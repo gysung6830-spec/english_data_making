@@ -27,7 +27,20 @@
 
 ---
 
-## 빠른 시작 — API 키 없이 디자인 미리보기
+## 웹앱으로 실행 (브라우저에서 바로)
+
+```bash
+bash setup.sh          # 최초 1회 (라이브러리 + 한글 폰트)
+python webapp.py       # → http://127.0.0.1:5000
+```
+
+- 지문을 붙여넣고(여러 개면 `---` 한 줄로 구분) 머리글·어휘 방식·내용일치 난이도를 고른 뒤
+  **‘시험지 생성 →’** 을 누르면 브라우저에서 바로 PDF를 미리보기/다운로드합니다.
+- **API 키가 없어도** ‘API 없이 데모’ 체크로 내장 지문(DNA·star manager) 결과를 볼 수 있습니다.
+- 실제 지문 생성에는 `.env` 의 `ANTHROPIC_API_KEY` 가 필요합니다.
+- 옵션: `python webapp.py --host 0.0.0.0 --port 8080`
+
+## 빠른 시작 — 파일/CLI로 미리보기(웹앱 없이)
 
 ```bash
 bash setup.sh                      # 최초 1회 (라이브러리 + 한글 폰트)
@@ -73,7 +86,9 @@ exam/
   validator.py    검증기 — 6종+해설 완비·유형집합 일치·번호 연속
   renderer.py     조판기 — 2단·지문라벨·연속번호·[문제 전체→해설 전체]
 시험지생성_데모코드.py   데모 진입점(부록 산출물): 지문데이터→검증→2단 PDF
-make_exam.py             실제 진입점: input/*.txt → Claude API → PDF
+make_exam.py             실제 진입점(CLI): input/*.txt → Claude API → PDF
+webapp.py                웹앱 진입점(Flask): 브라우저에서 붙여넣기→생성→미리보기/다운로드
+web/                     Flask 앱(app.py) + templates/ + static/
 ```
 
 ### 단일 지문 공유(중요)

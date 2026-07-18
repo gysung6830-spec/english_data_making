@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="resulthead">
+  <div>
+    <h2>생성 완료 ✅</h2>
+    <p class="tag">{{ '데모 지문' if demo else '입력 지문' }} {{ count }}개 · 각 지문 7문항
+      {% if header %}· 머리글 “{{ header }}”{% endif %}</p>
+  </div>
+  <div class="actions">
+    <a class="btn" href="{{ url_for('download', fid=fid) }}">PDF 다운로드</a>
+    <a class="btn ghost" href="{{ url_for('index') }}">새로 만들기</a>
+  </div>
+</div>
+
+<object class="preview" data="{{ url_for('pdf', fid=fid) }}" type="application/pdf">
+  <p>미리보기를 표시할 수 없습니다. <a href="{{ url_for('download', fid=fid) }}">여기서 PDF를 내려받으세요.</a></p>
+</object>
+
+{% endblock %}

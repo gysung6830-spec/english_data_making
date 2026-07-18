@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 input/*.pdf
 output/*.pdf
+output/web/
 output/*.html
 logs/*.jsonl
 logs/*.log

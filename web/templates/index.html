@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+{% if has_api_key %}
+  <div class="note ok">✅ API 키 감지됨 — 입력한 지문으로 실제 생성이 가능합니다.</div>
+{% else %}
+  <div class="note warn">⚠️ ANTHROPIC_API_KEY가 없습니다. 아래 <b>‘API 없이 데모’</b>로 디자인을 미리볼 수 있어요.
+    (실제 생성은 <code>.env</code>에 키를 넣은 뒤 가능합니다.)</div>
+{% endif %}
+
+<form method="post" action="{{ url_for('generate') }}" class="card">
+  <label class="field">
+    <span class="label">지문 (여러 개면 <code>---</code> 한 줄로 구분)</span>
+    <textarea name="passages" rows="12" placeholder="Paste your English passage here.
+여러 지문이면 아래처럼 --- 로 구분하세요.
+
+---
+
+Second passage goes here."></textarea>
+  </label>
+
+  <div class="row">
+    <label class="field">
+      <span class="label">상단 머리글 (학원명/자료명 등, 선택)</span>
+      <input type="text" name="header" placeholder="예: ○○학원 고3 영어 모의고사">
+    </label>
+  </div>
+
+  <div class="row">
+    <label class="field">
+      <span class="label">어휘 문제 방식</span>
+      <select name="vocab_method">
+        <option value="synonym">반의어형 (정답=반의어, 나머지=유의어)</option>
+        <option value="negation">부정어 삽입형 (원문 그대로 + 정답 문장에 not/no)</option>
+      </select>
+    </label>
+    <label class="field">
+      <span class="label">내용 일치 난이도</span>
+      <select name="content_difficulty">
+        <option value="hard">hard — 헷갈리는 함정 오답(4기법)</option>
+        <option value="plain">plain — 명확한 오답</option>
+      </select>
+    </label>
+  </div>
+
+  <label class="check">
+    <input type="checkbox" name="demo" {% if not has_api_key %}checked{% endif %}>
+    API 없이 <b>데모 지문(DNA·star manager)</b>으로 미리보기
+  </label>
+
+  <button type="submit" class="btn">시험지 생성 →</button>
+</form>
+
+<details class="help">
+  <summary>사용 팁</summary>
+  <ul>
+    <li>지문마다 <b>7종 문항</b>이 같은 순서로 생성되고, 문항 번호는 문서 전체에서 연속됩니다.</li>
+    <li>여러 지문은 <b>모든 문제 → 모든 해설</b> 순서로 배치됩니다.</li>
+    <li>실제 생성에는 Anthropic API 키가 필요합니다(<code>.env</code>의 <code>ANTHROPIC_API_KEY</code>).</li>
+  </ul>
+</details>
+
+{% endblock %}
