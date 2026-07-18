@@ -102,6 +102,9 @@ body{
 .lbl.v{ background:var(--v); } .lbl.a{ background:var(--a); } .lbl.r{ background:var(--r); }
 .lbl.c{ background:var(--c); } .lbl.o{ background:var(--o); }
 .c-en .qn{ font-size:6.1pt; color:var(--muted); font-weight:700; vertical-align:super; }
+/* 동사 문제 정답 기입용 밑줄 여백 */
+.c-en .write{ display:inline-block; width:2.9em; border-bottom:1px solid #9aa3af;
+  margin:0 4px 0 3px; height:0.95em; vertical-align:baseline; }
 
 /* ── 정답 · 해설 (다음 페이지) ── */
 .ans-page{ page-break-before:always; break-before:page; }
