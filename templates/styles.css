@@ -84,6 +84,7 @@ body {
 .summary-overall {
   background: #f0fdfa; border-left: 3px solid var(--sum);
   padding: 9px 12px; border-radius: 0 5px 5px 0;
+  font-weight: 800;
 }
 .summary-overall .lbl {
   font-weight: 800; color: #fff; background: var(--sum);
