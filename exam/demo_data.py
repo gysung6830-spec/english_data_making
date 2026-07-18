@@ -136,7 +136,7 @@ def _passage_dna() -> Passage:
         F.vocab_q(vocab_body),
         F.vocab_a(
             3,
-            "밑줄 ③ 앞뒤에서 DNA가 뼈와 얼음 속에서 수만 년을 '견딘다(surviving)'고 했으므로 "
+            "[반의어형] 밑줄 ③ 앞뒤에서 DNA가 뼈와 얼음 속에서 수만 년을 '견딘다(surviving)'고 했으므로 "
             "문맥상 '안정적인(durable/stable)' 의미라야 한다. 그런데 fragile(부서지기 쉬운)은 "
             "정반대이므로 부적절하다. 나머지 smaller·compact·advantages·developing은 모두 "
             "문맥에 맞는 유의어로 쓰였다.",
@@ -317,25 +317,27 @@ def _passage_star() -> Passage:
         ),
     )
 
-    # ④ 어휘 -----------------------------------------------------------------
+    # ④ 어휘 (방식 2: 부정어 삽입 — 선지는 원문 그대로) ---------------------
     vocab_body2 = (
         "Companies love to reward a top performer, and the most common reward is a "
         f"{F.underline(1, 'promotion')} into management. The intention is good, but the logic "
         f"is often {F.underline(2, 'flawed')}. Doing a job brilliantly and helping others do "
-        f"it well require {F.underline(3, 'identical')} skills. A star who is suddenly asked "
+        f"it well require {F.underline(3, 'different')} skills. A star who is suddenly asked "
         f"to lead may keep {F.underline(4, 'competing')} with the very people they should be "
-        f"coaching. In the end the firm may {F.underline(5, 'lose')} both a great specialist "
-        f"and a capable manager."
+        f"coaching. In the end, however, the firm does not {F.underline(5, 'lose')} either a "
+        f"great specialist or a capable manager."
     )
     p.set_qa(
         VOCAB,
         F.vocab_q(vocab_body2),
         F.vocab_a(
-            3,
-            "밑줄 ③의 뒤 내용은 '한 가지 일을 잘하는 것'과 '남을 돕는 것'이 서로 다르다는 "
-            "취지이므로 문맥상 different(다른) 계열의 낱말이 와야 한다. 그런데 "
-            "identical(동일한)은 정반대 의미라 부적절하다. 나머지 promotion·flawed·"
-            "competing·lose는 모두 문맥에 맞는 유의어로 쓰였다.",
+            5,
+            "[부정어 삽입형] 밑줄 단어는 모두 원문 그대로다. 글 전체는 스타를 관리자로 "
+            "올리면 회사가 '이중의 손해'(뛰어난 실무자도 잃고 부실한 관리자도 얻음)를 본다고 "
+            "말한다. 그런데 ⑤ 문장에 부정어 does not ~ either가 들어가 '회사가 둘 다 잃지 "
+            "않는다'는 뜻이 되어 글의 흐름과 정면으로 모순된다. 따라서 문맥상 부적절한 것은 "
+            "⑤이며, 나머지 promotion·flawed·different·competing은 원문 그대로 문맥에 맞게 "
+            "쓰였다.",
         ),
     )
 

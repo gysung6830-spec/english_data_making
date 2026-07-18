@@ -33,18 +33,20 @@ GENERATORS = {
 
 
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
-                  logger=None) -> Passage:
+                  logger=None, vocab_method: str = "synonym") -> Passage:
     """지문 원문 1개 -> 6종 문제/해설이 채워진 Passage."""
     analysis = analyzer.analyze(client, body, max_retries=max_retries)
     passage = Passage(title=analysis.title)
 
     for t in TYPE_ORDER:  # 고정 순서
         gen = GENERATORS[t]
+        # 유형별 추가 인자(어휘 방식 등)
+        kwargs = {"method": vocab_method} if t == VOCAB else {}
         # 유형별 재생성: 검증 실패(예외) 시 한 번 더 시도
         last_err: Exception | None = None
         for attempt in range(2):
             try:
-                q, a = gen.generate(client, analysis, body, max_retries=max_retries)
+                q, a = gen.generate(client, analysis, body, max_retries=max_retries, **kwargs)
                 passage.set_qa(t, q, a)
                 last_err = None
                 break
@@ -71,13 +73,15 @@ def build_exam(
     header_note: str = "",
     max_retries: int = 1,
     logger=None,
+    vocab_method: str = "synonym",
 ) -> Path:
     """여러 지문 원문 -> 검증 -> 2단 PDF 한 개."""
     passages: list[Passage] = []
     for i, body in enumerate(bodies, 1):
         if logger:
             logger.info("[%d/%d] 지문 분석·생성 중 …", i, len(bodies))
-        passages.append(build_passage(client, body, max_retries=max_retries, logger=logger))
+        passages.append(build_passage(client, body, max_retries=max_retries,
+                                       logger=logger, vocab_method=vocab_method))
 
     # 결과물 단계 검증(번호 연속 · 6종 완비)
     validator.validate_passages(passages)

@@ -46,6 +46,9 @@ def main() -> int:
     parser.add_argument("--out", default=None, help="출력 PDF 경로")
     parser.add_argument("--input", default=None, help="지문 .txt 폴더(기본 input/)")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
+    parser.add_argument("--vocab-method", choices=["synonym", "negation"],
+                        default="synonym",
+                        help="어휘 문제 방식: synonym(반의어 정답) 또는 negation(부정어 삽입)")
     parser.add_argument("--demo", action="store_true",
                         help="API 없이 데모 2지문으로 미리보기")
     args = parser.parse_args()
@@ -90,6 +93,7 @@ def main() -> int:
         header_note=args.header,
         max_retries=cfg.processing.max_retries,
         logger=logger,
+        vocab_method=args.vocab_method,
     )
     logger.info("시험지 생성 완료: %s", result)
     return 0
