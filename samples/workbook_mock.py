@@ -20,7 +20,8 @@ def mock_llm_workbook() -> ws.LLMWorkbook:
             ko="진행 중인 여러분의 설계 작업에 대해 고객들이 반응할 충분한 기회를 제공하는 것은 전문적 성공의 핵심이다.",
             questions=[
                 ws.LLMQuestion(id="Q1", type="adj", display="[ sufficient / ample / scarce ]",
-                               answer="sufficient", reason="scarce(부족한)는 문맥상 반대 의미"),
+                               answer="sufficient / ample",
+                               reason="sufficient(원문)·ample(유의어) 모두 정답; scarce(부족한)는 반대 의미라 오답"),
                 ws.LLMQuestion(id="Q2", type="verb", display="(react)",
                                answer="react", reason="opportunity to + 동사원형(부정사)"),
                 ws.LLMQuestion(id="Q3", type="verb", display="(be)",
@@ -40,7 +41,8 @@ def mock_llm_workbook() -> ws.LLMWorkbook:
                 ws.LLMQuestion(id="Q5", type="conj", display="[ while / because ]",
                                answer="while", reason="앞뒤 대조(양보) 흐름 — 인과의 because 는 반대"),
                 ws.LLMQuestion(id="Q6", type="adj", display="[ avoidable / preventable / inevitable ]",
-                               answer="avoidable", reason="inevitable(불가피한)은 문맥상 반대 의미"),
+                               answer="avoidable / preventable",
+                               reason="avoidable(원문)·preventable(유의어) 모두 정답; inevitable(불가피한)은 반대 의미라 오답"),
             ],
         ),
         ws.LLMSentence(

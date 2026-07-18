@@ -16,9 +16,10 @@ _RULES = """[다섯 가지 출제 유형]
 1) 동사·준동사(type=verb) → (동사원형)을 주고 문맥에 맞게 어형 변화시킨다.
    판단: 수일치, 시제, 태(능동/수동), to부정사/동명사/분사, 조동사 뒤 원형, 정동사 vs 준동사.
    display 예: "(react)"  answer 예: "react"
-2) 형용사·부사(type=adj) → [ 원문 / 유의어 / 반의어 ] 3개를 섞어 제시하고 알맞은 것을 고르게 한다.
-   오답 중 하나는 반드시 '문맥상 반대 의미(반의어)'로 넣는다.
-   display 예: "[ sufficient / ample / scarce ]"  answer 예: "sufficient"
+2) 형용사·부사(type=adj) → [ 원문 / 유의어 / 반의어 ] 3개를 섞어 제시하고 문맥상 알맞은 것을 고르게 한다.
+   원문과 유의어는 뜻이 통해 '둘 다 정답'이고, 반의어(문맥상 반대 의미) 하나만 오답이다.
+   그러므로 answer 에는 원문과 유의어를 함께(슬래시로 구분해) 적는다.
+   display 예: "[ sufficient / ample / scarce ]"  answer 예: "sufficient / ample"  (scarce = 반의어·오답)
 3) 관계사·대명사(type=rel) → [ A / B ]로 어법상 알맞은 것을 고르게 한다.
    오답은 유의어가 아니라 '문법적으로 혼동되는 것'(격, 관계사 vs 관계부사, that vs what, 지시대명사 수).
    display 예: "[ which / where ]"  answer 예: "which"
