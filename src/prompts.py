@@ -136,7 +136,7 @@ def exam_prompt(title: str, body: str, grammar: schemas.GrammarSection | None,
     return (
         "아래 지문의 '내신 빈출 출제 포인트 체크리스트'를 표 형태 데이터로 만드세요.\n"
         "- 각 항목: question_type(출제 유형 - 빈칸추론/제목추론/주제파악/순서배열/내용일치/서술형 등), "
-        "content(출제 내용), tip(신샘팁: 변형 대비 포인트).\n"
+        "content(출제 내용), tip(은아 T tip: 변형 대비 포인트).\n"
         "- 위 [참고]로 준 문법·어휘를 재사용하여 일관성 있게 작성하세요.\n"
         + ref + "\n\n"
         + _passage_block(title, body)
