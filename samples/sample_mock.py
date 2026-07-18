@@ -103,8 +103,10 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                 "1문장 - us - (호기심을 지닌 우리 사람들)\n"
                 "2문장 - they가 나오면 - (curious students, 호기심 많은 학생들)")),
             schemas.ExamItem(question_type="함축의미", content=(
-                "1문장의 \"drives us to explore the unknown\"은 문맥상 "
-                "(호기심이 우리를 미지의 영역으로 나아가게 하는 원동력이 됨)을 의미함")),
+                "1문장 \"drives us to explore the unknown\"\n"
+                "· 문맥상 의미: 호기심이 우리를 미지의 영역으로 나아가게 하는 원동력이 됨\n"
+                "· 영어 정답 표현: curiosity is what pushes people to investigate what they don't yet know\n"
+                "⚠️ 직역 함정: 'drives'를 '운전하다'로, 또는 단순히 '탐험하게 한다'로만 읽으면 오답")),
             schemas.ExamItem(question_type="서술형", content=(
                 "Children who are encouraged to ask questions tend to retain "
                 "their curiosity far longer than those who are simply given answers.\n"

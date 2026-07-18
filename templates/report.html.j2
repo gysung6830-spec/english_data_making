@@ -42,6 +42,15 @@
               {%- else -%}<br><span class="sv-reason">{{ ln }}</span>{%- endif -%}
             {%- endfor -%}
           </td>
+          {% elif '함축' in e.question_type %}
+          <td>
+            {%- for ln in e.content.split('\n') -%}
+              {%- if not ln.strip() -%}<div class="im-gap"></div>
+              {%- elif '함정' in ln -%}<div class="im-trap">{{ ln }}</div>
+              {%- elif ln.lstrip().startswith('·') or '문맥상' in ln or '정답 표현' in ln -%}<div class="im-sub">{{ ln }}</div>
+              {%- else -%}<div class="im-head">{{ ln }}</div>{%- endif -%}
+            {%- endfor -%}
+          </td>
           {% else %}
           <td class="pre">{{ e.content }}</td>
           {% endif %}

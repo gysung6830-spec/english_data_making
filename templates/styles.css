@@ -126,6 +126,17 @@ table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .ex-quote { color: var(--muted); font-style: italic; }
 td.pre { white-space: pre-line; }   /* 줄바꿈(\n)을 그대로 표시 */
 
+/* 함축의미: 원문 표현 + 문맥상 의미 + 영어 정답 표현 + 직역 함정 */
+.im-head { font-weight: 700; margin-top: 3px; }
+.im-head:first-child { margin-top: 0; }
+.im-sub { padding-left: 8px; }
+.im-trap {
+  padding-left: 8px;
+  color: var(--exam);
+  font-weight: 600;
+}
+.im-gap { height: 4px; }
+
 /* 서술형: 원문 문장 + 밑줄에 적는 문법요소 근거 */
 .sv-sent { font-weight: 700; }
 .sv-reason {
