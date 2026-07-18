@@ -10,3 +10,4 @@ logs/*.log
 scratchpad/
 output/*.png
 output/*.jpg
+output/*.json
