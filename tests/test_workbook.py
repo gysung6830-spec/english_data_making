@@ -109,7 +109,9 @@ def test_render_html():
     assert "ans-page" in html                    # page-break-before 대상
     assert "{{Q1}}" not in html                  # 자리표시자 누출 없음
     assert "동사·준동사" in html and "특수구문" in html  # 범례
-    print("PASS  HTML 렌더(SCORE·정답 페이지·범례)")
+    assert "※ 문제" in html and "(4)" in html    # 지시문(번호 형식 + 지칭 안내)
+    assert "지칭" in html                        # 대명사 지칭(ref) 유형 라벨
+    print("PASS  HTML 렌더(SCORE·정답 페이지·범례·지시문·지칭)")
 
 
 # ---- 7. 복수 지문 배치 (지문1→답1→지문2→답2) ----------------------------

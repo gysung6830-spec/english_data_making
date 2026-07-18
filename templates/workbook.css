@@ -66,8 +66,10 @@ body{
 .wb-guide > b{ color:var(--edge); margin-right:6px; }
 .wb-guide .gi{ margin-right:14px; white-space:nowrap; }
 .wb-guide .gi b{ color:#2b3648; }
+.wb-guide .gn{ font-weight:700; color:var(--edge); }
 .wb-guide .mk{ font-weight:700; padding:0 2px; }
-.wb-guide .mk.v{ color:var(--v); } .wb-guide .mk.sel{ color:var(--edge); } .wb-guide .mk.o{ color:var(--o); }
+.wb-guide .mk.v{ color:var(--v); } .wb-guide .mk.sel{ color:var(--edge); }
+.wb-guide .mk.o{ color:var(--o); } .wb-guide .mk.r{ color:var(--r); }
 
 /* ── 문항 카드 ── */
 .wb-cards{ display:flex; flex-direction:column; gap:7px; }

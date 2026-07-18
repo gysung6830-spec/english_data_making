@@ -19,7 +19,8 @@ _RULES = """[다섯 가지 출제 유형]
 2) 형용사·부사(type=adj) → [ 원문 / 유의어 / 반의어 ] 3개를 섞어 제시하고 문맥상 알맞은 것을 고르게 한다.
    원문과 유의어는 뜻이 통해 '둘 다 정답'이고, 반의어(문맥상 반대 의미) 하나만 오답이다.
    그러므로 answer 에는 원문과 유의어를 함께(슬래시로 구분해) 적는다.
-   display 예: "[ sufficient / ample / scarce ]"  answer 예: "sufficient / ample"  (scarce = 반의어·오답)
+   ★ 세 보기의 '순서를 매 문항 무작위로 섞어라'. 원문을 항상 첫 번째에 두지 말 것(뻔해지지 않게).
+   display 예: "[ scarce / ample / sufficient ]"  answer 예: "sufficient / ample"  (scarce = 반의어·오답)
 3) 관계사·대명사(type=rel) → [ A / B ]로 어법상 알맞은 것을 고르게 한다.
    오답은 유의어가 아니라 '문법적으로 혼동되는 것'(격, 관계사 vs 관계부사, that vs what, 지시대명사 수).
    display 예: "[ which / where ]"  answer 예: "which"
@@ -31,6 +32,12 @@ _RULES = """[다섯 가지 출제 유형]
    대소문자·구두점을 살려 슬래시로 구분해 제시하며, 표기는 반드시 〈 … 〉 로 감싼다.
    display 예: "〈 how / the current medical environment / each type of user / experiences 〉"
    answer 예: "how each type of user experiences the current medical environment"
+6) 대명사 지칭(type=ref) → 지문 속 대명사·지시어(it, they, them, this, that, those 등)가
+   '무엇을 가리키는지'를 고르게 한다. 문장 속 대명사는 그대로 두고, 그 뒤에 = 와 함께 보기를 제시한다.
+   보기는 지문에서 실제로 가리킬 수 있는 후보(정답 1 + 그럴듯한 오답 2)를 지문의 표현으로 넣는다.
+   display 형식: "대명사 = [ 후보 / 후보 / 후보 ]"  (en_template 에서는 그 대명사 자리에 {{Qn}} 을 둔다)
+   display 예: "they = [ teenagers / researchers / reactions ]"  answer 예: "teenagers"
+   reason 예: "they = 앞 문장의 teenagers 를 받음"
 
 [표기·채번 규칙]
 - en_template 은 문제로 낼 자리마다 {{Q1}}, {{Q2}} … 자리표시자를 넣은 '원문 문장'이다.
@@ -43,7 +50,7 @@ _RULES = """[다섯 가지 출제 유형]
 
 [출력 형식 — JSON]
 지문을 문장 단위로 나누고, 각 문장마다 {no, en_template, ko, questions:[{id,type,display,answer,reason}]} 구조로 출력한다.
-다른 말 없이 JSON 만 출력한다. type 값은 verb / adj / rel / conj / order 중 하나다."""
+다른 말 없이 JSON 만 출력한다. type 값은 verb / adj / rel / conj / order / ref 중 하나다."""
 
 
 def _passage_block(title: str, body: str, ko: str = "") -> str:

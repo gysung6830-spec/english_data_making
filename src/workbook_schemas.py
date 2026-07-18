@@ -16,15 +16,17 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
-# 다섯 가지 출제 유형 (spec 1)
-QTYPE = Literal["verb", "adj", "rel", "conj", "order"]
+# 출제 유형 (spec 1의 5유형 + 대명사 지칭 ref)
+#   ref = 대명사가 가리키는 대상을 고르는 지칭 추론 (관계사·대명사와 같은 보라색 계열)
+QTYPE = Literal["verb", "adj", "rel", "conj", "order", "ref"]
 
 # 유형 → 위첨자 라벨 / CSS 클래스 (spec 4-4)
-TYPE_LABEL = {"verb": "동사", "adj": "형·부", "rel": "관계사", "conj": "연결사", "order": "배열"}
-TYPE_CLASS = {"verb": "v", "adj": "a", "rel": "r", "conj": "c", "order": "o"}
+TYPE_LABEL = {"verb": "동사", "adj": "형·부", "rel": "관계사", "conj": "연결사",
+              "order": "배열", "ref": "지칭"}
+TYPE_CLASS = {"verb": "v", "adj": "a", "rel": "r", "conj": "c", "order": "o", "ref": "r"}
 TYPE_COLOR = {
     "verb": "#2563a0", "adj": "#158060", "rel": "#7d3caf",
-    "conj": "#c47510", "order": "#b83232",
+    "conj": "#c47510", "order": "#b83232", "ref": "#7d3caf",
 }
 
 # en_template 안의 자리표시자 패턴: {{Q1}}
