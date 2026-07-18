@@ -37,11 +37,21 @@ def _passage_html(
     esc = [F.esc(s) for s in sents]
     if marks:
         for idx, word, marker in marks:
-            pat = re.compile(r"(?<!\w)" + re.escape(F.esc(word)) + r"(?!\w)")
-            new, n = pat.subn(lambda _m: marker, esc[idx], count=1)
-            if n == 0:
+            if not (0 <= idx < len(esc)):
+                raise ValueError(f"밑줄 대상 문장 번호가 범위를 벗어났습니다: {idx}")
+            esc_word = re.escape(F.esc(word))
+            # 1) 단어 경계 매칭 → 2) 대소문자 무시 → 3) 부분 문자열(대소문자 무시)
+            for pat in (
+                re.compile(r"(?<!\w)" + esc_word + r"(?!\w)"),
+                re.compile(r"(?<!\w)" + esc_word + r"(?!\w)", re.IGNORECASE),
+                re.compile(esc_word, re.IGNORECASE),
+            ):
+                new, k = pat.subn(lambda _m: marker, esc[idx], count=1)
+                if k:
+                    esc[idx] = new
+                    break
+            else:
                 raise ValueError(f"문장 {idx} 에서 '{word}' 를 찾지 못했습니다.")
-            esc[idx] = new
     return " ".join(esc)
 
 
@@ -56,18 +66,43 @@ def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, 
 # ---------------------------------------------------------------------------
 # ① 순서 배열
 # ---------------------------------------------------------------------------
+def _even_split(total: int, parts: int) -> list[int]:
+    """total 을 parts 개의 연속 덩어리로 최대한 고르게 나눈다(각 >=1)."""
+    base, rem = divmod(total, parts)
+    return [base + (1 if i < rem else 0) for i in range(parts)]
+
+
 def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
                display: list[int], reason: str) -> tuple[str, str]:
     """given_n: 앞 몇 문장이 '주어진 글' / block_sizes: 나머지를 3덩어리로 /
     display: (A)(B)(C) 가 각각 원래 몇 번째 덩어리(1~3)인지.
+
+    LLM 이 문장 수를 잘못 세어 값이 어긋나도 실패하지 않도록 스스로 보정한다.
     """
-    if len(block_sizes) != 3 or len(display) != 3:
-        raise ValueError("block_sizes·display 는 각각 3개여야 합니다.")
-    if sorted(display) != [1, 2, 3]:
-        raise ValueError("display 는 1,2,3 의 순열이어야 합니다.")
+    n = len(sentences)
+    if n < 4:
+        raise ValueError("순서 문제를 만들기에 문장이 너무 적습니다(4문장 이상 필요).")
+
+    # given_n: 최소 1, 나머지로 3덩어리를 만들 수 있도록 최대 n-3 으로 보정
+    try:
+        given_n = int(given_n)
+    except (TypeError, ValueError):
+        given_n = 1
+    given_n = max(1, min(given_n, n - 3))
+    remaining = n - given_n
+
+    # block_sizes: 3개·양수·합==remaining 이 아니면 고르게 재분배
+    valid = (isinstance(block_sizes, list) and len(block_sizes) == 3
+             and all(isinstance(b, int) and b >= 1 for b in block_sizes)
+             and sum(block_sizes) == remaining)
+    if not valid:
+        block_sizes = _even_split(remaining, 3)
+
+    # display: 1,2,3 의 순열이 아니면 기본값으로 보정
+    if sorted(display or []) != [1, 2, 3]:
+        display = [2, 1, 3]
+
     rest = sentences[given_n:]
-    if sum(block_sizes) != len(rest):
-        raise ValueError("block_sizes 합이 나머지 문장 수와 다릅니다.")
     given = " ".join(sentences[:given_n])
 
     blocks: list[str] = []
@@ -102,10 +137,18 @@ def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
 # ② 문장 삽입
 # ---------------------------------------------------------------------------
 def make_insert(sentences: list[str], remove_idx: int, reason: str) -> tuple[str, str]:
-    """remove_idx: 빼낼 '주어진 문장'의 인덱스(내부 문장: 1 ~ len-2)."""
+    """remove_idx: 빼낼 '주어진 문장'의 인덱스(내부 문장: 1 ~ len-2).
+
+    LLM 이 첫/마지막 문장 등 범위를 벗어난 번호를 줘도 내부로 보정한다.
+    """
     n = len(sentences)
-    if not (1 <= remove_idx <= n - 2):
-        raise ValueError(f"remove_idx 는 1~{n - 2}(내부 문장)여야 합니다.")
+    if n < 3:
+        raise ValueError("삽입 문제를 만들기에 문장이 너무 적습니다(3문장 이상 필요).")
+    try:
+        remove_idx = int(remove_idx)
+    except (TypeError, ValueError):
+        remove_idx = 1
+    remove_idx = max(1, min(remove_idx, n - 2))   # 내부 문장으로 보정
     given = sentences[remove_idx]
     rest = [s for i, s in enumerate(sentences) if i != remove_idx]
     gaps = len(rest) - 1                                # rest 문장 사이 간격 수

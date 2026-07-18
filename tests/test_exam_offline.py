@@ -71,11 +71,21 @@ def test_build_and_validators() -> None:
     s = DNA.sentences
     q, a = B.make_order(s, given_n=1, block_sizes=[2, 2, 2], display=[2, 1, 3], reason="r")
     assert "(A)" in q and "answer-key" in a
-    # 잘못된 입력은 예외
+
+    # LLM 오류(개수 오산·범위 초과·대소문자)는 예외 대신 '자동 보정'되어야 한다
+    q2, _ = B.make_order(s, given_n=99, block_sizes=[9, 9], display=[7, 7, 7], reason="r")
+    assert "(A)" in q2                                   # 보정되어 정상 생성
+    q3, _ = B.make_insert(s, remove_idx=0, reason="r")   # 첫 문장 → 내부로 보정
+    assert "given-sentence" in q3
+    q4, _ = B.make_vocab(s, [(1, "REMARKABLE", "notable"), (1, "small", "tiny"),
+                             (3, "durable", "fragile"), (4, "efficiency", "eff"),
+                             (5, "expensive", "costly")], 3, "r")
+    assert "<u>" in q4                                   # 대소문자 달라도 매칭
+
+    # 정말 불가능한 입력만 예외
     for bad in (
-        lambda: B.make_order(s, 1, [2, 2], [2, 1, 3], "r"),       # block_sizes 2개
-        lambda: B.make_insert(s, 0, "r"),                          # 첫 문장은 불가
-        lambda: B.make_vocab(s, [(1, "nope", "x")] * 5, 1, "r"),   # 없는 단어
+        lambda: B.make_vocab(s, [(1, "nonexistentword", "x")] * 5, 1, "r"),  # 없는 단어
+        lambda: B.make_order(["only one."], 1, [1, 1, 1], [1, 2, 3], "r"),   # 문장 부족
     ):
         try:
             bad()
@@ -83,7 +93,7 @@ def test_build_and_validators() -> None:
             pass
         else:
             raise AssertionError("검증이 동작하지 않음")
-    print("✓ build 변형기·검증 통과")
+    print("✓ build 변형기·자동 보정·검증 통과")
 
 
 class _FakeClient:
