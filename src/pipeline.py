@@ -95,7 +95,8 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
             reports = (_mock_reports_for_pdf(cfg, pdf) if mock
                        else build_reports_for_pdf(client, cfg, pdf))
             out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
+                              min_vocab=cfg.vocab.min)
             outputs.append(out)
             manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
             success += 1

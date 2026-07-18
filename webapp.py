@@ -246,7 +246,8 @@ def analyze_route():
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
+                              min_vocab=cfg.vocab.min)
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음

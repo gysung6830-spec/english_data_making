@@ -64,14 +64,56 @@ def render_html(reports, footer_note: str = "") -> str:
     return tmpl.render(reports=_as_list(reports), footer_note=footer_note)
 
 
-def render_pdf(reports, out_path: str | Path, footer_note: str = "") -> Path:
+def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
+    """어휘 개수를 cap 개로 줄인 사본 반환(원본은 건드리지 않음)."""
+    if cap >= len(report.vocab.items):
+        return report
+    new_vocab = report.vocab.model_copy(update={"items": report.vocab.items[:cap]})
+    return report.model_copy(update={"vocab": new_vocab})
+
+
+def _fit_report(report, footer_note, css, min_vocab: int):
+    """한 지문이 2페이지에 들어오도록 어휘 개수를 필요한 만큼만 줄인다."""
+    from weasyprint import HTML
+
+    def pages(cap):
+        r = _cap_report(report, cap)
+        html = render_html([r], footer_note)
+        doc = HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
+        return len(doc.pages), r
+
+    n = len(report.vocab.items)
+    p, r = pages(n)
+    if p <= 2:
+        return report            # 이미 2페이지 이내면 그대로
+    cap = n
+    while cap > min_vocab:       # 최소 개수까지 한 개씩 줄이며 재시도
+        cap -= 1
+        p, r = pages(cap)
+        if p <= 2:
+            return r
+    return r                     # 최소 개수까지 줄여도 넘치면 그 상태로
+
+
+def render_pdf(reports, out_path: str | Path, footer_note: str = "",
+               fit_pages: bool = True, min_vocab: int = 8) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_html(reports, footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    rlist = _as_list(reports)
+
+    def build(rs):
+        html = render_html(rs, footer_note)
+        return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
+
+    doc = build(rlist)
+    # 지문 1개당 2페이지(1p: 요약~어휘, 2p: 직독직해)를 넘기면 어휘를 줄여 다시 렌더
+    if fit_pages and len(doc.pages) > 2 * len(rlist):
+        rlist = [_fit_report(r, footer_note, css, min_vocab) for r in rlist]
+        doc = build(rlist)
+    doc.write_pdf(str(out_path))
     return out_path
 
 

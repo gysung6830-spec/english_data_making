@@ -173,7 +173,8 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 ))
             pdf = files[fid]
             out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
+                              min_vocab=cfg.vocab.min)
             outputs.append(out)
             manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
             success += 1
