@@ -7,9 +7,10 @@
     3) output 폴더에 분석 PDF가 생성된다.
 
 옵션:
-    python run.py            # 일반(동기) 처리
+    python run.py            # 일반(동기) 처리 — 6개 분석 자료
     python run.py --batch    # 대량 처리(Batch API, 비용 절감)
     python run.py --mock     # API 없이 샘플 데이터로 디자인만 미리보기
+    python run.py --workbook # '문장별 복합유형 통합 워크북' 생성
     python run.py --config path/to/config.yaml
 """
 from __future__ import annotations
@@ -25,6 +26,8 @@ def main() -> int:
     parser.add_argument("--batch", action="store_true", help="Batch API 로 대량 처리")
     parser.add_argument("--mock", action="store_true",
                         help="API 없이 샘플 데이터로 출력 PDF 미리보기")
+    parser.add_argument("--workbook", action="store_true",
+                        help="'문장별 복합유형 통합 워크북' 생성")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
     args = parser.parse_args()
 
@@ -35,11 +38,16 @@ def main() -> int:
     print(f"  입력 폴더 : {cfg.input_dir}")
     print(f"  출력 폴더 : {cfg.output_dir}")
     print(f"  모델      : {cfg.model}")
+    kind = "통합 워크북" if args.workbook else "지문 분석"
     mode = "MOCK(미리보기)" if args.mock else ("BATCH" if args.batch else "일반")
+    print(f"  산출물    : {kind}")
     print(f"  실행 모드 : {mode}")
     print("=" * 56)
 
-    if args.batch and not args.mock:
+    if args.workbook:
+        from src.pipeline import run_folder_workbook
+        result = run_folder_workbook(cfg, mock=args.mock)
+    elif args.batch and not args.mock:
         from src.batch import run_folder_batch
         result = run_folder_batch(cfg, cfg.model)
     else:

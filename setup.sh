@@ -5,10 +5,19 @@
 # ============================================================
 set -e
 
-echo "[1/3] 파이썬 라이브러리 설치 중..."
+echo "[1/4] 파이썬 라이브러리 설치 중..."
 pip install -r requirements.txt
 
-echo "[2/3] 한글 폰트(나눔고딕) 설치 확인..."
+echo "[2/4] 통합 워크북 PDF 렌더용 Chromium 설치 확인..."
+# 관리형 환경 등에서 이미 Chromium 이 준비돼 있으면 건너뛴다.
+if [ -n "$PLAYWRIGHT_BROWSERS_PATH" ] && ls "$PLAYWRIGHT_BROWSERS_PATH"/chromium-* >/dev/null 2>&1; then
+  echo "   이미 설치된 Chromium 을 사용합니다: $PLAYWRIGHT_BROWSERS_PATH"
+else
+  python -m playwright install chromium || \
+    echo "   ⚠ Chromium 자동 설치 실패. '통합 워크북(--workbook)' 사용 시 'python -m playwright install chromium' 를 실행하세요."
+fi
+
+echo "[3/4] 한글 폰트(나눔고딕) 설치 확인..."
 if ! fc-list | grep -qi nanum; then
   echo "   나눔 폰트가 없어 설치를 시도합니다 (관리자 권한 필요할 수 있음)."
   if command -v apt-get >/dev/null 2>&1; then
@@ -24,7 +33,7 @@ else
   echo "   나눔 폰트가 이미 설치되어 있습니다."
 fi
 
-echo "[3/3] API 키 설정 파일 준비..."
+echo "[4/4] API 키 설정 파일 준비..."
 if [ ! -f .env ]; then
   cp .env.example .env
   echo "   .env 파일을 만들었습니다. 파일을 열어 ANTHROPIC_API_KEY 를 입력하세요."

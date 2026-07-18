@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ wb.title }} - 통합 워크북</title>
+  <style>{% include "workbook.css" %}</style>
+</head>
+<body>
+
+  {# ── 상단 헤더 ── #}
+  <div class="wb-header">
+    <div class="wb-titles">
+      <div class="wb-title">{{ wb.title }}</div>
+      {% if wb.subtitle %}<div class="wb-subtitle">{{ wb.subtitle }}</div>{% endif %}
+    </div>
+    <div class="wb-meta">
+      <div class="wb-name"><span class="lbl">NAME</span><span class="blank"></span></div>
+      <div class="wb-score"><span class="lbl">SCORE</span><span class="val">/ {{ wb.total }}</span></div>
+    </div>
+  </div>
+
+  {# ── 유형 범례 바 (5칸 균등) ── #}
+  <div class="wb-legend">
+    <div class="lg lg-v"><span class="name"><span class="dot"></span>동사·준동사</span><span class="how">어형 변화</span></div>
+    <div class="lg lg-a"><span class="name"><span class="dot"></span>형용사·부사</span><span class="how">원문/유의어/반의어</span></div>
+    <div class="lg lg-r"><span class="name"><span class="dot"></span>관계사·대명사</span><span class="how">어법 선택</span></div>
+    <div class="lg lg-c"><span class="name"><span class="dot"></span>연결사</span><span class="how">흐름 선택</span></div>
+    <div class="lg lg-o"><span class="name"><span class="dot"></span>특수구문</span><span class="how">어순 배열</span></div>
+  </div>
+
+  {# ── 문항 카드 ── #}
+  <div class="wb-cards">
+    {% for s in wb.sentences %}
+    <div class="card">
+      <span class="cbar"></span>
+      <span class="cnum">{{ s.no }}</span>
+      <div class="cbody">
+        <div class="c-en">{{ s | render_sentence }}</div>
+        <div class="c-ko">{{ s.ko }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if footer_note %}<div class="wb-foot">{{ footer_note }}</div>{% endif %}
+
+  {# ── 정답 · 해설 (다음 페이지) ── #}
+  <div class="ans-page">
+    <div class="ans-head">정답 · 해설 <span class="ans-sub">Answers &amp; Explanations · 총 {{ wb.total }}문항</span></div>
+    <ol class="ans-list">
+      {% for q in wb.all_questions %}
+      <li class="ans-item">
+        <span class="an">{{ q.num }})</span>
+        <span class="aw {{ q.css }}">{{ q.answer }}</span>
+        <span class="adash">—</span>
+        <span class="ar">{{ q.reason }}</span>
+        <span class="atag {{ q.css }}">{{ q.label }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+
+</body>
+</html>

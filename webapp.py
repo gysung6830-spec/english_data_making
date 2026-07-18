@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, render
+from src import extract, pipeline, render, workbook_render
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -65,6 +65,9 @@ BASE_CSS = """
   .btn:disabled{opacity:.5;cursor:not-allowed;}
   .btn.gray{background:#374151;}
   .chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:12px;font-weight:600;}
+  .kinds{display:flex;gap:10px;flex-wrap:wrap;}
+  .kind{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;
+        border:1px solid var(--line);border-radius:9px;padding:9px 12px;cursor:pointer;flex:1;}
   .hint{font-size:12px;color:var(--muted);margin-top:6px;}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;}
   table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
@@ -88,7 +91,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 6개 분석 자료가 담긴 PDF를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 6개 분석 자료 또는 문장별 통합 워크북 PDF를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -107,6 +110,12 @@ INDEX_HTML = """
              value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
+
+      <label>③ 산출물 종류</label>
+      <div class=kinds>
+        <label class=kind><input type=radio name=kind value=report checked> 6개 분석 자료</label>
+        <label class=kind><input type=radio name=kind value=workbook> 문장별 복합유형 통합 워크북</label>
+      </div>
 
       <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
@@ -216,6 +225,7 @@ def index():
 def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
+    kind = request.form.get("kind") or "report"   # report | workbook
     form_key = (request.form.get("api_key") or "").strip()
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
@@ -240,13 +250,17 @@ def analyze_route():
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
         try:
-            if mock:
-                report = pipeline._mock_report_for_pdf(cfg, tmp)
-            else:
-                report = pipeline.build_report_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
-            out = OUTPUT_DIR / f"{stem}_analysis.pdf"
-            render.render_pdf(report, out, footer_note=cfg.design.footer_note)
+            if kind == "workbook":
+                wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
+                      else pipeline.build_workbook_for_pdf(client, cfg, tmp))
+                out = OUTPUT_DIR / f"{stem}_workbook.pdf"
+                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
+            else:
+                report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
+                          else pipeline.build_report_for_pdf(client, cfg, tmp))
+                out = OUTPUT_DIR / f"{stem}_analysis.pdf"
+                render.render_pdf(report, out, footer_note=cfg.design.footer_note)
             results.append({"name": f.filename, "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
