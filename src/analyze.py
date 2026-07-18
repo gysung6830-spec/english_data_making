@@ -9,12 +9,23 @@ from .config import Config
 
 
 def extract_report(client: ClaudeClient, cfg: Config, raw_text: str) -> schemas.Extraction:
-    """0단계: 원문 텍스트 -> 지문 본문(제목/출처/문단)."""
+    """0단계(PDF): 원문 텍스트 -> 지문 본문(제목/출처/문단)."""
     return client.structured(
         system=prompts.EXTRACT_SYSTEM,
         prompt=prompts.extract_prompt(raw_text),
         model_cls=schemas.Extraction,
         max_retries=cfg.processing.max_retries,
+    )
+
+
+def extract_report_image(client: ClaudeClient, cfg: Config, image_path: str) -> schemas.Extraction:
+    """0단계(사진): 이미지 -> 지문 본문(비전으로 읽음)."""
+    return client.structured(
+        system=prompts.EXTRACT_SYSTEM,
+        prompt=prompts.extract_image_prompt(),
+        model_cls=schemas.Extraction,
+        max_retries=cfg.processing.max_retries,
+        image_path=image_path,
     )
 
 

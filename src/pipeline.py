@@ -11,20 +11,34 @@ from .logutil import Manifest, setup_logging
 from .schemas import Report
 
 
+INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS
+
+
 def list_pdfs(input_dir: Path) -> list[Path]:
-    return sorted(p for p in input_dir.glob("*.pdf") if p.is_file())
+    """PDF 와 이미지(사진/캡처) 파일을 모두 처리 대상으로 수집."""
+    return sorted(
+        p for p in input_dir.iterdir()
+        if p.is_file() and p.suffix.lower() in INPUT_EXTS
+    )
 
 
 def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
-def build_report_for_pdf(client: ClaudeClient, cfg: Config, pdf: Path) -> Report:
-    """실제 API 를 사용해 한 PDF -> Report."""
-    raw = extract.extract_passage_text(pdf)
-    if extract.looks_empty(raw):
-        raise ValueError("텍스트를 추출하지 못했습니다(스캔본이거나 빈 PDF일 수 있음).")
-    extraction = analyze.extract_report(client, cfg, raw)
+def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> Report."""
+    if extract.is_image(src):
+        # 사진/캡처 → 비전으로 지문 추출
+        extraction = analyze.extract_report_image(client, cfg, str(src))
+    else:
+        raw = extract.extract_passage_text(src)
+        if extract.looks_empty(raw):
+            raise ValueError(
+                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
+            )
+        extraction = analyze.extract_report(client, cfg, raw)
     return analyze.analyze_passage(client, cfg, extraction)
 
 
@@ -33,13 +47,14 @@ def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
 
     # 추출 단계를 실제로 돌려 제목 후보를 잡아본다(전처리 검증 목적).
     title = _safe_stem(pdf)
-    try:
-        raw = extract.extract_passage_text(pdf)
-        first = next((ln.strip() for ln in raw.splitlines() if ln.strip()), "")
-        if first and len(first) < 80:
-            title = first
-    except Exception:
-        pass
+    if not extract.is_image(pdf):
+        try:
+            raw = extract.extract_passage_text(pdf)
+            first = next((ln.strip() for ln in raw.splitlines() if ln.strip()), "")
+            if first and len(first) < 80:
+                title = first
+        except Exception:
+            pass
     return mock_report(title=title, source=f"{pdf.name}")
 
 

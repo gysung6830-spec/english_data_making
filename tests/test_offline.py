@@ -35,17 +35,19 @@ def test_clean_removes_noise():
     print("PASS  전처리(노이즈 제거)")
 
 
-# ---- 2. 스키마 검증: 문법 10개 강제 ----------------------------------------
-def test_grammar_exactly_10():
-    items = [{"no": i, "point": "p", "example": "e", "explanation": "x"} for i in range(1, 10)]
+# ---- 2. 스키마 검증: 문법은 비어있지 않으면 개수 제한 없음 -------------------
+def test_grammar_non_empty():
     try:
-        schemas.GrammarSection.model_validate({"items": items})
-        assert False, "9개인데 통과하면 안 됨"
+        schemas.GrammarSection.model_validate({"items": []})
+        assert False, "빈 목록은 통과하면 안 됨"
     except Exception:
         pass
-    items.append({"no": 10, "point": "p", "example": "e", "explanation": "x"})
-    schemas.GrammarSection.model_validate({"items": items})  # 10개면 통과
-    print("PASS  문법 정확히 10개 검증")
+    # 개수 제한이 없으므로 3개든 15개든 통과해야 함
+    for n in (3, 15):
+        items = [{"no": i, "point": "p", "example": "e", "explanation": "x", "sentence_no": i}
+                 for i in range(1, n + 1)]
+        schemas.GrammarSection.model_validate({"items": items})
+    print("PASS  문법 개수 제한 없음(비어있지만 않으면 OK)")
 
 
 # ---- 3. 어휘 개수 범위 -----------------------------------------------------
@@ -74,17 +76,21 @@ class _FakeMessages:
 
 
 def test_retry_recovers():
-    good_items = [{"no": i, "point": "p", "example": "e", "explanation": "x"}
-                  for i in range(1, 11)]
-    bad = json.dumps({"items": good_items[:9]})    # 9개 -> 실패
-    good = json.dumps({"items": good_items})       # 10개 -> 성공
+    # 어휘 개수 범위(12~20) 검증으로 재시도를 유도한다.
+    def vocab(n):
+        return json.dumps({"items": [{"no": i, "word": "w", "meaning": "m"} for i in range(1, n + 1)]})
+    bad = vocab(5)     # 5개 -> 범위 밖 -> 실패
+    good = vocab(13)   # 13개 -> 통과
 
     client = ClaudeClient.__new__(ClaudeClient)    # __init__ 우회(가짜 주입)
     client.model = "test"
     client._client = types.SimpleNamespace(messages=_FakeMessages([bad, good]))
 
-    result = client.structured(prompts.SYSTEM, "x", schemas.GrammarSection, max_retries=1)
-    assert len(result.items) == 10
+    result = client.structured(
+        prompts.SYSTEM, "x", schemas.VocabSection, max_retries=1,
+        extra_validate=lambda v: v.validate_count(12, 20),
+    )
+    assert len(result.items) == 13
     assert client._client.messages.calls == 2  # 1회 실패 후 1회 재시도
     print("PASS  검증 실패 후 재시도 복구")
 
@@ -101,7 +107,7 @@ def test_render_html():
 
 def run_all():
     test_clean_removes_noise()
-    test_grammar_exactly_10()
+    test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()
     test_render_html()

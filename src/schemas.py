@@ -94,9 +94,9 @@ class GrammarSection(BaseModel):
 
     @field_validator("items")
     @classmethod
-    def _exactly_10(cls, v: list[GrammarItem]) -> list[GrammarItem]:
-        if len(v) != 10:
-            raise ValueError(f"핵심 문법은 정확히 10개여야 합니다 (현재 {len(v)}개).")
+    def _non_empty(cls, v: list[GrammarItem]) -> list[GrammarItem]:
+        if not v:
+            raise ValueError("문법 항목이 비어 있습니다.")
         return v
 
 

@@ -11,6 +11,13 @@ from pathlib import Path
 
 import pdfplumber
 
+# 지원하는 이미지 확장자 (사진/캡처 자동 처리용)
+IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+
+
+def is_image(path: str | Path) -> bool:
+    return Path(path).suffix.lower() in IMAGE_EXTS
+
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
     re.compile(r"^\s*[①②③④⑤]"),                     # 객관식 보기 마커

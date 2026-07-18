@@ -74,14 +74,23 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     extract_reqs = []
     for fid, pdf in files.items():
         try:
-            raw = extract.extract_passage_text(pdf)
-            if extract.looks_empty(raw):
-                raise ValueError("텍스트 추출 실패(스캔본?)")
-            extract_reqs.append({
-                "custom_id": f"{fid}__extract",
-                "params": build_request(model, prompts.EXTRACT_SYSTEM,
-                                        prompts.extract_prompt(raw), schemas.Extraction),
-            })
+            if extract.is_image(pdf):
+                # 사진/캡처 → 비전 추출 요청
+                extract_reqs.append({
+                    "custom_id": f"{fid}__extract",
+                    "params": build_request(model, prompts.EXTRACT_SYSTEM,
+                                            prompts.extract_image_prompt(), schemas.Extraction,
+                                            image_path=str(pdf)),
+                })
+            else:
+                raw = extract.extract_passage_text(pdf)
+                if extract.looks_empty(raw):
+                    raise ValueError("텍스트 추출 실패(스캔본 PDF는 사진으로 저장해 주세요)")
+                extract_reqs.append({
+                    "custom_id": f"{fid}__extract",
+                    "params": build_request(model, prompts.EXTRACT_SYSTEM,
+                                            prompts.extract_prompt(raw), schemas.Extraction),
+                })
         except Exception as e:
             failed[fid] = f"extract-pre: {e}"
 

@@ -6,8 +6,10 @@
 """
 from __future__ import annotations
 
+import base64
 import copy
 import json
+from pathlib import Path
 from typing import Any, TypeVar
 
 from pydantic import BaseModel, ValidationError
@@ -43,19 +45,39 @@ def output_format(model_cls: type[BaseModel]) -> dict:
     return {"format": {"type": "json_schema", "schema": to_strict_schema(model_cls)}}
 
 
+_MEDIA = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+         ".gif": "image/gif", ".webp": "image/webp"}
+
+
+def image_block(image_path: str | Path) -> dict:
+    """이미지 파일 -> base64 이미지 content 블록 (비전 입력용)."""
+    p = Path(image_path)
+    b64 = base64.standard_b64encode(p.read_bytes()).decode("utf-8")
+    media = _MEDIA.get(p.suffix.lower(), "image/jpeg")
+    return {"type": "image", "source": {"type": "base64", "media_type": media, "data": b64}}
+
+
 def build_request(
     model: str,
     system: str,
     prompt: str,
     model_cls: type[BaseModel],
     max_tokens: int = DEFAULT_MAX_TOKENS,
+    image_path: str | Path | None = None,
 ) -> dict:
-    """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터."""
+    """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터.
+
+    image_path 가 주어지면 이미지 + 텍스트를 함께 보내는 비전 요청이 된다.
+    """
+    if image_path is not None:
+        content: Any = [image_block(image_path), {"type": "text", "text": prompt}]
+    else:
+        content = prompt
     return {
         "model": model,
         "max_tokens": max_tokens,
         "system": system,
-        "messages": [{"role": "user", "content": prompt}],
+        "messages": [{"role": "user", "content": content}],
         "output_config": output_format(model_cls),
     }
 
@@ -90,12 +112,17 @@ class ClaudeClient:
         max_tokens: int = DEFAULT_MAX_TOKENS,
         max_retries: int = 1,
         extra_validate=None,
+        image_path: str | Path | None = None,
     ) -> T:
-        """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청."""
+        """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청.
+
+        image_path 가 주어지면 이미지를 함께 보내는 비전 요청으로 동작한다.
+        """
         last_err: Exception | None = None
         cur_prompt = prompt
         for attempt in range(max_retries + 1):
-            req = build_request(self.model, system, cur_prompt, model_cls, max_tokens)
+            req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
+                                image_path=image_path)
             message = self._client.messages.create(**req)
             try:
                 text = extract_text(message)
