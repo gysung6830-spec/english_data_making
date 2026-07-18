@@ -34,7 +34,17 @@
       {% for e in report.exam.items %}
         <tr>
           <td class="cell-point">{{ e.question_type }}</td>
+          {% if '서술형' in e.question_type %}
+          <td class="pre">
+            {%- set lines = e.content.split('\n') -%}
+            {%- for ln in lines if ln.strip() -%}
+              {%- if loop.first -%}<span class="sv-sent">{{ ln }}</span>
+              {%- else -%}<br><span class="sv-reason">{{ ln }}</span>{%- endif -%}
+            {%- endfor -%}
+          </td>
+          {% else %}
           <td class="pre">{{ e.content }}</td>
+          {% endif %}
         </tr>
       {% endfor %}
       </tbody>

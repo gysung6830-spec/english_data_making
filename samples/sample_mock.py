@@ -106,6 +106,9 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                 "1문장의 \"drives us to explore the unknown\"은 문맥상 "
                 "(호기심이 우리를 미지의 영역으로 나아가게 하는 원동력이 됨)을 의미함")),
             schemas.ExamItem(question_type="서술형", content=(
-                "2문장 → that절 + 비교급(longer)이 결합돼 어순이 까다로워 영작 시 어려움")),
+                "Children who are encouraged to ask questions tend to retain "
+                "their curiosity far longer than those who are simply given answers.\n"
+                "관계대명사(who) 두 번, 분사구문(encouraged), 비교구문(longer than), "
+                "5형식(are given)")),
         ]),
     )
