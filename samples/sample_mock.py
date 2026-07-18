@@ -99,14 +99,13 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
             ],
         ),
         exam=schemas.ExamSection(items=[
-            schemas.ExamItem(question_type="지칭추론(대명사)",
-                             content="it fuels learning의 it = curiosity(호기심) / they가 나오면 = curious students(호기심 많은 학생들).",
-                             tip="대명사 앞의 명사를 되짚어 무엇을 받는지 확인."),
-            schemas.ExamItem(question_type="함축의미",
-                             content="'Curiosity fuels learning'은 호기심이 곧 학습을 굴러가게 하는 '연료(원동력)'라는 비유적 의미.",
-                             tip="표면 뜻(연료)이 아니라 문맥상 의미(학습 동기·추진력)로 해석."),
-            schemas.ExamItem(question_type="서술형",
-                             content="호기심이 학습에 도움이 되는 이유를 지문 근거로 영어로 서술하기.",
-                             tip="because it fuels learning 구문을 활용해 작성."),
+            schemas.ExamItem(question_type="지칭추론(대명사)", content=(
+                "1문장 - us - (호기심을 지닌 우리 사람들)\n"
+                "2문장 - they가 나오면 - (curious students, 호기심 많은 학생들)")),
+            schemas.ExamItem(question_type="함축의미", content=(
+                "1문장의 \"drives us to explore the unknown\"은 문맥상 "
+                "(호기심이 우리를 미지의 영역으로 나아가게 하는 원동력이 됨)을 의미함")),
+            schemas.ExamItem(question_type="서술형", content=(
+                "2문장 → that절 + 비교급(longer)이 결합돼 어순이 까다로워 영작 시 어려움")),
         ]),
     )

@@ -150,9 +150,9 @@ class StructureSection(BaseModel):
 # ⑥ 내신 빈출 출제 포인트 체크리스트
 # ---------------------------------------------------------------------------
 class ExamItem(BaseModel):
-    question_type: str   # 출제 유형 (빈칸추론/제목추론/주제파악/순서배열/내용일치/서술형 등)
-    content: str         # 출제 내용
-    tip: str             # 신샘팁 (변형 대비 포인트)
+    question_type: str   # 출제 유형 (지칭추론/함축의미/서술형)
+    content: str         # 은아 T tip 내용 (여러 줄 가능, 줄바꿈으로 구분)
+    tip: str = ""        # (미사용 - 이전 호환용)
 
 
 class ExamSection(BaseModel):

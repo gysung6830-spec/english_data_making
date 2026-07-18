@@ -27,13 +27,12 @@
       <span class="sec-sub">Exam Points</span>
     </div>
     <table class="grid t-exam">
-      <thead><tr><th>출제 유형</th><th>출제 내용</th><th>은아 T tip (변형 대비)</th></tr></thead>
+      <thead><tr><th style="width:130px">출제 유형</th><th>은아 T tip</th></tr></thead>
       <tbody>
       {% for e in report.exam.items %}
         <tr>
           <td class="cell-point">{{ e.question_type }}</td>
-          <td>{{ e.content }}</td>
-          <td>{{ e.tip }}</td>
+          <td class="pre">{{ e.content }}</td>
         </tr>
       {% endfor %}
       </tbody>

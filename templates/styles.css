@@ -116,6 +116,7 @@ table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .cell-word { font-weight: 700; }
 .cell-point { font-weight: 700; }
 .ex-quote { color: var(--muted); font-style: italic; }
+td.pre { white-space: pre-line; }   /* 줄바꿈(\n)을 그대로 표시 */
 
 /* 핵심 어법 강조 행 */
 .t-gram tbody tr.key-row td { background: #fff7ed !important; }
