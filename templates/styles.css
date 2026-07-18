@@ -9,7 +9,7 @@
   margin: 9mm 10mm 11mm 10mm;
   @bottom-center {
     content: counter(page) " / " counter(pages);
-    font-family: "NanumGothic", sans-serif;
+    font-family: "NanumGothic", "Malgun Gothic", sans-serif;
     font-size: 8px;
     color: #9aa0a6;
   }
@@ -18,7 +18,7 @@
 * { box-sizing: border-box; }
 
 body {
-  font-family: "NanumGothic", "Nanum Gothic", sans-serif;
+  font-family: "NanumGothic", "Nanum Gothic", "Malgun Gothic", "맑은 고딕", sans-serif;
   color: #23272e;
   font-size: 8.9px;
   line-height: 1.4;
