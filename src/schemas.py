@@ -56,6 +56,7 @@ class Chunk(BaseModel):
 class Sentence(BaseModel):
     no: int
     chunks: list[Chunk]
+    note: str = ""   # 문장 내용이 추상적일 때만 붙이는 쉬운 설명(아니면 공란)
 
     @field_validator("chunks")
     @classmethod
@@ -84,6 +85,7 @@ class GrammarItem(BaseModel):
     point: str          # 문법 포인트명
     example: str        # 지문에서 나온 실제 예문
     explanation: str    # 핵심 설명
+    key: bool = False   # 핵심 어법(관계사/분사/가정법/비교/도치/강조/5형식) 여부
 
 
 class GrammarSection(BaseModel):

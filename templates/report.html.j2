@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  {# ② 내신 빈출 출제 포인트 체크리스트 (직독직해 앞으로 이동) #}
+  {# ② 내신 빈출 출제 포인트 체크리스트 #}
   <div class="section s-exam">
     <div class="section-head">
       <span class="sec-num">2</span>
@@ -42,96 +42,10 @@
     </table>
   </div>
 
-  {# ③ 직독직해 (한 줄 / 방식, 영어-한글 색상 대응) #}
-  <div class="section s-lit">
-    <div class="section-head">
-      <span class="sec-num">3</span>
-      <span class="sec-title">직독직해</span>
-      <span class="sec-sub">같은 색끼리 영어 ↔ 한글이 대응됩니다</span>
-    </div>
-    {% for s in report.literal.sentences %}
-    <div class="lit-sentence">
-      <span class="snum">문장 {{ s.no }}</span>
-      <div class="lit-line en">
-        {%- for c in s.chunks -%}
-          <span class="ck ck{{ loop.index0 % 8 }}">{{ c.english }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
-        {%- endfor -%}
-      </div>
-      <div class="lit-line ko">
-        {%- for c in s.chunks -%}
-          <span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
-        {%- endfor -%}
-      </div>
-      {% set has_syntax = s.chunks | selectattr('syntax') | list %}
-      {% if has_syntax %}
-      <div class="lit-note">
-        {%- for c in s.chunks -%}{% if c.syntax %}<span class="ntag ck{{ loop.index0 % 8 }}">▸ {{ c.syntax }}</span>{% endif %}{%- endfor -%}
-      </div>
-      {% endif %}
-      {% set allwords = [] %}
-      {% for c in s.chunks %}{% for w in c.words %}{% set _ = allwords.append(w) %}{% endfor %}{% endfor %}
-      {% if allwords %}
-      <div class="lit-words">
-        <span class="wlbl">어휘</span>
-        {%- for w in allwords -%}{{ w.word }}: {{ w.meaning }}{% if not loop.last %} · {% endif %}{%- endfor -%}
-      </div>
-      {% endif %}
-    </div>
-    {% endfor %}
-  </div>
-
-  {# ④ 핵심 문법 TOP 10 #}
-  <div class="section s-gram">
-    <div class="section-head">
-      <span class="sec-num">4</span>
-      <span class="sec-title">핵심 문법 TOP 10</span>
-      <span class="sec-sub">Grammar</span>
-    </div>
-    <table class="grid t-gram">
-      <thead><tr><th>No</th><th>문법 포인트</th><th>지문 예문</th><th>핵심 설명</th></tr></thead>
-      <tbody>
-      {% for g in report.grammar.items %}
-        <tr>
-          <td class="cell-no">{{ g.no }}</td>
-          <td class="cell-point">{{ g.point }}</td>
-          <td class="ex-quote">{{ g.example }}</td>
-          <td>{{ g.explanation }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  {# ⑤ 핵심 어휘 · 유의어 · 반의어 #}
-  <div class="section s-voc">
-    <div class="section-head">
-      <span class="sec-num">5</span>
-      <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
-      <span class="sec-sub">Vocabulary</span>
-    </div>
-    <table class="grid t-voc">
-      <thead><tr>
-        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th>지문 예문</th>
-      </tr></thead>
-      <tbody>
-      {% for v in report.vocab.items %}
-        <tr>
-          <td class="cell-no">{{ v.no }}</td>
-          <td class="cell-word">{{ v.word }}</td>
-          <td>{{ v.meaning }}</td>
-          <td>{{ v.synonyms }}</td>
-          <td>{{ v.antonyms }}</td>
-          <td class="ex-quote">{{ v.example }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  {# ⑥ 지문 구조 분석 #}
+  {# ③ 지문 구조 분석 #}
   <div class="section s-struc">
     <div class="section-head">
-      <span class="sec-num">6</span>
+      <span class="sec-num">3</span>
       <span class="sec-title">지문 구조 분석</span>
       <span class="sec-sub">{{ "Logic Flow" if report.structure.flow_type == "logic" else "Emotional Flow" }}</span>
     </div>
@@ -156,6 +70,104 @@
       </li>
       {% endfor %}
     </ul>
+  </div>
+
+  {# ④ 직독직해 (2단: 왼쪽 영어+문법 / 오른쪽 한글+단어) #}
+  <div class="section s-lit">
+    <div class="section-head">
+      <span class="sec-num">4</span>
+      <span class="sec-title">직독직해</span>
+      <span class="sec-sub">왼쪽 영어+구문 / 오른쪽 직독직해+단어 · 같은 색끼리 대응</span>
+    </div>
+    <table class="lit2">
+      <thead><tr><th class="lh-en">영어 원문 + 핵심 구문</th><th class="lh-ko">직독직해 + 핵심 단어</th></tr></thead>
+      <tbody>
+      {% for s in report.literal.sentences %}
+      <tr class="lit-row">
+        <td class="lit-en">
+          <span class="snum">{{ s.no }}</span>
+          <span class="lit-line">
+            {%- for c in s.chunks -%}
+              <span class="ck ck{{ loop.index0 % 8 }}">{{ c.english }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+            {%- endfor -%}
+          </span>
+          {% set has_syntax = s.chunks | selectattr('syntax') | list %}
+          {% if has_syntax %}
+          <span class="lit-note-line">
+            {%- for c in s.chunks -%}{% if c.syntax %}<span class="ntag ck{{ loop.index0 % 8 }}{{ ' keytag' if c.syntax|is_key_grammar }}">{% if c.syntax|is_key_grammar %}★{% endif %}{{ c.syntax }}</span>{% endif %}{%- endfor -%}
+          </span>
+          {% endif %}
+        </td>
+        <td class="lit-ko">
+          <span class="lit-line">
+            {%- for c in s.chunks -%}
+              <span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+            {%- endfor -%}
+          </span>
+          {% set allwords = [] %}
+          {% for c in s.chunks %}{% for w in c.words %}{% set _ = allwords.append(w) %}{% endfor %}{% endfor %}
+          {% if allwords %}
+          <span class="lit-words">
+            {%- for w in allwords -%}<b>{{ w.word }}</b> {{ w.meaning }}{% if not loop.last %} · {% endif %}{%- endfor -%}
+          </span>
+          {% endif %}
+        </td>
+      </tr>
+      {% if s.note %}
+      <tr class="lit-note-row"><td colspan="2"><span class="nlbl">쉽게</span>{{ s.note }}</td></tr>
+      {% endif %}
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ⑤ 핵심 문법 TOP 10 #}
+  <div class="section s-gram">
+    <div class="section-head">
+      <span class="sec-num">5</span>
+      <span class="sec-title">핵심 문법 TOP 10</span>
+      <span class="sec-sub">★ = 관계사·분사·가정법·비교·도치·강조·5형식 (필수 어법)</span>
+    </div>
+    <table class="grid t-gram">
+      <thead><tr><th>No</th><th>문법 포인트</th><th>지문 예문</th><th>핵심 설명</th></tr></thead>
+      <tbody>
+      {% for g in report.grammar.items %}
+        {% set is_key = g.key or (g.point|is_key_grammar) %}
+        <tr class="{{ 'key-row' if is_key }}">
+          <td class="cell-no">{{ g.no }}</td>
+          <td class="cell-point">{% if is_key %}<span class="key-badge">★필수</span> {% endif %}{{ g.point }}</td>
+          <td class="ex-quote">{{ g.example }}</td>
+          <td>{{ g.explanation }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ⑥ 핵심 어휘 · 유의어 · 반의어 #}
+  <div class="section s-voc">
+    <div class="section-head">
+      <span class="sec-num">6</span>
+      <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
+      <span class="sec-sub">Vocabulary</span>
+    </div>
+    <table class="grid t-voc">
+      <thead><tr>
+        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th>지문 예문</th>
+      </tr></thead>
+      <tbody>
+      {% for v in report.vocab.items %}
+        <tr>
+          <td class="cell-no">{{ v.no }}</td>
+          <td class="cell-word">{{ v.word }}</td>
+          <td>{{ v.meaning }}</td>
+          <td>{{ v.synonyms }}</td>
+          <td>{{ v.antonyms }}</td>
+          <td class="ex-quote">{{ v.example }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
 
   {% if footer_note %}

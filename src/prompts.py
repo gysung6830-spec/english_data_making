@@ -49,10 +49,13 @@ def summary_prompt(title: str, body: str) -> str:
 # ② 직독직해 ---------------------------------------------------------------
 def literal_prompt(title: str, body: str) -> str:
     return (
-        "아래 지문을 '직독직해' 자료로 만드세요.\n"
+        "아래 지문을 '직독직해' 자료로 만드세요. (왼쪽=영어+문법, 오른쪽=한글+단어 2단 구성용 데이터)\n"
         "- 각 문장을 의미 단위(chunk)로 끊습니다.\n"
         "- 각 chunk 마다: english(원문 조각), syntax(핵심 구문/문법 분석, 예: '5형식 ask+목적어+to부정사', "
         "없으면 빈 문자열), korean(직독직해 한국어), words(그 chunk 의 핵심 단어와 뜻 목록).\n"
+        "- 특히 관계사·분사·가정법·비교구문·도치·강조구문·5형식이 보이면 syntax 에 반드시 표시하세요.\n"
+        "- note: 문장의 '내용 자체'가 너무 추상적이어서 직역만으로 이해가 어려운 경우에만, "
+        "고등학생이 이해할 수 있는 쉬운 설명을 1문장 붙이세요. 그렇지 않으면 빈 문자열로 두세요.\n"
         "- sentences 배열에 문장 순서대로 담고, no 는 1부터 매깁니다.\n\n"
         + _passage_block(title, body)
     )
@@ -63,7 +66,9 @@ def grammar_prompt(title: str, body: str) -> str:
     return (
         "아래 지문에서 '핵심 문법 TOP 10'을 정확히 10개 뽑으세요.\n"
         "- 각 항목: no(1~10), point(문법 포인트명), example(지문에 실제로 등장한 예문), "
-        "explanation(핵심 설명, 한국어).\n"
+        "explanation(핵심 설명, 한국어), key(핵심 어법 여부 true/false).\n"
+        "- 관계사·분사·가정법·비교구문·도치·강조구문·5형식 은 특히 중요하므로, 지문에 있으면 "
+        "우선적으로 뽑고 key=true 로 표시하세요. 나머지는 key=false.\n"
         "- 반드시 지문에서 실제로 쓰인 문법을 근거로 예문을 그대로 인용하세요.\n\n"
         + _passage_block(title, body)
     )
@@ -92,8 +97,8 @@ def structure_prompt(title: str, body: str) -> str:
         "감정 변화 단계(예: 5단계)로 정리하되 각 단계에 감정명(stage), 정리(content), "
         "근거 문장 인용(evidence)을 넣으세요.\n"
         "- genre_reason 에 왜 그 유형으로 판별했는지 한 줄로 쓰세요.\n"
-        "- easy_explanation 에는 이 지문이 무슨 내용인지 '초등학생도 이해할 수 있게' "
-        "아주 쉬운 말로, 필요하면 비유를 들어 2~3문장으로 풀어 설명하세요.\n\n"
+        "- easy_explanation 에는 이 지문이 무슨 내용인지 '고등학생이 이해할 수 있는 수준'의 "
+        "쉬운 말이나 적절한 비유로 2~3문장으로 풀어 설명하세요. (지나치게 유치하지 않게)\n\n"
         + _passage_block(title, body)
     )
 

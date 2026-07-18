@@ -15,6 +15,18 @@ _env = Environment(
     autoescape=select_autoescape(["html", "xml", "j2"]),
 )
 
+# 특히 중요한 핵심 어법 키워드 (부각 표시용)
+KEY_GRAMMAR = ["관계", "분사", "가정법", "비교", "도치", "강조", "5형식", "5 형식", "사역", "지각"]
+
+
+def _is_key_grammar(text: str | None) -> bool:
+    if not text:
+        return False
+    return any(k in text for k in KEY_GRAMMAR)
+
+
+_env.filters["is_key_grammar"] = _is_key_grammar
+
 
 def render_html(report: schemas.Report, footer_note: str = "") -> str:
     tmpl = _env.get_template("report.html.j2")
