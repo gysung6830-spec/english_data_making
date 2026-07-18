@@ -1,0 +1,172 @@
+/* ============================================================
+   영어 시험지 자동 생성 — 인쇄용 스타일 (WeasyPrint)
+   고등 모의고사 스타일 2단 레이아웃.
+
+   볼드 규칙(명세서 §4): 아래 5곳만 굵게, 나머지는 모두 얇게.
+     1) 제목 "영어 영역" + 상단 배지          → .brand-title, .badge
+     2) 문항 번호 (1. 2. 3. …)                → .qnum
+     3) 지문 라벨 [지문 1]                     → .passage-label
+     4) 정답·해설 헤더 + 각 문항 정답 글자     → .answer-title, .answer-key
+     5) 서술형 <보기> 제목 + 괄호 안 제시어    → .boki-title, .cue
+   ============================================================ */
+
+@page {
+  size: A4;
+  margin: 12mm 12mm 13mm 12mm;
+  @bottom-center {
+    content: "- " counter(page) " -";
+    font-family: "Noto Serif CJK KR", serif;
+    font-size: 8.5px;
+    color: #444;
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* 기본은 얇게(400). 굵게는 지정된 5곳에서만. */
+body {
+  font-family: "Noto Serif CJK KR", "Nanum Myeongjo", serif;
+  color: #111;
+  font-size: 9.4px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* ---------- 상단 머리글 ---------- */
+.sheet-head {
+  border-bottom: 2px solid #111;
+  padding-bottom: 3mm;
+  margin-bottom: 3mm;
+}
+.brand { display: flex; align-items: baseline; gap: 3mm; }
+.badge {
+  font-weight: 700;            /* 볼드 1 */
+  font-size: 9px;
+  border: 1px solid #111;
+  border-radius: 2px;
+  padding: 0.4mm 1.6mm;
+  letter-spacing: 0.3px;
+}
+.brand-title {
+  font-weight: 700;            /* 볼드 1 */
+  font-size: 19px;
+  letter-spacing: 6px;
+}
+.head-note {
+  margin-top: 1.5mm;
+  font-size: 9px;
+  color: #333;
+  font-weight: 400;
+}
+
+/* ---------- 2단 컬럼 ---------- */
+.columns {
+  column-count: 2;
+  column-gap: 7mm;
+  column-rule: 0.6px solid #bbb;
+}
+
+.answers { break-before: page; }
+
+.answer-title {
+  font-weight: 700;            /* 볼드 4 */
+  font-size: 13px;
+  text-align: center;
+  border: 1.5px solid #111;
+  padding: 1.5mm 0;
+  margin: 0 0 3mm 0;
+  letter-spacing: 2px;
+}
+
+/* ---------- 지문 블록 / 라벨 ---------- */
+.passage-block { margin-bottom: 2mm; }
+.passage-label {
+  font-weight: 700;            /* 볼드 3 */
+  font-size: 10px;
+  background: #111;
+  color: #fff;
+  padding: 0.6mm 2mm;
+  display: inline-block;
+  margin: 1mm 0 1.5mm 0;
+  break-after: avoid;
+}
+.passage-title { font-weight: 400; font-size: 9px; }
+
+/* ---------- 문제 항목 ---------- */
+.q-item, .a-item {
+  margin-bottom: 2.6mm;
+  break-inside: auto;
+}
+.q-head { margin-bottom: 1mm; break-after: avoid; }
+.qnum { font-weight: 700; }    /* 볼드 2 */
+.q-prompt { font-weight: 400; }
+.q-body { font-weight: 400; }
+
+/* ---------- 지문 박스 ---------- */
+.passage {
+  border: 0.8px solid #444;
+  padding: 1.8mm 2.2mm;
+  margin: 1mm 0 1.5mm 0;
+  line-height: 1.55;
+  text-align: justify;
+  hyphens: auto;
+}
+.passage.given {           /* 순서: 주어진 글 */
+  background: #f4f4f4;
+  margin-bottom: 1.2mm;
+}
+.given-sentence {          /* 삽입: 주어진 문장 박스 */
+  border: 0.8px solid #111;
+  padding: 1.4mm 2mm;
+  margin: 1mm 0 1.5mm 0;
+  background: #fafafa;
+}
+
+/* 순서배열의 (A)(B)(C) 덩어리 */
+.seg { margin: 1mm 0; }
+.seg-label { font-weight: 400; }
+
+/* ---------- 보기(선택지) ---------- */
+.choices {
+  list-style: none;
+  margin: 1mm 0 0 0;
+  padding: 0;
+  font-weight: 400;
+}
+.choices li { margin: 0.3mm 0; }
+.choices.inline li { display: inline-block; margin-right: 4mm; }
+
+/* 영어 주제 선지는 세로로 */
+.choices.topic li { margin: 0.6mm 0; text-align: left; }
+
+/* 밑줄/네모 표시 */
+u { text-decoration: underline; text-underline-offset: 1.5px; }
+.box {
+  border: 0.8px solid #111;
+  padding: 0 1.2px;
+  white-space: nowrap;
+}
+.cnum { font-weight: 400; }   /* 본문 속 ①②③ 위치·밑줄 번호는 얇게 */
+
+/* ---------- 서술형 ---------- */
+.sub-q { margin: 1.4mm 0; }
+.sub-label { font-weight: 400; }
+.boki {
+  border: 0.8px solid #444;
+  padding: 1.4mm 2mm;
+  margin: 1mm 0;
+  background: #f7f7f7;
+}
+.boki-title { font-weight: 700; }   /* 볼드 5 */
+.cue { font-weight: 700; }          /* 볼드 5 — 괄호 안 제시어 */
+.blank { letter-spacing: 1px; }
+
+/* ---------- 해설 ---------- */
+.a-head { margin-bottom: 0.6mm; break-after: avoid; }
+.a-type { font-weight: 400; font-size: 8.6px; color: #555; }
+.a-body { font-weight: 400; }
+.answer-key { font-weight: 700; }   /* 볼드 4 — 정답 글자 */
+.a-body p { margin: 0.6mm 0; }
+.reason { color: #222; }
+.wrong { color: #333; }

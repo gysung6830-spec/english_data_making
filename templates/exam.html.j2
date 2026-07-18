@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ doc_title }}</title>
+</head>
+<body>
+
+{# ===== 상단 머리글(제목 + 배지 + 사용자 입력 문구) ===== #}
+<header class="sheet-head">
+  <div class="brand">
+    <span class="badge">제 3 교시</span>
+    <span class="brand-title">영어 영역</span>
+  </div>
+  {% if header_note %}<div class="head-note">{{ header_note }}</div>{% endif %}
+</header>
+
+{# ===== 문제 전체 (모든 지문의 문제 먼저) ===== #}
+<section class="questions">
+  <div class="columns">
+    {% for block in qblocks %}
+    <div class="passage-block">
+      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title }}</span>{% endif %}</div>
+      {% for item in block.rows %}
+      <div class="q-item type-{{ item.type }}">
+        <div class="q-head">
+          <span class="qnum">{{ item.no }}.</span>
+          <span class="q-prompt">{{ item.prompt }}</span>
+        </div>
+        <div class="q-body">{{ item.body }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{# ===== 해설 전체 (그 뒤에 모든 지문의 해설) ===== #}
+<section class="answers">
+  <h2 class="answer-title">정답 및 해설</h2>
+  <div class="columns">
+    {% for block in ablocks %}
+    <div class="passage-block">
+      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title }}</span>{% endif %}</div>
+      {% for item in block.rows %}
+      <div class="a-item type-{{ item.type }}">
+        <div class="a-head">
+          <span class="qnum">{{ item.no }}.</span>
+          <span class="a-type">{{ item.label }}</span>
+        </div>
+        <div class="a-body">{{ item.body }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+</body>
+</html>
