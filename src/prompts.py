@@ -135,9 +135,13 @@ def exam_prompt(title: str, body: str, grammar: schemas.GrammarSection | None,
         ref += f"\n[참고: 앞서 뽑은 핵심 어휘] {ws}"
     return (
         "아래 지문의 '내신 빈출 출제 포인트 체크리스트'를 표 형태 데이터로 만드세요.\n"
-        "- 각 항목: question_type(출제 유형 - 빈칸추론/제목추론/주제파악/순서배열/내용일치/서술형 등), "
-        "content(출제 내용), tip(은아 T tip: 변형 대비 포인트).\n"
-        "- 위 [참고]로 준 문법·어휘를 재사용하여 일관성 있게 작성하세요.\n"
+        "- 출제 유형은 반드시 다음 4가지로만, 이 순서대로 한 항목씩 구성하세요(다른 유형 금지):\n"
+        "  1) 지칭추론(대명사)  2) 어휘  3) 순서배열·문장삽입  4) 서술형\n"
+        "- 각 항목: question_type(위 4개 중 하나), content(그 유형으로 이 지문에서 어떻게 출제될지), "
+        "tip(은아 T tip: 변형 대비 포인트).\n"
+        "- '지칭추론'은 this/that/those/it 등 대명사·지시어가 가리키는 대상을, "
+        "'순서배열·문장삽입'은 연결어(However, Similarly, In addition 등)와 지시어 단서를 활용하세요.\n"
+        "- 위 [참고]로 준 어휘·문법을 재사용하여 일관성 있게 작성하세요.\n"
         + ref + "\n\n"
         + _passage_block(title, body)
     )
