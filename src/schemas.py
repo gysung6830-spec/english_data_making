@@ -32,23 +32,10 @@ class Extraction(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# ① 내용 전체 요약 정리
+# ① 내용 전체 요약 정리  (주제 한 문장)
 # ---------------------------------------------------------------------------
-class ParagraphSummary(BaseModel):
-    index: int
-    summary: str
-
-
 class SummarySection(BaseModel):
-    overall: str
-    paragraphs: list[ParagraphSummary]
-
-    @field_validator("paragraphs")
-    @classmethod
-    def _has_items(cls, v: list[ParagraphSummary]) -> list[ParagraphSummary]:
-        if not v:
-            raise ValueError("문단별 요약이 비어 있습니다.")
-        return v
+    overall: str  # 지문의 주제를 담은 한 문장
 
 
 # ---------------------------------------------------------------------------
@@ -143,6 +130,7 @@ class FlowStage(BaseModel):
 class StructureSection(BaseModel):
     flow_type: Literal["logic", "emotional"]
     genre_reason: str = ""     # 왜 이 유형으로 판별했는지
+    easy_explanation: str = "" # 초등학생도 이해할 수 있는 쉬운(비유적) 설명
     stages: list[FlowStage]
 
     @field_validator("stages")

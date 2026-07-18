@@ -13,14 +13,7 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         title=title,
         source=source,
         summary=schemas.SummarySection(
-            overall=("호기심은 단순한 흥미를 넘어 학습과 성장의 원동력이다. "
-                     "글쓴이는 호기심이 지식의 확장뿐 아니라 문제 해결력과 창의성을 키운다고 주장한다. "
-                     "따라서 교육은 정답 암기보다 질문하는 태도를 길러야 한다."),
-            paragraphs=[
-                schemas.ParagraphSummary(index=1, summary="호기심의 정의와 그것이 인간 발달에서 갖는 중요성을 소개한다."),
-                schemas.ParagraphSummary(index=2, summary="호기심이 학습 동기와 기억에 미치는 긍정적 효과를 설명한다."),
-                schemas.ParagraphSummary(index=3, summary="질문을 장려하는 교육의 필요성을 결론으로 제시한다."),
-            ],
+            overall="호기심은 학습과 성장의 원동력이므로 교육은 정답 암기보다 질문하는 태도를 길러야 한다.",
         ),
         literal=schemas.LiteralSection(sentences=[
             schemas.Sentence(no=1, chunks=[
@@ -89,6 +82,9 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         structure=schemas.StructureSection(
             flow_type="logic",
             genre_reason="주장과 근거로 이루어진 논설문이므로 논리 전개형으로 분석함.",
+            easy_explanation=("이 글은 '궁금해하는 마음(호기심)'이 공부를 잘하게 도와주는 힘이라고 말해요. "
+                              "장난감이 궁금해서 이리저리 뜯어보다 보면 더 잘 알게 되는 것처럼, "
+                              "궁금한 걸 자꾸 물어보면 더 오래 기억하고 재미있게 배울 수 있대요."),
             stages=[
                 schemas.FlowStage(stage="[도입]", content="호기심의 정의를 제시하고 화제를 던진다.",
                                   evidence="Curiosity drives us to explore the unknown."),

@@ -40,9 +40,8 @@ def _passage_block(title: str, body: str) -> str:
 # ① 요약 -------------------------------------------------------------------
 def summary_prompt(title: str, body: str) -> str:
     return (
-        "아래 지문의 '내용 전체 요약 정리'를 작성하세요.\n"
-        "- overall: 지문 전체를 아우르는 요약 2~4문장 (한국어).\n"
-        "- paragraphs: 문단 수만큼, 각 문단의 핵심을 1~2문장(한국어)으로 요약. index 는 1부터.\n\n"
+        "아래 지문의 '주제'를 딱 한 문장으로 정리하세요.\n"
+        "- overall: 지문 전체를 관통하는 주제를 담은 한 문장(한국어). 문단별 요약은 하지 마세요.\n\n"
         + _passage_block(title, body)
     )
 
@@ -92,7 +91,9 @@ def structure_prompt(title: str, body: str) -> str:
         "- 문학·일상문 등 감정 전개형이면 flow_type='emotional' 로 하고, "
         "감정 변화 단계(예: 5단계)로 정리하되 각 단계에 감정명(stage), 정리(content), "
         "근거 문장 인용(evidence)을 넣으세요.\n"
-        "- genre_reason 에 왜 그 유형으로 판별했는지 한 줄로 쓰세요.\n\n"
+        "- genre_reason 에 왜 그 유형으로 판별했는지 한 줄로 쓰세요.\n"
+        "- easy_explanation 에는 이 지문이 무슨 내용인지 '초등학생도 이해할 수 있게' "
+        "아주 쉬운 말로, 필요하면 비유를 들어 2~3문장으로 풀어 설명하세요.\n\n"
         + _passage_block(title, body)
     )
 
