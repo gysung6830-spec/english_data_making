@@ -22,9 +22,13 @@ INSERT = "insert"
 TOPIC = "topic"
 VOCAB = "vocab"
 GRAMMAR = "grammar"
+CONTENT = "content"
 SHORT_ANSWER = "short_answer"
 
-TYPE_ORDER: tuple[str, ...] = (ORDER, INSERT, TOPIC, VOCAB, GRAMMAR, SHORT_ANSWER)
+# 내용 일치는 서술형 바로 앞에 배치한다.
+TYPE_ORDER: tuple[str, ...] = (
+    ORDER, INSERT, TOPIC, VOCAB, GRAMMAR, CONTENT, SHORT_ANSWER,
+)
 
 # 발문(문제 지시문). 조판 시 문제 상단에 얇게 표기한다.
 TYPE_PROMPTS: dict[str, str] = {
@@ -33,6 +37,7 @@ TYPE_PROMPTS: dict[str, str] = {
     TOPIC: "다음 글의 주제로 가장 적절한 것은?",
     VOCAB: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
     GRAMMAR: "밑줄 친 부분 중, 어법상 틀린 것을 모두 고르시오.",
+    CONTENT: "위 글의 내용과 일치하는 것은?",
     SHORT_ANSWER: "다음 글을 읽고 물음에 답하시오.",
 }
 
@@ -43,6 +48,7 @@ TYPE_LABELS: dict[str, str] = {
     TOPIC: "주제",
     VOCAB: "어휘",
     GRAMMAR: "어법",
+    CONTENT: "내용 일치",
     SHORT_ANSWER: "서술형",
 }
 

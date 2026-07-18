@@ -99,6 +99,30 @@ class TopicOut(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# 내용 일치 (한글 선지, 지문은 원본 그대로) — 서술형 앞
+# ---------------------------------------------------------------------------
+class ContentOut(BaseModel):
+    choices: list[str]             # 한글 선지 5개
+    answer_no: int                 # 글과 일치하는 정답 번호(1~5)
+    reason: str                    # 정답이 글의 어느 문장과 일치하는지
+    wrong_reasons: list[WrongReason]  # 각 오답이 '어느 부분에서' 틀렸는지
+
+    @field_validator("choices")
+    @classmethod
+    def _five(cls, v: list[str]) -> list[str]:
+        if len(v) != 5:
+            raise ValueError("내용 일치 선지는 정확히 5개여야 합니다.")
+        return v
+
+    @field_validator("answer_no")
+    @classmethod
+    def _range(cls, v: int) -> int:
+        if not (1 <= v <= 5):
+            raise ValueError("answer_no 는 1~5 여야 합니다.")
+        return v
+
+
+# ---------------------------------------------------------------------------
 # ④ 어휘 — 정본에서 지정 단어만 밑줄/치환
 # ---------------------------------------------------------------------------
 class WordMark(BaseModel):

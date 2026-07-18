@@ -147,6 +147,16 @@ def make_topic(sentences: list[str], choices: list[str], answer_no: int,
 
 
 # ---------------------------------------------------------------------------
+# 내용 일치 (원본 그대로 + 한글 선지) — 서술형 앞
+# ---------------------------------------------------------------------------
+def make_content(sentences: list[str], choices: list[str], answer_no: int,
+                 reason: str, wrong: dict[int, str]) -> tuple[str, str]:
+    q = F.content_q(" ".join(sentences), choices)
+    a = F.content_a(answer_no, reason, wrong)
+    return q, a
+
+
+# ---------------------------------------------------------------------------
 # ④ 어휘 (지정 단어만 원본과 다름)
 # ---------------------------------------------------------------------------
 def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],

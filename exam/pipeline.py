@@ -8,9 +8,10 @@ from __future__ import annotations
 from pathlib import Path
 
 from . import analyzer, renderer, validator
-from .generators import grammar, insert, order, short_answer, topic, vocab
+from .generators import content, grammar, insert, order, short_answer, topic, vocab
 from .llm import ClaudeClient
 from .types import (
+    CONTENT,
     GRAMMAR,
     INSERT,
     ORDER,
@@ -28,6 +29,7 @@ GENERATORS = {
     TOPIC: topic,
     VOCAB: vocab,
     GRAMMAR: grammar,
+    CONTENT: content,
     SHORT_ANSWER: short_answer,
 }
 

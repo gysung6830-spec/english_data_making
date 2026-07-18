@@ -147,8 +147,9 @@ body {
 .choices li { margin: 0.3mm 0; }
 .choices.inline li { display: inline-block; margin-right: 4mm; }
 
-/* 영어 주제 선지는 세로로 */
-.choices.topic li { margin: 0.6mm 0; text-align: left; }
+/* 주제(영어)·내용일치(한글) 선지는 세로로 */
+.choices.topic li,
+.choices.content li { margin: 0.6mm 0; text-align: left; }
 
 /* 밑줄/네모 표시 */
 u { text-decoration: underline; text-underline-offset: 1.5px; }

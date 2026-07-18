@@ -18,6 +18,7 @@ from exam import pipeline, renderer, validator  # noqa: E402
 from exam.demo_data import DNA, demo_passages  # noqa: E402
 from exam.schemas import (  # noqa: E402
     Analysis,
+    ContentOut,
     GrammarOut,
     GrammarReason,
     InsertOut,
@@ -36,7 +37,7 @@ def test_demo_validation_and_numbering() -> None:
     passages = demo_passages()
     validator.validate_passages(passages)
     numbers = validator.validate_numbering(passages, start=1)
-    assert numbers == [[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12]]
+    assert numbers == [[1, 2, 3, 4, 5, 6, 7], [8, 9, 10, 11, 12, 13, 14]]
     print("✓ 데모 검증·번호 연속 통과:", numbers)
 
 
@@ -58,7 +59,7 @@ def test_single_source_shared() -> None:
     """
     p = demo_passages()[0]  # DNA
     marker = "vanishingly small space"      # 정본에만 있는 특징 어구
-    for t in ("order", "insert", "topic", "short_answer"):
+    for t in ("order", "insert", "topic", "content", "short_answer"):
         assert marker in p.q[t], f"{t} 본문이 정본을 공유하지 않음"
     # 정본 문장이 실제로 각 유형에 그대로 들어갔는지(어휘는 밑줄 단어만 달라짐)
     assert "millions of ordinary hard drives combined" in p.q["order"]
@@ -118,6 +119,10 @@ _FAKE = {
         choices=["c1", "c2", "c3", "c4", "c5"], answer_no=2, reason="이유.",
         wrong_reasons=[WrongReason(no=1, text="무관"), WrongReason(no=3, text="모순"),
                        WrongReason(no=4, text="무관"), WrongReason(no=5, text="모순")]),
+    "ContentOut": lambda: ContentOut(
+        choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
+        wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
+                       WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
     "VocabOut": lambda: VocabOut(
         marks=[WordMark(sent_no=1, word="first", shown="initial"),
                WordMark(sent_no=2, word="important", shown="crucial"),

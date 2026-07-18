@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from . import build as B
 from .types import (
+    CONTENT,
     GRAMMAR,
     INSERT,
     ORDER,
@@ -115,7 +116,33 @@ def _passage_dna() -> Passage:
         },
     ))
 
-    # ⑥ 서술형 — 원본 + 파생 과제(영작·요약)
+    # ⑥ 내용 일치 (한글 선지) — 서술형 앞
+    p.set_qa(CONTENT, *B.make_content(
+        s,
+        choices=[
+            "합성 DNA에 데이터를 저장하는 기술은 이미 빠르고 저렴하다.",
+            "1그램의 DNA는 이론상 일반 하드 드라이브 수백만 개에 맞먹는 데이터를 담을 수 있다.",
+            "DNA는 뼈나 얼음 속에서 몇 년밖에 보존되지 못한다.",
+            "연구자들은 디지털 파일을 종이에 기록하기 시작했다.",
+            "DNA는 정보를 넓은 공간에 느슨하게 저장한다.",
+        ],
+        answer_no=2,
+        reason=("지문은 '1그램의 DNA가 이론상 일반 하드 드라이브 수백만 개와 맞먹는 데이터를 "
+                "담을 수 있다(A single gram of DNA ~ millions of ordinary hard drives)'고 "
+                "했으므로 ②가 글의 내용과 일치한다."),
+        wrong={
+            1: "지문은 그 기술이 '여전히 느리고 비싸다(still slow and expensive)'고 했으므로 "
+               "'이미 빠르고 저렴하다'는 부분이 글과 정반대다.",
+            3: "지문은 DNA가 뼈·얼음 속에서 '수만 년(tens of thousands of years)' 견딘다고 "
+               "했으므로 '몇 년밖에'가 틀렸다.",
+            4: "지문은 '합성 DNA(synthetic DNA)'에 부호화한다고 했으므로 '종이에 기록'이 "
+               "틀렸다.",
+            5: "지문은 정보를 '아주 작은 공간(vanishingly small space)'에 촘촘히 담는다고 "
+               "했으므로 '넓은 공간에 느슨하게'가 틀렸다.",
+        },
+    ))
+
+    # ⑦ 서술형 — 원본 + 파생 과제(영작·요약)
     p.set_qa(SHORT_ANSWER, *B.make_short(
         s,
         q1_prompt="본문에서 DNA를 'nature's own hard drive'라고 표현한 이유를 우리말로 서술하시오.",
@@ -239,7 +266,33 @@ def _passage_star() -> Passage:
         },
     ))
 
-    # ⑥ 서술형 — 원본 + 파생 과제
+    # ⑥ 내용 일치 (한글 선지) — 서술형 앞
+    p.set_qa(CONTENT, *B.make_content(
+        s,
+        choices=[
+            "관리자 역할과 실무 역할은 사실상 같은 능력을 요구한다.",
+            "회사가 최고 성과자를 관리자로 올리면 대개 큰 이득을 본다.",
+            "관리자로 승진한 스타는 팀을 코칭하기보다 개인적 성과를 계속 좇는 경향이 있다.",
+            "실무에서의 개인적 탁월함은 관리자 역할이 보상하는 능력이다.",
+            "승진한 스타 덕분에 팀 성과가 곧바로 향상된다.",
+        ],
+        answer_no=3,
+        reason=("지문은 '자리에 앉은 former star가 개인적 성과를 좇고 팀 코칭의 더딘 일을 "
+                "소홀히 한다(keeps chasing personal wins and neglects ~ coaching)'고 했으므로 "
+                "③이 글의 내용과 일치한다."),
+        wrong={
+            1: "지문은 두 역할이 '거의 정반대 능력(opposite skills)'을 요구한다고 했으므로 "
+               "'같은 능력'이 틀렸다.",
+            2: "지문은 회사가 결국 뛰어난 실무자와 유능한 관리자를 '둘 다 잃는다(loses both)'고 "
+               "했으므로 '큰 이득'이 정반대다.",
+            4: "지문에서 개인적 탁월함(personal brilliance)을 보상하는 것은 '실무 역할'이고 "
+               "관리자 역할은 '남을 키우는 인내'를 보상한다고 했으므로 주체가 뒤바뀌었다.",
+            5: "지문은 스타가 관리자가 되면 '팀이 정체된다(The team stalls)'고 했으므로 "
+               "'곧바로 향상된다'가 틀렸다.",
+        },
+    ))
+
+    # ⑦ 서술형 — 원본 + 파생 과제
     p.set_qa(SHORT_ANSWER, *B.make_short(
         s,
         q1_prompt=("본문 마지막 문장의 'the firm loses both ~'가 구체적으로 무엇을 잃는다는 "

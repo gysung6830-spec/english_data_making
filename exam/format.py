@@ -111,6 +111,31 @@ def topic_a(answer_no: int, reason: str, wrong_reasons: dict[int, str]) -> str:
 
 
 # ---------------------------------------------------------------------------
+# 내용 일치 (한글 선지) — 서술형 앞에 배치
+# ---------------------------------------------------------------------------
+def content_q(passage: str, choices: list[str]) -> str:
+    lis = "".join(
+        f'<li><span class="cnum">{circ(i)}</span> {esc(c)}</li>'
+        for i, c in enumerate(choices, 1)
+    )
+    return (
+        f'<div class="passage">{esc(passage)}</div>'
+        f'<ol class="choices content">{lis}</ol>'
+    )
+
+
+def content_a(answer_no: int, reason: str, wrong_reasons: dict[int, str]) -> str:
+    """정답 근거 + 각 오답이 '어느 부분에서' 글과 어긋나는지 짚는다."""
+    parts = [
+        f'<p><span class="answer-key">{circ(answer_no)}</span></p>',
+        f'<p class="reason">{esc(reason)}</p>',
+    ]
+    for i in sorted(wrong_reasons):
+        parts.append(f'<p class="wrong">{circ(i)} {esc(wrong_reasons[i])}</p>')
+    return "".join(parts)
+
+
+# ---------------------------------------------------------------------------
 # ④ 어휘 (문맥상 부적절)
 # ---------------------------------------------------------------------------
 def vocab_q(marked_passage_html: str) -> str:
