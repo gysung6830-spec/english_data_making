@@ -167,12 +167,16 @@ table.lit2 td {
 .ck3 { color: #7c3aed; } .ck4 { color: #be123c; } .ck5 { color: #0f766e; }
 .ck6 { color: #a16207; } .ck7 { color: #4338ca; }
 
-.lit-note-line { display: block; margin-top: 3px; }
-.lit-note-line .ntag {
+/* 직독직해에 통합된 핵심 문법 (문장별) */
+.lit-gram { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #f0ddc0; }
+.gline { display: block; margin-top: 2px; line-height: 1.35; }
+.gtag {
   display: inline-block; font-size: 8px; font-weight: 700;
-  border: 1px solid currentColor; border-radius: 3px; padding: 0 4px; margin: 2px 3px 0 0;
+  color: var(--gram); border: 1px solid var(--gram); border-radius: 3px;
+  padding: 0 5px; margin-right: 4px;
 }
-.ntag.keytag { background: #fff7ed; border-color: #ea580c; color: #c2410c; }
+.gtag.keytag { background: #fff7ed; border-color: #ea580c; color: #c2410c; }
+.gexp { font-size: 8.3px; color: #374151; }
 .lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #23272e; line-height: 1.5; }
 .lit-words b { color: #23272e; }
 .lit-note-row td {

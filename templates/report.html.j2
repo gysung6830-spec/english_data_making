@@ -67,33 +67,10 @@
     </ul>
   </div>
 
-  {# ④ 핵심 문법 TOP 10 #}
-  <div class="section s-gram">
-    <div class="section-head">
-      <span class="sec-num">4</span>
-      <span class="sec-title">핵심 문법 TOP 10</span>
-      <span class="sec-sub">★ = 관계사·분사·가정법·비교·도치·강조·5형식 (필수 어법)</span>
-    </div>
-    <table class="grid t-gram">
-      <thead><tr><th>No</th><th>문법 포인트</th><th>지문 예문</th><th>핵심 설명</th></tr></thead>
-      <tbody>
-      {% for g in report.grammar.items %}
-        {% set is_key = g.key or (g.point|is_key_grammar) %}
-        <tr class="{{ 'key-row' if is_key }}">
-          <td class="cell-no">{{ g.no }}</td>
-          <td class="cell-point">{% if is_key %}<span class="key-badge">★필수</span> {% endif %}{{ g.point }}</td>
-          <td class="ex-quote">{{ g.example }}</td>
-          <td>{{ g.explanation }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
-
-  {# ⑤ 핵심 어휘 · 유의어 · 반의어 #}
+  {# ④ 핵심 어휘 · 유의어 · 반의어 #}
   <div class="section s-voc">
     <div class="section-head">
-      <span class="sec-num">5</span>
+      <span class="sec-num">4</span>
       <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
       <span class="sec-sub">Vocabulary</span>
     </div>
@@ -116,15 +93,15 @@
     </table>
   </div>
 
-  {# ⑥ 직독직해 — 두 번째 페이지에 단독 배치 #}
+  {# ⑤ 직독직해 (핵심 문법 TOP 10 통합) — 두 번째 페이지에 단독 배치 #}
   <div class="section s-lit page-break">
     <div class="section-head">
-      <span class="sec-num">6</span>
+      <span class="sec-num">5</span>
       <span class="sec-title">직독직해 <span class="made-by">made by 은아 T</span></span>
-      <span class="sec-sub">왼쪽 영어+구문 / 오른쪽 직독직해+단어 · 같은 색끼리 대응</span>
+      <span class="sec-sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>
     <table class="lit2">
-      <thead><tr><th class="lh-en">영어 원문 + 핵심 구문</th><th class="lh-ko">직독직해 + 핵심 단어</th></tr></thead>
+      <thead><tr><th class="lh-en">영어 원문 + 핵심 문법</th><th class="lh-ko">직독직해 + 핵심 단어</th></tr></thead>
       <tbody>
       {% for s in report.literal.sentences %}
       <tr class="lit-row">
@@ -135,11 +112,17 @@
               <span class="ck ck{{ loop.index0 % 8 }}">{{ c.english }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
             {%- endfor -%}
           </span>
-          {% set has_syntax = s.chunks | selectattr('syntax') | list %}
-          {% if has_syntax %}
-          <span class="lit-note-line">
-            {%- for c in s.chunks -%}{% if c.syntax %}<span class="ntag ck{{ loop.index0 % 8 }}{{ ' keytag' if c.syntax|is_key_grammar }}">{% if c.syntax|is_key_grammar %}★{% endif %}{{ c.syntax }}</span>{% endif %}{%- endfor -%}
-          </span>
+          {% set gitems = report.grammar.items | selectattr('sentence_no', 'equalto', s.no) | list %}
+          {% if gitems %}
+          <div class="lit-gram">
+            {% for g in gitems %}
+            {% set is_key = g.key or (g.point|is_key_grammar) %}
+            <div class="gline">
+              <span class="gtag{{ ' keytag' if is_key }}">{% if is_key %}★필수 {% endif %}{{ g.point }}</span>
+              <span class="gexp">{{ g.explanation }}</span>
+            </div>
+            {% endfor %}
+          </div>
           {% endif %}
         </td>
         <td class="lit-ko">
@@ -161,6 +144,18 @@
       <tr class="lit-note-row"><td colspan="2"><span class="nlbl">쉽게</span>{{ s.note }}</td></tr>
       {% endif %}
       {% endfor %}
+      {# 문장 번호가 매칭되지 않은 문법이 있으면 하단에 모아서 표시(누락 방지) #}
+      {% set nmax = report.literal.sentences | length %}
+      {% set leftover = report.grammar.items | rejectattr('sentence_no', 'in', range(1, nmax + 1)) | list %}
+      {% if leftover %}
+      <tr class="lit-note-row"><td colspan="2">
+        <span class="nlbl">기타 문법</span>
+        {% for g in leftover %}
+        {% set is_key = g.key or (g.point|is_key_grammar) %}
+        <span class="gtag{{ ' keytag' if is_key }}">{% if is_key %}★ {% endif %}{{ g.point }}</span>
+        {% endfor %}
+      </td></tr>
+      {% endif %}
       </tbody>
     </table>
   </div>

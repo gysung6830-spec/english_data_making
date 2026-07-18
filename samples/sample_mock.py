@@ -48,7 +48,7 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
             ]),
         ]),
         grammar=schemas.GrammarSection(items=[
-            schemas.GrammarItem(no=i, point=p, example=ex, explanation=exp)
+            schemas.GrammarItem(no=i, point=p, example=ex, explanation=exp, sentence_no=(i - 1) % 2 + 1)
             for i, (p, ex, exp) in enumerate([
                 ("to부정사의 부사적 용법", "to explore the unknown", "'~하기 위해'라는 목적을 나타낸다."),
                 ("that 명사절", "Studies show that curious students...", "show 의 목적어로 that절이 쓰였다."),

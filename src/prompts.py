@@ -66,7 +66,10 @@ def grammar_prompt(title: str, body: str) -> str:
     return (
         "아래 지문에서 '핵심 문법 TOP 10'을 정확히 10개 뽑으세요.\n"
         "- 각 항목: no(1~10), point(문법 포인트명), example(지문에 실제로 등장한 예문), "
-        "explanation(핵심 설명, 한국어), key(핵심 어법 여부 true/false).\n"
+        "explanation(핵심 설명, 한국어), key(핵심 어법 여부 true/false), "
+        "sentence_no(그 문법이 등장하는 지문 문장 번호, 1부터).\n"
+        "- sentence_no 는 지문을 문장 단위로 앞에서부터 1,2,3... 세었을 때의 번호입니다. "
+        "직독직해의 문장 번호와 반드시 일치시키세요.\n"
         "- 관계사·분사·가정법·비교구문·도치·강조구문·5형식 은 특히 중요하므로, 지문에 있으면 "
         "우선적으로 뽑고 key=true 로 표시하세요. 나머지는 key=false.\n"
         "- 반드시 지문에서 실제로 쓰인 문법을 근거로 예문을 그대로 인용하세요.\n\n"

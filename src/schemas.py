@@ -82,10 +82,11 @@ class LiteralSection(BaseModel):
 # ---------------------------------------------------------------------------
 class GrammarItem(BaseModel):
     no: int
-    point: str          # 문법 포인트명
-    example: str        # 지문에서 나온 실제 예문
-    explanation: str    # 핵심 설명
-    key: bool = False   # 핵심 어법(관계사/분사/가정법/비교/도치/강조/5형식) 여부
+    point: str            # 문법 포인트명
+    example: str          # 지문에서 나온 실제 예문
+    explanation: str      # 핵심 설명
+    key: bool = False     # 핵심 어법(관계사/분사/가정법/비교/도치/강조/5형식) 여부
+    sentence_no: int = 0  # 이 문법이 등장하는 지문 문장 번호(직독직해 문장과 매칭)
 
 
 class GrammarSection(BaseModel):

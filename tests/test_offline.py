@@ -93,7 +93,8 @@ def test_retry_recovers():
 def test_render_html():
     from samples.sample_mock import mock_report
     html = render.render_html(mock_report(), footer_note="테스트")
-    assert "직독직해" in html and "핵심 문법 TOP 10" in html
+    assert "직독직해" in html and "made by 은아 T" in html
+    assert "핵심 어휘" in html and "출제 포인트" in html
     assert "The Value of Curiosity" in html
     print("PASS  HTML 렌더링")
 
