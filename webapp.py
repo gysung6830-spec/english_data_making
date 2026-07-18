@@ -22,7 +22,7 @@ def main() -> int:
     args = parser.parse_args()
 
     print(f"  ▶ 웹앱 실행: http://{args.host}:{args.port}")
-    app.run(host=args.host, port=args.port, debug=args.debug)
+    app.run(host=args.host, port=args.port, debug=args.debug, threaded=True)
     return 0
 
 
