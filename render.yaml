@@ -1,0 +1,14 @@
+# Render.com 배포 설정 (Blueprint)
+# render.com 에서 이 저장소를 연결하면 자동으로 이 설정대로 배포됩니다.
+services:
+  - type: web
+    name: english-passage-analyzer
+    runtime: docker
+    plan: free            # 무료 요금제 (일정 시간 미사용 시 잠자기 → 첫 접속 느릴 수 있음)
+    envVars:
+      - key: ANTHROPIC_API_KEY   # 본인 API 키 (Render 대시보드에서 입력)
+        sync: false
+      - key: APP_PASSWORD        # 웹앱 접속 비밀번호 (직접 정해서 입력)
+        sync: false
+      - key: APP_SECRET          # 세션 암호화용 (자동 생성)
+        generateValue: true

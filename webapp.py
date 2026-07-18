@@ -10,13 +10,15 @@
 """
 from __future__ import annotations
 
+import os
 import re
+import secrets
 import traceback
 import uuid
 from pathlib import Path
 
-from flask import (Flask, abort, render_template_string, request,
-                   send_from_directory, url_for)
+from flask import (Flask, abort, redirect, render_template_string, request,
+                   session, send_from_directory, url_for)
 
 from src import extract, pipeline, render
 from src.client import ClaudeClient
@@ -24,6 +26,10 @@ from src.config import ROOT, load_config
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB 업로드 제한
+app.secret_key = os.environ.get("APP_SECRET") or secrets.token_hex(16)
+
+# 인터넷에 올릴 때 접속 비밀번호 (환경변수 APP_PASSWORD). 없으면 잠금 없음(로컬용).
+APP_PASSWORD = os.environ.get("APP_PASSWORD")
 
 cfg = load_config()
 UPLOAD_DIR = ROOT / "web_uploads"
@@ -156,6 +162,48 @@ RESULT_HTML = """
 """
 
 
+LOGIN_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>로그인</title><style>""" + BASE_CSS + """</style></head>
+<body><div class=wrap><div class=card style="max-width:420px;margin:60px auto;">
+  <h1>🔒 로그인</h1>
+  <div class=sub>이 도구를 사용하려면 비밀번호를 입력하세요.</div>
+  {% if err %}<div class=err>{{ err }}</div>{% endif %}
+  <form method=post>
+    <label>비밀번호</label>
+    <input type=password name=password autofocus>
+    <div class=row><button class=btn type=submit>들어가기</button></div>
+  </form>
+</div></div></body></html>
+"""
+
+
+# ---------------------------------------------------------------------------
+# 접속 잠금 (인터넷 배포 시)
+# ---------------------------------------------------------------------------
+@app.before_request
+def _auth_gate():
+    if not APP_PASSWORD:
+        return  # 비밀번호 미설정 → 잠금 없음(내 컴퓨터 로컬 사용용)
+    if request.endpoint in ("login", "static"):
+        return
+    if session.get("auth"):
+        return
+    return redirect(url_for("login"))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    err = ""
+    if request.method == "POST":
+        if request.form.get("password") == APP_PASSWORD:
+            session["auth"] = True
+            return redirect(url_for("index"))
+        err = "비밀번호가 틀렸습니다."
+    return render_template_string(LOGIN_HTML, err=err)
+
+
 # ---------------------------------------------------------------------------
 # 라우트
 # ---------------------------------------------------------------------------
@@ -236,10 +284,11 @@ def view(fname):
 
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     print("=" * 56)
     print("  영어 지문 분석 웹앱이 실행되었습니다.")
     print("  브라우저에서 아래 주소로 접속하세요:")
-    print("      http://localhost:5000")
+    print(f"      http://localhost:{port}")
     print("  (종료하려면 이 창에서 Ctrl+C)")
     print("=" * 56)
-    app.run(host="0.0.0.0", port=5000, threaded=True)
+    app.run(host="0.0.0.0", port=port, threaded=True)
