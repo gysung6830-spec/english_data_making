@@ -21,6 +21,11 @@ class KeyTerm(BaseModel):
     antonym: str = ""
 
 
+class PassageText(BaseModel):
+    """사진/이미지에서 비전으로 옮겨 적은 영어 지문 본문."""
+    text: str
+
+
 class Analysis(BaseModel):
     title: str
     sentences: list[str]           # 정본 지문(문장 단위, 원문 그대로·순서 유지)

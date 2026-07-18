@@ -60,6 +60,8 @@ def generate():
     def fail(msg: str, code: int = 400):
         return render_template("index.html", has_api_key=cfg.has_api_key, error=msg), code
 
+    uploads = [f for f in request.files.getlist("files") if f and f.filename]
+
     try:
         if demo:
             passages = demo_passages()
@@ -68,15 +70,36 @@ def generate():
             renderer.render_pdf(passages, out, header_note=header)
             n = len(passages)
         else:
-            bodies = split_passages(request.form.get("passages", ""))
-            if not bodies:
-                return fail("지문을 입력하거나 '데모' 모드를 선택하세요.")
+            pasted = split_passages(request.form.get("passages", ""))
+            if not uploads and not pasted:
+                return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '데모'를 선택하세요.")
             if not cfg.has_api_key:
                 return fail("ANTHROPIC_API_KEY가 설정되지 않았습니다. .env에 키를 넣거나 "
                             "'API 없이 데모'를 사용하세요.")
+            from exam import ingest
             from exam.llm import ClaudeClient
             from exam.pipeline import build_exam
             client = ClaudeClient(cfg.api_key, cfg.model)
+
+            if uploads:
+                # 업로드 파일 저장(PDF/사진) → 지문 추출(사진은 비전으로 읽음)
+                updir = OUT / "uploads" / fid
+                updir.mkdir(parents=True, exist_ok=True)
+                paths = []
+                for i, f in enumerate(uploads, 1):
+                    ext = Path(f.filename).suffix.lower()
+                    if not ingest.is_supported(f"x{ext}"):
+                        return fail(f"지원하지 않는 형식입니다: {f.filename} "
+                                    "(.txt/.pdf/.jpg/.png/.webp)")
+                    dest = updir / f"upload_{i}{ext}"
+                    f.save(dest)
+                    paths.append(dest)
+                bodies = [b for _, b in ingest.load_bodies(paths, client=client)]
+            else:
+                bodies = pasted
+
+            if not bodies:
+                return fail("지문을 추출하지 못했습니다. 파일 내용을 확인해 주세요.")
             build_exam(client, bodies, out, header_note=header,
                        max_retries=cfg.processing.max_retries,
                        vocab_method=vocab_method,

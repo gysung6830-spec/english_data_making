@@ -28,23 +28,19 @@ from src.logutil import setup_logging
 ROOT = Path(__file__).resolve().parent
 
 
-def read_bodies(input_dir: Path) -> list[tuple[str, str]]:
-    """input 폴더의 .txt 파일들을 (파일명, 본문) 목록으로 읽는다(파일 1개=지문 1개)."""
-    files = sorted(p for p in input_dir.iterdir()
-                   if p.is_file() and p.suffix.lower() == ".txt")
-    bodies = []
-    for f in files:
-        text = f.read_text(encoding="utf-8").strip()
-        if text:
-            bodies.append((f.name, text))
-    return bodies
+def list_input_files(input_dir: Path):
+    """input 폴더의 지원 파일(.txt/.pdf/.jpg/.png/...)을 정렬해 수집."""
+    from exam import ingest
+    return sorted(p for p in input_dir.iterdir()
+                  if p.is_file() and ingest.is_supported(p))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="영어 시험지 자동 생성")
     parser.add_argument("--header", default="", help="상단 머리글 문구(학원명/자료명 등)")
     parser.add_argument("--out", default=None, help="출력 PDF 경로")
-    parser.add_argument("--input", default=None, help="지문 .txt 폴더(기본 input/)")
+    parser.add_argument("--input", default=None,
+                        help="지문 파일 폴더(기본 input/). .txt/.pdf/.jpg/.png 지원")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
     parser.add_argument("--vocab-method", choices=["synonym", "negation"],
                         default="synonym",
@@ -73,9 +69,9 @@ def main() -> int:
 
     # 실제 모드 --------------------------------------------------------------
     input_dir = Path(args.input) if args.input else cfg.input_dir
-    bodies = read_bodies(input_dir)
-    if not bodies:
-        logger.error("input 폴더에 지문 .txt 가 없습니다: %s", input_dir)
+    files = list_input_files(input_dir)
+    if not files:
+        logger.error("input 폴더에 지문 파일(.txt/.pdf/.jpg/.png)이 없습니다: %s", input_dir)
         logger.error("(API 없이 미리보려면: python make_exam.py --demo)")
         return 1
 
@@ -83,10 +79,21 @@ def main() -> int:
         logger.error("ANTHROPIC_API_KEY 가 설정되지 않았습니다. .env 에 키를 넣거나 --demo 를 쓰세요.")
         return 1
 
+    from exam import ingest
     from exam.pipeline import build_exam
     from exam.llm import ClaudeClient
 
     client = ClaudeClient(cfg.api_key, cfg.model)
+
+    # 파일 -> 지문 텍스트(사진은 비전으로 읽음)
+    try:
+        bodies = ingest.load_bodies(files, client=client)
+    except Exception as e:  # noqa: BLE001
+        logger.error("지문 추출 실패: %s", e)
+        return 1
+    if not bodies:
+        logger.error("지문을 추출하지 못했습니다.")
+        return 1
     logger.info("총 %d개 지문으로 시험지 생성 시작", len(bodies))
 
     result = build_exam(

@@ -2,6 +2,11 @@
 __pycache__/
 *.pyc
 input/*.pdf
+input/*.jpg
+input/*.jpeg
+input/*.png
+input/*.webp
+input/*.txt
 output/*.pdf
 output/web/
 output/*.html
