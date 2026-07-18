@@ -49,7 +49,8 @@ def index():
 @app.post("/generate")
 def generate():
     cfg = load_config()
-    demo = request.form.get("demo") == "on"
+    # 'demo' 버튼을 눌렀을 때만 데모. '시험지 생성'은 항상 입력 지문을 사용한다.
+    demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
     vocab_method = request.form.get("vocab_method", "synonym")
     content_difficulty = request.form.get("content_difficulty", "hard")

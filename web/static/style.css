@@ -28,6 +28,7 @@ textarea:focus,input:focus,select:focus{outline:none;border-color:var(--accent);
 .row{display:flex;gap:14px;flex-wrap:wrap}
 .row .field{flex:1;min-width:220px}
 .check{display:flex;align-items:center;gap:8px;font-size:14px;margin:6px 0 16px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 8px}
 .or{text-align:center;color:var(--muted);font-size:12.5px;margin:4px 0 12px;letter-spacing:1px}
 .hint{display:block;color:var(--muted);font-size:12px;margin-top:5px}
 input[type=file]{width:100%;font-size:13.5px;padding:8px;border:1px dashed var(--line);

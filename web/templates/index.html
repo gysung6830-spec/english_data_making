@@ -53,12 +53,12 @@ Second passage goes here."></textarea>
     </label>
   </div>
 
-  <label class="check">
-    <input type="checkbox" name="demo" {% if not has_api_key %}checked{% endif %}>
-    API 없이 <b>데모 지문(DNA·star manager)</b>으로 미리보기
-  </label>
-
-  <button type="submit" class="btn">시험지 생성 →</button>
+  <div class="btns">
+    <button type="submit" name="action" value="generate" class="btn">시험지 생성 →</button>
+    <button type="submit" name="action" value="demo" class="btn ghost">데모 지문으로 미리보기</button>
+  </div>
+  <p class="hint"><b>‘시험지 생성’</b>은 위에 넣은 <b>내 지문/파일</b>로 만듭니다(API 키 필요).
+    <b>‘데모’</b>는 내장 예시 지문(DNA·star manager)으로 <b>디자인만</b> 봅니다 — 내 지문은 쓰이지 않아요.</p>
 </form>
 
 <details class="help">
