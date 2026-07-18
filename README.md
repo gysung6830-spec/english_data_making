@@ -39,6 +39,21 @@ python run.py --workbook --mock   # API 키 없이 디자인만 미리보기
 
 **웹앱으로:** 파일 업로드 화면에서 **산출물 종류 → '문장별 복합유형 통합 워크북'** 을 선택하면 됩니다.
 
+### 여러 지문을 한 PDF로 (지문1 → 답1 → 지문2 → 답2)
+
+여러 지문을 넣고 **`config.yaml` 의 `one_pdf_per_passage` 를 `false`** 로 두면,
+한 PDF 안에 **지문1 문제 → 지문1 정답 → 지문2 문제 → 지문2 정답 …** 순서로 배치됩니다.
+(각 지문은 새 페이지에서 시작하고, 문항 번호·SCORE 는 지문별로 매겨집니다.)
+
+```yaml
+design:
+  one_pdf_per_passage: false   # 여러 지문을 한 파일(ALL_workbooks.pdf)로 합쳐 배치
+```
+
+- `true`(기본): 지문마다 개별 `*_workbook.pdf`
+- `false`: 합본 `ALL_workbooks.pdf` (지문1→답1→지문2→답2)
+- 웹앱에서는 지문을 2편 이상 올리면 개별 PDF와 함께 **합본 PDF도 자동으로** 제공됩니다.
+
 ---
 
 ## 🖼 결과물 미리보기 (API 키 없이)

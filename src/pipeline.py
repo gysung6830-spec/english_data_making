@@ -105,23 +105,42 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
             )
         client = ClaudeClient(cfg.api_key, cfg.model)
 
-    logger.info("총 %d개 지문으로 통합 워크북 생성 시작 (%s 모드)", total, "MOCK" if mock else "API")
+    # one_pdf_per_passage=False 이면 여러 지문을 한 PDF 에 배치한다:
+    #   지문1 → 답1 → 지문2 → 답2 …  (지문별로 문제 다음에 정답이 이어짐)
+    combine = not cfg.design.one_pdf_per_passage
+    logger.info("총 %d개 지문으로 통합 워크북 생성 시작 (%s 모드, %s)",
+                total, "MOCK" if mock else "API",
+                "합본: 지문1→답1→지문2→답2" if combine else "지문별 개별 PDF")
 
     outputs: list[Path] = []
+    books: list = []            # 합본 모드에서 모아두는 (지문 순서대로) 워크북
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
             wb = _mock_workbook_for_pdf(cfg, pdf) if mock else build_workbook_for_pdf(client, cfg, pdf)
-            out = cfg.output_dir / f"{_safe_stem(pdf)}_workbook.pdf"
-            workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
-            outputs.append(out)
-            manifest.record_success(str(pdf), str(out))
+            if combine:
+                books.append(wb)
+                logger.info("[%d/%d] 분석 완료: %s (문항 %d개)", i, total, pdf.name, wb.total)
+            else:
+                out = cfg.output_dir / f"{_safe_stem(pdf)}_workbook.pdf"
+                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
+                outputs.append(out)
+                manifest.record_success(str(pdf), str(out))
+                logger.info("[%d/%d] 완료: %s -> %s (문항 %d개)", i, total, pdf.name, out.name, wb.total)
             success += 1
-            logger.info("[%d/%d] 완료: %s -> %s (문항 %d개)", i, total, pdf.name, out.name, wb.total)
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))
             logger.error("[%d/%d] 실패: %s (%s)", i, total, pdf.name, e)
+
+    # 합본 모드: 모은 지문을 한 PDF 로 배치
+    if combine and books:
+        combined = cfg.output_dir / "ALL_workbooks.pdf"
+        workbook_render.render_workbooks_pdf(books, combined, footer_note=cfg.design.footer_note)
+        outputs.append(combined)
+        manifest.record_success("ALL", str(combined))
+        logger.info("합본 워크북 생성: %s (지문 %d편, 지문1→답1→지문2→답2 순서)",
+                    combined.name, len(books))
 
     logger.info("처리 요약 — 성공 %d, 실패 %d (총 %d)", success, failed, total)
     return {"total": total, "success": success, "failed": failed,

@@ -32,4 +32,6 @@ design:
   # 지문 하단에 넣을 출처/저작권 문구 (비워두면 표시 안 함)
   footer_note: "© 2026. 은아 T. All rights reserved."
   # 지문별로 개별 PDF 를 만들지(true), 하나의 PDF 로 합칠지(false)
+  #   통합 워크북(--workbook)에서 false 로 두면 여러 지문을 한 PDF 에
+  #   '지문1 → 답1 → 지문2 → 답2' 순서로 배치합니다.
   one_pdf_per_passage: true

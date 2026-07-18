@@ -18,6 +18,14 @@ body{
   color:var(--ink); font-size:10pt; line-height:1.5; font-weight:400;
 }
 
+/* ── 지문 단위 (복수 지문: 지문1 → 답1 → 지문2 → 답2) ── */
+.wb-unit.unit-break{ page-break-before:always; break-before:page; }
+.wb-idx{
+  display:inline-block; font-size:9pt; font-weight:700; color:#fff; background:var(--edge);
+  border-radius:5px; padding:1px 8px; margin-right:8px; vertical-align:middle;
+  font-family:"Nanum Gothic","NanumGothic","Malgun Gothic",sans-serif;
+}
+
 /* ── 상단 헤더 ── */
 .wb-header{
   display:flex; align-items:flex-end; justify-content:space-between;

@@ -11,7 +11,8 @@
 from __future__ import annotations
 
 from src import workbook_schemas as ws
-from src.workbook_render import render_sentence, render_workbook_html
+from src.workbook_render import (render_sentence, render_workbook_html,
+                                 render_workbooks_html)
 
 
 def _q(qid, typ="verb", display="(be)", answer="is", reason="r"):
@@ -111,6 +112,25 @@ def test_render_html():
     print("PASS  HTML 렌더(SCORE·정답 페이지·범례)")
 
 
+# ---- 7. 복수 지문 배치 (지문1→답1→지문2→답2) ----------------------------
+def test_multi_passage_layout():
+    from samples.workbook_mock import mock_workbook
+    b1 = mock_workbook(title="Passage One", subtitle="첫째 지문")
+    b2 = mock_workbook(title="Passage Two", subtitle="둘째 지문")
+    html = render_workbooks_html([b1, b2], footer_note="테스트")
+    # 두 지문 모두 제목·지문 번호 배지가 있어야 함
+    assert "Passage One" in html and "Passage Two" in html
+    assert "지문 1" in html and "지문 2" in html
+    # 정답 페이지가 지문마다 하나씩(총 2개) 존재 (CSS 정의와 구분하려 class 속성으로 카운트)
+    assert html.count('class="ans-page"') == 2
+    # 둘째 지문 문제 페이지는 새 페이지에서 시작(unit-break)
+    assert 'unit-break' in html
+    # 단일 지문은 지문 번호 배지가 없어야 함
+    solo = render_workbooks_html([b1])
+    assert "지문 1" not in solo and 'class="ans-page"' in solo
+    print("PASS  복수 지문 배치(지문1→답1→지문2→답2)")
+
+
 def run_all():
     test_placeholder_one_to_one()
     test_unique_ids()
@@ -118,6 +138,7 @@ def run_all():
     test_global_numbering()
     test_render_sentence_substitution()
     test_render_html()
+    test_multi_passage_layout()
     print("\n통합 워크북 오프라인 테스트 통과 ✅")
 
 

@@ -241,6 +241,7 @@ def analyze_route():
     client = None if mock else ClaudeClient(key, cfg.model)
 
     results = []
+    wb_books = []   # 워크북 합본용 (지문 순서대로)
     for f in files:
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
@@ -256,6 +257,7 @@ def analyze_route():
                       else pipeline.build_workbook_for_pdf(client, cfg, tmp))
                 out = OUTPUT_DIR / f"{stem}_workbook.pdf"
                 workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
+                wb_books.append(wb)
             else:
                 report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
                           else pipeline.build_report_for_pdf(client, cfg, tmp))
@@ -267,6 +269,18 @@ def analyze_route():
             results.append({"name": f.filename, "ok": False, "error": str(e)})
         finally:
             tmp.unlink(missing_ok=True)
+
+    # 워크북 + 지문 2편 이상: 합본(지문1→답1→지문2→답2) PDF 추가 제공
+    if kind == "workbook" and len(wb_books) >= 2:
+        try:
+            combined = OUTPUT_DIR / "ALL_workbooks.pdf"
+            workbook_render.render_workbooks_pdf(wb_books, combined,
+                                                 footer_note=cfg.design.footer_note)
+            results.append({"name": "📚 합본 (지문1→답1→지문2→답2)", "ok": True,
+                            "out": combined.name})
+        except Exception as e:
+            traceback.print_exc()
+            results.append({"name": "📚 합본", "ok": False, "error": str(e)})
 
     n_ok = sum(1 for r in results if r["ok"])
     return render_template_string(RESULT_HTML, results=results,
