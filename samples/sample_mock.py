@@ -82,9 +82,11 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         structure=schemas.StructureSection(
             flow_type="logic",
             genre_reason="주장과 근거로 이루어진 논설문이므로 논리 전개형으로 분석함.",
-            easy_explanation=("이 글의 핵심은 '호기심이 학습의 엔진'이라는 것이다. 궁금증이 생기면 뇌가 더 활발해져 "
-                              "기억이 오래가고 학습 동기도 높아진다. 따라서 정답을 외우게 하는 교육보다, 스스로 질문을 "
-                              "던지게 하는 교육이 더 효과적이라는 논리다."),
+            easy_explanation="한마디로 '궁금해야 공부가 된다' 이거임. 정답 외우기보다 스스로 질문하게 하는 게 훨씬 남는 장사.",
+            examples=[
+                "좋아하는 아이돌 정보는 안 외워도 줄줄 나오는데, 그게 바로 궁금해서 스스로 파고들었기 때문인 거랑 똑같음.",
+                "게임 공략을 누가 시켜서가 아니라 궁금해서 찾아보면 기가 막히게 기억나는 원리임.",
+            ],
             stages=[
                 schemas.FlowStage(stage="[도입]", content="호기심의 정의를 제시하고 화제를 던짐", evidence="문장 1"),
                 schemas.FlowStage(stage="[전개]", content="호기심이 학습·기억에 미치는 효과를 근거로 듦", evidence="문장 2"),

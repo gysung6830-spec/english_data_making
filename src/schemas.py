@@ -132,8 +132,9 @@ class FlowStage(BaseModel):
 
 class StructureSection(BaseModel):
     flow_type: Literal["logic", "emotional"]
-    genre_reason: str = ""     # 왜 이 유형으로 판별했는지
-    easy_explanation: str = "" # 초등학생도 이해할 수 있는 쉬운(비유적) 설명
+    genre_reason: str = ""              # 왜 이 유형으로 판별했는지
+    easy_explanation: str = ""          # 핵심을 확 와닿게 한 문장으로 요약(친근한 구어체)
+    examples: list[str] = Field(default_factory=list)  # 실생활에 빗댄 공감형 예시(Killer Examples)
     stages: list[FlowStage]
 
     @field_validator("stages")
