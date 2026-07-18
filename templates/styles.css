@@ -62,8 +62,16 @@ body {
 .sec-sub { font-size: 8.5px; color: var(--muted); font-weight: 600; }
 .made-by { font-size: 9px; font-weight: 600; color: var(--muted); }
 
-/* 직독직해를 2페이지에 단독 배치 */
+/* 직독직해를 새 페이지에 단독 배치 */
 .page-break { break-before: page; }
+
+/* 여러 지문: 지문2부터는 새 페이지에서 시작 */
+.passage.pg { break-before: page; }
+.passage-tag {
+  display: inline-block; background: #111827; color: #fff;
+  font-size: 9px; font-weight: 800; padding: 2px 9px; border-radius: 4px;
+  margin: 0 0 4px 6px; vertical-align: top;
+}
 
 .s-sum   .sec-num { background: var(--sum); }
 .s-lit   .sec-num { background: var(--lit); }

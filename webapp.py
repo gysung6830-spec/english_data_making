@@ -241,13 +241,14 @@ def analyze_route():
         f.save(str(tmp))
         try:
             if mock:
-                report = pipeline._mock_report_for_pdf(cfg, tmp)
+                reports = pipeline._mock_reports_for_pdf(cfg, tmp)
             else:
-                report = pipeline.build_report_for_pdf(client, cfg, tmp)
+                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_analysis.pdf"
-            render.render_pdf(report, out, footer_note=cfg.design.footer_note)
-            results.append({"name": f.filename, "ok": True, "out": out.name})
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
+            note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
+            results.append({"name": f.filename + note, "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})

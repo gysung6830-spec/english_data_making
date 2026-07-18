@@ -79,7 +79,7 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 extract_reqs.append({
                     "custom_id": f"{fid}__extract",
                     "params": build_request(model, prompts.EXTRACT_SYSTEM,
-                                            prompts.extract_image_prompt(), schemas.Extraction,
+                                            prompts.extract_image_prompt(), schemas.PassageSet,
                                             image_path=str(pdf)),
                 })
             else:
@@ -89,23 +89,28 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 extract_reqs.append({
                     "custom_id": f"{fid}__extract",
                     "params": build_request(model, prompts.EXTRACT_SYSTEM,
-                                            prompts.extract_prompt(raw), schemas.Extraction),
+                                            prompts.extract_prompt(raw), schemas.PassageSet),
                 })
         except Exception as e:
             failed[fid] = f"extract-pre: {e}"
 
     res1 = _submit_and_collect(client, extract_reqs, logger)
-    extractions: dict[str, schemas.Extraction] = {}
+    # units: (fid, pidx) -> Extraction  (한 파일에 여러 지문 가능)
+    units: dict[tuple[str, int], schemas.Extraction] = {}
+    file_units: dict[str, list[int]] = {}
     for fid in list(files):
         if fid in failed:
             continue
         text = res1.get(f"{fid}__extract")
         try:
-            extractions[fid] = parse_response_text(text or "", schemas.Extraction)
+            pset = parse_response_text(text or "", schemas.PassageSet)
+            for pidx, ex in enumerate(pset.passages):
+                units[(fid, pidx)] = ex
+                file_units.setdefault(fid, []).append(pidx)
         except Exception as e:
             failed[fid] = f"extract: {e}"
 
-    # ---- 2단계: 5개 섹션 ----
+    # ---- 2단계: 지문별 5개 섹션 ----
     lo, hi = cfg.vocab.min, cfg.vocab.max
     sec_reqs = []
     section_specs = {
@@ -115,58 +120,62 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         "vocab": (schemas.VocabSection, lambda t, b: prompts.vocab_prompt(t, b, lo, hi)),
         "structure": (schemas.StructureSection, lambda t, b: prompts.structure_prompt(t, b)),
     }
-    for fid, ex in extractions.items():
+    for (fid, pidx), ex in units.items():
         for name, (cls, mk) in section_specs.items():
             mt = 12000 if name == "literal" else 8000
             sec_reqs.append({
-                "custom_id": f"{fid}__{name}",
+                "custom_id": f"{fid}__{pidx}__{name}",
                 "params": build_request(model, prompts.SYSTEM, mk(ex.title, ex.body), cls, mt),
             })
     res2 = _submit_and_collect(client, sec_reqs, logger)
 
-    parsed: dict[str, dict[str, object]] = {fid: {} for fid in extractions}
-    for fid, ex in extractions.items():
+    parsed: dict[tuple[str, int], dict[str, object]] = {k: {} for k in units}
+    for (fid, pidx), ex in units.items():
         for name, (cls, _mk) in section_specs.items():
-            text = res2.get(f"{fid}__{name}")
+            text = res2.get(f"{fid}__{pidx}__{name}")
             try:
-                parsed[fid][name] = parse_response_text(text or "", cls)
+                parsed[(fid, pidx)][name] = parse_response_text(text or "", cls)
             except Exception as e:
-                failed.setdefault(fid, f"{name}: {e}")
+                failed.setdefault(fid, f"p{pidx}/{name}: {e}")
 
-    # ---- 3단계: 출제 포인트 (문법·어휘 참고) ----
+    # ---- 3단계: 지문별 출제 포인트 ----
     exam_reqs = []
-    for fid, ex in extractions.items():
+    for (fid, pidx), ex in units.items():
         if fid in failed:
             continue
-        g = parsed[fid].get("grammar")
-        v = parsed[fid].get("vocab")
+        g = parsed[(fid, pidx)].get("grammar")
+        v = parsed[(fid, pidx)].get("vocab")
         exam_reqs.append({
-            "custom_id": f"{fid}__exam",
+            "custom_id": f"{fid}__{pidx}__exam",
             "params": build_request(model, prompts.SYSTEM,
                                     prompts.exam_prompt(ex.title, ex.body, g, v),
                                     schemas.ExamSection),
         })
     res3 = _submit_and_collect(client, exam_reqs, logger)
 
-    # ---- 조립 + 렌더 ----
+    # ---- 조립 + 렌더 (파일별로 지문 순서대로 하나의 PDF) ----
     success = 0
     outputs: list[Path] = []
-    for fid, ex in extractions.items():
+    for fid in file_units:
         if fid in failed:
             continue
         try:
-            exam = parse_response_text(res3.get(f"{fid}__exam") or "", schemas.ExamSection)
-            report = schemas.Report(
-                title=ex.title, source=ex.source,
-                summary=parsed[fid]["summary"], literal=parsed[fid]["literal"],
-                grammar=parsed[fid]["grammar"], vocab=parsed[fid]["vocab"],
-                structure=parsed[fid]["structure"], exam=exam,
-            )
+            reports = []
+            for pidx in sorted(file_units[fid]):
+                ex = units[(fid, pidx)]
+                p = parsed[(fid, pidx)]
+                exam = parse_response_text(res3.get(f"{fid}__{pidx}__exam") or "", schemas.ExamSection)
+                reports.append(schemas.Report(
+                    title=ex.title, source=ex.source,
+                    summary=p["summary"], literal=p["literal"],
+                    grammar=p["grammar"], vocab=p["vocab"],
+                    structure=p["structure"], exam=exam,
+                ))
             pdf = files[fid]
             out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(report, out, footer_note=cfg.design.footer_note)
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
             outputs.append(out)
-            manifest.record_success(str(pdf), str(out))
+            manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
             success += 1
         except Exception as e:
             failed.setdefault(fid, f"assemble: {e}")

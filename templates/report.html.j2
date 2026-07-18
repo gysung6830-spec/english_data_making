@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="utf-8"><title>{{ report.title }} - Full Analysis</title></head>
+<head><meta charset="utf-8"><title>영어 지문 분석 - Full Analysis</title></head>
 <body>
 
+{% macro render_report(report, pno, total) %}
   <div class="doc-header">
     <span class="doc-badge">[Main Reading] Full Analysis</span>
+    {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
     <div class="doc-title">{{ report.title }}</div>
     {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
   </div>
@@ -115,7 +117,7 @@
     </table>
   </div>
 
-  {# ⑤ 직독직해 (핵심 문법 TOP 10 통합) — 두 번째 페이지에 단독 배치 #}
+  {# ⑥ 직독직해 (핵심 문법 통합) — 새 페이지에 단독 배치 #}
   <div class="section s-lit page-break">
     <div class="section-head">
       <span class="sec-num">6</span>
@@ -166,7 +168,6 @@
       <tr class="lit-note-row"><td colspan="2"><span class="nlbl">쉽게</span>{{ s.note }}</td></tr>
       {% endif %}
       {% endfor %}
-      {# 문장 번호가 매칭되지 않은 문법이 있으면 하단에 모아서 표시(누락 방지) #}
       {% set nmax = report.literal.sentences | length %}
       {% set leftover = report.grammar.items | rejectattr('sentence_no', 'in', range(1, nmax + 1)) | list %}
       {% if leftover %}
@@ -185,6 +186,13 @@
   {% if footer_note %}
   <div class="footer-note">{{ footer_note }}</div>
   {% endif %}
+{% endmacro %}
+
+  {% for report in reports %}
+  <div class="passage{{ ' pg' if not loop.first }}">
+    {{ render_report(report, loop.index, reports|length) }}
+  </div>
+  {% endfor %}
 
 </body>
 </html>

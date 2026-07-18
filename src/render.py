@@ -52,17 +52,24 @@ def _highlight_words(text: str | None, words) -> Markup:
 _env.filters["highlight_words"] = _highlight_words
 
 
-def render_html(report: schemas.Report, footer_note: str = "") -> str:
+def _as_list(reports) -> list:
+    if isinstance(reports, schemas.Report):
+        return [reports]
+    return list(reports)
+
+
+def render_html(reports, footer_note: str = "") -> str:
+    """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력."""
     tmpl = _env.get_template("report.html.j2")
-    return tmpl.render(report=report, footer_note=footer_note)
+    return tmpl.render(reports=_as_list(reports), footer_note=footer_note)
 
 
-def render_pdf(report: schemas.Report, out_path: str | Path, footer_note: str = "") -> Path:
+def render_pdf(reports, out_path: str | Path, footer_note: str = "") -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_html(report, footer_note)
+    html = render_html(reports, footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

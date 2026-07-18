@@ -26,11 +26,10 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
-def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report:
-    """실제 API 를 사용해 한 파일(PDF/사진) -> Report."""
+def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
     if extract.is_image(src):
-        # 사진/캡처 → 비전으로 지문 추출
-        extraction = analyze.extract_report_image(client, cfg, str(src))
+        pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
         raw = extract.extract_passage_text(src)
         if extract.looks_empty(raw):
@@ -38,14 +37,19 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
                 "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
                 "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
-        extraction = analyze.extract_report(client, cfg, raw)
-    return analyze.analyze_passage(client, cfg, extraction)
+        pset = analyze.extract_passages(client, cfg, raw)
+    return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
 
 
-def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
+# 하위 호환용 별칭(단일 Report 반환)
+def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report:
+    return build_reports_for_pdf(client, cfg, src)[0]
+
+
+def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
+    """목 모드: 실제 API 없이 샘플 Report(들)를 반환."""
     from samples.sample_mock import mock_report
 
-    # 추출 단계를 실제로 돌려 제목 후보를 잡아본다(전처리 검증 목적).
     title = _safe_stem(pdf)
     if not extract.is_image(pdf):
         try:
@@ -55,7 +59,11 @@ def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
                 title = first
         except Exception:
             pass
-    return mock_report(title=title, source=f"{pdf.name}")
+    return [mock_report(title=title, source=f"{pdf.name}")]
+
+
+def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
+    return _mock_reports_for_pdf(cfg, pdf)[0]
 
 
 def run_folder(cfg: Config, mock: bool = False) -> dict:
@@ -84,13 +92,15 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            report = _mock_report_for_pdf(cfg, pdf) if mock else build_report_for_pdf(client, cfg, pdf)
+            reports = (_mock_reports_for_pdf(cfg, pdf) if mock
+                       else build_reports_for_pdf(client, cfg, pdf))
             out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(report, out, footer_note=cfg.design.footer_note)
+            render.render_pdf(reports, out, footer_note=cfg.design.footer_note)
             outputs.append(out)
-            manifest.record_success(str(pdf), str(out))
+            manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
             success += 1
-            logger.info("[%d/%d] 완료: %s -> %s", i, total, pdf.name, out.name)
+            logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
+                        i, total, pdf.name, len(reports), out.name)
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))
