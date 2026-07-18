@@ -74,10 +74,15 @@ python run.py --mock          # 샘플 데이터로 output/에 미리보기 PDF 
 
 브라우저에서 파일을 올리고 버튼만 누르면 되는 방식입니다.
 
+**맥/리눅스:**
 ```bash
 bash setup.sh          # 최초 1회 설치 (flask · Chromium · 폰트 포함)
 bash run_webapp.sh     # 웹 서버 실행 (또는: python webapp.py)
 ```
+
+**윈도우:** 터미널 명령이 어렵다면 폴더 안의 파일을 **더블클릭**하면 됩니다.
+1. `setup.bat` 더블클릭 → 최초 1회 설치
+2. `run_webapp.bat` 더블클릭 → 웹앱 실행
 
 그다음 브라우저 주소창에 **http://localhost:5000** 입력 → 접속.
 
