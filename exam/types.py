@@ -48,6 +48,25 @@ TYPE_LABELS: dict[str, str] = {
 
 
 @dataclass
+class Source:
+    """지문 1개의 '정본(canonical) 텍스트'.
+
+    6종 변형문제는 모두 이 동일한 문장들에서 파생된다(명세서 §3, §5).
+    유형에 따라 원본을 변형하는 정도만 다르다:
+      - 주제: 원본 그대로  - 순서: 문장을 덩어리로 쪼개 순서만 섞음
+      - 삽입: 문장 하나만 빼냄  - 어휘/어법: 지정된 단어만 교체
+      - 서술형: 원본 + 파생 과제
+    """
+
+    title: str
+    sentences: list[str]
+
+    @property
+    def text(self) -> str:
+        return " ".join(s.strip() for s in self.sentences)
+
+
+@dataclass
 class Passage:
     """지문 1개에 대한 6종 문제/해설 묶음.
 

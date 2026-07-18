@@ -1,19 +1,18 @@
-"""② 문장 삽입 생성기."""
+"""② 문장 삽입 생성기 — 정본에서 문장 하나만 빼낸다."""
 from __future__ import annotations
 
-from .. import format as F
+from .. import build as B
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, InsertOut
 from .base import context
 
-_PROMPT = """아래 분석을 바탕으로 '문장 삽입' 문제를 만드세요.
+_PROMPT = """아래 '정본 지문'으로 '문장 삽입' 문제를 만드세요.
+지문을 새로 쓰지 말고, 빼낼 문장 하나만 고르세요.
 
-- 넣을 위치가 확정되는 문장만 '주어진 문장(given_sentence)'으로 고릅니다.
-  (however/therefore/this/such 등 연결사·지시어로 시작하거나 앞뒤와 같은 소재로 묶이는 문장)
-- 나머지 본문을 chunks(정확히 6조각)로 나눕니다. 조각 사이 5곳이 위치 ①~⑤ 가 됩니다.
-- answer_no: 주어진 문장이 원래 들어가야 할 위치 번호(1~5).
+- remove_no: '주어진 문장'으로 빼낼 문장 번호(1-based). 넣을 위치가 확정되는 문장,
+  즉 however/therefore/this/such 등 연결사·지시어로 시작하거나 앞뒤와 같은 소재로
+  묶이는 '내부' 문장을 고르세요(첫 문장·마지막 문장 제외).
 - reason: 지시어·연결 관계를 근거로 왜 그 위치인지 한국어로 설명.
-- 주어진 문장은 chunks 안에 포함하지 마세요(빼낸 문장입니다).
 
 {ctx}
 """
@@ -25,11 +24,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
         model_cls=InsertOut,
-        max_tokens=3000,
+        max_tokens=1500,
         max_retries=max_retries,
     )
-    markers = [F.pos(i) for i in range(1, 6)]
-    marked = F.weave(out.chunks, markers)
-    q = F.insert_q(out.given_sentence, marked)
-    a = F.insert_a(out.answer_no, out.reason)
-    return q, a
+    return B.make_insert(analysis.sentences, out.remove_no - 1, out.reason)
