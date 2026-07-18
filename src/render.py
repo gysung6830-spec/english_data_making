@@ -3,7 +3,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import re
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup, escape
 
 from . import schemas
 
@@ -26,6 +29,27 @@ def _is_key_grammar(text: str | None) -> bool:
 
 
 _env.filters["is_key_grammar"] = _is_key_grammar
+
+
+def _highlight_words(text: str | None, words) -> Markup:
+    """영어 요약문 안에서 핵심 단어(words)를 굵게 표시."""
+    if not text:
+        return Markup("")
+    ws = sorted({w.strip() for w in (words or []) if w and w.strip()}, key=len, reverse=True)
+    if not ws:
+        return escape(text)
+    pattern = re.compile(r"\b(" + "|".join(re.escape(w) for w in ws) + r")\b", re.IGNORECASE)
+    out: list[str] = []
+    last = 0
+    for m in pattern.finditer(text):
+        out.append(str(escape(text[last:m.start()])))
+        out.append('<b class="kw">' + str(escape(m.group(0))) + "</b>")
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+_env.filters["highlight_words"] = _highlight_words
 
 
 def render_html(report: schemas.Report, footer_note: str = "") -> str:

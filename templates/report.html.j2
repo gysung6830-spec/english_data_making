@@ -76,10 +76,24 @@
     </ul>
   </div>
 
-  {# ④ 핵심 어휘 · 유의어 · 반의어 #}
-  <div class="section s-voc">
+  {# ④ 핵심 단어 영어 요약문 #}
+  {% if report.vocab.english_summary %}
+  <div class="section s-esum">
     <div class="section-head">
       <span class="sec-num">4</span>
+      <span class="sec-title">핵심 단어 영어 요약문</span>
+      <span class="sec-sub">굵은 단어 = 아래 핵심 어휘</span>
+    </div>
+    <div class="esum-box">
+      {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
+    </div>
+  </div>
+  {% endif %}
+
+  {# ⑤ 핵심 어휘 · 유의어 · 반의어 #}
+  <div class="section s-voc">
+    <div class="section-head">
+      <span class="sec-num">5</span>
       <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
       <span class="sec-sub">Vocabulary</span>
     </div>
@@ -105,7 +119,7 @@
   {# ⑤ 직독직해 (핵심 문법 TOP 10 통합) — 두 번째 페이지에 단독 배치 #}
   <div class="section s-lit page-break">
     <div class="section-head">
-      <span class="sec-num">5</span>
+      <span class="sec-num">6</span>
       <span class="sec-title">직독직해 <span class="made-by">made by 은아 T</span></span>
       <span class="sec-sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>

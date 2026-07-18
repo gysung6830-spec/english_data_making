@@ -114,6 +114,7 @@ class VocabItem(BaseModel):
 
 class VocabSection(BaseModel):
     items: list[VocabItem]
+    english_summary: str = ""   # 핵심 단어들을 충분히 담은 2문장 이내 영어 요약문
 
     def validate_count(self, lo: int, hi: int) -> None:
         n = len(self.items)
