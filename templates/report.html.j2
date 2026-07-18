@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>{{ report.title }} - Full Analysis</title></head>
+<body>
+
+  <div class="doc-header">
+    <span class="doc-badge">[Main Reading] Full Analysis</span>
+    <div class="doc-title">{{ report.title }}</div>
+    {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
+  </div>
+
+  {# ① 내용 전체 요약 정리 #}
+  <div class="section s-sum">
+    <div class="section-head">
+      <span class="sec-num">1</span>
+      <span class="sec-title">내용 전체 요약 정리</span>
+      <span class="sec-sub">Summary</span>
+    </div>
+    <div class="summary-overall">
+      <span class="lbl">전체 요약</span><br>
+      {{ report.summary.overall }}
+    </div>
+    <ul class="para-list">
+      {% for p in report.summary.paragraphs %}
+      <li><span class="pnum">문단 {{ p.index }}</span>{{ p.summary }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {# ② 직독직해 #}
+  <div class="section s-lit">
+    <div class="section-head">
+      <span class="sec-num">2</span>
+      <span class="sec-title">직독직해</span>
+      <span class="sec-sub">Chunk-by-chunk</span>
+    </div>
+    {% for s in report.literal.sentences %}
+    <div class="lit-sentence">
+      <span class="snum">문장 {{ s.no }}</span>
+      <table class="lit">
+        <tr>
+          <td class="en"><span class="col-h">원문 + 구문분석</span></td>
+          <td class="ko"><span class="col-h">직독직해 + 핵심단어</span></td>
+        </tr>
+        {% for c in s.chunks %}
+        <tr>
+          <td class="en">
+            <div class="chunk">
+              <span class="eng">{{ c.english }}</span><span class="slash"> /</span>
+              {% if c.syntax %}<span class="syntax">▸ {{ c.syntax }}</span>{% endif %}
+            </div>
+          </td>
+          <td class="ko">
+            <div class="chunk">
+              <span class="kor">{{ c.korean }}</span>
+              {% if c.words %}
+              <span class="words">
+                {%- for w in c.words -%}
+                {{ w.word }}: {{ w.meaning }}{% if not loop.last %} · {% endif %}
+                {%- endfor -%}
+              </span>{% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+
+  {# ③ 핵심 문법 TOP 10 #}
+  <div class="section s-gram">
+    <div class="section-head">
+      <span class="sec-num">3</span>
+      <span class="sec-title">핵심 문법 TOP 10</span>
+      <span class="sec-sub">Grammar</span>
+    </div>
+    <table class="grid t-gram">
+      <thead><tr><th>No</th><th>문법 포인트</th><th>지문 예문</th><th>핵심 설명</th></tr></thead>
+      <tbody>
+      {% for g in report.grammar.items %}
+        <tr>
+          <td class="cell-no">{{ g.no }}</td>
+          <td class="cell-point">{{ g.point }}</td>
+          <td class="ex-quote">{{ g.example }}</td>
+          <td>{{ g.explanation }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ④ 핵심 어휘 · 유의어 · 반의어 #}
+  <div class="section s-voc">
+    <div class="section-head">
+      <span class="sec-num">4</span>
+      <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
+      <span class="sec-sub">Vocabulary</span>
+    </div>
+    <table class="grid t-voc">
+      <thead><tr>
+        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th>지문 예문</th>
+      </tr></thead>
+      <tbody>
+      {% for v in report.vocab.items %}
+        <tr>
+          <td class="cell-no">{{ v.no }}</td>
+          <td class="cell-word">{{ v.word }}</td>
+          <td>{{ v.meaning }}</td>
+          <td>{{ v.synonyms }}</td>
+          <td>{{ v.antonyms }}</td>
+          <td class="ex-quote">{{ v.example }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# ⑤ 지문 구조 분석 #}
+  <div class="section s-struc">
+    <div class="section-head">
+      <span class="sec-num">5</span>
+      <span class="sec-title">지문 구조 분석</span>
+      <span class="sec-sub">{{ "Logic Flow" if report.structure.flow_type == "logic" else "Emotional Flow" }}</span>
+    </div>
+    <span class="struc-type">
+      {{ "논리 전개형 (Logic Flow)" if report.structure.flow_type == "logic" else "감정 전개형 (Emotional Flow)" }}
+    </span>
+    {% if report.structure.genre_reason %}
+    <div class="struc-reason">판별 근거 · {{ report.structure.genre_reason }}</div>
+    {% endif %}
+    <ul class="flow">
+      {% for st in report.structure.stages %}
+      <li>
+        <div class="stage">{{ st.stage }}</div>
+        <div class="content">{{ st.content }}</div>
+        {% if st.evidence %}<div class="evidence">“{{ st.evidence }}”</div>{% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {# ⑥ 내신 빈출 출제 포인트 체크리스트 #}
+  <div class="section s-exam">
+    <div class="section-head">
+      <span class="sec-num">6</span>
+      <span class="sec-title">내신 빈출 출제 포인트 체크리스트</span>
+      <span class="sec-sub">Exam Points</span>
+    </div>
+    <table class="grid t-exam">
+      <thead><tr><th>출제 유형</th><th>출제 내용</th><th>신샘팁 (변형 대비)</th></tr></thead>
+      <tbody>
+      {% for e in report.exam.items %}
+        <tr>
+          <td class="cell-point">{{ e.question_type }}</td>
+          <td>{{ e.content }}</td>
+          <td>{{ e.tip }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if footer_note %}
+  <div class="footer-note">{{ footer_note }}</div>
+  {% endif %}
+
+</body>
+</html>

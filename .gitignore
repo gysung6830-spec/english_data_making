@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+input/*.pdf
+output/*.pdf
+output/*.html
+logs/*.jsonl
+logs/*.log
+.DS_Store
+scratchpad/

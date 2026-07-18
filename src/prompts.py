@@ -1,0 +1,117 @@
+"""각 섹션별 프롬프트 빌더.
+
+원칙:
+- 6개 섹션을 하나로 합치지 않고 각각 독립적으로 요청한다(품질 안정성).
+- 응답은 구조화된 JSON(스키마)으로 강제한다(코드에서 검증 가능).
+"""
+from __future__ import annotations
+
+from . import schemas
+
+SYSTEM = (
+    "당신은 한국 고등학교 영어 내신·수능 대비 교재를 만드는 전문 영어 강사입니다. "
+    "주어진 영어 지문을 정확하게 분석하고, 학생이 이해하기 쉬운 한국어 설명을 답니다. "
+    "요청된 스키마에 정확히 맞는 JSON 으로만 응답하세요."
+)
+
+# 0단계: 본문 추출(전처리) 프롬프트 -----------------------------------------
+EXTRACT_SYSTEM = (
+    "당신은 시험지/교재 PDF 에서 추출된 텍스트에서 '영어 지문 본문'만 골라내는 전처리기입니다. "
+    "문제, 보기(①②③④⑤), 정답, 해설, 어휘 목록, 페이지 번호 등 지문이 아닌 부분은 모두 제거하세요. "
+    "요청된 JSON 스키마로만 응답하세요."
+)
+
+
+def extract_prompt(raw_text: str) -> str:
+    return (
+        "다음은 PDF 에서 추출된 원문 텍스트입니다. 이 안에서 '영어 지문 본문'만 식별하여 "
+        "제목(title), 출처(source, 없으면 빈 문자열), 그리고 문단 목록(paragraphs)으로 정리하세요.\n"
+        "- 문제/보기/정답/해설/어휘표는 절대 포함하지 마세요.\n"
+        "- 본문 문단은 원문 그대로(영어), 문단 단위로 나누어 배열에 담으세요.\n"
+        "- 제목이 명확하지 않으면 본문 내용을 대표하는 짧은 영어 제목을 지어 넣으세요.\n\n"
+        f"[원문 텍스트]\n{raw_text}"
+    )
+
+
+def _passage_block(title: str, body: str) -> str:
+    return f"[지문 제목] {title}\n\n[지문 본문]\n{body}"
+
+
+# ① 요약 -------------------------------------------------------------------
+def summary_prompt(title: str, body: str) -> str:
+    return (
+        "아래 지문의 '내용 전체 요약 정리'를 작성하세요.\n"
+        "- overall: 지문 전체를 아우르는 요약 2~4문장 (한국어).\n"
+        "- paragraphs: 문단 수만큼, 각 문단의 핵심을 1~2문장(한국어)으로 요약. index 는 1부터.\n\n"
+        + _passage_block(title, body)
+    )
+
+
+# ② 직독직해 ---------------------------------------------------------------
+def literal_prompt(title: str, body: str) -> str:
+    return (
+        "아래 지문을 '직독직해' 자료로 만드세요.\n"
+        "- 각 문장을 의미 단위(chunk)로 끊습니다.\n"
+        "- 각 chunk 마다: english(원문 조각), syntax(핵심 구문/문법 분석, 예: '5형식 ask+목적어+to부정사', "
+        "없으면 빈 문자열), korean(직독직해 한국어), words(그 chunk 의 핵심 단어와 뜻 목록).\n"
+        "- sentences 배열에 문장 순서대로 담고, no 는 1부터 매깁니다.\n\n"
+        + _passage_block(title, body)
+    )
+
+
+# ③ 핵심 문법 TOP 10 -------------------------------------------------------
+def grammar_prompt(title: str, body: str) -> str:
+    return (
+        "아래 지문에서 '핵심 문법 TOP 10'을 정확히 10개 뽑으세요.\n"
+        "- 각 항목: no(1~10), point(문법 포인트명), example(지문에 실제로 등장한 예문), "
+        "explanation(핵심 설명, 한국어).\n"
+        "- 반드시 지문에서 실제로 쓰인 문법을 근거로 예문을 그대로 인용하세요.\n\n"
+        + _passage_block(title, body)
+    )
+
+
+# ④ 어휘 -------------------------------------------------------------------
+def vocab_prompt(title: str, body: str, lo: int, hi: int) -> str:
+    return (
+        f"아래 지문에서 핵심 어휘를 {lo}개 이상 {hi}개 이하로 뽑아 정리하세요.\n"
+        "- 각 항목: no(1부터), word(단어/표현), meaning(한글 의미), "
+        "synonyms(유의어, 없으면 빈 문자열), antonyms(반의어, 없으면 빈 문자열), "
+        "example(지문 속 예문).\n"
+        "- 지문 길이에 비례해 개수를 정하되 반드시 위 범위를 지키세요.\n\n"
+        + _passage_block(title, body)
+    )
+
+
+# ⑤ 구조 분석 --------------------------------------------------------------
+def structure_prompt(title: str, body: str) -> str:
+    return (
+        "아래 지문의 '구조 분석'을 하세요.\n"
+        "먼저 지문 유형을 판별합니다.\n"
+        "- 비문학·논설문 등 논리 전개형이면 flow_type='logic' 으로 하고, "
+        "stages 에 [도입]-[전개]-[상술]-[반론]-[결론] 같은 논리 구조를 단락별로 정리하세요.\n"
+        "- 문학·일상문 등 감정 전개형이면 flow_type='emotional' 로 하고, "
+        "감정 변화 단계(예: 5단계)로 정리하되 각 단계에 감정명(stage), 정리(content), "
+        "근거 문장 인용(evidence)을 넣으세요.\n"
+        "- genre_reason 에 왜 그 유형으로 판별했는지 한 줄로 쓰세요.\n\n"
+        + _passage_block(title, body)
+    )
+
+
+# ⑥ 출제 포인트 ------------------------------------------------------------
+def exam_prompt(title: str, body: str, grammar: schemas.GrammarSection | None,
+                vocab: schemas.VocabSection | None) -> str:
+    ref = ""
+    if grammar:
+        pts = ", ".join(g.point for g in grammar.items[:6])
+        ref += f"\n[참고: 앞서 뽑은 핵심 문법] {pts}"
+    if vocab:
+        ws = ", ".join(v.word for v in vocab.items[:8])
+        ref += f"\n[참고: 앞서 뽑은 핵심 어휘] {ws}"
+    return (
+        "아래 지문의 '내신 빈출 출제 포인트 체크리스트'를 표 형태 데이터로 만드세요.\n"
+        "- 각 항목: question_type(출제 유형 - 빈칸추론/제목추론/주제파악/순서배열/내용일치/서술형 등), "
+        "content(출제 내용), tip(신샘팁: 변형 대비 포인트).\n"
+        "- 위 [참고]로 준 문법·어휘를 재사용하여 일관성 있게 작성하세요.\n"
+        + ref + "\n\n"
+        + _passage_block(title, body)
+    )
