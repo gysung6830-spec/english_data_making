@@ -49,6 +49,9 @@ def main() -> int:
     parser.add_argument("--vocab-method", choices=["synonym", "negation"],
                         default="synonym",
                         help="어휘 문제 방식: synonym(반의어 정답) 또는 negation(부정어 삽입)")
+    parser.add_argument("--content-difficulty", choices=["plain", "hard"],
+                        default="hard",
+                        help="내용 일치 난이도: hard(헷갈리는 함정 오답) 또는 plain(명확한 오답)")
     parser.add_argument("--demo", action="store_true",
                         help="API 없이 데모 2지문으로 미리보기")
     args = parser.parse_args()
@@ -94,6 +97,7 @@ def main() -> int:
         max_retries=cfg.processing.max_retries,
         logger=logger,
         vocab_method=args.vocab_method,
+        content_difficulty=args.content_difficulty,
     )
     logger.info("시험지 생성 완료: %s", result)
     return 0
