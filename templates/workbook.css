@@ -9,9 +9,12 @@
 }
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
+/* 영어=세리프체, 한글=나눔고딕체.
+   글리프 단위 폴백을 이용해 라틴 문자는 세리프 폰트가, 한글은 나눔고딕이 담당한다.
+   (세리프 폰트에는 한글 글리프가 없어 자동으로 나눔고딕으로 넘어간다.) */
 body{
-  font-family:"Noto Sans CJK KR","Noto Sans KR","Nanum Gothic","Malgun Gothic",
-              "Apple SD Gothic Neo",sans-serif;
+  font-family:"Georgia","Times New Roman","Noto Serif","Liberation Serif","DejaVu Serif",
+              "Nanum Gothic","NanumGothic","Malgun Gothic","Apple SD Gothic Neo",serif;
   color:var(--ink); font-size:10pt; line-height:1.5; font-weight:400;
 }
 
@@ -104,6 +107,3 @@ body{
 }
 .atag.v{ background:var(--v); } .atag.a{ background:var(--a); } .atag.r{ background:var(--r); }
 .atag.c{ background:var(--c); } .atag.o{ background:var(--o); }
-
-/* ── 하단 문구 ── */
-.wb-foot{ margin-top:12px; text-align:right; font-size:7pt; color:#9aa3af; }

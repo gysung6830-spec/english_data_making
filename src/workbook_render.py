@@ -81,8 +81,21 @@ def _chromium_executable() -> str | None:
     return None
 
 
+# 하단 저작권 기본 문구 (footer_note 가 비어 있어도 항상 표기)
+DEFAULT_FOOTER = "© 2026. 은아 T. All rights reserved."
+
+
+def _footer_template(text: str) -> str:
+    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 세리프체로 표기."""
+    return (
+        '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:center; '
+        'font-family:Georgia,\'Times New Roman\',serif; padding:0 14mm;">'
+        f'{escape(text)}</div>'
+    )
+
+
 def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "") -> Path:
-    """Workbook -> A4 세로 PDF (Playwright/Chromium). 배경색 인쇄 포함."""
+    """Workbook -> A4 세로 PDF (Playwright/Chromium). 배경색 인쇄 + 모든 페이지 저작권 푸터."""
     from playwright.sync_api import sync_playwright  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
@@ -91,6 +104,8 @@ def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "
     html = render_workbook_html(wb, footer_note)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
+
+    footer = footer_note.strip() if footer_note and footer_note.strip() else DEFAULT_FOOTER
 
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
@@ -101,8 +116,11 @@ def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "
         pg.pdf(
             path=str(out_path),
             format="A4",
-            margin={"top": "14mm", "bottom": "14mm", "left": "14mm", "right": "14mm"},
-            print_background=True,   # 배경색 반드시 True (spec 4-3)
+            margin={"top": "14mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
+            print_background=True,          # 배경색 반드시 True (spec 4-3)
+            display_header_footer=True,     # 모든 페이지 하단 저작권 푸터
+            header_template="<span></span>",
+            footer_template=_footer_template(footer),
         )
         b.close()
     return out_path

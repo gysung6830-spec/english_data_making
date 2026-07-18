@@ -42,7 +42,7 @@
     {% endfor %}
   </div>
 
-  {% if footer_note %}<div class="wb-foot">{{ footer_note }}</div>{% endif %}
+  {# 하단 저작권 문구는 Playwright 인쇄 푸터로 모든 페이지에 렌더된다(render_workbook_pdf). #}
 
   {# ── 정답 · 해설 (다음 페이지) ── #}
   <div class="ans-page">
