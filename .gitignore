@@ -8,3 +8,5 @@ logs/*.jsonl
 logs/*.log
 .DS_Store
 scratchpad/
+output/*.png
+output/*.jpg
