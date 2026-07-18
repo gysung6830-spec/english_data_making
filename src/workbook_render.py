@@ -32,13 +32,10 @@ def _chunk_html(q: Question) -> str:
     display 는 이스케이프하여 안전하게 삽입한다.
     """
     cls = q.css
-    # 동사·준동사는 어형을 바꿔 '써야' 하므로 답을 적을 밑줄 여백을 붙인다.
-    write = '<span class="write"></span>' if q.type == "verb" else ""
     return (
         f'<span class="q {cls}">{escape(q.display)}</span>'
         f'<span class="lbl {cls}">{escape(q.label)}</span>'
         f'<sup class="qn">{q.num})</sup>'
-        f'{write}'
     )
 
 
