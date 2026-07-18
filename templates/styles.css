@@ -20,8 +20,8 @@
 body {
   font-family: "NanumGothic", "Nanum Gothic", sans-serif;
   color: #23272e;
-  font-size: 9.3px;
-  line-height: 1.4;
+  font-size: 8.6px;
+  line-height: 1.3;
   margin: 0;
 }
 
@@ -50,8 +50,8 @@ body {
 .doc-source { font-size: 9px; color: var(--muted); }
 
 /* ---------- 섹션 공통 ---------- */
-.section { margin: 0 0 7px; }
-.section-head { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.section { margin: 0 0 5px; }
+.section-head { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
 .sec-num {
   display: inline-flex; align-items: center; justify-content: center;
   width: 18px; height: 18px; border-radius: 50%; color: #fff;
@@ -59,6 +59,10 @@ body {
 }
 .sec-title { font-size: 12.5px; font-weight: 800; }
 .sec-sub { font-size: 8.5px; color: var(--muted); font-weight: 600; }
+.made-by { font-size: 9px; font-weight: 600; color: var(--muted); }
+
+/* 직독직해를 2페이지에 단독 배치 */
+.page-break { break-before: page; }
 
 .s-sum   .sec-num { background: var(--sum); }
 .s-lit   .sec-num { background: var(--lit); }
@@ -86,9 +90,9 @@ body {
 /* ---------- 공통 표 (zebra) ---------- */
 table.grid { width: 100%; border-collapse: collapse; }
 table.grid th {
-  color: #fff; font-size: 9px; font-weight: 700; padding: 4px 7px; text-align: left;
+  color: #fff; font-size: 8.3px; font-weight: 700; padding: 2.5px 6px; text-align: left;
 }
-table.grid td { padding: 2px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.grid td { padding: 1.5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .t-gram th { background: var(--gram); }
 .t-voc  th { background: var(--voc); }
@@ -118,7 +122,7 @@ table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .struc-reason { font-size: 9px; color: var(--muted); margin: 3px 0 5px; }
 .easy-box {
   background: #fef9ff; border: 1px dashed var(--struc); border-radius: 6px;
-  padding: 6px 10px; margin: 4px 0 6px; font-size: 9.5px; line-height: 1.5;
+  padding: 5px 9px; margin: 3px 0 5px; font-size: 9px; line-height: 1.4;
 }
 .easy-box .easy-lbl {
   display: inline-block; background: var(--struc); color: #fff;
@@ -127,12 +131,14 @@ table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .flow { list-style: none; padding: 0; margin: 0; }
 .flow li {
   border-left: 3px solid var(--struc); background: var(--struc-bg);
-  padding: 4px 9px; margin-bottom: 4px; border-radius: 0 5px 5px 0;
+  padding: 2px 9px; margin-bottom: 2px; border-radius: 0 5px 5px 0;
+  font-size: 9px;
 }
-.flow .stage { font-weight: 800; color: var(--struc); font-size: 10px; display: inline; }
-.flow .content { display: inline; margin-left: 4px; }
-.flow .evidence {
-  margin-top: 2px; font-size: 9px; color: #6d28d9; font-style: italic;
+.flow .stage { font-weight: 800; color: var(--struc); }
+.flow .content { margin-left: 5px; }
+.flow .stage-ref {
+  display: inline-block; font-size: 8px; font-weight: 700; color: var(--struc);
+  border: 1px solid var(--struc); border-radius: 8px; padding: 0 6px; margin-left: 6px;
 }
 
 /* ---------- ④ 직독직해 (2단 표) ---------- */
@@ -144,8 +150,8 @@ table.lit2 th {
 table.lit2 td {
   border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; width: 50%;
 }
-.lit-en { background: #fffdf7; }
-.lit-ko { background: #fbfbfd; }
+.lit-en { background: #fff; }
+.lit-ko { background: #fff; }
 .lit-row td { border-bottom: 1.5px solid #f0ddc0; }
 .snum {
   display: inline-block; background: var(--lit); color: #fff;
@@ -167,10 +173,10 @@ table.lit2 td {
   border: 1px solid currentColor; border-radius: 3px; padding: 0 4px; margin: 2px 3px 0 0;
 }
 .ntag.keytag { background: #fff7ed; border-color: #ea580c; color: #c2410c; }
-.lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #374151; line-height: 1.5; }
-.lit-words b { color: var(--voc); }
+.lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #23272e; line-height: 1.5; }
+.lit-words b { color: #23272e; }
 .lit-note-row td {
-  background: #fffbeb !important; font-size: 9px; color: #92400e;
+  background: #fff; font-size: 9px; color: #7c3a06;
   border-bottom: 1.5px solid #f0ddc0;
 }
 .lit-note-row .nlbl {

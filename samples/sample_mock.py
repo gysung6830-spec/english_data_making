@@ -86,12 +86,10 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                               "기억이 오래가고 학습 동기도 높아진다. 따라서 정답을 외우게 하는 교육보다, 스스로 질문을 "
                               "던지게 하는 교육이 더 효과적이라는 논리다."),
             stages=[
-                schemas.FlowStage(stage="[도입]", content="호기심의 정의를 제시하고 화제를 던진다.",
-                                  evidence="Curiosity drives us to explore the unknown."),
-                schemas.FlowStage(stage="[전개]", content="호기심이 학습과 기억에 미치는 효과를 근거로 든다."),
-                schemas.FlowStage(stage="[상술]", content="연구 결과를 들어 주장을 뒷받침한다.",
-                                  evidence="Studies show that curious students remember longer."),
-                schemas.FlowStage(stage="[결론]", content="질문을 장려하는 교육의 필요성을 강조한다."),
+                schemas.FlowStage(stage="[도입]", content="호기심의 정의를 제시하고 화제를 던짐", evidence="문장 1"),
+                schemas.FlowStage(stage="[전개]", content="호기심이 학습·기억에 미치는 효과를 근거로 듦", evidence="문장 2"),
+                schemas.FlowStage(stage="[상술]", content="연구 결과로 주장을 뒷받침함", evidence="문장 2"),
+                schemas.FlowStage(stage="[결론]", content="질문 장려 교육의 필요성을 강조함", evidence="문장 3"),
             ],
         ),
         exam=schemas.ExamSection(items=[
