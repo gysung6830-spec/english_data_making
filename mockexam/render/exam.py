@@ -217,8 +217,9 @@ def _footer_block(exam: MockExam, footer: str) -> str:
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
 def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    body = [_header_block(exam, info), '<div class="columns">',
-            _guidelines_block(exam, info)]
+    # 유의사항은 머리글 박스 바로 아래, 2단 시작 전 '1열(전체 폭)'로 배치
+    body = [_header_block(exam, info), _guidelines_block(exam, info),
+            '<div class="columns">']
     for q in exam.choice_questions:
         body.append(_q_html(q))
     body.append('<div class="section-div">&lt; 서 술 형 &gt;</div>')
