@@ -87,6 +87,39 @@ def test_bilingual_ebs_material_is_cleaned_and_split():
     assert "EBS" not in joined and "①" not in joined
     assert "Although the wish to be alone" in ps[0].text
     assert "forest gardening" in ps[1].text
+    # 문장 경계(마침표)가 복원되어야 한다
+    assert ps[0].text.rstrip().endswith((".", "!", "?"))
+    assert ps[0].text.count(".") >= 1
+
+
+def test_bilingual_other_textbook_headers_and_watermark():
+    """다른 교재 형식(N강 헤더 + URL 워터마크)도 지문 분리·정제."""
+    from mockexam.ingest.loader import split_passages
+    raw = (
+        "마더텅 5강 http://mothertongue.co.kr "
+        "① Success often comes from small habits repeated every single day 매일 반복된다. "
+        "② Over time these tiny habits shape exactly who we eventually become 우리를 만든다. "
+        "③ The lesson is that consistency beats intensity in the long run 일관성이 이긴다. "
+        "6강 ① Reading widely builds both empathy and broad general knowledge 독서는 쌓는다. "
+        "② It also steadily improves attention and focus over many years 집중력 향상. "
+        "③ Thus a daily reading habit rewards the patient learner 보상한다.")
+    ps = split_passages(raw)
+    assert len(ps) == 2
+    joined = " ".join(p.text for p in ps)
+    assert "mothertongue" not in joined and "마더텅" not in joined
+    assert "습관" not in joined and "①" not in joined
+    assert "Success often comes" in ps[0].text
+    assert "Reading widely builds" in ps[1].text
+
+
+def test_bilingual_headerless_splits_into_passages():
+    """헤더·문장번호 없는 직독직해도 문장묶음으로 여러 지문 확보."""
+    from mockexam.ingest.loader import split_passages
+    sents = [f"This is English study sentence number {i} about a topic 한글 해석 {i}."
+             for i in range(1, 17)]
+    ps = split_passages(" ".join(sents))
+    assert len(ps) >= 2
+    assert all("한글" not in p.text for p in ps)
 
 
 # ---------------------------------------------------------------------------

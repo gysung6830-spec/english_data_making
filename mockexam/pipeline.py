@@ -24,6 +24,7 @@ class GenResult:
     assignments: list
     verify_report: VerifyReport
     logs: list[dict] = field(default_factory=list)
+    num_passages: int = 0        # 입력에서 추출된 지문 수(0이면 텍스트 인식 실패)
 
 
 def generate_mock(
@@ -75,7 +76,8 @@ def generate_mock(
                         blueprint.choice_items[q.no - 1], p, ctx)
         report = verify(exam, blueprint, requested=diff)
 
-    return GenResult(exam, blueprint, assignments, report, logs)
+    return GenResult(exam, blueprint, assignments, report, logs,
+                     num_passages=len(passages))
 
 
 # ---------------------------------------------------------------------------

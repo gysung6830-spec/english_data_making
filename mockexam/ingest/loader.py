@@ -126,56 +126,125 @@ def detect_format(text: str) -> tuple[FormatType, list[str]]:
 # ---------------------------------------------------------------------------
 _HANGUL_RUN = re.compile(r"[가-힣ㄱ-ㅎㅏ-ㅣ]+")
 _CIRCLED = re.compile(r"[①-⑳㉑-㉟㉠-㉯]")  # ①~⑳ 및 원문자
+_CIRCLED_ONE = re.compile(r"①")            # 각 지문 첫 문장 표시(직독직해 공통)
 _EN_WORD = re.compile(r"[A-Za-z]{2,}")
-# 지문 경계 헤더(EBS/올림포스 등): 'Ch. 04 Unit 10 - 2번'
-_STUDY_HEADER = re.compile(r"Ch\.?\s*\d+\s*Unit\s*\d+\s*[-–~]\s*\d+\s*번", re.I)
-# 출처·워터마크 노이즈
+_SENT_END = re.compile(r"(?<=[.!?])\s+")
+
+# 지문 경계 헤더 — 교재 무관하게 폭넓게 인식
+#  Ch./Unit/Lesson/Chapter/Day/Test/Week/Part/N강/N회/N일차/지문 N/Passage N/N번 등
+_STUDY_HEADER = re.compile(
+    r"(?:Ch(?:apter|\.)?|Unit|Lesson|Day|Test|Week|Part|Step|Mini\s*Test|"
+    r"Review|Actual\s*Test|모의고사|실전|어법|지문|Passage)\s*\.?\s*\d+"
+    r"(?:\s*[-–~]\s*\d+)?\s*번?"
+    r"|\d+\s*(?:강|회|일차)\b", re.I)
+
+# 출처·워터마크·저작권 노이즈(교재/블로그/카페 등)
 _SRC_NOISE = re.compile(
-    r"\[EBS\][^\[\n]*?한줄해석\([^)]*\)|\[Flow\s*Edu\]|flowedu\.tistory\.com|"
-    r"한줄해석\([^)]*\)|올림포스[가-힣0-9]*", re.I)
+    r"\[[^\]\n]{0,40}\]"                                # [EBS] [Flow Edu] 등 대괄호 태그
+    r"|한줄해석\([^)]*\)|좌지문우해석|우지문좌해석|직독직해"
+    r"|올림포스[가-힣0-9]*|수능특강[가-힣0-9]*|수능완성[가-힣0-9]*"
+    r"|마더텅|자이스토리|능률|천재교육|비상교육|지학사|블랙라벨|한수영어"
+    r"|(?:https?://)?[\w.-]+\.(?:com|net|kr|co\.kr|tistory\.com|blog\.[\w.-]+)"
+    r"(?:/[\w\-./?=&%]*)?"
+    r"|Copyright[^\n]*|All\s+rights\s+reserved|무단\s*복제[^\n]*", re.I)
 
 
 def _is_bilingual_study(text: str) -> bool:
-    """직독직해/EBS식 이중언어 자료인지(영어+한글 해석 혼재) 판단."""
+    """직독직해식 이중언어 자료(영어 지문 + 한글 해석 혼재)인지 판단.
+
+    핵심 신호: 같은 줄에서 영어 단어 바로 뒤에 한글이 붙는 '끼어든 해석'.
+    (단순히 '지문 N' 구분자만 있는 순수 영어 자료는 여기서 제외한다.)
+    """
     has_ko = bool(_HANGUL_RUN.search(text))
     has_en = len(_EN_WORD.findall(text)) > 30
-    markers = bool(_STUDY_HEADER.search(text) or _SRC_NOISE.search(text) or
-                   re.search(r"[①-⑳][^\n]{0,80}[가-힣]", text))
-    return has_ko and has_en and markers
+    interleave = len(re.findall(r"[A-Za-z]{3,}[ \t]{1,4}[가-힣]", text))
+    circled_ko = text.count("①") >= 2 and bool(re.search(r"①[^\n]{0,120}[가-힣]", text))
+    return has_ko and has_en and (interleave >= 4 or circled_ko)
 
 
 def _clean_english(chunk: str) -> str:
-    """이중언어 조각에서 한글 해석·출처·문장번호를 걷어내고 영어 지문만 복원."""
+    """이중언어 조각에서 한글 해석·출처·문장번호를 걷어내고 영어 지문만 복원.
+
+    직독직해는 각 문장이 ①②③…로 시작하므로 이를 '문장 경계' 표식으로 삼아,
+    한글 해석을 지운 뒤 문장 경계에 마침표를 복원한다.
+    """
+    SENT = "\x00"                              # 문장 경계 임시 표식
     t = _SRC_NOISE.sub(" ", chunk)
     t = _STUDY_HEADER.sub(" ", t)
-    t = _CIRCLED.sub(" ", t)
-    t = _HANGUL_RUN.sub(" ", t)            # 한글 해석 제거
+    t = _CIRCLED.sub(f" {SENT} ", t)           # 문장번호 → 경계 표식
+    t = _HANGUL_RUN.sub(" ", t)                # 한글 해석 제거
     t = re.sub(r"[·∼※▶◀‣・「」『』（），、]", " ", t)
     t = re.sub(r"\s+", " ", t)
-    # 한글 제거로 생긴 '고아 구두점'(공백에 둘러싸인 . , ; :) 삭제
-    t = re.sub(r"\s+[.,;:!?]+(?=\s|$)", "", t)
-    t = re.sub(r"\s+([.,;:!?)])", r"\1", t)   # 구두점 앞 공백 제거
-    t = re.sub(r"([.,;:!?])\1+", r"\1", t)    # 중복 구두점 축소(.. → .)
+    # 한글 제거로 생긴 '고아 구두점'(공백에 둘러싸인 . , ; : ! ?) 삭제
+    t = re.sub(r"\s+[.,;:!?]+(?=\s|$)", " ", t)
+    # 문장 경계 표식 → 마침표 복원
+    t = re.sub(rf"\s*{SENT}\s*", ". ", t)
+    t = re.sub(r"([.!?])[.\s]*(?=[.!?])", "", t)  # 연속 문장부호 정리
+    t = re.sub(r"\s+([.,;:!?)])", r"\1", t)       # 구두점 앞 공백 제거
+    t = re.sub(r"([.,;:!?])\1+", r"\1", t)        # 중복 구두점 축소
     t = re.sub(r"\(\s+", "(", t)
-    t = re.sub(r"^[\s.,;:)\]]+", "", t)       # 앞머리 잡구두점 제거
+    t = re.sub(r"^[\s.,;:)\]]+", "", t)           # 앞머리 잡구두점 제거
     t = re.sub(r"\s{2,}", " ", t).strip()
+    if t and t[-1] not in ".!?\"'":               # 마지막 문장 마침표 보정
+        t += "."
     return t
 
 
+_MIN_PASSAGE_WORDS = 12  # 지문으로 채택할 최소 영어 단어 수
+
+
+def _split_by_sentences(text: str, target: int = 7, min_words: int = _MIN_PASSAGE_WORDS) -> list[str]:
+    """영어 지문 하나를 ~target 문장 묶음으로 나눈다(헤더 없는 자료 대비)."""
+    sents = [s for s in _SENT_END.split(text) if s.strip()]
+    groups: list[str] = []
+    cur: list[str] = []
+    for s in sents:
+        cur.append(s)
+        if len(cur) >= target:
+            groups.append(" ".join(cur))
+            cur = []
+    if cur:
+        tail = " ".join(cur)
+        if groups and len(_EN_WORD.findall(tail)) < min_words:
+            groups[-1] += " " + tail          # 짧은 꼬리는 앞 묶음에 합침
+        else:
+            groups.append(tail)
+    groups = [g for g in groups if len(_EN_WORD.findall(g)) >= min_words]
+    return groups or [text]
+
+
 def _split_bilingual(text: str) -> list[str]:
-    """직독직해 자료를 지문(단원) 단위로 나눠 영어 지문 리스트로 복원."""
-    heads = list(_STUDY_HEADER.finditer(text))
-    if len(heads) >= 2:
-        bounds = [m.start() for m in heads] + [len(text)]
-        raw_chunks = [text[bounds[i]:bounds[i + 1]] for i in range(len(heads))]
-    else:
+    """직독직해 자료를 지문 단위로 나눠 영어 지문 리스트로 복원(교재 무관)."""
+    raw_chunks: list[str] = []
+
+    # 1순위: '①' 리셋으로 분할 — 모든 직독직해에서 각 지문은 ①로 시작.
+    if text.count("①") >= 2:
+        raw_chunks = [c for c in re.split(r"(?=①)", text) if c.strip()]
+
+    # 2순위: 단원 헤더로 분할(Ch/Unit/N강/N번 등)
+    if len(raw_chunks) < 2:
+        heads = list(_STUDY_HEADER.finditer(text))
+        if len(heads) >= 2:
+            b = [m.start() for m in heads] + [len(text)]
+            raw_chunks = [text[b[i]:b[i + 1]] for i in range(len(heads))]
+
+    # 3순위: 경계 신호가 없으면 통째로 두고 뒤에서 문장묶음으로 분할
+    if not raw_chunks:
         raw_chunks = [text]
-    out: list[str] = []
-    for c in raw_chunks:
-        eng = _clean_english(c)
-        if len(_EN_WORD.findall(eng)) >= 20:   # 충분한 영어만 지문으로 채택
-            out.append(eng)
-    return out
+
+    cleaned = [_clean_english(c) for c in raw_chunks]
+    cleaned = [c for c in cleaned if len(_EN_WORD.findall(c)) >= _MIN_PASSAGE_WORDS]
+
+    # 분리 실패(경계 오인 등) → 전체를 한 번에 정제 후 문장묶음으로 재분할.
+    if not cleaned:
+        whole = _clean_english(text)
+        if len(_EN_WORD.findall(whole)) >= _MIN_PASSAGE_WORDS:
+            cleaned = _split_by_sentences(whole)
+
+    # 지문이 1개뿐이면(헤더·① 없음) 문장묶음으로 여러 지문 확보
+    if len(cleaned) == 1:
+        cleaned = _split_by_sentences(cleaned[0])
+    return cleaned
 
 
 # ---------------------------------------------------------------------------

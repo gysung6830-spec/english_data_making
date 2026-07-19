@@ -321,9 +321,13 @@ def generate():
     try:
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
                             grade=grade, client=client)
-        if not res.exam.questions:
-            raise RuntimeError("지문에서 문항을 만들지 못했습니다. 지문 텍스트가 인식됐는지 확인하세요"
-                               "(사진은 OCR 필요).")
+        # 지문을 하나도 못 읽은 경우에만(스캔/HWP 등) 실행 가능한 안내를 준다.
+        if res.num_passages == 0:
+            raise RuntimeError(
+                "업로드한 파일에서 영어 지문 텍스트를 읽지 못했습니다. "
+                "스캔·사진 PDF(그림만 있는 PDF)이거나 HWP일 수 있습니다. "
+                "→ 텍스트가 선택·복사되는 PDF로 저장하거나, HWP는 'PDF로 저장' 후 "
+                "다시 올려주세요. (사진 지문은 OCR 설치가 필요합니다.)")
 
         raw = (request.form.get("outname") or "").strip()
         if raw.lower().endswith(".pdf"):
