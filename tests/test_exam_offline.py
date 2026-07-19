@@ -96,6 +96,46 @@ def test_build_and_validators() -> None:
     print("✓ build 변형기·자동 보정·검증 통과")
 
 
+def test_pdf_cleaning() -> None:
+    """PDF 정제: 한글·머리글 제거, 영어 지문만 남기기."""
+    from exam import ingest
+    seg = (
+        "[EBS] 올림포스 영어독해 기본1 ­ 한줄해석 (좌지문 우해석)\n"
+        "Ch. 04 Unit 10 - 2번: 제목 한글입니다\n"
+        "① Although the wish to be alone is often strong, its intensity varies. 혼자 있고\n"
+        "② We need other people to confirm that we exist. 우리는 필요로 한다.\n"
+        "[Flow Edu] flowedu.tistory.com\n"
+    )
+    out = ingest._clean_pdf_text(seg)
+    assert "Although the wish to be alone" in out
+    assert "We need other people" in out
+    assert "올림포스" not in out and "Ch." not in out and "flowedu" not in out
+    assert not any("가" <= c <= "힣" for c in out)      # 한글 없음
+    print("✓ PDF 정제(한글·머리글 제거) 통과")
+
+
+def test_analyzer_uses_real_passage() -> None:
+    """분석기가 엉뚱한 지문을 내놓아도 '넣은 지문'만 쓰는지."""
+    from exam import analyzer
+    from exam.schemas import Analysis, KeyTerm as _KT
+
+    class _Halluc:
+        def structured(self, system, prompt, model_cls, **kw):
+            return Analysis(title="X",
+                            sentences=["Fake one.", "Fake two.", "Fake three.", "Fake four."],
+                            main_idea="x", key_terms=[_KT(word="a", synonym="b")],
+                            hardest_sentence="z")
+
+    body = ("The printing press changed how knowledge spread across Europe. "
+            "It made books cheaper and far more widely available. "
+            "As literacy rose, new ideas travelled faster than before. "
+            "This reshaped science and politics for centuries.")
+    a = analyzer.analyze(_Halluc(), body)
+    joined = " ".join(a.sentences)
+    assert "printing press" in joined and "Fake" not in joined
+    print("✓ 분석기: 넣은 지문만 사용(환각 무시) 통과")
+
+
 class _FakeClient:
     def structured(self, system, prompt, model_cls, max_tokens=8000,
                    max_retries=1, extra_validate=None, image_path=None):
@@ -173,5 +213,7 @@ if __name__ == "__main__":
     test_render_html_bold_rules()
     test_single_source_shared()
     test_build_and_validators()
+    test_pdf_cleaning()
+    test_analyzer_uses_real_passage()
     test_llm_path_wiring()
     print("\n모든 오프라인 테스트 통과 ✅")
