@@ -58,17 +58,17 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     title = reports[0].title if reports else stem
     outs: dict[str, Path] = {}
     if sel.analysis:
-        p = cfg.output_dir / f"{stem}_analysis.pdf"
+        p = cfg.output_dir / f"{stem}_지문분석.pdf"
         render.render_pdf(reports, p, footer_note=cfg.design.footer_note,
                           min_vocab=cfg.vocab.min, brand=brand)
         outs["analysis"] = p
     if sel.wordlist:
-        p = cfg.output_dir / f"{stem}_wordlist.pdf"
+        p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
         render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘",
                                    footer_note=cfg.design.footer_note)
         outs["wordlist"] = p
     if sel.quiz:
-        p = cfg.output_dir / f"{stem}_quiz.pdf"
+        p = cfg.output_dir / f"{stem}_어휘test.pdf"
         render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험",
                                footer_note=cfg.design.footer_note)
         outs["quiz"] = p

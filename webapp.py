@@ -108,7 +108,11 @@ INDEX_HTML = """
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label>③ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
+      <label>③ 저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
+      <input type=text name=basename placeholder="예: 2027수능특강_16강">
+      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
+
+      <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
@@ -244,6 +248,10 @@ def analyze_route():
     # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
     brand = cfg.design.brand if request.form.get("brand") else ""
 
+    # 저장 파일명(지문명) — 비우면 올린 파일 이름 사용
+    raw_name = (request.form.get("basename") or "").strip()
+    custom_base = _safe_name(raw_name) if raw_name else ""
+
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
     if not mock and not key:
@@ -255,7 +263,7 @@ def analyze_route():
     client = None if mock else ClaudeClient(key, cfg.model)
 
     results = []
-    for f in files:
+    for idx, f in enumerate(files, start=1):
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
             results.append({"name": f.filename, "ok": False,
@@ -268,7 +276,11 @@ def analyze_route():
                 reports = pipeline._mock_reports_for_pdf(cfg, tmp)
             else:
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
-            stem = _safe_name(Path(f.filename).stem)
+            if custom_base:
+                # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
+                stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
+            else:
+                stem = _safe_name(Path(f.filename).stem)
             outs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
             labels = {"analysis": "📘 분석지", "wordlist": "📝 어휘 리스트", "quiz": "✏️ 시험지"}
             fitems = [{"label": labels[k], "out": p.name} for k, p in outs.items()]
