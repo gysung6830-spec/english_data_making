@@ -245,3 +245,36 @@ table.lit2 td {
   margin-top: 9px; padding-top: 6px; border-top: 1px solid var(--line);
   font-size: 8px; color: var(--muted); text-align: center;
 }
+
+/* ============================================================
+   어휘 리스트 / 영단어 시험지 (직독직해 핵심 어휘 기반)
+   ============================================================ */
+.t-wl, .t-quiz { font-size: 10px; margin-top: 4px; }
+.t-wl th, .t-quiz th { background: var(--voc); }
+.wl-no { width: 26px; text-align: center; color: var(--muted); font-weight: 800; }
+.wl-en { width: 130px; font-weight: 700; color: #111827; }
+.wl-ko { }
+.t-wl td, .t-quiz td { padding: 4px 8px; }
+/* 좌우 두 묶음 사이 세로 구분선 */
+.t-wl td:nth-child(3), .t-wl th:nth-child(3),
+.t-quiz td:nth-child(3), .t-quiz th:nth-child(3) { border-right: 2px solid var(--line); }
+.wl-empty { margin-top: 14px; color: var(--muted); font-size: 11px; }
+
+/* 시험지: 뜻 쓰는 빈칸 */
+.q-blank { min-height: 20px; }
+.t-quiz tbody td { height: 22px; }
+.quiz-meta { font-size: 11px; font-weight: 700; margin: 3px 0 2px; }
+.quiz-meta .ql {
+  display: inline-block; border-bottom: 1px solid #111827; min-width: 120px;
+}
+.quiz-meta .ql.short { min-width: 46px; }
+
+/* 시험지 정답 (마지막에 별도 페이지) */
+.answer-key { margin-top: 10px; }
+.ak-title {
+  display: inline-block; background: #111827; color: #fff;
+  font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin-bottom: 8px;
+}
+.ak-list { columns: 2; column-gap: 22px; font-size: 9.5px; line-height: 1.7; }
+.ak-item { display: block; break-inside: avoid; color: #23272e; }
+.ak-item b { color: var(--voc); }

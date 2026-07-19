@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>영단어 시험지</title></head>
+<body>
+  <div class="doc-header">
+    <span class="doc-badge">Vocabulary Quiz</span>
+    <div class="doc-title">{{ title }}</div>
+    <div class="quiz-meta">
+      이름 <span class="ql">&nbsp;</span>　　　점수 <span class="ql short">&nbsp;</span> / {{ words|length }}
+    </div>
+    <div class="doc-source">아래 영단어의 한글 뜻을 쓰세요. (직독직해 핵심 어휘 · 순서 무작위)</div>
+  </div>
+
+  {% if words %}
+  <table class="grid t-quiz">
+    <thead><tr>
+      <th class="wl-no">No</th><th class="wl-en">단어</th><th class="q-blank">뜻 쓰기</th>
+      <th class="wl-no">No</th><th class="wl-en">단어</th><th class="q-blank">뜻 쓰기</th>
+    </tr></thead>
+    <tbody>
+    {% for l, r in rows %}
+      <tr>
+        <td class="wl-no">{{ l.no }}</td><td class="wl-en">{{ l.word }}</td><td class="q-blank"></td>
+        {% if r %}
+        <td class="wl-no">{{ r.no }}</td><td class="wl-en">{{ r.word }}</td><td class="q-blank"></td>
+        {% else %}<td></td><td></td><td class="q-blank"></td>{% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="answer-key page-break">
+    <div class="ak-title">정답 (Answer Key)</div>
+    <div class="ak-list">
+      {% for w in words %}<span class="ak-item"><b>{{ w.no }}.</b> {{ w.word }} — {{ w.meaning }}</span>{% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="wl-empty">직독직해에서 수집된 핵심 어휘가 없습니다.</div>
+  {% endif %}
+
+  {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+</body>
+</html>

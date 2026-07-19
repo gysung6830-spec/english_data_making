@@ -22,7 +22,7 @@ from flask import (Flask, abort, redirect, render_template_string, request,
 
 from src import extract, pipeline, render
 from src.client import ClaudeClient
-from src.config import ROOT, load_config
+from src.config import ROOT, OutputsCfg, load_config
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB 업로드 제한
@@ -88,7 +88,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 6개 분석 자료가 담긴 PDF를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -108,7 +108,12 @@ INDEX_HTML = """
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
+      <label>③ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
+      <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
+      <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
+      <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
+
+      <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
         <button class=btn id=go type=submit>분석 시작</button>
@@ -149,8 +154,13 @@ RESULT_HTML = """
         <td>{% if r.ok %}<span class=ok>완료</span>{% else %}<span class=fail>실패</span>{% endif %}</td>
         <td>
           {% if r.ok %}
-            <a class=dl href="{{ url_for('view', fname=r.out) }}" target=_blank>미리보기</a>
-            <a class=dl href="{{ url_for('download', fname=r.out) }}">다운로드</a>
+            {% for fitem in r.files %}
+            <div style="margin-bottom:5px">
+              <b style="font-size:12px">{{ fitem.label }}</b>&nbsp;
+              <a class=dl href="{{ url_for('view', fname=fitem.out) }}" target=_blank>미리보기</a>
+              <a class=dl href="{{ url_for('download', fname=fitem.out) }}">다운로드</a>
+            </div>
+            {% endfor %}
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
         </td>
       </tr>
@@ -220,6 +230,15 @@ def analyze_route():
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
 
+    # 만들 자료 선택 (아무것도 안 고르면 분석지만)
+    which = OutputsCfg(
+        analysis=bool(request.form.get("out_analysis")),
+        wordlist=bool(request.form.get("out_wordlist")),
+        quiz=bool(request.form.get("out_quiz")),
+    )
+    if not (which.analysis or which.wordlist or which.quiz):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
     if not mock and not key:
@@ -245,11 +264,11 @@ def analyze_route():
             else:
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
-            out = OUTPUT_DIR / f"{stem}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
-                              min_vocab=cfg.vocab.min)
+            outs = pipeline.render_outputs(cfg, reports, stem, which=which)
+            labels = {"analysis": "📘 분석지", "wordlist": "📝 어휘 리스트", "quiz": "✏️ 시험지"}
+            fitems = [{"label": labels[k], "out": p.name} for k, p in outs.items()]
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
-            results.append({"name": f.filename + note, "ok": True, "out": out.name})
+            results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})

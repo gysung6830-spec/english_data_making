@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>핵심 어휘 리스트</title></head>
+<body>
+  <div class="doc-header">
+    <span class="doc-badge">Word List</span>
+    <div class="doc-title">{{ title }}</div>
+    <div class="doc-source">직독직해 핵심 어휘 모음 · 총 {{ words|length }}개</div>
+  </div>
+
+  {% if words %}
+  <table class="grid t-wl">
+    <thead><tr>
+      <th class="wl-no">No</th><th class="wl-en">단어</th><th class="wl-ko">뜻</th>
+      <th class="wl-no">No</th><th class="wl-en">단어</th><th class="wl-ko">뜻</th>
+    </tr></thead>
+    <tbody>
+    {% for l, r in rows %}
+      <tr>
+        <td class="wl-no">{{ l.no }}</td><td class="wl-en">{{ l.word }}</td><td>{{ l.meaning }}</td>
+        {% if r %}
+        <td class="wl-no">{{ r.no }}</td><td class="wl-en">{{ r.word }}</td><td>{{ r.meaning }}</td>
+        {% else %}<td></td><td></td><td></td>{% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="wl-empty">직독직해에서 수집된 핵심 어휘가 없습니다.</div>
+  {% endif %}
+
+  {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+</body>
+</html>

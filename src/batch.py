@@ -16,7 +16,7 @@ from . import extract, prompts, render, schemas
 from .client import ClaudeClient, build_request, parse_response_text
 from .config import Config
 from .logutil import Manifest, setup_logging
-from .pipeline import _safe_stem, list_pdfs
+from .pipeline import _safe_stem, list_pdfs, render_outputs
 
 POLL_SECONDS = 30
 
@@ -153,9 +153,10 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         })
     res3 = _submit_and_collect(client, exam_reqs, logger)
 
-    # ---- 조립 + 렌더 (파일별로 지문 순서대로 하나의 PDF) ----
+    # ---- 조립 + 렌더 (파일별로 지문 순서대로, 선택된 종류의 PDF) ----
     success = 0
     outputs: list[Path] = []
+    analysis_outputs: list[Path] = []
     for fid in file_units:
         if fid in failed:
             continue
@@ -172,11 +173,12 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                     structure=p["structure"], exam=exam,
                 ))
             pdf = files[fid]
-            out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
-                              min_vocab=cfg.vocab.min)
-            outputs.append(out)
-            manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
+            outs = render_outputs(cfg, reports, _safe_stem(pdf))
+            outputs.extend(outs.values())
+            if "analysis" in outs:
+                analysis_outputs.append(outs["analysis"])
+            manifest.record_success(str(pdf), str(outs.get("analysis", "")),
+                                    {"passages": len(reports), "kinds": list(outs.keys())})
             success += 1
         except Exception as e:
             failed.setdefault(fid, f"assemble: {e}")
@@ -184,9 +186,9 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     for fid, err in failed.items():
         manifest.record_failure(str(files[fid]), err)
 
-    if outputs and not cfg.design.one_pdf_per_passage:
+    if analysis_outputs and not cfg.design.one_pdf_per_passage:
         combined = cfg.output_dir / "ALL_passages_analysis.pdf"
-        render.combine_pdfs(outputs, combined)
+        render.combine_pdfs(analysis_outputs, combined)
 
     logger.info("Batch 처리 요약 — 성공 %d, 실패 %d (총 %d)", success, len(failed), total)
     logger.info("실패 파일은 logs/failed.jsonl 참고. 동기 모드(python run.py)로 재시도 가능.")

@@ -1,6 +1,7 @@
 """Report -> HTML -> PDF (Jinja2 + WeasyPrint)."""
 from __future__ import annotations
 
+import random
 from pathlib import Path
 
 import re
@@ -114,6 +115,73 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
         rlist = [_fit_report(r, footer_note, css, min_vocab) for r in rlist]
         doc = build(rlist)
     doc.write_pdf(str(out_path))
+    return out_path
+
+
+# ---------------------------------------------------------------------------
+# 어휘 리스트 / 영단어 시험지 (직독직해 오른쪽 열 단어들 기반)
+# ---------------------------------------------------------------------------
+def collect_words(reports) -> list[dict]:
+    """직독직해 각 chunk 의 words(핵심 단어)를 지문 순서대로 모으고 중복 제거."""
+    seen: dict[str, dict] = {}
+    order: list[str] = []
+    for r in _as_list(reports):
+        for s in r.literal.sentences:
+            for c in s.chunks:
+                for w in c.words:
+                    word = (w.word or "").strip()
+                    meaning = (w.meaning or "").strip()
+                    if not word:
+                        continue
+                    key = word.lower()
+                    if key not in seen:
+                        seen[key] = {"word": word, "meaning": meaning}
+                        order.append(key)
+    return [{"no": i + 1, **seen[k]} for i, k in enumerate(order)]
+
+
+def _pair_rows(words: list[dict]) -> list[tuple]:
+    """단어 목록을 2열(왼쪽 위→아래, 오른쪽 위→아래)로 배치할 행 목록으로 변환."""
+    half = (len(words) + 1) // 2
+    left, right = words[:half], words[half:]
+    rows = []
+    for i in range(half):
+        rows.append((left[i], right[i] if i < len(right) else None))
+    return rows
+
+
+def render_wordlist_pdf(reports, out_path: str | Path,
+                        title: str = "핵심 어휘 리스트", footer_note: str = "") -> Path:
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    words = collect_words(reports)
+    tmpl = _env.get_template("wordlist.html.j2")
+    html = tmpl.render(title=title, words=words, rows=_pair_rows(words),
+                       footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
+def render_quiz_pdf(reports, out_path: str | Path,
+                    title: str = "영단어 시험지", footer_note: str = "",
+                    seed: int | None = None) -> Path:
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    words = collect_words(reports)
+    shuffled = words[:]
+    random.Random(seed).shuffle(shuffled)
+    for i, w in enumerate(shuffled):   # 섞은 뒤 번호를 다시 매김
+        w["no"] = i + 1
+    tmpl = _env.get_template("quiz.html.j2")
+    html = tmpl.render(title=title, words=shuffled, rows=_pair_rows(shuffled),
+                       footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
 
 

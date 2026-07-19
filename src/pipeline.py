@@ -46,6 +46,30 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
     return build_reports_for_pdf(client, cfg, src)[0]
 
 
+def render_outputs(cfg: Config, reports: list[Report], stem: str,
+                   which=None) -> dict[str, Path]:
+    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성하고 {종류: 경로} 반환."""
+    sel = which or cfg.outputs
+    title = reports[0].title if reports else stem
+    outs: dict[str, Path] = {}
+    if sel.analysis:
+        p = cfg.output_dir / f"{stem}_analysis.pdf"
+        render.render_pdf(reports, p, footer_note=cfg.design.footer_note,
+                          min_vocab=cfg.vocab.min)
+        outs["analysis"] = p
+    if sel.wordlist:
+        p = cfg.output_dir / f"{stem}_wordlist.pdf"
+        render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘",
+                                   footer_note=cfg.design.footer_note)
+        outs["wordlist"] = p
+    if sel.quiz:
+        p = cfg.output_dir / f"{stem}_quiz.pdf"
+        render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험",
+                               footer_note=cfg.design.footer_note)
+        outs["quiz"] = p
+    return outs
+
+
 def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
     """목 모드: 실제 API 없이 샘플 Report(들)를 반환."""
     from samples.sample_mock import mock_report
@@ -88,29 +112,33 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
 
     logger.info("총 %d개 지문 처리 시작 (%s 모드)", total, "MOCK" if mock else "API")
 
+    analysis_outputs: list[Path] = []
     outputs: list[Path] = []
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
             reports = (_mock_reports_for_pdf(cfg, pdf) if mock
                        else build_reports_for_pdf(client, cfg, pdf))
-            out = cfg.output_dir / f"{_safe_stem(pdf)}_analysis.pdf"
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
-                              min_vocab=cfg.vocab.min)
-            outputs.append(out)
-            manifest.record_success(str(pdf), str(out), {"passages": len(reports)})
+            outs = render_outputs(cfg, reports, _safe_stem(pdf))
+            outputs.extend(outs.values())
+            if "analysis" in outs:
+                analysis_outputs.append(outs["analysis"])
+            manifest.record_success(str(pdf), str(outs.get("analysis", "")),
+                                    {"passages": len(reports),
+                                     "kinds": list(outs.keys())})
             success += 1
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
-                        i, total, pdf.name, len(reports), out.name)
+                        i, total, pdf.name, len(reports),
+                        ", ".join(p.name for p in outs.values()))
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))
             logger.error("[%d/%d] 실패: %s (%s)", i, total, pdf.name, e)
 
-    # 하나의 PDF 로 합치기 옵션
-    if outputs and not cfg.design.one_pdf_per_passage:
+    # 하나의 PDF 로 합치기 옵션 (분석지에 한함)
+    if analysis_outputs and not cfg.design.one_pdf_per_passage:
         combined = cfg.output_dir / "ALL_passages_analysis.pdf"
-        render.combine_pdfs(outputs, combined)
+        render.combine_pdfs(analysis_outputs, combined)
         logger.info("합본 PDF 생성: %s", combined.name)
 
     logger.info("처리 요약 — 성공 %d, 실패 %d (총 %d)", success, failed, total)

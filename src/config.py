@@ -32,6 +32,14 @@ class DesignCfg:
 
 
 @dataclass
+class OutputsCfg:
+    """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지)."""
+    analysis: bool = True
+    wordlist: bool = True
+    quiz: bool = True
+
+
+@dataclass
 class Config:
     model: str = "claude-opus-4-8"
     input_dir: Path = field(default_factory=lambda: ROOT / "input")
@@ -40,6 +48,7 @@ class Config:
     vocab: VocabCfg = field(default_factory=VocabCfg)
     processing: ProcessingCfg = field(default_factory=ProcessingCfg)
     design: DesignCfg = field(default_factory=DesignCfg)
+    outputs: OutputsCfg = field(default_factory=OutputsCfg)
     api_key: str | None = None
 
     @property
@@ -64,6 +73,7 @@ def load_config(path: str | Path | None = None) -> Config:
     vocab = data.get("vocab", {})
     proc = data.get("processing", {})
     design = data.get("design", {})
+    outputs = data.get("outputs", {})
 
     cfg = Config(
         model=data.get("model", "claude-opus-4-8"),
@@ -79,6 +89,11 @@ def load_config(path: str | Path | None = None) -> Config:
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),
             one_pdf_per_passage=bool(design.get("one_pdf_per_passage", True)),
+        ),
+        outputs=OutputsCfg(
+            analysis=bool(outputs.get("analysis", True)),
+            wordlist=bool(outputs.get("wordlist", True)),
+            quiz=bool(outputs.get("quiz", True)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )

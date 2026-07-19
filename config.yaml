@@ -33,3 +33,12 @@ design:
   footer_note: "© 2026 은아 T. All rights reserved."
   # 지문별로 개별 PDF 를 만들지(true), 하나의 PDF 로 합칠지(false)
   one_pdf_per_passage: true
+
+# 어떤 PDF 를 만들지 선택 (true=생성 / false=건너뜀)
+#   - analysis : 지문 분석지 (6개 섹션)
+#   - wordlist : 직독직해 핵심 어휘만 모은 어휘 리스트
+#   - quiz     : 어휘를 무작위로 섞어 뜻을 적게 하는 영단어 시험지(정답 포함)
+outputs:
+  analysis: true
+  wordlist: true
+  quiz: true
