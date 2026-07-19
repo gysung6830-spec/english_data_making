@@ -259,9 +259,15 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
 
 
 def _exp_html(text: str) -> str:
-    """[오답 함정] 같은 대괄호 주석을 강조색으로."""
-    esc = html.escape(text)
-    return re.sub(r"(\[[^\]]+\])", r'<span class="trap">\1</span>', esc)
+    """[오답 함정] 대괄호 주석은 강조색으로, <b>..</b> 는 굵게 허용, 나머지는 이스케이프."""
+    out = []
+    for t in re.split(r"(<b>|</b>)", text):
+        if t in ("<b>", "</b>"):
+            out.append(t)
+        else:
+            out.append(re.sub(r"(\[[^\]]+\])", r'<span class="trap">\1</span>',
+                              html.escape(t)))
+    return "".join(out)
 
 
 def _wrap(title: str, body: str) -> str:
