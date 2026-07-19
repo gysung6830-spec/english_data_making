@@ -91,21 +91,53 @@ def extract_text(path) -> str:
 
 # ── auto-fit PDF 빌더 ─────────────────────────────────────────
 
+def _find_chromium():
+    """미리 설치된 Chromium 실행 파일을 탐색(playwright 기본 브라우저 부재 시)."""
+    import glob
+    roots = [
+        os.environ.get("PLAYWRIGHT_BROWSERS_PATH"),
+        "/opt/pw-browsers",
+        os.path.expanduser("~/.cache/ms-playwright"),
+    ]
+    patterns = [
+        "chromium-*/chrome-linux/chrome",
+        "chromium_headless_shell-*/chrome-linux/headless_shell",
+        "chromium-*/chrome-mac/Chromium.app/Contents/MacOS/Chromium",
+    ]
+    for root in roots:
+        if not root:
+            continue
+        for pat in patterns:
+            hits = sorted(glob.glob(os.path.join(root, pat)))
+            if hits:
+                return hits[-1]
+    return None
+
+
+def _launch_chromium(pw):
+    """Chromium 실행. env var 지정 → 기본 실행 → 미리 설치본 자동 탐색 순."""
+    args = ["--no-sandbox"]
+    exe = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE")
+    if exe:
+        return pw.chromium.launch(executable_path=exe, args=args)
+    try:
+        return pw.chromium.launch(args=args)
+    except Exception:
+        # playwright 기본 브라우저가 없으면(예: 컨테이너) 설치본을 찾아 재시도
+        found = _find_chromium()
+        if found:
+            return pw.chromium.launch(executable_path=found, args=args)
+        raise
+
+
 def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
     """Playwright(Chromium)로 HTML 렌더 → auto-fit 축소 → A4 PDF 출력."""
     from playwright.sync_api import sync_playwright
 
     out_pdf = str(out_pdf)
 
-    # 미리 설치된 Chromium을 쓰는 환경(컨테이너 등)에서는
-    # PLAYWRIGHT_CHROMIUM_EXECUTABLE 로 실행 파일 경로를 지정할 수 있다.
-    exe = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE")
-    launch_kwargs = {"args": ["--no-sandbox"]}
-    if exe:
-        launch_kwargs["executable_path"] = exe
-
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(**launch_kwargs)
+        browser = _launch_chromium(pw)
         page = browser.new_page(viewport={"width": A4_W_PX, "height": A4_H_PX})
         page.set_content(html_str, wait_until="networkidle")
 
