@@ -30,7 +30,10 @@ TYPE_LABEL_KO = {
 _BOGI_TYPES = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arrange",
                "arrange_and_translate", "chart_fix_and_arrange", "blank_choose_no_change"}
 
-_SERIF = "'Batang','바탕','Noto Serif KR','Nanum Myeongjo','Times New Roman',serif"
+# 한글 본문 글꼴: 학교 시험지(HWP) 기본 명조인 함초롬바탕을 1순위로,
+# 미설치 환경을 위해 바탕/Batang → Noto Serif KR 순으로 대체.
+_SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif KR',"
+          "'Nanum Myeongjo','Times New Roman',serif")
 
 _CSS = f"""
 * {{ box-sizing: border-box; }}
@@ -217,9 +220,9 @@ def _footer_block(exam: MockExam, footer: str) -> str:
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
 def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    # 유의사항은 머리글 박스 바로 아래, 2단 시작 전 '1열(전체 폭)'로 배치
-    body = [_header_block(exam, info), _guidelines_block(exam, info),
-            '<div class="columns">']
+    # 유의사항은 2단 레이아웃의 '왼쪽 단(첫째 열)' 맨 위에만 배치
+    body = [_header_block(exam, info), '<div class="columns">',
+            _guidelines_block(exam, info)]
     for q in exam.choice_questions:
         body.append(_q_html(q))
     body.append('<div class="section-div">&lt; 서 술 형 &gt;</div>')
