@@ -53,24 +53,52 @@ def _highlight_words(text: str | None, words) -> Markup:
 _env.filters["highlight_words"] = _highlight_words
 
 
-def _chunk_color_index(example, chunks) -> int:
-    """문법 예문(example)이 어느 chunk(어구)에 해당하는지 찾아 그 색 인덱스를 반환.
+# 매칭 시 무시할 기능어(내용어만 남겨 어구를 정확히 찾기 위함)
+_STOP_WORDS = {
+    "the", "a", "an", "of", "in", "on", "at", "to", "is", "are", "was", "were",
+    "be", "been", "being", "and", "or", "but", "it", "its", "this", "that",
+    "these", "those", "for", "as", "so", "with", "by", "from", "not", "no",
+    "does", "do", "did", "has", "have", "had", "will", "would", "can", "could",
+    "we", "you", "they", "he", "she", "them", "us", "here", "there", "too",
+    "also", "which", "who", "whom", "whose", "than", "then", "over", "again",
+    "almost", "really", "very", "much", "more", "most", "only", "even", "just",
+}
 
-    직독직해 왼쪽 열의 문법 설명 색을 해당 어구(청크)의 색과 동일하게 맞추기 위함.
+
+def _words(text) -> list[str]:
+    return re.findall(r"[a-z']+", (text or "").lower())
+
+
+def _chunk_color_index(example, chunks, point: str = "") -> int:
+    """문법이 가리키는 어구(chunk)의 색 인덱스를 반환.
+
+    직독직해 왼쪽 열의 문법 태그 색을 해당 어구(청크)의 색과 동일하게 맞추기 위함.
     청크 표시 색은 위치 index % 8 이므로 여기서도 같은 기준을 쓴다.
+
+    1) 문법 포인트명에 든 '영어 표지어'(itself, that, much, although 등)가
+       왼쪽부터 처음 등장하는 어구를 우선 선택 (가장 신뢰도 높음).
+    2) 표지어가 없으면(과거분사·삽입구 등) 예문의 '내용어' 겹침이 가장 큰 어구.
     """
-    if not example or not chunks:
+    if not chunks:
         return 0
-    ex_words = set(re.findall(r"[a-z']+", example.lower()))
-    if not ex_words:
-        return 0
-    best_i, best_score = 0, -1
-    for i, c in enumerate(chunks):
-        cw = set(re.findall(r"[a-z']+", (getattr(c, "english", "") or "").lower()))
-        score = len(ex_words & cw)
-        if score > best_score:
-            best_score, best_i = score, i
-    return best_i % 8
+    chunk_words = [set(_words(getattr(c, "english", ""))) for c in chunks]
+
+    # 1) 포인트명의 표지어 우선 (기능어라도 문법 표지이므로 그대로 사용)
+    for tok in _words(point):
+        for i, cw in enumerate(chunk_words):
+            if tok in cw:
+                return i % 8
+
+    # 2) 예문 내용어(기능어 제외) 최다 겹침
+    ex = {w for w in _words(example) if w not in _STOP_WORDS}
+    if ex:
+        best_i, best_score = 0, -1
+        for i, cw in enumerate(chunk_words):
+            score = len(ex & cw)
+            if score > best_score:
+                best_score, best_i = score, i
+        return best_i % 8
+    return 0
 
 
 _env.filters["chunk_color"] = _chunk_color_index
