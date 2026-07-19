@@ -4,18 +4,28 @@
 <div class="resulthead">
   <div>
     <h2>생성 완료 ✅</h2>
-    <p class="tag">{{ '데모 지문' if demo else '입력 지문' }} {{ count }}개 · 각 지문 7문항
+    <p class="tag">{{ '데모 지문' if demo else '입력 지문' }} · {{ outputs|length }}개 세트
       {% if header %}· 머리글 “{{ header }}”{% endif %}</p>
-    <p class="tag">파일명: <b>{{ doc_name }}_변형문제.pdf</b></p>
   </div>
   <div class="actions">
-    <a class="btn" href="{{ url_for('download', fid=fid, name=doc_name) }}">PDF 다운로드</a>
     <a class="btn ghost" href="{{ url_for('index') }}">새로 만들기</a>
   </div>
 </div>
 
-<object class="preview" data="{{ url_for('pdf', fid=fid) }}" type="application/pdf">
-  <p>미리보기를 표시할 수 없습니다. <a href="{{ url_for('download', fid=fid) }}">여기서 PDF를 내려받으세요.</a></p>
+<div class="dl-list">
+  {% for o in outputs %}
+  <div class="dl-row">
+    <span class="dl-label"><b>{{ o.label }}</b> · 지문 {{ o.count }}개</span>
+    <a class="btn" href="{{ url_for('download', fid=o.fid, name=o.name) }}">{{ o.name }}.pdf 다운로드</a>
+  </div>
+  {% endfor %}
+</div>
+
+{% if outputs %}
+<h3 class="preview-title">미리보기 — {{ outputs[0].label }}</h3>
+<object class="preview" data="{{ url_for('pdf', fid=outputs[0].fid) }}" type="application/pdf">
+  <p>미리보기를 표시할 수 없습니다. 위 다운로드 버튼으로 PDF를 내려받으세요.</p>
 </object>
+{% endif %}
 
 {% endblock %}

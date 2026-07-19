@@ -59,6 +59,14 @@ Second passage goes here."></textarea>
     </label>
   </div>
 
+  <div class="field setbox">
+    <span class="label">출력할 세트 (원하는 것만 체크 — 둘 다 체크하면 각각 별도 PDF)</span>
+    <label class="check"><input type="checkbox" name="sets" value="1" checked>
+      <b>변형문제 1회</b> <span class="hint2">순서·삽입·주제·어휘·어법·내용일치·서술형</span></label>
+    <label class="check"><input type="checkbox" name="sets" value="2">
+      <b>변형문제 2회</b> <span class="hint2">어법어휘짝짓기·함의추론·어법판별·어순배열·요약빈칸·빈칸추론·내용일치개수</span></label>
+  </div>
+
   <div class="btns">
     <button type="submit" name="action" value="generate" class="btn">시험지 생성 → (API 사용·비용)</button>
     <button type="submit" name="action" value="demo" class="btn ghost">무료 미리보기 (데모 지문·API 미사용)</button>

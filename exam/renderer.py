@@ -24,25 +24,29 @@ _env = Environment(
 )
 
 
-def _blocks(passages: list[Passage], start: int):
-    """지문별 문제/해설 블록을 만들며 문항 번호를 연속 부여한다."""
+def _blocks(passages: list[Passage], start: int,
+            type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS):
+    """지문별 문제/해설 블록을 만들며 문항 번호를 연속 부여한다.
+
+    type_order/prompts/labels 를 바꾸면 다른 문제 세트(예: 2회)도 같은 조판을 쓴다.
+    """
     qblocks: list[dict] = []
     ablocks: list[dict] = []
     n = start
     for i, p in enumerate(passages, start=1):
         q_items: list[dict] = []
         a_items: list[dict] = []
-        for t in TYPE_ORDER:
+        for t in type_order:
             q_items.append({
                 "no": n,
                 "type": t,
-                "prompt": TYPE_PROMPTS[t],
+                "prompt": prompts[t],
                 "body": Markup(p.q[t]),
             })
             a_items.append({
                 "no": n,
                 "type": t,
-                "label": TYPE_LABELS[t],
+                "label": labels[t],
                 "body": Markup(p.a[t]),
             })
             n += 1
@@ -62,8 +66,9 @@ def render_html(
     doc_title: str = "영어 영역",
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
+    type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
 ) -> str:
-    qblocks, ablocks = _blocks(passages, start)
+    qblocks, ablocks = _blocks(passages, start, type_order, prompts, labels)
     tmpl = _env.get_template("exam.html.j2")
     return tmpl.render(
         qblocks=qblocks,
@@ -81,13 +86,15 @@ def render_pdf(
     doc_title: str = "영어 영역",
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
+    type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
 ) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     html = render_html(passages, header_note=header_note, doc_title=doc_title,
-                       start=start, footer_note=footer_note)
+                       start=start, footer_note=footer_note,
+                       type_order=type_order, prompts=prompts, labels=labels)
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

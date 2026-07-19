@@ -30,14 +30,14 @@ class MissingReport:
         return not self.missing_q and not self.missing_a
 
 
-def check_passage(passage: Passage) -> MissingReport:
-    """지문 1개가 6종 문제+해설을 빠짐없이 가졌는지 점검.
+def check_passage(passage: Passage, type_order=TYPE_ORDER) -> MissingReport:
+    """지문 1개가 유형 문제+해설을 빠짐없이 가졌는지 점검.
 
-    - q, a 에 TYPE_ORDER 6종이 모두 있어야 한다.
+    - q, a 에 type_order 유형이 모두 있어야 한다.
     - q 와 a 의 유형 집합이 같아야 한다.
-    - 규격 외(TYPE_ORDER 에 없는) 유형이 있으면 오류.
+    - 규격 외(type_order 에 없는) 유형이 있으면 오류.
     """
-    expected = set(TYPE_ORDER)
+    expected = set(type_order)
 
     extra_q = passage.q.keys() - expected
     extra_a = passage.a.keys() - expected
@@ -46,18 +46,18 @@ def check_passage(passage: Passage) -> MissingReport:
             f"[{passage.title}] 규격 외 유형이 있습니다: q={sorted(extra_q)} a={sorted(extra_a)}"
         )
 
-    missing_q = [t for t in TYPE_ORDER if not (passage.q.get(t) or "").strip()]
-    missing_a = [t for t in TYPE_ORDER if not (passage.a.get(t) or "").strip()]
+    missing_q = [t for t in type_order if not (passage.q.get(t) or "").strip()]
+    missing_a = [t for t in type_order if not (passage.a.get(t) or "").strip()]
     return MissingReport(passage.title, missing_q, missing_a)
 
 
-def validate_passages(passages: list[Passage]) -> None:
-    """모든 지문이 6종+해설을 완비했는지 확인. 실패 시 ValidationError."""
+def validate_passages(passages: list[Passage], type_order=TYPE_ORDER) -> None:
+    """모든 지문이 유형+해설을 완비했는지 확인. 실패 시 ValidationError."""
     if not passages:
         raise ValidationError("지문이 하나도 없습니다.")
     problems: list[str] = []
     for p in passages:
-        rep = check_passage(p)
+        rep = check_passage(p, type_order)
         if not rep.ok:
             problems.append(
                 f"[{rep.passage_title}] 누락 — 문제:{rep.missing_q or '없음'} / 해설:{rep.missing_a or '없음'}"
@@ -66,20 +66,20 @@ def validate_passages(passages: list[Passage]) -> None:
         raise ValidationError("6종 완비 검증 실패:\n" + "\n".join(problems))
 
 
-def validate_numbering(passages: list[Passage], start: int = 1) -> list[list[int]]:
+def validate_numbering(passages: list[Passage], start: int = 1,
+                       type_order=TYPE_ORDER) -> list[list[int]]:
     """조판 결과의 문항 번호가 1..N 연속인지 확인하고, 지문별 번호 목록을 돌려준다.
 
-    각 지문은 정확히 6문항(6종)을 가지므로, 문서 전체 번호는
-    start..(start + 6*len - 1) 로 연속이어야 한다.
+    각 지문은 정확히 len(type_order) 문항을 가지므로, 문서 전체 번호는
+    start..(start + len*지문수 - 1) 로 연속이어야 한다.
     문제와 해설은 같은 번호를 공유한다.
     """
     numbers: list[list[int]] = []
     n = start
     for p in passages:
-        # check_passage 가 통과했다는 전제 하에 6종 고정
-        block = list(range(n, n + len(TYPE_ORDER)))
+        block = list(range(n, n + len(type_order)))
         numbers.append(block)
-        n += len(TYPE_ORDER)
+        n += len(type_order)
 
     flat = [num for block in numbers for num in block]
     expected = list(range(start, start + len(flat)))

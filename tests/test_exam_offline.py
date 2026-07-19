@@ -96,6 +96,22 @@ def test_build_and_validators() -> None:
     print("✓ build 변형기·자동 보정·검증 통과")
 
 
+def test_set2_demo() -> None:
+    """변형문제 2회(A~G) 데모: 검증·번호·조판."""
+    from exam.demo2 import demo_passages_2
+    from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+    ps = demo_passages_2()
+    validator.validate_passages(ps, TYPE_ORDER2)
+    nums = validator.validate_numbering(ps, 1, TYPE_ORDER2)
+    assert nums == [[1, 2, 3, 4, 5, 6, 7]]
+    html = renderer.render_html(ps, type_order=TYPE_ORDER2,
+                                prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2)
+    assert "vanishingly small space" in html          # 정본 공유
+    assert "다음 글의 내용과 일치하는 것의 개수는?" in html   # G 발문
+    assert "함의추론" in html                            # B 라벨(해설)
+    print("✓ 2회(A~G) 데모 검증·조판 통과")
+
+
 def test_pdf_cleaning() -> None:
     """PDF 정제: 한글·머리글 제거, 영어 지문만 남기기."""
     from exam import ingest
@@ -213,6 +229,7 @@ if __name__ == "__main__":
     test_render_html_bold_rules()
     test_single_source_shared()
     test_build_and_validators()
+    test_set2_demo()
     test_pdf_cleaning()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()

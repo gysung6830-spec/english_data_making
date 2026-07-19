@@ -1,0 +1,131 @@
+"""변형문제 2회(A~G) 전용 HTML 조각 빌더. 볼드 규칙은 1회와 동일(format.py 재사용)."""
+from __future__ import annotations
+
+from . import format as F
+
+CIRC_LETTER = ["ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ"]
+
+
+def cletter(i: int) -> str:
+    return CIRC_LETTER[i - 1]
+
+
+def uletter(i: int, word: str) -> str:
+    """ⓐ~ⓗ 문자 밑줄(어법·어휘 짝짓기용)."""
+    return f'<span class="cnum">{cletter(i)}</span> <u>{F.esc(word)}</u>'
+
+
+def _choices_ol(choices: list[str], cls: str = "") -> str:
+    lis = "".join(
+        f'<li><span class="cnum">{F.circ(i)}</span> {F.esc(c)}</li>'
+        for i, c in enumerate(choices, 1)
+    )
+    return f'<ol class="choices {cls}">{lis}</ol>'
+
+
+def _answer(answer_no: int, reason: str, wrong: dict[int, str] | None = None) -> str:
+    parts = [f'<p><span class="answer-key">{F.circ(answer_no)}</span></p>',
+             f'<p class="reason">{F.esc(reason)}</p>']
+    for i in sorted(wrong or {}):
+        parts.append(f'<p class="wrong">{F.circ(i)} {F.esc(wrong[i])}</p>')
+    return "".join(parts)
+
+
+# A · 어법·어휘 짝짓기 -------------------------------------------------------
+def A_q(marked_passage_html: str, choices: list[str]) -> str:
+    return f'<div class="passage">{marked_passage_html}</div>' + _choices_ol(choices)
+
+
+def A_a(answer_no: int, reason: str) -> str:
+    return _answer(answer_no, reason)
+
+
+# B · 함의추론(밑줄 1개 + 한글 선지) ----------------------------------------
+def B_q(passage: str, phrase: str, choices: list[str]) -> str:
+    esc_p = F.esc(passage)
+    marked = esc_p.replace(F.esc(phrase), f"<u>{F.esc(phrase)}</u>", 1)
+    return f'<div class="passage">{marked}</div>' + _choices_ol(choices, "content")
+
+
+def B_a(answer_no: int, reason: str, wrong: dict[int, str]) -> str:
+    return _answer(answer_no, reason, wrong)
+
+
+# E · 요약문 빈칸(객관식) ---------------------------------------------------
+def blank_ab(letter: str) -> str:
+    return f'({letter})<span class="blank">_____</span>'
+
+
+def E_q(summary_html: str, choices: list[str]) -> str:
+    lis = "".join(
+        f'<li><span class="cnum">{F.circ(i)}</span> {c}</li>'   # choices 는 (A)-(B) HTML
+        for i, c in enumerate(choices, 1)
+    )
+    return (f'<div class="boki"><span class="boki-title">&lt;요약문&gt;</span> {summary_html}</div>'
+            f'<ol class="choices">{lis}</ol>')
+
+
+def E_pair(a_word: str, b_word: str) -> str:
+    return f'(A) <b class="cue">{F.esc(a_word)}</b> &nbsp;····&nbsp; (B) <b class="cue">{F.esc(b_word)}</b>'
+
+
+def E_a(answer_no: int, reason: str) -> str:
+    return _answer(answer_no, reason)
+
+
+# F · 빈칸추론 --------------------------------------------------------------
+def F_q(passage_html_with_blank: str, choices: list[str]) -> str:
+    return f'<div class="passage">{passage_html_with_blank}</div>' + _choices_ol(choices)
+
+
+def blank_line() -> str:
+    return '<span class="blank">__________</span>'
+
+
+def F_a(answer_no: int, reason: str, wrong: dict[int, str]) -> str:
+    return _answer(answer_no, reason, wrong)
+
+
+# D · 어순 배열(서술형) -----------------------------------------------------
+def D_q(tokens: list[str], cues: list[str]) -> str:
+    cue_set = {c.strip().lower() for c in cues}
+    toks = []
+    for tk in tokens:
+        if tk.strip().lower() in cue_set:
+            toks.append(f'<span class="cue">{F.esc(tk)}</span>')
+        else:
+            toks.append(F.esc(tk))
+    return f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
+
+
+def D_a(sentence: str, reason: str = "") -> str:
+    out = [f'<p><span class="answer-key">정답</span> {F.esc(sentence)}</p>']
+    if reason:
+        out.append(f'<p class="reason">{F.esc(reason)}</p>')
+    return "".join(out)
+
+
+# G · 내용일치 개수 ---------------------------------------------------------
+_ABC = ["(a)", "(b)", "(c)", "(d)", "(e)", "(f)"]
+
+
+def G_q(passage: str, statements: list[str]) -> str:
+    lis = "".join(
+        f'<li>{_ABC[i]} {F.esc(s)}</li>' for i, s in enumerate(statements)
+    )
+    counts = ["1개", "2개", "3개", "4개", "5개"]
+    ch = "".join(
+        f'<li><span class="cnum">{F.circ(i)}</span> {c}</li>'
+        for i, c in enumerate(counts, 1)
+    )
+    return (f'<div class="passage">{F.esc(passage)}</div>'
+            f'<ul class="choices">{lis}</ul>'
+            f'<ol class="choices inline">{ch}</ol>')
+
+
+def G_a(match_count: int, reason: str, per_stmt: dict[int, str]) -> str:
+    parts = [f'<p><span class="answer-key">{F.circ(match_count)}</span> ({match_count}개 일치)</p>',
+             f'<p class="reason">{F.esc(reason)}</p>']
+    for i in sorted(per_stmt):
+        parts.append(f'<p class="wrong">{_ABC[i - 1]} {F.esc(per_stmt[i])}</p>')
+    return "".join(parts)

@@ -17,6 +17,8 @@ from flask import Flask, abort, render_template, request, send_file
 
 from exam import renderer, validator
 from exam.demo_data import demo_passages
+from exam.demo2 import demo_passages_2
+from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
 from src.config import load_config
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -74,37 +76,30 @@ def generate():
     vocab_method = request.form.get("vocab_method", "synonym")
     content_difficulty = request.form.get("content_difficulty", "hard")
 
-    fid = uuid.uuid4().hex[:12]
-    out = _pdf_path(fid)
+    # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
+    sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
+    uploads = [f for f in request.files.getlist("files") if f and f.filename]
+    doc_name = safe_name(request.form.get("doc_name", ""))
 
     def fail(msg: str, code: int = 400):
         return render_template("index.html", has_api_key=_api_available(cfg), error=msg), code
 
-    uploads = [f for f in request.files.getlist("files") if f and f.filename]
-    doc_name = safe_name(request.form.get("doc_name", ""))
-
-    try:
-        if demo:
-            passages = demo_passages()
-            validator.validate_passages(passages)
-            validator.validate_numbering(passages, start=1)
-            renderer.render_pdf(passages, out, header_note=header)
-            n = len(passages)
-        else:
-            pasted = split_passages(request.form.get("passages", ""))
-            if not uploads and not pasted:
-                return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '데모'를 선택하세요.")
-            if not _api_available(cfg):
-                return fail("실제 생성에는 API 키가 필요합니다. (미리보기 전용 모드이거나 키가 "
-                            "없습니다.) 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
-            from exam import ingest
-            from exam.llm import ClaudeClient
-            from exam.pipeline import build_exam
-            client = ClaudeClient(cfg.api_key, cfg.model)
-
+    # 실제 모드: 지문을 한 번만 확보(두 세트가 같은 지문 공유)
+    bodies = None
+    client = None
+    if not demo:
+        pasted = split_passages(request.form.get("passages", ""))
+        if not uploads and not pasted:
+            return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '무료 미리보기'를 선택하세요.")
+        if not _api_available(cfg):
+            return fail("실제 생성에는 API 키가 필요합니다. (미리보기 전용 모드이거나 키가 "
+                        "없습니다.) 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
+        from exam import ingest
+        from exam.llm import ClaudeClient
+        client = ClaudeClient(cfg.api_key, cfg.model)
+        try:
             if uploads:
-                # 업로드 파일 저장(PDF/사진) → 지문 추출(사진은 비전으로 읽음)
-                updir = OUT / "uploads" / fid
+                updir = OUT / "uploads" / uuid.uuid4().hex[:12]
                 updir.mkdir(parents=True, exist_ok=True)
                 paths = []
                 for i, f in enumerate(uploads, 1):
@@ -118,18 +113,12 @@ def generate():
                 bodies = [b for _, b in ingest.load_bodies(paths, client=client)]
             else:
                 bodies = pasted
+        except Exception as e:  # noqa: BLE001
+            return fail(f"지문 처리 실패: {e}", 500)
+        if not bodies:
+            return fail("지문을 추출하지 못했습니다. 파일 내용을 확인해 주세요.")
 
-            if not bodies:
-                return fail("지문을 추출하지 못했습니다. 파일 내용을 확인해 주세요.")
-            build_exam(client, bodies, out, header_note=header,
-                       max_retries=cfg.processing.max_retries,
-                       vocab_method=vocab_method,
-                       content_difficulty=content_difficulty)
-            n = len(bodies)
-    except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
-        return fail(f"생성 실패: {e}", 500)
-
-    # 다운로드 기본 파일명: (지문명)_변형문제
+    # 기본 파일명
     if not doc_name:
         if demo:
             doc_name = "데모지문"
@@ -137,8 +126,49 @@ def generate():
             doc_name = safe_name(Path(uploads[0].filename).stem)
         else:
             doc_name = "영어지문"
-    return render_template("result.html", fid=fid, count=n,
-                           demo=demo, header=header, doc_name=doc_name or "영어지문")
+    doc_name = doc_name or "영어지문"
+
+    outputs = []
+    try:
+        for sid in sets:
+            f2 = uuid.uuid4().hex[:12]
+            out = _pdf_path(f2)
+            if sid == "1":
+                if demo:
+                    ps = demo_passages()
+                    validator.validate_passages(ps)
+                    validator.validate_numbering(ps, start=1)
+                    renderer.render_pdf(ps, out, header_note=header)
+                    n = len(ps)
+                else:
+                    from exam.pipeline import build_exam
+                    build_exam(client, bodies, out, header_note=header,
+                               max_retries=cfg.processing.max_retries,
+                               vocab_method=vocab_method,
+                               content_difficulty=content_difficulty)
+                    n = len(bodies)
+                outputs.append({"fid": f2, "label": "변형문제 1회", "count": n,
+                                "name": f"{doc_name}_변형문제_1회"})
+            else:
+                if demo:
+                    ps = demo_passages_2()
+                    validator.validate_passages(ps, TYPE_ORDER2)
+                    validator.validate_numbering(ps, 1, TYPE_ORDER2)
+                    renderer.render_pdf(ps, out, header_note=header,
+                                        type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2,
+                                        labels=TYPE_LABELS2)
+                    n = len(ps)
+                else:
+                    from exam.gen2 import build_exam2
+                    build_exam2(client, bodies, out, header_note=header,
+                                max_retries=cfg.processing.max_retries)
+                    n = len(bodies)
+                outputs.append({"fid": f2, "label": "변형문제 2회", "count": n,
+                                "name": f"{doc_name}_변형문제_2회"})
+    except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
+        return fail(f"생성 실패: {e}", 500)
+
+    return render_template("result.html", outputs=outputs, demo=demo, header=header)
 
 
 @app.get("/pdf/<fid>")
@@ -154,6 +184,6 @@ def download(fid: str):
     p = _pdf_path(fid)
     if not p.exists():
         abort(404)
-    base = safe_name(request.args.get("name", "")) or "영어지문"
+    base = safe_name(request.args.get("name", "")) or "영어지문_변형문제"
     return send_file(p, mimetype="application/pdf", as_attachment=True,
-                     download_name=f"{base}_변형문제.pdf")
+                     download_name=f"{base}.pdf")
