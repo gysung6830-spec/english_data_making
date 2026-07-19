@@ -14,7 +14,20 @@ CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
 | 한줄영어 | (지문명)_한줄영어.pdf | 영어 문장만 (해석 없음) |
 | 좌지문 우해석 | (지문명)_좌지문우해석.pdf | 좌 영어 / 우 한글 2단 표 |
 
-## 웹앱 (권장)
+## 빠른 설치 (권장)
+한 번에 라이브러리·Chromium·나눔명조 폰트를 설치합니다.
+
+    cd passage3
+    bash setup.sh          # macOS / Linux
+    # Windows: setup.bat 더블클릭
+
+그다음 웹앱 실행:
+
+    bash run.sh            # macOS / Linux  (브라우저 자동 열림)
+    # Windows: start.bat 더블클릭
+    # 브라우저에서 http://localhost:5000
+
+## 웹앱 (수동 설치)
     pip install flask pdfplumber playwright anthropic pytesseract pdf2image pillow
     playwright install chromium
     # 한글 폰트(나눔명조) 설치 — 리눅스:  sudo apt install fonts-nanum
