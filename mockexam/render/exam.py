@@ -46,6 +46,12 @@ body {{ font-family: {_SERIF}; font-size: 10.3pt; line-height: 1.6; color:#000; 
 .code-pill {{ border:1px solid #000; border-radius:999px; padding:2px 12px; font-size:9.5pt; }}
 .exam-time {{ text-align:center; font-size:9pt; color:#333; margin-top:5px; }}
 
+/* 유의사항(머리글 박스 아래) */
+.guidelines {{ break-inside:avoid; font-size:9pt; line-height:1.5; margin-bottom:10px;
+               padding-bottom:6px; border-bottom:0.6px solid #999; }}
+.g-item {{ padding-left:13px; text-indent:-13px; margin:2px 0; }}
+.g-item .cont {{ display:block; padding-left:13px; text-indent:0; }}
+
 /* 2단 */
 .columns {{ column-count:2; column-gap:24px; column-rule:0.6px solid #cfcfcf; }}
 .section-div {{ column-span:all; font-weight:700; margin:6px 0 8px; }}
@@ -171,8 +177,36 @@ def _header_block(exam: MockExam, info: dict) -> str:
         '</div>')
 
 
+# 유의사항 기본 문구(원본 시험지 그대로). config header_info.guidelines 로 교체 가능.
+DEFAULT_GUIDELINES = [
+    "선다형은 반드시 컴퓨터용 사인펜을 사용하여 해당 답란에 정확히 마킹(●)하시오."
+    "\n서술형은 서술형 답안지에 흑색 또는 청색 볼펜을 사용하여 정확히 서술하시오.",
+    "각 문항마다 배점이 다르니 문항 끝에 표시된 배점을 참고하기 바랍니다.",
+]
+
+
+def _guidelines_block(exam: MockExam, info: dict) -> str:
+    """머리글 박스 아래 유의사항. 마지막 줄은 blueprint 로 문항수·쪽수 자동 산정."""
+    if info.get("guidelines") is False:      # 명시적으로 끄기
+        return ""
+    lines = info.get("guidelines") or DEFAULT_GUIDELINES
+    m = exam.blueprint.meta
+    n_c = len(exam.choice_questions)
+    n_e = len(exam.essay_questions)
+    summary = (f"지필평가: 총( {n_c + n_e} )문항"
+               f"(선다형( {n_c} )문항, 서술형( {n_e} )문항), 총( {m.pages} )쪽")
+    items = []
+    for ln in lines:
+        segs = str(ln).split("\n")
+        head = html.escape(segs[0])
+        cont = "".join(f'<span class="cont">{html.escape(s)}</span>' for s in segs[1:])
+        items.append(f'<div class="g-item">○ {head}{cont}</div>')
+    items.append(f'<div class="g-item">○ {html.escape(summary)}</div>')
+    return f'<div class="guidelines">{"".join(items)}</div>'
+
+
 def _footer_block(exam: MockExam, footer: str) -> str:
-    note = footer or "이 시험 문제는 무단 복제하면 관련법에 의해 처벌 받습니다."
+    note = footer or "이 시험문제는 은아T영어연구소의 저작물입니다."
     m = exam.blueprint.meta
     page_line = (f"{m.grade}학년 {m.subject or '공통영어1'} "
                  f"( 1 ) / ( {m.pages} ) 페이지 중")
@@ -183,7 +217,8 @@ def _footer_block(exam: MockExam, footer: str) -> str:
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
 def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    body = [_header_block(exam, info), '<div class="columns">']
+    body = [_header_block(exam, info), '<div class="columns">',
+            _guidelines_block(exam, info)]
     for q in exam.choice_questions:
         body.append(_q_html(q))
     body.append('<div class="section-div">&lt; 서 술 형 &gt;</div>')
