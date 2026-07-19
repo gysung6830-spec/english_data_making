@@ -110,6 +110,12 @@ INDEX_HTML = """
 
       <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
+      <label>③ 저장할 파일 이름
+        <span class=hint>(선택 · 비우면 원본 파일명으로 저장 · 확장자 .pdf는 자동)</span>
+      </label>
+      <input type=text name=outname placeholder="예: 1학년_동형모의고사">
+      <div class=hint>파일을 여러 개 올리면 이름 뒤에 각 원본 이름이 붙습니다.</div>
+
       <div class=row>
         <button class=btn id=go type=submit>분석 시작</button>
         <span class=hint>파일이 많으면 몇 분 걸릴 수 있어요. 창을 닫지 마세요.</span>
@@ -149,6 +155,7 @@ RESULT_HTML = """
         <td>{% if r.ok %}<span class=ok>완료</span>{% else %}<span class=fail>실패</span>{% endif %}</td>
         <td>
           {% if r.ok %}
+            <div class=hint style="margin-bottom:4px">💾 {{ r.out }}</div>
             <a class=dl href="{{ url_for('view', fname=r.out) }}" target=_blank>미리보기</a>
             <a class=dl href="{{ url_for('download', fname=r.out) }}">다운로드</a>
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
@@ -230,6 +237,13 @@ def analyze_route():
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
+    # 사용자가 지정한 저장 파일 이름(선택). 확장자·위험문자 정리.
+    raw_out = (request.form.get("outname") or "").strip()
+    if raw_out.lower().endswith(".pdf"):
+        raw_out = raw_out[:-4]
+    custom_name = _safe_name(raw_out) if raw_out else ""
+    multi = len(files) > 1
+
     results = []
     for f in files:
         ext = Path(f.filename).suffix.lower()
@@ -245,7 +259,11 @@ def analyze_route():
             else:
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
-            out = OUTPUT_DIR / f"{stem}_analysis.pdf"
+            if custom_name:
+                base = f"{custom_name}_{stem}" if multi else custom_name
+            else:
+                base = f"{stem}_analysis"
+            out = _unique_output(f"{base}.pdf")
             render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
                               min_vocab=cfg.vocab.min)
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
@@ -263,6 +281,18 @@ def analyze_route():
 
 def _safe_name(stem: str) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+
+
+def _unique_output(fname: str) -> Path:
+    """OUTPUT_DIR 아래 겹치지 않는 파일 경로. 이미 있으면 _2, _3 … 을 붙인다."""
+    p = OUTPUT_DIR / fname
+    if not p.exists():
+        return p
+    stem, suf = p.stem, p.suffix
+    i = 2
+    while (OUTPUT_DIR / f"{stem}_{i}{suf}").exists():
+        i += 1
+    return OUTPUT_DIR / f"{stem}_{i}{suf}"
 
 
 def _safe_output(fname: str) -> Path:
