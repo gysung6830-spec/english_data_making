@@ -53,13 +53,12 @@ def _passage_head(idx: int, p: Passage) -> str:
     label = escape(p.label) if p.label else ""
     title = escape(p.title) if p.title else ""
     if label or title:
+        # 지문명(라벨)과 지문주제(제목)를 각각 한 줄씩(줄바꿈)으로.
         inner = ""
-        if label and title:
-            inner = f'<span class="p-label">{label}:</span> <span class="p-title">{title}</span>'
-        elif label:
-            inner = f'<span class="p-label">{label}</span>'
-        else:
-            inner = f'<span class="p-title">{title}</span>'
+        if label:
+            inner += f'<span class="p-label">{label}</span>'
+        if title:
+            inner += f'<span class="p-title">{title}</span>'
         parts.append(f'<h2 class="p-head">{inner}</h2>')
     return "\n".join(parts)
 

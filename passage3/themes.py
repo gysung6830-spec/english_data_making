@@ -78,13 +78,11 @@ body {{
   border-left: 4px solid #1a1a1a;
   padding-left: 13px;
   margin: 0 0 20px 0;
-  font-weight: 700;
-  font-size: 15.5px;
-  line-height: 1.5;
+  line-height: 1.45;
   color: #1a1a1a;
 }}
-.p-head .p-label {{ font-weight: 800; }}
-.p-head .p-title {{ font-weight: 700; }}
+.p-head .p-label {{ display: block; font-weight: 700; font-size: 13px; color: #6e6e73; margin-bottom: 3px; }}
+.p-head .p-title {{ display: block; font-weight: 800; font-size: 15.5px; color: #1a1a1a; }}
 /* 한줄해석 / 한줄영어 : 문장 블록 */
 .sent {{
   margin-bottom: 14px;
@@ -148,9 +146,10 @@ body {{
 }}
 .p-head {{
   border-left:4px solid #2a5db0; padding-left:13px; margin:0 0 20px 0;
-  font-weight:700; font-size:15.5px; line-height:1.5; color:#20242c;
+  line-height:1.45; color:#20242c;
 }}
-.p-head .p-label {{ font-weight:800; color:#2a5db0; }}
+.p-head .p-label {{ display:block; font-weight:700; font-size:13px; color:#2a5db0; margin-bottom:3px; }}
+.p-head .p-title {{ display:block; font-weight:800; font-size:15.5px; color:#20242c; }}
 .sent {{ margin-bottom:14px; padding-bottom:13px; border-bottom:1px dotted #cfd6e0; }}
 .sent:last-child {{ border-bottom:none; padding-bottom:0; }}
 .en {{ font-size:13.5px; line-height:1.62; }}
@@ -180,9 +179,10 @@ body {{
 }}
 .p-head {{
   border-left:5px solid #ff8c42; padding-left:13px; margin:0 0 20px 0;
-  font-weight:800; font-size:16px; line-height:1.5; color:#2b2b2b;
+  line-height:1.45; color:#2b2b2b;
 }}
-.p-head .p-label {{ color:#ff8c42; }}
+.p-head .p-label {{ display:block; font-weight:700; font-size:13.5px; color:#ff8c42; margin-bottom:3px; }}
+.p-head .p-title {{ display:block; font-weight:800; font-size:16px; color:#2b2b2b; }}
 .sent {{ margin-bottom:16px; padding-bottom:14px; border-bottom:2px dashed #ffe0c2; }}
 .sent:last-child {{ border-bottom:none; padding-bottom:0; }}
 .en {{ font-size:14.5px; line-height:1.68; }}
