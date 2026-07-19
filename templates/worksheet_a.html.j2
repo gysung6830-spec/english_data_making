@@ -1,0 +1,146 @@
+{#- 레이아웃 A : 분석 학습지형 (passage20_analysis.html 기준). 명세서 §3 -#}
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>{{ analyses[0].title_en if analyses else '구문 분석 학습지' }}</title>
+<style>
+  :root{
+    --navy:#2f3f97; --red:#d23b3b; --blue:#3f6bd6; --gray:#7b8194;
+    --yellow-hl:#fbf3b8; --green-hl:#eef0b0; --ink:#1f2430; --line:#d7dbe4;
+  }
+  @page{ size:A4 portrait; margin:14mm 12mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Malgun Gothic','Apple SD Gothic Neo','Nanum Gothic',system-ui,sans-serif;
+    color:var(--ink); font-size:13px; line-height:1.5; font-weight:400;
+  }
+  .sheet{ page-break-after:always; }
+  .sheet:last-child{ page-break-after:auto; }
+
+  /* ---- 벤 리본 + 제목 ---- */
+  .ribbon{ display:flex; align-items:stretch; gap:14px; margin-bottom:14px; }
+  .ribbon .box{
+    position:relative; background:var(--navy); color:#fff; font-weight:800;
+    min-width:64px; padding:12px 14px 16px; text-align:center; border-radius:3px;
+    font-size:22px; line-height:1;
+  }
+  .ribbon .box .cap{ display:block; font-size:10px; font-weight:600; opacity:.85; margin-bottom:4px; }
+  .ribbon .box::after{  /* 하단 톱니 */
+    content:""; position:absolute; left:0; right:0; bottom:-7px; height:8px;
+    background:
+      linear-gradient(135deg, var(--navy) 50%, transparent 50%) 0 0/8px 8px repeat-x,
+      linear-gradient(-135deg, var(--navy) 50%, transparent 50%) 4px 0/8px 8px repeat-x;
+  }
+  .titles{ display:flex; flex-direction:column; justify-content:center; }
+  .titles .meta{ font-size:11px; color:var(--gray); font-weight:600; margin-bottom:2px; }
+  .titles h1{ font-size:19px; font-weight:800; margin:0; line-height:1.25; }
+  .titles .ko{ font-size:13px; color:#40465a; margin-top:2px; }
+
+  /* ---- 문장 행 ---- */
+  .row{ display:grid; grid-template-columns:1fr 272px; gap:16px; margin:10px 0 4px;
+        padding-top:8px; border-top:1px solid var(--line); page-break-inside:avoid; }
+  .analysis{ display:grid; grid-template-columns:30px 1fr; gap:8px; }
+  .num{ background:var(--navy); color:#fff; font-weight:800; font-size:13px; text-align:center;
+        border-radius:3px; height:24px; line-height:24px; }
+  .num.tg{ height:auto; padding:3px 0 5px; line-height:1.1; }
+  .num .badge{ display:block; font-size:9px; font-weight:700; margin-top:2px;
+               background:#fff; color:var(--navy); border-radius:2px; padding:1px 2px; }
+
+  /* ---- 영문 라인 + 토큰 주석 ---- */
+  .en{ }
+  .en .line{ margin-bottom:30px; }
+  .en .line:last-child{ margin-bottom:12px; }
+  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 7px 0 0;
+        position:relative; }
+  .tok .w{ font-size:14.5px; white-space:nowrap; }
+  .tok .w.hl-y{ background:var(--yellow-hl); }
+  .tok .w.hl-g{ background:var(--green-hl); }
+  .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
+  .tok .w.red{ color:var(--red); }
+  .tok .w.blue{ color:var(--blue); }
+  .above{ display:block; font-size:9px; color:var(--gray); font-style:italic; line-height:1.1;
+          margin-bottom:1px; }
+  .ann{ display:block; font-size:10px; line-height:1.15; margin-top:1px; white-space:nowrap; }
+  .ann.lbl{ color:var(--blue); font-weight:800; font-size:11px; }
+  .ann.red{ color:var(--red); font-weight:600; }
+  .ann.blue{ color:var(--blue); font-weight:600; }
+  .ann.gray{ color:var(--gray); }
+  .ann.x{ color:var(--gray); font-weight:600; }
+
+  .kotr{ margin-top:6px; padding-left:2px; color:#3a4152; font-size:12.5px; }
+  .kotr::before{ content:"→ "; color:var(--gray); }
+
+  /* ---- 포인트 박스 ---- */
+  .points{ display:flex; flex-direction:column; gap:8px; }
+  .pbox{ border:1.5px solid var(--blue); border-radius:6px; padding:7px 9px; font-size:11.5px;
+         line-height:1.45; }
+  .pbox.g{ border-color:var(--red); }
+  .pbox .cap{ font-weight:800; font-size:11px; margin-bottom:4px; color:var(--blue); }
+  .pbox.g .cap{ color:var(--red); }
+  .pbox b, .pbox strong{ font-weight:800; }
+  .pbox ul{ margin:2px 0 2px 0; padding-left:16px; }
+  .pbox li{ margin:1px 0; }
+  .pbox .mtab, .pbox table.mtab{ }
+  .pbox table{ border-collapse:collapse; width:100%; margin-top:3px; font-size:10.5px; }
+  .pbox td, .pbox th{ border:1px solid var(--line); padding:2px 4px; text-align:left; }
+  .pbox th{ background:#f2f4fb; font-weight:700; }
+  .footer{ margin-top:10px; text-align:right; font-size:10px; color:var(--gray); }
+</style>
+</head>
+<body>
+{% for a in analyses %}
+  <div class="sheet">
+    <div class="ribbon">
+      <div class="box">
+        {% if a.lecture_label %}<span class="cap">{{ a.date }}</span>{{ a.lecture_label }}{% else %}★{% endif %}
+      </div>
+      <div class="titles">
+        {% if a.date and not a.lecture_label %}<div class="meta">{{ a.date }}</div>{% endif %}
+        <h1>{{ a.title_en }}</h1>
+        {% if a.title_ko %}<div class="ko">{{ a.title_ko }}</div>{% endif %}
+      </div>
+    </div>
+
+    {% for s in a.sentences %}
+    <div class="row">
+      <div class="analysis">
+        <div class="num{% if s.badge %} tg{% endif %}">
+          {{ s.index }}{% if s.badge %}<span class="badge">{{ s.badge }}</span>{% endif %}
+        </div>
+        <div>
+          <div class="en">
+            {% for line in s.lines %}
+            <div class="line">
+              {%- for t in line -%}
+                <span class="tok">
+                  {%- if t.above %}<span class="above">{{ t.above }}</span>{% endif -%}
+                  <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>
+                  {%- if t.role %}<span class="ann lbl">{{ t.role }}</span>{% endif -%}
+                  {%- if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif -%}
+                  {%- if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif -%}
+                </span>
+              {%- endfor -%}
+            </div>
+            {% endfor %}
+          </div>
+          {% if s.translation %}<div class="kotr">{{ s.translation }}</div>{% endif %}
+        </div>
+      </div>
+      <div class="points">
+        {% for p in s.points %}
+        <div class="pbox{% if p.is_grammar %} g{% endif %}">
+          <div class="cap">{{ p.caption }}</div>
+          <div class="body">{{ p.body_html | safe }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    {% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
+  </div>
+{% endfor %}
+</body>
+</html>

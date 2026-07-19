@@ -23,6 +23,8 @@ from flask import (Flask, abort, redirect, render_template_string, request,
 from src import extract, pipeline, render
 from src.client import ClaudeClient
 from src.config import ROOT, OutputsCfg, load_config
+from src.worksheet import pipeline as ws_pipeline
+from src.worksheet.pipeline import Header as WsHeader
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB 업로드 제한
@@ -89,6 +91,7 @@ INDEX_HTML = """
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
     <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
+    <div style="margin:-6px 0 14px"><a class=dl href="{{ url_for('worksheet') }}">✏️ 구문 분석 학습지(직독직해 + 태깅) 만들러 가기 →</a></div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -319,6 +322,168 @@ def download(fname):
 def view(fname):
     _safe_output(fname)
     return send_from_directory(OUTPUT_DIR, fname, as_attachment=False)
+
+
+# ---------------------------------------------------------------------------
+# 구문 분석 학습지 (레이아웃 A/B)
+# ---------------------------------------------------------------------------
+WORKSHEET_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>구문 분석 학습지 만들기</title><style>""" + BASE_CSS + """
+  fieldset{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:14px;}
+  legend{font-weight:800;font-size:13px;padding:0 6px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .radio{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+  .radio label{font-weight:600;display:flex;align-items:center;gap:6px;margin:0;}
+  select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;}
+</style></head>
+<body><div class=wrap>
+  <div class=card>
+    <h1>✏️ 구문 분석 학습지</h1>
+    <div class=sub>지문을 문장 단위로 쪼개 <b>직독직해 + 구문 태깅 + 포인트 박스</b> 학습지를 만듭니다.</div>
+    <div style="margin:-6px 0 12px"><a class=dl href="{{ url_for('index') }}">← 6개 섹션 분석 도구로 돌아가기</a></div>
+    <form id=f method=post action="{{ url_for('worksheet_build') }}" enctype=multipart/form-data>
+
+      <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
+      <div class=drop id=drop>
+        <div style="font-size:26px">⬆️</div>
+        <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
+        <p>JPG · PNG · PDF</p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+      </div>
+      <div class=files id=filelist></div>
+
+      <fieldset><legend>② 레이아웃</legend>
+        <div class=radio>
+          <label><input type=radio name=layout value=A checked> A. 분석 학습지형 <span class=hint>(리본+분석+포인트)</span></label>
+          <label><input type=radio name=layout value=B> B. 대조표형 <span class=hint>(좌 영어 / 우 한글)</span></label>
+        </div>
+        <label class=chk style="margin-top:10px"><input type=checkbox name=tagged value=1> B에도 구문 태깅 얹기</label>
+      </fieldset>
+
+      <fieldset><legend>③ 태깅 강도</legend>
+        <div class=radio>
+          <label><input type=radio name=strength value=full checked> 전체</label>
+          <label><input type=radio name=strength value=key> 핵심만</label>
+          <label><input type=radio name=strength value=none> 없음(원문+해석)</label>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>④ 머리글 (선택)</legend>
+        <div class=grid2>
+          <div><label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강"></div>
+          <div><label>날짜</label><input type=text name=date placeholder="예: 2025년 09월"></div>
+        </div>
+        <label>영문 제목</label><input type=text name=title_en placeholder="예: The Paradox of Choice">
+        <label>한글 부제</label><input type=text name=title_ko placeholder="예: 선택의 역설">
+        <label>저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
+        <input type=text name=basename placeholder="예: 2027수능특강_20강">
+      </fieldset>
+
+      <label>⑤ Anthropic API 키
+        <span class=hint>(미리보기만 할 거면 비워두고 아래 '샘플 미리보기' 체크)</span></label>
+      <input type=password name=api_key placeholder="sk-ant-..."
+             value="{{ '설정됨(그대로 사용)' if has_key else '' }}" {{ 'readonly' if has_key else '' }}>
+
+      <label class=chk style="margin-top:12px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
+
+      <div class=row>
+        <button class=btn id=go type=submit>학습지 만들기</button>
+        <span class=hint>여러 지문은 지문마다 새 페이지로 나옵니다.</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">만드는 중입니다… 잠시만요</p></div>
+<script>
+ const drop=document.getElementById('drop'),file=document.getElementById('file'),
+       list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
+ drop.onclick=()=>file.click();
+ ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hl');}));
+ ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hl');}));
+ drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
+ file.onchange=show;
+ function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
+ f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+</script>
+</body></html>
+"""
+
+
+@app.route("/worksheet")
+def worksheet():
+    return render_template_string(WORKSHEET_HTML, has_key=cfg.has_api_key)
+
+
+@app.route("/worksheet/build", methods=["POST"], endpoint="worksheet_build")
+def worksheet_build_route():
+    files = [f for f in request.files.getlist("files") if f and f.filename]
+    mock = bool(request.form.get("mock"))
+    form_key = (request.form.get("api_key") or "").strip()
+    key = (None if "설정됨" in form_key else (form_key or None)) or cfg.api_key
+
+    layout = "B" if (request.form.get("layout") == "B") else "A"
+    tagged = bool(request.form.get("tagged"))
+    strength = request.form.get("strength") or "full"
+    if strength not in ("full", "key", "none"):
+        strength = "full"
+
+    base_header = WsHeader(
+        title_en=(request.form.get("title_en") or "").strip(),
+        title_ko=(request.form.get("title_ko") or "").strip(),
+        lecture_label=(request.form.get("lecture_label") or "").strip(),
+        date=(request.form.get("date") or "").strip(),
+        strength=strength,
+    )
+    raw_name = (request.form.get("basename") or "").strip()
+    custom_base = _safe_name(raw_name) if raw_name else ""
+
+    if not files:
+        return render_template_string(WORKSHEET_HTML, has_key=cfg.has_api_key)
+    if not mock and not key:
+        html = WORKSHEET_HTML.replace("<form id=f",
+            "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요.</div><form id=f")
+        return render_template_string(html, has_key=cfg.has_api_key)
+
+    client = None if mock else ClaudeClient(key, cfg.model)
+    footer = cfg.design.footer_note or "(C)2026.김은아영어연구소.All rights reserved"
+
+    results = []
+    for idx, f in enumerate(files, start=1):
+        ext = Path(f.filename).suffix.lower()
+        if ext not in ALLOWED:
+            results.append({"name": f.filename, "ok": False,
+                            "error": "지원하지 않는 형식(JPG·PNG·PDF만 가능)"})
+            continue
+        tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
+        f.save(str(tmp))
+        try:
+            if mock:
+                analyses = ws_pipeline.mock_analyses_for_file(tmp, base_header)
+            else:
+                analyses = ws_pipeline.build_analyses_for_file(
+                    client, cfg, tmp, base_header,
+                    max_retries=cfg.processing.max_retries)
+            if custom_base:
+                stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
+            else:
+                stem = _safe_name(Path(f.filename).stem)
+            out = OUTPUT_DIR / f"{stem}_구문분석학습지.pdf"
+            ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
+                                         footer_note=footer)
+            note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
+            results.append({"name": f.filename + note, "ok": True,
+                            "files": [{"label": f"✏️ 학습지({layout}형)", "out": out.name}]})
+        except Exception as e:  # 개별 실패가 전체를 멈추지 않음
+            traceback.print_exc()
+            results.append({"name": f.filename, "ok": False, "error": str(e)})
+        finally:
+            tmp.unlink(missing_ok=True)
+
+    n_ok = sum(1 for r in results if r["ok"])
+    return render_template_string(RESULT_HTML, results=results,
+                                  n_ok=n_ok, n_fail=len(results) - n_ok)
 
 
 if __name__ == "__main__":

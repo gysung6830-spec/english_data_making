@@ -1,0 +1,79 @@
+{#- 레이아웃 B : 대조표형 (lecture14_gateway.html 기준). 명세서 §7 -#}
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>{{ analyses[0].title_en if analyses else '직독직해 대조표' }}</title>
+<style>
+  :root{ --navy:#2f3f97; --red:#d23b3b; --blue:#3f6bd6; --gray:#7b8194;
+         --yellow-hl:#fbf3b8; --green-hl:#eef0b0; --ink:#1a1d24; }
+  @page{ size:A4 portrait; margin:14mm 12mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Malgun Gothic','Apple SD Gothic Neo','Nanum Gothic',system-ui,sans-serif;
+    color:var(--ink); font-size:13px; font-weight:400;
+  }
+  .sheet{ page-break-after:always; }
+  .sheet:last-child{ page-break-after:auto; }
+
+  .hbar{ background:#5b616e; color:#fff; padding:9px 12px; border:1px solid #3d4250;
+         display:flex; align-items:baseline; gap:12px; }
+  .hbar .lec{ font-weight:800; font-size:15px; white-space:nowrap; }
+  .hbar .subj{ font-size:12.5px; font-weight:400; opacity:.96; }
+  .hbar .date{ margin-left:auto; font-size:11px; opacity:.85; white-space:nowrap; }
+
+  table.gw{ width:100%; border-collapse:collapse; }
+  table.gw td{ border:1px solid #1a1d24; vertical-align:top; padding:10px 12px; }
+  td.no{ width:26px; text-align:center; border-right:1px solid #1a1d24;
+         font-size:15px; color:var(--navy); font-weight:700; padding:10px 4px; }
+  td.en{ line-height:2.15; font-size:14px; }
+  td.ko{ width:340px; line-height:1.75; font-size:12.5px; color:#2a2f3a; }
+
+  /* 옵션: A 태깅을 얹을 때 사용하는 최소 스타일 */
+  .en .tok{ display:inline; margin-right:5px; }
+  .en .tok .w.hl-y{ background:var(--yellow-hl); }
+  .en .tok .w.hl-g{ background:var(--green-hl); }
+  .en .tok .w.underline{ text-decoration:underline; }
+  .en .tok .w.red{ color:var(--red); }
+  .en .tok .w.blue{ color:var(--blue); }
+  .en .tok .ann{ font-size:10px; color:var(--blue); font-weight:700; margin:0 2px; }
+  .en .tok .ann.red{ color:var(--red); }
+  .en .tok .ann.gray{ color:var(--gray); font-weight:400; }
+  .en .tok .ann.x{ color:var(--gray); font-weight:600; }
+
+  .footer{ margin-top:8px; text-align:right; font-size:10px; color:var(--gray); }
+</style>
+</head>
+<body>
+{% for a in analyses %}
+  <div class="sheet">
+    <div class="hbar">
+      {% if a.lecture_label %}<span class="lec">{{ a.lecture_label }}</span>{% endif %}
+      <span class="subj">{{ a.title_en }}{% if a.title_ko %} · {{ a.title_ko }}{% endif %}</span>
+      {% if a.date %}<span class="date">{{ a.date }}</span>{% endif %}
+    </div>
+    <table class="gw">
+      {% for s in a.sentences %}
+      <tr>
+        <td class="no">{{ circled(s.index) }}</td>
+        <td class="en">
+          {% if tagged %}
+            {%- for line in s.lines -%}
+              {%- for t in line -%}
+                <span class="tok"><span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>{% if t.role %}<span class="ann">{{ t.role }}</span>{% endif %}{% if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif %}{% if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif %}</span>
+              {%- endfor -%}{{ ' ' }}
+            {%- endfor -%}
+          {% else %}
+            {{ s.text }}
+          {% endif %}
+        </td>
+        <td class="ko">{{ s.translation }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
+  </div>
+{% endfor %}
+</body>
+</html>
