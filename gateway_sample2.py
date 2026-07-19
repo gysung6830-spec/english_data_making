@@ -90,8 +90,9 @@ def build_passage() -> Passage:
         reason="involve→Involving(동명사 주어), produce→produces(수 일치)로 변형해 어순을 맞춘다.",
     ))
 
-    # E · 요약문 빈칸(객관식)
+    # E · 요약문 빈칸(객관식) — 지문도 함께 제시
     p.set_qa(E, *B2.make_E(
+        s,
         before="When a building's real users are ",
         mid=" during design, the result is greater satisfaction and ",
         after=" costs for the institution.",

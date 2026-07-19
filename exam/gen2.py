@@ -155,7 +155,8 @@ def _gen_E(client, analysis, body, max_retries=1):
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
                                   max_tokens=2000, max_retries=max_retries)
     pairs = [(x.a, x.b) for x in out.pairs]
-    return build2.make_E(out.before, out.mid, out.after, pairs, out.answer_no, out.reason)
+    return build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
+                         out.answer_no, out.reason)
 
 
 def _gen_F(client, analysis, body, max_retries=1):

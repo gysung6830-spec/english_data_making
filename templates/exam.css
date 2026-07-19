@@ -186,6 +186,15 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 .cue { font-weight: 700; }          /* 볼드 5 — 괄호 안 제시어 */
 .blank { letter-spacing: 1px; }
 
+/* 서술형 답 쓰는 칸 */
+.write-lines { margin: 1.4mm 0 0.5mm 0; }
+.wline {
+  display: block;
+  border-bottom: 0.6px solid #999;
+  height: 5.4mm;
+  break-inside: avoid;
+}
+
 /* ---------- 해설 ---------- */
 .a-head { margin-bottom: 0.6mm; break-after: avoid; }
 .a-type { font-weight: 400; font-size: 8.6px; color: #555; }

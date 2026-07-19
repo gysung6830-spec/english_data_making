@@ -22,6 +22,11 @@ def esc(text: str) -> str:
     return str(escape(text))
 
 
+def write_lines(n: int = 1) -> str:
+    """학생이 답을 적을 수 있는 빈 줄 n개(서술형용)."""
+    return '<div class="write-lines">' + "".join('<span class="wline"></span>' for _ in range(n)) + "</div>"
+
+
 def weave(chunks: list[str], markers_html: list[str]) -> str:
     """본문 조각(chunks) 사이에 마커 HTML 을 끼워 넣어 본문 HTML 을 만든다.
 
@@ -200,9 +205,11 @@ def short_answer_q(
 
     return (
         f'<div class="passage">{esc(passage)}</div>'
-        f'<div class="sub-q"><span class="sub-label">(1)</span> {esc(q1_prompt)}</div>'
+        f'<div class="sub-q"><span class="sub-label">(1)</span> {esc(q1_prompt)}'
+        f'{write_lines(2)}</div>'
         f'<div class="sub-q"><span class="sub-label">(2)</span> {esc(q2_prompt)}'
-        f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {boki}</div></div>'
+        f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {boki}</div>'
+        f'{write_lines(1)}</div>'
         f'<div class="sub-q"><span class="sub-label">(3)</span> {esc(q3_prompt)}'
         f'<div class="boki">{q3_summary_html}</div></div>'
     )

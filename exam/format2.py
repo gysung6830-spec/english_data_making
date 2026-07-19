@@ -56,12 +56,13 @@ def blank_ab(letter: str) -> str:
     return f'({letter})<span class="blank">_____</span>'
 
 
-def E_q(summary_html: str, choices: list[str]) -> str:
+def E_q(passage: str, summary_html: str, choices: list[str]) -> str:
     lis = "".join(
         f'<li><span class="cnum">{F.circ(i)}</span> {c}</li>'   # choices 는 (A)-(B) HTML
         for i, c in enumerate(choices, 1)
     )
-    return (f'<div class="boki"><span class="boki-title">&lt;요약문&gt;</span> {summary_html}</div>'
+    return (f'<div class="passage">{F.esc(passage)}</div>'
+            f'<div class="boki"><span class="boki-title">&lt;요약문&gt;</span> {summary_html}</div>'
             f'<ol class="choices">{lis}</ol>')
 
 
@@ -95,7 +96,8 @@ def D_q(tokens: list[str], cues: list[str]) -> str:
             toks.append(f'<span class="cue">{F.esc(tk)}</span>')
         else:
             toks.append(F.esc(tk))
-    return f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
+    return (f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
+            + F.write_lines(1))   # 답 쓰는 칸
 
 
 def D_a(sentence: str, reason: str = "") -> str:

@@ -45,12 +45,12 @@ def make_D(tokens, cues, answer_sentence, reason=""):
 
 
 # E · 요약문 빈칸(객관식) ---------------------------------------------------
-def make_E(before, mid, after, choice_pairs, answer_no, reason):
-    """choice_pairs: [(a_word, b_word)] 5개."""
+def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason):
+    """choice_pairs: [(a_word, b_word)] 5개. 요약문 위에 지문도 함께 제시한다."""
     summary = (F.esc(before) + F2.blank_ab("A") + F.esc(mid)
                + F2.blank_ab("B") + F.esc(after))
     choices = [F2.E_pair(a, b) for a, b in choice_pairs]
-    return F2.E_q(summary, choices), F2.E_a(answer_no, reason)
+    return F2.E_q(" ".join(sentences), summary, choices), F2.E_a(answer_no, reason)
 
 
 # F · 빈칸추론 --------------------------------------------------------------

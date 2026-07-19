@@ -81,8 +81,9 @@ def _passage_dna2() -> Passage:
         reason="동사 begin 을 문맥(현재완료)에 맞춰 have begun 으로 변형하고 어순을 맞춘다.",
     ))
 
-    # E · 요약문 빈칸(객관식)
+    # E · 요약문 빈칸(객관식) — 지문도 함께 제시
     p.set_qa(E, *B2.make_E(
+        s,
         before="DNA can ",
         mid=" a huge amount of information in a tiny space, so scientists are trying to ",
         after=" digital data inside it.",
