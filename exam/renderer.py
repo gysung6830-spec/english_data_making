@@ -52,11 +52,16 @@ def _blocks(passages: list[Passage], start: int):
     return qblocks, ablocks
 
 
+# 자료 하단 저작권 문구 기본값(필요하면 render_pdf(footer_note=...) 로 교체)
+DEFAULT_FOOTER = "ⓒ 2026. 김은아영어연구소. All rights reserved."
+
+
 def render_html(
     passages: list[Passage],
     header_note: str = "",
     doc_title: str = "영어 영역",
     start: int = 1,
+    footer_note: str = DEFAULT_FOOTER,
 ) -> str:
     qblocks, ablocks = _blocks(passages, start)
     tmpl = _env.get_template("exam.html.j2")
@@ -65,6 +70,7 @@ def render_html(
         ablocks=ablocks,
         header_note=header_note,
         doc_title=doc_title,
+        footer_note=footer_note,
     )
 
 
@@ -74,12 +80,14 @@ def render_pdf(
     header_note: str = "",
     doc_title: str = "영어 영역",
     start: int = 1,
+    footer_note: str = DEFAULT_FOOTER,
 ) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_html(passages, header_note=header_note, doc_title=doc_title, start=start)
+    html = render_html(passages, header_note=header_note, doc_title=doc_title,
+                       start=start, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

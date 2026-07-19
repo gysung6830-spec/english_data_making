@@ -6,6 +6,9 @@
 </head>
 <body>
 
+{# ===== 자료 하단 저작권(모든 쪽 하단에 반복) ===== #}
+{% if footer_note %}<div class="page-footer">{{ footer_note }}</div>{% endif %}
+
 {# ===== 상단 머리글(제목 + 배지 + 사용자 입력 문구) ===== #}
 <header class="sheet-head">
   <div class="brand">

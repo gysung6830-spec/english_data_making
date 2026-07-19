@@ -12,13 +12,26 @@
 
 @page {
   size: A4;
-  margin: 12mm 12mm 13mm 12mm;
+  margin: 12mm 12mm 14mm 12mm;
+  /* 자료 하단 저작권(가운데) + 쪽번호(오른쪽) */
   @bottom-center {
-    content: "- " counter(page) " -";
-    font-family: "Noto Serif CJK KR", serif;
-    font-size: 8.5px;
-    color: #444;
+    content: element(footer);
   }
+  @bottom-right {
+    content: counter(page) " / " counter(pages);
+    font-family: "Noto Serif CJK KR", serif;
+    font-size: 8px;
+    color: #999;
+  }
+}
+
+/* 러닝 요소: 본문 흐름에서 빠져 모든 쪽 하단에 반복 표시된다 */
+.page-footer {
+  position: running(footer);
+  font-family: "Noto Serif CJK KR", serif;
+  font-size: 8px;
+  color: #777;
+  text-align: center;
 }
 
 * { box-sizing: border-box; }
