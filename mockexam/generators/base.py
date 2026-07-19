@@ -140,8 +140,18 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         q.passage_text = out.passage
         if out.prompt_extra:
             q.stem = f"{stem}\n{out.prompt_extra}"
-        q.answer = " / ".join(a.answer for a in out.answers)
-        q.answer_notes = [f"{a.label}: {a.answer}" for a in out.answers]
+        notes = []
+        answers = []
+        for a in out.answers:
+            label, sep, ans = a.partition("::")
+            if sep:
+                notes.append(f"{label.strip()}: {ans.strip()}")
+                answers.append(ans.strip())
+            else:
+                notes.append(a.strip())
+                answers.append(a.strip())
+        q.answer = " / ".join(answers)
+        q.answer_notes = notes
     else:
         q.passage_text = passage.text
         q.answer = "(mock) 서술형 정답 예시"

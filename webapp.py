@@ -329,6 +329,22 @@ def generate():
                 "→ 텍스트가 선택·복사되는 PDF로 저장하거나, HWP는 'PDF로 저장' 후 "
                 "다시 올려주세요. (사진 지문은 OCR 설치가 필요합니다.)")
 
+        # LLM 문항 생성이 (거의) 전부 실패하면 자리표시자만 남으므로,
+        # 감추지 말고 '실제 원인'을 그대로 보여준다(API 키/모델/스키마 등).
+        gen_errs = [l for l in res.logs if l.get("note") == "generation_failed"]
+        n_q = len(res.exam.questions) or 1
+        if not mock and len(gen_errs) >= n_q * 0.5:
+            uniq = []
+            for l in gen_errs:
+                msg = l.get("error", "")
+                if msg and msg not in uniq:
+                    uniq.append(msg)
+            detail = " | ".join(uniq[:3]) or "원인 메시지 없음"
+            raise RuntimeError(
+                f"문항 생성이 대부분 실패했습니다({len(gen_errs)}/{n_q}). "
+                f"실제 오류: {detail}  ← 이 메시지를 확인해 주세요"
+                "(대개 API 키/모델 이름/요금제 문제).")
+
         raw = (request.form.get("outname") or "").strip()
         if raw.lower().endswith(".pdf"):
             raw = raw[:-4]

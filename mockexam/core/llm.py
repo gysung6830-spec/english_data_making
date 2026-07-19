@@ -37,17 +37,17 @@ class ChoiceQuestionOut(BaseModel):
         return v
 
 
-class EssaySubAnswer(BaseModel):
-    label: str = Field(..., description="소문항 지시(예: '보기 단어 모두 활용 영작')")
-    answer: str = Field(..., description="그 소문항의 정답")
-
-
 class EssayQuestionOut(BaseModel):
-    """서술형 1문항 LLM 출력."""
+    """서술형 1문항 LLM 출력.
+
+    중첩 스키마 참조를 피하려고 answers 를 문자열 리스트로 둔다.
+    각 항목은 '소문항 지시 :: 정답' 형식(구분자 없으면 통째로 정답).
+    """
 
     passage: str = Field(..., description="문제에 실릴 지문(빈칸/밑줄 포함 가능)")
     prompt_extra: str = Field("", description="발문에 덧붙일 조건/보기(예: [보기] 단어들, 조건)")
-    answers: list[EssaySubAnswer] = Field(..., description="소문항별 정답")
+    answers: list[str] = Field(
+        ..., description="소문항별 정답. 각 항목은 '소문항 지시 :: 정답' 형식")
 
 
 def system_prompt(profile: dict[str, Any], difficulty_ko: str) -> str:
