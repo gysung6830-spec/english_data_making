@@ -91,13 +91,14 @@ def extract_text(path) -> str:
         return ""
 
 
-def extract_passages(path) -> List[Passage]:
+def extract_passages(path, api_key: str = None) -> List[Passage]:
     """입력 종류에 맞춰 '깨끗한 지문 리스트'로 정규화.
 
     어떤 형식이든 결과가 일정하도록:
       - txt / 이미지 / 스캔 PDF → 텍스트(또는 OCR) → 텍스트 파서
       - 디지털 PDF → 표 인식 파서 우선(좌 영어/우 한글 2단 표 등),
         표에서 못 뽑으면 텍스트 파서로 폴백.
+    api_key 는 OCR(비전)에 쓰인다(스캔·사진일 때).
     """
     p = Path(path)
     suffix = p.suffix.lower()
@@ -106,11 +107,11 @@ def extract_passages(path) -> List[Passage]:
         return split_passages(p.read_text(encoding="utf-8", errors="replace"))
 
     if suffix in IMAGE_EXTS:
-        return split_passages(ocr_file(p))
+        return split_passages(ocr_file(p, api_key=api_key))
 
     if suffix == ".pdf":
         if is_scanned_pdf(p):
-            return split_passages(ocr_file(p))
+            return split_passages(ocr_file(p, api_key=api_key))
         # 디지털 PDF: 표 구조 우선(가장 안정적)
         table_passages = pdf_to_passages(p)
         if table_passages:
@@ -243,14 +244,14 @@ def _set_passage_class(page, selector: str, step: str) -> None:
 
 def run(input_path, out_dir, header: str = "", formats: str = "abc",
         do_translate: bool = True, theme: str = "modern",
-        docname: str = "") -> List[Path]:
+        docname: str = "", api_key: str = None) -> List[Path]:
     """입력 → 3형식 PDF 생성. 생성된 파일 경로 리스트 반환."""
     input_path = Path(input_path)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"[1/4] 입력 파싱: {input_path.name}")
-    passages = extract_passages(input_path)
+    passages = extract_passages(input_path, api_key=api_key)
 
     print("[2/4] 지문 정규화")
     if not passages:
@@ -261,8 +262,8 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     # 한줄영어(c)만 요청하면 번역 불필요
     needs_ko = any(f in formats for f in ("a", "b"))
     if do_translate and needs_ko:
-        print("[3/4] 해석 없는 문장 번역(있으면)")
-        passages = translate_missing(passages)
+        print("[3/4] 해석 없는 문장 번역(키 있으면)")
+        passages = translate_missing(passages, api_key=api_key)
     else:
         print("[3/4] 번역 생략")
 
@@ -300,6 +301,9 @@ def _build_argparser() -> argparse.ArgumentParser:
     ap.add_argument("--header", default="", help="상단 머리글(학원명·자료명 등)")
     ap.add_argument("--name", default="", help="출력 파일명(지문명). 미지정 시 입력 파일명")
     ap.add_argument("--no-translate", action="store_true", help="자동 번역 끄기")
+    ap.add_argument("--api-key", default="",
+                    help="Claude API 키(영어만 있는 자료 자동 번역·비전 OCR용). "
+                         "미지정 시 환경변수 ANTHROPIC_API_KEY 사용")
     return ap
 
 
@@ -313,6 +317,7 @@ def main(argv=None) -> int:
         do_translate=not args.no_translate,
         theme=args.theme,
         docname=args.name,
+        api_key=args.api_key or None,
     )
     return 0 if produced else 1
 

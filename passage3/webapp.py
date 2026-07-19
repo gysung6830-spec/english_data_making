@@ -115,6 +115,17 @@ PAGE = """
       <div class="hint">각 페이지 <b>오른쪽 위</b>에 표시됩니다(학원명·자료명 등). 비우면 표시 안 함.</div>
     </div>
 
+    <div class="card">
+      <label class="field" for="apikey">5. AI 번역 키 (선택)</label>
+      <input type="password" id="apikey" name="apikey" placeholder="sk-ant-... (해석 없는 자료를 자동 번역)"
+             autocomplete="off">
+      <div class="hint">
+        <b>영어만 있는 자료</b>에 한글 해석을 자동으로 채우려면 Claude API 키를 넣으세요.
+        비우면 해석칸은 빈 채로 나옵니다. (해석이 이미 있는 자료는 키 없이 그대로 사용)
+        키는 이번 생성에만 쓰이며 저장되지 않습니다.
+      </div>
+    </div>
+
     <button type="submit">PDF 생성 · 다운로드</button>
   </form>
 
@@ -155,6 +166,7 @@ def generate():
     docname = request.form.get("docname", "").strip()
     header = request.form.get("header", "").strip()
     formats = request.form.getlist("fmt")
+    api_key = request.form.get("apikey", "").strip() or None
 
     if not file or not file.filename:
         flash("지문 파일을 선택하세요.")
@@ -174,7 +186,7 @@ def generate():
         file.save(str(in_path))
 
         try:
-            passages = extract_passages(in_path)
+            passages = extract_passages(in_path, api_key=api_key)
         except Exception:
             traceback.print_exc()
             flash("파일을 처리하는 중 오류가 발생했습니다.")
@@ -187,7 +199,7 @@ def generate():
         # 한줄영어(c)만 선택하면 번역 불필요
         if any(f in formats for f in ("a", "b")):
             try:
-                passages = translate_missing(passages)
+                passages = translate_missing(passages, api_key=api_key)
             except Exception:
                 traceback.print_exc()  # 번역 실패는 치명적이지 않음
 

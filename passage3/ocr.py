@@ -77,10 +77,10 @@ def _load_image_bytes(path) -> List[bytes]:
 
 # ── Claude 비전 OCR ───────────────────────────────────────────
 
-def _vision_ocr(images: List[bytes], verbose: bool = True) -> str:
+def _vision_ocr(images: List[bytes], verbose: bool = True, api_key: str = None) -> str:
     import anthropic
 
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    client = anthropic.Anthropic(api_key=api_key or os.environ["ANTHROPIC_API_KEY"])
     out_pages: List[str] = []
     for i, img in enumerate(images, start=1):
         if verbose:
@@ -161,12 +161,16 @@ def _tesseract_ocr(images: List[bytes], verbose: bool = True) -> str:
 
 # ── 진입점 ────────────────────────────────────────────────────
 
-def ocr_file(path, verbose: bool = True) -> str:
-    """스캔 PDF·사진 → 텍스트. 엔진 자동 선택."""
+def ocr_file(path, verbose: bool = True, api_key: str = None) -> str:
+    """스캔 PDF·사진 → 텍스트. 엔진 자동 선택.
+
+    api_key 를 주면 Claude 비전 OCR에 그 키를, 없으면 환경변수를 쓴다.
+    """
+    api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     images = _load_image_bytes(path)
-    if os.environ.get("ANTHROPIC_API_KEY"):
+    if api_key:
         try:
-            return _vision_ocr(images, verbose=verbose)
+            return _vision_ocr(images, verbose=verbose, api_key=api_key)
         except Exception as e:  # 비전 실패 시 폴백
             if verbose:
                 print(f"  [vision OCR 실패 → tesseract 폴백] {e}")

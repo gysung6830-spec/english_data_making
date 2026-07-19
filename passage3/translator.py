@@ -35,9 +35,14 @@ def _collect_missing(passages: List[Passage]) -> List[tuple]:
     return missing
 
 
-def translate_missing(passages: List[Passage], model: str = DEFAULT_MODEL) -> List[Passage]:
-    """해석 없는 문장만 골라 번역해 채운다."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+def translate_missing(passages: List[Passage], model: str = DEFAULT_MODEL,
+                      api_key: str = None) -> List[Passage]:
+    """해석 없는 문장만 골라 번역해 채운다.
+
+    api_key 를 주면 그 키를, 없으면 환경변수 ANTHROPIC_API_KEY 를 쓴다.
+    키가 아예 없으면 아무 것도 하지 않고 그대로 반환한다.
+    """
+    api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     missing = _collect_missing(passages)
     if not api_key or not missing:
         return passages
