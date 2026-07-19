@@ -1,0 +1,24 @@
+# ============================================================
+#  동형모의고사 자동생성 - 설정 (§8.5.7)
+#  '학교를 고르면 그 학교가 학습한 경향대로 동형이 생성됩니다.'
+# ============================================================
+
+mode: generate          # learn | generate
+school_id: jinyang_hs   # 대상 학교(profiles/schools.json 에서 선택)
+grade: 1                # 학년
+difficulty: 중          # 상 | 중 | 하
+
+model: "claude-opus-4-8"
+
+# 지문 처리
+passage_mode: assign    # assign(올린 지문 자동배정, 기본) | keep(원본 유지)
+
+# 출력
+header: ""              # 상단 머리글(학원명/자료명 등)
+footer: "© 2026 은아 T. All rights reserved."
+num_forms: 1            # 생성할 세트 수(A형/B형 등)
+answer_key: end         # end(맨 뒤) | separate(별도 파일)
+
+paths:
+  input: "input"
+  output: "output"

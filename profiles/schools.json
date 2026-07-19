@@ -1,0 +1,9 @@
+{
+  "schools": [
+    { "school_id": "munsan_ms",     "name": "문산중",   "level": "middle", "grades": [1, 2, 3] },
+    { "school_id": "daegok_ms",     "name": "대곡중",   "level": "middle", "grades": [1, 2, 3] },
+    { "school_id": "jinyang_hs",    "name": "진양고",   "level": "high",   "grades": [1, 2, 3] },
+    { "school_id": "jeil_ghs",      "name": "제일여고", "level": "high",   "grades": [1, 2, 3] },
+    { "school_id": "dongmyeong_hs", "name": "동명고",   "level": "high",   "grades": [1, 2, 3] }
+  ]
+}
