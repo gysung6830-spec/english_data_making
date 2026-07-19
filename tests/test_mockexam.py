@@ -84,18 +84,15 @@ def test_assignment_format_hard_constraint():
             assert pmap[a.passage_id].format_type == "notice"
 
 
-def test_reuse_cap_max_three():
+def test_reuse_cap_max_two_hard():
     passages = load_passages([SAMPLE])
     prof = resolve_profile("jinyang_hs", 1)
     bp = blueprint_from_profile(prof, 1)
     assigns = assign_passages(bp, passages, difficulty="mid")
     from collections import Counter
-    c = Counter(a.passage_id for a in assigns if a.passage_id
-                and not a.passage_id.startswith("__"))
-    # 대체(substituted) 슬롯은 상한을 넘을 수 있으나, 정상 배정은 3 이하 지향
-    normal = Counter(a.passage_id for a in assigns
-                     if a.passage_id and a.note is None)
-    assert all(v <= 3 for v in normal.values()), normal
+    # 대체(substituted) 포함 모든 배정에서 한 지문은 최대 2회까지만 등장(하드 제약)
+    used = Counter(a.passage_id for a in assigns if a.passage_id)
+    assert all(v <= 2 for v in used.values()), used
 
 
 # ---------------------------------------------------------------------------

@@ -140,7 +140,7 @@ def _difficulty_bonus(prof: PassageProfile, want: Difficulty) -> float:
 # ---------------------------------------------------------------------------
 # 배정 알고리즘 (§3-A-3) — 기존 지문만으로, 새 지문 생성 안 함
 # ---------------------------------------------------------------------------
-REUSE_CAP = 3  # 한 지문 최대 3문항
+REUSE_CAP = 2  # 한 지문 최대 2문항(하드 제약). 상한을 넘으면 대체가 아니라 스킵.
 
 
 def assign_passages(
@@ -189,14 +189,16 @@ def assign_passages(
             continue
 
         if best is None:
-            # 일반 슬롯인데 상한 때문에 후보가 없음 → 차선(상한 무시하고 최고 적합) 대체
-            fallback = _pick(item, candidates, profiles, {p.id: 0 for p in passages},
+            # 상한(2)은 유지하되, '같은 지문에 같은 유형 금지'만 완화해 차선 배정 시도.
+            # 상한을 넘겨야 채울 수 있으면 대체하지 않고 스킵한다(한 지문 최대 2회 하드 보장).
+            fallback = _pick(item, candidates, profiles, use_count,
                              {p.id: set() for p in passages}, difficulty, llm_refine)
             if fallback is not None:
                 pid, score, src = fallback
                 assignments.append(Assignment(item.no, item.section, item.type, pid,
                                                score, src, note="substituted"))
-                use_count[pid] = use_count.get(pid, 0) + 1
+                use_count[pid] += 1
+                type_on[pid].add(item.type)
             else:
                 assignments.append(Assignment(item.no, item.section, item.type, None,
                                                0.0, "rule", note="skipped_no_passage"))
