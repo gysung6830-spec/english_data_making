@@ -53,6 +53,29 @@ def _highlight_words(text: str | None, words) -> Markup:
 _env.filters["highlight_words"] = _highlight_words
 
 
+def _chunk_color_index(example, chunks) -> int:
+    """문법 예문(example)이 어느 chunk(어구)에 해당하는지 찾아 그 색 인덱스를 반환.
+
+    직독직해 왼쪽 열의 문법 설명 색을 해당 어구(청크)의 색과 동일하게 맞추기 위함.
+    청크 표시 색은 위치 index % 8 이므로 여기서도 같은 기준을 쓴다.
+    """
+    if not example or not chunks:
+        return 0
+    ex_words = set(re.findall(r"[a-z']+", example.lower()))
+    if not ex_words:
+        return 0
+    best_i, best_score = 0, -1
+    for i, c in enumerate(chunks):
+        cw = set(re.findall(r"[a-z']+", (getattr(c, "english", "") or "").lower()))
+        score = len(ex_words & cw)
+        if score > best_score:
+            best_score, best_i = score, i
+    return best_i % 8
+
+
+_env.filters["chunk_color"] = _chunk_color_index
+
+
 def _as_list(reports) -> list:
     if isinstance(reports, schemas.Report):
         return [reports]

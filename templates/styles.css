@@ -229,6 +229,11 @@ table.lit2 td {
 }
 .gtag.keytag { background: #fff7ed; border-color: #ea580c; color: #c2410c; }
 .gexp { font-size: 8.3px; color: #374151; }
+
+/* 문법 설명 색 = 해당 어구(청크) 색과 동일 (.gline 에 ck0~ck7 이 붙어 color 를 지정) */
+.gline .gtag { color: inherit; border-color: currentColor; background: transparent; }
+.gline .gtag.keytag { color: inherit; border-color: currentColor; background: transparent; font-weight: 800; }
+.gline .gexp { color: inherit; }
 .lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #23272e; line-height: 1.5; }
 .lit-words b { color: #23272e; }
 .lit-note-row td {
