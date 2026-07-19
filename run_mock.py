@@ -74,7 +74,7 @@ def cmd_generate(args):
     out_dir = args.out or cfg.get("paths", {}).get("output", "output")
     input_arg = args.input or cfg.get("paths", {}).get("input", "input")
     model = cfg.get("model", "claude-opus-4-8")
-    header = cfg.get("header", "")
+    header_info = dict(cfg.get("header_info", {}) or {})
     footer = cfg.get("footer", "")
     answer_key = cfg.get("answer_key", "end")
     num_forms = int(cfg.get("num_forms", 1))
@@ -96,7 +96,9 @@ def cmd_generate(args):
     for f_i in range(num_forms):
         res = generate_mock(school, inputs, difficulty=difficulty, grade=grade,
                             client=client)
-        out = render_exam(res.exam, out_dir, form=forms[f_i], header=header,
+        info = dict(header_info)
+        info.setdefault("subject", res.blueprint.meta.subject)
+        out = render_exam(res.exam, out_dir, form=forms[f_i], header_info=info,
                           footer=footer, answer_key=answer_key)
         print(f"\n[{forms[f_i]}형] 검증:")
         print(res.verify_report.summary())

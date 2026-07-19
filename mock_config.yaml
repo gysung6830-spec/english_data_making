@@ -13,9 +13,14 @@ model: "claude-opus-4-8"
 # 지문 처리
 passage_mode: assign    # assign(올린 지문 자동배정, 기본) | keep(원본 유지)
 
-# 출력
-header: ""              # 상단 머리글(학원명/자료명 등)
-footer: "© 2026 은아 T. All rights reserved."
+# 출력 머리글(원본 시험지 디자인)
+header_info:
+  exam_title: "2026학년도 1학기 2차 시험"
+  code: "03"
+  class_range: "1학년 (1 ~ 10)반"
+  subject: "공통영어1"
+  date: "2026. 7. 1. 1교시"
+footer: "이 시험 문제는 무단 복제하면 관련법에 의해 처벌 받습니다."
 num_forms: 1            # 생성할 세트 수(A형/B형 등)
 answer_key: end         # end(맨 뒤) | separate(별도 파일)
 

@@ -146,6 +146,12 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         q.passage_text = passage.text
         q.answer = "(mock) 서술형 정답 예시"
         q.answer_notes = [f"{sp}: (mock 정답)" for sp in item.subparts]
+        # 디자인 미리보기용 <보기> 박스 데이터(오프라인 자리표시자)
+        _BOGI = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arrange",
+                 "arrange_and_translate", "chart_fix_and_arrange", "blank_choose_no_change"}
+        if item.type in _BOGI:
+            q.meta["bogi"] = ["(mock)", "word1", "word2", "word3", "word4", "can"]
+            q.meta["blank_ko"] = "(mock) 밑줄 친 우리말 의미"
     return q
 
 

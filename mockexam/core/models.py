@@ -94,6 +94,7 @@ class BlueprintMeta:
     subject: str = ""
     time_min: int = 50
     total_score: float = 100.0
+    pages: int = 7            # 원본 페이지수(하단 쪽번호 '( n ) / ( pages )'에 맞춤)
     learned: bool = False     # 학습 데이터 기반인지, 학교급 표준 골격인지
 
 

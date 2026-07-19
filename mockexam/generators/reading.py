@@ -44,9 +44,16 @@ def gen_order(item, passage, an, ctx):
     stem = ctx.stem("order", "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?")
     instr = ("도입문을 고정하고 (A)(B)(C)를 재배열. 연결사·지시어·정관사·대명사가 "
              "정답 순서를 하나로만 확정하게. 오답은 단서 하나를 무시했을 때 그럴듯하게.")
-    mock_choices = ["(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)", "(C)-(B)-(A)"]
+    mock_choices = ["(A) - (C) - (B)", "(B) - (A) - (C)", "(B) - (C) - (A)",
+                    "(C) - (A) - (B)", "(C) - (B) - (A)"]
+    # 도입문 박스 + (A)(B)(C) 구조로 디자인 미리보기
+    intro = an.sentences[0] if an.sentences else passage.text[:120]
+    a = an.sentences[1] if len(an.sentences) > 1 else "(A) ..."
+    b = an.sentences[2] if len(an.sentences) > 2 else "(B) ..."
+    c = an.sentences[3] if len(an.sentences) > 3 else "(C) ..."
+    mock_p = f"{intro}\n(A) {a}\n(B) {b}\n(C) {c}"
     return build_choice(item, passage, ctx, stem, instr, mock_choices=mock_choices,
-                        mock_answer="④")
+                        mock_answer="④", mock_passage=mock_p)
 
 
 @register("irrelevant_sentence")

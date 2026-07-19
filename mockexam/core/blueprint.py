@@ -22,6 +22,7 @@ def blueprint_from_profile(profile: dict[str, Any], grade: int | None = None) ->
         subject=profile.get("subject", "영어"),
         time_min=int(profile.get("time_min", 50)),
         total_score=float(profile.get("score_pattern", {}).get("total", 100)),
+        pages=int(profile.get("counts", {}).get("pages", 7)),
         learned=bool(profile.get("learned", False)),
     )
     items: list[Item] = []

@@ -1,106 +1,228 @@
-"""조판 (§6): 좌우 2단 문제지 + 정답·해설지.
+"""조판 (§6) — 원본 시험지 디자인 재현.
 
-- HTML 을 항상 만들고(브라우저 미리보기 가능), WeasyPrint 있으면 PDF 도 생성.
-- 2단은 CSS column 기반(간단). 페이지 넘김이 크게 문제되면 table 2단으로 확장 가능.
+문제지: 테두리 머리글(제목·코드·반·과목·시간) → 좌우 2단 → <서술형> → 하단 쪽번호.
+정답해설지: '정 답 및 해 설' 제목 → 문항별 배지(유형·난이도·배점) → 정답/해설.
+- HTML 항상 생성(브라우저 미리보기). WeasyPrint 있으면 PDF 도 생성(쪽번호 포함).
 """
 from __future__ import annotations
 
 import html
+import re
 from pathlib import Path
 
-from ..core.models import MockExam, Question
+from ..core.models import DIFFICULTY_KO_REV, MockExam, Question
 
-_CSS = """
-* { box-sizing: border-box; }
-body { font-family: 'Malgun Gothic','Noto Sans KR','Nanum Gothic',sans-serif;
-       font-size: 10.2pt; line-height: 1.5; color:#111; margin:0; }
-.header { text-align:center; border-bottom:2px solid #222; padding:8px 0; margin-bottom:10px; }
-.header .title { font-size:14pt; font-weight:700; }
-.header .sub { font-size:9pt; color:#555; }
-.columns { column-count:2; column-gap:22px; }
-.q { break-inside: avoid; margin-bottom:12px; }
-.q .no { font-weight:700; }
-.q .stem { font-weight:600; }
-.passage { border:1px solid #bbb; background:#fafafa; padding:6px 8px; margin:5px 0;
-           white-space:pre-wrap; font-size:9.6pt; }
-.choices { margin:3px 0 0 4px; }
-.choices div { margin:1px 0; }
-u { text-underline-offset:2px; }
-.section-title { font-weight:700; font-size:11pt; border-left:4px solid #333;
-                 padding-left:6px; margin:10px 0 6px; column-span:all; }
-.footer { text-align:center; font-size:8.5pt; color:#666; margin-top:8px; }
-.ans { break-inside:avoid; margin-bottom:8px; font-size:9.6pt; }
-.ans .k { font-weight:700; color:#b00; }
-.trap { color:#b00; }
+# 유형 → 정답지 배지용 한글 라벨
+TYPE_LABEL_KO = {
+    "grammar": "어법", "grammar_vocab_mix": "어법·어휘", "vocab_odd": "어휘",
+    "vocab_3blank_abc": "어휘(빈칸)", "main_point": "요지", "title": "제목",
+    "blank_single": "빈칸추론", "order": "순서", "irrelevant_sentence": "무관문장",
+    "implied_meaning": "함축의미", "inference_mismatch": "내용일치",
+    "dialogue_mismatch": "대화내용", "notice_match": "안내문", "summary_ab": "요약(A,B)",
+    "prep_find_and_translate": "서술형·전치사/해석",
+    "dialogue_arrange_inflect": "서술형·영작", "condition_write_inflect": "서술형·어형변형",
+    "summary_fill_from_text": "서술형·요약빈칸", "word_arrange": "서술형·배열",
+    "chart_fix_and_arrange": "서술형·도표", "arrange_and_translate": "서술형·배열/해석",
+    "blank_choose_no_change": "서술형·어휘선택", "grammar_fix_and_answer": "서술형·어법교정",
+}
+
+# 서술형에서 <보기> 박스를 쓰는 유형
+_BOGI_TYPES = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arrange",
+               "arrange_and_translate", "chart_fix_and_arrange", "blank_choose_no_change"}
+
+_SERIF = "'Batang','바탕','Noto Serif KR','Nanum Myeongjo','Times New Roman',serif"
+
+_CSS = f"""
+* {{ box-sizing: border-box; }}
+@page {{ size: A4; margin: 15mm 14mm 16mm 14mm; }}
+body {{ font-family: {_SERIF}; font-size: 10.3pt; line-height: 1.6; color:#000; margin:0; }}
+
+/* 머리글 */
+.exam-header {{ border:1.2px solid #000; padding:10px 14px 8px; margin-bottom:12px; }}
+.exam-title {{ text-align:center; font-size:19pt; font-weight:700; letter-spacing:4px;
+               margin-bottom:8px; }}
+.hrow {{ display:flex; align-items:center; justify-content:space-between; font-size:11pt; }}
+.hrow .center {{ font-weight:700; }}
+.code-pill {{ border:1px solid #000; border-radius:999px; padding:2px 12px; font-size:9.5pt; }}
+.exam-time {{ text-align:center; font-size:9pt; color:#333; margin-top:5px; }}
+
+/* 2단 */
+.columns {{ column-count:2; column-gap:24px; column-rule:0.6px solid #cfcfcf; }}
+.section-div {{ column-span:all; font-weight:700; margin:6px 0 8px; }}
+
+/* 문항 */
+.q {{ break-inside:avoid; margin-bottom:14px; }}
+.q-head {{ font-weight:700; }}
+.q-head .score {{ font-weight:400; font-size:9pt; color:#333; }}
+.passage {{ text-align:justify; margin:6px 0; }}
+.para {{ text-align:justify; margin:5px 0; }}
+.box {{ border:1px solid #000; padding:7px 10px; margin:6px 0; text-align:justify; }}
+.choices {{ margin:5px 0 0 2px; }}
+.choices div {{ margin:1.5px 0; }}
+u {{ text-underline-offset:2px; }}
+
+/* 보기 박스 */
+.bogi {{ border:1px solid #000; padding:6px 10px; margin:6px 0; text-align:center; }}
+.bogi .label {{ font-weight:700; margin-bottom:2px; }}
+.blank-ko {{ margin:4px 0; }}
+.answer-space {{ border-bottom:1px solid #000; height:26px; margin:6px 0 2px; }}
+
+/* 하단 */
+.footer {{ text-align:center; font-size:8.3pt; color:#555; margin-top:10px;
+           padding-top:6px; }}
+
+/* 정답해설지 */
+.ans-title {{ text-align:center; font-size:16pt; font-weight:700; letter-spacing:8px;
+              margin:2px 0 4px; }}
+.ans-rule {{ border:0; border-top:2px solid #000; margin:0 0 12px; }}
+.ans-item {{ break-inside:avoid; margin-bottom:12px; }}
+.ans-no {{ font-weight:700; }}
+.badge {{ border:1px solid #444; border-radius:999px; padding:1px 10px; font-size:8.6pt;
+          color:#333; margin-left:6px; }}
+.ans-line {{ margin:3px 0; }}
+.ans-line .a {{ font-weight:700; }}
+.exp {{ text-align:justify; }}
+.trap {{ color:#b00020; }}
 """
 
 
+# ---------------------------------------------------------------------------
+# 지문 렌더 (밑줄/순서 도입문/보기 처리)
+# ---------------------------------------------------------------------------
+def _safe(text: str) -> str:
+    """<u>..</u> 밑줄만 허용하고 나머지는 이스케이프."""
+    out = []
+    for t in re.split(r"(<u>|</u>)", text):
+        out.append(t if t in ("<u>", "</u>") else html.escape(t))
+    return "".join(out)
+
+
+def _render_passage(q: Question) -> str:
+    text = q.passage_text or ""
+    if not text or text.startswith("(지문 부족") or text.startswith("(지문"):
+        return ""
+    # 순서(order): 도입문 박스 + (A)(B)(C) 문단
+    if q.type == "order" and "(A)" in text and "(B)" in text:
+        m = re.split(r"(?=\(A\))", text, maxsplit=1)
+        intro = m[0].strip()
+        rest = m[1] if len(m) > 1 else ""
+        parts = [f'<div class="box">{_safe(intro)}</div>'] if intro else []
+        for seg in re.split(r"(?=\((?:A|B|C)\))", rest):
+            seg = seg.strip()
+            if seg:
+                parts.append(f'<div class="para">{_safe(seg)}</div>')
+        return "".join(parts)
+    return f'<div class="passage">{_safe(text)}</div>'
+
+
+def _render_bogi(q: Question) -> str:
+    bogi = q.meta.get("bogi")
+    blank_ko = q.meta.get("blank_ko")
+    out = []
+    if blank_ko:
+        out.append(f'<div class="blank-ko">밑줄: {html.escape(blank_ko)}</div>')
+    if bogi:
+        words = " / ".join(html.escape(w) for w in bogi)
+        out.append(f'<div class="bogi"><div class="label">&lt; 보기 &gt;</div>{words}</div>')
+    return "".join(out)
+
+
 def _q_html(q: Question) -> str:
-    parts = [f'<div class="q"><div><span class="no">{q.no}.</span> '
-             f'<span class="stem">{html.escape(q.stem)}</span> '
-             f'<span style="color:#888">[{q.score}점]</span></div>']
-    if q.passage_text and not q.passage_text.startswith("(지문 부족"):
-        # <u> 태그는 살리고 나머지는 이스케이프
-        parts.append(f'<div class="passage">{_safe_passage(q.passage_text)}</div>')
+    parts = [f'<div class="q"><div class="q-head">{q.no}. {html.escape(q.stem)} '
+             f'<span class="score">[{_fmt_score(q.score)}점]</span></div>']
+    parts.append(_render_passage(q))
+    if q.section == "essay":
+        parts.append(_render_bogi(q))
     if q.choices:
         parts.append('<div class="choices">')
         for c in q.choices:
             parts.append(f'<div>{c.label} {html.escape(c.text)}</div>')
         parts.append('</div>')
+    if q.section == "essay":
+        parts.append('<div class="answer-space"></div>')
     parts.append('</div>')
     return "".join(parts)
 
 
-def _safe_passage(text: str) -> str:
-    """<u>...</u> 밑줄과 ①~⑤ 마커만 허용하고 나머지는 이스케이프."""
-    import re
-    token = re.split(r'(<u>|</u>)', text)
-    out = []
-    for t in token:
-        if t in ("<u>", "</u>"):
-            out.append(t)
-        else:
-            out.append(html.escape(t))
-    return "".join(out)
+def _fmt_score(s: float) -> str:
+    return str(int(s)) if float(s).is_integer() else f"{s:g}"
 
 
-def build_problem_html(exam: MockExam, header: str = "", footer: str = "") -> str:
-    bp = exam.blueprint
-    title = header or f"{bp.meta.name} {bp.meta.grade}학년 영어 동형모의고사 ({exam.form}형)"
-    sub = (f"{bp.meta.subject} · {bp.meta.time_min}분 · {bp.meta.total_score}점 · "
-           f"선택형 {len(exam.choice_questions)} / 서술형 {len(exam.essay_questions)}"
-           f"{' · 표준골격' if not bp.meta.learned else ''}")
-    body = ['<div class="header">', f'<div class="title">{html.escape(title)}</div>',
-            f'<div class="sub">{html.escape(sub)}</div></div>']
-    body.append('<div class="columns">')
-    body.append('<div class="section-title">[선택형]</div>')
+# ---------------------------------------------------------------------------
+# 머리글 / 하단
+# ---------------------------------------------------------------------------
+def _header_block(exam: MockExam, info: dict) -> str:
+    m = exam.blueprint.meta
+    title = info.get("exam_title") or f"{m.grade}학년 영어 동형모의고사"
+    code = info.get("code", "03")
+    class_range = info.get("class_range", f"{m.grade}학년")
+    subject = info.get("subject") or m.subject or "공통영어1"
+    date = info.get("date", "")
+    time_line = f"{date} ({m.time_min}분)" if date else f"({m.time_min}분)"
+    return (
+        '<div class="exam-header">'
+        f'<div class="exam-title">{html.escape(title)}</div>'
+        '<div class="hrow">'
+        f'<span class="code-pill">코드: {html.escape(str(code))}</span>'
+        f'<span class="center">{html.escape(class_range)}</span>'
+        f'<span>과목명: {html.escape(subject)}</span>'
+        '</div>'
+        f'<div class="exam-time">{html.escape(time_line)}</div>'
+        '</div>')
+
+
+def _footer_block(exam: MockExam, footer: str) -> str:
+    note = footer or "이 시험 문제는 무단 복제하면 관련법에 의해 처벌 받습니다."
+    m = exam.blueprint.meta
+    page_line = (f"{m.grade}학년 {m.subject or '공통영어1'} "
+                 f"( 1 ) / ( {m.pages} ) 페이지 중")
+    return (f'<div class="footer">{html.escape(note)}<br>{html.escape(page_line)}</div>')
+
+
+# ---------------------------------------------------------------------------
+# 문제지 / 정답지
+# ---------------------------------------------------------------------------
+def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
+    body = [_header_block(exam, info), '<div class="columns">']
     for q in exam.choice_questions:
         body.append(_q_html(q))
-    body.append('<div class="section-title">[서술형]</div>')
+    body.append('<div class="section-div">&lt; 서 술 형 &gt;</div>')
     for q in exam.essay_questions:
         body.append(_q_html(q))
     body.append('</div>')
-    if footer:
-        body.append(f'<div class="footer">{html.escape(footer)}</div>')
+    body.append(_footer_block(exam, footer))
+    title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
     return _wrap(title, "".join(body))
 
 
-def build_answer_html(exam: MockExam, header: str = "") -> str:
-    bp = exam.blueprint
-    title = (header or f"{bp.meta.name} {bp.meta.grade}학년 동형모의고사") + " — 정답·해설"
-    body = ['<div class="header">', f'<div class="title">{html.escape(title)}</div></div>']
-    for label, qs in (("선택형", exam.choice_questions), ("서술형", exam.essay_questions)):
-        body.append(f'<div class="section-title">[{label} 정답·해설]</div>')
-        for q in qs:
-            ans = html.escape(q.answer)
-            body.append(f'<div class="ans"><span class="k">{q.no}. 정답: {ans}</span>')
-            if q.answer_notes:
-                for n in q.answer_notes:
-                    body.append(f'<div>· {html.escape(n)}</div>')
-            if q.explanation:
-                body.append(f'<div>{html.escape(q.explanation)}</div>')
-            body.append('</div>')
-    return _wrap(title, "".join(body))
+def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
+    body = ['<div class="ans-title">정 답 및 해 설</div><hr class="ans-rule">']
+    for q in exam.questions:
+        label = TYPE_LABEL_KO.get(q.type, q.type)
+        diff = DIFFICULTY_KO_REV.get(q.difficulty, "중")
+        no = f"{q.no}번" if q.section == "choice" else f"서술형 {q.no}번"
+        badge = f"{label} · {diff} · {_fmt_score(q.score)}점"
+        body.append(f'<div class="ans-item"><span class="ans-no">{no}</span>'
+                    f'<span class="badge">{html.escape(badge)}</span>')
+        if q.answer_notes:
+            body.append(f'<div class="ans-line"><span class="a">정답.</span> '
+                        f'{html.escape(q.answer)}</div>')
+            for n in q.answer_notes:
+                body.append(f'<div class="ans-line">· {html.escape(n)}</div>')
+        else:
+            body.append(f'<div class="ans-line"><span class="a">정답.</span> '
+                        f'{html.escape(q.answer)}</div>')
+        if q.explanation:
+            body.append(f'<div class="exp"><b>해설.</b> {_exp_html(q.explanation)}</div>')
+        body.append('</div>')
+    body.append(_footer_block(exam, footer))
+    return _wrap("정답 및 해설", "".join(body))
+
+
+def _exp_html(text: str) -> str:
+    """[오답 함정] 같은 대괄호 주석을 강조색으로."""
+    esc = html.escape(text)
+    return re.sub(r"(\[[^\]]+\])", r'<span class="trap">\1</span>', esc)
 
 
 def _wrap(title: str, body: str) -> str:
@@ -109,21 +231,25 @@ def _wrap(title: str, body: str) -> str:
             f'<body>{body}</body></html>')
 
 
+# ---------------------------------------------------------------------------
+# 진입점
+# ---------------------------------------------------------------------------
 def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
-                header: str = "", footer: str = "",
+                header_info: dict | None = None, footer: str = "",
                 answer_key: str = "end", to_pdf: bool = True) -> dict[str, Path]:
-    """문제지/정답지 HTML(+PDF) 생성. 반환: {'problem_html':..., 'problem_pdf':...}."""
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    info = header_info or {}
     result: dict[str, Path] = {}
 
-    prob = build_problem_html(exam, header, footer)
-    ans = build_answer_html(exam, header)
+    prob = build_problem_html(exam, info, footer)
+    ans = build_answer_html(exam, info, footer)
 
     if answer_key == "end":
-        # 정답을 문제지 맨 뒤에 붙인다.
         prob = prob.replace("</body></html>",
-                            ans.split("<body>")[1].split("</body>")[0] + "</body></html>")
+                            '<div style="break-before:page"></div>'
+                            + ans.split("<body>")[1].split("</body>")[0]
+                            + "</body></html>")
 
     p_html = out / f"mock_form_{form}.html"
     p_html.write_text(prob, encoding="utf-8")
@@ -145,6 +271,6 @@ def _maybe_pdf(html_str: str, path: Path, result: dict, key: str) -> None:
     try:
         from weasyprint import HTML
     except Exception:
-        return  # WeasyPrint 미설치 → HTML 만 제공
+        return
     HTML(string=html_str).write_pdf(str(path))
     result[key] = path

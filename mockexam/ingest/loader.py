@@ -76,20 +76,48 @@ def _looks_empty(text: str) -> bool:
 # ---------------------------------------------------------------------------
 # 형식 유형 판별 (§3-A-1 마지막 행)
 # ---------------------------------------------------------------------------
-_SPEAKER_RE = re.compile(r"^\s*([A-Z][a-zA-Z]{0,14}|[MWＭＷ]|남|여|Man|Woman)\s*:\s+", re.M)
-_NOTICE_HINT = re.compile(r"\b(When|Where|Date|Time|Location|Admission|Notice|Highlights|Notes|Details|Registration)\b", re.I)
+# 줄 앞머리 "라벨:" 패턴(안내문 구획 헤더 / 대화문 화자 라벨 공통)
+_LABEL_RE = re.compile(r"^\s*([A-Za-z가-힣][A-Za-z가-힣 &/]{0,24}):\s*\S")
+# 안내문 구획 라벨 키워드
+_NOTICE_LABELS = ("when", "where", "date", "time", "location", "admission", "notice",
+                  "highlights", "notes", "details", "registration", "price", "fee",
+                  "contact", "venue", "schedule", "program", "hours", "deadline",
+                  "eligibility", "prize", "how to")
+# 화자 라벨 후보(짧은 단일 토큰)
+_SPEAKER_TOKEN = re.compile(r"[A-Za-z]{1,12}|[mwMW]|man|woman|남|여")
 _CHART_HINT = re.compile(r"(\d+\s*%|percent|the (?:above|following) (?:graph|chart|table)|그래프|도표|위 표)", re.I)
 
 
 def detect_format(text: str) -> tuple[FormatType, list[str]]:
-    """서술문 / 대화문 / 안내문 / 도표 판별. (format_type, speakers)."""
-    speakers = sorted({m.group(1).strip() for m in _SPEAKER_RE.finditer(text)})
-    if len(speakers) >= 2 or (speakers and _SPEAKER_RE.findall(text).__len__() >= 3):
-        return "dialogue", speakers
+    """서술문 / 대화문 / 안내문 / 도표 판별. (format_type, speakers).
+
+    - 안내문: 'Label:' 형태 구획 헤더가 2개 이상(When/Where/Highlights/Notes 등).
+    - 대화문: 짧은 화자 라벨('M:'/'Tom:')로 시작하는 발화가 3턴 이상 & 화자 2명 이상.
+      (안내문 구획 라벨은 화자에서 제외 → 'Highlights:' 오인 방지)
+    - 흔한 단어(when/time)의 단순 등장으로는 안내문으로 판정하지 않는다.
+    """
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    notice_hits = 0
+    turns: list[str] = []
+    for ln in lines:
+        m = _LABEL_RE.match(ln)
+        if not m:
+            continue
+        label = m.group(1).strip().lower()
+        if any(k in label for k in _NOTICE_LABELS):
+            notice_hits += 1
+            continue
+        first = label.replace("&", " ").replace("/", " ").split()
+        if first and _SPEAKER_TOKEN.fullmatch(first[0]):
+            turns.append(first[0])
+
     if len(_CHART_HINT.findall(text)) >= 2:
         return "chart", []
-    if len(_NOTICE_HINT.findall(text)) >= 3:
+    if notice_hits >= 2:
         return "notice", []
+    distinct = sorted(set(turns))
+    if len(turns) >= 3 and len(distinct) >= 2:
+        return "dialogue", distinct
     return "narrative", []
 
 
