@@ -47,17 +47,19 @@ PAGE = """
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>영어 지문 → 3형식 PDF 생성기</title>
 <style>
-  :root { color-scheme: light dark; }
+  /* 다크모드 기기에서도 항상 밝은 문서 UI로 고정 (입력 글자 흰색 방지) */
+  :root { color-scheme: light; }
   * { box-sizing: border-box; }
   body { font-family: 'Noto Sans KR','Malgun Gothic',sans-serif; max-width: 640px;
          margin: 0 auto; padding: 24px 18px 60px; color:#1c1c1e; background:#fafafa; }
-  h1 { font-size: 20px; margin: 8px 0 4px; }
+  h1 { font-size: 20px; margin: 8px 0 4px; color:#1c1c1e; }
   p.sub { color:#6e6e73; font-size:13px; margin:0 0 20px; }
   .card { background:#fff; border:1px solid #ececee; border-radius:12px;
           padding:18px; margin-bottom:16px; }
-  label.field { display:block; font-weight:600; font-size:13.5px; margin-bottom:6px; }
+  label.field { display:block; font-weight:600; font-size:13.5px; margin-bottom:6px; color:#1c1c1e; }
   input[type=text], input[type=file] { width:100%; padding:9px 11px; font-size:14px;
-          border:1px solid #d6d6da; border-radius:8px; background:#fff; }
+          border:1px solid #d6d6da; border-radius:8px; background:#fff; color:#1c1c1e; }
+  input[type=text]::placeholder { color:#9a9a9f; }
   .fmt { display:flex; align-items:flex-start; gap:10px; padding:10px;
          border:1px solid #ececee; border-radius:8px; margin-bottom:8px; cursor:pointer; }
   .fmt input { margin-top:3px; }
