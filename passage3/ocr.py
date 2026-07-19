@@ -16,7 +16,7 @@ from typing import List
 
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
 
-_VISION_MODEL = "claude-sonnet-4-6"
+_VISION_MODEL = "claude-sonnet-5"
 
 _VISION_PROMPT = (
     "이 이미지는 영어 지문 학습 자료입니다. 화면에 보이는 텍스트를 있는 그대로 "

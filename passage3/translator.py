@@ -14,7 +14,7 @@ try:
 except ImportError:
     from parser import Passage, Sentence
 
-DEFAULT_MODEL = "claude-sonnet-4-6"
+DEFAULT_MODEL = "claude-sonnet-5"
 
 _SYSTEM = (
     "You are a professional Korean-English translator for a study handout. "
