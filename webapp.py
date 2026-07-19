@@ -113,6 +113,8 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
 
+      <label class=chk><input type=checkbox name=brand value=1 checked> 🖋️ 분석지에 '은아 T' 문구 넣기 <span class=hint>(직독직해 made by · 출제표 tip · 하단 저작권은 항상 유지)</span></label>
+
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
@@ -239,6 +241,9 @@ def analyze_route():
     if not (which.analysis or which.wordlist or which.quiz):
         which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
 
+    # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
+    brand = cfg.design.brand if request.form.get("brand") else ""
+
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
     if not mock and not key:
@@ -264,7 +269,7 @@ def analyze_route():
             else:
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             stem = _safe_name(Path(f.filename).stem)
-            outs = pipeline.render_outputs(cfg, reports, stem, which=which)
+            outs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
             labels = {"analysis": "📘 분석지", "wordlist": "📝 어휘 리스트", "quiz": "✏️ 시험지"}
             fitems = [{"label": labels[k], "out": p.name} for k, p in outs.items()]
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""

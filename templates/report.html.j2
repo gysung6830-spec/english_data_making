@@ -79,7 +79,7 @@
       <span class="sec-sub">Exam Points</span>
     </div>
     <table class="grid t-exam">
-      <thead><tr><th style="width:130px">출제 유형</th><th>은아 T tip</th></tr></thead>
+      <thead><tr><th style="width:130px">출제 유형</th><th>{{ (brand ~ " tip") if brand else "출제 tip" }}</th></tr></thead>
       <tbody>
       {% for e in report.exam.items %}
         <tr>
@@ -140,7 +140,7 @@
   <div class="section s-lit page-break">
     <div class="section-head">
       <span class="sec-num">6</span>
-      <span class="sec-title">직독직해 <span class="made-by">made by 은아 T</span></span>
+      <span class="sec-title">직독직해 {% if brand %}<span class="made-by">made by {{ brand }}</span>{% endif %}</span>
       <span class="sec-sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>
     <table class="lit2">

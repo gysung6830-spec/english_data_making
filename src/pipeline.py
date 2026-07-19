@@ -47,15 +47,20 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 
 
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
-                   which=None) -> dict[str, Path]:
-    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성하고 {종류: 경로} 반환."""
+                   which=None, brand: str | None = None) -> dict[str, Path]:
+    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성하고 {종류: 경로} 반환.
+
+    brand: 분석지의 'made by ~' · '~ tip' 문구에 넣을 이름. None 이면 config 값 사용,
+    빈 문자열("")이면 브랜드 문구 제거. (하단 저작권 footer 는 항상 그대로)
+    """
     sel = which or cfg.outputs
+    brand = cfg.design.brand if brand is None else brand
     title = reports[0].title if reports else stem
     outs: dict[str, Path] = {}
     if sel.analysis:
         p = cfg.output_dir / f"{stem}_analysis.pdf"
         render.render_pdf(reports, p, footer_note=cfg.design.footer_note,
-                          min_vocab=cfg.vocab.min)
+                          min_vocab=cfg.vocab.min, brand=brand)
         outs["analysis"] = p
     if sel.wordlist:
         p = cfg.output_dir / f"{stem}_wordlist.pdf"

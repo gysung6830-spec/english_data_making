@@ -59,10 +59,14 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
-def render_html(reports, footer_note: str = "") -> str:
-    """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력."""
+def render_html(reports, footer_note: str = "", brand: str = "은아 T") -> str:
+    """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
+
+    brand: 직독직해 'made by ~' 와 출제표 '~ tip' 에 넣을 이름. 빈 값이면 브랜드 문구 제거.
+    (하단 저작권 footer_note 는 brand 와 무관하게 항상 그대로 표시)
+    """
     tmpl = _env.get_template("report.html.j2")
-    return tmpl.render(reports=_as_list(reports), footer_note=footer_note)
+    return tmpl.render(reports=_as_list(reports), footer_note=footer_note, brand=brand)
 
 
 def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
@@ -73,13 +77,13 @@ def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
     return report.model_copy(update={"vocab": new_vocab})
 
 
-def _fit_report(report, footer_note, css, min_vocab: int):
+def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T"):
     """한 지문이 2페이지에 들어오도록 어휘 개수를 필요한 만큼만 줄인다."""
     from weasyprint import HTML
 
     def pages(cap):
         r = _cap_report(report, cap)
-        html = render_html([r], footer_note)
+        html = render_html([r], footer_note, brand)
         doc = HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
         return len(doc.pages), r
 
@@ -97,7 +101,8 @@ def _fit_report(report, footer_note, css, min_vocab: int):
 
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
-               fit_pages: bool = True, min_vocab: int = 8) -> Path:
+               fit_pages: bool = True, min_vocab: int = 8,
+               brand: str = "은아 T") -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
@@ -106,13 +111,13 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
     rlist = _as_list(reports)
 
     def build(rs):
-        html = render_html(rs, footer_note)
+        html = render_html(rs, footer_note, brand)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
     doc = build(rlist)
     # 지문 1개당 2페이지(1p: 요약~어휘, 2p: 직독직해)를 넘기면 어휘를 줄여 다시 렌더
     if fit_pages and len(doc.pages) > 2 * len(rlist):
-        rlist = [_fit_report(r, footer_note, css, min_vocab) for r in rlist]
+        rlist = [_fit_report(r, footer_note, css, min_vocab, brand) for r in rlist]
         doc = build(rlist)
     doc.write_pdf(str(out_path))
     return out_path
