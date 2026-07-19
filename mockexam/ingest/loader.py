@@ -122,6 +122,63 @@ def detect_format(text: str) -> tuple[FormatType, list[str]]:
 
 
 # ---------------------------------------------------------------------------
+# 이중언어(직독직해)·EBS 자료 전처리
+# ---------------------------------------------------------------------------
+_HANGUL_RUN = re.compile(r"[가-힣ㄱ-ㅎㅏ-ㅣ]+")
+_CIRCLED = re.compile(r"[①-⑳㉑-㉟㉠-㉯]")  # ①~⑳ 및 원문자
+_EN_WORD = re.compile(r"[A-Za-z]{2,}")
+# 지문 경계 헤더(EBS/올림포스 등): 'Ch. 04 Unit 10 - 2번'
+_STUDY_HEADER = re.compile(r"Ch\.?\s*\d+\s*Unit\s*\d+\s*[-–~]\s*\d+\s*번", re.I)
+# 출처·워터마크 노이즈
+_SRC_NOISE = re.compile(
+    r"\[EBS\][^\[\n]*?한줄해석\([^)]*\)|\[Flow\s*Edu\]|flowedu\.tistory\.com|"
+    r"한줄해석\([^)]*\)|올림포스[가-힣0-9]*", re.I)
+
+
+def _is_bilingual_study(text: str) -> bool:
+    """직독직해/EBS식 이중언어 자료인지(영어+한글 해석 혼재) 판단."""
+    has_ko = bool(_HANGUL_RUN.search(text))
+    has_en = len(_EN_WORD.findall(text)) > 30
+    markers = bool(_STUDY_HEADER.search(text) or _SRC_NOISE.search(text) or
+                   re.search(r"[①-⑳][^\n]{0,80}[가-힣]", text))
+    return has_ko and has_en and markers
+
+
+def _clean_english(chunk: str) -> str:
+    """이중언어 조각에서 한글 해석·출처·문장번호를 걷어내고 영어 지문만 복원."""
+    t = _SRC_NOISE.sub(" ", chunk)
+    t = _STUDY_HEADER.sub(" ", t)
+    t = _CIRCLED.sub(" ", t)
+    t = _HANGUL_RUN.sub(" ", t)            # 한글 해석 제거
+    t = re.sub(r"[·∼※▶◀‣・「」『』（），、]", " ", t)
+    t = re.sub(r"\s+", " ", t)
+    # 한글 제거로 생긴 '고아 구두점'(공백에 둘러싸인 . , ; :) 삭제
+    t = re.sub(r"\s+[.,;:!?]+(?=\s|$)", "", t)
+    t = re.sub(r"\s+([.,;:!?)])", r"\1", t)   # 구두점 앞 공백 제거
+    t = re.sub(r"([.,;:!?])\1+", r"\1", t)    # 중복 구두점 축소(.. → .)
+    t = re.sub(r"\(\s+", "(", t)
+    t = re.sub(r"^[\s.,;:)\]]+", "", t)       # 앞머리 잡구두점 제거
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    return t
+
+
+def _split_bilingual(text: str) -> list[str]:
+    """직독직해 자료를 지문(단원) 단위로 나눠 영어 지문 리스트로 복원."""
+    heads = list(_STUDY_HEADER.finditer(text))
+    if len(heads) >= 2:
+        bounds = [m.start() for m in heads] + [len(text)]
+        raw_chunks = [text[bounds[i]:bounds[i + 1]] for i in range(len(heads))]
+    else:
+        raw_chunks = [text]
+    out: list[str] = []
+    for c in raw_chunks:
+        eng = _clean_english(c)
+        if len(_EN_WORD.findall(eng)) >= 20:   # 충분한 영어만 지문으로 채택
+            out.append(eng)
+    return out
+
+
+# ---------------------------------------------------------------------------
 # 지문 경계 분리
 # ---------------------------------------------------------------------------
 _PASSAGE_MARK = re.compile(r"^\s*(?:지문\s*\d+|passage\s*\d+|\[?\s*\d+\s*\]?)\s*[.:)]?\s*$", re.I)
@@ -131,12 +188,24 @@ def split_passages(text: str, source_file: str | None = None,
                    id_prefix: str = "p") -> list[Passage]:
     """빈 줄·번호·제목 패턴으로 여러 지문을 나눈다.
 
+    - 직독직해/EBS식 이중언어 자료면 단원 헤더로 나누고 영어만 복원.
     - '지문 1' / 'Passage 2' / '[1]' 같은 명시적 구분선을 우선 사용.
     - 없으면 2줄 이상 빈 줄을 경계로 삼는다.
     """
     text = text.replace("\r\n", "\n").strip()
     if not text:
         return []
+
+    # 0) 직독직해/EBS 이중언어 자료 → 단원별 영어 지문으로 복원
+    if _is_bilingual_study(text):
+        passages: list[Passage] = []
+        for i, body in enumerate(_split_bilingual(text), 1):
+            fmt, speakers = detect_format(body)
+            passages.append(Passage(id=f"{id_prefix}{i}", text=body,
+                                    format_type=fmt, speakers=speakers,
+                                    source_file=source_file))
+        if passages:
+            return passages
 
     # 1) 명시적 마커로 분할
     chunks: list[str] = []

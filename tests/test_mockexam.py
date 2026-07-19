@@ -68,6 +68,27 @@ def test_detect_format_dialogue():
     assert fmt == "dialogue"
 
 
+def test_bilingual_ebs_material_is_cleaned_and_split():
+    """직독직해(EBS) 자료: 단원별 분리 + 한글 해석 제거 후 영어 지문 복원."""
+    from mockexam.ingest.loader import split_passages
+    raw = (
+        "[EBS]올림포스영어독해기본1한줄해석(좌지문우해석) Ch. 04 Unit 10 - 2번: 한글 제목 "
+        "① Although the wish to be alone is often strong, its intensity varies from "
+        "혼자 있고 싶은 소망은 강하다. person to person. ② An equally impelling impulse "
+        "하지만 다른 충동도 있다 is to seek the company of others and to share time. "
+        "[EBS]올림포스영어독해기본1한줄해석(좌지문우해석) Ch. 04 Unit 10 - 3번: 다른 제목 "
+        "① At one end of the spectrum was the forest gardening of New Guinea "
+        "변화의 한쪽 끝. ② This approach left minimal traces on the land. 최소 흔적.")
+    ps = split_passages(raw)
+    assert len(ps) == 2, [p.text for p in ps]
+    joined = " ".join(p.text for p in ps)
+    # 한글·출처·문장번호가 제거되어야 한다
+    assert "혼자" not in joined and "제목" not in joined
+    assert "EBS" not in joined and "①" not in joined
+    assert "Although the wish to be alone" in ps[0].text
+    assert "forest gardening" in ps[1].text
+
+
 # ---------------------------------------------------------------------------
 # 배정 (형식 하드제약)
 # ---------------------------------------------------------------------------
