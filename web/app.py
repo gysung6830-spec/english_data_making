@@ -26,6 +26,14 @@ app = Flask(__name__)
 
 _FID_RE = re.compile(r"^[0-9a-f]{6,32}$")
 _SEP_RE = re.compile(r"(?m)^\s*-{3,}\s*$")   # 지문 구분: --- 한 줄
+_ILLEGAL_NAME = re.compile(r'[\\/:*?"<>|\x00-\x1f]')   # 파일명 금지문자
+
+
+def safe_name(raw: str) -> str:
+    """사용자가 입력한 지문명을 안전한 파일명 조각으로 정리."""
+    s = _ILLEGAL_NAME.sub("", raw or "").strip().strip(".")
+    s = re.sub(r"\s+", " ", s)
+    return s[:80]
 
 
 def split_passages(text: str) -> list[str]:
@@ -62,6 +70,7 @@ def generate():
         return render_template("index.html", has_api_key=cfg.has_api_key, error=msg), code
 
     uploads = [f for f in request.files.getlist("files") if f and f.filename]
+    doc_name = safe_name(request.form.get("doc_name", ""))
 
     try:
         if demo:
@@ -109,8 +118,16 @@ def generate():
     except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
         return fail(f"생성 실패: {e}", 500)
 
+    # 다운로드 기본 파일명: (지문명)_변형문제
+    if not doc_name:
+        if demo:
+            doc_name = "데모지문"
+        elif uploads:
+            doc_name = safe_name(Path(uploads[0].filename).stem)
+        else:
+            doc_name = "영어지문"
     return render_template("result.html", fid=fid, count=n,
-                           demo=demo, header=header)
+                           demo=demo, header=header, doc_name=doc_name or "영어지문")
 
 
 @app.get("/pdf/<fid>")
@@ -126,5 +143,6 @@ def download(fid: str):
     p = _pdf_path(fid)
     if not p.exists():
         abort(404)
+    base = safe_name(request.args.get("name", "")) or "영어지문"
     return send_file(p, mimetype="application/pdf", as_attachment=True,
-                     download_name="영어시험지.pdf")
+                     download_name=f"{base}_변형문제.pdf")

@@ -6,9 +6,10 @@
     <h2>생성 완료 ✅</h2>
     <p class="tag">{{ '데모 지문' if demo else '입력 지문' }} {{ count }}개 · 각 지문 7문항
       {% if header %}· 머리글 “{{ header }}”{% endif %}</p>
+    <p class="tag">파일명: <b>{{ doc_name }}_변형문제.pdf</b></p>
   </div>
   <div class="actions">
-    <a class="btn" href="{{ url_for('download', fid=fid) }}">PDF 다운로드</a>
+    <a class="btn" href="{{ url_for('download', fid=fid, name=doc_name) }}">PDF 다운로드</a>
     <a class="btn ghost" href="{{ url_for('index') }}">새로 만들기</a>
   </div>
 </div>
