@@ -23,11 +23,21 @@ DEFAULT_MAX_TOKENS = 8000
 # pydantic 모델 -> 구조화 출력용 strict JSON 스키마
 # ---------------------------------------------------------------------------
 def _strictify(node: Any) -> None:
-    """모든 object 노드에 additionalProperties:false 와 required(전체 키)를 설정."""
+    """object 노드에 additionalProperties:false·required 설정.
+
+    또한 array 의 minItems/maxItems 중 0·1 이 아닌 값은 제거한다.
+    (Anthropic strict JSON 스키마는 minItems 0/1 만 지원 → 개수는 pydantic
+     field_validator 로 별도 검증한다.)
+    """
     if isinstance(node, dict):
         if node.get("type") == "object" and "properties" in node:
             node["additionalProperties"] = False
             node["required"] = list(node["properties"].keys())
+        if node.get("type") == "array":
+            if node.get("minItems") not in (0, 1):
+                node.pop("minItems", None)
+            if node.get("maxItems") not in (0, 1):
+                node.pop("maxItems", None)
         for v in node.values():
             _strictify(v)
     elif isinstance(node, list):

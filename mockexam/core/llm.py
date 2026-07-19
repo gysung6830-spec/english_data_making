@@ -23,8 +23,9 @@ class ChoiceQuestionOut(BaseModel):
 
     passage: str = Field(..., description="문제에 실릴 지문. 밑줄이 필요한 유형이면 "
                          "①<u>...</u> 형식으로 정확히 지정 개수만큼 표시")
-    choices: list[str] = Field(..., min_length=5, max_length=5,
-                               description="5개 선지 텍스트(라벨 제외)")
+    # min/max_length 를 스키마에 넣지 않는다(Anthropic strict 는 minItems 0/1 만 허용).
+    # 개수는 아래 _five validator 로 검증한다.
+    choices: list[str] = Field(..., description="정확히 5개 선지 텍스트(라벨 제외)")
     answer_index: int = Field(..., ge=1, le=5, description="정답 선지 번호(1~5)")
     explanation: str = Field(..., description="정답 근거 해설")
 
