@@ -149,8 +149,11 @@ def _gen_D(client, analysis, body, max_retries=1):
 
 def _gen_E(client, analysis, body, max_retries=1):
     p = ("아래 정본으로 '요약문 빈칸(E)'을 만드세요. 지문을 한 문장 요약하되 핵심어 2곳을 (A)(B)로 "
-         "비우고 before/mid/after 로 나눕니다. pairs 5개는 (a,b) 단어쌍 선지, 정답=논지에 맞는 쌍, "
-         "오답=한쪽만 맞거나 둘 다 어긋남. answer_no·reason 한국어.\n\n{ctx}")
+         "비우고 before/mid/after 로 나눕니다. pairs 5개는 (a,b) 단어쌍 선지입니다.\n"
+         "- 정답 쌍: (A)(B) 둘 다 논지에 맞되, 지문 단어를 '그대로 쓰지 말고 유의어(패러프레이즈)'로.\n"
+         "- 오답 4: (A)만 맞음 / (B)만 맞음 / 둘 다 어긋남 을 고루 섞고, 그중 일부에는 '지문에 실제 "
+         "나온 단어'를 넣어 맞아 보이게(함정) 만듭니다. 정답 쌍만 (A)(B) 둘 다 맞아야 합니다.\n"
+         "answer_no·reason 은 한국어.\n\n{ctx}")
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
                                   max_tokens=2000, max_retries=max_retries)
     pairs = [(x.a, x.b) for x in out.pairs]

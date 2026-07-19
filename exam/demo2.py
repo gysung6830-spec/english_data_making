@@ -81,17 +81,24 @@ def _passage_dna2() -> Passage:
         reason="동사 begin 을 문맥(현재완료)에 맞춰 have begun 으로 변형하고 어순을 맞춘다.",
     ))
 
-    # E · 요약문 빈칸(객관식) — 지문도 함께 제시
+    # E · 요약문 빈칸 — 정답=유의어, 오답=지문 원문 단어 함정
     p.set_qa(E, *B2.make_E(
         s,
         before="DNA can ",
         mid=" a huge amount of information in a tiny space, so scientists are trying to ",
         after=" digital data inside it.",
-        choice_pairs=[("store", "lose"), ("store", "preserve"), ("delete", "preserve"),
-                      ("store", "delete"), ("hide", "reveal")],
+        choice_pairs=[
+            ("store", "erase"),      # ① (A)=store 는 지문 단어(맞아 보임) 함정, (B) 틀림
+            ("retain", "archive"),   # ② 정답 — 둘 다 유의어(store→retain, encode/preserve→archive)
+            ("delete", "archive"),   # ③ (A) 틀림
+            ("retain", "expose"),    # ④ (B) 틀림
+            ("discard", "reveal"),   # ⑤ 둘 다 틀림
+        ],
         answer_no=2,
-        reason=("지문은 DNA가 정보를 '저장(store)'하고, 과학자들이 그 안에 디지털 데이터를 "
-                "'보존(preserve)'하려 한다는 내용이므로 (A) store, (B) preserve. 따라서 ②."),
+        reason=("지문은 DNA가 정보를 '저장(store/hold)'하고, 과학자들이 그 안에 데이터를 "
+                "'보존·부호화(preserve/encode)'하려 한다는 내용이다. 정답 ②는 원문 단어를 그대로 "
+                "쓰지 않고 유의어 retain(저장)·archive(보존)로 바꿨다. ①의 store는 지문 단어라 "
+                "맞아 보이지만 (B) erase가 틀려 오답이다."),
     ))
 
     # F · 빈칸추론 — 지문 전체 + 핵심(주제) 어구 빈칸, 정답은 유의어 패러프레이즈

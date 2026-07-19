@@ -90,17 +90,24 @@ def build_passage() -> Passage:
         reason="involve→Involving(동명사 주어), produce→produces(수 일치)로 변형해 어순을 맞춘다.",
     ))
 
-    # E · 요약문 빈칸(객관식) — 지문도 함께 제시
+    # E · 요약문 빈칸 — 정답=유의어, 오답=지문 원문 단어 함정
     p.set_qa(E, *B2.make_E(
         s,
         before="When a building's real users are ",
         mid=" during design, the result is greater satisfaction and ",
         after=" costs for the institution.",
-        choice_pairs=[("ignored", "higher"), ("consulted", "lower"), ("consulted", "higher"),
-                      ("replaced", "lower"), ("ignored", "lower")],
+        choice_pairs=[
+            ("consulted", "higher"),   # ① (A)=consulted 는 지문 단어(맞아 보임) 함정, (B) 틀림
+            ("engaged", "diminished"), # ② 정답 — 둘 다 유의어(consulted→engaged, lower→diminished)
+            ("ignored", "diminished"), # ③ (A) 틀림
+            ("engaged", "rising"),     # ④ (B) 틀림
+            ("replaced", "reduced"),   # ⑤ (A) 틀림 ((B)=reduced 는 지문 단어 함정)
+        ],
         answer_no=2,
-        reason=("지문은 사용자를 '자문(consult)'하면 만족이 커지고 비용이 '줄어든다(lower)'고 하므로 "
-                "(A) consulted, (B) lower. 따라서 ②."),
+        reason=("지문은 사용자를 '자문하면(consult)' 만족이 커지고 비용이 '줄어든다(lower/reduce)'는 "
+                "내용이다. 정답 ②는 원문 단어를 그대로 쓰지 않고 유의어 engaged(자문·참여)·"
+                "diminished(줄어든)로 바꿨다. ①의 consulted, ⑤의 reduced는 지문 단어라 맞아 보이지만 "
+                "나머지 한 칸이 틀려 오답이다."),
     ))
 
     # F · 빈칸추론 — 지문 전체 + 핵심(주제) 어구 빈칸, 정답은 유의어 패러프레이즈
