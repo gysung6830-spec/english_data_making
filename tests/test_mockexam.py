@@ -105,15 +105,42 @@ def test_assignment_format_hard_constraint():
             assert pmap[a.passage_id].format_type == "notice"
 
 
-def test_reuse_cap_max_two_hard():
-    passages = load_passages([SAMPLE])
-    prof = resolve_profile("jinyang_hs", 1)
-    bp = blueprint_from_profile(prof, 1)
+def _synthetic_passages(n):
+    from mockexam.core.models import Passage
+    topics = ["talent", "traffic", "sleep", "coral reefs", "invention", "reading",
+              "volunteering", "language", "habits", "memory", "climate", "music"]
+    out = []
+    for i in range(n):
+        t = topics[i % len(topics)]
+        text = (f"Research about {t} shows an interesting pattern. When people focus "
+                f"on {t}, however, they often overlook the details. Therefore the way "
+                f"we treat {t} matters, and in conclusion small choices shape it. "
+                f"For instance, one study proved that {t} can change over time.")
+        out.append(Passage(id=f"p{i+1}", text=text, format_type="narrative"))
+    return out
+
+
+def test_few_passages_unlimited_reuse_all_filled():
+    """지문 수 < 문항 수: 제한 없이 재사용하여 모든 문항을 채운다(스킵 없음)."""
+    bp = blueprint_from_profile(resolve_profile("jinyang_hs", 1), 1)   # 27슬롯
+    passages = _synthetic_passages(3)                                  # 3 < 27
     assigns = assign_passages(bp, passages, difficulty="mid")
+    assert len(assigns) == 27
+    assert all(a.passage_id is not None for a in assigns), "스킵된 문항이 있으면 안 됨"
     from collections import Counter
-    # 대체(substituted) 포함 모든 배정에서 한 지문은 최대 2회까지만 등장(하드 제약)
-    used = Counter(a.passage_id for a in assigns if a.passage_id)
-    assert all(v <= 2 for v in used.values()), used
+    used = Counter(a.passage_id for a in assigns)
+    assert max(used.values()) > 2, "지문 부족 시 2회 초과 재사용이 허용돼야 함"
+
+
+def test_enough_passages_cap_two_and_all_filled():
+    """지문 수 ≥ 문항 수: 한 지문 최대 2회, 그리고 모든 문항이 채워진다."""
+    bp = blueprint_from_profile(resolve_profile("jinyang_hs", 1), 1)   # 27슬롯
+    passages = _synthetic_passages(30)                                 # 30 ≥ 27
+    assigns = assign_passages(bp, passages, difficulty="mid")
+    assert all(a.passage_id is not None for a in assigns), "스킵된 문항이 있으면 안 됨"
+    from collections import Counter
+    used = Counter(a.passage_id for a in assigns)
+    assert max(used.values()) <= 2, f"지문 충분 시 최대 2회: {used}"
 
 
 # ---------------------------------------------------------------------------

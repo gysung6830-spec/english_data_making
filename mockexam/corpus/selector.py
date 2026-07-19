@@ -140,7 +140,9 @@ def _difficulty_bonus(prof: PassageProfile, want: Difficulty) -> float:
 # ---------------------------------------------------------------------------
 # 배정 알고리즘 (§3-A-3) — 기존 지문만으로, 새 지문 생성 안 함
 # ---------------------------------------------------------------------------
-REUSE_CAP = 2  # 한 지문 최대 2문항(하드 제약). 상한을 넘으면 대체가 아니라 스킵.
+# 지문 수 ≥ 문항 수 일 때만 적용되는 한 지문 최대 사용 횟수.
+# 지문 수 < 문항 수 이면 상한을 두지 않고(무제한) 모든 문항을 채운다.
+REUSE_CAP = 2
 
 
 def assign_passages(
@@ -154,58 +156,55 @@ def assign_passages(
 
     llm_refine: 규칙 점수가 애매할 때 (유형, 지문)→0~1 을 반환하는 선택 훅.
     """
+    if not passages:
+        # 지문이 하나도 없으면 채울 수 없다(유일한 스킵 경우).
+        return [Assignment(it.no, it.section, it.type, None, 0.0, "rule",
+                           note="skipped_no_passage") for it in blueprint.items]
+
     if profiles is None:
         profiles = {p.id: profile_passage(p) for p in passages}
     by_format: dict[str, list[Passage]] = {}
     for p in passages:
         by_format.setdefault(p.format_type, []).append(p)
 
+    # 동적 재사용 상한(사용자 규칙):
+    #  - 지문 수 ≥ 문항 수 : 한 지문 최대 REUSE_CAP(2)회
+    #  - 지문 수 <  문항 수 : 제한 없음(None) → 모든 문항을 반드시 채운다
+    num_slots = len(blueprint.items)
+    cap: int | None = REUSE_CAP if len(passages) >= num_slots else None
+
     use_count: dict[str, int] = {p.id: 0 for p in passages}
     type_on: dict[str, set[str]] = {p.id: set() for p in passages}  # 지문별 이미 붙은 유형
 
     assignments: list[Assignment] = []
-
     # 형식 고정 슬롯을 먼저 배정(하드 제약)
     order = sorted(blueprint.items, key=lambda it: (0 if it.type in FORMAT_REQUIRED else 1, it.no))
 
     for item in order:
         req_fmt = FORMAT_REQUIRED.get(item.type)
-        candidates = by_format.get(req_fmt, []) if req_fmt else passages
-        best = _pick(item, candidates, profiles, use_count, type_on, difficulty, llm_refine)
+        note: str | None = None
 
-        if best is None and req_fmt:
-            # 형식 지문 없음 → 새로 만들지 않는다. 서술문을 변환하거나 스킵.
-            narr = by_format.get("narrative", [])
-            conv = _pick(item, narr, profiles, use_count, type_on, difficulty, llm_refine)
-            if conv is not None:
-                pid, score, src = conv
-                assignments.append(Assignment(item.no, item.section, item.type, pid,
-                                               score, src, note="substituted"))
-                use_count[pid] += 1
-                type_on[pid].add(item.type)
-            else:
-                assignments.append(Assignment(item.no, item.section, item.type, None,
-                                               0.0, "format", note="skipped_no_passage"))
+        if req_fmt:
+            fmt_pool = by_format.get(req_fmt, [])
+            pick = _pick(item, fmt_pool, profiles, use_count, type_on, difficulty,
+                         llm_refine, cap)
+            if pick is None:
+                # 형식 지문이 없거나 소진 → 서술문(없으면 전체)으로 대체(완성 보장)
+                pool = by_format.get("narrative") or passages
+                pick = _guaranteed_pick(item, pool, profiles, use_count, type_on,
+                                        difficulty, llm_refine, cap)
+                note = "substituted"
+        else:
+            pick = _guaranteed_pick(item, passages, profiles, use_count, type_on,
+                                    difficulty, llm_refine, cap)
+
+        if pick is None:  # 지문 pool 이 비어있는 극단(위 not passages 로 사실상 방지)
+            assignments.append(Assignment(item.no, item.section, item.type, None,
+                                           0.0, "rule", note="skipped_no_passage"))
             continue
-
-        if best is None:
-            # 상한(2)은 유지하되, '같은 지문에 같은 유형 금지'만 완화해 차선 배정 시도.
-            # 상한을 넘겨야 채울 수 있으면 대체하지 않고 스킵한다(한 지문 최대 2회 하드 보장).
-            fallback = _pick(item, candidates, profiles, use_count,
-                             {p.id: set() for p in passages}, difficulty, llm_refine)
-            if fallback is not None:
-                pid, score, src = fallback
-                assignments.append(Assignment(item.no, item.section, item.type, pid,
-                                               score, src, note="substituted"))
-                use_count[pid] += 1
-                type_on[pid].add(item.type)
-            else:
-                assignments.append(Assignment(item.no, item.section, item.type, None,
-                                               0.0, "rule", note="skipped_no_passage"))
-            continue
-
-        pid, score, src = best
-        assignments.append(Assignment(item.no, item.section, item.type, pid, score, src))
+        pid, score, src = pick
+        assignments.append(Assignment(item.no, item.section, item.type, pid, score,
+                                       src, note=note))
         use_count[pid] += 1
         type_on[pid].add(item.type)
 
@@ -213,17 +212,40 @@ def assign_passages(
     return assignments
 
 
+def _guaranteed_pick(item, pool, profiles, use_count, type_on, difficulty,
+                     llm_refine, cap):
+    """pool 이 비어있지 않으면 반드시 지문을 하나 반환(모든 문항 완성 보장).
+
+    제약을 단계적으로 완화한다: 상한+유형겹침회피 → 유형겹침허용 → 상한무시.
+    """
+    if not pool:
+        return None
+    r = _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
+              cap, allow_type_overlap=False)
+    if r:
+        return r
+    r = _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
+              cap, allow_type_overlap=True)
+    if r:
+        return r
+    # 마지막 수단: 상한도 무시(가장 적게 쓴 지문이 뽑히도록 페널티가 유도)
+    return _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
+                 None, allow_type_overlap=True)
+
+
 def _pick(item: Item, candidates: list[Passage],
           profiles: dict[str, PassageProfile],
           use_count: dict[str, int], type_on: dict[str, set[str]],
           difficulty: Difficulty,
-          llm_refine: Callable[[str, Passage], float] | None):
-    """상한(3)·유형겹침을 지키며 적합도 최고 지문을 고른다. 없으면 None."""
+          llm_refine: Callable[[str, Passage], float] | None,
+          cap: int | None,
+          allow_type_overlap: bool = False):
+    """cap(None=무제한)·유형겹침 규칙 하에 적합도 최고 지문을 고른다. 없으면 None."""
     scored: list[tuple[float, str, str]] = []
     for p in candidates:
-        if use_count.get(p.id, 0) >= REUSE_CAP:
+        if cap is not None and use_count.get(p.id, 0) >= cap:
             continue
-        if item.type in type_on.get(p.id, set()):   # 같은 지문에 같은 유형 금지
+        if not allow_type_overlap and item.type in type_on.get(p.id, set()):
             continue
         prof = profiles[p.id]
         s = fit_score(item.type, prof) + _difficulty_bonus(prof, difficulty)
@@ -232,8 +254,8 @@ def _pick(item: Item, candidates: list[Passage],
         if llm_refine is not None and 0.35 <= s <= 0.65:
             s = llm_refine(item.type, p)
             src = "llm"
-        # 재사용은 페널티(중복 최소화)
-        s -= 0.05 * use_count.get(p.id, 0)
+        # 재사용은 페널티(사용 횟수가 적은 지문을 우선 → 고르게 분산)
+        s -= 0.08 * use_count.get(p.id, 0)
         scored.append((s, p.id, src))
     if not scored:
         return None
