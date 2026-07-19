@@ -20,6 +20,17 @@ python run_mock.py generate --school jinyang_hs --grade 1 --difficulty 중 \
 `--mock` 은 API 키를 무시하고 **구조만 채운 미리보기**를 만듭니다(검증기까지 전 구간 확인용).
 WeasyPrint가 설치되어 있으면 PDF도 함께 생성됩니다.
 
+## 웹앱으로 쓰기 (터미널 몰라도 OK)
+
+```bash
+pip install -r requirements.txt
+python mock_webapp.py          # 또는 Windows: start_mock.bat 더블클릭
+```
+→ 브라우저에서 **http://localhost:5001** 접속.
+지문 파일 올리기 → 학교·학년·난이도 고르기 → **저장할 파일 이름** 입력 → 만들기.
+API 키가 없으면 '미리보기'로 배치·검증·디자인까지 확인할 수 있고, 키를 넣으면 실제 문항이 생성됩니다.
+(WeasyPrint가 없으면 HTML로 저장되며, 브라우저에서 Ctrl+P → PDF로 저장하면 됩니다.)
+
 ## 실제 문항 생성 (LLM)
 
 `.env` 에 `ANTHROPIC_API_KEY` 를 넣으면 `--mock` 없이 실제 지문/선지/정답이 생성됩니다.

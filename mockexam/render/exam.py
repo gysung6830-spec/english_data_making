@@ -281,11 +281,14 @@ def _wrap(title: str, body: str) -> str:
 # ---------------------------------------------------------------------------
 def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
                 header_info: dict | None = None, footer: str = "",
-                answer_key: str = "end", to_pdf: bool = True) -> dict[str, Path]:
+                answer_key: str = "end", to_pdf: bool = True,
+                basename: str | None = None) -> dict[str, Path]:
+    """basename 을 주면 출력 파일명을 '{basename}.html/.pdf' 로 지정(웹앱 파일명 선택용)."""
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
     info = header_info or {}
     result: dict[str, Path] = {}
+    stem = basename or f"mock_form_{form}"
 
     prob = build_problem_html(exam, info, footer)
     ans = build_answer_html(exam, info, footer)
@@ -296,19 +299,19 @@ def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
                             + ans.split("<body>")[1].split("</body>")[0]
                             + "</body></html>")
 
-    p_html = out / f"mock_form_{form}.html"
+    p_html = out / f"{stem}.html"
     p_html.write_text(prob, encoding="utf-8")
     result["problem_html"] = p_html
 
     if answer_key == "separate":
-        a_html = out / f"mock_form_{form}_answers.html"
+        a_html = out / f"{stem}_answers.html"
         a_html.write_text(ans, encoding="utf-8")
         result["answers_html"] = a_html
 
     if to_pdf:
-        _maybe_pdf(prob, out / f"mock_form_{form}.pdf", result, "problem_pdf")
+        _maybe_pdf(prob, out / f"{stem}.pdf", result, "problem_pdf")
         if answer_key == "separate":
-            _maybe_pdf(ans, out / f"mock_form_{form}_answers.pdf", result, "answers_pdf")
+            _maybe_pdf(ans, out / f"{stem}_answers.pdf", result, "answers_pdf")
     return result
 
 
