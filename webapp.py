@@ -117,6 +117,12 @@ INDEX_HTML = """
         <label class=kind><input type=radio name=kind value=workbook> 문장별 복합유형 통합 워크북</label>
       </div>
 
+      <label>④ 저장할 PDF 파일명
+        <span class=hint>(비우면 자동: <b>지문명_워크북</b>)</span>
+      </label>
+      <input type=text name=outname placeholder="예: 올림포스_Unit10_워크북">
+      <div class=hint>여러 지문을 올리면 파일명 뒤에 지문 이름이 붙습니다.</div>
+
       <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
@@ -226,6 +232,8 @@ def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
     kind = request.form.get("kind") or "report"   # report | workbook
+    custom = _safe_name((request.form.get("outname") or "").strip()) if (request.form.get("outname") or "").strip() else ""
+    single = len(files) == 1
     form_key = (request.form.get("api_key") or "").strip()
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
@@ -255,13 +263,19 @@ def analyze_route():
             if kind == "workbook":
                 wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
                       else pipeline.build_workbook_for_pdf(client, cfg, tmp))
-                out = OUTPUT_DIR / f"{stem}_workbook.pdf"
+                # 파일명: 사용자가 지정하면 그것을, 없으면 '지문명_워크북'
+                if custom:
+                    base = custom if single else f"{custom}_{stem}"
+                else:
+                    base = f"{stem}_워크북"
+                out = OUTPUT_DIR / f"{base}.pdf"
                 workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
                 wb_books.append(wb)
             else:
+                base = (custom if single else f"{custom}_{stem}") if custom else f"{stem}_analysis"
+                out = OUTPUT_DIR / f"{base}.pdf"
                 report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
                           else pipeline.build_report_for_pdf(client, cfg, tmp))
-                out = OUTPUT_DIR / f"{stem}_analysis.pdf"
                 render.render_pdf(report, out, footer_note=cfg.design.footer_note)
             results.append({"name": f.filename, "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
@@ -273,7 +287,8 @@ def analyze_route():
     # 워크북 + 지문 2편 이상: 합본(지문1→답1→지문2→답2) PDF 추가 제공
     if kind == "workbook" and len(wb_books) >= 2:
         try:
-            combined = OUTPUT_DIR / "ALL_workbooks.pdf"
+            cbase = f"{custom}_합본" if custom else "통합워크북_합본"
+            combined = OUTPUT_DIR / f"{cbase}.pdf"
             workbook_render.render_workbooks_pdf(wb_books, combined,
                                                  footer_note=cfg.design.footer_note)
             results.append({"name": "📚 합본 (지문1→답1→지문2→답2)", "ok": True,

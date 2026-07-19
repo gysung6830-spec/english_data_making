@@ -122,7 +122,7 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
                 books.append(wb)
                 logger.info("[%d/%d] 분석 완료: %s (문항 %d개)", i, total, pdf.name, wb.total)
             else:
-                out = cfg.output_dir / f"{_safe_stem(pdf)}_workbook.pdf"
+                out = cfg.output_dir / f"{_safe_stem(pdf)}_워크북.pdf"
                 workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
                 outputs.append(out)
                 manifest.record_success(str(pdf), str(out))
@@ -135,7 +135,7 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
 
     # 합본 모드: 모은 지문을 한 PDF 로 배치
     if combine and books:
-        combined = cfg.output_dir / "ALL_workbooks.pdf"
+        combined = cfg.output_dir / "통합워크북_합본.pdf"
         workbook_render.render_workbooks_pdf(books, combined, footer_note=cfg.design.footer_note)
         outputs.append(combined)
         manifest.record_success("ALL", str(combined))
