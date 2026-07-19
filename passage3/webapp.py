@@ -111,8 +111,8 @@ PAGE = """
 
     <div class="card">
       <label class="field" for="header">4. 상단 머리글 (선택)</label>
-      <input type="text" id="header" name="header" placeholder="예: OO영어학원">
-      <div class="hint">각 페이지 상단 우측에 표시됩니다. 비우면 표시 안 함.</div>
+      <input type="text" id="header" name="header" placeholder="예: OO영어학원 · 지문 자료">
+      <div class="hint">각 페이지 <b>오른쪽 위</b>에 표시됩니다(학원명·자료명 등). 비우면 표시 안 함.</div>
     </div>
 
     <button type="submit">PDF 생성 · 다운로드</button>

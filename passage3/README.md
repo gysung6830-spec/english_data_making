@@ -17,6 +17,8 @@ CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
 ## 웹앱 (권장)
     pip install flask pdfplumber playwright anthropic pytesseract pdf2image pillow
     playwright install chromium
+    # 한글 폰트(나눔명조) 설치 — 리눅스:  sudo apt install fonts-nanum
+    #   (Windows·macOS는 '나눔명조'를 직접 설치. 온라인이면 자동으로 웹폰트 사용)
     cd passage3
     python webapp.py
     # 브라우저에서 http://localhost:5000
