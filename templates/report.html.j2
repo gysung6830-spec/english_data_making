@@ -21,44 +21,19 @@
     <div class="summary-overall">{{ report.summary.overall }}</div>
   </div>
 
-  {# ② '치밀하게 분석한' 출제 포인트 #}
-  <div class="section s-exam">
+  {# ② 핵심 단어 영어 요약문 #}
+  {% if report.vocab.english_summary %}
+  <div class="section s-esum">
     <div class="section-head">
       <span class="sec-num">2</span>
-      <span class="sec-title">‘치밀하게 분석한’ 출제 포인트</span>
-      <span class="sec-sub">Exam Points</span>
+      <span class="sec-title">핵심 단어 영어 요약문</span>
+      <span class="sec-sub">굵은 단어 = 아래 핵심 어휘</span>
     </div>
-    <table class="grid t-exam">
-      <thead><tr><th style="width:130px">출제 유형</th><th>은아 T tip</th></tr></thead>
-      <tbody>
-      {% for e in report.exam.items %}
-        <tr>
-          <td class="cell-point">{{ e.question_type }}</td>
-          {% if '서술형' in e.question_type %}
-          <td class="pre">
-            {%- set lines = e.content.split('\n') -%}
-            {%- for ln in lines if ln.strip() -%}
-              {%- if loop.first -%}<span class="sv-sent">{{ ln }}</span>
-              {%- else -%}<br><span class="sv-reason">{{ ln }}</span>{%- endif -%}
-            {%- endfor -%}
-          </td>
-          {% elif '함축' in e.question_type %}
-          <td>
-            {%- for ln in e.content.split('\n') -%}
-              {%- if not ln.strip() -%}<div class="im-gap"></div>
-              {%- elif '함정' in ln -%}<div class="im-trap">{{ ln }}</div>
-              {%- elif ln.lstrip().startswith('·') or '문맥상' in ln or '정답 표현' in ln -%}<div class="im-sub">{{ ln }}</div>
-              {%- else -%}<div class="im-head">{{ ln }}</div>{%- endif -%}
-            {%- endfor -%}
-          </td>
-          {% else %}
-          <td class="pre">{{ e.content }}</td>
-          {% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    <div class="esum-box">
+      {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
+    </div>
   </div>
+  {% endif %}
 
   {# ③ 지문 구조 분석 (개조식 + 문장번호) #}
   <div class="section s-struc">
@@ -96,19 +71,44 @@
     </ul>
   </div>
 
-  {# ④ 핵심 단어 영어 요약문 #}
-  {% if report.vocab.english_summary %}
-  <div class="section s-esum">
+  {# ④ '치밀하게 분석한' 출제 포인트 #}
+  <div class="section s-exam">
     <div class="section-head">
       <span class="sec-num">4</span>
-      <span class="sec-title">핵심 단어 영어 요약문</span>
-      <span class="sec-sub">굵은 단어 = 아래 핵심 어휘</span>
+      <span class="sec-title">‘치밀하게 분석한’ 출제 포인트</span>
+      <span class="sec-sub">Exam Points</span>
     </div>
-    <div class="esum-box">
-      {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
-    </div>
+    <table class="grid t-exam">
+      <thead><tr><th style="width:130px">출제 유형</th><th>은아 T tip</th></tr></thead>
+      <tbody>
+      {% for e in report.exam.items %}
+        <tr>
+          <td class="cell-point">{{ e.question_type }}</td>
+          {% if '서술형' in e.question_type %}
+          <td class="pre">
+            {%- set lines = e.content.split('\n') -%}
+            {%- for ln in lines if ln.strip() -%}
+              {%- if loop.first -%}<span class="sv-sent">{{ ln }}</span>
+              {%- else -%}<br><span class="sv-reason">{{ ln }}</span>{%- endif -%}
+            {%- endfor -%}
+          </td>
+          {% elif '함축' in e.question_type %}
+          <td>
+            {%- for ln in e.content.split('\n') -%}
+              {%- if not ln.strip() -%}<div class="im-gap"></div>
+              {%- elif '함정' in ln -%}<div class="im-trap">{{ ln }}</div>
+              {%- elif ln.lstrip().startswith('·') or '문맥상' in ln or '정답 표현' in ln -%}<div class="im-sub">{{ ln }}</div>
+              {%- else -%}<div class="im-head">{{ ln }}</div>{%- endif -%}
+            {%- endfor -%}
+          </td>
+          {% else %}
+          <td class="pre">{{ e.content }}</td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
   </div>
-  {% endif %}
 
   {# ⑤ 핵심 어휘 · 유의어 · 반의어 #}
   <div class="section s-voc">
