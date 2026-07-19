@@ -51,7 +51,14 @@ def generate_all(blueprint: Blueprint, assignments: list[Assignment],
         passage = passages.get(pid) if pid else _placeholder_passage(item.no, item.type)
         if passage.id not in analyses:
             analyses[passage.id] = PassageAnalysis.of(passage)
-        q = generate_question(item, passage, ctx, analyses[passage.id])
+        # 한 문항 생성이 실패해도 전체가 죽지 않도록 격리: 실패 시 mock 자리표시자로 대체.
+        try:
+            q = generate_question(item, passage, ctx, analyses[passage.id])
+        except Exception as e:  # noqa: BLE001 - 문항 단위 오류 격리
+            logs.append({"no": item.no, "section": item.section, "type": item.type,
+                         "note": "generation_failed", "error": str(e)[:200]})
+            q = generic_question(item, passage, ctx,
+                                 stem=f"[생성 실패-검토 필요] ({item.type})")
         questions.append(q)
 
     exam = MockExam(blueprint=blueprint, questions=questions)

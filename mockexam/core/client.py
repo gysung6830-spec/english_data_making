@@ -9,6 +9,7 @@ from __future__ import annotations
 import base64
 import copy
 import json
+import time
 from pathlib import Path
 from typing import Any, TypeVar
 
@@ -105,6 +106,39 @@ def extract_text(message: Any) -> str:
     raise ValueError("응답에 텍스트 블록이 없습니다.")
 
 
+# 일시적(재시도 가능) 오류로 볼 HTTP 상태 코드
+_RETRY_STATUS = {408, 409, 429, 500, 502, 503, 529}
+_RETRY_NAMES = {"RateLimitError", "InternalServerError", "APIConnectionError",
+                "APITimeoutError", "OverloadedError", "ServiceUnavailableError",
+                "APIConnectionTimeoutError"}
+
+
+def _is_retryable(exc: Exception) -> bool:
+    """rate limit(429)·과부하(529)·5xx·연결 오류면 재시도 대상."""
+    status = getattr(exc, "status_code", None)
+    if status in _RETRY_STATUS:
+        return True
+    return type(exc).__name__ in _RETRY_NAMES
+
+
+def create_with_retry(client: Any, req: dict, max_attempts: int = 5,
+                      base_delay: float = 2.0):
+    """messages.create 를 지수 백오프로 재시도(2s·4s·8s·16s).
+
+    rate limit/과부하/일시 오류에만 재시도하고, 그 외 오류는 즉시 전파한다.
+    """
+    last: Exception | None = None
+    for attempt in range(max_attempts):
+        try:
+            return client.messages.create(**req)
+        except Exception as e:  # noqa: BLE001 - 상태코드로 재시도 여부 판단
+            if not _is_retryable(e) or attempt == max_attempts - 1:
+                raise
+            last = e
+            time.sleep(base_delay * (2 ** attempt))
+    raise last  # 도달하지 않음
+
+
 class ClaudeClient:
     """동기 처리용 래퍼."""
 
@@ -133,7 +167,7 @@ class ClaudeClient:
         for attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
                                 image_path=image_path)
-            message = self._client.messages.create(**req)
+            message = create_with_retry(self._client, req)  # 429/529 등 백오프 재시도
             try:
                 text = extract_text(message)
                 obj = parse_response_text(text, model_cls)

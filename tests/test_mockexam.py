@@ -158,6 +158,55 @@ def test_generate_offline_passes_verifier():
     assert by["정답유일성"].ok, by["정답유일성"].detail
 
 
+def test_create_with_retry_backoff(monkeypatch):
+    """429/529 는 백오프로 재시도하고, 그 외 오류는 즉시 전파."""
+    import mockexam.core.client as C
+    monkeypatch.setattr(C.time, "sleep", lambda *_: None)  # 실제 대기 제거
+
+    class Boom(Exception):
+        def __init__(self, status): self.status_code = status
+
+    class FakeMessages:
+        def __init__(self, fails, status): self.n = 0; self.fails = fails; self.status = status
+        def create(self, **kw):
+            if self.n < self.fails:
+                self.n += 1
+                raise Boom(self.status)
+            return "ok"
+
+    class FakeClient:
+        def __init__(self, fails, status): self.messages = FakeMessages(fails, status)
+
+    # 429 두 번 실패 후 성공
+    assert C.create_with_retry(FakeClient(2, 429), {}, max_attempts=5) == "ok"
+    # 529(과부하)도 재시도 대상
+    assert C.create_with_retry(FakeClient(1, 529), {}, max_attempts=5) == "ok"
+    # 400 은 재시도 대상 아님 → 즉시 전파
+    import pytest as _pt
+    with _pt.raises(Boom):
+        C.create_with_retry(FakeClient(1, 400), {}, max_attempts=5)
+
+
+def test_one_question_failure_does_not_kill_exam():
+    """한 문항 생성이 실패해도 나머지는 완성되고 전체 문항수는 유지된다."""
+    from mockexam.generators.base import GenContext
+    from mockexam.generators.engine import generate_all
+
+    class RaisingClient:
+        def structured(self, *a, **k):
+            raise RuntimeError("검증 실패(재시도 소진)")
+
+    bp = blueprint_from_profile(resolve_profile("jinyang_hs", 1), 1)
+    passages = _synthetic_passages(20)
+    assigns = assign_passages(bp, passages, difficulty="mid")
+    pmap = {p.id: p for p in passages}
+    ctx = GenContext(profile=resolve_profile("jinyang_hs", 1), difficulty="mid",
+                     client=RaisingClient())
+    exam, logs = generate_all(bp, assigns, pmap, ctx)
+    assert len(exam.questions) == 27, "실패해도 전 문항이 채워져야 함"
+    assert any(l.get("note") == "generation_failed" for l in logs)
+
+
 def test_generate_offline_high_school_unlearned():
     res = generate_mock("dongmyeong_hs", [SAMPLE], difficulty="상", grade=2, client=None)
     assert res.blueprint.meta.learned is False
