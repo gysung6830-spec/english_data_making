@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ wb.title }} - 빈칸 워크북</title>
+  <style>{% include "blanks.css" %}</style>
+</head>
+<body>
+
+  {% for st in wb.sets %}
+  <section class="set{{ ' set-break' if not loop.first }}">
+
+    {# ── 지문 헤더 ── #}
+    <div class="set-head">
+      <span class="set-idx">지문 {{ st.no }}</span>
+      <span class="set-title">{{ st.title }}</span>
+      {% if st.subtitle %}<div class="set-sub">{{ st.subtitle }}</div>{% endif %}
+      <div class="set-rule"></div>
+    </div>
+
+    {# ── 유형 B: 지문 빈칸형 (첫 글자 + 밑줄, 2단: 영어 / 한글) ── #}
+    <div class="part-head pb-head">① 지문 빈칸 <span class="ph-sub">첫 글자 힌트</span></div>
+    <div class="cards">
+      {% for s in st.sentences %}
+      <div class="card">
+        <span class="cbar"></span>
+        <span class="cnum">{{ s.no }}</span>
+        <div class="cbody">
+          <div class="c-en">{{ s | render_bsentence }}</div>
+          <div class="c-ko">{{ s.ko }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {# ── 유형 A: 요약문 빈칸형 (번호만 + 단어뱅크) ── #}
+    <div class="part-head sb-head">② 요약문 빈칸 <span class="ph-sub">단어뱅크에서 골라 쓰기</span></div>
+    <div class="summary">
+      <span class="cbar sb-bar"></span>
+      <div class="sum-text">{{ st | render_summary }}</div>
+    </div>
+    <div class="wordbank">
+      <div class="wb-label">Word Bank</div>
+      <div class="chips">
+        {% for w in st.wordbank %}<span class="chip">{{ w }}</span>{% endfor %}
+      </div>
+    </div>
+
+  </section>
+  {% endfor %}
+
+  {# ── 정답 페이지 ── #}
+  <div class="ans-page">
+    <div class="ans-head">정답 <span class="ans-sub">Answers · 총 {{ wb.total }}개</span></div>
+    {% for st in wb.sets %}
+    <div class="ans-set">
+      <div class="ans-set-title"><span class="set-idx">지문 {{ st.no }}</span> {{ st.title }}</div>
+      <div class="ans-cols">
+        <div class="ans-col">
+          <div class="ans-col-h pb-h">① 지문 빈칸</div>
+          {% for b in st.passage_blanks %}<span class="ans-item"><b>{{ b.num }})</b> {{ b.answer }}</span>{% endfor %}
+        </div>
+        <div class="ans-col">
+          <div class="ans-col-h sb-h">② 요약문 빈칸</div>
+          {% for b in st.summary_blanks %}<span class="ans-item"><b>{{ b.num }})</b> {{ b.answer }}</span>{% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

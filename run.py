@@ -28,6 +28,8 @@ def main() -> int:
                         help="API 없이 샘플 데이터로 출력 PDF 미리보기")
     parser.add_argument("--workbook", action="store_true",
                         help="'문장별 복합유형 통합 워크북' 생성")
+    parser.add_argument("--blanks", action="store_true",
+                        help="'빈칸형 워크북(지문 빈칸 + 요약문 빈칸)' 생성")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
     args = parser.parse_args()
 
@@ -38,13 +40,17 @@ def main() -> int:
     print(f"  입력 폴더 : {cfg.input_dir}")
     print(f"  출력 폴더 : {cfg.output_dir}")
     print(f"  모델      : {cfg.model}")
-    kind = "통합 워크북" if args.workbook else "지문 분석"
+    kind = ("빈칸형 워크북" if args.blanks else
+            "통합 워크북" if args.workbook else "지문 분석")
     mode = "MOCK(미리보기)" if args.mock else ("BATCH" if args.batch else "일반")
     print(f"  산출물    : {kind}")
     print(f"  실행 모드 : {mode}")
     print("=" * 56)
 
-    if args.workbook:
+    if args.blanks:
+        from src.pipeline import run_folder_blanks
+        result = run_folder_blanks(cfg, mock=args.mock)
+    elif args.workbook:
         from src.pipeline import run_folder_workbook
         result = run_folder_workbook(cfg, mock=args.mock)
     elif args.batch and not args.mock:

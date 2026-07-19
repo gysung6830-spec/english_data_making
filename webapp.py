@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, render, workbook_render
+from src import extract, pipeline, render, workbook_render, blanks_render, blanks_schemas
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -114,7 +114,9 @@ INDEX_HTML = """
       <label>③ 산출물 종류</label>
       <div class=kinds>
         <label class=kind><input type=radio name=kind value=report checked> 6개 분석 자료</label>
-        <label class=kind><input type=radio name=kind value=workbook> 문장별 복합유형 통합 워크북</label>
+        <label class=kind><input type=radio name=kind value=workbook> 통합 워크북</label>
+        <label class=kind><input type=radio name=kind value=blanks> 빈칸형 워크북</label>
+        <label class=kind><input type=radio name=kind value=both> 워크북 2종 함께</label>
       </div>
 
       <label>④ 저장할 PDF 파일명
@@ -248,8 +250,21 @@ def analyze_route():
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
+    do_report = kind == "report"
+    do_workbook = kind in ("workbook", "both")
+    do_blanks = kind in ("blanks", "both")
+
+    def out_name(stem, suffix, default_suffix):
+        """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사. 여러 산출물은 suffix 로 구분."""
+        if custom:
+            b = custom if single else f"{custom}_{stem}"
+            return f"{b}{suffix}"
+        return f"{stem}{default_suffix}"
+
     results = []
-    wb_books = []   # 워크북 합본용 (지문 순서대로)
+    wb_books = []       # 통합 워크북 합본용
+    blank_sets = []     # 빈칸형 합본용
+    both = kind == "both"
     for f in files:
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
@@ -258,44 +273,61 @@ def analyze_route():
             continue
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
+        stem = _safe_name(Path(f.filename).stem)
         try:
-            stem = _safe_name(Path(f.filename).stem)
-            if kind == "workbook":
-                wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
-                      else pipeline.build_workbook_for_pdf(client, cfg, tmp))
-                # 파일명: 사용자가 지정하면 그것을, 없으면 '지문명_워크북'
-                if custom:
-                    base = custom if single else f"{custom}_{stem}"
-                else:
-                    base = f"{stem}_워크북"
-                out = OUTPUT_DIR / f"{base}.pdf"
-                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
-                wb_books.append(wb)
-            else:
-                base = (custom if single else f"{custom}_{stem}") if custom else f"{stem}_analysis"
-                out = OUTPUT_DIR / f"{base}.pdf"
+            if do_report:
                 report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
                           else pipeline.build_report_for_pdf(client, cfg, tmp))
+                out = OUTPUT_DIR / f"{out_name(stem, '', '_analysis')}.pdf"
                 render.render_pdf(report, out, footer_note=cfg.design.footer_note)
-            results.append({"name": f.filename, "ok": True, "out": out.name})
+                results.append({"name": f.filename, "ok": True, "out": out.name})
+            if do_workbook:
+                wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
+                      else pipeline.build_workbook_for_pdf(client, cfg, tmp))
+                out = OUTPUT_DIR / f"{out_name(stem, '_통합' if both else '', '_워크북')}.pdf"
+                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
+                wb_books.append(wb)
+                results.append({"name": f"{f.filename} · 통합 워크북", "ok": True, "out": out.name})
+            if do_blanks:
+                st = (pipeline._mock_blank_set_for_pdf(cfg, tmp, len(blank_sets) + 1) if mock
+                      else pipeline.build_blank_set_for_pdf(client, cfg, tmp))
+                st.no = 1
+                bwb = blanks_schemas.build_blank_workbook(
+                    blanks_schemas.LLMBlankWorkbook(sets=[st]), title=st.title, subtitle=st.subtitle)
+                out = OUTPUT_DIR / f"{out_name(stem, '_빈칸', '_빈칸워크북')}.pdf"
+                blanks_render.render_blanks_pdf(bwb, out, footer_note=cfg.design.footer_note)
+                blank_sets.append(st)
+                results.append({"name": f"{f.filename} · 빈칸형", "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})
         finally:
             tmp.unlink(missing_ok=True)
 
-    # 워크북 + 지문 2편 이상: 합본(지문1→답1→지문2→답2) PDF 추가 제공
-    if kind == "workbook" and len(wb_books) >= 2:
+    # 통합 워크북 2편 이상: 합본(지문1→답1→지문2→답2)
+    if do_workbook and len(wb_books) >= 2:
         try:
-            cbase = f"{custom}_합본" if custom else "통합워크북_합본"
-            combined = OUTPUT_DIR / f"{cbase}.pdf"
-            workbook_render.render_workbooks_pdf(wb_books, combined,
-                                                 footer_note=cfg.design.footer_note)
-            results.append({"name": "📚 합본 (지문1→답1→지문2→답2)", "ok": True,
-                            "out": combined.name})
+            combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
+            workbook_render.render_workbooks_pdf(wb_books, combined, footer_note=cfg.design.footer_note)
+            results.append({"name": "📚 통합 워크북 합본", "ok": True, "out": combined.name})
         except Exception as e:
             traceback.print_exc()
-            results.append({"name": "📚 합본", "ok": False, "error": str(e)})
+            results.append({"name": "📚 통합 합본", "ok": False, "error": str(e)})
+
+    # 빈칸형 2편 이상: 합본
+    if do_blanks and len(blank_sets) >= 2:
+        try:
+            for idx, st in enumerate(blank_sets, start=1):
+                st.no = idx
+            bwb = blanks_schemas.build_blank_workbook(
+                blanks_schemas.LLMBlankWorkbook(sets=blank_sets),
+                title="빈칸 워크북", subtitle="유형 B 지문 빈칸 · 유형 A 요약문 빈칸")
+            combined = OUTPUT_DIR / f"{(custom + '_빈칸합본') if custom else '빈칸워크북_합본'}.pdf"
+            blanks_render.render_blanks_pdf(bwb, combined, footer_note=cfg.design.footer_note)
+            results.append({"name": "📚 빈칸형 합본", "ok": True, "out": combined.name})
+        except Exception as e:
+            traceback.print_exc()
+            results.append({"name": "📚 빈칸 합본", "ok": False, "error": str(e)})
 
     n_ok = sum(1 for r in results if r["ok"])
     return render_template_string(RESULT_HTML, results=results,
