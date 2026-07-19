@@ -16,13 +16,11 @@ from flask import (Flask, flash, redirect, render_template_string, request,
                    send_file, url_for)
 
 try:
-    from .main import (FORMATS, extract_text, html_to_pdf, safe_filename)
-    from .parser import split_passages
+    from .main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
     from .renderer import render_format_a, render_format_b, render_format_c
     from .translator import translate_missing
 except ImportError:  # python webapp.py 로 직접 실행할 때
-    from main import (FORMATS, extract_text, html_to_pdf, safe_filename)
-    from parser import split_passages
+    from main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
     from renderer import render_format_a, render_format_b, render_format_c
     from translator import translate_missing
 
@@ -176,8 +174,7 @@ def generate():
         file.save(str(in_path))
 
         try:
-            raw = extract_text(in_path)
-            passages = split_passages(raw)
+            passages = extract_passages(in_path)
         except Exception:
             traceback.print_exc()
             flash("파일을 처리하는 중 오류가 발생했습니다.")

@@ -103,6 +103,35 @@ def test_filename_safe():
     assert safe_filename("  ") == "지문"
 
 
+def test_pdfparse_helpers():
+    """표 파서의 순수 함수(헤더 분리·셀 문장화) 검증."""
+    from pdfparse import _split_header, _cell_sentences, _looks_like_header
+
+    # 헤더 분리: 대괄호 없는 'Ch. .. N번: 제목' 형식도 처리
+    label, title = _split_header("Ch. 04 Unit 10 - 2번: 자신의 존재와 정체성")
+    assert label == "Ch. 04 Unit 10 - 2번"
+    assert title == "자신의 존재와 정체성"
+    # ANALYSIS 처럼 '번' 없는 헤더도 콜론 기준 분리
+    label2, title2 = _split_header("Ch. 04 Unit 11 - 수능 대비 ANALYSIS: 소셜 미디어")
+    assert label2.endswith("ANALYSIS") and title2 == "소셜 미디어"
+
+    # 셀 → 문장(영어/한글 쌍)
+    sents = _cell_sentences("① Although the wish to be alone is often strong.",
+                            "혼자 있고 싶은 소망은 종종 강하다.")
+    assert len(sents) == 1
+    assert sents[0].num == 1
+    assert sents[0].en == "Although the wish to be alone is often strong."
+    assert sents[0].ko == "혼자 있고 싶은 소망은 종종 강하다."
+
+    # 개행이 섞인 셀도 공백 정리
+    s2 = _cell_sentences("① first line\nsecond line", "해석\n둘째 줄")[0]
+    assert s2.en == "first line second line"
+    assert s2.ko == "해석 둘째 줄"
+
+    assert _looks_like_header(["Ch. 04 Unit 10 - 2번: 제목"]) is True
+    assert _looks_like_header(["① This is a sentence."]) is False
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_")]

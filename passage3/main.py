@@ -16,11 +16,13 @@ from typing import List
 try:
     from .ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from .parser import Passage, split_passages
+    from .pdfparse import pdf_to_passages
     from .renderer import render_format_a, render_format_b, render_format_c
     from .translator import translate_missing
 except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from parser import Passage, split_passages
+    from pdfparse import pdf_to_passages
     from renderer import render_format_a, render_format_b, render_format_c
     from translator import translate_missing
 
@@ -87,6 +89,37 @@ def extract_text(path) -> str:
         return p.read_text(encoding="utf-8", errors="replace")
     except Exception:
         return ""
+
+
+def extract_passages(path) -> List[Passage]:
+    """입력 종류에 맞춰 '깨끗한 지문 리스트'로 정규화.
+
+    어떤 형식이든 결과가 일정하도록:
+      - txt / 이미지 / 스캔 PDF → 텍스트(또는 OCR) → 텍스트 파서
+      - 디지털 PDF → 표 인식 파서 우선(좌 영어/우 한글 2단 표 등),
+        표에서 못 뽑으면 텍스트 파서로 폴백.
+    """
+    p = Path(path)
+    suffix = p.suffix.lower()
+
+    if suffix == ".txt":
+        return split_passages(p.read_text(encoding="utf-8", errors="replace"))
+
+    if suffix in IMAGE_EXTS:
+        return split_passages(ocr_file(p))
+
+    if suffix == ".pdf":
+        if is_scanned_pdf(p):
+            return split_passages(ocr_file(p))
+        # 디지털 PDF: 표 구조 우선(가장 안정적)
+        table_passages = pdf_to_passages(p)
+        if table_passages:
+            return table_passages
+        # 표가 없으면 텍스트 추출 후 파싱
+        return split_passages(extract_text(p))
+
+    # 알 수 없는 확장자
+    return split_passages(extract_text(p))
 
 
 # ── auto-fit PDF 빌더 ─────────────────────────────────────────
@@ -216,11 +249,10 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"[1/4] 텍스트 추출: {input_path.name}")
-    raw = extract_text(input_path)
+    print(f"[1/4] 입력 파싱: {input_path.name}")
+    passages = extract_passages(input_path)
 
-    print("[2/4] 지문 파싱")
-    passages = split_passages(raw)
+    print("[2/4] 지문 정규화")
     if not passages:
         print("  ⚠ 지문을 찾지 못했습니다. 헤더 형식(…N번: 제목)과 원문자(①②)를 확인하세요.")
         return []
