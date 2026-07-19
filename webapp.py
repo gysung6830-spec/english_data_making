@@ -19,9 +19,13 @@ def main() -> int:
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=5000)
     parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--preview", action="store_true",
+                        help="미리보기 전용: .env 에 키가 있어도 API 를 쓰지 않음(비용 0)")
     args = parser.parse_args()
 
-    print(f"  ▶ 웹앱 실행: http://{args.host}:{args.port}")
+    app.config["PREVIEW_ONLY"] = args.preview
+    mode = " [미리보기 전용]" if args.preview else ""
+    print(f"  ▶ 웹앱 실행: http://{args.host}:{args.port}{mode}")
     app.run(host=args.host, port=args.port, debug=args.debug, threaded=True)
     return 0
 

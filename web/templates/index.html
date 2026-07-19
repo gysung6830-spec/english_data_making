@@ -4,10 +4,11 @@
 {% if error %}<div class="alert">{{ error }}</div>{% endif %}
 
 {% if has_api_key %}
-  <div class="note ok">✅ API 키 감지됨 — 입력한 지문으로 실제 생성이 가능합니다.</div>
+  <div class="note ok">✅ API 키 감지됨 — <b>‘시험지 생성’</b>을 누를 때만 키가 사용됩니다(호출 비용 발생).
+    비용 없이 연습·미리보기만 하려면 <b>‘무료 미리보기’</b> 버튼을 누르세요.</div>
 {% else %}
-  <div class="note warn">⚠️ ANTHROPIC_API_KEY가 없습니다. 아래 <b>‘API 없이 데모’</b>로 디자인을 미리볼 수 있어요.
-    (실제 생성은 <code>.env</code>에 키를 넣은 뒤 가능합니다.)</div>
+  <div class="note warn">⚠️ 미리보기 전용(또는 API 키 없음) — <b>‘무료 미리보기’</b>로 디자인을 공짜로 볼 수 있어요.
+    내 지문으로 실제 생성하려면 <code>.env</code>에 <code>ANTHROPIC_API_KEY</code>가 필요합니다.</div>
 {% endif %}
 
 <form method="post" action="{{ url_for('generate') }}" class="card" enctype="multipart/form-data">
@@ -59,11 +60,11 @@ Second passage goes here."></textarea>
   </div>
 
   <div class="btns">
-    <button type="submit" name="action" value="generate" class="btn">시험지 생성 →</button>
-    <button type="submit" name="action" value="demo" class="btn ghost">데모 지문으로 미리보기</button>
+    <button type="submit" name="action" value="generate" class="btn">시험지 생성 → (API 사용·비용)</button>
+    <button type="submit" name="action" value="demo" class="btn ghost">무료 미리보기 (데모 지문·API 미사용)</button>
   </div>
-  <p class="hint"><b>‘시험지 생성’</b>은 위에 넣은 <b>내 지문/파일</b>로 만듭니다(API 키 필요).
-    <b>‘데모’</b>는 내장 예시 지문(DNA·star manager)으로 <b>디자인만</b> 봅니다 — 내 지문은 쓰이지 않아요.</p>
+  <p class="hint"><b>‘시험지 생성’</b>은 위에 넣은 <b>내 지문/파일</b>로 만듭니다(이때만 API 호출·비용).
+    <b>‘무료 미리보기’</b>는 내장 예시 지문(DNA·star manager)으로 <b>디자인만</b> 보며 <b>API를 전혀 쓰지 않습니다</b>.</p>
 </form>
 
 <details class="help">

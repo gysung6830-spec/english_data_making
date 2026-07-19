@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 
+import os
 import re
 import uuid
 from pathlib import Path
@@ -23,6 +24,16 @@ OUT = ROOT / "output" / "web"
 OUT.mkdir(parents=True, exist_ok=True)
 
 app = Flask(__name__)
+
+
+def _api_available(cfg) -> bool:
+    """API 키가 있고, '미리보기 전용 모드'가 아니면 True.
+
+    PREVIEW_ONLY(웹앱 --preview 또는 EXAM_PREVIEW_ONLY=1)면 키가 있어도 안 쓴다.
+    """
+    if app.config.get("PREVIEW_ONLY") or os.environ.get("EXAM_PREVIEW_ONLY"):
+        return False
+    return cfg.has_api_key
 
 _FID_RE = re.compile(r"^[0-9a-f]{6,32}$")
 _SEP_RE = re.compile(r"(?m)^\s*-{3,}\s*$")   # 지문 구분: --- 한 줄
@@ -51,7 +62,7 @@ def _pdf_path(fid: str) -> Path:
 @app.get("/")
 def index():
     cfg = load_config()
-    return render_template("index.html", has_api_key=cfg.has_api_key, error=None)
+    return render_template("index.html", has_api_key=_api_available(cfg), error=None)
 
 
 @app.post("/generate")
@@ -67,7 +78,7 @@ def generate():
     out = _pdf_path(fid)
 
     def fail(msg: str, code: int = 400):
-        return render_template("index.html", has_api_key=cfg.has_api_key, error=msg), code
+        return render_template("index.html", has_api_key=_api_available(cfg), error=msg), code
 
     uploads = [f for f in request.files.getlist("files") if f and f.filename]
     doc_name = safe_name(request.form.get("doc_name", ""))
@@ -83,9 +94,9 @@ def generate():
             pasted = split_passages(request.form.get("passages", ""))
             if not uploads and not pasted:
                 return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '데모'를 선택하세요.")
-            if not cfg.has_api_key:
-                return fail("ANTHROPIC_API_KEY가 설정되지 않았습니다. .env에 키를 넣거나 "
-                            "'API 없이 데모'를 사용하세요.")
+            if not _api_available(cfg):
+                return fail("실제 생성에는 API 키가 필요합니다. (미리보기 전용 모드이거나 키가 "
+                            "없습니다.) 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
             from exam import ingest
             from exam.llm import ClaudeClient
             from exam.pipeline import build_exam
