@@ -37,16 +37,16 @@ def build_passage() -> Passage:
         choices=["ⓐ, ⓑ", "ⓑ, ⓒ", "ⓐ, ⓓ", "ⓒ, ⓔ", "ⓓ, ⓔ"],
     ))
 
-    # B · 함의추론
+    # B · 함의추론 (선지 영어)
     p.set_qa(B, *B2.make_B(
         s,
         phrase="a better building",
         choices=[
-            "실제 사용자들의 서로 다른 요구와 경험을 이해해 그들에게 더 잘 맞게 만든 건물",
-            "더 비싼 자재로 지은 고급 건물",
-            "비용을 내는 고객의 요구만 충실히 반영한 건물",
-            "규모가 더 크고 층수가 많은 건물",
-            "공사 기간이 더 짧게 완성된 건물",
+            "a structure that suits its various real users because their needs were understood",
+            "a more luxurious building made of costlier materials",
+            "a building shaped only by the paying client's wishes",
+            "a larger building with more floors and rooms",
+            "a building that is completed in a much shorter time",
         ],
         answer_no=1,
         reason=("'a better building'은 글 전체 논지상 '각 사용자 집단이 공간을 어떻게 경험하는지 "
@@ -103,26 +103,28 @@ def build_passage() -> Passage:
                 "(A) consulted, (B) lower. 따라서 ②."),
     ))
 
-    # F · 빈칸추론
+    # F · 빈칸추론 — 지문 전체 + 핵심(주제) 어구 빈칸, 정답은 유의어 패러프레이즈
     p.set_qa(F, *B2.make_F(
-        before=("Understanding how each type of user experiences the current medical environment, "
-                "as well as how each reacts to your prospective designs, inevitably produces "),
-        after=". People are more satisfied with a new building if they have been consulted.",
+        s,
+        blank_sent_idx=5,   # S5: '사용자 이해 → 더 나은 건물'이라는 주제 문장
+        blank_phrase="produces a better building",
         choices=[
-            "a better building",
-            "a cheaper contract",
-            "a stricter regulation",
-            "a larger profit margin",
-            "a shorter waiting line",
+            "leads to a design that truly serves everyone who uses it",   # 정답(유의어)
+            "results in a much cheaper construction contract",
+            "forces the client to accept stricter regulations",
+            "guarantees a larger profit margin for the firm",
+            "simply speeds up the construction schedule",
         ],
         answer_no=1,
-        reason=("빈칸 앞은 '각 사용자의 경험을 이해하면'이고 글 전체 논지가 '사용자 이해 → 더 나은 "
-                "건물'이므로 ①이 앞뒤 논리로 유일하게 복원된다."),
+        reason=("이 글의 주제는 '각 사용자가 공간을 어떻게 경험하는지 이해하면 더 나은 건물이 "
+                "된다'이다. 빈칸엔 그 핵심이 와야 하므로 원문(produces a better building)을 "
+                "유의어로 바꾼 ①(leads to a design that truly serves everyone who uses it)이 "
+                "정답이다."),
         wrong={
-            2: "계약 비용은 '사용자 이해→더 나은 결과' 맥락과 무관하다(무관).",
-            3: "규제 강화는 글과 무관하다(무관).",
+            2: "계약 비용은 '사용자 이해→더 나은 건물' 논지와 무관하다(무관).",
+            3: "규제 강화는 글에 없고 논지와 무관하다(무관).",
             4: "이윤 마진은 사용자 이해→건물 개선 논리와 어긋난다(무관).",
-            5: "대기 줄 단축은 글에 언급이 없다(무관).",
+            5: "공사 속도는 주제가 아니며 글에 근거가 없다(무관).",
         },
     ))
 

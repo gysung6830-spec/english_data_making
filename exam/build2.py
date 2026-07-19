@@ -53,10 +53,13 @@ def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason):
     return F2.E_q(" ".join(sentences), summary, choices), F2.E_a(answer_no, reason)
 
 
-# F · 빈칸추론 --------------------------------------------------------------
-def make_F(before, after, choices, answer_no, reason, wrong):
-    passage_html = F.esc(before) + F2.blank_line() + F.esc(after)
-    return F2.F_q(passage_html, choices), F2.F_a(answer_no, reason, wrong)
+# F · 빈칸추론 (지문 전체 + 핵심 어구 빈칸) ---------------------------------
+def make_F(sentences, blank_sent_idx, blank_phrase, choices, answer_no, reason, wrong):
+    """지문 전체를 보여주되, blank_sent_idx 문장의 blank_phrase(핵심/주제 어구)만 빈칸으로.
+    정답 선지는 원문 어구를 '유의어로 패러프레이즈'한 것이어야 한다(원문 그대로 금지).
+    """
+    marked = B1._passage_html(sentences, [(blank_sent_idx, blank_phrase, F2.blank_line())])
+    return F2.F_q(marked, choices), F2.F_a(answer_no, reason, wrong)
 
 
 # G · 내용일치 개수 ---------------------------------------------------------

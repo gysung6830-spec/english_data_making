@@ -81,9 +81,8 @@ class EOut(BaseModel):
 
 
 class FOut(BaseModel):
-    before: str
-    after: str
-    choices: list[str]
+    blank_phrase: str                     # 지문에 실제로 있는 '핵심/주제' 어구(이걸 빈칸으로)
+    choices: list[str]                    # 5개(영어). 정답은 blank_phrase 의 유의어 패러프레이즈
     answer_no: int
     reason: str
     wrong_reasons: list[WrongReason]
@@ -125,8 +124,8 @@ def _gen_A(client, analysis, body, max_retries=1):
 
 def _gen_B(client, analysis, body, max_retries=1):
     p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르고(지문에 "
-         "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 한국어. 정답=글 전체 논지를 "
-         "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 한국어.\n\n{ctx}")
+         "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 '영어'. 정답=글 전체 논지를 "
+         "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 는 한국어.\n\n{ctx}")
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
                                   max_tokens=2500, max_retries=max_retries)
     wrong = {w.no: w.text for w in out.wrong_reasons}
@@ -160,13 +159,21 @@ def _gen_E(client, analysis, body, max_retries=1):
 
 
 def _gen_F(client, analysis, body, max_retries=1):
-    p = ("아래 정본으로 '빈칸추론(F)'을 만드세요. 주제문/연결문의 핵심 어구를 비워 before/after 로 "
-         "지문 맥락을 충분히 담고, choices 5개(영어) 중 정답=앞뒤 논리로 유일 복원, 오답=소재는 쓰되 "
-         "모순·무관. answer_no·reason·wrong_reasons 한국어.\n\n{ctx}")
+    p = ("아래 정본으로 '빈칸추론(F)'을 만드세요. 지문 전체를 보여주되, 글의 '가장 핵심(주제)'을 담은 "
+         "어구 하나를 blank_phrase 로 지정합니다(지문에 그대로 있는 표현). 그 어구가 빈칸이 됩니다.\n"
+         "choices 5개는 영어. 정답은 blank_phrase 를 '유의어로 패러프레이즈'한 것(원문 어구를 그대로 "
+         "쓰지 말 것). 오답은 소재는 쓰되 모순·무관. answer_no·reason·wrong_reasons 는 한국어.\n\n{ctx}")
     out: FOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), FOut,
                                   max_tokens=2500, max_retries=max_retries)
+    # blank_phrase 가 있는 문장을 찾는다
+    phrase = out.blank_phrase.strip()
+    idx = next((i for i, s in enumerate(analysis.sentences)
+                if phrase.lower() in s.lower()), None)
+    if idx is None:
+        raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{phrase}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    return build2.make_F(out.before, out.after, out.choices, out.answer_no, out.reason, wrong)
+    return build2.make_F(analysis.sentences, idx, phrase, out.choices,
+                         out.answer_no, out.reason, wrong)
 
 
 def _gen_G(client, analysis, body, max_retries=1):
