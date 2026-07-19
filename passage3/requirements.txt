@@ -1,0 +1,10 @@
+# 영어 지문 → 3형식 PDF 생성기
+flask>=3.0
+pdfplumber>=0.11.0
+playwright>=1.40
+# 선택(자동 번역 / 비전 OCR)
+anthropic>=0.117.0
+# 선택(Tesseract 폴백 OCR / 스캔 PDF 이미지화)
+pytesseract>=0.3.10
+pdf2image>=1.17.0
+pillow>=10.0
