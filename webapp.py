@@ -111,12 +111,11 @@ INDEX_HTML = """
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label>③ 산출물 종류</label>
+      <label>③ 산출물 종류 <span class=hint>(원하는 것을 모두 선택)</span></label>
       <div class=kinds>
-        <label class=kind><input type=radio name=kind value=report checked> 6개 분석 자료</label>
-        <label class=kind><input type=radio name=kind value=workbook> 통합 워크북</label>
-        <label class=kind><input type=radio name=kind value=blanks> 빈칸형 워크북</label>
-        <label class=kind><input type=radio name=kind value=both> 워크북 2종 함께</label>
+        <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북</label>
+        <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 채우기 워크북</label>
+        <label class=kind><input type=checkbox name=kinds value=report> 6개 분석 자료</label>
       </div>
 
       <label>④ 저장할 PDF 파일명
@@ -233,7 +232,7 @@ def index():
 def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
-    kind = request.form.get("kind") or "report"   # report | workbook
+    kinds = request.form.getlist("kinds") or ["workbook"]   # 체크박스(복수 선택). 기본: 통합 워크북
     custom = _safe_name((request.form.get("outname") or "").strip()) if (request.form.get("outname") or "").strip() else ""
     single = len(files) == 1
     form_key = (request.form.get("api_key") or "").strip()
@@ -250,21 +249,22 @@ def analyze_route():
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
-    do_report = kind == "report"
-    do_workbook = kind in ("workbook", "both")
-    do_blanks = kind in ("blanks", "both")
+    do_report = "report" in kinds
+    do_workbook = "workbook" in kinds
+    do_blanks = "blanks" in kinds
+    multi_types = (do_report + do_workbook + do_blanks) >= 2
 
-    def out_name(stem, suffix, default_suffix):
-        """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사. 여러 산출물은 suffix 로 구분."""
+    def out_name(stem, type_suffix, default_suffix):
+        """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사.
+        여러 산출물 유형을 함께 뽑을 땐 custom 뒤에 유형 접미사로 구분."""
         if custom:
             b = custom if single else f"{custom}_{stem}"
-            return f"{b}{suffix}"
+            return f"{b}{type_suffix if multi_types else ''}"
         return f"{stem}{default_suffix}"
 
     results = []
     wb_books = []       # 통합 워크북 합본용
     blank_sets = []     # 빈칸형 합본용
-    both = kind == "both"
     for f in files:
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
@@ -275,16 +275,10 @@ def analyze_route():
         f.save(str(tmp))
         stem = _safe_name(Path(f.filename).stem)
         try:
-            if do_report:
-                report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
-                          else pipeline.build_report_for_pdf(client, cfg, tmp))
-                out = OUTPUT_DIR / f"{out_name(stem, '', '_analysis')}.pdf"
-                render.render_pdf(report, out, footer_note=cfg.design.footer_note)
-                results.append({"name": f.filename, "ok": True, "out": out.name})
             if do_workbook:
                 wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
                       else pipeline.build_workbook_for_pdf(client, cfg, tmp))
-                out = OUTPUT_DIR / f"{out_name(stem, '_통합' if both else '', '_워크북')}.pdf"
+                out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
                 workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
                 wb_books.append(wb)
                 results.append({"name": f"{f.filename} · 통합 워크북", "ok": True, "out": out.name})
@@ -298,6 +292,12 @@ def analyze_route():
                 blanks_render.render_blanks_pdf(bwb, out, footer_note=cfg.design.footer_note)
                 blank_sets.append(st)
                 results.append({"name": f"{f.filename} · 빈칸형", "ok": True, "out": out.name})
+            if do_report:
+                report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
+                          else pipeline.build_report_for_pdf(client, cfg, tmp))
+                out = OUTPUT_DIR / f"{out_name(stem, '_분석', '_analysis')}.pdf"
+                render.render_pdf(report, out, footer_note=cfg.design.footer_note)
+                results.append({"name": f"{f.filename} · 6개 분석", "ok": True, "out": out.name})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})
