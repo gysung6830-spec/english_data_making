@@ -1,24 +1,17 @@
 """LLM 호출 래퍼 (§4 core/llm.py).
 
-기존 src/client.py 의 ClaudeClient(구조화 JSON + 재시도)를 재사용한다.
+mockexam.core.client 의 ClaudeClient(구조화 JSON + 재시도)를 사용한다.
 유형별 프롬프트는 각 generator 가 만들고, 여기서는 스키마·시스템 프롬프트·매핑만 담당.
 """
 from __future__ import annotations
 
-import sys
-from pathlib import Path
 from typing import Any
 
 from pydantic import BaseModel, Field, field_validator
 
-# 기존 src 패키지의 LLM 래퍼 재사용
-_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(_ROOT) not in sys.path:
-    sys.path.insert(0, str(_ROOT))
-
 
 def get_client(api_key: str, model: str = "claude-opus-4-8"):
-    from src.client import ClaudeClient  # 지연 임포트
+    from .client import ClaudeClient  # 지연 임포트
     return ClaudeClient(api_key=api_key, model=model)
 
 

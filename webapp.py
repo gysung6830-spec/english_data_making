@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""영어 지문 분석 도구 - 웹앱(브라우저) 버전.
+"""동형모의고사 자동생성 - 웹앱(브라우저) 버전.
 
 실행:
     python webapp.py
 그다음 브라우저에서  http://localhost:5000  접속.
 
-터미널을 몰라도, 브라우저에서 파일을 올리고 버튼만 누르면
-분석 PDF가 만들어집니다.
+지문 파일을 올리고 → 학교·학년·난이도·파일명을 고르고 → 버튼만 누르면
+동형모의고사(문제지+정답해설)가 만들어집니다. API 키가 없으면 '미리보기'로
+디자인·배치·검증까지 확인할 수 있습니다.
 """
 from __future__ import annotations
 
@@ -17,114 +18,155 @@ import traceback
 import uuid
 from pathlib import Path
 
+from dotenv import load_dotenv
 from flask import (Flask, abort, redirect, render_template_string, request,
-                   session, send_from_directory, url_for)
+                   send_from_directory, session, url_for)
 
-from src import extract, pipeline, render
-from src.client import ClaudeClient
-from src.config import ROOT, load_config
+from mockexam.ingest.loader import IMAGE_EXTS
+from mockexam.pipeline import generate_mock
+from mockexam.render.exam import render_exam
+from mockexam.school import load_schools_index
+
+ROOT = Path(__file__).resolve().parent
+load_dotenv(ROOT / ".env")
 
 app = Flask(__name__)
-app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB 업로드 제한
+app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024
 app.secret_key = os.environ.get("APP_SECRET") or secrets.token_hex(16)
-
-# 인터넷에 올릴 때 접속 비밀번호 (환경변수 APP_PASSWORD). 없으면 잠금 없음(로컬용).
 APP_PASSWORD = os.environ.get("APP_PASSWORD")
 
-cfg = load_config()
 UPLOAD_DIR = ROOT / "web_uploads"
+OUTPUT_DIR = ROOT / "output"
 UPLOAD_DIR.mkdir(exist_ok=True)
-OUTPUT_DIR = cfg.output_dir
+OUTPUT_DIR.mkdir(exist_ok=True)
+MODEL = os.environ.get("MOCK_MODEL", "claude-opus-4-8")
 
-ALLOWED = {".pdf"} | extract.IMAGE_EXTS
+ALLOWED = {".pdf", ".txt", ".md", ".hwp"} | IMAGE_EXTS
 
 
-# ---------------------------------------------------------------------------
-# HTML 템플릿 (한 파일로 관리)
-# ---------------------------------------------------------------------------
+def _has_key() -> bool:
+    k = os.environ.get("ANTHROPIC_API_KEY")
+    return bool(k and "여기에" not in k)
+
+
 BASE_CSS = """
-  :root{--ink:#23272e;--accent:#1d4ed8;--green:#15803d;--muted:#6b7280;--line:#e5e7eb;}
-  *{box-sizing:border-box;}
-  body{font-family:'Nanum Gothic','NanumGothic',system-ui,sans-serif;color:var(--ink);
-       background:#f6f7f9;margin:0;padding:24px;line-height:1.55;}
-  .wrap{max-width:720px;margin:0 auto;}
-  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;
-        box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:18px;}
-  h1{font-size:22px;margin:0 0 4px;}
-  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
-  label{font-weight:700;font-size:14px;display:block;margin:14px 0 6px;}
-  input[type=text],input[type=password]{width:100%;padding:10px 12px;border:1px solid var(--line);
-        border-radius:8px;font-size:14px;}
-  .drop{border:2px dashed #c7cdd6;border-radius:12px;padding:26px;text-align:center;
-        background:#fafbfc;cursor:pointer;transition:.15s;}
-  .drop.hl{border-color:var(--accent);background:#eff4ff;}
-  .drop p{margin:6px 0;color:var(--muted);font-size:13px;}
-  .files{margin-top:10px;font-size:13px;color:var(--ink);}
-  .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:9px;
-       padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer;}
-  .btn:disabled{opacity:.5;cursor:not-allowed;}
-  .btn.gray{background:#374151;}
-  .chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:12px;font-weight:600;}
-  .hint{font-size:12px;color:var(--muted);margin-top:6px;}
-  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;}
-  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
-  td,th{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;}
-  .ok{color:var(--green);font-weight:700;}
-  .fail{color:#be123c;font-weight:700;}
-  a.dl{color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;}
-  .err{background:#fff1f3;border:1px solid #fecdd3;color:#9f1239;padding:10px 12px;border-radius:8px;
-       font-size:13px;margin-top:10px;}
-  #overlay{position:fixed;inset:0;background:rgba(255,255,255,.85);display:none;
-           align-items:center;justify-content:center;flex-direction:column;z-index:10;}
-  .spin{width:44px;height:44px;border:5px solid #d1d5db;border-top-color:var(--accent);
-        border-radius:50%;animation:sp 1s linear infinite;}
-  @keyframes sp{to{transform:rotate(360deg);}}
+ :root{--ink:#23272e;--accent:#1d4ed8;--green:#15803d;--muted:#6b7280;--line:#e5e7eb;}
+ *{box-sizing:border-box;}
+ body{font-family:'Nanum Gothic',system-ui,sans-serif;color:var(--ink);
+      background:#f6f7f9;margin:0;padding:24px;line-height:1.55;}
+ .wrap{max-width:760px;margin:0 auto;}
+ .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;
+       box-shadow:0 1px 3px rgba(0,0,0,.05);margin-bottom:18px;}
+ h1{font-size:22px;margin:0 0 4px;}
+ .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+ label{font-weight:700;font-size:14px;display:block;margin:14px 0 6px;}
+ input[type=text],input[type=password],select{width:100%;padding:10px 12px;
+       border:1px solid var(--line);border-radius:8px;font-size:14px;background:#fff;}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+ .drop{border:2px dashed #c7cdd6;border-radius:12px;padding:26px;text-align:center;
+       background:#fafbfc;cursor:pointer;transition:.15s;}
+ .drop.hl{border-color:var(--accent);background:#eff4ff;}
+ .drop p{margin:6px 0;color:var(--muted);font-size:13px;}
+ .files{margin-top:10px;font-size:13px;}
+ .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:9px;
+      padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer;}
+ .btn.gray{background:#374151;}
+ .chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:12px;font-weight:600;}
+ .hint{font-size:12px;color:var(--muted);margin-top:6px;}
+ .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;}
+ table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
+ td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;}
+ .ok{color:var(--green);font-weight:700;} .fail{color:#be123c;font-weight:700;}
+ a.dl{color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;}
+ .err{background:#fff1f3;border:1px solid #fecdd3;color:#9f1239;padding:10px 12px;
+      border-radius:8px;font-size:13px;margin-top:10px;}
+ pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:12px;
+     overflow:auto;white-space:pre-wrap;}
+ #overlay{position:fixed;inset:0;background:rgba(255,255,255,.85);display:none;
+          align-items:center;justify-content:center;flex-direction:column;z-index:10;}
+ .spin{width:44px;height:44px;border:5px solid #d1d5db;border-top-color:var(--accent);
+       border-radius:50%;animation:sp 1s linear infinite;}
+ @keyframes sp{to{transform:rotate(360deg);}}
 """
 
 INDEX_HTML = """
 <!doctype html><html lang=ko><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>영어 지문 분석 도구</title><style>""" + BASE_CSS + """</style></head>
+<title>동형모의고사 생성기</title><style>""" + BASE_CSS + """</style></head>
 <body><div class=wrap>
   <div class=card>
-    <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 6개 분석 자료가 담긴 PDF를 만들어 드립니다.</div>
-    <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
+    <h1>📝 동형모의고사 자동생성</h1>
+    <div class=sub>지문을 올리고 학교·학년·난이도를 고르면, 그 학교 스타일의 동형모의고사를 만들어 드립니다.</div>
+    <form id=f method=post action="{{ url_for('generate') }}" enctype=multipart/form-data>
 
-      <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
+      <label>① 지문 파일 (PDF·사진·TXT·HWP, 여러 개 가능)</label>
       <div class=drop id=drop>
         <div style="font-size:26px">⬆️</div>
         <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
-        <p>JPG · PNG · PDF</p>
-        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+        <p>PDF · JPG · PNG · TXT · HWP</p>
+        <input id=file type=file name=files multiple
+               accept=".pdf,.jpg,.jpeg,.png,.txt,.md,.hwp" hidden>
       </div>
       <div class=files id=filelist></div>
 
-      <label>② Anthropic API 키
-        <span class=hint>(console.anthropic.com 에서 발급 · 미리보기만 할 거면 비워도 됨)</span>
+      <div class=grid>
+        <div>
+          <label>② 학교</label>
+          <select name=school>
+            {% for s in schools %}
+            <option value="{{ s.school_id }}" {{ 'selected' if s.school_id=='jinyang_hs' else '' }}>
+              {{ s.name }} ({{ '중' if s.level=='middle' else '고' }}){{ ' · 학습됨' if s.learned else ' · 표준골격' }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label>③ 학년</label>
+          <select name=grade>
+            <option>1</option><option>2</option><option>3</option>
+          </select>
+        </div>
+      </div>
+
+      <div class=grid>
+        <div>
+          <label>④ 난이도</label>
+          <select name=difficulty>
+            <option value="하">하</option>
+            <option value="중" selected>중</option>
+            <option value="상">상</option>
+          </select>
+        </div>
+        <div>
+          <label>⑤ 저장할 파일 이름 <span class=hint>(비우면 자동)</span></label>
+          <input type=text name=outname placeholder="예: 1학년_2차_동형A">
+        </div>
+      </div>
+
+      <label>⑥ 시험지 머리글 <span class=hint>(선택)</span></label>
+      <div class=grid>
+        <input type=text name=exam_title placeholder="2026학년도 1학기 2차 시험">
+        <input type=text name=subject placeholder="공통영어1">
+      </div>
+
+      <label>⑦ Anthropic API 키
+        <span class=hint>(실제 문항 생성용 · 비우고 아래 '미리보기'를 쓰면 디자인만 확인)</span>
       </label>
       <input type=password name=api_key placeholder="sk-ant-..."
              value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
              {{ 'readonly' if has_key else '' }}>
-      {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
-
-      <label>③ 저장할 파일 이름
-        <span class=hint>(선택 · 비우면 원본 파일명으로 저장 · 확장자 .pdf는 자동)</span>
-      </label>
-      <input type=text name=outname placeholder="예: 1학년_동형모의고사">
-      <div class=hint>파일을 여러 개 올리면 이름 뒤에 각 원본 이름이 붙습니다.</div>
+      <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
+        미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
       <div class=row>
-        <button class=btn id=go type=submit>분석 시작</button>
-        <span class=hint>파일이 많으면 몇 분 걸릴 수 있어요. 창을 닫지 마세요.</span>
+        <button class=btn id=go type=submit>동형모의고사 만들기</button>
+        <span class=hint>지문이 많으면 몇 분 걸릴 수 있어요.</span>
       </div>
     </form>
   </div>
 </div>
-
-<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">분석 중입니다… 잠시만요</p></div>
+<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">생성 중입니다… 잠시만요</p></div>
 <script>
  const drop=document.getElementById('drop'),file=document.getElementById('file'),
        list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
@@ -134,7 +176,7 @@ INDEX_HTML = """
  drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
  file.onchange=show;
  function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
- f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+ f.onsubmit=()=>{if(!file.files.length){alert('지문 파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
 </script>
 </body></html>
 """
@@ -142,58 +184,56 @@ INDEX_HTML = """
 RESULT_HTML = """
 <!doctype html><html lang=ko><head><meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<title>분석 결과</title><style>""" + BASE_CSS + """</style></head>
+<title>생성 결과</title><style>""" + BASE_CSS + """</style></head>
 <body><div class=wrap>
   <div class=card>
-    <h1>✅ 분석 결과</h1>
-    <div class=sub>성공 {{ n_ok }}개 · 실패 {{ n_fail }}개 (총 {{ results|length }}개)</div>
+    <h1>✅ 동형모의고사 생성 완료</h1>
+    <div class=sub>{{ school }} {{ grade }}학년 · 난이도 {{ difficulty }}
+      · 선택형 {{ n_choice }} / 서술형 {{ n_essay }} · {{ total }}점
+      {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}</div>
+
     <table>
-      <tr><th>파일</th><th>상태</th><th>결과 PDF</th></tr>
-      {% for r in results %}
-      <tr>
-        <td>{{ r.name }}</td>
-        <td>{% if r.ok %}<span class=ok>완료</span>{% else %}<span class=fail>실패</span>{% endif %}</td>
-        <td>
-          {% if r.ok %}
-            <div class=hint style="margin-bottom:4px">💾 {{ r.out }}</div>
-            <a class=dl href="{{ url_for('view', fname=r.out) }}" target=_blank>미리보기</a>
-            <a class=dl href="{{ url_for('download', fname=r.out) }}">다운로드</a>
-          {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
-        </td>
-      </tr>
+      <tr><th>산출물</th><th>열기</th></tr>
+      {% for f in downloads %}
+      <tr><td>💾 {{ f.name }}</td>
+        <td><a class=dl href="{{ url_for('view', fname=f.name) }}" target=_blank>미리보기</a>
+            <a class=dl href="{{ url_for('download', fname=f.name) }}">다운로드</a></td></tr>
       {% endfor %}
     </table>
-    <div class=row><a class="btn gray" href="{{ url_for('index') }}">← 다른 파일 분석하기</a></div>
+
+    <label style="margin-top:18px">검증 결과</label>
+    <pre>{{ verify }}</pre>
+
+    {% if logs %}
+    <label>지문 배정 참고 <span class=hint>(지문 부족으로 스킵/대체된 슬롯)</span></label>
+    <pre>{{ logs }}</pre>
+    {% endif %}
+
+    {% if not pdf_ready %}
+    <div class=err>PDF 변환기(WeasyPrint)가 없어 HTML로 저장했습니다.
+      HTML을 브라우저에서 열고 <b>Ctrl+P → PDF로 저장</b>하면 됩니다.</div>
+    {% endif %}
+
+    <div class=row><a class="btn gray" href="{{ url_for('index') }}">← 다시 만들기</a></div>
   </div>
 </div></body></html>
 """
 
-
 LOGIN_HTML = """
-<!doctype html><html lang=ko><head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>로그인</title><style>""" + BASE_CSS + """</style></head>
-<body><div class=wrap><div class=card style="max-width:420px;margin:60px auto;">
-  <h1>🔒 로그인</h1>
-  <div class=sub>이 도구를 사용하려면 비밀번호를 입력하세요.</div>
+<!doctype html><html lang=ko><head><meta charset=utf-8><title>로그인</title>
+<style>""" + BASE_CSS + """</style></head><body><div class=wrap>
+<div class=card style="max-width:420px;margin:60px auto;">
+  <h1>🔒 로그인</h1><div class=sub>비밀번호를 입력하세요.</div>
   {% if err %}<div class=err>{{ err }}</div>{% endif %}
-  <form method=post>
-    <label>비밀번호</label>
-    <input type=password name=password autofocus>
-    <div class=row><button class=btn type=submit>들어가기</button></div>
-  </form>
+  <form method=post><label>비밀번호</label><input type=password name=password autofocus>
+    <div class=row><button class=btn type=submit>들어가기</button></div></form>
 </div></div></body></html>
 """
 
 
-# ---------------------------------------------------------------------------
-# 접속 잠금 (인터넷 배포 시)
-# ---------------------------------------------------------------------------
 @app.before_request
 def _auth_gate():
-    if not APP_PASSWORD:
-        return  # 비밀번호 미설정 → 잠금 없음(내 컴퓨터 로컬 사용용)
-    if request.endpoint in ("login", "static"):
+    if not APP_PASSWORD or request.endpoint in ("login", "static"):
         return
     if session.get("auth"):
         return
@@ -211,92 +251,121 @@ def login():
     return render_template_string(LOGIN_HTML, err=err)
 
 
-# ---------------------------------------------------------------------------
-# 라우트
-# ---------------------------------------------------------------------------
+def _schools_for_view():
+    out = []
+    for s in load_schools_index():
+        prof = ROOT / "profiles" / s["school_id"] / "profile.json"
+        out.append({**s, "learned": prof.exists()})
+    return out
+
+
 @app.route("/")
 def index():
-    return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
-
-
-@app.route("/analyze", methods=["POST"], endpoint="analyze")
-def analyze_route():
-    files = [f for f in request.files.getlist("files") if f and f.filename]
-    mock = bool(request.form.get("mock"))
-    form_key = (request.form.get("api_key") or "").strip()
-    key = None if "설정됨" in form_key else (form_key or None)
-    key = key or cfg.api_key
-
-    if not files:
-        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
-    if not mock and not key:
-        # 키 없고 미리보기도 아님 → 안내
-        html = INDEX_HTML.replace("<form id=f",
-            "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요.</div><form id=f")
-        return render_template_string(html, has_key=cfg.has_api_key)
-
-    client = None if mock else ClaudeClient(key, cfg.model)
-
-    # 사용자가 지정한 저장 파일 이름(선택). 확장자·위험문자 정리.
-    raw_out = (request.form.get("outname") or "").strip()
-    if raw_out.lower().endswith(".pdf"):
-        raw_out = raw_out[:-4]
-    custom_name = _safe_name(raw_out) if raw_out else ""
-    multi = len(files) > 1
-
-    results = []
-    for f in files:
-        ext = Path(f.filename).suffix.lower()
-        if ext not in ALLOWED:
-            results.append({"name": f.filename, "ok": False,
-                            "error": "지원하지 않는 형식(JPG·PNG·PDF만 가능)"})
-            continue
-        tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
-        f.save(str(tmp))
-        try:
-            if mock:
-                reports = pipeline._mock_reports_for_pdf(cfg, tmp)
-            else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
-            stem = _safe_name(Path(f.filename).stem)
-            if custom_name:
-                base = f"{custom_name}_{stem}" if multi else custom_name
-            else:
-                base = f"{stem}_analysis"
-            out = _unique_output(f"{base}.pdf")
-            render.render_pdf(reports, out, footer_note=cfg.design.footer_note,
-                              min_vocab=cfg.vocab.min)
-            note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
-            results.append({"name": f.filename + note, "ok": True, "out": out.name})
-        except Exception as e:  # 개별 실패가 전체를 멈추지 않음
-            traceback.print_exc()
-            results.append({"name": f.filename, "ok": False, "error": str(e)})
-        finally:
-            tmp.unlink(missing_ok=True)
-
-    n_ok = sum(1 for r in results if r["ok"])
-    return render_template_string(RESULT_HTML, results=results,
-                                  n_ok=n_ok, n_fail=len(results) - n_ok)
+    return render_template_string(INDEX_HTML, schools=_schools_for_view(),
+                                  has_key=_has_key())
 
 
 def _safe_name(stem: str) -> str:
-    return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+    return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "mock_form"
 
 
-def _unique_output(fname: str) -> Path:
-    """OUTPUT_DIR 아래 겹치지 않는 파일 경로. 이미 있으면 _2, _3 … 을 붙인다."""
-    p = OUTPUT_DIR / fname
-    if not p.exists():
-        return p
-    stem, suf = p.stem, p.suffix
+def _unique_stem(stem: str) -> str:
+    if not (OUTPUT_DIR / f"{stem}.html").exists() and \
+       not (OUTPUT_DIR / f"{stem}.pdf").exists():
+        return stem
     i = 2
-    while (OUTPUT_DIR / f"{stem}_{i}{suf}").exists():
+    while (OUTPUT_DIR / f"{stem}_{i}.html").exists() or \
+          (OUTPUT_DIR / f"{stem}_{i}.pdf").exists():
         i += 1
-    return OUTPUT_DIR / f"{stem}_{i}{suf}"
+    return f"{stem}_{i}"
+
+
+@app.route("/generate", methods=["POST"])
+def generate():
+    files = [f for f in request.files.getlist("files") if f and f.filename]
+    mock = bool(request.form.get("mock"))
+    school = request.form.get("school") or "jinyang_hs"
+    grade = int(request.form.get("grade") or 1)
+    difficulty = request.form.get("difficulty") or "중"
+    form_key = (request.form.get("api_key") or "").strip()
+    key = None if "설정됨" in form_key else (form_key or None)
+    key = key or (os.environ.get("ANTHROPIC_API_KEY") if _has_key() else None)
+
+    if not files:
+        return render_template_string(INDEX_HTML, schools=_schools_for_view(),
+                                      has_key=_has_key())
+    if not mock and not key:
+        html = INDEX_HTML.replace("<form id=f",
+            "<div class=err>API 키가 없습니다. 키를 입력하거나 '미리보기'를 체크하세요.</div><form id=f")
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+
+    # 업로드 저장
+    saved: list[Path] = []
+    for f in files:
+        ext = Path(f.filename).suffix.lower()
+        if ext not in ALLOWED:
+            continue
+        p = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
+        f.save(str(p))
+        saved.append(p)
+    if not saved:
+        html = INDEX_HTML.replace("<form id=f",
+            "<div class=err>지원하는 지문 파일이 없습니다(PDF·JPG·PNG·TXT·HWP).</div><form id=f")
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+
+    client = None
+    if not mock:
+        from mockexam.core.llm import get_client
+        client = get_client(key, MODEL)
+
+    try:
+        res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
+                            grade=grade, client=client)
+        if not res.exam.questions:
+            raise RuntimeError("지문에서 문항을 만들지 못했습니다. 지문 텍스트가 인식됐는지 확인하세요"
+                               "(사진은 OCR 필요).")
+
+        raw = (request.form.get("outname") or "").strip()
+        if raw.lower().endswith(".pdf"):
+            raw = raw[:-4]
+        stem = _unique_stem(_safe_name(raw) if raw else
+                            f"{school}_{grade}학년_동형모의고사")
+
+        info = {}
+        if request.form.get("exam_title"):
+            info["exam_title"] = request.form["exam_title"].strip()
+        if request.form.get("subject"):
+            info["subject"] = request.form["subject"].strip()
+
+        out = render_exam(res.exam, OUTPUT_DIR, header_info=info,
+                          footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                          answer_key="end", basename=stem)
+    except Exception as e:
+        traceback.print_exc()
+        html = INDEX_HTML.replace("<form id=f",
+            f"<div class=err>생성 중 오류: {e}</div><form id=f")
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+    finally:
+        for p in saved:
+            p.unlink(missing_ok=True)
+
+    downloads = [{"name": p.name} for k, p in out.items()
+                 if k in ("problem_pdf", "problem_html")]
+    # PDF 를 우선 노출
+    downloads.sort(key=lambda d: (0 if d["name"].endswith(".pdf") else 1))
+    import json
+    logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
+    school_name = next((s["name"] for s in load_schools_index()
+                        if s["school_id"] == school), school)
+    return render_template_string(
+        RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
+        n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
+        total=res.blueprint.total_score, mock=mock,
+        downloads=downloads, verify=res.verify_report.summary(), logs=logs,
+        pdf_ready="problem_pdf" in out)
 
 
 def _safe_output(fname: str) -> Path:
-    """다운로드 경로 검증(디렉터리 탈출 방지)."""
     p = (OUTPUT_DIR / fname).resolve()
     if not str(p).startswith(str(OUTPUT_DIR.resolve())) or not p.is_file():
         abort(404)
@@ -318,9 +387,8 @@ def view(fname):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print("=" * 56)
-    print("  영어 지문 분석 웹앱이 실행되었습니다.")
-    print("  브라우저에서 아래 주소로 접속하세요:")
-    print(f"      http://localhost:{port}")
+    print("  동형모의고사 생성 웹앱이 실행되었습니다.")
+    print(f"  브라우저에서:  http://localhost:{port}")
     print("  (종료하려면 이 창에서 Ctrl+C)")
     print("=" * 56)
     app.run(host="0.0.0.0", port=port, threaded=True)

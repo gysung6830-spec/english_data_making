@@ -2,7 +2,7 @@
 # render.com 에서 이 저장소를 연결하면 자동으로 이 설정대로 배포됩니다.
 services:
   - type: web
-    name: english-passage-analyzer
+    name: mock-exam-generator
     runtime: docker
     plan: free            # 무료 요금제 (일정 시간 미사용 시 잠자기 → 첫 접속 느릴 수 있음)
     envVars:

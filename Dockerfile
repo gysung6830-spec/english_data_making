@@ -1,4 +1,4 @@
-# 영어 지문 분석 웹앱 - 인터넷 배포용 이미지
+# 동형모의고사 생성 웹앱 - 인터넷 배포용 이미지
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \

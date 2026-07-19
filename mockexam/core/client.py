@@ -1,8 +1,8 @@
 """Anthropic API 래퍼: 구조화된 JSON 응답 + 검증 + 재시도.
 
-- 6개 섹션을 각각 독립 호출로 처리하기 위한 저수준 헬퍼.
+- 문항 생성 시 유형별로 구조화 JSON 을 강제해 받기 위한 저수준 헬퍼.
 - output_config.format(json_schema) 로 JSON 형식을 강제하고,
-  pydantic 으로 다시 검증하여 개수/필드 오류 시 재요청한다.
+  pydantic 으로 다시 검증하여 스키마/개수 오류 시 재요청한다.
 """
 from __future__ import annotations
 
