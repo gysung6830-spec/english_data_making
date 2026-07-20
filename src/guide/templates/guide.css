@@ -68,6 +68,30 @@ body {
   padding: 8px 20px; font-size: 11px;
 }
 
+/* ── 목차 ─────────────────────────────────────── */
+.toc { page-break-after: always; padding-top: 6mm; }
+.toc-title {
+  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-size: 26px; font-weight: 800; color: var(--navy);
+  border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 18px;
+}
+.toc-title .toc-en { font-size: 12px; color: var(--gold); letter-spacing: 3px; margin-left: 8px; }
+.toc-part { margin: 14px 0 4px; }
+.toc-part a {
+  font-weight: 800; color: var(--navy); font-size: 13px; text-decoration: none;
+  display: flex; align-items: baseline;
+}
+.toc-item { margin: 3px 0 3px 16px; }
+.toc-item a {
+  color: #4b5563; font-size: 11px; text-decoration: none;
+  display: flex; align-items: baseline;
+}
+.toc-part a::after, .toc-item a::after {
+  content: leader('·') " " target-counter(attr(href url), page);
+  color: #b8bcc4; font-weight: 400;
+}
+.toc-part a::after { color: var(--gold); }
+
 /* ── 챕터 ─────────────────────────────────────── */
 .chapter { page-break-before: always; }
 .chapter:first-of-type { page-break-before: avoid; }
