@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 input/*.pdf
+input_corpus/*.pdf
+input_corpus/*.txt
+input_corpus/*.md
 output/*.pdf
 output/*.html
 logs/*.jsonl

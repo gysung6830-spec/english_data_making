@@ -1,0 +1,147 @@
+# ============================================================
+#  평가원 코드 — "답으로 이어지는" 기능어 목록 (구문해석 실전서 1부)
+#  평가원 코드 VOCA 의 카테고리를 그대로 챕터로 삼는다.
+#  코딩을 몰라도 아래 목록에 코드를 추가/수정하면 교재에 반영됩니다.
+#
+#  구조:
+#    categories[].id       : 내부 식별자
+#    categories[].title    : 챕터 제목 (예: 인과)
+#    categories[].day      : 원본 VOCA DAY 번호 (참고용)
+#    categories[].signal   : 이 코드들이 문장에서 하는 역할 한 줄
+#    categories[].misread  : 이 유형에서 학생이 가장 많이 저지르는 오역
+#    categories[].tip      : 이 코드를 만나면 무엇부터 확인할지(챕터 공통 팁)
+#    categories[].groups   : (선택) 방향/성격이 갈리는 소분류. 각 group 은 label + codes
+#    codes[].en            : 영어 코드 어구(매칭 패턴, A/B 는 자리표시자)
+#    codes[].ko            : 한국어 뜻
+#    codes[].dir           : (선택) 방향 태그(forward/backward 등, 렌더링 배지용)
+# ============================================================
+
+categories:
+  # ── 인과 (DAY19) ─────────────────────────────────────────
+  - id: causation
+    title: "인과"
+    day: 19
+    signal: "원인과 결과를 잇는 표현"
+    misread: "화살표 방향을 놓쳐 원인과 결과를 뒤바꿔 읽는다"
+    tip: "코드를 보면 먼저 화살표 방향부터 고정하라 — 누가 원인이고 누가 결과인지."
+    groups:
+      - label: "정방향 (A → B · A가 원인)"
+        codes:
+          - {en: "lead to",      ko: "A가 B로 이어지다",   dir: forward}
+          - {en: "result in",    ko: "A가 B를 야기하다",   dir: forward}
+          - {en: "cause",        ko: "A가 B를 야기하다",   dir: forward}
+          - {en: "bring about",  ko: "A가 B를 가져오다",   dir: forward}
+          - {en: "trigger",      ko: "A가 B를 촉발하다",   dir: forward}
+          - {en: "give rise to", ko: "A가 B를 일으키다",   dir: forward}
+          - {en: "contribute to",ko: "A가 B의 원인이 되다", dir: forward}
+      - label: "역방향 (B ← A · A가 결과)"
+        codes:
+          - {en: "result from",       ko: "A가 B에서 기인하다",  dir: backward}
+          - {en: "stem from",         ko: "A가 B로부터 비롯되다", dir: backward}
+          - {en: "arise from",        ko: "A가 B로부터 발생하다", dir: backward}
+          - {en: "be attributable to",ko: "A가 B에 기인하다",    dir: backward}
+          - {en: "be derived from",   ko: "A가 B로부터 파생되다", dir: backward}
+          - {en: "be due to",         ko: "A가 B 때문이다",     dir: backward}
+          - {en: "be rooted in",      ko: "A가 B에 뿌리를 두다", dir: backward}
+
+  # ── 대조·반의 (DAY17) ────────────────────────────────────
+  - id: contrast
+    title: "대조·반의"
+    day: 17
+    signal: "앞뒤 내용을 반대로 뒤집는 신호"
+    misread: "대조 신호를 놓쳐 앞뒤를 같은 방향으로 읽는다"
+    tip: "이 코드가 보이면 앞뒤가 '반대'다 — 뒤 내용을 앞과 뒤집어 이해하라."
+    groups:
+      - label: "대조 접속·전치사"
+        codes:
+          - {en: "unlike",       ko: "~와는 달리"}
+          - {en: "whereas",      ko: "~인 반면에"}
+          - {en: "while",        ko: "~인 반면에(대조)"}
+          - {en: "contrary to",  ko: "~와 반대로"}
+          - {en: "as opposed to",ko: "~와 대조적으로"}
+          - {en: "in contrast",  ko: "대조적으로"}
+          - {en: "on the contrary", ko: "그와는 반대로"}
+      - label: "양보 (겉과 속이 다름)"
+        codes:
+          - {en: "although",     ko: "비록 ~일지라도"}
+          - {en: "even though",  ko: "~에도 불구하고"}
+          - {en: "despite",      ko: "~에도 불구하고"}
+          - {en: "nevertheless", ko: "그럼에도 불구하고"}
+          - {en: "rather than",  ko: "~라기보다는"}
+
+  # ── 등호·구별 (DAY18) ────────────────────────────────────
+  - id: equivalence
+    title: "등호·구별"
+    day: 18
+    signal: "A와 B가 같은지(=) 다른지(≠)를 정하는 표현"
+    misread: "A=B(재진술·동격)를 놓쳐 새 정보로 읽거나, 구별을 동일시한다"
+    tip: "등호(A=B)면 뒤는 앞의 재진술이다 — 새 내용이 아니라 같은 말임을 알아채라."
+    groups:
+      - label: "등호 (A = B · 재진술/정의)"
+        codes:
+          - {en: "in other words", ko: "즉, 다시 말해"}
+          - {en: "that is",        ko: "즉"}
+          - {en: "namely",         ko: "즉, 다시 말해"}
+          - {en: "be equivalent to", ko: "A가 B에 상응하다"}
+          - {en: "amount to",      ko: "A가 B와 마찬가지다"}
+          - {en: "in essence",     ko: "본질적으로(=)"}
+      - label: "구별 (A ≠ B · 다름)"
+        codes:
+          - {en: "distinguish A from B", ko: "A를 B와 구별하다"}
+          - {en: "differ from",    ko: "A가 B와 다르다"}
+          - {en: "as distinct from", ko: "~와 구별되게"}
+          - {en: "set apart from", ko: "A를 B와 구별짓다"}
+
+  # ── 비교·대체·선호 (DAY16) ───────────────────────────────
+  - id: comparison
+    title: "비교·대체·선호"
+    day: 16
+    signal: "둘 중 어느 쪽이 더/우선인지를 정하는 표현"
+    misread: "우열·선호의 대상이 뒤바뀐다 (A를 택했는지 B를 택했는지)"
+    tip: "무엇이 무엇보다 위인지, 무엇이 무엇을 대신하는지 — 두 대상의 관계부터 확정하라."
+    groups:
+      - label: "선호·선택 (A를 택함)"
+        codes:
+          - {en: "prefer A to B",   ko: "B보다 A를 선호하다"}
+          - {en: "favor A over B",  ko: "B보다 A를 선호하다"}
+          - {en: "choose A over B", ko: "B보다 A를 택하다"}
+          - {en: "rather than",     ko: "B가 아니라 A를(선호)"}
+      - label: "우열·비교 (A가 위)"
+        codes:
+          - {en: "outweigh",       ko: "A가 B보다 더 중요하다"}
+          - {en: "be superior to", ko: "A가 B보다 우월하다"}
+          - {en: "surpass",        ko: "A가 B를 능가하다"}
+          - {en: "take precedence over", ko: "A가 B에 우선하다"}
+      - label: "대체 (A가 B를 대신)"
+        codes:
+          - {en: "replace",        ko: "A가 B를 대체하다"}
+          - {en: "give way to",    ko: "A가 B에게 자리를 내주다"}
+          - {en: "be replaced by", ko: "A가 B로 대체되다"}
+
+  # ── 연결어 (DAY20) ───────────────────────────────────────
+  - id: connective
+    title: "연결어"
+    day: 20
+    signal: "글의 논리 흐름(부연·예시·인과·양보)을 알리는 신호"
+    misread: "연결어의 논리 종류를 오해해 글의 흐름을 반대로/엉뚱하게 잡는다"
+    tip: "연결어의 '논리 종류'부터 판정하라 — 부연인지, 대조인지, 인과인지, 예시인지."
+    groups:
+      - label: "부연·첨가 (같은 방향 강화)"
+        codes:
+          - {en: "moreover",     ko: "게다가"}
+          - {en: "furthermore",  ko: "게다가"}
+          - {en: "in addition",  ko: "게다가"}
+          - {en: "likewise",     ko: "마찬가지로"}
+      - label: "결과·귀결"
+        codes:
+          - {en: "thus",         ko: "그래서"}
+          - {en: "hence",        ko: "그래서"}
+          - {en: "consequently", ko: "그 결과"}
+          - {en: "accordingly",  ko: "따라서"}
+          - {en: "thereby",      ko: "그렇게 함으로써"}
+      - label: "전환·역접"
+        codes:
+          - {en: "however",      ko: "하지만"}
+          - {en: "yet",          ko: "그러나"}
+          - {en: "nonetheless",  ko: "그럼에도"}
+          - {en: "instead",      ko: "대신에"}

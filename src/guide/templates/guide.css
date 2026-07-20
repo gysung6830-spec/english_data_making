@@ -1,0 +1,139 @@
+/* ============================================================
+   구문해석 실전서 - 인쇄용 스타일 (WeasyPrint)
+   팔레트: 네이비 #1a2740 / 골드 #b08d57 / 오역=빨강 / 정답=초록
+   ============================================================ */
+
+@page {
+  size: A4;
+  margin: 14mm 15mm 15mm 15mm;
+  @bottom-center {
+    content: "구문해석 실전서 · " counter(page) " / " counter(pages);
+    font-family: "NanumGothic", "WenQuanYi Zen Hei", sans-serif;
+    font-size: 8px;
+    color: #9aa0a6;
+  }
+}
+@page cover { margin: 0; @bottom-center { content: ""; } }
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "NanumGothic", "Nanum Gothic", "Malgun Gothic", "WenQuanYi Zen Hei", sans-serif;
+  color: #23272e;
+  font-size: 10.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+:root {
+  --navy:  #1a2740;
+  --navy2: #243456;
+  --gold:  #b08d57;
+  --wrong:   #c0392b;
+  --wrong-bg:#fdf1ef;
+  --right:   #1f8a54;
+  --right-bg:#eefaf2;
+  --ink:   #2b2f36;
+  --muted: #6b7280;
+  --line:  #e5e7eb;
+}
+
+.serif { font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif; }
+
+/* ── 표지 ─────────────────────────────────────── */
+.cover {
+  page: cover;
+  height: 297mm;
+  background: linear-gradient(150deg, #1a2740 0%, #223357 55%, #1a2740 100%);
+  color: #f4ecdd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  page-break-after: always;
+}
+.cover .kicker {
+  letter-spacing: 8px; font-size: 12px; color: #c7b48f; margin-bottom: 14px;
+}
+.cover h1 {
+  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-size: 46px; font-weight: 800; letter-spacing: 4px; margin: 0 0 16px;
+  color: #f4ecdd;
+}
+.cover .sub { font-size: 14px; color: #d8cbb0; line-height: 1.7; }
+.cover .rule { width: 54px; height: 2px; background: var(--gold); margin: 28px 0; }
+.cover .badge-sample {
+  border: 1px solid var(--gold); color: #c7b48f; letter-spacing: 4px;
+  padding: 8px 20px; font-size: 11px;
+}
+
+/* ── 챕터 ─────────────────────────────────────── */
+.chapter { page-break-before: always; }
+.chapter:first-of-type { page-break-before: avoid; }
+
+.ch-kicker { color: var(--gold); font-size: 10px; letter-spacing: 3px; font-weight: 700; }
+.ch-title {
+  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-size: 22px; font-weight: 800; color: var(--navy); margin: 2px 0 4px;
+  border-bottom: 2px solid var(--gold); padding-bottom: 8px;
+}
+.ch-signal { color: var(--muted); font-size: 10.5px; margin: 6px 0 14px; }
+
+/* 챕터 도입 박스: 대표 오역 + 공통 팁 */
+.ch-intro {
+  border-left: 4px solid var(--navy);
+  background: #f6f8fc;
+  padding: 12px 16px; margin-bottom: 16px; border-radius: 0 6px 6px 0;
+}
+.ch-intro .lbl { font-weight: 800; color: var(--navy); }
+.ch-intro .misread { color: var(--wrong); font-weight: 700; }
+.ch-intro .tip { margin-top: 6px; }
+
+/* ── 코드 카드 ─────────────────────────────────── */
+.card {
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px 16px 12px; margin-bottom: 14px;
+  page-break-inside: avoid;
+}
+.card-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+.code-chip {
+  background: var(--navy); color: #fff; font-weight: 700;
+  padding: 2px 10px; border-radius: 4px; font-size: 11px; white-space: nowrap;
+}
+.code-ko { color: var(--muted); font-size: 10px; }
+.dir-badge {
+  margin-left: auto; background: #f0ece1; color: #8a6d3b;
+  font-size: 9px; padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+
+.sentence {
+  font-size: 12px; line-height: 1.7; color: var(--ink);
+  padding: 8px 10px; background: #fbfbfc; border-radius: 6px; margin-bottom: 10px;
+}
+.code-hit {
+  background: #fff3d6; color: #7a5b12; font-weight: 700;
+  padding: 0 3px; border-radius: 3px;
+}
+.source { color: #9aa0a6; font-size: 9px; margin-left: 4px; }
+
+.rows { display: flex; flex-direction: column; gap: 7px; }
+.ab {
+  padding: 8px 12px; border-radius: 6px; font-size: 10.5px; line-height: 1.55;
+}
+.ab .tag {
+  display: inline-block; font-weight: 800; margin-right: 6px;
+  padding: 0 7px; border-radius: 3px; font-size: 9.5px; color: #fff;
+}
+.ab.wrong { background: var(--wrong-bg); }
+.ab.wrong .tag { background: var(--wrong); }
+.ab.wrong .why { color: var(--wrong); font-size: 9.5px; margin-top: 3px; }
+.ab.right { background: var(--right-bg); }
+.ab.right .tag { background: var(--right); }
+
+.tip-line {
+  margin-top: 9px; font-size: 10px; color: var(--navy);
+  border-top: 1px dashed var(--line); padding-top: 7px;
+}
+.tip-line b { color: var(--gold); }
+.skeleton { color: var(--muted); font-size: 9.5px; margin-top: 4px; }

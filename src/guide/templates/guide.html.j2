@@ -1,0 +1,66 @@
+<!-- 구문해석 실전서 - 1부 '답으로 이어지는 평가원 코드' -->
+
+<!-- 표지 -->
+<section class="cover">
+  <div class="kicker">{{ guide.kicker }}</div>
+  <h1>{{ guide.title }}</h1>
+  <div class="rule"></div>
+  <div class="sub">{{ guide.subtitle }}</div>
+  {% if sample %}<div style="height:26px"></div><div class="badge-sample">SAMPLE · 미리보기</div>{% endif %}
+</section>
+
+<!-- 1부 도입 -->
+<section class="chapter">
+  <div class="ch-kicker">1부 · 평가원 기능어 특집</div>
+  <div class="ch-title">답으로 이어지는 평가원 코드</div>
+  <div class="ch-signal">
+    평가원 문장은 추상적이고 수식어가 많다. 그런데 <b>기능어(평가원 코드)</b>만 정확히 잡으면
+    문장이 어느 방향으로 흐르는지 — 그리고 답이 어디로 이어지는지 — 가 보인다.
+    같은 유형의 코드를 모아, 흔한 <b style="color:var(--wrong)">오역</b>과
+    <b style="color:var(--right)">올바른 해석 방향</b>을 나란히 익힌다.
+  </div>
+
+  {% for chapter in guide.chapters %}
+  {% if not loop.first %}</section><section class="chapter">{% endif %}
+    <div class="ch-kicker">Ch{{ loop.index }}</div>
+    <div class="ch-title">{{ chapter.title }}</div>
+    <div class="ch-signal">{{ chapter.signal }}</div>
+
+    <div class="ch-intro">
+      <div><span class="lbl">이 유형의 대표 오역 ·</span>
+        <span class="misread">{{ chapter.misread }}</span></div>
+      <div class="tip"><span class="lbl">💡 코드를 만나면 ·</span> {{ chapter.tip }}</div>
+    </div>
+
+    {% for card in chapter.cards %}
+    <div class="card">
+      <div class="card-head">
+        <span class="code-chip">{{ card.code }}</span>
+        <span class="code-ko">{{ card.code_ko }}</span>
+        {% set dl = card.dir | dir_label %}
+        {% if dl %}<span class="dir-badge">{{ dl }}</span>{% endif %}
+      </div>
+
+      <div class="sentence">
+        {{ card.sentence | highlight_code(card.body.highlight) }}
+        {% if card.source %}<span class="source">— {{ card.source }}</span>{% endif %}
+      </div>
+
+      <div class="rows">
+        <div class="ab wrong">
+          <span class="tag">오역</span>{{ card.body.literal_trap }}
+          <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div>
+        </div>
+        <div class="ab right">
+          <span class="tag">정답</span>{{ card.body.correct }}
+        </div>
+      </div>
+
+      {% if card.body.skeleton %}
+      <div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>
+      {% endif %}
+      <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
+    </div>
+    {% endfor %}
+  {% endfor %}
+</section>
