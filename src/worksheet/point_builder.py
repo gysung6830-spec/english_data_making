@@ -43,12 +43,17 @@ def _grammar_facts(sentence: Sentence) -> list[str]:
     return uniq
 
 
-def build_grammar_point(sentence: Sentence) -> Point | None:
-    """어법 토큰(note_kind='red')을 (1)(2)… 로 번호 매기고, 인라인 주석은 번호로 바꾼 뒤
-    오른쪽 '어법 Point' 박스에 '(N) 어법이름'을 나열한다. (내용 TMI 없음)
+def _circled(n: int) -> str:
+    """1..20 → 원문자 ①..⑳. 범위 밖은 (n)."""
+    return chr(0x2460 + n - 1) if 1 <= n <= 20 else f"({n})"
 
-    - 인라인: 해당 어법 글자는 빨강, 주석은 '(N)' 빨강.
-    - 박스   : '(1) to부정사의 의미상의 주어' 처럼 번호와 어법명을 나열.
+
+def build_grammar_point(sentence: Sentence) -> Point | None:
+    """어법 토큰(note_kind='red')을 ①②… 로 번호 매기고, 인라인 주석은 번호로 바꾼 뒤
+    오른쪽 '어법 Point' 박스에 '① 어법이름'을 나열한다. (내용 TMI 없음)
+
+    - 인라인: 해당 어법 글자는 빨강, 주석은 '①' 빨강.
+    - 박스   : '① to부정사의 의미상의 주어' 처럼 원문자 번호와 어법명을 나열.
     """
     items: list[tuple[int, str, str | None]] = []
     n = 0
@@ -56,14 +61,14 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
         if t.note and t.note_kind == "red":
             n += 1
             items.append((n, t.note, t.wrong))
-            t.note = f"({n})"          # 인라인은 번호만
+            t.note = _circled(n)        # 인라인은 원문자 번호만
             t.note_kind = "red"
             t.color = t.color or "red"  # 어법 글자 빨강
     if not items:
         return None
     rows = []
     for num, name, wrong in items:
-        row = f"({num}) {escape(name)}"
+        row = f"{_circled(num)} {escape(name)}"
         if wrong:
             row += f" · <b>{escape(wrong)}</b>"
         rows.append(row)
