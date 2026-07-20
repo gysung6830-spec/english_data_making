@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from ..client import ClaudeClient
 from .llm_schemas import OverviewBundle
-from .models import Analysis, FlowStep, OutlineItem, VocabEntry
+from .models import Analysis, FlowStep, VocabEntry
 
 SYSTEM = (
     "당신은 한국 고등학교 영어 지문 학습지의 '요약 정리 페이지'를 만드는 전문 강사입니다. "
@@ -35,10 +35,9 @@ def build_prompt(analysis: Analysis) -> str:
         "[작성 규칙]\n"
         "1) vocab: 지문 핵심 어휘 8~12개. 각 항목 word(단어/표현), meaning(한글 뜻), "
         "syn(유의어, 없으면 '—'), ant(반의어, 없으면 '—'), sent(등장 문장 번호).\n"
-        "2) flow: 글의 논리 흐름을 4~6단계로. 각 단계 label(도입/전개/전환/주장/결론 등 짧은 이름), "
-        "text(개조식 한 줄), sentences(관련 문장 번호, 예 '1~3').\n"
-        "3) outline: 지문을 쉽게 이해하도록 구간별 '쉬운 비유 예시'를 한 줄씩(4~6개). "
-        "label(문장 범위, 예 '①~③'), easy(학생 눈높이 반말 비유 한 줄).\n"
+        "2) flow: 글의 논리 흐름을 4~6단계로. 각 단계에 논리와 쉬운 예시를 '함께' 담습니다. "
+        "label(도입/전개/전환/주장/결론 등 짧은 이름), text(개조식 논리 한 줄), "
+        "easy(그 단계를 학생 눈높이 반말로 풀어준 쉬운 비유 한 줄), sentences(관련 문장 번호, 예 '1~3').\n"
     )
 
 
@@ -46,8 +45,8 @@ def build_overview(
     client: ClaudeClient,
     analysis: Analysis,
     max_retries: int = 1,
-) -> tuple[list[VocabEntry], list[FlowStep], list[OutlineItem]]:
-    """LLM 로 뒷페이지 3종 생성. 실패 시 빈 목록."""
+) -> tuple[list[VocabEntry], list[FlowStep]]:
+    """LLM 로 뒷페이지(어휘 리스트 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 목록."""
     try:
         b: OverviewBundle = client.structured(
             system=SYSTEM,
@@ -57,10 +56,9 @@ def build_overview(
             max_retries=max_retries,
         )
     except Exception:
-        return [], [], []
+        return [], []
     vocab = [VocabEntry(word=v.word, meaning=v.meaning, syn=v.syn or "—",
                         ant=v.ant or "—", sent=(v.sent or None)) for v in b.vocab if v.word]
-    flow = [FlowStep(label=f.label, text=f.text, sentences=f.sentences)
+    flow = [FlowStep(label=f.label, text=f.text, easy=f.easy, sentences=f.sentences)
             for f in b.flow if f.label and f.text]
-    outline = [OutlineItem(label=o.label, easy=o.easy) for o in b.outline if o.easy]
-    return vocab, flow, outline
+    return vocab, flow

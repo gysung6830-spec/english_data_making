@@ -135,14 +135,31 @@ def test_render_back_page():
     a = mock_analysis()
     ha = renderer.render_a_html([a])
     assert 'class="bhead"' in ha                       # 뒷페이지 존재
-    assert 'class="vtab"' in ha and 'class="flow"' in ha and 'class="outline"' in ha
+    assert 'class="vtab"' in ha and 'class="flow"' in ha
+    assert 'class="ez"' in ha                          # 논리 흐름 + 쉬운 예시 통합
     assert "impermeable" in ha and "flourish" in ha    # 어휘/유의어
-    assert "비유 제시" in ha                             # 흐름도 단계
+    assert "비유 제시" in ha                             # 흐름 단계
     # 뒷페이지 데이터가 없는 Analysis 는 back 페이지를 만들지 않는다
     from src.worksheet.models import Analysis
     plain = Analysis(title_en="x", sentences=a.sentences)
     assert 'class="bhead"' not in renderer.render_a_html([plain])
-    print("PASS  뒷페이지(어휘/흐름도/예시)")
+    print("PASS  뒷페이지(어휘 + 논리흐름·쉬운예시)")
+
+
+def test_gloss_as_point_box():
+    # 함축(gloss_en)은 인라인이 아니라 포인트 박스(.imp)로 렌더
+    a = mock_analysis()
+    ha = renderer.render_a_html([a])
+    assert 'class="pbox imp"' in ha and "함축 Point" in ha
+    print("PASS  함축 → 포인트 박스")
+
+
+def test_pronoun_referent_in_mock():
+    # 대명사 지칭 대상 주석(→ ...)이 태깅되어 있는지
+    a = mock_analysis()
+    notes = [t.note for s in a.sentences for t in s.tokens if t.note]
+    assert any(n and n.startswith("→") for n in notes)
+    print("PASS  대명사 지칭 대상 표기")
 
 
 def test_page_break_per_passage():
@@ -158,17 +175,16 @@ def test_overview_builder_llm_path():
     payload = json.dumps({
         "vocab": [{"word": "thrive", "meaning": "번성하다", "syn": "flourish",
                    "ant": "decline", "sent": 6}],
-        "flow": [{"label": "도입", "text": "화제 제시", "sentences": "1"}],
-        "outline": [{"label": "①", "easy": "궁금하면 스스로 파고드는 거랑 같음"}],
+        "flow": [{"label": "도입", "text": "화제 제시",
+                  "easy": "궁금하면 스스로 파고드는 거랑 같음", "sentences": "1"}],
     })
     from src.worksheet import overview_builder
     from src.worksheet.models import Analysis, Sentence
     client = _fake_client([payload])
     a = Analysis(title_en="x", sentences=[Sentence(index=1, lines=[[Token(text="Hi")]])])
-    vocab, flow, outline = overview_builder.build_overview(client, a)
+    vocab, flow = overview_builder.build_overview(client, a)
     assert vocab and vocab[0].word == "thrive" and vocab[0].syn == "flourish"
-    assert flow and flow[0].label == "도입"
-    assert outline and outline[0].label == "①"
+    assert flow and flow[0].label == "도입" and flow[0].easy.startswith("궁금")
     print("PASS  overview_builder LLM 경로")
 
 
@@ -196,6 +212,8 @@ def run_all():
     test_build_points_fallback_to_rules()
     test_render_a_and_b()
     test_render_back_page()
+    test_gloss_as_point_box()
+    test_pronoun_referent_in_mock()
     test_page_break_per_passage()
     test_overview_builder_llm_path()
     test_webapp_worksheet_flow()

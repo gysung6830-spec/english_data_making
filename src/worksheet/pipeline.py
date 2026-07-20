@@ -76,7 +76,7 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
         sentences=sentences,
     )
     if with_back:
-        analysis.vocab, analysis.flow, analysis.outline = overview_builder.build_overview(
+        analysis.vocab, analysis.flow = overview_builder.build_overview(
             client, analysis, max_retries=max_retries)
     return analysis
 

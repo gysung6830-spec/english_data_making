@@ -14,8 +14,6 @@ HTML/PDF 로 출력한다. 두 가지 레이아웃을 지원한다.
 """
 from __future__ import annotations
 
-from .models import (Analysis, FlowStep, OutlineItem, Point, Sentence, Token,
-                     VocabEntry)
+from .models import Analysis, FlowStep, Point, Sentence, Token, VocabEntry
 
-__all__ = ["Analysis", "FlowStep", "OutlineItem", "Point", "Sentence", "Token",
-           "VocabEntry"]
+__all__ = ["Analysis", "FlowStep", "Point", "Sentence", "Token", "VocabEntry"]

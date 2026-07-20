@@ -7,8 +7,7 @@
 """
 from __future__ import annotations
 
-from .models import (Analysis, FlowStep, OutlineItem, Point, Sentence, Token,
-                     VocabEntry)
+from .models import Analysis, FlowStep, Point, Sentence, Token, VocabEntry
 
 
 def _T(text, role=None, note=None, kind="gray", wrong=None, above=None,
@@ -82,7 +81,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         index=6,
         badge="빈",
         lines=[[
-            _T("(In our lives too),"), _T("we"), _T("cannot"),
+            _T("(In our lives too),"), _T("we", note="→ 우리 인간"), _T("cannot"),
             _T("survive", role="V①"), _T("and", role="병렬"),
             _T("thrive", role="V②", color="red", above="↔ decline", note="= flourish"),
             _T("(in isolation).", note="= in a vacuum · 고립된 채로"),
@@ -96,12 +95,12 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
             _T("Leaders"), _T("need to be careful"),
             _T("(not to build", role="to부정사(부사)", hl="y"),
             _T("walls", hl="y"), _T("around", hl="y"),
-            _T("themselves", hl="y", wrong="them(X)"),
+            _T("themselves", hl="y", note="→ leaders", wrong="them(X)"),
             _T("(that", role="주관대", note="선행사: walls", wrong="who(X)"),
             _T("prevent", hl="y", note="keep/prohibit/stop A from ~ing"),
             _T("people", hl="y"),
             _T("from reaching out to", hl="y", note="~에게 다가가다"),
-            _T("them)).", hl="y"),
+            _T("them)).", hl="y", note="→ leaders"),
         ]],
         translation="리더는 사람들이 그들에게 다가오지 못하게 막는 벽을 그들 자신의 주변에 쌓지 않도록 주의해야 한다.",
         points=[
@@ -119,7 +118,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     s08 = Sentence(
         index=8,
         lines=[[
-            _T("(As a leader),"), _T("you"), _T("need"),
+            _T("(As a leader),"), _T("you", note="→ 리더(독자)"), _T("need"),
             _T("(to be able to", role="to부정사(명사)"),
             _T("touch", color="red", above="= come in contact with", note="↔ detach, disconnect"),
             _T("other people).", role="other+복수명사"),
@@ -168,18 +167,16 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         VocabEntry("be designed to", "~하도록 설계되다", "be built to", "—", 10),
     ]
     flow = [
-        FlowStep("비유 제시", "아무리 좋은 차도 물이 안 통하는 봉지 속에선 무용지물", "1~3"),
-        FlowStep("원리 설명", "티백은 구멍(porous)이 있어야 물과 찻잎이 접촉함", "4~5"),
-        FlowStep("삶에 적용", "사람도 고립된 채로는 살지도 성장하지도 못함", "6"),
-        FlowStep("주장", "리더는 벽을 쌓지 말고 열려 있어야 함", "7~8"),
-        FlowStep("결론", "우리는 다른 사람·사회와 함께 일하도록 설계된 존재", "9~10"),
-    ]
-    outline = [
-        OutlineItem("①~③", "아무리 좋은 찻잎도 물 안 통하는 봉지에 넣으면 꽝인 거랑 같음"),
-        OutlineItem("④~⑤", "티백에 구멍 뚫려야 차가 우러나듯, 물·찻잎이 서로 닿아야 됨"),
-        OutlineItem("⑥", "혼자 방에만 틀어박히면 사람도 시들해지는 거임"),
-        OutlineItem("⑦~⑧", '리더가 벽 치고 "오지 마" 하면 아무도 도와줄 수 없음'),
-        OutlineItem("⑨~⑩", "찻잎+물처럼, 사람도 같이 섞여야 제 실력이 나옴"),
+        FlowStep("비유 제시", "아무리 좋은 차도 물이 안 통하는 봉지 속에선 무용지물",
+                 easy="아무리 좋은 찻잎도 물 안 통하는 봉지에 넣으면 꽝인 거랑 같음", sentences="1~3"),
+        FlowStep("원리 설명", "티백은 구멍(porous)이 있어야 물과 찻잎이 접촉함",
+                 easy="티백에 구멍 뚫려야 차가 우러나듯, 물·찻잎이 서로 닿아야 됨", sentences="4~5"),
+        FlowStep("삶에 적용", "사람도 고립된 채로는 살지도 성장하지도 못함",
+                 easy="혼자 방에만 틀어박히면 사람도 시들해지는 거임", sentences="6"),
+        FlowStep("주장", "리더는 벽을 쌓지 말고 열려 있어야 함",
+                 easy='리더가 벽 치고 "오지 마" 하면 아무도 도와줄 수 없음', sentences="7~8"),
+        FlowStep("결론", "우리는 다른 사람·사회와 함께 일하도록 설계된 존재",
+                 easy="찻잎+물처럼, 사람도 같이 섞여야 제 실력이 나옴", sentences="9~10"),
     ]
 
     return Analysis(
@@ -188,5 +185,5 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         lecture_label=lecture_label,
         date=date,
         sentences=[s01, s02, s03, s04, s05, s06, s07, s08, s09, s10],
-        vocab=vocab, flow=flow, outline=outline,
+        vocab=vocab, flow=flow,
     )

@@ -65,16 +65,11 @@ class VocabSpec(BaseModel):
 
 class FlowSpec(BaseModel):
     label: str               # '도입','전개','비유','원리','주장','결론' 등
-    text: str                # 개조식 내용
+    text: str                # 개조식 논리 내용
+    easy: str = ""           # 학생 눈높이 쉬운 예시 한 줄(같은 단계에 함께)
     sentences: str = ""      # 관련 문장 번호(예: '1~3')
-
-
-class OutlineSpec(BaseModel):
-    label: str               # '①~③','6번' 등 범위 라벨
-    easy: str                # 쉬운 예시 한 줄
 
 
 class OverviewBundle(BaseModel):
     vocab: list[VocabSpec] = Field(default_factory=list)
     flow: list[FlowSpec] = Field(default_factory=list)
-    outline: list[OutlineSpec] = Field(default_factory=list)

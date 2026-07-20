@@ -88,19 +88,12 @@ class VocabEntry:
 
 @dataclass
 class FlowStep:
-    """논리 흐름도의 한 단계."""
+    """논리 흐름도의 한 단계 (쉬운 예시를 같은 목차에 포함)."""
 
     label: str               # '비유','원리','적용','주장','결론' 등 단계명
-    text: str                # 개조식 내용
+    text: str                # 개조식 논리 내용
+    easy: str = ""           # 학생 눈높이 쉬운 예시 한 줄(같은 단계에 함께 표시)
     sentences: str = ""      # 관련 문장 번호(예: '1~3')
-
-
-@dataclass
-class OutlineItem:
-    """쉬운 예시 한 줄 목차의 한 항목."""
-
-    label: str               # '①~③','6번' 등 범위 라벨
-    easy: str                # 학생 눈높이 쉬운 예시 한 줄
 
 
 @dataclass
@@ -115,7 +108,6 @@ class Analysis:
     # 뒷페이지(선택) — 비어 있으면 렌더 시 뒷페이지를 만들지 않는다.
     vocab: list[VocabEntry] = field(default_factory=list)
     flow: list[FlowStep] = field(default_factory=list)
-    outline: list[OutlineItem] = field(default_factory=list)
 
     @property
     def has_points(self) -> bool:
@@ -123,4 +115,4 @@ class Analysis:
 
     @property
     def has_back(self) -> bool:
-        return bool(self.vocab or self.flow or self.outline)
+        return bool(self.vocab or self.flow)
