@@ -80,23 +80,100 @@ def read_corpus_text(path: str | Path, english_only: bool = True) -> str:
     return extract_english(raw) if english_only else raw
 
 
-def collect_sentences(corpus_dir: str | Path) -> list[str]:
-    """corpus_dir 안의 모든 PDF/텍스트에서 문장을 모아 중복 제거."""
+# ── 출처(연·월·문항번호) 추출 ─────────────────────────────
+_FILE_META = re.compile(r"(20\d\d).*?(고\s*[123]).*?(\d{1,2})\s*월")
+# 문항 마커: 수능/모평 영어 지문은 18~45번
+_QNO = re.compile(r"(?<!\d)(1[89]|[2-4]\d)번")
+
+
+def exam_label(path: str | Path) -> str:
+    """파일명에서 시험 라벨을 만든다. 예: '2024_고3_6월.pdf' → '2024 고3 6월'."""
+    name = Path(path).stem
+    m = _FILE_META.search(name.replace("_", " "))
+    if m:
+        year, grade, month = m.group(1), m.group(2).replace(" ", ""), m.group(3)
+        return f"{year} {grade} {month}월"
+    return name
+
+
+_CLAUSE = re.compile(r"\b(who|which|that|whose|where|when|because|although|while|"
+                     r"\w+ing|\w+ed)\b", re.IGNORECASE)
+
+
+def estimate_difficulty(sentence: str) -> str:
+    """길이·콤마·절 표지로 '중'/'고' 난이도를 어림한다(휴리스틱)."""
+    n = len(sentence)
+    commas = sentence.count(",")
+    clauses = len(_CLAUSE.findall(sentence))
+    score = n / 55 + commas + clauses * 0.6
+    return "고" if (n >= 135 or commas >= 3 or score >= 6) else "중"
+
+
+@dataclass
+class SourcedSentence:
+    text: str
+    source: str = ""     # 예: '2024 고3 6월 23번'
+    difficulty: str = ""
+
+    def graded(self):
+        if not self.difficulty:
+            self.difficulty = estimate_difficulty(self.text)
+        return self
+
+
+def _sourced_from_file(f: Path) -> list[SourcedSentence]:
+    """한 파일 → (문항번호가 달린) 문장 목록. 문항 마커로 분할해 출처를 붙인다."""
+    label = exam_label(f)
+    raw = read_corpus_text(f, english_only=False)  # 문항 마커(한글) 보존을 위해 원문에서 분할
+    if not raw:
+        return []
+    out: list[SourcedSentence] = []
+    parts = _QNO.split(raw)
+    # parts = [pre, qno, seg, qno, seg, ...] — 앞부분(pre)은 문항번호 미상
+    if len(parts) == 1:
+        for s in split_sentences(extract_english(raw)):
+            out.append(SourcedSentence(text=s, source=label))
+        return out
+    # pre 구간
+    for s in split_sentences(extract_english(parts[0])):
+        out.append(SourcedSentence(text=s, source=label))
+    for i in range(1, len(parts) - 1, 2):
+        qno, seg = parts[i], parts[i + 1]
+        src = f"{label} {qno}번"
+        for s in split_sentences(extract_english(seg)):
+            out.append(SourcedSentence(text=s, source=src))
+    return out
+
+
+def collect_sourced(corpus_dir: str | Path) -> list[SourcedSentence]:
+    """corpus_dir 의 모든 파일 → 출처가 달린 문장 목록(중복 제거)."""
     corpus_dir = Path(corpus_dir)
     seen: set[str] = set()
-    sentences: list[str] = []
+    out: list[SourcedSentence] = []
     if not corpus_dir.exists():
-        return sentences
+        return out
     for f in sorted(corpus_dir.iterdir()):
-        if not f.is_file():
+        if not f.is_file() or f.suffix.lower() not in (".pdf", ".txt", ".md"):
             continue
-        text = read_corpus_text(f)
-        for s in split_sentences(text):
-            key = re.sub(r"\s+", " ", s.lower()).strip()
+        for ss in _sourced_from_file(f):
+            key = re.sub(r"\s+", " ", ss.text.lower()).strip()
             if key not in seen:
                 seen.add(key)
-                sentences.append(s)
-    return sentences
+                out.append(ss)
+    return out
+
+
+def collect_sentences(corpus_dir: str | Path) -> list[str]:
+    """corpus_dir 안의 모든 파일에서 문장만 모아 중복 제거(출처 없이)."""
+    return [ss.text for ss in collect_sourced(corpus_dir)]
+
+
+def _as_sourced(items) -> list[SourcedSentence]:
+    """list[str] 또는 list[SourcedSentence] 를 SourcedSentence 목록으로 정규화."""
+    out = []
+    for it in items:
+        out.append(it if isinstance(it, SourcedSentence) else SourcedSentence(text=str(it)))
+    return out
 
 
 @dataclass
@@ -104,25 +181,27 @@ class Match:
     code: Code
     sentence: str
     hit: str        # 문장에서 실제 매칭된 부분
+    source: str = ""
 
 
-def match_category(category: Category, sentences: list[str],
-                   per_code: int = 1) -> list[Match]:
+def match_category(category: Category, sentences, per_code: int = 1) -> list[Match]:
     """한 카테고리의 각 코드에 대해, 그 코드가 든 문장을 per_code 개까지 모은다.
 
+    sentences 는 list[str] 또는 list[SourcedSentence] 둘 다 허용(출처 보존).
     → 결과가 곧 '유형별로 모인 기출 문장'.
     """
+    pool = _as_sourced(sentences)
     matches: list[Match] = []
     used: set[str] = set()
     for code in category.codes:
         found = 0
-        for s in sentences:
-            if s in used:
+        for ss in pool:
+            if ss.text in used:
                 continue
-            hit = code.matches(s)
+            hit = code.matches(ss.text)
             if hit:
-                matches.append(Match(code=code, sentence=s, hit=hit))
-                used.add(s)
+                matches.append(Match(code=code, sentence=ss.text, hit=hit, source=ss.source))
+                used.add(ss.text)
                 found += 1
                 if found >= per_code:
                     break

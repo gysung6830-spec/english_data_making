@@ -34,6 +34,8 @@ class Category:
     misread: str
     tip: str
     codes: list[Code]
+    core_tip: str = ""      # 문장 핵심을 잡는 구체적 tip
+    infer_tip: str = ""     # 문장/단어 유추법
 
 
 def _build_pattern(en: str, strict: str = "") -> re.Pattern:
@@ -105,5 +107,6 @@ def load_categories(path: str | Path | None = None) -> list[Category]:
             id=c["id"], title=c["title"], day=int(c.get("day", 0)),
             signal=c.get("signal", ""), misread=c.get("misread", ""),
             tip=c.get("tip", ""), codes=codes,
+            core_tip=c.get("core_tip", ""), infer_tip=c.get("infer_tip", ""),
         ))
     return cats

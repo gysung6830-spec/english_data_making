@@ -1,5 +1,41 @@
 <!-- 구문해석 실전서 — 표지 · 목차 · 0부 · 1부 · 2부 -->
 
+{% set nums = ['①','②','③','④','⑤'] %}
+{% macro vocab_block(vocab) %}
+<div class="vocab-box">
+  <div class="vocab-title">📦 이 페이지 핵심 어휘</div>
+  <div class="vocab-grid">
+  {% for v in vocab %}<div class="vocab-item"><b>{{ v.word }}</b> {{ v.meaning }}</div>{% endfor %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro problems_block(problems) %}
+<div class="problems">
+  <div class="prob-title">🧪 문제 <span>· 예시 외 기출로 직접 풀어 보기</span></div>
+  {% for p in problems %}
+  <div class="problem">
+    <div class="prob-head">
+      <span class="prob-kind {{ p.kind }}">{{ '객관식' if p.kind=='mc' else '주관식' }}</span>
+      {% if p.source %}<span class="src-chip">📄 {{ p.source }}</span>{% endif %}
+    </div>
+    <div class="prob-sentence">{{ p.sentence }}</div>
+    <div class="prob-prompt">Q. {{ p.prompt }}</div>
+    {% if p.kind == 'mc' %}
+      {% for opt in p.options %}
+      <div class="prob-opt">{{ nums[loop.index0] }} {{ opt }}</div>
+      {% endfor %}
+      <div class="prob-answer">정답 {{ nums[p.answer_index] }} · {{ p.point }}</div>
+    {% else %}
+      <div class="prob-answer">모범답안 · {{ p.answer }}</div>
+      {% if p.trap %}<div class="prob-trap">⚠️ 흔한 오역 · {{ p.trap }}</div>{% endif %}
+      {% if p.point %}<div class="prob-point">🔑 {{ p.point }}</div>{% endif %}
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
 <!-- 표지 -->
 <section class="cover">
   <div class="kicker">{{ guide.kicker }}</div>
@@ -96,17 +132,25 @@
       <span class="misread">{{ chapter.misread }}</span></div>
     <div class="tip"><span class="lbl">💡 코드를 만나면 ·</span> {{ chapter.tip }}</div>
   </div>
+  {% if chapter.core_tip or chapter.infer_tip %}
+  <div class="tip-cards">
+    {% if chapter.core_tip %}<div class="tip-card core"><b>🎯 핵심 파악</b> {{ chapter.core_tip }}</div>{% endif %}
+    {% if chapter.infer_tip %}<div class="tip-card infer"><b>🔮 유추법</b> {{ chapter.infer_tip }}</div>{% endif %}
+  </div>
+  {% endif %}
+  <div class="ex-label">예시 <span>중난이도·고난이도 기출</span></div>
   {% for card in chapter.cards %}
   <div class="card">
     <div class="card-head">
       <span class="code-chip">{{ card.code }}</span>
       <span class="code-ko">{{ card.code_ko }}</span>
+      {% if card.difficulty %}<span class="diff diff-{{ card.difficulty }}">{{ card.difficulty }}난이도</span>{% endif %}
       {% set dl = card.dir | dir_label %}
       {% if dl %}<span class="dir-badge">{{ dl }}</span>{% endif %}
     </div>
+    {% if card.source %}<div class="src-chip">📄 {{ card.source }}</div>{% endif %}
     <div class="sentence">
       {{ card.sentence | highlight_code(card.body.highlight) }}
-      {% if card.source %}<span class="source">— {{ card.source }}</span>{% endif %}
     </div>
     <div class="rows">
       <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
@@ -120,6 +164,9 @@
     <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
   </div>
   {% endfor %}
+
+  {% if chapter.problems %}{{ problems_block(chapter.problems) }}{% endif %}
+  {% if chapter.vocab %}{{ vocab_block(chapter.vocab) }}{% endif %}
 </section>
 {% endfor %}
 {% endif %}
@@ -142,12 +189,17 @@
     <div><span class="lbl">이런 구조면 ·</span> {{ chapter.signal }}</div>
     <div class="tip"><span class="lbl">→ 이렇게 해석 ·</span> {{ chapter.how }}</div>
   </div>
+  {% if chapter.combat_tip %}
+  <div class="tip-cards"><div class="tip-card combat"><b>⚔️ {{ chapter.combat_tip.split('—')[0] }}</b>{{ '—' + chapter.combat_tip.split('—',1)[1] if '—' in chapter.combat_tip else chapter.combat_tip }}</div></div>
+  {% endif %}
+  <div class="ex-label">예시 <span>중난이도·고난이도 기출</span></div>
 
   {% for card in chapter.cards %}
   <div class="card syntax">
+    {% if card.source %}<div class="src-chip">📄 {{ card.source }}
+      {% if card.difficulty %}<span class="diff diff-{{ card.difficulty }}">{{ card.difficulty }}난이도</span>{% endif %}</div>{% endif %}
     <div class="sentence">
       {{ card.sentence | bracket_mods(card.body.modifiers) }}
-      {% if card.source %}<span class="source">— {{ card.source }}</span>{% endif %}
     </div>
     <div class="syn-step">
       <span class="dtag s2">뼈대(중3)</span>
@@ -177,6 +229,9 @@
     {% endif %}
   </div>
   {% endfor %}
+
+  {% if chapter.problems %}{{ problems_block(chapter.problems) }}{% endif %}
+  {% if chapter.vocab %}{{ vocab_block(chapter.vocab) }}{% endif %}
 </section>
 {% endfor %}
 {% endif %}

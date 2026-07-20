@@ -11,7 +11,7 @@ import logging
 from ..client import ClaudeClient
 from . import prompts
 from .codes import Category, load_categories, load_part0
-from .corpus import Match, collect_sentences, match_category
+from .corpus import Match, collect_sourced, match_category
 from .schemas import (CardBodyOut, CodeCard, Chapter, Guide, Part2,
                       SyntaxBodyOut, SyntaxCard, SyntaxChapter)
 from .syntax import SYNTAX_TYPES, group_by_syntax
@@ -29,19 +29,19 @@ def _make_card(client: ClaudeClient, cat: Category, m: Match,
         log.warning("카드 생성 실패 [%s] %s: %s", cat.title, m.code.en, e)
         return None
     return CodeCard(code=m.code.en, code_ko=m.code.ko, dir=m.code.dir,
-                    sentence=m.sentence, body=body)
+                    sentence=m.sentence, source=m.source, body=body)
 
 
-def _make_syntax_card(client: ClaudeClient, st, sentence: str,
+def _make_syntax_card(client: ClaudeClient, st, sm,
                       max_retries: int = 1) -> SyntaxCard | None:
-    prompt = prompts.syntax_card_prompt(st.title, st.formula, sentence)
+    prompt = prompts.syntax_card_prompt(st.title, st.formula, sm.sentence)
     try:
         body = client.structured(prompts.SYNTAX_SYSTEM, prompt, SyntaxBodyOut,
                                  max_retries=max_retries)
     except Exception as e:
         log.warning("구문 카드 실패 [%s]: %s", st.title, e)
         return None
-    return SyntaxCard(sentence=sentence, structure=st.title, body=body)
+    return SyntaxCard(sentence=sm.sentence, structure=st.title, source=sm.source, body=body)
 
 
 def build_part2(client: ClaudeClient, sentences: list[str], per_type: int = 2,
@@ -54,12 +54,12 @@ def build_part2(client: ClaudeClient, sentences: list[str], per_type: int = 2,
         st = tmap[sid]
         cards: list[SyntaxCard] = []
         for m in matches:
-            card = _make_syntax_card(client, st, m.sentence, max_retries=max_retries)
+            card = _make_syntax_card(client, st, m, max_retries=max_retries)
             if card:
                 cards.append(card)
         if cards:
             chapters.append(SyntaxChapter(id=st.id, title=st.title, signal=st.signal,
-                                          how=st.formula, cards=cards))
+                                          how=st.formula, combat_tip=st.combat, cards=cards))
     return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다.",
                  chapters=chapters)
 
@@ -69,8 +69,8 @@ def build_guide(client: ClaudeClient, corpus_dir, per_code: int = 1,
                 include_part0: bool = True, include_part2: bool = True,
                 per_type: int = 2) -> Guide:
     """코퍼스 폴더 → 실전서 Guide(0부 기본기 + 1부 평가원 코드 + 2부 구문해석)."""
-    sentences = collect_sentences(corpus_dir)
-    log.info("코퍼스 문장 %d개 수집", len(sentences))
+    sentences = collect_sourced(corpus_dir)
+    log.info("코퍼스 문장 %d개 수집(출처 포함)", len(sentences))
     cats = load_categories(codes_path)
 
     chapters: list[Chapter] = []
@@ -84,7 +84,8 @@ def build_guide(client: ClaudeClient, corpus_dir, per_code: int = 1,
                 cards.append(card)
         if cards:
             chapters.append(Chapter(id=cat.id, title=cat.title, signal=cat.signal,
-                                    misread=cat.misread, tip=cat.tip, cards=cards))
+                                    misread=cat.misread, tip=cat.tip, cards=cards,
+                                    core_tip=cat.core_tip, infer_tip=cat.infer_tip))
 
     part0 = load_part0() if include_part0 else None
     part2 = (build_part2(client, sentences, per_type=per_type, max_retries=max_retries)

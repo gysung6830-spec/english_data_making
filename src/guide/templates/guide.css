@@ -174,6 +174,57 @@ body {
 }
 .ch-intro.rule-box { border-left-color: var(--gold); }
 
+/* 출처 칩 · 난이도 배지 */
+.src-chip {
+  display: inline-block; background: #eef2f9; color: #3b5680;
+  font-size: 9px; font-weight: 700; padding: 2px 9px; border-radius: 4px;
+  margin-bottom: 5px;
+}
+.diff { font-size: 8.5px; font-weight: 800; padding: 1px 7px; border-radius: 10px; margin-left: 5px; }
+.diff-중 { background: #eafaf1; color: #1f8a54; }
+.diff-고 { background: #fdecea; color: #c0392b; }
+
+/* 핵심파악 · 유추 · 실전 팁 카드 */
+.tip-cards { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 12px; }
+.tip-card { font-size: 10px; line-height: 1.5; padding: 8px 12px; border-radius: 6px; }
+.tip-card b { margin-right: 5px; }
+.tip-card.core  { background: #fff6e9; border: 1px solid #f0d9b0; color: #7a5b12; }
+.tip-card.infer { background: #eef6ff; border: 1px solid #cfe0f5; color: #24507e; }
+.tip-card.combat{ background: #f2f0ff; border: 1px solid #d8d2f0; color: #4b3f8a; }
+
+.ex-label { font-weight: 800; color: var(--navy); font-size: 11px; margin: 12px 0 8px;
+  border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.ex-label span { color: var(--muted); font-weight: 500; font-size: 9px; }
+
+/* 문제(객관식·주관식) */
+.problems { margin-top: 14px; page-break-inside: avoid; }
+.prob-title { font-weight: 800; color: var(--exam); font-size: 12px; margin-bottom: 8px; }
+.prob-title span { color: var(--muted); font-weight: 500; font-size: 9px; }
+.problem { border: 1px solid #f0d6da; border-radius: 8px; padding: 11px 14px;
+  margin-bottom: 10px; page-break-inside: avoid; }
+.prob-head { margin-bottom: 6px; }
+.prob-kind { font-size: 9px; font-weight: 800; color: #fff; padding: 2px 9px;
+  border-radius: 4px; margin-right: 6px; }
+.prob-kind.mc { background: #2563eb; }
+.prob-kind.short { background: #7c3aed; }
+.prob-sentence { font-size: 11px; background: #fbfbfc; padding: 7px 10px;
+  border-radius: 5px; line-height: 1.6; }
+.prob-prompt { font-weight: 700; font-size: 10.5px; margin: 7px 0 5px; color: var(--ink); }
+.prob-opt { font-size: 10.5px; padding: 4px 8px; margin: 3px 0; background: #fafbfc;
+  border: 1px solid #eef0f3; border-radius: 5px; }
+.prob-answer { margin-top: 7px; font-size: 10px; color: #1f6b45; background: #eefaf2;
+  padding: 6px 10px; border-radius: 5px; }
+.prob-trap { font-size: 9.5px; color: var(--wrong); margin-top: 4px; }
+.prob-point { font-size: 9.5px; color: #8a6d3b; margin-top: 3px; }
+
+/* 페이지 하단 어휘 박스 */
+.vocab-box { margin-top: 14px; background: #fbfaf6; border: 1px dashed #d9c9a6;
+  border-radius: 8px; padding: 10px 14px; page-break-inside: avoid; }
+.vocab-title { font-weight: 800; color: var(--gold); font-size: 10.5px; margin-bottom: 6px; }
+.vocab-grid { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.vocab-item { font-size: 10px; color: #4b5563; width: 46%; }
+.vocab-item b { color: var(--navy); }
+
 /* ── 0부 · 3단계 읽기 엔진 ─────────────────────── */
 .part-open { }
 .spine {

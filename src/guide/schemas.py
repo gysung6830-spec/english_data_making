@@ -28,8 +28,28 @@ class CodeCard(BaseModel):
     code_ko: str              # 코드 뜻
     dir: str = ""             # 방향/성격 배지 (forward/backward 등, 선택)
     sentence: str             # 기출(또는 예문) 문장 원문
-    source: str = ""          # 출처 라벨 (예: 2023 수능 34번), 선택
+    source: str = ""          # 출처 라벨 (예: 2023 고3 6월 34번)
+    difficulty: str = ""      # '중' / '고'
     body: CardBody
+
+
+# ── 어휘 박스 / 문제 ──────────────────────────────────────────
+class VocabItem(BaseModel):
+    word: str
+    meaning: str
+
+
+class Problem(BaseModel):
+    """예시 외 나머지 기출을 '문제'로 낸다."""
+    kind: str                 # 'mc'(객관식: 오역 vs 정답 고르기) | 'short'(주관식)
+    sentence: str
+    source: str = ""
+    prompt: str = ""          # 발문 (예: '밑줄 친 부분의 올바른 해석은?')
+    options: list[str] = []   # mc: [오역해석, 정확한해석] (순서는 섞을 수 있음)
+    answer_index: int = 0     # mc: 정답 보기 인덱스
+    answer: str = ""          # short: 모범 답안(핵심 해석)
+    trap: str = ""            # 흔히 하는 오역(주관식 힌트/해설용)
+    point: str = ""           # 이 문제의 핵심 포인트(해설)
 
 
 class Chapter(BaseModel):
@@ -38,7 +58,11 @@ class Chapter(BaseModel):
     signal: str               # 이 코드들이 하는 역할 한 줄
     misread: str              # 대표 오역 유형
     tip: str                  # 챕터 공통 팁
-    cards: list[CodeCard] = []
+    core_tip: str = ""        # 문장 '핵심'을 잡는 구체적 tip
+    infer_tip: str = ""       # 문장/단어 '유추'하는 법
+    cards: list[CodeCard] = []   # 예시(중난이도 5 + 고난이도 5 지향)
+    problems: list[Problem] = [] # 나머지 기출을 문제로
+    vocab: list[VocabItem] = []  # 페이지 하단 어휘 박스
 
 
 # ── 0부: 3단계 읽기 엔진 (고정 콘텐츠) ──────────────────────────
@@ -96,6 +120,7 @@ class SyntaxCard(BaseModel):
     sentence: str
     structure: str           # 구문 유형 라벨(관계사절 등)
     source: str = ""
+    difficulty: str = ""     # '중' / '고'
     body: SyntaxBody
 
 
@@ -104,7 +129,10 @@ class SyntaxChapter(BaseModel):
     title: str               # 예: 관계사절
     signal: str              # 이 구문의 감지 신호/설명
     how: str                 # 이 구문을 괄호치는 법 한 줄
+    combat_tip: str = ""     # 2부 실전 팁(시험장에서 바로 쓰는 요령)
     cards: list[SyntaxCard] = []
+    problems: list[Problem] = []
+    vocab: list[VocabItem] = []
 
 
 class Part2(BaseModel):

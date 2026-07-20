@@ -8,22 +8,55 @@ from __future__ import annotations
 
 from src.guide.codes import load_part0
 from src.guide.schemas import (CardBody, CodeCard, Chapter, Guide, Modifier,
-                               Part2, SyntaxBody, SyntaxCard, SyntaxChapter)
+                               Part2, Problem, SyntaxBody, SyntaxCard,
+                               SyntaxChapter, VocabItem)
+
+# 실제 기출 출처·난이도 (코퍼스 조회로 확인한 값) — 문장 일부로 매칭해 자동 부착
+_SRC = {
+    "rising incomes inevitably": ("2022 고3 6월 30번", "중"),
+    "this ability is due to": ("2022 고3 9월 35번", "고"),
+    "unlike animals, they can generate": ("2022 고3 9월 35번", "중"),
+    "although this is true": ("2022 고3 6월 37번", "중"),
+    "in other words, as museums": ("2023 고3 6월 23번", "고"),
+    "automobile demand in cities needs to be managed": ("2022 고3 6월 30번", "고"),
+    "those data do not actually show": ("2022 고3 6월 23번", "고"),
+    "is a central element of this strategy": ("2022 고3 6월 30번", "고"),
+    "rather than irrelevant, moral questions": ("2026 고3 11월 22번", "중"),
+    "rarely make reference to computers": ("2022 고3 6월 31번", "중"),
+    "natural selection is unlikely to lead": ("2023 고3 6월 40번", "중"),
+    "consider two athletes who both": ("2022 고3 6월 20번", "중"),
+    "recognizing how she felt": ("2023 고3 11월 19번", "고"),
+    "the computer, or more appropriately": ("2022 고3 6월 31번", "고"),
+    "made a reservation for one of your": ("2022 고3 6월 18번", "중"),
+    "not only is it less convenient": ("2023 고3 6월 24번", "고"),
+    "thirty more students are coming": ("2022 고3 6월 18번", "고"),
+    "not only musicians and psychologists": ("2022 고3 9월 24번", "고"),
+}
 
 
-# ── 1부: 평가원 코드 카드 (오역 → 정답 → 진짜 의미) ─────────────
+def _meta(sentence: str):
+    low = sentence.lower()
+    for frag, (src, dif) in _SRC.items():
+        if frag in low:
+            return src, dif
+    return "", ""
+
+
+# ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
 def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what):
+    src, dif = _meta(sentence)
     return CodeCard(
-        code=code, code_ko=code_ko, dir=dir_, sentence=sentence,
+        code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why,
                       correct=correct, so_what=so_what),
     )
 
 
-# ── 2부: 구문 카드 (뼈대 → 살 붙이기 → 완성 → 진짜 의미) ────────
+# ── 2부: 구문 카드 (출처 → 뼈대 → 살 붙이기 → 완성 → 진짜 의미) ─
 def _syn(structure, sentence, sk_en, sk_ko, mods, full, real, check=""):
+    src, dif = _meta(sentence)
     return SyntaxCard(
-        sentence=sentence, structure=structure,
+        sentence=sentence, structure=structure, source=src, difficulty=dif,
         body=SyntaxBody(skeleton_en=sk_en, skeleton_ko=sk_ko,
                         modifiers=[Modifier(**m) for m in mods], full_ko=full,
                         real_meaning=real, self_check=check),
@@ -36,6 +69,26 @@ def mock_part2() -> Part2:
             id="relative", title="관계사절",
             signal="who / which / that / whose / where 가 명사 뒤에 붙어 길게 꾸민다.",
             how="관계사부터 절 끝까지 괄호 → 앞 명사만 뼈대에 남기고, '~하는'으로 뒤에서 붙인다.",
+            combat_tip="실전 팁 — 관계사 앞 명사(선행사)에 동그라미, 관계사부터 동사 나오기 전까지 괄호. "
+            "선행사만 뼈대에 남기면 5줄짜리 문장도 '명사가 ~한다'로 줄어든다.",
+            problems=[Problem(
+                kind="short",
+                sentence="In particular, they define a group as two or more people who "
+                "interact with, and exert mutual influences on, each other.",
+                source="2022 고3 9월 40번",
+                prompt="who 이하 관계사절에 괄호치고, 뼈대(주어+동사)만 우리말로 쓰시오.",
+                answer="뼈대: 그들은 집단을 둘 이상의 사람으로 정의한다. (who~ = 서로 상호작용하고 "
+                "영향을 주고받는 → '사람'을 꾸밈)",
+                trap="who절을 주절로 착각해 '상호작용한다'를 문장의 핵심 동사로 잡으면 뼈대가 무너진다.",
+                point="선행사(people)만 뼈대에 남기고 who절은 괄호. 진짜 동사는 define.",
+            )],
+            vocab=[
+                VocabItem(word="in particular", meaning="특히"),
+                VocabItem(word="define A as B", meaning="A를 B로 정의하다"),
+                VocabItem(word="interact with", meaning="~와 상호작용하다"),
+                VocabItem(word="exert influence on", meaning="~에 영향을 미치다"),
+                VocabItem(word="mutual", meaning="서로의, 상호의"),
+            ],
             cards=[_syn(
                 "관계사절",
                 "Consider two athletes who both want to play in college.",
@@ -172,6 +225,12 @@ def mock_part2() -> Part2:
             )],
         ),
     ]
+    # 나머지 챕터에도 구문 유형별 실전 팁 채우기
+    from src.guide.syntax import SYNTAX_TYPES
+    combat = {st.id: st.combat for st in SYNTAX_TYPES}
+    for ch in chapters:
+        if not ch.combat_tip:
+            ch.combat_tip = combat.get(ch.id, "")
     return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다 — "
                  "이런 구조면 → 이렇게 해석 → 해석하면 이런 내용.", chapters=chapters)
 
@@ -183,6 +242,8 @@ def mock_guide() -> Guide:
             signal="원인과 결과를 잇는 표현 — 화살표 방향이 생명이다.",
             misread="화살표 방향을 놓쳐 원인과 결과를 뒤바꿔 읽는다",
             tip="코드를 보면 먼저 화살표 방향부터 고정하라 — 누가 원인이고 누가 결과인지.",
+            core_tip="핵심 잡기 — 코드 앞뒤 두 명사에 'A(원인)→B(결과)' 화살표를 직접 그려라. 나머지 수식어를 다 지워도 인과 한 줄이 뼈대다.",
+            infer_tip="유추 — 코드 뜻을 몰라도, 앞이 '행동/조건'이고 뒤가 '변화/결과'로 보이면 앞이 원인일 확률이 높다. 상식적 선후관계로 검증하라.",
             cards=[_code(
                 "be due to", "A가 B 때문이다(A=결과)", "backward",
                 "This ability is due to the activity of plant meristems, regions of "
@@ -303,6 +364,41 @@ def mock_guide() -> Guide:
             signal="‘아니다·없다·거의 안 한다’로 문장의 극성을 뒤집는 말.",
             misread="부정·부재어를 놓쳐 필자 의견을 정반대(긍정)로 읽는다",
             tip="부정어가 보이면 극성이 뒤집힌다 — 놓치면 필자 의견과 정반대로 멀어진다.",
+            core_tip="핵심 잡기 — 부정어에 동그라미 치고 문장 끝에 (−) 표시. 필자의 진짜 주장은 대개 이 부정 뒤에 온다.",
+            infer_tip="유추 — 모르는 단어라도 hardly/rarely/no/lack 부정 신호만 잡으면 '그건 아니다'라는 극성은 확정된다.",
+            problems=[
+                Problem(
+                    kind="mc",
+                    sentence="Moreover farmers can rarely acquire payoff information on more "
+                    "than a few of the production methods they might use.",
+                    source="2022 고3 9월 23번",
+                    prompt="밑줄 친 문장의 올바른 해석을 고르시오.",
+                    options=[
+                        "게다가 농부들은 자신이 쓸 수 있는 생산 방식 다수에 대해 수익 정보를 자주 얻을 수 있다.",
+                        "게다가 농부들은 자신이 쓸 수 있는 생산 방식 중 몇 가지 이상에 대해서는 좀처럼 수익 정보를 얻지 못한다.",
+                    ],
+                    answer_index=1,
+                    point="rarely(좀처럼 ~않다)를 놓치면 정반대. 부정어에 (−) 표시하고 극성을 뒤집어라.",
+                ),
+                Problem(
+                    kind="short",
+                    sentence="As a practical matter, one seldom requires complete autonomy "
+                    "from the group.",
+                    source="2023 고3 6월 30번",
+                    prompt="seldom에 유의하여 이 문장을 해석하시오.",
+                    answer="실질적으로, 집단으로부터의 완전한 자율성이 요구되는 경우는 좀처럼 없다.",
+                    trap="seldom을 빼고 '자율성이 요구된다'로 읽으면 정반대가 된다.",
+                    point="seldom = 좀처럼 ~않다(빈도 부정). 극성을 뒤집어야 한다.",
+                ),
+            ],
+            vocab=[
+                VocabItem(word="rarely / seldom", meaning="좀처럼 ~않다"),
+                VocabItem(word="make reference to", meaning="~을 언급하다"),
+                VocabItem(word="employ", meaning="(기술을) 사용하다, 쓰다"),
+                VocabItem(word="autonomy", meaning="자율성"),
+                VocabItem(word="acquire", meaning="얻다, 획득하다"),
+                VocabItem(word="payoff", meaning="이득, 보상"),
+            ],
             cards=[_code(
                 "rarely", "좀처럼 ~않다", "",
                 "Young contemporary artists who employ digital technologies in their practice "
