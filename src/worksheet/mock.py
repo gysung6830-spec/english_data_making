@@ -117,8 +117,42 @@ def _mock_literal() -> list[LiteralSentence]:
     ]
 
 
+def _thin_to_strength(sentences: list[Sentence], strength: str) -> None:
+    """목 문장 태깅을 강도에 맞춰 줄인다(build_grammar_point 번호 매기기 '전'에 호출).
+
+    - full : 그대로(성분·모든 어법·유의어/반의어·형광 전부)
+    - key  : 성분(S·V·O·C) + '가장 중요한 어법 1개'만. 유의어/반의어·지엽 주석·지칭·함축 생략.
+    - none : 성분·문법 주석 전부 제거. 원문+해석만(형광/지칭/함축도 제거).
+    """
+    if strength == "full":
+        return
+    for s in sentences:
+        if strength == "none":
+            for t in s.tokens:
+                t.role = t.note = t.wrong = t.above = t.color = None
+                t.note_kind, t.hl, t.underline = "lbl", None, False
+            s.refs, s.badge = [], None
+            s.gloss_en = s.gloss_ko = None
+            continue
+        # strength == "key": 성분·형광은 유지, 어법은 문장당 1개만, 나머지 주석은 제거
+        kept_red = False
+        for t in s.tokens:
+            t.above = None            # 유의어/반의어(= / ↔) 위 메모 제거
+            t.underline = False
+            if t.note_kind == "red" and t.note:
+                if not kept_red:
+                    kept_red = True   # 첫 어법만 남김
+                else:
+                    t.note, t.color, t.note_kind = None, None, "lbl"
+            elif t.note_kind in ("gray", "blue"):
+                t.note = None         # 지엽적 해석 힌트 제거
+        s.refs = []                   # 지칭(떠먹여주는 Point) 생략
+        s.gloss_en = s.gloss_ko = None
+
+
 def mock_analysis(title_en: str = "A necessity of openness and connection in leadership",
-                  lecture_label: str = "20", date: str = "2025년06월") -> Analysis:
+                  lecture_label: str = "20", date: str = "2025년06월",
+                  strength: str = "full") -> Analysis:
     s01 = Sentence(
         index=1,
         lines=[[
@@ -237,6 +271,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     )
 
     sentences = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s10]
+    _thin_to_strength(sentences, strength)   # 태깅 강도 반영(번호 매기기 전)
     for s in sentences:
         gp = build_grammar_point(s)
         s.points = [gp] if gp else []

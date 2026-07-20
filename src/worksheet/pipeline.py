@@ -147,6 +147,7 @@ def mock_analyses_for_file(src: Path, header: Header) -> list[Analysis]:
         title_en=header.title_en or "The Paradox of Choice",
         lecture_label=header.lecture_label or "20",
         date=header.date or "2025년 09월",
+        strength=header.strength,
     )
     if header.title_ko:
         a.title_ko = header.title_ko
