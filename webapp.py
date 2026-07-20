@@ -367,22 +367,14 @@ WORKSHEET_HTML = """
         <div class=hint style="margin-top:6px">리본 + 구문 분석 + 포인트 박스 · 한 지문을 최대한 1페이지로 자동 압축</div>
       </fieldset>
 
-      <fieldset><legend>③ 태깅 강도</legend>
-        <div class=radio>
-          <label><input type=radio name=strength value=full checked> 전체</label>
-          <label><input type=radio name=strength value=key> 핵심만</label>
-          <label><input type=radio name=strength value=none> 없음(원문+해석)</label>
-        </div>
-      </fieldset>
-
-      <fieldset><legend>④ 강 번호 · 저장 파일명</legend>
+      <fieldset><legend>③ 강 번호 · 저장 파일명</legend>
         <label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강">
         <label>저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
         <input type=text name=basename placeholder="예: 2027수능특강_20강">
         <div class=hint>저장 이름: <b>(지문명)_포인트박스</b> · 영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
       </fieldset>
 
-      <label>⑤ Anthropic API 키
+      <label>④ Anthropic API 키
         <span class=hint>(미리보기만 할 거면 비워두고 아래 '샘플 미리보기' 체크)</span></label>
       <input type=password name=api_key placeholder="sk-ant-..."
              value="{{ '설정됨(그대로 사용)' if has_key else '' }}" {{ 'readonly' if has_key else '' }}>
@@ -427,9 +419,7 @@ def worksheet_build_route():
     layout = "A"       # 학습지는 포인트박스형 한 종류(직독직해 B형은 미노출)
     density = "auto"   # 한 지문을 최대한 1페이지로 자동 압축
     kind = "포인트박스"   # 저장 파일명: (지문명)_포인트박스.pdf
-    strength = request.form.get("strength") or "full"
-    if strength not in ("full", "key", "none"):
-        strength = "full"
+    strength = "full"    # 태깅 강도는 항상 '전체'로 고정
 
     # 영문 제목·한글 부제는 지문 내용에서 자동 생성(사용자 입력 아님). 날짜는 사용하지 않음.
     base_header = WsHeader(
