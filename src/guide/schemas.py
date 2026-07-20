@@ -39,11 +39,83 @@ class Chapter(BaseModel):
     cards: list[CodeCard] = []
 
 
+# ── 0부: 3단계 읽기 엔진 (고정 콘텐츠) ──────────────────────────
+class MethodDemo(BaseModel):
+    """한 방법(STEP)의 기출 시연: 괄호 → 뼈대 → 완성."""
+    sentence: str            # 기출/예문 원문
+    bracketed: str = ""      # 수식어를 (…) 로 묶은 모습(텍스트)
+    skeleton_en: str = ""    # 뼈대(S+V) 영어
+    skeleton_ko: str = ""    # 뼈대 중3 한국어
+    full_ko: str = ""        # 살 붙인 완성 해석
+
+
+class Method(BaseModel):
+    step: str                # 예: STEP 1
+    title: str               # 예: 괄호치기
+    idea: str                # 원리 한 줄
+    rule: str = ""           # 규칙
+    ms_point: str = ""       # 중3 포인트(왜 쉬워지는지)
+    demo: MethodDemo | None = None
+
+
+class Part0(BaseModel):
+    title: str = "3단계 읽기 엔진"
+    intro: str = ""
+    spine: str = ""          # 관통 철학 한 문장
+    methods: list[Method] = []
+    tools: list[str] = []    # 미니 도구 한 줄 목록
+
+
+# ── 2부: 구문별 괄호치기 실전 ──────────────────────────────────
+class Modifier(BaseModel):
+    """괄호칠 수식어 한 덩어리."""
+    phrase: str              # 수식어 원문(그대로 인용)
+    kind: str                # 관계사절/분사/전치사구/삽입 등
+    connector: str           # 붙일 때 쓰는 연결어(~하는/~하면서 등)
+    meaning: str             # 그 수식어의 한국어 뜻
+
+
+class SyntaxBody(BaseModel):
+    """Claude 가 한 문장에 대해 생성하는 부분."""
+    skeleton_en: str = Field(description="수식어를 뺀 뼈대(핵심 S+V+O) 영어 — 아주 짧게")
+    skeleton_ko: str = Field(description="그 뼈대의 중3 수준 쉬운 한국어 해석")
+    modifiers: list[Modifier] = Field(description="괄호칠 수식어 덩어리들(문장에 등장 순서)")
+    full_ko: str = Field(description="수식어를 연결어로 붙인 자연스러운 완성 해석")
+    self_check: str = Field(default="", description="학생이 직접 괄호쳐 볼 짧은 연습 한 줄(선택)")
+
+
+class SyntaxBodyOut(SyntaxBody):
+    pass
+
+
+class SyntaxCard(BaseModel):
+    sentence: str
+    structure: str           # 구문 유형 라벨(관계사절 등)
+    source: str = ""
+    body: SyntaxBody
+
+
+class SyntaxChapter(BaseModel):
+    id: str
+    title: str               # 예: 관계사절
+    signal: str              # 이 구문의 감지 신호/설명
+    how: str                 # 이 구문을 괄호치는 법 한 줄
+    cards: list[SyntaxCard] = []
+
+
+class Part2(BaseModel):
+    title: str = "구문별 괄호치기 실전"
+    intro: str = ""
+    chapters: list[SyntaxChapter] = []
+
+
 class Guide(BaseModel):
     title: str = "구문해석 실전서"
     kicker: str = "평가원 기출로 익히는"
     subtitle: str = "단어를 몰라도, 문장이 복잡해도 핵심을 놓치지 않는 법"
-    chapters: list[Chapter] = []
+    part0: Part0 | None = None                 # 0부 기본기
+    chapters: list[Chapter] = []               # 1부 평가원 코드
+    part2: Part2 | None = None                 # 2부 구문해석
 
 
 # Claude 구조화 출력 강제용: 한 문장 → CardBody 만 받는다.

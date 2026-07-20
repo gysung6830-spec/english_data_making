@@ -62,6 +62,23 @@ def _build_pattern(en: str, strict: str = "") -> re.Pattern:
     return re.compile(r"\b" + body + r"\b", re.IGNORECASE)
 
 
+def load_part0(path: str | Path | None = None):
+    """part0.yaml → Part0 객체(0부 고정 콘텐츠)."""
+    from .schemas import Method, MethodDemo, Part0
+    p = Path(path) if path else (Path(__file__).resolve().parent / "part0.yaml")
+    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    methods = []
+    for m in data.get("methods", []):
+        demo = m.get("demo")
+        methods.append(Method(
+            step=m.get("step", ""), title=m.get("title", ""), idea=m.get("idea", ""),
+            rule=m.get("rule", ""), ms_point=m.get("ms_point", ""),
+            demo=MethodDemo(**demo) if demo else None,
+        ))
+    return Part0(title=data.get("title", "3단계 읽기 엔진"), intro=data.get("intro", ""),
+                 spine=data.get("spine", ""), methods=methods, tools=data.get("tools", []))
+
+
 def load_categories(path: str | Path | None = None) -> list[Category]:
     p = Path(path) if path else CODES_PATH
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}

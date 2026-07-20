@@ -10,9 +10,11 @@ import logging
 
 from ..client import ClaudeClient
 from . import prompts
-from .codes import Category, load_categories
+from .codes import Category, load_categories, load_part0
 from .corpus import Match, collect_sentences, match_category
-from .schemas import CardBodyOut, CodeCard, Chapter, Guide
+from .schemas import (CardBodyOut, CodeCard, Chapter, Guide, Part2,
+                      SyntaxBodyOut, SyntaxCard, SyntaxChapter)
+from .syntax import SYNTAX_TYPES, group_by_syntax
 
 log = logging.getLogger("guide")
 
@@ -30,9 +32,43 @@ def _make_card(client: ClaudeClient, cat: Category, m: Match,
                     sentence=m.sentence, body=body)
 
 
+def _make_syntax_card(client: ClaudeClient, st, sentence: str,
+                      max_retries: int = 1) -> SyntaxCard | None:
+    prompt = prompts.syntax_card_prompt(st.title, st.how, sentence)
+    try:
+        body = client.structured(prompts.SYNTAX_SYSTEM, prompt, SyntaxBodyOut,
+                                 max_retries=max_retries)
+    except Exception as e:
+        log.warning("구문 카드 실패 [%s]: %s", st.title, e)
+        return None
+    return SyntaxCard(sentence=sentence, structure=st.title, body=body)
+
+
+def build_part2(client: ClaudeClient, sentences: list[str], per_type: int = 2,
+                max_retries: int = 1) -> Part2:
+    """기출 문장을 구문 유형별로 그룹핑 → 각 문장 3단계 분석 카드 생성(2부)."""
+    buckets = group_by_syntax(sentences, per_type=per_type)
+    tmap = {st.id: st for st in SYNTAX_TYPES}
+    chapters: list[SyntaxChapter] = []
+    for sid, matches in buckets.items():
+        st = tmap[sid]
+        cards: list[SyntaxCard] = []
+        for m in matches:
+            card = _make_syntax_card(client, st, m.sentence, max_retries=max_retries)
+            if card:
+                cards.append(card)
+        if cards:
+            chapters.append(SyntaxChapter(id=st.id, title=st.title, signal=st.signal,
+                                          how=st.how, cards=cards))
+    return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다.",
+                 chapters=chapters)
+
+
 def build_guide(client: ClaudeClient, corpus_dir, per_code: int = 1,
-                max_retries: int = 1, codes_path=None) -> Guide:
-    """코퍼스 폴더 → 실전서 Guide(1부: 평가원 코드 챕터들)."""
+                max_retries: int = 1, codes_path=None,
+                include_part0: bool = True, include_part2: bool = True,
+                per_type: int = 2) -> Guide:
+    """코퍼스 폴더 → 실전서 Guide(0부 기본기 + 1부 평가원 코드 + 2부 구문해석)."""
     sentences = collect_sentences(corpus_dir)
     log.info("코퍼스 문장 %d개 수집", len(sentences))
     cats = load_categories(codes_path)
@@ -49,4 +85,8 @@ def build_guide(client: ClaudeClient, corpus_dir, per_code: int = 1,
         if cards:
             chapters.append(Chapter(id=cat.id, title=cat.title, signal=cat.signal,
                                     misread=cat.misread, tip=cat.tip, cards=cards))
-    return Guide(chapters=chapters)
+
+    part0 = load_part0() if include_part0 else None
+    part2 = (build_part2(client, sentences, per_type=per_type, max_retries=max_retries)
+             if include_part2 else None)
+    return Guide(part0=part0, chapters=chapters, part2=part2)

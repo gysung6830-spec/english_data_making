@@ -5,7 +5,9 @@
 """
 from __future__ import annotations
 
-from src.guide.schemas import CardBody, CodeCard, Chapter, Guide
+from src.guide.codes import load_part0
+from src.guide.schemas import (CardBody, CodeCard, Chapter, Guide, Modifier,
+                               Part2, SyntaxBody, SyntaxCard, SyntaxChapter)
 
 
 def _card(code, code_ko, dir_, sentence, hit, trap, why, correct, skel=""):
@@ -14,6 +16,90 @@ def _card(code, code_ko, dir_, sentence, hit, trap, why, correct, skel=""):
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why,
                       correct=correct, skeleton=skel),
     )
+
+
+def _syn(structure, sentence, sk_en, sk_ko, mods, full, check=""):
+    return SyntaxCard(
+        sentence=sentence, structure=structure,
+        body=SyntaxBody(skeleton_en=sk_en, skeleton_ko=sk_ko,
+                        modifiers=[Modifier(**m) for m in mods], full_ko=full,
+                        self_check=check),
+    )
+
+
+def mock_part2() -> Part2:
+    """2부 — 구문별 괄호치기 실전(중3도 읽게) 목 데이터."""
+    chapters = [
+        SyntaxChapter(
+            id="relative", title="관계사절",
+            signal="who / which / that / whose / where 가 명사 뒤에 붙어 길게 꾸민다.",
+            how="관계사부터 절 끝까지 통째로 괄호 → 꾸밈받는 명사만 뼈대에 남긴다.",
+            cards=[
+                _syn(
+                    "관계사절",
+                    "The strategy is to analyze all the possible scenarios that the future "
+                    "holds and then to see what proportion of them lead to success.",
+                    "The strategy is to analyze scenarios and to see the proportion.",
+                    "그 전략은 시나리오를 분석하고 비율을 보는 것이다.",
+                    [
+                        {"phrase": "that the future holds", "kind": "관계사절",
+                         "connector": "~하는", "meaning": "미래가 품고 있는(→ 앞으로 벌어질)"},
+                        {"phrase": "what proportion of them lead to success", "kind": "관계사절",
+                         "connector": "~하는지", "meaning": "그중 얼마나가 성공으로 이어지는지"},
+                    ],
+                    "그 전략은 미래에 벌어질 수 있는 모든 시나리오를 분석한 뒤, 그중 어느 정도가 "
+                    "성공으로 이어지는지를 보는 것이다.",
+                    "다음 문장에서 who~ 절에 직접 괄호쳐 보자.",
+                ),
+            ],
+        ),
+        SyntaxChapter(
+            id="participle", title="분사구문",
+            signal="문두나 콤마 뒤에 V-ing / V-ed 덩어리가 붙는다.",
+            how="분사 덩어리를 통째로 괄호 → ~하면서 / ~한 채로 로 뼈대에 붙인다.",
+            cards=[
+                _syn(
+                    "분사구문",
+                    "Recognizing how she felt about her failure, Ken approached her and said "
+                    "a few encouraging words.",
+                    "Ken approached her and said a few words.",
+                    "Ken이 그녀에게 다가가 몇 마디를 건넸다.",
+                    [
+                        {"phrase": "Recognizing how she felt about her failure", "kind": "분사구문",
+                         "connector": "~해서", "meaning": "그녀가 실패에 대해 어떻게 느끼는지 알아채고서"},
+                        {"phrase": "encouraging", "kind": "분사(형용사)",
+                         "connector": "~하는", "meaning": "격려가 되는"},
+                    ],
+                    "그녀가 실패를 어떻게 느끼는지 알아챘기에(~해서), Ken은 그녀에게 다가가 몇 마디 "
+                    "격려의 말을 건넸다.",
+                ),
+            ],
+        ),
+        SyntaxChapter(
+            id="cleft", title="긴 주어·가주어",
+            signal="It is / was … that / to … — 진짜 주어가 뒤로 밀려 있다.",
+            how="가주어 It 은 버리고, 뒤의 that / to 덩어리를 진짜 주어로 앞에 놓는다.",
+            cards=[
+                _syn(
+                    "긴 주어·가주어",
+                    "It follows that natural selection is unlikely to lead to the evolution "
+                    "of perfect, maximally fit individuals.",
+                    "That ... follows. (= 그것이 따라 나온다)",
+                    "…라는 결론이 따라 나온다.",
+                    [
+                        {"phrase": "that natural selection is unlikely to lead to the evolution "
+                                   "of perfect individuals", "kind": "진주어(that절)",
+                         "connector": "~라는 것", "meaning": "자연선택이 완벽한 개체의 진화로 "
+                         "이어질 가능성이 낮다는 것"},
+                    ],
+                    "자연선택이 완벽하고 최대로 적합한 개체의 진화로 이어질 가능성은 낮다는 결론이 "
+                    "(그로부터) 따라 나온다.",
+                ),
+            ],
+        ),
+    ]
+    return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다.",
+                 chapters=chapters)
 
 
 def mock_guide() -> Guide:
@@ -151,4 +237,4 @@ def mock_guide() -> Guide:
             ],
         ),
     ]
-    return Guide(chapters=chapters)
+    return Guide(part0=load_part0(), chapters=chapters, part2=mock_part2())

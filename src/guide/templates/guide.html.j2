@@ -1,4 +1,4 @@
-<!-- 구문해석 실전서 - 1부 '답으로 이어지는 평가원 코드' -->
+<!-- 구문해석 실전서 — 0부 기본기 · 1부 평가원 코드 · 2부 구문해석 -->
 
 <!-- 표지 -->
 <section class="cover">
@@ -9,8 +9,47 @@
   {% if sample %}<div style="height:26px"></div><div class="badge-sample">SAMPLE · 미리보기</div>{% endif %}
 </section>
 
-<!-- 1부 도입 -->
-<section class="chapter">
+{# ===================== 0부 — 3단계 읽기 엔진 ===================== #}
+{% if guide.part0 %}
+{% set p0 = guide.part0 %}
+<section class="chapter part-open">
+  <div class="ch-kicker">0부 · 기본기</div>
+  <div class="ch-title">{{ p0.title }}</div>
+  <div class="spine">“{{ p0.spine }}”</div>
+  <div class="ch-signal">{{ p0.intro }}</div>
+
+  {% for m in p0.methods %}
+  <div class="method">
+    <div class="method-head"><span class="step">{{ m.step }}</span> {{ m.title }}</div>
+    <div class="method-idea">{{ m.idea }}</div>
+    {% if m.rule %}<div class="method-rule"><b>규칙 ·</b> {{ m.rule }}</div>{% endif %}
+    {% if m.ms_point %}<div class="ms-point">🎒 중3 포인트 · {{ m.ms_point }}</div>{% endif %}
+    {% if m.demo %}
+    <div class="demo">
+      <div class="demo-step"><span class="dtag s1">① 괄호치기</span>
+        <span class="demo-en">{{ m.demo.bracketed or m.demo.sentence }}</span></div>
+      <div class="demo-step"><span class="dtag s2">② 뼈대(중3)</span>
+        <span class="skel-en">{{ m.demo.skeleton_en }}</span>
+        <span class="skel-ko">— {{ m.demo.skeleton_ko }}</span></div>
+      <div class="demo-step"><span class="dtag s3">③ 완성</span>
+        <span class="demo-full">{{ m.demo.full_ko }}</span></div>
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+  {% if p0.tools %}
+  <div class="tools">
+    <div class="tools-title">🔧 미니 도구</div>
+    {% for t in p0.tools %}<div class="tool">{{ t }}</div>{% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+
+{# ===================== 1부 — 평가원 코드 ===================== #}
+{% if guide.chapters %}
+<section class="chapter part-open">
   <div class="ch-kicker">1부 · 평가원 기능어 특집</div>
   <div class="ch-title">답으로 이어지는 평가원 코드</div>
   <div class="ch-signal">
@@ -25,13 +64,11 @@
     <div class="ch-kicker">Ch{{ loop.index }}</div>
     <div class="ch-title">{{ chapter.title }}</div>
     <div class="ch-signal">{{ chapter.signal }}</div>
-
     <div class="ch-intro">
       <div><span class="lbl">이 유형의 대표 오역 ·</span>
         <span class="misread">{{ chapter.misread }}</span></div>
       <div class="tip"><span class="lbl">💡 코드를 만나면 ·</span> {{ chapter.tip }}</div>
     </div>
-
     {% for card in chapter.cards %}
     <div class="card">
       <div class="card-head">
@@ -40,27 +77,72 @@
         {% set dl = card.dir | dir_label %}
         {% if dl %}<span class="dir-badge">{{ dl }}</span>{% endif %}
       </div>
-
       <div class="sentence">
         {{ card.sentence | highlight_code(card.body.highlight) }}
         {% if card.source %}<span class="source">— {{ card.source }}</span>{% endif %}
       </div>
-
       <div class="rows">
-        <div class="ab wrong">
-          <span class="tag">오역</span>{{ card.body.literal_trap }}
-          <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div>
-        </div>
-        <div class="ab right">
-          <span class="tag">정답</span>{{ card.body.correct }}
-        </div>
+        <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
+          <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
+        <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}</div>
       </div>
-
-      {% if card.body.skeleton %}
-      <div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>
-      {% endif %}
+      {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
       <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
     </div>
     {% endfor %}
   {% endfor %}
 </section>
+{% endif %}
+
+{# ===================== 2부 — 구문별 괄호치기 실전 ===================== #}
+{% if guide.part2 %}
+{% set p2 = guide.part2 %}
+<section class="chapter part-open">
+  <div class="ch-kicker">2부 · 구문해석(문법구조)</div>
+  <div class="ch-title">{{ p2.title }}</div>
+  <div class="ch-signal">{{ p2.intro }}</div>
+
+  {% for chapter in p2.chapters %}
+  {% if not loop.first %}</section><section class="chapter">{% endif %}
+    <div class="ch-kicker">Ch{{ loop.index }}</div>
+    <div class="ch-title">{{ chapter.title }}</div>
+    <div class="ch-signal">{{ chapter.signal }}</div>
+    <div class="ch-intro">
+      <div><span class="lbl">감지 신호 ·</span> {{ chapter.signal }}</div>
+      <div class="tip"><span class="lbl">✂️ 괄호치는 법 ·</span> {{ chapter.how }}</div>
+    </div>
+
+    {% for card in chapter.cards %}
+    <div class="card syntax">
+      <div class="sentence">
+        {{ card.sentence | bracket_mods(card.body.modifiers) }}
+        {% if card.source %}<span class="source">— {{ card.source }}</span>{% endif %}
+      </div>
+      <div class="syn-step">
+        <span class="dtag s2">뼈대(중3)</span>
+        <span class="skel-en">{{ card.body.skeleton_en }}</span>
+        <span class="skel-ko">— {{ card.body.skeleton_ko }}</span>
+      </div>
+      {% if card.body.modifiers %}
+      <div class="mods">
+        <div class="mods-title">🧩 살 붙이기</div>
+        {% for mod in card.body.modifiers %}
+        <div class="mod-row">
+          <span class="mod-kind">{{ mod.kind }}</span>
+          <span class="mod-phrase">( {{ mod.phrase }} )</span>
+          <span class="mod-arrow">→</span>
+          <span class="mod-mean">{{ mod.meaning }}</span>
+          <span class="mod-conn">{{ mod.connector }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="syn-full"><span class="dtag s3">완성</span>{{ card.body.full_ko }}</div>
+      {% if card.body.self_check %}
+      <div class="self-check">✅ 셀프체크 · {{ card.body.self_check }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+</section>
+{% endif %}

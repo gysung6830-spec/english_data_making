@@ -47,6 +47,41 @@ def _highlight(sentence: str, hit: str | None) -> Markup:
 _env.filters["highlight_code"] = _highlight
 
 
+def _bracket_modifiers(sentence: str, modifiers) -> Markup:
+    """문장에서 수식어(modifier.phrase)들을 회색 괄호 span 으로 감싸 '괄호치기'를 시각화."""
+    if not sentence:
+        return Markup("")
+    spans = []
+    low = sentence.lower()
+    for mod in (modifiers or []):
+        ph = (getattr(mod, "phrase", "") or "").strip()
+        if not ph:
+            continue
+        idx = low.find(ph.lower())
+        if idx >= 0:
+            spans.append((idx, idx + len(ph)))
+    if not spans:
+        return escape(sentence)
+    spans.sort()
+    # 겹치는 구간 병합
+    merged = []
+    for s, e in spans:
+        if merged and s <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], e))
+        else:
+            merged.append((s, e))
+    out, last = [], 0
+    for s, e in merged:
+        out.append(str(escape(sentence[last:s])))
+        out.append('<span class="mod">(' + str(escape(sentence[s:e])) + ')</span>')
+        last = e
+    out.append(str(escape(sentence[last:])))
+    return Markup("".join(out))
+
+
+_env.filters["bracket_mods"] = _bracket_modifiers
+
+
 def render_html(guide, sample: bool = False, footer_note: str = "") -> str:
     tmpl = _env.get_template("guide.html.j2")
     # 챕터 번호 매기기

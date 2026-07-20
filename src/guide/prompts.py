@@ -13,6 +13,31 @@ SYSTEM = (
 )
 
 
+SYNTAX_SYSTEM = (
+    "당신은 중3 수준의 학생도 수능 기출 문장을 읽게 만드는 구문해석 코치입니다. "
+    "핵심 철학: '수능 문장 안에는 중3 문장이 숨어 있다. 수식어(살)를 괄호로 떼면 뼈대(주어+동사)만 남고, "
+    "그 뼈대는 중3도 읽는다.' 이 원칙으로 문장을 분석합니다. "
+    "요청된 JSON 스키마에 정확히 맞춰서만 응답하세요."
+)
+
+
+def syntax_card_prompt(structure: str, how: str, sentence: str) -> str:
+    return (
+        f"[구문 유형] {structure}\n"
+        f"[이 유형 괄호치는 법] {how}\n"
+        f"[기출 문장]\n{sentence}\n\n"
+        "이 문장을 '3단계 읽기'로 분석하세요. 중3 학생이 따라올 수 있게 아주 쉽게.\n"
+        "- skeleton_en: 수식어(살)를 모두 뺀 '뼈대'만 남긴 영어 문장. 핵심 주어+동사(+목적어)만, 아주 짧게.\n"
+        "- skeleton_ko: 그 뼈대의 중3 수준 쉬운 한국어 해석 한 줄.\n"
+        "- modifiers: 괄호쳐야 할 수식어 덩어리들을 문장 등장 순서로. 각 항목:\n"
+        "    · phrase(수식어 원문 그대로 인용), kind(관계사절/분사/전치사구/삽입/비교 중 하나),\n"
+        "      connector(붙일 때 쓰는 연결어: ~하는/~하면서/~해서/~한 채로/~보다 등), meaning(그 수식어의 한국어 뜻).\n"
+        "- full_ko: 뼈대에 수식어(살)를 연결어로 붙인, 자연스러운 완성 해석 한 문장.\n"
+        "- self_check: 학생이 스스로 괄호쳐 볼 수 있게 한 줄 힌트(선택, 없으면 빈 문자열).\n"
+        "반드시 이 문장 자체에 근거해서 쓰고, 원문에 없는 내용을 지어내지 마세요."
+    )
+
+
 def card_prompt(cat_title: str, misread: str, code: str, code_ko: str,
                 sentence: str) -> str:
     return (
