@@ -37,8 +37,9 @@
   .titles .ko{ font-size:14px; color:#4a5064; margin-top:3px; font-weight:600; }
 
   /* ---- 문장 행 ---- */
-  .row{ display:grid; grid-template-columns:1fr 250px; gap:14px; margin:6px 0;
-        padding-top:8px; page-break-inside:avoid; }
+  .row{ display:grid; grid-template-columns:1fr 250px; gap:14px; margin:18px 0 3px;
+        padding-top:6px; page-break-inside:avoid; }
+  .row:first-of-type{ margin-top:6px; }
   .analysis{ display:grid; grid-template-columns:26px 1fr; gap:6px; }
   .num{ color:var(--navy); font-weight:800; font-size:15px; line-height:1.4; }
 
@@ -54,22 +55,23 @@
      단어(.w)는 자연스러운 띄어쓰기로 촘촘히 흐르게 한다. 위/아래 주석(.over/.unders)은
      '폭 0' 의 flex 로 두어 단어 위·아래에 세로 공간만 차지하고 '가로 폭'은 넓히지 않는다.
      (흐름에 남아 있어 줄바꿈·정렬이 깨지지 않는다.) --------------------------------*/
-  .en{ margin-top:2px; }
-  .en .line{ margin-bottom:2px; }
+  .en{ margin-top:3px; }
+  .en .line{ margin-bottom:9px; }          /* 한 문장 안의 줄 사이 호흡 */
+  .en .line:last-of-type{ margin-bottom:0; }
   .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 2px; }
-  .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto;
+  .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto 3px;
               height:0; overflow:visible; font-size:9px; color:var(--gray); line-height:1.1;
               white-space:nowrap; }
   .tok .over.blue{ color:var(--blue); }
   .en .line.po .tok .over{ height:11px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
-  .tok .w{ display:block; font-size:15px; line-height:1.4; white-space:nowrap; }
+  .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:nowrap; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
   .tok .w.hl-p{ background:var(--purple-hl); }
   .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
   .tok .w.red{ color:var(--red); font-weight:600; }
   .tok .w.blue{ color:var(--blue); font-weight:600; }
-  .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:1px auto 0;
+  .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
                 overflow:visible; }
   .ann{ font-size:9.5px; line-height:1.18; white-space:nowrap; }
   .ann.lbl{ color:var(--blue); font-weight:800; }
@@ -78,7 +80,7 @@
   .ann.gray{ color:var(--gray); }
   .ann.x{ color:var(--gray); font-weight:600; }
 
-  .kotr{ margin-top:4px; color:#5b6172; font-size:12.5px; line-height:1.6; }
+  .kotr{ margin-top:11px; color:#5b6172; font-size:12.5px; line-height:1.6; }
 
   /* ---- 우측 박스 : 어법 Point(빨강) / 내용 TMI(남색) ---- */
   .points{ display:flex; flex-direction:column; gap:10px; }
