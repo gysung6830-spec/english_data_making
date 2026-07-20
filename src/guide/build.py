@@ -34,7 +34,7 @@ def _make_card(client: ClaudeClient, cat: Category, m: Match,
 
 def _make_syntax_card(client: ClaudeClient, st, sentence: str,
                       max_retries: int = 1) -> SyntaxCard | None:
-    prompt = prompts.syntax_card_prompt(st.title, st.how, sentence)
+    prompt = prompts.syntax_card_prompt(st.title, st.formula, sentence)
     try:
         body = client.structured(prompts.SYNTAX_SYSTEM, prompt, SyntaxBodyOut,
                                  max_retries=max_retries)
@@ -59,7 +59,7 @@ def build_part2(client: ClaudeClient, sentences: list[str], per_type: int = 2,
                 cards.append(card)
         if cards:
             chapters.append(SyntaxChapter(id=st.id, title=st.title, signal=st.signal,
-                                          how=st.how, cards=cards))
+                                          how=st.formula, cards=cards))
     return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다.",
                  chapters=chapters)
 

@@ -48,6 +48,18 @@ methods:
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
+  - step: "보너스"
+    title: "모르는 단어는 '유추'로 뚫는다"
+    idea: "단어 뜻을 다 몰라도 된다. 문장의 신호로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다."
+    rule: "① 긍정/부정 신호로 극성 잡기 · ② 대조(but·unlike) → 반대 뜻 · ③ 재진술(즉·that is)·예시(such as) → 옆에 쉬운 말 · ④ 병렬(A and B) → 같은 부류 · ⑤ 접두사·어근(dis-·un-·-less=부정, re-=다시)"
+    ms_point: "모르는 단어 1~2개는 '?'로 두고 넘어가도, 신호만 잡으면 문장 뜻은 안 무너진다."
+    demo:
+      sentence: "Consumer engagement levels in all manner of digital experiences and communities have simply exploded—and they show little or no signs of slowing."
+      bracketed: "Consumer engagement levels (in all manner of digital experiences and communities) have simply exploded (—and they show little or no signs of slowing)."
+      skeleton_en: "levels have exploded (and show no signs of slowing)"
+      skeleton_ko: "참여도가 폭발적으로 늘었다 (그리고 느려질 기미가 없다)."
+      full_ko: "'exploded(폭발했다)'의 정확한 뜻을 몰라도, 뒤의 'little or no signs of slowing(느려질 기미가 거의 없다)'이 부정 신호 → '계속 급증하고 있다'는 뜻임을 유추할 수 있다."
+
 tools:
   - "ⓐ 진짜 동사는 하나 — to-V · V-ing · p.p. 는 가짜 동사(준동사)다. 진짜 동사를 먼저 찾아라."
   - "ⓑ 긴 주어·가주어 It ~ that/to — 가주어 It 은 버리고 뒤 덩어리를 진짜 주어로 앞에 놓는다."

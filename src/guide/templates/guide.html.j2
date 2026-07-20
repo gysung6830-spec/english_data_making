@@ -86,6 +86,9 @@
           <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
         <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}</div>
       </div>
+      {% if card.body.so_what %}
+      <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}</div>
+      {% endif %}
       {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
       <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
     </div>
@@ -107,9 +110,9 @@
     <div class="ch-kicker">Ch{{ loop.index }}</div>
     <div class="ch-title">{{ chapter.title }}</div>
     <div class="ch-signal">{{ chapter.signal }}</div>
-    <div class="ch-intro">
-      <div><span class="lbl">감지 신호 ·</span> {{ chapter.signal }}</div>
-      <div class="tip"><span class="lbl">✂️ 괄호치는 법 ·</span> {{ chapter.how }}</div>
+    <div class="ch-intro rule-box">
+      <div><span class="lbl">이런 구조면 ·</span> {{ chapter.signal }}</div>
+      <div class="tip"><span class="lbl">→ 이렇게 해석 ·</span> {{ chapter.how }}</div>
     </div>
 
     {% for card in chapter.cards %}
@@ -138,6 +141,9 @@
       </div>
       {% endif %}
       <div class="syn-full"><span class="dtag s3">완성</span>{{ card.body.full_ko }}</div>
+      {% if card.body.real_meaning %}
+      <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.real_meaning }}</div>
+      {% endif %}
       {% if card.body.self_check %}
       <div class="self-check">✅ 셀프체크 · {{ card.body.self_check }}</div>
       {% endif %}

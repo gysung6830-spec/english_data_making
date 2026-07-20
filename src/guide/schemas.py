@@ -12,11 +12,13 @@ from pydantic import BaseModel, Field
 
 
 class CardBody(BaseModel):
-    """Claude 가 문장 하나에 대해 생성하는 부분(오역/정답/팁)."""
+    """Claude 가 문장 하나에 대해 생성하는 부분(오역/정답/팁/진짜 의미)."""
     highlight: str = Field(description="문장에서 코드 어구에 해당하는 정확한 원문 부분(그대로 인용)")
     literal_trap: str = Field(description="오역 — 이 코드를 무심코 직역할 때 나오는 잘못된 해석 한 줄")
-    trap_why: str = Field(description="그 해석이 왜 틀렸는지(방향/논리 근거) 한 줄")
+    trap_why: str = Field(description="그 해석이 왜 틀렸는지(방향/논리/필자 입장 근거) 한 줄")
     correct: str = Field(description="정답 — 문맥·구조를 반영한 올바른 해석 한 줄")
+    so_what: str = Field(default="", description="해석하면 이런 내용 — 이 문장이 결국 말하려는 바를 "
+                         "구체적으로(추상적 문장을 실제 상황으로 풀어서) 한 줄")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
 
 
@@ -81,6 +83,8 @@ class SyntaxBody(BaseModel):
     skeleton_ko: str = Field(description="그 뼈대의 중3 수준 쉬운 한국어 해석")
     modifiers: list[Modifier] = Field(description="괄호칠 수식어 덩어리들(문장에 등장 순서)")
     full_ko: str = Field(description="수식어를 연결어로 붙인 자연스러운 완성 해석")
+    real_meaning: str = Field(default="", description="해석하면 이런 내용 — 이 문장이 결국 말하려는 "
+                              "바를 구체적으로(추상→구체) 풀어 준 한 줄")
     self_check: str = Field(default="", description="학생이 직접 괄호쳐 볼 짧은 연습 한 줄(선택)")
 
 

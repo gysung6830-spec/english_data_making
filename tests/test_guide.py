@@ -48,19 +48,41 @@ def test_match_with_adverb():
     print("PASS  코드 매칭(부사 삽입 포함) + 그룹핑")
 
 
+def test_polarity_codes():
+    cats = {c.id: c for c in load_categories()}
+    assert "polarity_positive" in cats and "polarity_negative" in cats
+    pos = {c.en for c in cats["polarity_positive"].codes}
+    neg = {c.en for c in cats["polarity_negative"].codes}
+    assert "central" in pos and "essential" in pos
+    assert "rarely" in neg and "lack" in neg
+    print("PASS  긍정/부정 신호 카테고리")
+
+
+def test_syntax_eight_types():
+    from src.guide.syntax import SYNTAX_TYPES
+    ids = {st.id for st in SYNTAX_TYPES}
+    assert ids == {"relative", "participle", "insertion", "prep_stack",
+                   "cleft", "inversion", "comparison", "parallel"}
+    print("PASS  2부 8개 구문 유형")
+
+
 def test_render_html():
     from samples.guide_mock import mock_guide
     html = render.render_html(mock_guide(), sample=True)
     assert "답으로 이어지는 평가원 코드" in html
     assert "오역" in html and "정답" in html
-    assert "be attributable to" in html
-    print("PASS  실전서 HTML 렌더링")
+    assert "이런 내용" in html                    # 진짜 의미 층
+    assert "긍정·강조 신호" in html and "부정·부재·거부 신호" in html
+    assert "모르는 단어" in html                   # 0부 단어 유추법
+    print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 
 def run_all():
     test_load_codes()
     test_split_sentences()
     test_match_with_adverb()
+    test_polarity_codes()
+    test_syntax_eight_types()
     test_render_html()
     print("\n실전서 오프라인 테스트 통과 ✅")
 

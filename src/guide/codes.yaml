@@ -118,6 +118,65 @@ categories:
           - {en: "give way to",    ko: "A가 B에게 자리를 내주다"}
           - {en: "be replaced by", ko: "A가 B로 대체되다"}
 
+  # ── 긍정·강조 신호 (DAY31) ───────────────────────────────
+  - id: polarity_positive
+    title: "긍정·강조 신호"
+    day: 31
+    signal: "필자가 '중요하다 · 지지한다 · 핵심이다'라고 힘주는 대목"
+    misread: "강조 신호를 흘려 읽어 필자가 무엇을 '지지·중시'하는지(=필자 입장)를 놓친다"
+    tip: "긍정·강조어가 나오면 거기가 필자의 핵심 주장이다 — 밑줄 긋고 답의 근거로 삼아라."
+    groups:
+      - label: "핵심·중요 (필자가 미는 것)"
+        codes:
+          - {en: "essential",   ko: "필수적인, 본질적인"}
+          - {en: "crucial",     ko: "결정적으로 중요한"}
+          - {en: "vital",       ko: "필수적인"}
+          - {en: "central",     ko: "핵심적인"}
+          - {en: "fundamental", ko: "근본적인, 핵심적인"}
+          - {en: "key",         ko: "핵심적인"}
+          - {en: "significant", ko: "중요한, 상당한"}
+          - {en: "indispensable", ko: "없어서는 안 될"}
+      - label: "강조·지지 (필자의 태도)"
+        codes:
+          - {en: "emphasize",   ko: "강조하다"}
+          - {en: "prioritize",  ko: "우선시하다"}
+          - {en: "reinforce",   ko: "강화하다"}
+          - {en: "matter",      ko: "중요하다"}
+          - {en: "in favor of", ko: "~을 지지하여"}
+          - {en: "beneficial",  ko: "유익한"}
+
+  # ── 부정·부재·거부 신호 (DAY32·33) ───────────────────────
+  - id: polarity_negative
+    title: "부정·부재·거부 신호"
+    day: 32
+    signal: "'아니다 · 없다 · 거부한다 · 거의 안 한다'로 문장의 극성을 뒤집는 말"
+    misread: "부정·부재어(hardly, lack, far from, rather than 등)를 놓쳐 필자 의견을 정반대(긍정)로 읽는다"
+    tip: "부정·부재어가 보이면 극성이 뒤집힌다 — 필자는 '아니다/부족하다'고 말하는 중이다. 놓치면 필자 의견과 정반대로 멀어진다."
+    groups:
+      - label: "빈도 부정 (거의 ~않다)"
+        codes:
+          - {en: "hardly",  ko: "거의 ~않다"}
+          - {en: "rarely",  ko: "좀처럼 ~않다"}
+          - {en: "seldom",  ko: "좀처럼 ~않다"}
+          - {en: "little",  ko: "거의 없는"}
+          - {en: "few",     ko: "거의 없는"}
+          - {en: "by no means", ko: "결코 ~이 아닌"}
+      - label: "부재·결핍·실패"
+        codes:
+          - {en: "lack",    ko: "~가 없다, 부족"}
+          - {en: "absence", ko: "부재, 없음"}
+          - {en: "far from",ko: "결코 ~이 아닌"}
+          - {en: "unlikely to", ko: "~할 가능성이 없는"}
+          - {en: "fail to", ko: "~하지 못하다"}
+      - label: "거부·무시·평가절하"
+        codes:
+          - {en: "rather than", ko: "~라기보다는(뒤를 부정)"}
+          - {en: "ignore",   ko: "무시하다"}
+          - {en: "dismiss",  ko: "묵살하다"}
+          - {en: "irrelevant", ko: "무관한, 중요치 않은"}
+          - {en: "mere",     ko: "겨우 ~에 불과한"}
+          - {en: "nothing but", ko: "~에 불과한"}
+
   # ── 연결어 (DAY20) ───────────────────────────────────────
   - id: connective
     title: "연결어"
