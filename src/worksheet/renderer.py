@@ -38,15 +38,19 @@ def _as_list(analyses) -> list[Analysis]:
     return list(analyses)
 
 
-def render_a_html(analyses, footer_note: str = "", footer_meta: str = "") -> str:
+def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
+                  compact: bool = False, include_back: bool = True) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
-    footer_note : 하단 우측 저작권 문구.
-    footer_meta : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
+    footer_note  : 하단 우측 저작권 문구.
+    footer_meta  : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
+    compact      : 압축 밀도(한 지문을 최대한 1페이지에).
+    include_back : 뒷페이지(어휘/흐름) 포함 여부(측정 시 False).
     """
     tmpl = _env.get_template("worksheet_a.html.j2")
     return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
-                       footer_meta=footer_meta)
+                       footer_meta=footer_meta, compact=compact,
+                       include_back=include_back)
 
 
 def render_b_html(analyses, footer_note: str = "", tagged: bool = False) -> str:
@@ -56,10 +60,21 @@ def render_b_html(analyses, footer_note: str = "", tagged: bool = False) -> str:
 
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",
-                tagged: bool = False, footer_meta: str = "") -> str:
+                tagged: bool = False, footer_meta: str = "", compact: bool = False) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, tagged=tagged)
-    return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta)
+    return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
+                         compact=compact)
+
+
+def _analysis_fits_one_page(analyses, compact: bool) -> bool:
+    """각 지문의 '분석 앞면'이 1페이지에 들어가는지 WeasyPrint 로 측정(뒷페이지 제외)."""
+    from weasyprint import HTML  # dep
+
+    lst = _as_list(analyses)
+    html = render_a_html(lst, compact=compact, include_back=False)
+    pages = len(HTML(string=html).render().pages)
+    return pages <= len(lst)   # 지문당 1페이지
 
 
 # ---------------------------------------------------------------------------
@@ -120,12 +135,25 @@ def _pdf_weasyprint(html: str, out_path: Path) -> None:
 
 def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                footer_note: str = "", tagged: bool = False,
-               engine: str = "auto", footer_meta: str = "") -> Path:
-    """Analysis → PDF. engine: 'auto' | 'playwright' | 'weasyprint'."""
+               engine: str = "auto", footer_meta: str = "",
+               density: str = "auto") -> Path:
+    """Analysis → PDF.
+
+    engine  : 'auto' | 'playwright' | 'weasyprint'.
+    density : 'normal' | 'compact' | 'auto'. 'auto' 는 앞면이 지문당 1페이지를 넘으면
+              자동으로 압축 밀도로 다시 맞춘다(레이아웃 A 한정).
+    """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    compact = (density == "compact")
+    if layout.upper() == "A" and density == "auto":
+        try:
+            compact = not _analysis_fits_one_page(analyses, compact=False)
+        except Exception:
+            compact = False
     html = render_html(analyses, layout=layout, footer_note=footer_note, tagged=tagged,
-                       footer_meta=footer_meta)
+                       footer_meta=footer_meta, compact=compact)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):

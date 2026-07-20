@@ -360,6 +360,7 @@ WORKSHEET_HTML = """
           <label><input type=radio name=layout value=B> B. 대조표형 <span class=hint>(좌 영어 / 우 한글)</span></label>
         </div>
         <label class=chk style="margin-top:10px"><input type=checkbox name=tagged value=1> B에도 구문 태깅 얹기</label>
+        <label class=chk><input type=checkbox name=fit1page value=1 checked> 한 지문을 최대한 1페이지로(자동 압축) <span class=hint>(A형)</span></label>
       </fieldset>
 
       <fieldset><legend>③ 태깅 강도</legend>
@@ -425,6 +426,7 @@ def worksheet_build_route():
 
     layout = "B" if (request.form.get("layout") == "B") else "A"
     tagged = bool(request.form.get("tagged"))
+    density = "auto" if request.form.get("fit1page") else "normal"
     strength = request.form.get("strength") or "full"
     if strength not in ("full", "key", "none"):
         strength = "full"
@@ -471,7 +473,8 @@ def worksheet_build_route():
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_구문분석학습지.pdf"
             ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
-                                         footer_note=footer, footer_meta=base_header.date)
+                                         footer_note=footer, footer_meta=base_header.date,
+                                         density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
                             "files": [{"label": f"✏️ 학습지({layout}형)", "out": out.name}]})

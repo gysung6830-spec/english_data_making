@@ -105,6 +105,24 @@
   .pbox.feed .gko{ color:#4a5064; }          /* 함축 한글 병기 */
   .pbox b, .pbox strong{ font-weight:800; }
 
+  /* ---- 압축(compact) 밀도: 한 지문을 최대한 1페이지에 ---- */
+  .page.compact{ padding:14px 18px 26px; }
+  .page.compact .head{ margin-bottom:8px; min-height:60px; }
+  .page.compact .row{ margin:9px 0 2px; padding-top:3px; }
+  .page.compact .en{ margin-top:1px; }
+  .page.compact .en .line{ margin-bottom:5px; }
+  .page.compact .en .line.po .tok .over{ height:9px; }
+  .page.compact .tok .w{ font-size:13px; line-height:1.3; }
+  .page.compact .tok .over .lbl{ font-size:7.5px; }
+  .page.compact .ann{ font-size:7px; }
+  .page.compact .ann.red{ font-size:10px; }
+  .page.compact .kotr{ margin-top:6px; font-size:11px; line-height:1.45; }
+  .page.compact .num{ font-size:13px; }
+  .page.compact .points{ gap:6px; }
+  .page.compact .pbox{ font-size:9.5px; padding:0 9px 6px; }
+  .page.compact .pbox .cap{ font-size:9.5px; padding:2px 8px; margin:6px 0 4px; }
+  .page.compact .pbox .gn{ font-size:10px; }
+
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:#f2c14e; }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
@@ -145,7 +163,7 @@
 </head>
 <body>
 {% for a in analyses %}
-  <div class="page">
+  <div class="page{% if compact %} compact{% endif %}">
     <div class="head">
       <div class="ribbon">
         <div class="ym">{{ a.date or '&nbsp;' }}</div>
@@ -214,8 +232,8 @@
     {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
   </div>
 
-  {% if a.has_back %}
-  <div class="page">
+  {% if include_back and a.has_back %}
+  <div class="page{% if compact %} compact{% endif %}">
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>
