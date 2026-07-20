@@ -371,15 +371,11 @@ WORKSHEET_HTML = """
         </div>
       </fieldset>
 
-      <fieldset><legend>④ 머리글 (선택)</legend>
-        <div class=grid2>
-          <div><label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강"></div>
-          <div><label>날짜</label><input type=text name=date placeholder="예: 2025년 09월"></div>
-        </div>
-        <label>영문 제목</label><input type=text name=title_en placeholder="예: The Paradox of Choice">
-        <label>한글 부제</label><input type=text name=title_ko placeholder="예: 선택의 역설">
+      <fieldset><legend>④ 강 번호 · 저장 파일명</legend>
+        <label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강">
         <label>저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
         <input type=text name=basename placeholder="예: 2027수능특강_20강">
+        <div class=hint>영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
       </fieldset>
 
       <label>⑤ Anthropic API 키
@@ -431,11 +427,9 @@ def worksheet_build_route():
     if strength not in ("full", "key", "none"):
         strength = "full"
 
+    # 영문 제목·한글 부제는 지문 내용에서 자동 생성(사용자 입력 아님). 날짜는 사용하지 않음.
     base_header = WsHeader(
-        title_en=(request.form.get("title_en") or "").strip(),
-        title_ko=(request.form.get("title_ko") or "").strip(),
         lecture_label=(request.form.get("lecture_label") or "").strip(),
-        date=(request.form.get("date") or "").strip(),
         strength=strength,
     )
     raw_name = (request.form.get("basename") or "").strip()
@@ -473,8 +467,7 @@ def worksheet_build_route():
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_구문분석학습지.pdf"
             ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
-                                         footer_note=footer, footer_meta=base_header.date,
-                                         density=density)
+                                         footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
                             "files": [{"label": f"✏️ 학습지({layout}형)", "out": out.name}]})

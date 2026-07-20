@@ -33,6 +33,8 @@ def build_prompt(analysis: Analysis) -> str:
         f"다음은 지문(총 {n}문장)입니다. 문장번호·원문·해석을 참고해 '요약 정리 페이지'를 만드세요.\n\n"
         f"[지문]\n{_passage_block(analysis)}\n\n"
         "[작성 규칙]\n"
+        "0) title_en / title_ko: 지문 내용을 대표하는 '짧은 영문 제목'(title_en, 3~7단어)과 "
+        "그 '한글 부제'(title_ko, 한 구절)를 지어 넣으세요.\n"
         "1) vocab: 지문 핵심 어휘 8~12개. 각 항목 word(단어/표현), meaning(한글 뜻), "
         "syn(유의어, 없으면 '—'), ant(반의어, 없으면 '—'), sent(등장 문장 번호).\n"
         "2) flow: 글의 논리 흐름을 4~6단계로. 각 단계에 논리와 쉬운 예시를 '함께' 담습니다. "
@@ -45,8 +47,8 @@ def build_overview(
     client: ClaudeClient,
     analysis: Analysis,
     max_retries: int = 1,
-) -> tuple[list[VocabEntry], list[FlowStep]]:
-    """LLM 로 뒷페이지(어휘 리스트 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 목록."""
+) -> tuple[str, str, list[VocabEntry], list[FlowStep]]:
+    """LLM 로 제목(영/한) + 뒷페이지(어휘 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 값."""
     try:
         b: OverviewBundle = client.structured(
             system=SYSTEM,
@@ -56,9 +58,9 @@ def build_overview(
             max_retries=max_retries,
         )
     except Exception:
-        return [], []
+        return "", "", [], []
     vocab = [VocabEntry(word=v.word, meaning=v.meaning, syn=v.syn or "—",
                         ant=v.ant or "—", sent=(v.sent or None)) for v in b.vocab if v.word]
     flow = [FlowStep(label=f.label, text=f.text, easy=f.easy, sentences=f.sentences)
             for f in b.flow if f.label and f.text]
-    return vocab, flow
+    return b.title_en.strip(), b.title_ko.strip(), vocab, flow

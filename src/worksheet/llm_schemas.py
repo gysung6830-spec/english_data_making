@@ -73,5 +73,7 @@ class FlowSpec(BaseModel):
 
 
 class OverviewBundle(BaseModel):
+    title_en: str = ""       # 지문 내용을 대표하는 짧은 영문 제목(자동 생성)
+    title_ko: str = ""       # 한글 부제(자동 생성)
     vocab: list[VocabSpec] = Field(default_factory=list)
     flow: list[FlowSpec] = Field(default_factory=list)
