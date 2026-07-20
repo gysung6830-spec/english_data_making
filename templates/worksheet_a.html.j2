@@ -51,23 +51,27 @@
           background:var(--yellow-hl); display:inline-block; padding:1px 5px; border-radius:3px; }
 
   /* ---- 영문 라인 + 토큰 주석 ----
-     토큰마다 고정 높이의 '위 메모(.over)' 슬롯을 두어 단어 상단이 항상 정렬되게 하고,
-     '아래 주석(.unders)'은 흐름에 남겨 줄 높이가 자동으로 확보되게 한다. --------*/
+     단어(.w)는 자연스러운 띄어쓰기로 촘촘히 흐르게 한다. 위/아래 주석(.over/.unders)은
+     '폭 0' 의 flex 로 두어 단어 위·아래에 세로 공간만 차지하고 '가로 폭'은 넓히지 않는다.
+     (흐름에 남아 있어 줄바꿈·정렬이 깨지지 않는다.) --------------------------------*/
   .en{ margin-top:2px; }
-  .en .line{ margin-bottom:12px; }
-  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 6px 6px 0; }
-  .tok .over{ display:block; height:11px; font-size:9px; color:var(--gray); line-height:1.1;
+  .en .line{ margin-bottom:2px; }
+  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 2px; }
+  .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto;
+              height:0; overflow:visible; font-size:9px; color:var(--gray); line-height:1.1;
               white-space:nowrap; }
   .tok .over.blue{ color:var(--blue); }
-  .tok .w{ display:block; font-size:15px; line-height:1.3; white-space:nowrap; }
+  .en .line.po .tok .over{ height:11px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
+  .tok .w{ display:block; font-size:15px; line-height:1.4; white-space:nowrap; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
   .tok .w.hl-p{ background:var(--purple-hl); }
   .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
   .tok .w.red{ color:var(--red); font-weight:600; }
   .tok .w.blue{ color:var(--blue); font-weight:600; }
-  .unders{ display:block; }
-  .ann{ display:block; font-size:9.5px; line-height:1.18; white-space:nowrap; }
+  .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:1px auto 0;
+                overflow:visible; }
+  .ann{ font-size:9.5px; line-height:1.18; white-space:nowrap; }
   .ann.lbl{ color:var(--blue); font-weight:800; }
   .ann.red{ color:var(--red); font-weight:600; }
   .ann.blue{ color:var(--blue); font-weight:600; }
@@ -121,11 +125,12 @@
           {% if s.gloss_en %}<div><span class="bdg">함</span><span class="gloss">{{ s.gloss_en }}</span></div>{% endif %}
           <div class="en">
             {% for line in s.lines %}
-            <div class="line">
-              {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span>{% endif -%}
+            {%- set has_over = line | selectattr('above') | list -%}
+            <div class="line{% if has_over %} po{% endif %}">
+              {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span> {% endif -%}
               {%- for t in line -%}
                 <span class="tok">
-                  <span class="over{% if t.color == 'blue' %} blue{% endif %}">{{ t.above or '' }}</span>
+                  {%- if has_over %}<span class="over{% if t.color == 'blue' %} blue{% endif %}">{{ t.above or '' }}</span>{% endif -%}
                   <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>
                   {%- if t.role or t.note or t.wrong -%}
                   <span class="unders">
