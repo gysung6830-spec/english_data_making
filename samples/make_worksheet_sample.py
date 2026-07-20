@@ -1,8 +1,8 @@
 """구문 분석 학습지 디자인 미리보기(목 데이터, API 키 불필요).
 
 실행: python -m samples.make_worksheet_sample
--> output/sample_worksheet_A.pdf (분석 학습지형)
-   output/sample_worksheet_B.pdf (대조표형, 태깅 얹기)
+-> output/sample_worksheet_A.pdf (분석 학습지형 · 포인트박스형)
+   output/sample_worksheet_B.pdf (직독직해형)
    HTML 미리보기도 함께 저장한다.
 """
 from __future__ import annotations
@@ -28,14 +28,14 @@ def build(out_dir: Path | None = None) -> list[Path]:
     made.append(pa)
 
     pb = out_dir / "sample_worksheet_B.pdf"
-    renderer.render_pdf([a], pb, layout="B", tagged=True, footer_note=FOOTER)
+    renderer.render_pdf([a], pb, layout="B", brand="은아 T", footer_note=FOOTER)
     made.append(pb)
 
     (out_dir / "sample_worksheet_A.html").write_text(
         renderer.render_a_html([a], footer_note=FOOTER, footer_meta=FOOTER_META),
         encoding="utf-8")
     (out_dir / "sample_worksheet_B.html").write_text(
-        renderer.render_b_html([a], tagged=True, footer_note=FOOTER), encoding="utf-8")
+        renderer.render_b_html([a], brand="은아 T", footer_note=FOOTER), encoding="utf-8")
     return made
 
 

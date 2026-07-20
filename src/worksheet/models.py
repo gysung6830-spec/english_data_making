@@ -79,6 +79,51 @@ class Sentence:
 
 
 # ---------------------------------------------------------------------------
+# 직독직해(레이아웃 B) 요소 — 의미 단위 청크 + 문장별 핵심 문법 + 핵심 단어
+# ---------------------------------------------------------------------------
+@dataclass
+class KeyWord:
+    """직독직해 하단의 핵심 단어 한 항목."""
+
+    word: str
+    meaning: str
+
+
+@dataclass
+class LitChunk:
+    """의미 단위(‘/’로 끊는 직독직해 청크). 영어·한글이 같은 색으로 대응된다."""
+
+    english: str
+    korean: str
+    words: list["KeyWord"] = field(default_factory=list)  # 이 청크의 핵심 단어
+
+
+@dataclass
+class GrammarChip:
+    """문장에 딸린 핵심 문법 태그(테두리 알약) + 설명."""
+
+    point: str               # 어법 이름(예: '과거분사 후치수식')
+    explanation: str = ""    # 짧은 설명
+    key: bool = False        # ★필수 어법(관계사·분사·가정법·비교·도치·강조·5형식 등)
+    ci: int | None = None    # 해당 청크 색 인덱스(0~7). 없으면 기본 문법색
+
+
+@dataclass
+class LiteralSentence:
+    """직독직해(B형) 문장 하나 = 번호 + 청크들 + 핵심 문법 + '쉽게' 한 줄."""
+
+    no: int
+    chunks: list[LitChunk] = field(default_factory=list)
+    grammar: list[GrammarChip] = field(default_factory=list)
+    note: str = ""           # '쉽게' 요약 한 줄(선택)
+
+    @property
+    def words(self) -> list["KeyWord"]:
+        """청크에 흩어진 핵심 단어를 문장 단위로 모은 목록."""
+        return [w for c in self.chunks for w in c.words]
+
+
+# ---------------------------------------------------------------------------
 # 뒷페이지(요약 페이지) 요소 — 어휘 리스트 / 논리 흐름도 / 쉬운 예시 목차
 # ---------------------------------------------------------------------------
 @dataclass
@@ -114,6 +159,8 @@ class Analysis:
     # 뒷페이지(선택) — 비어 있으면 렌더 시 뒷페이지를 만들지 않는다.
     vocab: list[VocabEntry] = field(default_factory=list)
     flow: list[FlowStep] = field(default_factory=list)
+    # 직독직해(레이아웃 B) — 비어 있으면 렌더 시 원문/해석만 대체 표기한다.
+    literal: list[LiteralSentence] = field(default_factory=list)
 
     @property
     def has_points(self) -> bool:
@@ -122,3 +169,7 @@ class Analysis:
     @property
     def has_back(self) -> bool:
         return bool(self.vocab or self.flow)
+
+    @property
+    def has_literal(self) -> bool:
+        return bool(self.literal)

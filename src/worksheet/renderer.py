@@ -53,16 +53,20 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                        include_back=include_back)
 
 
-def render_b_html(analyses, footer_note: str = "", tagged: bool = False) -> str:
-    """레이아웃 B(대조표형) HTML. tagged=True 면 A 의 구문 태깅을 영어칸에 얹는다."""
+def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:
+    """레이아웃 B(직독직해형) HTML.
+
+    영어 원문을 의미 단위(청크)로 끊어 직독직해와 대응시키고, 문장별 핵심 문법 태그와
+    핵심 단어를 함께 싣는다. brand 는 헤더 'made by …' 문구(빈 문자열이면 생략).
+    """
     tmpl = _env.get_template("worksheet_b.html.j2")
-    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note, tagged=tagged)
+    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note, brand=brand)
 
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",
-                tagged: bool = False, footer_meta: str = "", compact: bool = False) -> str:
+                brand: str = "은아 T", footer_meta: str = "", compact: bool = False) -> str:
     if layout.upper() == "B":
-        return render_b_html(analyses, footer_note=footer_note, tagged=tagged)
+        return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
                          compact=compact)
 
@@ -134,12 +138,13 @@ def _pdf_weasyprint(html: str, out_path: Path) -> None:
 
 
 def render_pdf(analyses, out_path: str | Path, layout: str = "A",
-               footer_note: str = "", tagged: bool = False,
+               footer_note: str = "", brand: str = "은아 T",
                engine: str = "auto", footer_meta: str = "",
                density: str = "auto") -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
+    brand   : 레이아웃 B 헤더 'made by …' 문구.
     density : 'normal' | 'compact' | 'auto'. 'auto' 는 앞면이 지문당 1페이지를 넘으면
               자동으로 압축 밀도로 다시 맞춘다(레이아웃 A 한정).
     """
@@ -152,7 +157,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
             compact = not _analysis_fits_one_page(analyses, compact=False)
         except Exception:
             compact = False
-    html = render_html(analyses, layout=layout, footer_note=footer_note, tagged=tagged,
+    html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact)
 
     if engine in ("auto", "playwright"):

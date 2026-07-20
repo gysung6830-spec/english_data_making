@@ -3,8 +3,8 @@
 영어 지문을 문장 단위로 쪼개 '직독직해 + 구문 태깅 + 포인트 박스' 학습지를
 HTML/PDF 로 출력한다. 두 가지 레이아웃을 지원한다.
 
-- 레이아웃 A (분석 학습지형) : 벤 리본 + 좌 분석 / 우 포인트 박스
-- 레이아웃 B (대조표형)     : 회색 헤더바 + 좌 영어 / 우 한글 2단 표
+- 레이아웃 A (포인트박스형) : 리본 + 좌 구문 분석 / 우 포인트 박스
+- 레이아웃 B (직독직해형)   : 주황 헤더바 + 좌 영어 원문·핵심 문법 / 우 직독직해·핵심 단어
 
 파이프라인:
     loader → splitter → analyzer(규칙+LLM) → point_builder → renderer → PDF
@@ -14,6 +14,8 @@ HTML/PDF 로 출력한다. 두 가지 레이아웃을 지원한다.
 """
 from __future__ import annotations
 
-from .models import Analysis, FlowStep, Point, Sentence, Token, VocabEntry
+from .models import (Analysis, FlowStep, GrammarChip, KeyWord, LitChunk,
+                     LiteralSentence, Point, Sentence, Token, VocabEntry)
 
-__all__ = ["Analysis", "FlowStep", "Point", "Sentence", "Token", "VocabEntry"]
+__all__ = ["Analysis", "FlowStep", "GrammarChip", "KeyWord", "LitChunk",
+           "LiteralSentence", "Point", "Sentence", "Token", "VocabEntry"]

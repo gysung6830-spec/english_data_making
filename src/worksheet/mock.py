@@ -9,7 +9,8 @@
 """
 from __future__ import annotations
 
-from .models import Analysis, FlowStep, Sentence, Token, VocabEntry
+from .models import (Analysis, FlowStep, GrammarChip, KeyWord, LitChunk,
+                     LiteralSentence, Sentence, Token, VocabEntry)
 from .point_builder import build_grammar_point
 
 
@@ -23,6 +24,97 @@ def _G(text, name, role=None, wrong=None, hl=None, above=None) -> Token:
     role(성분)·above(유의어 밑줄)도 함께 가질 수 있다."""
     return Token(text=text, role=role, note=name, note_kind="red", color="red",
                  wrong=wrong, hl=hl, above=above)
+
+
+def _LC(english, korean, *words) -> LitChunk:
+    """직독직해 청크: english/korean + (word, meaning) 쌍들."""
+    kws = [KeyWord(word=w, meaning=m) for w, m in words]
+    return LitChunk(english=english, korean=korean, words=kws)
+
+
+def _GC(point, explanation="", key=False, ci=None) -> GrammarChip:
+    return GrammarChip(point=point, explanation=explanation, key=key, ci=ci)
+
+
+def _mock_literal() -> list[LiteralSentence]:
+    """지문 20('차·리더십')의 직독직해(청크 + 핵심 문법 + 핵심 단어)."""
+    return [
+        LiteralSentence(no=1, chunks=[
+            _LC("Imagine", "상상해 보라"),
+            _LC("(that) you have the best tea in the world", "당신이 세상에서 제일 좋은 차를 가지고 있고",
+                ("the best tea", "최고의 차")),
+            _LC("and you put it into a bag", "그것을 봉지에 넣는다고"),
+            _LC("that's impermeable", "스며들지 않는", ("impermeable", "스며들지 않는, 불투과성의")),
+        ], grammar=[
+            _GC("주격 관계대명사 that", "선행사 a bag 을 수식 · what(X)", key=True, ci=3),
+        ]),
+        LiteralSentence(no=2, chunks=[
+            _LC("It won't work.", "그것은 작용하지 않을 것이다.", ("work", "(차가) 우러나다(=infuse)")),
+        ], note="아무리 좋은 찻잎도 물이 안 통하는 봉지 속에선 무용지물이라는 말"),
+        LiteralSentence(no=3, chunks=[
+            _LC("You just won't be able to make", "당신은 그저 만들 수 없을 것이다",
+                ("be able to", "~할 수 있다")),
+            _LC("a cup of tea.", "차 한 잔을."),
+        ]),
+        LiteralSentence(no=4, chunks=[
+            _LC("For the teabag to work,", "티백이 작용하려면,"),
+            _LC("it needs to be porous.", "그것은 구멍이 있어야 한다.", ("porous", "구멍이 많은, 투과성의")),
+        ], grammar=[
+            _GC("to부정사의 의미상 주어", "「for + 목적격」이 to work 의 주어", key=True, ci=0),
+            _GC("to부정사(부사적·목적)", "‘~하기 위해’", key=True, ci=2),
+        ]),
+        LiteralSentence(no=5, chunks=[
+            _LC("You need", "당신은 ~해야 한다"),
+            _LC("the tea and the water", "차와 물이"),
+            _LC("to come in contact with each other.", "서로 접촉하도록.",
+                ("come in contact with", "~와 접촉하다")),
+        ], grammar=[
+            _GC("5형식 need + O + to-v", "목적어(the tea and the water)의 목적격보어로 to-v", key=True, ci=1),
+        ]),
+        LiteralSentence(no=6, chunks=[
+            _LC("In our lives too,", "우리 삶에서도 마찬가지로,"),
+            _LC("we cannot survive and thrive", "우리는 살아갈 수도 성장할 수도 없다",
+                ("thrive", "번성하다(=flourish)")),
+            _LC("in isolation.", "고립된 채로는.", ("isolation", "고립, 격리")),
+        ], grammar=[
+            _GC("병렬구조 survive and thrive", "조동사 cannot 뒤 동사원형 병렬", key=True, ci=4),
+        ], note="사람도 혼자 틀어박히면 못 산다 — 찻잎·물 비유를 삶에 적용"),
+        LiteralSentence(no=7, chunks=[
+            _LC("Leaders need to be careful", "리더는 주의해야 한다"),
+            _LC("not to build walls around themselves", "자기 주변에 벽을 쌓지 않도록"),
+            _LC("that prevent people", "사람들이 ~하지 못하게 막는", ("prevent A from ~ing", "A가 ~하지 못하게 막다")),
+            _LC("from reaching out to them.", "그들에게 다가오는 것을.", ("reach out", "다가가다, 손 내밀다")),
+        ], grammar=[
+            _GC("to부정사 부정 not to-v", "부정사 앞에 not", key=True, ci=1),
+            _GC("주격 관계대명사 that", "선행사 walls 수식 · who(X)", key=True, ci=2),
+            _GC("prevent A from -ing", "‘A가 -하는 것을 막다’", key=True, ci=4),
+            _GC("재귀대명사 themselves", "주어 Leaders 와 동일", ci=6),
+        ]),
+        LiteralSentence(no=8, chunks=[
+            _LC("As a leader,", "리더로서,"),
+            _LC("you need to be able to touch", "당신은 접촉할 수 있어야 한다", ("touch", "접촉하다, 닿다")),
+            _LC("other people.", "다른 사람들과."),
+        ], grammar=[
+            _GC("to부정사(명사적·목적어)", "need 의 목적어 to be able to touch", key=True, ci=5),
+        ]),
+        LiteralSentence(no=9, chunks=[
+            _LC("The tea", "차는"),
+            _LC("was meant to mix", "섞이도록 의도되었다", ("be meant to", "~하도록 의도되다")),
+            _LC("with the water.", "물과."),
+        ], grammar=[
+            _GC("수동태 was meant", "be + p.p. · ‘의도되다’", key=True, ci=0),
+        ]),
+        LiteralSentence(no=10, chunks=[
+            _LC("Similarly,", "마찬가지로,"),
+            _LC("all of us were designed", "우리 모두도 설계되었다", ("be designed to", "~하도록 설계되다")),
+            _LC("to work with other people, with teams,", "다른 사람들, 팀,"),
+            _LC("and with society at large.", "그리고 더 크게는 사회와 함께 일하도록."),
+        ], grammar=[
+            _GC("수동태 were designed", "be + p.p. · designed(X) 능동 아님", key=True, ci=1),
+            _GC("to부정사(부사적)", "‘~하도록’", ci=3),
+            _GC("병렬 with A, with B, and with C", "전치사구 3개 대등 연결", key=True, ci=6),
+        ], note="찻잎이 물과 섞이도록 만들어졌듯, 사람도 서로 어울리도록 설계됐다는 뜻"),
+    ]
 
 
 def mock_analysis(title_en: str = "A necessity of openness and connection in leadership",
@@ -181,4 +273,5 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         date=date,
         sentences=sentences,
         vocab=vocab, flow=flow,
+        literal=_mock_literal(),
     )

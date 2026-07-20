@@ -77,3 +77,34 @@ class OverviewBundle(BaseModel):
     title_ko: str = ""       # 한글 부제(자동 생성)
     vocab: list[VocabSpec] = Field(default_factory=list)
     flow: list[FlowSpec] = Field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
+# literal_builder: 직독직해(레이아웃 B) — 의미 단위 청크 + 핵심 문법 + 핵심 단어
+# ---------------------------------------------------------------------------
+class KeyWordSpec(BaseModel):
+    word: str
+    meaning: str
+
+
+class ChunkSpec(BaseModel):
+    english: str                  # 의미 단위(‘/’로 끊는) 영어 청크
+    korean: str                   # 그 청크의 직독직해(한글)
+    words: list[KeyWordSpec] = Field(default_factory=list)  # 이 청크의 핵심 단어
+
+
+class GrammarChipSpec(BaseModel):
+    point: str                    # 어법 이름(예: '과거분사 후치수식')
+    explanation: str = ""         # 짧은 설명
+    key: bool = False             # ★필수 어법 여부
+
+
+class LiteralSentenceSpec(BaseModel):
+    no: int
+    chunks: list[ChunkSpec] = Field(default_factory=list)
+    grammar: list[GrammarChipSpec] = Field(default_factory=list)
+    note: str = ""                # '쉽게' 요약 한 줄(선택)
+
+
+class LiteralBundle(BaseModel):
+    sentences: list[LiteralSentenceSpec] = Field(default_factory=list)

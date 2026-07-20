@@ -126,11 +126,18 @@ def test_render_a_and_b():
     assert "①" in ha                                # 어법 넘버링(원문자)
     assert "hl-p" in ha                             # 라벤더 하이라이트(담화표지)
     assert "Even the finest tea" in ha             # 함축 gloss 줄
-    hb = renderer.render_b_html([a], tagged=False)
-    assert "hbar" in hb and "①" in hb and "②" in hb and "③" in hb
-    hb_tagged = renderer.render_b_html([a], tagged=True)
-    assert "tok" in hb_tagged
-    print("PASS  렌더러 A/B HTML")
+    hb = renderer.render_b_html([a], brand="은아 T")
+    # 직독직해형: 주황 헤더 + made by 브랜드 + 2단 표 + 문법 태그 + 핵심 단어
+    assert "lbar" in hb and "직독직해" in hb and "made by 은아 T" in hb
+    assert "lit2" in hb and 'class="snum"' in hb
+    assert "★필수" in hb and "gtag" in hb           # 필수 어법 태그
+    assert "주격 관계대명사 that" in hb               # 문법 포인트명
+    assert "lit-words" in hb and "impermeable" in hb  # 핵심 단어
+    assert "쉽게" in hb                              # '쉽게' 요약 줄
+    assert '<span class="sl">/</span>' in hb         # 청크 구분 슬래시
+    # brand 를 비우면 made by 문구가 사라진다
+    assert 'class="made"' not in renderer.render_b_html([a], brand="")
+    print("PASS  렌더러 A/B HTML(직독직해형)")
 
 
 def test_render_back_page():
@@ -216,6 +223,48 @@ def test_overview_builder_llm_path():
     print("PASS  overview_builder LLM 경로(+자동 제목)")
 
 
+def test_literal_builder_llm_path():
+    payload = json.dumps({
+        "sentences": [{
+            "no": 1,
+            "chunks": [
+                {"english": "The cat", "korean": "그 고양이가",
+                 "words": [{"word": "cat", "meaning": "고양이"}]},
+                {"english": "caught the mouse", "korean": "그 쥐를 잡았다", "words": []},
+            ],
+            "grammar": [{"point": "과거분사 후치수식", "explanation": "명사 뒤에서 수식", "key": True}],
+            "note": "고양이가 쥐 잡은 거임",
+        }],
+    })
+    from src.worksheet import literal_builder
+    from src.worksheet.models import Analysis, Sentence, Token
+    client = _fake_client([payload])
+    a = Analysis(title_en="x", sentences=[
+        Sentence(index=1, lines=[[Token(text="The cat caught the mouse")]],
+                 translation="그 고양이가 그 쥐를 잡았다.")])
+    lits = literal_builder.build_literal(client, a)
+    assert lits and lits[0].no == 1
+    assert lits[0].chunks[0].english == "The cat" and lits[0].chunks[0].korean == "그 고양이가"
+    assert lits[0].chunks[0].words[0].word == "cat"
+    g = lits[0].grammar[0]
+    assert g.point == "과거분사 후치수식" and g.key is True   # ★필수
+    assert lits[0].note.startswith("고양이")
+    # 핵심 단어는 청크에서 문장 단위로 모인다
+    assert lits[0].words and lits[0].words[0].meaning == "고양이"
+    print("PASS  literal_builder LLM 경로(직독직해 청크/문법/단어)")
+
+
+def test_render_b_from_literal():
+    a = mock_analysis()
+    hb = renderer.render_b_html([a])
+    # 목 데이터의 직독직해가 표에 반영되는지
+    assert "made by" in hb and "직독직해" in hb
+    assert hb.count('class="lit-row"') == len(a.literal)   # 문장 수만큼 행
+    assert "5형식 need + O + to-v" in hb                    # 문법 포인트
+    assert "come in contact with" in hb                    # 핵심 단어
+    print("PASS  직독직해형 렌더(목 literal 반영)")
+
+
 # ---- 5. 웹앱 (test_client, 목 미리보기) ------------------------------------
 def test_webapp_worksheet_flow():
     import webapp
@@ -245,6 +294,8 @@ def run_all():
     test_pronoun_referent_in_refs()
     test_page_break_per_passage()
     test_overview_builder_llm_path()
+    test_literal_builder_llm_path()
+    test_render_b_from_literal()
     test_webapp_worksheet_flow()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 

@@ -12,7 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from . import analyzer, overview_builder, point_builder, renderer, splitter
+from . import (analyzer, literal_builder, overview_builder, point_builder,
+               renderer, splitter)
 from .models import Analysis, Sentence
 
 if TYPE_CHECKING:  # 타입 힌트 전용 (런타임 무거운 임포트 회피)
@@ -45,10 +46,12 @@ class Header:
 # ---------------------------------------------------------------------------
 def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
                  passage_summary: str = "", max_retries: int = 1,
-                 parallel: bool = True, with_back: bool = True) -> Analysis:
+                 parallel: bool = True, with_back: bool = True,
+                 with_literal: bool = False) -> Analysis:
     """지문 텍스트 하나를 문장 단위로 태깅+포인트 생성하여 Analysis 로.
 
     with_back=True 면 뒷페이지(어휘 리스트/논리 흐름도/쉬운 예시)도 함께 생성한다.
+    with_literal=True 면 직독직해(레이아웃 B: 청크·핵심 문법·핵심 단어)도 생성한다.
     """
     texts = splitter.split_sentences(raw_text)
 
@@ -82,6 +85,9 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
         # 영문 제목·한글 부제는 자동 생성값 우선(사용자 입력 없음)
         analysis.title_en = t_en or analysis.title_en
         analysis.title_ko = t_ko or analysis.title_ko
+    if with_literal:
+        analysis.literal = literal_builder.build_literal(
+            client, analysis, max_retries=max_retries)
     return analysis
 
 
@@ -104,8 +110,12 @@ def analyze_text_rule_only(raw_text: str, header: Header, tag: bool = True) -> A
 # 파일(PDF/사진) → Analysis 목록 (복수 지문 지원)
 # ---------------------------------------------------------------------------
 def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
-                            header: Header, max_retries: int = 1) -> list[Analysis]:
-    """한 파일에서 지문(들)을 추출해 각각 Analysis 로."""
+                            header: Header, max_retries: int = 1,
+                            layout: str = "A") -> list[Analysis]:
+    """한 파일에서 지문(들)을 추출해 각각 Analysis 로.
+
+    layout='B' 면 뒷페이지 대신 직독직해(청크·핵심 문법·핵심 단어)를 생성한다.
+    """
     from .. import analyze, extract  # 지연 임포트(pdfplumber/anthropic 무거움)
 
     if extract.is_image(src):
@@ -119,11 +129,13 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
             )
         pset = analyze.extract_passages(client, cfg, raw)
 
+    is_b = layout.upper() == "B"
     total = len(pset.passages)
     out: list[Analysis] = []
     for i, ex in enumerate(pset.passages, start=1):
         h = header.for_passage(ex, i, total)
-        out.append(analyze_text(client, ex.body, h, max_retries=max_retries))
+        out.append(analyze_text(client, ex.body, h, max_retries=max_retries,
+                                with_back=not is_b, with_literal=is_b))
     return out
 
 
@@ -145,9 +157,9 @@ def mock_analyses_for_file(src: Path, header: Header) -> list[Analysis]:
 # 렌더
 # ---------------------------------------------------------------------------
 def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
-                     tagged: bool = False, footer_note: str = "",
+                     brand: str = "은아 T", footer_note: str = "",
                      engine: str = "auto", footer_meta: str = "",
                      density: str = "auto") -> Path:
-    return renderer.render_pdf(analyses, out_path, layout=layout, tagged=tagged,
+    return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density)

@@ -1,77 +1,149 @@
-{#- 레이아웃 B : 대조표형 (lecture14_gateway.html 기준). 명세서 §7 -#}
+{#- 레이아웃 B : 직독직해형 (기존 6개 섹션 도구 '⑥ 직독직해' 디자인). 명세서 §7 -#}
 <!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>{{ analyses[0].title_en if analyses else '직독직해 대조표' }}</title>
+<title>{{ analyses[0].title_en if analyses else '직독직해' }}</title>
 <style>
-  :root{ --navy:#2f3f97; --red:#d23b3b; --blue:#3f6bd6; --gray:#7b8194;
-         --yellow-hl:#fbf3b8; --green-hl:#eef0b0; --ink:#1a1d24; }
-  @page{ size:A4 portrait; margin:14mm 12mm; }
+  :root{ --lit:#b45309; --line:#e5e7eb; --ink:#23272e; --muted:#6b7280; }
+  @page{ size:A4 portrait; margin:12mm 11mm; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
   body{
     font-family:'Nanum Gothic','NanumGothic','Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;
-    color:var(--ink); font-size:13px; font-weight:400;
+    color:var(--ink); font-size:12px; font-weight:400;
   }
   .sheet{ page-break-after:always; }
   .sheet:last-child{ page-break-after:auto; }
 
-  .hbar{ background:#5b616e; color:#fff; padding:9px 12px; border:1px solid #3d4250;
-         display:flex; align-items:baseline; gap:12px; }
-  .hbar .lec{ font-weight:800; font-size:15px; white-space:nowrap; }
-  .hbar .subj{ font-size:12.5px; font-weight:400; opacity:.96; }
-  .hbar .date{ margin-left:auto; font-size:11px; opacity:.85; white-space:nowrap; }
+  /* 주황 헤더 바 (⑥ 직독직해 made by 은아 T) */
+  .lbar{
+    background:var(--lit); color:#fff; border-radius:6px;
+    padding:8px 12px; display:flex; align-items:baseline; gap:9px; flex-wrap:wrap;
+  }
+  .lbar .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:19px; height:19px; border-radius:50%; background:#fff; color:var(--lit);
+    font-size:12px; font-weight:800; flex:none; align-self:center;
+  }
+  .lbar .tit{ font-size:15px; font-weight:800; white-space:nowrap; }
+  .lbar .made{ font-size:11px; font-weight:600; opacity:.95; }
+  .lbar .sub{ font-size:10px; font-weight:600; opacity:.92; margin-left:auto; }
+  .lbar .lec{
+    font-size:11px; font-weight:800; background:rgba(255,255,255,.22);
+    border-radius:9px; padding:1px 9px; white-space:nowrap; align-self:center;
+  }
 
-  table.gw{ width:100%; border-collapse:collapse; }
-  table.gw td{ border:1px solid #1a1d24; vertical-align:top; padding:10px 12px; }
-  td.no{ width:26px; text-align:center; border-right:1px solid #1a1d24;
-         font-size:15px; color:var(--navy); font-weight:700; padding:10px 4px; }
-  td.en{ line-height:2.15; font-size:14px; }
-  td.ko{ width:340px; line-height:1.75; font-size:12.5px; color:#2a2f3a; }
+  /* 2단 직독직해 표 */
+  table.lit2{ width:100%; border-collapse:collapse; table-layout:fixed; margin-top:8px; }
+  table.lit2 th{
+    background:var(--lit); color:#fff; font-size:10px; font-weight:700;
+    padding:4px 8px; text-align:left; width:50%; border:1px solid var(--lit);
+  }
+  table.lit2 td{ border:1px solid var(--line); padding:6px 9px; vertical-align:top; width:50%; }
+  .lit-row td{ border-bottom:1.5px solid #f0ddc0; }
+  .snum{
+    display:inline-block; background:var(--lit); color:#fff;
+    font-size:9px; font-weight:800; width:15px; height:15px; line-height:15px;
+    text-align:center; border-radius:50%; margin-right:5px; vertical-align:1px;
+  }
+  .lit-line{ line-height:1.65; }
+  .lit-line .sl{ color:#cbd5e1; padding:0 3px; font-weight:700; }
+  .lit-line .ck{ font-weight:600; }
 
-  /* 옵션: A 태깅을 얹을 때 사용하는 최소 스타일 */
-  .en .tok{ display:inline; margin-right:5px; }
-  .en .tok .w.hl-y{ background:var(--yellow-hl); }
-  .en .tok .w.hl-g{ background:var(--green-hl); }
-  .en .tok .w.hl-p{ background:#ddd6f3; }
-  .en .tok .w.underline{ text-decoration:underline; }
-  .en .tok .w.red{ color:var(--red); }
-  .en .tok .w.blue{ color:var(--blue); }
-  .en .tok .ann{ font-size:10px; color:var(--blue); font-weight:700; margin:0 2px; }
-  .en .tok .ann.red{ color:var(--red); }
-  .en .tok .ann.gray{ color:var(--gray); font-weight:400; }
-  .en .tok .ann.x{ color:var(--gray); font-weight:600; }
+  /* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 */
+  .ck0{ color:#1d4ed8; } .ck1{ color:#15803d; } .ck2{ color:#b45309; }
+  .ck3{ color:#7c3aed; } .ck4{ color:#be123c; } .ck5{ color:#0f766e; }
+  .ck6{ color:#a16207; } .ck7{ color:#4338ca; }
 
-  .footer{ margin-top:8px; text-align:right; font-size:10px; color:var(--gray); }
+  /* 문장별 핵심 문법 태그 */
+  .lit-gram{ margin-top:6px; padding-top:4px; border-top:1px dotted #f0ddc0; }
+  .gline{ display:block; margin-top:3px; line-height:1.4; color:#1d4ed8; }
+  .gtag{
+    display:inline-block; font-size:9.5px; font-weight:700;
+    color:inherit; border:1px solid currentColor; border-radius:3px;
+    padding:0 6px; margin-right:5px; background:transparent;
+  }
+  .gtag.keytag{ font-weight:800; }
+  .gexp{ font-size:9.8px; color:#23272e; }
+
+  /* 핵심 단어 */
+  .lit-words{ display:block; margin-top:5px; font-size:10px; color:#23272e; line-height:1.55; }
+  .lit-words b{ color:#111827; }
+
+  /* '쉽게' 요약 줄 */
+  .lit-note-row td{ background:#fffdf7; font-size:10.5px; color:#7c3a06; border-bottom:1.5px solid #f0ddc0; }
+  .lit-note-row .nlbl{
+    display:inline-block; background:#d97706; color:#fff;
+    font-size:9px; font-weight:800; padding:1px 8px; border-radius:9px; margin-right:6px;
+  }
+
+  .footer{ margin-top:9px; text-align:right; font-size:9.5px; color:var(--muted); }
 </style>
 </head>
 <body>
 {% for a in analyses %}
   <div class="sheet">
-    <div class="hbar">
-      {% if a.lecture_label %}<span class="lec">{{ a.lecture_label }}</span>{% endif %}
-      <span class="subj">{{ a.title_en }}{% if a.title_ko %} · {{ a.title_ko }}{% endif %}</span>
-      {% if a.date %}<span class="date">{{ a.date }}</span>{% endif %}
+    <div class="lbar">
+      <span class="num">⑥</span>
+      <span class="tit">직독직해</span>
+      {% if brand %}<span class="made">made by {{ brand }}</span>{% endif %}
+      {% if a.lecture_label %}<span class="lec">{{ a.lecture_label }}강</span>{% endif %}
+      <span class="sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>
-    <table class="gw">
-      {% for s in a.sentences %}
-      <tr>
-        <td class="no">{{ circled(s.index) }}</td>
-        <td class="en">
-          {% if tagged %}
-            {%- for line in s.lines -%}
-              {%- for t in line -%}
-                <span class="tok"><span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>{% if t.role %}<span class="ann">{{ t.role }}</span>{% endif %}{% if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif %}{% if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif %}</span>
-              {%- endfor -%}{{ ' ' }}
-            {%- endfor -%}
-          {% else %}
-            {{ s.text }}
-          {% endif %}
-        </td>
-        <td class="ko">{{ s.translation }}</td>
-      </tr>
-      {% endfor %}
+
+    {% set lits = a.literal if a.literal else [] %}
+    <table class="lit2">
+      <thead><tr><th class="lh-en">영어 원문 + 핵심 문법</th><th class="lh-ko">직독직해 + 핵심 단어</th></tr></thead>
+      <tbody>
+      {% if lits %}
+        {% for s in lits %}
+        <tr class="lit-row">
+          <td class="lit-en">
+            <span class="snum">{{ s.no }}</span>
+            <span class="lit-line">
+              {%- for c in s.chunks -%}
+                <span class="ck ck{{ loop.index0 % 8 }}">{{ c.english }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+              {%- endfor -%}
+            </span>
+            {% if s.grammar %}
+            <div class="lit-gram">
+              {% for g in s.grammar %}
+              <div class="gline{% if g.ci is not none %} ck{{ g.ci % 8 }}{% endif %}">
+                <span class="gtag{{ ' keytag' if g.key }}">{% if g.key %}★필수 {% endif %}{{ g.point }}</span>
+                {% if g.explanation %}<span class="gexp">{{ g.explanation }}</span>{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </td>
+          <td class="lit-ko">
+            <span class="lit-line">
+              {%- for c in s.chunks -%}
+                <span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+              {%- endfor -%}
+            </span>
+            {% if s.words %}
+            <span class="lit-words">
+              {%- for w in s.words -%}<b>{{ w.word }}</b> {{ w.meaning }}{% if not loop.last %} · {% endif %}{%- endfor -%}
+            </span>
+            {% endif %}
+          </td>
+        </tr>
+        {% if s.note %}
+        <tr class="lit-note-row"><td colspan="2"><span class="nlbl">쉽게</span>{{ s.note }}</td></tr>
+        {% endif %}
+        {% endfor %}
+      {% else %}
+        {# 직독직해 데이터가 없으면 원문/해석만이라도 대조 표기 #}
+        {% for s in a.sentences %}
+        <tr class="lit-row">
+          <td class="lit-en"><span class="snum">{{ s.index }}</span><span class="lit-line">{{ s.text }}</span></td>
+          <td class="lit-ko"><span class="lit-line">{{ s.translation }}</span></td>
+        </tr>
+        {% endfor %}
+      {% endif %}
+      </tbody>
     </table>
     {% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
   </div>

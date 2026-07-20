@@ -371,10 +371,9 @@ WORKSHEET_HTML = """
           <label class=lay>
             <span class=lh><input type=radio name=layout value=B> B. 직독직해형</span>
             <img src="{{ url_for('static', filename='layout_b.png') }}" alt="B형 예시">
-            <span class=ld>좌 영어 / 우 한글 대조표</span>
+            <span class=ld>영어 원문 + 문법 태그 / 직독직해 + 핵심 단어</span>
           </label>
         </div>
-        <label class=chk style="margin-top:10px"><input type=checkbox name=tagged value=1> B형에도 구문 태깅 얹기</label>
       </fieldset>
 
       <fieldset><legend>③ 태깅 강도</legend>
@@ -435,8 +434,8 @@ def worksheet_build_route():
     key = (None if "설정됨" in form_key else (form_key or None)) or cfg.api_key
 
     layout = "B" if (request.form.get("layout") == "B") else "A"
-    tagged = bool(request.form.get("tagged"))
     density = "auto"   # A형은 항상 자동 압축(한 지문 최대한 1페이지)
+    brand = cfg.design.brand or "은아 T"   # 직독직해 헤더 'made by …'
     kind = "포인트박스형" if layout == "A" else "직독직해형"
     strength = request.form.get("strength") or "full"
     if strength not in ("full", "key", "none"):
@@ -475,13 +474,13 @@ def worksheet_build_route():
             else:
                 analyses = ws_pipeline.build_analyses_for_file(
                     client, cfg, tmp, base_header,
-                    max_retries=cfg.processing.max_retries)
+                    max_retries=cfg.processing.max_retries, layout=layout)
             if custom_base:
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
-            ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
+            ws_pipeline.render_worksheet(analyses, out, layout=layout, brand=brand,
                                          footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
