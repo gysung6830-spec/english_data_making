@@ -36,14 +36,48 @@ def split_sentences(text: str) -> list[str]:
     return out
 
 
-def read_corpus_text(path: str | Path) -> str:
-    """PDF/텍스트 파일에서 텍스트를 뽑는다(이미지는 여기선 제외 — API 단계에서 처리)."""
+_HANGUL = re.compile(r"[가-힣ㄱ-ㅎㅏ-ㅣ]")
+_BOX = re.compile(r"[│┃❙▶◀■□●○◦·※★☆　。、〔〕「」『』【】]")
+_FLOAT_PUNCT = re.compile(r"(?<=\s)[.,;:]+(?=\s)")   # 양옆이 공백인 '떠 있는' 구두점
+_NUM_TOKEN = re.compile(r"(?<!\S)-?\d+(?:st|nd|rd|th)?-?(?!\S)")  # 홀로 선 숫자/페이지 번호
+
+
+def extract_english(text: str) -> str:
+    """평가원 워크북(영문+국문 2단 + 세로 저작권 워터마크)에서 영어 본문만 복원한다.
+
+    한글·워터마크 문자를 지우면 영어 조각이 남고, 조각을 이어 붙이면 원 문장이 복원된다.
+    (예: '... will be held 및\n개장 ... on June 1st.' → '... will be held on June 1st.')
+    """
+    t = _HANGUL.sub(" ", text)
+    t = _BOX.sub(" ", t)
+    t = t.replace("’", "'").replace("“", '"').replace("”", '"').replace("‘", " ")
+    t = re.sub(r"\s*\n\s*", " ", t)          # 줄바꿈 → 공백(조각 잇기)
+    # 워크북 머리말/안내 토큰 제거
+    t = re.sub(r"\bWORKBOOK\s*0?\b", " ", t)
+    t = re.sub(r"\bLearning Guide\b", " ", t)
+    # 페이지 표식('- 1 -')과 홀로 선 숫자 제거 (문장 내부 '1st' 등은 보존)
+    t = re.sub(r"-\s*\d+\s*-", " ", t)
+    t = _NUM_TOKEN.sub(" ", t)
+    t = _FLOAT_PUNCT.sub(" ", t)             # 국문 열에서 떨어져 나온 떠 있는 구두점 제거
+    t = re.sub(r"\s+([.,;:!?])", r"\1", t)   # 구두점 앞 공백 제거
+    t = re.sub(r"([!?.]){2,}", r"\1", t)     # 중복 문장부호 축약 (?? → ?)
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    return t
+
+
+def read_corpus_text(path: str | Path, english_only: bool = True) -> str:
+    """PDF/텍스트 파일에서 텍스트를 뽑는다(이미지는 여기선 제외 — API 단계에서 처리).
+
+    english_only=True 면 평가원 워크북의 국문·워터마크를 걷어내고 영어 본문만 남긴다.
+    """
     path = Path(path)
     if path.suffix.lower() == ".pdf":
-        return extract.extract_raw_text(path)
-    if path.suffix.lower() in (".txt", ".md"):
-        return path.read_text(encoding="utf-8", errors="ignore")
-    return ""
+        raw = extract.extract_raw_text(path)
+    elif path.suffix.lower() in (".txt", ".md"):
+        raw = path.read_text(encoding="utf-8", errors="ignore")
+    else:
+        return ""
+    return extract_english(raw) if english_only else raw
 
 
 def collect_sentences(corpus_dir: str | Path) -> list[str]:

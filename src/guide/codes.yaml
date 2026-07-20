@@ -80,8 +80,8 @@ categories:
       - label: "등호 (A = B · 재진술/정의)"
         codes:
           - {en: "in other words", ko: "즉, 다시 말해"}
-          - {en: "that is",        ko: "즉"}
-          - {en: "namely",         ko: "즉, 다시 말해"}
+          - {en: "that is",        ko: "즉",          strict: comma}   # 관계사절 오탐 방지
+          - {en: "namely",         ko: "즉, 다시 말해", strict: comma}
           - {en: "be equivalent to", ko: "A가 B에 상응하다"}
           - {en: "amount to",      ko: "A가 B와 마찬가지다"}
           - {en: "in essence",     ko: "본질적으로(=)"}

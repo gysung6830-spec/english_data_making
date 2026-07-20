@@ -16,6 +16,7 @@ class Code:
     ko: str
     dir: str = ""
     group: str = ""         # 소분류 라벨(방향 등)
+    strict: str = ""        # "comma" 면 담화표지로만 매칭(뒤에 쉼표 필요)
     pattern: re.Pattern = field(default=None, repr=False)
 
     def matches(self, sentence: str) -> str | None:
@@ -35,12 +36,14 @@ class Category:
     codes: list[Code]
 
 
-def _build_pattern(en: str) -> re.Pattern:
+def _build_pattern(en: str, strict: str = "") -> re.Pattern:
     """'be attributable to' / 'prefer A to B' 같은 코드 어구를 유연 매칭하는 정규식.
 
     - A / B 자리표시자는 '단어 몇 개'로 대체(비탐욕적).
     - 단어 사이 공백은 여러 공백/줄바꿈 허용.
     - be 동사는 활용형(is/are/was/were/been/being/be) 허용.
+    - strict=="comma": 담화표지(that is, namely 등)로만 매칭 — 뒤에 쉼표가 와야 함.
+      (관계사절 'a business that is ...' 같은 오탐 방지)
     """
     tokens = en.split()
     parts: list[str] = []
@@ -53,6 +56,9 @@ def _build_pattern(en: str) -> re.Pattern:
         else:
             parts.append(re.escape(tok))
     body = r"\s+".join(parts)
+    if strict == "comma":
+        # 앞: 문장 시작/쉼표/세미콜론/콜론 뒤,  뒤: 쉼표
+        return re.compile(r"(?:^|(?<=[,;:(]))\s*" + body + r"\s*,", re.IGNORECASE)
     return re.compile(r"\b" + body + r"\b", re.IGNORECASE)
 
 
@@ -68,14 +74,16 @@ def load_categories(path: str | Path | None = None) -> list[Category]:
             for g in raw_groups:
                 label = g.get("label", "")
                 for item in g.get("codes", []):
+                    strict = item.get("strict", "")
                     codes.append(Code(en=item["en"], ko=item.get("ko", ""),
-                                      dir=item.get("dir", ""), group=label,
-                                      pattern=_build_pattern(item["en"])))
+                                      dir=item.get("dir", ""), group=label, strict=strict,
+                                      pattern=_build_pattern(item["en"], strict)))
         else:
             for item in c.get("codes", []):
+                strict = item.get("strict", "")
                 codes.append(Code(en=item["en"], ko=item.get("ko", ""),
-                                  dir=item.get("dir", ""),
-                                  pattern=_build_pattern(item["en"])))
+                                  dir=item.get("dir", ""), strict=strict,
+                                  pattern=_build_pattern(item["en"], strict)))
         cats.append(Category(
             id=c["id"], title=c["title"], day=int(c.get("day", 0)),
             signal=c.get("signal", ""), misread=c.get("misread", ""),
