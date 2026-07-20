@@ -70,7 +70,9 @@
   .tok .w.hl-p{ background:var(--purple-hl); }
   .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
   .tok .w.red{ color:var(--red); font-weight:600; }
-  .tok .w.blue{ color:var(--blue); font-weight:600; }
+  /* 유의어/반의어가 달린 어휘 = 파란 '밑줄'(글씨색은 그대로; 어법이면 빨강 유지) */
+  .tok .w.vu{ text-decoration:underline; text-decoration-color:var(--blue);
+              text-decoration-thickness:1.5px; text-underline-offset:2.5px; }
   .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
                 overflow:visible; }
   /* 아래(unders) = 어법 번호(빨강, 크게) + 유의어(= 파랑)/반의어(↔ 회색) + 오답(X) */
@@ -168,7 +170,9 @@
                 <span class="tok">
                   {# 위: 문장 성분 라벨 #}
                   {%- if has_role %}<span class="over">{% if t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
-                  <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>
+                  {%- set _a = t.above or '' -%}{%- set _n = t.note or '' -%}
+                  {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
+                  <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}{% if is_vocab %} vu{% endif %}">{{ t.text }}</span>
                   {# 아래: 어법 번호 / 유의어·반의어 / 오답 #}
                   {%- if t.above or t.note or t.wrong -%}
                   <span class="unders">
