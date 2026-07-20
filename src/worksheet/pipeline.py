@@ -135,6 +135,7 @@ def mock_analyses_for_file(src: Path, header: Header) -> list[Analysis]:
 # ---------------------------------------------------------------------------
 def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      tagged: bool = False, footer_note: str = "",
-                     engine: str = "auto") -> Path:
+                     engine: str = "auto", footer_meta: str = "") -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, tagged=tagged,
-                               footer_note=footer_note, engine=engine)
+                               footer_note=footer_note, engine=engine,
+                               footer_meta=footer_meta)

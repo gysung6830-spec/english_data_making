@@ -12,8 +12,8 @@ from dataclasses import dataclass, field
 # 주석 종류 → CSS 클래스. 명세서 §3.2 색상 토큰과 대응.
 NOTE_KINDS = ("lbl", "red", "gray", "blue")
 
-# 하이라이트 종류
-HL_KINDS = ("y", "g")
+# 하이라이트 종류: y=노랑, g=연두, p=라벤더(담화표지/강조)
+HL_KINDS = ("y", "g", "p")
 
 
 @dataclass
@@ -57,7 +57,8 @@ class Sentence:
     index: int                                   # 문장 번호(1부터)
     lines: list[list[Token]] = field(default_factory=list)  # 줄바꿈 단위 토큰
     translation: str = ""                        # 한글 해석
-    badge: str | None = None                     # '순/삽','서','예시','결론' ...
+    badge: str | None = None                     # '빈','서','예시' 등 짧은 뱃지
+    gloss_en: str | None = None                  # 함축 의미 영어 한 줄(함 뱃지와 함께 표시)
     points: list[Point] = field(default_factory=list)       # 오른쪽 박스들
 
     @property

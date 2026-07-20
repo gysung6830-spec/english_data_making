@@ -471,7 +471,7 @@ def worksheet_build_route():
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_구문분석학습지.pdf"
             ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
-                                         footer_note=footer)
+                                         footer_note=footer, footer_meta=base_header.date)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
                             "files": [{"label": f"✏️ 학습지({layout}형)", "out": out.name}]})

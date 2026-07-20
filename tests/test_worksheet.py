@@ -117,23 +117,25 @@ def test_build_points_fallback_to_rules():
 # ---- 4. 렌더러 A/B ---------------------------------------------------------
 def test_render_a_and_b():
     a = mock_analysis()
-    ha = renderer.render_a_html([a], footer_note="(C)2026")
-    assert "ribbon" in ha and "pbox" in ha and "The Paradox of Choice" in ha
-    assert "offering(X)" in ha and "현재완료" in ha  # 오답형/주석 표시
+    ha = renderer.render_a_html([a], footer_note="(C)2026", footer_meta="분석서")
+    assert "ribbon" in ha and "pbox" in ha
+    assert "necessity of openness" in ha            # 제목
+    assert "what(X)" in ha and "designed(X)" in ha  # 오답형 표시
+    assert "내용 TMI" in ha and "어법 Point" in ha    # 두 종류 박스 캡션
+    assert "hl-p" in ha                             # 라벤더 하이라이트(담화표지)
+    assert "Even the finest tea" in ha             # 함축 gloss 줄
     hb = renderer.render_b_html([a], tagged=False)
     assert "hbar" in hb and "①" in hb and "②" in hb and "③" in hb
-    # tagged=False 면 태깅 클래스 대신 원문만
     hb_tagged = renderer.render_b_html([a], tagged=True)
     assert "tok" in hb_tagged
     print("PASS  렌더러 A/B HTML")
 
 
 def test_page_break_per_passage():
-    from weasyprint import HTML
+    # 지문마다 별도 .page 블록(page-break-after:always)으로 분리되는지 확인.
     a = mock_analysis()
     html = renderer.render_a_html([a, a, a])
-    pages = len(HTML(string=html).render().pages)
-    assert pages == 3, f"지문 3개 → 3페이지 예상, got {pages}"
+    assert html.count('class="page"') == 3
     print("PASS  지문당 페이지 분리")
 
 

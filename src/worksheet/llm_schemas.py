@@ -20,8 +20,8 @@ class TokenSpec(BaseModel):
     note: str = ""          # 문법 주석 (예: '현재분사'). 없으면 빈 문자열
     note_kind: Literal["lbl", "red", "gray", "blue"] = "lbl"
     wrong: str = ""         # 오답형 (예: 'direct(X)'). 없으면 빈 문자열
-    above: str = ""         # 토큰 위 메모 (예: 'it is 생략')
-    hl: Literal["", "y", "g"] = ""   # 하이라이트: 없음/노랑/연두
+    above: str = ""         # 토큰 위 메모 (예: 'it is 생략', '= infuse', '↔ decline')
+    hl: Literal["", "y", "g", "p"] = ""   # 하이라이트: 없음/노랑/연두/라벤더
     underline: bool = False
     color: Literal["", "red", "blue"] = ""
 
@@ -35,7 +35,8 @@ class SentenceAnalysis(BaseModel):
 
     lines: list[LineSpec] = Field(default_factory=list)
     translation: str = ""
-    badge: str = ""         # '순/삽','서','예시','결론' 등. 없으면 빈 문자열
+    badge: str = ""         # '빈'(빈출)·'서'(서술형) 등 짧은 뱃지. 없으면 빈 문자열
+    gloss_en: str = ""      # 함축 의미 영어 한 줄(맥락 없이 안 풀리는 문장에만). 없으면 빈 문자열
 
 
 # ---------------------------------------------------------------------------

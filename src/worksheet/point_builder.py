@@ -16,8 +16,9 @@ from .models import Point, Sentence
 
 SYSTEM = (
     "당신은 한국 고등학교 영어 학습지의 '포인트 박스'를 쓰는 전문 강사입니다. "
-    "문장마다 독해 Point(요지·대비·열거·지칭)와 어법 Point(시험에 나오는 어법)를 "
-    "간결한 카드로 만듭니다. 요청된 JSON 스키마로만 응답하세요."
+    "문장마다 '내용 TMI'(그 문장 뜻을 쉬운 반말로 풀어주는 독해 카드)와 "
+    "'어법 Point'(시험에 나오는 어법을 ①②로 짚는 카드)를 간결하게 만듭니다. "
+    "요청된 JSON 스키마로만 응답하세요."
 )
 
 
@@ -49,7 +50,8 @@ def rule_only_points(sentence: Sentence) -> list[Point]:
         return []
     lis = "".join(f"<li>{escape(f)}</li>" for f in facts[:5])
     body = f"<ul>{lis}</ul>"
-    return [Point(kind="grammar", caption=f"{sentence.index}번 문장 어법 Point", body_html=body)]
+    return [Point(kind="grammar", caption=f"{sentence.index}번 문장 어법 Point",
+                  body_html=body)]
 
 
 def build_points_prompt(sentence: Sentence, passage_summary: str, strength: str) -> str:
@@ -57,21 +59,23 @@ def build_points_prompt(sentence: Sentence, passage_summary: str, strength: str)
     fact_block = ""
     if facts:
         fact_block = "\n[analyzer 가 잡은 어법 요소]\n- " + "\n- ".join(facts) + "\n"
-    limit = "핵심 1개(어법이 뚜렷하면 어법 우선)" if strength == "key" else "1~2개(독해/어법)"
+    limit = "핵심 1개(어법이 뚜렷하면 어법 우선)" if strength == "key" else "1~2개(내용 TMI/어법)"
+    n = sentence.index
     return (
-        f"다음은 지문의 {sentence.index}번 문장입니다.\n\n"
+        f"다음은 지문의 {n}번 문장입니다.\n\n"
         f"[문장]\n{sentence.text}\n"
         f"[해석]\n{sentence.translation}\n"
         + fact_block +
         (f"\n[지문 요지]\n{passage_summary}\n" if passage_summary else "") +
         "\n[작성 규칙]\n"
         f"- 이 문장의 포인트 카드를 {limit} 만드세요. 포인트가 약하면 빈 배열도 허용.\n"
-        "- kind: 'reading'(독해) 또는 'grammar'(어법).\n"
-        "- caption: 'N번 문장 독해 Point' 또는 'N번 문장 어법 Point' 형식.\n"
-        "- body_html: 간결한 설명. 핵심어는 <b>…</b>, 목록은 <ul><li>…</li></ul>, "
-        "비교표가 필요하면 <table> 사용. 과한 마크업·인라인 style 은 넣지 마세요.\n"
-        "- 어법 Point 는 위 analyzer 요소를 근거로, 왜 시험에 나오는지/무엇이 오답인지 짚으세요.\n"
-        "- 독해 Point 는 요지·대비(A↔B)·열거·지칭 대상 등 '내용 이해'에 도움이 되는 것만.\n"
+        "- kind: 'reading'(내용 TMI) 또는 'grammar'(어법 Point).\n"
+        f"- caption: 내용 TMI 는 '{n}번 문장 내용 TMI', 어법 Point 는 '{n}번 문장 어법 Point' 로 정확히.\n"
+        "- 내용 TMI(reading): 그 문장이 '무슨 말인지'를 학생 눈높이의 친근한 반말('~야','~거야')로 "
+        "1~2문장 풀어주세요. 필요하면 대비(A↔B)·비유를 곁들이되 과하지 않게. body_html 은 보통 평문.\n"
+        "- 어법 Point(grammar): 위 analyzer 요소를 근거로 시험 어법을 짚으세요. "
+        "body_html 은 '① 포인트명'으로 시작하고 근거를 <ul><li>…</li></ul> 로, 오답형은 <b>form(X)</b> 로, "
+        "동치 구조는 '= …' 로. 핵심어는 <b>…</b>. 과한 마크업·인라인 style 금지.\n"
     )
 
 

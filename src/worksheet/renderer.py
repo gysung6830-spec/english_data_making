@@ -38,10 +38,15 @@ def _as_list(analyses) -> list[Analysis]:
     return list(analyses)
 
 
-def render_a_html(analyses, footer_note: str = "") -> str:
-    """레이아웃 A(분석 학습지형) HTML."""
+def render_a_html(analyses, footer_note: str = "", footer_meta: str = "") -> str:
+    """레이아웃 A(분석 학습지형) HTML.
+
+    footer_note : 하단 우측 저작권 문구.
+    footer_meta : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
+    """
     tmpl = _env.get_template("worksheet_a.html.j2")
-    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note)
+    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
+                       footer_meta=footer_meta)
 
 
 def render_b_html(analyses, footer_note: str = "", tagged: bool = False) -> str:
@@ -51,10 +56,10 @@ def render_b_html(analyses, footer_note: str = "", tagged: bool = False) -> str:
 
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",
-                tagged: bool = False) -> str:
+                tagged: bool = False, footer_meta: str = "") -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, tagged=tagged)
-    return render_a_html(analyses, footer_note=footer_note)
+    return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta)
 
 
 # ---------------------------------------------------------------------------
@@ -91,11 +96,12 @@ def _pdf_weasyprint(html: str, out_path: Path) -> None:
 
 def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                footer_note: str = "", tagged: bool = False,
-               engine: str = "auto") -> Path:
+               engine: str = "auto", footer_meta: str = "") -> Path:
     """Analysis → PDF. engine: 'auto' | 'playwright' | 'weasyprint'."""
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_html(analyses, layout=layout, footer_note=footer_note, tagged=tagged)
+    html = render_html(analyses, layout=layout, footer_note=footer_note, tagged=tagged,
+                       footer_meta=footer_meta)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):

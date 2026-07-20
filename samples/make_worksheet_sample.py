@@ -14,6 +14,7 @@ from src.worksheet.mock import mock_analysis
 
 ROOT = Path(__file__).resolve().parent.parent
 FOOTER = "(C)2026.김은아영어연구소.All rights reserved"
+FOOTER_META = "2025년 06월 고2 모의고사 분석서"
 
 
 def build(out_dir: Path | None = None) -> list[Path]:
@@ -23,7 +24,7 @@ def build(out_dir: Path | None = None) -> list[Path]:
 
     made: list[Path] = []
     pa = out_dir / "sample_worksheet_A.pdf"
-    renderer.render_pdf([a], pa, layout="A", footer_note=FOOTER)
+    renderer.render_pdf([a], pa, layout="A", footer_note=FOOTER, footer_meta=FOOTER_META)
     made.append(pa)
 
     pb = out_dir / "sample_worksheet_B.pdf"
@@ -31,7 +32,8 @@ def build(out_dir: Path | None = None) -> list[Path]:
     made.append(pb)
 
     (out_dir / "sample_worksheet_A.html").write_text(
-        renderer.render_a_html([a], footer_note=FOOTER), encoding="utf-8")
+        renderer.render_a_html([a], footer_note=FOOTER, footer_meta=FOOTER_META),
+        encoding="utf-8")
     (out_dir / "sample_worksheet_B.html").write_text(
         renderer.render_b_html([a], tagged=True, footer_note=FOOTER), encoding="utf-8")
     return made

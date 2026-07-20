@@ -1,4 +1,4 @@
-{#- 레이아웃 A : 분석 학습지형 (passage20_analysis.html 기준). 명세서 §3 -#}
+{#- 레이아웃 A : 분석 학습지형 (실제 참고 디자인 반영). 명세서 §3 -#}
 <!doctype html>
 <html lang="ko">
 <head>
@@ -6,98 +6,108 @@
 <title>{{ analyses[0].title_en if analyses else '구문 분석 학습지' }}</title>
 <style>
   :root{
-    --navy:#2f3f97; --red:#d23b3b; --blue:#3f6bd6; --gray:#7b8194;
-    --yellow-hl:#fbf3b8; --green-hl:#eef0b0; --ink:#1f2430; --line:#d7dbe4;
+    --navy:#2e3a8c; --red:#e0473c; --blue:#3f6bd6; --gray:#8a90a0; --ink:#20242e;
+    --yellow-hl:#fdf3b0; --green-hl:#e7eeb0; --purple-hl:#ddd6f3;
+    --page-bg:#e9f1fc; --line:#cdd5e3; --box-red:#e2b6b1; --tmi-line:#d3dae7;
   }
-  @page{ size:A4 portrait; margin:14mm 12mm; }
+  @page{ size:A4 portrait; margin:10mm 9mm; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
   body{
     font-family:'Malgun Gothic','Apple SD Gothic Neo','Nanum Gothic',system-ui,sans-serif;
     color:var(--ink); font-size:13px; line-height:1.5; font-weight:400;
   }
-  .sheet{ page-break-after:always; }
-  .sheet:last-child{ page-break-after:auto; }
+  .page{ background:var(--page-bg); border-radius:22px; padding:20px 22px 30px; position:relative;
+         page-break-after:always; }
+  .page:last-child{ page-break-after:auto; }
 
-  /* ---- 벤 리본 + 제목 ---- */
-  .ribbon{ display:flex; align-items:stretch; gap:14px; margin-bottom:14px; }
-  .ribbon .box{
-    position:relative; background:var(--navy); color:#fff; font-weight:800;
-    min-width:64px; padding:12px 14px 16px; text-align:center; border-radius:3px;
-    font-size:22px; line-height:1;
-  }
-  .ribbon .box .cap{ display:block; font-size:10px; font-weight:600; opacity:.85; margin-bottom:4px; }
-  .ribbon .box::after{  /* 하단 톱니 */
-    content:""; position:absolute; left:0; right:0; bottom:-7px; height:8px;
-    background:
-      linear-gradient(135deg, var(--navy) 50%, transparent 50%) 0 0/8px 8px repeat-x,
-      linear-gradient(-135deg, var(--navy) 50%, transparent 50%) 4px 0/8px 8px repeat-x;
-  }
-  .titles{ display:flex; flex-direction:column; justify-content:center; }
-  .titles .meta{ font-size:11px; color:var(--gray); font-weight:600; margin-bottom:2px; }
-  .titles h1{ font-size:19px; font-weight:800; margin:0; line-height:1.25; }
-  .titles .ko{ font-size:13px; color:#40465a; margin-top:2px; }
+  /* ---- 제비꼬리 리본 + 제목 ---- */
+  .head{ display:flex; align-items:flex-start; gap:16px; margin:0 0 12px; min-height:74px; }
+  .ribbon{ position:relative; width:74px; flex:0 0 74px; background:var(--navy); color:#fff;
+           text-align:center; padding:8px 4px 20px; margin-top:-4px;
+           box-shadow:inset 0 0 0 2px rgba(255,255,255,.28); }
+  .ribbon .ym{ font-size:10.5px; font-weight:600; letter-spacing:-.5px; opacity:.95; }
+  .ribbon .no{ font-size:32px; font-weight:800; line-height:1.05; margin-top:2px; }
+  .ribbon::after{ /* 하단 제비꼬리 V홈 (page-bg 삼각형이 아래 가운데를 파냄) */
+    content:""; position:absolute; left:0; bottom:-1px; width:0; height:0;
+    border-left:37px solid transparent; border-right:37px solid transparent;
+    border-bottom:15px solid var(--page-bg); }
+  .titles{ padding-top:12px; }
+  .titles h1{ font-size:19px; font-weight:800; margin:0; line-height:1.22; color:#1c2030; }
+  .titles .ko{ font-size:14px; color:#4a5064; margin-top:3px; font-weight:600; }
 
   /* ---- 문장 행 ---- */
-  .row{ display:grid; grid-template-columns:1fr 272px; gap:16px; margin:10px 0 4px;
-        padding-top:8px; border-top:1px solid var(--line); page-break-inside:avoid; }
-  .analysis{ display:grid; grid-template-columns:30px 1fr; gap:8px; }
-  .num{ background:var(--navy); color:#fff; font-weight:800; font-size:13px; text-align:center;
-        border-radius:3px; height:24px; line-height:24px; }
-  .num.tg{ height:auto; padding:3px 0 5px; line-height:1.1; }
-  .num .badge{ display:block; font-size:9px; font-weight:700; margin-top:2px;
-               background:#fff; color:var(--navy); border-radius:2px; padding:1px 2px; }
+  .row{ display:grid; grid-template-columns:1fr 250px; gap:14px; margin:6px 0;
+        padding-top:8px; page-break-inside:avoid; }
+  .analysis{ display:grid; grid-template-columns:26px 1fr; gap:6px; }
+  .num{ color:var(--navy); font-weight:800; font-size:15px; line-height:1.4; }
 
-  /* ---- 영문 라인 + 토큰 주석 ---- */
-  .en{ }
-  .en .line{ margin-bottom:30px; }
-  .en .line:last-child{ margin-bottom:12px; }
-  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 7px 0 0;
-        position:relative; }
-  .tok .w{ font-size:14.5px; white-space:nowrap; }
+  /* 뱃지(함/빈/서) + 함축 영어줄 */
+  .bdg{ display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
+        background:var(--navy); color:#fff; font-size:9.5px; font-weight:700; border-radius:3px;
+        padding:0 2px; vertical-align:1px; margin-right:3px; }
+  .bdg.r{ background:var(--red); }
+  .gloss{ margin:0 0 3px; font-size:11px; color:var(--blue); font-weight:600;
+          background:var(--yellow-hl); display:inline-block; padding:1px 5px; border-radius:3px; }
+
+  /* ---- 영문 라인 + 토큰 주석 ----
+     토큰마다 고정 높이의 '위 메모(.over)' 슬롯을 두어 단어 상단이 항상 정렬되게 하고,
+     '아래 주석(.unders)'은 흐름에 남겨 줄 높이가 자동으로 확보되게 한다. --------*/
+  .en{ margin-top:2px; }
+  .en .line{ margin-bottom:12px; }
+  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 6px 6px 0; }
+  .tok .over{ display:block; height:11px; font-size:9px; color:var(--gray); line-height:1.1;
+              white-space:nowrap; }
+  .tok .over.blue{ color:var(--blue); }
+  .tok .w{ display:block; font-size:15px; line-height:1.3; white-space:nowrap; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
+  .tok .w.hl-p{ background:var(--purple-hl); }
   .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
-  .tok .w.red{ color:var(--red); }
-  .tok .w.blue{ color:var(--blue); }
-  .above{ display:block; font-size:9px; color:var(--gray); font-style:italic; line-height:1.1;
-          margin-bottom:1px; }
-  .ann{ display:block; font-size:10px; line-height:1.15; margin-top:1px; white-space:nowrap; }
-  .ann.lbl{ color:var(--blue); font-weight:800; font-size:11px; }
+  .tok .w.red{ color:var(--red); font-weight:600; }
+  .tok .w.blue{ color:var(--blue); font-weight:600; }
+  .unders{ display:block; }
+  .ann{ display:block; font-size:9.5px; line-height:1.18; white-space:nowrap; }
+  .ann.lbl{ color:var(--blue); font-weight:800; }
   .ann.red{ color:var(--red); font-weight:600; }
   .ann.blue{ color:var(--blue); font-weight:600; }
   .ann.gray{ color:var(--gray); }
   .ann.x{ color:var(--gray); font-weight:600; }
 
-  .kotr{ margin-top:6px; padding-left:2px; color:#3a4152; font-size:12.5px; }
-  .kotr::before{ content:"→ "; color:var(--gray); }
+  .kotr{ margin-top:4px; color:#5b6172; font-size:12.5px; line-height:1.6; }
 
-  /* ---- 포인트 박스 ---- */
-  .points{ display:flex; flex-direction:column; gap:8px; }
-  .pbox{ border:1.5px solid var(--blue); border-radius:6px; padding:7px 9px; font-size:11.5px;
-         line-height:1.45; }
-  .pbox.g{ border-color:var(--red); }
-  .pbox .cap{ font-weight:800; font-size:11px; margin-bottom:4px; color:var(--blue); }
+  /* ---- 우측 박스 : 어법 Point(빨강) / 내용 TMI(남색) ---- */
+  .points{ display:flex; flex-direction:column; gap:10px; }
+  .pbox{ background:#fff; border:1.5px solid var(--tmi-line); border-radius:12px; padding:9px 11px 10px;
+         font-size:11.5px; line-height:1.5; }
+  .pbox .cap{ display:block; text-align:center; font-weight:800; font-size:11.5px; margin-bottom:6px; }
+  /* 내용 TMI = 남색 알약 헤더 */
+  .pbox.tmi .cap{ background:var(--navy); color:#fff; border-radius:20px; padding:3px 0; }
+  /* 어법 Point = 빨강 테두리 + 빨강 헤더 */
+  .pbox.g{ border-color:var(--box-red); }
   .pbox.g .cap{ color:var(--red); }
   .pbox b, .pbox strong{ font-weight:800; }
-  .pbox ul{ margin:2px 0 2px 0; padding-left:16px; }
+  .pbox ul{ margin:2px 0; padding-left:15px; }
   .pbox li{ margin:1px 0; }
-  .pbox .mtab, .pbox table.mtab{ }
-  .pbox table{ border-collapse:collapse; width:100%; margin-top:3px; font-size:10.5px; }
+  .pbox table{ border-collapse:collapse; width:100%; margin-top:4px; font-size:10.5px; }
   .pbox td, .pbox th{ border:1px solid var(--line); padding:2px 4px; text-align:left; }
-  .pbox th{ background:#f2f4fb; font-weight:700; }
-  .footer{ margin-top:10px; text-align:right; font-size:10px; color:var(--gray); }
+  .pbox th{ background:#eef1fb; font-weight:700; }
+
+  .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
+  .foot .dot{ color:#f2c14e; }
+  .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
+  .copyr{ position:absolute; right:22px; bottom:10px; font-size:9.5px; color:var(--gray); }
 </style>
 </head>
 <body>
 {% for a in analyses %}
-  <div class="sheet">
-    <div class="ribbon">
-      <div class="box">
-        {% if a.lecture_label %}<span class="cap">{{ a.date }}</span>{{ a.lecture_label }}{% else %}★{% endif %}
+  <div class="page">
+    <div class="head">
+      <div class="ribbon">
+        <div class="ym">{{ a.date or '&nbsp;' }}</div>
+        <div class="no">{{ a.lecture_label or '★' }}</div>
       </div>
       <div class="titles">
-        {% if a.date and not a.lecture_label %}<div class="meta">{{ a.date }}</div>{% endif %}
         <h1>{{ a.title_en }}</h1>
         {% if a.title_ko %}<div class="ko">{{ a.title_ko }}</div>{% endif %}
       </div>
@@ -106,20 +116,24 @@
     {% for s in a.sentences %}
     <div class="row">
       <div class="analysis">
-        <div class="num{% if s.badge %} tg{% endif %}">
-          {{ s.index }}{% if s.badge %}<span class="badge">{{ s.badge }}</span>{% endif %}
-        </div>
+        <div class="num">{{ "%02d"|format(s.index) }}</div>
         <div>
+          {% if s.gloss_en %}<div><span class="bdg">함</span><span class="gloss">{{ s.gloss_en }}</span></div>{% endif %}
           <div class="en">
             {% for line in s.lines %}
             <div class="line">
+              {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span>{% endif -%}
               {%- for t in line -%}
                 <span class="tok">
-                  {%- if t.above %}<span class="above">{{ t.above }}</span>{% endif -%}
+                  <span class="over{% if t.color == 'blue' %} blue{% endif %}">{{ t.above or '' }}</span>
                   <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>
-                  {%- if t.role %}<span class="ann lbl">{{ t.role }}</span>{% endif -%}
-                  {%- if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif -%}
-                  {%- if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif -%}
+                  {%- if t.role or t.note or t.wrong -%}
+                  <span class="unders">
+                    {%- if t.role %}<span class="ann lbl">{{ t.role }}</span>{% endif -%}
+                    {%- if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif -%}
+                    {%- if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif -%}
+                  </span>
+                  {%- endif -%}
                 </span>
               {%- endfor -%}
             </div>
@@ -130,8 +144,8 @@
       </div>
       <div class="points">
         {% for p in s.points %}
-        <div class="pbox{% if p.is_grammar %} g{% endif %}">
-          <div class="cap">{{ p.caption }}</div>
+        <div class="pbox {{ 'g' if p.is_grammar else 'tmi' }}">
+          <span class="cap">{{ p.caption }}</span>
           <div class="body">{{ p.body_html | safe }}</div>
         </div>
         {% endfor %}
@@ -139,7 +153,8 @@
     </div>
     {% endfor %}
 
-    {% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
+    <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
+    {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
   </div>
 {% endfor %}
 </body>
