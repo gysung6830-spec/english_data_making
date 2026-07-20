@@ -59,11 +59,11 @@
   .en .line{ margin-bottom:9px; }          /* 한 문장 안의 줄 사이 호흡 */
   .en .line:last-of-type{ margin-bottom:0; }
   .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 1.5px; }
+  /* 위(over) = 문장 성분 라벨(S·V·O 등) */
   .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto 3px;
-              height:0; overflow:visible; font-size:7.5px; color:var(--gray); line-height:1.15;
-              white-space:nowrap; text-align:center; }
-  .tok .over.blue{ color:var(--blue); }
-  .en .line.po .tok .over{ height:10px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
+              height:0; overflow:visible; line-height:1.15; white-space:nowrap; text-align:center; }
+  .tok .over .lbl{ color:var(--blue); font-weight:800; font-size:8.5px; }
+  .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
   .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:nowrap; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
@@ -73,11 +73,11 @@
   .tok .w.blue{ color:var(--blue); font-weight:600; }
   .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
                 overflow:visible; }
-  /* 주석은 폭0(flex)로 단어 칸을 넓히지 않음(한 줄). */
+  /* 아래(unders) = 어법 번호(빨강) + 유의어(= 파랑)/반의어(↔ 회색) + 오답(X) */
   .ann{ font-size:7.5px; line-height:1.2; white-space:nowrap; text-align:center; }
-  .ann.lbl{ color:var(--blue); font-weight:800; }
-  .ann.red{ color:var(--red); font-weight:600; }
-  .ann.blue{ color:var(--blue); font-weight:600; }
+  .ann.red{ color:var(--red); font-weight:700; }
+  .ann.syn{ color:var(--blue); }
+  .ann.ant{ color:var(--gray); }
   .ann.gray{ color:var(--gray); }
   .ann.x{ color:var(--gray); font-weight:600; }
 
@@ -159,17 +159,19 @@
         <div>
           <div class="en">
             {% for line in s.lines %}
-            {%- set has_over = line | selectattr('above') | list -%}
-            <div class="line{% if has_over %} po{% endif %}">
+            {%- set has_role = line | selectattr('role') | list -%}
+            <div class="line{% if has_role %} po{% endif %}">
               {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span> {% endif -%}
               {%- for t in line -%}
                 <span class="tok">
-                  {%- if has_over %}<span class="over{% if t.color == 'blue' %} blue{% endif %}">{{ t.above or '' }}</span>{% endif -%}
+                  {# 위: 문장 성분 라벨 #}
+                  {%- if has_role %}<span class="over">{% if t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
                   <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}">{{ t.text }}</span>
-                  {%- if t.role or t.note or t.wrong -%}
+                  {# 아래: 어법 번호 / 유의어·반의어 / 오답 #}
+                  {%- if t.above or t.note or t.wrong -%}
                   <span class="unders">
-                    {%- if t.role %}<span class="ann lbl">{{ t.role }}</span>{% endif -%}
-                    {%- if t.note %}<span class="ann {{ t.note_kind }}">{{ t.note }}</span>{% endif -%}
+                    {%- if t.above %}<span class="ann {{ 'syn' if t.above.startswith('=') else 'ant' }}">{{ t.above }}</span>{% endif -%}
+                    {%- if t.note %}<span class="ann {% if t.note_kind == 'red' %}red{% elif t.note.startswith('=') %}syn{% elif t.note.startswith('↔') %}ant{% else %}gray{% endif %}">{{ t.note }}</span>{% endif -%}
                     {%- if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif -%}
                   </span>
                   {%- endif -%}

@@ -142,6 +142,7 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "note=어법 이름(짧게, 예 '주격 관계대명사','수동태','to부정사의 의미상 주어'), note_kind='red', "
         "color='red' 로 답니다. 인라인 번호((1)(2)…)와 오른쪽 어법 Point 박스는 코드가 자동으로 만듭니다.\n"
         "- 유의어/반의어 note 는 '= 유의어' 또는 '↔ 반의어'(note_kind='gray'), 단어는 파랑.\n"
+        "  (렌더 규칙: 성분 라벨 role 은 단어 '위'에, 어법 번호·유의어/반의어는 단어 '아래'에 자동 배치됨)\n"
         "- 지칭(대명사·지시어)은 '본문 주석'이 아니라 refs 로 보냅니다: it, this, that, these, those, "
         "they, them, he, she, one, such 등은 refs 배열에 'it → the teabag' 형식으로 담고, "
         "토큰 note 에는 넣지 마세요.\n"

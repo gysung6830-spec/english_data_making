@@ -61,7 +61,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
             _G("(For the teabag", "to부정사의 의미상 주어"),
             _G("to work),", "to부정사(부사적)"),
             _T("it"), _T("needs to be"),
-            _T("porous.", color="blue", above="↔ non-porous", note="= permeable"),
+            _T("porous.", color="blue", above="= permeable", note="↔ non-porous"),
         ]],
         translation="티백이 작용하려면, 그것은 구멍이 있어야 한다.",
         refs=["it → the teabag(티백)"],
@@ -83,7 +83,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         lines=[[
             _T("(In our lives too),"), _T("we"), _T("cannot"),
             _T("survive", role="V①"), _T("and", role="병렬"),
-            _T("thrive", role="V②", color="blue", above="↔ decline", note="= flourish"),
+            _T("thrive", role="V②", color="blue", above="= flourish", note="↔ decline"),
             _T("(in isolation).", note="고립된 채로"),
         ]],
         translation="우리 삶에서도 마찬가지로, 우리는 고립된 채로는 살아갈 수도 성장할 수도 없다.",
