@@ -131,12 +131,45 @@ def test_render_a_and_b():
     print("PASS  렌더러 A/B HTML")
 
 
+def test_render_back_page():
+    a = mock_analysis()
+    ha = renderer.render_a_html([a])
+    assert 'class="bhead"' in ha                       # 뒷페이지 존재
+    assert 'class="vtab"' in ha and 'class="flow"' in ha and 'class="outline"' in ha
+    assert "impermeable" in ha and "flourish" in ha    # 어휘/유의어
+    assert "비유 제시" in ha                             # 흐름도 단계
+    # 뒷페이지 데이터가 없는 Analysis 는 back 페이지를 만들지 않는다
+    from src.worksheet.models import Analysis
+    plain = Analysis(title_en="x", sentences=a.sentences)
+    assert 'class="bhead"' not in renderer.render_a_html([plain])
+    print("PASS  뒷페이지(어휘/흐름도/예시)")
+
+
 def test_page_break_per_passage():
-    # 지문마다 별도 .page 블록(page-break-after:always)으로 분리되는지 확인.
+    # 지문마다 앞면 .head + 뒷면 .bhead 페이지로 분리되는지 확인.
     a = mock_analysis()
     html = renderer.render_a_html([a, a, a])
-    assert html.count('class="page"') == 3
-    print("PASS  지문당 페이지 분리")
+    assert html.count('class="head"') == 3      # 앞면 3개
+    assert html.count('class="bhead"') == 3     # 뒷면 3개
+    print("PASS  지문당 페이지 분리(앞/뒤)")
+
+
+def test_overview_builder_llm_path():
+    payload = json.dumps({
+        "vocab": [{"word": "thrive", "meaning": "번성하다", "syn": "flourish",
+                   "ant": "decline", "sent": 6}],
+        "flow": [{"label": "도입", "text": "화제 제시", "sentences": "1"}],
+        "outline": [{"label": "①", "easy": "궁금하면 스스로 파고드는 거랑 같음"}],
+    })
+    from src.worksheet import overview_builder
+    from src.worksheet.models import Analysis, Sentence
+    client = _fake_client([payload])
+    a = Analysis(title_en="x", sentences=[Sentence(index=1, lines=[[Token(text="Hi")]])])
+    vocab, flow, outline = overview_builder.build_overview(client, a)
+    assert vocab and vocab[0].word == "thrive" and vocab[0].syn == "flourish"
+    assert flow and flow[0].label == "도입"
+    assert outline and outline[0].label == "①"
+    print("PASS  overview_builder LLM 경로")
 
 
 # ---- 5. 웹앱 (test_client, 목 미리보기) ------------------------------------
@@ -162,7 +195,9 @@ def run_all():
     test_build_points_llm_path()
     test_build_points_fallback_to_rules()
     test_render_a_and_b()
+    test_render_back_page()
     test_page_break_per_passage()
+    test_overview_builder_llm_path()
     test_webapp_worksheet_flow()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 

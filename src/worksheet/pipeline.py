@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from . import analyzer, point_builder, renderer, splitter
+from . import analyzer, overview_builder, point_builder, renderer, splitter
 from .models import Analysis, Sentence
 
 if TYPE_CHECKING:  # 타입 힌트 전용 (런타임 무거운 임포트 회피)
@@ -45,8 +45,11 @@ class Header:
 # ---------------------------------------------------------------------------
 def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
                  passage_summary: str = "", max_retries: int = 1,
-                 parallel: bool = True) -> Analysis:
-    """지문 텍스트 하나를 문장 단위로 태깅+포인트 생성하여 Analysis 로."""
+                 parallel: bool = True, with_back: bool = True) -> Analysis:
+    """지문 텍스트 하나를 문장 단위로 태깅+포인트 생성하여 Analysis 로.
+
+    with_back=True 면 뒷페이지(어휘 리스트/논리 흐름도/쉬운 예시)도 함께 생성한다.
+    """
     texts = splitter.split_sentences(raw_text)
 
     def one(i_text):
@@ -65,13 +68,17 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
     else:
         sentences = [one(it) for it in items]
 
-    return Analysis(
+    analysis = Analysis(
         title_en=header.title_en,
         title_ko=header.title_ko,
         lecture_label=header.lecture_label,
         date=header.date,
         sentences=sentences,
     )
+    if with_back:
+        analysis.vocab, analysis.flow, analysis.outline = overview_builder.build_overview(
+            client, analysis, max_retries=max_retries)
+    return analysis
 
 
 def analyze_text_rule_only(raw_text: str, header: Header, tag: bool = True) -> Analysis:

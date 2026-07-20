@@ -50,3 +50,31 @@ class PointSpec(BaseModel):
 
 class PointBundle(BaseModel):
     points: list[PointSpec] = Field(default_factory=list)
+
+
+# ---------------------------------------------------------------------------
+# overview_builder: 뒷페이지(어휘 리스트 / 논리 흐름도 / 쉬운 예시 목차)
+# ---------------------------------------------------------------------------
+class VocabSpec(BaseModel):
+    word: str
+    meaning: str
+    syn: str = ""            # 유의어(쉼표 구분). 없으면 '—'
+    ant: str = ""            # 반의어(쉼표 구분). 없으면 '—'
+    sent: int = 0            # 등장 문장 번호(없으면 0)
+
+
+class FlowSpec(BaseModel):
+    label: str               # '도입','전개','비유','원리','주장','결론' 등
+    text: str                # 개조식 내용
+    sentences: str = ""      # 관련 문장 번호(예: '1~3')
+
+
+class OutlineSpec(BaseModel):
+    label: str               # '①~③','6번' 등 범위 라벨
+    easy: str                # 쉬운 예시 한 줄
+
+
+class OverviewBundle(BaseModel):
+    vocab: list[VocabSpec] = Field(default_factory=list)
+    flow: list[FlowSpec] = Field(default_factory=list)
+    outline: list[OutlineSpec] = Field(default_factory=list)

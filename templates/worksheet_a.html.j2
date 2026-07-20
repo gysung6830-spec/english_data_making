@@ -58,12 +58,12 @@
   .en{ margin-top:3px; }
   .en .line{ margin-bottom:9px; }          /* 한 문장 안의 줄 사이 호흡 */
   .en .line:last-of-type{ margin-bottom:0; }
-  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 2px; }
+  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 1.5px; }
   .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto 3px;
-              height:0; overflow:visible; font-size:9px; color:var(--gray); line-height:1.1;
+              height:0; overflow:visible; font-size:8px; color:var(--gray); line-height:1.1;
               white-space:nowrap; }
   .tok .over.blue{ color:var(--blue); }
-  .en .line.po .tok .over{ height:11px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
+  .en .line.po .tok .over{ height:10px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
   .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:nowrap; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
@@ -73,7 +73,7 @@
   .tok .w.blue{ color:var(--blue); font-weight:600; }
   .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
                 overflow:visible; }
-  .ann{ font-size:9.5px; line-height:1.18; white-space:nowrap; }
+  .ann{ font-size:8.5px; line-height:1.2; white-space:nowrap; }
   .ann.lbl{ color:var(--blue); font-weight:800; }
   .ann.red{ color:var(--red); font-weight:600; }
   .ann.blue{ color:var(--blue); font-weight:600; }
@@ -103,6 +103,41 @@
   .foot .dot{ color:#f2c14e; }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
   .copyr{ position:absolute; right:22px; bottom:10px; font-size:9.5px; color:var(--gray); }
+
+  /* ---- 뒷페이지(요약): 어휘 리스트 / 논리 흐름도 / 쉬운 예시 목차 ---- */
+  .bhead{ display:flex; align-items:center; gap:10px; margin:0 0 14px; }
+  .bhead .tag{ background:var(--navy); color:#fff; font-weight:800; font-size:12px;
+               padding:4px 12px; border-radius:4px; }
+  .bhead h2{ font-size:16px; font-weight:800; margin:0; color:#1c2030; }
+  .sec{ margin-bottom:18px; page-break-inside:avoid; }
+  .sec > .st{ display:inline-block; font-size:13px; font-weight:800; color:var(--navy);
+              border-bottom:2px solid var(--navy); padding-bottom:2px; margin-bottom:9px; }
+  /* 어휘 리스트 표 */
+  .vtab{ width:100%; border-collapse:collapse; font-size:11.5px; }
+  .vtab th, .vtab td{ border:1px solid var(--line); padding:5px 8px; text-align:left;
+                      vertical-align:top; }
+  .vtab th{ background:var(--navy); color:#fff; font-weight:700; font-size:11px; }
+  .vtab tr:nth-child(even) td{ background:#f4f7fd; }
+  .vtab .w{ font-weight:800; color:#20242e; white-space:nowrap; }
+  .vtab .syn{ color:#2f7d4f; }   /* 유의어=초록 */
+  .vtab .ant{ color:var(--red); } /* 반의어=빨강 */
+  /* 논리 흐름도 */
+  .flow{ display:flex; flex-direction:column; gap:0; }
+  .flow .step{ border:1.5px solid var(--navy); border-radius:10px; padding:7px 12px;
+               background:#f4f7fd; }
+  .flow .step .lb{ display:inline-block; background:var(--navy); color:#fff; font-weight:800;
+                   font-size:10.5px; padding:1px 8px; border-radius:10px; margin-right:8px; }
+  .flow .step .sn{ color:var(--gray); font-size:10px; font-weight:600; margin-left:6px; }
+  .flow .step .tx{ font-size:12px; }
+  .flow .arrow{ text-align:center; color:var(--navy); font-size:14px; line-height:1;
+                margin:3px 0; font-weight:800; }
+  /* 쉬운 예시 목차 */
+  .outline{ list-style:none; margin:0; padding:0; }
+  .outline li{ display:flex; gap:10px; padding:6px 2px; border-bottom:1px dashed var(--line);
+               font-size:12px; }
+  .outline li:last-child{ border-bottom:none; }
+  .outline .ol{ flex:0 0 54px; font-weight:800; color:var(--red); }
+  .outline .oe{ color:#33384a; }
 </style>
 </head>
 <body>
@@ -163,6 +198,61 @@
     <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
     {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
   </div>
+
+  {% if a.has_back %}
+  <div class="page">
+    <div class="bhead">
+      <div class="tag">{{ a.lecture_label or '★' }}</div>
+      <h2>{{ a.title_en }} · 정리</h2>
+    </div>
+
+    {% if a.vocab %}
+    <div class="sec">
+      <div class="st">핵심 어휘 · 유의어 · 반의어</div>
+      <table class="vtab">
+        <tr><th style="width:22%">단어</th><th style="width:26%">뜻</th>
+            <th style="width:26%">유의어(=)</th><th style="width:26%">반의어(↔)</th></tr>
+        {% for v in a.vocab %}
+        <tr>
+          <td class="w">{{ v.word }}{% if v.sent %}<span class="sn"> {{ v.sent }}번</span>{% endif %}</td>
+          <td>{{ v.meaning }}</td>
+          <td class="syn">{{ v.syn }}</td>
+          <td class="ant">{{ v.ant }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %}
+
+    {% if a.flow %}
+    <div class="sec">
+      <div class="st">논리 흐름도</div>
+      <div class="flow">
+        {% for f in a.flow %}
+        <div class="step">
+          <span class="lb">{{ f.label }}</span><span class="tx">{{ f.text }}</span>{% if f.sentences %}<span class="sn">({{ f.sentences }}번)</span>{% endif %}
+        </div>
+        {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if a.outline %}
+    <div class="sec">
+      <div class="st">한눈에 보기 · 쉬운 예시</div>
+      <ul class="outline">
+        {% for o in a.outline %}
+        <li><span class="ol">{{ o.label }}</span><span class="oe">{{ o.easy }}</span></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}-2</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
+    {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
+  </div>
+  {% endif %}
 {% endfor %}
 </body>
 </html>

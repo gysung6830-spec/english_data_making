@@ -72,6 +72,37 @@ class Sentence:
         return " ".join(t.text for t in self.tokens).strip()
 
 
+# ---------------------------------------------------------------------------
+# 뒷페이지(요약 페이지) 요소 — 어휘 리스트 / 논리 흐름도 / 쉬운 예시 목차
+# ---------------------------------------------------------------------------
+@dataclass
+class VocabEntry:
+    """핵심 어휘 한 항목 (유의어·반의어 포함)."""
+
+    word: str
+    meaning: str
+    syn: str = ""            # 유의어(쉼표 구분)
+    ant: str = ""            # 반의어(쉼표 구분)
+    sent: int | None = None  # 등장 문장 번호(선택)
+
+
+@dataclass
+class FlowStep:
+    """논리 흐름도의 한 단계."""
+
+    label: str               # '비유','원리','적용','주장','결론' 등 단계명
+    text: str                # 개조식 내용
+    sentences: str = ""      # 관련 문장 번호(예: '1~3')
+
+
+@dataclass
+class OutlineItem:
+    """쉬운 예시 한 줄 목차의 한 항목."""
+
+    label: str               # '①~③','6번' 등 범위 라벨
+    easy: str                # 학생 눈높이 쉬운 예시 한 줄
+
+
 @dataclass
 class Analysis:
     """지문 1개의 전체 분석 결과 (렌더러 입력)."""
@@ -81,7 +112,15 @@ class Analysis:
     lecture_label: str = ""                      # '20' / '14강'
     date: str = ""                               # '2025년 09월'
     sentences: list[Sentence] = field(default_factory=list)
+    # 뒷페이지(선택) — 비어 있으면 렌더 시 뒷페이지를 만들지 않는다.
+    vocab: list[VocabEntry] = field(default_factory=list)
+    flow: list[FlowStep] = field(default_factory=list)
+    outline: list[OutlineItem] = field(default_factory=list)
 
     @property
     def has_points(self) -> bool:
         return any(s.points for s in self.sentences)
+
+    @property
+    def has_back(self) -> bool:
+        return bool(self.vocab or self.flow or self.outline)
