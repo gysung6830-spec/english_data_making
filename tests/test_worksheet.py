@@ -146,20 +146,22 @@ def test_render_back_page():
     print("PASS  뒷페이지(어휘 + 논리흐름·쉬운예시)")
 
 
-def test_gloss_as_point_box():
-    # 함축(gloss_en)은 인라인이 아니라 포인트 박스(.imp)로 렌더
+def test_feed_point_box():
+    # 대명사 지칭 + 함축 = 파랑 '떠먹여주는 Point' 박스로 렌더
     a = mock_analysis()
     ha = renderer.render_a_html([a])
-    assert 'class="pbox imp"' in ha and "함축 Point" in ha
-    print("PASS  함축 → 포인트 박스")
+    assert 'class="pbox feed"' in ha and "떠먹여주는 Point" in ha
+    assert "the teabag" in ha        # 대명사 지칭(refs)
+    assert "Even the finest tea" in ha  # 함축(gloss_en) 도 이 박스 안에
+    print("PASS  떠먹여주는 Point(대명사+함축) 박스")
 
 
-def test_pronoun_referent_in_mock():
-    # 대명사 지칭 대상 주석(→ ...)이 태깅되어 있는지
+def test_pronoun_referent_in_refs():
+    # 대명사 지칭 대상이 토큰 주석이 아니라 refs 로 분리됐는지
     a = mock_analysis()
-    notes = [t.note for s in a.sentences for t in s.tokens if t.note]
-    assert any(n and n.startswith("→") for n in notes)
-    print("PASS  대명사 지칭 대상 표기")
+    refs = [r for s in a.sentences for r in s.refs]
+    assert any("→" in r for r in refs)
+    print("PASS  대명사 지칭 refs 분리")
 
 
 def test_page_break_per_passage():
@@ -212,8 +214,8 @@ def run_all():
     test_build_points_fallback_to_rules()
     test_render_a_and_b()
     test_render_back_page()
-    test_gloss_as_point_box()
-    test_pronoun_referent_in_mock()
+    test_feed_point_box()
+    test_pronoun_referent_in_refs()
     test_page_break_per_passage()
     test_overview_builder_llm_path()
     test_webapp_worksheet_flow()

@@ -132,12 +132,17 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- 각 token 의 text 는 원문 단어/구를 '순서대로, 빠짐없이' 담아 이어붙이면 원문이 되어야 합니다. "
         "성분/주석을 붙일 단위로 묶으세요(예: 'the curious students' 를 한 토큰으로). "
         "절·구를 감싸는 괄호 ( ) 는 토큰 text 에 그대로 포함하세요.\n"
-        "- color(색 원리 — 반드시 일관 적용): 🔴red='어법 포인트'(문장의 본동사), "
-        "🔵blue='구조·의미'(대비·강조되는 핵심 형용사/명사). 그 외는 빈 문자열. "
-        "성분 라벨(role)은 파랑, 어법 주석(분사·수동·관계사·수일치)은 빨강 계열로 통일합니다.\n"
-        "- 지칭(대명사·지시어) 필수 표기: it, this, that, these, those, they, them, he, she, "
-        "one, such 등이 나오면 note 에 '→ 가리키는 대상' 형식으로 반드시 무엇을 지칭하는지 적으세요 "
-        "(예: it → the teabag, they → curious students). note_kind 는 'gray'.\n"
+        "- color(본문 글씨 색 — 반드시 일관 적용):\n"
+        "    🔴 red = '중요 어법' 어구에만: 수동태·분사·관계사·도치·비교급·가정법·강조·생략 등 "
+        "시험에 나오는 문법 포인트가 걸린 단어/어구.\n"
+        "    🔵 blue = '유의어/반의어를 정리해줄 어휘'에만: 그 토큰의 note 에 '= 유의어' 또는 "
+        "'↔ 반의어'를 함께 달고 단어를 파랑으로. (어휘가 아니면 파랑 쓰지 않음)\n"
+        "    그 외 일반 단어는 색 없음(빈 문자열).\n"
+        "- note 는 짧게(예: '수동태','현재분사','주격 관계대명사','= mingle','↔ decline'). "
+        "긴 문법 설명은 오른쪽 어법 Point 박스로 보내고 여기서는 이름만 답니다.\n"
+        "- 지칭(대명사·지시어)은 '본문 주석'이 아니라 refs 로 보냅니다: it, this, that, these, those, "
+        "they, them, he, she, one, such 등은 refs 배열에 'it → the teabag' 형식으로 담고, "
+        "토큰 note 에는 넣지 마세요.\n"
         "- role: 문장 성분 라벨. 기본형 'S','V','O','C'; 복문은 'S①','V①','V②'…; "
         "필요하면 '가S'(가주어),'진S'(진주어),'5V'(5형식 동사),'OC'(목적격보어),'목관대'(목적격 관계대명사),"
         "'주관대'(주격 관계대명사),'병렬','전'(전치사) 등도 사용. 성분이 아니면 빈 문자열.\n"
@@ -186,6 +191,7 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
         translation=sa.translation or "",
         badge=sa.badge or None,
         gloss_en=sa.gloss_en or None,
+        refs=list(sa.refs or []),
     )
 
 

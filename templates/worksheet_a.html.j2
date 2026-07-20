@@ -60,8 +60,8 @@
   .en .line:last-of-type{ margin-bottom:0; }
   .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 1.5px; }
   .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto 3px;
-              height:0; overflow:visible; font-size:8px; color:var(--gray); line-height:1.1;
-              white-space:nowrap; }
+              height:0; overflow:visible; font-size:8px; color:var(--gray); line-height:1.15;
+              white-space:pre; text-align:center; }
   .tok .over.blue{ color:var(--blue); }
   .en .line.po .tok .over{ height:10px; }   /* 위 메모가 있는 줄만 상단 공간 확보(단어 정렬) */
   .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:nowrap; }
@@ -73,7 +73,8 @@
   .tok .w.blue{ color:var(--blue); font-weight:600; }
   .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
                 overflow:visible; }
-  .ann{ font-size:8.5px; line-height:1.2; white-space:nowrap; }
+  /* 주석은 폭0(flex)로 단어 칸을 넓히지 않음. 길면 데이터의 엔터(\n)로 줄바꿈해 폭을 줄인다. */
+  .ann{ font-size:8.5px; line-height:1.2; white-space:pre; text-align:center; }
   .ann.lbl{ color:var(--blue); font-weight:800; }
   .ann.red{ color:var(--red); font-weight:600; }
   .ann.blue{ color:var(--blue); font-weight:600; }
@@ -92,11 +93,13 @@
   /* 어법 Point = 빨강 테두리 + 빨강 헤더 */
   .pbox.g{ border-color:var(--box-red); }
   .pbox.g .cap{ color:var(--red); }
-  /* 함축 Point = 보라 테두리 + 보라 헤더 */
-  .pbox.imp{ border-color:#c9bdf0; background:#faf8ff; }
-  .pbox.imp .cap{ color:#6b4fc0; }
-  .pbox.imp .ie{ display:inline-block; background:#6b4fc0; color:#fff; font-size:9.5px;
-                 font-weight:800; padding:1px 6px; border-radius:10px; margin-right:4px; }
+  /* 떠먹여주는 Point(대명사 지칭 + 함축) = 파랑 테두리 + 파랑 헤더 */
+  .pbox.feed{ border-color:#b9caf2; background:#f5f8ff; }
+  .pbox.feed .cap{ color:var(--blue); }
+  .pbox.feed .fr{ margin:2px 0; }
+  .pbox.feed .ft{ display:inline-block; background:var(--blue); color:#fff; font-size:9px;
+                  font-weight:800; padding:1px 6px; border-radius:10px; margin-right:5px; }
+  .pbox.feed .ft.im{ background:#6b4fc0; }   /* 함축은 보라 칩으로 구분 */
   .pbox b, .pbox strong{ font-weight:800; }
   .pbox ul{ margin:2px 0; padding-left:15px; }
   .pbox li{ margin:1px 0; }
@@ -186,10 +189,13 @@
         </div>
       </div>
       <div class="points">
-        {% if s.gloss_en %}
-        <div class="pbox imp">
-          <span class="cap">{{ s.index }}번 문장 함축 Point</span>
-          <div class="body"><span class="ie">함축</span> {{ s.gloss_en }}</div>
+        {% if s.has_feed %}
+        <div class="pbox feed">
+          <span class="cap">{{ s.index }}번 문장 떠먹여주는 Point</span>
+          <div class="body">
+            {%- for r in s.refs %}<div class="fr"><span class="ft">지칭</span>{{ r }}</div>{% endfor -%}
+            {% if s.gloss_en %}<div class="fr"><span class="ft im">함축</span>{{ s.gloss_en }}</div>{% endif %}
+          </div>
         </div>
         {% endif %}
         {% for p in s.points %}

@@ -58,8 +58,13 @@ class Sentence:
     lines: list[list[Token]] = field(default_factory=list)  # 줄바꿈 단위 토큰
     translation: str = ""                        # 한글 해석
     badge: str | None = None                     # '빈','서','예시' 등 짧은 뱃지
-    gloss_en: str | None = None                  # 함축 의미 영어 한 줄(함 뱃지와 함께 표시)
+    gloss_en: str | None = None                  # 함축 의미(떠먹여주는 Point 박스에 표시)
+    refs: list[str] = field(default_factory=list)  # 대명사 지칭(예: 'it → the teabag')
     points: list[Point] = field(default_factory=list)       # 오른쪽 박스들
+
+    @property
+    def has_feed(self) -> bool:
+        return bool(self.refs or self.gloss_en)
 
     @property
     def tokens(self) -> list[Token]:

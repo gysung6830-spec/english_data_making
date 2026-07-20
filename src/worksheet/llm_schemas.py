@@ -36,7 +36,8 @@ class SentenceAnalysis(BaseModel):
     lines: list[LineSpec] = Field(default_factory=list)
     translation: str = ""
     badge: str = ""         # '빈'(빈출)·'서'(서술형) 등 짧은 뱃지. 없으면 빈 문자열
-    gloss_en: str = ""      # 함축 의미 영어 한 줄(맥락 없이 안 풀리는 문장에만). 없으면 빈 문자열
+    gloss_en: str = ""      # 함축 의미(맥락 없이 안 풀리는 문장에만). 떠먹여주는 Point 로 감. 없으면 ""
+    refs: list[str] = Field(default_factory=list)  # 대명사 지칭(예: 'it → the teabag'). 없으면 []
 
 
 # ---------------------------------------------------------------------------

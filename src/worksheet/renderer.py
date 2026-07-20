@@ -69,15 +69,39 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
 A4_VIEWPORT = {"width": 794, "height": 1123}
 
 
+def _find_chromium() -> str | None:
+    """미리 설치된 Chromium 실행 파일 경로(있으면). 버전 불일치 시 이걸로 실행."""
+    import glob
+    import os
+
+    base = os.environ.get("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
+    for pat in ("chromium-*/chrome-linux/chrome",
+                "chromium-*/chrome-linux64/chrome",
+                "chromium_headless_shell-*/chrome-linux/headless_shell"):
+        hits = sorted(glob.glob(os.path.join(base, pat)), reverse=True)
+        for h in hits:
+            if os.path.exists(h):
+                return h
+    return None
+
+
 def _pdf_playwright(html: str, out_path: Path) -> bool:
-    """Playwright(Chromium)로 HTML→PDF. 사용 불가하면 False."""
+    """Playwright(Chromium)로 HTML→PDF. 사용 불가하면 False.
+
+    Chromium 은 CSS 를 정확히(특히 폭0 주석) 렌더하므로 단어 간격이 촘촘하다.
+    번들 브라우저 버전이 안 맞으면 미리 설치된 Chromium 경로로 실행한다.
+    """
     try:
         from playwright.sync_api import sync_playwright
     except Exception:
         return False
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch()
+            launch_kw: dict = {"args": ["--no-sandbox"]}
+            exe = _find_chromium()
+            if exe:
+                launch_kw["executable_path"] = exe
+            browser = p.chromium.launch(**launch_kw)
             page = browser.new_page(viewport=A4_VIEWPORT)
             page.set_content(html, wait_until="networkidle")
             page.pdf(path=str(out_path), format="A4", print_background=True,

@@ -25,14 +25,15 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     s01 = Sentence(
         index=1,
         lines=[[
-            _T("Imagine", role="V", color="red"),
+            _T("Imagine", role="V"),
             _T("(you"), _T("have"), _T("the best tea"), _T("in the world"),
             _T("and", role="병렬"), _T("you"), _T("put"),
-            _T("it", note="→ the best tea"), _T("into a bag"),
-            _T("(that's", role="주관대", wrong="what(X)"),
+            _T("it"), _T("into a bag"),
+            _T("(that's", role="주관대", color="red", wrong="what(X)"),
             _T("impermeable)).", color="blue", above="= non-porous", note="↔ permeable, porous"),
         ]],
         translation="당신이 세상에서 제일 좋은 차(茶)를 가지고 있고, 당신이 그것을 스며들지 않는 티백에 넣는다고 상상해 보라.",
+        refs=["it → the best tea"],
         points=[Point(kind="reading", caption="1번 문장 내용 TMI",
                       body_html="세상에서 제일 비싼 찻잎이 있어도 물이 아예 안 들어오는 "
                                 "꽉 막힌 봉지에 넣어두면 아무짝에도 쓸모없다는 뜻이야.")],
@@ -41,10 +42,10 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         index=2,
         lines=[[
             _T("It"), _T("won't"),
-            _T("work.", color="red", role="V", above="= infuse  (찻잎이) 우러나다",
-               note="→ 1번문장 (a bag that's impermeable)"),
+            _T("work.", color="blue", role="V", above="= infuse (우러나다)"),
         ]],
         translation="그것은 작용하지 않을 것이다.",
+        refs=["It → 막힌 봉지 속 그 차"],
     )
     s03 = Sentence(
         index=3,
@@ -57,11 +58,11 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         lines=[[
             _T("(For the teabag", role="to부정사의 의미상 주어"),
             _T("to work),", role="to부정사(부사)"),
-            _T("it", note="→ the teabag"), _T("needs to be"),
-            _T("porous.", color="blue", above="↔ non-porous, impermeable",
-               note="= permeable, penetrable"),
+            _T("it"), _T("needs to be"),
+            _T("porous.", color="blue", above="↔ non-porous", note="= permeable"),
         ]],
         translation="티백이 작용하려면, 그것은 구멍이 있어야 한다.",
+        refs=["it → the teabag(티백)"],
         points=[Point(kind="reading", caption="4번 문장 내용 TMI",
                       body_html="맛있는 차를 마시려면 티백에 미세한 구멍이 뚫려 있어서 "
                                 "물이랑 찻잎이 서로 만나야만 해.")],
@@ -71,8 +72,8 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         lines=[[
             _T("You"), _T("need", role="5V"),
             _T("the tea", role="O①"), _T("and", role="병렬"), _T("the water", role="O②"),
-            _T("to come in contact with", role="OC", above="= interact with, mix with",
-               note="↔ be isolated from"),
+            _T("to come in contact with", role="OC", color="blue",
+               above="= interact with", note="↔ be isolated from"),
             _T("each other."),
         ]],
         translation="당신은 차와 물이 서로 접촉할 수 있도록 해야 한다.",
@@ -81,12 +82,13 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         index=6,
         badge="빈",
         lines=[[
-            _T("(In our lives too),"), _T("we", note="→ 우리 인간"), _T("cannot"),
+            _T("(In our lives too),"), _T("we"), _T("cannot"),
             _T("survive", role="V①"), _T("and", role="병렬"),
-            _T("thrive", role="V②", color="red", above="↔ decline", note="= flourish"),
-            _T("(in isolation).", note="= in a vacuum · 고립된 채로"),
+            _T("thrive", role="V②", color="blue", above="↔ decline", note="= flourish"),
+            _T("(in isolation).", note="고립된 채로"),
         ]],
         translation="우리 삶에서도 마찬가지로, 우리는 고립된 채로는 살아갈 수도 성장할 수도 없다.",
+        refs=["we → 우리(사람)"],
     )
     s07 = Sentence(
         index=7,
@@ -95,14 +97,15 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
             _T("Leaders"), _T("need to be careful"),
             _T("(not to build", role="to부정사(부사)", hl="y"),
             _T("walls", hl="y"), _T("around", hl="y"),
-            _T("themselves", hl="y", note="→ leaders", wrong="them(X)"),
-            _T("(that", role="주관대", note="선행사: walls", wrong="who(X)"),
-            _T("prevent", hl="y", note="keep/prohibit/stop A from ~ing"),
+            _T("themselves", hl="y", wrong="them(X)"),
+            _T("(that", role="주관대", color="red", note="선행사: walls", wrong="who(X)"),
+            _T("prevent", hl="y", note="prevent A\nfrom -ing"),
             _T("people", hl="y"),
             _T("from reaching out to", hl="y", note="~에게 다가가다"),
-            _T("them)).", hl="y", note="→ leaders"),
+            _T("them)).", hl="y"),
         ]],
         translation="리더는 사람들이 그들에게 다가오지 못하게 막는 벽을 그들 자신의 주변에 쌓지 않도록 주의해야 한다.",
+        refs=["themselves / them → leaders(리더 자신)"],
         points=[
             Point(kind="grammar", caption="7번 문장 어법 Point",
                   body_html="① <b>주격 관계대명사 that</b><ul>"
@@ -118,19 +121,20 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     s08 = Sentence(
         index=8,
         lines=[[
-            _T("(As a leader),"), _T("you", note="→ 리더(독자)"), _T("need"),
+            _T("(As a leader),"), _T("you"), _T("need"),
             _T("(to be able to", role="to부정사(명사)"),
-            _T("touch", color="red", above="= come in contact with", note="↔ detach, disconnect"),
+            _T("touch", color="blue", above="= come in\ncontact with", note="↔ detach"),
             _T("other people).", role="other+복수명사"),
         ]],
         translation="리더로서, 당신은 다른 사람들과 접촉할 수 있어야 한다.",
+        refs=["you → 리더(독자)"],
     )
     s09 = Sentence(
         index=9,
         lines=[[
             _T("The tea"),
-            _T("was meant to", note="be meant(= intended) to-v : ~하도록 의도되다"),
-            _T("mix", color="red", above="[원문] mingle with"),
+            _T("was meant to", note="be meant to\n~하도록 의도되다"),
+            _T("mix", color="blue", above="= mingle with"),
             _T("with the water."),
         ]],
         translation="차는 물과 섞이도록 의도되었다.",
@@ -139,9 +143,9 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         index=10,
         badge="빈",
         lines=[[
-            _T("Similarly", hl="p", above="= Likewise, In the same way"),
+            _T("Similarly", hl="p", color="blue", above="= Likewise"),
             _T("all of us", role="S"),
-            _T("were designed", color="red", note="be p.p(수동태)", wrong="designed(X)"),
+            _T("were designed", color="red", note="수동태", wrong="designed(X)"),
             _T("(to work", role="to부정사(부사)"),
             _T("with other people,", role="전치사구①"),
             _T("with teams,", role="②"),
@@ -149,6 +153,7 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
             _T("(at large)).", note="더 크게는"),
         ]],
         translation="마찬가지로 우리 모두도 다른 사람들, 팀, 그리고 더 크게는 사회와 함께 일하도록 설계되었다.",
+        refs=["all of us → 우리 모두(사람 전체)"],
         points=[Point(kind="reading", caption="10번 문장 내용 TMI",
                       body_html="찻잎이 물과 섞여야 차가 되듯, 우리도 동료나 사회와 부대끼며 "
                                 "살아가야 제대로 실력 발휘를 할 수 있게 만들어졌어.")],
