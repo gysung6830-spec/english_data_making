@@ -98,7 +98,7 @@ INDEX_HTML = """
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
     <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
-    <div style="margin:-6px 0 14px"><a class=dl href="{{ url_for('worksheet') }}">✏️ 구문 분석 학습지(직독직해 + 태깅) 만들러 가기 →</a></div>
+    <div style="margin:-6px 0 14px"><a class=dl href="{{ url_for('worksheet') }}">✏️ 구문 분석 학습지(포인트박스형) 만들러 가기 →</a></div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -348,7 +348,7 @@ WORKSHEET_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>✏️ 구문 분석 학습지</h1>
-    <div class=sub>지문을 문장 단위로 쪼개 <b>직독직해 + 구문 태깅 + 포인트 박스</b> 학습지를 만듭니다.</div>
+    <div class=sub>지문을 문장 단위로 쪼개 <b>구문 태깅 + 해석 + 포인트 박스</b> 학습지를 만듭니다.</div>
     <div style="margin:-6px 0 12px"><a class=dl href="{{ url_for('index') }}">← 6개 섹션 분석 도구로 돌아가기</a></div>
     <form id=f method=post action="{{ url_for('worksheet_build') }}" enctype=multipart/form-data>
 
@@ -361,19 +361,10 @@ WORKSHEET_HTML = """
       </div>
       <div class=files id=filelist></div>
 
-      <fieldset><legend>② 레이아웃 <span class=hint>(예시 사진 참고)</span></legend>
-        <div class=layouts>
-          <label class=lay>
-            <span class=lh><input type=radio name=layout value=A checked> A. 포인트박스형</span>
-            <img src="{{ url_for('static', filename='layout_a.png') }}" alt="A형 예시">
-            <span class=ld>리본 + 구문 분석 + 포인트 박스<br>(한 지문을 최대한 1페이지로 자동 압축)</span>
-          </label>
-          <label class=lay>
-            <span class=lh><input type=radio name=layout value=B> B. 직독직해형</span>
-            <img src="{{ url_for('static', filename='layout_b.png') }}" alt="B형 예시">
-            <span class=ld>영어 원문 + 문법 태그 / 직독직해 + 핵심 단어</span>
-          </label>
-        </div>
+      <fieldset><legend>② 미리보기 <span class=hint>(만들어질 학습지 모양)</span></legend>
+        <img src="{{ url_for('static', filename='layout_a.png') }}" alt="학습지 예시"
+             style="width:100%;border:1px solid var(--line);border-radius:8px;display:block;">
+        <div class=hint style="margin-top:6px">리본 + 구문 분석 + 포인트 박스 · 한 지문을 최대한 1페이지로 자동 압축</div>
       </fieldset>
 
       <fieldset><legend>③ 태깅 강도</legend>
@@ -433,10 +424,9 @@ def worksheet_build_route():
     form_key = (request.form.get("api_key") or "").strip()
     key = (None if "설정됨" in form_key else (form_key or None)) or cfg.api_key
 
-    layout = "B" if (request.form.get("layout") == "B") else "A"
-    density = "auto"   # A형은 항상 자동 압축(한 지문 최대한 1페이지)
-    brand = cfg.design.brand or "은아 T"   # 직독직해 헤더 'made by …'
-    kind = "포인트박스형" if layout == "A" else "직독직해형"
+    layout = "A"       # 학습지는 포인트박스형 한 종류(직독직해 B형은 미노출)
+    density = "auto"   # 한 지문을 최대한 1페이지로 자동 압축
+    kind = "포인트박스형"
     strength = request.form.get("strength") or "full"
     if strength not in ("full", "key", "none"):
         strength = "full"
@@ -480,7 +470,7 @@ def worksheet_build_route():
             else:
                 stem = _safe_name(Path(f.filename).stem)
             out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
-            ws_pipeline.render_worksheet(analyses, out, layout=layout, brand=brand,
+            ws_pipeline.render_worksheet(analyses, out, layout=layout,
                                          footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
