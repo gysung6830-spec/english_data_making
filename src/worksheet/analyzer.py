@@ -145,9 +145,10 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- 지칭(대명사·지시어)은 '본문 주석'이 아니라 refs 로 보냅니다: it, this, that, these, those, "
         "they, them, he, she, one, such 등은 refs 배열에 'it → the teabag' 형식으로 담고, "
         "토큰 note 에는 넣지 마세요.\n"
-        "- role: 문장 성분 라벨. 기본형 'S','V','O','C'; 복문은 'S①','V①','V②'…; "
-        "필요하면 '가S'(가주어),'진S'(진주어),'5V'(5형식 동사),'OC'(목적격보어),'목관대'(목적격 관계대명사),"
-        "'주관대'(주격 관계대명사),'병렬','전'(전치사) 등도 사용. 성분이 아니면 빈 문자열.\n"
+        "- role: 문장 성분 라벨. '모든 문장에 S·V·O·OC·C 를 빠짐없이' 답니다(복문은 'S①','V①','V②'…). "
+        "필요하면 '가S','진S','OC','병렬','전' 등도 사용. 성분이 아닌 토큰만 빈 문자열.\n"
+        "- 정확도: 어법(red)·유의어(=/↔) 태그는 그 요소가 걸리는 '정확한 단어'에만 다세요. "
+        "여러 단어를 한 토큰으로 묶어 번호·밑줄이 엉뚱한 위치에 가지 않게 하세요.\n"
         "- note: 그 토큰의 문법/해석 주석(예: '현재분사','수동태','to-v(부사)','be p.p(수동태)', "
         "'선행사: walls', '~에게 다가가다'). 유의어는 '= 동의어', 반의어는 '↔ 반의어' 형식. 없으면 빈 문자열.\n"
         "- note_kind: 어법 강조(분사·수동태·관계사·수일치)=‘red’, 해석 힌트/유의·반의(=,↔)=‘gray’, "
@@ -155,14 +156,14 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- wrong: 시험 함정 오답형이 있으면 '틀린형(X)' 로(예: 'who(X)','designed(X)','absolutely(X)'). 없으면 빈 문자열.\n"
         "- above: 단어 위에 띄울 짧은 메모(생략 복원 'it is 생략', 원문 '[원문] mingle with', "
         "유의/반의 '= infuse' · '↔ decline'). 없으면 빈 문자열.\n"
-        "- hl: 담화표지(Similarly, In fact, However 등)는 'p'(라벤더), 시험에 강조할 핵심 어구는 'y'(노랑), "
-        "보조 강조는 'g'(연두). 기본은 빈 문자열.\n"
+        "- hl: 담화표지(Similarly, In fact, However 등)는 'p'(라벤더); 빈칸(빈출) 문제로 나올 만한 핵심 어구나 "
+        "주제문은 'y'(노랑 형광). 기본은 빈 문자열. (별도의 '빈' 뱃지는 쓰지 않고 노란 형광으로 대체)\n"
         "- underline: 특정 표현을 밑줄로 강조할 때만 true.\n"
         + _strength_rule(strength) +
         "- translation: 이 문장의 자연스러운 한국어 해석(직독직해체).\n"
-        "- gloss_en: 직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 문장일 때만, 그 함축 의미를 "
-        "쉬운 영어 한 문장으로. 아니면 빈 문자열.\n"
-        "- badge: 빈출 포인트면 '빈', 서술형 출제 후보면 '서'. 아니면 빈 문자열.\n"
+        "- gloss_en / gloss_ko: 직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 문장일 때만, 그 함축 의미를 "
+        "쉬운 영어 한 문장(gloss_en)과 한글 한 문장(gloss_ko)으로 '병기'. 아니면 둘 다 빈 문자열.\n"
+        "- badge: 서술형 출제 후보면 '서'. (빈출은 뱃지 대신 노란 형광 hl='y' 로 표시)\n"
     )
 
 
@@ -193,6 +194,7 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
         translation=sa.translation or "",
         badge=sa.badge or None,
         gloss_en=sa.gloss_en or None,
+        gloss_ko=sa.gloss_ko or None,
         refs=list(sa.refs or []),
     )
 
