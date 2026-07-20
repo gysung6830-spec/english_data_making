@@ -43,6 +43,34 @@ def _grammar_facts(sentence: Sentence) -> list[str]:
     return uniq
 
 
+def build_grammar_point(sentence: Sentence) -> Point | None:
+    """어법 토큰(note_kind='red')을 (1)(2)… 로 번호 매기고, 인라인 주석은 번호로 바꾼 뒤
+    오른쪽 '어법 Point' 박스에 '(N) 어법이름'을 나열한다. (내용 TMI 없음)
+
+    - 인라인: 해당 어법 글자는 빨강, 주석은 '(N)' 빨강.
+    - 박스   : '(1) to부정사의 의미상의 주어' 처럼 번호와 어법명을 나열.
+    """
+    items: list[tuple[int, str, str | None]] = []
+    n = 0
+    for t in sentence.tokens:
+        if t.note and t.note_kind == "red":
+            n += 1
+            items.append((n, t.note, t.wrong))
+            t.note = f"({n})"          # 인라인은 번호만
+            t.note_kind = "red"
+            t.color = t.color or "red"  # 어법 글자 빨강
+    if not items:
+        return None
+    rows = []
+    for num, name, wrong in items:
+        row = f"({num}) {escape(name)}"
+        if wrong:
+            row += f" · <b>{escape(wrong)}</b>"
+        rows.append(row)
+    return Point(kind="grammar", caption=f"{sentence.index}번 문장 어법 Point",
+                 body_html="<br>".join(rows))
+
+
 def rule_only_points(sentence: Sentence) -> list[Point]:
     """API 없이 어법 Point 만 규칙기반으로 생성."""
     facts = _grammar_facts(sentence)

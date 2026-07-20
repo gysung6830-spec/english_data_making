@@ -121,7 +121,9 @@ def test_render_a_and_b():
     assert "ribbon" in ha and "pbox" in ha
     assert "necessity of openness" in ha            # 제목
     assert "what(X)" in ha and "designed(X)" in ha  # 오답형 표시
-    assert "내용 TMI" in ha and "어법 Point" in ha    # 두 종류 박스 캡션
+    assert "어법 Point" in ha and "떠먹여주는 Point" in ha  # 남은 두 종류 박스
+    assert "내용 TMI" not in ha                       # 내용 TMI 삭제됨
+    assert "(1)" in ha                              # 어법 넘버링
     assert "hl-p" in ha                             # 라벤더 하이라이트(담화표지)
     assert "Even the finest tea" in ha             # 함축 gloss 줄
     hb = renderer.render_b_html([a], tagged=False)
@@ -144,6 +146,26 @@ def test_render_back_page():
     plain = Analysis(title_en="x", sentences=a.sentences)
     assert 'class="bhead"' not in renderer.render_a_html([plain])
     print("PASS  뒷페이지(어휘 + 논리흐름·쉬운예시)")
+
+
+def test_grammar_numbering():
+    from src.worksheet import point_builder
+    from src.worksheet.models import Sentence, Token
+    s = Sentence(index=3, lines=[[
+        Token(text="that", note="주격 관계대명사", note_kind="red", wrong="who(X)"),
+        Token(text="cat"),
+        Token(text="was seen", note="수동태", note_kind="red"),
+    ]])
+    gp = point_builder.build_grammar_point(s)
+    assert gp is not None and gp.is_grammar
+    # 인라인 주석은 번호로 치환, 글자는 빨강
+    toks = s.tokens
+    assert toks[0].note == "(1)" and toks[0].color == "red"
+    assert toks[2].note == "(2)"
+    # 박스에는 '(1) 주격 관계대명사', '(2) 수동태'
+    assert "(1) 주격 관계대명사" in gp.body_html and "(2) 수동태" in gp.body_html
+    assert "who(X)" in gp.body_html
+    print("PASS  어법 넘버링 + 박스")
 
 
 def test_feed_point_box():
@@ -214,6 +236,7 @@ def run_all():
     test_build_points_fallback_to_rules()
     test_render_a_and_b()
     test_render_back_page()
+    test_grammar_numbering()
     test_feed_point_box()
     test_pronoun_referent_in_refs()
     test_page_break_per_passage()

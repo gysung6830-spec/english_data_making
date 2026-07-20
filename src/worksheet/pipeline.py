@@ -56,9 +56,9 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
         i, text = i_text
         s = analyzer.analyze_sentence(client, text, i + 1,
                                       strength=header.strength, max_retries=max_retries)
-        s.points = point_builder.build_points(client, s, passage_summary,
-                                               strength=header.strength,
-                                               max_retries=max_retries)
+        # 어법 요소를 (1)(2)…로 번호 매겨 오른쪽 '어법 Point' 박스로(내용 TMI 없음).
+        gp = point_builder.build_grammar_point(s)
+        s.points = [gp] if gp else []
         return s
 
     items = list(enumerate(texts))
