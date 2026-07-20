@@ -69,6 +69,13 @@ BASE_CSS = """
   .chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:12px;font-weight:600;}
   .hint{font-size:12px;color:var(--muted);margin-top:6px;}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;}
+  .layouts{display:flex;gap:12px;margin-top:8px;}
+  .lay{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:9px;margin:0;cursor:pointer;
+       display:block;font-weight:400;}
+  .lay .lh{font-size:14px;display:flex;align-items:center;gap:6px;font-weight:700;}
+  .lay img{width:100%;border:1px solid var(--line);border-radius:6px;margin:6px 0;display:block;}
+  .lay .ld{font-size:11px;color:var(--muted);line-height:1.4;}
+  .lay:has(input:checked){border-color:var(--accent);background:#f2f6ff;}
   table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
   td,th{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;}
   .ok{color:var(--green);font-weight:700;}
@@ -354,13 +361,20 @@ WORKSHEET_HTML = """
       </div>
       <div class=files id=filelist></div>
 
-      <fieldset><legend>② 레이아웃</legend>
-        <div class=radio>
-          <label><input type=radio name=layout value=A checked> A. 분석 학습지형 <span class=hint>(리본+분석+포인트)</span></label>
-          <label><input type=radio name=layout value=B> B. 대조표형 <span class=hint>(좌 영어 / 우 한글)</span></label>
+      <fieldset><legend>② 레이아웃 <span class=hint>(예시 사진 참고)</span></legend>
+        <div class=layouts>
+          <label class=lay>
+            <span class=lh><input type=radio name=layout value=A checked> A. 포인트박스형</span>
+            <img src="{{ url_for('static', filename='layout_a.png') }}" alt="A형 예시">
+            <span class=ld>리본 + 구문 분석 + 포인트 박스<br>(한 지문을 최대한 1페이지로 자동 압축)</span>
+          </label>
+          <label class=lay>
+            <span class=lh><input type=radio name=layout value=B> B. 직독직해형</span>
+            <img src="{{ url_for('static', filename='layout_b.png') }}" alt="B형 예시">
+            <span class=ld>좌 영어 / 우 한글 대조표</span>
+          </label>
         </div>
-        <label class=chk style="margin-top:10px"><input type=checkbox name=tagged value=1> B에도 구문 태깅 얹기</label>
-        <label class=chk><input type=checkbox name=fit1page value=1 checked> 한 지문을 최대한 1페이지로(자동 압축) <span class=hint>(A형)</span></label>
+        <label class=chk style="margin-top:10px"><input type=checkbox name=tagged value=1> B형에도 구문 태깅 얹기</label>
       </fieldset>
 
       <fieldset><legend>③ 태깅 강도</legend>
@@ -422,7 +436,8 @@ def worksheet_build_route():
 
     layout = "B" if (request.form.get("layout") == "B") else "A"
     tagged = bool(request.form.get("tagged"))
-    density = "auto" if request.form.get("fit1page") else "normal"
+    density = "auto"   # A형은 항상 자동 압축(한 지문 최대한 1페이지)
+    kind = "포인트박스형" if layout == "A" else "직독직해형"
     strength = request.form.get("strength") or "full"
     if strength not in ("full", "key", "none"):
         strength = "full"
@@ -465,12 +480,12 @@ def worksheet_build_route():
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            out = OUTPUT_DIR / f"{stem}_구문분석학습지.pdf"
+            out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
             ws_pipeline.render_worksheet(analyses, out, layout=layout, tagged=tagged,
                                          footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             results.append({"name": f.filename + note, "ok": True,
-                            "files": [{"label": f"✏️ 학습지({layout}형)", "out": out.name}]})
+                            "files": [{"label": f"✏️ {kind}", "out": out.name}]})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})
