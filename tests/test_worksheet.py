@@ -162,8 +162,10 @@ def test_grammar_numbering():
     toks = s.tokens
     assert toks[0].note == "①" and toks[0].color == "red"
     assert toks[2].note == "②"
-    # 박스에는 '① 주격 관계대명사', '② 수동태'
-    assert "① 주격 관계대명사" in gp.body_html and "② 수동태" in gp.body_html
+    # 박스에는 원문자 번호(빨강 span) + 어법명
+    assert 'class="gn"' in gp.body_html
+    assert "①" in gp.body_html and "주격 관계대명사" in gp.body_html
+    assert "②" in gp.body_html and "수동태" in gp.body_html
     assert "who(X)" in gp.body_html
     print("PASS  어법 넘버링(원문자) + 박스")
 

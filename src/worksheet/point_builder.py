@@ -68,7 +68,7 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
         return None
     rows = []
     for num, name, wrong in items:
-        row = f"{_circled(num)} {escape(name)}"
+        row = f'<span class="gn">{_circled(num)}</span> {escape(name)}'
         if wrong:
             row += f" · <b>{escape(wrong)}</b>"
         rows.append(row)
