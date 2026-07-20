@@ -379,7 +379,7 @@ WORKSHEET_HTML = """
         <label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강">
         <label>저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
         <input type=text name=basename placeholder="예: 2027수능특강_20강">
-        <div class=hint>영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
+        <div class=hint>저장 이름: <b>(지문명)_포인트박스</b> · 영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
       </fieldset>
 
       <label>⑤ Anthropic API 키
@@ -426,7 +426,7 @@ def worksheet_build_route():
 
     layout = "A"       # 학습지는 포인트박스형 한 종류(직독직해 B형은 미노출)
     density = "auto"   # 한 지문을 최대한 1페이지로 자동 압축
-    kind = "포인트박스형"
+    kind = "포인트박스"   # 저장 파일명: (지문명)_포인트박스.pdf
     strength = request.form.get("strength") or "full"
     if strength not in ("full", "key", "none"):
         strength = "full"

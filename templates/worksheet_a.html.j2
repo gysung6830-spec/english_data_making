@@ -141,6 +141,7 @@
                       vertical-align:top; }
   .vtab th{ background:var(--navy); color:#fff; font-weight:700; font-size:11px; }
   .vtab tr:nth-child(even) td{ background:#f4f7fd; }
+  .vtab .vn{ text-align:center; font-weight:700; color:var(--navy); white-space:nowrap; }
   .vtab .w{ font-weight:800; color:#20242e; white-space:nowrap; }
   .vtab .syn{ color:#2f7d4f; }   /* 유의어=초록 */
   .vtab .ant{ color:var(--red); } /* 반의어=빨강 */
@@ -241,11 +242,12 @@
     <div class="sec">
       <div class="st">핵심 어휘 · 유의어 · 반의어</div>
       <table class="vtab">
-        <tr><th style="width:22%">단어</th><th style="width:26%">뜻</th>
-            <th style="width:26%">유의어(=)</th><th style="width:26%">반의어(↔)</th></tr>
+        <tr><th style="width:8%">문장</th><th style="width:21%">단어</th><th style="width:24%">뜻</th>
+            <th style="width:23.5%">유의어(=)</th><th style="width:23.5%">반의어(↔)</th></tr>
         {% for v in a.vocab %}
         <tr>
-          <td class="w">{{ v.word }}{% if v.sent %}<span class="sn"> {{ v.sent }}번</span>{% endif %}</td>
+          <td class="vn">{% if v.sent %}{{ v.sent }}번{% endif %}</td>
+          <td class="w">{{ v.word }}</td>
           <td>{{ v.meaning }}</td>
           <td class="syn">{{ v.syn }}</td>
           <td class="ant">{{ v.ant }}</td>
