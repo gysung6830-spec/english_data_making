@@ -200,7 +200,9 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
         if pages(last) <= 2:
             return last
 
-    return last              # 최대한 줄여도 안 되면 마지막 후보
+    # 여기까지 못 맞췄다면 원인은 대개 '직독직해 자체가 길어서'이므로,
+    # 어휘·출제를 괜히 깎지 말고 원본을 그대로 둔다.
+    return report
 
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
