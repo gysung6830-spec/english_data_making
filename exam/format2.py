@@ -115,10 +115,10 @@ def G_q(passage: str, statements: list[str]) -> str:
     lis = "".join(
         f'<li>{_ABC[i]} {F.esc(s)}</li>' for i, s in enumerate(statements)
     )
-    counts = ["1개", "2개", "3개", "4개", "5개"]
+    # 선지 개수(1개~N개)는 진술 수에 맞춰 동적으로
     ch = "".join(
-        f'<li><span class="cnum">{F.circ(i)}</span> {c}</li>'
-        for i, c in enumerate(counts, 1)
+        f'<li><span class="cnum">{F.circ(i)}</span> {i}개</li>'
+        for i in range(1, len(statements) + 1)
     )
     return (f'<div class="passage">{F.esc(passage)}</div>'
             f'<ul class="choices">{lis}</ul>'

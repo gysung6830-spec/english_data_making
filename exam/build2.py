@@ -64,5 +64,8 @@ def make_F(sentences, blank_sent_idx, blank_phrase, choices, answer_no, reason, 
 
 # G · 내용일치 개수 ---------------------------------------------------------
 def make_G(sentences, statements, match_count, reason, per_stmt):
+    n = len(statements)
+    if not (1 <= match_count <= n):
+        raise ValueError(f"일치 개수는 1~{n} 여야 합니다(현재 {match_count}).")
     return (F2.G_q(" ".join(sentences), statements),
             F2.G_a(match_count, reason, per_stmt))

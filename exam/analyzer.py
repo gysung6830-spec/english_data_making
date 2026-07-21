@@ -30,12 +30,19 @@ _PROMPT = """다음 영어 지문을 1회 분석하여 JSON 으로 반환하세�
 # 문장 경계: 마침표/물음표/느낌표 뒤 공백 + (대문자/따옴표/괄호) 시작
 _SENT_BOUNDARY = re.compile(r'(?<=[.!?])\s+(?=[A-Z"\'(\[])')
 
+# 마침표가 문장 끝이 아닌 흔한 약어(뒤에 대문자가 와도 문장을 나누지 않도록 보호)
+_ABBR = ["Mr", "Mrs", "Ms", "Dr", "Prof", "Sr", "Jr", "St", "Mt", "vs", "No",
+         "Fig", "Inc", "Ltd", "Co", "Corp", "Gen", "Sen", "Rev", "Gov"]
+_DOT = "\x00"   # 임시 치환용 (본문에 없을 제어문자)
+
 
 def split_sentences(text: str) -> list[str]:
-    """지문 원문을 문장 단위로 나눈다(공백 정규화 포함)."""
+    """지문 원문을 문장 단위로 나눈다(공백 정규화 + 흔한 약어 보호)."""
     norm = " ".join((text or "").split())
+    for ab in _ABBR:
+        norm = re.sub(r'\b' + re.escape(ab) + r'\.', ab + _DOT, norm)
     parts = _SENT_BOUNDARY.split(norm)
-    return [p.strip() for p in parts if p.strip()]
+    return [p.replace(_DOT, ".").strip() for p in parts if p.strip()]
 
 
 def analyze(client: ClaudeClient, body: str, max_retries: int = 1) -> Analysis:

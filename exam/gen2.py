@@ -104,8 +104,10 @@ class GOut(BaseModel):
     def check(self):
         if len(self.statements) != len(self.matches):
             raise ValueError("statements 와 matches 개수가 다릅니다.")
-        if not (5 <= len(self.statements) <= 6):
-            raise ValueError("G유형 진술은 5~6개여야 합니다.")
+        if len(self.statements) != 5:
+            raise ValueError("G유형 진술은 정확히 5개여야 합니다.")
+        if not (1 <= sum(self.matches) <= 5):
+            raise ValueError("일치 개수는 1~5개여야 합니다(0개 불가).")
 
 
 # ---------------------------------------------------------------------------

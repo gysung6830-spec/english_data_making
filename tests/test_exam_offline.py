@@ -96,6 +96,22 @@ def test_build_and_validators() -> None:
     print("✓ build 변형기·자동 보정·검증 통과")
 
 
+def test_error_guards() -> None:
+    """오류 가드: 약어 문장분리, G 개수 범위, 조판 이스케이프."""
+    from exam import build2
+    from exam.analyzer import split_sentences
+    assert len(split_sentences("Dr. Smith won the U.S. prize. He left. It ended.")) == 3
+    try:
+        build2.make_G(["s"], ["a", "b", "c", "d", "e"], 0, "r", {})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("G 0개 일치가 차단되지 않음")
+    html = renderer.render_html(demo_passages(), header_note="X<b>&Y", doc_title="T<x>")
+    assert "X&lt;b&gt;&amp;Y" in html and "<title>T&lt;x&gt;</title>" in html
+    print("✓ 오류 가드(약어분리·G개수·이스케이프) 통과")
+
+
 def test_set2_demo() -> None:
     """변형문제 2회(A~G) 데모: 검증·번호·조판."""
     from exam.demo2 import demo_passages_2
@@ -229,6 +245,7 @@ if __name__ == "__main__":
     test_render_html_bold_rules()
     test_single_source_shared()
     test_build_and_validators()
+    test_error_guards()
     test_set2_demo()
     test_pdf_cleaning()
     test_analyzer_uses_real_passage()

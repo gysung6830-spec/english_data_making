@@ -2,12 +2,12 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <title>{{ doc_title }}</title>
+  <title>{{ doc_title|e }}</title>
 </head>
 <body>
 
 {# ===== 자료 하단 저작권(모든 쪽 하단에 반복) ===== #}
-{% if footer_note %}<div class="page-footer">{{ footer_note }}</div>{% endif %}
+{% if footer_note %}<div class="page-footer">{{ footer_note|e }}</div>{% endif %}
 
 {# ===== 상단 머리글(제목 + 배지 + 사용자 입력 문구) ===== #}
 <header class="sheet-head">
@@ -15,7 +15,7 @@
     <span class="badge">제 3 교시</span>
     <span class="brand-title">영어 영역</span>
   </div>
-  {% if header_note %}<div class="head-note">{{ header_note }}</div>{% endif %}
+  {% if header_note %}<div class="head-note">{{ header_note|e }}</div>{% endif %}
 </header>
 
 {# ===== 문제 전체 (모든 지문의 문제 먼저) ===== #}
@@ -23,7 +23,7 @@
   <div class="columns">
     {% for block in qblocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title }}</span>{% endif %}</div>
+      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title|e }}</span>{% endif %}</div>
       {% for item in block.rows %}
       <div class="q-item type-{{ item.type }}">
         <div class="q-head">
@@ -44,7 +44,7 @@
   <div class="columns">
     {% for block in ablocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title }}</span>{% endif %}</div>
+      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title|e }}</span>{% endif %}</div>
       {% for item in block.rows %}
       <div class="a-item type-{{ item.type }}">
         <div class="a-head">
