@@ -41,18 +41,23 @@ def test_placeholder_one_to_one():
     print("PASS  자리표시자 ↔ questions 1:1 대응 검증")
 
 
-# ---- 2. id 전역 유일성 -----------------------------------------------------
-def test_unique_ids():
-    dup = ws.LLMWorkbook(sentences=[
-        ws.LLMSentence(no=1, en_template="{{Q1}}", ko="가", questions=[_q("Q1")]),
-        ws.LLMSentence(no=2, en_template="{{Q1}}", ko="나", questions=[_q("Q1")]),
+# ---- 2. id 불일치 자동 정렬(등장 순서) --------------------------------------
+def test_id_mismatch_repair():
+    # 자리표시자 id와 questions id가 어긋나도 '개수'만 맞으면 등장 순서로 정렬되어야 함
+    # (LLM 이 전역 연속번호를 혼동해 문장2 템플릿=Q1, questions=Q3 처럼 어긋나는 경우)
+    llm = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="X {{Q1}} Y {{Q2}}", ko="가",
+                       questions=[_q("Q1", display="(a)", answer="a"),
+                                  _q("Q2", display="(b)", answer="b")]),
+        ws.LLMSentence(no=2, en_template="P {{Q1}} Q", ko="나",
+                       questions=[_q("Q3", display="(c)", answer="c")]),
     ])
-    try:
-        ws.validate_llm_workbook(dup)
-        assert False, "id 중복인데 통과하면 안 됨"
-    except ValueError:
-        pass
-    print("PASS  문항 id 전역 유일성 검증")
+    ws.validate_llm_workbook(llm)                    # 개수만 맞으면 통과(실패 안 함)
+    wb = ws.build_workbook(llm, title="T", subtitle="S")
+    out = str(render_sentence(wb.sentences[1]))      # 문장2: {{Q1}} → (c) 로 치환돼야
+    assert "{{Q1}}" not in out and "(c)" in out
+    assert [q.num for q in wb.all_questions] == [1, 2, 3]
+    print("PASS  id 불일치 자동 정렬(등장 순서)")
 
 
 # ---- 3. order 표기 검증 ----------------------------------------------------
@@ -135,7 +140,7 @@ def test_multi_passage_layout():
 
 def run_all():
     test_placeholder_one_to_one()
-    test_unique_ids()
+    test_id_mismatch_repair()
     test_order_display_format()
     test_global_numbering()
     test_render_sentence_substitution()

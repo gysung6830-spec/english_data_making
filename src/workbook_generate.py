@@ -22,8 +22,8 @@ def generate_workbook(client: ClaudeClient, cfg: Config, extraction: Extraction)
         prompt=wp.workbook_prompt(title, body),
         model_cls=ws.LLMWorkbook,
         max_tokens=12000,
-        max_retries=cfg.processing.max_retries,
-        extra_validate=ws.validate_llm_workbook,   # 1:1 대응·id 유일성 등 검증
+        max_retries=max(2, cfg.processing.max_retries),
+        extra_validate=ws.validate_llm_workbook,   # 자리표시자·questions 개수 검증
     )
     subtitle = extraction.source or "문장별 복합유형 통합 워크북"
     return ws.build_workbook(llm, title=title, subtitle=subtitle)

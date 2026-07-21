@@ -16,7 +16,7 @@ def generate_blank_set(client: ClaudeClient, cfg: Config, extraction: Extraction
         prompt=bp.blanks_prompt(title, body),
         model_cls=bs.LLMBlankSet,
         max_tokens=8000,
-        max_retries=cfg.processing.max_retries,
+        max_retries=max(2, cfg.processing.max_retries),
         extra_validate=lambda s: bs.validate_llm_blank_workbook(bs.LLMBlankWorkbook(sets=[s])),
     )
     st.no = 1

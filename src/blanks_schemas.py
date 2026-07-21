@@ -126,14 +126,22 @@ class BlankWorkbook:
 # 검증 + 채번 + 단어뱅크 구성
 # ---------------------------------------------------------------------------
 def validate_llm_blank_workbook(wb: LLMBlankWorkbook) -> None:
+    # id 라벨이 어긋나도 개수만 맞으면 build 가 '등장 순서'로 정렬하므로, 개수만 검증한다.
     for st in wb.sets:
         for s in st.sentences:
-            ph, ids = placeholders_in(s.en_template), [b.id for b in s.blanks]
-            if set(ph) != set(ids) or len(ph) != len(ids):
-                raise ValueError(f"세트 {st.no} 문장 {s.no}: 지문 빈칸 자리표시자와 blanks 가 1:1 대응하지 않습니다.")
-        sph, sids = placeholders_in(st.summary_template), [b.id for b in st.summary_blanks]
-        if set(sph) != set(sids) or len(sph) != len(sids):
-            raise ValueError(f"세트 {st.no}: 요약문 빈칸 자리표시자와 summary_blanks 가 1:1 대응하지 않습니다.")
+            if len(placeholders_in(s.en_template)) != len(s.blanks):
+                raise ValueError(
+                    f"세트 {st.no} 문장 {s.no}: 지문 빈칸 자리표시자 수와 blanks 수가 다릅니다.")
+        if len(placeholders_in(st.summary_template)) != len(st.summary_blanks):
+            raise ValueError(f"세트 {st.no}: 요약문 빈칸 자리표시자 수와 summary_blanks 수가 다릅니다.")
+
+
+def _align(order: list[str], items: list):
+    """자리표시자(등장 순서) ↔ items 를 매핑. id 가 정확히 맞으면 그 매핑을, 아니면 순서대로."""
+    by_id = {b.id: b for b in items}
+    if set(order) == set(by_id) and len(order) == len(items):
+        return [(pid, by_id[pid]) for pid in order]
+    return list(zip(order, items))
 
 
 def build_blank_workbook(llm: LLMBlankWorkbook, title: str, subtitle: str,
@@ -143,23 +151,19 @@ def build_blank_workbook(llm: LLMBlankWorkbook, title: str, subtitle: str,
     counter = 0
     sets: list[BlankSet] = []
     for st in llm.sets:
-        # 유형 B: 문장별로 en_template 자리표시자 순서대로 채번
+        # 유형 B: 문장별로 en_template 자리표시자 순서대로 채번 (id=자리표시자 문자열)
         bsents: list[BSentence] = []
         for s in st.sentences:
-            by_id = {b.id: b for b in s.blanks}
             numbered: list[Blank] = []
-            for pid in placeholders_in(s.en_template):
+            for pid, src in _align(placeholders_in(s.en_template), s.blanks):
                 counter += 1
-                src = by_id[pid]
-                numbered.append(Blank(id=src.id, answer=src.answer, kind="passage", num=counter))
+                numbered.append(Blank(id=pid, answer=src.answer, kind="passage", num=counter))
             bsents.append(BSentence(no=s.no, en_template=s.en_template, ko=s.ko, blanks=numbered))
         # 유형 A: 요약문 자리표시자 순서대로 이어서 채번
-        s_by_id = {b.id: b for b in st.summary_blanks}
         s_numbered: list[Blank] = []
-        for pid in placeholders_in(st.summary_template):
+        for pid, src in _align(placeholders_in(st.summary_template), st.summary_blanks):
             counter += 1
-            src = s_by_id[pid]
-            s_numbered.append(Blank(id=src.id, answer=src.answer, kind="summary", num=counter))
+            s_numbered.append(Blank(id=pid, answer=src.answer, kind="summary", num=counter))
         # 단어뱅크: 정답만 랜덤(정답 개수 = 빈칸 개수, 중복 정답은 중복 표기)
         answers = [b.answer for b in s_numbered]
         rng = random.Random(seed + st.no)

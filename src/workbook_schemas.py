@@ -129,26 +129,18 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
     - 문항 id 가 문서 전체에서 유일
     - 특수구문(order) display 는 〈 … 〉 형태
     """
-    seen: set[str] = set()
     for s in wb.sentences:
         ph = placeholders_in(s.en_template)
         ids = [q.id for q in s.questions]
-        ph_set, id_set = set(ph), set(ids)
-        if len(ph) != len(ph_set):
+        if len(ph) != len(set(ph)):
             raise ValueError(f"문장 {s.no}: en_template 에 중복된 자리표시자가 있습니다({ph}).")
-        if len(ids) != len(id_set):
-            raise ValueError(f"문장 {s.no}: questions 에 중복된 id 가 있습니다({ids}).")
-        if ph_set != id_set:
-            missing = id_set - ph_set          # questions 엔 있는데 템플릿에 없음
-            extra = ph_set - id_set            # 템플릿엔 있는데 questions 에 없음
+        # 자리표시자 개수와 questions 개수만 맞으면 된다. id 라벨이 어긋나도(전역 연속 번호
+        # 혼동 등) build_workbook 이 '등장 순서'로 자동 정렬하므로 실패시키지 않는다.
+        if len(ph) != len(ids):
             raise ValueError(
-                f"문장 {s.no}: 자리표시자와 questions 가 1:1 대응하지 않습니다 "
-                f"(템플릿에 없음={sorted(missing)}, questions에 없음={sorted(extra)})."
+                f"문장 {s.no}: 자리표시자 수({len(ph)})와 questions 수({len(ids)})가 다릅니다."
             )
         for q in s.questions:
-            if q.id in seen:
-                raise ValueError(f"문항 id 중복: {q.id} (문서 전체에서 유일해야 합니다).")
-            seen.add(q.id)
             if q.type == "order":
                 d = q.display.strip()
                 if not (d.startswith("〈") and d.endswith("〉")):
@@ -163,18 +155,19 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
     sentences: list[Sentence] = []
     counter = 0
     for s in llm.sentences:
-        # en_template 의 자리표시자 등장 순서대로 채번하여 위첨자 번호가 문장 흐름과 일치하게 한다.
+        # en_template 의 자리표시자 등장 순서대로 채번(위첨자 번호가 문장 흐름과 일치).
         order = placeholders_in(s.en_template)
         by_id = {q.id: q for q in s.questions}
-        numbered: dict[str, Question] = {}
-        for qid in order:
+        # id 라벨이 정확히 일치하면 그 매핑을, 아니면(개수만 맞는 경우) '등장 순서'로 정렬한다.
+        if set(order) == set(by_id) and len(order) == len(s.questions):
+            pairs = [(pid, by_id[pid]) for pid in order]
+        else:
+            pairs = list(zip(order, s.questions))   # 자리표시자 순서 ↔ questions 순서
+        qs: list[Question] = []
+        for pid, src in pairs:
             counter += 1
-            src = by_id[qid]
-            numbered[qid] = Question(
-                id=src.id, type=src.type, display=src.display,
-                answer=src.answer, reason=src.reason, num=counter,
-            )
-        # questions 순서는 원본 순서를 유지(정답지에서 참조하기 좋게)
-        qs = [numbered[q.id] for q in s.questions]
+            # Question.id 는 '자리표시자 문자열'로 둔다 → 렌더가 {{pid}} 를 정확히 치환.
+            qs.append(Question(id=pid, type=src.type, display=src.display,
+                               answer=src.answer, reason=src.reason, num=counter))
         sentences.append(Sentence(no=s.no, en_template=s.en_template, ko=s.ko, questions=qs))
     return Workbook(title=title, subtitle=subtitle, sentences=sentences, total=counter)
