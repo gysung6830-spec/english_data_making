@@ -47,32 +47,55 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 
 
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
-                   which=None, brand: str | None = None) -> dict[str, Path]:
-    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성하고 {종류: 경로} 반환.
+                   which=None, brand: str | None = None) -> list[dict]:
+    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성.
 
-    brand: 분석지의 'made by ~' · '~ tip' 문구에 넣을 이름. None 이면 config 값 사용,
-    빈 문자열("")이면 브랜드 문구 제거. (하단 저작권 footer 는 항상 그대로)
+    반환: [{"kind": "analysis"|"wordlist"|"quiz", "label": 표시명, "path": Path}, ...]
+
+    - 분석지: 지문이 여러 개여도 한 PDF(지문1→지문2… 순서)로.
+    - 어휘 리스트 / 시험지: 지문이 여러 개면 '지문별로 각각' 생성.
+    brand: 분석지의 'made by ~' · '~ tip' 문구 이름. None 이면 config 값, ""이면 문구 제거.
+    (하단 저작권 footer 는 항상 그대로)
     """
     sel = which or cfg.outputs
     brand = cfg.design.brand if brand is None else brand
-    title = reports[0].title if reports else stem
-    outs: dict[str, Path] = {}
+    fn = cfg.design.footer_note
+    multi = len(reports) > 1
+    recs: list[dict] = []
+
     if sel.analysis:
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
-        render.render_pdf(reports, p, footer_note=cfg.design.footer_note,
+        render.render_pdf(reports, p, footer_note=fn,
                           min_vocab=cfg.vocab.min, brand=brand)
-        outs["analysis"] = p
+        recs.append({"kind": "analysis", "label": "📘 분석지", "path": p})
+
     if sel.wordlist:
-        p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
-        render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘",
-                                   footer_note=cfg.design.footer_note)
-        outs["wordlist"] = p
+        if not multi:
+            p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
+            render.render_wordlist_pdf(reports, p,
+                                       title=f"{reports[0].title} — 핵심 어휘", footer_note=fn)
+            recs.append({"kind": "wordlist", "label": "📝 어휘 리스트", "path": p})
+        else:
+            for i, rep in enumerate(reports, 1):
+                p = cfg.output_dir / f"{stem}_지문{i}_어휘리스트.pdf"
+                render.render_wordlist_pdf([rep], p,
+                                           title=f"[지문{i}] {rep.title} — 핵심 어휘", footer_note=fn)
+                recs.append({"kind": "wordlist", "label": f"📝 어휘 리스트(지문{i})", "path": p})
+
     if sel.quiz:
-        p = cfg.output_dir / f"{stem}_어휘test.pdf"
-        render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험",
-                               footer_note=cfg.design.footer_note)
-        outs["quiz"] = p
-    return outs
+        if not multi:
+            p = cfg.output_dir / f"{stem}_어휘test.pdf"
+            render.render_quiz_pdf(reports, p,
+                                   title=f"{reports[0].title} — 영단어 시험", footer_note=fn)
+            recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
+        else:
+            for i, rep in enumerate(reports, 1):
+                p = cfg.output_dir / f"{stem}_지문{i}_어휘test.pdf"
+                render.render_quiz_pdf([rep], p,
+                                       title=f"[지문{i}] {rep.title} — 영단어 시험", footer_note=fn)
+                recs.append({"kind": "quiz", "label": f"✏️ 시험지(지문{i})", "path": p})
+
+    return recs
 
 
 def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
@@ -124,17 +147,17 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
         try:
             reports = (_mock_reports_for_pdf(cfg, pdf) if mock
                        else build_reports_for_pdf(client, cfg, pdf))
-            outs = render_outputs(cfg, reports, _safe_stem(pdf))
-            outputs.extend(outs.values())
-            if "analysis" in outs:
-                analysis_outputs.append(outs["analysis"])
-            manifest.record_success(str(pdf), str(outs.get("analysis", "")),
+            recs = render_outputs(cfg, reports, _safe_stem(pdf))
+            outputs.extend(r["path"] for r in recs)
+            a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
+            analysis_outputs.extend(a_paths)
+            manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
                                     {"passages": len(reports),
-                                     "kinds": list(outs.keys())})
+                                     "outputs": [r["path"].name for r in recs]})
             success += 1
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
                         i, total, pdf.name, len(reports),
-                        ", ".join(p.name for p in outs.values()))
+                        ", ".join(r["path"].name for r in recs))
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))

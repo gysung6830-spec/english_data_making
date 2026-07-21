@@ -173,12 +173,13 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                     structure=p["structure"], exam=exam,
                 ))
             pdf = files[fid]
-            outs = render_outputs(cfg, reports, _safe_stem(pdf))
-            outputs.extend(outs.values())
-            if "analysis" in outs:
-                analysis_outputs.append(outs["analysis"])
-            manifest.record_success(str(pdf), str(outs.get("analysis", "")),
-                                    {"passages": len(reports), "kinds": list(outs.keys())})
+            recs = render_outputs(cfg, reports, _safe_stem(pdf))
+            outputs.extend(r["path"] for r in recs)
+            a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
+            analysis_outputs.extend(a_paths)
+            manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
+                                    {"passages": len(reports),
+                                     "outputs": [r["path"].name for r in recs]})
             success += 1
         except Exception as e:
             failed.setdefault(fid, f"assemble: {e}")

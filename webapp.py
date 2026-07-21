@@ -281,9 +281,8 @@ def analyze_route():
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            outs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
-            labels = {"analysis": "📘 분석지", "wordlist": "📝 어휘 리스트", "quiz": "✏️ 시험지"}
-            fitems = [{"label": labels[k], "out": p.name} for k, p in outs.items()]
+            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
+            fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
