@@ -38,7 +38,7 @@ _SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif KR',"
 _CSS = f"""
 * {{ box-sizing: border-box; }}
 @page {{ size: A4; margin: 11mm 12mm 10mm 12mm; }}
-body {{ font-family: {_SERIF}; font-size: 8.8pt; line-height: 1.33; color:#000; margin:0; }}
+body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.3; color:#000; margin:0; }}
 
 /* 머리글 */
 .exam-header {{ border:1.2px solid #000; padding:6px 12px 5px; margin-bottom:8px; }}
@@ -73,6 +73,7 @@ body {{ font-family: {_SERIF}; font-size: 8.8pt; line-height: 1.33; color:#000; 
 .q-head {{ font-weight:700; }}
 .q-head .score {{ font-weight:400; font-size:8.4pt; color:#333; }}
 .passage {{ text-align:justify; margin:3px 0; }}
+.dialogue .turn {{ text-align:justify; margin:1.5px 0; padding-left:14px; text-indent:-14px; }}
 .para {{ text-align:justify; margin:3px 0; }}
 .box {{ border:1px solid #000; padding:5px 8px; margin:4px 0; text-align:justify; }}
 .choices {{ margin:3px 0 0 2px; }}
@@ -85,6 +86,14 @@ u {{ text-underline-offset:2px; }}
 .bogi.cond {{ text-align:left; }}
 .bogi.cond .label {{ text-align:center; }}
 .cond-list div {{ margin:1px 0; }}
+.bogi.summary {{ text-align:left; }}
+.bogi.summary .label {{ text-align:center; }}
+.summary-text {{ text-align:justify; margin-top:2px; }}
+
+/* 안내문 박스 */
+.box.notice {{ text-align:left; }}
+.notice-title {{ text-align:center; font-weight:700; margin-bottom:4px; }}
+.notice-row {{ margin:2px 0; text-align:justify; }}
 .blank-ko {{ margin:4px 0; }}
 .answer-space {{ border-bottom:1px solid #000; height:26px; margin:6px 0 2px; }}
 
@@ -133,7 +142,63 @@ def _render_passage(q: Question) -> str:
             if seg:
                 parts.append(f'<div class="para">{_safe(seg)}</div>')
         return "".join(parts)
+    # 안내문: 박스 + 구획별 줄나누기
+    if q.type == "notice_match" or _looks_notice(text):
+        return _render_notice_box(text)
+    # 대화문: 화자별 줄나누기
+    if q.type in ("dialogue_mismatch", "dialogue_arrange_inflect") or _looks_dialogue(text):
+        turns = [t.strip() for t in _SPEAKER_SPLIT.split(text) if t.strip()]
+        if len(turns) >= 2:
+            return ('<div class="passage dialogue">'
+                    + "".join(f'<div class="turn">{_safe(t)}</div>' for t in turns)
+                    + '</div>')
+    # 요약문([요약문] 마커) 분리 박스
+    if "[요약문]" in text:
+        body, _, summ = text.partition("[요약문]")
+        out = []
+        if body.strip():
+            out.append(f'<div class="passage">{_safe(body.strip())}</div>')
+        out.append(f'<div class="bogi summary"><div class="label">&lt; 요약문 &gt;</div>'
+                   f'<div class="summary-text">{_safe(summ.strip())}</div></div>')
+        return "".join(out)
     return f'<div class="passage">{_safe(text)}</div>'
+
+
+# 안내문 구획 라벨
+_NOTICE_LABEL = re.compile(
+    r"(When\s*&\s*Where|When|Where|Date|Time|Location|Admission|Highlights|Notes|"
+    r"Details|Registration|Price|Fee|Cost|Contact|Venue|Schedule|Hours|Deadline|"
+    r"Eligibility|Prize|How to (?:Apply|Join|Register))\s*:", re.I)
+
+
+def _looks_notice(text: str) -> bool:
+    return len(_NOTICE_LABEL.findall(text)) >= 2
+
+
+# 대화문 화자 라벨(줄 시작): 'Host:', 'Dr. Hill:', 'M:', 'W:', 'Woman:' 등
+_SPEAKER_SPLIT = re.compile(
+    r"(?=(?:[A-Z][a-zA-Z]*(?:\.\s*[A-Z][a-zA-Z]+)?|[MW]|Man|Woman|Boy|Girl)\s*:\s)")
+
+
+def _looks_dialogue(text: str) -> bool:
+    return len(_SPEAKER_SPLIT.findall(text)) >= 3
+
+
+def _render_notice_box(text: str) -> str:
+    """안내문을 박스에 넣고 제목·구획을 줄나누기."""
+    segs = _NOTICE_LABEL.split(text)
+    # split 은 [title, label1, tail1, label2, tail2, ...] 형태(캡처그룹 포함)
+    title = segs[0].strip()
+    lines = []
+    i = 1
+    while i < len(segs):
+        label = segs[i].strip()
+        content = segs[i + 1].strip() if i + 1 < len(segs) else ""
+        lines.append(f'<div class="notice-row"><b>{html.escape(label)}:</b> '
+                     f'{_safe(content)}</div>')
+        i += 2
+    head = f'<div class="notice-title">{_safe(title)}</div>' if title else ""
+    return f'<div class="box notice">{head}{"".join(lines)}</div>'
 
 
 def _render_bogi(q: Question) -> str:

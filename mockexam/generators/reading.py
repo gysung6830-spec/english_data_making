@@ -90,6 +90,8 @@ def gen_summary_ab(item, passage, an, ctx):
                     "다음 글의 내용을 한 문장으로 요약하고자 한다. "
                     "빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?")
     instr = ("요약문 한 문장에 (A)(B) 두 개념 빈칸. 각 칸에 유의어 함정을 배치해 "
-             "지문 논지의 두 축을 정확히 짚어야 조합이 맞게.")
-    mock_choices = [f"(A) word{i} … (B) word{i}b" for i in range(1, 6)]
+             "지문 논지의 두 축을 정확히 짚어야 조합이 맞게. "
+             "각 선지는 반드시 '(A) 낱말 - (B) 낱말' 형식으로 작성. "
+             "지문 뒤에 '[요약문]'으로 시작하는 한 문장 요약문을 (A)__, (B)__ 빈칸과 함께 넣어라.")
+    mock_choices = [f"(A) word{i} - (B) word{i}b" for i in range(1, 6)]
     return build_choice(item, passage, ctx, stem, instr, mock_choices=mock_choices)
