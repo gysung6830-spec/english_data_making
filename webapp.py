@@ -160,7 +160,7 @@ INDEX_HTML = """
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
       <label class=chk><input type=checkbox name=review value=1 checked>
-        정밀 검수 (2차 LLM으로 정답 타당성 재검토 · 품질↑ 비용↑)</label>
+        정밀검수 (비용추가)</label>
       <div class=hint>끄면 더 빠르고 저렴하지만 드물게 복수정답·애매 문항이 나올 수 있어요.</div>
 
       <div class=row>
