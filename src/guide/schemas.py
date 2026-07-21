@@ -239,6 +239,7 @@ class AbstractChapter(BaseModel):
     strategy: str = ""
     exprs: list[FormulaRow] = []      # 추상 표현 목록 (en → ko)
     examples: list[WorkExample] = []  # 기출 예문 + 구체화(끊어읽기)
+    practice: list[PracticeItem] = [] # 실전적용(문제↔해설)
 
 
 class AbstractPart(BaseModel):

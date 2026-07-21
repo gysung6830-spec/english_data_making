@@ -86,6 +86,7 @@ def load_abstract(path: str | Path | None = None):
     from .schemas import AbstractChapter, AbstractPart, FormulaRow, WorkExample
     p = Path(path) if path else (Path(__file__).resolve().parent / "abstract.yaml")
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    aprac = load_abstract_practice()
     chapters = []
     for c in data.get("chapters", []):
         chapters.append(AbstractChapter(
@@ -94,6 +95,7 @@ def load_abstract(path: str | Path | None = None):
             exprs=[FormulaRow(en=e["en"], ko=e["ko"]) for e in c.get("exprs", [])],
             examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
                       for e in c.get("examples", [])],
+            practice=aprac.get(c["id"], []),
         ))
     return AbstractPart(title=data.get("title", "추상 → 구체"),
                         intro=data.get("intro", ""), chapters=chapters)
@@ -109,6 +111,7 @@ def load_part2_workbook(path: str | Path | None = None):
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
     tmap = {st.id: st for st in SYNTAX_TYPES}
     formulas = data.get("formulas", {})
+    sprac = load_syntax_practice()
 
     def make_chapter(tid: str) -> SyntaxChapter | None:
         st = tmap.get(tid)
@@ -125,17 +128,25 @@ def load_part2_workbook(path: str | Path | None = None):
                     for e in f.get("examples", [])]
         training = [TrainStep(level=t.get("level", ""), en=t.get("en", ""), ko=t.get("ko", ""))
                     for t in f.get("training", [])]
-        practice = []
-        for i, pr in enumerate(f.get("practice", []), start=1):
-            sol = pr.get("solution")
-            practice.append(PracticeItem(
-                no=i, kind=pr.get("kind", "mc"), sentence=pr["sentence"],
-                source=pr.get("source", ""), prompt=pr.get("prompt", ""),
-                options=pr.get("options", []), answer_index=pr.get("answer_index", 0),
-                answer=pr.get("answer", ""),
-                vocab=[VocabItem(**v) for v in pr.get("vocab", [])],
-                solution=PracticeSolution(**sol) if sol else None,
-            ))
+        # 실전적용: syntax_practice.yaml 우선, 없으면 syntax_formula 인라인
+        practice = sprac.get(tid) or []
+        if not practice:
+            mc_n = sh_n = 0
+            for pr in f.get("practice", []):
+                kind = pr.get("kind", "mc")
+                if kind == "mc":
+                    mc_n += 1; no = mc_n
+                else:
+                    sh_n += 1; no = sh_n
+                sol = pr.get("solution")
+                practice.append(PracticeItem(
+                    no=no, kind=kind, sentence=pr["sentence"],
+                    source=pr.get("source", ""), prompt=pr.get("prompt", ""),
+                    options=pr.get("options", []), answer_index=pr.get("answer_index", 0),
+                    answer=pr.get("answer", ""),
+                    vocab=[VocabItem(**v) for v in pr.get("vocab", [])],
+                    solution=PracticeSolution(**sol) if sol else None,
+                ))
         return SyntaxChapter(id=st.id, title=st.title, signal=st.signal, how=st.formula,
                              point=f.get("point", ""), strategy=f.get("strategy", ""),
                              diagram=diagram, examples=examples, training=training,
@@ -152,16 +163,12 @@ def load_part2_workbook(path: str | Path | None = None):
                  "해석공식을 눈으로 익히고, 같은 전략을 반복 적용한다.", groups=groups)
 
 
-def load_codes_practice(path: str | Path | None = None) -> dict:
-    """codes_practice.yaml → {카테고리 id: [PracticeItem …]} (문제↔해설 페이지용).
-
-    kind별로 번호를 따로 매긴다(객관식 1..5 / 주관식 1..5).
-    """
+def _load_practice_map(path: Path) -> dict:
+    """practice YAML(공통) → {id: [PracticeItem …]}. kind별 번호(객1.. / 주1..)."""
     from .schemas import PracticeItem, PracticeSolution, VocabItem
-    p = Path(path) if path else (Path(__file__).resolve().parent / "codes_practice.yaml")
-    if not p.exists():
+    if not path.exists():
         return {}
-    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     out: dict[str, list] = {}
     for cid, items in (data.get("practice") or {}).items():
         lst = []
@@ -182,6 +189,24 @@ def load_codes_practice(path: str | Path | None = None) -> dict:
             ))
         out[cid] = lst
     return out
+
+
+def load_codes_practice(path: str | Path | None = None) -> dict:
+    """codes_practice.yaml → {카테고리 id: [PracticeItem …]} (1부 문제↔해설)."""
+    p = Path(path) if path else (Path(__file__).resolve().parent / "codes_practice.yaml")
+    return _load_practice_map(p)
+
+
+def load_syntax_practice(path: str | Path | None = None) -> dict:
+    """syntax_practice.yaml → {구문 type id: [PracticeItem …]} (3부 문제↔해설)."""
+    p = Path(path) if path else (Path(__file__).resolve().parent / "syntax_practice.yaml")
+    return _load_practice_map(p)
+
+
+def load_abstract_practice(path: str | Path | None = None) -> dict:
+    """abstract_practice.yaml → {추상 chapter id: [PracticeItem …]}."""
+    p = Path(path) if path else (Path(__file__).resolve().parent / "abstract_practice.yaml")
+    return _load_practice_map(p)
 
 
 def load_categories(path: str | Path | None = None) -> list[Category]:

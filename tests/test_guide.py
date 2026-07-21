@@ -85,7 +85,7 @@ def test_render_html():
     assert "실전적용 해설" in html                 # 목차별 문제→해설
     assert html.count('class="chapter drill-q"') >= 5    # 문제 묶음(목차별 1섹션)
     assert html.count('class="chapter drill-a"') >= 5    # 해설 묶음(목차별 1섹션)
-    assert html.count('class="dq-item"') >= 40           # 실제 문항 수(1부만 64)
+    assert html.count('class="dq-item"') >= 100          # 1부64 + 3부48 + 추상13
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 

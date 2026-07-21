@@ -291,6 +291,7 @@
   </ol>
   {% endif %}
 </section>
+{% if chapter.practice %}{{ drill_pages(chapter.title, chapter.practice) }}{% endif %}
 {% endfor %}
 {% endif %}
 
@@ -368,7 +369,7 @@
     {% endfor %}
   </ol>
   {% else %}
-  <div class="wb-note">▪ 예문·실전적용(문제/해설)은 API 연결 시 선별 기출로 자동 생성됩니다.</div>
+  <div class="wb-note">▪ 기출 예문은 API 연결 시 선별 기출로 자동 생성됩니다. (실전적용 문제·해설은 뒤에 이어집니다)</div>
   {% endif %}
 
   {% if chapter.vocab %}{{ vocab_block(chapter.vocab) }}{% endif %}

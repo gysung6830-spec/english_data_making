@@ -1,0 +1,1095 @@
+# 3부 구문해석 · 세부목차별 실전적용(문제↔해설). 실제 평가원 기출. 코딩 없이 편집.
+practice:
+  negation:
+  - kind: mc
+    sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
+    source: 2024 고3 6월 32번
+    prompt: rarely에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 창의적 아이디어를 만드는 것이 대개 최종 목표다.
+    - 창의적 아이디어를 만드는 것이 최종 목표인 경우는 좀처럼 없다.
+    answer_index: 1
+    vocab:
+    - word: definition
+      meaning: 정의
+    - word: aspect
+      meaning: 측면
+    - word: rarely
+      meaning: 좀처럼 ~않다
+    solution:
+      cut: 이 정의가 연구에서 널리 쓰이지만 / 창의성의 중요한 한 측면이 흔히 간과된다 / 콜론(:) → 즉, 창의적 아이디어를 만드는 것이 / 최종 목표인 경우는 좀처럼 없다(rarely is the final goal).
+      wrong: 창의적 아이디어를 만드는 것이 대개 최종 목표다.
+      wrong_why: rarely(좀처럼 ~않다)를 놓치면 극성이 정반대. rarely가 문장 전체의 극성을 (−)로 뒤집는다.
+      author_msg: 아이디어를 '내는 것' 자체가 끝이 아니라, 그 뒤(실행·평가)가 더 중요하다.
+      key_points:
+      - 'rarely : 빈도부정(좀처럼 ~않다) — 극성 (−).'
+      - '콜론(:) : 앞의 ''간과된 측면''을 구체화.'
+      - 'Generating ~ : 동명사 주어(''~을 만드는 것'').'
+  - kind: mc
+    sentence: 'Fashion is among the simplest and cheapest methods of self-expression: clothes can be inexpensively purchased while making it easy to convey notions of wealth, intellectual stature, relaxation or environmental consciousness, even if none of these is true.'
+    source: 2023 고3 11월 29번
+    prompt: even if none of these is true의 범위와 극성에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 이러한 것들 중 일부만 사실이 아닐지라도.
+    - 이러한 것들 중 어느 하나도 사실이 아닐지라도.
+    answer_index: 1
+    vocab:
+    - word: convey
+      meaning: 전달하다
+    - word: stature
+      meaning: 위상, 지위
+    - word: none
+      meaning: 어느 것도 ~않다(전체부정)
+    solution:
+      cut: 패션은 가장 단순하고 저렴한 자기표현 방법 중 하나다 / 콜론(:) → 옷은 저렴하게 구입될 수 있다 / 부·지적 위상·여유·환경 의식 같은 관념을 전달하기 쉽게 하면서 / 이러한 것들 중 어느 하나도 사실이 아닐지라도(even if none of these is true).
+      wrong: 이러한 것들 중 일부만 사실이 아닐지라도.
+      wrong_why: none은 '일부'가 아니라 '어느 것도 ~않다'는 전체부정. 'these(이러한 관념들) 전부가 사실이 아니어도'로 범위가 전체에 걸린다.
+      author_msg: 옷은 실제 부·교양이 전혀 없어도 그런 인상을 '싸게' 살 수 있게 해 준다는 냉소적 논지.
+      key_points:
+      - 'none of these : 전체부정(''어느 것도 ~아니다'') — 극성 (−).'
+      - 'even if : 양보(''~일지라도'')가 부정과 결합.'
+      - 'making it easy to convey : 가목적어 it — 진목적어는 to convey.'
+  - kind: short
+    sentence: Science is sometimes described as a winner-take-all contest, meaning that there are no rewards for being second or third.
+    source: 2024 고3 11월 38번
+    prompt: there are no rewards의 부정 범위에 유의하여 밑줄 부분을 우리말로 해석하시오.
+    answer: 2등이나 3등을 하는 것에 대해서는 아무런 보상도 없다는 것을 의미하면서.
+    vocab:
+    - word: describe
+      meaning: 묘사하다, 설명하다
+    - word: contest
+      meaning: 경쟁, 겨루기
+    - word: no rewards
+      meaning: 아무런 보상도 없음(전체부정)
+    solution:
+      cut: 과학은 때때로 승자독식 경쟁으로 묘사된다 / meaning that ~ (분사구문) → 즉, 2등이나 3등을 하는 것에 대해서는 / 아무런 보상도 없다는 것을 의미하면서.
+      wrong: 2등이나 3등에게는 보상이 적다.
+      wrong_why: no rewards는 '적다'가 아니라 '전혀 없다'는 전체부정. no가 rewards 전체를 부정해 극성이 (−)로 확정된다.
+      author_msg: 1등만 전부를 가져가는 구조 — 2·3등의 몫은 '조금'이 아니라 '0'이라는 점을 강조.
+      key_points:
+      - 'no rewards : 명사 부정(전체부정, ''전혀 없다'') — 극성 (−).'
+      - 'meaning that ~ : 분사구문(''~을 의미하면서'').'
+      - 'for being second or third : 전치사 for + 동명사(보상의 ''대상'').'
+  comparison:
+  - kind: mc
+    sentence: Free recall tests, in which students need to recall as much as they can remember without prompting, tend to result in better retention than cued recall tests, in which students are given hints about what they need to remember.
+    source: 2024 고3 6월 29번
+    prompt: better ~ than 비교 구문에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 학생들이 자유롭게 떠올리는 시험은, 힌트가 주어지는 단서 회상 시험만큼 기억 유지에 좋은 결과를 내지는 못하는 경향이 있다.
+    - 학생들이 어떤 유도도 없이 기억나는 만큼 떠올려야 하는 자유 회상 시험은, 기억해야 할 것에 대한 힌트가 주어지는 단서 회상 시험보다 더 나은 기억 유지 결과를 내는 경향이 있다.
+    answer_index: 1
+    vocab:
+    - word: recall
+      meaning: 떠올리다, 회상
+    - word: retention
+      meaning: 기억 유지, 보유
+    - word: prompting
+      meaning: 유도, 자극
+    solution:
+      cut: 자유 회상 시험은 / [유도 없이 기억나는 만큼 떠올려야 하는] / 내는 경향이 있다 / [단서 회상 시험보다 / 더 나은] 기억 유지를 / [기억할 것의 힌트가 주어지는].
+      wrong: 자유 회상 시험이 단서 회상 시험만큼 좋지는 못하다.
+      wrong_why: better A than B = 'B보다 더 나은 A'(우등 비교). 자유 회상 시험이 '더 나은' 쪽이다. 열등/동등으로 읽으면 우열이 뒤집힌다. 비교 대상은 '자유 회상 시험' ↔ '단서 회상 시험'.
+      author_msg: than 앞뒤에 놓인 두 시험을 먼저 찾고, 어느 쪽이 우등인지 better의 방향을 확정하라.
+      key_points:
+      - 'better A than B : B보다 더 나은 A(우등 비교).'
+      - '비교 대상 : Free recall tests ↔ cued recall tests.'
+      - 'in which ~ : 각 시험을 부연하는 관계사절, 비교의 주역이 아님.'
+  - kind: mc
+    sentence: There is no single, universal or authoritative version that makes sense, other than as a theoretical construct.
+    source: 2022 고3 6월 21번
+    prompt: other than에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 이론적 구성 개념을 포함하여, 말이 되는 단일하고 보편적이거나 권위 있는 판본이 존재한다.
+    - 이론적 구성 개념으로서를 제외하고는, 말이 되는 단일하고 보편적이거나 권위 있는 판본은 존재하지 않는다.
+    answer_index: 1
+    vocab:
+    - word: other than
+      meaning: ~외에는, ~을 제외하고는
+    - word: authoritative
+      meaning: 권위 있는
+    - word: construct
+      meaning: 구성 개념
+    solution:
+      cut: 존재하지 않는다 / [단일하고 보편적이거나 권위 있는] 판본은 / [말이 되는] / 이론적 구성 개념으로서를 제외하고는.
+      wrong: 이론적 구성 개념을 포함하여 그런 판본이 존재한다.
+      wrong_why: other than A = 'A를 제외하고는'(A 외에는). 문장은 no ~ version으로 전체 부정이며, 유일한 예외가 '이론적 구성 개념으로서'다. 포함으로 읽으면 정반대. 비교(대조) 대상은 '실재하는 판본' ↔ '이론적 구성 개념으로서의 판본'.
+      author_msg: other than은 '그것 외에는 없다'는 예외 표시다. no와 함께 '오직 그것만이 예외'라는 골격을 잡아라.
+      key_points:
+      - 'other than A : A를 제외하고는, A 외에는.'
+      - 'no ~ version ... other than B : B 말고는 그런 판본이 없다(B가 유일 예외).'
+      - '비교(대조) 대상 : 실재하는 판본 ↔ 이론적 구성 개념으로서의 판본.'
+  - kind: short
+    sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
+    source: 2024 고3 9월 40번
+    prompt: superior to에 유의하여 해석하시오.
+    answer: 한 번에 한 단어로만 의사소통할 수 있는 어린아이조차, 다른 어떤 동물이 사용하는 그 어떤 체계보다 무한히 우월한 의사소통 체계를 사용한다.
+    vocab:
+    - word: superior to
+      meaning: ~보다 우월한
+    - word: infinitely
+      meaning: 무한히
+    - word: utilize
+      meaning: 사용하다
+    solution:
+      cut: '[한 번에 한 단어만 쓰는] 어린아이조차 / 사용한다 / [다른 어떤 동물이 쓰는 그 어떤 체계보다 / 무한히 우월한] 의사소통 체계를.'
+      wrong: 어린아이의 의사소통 체계는 다른 동물의 체계보다 열등하다.
+      wrong_why: superior to A = 'A보다 우월한'(우등). 열등으로 읽으면 정반대. 비교 대상은 '아이의 체계' ↔ '다른 동물의 체계'.
+      author_msg: than 없이 to로 비교하는 라틴계 비교급이다. superior 다음의 to를 than으로 바꿔 두 대상을 짚어라.
+      key_points:
+      - 'A superior to B : A가 B보다 우월한(than 대신 to).'
+      - '비교 대상 : 아이의 언어 체계 ↔ 다른 동물의 체계.'
+      - 'who ~ : a small child를 꾸미는 삽입 관계사절.'
+  wh_clause:
+  - kind: mc
+    sentence: Indeed, there are examples of particular attractions that have limited capacity and where there is actually no room for more visitors.
+    source: 2024 고3 11월 24번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 수용 능력을 어떻게 제한하고 어디에 더 많은 방문객을 위한 공간이 없는지를 보여 주는 명소들
+    - 수용 능력이 제한되어 있고 더 많은 방문객을 위한 공간이 실제로 없는 명소들
+    answer_index: 1
+    vocab:
+    - word: attraction
+      meaning: 명소, 볼거리
+    - word: capacity
+      meaning: 수용 능력
+    - word: room
+      meaning: 공간, 여지
+    solution:
+      cut: 실제로 / 사례들이 있다 / [수용 능력이 제한되어 있고(that have ~) / 더 많은 방문객을 위한 공간이 실제로 없는(where there is ~)] 특정 명소들의.
+      wrong: 수용 능력을 어떻게 제한하고 어디에 방문객을 위한 공간이 없는지를 보여 주는 명소들
+      wrong_why: that과 where 둘 다 attractions(명소)를 꾸미는 관계사절이다. where는 '어디에'라는 의문사가 아니라 '~한 (장소)'을 뜻하는 관계부사(= in which)이므로 '어디에 ~인지'로 옮기면 안 된다.
+      author_msg: 수용 인원이 꽉 차 더는 손님을 받을 수 없는 명소들이 실제로 존재한다.
+      key_points:
+      - 'that have limited capacity : attractions를 꾸미는 주격 관계대명사절(''~한 명소'').'
+      - 'where there is no room : 관계부사 where(= in which), ''~한'' 수식이지 ''어디에 ~인지'' 의문사절이 아니다.'
+      - 선행사 attractions에 두 관계사절(that ~ / where ~)이 and로 병렬 연결.
+  - kind: mc
+    sentence: The scientific thinker looks for features of the thing that can be stripped of subjectivity, ideally, those aspects that can be quantified and whose values will thus never change from one observer to the next.
+    source: 2023 고3 6월 33번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 정량화될 수 있고 그래서 그 값이 관찰자에 따라 결코 변하지 않는 (그런) 측면들
+    - 어떤 측면이 정량화될 수 있고 누구의 값이 관찰자마다 변하지 않는지 (하는 문제)
+    answer_index: 0
+    vocab:
+    - word: quantify
+      meaning: 정량화하다, 수치화하다
+    - word: subjectivity
+      meaning: 주관성
+    - word: aspect
+      meaning: 측면
+    solution:
+      cut: 과학적 사고자는 찾는다 / 그 대상의 특징들을 / [주관성이 제거될 수 있는(that ~)], 이상적으로는 / [정량화될 수 있고(that ~) / 그래서 그 값이 관찰자마다 결코 변하지 않는(whose values ~)] 그런 측면들을.
+      wrong: 어떤 측면이 정량화될 수 있고 누구의 값이 변하지 않는지
+      wrong_why: that은 aspects를 꾸미는 주격 관계대명사, whose values는 '그 (측면들의) 값'을 뜻하는 소유격 관계대명사다. '어떤/누구의 ~인지'를 묻는 의문사절이 아니다.
+      author_msg: 과학적 사고는 주관을 걷어내고, 수치화할 수 있으며 관찰자가 바뀌어도 변치 않는 속성에 주목한다.
+      key_points:
+      - 'those aspects that can be quantified : that = 주격 관계대명사, aspects 수식(''정량화될 수 있는 측면'').'
+      - 'whose values will never change : 소유격 관계대명사(''그 값이 ~한''), aspects를 수식.'
+      - 'from one observer to the next : ''관찰자가 바뀌어도'', 즉 관찰자마다.'
+  - kind: mc
+    sentence: If you listen to someone who is not clear, who cannot stay on the topic, or who offers too much or too little information, you will quickly lose interest in the conversation.
+    source: 2026 고3 11월 32번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 누가 명확하지 않고, 누가 주제에서 벗어나며, 누가 정보를 너무 많거나 적게 주는지를
+    - 명확하지 않고, 주제에서 벗어나며, 정보를 너무 많거나 너무 적게 주는 사람의 (말을)
+    answer_index: 1
+    vocab:
+    - word: stay on the topic
+      meaning: 주제에서 벗어나지 않다
+    - word: offer
+      meaning: 주다, 제공하다
+    - word: lose interest
+      meaning: 흥미를 잃다
+    solution:
+      cut: 만약 당신이 듣는다면 / [명확하지 않고(who is ~) / 주제에 머물지 못하며(who cannot ~) / 정보를 너무 많거나 적게 주는(who offers ~)] 사람의 말을, / 당신은 곧 흥미를 잃을 것이다 / 대화에.
+      wrong: 누가 명확하지 않고 누가 주제에서 벗어나는지를 듣는다면
+      wrong_why: 세 개의 who는 모두 someone을 꾸미는 주격 관계대명사(병렬)다. '누가 ~인지'를 묻는 의문사 명사절이 아니라 '~한 사람'이라는 수식이다.
+      author_msg: 말이 불분명하고 주제를 못 지키며 정보량 조절을 못 하는 사람과의 대화엔 금세 흥미가 식는다.
+      key_points:
+      - 'someone who ~, who ~, or who ~ : 선행사 someone에 who 관계사절 3개가 or로 병렬 수식.'
+      - 'who is not clear : ''명확하지 않은 (사람)'' 수식이지 ''누가 명확하지 않은지''가 아니다.'
+      - 'stay on the topic : 주제에서 벗어나지 않다, 주제를 지키다.'
+  - kind: short
+    sentence: Animals have evolved many different ways of maintaining their health and then regaining it again once it has been damaged, such as an ability to heal wounds when they are injured and an amazingly complex immune system for warding off infection.
+    source: 2024 고3 9월 37번
+    prompt: wh절에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 동물들은 자신의 건강을 유지하고, 일단 손상되면 그것을 다시 회복하는 여러 다른 방법들을 진화시켜 왔는데, 예를 들어 다쳤을 때 상처를 치유하는 능력과 감염을 물리치는 놀라울 만큼 복잡한 면역 체계 같은 것들이다.
+    vocab:
+    - word: regain
+      meaning: 되찾다, 회복하다
+    - word: ward off
+      meaning: 물리치다, 막아 내다
+    - word: immune system
+      meaning: 면역 체계
+    solution:
+      cut: 동물들은 진화시켜 왔다 / 건강을 유지하고 / 일단 손상되면(once it has been damaged) 다시 회복하는 / 여러 방법을, / 예컨대 / 다쳤을 때(when they are injured) 상처를 치유하는 능력과 / 감염을 물리치는 놀랍도록 복잡한 면역 체계 같은.
+      wrong: 언제 다치는지, 언제 손상되는지를 유지하고 회복하는 방법을 진화시켰다.
+      wrong_why: when they are injured, once it has been damaged는 각각 '다쳤을 때', '일단 손상되면'이라는 부사절(시간/조건)이다. '언제 ~인지'라는 의문사 명사절이 아니다.
+      author_msg: 동물은 상처 치유, 면역처럼 건강을 지키고 되찾는 다양한 자기 방어 수단을 진화시켜 왔다.
+      key_points:
+      - 'when they are injured : ''다쳤을 때''(시간 부사절)이지 ''언제 다치는지''(의문사절)가 아니다.'
+      - 'once it has been damaged : ''일단 ~되면''(once = 조건/시간 접속사).'
+      - 'ways of maintaining ~ and (of) regaining : 전치사 of의 두 동명사(maintaining/regaining)가 ways를 수식.'
+  - kind: short
+    sentence: Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality.
+    source: 2024 고3 9월 33번
+    prompt: in which 관계사절에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 반대로, 많은 사람이 걷고 있지 않은 도시가 흔히 좋은 도시의 질을 나타낸다고 주장될 수도 있다.
+    vocab:
+    - word: conversely
+      meaning: 반대로
+    - word: indicate
+      meaning: 나타내다
+    - word: quality
+      meaning: 질
+    solution:
+      cut: 반대로 / 주장될 수 있다 / [많은 사람이 걷고 있지 않은(in which ~)] 도시가 / 흔히 나타낸다고 / 좋은 도시의 질을.
+      wrong: 많은 사람이 걷지 않는 곳이 어디인지가 도시의 질을 보여 준다.
+      wrong_why: in which many people are not walking은 a city를 꾸미는 관계사절('~한 도시')이다. in which를 '어디에 ~인지'로 읽으면 안 되고, indicates의 주어는 a city다.
+      author_msg: 굳이 걷지 않아도 되는(교통과 편의가 잘 갖춰진) 도시가 오히려 좋은 도시일 수 있다.
+      key_points:
+      - 'a city in which S+V : in which = 관계부사 상당(= where), ''a city''를 수식(''~인 도시'').'
+      - 'it can be claimed that ~ : 가주어 it + that명사절(''~라고 주장될 수 있다'').'
+      - indicates의 주어 = a city(문장 뼈대).
+  participle:
+  - kind: mc
+    sentence: Worried that she could not get to the boarding gate in time, she rushed through the crowds of people.
+    source: 2024 고3 9월 19번
+    prompt: 문두 분사구문에 유의하여 밑줄 없이 전체 문장의 의미로 가장 적절한 것을 고르시오.
+    options:
+    - 그녀가 제시간에 탑승구에 도착하지 못할까 걱정되었기 때문에, 사람들은 인파를 헤치고 서둘러 갔다.
+    - 제시간에 탑승구에 도착하지 못할까 봐 걱정되어, 그녀는 사람들의 인파를 헤치고 서둘러 갔다.
+    answer_index: 1
+    vocab:
+    - word: boarding gate
+      meaning: 탑승구
+    - word: in time
+      meaning: 제시간에
+    - word: rush through
+      meaning: 헤치고 서둘러 가다
+    solution:
+      cut: ([그녀가 제시간에 탑승구에 못 갈까] 걱정되어)(분사구문, 이유 ~해서) / 그녀는 / 서둘러 갔다 / 사람들의 인파를 헤치고.
+      wrong: 그녀가 제시간에 탑승구에 도착하지 못할까 걱정되었기 때문에, 사람들은 인파를 헤치고 서둘러 갔다.
+      wrong_why: 분사구문 (Being) Worried의 의미상 주어는 주절 주어 she다. 서둘러 간 주체는 사람들(people)이 아니라 그녀(she)이며, 주절 뼈대는 she rushed through the crowds다.
+      author_msg: 문두 콤마 분사 덩어리는 괄호로 묶고, 주절 주어부터 찾아 뼈대(she rushed)를 먼저 세운 뒤 분사구문을 이유(~해서)로 붙여 읽어라.
+      key_points:
+      - '(Being) Worried that ~ : 분사구문(이유, ~해서) — being 생략.'
+      - 의미상 주어 = 주절 주어(she).
+      - 'rush through the crowds : ~의 인파를 헤치고 서둘러 가다(주절 뼈대).'
+  - kind: mc
+    sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said a few encouraging words.
+    source: 2023 고3 11월 19번
+    prompt: 문두 분사구문의 의미상 주어에 유의하여 가장 적절한 해석을 고르시오.
+    options:
+    - 그녀가 자신의 실패에 대해 어떻게 느끼는지 알아차리고, 그녀의 팀 동료인 Ken이 그녀에게 다가가 몇 마디 격려의 말을 했다.
+    - 자신의 실패에 대해 어떻게 느끼는지 알아차린 그녀는, 팀 동료 Ken에게 다가가 몇 마디 격려의 말을 건넸다.
+    answer_index: 0
+    vocab:
+    - word: recognize
+      meaning: 알아차리다, 인식하다
+    - word: teammate
+      meaning: 팀 동료
+    - word: encouraging
+      meaning: 격려하는
+    solution:
+      cut: ([그녀가 실패에 대해 어떻게 느끼는지] 알아차리고)(분사구문, ~하고) / Ken이 / 그녀에게 다가가 / 몇 마디 격려의 말을 했다.
+      wrong: 자신의 실패에 대해 어떻게 느끼는지 알아차린 그녀는, 팀 동료 Ken에게 다가가 몇 마디 격려의 말을 건넸다.
+      wrong_why: Recognizing 분사구문의 의미상 주어는 콤마 뒤 주절 주어 Ken이다. 알아차리고 다가간 주체는 she가 아니라 Ken이며, 주절 뼈대는 Ken approached her and said이다.
+      author_msg: 문두 V-ing 덩어리를 괄호로 묶고 콤마 뒤 진짜 주어(Ken)를 확인하라. 분사구문의 주체는 언제나 주절 주어다.
+      key_points:
+      - 'Recognizing how ~ : 분사구문(동시상황/연속 ~하고).'
+      - 의미상 주어 = 주절 주어(Ken), she가 아님.
+      - '주절 뼈대 : Ken approached her and said a few encouraging words.'
+  - kind: short
+    sentence: For example, a United Nations initiative has estimated that the economic benefits of ecosystem services provided by tropical forests, including climate regulation, water purification, and erosion prevention, are over three times greater per hectare than the market benefits.
+    source: 2024 고3 11월 23번
+    prompt: 명사를 뒤에서 수식하는 분사에 유의하여 해석하시오.
+    answer: 예를 들어, 한 유엔 계획은 기후 조절, 수질 정화, 침식 방지를 포함해 열대림이 제공하는 생태계 서비스의 경제적 이익이 헥타르당 시장 이익보다 세 배 넘게 더 크다고 추정했다.
+    vocab:
+    - word: ecosystem services
+      meaning: 생태계 서비스
+    - word: erosion prevention
+      meaning: 침식 방지
+    - word: per hectare
+      meaning: 헥타르당
+    solution:
+      cut: 한 유엔 계획은 추정했다 / [생태계 서비스(열대림이 제공하는)(기후 조절, 수질 정화, 침식 방지를 포함해)의 경제적 이익이 / 헥타르당 시장 이익보다 / 세 배 넘게 더 크다]고.
+      wrong: 열대림이 생태계 서비스에 의해 제공되어, 그 경제적 이익이 시장 이익의 세 배가 되었다.
+      wrong_why: provided by tropical forests는 앞의 명사 ecosystem services를 뒤에서 수식하는 과거분사(~에 의해 제공되는/제공된)이다. 열대림이 제공받는 것이 아니라 열대림이 제공하는 서비스라는 뜻이며, including ~ 도 명사를 수식하는 분사구다.
+      author_msg: 명사 뒤 V-ed는 '~된/~되는'으로 앞 명사를 꾸미는 분사다. 삽입된 provided by ~ 와 including ~ 덩어리를 괄호로 묶어 걷어내고 that절의 뼈대(the benefits ~ are greater)를 먼저 잡아라.
+      key_points:
+      - 'services provided by tropical forests : 과거분사구가 명사 뒤에서 수식(~이 제공하는/제공되는).'
+      - 'including ~ : 현재분사구, 명사(services)를 보충 수식하는 삽입구.'
+      - 'that절 뼈대 : the economic benefits ~ are over three times greater than ~.'
+  - kind: short
+    sentence: Speaking with members of the media has advantages in getting a message out and perhaps receiving favorable recognition, but it runs the risk of misinterpretations, the need for repeated clarifications, and entanglement in never-ending controversy.
+    source: 2024 고3 11월 42번
+    prompt: 문두 V-ing가 분사구문이 아니라 동명사 주어임에 유의하여 해석하시오.
+    answer: 언론인들과 이야기하는 것은 메시지를 전하고 어쩌면 호의적인 인정을 받는 데 이점이 있지만, 그것은 오해, 반복되는 해명의 필요성, 그리고 끝없는 논쟁에 얽혀 드는 위험을 감수한다.
+    vocab:
+    - word: favorable recognition
+      meaning: 호의적인 인정
+    - word: misinterpretation
+      meaning: 오해, 잘못된 해석
+    - word: entanglement
+      meaning: 얽힘, 연루
+    solution:
+      cut: (언론인들과 이야기하는 것은)(동명사 주어) / 이점이 있다 / 메시지를 전하고 호의적 인정을 받는 데, // 하지만 그것은 / 감수한다 / 오해·반복 해명의 필요성·끝없는 논쟁에 얽힘의 위험을.
+      wrong: 언론인들과 이야기하면서, 메시지를 전하는 이점이 있었지만 그것은 위험을 감수했다.
+      wrong_why: 문두 Speaking with ~ 는 콤마로 분리된 분사구문이 아니라 단수 동사 has의 주어인 동명사구다(콤마 없이 바로 has로 이어짐). '~하면서'가 아니라 '~하는 것은'으로 옮겨야 하며, getting/receiving도 전치사 in 뒤의 동명사다.
+      author_msg: 문두 V-ing 뒤에 콤마 없이 동사가 바로 오면 분사구문이 아니라 동명사 주어다. 주어(~하는 것)로 묶고 단수 동사 has와 but 뒤 it runs 두 뼈대를 대비시켜 읽어라.
+      key_points:
+      - 'Speaking with ~ : 동명사 주어(~하는 것), 분사구문 아님 — 단수 동사 has가 근거.'
+      - 'in getting ~ and receiving ~ : 전치사 in 뒤 동명사 병렬.'
+      - '두 뼈대 대비 : ~ has advantages / but it runs the risk of ~.'
+  insertion:
+  - kind: mc
+    sentence: In spite of increasing acceleration, for example in travelling through geographical or virtual space, our body becomes more and more a passive non-moving container, which is transported by artefacts or loaded up with inner feelings of being mobile in the so-called information society.
+    source: 2022 고3 6월 40번
+    prompt: ''', which ~'' 계속적 관계사 삽입에 유의하여 알맞은 해석을 고르시오.'
+    options:
+    - 점점 더 증가하는 가속에도 불구하고, 우리 몸을 수동적인 비이동 용기로 바꾸는 인공물이 우리 몸을 이동시킨다.
+    - 점점 더 증가하는 가속에도 불구하고, 우리 몸은 점점 더 수동적인 비이동 용기가 되는데, 그것은 인공물에 의해 이동되거나 이동하고 있다는 내적 느낌으로 채워진다.
+    answer_index: 1
+    vocab:
+    - word: acceleration
+      meaning: 가속
+    - word: artefact
+      meaning: 인공물
+    - word: container
+      meaning: 용기, 그릇
+    solution:
+      cut: 가속의 증가에도 불구하고 / 우리 몸은 된다 / [점점 더 수동적인 비이동 용기가] / , which(그런데 그것은) / 이동되거나 채워진다 / [인공물에 의해 / 이동한다는 내적 느낌으로].
+      wrong: 우리 몸을 비이동 용기로 바꾸는 인공물이 우리 몸을 이동시킨다.
+      wrong_why: ', which의 선행사는 a passive non-moving container(우리 몸)이다. which절은 그 용기를 보충 설명하는 삽입(계속적 용법)이지, 인공물을 주어로 만드는 것이 아니다.'
+      author_msg: ''', which ~''를 통째로 괄호쳐 빼면 뼈대 our body becomes a passive non-moving container가 드러난다.'
+      key_points:
+      - ', which is transported ~ : 계속적 관계사(그런데 그것은) — 앞 명사 container 보충 설명.'
+      - '삽입을 빼면 뼈대: our body becomes a passive non-moving container.'
+      - 'is transported ~ or loaded up ~ : which절 안에서 or로 병렬된 두 수동태.'
+  - kind: mc
+    sentence: For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.
+    source: 2022 고3 6월 31번
+    prompt: 콤마 사이 동격 삽입(or more appropriately, the laptop)에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 현세대 예술가에게, 컴퓨터, 더 적절히 말하면 노트북은 그들의 사회생활과 직장생활을 연결하는 통합적이고 휴대 가능한 디지털 기술 집합의 하나이다.
+    - 현세대 예술가에게, 컴퓨터는 노트북을 더 적절하게 만들어, 그들의 사회생활과 직장생활을 연결하는 기술이 되었다.
+    answer_index: 0
+    vocab:
+    - word: appropriately
+      meaning: 적절하게
+    - word: integrated
+      meaning: 통합된
+    - word: portable
+      meaning: 휴대 가능한
+    solution:
+      cut: 현세대 예술가에게 / 컴퓨터는 / (더 적절히 말하면 노트북은) / 하나이다 / [통합적·휴대 가능한 디지털 기술 집합의] / that(그것들은) 연결한다 / [그들의 사회·직장 생활을].
+      wrong: 컴퓨터가 노트북을 더 적절하게 만들어 기술이 되었다.
+      wrong_why: '''or more appropriately, the laptop''은 주어 the computer를 바꿔 말하는 동격 삽입일 뿐, 컴퓨터가 노트북에 무언가를 하는 동사구가 아니다. 문장의 동사는 is이다.'
+      author_msg: 콤마 사이 삽입을 빼면 뼈대 the computer is one in a collection of ... technologies가 남는다.
+      key_points:
+      - 'or more appropriately, the laptop : 콤마 동격 삽입 — 주어 the computer 재진술.'
+      - '삽입을 빼면 뼈대: the computer is one in a collection of technologies.'
+      - 'that link ~ : technologies를 꾸미는 관계사절(선행사=technologies).'
+  - kind: short
+    sentence: The new definitions better served the needs of the emerging industrial food system, which could not supply foods that matched customary meanings and expectations.
+    source: 2024 고3 6월 23번
+    prompt: ''', which ~'' 계속적 관계사 삽입에 유의하여 해석하시오.'
+    answer: 새로운 정의는 신흥 산업 식품 체계의 요구에 더 잘 부합했는데, 그 체계는 관습적 의미와 기대에 맞는 식품을 공급할 수 없었다.
+    vocab:
+    - word: definition
+      meaning: 정의
+    - word: emerging
+      meaning: 신흥의, 떠오르는
+    - word: customary
+      meaning: 관습적인
+    solution:
+      cut: 새로운 정의는 / 더 잘 부합했다 / [신흥 산업 식품 체계의 요구에] / , which(그런데 그 체계는) / 공급할 수 없었다 / [관습적 의미·기대에 맞는 식품을].
+      wrong: 새로운 정의가 관습적 식품을 공급할 수 없게 만들었다.
+      wrong_why: ', which의 선행사는 the industrial food system이다. which절은 그 체계를 보충 설명하는 삽입(계속적 용법).'
+      author_msg: ''', which ~''를 빼도 The new definitions served the needs가 완전한 문장으로 성립한다.'
+      key_points:
+      - ', which ~ : 계속적 관계사(그런데 그것은) — 앞 명사 보충 설명.'
+      - '삽입을 빼면 뼈대: The new definitions served the needs.'
+      - 'foods that matched ~ : foods를 꾸미는 관계사절.'
+  - kind: short
+    sentence: Fortunately, in the period after 1660, when more items of dress survive to enrich our understanding of the history of the subject, there are also many painted, printed, photographed and filmed sources of evidence of people in clothing, caught in movement.
+    source: 2026 고3 11월 42번
+    prompt: 콤마 사이 삽입절(when ~ subject)과 콤마 삽입 분사구(caught ~)에 유의하여 해석하시오.
+    answer: 다행히도 1660년 이후 시기에는, 더 많은 의복 품목이 남아 그 주제의 역사에 대한 우리의 이해를 풍부하게 하는데, 움직이는 순간에 포착된 옷을 입은 사람들에 대한 그림, 판화, 사진, 영상 증거 자료도 많이 있다.
+    vocab:
+    - word: dress
+      meaning: 의복, 옷
+    - word: enrich
+      meaning: 풍부하게 하다
+    - word: evidence
+      meaning: 증거
+    solution:
+      cut: 다행히도 / [1660년 이후 시기에는] / , when ~ subject(그 시기에는 더 많은 의복이 남아 이해를 풍부하게 하는데) / there are also / [많은 그림·판화·사진·영상 증거 자료가] / [옷 입은 사람들에 대한] / , caught in movement(움직임 속에 포착된).
+      wrong: 1660년 이후 시기가 우리의 이해를 풍부하게 하여, 옷을 붙잡는 많은 증거가 있다.
+      wrong_why: ''', when ~ subject,''는 the period를 보충 설명하는 콤마 삽입절이고, ''caught in movement''는 people(또는 sources)을 꾸미는 콤마 삽입 분사구이다. 둘 다 빼면 뼈대 there are also many sources of evidence가 드러난다.'
+      author_msg: '삽입절과 삽입 분사구를 모두 괄호치면 뼈대: in the period after 1660, there are also many sources of evidence.'
+      key_points:
+      - ', when more items of dress survive ~ : the period 보충 설명하는 계속적 관계부사 삽입절.'
+      - '삽입을 빼면 뼈대: in the period after 1660, there are also many sources of evidence.'
+      - ', caught in movement : 앞 명사를 꾸미는 콤마 삽입 과거분사구(움직임 속에 포착된).'
+  apposition:
+  - kind: mc
+    sentence: 'When you say "It''s mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.'
+    source: 2023 고3 6월 21번
+    prompt: 콜론(:)의 기능에 유의하여, 문장의 의미로 가장 적절한 것을 고르시오.
+    options:
+    - '''그건 내 거야''라고 말할 때, 그것은 온전한 묶음을 이루는 막대기들, 그리고 그와는 별개인 판매·임대·저당·양도·증여·파괴 권리까지 모두 소유하려 한다는 뜻이다.'
+    - '''그건 내 거야''라고 말할 때, 그것은 온전한 묶음을 이루는 막대기들, 즉 판매 막대기·임대 막대기·저당·양도·증여, 심지어 파괴할 권리까지 상당수 소유하고 있다는 뜻이다.'
+    answer_index: 1
+    vocab:
+    - word: in reference to
+      meaning: ~에 관하여
+    - word: bundle
+      meaning: 묶음, 다발
+    - word: mortgage
+      meaning: 저당(잡히다)
+    solution:
+      cut: 흔히 그것은 뜻한다 / 당신이 그 막대기들을 상당수 소유하고 있음을 / [온전한 묶음을 이루는] / 콜론(:) 뒤 = 즉, 판매 막대기·임대 막대기·저당·양도·증여, 심지어 파괴할 권리까지.
+      wrong: 콜론(:) 뒤 나열을 the full bundle과 '별개의' 항목으로 보고, 소유하려 '한다'는 의지로 오독한 것.
+      wrong_why: 콜론(:)은 the full bundle(the sticks)을 구체적으로 풀어 쓰는 동격 표지 — 뒤의 목록은 그 막대기들의 '내용'이다. that means는 '즉 ~이다'의 재진술로 현재 소유 '상태'를 서술한다.
+      author_msg: '콜론(:)을 보면 ''즉''을 붙여 앞 명사를 다시 읽어라 — A : B는 A = B(내용)이다.'
+      key_points:
+      - '콜론(:) : 앞 명사(the full bundle)를 ''즉 ~''으로 풀어 나열하는 동격 표지.'
+      - 'the sticks = 나열 목록 : sell/rent stick … destroy the thing이 곧 그 막대기들의 내용(A = B).'
+      - 'that means : ''즉 ~라는 뜻이다''로 문장 전체를 재진술하는 신호.'
+  - kind: short
+    sentence: A part of an animal's territory is for eating, a part for sleeping, a part for swimming or wallowing, a part may be set aside for waste, depending on the species of animal.
+    source: 2022 고3 9월 31번
+    prompt: 콤마로 병렬 나열된 구조에 유의하여 문장을 우리말로 해석하시오.
+    answer: 동물 영역의 한 부분은 먹기 위한 것이고, 한 부분은 잠자기 위한 것, 한 부분은 헤엄치거나 뒹굴기 위한 것이며, 한 부분은 배설물을 위해 따로 마련될 수도 있는데, 이는 동물의 종에 따라 다르다.
+    vocab:
+    - word: territory
+      meaning: 영역, 세력권
+    - word: wallow
+      meaning: 뒹굴다
+    - word: set aside
+      meaning: 따로 떼어 두다
+    solution:
+      cut: 동물 영역의 한 부분은 먹기 위한 것 / 한 부분은 잠자기 위한 것 / 한 부분은 헤엄치거나 뒹굴기 위한 것 / 한 부분은 배설물을 위해 따로 마련될 수도 / 동물의 종에 따라 다르다.
+      wrong: 콤마 뒤 반복되는 for ~를 별개의 문장으로 끊어, is와 연결된 병렬임을 놓치는 것.
+      wrong_why: 콤마로 이어진 'a part for sleeping, a part for swimming …'은 앞의 'A part … is for eating'과 동일 술어(is for)를 공유하는 병렬 나열 — 반복되는 is가 생략된 대등 구조다.
+      author_msg: 콤마로 같은 형태가 반복되면 앞의 동사·전치사를 그대로 얹어 대등하게 읽어라.
+      key_points:
+      - '콤마 병렬 : ''A part … is for eating''을 기준으로 뒤의 ''a part for …''가 대등 나열.'
+      - '생략 : 반복되는 is (for)가 생략되어 for + 동명사만 남은 구조.'
+      - 'depending on … : 앞 나열 전체를 받아 ''~에 따라 다르다''로 마무리하는 분사구.'
+  prep_stack:
+  - kind: mc
+    sentence: Even without the imperative of climate change, the physical constraints of densely inhabited cities and the corresponding demands of accessibility, mobility, safety, air pollution, and urban livability all limit the option of expanding road networks purely to accommodate this rising demand.
+    source: 2022 고3 6월 30번
+    prompt: 전치사구가 이어붙은 긴 주어에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 기후 변화의 명령이 없어도, 밀집한 도시들은 접근성, 이동성, 안전, 대기 오염, 도시 거주 적합성을 물리적으로 제약하며, 그것들이 도로망을 확장한다.
+    - 기후 변화의 명령이 없더라도, 밀집한 도시들의 물리적 제약과 접근성, 이동성, 안전, 대기 오염, 도시 거주 적합성에 대한 그에 상응하는 요구가 모두, 이 늘어나는 수요를 수용하기 위해서만 도로망을 확장하는 선택지를 제한한다.
+    answer_index: 1
+    vocab:
+    - word: imperative
+      meaning: 명령, 절박한 요구
+    - word: constraint
+      meaning: 제약, 제한
+    - word: livability
+      meaning: 거주 적합성
+    solution:
+      cut: '[밀집한 도시들의 물리적 제약]과 [접근성·이동성·안전·대기 오염·도시 거주 적합성에 대한 그에 상응하는 요구]가 / 모두 제한한다 / [도로망을 확장하는 선택지를] / [이 늘어나는 수요를 수용하기 위해서만].'
+      wrong: 밀집한 도시들이 접근성, 이동성, 안전 등을 제약하며 그것들이 도로망을 확장한다.
+      wrong_why: 뼈대 주어는 두 개의 명사구 'the physical constraints ... and the corresponding demands ...'이고 동사는 'limit'. of/of 전치사구 속 'cities'나 'accessibility' 등은 주어가 아니라 제약·요구의 대상을 꾸미는 수식어다.
+      author_msg: of 뒤 명사(cities, accessibility...)에 눈이 쏠려 주어를 놓치기 쉽다. all 앞까지가 주어의 뼈대(constraints and demands)임을 잡아라.
+      key_points:
+      - 'the constraints of ... and the demands of ... all limit : A와 B 두 명사구가 병렬 주어, 동사는 limit.'
+      - 'of + 명사 나열 : 앞 명사(demands)를 뒤에서 꾸미는 전치사구, 주어 아님.'
+      - 'the option of expanding ... : ''~을 확장하는 선택지''(of + 동명사).'
+  - kind: mc
+    sentence: 'Often, though, we split the sticks up, as for a piece of land: there may be a landowner, a bank with a mortgage, a tenant with a lease, a plumber with a license to enter the land, an oil company with mineral rights.'
+    source: 2023 고3 6월 21번
+    prompt: '''명사 + with 전치사구''가 이어지는 나열에 유의하여 알맞은 해석을 고르시오.'
+    options:
+    - 그러나 흔히 우리는, 한 필지의 땅에서처럼 그 권리들을 나눈다. 즉 토지 소유자, 저당권을 가진 은행, 임차권을 가진 세입자, 그 땅에 들어갈 허가를 가진 배관공, 광물권을 가진 석유 회사가 있을 수 있다.
+    - 그러나 흔히 우리는 막대기를 쪼개는데, 땅처럼 저당이 은행을, 임차권이 세입자를, 허가가 배관공을, 광물권이 석유 회사를 소유한다.
+    answer_index: 0
+    vocab:
+    - word: mortgage
+      meaning: 저당(권), 담보 대출
+    - word: lease
+      meaning: 임차(권), 임대차 계약
+    - word: mineral rights
+      meaning: 광물권
+    solution:
+      cut: '흔히 우리는 그 권리들을 나눈다 / 한 필지의 땅에서처럼 : / [토지 소유자], [저당권을 가진 은행], [임차권을 가진 세입자], [그 땅에 들어갈 허가를 가진 배관공], [광물권을 가진 석유 회사]가 있을 수 있다.'
+      wrong: 저당이 은행을, 임차권이 세입자를, 허가가 배관공을 소유한다.
+      wrong_why: 각 항목의 뼈대 명사는 a bank, a tenant, a plumber, an oil company이고, 'with + 명사'는 그 명사가 '무엇을 가지고 있는지'를 꾸미는 전치사구다. with 뒤 명사(mortgage, lease...)는 주어가 아니다.
+      author_msg: '''there may be A, B, C...'' 나열 구조. 각 명사 뒤 with 전치사구를 ''~을 가진''으로 앞 명사에 붙여라.'
+      key_points:
+      - 'there may be a landowner, a bank ..., a tenant ... : 병렬로 나열된 존재 명사들.'
+      - 'a bank with a mortgage : ''저당권을 가진 은행''(with 전치사구가 앞 명사 수식).'
+      - 'a license to enter the land : ''그 땅에 들어갈 허가''(to부정사가 license 수식).'
+  - kind: short
+    sentence: A transit project that could speed travel for tens of thousands of people can be stopped by objections to the loss of a few parking spaces or by the simple fear that the project won't work.
+    source: 2024 고3 11월 34번
+    prompt: 긴 주어와 이어지는 전치사구에 유의하여 해석하시오.
+    answer: 수만 명의 이동을 빠르게 해 줄 수 있는 교통 사업이, 몇 안 되는 주차 공간의 상실에 대한 반대나 그 사업이 실패할 것이라는 단순한 두려움 때문에 중단될 수 있다.
+    vocab:
+    - word: transit
+      meaning: 교통, 대중교통
+    - word: objection to
+      meaning: ~에 대한 반대
+    - word: fear that
+      meaning: ~라는 두려움
+    solution:
+      cut: '[수만 명의 이동을 빠르게 해 줄] 교통 사업이 / 중단될 수 있다 / [몇몇 주차 공간 상실에 대한 반대] 때문에 / 또는 [그 사업이 실패할 거라는 단순한 두려움] 때문에.'
+      wrong: 수만 명의 사람들이 주차 공간을 잃을까 봐 교통 사업을 반대한다.
+      wrong_why: 뼈대 주어는 'A transit project', 동사는 'can be stopped'. by 이하 전치사구(반대/두려움)는 중단의 '이유'다.
+      author_msg: 관계절과 for 전치사구로 길어진 주어의 핵은 project 하나. by A or by B가 중단의 두 이유임을 잡아라.
+      key_points:
+      - 'A transit project ... can be stopped : 긴 주어의 뼈대(주어+수동 동사).'
+      - 'by A or by B : 두 이유(전치사구 병렬).'
+      - 'the fear that S+V : ''~라는 두려움''(동격 that).'
+  - kind: short
+    sentence: Restaurants began to be developed, initially in France but eventually in other nations, as a distinct institution offering people dining choices and table service, the opportunity for socialization and, over time, a finer and finer atmosphere.
+    source: 2025 고3 6월 24번
+    prompt: 명사 뒤로 이어지는 전치사구와 병렬 목적어에 유의하여 해석하시오.
+    answer: 식당은, 처음에는 프랑스에서 그러나 결국에는 다른 나라들에서, 사람들에게 식사 선택권과 테이블 서비스, 사교의 기회, 그리고 시간이 지나면서 점점 더 좋아지는 분위기를 제공하는 독특한 기관으로 발전하기 시작했다.
+    vocab:
+    - word: distinct
+      meaning: 독특한, 뚜렷이 구별되는
+    - word: institution
+      meaning: 기관, 제도
+    - word: socialization
+      meaning: 사교, 사회화
+    solution:
+      cut: 식당은 발전하기 시작했다 / (처음엔 프랑스에서 결국엔 다른 나라들에서) / [독특한 기관으로] / (그것은 사람들에게 제공한다) [식사 선택권과 테이블 서비스], [사교의 기회], 그리고 [점점 더 좋아지는 분위기]를.
+      wrong: 프랑스가 다른 나라들에게 식사 선택권과 테이블 서비스를 제공하는 기관으로 발전했다.
+      wrong_why: 뼈대 주어는 'Restaurants', 동사는 'began to be developed'. 'in France'의 France는 전치사구 속 명사일 뿐 주어가 아니다. offering의 목적어는 병렬로 이어진 세 개의 명사구다.
+      author_msg: 삽입된 in France/in other nations에 휘둘리지 말 것. institution 뒤 offering이 이끄는 목적어 나열(choices/opportunity/atmosphere)을 하나로 묶어라.
+      key_points:
+      - 'Restaurants began to be developed : 주어+동사 뼈대(수동 부정사).'
+      - 'offering people A, B, and C : ''people에게 A·B·C를 제공하는''(4형식 분사구, 목적어 병렬).'
+      - 'the opportunity for socialization : ''사교를 위한 기회''(for 전치사구가 opportunity 수식).'
+  inversion:
+  - kind: mc
+    sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be pushed beyond a certain point, called a bifurcation.'
+    source: 2025 고3 6월 37번
+    prompt: 문두 Nor 도치에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 모든 비선형 시스템은 혼돈적이며, 그렇게 되기 위해 특정 지점 너머로 밀려나야 한다.
+    - '모든 비선형 시스템이 혼돈적인 것도 아니다: 그렇게 되려면 분기점이라 불리는 특정 지점 너머로 밀려나야 한다.'
+    answer_index: 1
+    vocab:
+    - word: nonlinear
+      meaning: 비선형의
+    - word: chaotic
+      meaning: 혼돈적인
+    - word: bifurcation
+      meaning: 분기(점)
+    solution:
+      cut: '''~도 아니다'' 신호 받기 → 모든 비선형 시스템이 혼돈적인 것도 아니다(Nor are all nonlinear systems chaotic) / 콜론 뒤 → 그렇게 되려면(to become so) / 분기점이라 불리는 특정 지점 너머로 밀려나야 한다.'
+      wrong: 모든 시스템이 혼돈적이며 밀려나야 한다.
+      wrong_why: Nor + 도치는 앞 내용에 이어 '~도 아니다'라는 부정 첨가. 긍정으로 읽어 not all(부분부정)의 극성을 뒤집었다. 도치를 되돌릴 필요 없이 Nor부터 부정으로 받으면 된다.
+      author_msg: 비선형이라고 다 혼돈은 아니며, 분기점을 넘어서야 비로소 혼돈이 된다.
+      key_points:
+      - 'Nor + 조동사(are) + S : ''~도 (또한) 아니다'' — 도치된 채로 부정 첨가로 이어 읽기.'
+      - not all = 부분부정 '모두 ~인 것은 아니다'.
+      - 'to become so : ''so=chaotic'', 그렇게 되려면(목적).'
+  - kind: mc
+    sentence: Not only is it less convenient—in terms of time, cost and comfort—to access locations in cities, but the very process of moving around in cities generates a number of negative externalities.
+    source: 2023 고3 6월 24번
+    prompt: Not only 도치에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 도시에서 장소 접근이 (시간·비용·편의 면에서) 덜 편할 뿐 아니라, 이동 과정 자체가 여러 부정적 외부효과를 낳는다.
+    - 도시에서 장소에 접근하는 것이 더 편리해서 이동 과정도 이롭다.
+    answer_index: 0
+    vocab:
+    - word: convenient
+      meaning: 편리한
+    - word: externality
+      meaning: 외부효과
+    - word: the very process
+      meaning: 바로 그 과정 자체
+    solution:
+      cut: '''~뿐 아니라'' 받기 → 도시에서 장소 접근이 (시간·비용·편의 면에서) 덜 편할 뿐 아니라(Not only is it less convenient) / 이어서 → 이동 과정 자체가(but the very process) / 여러 부정적 외부효과를 낳는다.'
+      wrong: 도시 접근이 편리해서 이동이 이롭다.
+      wrong_why: Not only + 도치는 '~뿐 아니라'. less convenient(덜 편한)와 negative를 놓쳐 극성을 뒤집었다. 도치를 되돌릴 필요 없이 신호부터 받으면 된다.
+      author_msg: 도시 이동은 불편할 뿐 아니라 사회적 비용까지 낳는 이중고다.
+      key_points:
+      - 'Not only + 조동사(is) + S : ''A뿐 아니라'' — 도치된 채로 이어 읽기.'
+      - 'but (also) B : ''B도'' — 뒤 절이 짝.'
+      - 'the very process : ''바로 그 과정 자체''(강조).'
+  - kind: short
+    sentence: Little evidence exists that suggests modern AI's infallibility or predicts it in the future.
+    source: 2024 고3 6월 20번
+    prompt: 문두 부정어 Little에 유의하여 밑줄 문장을 우리말로 해석하시오.
+    answer: 현대 AI의 무오류성을 시사하거나 미래에 그것을 예측하는 증거는 거의 존재하지 않는다.
+    vocab:
+    - word: little (evidence)
+      meaning: 거의 없는 (증거)
+    - word: infallibility
+      meaning: 무오류성, 절대 틀리지 않음
+    - word: predict
+      meaning: 예측하다
+    solution:
+      cut: '''거의 ~않다'' 신호 받기 → 증거는 거의 존재하지 않는다(Little evidence exists) / that절 → 현대 AI의 무오류성을 시사하거나(suggests) / 미래에 그것을 예측하는.'
+      wrong: AI의 무오류성을 보여 주는 증거가 조금 존재한다.
+      wrong_why: 문두 Little은 '조금 있는'이 아니라 '거의 없는'이라는 부정어. 긍정으로 읽으면 극성이 뒤집힌다. 신호부터 부정으로 받고 that절을 evidence에 걸어 이어 읽으면 된다.
+      author_msg: AI가 절대 틀리지 않는다는 근거는 거의 없다.
+      key_points:
+      - '문두 Little + 명사 : ''거의 없는 ~'' — 부정 신호부터 받기.'
+      - 'that suggests ~ or predicts ~ : 주격 관계절이 evidence를 수식(동사 두 개 병렬).'
+      - 'infallibility : 부정 접두 in-이 붙은 ''무오류성''.'
+  - kind: short
+    sentence: Not only musicians and psychologists, but also committed music enthusiasts and experts often voice the opinion that the beauty of music lies in an expressive deviation from the exactly defined score.
+    source: 2022 고3 9월 24번
+    prompt: Not only ~ but also 구조에 유의하여 밑줄 문장을 우리말로 해석하시오.
+    answer: 음악가와 심리학자뿐만 아니라 열성적인 음악 애호가와 전문가도 흔히 음악의 아름다움이 정확히 규정된 악보로부터의 표현적 일탈에 있다는 의견을 낸다.
+    vocab:
+    - word: committed
+      meaning: 열성적인, 헌신적인
+    - word: deviation
+      meaning: 일탈, 벗어남
+    - word: score
+      meaning: 악보
+    solution:
+      cut: '''A뿐 아니라 B도'' 받기 → 음악가와 심리학자뿐만 아니라(Not only A) / 열성적 음악 애호가와 전문가도(but also B) / 흔히 ~라는 의견을 낸다 → 음악의 아름다움이 정확히 규정된 악보로부터의 표현적 일탈에 있다.'
+      wrong: 음악가와 심리학자만 그런 의견을 내고 애호가는 그렇지 않다.
+      wrong_why: Not only A but also B는 'A뿐 아니라 B도' 둘 다 포함이다. B를 배제하면 의미가 뒤집힌다. 여기선 조동사 도치 없이 주어 A와 B가 나란히 묶이는 형태로, 신호부터 '~뿐 아니라 ~도'로 받으면 된다.
+      author_msg: 전문가부터 애호가까지, 음악의 미는 악보를 살짝 벗어나는 표현에 있다고 입을 모은다.
+      key_points:
+      - 'Not only A but also B : ''A뿐 아니라 B도'' — 둘 다 주어로 포함.'
+      - 'the opinion that ~ : 동격 that절(''~라는 의견'').'
+      - 'deviation from the score : ''악보로부터의 일탈'' — lies in(~에 있다)의 목적어.'
+  emphasis:
+  - kind: mc
+    sentence: Many cultures invented gods to explain these eclipses that shocked, frightened, or surprised them; but very few imagined a god of falling bodies, to which they were so accustomed that they did not even notice them.
+    source: 2024 고3 9월 23번
+    prompt: 밑줄 친 so ~ that 구문의 의미를 살려 가장 자연스럽게 옮긴 것을 고르시오.
+    options:
+    - 그들은 낙하하는 물체에 매우 익숙했고, 그것을 알아차리지도 못했다.
+    - 그들은 낙하하는 물체에 너무 익숙해서, 그것을 알아차리지조차 못했다.
+    answer_index: 1
+    vocab:
+    - word: eclipse
+      meaning: (일식·월식의) 식(蝕)
+    - word: accustomed
+      meaning: 익숙한
+    - word: notice
+      meaning: 알아차리다
+    solution:
+      cut: 하지만 극소수만이 / 낙하하는 물체의 신을 상상했다 / [그것에 그들은 너무 익숙해서(so accustomed) / 알아차리지조차 못할 정도였다(that ~)].
+      wrong: 그들은 낙하하는 물체에 매우 익숙했고, 그것을 알아차리지도 못했다.
+      wrong_why: so ~ that을 단순 병렬(그리고)로 처리해 '너무 ~해서 …하다'라는 정도·인과 관계를 놓쳤다. so는 accustomed의 정도를 부각하고 that절이 그 결과를 이끈다.
+      author_msg: so + 형용사 + that은 '너무 ~해서 …하다' — 앞 상태가 원인, that절이 결과다. 익숙함이 지나쳐 '알아차리지 못함'으로 이어진다.
+      key_points:
+      - 'so 형용사 that S+V : 너무 ~해서 …할 정도다(정도·인과 강조).'
+      - 'to which they were accustomed : be accustomed to의 to를 관계사 which로 받음.'
+      - 'did not even notice : 결과절 — 익숙함이 지나쳐 인지조차 못함.'
+  - kind: short
+    sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
+    source: 2024 고3 9월 33번
+    prompt: It is ~ that 강조구문에서 강조 대상을 밝히고 문장을 우리말로 옮기시오.
+    answer: '강조 대상은 ''the large number of people standing or sitting in squares rather than walking''(걷기보다 광장에 서 있거나 앉아 있는 많은 사람들)이다. 해석: 로마 같은 도시에서 눈에 띄는 것은 바로, 걷기보다 광장에 서 있거나 앉아 있는 많은 사람들이다.'
+    vocab:
+    - word: square
+      meaning: 광장
+    - word: conspicuous
+      meaning: 눈에 띄는
+    - word: rather than
+      meaning: ~라기보다는
+    solution:
+      cut: 로마 같은 도시에서 / 눈에 띄는 것은 바로(it is ~ that) / [광장에 서 있거나 앉아 있는 많은 사람들이다] / 걷기보다는(rather than walking).
+      wrong: 로마 같은 도시에서, 그것은 광장에 서 있거나 앉아 있는 많은 사람들이 눈에 띈다는 것이다.
+      wrong_why: it is ~ that을 가주어-진주어로 오해했다. 실제로는 It is X that 강조구문 — it과 that을 걷어내도 문장이 성립하며, 사이의 X(많은 사람들)를 부각한다.
+      author_msg: It is X that ~ 는 it is/that을 지우면 원래 문장이 되고, 그 사이 X가 강조 대상이다. 여기서 X = 광장에 머무는 많은 사람들.
+      key_points:
+      - 'It is X that ~ : ~인 것은 바로 X다(X를 부각하는 강조구문).'
+      - 강조 대상 X = the large number of people standing or sitting ~.
+      - '환원 시 : The large number of people ... is conspicuous.'
+  parallel:
+  - kind: mc
+    sentence: Unfortunately, at the scales, accuracy, and precision most useful to protected area management, the future not only promises to be unprecedented, but it also promises to be unpredictable.
+    source: 2024 고3 9월 39번
+    prompt: not only A but (also) B의 병렬 구조에 유의하여 가장 적절한 해석을 고르시오.
+    options:
+    - 안타깝게도, 보호 구역 관리에 가장 유용한 규모, 정확도, 정밀도에서 미래는 전례 없는 것을 약속하지 않고 그저 예측 불가능함만을 약속한다.
+    - 안타깝게도, 보호 구역 관리에 가장 유용한 규모, 정확도, 정밀도에서 미래는 전례 없을 것으로 예상될 뿐만 아니라, 예측 불가능할 것으로도 예상된다.
+    answer_index: 1
+    vocab:
+    - word: protected area
+      meaning: 보호 구역
+    - word: unprecedented
+      meaning: 전례 없는
+    - word: unpredictable
+      meaning: 예측 불가능한
+    solution:
+      cut: 안타깝게도 / [보호 구역 관리에 가장 유용한] 규모, 정확도, 정밀도에서 / 미래는 / 전례 없을 것으로 예상될 뿐 아니라(not only promises to be unprecedented) / 예측 불가능할 것으로도 예상된다(but it also promises to be unpredictable).
+      wrong: 미래는 전례 없는 것을 약속하지 않고 그저 예측 불가능함만을 약속한다.
+      wrong_why: 'not only A but also B는 ''A뿐 아니라 B도''(둘 다 긍정)이다. A(전례 없음)를 부정으로 읽어 ''A가 아니라 B''로 옮기면 오역. 병렬 짝: promises to be unprecedented ↔ promises to be unpredictable(동사구).'
+      key_points:
+      - 'not only A but (also) B : A뿐 아니라 B도(둘 다 성립).'
+      - 병렬 짝 = promises to be unprecedented(동사구) ↔ promises to be unpredictable(동사구).
+      - B절의 it also는 주어를 반복한 것으로, A와 동일한 the future를 가리킨다.
+  - kind: mc
+    sentence: Learning how to choose from alternatives and make a decision requires not only good personal values, but also knowledge competence in the business area of concern.
+    source: 2022 고3 9월 29번
+    prompt: not only A but also B의 병렬 짝을 고려하여 가장 적절한 해석을 고르시오.
+    options:
+    - 대안 중에서 선택하고 결정을 내리는 방법을 배우는 것은 좋은 개인적 가치관을 요구하지만, 해당 사업 분야의 지식 역량은 요구하지 않는다.
+    - 대안 중에서 선택하고 결정을 내리는 방법을 배우는 것은 좋은 개인적 가치관뿐만 아니라, 해당 사업 분야의 지식 역량도 요구한다.
+    answer_index: 1
+    vocab:
+    - word: alternative
+      meaning: 대안
+    - word: personal values
+      meaning: 개인적 가치관
+    - word: competence
+      meaning: 역량, 능력
+    solution:
+      cut: '[대안 중에서 선택하고 결정을 내리는 방법을 배우는 것]은 / 요구한다 / 좋은 개인적 가치관뿐 아니라(not only good personal values) / 해당 사업 분야의 지식 역량도(but also knowledge competence).'
+      wrong: 좋은 개인적 가치관은 요구하지만, 해당 사업 분야의 지식 역량은 요구하지 않는다.
+      wrong_why: 'not only A but also B는 A와 B를 모두 requires의 목적어로 아우른다(둘 다 필요). B를 부정으로 옮기면 오역. 병렬 짝: good personal values ↔ knowledge competence(명사구, 둘 다 requires의 목적어).'
+      key_points:
+      - 'not only A but also B : A뿐 아니라 B도(둘 다 requires의 목적어).'
+      - 병렬 짝 = good personal values(명사구) ↔ knowledge competence(명사구).
+      - Learning how to ... 은 동명사 주어로 단수 취급 → requires.
+  - kind: mc
+    sentence: The opening da-da-da-DUM that everyone has heard somewhere or another appears in an incredible variety of ways throughout not only the opening movement, but the remaining three movements, like a kind of motto or a connective thread.
+    source: 2022 고3 6월 34번
+    prompt: not only A but B가 전치사 throughout의 목적어를 병렬로 잇고 있음에 유의하여 해석을 고르시오.
+    options:
+    - 누구나 어디선가 들어본 그 서두의 da-da-da-DUM은 일종의 모토나 연결하는 실처럼, 1악장 전체에 걸쳐 놀랄 만큼 다양한 방식으로 등장한다.
+    - 누구나 어디선가 들어본 그 서두의 da-da-da-DUM은 일종의 모토나 연결하는 실처럼, 1악장뿐만 아니라 나머지 세 악장에 걸쳐서도 놀랄 만큼 다양한 방식으로 등장한다.
+    answer_index: 1
+    vocab:
+    - word: movement
+      meaning: (교향곡의) 악장
+    - word: motto
+      meaning: 모토, 표어
+    - word: connective thread
+      meaning: 연결하는 실, 연결 고리
+    solution:
+      cut: '[누구나 어디선가 들어본] 그 서두의 da-da-da-DUM은 / 등장한다 / 놀랄 만큼 다양한 방식으로 / 1악장뿐 아니라(not only the opening movement) / 나머지 세 악장에 걸쳐서도(but the remaining three movements) / 일종의 모토나 연결하는 실처럼.'
+      wrong: 1악장 전체에 걸쳐 놀랄 만큼 다양한 방식으로 등장한다.
+      wrong_why: 'throughout의 목적어가 not only A but B로 두 개(the opening movement, the remaining three movements)이다. A만 옮기고 B(나머지 세 악장)를 빠뜨리면 오역. 병렬 짝: the opening movement ↔ the remaining three movements(명사구).'
+      key_points:
+      - 'not only A but B : A뿐 아니라 B도(also가 생략될 수 있음).'
+      - 병렬 짝 = the opening movement ↔ the remaining three movements(throughout의 목적어인 명사구).
+      - that everyone has heard ... 는 da-da-da-DUM을 수식하는 목적격 관계사절.
+  - kind: short
+    sentence: Sometimes these internal narratives we form not only shape our beliefs and opinions but also become deeply rooted in our identity.
+    source: 2026 고3 11월 38번
+    prompt: not only A but also B에 유의하여 해석하시오.
+    answer: 때때로 우리가 만드는 이 내적 이야기들은 우리의 믿음과 의견을 형성할 뿐 아니라, 우리의 정체성에 깊이 뿌리내리기도 한다.
+    vocab:
+    - word: internal narrative
+      meaning: 내적 이야기
+    - word: shape
+      meaning: 형성하다
+    - word: rooted in
+      meaning: ~에 뿌리내린
+    solution:
+      cut: 때때로 / [우리가 만드는] 이 내적 이야기들은 / 형성할 뿐 아니라(not only shape) / 우리의 믿음과 의견을 / 뿌리내리기도 한다(but also become rooted) / 우리의 정체성에 깊이.
+      wrong: 내적 이야기는 믿음을 형성하지만 정체성에는 뿌리내리지 못한다.
+      wrong_why: 'not only A but also B는 ''A뿐 아니라 B도''(둘 다 긍정). B를 부정으로 읽으면 안 된다. 병렬 짝: shape ↔ become rooted(동사).'
+      key_points:
+      - 'not only A but also B : A뿐 아니라 B도(둘 다).'
+      - 병렬 짝 = shape(동사) ↔ become(동사).
+      - 'these internal narratives (we form) : 주어 + 목적격 관계사절.'
+  - kind: short
+    sentence: What's behind this idea is not only landscape architects' desire to design aesthetically suggestive park spaces, but a much longer history of Western thought that envisions cities and nature as antithetical spaces and oppositional forces.
+    source: 2023 고3 11월 38번
+    prompt: not only A but B가 be동사(is)의 보어를 병렬로 잇고 있음에 유의하여 해석하시오.
+    answer: 이 생각의 배후에 있는 것은 미학적으로 시사하는 바가 있는 공원 공간을 설계하려는 조경가들의 욕망뿐만 아니라, 도시와 자연을 대립하는 공간이자 대립하는 힘으로 여기는 훨씬 더 긴 서구 사상의 역사이기도 하다.
+    vocab:
+    - word: landscape architect
+      meaning: 조경가
+    - word: aesthetically suggestive
+      meaning: 미학적으로 시사하는 바가 있는
+    - word: antithetical
+      meaning: 대립하는, 상반되는
+    solution:
+      cut: '[이 생각의 배후에 있는 것]은 / 조경가들의 욕망뿐 아니라(not only landscape architects'' desire) / 미학적으로 시사하는 바가 있는 공원 공간을 설계하려는 / 훨씬 더 긴 서구 사상의 역사이기도 하다(but a much longer history) / [도시와 자연을 대립 공간이자 대립하는 힘으로 여기는].'
+      wrong: 이 생각의 배후에 있는 것은 조경가들의 욕망이지 서구 사상의 역사는 아니다.
+      wrong_why: 'not only A but B는 is의 보어 두 개(A, B)를 모두 긍정으로 아우른다. B를 배제하면 오역. 병렬 짝: landscape architects'' desire ↔ a much longer history of Western thought(명사구).'
+      key_points:
+      - 'not only A but B : A뿐 아니라 B도(둘 다 is의 보어).'
+      - 병렬 짝 = landscape architects' desire(명사구) ↔ a much longer history of Western thought(명사구).
+      - that envisions ... 는 history를 수식하는 관계사절; envision A as B는 'A를 B로 여기다'.
+  what_clause:
+  - kind: mc
+    sentence: In the absence of a universal standard or law, what matters is the outcome or consequences; so, the end justifies the means.
+    source: 2026 고3 11월 30번
+    prompt: 밑줄 없는 what matters의 뜻을 가장 잘 살린 해석을 고르시오.
+    options:
+    - 보편적 기준이나 법이 없을 때, 무엇이 문제인가는 결과이다; 그래서 목적이 수단을 정당화한다.
+    - 보편적 기준이나 법이 없을 때, 중요한 것은 결과이다; 그래서 목적이 수단을 정당화한다.
+    answer_index: 1
+    vocab:
+    - word: in the absence of
+      meaning: ~이 없을 때
+    - word: outcome
+      meaning: 결과
+    - word: justify
+      meaning: 정당화하다
+    solution:
+      cut: '[보편적 기준이나 법이 없을 때] / 중요한 것은(what matters = ~한 것) / 결과 또는 결말이다 / 그래서 / 목적이 수단을 정당화한다.'
+      wrong: 무엇이 문제인가는 결과이다.
+      wrong_why: what을 의문사 '무엇'으로 좁게 읽었다. 여기서 what matters는 [중요한 것]이라는 하나의 명사 덩어리로 문장의 주어다.
+      author_msg: what을 보면 반사적으로 '무엇'이 아니라 [ ]로 묶어 '~하는 것'으로 먼저 읽어 보라.
+      key_points:
+      - 'what S+V : ''~하는 것''(선행사 포함 명사절).'
+      - '[what matters] : ''중요한 것''으로 문장의 주어 역할.'
+      - 'the end justifies the means : 목적이 수단을 정당화한다(속담).'
+  - kind: mc
+    sentence: Suddenly, you judge everyone from the university by what you've experienced on just a few unfortunate occasions.
+    source: 2026 고3 11월 38번
+    prompt: what you've experienced의 해석으로 알맞은 것을 고르시오.
+    options:
+    - 네가 단지 몇 번의 불운한 경우에 경험한 것에 의해
+    - 네가 무엇을 단지 몇 번의 불운한 경우에 경험했는지에 의해
+    answer_index: 0
+    vocab:
+    - word: judge
+      meaning: 판단하다
+    - word: occasion
+      meaning: 경우, 때
+    - word: unfortunate
+      meaning: 불운한
+    solution:
+      cut: 갑자기 / 너는 그 대학의 모든 사람을 판단한다 / [네가 단지 몇 번의 불운한 경우에 경험한 것]에 의해.
+      wrong: 네가 무엇을 경험했는지에 의해
+      wrong_why: what을 간접의문문 '무엇을 ~했는지'로 읽어 전치사 by의 목적어 범위를 흐렸다. 여기서는 [경험한 것]이라는 명사절이 by의 목적어다.
+      author_msg: 전치사 by 뒤의 what절은 통째로 [ ]로 묶어 하나의 명사로 삼아라.
+      key_points:
+      - 'what S+V : 선행사를 품은 ''~하는 것''.'
+      - '[what you''ve experienced] : 전치사 by의 목적어인 명사 덩어리.'
+      - 'by + 명사절 : ''~한 것에 의해/근거하여''로 판단의 근거를 나타냄.'
+  - kind: mc
+    sentence: Labor sharing groups are part of what has been called a moral economy since no one keeps formal records on how much any family puts in or takes out.
+    source: 2023 고3 6월 32번
+    prompt: what has been called a moral economy의 해석으로 알맞은 것을 고르시오.
+    options:
+    - 무엇이 도덕 경제라고 불려 왔는가의 일부
+    - 도덕 경제라고 불려 온 것의 일부
+    answer_index: 1
+    vocab:
+    - word: labor sharing
+      meaning: 노동 나눔, 품앗이
+    - word: moral economy
+      meaning: 도덕 경제
+    - word: formal record
+      meaning: 공식 기록
+    solution:
+      cut: 노동 나눔 집단은 / [도덕 경제라고 불려 온 것]의 일부이다 / 아무도 공식 기록을 남기지 않기 때문에 / 어느 가정이 얼마나 넣거나 빼는지에 대해.
+      wrong: 무엇이 도덕 경제라고 불려 왔는가의 일부
+      wrong_why: what을 의문사로 읽어 '무엇이 ~인가'로 옮겼다. 여기서 [what has been called a moral economy]는 전치사 of의 목적어인 명사절로 '~라고 불려 온 것'이다.
+      author_msg: part of 뒤 what절은 [ ]로 묶어 of의 목적어 명사로 처리하라.
+      key_points:
+      - 'what S+V : 선행사 포함 명사절 ''~하는 것''.'
+      - '[what has been called a moral economy] : ''도덕 경제라고 불려 온 것''(of의 목적어).'
+      - call A B(A를 B라고 부르다)의 수동태 be called B가 what절 안에 들어 있음.
+  - kind: short
+    sentence: We tend not to notice those cultural norms until they violate what we consider to be common sense, good judgment, or the nature of things.
+    source: 2022 고3 9월 20번
+    prompt: what we consider to be ...에 유의하여 해석하시오.
+    answer: 우리는 그 문화적 규범들이 우리가 상식, 올바른 판단, 또는 사물의 본질이라고 여기는 것을 위반할 때까지는 그것들을 알아차리지 못하는 경향이 있다.
+    vocab:
+    - word: cultural norm
+      meaning: 문화적 규범
+    - word: violate
+      meaning: 위반하다
+    - word: common sense
+      meaning: 상식
+    solution:
+      cut: 우리는 / 그 문화적 규범들을 알아차리지 못하는 경향이 있다 / 그것들이 위반할 때까지 / [우리가 상식, 올바른 판단, 또는 사물의 본질이라고 여기는 것]을.
+      wrong: 우리가 무엇을 상식이라고 여기는지를 그것들이 위반할 때까지
+      wrong_why: what을 '무엇을 ~하는지'로 읽었다. 여기서 [what we consider to be ...]는 violate의 목적어인 명사 덩어리 '우리가 ~라고 여기는 것'이다.
+      author_msg: 동사 violate의 목적어를 찾을 때 what절 전체를 [ ]로 묶어 하나의 명사로 보라.
+      key_points:
+      - 'what S+V : ''~하는 것''(선행사 포함 명사절).'
+      - '[what we consider to be A] : ''우리가 A라고 여기는 것''(violate의 목적어).'
+      - consider O to be C 구조가 what절 안에서 what을 목적어로 삼고 있음.
+  - kind: short
+    sentence: Becoming competent in another culture means looking beyond behavior to see if we can understand the attitudes, beliefs, and values that motivate what we observe.
+    source: 2022 고3 9월 20번
+    prompt: what we observe에 유의하여 해석하시오.
+    answer: 다른 문화에 능숙해진다는 것은 우리가 관찰하는 것을 유발하는 태도, 신념, 가치를 이해할 수 있는지 알아보기 위해 행동 너머를 바라보는 것을 의미한다.
+    vocab:
+    - word: competent
+      meaning: 능숙한, 유능한
+    - word: look beyond
+      meaning: ~ 너머를 보다
+    - word: motivate
+      meaning: 유발하다, 동기를 부여하다
+    solution:
+      cut: 다른 문화에 능숙해진다는 것은 / 행동 너머를 바라보는 것을 의미한다 / 우리가 이해할 수 있는지 알아보기 위해 / 태도, 신념, 가치를 / [우리가 관찰하는 것]을 유발하는.
+      wrong: 우리가 무엇을 관찰하는지를 유발하는 태도, 신념, 가치
+      wrong_why: what을 의문사 '무엇을 ~하는지'로 옮겼다. [what we observe]는 관계절 안 동사 motivate의 목적어인 명사절 '우리가 관찰하는 것'이다.
+      author_msg: motivate의 목적어 자리에 온 what절을 [ ]로 묶어 '~하는 것'으로 읽어라.
+      key_points:
+      - 'what S+V : 선행사를 품은 ''~하는 것''.'
+      - '[what we observe] : ''우리가 관찰하는 것''(motivate의 목적어).'
+      - that motivate ...는 앞의 attitudes, beliefs, and values를 수식하는 관계절.
+  - kind: short
+    sentence: We must know who this person is, who these other people are, what their relationship is, what is at stake in the scene, and the like.
+    source: 2024 고3 11월 33번
+    prompt: what is at stake in the scene에 유의하여 해석하시오.
+    answer: 우리는 이 사람이 누구인지, 이 다른 사람들이 누구인지, 그들의 관계가 무엇인지, 그 장면에서 무엇이 위태로운지 등을 알아야 한다.
+    vocab:
+    - word: relationship
+      meaning: 관계
+    - word: at stake
+      meaning: 위태로운, 걸려 있는
+    - word: and the like
+      meaning: 기타 등등
+    solution:
+      cut: 우리는 알아야 한다 / [이 사람이 누구인지], [이 다른 사람들이 누구인지], [그들의 관계가 무엇인지], [그 장면에서 무엇이 위태로운지] / 등등을.
+      wrong: 그 장면에서 위태로운 것을 알아야 한다
+      wrong_why: 이 문장에서는 who ... 와 나란히 놓인 간접의문문이므로 what을 의문사 '무엇이'로 읽어야 한다. 관계대명사 '~하는 것'으로 좁혀 옮기면 병렬된 의문의 뉘앙스가 사라진다.
+      author_msg: what은 항상 '~하는 것'만은 아니다. who/what이 나란히 이어지는 know의 목적어 자리에서는 간접의문문 '무엇이 ~인지'로 읽어라.
+      key_points:
+      - know 뒤 who is / what is가 병렬된 간접의문문 구조.
+      - '[what is at stake in the scene] : ''무엇이 위태로운지''(know의 목적어절).'
+      - 같은 what이라도 문맥에 따라 관계대명사('~것')와 의문사('무엇')를 구분해야 함.
+  that_clause:
+  - kind: mc
+    sentence: However, sound graphs of songs recorded over several weeks or months reveal that during this practice period the bird fine-tunes his efforts until he produces an accurate copy of the memorized template.
+    source: 2024 고3 6월 35번
+    prompt: reveal that의 that절 범위에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 그러나 몇 주 또는 몇 달에 걸쳐 녹음된 노래의 음향 그래프가 이 연습 기간 동안 드러나고, 그 새는 암기한 원형의 정확한 복제본을 만들어낼 때까지 자신의 노력을 미세하게 조정한다.
+    - 그러나 몇 주 또는 몇 달에 걸쳐 녹음된 노래의 음향 그래프는 이 연습 기간 동안 그 새가 암기한 원형의 정확한 복제본을 만들어낼 때까지 자신의 노력을 미세하게 조정한다는 것을 보여준다.
+    answer_index: 1
+    vocab:
+    - word: fine-tune
+      meaning: 미세하게 조정하다
+    - word: accurate
+      meaning: 정확한
+    - word: template
+      meaning: 원형, 본보기
+    solution:
+      cut: 그러나 / [몇 주 또는 몇 달에 걸쳐 녹음된 노래의] 음향 그래프는 / 보여준다 / [이 연습 기간 동안 그 새가 (암기한 원형의 정확한 복제본을 만들어낼 때까지) 자신의 노력을 미세하게 조정한다는 것을](that ~).
+      wrong: 음향 그래프가 이 연습 기간 동안 드러나고, 그 새는 ~ 노력을 조정한다.
+      wrong_why: reveal은 타동사이고 뒤의 that절 전체가 목적어(명사절)이다. reveal을 '드러나다'라는 자동사로 보고 that절을 별개의 문장으로 끊으면 오역이다.
+      author_msg: reveal that S+V = '~라는 것을 드러내다/보여주다'. that 이하 완전한 절 전체가 하나의 목적어 덩어리다.
+      key_points:
+      - 'reveal that S+V : that = 목적어 명사절(''~라는 것을'').'
+      - 'during this practice period ~ template : that절 내부의 부사·시간 구조.'
+      - 'until he produces ~ : ''~할 때까지''(fine-tunes를 수식).'
+  - kind: mc
+    sentence: When we blush, it's a signal to others that we recognize that a social norm has been broken; it is an apology for a faux pas.
+    source: 2023 고3 6월 37번
+    prompt: 두 개의 that의 정체(동격/명사절)를 구분하여 올바른 해석을 고르시오.
+    options:
+    - 우리가 얼굴을 붉힐 때, 그것은 다른 사람들에게 보내는 신호인데, 그 신호를 우리는 사회적 규범이 깨진 것으로 인식하며, 그것은 실수에 대한 사과이다.
+    - 우리가 얼굴을 붉힐 때, 그것은 우리가 사회적 규범이 깨졌다는 것을 인식하고 있다는 것을 다른 사람들에게 알리는 신호이며, 그것은 실수에 대한 사과이다.
+    answer_index: 1
+    vocab:
+    - word: blush
+      meaning: 얼굴을 붉히다
+    - word: social norm
+      meaning: 사회적 규범
+    - word: faux pas
+      meaning: 실수, 결례
+    solution:
+      cut: 우리가 얼굴을 붉힐 때 / 그것은 [다른 사람들에게 알리는] 신호이다 / [우리가 (사회적 규범이 깨졌다는 것을) 인식하고 있다는](signal과 동격 that) ; / 그것은 실수에 대한 사과이다.
+      wrong: 그것은 다른 사람들에게 보내는 신호인데, 그 신호를 우리는 사회적 규범이 깨진 것으로 인식한다.
+      wrong_why: 첫 번째 that은 a signal의 내용을 설명하는 동격 that('~라는 신호')이지, signal을 목적어로 받는 관계사가 아니다. 두 번째 that은 recognize의 목적어 명사절이다.
+      author_msg: 명사(signal, fact, notion 등) 뒤 완전한 절이 오면 동격 that. 인식·전달 동사(recognize) 뒤 완전한 절이 오면 목적어 명사절. 두 that의 층위를 구분하라.
+      key_points:
+      - 'a signal + that S+V : 동격 that(''~라는 신호'').'
+      - 'recognize that S+V : 목적어 명사절(''~라는 것을 인식하다'').'
+      - 동격 that절은 앞 명사와 완전한 절, 관계사 that절은 불완전한 절로 구분.
+  - kind: mc
+    sentence: Thus, when we are astonished by someone with publications in different scientific fields, realize that each topic was explored during a specific period of time.
+    source: 2024 고3 11월 40번
+    prompt: realize that의 구조(명령문+명사절)에 유의하여 올바른 해석을 고르시오.
+    options:
+    - 따라서 서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때, 각 주제가 특정한 기간 동안 탐구되었다는 것을 깨달아라.
+    - 따라서 서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때, 각 주제가 탐구되었던 그 특정한 기간을 깨달아라.
+    answer_index: 0
+    vocab:
+    - word: astonished
+      meaning: 놀란
+    - word: publication
+      meaning: 출판물, 발표된 논문
+    - word: explore
+      meaning: 탐구하다
+    solution:
+      cut: 따라서 / [서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때] / 깨달아라(명령문) / [각 주제가 특정한 기간 동안 탐구되었다는 것을](that ~).
+      wrong: 각 주제가 탐구되었던 그 특정한 기간을 깨달아라.
+      wrong_why: realize 뒤의 that은 목적어 명사절을 이끄는 접속사(that 뒤 완전한 절)이지, '기간(period)'을 수식하는 관계사가 아니다. that절 전체가 '~라는 것을'로 목적어가 된다.
+      author_msg: realize that S+V = '~라는 것을 깨달아라'. that 뒤에 주어·동사·부사구가 모두 갖춰진 완전한 절이면 명사절이다.
+      key_points:
+      - 'realize that S+V : that = 목적어 명사절(''~라는 것을'').'
+      - '주절이 동사원형으로 시작 : 명령문(''깨달아라'').'
+      - 'was explored during ~ : 완전한 절 → that은 접속사(명사절).'
+  - kind: short
+    sentence: However, while we sometimes want to disappear when we involuntarily go bright red, psychologists argue that blushing actually serves a positive social purpose.
+    source: 2023 고3 6월 37번
+    prompt: argue that에 유의하여 해석하시오.
+    answer: 그러나 우리가 무심코 얼굴이 새빨개질 때 사라지고 싶어질 때도 있지만, 심리학자들은 얼굴 붉힘이 실제로 긍정적인 사회적 기능을 한다고 주장한다.
+    vocab:
+    - word: involuntarily
+      meaning: 무심코, 자기도 모르게
+    - word: blush
+      meaning: 얼굴을 붉히다, 얼굴 붉힘
+    - word: serve a purpose
+      meaning: 목적/기능을 하다
+    solution:
+      cut: 그러나 / [우리가 무심코 얼굴이 빨개질 때 사라지고 싶기도 하지만] / 심리학자들은 주장한다 / [얼굴 붉힘이 실제로 긍정적 사회적 기능을 한다는 것을](that ~).
+      wrong: 심리학자들은 얼굴 붉힘이 긍정적 기능을 한다고 주장하는 것에 반대한다.
+      wrong_why: argue that S+V는 '~라고 주장하다'(that = 목적어 명사절)이다. 부정·반대의 의미가 아니다.
+      author_msg: 인식·전달 동사(argue) + that S+V = '~라는 것을 주장하다'. that절 전체가 목적어 덩어리다.
+      key_points:
+      - 'argue that S+V : that = 목적어 명사절(''~라는 것을'').'
+      - 'while ~ : 양보(~이지만).'
+      - 'involuntarily go bright red : 무심코 얼굴이 빨개지다.'
+  - kind: short
+    sentence: Yet, the application of logical reasoning will reveal that the figure only appears small because it obeys the laws of geometrical perspective.
+    source: 2023 고3 6월 34번
+    prompt: reveal that의 that절 범위에 유의하여 해석하시오.
+    answer: 하지만 논리적 추론의 적용은 그 형상이 기하학적 원근법의 법칙을 따르기 때문에 단지 작게 보일 뿐이라는 것을 드러낼 것이다.
+    vocab:
+    - word: logical reasoning
+      meaning: 논리적 추론
+    - word: obey
+      meaning: 따르다, 순종하다
+    - word: geometrical perspective
+      meaning: 기하학적 원근법
+    solution:
+      cut: 하지만 / [논리적 추론의 적용]은 / 드러낼 것이다 / [그 형상이 (기하학적 원근법의 법칙을 따르기 때문에) 단지 작게 보일 뿐이라는 것을](that ~).
+      wrong: 논리적 추론의 적용이 드러날 것이고, 그 형상은 단지 작게 보일 뿐이다.
+      wrong_why: reveal은 타동사이며 뒤의 that절 전체가 목적어 명사절이다. reveal을 자동사('드러나다')로 보고 that절을 끊으면 안 된다.
+      author_msg: reveal that S+V = '~라는 것을 드러내다'. that 뒤 the figure ~ perspective 전체가 하나의 목적어 절이다.
+      key_points:
+      - 'reveal that S+V : that = 목적어 명사절(''~라는 것을'').'
+      - 'only appears small : ''단지 작게 보일 뿐이다''(appear + 형용사).'
+      - 'because it obeys ~ : that절 내부의 이유 부사절.'
+  - kind: short
+    sentence: From birth, infants will orient preferentially towards the human face and voice, seeming to know that such stimuli are particularly meaningful for them.
+    source: 2024 고3 11월 29번
+    prompt: know that의 명사절에 유의하여 해석하시오.
+    answer: 태어날 때부터, 유아들은 인간의 얼굴과 목소리 쪽으로 우선적으로 향하는데, 그러한 자극이 자신들에게 특히 의미가 있다는 것을 아는 것처럼 보인다.
+    vocab:
+    - word: orient towards
+      meaning: ~쪽으로 향하다
+    - word: preferentially
+      meaning: 우선적으로
+    - word: stimuli
+      meaning: 자극(stimulus의 복수)
+    solution:
+      cut: 태어날 때부터 / 유아들은 [인간의 얼굴과 목소리 쪽으로] 우선적으로 향한다 / [아는 것처럼 보이며](seeming to know) / [그러한 자극이 자신들에게 특히 의미가 있다는 것을](that ~).
+      wrong: 유아들은 ~ 향하는데, 그러한 자극을 아는 것이 자신들에게 특히 의미가 있어 보인다.
+      wrong_why: know의 목적어는 that절 전체('~라는 것을')이다. that을 관계사처럼 끊어 stimuli만 목적어로 보면 오역이다.
+      author_msg: know that S+V = '~라는 것을 알다'. that 뒤 완전한 절 전체가 목적어 명사절이다.
+      key_points:
+      - 'know that S+V : that = 목적어 명사절(''~라는 것을'').'
+      - 'seeming to ~ : 분사구문(''~하는 것처럼 보이면서'').'
+      - 'such stimuli are meaningful : that절 내부의 완전한 절.'
