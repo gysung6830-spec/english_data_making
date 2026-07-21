@@ -1,11 +1,4 @@
-# ============================================================
-#  1부 · 평가원 코드 — 세부목차별 실전적용(문제 ↔ 해설)
-#  각 목차 뒤에 '문제(여러 개) → 해설(같은 수)'로 나온다.
-#  모든 문장은 실제 평가원 기출. 코딩 없이 여기서 문항을 추가·수정하세요.
-#  · kind: mc(객관식) | short(주관식)
-#  · mc → options:[오역, 정답] + answer_index / short → answer(모범답안)
-#  · solution: cut/wrong/wrong_why/author_msg/key_points
-# ============================================================
+# 1부 · 평가원 코드 — 세부목차별 실전적용(문제↔해설). 실제 평가원 기출. 코딩 없이 편집.
 practice:
   causation:
   - kind: mc
@@ -233,6 +226,27 @@ practice:
       - 'A cause B : A가 B를 일으키다(정방향).'
       - 'signal danger ... and cause ... : 동사 2개 병렬(주어 = Departure).'
       - 'what appears to be ~ : ''~처럼 보이는 것''(cause의 목적어, 명사절).'
+  - kind: short
+    sentence: And it's not due to necessity but rather that the city quality is so inviting.
+    source: 2024 고3 9월 33번
+    prompt: not due to A but rather B에 유의하여 해석하시오.
+    answer: 그리고 그것은 필요(필연) 때문이 아니라, 오히려 도시의 질이 매우 매력적이기 때문이다.
+    vocab:
+    - word: necessity
+      meaning: 필요, 필연
+    - word: inviting
+      meaning: 매력적인
+    - word: due to
+      meaning: ~때문에
+    solution:
+      cut: 그리고 그것은 / ~때문이 아니라(not due to) / 필요(필연) / 오히려(but rather) / 도시의 질이 / 매우 매력적이기 때문이다.
+      wrong: 그것은 필요 때문이지, 도시의 질 때문이 아니다.
+      wrong_why: not A but rather B는 'A가 아니라 오히려 B' — A(necessity)를 원인으로 잡고 B(도시 질)를 부정하면 정반대다.
+      author_msg: 사람들이 그렇게 하는 건 어쩔 수 없어서가 아니라, 도시가 그만큼 매력적이라서다.
+      key_points:
+      - 'not due to A but rather B : A 때문이 아니라 오히려 B 때문(원인을 B로 확정).'
+      - 'due to : ~때문에(원인 표시) — 여기선 앞의 not이 붙어 원인을 부정.'
+      - 'so inviting : 너무나 매력적인(so + 형용사, 정도 강조).'
   contrast:
   - kind: mc
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
