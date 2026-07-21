@@ -38,12 +38,12 @@ body {
 }
 
 :root {
-  /* 팔레트: 플럼(주색) + 앰버(강조) — 참고 사진의 네이비/핑크와 구분되는 톤 */
-  --navy:  #453a78;   /* 주색: 딥 플럼 */
-  --navy2: #574a93;
+  /* 팔레트: 딥그린(주색) + 앰버(강조) */
+  --navy:  #0f5c4d;   /* 주색: 딥 그린 */
+  --navy2: #177a63;
   --gold:  #c98a3b;   /* 강조: 앰버 */
-  --tint:  #f3f1fa;   /* 플럼 연한 배경 */
-  --tint2: #e9e5f6;
+  --tint:  #eef7f3;   /* 그린 연한 배경 */
+  --tint2: #dcefe8;
   --wrong:   #c0392b;
   --wrong-bg:#fdf1ef;
   --right:   #1f8a54;
@@ -59,8 +59,8 @@ body {
 .cover {
   page: cover;
   height: 297mm;
-  background: linear-gradient(150deg, #3b3168 0%, #574a93 55%, #3b3168 100%);
-  color: #f4ecdd;
+  background: linear-gradient(150deg, #0c4a3e 0%, #177a63 55%, #0c4a3e 100%);
+  color: #eafaf4;
   display: flex;
   flex-direction: column;
   align-items: center;
