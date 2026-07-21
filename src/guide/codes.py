@@ -152,6 +152,38 @@ def load_part2_workbook(path: str | Path | None = None):
                  "해석공식을 눈으로 익히고, 같은 전략을 반복 적용한다.", groups=groups)
 
 
+def load_codes_practice(path: str | Path | None = None) -> dict:
+    """codes_practice.yaml → {카테고리 id: [PracticeItem …]} (문제↔해설 페이지용).
+
+    kind별로 번호를 따로 매긴다(객관식 1..5 / 주관식 1..5).
+    """
+    from .schemas import PracticeItem, PracticeSolution, VocabItem
+    p = Path(path) if path else (Path(__file__).resolve().parent / "codes_practice.yaml")
+    if not p.exists():
+        return {}
+    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    out: dict[str, list] = {}
+    for cid, items in (data.get("practice") or {}).items():
+        lst = []
+        mc_n = sh_n = 0
+        for pr in items or []:
+            kind = pr.get("kind", "mc")
+            if kind == "mc":
+                mc_n += 1; no = mc_n
+            else:
+                sh_n += 1; no = sh_n
+            sol = pr.get("solution")
+            lst.append(PracticeItem(
+                no=no, kind=kind, sentence=pr["sentence"], source=pr.get("source", ""),
+                prompt=pr.get("prompt", ""), options=pr.get("options", []),
+                answer_index=pr.get("answer_index", 0), answer=pr.get("answer", ""),
+                vocab=[VocabItem(**v) for v in pr.get("vocab", [])],
+                solution=PracticeSolution(**sol) if sol else None,
+            ))
+        out[cid] = lst
+    return out
+
+
 def load_categories(path: str | Path | None = None) -> list[Category]:
     p = Path(path) if path else CODES_PATH
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}

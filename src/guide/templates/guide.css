@@ -397,7 +397,10 @@ body {
 .wb-note { color: var(--muted); font-size: 10px; margin: 10px 0; }
 :root { --goldbg: #fbf3e5; }
 
-/* ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────── */
+/* ── 실전적용: 문제 페이지(왼쪽) ↔ 해설 페이지(오른쪽) ── */
+/* 인쇄(양면) 시 문제는 왼쪽(verso) 페이지에서 시작, 해설은 마주보는 오른쪽(recto)에 오게 한다. */
+.drill-q { page-break-before: left; }
+.drill-a { page-break-before: right; }
 .drill-band { background: linear-gradient(100deg, var(--navy), var(--navy2)); color: #eafaf4;
   font-weight: 800; font-size: 15px; padding: 10px 16px; border-radius: 9px; margin-bottom: 12px; }
 .drill-band.dk { background: #08382f; }
@@ -419,6 +422,8 @@ body {
 .sol { margin: 12px 0; border-radius: 10px; padding: 11px 14px; position: relative; font-size: 11px; line-height: 1.7; }
 .sol-tag { display: inline-block; color: #fff; font-weight: 800; font-size: 9.5px;
   padding: 2px 11px; border-radius: 7px; margin-right: 8px; }
+.sol.ans { background: #eef7f3; border: 1px solid var(--tint2); }
+.sol.ans .sol-tag { background: var(--navy); }
 .sol.cut { background: var(--tint); } .sol.cut .sol-tag { background: var(--navy2); }
 .sol.wrong { background: var(--wrong-bg); } .sol.wrong .sol-tag { background: var(--wrong); }
 .sol.wrong .sol-why { color: var(--wrong); font-size: 10px; margin-top: 4px; }

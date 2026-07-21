@@ -1,0 +1,313 @@
+# ============================================================
+#  1부 · 평가원 코드 — 세부목차별 실전적용(문제 ↔ 해설)
+#  각 목차 뒤에 '문제 페이지(왼쪽) → 해설 페이지(오른쪽)'로 나온다.
+#  목표: 목차마다 객관식 5 + 주관식 5. (아래에 채운 만큼 렌더링됨)
+#  모든 문장은 실제 평가원 기출. 코딩 없이 여기서 문항을 추가·수정하세요.
+#  · kind: mc(객관식) | short(주관식)
+#  · mc  → options:[오역, 정답 …] + answer_index
+#  · short → answer(모범답안)
+#  · solution: cut(끊어읽기)/wrong(오역)/wrong_why/author_msg(필자 말)/key_points(주요구문)
+# ============================================================
+
+practice:
+  causation:
+    # ── 객관식 5 ──
+    - kind: mc
+      sentence: "When our worries exceed our control, however, they cause us unnecessary suffering."
+      source: "2025 고3 6월 20번"
+      prompt: "밑줄 친 문장의 올바른 해석을 고르시오."
+      options:
+        - "불필요한 고통이 우리의 걱정을 통제 밖으로 밀어낸다."
+        - "걱정이 우리의 통제를 넘어서면, 그 걱정이 우리에게 불필요한 고통을 일으킨다."
+      answer_index: 1
+      vocab:
+        - {word: "exceed", meaning: "넘어서다, 초과하다"}
+        - {word: "suffering", meaning: "고통"}
+        - {word: "unnecessary", meaning: "불필요한"}
+      solution:
+        cut: "우리의 걱정이 / 우리의 통제를 넘어설 때 / however(그러나) / 그것들(걱정)이 / 우리에게 / 불필요한 고통을 일으킨다."
+        wrong: "불필요한 고통이 걱정을 통제 밖으로 밀어낸다."
+        wrong_why: "cause의 주어(they = worries)와 목적어(suffering)를 뒤바꿔, 원인과 결과가 정반대가 되었다."
+        author_msg: "걱정이 감당할 수준을 넘으면, 그 걱정 자체가 쓸데없는 괴로움을 만들어 낸다."
+        key_points:
+          - "they = our worries : 앞 주어를 받는 대명사 — cause의 주어(원인)다."
+          - "cause A B : A에게 B를 일으키다(원인 → 결과, 정방향)."
+          - "however : 삽입 역접 — 뼈대에서 빼고 읽는다."
+    - kind: mc
+      sentence: "In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth."
+      source: "2024 고3 9월 29번"
+      prompt: "that result from ~ 부분의 올바른 해석을 고르시오."
+      options:
+        - "인구 과잉과 무계획적 성장을 초래하는 모든 범죄·악·비참함"
+        - "인구 과잉과 무계획적 성장에서 비롯되는 모든 범죄·악·비참함"
+      answer_index: 1
+      vocab:
+        - {word: "misery", meaning: "비참함"}
+        - {word: "result from", meaning: "~에서 비롯되다"}
+        - {word: "overpopulation", meaning: "인구 과잉"}
+      solution:
+        cut: "남쪽에는 / 런던이 있었다 / (이미 세계 최대 도시인) / [모든 범죄·악·비참함을] 보여주며 / [인구 과잉과 무계획적 성장에서 비롯되는]."
+        wrong: "인구 과잉과 무계획적 성장을 '초래하는' 범죄·악·비참함."
+        wrong_why: "result from은 'A from B = A가 B에서 비롯되다'(B가 원인). 방향을 뒤집어 결과를 원인으로 읽었다."
+        author_msg: "런던의 온갖 범죄·악·비참함은 '인구 과잉과 무계획적 성장'이라는 원인에서 나온 결과다."
+        key_points:
+          - "A result from B : A(결과)가 B(원인)에서 비롯되다 — 역방향."
+          - "showing ~ : 분사구문(London을 부연) — 뼈대는 there was London."
+          - "that result from ~ : 앞 명사(crime, evil, misery)를 꾸미는 관계사절."
+    - kind: mc
+      sentence: "The strategy is to analyze all the possible scenarios that the future holds and then to see what proportion of them lead to success or failure."
+      source: "2023 고3 11월 20번"
+      prompt: "what proportion of them lead to ~ 의 올바른 해석을 고르시오."
+      options:
+        - "얼마나 많은 성공·실패가 그 시나리오들로 이어지는지"
+        - "그중 얼마만큼(의 시나리오)이 성공 또는 실패로 이어지는지"
+      answer_index: 1
+      vocab:
+        - {word: "scenario", meaning: "시나리오, 상황"}
+        - {word: "proportion", meaning: "비율, 부분"}
+        - {word: "lead to", meaning: "~로 이어지다"}
+      solution:
+        cut: "그 전략은 / 분석하는 것이다 / [미래가 품은 모든 가능한 시나리오를] / 그런 다음 / 보는 것이다 / [그중 얼마만큼이 / 성공 또는 실패로 이어지는지]."
+        wrong: "얼마나 많은 성공·실패가 그 시나리오들로 이어지는지."
+        wrong_why: "lead to는 'A lead to B = A가 B로 이어지다'(A가 원인). 주어(proportion=시나리오)와 결과(success/failure)를 뒤바꿨다."
+        author_msg: "미래 시나리오들을 다 따진 뒤, 그중 몇 %가 성공으로/실패로 귀결되는지 확인하는 게 전략이다."
+        key_points:
+          - "A lead to B : A가 B로 이어지다(정방향, A = 원인)."
+          - "what proportion of them : '그중 얼마만큼' — 명사절 주어."
+          - "to analyze ~ and (then) to see ~ : to부정사 병렬(전략의 내용 둘)."
+    - kind: mc
+      sentence: "Agricultural markets are naturally unstable, due to changes in harvest size that result from variable weather patterns and other factors."
+      source: "2026 고3 11월 31번"
+      prompt: "인과의 방향에 유의하여 올바른 해석을 고르시오."
+      options:
+        - "농산물 시장이 불안정하기 때문에 수확량이 변하고 날씨가 변덕스러워진다."
+        - "농산물 시장은 본래 불안정한데, 이는 변덕스러운 날씨 등에서 비롯된 수확량 변화 때문이다."
+      answer_index: 1
+      vocab:
+        - {word: "unstable", meaning: "불안정한"}
+        - {word: "harvest", meaning: "수확(량)"}
+        - {word: "variable", meaning: "변덕스러운, 가변적인"}
+      solution:
+        cut: "농산물 시장은 / 본래 불안정하다 / due to(~때문에) / [수확량의 변화] / [변덕스러운 날씨와 기타 요인에서 비롯되는]."
+        wrong: "시장이 불안정해서 수확량과 날씨가 변한다."
+        wrong_why: "due to와 result from 둘 다 역방향(결과 ← 원인). 원인(날씨 → 수확량 변화)과 결과(시장 불안정)를 통째로 뒤집었다."
+        author_msg: "시장 불안정 ← 수확량 변화 ← 날씨 변동. 원인이 뒤에서 앞으로 거슬러 올라가는 이중 인과다."
+        key_points:
+          - "A due to B : A(결과)는 B(원인) 때문 — 역방향."
+          - "changes ... that result from ... : 수확량 변화(결과)가 날씨(원인)에서 비롯됨 — 또 한 겹의 역방향."
+          - "원인 체인 : 날씨 → 수확량 변화 → 시장 불안정."
+    - kind: mc
+      sentence: "Social media users may unknowingly participate in creating and circulating misinformation, which can influence elections, cause violence, and create widespread panic."
+      source: "2024 고3 9월 20번"
+      prompt: "which 이하의 올바른 해석을 고르시오."
+      options:
+        - "선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게 한다."
+        - "그것(잘못된 정보)이 선거에 영향을 주고 폭력을 일으키며 광범위한 공황을 만들 수 있다."
+      answer_index: 1
+      vocab:
+        - {word: "circulate", meaning: "퍼뜨리다, 유통시키다"}
+        - {word: "misinformation", meaning: "잘못된 정보"}
+        - {word: "widespread", meaning: "광범위한"}
+      solution:
+        cut: "소셜미디어 이용자들은 / 자신도 모르게 / [잘못된 정보를 만들고 퍼뜨리는 데] 가담할 수 있다 / which(그리고 그것은) / 선거에 영향을 주고 / 폭력을 일으키며 / 광범위한 공황을 만든다."
+        wrong: "선거·폭력·공황이 이용자들에게 정보를 만들게 한다."
+        wrong_why: "cause/influence/create의 주어는 which(= misinformation)다. 원인(잘못된 정보)과 결과(선거·폭력·공황)를 뒤바꿨다."
+        author_msg: "이용자가 무심코 퍼뜨린 잘못된 정보가 선거·폭력·공황이라는 실제 피해로 이어진다."
+        key_points:
+          - "which = misinformation : 콤마 관계사(계속적 용법) — '그리고 그것은'."
+          - "cause violence : 폭력을 일으키다(정방향, 원인 → 결과)."
+          - "influence, cause, create : which의 동사 3개 병렬."
+    # ── 주관식 5 ──
+    - kind: short
+      sentence: "Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the necessity of the role of humans as the decision makers would appear to be in decline."
+      source: "2024 고3 6월 20번"
+      prompt: "be due to에 유의하여 밑줄 친 문장을 우리말로 해석하시오."
+      answer: "그것이 AI 비서의 증가 때문이든 자율주행차의 등장 때문이든, 의사결정자로서 인간 역할의 필요성은 줄어드는 것처럼 보인다."
+      vocab:
+        - {word: "presence", meaning: "존재, (수의) 증가"}
+        - {word: "emergence", meaning: "등장, 출현"}
+        - {word: "in decline", meaning: "줄어드는, 쇠퇴하는"}
+      solution:
+        cut: "그것이 ~때문이든(due to) / [AI 비서의 증가] 또는 [자율주행차의 등장] / 의사결정자로서 인간 역할의 필요성은 / 줄어드는 듯 보인다."
+        wrong: "AI 비서와 자율주행차가 인간의 역할 때문에 늘어난다."
+        wrong_why: "be due to는 역방향('~때문이다'). 원인(AI·자율주행차)과 결과(인간 역할 감소)를 뒤집으면 안 된다."
+        author_msg: "원인이 무엇이든(AI든 자율주행차든), 결과적으로 인간이 결정을 내릴 필요는 줄고 있다."
+        key_points:
+          - "Whether A or B : A이든 B이든(양보)."
+          - "be due to : ~때문이다(결과가 주어, 역방향)."
+          - "the necessity of the role of humans : 전치사구 겹침 — 뼈대 주어는 'the necessity'."
+    - kind: short
+      sentence: "Living your values only some of the time does not contribute to the creation and maintenance of culture."
+      source: "2024 고3 11월 20번"
+      prompt: "contribute to와 부정어에 유의하여 해석하시오."
+      answer: "가치를 오직 일부 시간에만 실천하는 것은 문화의 창조와 유지에 기여하지 않는다."
+      vocab:
+        - {word: "contribute to", meaning: "~에 기여하다"}
+        - {word: "maintenance", meaning: "유지"}
+        - {word: "values", meaning: "가치(관)"}
+      solution:
+        cut: "[당신의 가치를 / 오직 일부 시간에만 실천하는 것은] / 기여하지 않는다 / [문화의 창조와 유지에]."
+        wrong: "가치를 가끔 실천해도 문화를 만들고 유지하는 데 도움이 된다."
+        wrong_why: "does not을 놓치면 극성이 뒤집힌다. contribute to(기여하다)는 정방향이지만 앞의 부정이 핵심."
+        author_msg: "가치를 어쩌다 한 번씩 실천하는 정도로는 문화가 만들어지지도 유지되지도 않는다."
+        key_points:
+          - "A contribute to B : A가 B에 기여하다(정방향)."
+          - "does not contribute : 부정 — 극성을 뒤집는다."
+          - "Living ... only some of the time : 동명사 주어('일부 시간에만 실천하는 것')."
+    - kind: short
+      sentence: "Excessive specificity may result in information from outside the domain being underestimated and unavailable, which leads to fixedness of thinking, whereas excessive generality causes chaos, vagueness, and shallowness."
+      source: "2023 고3 6월 20번"
+      prompt: "result in / lead to / cause의 방향에 유의하여 해석하시오."
+      answer: "지나친 구체성은 영역 밖 정보가 과소평가되고 이용 불가능해지는 결과를 낳을 수 있고, 이것은 사고의 경직으로 이어지는 반면, 지나친 일반성은 혼란·모호함·피상성을 초래한다."
+      vocab:
+        - {word: "excessive", meaning: "지나친"}
+        - {word: "specificity", meaning: "구체성"}
+        - {word: "fixedness", meaning: "경직, 고착"}
+      solution:
+        cut: "지나친 구체성은 / 초래할 수 있다(result in) / [영역 밖 정보가 / 과소평가되고 이용 불가능해지는 것을] / 이것은 이어진다(leads to) / 사고의 경직으로 / 반면(whereas) / 지나친 일반성은 / 초래한다(causes) / 혼란·모호·피상을."
+        wrong: "과소평가된 정보가 지나친 구체성을 초래한다."
+        wrong_why: "result in은 정방향(A result in B: A가 B를 낳다). 원인(구체성)과 결과(정보 과소평가)를 뒤집으면 안 된다."
+        author_msg: "너무 구체적이면 바깥 정보를 놓쳐 사고가 굳고, 너무 두루뭉술하면 혼란해진다 — 양극단 모두 문제."
+        key_points:
+          - "A result in B : A가 B라는 결과를 낳다(정방향)."
+          - "which leads to ~ : 앞 절 전체를 받아 '이것이 ~로 이어지다'."
+          - "whereas : 대조(반면) — 앞뒤 두 극단을 대비."
+    - kind: short
+      sentence: "Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences."
+      source: "2026 고3 11월 24번"
+      prompt: "lead to에 유의하여 해석하시오."
+      answer: "변화하는 정치·사회·종교 지형은 새로운 문화의 등장으로, 그와 함께 새로운 문화체험의 등장으로 이어질 것이다."
+      vocab:
+        - {word: "landscape", meaning: "지형, 양상"}
+        - {word: "religious", meaning: "종교의"}
+        - {word: "emergence", meaning: "등장"}
+      solution:
+        cut: "변화하는 / 정치·사회·종교 지형은 / 이어질 것이다(will lead to) / [새로운 문화의 등장으로] / 그리고 그것들과 함께 / [새로운 문화체험(으로)]."
+        wrong: "새로운 문화가 정치·사회·종교 지형의 변화를 이끈다."
+        wrong_why: "lead to는 정방향(A lead to B). 주어(landscapes)와 결과(new cultures)를 뒤바꾸면 인과가 뒤집힌다."
+        author_msg: "정치·사회·종교의 변화가 원인이 되어 새 문화, 나아가 새 문화체험이 생겨난다."
+        key_points:
+          - "A lead to B : A가 B로 이어지다(정방향)."
+          - "the emergence of new cultures : 명사화 — '새 문화가 생겨나는 것'."
+          - "with them new ... experiences : 앞 구조의 반복(lead to 생략)."
+    - kind: short
+      sentence: "Departure from the group may signal danger to nonvigilant animals and cause what appears to be a coordinated flushing of prey from the area."
+      source: "2022 고3 6월 39번"
+      prompt: "cause에 유의하여 해석하시오."
+      answer: "무리에서 벗어나는 것은 경계하지 않는 동물들에게 위험 신호를 보내고, 그 지역에서 먹잇감이 조직적으로 몰려 달아나는 것처럼 보이는 사태를 일으킬 수 있다."
+      vocab:
+        - {word: "departure", meaning: "벗어남, 출발"}
+        - {word: "nonvigilant", meaning: "경계하지 않는"}
+        - {word: "prey", meaning: "먹잇감"}
+      solution:
+        cut: "[무리에서 벗어나는 것은] / 위험을 알릴 수 있다(signal) / 경계 안 하는 동물들에게 / 그리고 일으킬 수 있다(cause) / [겉보기에 조직적인 / 그 지역 먹잇감의 몰이 달아남처럼 보이는 것을]."
+        wrong: "먹잇감의 달아남이 무리에서의 이탈을 초래한다."
+        wrong_why: "cause의 주어는 'Departure from the group'(이탈). 원인(이탈)과 결과(먹잇감 몰이)를 뒤바꿨다."
+        author_msg: "한 마리가 무리를 벗어나면, 그게 신호가 되어 먹잇감 전체가 우르르 달아나는 사태를 부를 수 있다."
+        key_points:
+          - "A cause B : A가 B를 일으키다(정방향)."
+          - "signal danger ... and cause ... : 동사 2개 병렬(주어 = Departure)."
+          - "what appears to be ~ : '~처럼 보이는 것'(cause의 목적어, 명사절)."
+
+  contrast:
+    - kind: mc
+      sentence: "In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous."
+      source: "2024 고3 9월 33번"
+      prompt: "rather than에 유의하여 올바른 해석을 고르시오."
+      options:
+        - "로마 같은 도시에서는 광장에서 걷는 사람들의 수가 눈에 띈다."
+        - "로마 같은 도시에서 눈에 띄는 것은, 걷는 것이 아니라 광장에 서 있거나 앉아 있는 많은 사람들이다."
+      answer_index: 1
+      vocab:
+        - {word: "conspicuous", meaning: "눈에 띄는"}
+        - {word: "square", meaning: "광장"}
+        - {word: "rather than", meaning: "~가 아니라"}
+      solution:
+        cut: "로마 같은 도시에서 / 눈에 띄는 것은(it is ~ that 강조) / [광장에 서 있거나 앉아 있는 많은 사람들이지] / 걷는 사람들이 아니다(rather than walking)."
+        wrong: "광장에서 걷는 사람들의 수가 눈에 띈다."
+        wrong_why: "rather than walking(걷는 것이 아니라)을 놓치면 대조가 사라져 정반대 대상을 강조하게 된다."
+        author_msg: "로마에서 인상적인 건 '걷는' 사람이 아니라 광장에 '머무는(서거나 앉은)' 사람들이 많다는 점이다."
+        key_points:
+          - "A rather than B : B가 아니라 A(B를 부정, 대조)."
+          - "It is X that ~ : X 강조구문 — X(the large number of people ~)가 답."
+          - "standing or sitting ~ rather than walking : A(서다/앉다) ↔ B(걷다) 대조."
+    - kind: mc
+      sentence: "However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static."
+      source: "2026 고3 11월 42번"
+      prompt: "unlike와 rather than에 유의하여 올바른 해석을 고르시오."
+      options:
+        - "그것은 그 영역을 구성하는 대부분의 범주와 마찬가지로 고정적이다."
+        - "그것은 그 영역을 구성하는 대부분의 수집·연구 범주와 달리, 고정적이지 않고 유동적이다."
+      answer_index: 1
+      vocab:
+        - {word: "unlike", meaning: "~와 달리"}
+        - {word: "fluid", meaning: "유동적인"}
+        - {word: "static", meaning: "고정적인"}
+      solution:
+        cut: "그러나 / [그 영역을 구성하는 / 대부분의 수집·연구 범주와] 달리(unlike) / 그것은 / 유동적이다 / 고정적이지 않고(rather than static)."
+        wrong: "그것은 대부분의 범주와 마찬가지로 고정적이다."
+        wrong_why: "unlike(~와 달리)와 rather than static(고정적이지 않고)을 둘 다 놓쳐 대조를 순접으로 뒤집었다."
+        author_msg: "다른 범주들은 고정돼 있지만, '그것'만은 예외적으로 유동적이라는 대비가 핵심."
+        key_points:
+          - "unlike A : A와 달리(대조 신호)."
+          - "A rather than B : B가 아니라 A(fluid ↔ static)."
+          - "that make up those areas : 앞 명사(categories)를 꾸미는 관계사절."
+    - kind: short
+      sentence: "The truth of the matter is revealed not in the perception of the figure but in its rational representation."
+      source: "2023 고3 6월 34번"
+      prompt: "not A but B에 유의하여 해석하시오."
+      answer: "그 문제의 진실은 도형에 대한 지각에서가 아니라, 그것에 대한 이성적 표상에서 드러난다."
+      vocab:
+        - {word: "perception", meaning: "지각"}
+        - {word: "rational", meaning: "이성적인"}
+        - {word: "representation", meaning: "표상, 표현"}
+      solution:
+        cut: "그 문제의 진실은 / 드러난다 / [도형에 대한 지각에서]가 아니라(not A) / [그것에 대한 이성적 표상에서](but B)."
+        wrong: "진실은 도형에 대한 지각에서 드러난다."
+        wrong_why: "not A but B에서 A(지각)는 부정된다. A만 읽고 but B를 놓치면 정반대."
+        author_msg: "진실은 눈에 보이는 '지각'이 아니라 머리로 따진 '이성적 표상'에서 드러난다."
+        key_points:
+          - "not A but B : A가 아니라 B(B로 확정)."
+          - "is revealed : 수동태('드러난다')."
+          - "not in ... but in ... : 전치사구 병렬로 A/B 대조."
+
+  polarity_negative:
+    - kind: mc
+      sentence: "Moreover farmers can rarely acquire payoff information on more than a few of the production methods they might use."
+      source: "2022 고3 9월 23번"
+      prompt: "rarely에 유의하여 올바른 해석을 고르시오."
+      options:
+        - "게다가 농부들은 자신이 쓸 수 있는 생산 방식 다수에 대해 수익 정보를 자주 얻을 수 있다."
+        - "게다가 농부들은 자신이 쓸 수 있는 생산 방식 중 몇 가지 이상에 대해서는 좀처럼 수익 정보를 얻지 못한다."
+      answer_index: 1
+      vocab:
+        - {word: "rarely", meaning: "좀처럼 ~않다"}
+        - {word: "acquire", meaning: "얻다, 획득하다"}
+        - {word: "payoff", meaning: "이득, 보상"}
+      solution:
+        cut: "게다가 / 농부들은 / 좀처럼 얻지 못한다(can rarely acquire) / 수익 정보를 / [자신이 쓸 수 있는 생산 방식 중 / 몇 가지 이상에 대해서는]."
+        wrong: "농부들은 여러 생산 방식의 수익 정보를 자주 얻을 수 있다."
+        wrong_why: "rarely(좀처럼 ~않다)를 빠뜨리면 극성이 정반대가 된다."
+        author_msg: "농부는 자기가 쓸 수 있는 방법들 대부분의 '수익성'을 미리 알 길이 거의 없다."
+        key_points:
+          - "rarely : 빈도 부정(좀처럼 ~않다) — 문장 전체 극성을 뒤집는다."
+          - "more than a few : '몇 개 이상' — rarely와 합쳐 '몇 개 이상은 못 얻는다'."
+          - "(that) they might use : 앞 명사(production methods)를 꾸미는 관계사절(목적격 that 생략)."
+    - kind: short
+      sentence: "As a practical matter, one seldom requires complete autonomy from the group."
+      source: "2023 고3 6월 30번"
+      prompt: "seldom에 유의하여 밑줄 친 문장을 우리말로 해석하시오."
+      answer: "실질적으로, 사람이 집단으로부터의 완전한 자율성을 요구하는 경우는 좀처럼 없다."
+      vocab:
+        - {word: "seldom", meaning: "좀처럼 ~않다"}
+        - {word: "autonomy", meaning: "자율성"}
+        - {word: "practical", meaning: "실질적인"}
+      solution:
+        cut: "실질적인 문제로서(as a practical matter) / 사람은 / 좀처럼 요구하지 않는다(seldom requires) / 완전한 자율성을 / 집단으로부터."
+        wrong: "사람은 집단으로부터 완전한 자율성을 요구한다."
+        wrong_why: "seldom(좀처럼 ~않다)을 빠뜨리면 극성이 정반대가 된다."
+        author_msg: "사람은 집단에서 완전히 독립하려 하기보다, 어느 정도는 집단에 기대는 게 보통이다."
+        key_points:
+          - "seldom : 빈도 부정(좀처럼 ~않다) — 문장 전체 극성을 뒤집는다."
+          - "as a practical matter : 삽입 부사구(실질적으로) — 뼈대에서 빼고 읽는다."
+          - "complete autonomy from the group : 'from ~'은 autonomy를 꾸미는 전치사구."

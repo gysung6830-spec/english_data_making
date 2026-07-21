@@ -56,6 +56,28 @@ class Problem(BaseModel):
     point: str = ""           # 이 문제의 핵심 포인트(해설)
 
 
+# ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────
+class PracticeSolution(BaseModel):
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+    wrong: str = ""               # 오역(흔한 실수)
+    wrong_why: str = ""           # 왜 틀렸나
+    author_msg: str = ""          # 필자가 하고싶은 말
+    key_points: list[str] = []    # 주요구문(각 'X : 설명')
+
+
+class PracticeItem(BaseModel):
+    no: int = 0
+    kind: str = "mc"              # 'mc'(객관식) | 'short'(주관식)
+    sentence: str                 # 기출 문장(지문)
+    source: str = ""
+    prompt: str = ""              # 발문
+    options: list[str] = []       # mc 선지 [오역, 정답 등]
+    answer_index: int = 0
+    answer: str = ""              # short 모범답안
+    vocab: list[VocabItem] = []   # 문제 페이지 하단 단어 박스
+    solution: PracticeSolution | None = None   # 해설 페이지
+
+
 class Chapter(BaseModel):
     id: str
     title: str                # 예: 인과
@@ -65,7 +87,8 @@ class Chapter(BaseModel):
     core_tip: str = ""        # 문장 '핵심'을 잡는 구체적 tip
     infer_tip: str = ""       # 문장/단어 '유추'하는 법
     cards: list[CodeCard] = []   # 예시(중난이도 5 + 고난이도 5 지향)
-    problems: list[Problem] = [] # 나머지 기출을 문제로
+    problems: list[Problem] = [] # 나머지 기출을 문제로(레거시 인라인)
+    practice: list[PracticeItem] = []  # 실전적용(문제↔해설 페이지, 객5·주5)
     vocab: list[VocabItem] = []  # 페이지 하단 어휘 박스
 
 
@@ -152,28 +175,6 @@ class TrainStep(BaseModel):
     level: str                    # 단계 라벨 (① 쉬움 …)
     en: str
     ko: str
-
-
-# ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────
-class PracticeSolution(BaseModel):
-    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
-    wrong: str = ""               # 오역(흔한 실수)
-    wrong_why: str = ""           # 왜 틀렸나
-    author_msg: str = ""          # 필자가 하고싶은 말
-    key_points: list[str] = []    # 주요구문(각 'X : 설명')
-
-
-class PracticeItem(BaseModel):
-    no: int = 0
-    kind: str = "mc"              # 'mc'(객관식) | 'short'(주관식)
-    sentence: str                 # 기출 문장(지문)
-    source: str = ""
-    prompt: str = ""              # 발문
-    options: list[str] = []       # mc 선지 [오역, 정답 등]
-    answer_index: int = 0
-    answer: str = ""              # short 모범답안
-    vocab: list[VocabItem] = []   # 문제 페이지 하단 단어 박스
-    solution: PracticeSolution | None = None   # 해설 페이지
 
 
 class SyntaxChapter(BaseModel):

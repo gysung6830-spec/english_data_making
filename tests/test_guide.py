@@ -81,6 +81,10 @@ def test_render_html():
     assert "대비로 구체화" in html                 # 추상→구체 신규 패턴
     assert html.count('class="sv-line"') >= 8      # 모든 정답 카드에 A→B 관계 도식
     assert "sv-label" in html                     # 관계 도식 라벨
+    assert "sw-basis" not in html                 # '이런 내용' 근거 라인 삭제
+    assert "실전적용 해설" in html                 # 1부 목차별 문제→해설
+    assert html.count('class="chapter drill-q"') >= 10   # 문제 페이지(왼쪽)
+    assert html.count('class="chapter drill-a"') >= 10   # 해설 페이지(오른쪽)
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 

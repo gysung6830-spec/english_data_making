@@ -445,6 +445,10 @@ def mock_guide() -> Guide:
             )],
         ),
     ]
-    from src.guide.codes import load_abstract, load_part2_workbook
+    from src.guide.codes import (load_abstract, load_codes_practice,
+                                 load_part2_workbook)
+    practice = load_codes_practice()
+    for ch in chapters:
+        ch.practice = practice.get(ch.id, [])
     return Guide(part0=load_part0(), chapters=chapters, abstract=load_abstract(),
                  part2=load_part2_workbook())
