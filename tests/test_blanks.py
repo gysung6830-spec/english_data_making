@@ -61,7 +61,8 @@ def test_html():
     html = render_blanks_html(wb, footer_note="테스트")
     assert "지문 빈칸" in html and "요약문 빈칸" in html and "Word Bank" in html
     assert "정답" in html and "{{B1}}" not in html and "{{S1}}" not in html
-    print("PASS  HTML 렌더(구획·단어뱅크·정답)")
+    assert "요약문 해석" in html                 # 해설에 요약문 한국어 해석 포함
+    print("PASS  HTML 렌더(구획·단어뱅크·정답·요약문 해석)")
 
 
 def run_all():

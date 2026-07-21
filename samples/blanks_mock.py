@@ -30,7 +30,8 @@ def mock_blank_set(title: str = "The Human Need for Companionship", no: int = 1)
         summary_template="Humans crave {{S1}} with others to confirm their own {{S2}} and to satisfy their emotional {{S3}}. Because this {{S4}} sustains us, we can rarely endure long periods of {{S5}}.",
         summary_blanks=[SB(id="S1", answer="connection"), SB(id="S2", answer="identity"),
                         SB(id="S3", answer="needs"), SB(id="S4", answer="interaction"),
-                        SB(id="S5", answer="isolation")])
+                        SB(id="S5", answer="isolation")],
+        summary_ko="인간은 자신의 정체성을 확인받고 정서적 필요를 채우기 위해 타인과의 유대를 갈망하며, 이러한 상호작용이 우리를 지탱해 주기에 오랜 고립을 견디기 어렵다.")
 
 
 def mock_blank_workbook(title: str = "The Human Need for Companionship") -> bs.BlankWorkbook:

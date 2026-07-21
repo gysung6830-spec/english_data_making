@@ -94,3 +94,6 @@ body{
 .pb-h{ color:var(--pb); } .sb-h{ color:var(--sb); }
 .ans-item{ display:inline-block; font-size:9pt; margin:0 12px 4px 0; }
 .ans-item b{ color:var(--navy); }
+.ans-sum-ko{ margin-top:6px; font-size:8.5pt; color:#404652; line-height:1.5;
+  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.ans-sum-ko .ans-col-h{ display:inline; margin-right:6px; }

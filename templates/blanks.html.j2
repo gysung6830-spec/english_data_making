@@ -65,6 +65,9 @@
           {% for b in st.summary_blanks %}<span class="ans-item"><b>{{ b.num }})</b> {{ b.answer }}</span>{% endfor %}
         </div>
       </div>
+      {% if st.summary_ko %}
+      <div class="ans-sum-ko"><span class="ans-col-h sb-h">요약문 해석</span> {{ st.summary_ko }}</div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
