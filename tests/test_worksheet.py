@@ -46,6 +46,25 @@ def test_splitter_ellipsis_fragments():
     print("PASS  splitter 생략부호 조각 분리")
 
 
+def test_extract_strip_korean_layouts():
+    # PDF 배치 무관하게 영어 원문만 남는지: 좌영어우한글 / 영어만 / 영어줄·한글줄 교차
+    from src import extract
+    sk = extract.strip_korean_keep_english
+    # (a) 좌 영어 / 우 한글 (한 줄에 섞여 읽힘)
+    a = sk("Humans are social.  인간은 사회적이다.\nThey seek others.  그들은 타인을 찾는다.")
+    assert "인간" not in a and "그들" not in a
+    assert "Humans are social." in a and "They seek others." in a
+    # (b) 영어만 → 무변경
+    b = "Humans are social.\nThey seek others."
+    assert sk(b) == b
+    # (c) 영어 줄 / 한글 줄 교차 → 한글 줄 제거
+    c = sk("Humans are social.\n인간은 사회적이다.\nThey seek others.\n그들은 타인을 찾는다.")
+    assert "인간" not in c and "Humans are social." in c and "They seek others." in c
+    # 토큰에 한글이 붙어도 영문은 보존(cat고양이 → cat)
+    assert sk("the cat고양이 sat앉다 down") == "the cat sat down"
+    print("PASS  PDF 배치 무관 영어 추출(좌우2단/영어만/교차)")
+
+
 def test_splitter_missing_space_and_paragraphs():
     # 인식 오류 방지: 마침표 뒤 공백이 없어도(비전/OCR) 대문자면 문장을 나눈다.
     segs = splitter.split_sentences("Humans are social.They seek others.We need it.")
@@ -309,6 +328,7 @@ def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
     test_splitter_ellipsis_fragments()
+    test_extract_strip_korean_layouts()
     test_splitter_missing_space_and_paragraphs()
     test_rule_hints()
     test_rule_only_sentence_and_none()

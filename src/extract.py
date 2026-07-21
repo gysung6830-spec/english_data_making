@@ -31,6 +31,33 @@ _NOISE_PATTERNS = [
 # 페이지 번호/머리말 같은 짧은 잡음 줄
 _SHORT_NOISE = re.compile(r"^\s*[-–—•·\d\s]{0,4}$")
 
+# 한글(음절·자모) 문자
+_HANGUL_RE = re.compile(r"[가-힣ᄀ-ᇿ㄰-㆏]")
+_LATIN_RE = re.compile(r"[A-Za-z]")
+
+
+def strip_korean_keep_english(raw: str) -> str:
+    """어떤 배치의 PDF 든 '영어 원문'만 순서대로 남긴다.
+
+    - 좌 영어 / 우 한글(2단)  : pdfplumber 가 한 줄에 'English … 한글' 로 붙여 읽어도,
+      각 줄을 토큰(공백 단위)으로 보고 한글을 지운 뒤 '영문이 남는 토큰'만 유지.
+    - 영어 한 줄 / 한글 한 줄  : 한글 전용 줄은 영문 토큰이 없어 빈 줄로 사라짐.
+    - 영어만                   : 한글이 없으므로 원본 그대로(무변경).
+    토큰에 한글이 붙어 있어도(cat고양이) 한글만 떼어내 영문(cat)은 살린다.
+    """
+    out_lines: list[str] = []
+    for line in raw.splitlines():
+        if not _HANGUL_RE.search(line):
+            out_lines.append(line)          # 한글 없음 → 그대로(영어만/빈 줄)
+            continue
+        toks: list[str] = []
+        for tok in line.split():
+            cleaned = _HANGUL_RE.sub("", tok).strip()
+            if _LATIN_RE.search(cleaned):    # 영문이 남는 토큰만 유지
+                toks.append(cleaned)
+        out_lines.append(" ".join(toks))     # 영문 없으면 빈 줄(한글 전용 줄 제거)
+    return "\n".join(out_lines)
+
 
 def extract_raw_text(pdf_path: str | Path) -> str:
     """PDF 전체에서 텍스트를 뽑는다."""
@@ -63,8 +90,11 @@ def clean_text(raw: str) -> str:
 
 
 def extract_passage_text(pdf_path: str | Path) -> str:
-    """PDF -> (1차 정제된) 지문 후보 텍스트."""
-    return clean_text(extract_raw_text(pdf_path))
+    """PDF -> (1차 정제된) 지문 후보 텍스트.
+
+    배치 무관(좌영어우한글·영어만·영어줄/한글줄)하게 영어만 남긴 뒤 잡음 줄을 제거한다.
+    """
+    return clean_text(strip_korean_keep_english(extract_raw_text(pdf_path)))
 
 
 def looks_empty(text: str) -> bool:
