@@ -69,7 +69,7 @@ body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.42; color:#000; 
 .col.right {{ float: right; }}
 
 /* 문항 */
-.q {{ break-inside:avoid; margin-bottom:12px; }}
+.q {{ break-inside:avoid; margin-bottom:17px; }}
 .q-head {{ font-weight:700; margin-bottom:4px; }}
 .q-head .no {{ font-weight:800; }}
 .q-head .score {{ font-weight:400; font-size:8.4pt; color:#333; }}
@@ -332,7 +332,7 @@ def _est_height(q: Question) -> float:
             h += 10.0 + len(q.meta["conditions"]) * 4.0   # <조건> 박스
         if q.meta.get("blank_ko"):
             h += 5.0
-    h += 6.0                                  # 문항 간 여백
+    h += 9.0                                  # 문항 간 여백
     return h
 
 
