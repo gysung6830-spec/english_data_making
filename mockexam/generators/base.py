@@ -107,7 +107,9 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         ul = (f"\n지문의 밑줄은 정확히 {item.underlines}개를 ①<u>..</u>~ 형식으로 표시하라."
               if item.underlines else "")
         prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}\n\n"
-                  f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.")
+                  f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라. "
+                  "explanation 에는 정답 근거뿐 아니라 오답 ①~⑤ 각각이 왜 틀렸는지와 "
+                  "핵심 문법·어휘·논지 포인트까지 자세히 써라.")
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
         out = ctx.client.structured(sysp, prompt, ChoiceQuestionOut, max_retries=2)
         q.passage_text = out.passage
@@ -140,7 +142,9 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                   "2) <보기> 단어상자를 쓰는 유형이면 bogi 에 단어들을, <조건>을 쓰는 "
                   "유형이면 conditions 에 조건 문구를 채워라. 아니면 빈 리스트.\n"
                   "3) 영작 유형이면 학생이 영작할 한국어를 blank_ko 에 넣어라.\n"
-                  "4) 각 소문항 정답을 answers 에 '지시 :: 정답' 형식으로.")
+                  "4) 각 소문항 정답을 answers 에 '지시 :: 정답' 형식으로.\n"
+                  "5) explanation 에 각 소문항의 정답 근거·어형변형/어순/문법 포인트·본문 "
+                  "근거를 자세히 써라.")
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
         out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2)
         q.passage_text = out.passage
@@ -164,6 +168,7 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                 answers.append(a.strip())
         q.answer = " / ".join(answers)
         q.answer_notes = notes
+        q.explanation = out.explanation
     else:
         q.passage_text = passage.text
         q.answer = "(mock) 서술형 정답 예시"

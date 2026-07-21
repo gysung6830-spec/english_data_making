@@ -27,7 +27,10 @@ class ChoiceQuestionOut(BaseModel):
     # minimum·maximum 등을 지원하지 않음). 대신 아래 validator 로 검증한다.
     choices: list[str] = Field(..., description="정확히 5개 선지 텍스트(라벨 제외)")
     answer_index: int = Field(..., description="정답 선지 번호(1~5)")
-    explanation: str = Field(..., description="정답 근거 해설")
+    explanation: str = Field(..., description=(
+        "자세한 해설. 반드시 (1) 정답이 왜 맞는지 근거, (2) 오답 각각(①~⑤ 중 정답 제외)이 "
+        "왜 틀렸는지 한 줄씩, (3) 관련 핵심 포인트(문법 규칙·어휘 뜻·글의 논지 등)를 포함. "
+        "핵심 교정어/근거는 <b>...</b>로 강조하고, 대표 함정은 '[오답 함정] ...'으로 표기."))
 
     @field_validator("choices")
     @classmethod
@@ -64,6 +67,9 @@ class EssayQuestionOut(BaseModel):
     blank_ko: str = Field("", description="밑줄 친 우리말(영작 유형에서 학생이 영작할 한국어 문장). 없으면 빈 문자열")
     answers: list[str] = Field(
         ..., description="소문항별 정답. 각 항목은 '소문항 지시 :: 정답' 형식")
+    explanation: str = Field("", description=(
+        "자세한 해설. 각 소문항의 정답 근거, 어형변형/어순/문법 포인트, 본문 근거 위치를 "
+        "구체적으로 설명. 핵심은 <b>...</b>로 강조."))
 
 
 def system_prompt(profile: dict[str, Any], difficulty_ko: str) -> str:
