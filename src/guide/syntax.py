@@ -77,12 +77,18 @@ SYNTAX_TYPES: list[SyntaxType] = [
         pattern=re.compile(r"\bwhat\s+\w+", re.IGNORECASE),
     ),
     SyntaxType(
-        id="insertion_participle", title="삽입절·분사구문",
-        signal="— … — / , which / 콤마 삽입, 또는 문두·콤마 뒤 V-ing/V-ed 분사 덩어리",
-        formula="삽입은 통째 괄호(없는 셈)로 뼈대부터. 분사는 ~하면서/~한 채로/~해서로 붙인다.",
-        combat="실전 팁 — 대시/콤마 삽입을 빼도 문장이 성립하면 제대로 괄호친 것. 분사의 의미상 주어=주절 주어.",
-        pattern=re.compile(r"—[^—]+—|―[^―]+―|,\s+which\b|"
-                           r"(?:^|,\s)(\w+ing|\w+ed)\b[^,]{6,},", re.IGNORECASE),
+        id="insertion", title="삽입절",
+        signal="— … — / , which / 콤마 사이에 부가 설명이 끼어든다",
+        formula="대시·콤마 사이는 통째로 괄호(없는 셈)로 뼈대부터 읽고 부가 설명으로 취급한다.",
+        combat="실전 팁 — 대시/콤마 삽입을 빼도 문장이 성립하면 제대로 괄호친 것. 삽입을 지우면 뼈대가 선명.",
+        pattern=re.compile(r"—[^—]+—|―[^―]+―|,\s+which\b", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="participle", title="분사구문",
+        signal="문두나 콤마 뒤에 V-ing / V-ed 덩어리가 붙는다(부대상황)",
+        formula="분사 덩어리를 괄호 → 주절 뼈대부터 읽고 ~하면서/~한 채로/~해서로 붙인다.",
+        combat="실전 팁 — 콤마+V-ing/V-ed는 부대상황 신호. 분사의 의미상 주어는 주절 주어와 같다.",
+        pattern=re.compile(r"(?:^|,\s)(\w+ing|\w+ed)\b[^,]{6,},", re.IGNORECASE),
     ),
     SyntaxType(
         id="that_clause", title="that절",
