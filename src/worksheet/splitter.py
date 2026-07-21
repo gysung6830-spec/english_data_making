@@ -58,6 +58,11 @@ def split_by_punct(text: str) -> list[str]:
                 buf.append(text[j])
                 j += 1
             rest = text[j:]
+            # 생략부호(...) 는 문장 종결이 아님 → 다음 텍스트에 붙인다(문장 중간에서 안 끊음).
+            # (조각 분리는 split_sentences 의 생략부호 경계에서 이미 처리됨.)
+            if j < n and len(text[i:j]) >= 2 and set(text[i:j]) == {"."}:
+                i = j
+                continue
             # 소수점(숫자.숫자) 보호
             if ch == "." and i + 1 < n and text[i + 1].isdigit() and text[i - 1:i].isdigit():
                 i = j
@@ -67,8 +72,14 @@ def split_by_punct(text: str) -> list[str]:
             if word in _ABBREV:
                 i = j
                 continue
-            # 문장 경계로 인정하려면 뒤에 공백+대문자/따옴표/끝
-            if j >= n or (text[j] == " " and (j + 1 >= n or text[j + 1] in "\"“‘([" or text[j + 1].isupper())):
+            # 다음 '실제' 문자(공백 건너뜀)를 본다. 문장 끝/대문자/여는 따옴표·괄호/생략부호면 경계.
+            # 공백이 없어도(OCR·비전이 마침표 뒤 공백을 누락) 대문자면 경계로 인정 → 한 줄로 뭉침 방지.
+            k = j
+            while k < n and text[k] == " ":
+                k += 1
+            nxt = text[k] if k < n else ""
+            if (j >= n or nxt == "" or nxt in "\"“‘([" or nxt.isupper()
+                    or text[k:k + 3] == "..."):
                 sentences.append("".join(buf).strip())
                 buf = []
             i = j
@@ -99,10 +110,13 @@ def split_sentences(text: str) -> list[str]:
         # 원문자로 나눈 각 조각 안에 다시 여러 문장이 있을 수 있으나,
         # 학습지에서는 원문자 = 한 '문장 단위' 로 취급하는 관례를 따른다.
         return circled
-    # 원문자가 없으면 문단을 합쳐 구두점 분할
-    joined = re.sub(r"\s*\n\s*", " ", text)
-    # '문장끝 + 생략부호 시작' 조각을 먼저 경계로 끊고(합쳐짐 방지), 각 조각을 다시 구두점 분할.
+    # 원문자가 없으면: 먼저 '문단(빈 줄)' 경계로 나눠 문단끼리 뭉치지 않게 하고,
+    # 각 문단 안에서 '문장끝 + 생략부호 시작' → 구두점 순으로 분할한다.
     out: list[str] = []
-    for part in _ELLIPSIS_BOUNDARY.split(joined):
-        out.extend(split_by_punct(part))
+    for para in re.split(r"\n[ \t]*\n", text):
+        joined = re.sub(r"\s*\n\s*", " ", para).strip()
+        if not joined:
+            continue
+        for part in _ELLIPSIS_BOUNDARY.split(joined):
+            out.extend(split_by_punct(part))
     return [s for s in out if s]

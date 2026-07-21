@@ -46,6 +46,16 @@ def test_splitter_ellipsis_fragments():
     print("PASS  splitter 생략부호 조각 분리")
 
 
+def test_splitter_missing_space_and_paragraphs():
+    # 인식 오류 방지: 마침표 뒤 공백이 없어도(비전/OCR) 대문자면 문장을 나눈다.
+    segs = splitter.split_sentences("Humans are social.They seek others.We need it.")
+    assert segs == ["Humans are social.", "They seek others.", "We need it."], segs
+    # 문단(빈 줄)으로만 구분되고 마침표가 없는 조각도 서로 뭉치지 않는다.
+    para = splitter.split_sentences("First idea here\n\nSecond follows.\n\nThird wraps up")
+    assert len(para) == 3 and para[0] == "First idea here", para
+    print("PASS  splitter 공백누락·문단 분리(한 줄 뭉침 방지)")
+
+
 # ---- 2. analyzer 규칙기반 --------------------------------------------------
 def test_rule_hints():
     hints = analyzer.rule_hints("The book which was written by her is loved.")
@@ -299,6 +309,7 @@ def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
     test_splitter_ellipsis_fragments()
+    test_splitter_missing_space_and_paragraphs()
     test_rule_hints()
     test_rule_only_sentence_and_none()
     test_analyze_sentence_llm_path()
