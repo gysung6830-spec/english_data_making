@@ -115,7 +115,6 @@ INDEX_HTML = """
       <div class=kinds>
         <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북</label>
         <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 채우기 워크북</label>
-        <label class=kind><input type=checkbox name=kinds value=report> 6개 분석 자료</label>
       </div>
 
       <label>④ 저장할 PDF 파일명
