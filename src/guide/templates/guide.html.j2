@@ -57,14 +57,19 @@
   {% endif %}
 
   {% if guide.chapters %}
-  <div class="toc-part"><a href="#part1">1부 · 평가원 코드 — 답으로 이어지는 평가원 코드</a></div>
+  <div class="toc-part"><a href="#part1">1부 · 평가원 코드 — 잘못 읽으면 큰일나는 구문: 필자의 긍정(O)/부정(X) 파악</a></div>
   {% for c in guide.chapters %}
   <div class="toc-item"><a href="#ch-{{ c.id }}">Ch{{ loop.index }} · {{ c.title }}</a></div>
   {% endfor %}
   {% endif %}
 
+  {% if guide.paraphrase %}
+  <div class="toc-part"><a href="#partP">2부 · 패러프레이징 — 핵심주제가 어떻게 다른 표현으로 전개되는가</a></div>
+  <div class="toc-item"><a href="#partP">지문 단위 훈련 (주제 제시 → 재진술 → 예시 → 결론)</a></div>
+  {% endif %}
+
   {% if guide.part2 %}
-  <div class="toc-part"><a href="#part2">2부 · 구문해석 — {{ guide.part2.title }}</a></div>
+  <div class="toc-part"><a href="#part2">3부 · 구문해석 — 이런 구조면 이렇게 해석</a></div>
   {% for c in guide.part2.chapters %}
   <div class="toc-item"><a href="#sx-{{ c.id }}">Ch{{ loop.index }} · {{ c.title }}</a></div>
   {% endfor %}
@@ -176,11 +181,21 @@
 {% endfor %}
 {% endif %}
 
-{# ===================== 2부 — 구문별 괄호치기 실전 ===================== #}
+{# ===================== 2부 — 패러프레이징(지문 단위) ===================== #}
+{% if guide.paraphrase %}
+{% set pp = guide.paraphrase %}
+<section class="chapter" id="partP">
+  <div class="ch-kicker">2부 · 패러프레이징</div>
+  <div class="ch-title">{{ pp.title }}</div>
+  <div class="ch-signal">{{ pp.intro }}</div>
+</section>
+{% endif %}
+
+{# ===================== 3부 — 구문별 괄호치기 실전 ===================== #}
 {% if guide.part2 %}
 {% set p2 = guide.part2 %}
 <section class="chapter" id="part2">
-  <div class="ch-kicker">2부 · 구문해석(문법구조)</div>
+  <div class="ch-kicker">3부 · 구문해석(문법구조)</div>
   <div class="ch-title">{{ p2.title }}</div>
   <div class="ch-signal">{{ p2.intro }}</div>
 </section>
