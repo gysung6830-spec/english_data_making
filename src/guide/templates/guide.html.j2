@@ -255,9 +255,46 @@
   <div class="wb-note">▪ 예문·실전적용(문제/해설)은 API 연결 시 선별 기출로 자동 생성됩니다.</div>
   {% endif %}
 
-  {% if chapter.problems %}{{ problems_block(chapter.problems) }}{% endif %}
   {% if chapter.vocab %}{{ vocab_block(chapter.vocab) }}{% endif %}
 </section>
+
+{# 실전적용: 문제 페이지 ↔ 해설 페이지 (교차) #}
+{% set nums = ['①','②','③','④','⑤'] %}
+{% for pr in chapter.practice %}
+<section class="chapter drill-q">
+  <div class="drill-band">실전적용 <small>{{ chapter.title }} · 문제 {{ pr.no }}</small></div>
+  <div class="dq">
+    <span class="dq-no">{{ '%02d' % pr.no }}</span>
+    <span class="dq-sent">{{ pr.sentence }}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
+  </div>
+  <div class="dq-prompt">Q. {{ pr.prompt }}</div>
+  {% if pr.kind == 'mc' %}
+    {% for opt in pr.options %}<div class="dq-opt">{{ nums[loop.index0] }} {{ opt }}</div>{% endfor %}
+  {% else %}
+    <div class="dq-ans-line">▶ 해석: <span class="dq-blank"></span></div>
+    <div class="dq-ans-line"><span class="dq-blank"></span></div>
+  {% endif %}
+  {% if pr.vocab %}{{ vocab_block(pr.vocab) }}{% endif %}
+</section>
+
+{% if pr.solution %}{% set s = pr.solution %}
+<section class="chapter drill-a">
+  <div class="drill-band dk">실전적용 해설 <small>{{ chapter.title }} · 문제 {{ pr.no }}</small></div>
+  <div class="dq">
+    <span class="dq-no">{{ '%02d' % pr.no }}</span>
+    <span class="dq-sent">{{ pr.sentence }}
+      {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ nums[pr.answer_index] }}</span>
+      {% endif %}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
+  </div>
+  {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기</span>{{ s.cut }}</div>{% endif %}
+  {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
+    {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}</div>{% endif %}
+  {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">필자가 하고싶은 말</span>{{ s.author_msg }}</div>{% endif %}
+  {% if s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
+    {% for k in s.key_points %}<div class="kp">{{ k }}</div>{% endfor %}</div>{% endif %}
+</section>
+{% endif %}
+{% endfor %}
 {% endfor %}
 {% endfor %}
 {% endif %}

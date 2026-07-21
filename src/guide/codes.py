@@ -83,8 +83,9 @@ def load_part0(path: str | Path | None = None):
 
 def load_part2_workbook(path: str | Path | None = None):
     """syntax_formula.yaml + SYNTAX_TYPES → 3 PART로 묶인 워크북형 Part2(해석공식 시각화)."""
-    from .schemas import (Diagram, FormulaRow, Part2, SyntaxChapter,
-                          SyntaxPartGroup, WorkExample)
+    from .schemas import (Diagram, FormulaRow, Part2, PracticeItem,
+                          PracticeSolution, SyntaxChapter, SyntaxPartGroup,
+                          VocabItem, WorkExample)
     from .syntax import SYNTAX_TYPES
     p = Path(path) if path else (Path(__file__).resolve().parent / "syntax_formula.yaml")
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
@@ -103,9 +104,21 @@ def load_part2_workbook(path: str | Path | None = None):
                               rows=[FormulaRow(en=r["en"], ko=r["ko"]) for r in dia.get("rows", [])])
         examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
                     for e in f.get("examples", [])]
+        practice = []
+        for i, pr in enumerate(f.get("practice", []), start=1):
+            sol = pr.get("solution")
+            practice.append(PracticeItem(
+                no=i, kind=pr.get("kind", "mc"), sentence=pr["sentence"],
+                source=pr.get("source", ""), prompt=pr.get("prompt", ""),
+                options=pr.get("options", []), answer_index=pr.get("answer_index", 0),
+                answer=pr.get("answer", ""),
+                vocab=[VocabItem(**v) for v in pr.get("vocab", [])],
+                solution=PracticeSolution(**sol) if sol else None,
+            ))
         return SyntaxChapter(id=st.id, title=st.title, signal=st.signal, how=st.formula,
                              point=f.get("point", ""), strategy=f.get("strategy", ""),
-                             diagram=diagram, examples=examples, combat_tip=st.combat)
+                             diagram=diagram, examples=examples, practice=practice,
+                             combat_tip=st.combat)
 
     groups = []
     for part in data.get("parts", []):

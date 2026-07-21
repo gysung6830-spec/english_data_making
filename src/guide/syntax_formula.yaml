@@ -37,6 +37,47 @@ formulas:
          cut: "응급 상황은 / 항상 명확히 표시되는 것은 / 아니다. (→ 표시될 때도, 안 될 때도)"}
       - {en: "Living your values only some of the time does not contribute to the creation of culture.", src: "2024 고3 11월 20번",
          cut: "가치를 / 일부 시간에만 실천하는 것은 / 문화 창조에 / 기여하지 않는다."}
+    practice:
+      - kind: mc
+        sentence: "Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all."
+        source: "2024 고3 9월 30번"
+        prompt: "밑줄 친 문장의 올바른 해석을 고르시오."
+        options:
+          - "우리는 신중한 사고자라서, 성급한 판단을 하지 않는다."
+          - "스스로는 신중하다고 느끼지만, 실제로는 성급하게 판단하거나 아예 판단하지 않는다."
+        answer_index: 1
+        vocab:
+          - {word: "subjective", meaning: "주관적인"}
+          - {word: "impression", meaning: "인상"}
+          - {word: "snap judgment", meaning: "성급한 판단"}
+          - {word: "careful thinker", meaning: "신중한 사고자"}
+        solution:
+          cut: "비록 우리 각자가 / 주관적 인상을 가질지라도 / [우리가 신중한 사고자라는] / 우리는 흔히 성급한 판단을 내린다 / 혹은 아예 제대로 된 판단을 내리지 않는다."
+          wrong: "우리는 신중한 사고자라서, 성급한 판단을 하지 않는다."
+          wrong_why: "Although(양보)를 놓쳐 앞뒤를 순접으로, no real judgments의 부정을 놓쳐 극성을 뒤집음 → 필자 의견과 정반대."
+          author_msg: "스스로는 신중하다고 '느끼지만', 실제로는 대충 판단하거나 판단 자체를 안 한다. (겉 인상 ↔ 실제 행동의 대비)"
+          key_points:
+            - "Although ~ : 양보(비록 ~일지라도) — 앞은 인정, 핵심은 뒤에서 뒤집힌다."
+            - "the impression [that S+V] : 동격 that절 — '인상 = 신중한 사고자라는 것'(관계사 아님)."
+            - "A or no B at all : 부정어 — '혹은 아예 B가 전혀 없다'. snap judgments 와 병렬."
+      - kind: short
+        sentence: "As a practical matter, one seldom requires complete autonomy from the group."
+        source: "2023 고3 6월 30번"
+        prompt: "seldom에 유의하여 밑줄 친 문장을 우리말로 해석하시오."
+        answer: "실질적으로, 집단으로부터의 완전한 자율성이 요구되는 경우는 좀처럼 없다."
+        vocab:
+          - {word: "practical", meaning: "실질적인"}
+          - {word: "seldom", meaning: "좀처럼 ~않다"}
+          - {word: "autonomy", meaning: "자율성"}
+          - {word: "require", meaning: "요구하다"}
+        solution:
+          cut: "실질적인 문제로서 / 사람은 좀처럼 요구하지 않는다 / 완전한 자율성을 / 집단으로부터."
+          wrong: "사람은 집단으로부터 완전한 자율성을 요구한다."
+          wrong_why: "seldom(좀처럼 ~않다)을 빠뜨리면 극성이 정반대가 된다."
+          author_msg: "사람은 집단에서 완전히 독립하려 하기보다, 어느 정도는 집단에 기대는 게 보통이다."
+          key_points:
+            - "seldom : 빈도 부정(좀처럼 ~않다) — 문장 전체의 극성을 뒤집는다."
+            - "as a practical matter : 삽입 부사구(실질적으로) — 뼈대에서 빼고 읽는다."
 
   comparison:
     point: "비교구문은 than/as를 기준으로 두 대상의 우열을 정한다. 무엇이 더 위인지가 곧 답."

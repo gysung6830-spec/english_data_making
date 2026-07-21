@@ -145,6 +145,28 @@ class WorkExample(BaseModel):
     cut: str = ""                 # 끊어읽기(슬래시 직독직해)
 
 
+# ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────
+class PracticeSolution(BaseModel):
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+    wrong: str = ""               # 오역(흔한 실수)
+    wrong_why: str = ""           # 왜 틀렸나
+    author_msg: str = ""          # 필자가 하고싶은 말
+    key_points: list[str] = []    # 주요구문(각 'X : 설명')
+
+
+class PracticeItem(BaseModel):
+    no: int = 0
+    kind: str = "mc"              # 'mc'(객관식) | 'short'(주관식)
+    sentence: str                 # 기출 문장(지문)
+    source: str = ""
+    prompt: str = ""              # 발문
+    options: list[str] = []       # mc 선지 [오역, 정답 등]
+    answer_index: int = 0
+    answer: str = ""              # short 모범답안
+    vocab: list[VocabItem] = []   # 문제 페이지 하단 단어 박스
+    solution: PracticeSolution | None = None   # 해설 페이지
+
+
 class SyntaxChapter(BaseModel):
     id: str
     title: str               # 예: 부정구문
@@ -154,6 +176,7 @@ class SyntaxChapter(BaseModel):
     strategy: str = ""       # 실전 해석 전략 한 줄
     diagram: Diagram | None = None    # 해석공식 다이어그램
     examples: list[WorkExample] = []  # 기출 예문 + 끊어읽기
+    practice: list[PracticeItem] = [] # 실전적용(문제↔해설)
     combat_tip: str = ""
     cards: list[SyntaxCard] = []
     problems: list[Problem] = []
