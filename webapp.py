@@ -159,7 +159,7 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
-      <label class=chk><input type=checkbox name=review value=1 checked>
+      <label class=chk><input type=checkbox name=review value=1>
         정밀검수 (비용추가)</label>
       <div class=hint>끄면 더 빠르고 저렴하지만 드물게 복수정답·애매 문항이 나올 수 있어요.</div>
 
