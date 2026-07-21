@@ -44,12 +44,12 @@ def _meta(sentence: str):
 
 # ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
 def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
-          para="", subj="", act=""):
+          basis="", para="", subj="", act=""):
     src, dif = _meta(sentence)
     return CodeCard(
         code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why, correct=correct,
-                      so_what=so_what, subject=subj, action=act),
+                      so_what=so_what, so_what_basis=basis, subject=subj, action=act),
     )
 
 
@@ -259,6 +259,7 @@ def mock_guide() -> Guide:
                 "이 능력은 식물 분열조직의 활동 '덕분에/때문에' 생긴다(활동이 원인).",
                 "즉, (이 능력)의 원인은 뿌리·줄기의 미분화 조직인 분열조직이 세포를 분열시키는 활동에 있다는 뜻. "
                 "('이 능력'이 무엇인지는 이 문장만으론 알 수 없어 그대로 둔다.)",
+                basis="근거: 동격〈regions of undifferentiated tissue … that can divide〉 — '활동'의 정체를 '세포를 분열시키는'으로 구체화. (this ability는 문장 밖이라 미해결로 둠)",
                 para="(This ability) exists because plant meristems—dividing tissue in roots "
                 "and shoots—are active.",
                 subj="(이 능력) this ability", act="분열조직의 활동 때문에 생긴다",
@@ -270,6 +271,7 @@ def mock_guide() -> Guide:
                 "'lead to'는 정방향(A→B) — 앞(소득 상승)이 원인, 뒤(자동차화)가 결과. 주어·목적어를 바꾸면 인과가 뒤집힌다.",
                 "소득 증가는 필연적으로 자동차화(자동차 보유·이용 증가)로 이어진다.",
                 "즉, 소득이 오르면 예외 없이(inevitably) 차를 더 갖거나 타게 된다는 것.",
+                basis="근거: 'motorization'(자동차화)를 '차를 더 갖거나 타게 됨'으로 풀고, 부사 'inevitably'를 '예외 없이'로 반영.",
                 para="As incomes rise, car ownership and use are bound to increase.",
                 subj="소득 증가 rising incomes", act="자동차화 증가로 이어진다",
             )],
@@ -436,5 +438,6 @@ def mock_guide() -> Guide:
             )],
         ),
     ]
-    from src.guide.codes import load_part2_workbook
-    return Guide(part0=load_part0(), chapters=chapters, part2=load_part2_workbook())
+    from src.guide.codes import load_abstract, load_part2_workbook
+    return Guide(part0=load_part0(), chapters=chapters, abstract=load_abstract(),
+                 part2=load_part2_workbook())

@@ -1,0 +1,70 @@
+# ============================================================
+#  추상 → 구체 · 추상적 표현을 손에 잡히게
+#  평가원 문장은 추상적이다. 이 파트는 '추상 표현을 구체화하는 4가지 길'을
+#  목차로 잡고, 각 길에 해당하는 표현·기출 예문을 익히게 한다.
+#  (표현/예문은 여기서 바로 편집 가능)
+# ============================================================
+title: "추상 → 구체 · 추상적 표현을 손에 잡히게"
+intro: >-
+  평가원 문장이 어려운 건 추상적이기 때문이다. 아래 4가지 '구체화의 길'을 익히면,
+  추상 표현도 실제 상황으로 풀어 읽을 수 있다. ('이런 내용'을 만드는 바로 그 능력.)
+
+chapters:
+  - id: nominalization
+    title: "명사화 풀기 — 추상명사를 동사로 되돌린다"
+    point: "영어는 동작을 '추상명사'로 굳혀 쓴다(the recombination of ~). 이를 동사로 풀면(재조합하는 것) 구체적으로 잡힌다."
+    strategy: "'the + 추상명사 + of A' 를 보면 → 'A를 ~하는 것/A가 ~하는 것' 으로 동사처럼 풀어 읽는다."
+    exprs:
+      - {en: "the recombination of A", ko: "A를 재조합하는 것"}
+      - {en: "a shift in A", ko: "A가 바뀌는 것 / 변화"}
+      - {en: "the emergence of A", ko: "A가 생겨나는 것 / 등장"}
+      - {en: "the ability to V", ko: "V할 수 있다는 것"}
+      - {en: "the tendency to V", ko: "V하려는 경향"}
+      - {en: "the absence of A", ko: "A가 없다는 것"}
+    examples:
+      - {en: "Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the role of humans is in decline.",
+         src: "2024 고3 6월 20번",
+         cut: "AI 비서가 점점 많아지든 / 자율주행차가 '등장하든' (= 자율주행차가 새로 나타나든) / 인간의 역할은 줄고 있다."}
+
+  - id: restate
+    title: "재진술·예시 신호로 구체화 — 옆에 쉬운 말이 있다"
+    point: "추상 문장 뒤엔 대개 쉬운 말이 따라온다. that is / in other words / namely(재진술), such as / for example(예시)가 그 신호."
+    strategy: "이 신호가 보이면 → 바로 뒤(또는 앞)의 '구체 설명·예시'를 잡아 추상 문장을 갈음한다. 추상+구체는 같은 말이다."
+    exprs:
+      - {en: "that is / namely", ko: "즉, 다시 말해 (재진술)"}
+      - {en: "in other words", ko: "다시 말해 (재진술)"}
+      - {en: "such as / like", ko: "~와 같은 (예시)"}
+      - {en: "for example / for instance", ko: "예를 들어 (예시)"}
+      - {en: "in short / to put it simply", ko: "요컨대 (요약)"}
+    examples:
+      - {en: "In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts open to the public.",
+         src: "2023 고3 6월 23번",
+         cut: "다시 말해(= 앞 문장을 쉽게 풀면), / 박물관이 경쟁 경제에서 살아남으려 애쓰면서 / 예산을 '대중에게 공개되는 부분'에 우선 배정한다."}
+
+  - id: reference
+    title: "지시어 구체화 — this/that/it 의 정체를 문장에서 찾는다"
+    point: "this/that/these/such 는 앞의 무언가를 가리킨다. 그 대상을 찾아 넣어야 문장이 손에 잡힌다."
+    strategy: "지시어를 보면 → '무엇을 가리키지?'를 묻고, 문장 안(또는 바로 앞)에서 대상을 찾아 대입한다. 문장 안에 없으면 (이것)으로 두고 넘어간다."
+    exprs:
+      - {en: "this / that / these / those", ko: "이/그/이것들/그것들 (앞의 대상)"}
+      - {en: "such a(n) N", ko: "그러한 N (앞서 말한)"}
+      - {en: "it / they (지시)", ko: "그것/그것들 (앞 명사)"}
+      - {en: "the former / the latter", ko: "전자 / 후자"}
+    examples:
+      - {en: "This ability is due to the activity of plant meristems, regions of undifferentiated tissue that can divide.",
+         src: "2022 고3 9월 35번",
+         cut: "이 능력은(= 앞에서 말한 그 능력은) / 분열조직의 활동 '덕분에' 생긴다 / (분열조직은) 분열할 수 있는 미분화 조직."}
+
+  - id: metaphor
+    title: "비유·은유 읽기 — 그림·비유를 실제 뜻으로 바꾼다"
+    point: "평가원은 추상 개념을 비유로 감춘다(그림자 vs 실체, 옷의 솔기 등). 비유의 '진짜 대상'을 대입해야 뜻이 열린다."
+    strategy: "비유 표현이 나오면 → 'A는 사실 무엇을 빗댄 걸까?'를 묻고, 문맥이 주는 실제 대상으로 치환한다."
+    exprs:
+      - {en: "hunt the shadow, not the substance", ko: "실체가 아니라 겉모습(그림자)만 좇다"}
+      - {en: "the tip of the iceberg", ko: "빙산의 일각 (드러난 일부)"}
+      - {en: "a double-edged sword", ko: "양날의 검 (장단 양면)"}
+      - {en: "a stepping stone", ko: "디딤돌 (다음으로 가는 발판)"}
+    examples:
+      - {en: "Those who rely only upon theories were obviously hunting the shadow, not the substance.",
+         src: "2025 수능 21번",
+         cut: "이론에만 의존한 사람들은 / 분명 '그림자를 좇고 있었다, 실체가 아니라' (= 겉핥기 지식만 좇고 알맹이는 놓쳤다)."}

@@ -68,6 +68,13 @@
   <div class="toc-item"><a href="#partP">지문 단위 훈련 (주제 제시 → 재진술 → 예시 → 결론)</a></div>
   {% endif %}
 
+  {% if guide.abstract %}
+  <div class="toc-part"><a href="#partAbs">추상 → 구체 — {{ guide.abstract.title.split('·')[1] if '·' in guide.abstract.title else guide.abstract.title }}</a></div>
+  {% for c in guide.abstract.chapters %}
+  <div class="toc-item"><a href="#abs-{{ c.id }}">{{ c.title }}</a></div>
+  {% endfor %}
+  {% endif %}
+
   {% if guide.part2 %}
   <div class="toc-part"><a href="#part2">3부 · 구문해석 — {{ guide.part2.title }}</a></div>
   {% for g in guide.part2.groups %}
@@ -171,7 +178,9 @@
     </div>
     {% if card.body.so_what %}
     <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}
-      <span class="sw-note">(이 문장만으로 도출)</span></div>
+      <span class="sw-note">(이 문장만으로 도출)</span>
+      {% if card.body.so_what_basis %}<div class="sw-basis">🔎 {{ card.body.so_what_basis }}</div>{% endif %}
+    </div>
     {% endif %}
     {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
     <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
@@ -192,6 +201,51 @@
   <div class="ch-title">{{ pp.title }}</div>
   <div class="ch-signal">{{ pp.intro }}</div>
 </section>
+{% endif %}
+
+{# ===================== 추상 → 구체 ===================== #}
+{% if guide.abstract %}
+{% set ab = guide.abstract %}
+<section class="chapter" id="partAbs">
+  <div class="ch-kicker">추상 → 구체</div>
+  <div class="ch-title">{{ ab.title }}</div>
+  <div class="ch-signal">{{ ab.intro }}</div>
+</section>
+
+{% for chapter in ab.chapters %}
+<section class="chapter wb" id="abs-{{ chapter.id }}">
+  <div class="ch-kicker">추상 → 구체 · 길 {{ loop.index }}</div>
+  <div class="ch-title">{{ chapter.title }}</div>
+
+  {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>{% endif %}
+
+  {% if chapter.exprs %}
+  <div class="formula">
+    <div class="f-label">이 길에 쓰이는 표현</div>
+    <div class="f-rows">
+      {% for r in chapter.exprs %}
+      <div class="f-row"><span class="f-en">{{ r.en }}</span>
+        <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if chapter.strategy %}<div class="wb-strategy">🎯 <b>구체화 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+
+  {% if chapter.examples %}
+  <div class="ex-label">기출 예문 <span>· 구체화</span></div>
+  <ol class="wb-ex">
+    {% for e in chapter.examples %}
+    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+      {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
+      {% if e.cut %}<div class="wb-cut"><span class="cut-tag">구체화</span>{{ e.cut }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+</section>
+{% endfor %}
 {% endif %}
 
 {# ===================== 3부 — 구문해석 · 해석공식 시각화 ===================== #}

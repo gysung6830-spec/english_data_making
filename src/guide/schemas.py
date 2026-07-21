@@ -19,6 +19,8 @@ class CardBody(BaseModel):
     correct: str = Field(description="정답 — 문맥·구조를 반영한 올바른 해석 한 줄")
     so_what: str = Field(default="", description="해석하면 이런 내용 — '이 문장 하나만으로' 도출되는 "
                          "구체화. 앞뒤 지문·필자 의도 추측 금지. 지시어 대상이 문장 밖이면 언급하지 말 것")
+    so_what_basis: str = Field(default="", description="구체화 근거 — 위 '이런 내용'을 어느 문장 단서에서 "
+                               "끌어냈는지(동격·수식어·예시·대조 등)를 '근거: …' 형태로 짧게")
     subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
     action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
@@ -220,6 +222,22 @@ class ParaphrasePart(BaseModel):
     passages: list[ParaphrasePassage] = []
 
 
+# ── 추상 → 구체 파트 ─────────────────────────────────────────
+class AbstractChapter(BaseModel):
+    id: str
+    title: str
+    point: str = ""
+    strategy: str = ""
+    exprs: list[FormulaRow] = []      # 추상 표현 목록 (en → ko)
+    examples: list[WorkExample] = []  # 기출 예문 + 구체화(끊어읽기)
+
+
+class AbstractPart(BaseModel):
+    title: str = "추상 → 구체"
+    intro: str = ""
+    chapters: list[AbstractChapter] = []
+
+
 class Guide(BaseModel):
     title: str = "구문해석 실전서"
     kicker: str = "평가원 기출로 익히는"
@@ -227,6 +245,7 @@ class Guide(BaseModel):
     part0: Part0 | None = None                 # 0부 기본기
     chapters: list[Chapter] = []               # 1부 평가원 코드
     paraphrase: ParaphrasePart | None = None   # 2부 패러프레이징(지문 단위)
+    abstract: AbstractPart | None = None       # 추상→구체
     part2: Part2 | None = None                 # 3부 구문해석
 
 
