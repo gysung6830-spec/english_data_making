@@ -8,15 +8,16 @@ set -e
 echo "[1/3] 파이썬 라이브러리 설치 중..."
 pip install -r requirements.txt
 
-echo "[2/3] 한글 폰트(나눔고딕) 설치 확인..."
-if ! fc-list | grep -qi nanum; then
+echo "[2/3] 한글 폰트(나눔고딕·나눔명조) 설치 확인..."
+if ! fc-list | grep -qi "nanummyeongjo\|nanum myeongjo"; then
   echo "   나눔 폰트가 없어 설치를 시도합니다 (관리자 권한 필요할 수 있음)."
   if command -v apt-get >/dev/null 2>&1; then
+    # fonts-nanum 패키지에 나눔고딕·나눔명조가 함께 들어 있음
     sudo apt-get update && sudo apt-get install -y fonts-nanum || \
-      echo "   ⚠ 자동 설치 실패. 나눔고딕 폰트를 직접 설치해 주세요."
+      echo "   ⚠ 자동 설치 실패. 나눔고딕·나눔명조 폰트를 직접 설치해 주세요."
   elif command -v brew >/dev/null 2>&1; then
-    brew install --cask font-nanum-gothic || \
-      echo "   ⚠ 자동 설치 실패. 나눔고딕 폰트를 직접 설치해 주세요."
+    brew install --cask font-nanum-gothic font-nanum-myeongjo || \
+      echo "   ⚠ 자동 설치 실패. 나눔고딕·나눔명조 폰트를 직접 설치해 주세요."
   else
     echo "   ⚠ 자동 설치 도구를 찾지 못했습니다. 나눔고딕 폰트를 직접 설치해 주세요."
   fi

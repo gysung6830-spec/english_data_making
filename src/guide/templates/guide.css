@@ -1,7 +1,18 @@
 /* ============================================================
    구문해석 실전서 - 인쇄용 스타일 (WeasyPrint)
    팔레트: 네이비 #1a2740 / 골드 #b08d57 / 오역=빨강 / 정답=초록
+   폰트 정책: 영어=세리프(Georgia) / 본문 한글=나눔고딕 / 목차 한글=나눔명조
+     (font stack 앞쪽 세리프는 한글 글리프가 없어 → 한글은 뒤의 나눔 폰트로 자동 폴백)
    ============================================================ */
+
+/* 영어=세리프 + 본문 한글=나눔고딕 */
+:root {
+  --f-body: "Georgia", "Times New Roman", "NanumGothic", "Nanum Gothic",
+            "Malgun Gothic", "WenQuanYi Zen Hei", serif;
+  /* 영어=세리프 + 목차/제목 한글=나눔명조 */
+  --f-myeongjo: "Georgia", "Times New Roman", "NanumMyeongjo", "Nanum Myeongjo",
+                "Batang", "WenQuanYi Zen Hei", serif;
+}
 
 @page {
   size: A4;
@@ -18,7 +29,8 @@
 * { box-sizing: border-box; }
 
 body {
-  font-family: "NanumGothic", "Nanum Gothic", "Malgun Gothic", "WenQuanYi Zen Hei", sans-serif;
+  font-family: "Georgia", "Times New Roman", "NanumGothic", "Nanum Gothic",
+               "Malgun Gothic", "WenQuanYi Zen Hei", serif;
   color: #23272e;
   font-size: 10.5px;
   line-height: 1.55;
@@ -38,7 +50,7 @@ body {
   --line:  #e5e7eb;
 }
 
-.serif { font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif; }
+.serif { font-family: var(--f-myeongjo); }
 
 /* ── 표지 ─────────────────────────────────────── */
 .cover {
@@ -57,7 +69,7 @@ body {
   letter-spacing: 8px; font-size: 12px; color: #c7b48f; margin-bottom: 14px;
 }
 .cover h1 {
-  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-family: var(--f-myeongjo);
   font-size: 46px; font-weight: 800; letter-spacing: 4px; margin: 0 0 16px;
   color: #f4ecdd;
 }
@@ -69,9 +81,9 @@ body {
 }
 
 /* ── 목차 ─────────────────────────────────────── */
-.toc { page-break-after: always; padding-top: 6mm; }
+.toc { page-break-after: always; padding-top: 6mm; font-family: var(--f-myeongjo); }
 .toc-title {
-  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-family: var(--f-myeongjo);
   font-size: 26px; font-weight: 800; color: var(--navy);
   border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 18px;
 }
@@ -98,7 +110,7 @@ body {
 
 .ch-kicker { color: var(--gold); font-size: 10px; letter-spacing: 3px; font-weight: 700; }
 .ch-title {
-  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-family: var(--f-body);  /* 내용=나눔고딕(영어는 세리프) */
   font-size: 22px; font-weight: 800; color: var(--navy); margin: 2px 0 4px;
   border-bottom: 2px solid var(--gold); padding-bottom: 8px;
 }
@@ -228,7 +240,7 @@ body {
 /* ── 0부 · 3단계 읽기 엔진 ─────────────────────── */
 .part-open { }
 .spine {
-  font-family: "Nanum Myeongjo", "Batang", "WenQuanYi Zen Hei", serif;
+  font-family: var(--f-body);
   font-size: 15px; color: var(--navy); font-weight: 700;
   background: #f6f8fc; border-left: 4px solid var(--gold);
   padding: 12px 16px; margin: 8px 0 14px; border-radius: 0 6px 6px 0;
