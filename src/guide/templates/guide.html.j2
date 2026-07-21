@@ -172,7 +172,7 @@
         <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
       <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}
         {% if card.body.subject and card.body.action %}
-        <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
+        <div class="sv-line"><span class="sv-label">관계</span><span class="sv-s">{{ card.body.subject }}</span>
           <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
         {% endif %}
       </div>

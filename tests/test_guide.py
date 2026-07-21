@@ -78,6 +78,9 @@ def test_render_html():
     assert "패턴으로 익히는 실전해석" in html         # 3부 개칭
     assert "단계별 트레이닝" in html                # 전치사구 트레이닝
     assert "관계성" in html                       # 0부 관계성 원리
+    assert "대비로 구체화" in html                 # 추상→구체 신규 패턴
+    assert html.count('class="sv-line"') >= 8      # 모든 정답 카드에 A→B 관계 도식
+    assert "sv-label" in html                     # 관계 도식 라벨
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 
