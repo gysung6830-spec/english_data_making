@@ -37,37 +37,46 @@ _SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif KR',"
 
 _CSS = f"""
 * {{ box-sizing: border-box; }}
-@page {{ size: A4; margin: 15mm 14mm 16mm 14mm; }}
-body {{ font-family: {_SERIF}; font-size: 10.3pt; line-height: 1.6; color:#000; margin:0; }}
+@page {{ size: A4; margin: 11mm 12mm 10mm 12mm; }}
+body {{ font-family: {_SERIF}; font-size: 8.8pt; line-height: 1.33; color:#000; margin:0; }}
 
 /* 머리글 */
-.exam-header {{ border:1.2px solid #000; padding:10px 14px 8px; margin-bottom:12px; }}
-.exam-title {{ text-align:center; font-size:19pt; font-weight:700; letter-spacing:4px;
-               margin-bottom:8px; }}
-.hrow {{ display:flex; align-items:center; justify-content:space-between; font-size:11pt; }}
+.exam-header {{ border:1.2px solid #000; padding:6px 12px 5px; margin-bottom:8px; }}
+.exam-title {{ text-align:center; font-size:17pt; font-weight:700; letter-spacing:4px;
+               margin-bottom:5px; }}
+.hrow {{ display:flex; align-items:center; justify-content:space-between; font-size:10.5pt; }}
 .hrow .center {{ font-weight:700; }}
-.code-pill {{ border:1px solid #000; border-radius:999px; padding:2px 12px; font-size:9.5pt; }}
-.exam-time {{ text-align:center; font-size:9pt; color:#333; margin-top:5px; }}
+.code-pill {{ border:1px solid #000; border-radius:999px; padding:1px 11px; font-size:9pt; }}
+.exam-time {{ text-align:center; font-size:8.5pt; color:#333; margin-top:3px; }}
 
 /* 유의사항(머리글 박스 아래) */
-.guidelines {{ break-inside:avoid; font-size:9pt; line-height:1.5; margin-bottom:10px;
-               padding-bottom:6px; border-bottom:0.6px solid #999; }}
-.g-item {{ padding-left:13px; text-indent:-13px; margin:2px 0; }}
-.g-item .cont {{ display:block; padding-left:13px; text-indent:0; }}
+.guidelines {{ break-inside:avoid; font-size:8.4pt; line-height:1.4; margin-bottom:7px;
+               padding-bottom:5px; border-bottom:0.6px solid #999; }}
+.g-item {{ padding-left:12px; text-indent:-12px; margin:1px 0; }}
+.g-item .cont {{ display:block; padding-left:12px; text-indent:0; }}
 
-/* 2단 */
-.columns {{ column-count:2; column-gap:24px; column-rule:0.6px solid #cfcfcf; }}
+/* 2단. column-fill:auto → 각 페이지를 위→아래(왼쪽 단 먼저)로 꽉 채움 */
+.columns {{ column-count:2; column-gap:18px; column-rule:0.6px solid #cfcfcf;
+            column-fill:auto; }}
 .section-div {{ column-span:all; font-weight:700; margin:6px 0 8px; }}
 
+/* 페이지 단위 2단 배치(문항을 좌단부터 채움) */
+.page {{ page-break-before: always; break-before: page; }}
+.page:first-child {{ page-break-before: avoid; break-before: avoid; }}
+.sheet {{ overflow: hidden; }}   /* clearfix */
+.col {{ width: 48%; }}
+.col.left {{ float: left; border-right: 0.6px solid #cfcfcf; padding-right: 15px; }}
+.col.right {{ float: right; }}
+
 /* 문항 */
-.q {{ break-inside:avoid; margin-bottom:14px; }}
+.q {{ break-inside:avoid; margin-bottom:9px; }}
 .q-head {{ font-weight:700; }}
-.q-head .score {{ font-weight:400; font-size:9pt; color:#333; }}
-.passage {{ text-align:justify; margin:6px 0; }}
-.para {{ text-align:justify; margin:5px 0; }}
-.box {{ border:1px solid #000; padding:7px 10px; margin:6px 0; text-align:justify; }}
-.choices {{ margin:5px 0 0 2px; }}
-.choices div {{ margin:1.5px 0; }}
+.q-head .score {{ font-weight:400; font-size:8.4pt; color:#333; }}
+.passage {{ text-align:justify; margin:3px 0; }}
+.para {{ text-align:justify; margin:3px 0; }}
+.box {{ border:1px solid #000; padding:5px 8px; margin:4px 0; text-align:justify; }}
+.choices {{ margin:3px 0 0 2px; }}
+.choices div {{ margin:0.5px 0; }}
 u {{ text-underline-offset:2px; }}
 
 /* 보기 박스 */
@@ -208,30 +217,96 @@ def _guidelines_block(exam: MockExam, info: dict) -> str:
     return f'<div class="guidelines">{"".join(items)}</div>'
 
 
-def _footer_block(exam: MockExam, footer: str) -> str:
-    note = footer or "이 시험문제는 은아T영어연구소의 저작물입니다."
+def _footer_note(exam: MockExam, footer: str) -> str:
+    """매 페이지 하단에 넣을 저작권 문구(쪽번호는 @page 카운터가 채움)."""
     m = exam.blueprint.meta
-    page_line = (f"{m.grade}학년 {m.subject or '공통영어1'} "
-                 f"( 1 ) / ( {m.pages} ) 페이지 중")
-    return (f'<div class="footer">{html.escape(note)}<br>{html.escape(page_line)}</div>')
+    note = footer or "이 시험문제는 은아T영어연구소의 저작물입니다."
+    return f"{note}  ·  {m.grade}학년 {m.subject or '공통영어1'}"
 
 
 # ---------------------------------------------------------------------------
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
+# 한 단(컬럼)의 대략 가용 높이(mm). @page 여백 11/10mm 기준.
+_COL_H = 262.0
+_HEADER_H = 28.0
+_GUIDE_H = 24.0
+_SECTION_H = 9.0
+
+
+def _est_height(q: Question) -> float:
+    """문항의 대략 높이(mm) 추정 — 좌/우 단 배치용(8.8pt 기준)."""
+    words = len((q.passage_text or "").split())
+    h = 6.0                                   # 발문
+    h += (words / 9.5) * 4.0                  # 지문(한 줄 ~9.5단어, 줄높이 ~4.0mm)
+    if q.choices:
+        h += len(q.choices) * 4.2             # 선지
+    if q.section == "essay":
+        h += 16.0                             # 답란
+        if q.meta.get("bogi"):
+            h += 14.0                         # <보기> 박스
+        if q.meta.get("blank_ko"):
+            h += 5.0
+    h += 6.0                                  # 문항 간 여백
+    return h
+
+
+def _pack(questions: list[Question], first_left: float, first_right: float,
+          col_h: float) -> list[tuple[list, list]]:
+    """문항을 (좌단, 우단) 페이지 리스트로 배치. 좌단부터 채운다."""
+    pages: list[tuple[list, list]] = []
+    left: list = []
+    right: list = []
+    lh = rh = 0.0
+    bl, br = first_left, first_right
+    for q in questions:
+        h = _est_height(q)
+        if not left or lh + h <= bl:          # 좌단 우선(빈 좌단엔 무조건)
+            left.append(q); lh += h
+        elif rh + h <= br:                     # 좌단 다 차면 우단
+            right.append(q); rh += h
+        else:                                  # 둘 다 차면 새 페이지
+            pages.append((left, right))
+            left, right, lh, rh, bl, br = [q], [], h, 0.0, col_h, col_h
+    if left or right:
+        pages.append((left, right))
+    return pages
+
+
+def _render_sheet(left_html: str, right_html: str) -> str:
+    return (f'<div class="sheet"><div class="col left">{left_html}</div>'
+            f'<div class="col right">{right_html}</div></div>')
+
+
 def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    # 유의사항은 2단 레이아웃의 '왼쪽 단(첫째 열)' 맨 위에만 배치
-    body = [_header_block(exam, info), '<div class="columns">',
-            _guidelines_block(exam, info)]
-    for q in exam.choice_questions:
-        body.append(_q_html(q))
-    body.append('<div class="section-div">&lt; 서 술 형 &gt;</div>')
-    for q in exam.essay_questions:
-        body.append(_q_html(q))
-    body.append('</div>')
-    body.append(_footer_block(exam, footer))
+    """실제 시험지 배치: 문항 높이를 추정해 좌/우 단·페이지로 직접 배치.
+
+    선택형은 페이지당 ~5문항(좌단부터 채움), 서술형은 새 페이지에서 시작해 ~3문항.
+    """
+    guide = _guidelines_block(exam, info)
+    # 선택형: 1쪽 좌단은 머리글+유의사항만큼 줄임
+    c_pages = _pack(exam.choice_questions,
+                    first_left=_COL_H - _HEADER_H - _GUIDE_H,
+                    first_right=_COL_H - _HEADER_H, col_h=_COL_H)
+    e_pages = _pack(exam.essay_questions,
+                    first_left=_COL_H - _SECTION_H,
+                    first_right=_COL_H - _SECTION_H, col_h=_COL_H) \
+        if exam.essay_questions else []
+
+    pages_html: list[str] = []
+    for i, (left, right) in enumerate(c_pages):
+        inner = _header_block(exam, info) if i == 0 else ""
+        lh = (guide if i == 0 else "") + "".join(_q_html(q) for q in left)
+        rh = "".join(_q_html(q) for q in right)
+        pages_html.append(f'<div class="page">{inner}{_render_sheet(lh, rh)}</div>')
+    for i, (left, right) in enumerate(e_pages):
+        sec = '<div class="section-div">&lt; 서 술 형 &gt;</div>' if i == 0 else ""
+        lh = "".join(_q_html(q) for q in left)
+        rh = "".join(_q_html(q) for q in right)
+        pages_html.append(f'<div class="page">{sec}{_render_sheet(lh, rh)}</div>')
+
     title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
-    return _wrap(title, "".join(body))
+    return _wrap(title, "".join(pages_html), footer_note=_footer_note(exam, footer))
 
 
 def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
@@ -254,8 +329,7 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
         if q.explanation:
             body.append(f'<div class="exp"><b>해설.</b> {_exp_html(q.explanation)}</div>')
         body.append('</div>')
-    body.append(_footer_block(exam, footer))
-    return _wrap("정답 및 해설", "".join(body))
+    return _wrap("정답 및 해설", "".join(body), footer_note=_footer_note(exam, footer))
 
 
 def _exp_html(text: str) -> str:
@@ -270,9 +344,22 @@ def _exp_html(text: str) -> str:
     return "".join(out)
 
 
-def _wrap(title: str, body: str) -> str:
+def _page_css(footer_note: str) -> str:
+    """매 페이지 하단(@bottom)에 저작권 문구·쪽번호를 넣는 @page 규칙."""
+    note = footer_note.replace('"', "'")
+    return (
+        "@page { "
+        f'@bottom-center {{ content: "{note}"; font-family: {_SERIF}; '
+        'font-size: 8pt; color: #555; } '
+        '@bottom-right { content: "( " counter(page) " ) / ( " counter(pages) " )"; '
+        'font-size: 8pt; color: #555; } }')
+
+
+def _wrap(title: str, body: str, footer_note: str = "") -> str:
+    page_css = _page_css(footer_note) if footer_note else ""
     return (f'<!doctype html><html><head><meta charset="utf-8">'
-            f'<title>{html.escape(title)}</title><style>{_CSS}</style></head>'
+            f'<title>{html.escape(title)}</title>'
+            f'<style>{_CSS}{page_css}</style></head>'
             f'<body>{body}</body></html>')
 
 
