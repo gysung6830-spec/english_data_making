@@ -82,9 +82,10 @@ def test_render_html():
     assert html.count('class="sv-line"') >= 8      # 모든 정답 카드에 A→B 관계 도식
     assert "sv-label" in html                     # 관계 도식 라벨
     assert "sw-basis" not in html                 # '이런 내용' 근거 라인 삭제
-    assert "실전적용 해설" in html                 # 1부 목차별 문제→해설
-    assert html.count('class="chapter drill-q"') >= 10   # 문제 페이지(왼쪽)
-    assert html.count('class="chapter drill-a"') >= 10   # 해설 페이지(오른쪽)
+    assert "실전적용 해설" in html                 # 목차별 문제→해설
+    assert html.count('class="chapter drill-q"') >= 5    # 문제 묶음(목차별 1섹션)
+    assert html.count('class="chapter drill-a"') >= 5    # 해설 묶음(목차별 1섹션)
+    assert html.count('class="dq-item"') >= 40           # 실제 문항 수(1부만 64)
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 

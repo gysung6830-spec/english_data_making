@@ -397,20 +397,30 @@ body {
 .wb-note { color: var(--muted); font-size: 10px; margin: 10px 0; }
 :root { --goldbg: #fbf3e5; }
 
-/* ── 실전적용: 문제 페이지(왼쪽) ↔ 해설 페이지(오른쪽) ── */
-/* 인쇄(양면) 시 문제는 왼쪽(verso) 페이지에서 시작, 해설은 마주보는 오른쪽(recto)에 오게 한다. */
-.drill-q { page-break-before: left; }
-.drill-a { page-break-before: right; }
+/* ── 실전적용: 문제(여러 개) → 해설(같은 수) 배치 ── */
+/* 문제들을 페이지에 채운 뒤, 같은 수의 해설을 이어서 배치한다. */
+.drill-q, .drill-a { page-break-before: always; }
+.dq-item { border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px 10px;
+  margin-bottom: 12px; page-break-inside: avoid; background: #fff; }
+.sol-item { border: 1px solid var(--tint2); border-radius: 10px; padding: 11px 14px 8px;
+  margin-bottom: 13px; page-break-inside: avoid; background: #fcfefe; }
+.dq-kind { display: inline-block; font-weight: 800; font-size: 8.5px; padding: 1px 8px;
+  border-radius: 4px; margin-right: 8px; vertical-align: middle; }
+.dq-kind.mc { background: #e7f2ed; color: #1f5a4c; }
+.dq-kind.short { background: #fbeede; color: #9a6a1e; }
+.dq-voca { margin-top: 7px; font-size: 9px; color: #5a6b64; border-top: 1px dashed var(--line);
+  padding-top: 5px; }
+.dq-voca b { color: var(--navy2); }
 .drill-band { background: linear-gradient(100deg, var(--navy), var(--navy2)); color: #eafaf4;
   font-weight: 800; font-size: 15px; padding: 10px 16px; border-radius: 9px; margin-bottom: 12px; }
 .drill-band.dk { background: #08382f; }
 .drill-band small { font-weight: 500; font-size: 10px; color: #bfe6da; margin-left: 8px; }
 
-.dq { margin: 4px 0 8px; }
-.dq-no { font-family: "Georgia", serif; font-size: 22px; font-weight: 800; color: var(--navy2);
-  display: inline-block; width: 40px; vertical-align: top; }
-.dq-sent { display: inline-block; width: calc(100% - 46px); font-family: "Georgia", serif;
-  font-size: 13px; line-height: 1.9; color: #20293a; }
+.dq { margin: 2px 0 7px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 2px; }
+.dq-no { font-family: "Georgia", serif; font-size: 18px; font-weight: 800; color: var(--navy2);
+  margin-right: 8px; }
+.dq-sent { flex: 1; min-width: 60%; font-family: "Georgia", serif;
+  font-size: 12px; line-height: 1.75; color: #20293a; }
 .dq-correct { background: var(--right); color: #fff; font-weight: 800; font-size: 9px;
   padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
 .dq-prompt { font-weight: 800; font-size: 11px; color: var(--ink); margin: 8px 0 6px; }
