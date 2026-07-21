@@ -69,9 +69,12 @@
   {% endif %}
 
   {% if guide.part2 %}
-  <div class="toc-part"><a href="#part2">3부 · 구문해석 — 이런 구조면 이렇게 해석</a></div>
-  {% for c in guide.part2.chapters %}
-  <div class="toc-item"><a href="#sx-{{ c.id }}">Ch{{ loop.index }} · {{ c.title }}</a></div>
+  <div class="toc-part"><a href="#part2">3부 · 구문해석 — {{ guide.part2.title }}</a></div>
+  {% for g in guide.part2.groups %}
+  <div class="toc-sub">◆ {{ g.title }} <span>· {{ g.subtitle }}</span></div>
+  {% for c in g.chapters %}
+  <div class="toc-item"><a href="#sx-{{ c.id }}">{{ c.title }}</a></div>
+  {% endfor %}
   {% endfor %}
   {% endif %}
 </section>
@@ -191,72 +194,70 @@
 </section>
 {% endif %}
 
-{# ===================== 3부 — 구문별 괄호치기 실전 ===================== #}
+{# ===================== 3부 — 구문해석 · 해석공식 시각화 ===================== #}
 {% if guide.part2 %}
 {% set p2 = guide.part2 %}
 <section class="chapter" id="part2">
-  <div class="ch-kicker">3부 · 구문해석(문법구조)</div>
+  <div class="ch-kicker">3부 · 구문해석</div>
   <div class="ch-title">{{ p2.title }}</div>
   <div class="ch-signal">{{ p2.intro }}</div>
 </section>
 
-{% for chapter in p2.chapters %}
-<section class="chapter" id="sx-{{ chapter.id }}">
-  <div class="ch-kicker">Ch{{ loop.index }}</div>
-  <div class="ch-title">{{ chapter.title }}</div>
-  <div class="ch-signal">{{ chapter.signal }}</div>
-  <div class="ch-intro rule-box">
-    <div><span class="lbl">이런 구조면 ·</span> {{ chapter.signal }}</div>
-    <div class="tip"><span class="lbl">→ 이렇게 해석 ·</span> {{ chapter.how }}</div>
+{% for g in p2.groups %}
+{% set pidx = loop.index %}
+<section class="chapter" id="grp-{{ g.id }}">
+  <div class="part-opener">
+    <div class="po-badge">PART {{ pidx }}</div>
+    <div class="po-title">{{ g.title }}<small>{{ g.subtitle }}</small></div>
   </div>
-  {% if chapter.combat_tip %}
-  <div class="tip-cards"><div class="tip-card combat"><b>⚔️ {{ chapter.combat_tip.split('—')[0] }}</b>{{ '—' + chapter.combat_tip.split('—',1)[1] if '—' in chapter.combat_tip else chapter.combat_tip }}</div></div>
-  {% endif %}
-  <div class="ex-label">예시 <span>중난이도·고난이도 기출</span></div>
+  <div class="po-strategy">🎯 실전 전략 · {{ g.strategy }}</div>
+</section>
 
-  {% for card in chapter.cards %}
-  <div class="card syntax">
-    {% if card.source %}<div class="src-chip">📄 {{ card.source }}
-      {% if card.difficulty %}<span class="diff diff-{{ card.difficulty }}">{{ card.difficulty }}난이도</span>{% endif %}</div>{% endif %}
-    <div class="sentence">
-      {{ card.sentence | bracket_mods(card.body.modifiers) }}
-    </div>
-    <div class="syn-step">
-      <span class="dtag s2">뼈대(중3)</span>
-      <span class="skel-en">{{ card.body.skeleton_en }}</span>
-      <span class="skel-ko">— {{ card.body.skeleton_ko }}</span>
-    </div>
-    {% if card.body.subject and card.body.action %}
-    <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
-      <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
-    {% endif %}
-    {% if card.body.modifiers %}
-    <div class="mods">
-      <div class="mods-title">🧩 살 붙이기</div>
-      {% for mod in card.body.modifiers %}
-      <div class="mod-row">
-        <span class="mod-kind">{{ mod.kind }}</span>
-        <span class="mod-phrase">( {{ mod.phrase }} )</span>
-        <span class="mod-arrow">→</span>
-        <span class="mod-mean">{{ mod.meaning }}</span>
-        <span class="mod-conn">{{ mod.connector }}</span>
+{% for chapter in g.chapters %}
+<section class="chapter wb" id="sx-{{ chapter.id }}">
+  <div class="ch-kicker">PART {{ pidx }} · 구문</div>
+  <div class="ch-title">{{ chapter.title }}</div>
+
+  {% if chapter.point %}
+  <div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>
+  {% endif %}
+
+  {% if chapter.diagram %}
+  <div class="formula">
+    <div class="f-label">해석 공식</div>
+    <div class="f-diagram">
+      <div class="f-symbol">{{ chapter.diagram.symbol }}</div>
+      <div class="f-rows">
+        {% for r in chapter.diagram.rows %}
+        <div class="f-row"><span class="f-en">{{ r.en }}</span>
+          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
-    {% endif %}
-    <div class="syn-full"><span class="dtag s3">완성</span>{{ card.body.full_ko }}</div>
-    {% if card.body.real_meaning %}
-    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.real_meaning }}
-      <span class="sw-note">(이 문장만으로 도출)</span></div>
-    {% endif %}
-    {% if card.body.self_check %}
-    <div class="self-check">✅ 셀프체크 · {{ card.body.self_check }}</div>
-    {% endif %}
   </div>
-  {% endfor %}
+  {% endif %}
+
+  {% if chapter.strategy %}
+  <div class="wb-strategy">🎯 <b>실전 해석 전략</b> · {{ chapter.strategy }}</div>
+  {% endif %}
+
+  {% if chapter.examples %}
+  <div class="ex-label">기출 예문 <span>· 밑줄=구문 신호</span></div>
+  <ol class="wb-ex">
+    {% for e in chapter.examples %}
+    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+      {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
+      {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <div class="wb-note">▪ 예문·실전적용(문제/해설)은 API 연결 시 선별 기출로 자동 생성됩니다.</div>
+  {% endif %}
 
   {% if chapter.problems %}{{ problems_block(chapter.problems) }}{% endif %}
   {% if chapter.vocab %}{{ vocab_block(chapter.vocab) }}{% endif %}
 </section>
+{% endfor %}
 {% endfor %}
 {% endif %}

@@ -436,4 +436,5 @@ def mock_guide() -> Guide:
             )],
         ),
     ]
-    return Guide(part0=load_part0(), chapters=chapters, part2=mock_part2())
+    from src.guide.codes import load_part2_workbook
+    return Guide(part0=load_part0(), chapters=chapters, part2=load_part2_workbook())

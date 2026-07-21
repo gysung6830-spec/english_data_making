@@ -81,6 +81,42 @@ def load_part0(path: str | Path | None = None):
                  spine=data.get("spine", ""), methods=methods, tools=data.get("tools", []))
 
 
+def load_part2_workbook(path: str | Path | None = None):
+    """syntax_formula.yaml + SYNTAX_TYPES → 3 PART로 묶인 워크북형 Part2(해석공식 시각화)."""
+    from .schemas import (Diagram, FormulaRow, Part2, SyntaxChapter,
+                          SyntaxPartGroup, WorkExample)
+    from .syntax import SYNTAX_TYPES
+    p = Path(path) if path else (Path(__file__).resolve().parent / "syntax_formula.yaml")
+    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    tmap = {st.id: st for st in SYNTAX_TYPES}
+    formulas = data.get("formulas", {})
+
+    def make_chapter(tid: str) -> SyntaxChapter | None:
+        st = tmap.get(tid)
+        f = formulas.get(tid, {})
+        if not st:
+            return None
+        dia = f.get("diagram")
+        diagram = None
+        if dia:
+            diagram = Diagram(symbol=dia.get("symbol", ""),
+                              rows=[FormulaRow(en=r["en"], ko=r["ko"]) for r in dia.get("rows", [])])
+        examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
+                    for e in f.get("examples", [])]
+        return SyntaxChapter(id=st.id, title=st.title, signal=st.signal, how=st.formula,
+                             point=f.get("point", ""), strategy=f.get("strategy", ""),
+                             diagram=diagram, examples=examples, combat_tip=st.combat)
+
+    groups = []
+    for part in data.get("parts", []):
+        chs = [c for c in (make_chapter(t) for t in part.get("types", [])) if c]
+        groups.append(SyntaxPartGroup(id=part["id"], title=part["title"],
+                                      subtitle=part.get("subtitle", ""),
+                                      strategy=part.get("strategy", ""), chapters=chs))
+    return Part2(intro="구문 유형을 '실전 해석 동작'이 같은 것끼리 묶었다. "
+                 "해석공식을 눈으로 익히고, 같은 전략을 반복 적용한다.", groups=groups)
+
+
 def load_categories(path: str | Path | None = None) -> list[Category]:
     p = Path(path) if path else CODES_PATH
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}

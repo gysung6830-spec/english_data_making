@@ -128,21 +128,50 @@ class SyntaxCard(BaseModel):
     body: SyntaxBody
 
 
+# ── 해석공식 시각화 ──────────────────────────────────────────
+class FormulaRow(BaseModel):
+    en: str
+    ko: str
+
+
+class Diagram(BaseModel):
+    symbol: str = ""              # 다이어그램 좌측 큰 기호 (NOT / A>B / N←[wh~] 등)
+    rows: list[FormulaRow] = []
+
+
+class WorkExample(BaseModel):
+    en: str                       # 기출 문장(원문)
+    src: str = ""                 # 출처
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+
+
 class SyntaxChapter(BaseModel):
     id: str
-    title: str               # 예: 관계사절
+    title: str               # 예: 부정구문
     signal: str              # 이 구문의 감지 신호/설명
-    how: str                 # 이 구문을 괄호치는 법 한 줄
-    combat_tip: str = ""     # 2부 실전 팁(시험장에서 바로 쓰는 요령)
+    how: str                 # 괄호치는 법 한 줄
+    point: str = ""          # Point 박스 개념
+    strategy: str = ""       # 실전 해석 전략 한 줄
+    diagram: Diagram | None = None    # 해석공식 다이어그램
+    examples: list[WorkExample] = []  # 기출 예문 + 끊어읽기
+    combat_tip: str = ""
     cards: list[SyntaxCard] = []
     problems: list[Problem] = []
     vocab: list[VocabItem] = []
 
 
-class Part2(BaseModel):
-    title: str = "구문별 괄호치기 실전"
-    intro: str = ""
+class SyntaxPartGroup(BaseModel):
+    id: str
+    title: str               # 예: 극성 판단 구문
+    subtitle: str = ""
+    strategy: str = ""
     chapters: list[SyntaxChapter] = []
+
+
+class Part2(BaseModel):
+    title: str = "구문해석 — 해석공식을 눈으로"
+    intro: str = ""
+    groups: list[SyntaxPartGroup] = []
 
 
 # ── 패러프레이징 파트(지문 단위): 핵심주제가 어떻게 다른 표현으로 전개되는가 ──

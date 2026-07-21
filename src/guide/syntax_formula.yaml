@@ -1,0 +1,170 @@
+# ============================================================
+#  구문해석 파트 — 해석공식 시각화 데이터
+#  구문 유형을 '실전 해석 동작'이 같은 것끼리 3 PART로 묶고,
+#  각 유형마다 Point(개념) · 실전 전략 · 해석공식 다이어그램 · 기출 예문을 담는다.
+#  코딩 몰라도 여기 문구/행/예문만 고치면 교재에 반영됩니다.
+# ============================================================
+
+parts:
+  - id: polarity
+    title: "극성 판단 구문"
+    subtitle: "필자의 긍정(O) / 부정(X)을 뒤집는 신호"
+    strategy: "방향·극성만 잡으면 답이 보인다 — 무엇이 (+)이고 무엇이 (−)인지."
+    types: [negation, comparison]
+  - id: modifier
+    title: "수식어 괄호치기 구문"
+    subtitle: "뼈대를 숨기는 살(수식어) 걷어내기"
+    strategy: "명사 뒤 덩어리는 통째로 괄호 → 주어+동사(뼈대)부터 읽는다."
+    types: [wh_clause, participle, insertion, apposition, prep_stack]
+  - id: order
+    title: "어순·구조 복원 구문"
+    subtitle: "자리를 뒤바꾸거나 절로 묶은 구문 되돌리기"
+    strategy: "원래 자리(주어+동사)로 되돌리거나, 절을 하나의 덩어리로 묶어 읽는다."
+    types: [inversion, emphasis, parallel, what_clause, that_clause]
+
+formulas:
+  negation:
+    point: "부정어는 문장의 극성을 뒤집는 신호. 부분부정(not all/always)은 '전부는 아니다', 완전부정(no/never)은 '전혀 아니다'."
+    strategy: "부정어에 동그라미 → 문장 끝에 (−) 표시 → '전부 X'인지 '일부만'인지 폭을 정한다. 필자의 진짜 주장은 부정 뒤에."
+    diagram:
+      symbol: "NOT"
+      rows:
+        - {en: "not necessarily", ko: "반드시 ~인 것은 아니다"}
+        - {en: "not always", ko: "항상 ~인 것은 아니다"}
+        - {en: "no / never / hardly", ko: "전혀·거의 ~않다 (완전부정)"}
+    examples:
+      - {en: "Emergencies are not always clearly labeled as such.", src: "2022 고3 6월 42번",
+         cut: "응급 상황은 / 항상 명확히 표시되는 것은 / 아니다. (→ 표시될 때도, 안 될 때도)"}
+      - {en: "Living your values only some of the time does not contribute to the creation of culture.", src: "2024 고3 11월 20번",
+         cut: "가치를 / 일부 시간에만 실천하는 것은 / 문화 창조에 / 기여하지 않는다."}
+
+  comparison:
+    point: "비교구문은 than/as를 기준으로 두 대상의 우열을 정한다. 무엇이 더 위인지가 곧 답."
+    strategy: "than/as에 세로줄 → 좌우 두 대상에 동그라미 → 'A>B'인지 'A=B'인지만 정확히. 대상이 뒤바뀌면 결론이 반대."
+    diagram:
+      symbol: "A>B"
+      rows:
+        - {en: "A -er / more ~ than B", ko: "A가 B보다 더 ~하다 (A > B)"}
+        - {en: "as A as B", ko: "B만큼 A하다 (A = B)"}
+        - {en: "the 비교급 …, the 비교급 …", ko: "~할수록 더 ~하다"}
+    examples:
+      - {en: "Cued recall tests are better than recognition tests, such as multiple-choice answers.", src: "2024 고3 6월 29번",
+         cut: "단서 회상 시험이 / 더 낫다 / 객관식 같은 재인 시험보다."}
+      - {en: "The end goal of winning is more important than expressing concern for competitors.", src: "2026 고3 11월 30번",
+         cut: "이기려는 최종 목표가 / 더 중요하다 / 경쟁자 배려를 표하는 것보다."}
+
+  wh_clause:
+    point: "who/which/that/where/when/why/how 가 명사를 꾸미거나(관계사) 명사절을 만든다."
+    strategy: "wh- 앞에 명사가 있으면 '~하는'(수식), 없으면 '누가/어디/왜 ~하는지'(명사절). 어느 쪽이든 wh~끝까지 통째 괄호, 앞 명사만 뼈대."
+    diagram:
+      symbol: "N ← [wh ~]"
+      rows:
+        - {en: "N + who/which/that + V", ko: "~하는 (앞 명사를 수식)"}
+        - {en: "wh + S + V", ko: "누가/어디/왜 ~하는지 (명사절)"}
+    examples:
+      - {en: "Consider two athletes who both want to play in college.", src: "2022 고3 6월 20번",
+         cut: "생각해 보라 / 두 선수를 / [둘 다 대학에서 뛰고 싶어하는]."}
+
+  participle:
+    point: "문두·콤마 뒤 V-ing / V-ed 덩어리는 '부대상황'. 주절의 동작에 곁들여지는 살이다."
+    strategy: "분사 덩어리를 통째 괄호 → 주절 뼈대부터 읽고, ~하면서 / ~한 채로 / ~해서로 붙인다. 분사의 의미상 주어=주절 주어."
+    diagram:
+      symbol: "주절 + (분사)"
+      rows:
+        - {en: "V-ing ~,", ko: "~하면서 / ~해서 (능동)"}
+        - {en: "(being) V-ed ~,", ko: "~된 채로 / ~되어 (수동)"}
+        - {en: "Having p.p. ~,", ko: "~하고 나서 (완료)"}
+    examples:
+      - {en: "Recognizing how she felt about her failure, Ken approached her and said a few encouraging words.", src: "2023 고3 11월 19번",
+         cut: "(그녀가 실패를 어떻게 느끼는지 알아채고서), / Ken이 그녀에게 다가가 / 몇 마디 격려의 말을 건넸다."}
+
+  insertion:
+    point: "— … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리."
+    strategy: "대시·콤마 삽입을 통째 괄호치고 없는 셈 → 뼈대부터 읽는다. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것."
+    diagram:
+      symbol: "S …(삽입)… V"
+      rows:
+        - {en: "S — … — V", ko: "대시 사이 = 부가 설명 (건너뜀)"}
+        - {en: "N, which ~,", ko: "앞 문장·명사를 보충 설명"}
+        - {en: "N, a/the N, ~", ko: "콤마 동격 (= 같은 대상)"}
+    examples:
+      - {en: "For the present generation of artists, the computer, or more appropriately, the laptop, is one tool.", src: "2022 고3 6월 31번",
+         cut: "요즘 세대 예술가에게 / 컴퓨터는, (더 정확히는 노트북은), / 도구 하나다."}
+
+  apposition:
+    point: "the fact/idea/belief + that … 또는 'N, N' 콤마 동격 — 앞 명사와 뒤 내용이 '='."
+    strategy: "the fact that … 의 that은 관계사가 아니라 동격(=내용). '명사 = that절 내용'으로 등호를 긋는다."
+    diagram:
+      symbol: "N = [내용]"
+      rows:
+        - {en: "the fact that S+V", ko: "~라는 사실 (사실 = 내용)"}
+        - {en: "N, (a/the) N,", ko: "즉, 다시 말해 (같은 대상)"}
+    examples: []
+
+  prep_stack:
+    point: "명사 뒤에 of/in/on/for/with 전치사구가 줄줄이 붙어 명사를 길게 늘린다."
+    strategy: "전치사구는 뒤에서 앞으로 '~의 / ~에 있는 / ~을 위한'으로 차례로 붙인다. 진짜 주어는 맨 앞 명사 하나뿐."
+    diagram:
+      symbol: "N ← of/in/for"
+      rows:
+        - {en: "N of N", ko: "~의 (소유·관련)"}
+        - {en: "N in/on/at N", ko: "~에 있는 (장소·범위)"}
+        - {en: "N for N", ko: "~을 위한 (목적)"}
+    examples:
+      - {en: "Last week, I made a reservation for one of your company's swimming pools for our summer swim camp.", src: "2022 고3 6월 18번",
+         cut: "지난주에 / 저는 예약을 했습니다 / [귀사의 수영장 중 하나를] / [저희 여름 수영 캠프를 위해]."}
+
+  inversion:
+    point: "문두에 부정어(Never/Not only/Only/Little…)가 나오면 주어·동사가 뒤집힌다(도치)."
+    strategy: "문두 부정어에 밑줄 → 뒤의 '조동사+주어'를 원래 어순(주어+동사)으로 되돌려 읽는다. 도치는 강조라 그 자리가 답 단서."
+    diagram:
+      symbol: "부정어↑ + 조동사 + S"
+      rows:
+        - {en: "Never / Only + aux + S", ko: "→ 원위치: S + 동사 (거의/결코 ~않다)"}
+        - {en: "Not only A but also B", ko: "A뿐 아니라 B도 (도치 강조)"}
+    examples:
+      - {en: "Not only is it less convenient to access locations in cities, but the very process generates negative effects.", src: "2023 고3 6월 24번",
+         cut: "도시에서 장소 접근이 / 덜 편할 뿐 아니라, / 이동 과정 자체가 / 부정적 효과를 낳는다."}
+
+  emphasis:
+    point: "It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조."
+    strategy: "It is ~ that 사이(X)가 '강조 대상=답'인 경우가 많다. that절이 완전하면 강조(X 부각), 불완전하면 가주어·진주어."
+    diagram:
+      symbol: "It is [X] that ~"
+      rows:
+        - {en: "It is X that ~", ko: "바로 X가 ~인 것이다 (X 강조)"}
+        - {en: "do / does / did + V", ko: "정말 ~하다 (동사 강조)"}
+    examples: []
+
+  parallel:
+    point: "and / but / or, not only A but also B, both A and B — 같은 급끼리 대칭으로 묶인다."
+    strategy: "접속사 앞뒤로 '같은 모양(품사)'을 손가락으로 짚어 짝을 맞춘다. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것."
+    diagram:
+      symbol: "A ∥ B"
+      rows:
+        - {en: "A and/or/but B", ko: "A와 B (같은 급)"}
+        - {en: "not only A but also B", ko: "A뿐 아니라 B도"}
+        - {en: "both A and B / either A or B", ko: "A와 B 둘 다 / 둘 중 하나"}
+    examples:
+      - {en: "Not only musicians and psychologists, but also committed music enthusiasts and experts voice the opinion.", src: "2022 고3 9월 24번",
+         cut: "음악가와 심리학자뿐 아니라, / 열성적 애호가와 전문가들도 / 그 의견을 낸다."}
+
+  what_clause:
+    point: "what 은 선행사를 포함(the thing which). what절 전체가 하나의 명사(주어·목적어·보어)다."
+    strategy: "what절 전체를 [ ]로 묶어 '~하는 것'이라는 한 덩어리 명사로 취급한다."
+    diagram:
+      symbol: "[what ~] = 명사"
+      rows:
+        - {en: "what S + V", ko: "~하는 것 (명사 덩어리)"}
+        - {en: "what matters / what counts", ko: "중요한 것"}
+    examples: []
+
+  that_clause:
+    point: "인식·전달 동사 + that S+V 는 '~라는 것을'. 접속사 that 뒤엔 완전한 문장이 온다(관계사 that과 구분)."
+    strategy: "that절 전체를 목적어인 '한 문장(명사절)'으로 묶어 '~라는 것을'로 뒤에 붙인다."
+    diagram:
+      symbol: "[that S+V] = 명사절"
+      rows:
+        - {en: "V that S + V", ko: "~라는 것을 (목적어절)"}
+        - {en: "the N that S+V", ko: "동격/관계 — 뒤 문장이 완전한가로 구분"}
+    examples: []

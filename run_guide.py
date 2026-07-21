@@ -68,7 +68,7 @@ def main() -> int:
 
     render.render_pdf(guide, out, sample=args.mock, footer_note=cfg.design.footer_note)
     n_code = sum(len(c.cards) for c in guide.chapters)
-    n_syn = sum(len(c.cards) for c in guide.part2.chapters) if guide.part2 else 0
+    n_syn = sum(len(g.chapters) for g in guide.part2.groups) if guide.part2 else 0
     n_method = len(guide.part0.methods) if guide.part0 else 0
     print("-" * 56)
     print(f"  0부 방법 {n_method}개 · 1부 코드 카드 {n_code}장 · 2부 구문 카드 {n_syn}장")

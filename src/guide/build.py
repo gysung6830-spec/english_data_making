@@ -44,24 +44,14 @@ def _make_syntax_card(client: ClaudeClient, st, sm,
     return SyntaxCard(sentence=sm.sentence, structure=st.title, source=sm.source, body=body)
 
 
-def build_part2(client: ClaudeClient, sentences: list[str], per_type: int = 2,
+def build_part2(client: ClaudeClient, sentences=None, per_type: int = 2,
                 max_retries: int = 1) -> Part2:
-    """기출 문장을 구문 유형별로 그룹핑 → 각 문장 3단계 분석 카드 생성(2부)."""
-    buckets = group_by_syntax(sentences, per_type=per_type)
-    tmap = {st.id: st for st in SYNTAX_TYPES}
-    chapters: list[SyntaxChapter] = []
-    for sid, matches in buckets.items():
-        st = tmap[sid]
-        cards: list[SyntaxCard] = []
-        for m in matches:
-            card = _make_syntax_card(client, st, m, max_retries=max_retries)
-            if card:
-                cards.append(card)
-        if cards:
-            chapters.append(SyntaxChapter(id=st.id, title=st.title, signal=st.signal,
-                                          how=st.formula, combat_tip=st.combat, cards=cards))
-    return Part2(intro="같은 3단계를 구문 유형별로 반복 훈련한다. 유형이 달라도 방법은 똑같다.",
-                 chapters=chapters)
+    """3부 구문해석 — 해석공식 시각화(3 PART 그룹). 개념·공식·예문은 syntax_formula.yaml에서.
+
+    (실전적용 문제 생성은 후속 단계에서 각 챕터에 붙인다.)
+    """
+    from .codes import load_part2_workbook
+    return load_part2_workbook()
 
 
 def build_guide(client: ClaudeClient, corpus_dir, per_code: int = 1,
