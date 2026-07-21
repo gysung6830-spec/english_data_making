@@ -402,8 +402,8 @@ body {
 .drill-q, .drill-a { page-break-before: always; }
 .dq-item { border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px 10px;
   margin-bottom: 12px; page-break-inside: avoid; background: #fff; }
-.sol-item { border: 1px solid var(--tint2); border-radius: 10px; padding: 11px 14px 8px;
-  margin-bottom: 13px; page-break-inside: avoid; background: #fcfefe; }
+.sol-item { border: 1px solid var(--tint2); border-radius: 9px; padding: 8px 12px 5px;
+  margin-bottom: 8px; page-break-inside: avoid; background: #fcfefe; }
 .dq-kind { display: inline-block; font-weight: 800; font-size: 8.5px; padding: 1px 8px;
   border-radius: 4px; margin-right: 8px; vertical-align: middle; }
 .dq-kind.mc { background: #e7f2ed; color: #1f5a4c; }
@@ -411,6 +411,10 @@ body {
 .dq-voca { margin-top: 7px; font-size: 9px; color: #5a6b64; border-top: 1px dashed var(--line);
   padding-top: 5px; }
 .dq-voca b { color: var(--navy2); }
+/* 해설 카드 안에서는 더 촘촘하게 */
+.sol-item .dq { margin: 0 0 5px; }
+.sol-item .dq-no { font-size: 15px; }
+.sol-item .dq-sent { font-size: 10.5px; line-height: 1.5; }
 .drill-band { background: linear-gradient(100deg, var(--navy), var(--navy2)); color: #eafaf4;
   font-weight: 800; font-size: 15px; padding: 10px 16px; border-radius: 9px; margin-bottom: 12px; }
 .drill-band.dk { background: #08382f; }
@@ -429,17 +433,17 @@ body {
 .dq-ans-line { margin: 12px 0; font-size: 11px; color: var(--muted); }
 .dq-blank { display: inline-block; min-width: 320px; max-width: 80%; border-bottom: 1px solid #b8c2d4; height: 14px; }
 
-.sol { margin: 12px 0; border-radius: 10px; padding: 11px 14px; position: relative; font-size: 11px; line-height: 1.7; }
-.sol-tag { display: inline-block; color: #fff; font-weight: 800; font-size: 9.5px;
-  padding: 2px 11px; border-radius: 7px; margin-right: 8px; }
+.sol { margin: 5px 0; border-radius: 7px; padding: 6px 10px; position: relative; font-size: 9.8px; line-height: 1.5; }
+.sol-tag { display: inline-block; color: #fff; font-weight: 800; font-size: 8.3px;
+  padding: 1px 7px; border-radius: 5px; margin-right: 6px; vertical-align: 1px; }
 .sol.ans { background: #eef7f3; border: 1px solid var(--tint2); }
 .sol.ans .sol-tag { background: var(--navy); }
 .sol.cut { background: var(--tint); } .sol.cut .sol-tag { background: var(--navy2); }
 .sol.wrong { background: var(--wrong-bg); } .sol.wrong .sol-tag { background: var(--wrong); }
-.sol.wrong .sol-why { color: var(--wrong); font-size: 10px; margin-top: 4px; }
+.sol.wrong .sol-why { color: var(--wrong); font-size: 9px; margin-top: 2px; }
 .sol.msg { background: var(--right-bg); } .sol.msg .sol-tag { background: var(--right); }
 .sol.key { background: var(--goldbg); } .sol.key .sol-tag { background: var(--gold); }
-.sol.key .kp { margin: 5px 0; font-size: 10.5px; color: #5b4a1e; }
+.sol.key .kp { margin: 2px 0; font-size: 9.3px; color: #5b4a1e; line-height: 1.45; }
 
 /* 구체화 근거 */
 .sw-basis { margin-top: 5px; font-size: 9.5px; color: #7a6a3b;

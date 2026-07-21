@@ -9,6 +9,17 @@ import yaml
 
 CODES_PATH = Path(__file__).resolve().parent / "codes.yaml"
 
+# 교재에서 제외할 기출 문항 번호(출처의 'N번'). 20/25/26/27/28/29 = 주장·도표·일치·안내문·어법.
+EXCLUDE_ITEM_NOS = {20, 25, 26, 27, 28, 29}
+
+
+def keep_source(src: str) -> bool:
+    """출처의 문항 번호가 제외 대상(EXCLUDE_ITEM_NOS)이면 False(교재에서 뺀다)."""
+    if not src:
+        return True
+    m = re.search(r"(\d+)\s*번", src)
+    return not (m and int(m.group(1)) in EXCLUDE_ITEM_NOS)
+
 
 @dataclass
 class Code:
@@ -94,7 +105,7 @@ def load_abstract(path: str | Path | None = None):
             strategy=c.get("strategy", ""),
             exprs=[FormulaRow(en=e["en"], ko=e["ko"]) for e in c.get("exprs", [])],
             examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
-                      for e in c.get("examples", [])],
+                      for e in c.get("examples", []) if keep_source(e.get("src", ""))],
             practice=aprac.get(c["id"], []),
         ))
     return AbstractPart(title=data.get("title", "추상 → 구체"),
@@ -125,7 +136,7 @@ def load_part2_workbook(path: str | Path | None = None):
                               rows=[FormulaRow(en=r["en"], ko=r["ko"]) for r in dia.get("rows", [])])
         examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""),
                                 ab=e.get("ab", ""))
-                    for e in f.get("examples", [])]
+                    for e in f.get("examples", []) if keep_source(e.get("src", ""))]
         training = [TrainStep(level=t.get("level", ""), en=t.get("en", ""), ko=t.get("ko", ""))
                     for t in f.get("training", [])]
         # 실전적용: syntax_practice.yaml 우선, 없으면 syntax_formula 인라인
@@ -174,6 +185,8 @@ def _load_practice_map(path: Path) -> dict:
         lst = []
         mc_n = sh_n = 0
         for pr in items or []:
+            if not keep_source(pr.get("source", "")):
+                continue
             kind = pr.get("kind", "mc")
             if kind == "mc":
                 mc_n += 1; no = mc_n
