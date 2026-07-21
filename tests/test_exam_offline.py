@@ -109,7 +109,25 @@ def test_error_guards() -> None:
         raise AssertionError("G 0개 일치가 차단되지 않음")
     html = renderer.render_html(demo_passages(), header_note="X<b>&Y", doc_title="T<x>")
     assert "X&lt;b&gt;&amp;Y" in html and "<title>T&lt;x&gt;</title>" in html
-    print("✓ 오류 가드(약어분리·G개수·이스케이프) 통과")
+
+    # A: 밑줄 중첩 없음 + 같은 단어 중복 지정 차단
+    from exam import build2
+    s = ["The cat sat on the mat.", "The cat ran fast.", "It ended well now here."]
+    q, _ = build2.make_A(s, [(0, "cat", "CAT"), (0, "mat", "MAT"), (1, "ran", "RAN"),
+                             (2, "ended", "ENDED"), (2, "well", "WELL")],
+                         2, "r", ["1", "2", "3", "4", "5"])
+    assert q.count("<u>") == 5 and "<u><span" not in q
+    for bad in (
+        lambda: build2.make_A(s, [(0, "cat", "x")] * 5, 1, "r", ["1", "2", "3", "4", "5"]),
+        lambda: build2.make_F(s, 0, "The cat", ["1", "2", "3", "4", "5"], 1, "r", {}),  # 2회 등장
+    ):
+        try:
+            bad()
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("모호성 가드가 동작하지 않음")
+    print("✓ 오류 가드(약어분리·G개수·이스케이프·중첩/다중출현) 통과")
 
 
 def test_set2_demo() -> None:

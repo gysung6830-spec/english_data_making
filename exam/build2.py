@@ -10,6 +10,8 @@
 """
 from __future__ import annotations
 
+import re
+
 from . import build as B1
 from . import format as F
 from . import format2 as F2
@@ -58,6 +60,11 @@ def make_F(sentences, blank_sent_idx, blank_phrase, choices, answer_no, reason, 
     """지문 전체를 보여주되, blank_sent_idx 문장의 blank_phrase(핵심/주제 어구)만 빈칸으로.
     정답 선지는 원문 어구를 '유의어로 패러프레이즈'한 것이어야 한다(원문 그대로 금지).
     """
+    # 빈칸 어구는 지문 전체에 '정확히 한 번'만 나와야 한다(여러 번이면 다른 곳에서 베낄 수 있음).
+    occ = len(re.findall(re.escape(blank_phrase), " ".join(sentences), re.IGNORECASE))
+    if occ != 1:
+        raise ValueError(f"빈칸 어구는 지문에 정확히 한 번만 나와야 합니다(현재 {occ}회): "
+                         f"'{blank_phrase}'")
     marked = B1._passage_html(sentences, [(blank_sent_idx, blank_phrase, F2.blank_line())])
     return F2.F_q(marked, choices), F2.F_a(answer_no, reason, wrong)
 

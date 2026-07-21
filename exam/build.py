@@ -36,22 +36,32 @@ def _passage_html(
             sents[i] = txt
     esc = [F.esc(s) for s in sents]
     if marks:
-        for idx, word, marker in marks:
+        # 마커를 곧바로 넣지 않고 '플레이스홀더'로 먼저 치환한 뒤 마지막에 교체한다.
+        # → 뒤 마크가 앞 마크가 넣은 마커 HTML 안에서 다시 매칭돼 '밑줄이 중첩'되는 일을 차단.
+        #   같은 단어를 두 번 지정하면 두 번째는 '다음 출현'을 잡고, 없으면 명확히 실패한다.
+        placeholders: dict[str, str] = {}
+        for k, (idx, word, marker) in enumerate(marks):
             if not (0 <= idx < len(esc)):
                 raise ValueError(f"밑줄 대상 문장 번호가 범위를 벗어났습니다: {idx}")
+            token = f"\x00{k}\x00"
             esc_word = re.escape(F.esc(word))
-            # 1) 단어 경계 매칭 → 2) 대소문자 무시 → 3) 부분 문자열(대소문자 무시)
+            # 1) 단어 경계 → 2) 대소문자 무시 → 3) 부분 문자열(대소문자 무시)
             for pat in (
                 re.compile(r"(?<!\w)" + esc_word + r"(?!\w)"),
                 re.compile(r"(?<!\w)" + esc_word + r"(?!\w)", re.IGNORECASE),
                 re.compile(esc_word, re.IGNORECASE),
             ):
-                new, k = pat.subn(lambda _m: marker, esc[idx], count=1)
-                if k:
+                new, n = pat.subn(lambda _m: token, esc[idx], count=1)
+                if n:
                     esc[idx] = new
+                    placeholders[token] = marker
                     break
             else:
-                raise ValueError(f"문장 {idx} 에서 '{word}' 를 찾지 못했습니다.")
+                raise ValueError(f"문장 {idx} 에서 '{word}' 를 찾지 못했습니다(중복 지정 가능성).")
+        text = " ".join(esc)
+        for token, marker in placeholders.items():
+            text = text.replace(token, marker)
+        return text
     return " ".join(esc)
 
 
