@@ -51,8 +51,17 @@ class EssayQuestionOut(BaseModel):
     각 항목은 '소문항 지시 :: 정답' 형식(구분자 없으면 통째로 정답).
     """
 
-    passage: str = Field(..., description="문제에 실릴 지문(빈칸/밑줄 포함 가능)")
-    prompt_extra: str = Field("", description="발문에 덧붙일 조건/보기(예: [보기] 단어들, 조건)")
+    passage: str = Field(..., description=(
+        "문제에 실릴 지문. 이 유형이 요구하는 빈칸은 정확히 '____'(밑줄 4개)로, "
+        "밑줄 표시가 필요한 부분은 <u>...</u>로 지문 안에 반드시 넣을 것. "
+        "요약문형이면 요약문을 지문 끝에 '[요약문] ...' 로 포함하고 빈칸을 넣을 것."))
+    bogi: list[str] = Field(default_factory=list, description=(
+        "<보기> 단어 상자에 넣을 단어들(배열영작·어형변형·골라넣기 유형일 때만; "
+        "그 외 유형은 빈 리스트)"))
+    conditions: list[str] = Field(default_factory=list, description=(
+        "<조건> 상자에 넣을 조건 문구들(예: '주어진 괄호 속 단어를 사용할 것', "
+        "'본문에 사용된 단어만 사용할 것'). 조건이 없으면 빈 리스트"))
+    blank_ko: str = Field("", description="밑줄 친 우리말(영작 유형에서 학생이 영작할 한국어 문장). 없으면 빈 문자열")
     answers: list[str] = Field(
         ..., description="소문항별 정답. 각 항목은 '소문항 지시 :: 정답' 형식")
 

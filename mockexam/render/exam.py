@@ -79,9 +79,12 @@ body {{ font-family: {_SERIF}; font-size: 8.8pt; line-height: 1.33; color:#000; 
 .choices div {{ margin:0.5px 0; }}
 u {{ text-underline-offset:2px; }}
 
-/* 보기 박스 */
-.bogi {{ border:1px solid #000; padding:6px 10px; margin:6px 0; text-align:center; }}
+/* 보기/조건 박스 */
+.bogi {{ border:1px solid #000; padding:5px 9px; margin:5px 0; text-align:center; }}
 .bogi .label {{ font-weight:700; margin-bottom:2px; }}
+.bogi.cond {{ text-align:left; }}
+.bogi.cond .label {{ text-align:center; }}
+.cond-list div {{ margin:1px 0; }}
 .blank-ko {{ margin:4px 0; }}
 .answer-space {{ border-bottom:1px solid #000; height:26px; margin:6px 0 2px; }}
 
@@ -134,11 +137,17 @@ def _render_passage(q: Question) -> str:
 
 
 def _render_bogi(q: Question) -> str:
-    bogi = q.meta.get("bogi")
-    blank_ko = q.meta.get("blank_ko")
+    """서술형의 <조건>·<보기> 박스와 밑줄 우리말을 렌더."""
     out = []
+    conditions = q.meta.get("conditions")
+    if conditions:
+        items = "".join(f'<div>· {html.escape(str(c))}</div>' for c in conditions)
+        out.append(f'<div class="bogi cond"><div class="label">&lt; 조건 &gt;</div>'
+                   f'<div class="cond-list">{items}</div></div>')
+    blank_ko = q.meta.get("blank_ko")
     if blank_ko:
         out.append(f'<div class="blank-ko">밑줄: {html.escape(blank_ko)}</div>')
+    bogi = q.meta.get("bogi")
     if bogi:
         words = " / ".join(html.escape(w) for w in bogi)
         out.append(f'<div class="bogi"><div class="label">&lt; 보기 &gt;</div>{words}</div>')
@@ -245,6 +254,8 @@ def _est_height(q: Question) -> float:
         h += 16.0                             # 답란
         if q.meta.get("bogi"):
             h += 14.0                         # <보기> 박스
+        if q.meta.get("conditions"):
+            h += 10.0 + len(q.meta["conditions"]) * 4.0   # <조건> 박스
         if q.meta.get("blank_ko"):
             h += 5.0
     h += 6.0                                  # 문항 간 여백

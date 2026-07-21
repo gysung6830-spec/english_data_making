@@ -134,10 +134,22 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         subs = "\n".join(f"- {s}" for s in item.subparts) or "- 단일 서술형"
         prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}\n\n"
                   f"[소문항]\n{subs}\n\n[발문]\n{stem}\n\n"
-                  "위 지문으로 이 서술형 1문항을 만들고, 각 소문항 정답을 제시하라.")
+                  "위 지문으로 이 서술형 1문항을 만들어라. 반드시:\n"
+                  "1) 이 유형이 요구하는 빈칸은 지문(또는 요약문)에 '____'로, 밑줄은 "
+                  "<u>...</u>로 실제로 넣어라(빈칸/밑줄 없는 발문은 오류다).\n"
+                  "2) <보기> 단어상자를 쓰는 유형이면 bogi 에 단어들을, <조건>을 쓰는 "
+                  "유형이면 conditions 에 조건 문구를 채워라. 아니면 빈 리스트.\n"
+                  "3) 영작 유형이면 학생이 영작할 한국어를 blank_ko 에 넣어라.\n"
+                  "4) 각 소문항 정답을 answers 에 '지시 :: 정답' 형식으로.")
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
         out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2)
         q.passage_text = out.passage
+        if out.bogi:
+            q.meta["bogi"] = list(out.bogi)
+        if out.conditions:
+            q.meta["conditions"] = list(out.conditions)
+        if out.blank_ko:
+            q.meta["blank_ko"] = out.blank_ko
         if out.prompt_extra:
             q.stem = f"{stem}\n{out.prompt_extra}"
         notes = []
@@ -156,12 +168,18 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         q.passage_text = passage.text
         q.answer = "(mock) 서술형 정답 예시"
         q.answer_notes = [f"{sp}: (mock 정답)" for sp in item.subparts]
-        # 디자인 미리보기용 <보기> 박스 데이터(오프라인 자리표시자)
-        _BOGI = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arrange",
-                 "arrange_and_translate", "chart_fix_and_arrange", "blank_choose_no_change"}
+        # 디자인 미리보기용 <보기>/<조건> 박스 데이터(오프라인 자리표시자)
+        _BOGI = {"dialogue_arrange_inflect", "word_arrange",
+                 "arrange_and_translate", "blank_choose_no_change", "chart_fix_and_arrange"}
+        _COND = {"condition_write_inflect", "grammar_fix_and_answer",
+                 "summary_fill_from_text"}
         if item.type in _BOGI:
             q.meta["bogi"] = ["(mock)", "word1", "word2", "word3", "word4", "can"]
+        if item.type in ("dialogue_arrange_inflect", "arrange_and_translate"):
             q.meta["blank_ko"] = "(mock) 밑줄 친 우리말 의미"
+        if item.type in _COND:
+            q.meta["conditions"] = ["(mock) 주어진 괄호 속 단어를 사용할 것",
+                                    "(mock) 필요시 어형을 변형할 것"]
     return q
 
 
