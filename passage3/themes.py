@@ -37,14 +37,14 @@ tr.sent    { break-inside: avoid; }
 AUTOFIT_RULES = """
 /* 1단계 축소 */
 .passage.compact  .en { font-size:12.7px; line-height:1.5; }
-.passage.compact  .ko { font-size:11.3px; line-height:1.48; }
+.passage.compact  .ko { font-size:10.5px; line-height:1.45; }
 .passage.compact  .sent { margin-bottom:10px; padding-bottom:10px; }
 .passage.compact  .ko-box { margin-top:6px; padding:6px 10px; }
 .passage.compact  td { padding:8px 12px 8px 0; font-size:12.5px; }
 .passage.compact  .p-head { margin-bottom:14px; }
 /* 2단계 축소 */
 .passage.compact2 .en { font-size:12px;   line-height:1.42; }
-.passage.compact2 .ko { font-size:10.8px; line-height:1.4; }
+.passage.compact2 .ko { font-size:10px; line-height:1.38; }
 .passage.compact2 .sent { margin-bottom:7px; padding-bottom:7px; }
 .passage.compact2 .ko-box { margin-top:5px; padding:5px 9px; }
 .passage.compact2 td { padding:6px 10px 6px 0; font-size:12px; }
@@ -107,8 +107,8 @@ body {{
   padding: 8px 12px;
 }}
 .ko-box .ko {{
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 11px;
+  line-height: 1.5;
   color: #555558;
 }}
 /* 좌지문 우해석 : 2단 표(배경 없음, 가로 구분선만) */
@@ -126,7 +126,7 @@ table.two-col td {{
 }}
 table.two-col tr.sent:last-child td {{ border-bottom: none; }}
 table.two-col td.col-en {{ width: 62%; color: #1a1a1a; padding-right: 20px; }}
-table.two-col td.col-ko {{ width: 38%; color: #555558; font-size: 12px; }}
+table.two-col td.col-ko {{ width: 38%; color: #555558; font-size: 11px; }}
 {AUTOFIT_RULES}"""
 
 
@@ -155,11 +155,11 @@ body {{
 .en {{ font-size:13.5px; line-height:1.62; }}
 .num {{ color:#2a5db0; margin-right:6px; }}
 .ko-box {{ margin-top:8px; background:#eef3fb; border-left:3px solid #2a5db0; padding:8px 12px; }}
-.ko-box .ko {{ font-size:12px; line-height:1.55; color:#3a4048; }}
+.ko-box .ko {{ font-size:11px; line-height:1.5; color:#3a4048; }}
 table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:11px 14px 11px 0; border-bottom:1px solid #cfd6e0; font-size:13px; line-height:1.62; }}
 table.two-col td.col-en {{ width:62%; padding-right:20px; }}
-table.two-col td.col-ko {{ width:38%; color:#3a4048; font-size:12px; }}
+table.two-col td.col-ko {{ width:38%; color:#3a4048; font-size:11px; }}
 {AUTOFIT_RULES}"""
 
 
@@ -188,11 +188,11 @@ body {{
 .en {{ font-size:14.5px; line-height:1.68; }}
 .num {{ color:#ff8c42; font-weight:700; margin-right:6px; }}
 .ko-box {{ margin-top:8px; background:#fff6ee; border-radius:8px; padding:9px 13px; }}
-.ko-box .ko {{ font-size:12.5px; line-height:1.55; color:#555; }}
+.ko-box .ko {{ font-size:11.5px; line-height:1.5; color:#555; }}
 table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:12px 14px 12px 0; border-bottom:2px dashed #ffe0c2; font-size:14px; line-height:1.68; }}
 table.two-col td.col-en {{ width:60%; padding-right:20px; }}
-table.two-col td.col-ko {{ width:40%; color:#555; font-size:12.5px; }}
+table.two-col td.col-ko {{ width:40%; color:#555; font-size:11.5px; }}
 {AUTOFIT_RULES}"""
 
 
