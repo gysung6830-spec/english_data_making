@@ -80,12 +80,18 @@ def split_by_punct(text: str) -> list[str]:
     return [s for s in sentences if s]
 
 
+# 문장 끝(. ! ?) 뒤 공백 + 생략부호(...)로 시작하는 다음 조각의 경계.
+# 예: "... activities. ...conversational ..." → 두 문장으로 분리.
+_ELLIPSIS_BOUNDARY = re.compile(r"(?<=[.!?])\s+(?=\.\.\.)")
+
+
 def split_sentences(text: str) -> list[str]:
     """지문 텍스트 → 문장 목록. 원문자 우선, 없으면 구두점.
 
     여러 문단(빈 줄로 구분)이 들어와도 하나의 지문으로 이어붙여 분할한다.
+    생략부호(…/...)로 시작하는 조각(순서·삽입·요약 유형 지문)은 각각 별도 문장으로 본다.
     """
-    text = (text or "").strip()
+    text = (text or "").strip().replace("…", "...")   # 생략부호 정규화
     if not text:
         return []
     circled = split_by_circled(text)
@@ -95,4 +101,8 @@ def split_sentences(text: str) -> list[str]:
         return circled
     # 원문자가 없으면 문단을 합쳐 구두점 분할
     joined = re.sub(r"\s*\n\s*", " ", text)
-    return split_by_punct(joined)
+    # '문장끝 + 생략부호 시작' 조각을 먼저 경계로 끊고(합쳐짐 방지), 각 조각을 다시 구두점 분할.
+    out: list[str] = []
+    for part in _ELLIPSIS_BOUNDARY.split(joined):
+        out.extend(split_by_punct(part))
+    return [s for s in out if s]

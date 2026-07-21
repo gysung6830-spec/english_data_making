@@ -51,15 +51,16 @@
           background:var(--yellow-hl); display:inline-block; padding:1px 5px; border-radius:3px; }
 
   /* ---- 영문 라인 + 토큰 주석 ----
-     단어(.w)는 자연스러운 띄어쓰기로 촘촘히 흐르게 한다. 위/아래 주석(.over/.unders)은
-     '폭 0' 의 flex 로 두어 단어 위·아래에 세로 공간만 차지하고 '가로 폭'은 넓히지 않는다.
-     (흐름에 남아 있어 줄바꿈·정렬이 깨지지 않는다.) --------------------------------*/
+     각 토큰(.tok)은 '단어(.w)'와 위/아래 주석(.over/.unders) 중 가장 넓은 것에 맞춰
+     너비가 정해지는 inline-block. 주석이 단어보다 넓으면 그만큼 토큰이 벌어져
+     '옆 단어 주석과 좌우로 겹치지 않는다'(중첩 방지). 짧은 주석/번호는 단어 폭과
+     비슷해 영문은 여전히 촘촘히 흐른다. -------------------------------------------*/
   .en{ margin-top:3px; }
   .en .line{ margin-bottom:9px; }          /* 한 문장 안의 줄 사이 호흡 */
   .en .line:last-of-type{ margin-bottom:0; }
-  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 1.5px; }
+  .tok{ display:inline-block; vertical-align:top; text-align:center; margin:0 2px; }
   /* 위(over) = 문장 성분 라벨(S·V·O 등) */
-  .tok .over{ display:flex; flex-direction:column; align-items:center; width:0; margin:0 auto 3px;
+  .tok .over{ display:flex; flex-direction:column; align-items:center; margin:0 auto 3px;
               height:0; overflow:visible; line-height:1.15; white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:var(--blue); font-weight:800; font-size:8.5px; }
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
@@ -72,10 +73,11 @@
   /* 유의어/반의어가 달린 어휘 = 파란 '밑줄'(글씨색은 그대로; 어법이면 빨강 유지) */
   .tok .w.vu{ text-decoration:underline; text-decoration-color:var(--blue);
               text-decoration-thickness:1.5px; text-underline-offset:2.5px; }
-  .tok .unders{ display:flex; flex-direction:column; align-items:center; width:0; margin:3px auto 0;
+  .tok .unders{ display:flex; flex-direction:column; align-items:center; margin:3px auto 0;
                 overflow:visible; }
   /* 아래(unders) = 어법 번호(빨강, 크게) + 유의어(= 파랑)/반의어(↔ 회색) + 오답(X) */
-  .ann{ font-size:7.5px; line-height:1.2; white-space:nowrap; text-align:center; }
+  .ann{ font-size:7.5px; line-height:1.2; white-space:nowrap; text-align:center;
+        max-width:150px; }   /* 아주 긴 주석만 방어적으로 제한(대개 짧음) */
   .ann.red{ color:var(--red); font-weight:800; font-size:11.5px; line-height:1; }
   .ann.syn{ color:var(--blue); }
   .ann.ant{ color:var(--gray); }

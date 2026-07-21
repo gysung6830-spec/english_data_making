@@ -30,6 +30,22 @@ def test_splitter_punct_protects_abbrev_and_decimal():
     print("PASS  splitter 약어/소수점 보호")
 
 
+def test_splitter_ellipsis_fragments():
+    # 생략부호(...)로 시작하는 조각형 지문이 한 문장으로 뭉치지 않고 분리돼야 한다.
+    raw = ("...and to spend extended periods of time sharing activities. "
+           "...conversational and non-verbal forms (facial expressions, and so on). "
+           "...we exist and that we have an identity. "
+           "Thus, we cannot exist for too long without seeking companionship.")
+    segs = splitter.split_sentences(raw)
+    assert len(segs) == 4, segs
+    assert segs[0].startswith("...and to spend") and segs[0].endswith("activities.")
+    assert segs[1].startswith("...conversational")
+    assert segs[3].startswith("Thus,")
+    # 유니코드 생략부호(…)도 동일하게 처리
+    assert len(splitter.split_sentences("A ends here. …B starts. …C ends.")) == 3
+    print("PASS  splitter 생략부호 조각 분리")
+
+
 # ---- 2. analyzer 규칙기반 --------------------------------------------------
 def test_rule_hints():
     hints = analyzer.rule_hints("The book which was written by her is loved.")
@@ -282,6 +298,7 @@ def test_webapp_worksheet_flow():
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
+    test_splitter_ellipsis_fragments()
     test_rule_hints()
     test_rule_only_sentence_and_none()
     test_analyze_sentence_llm_path()
