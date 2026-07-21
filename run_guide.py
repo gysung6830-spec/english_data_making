@@ -29,6 +29,9 @@ def main() -> int:
     parser.add_argument("--mock", action="store_true", help="샘플 데이터로 디자인 미리보기")
     parser.add_argument("--corpus", default=None, help="기출 코퍼스 폴더 (기본 input_corpus)")
     parser.add_argument("--per-code", type=int, default=1, help="코드당 기출 문장 개수")
+    parser.add_argument("--examples", type=int, default=10,
+                        help="챕터당 예시 카드 수(중난이도 절반+고난이도 절반)")
+    parser.add_argument("--problems", type=int, default=100, help="챕터당 문제 수")
     parser.add_argument("--out", default=None, help="출력 PDF 경로")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
     args = parser.parse_args()

@@ -17,8 +17,12 @@ class CardBody(BaseModel):
     literal_trap: str = Field(description="오역 — 이 코드를 무심코 직역할 때 나오는 잘못된 해석 한 줄")
     trap_why: str = Field(description="그 해석이 왜 틀렸는지(방향/논리/필자 입장 근거) 한 줄")
     correct: str = Field(description="정답 — 문맥·구조를 반영한 올바른 해석 한 줄")
-    so_what: str = Field(default="", description="해석하면 이런 내용 — 이 문장이 결국 말하려는 바를 "
-                         "구체적으로(추상적 문장을 실제 상황으로 풀어서) 한 줄")
+    so_what: str = Field(default="", description="해석하면 이런 내용 — '이 문장 하나만으로' 도출되는 "
+                         "구체화. 앞뒤 지문·필자 의도 추측 금지. 지시어 대상이 문장 밖이면 언급하지 말 것")
+    paraphrase: str = Field(default="", description="같은 뜻을 다른 영어로 바꿔 쓴 문장(패러프레이즈). "
+                            "문장 내부 정보만 사용, 핵심 명제는 유지")
+    subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
+    action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
 
 
@@ -105,10 +109,14 @@ class SyntaxBody(BaseModel):
     """Claude 가 한 문장에 대해 생성하는 부분."""
     skeleton_en: str = Field(description="수식어를 뺀 뼈대(핵심 S+V+O) 영어 — 아주 짧게")
     skeleton_ko: str = Field(description="그 뼈대의 중3 수준 쉬운 한국어 해석")
+    subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
+    action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     modifiers: list[Modifier] = Field(description="괄호칠 수식어 덩어리들(문장에 등장 순서)")
     full_ko: str = Field(description="수식어를 연결어로 붙인 자연스러운 완성 해석")
-    real_meaning: str = Field(default="", description="해석하면 이런 내용 — 이 문장이 결국 말하려는 "
-                              "바를 구체적으로(추상→구체) 풀어 준 한 줄")
+    real_meaning: str = Field(default="", description="해석하면 이런 내용 — '이 문장 하나만으로' "
+                              "도출되는 구체화. 앞뒤 지문·필자 의도 추측 금지. 지시어 대상이 문장 밖이면 언급 말 것")
+    paraphrase: str = Field(default="", description="같은 뜻을 다른 영어로 바꿔 쓴 문장(패러프레이즈). "
+                            "문장 내부 정보만 사용")
     self_check: str = Field(default="", description="학생이 직접 괄호쳐 볼 짧은 연습 한 줄(선택)")
 
 

@@ -43,23 +43,25 @@ def _meta(sentence: str):
 
 
 # ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
-def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what):
+def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
+          para="", subj="", act=""):
     src, dif = _meta(sentence)
     return CodeCard(
         code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
-        body=CardBody(highlight=hit, literal_trap=trap, trap_why=why,
-                      correct=correct, so_what=so_what),
+        body=CardBody(highlight=hit, literal_trap=trap, trap_why=why, correct=correct,
+                      so_what=so_what, paraphrase=para, subject=subj, action=act),
     )
 
 
 # ── 2부: 구문 카드 (출처 → 뼈대 → 살 붙이기 → 완성 → 진짜 의미) ─
-def _syn(structure, sentence, sk_en, sk_ko, mods, full, real, check=""):
+def _syn(structure, sentence, sk_en, sk_ko, mods, full, real, check="",
+         para="", subj="", act=""):
     src, dif = _meta(sentence)
     return SyntaxCard(
         sentence=sentence, structure=structure, source=src, difficulty=dif,
-        body=SyntaxBody(skeleton_en=sk_en, skeleton_ko=sk_ko,
+        body=SyntaxBody(skeleton_en=sk_en, skeleton_ko=sk_ko, subject=subj, action=act,
                         modifiers=[Modifier(**m) for m in mods], full_ko=full,
-                        real_meaning=real, self_check=check),
+                        real_meaning=real, paraphrase=para, self_check=check),
     )
 
 
@@ -96,8 +98,11 @@ def mock_part2() -> Part2:
                 [{"phrase": "who both want to play in college", "kind": "관계사절",
                   "connector": "~하는", "meaning": "둘 다 대학에서 (운동을) 뛰고 싶어하는"}],
                 "둘 다 대학에서 뛰고 싶어하는 두 선수를 생각해 보라.",
-                "즉, 목표가 똑같은 두 선수를 세워 두고 이제 그 '차이'를 비교하려는 도입 문장이다.",
+                "즉, '둘 다 대학에서 뛰고 싶어하는' 선수가 두 명 있다는 것 — 목표가 같은 두 사람을 상정한 문장. "
+                "(그 다음에 무엇을 할지는 이 문장엔 없다.)",
                 "다음 문장에서 who~ 절에 직접 괄호쳐 보자.",
+                para="Picture two athletes who each hope to compete at the college level.",
+                subj="두 선수 two athletes", act="(독자에게) 생각해 보라",
             )],
         ),
         SyntaxChapter(
@@ -252,7 +257,11 @@ def mock_guide() -> Guide:
                 "이 능력이 식물 분열조직의 활동을 '일으킨다'(능력이 원인).",
                 "'be due to'는 역방향 — A(능력)가 원인이 아니라 결과다. 원인은 뒤(분열조직 활동).",
                 "이 능력은 식물 분열조직의 활동 '덕분에/때문에' 생긴다(활동이 원인).",
-                "즉, 식물이 평생 새 기관을 만들 수 있는 건 분열조직이 계속 세포를 만들어 주기 때문이라는 말.",
+                "즉, (이 능력)의 원인은 뿌리·줄기의 미분화 조직인 분열조직이 세포를 분열시키는 활동에 있다는 뜻. "
+                "('이 능력'이 무엇인지는 이 문장만으론 알 수 없어 그대로 둔다.)",
+                para="(This ability) exists because plant meristems—dividing tissue in roots "
+                "and shoots—are active.",
+                subj="(이 능력) this ability", act="분열조직의 활동 때문에 생긴다",
             ), _code(
                 "lead to", "A가 B로 이어지다(A=원인)", "forward",
                 "Rising incomes inevitably lead to increases in motorization.",
@@ -260,7 +269,9 @@ def mock_guide() -> Guide:
                 "자동차화(motorization)의 증가가 소득 상승을 이끈다.",
                 "'lead to'는 정방향(A→B) — 앞(소득 상승)이 원인, 뒤(자동차화)가 결과. 주어·목적어를 바꾸면 인과가 뒤집힌다.",
                 "소득 증가는 필연적으로 자동차화(자동차 보유·이용 증가)로 이어진다.",
-                "즉, 사람들이 잘살게 될수록 차를 더 많이 사고 타게 된다는, 거의 예외 없는 흐름.",
+                "즉, 소득이 오르면 예외 없이(inevitably) 차를 더 갖거나 타게 된다는 것.",
+                para="As incomes rise, car ownership and use are bound to increase.",
+                subj="소득 증가 rising incomes", act="자동차화 증가로 이어진다",
             )],
         ),
         Chapter(
@@ -407,7 +418,10 @@ def mock_guide() -> Guide:
                 "디지털 기술을 쓰는 젊은 예술가들은 컴퓨터를 자주 언급한다.",
                 "'rarely(좀처럼 ~않다)'를 놓치면 문장 극성이 정반대가 되어 필자 의견과 완전히 멀어진다.",
                 "디지털 기술을 쓰는 젊은 현대 예술가들은 정작 컴퓨터를 ‘좀처럼 언급하지 않는다’.",
-                "즉, 도구로는 컴퓨터를 쓰면서도 자기 작품을 말할 땐 컴퓨터를 감추는 ‘역설’을 필자가 지적하는 것.",
+                "즉, 디지털 기술을 도구로 쓰는 젊은 예술가인데도 정작 ‘컴퓨터’라는 말은 거의 꺼내지 않는다는 것. "
+                "(문장 안의 대비만으로 도출됨.)",
+                para="Although these young artists use digital tools, they seldom mention computers.",
+                subj="디지털 기술을 쓰는 젊은 예술가들", act="컴퓨터를 좀처럼 언급하지 않는다",
             ), _code(
                 "unlikely to", "~할 가능성이 없는", "",
                 "It follows that natural selection is unlikely to lead to the evolution of "
@@ -416,7 +430,9 @@ def mock_guide() -> Guide:
                 "자연선택은 완벽한 개체의 진화로 이어질 가능성이 높다.",
                 "'unlikely to(~할 가능성이 없는)'를 놓치면 극성이 정반대 — 필자는 ‘이어지지 않는다’고 말하는 중이다.",
                 "자연선택이 완벽하고 최고로 적합한 개체의 진화로 이어질 가능성은 낮다.",
-                "즉, 진화는 ‘완벽한 생물’을 빚어내는 게 아니라 그저 그럭저럭 적응한 생물을 남길 뿐이라는 뜻.",
+                "즉, 자연선택으로는 ‘완벽하게 최적화된 개체’가 나오기 어렵다는 것. (무엇이 대신 나오는지는 이 문장엔 없다.)",
+                para="Natural selection will probably not produce perfectly, maximally fit individuals.",
+                subj="자연선택 natural selection", act="완벽한 개체의 진화로 이어지지 않는다",
             )],
         ),
     ]

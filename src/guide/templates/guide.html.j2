@@ -152,13 +152,21 @@
     <div class="sentence">
       {{ card.sentence | highlight_code(card.body.highlight) }}
     </div>
+    {% if card.body.subject and card.body.action %}
+    <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
+      <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
+    {% endif %}
     <div class="rows">
       <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
         <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
       <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}</div>
     </div>
     {% if card.body.so_what %}
-    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}</div>
+    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}
+      <span class="sw-note">(이 문장만으로 도출)</span></div>
+    {% endif %}
+    {% if card.body.paraphrase %}
+    <div class="para-line"><span class="para-tag">🔄 패러프레이즈</span>{{ card.body.paraphrase }}</div>
     {% endif %}
     {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
     <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
@@ -206,6 +214,10 @@
       <span class="skel-en">{{ card.body.skeleton_en }}</span>
       <span class="skel-ko">— {{ card.body.skeleton_ko }}</span>
     </div>
+    {% if card.body.subject and card.body.action %}
+    <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
+      <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
+    {% endif %}
     {% if card.body.modifiers %}
     <div class="mods">
       <div class="mods-title">🧩 살 붙이기</div>
@@ -222,7 +234,11 @@
     {% endif %}
     <div class="syn-full"><span class="dtag s3">완성</span>{{ card.body.full_ko }}</div>
     {% if card.body.real_meaning %}
-    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.real_meaning }}</div>
+    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.real_meaning }}
+      <span class="sw-note">(이 문장만으로 도출)</span></div>
+    {% endif %}
+    {% if card.body.paraphrase %}
+    <div class="para-line"><span class="para-tag">🔄 패러프레이즈</span>{{ card.body.paraphrase }}</div>
     {% endif %}
     {% if card.body.self_check %}
     <div class="self-check">✅ 셀프체크 · {{ card.body.self_check }}</div>
