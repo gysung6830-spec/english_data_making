@@ -11,7 +11,7 @@ out = ["# 연습 문장 선별 미리보기\n",
 def dump(title, chapters):
     out.append(f"\n## {title}\n")
     for cp in chapters:
-        ex, pr = split_examples_problems(cp.picks, 10)
+        ex, pr = split_examples_problems(cp.picks, 5, 20)
         out.append(f"\n### {cp.title} — 통과 {len(cp.picks)} "
                    f"(예시 {len(ex)}, 문제 {len(pr)}) · 필터탈락 {cp.filtered_out}\n")
         out.append("**예시(우선 수록):**\n")
