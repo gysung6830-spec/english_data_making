@@ -191,6 +191,32 @@ def test_generate_offline_passes_verifier():
     assert by["정답유일성"].ok, by["정답유일성"].detail
 
 
+def test_strict_schema_has_no_unsupported_keywords():
+    """Anthropic strict 출력이 거부하는 제약 키워드가 스키마에 없어야 한다."""
+    import json
+    from mockexam.core.client import to_strict_schema
+    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut
+    banned = ("minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
+              "multipleOf", "minLength", "maxLength", "minItems", "maxItems")
+    for M in (ChoiceQuestionOut, EssayQuestionOut):
+        js = json.dumps(to_strict_schema(M))
+        for k in banned:
+            assert f'"{k}"' not in js, f"{M.__name__} 에 {k} 가 남아있음"
+
+
+def test_answer_index_range_validated():
+    from pydantic import ValidationError
+    from mockexam.core.llm import ChoiceQuestionOut
+    import pytest as _pt
+    for bad in (0, 6, -1):
+        with _pt.raises(ValidationError):
+            ChoiceQuestionOut(passage="p", choices=list("abcde"),
+                              answer_index=bad, explanation="e")
+    ok = ChoiceQuestionOut(passage="p", choices=list("abcde"),
+                           answer_index=4, explanation="e")
+    assert ok.answer_index == 4
+
+
 def test_create_with_retry_backoff(monkeypatch):
     """429/529 는 백오프로 재시도하고, 그 외 오류는 즉시 전파."""
     import mockexam.core.client as C

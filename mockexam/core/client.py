@@ -23,22 +23,29 @@ DEFAULT_MAX_TOKENS = 8000
 # ---------------------------------------------------------------------------
 # pydantic 모델 -> 구조화 출력용 strict JSON 스키마
 # ---------------------------------------------------------------------------
-def _strictify(node: Any) -> None:
-    """object 노드에 additionalProperties:false·required 설정.
+# Anthropic strict JSON 스키마가 지원하지 않는 검증 키워드(개수·범위·길이 등).
+# 이런 제약은 스키마에서 제거하고, 값 검증은 pydantic field_validator 로 대신한다.
+_UNSUPPORTED_KEYS = (
+    "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf",
+    "minLength", "maxLength", "minItems", "maxItems", "minProperties", "maxProperties",
+)
 
-    또한 array 의 minItems/maxItems 중 0·1 이 아닌 값은 제거한다.
-    (Anthropic strict JSON 스키마는 minItems 0/1 만 지원 → 개수는 pydantic
-     field_validator 로 별도 검증한다.)
+
+def _strictify(node: Any) -> None:
+    """object 노드에 additionalProperties:false·required 설정 + 미지원 키워드 제거.
+
+    (Anthropic strict JSON 스키마는 minimum/maximum/minItems/minLength 등 제약을
+     지원하지 않는다. 개수·범위 검증은 pydantic field_validator 로 처리한다.)
     """
     if isinstance(node, dict):
         if node.get("type") == "object" and "properties" in node:
             node["additionalProperties"] = False
             node["required"] = list(node["properties"].keys())
-        if node.get("type") == "array":
-            if node.get("minItems") not in (0, 1):
-                node.pop("minItems", None)
-            if node.get("maxItems") not in (0, 1):
-                node.pop("maxItems", None)
+        # minItems/maxItems 는 0·1 이면 허용, 그 외 및 나머지 제약은 제거
+        for key in _UNSUPPORTED_KEYS:
+            if key in ("minItems", "maxItems") and node.get(key) in (0, 1):
+                continue
+            node.pop(key, None)
         for v in node.values():
             _strictify(v)
     elif isinstance(node, list):

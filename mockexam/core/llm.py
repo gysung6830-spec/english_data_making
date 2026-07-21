@@ -23,10 +23,10 @@ class ChoiceQuestionOut(BaseModel):
 
     passage: str = Field(..., description="문제에 실릴 지문. 밑줄이 필요한 유형이면 "
                          "①<u>...</u> 형식으로 정확히 지정 개수만큼 표시")
-    # min/max_length 를 스키마에 넣지 않는다(Anthropic strict 는 minItems 0/1 만 허용).
-    # 개수는 아래 _five validator 로 검증한다.
+    # 개수/범위 제약을 JSON 스키마에 넣지 않는다(Anthropic strict 는 minItems·
+    # minimum·maximum 등을 지원하지 않음). 대신 아래 validator 로 검증한다.
     choices: list[str] = Field(..., description="정확히 5개 선지 텍스트(라벨 제외)")
-    answer_index: int = Field(..., ge=1, le=5, description="정답 선지 번호(1~5)")
+    answer_index: int = Field(..., description="정답 선지 번호(1~5)")
     explanation: str = Field(..., description="정답 근거 해설")
 
     @field_validator("choices")
@@ -34,6 +34,13 @@ class ChoiceQuestionOut(BaseModel):
     def _five(cls, v: list[str]) -> list[str]:
         if len(v) != 5:
             raise ValueError("선지는 정확히 5개여야 합니다.")
+        return v
+
+    @field_validator("answer_index")
+    @classmethod
+    def _in_range(cls, v: int) -> int:
+        if not 1 <= v <= 5:
+            raise ValueError("정답 번호는 1~5 여야 합니다.")
         return v
 
 
