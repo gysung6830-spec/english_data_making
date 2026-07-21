@@ -28,6 +28,7 @@ DEFAULT_MAX_TOKENS = 8000
 _UNSUPPORTED_KEYS = (
     "minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf",
     "minLength", "maxLength", "minItems", "maxItems", "minProperties", "maxProperties",
+    "default", "title", "examples",   # Anthropic strict 가 거부(특히 default → 서술형 실패 원인)
 )
 
 

@@ -38,7 +38,7 @@ _SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif KR',"
 _CSS = f"""
 * {{ box-sizing: border-box; }}
 @page {{ size: A4; margin: 11mm 12mm 10mm 12mm; }}
-body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.3; color:#000; margin:0; }}
+body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.42; color:#000; margin:0; }}
 
 /* 머리글 */
 .exam-header {{ border:1.2px solid #000; padding:6px 12px 5px; margin-bottom:8px; }}
@@ -69,15 +69,18 @@ body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.3; color:#000; m
 .col.right {{ float: right; }}
 
 /* 문항 */
-.q {{ break-inside:avoid; margin-bottom:9px; }}
-.q-head {{ font-weight:700; }}
+.q {{ break-inside:avoid; margin-bottom:12px; }}
+.q-head {{ font-weight:700; margin-bottom:4px; }}
+.q-head .no {{ font-weight:800; }}
 .q-head .score {{ font-weight:400; font-size:8.4pt; color:#333; }}
-.passage {{ text-align:justify; margin:3px 0; }}
-.dialogue .turn {{ text-align:justify; margin:1.5px 0; padding-left:14px; text-indent:-14px; }}
+.passage {{ text-align:justify; margin:4px 0 5px; }}
+.dialogue {{ margin:4px 0 5px; }}
+.dialogue .turn {{ text-align:justify; margin:2px 0; padding-left:14px; text-indent:-14px; }}
 .para {{ text-align:justify; margin:3px 0; }}
-.box {{ border:1px solid #000; padding:5px 8px; margin:4px 0; text-align:justify; }}
-.choices {{ margin:3px 0 0 2px; }}
-.choices div {{ margin:0.5px 0; }}
+.box {{ border:1px solid #000; padding:5px 8px; margin:5px 0; text-align:justify; }}
+.choices {{ margin:5px 0 0 2px; }}
+.choices div {{ margin:1px 0; }}
+.choices.numonly {{ margin-left:2px; letter-spacing:6px; }}
 u {{ text-underline-offset:2px; }}
 
 /* 보기/조건 박스 */
@@ -220,16 +223,22 @@ def _render_bogi(q: Question) -> str:
 
 
 def _q_html(q: Question) -> str:
-    parts = [f'<div class="q"><div class="q-head">{q.no}. {html.escape(q.stem)} '
+    parts = [f'<div class="q"><div class="q-head"><span class="no">{q.no}.</span> '
+             f'{html.escape(q.stem)} '
              f'<span class="score">[{_fmt_score(q.score)}점]</span></div>']
     parts.append(_render_passage(q))
     if q.section == "essay":
         parts.append(_render_bogi(q))
     if q.choices:
-        parts.append('<div class="choices">')
-        for c in q.choices:
-            parts.append(f'<div>{c.label} {html.escape(c.text)}</div>')
-        parts.append('</div>')
+        if q.meta.get("number_only"):
+            # 어법·무관문장 등: 선지는 번호(①~⑤)만 한 줄로
+            labels = " ".join(c.label for c in q.choices)
+            parts.append(f'<div class="choices numonly">{labels}</div>')
+        else:
+            parts.append('<div class="choices">')
+            for c in q.choices:
+                parts.append(f'<div>{c.label} {html.escape(c.text)}</div>')
+            parts.append('</div>')
     if q.section == "essay":
         parts.append('<div class="answer-space"></div>')
     parts.append('</div>')

@@ -15,7 +15,7 @@ def gen_grammar(item, passage, an, ctx):
     instr = (f"문법 요소가 걸린 {item.underlines or 5}곳을 밑줄. 정확히 1곳만 규칙 위반, "
              f"나머지는 완전히 정답이며 각기 다른 문법 포인트. 이 학교는 {focus}를 자주 출제. "
              "밑줄 위치는 '고쳐야 할 것 같지만 실제로는 맞는' 표현에 두어 함정.")
-    return build_choice(item, passage, ctx, stem, instr, mock_answer="③")
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="③", number_only=True)
 
 
 @register("grammar_vocab_mix")
@@ -25,7 +25,7 @@ def gen_grammar_vocab_mix(item, passage, an, ctx):
                     "적절하지 않은 것은?")
     instr = (f"{item.underlines or 5}개 밑줄에 어법 표현과 어휘를 혼합. "
              "정답은 '문맥상 낱말 쓰임'이 어긋난 1개.")
-    return build_choice(item, passage, ctx, stem, instr, mock_answer="②")
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="②", number_only=True)
 
 
 @register("grammar_fix_and_answer")

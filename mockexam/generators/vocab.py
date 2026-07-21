@@ -11,7 +11,7 @@ def gen_vocab_odd(item, passage, an, ctx):
     instr = (f"{item.underlines or 5}개 밑줄 중 정답은 반의어/오용어로 심고, "
              "나머지는 원문 단어를 유의어로 바꿔 기억으로 못 맞히게 해 순수 문맥 판단을 강제. "
              "난이도 상이면 연어(collocation) 오류로.")
-    return build_choice(item, passage, ctx, stem, instr, mock_answer="④")
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="④", number_only=True)
 
 
 @register("vocab_3blank_abc")

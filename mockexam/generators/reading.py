@@ -60,9 +60,10 @@ def gen_order(item, passage, an, ctx):
 def gen_irrelevant(item, passage, an, ctx):
     stem = ctx.stem("irrelevant_sentence", "다음 글에서 전체 흐름과 관계 없는 문장은?")
     instr = ("같은 소재를 쓰되 논지 방향이 살짝 어긋난 문장 1개를 ①~⑤ 중 한 자리에 삽입. "
-             "어휘가 겹쳐 관련 있어 보이나 흐름엔 기여하지 않게.")
-    return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) 문장 {L}" for L in "①②③④⑤"])
+             "어휘가 겹쳐 관련 있어 보이나 흐름엔 기여하지 않게. "
+             "지문의 각 문장 앞에 ①~⑤ 표시를 붙여라(선지는 번호만).")
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="③",
+                        number_only=True)
 
 
 @register("implied_meaning")

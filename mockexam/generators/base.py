@@ -93,14 +93,18 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
                  stem: str, instruction: str,
                  mock_choices: list[str] | None = None,
                  mock_answer: str = "③",
-                 mock_passage: str | None = None) -> Question:
+                 mock_passage: str | None = None,
+                 number_only: bool = False) -> Question:
     """객관식 1문항. client 있으면 LLM, 없으면 mock 구조 문항.
 
     instruction: 이 유형의 출제원리(§3-C)를 담은 지시문(LLM 프롬프트에 주입).
+    number_only: 어법·무관문장처럼 선지를 ①~⑤ 번호만 주는 유형.
     """
     q = Question(no=item.no, section="choice", type=item.type, score=item.score,
                  stem=stem, passage_id=passage.id, difficulty=ctx.difficulty,
                  underlines=item.underlines)
+    if number_only:
+        q.meta["number_only"] = True
     if ctx.client is not None:
         from ..core.llm import ChoiceQuestionOut, system_prompt
         from ..core.models import DIFFICULTY_KO_REV
@@ -122,6 +126,9 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         q.explanation = f"(mock) {item.type}: 정답 {mock_answer}."
         q.passage_text = mock_passage if mock_passage is not None else (
             underline_passage(passage.text, item.underlines) if item.underlines else passage.text)
+    if number_only:
+        # 선지는 지문의 ①~⑤(밑줄/문장 위치)에서 고르므로 번호만 남긴다.
+        q.choices = [Choice(lb, "") for lb in LABELS]
     return q
 
 
