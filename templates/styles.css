@@ -210,7 +210,7 @@ table.lit2 td {
   font-size: 8px; font-weight: 800; width: 13px; height: 13px; line-height: 13px;
   text-align: center; border-radius: 50%; margin-right: 4px;
 }
-.lit-line { line-height: 1.6; }
+.lit-line { line-height: 1.55; font-size: 10.5px; }   /* 직독직해 본문(영어·한글)만 크게 */
 .lit-line .sl { color: #cbd5e1; padding: 0 3px; font-weight: 700; }
 .lit-line .ck { font-weight: 600; }
 
