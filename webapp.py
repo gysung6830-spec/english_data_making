@@ -159,6 +159,10 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
+      <label class=chk><input type=checkbox name=review value=1 checked>
+        정밀 검수 (2차 LLM으로 정답 타당성 재검토 · 품질↑ 비용↑)</label>
+      <div class=hint>끄면 더 빠르고 저렴하지만 드물게 복수정답·애매 문항이 나올 수 있어요.</div>
+
       <div class=row>
         <button class=btn id=go type=submit>동형모의고사 만들기</button>
         <span class=hint>지문이 많으면 몇 분 걸릴 수 있어요.</span>
@@ -190,7 +194,7 @@ RESULT_HTML = """
     <h1>✅ 동형모의고사 생성 완료</h1>
     <div class=sub>{{ school }} {{ grade }}학년 · 난이도 {{ difficulty }}
       · 선택형 {{ n_choice }} / 서술형 {{ n_essay }} · {{ total }}점
-      {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}</div>
+      {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}{{ ' · 정밀검수✓' if review and not mock else '' }}</div>
 
     <table>
       <tr><th>산출물</th><th>열기</th></tr>
@@ -284,6 +288,7 @@ def _unique_stem(stem: str) -> str:
 def generate():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
+    review = bool(request.form.get("review"))
     school = request.form.get("school") or "jinyang_hs"
     grade = int(request.form.get("grade") or 1)
     difficulty = request.form.get("difficulty") or "중"
@@ -320,7 +325,7 @@ def generate():
 
     try:
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
-                            grade=grade, client=client)
+                            grade=grade, client=client, review_pass=review)
         # 지문을 하나도 못 읽은 경우에만(스캔/HWP 등) 실행 가능한 안내를 준다.
         if res.num_passages == 0:
             raise RuntimeError(
@@ -380,7 +385,7 @@ def generate():
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
-        total=res.blueprint.total_score, mock=mock,
+        total=res.blueprint.total_score, mock=mock, review=review,
         downloads=downloads, verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
 
