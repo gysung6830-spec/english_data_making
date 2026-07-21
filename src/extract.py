@@ -20,7 +20,6 @@ def is_image(path: str | Path) -> bool:
 
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
-    re.compile(r"^\s*[①②③④⑤]"),                     # 객관식 보기 마커
     re.compile(r"^\s*\(?[1-9]\d?\)?\s*[.)]\s"),         # 1) 2. 등 번호 문항
     re.compile(r"^\s*(정답|해설|풀이|어휘|해석|출제|답)\s*[:：)]"),
     re.compile(r"^\s*\[?\s*(정답|해설)\s*\]?"),
@@ -28,19 +27,68 @@ _NOISE_PATTERNS = [
     re.compile(r"^\s*[A-E]\)\s"),                       # A) B) 보기
 ]
 
+# 원문자 마커(①②③…): 한줄해석 지문에서는 '문장 번호', 객관식에서는 '보기'.
+# 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
+_CIRCLED = re.compile(r"^\s*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]\s*")
+
 # 페이지 번호/머리말 같은 짧은 잡음 줄
 _SHORT_NOISE = re.compile(r"^\s*[-–—•·\d\s]{0,4}$")
 
 
 def extract_raw_text(pdf_path: str | Path) -> str:
-    """PDF 전체에서 텍스트를 뽑는다."""
+    """PDF 전체에서 텍스트를 뽑는다. 2단(좌지문/우해석) 레이아웃은 칸별로 세로 추출."""
     pdf_path = Path(pdf_path)
     parts: list[str] = []
     with pdfplumber.open(str(pdf_path)) as pdf:
         for page in pdf.pages:
-            txt = page.extract_text() or ""
-            parts.append(txt)
+            parts.append(_extract_page_text(page))
     return "\n".join(parts)
+
+
+def _is_hangul(s: str) -> bool:
+    return any("가" <= c <= "힣" for c in s)
+
+
+def _extract_page_text(page) -> str:
+    """한 페이지 텍스트.
+
+    좌지문/우해석(영어+한글 2단) 페이지는 문자 종류로 분리한다:
+    같은 줄에서 라틴 문자(영어)와 한글을 갈라, '영어 전체 → 한글 전체' 순서로 재배열.
+    이렇게 하면 pdfplumber 가 좌우를 뒤섞어 문장이 조각나는 문제를 막는다.
+    """
+    try:
+        words = page.extract_words()
+    except Exception:
+        words = []
+    full = page.extract_text() or ""
+    if not words:
+        return full
+
+    # 한글이 거의 없으면(영어 전용 지문) 원본 추출을 그대로 사용
+    n_kor = sum(1 for w in words if _is_hangul(w["text"]))
+    if n_kor < 3 or n_kor > len(words) - 3:
+        return full
+
+    # 줄(top)로 묶고, 각 줄에서 라틴/한글을 분리
+    lines: dict[int, list] = {}
+    for w in words:
+        lines.setdefault(round(float(w["top"]) / 3.0), []).append(w)
+
+    eng_lines: list[str] = []
+    kor_lines: list[str] = []
+    for key in sorted(lines):
+        row = sorted(lines[key], key=lambda x: float(x["x0"]))
+        eng = " ".join(x["text"] for x in row if not _is_hangul(x["text"])).strip()
+        kor = " ".join(x["text"] for x in row if _is_hangul(x["text"])).strip()
+        if eng:
+            eng_lines.append(eng)
+        if kor:
+            kor_lines.append(kor)
+
+    out = "\n".join(eng_lines)
+    if kor_lines:
+        out += "\n\n[해석]\n" + "\n".join(kor_lines)
+    return out
 
 
 def clean_text(raw: str) -> str:
@@ -52,6 +100,14 @@ def clean_text(raw: str) -> str:
             kept.append("")
             continue
         if _SHORT_NOISE.match(s):
+            continue
+        m = _CIRCLED.match(s)
+        if m:
+            rest = s[m.end():].strip()
+            if len(rest) < 25:          # 짧으면 객관식 보기로 보고 제거
+                continue
+            # 지문 문장이면 마커만 떼고 본문 유지
+            kept.append(rest)
             continue
         if any(p.search(s) for p in _NOISE_PATTERNS):
             continue

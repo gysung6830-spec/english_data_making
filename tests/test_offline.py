@@ -35,6 +35,24 @@ def test_clean_removes_noise():
     print("PASS  전처리(노이즈 제거)")
 
 
+# ---- 1-b. 한줄해석 지문: ①②③ 문장 마커는 지우지 말고 문장은 유지 ----------
+def test_clean_keeps_circled_sentences():
+    raw = (
+        "① Although the wish to be alone is often strong, its intensity varies from person to person.\n"
+        "② An equally impelling impulse is to seek the company of others and share activities.\n"
+        "⑥ Thus, we generally cannot exist for too long without seeking companionship.\n"
+        "① 짧은 보기\n"
+    )
+    cleaned = extract.clean_text(raw)
+    # 긴 지문 문장은 마커만 떼고 유지
+    assert "Although the wish to be alone" in cleaned
+    assert "An equally impelling impulse" in cleaned
+    assert "Thus, we generally cannot exist" in cleaned
+    # 짧은 보기는 제거, 원문자 마커는 남지 않음
+    assert "짧은 보기" not in cleaned and "①" not in cleaned
+    print("PASS  한줄해석 ①②③ 문장 유지(짧은 보기만 제거)")
+
+
 # ---- 2. 스키마 검증: 문법은 비어있지 않으면 개수 제한 없음 -------------------
 def test_grammar_non_empty():
     try:
@@ -107,6 +125,7 @@ def test_render_html():
 
 def run_all():
     test_clean_removes_noise()
+    test_clean_keeps_circled_sentences()
     test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()
