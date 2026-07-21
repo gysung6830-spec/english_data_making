@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, render, workbook_render, blanks_render, blanks_schemas
+from src import extract, pipeline, workbook_render, blanks_render, blanks_schemas
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -91,7 +91,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 6개 분석 자료 또는 문장별 통합 워크북 PDF를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 통합 워크북·빈칸 채우기 워크북 PDF를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -248,10 +248,9 @@ def analyze_route():
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
-    do_report = "report" in kinds
     do_workbook = "workbook" in kinds
     do_blanks = "blanks" in kinds
-    multi_types = (do_report + do_workbook + do_blanks) >= 2
+    multi_types = (do_workbook + do_blanks) >= 2
 
     def out_name(stem, type_suffix, default_suffix):
         """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사.
@@ -297,12 +296,6 @@ def analyze_route():
                 blank_sets.extend(file_sets)
                 results.append({"name": f"{f.filename} · 빈칸형 (지문 {len(file_sets)}편)",
                                 "ok": True, "out": out.name})
-            if do_report:
-                report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
-                          else pipeline.build_report_for_pdf(client, cfg, tmp))
-                out = OUTPUT_DIR / f"{out_name(stem, '_분석', '_analysis')}.pdf"
-                render.render_pdf(report, out, footer_note=cfg.design.footer_note)
-                results.append({"name": f"{f.filename} · 6개 분석", "ok": True, "out": out.name})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
