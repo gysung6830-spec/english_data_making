@@ -12,27 +12,43 @@
 
 ---
 
-## ✏️ 구문 분석 학습지 (직독직해 + 태깅) — 새 기능
+## ✏️ 구문 분석 학습지 (포인트박스형) — 본 프로젝트
 
-위 6종 분석과 별개로, 지문을 **문장 단위로 쪼개 직독직해·구문 태깅·포인트 박스**를 붙인
-"구문 분석 학습지"를 만들 수 있습니다. 두 가지 레이아웃을 지원합니다.
+지문을 **문장 단위로 쪼개 구문 태깅(S/V/O/C·분사·관계사·수동태·오답형(X)) + 해석 +
+포인트 박스**를 붙인 "구문 분석 학습지"를 만듭니다. 벤 리본 + 좌측 구문 분석 + 우측
+포인트 박스(어법·떠먹여주는) 구성이며, **한 지문을 최대한 1페이지로 자동 압축**합니다.
 
-- **레이아웃 A (분석 학습지형)** — 벤 리본 + 좌측 분석(S/V/O/C·분사·관계사·수동태·오답형(X)) + 우측 포인트 박스
-- **레이아웃 B (대조표형)** — 회색 헤더바 + 좌 영어 / 우 한글 2단 표 (옵션으로 A의 태깅 얹기)
-
-**웹앱**에서: 첫 화면의 *"구문 분석 학습지 만들러 가기"* 링크(또는 `/worksheet`)로 이동 →
-레이아웃(A/B)·태깅 강도(전체/핵심만/없음)·머리글(강 번호·제목·날짜)을 고르고 PDF를 받습니다.
-
-**API 키 없이 디자인 미리보기**(목 데이터):
+**전용 웹앱으로 실행합니다:**
 
 ```bash
-python -m samples.make_worksheet_sample
-# → output/sample_worksheet_A.pdf, output/sample_worksheet_B.pdf (HTML 미리보기도 함께)
+python worksheet_app.py     # → http://localhost:5001
 ```
 
-> PDF 렌더 엔진은 **WeasyPrint(기본)** 를 쓰며, Playwright(Chromium)가 설치돼 있으면 자동으로
-> 그쪽을 우선 사용합니다(명세서 준수). 코드: `src/worksheet/`, 템플릿: `templates/worksheet_a.html.j2`,
-> `templates/worksheet_b.html.j2`.
+지문 파일(JPG·PNG·PDF)을 올리고 강 번호·저장 파일명을 입력하면
+`(지문명)_포인트박스.pdf` 가 만들어집니다. (영문 제목·한글 부제는 자동 생성,
+태깅 강도는 항상 '전체') API 키 없이 디자인만 볼 때는 '샘플 미리보기'를 체크하거나:
+
+```bash
+python -m samples.make_worksheet_sample   # → output/sample_worksheet_A.pdf
+```
+
+> PDF 렌더 엔진은 Playwright(Chromium)가 있으면 우선 사용하고, 없으면 WeasyPrint 로 폴백합니다.
+
+### 🔒 프로젝트 경계 (중요)
+
+이 저장소에는 **두 개의 도구**가 있습니다. 서로 화면(웹앱)이 분리돼 있으니 헷갈리지 마세요.
+
+| | 구문 분석 학습지 **(본 프로젝트)** | 6섹션 분석 도구 *(별개, 위 섹션)* |
+|---|---|---|
+| 웹앱 | `worksheet_app.py` (포트 5001) | `webapp.py` (포트 5000) |
+| 코드 | `src/worksheet/` | `src/analyze.py`, `src/prompts.py`, `src/schemas.py` … |
+| 템플릿 | `templates/worksheet_a.html.j2`, `worksheet_b.html.j2` | `templates/report.html.j2`, `styles.css` |
+| 테스트 | `tests/test_worksheet.py` | `tests/test_offline.py` |
+| 산출물 | `(지문명)_포인트박스.pdf` | `(지문명)_지문분석/어휘리스트/어휘test.pdf` |
+
+- **공유 코어**(둘 다 사용): 지문 추출 `src/extract.py`, 지문 분리 `src/analyze.extract_passages`,
+  LLM 클라이언트 `src/client.py`, 설정 `src/config.py`, 웹 공통 `web_common.py`.
+- 본 프로젝트 작업은 **왼쪽 열 파일만** 건드립니다. 오른쪽(6섹션) 파일은 수정하지 않습니다.
 
 ---
 

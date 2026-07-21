@@ -312,16 +312,16 @@ def test_render_b_from_literal():
 
 # ---- 5. 웹앱 (test_client, 목 미리보기) ------------------------------------
 def test_webapp_worksheet_flow():
-    import webapp
-    c = webapp.app.test_client()
-    assert c.get("/worksheet").status_code == 200
-    for layout in ("A", "B"):
-        data = {"layout": layout, "strength": "full", "basename": f"t_{layout}",
-                "lecture_label": "20", "mock": "1",
-                "files": (io.BytesIO(b"x"), f"s_{layout}.pdf")}
-        r = c.post("/worksheet/build", data=data, content_type="multipart/form-data")
-        assert r.status_code == 200 and "완료".encode("utf-8") in r.data
-    print("PASS  웹앱 학습지 플로우(A/B, 목)")
+    # 구문 분석 학습지 전용 웹앱(worksheet_app) — 6섹션 도구(webapp)와 분리됨.
+    import worksheet_app
+    c = worksheet_app.app.test_client()
+    assert c.get("/").status_code == 200                      # 학습지 폼이 첫 화면
+    data = {"basename": "t_ws", "lecture_label": "20", "mock": "1",
+            "files": (io.BytesIO(b"x"), "s_ws.pdf")}
+    r = c.post("/build", data=data, content_type="multipart/form-data")
+    assert r.status_code == 200 and "완료".encode("utf-8") in r.data
+    assert "포인트박스".encode("utf-8") in r.data
+    print("PASS  웹앱 학습지 플로우(worksheet_app, 목)")
 
 
 def run_all():
