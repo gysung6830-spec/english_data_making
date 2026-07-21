@@ -31,9 +31,6 @@
     </div>
     <div class="esum-box">
       {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
-      {% if report.vocab.korean_summary %}
-      <div class="esum-ko">{{ report.vocab.korean_summary }}</div>
-      {% endif %}
     </div>
   </div>
   {% endif %}
