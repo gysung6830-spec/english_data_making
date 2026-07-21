@@ -34,8 +34,13 @@ def generate_mock(
     grade: int = 1,
     client: Any = None,
     max_regen: int = 2,
+    review_pass: bool = True,
+    max_review: int = 1,
 ) -> GenResult:
-    """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high."""
+    """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
+
+    review_pass=True 면 생성 후 2차 LLM 검수로 정답 타당성을 점검해 실패 문항 재생성.
+    """
     diff: Difficulty = DIFFICULTY_KO.get(difficulty, difficulty)  # type: ignore
     if diff not in ("low", "mid", "high"):
         diff = "mid"
@@ -58,7 +63,19 @@ def generate_mock(
                      grammar_focus=profile.get("grammar_focus", []))
     exam, logs = generate_all(blueprint, assignments, pmap, ctx)
 
-    # [6] 검증 + 실패 문항만 재생성 (LLM 생성 시 구조 요건도 검사)
+    # 문항 재생성 헬퍼(선택형/서술형 공통)
+    a_by = {(a.section, a.no): a for a in assignments}
+    item_by = {(it.section, it.no): it for it in blueprint.items}
+
+    def _regen(q_i: int) -> None:
+        q = exam.questions[q_i]
+        a = a_by.get((q.section, q.no))
+        p = pmap.get(a.passage_id) if a and a.passage_id else None
+        item = item_by.get((q.section, q.no))
+        if p is not None and item is not None:
+            exam.questions[q_i] = generate_question(item, p, ctx)
+
+    # [6] 형식·구조 검증 + 실패 문항 재생성
     structural = client is not None
     report = verify(exam, blueprint, requested=diff, structural=structural)
     for _ in range(max_regen):
@@ -67,14 +84,28 @@ def generate_mock(
         bad = report.failed_choice_nos()
         if not bad:
             break
-        a_by_no = {a.no: a for a in assignments if a.section == "choice"}
         for q_i, q in enumerate(exam.questions):
             if q.section == "choice" and q.no in bad:
-                a = a_by_no.get(q.no)
-                p = pmap.get(a.passage_id) if a and a.passage_id else None
-                if p is not None:
-                    exam.questions[q_i] = generate_question(
-                        blueprint.choice_items[q.no - 1], p, ctx)
+                _regen(q_i)
+        report = verify(exam, blueprint, requested=diff, structural=structural)
+
+    # [6-2] 2차 LLM 검수 패스 — 정답 타당성 점검 후 실패 문항 재생성
+    if review_pass and client is not None:
+        from .verify.review import review_question
+        for _ in range(max_review):
+            failed_idx: list[int] = []
+            for q_i, q in enumerate(exam.questions):
+                if not (q.passage_text or q.choices):   # 지문 부족/자리표시자 건너뜀
+                    continue
+                ok, issue = review_question(client, q)
+                if not ok:
+                    failed_idx.append(q_i)
+                    logs.append({"no": q.no, "section": q.section, "type": q.type,
+                                 "note": "review_failed", "issue": issue[:200]})
+            if not failed_idx:
+                break
+            for q_i in failed_idx:
+                _regen(q_i)
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
     return GenResult(exam, blueprint, assignments, report, logs,

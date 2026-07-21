@@ -191,6 +191,40 @@ def test_generate_offline_passes_verifier():
     assert by["정답유일성"].ok, by["정답유일성"].detail
 
 
+def test_review_pass_verdict_and_robustness():
+    """검수 패스: ok/탈락 판정 + 검수 호출 실패 시 문항 보존."""
+    from mockexam.core.models import Choice, Question
+    from mockexam.verify.review import review_question
+
+    class Verdict:
+        def __init__(self, ok, issue): self.ok, self.issue = ok, issue
+
+    class FakeClient:
+        def __init__(self, ok, issue=""): self._ok, self._issue = ok, issue
+        def structured(self, *a, **k): return Verdict(self._ok, self._issue)
+
+    class BoomClient:
+        def structured(self, *a, **k): raise RuntimeError("api")
+
+    q = Question(2, "choice", "grammar", 3.0, "어법",
+                 passage_text="x ①<u>a</u> ②b ③c ④d ⑤e",
+                 choices=[Choice(l, "") for l in "①②③④⑤"], answer="③")
+    assert review_question(FakeClient(True), q) == (True, "")
+    ok, issue = review_question(FakeClient(False, "②도 정답"), q)
+    assert ok is False and "②" in issue
+    # 검수 API 오류 → 문항을 버리지 않고 통과 처리
+    assert review_question(BoomClient(), q) == (True, "")
+
+
+def test_review_verdict_schema_clean():
+    import json
+    from mockexam.core.client import to_strict_schema
+    from mockexam.core.llm import ReviewVerdict
+    js = json.dumps(to_strict_schema(ReviewVerdict))
+    for k in ("default", "minItems", "minimum", "$ref"):
+        assert k not in js
+
+
 def test_strict_schema_has_no_unsupported_keywords():
     """Anthropic strict 출력이 거부하는 제약 키워드가 스키마에 없어야 한다."""
     import json
