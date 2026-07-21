@@ -57,7 +57,7 @@
   {% endif %}
 
   {% if guide.chapters %}
-  <div class="toc-part"><a href="#part1">1부 · 평가원 코드 — 잘못 읽으면 큰일나는 구문: 필자의 긍정(O)/부정(X) 파악</a></div>
+  <div class="toc-part"><a href="#part1">1부 · 평가원 코드 — 필자가 의도하는 바를 파악하기</a></div>
   {% for c in guide.chapters %}
   <div class="toc-item"><a href="#ch-{{ c.id }}">Ch{{ loop.index }} · {{ c.title }}</a></div>
   {% endfor %}
@@ -128,7 +128,7 @@
 {% if guide.chapters %}
 <section class="chapter" id="part1">
   <div class="ch-kicker">1부 · 평가원 기능어 특집</div>
-  <div class="ch-title">답으로 이어지는 평가원 코드</div>
+  <div class="ch-title">평가원 코드 — 필자가 의도하는 바를 파악하기</div>
   <div class="ch-signal">
     평가원 문장은 추상적이고 수식어가 많다. 그런데 <b>기능어(평가원 코드)</b>만 정확히 잡으면
     문장이 어느 방향으로 흐르는지 — 그리고 답이 어디로 이어지는지 — 가 보인다.
@@ -150,7 +150,7 @@
   {% if chapter.core_tip or chapter.infer_tip %}
   <div class="tip-cards">
     {% if chapter.core_tip %}<div class="tip-card core"><b>🎯 핵심 파악</b> {{ chapter.core_tip }}</div>{% endif %}
-    {% if chapter.infer_tip %}<div class="tip-card infer"><b>🔮 유추법</b> {{ chapter.infer_tip }}</div>{% endif %}
+    {% if chapter.infer_tip %}<div class="tip-card infer"><b>🔮 유추 tip</b> {{ chapter.infer_tip }}</div>{% endif %}
   </div>
   {% endif %}
   <div class="ex-label">예시 <span>중난이도·고난이도 기출</span></div>
@@ -167,14 +167,15 @@
     <div class="sentence">
       {{ card.sentence | highlight_code(card.body.highlight) }}
     </div>
-    {% if card.body.subject and card.body.action %}
-    <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
-      <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
-    {% endif %}
     <div class="rows">
       <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
         <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
-      <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}</div>
+      <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}
+        {% if card.body.subject and card.body.action %}
+        <div class="sv-line"><span class="sv-s">{{ card.body.subject }}</span>
+          <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
+        {% endif %}
+      </div>
     </div>
     {% if card.body.so_what %}
     <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}
@@ -183,7 +184,6 @@
     </div>
     {% endif %}
     {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
-    <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
   </div>
   {% endfor %}
 
@@ -252,19 +252,21 @@
 {% if guide.part2 %}
 {% set p2 = guide.part2 %}
 <section class="chapter" id="part2">
-  <div class="ch-kicker">3부 · 구문해석</div>
+  <div class="ch-kicker">3부 · 패턴으로 익히는 실전해석</div>
   <div class="ch-title">{{ p2.title }}</div>
   <div class="ch-signal">{{ p2.intro }}</div>
 </section>
 
 {% for g in p2.groups %}
 {% set pidx = loop.index %}
-<section class="chapter" id="grp-{{ g.id }}">
-  <div class="part-opener">
-    <div class="po-badge">PART {{ pidx }}</div>
-    <div class="po-title">{{ g.title }}<small>{{ g.subtitle }}</small></div>
+<section class="divider" id="grp-{{ g.id }}">
+  <div class="dv-inner">
+    <div class="dv-badge">PART {{ pidx }}</div>
+    <div class="dv-title">{{ g.title }}</div>
+    <div class="dv-sub">{{ g.subtitle }}</div>
+    <div class="dv-rule"></div>
+    <div class="dv-strategy">🎯 {{ g.strategy }}</div>
   </div>
-  <div class="po-strategy">🎯 실전 전략 · {{ g.strategy }}</div>
 </section>
 
 {% for chapter in g.chapters %}
@@ -295,12 +297,26 @@
   <div class="wb-strategy">🎯 <b>실전 해석 전략</b> · {{ chapter.strategy }}</div>
   {% endif %}
 
+  {% if chapter.training %}
+  <div class="ex-label">단계별 트레이닝 <span>· 쉬움 → 하드, 한 겹씩 붙여 읽기</span></div>
+  <div class="train">
+    {% for t in chapter.training %}
+    <div class="train-row">
+      <div class="train-lv">{{ t.level }}</div>
+      <div class="train-body"><span class="train-en">{{ t.en }}</span>
+        <span class="train-arrow">→</span><span class="train-ko">{{ t.ko }}</span></div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   {% if chapter.examples %}
   <div class="ex-label">기출 예문 <span>· 밑줄=구문 신호</span></div>
   <ol class="wb-ex">
     {% for e in chapter.examples %}
     <li><span class="n">{{ loop.index }}</span>{{ e.en }}
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
+      {% if e.ab %}<div class="wb-ab"><span class="ab-tag">A→B</span>{{ e.ab }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
     </li>
     {% endfor %}

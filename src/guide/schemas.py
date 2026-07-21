@@ -145,6 +145,13 @@ class WorkExample(BaseModel):
     en: str                       # 기출 문장(원문)
     src: str = ""                 # 출처
     cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+    ab: str = ""                  # A→B 단순화(뼈대 관계) 한 줄
+
+
+class TrainStep(BaseModel):
+    level: str                    # 단계 라벨 (① 쉬움 …)
+    en: str
+    ko: str
 
 
 # ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────
@@ -178,6 +185,7 @@ class SyntaxChapter(BaseModel):
     strategy: str = ""       # 실전 해석 전략 한 줄
     diagram: Diagram | None = None    # 해석공식 다이어그램
     examples: list[WorkExample] = []  # 기출 예문 + 끊어읽기
+    training: list[TrainStep] = []    # 단계별 트레이닝(쉬움→하드)
     practice: list[PracticeItem] = [] # 실전적용(문제↔해설)
     combat_tip: str = ""
     cards: list[SyntaxCard] = []

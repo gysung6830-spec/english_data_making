@@ -38,7 +38,7 @@ SYNTAX_TYPES: list[SyntaxType] = [
         id="inversion", title="도치구문",
         signal="문두 부정어(Never/Rarely/Not only/Little/Hardly/Only…) 뒤 주어·동사가 뒤집힌다",
         formula="원래 어순(주어+동사)으로 되돌려 읽는다. 문두 부정어는 '거의/결코 ~않다'로.",
-        combat="실전 팁 — 문두 부정어에 밑줄, 뒤의 '조동사+주어'를 원위치로. 도치는 강조라 그 자리가 답 단서일 때가 많다.",
+        combat="실전 팁 — 원문장으로 되돌리지 마라. 문두 부정어를 '결코/거의 ~않다·~뿐 아니라·오직 ~해서야'로 먼저 받고, 뒤의 '조동사+주어'는 그냥 주어로 이어 읽는다. 도치는 강조라 그 자리가 답 단서일 때가 많다.",
         pattern=re.compile(r"^\s*(Never|Rarely|Seldom|Hardly|Little|Not only|Nor|No sooner|"
                            r"Only|Not until|Neither|Nowhere|Scarcely|No longer)\b", re.IGNORECASE),
     ),
@@ -116,7 +116,7 @@ SYNTAX_TYPES: list[SyntaxType] = [
                            re.IGNORECASE),
     ),
     SyntaxType(
-        id="prep_stack", title="전치사구 (별도)",
+        id="prep_stack", title="전치사구 이어붙기",
         signal="명사 뒤에 of/in/on/for/with 전치사구가 두 개 이상 줄줄이 이어진다",
         formula="전치사구는 뒤에서 앞으로 '~의 / ~에 있는'으로 차례차례 붙여 명사를 완성한다.",
         combat="실전 팁 — 전치사가 연달으면 명사 뒤에서 앞으로 화살표. 진짜 주어는 맨 앞 명사 하나뿐.",

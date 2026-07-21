@@ -25,16 +25,28 @@ methods:
       full_ko: "작년에 과학 동아리에 가입한 그 학생들이 전국 대회 상을 받았다."
 
   - step: "STEP 2"
-    title: "뼈대 찾기 — '누가 → 무엇을 한다'부터 읽는다"
-    idea: "괄호를 건너뛰고 남은 뼈대에서 '주체(누가)'에 동그라미, '행위(무엇을 한다=진짜 동사)'에 세모. 무조건 '주체 → 행위' 순서로 먼저 읽는다."
-    rule: "진짜 동사는 문장에 하나. to-V·V-ing·p.p.는 동사처럼 생겨도 '가짜(준동사)'다. 세모(진짜 동사)를 먼저 찾고, 그 앞에서 동그라미(주체)를 찾아라."
-    ms_point: "'누가 → 무엇을 한다' 한 줄만 잡으면 나머지는 다 그 뼈대에 붙는 살이다."
+    title: "뼈대 찾기 — 수식어보다 '뼈대'가 먼저다"
+    idea: "괄호를 건너뛰고 남은 뼈대에서 '주체(누가)'에 동그라미, '행위(무엇을 한다=진짜 동사)'에 세모. 수식어(살)가 아무리 화려해도, 문장의 뜻을 결정하는 건 언제나 뼈대 '누가 → 무엇을 한다'다."
+    rule: "진짜 동사는 문장에 하나. to-V·V-ing·p.p.는 동사처럼 생겨도 '가짜(준동사)'다. 세모(진짜 동사)를 먼저 찾고, 그 앞에서 동그라미(주체)를 찾아라. 수식어가 길수록 오히려 뼈대는 짧다 — 겁먹지 말 것."
+    ms_point: "핵심은 살이 아니라 뼈대에 있다. '누가 → 무엇을 한다' 한 줄만 잡으면, 나머지는 다 그 뼈대에 붙는 부가 설명일 뿐이다."
     demo:
       sentence: "The report published by the committee last month suggests a completely new approach."
       bracketed: "The report (published by the committee last month) suggests a completely new approach."
       skeleton_en: "The report suggests a new approach."
       skeleton_ko: "그 보고서는 새로운 접근을 제안한다."
       full_ko: "지난달 위원회가 발표한 그 보고서는 완전히 새로운 접근법을 제안한다."
+
+  - step: "핵심 원리"
+    title: "'관계성'으로 읽기 — 단어 순서가 아니라 '누가 ↔ 무엇' 관계"
+    idea: "왼쪽부터 단어를 하나씩 뜻만 바꾸는 '직독직해'는 긴 문장에서 무너진다. 진짜 독해는 '누가(주체) / 무엇을 했나(행위) / 그래서 무엇과 무엇이 어떤 관계인가'를 잡는 것이다."
+    rule: "① 진짜 동사를 축으로 '누가 ↔ 무엇' 관계를 먼저 연결한다. ② 수식어는 '누구를/무엇을 꾸미는가'라는 관계로만 붙인다. ③ 접속사·비교·인과 신호는 'A와 B가 어떤 관계(대조·원인·비교)인가'를 알려주는 이정표다."
+    ms_point: "단어를 다 해석했는데도 뜻이 안 잡히면, 순서대로 옮기기만 했을 뿐 '관계'를 안 본 것이다. 문장은 단어의 나열이 아니라 '누가 무엇을 했느냐'의 그림이다."
+    demo:
+      sentence: "The scientists whose research the government funded published results that surprised everyone."
+      bracketed: "The scientists (whose research the government funded) published results (that surprised everyone)."
+      skeleton_en: "The scientists published results."
+      skeleton_ko: "그 과학자들이 결과를 발표했다. (누가 → 무엇을)"
+      full_ko: "단어 순서대로 옮기면 'whose research the government funded'에서 꼬인다. 관계로 보면 간단하다: 주체=과학자들 / 행위=결과를 발표했다. 나머지는 관계로 붙는다 — [정부가 그 연구에 자금을 댄] 과학자들이, [모두를 놀라게 한] 결과를 발표했다."
 
   - step: "STEP 3"
     title: "살 붙이기 — 연결어로 자연스럽게 합친다"
@@ -60,17 +72,29 @@ methods:
       skeleton_ko: "자유 회상 시험은 더 나은 기억 유지로 이어진다. (뼈대 먼저)"
       full_ko: "괄호 속(in which ~)은 '건너뛰고 끝'이 아니라 뼈대를 잡은 뒤 다시 붙인다: '학생이 최대한 많이 회상해야 하는' 자유 회상 시험은 더 나은 기억 유지로 이어진다. (살도 결국 읽는다 — 순서만 뒤로.)"
 
-  - step: "보너스"
-    title: "모르는 단어는 '유추'로 뚫는다"
-    idea: "단어 뜻을 다 몰라도 된다. 문장의 신호로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다."
-    rule: "① 긍정/부정 신호로 극성 잡기 · ② 대조(but·unlike) → 반대 뜻 · ③ 재진술(즉·that is)·예시(such as) → 옆에 쉬운 말 · ④ 병렬(A and B) → 같은 부류 · ⑤ 접두사·어근(dis-·un-·-less=부정, re-=다시)"
-    ms_point: "모르는 단어 1~2개는 '?'로 두고 넘어가도, 신호만 잡으면 문장 뜻은 안 무너진다."
+  - step: "유추 tip ①"
+    title: "모르는 단어는 '유추'로 뚫는다 — 다섯 갈래 단서"
+    idea: "단어 뜻을 다 몰라도 된다. 문장이 스스로 흘리는 단서로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다. 모르는 단어를 만나면 아래 순서로 단서를 뒤진다."
+    rule: "① 극성 신호 — 긍정어(benefit·thrive)/부정어(harm·fail) 주변이면 그 색깔을 따라간다. ② 대조 신호 — but·however·unlike·while 뒤 단어는 앞의 '반대' 뜻. ③ 재진술·예시 — that is·in other words·such as·for example 옆에 쉬운 말로 다시 풀어 준다. ④ 병렬 — A and/or B 로 묶이면 A와 B는 '같은 부류'. ⑤ 형태 — 접두사·어근(dis-·un-·-less=부정, re-=다시, over-=과잉)으로 뜻의 방향을 잡는다."
+    ms_point: "모르는 단어 1~2개는 '?'로 두고 넘어가도, 다섯 단서 중 하나만 잡히면 문장 뜻은 안 무너진다. '정확한 뜻'이 아니라 '대략 좋은 말/나쁜 말'만 알면 충분할 때가 많다."
     demo:
       sentence: "Consumer engagement levels in all manner of digital experiences and communities have simply exploded—and they show little or no signs of slowing."
       bracketed: "Consumer engagement levels (in all manner of digital experiences and communities) have simply exploded (—and they show little or no signs of slowing)."
       skeleton_en: "levels have exploded (and show no signs of slowing)"
       skeleton_ko: "참여도가 폭발적으로 늘었다 (그리고 느려질 기미가 없다)."
-      full_ko: "'exploded(폭발했다)'의 정확한 뜻을 몰라도, 뒤의 'little or no signs of slowing(느려질 기미가 거의 없다)'이 부정 신호 → '계속 급증하고 있다'는 뜻임을 유추할 수 있다."
+      full_ko: "'exploded(폭발했다)'의 정확한 뜻을 몰라도, 뒤의 'little or no signs of slowing(느려질 기미가 거의 없다)'이 부정 신호 → '계속 급증하고 있다'는 뜻임을 유추할 수 있다. (단서 ①③)"
+
+  - step: "유추 tip ②"
+    title: "대조·재진술 단서로 '반대 뜻·같은 뜻' 잡기"
+    idea: "가장 강력한 두 단서는 '대조'와 '재진술'이다. 대조는 모르는 단어를 아는 단어의 '반대'로, 재진술은 '같은 뜻'으로 알려 준다 — 사실상 문장이 뜻을 공짜로 준다."
+    rule: "대조: A, but/unlike/whereas B → A를 알면 B는 반대, B를 알면 A는 반대. 재진술: X, that is / X, or(=즉) / X (such as 예시) → X 옆의 쉬운 말이 곧 X의 뜻. 콤마·대시 뒤 풀어쓰기도 재진술 신호다."
+    ms_point: "모르는 단어 옆에 but 이 있으면 '반대말'을, that is·such as 가 있으면 '같은 말'을 이미 준 것이다. 그 신호부터 찾아라."
+    demo:
+      sentence: "Unlike his frugal brother, who saved every coin, Tom was profligate and spent his salary within a week."
+      bracketed: "Unlike his frugal brother (who saved every coin), Tom was profligate and spent his salary within a week."
+      skeleton_en: "Tom was profligate (≠ frugal, saved every coin)."
+      skeleton_ko: "Tom은 profligate했다 (≠ 절약하는)."
+      full_ko: "'profligate'를 몰라도 Unlike(대조) + '동전 하나까지 모으던 형과 달리' + '일주일 만에 월급을 다 썼다'로 → '헤프게 낭비하는'이라고 유추된다. (단서 ②, 대조)"
 
 tools:
   - "ⓐ 진짜 동사는 하나 — to-V · V-ing · p.p. 는 가짜 동사(준동사)다. 진짜 동사를 먼저 찾아라."

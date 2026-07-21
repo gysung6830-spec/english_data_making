@@ -17,9 +17,9 @@ parts:
     strategy: "명사 뒤 덩어리는 통째로 괄호 → 주어+동사(뼈대)부터 읽는다."
     types: [wh_clause, participle, insertion, apposition, prep_stack]
   - id: order
-    title: "어순·구조 복원 구문"
-    subtitle: "자리를 뒤바꾸거나 절로 묶은 구문 되돌리기"
-    strategy: "원래 자리(주어+동사)로 되돌리거나, 절을 하나의 덩어리로 묶어 읽는다."
+    title: "어순·구조 특이구문"
+    subtitle: "자리가 바뀌어도 자연스럽게 해석하기"
+    strategy: "자리가 바뀐 채로도 신호만 잡으면 자연스럽게 읽힌다 — 굳이 원위치로 되돌리지 않아도 된다."
     types: [inversion, emphasis, parallel, what_clause, that_clause]
 
 formulas:
@@ -34,9 +34,9 @@ formulas:
         - {en: "no / never / hardly", ko: "전혀·거의 ~않다 (완전부정)"}
     examples:
       - {en: "Emergencies are not always clearly labeled as such.", src: "2022 고3 6월 42번",
-         cut: "응급 상황은 / 항상 명확히 표시되는 것은 / 아니다. (→ 표시될 때도, 안 될 때도)"}
+         cut: "응급 상황은 / 항상 명확히 표시되는 것은 / 아니다. (→ 표시될 때도, 안 될 때도)", ab: "응급상황 → 항상 표시되진 않음 (부분부정)"}
       - {en: "Living your values only some of the time does not contribute to the creation of culture.", src: "2024 고3 11월 20번",
-         cut: "가치를 / 일부 시간에만 실천하는 것은 / 문화 창조에 / 기여하지 않는다."}
+         cut: "가치를 / 일부 시간에만 실천하는 것은 / 문화 창조에 / 기여하지 않는다.", ab: "가끔만 실천 → 문화 형성 안 됨 (−)"}
     practice:
       - kind: mc
         sentence: "Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all."
@@ -80,19 +80,21 @@ formulas:
             - "as a practical matter : 삽입 부사구(실질적으로) — 뼈대에서 빼고 읽는다."
 
   comparison:
-    point: "비교구문은 than/as를 기준으로 두 대상의 우열을 정한다. 무엇이 더 위인지가 곧 답."
-    strategy: "than/as에 세로줄 → 좌우 두 대상에 동그라미 → 'A>B'인지 'A=B'인지만 정확히. 대상이 뒤바뀌면 결론이 반대."
+    point: "비교는 '우등(A>B)'만 있는 게 아니다. 열등(A<B), than 없는 비교급, as A as B(동등, A=B)까지 패턴마다 방향이 다르다. 패턴부터 판정하라."
+    strategy: "먼저 패턴을 판정: 우등? 열등? 동등? than 생략? → 그 방향대로 두 대상만 잡는다. as A as B는 우열이 아니라 '같다'임에 주의."
     diagram:
-      symbol: "A>B"
+      symbol: "A ? B"
       rows:
-        - {en: "A -er / more ~ than B", ko: "A가 B보다 더 ~하다 (A > B)"}
-        - {en: "as A as B", ko: "B만큼 A하다 (A = B)"}
-        - {en: "the 비교급 …, the 비교급 …", ko: "~할수록 더 ~하다"}
+        - {en: "A -er / more ~ than B", ko: "우등 — A가 B보다 더 ~ (A > B)"}
+        - {en: "A less ~ than B / A be inferior to B", ko: "열등 — A가 B보다 덜 ~ (A < B)"}
+        - {en: "비교급 (than 생략)", ko: "than 없이도 비교 — 비교 대상은 문맥에서 찾기"}
+        - {en: "as A as B", ko: "동등 — B만큼 A (A = B, 우열 아님!)"}
+        - {en: "the 비교급 …, the 비교급 …", ko: "비례 — ~할수록 더 ~"}
     examples:
       - {en: "Cued recall tests are better than recognition tests, such as multiple-choice answers.", src: "2024 고3 6월 29번",
-         cut: "단서 회상 시험이 / 더 낫다 / 객관식 같은 재인 시험보다."}
-      - {en: "The end goal of winning is more important than expressing concern for competitors.", src: "2026 고3 11월 30번",
-         cut: "이기려는 최종 목표가 / 더 중요하다 / 경쟁자 배려를 표하는 것보다."}
+         cut: "단서 회상 시험이 / 더 낫다 / 객관식 같은 재인 시험보다.", ab: "단서 회상 > 재인 시험 (우등)"}
+      - {en: "For Rousseau, our dependence on others is no less real than our need for food.", src: "2024 고3 9월 34번",
+         cut: "타인에 대한 의존은 / 결코 덜 실재적이지 않다 / 음식에 대한 필요만큼 (= 음식만큼이나 실재적이다).", ab: "의존 = 음식 필요 (동등, no less ~ than)"}
 
   wh_clause:
     point: "who/which/that/where/when/why/how 가 명사를 꾸미거나(관계사) 명사절을 만든다."
@@ -143,29 +145,39 @@ formulas:
     examples: []
 
   prep_stack:
-    point: "명사 뒤에 of/in/on/for/with 전치사구가 줄줄이 붙어 명사를 길게 늘린다."
-    strategy: "전치사구는 뒤에서 앞으로 '~의 / ~에 있는 / ~을 위한'으로 차례로 붙인다. 진짜 주어는 맨 앞 명사 하나뿐."
+    point: "수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리 길어도 안 무너진다."
+    strategy: "전치사(of/in/for…)를 만날 때마다 '여기서 새 살 시작'으로 끊는다 → 명사 하나가 완성될 때까지 뒤에서 앞으로 '~의/~에 있는/~을 위한'. 진짜 주어는 맨 앞 명사 하나뿐."
     diagram:
-      symbol: "N ← of/in/for"
+      symbol: "N ← of → in → for …"
       rows:
         - {en: "N of N", ko: "~의 (소유·관련)"}
-        - {en: "N in/on/at N", ko: "~에 있는 (장소·범위)"}
+        - {en: "N in / on / at N", ko: "~에 있는 (장소·범위)"}
         - {en: "N for N", ko: "~을 위한 (목적)"}
+        - {en: "N with / without N", ko: "~을 가진 / ~ 없는"}
+        - {en: "N between / among N", ko: "~ 사이의"}
+    training:
+      - {level: "① 쉬움 · 전치사구 1개", en: "the amount [of traffic]", ko: "교통의 양"}
+      - {level: "② 보통 · 2개 연속", en: "the amount [of traffic] [on the highway]", ko: "고속도로 위 / 교통의 양"}
+      - {level: "③ 어려움 · 3개 중첩", en: "the amount [of traffic] [on the highway] [during rush hour]", ko: "출퇴근 시간 / 고속도로 위 / 교통의 양"}
+      - {level: "④ 하드 · 4개+ (주어가 끝없이 길어짐)", en: "the tendency [of people] [in cities] [with limited access] [to public transport]", ko: "대중교통 이용이 제한된 / 도시의 / 사람들의 / 경향"}
     examples:
+      - {en: "The amount of traffic on the highway during rush hour has been steadily increasing over the years.", src: "예문(트레이닝)",
+         cut: "[출퇴근 시간 / 고속도로 위 / 교통의] 양은 / 수년에 걸쳐 / 꾸준히 늘어왔다.", ab: "교통량 → 늘어남 (뼈대: The amount ~ has increased)"}
       - {en: "Last week, I made a reservation for one of your company's swimming pools for our summer swim camp.", src: "2022 고3 6월 18번",
-         cut: "지난주에 / 저는 예약을 했습니다 / [귀사의 수영장 중 하나를] / [저희 여름 수영 캠프를 위해]."}
+         cut: "지난주에 / 저는 예약을 했습니다 / [귀사의 수영장 중 하나를] / [저희 여름 수영 캠프를 위해].", ab: "나 → 예약함 (뼈대: I made a reservation)"}
 
   inversion:
-    point: "문두에 부정어(Never/Not only/Only/Little…)가 나오면 주어·동사가 뒤집힌다(도치)."
-    strategy: "문두 부정어에 밑줄 → 뒤의 '조동사+주어'를 원래 어순(주어+동사)으로 되돌려 읽는다. 도치는 강조라 그 자리가 답 단서."
+    point: "문두 부정어(Never/Not only/Only…)가 오면 도치된다. 하지만 굳이 원위치로 되돌릴 필요 없다 — 도치된 순서 그대로 '신호부터 받고' 자연스럽게 이어 읽으면 된다."
+    strategy: "문두 부정어를 '거의/결코 ~않다 · ~뿐 아니라 · 오직 ~해서야'로 먼저 받고, 뒤의 '조동사+주어'는 그냥 주어로 이어 읽는다. 되돌리지 말고 흐르는 대로."
     diagram:
-      symbol: "부정어↑ + 조동사 + S"
+      symbol: "부정어 + V + S → 그대로"
       rows:
-        - {en: "Never / Only + aux + S", ko: "→ 원위치: S + 동사 (거의/결코 ~않다)"}
-        - {en: "Not only A but also B", ko: "A뿐 아니라 B도 (도치 강조)"}
+        - {en: "Never/Little + aux + S ~", ko: "'결코/거의 ~않다' + 이어서 S가 ~"}
+        - {en: "Not only A but (also) B", ko: "'A뿐 아니라' + 이어서 B도 ~"}
+        - {en: "Only + 부사구 + aux + S", ko: "'오직 ~해서야 비로소' + S가 ~"}
     examples:
       - {en: "Not only is it less convenient to access locations in cities, but the very process generates negative effects.", src: "2023 고3 6월 24번",
-         cut: "도시에서 장소 접근이 / 덜 편할 뿐 아니라, / 이동 과정 자체가 / 부정적 효과를 낳는다."}
+         cut: "'~뿐 아니라' 받기 → 도시에서 장소 접근이 덜 편할 '뿐 아니라', / 이어서 → 이동 과정 자체가 부정적 효과를 낳는다.", ab: "도시 이동 → 불편 + 부작용 (둘 다)"}
 
   emphasis:
     point: "It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조."

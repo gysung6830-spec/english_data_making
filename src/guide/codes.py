@@ -103,7 +103,7 @@ def load_part2_workbook(path: str | Path | None = None):
     """syntax_formula.yaml + SYNTAX_TYPES → 3 PART로 묶인 워크북형 Part2(해석공식 시각화)."""
     from .schemas import (Diagram, FormulaRow, Part2, PracticeItem,
                           PracticeSolution, SyntaxChapter, SyntaxPartGroup,
-                          VocabItem, WorkExample)
+                          TrainStep, VocabItem, WorkExample)
     from .syntax import SYNTAX_TYPES
     p = Path(path) if path else (Path(__file__).resolve().parent / "syntax_formula.yaml")
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
@@ -120,8 +120,11 @@ def load_part2_workbook(path: str | Path | None = None):
         if dia:
             diagram = Diagram(symbol=dia.get("symbol", ""),
                               rows=[FormulaRow(en=r["en"], ko=r["ko"]) for r in dia.get("rows", [])])
-        examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
+        examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""),
+                                ab=e.get("ab", ""))
                     for e in f.get("examples", [])]
+        training = [TrainStep(level=t.get("level", ""), en=t.get("en", ""), ko=t.get("ko", ""))
+                    for t in f.get("training", [])]
         practice = []
         for i, pr in enumerate(f.get("practice", []), start=1):
             sol = pr.get("solution")
@@ -135,8 +138,8 @@ def load_part2_workbook(path: str | Path | None = None):
             ))
         return SyntaxChapter(id=st.id, title=st.title, signal=st.signal, how=st.formula,
                              point=f.get("point", ""), strategy=f.get("strategy", ""),
-                             diagram=diagram, examples=examples, practice=practice,
-                             combat_tip=st.combat)
+                             diagram=diagram, examples=examples, training=training,
+                             practice=practice, combat_tip=st.combat)
 
     groups = []
     for part in data.get("parts", []):
@@ -144,7 +147,8 @@ def load_part2_workbook(path: str | Path | None = None):
         groups.append(SyntaxPartGroup(id=part["id"], title=part["title"],
                                       subtitle=part.get("subtitle", ""),
                                       strategy=part.get("strategy", ""), chapters=chs))
-    return Part2(intro="구문 유형을 '실전 해석 동작'이 같은 것끼리 묶었다. "
+    return Part2(title="패턴으로 익히는 실전해석",
+                 intro="구문 유형을 '실전 해석 동작'이 같은 것끼리 묶었다. "
                  "해석공식을 눈으로 익히고, 같은 전략을 반복 적용한다.", groups=groups)
 
 

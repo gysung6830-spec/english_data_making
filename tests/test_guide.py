@@ -70,11 +70,14 @@ def test_syntax_types():
 def test_render_html():
     from samples.guide_mock import mock_guide
     html = render.render_html(mock_guide(), sample=True)
-    assert "답으로 이어지는 평가원 코드" in html
+    assert "필자가 의도하는 바를 파악하기" in html   # 1부 개칭
     assert "오역" in html and "정답" in html
     assert "이런 내용" in html                    # 진짜 의미 층
     assert "긍정·강조 신호" in html and "부정·부재·거부 신호" in html
     assert "모르는 단어" in html                   # 0부 단어 유추법
+    assert "패턴으로 익히는 실전해석" in html         # 3부 개칭
+    assert "단계별 트레이닝" in html                # 전치사구 트레이닝
+    assert "관계성" in html                       # 0부 관계성 원리
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 
