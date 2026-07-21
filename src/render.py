@@ -128,27 +128,79 @@ def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
     return report.model_copy(update={"vocab": new_vocab})
 
 
+# ---- 출제 포인트(4번) 자동 분량 조절용 헬퍼 -------------------------------
+_EXAM_REF_FLOOR = 3   # 지칭추론은 최소 이만큼은 남긴다
+_EXAM_IMP_FLOOR = 1   # 함축의미 블록은 최소 이만큼은 남긴다
+
+
+def _ref_line_count(report) -> int:
+    for e in report.exam.items:
+        if "지칭" in e.question_type:
+            return len([ln for ln in e.content.split("\n") if ln.strip()])
+    return 0
+
+
+def _imp_block_count(report) -> int:
+    for e in report.exam.items:
+        if "함축" in e.question_type:
+            return len([b for b in re.split(r"\n\s*\n", e.content.strip()) if b.strip()])
+    return 0
+
+
+def _trim_exam_report(report, ref_keep=None, imp_keep=None):
+    """지칭추론 목록은 앞에서 ref_keep 줄, 함축의미는 앞에서 imp_keep 블록만 남긴 사본."""
+    items = []
+    for e in report.exam.items:
+        if ref_keep is not None and "지칭" in e.question_type:
+            lines = [ln for ln in e.content.split("\n") if ln.strip()][:ref_keep]
+            items.append(e.model_copy(update={"content": "\n".join(lines)}))
+        elif imp_keep is not None and "함축" in e.question_type:
+            blocks = [b for b in re.split(r"\n\s*\n", e.content.strip()) if b.strip()][:imp_keep]
+            items.append(e.model_copy(update={"content": "\n\n".join(blocks)}))
+        else:
+            items.append(e)
+    return report.model_copy(update={"exam": report.exam.model_copy(update={"items": items})})
+
+
 def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T"):
-    """한 지문이 2페이지에 들어오도록 어휘 개수를 필요한 만큼만 줄인다."""
+    """한 지문이 2페이지에 들어오도록, 넘칠 때만 단계적으로 분량을 줄인다.
+
+    순서(내용 손실이 적은 것부터):
+      1) 어휘 개수를 full → min_vocab 까지 축소
+      2) (어휘 최소 상태) 출제포인트 '지칭추론' 목록을 뒤에서부터 축소
+      3) (지칭추론 최소 상태) 출제포인트 '함축의미' 블록을 뒤에서부터 축소
+    """
     from weasyprint import HTML
 
-    def pages(cap):
-        r = _cap_report(report, cap)
-        html = render_html([r], footer_note, brand)
-        doc = HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
-        return len(doc.pages), r
+    def pages(rep):
+        html = render_html([rep], footer_note, brand)
+        return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
 
-    n = len(report.vocab.items)
-    p, r = pages(n)
-    if p <= 2:
-        return report            # 이미 2페이지 이내면 그대로
-    cap = n
-    while cap > min_vocab:       # 최소 개수까지 한 개씩 줄이며 재시도
-        cap -= 1
-        p, r = pages(cap)
-        if p <= 2:
-            return r
-    return r                     # 최소 개수까지 줄여도 넘치면 그 상태로
+    if pages(report) <= 2:
+        return report
+
+    # 1) 어휘 줄이기
+    last = report
+    for cap in range(len(report.vocab.items) - 1, min_vocab - 1, -1):
+        last = _cap_report(report, cap)
+        if pages(last) <= 2:
+            return last
+
+    # 2) 어휘 최소 상태에서 지칭추론 목록 줄이기
+    base = _cap_report(report, min_vocab)
+    for ref_keep in range(_ref_line_count(base) - 1, _EXAM_REF_FLOOR - 1, -1):
+        last = _trim_exam_report(base, ref_keep=ref_keep)
+        if pages(last) <= 2:
+            return last
+
+    # 3) 지칭추론 최소 상태에서 함축의미 블록 줄이기
+    base2 = _trim_exam_report(base, ref_keep=_EXAM_REF_FLOOR)
+    for imp_keep in range(_imp_block_count(base2) - 1, _EXAM_IMP_FLOOR - 1, -1):
+        last = _trim_exam_report(base2, ref_keep=_EXAM_REF_FLOOR, imp_keep=imp_keep)
+        if pages(last) <= 2:
+            return last
+
+    return last              # 최대한 줄여도 안 되면 마지막 후보
 
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
