@@ -106,6 +106,7 @@ body {
   font-size: 10.5px; line-height: 1.6;
 }
 .esum-box .kw { color: var(--voc); font-weight: 800; }
+.esum-ko { margin-top: 5px; padding-left: 3px; font-size: 9.5px; color: #4b5563; line-height: 1.55; }
 
 /* ---------- 공통 표 (zebra) ---------- */
 table.grid { width: 100%; border-collapse: collapse; }

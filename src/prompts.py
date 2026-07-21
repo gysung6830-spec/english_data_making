@@ -110,7 +110,8 @@ def vocab_prompt(title: str, body: str, lo: int, hi: int) -> str:
         "example(지문 속 예문).\n"
         "- 지문 길이에 비례해 개수를 정하되 반드시 위 범위를 지키세요.\n"
         "- english_summary: 위에서 뽑은 핵심 단어들을 최대한 많이 포함하는, 지문 전체를 요약한 "
-        "2문장 이내의 영어 문장을 작성하세요. 자연스러운 영어로 쓰되 핵심 어휘가 실제로 들어가야 합니다.\n\n"
+        "2문장 이내의 영어 문장을 작성하세요. 자연스러운 영어로 쓰되 핵심 어휘가 실제로 들어가야 합니다.\n"
+        "- english_summary_ko: 위 english_summary 문장을 자연스러운 한국어로 해석한 문장을 쓰세요.\n\n"
         + _passage_block(title, body)
     )
 

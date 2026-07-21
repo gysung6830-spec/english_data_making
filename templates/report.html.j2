@@ -200,6 +200,9 @@
     <div class="esum-box">
       {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
     </div>
+    {% if report.vocab.english_summary_ko %}
+    <div class="esum-ko">{{ report.vocab.english_summary_ko }}</div>
+    {% endif %}
   </div>
   {% endif %}
 

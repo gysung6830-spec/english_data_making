@@ -82,6 +82,9 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
             "Curiosity is essential because it fuels motivation, helps students retain "
             "information, and sparks creativity. Therefore, education should encourage "
             "learners to explore and inquire rather than simply memorize answers."
+        ), english_summary_ko=(
+            "호기심은 동기를 북돋우고, 학생들이 정보를 오래 기억하게 하며, 창의력을 자극하므로 필수적이다. "
+            "따라서 교육은 학습자가 단순히 답을 외우기보다 탐구하고 질문하도록 장려해야 한다."
         )),
         structure=schemas.StructureSection(
             flow_type="logic",
