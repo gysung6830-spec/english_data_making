@@ -146,14 +146,15 @@ def select_syntax_chapters(sourced: list[SourcedSentence]) -> list[ChapterPick]:
     return results
 
 
-def split_examples_problems(picks: list[Picked], n_examples: int = 10):
-    """예시(중 절반 + 고 절반) / 문제(나머지)로 나눈다."""
+def split_examples_problems(picks: list[Picked], n_examples: int = 5,
+                            n_problems: int = 20):
+    """예시(중 절반 + 고 절반) / 문제(나머지, 최대 n_problems)로 나눈다."""
     mids = [p for p in picks if p.difficulty == "중"]
     highs = [p for p in picks if p.difficulty == "고"]
     half = n_examples // 2
     examples = mids[:half] + highs[:n_examples - half]
     ex_set = {id(p) for p in examples}
-    problems = [p for p in picks if id(p) not in ex_set]
+    problems = [p for p in picks if id(p) not in ex_set][:n_problems]
     return examples, problems
 
 

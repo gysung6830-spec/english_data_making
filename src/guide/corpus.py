@@ -168,6 +168,34 @@ def collect_sentences(corpus_dir: str | Path) -> list[str]:
     return [ss.text for ss in collect_sourced(corpus_dir)]
 
 
+@dataclass
+class Passage:
+    text: str            # 지문 전체(영어)
+    source: str = ""     # 예: '2024 고3 6월 23번'
+
+
+def collect_passages(corpus_dir: str | Path, min_words: int = 40) -> list[Passage]:
+    """문항 단위로 '지문 전체'를 모은다(패러프레이징 파트용 — 지문 통째 학습)."""
+    corpus_dir = Path(corpus_dir)
+    out: list[Passage] = []
+    if not corpus_dir.exists():
+        return out
+    for f in sorted(corpus_dir.iterdir()):
+        if not f.is_file() or f.suffix.lower() not in (".pdf", ".txt", ".md"):
+            continue
+        buckets: dict[str, list[str]] = {}
+        order: list[str] = []
+        for ss in _sourced_from_file(f):
+            buckets.setdefault(ss.source, []).append(ss.text)
+            if ss.source not in order:
+                order.append(ss.source)
+        for src in order:
+            text = " ".join(buckets[src]).strip()
+            if len(text.split()) >= min_words:
+                out.append(Passage(text=text, source=src))
+    return out
+
+
 def _as_sourced(items) -> list[SourcedSentence]:
     """list[str] 또는 list[SourcedSentence] 를 SourcedSentence 목록으로 정규화."""
     out = []

@@ -145,13 +145,37 @@ class Part2(BaseModel):
     chapters: list[SyntaxChapter] = []
 
 
+# ── 패러프레이징 파트(지문 단위): 핵심주제가 어떻게 다른 표현으로 전개되는가 ──
+class ParaphraseLink(BaseModel):
+    excerpt: str = Field(description="지문 속 표현(핵심주제를 담거나 재진술한 문장·구, 원문 인용)")
+    role: str = Field(description="역할: 주제제시 / 재진술 / 예시 / 부연 / 결론 중 하나")
+    restated: str = Field(description="그 표현이 '핵심주제'를 어떻게 바꿔 말했는지 한국어로 한 줄")
+
+
+class ParaphrasePassage(BaseModel):
+    source: str = ""
+    passage: str = Field(description="지문 전체(영어 원문)")
+    main_idea: str = Field(description="이 지문의 핵심주제(필자가 하려는 말) 한국어 한 문장")
+    main_idea_en: str = Field(default="", description="핵심주제를 담은 영어 한 문장")
+    links: list[ParaphraseLink] = Field(description="같은 핵심주제가 다른 표현으로 전개되는 사슬")
+    answer_expression: str = Field(default="", description="요지·주제 문제의 정답이 될 만한 "
+                                   "패러프레이즈 표현(지문 표현을 바꿔 쓴 것)")
+
+
+class ParaphrasePart(BaseModel):
+    title: str = "패러프레이징 — 같은 주제, 다른 표현"
+    intro: str = ""
+    passages: list[ParaphrasePassage] = []
+
+
 class Guide(BaseModel):
     title: str = "구문해석 실전서"
     kicker: str = "평가원 기출로 익히는"
     subtitle: str = "단어를 몰라도, 문장이 복잡해도 핵심을 놓치지 않는 법"
     part0: Part0 | None = None                 # 0부 기본기
     chapters: list[Chapter] = []               # 1부 평가원 코드
-    part2: Part2 | None = None                 # 2부 구문해석
+    paraphrase: ParaphrasePart | None = None   # 2부 패러프레이징(지문 단위)
+    part2: Part2 | None = None                 # 3부 구문해석
 
 
 # Claude 구조화 출력 강제용: 한 문장 → CardBody 만 받는다.

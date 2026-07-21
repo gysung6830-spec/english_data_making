@@ -58,12 +58,13 @@ def test_polarity_codes():
     print("PASS  긍정/부정 신호 카테고리")
 
 
-def test_syntax_eight_types():
+def test_syntax_types():
     from src.guide.syntax import SYNTAX_TYPES
     ids = {st.id for st in SYNTAX_TYPES}
-    assert ids == {"relative", "participle", "insertion", "prep_stack",
-                   "cleft", "inversion", "comparison", "parallel"}
-    print("PASS  2부 8개 구문 유형")
+    assert ids == {"emphasis", "inversion", "parallel", "comparison", "apposition",
+                   "what_clause", "insertion_participle", "that_clause", "wh_clause",
+                   "negation", "prep_stack"}
+    print("PASS  구문 목차(부정·비교·강조·도치·동격·병렬·what·that·wh·삽입분사·전치사구)")
 
 
 def test_render_html():
@@ -82,7 +83,7 @@ def run_all():
     test_split_sentences()
     test_match_with_adverb()
     test_polarity_codes()
-    test_syntax_eight_types()
+    test_syntax_types()
     test_render_html()
     print("\n실전서 오프라인 테스트 통과 ✅")
 

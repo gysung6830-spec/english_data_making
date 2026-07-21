@@ -1,9 +1,10 @@
-"""구문 유형 자동 감지 — 기출 문장을 '구문 유형별로' 그룹핑한다(2부용).
+"""구문 유형 자동 감지 — 기출 문장을 '구문 유형별로' 그룹핑한다(구문해석 파트).
 
 정규식 휴리스틱으로 후보를 모으는 단계다(완벽한 파싱이 아님).
 실제 괄호치기/뼈대 분석은 이후 Claude 카드 생성이 담당한다.
 
-각 유형 = 감지 신호(이런 구조면) + 해석 공식(이렇게 해석).
+각 유형 = 감지 신호(이런 구조면) + 해석 공식(이렇게 해석) + 실전 팁.
+목차: 부정·비교·강조·도치·동격·병렬·what절·that절·wh절·삽입/분사, 그리고 전치사구(별도).
 """
 from __future__ import annotations
 
@@ -18,72 +19,101 @@ class SyntaxType:
     signal: str          # 이런 구조면 (감지 신호)
     formula: str         # 이렇게 해석 (해석 공식)
     pattern: re.Pattern
-    combat: str = ""      # 2부 실전 팁(시험장 요령)
-    min_len: int = 55
+    combat: str = ""      # 실전 팁(시험장 요령)
+    min_len: int = 45
 
 
 # 감지 규칙(위에서부터 우선). 한 문장은 가장 먼저 맞는 유형 하나에 배정.
 SYNTAX_TYPES: list[SyntaxType] = [
     SyntaxType(
-        id="inversion",
-        combat="실전 팁 — 문두 부정어를 보면 손으로 밑줄 긋고 문장 끝에 (−) 표시. 도치는 강조하려는 것이니, 그 부정어 자리가 답의 단서일 때가 많다.", title="도치·강조",
-        signal="문두에 부정어(Never/Rarely/Not only/Little…)나 Only가 나오고 주어·동사가 뒤집힌다",
+        id="emphasis", title="강조구문",
+        signal="It is/was … that/who … (분열문) 또는 do/does/did + 동사원형, 재귀대명사 강조",
+        formula="It ~ that 사이(강조 대상)를 먼저 잡는다: '바로 그것이 …이다'. do 강조는 '정말 ~한다'.",
+        combat="실전 팁 — It is X that … 에서 X가 '답'인 경우가 많다. It을 가주어로 착각 말고, that절이 완전하면 강조(=X 부각).",
+        pattern=re.compile(r"\bIt\s+(is|was)\b[^.]*?\b(that|who)\b|"
+                           r"\b(do|does|did)\s+(?=[a-z]{3,}\b)|"
+                           r"\b(myself|yourself|itself|himself|herself|themselves)\b", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="inversion", title="도치구문",
+        signal="문두 부정어(Never/Rarely/Not only/Little/Hardly/Only…) 뒤 주어·동사가 뒤집힌다",
         formula="원래 어순(주어+동사)으로 되돌려 읽는다. 문두 부정어는 '거의/결코 ~않다'로.",
-        pattern=re.compile(r"^\s*(Never|Rarely|Seldom|Hardly|Little|Not only|Nor|"
-                           r"No sooner|Only|Not until|Neither|Nowhere)\b", re.IGNORECASE),
+        combat="실전 팁 — 문두 부정어에 밑줄, 뒤의 '조동사+주어'를 원위치로. 도치는 강조라 그 자리가 답 단서일 때가 많다.",
+        pattern=re.compile(r"^\s*(Never|Rarely|Seldom|Hardly|Little|Not only|Nor|No sooner|"
+                           r"Only|Not until|Neither|Nowhere|Scarcely|No longer)\b", re.IGNORECASE),
     ),
     SyntaxType(
-        id="cleft",
-        combat="실전 팁 — It ~ that 강조구문이면 that 앞이 '강조 대상(=답)'. 가주어 It이면 that/to 뒤부터 읽고 It은 무시. 둘을 that절이 '완전한가/불완전한가'로 구분하라.", title="긴 주어·가주어",
-        signal="It is / was … that / to … — 진짜 주어가 뒤로 밀려 있다",
-        formula="가주어 It은 버리고, 뒤의 that/to 덩어리를 진짜 주어로 앞에 놓는다.",
-        pattern=re.compile(r"\bIt\s+(is|was|has been|seems|appears|follows|takes|remains)\b"
-                           r"[^.]*?\b(that|to)\b", re.IGNORECASE),
-    ),
-    SyntaxType(
-        id="parallel",
-        combat="실전 팁 — 접속사(and/but/or) 앞뒤로 '같은 급'을 손가락으로 짚어 짝을 맞춰라. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것 — 어형(품사)이 같은 자리를 찾아라.", title="병렬·상관접속사",
-        signal="not only A but (also) B / both A and B / either…or / neither…nor 로 짝을 이룬다",
-        formula="A와 B의 '급(단어 종류)'을 맞춰 같은 자리에 놓고 대칭으로 읽는다.",
+        id="parallel", title="병렬구문",
+        signal="not only A but (also) B / both A and B / either…or / neither…nor / A, B, and C",
+        formula="접속사 앞뒤로 '같은 급(품사)'을 짝지어 같은 자리에 놓고 대칭으로 읽는다.",
+        combat="실전 팁 — and/but/or 앞뒤에 같은 모양(품사)을 손가락으로 짚어 짝 맞추기. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것.",
         pattern=re.compile(r"\bnot only\b.+?\bbut\b|\bboth\b.+?\band\b|"
-                           r"\beither\b.+?\bor\b|\bneither\b.+?\bnor\b", re.IGNORECASE),
+                           r"\beither\b.+?\bor\b|\bneither\b.+?\bnor\b|"
+                           r"\bnot\b.+?\bbut (also|rather)\b", re.IGNORECASE),
     ),
     SyntaxType(
-        id="comparison",
-        combat="실전 팁 — than/as에 세로줄을 긋고 좌우 비교 대상 두 개에 동그라미. 무엇이 더 큰지(우열)만 정확히 잡으면 선지의 함정을 피한다.", title="비교구문",
-        signal="more/-er … than, as … as, the 비교급 … the 비교급 — 비교 기준이 뒤에 온다",
+        id="comparison", title="비교구문",
+        signal="more/less … than, -er than, as … as, the 비교급 … the 비교급",
         formula="than/as 뒤(비교 기준)를 괄호 → '무엇보다 / 무엇만큼'을 뼈대 뒤에 붙인다.",
+        combat="실전 팁 — than/as에 세로줄, 좌우 비교 대상 두 개에 동그라미. 무엇이 더 큰지(우열)만 정확히.",
         pattern=re.compile(r"\b(more|less)\b[^.]*?\bthan\b|\b\w+er\s+than\b|"
-                           r"\bas\s+\w+\s+as\b|\bthe\s+\w+er\b.+?\bthe\s+\w+er\b", re.IGNORECASE),
+                           r"\bas\s+\w+\s+as\b|\bthe\s+\w+er\b.+?\bthe\s+\w+er\b|"
+                           r"\bno\s+(more|less)\s+than\b", re.IGNORECASE),
     ),
     SyntaxType(
-        id="insertion",
-        combat="실전 팁 — 대시/콤마 삽입은 연필로 통째 괄호치고 없는 셈 치고 읽어라. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것 — 뼈대가 선명해진다.", title="삽입·동격",
-        signal="— … — 또는 , which / 콤마 동격(, a/the 명사,)이 문장 중간에 끼어든다",
-        formula="대시·콤마 사이는 통째로 괄호(없는 셈) → 뼈대부터 읽고 부가 설명으로 취급한다.",
-        pattern=re.compile(r"—[^—]+—|―[^―]+―|,\s+which\b|,\s+(?:a|an|the)\s+\w+,",
+        id="apposition", title="동격구문",
+        signal="the fact/idea/belief/notion that … , 또는 'N, (a/the) N,' 콤마 동격 (앞 명사=뒤 설명)",
+        formula="동격은 앞 명사를 '즉/다시 말해'로 풀어 뒤가 같은 대상임을 확인한다.",
+        combat="실전 팁 — the fact that … 의 that은 관계사가 아니라 동격(=내용). 'fact = that절 내용'으로 등호를 그어라.",
+        pattern=re.compile(r"\b(fact|idea|belief|notion|view|claim|conclusion|possibility|"
+                           r"assumption|theory|principle|sense|point|question)\s+that\b|"
+                           r",\s+(?:a|an|the)\s+\w+(?:\s+\w+){0,2},", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="what_clause", title="what절",
+        signal="what 이 이끄는 명사절 (what S V = '~하는 것')",
+        formula="what절은 통째로 하나의 명사(주어·목적어·보어)다: '~하는 것'으로 묶어 읽는다.",
+        combat="실전 팁 — what은 선행사를 포함(the thing which). what절 전체를 [ ]로 묶어 한 덩어리 명사로 취급.",
+        pattern=re.compile(r"\bwhat\s+\w+", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="insertion_participle", title="삽입절·분사구문",
+        signal="— … — / , which / 콤마 삽입, 또는 문두·콤마 뒤 V-ing/V-ed 분사 덩어리",
+        formula="삽입은 통째 괄호(없는 셈)로 뼈대부터. 분사는 ~하면서/~한 채로/~해서로 붙인다.",
+        combat="실전 팁 — 대시/콤마 삽입을 빼도 문장이 성립하면 제대로 괄호친 것. 분사의 의미상 주어=주절 주어.",
+        pattern=re.compile(r"—[^—]+—|―[^―]+―|,\s+which\b|"
+                           r"(?:^|,\s)(\w+ing|\w+ed)\b[^,]{6,},", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="that_clause", title="that절",
+        signal="인식·전달 동사 + that S V (think/believe/show/suggest/argue … that)",
+        formula="that절은 통째로 목적어인 '한 문장(명사절)'이다: '~라는 것을'로 묶어 뒤로 붙인다.",
+        combat="실전 팁 — 동사 뒤 that은 '~라는 것을'. 접속사 that은 뒤에 완전한 문장(S+V)이 온다(관계사 that과 구분).",
+        pattern=re.compile(r"\b(believe|think|show|suggest|argue|claim|find|found|know|knew|say|"
+                           r"said|reveal|indicate|assume|conclude|note|mean|meant|imply|insist|"
+                           r"realize|recognize|prove|demonstrate|report)s?\s+that\b", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="wh_clause", title="wh절",
+        signal="who / whom / whose / which / where / when / why / how 가 이끄는 관계·명사절",
+        formula="선행사(앞 명사)를 꾸미면 '~하는'으로, 명사절이면 '누가/어디/언제/왜/어떻게 ~하는지'로.",
+        combat="실전 팁 — wh- 앞에 명사가 있으면 관계사(그 명사 수식), 없으면 명사절. 어느 쪽이든 wh~끝까지 [ ]로 묶어라.",
+        pattern=re.compile(r"\b(who|whom|whose|which|where|when|why|how)\b", re.IGNORECASE),
+    ),
+    SyntaxType(
+        id="negation", title="부정구문",
+        signal="not all/always(부분부정), no/none/nothing/never/hardly/rarely, not A but B",
+        formula="부정어에 (−)를 붙여 극성을 뒤집는다. 부분부정(not all)은 '모두 ~인 것은 아니다'.",
+        combat="실전 팁 — not + all/always/every는 '전부는 아니다'(부분부정). no/never/hardly는 문장 전체를 부정.",
+        pattern=re.compile(r"\bnot\s+(all|always|every|necessarily|entirely|completely)\b|"
+                           r"\b(no|none|nothing|neither|never|hardly|rarely|seldom|scarcely)\b",
                            re.IGNORECASE),
     ),
     SyntaxType(
-        id="relative",
-        combat="실전 팁 — 관계사 앞 명사(선행사)에 동그라미, 관계사부터 동사 나오기 전까지 괄호. 선행사만 뼈대에 남기면 5줄짜리 문장도 '명사가 ~한다'로 줄어든다.", title="관계사절",
-        signal="who / which / that / whose / where 가 명사 뒤에 붙어 길게 꾸민다",
-        formula="관계사부터 절 끝까지 괄호 → 앞 명사만 뼈대에 남기고, '~하는'으로 뒤에서 붙인다.",
-        pattern=re.compile(r"\b\w+\s+(who|which|whose|where|whom)\b|"
-                           r"\bthe\s+\w+\s+that\s+\w+", re.IGNORECASE),
-    ),
-    SyntaxType(
-        id="participle",
-        combat="실전 팁 — 콤마+V-ing/V-ed는 '부대상황' 신호. 주절부터 읽고 분사는 ~하면서/~한 채로로 뒤에 붙여라. 분사의 의미상 주어는 주절 주어와 같다.", title="분사·분사구문",
-        signal="문두나 콤마 뒤에 V-ing / V-ed 덩어리가 붙는다",
-        formula="분사 덩어리를 괄호 → 주절 뼈대부터 읽고 ~하면서 / ~한 채로 / ~해서로 붙인다.",
-        pattern=re.compile(r"(?:^|,\s)(\w+ing|\w+ed)\b[^,]{6,},", re.IGNORECASE),
-    ),
-    SyntaxType(
-        id="prep_stack",
-        combat="실전 팁 — of/in/for가 연달아 나오면 명사 뒤에서 앞으로 화살표를 그어 거꾸로 붙여라. 진짜 주어는 맨 앞 명사 하나 — 전치사구에 딸린 명사를 주어로 착각 말 것.", title="전치사구 후치수식 겹침",
-        signal="명사 뒤에 of/in/on/with/for 전치사구가 두 개 이상 줄줄이 이어진다",
+        id="prep_stack", title="전치사구 (별도)",
+        signal="명사 뒤에 of/in/on/for/with 전치사구가 두 개 이상 줄줄이 이어진다",
         formula="전치사구는 뒤에서 앞으로 '~의 / ~에 있는'으로 차례차례 붙여 명사를 완성한다.",
+        combat="실전 팁 — 전치사가 연달으면 명사 뒤에서 앞으로 화살표. 진짜 주어는 맨 앞 명사 하나뿐.",
         pattern=re.compile(r"\b\w+\s+(of|in|on|for|with|between|among)\s+(?:\w+\s+){1,4}"
                            r"(of|in|on|for|with|to|between|among)\b", re.IGNORECASE),
         min_len=70,

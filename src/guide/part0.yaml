@@ -48,6 +48,18 @@ methods:
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
+  - step: "짚고 가기"
+    title: "수식어구, 어떻게 알아보고 — 정말 안 읽어도 되나?"
+    idea: "수식어구 = '명사 뒤에 붙어 그 명사를 더 설명하는 덩어리'. 아래 신호가 보이면 수식어다."
+    rule: "수식어 신호 = 관계사(who/which/that) · 분사(V-ing/V-ed) · 전치사구(of/in/with…) · to부정사 · 콤마·대시 삽입(— , —). 앞 명사를 꾸미면 전부 수식어."
+    ms_point: "괄호친다 = '안 읽는다'가 아니다! 뼈대로 '누가 → 무엇을 한다'를 먼저 잡은 뒤, 살(수식어)을 다시 붙여 세부를 읽는다. 순서만 바꾸는 것 — 특히 평가원은 수식어 속에 정답 근거를 숨기므로, 결국 다 읽되 '뼈대 → 살' 순서로 읽는다."
+    demo:
+      sentence: "Free recall tests, in which students need to recall as much as they can, tend to result in better retention."
+      bracketed: "Free recall tests (in which students need to recall as much as they can) tend to result in better retention."
+      skeleton_en: "Free recall tests result in better retention."
+      skeleton_ko: "자유 회상 시험은 더 나은 기억 유지로 이어진다. (뼈대 먼저)"
+      full_ko: "괄호 속(in which ~)은 '건너뛰고 끝'이 아니라 뼈대를 잡은 뒤 다시 붙인다: '학생이 최대한 많이 회상해야 하는' 자유 회상 시험은 더 나은 기억 유지로 이어진다. (살도 결국 읽는다 — 순서만 뒤로.)"
+
   - step: "보너스"
     title: "모르는 단어는 '유추'로 뚫는다"
     idea: "단어 뜻을 다 몰라도 된다. 문장의 신호로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다."
