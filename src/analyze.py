@@ -29,6 +29,29 @@ def extract_report_image(client: ClaudeClient, cfg: Config, image_path: str) -> 
     )
 
 
+def extract_passages(client: ClaudeClient, cfg: Config, raw_text: str) -> list[schemas.Extraction]:
+    """원문 텍스트 -> '여러 지문' 분리 추출."""
+    return client.structured(
+        system=prompts.EXTRACT_MULTI_SYSTEM,
+        prompt=prompts.extract_multi_prompt(raw_text),
+        model_cls=schemas.ExtractionList,
+        max_tokens=12000,
+        max_retries=max(2, cfg.processing.max_retries),
+    ).passages
+
+
+def extract_passages_image(client: ClaudeClient, cfg: Config, image_path: str) -> list[schemas.Extraction]:
+    """이미지 -> '여러 지문' 분리 추출(비전)."""
+    return client.structured(
+        system=prompts.EXTRACT_MULTI_SYSTEM,
+        prompt=prompts.extract_multi_image_prompt(),
+        model_cls=schemas.ExtractionList,
+        max_tokens=12000,
+        max_retries=max(2, cfg.processing.max_retries),
+        image_path=image_path,
+    ).passages
+
+
 def analyze_passage(
     client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
 ) -> schemas.Report:

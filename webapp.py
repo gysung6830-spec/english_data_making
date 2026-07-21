@@ -263,8 +263,9 @@ def analyze_route():
         return f"{stem}{default_suffix}"
 
     results = []
-    wb_books = []       # 통합 워크북 합본용
-    blank_sets = []     # 빈칸형 합본용
+    wb_books = []       # 통합 워크북 파일간 합본용
+    blank_sets = []     # 빈칸형 파일간 합본용
+    n_files_ok = 0      # 산출물을 낸 파일 수(파일간 합본 여부 판단용)
     for f in files:
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
@@ -276,36 +277,42 @@ def analyze_route():
         stem = _safe_name(Path(f.filename).stem)
         try:
             if do_workbook:
-                wb = (pipeline._mock_workbook_for_pdf(cfg, tmp) if mock
-                      else pipeline.build_workbook_for_pdf(client, cfg, tmp))
+                # 한 파일에 여러 지문이 있으면 지문별 워크북을 모두 만든다.
+                wbs = ([pipeline._mock_workbook_for_pdf(cfg, tmp)] if mock
+                       else pipeline.build_workbooks_for_pdf(client, cfg, tmp))
                 out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
-                wb_books.append(wb)
-                results.append({"name": f"{f.filename} · 통합 워크북", "ok": True, "out": out.name})
+                workbook_render.render_workbooks_pdf(wbs, out, footer_note=cfg.design.footer_note)
+                wb_books.extend(wbs)
+                results.append({"name": f"{f.filename} · 통합 워크북 (지문 {len(wbs)}편)",
+                                "ok": True, "out": out.name})
             if do_blanks:
-                st = (pipeline._mock_blank_set_for_pdf(cfg, tmp, len(blank_sets) + 1) if mock
-                      else pipeline.build_blank_set_for_pdf(client, cfg, tmp))
-                st.no = 1
+                file_sets = ([pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)] if mock
+                             else pipeline.build_blank_sets_for_pdf(client, cfg, tmp))
+                for idx, st in enumerate(file_sets, start=1):
+                    st.no = idx
                 bwb = blanks_schemas.build_blank_workbook(
-                    blanks_schemas.LLMBlankWorkbook(sets=[st]), title=st.title, subtitle=st.subtitle)
+                    blanks_schemas.LLMBlankWorkbook(sets=file_sets),
+                    title=file_sets[0].title, subtitle=file_sets[0].subtitle)
                 out = OUTPUT_DIR / f"{out_name(stem, '_빈칸', '_빈칸워크북')}.pdf"
                 blanks_render.render_blanks_pdf(bwb, out, footer_note=cfg.design.footer_note)
-                blank_sets.append(st)
-                results.append({"name": f"{f.filename} · 빈칸형", "ok": True, "out": out.name})
+                blank_sets.extend(file_sets)
+                results.append({"name": f"{f.filename} · 빈칸형 (지문 {len(file_sets)}편)",
+                                "ok": True, "out": out.name})
             if do_report:
                 report = (pipeline._mock_report_for_pdf(cfg, tmp) if mock
                           else pipeline.build_report_for_pdf(client, cfg, tmp))
                 out = OUTPUT_DIR / f"{out_name(stem, '_분석', '_analysis')}.pdf"
                 render.render_pdf(report, out, footer_note=cfg.design.footer_note)
                 results.append({"name": f"{f.filename} · 6개 분석", "ok": True, "out": out.name})
+            n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})
         finally:
             tmp.unlink(missing_ok=True)
 
-    # 통합 워크북 2편 이상: 합본(지문1→답1→지문2→답2)
-    if do_workbook and len(wb_books) >= 2:
+    # 파일이 '2개 이상'일 때만 파일들을 하나로 합친 합본 추가(단일 파일은 이미 지문별로 다 들어감)
+    if do_workbook and n_files_ok >= 2 and len(wb_books) >= 2:
         try:
             combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
             workbook_render.render_workbooks_pdf(wb_books, combined, footer_note=cfg.design.footer_note)
@@ -314,8 +321,8 @@ def analyze_route():
             traceback.print_exc()
             results.append({"name": "📚 통합 합본", "ok": False, "error": str(e)})
 
-    # 빈칸형 2편 이상: 합본
-    if do_blanks and len(blank_sets) >= 2:
+    # 빈칸형: 파일 2개 이상일 때만 파일간 합본 추가
+    if do_blanks and n_files_ok >= 2 and len(blank_sets) >= 2:
         try:
             for idx, st in enumerate(blank_sets, start=1):
                 st.no = idx

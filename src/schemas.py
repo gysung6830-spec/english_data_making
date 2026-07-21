@@ -31,6 +31,18 @@ class Extraction(BaseModel):
         return "\n\n".join(self.paragraphs)
 
 
+class ExtractionList(BaseModel):
+    """한 파일에서 분리한 '여러 지문'."""
+    passages: list[Extraction] = Field(default_factory=list)
+
+    @field_validator("passages")
+    @classmethod
+    def _non_empty(cls, v: list[Extraction]) -> list[Extraction]:
+        if not v:
+            raise ValueError("지문을 하나도 찾지 못했습니다.")
+        return v
+
+
 # ---------------------------------------------------------------------------
 # ① 내용 전체 요약 정리  (주제 한 문장)
 # ---------------------------------------------------------------------------

@@ -63,6 +63,31 @@ def build_blank_set_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
     return blanks_generate.generate_blank_set(client, cfg, extraction)
 
 
+def _extract_passages_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
+    """한 파일 -> 그 안의 '여러 지문' 목록(Extraction 리스트)."""
+    if extract.is_image(src):
+        return analyze.extract_passages_image(client, cfg, str(src))
+    raw = extract.extract_passage_text(src)
+    if extract.looks_empty(raw):
+        raise ValueError(
+            "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+            "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
+        )
+    return analyze.extract_passages(client, cfg, raw)
+
+
+def build_workbooks_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Workbook]:
+    """한 파일(여러 지문 가능) -> 지문별 통합 워크북 목록."""
+    return [workbook_generate.generate_workbook(client, cfg, ex)
+            for ex in _extract_passages_for_pdf(client, cfg, src)]
+
+
+def build_blank_sets_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list:
+    """한 파일(여러 지문 가능) -> 지문별 빈칸형 세트(LLMBlankSet) 목록."""
+    return [blanks_generate.generate_blank_set(client, cfg, ex)
+            for ex in _extract_passages_for_pdf(client, cfg, src)]
+
+
 def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
     from samples.sample_mock import mock_report
 
@@ -134,19 +159,22 @@ def run_folder_blanks(cfg: Config, mock: bool = False) -> dict:
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            st = _mock_blank_set_for_pdf(cfg, pdf, no=i) if mock else build_blank_set_for_pdf(client, cfg, pdf)
+            file_sets = ([_mock_blank_set_for_pdf(cfg, pdf, no=1)] if mock
+                         else build_blank_sets_for_pdf(client, cfg, pdf))
             if combine:
-                sets.append(st)
+                sets.extend(file_sets)
             else:
-                st.no = 1
+                for idx, st in enumerate(file_sets, start=1):
+                    st.no = idx
                 wb = blanks_schemas.build_blank_workbook(
-                    blanks_schemas.LLMBlankWorkbook(sets=[st]), title=st.title, subtitle=st.subtitle)
+                    blanks_schemas.LLMBlankWorkbook(sets=file_sets),
+                    title=file_sets[0].title, subtitle=file_sets[0].subtitle)
                 out = cfg.output_dir / f"{_safe_stem(pdf)}_빈칸워크북.pdf"
                 blanks_render.render_blanks_pdf(wb, out, footer_note=cfg.design.footer_note)
                 outputs.append(out)
                 manifest.record_success(str(pdf), str(out))
             success += 1
-            logger.info("[%d/%d] 완료: %s", i, total, pdf.name)
+            logger.info("[%d/%d] 완료: %s (지문 %d편)", i, total, pdf.name, len(file_sets))
         except Exception as e:
             failed += 1
             manifest.record_failure(str(pdf), str(e))
@@ -201,16 +229,17 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            wb = _mock_workbook_for_pdf(cfg, pdf) if mock else build_workbook_for_pdf(client, cfg, pdf)
+            wbs = [_mock_workbook_for_pdf(cfg, pdf)] if mock else build_workbooks_for_pdf(client, cfg, pdf)
             if combine:
-                books.append(wb)
-                logger.info("[%d/%d] 분석 완료: %s (문항 %d개)", i, total, pdf.name, wb.total)
+                books.extend(wbs)   # 파일 안의 여러 지문을 모두 합본에 포함
+                logger.info("[%d/%d] 분석 완료: %s (지문 %d편)", i, total, pdf.name, len(wbs))
             else:
                 out = cfg.output_dir / f"{_safe_stem(pdf)}_워크북.pdf"
-                workbook_render.render_workbook_pdf(wb, out, footer_note=cfg.design.footer_note)
+                # 한 파일에 여러 지문이 있으면 한 PDF 에 지문1→답1→지문2→답2… 로 배치
+                workbook_render.render_workbooks_pdf(wbs, out, footer_note=cfg.design.footer_note)
                 outputs.append(out)
                 manifest.record_success(str(pdf), str(out))
-                logger.info("[%d/%d] 완료: %s -> %s (문항 %d개)", i, total, pdf.name, out.name, wb.total)
+                logger.info("[%d/%d] 완료: %s -> %s (지문 %d편)", i, total, pdf.name, out.name, len(wbs))
             success += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
