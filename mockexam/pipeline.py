@@ -58,8 +58,9 @@ def generate_mock(
                      grammar_focus=profile.get("grammar_focus", []))
     exam, logs = generate_all(blueprint, assignments, pmap, ctx)
 
-    # [6] 검증 + 실패 문항만 재생성
-    report = verify(exam, blueprint, requested=diff)
+    # [6] 검증 + 실패 문항만 재생성 (LLM 생성 시 구조 요건도 검사)
+    structural = client is not None
+    report = verify(exam, blueprint, requested=diff, structural=structural)
     for _ in range(max_regen):
         if report.ok:
             break
@@ -74,7 +75,7 @@ def generate_mock(
                 if p is not None:
                     exam.questions[q_i] = generate_question(
                         blueprint.choice_items[q.no - 1], p, ctx)
-        report = verify(exam, blueprint, requested=diff)
+        report = verify(exam, blueprint, requested=diff, structural=structural)
 
     return GenResult(exam, blueprint, assignments, report, logs,
                      num_passages=len(passages))

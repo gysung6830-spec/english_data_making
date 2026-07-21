@@ -137,6 +137,23 @@ def _difficulty_bonus(prof: PassageProfile, want: Difficulty) -> float:
     return 0.0 if order[prof.difficulty] == 1 else -0.02
 
 
+# 지문을 '변형/오류 삽입'하는 유형 — 같은 지문을 다른 유형과 함께 쓰면 학생이
+# 대조해 정답을 찾을 수 있으므로(스포일러), 이런 유형은 되도록 단독 지문에 배정.
+SPOILER_TYPES = {
+    "grammar", "grammar_vocab_mix", "vocab_odd", "irrelevant_sentence",
+    "grammar_fix_and_answer", "blank_single", "order", "summary_ab",
+}
+
+
+def _spoiler_penalty(item_type: str, existing_types: set[str]) -> float:
+    """이미 다른 유형이 붙은 지문에 스포일러 유형을 겹쳐 쓰면 큰 페널티."""
+    if not existing_types:
+        return 0.0
+    if item_type in SPOILER_TYPES or (existing_types & SPOILER_TYPES):
+        return 0.45
+    return 0.0
+
+
 # ---------------------------------------------------------------------------
 # 배정 알고리즘 (§3-A-3) — 기존 지문만으로, 새 지문 생성 안 함
 # ---------------------------------------------------------------------------
@@ -256,6 +273,8 @@ def _pick(item: Item, candidates: list[Passage],
             src = "llm"
         # 재사용은 페널티(사용 횟수가 적은 지문을 우선 → 고르게 분산)
         s -= 0.08 * use_count.get(p.id, 0)
+        # 스포일러 유형과 다른 유형이 한 지문에 섞이지 않게 페널티
+        s -= _spoiler_penalty(item.type, type_on.get(p.id, set()))
         scored.append((s, p.id, src))
     if not scored:
         return None

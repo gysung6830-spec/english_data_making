@@ -49,8 +49,56 @@ def _count_underlines(q: Question) -> int:
     return len(re.findall(r"<u[ >]", text))
 
 
+_BLANK_RE = re.compile(r"_{3,}|▢|□|\(\s{2,}\)")
+
+
+def structural_issue(q: Question) -> str | None:
+    """유형이 요구하는 구조 요소(빈칸·밑줄·①~⑤·(A)(B)(C))가 있는지 점검.
+
+    LLM 생성 문항이 발문은 맞지만 지문에 정답 근거 구조를 빠뜨리는 오류를 잡는다.
+    """
+    t = q.type
+    p = q.passage_text or ""
+    circled = len(re.findall(r"[①②③④⑤]", p))
+    has_u = "<u>" in p
+    has_blank = bool(_BLANK_RE.search(p)) or "____" in p
+    has_abc = all(m in p for m in ("(A)", "(B)", "(C)"))
+
+    if t in ("grammar", "grammar_vocab_mix", "vocab_odd"):
+        if circled < 5 and (not has_u):
+            return "밑줄 표시(①~⑤) 부족"
+    elif t == "irrelevant_sentence":
+        if circled < 5:
+            return "문장 번호(①~⑤) 부족"
+    elif t == "implied_meaning":
+        if not has_u:
+            return "밑줄(<u>) 없음"
+    elif t in ("blank_single",):
+        if not has_blank:
+            return "빈칸(____) 없음"
+    elif t == "summary_ab":
+        if not (has_blank or has_abc):
+            return "(A)/(B) 빈칸 없음"
+        if q.choices and not any(" - " in c.text or "(A)" in c.text for c in q.choices):
+            return "선지가 '(A) - (B)' 형식 아님"
+    elif t == "vocab_3blank_abc":
+        if not (has_abc or (q.choices and any("(A)" in c.text for c in q.choices))):
+            return "(A)(B)(C) 표시 없음"
+    elif t == "order":
+        if not has_abc:
+            return "(A)(B)(C) 문단 없음"
+    elif t == "summary_fill_from_text":
+        if not has_blank:
+            return "요약 빈칸 없음"
+    elif t == "grammar_fix_and_answer":
+        marks = p.count("<u>") + len(re.findall(r"[①②③]", p))
+        if marks < 3:
+            return "어법 오류 밑줄 3곳 부족"
+    return None
+
+
 def verify(exam: MockExam, blueprint: Blueprint,
-           requested: Difficulty = "mid") -> VerifyReport:
+           requested: Difficulty = "mid", structural: bool = False) -> VerifyReport:
     rep = VerifyReport()
     qs = exam.questions
     choice = exam.choice_questions
@@ -129,5 +177,19 @@ def verify(exam: MockExam, blueprint: Blueprint,
     rep.checks.append(CheckResult(
         "난이도일관성", ok7,
         f"요청={requested}, 불일치 {len(bad_diff)}/{len(choice)}"))
+
+    # 8) 구조 요건(LLM 생성 시): 유형이 요구하는 빈칸/밑줄/①~⑤/(A)(B)(C) 유무
+    if structural:
+        bad_struct: list[int] = []
+        details: list[str] = []
+        for q in qs:
+            issue = structural_issue(q)
+            if issue:
+                details.append(f"{'서술형 ' if q.section=='essay' else ''}{q.no}({issue})")
+                if q.section == "choice":
+                    bad_struct.append(q.no)
+        rep.checks.append(CheckResult(
+            "구조요건", not details,
+            "정상" if not details else "; ".join(details), bad_items=bad_struct))
 
     return rep
