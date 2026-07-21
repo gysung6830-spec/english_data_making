@@ -60,7 +60,7 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     sel = which or cfg.outputs
     brand = cfg.design.brand if brand is None else brand
     fn = cfg.design.footer_note
-    multi = len(reports) > 1
+    title = reports[0].title if reports else stem
     recs: list[dict] = []
 
     if sel.analysis:
@@ -69,31 +69,16 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
                           min_vocab=cfg.vocab.min, brand=brand)
         recs.append({"kind": "analysis", "label": "📘 분석지", "path": p})
 
+    # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
     if sel.wordlist:
-        if not multi:
-            p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
-            render.render_wordlist_pdf(reports, p,
-                                       title=f"{reports[0].title} — 핵심 어휘", footer_note=fn)
-            recs.append({"kind": "wordlist", "label": "📝 어휘 리스트", "path": p})
-        else:
-            for i, rep in enumerate(reports, 1):
-                p = cfg.output_dir / f"{stem}_지문{i}_어휘리스트.pdf"
-                render.render_wordlist_pdf([rep], p,
-                                           title=f"[지문{i}] {rep.title} — 핵심 어휘", footer_note=fn)
-                recs.append({"kind": "wordlist", "label": f"📝 어휘 리스트(지문{i})", "path": p})
+        p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
+        render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘", footer_note=fn)
+        recs.append({"kind": "wordlist", "label": "📝 어휘 리스트", "path": p})
 
     if sel.quiz:
-        if not multi:
-            p = cfg.output_dir / f"{stem}_어휘test.pdf"
-            render.render_quiz_pdf(reports, p,
-                                   title=f"{reports[0].title} — 영단어 시험", footer_note=fn)
-            recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
-        else:
-            for i, rep in enumerate(reports, 1):
-                p = cfg.output_dir / f"{stem}_지문{i}_어휘test.pdf"
-                render.render_quiz_pdf([rep], p,
-                                       title=f"[지문{i}] {rep.title} — 영단어 시험", footer_note=fn)
-                recs.append({"kind": "quiz", "label": f"✏️ 시험지(지문{i})", "path": p})
+        p = cfg.output_dir / f"{stem}_어휘test.pdf"
+        render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
+        recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
 
     return recs
 

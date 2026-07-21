@@ -264,6 +264,8 @@ table.lit2 td {
 .t-wl td:nth-child(3), .t-wl th:nth-child(3),
 .t-quiz td:nth-child(3), .t-quiz th:nth-child(3) { border-right: 2px solid var(--line); }
 .wl-empty { margin-top: 14px; color: var(--muted); font-size: 11px; }
+/* 지문별/정답 페이지 구분 */
+.pgbreak { break-before: page; }
 
 /* 시험지: 뜻 쓰는 빈칸 */
 .q-blank { min-height: 20px; }

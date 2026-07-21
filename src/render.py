@@ -229,22 +229,34 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
 # ---------------------------------------------------------------------------
 # 어휘 리스트 / 영단어 시험지 (직독직해 오른쪽 열 단어들 기반)
 # ---------------------------------------------------------------------------
+def _collect_words_one(report) -> list[dict]:
+    """한 지문(report)의 직독직해 chunk words 를 순서대로 모으고 중복 제거."""
+    seen: dict[str, dict] = {}
+    order: list[str] = []
+    for s in report.literal.sentences:
+        for c in s.chunks:
+            for w in c.words:
+                word = (w.word or "").strip()
+                meaning = (w.meaning or "").strip()
+                if not word:
+                    continue
+                key = word.lower()
+                if key not in seen:
+                    seen[key] = {"word": word, "meaning": meaning}
+                    order.append(key)
+    return [{"no": i + 1, **seen[k]} for i, k in enumerate(order)]
+
+
 def collect_words(reports) -> list[dict]:
-    """직독직해 각 chunk 의 words(핵심 단어)를 지문 순서대로 모으고 중복 제거."""
+    """여러 지문의 어휘를 모두 합쳐 중복 제거(전체 합본용). 하위호환 유지."""
     seen: dict[str, dict] = {}
     order: list[str] = []
     for r in _as_list(reports):
-        for s in r.literal.sentences:
-            for c in s.chunks:
-                for w in c.words:
-                    word = (w.word or "").strip()
-                    meaning = (w.meaning or "").strip()
-                    if not word:
-                        continue
-                    key = word.lower()
-                    if key not in seen:
-                        seen[key] = {"word": word, "meaning": meaning}
-                        order.append(key)
+        for item in _collect_words_one(r):
+            key = item["word"].lower()
+            if key not in seen:
+                seen[key] = {"word": item["word"], "meaning": item["meaning"]}
+                order.append(key)
     return [{"no": i + 1, **seen[k]} for i, k in enumerate(order)]
 
 
@@ -260,14 +272,19 @@ def _pair_rows(words: list[dict]) -> list[tuple]:
 
 def render_wordlist_pdf(reports, out_path: str | Path,
                         title: str = "핵심 어휘 리스트", footer_note: str = "") -> Path:
+    """PDF 1개 안에서 지문별로 페이지를 나눠 어휘 리스트를 만든다."""
     from weasyprint import CSS, HTML
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    words = collect_words(reports)
+    reps = _as_list(reports)
+    passages = []
+    for i, rep in enumerate(reps, 1):
+        words = _collect_words_one(rep)
+        passages.append({"no": i, "total": len(reps), "title": rep.title,
+                         "words": words, "rows": _pair_rows(words)})
     tmpl = _env.get_template("wordlist.html.j2")
-    html = tmpl.render(title=title, words=words, rows=_pair_rows(words),
-                       footer_note=footer_note)
+    html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
@@ -276,18 +293,24 @@ def render_wordlist_pdf(reports, out_path: str | Path,
 def render_quiz_pdf(reports, out_path: str | Path,
                     title: str = "영단어 시험지", footer_note: str = "",
                     seed: int | None = None) -> Path:
+    """PDF 1개 안에서 지문별로 페이지를 나눠 영단어 시험지를 만든다(지문마다 정답 포함)."""
     from weasyprint import CSS, HTML
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    words = collect_words(reports)
-    shuffled = words[:]
-    random.Random(seed).shuffle(shuffled)
-    for i, w in enumerate(shuffled):   # 섞은 뒤 번호를 다시 매김
-        w["no"] = i + 1
+    reps = _as_list(reports)
+    rng = random.Random(seed)
+    passages = []
+    for i, rep in enumerate(reps, 1):
+        words = _collect_words_one(rep)
+        shuffled = words[:]
+        rng.shuffle(shuffled)
+        for j, w in enumerate(shuffled):   # 섞은 뒤 번호 재부여
+            w["no"] = j + 1
+        passages.append({"no": i, "total": len(reps), "title": rep.title,
+                         "words": shuffled, "rows": _pair_rows(shuffled)})
     tmpl = _env.get_template("quiz.html.j2")
-    html = tmpl.render(title=title, words=shuffled, rows=_pair_rows(shuffled),
-                       footer_note=footer_note)
+    html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
