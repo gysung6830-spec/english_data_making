@@ -1,13 +1,12 @@
 # 3부 구문해석 · 세부목차별 실전적용(문제↔해설). 실제 평가원 기출. 코딩 없이 편집.
 practice:
   negation:
-  - kind: mc
-    sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
+  - sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
     source: 2024 고3 6월 32번
-    prompt: rarely에 유의하여 올바른 해석을 고르시오.
+    prompt: rarely의 극성과 부정 범위에 유의하여 올바른 해석을 고르시오.
     options:
-    - 창의적 아이디어를 만드는 것이 대개 최종 목표다.
-    - 창의적 아이디어를 만드는 것이 최종 목표인 경우는 좀처럼 없다.
+    - 이 정의가 연구에서 널리 쓰이지만, 창의성의 중요한 한 측면은 흔히 간과된다. 즉, 창의적인 생각을 만들어 내는 것은 드물게라도 최종 목표이다.
+    - 이 정의가 연구에서 널리 쓰이지만, 창의성의 중요한 한 측면은 흔히 간과된다. 즉, 창의적인 생각을 만들어 내는 것이 최종 목표인 경우는 좀처럼 없다.
     answer_index: 1
     vocab:
     - word: definition
@@ -15,94 +14,206 @@ practice:
     - word: aspect
       meaning: 측면
     - word: rarely
-      meaning: 좀처럼 ~않다
+      meaning: 좀처럼 ~않다, 드물게
     solution:
-      cut: 이 정의가 연구에서 널리 쓰이지만 / 창의성의 중요한 한 측면이 흔히 간과된다 / 콜론(:) → 즉, 창의적 아이디어를 만드는 것이 / 최종 목표인 경우는 좀처럼 없다(rarely is the final goal).
-      wrong: 창의적 아이디어를 만드는 것이 대개 최종 목표다.
-      wrong_why: rarely(좀처럼 ~않다)를 놓치면 극성이 정반대. rarely가 문장 전체의 극성을 (−)로 뒤집는다.
-      author_msg: 아이디어를 '내는 것' 자체가 끝이 아니라, 그 뒤(실행·평가)가 더 중요하다.
+      cut: an important aspect of creativity is often ignored / 콜론(:) → Generating creative ideas / rarely is / the final goal
+      wrong: 창의적인 생각을 만들어 내는 것은 드물게라도 최종 목표이다.
+      wrong_why: rarely를 '드물게라도 ~이다'라는 긍정으로 처리한 것. rarely는 not 없이도 서술어 'is the final goal'을 부정하는 빈도부정어라, '드물게라도 목표이다'로 옮기면 극성이 (−)에서 (+)로 뒤집힌다.
+      author_msg: rarely, seldom, hardly, scarcely는 not이 없어도 문장을 (−)로 만드는 준부정어입니다. 서술어를 통째로 부정한다고 보세요.
       key_points:
-      - 'rarely : 빈도부정(좀처럼 ~않다) — 극성 (−).'
-      - '콜론(:) : 앞의 ''간과된 측면''을 구체화.'
-      - 'Generating ~ : 동명사 주어(''~을 만드는 것'').'
-  - kind: mc
-    sentence: 'Fashion is among the simplest and cheapest methods of self-expression: clothes can be inexpensively purchased while making it easy to convey notions of wealth, intellectual stature, relaxation or environmental consciousness, even if none of these is true.'
-    source: 2023 고3 11월 29번
-    prompt: even if none of these is true의 범위와 극성에 유의하여 올바른 해석을 고르시오.
+      - 'rarely : not 없이 문장을 (−)로 만드는 빈도부정 부사'
+      - '부정 범위 : 서술어 ''is the final goal'' 전체 (거의 아님 = 강한 부정)'
+      - '해석 틀 : ''A가 B인 경우는 좀처럼 없다 = 거의 B가 아니다'''
+    kind: mc
+  - sentence: Emergencies are not always clearly labeled as such; "smoke" pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
+    source: 2022 고3 6월 42번
+    prompt: not always의 부정 범위(부분/전체)에 유의하여 올바른 해석을 고르시오.
     options:
-    - 이러한 것들 중 일부만 사실이 아닐지라도.
-    - 이러한 것들 중 어느 하나도 사실이 아닐지라도.
+    - 응급 상황이 항상 그러한 것으로 분명하게 표시되는 것은 아니다. 대기실로 쏟아져 들어오는 '연기'는 화재로 인한 것일 수도 있고, 단지 증기 파이프의 누출을 나타내는 것일 수도 있다.
+    - 응급 상황은 결코 그러한 것으로 분명하게 표시되지 않는다. 대기실로 쏟아져 들어오는 '연기'는 화재로 인한 것일 수도 있고, 단지 증기 파이프의 누출을 나타내는 것일 수도 있다.
+    answer_index: 0
+    vocab:
+    - word: emergency
+      meaning: 응급 상황, 비상 사태
+    - word: label
+      meaning: 표시하다, 이름표를 붙이다
+    - word: leak
+      meaning: 누출
+    solution:
+      cut: Emergencies / are not always clearly labeled / as such
+      wrong: 응급 상황은 결코 그러한 것으로 분명하게 표시되지 않는다.
+      wrong_why: not always를 '결코 ~않다(never)'라는 전체부정으로 옮긴 것. always 같은 전부 표현이 not과 만나면 '항상 ~인 것은 아니다'라는 부분부정이 되어 예외를 남긴다. '결코 ~않다'는 부정 범위를 전체로 넓힌 오역이다.
+      author_msg: not + all/always/every/both은 '일부는 아니다'로 읽는 부분부정 공식입니다. never/none(전체부정)과 헷갈리지 마세요.
+      key_points:
+      - 'not always : ''항상 ~인 것은 아니다''로 읽는 부분부정'
+      - '부정 범위 : always(전부)만 부정 → 예외를 남김 (부분부정)'
+      - '대비 : never/none = 예외 없는 전체부정'
+    kind: mc
+  - sentence: We can see the world only as it appears to us, not as it truly is, because there is no as it truly is without a perspective to give it form.
+    source: 2022 고3 6월 21번
+    prompt: not A but B(대조)와 no의 부정을 바르게 옮긴 것을 고르시오.
+    options:
+    - 우리는 세상을 우리에게 보이는 대로만이 아니라 그것이 진정으로 존재하는 대로도 볼 수 있는데, 형태를 부여할 관점이 있어야 '진정으로 존재하는 대로'가 있기 때문이다.
+    - 우리는 세상을 그것이 진정으로 존재하는 대로가 아니라 우리에게 보이는 대로만 볼 수 있는데, 형태를 부여할 관점 없이는 '진정으로 존재하는 대로'라는 것이 없기 때문이다.
     answer_index: 1
+    vocab:
+    - word: appear
+      meaning: ~처럼 보이다, 나타나다
+    - word: perspective
+      meaning: 관점, 시각
+    - word: give ~ form
+      meaning: ~에 형태를 부여하다
+    solution:
+      cut: only as it appears to us, / not as it truly is / because there is no ~ without ~
+      wrong: 우리는 세상을 우리에게 보이는 대로만이 아니라 그것이 진정으로 존재하는 대로도 볼 수 있는데 ~
+      wrong_why: '''only as it appears to us, not as it truly is''는 ''as it truly is''를 부정 축에 놓고 ''as it appears''와 대조하는 구조인데, 이를 ''A뿐 아니라 B도''로 바꾸면 부정 대상이 사라진다. 게다가 no ~ without(이중부정)을 ''~해야 있다''로만 옮기며 명사 존재 부정을 흐렸다.'
+      author_msg: not A but B의 not은 A가 아니라 B(뒤 축)를 부정해 대조합니다. no ~ without은 (−)(−)로 '~없이는 ~없다 = ~해야 비로소 있다'는 필요조건임을 함께 확인하세요.
+      key_points:
+      - 'not as it truly is : ''as it appears''와 대조되는 축을 (−)로 배제'
+      - 'no + 명사(as it truly is) : 명사의 존재 자체를 부정하는 전체부정'
+      - 'no ~ without : 이중부정 → ''관점이 있어야 비로소 있다''는 필요조건'
+    kind: mc
+  - sentence: 'Fashion is among the simplest and cheapest methods of self-expression: clothes can be inexpensively purchased while making it easy to convey notions of wealth, intellectual stature, relaxation or environmental consciousness, even if none of these is true.'
+    source: 2023 고3 11월 29번
+    prompt: none of these의 부정 범위에 유의하여 밑줄 부분(even if none of these is true)을 우리말로 해석하시오.
+    answer: 이러한 것들 중 어느 하나도 사실이 아닐지라도.
     vocab:
     - word: convey
-      meaning: 전달하다
+      meaning: 전달하다, 나타내다
     - word: stature
-      meaning: 위상, 지위
+      meaning: 지위, 위상
     - word: none
-      meaning: 어느 것도 ~않다(전체부정)
+      meaning: (그 중) 어느 것도 ~아니다
     solution:
-      cut: 패션은 가장 단순하고 저렴한 자기표현 방법 중 하나다 / 콜론(:) → 옷은 저렴하게 구입될 수 있다 / 부·지적 위상·여유·환경 의식 같은 관념을 전달하기 쉽게 하면서 / 이러한 것들 중 어느 하나도 사실이 아닐지라도(even if none of these is true).
+      cut: even if / none of these / is true
       wrong: 이러한 것들 중 일부만 사실이 아닐지라도.
-      wrong_why: none은 '일부'가 아니라 '어느 것도 ~않다'는 전체부정. 'these(이러한 관념들) 전부가 사실이 아니어도'로 범위가 전체에 걸린다.
-      author_msg: 옷은 실제 부·교양이 전혀 없어도 그런 인상을 '싸게' 살 수 있게 해 준다는 냉소적 논지.
+      wrong_why: none을 '일부는 아니다'로 옮긴 것. none of these는 '(집합 내) 어느 것도 ~아니다'라는 전체부정으로 예외를 남기지 않는다. '일부만 아니다'는 부분부정이 되어 부정 범위를 축소한 오역이다. 동사 is는 none을 단수 취급한 것.
+      author_msg: none of + 복수명사는 '그 중 하나도 ~아니다'라는 전체부정입니다. not all(부분부정)과 확실히 구분하세요.
       key_points:
-      - 'none of these : 전체부정(''어느 것도 ~아니다'') — 극성 (−).'
-      - 'even if : 양보(''~일지라도'')가 부정과 결합.'
-      - 'making it easy to convey : 가목적어 it — 진목적어는 to convey.'
-  - kind: short
-    sentence: Science is sometimes described as a winner-take-all contest, meaning that there are no rewards for being second or third.
-    source: 2024 고3 11월 38번
-    prompt: there are no rewards의 부정 범위에 유의하여 밑줄 부분을 우리말로 해석하시오.
-    answer: 2등이나 3등을 하는 것에 대해서는 아무런 보상도 없다는 것을 의미하면서.
+      - 'none : ''어느 것도 아니다''라는 (−) 전체부정어'
+      - '부정 범위 : these가 가리키는 항목 전부 (예외 없음)'
+      - '대비 : not all of these = 부분부정, none of these = 전체부정'
+    kind: short
+  - sentence: Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.
+    source: 2024 고3 9월 30번
+    prompt: no ~ at all의 극성과 강도를 살려 밑줄 부분(we often make snap judgments or no real judgments at all)을 우리말로 해석하시오.
+    answer: 우리는 흔히 성급한 판단을 내리거나 진정한 판단을 전혀 내리지 않는다.
     vocab:
-    - word: describe
-      meaning: 묘사하다, 설명하다
-    - word: contest
-      meaning: 경쟁, 겨루기
-    - word: no rewards
-      meaning: 아무런 보상도 없음(전체부정)
+    - word: subjective
+      meaning: 주관적인
+    - word: snap judgment
+      meaning: 성급한 판단, 즉흥적 판단
+    - word: at all
+      meaning: (부정과 함께) 전혀
     solution:
-      cut: 과학은 때때로 승자독식 경쟁으로 묘사된다 / meaning that ~ (분사구문) → 즉, 2등이나 3등을 하는 것에 대해서는 / 아무런 보상도 없다는 것을 의미하면서.
-      wrong: 2등이나 3등에게는 보상이 적다.
-      wrong_why: no rewards는 '적다'가 아니라 '전혀 없다'는 전체부정. no가 rewards 전체를 부정해 극성이 (−)로 확정된다.
-      author_msg: 1등만 전부를 가져가는 구조 — 2·3등의 몫은 '조금'이 아니라 '0'이라는 점을 강조.
+      cut: we often make snap judgments / or / no real judgments at all
+      wrong: 우리는 흔히 성급한 판단을 내리거나 진정한 판단을 조금 덜 내린다.
+      wrong_why: '''no + 명사''는 그 명사의 존재 자체를 부정하고 at all이 이를 강조해 ''전혀 ~하지 않는다''는 강한 전체부정이 된다. ''조금 덜''로 옮기면 (−) 극성과 부정 강도를 모두 약화시킨 오역이다.'
+      author_msg: no + 명사는 'not ~ any'와 같은 완전 부정이고, at all은 그 부정을 강화하는 장치입니다. '전혀'로 확실히 못 박으세요.
       key_points:
-      - 'no rewards : 명사 부정(전체부정, ''전혀 없다'') — 극성 (−).'
-      - 'meaning that ~ : 분사구문(''~을 의미하면서'').'
-      - 'for being second or third : 전치사 for + 동명사(보상의 ''대상'').'
+      - 'no real judgments : ''make''의 목적어 존재를 통째로 부정하는 전체부정'
+      - 'at all : 부정을 강화하는 극성 강조 (전혀)'
+      - '부정 범위 : real judgments 전체 → 성급한 판단과 대조되는 (−) 진술'
+    kind: short
+  - sentence: In his early studies on musical performance, Carl Seashore discovered that musicians only rarely play two equal notes in exactly the same way.
+    source: 2022 고3 9월 24번
+    prompt: only rarely의 극성을 살려 밑줄 부분(that musicians only rarely play two equal notes in exactly the same way)을 우리말로 해석하시오.
+    answer: 음악가들이 두 개의 같은 음을 정확히 똑같은 방식으로 연주하는 일은 극히 드물다는 것을.
+    vocab:
+    - word: performance
+      meaning: 연주, 수행
+    - word: note
+      meaning: 음, 음표
+    - word: rarely
+      meaning: 좀처럼 ~않다, 드물게
+    solution:
+      cut: musicians / only rarely play / two equal notes / in exactly the same way
+      wrong: 음악가들이 두 개의 같은 음을 정확히 똑같은 방식으로 오직 드물게 연주한다는 것을.
+      wrong_why: rarely는 (−) 극성의 빈도부정어이고 only는 이를 강조해 '극히 드물다(거의 하지 않는다)'가 된다. '오직 드물게 연주한다'는 행위를 긍정하는 것처럼 읽혀 부정 의미가 흐려진 오역이다.
+      author_msg: only rarely = '극히 드물게 = 거의 ~않는다'로 못 박으세요. rarely 자체가 준부정어라 별도의 not이 필요 없습니다.
+      key_points:
+      - 'rarely : not 없이 문장을 (−)로 만드는 빈도부정 부사'
+      - 'only : rarely의 부정 정도를 강화 (극히 드물게)'
+      - '부정 범위 : ''play ~ in exactly the same way'' 전체 → 거의 일어나지 않음'
+    kind: short
   comparison:
   - kind: mc
-    sentence: Free recall tests, in which students need to recall as much as they can remember without prompting, tend to result in better retention than cued recall tests, in which students are given hints about what they need to remember.
-    source: 2024 고3 6월 29번
-    prompt: better ~ than 비교 구문에 유의하여 알맞은 해석을 고르시오.
+    sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
+    source: 2024 고3 9월 40번
+    prompt: superior to 비교 구문에 유의하여 알맞은 해석을 고르시오.
     options:
-    - 학생들이 자유롭게 떠올리는 시험은, 힌트가 주어지는 단서 회상 시험만큼 기억 유지에 좋은 결과를 내지는 못하는 경향이 있다.
-    - 학생들이 어떤 유도도 없이 기억나는 만큼 떠올려야 하는 자유 회상 시험은, 기억해야 할 것에 대한 힌트가 주어지는 단서 회상 시험보다 더 나은 기억 유지 결과를 내는 경향이 있다.
+    - 한 번에 한 단어로만 의사소통할 수 있는 어린아이는, 다른 어떤 동물이 사용하는 체계보다 훨씬 열등한 의사소통 체계를 사용한다.
+    - 한 번에 한 단어로만 의사소통할 수 있는 어린아이조차, 다른 어떤 동물이 사용하는 그 어떤 체계보다 무한히 우월한 의사소통 체계를 사용한다.
     answer_index: 1
     vocab:
-    - word: recall
-      meaning: 떠올리다, 회상
-    - word: retention
-      meaning: 기억 유지, 보유
-    - word: prompting
-      meaning: 유도, 자극
+    - word: superior to
+      meaning: ~보다 우월한
+    - word: infinitely
+      meaning: 무한히
+    - word: utilize
+      meaning: 사용하다
     solution:
-      cut: 자유 회상 시험은 / [유도 없이 기억나는 만큼 떠올려야 하는] / 내는 경향이 있다 / [단서 회상 시험보다 / 더 나은] 기억 유지를 / [기억할 것의 힌트가 주어지는].
-      wrong: 자유 회상 시험이 단서 회상 시험만큼 좋지는 못하다.
-      wrong_why: better A than B = 'B보다 더 나은 A'(우등 비교). 자유 회상 시험이 '더 나은' 쪽이다. 열등/동등으로 읽으면 우열이 뒤집힌다. 비교 대상은 '자유 회상 시험' ↔ '단서 회상 시험'.
-      author_msg: than 앞뒤에 놓인 두 시험을 먼저 찾고, 어느 쪽이 우등인지 better의 방향을 확정하라.
+      cut: '[한 번에 한 단어만 쓰는] 어린아이조차 / 사용한다 / [다른 어떤 동물이 쓰는 그 어떤 체계보다 / 무한히 우월한] 의사소통 체계를.'
+      wrong: 어린아이의 의사소통 체계는 다른 동물의 체계보다 훨씬 열등하다.
+      wrong_why: superior to A = 'A보다 우월한'(우등 비교). 아이의 체계가 '더 우월한' 쪽인데 열등으로 읽으면 우열이 정반대가 된다. 비교 대상은 '아이가 쓰는 의사소통 체계' ↔ '다른 동물이 쓰는 체계'.
+      author_msg: than 없이 to로 비교하는 라틴계 비교급이다. superior 뒤의 to를 than으로 바꿔 두 대상을 짚어라.
       key_points:
-      - 'better A than B : B보다 더 나은 A(우등 비교).'
-      - '비교 대상 : Free recall tests ↔ cued recall tests.'
-      - 'in which ~ : 각 시험을 부연하는 관계사절, 비교의 주역이 아님.'
+      - 'A superior to B : A가 B보다 우월한(than 대신 to로 연결).'
+      - '비교 대상 : a system for communication(아이의 체계) ↔ any system utilized by any other animal.'
+      - 'infinitely : 비교급을 강조하는 ''무한히, 훨씬''.'
   - kind: mc
+    sentence: You found it only slightly difficult and conclude that you were climbing quite well, when in fact you were climbing no better than usual.
+    source: 2025 고3 6월 21번
+    prompt: no better than에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 사실은 평소보다 조금도 더 잘 오르고 있지 않았다.
+    - 사실은 평소보다 훨씬 더 잘 오르고 있었다.
+    answer_index: 0
+    vocab:
+    - word: no better than
+      meaning: ~보다 조금도 낫지 않은, ~만큼밖에 안 되는
+    - word: conclude
+      meaning: 결론짓다
+    - word: in fact
+      meaning: 사실은, 실제로는
+    solution:
+      cut: 당신은 결론짓지만 / [자신이 꽤 잘 오르고 있다고] / 사실은 / 당신은 오르고 있었다 / [평소보다 조금도 낫지 않게].
+      wrong: 사실은 평소보다 훨씬 더 잘 오르고 있었다.
+      wrong_why: no better than A = 'A보다 조금도 낫지 않은, A만큼밖에 안 되는'. '훨씬 더 잘'로 읽으면 의미가 정반대. 비교 대상은 '실제 오르던 실력' ↔ 'usual(평소의 실력)'.
+      author_msg: no better than은 우등을 부정해 '기껏해야 그 수준'으로 끌어내린다. 잘 오른다는 착각과 대비되는 실제 상태다.
+      key_points:
+      - 'no better than A : A보다 조금도 낫지 않은(= A만큼밖에 안 되는).'
+      - '비교 대상 : 실제 오르던 실력 ↔ usual(평소의 실력).'
+      - 'when in fact ~ : 앞의 ''잘 오른다''는 착각과 사실을 대비.'
+  - kind: mc
+    sentence: A company may devise a family emergency leave plan that allows employees the opportunity to be away from the company for a period of no longer than three hours, and no more than once a month, for illness in the employee's immediate family.
+    source: 2023 고3 11월 39번
+    prompt: no longer than / no more than에 유의하여 알맞은 해석을 고르시오.
+    options:
+    - 세 시간보다 더 긴 기간 동안, 그리고 한 달에 한 번보다 더 자주 회사를 떠나 있을 기회를 허용한다.
+    - 세 시간을 넘지 않는 기간 동안, 그리고 한 달에 한 번을 넘지 않게 회사를 떠나 있을 기회를 허용한다.
+    answer_index: 1
+    vocab:
+    - word: no longer than
+      meaning: ~을 넘지 않는(최대 ~)
+    - word: no more than
+      meaning: ~을 넘지 않는(많아야 ~)
+    - word: immediate family
+      meaning: 직계 가족
+    solution:
+      cut: 회사는 고안할 수 있다 / 가족 비상 휴가 제도를 / [직원에게 기회를 허용하는 / 회사를 떠나 있을 / [세 시간을 넘지 않는 기간 동안, / 그리고 한 달에 한 번을 넘지 않게]].
+      wrong: 세 시간보다 더 긴 기간 동안, 그리고 한 달에 한 번보다 더 자주 자리를 비울 수 있게 허용한다.
+      wrong_why: no longer than / no more than은 둘 다 상한을 긋는 표현('최대 ~, 많아야 ~')인데, '더 길게/더 자주'로 읽으면 상한을 하한처럼 뒤집게 된다.
+      author_msg: no longer than과 no more than이 각각 무엇의 상한인지 비교 대상을 확인하라. 기간의 상한과 빈도의 상한이다.
+      key_points:
+      - 'no longer than three hours : 세 시간을 넘지 않는(최대 세 시간).'
+      - 'no more than once a month : 한 달에 한 번을 넘지 않는(많아야 한 달 한 번).'
+      - '비교 대상 : 자리를 비우는 기간 ↔ three hours / 그 빈도 ↔ once a month.'
+  - kind: short
     sentence: There is no single, universal or authoritative version that makes sense, other than as a theoretical construct.
     source: 2022 고3 6월 21번
-    prompt: other than에 유의하여 알맞은 해석을 고르시오.
-    options:
-    - 이론적 구성 개념을 포함하여, 말이 되는 단일하고 보편적이거나 권위 있는 판본이 존재한다.
-    - 이론적 구성 개념으로서를 제외하고는, 말이 되는 단일하고 보편적이거나 권위 있는 판본은 존재하지 않는다.
-    answer_index: 1
+    prompt: other than에 유의하여 해석하시오.
+    answer: 이론적 구성 개념으로서를 제외하고는, 말이 되는 단일하고 보편적이거나 권위 있는 판본은 존재하지 않는다.
     vocab:
     - word: other than
       meaning: ~외에는, ~을 제외하고는
@@ -113,33 +224,54 @@ practice:
     solution:
       cut: 존재하지 않는다 / [단일하고 보편적이거나 권위 있는] 판본은 / [말이 되는] / 이론적 구성 개념으로서를 제외하고는.
       wrong: 이론적 구성 개념을 포함하여 그런 판본이 존재한다.
-      wrong_why: other than A = 'A를 제외하고는'(A 외에는). 문장은 no ~ version으로 전체 부정이며, 유일한 예외가 '이론적 구성 개념으로서'다. 포함으로 읽으면 정반대. 비교(대조) 대상은 '실재하는 판본' ↔ '이론적 구성 개념으로서의 판본'.
+      wrong_why: other than A = 'A를 제외하고는'(A 외에는). 문장은 no ~ version의 전체 부정이며 유일한 예외가 '이론적 구성 개념으로서'다. 포함으로 읽으면 정반대. 비교(대조) 대상은 '실재하는 판본' ↔ '이론적 구성 개념으로서의 판본'.
       author_msg: other than은 '그것 외에는 없다'는 예외 표시다. no와 함께 '오직 그것만이 예외'라는 골격을 잡아라.
       key_points:
       - 'other than A : A를 제외하고는, A 외에는.'
       - 'no ~ version ... other than B : B 말고는 그런 판본이 없다(B가 유일 예외).'
       - '비교(대조) 대상 : 실재하는 판본 ↔ 이론적 구성 개념으로서의 판본.'
   - kind: short
-    sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
-    source: 2024 고3 9월 40번
-    prompt: superior to에 유의하여 해석하시오.
-    answer: 한 번에 한 단어로만 의사소통할 수 있는 어린아이조차, 다른 어떤 동물이 사용하는 그 어떤 체계보다 무한히 우월한 의사소통 체계를 사용한다.
+    sentence: But, once an organized game is played with officials, most athletes will not admit to the same fouls or violations as the end goal of winning is more important than expressing concern for competitors.
+    source: 2026 고3 11월 30번
+    prompt: more ~ than에 유의하여 해석하시오.
+    answer: 하지만 일단 심판이 있는 조직화된 경기가 벌어지면, 이기는 것이라는 최종 목표가 경쟁자에 대한 염려를 표현하는 것보다 더 중요하기 때문에, 대부분의 운동선수는 같은 반칙이나 위반을 인정하지 않으려 할 것이다.
     vocab:
-    - word: superior to
-      meaning: ~보다 우월한
-    - word: infinitely
-      meaning: 무한히
-    - word: utilize
-      meaning: 사용하다
+    - word: more important than
+      meaning: ~보다 더 중요한
+    - word: foul
+      meaning: 반칙
+    - word: violation
+      meaning: 위반
     solution:
-      cut: '[한 번에 한 단어만 쓰는] 어린아이조차 / 사용한다 / [다른 어떤 동물이 쓰는 그 어떤 체계보다 / 무한히 우월한] 의사소통 체계를.'
-      wrong: 어린아이의 의사소통 체계는 다른 동물의 체계보다 열등하다.
-      wrong_why: superior to A = 'A보다 우월한'(우등). 열등으로 읽으면 정반대. 비교 대상은 '아이의 체계' ↔ '다른 동물의 체계'.
-      author_msg: than 없이 to로 비교하는 라틴계 비교급이다. superior 다음의 to를 than으로 바꿔 두 대상을 짚어라.
+      cut: 하지만 / [일단 심판이 있는 조직화된 경기가 벌어지면] / 대부분의 운동선수는 인정하지 않으려 할 것이다 / 같은 반칙이나 위반을 / [이기는 최종 목표가 / 더 중요하기 때문에 / 경쟁자에 대한 염려를 표현하는 것보다].
+      wrong: 경쟁자에 대한 염려를 표현하는 것이 이기는 것보다 더 중요하다.
+      wrong_why: more A than B = 'B보다 더 A한'으로 than 앞이 우위에 놓인다. 앞뒤 대상을 바꿔 읽으면 무엇이 더 중요한지가 뒤집힌다. 비교 대상은 '이기는 것' ↔ '경쟁자에 대한 염려의 표현'. (as는 이유의 접속사)
+      author_msg: more ~ than에서 than 앞이 우등이다. than 뒤의 대상과 짝지어 방향을 확정하라.
       key_points:
-      - 'A superior to B : A가 B보다 우월한(than 대신 to).'
-      - '비교 대상 : 아이의 언어 체계 ↔ 다른 동물의 체계.'
-      - 'who ~ : a small child를 꾸미는 삽입 관계사절.'
+      - 'more A than B : B보다 더 A한(than 앞이 우위).'
+      - '비교 대상 : the end goal of winning(이기는 것) ↔ expressing concern for competitors.'
+      - 'as ~ : 여기서는 ''~때문에''라는 이유의 접속사.'
+  - kind: short
+    sentence: By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.
+    source: 2022 고3 6월 35번
+    prompt: more likely ~ than에 유의하여 해석하시오.
+    answer: 상대에 관한 정보를 수집하는 데 약간의 추가 시간을 씀으로써, 그 동물은 그런 정보 없이 결정을 내리는 경우보다 자신이 이길 가능성을 극대화하는 결정에 도달할 가능성이 더 높다.
+    vocab:
+    - word: be more likely to
+      meaning: ~할 가능성이 더 높다
+    - word: opponent
+      meaning: 상대
+    - word: maximize
+      meaning: 극대화하다
+    solution:
+      cut: '[상대에 관한 정보를 수집하는 데 약간의 추가 시간을 씀으로써] / 그 동물은 가능성이 더 높다 / [이길 가능성을 극대화하는] 결정에 도달할 / [그런 정보 없이 결정을 내리는 경우보다].'
+      wrong: 정보 없이 결정하는 경우가 정보를 수집한 경우보다 이길 가능성을 더 높인다.
+      wrong_why: more likely ~ than 구문에서 than 앞(정보를 수집한 경우)이 가능성이 더 높은 쪽이다. 두 상황을 바꿔 읽으면 비교 방향이 정반대가 된다. 비교 대상은 '정보를 수집한 경우' ↔ '정보 없이 결정하는 경우'.
+      author_msg: than 뒤가 명사가 아니라 if 조건절로 나온 형태다. 정보 있음 vs 없음, 두 상황을 비교 대상으로 잡아라.
+      key_points:
+      - 'be more likely to ... than ~ : ~보다 …할 가능성이 더 높다.'
+      - '비교 대상 : 정보를 수집한 경우 ↔ if it takes a decision without such information(정보 없이 결정하는 경우).'
+      - 'than + if절 : 비교 대상이 조건절 형태로 제시됨.'
   wh_clause:
   - kind: mc
     sentence: Indeed, there are examples of particular attractions that have limited capacity and where there is actually no room for more visitors.
