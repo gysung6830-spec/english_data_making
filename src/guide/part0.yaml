@@ -48,19 +48,7 @@ methods:
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
-  - step: "보너스 A"
-    title: "패러프레이징 — 같은 뜻, 다른 말로 바꾸기"
-    idea: "평가원은 지문의 표현을 '다른 말로 바꾼' 선지를 정답으로 쓴다. 문장을 읽고 '내가 다른 영어로 바꿔 말하면?'을 연습하면 정답 선지가 보인다."
-    rule: "① 동의어 치환(rise↔increase) · ② 구조 바꾸기(능동↔수동, 명사화↔동사화) · ③ 부정·비교를 반대로 뒤집어 같은 뜻 만들기(A>B ↔ B<A) · ④ 핵심 명제는 반드시 유지"
-    ms_point: "'이런 내용'(구체화)도 결국 패러프레이즈다 — 단, 그 문장 안 정보만 써서 바꿔야 한다(지문 전체를 끌어오면 안 됨)."
-    demo:
-      sentence: "Rising incomes inevitably lead to increases in motorization."
-      bracketed: "Rising incomes inevitably lead to increases in motorization."
-      skeleton_en: "Rising incomes → more motorization"
-      skeleton_ko: "소득 증가 → 자동차화 증가 (원인 → 결과)"
-      full_ko: "패러프레이즈 예: As people earn more, car ownership and use are bound to increase. (동의어·구조를 바꿨지만 '소득↑ → 차↑'라는 핵심 명제는 그대로.)"
-
-  - step: "보너스 B"
+  - step: "보너스"
     title: "모르는 단어는 '유추'로 뚫는다"
     idea: "단어 뜻을 다 몰라도 된다. 문장의 신호로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다."
     rule: "① 긍정/부정 신호로 극성 잡기 · ② 대조(but·unlike) → 반대 뜻 · ③ 재진술(즉·that is)·예시(such as) → 옆에 쉬운 말 · ④ 병렬(A and B) → 같은 부류 · ⑤ 접두사·어근(dis-·un-·-less=부정, re-=다시)"

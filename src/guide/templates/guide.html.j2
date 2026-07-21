@@ -165,9 +165,6 @@
     <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}
       <span class="sw-note">(이 문장만으로 도출)</span></div>
     {% endif %}
-    {% if card.body.paraphrase %}
-    <div class="para-line"><span class="para-tag">🔄 패러프레이즈</span>{{ card.body.paraphrase }}</div>
-    {% endif %}
     {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
     <div class="tip-line"><b>핵심 ·</b> {{ chapter.tip }}</div>
   </div>
@@ -236,9 +233,6 @@
     {% if card.body.real_meaning %}
     <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.real_meaning }}
       <span class="sw-note">(이 문장만으로 도출)</span></div>
-    {% endif %}
-    {% if card.body.paraphrase %}
-    <div class="para-line"><span class="para-tag">🔄 패러프레이즈</span>{{ card.body.paraphrase }}</div>
     {% endif %}
     {% if card.body.self_check %}
     <div class="self-check">✅ 셀프체크 · {{ card.body.self_check }}</div>

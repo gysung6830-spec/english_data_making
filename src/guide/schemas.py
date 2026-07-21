@@ -19,8 +19,6 @@ class CardBody(BaseModel):
     correct: str = Field(description="정답 — 문맥·구조를 반영한 올바른 해석 한 줄")
     so_what: str = Field(default="", description="해석하면 이런 내용 — '이 문장 하나만으로' 도출되는 "
                          "구체화. 앞뒤 지문·필자 의도 추측 금지. 지시어 대상이 문장 밖이면 언급하지 말 것")
-    paraphrase: str = Field(default="", description="같은 뜻을 다른 영어로 바꿔 쓴 문장(패러프레이즈). "
-                            "문장 내부 정보만 사용, 핵심 명제는 유지")
     subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
     action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
@@ -115,8 +113,6 @@ class SyntaxBody(BaseModel):
     full_ko: str = Field(description="수식어를 연결어로 붙인 자연스러운 완성 해석")
     real_meaning: str = Field(default="", description="해석하면 이런 내용 — '이 문장 하나만으로' "
                               "도출되는 구체화. 앞뒤 지문·필자 의도 추측 금지. 지시어 대상이 문장 밖이면 언급 말 것")
-    paraphrase: str = Field(default="", description="같은 뜻을 다른 영어로 바꿔 쓴 문장(패러프레이즈). "
-                            "문장 내부 정보만 사용")
     self_check: str = Field(default="", description="학생이 직접 괄호쳐 볼 짧은 연습 한 줄(선택)")
 
 

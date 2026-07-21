@@ -49,7 +49,7 @@ def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
     return CodeCard(
         code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why, correct=correct,
-                      so_what=so_what, paraphrase=para, subject=subj, action=act),
+                      so_what=so_what, subject=subj, action=act),
     )
 
 
@@ -61,7 +61,7 @@ def _syn(structure, sentence, sk_en, sk_ko, mods, full, real, check="",
         sentence=sentence, structure=structure, source=src, difficulty=dif,
         body=SyntaxBody(skeleton_en=sk_en, skeleton_ko=sk_ko, subject=subj, action=act,
                         modifiers=[Modifier(**m) for m in mods], full_ko=full,
-                        real_meaning=real, paraphrase=para, self_check=check),
+                        real_meaning=real, self_check=check),
     )
 
 
