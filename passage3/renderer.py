@@ -63,6 +63,29 @@ def _passage_head(idx: int, p: Passage) -> str:
     return "\n".join(parts)
 
 
+def _vocab_box(p: Passage, blank_slots: int = 8) -> str:
+    """지문 하단 어휘 리스트 박스. 어휘가 있으면 채우고, 없으면 빈 칸."""
+    items = []
+    if p.vocab:
+        for v in p.vocab:
+            items.append(
+                '<div class="vocab-item">'
+                f'<span class="w">{escape(v.word)}</span>'
+                f'<span class="m">{escape(v.meaning)}</span>'
+                '</div>'
+            )
+    else:
+        # 빈 박스: 직접 적을 수 있는 밑줄 칸
+        for _ in range(blank_slots):
+            items.append('<div class="vocab-item blank"></div>')
+    return (
+        '<div class="vocab">'
+        '<div class="vocab-title">핵심 어휘</div>'
+        f'<div class="vocab-grid">{"".join(items)}</div>'
+        '</div>'
+    )
+
+
 def render_format_a(passages: List[Passage], header_text: str = "", theme: str = "") -> str:
     """한줄해석: 영어 문장 + 바로 아래 회색박스 한글해석(같은 번호 표기)."""
     css = get_css(theme)
@@ -84,6 +107,7 @@ def render_format_a(passages: List[Passage], header_text: str = "", theme: str =
                     '</span></div>'
                 )
             chunk.append(f'<div class="sent">{en}{ko}</div>')
+        chunk.append(_vocab_box(p))
         chunk.append("</div>")
         blocks.append("\n".join(chunk))
     return _doc("\n".join(blocks), css, header_text)
@@ -102,6 +126,7 @@ def render_format_c(passages: List[Passage], header_text: str = "", theme: str =
                 f'<span class="num">{num}</span>{escape(s.en)}'
                 '</div></div>'
             )
+        chunk.append(_vocab_box(p))
         chunk.append("</div>")
         blocks.append("\n".join(chunk))
     return _doc("\n".join(blocks), css, header_text)
@@ -123,6 +148,7 @@ def render_format_b(passages: List[Passage], header_text: str = "", theme: str =
                 '</tr>'
             )
         chunk.append('</tbody></table>')
+        chunk.append(_vocab_box(p))
         chunk.append("</div>")
         blocks.append("\n".join(chunk))
     return _doc("\n".join(blocks), css, header_text)

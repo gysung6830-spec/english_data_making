@@ -19,12 +19,14 @@ try:
     from .pdfparse import pdf_to_passages
     from .renderer import render_format_a, render_format_b, render_format_c
     from .translator import translate_missing
+    from .vocab import extract_vocab
 except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from parser import Passage, split_passages
     from pdfparse import pdf_to_passages
     from renderer import render_format_a, render_format_b, render_format_c
     from translator import translate_missing
+    from vocab import extract_vocab
 
 # ── auto-fit 상수 ─────────────────────────────────────────────
 # A4 @96dpi
@@ -266,6 +268,10 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
         passages = translate_missing(passages, api_key=api_key)
     else:
         print("[3/4] 번역 생략")
+
+    # 하단 어휘 리스트(키 있으면 자동 추출, 없으면 빈 박스)
+    print("      어휘 리스트 추출(키 있으면)")
+    passages = extract_vocab(passages, api_key=api_key)
 
     doc = safe_filename(docname or input_path.stem)
 

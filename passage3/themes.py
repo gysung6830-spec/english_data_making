@@ -49,6 +49,44 @@ AUTOFIT_RULES = """
 .passage.compact2 .ko-box { margin-top:5px; padding:5px 9px; }
 .passage.compact2 td { padding:6px 10px 6px 0; font-size:12px; }
 .passage.compact2 .p-head { margin-bottom:11px; }
+.passage.compact  .vocab { margin-top:12px; padding:8px 12px; }
+.passage.compact  .vocab-item { font-size:10.5px; }
+.passage.compact2 .vocab { margin-top:9px; padding:6px 10px; }
+.passage.compact2 .vocab-item { font-size:10px; }
+"""
+
+# ── 하단 어휘 리스트 박스 (모든 테마 공통) ────────────────────
+VOCAB_RULES = """
+.vocab {
+  margin-top: 18px;
+  border: 1px solid #d9d9dd;
+  border-radius: 6px;
+  padding: 10px 14px;
+  break-inside: avoid;
+}
+.vocab-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #6e6e73;
+  letter-spacing: .3px;
+  margin-bottom: 8px;
+}
+.vocab-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px 22px;
+}
+.vocab-item {
+  font-size: 11px;
+  line-height: 1.45;
+  break-inside: avoid;
+  display: flex;
+  gap: 7px;
+  align-items: baseline;
+}
+.vocab-item .w { font-weight: 700; color: #1a1a1a; white-space: nowrap; }
+.vocab-item .m { color: #555558; }
+.vocab-item.blank { display: block; border-bottom: 1px dotted #c4c4c8; height: 15px; }
 """
 
 
@@ -127,7 +165,7 @@ table.two-col td {{
 table.two-col tr.sent:last-child td {{ border-bottom: none; }}
 table.two-col td.col-en {{ width: 62%; color: #1a1a1a; padding-right: 20px; }}
 table.two-col td.col-ko {{ width: 38%; color: #555558; font-size: 11px; }}
-{AUTOFIT_RULES}"""
+{AUTOFIT_RULES}{VOCAB_RULES}"""
 
 
 def _textbook_css() -> str:
@@ -160,7 +198,7 @@ table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:11px 14px 11px 0; border-bottom:1px solid #cfd6e0; font-size:13px; line-height:1.62; }}
 table.two-col td.col-en {{ width:62%; padding-right:20px; }}
 table.two-col td.col-ko {{ width:38%; color:#3a4048; font-size:11px; }}
-{AUTOFIT_RULES}"""
+{AUTOFIT_RULES}{VOCAB_RULES}"""
 
 
 def _middle_css() -> str:
@@ -193,7 +231,7 @@ table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:12px 14px 12px 0; border-bottom:2px dashed #ffe0c2; font-size:14px; line-height:1.68; }}
 table.two-col td.col-en {{ width:60%; padding-right:20px; }}
 table.two-col td.col-ko {{ width:40%; color:#555; font-size:11.5px; }}
-{AUTOFIT_RULES}"""
+{AUTOFIT_RULES}{VOCAB_RULES}"""
 
 
 _THEMES = {

@@ -20,10 +20,17 @@ class Sentence:
 
 
 @dataclass
+class Vocab:
+    word: str        # 영어 단어/표현
+    meaning: str     # 한글 뜻(문맥상)
+
+
+@dataclass
 class Passage:
     label: str                              # "[고3] 2026년 5월 - 26번"
     title: str                              # 제목/주제
     sentences: List[Sentence] = field(default_factory=list)
+    vocab: List[Vocab] = field(default_factory=list)  # 하단 어휘 리스트
 
 
 # ── 정규식/상수 ───────────────────────────────────────────────

@@ -19,10 +19,12 @@ try:
     from .main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
     from .renderer import render_format_a, render_format_b, render_format_c
     from .translator import translate_missing
+    from .vocab import extract_vocab
 except ImportError:  # python webapp.py 로 직접 실행할 때
     from main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
     from renderer import render_format_a, render_format_b, render_format_c
     from translator import translate_missing
+    from vocab import extract_vocab
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("APP_SECRET", "passage3-dev-secret")
@@ -202,6 +204,12 @@ def generate():
                 passages = translate_missing(passages, api_key=api_key)
             except Exception:
                 traceback.print_exc()  # 번역 실패는 치명적이지 않음
+
+        # 하단 어휘 리스트(키 있으면 자동 추출)
+        try:
+            passages = extract_vocab(passages, api_key=api_key)
+        except Exception:
+            traceback.print_exc()  # 어휘 추출 실패도 치명적이지 않음
 
         renderers = {
             "a": render_format_a,
