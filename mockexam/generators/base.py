@@ -161,8 +161,6 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
             q.meta["conditions"] = list(out.conditions)
         if out.blank_ko:
             q.meta["blank_ko"] = out.blank_ko
-        if out.prompt_extra:
-            q.stem = f"{stem}\n{out.prompt_extra}"
         notes = []
         answers = []
         for a in out.answers:
