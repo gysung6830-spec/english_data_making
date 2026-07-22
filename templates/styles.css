@@ -26,23 +26,23 @@ body {
 }
 
 :root {
-  /* 5색 카테고리 팔레트 (동사=파랑 · 형용사부사=초록 · 관계사대명사=보라 · 연결사=노랑 · 특수구문=빨강) */
-  --c-blue:   #3b5bdb;
-  --c-green:  #2f9e44;
-  --c-purple: #6741d9;
-  --c-amber:  #e0850a;
-  --c-red:    #e03131;
+  /* 5색 카테고리 팔레트 (채도 낮춘 톤다운 버전) */
+  --c-blue:   #4d6091;
+  --c-green:  #4e8a63;
+  --c-purple: #6d5f96;
+  --c-amber:  #bd8a45;
+  --c-red:    #c05d55;
 
   --sum:   var(--c-red);      /* 주제 */
   --lit:   var(--c-blue);     /* 직독직해(동사·어형) */
   --gram:  var(--c-blue);     /* 문법 */
-  --gram-bg: #edf2ff;
+  --gram-bg: #eef1f7;
   --voc:   var(--c-green);    /* 어휘(유의어·반의어) */
-  --voc-bg: #ebfbee;
+  --voc-bg: #eef4ef;
   --struc: var(--c-amber);    /* 구조 분석(흐름) */
-  --struc-bg: #fff6e6;
+  --struc-bg: #f7f2e8;
   --exam:  var(--c-purple);   /* 출제 포인트(어법·지칭) */
-  --exam-bg: #f3f0ff;
+  --exam-bg: #f2f0f6;
   --esum:  var(--c-blue);     /* 핵심 단어 영어 요약문 */
   --muted: #6b7280;
   --line: #e5e7eb;
@@ -108,7 +108,7 @@ body {
 
 /* ---------- ④ 핵심 단어 영어 요약문 ---------- */
 .esum-box {
-  background: #eef2ff; border-left: 3px solid var(--esum);
+  background: #eef1f7; border-left: 3px solid var(--esum);
   padding: 9px 12px; border-radius: 0 5px 5px 0;
   font-size: 10.5px; line-height: 1.6;
 }
@@ -222,10 +222,10 @@ table.lit2 td {
 .lit-line .sl { color: #cbd5e1; padding: 0 3px; font-weight: 700; }
 .lit-line .ck { font-weight: 600; }
 
-/* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 */
-.ck0 { color: #1d4ed8; } .ck1 { color: #15803d; } .ck2 { color: #b45309; }
-.ck3 { color: #7c3aed; } .ck4 { color: #be123c; } .ck5 { color: #0f766e; }
-.ck6 { color: #a16207; } .ck7 { color: #4338ca; }
+/* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 (채도 낮춘 톤다운) */
+.ck0 { color: #4d6091; } .ck1 { color: #4e8a63; } .ck2 { color: #a5763a; }
+.ck3 { color: #6d5f96; } .ck4 { color: #c05d55; } .ck5 { color: #3f7d76; }
+.ck6 { color: #8f7a3f; } .ck7 { color: #565f9c; }
 
 /* 직독직해에 통합된 핵심 문법 (문장별) */
 .lit-gram { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #f0ddc0; }
