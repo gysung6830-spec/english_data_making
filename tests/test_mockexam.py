@@ -292,6 +292,32 @@ def test_full_llm_path_runs_without_error():
         assert q.answer
 
 
+def test_generation_selfcheck_rejects_bad_structure():
+    """생성 단계 자가검증: 구조·<보기>·정답 누락이면 ValueError(→ 자동 재작성 유발)."""
+    from mockexam.core.models import Item
+    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut
+    from mockexam.generators.base import _validate_choice_out, _validate_essay_out
+
+    # 어법 유형인데 지문에 밑줄(①~⑤)이 없으면 거부
+    it_g = Item(no=1, section="choice", type="grammar", score=3, underlines=5)
+    bad = ChoiceQuestionOut(passage="No underlines here.",
+                            choices=list("abcde"), answer_index=3, explanation="e")
+    with pytest.raises(ValueError):
+        _validate_choice_out(it_g, bad)
+    good = ChoiceQuestionOut(
+        passage="①<u>a</u> ②<u>b</u> ③<u>c</u> ④<u>d</u> ⑤<u>e</u>.",
+        choices=list("abcde"), answer_index=3, explanation="e")
+    _validate_choice_out(it_g, good)  # 통과(예외 없음)
+
+    # 배열영작 서술형인데 <보기> 비면 거부
+    it_e = Item(no=1, section="essay", type="word_arrange", score=4)
+    bad_e = EssayQuestionOut(passage="p", bogi=[], answers=["x"])
+    with pytest.raises(ValueError):
+        _validate_essay_out(it_e, bad_e)
+    good_e = EssayQuestionOut(passage="p", bogi=["w1", "w2"], answers=["x"])
+    _validate_essay_out(it_e, good_e)  # 통과
+
+
 def test_answer_index_range_validated():
     from pydantic import ValidationError
     from mockexam.core.llm import ChoiceQuestionOut

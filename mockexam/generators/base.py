@@ -53,6 +53,11 @@ class GenContext:
         return style.get(item_type) or fallback
 
 
+# 서술형 중 <보기> 단어상자가 반드시 있어야 하는 유형 / 영작(우리말) 유형
+_ESSAY_BOGI = {"dialogue_arrange_inflect", "word_arrange",
+               "arrange_and_translate", "blank_choose_no_change", "chart_fix_and_arrange"}
+_ESSAY_KO = {"dialogue_arrange_inflect", "arrange_and_translate"}
+
 Builder = Callable[[Item, Passage, PassageAnalysis, GenContext], Question]
 REGISTRY: dict[str, Builder] = {}
 
@@ -90,6 +95,37 @@ def underline_passage(text: str, n: int) -> str:
     return " ".join(out)
 
 
+def _validate_choice_out(item: Item, out: Any) -> None:
+    """생성 직후(같은 호출 안에서) 구조·정답을 자가검증 → 실패 시 자동 재작성.
+
+    별도 검수 패스 없이도 '밑줄/빈칸 누락·정답 개수 이상'을 생성 단계에서 잡는다.
+    """
+    from ..verify.verifier import structural_issue  # 지연 임포트(순환 방지)
+    tmp = Question(no=item.no, section="choice", type=item.type, score=item.score,
+                   stem="", passage_id="", difficulty="mid",
+                   underlines=item.underlines, passage_text=out.passage,
+                   choices=make_choices(out.choices))
+    issue = structural_issue(tmp)
+    if issue:
+        raise ValueError(f"지문 구조 오류: {issue}")
+
+
+def _validate_essay_out(item: Item, out: Any) -> None:
+    """서술형 생성 직후 자가검증(<보기>·우리말·정답·구조 누락)."""
+    from ..verify.verifier import structural_issue  # 지연 임포트
+    if item.type in _ESSAY_BOGI and not out.bogi:
+        raise ValueError("<보기> 단어 상자(bogi)가 비어 있습니다. 유형상 반드시 채워야 합니다.")
+    if item.type in _ESSAY_KO and not (out.blank_ko or "").strip():
+        raise ValueError("영작할 우리말(blank_ko)이 비어 있습니다.")
+    if not out.answers:
+        raise ValueError("정답(answers)이 비어 있습니다.")
+    tmp = Question(no=item.no, section="essay", type=item.type, score=item.score,
+                   stem="", passage_id="", difficulty="mid", passage_text=out.passage)
+    issue = structural_issue(tmp)
+    if issue:
+        raise ValueError(f"지문 구조 오류: {issue}")
+
+
 def build_choice(item: Item, passage: Passage, ctx: GenContext,
                  stem: str, instruction: str,
                  mock_choices: list[str] | None = None,
@@ -112,11 +148,15 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         ul = (f"\n지문의 밑줄은 정확히 {item.underlines}개를 ①<u>..</u>~ 형식으로 표시하라."
               if item.underlines else "")
         prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}\n\n"
-                  f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라. "
+                  f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.\n"
+                  "[정답 유일성 자가검증] 출력 전에 스스로 다섯 선지를 하나씩 대입해 "
+                  "정답이 '오직 1개'만 성립하는지 확인하라. 두 개 이상 정답이 될 여지가 "
+                  "있으면 오답 선지를 확실히 틀리도록 고쳐서 유일 정답이 되게 하라.\n"
                   "explanation 에는 정답 근거뿐 아니라 오답 ①~⑤ 각각이 왜 틀렸는지와 "
                   "핵심 문법·어휘·논지 포인트까지 자세히 써라.")
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
-        out = ctx.client.structured(sysp, prompt, ChoiceQuestionOut, max_retries=2)
+        out = ctx.client.structured(sysp, prompt, ChoiceQuestionOut, max_retries=2,
+                                    extra_validate=lambda o: _validate_choice_out(item, o))
         q.passage_text = out.passage
         q.choices = make_choices(out.choices)
         q.answer = LABELS[out.answer_index - 1]
@@ -154,7 +194,8 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                   "5) explanation 에 각 소문항의 정답 근거·어형변형/어순/문법 포인트·본문 "
                   "근거를 자세히 써라.")
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
-        out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2)
+        out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2,
+                                    extra_validate=lambda o: _validate_essay_out(item, o))
         q.passage_text = out.passage
         if out.bogi:
             q.meta["bogi"] = list(out.bogi)

@@ -39,13 +39,8 @@ UPLOAD_DIR = ROOT / "web_uploads"
 OUTPUT_DIR = ROOT / "output"
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
+# 생성 모델은 Sonnet 고정(빠르고 우수·합리적 비용). 바꾸려면 MOCK_MODEL 환경변수만.
 MODEL = os.environ.get("MOCK_MODEL", "claude-sonnet-5")
-# 웹앱 속도 선택 → 모델 매핑
-SPEED_MODEL = {
-    "fast": "claude-sonnet-5",             # 빠름·고품질(기본)
-    "turbo": "claude-haiku-4-5-20251001",  # 초고속·저비용
-    "best": "claude-opus-4-8",             # 최고품질·느림
-}
 
 ALLOWED = {".pdf", ".txt", ".md", ".hwp"} | IMAGE_EXTS
 
@@ -165,17 +160,6 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
-      <label>⑧ 생성 속도 <span class=hint>(빠를수록 저렴)</span></label>
-      <select name=speed>
-        <option value="fast" selected>빠름 · 고품질 (Sonnet, 권장)</option>
-        <option value="turbo">초고속 · 저비용 (Haiku)</option>
-        <option value="best">최고품질 · 느림 (Opus)</option>
-      </select>
-
-      <label class=chk><input type=checkbox name=review value=1>
-        정밀검수 (비용추가)</label>
-      <div class=hint>끄면 더 빠르고 저렴하지만 드물게 복수정답·애매 문항이 나올 수 있어요.</div>
-
       <div class=row>
         <button class=btn id=go type=submit>동형모의고사 만들기</button>
         <span class=hint>지문이 많으면 몇 분 걸릴 수 있어요.</span>
@@ -207,7 +191,7 @@ RESULT_HTML = """
     <h1>✅ 동형모의고사 생성 완료</h1>
     <div class=sub>{{ school }} {{ grade }}학년 · 난이도 {{ difficulty }}
       · 선택형 {{ n_choice }} / 서술형 {{ n_essay }} · {{ total }}점
-      {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}{{ ' · 정밀검수✓' if review and not mock else '' }}</div>
+      {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}
 
     <table>
       <tr><th>산출물</th><th>열기</th></tr>
@@ -301,7 +285,6 @@ def _unique_stem(stem: str) -> str:
 def generate():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
-    review = bool(request.form.get("review"))
     school = request.form.get("school") or "jinyang_hs"
     grade = int(request.form.get("grade") or 1)
     difficulty = request.form.get("difficulty") or "중"
@@ -331,15 +314,15 @@ def generate():
             "<div class=err>지원하는 지문 파일이 없습니다(PDF·JPG·PNG·TXT·HWP).</div><form id=f")
         return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
 
-    model = SPEED_MODEL.get(request.form.get("speed"), MODEL)
     client = None
     if not mock:
         from mockexam.core.llm import get_client
-        client = get_client(key, model)
+        client = get_client(key, MODEL)
 
     try:
+        # 생성 단계에서 구조·정답 자가검증을 강화했으므로 별도 검수 패스는 끈다.
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
-                            grade=grade, client=client, review_pass=review)
+                            grade=grade, client=client, review_pass=False)
         # 지문을 하나도 못 읽은 경우에만(스캔/HWP 등) 실행 가능한 안내를 준다.
         if res.num_passages == 0:
             raise RuntimeError(
@@ -399,7 +382,7 @@ def generate():
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
-        total=res.blueprint.total_score, mock=mock, review=review,
+        total=res.blueprint.total_score, mock=mock,
         downloads=downloads, verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
 
