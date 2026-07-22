@@ -29,6 +29,7 @@ class Token:
     hl: str | None = None              # 'y' | 'g' | None (노랑/연두 하이라이트)
     underline: bool = False            # 밑줄
     color: str | None = None           # 'red' | 'blue' | None (본문 글자색)
+    cat: str | None = None             # 어법 카테고리 키(cverb/cadj/crel/cconn/cspec)
 
     def __post_init__(self) -> None:
         if self.note_kind not in NOTE_KINDS:

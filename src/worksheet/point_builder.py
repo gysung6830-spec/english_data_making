@@ -11,6 +11,7 @@ from __future__ import annotations
 from markupsafe import escape
 
 from ..client import ClaudeClient
+from .grammar_cat import classify
 from .llm_schemas import PointBundle
 from .models import Point, Sentence
 
@@ -52,23 +53,26 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
     """어법 토큰(note_kind='red')을 ①②… 로 번호 매기고, 인라인 주석은 번호로 바꾼 뒤
     오른쪽 '어법 Point' 박스에 '① 어법이름'을 나열한다. (내용 TMI 없음)
 
-    - 인라인: 해당 어법 글자는 빨강, 주석은 '①' 빨강.
-    - 박스   : '① to부정사의 의미상의 주어' 처럼 원문자 번호와 어법명을 나열.
+    - 인라인: 어법 글자·번호를 그 어법의 '카테고리 색'으로(IMG_0195 색상 체계).
+    - 박스   : '① to부정사의 의미상의 주어' 처럼 원문자 번호와 어법명을 카테고리 색으로 나열.
     """
-    items: list[tuple[int, str, str | None]] = []
+    items: list[tuple[int, str, str | None, str]] = []
     n = 0
     for t in sentence.tokens:
         if t.note and t.note_kind == "red":
             n += 1
-            items.append((n, t.note, t.wrong))
+            cat = classify(t.note)
+            items.append((n, t.note, t.wrong, cat))
             t.note = _circled(n)        # 인라인은 원문자 번호만
             t.note_kind = "red"
-            t.color = t.color or "red"  # 어법 글자 빨강
+            t.cat = cat                 # 어법 글자·번호 색 = 카테고리
+            t.color = None              # 카테고리 색이 우선(빨강 고정 해제)
     if not items:
         return None
     rows = []
-    for num, name, wrong in items:
-        row = f'<span class="gn">{_circled(num)}</span> {escape(name)}'
+    for num, name, wrong, cat in items:
+        row = (f'<span class="gn {cat}">{_circled(num)}</span> '
+               f'<span class="gname {cat}">{escape(name)}</span>')
         if wrong:
             row += f" · <b>{escape(wrong)}</b>"
         rows.append(row)
