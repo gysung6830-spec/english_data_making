@@ -33,33 +33,53 @@ def generate_all(blueprint: Blueprint, assignments: list[Assignment],
     by_no: dict[tuple[str, int], Assignment] = {
         (a.section, a.no): a for a in assignments}
     analyses: dict[str, PassageAnalysis] = {}
-    questions: list[Question] = []
+    questions: list[Question | None] = [None] * len(blueprint.items)
     logs: list[dict] = []
+    tasks: list[tuple[int, Item, Passage]] = []
 
-    for item in blueprint.items:
+    # 1) 지문 배정 정리(지문 없는 슬롯은 즉시 자리표시자) + 분석 준비
+    for idx, item in enumerate(blueprint.items):
         a = by_no.get((item.section, item.no))
         pid = a.passage_id if a else None
         if pid is None or pid not in passages:
             logs.append({"no": item.no, "section": item.section, "type": item.type,
                          "note": (a.note if a else None) or "no_passage"})
             if skip_missing:
-                # 지문 없으면 안전망 문항(구조 유지, 지문 부족 표기)
-                q = generic_question(item, _placeholder_passage(item.no, item.type),
-                                     ctx, stem=f"[지문 부족] ({item.type})")
-                questions.append(q)
+                questions[idx] = generic_question(
+                    item, _placeholder_passage(item.no, item.type), ctx,
+                    stem=f"[지문 부족] ({item.type})")
                 continue
         passage = passages.get(pid) if pid else _placeholder_passage(item.no, item.type)
         if passage.id not in analyses:
             analyses[passage.id] = PassageAnalysis.of(passage)
-        # 한 문항 생성이 실패해도 전체가 죽지 않도록 격리: 실패 시 mock 자리표시자로 대체.
+        tasks.append((idx, item, passage))
+
+    # 2) 문항 생성 — LLM 이면 병렬(문항끼리 독립), mock 이면 순차.
+    def _one(t: tuple[int, Item, Passage]):
+        idx, item, passage = t
         try:
-            q = generate_question(item, passage, ctx, analyses[passage.id])
+            return idx, generate_question(item, passage, ctx, analyses[passage.id]), None
         except Exception as e:  # noqa: BLE001 - 문항 단위 오류 격리
+            return idx, None, (item, passage, str(e)[:200])
+
+    for idx, q, err in _run(tasks, _one, ctx):
+        if err is not None:
+            item, passage, msg = err
             logs.append({"no": item.no, "section": item.section, "type": item.type,
-                         "note": "generation_failed", "error": str(e)[:200]})
+                         "note": "generation_failed", "error": msg})
             q = generic_question(item, passage, ctx,
                                  stem=f"[생성 실패-검토 필요] ({item.type})")
-        questions.append(q)
+        questions[idx] = q
 
-    exam = MockExam(blueprint=blueprint, questions=questions)
+    exam = MockExam(blueprint=blueprint, questions=[q for q in questions if q])
     return exam, logs
+
+
+def _run(items, fn, ctx):
+    """LLM 모드면 스레드풀로 병렬, 아니면 순차 실행."""
+    workers = getattr(ctx, "max_workers", 8) if getattr(ctx, "client", None) else 1
+    if workers <= 1 or len(items) <= 1:
+        return [fn(x) for x in items]
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        return list(ex.map(fn, items))

@@ -36,6 +36,7 @@ def generate_mock(
     max_regen: int = 2,
     review_pass: bool = True,
     max_review: int = 1,
+    workers: int = 8,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
@@ -60,7 +61,8 @@ def generate_mock(
 
     # [5] 문항 생성
     ctx = GenContext(profile=profile, difficulty=diff, client=client,
-                     grammar_focus=profile.get("grammar_focus", []))
+                     grammar_focus=profile.get("grammar_focus", []),
+                     max_workers=max(1, int(workers)))
     exam, logs = generate_all(blueprint, assignments, pmap, ctx)
 
     # 문항 재생성 헬퍼(선택형/서술형 공통)
@@ -84,28 +86,41 @@ def generate_mock(
         bad = report.failed_choice_nos()
         if not bad:
             break
-        for q_i, q in enumerate(exam.questions):
-            if q.section == "choice" and q.no in bad:
+        regen_idx = [i for i, q in enumerate(exam.questions)
+                     if q.section == "choice" and q.no in bad]
+        if client is not None and len(regen_idx) > 1:
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
+                list(ex.map(_regen, regen_idx))
+        else:
+            for q_i in regen_idx:
                 _regen(q_i)
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
-    # [6-2] 2차 LLM 검수 패스 — 정답 타당성 점검 후 실패 문항 재생성
+    # [6-2] 2차 LLM 검수 패스 — 정답 타당성 점검 후 실패 문항 재생성(병렬)
     if review_pass and client is not None:
+        from concurrent.futures import ThreadPoolExecutor
         from .verify.review import review_question
+        workers = ctx.max_workers
         for _ in range(max_review):
-            failed_idx: list[int] = []
-            for q_i, q in enumerate(exam.questions):
-                if not (q.passage_text or q.choices):   # 지문 부족/자리표시자 건너뜀
-                    continue
-                ok, issue = review_question(client, q)
+            idxs = [i for i, q in enumerate(exam.questions)
+                    if (q.passage_text or q.choices)]
+
+            def _rev(i):
+                return i, review_question(client, exam.questions[i])
+            with ThreadPoolExecutor(max_workers=workers) as ex:
+                results = list(ex.map(_rev, idxs))
+            failed_idx = []
+            for i, (ok, issue) in results:
                 if not ok:
-                    failed_idx.append(q_i)
+                    failed_idx.append(i)
+                    q = exam.questions[i]
                     logs.append({"no": q.no, "section": q.section, "type": q.type,
                                  "note": "review_failed", "issue": issue[:200]})
             if not failed_idx:
                 break
-            for q_i in failed_idx:
-                _regen(q_i)
+            with ThreadPoolExecutor(max_workers=workers) as ex:
+                list(ex.map(_regen, failed_idx))
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
     return GenResult(exam, blueprint, assignments, report, logs,

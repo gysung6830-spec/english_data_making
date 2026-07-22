@@ -46,6 +46,7 @@ class GenContext:
     difficulty: Difficulty = "mid"
     client: Any = None          # ClaudeClient 또는 None(오프라인)
     grammar_focus: list[str] = field(default_factory=list)
+    max_workers: int = 8        # LLM 병렬 호출 수(속도↑, 과도하면 rate limit)
 
     def stem(self, item_type: str, fallback: str) -> str:
         style = self.profile.get("stem_style", {}) or {}
