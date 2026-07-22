@@ -26,17 +26,24 @@ body {
 }
 
 :root {
-  --sum:   #0f766e;
-  --lit:   #b45309;
-  --gram:  #1d4ed8;
-  --gram-bg: #eff4ff;
-  --voc:   #15803d;
-  --voc-bg: #ecfdf3;
-  --struc: #7c3aed;
-  --struc-bg: #f5f0ff;
-  --exam:  #be123c;
-  --exam-bg: #fff1f3;
-  --esum:  #4f46e5;
+  /* 5색 카테고리 팔레트 (동사=파랑 · 형용사부사=초록 · 관계사대명사=보라 · 연결사=노랑 · 특수구문=빨강) */
+  --c-blue:   #3b5bdb;
+  --c-green:  #2f9e44;
+  --c-purple: #6741d9;
+  --c-amber:  #e0850a;
+  --c-red:    #e03131;
+
+  --sum:   var(--c-red);      /* 주제 */
+  --lit:   var(--c-blue);     /* 직독직해(동사·어형) */
+  --gram:  var(--c-blue);     /* 문법 */
+  --gram-bg: #edf2ff;
+  --voc:   var(--c-green);    /* 어휘(유의어·반의어) */
+  --voc-bg: #ebfbee;
+  --struc: var(--c-amber);    /* 구조 분석(흐름) */
+  --struc-bg: #fff6e6;
+  --exam:  var(--c-purple);   /* 출제 포인트(어법·지칭) */
+  --exam-bg: #f3f0ff;
+  --esum:  var(--c-blue);     /* 핵심 단어 영어 요약문 */
   --muted: #6b7280;
   --line: #e5e7eb;
 }
