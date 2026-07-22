@@ -226,16 +226,54 @@ def test_review_verdict_schema_clean():
 
 
 def test_strict_schema_has_no_unsupported_keywords():
-    """Anthropic strict 출력이 거부하는 제약 키워드가 스키마에 없어야 한다."""
+    """Anthropic strict 출력이 거부하는 키워드가 어떤 스키마에도 없어야 한다."""
     import json
     from mockexam.core.client import to_strict_schema
-    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut
+    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut, ReviewVerdict
     banned = ("minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
-              "multipleOf", "minLength", "maxLength", "minItems", "maxItems")
-    for M in (ChoiceQuestionOut, EssayQuestionOut):
+              "multipleOf", "minLength", "maxLength", "minItems", "maxItems",
+              "default", "title", "examples", "$ref", "$defs")
+    for M in (ChoiceQuestionOut, EssayQuestionOut, ReviewVerdict):
         js = json.dumps(to_strict_schema(M))
         for k in banned:
             assert f'"{k}"' not in js, f"{M.__name__} 에 {k} 가 남아있음"
+
+
+class _FakeLLMClient:
+    """LLM 응답을 흉내내는 가짜 클라이언트 — LLM 경로(build_choice/essay/review)를
+    실제 키 없이 오프라인 테스트로 검증한다(리팩터/응답처리 버그 조기 발견)."""
+
+    def structured(self, system, prompt, model_cls, **kw):
+        name = model_cls.__name__
+        if name == "ChoiceQuestionOut":
+            return model_cls(
+                passage=("Intro. ①<u>a</u> ②<u>b</u> ③<u>c</u> ④<u>d</u> ⑤<u>e</u>. "
+                         "(A) one (B) two (C) three ____ blank."),
+                choices=["opt1", "opt2", "opt3", "opt4", "opt5"],
+                answer_index=3, explanation="정답 ③. 근거 …")
+        if name == "EssayQuestionOut":
+            return model_cls(
+                passage="Passage with a ____ blank. [요약문] A ____ summary.",
+                bogi=["w1", "w2", "w3"], conditions=["본문 단어만 쓸 것"],
+                blank_ko="우리말 문장", answers=["지시 :: 정답"], explanation="해설 …")
+        if name == "ReviewVerdict":
+            return model_cls(ok=True, issue="")
+        raise AssertionError(f"unexpected model {name}")
+
+
+def test_full_llm_path_runs_without_error():
+    """가짜 LLM으로 전체 생성+검수 경로를 태워 리팩터/응답처리 버그를 잡는다.
+
+    (이 테스트가 있었다면 prompt_extra AttributeError 를 사전에 잡았음)
+    """
+    res = generate_mock("jinyang_hs", [SAMPLE], difficulty="중", grade=1,
+                        client=_FakeLLMClient(), review_pass=True)
+    assert len(res.exam.questions) == 27
+    # LLM 경로가 실제로 실행되어 내용이 채워졌는지(자리표시자가 아님)
+    for q in res.exam.choice_questions:
+        assert q.answer in "①②③④⑤"
+    for q in res.exam.essay_questions:
+        assert q.answer
 
 
 def test_answer_index_range_validated():
