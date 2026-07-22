@@ -171,11 +171,6 @@ def test_render_a_and_b():
     assert "①" in ha                                # 어법 넘버링(원문자)
     assert "hl-p" in ha                             # 라벤더 하이라이트(담화표지)
     assert "Even the finest tea" in ha             # 함축 gloss 줄
-    # 어법 색상 카테고리(IMG_0195): 상단 범례 + 카테고리별 색 클래스
-    assert "catbar" in ha and "cchip cverb" in ha and "동사·준동사" in ha
-    assert "특수구문" in ha and "관계사·대명사" in ha
-    assert 'class="gn crel"' in ha or 'gname crel' in ha   # 관계사=보라
-    assert 'class="gn cspec"' in ha or 'gname cspec' in ha  # 5형식=특수구문(빨강)
     hb = renderer.render_b_html([a], brand="은아 T")
     # 직독직해형: 주황 헤더 + made by 브랜드 + 2단 표 + 문법 태그 + 핵심 단어
     assert "lbar" in hb and "직독직해" in hb and "made by 은아 T" in hb
@@ -215,16 +210,16 @@ def test_grammar_numbering():
     ]])
     gp = point_builder.build_grammar_point(s)
     assert gp is not None and gp.is_grammar
-    # 인라인 주석은 원문자 번호로 치환, 글자색은 어법 '카테고리'로 지정
+    # 인라인 주석은 원문자 번호로 치환, 글자는 빨강
     toks = s.tokens
-    assert toks[0].note == "①" and toks[0].cat == "crel"     # 관계사·대명사 = 보라
-    assert toks[2].note == "②" and toks[2].cat == "cverb"    # 수동태 = 동사·준동사
-    # 박스에는 원문자 번호(카테고리 span) + 어법명
-    assert 'class="gn crel"' in gp.body_html
+    assert toks[0].note == "①" and toks[0].color == "red"
+    assert toks[2].note == "②"
+    # 박스에는 원문자 번호(빨강 span) + 어법명
+    assert 'class="gn"' in gp.body_html
     assert "①" in gp.body_html and "주격 관계대명사" in gp.body_html
     assert "②" in gp.body_html and "수동태" in gp.body_html
     assert "who(X)" in gp.body_html
-    print("PASS  어법 넘버링(원문자) + 카테고리 색 박스")
+    print("PASS  어법 넘버링(원문자) + 박스")
 
 
 def test_feed_point_box():
