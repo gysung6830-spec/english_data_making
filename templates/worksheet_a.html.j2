@@ -6,10 +6,12 @@
 <title>{{ analyses[0].title_en if analyses else '구문 분석 학습지' }}</title>
 <style>
   :root{
-    /* IMG_0195 사진에서 추출한 색으로 교체(역할은 기존 그대로) */
-    --navy:#32639d; --red:#a93f32; --blue:#3a63a0; --gray:#8a90a0; --ink:#20242e;
-    --yellow-hl:#fdf3b0; --green-hl:#e7eeb0; --purple-hl:#ddd6f3;
-    --page-bg:#e9f1fc; --line:#cdd5e3; --box-red:#e2b6b1; --tmi-line:#d3dae7;
+    /* IMG_0201 채도 낮춘 차분한 팔레트(회색기 도는 톤) — 적절히 배치 */
+    --navy:#4d6091; --red:#c05d55; --blue:#4d6091;      /* 성분·리본=파랑, 어법=빨강 */
+    --green:#4e8a63; --purple:#6d5f96; --amber:#bd8a45; /* 유의어=초록, 함축·지칭=보라, 포인트=노랑 */
+    --gray:#8a90a0; --ink:#20242e;
+    --yellow-hl:#fcf1ad; --green-hl:#e3ecb2; --purple-hl:#dcd7ec;
+    --page-bg:#edeff4; --line:#d3d8e0; --box-red:#e2b6b1; --tmi-line:#d5d9e1;
   }
   @page{ size:A4 portrait; margin:10mm 9mm; }
   *{ box-sizing:border-box; }
@@ -71,8 +73,8 @@
   .tok .w.hl-p{ background:var(--purple-hl); }
   .tok .w.underline{ text-decoration:underline; text-underline-offset:2px; }
   .tok .w.red{ color:var(--red); font-weight:600; }
-  /* 유의어/반의어가 달린 어휘 = 파란 '밑줄'(글씨색은 그대로; 어법이면 빨강 유지) */
-  .tok .w.vu{ text-decoration:underline; text-decoration-color:var(--blue);
+  /* 유의어/반의어가 달린 어휘 = 초록 '밑줄'(글씨색은 그대로; 어법이면 빨강 유지) */
+  .tok .w.vu{ text-decoration:underline; text-decoration-color:var(--green);
               text-decoration-thickness:1.5px; text-underline-offset:2.5px; }
   .tok .unders{ display:flex; flex-direction:column; align-items:center; margin:3px auto 0;
                 overflow:visible; }
@@ -80,8 +82,8 @@
   .ann{ font-size:7.5px; line-height:1.2; white-space:nowrap; text-align:center;
         max-width:150px; }   /* 아주 긴 주석만 방어적으로 제한(대개 짧음) */
   .ann.red{ color:var(--red); font-weight:800; font-size:11.5px; line-height:1; }
-  .ann.syn{ color:var(--blue); }
-  .ann.ant{ color:var(--gray); }
+  .ann.syn{ color:var(--green); }   /* 유의어(=) 초록 */
+  .ann.ant{ color:var(--gray); }    /* 반의어(↔) 차분한 회색 */
   .ann.gray{ color:var(--gray); }
   .ann.x{ color:var(--gray); font-weight:600; }
 
@@ -95,15 +97,15 @@
               border-radius:20px; padding:2px 10px; margin:8px 0 7px; }
   /* 박스 안 어법 번호 = 인라인과 동일(빨강, 크게) */
   .pbox .gn{ color:var(--red); font-weight:800; font-size:11.5px; }
-  /* 어법 Point = 빨강 알약(사진 빨강 톤) */
-  .pbox.g{ border-color:#e0c3bd; }
-  .pbox.g .cap{ background:#b45a4d; }
-  /* 떠먹여주는 Point(대명사 지칭 + 함축) = 파랑 알약(사진 파랑 톤) */
-  .pbox.feed{ border-color:#c2d0e6; }
-  .pbox.feed .cap{ background:#4f7bb0; }
+  /* 어법 Point = 빨강 알약(차분한 빨강) */
+  .pbox.g{ border-color:#dcc4c1; }
+  .pbox.g .cap{ background:var(--red); }
+  /* 떠먹여주는 Point(대명사 지칭 + 함축) = 보라 알약(차분한 보라) */
+  .pbox.feed{ border-color:#cec9db; }
+  .pbox.feed .cap{ background:var(--purple); }
   .pbox.feed .fr{ margin:3px 0; }
-  .pbox.feed .fl{ font-weight:800; color:var(--blue); }
-  .pbox.feed .fl.im{ color:#743eae; }        /* 함축 라벨은 보라(사진 보라 톤) */
+  .pbox.feed .fl{ font-weight:800; color:var(--purple); }
+  .pbox.feed .fl.im{ color:var(--purple); }        /* 함축 라벨은 보라 */
   .pbox.feed .gko{ color:#4a5064; }          /* 함축 한글 병기 */
   .pbox b, .pbox strong{ font-weight:800; }
 
@@ -126,7 +128,7 @@
   .page.compact .pbox .gn{ font-size:10px; }
 
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
-  .foot .dot{ color:#f2c14e; }
+  .foot .dot{ color:var(--amber); }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
   .copyr{ position:absolute; right:22px; bottom:10px; font-size:9.5px; color:var(--gray); }
 
@@ -146,7 +148,7 @@
   .vtab tr:nth-child(even) td{ background:#f4f7fd; }
   .vtab .vn{ text-align:center; font-weight:700; color:var(--navy); white-space:nowrap; }
   .vtab .w{ font-weight:800; color:#20242e; white-space:nowrap; }
-  .vtab .syn{ color:#2f7d4f; }   /* 유의어=초록 */
+  .vtab .syn{ color:var(--green); }   /* 유의어=초록(팔레트 통일) */
   .vtab .ant{ color:var(--red); } /* 반의어=빨강 */
   /* 논리 흐름 + 쉬운 예시 (같은 단계에 함께) */
   .flow{ display:flex; flex-direction:column; gap:0; }
