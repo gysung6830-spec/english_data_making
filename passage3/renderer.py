@@ -63,21 +63,18 @@ def _passage_head(idx: int, p: Passage) -> str:
     return "\n".join(parts)
 
 
-def _vocab_box(p: Passage, blank_slots: int = 8) -> str:
-    """지문 하단 어휘 리스트 박스. 어휘가 있으면 채우고, 없으면 빈 칸."""
+def _vocab_box(p: Passage) -> str:
+    """지문 하단 어휘 리스트 박스. 어휘가 있을 때만 렌더(없으면 박스 없음)."""
+    if not p.vocab:
+        return ""
     items = []
-    if p.vocab:
-        for v in p.vocab:
-            items.append(
-                '<div class="vocab-item">'
-                f'<span class="w">{escape(v.word)}</span>'
-                f'<span class="m">{escape(v.meaning)}</span>'
-                '</div>'
-            )
-    else:
-        # 빈 박스: 직접 적을 수 있는 밑줄 칸
-        for _ in range(blank_slots):
-            items.append('<div class="vocab-item blank"></div>')
+    for v in p.vocab:
+        items.append(
+            '<div class="vocab-item">'
+            f'<span class="w">{escape(v.word)}</span>'
+            f'<span class="m">{escape(v.meaning)}</span>'
+            '</div>'
+        )
     return (
         '<div class="vocab">'
         '<div class="vocab-title">핵심 어휘</div>'

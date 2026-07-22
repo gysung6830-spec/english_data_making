@@ -86,7 +86,6 @@ VOCAB_RULES = """
 }
 .vocab-item .w { font-weight: 700; color: #1a1a1a; white-space: nowrap; }
 .vocab-item .m { color: #555558; }
-.vocab-item.blank { display: block; border-bottom: 1px dotted #c4c4c8; height: 15px; }
 """
 
 
