@@ -31,6 +31,9 @@ class ChoiceQuestionOut(BaseModel):
         "자세한 해설. 반드시 (1) 정답이 왜 맞는지 근거, (2) 오답 각각(①~⑤ 중 정답 제외)이 "
         "왜 틀렸는지 한 줄씩, (3) 관련 핵심 포인트(문법 규칙·어휘 뜻·글의 논지 등)를 포함. "
         "핵심 교정어/근거는 <b>...</b>로 강조하고, 대표 함정은 '[오답 함정] ...'으로 표기."))
+    answer_confidence: str = Field("확실", description=(
+        "정답이 '유일하게' 성립함에 대한 확신도: '확실' 또는 '주의' 중 하나. 다른 선지도 "
+        "정답이 될 여지가 조금이라도 있거나 애매하면 반드시 '주의'로 표시."))
 
     @field_validator("choices")
     @classmethod
@@ -70,6 +73,9 @@ class EssayQuestionOut(BaseModel):
     explanation: str = Field("", description=(
         "자세한 해설. 각 소문항의 정답 근거, 어형변형/어순/문법 포인트, 본문 근거 위치를 "
         "구체적으로 설명. 핵심은 <b>...</b>로 강조."))
+    answer_confidence: str = Field("확실", description=(
+        "정답이 '유일하게' 성립함에 대한 확신도: '확실' 또는 '주의' 중 하나. 정답이 여러 개 "
+        "가능하거나 채점 기준이 애매하면 반드시 '주의'로 표시."))
 
 
 def system_prompt(profile: dict[str, Any], difficulty_ko: str) -> str:

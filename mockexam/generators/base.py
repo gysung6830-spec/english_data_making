@@ -58,6 +58,38 @@ _ESSAY_BOGI = {"dialogue_arrange_inflect", "word_arrange",
                "arrange_and_translate", "blank_choose_no_change", "chart_fix_and_arrange"}
 _ESSAY_KO = {"dialogue_arrange_inflect", "arrange_and_translate"}
 
+# 의미 이해형(선지가 문장) 선지 구성 원리 — 정답 유일성을 '구조적으로' 보장한다.
+#   정답  : 지문 핵심을 유의어로 패러프레이즈(지문 단어 복붙 금지)
+#   오답4 : 2개=주제와 무관 / 2개=주제와 모순 (넷 다 지문에 나온 단어를 활용해 그럴듯하게)
+DISTRACTOR_RULE = (
+    "[선지 구성(오답 출제) 원리] 정답 선지는 지문의 핵심 논지를 '유의어로 바꿔' 표현하라"
+    "(지문 단어를 그대로 베끼지 말 것). 나머지 오답 4개는 반드시 2개는 '주제와 무관'하게, "
+    "2개는 '주제와 정반대로 모순'되게 만들되, 오답 4개 모두 지문에 실제 등장한 단어를 활용해 "
+    "그럴듯하게 보이도록 하라. 그 결과 정답은 오직 1개만 성립하고 오답 4개는 확실히 틀리게 하라."
+)
+# 위 원리(정답=유의어 패러프레이즈)를 적용하는 유형
+_PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning"}
+
+
+def _flag_reason(item: Item, out: Any) -> str:
+    """해설지 '⚠ 확인 권장' 배지 사유. 없으면 빈 문자열.
+
+    (1) 모델 자가확신도가 '주의'거나, (2) 유의어 패러프레이즈 유형인데 정답 선지가
+    지문 문장과 거의 동일(원리 위반)하면 사람이 한 번 더 볼 것을 권한다.
+    """
+    conf = (getattr(out, "answer_confidence", "") or "").strip()
+    if conf and not conf.startswith("확실"):
+        return "정답 유일성 자가점검에서 '주의'로 표시됨"
+    if item.type in _PARAPHRASE_TYPES:
+        try:
+            correct = (out.choices[out.answer_index - 1] or "").strip()
+        except Exception:  # noqa: BLE001
+            correct = ""
+        core = re.sub(r"[^A-Za-z가-힣 ]", "", correct).strip().lower()
+        if len(core) >= 12 and core in (out.passage or "").lower():
+            return "정답 선지가 지문 문장과 거의 동일(유의어 패러프레이즈 원리 위반 가능)"
+    return ""
+
 Builder = Callable[[Item, Passage, PassageAnalysis, GenContext], Question]
 REGISTRY: dict[str, Builder] = {}
 
@@ -161,6 +193,9 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         q.choices = make_choices(out.choices)
         q.answer = LABELS[out.answer_index - 1]
         q.explanation = out.explanation
+        flag = _flag_reason(item, out)
+        if flag:
+            q.meta["review_flag"] = flag
     else:
         q.choices = make_choices(mock_choices or [f"선택지 {i+1}" for i in range(5)])
         q.answer = mock_answer
@@ -216,6 +251,9 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         q.answer = " / ".join(answers)
         q.answer_notes = notes
         q.explanation = out.explanation
+        conf = (getattr(out, "answer_confidence", "") or "").strip()
+        if conf and not conf.startswith("확실"):
+            q.meta["review_flag"] = "정답 확신도 '주의'로 표시됨"
     else:
         q.passage_text = passage.text
         q.answer = "(mock) 서술형 정답 예시"

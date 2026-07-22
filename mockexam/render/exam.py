@@ -112,6 +112,9 @@ u {{ text-underline-offset:2px; }}
 .ans-no {{ font-weight:700; }}
 .badge {{ border:1px solid #444; border-radius:999px; padding:1px 10px; font-size:8.6pt;
           color:#333; margin-left:6px; }}
+.warn {{ border:1px solid #b00020; border-radius:999px; padding:1px 10px; font-size:8.6pt;
+         color:#b00020; font-weight:700; margin-left:6px; }}
+.warn-note {{ color:#b00020; font-size:8.4pt; margin:2px 0; }}
 .ans-line {{ margin:3px 0; }}
 .ans-line .a {{ font-weight:700; }}
 .exp {{ text-align:justify; }}
@@ -401,8 +404,10 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
         diff = DIFFICULTY_KO_REV.get(q.difficulty, "중")
         no = f"{q.no}번" if q.section == "choice" else f"서술형 {q.no}번"
         badge = f"{label} · {diff} · {_fmt_score(q.score)}점"
+        flag = q.meta.get("review_flag") if isinstance(q.meta, dict) else None
+        warn = '<span class="warn">⚠ 확인 권장</span>' if flag else ""
         body.append(f'<div class="ans-item"><span class="ans-no">{no}</span>'
-                    f'<span class="badge">{html.escape(badge)}</span>')
+                    f'<span class="badge">{html.escape(badge)}</span>{warn}')
         if q.answer_notes:
             body.append(f'<div class="ans-line"><span class="a">정답.</span> '
                         f'{html.escape(q.answer)}</div>')
@@ -413,6 +418,9 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
                         f'{html.escape(q.answer)}</div>')
         if q.explanation:
             body.append(f'<div class="exp"><b>해설.</b> {_exp_html(q.explanation)}</div>')
+        if flag:
+            body.append(f'<div class="warn-note">※ 자동 점검 참고: {html.escape(flag)} '
+                        '— 정답·선지를 한 번 확인하세요.</div>')
         body.append('</div>')
     return _wrap("정답 및 해설", "".join(body), footer_note=_footer_note(exam, footer))
 

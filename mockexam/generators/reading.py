@@ -4,16 +4,15 @@ from __future__ import annotations
 
 from ..core.models import Item, Passage
 from .base import (
-    GenContext, PassageAnalysis, build_choice, make_choices, register,
+    DISTRACTOR_RULE, GenContext, PassageAnalysis, build_choice, make_choices,
+    register,
 )
 
 
 @register("main_point")
 def gen_main_point(item, passage, an, ctx):
     stem = ctx.stem("main_point", "다음 글의 요지로 가장 적절한 것은?")
-    instr = ("전체 요지를 핵심어의 유의어/상위어로 표현(원단어 그대로 X). "
-             "오답 5개 중 2개는 지문 실단어를 섞은 함정, 2개는 주제를 벗어난 무관 선지. "
-             "요지 선지는 **한국어**로.")
+    instr = DISTRACTOR_RULE + " 요지 선지는 **한국어**로 작성하라."
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) 요지 후보 {i+1}" for i in range(5)])
 
@@ -21,8 +20,7 @@ def gen_main_point(item, passage, an, ctx):
 @register("title")
 def gen_title(item, passage, an, ctx):
     stem = ctx.stem("title", "다음 글의 제목으로 가장 적절한 것은?")
-    instr = ("제목을 핵심어의 유의어/상위어로 표현. 오답에 지문 실단어를 섞은 함정. "
-             "제목 선지는 **영어**로.")
+    instr = DISTRACTOR_RULE + " 제목 선지는 **영어**로 작성하라."
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) Title Candidate {i+1}" for i in range(5)])
 
@@ -70,8 +68,9 @@ def gen_irrelevant(item, passage, an, ctx):
 def gen_implied(item, passage, an, ctx):
     stem = ctx.stem("implied_meaning",
                     "밑줄 친 부분이 다음 글에서 의미하는 바로 가장 적절한 것은?")
-    instr = ("밑줄 표현을 문맥 전체로 재해석해야 답이 나오게(직역으로는 못 풀게). "
-             "오답은 표현을 표면적/축자적으로 읽은 오독 4종. 선지는 영어.")
+    instr = (DISTRACTOR_RULE + " 단, 밑줄 표현은 문맥 전체로 재해석해야 답이 나오게 하고"
+             "(직역으로는 못 풀게), '무관·모순' 오답은 표현을 표면적/축자적으로 읽은 "
+             "오독으로 구성하라. 선지는 **영어**로 작성하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) implied reading {i+1}" for i in range(5)])
 

@@ -282,6 +282,43 @@ def test_generation_selfcheck_rejects_bad_structure():
     _validate_essay_out(it_e, good_e)  # 통과
 
 
+def test_review_flag_from_confidence_and_verbatim():
+    """해설지 '⚠ 확인 권장' 사유 판정: 자가확신 '주의' + 유의어원리 위반(정답=지문복붙)."""
+    from mockexam.core.models import Item
+    from mockexam.core.llm import ChoiceQuestionOut
+    from mockexam.generators.base import _flag_reason
+
+    it = Item(no=1, section="choice", type="main_point", score=3)
+    # 확신도 '주의' → 플래그
+    o1 = ChoiceQuestionOut(passage="The passage about bees and honey.",
+                           choices=["요지 A", "요지 B", "요지 C", "요지 D", "요지 E"],
+                           answer_index=1, explanation="e", answer_confidence="주의")
+    assert _flag_reason(it, o1)
+    # 확신도 '확실' + 정답이 지문과 겹치지 않는 패러프레이즈 → 플래그 없음
+    o2 = ChoiceQuestionOut(passage="The passage about bees and honey.",
+                           choices=["꿀벌의 협업", "b", "c", "d", "e"],
+                           answer_index=1, explanation="e", answer_confidence="확실")
+    assert not _flag_reason(it, o2)
+    # 정답 선지가 지문 문장을 거의 그대로 복붙 → 유의어원리 위반 플래그
+    o3 = ChoiceQuestionOut(passage="Bees make honey from flower nectar every summer.",
+                           choices=["Bees make honey from flower nectar every summer",
+                                    "b", "c", "d", "e"],
+                           answer_index=1, explanation="e", answer_confidence="확실")
+    assert _flag_reason(it, o3)
+
+
+def test_answer_key_shows_warn_badge():
+    """review_flag 가 있는 문항은 해설지에 ⚠ 확인 권장 배지가 붙는다(문제지엔 없음)."""
+    from mockexam.render.exam import build_answer_html, build_problem_html
+
+    res = generate_mock("jinyang_hs", [SAMPLE], difficulty="중", grade=1, client=None)
+    res.exam.questions[0].meta["review_flag"] = "정답 유일성 자가점검에서 '주의'로 표시됨"
+    ans = build_answer_html(res.exam, {}, footer="")
+    assert "⚠ 확인 권장" in ans and "자동 점검 참고" in ans
+    prob = build_problem_html(res.exam, {}, footer="")
+    assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
+
+
 def test_answer_index_range_validated():
     from pydantic import ValidationError
     from mockexam.core.llm import ChoiceQuestionOut
