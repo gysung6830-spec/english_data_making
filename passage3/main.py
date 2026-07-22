@@ -183,7 +183,7 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
         # 페이지마다 하단 가운데에 반복되는 저작권 푸터(하단 여백 안에 배치)
         footer_template = (
             f'<div style="width:100%; text-align:center; '
-            f'font-family:{_FOOTER_FONT}; font-size:8px; color:#9a9a9f; '
+            f'font-family:{_FOOTER_FONT}; font-size:8px; color:#000000; '
             f'padding:0; margin:0;">{FOOTER_TEXT}</div>'
         )
 

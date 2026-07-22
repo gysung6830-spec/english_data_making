@@ -90,15 +90,16 @@ VOCAB_RULES = """
 
 
 def _modern_css() -> str:
-    # 업로드 색상 #ecedf1(옅은 청회색) 기반 팔레트
+    # 업로드 색상 #ecedf1(옅은 청회색) 기반 팔레트.
+    # 배경·강조막대·구분선만 색을 쓰고, 글자는 모두 검은색.
     FILL = "#ecedf1"       # 해석·어휘 박스 배경
-    INK = "#2a2e3a"        # 진한 본문(청회 계열 near-black)
-    KO = "#565c6c"         # 한글 해석 글자
-    MUTED = "#82869b"      # 라벨·머리글
-    LINE = "#e4e6ed"       # 문장 구분선
+    INK = "#000000"        # 본문 글자(검정)
+    KO = "#000000"         # 한글 해석 글자(검정)
+    MUTED = "#000000"      # 라벨·머리글 글자(검정)
+    LINE = "#dcdee7"       # 문장 구분선
     RULE = "#d3d6e1"       # 머리글 아래 굵은 선
-    ACCENT = "#5b6377"     # 제목 왼쪽 강조막대(슬레이트)
-    NUM = "#a7aab9"        # 원문자 번호
+    ACCENT = "#5b6377"     # 제목 왼쪽 강조막대(슬레이트, 글자 아님)
+    NUM = "#000000"        # 원문자 번호(검정)
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
   font-family: {SERIF_STACK};
