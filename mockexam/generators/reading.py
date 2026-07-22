@@ -81,8 +81,11 @@ def gen_implied(item, passage, an, ctx):
 @register("inference_mismatch")
 def gen_inference_mismatch(item, passage, an, ctx):
     stem = ctx.stem("inference_mismatch", "다음 글의 내용과 일치하지 않는 것은?")
-    instr = ("선지 5개 중 1개만 지문과 불일치. 오답은 지문에 실제 언급된 사실을 정확히 반영해 "
-             "소거가 어렵게.")
+    instr = ("선지 5개 중 1개만 지문과 불일치(=정답). 정답 선지는 지문 내용에서 "
+             "'주체(누가/무엇이 했는지)·인과(원인↔결과)·부정↔긍정' 중 하나를 비틀어 "
+             "만들어라 — 예: 행위의 주체를 다른 대상으로 바꾸기, 원인과 결과를 뒤집기, "
+             "긍정 진술을 부정으로(또는 부정을 긍정으로) 뒤집기. "
+             "나머지 오답 4개는 지문에 실제 언급된 사실을 정확히 반영해 소거가 어렵게 하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) 진술 {i+1}" for i in range(5)])
 
