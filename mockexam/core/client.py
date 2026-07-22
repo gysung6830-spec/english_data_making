@@ -9,6 +9,7 @@ from __future__ import annotations
 import base64
 import copy
 import json
+import re
 import time
 from pathlib import Path
 from typing import Any, TypeVar
@@ -76,6 +77,31 @@ def image_block(image_path: str | Path) -> dict:
     return {"type": "image", "source": {"type": "base64", "media_type": media, "data": b64}}
 
 
+def _field_type(spec: dict) -> str:
+    t = spec.get("type")
+    if t == "array":
+        it = (spec.get("items") or {}).get("type", "string")
+        return f"{it} 배열(예: [..])"
+    return {"string": "문자열", "integer": "정수", "boolean": "true/false",
+            "number": "숫자"}.get(t, t or "값")
+
+
+def json_instructions(model_cls: type[BaseModel]) -> str:
+    """모델 필드로부터 '이 JSON 형식으로만 답하라'는 프롬프트 지시를 만든다.
+
+    strict output_config 대신 프롬프트로 형식을 안내 → 서버 스키마 거부(400) 회피.
+    """
+    props = model_cls.model_json_schema().get("properties", {})
+    lines = []
+    for name, spec in props.items():
+        desc = spec.get("description", "")
+        lines.append(f'  "{name}": <{_field_type(spec)}>'
+                     + (f"   // {desc}" if desc else ""))
+    body = ",\n".join(lines)
+    return ("반드시 아래 형식의 JSON 객체 '하나만' 출력하라. 마크다운/설명/코드펜스 없이 "
+            "순수 JSON 만:\n{\n" + body + "\n}")
+
+
 def build_request(
     model: str,
     system: str,
@@ -84,27 +110,35 @@ def build_request(
     max_tokens: int = DEFAULT_MAX_TOKENS,
     image_path: str | Path | None = None,
 ) -> dict:
-    """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터.
-
-    image_path 가 주어지면 이미지 + 텍스트를 함께 보내는 비전 요청이 된다.
-    """
+    """messages.create 요청 파라미터. 형식은 프롬프트로 안내(구조화 출력 미사용)."""
+    full = f"{prompt}\n\n{json_instructions(model_cls)}"
     if image_path is not None:
-        content: Any = [image_block(image_path), {"type": "text", "text": prompt}]
+        content: Any = [image_block(image_path), {"type": "text", "text": full}]
     else:
-        content = prompt
+        content = full
     return {
         "model": model,
         "max_tokens": max_tokens,
         "system": system,
         "messages": [{"role": "user", "content": content}],
-        "output_config": output_format(model_cls),
     }
 
 
 def parse_response_text(text: str, model_cls: type[T]) -> T:
-    """응답 JSON 텍스트를 pydantic 모델로 검증/파싱."""
-    data = json.loads(text)
-    return model_cls.model_validate(data)
+    """응답 텍스트에서 JSON 을 추출·파싱해 pydantic 모델로 검증(느슨한 파싱)."""
+    return model_cls.model_validate(_extract_json(text))
+
+
+def _extract_json(text: str) -> Any:
+    """코드펜스/앞뒤 설명이 섞여 있어도 JSON 객체를 뽑아낸다."""
+    s = text.strip()
+    m = re.search(r"```(?:json)?\s*(.+?)```", s, re.S)
+    if m:
+        s = m.group(1).strip()
+    start, end = s.find("{"), s.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        s = s[start:end + 1]
+    return json.loads(s)
 
 
 def extract_text(message: Any) -> str:

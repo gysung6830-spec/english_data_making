@@ -239,6 +239,22 @@ def test_strict_schema_has_no_unsupported_keywords():
             assert f'"{k}"' not in js, f"{M.__name__} 에 {k} 가 남아있음"
 
 
+def test_no_strict_output_config_and_lenient_parse():
+    """strict 구조화 출력을 쓰지 않아 스키마 키워드 400 이 원천 불가능.
+
+    요청에 output_config 가 없고, 응답은 코드펜스/설명이 섞여도 파싱된다.
+    """
+    from mockexam.core.client import build_request, parse_response_text
+    from mockexam.core.llm import ChoiceQuestionOut
+    req = build_request("m", "sys", "prompt", ChoiceQuestionOut)
+    assert "output_config" not in req          # ← 400 유발하던 부분이 사라짐
+    assert "JSON" in req["messages"][0]["content"]
+    fenced = ('설명입니다\n```json\n{"passage":"P","choices":["a","b","c","d","e"],'
+              '"answer_index":2,"explanation":"e"}\n```')
+    obj = parse_response_text(fenced, ChoiceQuestionOut)
+    assert obj.answer_index == 2 and len(obj.choices) == 5
+
+
 class _FakeLLMClient:
     """LLM 응답을 흉내내는 가짜 클라이언트 — LLM 경로(build_choice/essay/review)를
     실제 키 없이 오프라인 테스트로 검증한다(리팩터/응답처리 버그 조기 발견)."""
