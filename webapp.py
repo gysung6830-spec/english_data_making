@@ -320,9 +320,9 @@ def generate():
         client = get_client(key, MODEL)
 
     try:
-        # 생성 단계에서 구조·정답 자가검증을 강화했으므로 별도 검수 패스는 끈다.
+        # 문항 생성 단계에서 구조·정답 유일성을 자가검증한다(별도 검수 패스 없음).
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
-                            grade=grade, client=client, review_pass=False)
+                            grade=grade, client=client)
         # 지문을 하나도 못 읽은 경우에만(스캔/HWP 등) 실행 가능한 안내를 준다.
         if res.num_passages == 0:
             raise RuntimeError(

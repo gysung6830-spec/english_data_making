@@ -191,49 +191,15 @@ def test_generate_offline_passes_verifier():
     assert by["정답유일성"].ok, by["정답유일성"].detail
 
 
-def test_review_pass_verdict_and_robustness():
-    """검수 패스: ok/탈락 판정 + 검수 호출 실패 시 문항 보존."""
-    from mockexam.core.models import Choice, Question
-    from mockexam.verify.review import review_question
-
-    class Verdict:
-        def __init__(self, ok, issue): self.ok, self.issue = ok, issue
-
-    class FakeClient:
-        def __init__(self, ok, issue=""): self._ok, self._issue = ok, issue
-        def structured(self, *a, **k): return Verdict(self._ok, self._issue)
-
-    class BoomClient:
-        def structured(self, *a, **k): raise RuntimeError("api")
-
-    q = Question(2, "choice", "grammar", 3.0, "어법",
-                 passage_text="x ①<u>a</u> ②b ③c ④d ⑤e",
-                 choices=[Choice(l, "") for l in "①②③④⑤"], answer="③")
-    assert review_question(FakeClient(True), q) == (True, "")
-    ok, issue = review_question(FakeClient(False, "②도 정답"), q)
-    assert ok is False and "②" in issue
-    # 검수 API 오류 → 문항을 버리지 않고 통과 처리
-    assert review_question(BoomClient(), q) == (True, "")
-
-
-def test_review_verdict_schema_clean():
-    import json
-    from mockexam.core.client import to_strict_schema
-    from mockexam.core.llm import ReviewVerdict
-    js = json.dumps(to_strict_schema(ReviewVerdict))
-    for k in ("default", "minItems", "minimum", "$ref"):
-        assert k not in js
-
-
 def test_strict_schema_has_no_unsupported_keywords():
     """Anthropic strict 출력이 거부하는 키워드가 어떤 스키마에도 없어야 한다."""
     import json
     from mockexam.core.client import to_strict_schema
-    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut, ReviewVerdict
+    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut
     banned = ("minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum",
               "multipleOf", "minLength", "maxLength", "minItems", "maxItems",
               "default", "title", "examples", "$ref", "$defs")
-    for M in (ChoiceQuestionOut, EssayQuestionOut, ReviewVerdict):
+    for M in (ChoiceQuestionOut, EssayQuestionOut):
         js = json.dumps(to_strict_schema(M))
         for k in banned:
             assert f'"{k}"' not in js, f"{M.__name__} 에 {k} 가 남아있음"
@@ -256,7 +222,7 @@ def test_no_strict_output_config_and_lenient_parse():
 
 
 class _FakeLLMClient:
-    """LLM 응답을 흉내내는 가짜 클라이언트 — LLM 경로(build_choice/essay/review)를
+    """LLM 응답을 흉내내는 가짜 클라이언트 — LLM 경로(build_choice/essay)를
     실제 키 없이 오프라인 테스트로 검증한다(리팩터/응답처리 버그 조기 발견)."""
 
     def structured(self, system, prompt, model_cls, **kw):
@@ -272,18 +238,16 @@ class _FakeLLMClient:
                 passage="Passage with a ____ blank. [요약문] A ____ summary.",
                 bogi=["w1", "w2", "w3"], conditions=["본문 단어만 쓸 것"],
                 blank_ko="우리말 문장", answers=["지시 :: 정답"], explanation="해설 …")
-        if name == "ReviewVerdict":
-            return model_cls(ok=True, issue="")
         raise AssertionError(f"unexpected model {name}")
 
 
 def test_full_llm_path_runs_without_error():
-    """가짜 LLM으로 전체 생성+검수 경로를 태워 리팩터/응답처리 버그를 잡는다.
+    """가짜 LLM으로 전체 생성 경로를 태워 리팩터/응답처리 버그를 잡는다.
 
     (이 테스트가 있었다면 prompt_extra AttributeError 를 사전에 잡았음)
     """
     res = generate_mock("jinyang_hs", [SAMPLE], difficulty="중", grade=1,
-                        client=_FakeLLMClient(), review_pass=True)
+                        client=_FakeLLMClient())
     assert len(res.exam.questions) == 27
     # LLM 경로가 실제로 실행되어 내용이 채워졌는지(자리표시자가 아님)
     for q in res.exam.choice_questions:

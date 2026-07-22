@@ -34,13 +34,11 @@ def generate_mock(
     grade: int = 1,
     client: Any = None,
     max_regen: int = 2,
-    review_pass: bool = True,
-    max_review: int = 1,
     workers: int = 8,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
-    review_pass=True 면 생성 후 2차 LLM 검수로 정답 타당성을 점검해 실패 문항 재생성.
+    문항 생성 단계에서 구조·정답 유일성을 자가검증하므로 별도 검수 패스는 두지 않는다.
     """
     diff: Difficulty = DIFFICULTY_KO.get(difficulty, difficulty)  # type: ignore
     if diff not in ("low", "mid", "high"):
@@ -95,32 +93,6 @@ def generate_mock(
         else:
             for q_i in regen_idx:
                 _regen(q_i)
-        report = verify(exam, blueprint, requested=diff, structural=structural)
-
-    # [6-2] 2차 LLM 검수 패스 — 정답 타당성 점검 후 실패 문항 재생성(병렬)
-    if review_pass and client is not None:
-        from concurrent.futures import ThreadPoolExecutor
-        from .verify.review import review_question
-        workers = ctx.max_workers
-        for _ in range(max_review):
-            idxs = [i for i, q in enumerate(exam.questions)
-                    if (q.passage_text or q.choices)]
-
-            def _rev(i):
-                return i, review_question(client, exam.questions[i])
-            with ThreadPoolExecutor(max_workers=workers) as ex:
-                results = list(ex.map(_rev, idxs))
-            failed_idx = []
-            for i, (ok, issue) in results:
-                if not ok:
-                    failed_idx.append(i)
-                    q = exam.questions[i]
-                    logs.append({"no": q.no, "section": q.section, "type": q.type,
-                                 "note": "review_failed", "issue": issue[:200]})
-            if not failed_idx:
-                break
-            with ThreadPoolExecutor(max_workers=workers) as ex:
-                list(ex.map(_regen, failed_idx))
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
     return GenResult(exam, blueprint, assignments, report, logs,

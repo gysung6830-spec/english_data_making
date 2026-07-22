@@ -72,25 +72,6 @@ class EssayQuestionOut(BaseModel):
         "구체적으로 설명. 핵심은 <b>...</b>로 강조."))
 
 
-class ReviewVerdict(BaseModel):
-    """생성된 문항에 대한 검수자(2차 LLM) 판정."""
-
-    ok: bool = Field(..., description=(
-        "문항이 타당하면 true. 즉 (표시된 정답이 실제로 맞고) & (정답이 유일하며 "
-        "다른 선지는 확실히 틀리고) & (지문·선지에 사실/문법 오류가 없음)."))
-    issue: str = Field("", description=(
-        "ok=false 일 때 구체적 문제. 예: '②도 정답 가능', '표시된 정답이 실제로는 틀림', "
-        "'지문에 밑줄 없음', '④가 사실상 오답 아님', '문법 오류'. ok=true 면 빈 문자열."))
-
-
-REVIEW_SYSTEM = (
-    "당신은 학교 영어 시험 문항을 검수하는 까다로운 검토자다. 아래 문항이 실제 시험에 "
-    "낼 수 있을 만큼 타당한지 엄격하게 판정한다. 조금이라도 정답이 복수이거나, 표시된 "
-    "정답이 틀렸거나, 오답 중 정답으로 볼 만한 것이 있거나, 지문/선지에 오류가 있으면 "
-    "ok=false 로 판정하고 issue 에 이유를 구체적으로 적는다. 반드시 JSON 스키마로만 답한다."
-)
-
-
 def system_prompt(profile: dict[str, Any], difficulty_ko: str) -> str:
     """학교 스타일을 주입한 시스템 프롬프트(§8.5.5)."""
     name = profile.get("name", "해당 학교")
