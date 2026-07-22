@@ -8,7 +8,11 @@ school_id: jinyang_hs   # 대상 학교(profiles/schools.json 에서 선택)
 grade: 1                # 학년
 difficulty: 중          # 상 | 중 | 하
 
-model: "claude-opus-4-8"
+# 생성 모델(속도/품질/비용). 기본은 빠르고 우수한 Sonnet.
+#   claude-sonnet-5           : 빠름·고품질(권장, 기본)
+#   claude-haiku-4-5-20251001 : 초고속·저비용(간단한 문항)
+#   claude-opus-4-8           : 최고품질·느림·고비용
+model: "claude-sonnet-5"
 
 # 지문 처리
 passage_mode: assign    # assign(올린 지문 자동배정, 기본) | keep(원본 유지)

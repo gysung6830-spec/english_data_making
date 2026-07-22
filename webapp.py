@@ -39,7 +39,13 @@ UPLOAD_DIR = ROOT / "web_uploads"
 OUTPUT_DIR = ROOT / "output"
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
-MODEL = os.environ.get("MOCK_MODEL", "claude-opus-4-8")
+MODEL = os.environ.get("MOCK_MODEL", "claude-sonnet-5")
+# 웹앱 속도 선택 → 모델 매핑
+SPEED_MODEL = {
+    "fast": "claude-sonnet-5",             # 빠름·고품질(기본)
+    "turbo": "claude-haiku-4-5-20251001",  # 초고속·저비용
+    "best": "claude-opus-4-8",             # 최고품질·느림
+}
 
 ALLOWED = {".pdf", ".txt", ".md", ".hwp"} | IMAGE_EXTS
 
@@ -158,6 +164,13 @@ INDEX_HTML = """
 
       <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
+
+      <label>⑧ 생성 속도 <span class=hint>(빠를수록 저렴)</span></label>
+      <select name=speed>
+        <option value="fast" selected>빠름 · 고품질 (Sonnet, 권장)</option>
+        <option value="turbo">초고속 · 저비용 (Haiku)</option>
+        <option value="best">최고품질 · 느림 (Opus)</option>
+      </select>
 
       <label class=chk><input type=checkbox name=review value=1>
         정밀검수 (비용추가)</label>
@@ -318,10 +331,11 @@ def generate():
             "<div class=err>지원하는 지문 파일이 없습니다(PDF·JPG·PNG·TXT·HWP).</div><form id=f")
         return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
 
+    model = SPEED_MODEL.get(request.form.get("speed"), MODEL)
     client = None
     if not mock:
         from mockexam.core.llm import get_client
-        client = get_client(key, MODEL)
+        client = get_client(key, model)
 
     try:
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
