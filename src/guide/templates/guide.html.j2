@@ -66,12 +66,10 @@
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
       <span class="dq-kind {{ pr.kind }}">{{ '객관식' if pr.kind=='mc' else '주관식' }} {{ pr.no }}</span>
       <span class="dq-sent">{{ pr.sentence }}
-        {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ dnums[pr.answer_index] }}</span>
-        {% else %}<span class="dq-correct">모범답안</span>{% endif %}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
+        {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ dnums[pr.answer_index] }}</span>{% endif %}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
     </div>
     {% if s %}
-    {% if pr.kind == 'short' and pr.answer %}<div class="sol ans"><span class="sol-tag">모범답안</span>{{ pr.answer }}</div>{% endif %}
-    {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기</span>{{ s.cut }}</div>{% endif %}
+    {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
       {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">필자가 하고싶은 말</span>{{ s.author_msg }}</div>{% endif %}
