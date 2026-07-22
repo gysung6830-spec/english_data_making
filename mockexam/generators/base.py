@@ -67,8 +67,8 @@ DISTRACTOR_RULE = (
     "2개는 '주제와 정반대로 모순'되게 만들되, 오답 4개 모두 지문에 실제 등장한 단어를 활용해 "
     "그럴듯하게 보이도록 하라. 그 결과 정답은 오직 1개만 성립하고 오답 4개는 확실히 틀리게 하라."
 )
-# 위 원리(정답=유의어 패러프레이즈)를 적용하는 유형
-_PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning"}
+# 위 원리(정답=유의어 패러프레이즈)를 적용하는 유형(모두 '가장 적절한 것' 고르기형)
+_PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning", "blank_single"}
 
 
 def _flag_reason(item: Item, out: Any) -> str:
