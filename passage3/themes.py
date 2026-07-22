@@ -90,10 +90,19 @@ VOCAB_RULES = """
 
 
 def _modern_css() -> str:
+    # 업로드 색상 #ecedf1(옅은 청회색) 기반 팔레트
+    FILL = "#ecedf1"       # 해석·어휘 박스 배경
+    INK = "#2a2e3a"        # 진한 본문(청회 계열 near-black)
+    KO = "#565c6c"         # 한글 해석 글자
+    MUTED = "#82869b"      # 라벨·머리글
+    LINE = "#e4e6ed"       # 문장 구분선
+    RULE = "#d3d6e1"       # 머리글 아래 굵은 선
+    ACCENT = "#5b6377"     # 제목 왼쪽 강조막대(슬레이트)
+    NUM = "#a7aab9"        # 원문자 번호
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
   font-family: {SERIF_STACK};
-  color: #1a1a1a;
+  color: {INK};
   font-size: 13.5px;
   line-height: 1.6;
   -webkit-print-color-adjust: exact;
@@ -103,50 +112,50 @@ body {{
 .doc-header {{
   text-align: right;
   font-size: 11px;
-  color: #8a8a8e;
+  color: {MUTED};
   letter-spacing: .3px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #d9d9dd;
+  border-bottom: 1px solid {RULE};
   margin-bottom: 22px;
 }}
 .passage {{ margin: 0; }}
 /* 제목: 라벨 + 제목 한 줄, 왼쪽 세로 강조막대 */
 .p-head {{
-  border-left: 4px solid #1a1a1a;
+  border-left: 4px solid {ACCENT};
   padding-left: 13px;
   margin: 0 0 20px 0;
   line-height: 1.45;
-  color: #1a1a1a;
+  color: {INK};
 }}
-.p-head .p-label {{ display: block; font-weight: 700; font-size: 13px; color: #6e6e73; margin-bottom: 3px; }}
-.p-head .p-title {{ display: block; font-weight: 800; font-size: 15.5px; color: #1a1a1a; }}
+.p-head .p-label {{ display: block; font-weight: 700; font-size: 13px; color: {MUTED}; margin-bottom: 3px; }}
+.p-head .p-title {{ display: block; font-weight: 800; font-size: 15.5px; color: {INK}; }}
 /* 한줄해석 / 한줄영어 : 문장 블록 */
 .sent {{
   margin-bottom: 14px;
   padding-bottom: 14px;
-  border-bottom: 1px solid #ececee;   /* 문장마다 연한 구분선 */
+  border-bottom: 1px solid {LINE};   /* 문장마다 연한 구분선 */
 }}
 .sent:last-child {{ border-bottom: none; padding-bottom: 0; }}
 .en {{
   font-size: 13.5px;
   line-height: 1.62;
-  color: #1a1a1a;
+  color: {INK};
 }}
 .num {{
-  color: #9a9a9f;
+  color: {NUM};
   margin-right: 6px;
 }}
 /* 회색박스 한글해석 */
 .ko-box {{
   margin-top: 8px;
-  background: #f4f4f5;
+  background: {FILL};
   border-radius: 5px;
   padding: 8px 12px;
 }}
 .ko-box .ko {{
   font-size: 11px;
   line-height: 1.5;
-  color: #555558;
+  color: {KO};
 }}
 /* 좌지문 우해석 : 2단 표(배경 없음, 가로 구분선만) */
 table.two-col {{
@@ -157,14 +166,20 @@ table.two-col {{
 table.two-col td {{
   vertical-align: top;
   padding: 11px 14px 11px 0;
-  border-bottom: 1px solid #ececee;
+  border-bottom: 1px solid {LINE};
   font-size: 13px;
   line-height: 1.62;
 }}
 table.two-col tr.sent:last-child td {{ border-bottom: none; }}
-table.two-col td.col-en {{ width: 62%; color: #1a1a1a; padding-right: 20px; }}
-table.two-col td.col-ko {{ width: 38%; color: #555558; font-size: 11px; }}
-{AUTOFIT_RULES}{VOCAB_RULES}"""
+table.two-col td.col-en {{ width: 62%; color: {INK}; padding-right: 20px; }}
+table.two-col td.col-ko {{ width: 38%; color: {KO}; font-size: 11px; }}
+{AUTOFIT_RULES}{VOCAB_RULES}
+/* 하단 어휘 박스도 같은 색 계열 (VOCAB_RULES 뒤에서 덮어씀) */
+.vocab {{ border-color: #d7d9e3; background: {FILL}; }}
+.vocab-title {{ color: {MUTED}; }}
+.vocab-item .w {{ color: {INK}; }}
+.vocab-item .m {{ color: {KO}; }}
+"""
 
 
 def _textbook_css() -> str:
