@@ -1,14 +1,14 @@
 # ============================================================
-#  0부 — 읽기 엔진 (모든 문장·모든 문제에 쓰는 공통 도구)
+#  0부 — 읽기 엔진 (모든 문장에 쓰는 3단계 공통 도구)
 #  원칙: 간결하게. 학생이 한 번 읽고 이해할 분량만.
-#  고정 콘텐츠. 예문/설명을 여기서 바로 고칠 수 있습니다(코딩 불필요).
+#  (어휘 유추는 별도 목차 '어휘 유추'로 분리)
 # ============================================================
 
-title: "읽기 엔진 — 뼈대 → 관계 → 깊이 조절"
+title: "읽기 엔진 — 뼈대 → 관계 → 완성"
 spine: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있다."
 intro: >-
-  수식어(살)가 뼈대를 덮어서 어려울 뿐이다. 뼈대부터 잡고 → 살을 붙여 → 앞으로만 읽는다.
-  그리고 문제 유형에 맞게 '읽는 깊이'만 조절하면 된다.
+  수식어(살)가 뼈대를 덮어서 어려울 뿐이다.
+  뼈대부터 잡고 → 관계로 읽고 → 살을 붙여 '앞으로만' 읽는다.
 
 methods:
   - step: "STEP 1"
@@ -46,46 +46,6 @@ methods:
       skeleton_en: "She walked onto the stage."
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
-
-  - step: "읽기 깊이"
-    title: "유형별로 '어디까지' 읽나"
-    idea: "모든 문장을 같은 깊이로 읽는 게 비효율. 유형이 요구하는 만큼만 판다."
-    rule: "대의 → 뼈대·연결어만 빠르게 / 빈칸·함축 → 논리(재진술·대조) 정밀 / 어법·어휘 → 구조 정밀 / 순서·삽입 → 연결어·지시어(담화 표지)."
-    ms_point: "빠르게 훑을 곳과 정밀히 팔 곳을 나누면, 같은 시간에 더 정확히 푼다."
-
-  - step: "유추 tip"
-    title: "모르는 단어는 '유추'로 뚫는다"
-    idea: "단어 뜻을 다 몰라도 된다. 대조·재진술 단서가 뜻을 공짜로 준다."
-    rule: "① 극성(긍정/부정어 주변) · ② 대조(but·unlike 뒤=반대) · ③ 재진술·예시(that is·such as=같은 뜻) · ④ 병렬(A and B=같은 부류) · ⑤ 형태(un-·-less=부정)."
-    ms_point: "but=반대말, that is·such as=같은 말을 이미 준 것. 단서 하나만 잡으면 뜻은 안 무너진다."
-    demo:
-      sentence: "Unlike his frugal brother, who saved every coin, Tom was profligate and spent his salary within a week."
-      bracketed: "Unlike his frugal brother (who saved every coin), Tom was profligate and spent his salary within a week."
-      skeleton_en: "Tom was profligate (≠ frugal)."
-      skeleton_ko: "Tom은 profligate했다 (≠ 절약하는)."
-      full_ko: "'profligate'를 몰라도 Unlike(대조) + '형은 절약' + '일주일 만에 월급 탕진' → '헤프게 낭비하는'으로 유추. (단서 ②)"
-
-# '읽기 깊이' 형광펜 예시(꼭 읽을 곳만 강조). 학습용 예시 지문.
-depth_demos:
-  - kind: "주제·요지 — 뼈대만 빠르게"
-    source: "학습용 예시"
-    goal: "핵심 주장 하나만 잡으면 끝. 예시는 증거일 뿐 흘려 읽는다."
-    passage: >-
-      ==Many people believe talent alone determines success, but research suggests that
-      deliberate practice matters far more.== In one study, elite violinists were not born more
-      gifted; they had simply practiced thousands more hours. Chess masters spend years studying
-      past games. Even 'natural' athletes train relentlessly. ==In short, what looks like raw
-      talent is usually the tip of a long, deliberate effort.==
-    read: "주제문(but) + In short(재진술)만 읽어도 요지가 잡힌다 — 가운데 예시는 같은 말의 반복."
-  - kind: "빈칸 추론 — 단서 정밀"
-    source: "학습용 예시"
-    goal: "빈칸의 답 = 주변의 재진술·대조가 이미 말해 준다. 빈칸만 노려보지 말 것."
-    passage: >-
-      A good map leaves out detail on purpose. ==A subway map, for example, ignores real distances,
-      showing only the order of stops,== which makes it easier to use. In the same way, a useful
-      model works by ( ____ ). ==By stripping away the messy details, it reveals the pattern that
-      matters.==
-    read: "빈칸 앞 예시 + 뒤 재진술만 읽으면 답이 보인다 — 빈칸 = '불필요한 세부를 덜어내기'."
 
 tools:
   - "ⓐ 되돌아가지 않기 — 청크 단위로 '앞으로만'(직독직해)."

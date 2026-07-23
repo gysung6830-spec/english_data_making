@@ -113,6 +113,11 @@
   {% endfor %}
   {% endif %}
 
+  {% if guide.inference %}
+  <div class="toc-part"><a href="#partInf">어휘 유추 — 모르는 단어는 유추로 뚫는다</a></div>
+  <div class="toc-item"><a href="#partInf">유추의 다섯 단서 · 유추 문제(객관식·주관식)</a></div>
+  {% endif %}
+
   {% if guide.part2 %}
   <div class="toc-part"><a href="#part2">1부 · 구문해석 — {{ guide.part2.title }}</a></div>
   {% for g in guide.part2.groups %}
@@ -207,6 +212,47 @@
   </div>
   {% endif %}
 </section>
+{% endif %}
+
+{# ===================== 어휘 유추 (별도 목차) ===================== #}
+{% if guide.inference %}
+{% set inf = guide.inference %}
+<section class="chapter" id="partInf">
+  <div class="ch-kicker">어휘 유추</div>
+  <div class="ch-title">{{ inf.title }}</div>
+  <div class="ch-signal">{{ inf.intro }}</div>
+</section>
+{% for chapter in inf.chapters %}
+<section class="chapter wb" id="inf-{{ chapter.id }}">
+  <div class="ch-kicker">어휘 유추 · 원리</div>
+  <div class="ch-title">{{ chapter.title }}</div>
+  {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">원리</span>{{ chapter.point }}</div>{% endif %}
+  {% if chapter.exprs %}
+  <div class="formula">
+    <div class="f-label">유추의 단서</div>
+    <div class="f-rows">
+      {% for r in chapter.exprs %}
+      <div class="f-row"><span class="f-en">{{ r.en }}</span>
+        <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  {% if chapter.strategy %}<div class="wb-strategy">🎯 <b>유추 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+  {% if chapter.examples %}
+  <div class="ex-label">유추 시연 <span>· 단서로 뜻 뚫기</span></div>
+  <ol class="wb-ex">
+    {% for e in chapter.examples %}
+    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+      {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
+      {% if e.cut %}<div class="wb-cut"><span class="cut-tag">유추</span>{{ e.cut }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+</section>
+{% if chapter.practice %}{{ drill_pages(chapter.title, chapter.practice) }}{% endif %}
+{% endfor %}
 {% endif %}
 
 {# ===================== 1부 — 구문해석 · 해석공식 시각화 ===================== #}

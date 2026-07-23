@@ -263,6 +263,7 @@ class Guide(BaseModel):
     kicker: str = "평가원 기출로 익히는"
     subtitle: str = "단어를 몰라도, 문장이 복잡해도 핵심을 놓치지 않는 법"
     part0: Part0 | None = None                 # 0부 기본기
+    inference: AbstractPart | None = None       # 어휘 유추(별도 목차) — AbstractPart 재사용
     chapters: list[Chapter] = []               # 1부 평가원 코드
     paraphrase: ParaphrasePart | None = None   # 2부 패러프레이징(지문 단위)
     abstract: AbstractPart | None = None       # 추상→구체

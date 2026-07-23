@@ -116,6 +116,46 @@ def load_abstract(path: str | Path | None = None):
                         intro=data.get("intro", ""), chapters=chapters)
 
 
+def load_inference(path: str | Path | None = None):
+    """inference.yaml → 어휘 유추 파트(원리 + 문제↔해설). AbstractPart 재사용."""
+    from .schemas import (AbstractChapter, AbstractPart, FormulaRow, PracticeItem,
+                          PracticeSolution, VocabItem, WorkExample)
+    p = Path(path) if path else (Path(__file__).resolve().parent / "inference.yaml")
+    if not p.exists():
+        return None
+    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    chapters = []
+    for c in data.get("chapters", []):
+        prac = []
+        mc_n = sh_n = 0
+        for pr in c.get("practice", []):
+            if not keep_source(pr.get("source", "")):
+                continue
+            kind = pr.get("kind", "mc")
+            if kind == "mc":
+                mc_n += 1; no = mc_n
+            else:
+                sh_n += 1; no = sh_n
+            sol = pr.get("solution")
+            prac.append(PracticeItem(
+                no=no, kind=kind, sentence=pr["sentence"], source=pr.get("source", ""),
+                prompt=pr.get("prompt", ""), options=pr.get("options", []),
+                answer_index=pr.get("answer_index", 0), answer=pr.get("answer", ""),
+                vocab=[VocabItem(**v) for v in pr.get("vocab", [])],
+                solution=PracticeSolution(**sol) if sol else None,
+            ))
+        chapters.append(AbstractChapter(
+            id=c["id"], title=c["title"], point=c.get("point", ""),
+            strategy=c.get("strategy", ""),
+            exprs=[FormulaRow(en=e["en"], ko=e["ko"]) for e in c.get("exprs", [])],
+            examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""))
+                      for e in c.get("examples", []) if keep_source(e.get("src", ""))],
+            practice=prac,
+        ))
+    return AbstractPart(title=data.get("title", "어휘 유추"),
+                        intro=data.get("intro", ""), chapters=chapters)
+
+
 def load_part2_workbook(path: str | Path | None = None):
     """syntax_formula.yaml + SYNTAX_TYPES → 3 PART로 묶인 워크북형 Part2(해석공식 시각화)."""
     from .schemas import (Diagram, FormulaRow, Part2, PracticeItem,

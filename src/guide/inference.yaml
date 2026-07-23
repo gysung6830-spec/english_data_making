@@ -1,0 +1,196 @@
+# 어휘 유추 — 별도 목차(원리 + 유추 문제). 실제 평가원 기출. 코딩 없이 편집.
+title: 어휘 유추 — 모르는 단어는 유추로 뚫는다
+intro: 모든 단어를 외울 순 없다. 하지만 평가원 문장은 어려운 단어의 뜻을 '문맥 단서'로 흘려 준다. 다섯 단서로 모르는 단어를 뚫는 법을 익히고, 유추 문제로 훈련한다.
+chapters:
+- id: infer
+  title: 유추의 다섯 단서
+  point: 단어 뜻을 다 몰라도 된다. 문장이 흘리는 단서로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다. 가장 강력한 건 '대조'와 '재진술' — 사실상 문장이 뜻을 공짜로 준다.
+  strategy: 모르는 단어를 만나면 → 주변에서 단서부터 찾는다. 대조(but·unlike)면 '반대', 재진술·예시(that is·such as)면 '같은 뜻', 극성 신호면 '좋다/나쁘다'만 잡아도 충분할 때가 많다.
+  exprs:
+  - en: 극성 (긍정어/부정어 주변)
+    ko: 좋은 말/나쁜 말 색깔을 따라간다
+  - en: 대조 but·however·unlike·rather than
+    ko: 뒤 단어 = 앞의 '반대' 뜻
+  - en: 재진술·예시 that is·such as·for example
+    ko: 옆의 쉬운 말·나열 = '같은 뜻'
+  - en: 병렬 A and/or B
+    ko: A와 B는 '같은 부류'
+  - en: 형태 접두사·어근 un-·-less·re-·over-
+    ko: 뜻의 방향(부정·반복·과잉)
+  examples:
+  - en: Unlike his frugal brother, who saved every coin, Tom was profligate and spent his salary within a week.
+    src: 학습용 예시
+    cut: '''profligate''를 몰라도 → Unlike(대조) + ''동전까지 모으던 형과 달리'' + ''일주일 만에 월급 탕진'' → ''헤프게 낭비하는''. (단서: 대조)'
+  practice:
+  - kind: mc
+    sentence: However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static.
+    source: 2026 고3 11월 42번
+    prompt: 밑줄 친 fluid의 문맥상 의미로 가장 적절한 것을 고르시오.
+    options:
+    - 고정된, 확립된
+    - 유동적인, 변하는
+    answer_index: 1
+    vocab:
+    - word: fluid
+      meaning: 유동적인
+    - word: static
+      meaning: 고정된
+    - word: category
+      meaning: 범주
+    solution:
+      cut: unlike(대조) + 'fluid rather than static' → static(고정)의 반대.
+      wrong: fluid = '고정된, 확립된'.
+      wrong_why: rather than static(고정적이지 않고)의 대조를 놓치면 반대로 읽는다.
+      author_msg: fluid = '유동적인'. 다른 범주들과 달리 그것은 고정돼 있지 않고 계속 변한다는 뜻.
+      key_points:
+      - '단서: rather than static — A rather than B에서 A(fluid)는 B(static)의 반대.'
+      - '단서: unlike(대조).'
+  - kind: mc
+    sentence: Passwords, double-key identification, and biometrics such as fingerprint, iris, and voice recognition are all ways of keeping the account details hidden from potential fraudsters.
+    source: 2022 고3 9월 39번
+    prompt: 밑줄 친 biometrics의 문맥상 의미로 가장 적절한 것을 고르시오.
+    options:
+    - 암호를 자주 바꾸는 정책
+    - 지문·홍채·음성 등 생체 정보를 이용한 인증
+    answer_index: 1
+    vocab:
+    - word: biometrics
+      meaning: 생체 인식(정보)
+    - word: fraudster
+      meaning: 사기꾼
+    - word: iris
+      meaning: 홍채
+    solution:
+      cut: such as fingerprint, iris, and voice recognition(예시) → 신체 특징 기반 인식.
+      wrong: biometrics = '암호를 자주 바꾸는 정책'.
+      wrong_why: 앞의 passwords에 이끌려 암호 관련으로 착각한다.
+      author_msg: biometrics = '생체 인식'. 지문·홍채·음성 같은 신체 특징으로 본인을 확인하는 방식이라는 뜻.
+      key_points:
+      - '단서: such as fingerprint, iris, and voice recognition — 예시가 곧 정의.'
+      - '단서: 신체 특징 나열.'
+  - kind: mc
+    sentence: Overly rigid habits and conventions, no matter how well-considered or well-intentioned, threaten innovation.
+    source: 2024 고3 9월 24번
+    prompt: 밑줄 친 rigid의 문맥상 의미로 가장 적절한 것을 고르시오.
+    options:
+    - 유연한, 융통성 있는
+    - 경직된, 융통성 없는
+    answer_index: 1
+    vocab:
+    - word: rigid
+      meaning: 경직된
+    - word: convention
+      meaning: 관습
+    - word: innovation
+      meaning: 혁신
+    solution:
+      cut: '''Overly rigid ... threaten innovation''(혁신을 위협) → 부정적 극성, 유연함의 반대.'
+      wrong: rigid = '유연한, 융통성 있는'.
+      wrong_why: 습관·관습을 좋게 보아 긍정적 뉘앙스로 오해한다.
+      author_msg: rigid = '경직된'. 지나치게 굳어 버린 습관과 관습은 혁신을 위협한다는 뜻.
+      key_points:
+      - '단서: threaten innovation(혁신을 위협) — 부정적 극성.'
+      - '단서: Overly(지나치게)가 부정 강조.'
+  - kind: mc
+    sentence: You found it only slightly difficult and conclude that you were climbing quite well, when in fact you were climbing no better than usual.
+    source: 2025 고3 6월 21번
+    prompt: 밑줄 친 no better than의 문맥상 의미로 가장 적절한 것을 고르시오.
+    options:
+    - 평소보다 훨씬 나은
+    - 평소와 다를 바 없는(더 낫지 않은)
+    answer_index: 1
+    vocab:
+    - word: no better than
+      meaning: ~보다 나을 것 없는
+    - word: slightly
+      meaning: 약간
+    - word: conclude
+      meaning: 결론짓다
+    solution:
+      cut: when in fact(실제로는, 대조) → 잘한다는 결론과 반대되는 사실.
+      wrong: no better than = '평소보다 훨씬 나은'.
+      wrong_why: better만 보고 '더 낫다'로 읽으면 no의 부정을 놓친다.
+      author_msg: no better than usual = '평소와 다를 바 없는'. 잘 오른다고 착각했지만 사실은 평소만큼밖에 못 올랐다는 뜻.
+      key_points:
+      - '단서: when in fact(실제로는) — 앞 결론과 대조.'
+      - '단서: no + better = 더 낫지 않음(부정).'
+  - kind: short
+    sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
+    source: 2024 고3 11월 23번
+    prompt: ecosystem services의 뜻을 문맥으로 유추해 우리말로 쓰고, 근거 단서를 밝히시오.
+    answer: '생태계 서비스(생태계가 인간에게 주는 이로움) (단서: carbon capture, wildlife habitat, flood protection 같은 예시가 and other ecosystem services로 묶임)'
+    vocab:
+    - word: ecosystem services
+      meaning: 생태계 서비스
+    - word: incentive
+      meaning: 유인, 동기
+    - word: habitat
+      meaning: 서식지
+    solution:
+      cut: carbon capture, wildlife habitat, flood protection, and other ecosystem services → 나열의 마무리로 앞 항목들이 곧 그 예시.
+      wrong: ecosystem services = '생태계에 요금을 매기는 서비스업'.
+      wrong_why: services를 상업적 '서비스업'으로만 읽으면 오해한다.
+      author_msg: ecosystem services = '생태계 서비스'. 탄소 흡수·서식지·홍수 방지처럼 숲(생태계)이 제공하는 이로움을 뜻한다.
+      key_points:
+      - '단서: and other ecosystem services — 앞 나열 항목을 한데 묶는 상위어.'
+      - '단서: such-example식 나열(carbon capture, habitat, flood protection).'
+  - kind: short
+    sentence: As a practical matter, one seldom requires complete autonomy from the group.
+    source: 2023 고3 6월 30번
+    prompt: autonomy의 뜻을 문맥으로 유추해 우리말로 쓰고, 근거 단서를 밝히시오.
+    answer: '자율성, 독립성 (단서: from the group과 결합해 ''집단으로부터의 ~''로, 집단에 매이지 않는 상태를 가리킴)'
+    vocab:
+    - word: autonomy
+      meaning: 자율성, 독립성
+    - word: seldom
+      meaning: 좀처럼 ~않다
+    - word: practical
+      meaning: 실질적인
+    solution:
+      cut: complete autonomy from the group → '집단으로부터의 완전한 ~' → 집단에 의존하지 않는 독립 상태.
+      wrong: autonomy = '집단에 대한 복종, 소속감'.
+      wrong_why: from the group을 '집단에 속함'으로 뒤집어 읽으면 반대가 된다.
+      author_msg: autonomy = '자율성, 독립성'. 현실적으로 집단에서 완전히 독립할 필요는 좀처럼 없다는 뜻.
+      key_points:
+      - '단서: from the group — ''~로부터의'' 독립을 의미.'
+      - '단서: complete(완전한)가 독립의 정도를 수식.'
+  - kind: short
+    sentence: At the same time, it is important to recognize that, no matter how fast they grow, countries where a large part of the population derive their livelihood from uncertain sources cannot hope to prevent famines.
+    source: 2024 고3 6월 40번
+    prompt: livelihood의 뜻을 문맥으로 유추해 우리말로 쓰고, 근거 단서를 밝히시오.
+    answer: '생계, 생계 수단 (단서: derive their livelihood from uncertain sources — 불안정한 원천에서 얻는 것, famines(기근)와 연결)'
+    vocab:
+    - word: livelihood
+      meaning: 생계, 생계 수단
+    - word: derive
+      meaning: 얻다, 이끌어내다
+    - word: famine
+      meaning: 기근
+    solution:
+      cut: derive their livelihood from uncertain sources + cannot ... prevent famines → 먹고사는 수단이 불안정 → 기근.
+      wrong: livelihood = '삶의 활기, 생기'.
+      wrong_why: live-가 들어가 'liveliness(활기)'와 혼동한다.
+      author_msg: livelihood = '생계'. 인구 상당수가 불안정한 원천에서 생계를 얻는 나라는 기근을 막기 어렵다는 뜻.
+      key_points:
+      - '단서: derive ... from uncertain sources(불안정한 원천에서 얻음).'
+      - '단서: cannot ... prevent famines(기근) — 먹고사는 문제와 직결.'
+  - kind: short
+    sentence: Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills.
+    source: 2023 고3 6월 35번
+    prompt: automaticity의 뜻을 문맥으로 유추해 우리말로 쓰고, 근거 단서를 밝히시오.
+    answer: '자동성(의식하지 않고도 자동으로 처리되는 능숙함) (단서: on the other hand로 숙련자와 대조, fluency와 나란히 나열)'
+    vocab:
+    - word: automaticity
+      meaning: 자동성
+    - word: fluency
+      meaning: 유창함
+    - word: component
+      meaning: 구성 요소의
+    solution:
+      cut: on the other hand(대조)로 초보자는 숙련자와 달리 fluency and automaticity를 아직 못 갖춤 → 능숙한 자동 처리 능력.
+      wrong: automaticity = '기계적이고 무성의한 태도'.
+      wrong_why: '''자동''을 부정적 ''기계적''으로만 읽으면 오해한다.'
+      author_msg: automaticity = '자동성'. 각 세부 기술이 의식적 노력 없이 자동으로 수행되는 능숙한 상태로, 초보자는 아직 이르지 못한 경지다.
+      key_points:
+      - '단서: on the other hand — 숙련자와 대조되는 ''아직 못 이룬'' 능력.'
+      - '단서: fluency and automaticity — 유창함과 나란히 놓인 긍정적 숙련도.'
