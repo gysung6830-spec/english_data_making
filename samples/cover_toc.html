@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>형광펜 독해 — 표지·목차</title>
+<style>
+@page{ size:A4; margin:0; }
+*{ box-sizing:border-box; }
+body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; color:#23272e; margin:0; }
+:root{ --deep:#1f7a5c; --deep-d:#12543d; --must:#ffe9a8; --muted:#6b7280; --line:#e6e8ea; }
+
+/* 표지 */
+.cover{ height:297mm; padding:34mm 26mm; display:flex; flex-direction:column;
+  background:linear-gradient(160deg,#12543d 0%, #1f7a5c 70%, #2a916d 100%); color:#fff;
+  break-after:page; }
+.cover .kicker{ font-size:13px; font-weight:700; letter-spacing:2px; opacity:.85; }
+.cover .hl{ display:inline-block; background:var(--must); color:#12543d; font-weight:800;
+  padding:2px 10px; border-radius:6px; }
+.cover .title{ font-size:58px; font-weight:800; line-height:1.1; margin:14px 0 6px; }
+.cover .sub{ font-size:15px; line-height:1.7; opacity:.95; max-width:150mm; }
+.cover .rule{ width:70mm; height:4px; background:var(--must); border-radius:3px; margin:22px 0; }
+.cover .tags{ margin-top:auto; font-size:12px; opacity:.9; line-height:2; }
+.cover .tags b{ color:var(--must); }
+.cover .foot{ margin-top:18px; font-size:11px; opacity:.75; }
+
+/* 목차 */
+.toc{ padding:28mm 26mm; }
+.toc h1{ font-size:30px; font-weight:800; color:var(--deep-d); margin:0 0 4px; }
+.toc .h1sub{ font-size:12px; color:var(--muted); margin-bottom:22px; }
+.part{ margin-bottom:16px; }
+.part .pt-hd{ display:flex; align-items:baseline; border-bottom:2px solid var(--deep); padding-bottom:5px; }
+.part .pt-no{ font-size:12px; font-weight:800; color:#fff; background:var(--deep); border-radius:5px; padding:2px 9px; margin-right:9px; }
+.part .pt-title{ font-size:17px; font-weight:800; color:var(--deep-d); }
+.part .pt-page{ margin-left:auto; font-size:13px; font-weight:800; color:var(--deep); }
+.part .desc{ font-size:11px; color:var(--muted); margin:4px 0 6px 46px; }
+.sub-row{ display:flex; align-items:baseline; font-size:12.5px; margin:3px 0 3px 46px; color:#2b3a34; }
+.sub-row .dots{ flex:1; border-bottom:1px dotted #b9cfc6; margin:0 8px; transform:translateY(-3px); }
+.sub-row .pg{ font-weight:700; color:var(--deep-d); }
+.toc .note{ margin-top:24px; font-size:10.5px; color:var(--muted); background:#eaf5f0; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:9px 12px; line-height:1.6; }
+.toc .note b{ color:var(--deep-d); }
+</style>
+</head>
+<body>
+
+  <!-- 표지 -->
+  <div class="cover">
+    <div class="kicker">수능 영어 · <span class="hl">🟡 칠하는 법</span></div>
+    <div class="title">형광펜<br>독해</div>
+    <div class="sub">무엇을 읽고 무엇을 버릴지 — 노란색 '신호'로 골라 읽어<br>기출을 최소 시간에 푸는 법을 배우는 훈련 교재.</div>
+    <div class="rule"></div>
+    <div class="tags">
+      대상 <b>3~5등급 → 2등급</b><br>
+      엔진 <b>신호 사전</b> · <b>패러프레이징</b><br>
+      소재 <b>실제 평가원 기출</b> (2022~2027)
+    </div>
+    <div class="foot">© 김은아영어연구소 · 형광펜 독해 시리즈</div>
+  </div>
+
+  <!-- 목차 -->
+  <div class="toc">
+    <h1>목차 <span style="font-size:16px;color:var(--muted)">Contents</span></h1>
+    <div class="h1sub">이 교재는 두 파트가 하나로 묶여 있습니다 — 유형별 훈련 + 패러프레이징 특별 훈련.</div>
+
+    <div class="part">
+      <div class="pt-hd"><span class="pt-no">PART 0</span><span class="pt-title">엔진 — 신호 사전</span><span class="pt-page">p.3</span></div>
+      <div class="desc">정답을 몰라도 노란색을 스스로 칠하게 하는 12분류 신호 + 적용범위</div>
+      <div class="sub-row"><span>신호 사전(역접·한정·결론·지시·연결…)</span><span class="dots"></span><span class="pg">3</span></div>
+      <div class="sub-row"><span>"노랑만 읽기가 통하는 유형" 범위</span><span class="dots"></span><span class="pg">4</span></div>
+    </div>
+
+    <div class="part">
+      <div class="pt-hd"><span class="pt-no">PART 1</span><span class="pt-title">유형별 훈련</span><span class="pt-page">p.5</span></div>
+      <div class="desc">문항마다 ①연습(직접 풀기) → ②훈련(정답 칠·노랑만으로 정답 도출) → ③해석(직독직해)</div>
+      <div class="sub-row"><span>빈칸추론 (2022 6월 34번)</span><span class="dots"></span><span class="pg">5</span></div>
+      <div class="sub-row"><span>함축의미 (2022 6월 21번)</span><span class="dots"></span><span class="pg">7</span></div>
+    </div>
+
+    <div class="part">
+      <div class="pt-hd"><span class="pt-no">PART 2</span><span class="pt-title">패러프레이징 특별 훈련</span><span class="pt-page">p.9</span></div>
+      <div class="desc">평가원이 지문의 말을 어떻게 바꿔 정답을 내는지 — 방법론 · 지문 내 해부 · 객관식</div>
+      <div class="sub-row"><span>원리·5변환·함정 4유형</span><span class="dots"></span><span class="pg">9</span></div>
+      <div class="sub-row"><span>평가원 지문 내 패러프레이징 해부(실제 기출)</span><span class="dots"></span><span class="pg">10</span></div>
+      <div class="sub-row"><span>객관식 10문항</span><span class="dots"></span><span class="pg">12</span></div>
+      <div class="sub-row"><span>정답 &amp; 해설(함정 유형까지)</span><span class="dots"></span><span class="pg">14</span></div>
+    </div>
+
+    <div class="note">📖 <b>이렇게 쓰세요</b> — PART 0의 신호 사전을 먼저 익히고, PART 1에서 문항마다 왼쪽(문제)을 직접 푼 뒤 오른쪽(풀이·해석)으로 확인합니다. PART 2는 모든 유형을 관통하는 '바꿔 말하기' 스킬을 따로 훈련합니다.</div>
+  </div>
+
+</body>
+</html>
