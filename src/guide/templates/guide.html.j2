@@ -10,6 +10,18 @@
 </div>
 {% endmacro %}
 
+{% macro method_demo(demo) %}
+<div class="demo">
+  <div class="demo-step"><span class="dtag s1">① 괄호치기</span>
+    <span class="demo-en">{{ demo.bracketed or demo.sentence }}</span></div>
+  <div class="demo-step"><span class="dtag s2">② 뼈대(쉬운 말)</span>
+    <span class="skel-en">{{ demo.skeleton_en }}</span>
+    <span class="skel-ko">— {{ demo.skeleton_ko }}</span></div>
+  <div class="demo-step"><span class="dtag s3">③ 완성</span>
+    <span class="demo-full">{{ demo.full_ko }}</span></div>
+</div>
+{% endmacro %}
+
 {% macro problems_block(problems) %}
 <div class="problems">
   <div class="prob-title">🎯 실전적용 <span>· 예시 외 기출로 직접 풀어 보기</span></div>
@@ -135,23 +147,43 @@
   <div class="spine">“{{ p0.spine }}”</div>
   <div class="ch-signal">{{ p0.intro }}</div>
 
-  {% for m in p0.methods %}
-  <div class="method">
-    <div class="method-head"><span class="step">{{ m.step }}</span> {{ m.title }}</div>
+  {# ── 엔진 요약 배너: 문장이 3단계를 통과한다 ── #}
+  <div class="engine-flow">
+    <span class="ef-cap ef-in">수능 문장<small>길고 복잡</small></span>
+    <span class="ef-arrow">▶</span>
+    <span class="ef-step"><b>①</b> 괄호치기</span>
+    <span class="ef-arrow">▶</span>
+    <span class="ef-step"><b>②</b> 뼈대·관계</span>
+    <span class="ef-arrow">▶</span>
+    <span class="ef-step"><b>③</b> 살 붙이기</span>
+    <span class="ef-arrow">▶</span>
+    <span class="ef-cap ef-out">쉬운 해석<small>직독직해</small></span>
+  </div>
+
+  {# ── STEP 1·2·3 타임라인(연결된 과정) ── #}
+  <div class="steps-rail">
+  {% for m in p0.methods if m.step.startswith('STEP') %}
+    <div class="step-node">
+      <div class="node-num">{{ loop.index }}</div>
+      <div class="node-body">
+        <div class="node-title">{{ m.title }}</div>
+        <div class="method-idea">{{ m.idea }}</div>
+        {% if m.rule %}<div class="method-rule"><b>규칙 ·</b> {{ m.rule }}</div>{% endif %}
+        {% if m.ms_point %}<div class="ms-point">💡 한 줄 정리 · {{ m.ms_point }}</div>{% endif %}
+        {% if m.demo %}{{ method_demo(m.demo) }}{% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+  {# ── 지원 도구: 읽기 깊이 · 유추 (STEP 아님, 별도 카드) ── #}
+  {% for m in p0.methods if not m.step.startswith('STEP') %}
+  <div class="method extra">
+    <div class="method-head"><span class="step alt">{{ m.step }}</span> {{ m.title }}</div>
     <div class="method-idea">{{ m.idea }}</div>
     {% if m.rule %}<div class="method-rule"><b>규칙 ·</b> {{ m.rule }}</div>{% endif %}
     {% if m.ms_point %}<div class="ms-point">💡 한 줄 정리 · {{ m.ms_point }}</div>{% endif %}
-    {% if m.demo %}
-    <div class="demo">
-      <div class="demo-step"><span class="dtag s1">① 괄호치기</span>
-        <span class="demo-en">{{ m.demo.bracketed or m.demo.sentence }}</span></div>
-      <div class="demo-step"><span class="dtag s2">② 뼈대(쉬운 말)</span>
-        <span class="skel-en">{{ m.demo.skeleton_en }}</span>
-        <span class="skel-ko">— {{ m.demo.skeleton_ko }}</span></div>
-      <div class="demo-step"><span class="dtag s3">③ 완성</span>
-        <span class="demo-full">{{ m.demo.full_ko }}</span></div>
-    </div>
-    {% endif %}
+    {% if m.demo %}{{ method_demo(m.demo) }}{% endif %}
     {% if m.step == '읽기 깊이' and p0.depth_demos %}
     <div class="depth-demos">
       <div class="dd-title">🖍 같은 글도 유형 따라 '읽는 양'이 다르다 — <span>형광펜 = 꼭 읽을 곳</span></div>

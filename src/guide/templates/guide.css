@@ -268,6 +268,36 @@ body {
   background: #f6f8fc; border-left: 4px solid var(--gold);
   padding: 12px 16px; margin: 8px 0 14px; border-radius: 0 6px 6px 0;
 }
+/* 엔진 요약 배너 — 문장이 3단계를 통과 */
+.engine-flow { display: flex; align-items: stretch; flex-wrap: wrap; gap: 6px;
+  background: linear-gradient(100deg, #0c4a3d, var(--navy2)); border-radius: 12px;
+  padding: 12px 14px; margin: 8px 0 16px; justify-content: center; }
+.engine-flow .ef-cap, .engine-flow .ef-step { display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; }
+.ef-cap { color: #eafaf4; font-weight: 800; font-size: 11px; padding: 5px 12px;
+  border: 1.5px dashed rgba(255,255,255,.45); border-radius: 8px; line-height: 1.3; }
+.ef-cap small { display: block; font-weight: 500; font-size: 8px; color: #bfe3d7; }
+.ef-step { background: #eafaf4; color: var(--navy); font-weight: 800; font-size: 11px;
+  padding: 6px 13px; border-radius: 8px; }
+.ef-step b { color: var(--gold); margin-right: 3px; }
+.ef-arrow { color: var(--gold); font-weight: 900; font-size: 12px; align-self: center; }
+
+/* STEP 1·2·3 타임라인(연결된 과정) */
+.steps-rail { margin: 0 0 16px; }
+.step-node { display: flex; gap: 12px; position: relative; padding-bottom: 12px; }
+.step-node:not(:last-child)::before { content: ""; position: absolute; left: 15px; top: 30px;
+  bottom: -2px; width: 2px; background: var(--tint2); }
+.node-num { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy);
+  color: #fff; font-family: "Georgia", serif; font-weight: 800; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; z-index: 1;
+  box-shadow: 0 0 0 3px #e2f1eb; }
+.node-body { flex: 1; border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px 14px; background: #fff; page-break-inside: avoid; }
+.node-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+
+.method.extra { border: 1px solid var(--tint2); border-radius: 12px; background: #fcfefe; }
+.method-head .step.alt { background: var(--gold); }
+
 .method {
   border: 1px solid var(--line); border-radius: 8px;
   padding: 13px 16px; margin-bottom: 13px; page-break-inside: avoid;
