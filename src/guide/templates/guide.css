@@ -1,14 +1,14 @@
 /* ============================================================
    구문해석 실전서 - 인쇄용 스타일 (WeasyPrint)
    팔레트: 네이비 #1a2740 / 골드 #b08d57 / 오역=빨강 / 정답=초록
-   폰트 정책: 영어=세리프(Georgia) / 본문 한글=나눔고딕 / 목차 한글=나눔명조
+   폰트 정책: 영어=세리프(Georgia) / 본문 한글=나눔스퀘어라운드 / 목차 한글=나눔명조
      (font stack 앞쪽 세리프는 한글 글리프가 없어 → 한글은 뒤의 나눔 폰트로 자동 폴백)
    ============================================================ */
 
-/* 영어=세리프 + 본문 한글=나눔고딕 */
+/* 영어=세리프 + 본문 한글=나눔스퀘어라운드 */
 :root {
-  --f-body: "Georgia", "Times New Roman", "NanumGothic", "Nanum Gothic",
-            "Malgun Gothic", "WenQuanYi Zen Hei", serif;
+  --f-body: "Georgia", "Times New Roman", "NanumSquareRound", "NanumSquare Round",
+            "NanumGothic", "Nanum Gothic", "Malgun Gothic", "WenQuanYi Zen Hei", serif;
   /* 영어=세리프 + 목차/제목 한글=나눔명조 */
   --f-myeongjo: "Georgia", "Times New Roman", "NanumMyeongjo", "Nanum Myeongjo",
                 "Batang", "WenQuanYi Zen Hei", serif;
