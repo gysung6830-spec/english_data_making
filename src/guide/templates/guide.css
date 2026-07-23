@@ -170,6 +170,9 @@ body {
 .ab.wrong .why { color: var(--wrong); font-size: 9.5px; margin-top: 3px; }
 .ab.right { background: var(--right-bg); }
 .ab.right .tag { background: var(--right); }
+/* 정답(초록) 박스 압축 — 내부 여백 최소화 */
+.ab.right .sv-line { margin: 5px 0 0; }
+.ab.right .wb-cut { margin-top: 4px; padding: 4px 9px; background: #eef8f2; }
 
 .tip-line {
   margin-top: 9px; font-size: 10px; color: var(--navy);

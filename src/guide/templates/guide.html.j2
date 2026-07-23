@@ -84,11 +84,11 @@
     </div>
     {% if s %}
     {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
-    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
-      {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">필자가 하고싶은 말</span>{{ s.author_msg }}</div>{% endif %}
     {% if s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
       {% for k in s.key_points %}<div class="kp">{{ k }}</div>{% endfor %}</div>{% endif %}
+    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
+      {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}</div>{% endif %}
     {% endif %}
   </div>
   {% endfor %}
@@ -385,8 +385,6 @@
       {{ card.sentence | highlight_code(card.body.highlight) }}
     </div>
     <div class="rows">
-      <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
-        <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
       <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}
         {% if card.body.subject and card.body.action %}
         <div class="sv-line"><span class="sv-label">관계</span><span class="sv-s">{{ card.body.subject }}</span>
@@ -401,6 +399,8 @@
     </div>
     {% endif %}
     {% if card.body.skeleton %}<div class="skeleton">뼈대 · {{ card.body.skeleton }}</div>{% endif %}
+    <div class="ab wrong"><span class="tag">오역</span>{{ card.body.literal_trap }}
+      <div class="why">↳ 왜 틀렸나 · {{ card.body.trap_why }}</div></div>
   </div>
   {% endfor %}
 
