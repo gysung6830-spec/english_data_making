@@ -7,25 +7,30 @@ from __future__ import annotations
 
 from .base import GenContext, build_choice, register
 
+_GRAMMAR_STEM = "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?"
+
+
+def _grammar_instr(item, ctx) -> str:
+    """어법 유형 공통 출제원리: 5곳 밑줄 중 정확히 1곳만 규칙 위반, 나머지는 완전히 맞음."""
+    focus = ", ".join(ctx.profile.get("grammar_focus", []) or ["관계사", "태", "분사"])
+    return (f"문법 요소가 걸린 {item.underlines or 5}곳을 밑줄. 정확히 1곳만 규칙 위반, "
+            f"나머지는 완전히 정답이며 각기 다른 문법 포인트. 이 학교는 {focus}를 자주 출제. "
+            "밑줄 위치는 '고쳐야 할 것 같지만 실제로는 맞는' 표현에 두어 함정.")
+
 
 @register("grammar")
 def gen_grammar(item, passage, an, ctx):
-    stem = ctx.stem("grammar", "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?")
-    focus = ", ".join(ctx.profile.get("grammar_focus", []) or ["관계사", "태", "분사"])
-    instr = (f"문법 요소가 걸린 {item.underlines or 5}곳을 밑줄. 정확히 1곳만 규칙 위반, "
-             f"나머지는 완전히 정답이며 각기 다른 문법 포인트. 이 학교는 {focus}를 자주 출제. "
-             "밑줄 위치는 '고쳐야 할 것 같지만 실제로는 맞는' 표현에 두어 함정.")
-    return build_choice(item, passage, ctx, stem, instr, mock_answer="③", number_only=True)
+    stem = ctx.stem("grammar", _GRAMMAR_STEM)
+    return build_choice(item, passage, ctx, stem, _grammar_instr(item, ctx),
+                        mock_answer="③", number_only=True)
 
 
 @register("grammar_vocab_mix")
 def gen_grammar_vocab_mix(item, passage, an, ctx):
-    stem = ctx.stem("grammar_vocab_mix",
-                    "다음 글의 밑줄 친 부분 중, 어법 또는 문맥상 낱말의 쓰임이 "
-                    "적절하지 않은 것은?")
-    instr = (f"{item.underlines or 5}개 밑줄에 어법 표현과 어휘를 혼합. "
-             "정답은 '문맥상 낱말 쓰임'이 어긋난 1개.")
-    return build_choice(item, passage, ctx, stem, instr, mock_answer="②", number_only=True)
+    # 사용자 확정: 이 유형도 '어법' 유형과 동일하게 순수 어법 오류 1곳 찾기로 출제.
+    stem = ctx.stem("grammar_vocab_mix", _GRAMMAR_STEM)
+    return build_choice(item, passage, ctx, stem, _grammar_instr(item, ctx),
+                        mock_answer="②", number_only=True)
 
 
 @register("grammar_fix_and_answer")

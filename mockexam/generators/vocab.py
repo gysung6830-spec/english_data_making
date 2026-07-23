@@ -19,8 +19,10 @@ def gen_vocab_3blank(item, passage, an, ctx):
     stem = ctx.stem("vocab_3blank_abc",
                     "(A), (B), (C)의 각 네모 안에서 문맥에 맞는 낱말로 "
                     "가장 적절한 것끼리 짝지은 것은?")
-    instr = ("각 칸마다 정답 1 + 유의어 함정 1을 두고 5지선다 조합. "
-             "세 칸을 다 판단해야 답이 하나로 좁혀지게 배치.")
+    instr = ("(A)(B)(C) 각 칸마다 정답 1개 + 문맥으로만 가려지는 유의어 함정 1개를 두고, "
+             "5개 선지는 세 칸의 조합으로 구성하라. 어느 한 칸만 봐서는 정답이 결정되지 않도록 "
+             "선지들이 각 칸에서 서로 갈리게 배치하고, (A)(B)(C) 세 칸을 '모두' 정확히 판단해야 "
+             "정답 1개로 좁혀지게 하라(한 칸만 맞혀도 답이 나오면 안 됨).")
     mock_choices = ["(A)-(B)-(C)", "(A)-(B')-(C)", "(A')-(B)-(C)",
                     "(A)-(B)-(C')", "(A')-(B')-(C')"]
     return build_choice(item, passage, ctx, stem, instr, mock_choices=mock_choices,

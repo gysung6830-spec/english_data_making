@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from ..core.models import Item, Passage
 from .base import (
-    DISTRACTOR_RULE, GenContext, PassageAnalysis, build_choice, make_choices,
-    register,
+    DISTRACTOR_RULE, FACT_TWIST, GenContext, PassageAnalysis, build_choice,
+    make_choices, register,
 )
 
 
@@ -43,8 +43,12 @@ def gen_blank(item, passage, an, ctx):
 @register("order")
 def gen_order(item, passage, an, ctx):
     stem = ctx.stem("order", "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?")
-    instr = ("도입문을 고정하고 (A)(B)(C)를 재배열. 연결사·지시어·정관사·대명사가 "
-             "정답 순서를 하나로만 확정하게. 오답은 단서 하나를 무시했을 때 그럴듯하게.")
+    instr = ("도입문을 고정하고 (A)(B)(C)를 재배열하는 유형. 정답 순서가 '단 하나'로만 "
+             "확정되도록, 각 문단에 연결사(however·for example·in addition 등)·지시어"
+             "(this·that·such)·정관사(the)·대명사가 '이어질 특정 문단'을 가리키는 결속 "
+             "단서를 '2개 이상' 심어라. 한 단서만 무시하면 다른 순서도 그럴듯해 보이되, "
+             "모든 단서를 종합하면 정답 순서는 오직 하나뿐이게 하라. 오답 순서는 단서 하나를 "
+             "무시했을 때만 성립하도록 배치하라.")
     mock_choices = ["(A) - (C) - (B)", "(B) - (A) - (C)", "(B) - (C) - (A)",
                     "(C) - (A) - (B)", "(C) - (B) - (A)"]
     # 도입문 박스 + (A)(B)(C) 구조로 디자인 미리보기
@@ -81,11 +85,8 @@ def gen_implied(item, passage, an, ctx):
 @register("inference_mismatch")
 def gen_inference_mismatch(item, passage, an, ctx):
     stem = ctx.stem("inference_mismatch", "다음 글의 내용과 일치하지 않는 것은?")
-    instr = ("선지 5개 중 1개만 지문과 불일치(=정답). 정답 선지는 지문 내용에서 "
-             "'주체(누가/무엇이 했는지)·인과(원인↔결과)·부정↔긍정' 중 하나를 비틀어 "
-             "만들어라 — 예: 행위의 주체를 다른 대상으로 바꾸기, 원인과 결과를 뒤집기, "
-             "긍정 진술을 부정으로(또는 부정을 긍정으로) 뒤집기. "
-             "나머지 오답 4개는 지문에 실제 언급된 사실을 정확히 반영해 소거가 어렵게 하라.")
+    instr = ("선지 5개 중 1개만 지문과 불일치(=정답). 정답 선지는 지문 내용에서 " + FACT_TWIST +
+             " 나머지 오답 4개는 지문에 실제 언급된 사실을 정확히 반영해 소거가 어렵게 하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) 진술 {i+1}" for i in range(5)])
 
@@ -95,9 +96,11 @@ def gen_summary_ab(item, passage, an, ctx):
     stem = ctx.stem("summary_ab",
                     "다음 글의 내용을 한 문장으로 요약하고자 한다. "
                     "빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?")
-    instr = ("요약문 한 문장에 (A)(B) 두 개념 빈칸. 각 칸에 유의어 함정을 배치해 "
-             "지문 논지의 두 축을 정확히 짚어야 조합이 맞게. "
-             "각 선지는 반드시 '(A) 낱말 - (B) 낱말' 형식으로 작성. "
+    instr = ("지문을 한 문장으로 요약하되 핵심 두 축을 (A)(B) 빈칸으로 비운다. 각 칸에 "
+             "유의어 함정을 배치하고, 5개 선지는 (A)(B) 조합으로 구성하라. 어느 한 칸만 "
+             "봐서는 답이 결정되지 않도록 선지들이 두 칸에서 서로 갈리게 배치하고, (A)(B) "
+             "두 칸을 '모두' 정확히 판단해야 정답 1개로 좁혀지게 하라(한 칸만 맞혀도 답이 "
+             "나오면 안 됨). 각 선지는 반드시 '(A) 낱말 - (B) 낱말' 형식으로 작성. "
              "지문 뒤에 '[요약문]'으로 시작하는 한 문장 요약문을 (A)__, (B)__ 빈칸과 함께 넣어라.")
     mock_choices = [f"(A) word{i} - (B) word{i}b" for i in range(1, 6)]
     return build_choice(item, passage, ctx, stem, instr, mock_choices=mock_choices)
