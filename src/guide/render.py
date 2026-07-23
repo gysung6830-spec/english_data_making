@@ -47,6 +47,23 @@ def _highlight(sentence: str, hit: str | None) -> Markup:
 _env.filters["highlight_code"] = _highlight
 
 
+def _hi_marks(text: str) -> Markup:
+    """지문에서 ==꼭 읽을 곳== 을 형광펜 <mark> 으로 감싼다(나머지는 이스케이프)."""
+    if not text:
+        return Markup("")
+    parts = re.split(r"==(.+?)==", text)
+    out = []
+    for i, seg in enumerate(parts):
+        if i % 2 == 1:                      # ==...== 안쪽 = 형광펜
+            out.append('<mark class="hl">' + str(escape(seg)) + "</mark>")
+        else:
+            out.append(str(escape(seg)))
+    return Markup("".join(out))
+
+
+_env.filters["hi_marks"] = _hi_marks
+
+
 def _bracket_modifiers(sentence: str, modifiers) -> Markup:
     """문장에서 수식어(modifier.phrase)들을 회색 괄호 span 으로 감싸 '괄호치기'를 시각화."""
     if not sentence:

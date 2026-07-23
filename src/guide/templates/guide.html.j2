@@ -152,6 +152,19 @@
         <span class="demo-full">{{ m.demo.full_ko }}</span></div>
     </div>
     {% endif %}
+    {% if m.step == '읽기 깊이' and p0.depth_demos %}
+    <div class="depth-demos">
+      <div class="dd-title">🖍 같은 글도 유형 따라 '읽는 양'이 다르다 — <span>형광펜 = 꼭 읽을 곳</span></div>
+      {% for dd in p0.depth_demos %}
+      <div class="depth-demo">
+        <div class="dd-head"><span class="dd-kind">{{ dd.kind }}</span>{% if dd.source %}<span class="dd-src">{{ dd.source }}</span>{% endif %}</div>
+        {% if dd.goal %}<div class="dd-goal">🎯 {{ dd.goal }}</div>{% endif %}
+        <div class="dd-passage">{{ dd.passage | hi_marks }}</div>
+        {% if dd.read %}<div class="dd-read"><span class="ddr-tag">형광펜만 읽으면</span>{{ dd.read }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
   {% endfor %}
 

@@ -77,7 +77,7 @@ def _build_pattern(en: str, strict: str = "") -> re.Pattern:
 
 def load_part0(path: str | Path | None = None):
     """part0.yaml → Part0 객체(0부 고정 콘텐츠)."""
-    from .schemas import Method, MethodDemo, Part0
+    from .schemas import DepthDemo, Method, MethodDemo, Part0
     p = Path(path) if path else (Path(__file__).resolve().parent / "part0.yaml")
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
     methods = []
@@ -88,8 +88,12 @@ def load_part0(path: str | Path | None = None):
             rule=m.get("rule", ""), ms_point=m.get("ms_point", ""),
             demo=MethodDemo(**demo) if demo else None,
         ))
+    depth = [DepthDemo(kind=d["kind"], source=d.get("source", ""), goal=d.get("goal", ""),
+                       passage=d.get("passage", ""), read=d.get("read", ""))
+             for d in data.get("depth_demos", [])]
     return Part0(title=data.get("title", "3단계 읽기 엔진"), intro=data.get("intro", ""),
-                 spine=data.get("spine", ""), methods=methods, tools=data.get("tools", []))
+                 spine=data.get("spine", ""), methods=methods, depth_demos=depth,
+                 tools=data.get("tools", []))
 
 
 def load_abstract(path: str | Path | None = None):

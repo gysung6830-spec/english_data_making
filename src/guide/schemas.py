@@ -111,11 +111,21 @@ class Method(BaseModel):
     demo: MethodDemo | None = None
 
 
+class DepthDemo(BaseModel):
+    """'읽기 깊이' 실제 예시 — 유형별로 '이만큼만 읽으면 된다'(형광펜)."""
+    kind: str                # 유형 라벨 (예: 주제·요지 파악 / 빈칸 추론)
+    source: str = ""
+    goal: str = ""           # 이 유형에서 '무엇을 찾나' 한 줄
+    passage: str = ""        # 지문(==꼭 읽을 곳== 을 == 로 감싼다)
+    read: str = ""           # '형광펜만 읽으면 …' 정리 한 줄
+
+
 class Part0(BaseModel):
     title: str = "3단계 읽기 엔진"
     intro: str = ""
     spine: str = ""          # 관통 철학 한 문장
     methods: list[Method] = []
+    depth_demos: list[DepthDemo] = []   # '읽기 깊이' 형광펜 예시
     tools: list[str] = []    # 미니 도구 한 줄 목록
 
 

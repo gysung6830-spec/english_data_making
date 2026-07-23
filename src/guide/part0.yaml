@@ -67,6 +67,30 @@ methods:
       skeleton_ko: "Tom은 profligate했다 (≠ 절약하는)."
       full_ko: "'profligate'를 몰라도 Unlike(대조) + '동전 하나까지 모으던 형과 달리' + '일주일 만에 월급을 다 썼다'로 → '헤프게 낭비하는'이라고 유추된다. (단서 ②, 대조)"
 
+# '읽기 깊이' 실제 예시(형광펜 = 꼭 읽을 곳). 학습용 예시 지문.
+depth_demos:
+  - kind: "주제·요지·주장 — 뼈대만 빠르게"
+    source: "학습용 예시"
+    goal: "필자의 핵심 주장(반복되는 것) 하나만 잡으면 끝 — 예시·부연은 그 주장의 증거일 뿐이라 빠르게 훑는다."
+    passage: >-
+      ==Many people believe talent alone determines success, but research suggests that
+      deliberate practice matters far more.== In one study, elite violinists were not born more
+      gifted; they had simply logged thousands more hours of focused practice than their peers.
+      Chess masters, too, spend years studying past games before they excel. Even so-called
+      'natural' athletes train relentlessly behind the scenes. ==In short, what looks like raw
+      talent is usually the visible tip of a long, deliberate effort.==
+    read: "주제 문장(but 대조) + 'In short' 재진술만 읽어도 요지가 잡힌다. 가운데 예시(바이올린·체스·운동선수)는 '같은 말의 반복'이라 흘려 읽어도 된다."
+  - kind: "빈칸 추론 — 논리 단서 정밀"
+    source: "학습용 예시"
+    goal: "빈칸의 답 = 빈칸 주변의 '재진술·대조·예시'가 이미 말해 준다. 빈칸만 노려보지 말고 '단서 문장'을 정밀히 읽어라."
+    passage: >-
+      A good map does not show everything; it leaves out detail on purpose.
+      ==A subway map, for example, ignores real distances and streets, showing only the order of
+      stops,== which makes it far easier to use. In the same way, a useful scientific model works
+      by ( ____ ). ==By stripping away the messy details, it reveals the pattern that matters.==
+      A model that copied reality exactly would be as confusing as the world itself.
+    read: "빈칸 앞 예시(지하철 노선도=세부를 무시) + 빈칸 뒤 재진술('세부를 덜어내 핵심 패턴을 드러낸다')만 정밀히 읽으면 답이 보인다. 빈칸 = 이 단서들의 다른 표현('불필요한 세부를 덜어내기')일 뿐."
+
 tools:
   - "ⓐ 되돌아가지 않기 — 문장 끝에서 앞으로 되돌아 재해석하지 말고, 청크 단위로 '앞으로만' 읽는다(직독직해)."
   - "ⓑ 진짜 동사는 하나 — to-V · V-ing · p.p. 는 가짜 동사(준동사)다. 진짜 동사부터 찾아라."
