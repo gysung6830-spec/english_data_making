@@ -108,39 +108,42 @@
 <section class="toc">
   <div class="toc-title">목차 <span class="toc-en">CONTENTS</span></div>
 
+  {% set letters = ['A','B','C','D','E','F'] %}
   {% if guide.part0 %}
-  <div class="toc-part"><a href="#part0">0부 · 기본기 — {{ guide.part0.title }}</a></div>
+  <div class="toc-part"><a href="#part0"><span class="toc-pno">0부</span> 기본기 — {{ guide.part0.title }}</a></div>
   {% for m in guide.part0.methods %}
-  <div class="toc-item"><a href="#part0">{{ m.step }} · {{ m.title }}</a></div>
+  <div class="toc-item"><a href="#part0"><span class="toc-no">0-{{ loop.index }}</span>{{ m.step }} · {{ m.title }}</a></div>
   {% endfor %}
   {% endif %}
 
   {% if guide.inference %}
-  <div class="toc-part"><a href="#partInf">어휘 유추 — 모르는 단어는 유추로 뚫는다</a></div>
-  <div class="toc-item"><a href="#partInf">유추의 다섯 단서 · 유추 문제(객관식·주관식)</a></div>
+  <div class="toc-part"><a href="#partInf"><span class="toc-pno special">특강</span> 어휘 유추 — 모르는 단어는 유추로 뚫는다</a></div>
+  <div class="toc-item"><a href="#partInf"><span class="toc-no">특강</span>유추의 다섯 단서 · 유추 문제(객관식·주관식)</a></div>
   {% endif %}
 
   {% if guide.part2 %}
-  <div class="toc-part"><a href="#part2">1부 · 구문해석 — {{ guide.part2.title }}</a></div>
+  <div class="toc-part"><a href="#part2"><span class="toc-pno">1부</span> 구문해석 — {{ guide.part2.title }}</a></div>
+  {% set tns = namespace(cn=0) %}
   {% for g in guide.part2.groups %}
-  <div class="toc-sub">◆ {{ g.title }} <span>· {{ g.subtitle }}</span></div>
+  <div class="toc-sub">1부 {{ letters[loop.index0] }} · {{ g.title }} <span>· {{ g.subtitle }}</span></div>
   {% for c in g.chapters %}
-  <div class="toc-item"><a href="#sx-{{ c.id }}">{{ c.title }}</a></div>
+  {% set tns.cn = tns.cn + 1 %}
+  <div class="toc-item"><a href="#sx-{{ c.id }}"><span class="toc-no">1-{{ tns.cn }}</span>{{ c.title }}</a></div>
   {% endfor %}
   {% endfor %}
   {% endif %}
 
   {% if guide.chapters %}
-  <div class="toc-part"><a href="#part1">2부 · 평가원 코드 — 필자가 의도하는 바를 파악하기</a></div>
+  <div class="toc-part"><a href="#part1"><span class="toc-pno">2부</span> 평가원 코드 — 필자가 의도하는 바를 파악하기</a></div>
   {% for c in guide.chapters %}
-  <div class="toc-item"><a href="#ch-{{ c.id }}">Ch{{ loop.index }} · {{ c.title }}</a></div>
+  <div class="toc-item"><a href="#ch-{{ c.id }}"><span class="toc-no">2-{{ loop.index }}</span>{{ c.title }}</a></div>
   {% endfor %}
   {% endif %}
 
   {% if guide.abstract %}
-  <div class="toc-part"><a href="#partAbs">3부 · 추상 → 구체 — {{ guide.abstract.title.split('·')[1] if '·' in guide.abstract.title else guide.abstract.title }}</a></div>
+  <div class="toc-part"><a href="#partAbs"><span class="toc-pno">3부</span> 추상 → 구체 — {{ guide.abstract.title.split('·')[1] if '·' in guide.abstract.title else guide.abstract.title }}</a></div>
   {% for c in guide.abstract.chapters %}
-  <div class="toc-item"><a href="#abs-{{ c.id }}">{{ c.title }}</a></div>
+  <div class="toc-item"><a href="#abs-{{ c.id }}"><span class="toc-no">3-{{ loop.index }}</span>{{ c.title }}</a></div>
   {% endfor %}
   {% endif %}
 </section>
@@ -266,11 +269,13 @@
   <div class="ch-signal">{{ p2.intro }}</div>
 </section>
 
+{% set bletters = ['A','B','C','D','E','F'] %}
+{% set bns = namespace(cn=0) %}
 {% for g in p2.groups %}
 {% set pidx = loop.index %}
 <section class="divider" id="grp-{{ g.id }}">
   <div class="dv-inner">
-    <div class="dv-badge">PART {{ pidx }}</div>
+    <div class="dv-badge">1부 · {{ bletters[loop.index0] }}</div>
     <div class="dv-title">{{ g.title }}</div>
     <div class="dv-sub">{{ g.subtitle }}</div>
     <div class="dv-rule"></div>
@@ -279,8 +284,9 @@
 </section>
 
 {% for chapter in g.chapters %}
+{% set bns.cn = bns.cn + 1 %}
 <section class="chapter wb" id="sx-{{ chapter.id }}">
-  <div class="ch-kicker">PART {{ pidx }} · 구문</div>
+  <div class="ch-kicker">1-{{ bns.cn }} · 구문</div>
   <div class="ch-title">{{ chapter.title }}</div>
 
   {% if chapter.point %}
@@ -356,7 +362,7 @@
 
 {% for chapter in guide.chapters %}
 <section class="chapter" id="ch-{{ chapter.id }}">
-  <div class="ch-kicker">Ch{{ loop.index }}</div>
+  <div class="ch-kicker">2-{{ loop.index }}</div>
   <div class="ch-title">{{ chapter.title }}</div>
   <div class="ch-signal">{{ chapter.signal }}</div>
   <div class="ch-intro">
@@ -431,7 +437,7 @@
 
 {% for chapter in ab.chapters %}
 <section class="chapter wb" id="abs-{{ chapter.id }}">
-  <div class="ch-kicker">추상 → 구체 · 길 {{ loop.index }}</div>
+  <div class="ch-kicker">3-{{ loop.index }} · 추상→구체</div>
   <div class="ch-title">{{ chapter.title }}</div>
 
   {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>{% endif %}
