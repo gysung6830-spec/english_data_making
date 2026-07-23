@@ -228,8 +228,10 @@ def ingest(pdf_path: Path, quiet: bool = False, share_to_input: bool = True):
     exam_id = parse_exam_id(full)
     answer_key = is_answer_key(full)
 
-    # 새 PDF면 구문해설 처리 큐(input/)에도 공유. 단, 정답표는 지문이 아니므로 제외.
-    if is_new and share_to_input and not answer_key:
+    # 새 PDF면 구문해설 처리 큐(input/)에도 공유.
+    #   단, 정답표·해설 booklet(장수 많은 문서)은 지문이 아니므로 제외(시험지 문제지 ~8p만).
+    is_booklet = _doc.page_count > 15
+    if is_new and share_to_input and not answer_key and not is_booklet:
         try:
             INPUT_DIR.mkdir(parents=True, exist_ok=True)
             dst = INPUT_DIR / pdf_path.name
@@ -259,26 +261,43 @@ def ingest(pdf_path: Path, quiet: bool = False, share_to_input: bool = True):
         return 0
 
     # ── 일반 시험지: 지문 적재 + (정답표가 있으면) 공식 정답 연결 ──
+    #   중복 제거: 같은 (시험, 문항번호)면 하나만 유지하고 '더 좋은' 버전을 남긴다
+    #   (시험지 vs 해설지 등 같은 지문이 두 번 들어오는 것 방지).
     records, pages, exam_id = parse_pdf(pdf_path)
     akey = load_answer_keys().get(exam_id, {})
     bank = load_bank()
-    seen = {(r.get("source_sha"), r["num"]) for r in bank}
-    added = 0
+
+    def key_of(rec):
+        eid = rec.get("exam_id")
+        return (eid, rec["num"]) if eid else (rec.get("source_sha"), rec["num"])
+
+    def quality(rec):  # 정답 유무 > 신호점수 > 길이 순으로 '좋은' 버전 판단
+        return (1 if rec.get("answer") else 0, rec.get("signal_score", 0), rec.get("length", 0))
+
+    index = {key_of(r): i for i, r in enumerate(bank)}
+    added = replaced = 0
     for r in records:
-        if (h, r["num"]) in seen:
-            continue
         a = akey.get(str(r["num"]))
         if a:
             r["answer"], r["points"] = a["answer"], a["points"]
         r["source_sha"] = h
         r["source_name"] = pdf_path.name
+        k = key_of(r)
+        if k in index:
+            j = index[k]
+            if quality(r) > quality(bank[j]):
+                bank[j] = r
+                replaced += 1
+            continue
+        index[k] = len(bank)
         bank.append(r)
         added += 1
     save_bank(bank)
     if not quiet:
         nans = sum(1 for r in records if r.get("answer"))
         tail = f", 정답연결 {nans}개" if nans else ", 정답 미연결(정답표 없음)"
-        print(f"[적재] {pdf_path.name} (p{pages}, {exam_id}) → 문항 {len(records)}개, {added}개 신규{tail}")
+        rep = f", 교체 {replaced}개" if replaced else ""
+        print(f"[적재] {pdf_path.name} (p{pages}, {exam_id}) → 문항 {len(records)}개, {added}개 신규{rep}{tail}")
     return added
 
 
