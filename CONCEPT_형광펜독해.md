@@ -26,16 +26,24 @@
 
 ---
 
-## 2. 엔진 — 「신호 사전」 (한 번 외우면 모든 지문에 적용)
+## 2. 엔진 — 「신호 사전」 (확장판, 한 번 외우면 모든 지문에 적용)
 
-| 🟡 무조건 읽기 (이 신호가 보이면) | ⬜ 스킵 |
+**🟡 무조건 읽기 신호**
+
+| 분류 | 신호어 |
 |---|---|
-| **역접** However·But·Yet·In contrast → 필자의 진짜 포인트 | For example·such as·like (예시) |
-| **한정·조건** only·If·unless·when → **정답이 숨는 단골 자리** | 숫자·연도·고유명사 나열 |
-| **결론** Thus·So·Therefore·In sum | 같은 말 다시 하는 재진술 뒷부분 |
-| **주장** should·must·important·need to | 양보절(Despite·Although~) — 주절이 핵심 |
-| **앵커** 첫 문장 · 빈칸/밑줄 있는 문장 | |
+| 역접·대조 | However·But·Yet·Nevertheless·In contrast·On the other hand·Instead / **Unlike, not A but B, rather than** |
+| 결론·인과 | Thus·Therefore·So·As a result·Consequently / **because·since·lead to·result in** (인과=논리 뼈대) |
+| 강조·주장 | should·must·need to / important·key·essential·crucial / **the most·the only·the single**(최상·유일) / In fact·Indeed·Above all / It is X that (강조구문) |
+| 한정·조건·예외 | only·only when·if·unless·except·as long as → **정답이 숨는 단골** |
+| 통념·반전 | "Many believe / It is thought"(통념) → **바로 뒤 역접이 진짜 주제** / Surprisingly·Contrary to·Paradoxically |
+| 정의·재정의 | is defined as·means·refers to / **콜론( : ) 뒤** |
+| 태도·평가어(±) | 긍정 benefit·valuable ↔ 부정 problem·risk·illusion·fail → 대의·함축·어휘 정답 방향 |
+| 위치 | 첫 문장 · 각 단락 첫 문장 · 마지막 문장 · 빈칸/밑줄 문장 |
 
+**⬜ 스킵 신호**: For example·For instance·such as·like·to illustrate(예시) / 숫자·연도·고유명사·인명 나열 / 재진술 반복 / 양보절(Although·Despite~ — 주절이 핵심) / 긴 관계절 수식
+
+> 원칙: **사전은 풍부하게, 카드는 간결하게.** 각 문항 카드에는 그 지문에서 실제로 울린 신호 2~3개만 표시한다.
 > 이 표는 교재 맨 앞 1페이지. 모든 문항 카드가 이 신호를 재사용한다.
 
 ---
@@ -48,6 +56,11 @@
 2. **정답 칠 공개 (왜 노랑)** — 🟡 표시 + 각 칠에 신호 태그(역접/한정/결론…). "정답 몰라도 이 신호로 여기다."
 3. **정답·오답 찍기** — 칠한 근거 문장 `⟶` 정답. 오답은 ✘ 한 줄: **표면어휘 재사용 함정** vs **논리 반대**.
 4. **공식 한 줄** — 이 유형 통용 규칙. (예: "빈칸 = 역접·한정 문장 찾아 추상화")
+
+### 3-1. 카드는 2종 분리 — 「훈련 카드」 + 「해석 카드」
+- **훈련 카드**: 위 1~4단계. 영어·신호·찍기 중심, **한글 없음**(깔끔하게 유지).
+- **해석 카드**(별도): 2단 표(왼쪽 영어 / 오른쪽 한글). **🟡 형광펜 문장 + 정답·오답 선지만** 해석.
+  스킵(회색) 문장은 해석하지 않는다 — 안 읽어도 되는 곳이므로. 해석 부담까지 줄여 "선택적 읽기"를 강화.
 
 ---
 

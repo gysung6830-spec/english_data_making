@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>풀이 패턴 카드 v2 — "왜 노랑?" 신호로 스스로 칠하기 (2022 6월 기출)</title>
+<title>형광펜 독해 — 신호 사전(확장) + 훈련 카드 + 해석 카드 (2022 6월 기출)</title>
 <style>
 @page{ size:A4; margin:10mm 11mm; }
 *{ box-sizing:border-box; }
 body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; color:#23272e;
   font-size:10px; line-height:1.5; margin:0; background:#f4f5f7; padding:16px; }
-.wrap{ max-width:800px; margin:0 auto; }
+.wrap{ max-width:820px; margin:0 auto; }
 :root{
   --ink:#1f6f78; --ink-d:#12525a;
   --must:#fff3bf; --must-line:#e6b800;
@@ -19,26 +19,24 @@ body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; colo
 .tophead .t{ font-size:16px; font-weight:800; color:var(--ink-d); }
 .tophead .s{ font-size:9.5px; color:var(--muted); }
 
-/* 신호 사전 — 딱 한 번 외우면 모든 지문에 적용 */
-.dict{ background:#fff; border:2px solid var(--ink); border-radius:8px; padding:11px 14px; margin-bottom:16px; }
-.dict h3{ margin:0 0 7px; font-size:12px; color:var(--ink-d); }
+/* 확장 신호 사전 */
+.dict{ background:#fff; border:2px solid var(--ink); border-radius:8px; padding:12px 15px; margin-bottom:16px; }
+.dict h3{ margin:0 0 8px; font-size:12.5px; color:var(--ink-d); }
 .dict h3 small{ font-weight:600; color:var(--muted); font-size:9px; }
-.dict .two{ display:flex; gap:14px; }
-.dict .col{ flex:1; }
-.dict .ch{ font-size:9.5px; font-weight:800; margin-bottom:4px; }
-.dict .ch.y{ color:#a86b00; } .dict .ch.g{ color:var(--skip); }
-.dict ul{ margin:0; padding-left:15px; }
-.dict li{ margin-bottom:2px; font-size:9.3px; }
-.sig{ display:inline-block; font-size:8px; font-weight:800; border-radius:3px;
-  padding:0 5px; color:#fff; background:var(--ink); margin-right:3px; }
+.dgrid{ display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; }
+.drow{ font-size:9.3px; line-height:1.5; }
+.drow .cat{ display:inline-block; font-size:8px; font-weight:800; color:#fff; background:var(--ink);
+  border-radius:3px; padding:0 6px; margin-right:4px; }
+.drow .cat.sk{ background:var(--skip); }
+.skipwrap{ margin-top:8px; padding-top:7px; border-top:1px dashed var(--line); }
+.eng{ font-style:italic; color:#3a3f45; }
 
-/* 카드 */
-.card{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.1);
-  padding:14px 16px; margin-bottom:16px; }
-.hd{ display:flex; align-items:center; gap:8px; border-bottom:2px solid var(--ink-d);
-  padding-bottom:6px; margin-bottom:9px; }
+/* 카드 공통 */
+.card{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.1); padding:14px 16px; margin-bottom:14px; }
+.hd{ display:flex; align-items:center; gap:8px; border-bottom:2px solid var(--ink-d); padding-bottom:6px; margin-bottom:9px; }
 .hd .no{ background:var(--ink-d); color:#fff; font-weight:800; font-size:12px; padding:2px 9px; border-radius:5px; }
 .hd .ty{ font-weight:800; font-size:13px; color:var(--ink-d); }
+.hd .kind{ font-size:9px; font-weight:700; color:var(--ink); border:1px solid var(--ink); border-radius:9px; padding:1px 8px; }
 .hd .pt{ font-size:9px; font-weight:700; color:#fff; background:var(--trap); padding:1px 7px; border-radius:9px; }
 .hd .tm{ margin-left:auto; font-size:9.5px; font-weight:700; color:var(--muted); }
 
@@ -47,12 +45,9 @@ mark.m{ background:var(--must); box-shadow:inset 0 -2px 0 var(--must-line); padd
 mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); padding:0 1px; }
 .sk{ color:var(--skip); }
 .bk{ display:inline-block; min-width:60px; border-bottom:2px solid #111; text-align:center; font-weight:800; }
-/* 지문 안 인라인 신호 태그 */
-.tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--ink); border-radius:3px;
-  padding:0 4px; vertical-align:2px; margin:0 1px; }
+.tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--ink); border-radius:3px; padding:0 4px; vertical-align:2px; margin:0 1px; }
 .tag.hot{ background:var(--trap); }
 
-/* 왜 노랑? — 이 교재의 핵심 */
 .why{ background:#fffbe9; border:1px solid var(--must-line); border-radius:6px; padding:7px 10px; margin-bottom:8px; }
 .why .h{ font-size:9px; font-weight:800; color:#a86b00; margin-bottom:3px; }
 .why .r{ display:flex; gap:6px; align-items:baseline; margin-bottom:2px; font-size:9.4px; }
@@ -72,71 +67,70 @@ mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); paddin
 .opt.ok .jd{ color:var(--src-line); } .opt.x .jd{ color:var(--trap); }
 .reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; color:#a5342d; }
 
-.formula{ margin-top:8px; background:#effafa; border:1.5px solid var(--ink); border-radius:6px;
-  padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
+.formula{ margin-top:8px; background:#effafa; border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
 .formula .k{ background:var(--ink); color:#fff; font-size:8px; padding:1px 6px; border-radius:8px; margin-right:6px; }
+
+/* 해석 카드 (2단: 영어 | 한글) */
+.card.trans{ border-left:5px solid var(--src-line); }
+table.tr2{ width:100%; border-collapse:collapse; table-layout:fixed; }
+table.tr2 th{ background:var(--src-line); color:#fff; font-size:8.8px; font-weight:700; padding:3px 8px; text-align:left; }
+table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top; width:50%; font-size:9.5px; line-height:1.55; }
+.tr2 .en{ color:#3a3f45; }
+.tr2 .ko{ color:#23272e; }
+.tr2 .secrow td{ background:#f3f7f4; font-weight:800; color:var(--src-line); font-size:9px; }
+.tr2 .co{ font-weight:800; color:var(--src-line); }
+.tr2 .xo{ color:var(--trap); font-weight:800; }
+.note{ font-size:8.7px; color:var(--muted); margin-top:5px; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="tophead">
-    <div class="t">풀이 패턴 카드 — "노란색을 스스로 칠하는 법"</div>
-    <div class="s">2022 6월 모평 · 정답을 몰라도 <b>신호</b>만 보면 중요한 곳이 보인다</div>
+    <div class="t">형광펜 독해 — 신호 사전(확장) · 훈련 카드 · 해석 카드</div>
+    <div class="s">2022 6월 모평 실제 기출 · "칠하는 법"을 배우는 훈련서</div>
   </div>
 
-  <!-- 신호 사전: 딱 한 번 외우면 모든 지문에 적용 -->
+  <!-- ============ 확장 신호 사전 ============ -->
   <div class="dict">
-    <h3>📢 신호 사전 <small>— 이 표 하나만 외우면 어떤 지문이든 노란색을 스스로 칠할 수 있다</small></h3>
-    <div class="two">
-      <div class="col">
-        <div class="ch y">🟡 무조건 읽기 (이 신호가 보이면)</div>
-        <ul>
-          <li><span class="sig">역접</span>However·But·Yet·In contrast → 필자의 진짜 포인트</li>
-          <li><span class="sig">한정</span>only·If·unless·when → <b>정답이 숨는 단골</b></li>
-          <li><span class="sig">결론</span>Thus·So·Therefore·In sum</li>
-          <li><span class="sig">주장</span>should·must·important·need to</li>
-          <li><span class="sig">앵커</span>첫 문장 · 빈칸/밑줄 있는 문장</li>
-        </ul>
-      </div>
-      <div class="col">
-        <div class="ch g">⬜ 스킵해도 되는 곳</div>
-        <ul>
-          <li>For example·For instance·such as·like (예시)</li>
-          <li>숫자·연도·고유명사 나열</li>
-          <li>같은 말 다시 하는 재진술 뒷부분</li>
-          <li>Despite·Although 딸린 양보절(주절이 핵심)</li>
-        </ul>
-      </div>
+    <h3>📢 신호 사전 (확장판) <small>— 이 신호가 보이면 노랑. 정답을 몰라도 칠할 수 있다</small></h3>
+    <div class="dgrid">
+      <div class="drow"><span class="cat">역접·대조</span>However·But·Yet·In contrast·On the other hand·Instead / <span class="eng">Unlike, not A but B, rather than</span></div>
+      <div class="drow"><span class="cat">결론·인과</span>Thus·Therefore·So·As a result / <span class="eng">because·since·lead to·result in</span></div>
+      <div class="drow"><span class="cat">강조·주장</span>should·must / important·key·essential / <span class="eng">the most·the only·the single</span> / In fact·Indeed</div>
+      <div class="drow"><span class="cat">한정·조건</span>only·only when·if·unless·except·as long as → <b>정답 단골</b></div>
+      <div class="drow"><span class="cat">통념·반전</span>"Many believe/It is thought"(통념) → <b>바로 뒤 역접이 주제</b> / Surprisingly·Contrary to·Paradoxically</div>
+      <div class="drow"><span class="cat">정의</span>is defined as·means·refers to / <b>콜론( : ) 뒤</b></div>
+      <div class="drow"><span class="cat">태도어(±)</span>긍정 benefit·valuable ↔ 부정 problem·risk·illusion·fail → 정답 방향</div>
+      <div class="drow"><span class="cat">위치</span>첫 문장 · 단락 첫 문장 · 마지막 문장 · 빈칸/밑줄 문장</div>
     </div>
+    <div class="skipwrap dgrid">
+      <div class="drow"><span class="cat sk">스킵</span>For example·For instance·such as·like·to illustrate (예시)</div>
+      <div class="drow"><span class="cat sk">스킵</span>숫자·연도·고유명사·인명 나열 / 재진술 반복 / 양보절(Although·Despite~)</div>
+    </div>
+    <div class="note">※ 카드에는 <b>그 지문에서 실제로 울린 신호 2~3개만</b> 표시한다. 사전은 풍부하게, 카드는 간결하게.</div>
   </div>
 
-  <!-- ===== 34번 빈칸 ===== -->
+  <!-- ============ 34번 훈련 카드 ============ -->
   <div class="card">
     <div class="hd">
-      <span class="no">34</span><span class="ty">빈칸추론</span><span class="pt">3점</span>
+      <span class="no">34</span><span class="ty">빈칸추론</span><span class="kind">훈련 카드</span><span class="pt">3점</span>
       <span class="tm">⏱ 1'40"</span>
     </div>
-
     <div class="psg">
-      <span class="sk">Emma Brindley has investigated the responses of European robins... </span>
-      <span class="sk"><span class="tag">양보</span>Despite the large and complex song repertoire,</span> they were able to discriminate between neighbors and strangers.
+      <span class="sk">Emma Brindley has investigated the responses of European robins... <span class="tag">양보</span>Despite the large and complex song repertoire,</span> they could discriminate neighbors from strangers.
       <mark class="m">When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs more often.</mark>
       <span class="sk">As Brindley suggests, this may be an aggressive response.</span>
       <mark class="m"><span class="tag hot">역접</span>However, this difference occurred <span class="tag hot">한정</span>only when the neighbor's song was played at the boundary between that neighbor's territory and the tested bird's.</mark>
       <mark class="g"><span class="tag hot">조건</span>If the same song was played at another boundary, it was treated as the call of a stranger.</mark>
       <span class="tag">앵커</span>Not only does this result demonstrate that <span class="bk">&nbsp;34&nbsp;</span>...
     </div>
-
     <div class="why">
-      <div class="h">🟡 왜 여기를 읽어야 하나 (정답 몰라도 보이는 신호)</div>
-      <div class="r"><span class="s"><span class="tag hot">역접</span></span><span class="d"><b>However</b> = 앞의 일반 반응을 뒤집는 필자의 핵심 → 무조건</span></div>
-      <div class="r"><span class="s"><span class="tag hot">한정+조건</span></span><span class="d"><b>only when / If ~ another boundary</b> = 조건이 결과를 뒤집는 곳 → <b>빈칸 정답은 항상 여기서 나옴</b></span></div>
-      <div class="r"><span class="s"><span class="tag">앵커</span></span><span class="d">빈칸 문장 = 이 결과를 한마디로 요약하는 자리</span></div>
+      <div class="h">🟡 왜 여기가 노랑인가 (정답 몰라도 보이는 신호)</div>
+      <div class="r"><span class="s"><span class="tag hot">역접</span></span><span class="d"><b>However</b> = 앞의 일반 반응을 뒤집는 필자 핵심</span></div>
+      <div class="r"><span class="s"><span class="tag hot">한정+조건</span></span><span class="d"><b>only when / If ~ another boundary</b> = 조건이 결과를 뒤집는 곳 → <b>빈칸 정답은 여기서</b></span></div>
     </div>
-
-    <div class="line"><span class="lb src">근거</span><span>같은 노래도 <b>경계(장소)</b>가 바뀌면 낯선 새로 취급 <span class="arw">⟶</span> 새는 노래를 '<b>장소</b>'와 묶어 인식</span></div>
-
+    <div class="line"><span class="lb src">근거</span><span>같은 노래도 <b>경계(장소)</b>가 바뀌면 낯선 새로 취급 <span class="arw">⟶</span> 노래를 '<b>장소</b>'와 묶어 인식</span></div>
     <div class="opts">
       <div class="opt ok"><span class="n">④</span><span class="tx">the robins associate <b>locality</b> with familiar songs</span><span class="jd">✔ 위치+노래 = 근거 그대로</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">variety and <span class="reuse">complexity</span> characterize the songs</span><span class="jd">✘ 'complex' 표면어휘 함정</span></div>
@@ -144,32 +138,54 @@ mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); paddin
       <div class="opt x"><span class="n">③</span><span class="tx">poor territorial sense is a key to survival</span><span class="jd">✘ 정반대</span></div>
       <div class="opt x"><span class="n">⑤</span><span class="tx">less responsive to recorded songs</span><span class="jd">✘ 반대(녹음에 더 반응)</span></div>
     </div>
-
-    <div class="formula"><span class="k">공식</span>빈칸 = <b>역접·한정(However·only·If)</b> 문장을 찾아 추상화 / 지문 단어 그대로 쓴 선지 = 함정</div>
+    <div class="formula"><span class="k">공식</span>빈칸 = <b>역접·한정(However·only·If)</b> 문장 찾아 추상화 / 지문 단어 그대로 쓴 선지 = 함정</div>
   </div>
 
-  <!-- ===== 21번 함축 ===== -->
+  <!-- ============ 34번 해석 카드 (별도) ============ -->
+  <div class="card trans">
+    <div class="hd">
+      <span class="no">34</span><span class="ty">빈칸추론</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">해석 카드</span>
+      <span class="tm">🟡 형광펜 문장 + 선지만 해석</span>
+    </div>
+    <table class="tr2">
+      <thead><tr><th>영어 (노란 형광펜 문장 · 선지)</th><th>한글 해석</th></tr></thead>
+      <tbody>
+        <tr class="secrow"><td colspan="2">🟡 무조건 읽어야 하는 문장</td></tr>
+        <tr><td class="en">When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs more often.</td>
+            <td class="ko">낯선 새의 <b>녹음</b>을 들었을 때, 울새들은 더 빨리 노래하기 시작했고 더 많이 불렀으며 재생음과 자기 노래를 더 자주 <b>겹쳤다</b>. (공격적 반응)</td></tr>
+        <tr><td class="en">However, this difference occurred only when the neighbor's song was played at the boundary between that neighbor's territory and the tested bird's.</td>
+            <td class="ko"><b>그러나</b> 이 차이는 이웃의 노래가 '그 이웃과 실험 대상 새의 영역 <b>사이 경계</b>'에서 재생될 때<b>에만</b> 나타났다.</td></tr>
+        <tr><td class="en">If the same song was played at another boundary, it was treated as the call of a stranger.</td>
+            <td class="ko">같은 노래라도 <b>다른 경계</b>에서 재생되면, <b>낯선 새</b>의 울음으로 취급되었다. ← 정답 근거</td></tr>
+        <tr class="secrow"><td colspan="2">선지 해석</td></tr>
+        <tr><td class="en"><span class="co">④</span> associate locality with familiar songs</td><td class="ko"><span class="co">정답</span> 울새는 <b>장소(위치)</b>를 익숙한 노래와 연관 짓는다</td></tr>
+        <tr><td class="en"><span class="xo">①</span> variety and complexity characterize the songs</td><td class="ko"><span class="xo">오답</span> 다양성과 복잡성이 울새의 노래를 특징짓는다</td></tr>
+        <tr><td class="en"><span class="xo">②</span> song volume affects aggressive behavior</td><td class="ko"><span class="xo">오답</span> 노래의 <b>음량</b>이 공격적 행동에 영향을 준다</td></tr>
+        <tr><td class="en"><span class="xo">③</span> poor territorial sense is a key to survival</td><td class="ko"><span class="xo">오답</span> 빈약한 <b>영역 감각</b>이 생존의 열쇠다</td></tr>
+        <tr><td class="en"><span class="xo">⑤</span> less responsive to recorded songs</td><td class="ko"><span class="xo">오답</span> 녹음된 노래에 <b>덜</b> 반응한다</td></tr>
+      </tbody>
+    </table>
+    <div class="note">※ 훈련 카드엔 한글을 넣지 않아 깔끔하게 유지 → 해석은 이 별도 카드에서 확인. 스킵(회색) 문장은 해석하지 않음(안 읽어도 되니까).</div>
+  </div>
+
+  <!-- ============ 21번 훈련 카드 ============ -->
   <div class="card">
     <div class="hd">
-      <span class="no">21</span><span class="ty">함축의미</span><span class="pt">3점</span>
+      <span class="no">21</span><span class="ty">함축의미</span><span class="kind">훈련 카드</span><span class="pt">3점</span>
       <span class="tm">⏱ 1'30"</span>
     </div>
-
     <div class="psg">
       <mark class="m"><span class="tag">앵커</span>The single most important change is to switch to creative work first, reactive work second</mark> — with phone and e-mail off.
       <span class="sk">I used to be a frustrated writer. Making this switch turned me into a productive writer...</span>
       <mark class="g"><span class="tag hot">역접</span>But it's better to disappoint a few people over small things, than to abandon your dreams for <b>an empty inbox</b>.</mark>
       <mark class="m"><span class="tag">결론</span>Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
     </div>
-
     <div class="why">
-      <div class="h">🟡 왜 여기를 읽어야 하나</div>
-      <div class="r"><span class="s"><span class="tag">앵커</span></span><span class="d">밑줄이 있는 문장 + 첫 문장(주제) → 밑줄 뜻은 주제와 반대편</span></div>
-      <div class="r"><span class="s"><span class="tag hot">역접</span></span><span class="d"><b>But ~ than to abandon your dreams for</b> = 밑줄을 '버려야 할 나쁜 것'으로 못박음 → ± 판정 끝</span></div>
+      <div class="h">🟡 왜 여기가 노랑인가</div>
+      <div class="r"><span class="s"><span class="tag">앵커+강조</span></span><span class="d"><b>The single most important</b>(최상·유일) = 필자 주제 대놓고 선언</span></div>
+      <div class="r"><span class="s"><span class="tag hot">역접</span></span><span class="d"><b>But ~ abandon your dreams for</b> = 밑줄을 '버려야 할 나쁜 것'으로 못박음 → ± 판정 끝</span></div>
     </div>
-
-    <div class="line"><span class="lb pat">패턴</span><span>밑줄의 <b>±</b>부터 → 부정. "꿈을 버리고 얻는 것" = 남 메일 다 응대 <span class="arw">⟶</span> 남을 만족시키려는 것</span></div>
-
+    <div class="line"><span class="lb pat">패턴</span><span>밑줄 <b>±</b>부터 → 부정. "꿈을 버리고 얻는 것" = 남 메일 다 응대 <span class="arw">⟶</span> 남을 만족시키려는 것</span></div>
     <div class="opts">
       <div class="opt ok"><span class="n">②</span><span class="tx">attempting to satisfy <b>other people's demands</b></span><span class="jd">✔ '남 메일 응대'의 추상화</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">following an <span class="reuse">innovative</span> course of action</span><span class="jd">✘ 긍정어 → ± 반대</span></div>
@@ -177,8 +193,33 @@ mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); paddin
       <div class="opt x"><span class="n">④</span><span class="tx">removing <span class="reuse">social</span> ties for balance</span><span class="jd">✘ 표면어휘 함정</span></div>
       <div class="opt x"><span class="n">⑤</span><span class="tx">securing <span class="reuse">social networking</span></span><span class="jd">✘ 표면어휘 함정</span></div>
     </div>
-
     <div class="formula"><span class="k">공식</span>함축 = <b>역접(But) 신호</b>로 밑줄 ± 판정 → 추상 표현 선지 / 밑줄 근처 표면어휘 = 함정</div>
+  </div>
+
+  <!-- ============ 21번 해석 카드 (별도) ============ -->
+  <div class="card trans">
+    <div class="hd">
+      <span class="no">21</span><span class="ty">함축의미</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">해석 카드</span>
+      <span class="tm">🟡 형광펜 문장 + 선지만 해석</span>
+    </div>
+    <table class="tr2">
+      <thead><tr><th>영어 (노란 형광펜 문장 · 선지)</th><th>한글 해석</th></tr></thead>
+      <tbody>
+        <tr class="secrow"><td colspan="2">🟡 무조건 읽어야 하는 문장</td></tr>
+        <tr><td class="en">The single most important change is to switch to creative work first, reactive work second.</td>
+            <td class="ko"><b>가장 중요한 단 하나의</b> 변화는 창의적 일을 먼저, 반응적 일을 나중에 하도록 바꾸는 것이다.</td></tr>
+        <tr><td class="en">But it's better to disappoint a few people over small things, than to abandon your dreams for an empty inbox.</td>
+            <td class="ko"><b>그러나</b> 사소한 일로 몇 사람을 실망시키는 것이, <b>텅 빈 수신함</b>을 위해 당신의 꿈을 <b>포기하는 것</b>보다 낫다.</td></tr>
+        <tr><td class="en">Otherwise, you're sacrificing your potential for the illusion of professionalism.</td>
+            <td class="ko">그렇지 않으면, 당신은 전문성이라는 <b>환상</b>을 위해 자신의 잠재력을 <b>희생</b>하는 것이다.</td></tr>
+        <tr class="secrow"><td colspan="2">선지 해석</td></tr>
+        <tr><td class="en"><span class="co">②</span> attempting to satisfy other people's demands</td><td class="ko"><span class="co">정답</span> 다른 사람들의 <b>요구를 만족시키려</b> 애쓰는 것</td></tr>
+        <tr><td class="en"><span class="xo">①</span> following an innovative course of action</td><td class="ko"><span class="xo">오답</span> <b>혁신적인</b> 행동 방침을 따르는 것</td></tr>
+        <tr><td class="en"><span class="xo">③</span> completing challenging work without mistakes</td><td class="ko"><span class="xo">오답</span> <b>실수 없이</b> 어려운 일을 완수하는 것</td></tr>
+        <tr><td class="en"><span class="xo">④</span> removing social ties to maintain a mental balance</td><td class="ko"><span class="xo">오답</span> 정신적 균형을 위해 <b>사회적 관계</b>를 끊는 것</td></tr>
+        <tr><td class="en"><span class="xo">⑤</span> securing enough opportunities for social networking</td><td class="ko"><span class="xo">오답</span> 충분한 <b>사회적 관계망</b> 기회를 확보하는 것</td></tr>
+      </tbody>
+    </table>
   </div>
 
 </div>
