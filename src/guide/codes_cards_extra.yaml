@@ -1,0 +1,179 @@
+# 2부 코드 예시 카드 추가분(4개씩 채우기). 실제 평가원 기출. 코딩 없이 편집.
+contrast:
+- code: While
+  code_ko: ~이지만(대조/역접)
+  dir: ''
+  sentence: 'While this definition is widely used in research, an important aspect
+    of creativity is often ignored: Generating creative ideas rarely is the final
+    goal.'
+  source: 2024 고3 6월 32번
+  hit: While
+  trap: 이 정의가 연구에서 널리 쓰일 때, 창의성의 중요한 한 측면이 종종 무시된다.
+  why: While은 여기서 '~하는 동안(시간)'이 아니라 앞뒤를 대비시키는 '~이지만(대조)'이다.
+  correct: 이 정의가 연구에서 널리 쓰이지만, 창의성의 중요한 한 측면이 종종 무시된다.
+  so_what: 널리 쓰이는 정의가 정작 창의성의 핵심(창의적 아이디어 생성은 최종 목표가 아님)을 놓치고 있다.
+  subj: 정의 this definition / 창의성의 한 측면 aspect of creativity
+  act: 널리 쓰이다 is widely used ↔ 종종 무시되다 is often ignored
+  cut: 'While this definition is widely used in research (~이지만) / an important aspect
+    of creativity / is often ignored: / Generating creative ideas / rarely is the
+    final goal.'
+- code: Although
+  code_ko: 비록 ~이지만(양보/대조)
+  dir: ''
+  sentence: Although scientists are trained in the substantive content of their discipline,
+    they are not formally instructed in how ' to be a good scientist'.
+  source: 2023 고3 6월 38번
+  hit: Although
+  trap: 과학자들이 자기 분야의 실질적 내용에서 훈련받기 때문에, 그들은 '좋은 과학자가 되는 법'을 공식적으로 배우지 않는다.
+  why: Although은 이유(~때문에)가 아니라 앞 절을 인정하고 뒤에서 뒤집는 '~이지만(양보)'이다.
+  correct: 과학자들은 자기 분야의 실질적 내용은 훈련받지만, '좋은 과학자가 되는 법'은 공식적으로 배우지 않는다.
+  so_what: 전공 지식은 정식 교육으로 배우지만, 좋은 과학자가 되는 법은 정식으로 가르쳐지지 않는다.
+  subj: 과학자들 scientists
+  act: 훈련받다 are trained ↔ 배우지 못하다 are not formally instructed
+  cut: Although scientists are trained (~이지만) / in the substantive content of their
+    discipline, / they are not formally instructed / in how 'to be a good scientist'.
+comparison:
+- code: rather than
+  code_ko: ~가 아니라/~보다는(비교·선호)
+  dir: ''
+  sentence: If not, the robot might endlessly chase itself rather than the blocks.
+  source: 2024 고3 9월 38번
+  hit: rather than
+  trap: 그렇지 않으면, 로봇은 블록과 더불어 끝없이 자기 자신을 쫓을지도 모른다.
+  why: rather than은 'A rather than B'로 A를 취하고 B를 배제하는 대비 표현이다(itself를 쫓고 blocks는 아님).
+  correct: 그렇지 않으면, 로봇은 블록이 아니라 자기 자신을 끝없이 쫓을지도 모른다.
+  so_what: 조건이 갖춰지지 않으면 로봇이 목표물(블록) 대신 엉뚱하게 자기 자신을 쫓게 된다.
+  subj: 로봇 the robot
+  act: 쫓다 chase (자기 자신 itself, 블록 아님 not the blocks)
+  cut: If not, / the robot might endlessly chase / itself / rather than the blocks
+    (~가 아니라).
+connective:
+- code: Instead
+  code_ko: 그 대신에(앞 내용을 부정하고 전환)
+  dir: ''
+  sentence: Instead, much like the young child learning how to play ' nicely', the
+    apprentice scientist gains his or her understanding of the moral values inherent
+    in the role by absorption from their colleagues—socialization.
+  source: 2023 고3 6월 38번
+  hit: Instead
+  trap: 게다가, 어린아이가 '얌전히' 노는 법을 배우듯, 견습 과학자도 동료로부터의 흡수를 통해 도덕적 가치를 이해한다.
+  why: Instead는 앞의 방식(정식 교육)을 부정하고 다른 방식으로 전환하는 표지이지, 내용을 덧붙이는 순접(게다가)이 아니다.
+  correct: 그 대신, 어린아이가 '얌전히' 노는 법을 배우는 것처럼, 견습 과학자는 동료로부터의 흡수(사회화)를 통해 그 역할에 내재된 도덕적
+    가치를 이해하게 된다.
+  so_what: 도덕적 가치는 정식 교육이 아니라 동료로부터 자연스럽게 흡수되는 사회화로 습득된다.
+  subj: 견습 과학자 the apprentice scientist
+  act: 이해를 얻다 gains understanding (흡수·사회화 by absorption—socialization)
+  cut: Instead (그 대신), / much like the young child learning how to play 'nicely',
+    / the apprentice scientist gains his or her understanding / of the moral values
+    inherent in the role / by absorption from their colleagues—socialization.
+- code: Accordingly
+  code_ko: 그에 따라서(앞 내용의 결과)
+  dir: ''
+  sentence: Accordingly, manufacturers have set up market‑research departments to
+    explore the needs of users in the target market, product‑development groups to
+    think up suitable products to address those needs, and so forth.
+  source: 2022 고3 6월 33번
+  hit: Accordingly
+  trap: 그러나, 제조업체들은 시장의 필요를 조사할 시장조사 부서와 제품개발 팀 등을 설립했다.
+  why: Accordingly는 앞 내용의 결과(그에 따라)를 잇는 표지로, 역접(그러나)이 아니다.
+  correct: 그에 따라, 제조업체들은 표적 시장 사용자의 필요를 조사할 시장조사 부서, 그 필요를 충족할 적합한 제품을 구상할 제품개발 팀
+    등을 설립했다.
+  so_what: 사용자 필요를 중시하는 흐름의 결과로, 제조업체들이 필요 조사·제품개발 조직을 갖추게 되었다.
+  subj: 제조업체들 manufacturers
+  act: 설립했다 have set up (시장조사 부서·제품개발 팀 departments, groups)
+  cut: Accordingly (그에 따라), / manufacturers have set up / market-research departments
+    to explore the needs of users / in the target market, / product-development groups
+    to think up suitable products / to address those needs, / and so forth.
+- code: Thus
+  code_ko: 따라서(결론·귀결)
+  dir: ''
+  sentence: Thus, when the work is less "readable" (or easily interpreted), '( its
+    departure from conventional forms reminds the viewer ) or reader that an "aesthetic
+    attitude" is needed to appreciate the whole episode.
+  source: 2024 고3 6월 39번
+  hit: Thus
+  trap: 그러나, 작품이 덜 '읽기 쉬울' 때, 관습적 형식에서 벗어난 점이 독자에게 미적 태도가 필요함을 상기시킨다.
+  why: Thus는 앞 논의로부터 결론을 이끄는 귀결 표지(따라서)이지, 방향을 뒤집는 역접(그러나)이 아니다.
+  correct: 따라서, 작품이 덜 '읽기 쉬울'(또는 쉽게 해석되지 않을) 때, 관습적 형식에서 벗어난 그 점이 관람자나 독자에게 전체를 감상하려면
+    '미적 태도'가 필요함을 상기시킨다.
+  so_what: 덜 읽히는 작품일수록 그 형식의 낯섦이 오히려 감상에 미적 태도가 필요함을 일깨운다.
+  subj: 관습에서 벗어남 its departure from conventional forms
+  act: 상기시키다 reminds (관람자·독자에게 the viewer or reader)
+  cut: Thus (따라서), / when the work is less "readable" (or easily interpreted), / its
+    departure from conventional forms / reminds the viewer or reader / that an "aesthetic
+    attitude" is needed / to appreciate the whole episode.
+polarity_positive:
+- code: significant
+  code_ko: 유의미한/상당한(강조)
+  dir: ''
+  sentence: In over studies across many different domains, half of all cases show
+    simple formulas make better significant predictions than human experts, and the
+    remainder (except ( ) a very small handful), show a tie between the two.
+  source: 2023 고3 11월 42번
+  hit: significant
+  trap: 단순 공식이 인간 전문가보다 그저 조금 더 나은, 별것 아닌 예측을 한다.
+  why: significant는 예측의 우위가 '유의미하게(상당히)' 큼을 못박는 강조어로, 빼면 차이가 사소한 것처럼 오독된다.
+  correct: 전체 사례의 절반에서 단순 공식이 인간 전문가보다 유의미하게(상당히) 더 나은 예측을 한다.
+  so_what: 여러 분야에 걸쳐 단순 공식이 전문가보다 유의미하게 더 나은 예측을 하는 경우가 많다.
+  subj: 단순 공식 (simple formulas)
+  act: 유의미하게 더 나은 예측을 한다 (make better significant predictions)
+  cut: In over studies across many different domains (여러 다른 분야에 걸친 연구들에서) / half of
+    all cases show (전체 사례의 절반은 ~을 보여준다) / simple formulas make better significant
+    predictions (단순 공식이 유의미하게 더 나은 예측을 함을) / than human experts (인간 전문가보다) / and the
+    remainder (그리고 나머지는) / (except a very small handful) (아주 소수를 제외하고) / show a tie
+    between the two (둘 사이의 무승부를 보여준다)
+- code: highly
+  code_ko: 매우/고도로(강조)
+  dir: ''
+  sentence: In highly representational paintings, plays, or stories, the focus is
+    on subject matter that resembles everyday life and the role of background style
+    is to facilitate the construction of mental models.
+  source: 2024 고3 6월 39번
+  hit: highly
+  trap: 어느 정도 재현적인 그림·연극·이야기에서는, 초점이 일상을 닮은 소재에 있다.
+  why: highly는 정도를 극대화하는 강조어로, 대상이 '고도로' 재현적임을 나타낸다(단순히 재현적인 정도가 아님).
+  correct: 매우(고도로) 재현적인 그림·연극·이야기에서는, 초점이 일상생활을 닮은 소재에 있다.
+  so_what: 고도로 재현적인 작품에서는 초점이 일상 같은 소재에 있고, 배경 양식은 심적 모형 구성을 돕는 역할을 한다.
+  subj: 초점 (the focus)
+  act: 일상 닮은 소재에 있다 (is on subject matter resembling everyday life)
+  cut: In highly representational paintings, plays, or stories (매우 재현적인 그림·연극·이야기에서는)
+    / the focus is on subject matter (초점은 소재에 있다) / that resembles everyday life (일상생활을
+    닮은) / and the role of background style is (그리고 배경 양식의 역할은) / to facilitate the
+    construction of mental models (심적 모형의 구성을 촉진하는 것이다)
+polarity_negative:
+- code: Lack of
+  code_ko: ~의 부족/결여(부정)
+  dir: ''
+  sentence: Lack of sufficient physical activity has now been linked to at least unhealthy
+    conditions, almost all of which are chronic diseases or considered risk factors
+    for chronic diseases.
+  source: 2025 고3 6월 36번
+  hit: Lack of
+  trap: 충분한 신체 활동이 이제 건강하지 못한 상태들과 연결되어 왔다.
+  why: Lack of는 주어를 '부족/결여'로 뒤집는 부정 신호로, 연결되는 것은 활동이 아니라 활동의 '부족'이다.
+  correct: 충분한 신체 활동의 '부족'이 이제 건강하지 못한 상태들과 연결되어 왔다.
+  so_what: 신체 활동 부족이 대부분 만성질환이거나 그 위험 요인인 건강 문제들과 연결된다.
+  subj: 충분한 신체 활동의 부족 (Lack of sufficient physical activity)
+  act: 건강 문제와 연결되어 왔다 (has been linked to unhealthy conditions)
+  cut: Lack of sufficient physical activity (충분한 신체 활동의 부족이) / has now been linked
+    to (이제 ~와 연결되어 왔다) / at least unhealthy conditions (적어도 건강하지 못한 상태들과) / almost
+    all of which are chronic diseases (그것들의 거의 전부는 만성질환이거나) / or considered risk factors
+    for chronic diseases (만성질환의 위험 요인으로 여겨진다)
+- code: not all
+  code_ko: 모두 ~인 것은 아니다(부분 부정)
+  dir: ''
+  sentence: ''' Part of the lack of fit arises because the present properties of an
+    organism have not all originated in an environment similar in every respect to
+    the one in which it now lives.'
+  source: 2023 고3 6월 40번
+  hit: not all
+  trap: 생물의 현재 속성들이 지금 사는 곳과 모든 면에서 유사한 환경에서 모두 생겨나지 않았기 때문이다.
+  why: not all은 전체 부정이 아니라 부분 부정으로, '전부가 ~한 것은 아니다'(일부는 다르다)를 뜻한다.
+  correct: 생물의 현재 속성들이 지금 사는 곳과 유사한 환경에서 '전부' 생겨난 것은 아니기(일부는 다른 환경에서 생겼기) 때문이다.
+  so_what: 현재 환경과 맞지 않는 부분이 생기는 것은 생물 속성의 일부가 지금과 다른 환경에서 유래했기 때문이다.
+  subj: 생물의 현재 속성 (present properties of an organism)
+  act: 전부 그런 환경에서 생겨난 것은 아니다 (have not all originated)
+  cut: ''' Part of the lack of fit arises (부적합함의 일부는 생겨난다) / because the present properties
+    of an organism (생물의 현재 속성들이) / have not all originated (모두 다 생겨난 것은 아니기 때문에) /
+    in an environment similar in every respect (모든 면에서 유사한 환경에서) / to the one in which
+    it now lives (그것이 지금 사는 환경과)'
