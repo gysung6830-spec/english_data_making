@@ -319,6 +319,25 @@ def test_answer_key_shows_warn_badge():
     assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
 
 
+def test_dialogue_notice_format_fallback():
+    """대화/안내문 지문이 없어 대체된 경우, 지어내지 말고 일반 내용(불)일치로 전환."""
+    from mockexam.core.models import Item, Passage
+    from mockexam.generators.base import GenContext, PassageAnalysis
+    from mockexam.generators.dialogue import gen_dialogue_mismatch, gen_notice_match
+
+    ctx = GenContext(profile={"name": "t"}, difficulty="mid", client=None)
+
+    def stem_of(fn, typ, fmt):
+        p = Passage(id="x", text="A B C. D E F. G H I. J K L. M N O.", format_type=fmt)
+        return fn(Item(no=1, section="choice", type=typ, score=3),
+                  p, PassageAnalysis.of(p), ctx).stem
+
+    assert "대화" in stem_of(gen_dialogue_mismatch, "dialogue_mismatch", "dialogue")
+    assert "대화" not in stem_of(gen_dialogue_mismatch, "dialogue_mismatch", "narrative")
+    assert "안내문" in stem_of(gen_notice_match, "notice_match", "notice")
+    assert "안내문" not in stem_of(gen_notice_match, "notice_match", "narrative")
+
+
 def test_structural_selfcheck_alignment():
     """원리↔검증 정합성: 유형이 요구하는 구조가 빠지면 생성단계에서 반드시 걸린다.
 
