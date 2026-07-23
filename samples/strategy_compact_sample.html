@@ -66,6 +66,22 @@ table.pt th{ background:var(--pur); color:#fff; padding:3px 8px; text-align:left
 table.pt td{ padding:3px 8px; border-bottom:1px solid var(--line); }
 table.pt tbody tr:nth-child(even) td{ background:#faf7fd; }
 .pt .pat{ font-weight:800; color:var(--pur-d); white-space:nowrap; }
+/* 왜 노란색만으로 답이 나오나 — 자연스러운 원리 설명 */
+.mech{ background:#fff; border:2px solid var(--must-line); border-radius:8px; padding:12px 15px; margin-bottom:14px; }
+.mech h3{ margin:0 0 7px; font-size:12.5px; color:#8a6a00; }
+.mech .lead{ font-size:10.2px; line-height:1.6; background:var(--must); border-radius:6px; padding:8px 11px; margin-bottom:10px; }
+.mech .lead b{ color:#6b4e00; }
+.mech .diag{ display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; margin:2px 0 4px; }
+.mech .diag .n{ font-size:9px; font-weight:800; padding:3px 9px; border-radius:5px; }
+.mech .diag .y{ background:var(--must); border:1px solid var(--must-line); color:#7a5c00; }
+.mech .diag .s{ background:#eef0f2; color:var(--skip); font-weight:700; }
+.mech .diag .ar{ color:#c3cbe0; font-weight:800; }
+.mech .cap{ text-align:center; font-size:9px; color:var(--muted); margin-bottom:9px; }
+.mech .cap b{ color:#8a6a00; }
+.mech .pts{ font-size:9.7px; line-height:1.55; }
+.mech .pts p{ margin:0 0 4px; padding-left:15px; text-indent:-15px; }
+.mech .pts .k{ display:inline-block; width:15px; color:#8a6a00; font-weight:800; }
+.mech .pts b{ color:var(--ink-d); }
 .scope{ background:#fff; border:2px dashed var(--ink); border-radius:8px; padding:11px 15px; margin-bottom:14px; }
 .scope h3{ margin:0 0 6px; font-size:12px; color:var(--ink-d); }
 .scope table{ width:100%; border-collapse:collapse; font-size:9.4px; }
@@ -301,6 +317,20 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
         </tbody>
       </table>
     </div>
+    <div class="mech">
+      <h3>🟡 왜 노란색만 읽어도 답이 나올까?</h3>
+      <div class="lead">수능 지문은 예외 없이 <b>하나의 주장</b>을, <b>예시·부연으로 늘려 쓴 글</b>이다. 노란색은 그 <b>주장이 드러나는 자리</b>(주제문·방향 트는 역접·결론·빈칸)만 골라낸 것.</div>
+      <div class="diag">
+        <span class="n y">🟡 주제</span><span class="ar">→</span><span class="n s">⬜ 예시</span><span class="ar">→</span><span class="n s">⬜ 부연</span><span class="ar">→</span><span class="n y">🟡 역접·결론(재진술)</span>
+      </div>
+      <div class="cap">예시(회색)를 빼도 주장(노랑)은 <b>그대로다</b> — 예시는 주장을 '설명'할 뿐, '바꾸지' 못하니까.</div>
+      <div class="pts">
+        <p><span class="k">①</span>글은 <b>뼈대(주장)</b>와 <b>살(예시)</b>로 되어 있다. 노란색은 뼈대만 추린 것.</p>
+        <p><span class="k">②</span>평가원 정답은 <b>언제나 뼈대(주장)</b>에서 나온다 — 예시 속 낱낱의 사실이 아니라, 글이 향하는 논지에서.</p>
+        <p><span class="k">③</span>그래서 <b>노란 문장만 이으면 글이 하려는 말이 그대로 재구성</b>되고, 정답 근거가 손에 들어온다. 회색(살)은 시간만 먹는다.</p>
+      </div>
+    </div>
+
     <div class="scope">
       <h3>🟡 이 교재가 다루는 유형 = "노랑만 읽기가 통하는 유형"만</h3>
       <table>
@@ -373,7 +403,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
         <mark class="m"><span class="tag hot">역접</span>However, this occurred <span class="tag hot">한정</span>only when played at the boundary of the neighbor's and the tested bird's territory.</mark>
         <mark class="g"><span class="tag hot">조건</span>If played at another boundary, it was treated as a stranger.</mark>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[낯선 녹음→공격] +[<b>However</b> 경계에서만] +[<b>다른 경계</b>=낯선] <span class="arw">⟹</span> 노래=<b>장소</b> = <b>④</b> ✓</span></div>
+      <div class="vline"><span class="lb">🟡만 읽어보면</span><span class="seq">낯선 노래엔 공격적이지만, <b>However</b> 그건 '경계'에서 틀 때만이고 <b>다른 경계</b>면 낯설게 대한다 <span class="arw">→</span> 결국 새는 노래를 <b>'장소'와 묶어</b> 듣는다 = <b>④</b> (예시 문장 없이도 논지가 완성됨)</span></div>
       <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">boundary·territory</span> <span class="arw">→</span> ④ <span class="sw">locality</span> ✓ / 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> 복사</div>
       <div class="opts">
         <div class="opt ok"><span class="n">④</span><span class="tx">associate <b>locality</b> with songs</span><span class="jd">✔ 근거</span></div>
@@ -464,7 +494,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
         <mark class="g"><span class="tag hot">역접</span>But it's better to disappoint a few people, than to abandon your dreams for <b>an empty inbox</b>.</mark>
         <mark class="m"><span class="tag">결론</span>Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[창의적 일 먼저] +[<b>But</b> 꿈≠empty inbox] +[<b>Otherwise</b> 잠재력 희생] <span class="arw">⟹</span> empty inbox=남 요구 = <b>②</b> ✓</span></div>
+      <div class="vline"><span class="lb">🟡만 읽어보면</span><span class="seq">가장 중요한 건 창의적 일을 먼저 하는 것, <b>But</b> 꿈을 'empty inbox'와 바꾸지 말라 하고 <b>Otherwise</b> 잠재력을 희생한다고 못박는다 <span class="arw">→</span> empty inbox = <b>남의 요구에 응하는 일</b> = <b>②</b> (중간 사연 없이도 결론이 보임)</span></div>
       <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">empty inbox (비유)</span> <span class="arw">→</span> ② <span class="sw">others' demands</span> (직설) ✓ / 오답 ④⑤ <span class="cp">social</span> 복사</div>
       <div class="opts">
         <div class="opt ok"><span class="n">②</span><span class="tx">satisfy <b>other people's demands</b></span><span class="jd">✔ 추상화</span></div>
