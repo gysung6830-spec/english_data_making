@@ -24,6 +24,7 @@ class CardBody(BaseModel):
     subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
     action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
+    cut: str = Field(default="", description="끊어읽기 — 의미 단위 슬래시(/) 직독직해(선택)")
 
 
 class CodeCard(BaseModel):
@@ -54,6 +55,7 @@ class Problem(BaseModel):
     answer: str = ""          # short: 모범 답안(핵심 해석)
     trap: str = ""            # 흔히 하는 오역(주관식 힌트/해설용)
     point: str = ""           # 이 문제의 핵심 포인트(해설)
+    cut: str = ""             # 끊어읽기(슬래시 직독직해)
 
 
 # ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────

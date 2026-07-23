@@ -38,8 +38,10 @@
       <div class="prob-opt">{{ nums[loop.index0] }} {{ opt }}</div>
       {% endfor %}
       <div class="prob-answer">정답 {{ nums[p.answer_index] }} · {{ p.point }}</div>
+      {% if p.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ p.cut }}</div>{% endif %}
     {% else %}
       <div class="prob-answer">모범답안 · {{ p.answer }}</div>
+      {% if p.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ p.cut }}</div>{% endif %}
       {% if p.trap %}<div class="prob-trap">⚠️ 흔한 오역 · {{ p.trap }}</div>{% endif %}
       {% if p.point %}<div class="prob-point">🔑 {{ p.point }}</div>{% endif %}
     {% endif %}
@@ -390,6 +392,7 @@
         <div class="sv-line"><span class="sv-label">관계</span><span class="sv-s">{{ card.body.subject }}</span>
           <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
         {% endif %}
+        {% if card.body.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ card.body.cut }}</div>{% endif %}
       </div>
     </div>
     {% if card.body.so_what %}

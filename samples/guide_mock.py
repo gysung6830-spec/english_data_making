@@ -44,12 +44,12 @@ def _meta(sentence: str):
 
 # ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
 def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
-          basis="", para="", subj="", act=""):
+          basis="", para="", subj="", act="", cut=""):
     src, dif = _meta(sentence)
     return CodeCard(
         code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why, correct=correct,
-                      so_what=so_what, so_what_basis=basis, subject=subj, action=act),
+                      so_what=so_what, so_what_basis=basis, subject=subj, action=act, cut=cut),
     )
 
 
@@ -263,6 +263,7 @@ def mock_guide() -> Guide:
                 para="(This ability) exists because plant meristems—dividing tissue in roots "
                 "and shoots—are active.",
                 subj="(이 능력) this ability", act="분열조직의 활동 때문에 생긴다",
+                cut="이 능력은 ~ 때문이다(is due to) / 식물 분열조직의 활동 / — 즉 뿌리·줄기의 미분화 조직이며(regions ~ tissue) / 분열할 수 있는(that can divide).",
             ), _code(
                 "lead to", "A가 B로 이어지다(A=원인)", "forward",
                 "Rising incomes inevitably lead to increases in motorization.",
@@ -274,6 +275,7 @@ def mock_guide() -> Guide:
                 basis="근거: 'motorization'(자동차화)를 '차를 더 갖거나 타게 됨'으로 풀고, 부사 'inevitably'를 '예외 없이'로 반영.",
                 para="As incomes rise, car ownership and use are bound to increase.",
                 subj="소득 증가 rising incomes", act="자동차화 증가로 이어진다",
+                cut="소득 증가는 / 필연적으로(inevitably) / ~로 이어진다(lead to) / 자동차화의 증가로.",
             )],
         ),
         Chapter(
@@ -291,6 +293,7 @@ def mock_guide() -> Guide:
                 "동물과 ‘달리’ 그들(식물)은 평생에 걸쳐 새로운 기관과 조직을 만들 수 있기 때문이다.",
                 "즉, ‘동물은 못 하는데 식물은 한다’는 차이가 이 문장이 말하려는 핵심이다.",
                 subj="그들(식물) they", act="동물과 달리, 평생 새 기관·조직을 만든다",
+                cut="그것은 주로 ~때문이다(largely because) / 동물과 달리(unlike animals) / 그들(식물)은 만들 수 있다 / 새 기관·조직을 / 평생에 걸쳐(throughout their life cycle).",
             ), _code(
                 "although", "비록 ~일지라도(양보)", "",
                 "Although this is true, it has also become a tired and played-out argument.",
@@ -300,6 +303,7 @@ def mock_guide() -> Guide:
                 "비록 이것이 사실이지만, 그것은 이제 낡고 진부해진 주장이기도 하다.",
                 "즉, 맞는 말이긴 해도 너무 여러 번 우려먹어 더는 신선하지 않다는 평가.",
                 subj="그것(이 주장) it", act="사실이지만, 낡고 진부한 주장이 되었다",
+                cut="비록 이것이 사실이지만(Although this is true) / 그것은 또한 되었다 / 낡고 진부한 주장이.",
             )],
         ),
         Chapter(
@@ -317,6 +321,7 @@ def mock_guide() -> Guide:
                 "다시 말해, 박물관은 경쟁 경제에서 살아남으려 예산을 ‘대중에게 공개되는 부분’에 우선 배정한다.",
                 "즉, 돈이 걸리니 박물관도 관람객 눈에 보이는 전시 위주로 예산을 쓴다는 뜻.",
                 subj="박물관 예산 their budgets", act="대중에 공개되는 부분을 우선 배정한다",
+                cut="다시 말해(In other words) / 박물관이 살아남으려 애쓰며(as museums struggle to survive) / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 대중에게 공개되는 부분을(those parts ~ open to the public).",
             )],
         ),
         Chapter(
@@ -334,6 +339,7 @@ def mock_guide() -> Guide:
                 "도시의 자동차 수요는 (도로를 늘려) 수용할 게 아니라 ‘관리’되어야 한다.",
                 "즉, 차가 늘면 길을 넓혀 받아주던 방식을 버리고 수요 자체를 억제·관리하자는 입장.",
                 subj="도시의 자동차 수요 automobile demand", act="수용이 아니라 '관리'되어야 한다",
+                cut="도시 교통 전문가들은 / 대체로 받아들였다(acquiesced to) / ~라는 견해를(the view that) / 도시의 자동차 수요는 / 관리되어야 한다 / 수용되기보다(rather than accommodated).",
             )],
         ),
         Chapter(
@@ -351,6 +357,7 @@ def mock_guide() -> Guide:
                 "하지만 그 데이터가 문화마다 감정이 ‘다르다’는 것을 실제로 보여주는 건 아니다.",
                 "즉, 겉보기 데이터와 달리, 감정을 뇌에 구현된 핵심 상태로 보면 문화 간 감정은 다르지 않다는 반박.",
                 subj="그 데이터 those data", act="문화별 감정 차이를 '보여주지 못한다'",
+                cut="하지만(However) / 그 데이터는 실제로 보여주지 못한다(do not actually show) / 문화마다 감정이 다르다는 것을 / 감정을 ~로 본다면(if we think of emotions as) / 핵심적·신경적으로 구현된 상태로.",
             )],
         ),
         Chapter(
@@ -368,6 +375,7 @@ def mock_guide() -> Guide:
                 "대안 수단(도보·자전거·대중교통)의 질을 높이는 것이 이 전략의 ‘핵심’ 요소다.",
                 "즉, 필자는 차를 줄이는 정책의 성패가 ‘대안 교통을 얼마나 좋게 만드느냐’에 달렸다고 못박는 것.",
                 subj="대안 수단의 질 개선 improving alternatives", act="이 전략의 '핵심' 요소다",
+                cut="대안 수단의 질을 높이는 것은(Improving the quality ~) / — 도보·자전거·대중교통 같은 / ~이다 / 이 전략의 '핵심' 요소(a central element).",
             ), _code(
                 "fundamental", "근본적인, 핵심적인", "",
                 "Rather than irrelevant, moral questions are fundamental to the imposition of tax.",
@@ -377,6 +385,7 @@ def mock_guide() -> Guide:
                 "도덕적 질문은 (무관하기는커녕) 세금 부과에 근본적으로 중요하다.",
                 "즉, 세금을 매기는 일은 숫자·행정이 아니라 ‘무엇이 옳은가’라는 도덕 문제가 핵심이라는 주장.",
                 subj="도덕적 질문 moral questions", act="세금 부과에 '근본적으로' 중요하다",
+                cut="무관하기는커녕(Rather than irrelevant) / 도덕적 질문은 / 근본적으로 중요하다(are fundamental to) / 세금 부과에.",
             )],
         ),
         Chapter(
@@ -399,6 +408,7 @@ def mock_guide() -> Guide:
                     ],
                     answer_index=1,
                     point="rarely(좀처럼 ~않다)를 놓치면 정반대. 부정어에 (−) 표시하고 극성을 뒤집어라.",
+                    cut="게다가(Moreover) / 농부들은 / 좀처럼 얻지 못한다(can rarely acquire) / 수익 정보를 / 몇 가지 이상의 생산 방식에 대해(on more than a few of ~) / 그들이 쓸 법한.",
                 ),
                 Problem(
                     kind="short",
@@ -409,6 +419,7 @@ def mock_guide() -> Guide:
                     answer="실질적으로, 집단으로부터의 완전한 자율성이 요구되는 경우는 좀처럼 없다.",
                     trap="seldom을 빼고 '자율성이 요구된다'로 읽으면 정반대가 된다.",
                     point="seldom = 좀처럼 ~않다(빈도 부정). 극성을 뒤집어야 한다.",
+                    cut="실질적으로(As a practical matter) / 사람은 / 좀처럼 요구하지 않는다(seldom requires) / 완전한 자율성을 / 집단으로부터(from the group).",
                 ),
             ],
             vocab=[
@@ -431,6 +442,7 @@ def mock_guide() -> Guide:
                 "(문장 안의 대비만으로 도출됨.)",
                 para="Although these young artists use digital tools, they seldom mention computers.",
                 subj="디지털 기술을 쓰는 젊은 예술가들", act="컴퓨터를 좀처럼 언급하지 않는다",
+                cut="젊은 현대 예술가들은(Young contemporary artists) / 작업에 디지털 기술을 쓰는(who employ digital technologies) / 좀처럼 ~않는다(rarely) / 컴퓨터를 언급하다(make reference to computers).",
             ), _code(
                 "unlikely to", "~할 가능성이 없는", "",
                 "It follows that natural selection is unlikely to lead to the evolution of "
@@ -442,6 +454,7 @@ def mock_guide() -> Guide:
                 "즉, 자연선택으로는 ‘완벽하게 최적화된 개체’가 나오기 어렵다는 것. (무엇이 대신 나오는지는 이 문장엔 없다.)",
                 para="Natural selection will probably not produce perfectly, maximally fit individuals.",
                 subj="자연선택 natural selection", act="완벽한 개체의 진화로 이어지지 않는다",
+                cut="~라는 결론이 나온다(It follows that) / 자연선택은 / ~할 가능성이 낮다(is unlikely to) / 이어질 / 완벽하고 최고로 적합한 개체의 진화로.",
             )],
         ),
     ]
