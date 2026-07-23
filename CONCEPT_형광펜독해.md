@@ -143,6 +143,25 @@
 
 ---
 
+## 5-1. 학습형 지문 은행 (넣는 PDF마다 축적·교체)
+
+넣는 기출 PDF를 **모두 저장하고 학습**해, 유형별로 가장 적합한 지문을 교재가 쓰게 한다.
+
+- **적재기**: `src/ingest_bank.py` — PDF → 문항 분해 → 번호대/유형 분류(근거 응집형만) → 지문·선지 추출 → **신호 점수** 계산 → `corpus/passage_bank.jsonl` 누적
+- **신호 점수(fitness)** = 역접·한정·결론·주장·인과·통념 신호어 개수 × 길이 적합도. **형광펜 학습에 적합할수록 높음.**
+- **자동 교체**: 같은 유형 슬롯에서 **더 높은 점수의 지문이 들어오면 대표 지문으로 승격**. → PDF를 넣을수록 각 유형 대표 지문이 더 좋은 것으로 갱신된다.
+- **영구 보존**: `passage_bank.jsonl`은 git 커밋(세션 초기화돼도 유지). 원본 PDF는 `corpus/pdfs/`에 보관(저작권·용량으로 git 제외).
+- 상세: `corpus/README.md`
+- 실측(2022 6월 적재): 16개 지문 학습, 빈칸 대표=#33(신호점수 6.0, 역접 5), 함축 대표=#21(2.4).
+
+```bash
+python -m src.ingest_bank 시험지.pdf     # 학습(누적)
+python -m src.ingest_bank --report        # 은행 현황
+python -m src.ingest_bank --pick 31-34    # 유형별 대표 지문
+```
+
+---
+
 ## 6. 기존 시스템과의 결합 (구현 메모)
 
 - `config.yaml` `outputs`에 `highlight: true/false` + 웹앱 체크박스
