@@ -82,6 +82,19 @@ table.pt th{ background:#7a4bb3; color:#fff; padding:3px 8px; text-align:left; f
 table.pt td{ padding:3px 8px; border-bottom:1px solid var(--line); }
 table.pt tbody tr:nth-child(even) td{ background:#faf7fd; }
 .pt .pat{ font-weight:800; color:#5a3a86; white-space:nowrap; }
+/* 적용범위 안내 */
+.scope{ background:#fff; border:2px dashed var(--ink); border-radius:8px; padding:11px 15px; margin-bottom:16px; }
+.scope h3{ margin:0 0 6px; font-size:12px; color:var(--ink-d); }
+.scope table{ width:100%; border-collapse:collapse; font-size:9.4px; }
+.scope th{ background:var(--ink); color:#fff; padding:3px 8px; text-align:left; }
+.scope td{ padding:4px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+.scope .yes{ color:var(--src-line); font-weight:800; white-space:nowrap; }
+.scope .no{ color:var(--trap); font-weight:800; white-space:nowrap; }
+.scope .safe{ margin-top:7px; font-size:9.2px; background:#fffbe9; border-left:3px solid var(--must-line); padding:5px 9px; border-radius:0 4px 4px 0; }
+/* 노랑만 읽기 검증 줄 */
+.vline{ margin-top:6px; background:#fffdf3; border:1px solid var(--must-line); border-radius:6px; padding:5px 9px; font-size:9.4px; }
+.vline .lb{ font-size:8px; font-weight:800; color:#7a5c00; background:var(--must); border:1px solid var(--must-line); border-radius:8px; padding:1px 6px; margin-right:5px; }
+.vline .seq{ color:#5a4600; } .vline .seq b{ color:var(--ink-d); } .vline .arw{ color:#a86b00; font-weight:800; }
 /* 카드 내 패러프레이즈 캐치 줄 */
 .pline{ margin-top:6px; background:#f7f3fc; border-left:3px solid #7a4bb3; border-radius:0 5px 5px 0; padding:5px 9px; font-size:9.5px; }
 .pline .lb{ font-size:8px; font-weight:800; color:#fff; background:#7a4bb3; border-radius:8px; padding:1px 6px; margin-right:5px; }
@@ -149,6 +162,19 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
     </table>
   </div>
 
+  <!-- ============ 노랑만 읽어도 되나? 적용범위 ============ -->
+  <div class="scope">
+    <h3>🟡 "노랑만 읽어도 답이 나오나?" — 유형에 따라 다르다 (정직하게)</h3>
+    <table>
+      <thead><tr><th style="width:15%"></th><th style="width:20%">유형</th><th>노랑만 읽기</th></tr></thead>
+      <tbody>
+        <tr><td class="yes">✅ 됨</td><td>대의(목적·심경·주장·요지·주제·제목) · <b>함축 · 빈칸</b> · 순서 · 삽입 · 요약</td><td>답 근거가 <b>주제·역접·결론 문장</b>에 모임(근거 응집형) → 노랑만으로 풀림</td></tr>
+        <tr><td class="no">❌ 안 됨</td><td>내용일치 · 도표 · 안내문 · <b>어법 · 어휘</b></td><td>칠하는 법이 <b>정반대</b> — 지문 정독 대신 <b>선지·밑줄 기준으로 해당 부분만 역스캔</b></td></tr>
+      </tbody>
+    </table>
+    <div class="safe">🔒 <b>안전장치</b>: 노랑만으로 선지가 안 갈리면 → 회색으로 <b>한 단계 확장</b>(예시가 근거인 드문 경우). 회색은 "안 읽는다"가 아니라 "정독하지 않는다".</div>
+  </div>
+
   <!-- ============ 34번 훈련 카드 ============ -->
   <div class="card">
     <div class="hd">
@@ -170,6 +196,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
     </div>
     <div class="line"><span class="lb src">근거</span><span>같은 노래도 <b>경계(장소)</b>가 바뀌면 낯선 새로 취급 <span class="arw">⟶</span> 노래를 '<b>장소</b>'와 묶어 인식</span></div>
     <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">boundary·territory (장소)</span> <span class="arw">→</span> 정답 ④ <span class="sw">locality</span> (동의·추상) ✓ &nbsp;/&nbsp; 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> = 지문어 <b>그대로 복사</b> 함정</div>
+    <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[낯선 녹음→더 공격적] <span class="arw">+</span> [<b>However</b> 경계에서만] <span class="arw">+</span> [<b>다른 경계</b>면 낯선 취급] <span class="arw">⟹</span> 노래=<b>장소</b> 인식 = <b>④</b>. 회색 없이 답 나옴 ✓</span></div>
     <div class="opts">
       <div class="opt ok"><span class="n">④</span><span class="tx">the robins associate <b>locality</b> with familiar songs</span><span class="jd">✔ 위치+노래 = 근거 그대로</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">variety and <span class="reuse">complexity</span> characterize the songs</span><span class="jd">✘ 'complex' 표면어휘 함정</span></div>
@@ -226,6 +253,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
     </div>
     <div class="line"><span class="lb pat">패턴</span><span>밑줄 <b>±</b>부터 → 부정. "꿈을 버리고 얻는 것" = 남 메일 다 응대 <span class="arw">⟶</span> 남을 만족시키려는 것</span></div>
     <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">an empty inbox (비유)</span> <span class="arw">→</span> 정답 ② <span class="sw">satisfy others' demands</span> (비유→직설) ✓ &nbsp;/&nbsp; 오답 ④⑤ <span class="cp">social</span> = 지문어 <b>그대로 복사</b> 함정</div>
+    <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[창의적 일 먼저·이메일 끄기] <span class="arw">+</span> [<b>But</b> 꿈을 empty inbox와 안 바꿈] <span class="arw">+</span> [<b>Otherwise</b> 잠재력 희생] <span class="arw">⟹</span> empty inbox=남 요구 응대 = <b>②</b> ✓</span></div>
     <div class="opts">
       <div class="opt ok"><span class="n">②</span><span class="tx">attempting to satisfy <b>other people's demands</b></span><span class="jd">✔ '남 메일 응대'의 추상화</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">following an <span class="reuse">innovative</span> course of action</span><span class="jd">✘ 긍정어 → ± 반대</span></div>
