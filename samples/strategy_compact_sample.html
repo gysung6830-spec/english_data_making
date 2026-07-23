@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>풀이 패턴 카드 — 실제 기출(2022 6월) 압축 샘플</title>
+<style>
+/* 압축형: 한 문항 = 반쪽. 학생이 질리지 않게 글 최소화, 시각 중심 */
+@page { size:A4; margin:10mm 11mm; }
+*{ box-sizing:border-box; }
+body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; color:#23272e;
+  font-size:10px; line-height:1.5; margin:0; background:#f4f5f7; padding:16px; }
+.wrap{ max-width:780px; margin:0 auto; }
+
+:root{
+  --ink:#1f6f78; --ink-d:#12525a;
+  --must:#fff3bf; --must-line:#e6b800;
+  --src:#e8f5e9; --src-line:#3d8f58;
+  --skip:#9aa0a6; --trap:#cd5049; --muted:#6b7280; --line:#e5e7eb;
+}
+
+.card{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.1);
+  padding:14px 16px; margin-bottom:16px; }
+
+/* 헤더 한 줄 */
+.hd{ display:flex; align-items:center; gap:8px; border-bottom:2px solid var(--ink-d);
+  padding-bottom:6px; margin-bottom:9px; }
+.hd .no{ background:var(--ink-d); color:#fff; font-weight:800; font-size:12px;
+  padding:2px 9px; border-radius:5px; }
+.hd .ty{ font-weight:800; font-size:13px; color:var(--ink-d); }
+.hd .pt{ font-size:9px; font-weight:700; color:#fff; background:var(--trap);
+  padding:1px 7px; border-radius:9px; }
+.hd .tm{ margin-left:auto; font-size:9.5px; font-weight:700; color:var(--muted); }
+
+/* 지문 (형광펜) */
+.psg{ font-size:10px; line-height:1.8; border:1px solid var(--line); border-radius:6px;
+  padding:9px 11px; margin-bottom:9px; }
+mark.m{ background:var(--must); box-shadow:inset 0 -2px 0 var(--must-line); padding:0 1px; }
+mark.s{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); padding:0 1px; }
+.sk{ color:var(--skip); }
+.bk{ display:inline-block; min-width:60px; border-bottom:2px solid #111; text-align:center; font-weight:800; }
+
+/* 한 줄 라벨 블록들 */
+.line{ display:flex; gap:7px; align-items:baseline; margin:5px 0; font-size:10px; }
+.line .lb{ flex:none; font-size:8.5px; font-weight:800; color:#fff; border-radius:4px;
+  padding:2px 7px; }
+.lb.pat{ background:var(--ink); }
+.lb.src{ background:var(--src-line); }
+.line b{ color:var(--ink-d); }
+.arw{ color:var(--ink); font-weight:800; }
+
+/* 선지 찍기 — 아주 짧게 */
+.opts{ margin-top:7px; border-top:1px dashed var(--line); padding-top:7px; }
+.opt{ display:flex; gap:6px; align-items:baseline; font-size:9.6px; margin-bottom:3px; }
+.opt .n{ flex:none; font-weight:800; width:14px; }
+.opt .tx{ flex:1; }
+.opt .jd{ flex:none; font-size:8.7px; font-weight:800; }
+.opt.ok{ background:var(--src); border-radius:4px; padding:2px 5px; }
+.opt.ok .jd{ color:var(--src-line); }
+.opt.x .jd{ color:var(--trap); }
+.reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; color:#a5342d; }
+
+/* 공식 한 줄 */
+.formula{ margin-top:8px; background:#effafa; border:1.5px solid var(--ink);
+  border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
+.formula .k{ background:var(--ink); color:#fff; font-size:8px; padding:1px 6px;
+  border-radius:8px; margin-right:6px; }
+
+.tophead{ text-align:center; margin-bottom:12px; }
+.tophead .t{ font-size:16px; font-weight:800; color:var(--ink-d); }
+.tophead .s{ font-size:9.5px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="tophead">
+    <div class="t">풀이 패턴 카드 — "이렇게 풀었어야 한다"</div>
+    <div class="s">2022학년도 6월 모평 · 실제 기출 · 한 문항 = 반쪽, 글은 최소</div>
+  </div>
+
+  <!-- ===== 34번 빈칸 ===== -->
+  <div class="card">
+    <div class="hd">
+      <span class="no">34</span><span class="ty">빈칸추론</span><span class="pt">3점</span>
+      <span class="tm">⏱ 1'40" · 형광펜만 읽기</span>
+    </div>
+
+    <div class="psg">
+      <span class="sk">Emma Brindley has investigated the responses of European robins to the songs of neighbors and strangers. Despite the large and complex song repertoire of European robins, they were able to discriminate between the songs of neighbors and strangers.</span>
+      <mark class="m">When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs with the playback more often</mark> than on hearing a neighbor's song.
+      <span class="sk">As Brindley suggests, the overlapping of song may be an aggressive response.</span>
+      <mark class="m">However, this difference occurred <b>only when</b> the neighbor's song was played at the boundary between that neighbor's territory and the territory of the bird being tested.</mark>
+      <mark class="s">If the same neighbor's song was played at another boundary, one separating the test subject from another neighbor, it was treated as the call of a stranger.</mark>
+      Not only does this result demonstrate that <span class="bk">&nbsp;34&nbsp;</span>, but it also shows that the choice of songs is highly important.
+    </div>
+
+    <div class="line"><span class="lb pat">패턴</span><span>빈칸=<b>실험 결과 요약</b>. 결과 중 <b>"딱 하나 결정적 문장"</b>(However·only·If~)만 찾아 그걸 추상화.</span></div>
+    <div class="line"><span class="lb src">근거</span><span>같은 노래도 <b>다른 경계</b>에서 틀면 → <b>낯선 새로 취급</b> <span class="arw">⟶</span> 새는 노래를 '<b>장소</b>'와 묶어 인식</span></div>
+
+    <div class="opts">
+      <div class="opt ok"><span class="n">④</span><span class="tx">the robins associate <b>locality</b> with familiar songs</span><span class="jd">✔ 위치+노래 연결 = 근거 그대로</span></div>
+      <div class="opt x"><span class="n">①</span><span class="tx">variety and <span class="reuse">complexity</span> characterize the songs</span><span class="jd">✘ 'complex' 표면어휘 함정</span></div>
+      <div class="opt x"><span class="n">②</span><span class="tx">song <span class="reuse">volume</span> affects aggressive behavior</span><span class="jd">✘ 지문에 없음</span></div>
+      <div class="opt x"><span class="n">③</span><span class="tx">poor territorial sense is a key to survival</span><span class="jd">✘ 정반대(영역 예민)</span></div>
+      <div class="opt x"><span class="n">⑤</span><span class="tx">less responsive to recorded songs</span><span class="jd">✘ 반대(녹음에 더 반응)</span></div>
+    </div>
+
+    <div class="formula"><span class="k">공식</span>빈칸 = 결정적 문장 1개(역접·only·조건) 찾아 → 추상화 / 지문 단어 그대로 쓴 선지 = 함정</div>
+  </div>
+
+  <!-- ===== 21번 함축 ===== -->
+  <div class="card">
+    <div class="hd">
+      <span class="no">21</span><span class="ty">함축의미</span><span class="pt">3점</span>
+      <span class="tm">⏱ 1'30" · 밑줄 태도(±)부터</span>
+    </div>
+
+    <div class="psg">
+      <mark class="m">The single most important change you can make is to switch to creative work first, reactive work second</mark> — blocking off time for your own priorities, with phone and e-mail off.
+      <span class="sk">I used to be a frustrated writer. Making this switch turned me into a productive writer. Yet there wasn't a day without a string of people waiting for me to get back to them...</span>
+      <mark class="s">But it's better to disappoint a few people over small things, than to abandon your dreams for <b>an empty inbox</b>.</mark>
+      <mark class="m">Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
+    </div>
+
+    <div class="line"><span class="lb pat">패턴</span><span>밑줄의 <b>±(긍정/부정)</b>부터 판단 → 부정. "<b>꿈을 버리고</b> 얻는 것"이 곧 empty inbox = 남 메일 다 처리하기.</span></div>
+    <div class="line"><span class="lb src">근거</span><span>"abandon your dreams <b>for</b> an empty inbox" <span class="arw">⟶</span> 남의 요구에 응하는 일 = <b>남을 만족시키려는 것</b></span></div>
+
+    <div class="opts">
+      <div class="opt ok"><span class="n">②</span><span class="tx">attempting to satisfy <b>other people's demands</b></span><span class="jd">✔ '남 메일 응대'의 추상화</span></div>
+      <div class="opt x"><span class="n">①</span><span class="tx">following an <span class="reuse">innovative</span> course of action</span><span class="jd">✘ 긍정어 → ± 반대</span></div>
+      <div class="opt x"><span class="n">③</span><span class="tx">completing challenging work without <span class="reuse">mistakes</span></span><span class="jd">✘ mistakes 언급 없음</span></div>
+      <div class="opt x"><span class="n">④</span><span class="tx">removing <span class="reuse">social</span> ties for mental balance</span><span class="jd">✘ 표면어휘 함정</span></div>
+      <div class="opt x"><span class="n">⑤</span><span class="tx">securing <span class="reuse">social networking</span> opportunities</span><span class="jd">✘ 표면어휘 함정</span></div>
+    </div>
+
+    <div class="formula"><span class="k">공식</span>함축 = 밑줄 ±부터 정하고 → 그 뜻을 '추상 표현'으로 바꾼 선지 / 밑줄 근처 표면어휘 재사용 = 함정</div>
+  </div>
+
+</div>
+</body>
+</html>
