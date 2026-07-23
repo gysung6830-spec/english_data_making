@@ -1,9 +1,11 @@
-# 추상→구체 · 세부목차별 실전적용(문제↔해설). 실제 평가원 기출. 코딩 없이 편집.
 practice:
   nominalization:
-  - sentence: Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the necessity of the role of humans as the decision makers would appear to be in decline.
+  - sentence: Whether it be due to the growing presence of AI assistants or the emergence
+      of self-driving cars, the necessity of the role of humans as the decision makers
+      would appear to be in decline.
     source: 2024 고3 6월 20번
-    prompt: 밑줄 친 the emergence of self-driving cars와 the necessity of the role of humans를 명사화를 풀어 자연스럽게 옮긴 것을 고르시오.
+    prompt: 밑줄 친 the emergence of self-driving cars와 the necessity of the role of
+      humans를 명사화를 풀어 자연스럽게 옮긴 것을 고르시오.
     options:
     - 자율주행차의 출현이라는 결과나 의사결정자로서의 인간 역할의 필요성이라는 원인 때문에, 인간은 이미 사라지고 있는 것으로 보인다.
     - 자율주행차가 생겨나고 있기 때문이든 아니든, 의사결정자로서 인간 역할이 필요하다는 것은 쇠퇴하고 있는 것으로 보인다.
@@ -18,13 +20,17 @@ practice:
     solution:
       cut: the emergence of self-driving cars / the necessity of the role of humans
       wrong: 명사 덩어리를 명사 그대로 두고 억지로 인과(결과·원인)로 붙임
-      wrong_why: the emergence of A는 'A가 생겨나는 것', the necessity of B는 'B가 필요하다는 것'으로 동사로 풀어야 하는데, 명사화를 그대로 둔 채 없는 인과관계를 만들어 오역했다.
+      wrong_why: the emergence of A는 'A가 생겨나는 것', the necessity of B는 'B가 필요하다는 것'으로
+        동사로 풀어야 하는데, 명사화를 그대로 둔 채 없는 인과관계를 만들어 오역했다.
       author_msg: of 앞의 추상명사(emergence/necessity)를 동사(생겨나다/필요하다)로 바꿔 읽으면 문장 뼈대가 보인다.
       key_points:
-      - "the emergence of self-driving cars : '출현(명사)'로 굳혀 앞 growing presence of AI와 억지로 원인·결과로 엮기 쉽다 → 'A가 생겨나는 것'으로 동사화."
-      - "the necessity of the role of humans : '필요성(명사)'로 두면 무엇이 in decline인지 안 잡힌다 → '인간 역할이 필요하다는 것'으로 동사화."
+      - 'the emergence of self-driving cars : ''출현(명사)''로 굳혀 앞 growing presence of
+        AI와 억지로 원인·결과로 엮기 쉽다 → ''A가 생겨나는 것''으로 동사화.'
+      - 'the necessity of the role of humans : ''필요성(명사)''로 두면 무엇이 in decline인지 안
+        잡힌다 → ''인간 역할이 필요하다는 것''으로 동사화.'
     kind: mc
-  - sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
+  - sentence: Changing political, social and religious landscapes will lead to the
+      emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
     prompt: 밑줄 친 the emergence of new cultures를 명사화를 풀어 가장 자연스럽게 옮긴 것을 고르시오.
     options:
@@ -41,16 +47,21 @@ practice:
     solution:
       cut: lead to the emergence of new cultures
       wrong: emergence를 '출현물'이라는 사물 명사로 굳혀 읽음
-      wrong_why: lead to the emergence of A는 'A가 생겨나게 된다'로 동사로 풀어야 하는데, emergence를 명사 사물로 처리해 뜻이 어색해졌다.
+      wrong_why: lead to the emergence of A는 'A가 생겨나게 된다'로 동사로 풀어야 하는데, emergence를
+        명사 사물로 처리해 뜻이 어색해졌다.
       author_msg: lead to the emergence of A는 'A가 생겨나는 결과로 이어진다 = A가 생겨난다'로 통째로 동사화하라.
       key_points:
-      - "the emergence of new cultures : emergence를 '출현물(사물)'로 굳혀 새 문화를 결과물로 오독하기 쉽다 → 'A가 생겨나는 것'으로 동사화."
-      - "lead to A : 사물 목적어로 받아 'A를 이끌다'로 오독하기 쉽다 → 'A가 생겨나게 된다'로 통째 동사화."
+      - 'the emergence of new cultures : emergence를 ''출현물(사물)''로 굳혀 새 문화를 결과물로 오독하기
+        쉽다 → ''A가 생겨나는 것''으로 동사화.'
+      - 'lead to A : 사물 목적어로 받아 ''A를 이끌다''로 오독하기 쉽다 → ''A가 생겨나게 된다''로 통째 동사화.'
     kind: mc
-  - sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
+  - sentence: In other words, they not only have an innate capacity for matching their
+      own kinaesthetically experienced bodily movements with those of others that
+      are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
     prompt: 밑줄 친 an innate capacity for matching ...를 명사화(capacity for)를 풀어 우리말로 옮기시오.
-    answer: 그들은 자신의 운동감각으로 경험된 신체 움직임을 시각적으로 지각되는 타인의 움직임과 맞춰 볼 수 있는 타고난 능력을 지닐 뿐만 아니라, 그렇게 하려는 타고난 욕구도 지닌다.
+    answer: 그들은 자신의 운동감각으로 경험된 신체 움직임을 시각적으로 지각되는 타인의 움직임과 맞춰 볼 수 있는 타고난 능력을 지닐 뿐만
+      아니라, 그렇게 하려는 타고난 욕구도 지닌다.
     vocab:
     - word: innate
       meaning: 타고난
@@ -61,19 +72,28 @@ practice:
     solution:
       cut: an innate capacity for matching A with B
       wrong: capacity for matching을 '맞춤이라는 능력'처럼 명사 덩어리로 굳혀 옮김
-      wrong_why: capacity for -ing는 '~할 수 있는 능력'으로 동사로 풀어야 하는데, matching을 명사로 두면 무엇을 무엇과 맞추는지 관계가 흐려진다.
-      author_msg: capacity for -ing = '-할 수 있다는 것', drive to do = '-하려 한다는 것'으로 동사화해 A(자기 움직임)와 B(타인 움직임)의 연결을 드러내라.
+      wrong_why: capacity for -ing는 '~할 수 있는 능력'으로 동사로 풀어야 하는데, matching을 명사로 두면 무엇을
+        무엇과 맞추는지 관계가 흐려진다.
+      author_msg: capacity for -ing = '-할 수 있다는 것', drive to do = '-하려 한다는 것'으로 동사화해
+        A(자기 움직임)와 B(타인 움직임)의 연결을 드러내라.
       key_points:
-      - "capacity for matching A with B : matching을 '맞춤(명사)'으로 굳히면 무엇을 무엇과 맞추는지 A·B 관계가 흐려진다 → '~할 수 있다는 것'으로 동사화."
-      - "those of others that are visually perceived : those가 앞 movements를 받는 것을 놓쳐 엉뚱한 대상과 맞추기 쉽다 → '타인의 (움직임)'으로 복원."
+      - 'capacity for matching A with B : matching을 ''맞춤(명사)''으로 굳히면 무엇을 무엇과 맞추는지
+        A·B 관계가 흐려진다 → ''~할 수 있다는 것''으로 동사화.'
+      - 'those of others that are visually perceived : those가 앞 movements를 받는 것을 놓쳐
+        엉뚱한 대상과 맞추기 쉽다 → ''타인의 (움직임)''으로 복원.'
     kind: short
   restate:
-  - sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
+  - sentence: 'In other words, as museums struggle to survive in a competitive economy,
+      their budgets often prioritise those parts of themselves that are consumable:
+      infotainment in the galleries, goods and services in the cafes and the shops.'
     source: 2023 고3 6월 23번
-    prompt: 밑줄 친 those parts of themselves that are consumable가 콜론(:) 뒤에서 재진술로 구체화되는 방식을 고려하여, 이 문장의 의미로 가장 적절한 것을 고르시오.
+    prompt: 밑줄 친 those parts of themselves that are consumable가 콜론(:) 뒤에서 재진술로 구체화되는
+      방식을 고려하여, 이 문장의 의미로 가장 적절한 것을 고르시오.
     options:
-    - 다시 말해, 박물관은 경쟁적 경제 속에서 살아남으려 애쓰면서, 소비될 수 있는 자기 부분들 즉 전시실의 인포테인먼트, 카페와 상점의 상품 및 서비스가 예산에서 우선시되지 않도록 막는다.
-    - 다시 말해, 박물관이 경쟁적 경제 속에서 살아남으려 애쓰면서, 그들의 예산은 흔히 소비될 수 있는 자기 부분들, 즉 전시실의 인포테인먼트와 카페와 상점의 상품 및 서비스를 우선시한다.
+    - 다시 말해, 박물관은 경쟁적 경제 속에서 살아남으려 애쓰면서, 소비될 수 있는 자기 부분들 즉 전시실의 인포테인먼트, 카페와 상점의 상품
+      및 서비스가 예산에서 우선시되지 않도록 막는다.
+    - 다시 말해, 박물관이 경쟁적 경제 속에서 살아남으려 애쓰면서, 그들의 예산은 흔히 소비될 수 있는 자기 부분들, 즉 전시실의 인포테인먼트와
+      카페와 상점의 상품 및 서비스를 우선시한다.
     answer_index: 1
     vocab:
     - word: prioritise
@@ -83,17 +103,23 @@ practice:
     - word: infotainment
       meaning: 정보와 오락을 결합한 것(인포테인먼트)
     solution:
-      cut: 콜론(:) 뒤의 infotainment ... goods and services는 앞의 those parts of themselves that are consumable를 그대로 풀어 쓴 재진술이다.
+      cut: 콜론(:) 뒤의 infotainment ... goods and services는 앞의 those parts of themselves
+        that are consumable를 그대로 풀어 쓴 재진술이다.
       wrong: 0번
-      wrong_why: '''prioritise(우선시한다)''를 ''우선시되지 않도록 막는다''로 정반대로 뒤집었다. 원문에는 부정어가 없으며 예산이 소비 가능한 부분을 ''우선시''한다.'
-      author_msg: In other words와 콜론(:)은 새 정보를 더하는 게 아니라 같은 말을 쉽게 되풀이하는 신호다. 콜론 뒤 목록은 '소비될 수 있는 부분'이 무엇인지 구체적 예로 바꿔 말한 것일 뿐, 앞 내용과 동일한 지시 대상이다.
+      wrong_why: '''prioritise(우선시한다)''를 ''우선시되지 않도록 막는다''로 정반대로 뒤집었다. 원문에는 부정어가 없으며
+        예산이 소비 가능한 부분을 ''우선시''한다.'
+      author_msg: In other words와 콜론(:)은 새 정보를 더하는 게 아니라 같은 말을 쉽게 되풀이하는 신호다. 콜론 뒤
+        목록은 '소비될 수 있는 부분'이 무엇인지 구체적 예로 바꿔 말한 것일 뿐, 앞 내용과 동일한 지시 대상이다.
       key_points:
-      - "콜론(:) 뒤 infotainment ... goods and services : 새 정보로 착각하기 쉽다 → 앞 '소비 가능한 부분'과 같은 대상의 구체적 재진술."
-      - "prioritise : 부정어가 없는데도 문맥상 '막는다·우선시 안 함'으로 방향을 뒤집기 쉽다 → '우선시한다' 그대로 살리기."
+      - '콜론(:) 뒤 infotainment ... goods and services : 새 정보로 착각하기 쉽다 → 앞 ''소비 가능한
+        부분''과 같은 대상의 구체적 재진술.'
+      - 'prioritise : 부정어가 없는데도 문맥상 ''막는다·우선시 안 함''으로 방향을 뒤집기 쉽다 → ''우선시한다'' 그대로 살리기.'
     kind: mc
-  - sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
+  - sentence: Instead, they should concentrate attention on one subject after another,
+      that is, in different periods of time.
     source: 2024 고3 11월 40번
-    prompt: that is 뒤 내용이 앞의 one subject after another를 어떻게 재진술하는지 밝혀, 이 문장을 우리말로 옮기시오.
+    prompt: that is 뒤 내용이 앞의 one subject after another를 어떻게 재진술하는지 밝혀, 이 문장을 우리말로
+      옮기시오.
     answer: 대신에, 그들은 한 주제에 이어 다른 주제로 차례차례, 즉 서로 다른 시간대에 걸쳐 주의를 집중해야 한다.
     vocab:
     - word: concentrate
@@ -103,18 +129,24 @@ practice:
     - word: that is
       meaning: 즉, 다시 말해
     solution:
-      cut: that is 뒤의 in different periods of time은 앞의 one subject after another(한 주제 다음 또 한 주제)를 시간의 관점에서 다시 말한 재진술이다.
+      cut: that is 뒤의 in different periods of time은 앞의 one subject after another(한
+        주제 다음 또 한 주제)를 시간의 관점에서 다시 말한 재진술이다.
       wrong: that is를 '그것은 ~이다'로 오독하는 경우
       wrong_why: that is는 주어+동사가 아니라 '즉, 다시 말해'라는 재진술 연결어이다. 이를 문장 술어로 보면 구조가 무너진다.
-      author_msg: that is는 새 정보를 추가하지 않는다. 여러 주제를 잇따라 다룬다는 것을 '서로 다른 시간대에 걸쳐'라고 같은 뜻으로 바꿔 말한 것일 뿐이다.
+      author_msg: that is는 새 정보를 추가하지 않는다. 여러 주제를 잇따라 다룬다는 것을 '서로 다른 시간대에 걸쳐'라고 같은
+        뜻으로 바꿔 말한 것일 뿐이다.
       key_points:
-      - "that is : 주어+동사 '그것은 ~이다'로 오독해 술어로 잡으면 구조가 무너진다 → '즉'이라는 재진술 연결어로 처리."
-      - "in different periods of time : 새 정보로 보면 앞 one subject after another와 따로 놀기 쉽다 → 같은 상황을 시간 관점으로 되풀이한 재진술."
+      - 'that is : 주어+동사 ''그것은 ~이다''로 오독해 술어로 잡으면 구조가 무너진다 → ''즉''이라는 재진술 연결어로 처리.'
+      - 'in different periods of time : 새 정보로 보면 앞 one subject after another와 따로 놀기
+        쉽다 → 같은 상황을 시간 관점으로 되풀이한 재진술.'
     kind: short
   example:
-  - sentence: Passwords, double-key identification, and biometrics such as fingerprint, iris, and voice recognition are all ways of keeping the account details hidden from potential fraudsters.
+  - sentence: Passwords, double-key identification, and biometrics such as fingerprint,
+      iris, and voice recognition are all ways of keeping the account details hidden
+      from potential fraudsters.
     source: 2022 고3 9월 39번
-    prompt: 밑줄 친 biometrics such as fingerprint, iris, and voice recognition의 의미로 가장 적절한 것을 고르시오.
+    prompt: 밑줄 친 biometrics such as fingerprint, iris, and voice recognition의 의미로
+      가장 적절한 것을 고르시오.
     options:
     - 지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술
     - 지문, 홍채, 음성 인식과 같은 구체적 사례로 이루어진 생체 인식
@@ -130,13 +162,18 @@ practice:
       cut: biometrics such as fingerprint, iris, and voice recognition
       wrong: 지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술
       wrong_why: such as는 앞의 상위 개념을 뒤의 사례로 구체화하는 표현인데, 이를 '구별되는 별도의 것'으로 반대로 읽은 오역이다.
-      author_msg: such as 뒤 나열은 상위 개념의 예시입니다. biometrics(생체 인식)라는 큰 범주를 '지문, 홍채, 음성 인식'이라는 구체적 종류로 풀어 준 것이지, 이들과 별개의 기술이 아닙니다.
+      author_msg: such as 뒤 나열은 상위 개념의 예시입니다. biometrics(생체 인식)라는 큰 범주를 '지문, 홍채, 음성
+        인식'이라는 구체적 종류로 풀어 준 것이지, 이들과 별개의 기술이 아닙니다.
       key_points:
-      - "biometrics such as A, B, and C : such as를 '~와는 구별되는'으로 반대로 읽어 예시를 별개 기술로 오독하기 쉽다 → 상위 biometrics를 좁혀 준 구체 예시."
+      - 'biometrics such as A, B, and C : such as를 ''~와는 구별되는''으로 반대로 읽어 예시를 별개 기술로
+        오독하기 쉽다 → 상위 biometrics를 좁혀 준 구체 예시.'
     kind: mc
-  - sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
+  - sentence: Owners of forest lands have a market incentive to cut down trees rather
+      than manage the forest for carbon capture, wildlife habitat, flood protection,
+      and other ecosystem services.
     source: 2024 고3 11월 23번
-    prompt: carbon capture, wildlife habitat, flood protection을 하나로 묶는 상위 개념을 문장에서 찾아 영어로 쓰시오.
+    prompt: carbon capture, wildlife habitat, flood protection을 하나로 묶는 상위 개념을 문장에서
+      찾아 영어로 쓰시오.
     answer: ecosystem services
     vocab:
     - word: carbon capture
@@ -146,59 +183,19 @@ practice:
     - word: flood protection
       meaning: 홍수 방지
     solution:
-      cut: for carbon capture, wildlife habitat, flood protection, and other ecosystem services
+      cut: for carbon capture, wildlife habitat, flood protection, and other ecosystem
+        services
       wrong: carbon capture, wildlife habitat, flood protection을 서로 무관한 별개 항목으로 봄
       wrong_why: and other ~는 앞의 나열이 결국 뒤 상위 개념의 사례임을 알려주는 표지인데 이를 놓친 것이다.
-      author_msg: '''A, B, C, and other X'' 구조에서 X가 상위 개념입니다. 탄소 포집·서식지·홍수 방지는 모두 ecosystem services(생태계 서비스)라는 큰 범주에 묶이는 구체 사례입니다.'
+      author_msg: '''A, B, C, and other X'' 구조에서 X가 상위 개념입니다. 탄소 포집·서식지·홍수 방지는 모두
+        ecosystem services(생태계 서비스)라는 큰 범주에 묶이는 구체 사례입니다.'
       key_points:
-      - "A, B, C, and other X : 'and other'를 놓치면 나열을 서로 무관한 별개 항목으로 읽기 쉽다 → A·B·C가 상위 X(ecosystem services)의 사례임을 알리는 표지."
-    kind: short
-  reference:
-  - sentence: It is important to recognize the cumulative impact of not prioritizing self-care and to make sure that in the long term, this is the exception rather than the norm.
-    source: 2026 고3 11월 35번
-    prompt: 밑줄 친 this가 가리키는 대상을 문장 안에서 찾아 대입했을 때, 우리말 해석으로 옳은 것을 고르시오.
-    options:
-    - 자기 관리를 우선시하지 않는 것의 누적된 영향을 인식하고, 장기적으로 이것(자기 관리)이 예외가 아니라 표준이 되도록 하는 것이 중요하다.
-    - 자기 관리를 우선시하지 않는 것의 누적된 영향을 인식하고, 장기적으로 이것(자기 관리를 우선시하지 않는 것)이 표준이 아니라 예외가 되도록 하는 것이 중요하다.
-    answer_index: 1
-    vocab:
-    - word: cumulative
-      meaning: 누적되는
-    - word: prioritize
-      meaning: 우선시하다
-    - word: norm
-      meaning: 표준, 일반적인 것
-    solution:
-      cut: this가 가리키는 대상을 문장 안에서 정확히 짚고, exception rather than the norm의 순서를 뒤집지 않는 것이 관건이다.
-      wrong: this를 self-care(자기 관리)로 잡고, exception과 norm의 관계를 반대로 옮긴 해석.
-      wrong_why: this는 바로 앞의 not prioritizing self-care(자기 관리를 우선시하지 않는 것)를 가리키며, 원문은 이것이 the norm(표준)이 아니라 the exception(예외)이 되어야 한다고 말한다.
-      author_msg: 지시어는 가장 가까운 명사구가 아니라 문맥상 되짚어야 할 대상을 찾아야 하며, this는 self-care가 아니라 not prioritizing self-care 전체를 받는다.
-      key_points:
-      - "this : 가장 가까운 self-care로 잡기 쉽다 → 실제 지시 대상은 not prioritizing self-care(자기 관리를 우선시하지 않는 것) 전체."
-      - "the exception rather than the norm : A rather than B의 순서를 뒤집어 '표준'으로 잡기 쉽다 → 'B(표준)가 아니라 A(예외)'."
-    kind: mc
-  - sentence: This ability is due to the activity of plant meristems, regions of undifferentiated tissue that can divide.
-    source: 2022 고3 9월 35번
-    prompt: 밑줄 친 This ability가 가리키는 대상을 반영하여 문장을 우리말로 해석하시오. (지시 대상이 문장 밖에 있으면 (앞의 그 능력)으로 두시오.)
-    answer: (앞의 그 능력)은 분열할 수 있는 미분화 조직의 영역인 식물 분열 조직의 활동 때문이다.
-    vocab:
-    - word: meristem
-      meaning: 분열 조직
-    - word: undifferentiated
-      meaning: 미분화의
-    - word: divide
-      meaning: 분열하다
-    solution:
-      cut: This ability의 지시 대상이 문장 안에 없다는 점을 확인하고, 동격으로 이어지는 regions ... 부분을 meristems의 설명으로 붙여 옮기는 것이 관건이다.
-      wrong: This ability를 문장 안의 활동이나 조직을 가리키는 것으로 잘못 잡는 해석.
-      wrong_why: This ability가 가리키는 능력은 이 문장 안에 제시되지 않고 앞 문맥에 있으므로, 문장 안에서 대입하지 말고 (앞의 그 능력)으로 두어야 한다.
-      author_msg: 지시어의 대상은 반드시 같은 문장 안에 있는 것이 아니며, 없을 때는 (앞의 그것)으로 처리하고 나머지 동격 구조를 정확히 옮겨야 한다.
-      key_points:
-      - "This ability : 지시 대상을 문장 안(활동·조직)에서 찾으려다 헛짚기 쉽다 → 대상이 문장 밖이면 (앞의 그 능력)으로 두기."
-      - "regions of undifferentiated tissue that can divide : 새 주어로 오독하기 쉽다 → 앞 plant meristems를 풀어 준 동격 설명."
+      - 'A, B, C, and other X : ''and other''를 놓치면 나열을 서로 무관한 별개 항목으로 읽기 쉽다 → A·B·C가
+        상위 X(ecosystem services)의 사례임을 알리는 표지.'
     kind: short
   contrast:
-  - sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
+  - sentence: The truth of the matter is revealed not in the perception of the figure
+      but in its rational representation.
     source: 2023 고3 6월 34번
     prompt: 다음 문장의 의미로 가장 적절한 것을 고르시오.
     options:
@@ -213,14 +210,19 @@ practice:
     - word: rational representation
       meaning: 이성적 표상
     solution:
-      cut: not A but B 구문이 핵심이다. 'not in the perception of the figure but in its rational representation'은 진리가 드러나는 자리를 두 대상의 대비로 못 박는다. A(지각)를 부정하고 B(이성적 표상)를 세운다.
+      cut: not A but B 구문이 핵심이다. 'not in the perception of the figure but in its rational
+        representation'은 진리가 드러나는 자리를 두 대상의 대비로 못 박는다. A(지각)를 부정하고 B(이성적 표상)를 세운다.
       wrong: 1번은 A와 B를 뒤바꾼 오역이다.
-      wrong_why: 진리가 '지각에서 드러난다'고 한 뒤 '이성적 표상에서는 드러나지 않는다'고 옮긴 것은, not A but B가 부정하는 것(A=지각)과 긍정하는 것(B=이성적 표상)을 정반대로 배치한 것이다.
-      author_msg: 추상적인 '진리가 드러나는 곳'은 그 자체로는 잡히지 않는다. not A but B의 반대말 짝, 즉 '지각이 아니라 이성적 표상'이라는 대비가 그 정체를 확정한다. 부정되는 쪽(A)을 놓치면 문장 전체가 뒤집힌다.
+      wrong_why: 진리가 '지각에서 드러난다'고 한 뒤 '이성적 표상에서는 드러나지 않는다'고 옮긴 것은, not A but B가 부정하는
+        것(A=지각)과 긍정하는 것(B=이성적 표상)을 정반대로 배치한 것이다.
+      author_msg: 추상적인 '진리가 드러나는 곳'은 그 자체로는 잡히지 않는다. not A but B의 반대말 짝, 즉 '지각이 아니라
+        이성적 표상'이라는 대비가 그 정체를 확정한다. 부정되는 쪽(A)을 놓치면 문장 전체가 뒤집힌다.
       key_points:
-      - "not A but B : not이 걸리는 A(지각)를 놓쳐 A·B 자리를 뒤바꿔 '지각에서 드러난다'로 뒤집기 쉽다 → 부정은 지각, 긍정은 이성적 표상."
+      - 'not A but B : not이 걸리는 A(지각)를 놓쳐 A·B 자리를 뒤바꿔 ''지각에서 드러난다''로 뒤집기 쉽다 → 부정은
+        지각, 긍정은 이성적 표상.'
     kind: mc
-  - sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
+  - sentence: Urban transport professionals have largely acquiesced to the view that
+      automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
     prompt: 다음 문장을 우리말로 해석하시오.
     answer: 도시 교통 전문가들은 도시의 자동차 수요가 수용되기보다는 관리되어야 한다는 견해를 대체로 받아들여 왔다.
@@ -232,17 +234,25 @@ practice:
     - word: accommodate
       meaning: 수용하다, 받아주다
     solution:
-      cut: '''managed rather than accommodated''가 초점이다. B rather than A 구문으로, 자동차 수요에 대한 처방을 두 대립되는 태도의 대비로 규정한다: ''수용(accommodated)''이 아니라 ''관리(managed)''.'
+      cut: '''managed rather than accommodated''가 초점이다. B rather than A 구문으로, 자동차
+        수요에 대한 처방을 두 대립되는 태도의 대비로 규정한다: ''수용(accommodated)''이 아니라 ''관리(managed)''.'
       wrong: rather than을 놓치고 '관리'와 '수용'을 나란한 것으로 옮기면 안 된다.
-      wrong_why: rather than은 앞의 것(managed)을 택하고 뒤의 것(accommodated)을 물리치는 대비 표현이다. '관리되고 수용되어야 한다'처럼 둘을 병렬로 처리하면, 전문가들이 물리친 태도(수요를 그대로 받아주는 것)를 오히려 인정하는 반대 뜻이 된다.
-      author_msg: '''자동차 수요를 어떻게 다뤄야 하는가''라는 추상적 물음은, accommodate(받아주다) 대 manage(관리하다)라는 반대말 대비로 구체화된다. rather than이 가리키는 반대말(accommodated)을 짚어야 ''수용이 아니라 관리''라는 정체가 선명해진다.'
+      wrong_why: rather than은 앞의 것(managed)을 택하고 뒤의 것(accommodated)을 물리치는 대비 표현이다.
+        '관리되고 수용되어야 한다'처럼 둘을 병렬로 처리하면, 전문가들이 물리친 태도(수요를 그대로 받아주는 것)를 오히려 인정하는 반대 뜻이
+        된다.
+      author_msg: '''자동차 수요를 어떻게 다뤄야 하는가''라는 추상적 물음은, accommodate(받아주다) 대 manage(관리하다)라는
+        반대말 대비로 구체화된다. rather than이 가리키는 반대말(accommodated)을 짚어야 ''수용이 아니라 관리''라는 정체가
+        선명해진다.'
       key_points:
-      - "managed rather than accommodated : rather than을 '그리고'처럼 병렬로 읽어 배제된 accommodated(수용)를 인정하는 정반대 뜻이 되기 쉽다 → B(관리)를 택하고 A(수용)를 배제."
+      - 'managed rather than accommodated : rather than을 ''그리고''처럼 병렬로 읽어 배제된 accommodated(수용)를
+        인정하는 정반대 뜻이 되기 쉽다 → B(관리)를 택하고 A(수용)를 배제.'
     kind: short
   metaphor:
-  - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
+  - sentence: Those who rely only upon theories were obviously hunting the shadow,
+      not the substance.
     source: 2025 수능 21번
-    prompt: 밑줄 친 'hunting the shadow, not the substance'가 이 문맥에서 실제로 의미하는 바로 가장 적절한 것은?
+    prompt: 밑줄 친 'hunting the shadow, not the substance'가 이 문맥에서 실제로 의미하는 바로 가장 적절한
+      것은?
     options:
     - 실제 그림자를 뒤쫓느라 정작 물체 자체는 사냥하지 못하는 어리석은 사냥꾼의 모습을 묘사한다.
     - 이론에만 의존하여 겉으로 드러난 허상만 좇을 뿐 지식의 알맹이인 본질은 붙잡지 못함을 뜻한다.
@@ -257,15 +267,21 @@ practice:
     solution:
       cut: hunting the shadow, not the substance
       wrong: 실제 그림자를 뒤쫓느라 정작 물체 자체는 사냥하지 못하는 어리석은 사냥꾼의 모습을 묘사한다.
-      wrong_why: '''shadow''와 ''substance''를 사냥 장면의 문자 그대로의 그림자와 물체로 읽어, 이론 의존이라는 문맥이 부여한 비유적 의미를 놓쳤다.'
-      author_msg: 비유는 문맥이 지정하는 대상으로 치환해야 한다. 여기서 shadow는 이론에만 기댄 겉핥기 지식(허상), substance는 실제 알맹이인 본질을 가리킨다.
+      wrong_why: '''shadow''와 ''substance''를 사냥 장면의 문자 그대로의 그림자와 물체로 읽어, 이론 의존이라는
+        문맥이 부여한 비유적 의미를 놓쳤다.'
+      author_msg: 비유는 문맥이 지정하는 대상으로 치환해야 한다. 여기서 shadow는 이론에만 기댄 겉핥기 지식(허상), substance는
+        실제 알맹이인 본질을 가리킨다.
       key_points:
-      - "hunting the shadow, not the substance : shadow·substance를 사냥 장면의 실제 그림자·물체로 읽기 쉽다 → 문맥이 지정한 비유(겉핥기 허상 대 본질)로 치환."
+      - 'hunting the shadow, not the substance : shadow·substance를 사냥 장면의 실제 그림자·물체로
+        읽기 쉽다 → 문맥이 지정한 비유(겉핥기 허상 대 본질)로 치환.'
     kind: mc
-  - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing them flat and making sure they are hidden on the inside so that we wear clothing rather than pieces of fabric.
+  - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing
+      them flat and making sure they are hidden on the inside so that we wear clothing
+      rather than pieces of fabric.
     source: 2025 고3 6월 42번
     prompt: 이 문장에서 'the seams'(솔기)를 감춘다는 비유가 기술의 맥락에서 실제로 의미하는 바를 한 문장으로 서술하시오.
-    answer: 기술을 구성하는 이음매(부분 요소들 사이의 경계)를 감춰 사용자가 조각들이 아니라 하나의 매끄럽고 완결된 전체를 경험하게 만든다는 뜻이다.
+    answer: 기술을 구성하는 이음매(부분 요소들 사이의 경계)를 감춰 사용자가 조각들이 아니라 하나의 매끄럽고 완결된 전체를 경험하게 만든다는
+      뜻이다.
     vocab:
     - word: seamless
       meaning: 이음매 없는, 매끄러운
@@ -277,7 +293,9 @@ practice:
       cut: hidden on the inside so that we wear clothing rather than pieces of fabric
       wrong: 실제 바느질로 옷의 솔기를 안쪽에 숨기는 재봉 기술만을 설명한 것으로 읽는 것.
       wrong_why: 솔기를 문자 그대로의 옷감 봉제로만 이해하면, 이 문장이 기술의 이음매를 감추는 매끄러운 설계를 빗댄 비유임을 놓친다.
-      author_msg: 옷의 솔기 감추기는 기술의 이음매(구성 요소 간 경계)를 감춰 사용자가 조각이 아닌 완결된 전체로 경험하게 하는 설계를 비유한다.
+      author_msg: 옷의 솔기 감추기는 기술의 이음매(구성 요소 간 경계)를 감춰 사용자가 조각이 아닌 완결된 전체로 경험하게 하는 설계를
+        비유한다.
       key_points:
-      - "the seams (hidden ... rather than pieces of fabric) : 솔기 감추기를 실제 옷 봉제로만 읽기 쉽다 → 기술의 이음매(구성 요소 경계)를 감춰 조각이 아닌 완결된 전체로 경험하게 하는 설계 비유."
+      - 'the seams (hidden ... rather than pieces of fabric) : 솔기 감추기를 실제 옷 봉제로만 읽기
+        쉽다 → 기술의 이음매(구성 요소 경계)를 감춰 조각이 아닌 완결된 전체로 경험하게 하는 설계 비유.'
     kind: short
