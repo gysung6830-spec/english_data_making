@@ -10,13 +10,13 @@ body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; colo
   font-size:10px; line-height:1.5; margin:0; background:#f4f5f7; padding:16px; }
 .wrap{ max-width:820px; margin:0 auto; }
 :root{
-  /* 교재 색은 5가지로 제한 — 파랑·초록·보라·노랑(amber)·빨강 (구문해설 도구와 동일 팔레트) */
-  --ink:#445fb0; --ink-d:#33477f;          /* 파랑 = 시그니처/구조 */
-  --src:#eaf4ee; --src-line:#3d8f58;        /* 초록 = 해석 */
-  --pur:#6a54b3; --pur-d:#4f3d8c;           /* 보라 = 패러프레이즈 */
-  --trap:#cd5049;                            /* 빨강 = 함정/오답 */
-  --must:#faedc8; --must-line:#dcc06a;       /* 노랑(amber) = 신호/형광펜(연하게) */
-  --skip:#9aa0a6; --muted:#6b7280; --line:#e5e7eb;
+  /* 기본 톤 = 딥그린. 강조는 노랑(형광펜)·빨강(함정)만, 나머지는 딥그린/회색으로 정돈 */
+  --ink:#1f7a5c; --ink-d:#12543d;          /* 딥그린 = 시그니처/구조/해석 */
+  --src:#e9f4ef; --src-line:#1f7a5c;        /* 해석 = 딥그린 계열 */
+  --pur:#1f7a5c; --pur-d:#12543d;           /* (패러프레이즈 잔여 요소) 딥그린으로 통일 */
+  --trap:#cd5049;                            /* 빨강 = 함정/오답(강조) */
+  --must:#ffe9a8; --must-line:#e0b94a;       /* 노랑 = 형광펜/신호(강조) */
+  --skip:#9aa0a6; --muted:#6b7280; --line:#e6e8ea;
 }
 .tophead{ text-align:center; margin-bottom:12px; }
 .tophead .t{ font-size:16px; font-weight:800; color:var(--ink-d); }
@@ -47,11 +47,11 @@ body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; colo
 .dblock .w{ font-size:9.8px; line-height:1.6; color:#2b2f36; }
 .dblock .w .en{ font-style:italic; color:#33383f; }
 .dblock .g{ font-size:9px; color:var(--muted); margin-top:1px; }
-.dblock .ex{ font-size:8.8px; color:#557; background:#eef1fa; border-radius:4px; padding:2px 7px; margin-top:3px; }
+.dblock .ex{ font-size:8.8px; color:#557; background:#e9f4ef; border-radius:4px; padding:2px 7px; margin-top:3px; }
 .dblock .ex b{ color:var(--ink-d); }
 .skipband{ margin-top:12px; padding-top:11px; border-top:1.5px dashed var(--line); }
 .dict-foot{ margin-top:13px; padding-top:11px; border-top:2px solid var(--ink); display:flex; gap:10px; }
-.dict-foot .step{ flex:1; background:#eef1fa; border:1px solid var(--ink); border-radius:6px; padding:7px 10px; font-size:9.3px; }
+.dict-foot .step{ flex:1; background:#e9f4ef; border:1px solid var(--ink); border-radius:6px; padding:7px 10px; font-size:9.3px; }
 .dict-foot .step b{ display:block; color:var(--ink-d); font-size:10px; margin-bottom:2px; }
 .dict-foot .step .k{ display:inline-block; width:15px; height:15px; line-height:15px; text-align:center; background:var(--ink); color:#fff; border-radius:50%; font-size:8.5px; font-weight:800; margin-right:4px; }
 
@@ -60,11 +60,11 @@ body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; colo
 .para h3{ margin:0 0 6px; font-size:12.5px; color:var(--pur-d); }
 .para h3 small{ font-weight:600; color:var(--muted); font-size:9px; }
 .para .steps{ font-size:9.6px; margin:4px 0 8px; } .para .steps b{ color:var(--pur-d); }
-.para .swap{ display:inline-block; background:#f3edfa; border:1px solid #d9c9f0; border-radius:4px; padding:0 5px; font-weight:700; color:var(--pur-d); }
+.para .swap{ display:inline-block; background:#e9f4ef; border:1px solid #bcd9cd; border-radius:4px; padding:0 5px; font-weight:700; color:var(--pur-d); }
 table.pt{ width:100%; border-collapse:collapse; font-size:9.3px; }
 table.pt th{ background:var(--pur); color:#fff; padding:3px 8px; text-align:left; font-weight:700; }
 table.pt td{ padding:3px 8px; border-bottom:1px solid var(--line); }
-table.pt tbody tr:nth-child(even) td{ background:#faf7fd; }
+table.pt tbody tr:nth-child(even) td{ background:#f1f7f4; }
 .pt .pat{ font-weight:800; color:var(--pur-d); white-space:nowrap; }
 /* 왜 노란색만으로 답이 나오나 — 자연스러운 원리 설명 */
 .mech{ background:#fff; border:2px solid var(--must-line); border-radius:8px; padding:12px 15px; margin-bottom:14px; }
@@ -75,7 +75,7 @@ table.pt tbody tr:nth-child(even) td{ background:#faf7fd; }
 .mech .diag .n{ font-size:9px; font-weight:800; padding:3px 9px; border-radius:5px; }
 .mech .diag .y{ background:var(--must); border:1px solid var(--must-line); color:#7a5c00; }
 .mech .diag .s{ background:#eef0f2; color:var(--skip); font-weight:700; }
-.mech .diag .ar{ color:#c3cbe0; font-weight:800; }
+.mech .diag .ar{ color:#b9cfc6; font-weight:800; }
 .mech .cap{ text-align:center; font-size:9px; color:var(--muted); margin-bottom:9px; }
 .mech .cap b{ color:#8a6a00; }
 .mech .pts{ font-size:9.7px; line-height:1.55; }
@@ -132,7 +132,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .psg.work .bk{ min-width:72px; }
 .how{ font-size:9.3px; color:#8a6a00; background:var(--must); border-radius:5px; padding:7px 10px; margin-bottom:11px; font-weight:700; }
 /* 풀이 가이드(하단 채움) */
-.pguide{ margin-top:auto; background:#eef1fa; border:1px solid var(--ink); border-radius:7px; padding:9px 12px; }
+.pguide{ margin-top:auto; background:#e9f4ef; border:1px solid var(--ink); border-radius:7px; padding:9px 12px; }
 .pguide .h{ font-size:9.5px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
 .pguide .g3{ display:flex; gap:8px; }
 .pguide .g3 .s{ flex:1; font-size:8.8px; line-height:1.4; }
@@ -148,11 +148,11 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .check{ list-style:none; margin:0; padding:0; font-size:9px; }
 .check li{ margin-bottom:4px; padding-left:17px; position:relative; line-height:1.35; }
 .check li::before{ content:"☐"; position:absolute; left:0; font-size:11px; color:var(--ink); }
-.memo{ margin-top:11px; background:#f4f6fc; border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+.memo{ margin-top:11px; background:#eef4f1; border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
 .memo .h{ font-size:9px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
 .memo .row{ font-size:9px; margin-bottom:6px; color:#4a5560; }
 .memo .fill{ display:inline-block; min-width:38px; border-bottom:1.5px solid var(--ink); margin:0 4px; }
-.memo .big{ display:block; height:26px; border-bottom:1px dotted #c3cbe0; }
+.memo .big{ display:block; height:26px; border-bottom:1px dotted #b9cfc6; }
 
 /* 훈련 ‖ 해석 병합 2단 */
 .merge{ display:flex; gap:10px; align-items:stretch; margin-bottom:12px; }
@@ -179,7 +179,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .dchl .ko{ font-size:9.7px; line-height:1.95; color:#23272e; margin-top:2px; }
 .hl0,.hl1,.hl2,.hl3,.hl4{ color:#23272e; padding:1px 4px; border-radius:3px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 /* 청크 형광펜 = 5색의 연한 파스텔 톤 (노랑·초록·빨강·파랑·보라) */
-.hl0{ background:#f9edcf; } .hl1{ background:#e0efe4; } .hl2{ background:#f6e2e0; } .hl3{ background:#e3e9f5; } .hl4{ background:#e9e4f2; }
+.hl0{ background:#ffe9a8; } .hl1{ background:#cdead6; } .hl2{ background:#f6ddd9; } .hl3{ background:#d3e7de; } .hl4{ background:#e6ede4; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.4px; }
 .dchl .opt-line .co{ color:var(--src-line); font-weight:800; } .dchl .opt-line .xo{ color:var(--trap); font-weight:700; }
 .dchl .hint{ font-size:8.3px; color:var(--muted); margin-top:5px; }
@@ -206,7 +206,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .opt.ok{ background:var(--src); border-radius:4px; padding:2px 5px; }
 .opt.ok .jd{ color:var(--src-line); } .opt.x .jd{ color:var(--trap); }
 .reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; color:#a5342d; }
-.formula{ margin-top:8px; background:#eef1fa; border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
+.formula{ margin-top:8px; background:#e9f4ef; border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
 .formula .k{ background:var(--ink); color:#fff; font-size:8px; padding:1px 6px; border-radius:8px; margin-right:6px; }
 
 .card.trans{ border-left:5px solid var(--src-line); }
@@ -300,23 +300,6 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
 
   <!-- ================= 패러프레이즈 + 적용범위 (한 페이지) ================= -->
   <div class="engines">
-    <div class="para">
-      <h3>🔁 패러프레이즈 3초 캐치법 <small>— 정답을 '찍는' 핵심 기술</small></h3>
-      <div class="steps">
-        원리: <b>정답은 뜻은 같고 단어를 바꾼다. 오답은 단어를 그대로 두고 뜻을 왜곡한다.</b><br>
-        ① 형광펜 문장 <b>핵심어에 ○</b> → ② <span class="swap">지문 단어 그대로 복사</span>한 선지 = 함정 먼저 소거 / <b>뜻이 다른 단어로 바뀐</b> 선지 = 정답 후보 → ③ 남은 '바꿔 말한' 선지가 정답
-      </div>
-      <table class="pt">
-        <thead><tr><th style="width:26%">평가원 단골 변환</th><th>지문 → 정답 선지</th></tr></thead>
-        <tbody>
-          <tr><td class="pat">동의어 치환</td><td>regulate/set → <b>control·determine·govern</b></td></tr>
-          <tr><td class="pat">구체→추상(상위어)</td><td>lion·songwriter·engineer → <b>creatures·creative people</b></td></tr>
-          <tr><td class="pat">품사 전환</td><td>decide(동) → <b>decision·decision-making</b>(명)</td></tr>
-          <tr><td class="pat">반대구조</td><td>does not shrink → <b>expands</b> / only at boundary → <b>associate location</b></td></tr>
-          <tr><td class="pat">비유→직설</td><td>an empty inbox → <b>satisfying others' demands</b></td></tr>
-        </tbody>
-      </table>
-    </div>
     <div class="mech">
       <h3>🟡 왜 노란색만 읽어도 답이 나올까?</h3>
       <div class="lead">수능 지문은 예외 없이 <b>하나의 주장</b>을, <b>예시·부연으로 늘려 쓴 글</b>이다. 노란색은 그 <b>주장이 드러나는 자리</b>(주제문·방향 트는 역접·결론·빈칸)만 골라낸 것.</div>
