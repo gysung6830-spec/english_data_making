@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus"
 PDF_DIR = CORPUS / "pdfs"
 BANK = CORPUS / "passage_bank.jsonl"
+ANSWER_KEYS = CORPUS / "answer_keys.jsonl"
 INPUT_DIR = ROOT / "input"   # 구문해설 도구의 처리 큐(공유 대상)
 
 CIRCLED = "①②③④⑤"
@@ -104,10 +105,61 @@ def extract_choices(text):
             ch[i] = m.group(1).strip()
     return ch
 
+# ── 시험 식별자 · 정답표 ──
+def parse_exam_id(text: str):
+    """'2023학년도 … 6월 모의평가' → '2023-06'. 수능이면 '{year}-수능'.
+
+    주의: 지문·선지 안의 '7월' 같은 표현이 아니라 '시험 제목'의 월만 잡는다
+    (월 뒤에 모의평가/학력평가가 붙는 경우로 한정).
+    """
+    m = re.search(r"(\d{4})학년도", text)
+    if not m:
+        return None
+    year = m.group(1)
+    mm = re.search(r"(\d{1,2})\s*월\s*(?:모의평가|학력평가|전국연합)", text)
+    if mm:
+        return f"{year}-{int(mm.group(1)):02d}"
+    if "대학수학능력시험" in text:
+        return f"{year}-수능"
+    return f"{year}-00"
+
+def is_answer_key(text: str) -> bool:
+    return "정답표" in text
+
+def parse_answer_key(text: str) -> dict:
+    """정답표 텍스트 → {번호(str): {'answer': 1~5, 'points': 2|3}}."""
+    ans = {}
+    for m in re.finditer(r"(\d{1,2})\s*\n\s*([①②③④⑤])\s*\n\s*([23])", text):
+        num = int(m.group(1))
+        if 1 <= num <= 45:
+            ans[str(num)] = {"answer": CIRCLED.index(m.group(2)) + 1,
+                             "points": int(m.group(3))}
+    return ans
+
+def load_answer_keys() -> dict:
+    if not ANSWER_KEYS.exists():
+        return {}
+    out = {}
+    for l in ANSWER_KEYS.read_text(encoding="utf-8").splitlines():
+        if l.strip():
+            r = json.loads(l)
+            out[r["exam_id"]] = r["answers"]
+    return out
+
+def save_answer_key(exam_id: str, answers: dict):
+    keys = load_answer_keys()
+    keys[exam_id] = answers
+    ANSWER_KEYS.parent.mkdir(parents=True, exist_ok=True)
+    with ANSWER_KEYS.open("w", encoding="utf-8") as f:
+        for eid, a in keys.items():
+            f.write(json.dumps({"exam_id": eid, "answers": a}, ensure_ascii=False) + "\n")
+
+
 def parse_pdf(pdf_path: Path):
     import fitz
     doc = fitz.open(pdf_path)
     full = "\n".join(doc[i].get_text() for i in range(doc.page_count))
+    exam_id = parse_exam_id(full)
 
     # 그룹 발문 [a~b] <stem> → 각 번호에 stem 매핑 (빈칸/순서/삽입 등)
     group_stem = {}
@@ -143,11 +195,12 @@ def parse_pdf(pdf_path: Path):
         choices = extract_choices(body)
         score, sig, L = signal_score(passage)
         records.append({
-            "num": num, "type": qtype, "band": band,
+            "num": num, "type": qtype, "band": band, "exam_id": exam_id,
             "passage": passage, "choices": choices,
             "signal_score": score, "signals": sig, "length": L,
+            "answer": None, "points": None,
         })
-    return records, doc.page_count
+    return records, doc.page_count, exam_id
 
 def load_bank():
     if not BANK.exists():
@@ -168,34 +221,64 @@ def ingest(pdf_path: Path, quiet: bool = False, share_to_input: bool = True):
     is_new = not saved.exists()
     if is_new:
         shutil.copy2(pdf_path, saved)
-        # 새 PDF면 구문해설 도구의 처리 큐(input/)에도 넣어 '공유'한다.
-        # (형광펜 교재가 입력 창구 → 구문해설이 같은 지문을 받아 분석)
-        if share_to_input:
-            try:
-                INPUT_DIR.mkdir(parents=True, exist_ok=True)
-                dst = INPUT_DIR / pdf_path.name
-                if not dst.exists():
-                    shutil.copy2(pdf_path, dst)
-                    if not quiet:
-                        print(f"[공유] 구문해설 큐에 추가: input/{pdf_path.name}")
-            except Exception:
-                pass
 
-    records, pages = parse_pdf(pdf_path)
+    import fitz
+    _doc = fitz.open(pdf_path)
+    full = "\n".join(_doc[i].get_text() for i in range(_doc.page_count))
+    exam_id = parse_exam_id(full)
+    answer_key = is_answer_key(full)
+
+    # 새 PDF면 구문해설 처리 큐(input/)에도 공유. 단, 정답표는 지문이 아니므로 제외.
+    if is_new and share_to_input and not answer_key:
+        try:
+            INPUT_DIR.mkdir(parents=True, exist_ok=True)
+            dst = INPUT_DIR / pdf_path.name
+            if not dst.exists():
+                shutil.copy2(pdf_path, dst)
+                if not quiet:
+                    print(f"[공유] 구문해설 큐에 추가: input/{pdf_path.name}")
+        except Exception:
+            pass
+
+    # ── 정답표면: 공식 정답 저장 + 은행의 같은 시험 문항에 연결(back-fill) ──
+    if answer_key:
+        answers = parse_answer_key(full)
+        if exam_id:
+            save_answer_key(exam_id, answers)
+        bank = load_bank()
+        filled = 0
+        for r in bank:
+            if r.get("exam_id") == exam_id:
+                a = answers.get(str(r["num"]))
+                if a and r.get("answer") != a["answer"]:
+                    r["answer"], r["points"] = a["answer"], a["points"]
+                    filled += 1
+        save_bank(bank)
+        if not quiet:
+            print(f"[정답표] {exam_id} 정답 {len(answers)}개 저장 → 은행 {filled}개 문항에 연결")
+        return 0
+
+    # ── 일반 시험지: 지문 적재 + (정답표가 있으면) 공식 정답 연결 ──
+    records, pages, exam_id = parse_pdf(pdf_path)
+    akey = load_answer_keys().get(exam_id, {})
     bank = load_bank()
     seen = {(r.get("source_sha"), r["num"]) for r in bank}
     added = 0
     for r in records:
-        key = (h, r["num"])
-        if key in seen:
+        if (h, r["num"]) in seen:
             continue
+        a = akey.get(str(r["num"]))
+        if a:
+            r["answer"], r["points"] = a["answer"], a["points"]
         r["source_sha"] = h
         r["source_name"] = pdf_path.name
         bank.append(r)
         added += 1
     save_bank(bank)
     if not quiet:
-        print(f"[적재] {pdf_path.name} (p{pages}) → 문항 {len(records)}개 인식, {added}개 신규 저장")
+        nans = sum(1 for r in records if r.get("answer"))
+        tail = f", 정답연결 {nans}개" if nans else ", 정답 미연결(정답표 없음)"
+        print(f"[적재] {pdf_path.name} (p{pages}, {exam_id}) → 문항 {len(records)}개, {added}개 신규{tail}")
     return added
 
 
@@ -216,16 +299,17 @@ def share_pdf(pdf_path) -> int:
 
 def report():
     bank = load_bank()
-    print(f"\n=== 지문 은행 현황 · 총 {len(bank)}개 지문 ===")
+    nans = sum(1 for r in bank if r.get("answer"))
+    print(f"\n=== 지문 은행 현황 · 총 {len(bank)}개 지문 (정답 연결 {nans}개) ===")
     by_band = {}
     for r in bank:
         by_band.setdefault(r["band"], []).append(r)
     for band in sorted(by_band):
         rows = sorted(by_band[band], key=lambda x: -x["signal_score"])
         best = rows[0]
-        types = rows[0]["type"]
-        print(f"  {band:<7} {types:<8} {len(rows):>2}개 | 대표(최고 신호점수 {best['signal_score']}) "
-              f"← {best['source_name']} #{best['num']} {best['signals']}")
+        a = f" 정답{CIRCLED[best['answer']-1]}" if best.get("answer") else ""
+        print(f"  {band:<7} {rows[0]['type']:<8} {len(rows):>2}개 | 대표(신호 {best['signal_score']}{a}) "
+              f"← {best.get('exam_id','?')} #{best['num']} {best['signals']}")
 
 def pick(band):
     bank = [r for r in load_bank() if r["band"] == band]
@@ -233,13 +317,15 @@ def pick(band):
         print(f"(은행에 {band} 지문이 없습니다)")
         return
     best = max(bank, key=lambda x: x["signal_score"])
-    print(f"\n=== {band} 대표 지문 (신호점수 {best['signal_score']}, {best['signals']}) ===")
-    print(f"출처: {best['source_name']} #{best['num']}\n")
+    a = f" · 공식정답 {CIRCLED[best['answer']-1]}({best.get('points')}점)" if best.get("answer") else ""
+    print(f"\n=== {band} 대표 지문 (신호점수 {best['signal_score']}, {best['signals']}{a}) ===")
+    print(f"출처: {best.get('exam_id','?')} {best['source_name']} #{best['num']}\n")
     print(best["passage"][:1200])
     if best.get("choices"):
         print("\n[선지]")
         for k in sorted(best["choices"]):
-            print(f"  {CIRCLED[k-1]} {best['choices'][k]}")
+            mark = " ← 정답" if best.get("answer") == k else ""
+            print(f"  {CIRCLED[k-1]} {best['choices'][k]}{mark}")
 
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
