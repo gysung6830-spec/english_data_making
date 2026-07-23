@@ -428,9 +428,9 @@ body {
 .f-rows { flex: 1; }
 .f-row { display: flex; align-items: center; padding: 7px 2px; border-bottom: 1px dashed var(--line); }
 .f-row:last-child { border-bottom: none; }
-.f-en { font-family: "Georgia", "Times New Roman", "Noto Serif", "NanumSquareRound", "NanumGothic", "WenQuanYi Zen Hei", serif; font-weight: 800; font-size: 15px; width: 200px; color: #274b40; }
-.f-arrow { color: var(--navy2); font-weight: 800; margin: 0 8px; }
-.f-ko { color: #33403a; font-size: 11px; }
+.f-en { font-family: "Georgia", "Times New Roman", "Noto Serif", "NanumSquareRound", "NanumGothic", "WenQuanYi Zen Hei", serif; font-weight: 800; font-size: 12.5px; flex: 0 0 auto; min-width: 300px; white-space: nowrap; color: #274b40; }
+.f-arrow { color: var(--navy2); font-weight: 800; margin: 0 8px; flex: 0 0 auto; }
+.f-ko { color: #33403a; font-size: 11px; flex: 1 1 auto; }
 
 .wb-strategy { background: var(--goldbg, #fbf3e5); border-left: 4px solid var(--gold);
   border-radius: 0 8px 8px 0; padding: 10px 15px; margin: 12px 0; font-size: 11px; }
