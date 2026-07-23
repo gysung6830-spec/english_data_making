@@ -16,11 +16,16 @@ parts:
     subtitle: "뼈대를 숨기는 살(수식어) 걷어내기"
     strategy: "명사 뒤 덩어리는 통째로 괄호 → 주어+동사(뼈대)부터 읽는다."
     types: [wh_clause, participle, insertion, apposition, prep_stack]
+  - id: nounclause
+    title: "명사절 묶기 구문"
+    subtitle: "절을 통째 [한 덩어리 명사]로 묶어 주어·목적어 자리에 넣기"
+    strategy: "what/that절은 건너뛰는 '살'이 아니라 '뼈대'다 — 절 전체를 [ ]로 묶어 하나의 명사(주어·목적어·보어)로 취급한다."
+    types: [what_clause, that_clause]
   - id: order
     title: "어순·구조 특이구문"
     subtitle: "자리가 바뀌어도 자연스럽게 해석하기"
     strategy: "자리가 바뀐 채로도 신호만 잡으면 자연스럽게 읽힌다 — 굳이 원위치로 되돌리지 않아도 된다."
-    types: [inversion, emphasis, parallel, what_clause, that_clause]
+    types: [inversion, emphasis, parallel]
 
 formulas:
   negation:
