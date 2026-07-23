@@ -1,9 +1,3 @@
-# ============================================================
-#  구문해석 파트 — 해석공식 시각화 데이터
-#  구문 유형을 '실전 해석 동작'이 같은 것끼리 3 PART로 묶고,
-#  각 유형마다 Point(개념) · 실전 전략 · 해석공식 다이어그램 · 기출 예문을 담는다.
-#  코딩 몰라도 여기 문구/행/예문만 고치면 교재에 반영됩니다.
-# ============================================================
 parts:
 - id: modifier
   title: 수식어 괄호치기 구문
@@ -33,7 +27,8 @@ parts:
 formulas:
   wh_clause:
     point: who/which/that/where/when/why/how 가 명사를 꾸미거나(관계사) 명사절을 만든다.
-    strategy: wh- 앞에 명사가 있으면 '~하는'(수식), 없으면 '누가/어디/왜 ~하는지'(명사절). 어느 쪽이든 wh~끝까지 통째 괄호, 앞 명사만 뼈대.
+    strategy: wh- 앞에 명사가 있으면 '~하는'(수식), 없으면 '누가/어디/왜 ~하는지'(명사절). 어느 쪽이든 wh~끝까지 통째
+      괄호, 앞 명사만 뼈대.
     diagram:
       symbol: N ← [wh ~]
       rows:
@@ -45,6 +40,36 @@ formulas:
     - en: Consider two athletes who both want to play in college.
       src: 2022 고3 6월 20번
       cut: 생각해 보라 / 두 선수를 / [둘 다 대학에서 뛰고 싶어하는].
+    - en: Alternatively, parents who supply reasons, show an emotional understanding
+        of difficulties overcoming problems, and use a minimum of external incentives
+        are more likely to cultivate a sense of willingness and value for work in
+        their child.
+      src: 2024 고3 6월 30번
+      cut: 그 대신에 / 부모는 [이유를 제시하고(who supply reasons), 어려움에 대한 정서적 이해를 보이며, 외적 유인은
+        최소로 쓰는] / 자녀에게 일에 대한 의욕과 가치를 길러 줄 가능성이 더 크다 — who ~ 관계사절이 supply·show·use
+        세 동사를 묶어 주어 parents를 수식, 문장의 진짜 동사는 are.
+    - en: A similar idea is supported by further evidence that checklists' can improve
+        the quality of expert decisions in a ' range of domains by ensuring that important
+        steps or considerations aren't missed when people are feeling overloaded.
+      src: 2023 고3 11월 42번
+      cut: 비슷한 생각이 / 추가 증거로 뒷받침된다 / [체크리스트가 여러 영역에서 전문가 결정의 질을 높일 수 있다는(evidence that
+        ~)] — 여기 that은 동격절, 뒤 ensuring that ~은 '~을 보장함으로써' / [사람들이 과부하를 느낄 때 중요한 단계나
+        고려 사항이 빠지지 않도록].
+    - en: The critic who wants to write about literature from a formalist perspective
+        must first be a close and careful reader who examines all the elements of
+        a text individually and questions how they come together to create a work
+        of art.
+      src: 2022 고3 6월 32번
+      cut: 그 비평가는 [형식주의 관점에서 문학에 관해 쓰고 싶어 하는(who wants ~)] / 먼저 꼼꼼하고 신중한 독자여야 한다 /
+        [텍스트의 모든 요소를 개별적으로 검토하고(who examines ~) / 의문사절 how they come together to create
+        a work of art를 questions하는] — 앞 who는 the critic 수식, 뒤 who는 reader 수식.
+    - en: Technical mobilities turn human beings into some kind of terminal creatures,
+        who spend most of their time at rest ( ) and who need to participate in sports
+        in order to balance their daily disproportion of motion and rest.
+      src: 2022 고3 6월 40번
+      cut: 기술적 이동 수단은 / 인간을 일종의 종착역 같은 존재로 바꾼다 / [대부분의 시간을 쉬며 보내고(who spend ~) / 또
+        스포츠에 참여할 필요가 있는(and who need ~)] — 콤마 뒤 who는 계속적 용법, terminal creatures를 부연
+        설명 / 하루의 운동·휴식 불균형을 맞추기 위해.
   participle:
     point: 문두·콤마 뒤 V-ing / V-ed 덩어리는 '부대상황'. 주절의 동작에 곁들여지는 살이다.
     strategy: 분사 덩어리를 통째 괄호 → 주절 뼈대부터 읽고, ~하면서 / ~한 채로 / ~해서로 붙인다. 분사의 의미상 주어=주절 주어.
@@ -58,9 +83,30 @@ formulas:
       - en: Having p.p. ~,
         ko: ~하고 나서 (완료)
     examples:
-    - en: Recognizing how she felt about her failure, Ken approached her and said a few encouraging words.
+    - en: Recognizing how she felt about her failure, Ken approached her and said
+        a few encouraging words.
       src: 2023 고3 11월 19번
       cut: (그녀가 실패를 어떻게 느끼는지 알아채고서), / Ken이 그녀에게 다가가 / 몇 마디 격려의 말을 건넸다.
+    - en: Unless you're comfortable planning your life around a particular scheduled
+        trip, speed is worthless without frequency, so a transit map that screams
+        about speed and ( ) whispers about frequency may simply be planting confusion.
+      src: 2026 고3 11월 23번
+      cut: 당신이 편치 않다면 / [특정한 정해진 운행에 맞춰 삶을 계획하는 것을(planning ~)] — comfortable 뒤 planning은
+        분사·동명사구 / 속도는 빈도 없이는 무가치하다 / 그래서 [속도만 외치고 빈도는 속삭이는(that screams ~ and whispers
+        ~)] 교통 노선도는 / 그저 혼란을 심고 있는 것일 수 있다.
+    - en: Understanding why and where migration happens requires consideration of
+        the political organization of territory, the spatial consequences of discrimination,
+        socio‑economic patterns, and the layout of the physical environment.
+      src: 2025 고3 6월 34번
+      cut: (동명사 주어) 이해하는 것은 / [이주가 왜 어디서 일어나는지를] / 요구한다 / 고려를 — Understanding ~이 통째로
+        주어, 동사는 requires / 즉 영토의 정치적 구성, 차별의 공간적 결과, 사회·경제적 양상, 물리적 환경의 배치에 대한 고려.
+    - en: Speeding up and enjoying the wide blue sea, Emma couldn't hide her excitement
+        and exclaimed, "Clara, the Emma "Clara,!" view is amazing!" Clara's silence,
+        however, seemed to say that she was lost Clara in her thoughts.
+      src: 2024 고3 11월 45번
+      cut: (분사구문) 속도를 높이며 넓고 푸른 바다를 즐기면서(Speeding up and enjoying ~), / Emma는 / 흥분을
+        감추지 못하고 외쳤다 / "Clara, 경치가 멋져!" / 그러나 Clara의 침묵은 / 그녀가 생각에 잠겼음을 말하는 듯했다 — 문두
+        -ing 두 개가 주절 주어 Emma에 걸리는 분사구문.
   insertion:
     point: — … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리.
     strategy: 대시·콤마 삽입을 통째 괄호치고 없는 셈 → 뼈대부터 읽는다. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것.
@@ -74,9 +120,29 @@ formulas:
       - en: N, a/the N, ~
         ko: 콤마 동격 (= 같은 대상)
     examples:
-    - en: For the present generation of artists, the computer, or more appropriately, the laptop, is one tool.
+    - en: For the present generation of artists, the computer, or more appropriately,
+        the laptop, is one tool.
       src: 2022 고3 6월 31번
       cut: 요즘 세대 예술가에게 / 컴퓨터는, (더 정확히는 노트북은), / 도구 하나다.
+    - en: Whatever the nature of the outcome, which may actually favour one party
+        more than another, the purpose of negotiation is the identification of areas
+        of common interest and conflict.
+      src: 2024 고3 11월 36번
+      cut: 결과의 성격이 무엇이든 간에 / (실제로 어느 한쪽을 다른 쪽보다 유리하게 할 수도 있지만 — which ~ another는 콤마
+        삽입, 걷어내면 골격이 보임) / 협상의 목적은 / 공통 관심사와 갈등의 영역을 확인하는 것이다 — S(the purpose) + V(is)
+        + C.
+    - en: If you pick it up today from Edincester Heights Edincester Heights, you
+        can have it for the current price, which is half the market rate.".\" Helen
+        immediately messaged the seller.
+      src: 2024 고3 9월 45번
+      cut: 오늘 Edincester Heights에서 가져가면 / 현재 가격에 살 수 있다 / (그런데 그건 시장가의 절반이다 — which
+        ~는 the current price를 부연하는 콤마 삽입) / Helen은 즉시 판매자에게 메시지를 보냈다.
+    - en: Urban delivery vehicles can be adapted to better suit the density of urban
+        distribution, which often involves smaller vehicles such as vans, including
+        bicycles.
+      src: 2023 고3 11월 22번
+      cut: 도시 배송 차량은 / 도시 유통의 밀도에 더 잘 맞도록 조정될 수 있다 / (여기에는 흔히 밴 같은 더 작은 차량이 포함되고 —
+        which ~는 콤마 삽입, 걷어내면 S+V가 명확 / 자전거까지 포함해서).
   apposition:
     point: the fact/idea/belief + that … 또는 'N, N' 콤마 동격 — 앞 명사와 뒤 내용이 '='.
     strategy: the fact that … 의 that은 관계사가 아니라 동격(=내용). '명사 = that절 내용'으로 등호를 긋는다.
@@ -87,10 +153,33 @@ formulas:
         ko: ~라는 사실 (사실 = 내용)
       - en: N, (a/the) N,
         ko: 즉, 다시 말해 (같은 대상)
-    examples: []
+    examples:
+    - en: 'When trying to establish what is meant by digital preservation, the first
+        question that must be addressed is: what are you?'' actually trying to preserve?'
+      src: 2024 고3 6월 31번
+      cut: 확립하려 할 때 / [디지털 보존이 뜻하는 바를] // 첫 번째 질문은 / [반드시 다뤄져야 할] / (콜론)이다 = 무엇을 /
+        당신은 실제로 보존하려 하는가 — 콜론 뒤 절이 the first question의 내용을 그대로 풀어준다(질문=그 내용).
+    - en: For the physicist, understanding the ordinary, the habitual, and the frequent
+        thus allows us to account for the frightening and the singular.
+      src: 2024 고3 9월 23번
+      cut: 물리학자에게 / 이해하는 것은 / [평범한 것·습관적인 것·빈번한 것을(the ordinary·the habitual·the frequent)]
+        / 이렇게 우리에게 허락한다 / 설명하도록 / [무서운 것과 특이한 것을] — 「the+형용사」가 나란히 놓여 각각 하나의 명사(부류)로
+        묶인다.
+    - en: When the Industrial Revolution arrived with its great innovation, the motor,
+        we didn't leave our world to go to! some remote motorspace!
+      src: 2023 고3 11월 30번
+      cut: 산업혁명이 도래했을 때 / [그 거대한 혁신, 곧 모터와 함께(its great innovation = the motor)] //
+        우리는 / 떠나지 않았다 / 우리 세계를 / [어떤 먼 모터공간으로 가기 위해] — 콤마로 감싼 the motor가 its great
+        innovation을 = 로 재지칭.
+    - en: She said, "You must be Julia!" " Julia!" Laughing, the woman said, "Yes!
+      src: 2024 고3 9월 45번
+      cut: 그녀가 말했다 / "당신이 Julia임에 틀림없군요(You must be Julia)" — 호칭 Julia = 상대(You)를
+        가리키는 동격 // 웃으며 / 그 여자가 말했다 / "네".
   prep_stack:
-    point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리 길어도 안 무너진다.
-    strategy: 전치사(of/in/for…)를 만날 때마다 '여기서 새 살 시작'으로 끊는다 → 명사 하나가 완성될 때까지 뒤에서 앞으로 '~의/~에 있는/~을 위한'. 진짜 주어는 맨 앞 명사 하나뿐.
+    point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리
+      길어도 안 무너진다.
+    strategy: 전치사(of/in/for…)를 만날 때마다 '여기서 새 살 시작'으로 끊는다 → 명사 하나가 완성될 때까지 뒤에서 앞으로
+      '~의/~에 있는/~을 위한'. 진짜 주어는 맨 앞 명사 하나뿐.
     diagram:
       symbol: N ← of → in → for …
       rows:
@@ -118,17 +207,37 @@ formulas:
       en: the tendency [of people] [in cities] [with limited access] [to public transport]
       ko: 대중교통 이용이 제한된 / 도시의 / 사람들의 / 경향
     examples:
-    - en: The amount of traffic on the highway during rush hour has been steadily increasing over the years.
+    - en: The amount of traffic on the highway during rush hour has been steadily
+        increasing over the years.
       src: 예문(트레이닝)
       cut: '[출퇴근 시간 / 고속도로 위 / 교통의] 양은 / 수년에 걸쳐 / 꾸준히 늘어왔다.'
       ab: '교통량 → 늘어남 (뼈대: The amount ~ has increased)'
-    - en: Last week, I made a reservation for one of your company's swimming pools for our summer swim camp.
+    - en: Last week, I made a reservation for one of your company's swimming pools
+        for our summer swim camp.
       src: 2022 고3 6월 18번
       cut: 지난주에 / 저는 예약을 했습니다 / [귀사의 수영장 중 하나를] / [저희 여름 수영 캠프를 위해].
       ab: '나 → 예약함 (뼈대: I made a reservation)'
+    - en: Many pedestrians in a city are not necessarily an indication of good city
+        quality—many people walking around can often be a sign of insufficient transit
+        options or long distances between the various functions in the city.
+      src: 2024 고3 9월 33번
+      cut: 많은 보행자가 / [도시 안의(in a city)] / 반드시 ~은 아니다 / 좋은 도시 품질의 지표 — // 돌아다니는 많은
+        사람은 / 흔히 신호일 수 있다 / [불충분한 교통 선택지] 또는 [긴 거리(of insufficient ~ or long distances)]의
+        // [다양한 기능들 사이의(between the various functions)] / [그 도시 안의(in the city)] —
+        전치사구가 of→between→in 으로 층층이 겹쳐 뒤 명사를 순서대로 수식.
+    - en: A physical carrier is necessary, but as long as the source media can be
+        read, bit‑perfect copies can be made cheaply and easily on other devices,
+        making the preservation of the original carrier of diminishing importance.
+      src: 2024 고3 6월 31번
+      cut: 물리적 매체가 / 필요하다 / 하지만 [원본 매체를 읽을 수 있는 한] // 비트 단위로 완벽한 사본이 / 만들어질 수 있다 /
+        값싸고 쉽게 / [다른 장치에서(on other devices)] // 만들면서 / [원본 매체의(of the original carrier)]
+        보존을 / [점점 줄어드는 중요성으로(of diminishing importance)] — of가 두 번 겹쳐 앞은 preservation을,
+        뒤는 make A of B(A를 B한 상태로)의 보어를 이끈다.
   inversion:
-    point: 문두 부정어(Never/Not only/Only…)가 오면 도치된다. 하지만 굳이 원위치로 되돌릴 필요 없다 — 도치된 순서 그대로 '신호부터 받고' 자연스럽게 이어 읽으면 된다.
-    strategy: 문두 부정어를 '거의/결코 ~않다 · ~뿐 아니라 · 오직 ~해서야'로 먼저 받고, 뒤의 '조동사+주어'는 그냥 주어로 이어 읽는다. 되돌리지 말고 흐르는 대로.
+    point: 문두 부정어(Never/Not only/Only…)가 오면 도치된다. 하지만 굳이 원위치로 되돌릴 필요 없다 — 도치된 순서 그대로
+      '신호부터 받고' 자연스럽게 이어 읽으면 된다.
+    strategy: 문두 부정어를 '거의/결코 ~않다 · ~뿐 아니라 · 오직 ~해서야'로 먼저 받고, 뒤의 '조동사+주어'는 그냥 주어로 이어
+      읽는다. 되돌리지 말고 흐르는 대로.
     diagram:
       symbol: 부정어 + V + S → 그대로
       rows:
@@ -139,9 +248,11 @@ formulas:
       - en: Only + 부사구 + aux + S
         ko: '''오직 ~해서야 비로소'' + S가 ~'
     examples:
-    - en: Not only is it less convenient to access locations in cities, but the very process generates negative effects.
+    - en: Not only is it less convenient to access locations in cities, but the very
+        process generates negative effects.
       src: 2023 고3 6월 24번
-      cut: '''~뿐 아니라'' 받기 → 도시에서 장소 접근이 덜 편할 ''뿐 아니라'', / 이어서 → 이동 과정 자체가 부정적 효과를 낳는다.'
+      cut: '''~뿐 아니라'' 받기 → 도시에서 장소 접근이 덜 편할 ''뿐 아니라'', / 이어서 → 이동 과정 자체가 부정적 효과를
+        낳는다.'
       ab: 도시 이동 → 불편 + 부작용 (둘 다)
   emphasis:
     point: It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조.
@@ -153,7 +264,35 @@ formulas:
         ko: 바로 X가 ~인 것이다 (X 강조)
       - en: do / does / did + V
         ko: 정말 ~하다 (동사 강조)
-    examples: []
+    examples:
+    - en: Many cultures invented gods to explain these eclipses that shocked, frightened,
+        or surprised them; but very few imagined a god of falling bodies—to which
+        they were so accustomed that they did not even notice them.
+      src: 2024 고3 9월 23번
+      cut: '많은 문화가 / 신들을 만들어냈다 / [이 일식들을 설명하려고] / [그들을 충격·공포·놀라게 한] // 그러나 극소수만이 /
+        상상했다 / [낙하하는 물체의 신을] / — [그것에 너무나 익숙해서(so accustomed that ~) 알아차리지도 못한] —
+        so ~ that 강조 구문: ''너무 …해서 ~하다''.'
+    - en: ''' If the baby water flea is developing into an adult in water that includes
+        the chemical signatures of creatures that prey ( ) on water fleas, it develops
+        a helmet and spines to defend itself against predators.'
+      src: 2023 고3 11월 36번
+      cut: '[만약 새끼 물벼룩이 / 성체로 자라고 있다면 / 물속에서 / [물벼룩을 잡아먹는 생물의 화학적 흔적을 담은]] // 그것은
+        / 발달시킨다 / 투구와 가시를 / [자신을 방어하려고 / 포식자로부터] — If 조건절이 주절(S+V) 앞에 놓여 강조되고, 뒤에
+        it이 받는다.'
+    - en: The generally close connection between health and what animals want exists
+        because wanting to obtain the right things and wanting to avoid the wrong
+        ones are major ways in which animals keep themselves healthy.
+      src: 2024 고3 9월 37번
+      cut: 그 대체로 긴밀한 연결은 / [건강과 (동물이 원하는 것) 사이의(between A and B)] / 존재한다 / [왜냐하면 /
+        (옳은 것을 얻으려는 것)과 (그른 것을 피하려는 것)이 / 주된 방식이기 때문에 / [그 안에서 동물이 스스로를 건강하게 유지하는]]
+        — because절이 앞 주절을 뒷받침하며 원인을 강조.
+    - en: By way of example, for many years it was thought that ' there would be "one"
+        cure for cancer, but it is now realized that cancer takes multiple forms and
+        that multiple approaches are needed to provide a cure.
+      src: 2024 고3 11월 38번
+      cut: '예로써 / 여러 해 동안 / 생각되었다 (가주어 it) / [진짜 주어: 암에 대한 ''하나의'' 치료법이 있으리라는 것을]
+        // 그러나 / 이제 깨닫는다 (가주어 it) / [진짜 주어: 암이 여러 형태를 띤다는 것과 / 여러 접근이 필요하다는 것을] —
+        it ~ that 가주어·진주어로 that절 내용을 뒤로 빼 강조.'
   parallel:
     point: and / but / or, not only A but also B, both A and B — 같은 급끼리 대칭으로 묶인다.
     strategy: 접속사 앞뒤로 '같은 모양(품사)'을 손가락으로 짚어 짝을 맞춘다. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것.
@@ -167,9 +306,25 @@ formulas:
       - en: both A and B / either A or B
         ko: A와 B 둘 다 / 둘 중 하나
     examples:
-    - en: Not only musicians and psychologists, but also committed music enthusiasts and experts voice the opinion.
+    - en: Not only musicians and psychologists, but also committed music enthusiasts
+        and experts voice the opinion.
       src: 2022 고3 9월 24번
       cut: 음악가와 심리학자뿐 아니라, / 열성적 애호가와 전문가들도 / 그 의견을 낸다.
+    - en: In both the ancient hunter‑gatherer band and our intimate speech communities
+        today, the diffusion of speech shaped values.
+      src: 2024 고3 6월 22번
+      cut: (both A and B) 옛 수렵채집 무리와(the ancient hunter-gatherer band) · 오늘날 우리의 친밀한
+        언어 공동체 [둘 다에서](both A and B) / 말의 확산이 / 가치를 형성했다. — both가 묶는 두 명사구 A·B를 나란히
+        본다.
+    - en: ( ) People are framed as bounded social actors either playing the role of
+        hosts or guests.
+      src: 2024 고3 11월 24번
+      cut: 사람들은 / 규정된다 / 경계 지어진 사회적 행위자로 / (either A or B) [주인 역할을 하거나](playing the
+        role of hosts) · [손님 역할을 하는](guests) 둘 중 하나로. — either ~ or가 잇는 A·B를 나란히 본다.
+    - en: For many people, their work is both a source of income and of meaning.
+      src: 2025 고3 6월 40번
+      cut: 많은 이에게 / 그들의 일은 / (both A and B) [수입의](of income) 원천이자 · [의미의](of meaning)
+        원천이다. — both A and B, 전치사구 of income · of meaning을 나란히 본다.
   what_clause:
     point: what 은 선행사를 포함(the thing which). what절 전체가 하나의 명사(주어·목적어·보어)다.
     strategy: what절 전체를 [ ]로 묶어 '~하는 것'이라는 한 덩어리 명사로 취급한다.
@@ -180,7 +335,34 @@ formulas:
         ko: ~하는 것 (명사 덩어리)
       - en: what matters / what counts
         ko: 중요한 것
-    examples: []
+    examples:
+    - en: ' Philosopher Thomas Nagel argued that there is no "view Thomas Nagel ''
+        from nowhere," since we cannot see the world except from a particular perspective,
+        and that perspective influences what we see.'
+      src: 2022 고3 6월 21번
+      cut: 철학자 토머스 네이글은 주장했다 / ["아무 데도 아닌 곳에서의 시점"은 없다고] / 우리는 세계를 볼 수 없으므로 / 특정 관점에서가
+        아니고는 / 그리고 그 관점이 영향을 준다 / [우리가 보는 것에(what we see)]. — what we see = 동사 influences의
+        목적어 명사절(선행사 없는 관계사).
+    - en: A compelling argument can be made that what fans love is less the object
+        of their fandom than the attachments to ( ) (and differentiations from) one
+        another that those affections afford.
+      src: 2022 고3 9월 32번
+      cut: 설득력 있는 주장이 성립될 수 있다 / [팬들이 사랑하는 것(what fans love)]은 / (less A than B) 그들이
+        열광하는 대상이라기보다 · 서로에 대한 애착이라고. — what fans love = 문장(that절 내부)의 주어 명사절.
+    - en: One of the factors determining the use of technologies of communication
+        will be the kinds of investments made in equipment and personnel; who makes
+        them, and what they expect in return.
+      src: 2024 고3 9월 32번
+      cut: 통신 기술의 사용을 결정하는 요인 중 하나는 / 장비와 인력에 투입되는 투자의 종류일 것이다 / 즉 누가 그 투자를 하는가 ·
+        그리고 [그들이 대가로 기대하는 것(what they expect in return)]. — what they expect = 명사절,
+        who절과 나란히 놓인다.
+    - en: She had her own ideas like any patron, there were no fashion plates, and
+        the tailor was simply at her service, perhaps with helpful suggestions about
+        what others were wearing.
+      src: 2022 고3 9월 33번
+      cut: 그녀는 어떤 후원자처럼 자기 생각이 있었고 / 패션 도안집은 없었으며 / 재단사는 그저 그녀를 위해 대기했다 / 아마 유용한 제안과
+        함께 / [다른 이들이 무엇을 입고 있는지에 관한(about what others were wearing)]. — what others
+        were wearing = 전치사 about의 목적어 명사절.
   that_clause:
     point: 인식·전달 동사 + that S+V 는 '~라는 것을'. 접속사 that 뒤엔 완전한 문장이 온다(관계사 that과 구분).
     strategy: that절 전체를 목적어인 '한 문장(명사절)'으로 묶어 '~라는 것을'로 뒤에 붙인다.
@@ -191,4 +373,26 @@ formulas:
         ko: ~라는 것을 (목적어절)
       - en: the N that S+V
         ko: 동격/관계 — 뒤 문장이 완전한가로 구분
-    examples: []
+    examples:
+    - en: 'The rental section on your website says that there are two other swimming
+        pools during the summer season: the Splash Pool Rainbow Pool Splash Pool and
+        the Rainbow Pool.'
+      src: 2022 고3 6월 18번
+      cut: 웹사이트의 대여 섹션은 말한다 / [다른 수영장이 두 개 더 있다고(that there are two other ~)] / 여름
+        시즌 동안. — says의 목적어 명사절 that절, 뒤 콜론은 구체 나열.
+    - en: To the extent that an agent relies on the prior knowledge of its designer
+        rather than on its own percepts, we say that the agent lacks autonomy.
+      src: 2023 고3 6월 30번
+      cut: (부사절 that) [에이전트가 설계자의 사전 지식에 의존하는 만큼(To the extent that ~) / (rather than)
+        자신의 지각이 아니라] / 우리는 말한다 / [그 에이전트가 자율성이 없다고(that the agent lacks ~)]. — 앞 that은
+        the extent 수식 부사절, 뒤 that은 say의 목적어 명사절.
+    - en: In a hiring negotiation, a job applicant who assumes that salary is the
+        only issue may insist on $75,000 when the employer is offering $70,000.
+      src: 2023 고3 6월 42번
+      cut: 채용 협상에서 / 구직자는 [급여가 유일한 쟁점이라고 가정하는(who assumes that ~)] / 75,000달러를 고집할
+        수 있다 / 고용주가 70,000달러를 제시할 때. — assumes의 목적어 명사절 that절.
+    - en: Although we'd like to think that our minds are sharp enough to always make
+        good decisions with the greatest efficiency, they just aren't.
+      src: 2024 고3 11월 35번
+      cut: (양보절) [우리는 생각하고 싶지만 / [우리의 정신이 충분히 예리하다고(that our minds are sharp enough
+        ~) / 늘 최고 효율로 좋은 결정을 내릴 만큼]] / 그것은 그저 그렇지 않다. — think의 목적어 명사절 that절.
