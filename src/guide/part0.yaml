@@ -1,23 +1,21 @@
 # ============================================================
 #  0부 — 읽기 엔진 (모든 문장·모든 문제에 쓰는 공통 도구)
-#  철학: "건너뛰는 게 아니라, 순서를 잡고 깊이를 조절하는 것."
+#  원칙: 간결하게. 학생이 한 번 읽고 이해할 분량만.
 #  고정 콘텐츠. 예문/설명을 여기서 바로 고칠 수 있습니다(코딩 불필요).
 # ============================================================
 
 title: "읽기 엔진 — 뼈대 → 관계 → 깊이 조절"
 spine: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있다."
 intro: >-
-  수능 문장이 어려운 건 내용이 아니라 '수식어(살)가 뼈대를 덮고 있어서'다.
-  그렇다고 '건너뛰고 안 읽는' 게 아니다 — 뼈대를 먼저 잡고(STEP 1·2), 미뤄둔 살을 다시 붙여
-  결국 다 읽되(STEP 3), '되돌아가지 않고 앞으로만' 읽는 것이 핵심이다.
-  마지막으로, 문제 유형이 요구하는 만큼만 '읽는 깊이'를 조절한다.
+  수식어(살)가 뼈대를 덮어서 어려울 뿐이다. 뼈대부터 잡고 → 살을 붙여 → 앞으로만 읽는다.
+  그리고 문제 유형에 맞게 '읽는 깊이'만 조절하면 된다.
 
 methods:
   - step: "STEP 1"
-    title: "뼈대 먼저 — 수식어(살)는 괄호로 '잠깐' 미뤄둔다"
-    idea: "명사 뒤에 붙어 꾸미는 덩어리는 ( )로 묶어 잠깐 미뤄두고, 주어+동사(뼈대)부터 본다. '버리는' 게 아니라 '순서를 뒤로' 미루는 것이다."
-    rule: "괄호(잠깐 미뤄둘) 대상 = 관계사절(who/which/that…) · 분사(V-ing/V-ed 덩어리) · 전치사구(of/in/with…) · to부정사 · 콤마·대시 삽입(— , —). 앞 명사를 꾸미면 전부 수식어."
-    ms_point: "긴 문장이 갑자기 짧아진다 — '살'을 잠깐 미뤄뒀을 뿐인데. 단, 평가원은 정답 근거를 이 '살(수식어)' 속에 자주 숨기므로, 미뤄뒀다가 STEP 3에서 반드시 다시 붙여 읽는다."
+    title: "괄호치기 — 수식어는 잠깐 미뤄둔다"
+    idea: "명사 뒤에서 꾸미는 덩어리는 ( )로 묶어 미뤄두고, 주어+동사(뼈대)부터 본다. '버리는' 게 아니라 순서를 뒤로."
+    rule: "괄호 대상 = 관계사절 · 분사(V-ing/V-ed) · 전치사구 · to부정사 · 콤마·대시 삽입."
+    ms_point: "긴 문장이 짧아진다. 단, 살 속에 답 근거가 있으니 STEP 3에서 다시 읽는다."
     demo:
       sentence: "The students who joined the science club last year won the national award."
       bracketed: "The students (who joined the science club last year) won the national award."
@@ -26,22 +24,22 @@ methods:
       full_ko: "작년에 과학 동아리에 가입한 그 학생들이 전국 대회 상을 받았다."
 
   - step: "STEP 2"
-    title: "관계로 읽기 — 순서가 아니라 '누가 ↔ 무엇' 관계"
-    idea: "뼈대에서 '주체(누가)'에 동그라미, '진짜 동사(무엇을 한다)'에 세모. 왼쪽부터 단어 뜻만 바꾸는 직독직해는 긴 문장에서 무너진다 — '누가 → 무엇을 했나'라는 관계부터 잡아라."
-    rule: "진짜 동사는 문장에 하나(to-V·V-ing·p.p.는 '가짜'). 세모(진짜 동사)를 먼저 찾고, 그 앞에서 동그라미(주체)를 찾는다. 수식어는 '누구를/무엇을 꾸미는가'라는 관계로만 붙이고, 접속사·비교·인과 신호는 'A와 B가 어떤 관계(대조·원인·비교)인가'를 알려주는 이정표다."
-    ms_point: "단어를 다 해석했는데도 뜻이 안 잡히면, 순서대로 옮기기만 했을 뿐 '관계'를 안 본 것 — 문장은 단어의 나열이 아니라 '누가 무엇을 했느냐'의 그림이다."
+    title: "관계로 읽기 — '누가 ↔ 무엇'"
+    idea: "단어 순서대로가 아니라 '누가(주어) → 무엇을 한다(진짜 동사)'라는 관계부터 잡는다."
+    rule: "진짜 동사는 문장에 하나(to-V·V-ing·p.p.는 가짜). 접속사·비교·인과 신호 = 'A와 B의 관계' 이정표."
+    ms_point: "다 해석했는데 뜻이 안 잡히면, '관계'를 안 본 것이다."
     demo:
       sentence: "The scientists whose research the government funded published results that surprised everyone."
       bracketed: "The scientists (whose research the government funded) published results (that surprised everyone)."
       skeleton_en: "The scientists published results."
       skeleton_ko: "그 과학자들이 결과를 발표했다. (누가 → 무엇을)"
-      full_ko: "단어 순서대로 옮기면 'whose research the government funded'에서 꼬인다. 관계로 보면 간단하다: 주체=과학자들 / 행위=결과를 발표했다. 나머지는 관계로 붙는다 — [정부가 그 연구에 자금을 댄] 과학자들이, [모두를 놀라게 한] 결과를 발표했다."
+      full_ko: "관계로 보면 간단하다 — [정부가 그 연구에 자금을 댄] 과학자들이, [모두를 놀라게 한] 결과를 발표했다."
 
   - step: "STEP 3"
-    title: "살 붙이기 — 되돌아가지 말고 '앞으로만'(직독직해)"
-    idea: "미뤄둔 수식어를 뒤에서 앞으로 '~하는 / ~하면서 / ~해서 / ~한 채로' 로 붙여 세부까지 완성한다. 결국 다 읽되, 문장 끝에서 앞으로 되돌아가지 않고 청크(의미 단위)로 '앞으로만' 읽는다."
-    rule: "한 번에 한 덩어리씩, 짧은 문장 여러 개로 나눠 이해한다. 문장 끝까지 갔다가 앞으로 되돌아가 재해석하는 습관을 버리는 것이 속도의 핵심이다(직독직해)."
-    ms_point: "아무리 길어도 '뼈대 + 살 몇 개'일 뿐 — 앞에서부터 순서대로 조립하면 끝난다."
+    title: "살 붙이기 — 앞으로만(직독직해)"
+    idea: "미뤄둔 수식어를 '~하는 / ~해서'로 다시 붙여 완성. 끝에서 앞으로 되돌아가지 말고 앞으로만."
+    rule: "한 덩어리씩 앞에서부터. 되돌아가 재해석하지 않는 것이 속도의 핵심."
+    ms_point: "아무리 길어도 '뼈대 + 살 몇 개'. 순서대로 조립하면 끝."
     demo:
       sentence: "Feeling nervous about the result, she slowly walked onto the stage."
       bracketed: "(Feeling nervous about the result), she slowly walked onto the stage."
@@ -50,48 +48,46 @@ methods:
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
   - step: "읽기 깊이"
-    title: "유형별로 '어디까지' 읽나 — 깊이 조절"
-    idea: "모든 문장을 같은 깊이로 읽는 게 가장 비효율이다. 문제 유형이 요구하는 만큼만 깊이 판다 — 빠르게 훑을 곳과 정밀하게 팔 곳을 나눈다."
-    rule: "대의(주제·요지·제목·주장) → 뼈대 + 극성·연결어만 빠르게, 반복되는 핵심어 추적 · 빈칸·함축 → 논리(인과·대조·재진술) 정밀, 빈칸 주변의 재진술 찾기 · 어법·어휘 → 구조(수일치·병렬·수식) 정밀 · 순서·삽입 → 연결어·지시어·시간 흐름(담화 표지)."
-    ms_point: "빠르게 훑을 곳과 정밀하게 팔 곳을 나누면, 같은 시간에 더 정확히 푼다. (1부 구문 = 정밀 독해 근육, 2부 코드 = 논리 신호를 잡는 눈.)"
+    title: "유형별로 '어디까지' 읽나"
+    idea: "모든 문장을 같은 깊이로 읽는 게 비효율. 유형이 요구하는 만큼만 판다."
+    rule: "대의 → 뼈대·연결어만 빠르게 / 빈칸·함축 → 논리(재진술·대조) 정밀 / 어법·어휘 → 구조 정밀 / 순서·삽입 → 연결어·지시어(담화 표지)."
+    ms_point: "빠르게 훑을 곳과 정밀히 팔 곳을 나누면, 같은 시간에 더 정확히 푼다."
 
   - step: "유추 tip"
-    title: "모르는 단어는 '유추'로 뚫는다 — 다섯 단서"
-    idea: "단어 뜻을 다 몰라도 된다. 문장이 스스로 흘리는 단서로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다. 가장 강력한 건 '대조'와 '재진술' — 사실상 문장이 뜻을 공짜로 준다."
-    rule: "① 극성 — 긍정어(benefit·thrive)/부정어(harm·fail) 주변이면 그 색깔. ② 대조 — but·however·unlike·while 뒤 단어는 앞의 '반대' 뜻. ③ 재진술·예시 — that is·in other words·such as·for example 옆의 쉬운 말이 곧 그 뜻. ④ 병렬 — A and/or B는 '같은 부류'. ⑤ 형태 — 접두사·어근(dis-·un-·-less=부정, re-=다시, over-=과잉)."
-    ms_point: "모르는 단어 옆에 but이 있으면 '반대말'을, that is·such as가 있으면 '같은 말'을 이미 준 것. 1~2개는 '?'로 두고 넘어가도, 다섯 단서 중 하나만 잡히면 문장 뜻은 안 무너진다."
+    title: "모르는 단어는 '유추'로 뚫는다"
+    idea: "단어 뜻을 다 몰라도 된다. 대조·재진술 단서가 뜻을 공짜로 준다."
+    rule: "① 극성(긍정/부정어 주변) · ② 대조(but·unlike 뒤=반대) · ③ 재진술·예시(that is·such as=같은 뜻) · ④ 병렬(A and B=같은 부류) · ⑤ 형태(un-·-less=부정)."
+    ms_point: "but=반대말, that is·such as=같은 말을 이미 준 것. 단서 하나만 잡으면 뜻은 안 무너진다."
     demo:
       sentence: "Unlike his frugal brother, who saved every coin, Tom was profligate and spent his salary within a week."
       bracketed: "Unlike his frugal brother (who saved every coin), Tom was profligate and spent his salary within a week."
-      skeleton_en: "Tom was profligate (≠ frugal, saved every coin)."
+      skeleton_en: "Tom was profligate (≠ frugal)."
       skeleton_ko: "Tom은 profligate했다 (≠ 절약하는)."
-      full_ko: "'profligate'를 몰라도 Unlike(대조) + '동전 하나까지 모으던 형과 달리' + '일주일 만에 월급을 다 썼다'로 → '헤프게 낭비하는'이라고 유추된다. (단서 ②, 대조)"
+      full_ko: "'profligate'를 몰라도 Unlike(대조) + '형은 절약' + '일주일 만에 월급 탕진' → '헤프게 낭비하는'으로 유추. (단서 ②)"
 
-# '읽기 깊이' 실제 예시(형광펜 = 꼭 읽을 곳). 학습용 예시 지문.
+# '읽기 깊이' 형광펜 예시(꼭 읽을 곳만 강조). 학습용 예시 지문.
 depth_demos:
-  - kind: "주제·요지·주장 — 뼈대만 빠르게"
+  - kind: "주제·요지 — 뼈대만 빠르게"
     source: "학습용 예시"
-    goal: "필자의 핵심 주장(반복되는 것) 하나만 잡으면 끝 — 예시·부연은 그 주장의 증거일 뿐이라 빠르게 훑는다."
+    goal: "핵심 주장 하나만 잡으면 끝. 예시는 증거일 뿐 흘려 읽는다."
     passage: >-
       ==Many people believe talent alone determines success, but research suggests that
       deliberate practice matters far more.== In one study, elite violinists were not born more
-      gifted; they had simply logged thousands more hours of focused practice than their peers.
-      Chess masters, too, spend years studying past games before they excel. Even so-called
-      'natural' athletes train relentlessly behind the scenes. ==In short, what looks like raw
-      talent is usually the visible tip of a long, deliberate effort.==
-    read: "주제 문장(but 대조) + 'In short' 재진술만 읽어도 요지가 잡힌다. 가운데 예시(바이올린·체스·운동선수)는 '같은 말의 반복'이라 흘려 읽어도 된다."
-  - kind: "빈칸 추론 — 논리 단서 정밀"
+      gifted; they had simply practiced thousands more hours. Chess masters spend years studying
+      past games. Even 'natural' athletes train relentlessly. ==In short, what looks like raw
+      talent is usually the tip of a long, deliberate effort.==
+    read: "주제문(but) + In short(재진술)만 읽어도 요지가 잡힌다 — 가운데 예시는 같은 말의 반복."
+  - kind: "빈칸 추론 — 단서 정밀"
     source: "학습용 예시"
-    goal: "빈칸의 답 = 빈칸 주변의 '재진술·대조·예시'가 이미 말해 준다. 빈칸만 노려보지 말고 '단서 문장'을 정밀히 읽어라."
+    goal: "빈칸의 답 = 주변의 재진술·대조가 이미 말해 준다. 빈칸만 노려보지 말 것."
     passage: >-
-      A good map does not show everything; it leaves out detail on purpose.
-      ==A subway map, for example, ignores real distances and streets, showing only the order of
-      stops,== which makes it far easier to use. In the same way, a useful scientific model works
-      by ( ____ ). ==By stripping away the messy details, it reveals the pattern that matters.==
-      A model that copied reality exactly would be as confusing as the world itself.
-    read: "빈칸 앞 예시(지하철 노선도=세부를 무시) + 빈칸 뒤 재진술('세부를 덜어내 핵심 패턴을 드러낸다')만 정밀히 읽으면 답이 보인다. 빈칸 = 이 단서들의 다른 표현('불필요한 세부를 덜어내기')일 뿐."
+      A good map leaves out detail on purpose. ==A subway map, for example, ignores real distances,
+      showing only the order of stops,== which makes it easier to use. In the same way, a useful
+      model works by ( ____ ). ==By stripping away the messy details, it reveals the pattern that
+      matters.==
+    read: "빈칸 앞 예시 + 뒤 재진술만 읽으면 답이 보인다 — 빈칸 = '불필요한 세부를 덜어내기'."
 
 tools:
-  - "ⓐ 되돌아가지 않기 — 문장 끝에서 앞으로 되돌아 재해석하지 말고, 청크 단위로 '앞으로만' 읽는다(직독직해)."
-  - "ⓑ 진짜 동사는 하나 — to-V · V-ing · p.p. 는 가짜 동사(준동사)다. 진짜 동사부터 찾아라."
-  - "ⓒ 관계가 먼저 — 단어 뜻보다 'A와 B가 인과냐 대조냐 재진술이냐'를 잡아라. 평가원은 어휘가 아니라 '논리' 시험이다."
+  - "ⓐ 되돌아가지 않기 — 청크 단위로 '앞으로만'(직독직해)."
+  - "ⓑ 진짜 동사는 하나 — to-V·V-ing·p.p.는 가짜. 진짜 동사부터."
+  - "ⓒ 관계가 먼저 — 단어 뜻보다 'A와 B의 관계(인과·대조·재진술)'. 평가원은 논리 시험이다."

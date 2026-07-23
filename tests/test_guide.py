@@ -77,7 +77,7 @@ def test_render_html():
     assert "모르는 단어" in html                   # 0부 단어 유추법
     assert "패턴으로 익히는 실전해석" in html         # 3부 개칭
     assert "단계별 트레이닝" in html                # 전치사구 트레이닝
-    assert "관계부터 잡아라" in html                # 0부 STEP2 관계 원리
+    assert "관계로 읽기" in html                    # 0부 STEP2 관계 원리
     assert "읽기 깊이" in html and "깊이 조절" in html   # 0부 유형별 읽기 깊이 신설
     assert "대비로 구체화" in html                 # 추상→구체 신규 패턴
     assert html.count('class="sv-line"') >= 8      # 모든 정답 카드에 A→B 관계 도식
