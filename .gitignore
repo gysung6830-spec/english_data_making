@@ -12,3 +12,4 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
+samples/*.pdf
