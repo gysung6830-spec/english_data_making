@@ -55,18 +55,15 @@ body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.42; color:#000; 
 .g-item {{ padding-left:12px; text-indent:-12px; margin:1px 0; }}
 .g-item .cont {{ display:block; padding-left:12px; text-indent:0; }}
 
-/* 2단. column-fill:auto → 각 페이지를 위→아래(왼쪽 단 먼저)로 꽉 채움 */
-.columns {{ column-count:2; column-gap:18px; column-rule:0.6px solid #cfcfcf;
-            column-fill:auto; }}
-.section-div {{ column-span:all; font-weight:700; margin:6px 0 8px; }}
+/* 2단 흐름 배치. column-fill:auto → 왼쪽 단을 페이지 끝까지 채운 뒤 오른쪽 단,
+   그다음 페이지로 넘어간다. 네이티브 페이지네이션이라 높이 추정 없이도
+   문항이 페이지 경계에서 절대 겹치지(오버프린트) 않는다. */
+.flow {{ column-count:2; column-gap:18px; column-rule:0.6px solid #cfcfcf;
+         column-fill:auto; }}
+.section-div {{ font-weight:700; margin:6px 0 8px; }}
 
-/* 페이지 단위 2단 배치(문항을 좌단부터 채움) */
 .page {{ page-break-before: always; break-before: page; }}
 .page:first-child {{ page-break-before: avoid; break-before: avoid; }}
-.sheet {{ overflow: hidden; }}   /* clearfix */
-.col {{ width: 48%; }}
-.col.left {{ float: left; border-right: 0.6px solid #cfcfcf; padding-right: 15px; }}
-.col.right {{ float: right; }}
 
 /* 문항 */
 .q {{ break-inside:avoid; margin-bottom:17px; }}
@@ -313,85 +310,22 @@ def _footer_note(exam: MockExam, footer: str) -> str:
 # ---------------------------------------------------------------------------
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
-# 한 단(컬럼)의 대략 가용 높이(mm). @page 여백 11/10mm 기준.
-_COL_H = 262.0
-_HEADER_H = 28.0
-_GUIDE_H = 24.0
-_SECTION_H = 9.0
-
-
-def _est_height(q: Question) -> float:
-    """문항의 대략 높이(mm) 추정 — 좌/우 단 배치용(8.8pt 기준)."""
-    words = len((q.passage_text or "").split())
-    h = 6.0                                   # 발문
-    h += (words / 9.5) * 4.0                  # 지문(한 줄 ~9.5단어, 줄높이 ~4.0mm)
-    if q.choices:
-        h += len(q.choices) * 4.2             # 선지
-    if q.section == "essay":
-        h += 16.0                             # 답란
-        if q.meta.get("bogi"):
-            h += 14.0                         # <보기> 박스
-        if q.meta.get("conditions"):
-            h += 10.0 + len(q.meta["conditions"]) * 4.0   # <조건> 박스
-        if q.meta.get("blank_ko"):
-            h += 5.0
-    h += 9.0                                  # 문항 간 여백
-    return h
-
-
-def _pack(questions: list[Question], first_left: float, first_right: float,
-          col_h: float) -> list[tuple[list, list]]:
-    """문항을 (좌단, 우단) 페이지 리스트로 배치. 좌단부터 채운다."""
-    pages: list[tuple[list, list]] = []
-    left: list = []
-    right: list = []
-    lh = rh = 0.0
-    bl, br = first_left, first_right
-    for q in questions:
-        h = _est_height(q)
-        if not left or lh + h <= bl:          # 좌단 우선(빈 좌단엔 무조건)
-            left.append(q); lh += h
-        elif rh + h <= br:                     # 좌단 다 차면 우단
-            right.append(q); rh += h
-        else:                                  # 둘 다 차면 새 페이지
-            pages.append((left, right))
-            left, right, lh, rh, bl, br = [q], [], h, 0.0, col_h, col_h
-    if left or right:
-        pages.append((left, right))
-    return pages
-
-
-def _render_sheet(left_html: str, right_html: str) -> str:
-    return (f'<div class="sheet"><div class="col left">{left_html}</div>'
-            f'<div class="col right">{right_html}</div></div>')
-
-
 def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    """실제 시험지 배치: 문항 높이를 추정해 좌/우 단·페이지로 직접 배치.
+    """실제 시험지 배치: 2단 흐름(column-fill:auto)으로 왼쪽 단부터 채우며
+    네이티브 페이지네이션으로 자동 분할한다(문항 겹침/오버프린트 없음).
 
-    선택형은 페이지당 ~5문항(좌단부터 채움), 서술형은 새 페이지에서 시작해 ~3문항.
+    선택형은 머리글·유의사항 아래로 2단 흐름, 서술형은 새 페이지에서 시작.
     """
+    header = _header_block(exam, info)
     guide = _guidelines_block(exam, info)
-    # 선택형: 1쪽 좌단은 머리글+유의사항만큼 줄임
-    c_pages = _pack(exam.choice_questions,
-                    first_left=_COL_H - _HEADER_H - _GUIDE_H,
-                    first_right=_COL_H - _HEADER_H, col_h=_COL_H)
-    e_pages = _pack(exam.essay_questions,
-                    first_left=_COL_H - _SECTION_H,
-                    first_right=_COL_H - _SECTION_H, col_h=_COL_H) \
-        if exam.essay_questions else []
-
-    pages_html: list[str] = []
-    for i, (left, right) in enumerate(c_pages):
-        inner = _header_block(exam, info) if i == 0 else ""
-        lh = (guide if i == 0 else "") + "".join(_q_html(q) for q in left)
-        rh = "".join(_q_html(q) for q in right)
-        pages_html.append(f'<div class="page">{inner}{_render_sheet(lh, rh)}</div>')
-    for i, (left, right) in enumerate(e_pages):
-        sec = '<div class="section-div">&lt; 서 술 형 &gt;</div>' if i == 0 else ""
-        lh = "".join(_q_html(q) for q in left)
-        rh = "".join(_q_html(q) for q in right)
-        pages_html.append(f'<div class="page">{sec}{_render_sheet(lh, rh)}</div>')
+    choice_flow = "".join(_q_html(q) for q in exam.choice_questions)
+    pages_html = [f'<div class="page">{header}{guide}'
+                  f'<div class="flow">{choice_flow}</div></div>']
+    if exam.essay_questions:
+        essay_flow = "".join(_q_html(q) for q in exam.essay_questions)
+        pages_html.append('<div class="page">'
+                          '<div class="section-div">&lt; 서 술 형 &gt;</div>'
+                          f'<div class="flow">{essay_flow}</div></div>')
 
     title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
     return _wrap(title, "".join(pages_html), footer_note=_footer_note(exam, footer))
