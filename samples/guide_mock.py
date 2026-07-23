@@ -42,6 +42,33 @@ def _meta(sentence: str):
     return "", ""
 
 
+def _load_extra_cards():
+    """src/guide/codes_cards_extra.yaml 의 추가 코드 카드 → {code_id: [CodeCard,...]}.
+    파일이 없으면 빈 dict. (2부 예시 카드를 4개씩 채우기 위한 데이터, 코딩 없이 편집 가능)"""
+    import yaml as _yaml
+    from pathlib import Path as _P
+    from src.guide.corpus import estimate_difficulty
+    p = _P(__file__).resolve().parents[1] / "src" / "guide" / "codes_cards_extra.yaml"
+    if not p.exists():
+        return {}
+    data = _yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    out = {}
+    for cid, cards in data.items():
+        lst = []
+        for d in cards or []:
+            lst.append(CodeCard(
+                code=d.get("code", ""), code_ko=d.get("code_ko", ""), dir=d.get("dir", ""),
+                sentence=d["sentence"], source=d.get("source", ""),
+                difficulty=estimate_difficulty(d["sentence"]),
+                body=CardBody(highlight=d.get("hit", ""), literal_trap=d.get("trap", ""),
+                              trap_why=d.get("why", ""), correct=d.get("correct", ""),
+                              so_what=d.get("so_what", ""), subject=d.get("subj", ""),
+                              action=d.get("act", ""), cut=d.get("cut", "")),
+            ))
+        out[cid] = lst
+    return out
+
+
 # ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
 def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
           basis="", para="", subj="", act="", cut=""):
@@ -461,8 +488,10 @@ def mock_guide() -> Guide:
     from src.guide.codes import (keep_source, load_abstract, load_inference,
                                  load_codes_practice, load_part2_workbook)
     practice = load_codes_practice()
+    extra = _load_extra_cards()
     for ch in chapters:
         ch.cards = [c for c in ch.cards if keep_source(c.source)]
+        ch.cards += [c for c in extra.get(ch.id, []) if keep_source(c.source)]
         ch.problems = [p for p in ch.problems if keep_source(p.source)]
         ch.practice = practice.get(ch.id, [])
     return Guide(part0=load_part0(), inference=load_inference(), chapters=chapters,
