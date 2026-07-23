@@ -2,91 +2,113 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>패러프레이징 특별 훈련 — 방법론 + 객관식</title>
+<title>패러프레이징 특별 훈련 — 방법론 · 지문 내 해부 · 객관식</title>
 <style>
 @page{ size:A4; margin:11mm 12mm; }
 *{ box-sizing:border-box; }
 body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; color:#23272e;
   font-size:10px; line-height:1.55; margin:0; background:#f4f5f7; padding:16px; }
 .wrap{ max-width:820px; margin:0 auto; }
-:root{ --pur:#7a4bb3; --pur-d:#5a3a86; --ink:#1f6f78; --ink-d:#12525a;
-  --src:#e8f5e9; --src-line:#3d8f58; --trap:#cd5049; --muted:#6b7280; --line:#e5e7eb; --must:#fff3bf; --must-line:#e6b800; }
-
+:root{
+  --deep:#1f7a5c; --deep-d:#12543d;         /* 딥그린 = 기본 톤 */
+  --amber:#ffe9a8; --amber-line:#e0b94a;    /* 노랑 = 지문 핵심어(강조) */
+  --gsoft:#cdead6;                           /* 연녹 = 정답 표현(강조) */
+  --trap:#cd5049;                            /* 빨강 = 함정/오답(강조) */
+  --muted:#6b7280; --line:#e6e8ea;
+}
 @media print{
   body{ background:#fff; padding:0; }
-  .box,.q{ box-shadow:none; }
+  .box,.q,.dcard{ box-shadow:none; }
   .method{ break-after:page; }
-  .q{ break-inside:avoid; }
+  .dissect{ break-before:page; }
+  .q, .dcard{ break-inside:avoid; }
   .answers{ break-before:page; }
 }
 
-/* 섹션 표지 헤더 */
-.sec-hd{ background:var(--pur-d); color:#fff; border-radius:8px; padding:14px 18px; margin-bottom:14px; }
-.sec-hd .tag{ font-size:9px; font-weight:700; background:#fff; color:var(--pur-d); padding:2px 9px; border-radius:9px; }
+/* 섹션 표지 */
+.sec-hd{ background:var(--deep-d); color:#fff; border-radius:8px; padding:14px 18px; margin-bottom:14px; }
+.sec-hd .tag{ font-size:9px; font-weight:700; background:#fff; color:var(--deep-d); padding:2px 9px; border-radius:9px; }
 .sec-hd .t{ font-size:19px; font-weight:800; margin:5px 0 2px; }
-.sec-hd .s{ font-size:10px; opacity:.9; }
+.sec-hd .s{ font-size:10px; opacity:.92; }
 
-.box{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.09); padding:13px 16px; margin-bottom:13px; }
-.box h3{ margin:0 0 8px; font-size:13px; color:var(--pur-d); border-bottom:2px solid var(--pur); padding-bottom:5px; }
-.principle{ background:#f3edfa; border-left:3px solid var(--pur); border-radius:0 5px 5px 0; padding:9px 12px; font-size:10.5px; font-weight:700; color:var(--pur-d); margin-bottom:10px; }
+.h2{ font-size:13.5px; font-weight:800; color:var(--deep-d); margin:16px 0 9px; padding-bottom:5px; border-bottom:2px solid var(--deep); }
+.h2 small{ font-weight:600; color:var(--muted); font-size:9px; }
+
+.box{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.08); padding:13px 16px; margin-bottom:12px; }
+.box h3{ margin:0 0 8px; font-size:12.5px; color:var(--deep-d); }
+.principle{ background:#eaf5f0; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:9px 12px; font-size:10.5px; font-weight:700; color:var(--deep-d); margin-bottom:10px; }
 
 table.t{ width:100%; border-collapse:collapse; font-size:9.6px; }
-table.t th{ background:var(--pur); color:#fff; padding:4px 9px; text-align:left; font-weight:700; }
+table.t th{ background:var(--deep); color:#fff; padding:4px 9px; text-align:left; font-weight:700; }
 table.t td{ padding:4px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
-table.t tbody tr:nth-child(even) td{ background:#faf7fd; }
-.t .pat{ font-weight:800; color:var(--pur-d); white-space:nowrap; }
-.arw{ color:var(--pur); font-weight:800; }
+table.t tbody tr:nth-child(even) td{ background:#f1f7f4; }
+.t .pat{ font-weight:800; color:var(--deep-d); white-space:nowrap; }
+.arw{ color:var(--deep); font-weight:800; }
 
-/* 함정 4유형 */
 .traps{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
 .trapc{ border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-size:9.5px; }
 .trapc .h{ font-weight:800; color:var(--trap); margin-bottom:2px; }
-.trapc.ok{ border-color:var(--src-line); background:var(--src); }
-.trapc.ok .h{ color:var(--src-line); }
-
+.trapc.ok{ border-color:var(--deep); background:#eaf5f0; }
+.trapc.ok .h{ color:var(--deep); }
 .steps{ font-size:9.8px; margin-top:6px; }
-.steps .k{ display:inline-block; width:16px; height:16px; line-height:16px; text-align:center; background:var(--pur); color:#fff; border-radius:50%; font-size:9px; font-weight:800; margin-right:5px; }
+.steps .k{ display:inline-block; width:16px; height:16px; line-height:16px; text-align:center; background:var(--deep); color:#fff; border-radius:50%; font-size:9px; font-weight:800; margin-right:5px; }
+
+/* ── 지문 내 패러프레이징 해부 ── */
+.dcard{ background:#fff; border-radius:8px; box-shadow:0 1px 5px rgba(0,0,0,.08); border-left:5px solid var(--deep); padding:12px 15px; margin-bottom:12px; }
+.dcard .dh{ font-size:10px; font-weight:800; color:var(--deep-d); margin-bottom:8px; }
+.dcard .dh .ty{ font-size:8.5px; background:var(--deep); color:#fff; border-radius:8px; padding:1px 8px; margin-left:5px; }
+.drow{ display:flex; gap:8px; align-items:flex-start; margin-bottom:6px; font-size:10px; line-height:1.6; }
+.drow .lab{ flex:none; width:38px; font-size:8.5px; font-weight:800; padding:2px 0; text-align:center; border-radius:4px; }
+.lab.src{ background:var(--amber); color:#7a5c00; }
+.lab.ans{ background:var(--gsoft); color:var(--deep-d); }
+.hla{ background:var(--amber); padding:0 3px; border-radius:2px; font-weight:600; }
+.hlg{ background:var(--gsoft); padding:0 3px; border-radius:2px; font-weight:700; }
+.ko{ display:block; font-size:8.7px; color:var(--muted); margin-top:2px; }
+.dmap{ margin-top:6px; background:#f5faf8; border:1px solid var(--line); border-radius:6px; padding:7px 10px; }
+.dmap .m{ display:flex; align-items:center; gap:7px; font-size:9.3px; margin-bottom:3px; }
+.dmap .m:last-child{ margin-bottom:0; }
+.dmap .from{ color:#7a5c00; font-weight:700; }
+.dmap .to{ color:var(--deep-d); font-weight:800; }
+.dmap .bd{ flex:none; font-size:7.8px; font-weight:800; color:#fff; background:var(--deep); border-radius:7px; padding:0 6px; }
+.dnote{ font-size:9px; color:#3a4a44; margin-top:6px; padding-left:4px; border-left:2px solid var(--gsoft); padding-left:8px; }
+.dnote b{ color:var(--deep-d); }
 
 /* 문제 */
-.qhead{ font-size:12px; font-weight:800; color:var(--pur-d); margin:14px 0 8px; }
 .q{ background:#fff; border-radius:8px; box-shadow:0 1px 5px rgba(0,0,0,.08); padding:12px 15px; margin-bottom:11px; }
-.q .qn{ display:inline-block; background:var(--pur-d); color:#fff; font-weight:800; font-size:11px; padding:2px 9px; border-radius:5px; margin-right:7px; }
+.q .qn{ display:inline-block; background:var(--deep-d); color:#fff; font-weight:800; font-size:11px; padding:2px 9px; border-radius:5px; margin-right:7px; }
 .q .ask{ font-size:10.3px; font-weight:700; }
-.src{ background:#f6f3fb; border:1px solid #e0d5f0; border-radius:6px; padding:8px 11px; margin:7px 0 8px; font-size:10px; line-height:1.6; }
-.src .u{ text-decoration:underline; text-decoration-color:var(--pur); text-underline-offset:2px; font-weight:700; }
-.ko{ display:block; font-size:9px; color:var(--muted); margin-top:3px; }
+.src{ background:#eaf5f0; border:1px solid #cfe6dd; border-radius:6px; padding:8px 11px; margin:7px 0 8px; font-size:10px; line-height:1.6; }
+.src .u{ background:var(--amber); padding:0 3px; border-radius:2px; font-weight:700; }
 .ch{ list-style:none; margin:0; padding:0; }
 .ch li{ font-size:9.9px; padding:3px 0 3px 4px; }
 .ch .num{ font-weight:800; margin-right:5px; }
 
-/* 정답 해설 */
-.answers .box h3{ color:var(--ink-d); border-color:var(--ink); }
+.answers .box h3{ color:var(--deep-d); }
 .ak{ font-size:9.7px; margin-bottom:9px; }
-.ak .qn{ background:var(--ink-d); }
-.ak .cor{ color:var(--src-line); font-weight:800; }
+.ak .qn{ background:var(--deep-d); color:#fff; font-weight:800; font-size:10px; padding:1px 7px; border-radius:4px; margin-right:5px;}
+.ak .cor{ color:var(--deep); font-weight:800; }
 .ak table{ width:100%; border-collapse:collapse; margin-top:4px; }
 .ak td{ padding:3px 7px; border-bottom:1px solid var(--line); font-size:9.3px; vertical-align:top; }
 .ak .oc{ font-weight:800; width:20px; }
-.ak .ok{ background:var(--src); }
+.ak .ok{ background:#eaf5f0; }
 .ak .badge{ display:inline-block; font-size:8px; font-weight:800; border-radius:8px; padding:0 6px; color:#fff; }
-.ak .b-ok{ background:var(--src-line); } .ak .b-copy{ background:#c2410c; } .ak .b-dist{ background:var(--trap); }
-.ak .b-over{ background:#b8860b; } .ak .b-off{ background:var(--muted); }
+.b-ok{ background:var(--deep); } .b-copy{ background:#c2410c; } .b-dist{ background:var(--trap); }
+.b-over{ background:#b8860b; } .b-off{ background:var(--muted); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- ===== 섹션 표지 ===== -->
   <div class="sec-hd">
     <span class="tag">SECTION · 특별 훈련</span>
     <div class="t">🔁 패러프레이징 훈련</div>
-    <div class="s">정답은 "바꿔 말한 것", 오답은 "그대로 베낀 것" — 이 한 스킬이 모든 유형의 정답을 가른다</div>
+    <div class="s">평가원은 지문의 말을 '바꿔서' 정답 선지로 낸다 — 그 바꾸는 법을 읽어내면 정답이 보인다</div>
   </div>
 
   <!-- ===== 방법론 (한 페이지) ===== -->
   <div class="method">
     <div class="box">
-      <h3>1. 원리 · 방법론</h3>
+      <h3>1. 원리 · 3초 캐치법</h3>
       <div class="principle">정답 = 뜻은 같고 <u>단어를 바꾼다</u>. &nbsp;오답 = 단어를 그대로 두고 <u>뜻을 왜곡한다</u>.</div>
       <div class="steps">
         <div><span class="k">1</span>지문 핵심 문장의 <b>키워드에 ○</b></div>
@@ -121,152 +143,171 @@ table.t tbody tr:nth-child(even) td{ background:#faf7fd; }
     </div>
   </div>
 
-  <!-- ===== 객관식 문제 ===== -->
-  <div class="qhead">4. 연습 문제 — 다음 중 밑줄(또는 문장)을 바르게 패러프레이징한 것은?</div>
+  <!-- ===== 지문 내 패러프레이징 해부 ===== -->
+  <div class="dissect">
+    <div class="h2">4. 평가원은 지문을 이렇게 바꿔 선지로 낸다 <small>— 실제 기출로, 어느 단어가 어떻게 변했는지 해부</small></div>
 
-  <div class="q">
-    <div><span class="qn">Q1</span><span class="ask">밑줄 친 부분을 바르게 바꿔 말한 것은?</span></div>
-    <div class="src">"It's better to disappoint a few people than to abandon your dreams for <span class="u">an empty inbox</span>."
-      <span class="ko">텅 빈 수신함을 위해 꿈을 포기하느니 몇 사람 실망시키는 게 낫다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>keeping your email inbox completely empty</li>
-      <li><span class="num">②</span>responding to everyone's messages and requests</li>
-      <li><span class="num">③</span>ignoring all incoming emails forever</li>
-      <li><span class="num">④</span>organizing your daily work schedule</li>
-      <li><span class="num">⑤</span>deleting unimportant emails as fast as possible</li>
-    </ul>
+    <div class="dcard">
+      <div class="dh">기출 ① 2022 6월 34번 (빈칸)<span class="ty">구체→추상 · 반대구조</span></div>
+      <div class="drow"><span class="lab src">지문</span><div>If the same song was played at <span class="hla">another boundary</span>, it was <span class="hla">treated as a stranger</span>.<span class="ko">같은 노래도 다른 경계에서 틀면 낯선 새로 취급됐다</span></div></div>
+      <div class="drow"><span class="lab ans">정답</span><div>the robins <span class="hlg">associate locality with</span> familiar songs<span class="ko">울새는 장소를 익숙한 노래와 연관 짓는다</span></div></div>
+      <div class="dmap">
+        <div class="m"><span class="bd">구체→추상</span><span class="from">another boundary / territory (구체적 장소)</span><span class="arw">→</span><span class="to">locality (추상적 '위치')</span></div>
+        <div class="m"><span class="bd">반대구조</span><span class="from">위치 바뀌면 '낯설게' 반응</span><span class="arw">→</span><span class="to">노래를 '위치와 연관' 짓는다(재진술)</span></div>
+      </div>
+      <div class="dnote">지문은 <b>사례</b>(경계 바꾸니 낯설게 반응)로 보여주고, 정답은 그걸 <b>일반 명제</b>(노래=장소와 연관)로 끌어올렸다. 지문 단어 <b>boundary·stranger</b>는 정답에 안 쓰인다 — 쓴 선지(①complexity·⑤recorded)가 함정.</div>
+    </div>
+
+    <div class="dcard">
+      <div class="dh">기출 ② 2022 6월 21번 (함축)<span class="ty">비유→직설</span></div>
+      <div class="drow"><span class="lab src">지문</span><div>…than to abandon your dreams for <span class="hla">an empty inbox</span>.<span class="ko">텅 빈 수신함을 위해 꿈을 포기하느니…</span></div></div>
+      <div class="drow"><span class="lab ans">정답</span><div>attempting to <span class="hlg">satisfy other people's demands</span><span class="ko">남의 요구를 만족시키려 애쓰는 것</span></div></div>
+      <div class="dmap">
+        <div class="m"><span class="bd">비유→직설</span><span class="from">an empty inbox (텅 빈 수신함=이미지)</span><span class="arw">→</span><span class="to">satisfy others' demands (남 메일에 다 응대)</span></div>
+      </div>
+      <div class="dnote">'빈 수신함'은 <b>비유</b>다. 이걸 직설로 풀면 '남의 메일·요구에 다 응하는 것'. 함정 선지는 지문의 <b>social·innovative</b>를 그대로 베껴 끌어당긴다.</div>
+    </div>
+
+    <div class="dcard">
+      <div class="dh">기출형 ③ 동의어 치환 (요약·주제)<span class="ty">동의어</span></div>
+      <div class="drow"><span class="lab src">지문</span><div><span class="hla">Proper planning</span> <span class="hla">forces</span> <span class="hla">detailed thinking</span> about the project.<span class="ko">적절한 계획은 프로젝트에 대한 세밀한 사고를 강제한다</span></div></div>
+      <div class="drow"><span class="lab ans">정답</span><div><span class="hlg">Careful planning</span> <span class="hlg">drives</span> <span class="hlg">thorough consideration</span>.<span class="ko">신중한 계획은 철저한 숙고를 이끈다</span></div></div>
+      <div class="dmap">
+        <div class="m"><span class="bd">동의어</span><span class="from">proper</span><span class="arw">→</span><span class="to">careful</span></div>
+        <div class="m"><span class="bd">동의어</span><span class="from">forces</span><span class="arw">→</span><span class="to">drives</span></div>
+        <div class="m"><span class="bd">동의어</span><span class="from">detailed thinking</span><span class="arw">→</span><span class="to">thorough consideration</span></div>
+      </div>
+      <div class="dnote">가장 기본형: 뜻은 그대로 두고 <b>단어만 동의어로</b> 하나하나 바꾼다. 구조·논리는 동일.</div>
+    </div>
+
+    <div class="dcard">
+      <div class="dh">기출형 ④ 구체 사례 → 상위 개념<span class="ty">구체→추상</span></div>
+      <div class="drow"><span class="lab src">지문</span><div>A <span class="hla">songwriter</span> under a <span class="hla">strict form</span> searches <span class="hla">unexplored corners of language</span>.<span class="ko">엄격한 형식 속 작곡가는 언어의 미개척 영역을 탐색한다</span></div></div>
+      <div class="drow"><span class="lab ans">정답</span><div><span class="hlg">Limits</span> redirect effort toward <span class="hlg">overlooked possibilities</span>.<span class="ko">제약은 노력을 간과된 가능성으로 돌린다</span></div></div>
+      <div class="dmap">
+        <div class="m"><span class="bd">구체→추상</span><span class="from">songwriter·strict form (개별 사례)</span><span class="arw">→</span><span class="to">limits (일반 개념)</span></div>
+        <div class="m"><span class="bd">구체→추상</span><span class="from">unexplored corners of language</span><span class="arw">→</span><span class="to">overlooked possibilities</span></div>
+      </div>
+      <div class="dnote">지문의 <b>작곡가·형식</b> 같은 구체 예시를 <b>제약·가능성</b>이라는 상위 개념으로 끌어올렸다. 빈칸·주제의 단골 수법.</div>
+    </div>
   </div>
 
-  <div class="q">
-    <div><span class="qn">Q2</span><span class="ask">다음 문장을 요약·패러프레이징한 것은?</span></div>
-    <div class="src">"We may not determine how or what a lion eats, but we certainly can regulate where the lion feeds."
-      <span class="ko">우리는 사자가 무엇을·어떻게 먹는지는 정하지 못해도, 어디서 먹는지는 분명히 규제할 수 있다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>Humans control every part of animal behavior.</li>
-      <li><span class="num">②</span>Humans increasingly shape the setting in which nature operates.</li>
-      <li><span class="num">③</span>Lions freely decide where and what they eat.</li>
-      <li><span class="num">④</span>Nature regulates itself without any human influence.</li>
-      <li><span class="num">⑤</span>Feeding wild lions is nearly impossible to control.</li>
-    </ul>
-  </div>
+  <!-- ===== 객관식 ===== -->
+  <div class="h2">5. 연습 문제 — 다음 중 밑줄(또는 문장)을 바르게 패러프레이징한 것은?</div>
 
-  <div class="q">
-    <div><span class="qn">Q3</span><span class="ask">실험 결과를 바르게 일반화한 것은?</span></div>
-    <div class="src">"If the same neighbor's song was played at another boundary, it was treated as the call of a stranger."
-      <span class="ko">같은 이웃의 노래라도 다른 경계에서 틀면, 낯선 새의 울음으로 취급됐다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>The birds cannot tell neighbors from strangers at all.</li>
-      <li><span class="num">②</span>The birds associate a song with the place where it is heard.</li>
-      <li><span class="num">③</span>Song complexity decides how the birds respond.</li>
-      <li><span class="num">④</span>The birds always attack any song they hear.</li>
-      <li><span class="num">⑤</span>The birds ignore songs coming from other territories.</li>
-    </ul>
-  </div>
+  <div class="q"><div><span class="qn">Q1</span><span class="ask">밑줄 친 부분을 바르게 바꿔 말한 것은?</span></div>
+    <div class="src">"…than to abandon your dreams for <span class="u">an empty inbox</span>."</div>
+    <ul class="ch"><li><span class="num">①</span>keeping your email inbox completely empty</li><li><span class="num">②</span>responding to everyone's messages and requests</li><li><span class="num">③</span>ignoring all incoming emails forever</li><li><span class="num">④</span>organizing your daily work schedule</li><li><span class="num">⑤</span>deleting unimportant emails as fast as possible</li></ul></div>
 
-  <div class="q">
-    <div><span class="qn">Q4</span><span class="ask">밑줄 친 문장을 바르게 바꿔 말한 것은?</span></div>
-    <div class="src"><span class="u">"Proper planning forces detailed thinking about the project."</span>
-      <span class="ko">적절한 계획은 프로젝트에 대한 세밀한 사고를 강제한다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>Planning removes all risks from a project.</li>
-      <li><span class="num">②</span>Careful planning drives thorough consideration of the project.</li>
-      <li><span class="num">③</span>Detailed projects need very little planning.</li>
-      <li><span class="num">④</span>Thinking too much about a project wastes planning time.</li>
-      <li><span class="num">⑤</span>A good plan guarantees the project will succeed.</li>
-    </ul>
-  </div>
+  <div class="q"><div><span class="qn">Q2</span><span class="ask">다음 문장을 요약·패러프레이징한 것은?</span></div>
+    <div class="src">"We may not determine how or what a lion eats, but we certainly can regulate where the lion feeds."</div>
+    <ul class="ch"><li><span class="num">①</span>Humans control every part of animal behavior.</li><li><span class="num">②</span>Humans increasingly shape the setting in which nature operates.</li><li><span class="num">③</span>Lions freely decide where and what they eat.</li><li><span class="num">④</span>Nature regulates itself without any human influence.</li><li><span class="num">⑤</span>Feeding wild lions is nearly impossible to control.</li></ul></div>
 
-  <div class="q">
-    <div><span class="qn">Q5</span><span class="ask">다음 주장을 바르게 바꿔 말한 것은?</span></div>
-    <div class="src">"Creativity often flourishes when it is bounded; the boundary does not shrink the creative space."
-      <span class="ko">창의성은 제약이 있을 때 오히려 피어난다; 경계는 창의의 공간을 줄이지 않는다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>Unlimited freedom always produces the best ideas.</li>
-      <li><span class="num">②</span>Limits can actually enhance creative output.</li>
-      <li><span class="num">③</span>Strict boundaries destroy any chance of creativity.</li>
-      <li><span class="num">④</span>Creative people dislike following any rules.</li>
-      <li><span class="num">⑤</span>Bounded work tends to be less original than free work.</li>
-    </ul>
-  </div>
+  <div class="q"><div><span class="qn">Q3</span><span class="ask">실험 결과를 바르게 일반화한 것은?</span></div>
+    <div class="src">"If the same neighbor's song was played at another boundary, it was treated as the call of a stranger."</div>
+    <ul class="ch"><li><span class="num">①</span>The birds cannot tell neighbors from strangers at all.</li><li><span class="num">②</span>The birds associate a song with the place where it is heard.</li><li><span class="num">③</span>Song complexity decides how the birds respond.</li><li><span class="num">④</span>The birds always attack any song they hear.</li><li><span class="num">⑤</span>The birds ignore songs coming from other territories.</li></ul></div>
 
-  <div class="q">
-    <div><span class="qn">Q6</span><span class="ask">구체적 예시를 일반화한 표현으로 가장 적절한 것은?</span></div>
-    <div class="src">"A songwriter, an engineer, and a poet all did their best work under tight constraints."
-      <span class="ko">작곡가, 엔지니어, 시인 모두 빡빡한 제약 아래에서 최고의 작업을 해냈다.</span></div>
-    <ul class="ch">
-      <li><span class="num">①</span>Only professional artists benefit from constraints.</li>
-      <li><span class="num">②</span>People across different creative fields perform better under limits.</li>
-      <li><span class="num">③</span>Songwriters are more creative than engineers or poets.</li>
-      <li><span class="num">④</span>Constraints slow down everyone's work.</li>
-      <li><span class="num">⑤</span>Creative jobs require no rules at all.</li>
-    </ul>
-  </div>
+  <div class="q"><div><span class="qn">Q4</span><span class="ask">밑줄 친 문장을 바르게 바꿔 말한 것은?</span></div>
+    <div class="src"><span class="u">"Proper planning forces detailed thinking about the project."</span></div>
+    <ul class="ch"><li><span class="num">①</span>Planning removes all risks from a project.</li><li><span class="num">②</span>Careful planning drives thorough consideration of the project.</li><li><span class="num">③</span>Detailed projects need very little planning.</li><li><span class="num">④</span>Thinking too much about a project wastes planning time.</li><li><span class="num">⑤</span>A good plan guarantees the project will succeed.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q5</span><span class="ask">다음 주장을 바르게 바꿔 말한 것은?</span></div>
+    <div class="src">"Creativity often flourishes when it is bounded; the boundary does not shrink the creative space."</div>
+    <ul class="ch"><li><span class="num">①</span>Unlimited freedom always produces the best ideas.</li><li><span class="num">②</span>Limits can actually enhance creative output.</li><li><span class="num">③</span>Strict boundaries destroy any chance of creativity.</li><li><span class="num">④</span>Creative people dislike following any rules.</li><li><span class="num">⑤</span>Bounded work tends to be less original than free work.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q6</span><span class="ask">구체적 예시를 일반화한 표현으로 가장 적절한 것은?</span></div>
+    <div class="src">"A songwriter, an engineer, and a poet all did their best work under tight constraints."</div>
+    <ul class="ch"><li><span class="num">①</span>Only professional artists benefit from constraints.</li><li><span class="num">②</span>People across different creative fields perform better under limits.</li><li><span class="num">③</span>Songwriters are more creative than engineers or poets.</li><li><span class="num">④</span>Constraints slow down everyone's work.</li><li><span class="num">⑤</span>Creative jobs require no rules at all.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q7</span><span class="ask">밑줄 친 문장을 바르게 바꿔 말한 것은? (동의어)</span></div>
+    <div class="src"><span class="u">"The new tool enhances productivity."</span></div>
+    <ul class="ch"><li><span class="num">①</span>The tool boosts efficiency.</li><li><span class="num">②</span>The tool reduces the need for tools.</li><li><span class="num">③</span>The tool replaces workers entirely.</li><li><span class="num">④</span>The tool makes work impossible.</li><li><span class="num">⑤</span>The tool complicates the process.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q8</span><span class="ask">다음을 일반화한 표현으로 가장 적절한 것은? (구체→추상)</span></div>
+    <div class="src">"Bees, ants, and termites work together for the good of the colony."</div>
+    <ul class="ch"><li><span class="num">①</span>Only bees show real cooperation.</li><li><span class="num">②</span>Social insects act for the benefit of their group.</li><li><span class="num">③</span>Insects never cooperate with one another.</li><li><span class="num">④</span>Colonies harm the individual insects in them.</li><li><span class="num">⑤</span>Termites are the most intelligent insects.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q9</span><span class="ask">밑줄 친 문장을 바르게 바꿔 말한 것은? (반대구조)</span></div>
+    <div class="src"><span class="u">"Technology does not replace teachers; it supports them."</span></div>
+    <ul class="ch"><li><span class="num">①</span>Technology assists teachers rather than replacing them.</li><li><span class="num">②</span>Teachers are quickly becoming unnecessary.</li><li><span class="num">③</span>Technology fully substitutes for teachers.</li><li><span class="num">④</span>Good teaching requires no technology at all.</li><li><span class="num">⑤</span>Teachers tend to reject new technology.</li></ul></div>
+
+  <div class="q"><div><span class="qn">Q10</span><span class="ask">밑줄 친 비유를 직설로 바르게 옮긴 것은? (비유→직설)</span></div>
+    <div class="src">"Reading is <span class="u">a window to other worlds</span>."</div>
+    <ul class="ch"><li><span class="num">①</span>Reading lets us experience unfamiliar perspectives.</li><li><span class="num">②</span>Windows can help us read more easily.</li><li><span class="num">③</span>Books should contain more pictures.</li><li><span class="num">④</span>Other worlds are dangerous to explore.</li><li><span class="num">⑤</span>Reading narrows our imagination.</li></ul></div>
 
   <!-- ===== 정답 · 해설 ===== -->
   <div class="answers">
     <div class="box">
       <h3>정답 &amp; 해설 — 오답이 어떤 함정인지까지</h3>
+      <div class="ak"><span class="qn">Q1</span> 정답 <span class="cor">②</span> <span class="badge b-ok">비유→직설</span> "empty inbox"(비유)=남 메일 다 응대=남의 요구 만족.
+        <table><tr class="ok"><td class="oc">②</td><td>responding to everyone's messages <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>inbox 그대로 씀 <span class="badge b-copy">그대로 복사</span></td></tr>
+        <tr><td class="oc">③</td><td>메일을 영영 무시 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">④</td><td>일정 관리 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">⑤</td><td>중요치 않은 메일 삭제 <span class="badge b-dist">뜻 왜곡</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q1</span> 정답 <span class="cor">②</span> <span class="badge b-ok">비유→직설</span> "empty inbox"(비유) = 남의 메일 다 응대 = 남의 요구 만족.
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>responding to everyone's messages <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>inbox를 그대로 씀 <span class="badge b-copy">그대로 복사</span></td></tr>
-          <tr><td class="oc">③</td><td>메일을 영영 무시 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">④</td><td>일정 관리 <span class="badge b-off">무관</span></td></tr>
-          <tr><td class="oc">⑤</td><td>중요치 않은 메일 삭제 <span class="badge b-dist">뜻 왜곡</span></td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q2</span> 정답 <span class="cor">②</span> <span class="badge b-ok">구체→추상</span> 'where the lion feeds 규제'=자연의 '맥락'을 인간이 설정.
+        <table><tr class="ok"><td class="oc">②</td><td>humans shape the setting of nature <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>every part 통제 <span class="badge b-over">과장</span></td></tr>
+        <tr><td class="oc">③</td><td>사자가 자유롭게 결정 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">④</td><td>인간 영향 없이 자기조절 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">⑤</td><td>통제 불가능 <span class="badge b-dist">뜻 왜곡</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q2</span> 정답 <span class="cor">②</span> <span class="badge b-ok">구체→추상</span> "where the lion feeds 규제" = 자연이 작동하는 '맥락'을 인간이 설정.
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>humans shape the setting of nature <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>every part 통제 <span class="badge b-over">과장</span></td></tr>
-          <tr><td class="oc">③</td><td>사자가 자유롭게 결정 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">④</td><td>인간 영향 없이 자기조절 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">⑤</td><td>통제 불가능 <span class="badge b-dist">뜻 왜곡</span></td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q3</span> 정답 <span class="cor">②</span> <span class="badge b-ok">반대구조·추상</span> 위치 바뀌면 낯설게 취급=노래를 '장소'와 연결.
+        <table><tr class="ok"><td class="oc">②</td><td>associate a song with the place <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>구별 못 함 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">③</td><td>complexity가 결정 <span class="badge b-copy">그대로 복사</span></td></tr>
+        <tr><td class="oc">④</td><td>always attack <span class="badge b-over">과장</span></td></tr>
+        <tr><td class="oc">⑤</td><td>다른 영역 노래 무시 <span class="badge b-dist">뜻 왜곡</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q3</span> 정답 <span class="cor">②</span> <span class="badge b-ok">반대구조·추상</span> 같은 노래도 장소 바뀌면 낯설게 취급 = 노래를 '장소'와 연결.
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>associate a song with the place <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>구별 못 함 <span class="badge b-dist">뜻 반대</span>(지문은 discriminate)</td></tr>
-          <tr><td class="oc">③</td><td>complexity가 결정 <span class="badge b-copy">그대로 복사</span></td></tr>
-          <tr><td class="oc">④</td><td>always attack <span class="badge b-over">과장</span></td></tr>
-          <tr><td class="oc">⑤</td><td>다른 영역 노래 무시 <span class="badge b-dist">뜻 왜곡</span></td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q4</span> 정답 <span class="cor">②</span> <span class="badge b-ok">동의어</span> proper→careful, forces→drives, detailed thinking→thorough consideration.
+        <table><tr class="ok"><td class="oc">②</td><td>careful planning drives thorough consideration <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>모든 위험 제거 <span class="badge b-over">과장</span></td></tr>
+        <tr><td class="oc">③</td><td>계획 거의 불필요 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">④</td><td>사고가 시간 낭비 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">⑤</td><td>성공을 보장 <span class="badge b-over">과장</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q4</span> 정답 <span class="cor">②</span> <span class="badge b-ok">동의어 치환</span> proper→careful, forces→drives, detailed thinking→thorough consideration.
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>careful planning drives thorough consideration <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>모든 위험 제거 <span class="badge b-over">과장</span></td></tr>
-          <tr><td class="oc">③</td><td>계획 거의 불필요 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">④</td><td>사고가 시간 낭비 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">⑤</td><td>성공을 보장 <span class="badge b-over">과장</span>(지문은 not guarantee)</td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q5</span> 정답 <span class="cor">②</span> <span class="badge b-ok">반대구조</span> "does not shrink"=오히려 키운다(enhance).
+        <table><tr class="ok"><td class="oc">②</td><td>limits can enhance creative output <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>무한 자유가 최고 <span class="badge b-dist">통념·반대</span></td></tr>
+        <tr><td class="oc">③</td><td>제약이 창의성 파괴 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">④</td><td>규칙 싫어함 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">⑤</td><td>덜 독창적 <span class="badge b-dist">뜻 반대</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q5</span> 정답 <span class="cor">②</span> <span class="badge b-ok">반대구조</span> "does not shrink" = 오히려 키운다(enhance).
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>limits can enhance creative output <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>무한 자유가 최고 <span class="badge b-dist">통념·반대</span></td></tr>
-          <tr><td class="oc">③</td><td>제약이 창의성 파괴 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">④</td><td>규칙 싫어함 <span class="badge b-off">무관</span></td></tr>
-          <tr><td class="oc">⑤</td><td>덜 독창적 <span class="badge b-dist">뜻 반대</span></td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q6</span> 정답 <span class="cor">②</span> <span class="badge b-ok">구체→추상</span> 작곡가·엔지니어·시인=여러 창작 분야 사람들(상위어).
+        <table><tr class="ok"><td class="oc">②</td><td>people across creative fields <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>only artists <span class="badge b-over">축소·과장</span></td></tr>
+        <tr><td class="oc">③</td><td>작곡가가 더 창의적 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">④</td><td>모두 느려짐 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">⑤</td><td>규칙 전혀 불필요 <span class="badge b-dist">뜻 반대</span></td></tr></table></div>
 
-      <div class="ak"><span class="qn">Q6</span> 정답 <span class="cor">②</span> <span class="badge b-ok">구체→추상</span> 작곡가·엔지니어·시인 = 여러 창작 분야 사람들(상위어).
-        <table>
-          <tr class="ok"><td class="oc">②</td><td>people across creative fields <span class="badge b-ok">정답</span></td></tr>
-          <tr><td class="oc">①</td><td>only artists <span class="badge b-over">축소·과장</span></td></tr>
-          <tr><td class="oc">③</td><td>작곡가가 더 창의적 <span class="badge b-off">무관</span></td></tr>
-          <tr><td class="oc">④</td><td>모두 느려짐 <span class="badge b-dist">뜻 반대</span></td></tr>
-          <tr><td class="oc">⑤</td><td>규칙 전혀 불필요 <span class="badge b-dist">뜻 반대</span></td></tr>
-        </table>
-      </div>
+      <div class="ak"><span class="qn">Q7</span> 정답 <span class="cor">①</span> <span class="badge b-ok">동의어</span> enhance→boost, productivity→efficiency.
+        <table><tr class="ok"><td class="oc">①</td><td>boosts efficiency <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">②</td><td>도구 필요 줄임 <span class="badge b-dist">뜻 왜곡</span></td></tr>
+        <tr><td class="oc">③</td><td>노동자 대체 <span class="badge b-over">과장</span></td></tr>
+        <tr><td class="oc">④</td><td>일을 불가능하게 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">⑤</td><td>과정을 복잡하게 <span class="badge b-dist">뜻 반대</span></td></tr></table></div>
 
+      <div class="ak"><span class="qn">Q8</span> 정답 <span class="cor">②</span> <span class="badge b-ok">구체→추상</span> bees·ants·termites→social insects, colony→group.
+        <table><tr class="ok"><td class="oc">②</td><td>social insects act for their group <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">①</td><td>only bees <span class="badge b-over">축소</span></td></tr>
+        <tr><td class="oc">③</td><td>협력 안 함 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">④</td><td>군집이 개체에 해 <span class="badge b-dist">뜻 왜곡</span></td></tr>
+        <tr><td class="oc">⑤</td><td>흰개미가 가장 똑똑 <span class="badge b-off">무관</span></td></tr></table></div>
+
+      <div class="ak"><span class="qn">Q9</span> 정답 <span class="cor">①</span> <span class="badge b-ok">반대구조</span> "not replace but support"=assist rather than replace.
+        <table><tr class="ok"><td class="oc">①</td><td>assists rather than replacing <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">②</td><td>교사 불필요 <span class="badge b-dist">뜻 반대</span></td></tr>
+        <tr><td class="oc">③</td><td>완전히 대체 <span class="badge b-copy">그대로 복사(replace)</span></td></tr>
+        <tr><td class="oc">④</td><td>기술 전혀 불필요 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">⑤</td><td>교사가 기술 거부 <span class="badge b-off">무관</span></td></tr></table></div>
+
+      <div class="ak"><span class="qn">Q10</span> 정답 <span class="cor">①</span> <span class="badge b-ok">비유→직설</span> "window to other worlds"=낯선 시야를 경험함.
+        <table><tr class="ok"><td class="oc">①</td><td>experience unfamiliar perspectives <span class="badge b-ok">정답</span></td></tr>
+        <tr><td class="oc">②</td><td>창문이 독서를 도움 <span class="badge b-copy">그대로 복사(window)</span></td></tr>
+        <tr><td class="oc">③</td><td>그림 더 넣어야 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">④</td><td>다른 세계는 위험 <span class="badge b-off">무관</span></td></tr>
+        <tr><td class="oc">⑤</td><td>상상력을 좁힘 <span class="badge b-dist">뜻 반대</span></td></tr></table></div>
     </div>
   </div>
 
