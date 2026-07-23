@@ -16,13 +16,74 @@ IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 # ---------------------------------------------------------------------------
 # 파일 → 원문 텍스트
 # ---------------------------------------------------------------------------
+_HANGUL_CHAR = re.compile(r"[가-힣ㄱ-ㅎㅏ-ㅣ]")
+
+
+def _strip_trailing_name_echo(txt: str) -> str:
+    """줄 끝에 붙은 '해석부 첫 인물명' 겹침 제거.
+
+    직독직해는 해석문이 대개 주어(인물명)로 시작해, 영어부를 잘라도 그 이름이 줄 끝에
+    한 번 더 남는다. 앞쪽에 이미 나온 대문자 토큰이 줄 끝에 반복되면 그것만 걷어낸다.
+    """
+    toks = txt.split()
+    def norm(w: str) -> str:
+        return re.sub(r"""[^A-Za-z]""", "", w)
+    while len(toks) >= 2:
+        last = norm(toks[-1])
+        if last and last[:1].isupper() and last in {norm(t) for t in toks[:-1]}:
+            toks.pop()
+        else:
+            break
+    return " ".join(toks)
+
+
+def _page_english_rows(page) -> str:
+    """페이지를 줄(행) 단위로 재구성하되, 각 줄에서 '첫 한글 앞 영어부'만 남긴다.
+
+    직독직해/워크북처럼 한 줄에 [영어 원문][한글 해석]이 나란한 자료에서, 한글 해석과
+    거기 섞인 인물명 겹침·머리말·쪽번호를 제거해 영어 지문만 복원한다
+    (설명형 지문은 거의 완벽히 정리되고, 서사형은 인물명 겹침까지 대부분 제거).
+    """
+    words = page.extract_words(use_text_flow=False)
+    if not words:
+        return page.extract_text() or ""
+    rows: dict[float, list] = {}
+    for w in words:
+        rows.setdefault(round(w["top"] / 3.0), []).append(w)
+    out: list[str] = []
+    for key in sorted(rows):
+        ws = sorted(rows[key], key=lambda w: w["x0"])
+        txt = " ".join(w["text"] for w in ws)
+        m = _HANGUL_CHAR.search(txt)
+        had_ko = m is not None
+        if had_ko:                              # 첫 한글부터 뒤(=해석부)를 잘라낸다
+            txt = txt[:m.start()]
+        txt = _SRC_NOISE.sub(" ", txt)          # WORKBOOK·쪽번호·워터마크 제거
+        txt = _STUDY_HEADER.sub(" ", txt)
+        txt = re.sub(r"[。·※▶◀‣・｜┃]", " ", txt)
+        txt = re.sub(r"\s{2,}", " ", txt).strip()
+        if not _EN_WORD.search(txt):            # 영어 단어가 없으면 머리말/잡음 → 버림
+            continue
+        if had_ko:
+            txt = _strip_trailing_name_echo(txt)
+        if txt:
+            out.append(txt)
+    return "\n".join(out)
+
+
 def _read_pdf(path: Path) -> str:
     import pdfplumber
-    parts: list[str] = []
+    plain: list[str] = []
+    rows_en: list[str] = []
     with pdfplumber.open(str(path)) as pdf:
         for page in pdf.pages:
-            parts.append(page.extract_text() or "")
-    return "\n".join(parts)
+            plain.append(page.extract_text() or "")
+            rows_en.append(_page_english_rows(page))
+    full = "\n".join(plain)
+    # 이중언어(직독직해/워크북)면 줄 단위로 한글 해석을 제거한 영어본을 쓴다.
+    if _is_bilingual_study(full):
+        return "\n\n".join(r for r in rows_en if r.strip())
+    return full
 
 
 def _read_image_ocr(path: Path) -> str:
@@ -136,7 +197,8 @@ _STUDY_HEADER = re.compile(
     r"(?:Ch(?:apter|\.)?|Unit|Lesson|Day|Test|Week|Part|Step|Mini\s*Test|"
     r"Review|Actual\s*Test|모의고사|실전|어법|지문|Passage)\s*\.?\s*\d+"
     r"(?:\s*[-–~]\s*\d+)?\s*번?"
-    r"|\d+\s*(?:강|회|일차)\b", re.I)
+    r"|\d+\s*(?:강|회|일차)\b"
+    r"|\d{1,3}\s*번", re.I)                             # 18번·21번 등 문항번호 머리말
 
 # 출처·워터마크·저작권 노이즈(교재/블로그/카페 등)
 _SRC_NOISE = re.compile(
@@ -144,6 +206,11 @@ _SRC_NOISE = re.compile(
     r"|한줄해석\([^)]*\)|좌지문우해석|우지문좌해석|직독직해"
     r"|올림포스[가-힣0-9]*|수능특강[가-힣0-9]*|수능완성[가-힣0-9]*"
     r"|마더텅|자이스토리|능률|천재교육|비상교육|지학사|블랙라벨|한수영어"
+    # 워크북/모의고사 머리말·쪽번호·워터마크
+    r"|WORKBOOK\s*\d*|WORK\s*BOOK|Learning\s*Guide|지문\s*연습(?:하기)?|지문연습"
+    r"|단계별|모의평가|한국교육과정평가원|평가원|교육청|수능|기출"
+    r"|(?<!\d)-\s*\d{1,3}\s*-(?!\d)"                    # - 3 - 형태 쪽번호
+    r"|┃|｜"                                            # 세로 구분자
     r"|(?:https?://)?[\w.-]+\.(?:com|net|kr|co\.kr|tistory\.com|blog\.[\w.-]+)"
     r"(?:/[\w\-./?=&%]*)?"
     r"|Copyright[^\n]*|All\s+rights\s+reserved|무단\s*복제[^\n]*", re.I)

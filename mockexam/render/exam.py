@@ -32,8 +32,8 @@ _BOGI_TYPES = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arra
 
 # 한글 본문 글꼴: 학교 시험지(HWP) 기본 명조인 함초롬바탕을 1순위로,
 # 미설치 환경을 위해 바탕/Batang → Noto Serif KR 순으로 대체.
-_SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif KR',"
-          "'Nanum Myeongjo','Times New Roman',serif")
+_SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif CJK KR',"
+          "'Noto Serif KR','NanumMyeongjo','Nanum Myeongjo','Times New Roman',serif")
 
 _CSS = f"""
 * {{ box-sizing: border-box; }}
