@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus"
 PDF_DIR = CORPUS / "pdfs"
 BANK = CORPUS / "passage_bank.jsonl"
+INPUT_DIR = ROOT / "input"   # 구문해설 도구의 처리 큐(공유 대상)
 
 CIRCLED = "①②③④⑤"
 
@@ -159,13 +160,26 @@ def save_bank(rows):
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
-def ingest(pdf_path: Path, quiet: bool = False):
+def ingest(pdf_path: Path, quiet: bool = False, share_to_input: bool = True):
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     data = pdf_path.read_bytes()
     h = hashlib.sha1(data).hexdigest()[:12]
     saved = PDF_DIR / f"{h}_{pdf_path.name}"
-    if not saved.exists():
+    is_new = not saved.exists()
+    if is_new:
         shutil.copy2(pdf_path, saved)
+        # 새 PDF면 구문해설 도구의 처리 큐(input/)에도 넣어 '공유'한다.
+        # (형광펜 교재가 입력 창구 → 구문해설이 같은 지문을 받아 분석)
+        if share_to_input:
+            try:
+                INPUT_DIR.mkdir(parents=True, exist_ok=True)
+                dst = INPUT_DIR / pdf_path.name
+                if not dst.exists():
+                    shutil.copy2(pdf_path, dst)
+                    if not quiet:
+                        print(f"[공유] 구문해설 큐에 추가: input/{pdf_path.name}")
+            except Exception:
+                pass
 
     records, pages = parse_pdf(pdf_path)
     bank = load_bank()
