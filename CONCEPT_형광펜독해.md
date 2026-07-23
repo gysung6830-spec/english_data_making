@@ -48,6 +48,31 @@
 
 ---
 
+## 2-1. 두 번째 엔진 — 「패러프레이즈 캐치법」 (정답 찍는 핵심)
+
+**원리: 정답은 뜻은 같고 단어를 바꾼다. 오답은 단어를 그대로 두고 뜻을 왜곡한다.**
+평가원 정답은 지문의 paraphrase, 오답은 지문 단어의 표면 복사. 그래서 "빨리 캐치 = 빨리 정답".
+
+**3초 캐치 절차**
+1. 형광펜 문장의 **핵심어에 ○**
+2. 선지 스캔 — **지문 단어를 그대로 복사한 선지 = 함정, 먼저 소거** / **뜻이 다른 단어로 바뀐 선지 = 정답 후보**
+3. 남은 '바꿔 말한' 선지가 정답
+
+**평가원 단골 변환 패턴 (사전화)**
+
+| 패턴 | 지문 → 정답 선지 |
+|---|---|
+| 동의어 치환 | regulate/set → control·determine·govern |
+| 구체→추상(상위어) | lion·songwriter·engineer → creatures·creative people |
+| 품사 전환 | decide(동) → decision·decision-making(명) |
+| 반대구조 | does not shrink → expands / only at boundary → associate location |
+| 비유→직설 | an empty inbox → satisfying others' demands |
+
+> 카드마다 **「패러프레이즈 캐치」 줄** 1개: `지문어 ⟷ 정답어`(교체) 표시 + 오답의 '그대로 복사'를 빨강 표시.
+> 검증(2022 6월): 34번 `boundary/territory`→`locality`(동의·추상), 오답 `complexity·recorded` 복사 / 21번 `empty inbox`(비유)→`others' demands`(직설), 오답 `social` 복사.
+
+---
+
 ## 3. 문항 1개 = 학습 루프 4단계 (이게 훈련서의 핵심)
 
 각 기출 문항을 이 흐름으로 훈련시킨다. **글은 최소, 한 문항 = 반쪽.**

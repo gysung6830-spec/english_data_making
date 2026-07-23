@@ -70,6 +70,25 @@ mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); paddin
 .formula{ margin-top:8px; background:#effafa; border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:10px; }
 .formula .k{ background:var(--ink); color:#fff; font-size:8px; padding:1px 6px; border-radius:8px; margin-right:6px; }
 
+/* 패러프레이즈 엔진 */
+.para{ background:#fff; border:2px solid #7a4bb3; border-radius:8px; padding:12px 15px; margin-bottom:16px; }
+.para h3{ margin:0 0 6px; font-size:12.5px; color:#5a3a86; }
+.para h3 small{ font-weight:600; color:var(--muted); font-size:9px; }
+.para .steps{ font-size:9.6px; margin:4px 0 8px; }
+.para .steps b{ color:#5a3a86; }
+.para .swap{ display:inline-block; background:#f3edfa; border:1px solid #d9c9f0; border-radius:4px; padding:0 5px; font-weight:700; color:#5a3a86; }
+table.pt{ width:100%; border-collapse:collapse; font-size:9.3px; }
+table.pt th{ background:#7a4bb3; color:#fff; padding:3px 8px; text-align:left; font-weight:700; }
+table.pt td{ padding:3px 8px; border-bottom:1px solid var(--line); }
+table.pt tbody tr:nth-child(even) td{ background:#faf7fd; }
+.pt .pat{ font-weight:800; color:#5a3a86; white-space:nowrap; }
+/* 카드 내 패러프레이즈 캐치 줄 */
+.pline{ margin-top:6px; background:#f7f3fc; border-left:3px solid #7a4bb3; border-radius:0 5px 5px 0; padding:5px 9px; font-size:9.5px; }
+.pline .lb{ font-size:8px; font-weight:800; color:#fff; background:#7a4bb3; border-radius:8px; padding:1px 6px; margin-right:5px; }
+.pline .sw{ background:#ece3f8; border-radius:3px; padding:0 4px; font-weight:700; color:#5a3a86; }
+.pline .cp{ background:#ffe0dd; border-radius:3px; padding:0 4px; font-weight:700; color:#a5342d; }
+.pline .arw{ color:#7a4bb3; font-weight:800; }
+
 /* 해석 카드 (2단: 영어 | 한글) */
 .card.trans{ border-left:5px solid var(--src-line); }
 table.tr2{ width:100%; border-collapse:collapse; table-layout:fixed; }
@@ -111,6 +130,25 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
     <div class="note">※ 카드에는 <b>그 지문에서 실제로 울린 신호 2~3개만</b> 표시한다. 사전은 풍부하게, 카드는 간결하게.</div>
   </div>
 
+  <!-- ============ 패러프레이즈 캐치법 ============ -->
+  <div class="para">
+    <h3>🔁 패러프레이즈 3초 캐치법 <small>— 정답을 '찍는' 핵심 기술</small></h3>
+    <div class="steps">
+      원리: <b>정답은 뜻은 같고 단어를 바꾼다. 오답은 단어를 그대로 두고 뜻을 왜곡한다.</b><br>
+      ① 형광펜 문장 <b>핵심어에 ○</b> &nbsp;→&nbsp; ② 선지 스캔: <span class="swap">지문 단어 그대로 복사</span> = <b>함정 먼저 소거</b> / <b>뜻이 다른 단어로 바뀐</b> 선지 = 정답 후보 &nbsp;→&nbsp; ③ 남은 '바꿔 말한' 선지가 정답
+    </div>
+    <table class="pt">
+      <thead><tr><th style="width:26%">평가원 단골 변환</th><th>지문 &nbsp;→&nbsp; 정답 선지</th></tr></thead>
+      <tbody>
+        <tr><td class="pat">동의어 치환</td><td>regulate/set → <b>control·determine·govern</b></td></tr>
+        <tr><td class="pat">구체→추상(상위어)</td><td>lion·songwriter·engineer → <b>creatures·creative people</b></td></tr>
+        <tr><td class="pat">품사 전환</td><td>decide(동) → <b>decision·decision-making</b>(명)</td></tr>
+        <tr><td class="pat">반대구조</td><td>does not shrink → <b>expands</b> / only at boundary → <b>associate location</b></td></tr>
+        <tr><td class="pat">비유→직설</td><td>an empty inbox → <b>satisfying others' demands</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <!-- ============ 34번 훈련 카드 ============ -->
   <div class="card">
     <div class="hd">
@@ -131,6 +169,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
       <div class="r"><span class="s"><span class="tag hot">한정+조건</span></span><span class="d"><b>only when / If ~ another boundary</b> = 조건이 결과를 뒤집는 곳 → <b>빈칸 정답은 여기서</b></span></div>
     </div>
     <div class="line"><span class="lb src">근거</span><span>같은 노래도 <b>경계(장소)</b>가 바뀌면 낯선 새로 취급 <span class="arw">⟶</span> 노래를 '<b>장소</b>'와 묶어 인식</span></div>
+    <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">boundary·territory (장소)</span> <span class="arw">→</span> 정답 ④ <span class="sw">locality</span> (동의·추상) ✓ &nbsp;/&nbsp; 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> = 지문어 <b>그대로 복사</b> 함정</div>
     <div class="opts">
       <div class="opt ok"><span class="n">④</span><span class="tx">the robins associate <b>locality</b> with familiar songs</span><span class="jd">✔ 위치+노래 = 근거 그대로</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">variety and <span class="reuse">complexity</span> characterize the songs</span><span class="jd">✘ 'complex' 표면어휘 함정</span></div>
@@ -186,6 +225,7 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
       <div class="r"><span class="s"><span class="tag hot">역접</span></span><span class="d"><b>But ~ abandon your dreams for</b> = 밑줄을 '버려야 할 나쁜 것'으로 못박음 → ± 판정 끝</span></div>
     </div>
     <div class="line"><span class="lb pat">패턴</span><span>밑줄 <b>±</b>부터 → 부정. "꿈을 버리고 얻는 것" = 남 메일 다 응대 <span class="arw">⟶</span> 남을 만족시키려는 것</span></div>
+    <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">an empty inbox (비유)</span> <span class="arw">→</span> 정답 ② <span class="sw">satisfy others' demands</span> (비유→직설) ✓ &nbsp;/&nbsp; 오답 ④⑤ <span class="cp">social</span> = 지문어 <b>그대로 복사</b> 함정</div>
     <div class="opts">
       <div class="opt ok"><span class="n">②</span><span class="tx">attempting to satisfy <b>other people's demands</b></span><span class="jd">✔ '남 메일 응대'의 추상화</span></div>
       <div class="opt x"><span class="n">①</span><span class="tx">following an <span class="reuse">innovative</span> course of action</span><span class="jd">✘ 긍정어 → ± 반대</span></div>
