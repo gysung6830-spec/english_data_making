@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>유형 풀이 전략지 — 빈칸추론(31–34) 샘플</title>
+<style>
+/* ============================================================
+   유형 풀이 전략지 — 빈칸추론(31–34) 완성 샘플
+   기존 분석지 톤(나눔고딕·색배지·zebra) 위에
+   풀이 시그니처 컬러 = 남색(teal-navy), 형광펜 2색 추가
+   ============================================================ */
+@page { size: A4; margin: 10mm 11mm 12mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: "NanumGothic","Nanum Gothic","Malgun Gothic","맑은 고딕",sans-serif;
+  color:#23272e; font-size:10px; line-height:1.5; margin:0;
+  background:#f4f5f7; padding:16px;
+}
+.sheet { background:#fff; max-width:820px; margin:0 auto; padding:22px 26px;
+  box-shadow:0 1px 8px rgba(0,0,0,.12); border-radius:6px; }
+
+:root{
+  --ink:#1f6f78;         /* 풀이 시그니처: 틸-네이비 */
+  --ink-d:#12525a;
+  --must:#fff3bf;        /* 🟡 무조건 읽기 형광펜 */
+  --must-line:#e6b800;
+  --skip:#eceff1;        /* ⬜ 스킵 형광펜 */
+  --skip-tx:#9aa0a6;
+  --ans:#e8f5e9;         /* 정답 근거 */
+  --ans-line:#3d8f58;
+  --trap:#fdecea;        /* 오답 함정 */
+  --trap-line:#cd5049;
+  --muted:#6b7280; --line:#e5e7eb;
+}
+
+/* 헤더 */
+.doc-header{ border-bottom:2.5px solid var(--ink-d); padding-bottom:7px; margin-bottom:12px; }
+.doc-badge{ display:inline-block; background:var(--ink-d); color:#fff; font-size:10px;
+  font-weight:700; padding:2px 9px; border-radius:4px; margin-bottom:4px; }
+.doc-title{ font-size:18px; font-weight:800; margin:2px 0; }
+.doc-sub{ font-size:10px; color:var(--muted); }
+.meta-row{ display:flex; gap:6px; flex-wrap:wrap; margin-top:7px; }
+.chip{ font-size:9px; font-weight:700; padding:2px 9px; border-radius:11px;
+  border:1px solid var(--ink); color:var(--ink-d); background:#effafa; }
+.chip.hot{ background:var(--ink-d); color:#fff; border-color:var(--ink-d); }
+
+/* 섹션 공통 */
+.section{ margin:0 0 13px; }
+.section-head{ display:flex; align-items:center; gap:7px; margin-bottom:6px; }
+.sec-num{ display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;
+  border-radius:50%; background:var(--ink); color:#fff; font-size:11px; font-weight:800; flex:none; }
+.sec-title{ font-size:13.5px; font-weight:800; color:var(--ink-d); }
+.sec-sub{ font-size:9px; color:var(--muted); font-weight:600; }
+
+/* 형광펜 범례 */
+.legend{ display:flex; gap:14px; font-size:9.5px; font-weight:700; margin:2px 0 7px; }
+.legend span{ display:inline-flex; align-items:center; gap:4px; }
+.sw{ width:15px; height:11px; border-radius:2px; display:inline-block; }
+.sw.must{ background:var(--must); border:1px solid var(--must-line); }
+.sw.skip{ background:var(--skip); }
+
+/* 지문 박스 (형광펜 리딩) */
+.passage{ border:1px solid var(--line); border-radius:6px; padding:12px 14px;
+  line-height:1.85; font-size:10.5px; background:#fff; }
+.passage .num{ font-weight:800; color:var(--ink-d); }
+mark.must{ background:var(--must); padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 var(--must-line); }
+.skip{ color:var(--skip-tx); }
+.blank{ display:inline-block; min-width:74px; border-bottom:2px solid #111; text-align:center;
+  color:#111; font-weight:800; }
+.ans-src{ background:var(--ans); box-shadow:inset 0 -2px 0 var(--ans-line); padding:0 2px; border-radius:2px; }
+.tag-src{ display:inline-block; font-size:8px; font-weight:800; color:#fff; background:var(--ans-line);
+  border-radius:8px; padding:0 6px; margin-left:3px; vertical-align:1px; }
+
+/* 신호어 규칙표 */
+table.rules{ width:100%; border-collapse:collapse; font-size:9.5px; margin-top:2px; }
+table.rules th{ background:var(--ink); color:#fff; font-weight:700; padding:4px 8px; text-align:left; }
+table.rules td{ padding:4px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.rules tbody tr:nth-child(even) td{ background:#f5fafa; }
+.judge{ font-weight:800; white-space:nowrap; }
+.judge.m{ color:#a86b00; } .judge.s{ color:var(--skip-tx); }
+code.sig{ background:#eef2f3; border:1px solid var(--line); border-radius:3px;
+  padding:0 5px; font-family:inherit; font-weight:700; color:var(--ink-d); }
+
+/* 정답 근거 박스 */
+.ans-box{ background:var(--ans); border-left:3px solid var(--ans-line); border-radius:0 5px 5px 0;
+  padding:9px 12px; }
+.ans-box .lbl{ background:var(--ans-line); color:#fff; font-size:9px; font-weight:800;
+  padding:1px 7px; border-radius:9px; margin-right:5px; }
+
+/* 추상화 해부 */
+table.abx-t{ width:100%; border-collapse:collapse; font-size:9.5px; }
+table.abx-t th{ background:var(--ink); color:#fff; padding:4px 8px; text-align:left; font-weight:700; }
+table.abx-t td{ padding:5px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+.concrete{ color:var(--muted); }
+.arrow{ color:var(--ink); font-weight:800; text-align:center; }
+.abstract{ color:var(--ink-d); font-weight:700; }
+/* 선지 판정 */
+.opts{ margin-top:8px; }
+.opt{ padding:5px 10px; border-radius:5px; margin-bottom:4px; font-size:9.8px; line-height:1.45;
+  border:1px solid var(--line); }
+.opt .no{ font-weight:800; margin-right:5px; }
+.opt.correct{ background:var(--ans); border-color:var(--ans-line); }
+.opt.correct .no{ color:var(--ans-line); }
+.opt.trap{ background:var(--trap); border-color:#f2c4c0; }
+.opt .why{ display:block; font-size:8.8px; color:var(--muted); margin-top:2px; }
+.opt.correct .why{ color:#2f6b41; font-weight:700; }
+.opt.trap .why{ color:#a5342d; font-weight:700; }
+.reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; }
+
+/* 시간 전략 + 카드 (2단) */
+.two{ display:flex; gap:12px; }
+.two > div{ flex:1; }
+.time-box{ border:1px solid var(--line); border-radius:6px; padding:9px 11px; background:#fbfbfc; }
+.time-box h4{ margin:0 0 5px; font-size:10.5px; color:var(--ink-d); }
+.time-box ul{ margin:0; padding-left:16px; }
+.time-box li{ margin-bottom:3px; }
+.card{ border:2px solid var(--ink); border-radius:8px; padding:10px 12px; background:#effafa; }
+.card h4{ margin:0 0 5px; font-size:11px; color:var(--ink-d); }
+.card .step{ display:block; margin-bottom:3px; }
+.card .k{ display:inline-block; width:15px; height:15px; line-height:15px; text-align:center;
+  background:var(--ink); color:#fff; border-radius:50%; font-size:8.5px; font-weight:800; margin-right:5px; }
+.card .oneline{ margin-top:6px; padding-top:6px; border-top:1px dashed var(--ink);
+  font-weight:800; color:var(--ink-d); }
+
+.footer-note{ margin-top:14px; padding-top:7px; border-top:1px solid var(--line);
+  font-size:8.5px; color:var(--muted); text-align:center; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- 헤더 -->
+  <div class="doc-header">
+    <span class="doc-badge">유형 풀이 전략지</span>
+    <div class="doc-title">빈칸추론 — "다 읽지 말고, 재진술만 잡아라"</div>
+    <div class="doc-sub">3~5등급 → 2등급 · 실제 지문 위에서 익히는 풀이 알고리즘</div>
+    <div class="meta-row">
+      <span class="chip hot">31–34번대</span>
+      <span class="chip">유형: 빈칸추론(구/절)</span>
+      <span class="chip">배점 2~3점 · 킬러</span>
+      <span class="chip">목표 시간 1'40"</span>
+    </div>
+  </div>
+
+  <!-- ① 번호·유형 판별 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">1</span>
+      <span class="sec-title">이 문제가 뭘 묻나</span>
+      <span class="sec-sub">빈칸 = 글의 핵심을 '다른 말로' 다시 쓴 것을 고르는 문제</span>
+    </div>
+    <div class="ans-box" style="background:#effafa;border-left-color:var(--ink)">
+      <span class="lbl" style="background:var(--ink)">한 문장</span>
+      빈칸추론은 <b>새 정보를 찾는 게 아니라</b>, 지문이 이미 말한 주제문을 <b>추상적으로 바꿔 쓴 선지</b>를 찾는 문제다.
+      그래서 <b>빈칸 문장 + 그것과 짝이 되는 재진술 문장</b>만 정확히 읽으면 풀린다. 예시는 안 읽어도 된다.
+    </div>
+  </div>
+
+  <!-- ② 형광펜 리딩 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">2</span>
+      <span class="sec-title">형광펜 리딩 — 무조건 읽기 / 스킵</span>
+    </div>
+    <div class="legend">
+      <span><i class="sw must"></i> 🟡 무조건 읽기 (주제·역접·결론·빈칸)</span>
+      <span><i class="sw skip"></i> ⬜ 스킵 가능 (예시·부연)</span>
+      <span><i class="sw" style="background:var(--ans);box-shadow:inset 0 -2px 0 var(--ans-line)"></i> 정답 근거</span>
+    </div>
+    <div class="passage">
+      <span class="num">[31] </span>
+      <mark class="must">Contrary to the popular belief that unlimited freedom sparks the best ideas, creativity often flourishes when it is bounded.</mark>
+      <span class="skip">When people face no restrictions, they tend to fall back on the most familiar and conventional solutions, because the sheer number of possibilities is overwhelming.</span>
+      <span class="skip">For example, a songwriter told to "write any song" frequently produces something derivative, whereas one asked to compose within a strict form is pushed to search unexplored corners of language.</span>
+      <span class="skip">Similarly, engineers working with a tight budget often devise more elegant designs than those with endless resources, precisely because scarcity forces them to question assumptions they would otherwise accept.</span>
+      <mark class="must">In each case, the boundary does not shrink the creative space; it <span class="blank">&nbsp;31&nbsp;</span>.</mark>
+      <mark class="must ans-src">The limitation becomes a lens that concentrates attention and turns obstacles into the very source of originality.<span class="tag-src">정답 근거</span></mark>
+    </div>
+  </div>
+
+  <!-- ③ 걸러내기 신호어 규칙 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">3</span>
+      <span class="sec-title">어떻게 걸러냈나 — 신호어 규칙</span>
+      <span class="sec-sub">감이 아니라 '신호어'로 무조건/스킵을 판정</span>
+    </div>
+    <table class="rules">
+      <thead><tr><th style="width:34%">이 지문의 신호</th><th style="width:12%">판정</th><th>이유</th></tr></thead>
+      <tbody>
+        <tr><td><code class="sig">Contrary to the belief…</code></td><td class="judge m">🟡 무조건</td><td>통념 뒤집기 = 진짜 주제가 바로 뒤에 온다</td></tr>
+        <tr><td><code class="sig">For example</code> / <code class="sig">Similarly</code></td><td class="judge s">⬜ 스킵</td><td>예시·병렬 사례. 주제의 '근거'일 뿐, 주제 자체가 아님</td></tr>
+        <tr><td><code class="sig">In each case</code></td><td class="judge m">🟡 무조건</td><td>사례를 일반화해 주제로 회귀 → 빈칸 문장</td></tr>
+        <tr><td>빈칸 문장 &amp; 바로 뒤 재진술 문장</td><td class="judge m">🟡 무조건</td><td>빈칸 = 재진술. 답의 근거는 항상 이 짝에 있다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ④ 정답 근거 지점 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">4</span>
+      <span class="sec-title">정답이 결정되는 지점</span>
+    </div>
+    <div class="ans-box">
+      <span class="lbl">근거 문장</span>
+      <i>"The limitation becomes a lens that <b>concentrates attention</b> and turns obstacles into <b>the very source of originality</b>."</i>
+      <div style="margin-top:5px">
+        빈칸 문장 <b>"boundary does not shrink the creative space; it ___"</b> 은 이 문장의 <b>재진술</b>이다.
+        즉 빈칸 = "제약이 창의 공간을 <u>줄이는 게 아니라 오히려 ~하게 한다</u>" → 근거 문장이 말한 <b>'집중시키고 새 원천으로 돌린다'</b> 를 빈칸에 넣으면 된다.
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 평가원 추상화 해부 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">5</span>
+      <span class="sec-title">평가원은 이렇게 어렵게 낸다 — 추상화 해부</span>
+      <span class="sec-sub">정답=구체표현을 추상화 / 오답=지문 단어를 그대로 재사용한 함정</span>
+    </div>
+    <table class="abx-t">
+      <thead><tr><th style="width:47%">지문의 구체 표현</th><th style="width:6%"></th><th>정답 선지의 추상 표현</th></tr></thead>
+      <tbody>
+        <tr><td class="concrete">"search unexplored corners", "question assumptions they would otherwise accept"</td><td class="arrow">→</td><td class="abstract">overlooked possibilities (간과된 가능성)</td></tr>
+        <tr><td class="concrete">"concentrates attention", "does not shrink … the space"</td><td class="arrow">→</td><td class="abstract">redirects energy toward ~ (에너지를 ~로 돌린다)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="opts">
+      <div class="opt correct"><span class="no">②</span> redirects energy toward possibilities that would otherwise be overlooked
+        <span class="why">✔ 정답 — 지문의 구체 사례를 '간과된 가능성으로 에너지를 돌린다'로 추상화. 지문 단어를 그대로 쓰지 않음</span></div>
+      <div class="opt trap"><span class="no">③</span> guarantees a wider range of <span class="reuse">familiar</span> outcomes
+        <span class="why">✘ 함정 — 지문 단어 'familiar' 재사용. 하지만 글은 familiar에서 '벗어난다'는 내용 → 논리 반대</span></div>
+      <div class="opt trap"><span class="no">⑤</span> reduces the <span class="reuse">effort</span> required to find a <span class="reuse">solution</span>
+        <span class="why">✘ 함정 — 'effort·solution' 표면어휘 매칭. 제약은 노력을 '줄이는' 게 아니라 '집중'시킴 → 반대</span></div>
+    </div>
+  </div>
+
+  <!-- ⑥ 시간 전략 + 공식카드 -->
+  <div class="section">
+    <div class="section-head">
+      <span class="sec-num">6</span>
+      <span class="sec-title">시간 전략 &amp; 공식 카드</span>
+    </div>
+    <div class="two">
+      <div class="time-box">
+        <h4>⏱ 시간 운용 (목표 1'40")</h4>
+        <ul>
+          <li><b>0–30초</b>: 첫 문장 + 빈칸 문장만 먼저 읽고 '무엇을 묻나' 파악</li>
+          <li><b>30–70초</b>: 빈칸과 짝인 <b>재진술 문장</b>만 찾아 읽기 (예시는 스킵)</li>
+          <li><b>70–100초</b>: 선지에서 <b>지문 단어 그대로 쓴 것</b> 먼저 소거 → 남은 추상 선지 확정</li>
+          <li><b>버리기 기준</b>: 재진술 문장을 못 찾겠으면 100초에서 <b>주제와 가장 가까운 추상 선지 찍고 넘어감</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>📇 빈칸 공식 카드</h4>
+        <span class="step"><span class="k">1</span>통념 뒤집기·역접 뒤 = 주제문</span>
+        <span class="step"><span class="k">2</span>For example / Similarly = 스킵</span>
+        <span class="step"><span class="k">3</span>빈칸 = 재진술 문장을 추상화</span>
+        <span class="step"><span class="k">4</span>지문 단어 그대로 쓴 선지 = 함정</span>
+        <div class="oneline">한 줄: "재진술을 찾고, 그걸 추상화한 선지를 골라라"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">유형 풀이 전략지 · 빈칸추론(31–34) 샘플 — 컨셉 검증용 목업 (지문은 예시)</div>
+
+</div>
+</body>
+</html>
