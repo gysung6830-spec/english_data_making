@@ -6,11 +6,6 @@
 # ============================================================
 
 parts:
-  - id: polarity
-    title: "극성 판단 구문"
-    subtitle: "필자의 긍정(O) / 부정(X)을 뒤집는 신호"
-    strategy: "방향·극성만 잡으면 답이 보인다 — 무엇이 (+)이고 무엇이 (−)인지."
-    types: [negation, comparison]
   - id: modifier
     title: "수식어 괄호치기 구문"
     subtitle: "뼈대를 숨기는 살(수식어) 걷어내기"
