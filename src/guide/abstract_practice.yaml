@@ -45,7 +45,8 @@ practice:
     - word: lead to
       meaning: ~로 이어지다
     solution:
-      cut: lead to the emergence of new cultures
+      cut: 변화하는 정치·사회·종교적 지형은(Changing ~ landscapes) / 이어질 것이다 / 새로운 문화의 출현으로(the
+        emergence of new cultures) / 그리고 그와 함께 / 새로운 '컬처테인먼트' 경험으로.
       wrong: emergence를 '출현물'이라는 사물 명사로 굳혀 읽음
       wrong_why: lead to the emergence of A는 'A가 생겨나게 된다'로 동사로 풀어야 하는데, emergence를
         명사 사물로 처리해 뜻이 어색해졌다.
@@ -70,7 +71,9 @@ practice:
     - word: kinaesthetically
       meaning: 운동감각적으로
     solution:
-      cut: an innate capacity for matching A with B
+      cut: 다시 말해(In other words) / 그들은 타고난 능력을 가질 뿐 아니라(not only have an innate capacity)
+        / 자신의 운동감각으로 경험한 신체 움직임을 / 시각적으로 지각된 타인의 움직임과 맞추는 / 그렇게 하려는 타고난 욕구도 가진다(an
+        innate drive to do so).
       wrong: capacity for matching을 '맞춤이라는 능력'처럼 명사 덩어리로 굳혀 옮김
       wrong_why: capacity for -ing는 '~할 수 있는 능력'으로 동사로 풀어야 하는데, matching을 명사로 두면 무엇을
         무엇과 맞추는지 관계가 흐려진다.
@@ -374,8 +377,9 @@ practice:
     - word: infotainment
       meaning: 정보와 오락을 결합한 것(인포테인먼트)
     solution:
-      cut: 콜론(:) 뒤의 infotainment ... goods and services는 앞의 those parts of themselves
-        that are consumable를 그대로 풀어 쓴 재진술이다.
+      cut: 다시 말해(In other words) / 박물관이 살아남으려 애쓰면서(as museums struggle to survive)
+        / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 소비될 수 있는 자기 부분들을(those parts ~ consumable)
+        / 즉 전시실의 인포테인먼트, 카페·상점의 상품과 서비스(콜론 뒤 구체화).
       wrong: 0번
       wrong_why: '''prioritise(우선시한다)''를 ''우선시되지 않도록 막는다''로 정반대로 뒤집었다. 원문에는 부정어가 없으며
         예산이 소비 가능한 부분을 ''우선시''한다.'
@@ -400,8 +404,8 @@ practice:
     - word: that is
       meaning: 즉, 다시 말해
     solution:
-      cut: that is 뒤의 in different periods of time은 앞의 one subject after another(한
-        주제 다음 또 한 주제)를 시간의 관점에서 다시 말한 재진술이다.
+      cut: 대신에(Instead) / 그들은 주의를 집중해야 한다 / 한 주제에 이어 다른 주제로(one subject after another)
+        / 즉(that is) / 서로 다른 시간대에 걸쳐(in different periods of time).
       wrong: that is를 '그것은 ~이다'로 오독하는 경우
       wrong_why: that is는 주어+동사가 아니라 '즉, 다시 말해'라는 재진술 연결어이다. 이를 문장 술어로 보면 구조가 무너진다.
       author_msg: that is는 새 정보를 추가하지 않는다. 여러 주제를 잇따라 다룬다는 것을 '서로 다른 시간대에 걸쳐'라고 같은
@@ -693,7 +697,8 @@ practice:
     - word: fraudster
       meaning: 사기꾼
     solution:
-      cut: biometrics such as fingerprint, iris, and voice recognition
+      cut: 비밀번호·이중 키 인증, 그리고 생체 인식은(biometrics) / 예컨대 지문·홍채·음성 인식(such as ~) / 모두
+        ~하는 방법이다 / 계정 정보를 숨기는 / 잠재적 사기꾼으로부터(from potential fraudsters).
       wrong: 지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술
       wrong_why: such as는 앞의 상위 개념을 뒤의 사례로 구체화하는 표현인데, 이를 '구별되는 별도의 것'으로 반대로 읽은 오역이다.
       author_msg: such as 뒤 나열은 상위 개념의 예시입니다. biometrics(생체 인식)라는 큰 범주를 '지문, 홍채, 음성
@@ -717,8 +722,9 @@ practice:
     - word: flood protection
       meaning: 홍수 방지
     solution:
-      cut: for carbon capture, wildlife habitat, flood protection, and other ecosystem
-        services
+      cut: 산림 소유자는(Owners of forest lands) / 나무를 벨 시장 유인이 있다(a market incentive to
+        cut down) / 숲을 관리하기보다(rather than manage) / 탄소 포집·야생동물 서식지·홍수 방지 / 그리고 다른
+        생태계 서비스를 위해(other ecosystem services).
       wrong: carbon capture, wildlife habitat, flood protection을 서로 무관한 별개 항목으로 봄
       wrong_why: and other ~는 앞의 나열이 결국 뒤 상위 개념의 사례임을 알려주는 표지인데 이를 놓친 것이다.
       author_msg: '''A, B, C, and other X'' 구조에서 X가 상위 개념입니다. 탄소 포집·서식지·홍수 방지는 모두
@@ -995,8 +1001,8 @@ practice:
     - word: rational representation
       meaning: 이성적 표상
     solution:
-      cut: not A but B 구문이 핵심이다. 'not in the perception of the figure but in its rational
-        representation'은 진리가 드러나는 자리를 두 대상의 대비로 못 박는다. A(지각)를 부정하고 B(이성적 표상)를 세운다.
+      cut: 사안의 진실은(The truth of the matter) / 드러난다 / 형상의 지각에서가 아니라(not in the perception
+        of the figure) / 그것의 이성적 재현에서(but in its rational representation).
       wrong: 1번은 A와 B를 뒤바꾼 오역이다.
       wrong_why: 진리가 '지각에서 드러난다'고 한 뒤 '이성적 표상에서는 드러나지 않는다'고 옮긴 것은, not A but B가 부정하는
         것(A=지각)과 긍정하는 것(B=이성적 표상)을 정반대로 배치한 것이다.
@@ -1019,8 +1025,8 @@ practice:
     - word: accommodate
       meaning: 수용하다, 받아주다
     solution:
-      cut: '''managed rather than accommodated''가 초점이다. B rather than A 구문으로, 자동차
-        수요에 대한 처방을 두 대립되는 태도의 대비로 규정한다: ''수용(accommodated)''이 아니라 ''관리(managed)''.'
+      cut: 도시 교통 전문가들은(Urban transport professionals) / 대체로 받아들였다(acquiesced to) /
+        ~라는 견해를(the view that) / 도시의 자동차 수요는 / 관리되어야 한다 / 수용되기보다(rather than accommodated).
       wrong: rather than을 놓치고 '관리'와 '수용'을 나란한 것으로 옮기면 안 된다.
       wrong_why: rather than은 앞의 것(managed)을 택하고 뒤의 것(accommodated)을 물리치는 대비 표현이다.
         '관리되고 수용되어야 한다'처럼 둘을 병렬로 처리하면, 전문가들이 물리친 태도(수요를 그대로 받아주는 것)를 오히려 인정하는 반대 뜻이
@@ -1285,7 +1291,8 @@ practice:
     - word: substance
       meaning: 실체, 본질(알맹이)
     solution:
-      cut: hunting the shadow, not the substance
+      cut: 이론에만 의존하는 사람들은(Those who rely only upon theories) / 분명히 / 그림자를 쫓고 있었다(hunting
+        the shadow) / 실체가 아니라(not the substance).
       wrong: 실제 그림자를 뒤쫓느라 정작 물체 자체는 사냥하지 못하는 어리석은 사냥꾼의 모습을 묘사한다.
       wrong_why: '''shadow''와 ''substance''를 사냥 장면의 문자 그대로의 그림자와 물체로 읽어, 이론 의존이라는
         문맥이 부여한 비유적 의미를 놓쳤다.'
@@ -1310,7 +1317,9 @@ practice:
     - word: aesthetics
       meaning: 미학, 심미성
     solution:
-      cut: hidden on the inside so that we wear clothing rather than pieces of fabric
+      cut: 우리는 이음매 없는 미학을 추구한다(seamless aesthetics) / 솔기를 촘촘히 꿰매고(stitching the seams
+        closely) / 평평하게 눌러 / 안쪽에 숨김으로써 / 그래서 우리가 입는 것이 옷이 되도록(we wear clothing) /
+        천 조각이 아니라(rather than pieces of fabric).
       wrong: 실제 바느질로 옷의 솔기를 안쪽에 숨기는 재봉 기술만을 설명한 것으로 읽는 것.
       wrong_why: 솔기를 문자 그대로의 옷감 봉제로만 이해하면, 이 문장이 기술의 이음매를 감추는 매끄러운 설계를 빗댄 비유임을 놓친다.
       author_msg: 옷의 솔기 감추기는 기술의 이음매(구성 요소 간 경계)를 감춰 사용자가 조각이 아닌 완결된 전체로 경험하게 하는 설계를
