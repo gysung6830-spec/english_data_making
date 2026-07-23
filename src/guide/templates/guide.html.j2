@@ -140,12 +140,12 @@
     <div class="method-head"><span class="step">{{ m.step }}</span> {{ m.title }}</div>
     <div class="method-idea">{{ m.idea }}</div>
     {% if m.rule %}<div class="method-rule"><b>규칙 ·</b> {{ m.rule }}</div>{% endif %}
-    {% if m.ms_point %}<div class="ms-point">🎒 중3 포인트 · {{ m.ms_point }}</div>{% endif %}
+    {% if m.ms_point %}<div class="ms-point">💡 한 줄 정리 · {{ m.ms_point }}</div>{% endif %}
     {% if m.demo %}
     <div class="demo">
       <div class="demo-step"><span class="dtag s1">① 괄호치기</span>
         <span class="demo-en">{{ m.demo.bracketed or m.demo.sentence }}</span></div>
-      <div class="demo-step"><span class="dtag s2">② 뼈대(중3)</span>
+      <div class="demo-step"><span class="dtag s2">② 뼈대(쉬운 말)</span>
         <span class="skel-en">{{ m.demo.skeleton_en }}</span>
         <span class="skel-ko">— {{ m.demo.skeleton_ko }}</span></div>
       <div class="demo-step"><span class="dtag s3">③ 완성</span>
