@@ -153,6 +153,7 @@
 - **영구 보존**: `passage_bank.jsonl`은 git 커밋(세션 초기화돼도 유지). 원본 PDF는 `corpus/pdfs/`에 보관(저작권·용량으로 git 제외).
 - 상세: `corpus/README.md`
 - 실측(2022 6월 적재): 16개 지문 학습, 빈칸 대표=#33(신호점수 6.0, 역접 5), 함축 대표=#21(2.4).
+- **구문해설 교재와 데이터 공유**: 은행이 두 교재의 **공유 계층**. 기존 `run.py` 처리 루프에 best-effort 훅(`ingest_bank.share_pdf`)을 걸어 **어느 도구로 올리든 한 번만 올리면 양쪽이 같은 지문을 씀**. 중복(해시+문항)은 자동 스킵.
 
 ```bash
 python -m src.ingest_bank 시험지.pdf     # 학습(누적)

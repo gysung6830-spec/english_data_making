@@ -129,6 +129,15 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
     outputs: list[Path] = []
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
+        # 공유 지문 은행에도 적재(구문해설·형광펜 교재가 같은 데이터를 쓰도록).
+        # 어떤 경우에도 본 처리를 방해하지 않는 best-effort 훅.
+        try:
+            from . import ingest_bank
+            n = ingest_bank.share_pdf(pdf)
+            if n:
+                logger.info("[%d/%d] 공유 은행에 지문 %d개 추가: %s", i, total, n, pdf.name)
+        except Exception:
+            pass
         try:
             reports = (_mock_reports_for_pdf(cfg, pdf) if mock
                        else build_reports_for_pdf(client, cfg, pdf))

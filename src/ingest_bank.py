@@ -159,7 +159,7 @@ def save_bank(rows):
         for r in rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
-def ingest(pdf_path: Path):
+def ingest(pdf_path: Path, quiet: bool = False):
     PDF_DIR.mkdir(parents=True, exist_ok=True)
     data = pdf_path.read_bytes()
     h = hashlib.sha1(data).hexdigest()[:12]
@@ -169,7 +169,7 @@ def ingest(pdf_path: Path):
 
     records, pages = parse_pdf(pdf_path)
     bank = load_bank()
-    seen = {(r["source_sha"], r["num"]) for r in bank}
+    seen = {(r.get("source_sha"), r["num"]) for r in bank}
     added = 0
     for r in records:
         key = (h, r["num"])
@@ -180,8 +180,25 @@ def ingest(pdf_path: Path):
         bank.append(r)
         added += 1
     save_bank(bank)
-    print(f"[적재] {pdf_path.name} (p{pages}) → 문항 {len(records)}개 인식, {added}개 신규 저장")
+    if not quiet:
+        print(f"[적재] {pdf_path.name} (p{pages}) → 문항 {len(records)}개 인식, {added}개 신규 저장")
     return added
+
+
+def share_pdf(pdf_path) -> int:
+    """다른 도구(구문해설 파이프라인 등)에서 호출하는 '공유' 진입점.
+
+    어떤 경우에도 예외를 밖으로 던지지 않는다(본 작업을 방해하지 않도록).
+    PyMuPDF 미설치·이미지 파일·파싱 실패 시 조용히 0을 반환.
+    반환: 은행에 새로 추가된 지문 수.
+    """
+    try:
+        p = Path(pdf_path)
+        if p.suffix.lower() != ".pdf":   # 이미지 등은 은행 파싱 대상 아님
+            return 0
+        return ingest(p, quiet=True)
+    except Exception:
+        return 0
 
 def report():
     bank = load_bank()
