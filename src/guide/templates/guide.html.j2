@@ -160,13 +160,13 @@
     <span class="ef-cap ef-out">쉬운 해석<small>직독직해</small></span>
   </div>
 
-  {# ── STEP 1·2·3 타임라인(연결된 과정) ── #}
-  <div class="steps-rail">
+  {# ── STEP 1·2·3 지그재그 매거진(좌·우 교차) ── #}
+  <div class="steps-zz">
   {% for m in p0.methods if m.step.startswith('STEP') %}
-    <div class="step-node">
-      <div class="node-num">{{ loop.index }}</div>
-      <div class="node-body">
-        <div class="node-title">{{ m.title }}</div>
+    <div class="zz{{ ' alt' if loop.index is even }}">
+      <div class="zz-side"><div class="zz-num">{{ loop.index }}</div><div class="zz-lbl">{{ m.step }}</div></div>
+      <div class="zz-main">
+        <div class="zz-title">{{ m.title }}</div>
         <div class="method-idea">{{ m.idea }}</div>
         {% if m.rule %}<div class="method-rule"><b>규칙 ·</b> {{ m.rule }}</div>{% endif %}
         {% if m.ms_point %}<div class="ms-point">💡 한 줄 정리 · {{ m.ms_point }}</div>{% endif %}

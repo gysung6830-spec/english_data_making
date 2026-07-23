@@ -282,18 +282,18 @@ body {
 .ef-step b { color: var(--gold); margin-right: 3px; }
 .ef-arrow { color: var(--gold); font-weight: 900; font-size: 12px; align-self: center; }
 
-/* STEP 1·2·3 타임라인(연결된 과정) */
-.steps-rail { margin: 0 0 16px; }
-.step-node { display: flex; gap: 12px; position: relative; padding-bottom: 12px; }
-.step-node:not(:last-child)::before { content: ""; position: absolute; left: 15px; top: 30px;
-  bottom: -2px; width: 2px; background: var(--tint2); }
-.node-num { flex: 0 0 32px; height: 32px; border-radius: 50%; background: var(--navy);
-  color: #fff; font-family: "Georgia", serif; font-weight: 800; font-size: 15px;
-  display: flex; align-items: center; justify-content: center; z-index: 1;
-  box-shadow: 0 0 0 3px #e2f1eb; }
-.node-body { flex: 1; border: 1px solid var(--line); border-radius: 12px;
-  padding: 10px 14px; background: #fff; page-break-inside: avoid; }
-.node-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+/* STEP 1·2·3 지그재그 매거진(좌·우 교차) */
+.steps-zz { margin: 0 0 16px; }
+.zz { display: flex; align-items: stretch; gap: 12px; margin-bottom: 11px; border-radius: 12px;
+  border: 1px solid var(--line); overflow: hidden; background: #fff; page-break-inside: avoid; }
+.zz.alt { flex-direction: row-reverse; background: var(--tint); }
+.zz-side { flex: 0 0 90px; background: var(--navy); color: #fff; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 10px; }
+.zz.alt .zz-side { background: var(--navy2); }
+.zz-num { font-family: var(--f-myeongjo); font-weight: 800; font-size: 34px; line-height: 1; }
+.zz-lbl { font-size: 9px; color: #cdeee3; margin-top: 4px; letter-spacing: 1px; }
+.zz-main { flex: 1; padding: 11px 15px; }
+.zz-title { font-size: 13px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
 
 .method.extra { border: 1px solid var(--tint2); border-radius: 12px; background: #fcfefe; }
 .method-head .step.alt { background: var(--gold); }
