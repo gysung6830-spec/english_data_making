@@ -26,12 +26,12 @@ body {
 }
 
 :root {
-  /* 5색 카테고리 팔레트 (채도 낮춘 톤다운 버전) */
-  --c-blue:   #4d6091;
-  --c-green:  #4e8a63;
-  --c-purple: #6d5f96;
-  --c-amber:  #bd8a45;
-  --c-red:    #c05d55;
+  /* 5색 카테고리 팔레트 (채도 중간 톤) */
+  --c-blue:   #445fb0;
+  --c-green:  #3d8f58;
+  --c-purple: #6a54b3;
+  --c-amber:  #cf8a2a;
+  --c-red:    #cd5049;
 
   --sum:   var(--c-red);      /* 주제 */
   --lit:   var(--c-blue);     /* 직독직해(동사·어형) */
@@ -222,10 +222,10 @@ table.lit2 td {
 .lit-line .sl { color: #cbd5e1; padding: 0 3px; font-weight: 700; }
 .lit-line .ck { font-weight: 600; }
 
-/* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 (채도 낮춘 톤다운) */
-.ck0 { color: #4d6091; } .ck1 { color: #4e8a63; } .ck2 { color: #a5763a; }
-.ck3 { color: #6d5f96; } .ck4 { color: #c05d55; } .ck5 { color: #3f7d76; }
-.ck6 { color: #8f7a3f; } .ck7 { color: #565f9c; }
+/* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 (채도 중간 톤) */
+.ck0 { color: #3a58ad; } .ck1 { color: #3a8a56; } .ck2 { color: #ac6b28; }
+.ck3 { color: #6d51b5; } .ck4 { color: #c14a48; } .ck5 { color: #2f7d73; }
+.ck6 { color: #977028; } .ck7 { color: #4d55a8; }
 
 /* 직독직해에 통합된 핵심 문법 (문장별) */
 .lit-gram { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #f0ddc0; }
