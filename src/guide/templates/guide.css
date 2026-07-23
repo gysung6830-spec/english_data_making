@@ -402,6 +402,33 @@ body {
 .dv-rule { width: 44px; height: 3px; background: var(--gold); margin: 26px auto; border-radius: 2px; }
 .dv-strategy { color: #e7f6f0; font-size: 12px; line-height: 1.7; max-width: 62%;
   margin: 0 auto; opacity: .95; }
+/* 표지 divider 안 챕터 목록(어두운 배경) */
+.dv-chapters { margin: 30px auto 0; max-width: 70%; text-align: left; }
+.dv-ch { display: flex; align-items: baseline; gap: 12px; padding: 7px 0;
+  border-top: 1px solid rgba(255,255,255,.14); }
+.dv-ch:last-child { border-bottom: 1px solid rgba(255,255,255,.14); }
+.dv-ch .no { color: var(--gold); font-family: var(--f-eng,"Georgia"),serif; font-weight: 800;
+  font-size: 12px; min-width: 34px; letter-spacing: 1px; }
+.dv-ch .t { color: #eafaf4; font-weight: 700; font-size: 13px; white-space: nowrap; }
+.dv-ch .d { color: #a9cfc3; font-size: 10.5px; margin-left: auto; }
+
+/* 파트 표지 로드맵(밝은 배경) — 제목만 있던 페이지를 채운다 */
+.roadmap { margin: 20px 0 0; border: 1px solid var(--tint2); border-radius: 14px;
+  background: #f5fbf8; padding: 16px 20px; }
+.rm-title { color: var(--navy); font-weight: 800; font-size: 13px; margin-bottom: 10px;
+  letter-spacing: .3px; }
+.rm-group { color: var(--gold); font-weight: 800; font-size: 10.5px; letter-spacing: 1px;
+  margin: 12px 0 5px; text-transform: none; }
+.rm-item { display: flex; align-items: baseline; gap: 11px; padding: 5px 0 5px 6px;
+  border-bottom: 1px dashed var(--line); }
+.rm-item:last-child { border-bottom: none; }
+.rm-no { color: var(--navy2); font-family: var(--f-eng,"Georgia"),serif; font-weight: 800;
+  font-size: 11px; min-width: 32px; }
+.rm-t { color: #274b40; font-weight: 700; font-size: 12px; }
+.rm-d { color: var(--muted); font-size: 10px; margin-left: auto; text-align: right; max-width: 55%; }
+.study-tip { margin-top: 14px; background: var(--goldbg); border-left: 4px solid var(--gold);
+  border-radius: 8px; padding: 11px 15px; font-size: 11px; line-height: 1.7; color: #5a4630; }
+.study-tip b { color: var(--gold); }
 
 /* 단계별 트레이닝(쉬움→하드) */
 .train { margin: 8px 0 4px; border: 1px solid var(--tint2); border-radius: 12px;
