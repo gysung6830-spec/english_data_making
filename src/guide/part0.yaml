@@ -2,6 +2,7 @@
 #  0부 — 3단계 읽기 엔진 (모든 문장에 쓰는 공통 도구)
 #  철학: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있다."
 #  고정 콘텐츠. 예문/설명을 여기서 바로 고칠 수 있습니다(코딩 불필요).
+#  목차는 STEP 1~3 + 유추 tip 4개로 병합.
 # ============================================================
 
 title: "3단계 읽기 엔진"
@@ -9,14 +10,14 @@ spine: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있�
 intro: >-
   수능 문장이 어려운 건 내용이 어려워서가 아니다. 수식어(살)가 뼈대를 덮고 있어서다.
   살을 괄호로 떼어내면 남는 건 '주어 + 동사' — 바로 중3 문장이다.
-  아래 3단계를 모든 문장에 똑같이 적용한다.
+  아래 3단계(+유추)를 모든 문장에 똑같이 적용한다.
 
 methods:
   - step: "STEP 1"
     title: "괄호치기 — 수식어는 통째로 건너뛴다"
-    idea: "명사 뒤에 붙어 명사를 꾸미는 덩어리는 다 ( )로 묶어 눈에서 지운다."
-    rule: "괄호 대상 = 관계사절(who/which/that…) · 분사(V-ing/V-ed 덩어리) · 전치사구(of/in/with…) · to부정사 · 삽입(— , —)"
-    ms_point: "긴 문장이 갑자기 짧아진다 — '살'을 지웠을 뿐인데."
+    idea: "명사 뒤에 붙어 명사를 꾸미는 덩어리는 다 ( )로 묶어 눈에서 지운다. 아래 신호가 보이면 전부 수식어다."
+    rule: "괄호 대상(수식어 신호) = 관계사절(who/which/that…) · 분사(V-ing/V-ed 덩어리) · 전치사구(of/in/with…) · to부정사 · 콤마·대시 삽입(— , —). 앞 명사를 꾸미면 전부 수식어."
+    ms_point: "긴 문장이 갑자기 짧아진다 — '살'을 지웠을 뿐인데. 단, 괄호친다 = '안 읽는다'가 아니다! 뼈대로 '누가 → 무엇을 한다'를 먼저 잡은 뒤, 살(수식어)을 다시 붙여 세부를 읽는다. 특히 평가원은 수식어 속에 정답 근거를 숨기므로, 결국 다 읽되 '뼈대 → 살' 순서로 읽는다."
     demo:
       sentence: "The students who joined the science club last year won the national award."
       bracketed: "The students (who joined the science club last year) won the national award."
@@ -25,22 +26,10 @@ methods:
       full_ko: "작년에 과학 동아리에 가입한 그 학생들이 전국 대회 상을 받았다."
 
   - step: "STEP 2"
-    title: "뼈대 찾기 — 수식어보다 '뼈대'가 먼저다"
-    idea: "괄호를 건너뛰고 남은 뼈대에서 '주체(누가)'에 동그라미, '행위(무엇을 한다=진짜 동사)'에 세모. 수식어(살)가 아무리 화려해도, 문장의 뜻을 결정하는 건 언제나 뼈대 '누가 → 무엇을 한다'다."
-    rule: "진짜 동사는 문장에 하나. to-V·V-ing·p.p.는 동사처럼 생겨도 '가짜(준동사)'다. 세모(진짜 동사)를 먼저 찾고, 그 앞에서 동그라미(주체)를 찾아라. 수식어가 길수록 오히려 뼈대는 짧다 — 겁먹지 말 것."
-    ms_point: "핵심은 살이 아니라 뼈대에 있다. '누가 → 무엇을 한다' 한 줄만 잡으면, 나머지는 다 그 뼈대에 붙는 부가 설명일 뿐이다."
-    demo:
-      sentence: "The report published by the committee last month suggests a completely new approach."
-      bracketed: "The report (published by the committee last month) suggests a completely new approach."
-      skeleton_en: "The report suggests a new approach."
-      skeleton_ko: "그 보고서는 새로운 접근을 제안한다."
-      full_ko: "지난달 위원회가 발표한 그 보고서는 완전히 새로운 접근법을 제안한다."
-
-  - step: "핵심 원리"
-    title: "'관계성'으로 읽기 — 단어 순서가 아니라 '누가 ↔ 무엇' 관계"
-    idea: "왼쪽부터 단어를 하나씩 뜻만 바꾸는 '직독직해'는 긴 문장에서 무너진다. 진짜 독해는 '누가(주체) / 무엇을 했나(행위) / 그래서 무엇과 무엇이 어떤 관계인가'를 잡는 것이다."
-    rule: "① 진짜 동사를 축으로 '누가 ↔ 무엇' 관계를 먼저 연결한다. ② 수식어는 '누구를/무엇을 꾸미는가'라는 관계로만 붙인다. ③ 접속사·비교·인과 신호는 'A와 B가 어떤 관계(대조·원인·비교)인가'를 알려주는 이정표다."
-    ms_point: "단어를 다 해석했는데도 뜻이 안 잡히면, 순서대로 옮기기만 했을 뿐 '관계'를 안 본 것이다. 문장은 단어의 나열이 아니라 '누가 무엇을 했느냐'의 그림이다."
+    title: "뼈대 찾기 — 수식어보다 '뼈대', 순서보다 '관계'"
+    idea: "괄호를 건너뛰고 남은 뼈대에서 '주체(누가)'에 동그라미, '행위(무엇을 한다=진짜 동사)'에 세모. 왼쪽부터 단어 뜻만 바꾸는 '직독직해'는 긴 문장에서 무너진다 — '누가 → 무엇을 했나'라는 관계부터 잡아라."
+    rule: "진짜 동사는 문장에 하나(to-V·V-ing·p.p.는 '가짜'). 세모(진짜 동사)를 먼저 찾고, 그 앞에서 동그라미(주체)를 찾는다. 수식어는 '누구를/무엇을 꾸미는가'라는 관계로만 붙이고, 접속사·비교·인과 신호는 'A와 B가 어떤 관계(대조·원인·비교)인가'를 알려주는 이정표다."
+    ms_point: "핵심은 살이 아니라 뼈대에 있다. 단어를 다 해석했는데도 뜻이 안 잡히면, 순서대로 옮기기만 했을 뿐 '관계'를 안 본 것 — 문장은 단어의 나열이 아니라 '누가 무엇을 했느냐'의 그림이다."
     demo:
       sentence: "The scientists whose research the government funded published results that surprised everyone."
       bracketed: "The scientists (whose research the government funded) published results (that surprised everyone)."
@@ -51,7 +40,7 @@ methods:
   - step: "STEP 3"
     title: "살 붙이기 — 연결어로 자연스럽게 합친다"
     idea: "괄호 속 수식어를 '~하는 / ~하면서 / ~해서 / ~한 채로 / ~라면' 중 문맥에 맞게 뼈대에 붙인다."
-    rule: "뒤에서 앞으로 붙이기(후치수식). 한 번에 하나씩, 짧은 문장 여러 개로 나눠 이해한다."
+    rule: "뒤에서 앞으로 붙이기(후치수식). 한 번에 하나씩, 짧은 문장 여러 개로 나눠 이해한다. 괄호 속(수식어)도 결국 다 읽되 '뼈대 → 살' 순서로."
     ms_point: "아무리 길어도 '뼈대 + 살 몇 개'일 뿐 — 조립만 하면 된다."
     demo:
       sentence: "Feeling nervous about the result, she slowly walked onto the stage."
@@ -60,35 +49,11 @@ methods:
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
-  - step: "짚고 가기"
-    title: "수식어구, 어떻게 알아보고 — 정말 안 읽어도 되나?"
-    idea: "수식어구 = '명사 뒤에 붙어 그 명사를 더 설명하는 덩어리'. 아래 신호가 보이면 수식어다."
-    rule: "수식어 신호 = 관계사(who/which/that) · 분사(V-ing/V-ed) · 전치사구(of/in/with…) · to부정사 · 콤마·대시 삽입(— , —). 앞 명사를 꾸미면 전부 수식어."
-    ms_point: "괄호친다 = '안 읽는다'가 아니다! 뼈대로 '누가 → 무엇을 한다'를 먼저 잡은 뒤, 살(수식어)을 다시 붙여 세부를 읽는다. 순서만 바꾸는 것 — 특히 평가원은 수식어 속에 정답 근거를 숨기므로, 결국 다 읽되 '뼈대 → 살' 순서로 읽는다."
-    demo:
-      sentence: "Free recall tests, in which students need to recall as much as they can, tend to result in better retention."
-      bracketed: "Free recall tests (in which students need to recall as much as they can) tend to result in better retention."
-      skeleton_en: "Free recall tests result in better retention."
-      skeleton_ko: "자유 회상 시험은 더 나은 기억 유지로 이어진다. (뼈대 먼저)"
-      full_ko: "괄호 속(in which ~)은 '건너뛰고 끝'이 아니라 뼈대를 잡은 뒤 다시 붙인다: '학생이 최대한 많이 회상해야 하는' 자유 회상 시험은 더 나은 기억 유지로 이어진다. (살도 결국 읽는다 — 순서만 뒤로.)"
-
-  - step: "유추 tip ①"
-    title: "모르는 단어는 '유추'로 뚫는다 — 다섯 갈래 단서"
-    idea: "단어 뜻을 다 몰라도 된다. 문장이 스스로 흘리는 단서로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다. 모르는 단어를 만나면 아래 순서로 단서를 뒤진다."
-    rule: "① 극성 신호 — 긍정어(benefit·thrive)/부정어(harm·fail) 주변이면 그 색깔을 따라간다. ② 대조 신호 — but·however·unlike·while 뒤 단어는 앞의 '반대' 뜻. ③ 재진술·예시 — that is·in other words·such as·for example 옆에 쉬운 말로 다시 풀어 준다. ④ 병렬 — A and/or B 로 묶이면 A와 B는 '같은 부류'. ⑤ 형태 — 접두사·어근(dis-·un-·-less=부정, re-=다시, over-=과잉)으로 뜻의 방향을 잡는다."
-    ms_point: "모르는 단어 1~2개는 '?'로 두고 넘어가도, 다섯 단서 중 하나만 잡히면 문장 뜻은 안 무너진다. '정확한 뜻'이 아니라 '대략 좋은 말/나쁜 말'만 알면 충분할 때가 많다."
-    demo:
-      sentence: "Consumer engagement levels in all manner of digital experiences and communities have simply exploded—and they show little or no signs of slowing."
-      bracketed: "Consumer engagement levels (in all manner of digital experiences and communities) have simply exploded (—and they show little or no signs of slowing)."
-      skeleton_en: "levels have exploded (and show no signs of slowing)"
-      skeleton_ko: "참여도가 폭발적으로 늘었다 (그리고 느려질 기미가 없다)."
-      full_ko: "'exploded(폭발했다)'의 정확한 뜻을 몰라도, 뒤의 'little or no signs of slowing(느려질 기미가 거의 없다)'이 부정 신호 → '계속 급증하고 있다'는 뜻임을 유추할 수 있다. (단서 ①③)"
-
-  - step: "유추 tip ②"
-    title: "대조·재진술 단서로 '반대 뜻·같은 뜻' 잡기"
-    idea: "가장 강력한 두 단서는 '대조'와 '재진술'이다. 대조는 모르는 단어를 아는 단어의 '반대'로, 재진술은 '같은 뜻'으로 알려 준다 — 사실상 문장이 뜻을 공짜로 준다."
-    rule: "대조: A, but/unlike/whereas B → A를 알면 B는 반대, B를 알면 A는 반대. 재진술: X, that is / X, or(=즉) / X (such as 예시) → X 옆의 쉬운 말이 곧 X의 뜻. 콤마·대시 뒤 풀어쓰기도 재진술 신호다."
-    ms_point: "모르는 단어 옆에 but 이 있으면 '반대말'을, that is·such as 가 있으면 '같은 말'을 이미 준 것이다. 그 신호부터 찾아라."
+  - step: "유추 tip"
+    title: "모르는 단어는 '유추'로 뚫는다 — 다섯 단서"
+    idea: "단어 뜻을 다 몰라도 된다. 문장이 스스로 흘리는 단서로 '대략의 뜻·극성(좋다/나쁘다)'만 잡으면 해석은 굴러간다. 가장 강력한 건 '대조'와 '재진술' — 사실상 문장이 뜻을 공짜로 준다."
+    rule: "① 극성 — 긍정어(benefit·thrive)/부정어(harm·fail) 주변이면 그 색깔. ② 대조 — but·however·unlike·while 뒤 단어는 앞의 '반대' 뜻. ③ 재진술·예시 — that is·in other words·such as·for example 옆의 쉬운 말이 곧 그 뜻. ④ 병렬 — A and/or B는 '같은 부류'. ⑤ 형태 — 접두사·어근(dis-·un-·-less=부정, re-=다시, over-=과잉)."
+    ms_point: "모르는 단어 옆에 but이 있으면 '반대말'을, that is·such as가 있으면 '같은 말'을 이미 준 것. 1~2개는 '?'로 두고 넘어가도, 다섯 단서 중 하나만 잡히면 문장 뜻은 안 무너진다. '정확한 뜻'이 아니라 '대략 좋은 말/나쁜 말'만 알면 충분할 때가 많다."
     demo:
       sentence: "Unlike his frugal brother, who saved every coin, Tom was profligate and spent his salary within a week."
       bracketed: "Unlike his frugal brother (who saved every coin), Tom was profligate and spent his salary within a week."

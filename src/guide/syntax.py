@@ -4,7 +4,8 @@
 실제 괄호치기/뼈대 분석은 이후 Claude 카드 생성이 담당한다.
 
 각 유형 = 감지 신호(이런 구조면) + 해석 공식(이렇게 해석) + 실전 팁.
-목차: 부정·비교·강조·도치·동격·병렬·what절·that절·wh절·삽입/분사, 그리고 전치사구(별도).
+목차: 강조·도치·동격·병렬·what절·that절·wh절·삽입/분사, 그리고 전치사구(별도).
+(부정·비교는 2부 '평가원 코드'에서 다루므로 구문해석에서 제외.)
 """
 from __future__ import annotations
 
@@ -52,15 +53,6 @@ SYNTAX_TYPES: list[SyntaxType] = [
                            r"\bnot\b.+?\bbut (also|rather)\b", re.IGNORECASE),
     ),
     SyntaxType(
-        id="comparison", title="비교구문",
-        signal="more/less … than, -er than, as … as, the 비교급 … the 비교급",
-        formula="than/as 뒤(비교 기준)를 괄호 → '무엇보다 / 무엇만큼'을 뼈대 뒤에 붙인다.",
-        combat="실전 팁 — than/as에 세로줄, 좌우 비교 대상 두 개에 동그라미. 무엇이 더 큰지(우열)만 정확히.",
-        pattern=re.compile(r"\b(more|less)\b[^.]*?\bthan\b|\b\w+er\s+than\b|"
-                           r"\bas\s+\w+\s+as\b|\bthe\s+\w+er\b.+?\bthe\s+\w+er\b|"
-                           r"\bno\s+(more|less)\s+than\b", re.IGNORECASE),
-    ),
-    SyntaxType(
         id="apposition", title="동격구문",
         signal="the fact/idea/belief/notion that … , 또는 'N, (a/the) N,' 콤마 동격 (앞 명사=뒤 설명)",
         formula="동격은 앞 명사를 '즉/다시 말해'로 풀어 뒤가 같은 대상임을 확인한다.",
@@ -105,15 +97,6 @@ SYNTAX_TYPES: list[SyntaxType] = [
         formula="선행사(앞 명사)를 꾸미면 '~하는'으로, 명사절이면 '누가/어디/언제/왜/어떻게 ~하는지'로.",
         combat="실전 팁 — wh- 앞에 명사가 있으면 관계사(그 명사 수식), 없으면 명사절. 어느 쪽이든 wh~끝까지 [ ]로 묶어라.",
         pattern=re.compile(r"\b(who|whom|whose|which|where|when|why|how)\b", re.IGNORECASE),
-    ),
-    SyntaxType(
-        id="negation", title="부정구문",
-        signal="not all/always(부분부정), no/none/nothing/never/hardly/rarely, not A but B",
-        formula="부정어에 (−)를 붙여 극성을 뒤집는다. 부분부정(not all)은 '모두 ~인 것은 아니다'.",
-        combat="실전 팁 — not + all/always/every는 '전부는 아니다'(부분부정). no/never/hardly는 문장 전체를 부정.",
-        pattern=re.compile(r"\bnot\s+(all|always|every|necessarily|entirely|completely)\b|"
-                           r"\b(no|none|nothing|neither|never|hardly|rarely|seldom|scarcely)\b",
-                           re.IGNORECASE),
     ),
     SyntaxType(
         id="prep_stack", title="전치사구 이어붙기",
