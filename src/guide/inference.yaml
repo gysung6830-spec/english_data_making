@@ -25,12 +25,6 @@ chapters:
     src: 학습용 예시
     cut: '''profligate''를 몰라도 → Unlike(대조) + ''동전까지 모으던 형과 달리'' + ''일주일 만에 월급 탕진''
       → ''헤프게 낭비하는''. (단서: 대조)'
-  - en: He's kept it a secret so as not to worry us," Hailey explained." Hailey "Dad,
-      these glasses can help correct your red‑green color " blindness," said Hailey."
-      Hailey He slowly put them on, and stared at the birthday presents on the table.
-    src: 2023 고3 11월 45번
-    cut: '단서 유추: ''these glasses can help correct your red-green color ___''(안경이 적록색을
-      교정) + He slowly put them on(안경을 씀) → 모르는 단어 blindness = ''색맹(적록색맹)''으로 유추.'
   - en: If so, how?' The scientific thinker looks for features of the thing that can
       be stripped of subjectivity—ideally, those aspects that can be quantified and
       whose values will thus never change from one observer to the next.
@@ -45,6 +39,12 @@ chapters:
     cut: '단서 유추: just as(~처럼) a mutation ↔ an accidental failure to reproduce the
       text(원본 복제의 우연한 실패) 비유 대응 → 모르는 단어 mutation = ''(우연히 생기는) 돌연변이/복제 오류''로 유추 /
       그것이 fitness(적합도)를 높인다.'
+  - en: Economics can go a long way towards helping a legislature determine whether
+      or not a particular tax law will help achieve a particular goal, but economics
+      cannot, in a vacuum, identify the goal.
+    src: 2022 고3 9월 22번
+    cut: '단서 유추: 경제학이 입법부의 목표 달성 판단을 ''돕지만(help)'' / but(대조) / ''in a vacuum'' 상태에서
+      목표 자체를 정하진 못한다 → but 대조 + ''스스로 목표를 못 정함''에서 in a vacuum = ''맥락 없이·고립되어''로 유추.'
   practice:
   - kind: mc
     sentence: However, unlike most of the categories of collection and study that

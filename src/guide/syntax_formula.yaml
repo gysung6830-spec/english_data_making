@@ -100,13 +100,12 @@ formulas:
       src: 2025 고3 6월 34번
       cut: (동명사 주어) 이해하는 것은 / [이주가 왜 어디서 일어나는지를] / 요구한다 / 고려를 — Understanding ~이 통째로
         주어, 동사는 requires / 즉 영토의 정치적 구성, 차별의 공간적 결과, 사회·경제적 양상, 물리적 환경의 배치에 대한 고려.
-    - en: Speeding up and enjoying the wide blue sea, Emma couldn't hide her excitement
-        and exclaimed, "Clara, the Emma "Clara,!" view is amazing!" Clara's silence,
-        however, seemed to say that she was lost Clara in her thoughts.
-      src: 2024 고3 11월 45번
-      cut: (분사구문) 속도를 높이며 넓고 푸른 바다를 즐기면서(Speeding up and enjoying ~), / Emma는 / 흥분을
-        감추지 못하고 외쳤다 / "Clara, 경치가 멋져!" / 그러나 Clara의 침묵은 / 그녀가 생각에 잠겼음을 말하는 듯했다 — 문두
-        -ing 두 개가 주절 주어 Emma에 걸리는 분사구문.
+    - en: Comparing the offices of the 1940s with contemporary office spaces shows
+        that they have circled back around to essentially the same style, via a period
+        in the 1980s when partitions and cubicles were more the norm.
+      src: 2024 고3 9월 24번
+      cut: 1940년대 사무실을 현대 사무 공간과 비교하면(Comparing ~ = 분사구문, 주어 앞) / 보여준다 / 그것들이 본질적으로
+        같은 양식으로 되돌아왔음을(circled back) / 1980년대 시기를 거쳐 / 칸막이·큐비클이 더 일반적이던(when ~).
   insertion:
     point: — … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리.
     strategy: 대시·콤마 삽입을 통째 괄호치고 없는 셈 → 뼈대부터 읽는다. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것.
@@ -131,18 +130,17 @@ formulas:
       cut: 결과의 성격이 무엇이든 간에 / (실제로 어느 한쪽을 다른 쪽보다 유리하게 할 수도 있지만 — which ~ another는 콤마
         삽입, 걷어내면 골격이 보임) / 협상의 목적은 / 공통 관심사와 갈등의 영역을 확인하는 것이다 — S(the purpose) + V(is)
         + C.
-    - en: If you pick it up today from Edincester Heights Edincester Heights, you
-        can have it for the current price, which is half the market rate.".\" Helen
-        immediately messaged the seller.
-      src: 2024 고3 9월 45번
-      cut: 오늘 Edincester Heights에서 가져가면 / 현재 가격에 살 수 있다 / (그런데 그건 시장가의 절반이다 — which
-        ~는 the current price를 부연하는 콤마 삽입) / Helen은 즉시 판매자에게 메시지를 보냈다.
     - en: Urban delivery vehicles can be adapted to better suit the density of urban
         distribution, which often involves smaller vehicles such as vans, including
         bicycles.
       src: 2023 고3 11월 22번
       cut: 도시 배송 차량은 / 도시 유통의 밀도에 더 잘 맞도록 조정될 수 있다 / (여기에는 흔히 밴 같은 더 작은 차량이 포함되고 —
         which ~는 콤마 삽입, 걷어내면 S+V가 명확 / 자전거까지 포함해서).
+    - en: The main institutions of state—parliament, courts, police and so on—along
+        with certain of the professions, exhibit this formal character.
+      src: 2023 고3 6월 38번
+      cut: 국가의 주요 제도들은(The main institutions of state) / —의회·법원·경찰 등— (대시 삽입 걷어내기)
+        / 특정 전문직들과 더불어 / 이 공식적 성격을 드러낸다(exhibit). ※ 삽입을 걷어내면 S+V가 보인다.
   apposition:
     point: the fact/idea/belief + that … 또는 'N, N' 콤마 동격 — 앞 명사와 뒤 내용이 '='.
     strategy: the fact that … 의 that은 관계사가 아니라 동격(=내용). '명사 = that절 내용'으로 등호를 긋는다.
@@ -171,10 +169,11 @@ formulas:
       cut: 산업혁명이 도래했을 때 / [그 거대한 혁신, 곧 모터와 함께(its great innovation = the motor)] //
         우리는 / 떠나지 않았다 / 우리 세계를 / [어떤 먼 모터공간으로 가기 위해] — 콤마로 감싼 the motor가 its great
         innovation을 = 로 재지칭.
-    - en: She said, "You must be Julia!" " Julia!" Laughing, the woman said, "Yes!
-      src: 2024 고3 9월 45번
-      cut: 그녀가 말했다 / "당신이 Julia임에 틀림없군요(You must be Julia)" — 호칭 Julia = 상대(You)를
-        가리키는 동격 // 웃으며 / 그 여자가 말했다 / "네".
+    - en: Roads are there all the time, so their speed is the most important fact
+        that distinguishes them.
+      src: 2026 고3 11월 23번
+      cut: 도로는 항상 거기 있다 / 그래서 그 속도가(their speed) / 가장 중요한 사실이다 = [that distinguishes
+        them, 그것들을 구별 짓는] ← 관계절이 'fact'의 내용을 규정.
   prep_stack:
     point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리
       길어도 안 무너진다.
@@ -336,13 +335,6 @@ formulas:
       - en: what matters / what counts
         ko: 중요한 것
     examples:
-    - en: ' Philosopher Thomas Nagel argued that there is no "view Thomas Nagel ''
-        from nowhere," since we cannot see the world except from a particular perspective,
-        and that perspective influences what we see.'
-      src: 2022 고3 6월 21번
-      cut: 철학자 토머스 네이글은 주장했다 / ["아무 데도 아닌 곳에서의 시점"은 없다고] / 우리는 세계를 볼 수 없으므로 / 특정 관점에서가
-        아니고는 / 그리고 그 관점이 영향을 준다 / [우리가 보는 것에(what we see)]. — what we see = 동사 influences의
-        목적어 명사절(선행사 없는 관계사).
     - en: A compelling argument can be made that what fans love is less the object
         of their fandom than the attachments to ( ) (and differentiations from) one
         another that those affections afford.
@@ -363,6 +355,11 @@ formulas:
       cut: 그녀는 어떤 후원자처럼 자기 생각이 있었고 / 패션 도안집은 없었으며 / 재단사는 그저 그녀를 위해 대기했다 / 아마 유용한 제안과
         함께 / [다른 이들이 무엇을 입고 있는지에 관한(about what others were wearing)]. — what others
         were wearing = 전치사 about의 목적어 명사절.
+    - en: In fact, what we might now call "shadow studies"—the exploration of shadows
+        in their various artistic representations—has its roots in ancient Athens.
+      src: 2024 고3 6월 24번
+      cut: 사실 / [우리가 이제 '그림자 연구'라 부를 만한 것](what we might now call ~ = what절 주어 덩어리)
+        / —즉 다양한 예술적 표현 속 그림자 탐구— / 그 뿌리는 고대 아테네에 있다(has its roots).
   that_clause:
     point: 인식·전달 동사 + that S+V 는 '~라는 것을'. 접속사 that 뒤엔 완전한 문장이 온다(관계사 that과 구분).
     strategy: that절 전체를 목적어인 '한 문장(명사절)'으로 묶어 '~라는 것을'로 뒤에 붙인다.
@@ -374,12 +371,6 @@ formulas:
       - en: the N that S+V
         ko: 동격/관계 — 뒤 문장이 완전한가로 구분
     examples:
-    - en: 'The rental section on your website says that there are two other swimming
-        pools during the summer season: the Splash Pool Rainbow Pool Splash Pool and
-        the Rainbow Pool.'
-      src: 2022 고3 6월 18번
-      cut: 웹사이트의 대여 섹션은 말한다 / [다른 수영장이 두 개 더 있다고(that there are two other ~)] / 여름
-        시즌 동안. — says의 목적어 명사절 that절, 뒤 콜론은 구체 나열.
     - en: To the extent that an agent relies on the prior knowledge of its designer
         rather than on its own percepts, we say that the agent lacks autonomy.
       src: 2023 고3 6월 30번
@@ -396,3 +387,9 @@ formulas:
       src: 2024 고3 11월 35번
       cut: (양보절) [우리는 생각하고 싶지만 / [우리의 정신이 충분히 예리하다고(that our minds are sharp enough
         ~) / 늘 최고 효율로 좋은 결정을 내릴 만큼]] / 그것은 그저 그렇지 않다. — think의 목적어 명사절 that절.
+    - en: A hypothesis called the Mach band theory suggests that moths see a dark
+        area around a light source and head for it to escape the light.
+      src: 2024 고3 9월 31번
+      cut: 마흐 밴드 이론이라 불리는 가설은(A hypothesis called ~) / 시사한다(suggests) → [that moths
+        see a dark area ~ and head for it, 나방이 광원 주위 어두운 영역을 보고 그리로 향한다는] ← 접속사 that절
+        = suggests의 목적어 / 빛을 피하려고.

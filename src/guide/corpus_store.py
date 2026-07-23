@@ -18,6 +18,22 @@ DEFAULT_STORE = ROOT / "data" / "corpus.jsonl"
 
 EXCLUDE_ITEM_NOS = {20, 25, 26, 27, 28, 29}
 
+# 워크북 2단 편집에서 온 OCR 중복(같은 고유명사·따옴표가 붙어 반복)을 걸러낸다.
+_DUP_NOISE = re.compile(r'\b([A-Z][a-z]{2,})\b[^.]{0,60}?\b\1\b')
+_STOP_DUP = {"The","This","That","When","With","And","For","But","They",
+             "Their","Some","Even","Here","There","Such","What","Where"}
+
+
+def is_noisy(text: str) -> bool:
+    """OCR 중복 아티팩트가 있는 문장이면 True(예문·문제에서 제외 권장)."""
+    m = _DUP_NOISE.search(text)
+    if m and m.group(1) not in _STOP_DUP:
+        return True
+    # 홀로 떠 있는 따옴표 조각(' " ,) 이상 반복
+    if text.count('"') >= 4 and re.search(r'"\s*[A-Za-z]+,!?"', text):
+        return True
+    return False
+
 
 def load_corpus(path: str | Path | None = None) -> list[dict]:
     p = Path(path) if path else DEFAULT_STORE
@@ -59,6 +75,8 @@ def query(
     out = []
     for r in recs:
         if not _keep(r, exclude_items):
+            continue
+        if is_noisy(r["text"]):
             continue
         if self_contained and not r.get("self_contained"):
             continue
