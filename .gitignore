@@ -2,13 +2,12 @@
 __pycache__/
 *.pyc
 input/*.pdf
-output/*.pdf
-output/*.html
+# 생성 산출물(하위 폴더 포함) — .gitkeep 만 추적
+output/**
+!output/
+!output/.gitkeep
 logs/*.jsonl
 logs/*.log
 .DS_Store
 scratchpad/
-output/*.png
-output/*.jpg
-output/*.json
 web_uploads/
