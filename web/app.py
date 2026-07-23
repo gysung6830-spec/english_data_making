@@ -130,6 +130,12 @@ def generate():
 
     outputs = []
     try:
+        # 실제 모드에서 두 세트가 같은 지문을 쓰면 분석을 '한 번만' 돌려 공유한다(속도·비용).
+        analyses = None
+        if not demo:
+            from exam.pipeline import analyze_bodies
+            analyses = analyze_bodies(client, bodies,
+                                      max_retries=cfg.processing.max_retries)
         for sid in sets:
             f2 = uuid.uuid4().hex[:12]
             out = _pdf_path(f2)
@@ -145,7 +151,8 @@ def generate():
                     build_exam(client, bodies, out, header_note=header,
                                max_retries=cfg.processing.max_retries,
                                vocab_method=vocab_method,
-                               content_difficulty=content_difficulty)
+                               content_difficulty=content_difficulty,
+                               analyses=analyses)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 1회", "count": n,
                                 "name": f"{doc_name}_변형문제_1회"})
@@ -161,7 +168,8 @@ def generate():
                 else:
                     from exam.gen2 import build_exam2
                     build_exam2(client, bodies, out, header_note=header,
-                                max_retries=cfg.processing.max_retries)
+                                max_retries=cfg.processing.max_retries,
+                                analyses=analyses)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 2회", "count": n,
                                 "name": f"{doc_name}_변형문제_2회"})

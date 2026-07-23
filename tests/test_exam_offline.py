@@ -30,6 +30,16 @@ from exam.schemas import (  # noqa: E402
     WordMark,
     WrongReason,
 )
+from exam.gen2 import (  # noqa: E402
+    AOut,
+    BOut,
+    DOut,
+    EOut,
+    FOut,
+    GOut,
+    Pair,
+)
+from exam.set2 import TYPE_ORDER2  # noqa: E402
 from exam.types import TYPE_ORDER  # noqa: E402
 
 
@@ -245,6 +255,42 @@ _FAKE = {
         q3_prompt="p3", q3_before="Info ", q3_mid=" is ", q3_after=" now.",
         q3_cue_a="accumulate", q3_cue_b="govern", q3_ans_a="accumulated", q3_ans_b="governs",
         q3_reason="근거."),
+    # --- 2회(A~G) 가짜 출력 -------------------------------------------------
+    "AOut": lambda: AOut(
+        marks=[WordMark(sent_no=1, word="first", shown="first"),
+               WordMark(sent_no=2, word="important", shown="important"),
+               WordMark(sent_no=3, word="concrete", shown="abstract"),   # 반의어(오답)
+               WordMark(sent_no=4, word="draws", shown="draw"),          # 어법(오답)
+               WordMark(sent_no=1, word="clearly", shown="clearly")],
+        answer_no=3, reason="이유.",
+        choices=["ⓐ, ⓑ", "ⓐ, ⓒ", "ⓒ, ⓓ", "ⓑ, ⓔ", "ⓓ, ⓔ"]),
+    "BOut": lambda: BOut(
+        phrase="concrete example", choices=["b1", "b2", "b3", "b4", "b5"],
+        answer_no=2, reason="이유.",
+        wrong_reasons=[WrongReason(no=1, text="축자적 오독"), WrongReason(no=3, text="논지 위배"),
+                       WrongReason(no=4, text="무관"), WrongReason(no=5, text="모순")]),
+    "DOut": lambda: DOut(
+        tokens=["the", "third", "sentence", "give", "a", "concrete", "example"],
+        cues=["give"],
+        answer="The third sentence gives a concrete example.",  # 지문 문장 그대로
+        reason="원래 배열."),
+    "EOut": lambda: EOut(
+        before="The passage presents its ", mid=" through a ", after=" for readers.",
+        pairs=[Pair(a="topic", b="example", a_ok=True, b_ok=True),      # 정답(둘 다 맞음)
+               Pair(a="topic", b="wrongword", a_ok=True, b_ok=False),
+               Pair(a="wrongword", b="example", a_ok=False, b_ok=True),
+               Pair(a="wrongword", b="badword", a_ok=False, b_ok=False),
+               Pair(a="badword", b="wrongword", a_ok=False, b_ok=False)],
+        answer_no=1, reason="이유."),
+    "FOut": lambda: FOut(
+        blank_phrase="concrete example", choices=["f1", "f2", "f3", "f4", "f5"],
+        answer_no=2, reason="이유.",
+        wrong_reasons=[WrongReason(no=1, text="모순"), WrongReason(no=3, text="무관"),
+                       WrongReason(no=4, text="모순"), WrongReason(no=5, text="무관")]),
+    "GOut": lambda: GOut(
+        statements=["진술1", "진술2", "진술3", "진술4", "진술5"],
+        matches=[True, False, True, False, True], reason="이유.",
+        per_stmt=["일치", "불일치", "일치", "불일치", "일치"]),
 }
 
 
@@ -260,6 +306,36 @@ def test_llm_path_wiring() -> None:
     print("✓ LLM 경로(생성기→build→검증→조판) 배선 통과")
 
 
+def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """유형 병렬 생성 + 지문 병렬 분석 + 1회·2회 분석 공유가 정상 배선되는지."""
+    from exam import gen2, pipeline
+    tmp_out.mkdir(parents=True, exist_ok=True)
+
+    client = _FakeClient()
+    bodies = ["dummy body one", "dummy body two"]
+
+    # 1) 지문 여러 개 병렬 분석
+    analyses = pipeline.analyze_bodies(client, bodies)
+    assert len(analyses) == len(bodies)
+
+    # 2) 1회: 미리 만든 분석을 공유하며 병렬 유형 생성 → 번호 연속(1..14)
+    out1 = tmp_out / "p1.pdf"
+    pipeline.build_exam(client, bodies, out1, analyses=analyses)
+    assert out1.exists()
+
+    # 3) 2회: 같은 분석 공유 → A~G 병렬 생성
+    out2 = tmp_out / "p2.pdf"
+    gen2.build_exam2(client, bodies, out2, analyses=analyses)
+    assert out2.exists()
+
+    # 4) 병렬 build_passage 결과가 순서대로 온전히 채워졌는지(7종)
+    p = pipeline.build_passage(client, "dummy", analysis=analyses[0])
+    assert p.types == set(TYPE_ORDER)
+    p2 = gen2.build_passage2(client, "dummy", analysis=analyses[0])
+    assert p2.types == set(TYPE_ORDER2)
+    print("✓ 병렬 생성·병렬 분석·1회2회 분석 공유 통과")
+
+
 if __name__ == "__main__":
     test_demo_validation_and_numbering()
     test_render_html_bold_rules()
@@ -270,4 +346,5 @@ if __name__ == "__main__":
     test_pdf_cleaning()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()
+    test_parallel_and_shared_analysis()
     print("\n모든 오프라인 테스트 통과 ✅")

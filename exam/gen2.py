@@ -10,6 +10,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from . import analyzer, build2, renderer, validator
+from ._concurrent import run_parallel
 from .generators import grammar as _grammar_gen
 from .generators.base import context
 from .llm import SYSTEM, ClaudeClient
@@ -224,34 +225,48 @@ _GENERATORS2 = {A: _gen_A, B: _gen_B, C: _gen_C, D: _gen_D, E: _gen_E, F: _gen_F
 # ---------------------------------------------------------------------------
 # 오케스트레이션
 # ---------------------------------------------------------------------------
-def build_passage2(client, body, max_retries=1, logger=None) -> Passage:
-    analysis = analyzer.analyze(client, body, max_retries=max_retries)
+def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger):
+    """2회 한 유형 생성(실패 시 한 번 더). (q, a) 반환."""
+    last_err = None
+    for attempt in range(2):
+        try:
+            return gen(client, analysis, body, max_retries=max_retries)
+        except Exception as e:  # noqa: BLE001
+            last_err = e
+            if logger:
+                logger.warning("[2회 %s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
+    raise RuntimeError(f"2회 '{t}' 유형 생성 실패: {last_err}")
+
+
+def build_passage2(client, body, max_retries=1, logger=None, analysis=None) -> Passage:
+    """2회 지문 1개 -> A~G. 유형은 병렬 생성, analysis 를 주면 분석을 건너뛴다."""
+    if analysis is None:
+        analysis = analyzer.analyze(client, body, max_retries=max_retries)
     passage = Passage(title=analysis.title)
-    for t in TYPE_ORDER2:
+
+    def _task(t):
         gen = _GENERATORS2[t]
-        last_err = None
-        for attempt in range(2):
-            try:
-                q, a = gen(client, analysis, body, max_retries=max_retries)
-                passage.set_qa(t, q, a)
-                last_err = None
-                break
-            except Exception as e:  # noqa: BLE001
-                last_err = e
-                if logger:
-                    logger.warning("[2회 %s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
-        if last_err is not None:
-            raise RuntimeError(f"2회 '{t}' 유형 생성 실패: {last_err}")
+        return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries, logger)
+
+    results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
+    for t in TYPE_ORDER2:
+        q, a = results[t]
+        passage.set_qa(t, q, a)
     validator.check_passage(passage, TYPE_ORDER2)
     return passage
 
 
-def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None) -> Path:
+def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
+                analyses=None) -> Path:
+    from .pipeline import analyze_bodies
+    if analyses is None:
+        analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
     passages = []
-    for i, body in enumerate(bodies, 1):
+    for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
         if logger:
-            logger.info("[2회 %d/%d] 지문 분석·생성 중 …", i, len(bodies))
-        passages.append(build_passage2(client, body, max_retries=max_retries, logger=logger))
+            logger.info("[2회 %d/%d] 지문 생성 중 …", i, len(bodies))
+        passages.append(build_passage2(client, body, max_retries=max_retries,
+                                       logger=logger, analysis=analysis))
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
