@@ -21,11 +21,10 @@ body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; colo
 
 @media print {
   body{ background:#fff; padding:0; }
-  .dict,.para,.scope,.card{ box-shadow:none; }
+  .dict,.para,.scope,.card,.mcol{ box-shadow:none; }
   .dict{ break-after:page; }          /* 신호 사전 = 한 페이지 통째 */
   .engines{ break-after:page; }        /* 패러프레이즈+적용범위 = 한 페이지 */
-  .qpage{ break-before:page; break-inside:avoid; }  /* 빈칸연습+훈련 = 한 페이지 */
-  .card.trans{ break-before:page; }    /* 해석 카드 = 다음 페이지 */
+  .qpage{ break-before:page; break-inside:avoid; }  /* 연습+훈련‖해석 = 한 페이지 */
 }
 
 /* ===== 신호 사전 (풍성, 한 페이지 가득) ===== */
@@ -91,6 +90,24 @@ mark.g{ background:var(--src); box-shadow:inset 0 -2px 0 var(--src-line); paddin
 .doit{ font-size:9.3px; color:#8a6a00; background:var(--must); border-radius:5px; padding:5px 9px; margin-bottom:7px; font-weight:700; }
 .myans{ font-size:9.4px; margin-top:6px; color:#5a4600; }
 .myans .fill{ display:inline-block; min-width:34px; border-bottom:1.5px solid #b78900; margin:0 4px; }
+.pracopts{ font-size:9.3px; line-height:1.65; margin-top:7px; padding:6px 10px; background:#fff; border:1px dashed var(--must-line); border-radius:5px; }
+.pracopts .o{ display:inline-block; margin-right:14px; }
+
+/* 훈련 ‖ 해석 병합 2단 */
+.merge{ display:flex; gap:10px; align-items:stretch; margin-bottom:12px; }
+.mcol{ flex:1; background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.1); padding:11px 13px; }
+.mcol.trans{ border-left:4px solid var(--src-line); }
+.mh{ font-size:10.5px; font-weight:800; color:var(--ink-d); border-bottom:2px solid var(--ink-d); padding-bottom:4px; margin-bottom:7px; display:flex; align-items:center; gap:6px; }
+.mh .tm{ margin-left:auto; font-size:8.8px; color:var(--muted); font-weight:700; }
+.mh.g{ color:var(--src-line); border-color:var(--src-line); }
+.mcol .psg{ font-size:9px; line-height:1.75; margin-bottom:6px; }
+.mcol .opts{ margin-top:6px; }
+.mcol .opt{ font-size:9px; }
+.mcol .formula{ font-size:9.2px; }
+.klist{ font-size:9.2px; line-height:1.5; }
+.klist .kt{ display:block; font-weight:800; color:var(--src-line); font-size:8.8px; margin:6px 0 3px; }
+.klist .s{ display:block; margin-bottom:4px; }
+.klist .co{ color:var(--src-line); font-weight:800; } .klist .xo{ color:var(--trap); font-weight:800; }
 
 .why{ background:#fffbe9; border:1px solid var(--must-line); border-radius:6px; padding:7px 10px; margin-bottom:8px; }
 .why .h{ font-size:9px; font-weight:800; color:#a86b00; margin-bottom:3px; }
@@ -230,111 +247,117 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
     </div>
   </div>
 
-  <!-- ================= 34번: 빈칸 연습 + 훈련 (한 페이지) ================= -->
+  <!-- ================= 34번: 연습(문제+선지) + 훈련‖해석 병합 2단 (한 페이지) ================= -->
   <div class="qpage">
-    <!-- 빈칸(연습) 카드 -->
+    <!-- ① 빈칸 연습 카드: 문제 + 선지 -->
     <div class="card blank">
-      <div class="hd"><span class="no">34</span><span class="ty">빈칸추론</span><span class="kind b">① 빈칸 연습 카드</span><span class="pt">3점</span><span class="tm">먼저 스스로!</span></div>
-      <div class="doit">✍️ 신호 사전을 보고 <b>무조건 읽을 문장에 직접 형광펜</b>을 치세요. 그다음 아래 훈련 카드로 정답 칠과 비교합니다.</div>
+      <div class="hd"><span class="no">34</span><span class="ty">빈칸추론</span><span class="kind b">① 연습 (직접 풀기)</span><span class="pt">3점</span><span class="tm">먼저 스스로!</span></div>
+      <div class="doit">✍️ 신호 사전 보고 <b>무조건 읽을 문장에 형광펜</b> → 선지까지 골라본 뒤, 아래에서 정답 칠·해석과 비교하세요.</div>
       <div class="psg plain">
         Emma Brindley has investigated the responses of European robins to the songs of neighbors and strangers. Despite the large and complex song repertoire of European robins, they were able to discriminate between the songs of neighbors and strangers. When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs with the playback more often than on hearing a neighbor's song. As Brindley suggests, the overlapping of song may be an aggressive response. However, this difference occurred only when the neighbor's song was played at the boundary between that neighbor's territory and the territory of the bird being tested. If the same song was played at another boundary, it was treated as the call of a stranger. Not only does this result demonstrate that <span class="bk">&nbsp;34&nbsp;</span>, but it also shows that the choice of songs is highly important.
       </div>
-      <div class="myans">내가 고른 답 <span class="fill"></span> &nbsp;·&nbsp; 근거라고 생각한 문장에 밑줄 → 훈련 카드와 맞춰보기</div>
+      <div class="pracopts">
+        <span class="o">① variety and complexity characterize the robins' songs</span>
+        <span class="o">② song volume affects the robins' aggressive behavior</span>
+        <span class="o">③ poor territorial sense is a key to survival</span>
+        <span class="o">④ the robins associate locality with familiar songs</span>
+        <span class="o">⑤ less responsive to recorded songs</span>
+      </div>
+      <div class="myans">내가 고른 답 <span class="fill"></span> &nbsp;·&nbsp; 근거라고 생각한 문장에 밑줄</div>
     </div>
-    <!-- 훈련 카드 -->
-    <div class="card">
-      <div class="hd"><span class="no">34</span><span class="ty">빈칸추론</span><span class="kind">② 훈련 카드 (정답 칠)</span><span class="tm">⏱ 1'40"</span></div>
-      <div class="psg">
-        <span class="sk">Emma Brindley has investigated... <span class="tag">양보</span>Despite the large and complex song repertoire,</span> they could discriminate neighbors from strangers.
-        <mark class="m">When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs more often.</mark>
-        <span class="sk">As Brindley suggests, this may be an aggressive response.</span>
-        <mark class="m"><span class="tag hot">역접</span>However, this difference occurred <span class="tag hot">한정</span>only when the neighbor's song was played at the boundary between that neighbor's territory and the tested bird's.</mark>
-        <mark class="g"><span class="tag hot">조건</span>If the same song was played at another boundary, it was treated as the call of a stranger.</mark>
-        <span class="tag">앵커</span>Not only does this result demonstrate that <span class="bk">&nbsp;34&nbsp;</span>...
+
+    <!-- ②훈련 ‖ ③해석 병합 2단 -->
+    <div class="merge">
+      <!-- 왼쪽: 훈련 -->
+      <div class="mcol train">
+        <div class="mh">② 훈련 (정답 칠)<span class="tm">⏱ 1'40"</span></div>
+        <div class="psg">
+          <span class="sk">Emma Brindley... <span class="tag">양보</span>Despite the complex repertoire,</span> they discriminate.
+          <mark class="m">When they heard a stranger's recording, they sang sooner, more, and overlapped more often.</mark>
+          <span class="sk">This may be aggressive.</span>
+          <mark class="m"><span class="tag hot">역접</span>However, this occurred <span class="tag hot">한정</span>only when played at the boundary of the neighbor's and the tested bird's territory.</mark>
+          <mark class="g"><span class="tag hot">조건</span>If played at another boundary, it was treated as a stranger.</mark>
+        </div>
+        <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[낯선 녹음→공격] +[<b>However</b> 경계에서만] +[<b>다른 경계</b>=낯선] <span class="arw">⟹</span> 노래=<b>장소</b> = <b>④</b> ✓</span></div>
+        <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">boundary·territory</span> <span class="arw">→</span> ④ <span class="sw">locality</span> ✓ / 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> 복사</div>
+        <div class="opts">
+          <div class="opt ok"><span class="n">④</span><span class="tx">associate <b>locality</b> with songs</span><span class="jd">✔ 근거</span></div>
+          <div class="opt x"><span class="n">①</span><span class="tx"><span class="reuse">complexity</span> ...</span><span class="jd">✘ 표면어휘</span></div>
+          <div class="opt x"><span class="n">②</span><span class="tx"><span class="reuse">volume</span> ...</span><span class="jd">✘ 없음</span></div>
+          <div class="opt x"><span class="n">③</span><span class="tx">poor territorial sense</span><span class="jd">✘ 정반대</span></div>
+          <div class="opt x"><span class="n">⑤</span><span class="tx">less responsive to <span class="reuse">recorded</span></span><span class="jd">✘ 반대</span></div>
+        </div>
+        <div class="formula"><span class="k">공식</span>빈칸=역접·한정 문장 추상화 / 지문어 복사=함정</div>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[낯선 녹음→더 공격적] <span class="arw">+</span> [<b>However</b> 경계에서만] <span class="arw">+</span> [<b>다른 경계</b>면 낯선 취급] <span class="arw">⟹</span> 노래=<b>장소</b> 인식 = <b>④</b> ✓</span></div>
-      <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">boundary·territory (장소)</span> <span class="arw">→</span> 정답 ④ <span class="sw">locality</span> ✓ &nbsp;/&nbsp; 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> = 그대로 복사 함정</div>
-      <div class="opts">
-        <div class="opt ok"><span class="n">④</span><span class="tx">the robins associate <b>locality</b> with familiar songs</span><span class="jd">✔ 위치+노래 = 근거</span></div>
-        <div class="opt x"><span class="n">①</span><span class="tx">variety and <span class="reuse">complexity</span> characterize the songs</span><span class="jd">✘ 표면어휘</span></div>
-        <div class="opt x"><span class="n">②</span><span class="tx">song <span class="reuse">volume</span> affects aggressive behavior</span><span class="jd">✘ 없음</span></div>
-        <div class="opt x"><span class="n">③</span><span class="tx">poor territorial sense is a key to survival</span><span class="jd">✘ 정반대</span></div>
-        <div class="opt x"><span class="n">⑤</span><span class="tx">less responsive to recorded songs</span><span class="jd">✘ 반대</span></div>
+      <!-- 오른쪽: 해석 -->
+      <div class="mcol trans">
+        <div class="mh g">③ 해석 <span class="tm">🟡문장·선지만</span></div>
+        <div class="klist">
+          <span class="kt">🟡 무조건 읽는 문장</span>
+          <span class="s">• 낯선 새 <b>녹음</b>을 듣자 더 빨리·많이 노래하고 재생음과 <b>겹쳤다</b>(공격 반응).</span>
+          <span class="s">• <b>그러나</b> 이 차이는 이웃·실험새 영역 <b>사이 경계</b>에서 재생될 때<b>에만</b> 나타났다.</span>
+          <span class="s">• 같은 노래도 <b>다른 경계</b>면 <b>낯선 새</b> 울음으로 취급. ← 근거</span>
+          <span class="kt">선지</span>
+          <span class="s"><span class="co">④정답</span> 울새는 <b>장소(위치)</b>를 익숙한 노래와 연관 짓는다</span>
+          <span class="s"><span class="xo">①</span> 다양성·복잡성이 노래를 특징 / <span class="xo">②</span> 음량이 공격성에 영향</span>
+          <span class="s"><span class="xo">③</span> 빈약한 영역감각=생존열쇠 / <span class="xo">⑤</span> 녹음에 덜 반응</span>
+        </div>
       </div>
-      <div class="formula"><span class="k">공식</span>빈칸 = <b>역접·한정(However·only·If)</b> 문장 찾아 추상화 / 지문 단어 그대로 쓴 선지 = 함정</div>
     </div>
   </div>
 
-  <!-- 34번 해석 카드 -->
-  <div class="card trans">
-    <div class="hd"><span class="no">34</span><span class="ty">빈칸추론</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">③ 해석 카드</span><span class="tm">🟡 형광펜 문장 + 선지만</span></div>
-    <table class="tr2">
-      <thead><tr><th>영어 (노란 형광펜 문장 · 선지)</th><th>한글 해석</th></tr></thead>
-      <tbody>
-        <tr class="secrow"><td colspan="2">🟡 무조건 읽어야 하는 문장</td></tr>
-        <tr><td class="en">When they heard a recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs more often.</td><td class="ko">낯선 새의 <b>녹음</b>을 들었을 때, 울새들은 더 빨리·더 많이 노래했고 재생음과 자기 노래를 더 자주 <b>겹쳤다</b>.(공격 반응)</td></tr>
-        <tr><td class="en">However, this difference occurred only when the neighbor's song was played at the boundary between that neighbor's territory and the tested bird's.</td><td class="ko"><b>그러나</b> 이 차이는 이웃 노래가 '그 이웃과 실험 새의 영역 <b>사이 경계</b>'에서 재생될 때<b>에만</b> 나타났다.</td></tr>
-        <tr><td class="en">If the same song was played at another boundary, it was treated as the call of a stranger.</td><td class="ko">같은 노래도 <b>다른 경계</b>에서 재생되면 <b>낯선 새</b>의 울음으로 취급됐다. ← 정답 근거</td></tr>
-        <tr class="secrow"><td colspan="2">선지 해석</td></tr>
-        <tr><td class="en"><span class="co">④</span> associate locality with familiar songs</td><td class="ko"><span class="co">정답</span> 울새는 <b>장소(위치)</b>를 익숙한 노래와 연관 짓는다</td></tr>
-        <tr><td class="en"><span class="xo">①</span> variety and complexity characterize the songs</td><td class="ko"><span class="xo">오답</span> 다양성·복잡성이 노래를 특징짓는다</td></tr>
-        <tr><td class="en"><span class="xo">②</span> song volume affects aggressive behavior</td><td class="ko"><span class="xo">오답</span> 노래 <b>음량</b>이 공격 행동에 영향</td></tr>
-        <tr><td class="en"><span class="xo">③</span> poor territorial sense is a key to survival</td><td class="ko"><span class="xo">오답</span> 빈약한 <b>영역 감각</b>이 생존의 열쇠</td></tr>
-        <tr><td class="en"><span class="xo">⑤</span> less responsive to recorded songs</td><td class="ko"><span class="xo">오답</span> 녹음 노래에 <b>덜</b> 반응</td></tr>
-      </tbody>
-    </table>
-    <div class="note">※ 스킵(회색) 문장은 해석하지 않음 — 안 읽어도 되는 곳이므로.</div>
-  </div>
-
-  <!-- ================= 21번: 빈칸 연습 + 훈련 (한 페이지) ================= -->
+  <!-- ================= 21번: 연습(문제+선지) + 훈련‖해석 병합 2단 (한 페이지) ================= -->
   <div class="qpage">
     <div class="card blank">
-      <div class="hd"><span class="no">21</span><span class="ty">함축의미</span><span class="kind b">① 밑줄 연습 카드</span><span class="pt">3점</span><span class="tm">먼저 스스로!</span></div>
-      <div class="doit">✍️ 밑줄 <b>an empty inbox</b>가 긍정인지 부정인지부터 정하고, 근거가 될 문장에 직접 형광펜을 치세요.</div>
+      <div class="hd"><span class="no">21</span><span class="ty">함축의미</span><span class="kind b">① 연습 (직접 풀기)</span><span class="pt">3점</span><span class="tm">먼저 스스로!</span></div>
+      <div class="doit">✍️ 밑줄 <b>an empty inbox</b>가 (＋/−)인지부터 정하고, 근거 문장에 형광펜 → 선지까지 골라본 뒤 아래와 비교.</div>
       <div class="psg plain">
         The single most important change you can make in your working habits is to switch to creative work first, reactive work second. This means blocking off a large chunk of time every day for creative work, with the phone and e-mail off. I used to be a frustrated writer. Making this switch turned me into a productive writer. Yet there wasn't a single day when I sat down to write without a string of people waiting for me to get back to them. But it's better to disappoint a few people over small things, than to abandon your dreams for <u>an empty inbox</u>. Otherwise, you're sacrificing your potential for the illusion of professionalism.
       </div>
-      <div class="myans">an empty inbox는 (＋ / －) &nbsp;·&nbsp; 내가 고른 답 <span class="fill"></span> → 훈련 카드와 맞춰보기</div>
-    </div>
-    <div class="card">
-      <div class="hd"><span class="no">21</span><span class="ty">함축의미</span><span class="kind">② 훈련 카드 (정답 칠)</span><span class="tm">⏱ 1'30"</span></div>
-      <div class="psg">
-        <mark class="m"><span class="tag">앵커·강조</span>The single most important change is to switch to creative work first, reactive work second</mark> — with phone and e-mail off.
-        <span class="sk">I used to be a frustrated writer. Making this switch turned me into a productive writer...</span>
-        <mark class="g"><span class="tag hot">역접</span>But it's better to disappoint a few people over small things, than to abandon your dreams for <b>an empty inbox</b>.</mark>
-        <mark class="m"><span class="tag">결론</span>Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
+      <div class="pracopts">
+        <span class="o">① following an innovative course of action</span>
+        <span class="o">② attempting to satisfy other people's demands</span>
+        <span class="o">③ completing challenging work without mistakes</span>
+        <span class="o">④ removing social ties to maintain a mental balance</span>
+        <span class="o">⑤ securing enough opportunities for social networking</span>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[창의적 일 먼저·이메일 끄기] <span class="arw">+</span> [<b>But</b> 꿈을 empty inbox와 안 바꿈] <span class="arw">+</span> [<b>Otherwise</b> 잠재력 희생] <span class="arw">⟹</span> empty inbox=남 요구 응대 = <b>②</b> ✓</span></div>
-      <div class="pline"><span class="lb">패러프레이즈</span> 지문 <span class="sw">an empty inbox (비유)</span> <span class="arw">→</span> 정답 ② <span class="sw">satisfy others' demands</span> (비유→직설) ✓ &nbsp;/&nbsp; 오답 ④⑤ <span class="cp">social</span> = 그대로 복사 함정</div>
-      <div class="opts">
-        <div class="opt ok"><span class="n">②</span><span class="tx">attempting to satisfy <b>other people's demands</b></span><span class="jd">✔ '남 메일 응대' 추상화</span></div>
-        <div class="opt x"><span class="n">①</span><span class="tx">following an <span class="reuse">innovative</span> course of action</span><span class="jd">✘ 긍정어 → ± 반대</span></div>
-        <div class="opt x"><span class="n">③</span><span class="tx">completing work without <span class="reuse">mistakes</span></span><span class="jd">✘ 없음</span></div>
-        <div class="opt x"><span class="n">④</span><span class="tx">removing <span class="reuse">social</span> ties for balance</span><span class="jd">✘ 표면어휘</span></div>
-        <div class="opt x"><span class="n">⑤</span><span class="tx">securing <span class="reuse">social networking</span></span><span class="jd">✘ 표면어휘</span></div>
-      </div>
-      <div class="formula"><span class="k">공식</span>함축 = <b>역접(But) 신호</b>로 밑줄 ± 판정 → 추상 표현 선지 / 밑줄 근처 표면어휘 = 함정</div>
+      <div class="myans">an empty inbox는 (＋ / －) &nbsp;·&nbsp; 내가 고른 답 <span class="fill"></span></div>
     </div>
-  </div>
 
-  <!-- 21번 해석 카드 -->
-  <div class="card trans">
-    <div class="hd"><span class="no">21</span><span class="ty">함축의미</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">③ 해석 카드</span><span class="tm">🟡 형광펜 문장 + 선지만</span></div>
-    <table class="tr2">
-      <thead><tr><th>영어 (노란 형광펜 문장 · 선지)</th><th>한글 해석</th></tr></thead>
-      <tbody>
-        <tr class="secrow"><td colspan="2">🟡 무조건 읽어야 하는 문장</td></tr>
-        <tr><td class="en">The single most important change is to switch to creative work first, reactive work second.</td><td class="ko"><b>가장 중요한 단 하나의</b> 변화는 창의적 일을 먼저, 반응적 일을 나중에 하는 것이다.</td></tr>
-        <tr><td class="en">But it's better to disappoint a few people over small things, than to abandon your dreams for an empty inbox.</td><td class="ko"><b>그러나</b> 사소한 일로 몇 사람 실망시키는 것이, <b>텅 빈 수신함</b>을 위해 꿈을 <b>포기하는 것</b>보다 낫다.</td></tr>
-        <tr><td class="en">Otherwise, you're sacrificing your potential for the illusion of professionalism.</td><td class="ko">그렇지 않으면 전문성이라는 <b>환상</b>을 위해 잠재력을 <b>희생</b>하는 것이다.</td></tr>
-        <tr class="secrow"><td colspan="2">선지 해석</td></tr>
-        <tr><td class="en"><span class="co">②</span> attempting to satisfy other people's demands</td><td class="ko"><span class="co">정답</span> 다른 사람들의 <b>요구를 만족시키려</b> 애쓰는 것</td></tr>
-        <tr><td class="en"><span class="xo">①</span> following an innovative course of action</td><td class="ko"><span class="xo">오답</span> <b>혁신적인</b> 행동 방침을 따르는 것</td></tr>
-        <tr><td class="en"><span class="xo">③</span> completing challenging work without mistakes</td><td class="ko"><span class="xo">오답</span> <b>실수 없이</b> 어려운 일을 완수하는 것</td></tr>
-        <tr><td class="en"><span class="xo">④</span> removing social ties to maintain a mental balance</td><td class="ko"><span class="xo">오답</span> 균형을 위해 <b>사회적 관계</b>를 끊는 것</td></tr>
-        <tr><td class="en"><span class="xo">⑤</span> securing enough opportunities for social networking</td><td class="ko"><span class="xo">오답</span> <b>사회적 관계망</b> 기회를 확보하는 것</td></tr>
-      </tbody>
-    </table>
+    <div class="merge">
+      <div class="mcol train">
+        <div class="mh">② 훈련 (정답 칠)<span class="tm">⏱ 1'30"</span></div>
+        <div class="psg">
+          <mark class="m"><span class="tag">앵커·강조</span>The single most important change is to switch to creative work first, reactive work second</mark> — phone/e-mail off.
+          <span class="sk">I used to be a frustrated writer... turned me into a productive writer...</span>
+          <mark class="g"><span class="tag hot">역접</span>But it's better to disappoint a few people, than to abandon your dreams for <b>an empty inbox</b>.</mark>
+          <mark class="m"><span class="tag">결론</span>Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
+        </div>
+        <div class="vline"><span class="lb">🟡만 읽기 검증</span><span class="seq">[창의적 일 먼저] +[<b>But</b> 꿈≠empty inbox] +[<b>Otherwise</b> 잠재력 희생] <span class="arw">⟹</span> empty inbox=남 요구 = <b>②</b> ✓</span></div>
+        <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">empty inbox (비유)</span> <span class="arw">→</span> ② <span class="sw">others' demands</span> (직설) ✓ / 오답 ④⑤ <span class="cp">social</span> 복사</div>
+        <div class="opts">
+          <div class="opt ok"><span class="n">②</span><span class="tx">satisfy <b>other people's demands</b></span><span class="jd">✔ 추상화</span></div>
+          <div class="opt x"><span class="n">①</span><span class="tx"><span class="reuse">innovative</span> ...</span><span class="jd">✘ ± 반대</span></div>
+          <div class="opt x"><span class="n">③</span><span class="tx">without <span class="reuse">mistakes</span></span><span class="jd">✘ 없음</span></div>
+          <div class="opt x"><span class="n">④</span><span class="tx">removing <span class="reuse">social</span> ties</span><span class="jd">✘ 표면어휘</span></div>
+          <div class="opt x"><span class="n">⑤</span><span class="tx"><span class="reuse">social networking</span></span><span class="jd">✘ 표면어휘</span></div>
+        </div>
+        <div class="formula"><span class="k">공식</span>함축=역접(But)로 밑줄 ± 판정 → 추상 선지 / 표면어휘=함정</div>
+      </div>
+      <div class="mcol trans">
+        <div class="mh g">③ 해석 <span class="tm">🟡문장·선지만</span></div>
+        <div class="klist">
+          <span class="kt">🟡 무조건 읽는 문장</span>
+          <span class="s">• <b>가장 중요한 단 하나의</b> 변화는 창의적 일을 먼저, 반응적 일을 나중에.</span>
+          <span class="s">• <b>그러나</b> 몇 사람 실망시키는 게, <b>텅 빈 수신함</b> 위해 꿈을 <b>포기</b>하는 것보다 낫다.</span>
+          <span class="s">• 안 그러면 전문성이라는 <b>환상</b>에 잠재력을 <b>희생</b>. ← 근거</span>
+          <span class="kt">선지</span>
+          <span class="s"><span class="co">②정답</span> 남들의 <b>요구를 만족시키려</b> 애쓰는 것</span>
+          <span class="s"><span class="xo">①</span> 혁신적 방침을 따름 / <span class="xo">③</span> 실수 없이 완수</span>
+          <span class="s"><span class="xo">④</span> 균형 위해 사회적 관계 끊기 / <span class="xo">⑤</span> 사회적 관계망 확보</span>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
