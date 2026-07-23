@@ -91,12 +91,35 @@ def test_render_html():
     print("PASS  실전서 HTML 렌더링(진짜 의미·극성·유추 포함)")
 
 
+def test_corpus_store():
+    """영구 기출 저장소(data/corpus.jsonl) 조회 계층 스모크 테스트."""
+    from src.guide.corpus_store import EXCLUDE_ITEM_NOS, load_corpus, pick, query
+    recs = load_corpus()
+    if not recs:
+        print("SKIP  corpus.jsonl 없음(ingest 전) — 저장소 테스트 생략")
+        return
+    # 필수 필드
+    r = recs[0]
+    for k in ("id", "text", "source", "codes", "type", "difficulty", "self_contained"):
+        assert k in r, f"레코드에 {k} 없음"
+    # 제외 문항은 기본 질의에서 빠져야 함
+    picked = query(recs, code="contrast")
+    assert all(x.get("item") not in EXCLUDE_ITEM_NOS for x in picked), "제외문항 누출"
+    assert all(x["self_contained"] for x in picked), "자기완결 필터 미적용"
+    # pick 은 결정적(재현 가능)
+    a = [x["id"] for x in pick(3, type="apposition")]
+    b = [x["id"] for x in pick(3, type="apposition")]
+    assert a == b, "pick 비결정적"
+    print(f"PASS  영구 코퍼스 저장소({len(recs)}문장) 조회·필터·재현성")
+
+
 def run_all():
     test_load_codes()
     test_split_sentences()
     test_match_with_adverb()
     test_polarity_codes()
     test_syntax_types()
+    test_corpus_store()
     test_render_html()
     print("\n실전서 오프라인 테스트 통과 ✅")
 
