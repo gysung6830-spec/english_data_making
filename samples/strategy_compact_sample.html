@@ -197,6 +197,19 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .pline .sw{ background:#ece3f8; border-radius:3px; padding:0 4px; font-weight:700; color:var(--pur-d); }
 .pline .cp{ background:#ffe0dd; border-radius:3px; padding:0 4px; font-weight:700; color:#a5342d; }
 .pline .arw{ color:var(--pur); font-weight:800; }
+/* 노란색만으로 정답 도출 — 카드별 상세 과정 */
+.derive{ margin-top:6px; background:#fffdf3; border:1px solid var(--must-line); border-radius:6px; padding:9px 12px; }
+.derive .dh{ font-size:9.3px; font-weight:800; color:#8a6a00; margin-bottom:6px; }
+.derive ol{ margin:0 0 6px; padding:0; list-style:none; }
+.derive li{ font-size:9.5px; line-height:1.55; margin-bottom:4px; padding-left:42px; position:relative; }
+.derive li .yb{ position:absolute; left:0; top:1px; font-size:7.5px; font-weight:800; color:#7a5c00;
+  background:var(--must); border:1px solid var(--must-line); border-radius:7px; padding:1px 5px; }
+.derive li u{ text-decoration:none; background:var(--must); padding:0 2px; border-radius:2px; font-weight:700; }
+.derive li .an{ color:var(--muted); font-size:8.7px; }
+.derive .concl{ font-size:9.6px; font-weight:700; color:#23272e; background:#eaf5f0;
+  border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:6px 10px; margin-top:2px; }
+.derive .concl b{ color:var(--ink-d); }
+.derive .gnote{ font-size:8.6px; color:var(--muted); margin-top:5px; padding-left:2px; }
 .vline{ margin-top:6px; background:#fffdf3; border:1px solid var(--must-line); border-radius:6px; padding:5px 9px; font-size:9.4px; }
 .vline .lb{ font-size:8px; font-weight:800; color:#7a5c00; background:var(--must); border:1px solid var(--must-line); border-radius:8px; padding:1px 6px; margin-right:5px; }
 .vline .seq{ color:#5a4600; } .vline .seq b{ color:var(--ink-d); } .vline .arw{ color:#a86b00; font-weight:800; }
@@ -300,20 +313,6 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
 
   <!-- ================= 패러프레이즈 + 적용범위 (한 페이지) ================= -->
   <div class="engines">
-    <div class="mech">
-      <h3>🟡 왜 노란색만 읽어도 답이 나올까?</h3>
-      <div class="lead">수능 지문은 예외 없이 <b>하나의 주장</b>을, <b>예시·부연으로 늘려 쓴 글</b>이다. 노란색은 그 <b>주장이 드러나는 자리</b>(주제문·방향 트는 역접·결론·빈칸)만 골라낸 것.</div>
-      <div class="diag">
-        <span class="n y">🟡 주제</span><span class="ar">→</span><span class="n s">⬜ 예시</span><span class="ar">→</span><span class="n s">⬜ 부연</span><span class="ar">→</span><span class="n y">🟡 역접·결론(재진술)</span>
-      </div>
-      <div class="cap">예시(회색)를 빼도 주장(노랑)은 <b>그대로다</b> — 예시는 주장을 '설명'할 뿐, '바꾸지' 못하니까.</div>
-      <div class="pts">
-        <p><span class="k">①</span>글은 <b>뼈대(주장)</b>와 <b>살(예시)</b>로 되어 있다. 노란색은 뼈대만 추린 것.</p>
-        <p><span class="k">②</span>평가원 정답은 <b>언제나 뼈대(주장)</b>에서 나온다 — 예시 속 낱낱의 사실이 아니라, 글이 향하는 논지에서.</p>
-        <p><span class="k">③</span>그래서 <b>노란 문장만 이으면 글이 하려는 말이 그대로 재구성</b>되고, 정답 근거가 손에 들어온다. 회색(살)은 시간만 먹는다.</p>
-      </div>
-    </div>
-
     <div class="scope">
       <h3>🟡 이 교재가 다루는 유형 = "노랑만 읽기가 통하는 유형"만</h3>
       <table>
@@ -386,7 +385,16 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
         <mark class="m"><span class="tag hot">역접</span>However, this occurred <span class="tag hot">한정</span>only when played at the boundary of the neighbor's and the tested bird's territory.</mark>
         <mark class="g"><span class="tag hot">조건</span>If played at another boundary, it was treated as a stranger.</mark>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽어보면</span><span class="seq">낯선 노래엔 공격적이지만, <b>However</b> 그건 '경계'에서 틀 때만이고 <b>다른 경계</b>면 낯설게 대한다 <span class="arw">→</span> 결국 새는 노래를 <b>'장소'와 묶어</b> 듣는다 = <b>④</b> (예시 문장 없이도 논지가 완성됨)</span></div>
+      <div class="derive">
+        <div class="dh">🟡 노란색 세 문장만으로 정답이 나오는 과정</div>
+        <ol>
+          <li><span class="yb">노랑①</span>낯선 새 노래엔 <b>더 공격적으로</b> 반응한다 <span class="an">— 반응에 '차이'가 있다</span></li>
+          <li><span class="yb">노랑②</span><u>However</u>, 그 차이는 '그 경계'에서 틀 때<b>만</b> 나타난다 <span class="an">— 차이에 '위치'라는 조건이 붙는다</span></li>
+          <li><span class="yb">노랑③</span><u>If</u> 같은 노래도 '다른 경계'면 <b>낯선 것</b>으로 취급된다 <span class="an">— 위치가 바뀌면 반응도 바뀐다</span></li>
+        </ol>
+        <div class="concl">→ 세 문장을 이으면: 반응을 가르는 건 노래 자체가 아니라 <b>'어디서 들리느냐(위치)'</b>다. 빈칸 = 이 결론의 한 줄 요약 = 새는 노래를 <b>위치(locality)와 연관 짓는다</b> = <b>④</b></div>
+        <div class="gnote">회색(도입·"복잡한 레퍼토리"·"aggressive response" 부연)은 빼도 이 논리에 영향 없음.</div>
+      </div>
       <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">boundary·territory</span> <span class="arw">→</span> ④ <span class="sw">locality</span> ✓ / 오답 ① <span class="cp">complexity</span>·⑤ <span class="cp">recorded</span> 복사</div>
       <div class="opts">
         <div class="opt ok"><span class="n">④</span><span class="tx">associate <b>locality</b> with songs</span><span class="jd">✔ 근거</span></div>
@@ -477,7 +485,16 @@ table.tr2 td{ border:1px solid var(--line); padding:5px 8px; vertical-align:top;
         <mark class="g"><span class="tag hot">역접</span>But it's better to disappoint a few people, than to abandon your dreams for <b>an empty inbox</b>.</mark>
         <mark class="m"><span class="tag">결론</span>Otherwise, you're sacrificing your potential for the illusion of professionalism.</mark>
       </div>
-      <div class="vline"><span class="lb">🟡만 읽어보면</span><span class="seq">가장 중요한 건 창의적 일을 먼저 하는 것, <b>But</b> 꿈을 'empty inbox'와 바꾸지 말라 하고 <b>Otherwise</b> 잠재력을 희생한다고 못박는다 <span class="arw">→</span> empty inbox = <b>남의 요구에 응하는 일</b> = <b>②</b> (중간 사연 없이도 결론이 보임)</span></div>
+      <div class="derive">
+        <div class="dh">🟡 노란색 세 문장만으로 정답이 나오는 과정</div>
+        <ol>
+          <li><span class="yb">노랑①</span><b>가장 중요한 변화</b>는 창의적 일을 먼저 하는 것 <span class="an">— 필자의 핵심 주장</span></li>
+          <li><span class="yb">노랑②</span><u>But</u> 꿈을 'empty inbox'와 <b>바꾸지 말라</b> <span class="an">— empty inbox는 꿈과 '대립'되는 나쁜 것</span></li>
+          <li><span class="yb">노랑③</span><u>Otherwise</u> 전문성이라는 <b>'환상(illusion)'</b>에 잠재력을 희생한다 <span class="an">— 그 나쁜 것 = 헛된 겉치레</span></li>
+        </ol>
+        <div class="concl">→ 이으면: empty inbox = 꿈을 포기하고 매달리는 <b>헛된 일</b> = 남의 메일·요구에 다 응하는 것 = <b>②</b></div>
+        <div class="gnote">회색("I used to be a frustrated writer…" 개인 사연)은 빼도 결론은 그대로.</div>
+      </div>
       <div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">empty inbox (비유)</span> <span class="arw">→</span> ② <span class="sw">others' demands</span> (직설) ✓ / 오답 ④⑤ <span class="cp">social</span> 복사</div>
       <div class="opts">
         <div class="opt ok"><span class="n">②</span><span class="tx">satisfy <b>other people's demands</b></span><span class="jd">✔ 추상화</span></div>
