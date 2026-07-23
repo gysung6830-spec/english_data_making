@@ -9,7 +9,19 @@
 """
 from __future__ import annotations
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+
+def _require_all_distractors(answer_no: int, wrong_reasons) -> None:
+    """정답을 제외한 4개 선지가 모두 '틀린 이유'와 함께 설명됐는지 확인.
+
+    → 각 오답이 왜 틀린지 근거를 반드시 대게 하여 '정답급 오답'을 걸러낸다.
+    """
+    expected = {i for i in range(1, 6) if i != answer_no}
+    got = {w.no for w in wrong_reasons}
+    if got != expected:
+        raise ValueError(f"오답 설명은 정답(제외) 4개 선지를 모두 다뤄야 합니다: "
+                         f"필요 {sorted(expected)}, 받음 {sorted(got)}")
 
 
 # ---------------------------------------------------------------------------
@@ -102,6 +114,11 @@ class TopicOut(BaseModel):
             raise ValueError("answer_no 는 1~5 여야 합니다.")
         return v
 
+    @model_validator(mode="after")
+    def _distractors(self):
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self
+
 
 # ---------------------------------------------------------------------------
 # 내용 일치 (한글 선지, 지문은 원본 그대로) — 서술형 앞
@@ -125,6 +142,11 @@ class ContentOut(BaseModel):
         if not (1 <= v <= 5):
             raise ValueError("answer_no 는 1~5 여야 합니다.")
         return v
+
+    @model_validator(mode="after")
+    def _distractors(self):
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self
 
 
 # ---------------------------------------------------------------------------

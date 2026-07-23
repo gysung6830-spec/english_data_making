@@ -72,13 +72,14 @@ def _passage_dna2() -> Passage:
         },
     ))
 
-    # D · 어순 배열
+    # D · 어순 배열 — 정답은 지문에 실제로 있는 문장(S6) 그대로
     p.set_qa(D, *B2.make_D(
-        tokens=["researchers", "begin", "to", "encode", "digital", "files",
-                "into", "synthetic", "DNA"],
-        cues=["begin"],
-        answer_sentence="Researchers have begun to encode digital files into synthetic DNA.",
-        reason="동사 begin 을 문맥(현재완료)에 맞춰 have begun 으로 변형하고 어순을 맞춘다.",
+        s,
+        tokens=["one", "day", "our", "libraries", "and", "photographs", "may", "be",
+                "store", "safely", "inside", "molecules"],
+        cues=["store"],
+        answer_sentence="One day, our libraries and photographs may be stored safely inside molecules.",
+        reason="동사 store 를 수동(may be stored)으로 바꾸고 지문 어순 그대로 배열한다.",
     ))
 
     # E · 요약문 빈칸 — 정답=유의어, 오답=지문 원문 단어 함정

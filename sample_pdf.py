@@ -142,12 +142,13 @@ def _passage1() -> Passage:
         q1_prompt="본문에서 우리가 다른 사람들을 필요로 하는 이유를 두 가지 이상 우리말로 서술하시오.",
         q1_answer=("사랑·지지·인정·신체적 접촉·안심 같은 실질적·정서적 필요를 제공받기 위해서, "
                    "그리고 우리가 존재하며 고유한 정체성을 지녔음을 확인받기 위해서이다."),
-        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '우리는 교제를 추구하지 않고는 오랫동안 "
-                   "존재할 수 없다'라는 뜻의 문장을 완성하시오. (동사는 원형 제공)"),
-        q2_tokens=["we", "cannot", "exist", "for", "long", "without", "seek",
-                   "companionship"],
+        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '따라서 우리는 일반적으로 교제를 추구하지 "
+                   "않고는 그렇게 오래 존재할 수 없다'라는 뜻의 문장(지문 원문)을 완성하시오. "
+                   "(동사는 원형 제공)"),
+        q2_tokens=["thus", "we", "generally", "cannot", "exist", "for", "too", "long",
+                   "without", "seek", "companionship"],
         q2_cues=["seek"],
-        q2_answer="We cannot exist for long without seeking companionship.",
+        q2_answer="Thus, we generally cannot exist for too long without seeking companionship.",
         q3_prompt="다음 요약문의 빈칸 (A), (B)에 제시어를 알맞은 형태로 바꿔 쓰시오.",
         q3_before="Although the wish to be alone ",
         q3_mid=" from person to person, humans still need the ",
@@ -289,11 +290,12 @@ def _passage2() -> Passage:
         q1_prompt="본문에서 단일 재배가 가져온 '뜻밖의(원치 않은) 생태적 결과'가 무엇인지 우리말로 서술하시오.",
         q1_answer=("재배하려던 작물뿐 아니라 쥐·모기·파리 같은 해충과 잡초 등 원치 않는 종들까지 "
                    "함께 번성하게 된 것이다."),
-        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '잡초와 해충도 생물학적 승자였다'라는 뜻의 "
-                   "문장을 완성하시오. (동사는 원형 제공)"),
-        q2_tokens=["weeds", "and", "pests", "be", "also", "biological", "winners"],
+        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '인간 덕분에, 잡초와 해충도 생물학적 "
+                   "승자였다'라는 뜻의 문장(지문 원문)을 완성하시오. (동사는 원형 제공)"),
+        q2_tokens=["thanks", "to", "humans", "weeds", "and", "pests", "be", "also",
+                   "biological", "winners"],
         q2_cues=["be"],
-        q2_answer="Weeds and pests were also biological winners.",
+        q2_answer="Thanks to humans, weeds and pests were also biological winners.",
         q3_prompt="다음 요약문의 빈칸 (A), (B)에 제시어를 알맞은 형태로 바꿔 쓰시오.",
         q3_before="As farmers ",
         q3_mid=" a single species, unwanted animals such as rats and insects also ",

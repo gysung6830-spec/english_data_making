@@ -7,13 +7,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from . import analyzer, build2, renderer, validator
 from .generators import grammar as _grammar_gen
 from .generators.base import context
 from .llm import SYSTEM, ClaudeClient
-from .schemas import Analysis, WordMark, WrongReason
+from .schemas import Analysis, WordMark, WrongReason, _require_all_distractors
 from .set2 import (
     A, B, C, D, E, F, G, TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2,
 )
@@ -51,6 +51,11 @@ class BOut(BaseModel):
             raise ValueError("B유형 선지는 5개여야 합니다.")
         return v
 
+    @model_validator(mode="after")
+    def _distractors(self):
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self
+
 
 class DOut(BaseModel):
     tokens: list[str]
@@ -62,6 +67,8 @@ class DOut(BaseModel):
 class Pair(BaseModel):
     a: str
     b: str
+    a_ok: bool           # (A) 자리가 논지에 맞는가
+    b_ok: bool           # (B) 자리가 논지에 맞는가
 
 
 class EOut(BaseModel):
@@ -79,6 +86,15 @@ class EOut(BaseModel):
             raise ValueError("E유형 선지쌍은 5개여야 합니다.")
         return v
 
+    @model_validator(mode="after")
+    def _one_correct(self):
+        # (A)(B) 둘 다 맞는 쌍이 '정확히 하나'여야 하고 그게 정답이어야 한다
+        both = [i + 1 for i, p in enumerate(self.pairs) if p.a_ok and p.b_ok]
+        if both != [self.answer_no]:
+            raise ValueError(f"(A)(B) 둘 다 맞는 선지는 정답 1개뿐이어야 합니다: "
+                             f"둘다맞음 {both}, answer_no {self.answer_no}")
+        return self
+
 
 class FOut(BaseModel):
     blank_phrase: str                     # 지문에 실제로 있는 '핵심/주제' 어구(이걸 빈칸으로)
@@ -93,6 +109,11 @@ class FOut(BaseModel):
         if len(v) != 5:
             raise ValueError("F유형 선지는 5개여야 합니다.")
         return v
+
+    @model_validator(mode="after")
+    def _distractors(self):
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self
 
 
 class GOut(BaseModel):
@@ -141,12 +162,12 @@ def _gen_C(client, analysis, body, max_retries=1):
 
 
 def _gen_D(client, analysis, body, max_retries=1):
-    p = ("아래 정본으로 '어순 배열(D)'을 만드세요. 문법요소가 풍부한 문장을 골라 낱개 단어로 "
-         "뒤섞어 tokens 로 주고(구 묶음 금지), 어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. "
-         "answer 는 어형변화까지 마친 원문장. reason 한국어.\n\n{ctx}")
+    p = ("아래 정본으로 '어순 배열(D)'을 만드세요. answer 는 반드시 '지문에 실제로 있는 문장 그대로'"
+         "여야 하며(원래 배열이 정답), 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
+         "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
                                   max_tokens=1500, max_retries=max_retries)
-    return build2.make_D(out.tokens, out.cues, out.answer, out.reason)
+    return build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer, out.reason)
 
 
 def _gen_E(client, analysis, body, max_retries=1):
@@ -154,7 +175,9 @@ def _gen_E(client, analysis, body, max_retries=1):
          "비우고 before/mid/after 로 나눕니다. pairs 5개는 (a,b) 단어쌍 선지입니다.\n"
          "- 정답 쌍: (A)(B) 둘 다 논지에 맞되, 지문 단어를 '그대로 쓰지 말고 유의어(패러프레이즈)'로.\n"
          "- 오답 4: (A)만 맞음 / (B)만 맞음 / 둘 다 어긋남 을 고루 섞고, 그중 일부에는 '지문에 실제 "
-         "나온 단어'를 넣어 맞아 보이게(함정) 만듭니다. 정답 쌍만 (A)(B) 둘 다 맞아야 합니다.\n"
+         "나온 단어'를 넣어 맞아 보이게(함정) 만듭니다.\n"
+         "- 각 쌍에 a_ok/b_ok(그 자리가 논지에 맞는지 true/false)를 표시하세요. (A)(B) 둘 다 true인 "
+         "쌍은 '정답 하나뿐'이어야 하고, 그 번호가 answer_no 입니다(우연히 둘 다 맞는 오답이 없게).\n"
          "answer_no·reason 은 한국어.\n\n{ctx}")
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
                                   max_tokens=2000, max_retries=max_retries)
@@ -166,8 +189,10 @@ def _gen_E(client, analysis, body, max_retries=1):
 def _gen_F(client, analysis, body, max_retries=1):
     p = ("아래 정본으로 '빈칸추론(F)'을 만드세요. 지문 전체를 보여주되, 글의 '가장 핵심(주제)'을 담은 "
          "어구 하나를 blank_phrase 로 지정합니다(지문에 그대로 있는 표현). 그 어구가 빈칸이 됩니다.\n"
-         "choices 5개는 영어. 정답은 blank_phrase 를 '유의어로 패러프레이즈'한 것(원문 어구를 그대로 "
-         "쓰지 말 것). 오답은 소재는 쓰되 모순·무관. answer_no·reason·wrong_reasons 는 한국어.\n\n{ctx}")
+         "choices 5개는 영어. 정답은 blank_phrase 와 '의미가 동일한 정확한 유의어 패러프레이즈'여야 "
+         "한다(원문 어구를 그대로 쓰지 말 것, 뜻이 어긋나도 안 됨). 오답 4개는 소재는 쓰되 각각 "
+         "'확실히' 모순·무관이어서 정답으로 읽힐 여지가 없어야 한다. answer_no·reason·wrong_reasons 는 "
+         "한국어.\n\n{ctx}")
     out: FOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), FOut,
                                   max_tokens=2500, max_retries=max_retries)
     # blank_phrase 가 있는 문장을 찾는다

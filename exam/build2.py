@@ -39,10 +39,18 @@ def make_C(sentences, marks, answer_nos, reasons):
 
 
 # D · 어순 배열 -------------------------------------------------------------
-def make_D(tokens, cues, answer_sentence, reason=""):
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+
+def make_D(sentences, tokens, cues, answer_sentence, reason=""):
+    """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장)."""
     for t in tokens:
         if " " in t.strip():
             raise ValueError(f"낱개 단어여야 합니다(구 묶음 금지): '{t}'")
+    na = _norm(answer_sentence)
+    if not any(_norm(s) == na for s in sentences):
+        raise ValueError("어순 배열 정답은 지문에 실제로 있는 문장이어야 합니다(원래 배열).")
     return F2.D_q(tokens, cues), F2.D_a(answer_sentence, reason)
 
 

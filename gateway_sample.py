@@ -156,12 +156,14 @@ def build_passage() -> Passage:
         q1_prompt="본문 마지막 문장의 this가 가리키는 내용을 우리말로 구체적으로 서술하시오.",
         q1_answer=("설계 과정에서 건물을 실제로 사용할 사람들을 참여시키고 자문을 구하여, 그들이 "
                    "완성된 새 건물(또는 증축)에 더 만족하게 되는 것을 가리킨다."),
-        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '설계 과정에 사용자를 참여시키는 것은 더 "
-                   "나은 건물을 만든다'라는 뜻의 문장을 완성하시오. (동사는 원형 제공)"),
-        q2_tokens=["involve", "users", "in", "the", "design", "process",
-                   "produce", "a", "better", "building"],
-        q2_cues=["involve", "produce"],
-        q2_answer="Involving users in the design process produces a better building.",
+        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '마찬가지로, 예상 사용자를 고객과 함께 "
+                   "참여시키는 것은 장기적으로 훨씬 더 가치 있다'라는 뜻의 문장(지문 원문)을 "
+                   "완성하시오. (동사는 원형 제공)"),
+        q2_tokens=["similarly", "involving", "prospective", "building", "users", "as",
+                   "well", "as", "clients", "be", "even", "more", "valuable", "in",
+                   "the", "long", "run"],
+        q2_cues=["be"],
+        q2_answer="Similarly, involving prospective building users as well as clients is even more valuable in the long run.",
         q3_prompt="다음 요약문의 빈칸 (A), (B)에 제시어를 알맞은 형태로 바꿔 쓰시오.",
         q3_before="When a building's real users, not just its clients, are ",
         q3_mid=" during design, the result is greater satisfaction and ",

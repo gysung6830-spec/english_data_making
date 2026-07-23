@@ -81,13 +81,14 @@ def build_passage() -> Passage:
         },
     ))
 
-    # D · 어순 배열
+    # D · 어순 배열 — 정답은 지문에 실제로 있는 문장(S2) 그대로
     p.set_qa(D, *B2.make_D(
-        tokens=["involve", "users", "in", "the", "design", "process",
-                "produce", "a", "better", "building"],
-        cues=["involve", "produce"],
-        answer_sentence="Involving users in the design process produces a better building.",
-        reason="involve→Involving(동명사 주어), produce→produces(수 일치)로 변형해 어순을 맞춘다.",
+        s,
+        tokens=["say", "your", "client", "be", "a", "large", "corporation",
+                "such", "as", "a", "health", "care", "provider"],
+        cues=["be"],
+        answer_sentence="Say your client is a large corporation, such as a health care provider.",
+        reason="동사 be 를 is 로 바꾸고 지문 문장 어순 그대로 배열한다.",
     ))
 
     # E · 요약문 빈칸 — 정답=유의어, 오답=지문 원문 단어 함정

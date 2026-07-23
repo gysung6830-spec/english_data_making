@@ -238,8 +238,10 @@ _FAKE = {
         reasons=[GrammarReason(no=1, text="수 일치"), GrammarReason(no=3, text="수 일치")]),
     "ShortOut": lambda: ShortOut(
         q1_prompt="p1", q1_answer="한글답",
-        q2_prompt="p2", q2_tokens=["she", "decide", "to", "leave"], q2_cues=["decide"],
-        q2_answer="She decided to leave.",
+        q2_prompt="p2",
+        q2_tokens=["the", "first", "sentence", "introduce", "the", "topic", "clearly"],
+        q2_cues=["introduce"],
+        q2_answer="The first sentence introduces the topic clearly.",  # 지문 문장과 동일
         q3_prompt="p3", q3_before="Info ", q3_mid=" is ", q3_after=" now.",
         q3_cue_a="accumulate", q3_cue_b="govern", q3_ans_a="accumulated", q3_ans_b="governs",
         q3_reason="근거."),

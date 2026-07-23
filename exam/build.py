@@ -76,6 +76,11 @@ def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, 
 # ---------------------------------------------------------------------------
 # ① 순서 배열
 # ---------------------------------------------------------------------------
+def _norm(s: str) -> str:
+    """문장 비교용 정규화(소문자·영숫자만)."""
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+
 def _even_split(total: int, parts: int) -> list[int]:
     """total 을 parts 개의 연속 덩어리로 최대한 고르게 나눈다(각 >=1)."""
     base, rem = divmod(total, parts)
@@ -247,6 +252,10 @@ def make_short(
     q3_prompt: str, q3_before: str, q3_mid: str, q3_after: str,
     q3_cue_a: str, q3_cue_b: str, q3_ans_a: str, q3_ans_b: str, q3_reason: str,
 ) -> tuple[str, str]:
+    # (2) 영작 정답은 '지문에 실제로 있는 문장 그대로'여야 한다(원래 배열 보장)
+    na = _norm(q2_answer)
+    if not any(_norm(s) == na for s in sentences):
+        raise ValueError("서술형(2) 영작 정답은 지문에 실제로 있는 문장이어야 합니다(원래 배열).")
     summary_html = (
         F.esc(q3_before) + F.blank("A", q3_cue_a)
         + F.esc(q3_mid) + F.blank("B", q3_cue_b)

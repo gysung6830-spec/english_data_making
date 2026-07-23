@@ -154,12 +154,13 @@ def _passage_dna() -> Passage:
         q1_prompt="본문에서 DNA를 'nature's own hard drive'라고 표현한 이유를 우리말로 서술하시오.",
         q1_answer=("DNA가 세포 안 아주 작은 공간에 생명체의 방대한 정보를 저장하고 오랫동안 "
                    "보관하는, 자연이 만든 정보 저장 장치와 같기 때문이다."),
-        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '연구자들은 디지털 파일을 합성 DNA에 "
-                   "저장(부호화)하기 시작했다'라는 뜻의 문장을 완성하시오. (동사는 원형 제공)"),
-        q2_tokens=["researchers", "begin", "to", "encode", "digital", "files",
-                   "into", "synthetic", "DNA"],
-        q2_cues=["begin"],
-        q2_answer="Researchers have begun to encode digital files into synthetic DNA.",
+        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '그러한 효율에 영감을 받아, 연구자들은 "
+                   "디지털 파일을 합성 DNA에 부호화하기 시작했다'라는 뜻의 문장(지문 원문)을 "
+                   "완성하시오. (동사는 원형 제공)"),
+        q2_tokens=["inspire", "by", "such", "efficiency", "researchers", "begin", "to",
+                   "encode", "digital", "files", "into", "synthetic", "DNA"],
+        q2_cues=["inspire", "begin"],
+        q2_answer="Inspired by such efficiency, researchers have begun to encode digital files into synthetic DNA.",
         q3_prompt="다음 요약문의 빈칸 (A), (B)에 제시어를 알맞은 형태로 바꿔 쓰시오.",
         q3_before="DNA ", q3_mid=(" vast amounts of information in a tiny space, so "
                                   "engineers are now "),
@@ -310,12 +311,12 @@ def _passage_star() -> Passage:
                    "뜻인지 우리말로 서술하시오."),
         q1_answer=("뛰어난 실무자(스타 성과자)를 관리자로 올리면서 그 실무 인재를 잃고, "
                    "동시에 팀을 제대로 이끌지 못하는 부실한 관리자를 떠안게 되는 것을 뜻한다."),
-        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '회사는 뛰어난 실무자와 유능한 관리자를 "
-                   "둘 다 잃는다'라는 뜻의 문장을 완성하시오. (동사는 원형 제공)"),
-        q2_tokens=["the", "firm", "lose", "both", "an", "outstanding",
+        q2_prompt=("다음 <보기>의 단어를 모두 배열하여 '결국 회사는 뛰어난 실무자와 유능한 관리자를 "
+                   "둘 다 잃는다'라는 뜻의 문장(지문 원문)을 완성하시오. (동사는 원형 제공)"),
+        q2_tokens=["in", "the", "end", "the", "firm", "lose", "both", "an", "outstanding",
                    "contributor", "and", "a", "capable", "manager"],
         q2_cues=["lose"],
-        q2_answer="The firm loses both an outstanding contributor and a capable manager.",
+        q2_answer="In the end, the firm loses both an outstanding contributor and a capable manager.",
         q3_prompt="다음 요약문의 빈칸 (A), (B)에 제시어를 알맞은 형태로 바꿔 쓰시오.",
         q3_before="Promoting a star into management often ",
         q3_mid=", because the talent that has been ",
