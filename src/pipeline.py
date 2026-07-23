@@ -152,6 +152,15 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
                         i, total, pdf.name, len(reports),
                         ", ".join(r["path"].name for r in recs))
+            # 성공 처리한 PDF는 input/_done/ 으로 옮겨 다음 실행 때 재분석(재과금)되지 않게.
+            # 원본은 corpus/pdfs/ 에도 보관돼 있어 안전. 실패 파일은 input/ 에 남겨 재시도.
+            try:
+                import shutil as _sh
+                done = cfg.input_dir / "_done"
+                done.mkdir(parents=True, exist_ok=True)
+                _sh.move(str(pdf), str(done / pdf.name))
+            except Exception:
+                pass
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))
