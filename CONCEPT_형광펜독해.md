@@ -53,6 +53,12 @@
 | 정의·재정의 | is defined as·means·refers to / **콜론( : ) 뒤** |
 | 태도·평가어(±) | 긍정 benefit·valuable ↔ 부정 problem·risk·illusion·fail → 대의·함축·어휘 정답 방향 |
 | 위치 | 첫 문장 · 각 단락 첫 문장 · 마지막 문장 · 빈칸/밑줄 문장 |
+| **지시·연결(대용어)** | this·these·that·those·such(a)·one·another·its·the former/latter → **순서·삽입(35–38)의 핵심** — 앞 문장을 가리켜 흐름을 잇는다 |
+| **첨가·병렬 / 비교** | not only~but also·moreover·in addition·as well as·besides / similarly·likewise·just as → 같은 방향 강화·논지 확장 |
+
+> **데이터 기반 보강**: 학습된 220개 지문(2022-06~2027-06) 빈도 분석으로 실제 자주 나오는 신호를 추가.
+> 특히 지시·연결어(that 550·this 170·one 100·these 56·such·another…)가 최다 → 순서·삽입 카테고리 신설.
+> 역접(rather·still·by contrast·no longer)·강조(especially·particularly·notably)·인과(thereby·in order to)·예시스킵(take·consider·imagine·including)도 보강. `src/ingest_bank.py`의 신호점수 계산에도 반영(재계산 완료).
 
 **⬜ 스킵 신호**: For example·For instance·such as·like·to illustrate(예시) / 숫자·연도·고유명사·인명 나열 / 재진술 반복 / 양보절(Although·Despite~ — 주절이 핵심) / 긴 관계절 수식
 

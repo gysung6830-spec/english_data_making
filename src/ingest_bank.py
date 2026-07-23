@@ -59,12 +59,15 @@ def classify(stem: str):
 
 # ── 신호 점수: 형광펜 학습에 적합한 지문일수록 높음 ──
 SIGNALS = {
-    "역접": r"\b(however|but|yet|nevertheless|in contrast|on the other hand|instead|conversely|whereas|unlike)\b",
-    "결론": r"\b(thus|therefore|hence|so that|consequently|as a result|in conclusion|in sum)\b",
-    "한정": r"\b(only when|only if|only|unless|except|as long as)\b",
-    "주장": r"\b(should|must|ought to|need to|important|essential|crucial|key|the most|the only|the single)\b",
-    "인과": r"\b(because|since|due to|lead to|leads to|result in|results in|give rise to)\b",
-    "통념": r"\b(many believe|it is thought|contrary to|traditionally|surprisingly|paradoxically)\b",
+    # ── 학습된 220개 지문 빈도 분석으로 보강(2022-06~2027-06) ──
+    "역접": r"\b(however|but|yet|nevertheless|nonetheless|in contrast|by contrast|on the contrary|on the other hand|instead|conversely|whereas|unlike|rather than|rather|still|no longer|otherwise|even so)\b",
+    "결론": r"\b(thus|therefore|hence|consequently|as a result|in conclusion|in short|in sum|to sum up|ultimately|in the end)\b",
+    "한정": r"\b(only when|only if|only|unless|except|as long as|provided that|whenever|without)\b",
+    "주장": r"\b(should|must|ought to|need to|have to|important|essential|crucial|vital|critical|key|the most|the only|the single|in fact|indeed|above all|especially|particularly|notably|significantly|clearly)\b",
+    "인과": r"\b(because|since|due to|owing to|lead to|leads to|result in|results in|give rise to|thereby|in order to|for this reason|this is because)\b",
+    "통념": r"\b(many believe|it is thought|it is assumed|contrary to|traditionally|surprisingly|paradoxically|ironically)\b",
+    "첨가": r"\b(not only|but also|moreover|furthermore|in addition|additionally|besides|as well as)\b",
+    "비교": r"\b(similarly|likewise|just as|in the same way|compared to|in comparison)\b",
 }
 
 def signal_score(passage: str):
@@ -346,11 +349,25 @@ def pick(band):
             mark = " ← 정답" if best.get("answer") == k else ""
             print(f"  {CIRCLED[k-1]} {best['choices'][k]}{mark}")
 
+def rescore():
+    """SIGNALS 갱신 후 은행 전체 지문의 신호점수를 다시 계산."""
+    bank = load_bank()
+    changed = 0
+    for r in bank:
+        s, sig, L = signal_score(r["passage"])
+        if r.get("signal_score") != s or r.get("signals") != sig:
+            r["signal_score"], r["signals"], r["length"] = s, sig, L
+            changed += 1
+    save_bank(bank)
+    print(f"[재계산] {len(bank)}개 지문 중 {changed}개 신호점수 갱신")
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__); return
     if argv[0] == "--report":
         report(); return
+    if argv[0] == "--rescore":
+        rescore(); report(); return
     if argv[0] == "--pick":
         pick(argv[1] if len(argv) > 1 else "31-34"); return
     total = 0
