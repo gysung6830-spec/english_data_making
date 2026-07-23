@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>해석 카드 — 대안 포맷 3종 (34번)</title>
+<style>
+@page{ size:A4; margin:11mm 12mm; }
+*{ box-sizing:border-box; }
+body{ font-family:"NanumGothic","Malgun Gothic","맑은 고딕",sans-serif; color:#23272e;
+  font-size:10px; line-height:1.5; margin:0; background:#f4f5f7; padding:16px; }
+.wrap{ max-width:820px; margin:0 auto; }
+:root{ --src-line:#3d8f58; --ink:#1f6f78; --ink-d:#12525a; --trap:#cd5049; --muted:#6b7280; --line:#e5e7eb; --must:#fff3bf; }
+/* 청크 색(영↔한 매칭) */
+.c0{color:#3a58ad} .c1{color:#3a8a56} .c2{color:#ac6b28} .c3{color:#6d51b5} .c4{color:#c14a48} .c5{color:#2f7d73}
+
+.tophead{ text-align:center; margin-bottom:14px; }
+.tophead .t{ font-size:16px; font-weight:800; color:var(--ink-d); }
+.tophead .s{ font-size:9.5px; color:var(--muted); }
+.vt{ font-size:12.5px; font-weight:800; color:var(--src-line); margin:16px 0 8px; padding-bottom:4px; border-bottom:2px solid var(--src-line); }
+.vt small{ font-weight:600; color:var(--muted); font-size:9px; }
+.card{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.08); padding:13px 15px; margin-bottom:8px; border-left:5px solid var(--src-line); }
+.hd{ font-size:9px; font-weight:800; color:var(--src-line); margin-bottom:8px; }
+
+/* ===== A. 직독직해 청크 대조 ===== */
+.dc{ margin-bottom:9px; }
+.dc .en{ font-size:10.5px; line-height:1.5; }
+.dc .en .sl{ color:#cbd5e1; font-weight:700; padding:0 3px; }
+.dc .ko{ font-size:9.8px; line-height:1.5; margin-top:2px; }
+.dc .ko .sl{ color:#e0e0e0; padding:0 3px; }
+.dc .bn{ display:inline-block; width:14px; height:14px; line-height:14px; text-align:center; background:var(--src-line); color:#fff; border-radius:50%; font-size:8px; font-weight:800; margin-right:5px; }
+.optbar{ margin-top:6px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.4px; }
+.optbar .co{ color:var(--src-line); font-weight:800; } .optbar .xo{ color:var(--trap); font-weight:700; }
+
+/* ===== B. 플래시 타일 ===== */
+.tiles{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.tile{ border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.tile .en{ background:#f4f8f5; padding:6px 9px; font-size:9.3px; color:#3a4a40; border-bottom:2px solid var(--src-line); line-height:1.45; }
+.tile .en b{ background:var(--must); padding:0 2px; border-radius:2px; }
+.tile .ko{ padding:7px 9px; font-size:10px; font-weight:700; line-height:1.5; }
+.tile .ko b{ color:var(--src-line); }
+.tile .bn{ float:right; background:var(--src-line); color:#fff; font-size:8px; font-weight:800; border-radius:8px; padding:0 6px; }
+.optgrid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+.ot{ border:1px solid var(--line); border-radius:6px; padding:5px 9px; font-size:9.3px; }
+.ot.ok{ grid-column:1/3; background:#eef7f0; border-color:var(--src-line); }
+.ot .n{ font-weight:800; margin-right:4px; } .ot.ok .n{ color:var(--src-line); } .ot .n.x{ color:var(--trap); }
+
+/* ===== C. 좌우 말풍선 ===== */
+.bub{ display:flex; gap:8px; align-items:stretch; margin-bottom:7px; }
+.bub .bn{ flex:none; width:16px; height:16px; line-height:16px; text-align:center; background:var(--src-line); color:#fff; border-radius:50%; font-size:8.5px; font-weight:800; margin-top:6px; }
+.bub .en{ flex:1; background:#eef4ff; border-radius:10px 10px 10px 2px; padding:6px 10px; font-size:9.6px; color:#33415c; }
+.bub .arw{ flex:none; align-self:center; color:var(--src-line); font-weight:800; }
+.bub .ko{ flex:1; background:#eef7f0; border-radius:10px 10px 2px 10px; padding:6px 10px; font-size:9.8px; font-weight:600; }
+.bub .ko b{ color:var(--src-line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tophead">
+    <div class="t">해석 카드 — 대안 포맷 3종 (34번 빈칸)</div>
+    <div class="s">🟡 형광펜 문장 + 선지만 해석 · 마음에 드는 포맷을 고르세요</div>
+  </div>
+
+  <!-- ===== A ===== -->
+  <div class="vt">A. 직독직해 청크 대조 <small>— 영어를 의미 덩어리로 쪼개고 바로 아래 한글을 같은 색으로 매칭</small></div>
+  <div class="card">
+    <div class="hd">🟡 무조건 읽는 문장</div>
+    <div class="dc">
+      <div class="en"><span class="bn">1</span><span class="c0">When they heard a stranger's recording,</span><span class="sl">/</span> <span class="c1">they sang sooner &amp; more,</span><span class="sl">/</span> <span class="c2">overlapping songs more often.</span></div>
+      <div class="ko" style="padding-left:19px"><span class="c0">낯선 새 녹음을 듣자,</span><span class="sl">/</span> <span class="c1">더 빨리·많이 노래했고,</span><span class="sl">/</span> <span class="c2">노래를 더 자주 겹쳤다.</span></div>
+    </div>
+    <div class="dc">
+      <div class="en"><span class="bn">2</span><span class="c3">However, this occurred only when</span><span class="sl">/</span> <span class="c4">the song was played at the boundary</span><span class="sl">/</span> <span class="c5">of the two territories.</span></div>
+      <div class="ko" style="padding-left:19px"><span class="c3">그러나 이는 ~할 때만 일어났다:</span><span class="sl">/</span> <span class="c4">노래가 경계에서 재생될 때</span><span class="sl">/</span> <span class="c5">두 영역 사이의.</span></div>
+    </div>
+    <div class="dc">
+      <div class="en"><span class="bn">3</span><span class="c0">If played at another boundary,</span><span class="sl">/</span> <span class="c4">it was treated as a stranger.</span></div>
+      <div class="ko" style="padding-left:19px"><span class="c0">다른 경계에서 재생되면,</span><span class="sl">/</span> <span class="c4">낯선 새로 취급됐다. ← 근거</span></div>
+    </div>
+    <div class="optbar"><span class="co">④정답</span> 울새는 <b>장소</b>를 노래와 연관 짓는다 &nbsp;·&nbsp; <span class="xo">①</span>복잡성 <span class="xo">②</span>음량 <span class="xo">③</span>영역감각 <span class="xo">⑤</span>녹음에 덜 반응</div>
+  </div>
+
+  <!-- ===== B ===== -->
+  <div class="vt">B. 플래시 타일 <small>— 문장마다 카드(영어 위 / 한글 아래), 핵심어 하이라이트</small></div>
+  <div class="card">
+    <div class="hd">🟡 무조건 읽는 문장</div>
+    <div class="tiles">
+      <div class="tile">
+        <div class="en"><span class="bn">1</span>When they heard a <b>stranger's recording</b>, they sang sooner &amp; overlapped more.</div>
+        <div class="ko"><b>낯선 새 녹음</b>을 듣자 더 빨리 노래하고 더 자주 겹쳤다(공격 반응).</div>
+      </div>
+      <div class="tile">
+        <div class="en"><span class="bn">2</span><b>However</b>, only when played at the <b>boundary</b> of the two territories.</div>
+        <div class="ko"><b>그러나</b> 두 영역 <b>경계</b>에서 재생될 때<b>에만</b>.</div>
+      </div>
+      <div class="tile">
+        <div class="en"><span class="bn">3</span>If played at <b>another boundary</b>, treated as a <b>stranger</b>.</div>
+        <div class="ko"><b>다른 경계</b>면 <b>낯선 새</b>로 취급. ← 근거</div>
+      </div>
+    </div>
+    <div class="optgrid">
+      <div class="ot ok"><span class="n">④</span>울새는 <b>장소(위치)</b>를 익숙한 노래와 연관 짓는다 — 정답</div>
+      <div class="ot"><span class="n x">①</span>다양성·복잡성이 특징</div>
+      <div class="ot"><span class="n x">②</span>음량이 공격성에 영향</div>
+      <div class="ot"><span class="n x">③</span>빈약한 영역감각=생존</div>
+      <div class="ot"><span class="n x">⑤</span>녹음에 덜 반응</div>
+    </div>
+  </div>
+
+  <!-- ===== C ===== -->
+  <div class="vt">C. 좌우 말풍선 대조 <small>— 영어 말풍선 ↔ 한글 말풍선</small></div>
+  <div class="card">
+    <div class="hd">🟡 무조건 읽는 문장</div>
+    <div class="bub"><span class="bn">1</span><span class="en">When they heard a stranger's recording, they sang sooner &amp; overlapped more often.</span><span class="arw">→</span><span class="ko">낯선 새 <b>녹음</b>을 듣자 더 빨리·자주 <b>겹쳐</b> 노래(공격 반응).</span></div>
+    <div class="bub"><span class="bn">2</span><span class="en">However, this occurred only when played at the boundary of the two territories.</span><span class="arw">→</span><span class="ko"><b>그러나</b> 두 영역 <b>경계</b>에서 재생될 때<b>에만</b> 나타났다.</span></div>
+    <div class="bub"><span class="bn">3</span><span class="en">If played at another boundary, it was treated as the call of a stranger.</span><span class="arw">→</span><span class="ko"><b>다른 경계</b>면 <b>낯선 새</b> 울음으로 취급. ← 근거</span></div>
+    <div class="optbar"><span class="co">④정답</span> 울새는 <b>장소</b>를 노래와 연관 &nbsp;·&nbsp; <span class="xo">①</span>복잡성 <span class="xo">②</span>음량 <span class="xo">③</span>영역감각 <span class="xo">⑤</span>녹음</div>
+  </div>
+
+</div>
+</body>
+</html>
