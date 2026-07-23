@@ -36,11 +36,12 @@ def gen_grammar_vocab_mix(item, passage, an, ctx):
 @register("grammar_fix_and_answer")
 def gen_grammar_fix_and_answer(item, passage, an, ctx):
     # 서술형이지만 어법 계열이라 여기서 등록.
-    from .base import build_essay
+    from .base import ESSAY_UNIQUE, build_essay
     stem = ctx.stem("grammar_fix_and_answer",
                     "밑줄 친 부분 중 어법상 틀린 3곳을 찾아 바르게 고치고, "
                     "본문에 근거하여 영어 질문에 영어로 답하시오.")
-    instr = ("밑줄 3곳의 어법 오류를 고쳐 쓰게 하고(생산적 어법력), "
-             "Why/How 등 영어 질문에 본문 근거로 영어 문장 답. "
-             "'본문에 사용된 단어만' 조건을 붙일 수 있음.")
+    instr = ("밑줄 3곳을 수일치·시제·태·관계사 등 '명백한 어법 오류'로 만들어 고친 정답이 "
+             "각각 하나로 확정되게 하라. 이어 Why/How 등 영어 질문에 본문 근거로 영어 문장 "
+             "답을 쓰되, 본문 표현을 활용해 모범답안 1개로 채점 가능하게 하라. '본문에 사용된 "
+             "단어만' 조건을 붙일 수 있음. " + ESSAY_UNIQUE)
     return build_essay(item, passage, ctx, stem, instr)
