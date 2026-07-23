@@ -319,6 +319,32 @@ def test_answer_key_shows_warn_badge():
     assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
 
 
+def test_structural_selfcheck_alignment():
+    """원리↔검증 정합성: 유형이 요구하는 구조가 빠지면 생성단계에서 반드시 걸린다.
+
+    (implied_meaning=<u>, order/vocab_3blank_abc=(A)(B)(C), blank_single=____)
+    """
+    from mockexam.core.models import Item
+    from mockexam.core.llm import ChoiceQuestionOut
+    from mockexam.generators.base import _validate_choice_out
+
+    def out(passage):
+        return ChoiceQuestionOut(passage=passage, choices=list("abcde"),
+                                 answer_index=1, explanation="e")
+
+    cases = [
+        ("implied_meaning", "No underline here.", "He <u>broke the ice</u> at once."),
+        ("order", "Intro then paragraphs.", "Intro. (A) one (B) two (C) three."),
+        ("vocab_3blank_abc", "no markers", "(A) x (B) y (C) z in text."),
+        ("blank_single", "no blank at all", "The key point is ____ indeed."),
+    ]
+    for typ, bad, good in cases:
+        it = Item(no=1, section="choice", type=typ, score=3)
+        with pytest.raises(ValueError):
+            _validate_choice_out(it, out(bad))     # 구조 없음 → 걸림
+        _validate_choice_out(it, out(good))        # 구조 있음 → 통과
+
+
 def test_answer_index_range_validated():
     from pydantic import ValidationError
     from mockexam.core.llm import ChoiceQuestionOut

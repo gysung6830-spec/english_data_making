@@ -43,8 +43,9 @@ def gen_blank(item, passage, an, ctx):
 @register("order")
 def gen_order(item, passage, an, ctx):
     stem = ctx.stem("order", "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?")
-    instr = ("도입문을 고정하고 (A)(B)(C)를 재배열하는 유형. 정답 순서가 '단 하나'로만 "
-             "확정되도록, 각 문단에 연결사(however·for example·in addition 등)·지시어"
+    instr = ("도입문을 고정하고 (A)(B)(C)를 재배열하는 유형. 지문은 반드시 도입문 뒤에 "
+             "'(A)', '(B)', '(C)'로 시작하는 세 문단을 넣어 구성하라. 정답 순서가 '단 "
+             "하나'로만 확정되도록, 각 문단에 연결사(however·for example·in addition 등)·지시어"
              "(this·that·such)·정관사(the)·대명사가 '이어질 특정 문단'을 가리키는 결속 "
              "단서를 '2개 이상' 심어라. 한 단서만 무시하면 다른 순서도 그럴듯해 보이되, "
              "모든 단서를 종합하면 정답 순서는 오직 하나뿐이게 하라. 오답 순서는 단서 하나를 "
@@ -75,8 +76,9 @@ def gen_irrelevant(item, passage, an, ctx):
 def gen_implied(item, passage, an, ctx):
     stem = ctx.stem("implied_meaning",
                     "밑줄 친 부분이 다음 글에서 의미하는 바로 가장 적절한 것은?")
-    instr = (DISTRACTOR_RULE + " 단, 밑줄 표현은 문맥 전체로 재해석해야 답이 나오게 하고"
-             "(직역으로는 못 풀게), '무관·모순' 오답은 표현을 표면적/축자적으로 읽은 "
+    instr = (DISTRACTOR_RULE + " 단, 지문에서 재해석할 표현(구/절) '한 곳'을 반드시 "
+             "<u>...</u>로 감싸고, 그 밑줄 표현은 문맥 전체로 재해석해야 답이 나오게 하라"
+             "(직역으로는 못 풀게). '무관·모순' 오답은 그 표현을 표면적/축자적으로 읽은 "
              "오독으로 구성하라. 선지는 **영어**로 작성하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"(mock) implied reading {i+1}" for i in range(5)])
