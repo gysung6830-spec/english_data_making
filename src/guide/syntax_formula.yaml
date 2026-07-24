@@ -49,13 +49,6 @@ formulas:
       cut: 그 대신에 / 부모는 [이유를 제시하고, 어려움을 극복하는 데 대한 정서적 이해를 보이며, 외적 유인은 최소로 쓰는] / 자녀에게
         일에 대한 의욕과 가치를 길러 줄 가능성이 더 크다.
       how: who절이 supply·show·use 세 동사를 묶어 parents 수식 → 진짜 동사 are 찾기.
-    - en: A similar idea is supported by further evidence that checklists' can improve
-        the quality of expert decisions in a ' range of domains by ensuring that important
-        steps or considerations aren't missed when people are feeling overloaded.
-      src: 2023 고3 11월 42번
-      cut: 비슷한 생각이 / 추가 증거로 뒷받침된다 / [체크리스트가 여러 영역에서 전문가 결정의 질을 높일 수 있다는] / [사람들이 과부하를
-        느낄 때 중요한 단계나 고려 사항이 빠지지 않도록 보장함으로써].
-      how: evidence 뒤 that → 동격절로 내용 풀이, ensuring that → '~보장하며' 붙임.
     - en: The critic who wants to write about literature from a formalist perspective
         must first be a close and careful reader who examines all the elements of
         a text individually and questions how they come together to create a work
@@ -89,27 +82,21 @@ formulas:
       src: 2023 고3 11월 19번
       cut: (그녀가 자신의 실패를 어떻게 느끼는지 알아채고서) / Ken이 그녀에게 다가가 / 몇 마디 격려의 말을 건넸다.
       how: 문두 분사구(Recognizing~) → 주절부터 찾고 '~하고서'로 앞에 붙임.
-    - en: Unless you're comfortable planning your life around a particular scheduled
-        trip, speed is worthless without frequency, so a transit map that screams
-        about speed and ( ) whispers about frequency may simply be planting confusion.
-      src: 2026 고3 11월 23번
-      cut: 당신이 특정한 정해진 운행에 맞춰 삶을 계획하는 것이 편치 않다면 / 속도는 빈도 없이는 무가치하다 / 그래서 [속도만 외치고
-        빈도는 속삭이는] 교통 노선도는 / 그저 혼란을 심고 있는 것일 수 있다.
-      how: that screams·whispers 관계절 괄호치고 주절 map may be planting 뼈대.
-    - en: Understanding why and where migration happens requires consideration of
-        the political organization of territory, the spatial consequences of discrimination,
-        socio‑economic patterns, and the layout of the physical environment.
-      src: 2025 고3 6월 34번
-      cut: 이주가 왜 어디서 일어나는지를 이해하는 것은 / 요구한다 / 영토의 정치적 구성, 차별의 공간적 결과, 사회·경제적 양상, 물리적
-        환경의 배치에 대한 고려를.
-      how: Understanding~happens 통째 동명사 주어 → 동사 requires, of 이하 네 목적어.
-    - en: Comparing the offices of the 1940s with contemporary office spaces shows
-        that they have circled back around to essentially the same style, via a period
-        in the 1980s when partitions and cubicles were more the norm.
+    - en: Seeing vivid red and green colors for the first time ever, he started to
+        cry.
+      src: 2023 고3 11월 45번
+      cut: (생생한 빨강과 초록 색을 난생처음으로 보고서) / 그는 / 울기 시작했다.
+      how: 문두 분사구(Seeing~) → 주절(he started) 잡고 '~하고서'로 앞에 붙임.
+    - en: Surveying office spaces from the past eighty years, one can see a cycle
+        that repeats.
       src: 2024 고3 9월 24번
-      cut: 1940년대 사무실을 현대 사무 공간과 비교하면 / 보여준다 / 그것들이 본질적으로 같은 양식으로 되돌아왔음을 / 칸막이·큐비클이
-        더 일반적이던 1980년대 시기를 거쳐.
-      how: 문두 Comparing~ 분사구문 '~해 보면' → 동사 shows, when절은 period 수식.
+      cut: (지난 80년의 사무 공간을 훑어보면) / 우리는 / 반복되는 하나의 순환을 볼 수 있다.
+      how: 문두 분사구(Surveying~) → 주절(one can see) 잡고 '~해 보면'으로 앞에.
+    - en: The moths, attempting to escape the light, fly toward that imagined "portal,"
+        bringing them closer to the source.
+      src: 2024 고3 9월 31번
+      cut: 나방은, (빛에서 벗어나려 애쓰며), / 그 상상된 '통로'를 향해 날아간다 / (그리하여 광원에 더 가까워진다).
+      how: 콤마 분사구(attempting~) → 주절(moths fly) 감싼 부대상황 '~하며'로 붙임.
   insertion:
     point: — … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리.
     strategy: 대시·콤마 삽입을 통째 괄호치고 없는 셈 → 뼈대부터 읽는다. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것.
@@ -135,18 +122,17 @@ formulas:
       cut: 결과의 성격이 무엇이든 간에 / (실제로 어느 한쪽을 다른 쪽보다 유리하게 할 수도 있지만) / 협상의 목적은 / 공통 관심사와
         갈등의 영역을 확인하는 것이다.
       how: which~another 콤마 삽입절 걷어내면 S(purpose)+V(is)+C 드러남.
-    - en: Urban delivery vehicles can be adapted to better suit the density of urban
-        distribution, which often involves smaller vehicles such as vans, including
-        bicycles.
-      src: 2023 고3 11월 22번
-      cut: 도시 배송 차량은 / 도시 유통의 밀도에 더 잘 맞도록 조정될 수 있다 / (여기에는 자전거를 포함해 흔히 밴 같은 더 작은 차량이
-        포함된다).
-      how: which often involves~ 계속적 관계절 걷어내고 주절 S+V, including은 예시.
     - en: The main institutions of state—parliament, courts, police and so on—along
         with certain of the professions, exhibit this formal character.
       src: 2023 고3 6월 38번
       cut: 국가의 주요 제도들은 / —의회·법원·경찰 등— / 특정 전문직들과 더불어 / 이 공식적 성격을 드러낸다.
       how: 대시(—…—) 삽입 걷어내면 주어(institutions)+동사(exhibit) 이어짐.
+    - en: No offices or factories need to be built, no local regulations are observed,
+        and—in most cases—no local taxes are paid.
+      src: 2026 고3 11월 21번
+      cut: 어떤 사무실도 공장도 지어질 필요가 없고 / 어떤 지역 규제도 준수되지 않으며 / (대부분의 경우) / 어떤 지역 세금도 납부되지
+        않는다.
+      how: 대시 쌍(—in most cases—) 걷어내면 뼈대 taxes are paid 드러남.
   apposition:
     point: the fact/idea/belief + that … 또는 'N, N' 콤마 동격 — 앞 명사와 뒤 내용이 '='.
     strategy: the fact that … 의 that은 관계사가 아니라 동격(=내용). '명사 = that절 내용'으로 등호를 긋는다.
@@ -163,21 +149,11 @@ formulas:
       src: 2024 고3 6월 31번
       cut: 디지털 보존이 뜻하는 바를 확립하려 할 때 / 반드시 다뤄져야 할 첫 번째 질문은 / (콜론) 당신이 실제로 무엇을 보존하려 하는가이다.
       how: 콜론(:) → the first question 내용을 동격으로 풀이, 앞뒤 등치.
-    - en: For the physicist, understanding the ordinary, the habitual, and the frequent
-        thus allows us to account for the frightening and the singular.
-      src: 2024 고3 9월 23번
-      cut: 물리학자에게 / 평범한 것·습관적인 것·빈번한 것을 이해하는 것은 / 이렇게 우리에게 / 무서운 것과 특이한 것을 설명하도록 허락한다.
-      how: 「the+형용사」 → 각각 명사 부류로 묶어 understanding·account for의 목적어로.
     - en: When the Industrial Revolution arrived with its great innovation, the motor,
         we didn't leave our world to go to! some remote motorspace!
       src: 2023 고3 11월 30번
       cut: 산업혁명이 그 거대한 혁신, 곧 모터와 함께 도래했을 때 / 우리는 / 어떤 먼 모터공간으로 가려고 / 우리 세계를 떠나지 않았다.
       how: 콤마 삽입 the motor → 앞 its great innovation과 '=' 동격으로 겹쳐 읽기.
-    - en: Roads are there all the time, so their speed is the most important fact
-        that distinguishes them.
-      src: 2026 고3 11월 23번
-      cut: 도로는 항상 거기 있다 / 그래서 그 속도가 / 그것들을 구별 짓는 가장 중요한 사실이다.
-      how: fact 뒤 that distinguishes them → fact 규정 관계절, 뒤→앞으로 붙임.
   prep_stack:
     point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리
       길어도 안 무너진다.
@@ -214,14 +190,7 @@ formulas:
         increasing over the years.
       src: 예문(트레이닝)
       cut: 출퇴근 시간 고속도로 위 교통의 양은 / 수년에 걸쳐 / 꾸준히 늘어왔다.
-      ab: '교통량 → 늘어남 (뼈대: The amount ~ has increased)'
       how: of·on·during 층층 전치사구 → '~의 양'까지 주어, 동사 has been increasing.
-    - en: Last week, I made a reservation for one of your company's swimming pools
-        for our summer swim camp.
-      src: 2022 고3 6월 18번
-      cut: 지난주에 / 저는 예약을 했습니다 / 귀사의 수영장 중 하나를 / 저희 여름 수영 캠프를 위해.
-      ab: '나 → 예약함 (뼈대: I made a reservation)'
-      how: made a reservation + for(대상)·for(목적) → 역할 구분해 순서대로 뒤에 붙임.
     - en: Many pedestrians in a city are not necessarily an indication of good city
         quality—many people walking around can often be a sign of insufficient transit
         options or long distances between the various functions in the city.
@@ -229,13 +198,16 @@ formulas:
       cut: 도시 안의 많은 보행자가 / 반드시 좋은 도시 품질의 지표인 것은 아니다 / 돌아다니는 많은 사람은 / 흔히 불충분한 교통 선택지나
         / 그 도시 안 다양한 기능들 사이의 긴 거리의 / 신호일 수 있다.
       how: a sign + of→between→in 전치사구 겹침 → 각기 앞 명사 수식, 순서대로 이어 읽기.
-    - en: A physical carrier is necessary, but as long as the source media can be
-        read, bit‑perfect copies can be made cheaply and easily on other devices,
-        making the preservation of the original carrier of diminishing importance.
-      src: 2024 고3 6월 31번
-      cut: 물리적 매체가 필요하다 / 하지만 원본 매체를 읽을 수 있는 한 / 비트 단위로 완벽한 사본이 / 다른 장치에서 값싸고 쉽게 만들어질
-        수 있다 / 그리하여 원본 매체의 보존을 점점 줄어드는 중요성을 갖는 것으로 만든다.
-      how: making~ 결과 분사구문, of 두 번 → 앞은 preservation, 뒤는 make A of B 보어.
+    - en: But, in fact, the moral questions of taxation are at the very heart of the
+        creation of tax laws.
+      src: 2022 고3 9월 22번
+      cut: 하지만 사실 / 과세의 도덕적 문제들은 / 바로 그 핵심에 있다 / 세법 제정의.
+      how: 전치사 of 반복 → questions·heart·creation 앞 명사에 차례로 붙여 읽기.
+    - en: The studied nonchalance of patients in a dentist's waiting room is a poor
+        indication of their inner anxiety.
+      src: 2022 고3 6월 42번
+      cut: 짐짓 태연한 척함은 / 환자들의 / 치과 대기실 안 / 서투른 지표다 / 그들의 내적 불안의.
+      how: 전치사구 of 중첩 → nonchalance에 겹겹이 붙여 주어 끝까지 읽기.
   inversion:
     point: 문두 부정어(Never/Not only/Only…)가 오면 도치된다. 하지만 굳이 원위치로 되돌릴 필요 없다 — 도치된 순서 그대로
       '신호부터 받고' 자연스럽게 이어 읽으면 된다.
@@ -255,7 +227,6 @@ formulas:
         process generates negative effects.
       src: 2023 고3 6월 24번
       cut: 도시에서 장소에 접근하는 것이 덜 편할 뿐 아니라 / 바로 그 (이동) 과정 자체가 / 부정적 효과를 낳는다.
-      ab: 도시 이동 → 불편 + 부작용 (둘 다)
       how: 문두 Not only → 도치(is it)를 정상 어순(it is)으로, 'A뿐 아니라 B도'.
   emphasis:
     point: It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조.
@@ -268,34 +239,23 @@ formulas:
       - en: do / does / did + V
         ko: 정말 ~하다 (동사 강조)
     examples:
-    - en: Many cultures invented gods to explain these eclipses that shocked, frightened,
-        or surprised them; but very few imagined a god of falling bodies—to which
-        they were so accustomed that they did not even notice them.
-      src: 2024 고3 9월 23번
-      cut: 많은 문화가 / 신들을 만들어냈다 / 이 일식들을 설명하려고 / (그들을 충격에 빠뜨리거나 겁주거나 놀라게 한) // 그러나 극소수만이
-        / 낙하하는 물체의 신을 상상했다 / — 그것에 너무나 익숙해서 / 알아차리지도 못했다.
-      how: so ~ that 강조 → 원인·결과로, to which는 falling bodies 받는 관계사구.
-    - en: ''' If the baby water flea is developing into an adult in water that includes
-        the chemical signatures of creatures that prey ( ) on water fleas, it develops
-        a helmet and spines to defend itself against predators.'
-      src: 2023 고3 11월 36번
-      cut: 만약 새끼 물벼룩이 / 성체로 자라고 있다면 / (물벼룩을 잡아먹는 생물의 화학적 흔적을 담은) 물속에서 // 그것은 / 투구와
-        가시를 발달시킨다 / 포식자로부터 자신을 방어하려고.
-      how: If 조건절 닫고 주절 S+V(it develops), 두 that절은 water·creatures 수식.
-    - en: The generally close connection between health and what animals want exists
-        because wanting to obtain the right things and wanting to avoid the wrong
-        ones are major ways in which animals keep themselves healthy.
-      src: 2024 고3 9월 37번
-      cut: 건강과 (동물이 원하는 것) 사이의 / 대체로 긴밀한 연결은 / 존재한다 / 왜냐하면 / 옳은 것을 얻으려는 것과 / 그른 것을
-        피하려는 것이 / 주된 방식이기 때문에 / (그 안에서 동물이 스스로를 건강하게 유지하는).
-      how: 긴 주어(connection between~) 닫고 동사 exists, in which는 ways 수식.
-    - en: By way of example, for many years it was thought that ' there would be "one"
-        cure for cancer, but it is now realized that cancer takes multiple forms and
-        that multiple approaches are needed to provide a cure.
-      src: 2024 고3 11월 38번
-      cut: 예로써 / 여러 해 동안 / 생각되었다 / (암에 대한 '하나의' 치료법이 있으리라는 것이) // 그러나 / 이제 깨닫는다 /
-        (암이 여러 형태를 띤다는 것과 / 여러 접근이 치료법 제공에 필요하다는 것을).
-      how: it 가주어·that 진주어 → it 비우고 that절을 주어로 되살려 읽기.
+    - en: However, the emotional states themselves are likely to be quite invariant
+        across cultures.
+      src: 2022 고3 6월 23번
+      cut: 그러나 / 감정 상태 그 자체는 / 문화 전반에 걸쳐 / 상당히 변하지 않을 가능성이 크다.
+      how: 재귀대명사 themselves → 앞 명사(감정 상태)를 '그 자체'로 힘줘 강조.
+    - en: Apart from demonstrating that evolution did occur, the fossil record also
+        provides tests of the predictions made from evolutionary theory.
+      src: 2022 고3 6월 36번
+      cut: 진화가 실제로 일어났음을 보여 주는 것 외에도 / 화석 기록은 또한 / 진화론에서 도출된 예측들의 검증을 / 제공한다.
+      how: did 강조 → did occur를 '실제로 일어났다'로 동사 힘줘 읽기.
+    - en: Beginning in the late nineteenth century, with the hugely successful rise
+        of the artistic male couturier, it was the designer who became celebrated,
+        and the client elevated by his inspired attention.
+      src: 2022 고3 9월 33번
+      cut: 19세기 후반부터 / 예술가적 남성 재단사의 크게 성공적인 부상과 함께 / 유명해진 것은 바로 그 디자이너였고 / 고객은 그의
+        영감 어린 관심으로 격상되었다.
+      how: It was ~ who 강조 → '유명해진 건 바로 디자이너'로 강조어 부각.
   parallel:
     point: and / but / or, not only A but also B, both A and B — 같은 급끼리 대칭으로 묶인다.
     strategy: 접속사 앞뒤로 '같은 모양(품사)'을 손가락으로 짚어 짝을 맞춘다. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것.
