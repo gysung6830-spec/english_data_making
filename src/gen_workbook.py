@@ -85,7 +85,8 @@ def highlight(passage):
             out.append(f'<span class="sk">{esc(s)}</span>'); continue
         h, names = wrap_signals(s)
         if names:
-            out.append(f'<mark class="m">{h}</mark>'); sig_all += names
+            tag = f'<span class="tag">{names[0]}</span>' if names else ""
+            out.append(f'<mark class="m">{tag}{h}</mark>'); sig_all += names
         else:
             out.append(esc(s))
     return " ".join(out), sorted(set(sig_all))
@@ -122,22 +123,20 @@ def card(r, idx):
     if choices:
         lis = []
         for k in sorted(int(x) for x in choices):
-            mark = ' class="ok"' if ans == k else ""
-            tag = ' ← 정답' if ans == k else ""
-            lis.append(f'<li{mark}><span class="n">{CIRCLED[k-1]}</span>{esc(str(choices[str(k)]))}<span class="a">{tag}</span></li>')
-        ch_html = f'<ul class="ch">{"".join(lis)}</ul>'
+            cls = ' class="opt ok"' if ans == k else ' class="opt"'
+            jd = '<span class="jd">✔ 정답</span>' if ans == k else ''
+            lis.append(f'<div{cls}><span class="n">{CIRCLED[k-1]}</span><span class="tx">{esc(str(choices[str(k)]))}</span>{jd}</div>')
+        ch_html = f'<div class="opts">{"".join(lis)}</div>'
     elif ans:
-        ch_html = f'<div class="anonly">공식 정답 <b>{CIRCLED[ans-1]}</b></div>'
-    sigline = " · ".join(sigs) if sigs else "—"
+        ch_html = f'<div class="opts"><div class="opt ok"><span class="n">{CIRCLED[ans-1]}</span><span class="tx">공식 정답</span><span class="jd">✔ 정답</span></div></div>'
     formula = FORMULA.get(r.get("type", typ), FORMULA.get(typ, ""))
-    return f'''<div class="tc">
-  <div class="tch"><span class="no">{r["num"]}</span><span class="ty">{typ}</span>
-    {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="src">{r.get("exam_id","")}</span>
-    <span class="idx">#{idx}</span></div>
+    return f'''<div class="card">
+  <div class="hd"><span class="no">{r["num"]}</span><span class="ty">{typ}</span>
+    {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="kind">STEP · 훈련(정답 칠)</span>
+    <span class="tm">{r.get("exam_id","")} · #{idx}</span></div>
   <div class="psg">{hl}</div>
-  <div class="meta">🔴 이 지문의 신호(칠한 근거): <b>{sigline}</b></div>
+  <div class="fx"><span class="k">공식</span>{esc(formula)}</div>
   {ch_html}
-  <div class="fx">📌 {esc(formula)}</div>
 </div>'''
 
 def build(n=80):
@@ -159,40 +158,39 @@ def build(n=80):
     print(f"워크북 생성: {idx}문항 → {OUT}")
 
 TEMPLATE = '''<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
-<title>유형별 훈련 워크북</title><style>
+<title>유형별 훈련</title><style>
 @page{ size:A4; margin:11mm 12mm; }
 *{ box-sizing:border-box; }
 body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; color:#23272e; font-size:10px; margin:0; background:#fff; }
 .wrap{ max-width:820px; margin:0 auto; }
-:root{ --ink:#1f7a5c; --ink-d:#12543d; --must:#ffe9a8; --trap:#cd5049; --skip:#9aa0a6; --muted:#6b7280; --line:#e6e8ea; }
-.cover{ text-align:center; padding:14px 0 8px; border-bottom:3px solid var(--ink-d); margin-bottom:14px; }
-.cover .t{ font-size:20px; font-weight:800; color:var(--ink-d); }
+:root{ --ink:#1f7a5c; --ink-d:#12543d; --must:#ffe9a8; --must-line:#e0b94a; --trap:#cd5049; --skip:#9aa0a6; --muted:#6b7280; --line:#e6e8ea; }
+.cover{ text-align:center; padding:12px 0 8px; border-bottom:3px solid var(--ink-d); margin-bottom:12px; }
+.cover .t{ font-size:19px; font-weight:800; color:var(--ink-d); }
 .cover .s{ font-size:10px; color:var(--muted); }
 .sec{ font-size:13px; font-weight:800; color:#fff; background:var(--ink); border-radius:6px; padding:4px 12px; margin:14px 0 9px; break-after:avoid; }
 .sec small{ font-weight:600; opacity:.9; font-size:9px; }
-.tc{ border:1px solid var(--line); border-left:4px solid var(--ink); border-radius:7px; padding:10px 13px; margin-bottom:10px; break-inside:avoid; }
-.tch{ display:flex; align-items:center; gap:7px; border-bottom:1px solid var(--line); padding-bottom:5px; margin-bottom:7px; }
-.tch .no{ background:var(--ink-d); color:#fff; font-weight:800; font-size:11px; padding:1px 8px; border-radius:5px; }
-.tch .ty{ font-weight:800; font-size:12px; color:var(--ink-d); }
-.tch .pt{ font-size:8.5px; font-weight:700; color:#fff; background:var(--trap); border-radius:9px; padding:1px 7px; }
-.tch .src{ font-size:9px; color:var(--muted); }
-.tch .idx{ margin-left:auto; font-size:9px; font-weight:800; color:var(--skip); }
-.psg{ font-size:11px; line-height:1.85; }
-mark.m{ background:var(--must); padding:0 1px; border-radius:2px; }
+/* 대표 카드와 동일한 디자인 */
+.card{ background:#fff; border:1px solid var(--line); border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,.06); padding:12px 15px; margin-bottom:11px; break-inside:avoid; }
+.hd{ display:flex; align-items:center; gap:8px; border-bottom:2px solid var(--ink-d); padding-bottom:6px; margin-bottom:8px; }
+.hd .no{ background:var(--ink-d); color:#fff; font-weight:800; font-size:12px; padding:2px 9px; border-radius:5px; }
+.hd .ty{ font-weight:800; font-size:13px; color:var(--ink-d); }
+.hd .pt{ font-size:9px; font-weight:700; color:#fff; background:var(--trap); padding:1px 7px; border-radius:9px; }
+.hd .kind{ font-size:9px; font-weight:700; color:var(--ink); border:1px solid var(--ink); border-radius:9px; padding:1px 8px; }
+.hd .tm{ margin-left:auto; font-size:9.3px; font-weight:700; color:var(--muted); }
+.psg{ font-size:11.3px; line-height:1.85; }
+mark.m{ background:var(--must); padding:0 2px; border-radius:2px; }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
 .sk{ color:var(--skip); }
-.meta{ font-size:9px; color:#3a4a44; margin-top:6px; }
-.meta b{ color:var(--trap); }
-.ch{ list-style:none; margin:6px 0 0; padding:0; }
-.ch li{ font-size:9.6px; padding:2px 0; }
-.ch li .n{ font-weight:800; margin-right:4px; }
-.ch li.ok{ background:#e9f4ef; border-radius:4px; padding:2px 5px; }
-.ch li.ok .a{ color:var(--ink); font-weight:800; }
-.anonly{ font-size:9.6px; margin-top:6px; color:var(--ink-d); }
-.fx{ font-size:9.2px; font-weight:700; color:var(--ink-d); background:#eef4f1; border-radius:5px; padding:5px 9px; margin-top:7px; }
+.tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 2px 0 0; }
+.opts{ margin-top:7px; border-top:1px dashed var(--line); padding-top:7px; }
+.opt{ display:flex; gap:6px; align-items:baseline; font-size:9.8px; margin-bottom:3px; }
+.opt .n{ flex:none; font-weight:800; width:14px; } .opt .tx{ flex:1; } .opt .jd{ flex:none; font-size:8.7px; font-weight:800; color:var(--ink); }
+.opt.ok{ background:#e9f4ef; border-radius:4px; padding:2px 5px; }
+.fx{ font-size:9.4px; font-weight:700; color:var(--ink-d); background:#eef4f1; border:1px solid #cfe6dd; border-radius:5px; padding:5px 9px; margin-top:7px; }
+.fx .k{ display:inline-block; background:var(--ink); color:#fff; font-size:8px; padding:1px 6px; border-radius:8px; margin-right:6px; }
 </style></head><body><div class="wrap">
-<div class="cover"><div class="t">유형별 훈련 워크북 <span style="font-size:12px;color:#6b7280">— 실제 기출 {{N}}문항</span></div>
-<div class="s">🟡 노란 형광펜 = 읽을 문장 / 🔴 빨간 형광펜 = 그 문장을 칠한 근거(신호). 지문 은행 자동 생성.</div></div>
+<div class="cover"><div class="t">PART 1 · 유형별 훈련 <span style="font-size:12px;color:#6b7280">— 실제 기출 {{N}}문항 (정답 칠)</span></div>
+<div class="s">🟡 노란 형광펜 = 읽을 문장 / 🔴 빨간 형광펜·태그 = 그 문장을 칠한 근거(신호) / 초록 = 공식 정답. 지문 은행 자동 생성.</div></div>
 {{BODY}}
 </div></body></html>'''
 

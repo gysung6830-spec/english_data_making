@@ -21,8 +21,9 @@ render 유형별훈련_워크북 _workbook
 python3 - "$DIR" <<'PY'
 import sys, fitz
 d=sys.argv[1]; out=fitz.open()
-# 표지·목차 → PART1 유형훈련 예시 → PART2 패러프레이징(방법론·해부·50문항) → PART3 유형별 훈련 워크북(80)
-for f in ["_cover","형광펜독해_샘플","패러프레이징_훈련","_pp50","_workbook"]:
+# 표지·목차 → PART0 신호사전+PART1 대표카드(형광펜독해_샘플) → PART1 유형별 훈련 80(_workbook)
+#          → PART2 패러프레이징(방법론·해부·50문항)
+for f in ["_cover","형광펜독해_샘플","_workbook","패러프레이징_훈련","_pp50"]:
     out.insert_pdf(fitz.open(f"{d}/{f}.pdf"))
 out.save(f"{d}/_book_raw.pdf")
 print("병합 완료:", out.page_count, "pages")
