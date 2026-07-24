@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REAL = ROOT / "corpus" / "paraphrase_real.json"
 ITEMS = ROOT / "corpus" / "paraphrase_items.json"
+EXPLAIN = ROOT / "corpus" / "paraphrase_explain.json"
 OUT = ROOT / "samples" / "패러프레이징_50.html"
 CIRCLED = "①②③④⑤"
 
@@ -47,28 +48,40 @@ def q_card(qn, typ, ask, src, choices, cite):
             f'{cite_html}</div>'
             f'<div class="src">{esc(src)}</div><ul class="ch">{lis}</ul></div>')
 
-def a_card(qn, typ, a, choices, src, extra=""):
+def a_card(qn, typ, a, choices, src, ex=None, extra=""):
+    exrows = (ex or {}).get("rows") or []
     rows = ""
     for j, c in enumerate(choices):
         t = c.get("trap", "off"); nm, cls = TRAP.get(t, TRAP["off"])
         okcls = ' class="ok"' if t == "ok" else ""
+        ko = esc(exrows[j].get("ko","")) if j < len(exrows) else ""
+        why = esc(exrows[j].get("why","")) if j < len(exrows) else ""
+        detail = ((f'<div class="rko">{ko}</div>' if ko else "")
+                  + (f'<div class="rwhy">{"✓ " if t=="ok" else "✗ "}{why}</div>' if why else ""))
         rows += (f'<tr{okcls}><td class="oc">{CIRCLED[j]}</td>'
-                 f'<td>{esc(c.get("t",""))} <span class="badge {cls}">{nm}</span></td></tr>')
-    return (f'<div class="ak"><span class="qn">{qn}</span> 정답 '
+                 f'<td><span class="ce">{esc(c.get("t",""))}</span> <span class="badge {cls}">{nm}</span>'
+                 f'{detail}</td></tr>')
+    srcko = (ex or {}).get("src_ko", "")
+    srcline = f'<div class="src-ko">원문 해석 — {esc(srcko)}</div>' if srcko else ""
+    return (f'<div class="ak"><span class="qn">{esc(qn)}</span> 정답 '
             f'<span class="cor">{CIRCLED[a-1] if a else "?"}</span> '
             f'<span class="badge b-ok">{esc(typ)}</span> '
-            f'<span class="src-mini">{esc(src)}</span>{extra}<table>{rows}</table></div>')
+            f'<span class="src-mini">{esc(src)}</span>{extra}{srcline}<table>{rows}</table></div>')
 
 def build():
     real = json.loads(REAL.read_text(encoding="utf-8")) if REAL.exists() else []
     items = json.loads(ITEMS.read_text(encoding="utf-8")) if ITEMS.exists() else []
+    explain = {}
+    if EXPLAIN.exists():
+        for e in json.loads(EXPLAIN.read_text(encoding="utf-8")):
+            explain[e.get("id")] = e
 
     # ── 실전편 (실제 평가원 선지) ──
     rprob, rans = [], []
-    for i, it in enumerate(real, 1):
+    for i, it in enumerate(real):
         if not it.get("src"):
             continue
-        qn = f"실전 {i}"
+        qn = f"실전 {len(rprob)+1}"
         cite = f"평가원 {exam_label(it.get('exam_id',''))} {it.get('num','')}번"
         rprob.append(q_card(qn, it.get("type",""),
             "원문을 바르게 바꿔 말한 선지는? (①~⑤ 모두 실제 평가원 선지)",
@@ -77,19 +90,19 @@ def build():
         extra = (f' <span class="badge b-tf">{esc(it.get("answer_transform",""))}</span>'
                  f'<div class="dissect">🔎 {esc(dis)}</div>' if dis else "")
         rans.append(a_card(qn, it.get("type",""), it.get("answer"),
-            it.get("choices",[]), it.get("src",""), extra))
+            it.get("choices",[]), it.get("src",""), explain.get(f"real|{i}"), extra))
     rcount = len(rprob)
 
     # ── 기초편 (문장 변환 연습) ──
     bprob, bans = [], []
-    for i, it in enumerate(items, 1):
-        qn = f"기초 {i}"
+    for i, it in enumerate(items):
+        qn = f"기초 {i+1}"
         cite = f"문장 출처 · {exam_label(it.get('exam_id',''))}"
         bprob.append(q_card(qn, it.get("type",""),
             "다음 문장을 바르게 바꿔 말한 것은?",
             it.get("src",""), it.get("choices",[]), cite))
         bans.append(a_card(qn, it.get("type",""), it.get("answer"),
-            it.get("choices",[]), it.get("src","")))
+            it.get("choices",[]), it.get("src",""), explain.get(f"basic|{i}")))
     bcount = len(bprob)
 
     doc = (TPL
@@ -124,7 +137,11 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .ak{ font-size:9.3px; margin-bottom:8px; break-inside:avoid; } .ak .qn{ background:var(--deep-d); color:#fff; font-weight:800; font-size:9.2px; padding:1px 6px; border-radius:4px; margin-right:5px; }
 .ak .cor{ color:var(--deep); font-weight:800; } .ak .src-mini{ font-size:8.6px; color:var(--muted); font-style:italic; }
 .ak table{ width:100%; border-collapse:collapse; margin-top:3px; }
-.ak td{ padding:2px 6px; border-bottom:1px solid var(--line); font-size:9px; } .ak .oc{ font-weight:800; width:18px; } .ak tr.ok{ background:#eaf5f0; }
+.ak td{ padding:3px 6px; border-bottom:1px solid var(--line); font-size:9px; vertical-align:top; } .ak .oc{ font-weight:800; width:18px; } .ak tr.ok{ background:#eaf5f0; }
+.ak .ce{ color:#3a3f45; }
+.ak .src-ko{ font-size:8.9px; font-weight:700; color:#12543d; background:#eef4f1; border-radius:4px; padding:3px 8px; margin:3px 0 4px; }
+.ak .rko{ font-size:8.6px; color:#4a5560; margin-top:2px; }
+.ak .rwhy{ font-size:8.6px; color:#7a1f19; margin-top:1px; } .ak tr.ok .rwhy{ color:#12543d; }
 .dissect{ font-size:8.8px; color:var(--deep-d); background:#fffdf3; border:1px solid #e0b94a; border-radius:5px; padding:4px 8px; margin-top:4px; }
 .badge{ display:inline-block; font-size:7.8px; font-weight:800; border-radius:8px; padding:0 6px; color:#fff; }
 .b-ok{ background:var(--deep); } .b-copy{ background:#c2410c; } .b-rev{ background:var(--trap); } .b-dist{ background:#a5342d; } .b-over{ background:#b8860b; } .b-off{ background:var(--muted); } .b-tf{ background:#12543d; }
