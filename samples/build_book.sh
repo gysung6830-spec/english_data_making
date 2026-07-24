@@ -24,6 +24,9 @@ d=sys.argv[1]; out=fitz.open()
 # 표지·목차 → PART1 유형훈련 예시 → PART2 패러프레이징(방법론·해부·50문항) → PART3 유형별 훈련 워크북(80)
 for f in ["_cover","형광펜독해_샘플","패러프레이징_훈련","_pp50","_workbook"]:
     out.insert_pdf(fitz.open(f"{d}/{f}.pdf"))
-out.save(f"{d}/형광펜독해_교재.pdf")
-print("교재 빌드 완료:", out.page_count, "pages →", f"{d}/형광펜독해_교재.pdf")
+out.save(f"{d}/_book_raw.pdf")
+print("병합 완료:", out.page_count, "pages")
 PY
+# 후처리: 문제=왼쪽/해설=오른쪽 정렬 + 전 페이지 푸터(페이지번호+저작권)
+python3 "$DIR/finalize_book.py" "$DIR/_book_raw.pdf" "$DIR/형광펜독해_교재.pdf"
+rm -f "$DIR/_book_raw.pdf"
