@@ -39,7 +39,7 @@ def finalize(src_path, out_path):
             fontfile=KFONT, fontname="nsr", fontsize=7.3,
             color=(0.55, 0.56, 0.57), align=1,
         )
-    out.save(out_path, deflate=True)
+    out.save(out_path, garbage=4, deflate=True, deflate_fonts=True, clean=True)
     print(f"후처리 완료: {total} pages (문제=왼쪽 정렬 + 푸터) → {out_path}")
 
 if __name__ == "__main__":
