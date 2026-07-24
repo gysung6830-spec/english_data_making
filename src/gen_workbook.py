@@ -64,6 +64,17 @@ REMIND = {
   "36-37": [("지시어 this·that","y"),("연결어 However·So","y"),("연대·순서","y")],
   "38-39": [("지시어 they·this","y"),("역접 However","y"),("논리 공백","y")],
 }
+TYPE_TIP = {
+  "21": "밑줄이 가리키는 게 '좋다/나쁘다' 어느 쪽인지부터 판정. 그 방향을 <b>추상적으로 바꿔 말한</b> 선지가 정답이다.",
+  "22": "글쓴이가 '<b>결국 하고 싶은 말</b>'을 찾는다. 역접·결론 문장에 답이 있고, 예시는 근거일 뿐이다.",
+  "23": "<b>무엇에 대한 글</b>인가. 반복되는 키워드 + 주제문을 추상화한 선지를 고른다.",
+  "24": "주제문을 한 번 더 <b>압축·비유</b>한 것이 제목. 너무 좁거나 너무 넓으면 오답이다.",
+  "31-34": "빈칸은 새 정보가 아니라 지문이 <b>이미 한 말의 재진술</b>. 역접·한정 문장을 추상화한 선지가 답, 지문어 복사는 함정.",
+  "35": "주제 궤도에서 <b>벗어난 문장 1개</b>. 소재는 비슷해 보여도 논리 방향이 다르면 그것이 정답.",
+  "36-37": "지시어(this·they)와 연결어(however·so), 시간 순서로 <b>사슬을 잇는다</b>.",
+  "38-39": "주어진 문장의 지시어가 '<b>갑자기 튀는</b>' 논리 공백 지점을 찾는다.",
+  "40": "주제문을 압축해 한 문장으로. 빈칸 두 개는 지문의 핵심어를 <b>추상어</b>로 바꾼 것.",
+}
 BAND_TITLE = {
   "21":"함축의미","22":"요지","23":"주제","24":"제목",
   "31-34":"빈칸추론","35":"무관한 문장","36-37":"글의 순서","38-39":"문장 삽입","40":"요약문",
@@ -205,7 +216,7 @@ def render_spread(rec, c, idx):
     src_ans = c.get("answer_src", "given")
     ans_note = "" if src_ans == "given" else " <span style=\"font-size:8px;color:#a86b00\">(정답 미공개 → 풀이로 확정)</span>"
 
-    left = f'''<div class="qproblem">
+    left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
       {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
@@ -305,6 +316,38 @@ def render_fallback(rec, idx):
     </div>'''
 
 
+def band_divider(b, recs, seq, total_bands):
+    """번호대 섹션 = 한 페이지 가득 채우는 유형 표지(공식·접근법·신호 리마인더)."""
+    typ = BAND_TITLE.get(b, b)
+    cnt = len(recs)
+    formula = FORMULA.get(typ, "")
+    tip = TYPE_TIP.get(b, "")
+    chips = "".join(f'<span class="chip {cl}">{esc(tx)}</span>' for tx, cl in REMIND.get(b, REMIND["31-34"]))
+    # 대표 번호 배지(번호대 첫 숫자)
+    head_no = b.split("-")[0]
+    return f'''<section class="banddiv"><span class="wbm">wbspread</span>
+      <div class="bd-top">
+        <span class="bd-seq">유형 {seq:02d} / {total_bands:02d}</span>
+        <span class="bd-part">PART 1 · 유형별 훈련</span>
+      </div>
+      <div class="bd-hero">
+        <div class="bd-no">{esc(head_no)}</div>
+        <div class="bd-titlewrap">
+          <div class="bd-ty">{esc(typ)}</div>
+          <div class="bd-meta">{esc(b)}번대 · 실제 기출 <b>{cnt}문항</b></div>
+        </div>
+      </div>
+      <div class="bd-formula"><span class="k">유형 공식</span>{esc(formula)}</div>
+      <div class="bd-tip"><span class="h">이렇게 접근한다</span>{tip}</div>
+      <div class="bd-steps">
+        <div class="st"><span class="k">STEP 1</span><b>직접 풀기</b><span class="d">신호를 떠올리며 직접 형광펜을 치고 답을 고른다 (왼쪽 페이지)</span></div>
+        <div class="st"><span class="k">STEP 2</span><b>훈련 · 정답 칠</b><span class="d">🟡읽을 문장·🔴칠한 근거 + 노랑만으로 정답 도출 + 선지 판정</span></div>
+        <div class="st"><span class="k">STEP 3</span><b>직독직해</b><span class="d">같은 형광펜 색끼리 영↔한 청크 대응 (오른쪽 페이지)</span></div>
+      </div>
+      <div class="bd-remind"><span class="h">📢 이 유형 신호 리마인더</span><div class="chips">{chips}</div></div>
+    </section>'''
+
+
 def build(n=80):
     bank = [json.loads(l) for l in BANK.read_text(encoding="utf-8").splitlines() if l.strip()]
     picked = select(bank, n)
@@ -315,11 +358,10 @@ def build(n=80):
     groups = {}
     for r in picked:
         groups.setdefault(r["band"], []).append(r)
+    present_bands = [b for b in BAND_ORDER if b in groups]
     body, idx, full = [], 0, 0
-    for b in BAND_ORDER:
-        if b not in groups:
-            continue
-        body.append(f'<div class="sec">{BAND_TITLE.get(b,b)} <small>({b}번대 · {len(groups[b])}문항)</small></div>')
+    for si, b in enumerate(present_bands, 1):
+        body.append(band_divider(b, groups[b], si, len(present_bands)))
         for r in groups[b]:
             idx += 1
             key = f'{r["exam_id"]}|{r["num"]}'
@@ -340,18 +382,48 @@ TEMPLATE = '''<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
 body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; color:#23272e; font-size:10px; line-height:1.5; margin:0; background:#fff; }
 :root{ --ink:#1f7a5c; --ink-d:#12543d; --src:#e9f4ef; --src-line:#1f7a5c; --trap:#cd5049;
   --must:#ffe9a8; --must-line:#e0b94a; --skip:#9aa0a6; --muted:#6b7280; --line:#e6e8ea; }
-.cover{ text-align:center; padding:10px 0 8px; border-bottom:3px solid var(--ink-d); margin-bottom:10px; break-after:avoid; }
-.cover .t{ font-size:19px; font-weight:800; color:var(--ink-d); }
-.cover .s{ font-size:9.5px; color:var(--muted); }
-.sec{ font-size:13px; font-weight:800; color:#fff; background:var(--ink); border-radius:6px; padding:4px 12px; margin:12px 0 8px; break-before:page; break-after:avoid; }
-.sec small{ font-weight:600; opacity:.9; font-size:9px; }
+/* PART 1 표지 — 한 페이지 가득 채우는 히어로 */
+.cover{ height:275mm; display:flex; flex-direction:column; justify-content:center; color:#fff; text-align:center;
+  background:linear-gradient(160deg,#12543d 0%, #1f7a5c 72%, #2a916d 100%); border-radius:10px; padding:0 22mm; break-after:page; }
+.cover .kick{ font-size:13px; font-weight:800; letter-spacing:3px; opacity:.85; margin-bottom:10px; }
+.cover .t{ font-size:44px; font-weight:800; line-height:1.15; }
+.cover .n{ display:inline-block; background:var(--must); color:#12543d; font-weight:800; border-radius:8px; padding:2px 12px; }
+.cover .rule{ width:64mm; height:4px; background:var(--must); border-radius:3px; margin:20px auto; }
+.cover .s{ font-size:13px; line-height:1.9; opacity:.95; max-width:150mm; margin:0 auto; }
+.cover .legend{ margin-top:22px; font-size:12px; opacity:.92; }
+.cover .legend b{ color:var(--must); }
+
+/* 번호대 유형 표지 — 한 페이지 가득 */
+.banddiv{ height:274mm; display:flex; flex-direction:column; break-before:page; break-inside:avoid; padding:5mm 3mm; }
+.bd-top{ display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:7px; }
+.bd-top .bd-seq{ font-size:12px; font-weight:800; color:#fff; background:var(--ink); border-radius:6px; padding:3px 12px; }
+.bd-top .bd-part{ font-size:11px; font-weight:800; color:var(--ink-d); letter-spacing:1px; }
+.bd-hero{ display:flex; align-items:center; gap:20px; margin:22mm 0 14mm; }
+.bd-hero .bd-no{ font-size:64px; font-weight:800; color:#fff; background:linear-gradient(150deg,var(--ink-d),var(--ink)); border-radius:16px; width:118px; height:118px; line-height:118px; text-align:center; flex:none; box-shadow:0 4px 14px rgba(18,84,61,.28); }
+.bd-hero .bd-ty{ font-size:40px; font-weight:800; color:var(--ink-d); line-height:1.1; }
+.bd-hero .bd-meta{ font-size:15px; color:var(--muted); margin-top:8px; } .bd-hero .bd-meta b{ color:var(--ink-d); }
+.bd-formula{ font-size:14px; font-weight:800; color:var(--ink-d); background:#e9f4ef; border:2px solid var(--ink); border-radius:9px; padding:12px 16px; margin-bottom:11px; }
+.bd-formula .k{ display:inline-block; background:var(--ink); color:#fff; font-size:11px; padding:2px 10px; border-radius:9px; margin-right:9px; vertical-align:2px; }
+.bd-tip{ font-size:13.5px; line-height:1.75; color:#2b3a34; background:#fffdf3; border:1px solid var(--must-line); border-radius:9px; padding:12px 16px; margin-bottom:14px; }
+.bd-tip .h{ display:block; font-size:11px; font-weight:800; color:#a86b00; margin-bottom:4px; } .bd-tip b{ color:var(--ink-d); }
+.bd-steps{ display:flex; gap:11px; margin-bottom:14px; }
+.bd-steps .st{ flex:1; background:#fff; border:1.5px solid var(--line); border-top:4px solid var(--ink); border-radius:9px; padding:11px 13px; }
+.bd-steps .st .k{ display:inline-block; font-size:10px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:6px; padding:2px 9px; margin-bottom:6px; }
+.bd-steps .st b{ display:block; font-size:14px; color:var(--ink-d); margin-bottom:5px; }
+.bd-steps .st .d{ font-size:11px; line-height:1.55; color:var(--muted); }
+.bd-remind{ margin-top:auto; background:#eef4f1; border-radius:9px; padding:12px 16px; }
+.bd-remind .h{ display:block; font-size:12px; font-weight:800; color:var(--ink-d); margin-bottom:7px; }
+.bd-remind .chip{ font-size:11.5px; padding:2px 10px; }
 @media print{
   .spread{ display:block; }
-  .qproblem{ break-before:left; break-inside:avoid; }
-  .qsolution{ break-before:right; break-inside:avoid; }
+  /* 워크북은 유형 표지(1쪽)가 좌우 짝을 깨므로 강제 좌/우 정렬을 쓰지 않는다
+     → 표지·문제·해설이 빈 페이지 없이 연달아 흐르도록 break-before:page 만 사용 */
+  .qproblem{ break-before:page; break-inside:avoid; }
+  .qsolution{ break-before:page; break-inside:avoid; }
   .card.solo{ break-inside:avoid; }
 }
 .spread{ margin-bottom:6px; }
+.wbm{ font-size:2px; color:#fff; line-height:0; }
 
 /* 카드 공통 */
 .card{ background:#fff; border-radius:8px; box-shadow:0 1px 6px rgba(0,0,0,.1); padding:12px 15px; margin-bottom:10px; }
@@ -442,8 +514,13 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
 .dchl .opt-line .co{ color:var(--src-line); font-weight:800; } .dchl .opt-line .xo{ color:var(--trap); font-weight:700; }
 </style></head><body>
-<div class="cover"><div class="t">PART 1 · 유형별 훈련 <span style="font-size:12px;color:#6b7280">— 실제 기출 {{N}}문항 (대표형 {{FULL}})</span></div>
-<div class="s">문항마다 STEP 1 직접 풀기(왼쪽) → STEP 2 훈련·정답 칠 + STEP 3 직독직해(오른쪽). 🟡=읽을 문장 · 🔴=칠한 근거(신호) · 초록=정답.</div></div>
+<div class="cover">
+  <div class="kick">PART 1</div>
+  <div class="t">유형별 훈련</div>
+  <div class="rule"></div>
+  <div class="s">실제 평가원 기출 <span class="n">{{N}}문항</span>을 한 문항도 빠짐없이<br>대표 카드와 같은 <b>3-STEP 펼침면</b>으로.<br>왼쪽 STEP 1 직접 풀기 → 오른쪽 STEP 2 훈련·정답 칠 + STEP 3 직독직해.</div>
+  <div class="legend"><b>🟡</b> 읽을 문장 &nbsp;·&nbsp; <b>🔴</b> 칠한 근거(신호) &nbsp;·&nbsp; <b>초록</b> 정답</div>
+</div>
 {{BODY}}
 </body></html>'''
 

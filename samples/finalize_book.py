@@ -15,6 +15,10 @@ FOOT = "(c) 2026. 김은아영어연구소. all rights reserved"
 
 def is_problem(page):
     t = page.get_text()
+    # 워크북(유형별 훈련) 카드는 유형 표지가 좌우 짝을 깨므로 강제 좌측 정렬에서 제외
+    # (wbspread = 워크북 문제 페이지에만 심은 비가시 마커) → 빈 페이지가 생기지 않도록
+    if "wbspread" in t:
+        return False
     return ("STEP 1" in t) and ("직접" in t)
 
 def finalize(src_path, out_path):
