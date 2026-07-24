@@ -518,8 +518,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
   <div class="kick">PART 1</div>
   <div class="t">유형별 훈련</div>
   <div class="rule"></div>
-  <div class="s">실제 평가원 기출 <span class="n">{{N}}문항</span>을 한 문항도 빠짐없이<br>대표 카드와 같은 <b>3-STEP 펼침면</b>으로.<br>왼쪽 STEP 1 직접 풀기 → 오른쪽 STEP 2 훈련·정답 칠 + STEP 3 직독직해.</div>
-  <div class="legend"><b>🟡</b> 읽을 문장 &nbsp;·&nbsp; <b>🔴</b> 칠한 근거(신호) &nbsp;·&nbsp; <b>초록</b> 정답</div>
+  <div class="s">실제 평가원 기출 <span class="n">{{N}}문항</span></div>
 </div>
 {{BODY}}
 </body></html>'''
