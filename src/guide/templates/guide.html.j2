@@ -261,6 +261,7 @@
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag infer">유추</span>{{ e.how }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
+      {% if e.catch %}<div class="wb-catch"><span class="catch-tag">이 정도는 캐치</span>{{ e.catch }}</div>{% endif %}
     </li>
     {% endfor %}
   </ol>
@@ -359,6 +360,7 @@
       {% if e.ab %}<div class="wb-ab"><span class="ab-tag">A→B</span>{{ e.ab }}</div>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag">어떻게 읽나</span>{{ e.how }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
+      {% if e.catch %}<div class="wb-catch"><span class="catch-tag">이 정도는 캐치</span>{{ e.catch }}</div>{% endif %}
     </li>
     {% endfor %}
   </ol>
@@ -504,6 +506,7 @@
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag">구체화</span>{{ e.how }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
+      {% if e.catch %}<div class="wb-catch"><span class="catch-tag">이 정도는 캐치</span>{{ e.catch }}</div>{% endif %}
     </li>
     {% endfor %}
   </ol>

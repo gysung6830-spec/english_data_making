@@ -490,6 +490,12 @@ body {
 .how-tag { display: inline-block; background: var(--gold); color: #fff; font-weight: 800;
   font-size: 8.5px; padding: 1px 8px; border-radius: 3px; margin-right: 7px; }
 .how-tag.infer { background: #6d4bb5; }
+/* 이 정도는 캐치 — 문장 읽고 잡아야 할 핵심 정보(교재 컨셉) */
+.wb-catch { font-family: var(--f-body); font-size: 10.5px; color: #123c33; margin-top: 5px;
+  background: var(--tint2); border-left: 4px solid var(--navy2); border-radius: 6px;
+  padding: 7px 11px; font-weight: 500; }
+.catch-tag { display: inline-block; background: var(--navy); color: #fff; font-weight: 800;
+  font-size: 8.5px; padding: 1px 8px; border-radius: 3px; margin-right: 7px; }
 .wb-note { color: var(--muted); font-size: 10px; margin: 10px 0; }
 :root { --goldbg: #fbf3e5; }
 

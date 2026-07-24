@@ -181,6 +181,7 @@ class WorkExample(BaseModel):
     src: str = ""                 # 출처
     cut: str = ""                 # 끊어읽기(슬래시 직독직해 — 읽은 '결과')
     how: str = ""                 # 어떻게 읽나(구조 파악·처리 '방법')
+    catch: str = ""               # 이 정도는 캐치(문장 읽고 잡아야 할 핵심 정보)
     ab: str = ""                  # A→B 단순화(뼈대 관계) 한 줄
 
 
