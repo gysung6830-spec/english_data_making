@@ -26,6 +26,7 @@ chapters:
     cut: 동전 하나까지 모으던 검소한 형과 달리 / Tom은 낭비가 심해서 / 일주일 만에 월급을 다 써버렸다.
     how: profligate를 몰라도 괜찮아요. Unlike his frugal brother라는 대조 단서가 있으니 검소한 형과 반대인 헤프게
       낭비한다는 뜻으로 유추하면 됩니다.
+    catch: profligate = 아끼는 형과 정반대, 즉 '헤프게 낭비하는'. Unlike 대조 단서로 뜻을 잡습니다.
   - en: If so, how?' The scientific thinker looks for features of the thing that can
       be stripped of subjectivity—ideally, those aspects that can be quantified and
       whose values will thus never change from one observer to the next.
@@ -34,6 +35,7 @@ chapters:
       그래서 관찰자마다 값이 결코 변하지 않는 측면들을.
     how: subjectivity가 낯설어도, 대시(—) 뒤 재진술이 힌트예요. 관찰자마다 값이 달라지는 것이라 풀어 주니 그 반대 개념으로
       뜻을 잡으면 됩니다.
+    catch: subjectivity = 관찰자마다 값이 달라지는 것. 대시 뒤 재진술로 '주관성'의 뜻을 유추합니다.
   - en: Occasionally, however, a mutation may occur that increases the fitness of
       the organism, just as an accidental failure to reproduce the text of the first
       edition might provide more accurate or updated information.
@@ -42,6 +44,7 @@ chapters:
       정확하거나 갱신된 정보를 줄 수도 있는 것처럼.
     how: mutation의 뜻이 막막하면 just as 뒤 비유를 보세요. 우연한 복제 오류에 빗대 주니 원본이 뜻밖에 바뀌는 변화라는 의미로
       유추할 수 있습니다.
+    catch: mutation = 적합도를 높일 수도 있는 우연한 변화, 즉 '돌연변이'. 복제 오류 비유로 뜻을 잡아요.
   - en: Economics can go a long way towards helping a legislature determine whether
       or not a particular tax law will help achieve a particular goal, but economics
       cannot, in a vacuum, identify the goal.
@@ -50,6 +53,7 @@ chapters:
       없이 홀로는 / 그 목표 자체를 정하지 못한다.
     how: in a vacuum이 어려워도, but이라는 대조 단서가 도와줘요. 앞의 도움과 맞세워 '맥락 없이 홀로는'이라는 뜻으로 자연스럽게
       유추하면 됩니다.
+    catch: in a vacuum = 맥락 없이 홀로, 즉 '고립되어'. but 대조로 뜻을 유추 — 목표는 정하지 못한다는 한계.
   practice:
   - kind: mc
     sentence: However, unlike most of the categories of collection and study that
