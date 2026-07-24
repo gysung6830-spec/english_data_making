@@ -202,6 +202,14 @@ RESULT_HTML = """
       {% endfor %}
     </table>
 
+    {% if shortage %}
+    <div class=err style="background:#fff8e1;border-color:#ffe08a;color:#8a5a00">
+      ⚠ <b>지문 부족</b> — {{ shortage }}<br>
+      같은 지문이 여러 문항에 재사용되어 유사·중복 문항이 나올 수 있습니다.
+      서로 다른 지문을 더 올리면 품질이 크게 좋아집니다.
+    </div>
+    {% endif %}
+
     <label style="margin-top:18px">검증 결과</label>
     <pre>{{ verify }}</pre>
 
@@ -377,12 +385,14 @@ def generate():
     downloads.sort(key=lambda d: (0 if d["name"].endswith(".pdf") else 1))
     import json
     logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
+    shortage = next((l.get("msg") for l in res.logs
+                     if l.get("note") == "passage_shortage"), "")
     school_name = next((s["name"] for s in load_schools_index()
                         if s["school_id"] == school), school)
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
-        total=res.blueprint.total_score, mock=mock,
+        total=res.blueprint.total_score, mock=mock, shortage=shortage,
         downloads=downloads, verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
 

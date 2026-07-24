@@ -144,6 +144,21 @@ SPOILER_TYPES = {
     "grammar_fix_and_answer", "blank_single", "order", "summary_ab",
 }
 
+# 사실상 같은 문항을 만드는 '유형군' — 한 지문에 같은 군을 겹쳐 배정하면
+# 중복 문항(예: 어법·어법+어휘가 같은 지문의 같은 오류를 정답으로)이 나온다.
+_TYPE_FAMILY = {
+    "grammar": "grammar", "grammar_vocab_mix": "grammar",
+    "main_point": "main_idea", "title": "main_idea", "summary_ab": "main_idea",
+    "summary_fill_from_text": "main_idea",
+    "vocab_odd": "vocab", "vocab_3blank_abc": "vocab",
+    "inference_mismatch": "factmatch", "dialogue_mismatch": "factmatch",
+    "notice_match": "factmatch",
+}
+
+
+def _family(t: str) -> str:
+    return _TYPE_FAMILY.get(t, t)
+
 
 def _spoiler_penalty(item_type: str, existing_types: set[str]) -> float:
     """이미 다른 유형이 붙은 지문에 스포일러 유형을 겹쳐 쓰면 큰 페널티."""
@@ -262,7 +277,9 @@ def _pick(item: Item, candidates: list[Passage],
     for p in candidates:
         if cap is not None and use_count.get(p.id, 0) >= cap:
             continue
-        if not allow_type_overlap and item.type in type_on.get(p.id, set()):
+        # 같은 유형군(어법/주제/어휘/사실확인)이 한 지문에 겹치면 중복 문항 위험 → 회피
+        if not allow_type_overlap and \
+                _family(item.type) in {_family(x) for x in type_on.get(p.id, set())}:
             continue
         prof = profiles[p.id]
         s = fit_score(item.type, prof) + _difficulty_bonus(prof, difficulty)

@@ -102,6 +102,10 @@ def cmd_generate(args):
                           footer=footer, answer_key=answer_key)
         print(f"\n[{forms[f_i]}형] 검증:")
         print(res.verify_report.summary())
+        _short = next((l.get("msg") for l in res.logs
+                       if l.get("note") == "passage_shortage"), "")
+        if _short:
+            print(f"\n⚠ [지문 부족] {_short}")
         if res.logs:
             print("지문 배정 로그:", json.dumps(res.logs, ensure_ascii=False))
         for k, v in out.items():
