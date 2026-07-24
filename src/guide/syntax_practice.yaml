@@ -243,6 +243,58 @@ practice:
       key_points:
       - 'ask why + S + would ... : why 의문사절이 ask의 목적어(왜 ~하는지) — 이유 부사절로 오독 금지'
       - 'leading researchers to ask ... : 결과를 나타내는 분사구문'
+  - kind: mc
+    sentence: The design process concentrates on how the agents will cooperate and
+      coordinate with each other to accomplish the team goals.
+    source: 2022 고3 6월 24번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 그 설계 과정은 에이전트들이 팀 목표를 달성하기 위해 서로 얼마나 협력하고 조정하는지에 집중한다
+    - 그 설계 과정은 에이전트들이 팀 목표를 달성하기 위해 서로 어떻게 협력하고 조정할 것인지에 집중한다
+    answer_index: 1
+    vocab:
+    - word: concentrate on
+      meaning: ~에 집중하다
+    - word: cooperate
+      meaning: 협력하다
+    - word: coordinate
+      meaning: 조정하다, 협응하다
+    - word: accomplish
+      meaning: 이루다, 달성하다
+    solution:
+      cut: The design process / concentrates on / how the agents will cooperate and
+        coordinate with each other / to accomplish the team goals.
+      wrong: how를 정도(얼마나)로 보아 '얼마나 협력하는지'로 오독.
+      wrong_why: 여기서 how는 전치사 on의 목적어가 되는 명사절을 이끄는 의문사/관계부사로 '어떻게(방법)'를 뜻한다. how many/much처럼
+        정도를 나타내는 용법이 아니다.
+      author_msg: 설계의 초점은 에이전트들이 '어떻게' 협력·조정할지, 즉 그 방법에 있다.
+      key_points:
+      - 'how 명사절 : 정도(얼마나) 오독 → 방법(어떻게)의 명사절로 처리'
+  - kind: short
+    sentence: Culture operates in ways we can consciously consider and discuss but
+      also in ways of which we are far less cognizant.
+    source: 2022 고3 9월 37번
+    prompt: wh절(관계사·명사절)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 문화는 우리가 의식적으로 고려하고 논의할 수 있는 방식으로 작동하지만, 또한 우리가 훨씬 덜 인식하는 방식으로도 작동한다.
+    vocab:
+    - word: operate
+      meaning: 작동하다
+    - word: consciously
+      meaning: 의식적으로
+    - word: cognizant
+      meaning: 인식하는, 알고 있는
+    - word: far less
+      meaning: 훨씬 덜
+    solution:
+      cut: Culture operates / in ways (we can consciously consider and discuss) /
+        but also in ways (of which we are far less cognizant).
+      wrong: of which를 놓쳐 뒤 관계절을 선행사 ways에 걸지 못하고 문장을 끊어 오독.
+      wrong_why: of which we are far less cognizant는 ways를 수식하는 관계절로, be cognizant
+        of의 of가 관계대명사 which와 함께 앞으로 이동한 형태다. '그 방식에 대해 우리가 훨씬 덜 인식하는'으로 선행사 ways에
+        걸어야 한다.
+      author_msg: 문화는 우리가 인식하는 방식뿐 아니라 거의 인식하지 못하는 방식으로도 작동한다.
+      key_points:
+      - 'of which 관계절 : 전치사+관계대명사가 선행사 ways 수식 → be cognizant of의 of가 앞으로 이동'
   participle:
   - kind: mc
     sentence: Worried that she could not get to the boarding gate in time, she rushed
@@ -359,6 +411,171 @@ practice:
       key_points:
       - '문두 Moving up in scale : 주절 주어로 오독 → 분사구문 ''~할 때'' / forces shaping ~ : 병렬
         동사로 오독 → forces를 수식하는 현재분사로 처리'
+  - kind: mc
+    sentence: Questions of morality are often pushed to the side in legislative debate,
+      labeled too controversial, too difficult to answer, or, worst of all, irrelevant
+      to the project.
+    source: 2022 고3 9월 22번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 도덕성의 문제들은 입법 논쟁에서 종종 뒷전으로 밀려나는데, 너무 논쟁적이고, 답하기 너무 어렵고, 최악의 경우 그 사안과 무관하다고 여겨진다
+    - 도덕성의 문제들은 입법 논쟁에서 종종 뒷전으로 밀려나며, (사람들을) 너무 논쟁적이고 답하기 어렵다고 규정짓는다
+    answer_index: 0
+    vocab:
+    - word: morality
+      meaning: 도덕성
+    - word: legislative
+      meaning: 입법의
+    - word: controversial
+      meaning: 논쟁적인
+    - word: irrelevant
+      meaning: 무관한
+    solution:
+      cut: Questions of morality / are often pushed to the side / in legislative debate,
+        / labeled too controversial, / too difficult to answer, / or ... irrelevant
+        to the project.
+      wrong: labeled를 능동으로 보아 '~라고 규정짓는다'로 오독.
+      wrong_why: labeled는 (being) labeled의 수동 분사구문으로, 주어 Questions of morality가 '~라고
+        분류되는' 대상이다. 능동으로 무언가를 규정하는 것이 아니다.
+      author_msg: 도덕 문제는 논쟁적·난해·무관하다는 딱지가 붙어 뒷전으로 밀린다.
+      key_points:
+      - '과거분사 분사구문 labeled : 능동 오독 → (being) labeled 수동, 주어가 분류되는 대상'
+  - kind: mc
+    sentence: But the economic benefits provided by these services, based on their
+      non‑market values, may exceed the economic value of the timber.
+    source: 2024 고3 11월 23번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 그러나 이 서비스들이 제공하는 경제적 이익은, 목재의 비시장 가치에 근거하여, 그 경제적 가치를 초과할 수 있다
+    - 그러나 이 서비스들이 제공하는 경제적 이익은, 그것들(서비스)의 비시장 가치에 근거하면, 목재의 경제적 가치를 초과할 수도 있다
+    answer_index: 1
+    vocab:
+    - word: economic benefit
+      meaning: 경제적 이익
+    - word: non-market value
+      meaning: 비시장 가치
+    - word: exceed
+      meaning: 초과하다, 넘어서다
+    - word: timber
+      meaning: 목재
+    solution:
+      cut: But the economic benefits (provided by these services), / based on their
+        non‑market values, / may exceed / the economic value of the timber.
+      wrong: 삽입된 분사구문 based on their non‑market values의 their를 timber로 잘못 연결.
+      wrong_why: based on their non‑market values는 (being) based on의 삽입 분사구문으로, their는
+        앞의 these services(그 이익의 원천)를 가리킨다. 목재가 아니라 서비스의 비시장 가치에 근거해 산정된 이익이다.
+      author_msg: 서비스의 비시장 가치를 반영하면 그 이익이 목재 가치를 넘어설 수 있다.
+      key_points:
+      - '삽입 분사구문 based on : their를 timber로 오독 → these services(이익의 원천)에 연결'
+  - kind: mc
+    sentence: Formal training programs, developed in advance and delivered according
+      to a preset schedule, are insufficient to address shifting training needs and
+      encourage timely information sharing.
+    source: 2024 고3 6월 37번
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    options:
+    - 공식 훈련 프로그램은 미리 개발하고 정해진 일정에 따라 전달하기 때문에, 변화하는 훈련 요구를 다루기에 불충분하다
+    - 미리 개발되어 정해진 일정에 따라 전달되는 공식 훈련 프로그램은, 변화하는 훈련 요구를 다루고 시기적절한 정보 공유를 촉진하기에는 불충분하다
+    answer_index: 1
+    vocab:
+    - word: formal
+      meaning: 공식적인
+    - word: in advance
+      meaning: 미리
+    - word: preset
+      meaning: 미리 정해진
+    - word: insufficient
+      meaning: 불충분한
+    solution:
+      cut: Formal training programs, / (developed in advance and delivered according
+        to a preset schedule), / are insufficient / to address shifting training needs
+        / and encourage timely information sharing.
+      wrong: developed/delivered를 능동 본동사로 보아 '개발하고 전달한다'로 오독.
+      wrong_why: developed와 delivered는 주어 Formal training programs를 수식하는 과거분사(수동)의
+        삽입 분사구문이며, 문장의 본동사는 are insufficient이다.
+      author_msg: 미리 짜여 정해진 일정대로 제공되는 공식 훈련은 변화하는 요구에 대응하기 부족하다.
+      key_points:
+      - '과거분사 삽입구 developed/delivered : 능동 본동사 오독 → 수동 수식, 본동사는 are insufficient'
+  - kind: short
+    sentence: In this sense, depending on the intentions of the parties, the areas
+      of common interest may be clarified, refined and given negotiated form and substance.
+    source: 2024 고3 11월 36번
+    prompt: 분사구문(문두·콤마 V-ing/V-ed, 동명사 주어 제외)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 이런 의미에서, 당사자들의 의도에 따라, 공동의 관심 영역은 명확해지고 다듬어지며 협상된 형태와 실체를 부여받을 수 있다.
+    vocab:
+    - word: depending on
+      meaning: ~에 따라
+    - word: parties
+      meaning: 당사자들
+    - word: clarify
+      meaning: 명확히 하다
+    - word: substance
+      meaning: 실체, 내용
+    solution:
+      cut: In this sense, / depending on the intentions of the parties, / the areas
+        of common interest / may be clarified, refined / and given negotiated form
+        and substance.
+      wrong: depending on을 '~에 의존하는 (관심 영역)'처럼 명사 수식으로 보거나 주어로 오해.
+      wrong_why: depending on the intentions of the parties는 문두 분사구문(= as it depends
+        on ~)으로 '당사자들의 의도에 따라'라는 부사·조건 의미이며, 주절의 주어는 the areas of common interest이다.
+      author_msg: 당사자 의도에 따라 공동 관심사는 구체적 형태를 갖추게 된다.
+      key_points:
+      - '문두 분사구문 depending on : 명사수식/주어 오독 → 부사적 조건(~에 따라)'
+  - kind: short
+    sentence: Individual perspectives may also be context dependent, meaning that
+      under different circumstances, at a different time, when they are feeling a
+      different way, the same individual may make different choices.
+    source: 2024 고3 6월 42번
+    prompt: 분사구문(문두·콤마 V-ing/V-ed, 동명사 주어 제외)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 개인의 관점 또한 맥락에 의존적일 수 있는데, 이는 다른 상황에서, 다른 시간에, 그들이 다르게 느끼고 있을 때, 같은 사람이
+      다른 선택을 할 수도 있음을 의미한다.
+    vocab:
+    - word: perspective
+      meaning: 관점
+    - word: context dependent
+      meaning: 맥락 의존적인
+    - word: circumstances
+      meaning: 상황, 환경
+    - word: individual
+      meaning: 개인, 사람
+    solution:
+      cut: Individual perspectives / may also be context dependent, / meaning that
+        ... / the same individual may make different choices.
+      wrong: meaning을 '의미 있는'이라는 형용사나 be동사의 목적으로 오독.
+      wrong_why: meaning that ...은 앞 절 전체를 부연하는 분사구문(= which means that)으로, '즉 ~을
+        의미한다'로 이어 읽어야 한다.
+      author_msg: 관점은 맥락에 좌우되어 같은 사람도 상황에 따라 다르게 선택한다.
+      key_points:
+      - '콤마 분사구문 meaning that : 형용사/목적어 오독 → 앞 절 부연(= which means)'
+  - kind: short
+    sentence: For example, a United Nations initiative has estimated that the economic
+      benefits of ecosystem services provided by tropical forests, including climate
+      regulation, water purification, and erosion prevention, are over three times
+      greater per hectare than the market benefits.
+    source: 2024 고3 11월 23번
+    prompt: 분사구문(문두·콤마 V-ing/V-ed, 동명사 주어 제외)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 예를 들어, 한 유엔 계획은 기후 조절, 수질 정화, 침식 방지를 포함하여 열대림이 제공하는 생태계 서비스의 경제적 이익이 헥타르당
+      시장 이익보다 세 배 넘게 크다고 추정했다.
+    vocab:
+    - word: initiative
+      meaning: 계획, 이니셔티브
+    - word: ecosystem services
+      meaning: 생태계 서비스
+    - word: erosion prevention
+      meaning: 침식 방지
+    - word: per hectare
+      meaning: 헥타르당
+    solution:
+      cut: a United Nations initiative has estimated / that the economic benefits
+        of ecosystem services (provided by tropical forests), / including climate
+        regulation, water purification, and erosion prevention, / are over three times
+        greater per hectare / than the market benefits.
+      wrong: including을 본동사나 '~을 포함시킨다'로 보아 that절 구조를 깨뜨림.
+      wrong_why: including ...은 ecosystem services를 부연하는 콤마 분사구(= which include)로
+        삽입된 예시이며, that절의 본동사는 are (greater)이다.
+      author_msg: 기후조절·정화·침식방지 등 생태계 서비스의 가치가 목재 시장가치의 세 배를 넘는다.
+      key_points:
+      - '콤마 분사구 including : 본동사 오독 → 예시 삽입 분사구, that절 본동사는 are greater'
   insertion:
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through
@@ -579,6 +796,57 @@ practice:
       key_points:
       - '— evolutionary baggage — 대시 동격 삽입 : 새 목적어로 오독 → 앞 명사 characteristics의 다른
         이름으로 처리'
+  - kind: short
+    sentence: One function of poetry is to depict the world with a fresh perception—to
+      make it strange—so that we will listen to language once again.
+    source: 2024 고3 9월 42번
+    prompt: 삽입(콤마/대시 쌍, 문미 꼬리절 제외)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 시의 한 가지 기능은 세상을 신선한 지각으로 묘사하는 것 — 즉 세상을 낯설게 만드는 것 — 인데, 그리하여 우리가 언어에 다시
+      한번 귀 기울이게 하려는 것이다.
+    vocab:
+    - word: depict
+      meaning: 묘사하다
+    - word: perception
+      meaning: 지각, 인식
+    - word: strange
+      meaning: 낯선
+    - word: so that
+      meaning: ~하도록
+    solution:
+      cut: One function of poetry / is to depict the world with a fresh perception
+        / —to make it strange— / so that we will listen to language once again.
+      wrong: 대시 쌍 —to make it strange—를 앞의 to depict와 병렬된 별개의 목적으로 오독.
+      wrong_why: —to make it strange—는 대시 쌍으로 삽입된 부연으로, 바로 앞 'a fresh perception으로
+        묘사하기'를 다시 풀어 설명한다. 문장의 골격은 One function is to depict ... so that ...이다.
+      author_msg: 시는 세상을 낯설게 함으로써 언어에 다시 주목하게 한다.
+      key_points:
+      - '대시 쌍 삽입 —to make it strange— : 병렬 목적 오독 → 앞 어구의 부연(삽입)'
+  - kind: short
+    sentence: But here too there is iteration—the repeated burning of molecules of
+      wax—so this too is an iterative process, although at first masked.
+    source: 2026 고3 11월 36번
+    prompt: 삽입(콤마/대시 쌍, 문미 꼬리절 제외)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 그러나 여기에도 반복이 있는데 — 밀랍 분자가 반복적으로 연소되는 것 — 그래서 이것 역시, 처음에는 가려져 있었지만, 반복적인
+      과정이다.
+    vocab:
+    - word: iteration
+      meaning: 반복
+    - word: molecule
+      meaning: 분자
+    - word: wax
+      meaning: 밀랍, 왁스
+    - word: masked
+      meaning: 가려진, 감춰진
+    solution:
+      cut: But here too / there is iteration / —the repeated burning of molecules
+        of wax— / so this too is an iterative process, / although at first masked.
+      wrong: 대시 쌍 삽입을 별개의 절이나 본동사구로 보아 there is ... so ... 골격을 놓침.
+      wrong_why: —the repeated burning of molecules of wax—는 대시 쌍으로 삽입된 iteration의
+        동격 부연이다. 삽입구를 걷어내면 there is iteration so this too is an iterative process가
+        문장 골격이다.
+      author_msg: 밀랍이 반복 연소되므로 이것도 결국 반복적 과정이다.
+      key_points:
+      - '대시 쌍 삽입 : 별개 절 오독 → iteration의 동격 부연, 골격은 there is iteration ... so ...'
   apposition:
   - kind: mc
     sentence: 'When you say "It''s mine" in reference to a resource, often that means
@@ -1026,6 +1294,63 @@ practice:
       - 'the extent of the responsibility of those of us alive now : of가 연쇄되는 명사구(…의
         …의 정도)'
       - 'hidden from view + (긴 목적어) : 부사구 뒤로 목적어가 후치된 어순'
+  - kind: short
+    sentence: Sequential changes are found in many fossils showing the change of certain
+      features over time from a common ancestor, as in the case of the horse.
+    source: 2022 고3 6월 36번
+    prompt: 전치사구 중첩(명사 수식)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 순차적인 변화는 많은 화석에서 발견되는데, 그 화석들은 말의 경우에서처럼 공통 조상으로부터 시간에 걸쳐 특정 형질들이 변화하는
+      것을 보여 준다.
+    vocab:
+    - word: sequential
+      meaning: 순차적인, 잇따른
+    - word: fossil
+      meaning: 화석
+    - word: feature
+      meaning: 형질, 특징
+    - word: common ancestor
+      meaning: 공통 조상
+    solution:
+      cut: Sequential changes are found / in many fossils / showing the change / of
+        certain features / over time / from a common ancestor, / as in the case of
+        the horse.
+      wrong: '''from a common ancestor''를 앞의 동사 are found에 걸어 ''공통 조상에게서 화석이 발견된다''처럼
+        읽는 오역.'
+      wrong_why: 명사 the change를 of·over·from 세 전치사구가 연달아 수식하는 중첩 구조인데, 마지막 from구를
+        다른 동사나 명사에 잘못 연결하면 수식 관계가 끊어진다.
+      author_msg: 명사 뒤에 전치사구가 여러 개 겹치면 모두 그 명사를 꾸민다고 보고 하나의 덩어리로 묶어 읽어라.
+      key_points:
+      - 'the change of certain features over time from a common ancestor : from구를
+        found에 걸어 ''조상에게서 발견''으로 오독 → of·over·from 세 구가 모두 change를 수식하는 중첩 구조로 처리'
+  - kind: short
+    sentence: Consumer engagement levels in all manner of digital experiences and
+      communities have simply exploded—and they show little or no signs of slowing.
+    source: 2022 고3 6월 22번
+    prompt: 전치사구 중첩(명사 수식)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 모든 종류의 디지털 경험과 커뮤니티에서의 소비자 참여 수준이 그야말로 폭발적으로 증가했고, 그것들은 둔화될 기미를 거의 혹은
+      전혀 보이지 않는다.
+    vocab:
+    - word: engagement
+      meaning: 참여, 관여
+    - word: all manner of
+      meaning: 모든 종류의
+    - word: explode
+      meaning: 폭발적으로 증가하다
+    - word: sign
+      meaning: 기미, 징후
+    solution:
+      cut: Consumer engagement levels / in all manner / of digital experiences and
+        communities / have simply exploded / —and they show / little or no signs /
+        of slowing.
+      wrong: '''in all manner''까지만 주어로 보거나 of구를 동사에 걸어, have exploded의 진짜 주어를 놓치고
+        문장 구조를 오독.'
+      wrong_why: 주어의 핵 명사 levels를 'in all manner of digital experiences and communities'라는
+        중첩 전치사구가 길게 수식하는데, 중간에서 끊어 읽으면 술어(have exploded)의 주어를 잘못 잡는다.
+      author_msg: 주어 명사 뒤로 전치사구가 길게 이어져도 동사가 나오기 전까지는 모두 주어를 수식하는 한 덩어리다.
+      key_points:
+      - 'levels in all manner of digital experiences and communities : in구에서 끊어 주어를
+        짧게 잡음 → in all manner of ... 전체를 levels를 꾸미는 수식 덩어리로 묶고 have exploded를 술어로
+        처리'
   inversion:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be
