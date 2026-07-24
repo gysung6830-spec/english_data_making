@@ -16,15 +16,22 @@
 
 @page {
   size: A4;
-  margin: 14mm 15mm 15mm 15mm;
+  margin: 14mm 15mm 16mm 15mm;
   @bottom-center {
     content: "구문해석 실전서 · " counter(page) " / " counter(pages);
     font-family: "NanumGothic", "WenQuanYi Zen Hei", sans-serif;
     font-size: 8px;
     color: #9aa0a6;
   }
+  @bottom-left {
+    content: "ⓒ 2026 김은아영어연구소 · All rights reserved";
+    font-family: "NanumGothic", "WenQuanYi Zen Hei", sans-serif;
+    font-size: 7.5px;
+    color: #b0b4ba;
+  }
 }
-@page cover { margin: 0; @bottom-center { content: ""; } }
+@page cover { margin: 0;
+  @bottom-center { content: ""; } @bottom-left { content: ""; } }
 
 * { box-sizing: border-box; }
 
