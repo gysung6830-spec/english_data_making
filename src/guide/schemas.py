@@ -202,6 +202,7 @@ class SyntaxChapter(BaseModel):
     examples: list[WorkExample] = []  # 기출 예문 + 끊어읽기
     training: list[TrainStep] = []    # 단계별 트레이닝(쉬움→하드)
     practice: list[PracticeItem] = [] # 실전적용(문제↔해설)
+    coach: str = ""                   # 저자 한 마디(현장 코치 코멘트)
     combat_tip: str = ""
     cards: list[SyntaxCard] = []
     problems: list[Problem] = []
