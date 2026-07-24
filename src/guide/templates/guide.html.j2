@@ -332,7 +332,7 @@
   {% endif %}
 
   {% if chapter.coach %}
-  <div class="coach"><span class="coach-tag">🖊 한 마디</span>{{ chapter.coach }}</div>
+  <div class="coach"><span class="coach-tag">🖊 한 마디</span>{{ chapter.coach | safe }}</div>
   {% endif %}
 
   {% if chapter.diagram %}
