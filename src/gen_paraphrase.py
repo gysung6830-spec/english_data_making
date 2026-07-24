@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""패러프레이징 50문항 생성기 — '다음 중 바르게 바꿔 말한 것은?' 객관식.
+"""패러프레이징 80문항 생성기 — '다음 중 바르게 바꿔 말한 것은?' 객관식.
 
 5대 변환(동의어·구체→추상·품사전환·반대구조·비유→직설)별로 문항을 만들고,
 오답마다 함정 유형(그대로 복사/뜻 반대·왜곡/과장/무관)을 표시한다.
-출력: samples/패러프레이징_50.html
+출력: samples/패러프레이징_50.html (파일명 유지; 문항 수는 {{N}}로 표기)
 """
 import html
 from pathlib import Path
@@ -46,7 +46,25 @@ Q = [
  ("동의어","The medicine alleviates chronic pain.",3,[
    ("worsens long-term pain","rev"),("causes new kinds of pain","dist"),
    ("eases ongoing pain","ok"),("removes all pain permanently","over"),("is sold only online","off")]),
- # ── 구체 → 추상(상위어) (10) ──
+ ("동의어","The committee approved the proposal unanimously.",2,[
+   ("rejected the proposal outright","rev"),("agreed to approve it without opposition","ok"),
+   ("was forced to accept it","dist"),("won the support of the entire world","over"),("met on a Friday","off")]),
+ ("동의어","The storm devastated the coastal town.",1,[
+   ("caused severe damage to the coastal town","ok"),("left the town completely untouched","rev"),
+   ("wiped out every town on earth","over"),("mildly inconvenienced the town","dist"),("delighted the local tourists","off")]),
+ ("동의어","Her explanation was concise and clear.",3,[
+   ("was long and hard to follow","rev"),("was vague despite being short","dist"),
+   ("was brief and easy to understand","ok"),("was the shortest ever given","over"),("was delivered in French","off")]),
+ ("동의어","The new law prohibits smoking indoors.",2,[
+   ("permits smoking anywhere at all","rev"),("bans smoking inside buildings","ok"),
+   ("encourages people to smoke outside","dist"),("outlaws smoking across the whole planet","over"),("was passed last spring","off")]),
+ ("동의어","Volunteers distributed food to the needy.",1,[
+   ("handed out food to people in need","ok"),("took food away from the poor","rev"),
+   ("sold the food at high prices","dist"),("fed the entire nation by themselves","over"),("worked at a fine restaurant","off")]),
+ ("동의어","The professor praised the student's diligence.",3,[
+   ("scolded the student for being lazy","rev"),("overlooked the student's effort","dist"),
+   ("commended the student's hard work","ok"),("called the student the best in history","over"),("canceled the afternoon class","off")]),
+ # ── 구체 → 추상(상위어) (16) ──
  ("구체→추상","Apples, carrots, and spinach are part of a healthy diet.",2,[
    ("Only apples are truly healthy","over"),("Fruits and vegetables support good health","ok"),
    ("Vegetables are harmful to health","rev"),("Spinach tastes better than carrots","off"),("Diets should avoid all plants","rev")]),
@@ -77,7 +95,25 @@ Q = [
  ("구체→추상","Chess, Go, and bridge sharpen strategic thinking.",2,[
    ("Only chess builds intelligence","over"),("Strategy games improve strategic thinking","ok"),
    ("These games dull the mind","rev"),("Go is older than chess","off"),("Games waste valuable time","dist")]),
- # ── 품사 전환 (8) ──
+ ("구체→추상","Oak, pine, and maple cover the mountainside.",2,[
+   ("Only oak grows on the mountain","over"),("Trees cover the mountainside","ok"),
+   ("The mountain is completely bare","rev"),("Maple leaves turn red in fall","off"),("Forests damage the mountains","dist")]),
+ ("구체→추상","Gold, silver, and copper are dug from the earth.",1,[
+   ("Metals are mined from the ground","ok"),("Only gold has any value","over"),
+   ("These are manufactured in factories","rev"),("Silver tarnishes over time","off"),("Mining is always perfectly safe","dist")]),
+ ("구체→추상","Novels, plays, and poems can move readers deeply.",3,[
+   ("Only novels are worth reading","over"),("Writing bores nearly everyone","rev"),
+   ("Literature can stir readers' emotions","ok"),("Plays are shorter than novels","off"),("Reading is a waste of time","dist")]),
+ ("구체→추상","Spanish, Arabic, and Mandarin are spoken worldwide.",2,[
+   ("Only Mandarin is truly global","over"),("Many languages are used around the world","ok"),
+   ("Almost no one speaks these","rev"),("Arabic is written right to left","off"),("Languages only divide people","dist")]),
+ ("구체→추상","Bees, ants, and termites live in organized colonies.",1,[
+   ("Social insects live in structured groups","ok"),("Only bees ever cooperate","over"),
+   ("These insects live entirely alone","rev"),("Ants are stronger than bees","off"),("Insects are nothing but pests","dist")]),
+ ("구체→추상","Rain, snow, and hail fall from the clouds.",3,[
+   ("Only rain ever falls from clouds","over"),("The sky is always perfectly clear","rev"),
+   ("Various forms of precipitation come from clouds","ok"),("Snow feels cold to the touch","off"),("Weather can never be predicted","dist")]),
+ # ── 품사 전환 (14) ──
  ("품사전환","People who decide quickly often succeed.",2,[
    ("Slow people always fail","over"),("Quick decision-making often leads to success","ok"),
    ("Deciding has nothing to do with success","rev"),("Success requires no choices","dist"),("Fast people are careless","off")]),
@@ -102,7 +138,25 @@ Q = [
  ("품사전환","Because she persevered, she reached her goal.",1,[
    ("Her perseverance brought her to her goal","ok"),("Giving up got her the goal","rev"),
    ("Her goal required no effort","dist"),("She quit before finishing","rev"),("Goals are always easy","over")]),
- # ── 반대구조(부정↔긍정) (10) ──
+ ("품사전환","The bridge collapsed suddenly, and travel was disrupted.",2,[
+   ("The strong bridge made travel easier","rev"),("The sudden collapse of the bridge disrupted travel","ok"),
+   ("Travel caused the bridge to collapse","dist"),("All travel stopped forever after that","over"),("The river below was very deep","off")]),
+ ("품사전환","Because the soil was fertile, crops flourished.",1,[
+   ("The fertility of the soil made crops flourish","ok"),("Poor soil helped the crops grow","rev"),
+   ("The crops made the soil fertile","dist"),("Every plant on earth suddenly grew","over"),("The farmers worked long hours","off")]),
+ ("품사전환","When the audience applauded warmly, the performer smiled.",3,[
+   ("Silence pleased the performer most","rev"),("The performer's smile caused the applause","dist"),
+   ("The audience's warm applause made the performer smile","ok"),("Everyone in the hall burst into tears","over"),("The theater was completely full","off")]),
+ ("품사전환","Since the evidence was strong, the jury convicted him.",2,[
+   ("Weak evidence led to his conviction","rev"),("The strength of the evidence led to his conviction","ok"),
+   ("His conviction created the evidence","dist"),("He was jailed for life on the spot","over"),("The trial lasted many weeks","off")]),
+ ("품사전환","He apologized sincerely, and the tension eased.",1,[
+   ("His sincere apology eased the tension","ok"),("His insult calmed everyone down","rev"),
+   ("The tension forced him to apologize","dist"),("Every conflict on earth ended at once","over"),("The two of them were coworkers","off")]),
+ ("품사전환","Because prices dropped, demand increased.",3,[
+   ("Rising prices boosted the demand","rev"),("The demand pushed the prices down","dist"),
+   ("The drop in prices increased demand","ok"),("Shoppers bought absolutely everything","over"),("The stores stayed open late","off")]),
+ # ── 반대구조(부정↔긍정) (16) ──
  ("반대구조","This tool does not limit creativity; it frees it.",2,[
    ("The tool restricts creativity","rev"),("The tool sets creativity free","ok"),
    ("The tool has no effect on creativity","dist"),("Creativity needs no tools at all","over"),("The tool is hard to use","off")]),
@@ -133,7 +187,25 @@ Q = [
  ("반대구조","Aging is not only loss; it also brings wisdom.",2,[
    ("Aging brings nothing but decline","rev"),("Aging can also bring wisdom","ok"),
    ("Wisdom has no link to age","dist"),("Only the young are wise","rev"),("People fear growing old","off")]),
- # ── 비유 → 직설 (12) ──
+ ("반대구조","The mistake did not ruin the project; it improved it.",2,[
+   ("The mistake destroyed the project","rev"),("The mistake ended up making the project better","ok"),
+   ("The project contained no mistakes","dist"),("Mistakes always improve everything","over"),("The project cost a lot of money","off")]),
+ ("반대구조","Solitude is not loneliness; it can restore the mind.",1,[
+   ("Time alone can refresh the mind","ok"),("Solitude always harms the mind","rev"),
+   ("Solitude and loneliness are identical","dist"),("People should always stay alone","over"),("The mind needs regular meals","off")]),
+ ("반대구조","The critic did not dismiss the film; she celebrated it.",3,[
+   ("The critic harshly condemned the film","rev"),("The critic never actually watched it","dist"),
+   ("The critic praised the film","ok"),("It was the greatest film ever made","over"),("The film ran for three hours","off")]),
+ ("반대구조","Losing the match did not discourage her; it motivated her.",2,[
+   ("The loss made her want to quit","rev"),("The loss motivated rather than discouraged her","ok"),
+   ("She had actually never lost","dist"),("She then never lost again in her life","over"),("The match was played outdoors","off")]),
+ ("반대구조","The reform did not burden farmers; it relieved them.",1,[
+   ("The reform eased the farmers' burden","ok"),("The reform overwhelmed the farmers","rev"),
+   ("The farmers were left unaffected","dist"),("It solved every problem they ever had","over"),("The farmers mainly grew rice","off")]),
+ ("반대구조","Technology does not isolate us; it can connect us.",3,[
+   ("Technology always drives people apart","rev"),("Technology has no effect on relationships","dist"),
+   ("Technology can bring people together","ok"),("Technology unites everyone perfectly","over"),("New devices are quite costly","off")]),
+ # ── 비유 → 직설 (18) ──
  ("비유→직설","Reading is a window to other worlds.",2,[
    ("Windows help us read more easily","copy"),("Reading lets us experience unfamiliar worlds","ok"),
    ("Books should have more pictures","off"),("Other worlds are dangerous","dist"),("Reading narrows the mind","rev")]),
@@ -170,6 +242,24 @@ Q = [
  ("비유→직설","Patience is the key that unlocks progress.",3,[
    ("Keys are needed to make progress","copy"),("Progress happens without any effort","rev"),
    ("Being patient makes progress possible","ok"),("Locks slow everyone down","off"),("Impatience speeds up success","rev")]),
+ ("비유→직설","Life is a journey with many turns.",2,[
+   ("Journeys require a reliable map","copy"),("Life brings many changes over time","ok"),
+   ("Life never changes at all","rev"),("Everyone's life is exactly the same","over"),("Traveling can be expensive","off")]),
+ ("비유→직설","His mind was a sponge for new ideas.",1,[
+   ("He absorbed new ideas easily","ok"),("Sponges are full of clever ideas","copy"),
+   ("He rejected every new idea","rev"),("He instantly knew everything","over"),("Cleaning needs a good sponge","off")]),
+ ("비유→직설","The economy is a rollercoaster.",3,[
+   ("Rollercoasters are costly to build","copy"),("The economy stays perfectly steady","rev"),
+   ("The economy rises and falls unpredictably","ok"),("The economy will crash forever","over"),("Amusement parks draw big crowds","off")]),
+ ("비유→직설","Deadlines are a fire under our feet.",2,[
+   ("Fires near one's feet are dangerous","copy"),("Deadlines push us to act quickly","ok"),
+   ("Deadlines let us fully relax","rev"),("Deadlines destroy all of our work","over"),("Good shoes protect the feet","off")]),
+ ("비유→직설","A good teacher is a lighthouse for students.",1,[
+   ("A good teacher guides students along","ok"),("Lighthouses are built by teachers","copy"),
+   ("Teachers only confuse their students","rev"),("Teachers control students' entire lives","over"),("Ships steer clear of the rocks","off")]),
+ ("비유→직설","Rumors are wildfire in a small town.",3,[
+   ("Small towns often catch fire","copy"),("Rumors travel very slowly there","rev"),
+   ("Rumors spread quickly through a small town","ok"),("Rumors literally burn towns down","over"),("Small towns are peaceful places","off")]),
 ]
 
 TRAP = {"ok":("정답","b-ok"),"copy":("그대로 복사","b-copy"),"rev":("뜻 반대","b-dist"),
@@ -191,7 +281,7 @@ def build():
     doc=TPL.replace("{{PROB}}","\n".join(probs)).replace("{{ANS}}","\n".join(ans)).replace("{{N}}",str(len(Q)))
     OUT.write_text(doc,encoding="utf-8"); print(f"패러프레이징 {len(Q)}문항 → {OUT}")
 
-TPL='''<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>패러프레이징 50문항</title><style>
+TPL='''<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>패러프레이징 훈련</title><style>
 @page{ size:A4; margin:11mm 12mm; } *{ box-sizing:border-box; }
 body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; color:#23272e; font-size:10px; margin:0; }
 .wrap{ max-width:820px; margin:0 auto; }
