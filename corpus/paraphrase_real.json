@@ -1,0 +1,1154 @@
+[
+ {
+  "exam_id": "2023-06",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "Philosopher Thomas Nagel argued that there is no “view from nowhere,” since we cannot see the world except from a particular perspective, and that perspective influences what we see.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "perception of reality affected by subjective views",
+    "trap": "rev"
+   },
+   {
+    "t": "valuable perspective most people have in mind",
+    "trap": "off"
+   },
+   {
+    "t": "particular view adopted by very few people",
+    "trap": "off"
+   },
+   {
+    "t": "critical insight that defeats our prejudices",
+    "trap": "over"
+   },
+   {
+    "t": "unbiased and objective view of the world",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 비유 ‘view from nowhere’(particular perspective 없이 보는 것) → 정답 unbiased and objective view of the world 로 직설화"
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "As for, say, color vision, they just say that, despite the same internal processing architecture, how we interpret, categorize, and name emotions varies according to culture and that we learn in a particular culture the social context in which it is appropriate to express emotions.",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "essential links between emotions and behaviors",
+    "trap": "rev"
+   },
+   {
+    "t": "culturally constructed representation of emotions",
+    "trap": "ok"
+   },
+   {
+    "t": "falsely described emotions through global languages",
+    "trap": "dist"
+   },
+   {
+    "t": "universally defined emotions across academic disciplines",
+    "trap": "off"
+   },
+   {
+    "t": "wider influence of cognition on learning cultural contexts",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 interpret·categorize·name emotions varies according to culture → 정답 culturally constructed representation 로 압축"
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 24,
+  "band": "24",
+  "type": "제목",
+  "src": "The approach, joint cognitive systems, treats a robot as part of a human-machine team where the intelligence is synergistic, arising from the contributions of each agent.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Better Together: Human and Machine Collaboration",
+    "trap": "ok"
+   },
+   {
+    "t": "Can Robots Join Forces to Outperform Human Teams?",
+    "trap": "off"
+   },
+   {
+    "t": "Loss of Humanity in the Human and Machine Conflict",
+    "trap": "rev"
+   },
+   {
+    "t": "Power Off: When and How to Say No to Robot Partners",
+    "trap": "off"
+   },
+   {
+    "t": "Shifting from Service Animals to Robot Assistants of Humans",
+    "trap": "copy"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 human-machine team / synergistic intelligence → 정답 제목 Human and Machine Collaboration 으로 일반화"
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 32,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Instead of examining historical periods, author biographies, or literary styles, for example, he or she will approach a text with the assumption that it is a self-contained entity and that he or she is looking for the governing principles that allow the text to reveal itself.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "putting himself or herself both inside and outside it",
+    "trap": "over"
+   },
+   {
+    "t": "finding a middle ground between it and the world",
+    "trap": "off"
+   },
+   {
+    "t": "searching for historical realities revealed within it",
+    "trap": "rev"
+   },
+   {
+    "t": "looking inside it, not outside it or beyond it",
+    "trap": "ok"
+   },
+   {
+    "t": "exploring its characters’ cultural relevance",
+    "trap": "rev"
+   }
+  ],
+  "answer_transform": "구체→추상",
+  "dissect": "지문 self-contained entity / 역사·전기 배제 → 정답 looking inside it, not outside 로 추상화"
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Indeed, when lead users’ innovations do enter a firm’s product line ― and they have been shown to be the actual source of many major innovations for many firms ― they typically arrive with a lag and by an unusual and unsystematic",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "lead users tended to overlook",
+    "trap": "rev"
+   },
+   {
+    "t": "lead users have already developed",
+    "trap": "ok"
+   },
+   {
+    "t": "lead users encountered in the market",
+    "trap": "copy"
+   },
+   {
+    "t": "other firms frequently put into use",
+    "trap": "off"
+   },
+   {
+    "t": "both users and firms have valued",
+    "trap": "over"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 lead users’ innovations (the actual source of major innovations) → 정답 lead users have already developed 로 바꿔 말함"
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Just as we don’t always see the intricate brushwork that goes into the creation of a painting, we may not always notice how Beethoven keeps finding fresh uses for his motto or how he develops his material into a large, cohesive statement.",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "makes the composer’s musical ideas contradictory",
+    "trap": "off"
+   },
+   {
+    "t": "appears in an incredible variety of ways",
+    "trap": "ok"
+   },
+   {
+    "t": "provides extensive musical knowledge creatively",
+    "trap": "off"
+   },
+   {
+    "t": "remains fairly calm within the structure",
+    "trap": "rev"
+   },
+   {
+    "t": "becomes deeply associated with one’s own enjoyment",
+    "trap": "copy"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 keeps finding fresh uses for his motto → 정답 appears in an incredible variety of ways 로 바꿔 말함"
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "The metaphor is useful because it helps us see ownership as a grouping of interpersonal rights that can be separated and put back together.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "a legal obligation to develop the resource",
+    "trap": "rev"
+   },
+   {
+    "t": "a priority to legally claim the real estate",
+    "trap": "off"
+   },
+   {
+    "t": "a right to use one aspect of the property",
+    "trap": "ok"
+   },
+   {
+    "t": "a building to be shared equally by tenants",
+    "trap": "dist"
+   },
+   {
+    "t": "a piece of land nobody can claim as their own",
+    "trap": "rev"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 비유 a stick in the bundle (분리 가능한 개별 소유권 rights) → 정답 a right to use one aspect of the property 로 직설화"
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops. The unlit, unglamorous storerooms, if they are ever discussed, are at best presented as service areas that process objects for the exhibition halls.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "importance of prioritising museums’ exhibition spaces",
+    "trap": "rev"
+   },
+   {
+    "t": "benefits of diverse activities in museums for audiences",
+    "trap": "off"
+   },
+   {
+    "t": "necessity of expanding storerooms for displaying objects",
+    "trap": "dist"
+   },
+   {
+    "t": "consequences of profit-oriented management of museums",
+    "trap": "ok"
+   },
+   {
+    "t": "ways to increase museums’ commitment to the public good",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '수익 경쟁 속 소비 가능한 전시공간에 예산 집중, 수장고는 희생' → 정답 profit-oriented management의 consequences 로 요지 일반화"
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 24,
+  "band": "24",
+  "type": "제목",
+  "src": "Yet, despite the increasing level of urban mobility worldwide, access to places, activities and services has become increasingly difficult. Accordingly, many of the world’s cities face an unprecedented accessibility crisis, and are characterized by unsustainable mobility systems.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Is Hyper-mobility Always Good for Cities?",
+    "trap": "ok"
+   },
+   {
+    "t": "Accessibility: A Guide to a Web of Urban Areas",
+    "trap": "off"
+   },
+   {
+    "t": "A Long and Winding Road to Economic Success",
+    "trap": "off"
+   },
+   {
+    "t": "Inevitable Regional Conflicts from Hyper-mobility",
+    "trap": "dist"
+   },
+   {
+    "t": "Infrastructure: An Essential Element of Hyper-mobility",
+    "trap": "copy"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 'hyper-mobility가 경제 성공을 준다는 통념에도 접근성 위기·지속불가능' → 정답 제목 'Always Good?' 의문형 반전으로 압축"
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "The artist, on the other hand, relies on the strength of her artistry to effect a marriage between her own subjectivity and that of her readers. She creates a reality dependent upon observers, indeed a reality in which order for it to exist at all.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "human beings must participate",
+    "trap": "ok"
+   },
+   {
+    "t": "objectivity should be maintained",
+    "trap": "rev"
+   },
+   {
+    "t": "science and art need to harmonize",
+    "trap": "off"
+   },
+   {
+    "t": "readers remain distanced from the arts",
+    "trap": "rev"
+   },
+   {
+    "t": "she is disengaged from her own subjectivity",
+    "trap": "rev"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 'reality dependent upon observers(관찰자에 의존하는 현실)' → 정답 human beings must participate 로 동의 재진술"
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Only the rational discourse has the tools to overcome illusions and to point towards true knowledge. Yet, the application of logical reasoning will reveal that the figure only appears small because it obeys the laws of geometrical perspective.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "as the outcome of blindly following sensual experience",
+    "trap": "rev"
+   },
+   {
+    "t": "by moving away from the idea of perfect representation",
+    "trap": "off"
+   },
+   {
+    "t": "beyond the limit of where rational knowledge can approach",
+    "trap": "rev"
+   },
+   {
+    "t": "through a variety of experiences rather than logical reasoning",
+    "trap": "rev"
+   },
+   {
+    "t": "not in the perception of the figure but in its rational representation",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "반대구조",
+  "dissect": "지문 '이성적 담론만이 착각을 극복하고 참지식을 가리킨다' → 정답 '지각이 아니라 이성적 표상에서 진리가 드러난다'로 not-but 대비구조 재진술"
+ },
+ {
+  "exam_id": "2023-수능",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "By making the self public in a private sphere, the self also became an object for self-inspection and self-critique.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "use writing as a means of reflecting on oneself",
+    "trap": "ok"
+   },
+   {
+    "t": "build one’s identity by reading others’ diaries",
+    "trap": "dist"
+   },
+   {
+    "t": "exchange feedback in the process of writing",
+    "trap": "off"
+   },
+   {
+    "t": "create an alternate ego to present to others",
+    "trap": "rev"
+   },
+   {
+    "t": "develop topics for writing about selfhood",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 '사적 영역에서 자기를 공개해 self가 self-inspection·self-critique 대상이 됨' → 정답 '글쓰기로 자신을 성찰'로 직설 풀이"
+ },
+ {
+  "exam_id": "2023-수능",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Since receiver bees will only accept water if they require it, either for themselves or to pass on to other bees and brood, this unloading time is correlated with the colony’s overall need of water.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "allow the colony to regulate its workforce",
+    "trap": "ok"
+   },
+   {
+    "t": "search for water sources by measuring distance",
+    "trap": "dist"
+   },
+   {
+    "t": "decrease the colony’s workload when necessary",
+    "trap": "dist"
+   },
+   {
+    "t": "divide tasks according to their respective talents",
+    "trap": "off"
+   },
+   {
+    "t": "train workers to acquire basic communication patterns",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "구체→추상",
+  "dissect": "지문 개별 벌의 물 수집량 조절(unloading time에 반응) → 정답 군집 전체의 일손(workforce) 조절 로 일반화"
+ },
+ {
+  "exam_id": "2023-수능",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "The narrowing of our consciousness of time smooths the way to divorcing ourselves from responsibility for developments in the past and the future with which our lives are in fact deeply intertwined.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "all our efforts prove to be effective and are thus encouraged",
+    "trap": "off"
+   },
+   {
+    "t": "sufficient scientific evidence has been provided to us",
+    "trap": "off"
+   },
+   {
+    "t": "future concerns are more urgent than present needs",
+    "trap": "off"
+   },
+   {
+    "t": "our ancestors maintained a different frame of time",
+    "trap": "copy"
+   },
+   {
+    "t": "we face the facts but then deny our responsibility",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "반대구조",
+  "dissect": "지문 '시간 구획이 현실을 가려 책임 문제가 안 생긴다' → 정답은 그 반대 상황(사실을 직시하고도 책임을 부인함)을 부정형으로 대비시킴"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "A narrow focus heightens the stress level of each experience, but a widened focus turns down the stress level because you’re better able to put each situation into a broader perspective.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "never being confronted with any stressful experiences in daily life",
+    "trap": "rev"
+   },
+   {
+    "t": "broadening one’s perspective to identify the cause of stress",
+    "trap": "dist"
+   },
+   {
+    "t": "rarely confining one’s attention to positive aspects of an experience",
+    "trap": "off"
+   },
+   {
+    "t": "having a larger view of an experience beyond its stressful aspects",
+    "trap": "ok"
+   },
+   {
+    "t": "taking stress into account as the source of developing a wide view",
+    "trap": "rev"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 '눌어붙지 않는 프라이팬'(스트레스가 달라붙지 않음) 비유 → 정답 스트레스적 측면을 넘어 경험을 넓게 보기 로 직설화"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "But the economic benefits provided by these services, based on their non-market values, may exceed the economic value of the timber.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "necessity of calculating the market values of ecosystem services",
+    "trap": "dist"
+   },
+   {
+    "t": "impact of using forest resources to maximize financial benefits",
+    "trap": "off"
+   },
+   {
+    "t": "ways of increasing the efficiency of managing natural resources",
+    "trap": "off"
+   },
+   {
+    "t": "significance of weighing forest resources’ non-market values",
+    "trap": "ok"
+   },
+   {
+    "t": "merits of balancing forests’ market and non-market values",
+    "trap": "dist"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '비시장가치 편익이 목재 가치를 능가한다' → 정답 산림 비시장가치를 따져보는 것의 중요성 으로 요지 압축"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 24,
+  "band": "24",
+  "type": "제목",
+  "src": "What is excessive or out of proportion is highly relative and might be more related to other aspects than physical capacity, such as natural degradation and economic leakages (not to mention politics and local power dynamics).",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Overtourism: Not Simply a Matter of People and Places",
+    "trap": "ok"
+   },
+   {
+    "t": "The Severity of Overtourism: Much Worse than Imagined",
+    "trap": "off"
+   },
+   {
+    "t": "The Solutions to Overtourism: From Complex to Simple",
+    "trap": "off"
+   },
+   {
+    "t": "Are Tourist Attractions Winners or Losers of Overtourism?",
+    "trap": "off"
+   },
+   {
+    "t": "What Makes Popular Destinations Attractive to Visitors?",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '과잉은 물리적 수용력(사람·장소)보다 다른 측면에 더 관련된다' → 정답 제목 '단순히 사람과 장소의 문제가 아니다' 로 일반화"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 32,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Such familiarity allows the viewer to be placed in a comfortable space so that the film may then lead the viewer to what is an unfamiliar, but acceptable vision of a world different from their",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "frees the plot of its familiarity",
+    "trap": "rev"
+   },
+   {
+    "t": "aids in viewer access to the film",
+    "trap": "ok"
+   },
+   {
+    "t": "adds to an exotic musical experience",
+    "trap": "rev"
+   },
+   {
+    "t": "orients audiences to the film’s theme",
+    "trap": "dist"
+   },
+   {
+    "t": "inspires viewers to think more deeply",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "구체→추상",
+  "dissect": "지문 '익숙한 악보가 관객을 편안한 공간에 두어 영화가 이끌게 한다' → 정답 관객의 영화 접근을 돕는다 로 추상화"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "What is striking about them is that is missing in all this is any setting or context to make the emotion determinate.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "all of them could be matched consistently with their intended emotions",
+    "trap": "rev"
+   },
+   {
+    "t": "every one of them was illustrated with photographic precision",
+    "trap": "off"
+   },
+   {
+    "t": "each of them definitively displayed its own social narrative",
+    "trap": "rev"
+   },
+   {
+    "t": "most of them would be seen as representing unique characteristics",
+    "trap": "rev"
+   },
+   {
+    "t": "any number of them could be substituted for one another without loss",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '맥락이 없어 감정이 확정 불가(indeterminate)' → 정답 '얼굴들이 서로 손실 없이 교체 가능'으로 재진술"
+ },
+ {
+  "exam_id": "2024-수능",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Public debates about streets are typically rooted in emotional assumptions about how a change will affect a person’s commute, ability to park, belief about what is safe and what isn’t, or the bottom line of a local business.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "relies heavily on how others see her city’s streets",
+    "trap": "off"
+   },
+   {
+    "t": "updates itself with each new public transit policy",
+    "trap": "dist"
+   },
+   {
+    "t": "arises independently of the streets she travels on",
+    "trap": "rev"
+   },
+   {
+    "t": "tracks pretty closely with how she gets around",
+    "trap": "ok"
+   },
+   {
+    "t": "ties firmly in with how her city operates",
+    "trap": "over"
+   }
+  ],
+  "answer_transform": "구체→추상",
+  "dissect": "지문 '통근·주차 등 개인 이동 경험에 근거한 감정적 판단' → 정답 '거리를 어떻게 다니느냐(이동 방식)와 밀접'으로 추상화"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "In all these cases, the good or bad feelings you have are not based on something you can take credit for.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "perceptions of self-growth vary from person to person",
+    "trap": "off"
+   },
+   {
+    "t": "your self-confidence is an outcome of constant effort",
+    "trap": "rev"
+   },
+   {
+    "t": "the pride you take in your achievement is unreliable",
+    "trap": "ok"
+   },
+   {
+    "t": "performance comparison to partners is demotivating",
+    "trap": "dist"
+   },
+   {
+    "t": "ambitious goals help you improve performance",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 '자부심 상승이 fiction(허구)에 근거' → 정답 '성취에서 얻는 자부심이 신뢰할 수 없다'로 직설화"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "But note taking in discussions is not only manageable, it is also important. Note taking helps to keep you active and alert; it allows you to impose some organization on the discussion; and it can prepare you to speak.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "reasons to standardize procedures for class discussions",
+    "trap": "off"
+   },
+   {
+    "t": "strategies to improve note-taking skills for public speaking",
+    "trap": "off"
+   },
+   {
+    "t": "significance of note taking for active engagement in discussion",
+    "trap": "ok"
+   },
+   {
+    "t": "effectiveness of summarizing and reviewing notes after class",
+    "trap": "off"
+   },
+   {
+    "t": "benefits of brainstorming to generate ideas for writing tasks",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '토론 중 필기가 능동적으로 참여하게 하고 중요하다' → 정답 '토론 능동 참여를 위한 필기의 중요성'으로 요지 압축"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 24,
+  "band": "24",
+  "type": "제목",
+  "src": "Food became more than just a life necessity.",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Changing Appetites: The Return of Fine Dining",
+    "trap": "dist"
+   },
+   {
+    "t": "Beyond Mere Necessity: The Rise of Food Culture",
+    "trap": "ok"
+   },
+   {
+    "t": "Tips for Choosing Restaurants for Social Occasions",
+    "trap": "off"
+   },
+   {
+    "t": "Why Table Manners Matter: Food and Class Identity",
+    "trap": "off"
+   },
+   {
+    "t": "How Industrialization Is Taking Over Food Production",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 '음식이 단순한 생필품 그 이상이 됨(식당·미식 문화 부상)' → 정답 제목 'Beyond Mere Necessity: 음식 문화의 부상'으로 일반화"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 32,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Writers often give us the impression that they have described the faces of their characters, when in fact they have simply given you an outline to fill in.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "have been told exactly what he looks like",
+    "trap": "ok"
+   },
+   {
+    "t": "have become a member of his social group",
+    "trap": "off"
+   },
+   {
+    "t": "already know what will happen to him in the story",
+    "trap": "off"
+   },
+   {
+    "t": "have been given precise details about his behavior",
+    "trap": "dist"
+   },
+   {
+    "t": "recognize the core characteristics of his personality",
+    "trap": "dist"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 '외형을 묘사했다는 인상만 줄 뿐 실제론 윤곽만 준다' → 정답 '외모를 정확히 들었다고 느낀다'로 동의 재진술"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "When we’re stuck narrowed in for too long, accidents go up and performance drops.",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "get distracted by too many sources",
+    "trap": "rev"
+   },
+   {
+    "t": "rely too heavily on digital devices",
+    "trap": "copy"
+   },
+   {
+    "t": "randomly switch between tasks",
+    "trap": "rev"
+   },
+   {
+    "t": "remain zoomed in for too long",
+    "trap": "ok"
+   },
+   {
+    "t": "fail to control our feelings",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 'narrowed in for too long(너무 오래 좁혀진 상태)' → 정답 'zoomed in for too long'으로 동의어 치환"
+ },
+ {
+  "exam_id": "2026-06",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Getting to such questions means taking spatial arrangements, variations, and interconnections seriously.",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "why cross-cultural conflicts will increase",
+    "trap": "off"
+   },
+   {
+    "t": "how phenomena are arranged on Earth’s surface",
+    "trap": "ok"
+   },
+   {
+    "t": "when the Earth’s natural resources will be exhausted",
+    "trap": "off"
+   },
+   {
+    "t": "which places on Earth are damaged by climate change",
+    "trap": "off"
+   },
+   {
+    "t": "who has the authority to make decisions about territories",
+    "trap": "copy"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 spatial arrangements → 정답 how phenomena are arranged on Earth’s surface 로 바꿔 말함"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "When we double or halve a frequency, we end up with a note that sounds remarkably similar to the one we started out with.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "identified tonal differences within the same octave",
+    "trap": "dist"
+   },
+   {
+    "t": "returned to the original note with an identical frequency",
+    "trap": "rev"
+   },
+   {
+    "t": "reached a note named the same but with a different pitch",
+    "trap": "ok"
+   },
+   {
+    "t": "restored musical sensitivity by adapting to various octaves",
+    "trap": "off"
+   },
+   {
+    "t": "constructed frequency patterns from notes with the same name",
+    "trap": "over"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "지문 come back home again(진동수 2배 시 같은 이름의 음) → 정답 same name but different pitch 로 직설화"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "For life narrators, by contrast, personal memories are the primary archival source.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "role of personal memories in different types of life storytelling",
+    "trap": "ok"
+   },
+   {
+    "t": "advantages of documenting evidence-based family histories",
+    "trap": "off"
+   },
+   {
+    "t": "influence of the source types on the quality of life narratives",
+    "trap": "dist"
+   },
+   {
+    "t": "similarity of data sources in describing a person’s life",
+    "trap": "rev"
+   },
+   {
+    "t": "crucial conditions for the success of life narrators",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 biographer vs life narrator의 personal memories 취급 대비 → 정답 role of personal memories in different types 로 일반화"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 24,
+  "band": "24",
+  "type": "제목",
+  "src": "Both those following this life and those outside believed that monastic lives were led for the benefit of wider society, and that the sacrifices made by monks in separating themselves from ‘normal’ human contact functioned as penances on behalf of the community as well as for their own deliverance.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "How to Gain Religious and Social Benefits from Monastery Life",
+    "trap": "off"
+   },
+   {
+    "t": "Why the Middle Ages Demanded Religious Figures Be Isolated",
+    "trap": "dist"
+   },
+   {
+    "t": "The Grace of Solitude: Detached from but Attached to Society",
+    "trap": "ok"
+   },
+   {
+    "t": "No Sacrificial Leaders, No Flowering of Civilization",
+    "trap": "over"
+   },
+   {
+    "t": "Mystery of Power: The Politics of Peace and Solitude",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문 self-imposed isolation이지만 for the benefit of wider society → 정답 Detached from but Attached to Society 로 압축"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 32,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "In fact, they argue, empathy makes such conflicts worse.",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "underestimates the invisible conflicts possible within a group",
+    "trap": "off"
+   },
+   {
+    "t": "is triggered by the need for solutions to emotional conflicts",
+    "trap": "off"
+   },
+   {
+    "t": "is often counterproductive in cases of conflict",
+    "trap": "ok"
+   },
+   {
+    "t": "functions as a facilitator in the resolution of social disharmony",
+    "trap": "rev"
+   },
+   {
+    "t": "raises questions about negative attitudes toward social disharmony",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 empathy makes such conflicts worse → 정답 counterproductive in cases of conflict 로 바꿔 말함"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 33,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Here the Forestry Commission has drained, fertilized, and fenced extensive areas of wetlands to facilitate turning them into forests.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "grounds for investigating the value of forest expansion",
+    "trap": "off"
+   },
+   {
+    "t": "a basis for extending institutional aid to entire ecosystems",
+    "trap": "off"
+   },
+   {
+    "t": "taken as the reason for introducing exotic species to an ecosystem",
+    "trap": "dist"
+   },
+   {
+    "t": "accepted as evidence for increasing ecological enrichment",
+    "trap": "rev"
+   },
+   {
+    "t": "a justification for converting nonforests into forests",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "구체→추상",
+  "dissect": "지문 turning wetlands into forests → 정답 converting nonforests into forests 로 추상화"
+ },
+ {
+  "exam_id": "2026-09",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Allowing lotteries as social outcomes hence seems like a necessity for impartial collective choice.",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "call for randomization or other means of tiebreaking",
+    "trap": "ok"
+   },
+   {
+    "t": "demonstrate how impartial selection could be invalidated",
+    "trap": "dist"
+   },
+   {
+    "t": "necessitate deterministic systems of selecting voters blindly",
+    "trap": "rev"
+   },
+   {
+    "t": "rely upon neutral agents to establish clear selection guidelines",
+    "trap": "copy"
+   },
+   {
+    "t": "require understanding of the unpredictability inherent in democracy",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "동의어",
+  "dissect": "지문 lotteries as social outcomes(추첨으로 타이 해결) → 정답 randomization or other means of tiebreaking 로 바꿔 말함"
+ },
+ {
+  "exam_id": "2027-06",
+  "num": 21,
+  "band": "21",
+  "type": "함축의미",
+  "src": "After all, despite the flourishing of neuroscience, no one had yet found any part of the brain unique to humans that might be responsible for this hallowed “consciousness.”",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "the claim that animal consciousness should be studied",
+    "trap": "off"
+   },
+   {
+    "t": "the belief that consciousness is a quality exclusive to humans",
+    "trap": "ok"
+   },
+   {
+    "t": "the illusion that animals possess truly conscious inner worlds",
+    "trap": "rev"
+   },
+   {
+    "t": "the idea that human cognition is superior to that of animals",
+    "trap": "off"
+   },
+   {
+    "t": "the concept that humans and animals are essentially alike",
+    "trap": "over"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "‘give up the ghost’(포기하다) 비유 → 인간 뇌에만 있는 의식 부위가 없다는 근거로 ‘의식은 인간만의 것’이라는 통념(2)을 버리자는 직설로 해석"
+ },
+ {
+  "exam_id": "2027-06",
+  "num": 23,
+  "band": "23",
+  "type": "주제",
+  "src": "A telescoping of time correlates with size. Being longer-lived puts a greater premium on learning and memory, and less on automatic preprogrammed behaviors.",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "chances of survival for animals with different time perceptions",
+    "trap": "off"
+   },
+   {
+    "t": "significance of animal size in life spans and survival skills",
+    "trap": "ok"
+   },
+   {
+    "t": "benefits of energy reserves in animals’ environmental adaptation",
+    "trap": "off"
+   },
+   {
+    "t": "limits of animals’ decision making according to body size",
+    "trap": "off"
+   },
+   {
+    "t": "influences of predetermined behavior patterns on animal survival",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "지문의 ‘크기↔반사·의사결정·학습·수명’ 논의를 ‘동물 크기가 수명·생존기술에서 갖는 중요성’으로 압축·일반화"
+ },
+ {
+  "exam_id": "2027-06",
+  "num": 32,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "Even Freud suggested that “he that has eyes to see and ears to hear may convince himself that no mortal can keep a secret. If his lips are silent, he chatters with his fingertips; betrayal oozes out of him at every pore.”",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "pretend to pay attention to others",
+    "trap": "off"
+   },
+   {
+    "t": "conceal what they mean and feel",
+    "trap": "ok"
+   },
+   {
+    "t": "interpret one’s nonverbal behavior",
+    "trap": "copy"
+   },
+   {
+    "t": "maintain the nonverbal communication",
+    "trap": "off"
+   },
+   {
+    "t": "encounter a chance to understand others",
+    "trap": "off"
+   }
+  ],
+  "answer_transform": "비유→직설",
+  "dissect": "‘손끝으로 지껄이고 모공마다 배신이 새어 나온다’는 Freud 비유 → ‘자기 뜻·감정을 숨기기(2)’ 어렵다는 직설로 바꿔 말함"
+ },
+ {
+  "exam_id": "2027-06",
+  "num": 34,
+  "band": "31-34",
+  "type": "빈칸추론",
+  "src": "In signing his check the collector asserts his belief in the future presence of the work as a significant point attained by art as a whole.",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "he can predict where art is going",
+    "trap": "rev"
+   },
+   {
+    "t": "the artist behind the work is reliable",
+    "trap": "off"
+   },
+   {
+    "t": "the art work tells the story of his time",
+    "trap": "dist"
+   },
+   {
+    "t": "his choice will lead to immediate profits",
+    "trap": "off"
+   },
+   {
+    "t": "the originality of the work is unshakable",
+    "trap": "ok"
+   }
+  ],
+  "answer_transform": "압축·일반화",
+  "dissect": "‘작품이 미술사에서 도달한 유의미한 지점으로 미래에도 존재하리라는 믿음’ → ‘작품의 독창성이 흔들리지 않는다(5)’는 확신으로 압축"
+ }
+]
