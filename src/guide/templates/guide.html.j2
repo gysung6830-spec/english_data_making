@@ -230,7 +230,7 @@
   <div class="roadmap">
     <div class="rm-title">🔮 모르는 단어를 뚫는 5가지 단서</div>
     {% for e in inf.chapters[0].exprs %}
-    <div class="rm-item"><span class="rm-no">{{ loop.index }}</span><span class="rm-t">{{ e.en }}</span><span class="rm-d">{{ e.ko }}</span></div>
+    <div class="rm-item"><span class="rm-no">{{ loop.index }}</span><span class="rm-t">{{ e.en }}</span></div>
     {% endfor %}
   </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 모든 단어를 외울 필요는 없다. 모르는 단어를 만나면 <b>주변 단서</b>(대조·재진술·예시·병렬·형태)로 '대략의 뜻·좋은 말/나쁜 말'만 잡아도 문제는 풀린다. 아래 원리와 유추 문제(객관식·주관식)로 '단서 잡는 눈'을 훈련한다.</div>
@@ -280,9 +280,9 @@
     <div class="rm-title">📚 이 파트의 구성 — 3갈래 · 10유형</div>
     {% set r2 = namespace(cn=0) %}
     {% for g in p2.groups %}
-    <div class="rm-group">1부 {{ ['A','B','C','D'][loop.index0] }} · {{ g.title }} <span style="color:var(--muted);font-weight:500">— {{ g.subtitle }}</span></div>
+    <div class="rm-group">1부 {{ ['A','B','C','D'][loop.index0] }} · {{ g.title }}</div>
     {% for c in g.chapters %}{% set r2.cn = r2.cn + 1 %}
-    <div class="rm-item"><span class="rm-no">1-{{ r2.cn }}</span><span class="rm-t">{{ c.title }}</span><span class="rm-d">{{ c.point[:40] ~ '…' if c.point and c.point|length > 40 else c.point }}</span></div>
+    <div class="rm-item"><span class="rm-no">1-{{ r2.cn }}</span><span class="rm-t">{{ c.title }}</span></div>
     {% endfor %}
     {% endfor %}
   </div>
@@ -299,7 +299,6 @@
     <div class="dv-title">{{ g.title }}</div>
     <div class="dv-sub">{{ g.subtitle }}</div>
     <div class="dv-rule"></div>
-    <div class="dv-strategy">🎯 {{ g.strategy }}</div>
     <div class="dv-chapters">
     {% for c in g.chapters %}
       <div class="dv-ch"><span class="no">1-{{ bns.cn + loop.index }}</span><span class="t">{{ c.title }}</span></div>
@@ -386,7 +385,7 @@
   <div class="roadmap">
     <div class="rm-title">📚 이 파트의 구성 — 7가지 코드 유형</div>
     {% for c in guide.chapters %}
-    <div class="rm-item"><span class="rm-no">2-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span><span class="rm-d">{{ c.signal[:38] ~ '…' if c.signal and c.signal|length > 38 else c.signal }}</span></div>
+    <div class="rm-item"><span class="rm-no">2-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span></div>
     {% endfor %}
   </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 각 코드는 <b>오역 ↔ 정답 카드</b>로 '흔한 함정'과 '올바른 방향'을 나란히 본 뒤, 실전적용 문제로 스스로 방향을 잡는다. 코드를 만나면 <b>화살표 방향(원인↔결과, 앞↔뒤)</b>부터 확정하는 습관을 들인다.</div>
@@ -468,7 +467,7 @@
   <div class="roadmap">
     <div class="rm-title">📚 이 파트의 구성 — 5가지 '구체화의 길'</div>
     {% for c in ab.chapters %}
-    <div class="rm-item"><span class="rm-no">3-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span><span class="rm-d">{{ c.point[:40] ~ '…' if c.point and c.point|length > 40 else c.point }}</span></div>
+    <div class="rm-item"><span class="rm-no">3-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span></div>
     {% endfor %}
   </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 추상 표현을 만나면 당황하지 말고 <b>바로 옆·뒤의 구체화 장치</b>(재진술·예시·대비·비유)를 찾는다. 그 장치가 곧 추상어의 '쉬운 번역'이다. 각 길마다 기출 예문의 끊어읽기로 '구체화되는 지점'을 눈에 익힌다.</div>
