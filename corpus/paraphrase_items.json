@@ -1,0 +1,2242 @@
+[
+ {
+  "src": "When we experience emotions in such worlds, this is not a sign that we are being incoherent or regressed.",
+  "exam_id": "2022-06",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Experiencing emotions in such worlds is a clear sign that our thinking has become incoherent and regressed.",
+    "trap": "copy"
+   },
+   {
+    "t": "Feeling emotions in these imagined worlds does not indicate that we are being irrational or immature.",
+    "trap": "ok"
+   },
+   {
+    "t": "The emotions we feel in such worlds show that our reasoning has temporarily broken down.",
+    "trap": "rev"
+   },
+   {
+    "t": "Our emotional reactions in these worlds reveal that we are only briefly confused about reality.",
+    "trap": "dist"
+   },
+   {
+    "t": "Emotions can arise in fictional worlds only when our reasoning has regressed.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "As long as something is funny, we are for the moment not concerned with whether it is real or fictional, true or false.",
+  "exam_id": "2022-수능",
+  "type": "반대구조",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "As long as something is funny, we stay concerned about whether it is real or fictional, true or false.",
+    "trap": "copy"
+   },
+   {
+    "t": "Something can strike us as funny only once we are sure it is true rather than made up.",
+    "trap": "rev"
+   },
+   {
+    "t": "Once we judge something to be fictional, we then become free to find it funny for a while.",
+    "trap": "dist"
+   },
+   {
+    "t": "While something amuses us, we momentarily stop caring whether it is real or true.",
+    "trap": "ok"
+   },
+   {
+    "t": "Humor makes us permanently indifferent to whether anything is real or true.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Both are working hard but only the latter is working smart.",
+  "exam_id": "2023-06",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "The two put in equal effort, yet only the second one works in a clever, efficient way.",
+    "trap": "ok"
+   },
+   {
+    "t": "Both are working hard, and both of them are also working smart.",
+    "trap": "copy"
+   },
+   {
+    "t": "Only the former works hard, while the latter simply works smart instead.",
+    "trap": "rev"
+   },
+   {
+    "t": "The latter works smart precisely because it avoids working hard at all.",
+    "trap": "dist"
+   },
+   {
+    "t": "Working hard never matters so long as a person is working smart.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Creating tax policy requires identifying a moral goal, which is a task that must involve ethics and moral analysis.",
+  "exam_id": "2023-09",
+  "type": "품사전환",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Creating tax policy requires a moral goal, though that task can be done without ethics or moral analysis.",
+    "trap": "copy"
+   },
+   {
+    "t": "Tax policy ought to be created without appealing to any moral goal or ethical reasoning.",
+    "trap": "rev"
+   },
+   {
+    "t": "Identifying a moral goal is just one optional step among many in creating tax policy.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only professional ethicists, rather than policymakers, can create tax policy.",
+    "trap": "over"
+   },
+   {
+    "t": "Designing tax policy demands settling on a moral aim, a job that necessarily draws on ethics and moral reasoning.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Each choice involves uncertainty about which path will get you to your destination.",
+  "exam_id": "2023-수능",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Each choice removes the uncertainty about which path will get you to your destination.",
+    "trap": "copy"
+   },
+   {
+    "t": "You can know for certain which path will reach your destination before you decide.",
+    "trap": "rev"
+   },
+   {
+    "t": "Every decision carries some doubt about which route will actually lead you to your goal.",
+    "trap": "ok"
+   },
+   {
+    "t": "Uncertainty appears only after a wrong path has already taken you to your destination.",
+    "trap": "dist"
+   },
+   {
+    "t": "No single choice can ever bring you any closer to your destination.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "The unlit, unglamorous storerooms, if they are ever discussed, are at best presented as service areas that process objects for the exhibition halls.",
+  "exam_id": "2024-06",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "The unlit, unglamorous storerooms are often discussed as spaces that rival the exhibition halls in appeal.",
+    "trap": "copy"
+   },
+   {
+    "t": "The dim, plain storerooms are seldom mentioned, and when they are, they are treated merely as support spaces preparing objects for the galleries.",
+    "trap": "ok"
+   },
+   {
+    "t": "The storerooms are usually celebrated as the most important rooms in the whole museum.",
+    "trap": "rev"
+   },
+   {
+    "t": "When the storerooms are discussed, they are praised for displaying objects to visitors directly.",
+    "trap": "dist"
+   },
+   {
+    "t": "The storerooms are never brought up in any conversation about the museum.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "One of the biggest misconceptions about becoming self-confident is that it means living fearlessly.",
+  "exam_id": "2024-09",
+  "type": "비유→직설",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "One of the biggest misconceptions is that becoming self-confident really does mean living fearlessly.",
+    "trap": "copy"
+   },
+   {
+    "t": "It is widely and correctly understood that self-confidence means living without any fear.",
+    "trap": "rev"
+   },
+   {
+    "t": "The main barrier to self-confidence is that people insist on living fearlessly.",
+    "trap": "dist"
+   },
+   {
+    "t": "A common false belief about gaining self-confidence is that it requires feeling no fear at all.",
+    "trap": "ok"
+   },
+   {
+    "t": "People become self-confident only after they have wiped out every last fear.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "What is striking about them is that what is missing in all this is any setting or context to make the emotion determinate.",
+  "exam_id": "2024-수능",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "What stands out about them is the absence of any setting or context that would make the emotion definite.",
+    "trap": "ok"
+   },
+   {
+    "t": "What is striking is that the setting and context are present to make the emotion determinate.",
+    "trap": "copy"
+   },
+   {
+    "t": "What is remarkable is how clearly the surrounding context pins down each emotion.",
+    "trap": "rev"
+   },
+   {
+    "t": "What is notable is that only the emotion, and not its setting, is left undefined.",
+    "trap": "dist"
+   },
+   {
+    "t": "These works never convey any emotion at all, offering only setting and context.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable.",
+  "exam_id": "2025-06",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Novelty counts for little unless an idea is also useful, and usefulness draws little notice unless an idea is also new.",
+    "trap": "ok"
+   },
+   {
+    "t": "Ideas that are both original and useful end up being irrelevant and unremarkable.",
+    "trap": "copy"
+   },
+   {
+    "t": "An original idea still stands out even when useless, while a useful idea stays relevant even when unoriginal.",
+    "trap": "rev"
+   },
+   {
+    "t": "Ideas that lack originality are irrelevant, while ideas that lack usefulness go unremarked.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only ideas that are at once original and useful carry any worth at all.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Truth is essential for progress and the development of knowledge, as it serves as the foundation upon which reliable and accurate understanding is built.",
+  "exam_id": "2025-09",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Truth builds reliable understanding, yet progress and knowledge advance quite apart from it.",
+    "trap": "copy"
+   },
+   {
+    "t": "Knowledge and progress can develop even when truth does not underlie them.",
+    "trap": "rev"
+   },
+   {
+    "t": "Truth is one of several foundations that make our understanding reliable and accurate.",
+    "trap": "dist"
+   },
+   {
+    "t": "Because dependable and accurate understanding rests on truth, truth is indispensable for advancing knowledge.",
+    "trap": "ok"
+   },
+   {
+    "t": "Truth is the only thing that ever brings about genuine progress in knowledge.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Games catch and hold attention in a way that few things can.",
+  "exam_id": "2025-수능",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Games find it harder than most other things to capture and keep our attention.",
+    "trap": "rev"
+   },
+   {
+    "t": "Few other things can seize and sustain our attention the way games do.",
+    "trap": "ok"
+   },
+   {
+    "t": "Games catch attention, though few things are able to hold it for long.",
+    "trap": "copy"
+   },
+   {
+    "t": "Games are among the many pastimes that briefly draw people's attention.",
+    "trap": "off"
+   },
+   {
+    "t": "Games grab attention quickly but seldom manage to keep it.",
+    "trap": "dist"
+   }
+  ]
+ },
+ {
+  "src": "Our ability to respond to danger has been important for survival, so feeling worried in uncertain situations is normal.",
+  "exam_id": "2026-06",
+  "type": "반대구조",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Our ability to respond to danger is normal, yet worry itself puts our survival at risk.",
+    "trap": "copy"
+   },
+   {
+    "t": "Feeling worried sharpens our ability to respond to danger, which in turn aids survival.",
+    "trap": "dist"
+   },
+   {
+    "t": "Because reacting to danger rarely helped us survive, anxiety in uncertain situations is unusual.",
+    "trap": "rev"
+   },
+   {
+    "t": "Worry serves a purpose only when a real threat is actually present.",
+    "trap": "over"
+   },
+   {
+    "t": "Since reacting to threats has aided our survival, feeling anxious amid uncertainty is only to be expected.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Lin’s work stresses that it is who you know as much as what you know that shapes our experience in society.",
+  "exam_id": "2026-09",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Lin argues that what you know counts for far more than who you know in society.",
+    "trap": "rev"
+   },
+   {
+    "t": "Lin shows that who you know rests on what you know in shaping social life.",
+    "trap": "copy"
+   },
+   {
+    "t": "For Lin, personal connections shape our place in society just as much as our knowledge does.",
+    "trap": "ok"
+   },
+   {
+    "t": "Lin claims that the people you know gradually decide what you come to know in society.",
+    "trap": "dist"
+   },
+   {
+    "t": "Lin's work centers on how social experience shapes the people we choose to associate with.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "As it is easy to misinterpret nonverbal behavior, effective listeners verbally confirm their interpretations of someone’s nonverbal communication.",
+  "exam_id": "2027-06",
+  "type": "품사전환",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Since body language is easily misread, skilled listeners put their reading of it into words to check it.",
+    "trap": "ok"
+   },
+   {
+    "t": "Skilled listeners lean on nonverbal cues to confirm what a speaker has said in words.",
+    "trap": "dist"
+   },
+   {
+    "t": "Because nonverbal behavior is easy to read correctly, listeners seldom need to confirm it aloud.",
+    "trap": "copy"
+   },
+   {
+    "t": "Effective listeners refrain from putting their reading of nonverbal cues into words.",
+    "trap": "rev"
+   },
+   {
+    "t": "Nonverbal signals can be trusted only once they have been spelled out in words.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Children can move effortlessly between play and absorption in a story, as if both are forms of the same activity.",
+  "exam_id": "2022-06",
+  "type": "동의어",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Children move between play and a story only with effort, as though the two were quite different.",
+    "trap": "copy"
+   },
+   {
+    "t": "Children favor stories over play because both draw them in so completely.",
+    "trap": "off"
+   },
+   {
+    "t": "Children find it hard to shift between play and losing themselves in a story.",
+    "trap": "rev"
+   },
+   {
+    "t": "Children slip easily between playing and getting caught up in a story, treating the two as much the same thing.",
+    "trap": "ok"
+   },
+   {
+    "t": "Children handle play and story-absorption as opposite kinds of activity that they alternate between.",
+    "trap": "dist"
+   }
+  ]
+ },
+ {
+  "src": "News, especially in its televised form, is constituted not only by its choice of topics and stories but also by its manner of presentation.",
+  "exam_id": "2022-수능",
+  "type": "품사전환",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Television news is defined chiefly by how it presents stories rather than by which ones it selects.",
+    "trap": "dist"
+   },
+   {
+    "t": "What makes television news is not just the stories it picks but also the way it presents them.",
+    "trap": "ok"
+   },
+   {
+    "t": "News is constituted by its choice of topics, above all when it is not in televised form.",
+    "trap": "copy"
+   },
+   {
+    "t": "Television news is shaped by the stories it chooses but not by the manner in which it presents them.",
+    "trap": "rev"
+   },
+   {
+    "t": "Televised news differs from print news mainly in the range of topics it decides to cover.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "What can make the difference is drive ― utilizing the mental gear to maximize gains made in the technical and physical areas.",
+  "exam_id": "2023-06",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "The mental gear itself is what sets people apart, more than the technical and physical progress they make.",
+    "trap": "dist"
+   },
+   {
+    "t": "The decisive factor is motivation, which harnesses mental effort to get the most out of one's technical and physical gains.",
+    "trap": "ok"
+   },
+   {
+    "t": "Drive matters only when the technical and physical areas have already been fully mastered.",
+    "trap": "over"
+   },
+   {
+    "t": "What makes the difference is maximizing gains in the technical and physical areas so that drive can develop.",
+    "trap": "rev"
+   },
+   {
+    "t": "Utilizing the right gear is the drive that produces gains in the technical and physical areas.",
+    "trap": "copy"
+   }
+  ]
+ },
+ {
+  "src": "Tax is the application of a society’s theories of distributive justice.",
+  "exam_id": "2023-09",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Taxation applies a society’s justice so that wealth can be distributed to its theorists.",
+    "trap": "copy"
+   },
+   {
+    "t": "A society’s theories of distributive justice are shaped in response to how its taxes work.",
+    "trap": "rev"
+   },
+   {
+    "t": "Tax is one of several tools a society uses to test whether its justice theories are correct.",
+    "trap": "off"
+   },
+   {
+    "t": "Through taxation, a society puts its ideas about fair distribution into practice.",
+    "trap": "ok"
+   },
+   {
+    "t": "Tax reflects only those parts of distributive justice that a society can afford to fund.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "The mathematical theory of probability hasn’t eliminated risk, but it allows us to manage that risk more effectively.",
+  "exam_id": "2023-수능",
+  "type": "반대구조",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Probability theory does not remove risk, yet it does give us better means of handling it.",
+    "trap": "ok"
+   },
+   {
+    "t": "By eliminating risk, the mathematical theory of probability lets us manage situations more effectively.",
+    "trap": "copy"
+   },
+   {
+    "t": "The theory of probability manages risk so well that risk itself has effectively disappeared.",
+    "trap": "rev"
+   },
+   {
+    "t": "Probability theory reduces risk only in cases that can be expressed in mathematical terms.",
+    "trap": "over"
+   },
+   {
+    "t": "The value of probability theory lies in predicting which risks are worth taking.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Since Plato, the supremacy of rational reason is based on the assertion that it is able to extract true knowledge from experience.",
+  "exam_id": "2024-06",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Ever since Plato, reason has been supreme because it draws true knowledge directly from other reasoning rather than from experience.",
+    "trap": "dist"
+   },
+   {
+    "t": "Plato argued that experience, not reason, is what allows us to arrive at true knowledge.",
+    "trap": "rev"
+   },
+   {
+    "t": "The claim that reason can extract knowledge is the one assertion Plato is remembered for.",
+    "trap": "off"
+   },
+   {
+    "t": "Reason has held supremacy since Plato only where experience has already been shown to be reliable.",
+    "trap": "over"
+   },
+   {
+    "t": "Since Plato, reason’s dominance has rested on the claim that it can derive genuine knowledge from experience.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "If we only do the things we know we can do well, fear of the new and unknown tends to grow.",
+  "exam_id": "2024-09",
+  "type": "반대구조",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Confining ourselves to what we already do well is the only way to keep fear of the unknown from growing.",
+    "trap": "rev"
+   },
+   {
+    "t": "Doing the things we know we can do well makes the new and unknown feel more familiar over time.",
+    "trap": "copy"
+   },
+   {
+    "t": "Sticking to what we are already good at tends to make the unfamiliar seem more frightening.",
+    "trap": "ok"
+   },
+   {
+    "t": "Fear of the unknown grows mainly because we lack the skills to do new things well.",
+    "trap": "dist"
+   },
+   {
+    "t": "Once we do something well, we never again feel afraid of trying what is new.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "In particular, when people post positive comments they are expressions of appreciation for the experience that led to the post.",
+  "exam_id": "2024-수능",
+  "type": "품사전환",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "A positive comment someone posts is essentially a way of showing gratitude for the experience behind it.",
+    "trap": "ok"
+   },
+   {
+    "t": "People post positive comments in order to create the kind of experience they would appreciate.",
+    "trap": "rev"
+   },
+   {
+    "t": "Positive comments are expressions people post to gain appreciation from those who read them.",
+    "trap": "copy"
+   },
+   {
+    "t": "Only genuinely enjoyable experiences ever move people to post positive comments about them.",
+    "trap": "over"
+   },
+   {
+    "t": "The wording people choose reveals how strongly they felt about the experience they describe.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "In this manner, subjective experience is extended into the external environment, as disciplinary objects, institutional laws, and equipment become mental institutions.",
+  "exam_id": "2025-06",
+  "type": "구체→추상",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "In this way, the external environment is gradually stripped of the objects and laws that once shaped subjective experience.",
+    "trap": "rev"
+   },
+   {
+    "t": "Here, subjective experience remains internal while disciplinary objects and laws stay entirely external to the mind.",
+    "trap": "dist"
+   },
+   {
+    "t": "In this manner, mental institutions produce the disciplinary objects, laws, and equipment found in the external environment.",
+    "trap": "copy"
+   },
+   {
+    "t": "In this way, inner experience reaches outward, so that external structures such as rules and tools come to function as parts of the mind.",
+    "trap": "ok"
+   },
+   {
+    "t": "This shows that only formal institutions, not ordinary objects, can ever be absorbed into our mental life.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "As social media becomes a primary source of information for millions, its unregulated nature allows misinformation to spread rapidly.",
+  "exam_id": "2025-09",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Because social media is unregulated, it has become the primary source of information that millions choose to trust.",
+    "trap": "dist"
+   },
+   {
+    "t": "Now that many people rely on social media for information, its lack of oversight lets false claims circulate quickly.",
+    "trap": "ok"
+   },
+   {
+    "t": "As a primary source of information, social media regulates itself well enough to keep misinformation from spreading.",
+    "trap": "rev"
+   },
+   {
+    "t": "Social media’s unregulated nature allows information to reach millions who serve as its primary source.",
+    "trap": "copy"
+   },
+   {
+    "t": "Misinformation spreads on social media only when users fail to check other primary sources first.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Individuals who are skilled in this domain are able to express emotions, feelings and moods accurately and thus may facilitate clear communication between co-workers.",
+  "exam_id": "2025-수능",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Those skilled in this domain express their feelings accurately, and as a result co-workers rarely disagree with one another.",
+    "trap": "copy"
+   },
+   {
+    "t": "People adept in this area can convey their emotions precisely, which can help colleagues communicate more clearly.",
+    "trap": "ok"
+   },
+   {
+    "t": "People who are weak in this area still express their moods accurately, thereby aiding communication among co-workers.",
+    "trap": "rev"
+   },
+   {
+    "t": "People skilled in this area accurately read the emotions of others, thereby easing communication between co-workers.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only those skilled in this domain can express emotions accurately enough for clear communication at work.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Feelings of worry, which are activated in anticipation of future events, are often experienced in everyday situations.",
+  "exam_id": "2026-06",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Feelings of worry activated by future events are rarely experienced in everyday situations.",
+    "trap": "copy"
+   },
+   {
+    "t": "Worry arises when we look back on past events and then surfaces in ordinary daily situations.",
+    "trap": "dist"
+   },
+   {
+    "t": "Worry, triggered by expecting what lies ahead, is felt in nearly every situation we encounter.",
+    "trap": "over"
+   },
+   {
+    "t": "Worry tends to fade in everyday situations because it is tied only to distant future events.",
+    "trap": "rev"
+   },
+   {
+    "t": "Worry, brought on when we expect events still to come, commonly appears in ordinary daily life.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Anonymity requires that the collective choice ought to be independent of the agents' identities, whereas neutrality requires impartiality towards the alternatives.",
+  "exam_id": "2026-09",
+  "type": "품사전환",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Anonymity means the group's decision must not depend on who the agents are, while neutrality means treating all the options impartially.",
+    "trap": "ok"
+   },
+   {
+    "t": "Anonymity means the collective choice should reflect the agents' identities, whereas neutrality favors certain alternatives.",
+    "trap": "rev"
+   },
+   {
+    "t": "Anonymity requires impartiality toward the alternatives, whereas neutrality requires independence from the agents' identities.",
+    "trap": "dist"
+   },
+   {
+    "t": "Anonymity requires that the agents' identities determine the collective choice, and neutrality treats the alternatives equally.",
+    "trap": "copy"
+   },
+   {
+    "t": "Anonymity alone is enough to keep a collective choice fair no matter which alternatives are on offer.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "A question as simple as 'Do your nods indicate a yes vote?' can make sure that everyone is on the same wavelength.",
+  "exam_id": "2027-06",
+  "type": "비유→직설",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "A simple question about nodding can reveal whether people intend to vote yes.",
+    "trap": "copy"
+   },
+   {
+    "t": "Only a simple question like this can guarantee that a group reaches complete agreement.",
+    "trap": "over"
+   },
+   {
+    "t": "Asking whether nods mean a yes vote helps the leader decide the outcome of the vote.",
+    "trap": "dist"
+   },
+   {
+    "t": "Even a plain question such as that one can confirm that everyone shares the same understanding.",
+    "trap": "ok"
+   },
+   {
+    "t": "A question that simple usually leaves people unsure whether they truly agree.",
+    "trap": "rev"
+   }
+  ]
+ },
+ {
+  "src": "Not only does this result demonstrate the effect, but it also shows that the choice of songs used in playback experiments is highly important.",
+  "exam_id": "2022-06",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "This result mainly proves that the number of songs in playback experiments matters more than which songs are chosen.",
+    "trap": "dist"
+   },
+   {
+    "t": "This result demonstrates the effect but says little about the songs used in playback experiments.",
+    "trap": "copy"
+   },
+   {
+    "t": "This finding not only proves the effect but also reveals that which songs are chosen for playback experiments matters greatly.",
+    "trap": "ok"
+   },
+   {
+    "t": "This result shows the effect while suggesting that the choice of playback songs is largely unimportant.",
+    "trap": "rev"
+   },
+   {
+    "t": "This result proves that only the choice of songs, and nothing else, decides how playback experiments turn out.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "The creator of humour is putting ideas into people's heads for the pleasure those ideas will bring, not to provide information.",
+  "exam_id": "2022-수능",
+  "type": "반대구조",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "The creator of humour plants ideas in people's minds chiefly to inform them, not merely to amuse.",
+    "trap": "rev"
+   },
+   {
+    "t": "Someone who makes humour puts ideas into listeners' minds to give enjoyment rather than to inform.",
+    "trap": "ok"
+   },
+   {
+    "t": "The creator of humour supplies information that happens to place pleasant ideas in people's heads.",
+    "trap": "copy"
+   },
+   {
+    "t": "The creator of humour shares ideas so that listeners will remember the information those ideas carry.",
+    "trap": "dist"
+   },
+   {
+    "t": "A humourist's only aim is to plant pleasurable ideas in people's heads, never to say anything true.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Self-driving cars, where a person turns the driving on and off, are an example of a joint cognitive system.",
+  "exam_id": "2023-06",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Self-driving cars, in which a person steers continuously, are an example of a joint cognitive system.",
+    "trap": "dist"
+   },
+   {
+    "t": "Self-driving cars, where the machine alone controls the driving, are not truly a joint cognitive system.",
+    "trap": "rev"
+   },
+   {
+    "t": "A person who turns the driving on and off is himself a joint cognitive system.",
+    "trap": "copy"
+   },
+   {
+    "t": "Self-driving cars are the only genuine example of a joint cognitive system.",
+    "trap": "over"
+   },
+   {
+    "t": "Autonomous cars, in which a human switches the driving on and off, illustrate a joint cognitive system.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "What he said about understanding memory can be extended to our questions about young children's minds.",
+  "exam_id": "2023-09",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "His remarks on comprehending memory can also apply to the questions we ask about young children's minds.",
+    "trap": "ok"
+   },
+   {
+    "t": "What he said about memory cannot really be applied to our questions about young children's minds.",
+    "trap": "rev"
+   },
+   {
+    "t": "His comments on young children's minds can be extended to our questions about memory.",
+    "trap": "dist"
+   },
+   {
+    "t": "He said that understanding memory settles all our questions about young children's minds.",
+    "trap": "copy"
+   },
+   {
+    "t": "His view on memory applies only to questions about young children's minds and to nothing else.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Urban delivery vehicles can be adapted to better suit the density of urban distribution, which often involves smaller vehicles such as vans, including bicycles.",
+  "exam_id": "2023-수능",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Urban delivery vehicles must raise the density of distribution by relying on vans and bicycles.",
+    "trap": "copy"
+   },
+   {
+    "t": "City delivery vehicles can be modified to fit the high density of urban distribution, which tends to depend on smaller vehicles like vans and even bicycles.",
+    "trap": "ok"
+   },
+   {
+    "t": "Because dense cities favor larger vehicles, delivery fleets are moving away from vans and bicycles.",
+    "trap": "rev"
+   },
+   {
+    "t": "Delivery vans are being phased out in favor of bicycles because vans are too bulky for crowded streets.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only bicycles can effectively deliver goods within densely populated urban areas.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "As the discussion in the Republic helps to explain, perceptions are inherently unreliable and misleading because the senses are subject to errors and illusions.",
+  "exam_id": "2024-06",
+  "type": "품사전환",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "The discussion in the Republic is itself unreliable and misleading because it depends on the senses.",
+    "trap": "copy"
+   },
+   {
+    "t": "Since the senses seldom make mistakes, our perceptions can usually be trusted as accurate.",
+    "trap": "rev"
+   },
+   {
+    "t": "Perceptions turn misleading only when the senses are deliberately fooled by an illusion.",
+    "trap": "dist"
+   },
+   {
+    "t": "The Republic claims that reason, unlike the senses, is the real source of illusions.",
+    "trap": "off"
+   },
+   {
+    "t": "Because the senses are prone to mistakes and illusions, our perceptions are by nature untrustworthy and deceptive.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Multiculturalists suggest that there should be a model of partial assimilation in which immigrants retain some of their customs, beliefs, and language.",
+  "exam_id": "2024-09",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Multiculturalists call for a model of partial assimilation that lets immigrants keep some of their traditions, beliefs, and language.",
+    "trap": "ok"
+   },
+   {
+    "t": "Multiculturalists propose a model in which immigrants assimilate fully while still preserving their language.",
+    "trap": "dist"
+   },
+   {
+    "t": "Multiculturalists recommend that immigrants give up their original customs and beliefs in order to integrate.",
+    "trap": "rev"
+   },
+   {
+    "t": "Immigrants can integrate successfully only if they surrender part of their cultural identity.",
+    "trap": "over"
+   },
+   {
+    "t": "Multiculturalism is mainly concerned with teaching immigrants the language of their new country.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Indeed, there are examples of particular attractions that have limited capacity and where there is actually no room for more visitors.",
+  "exam_id": "2024-수능",
+  "type": "동의어",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Some attractions have limited capacity because their visitors leave no room for the exhibits.",
+    "trap": "copy"
+   },
+   {
+    "t": "Most attractions have ample space and can always take in additional visitors.",
+    "trap": "rev"
+   },
+   {
+    "t": "Certain attractions restrict visitor numbers in order to expand their overall capacity.",
+    "trap": "dist"
+   },
+   {
+    "t": "Certain attractions can hold only a fixed number of people and simply cannot admit any more visitors.",
+    "trap": "ok"
+   },
+   {
+    "t": "Only the most famous attractions ever place any real limit on how many visitors they allow.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.",
+  "exam_id": "2025-06",
+  "type": "비유→직설",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Creative ideas are useless because they always fade into a silent death right after being generated.",
+    "trap": "copy"
+   },
+   {
+    "t": "Being able to come up with creative ideas has little value if those ideas are never developed and quietly fade away.",
+    "trap": "ok"
+   },
+   {
+    "t": "Even ideas that are never acted upon reveal the true worth of creative thinking.",
+    "trap": "rev"
+   },
+   {
+    "t": "Producing creative ideas grows harder once one's earlier ideas have quietly failed.",
+    "trap": "dist"
+   },
+   {
+    "t": "The quiet disappearance of ideas shows that creativity itself cannot really be taught.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "The consensus seems to hold that moths are not so much attracted to lights as they are trapped by them.",
+  "exam_id": "2025-09",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Researchers generally agree that moths are genuinely drawn toward lights rather than trapped by them.",
+    "trap": "rev"
+   },
+   {
+    "t": "The consensus is that moths seek out lights precisely because the lights end up trapping them.",
+    "trap": "dist"
+   },
+   {
+    "t": "Experts agree that a moth never approaches a light unless it is already trapped by it.",
+    "trap": "over"
+   },
+   {
+    "t": "There is agreement that artificial lights disrupt the way moths navigate at night.",
+    "trap": "off"
+   },
+   {
+    "t": "Most experts agree that moths do not truly seek out lights but instead become caught by them.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Literature can be helpful in the language learning process because of the engagement it fosters in readers.",
+  "exam_id": "2025-수능",
+  "type": "품사전환",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Literature aids language learning because readers themselves foster it during the process.",
+    "trap": "copy"
+   },
+   {
+    "t": "Literature tends to hold back language learning because it fails to involve its readers.",
+    "trap": "rev"
+   },
+   {
+    "t": "Literature supports language learning by drawing readers into active engagement with the text.",
+    "trap": "ok"
+   },
+   {
+    "t": "Literature helps language learning chiefly by broadening readers' vocabulary range.",
+    "trap": "dist"
+   },
+   {
+    "t": "A language can be learned only through the engagement that literary texts create.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "When we home in, we increase motivational intensity, reinforcing that what's in front of us is what we should be after.",
+  "exam_id": "2026-06",
+  "type": "비유→직설",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "When we home in on a goal, our motivational intensity drops once the goal sits in front of us.",
+    "trap": "copy"
+   },
+   {
+    "t": "Widening our focus raises our motivation and clarifies which goal we ought to pursue.",
+    "trap": "rev"
+   },
+   {
+    "t": "Intense motivation is what makes us home in on whatever goal happens to be nearest.",
+    "trap": "dist"
+   },
+   {
+    "t": "By narrowing our focus onto a goal, we heighten our motivation and strengthen the sense that the thing before us is what we should pursue.",
+    "trap": "ok"
+   },
+   {
+    "t": "Chasing several goals at once keeps our motivation from fading over time.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Showing up late for work and using abusive language are the kinds of problems that every business wants to eliminate.",
+  "exam_id": "2026-09",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Arriving late and speaking abusively are problems that businesses tolerate as long as they are rare.",
+    "trap": "rev"
+   },
+   {
+    "t": "Tardiness and offensive speech are the sorts of issues that companies would like to get rid of.",
+    "trap": "ok"
+   },
+   {
+    "t": "Every business wants to eliminate the language its employees use at work.",
+    "trap": "copy"
+   },
+   {
+    "t": "Businesses aim to remove lateness, and abusive language is the only issue they overlook.",
+    "trap": "over"
+   },
+   {
+    "t": "Companies mainly worry about how to discipline workers who arrive late rather than about their speech.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Imagination continues to function when perception is not actively discerning objects, in cases of emotion, disease, and sleep.",
+  "exam_id": "2027-06",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "In states like emotion, illness, and sleep, imagination shuts down while perception keeps identifying objects.",
+    "trap": "rev"
+   },
+   {
+    "t": "Perception actively discerns objects in cases of emotion, disease, and sleep.",
+    "trap": "copy"
+   },
+   {
+    "t": "Imagination works best only when we are asleep and free from disease or strong feeling.",
+    "trap": "over"
+   },
+   {
+    "t": "Even when perception stops picking out objects—as in emotion, illness, or sleep—imagination keeps working.",
+    "trap": "ok"
+   },
+   {
+    "t": "Emotion and disease sharpen perception so that it can tell objects apart more clearly.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "We may not determine how or what a lion eats but we certainly can regulate where the lion feeds.",
+  "exam_id": "2022-06",
+  "type": "반대구조",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Though we can't control a lion's manner or choice of food, we are able to control the place where it feeds.",
+    "trap": "ok"
+   },
+   {
+    "t": "We can decide how and what a lion eats, though not where it feeds.",
+    "trap": "rev"
+   },
+   {
+    "t": "We may not determine where a lion feeds, but we can regulate what it eats.",
+    "trap": "copy"
+   },
+   {
+    "t": "We are able to manage every aspect of a lion's diet except its feeding schedule.",
+    "trap": "over"
+   },
+   {
+    "t": "Controlling a lion's feeding grounds matters less than understanding what it prefers to eat.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Popular formats can be said to enhance understanding by engaging an audience unwilling to endure the longer verbal orientation of older news formats.",
+  "exam_id": "2022-수능",
+  "type": "구체→추상",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Older news formats enhance understanding because their longer verbal orientation engages the audience.",
+    "trap": "rev"
+   },
+   {
+    "t": "Popular formats endure the longer verbal orientation in order to engage an unwilling audience.",
+    "trap": "copy"
+   },
+   {
+    "t": "Popular formats deepen understanding only for audiences who dislike any form of news.",
+    "trap": "over"
+   },
+   {
+    "t": "Popular formats attract larger audiences, though this comes at the cost of real comprehension.",
+    "trap": "off"
+   },
+   {
+    "t": "Accessible formats aid comprehension by drawing in people who won't sit through the wordier style of traditional news.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Entertainment robots are examples of mixed teams, as are robots for telecommuting.",
+  "exam_id": "2023-06",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Entertainment robots form mixed teams, but robots used for telecommuting do not.",
+    "trap": "rev"
+   },
+   {
+    "t": "Mixed teams are examples of entertainment robots and of robots for telecommuting.",
+    "trap": "copy"
+   },
+   {
+    "t": "Both entertainment robots and telecommuting robots serve as instances of mixed teams.",
+    "trap": "ok"
+   },
+   {
+    "t": "Only entertainment robots truly qualify as mixed teams among the robots discussed.",
+    "trap": "over"
+   },
+   {
+    "t": "Robots for telecommuting outperform entertainment robots when working within mixed teams.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Historically, drafters of tax legislation are attentive to questions of economics and history, and less attentive to moral questions.",
+  "exam_id": "2023-09",
+  "type": "품사전환",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "In the past, those who wrote tax laws focused on economic and historical concerns while paying little heed to moral ones.",
+    "trap": "ok"
+   },
+   {
+    "t": "Historically, drafters of tax legislation cared more about moral questions than about economics and history.",
+    "trap": "rev"
+   },
+   {
+    "t": "Historically, questions of economics and history were less attentive to the drafters of tax legislation.",
+    "trap": "copy"
+   },
+   {
+    "t": "Tax lawmakers never gave any thought to morality, focusing solely on economics and history.",
+    "trap": "over"
+   },
+   {
+    "t": "Modern tax drafters have finally learned to weigh economic history against moral principles.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Cells that help you recognize people's faces need to be extremely sensitive to details of shape, but they can pay less attention to location.",
+  "exam_id": "2023-수능",
+  "type": "반대구조",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Cells for recognizing faces must be highly sensitive to location while largely ignoring details of shape.",
+    "trap": "rev"
+   },
+   {
+    "t": "Cells that help you recognize faces are sensitive to details of location but pay less attention to shape.",
+    "trap": "copy"
+   },
+   {
+    "t": "Face-recognition cells respond only to shape and are completely blind to where a face appears.",
+    "trap": "over"
+   },
+   {
+    "t": "The cells that let us identify faces must register fine differences in shape, though they needn't track position closely.",
+    "trap": "ok"
+   },
+   {
+    "t": "Recognizing a person's face depends more on where the face is than on its precise shape.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "People still eat, but a growing part of food's value now comes from aspects other than nutrition.",
+  "exam_id": "2024-06",
+  "type": "구체→추상",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "People eat less than before, and food's value increasingly rests on its nutritional content.",
+    "trap": "rev"
+   },
+   {
+    "t": "People continue to eat, yet more and more of what food is worth derives from non-nutritional qualities.",
+    "trap": "ok"
+   },
+   {
+    "t": "People still eat, but a growing component of food's value is determined by its price.",
+    "trap": "copy"
+   },
+   {
+    "t": "Nutrition is now the sole factor that gives food any value to people who eat.",
+    "trap": "over"
+   },
+   {
+    "t": "How much people eat has become the main thing that decides the value of their food.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "To achieve commercial success, that audience must be as large as possible.",
+  "exam_id": "2024-09",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Commercial success is what makes an audience grow as large as possible.",
+    "trap": "copy"
+   },
+   {
+    "t": "Reaching commercial success requires drawing the widest possible audience.",
+    "trap": "ok"
+   },
+   {
+    "t": "A smaller, more select audience is what commercial success truly depends on.",
+    "trap": "rev"
+   },
+   {
+    "t": "To achieve commercial success, the audience must be as loyal as possible.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only by attracting the largest audience of all can any work be counted a success.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Even in the easiest texts, what a sentence ‘says’ is often not what it means.",
+  "exam_id": "2024-수능",
+  "type": "반대구조",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "The easiest texts are precisely the ones where what a sentence says matches what it means.",
+    "trap": "copy"
+   },
+   {
+    "t": "In easy texts, what a sentence says is generally the same as what it means.",
+    "trap": "rev"
+   },
+   {
+    "t": "Even in the easiest texts, what a sentence means is often harder to say than to grasp.",
+    "trap": "dist"
+   },
+   {
+    "t": "In no text does the wording of a sentence ever line up with its meaning.",
+    "trap": "over"
+   },
+   {
+    "t": "Even in simple writing, a sentence's literal wording frequently differs from its intended meaning.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Any attempt to model musical behavior or perception in a general way is filled with difficulties.",
+  "exam_id": "2025-06",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Trying to build a general model of how people make or perceive music runs into many problems.",
+    "trap": "ok"
+   },
+   {
+    "t": "Musical behavior and perception can be modeled in a general way, though the process is filled with difficulties.",
+    "trap": "copy"
+   },
+   {
+    "t": "Modeling musical behavior or perception in a general way turns out to be fairly straightforward.",
+    "trap": "rev"
+   },
+   {
+    "t": "Any attempt to model the structure of one specific piece of music is filled with difficulties.",
+    "trap": "dist"
+   },
+   {
+    "t": "No aspect of music can ever be captured by a general model.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Their flight appears to have no purpose, but they are, it is believed, trying to escape the pull of the light.",
+  "exam_id": "2025-09",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Their flight has no purpose, and they are believed to be drawn toward the pull of the light.",
+    "trap": "copy"
+   },
+   {
+    "t": "Their flight clearly has a purpose, yet they are not really trying to avoid the light.",
+    "trap": "rev"
+   },
+   {
+    "t": "Their flight appears purposeful, but they are believed to be searching for the source of the light.",
+    "trap": "dist"
+   },
+   {
+    "t": "Although their flying looks aimless, it is thought that they are in fact trying to get away from the light's attraction.",
+    "trap": "ok"
+   },
+   {
+    "t": "These insects never fly for any reason other than fleeing from light.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Core language teaching materials must concentrate on how a language operates both as a rule-based system and as a sociosemantic system.",
+  "exam_id": "2025-수능",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Core teaching materials must treat language purely as a rule-based system rather than a sociosemantic one.",
+    "trap": "copy"
+   },
+   {
+    "t": "Language teaching materials should avoid presenting a language as a rule-based system at all.",
+    "trap": "rev"
+   },
+   {
+    "t": "Essential language-teaching materials should focus on how a language works both as a system governed by rules and as one that carries social meaning.",
+    "trap": "ok"
+   },
+   {
+    "t": "Core teaching materials must show how learners follow social customs when they break a language's grammar.",
+    "trap": "off"
+   },
+   {
+    "t": "Only materials that set grammar rules aside can capture a language's social meaning.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "To some extent, thinking through potential scenarios can be helpful.",
+  "exam_id": "2026-06",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Thinking through potential scenarios can be helpful to whatever extent a person wishes.",
+    "trap": "copy"
+   },
+   {
+    "t": "Thinking through possible scenarios tends to do more harm than good.",
+    "trap": "rev"
+   },
+   {
+    "t": "To some extent, imagining potential scenarios can be entertaining.",
+    "trap": "dist"
+   },
+   {
+    "t": "Considering every possible scenario is always the most helpful thing one can do.",
+    "trap": "over"
+   },
+   {
+    "t": "Up to a point, working through possible situations in advance can be useful.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "In fact, one common reason that employees give for breaking rules is that they were unaware their behavior was undesirable.",
+  "exam_id": "2026-09",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "In fact, employees commonly break rules because they are well aware their behavior is undesirable.",
+    "trap": "copy"
+   },
+   {
+    "t": "In fact, a frequent excuse workers offer for violating rules is that they did not realize their conduct was unwanted.",
+    "trap": "ok"
+   },
+   {
+    "t": "Actually, employees rarely explain their rule-breaking by claiming they did not know what was expected.",
+    "trap": "rev"
+   },
+   {
+    "t": "In fact, a common reason employees break rules is that they knew the rules but found them unreasonable.",
+    "trap": "dist"
+   },
+   {
+    "t": "Employees only ever break rules when they are unaware that their behavior is undesirable.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "A coward’s perceptual disposition is affected by his disposition to experience fear.",
+  "exam_id": "2027-06",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "A coward's disposition to experience fear is what his perceptual disposition affects.",
+    "trap": "copy"
+   },
+   {
+    "t": "A coward's way of perceiving the world is left untouched by any tendency to feel fear.",
+    "trap": "rev"
+   },
+   {
+    "t": "A coward's tendency to feel fear is affected by how other people perceive his disposition.",
+    "trap": "dist"
+   },
+   {
+    "t": "How a coward tends to perceive things is shaped by his tendency to feel fear.",
+    "trap": "ok"
+   },
+   {
+    "t": "A person's perception is governed solely by fear whenever that person is a coward.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Political institutions at central, regional, and local levels must allow users to devise their own regulations and independently ensure observance.",
+  "exam_id": "2022-수능",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Governing bodies at every level must devise regulations for users and enforce them centrally.",
+    "trap": "dist"
+   },
+   {
+    "t": "Government bodies at all tiers should let people set their own rules and see to their enforcement on their own.",
+    "trap": "ok"
+   },
+   {
+    "t": "Political institutions must independently ensure that users observe the regulations they are given.",
+    "trap": "copy"
+   },
+   {
+    "t": "Governments should prevent users from creating regulations unless observance can be guaranteed centrally.",
+    "trap": "rev"
+   },
+   {
+    "t": "Only local institutions, not central or regional ones, may let users make and enforce their own rules.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Others, at the bottom of this power, are victims of mobility-structured social exclusion.",
+  "exam_id": "2023-06",
+  "type": "품사전환",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Those with the least power exclude others by structuring how mobility is distributed.",
+    "trap": "rev"
+   },
+   {
+    "t": "Others at the bottom of this power become victims because they refuse the mobility offered to them.",
+    "trap": "dist"
+   },
+   {
+    "t": "People at the bottom of this power are the only ones ever shaped by social exclusion.",
+    "trap": "over"
+   },
+   {
+    "t": "Those at the bottom of this power structure mobility to escape their social exclusion.",
+    "trap": "copy"
+   },
+   {
+    "t": "People with little power suffer social exclusion that is shaped by unequal access to mobility.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Rather than irrelevant, moral questions are fundamental to the imposition of tax.",
+  "exam_id": "2023-09",
+  "type": "반대구조",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Moral questions are largely irrelevant to how taxes ought to be imposed.",
+    "trap": "rev"
+   },
+   {
+    "t": "Rather than fundamental, questions of tax are what make morality irrelevant.",
+    "trap": "copy"
+   },
+   {
+    "t": "Moral questions matter chiefly for deciding how tax revenue should later be spent.",
+    "trap": "off"
+   },
+   {
+    "t": "Far from being beside the point, ethical considerations are central to levying tax.",
+    "trap": "ok"
+   },
+   {
+    "t": "Moral questions are the only consideration that can ever justify imposing a tax.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Cities drive taste change because they are, not surprisingly, often home to the creative people cities seem to attract.",
+  "exam_id": "2023-수능",
+  "type": "구체→추상",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Cities alter tastes largely because they tend to house the inventive individuals they draw in.",
+    "trap": "ok"
+   },
+   {
+    "t": "Creative people change cities because tastes, unsurprisingly, attract them.",
+    "trap": "copy"
+   },
+   {
+    "t": "Cities resist changes in taste because the creative people they attract prefer stability.",
+    "trap": "rev"
+   },
+   {
+    "t": "Cities shape taste mainly by advertising to the creative newcomers who move there.",
+    "trap": "dist"
+   },
+   {
+    "t": "Only cities, never smaller places, can ever draw the creative people who change taste.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Consumption is less and less a matter of sustenance and more and more a question of life-style and choice.",
+  "exam_id": "2024-06",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Consumption remains chiefly about meeting needs rather than expressing a life-style.",
+    "trap": "rev"
+   },
+   {
+    "t": "Life-style and choice are less and less what consumption is about these days.",
+    "trap": "copy"
+   },
+   {
+    "t": "Increasingly, what we consume reflects our chosen way of living rather than mere survival.",
+    "trap": "ok"
+   },
+   {
+    "t": "Consumption is now purely a question of life-style, with survival playing no part at all.",
+    "trap": "over"
+   },
+   {
+    "t": "Consumption is becoming more about affording basic goods than about personal taste.",
+    "trap": "dist"
+   }
+  ]
+ },
+ {
+  "src": "Ideally, an innovation opens up only the next step from what is known and invites the culture to move forward one hop.",
+  "exam_id": "2024-09",
+  "type": "비유→직설",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Ideally, an innovation opens up every step beyond what is known at once.",
+    "trap": "rev"
+   },
+   {
+    "t": "Ideally, an innovation invites the culture to hop back to what is already known.",
+    "trap": "copy"
+   },
+   {
+    "t": "Innovations are valuable mainly for how far ahead of current knowledge they leap.",
+    "trap": "off"
+   },
+   {
+    "t": "At best, an innovation reveals just the immediate next stage and lets a society advance by a single measured step.",
+    "trap": "ok"
+   },
+   {
+    "t": "An innovation ideally lets a culture advance only when every member takes the step together.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "People are framed as bounded social actors either playing the role of hosts or guests.",
+  "exam_id": "2024-수능",
+  "type": "품사전환",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "People frame their own social roles by choosing freely between hosting and being a guest.",
+    "trap": "rev"
+   },
+   {
+    "t": "People are portrayed as clearly defined participants who take on either the host's or the guest's part.",
+    "trap": "ok"
+   },
+   {
+    "t": "People are framed as social actors whose roles as hosts and guests have no fixed bounds.",
+    "trap": "copy"
+   },
+   {
+    "t": "People are cast as social actors only when they successfully host others as guests.",
+    "trap": "over"
+   },
+   {
+    "t": "People are described as social actors mainly by how well they perform the host's duties.",
+    "trap": "dist"
+   }
+  ]
+ },
+ {
+  "src": "The potential contribution of greater economic success, if it involves vulnerable groups, cannot be denied.",
+  "exam_id": "2025-06",
+  "type": "반대구조",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Greater economic success can contribute little once vulnerable groups are involved.",
+    "trap": "rev"
+   },
+   {
+    "t": "The potential contribution of vulnerable groups to economic success cannot be denied.",
+    "trap": "copy"
+   },
+   {
+    "t": "Greater economic success is worth pursuing chiefly for the wealth it brings to strong groups.",
+    "trap": "off"
+   },
+   {
+    "t": "Economic success helps only when it is confined entirely to vulnerable groups.",
+    "trap": "over"
+   },
+   {
+    "t": "It is undeniable that stronger economic performance can help, provided it reaches disadvantaged people.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality.",
+  "exam_id": "2025-09",
+  "type": "반대구조",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "The fact that few people walk in a city is often a sign of the city's high quality.",
+    "trap": "copy"
+   },
+   {
+    "t": "A low number of pedestrians in a city can, on the contrary, be read as a mark of a well-functioning city.",
+    "trap": "ok"
+   },
+   {
+    "t": "A city where many residents choose to walk tends to be one of superior quality.",
+    "trap": "rev"
+   },
+   {
+    "t": "The presence of walkers on the streets always guarantees that a city is of good quality.",
+    "trap": "over"
+   },
+   {
+    "t": "Whether people walk or not reveals little about how safe a city truly is.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Very often, the process of learning is essentially analytic, piecemeal, and, at the level of the personality, fairly superficial.",
+  "exam_id": "2025-수능",
+  "type": "동의어",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Learning is frequently a piecemeal process that reshapes the personality in profound ways.",
+    "trap": "copy"
+   },
+   {
+    "t": "Learning usually proceeds as a holistic, integrated experience that reaches deep into who we are.",
+    "trap": "rev"
+   },
+   {
+    "t": "In most cases, the analytic nature of learning makes it emotionally overwhelming for the learner.",
+    "trap": "dist"
+   },
+   {
+    "t": "In many cases, learning breaks things into parts step by step and, as far as the self is concerned, stays rather shallow.",
+    "trap": "ok"
+   },
+   {
+    "t": "Learning is never more than a shallow, fragmented activity with no bearing on the personality.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Take, for instance, a coin-tossing game in which it is decided that throwing three heads in a row constitutes a win.",
+  "exam_id": "2026-06",
+  "type": "품사전환",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Consider, as an example, a game with a coin where getting heads three times consecutively counts as winning.",
+    "trap": "ok"
+   },
+   {
+    "t": "Consider a coin game in which throwing three tails in a row is what decides the winner.",
+    "trap": "dist"
+   },
+   {
+    "t": "For instance, in a coin-tossing game, a win is defined as the very first throw landing on heads.",
+    "trap": "copy"
+   },
+   {
+    "t": "Take a coin game where a player loses only if three heads appear one after another.",
+    "trap": "rev"
+   },
+   {
+    "t": "In any coin-tossing contest, victory always comes down to a run of three identical results.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Social capital describes the networks of relationships we have that are built on mutuality and sharing of identity, understanding, norms and values.",
+  "exam_id": "2026-09",
+  "type": "구체→추상",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "Social capital is the set of relationship networks we build by sharing our own identity and imposing our norms on others.",
+    "trap": "dist"
+   },
+   {
+    "t": "Social capital refers to the wealth and material resources that circulate through our personal connections.",
+    "trap": "off"
+   },
+   {
+    "t": "Social capital names relationships that exist despite deep differences in identity, understanding, and values.",
+    "trap": "rev"
+   },
+   {
+    "t": "Social capital consists only of networks that people form when they fully agree on every norm and value.",
+    "trap": "over"
+   },
+   {
+    "t": "Social capital refers to our webs of connection grounded in reciprocity and a common sense of who we are and what we believe.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "In the pharmaceutical industry, algorithms are being employed to find treatments and drugs for rare diseases that to date haven’t received much attention.",
+  "exam_id": "2027-06",
+  "type": "동의어",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "In pharmaceuticals, algorithms are used to find treatments for rare diseases that have long attracted a great deal of attention.",
+    "trap": "copy"
+   },
+   {
+    "t": "Drug companies rely on algorithms mainly to cut the cost of producing medicines for common illnesses.",
+    "trap": "off"
+   },
+   {
+    "t": "Within drug development, computational methods are now used to seek out remedies for uncommon conditions that have so far been largely overlooked.",
+    "trap": "ok"
+   },
+   {
+    "t": "In the pharmaceutical field, algorithms have replaced human researchers in discovering every new drug.",
+    "trap": "over"
+   },
+   {
+    "t": "Pharmaceutical firms use algorithms to steer research away from rare diseases toward more profitable ones.",
+    "trap": "rev"
+   }
+  ]
+ },
+ {
+  "src": "One is the view that scientific explanation consists in the unification of broad bodies of phenomena under a minimal number of generalizations.",
+  "exam_id": "2022-수능",
+  "type": "품사전환",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "One view holds that scientific explanation means dividing broad phenomena into as many separate generalizations as possible.",
+    "trap": "rev"
+   },
+   {
+    "t": "According to one position, to explain scientifically is to bring together wide ranges of phenomena under a few general principles.",
+    "trap": "ok"
+   },
+   {
+    "t": "One is the view that scientific explanation consists in describing broad phenomena in exhaustive, minute detail.",
+    "trap": "copy"
+   },
+   {
+    "t": "One view claims that a scientific explanation is valid only when it rests on a single, all-encompassing generalization.",
+    "trap": "over"
+   },
+   {
+    "t": "One idea is that scientific explanation is chiefly concerned with predicting how future phenomena will behave.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Drive applies direct force on your physical and technical gears, strengthening and polishing them so they can spin with vigor and purpose.",
+  "exam_id": "2023-06",
+  "type": "비유→직설",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Drive puts direct force on your gears, wearing them down until they can barely spin at all.",
+    "trap": "rev"
+   },
+   {
+    "t": "Drive polishes your physical and technical gears so smoothly that they no longer need any effort to turn.",
+    "trap": "dist"
+   },
+   {
+    "t": "Drive literally tightens the metal gears in your equipment so the machine runs with more power.",
+    "trap": "copy"
+   },
+   {
+    "t": "Drive directly pushes on your bodily and skill-based abilities, building and refining them so you can perform energetically and with clear intent.",
+    "trap": "ok"
+   },
+   {
+    "t": "Only through relentless drive can any of your abilities ever be developed in the slightest.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Within the same metric structure, there is a wide potential of variations in tempo, volume, tonal quality and intonation.",
+  "exam_id": "2023-09",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "Even while the metric framework stays fixed, there is ample room to vary speed, loudness, tone color and pitch.",
+    "trap": "ok"
+   },
+   {
+    "t": "Keeping the same metric structure forces tempo, volume, tone and intonation to remain essentially unchanged.",
+    "trap": "rev"
+   },
+   {
+    "t": "Within the same metric structure, variations in tempo and volume are possible only when the melody itself changes.",
+    "trap": "dist"
+   },
+   {
+    "t": "A shared metric structure offers wide potential for varying the lyrics, harmony and instrumentation of a piece.",
+    "trap": "off"
+   },
+   {
+    "t": "The metric structure can be altered freely, which is the only way to produce variety in tempo and tone.",
+    "trap": "over"
+   }
+  ]
+ },
+ {
+  "src": "Conversely, if this search time is long then the bee is more likely to give up collecting water.",
+  "exam_id": "2023-수능",
+  "type": "동의어",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "The longer the search time, the more water the bee ends up collecting.",
+    "trap": "rev"
+   },
+   {
+    "t": "When it takes a long time to find water, the bee tends to abandon the effort to gather it.",
+    "trap": "ok"
+   },
+   {
+    "t": "A long search time makes the bee search harder rather than stop collecting water.",
+    "trap": "dist"
+   },
+   {
+    "t": "If this search time is long, the bee is the only one likely to keep collecting water.",
+    "trap": "over"
+   },
+   {
+    "t": "Because search time is long, bees prefer collecting nectar to water.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "When a family needs a new barn or faces repair work that requires group labor, a barn-raising party is called.",
+  "exam_id": "2024-06",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "A barn-raising party is a repair work that a new family calls for group labor.",
+    "trap": "copy"
+   },
+   {
+    "t": "A family holds a barn-raising party only when it wants to avoid asking others for help.",
+    "trap": "rev"
+   },
+   {
+    "t": "Families throw a barn-raising party mainly to celebrate finishing a barn on their own.",
+    "trap": "off"
+   },
+   {
+    "t": "A household summons neighbors for a barn-raising party when it must build a new barn or do repairs that call for many hands.",
+    "trap": "ok"
+   },
+   {
+    "t": "A barn-raising party is called only if a family needs a new barn, not for repairs.",
+    "trap": "dist"
+   }
+  ]
+ },
+ {
+  "src": "Building confidence inevitably demands that we make friends with vulnerability because it is the only way to be without confidence for a while.",
+  "exam_id": "2024-09",
+  "type": "반대구조",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "To gain confidence, we must accept feeling vulnerable, since tolerating a period without confidence is unavoidable.",
+    "trap": "ok"
+   },
+   {
+    "t": "Building confidence requires us to avoid vulnerability so that we are never without confidence.",
+    "trap": "rev"
+   },
+   {
+    "t": "Making friends is the inevitable demand that lets us build confidence and vulnerability at once.",
+    "trap": "copy"
+   },
+   {
+    "t": "Confidence grows only for those willing to stay vulnerable permanently rather than briefly.",
+    "trap": "over"
+   },
+   {
+    "t": "Confidence comes mainly from choosing supportive friends who shield us from vulnerability.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Places, in a similar way, are treated as stable containers with clear boundaries.",
+  "exam_id": "2024-수능",
+  "type": "구체→추상",
+  "answer": 3,
+  "choices": [
+   {
+    "t": "Places are treated as containers whose boundaries stay unclear and shifting.",
+    "trap": "rev"
+   },
+   {
+    "t": "In a similar way, clear boundaries treat places as the containers that keep them stable.",
+    "trap": "copy"
+   },
+   {
+    "t": "Likewise, places are regarded as fixed, well-defined spaces set off by distinct edges.",
+    "trap": "ok"
+   },
+   {
+    "t": "Places are the only entities imagined as stable containers with sharp boundaries.",
+    "trap": "over"
+   },
+   {
+    "t": "Places are valued for the stable resources their boundaries manage to contain.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "After all, our capacity for making mistakes is well documented.",
+  "exam_id": "2025-06",
+  "type": "동의어",
+  "answer": 5,
+  "choices": [
+   {
+    "t": "In the end, our documents are what cause us to make so many mistakes.",
+    "trap": "copy"
+   },
+   {
+    "t": "After all, our ability to avoid mistakes has been thoroughly recorded.",
+    "trap": "rev"
+   },
+   {
+    "t": "Indeed, only well-documented people are known to be prone to error.",
+    "trap": "over"
+   },
+   {
+    "t": "After all, we tend to document our mistakes far better than our successes.",
+    "trap": "off"
+   },
+   {
+    "t": "Indeed, how prone we are to error is something amply recorded.",
+    "trap": "ok"
+   }
+  ]
+ },
+ {
+  "src": "Rousseau believed that people are not born but made, every individual a bundle of potentials whose realization requires the active involvement of other people.",
+  "exam_id": "2025-09",
+  "type": "반대구조",
+  "answer": 2,
+  "choices": [
+   {
+    "t": "Rousseau held that people are born complete, and other people merely reveal potentials already fixed at birth.",
+    "trap": "rev"
+   },
+   {
+    "t": "For Rousseau, a person is shaped rather than fixed at birth, and each one's possibilities are fulfilled only through others' active participation.",
+    "trap": "ok"
+   },
+   {
+    "t": "Rousseau believed every individual is a bundle of potentials born, not made, through other people.",
+    "trap": "copy"
+   },
+   {
+    "t": "Rousseau argued that realizing one's potential depends solely on the individual's own effort, not on others.",
+    "trap": "dist"
+   },
+   {
+    "t": "Rousseau claimed people are made by others only when they fail to develop on their own.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Engaging imaginatively with literature enables learners to shift the focus of their attention beyond the more mechanical aspects of the foreign language system.",
+  "exam_id": "2025-수능",
+  "type": "품사전환",
+  "answer": 4,
+  "choices": [
+   {
+    "t": "Imaginative engagement with literature keeps learners focused on the mechanical parts of the foreign language.",
+    "trap": "rev"
+   },
+   {
+    "t": "Literature enables the foreign language system to shift its mechanical focus onto imaginative learners.",
+    "trap": "copy"
+   },
+   {
+    "t": "Only literature read imaginatively can teach the mechanical aspects of a foreign language system.",
+    "trap": "over"
+   },
+   {
+    "t": "When learners engage their imagination with literature, they can move their attention past the merely mechanical features of the foreign language.",
+    "trap": "ok"
+   },
+   {
+    "t": "Reading literature imaginatively helps learners memorize the grammatical rules of the foreign language more quickly.",
+    "trap": "off"
+   }
+  ]
+ },
+ {
+  "src": "Interpretation is at the core of everything we do, think about, and feel.",
+  "exam_id": "2026-06",
+  "type": "동의어",
+  "answer": 1,
+  "choices": [
+   {
+    "t": "How we interpret things lies at the heart of all our actions, thoughts, and feelings.",
+    "trap": "ok"
+   },
+   {
+    "t": "What we do, think, and feel usually stays untouched by how we interpret it.",
+    "trap": "rev"
+   },
+   {
+    "t": "At its core, interpretation is the one thing we neither do, think about, nor feel.",
+    "trap": "dist"
+   },
+   {
+    "t": "Interpretation matters only for what we think, not for what we do or feel.",
+    "trap": "over"
+   },
+   {
+    "t": "Sharing our interpretations with others is central to everything we do and feel.",
+    "trap": "off"
+   }
+  ]
+ }
+]
