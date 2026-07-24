@@ -189,16 +189,17 @@ body {
 .skeleton { color: var(--muted); font-size: 9.5px; margin-top: 4px; }
 
 /* '해석하면 이런 내용' — 추상→구체 의미층 */
+/* '이 정도는 캐치'(2부 카드) — wb-catch와 동일 톤 통일 */
 .so-what {
-  margin-top: 8px; background: #fdf6e3;
-  border: 1px solid #efdca8; border-radius: 6px; padding: 8px 12px;
-  font-size: 10.5px; color: #5b4a1e; line-height: 1.55;
+  margin-top: 8px; background: var(--tint2);
+  border-left: 4px solid var(--navy2); border-radius: 6px; padding: 8px 12px;
+  font-size: 10.5px; color: #123c33; line-height: 1.55;
 }
 .so-what .sw-tag {
-  display: inline-block; background: var(--gold); color: #fff; font-weight: 800;
+  display: inline-block; background: var(--navy); color: #fff; font-weight: 800;
   font-size: 9px; padding: 1px 8px; border-radius: 3px; margin-right: 7px;
 }
-.sw-note { color: #b8a878; font-size: 8.5px; margin-left: 4px; }
+.sw-note { color: #6b8f83; font-size: 8.5px; margin-left: 4px; }
 
 /* 주체 → 행위 (누가 → 무엇을 한다) */
 .sv-line {
@@ -543,7 +544,7 @@ body {
 .sol.cut { background: var(--tint); } .sol.cut .sol-tag { background: var(--navy2); }
 .sol.wrong { background: var(--wrong-bg); } .sol.wrong .sol-tag { background: var(--wrong); }
 .sol.wrong .sol-why { color: var(--wrong); font-size: 9px; margin-top: 2px; }
-.sol.msg { background: var(--right-bg); } .sol.msg .sol-tag { background: var(--right); }
+.sol.msg { background: var(--tint2); border-left: 3px solid var(--navy2); } .sol.msg .sol-tag { background: var(--navy); }
 .sol.key { background: var(--goldbg); } .sol.key .sol-tag { background: var(--gold); }
 .sol.key .kp { margin: 2px 0; font-size: 9.3px; color: #5b4a1e; line-height: 1.45; }
 

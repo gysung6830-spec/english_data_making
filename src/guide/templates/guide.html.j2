@@ -84,7 +84,7 @@
     </div>
     {% if s %}
     {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
-    {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">필자가 하고싶은 말</span>{{ s.author_msg }}</div>{% endif %}
+    {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
     {% if s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
       {% for k in s.key_points %}<div class="kp">{{ k }}</div>{% endfor %}</div>{% endif %}
     {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
@@ -435,7 +435,7 @@
       </div>
     </div>
     {% if card.body.so_what %}
-    <div class="so-what"><span class="sw-tag">이런 내용</span>{{ card.body.so_what }}
+    <div class="so-what"><span class="sw-tag">이 정도는 캐치</span>{{ card.body.so_what }}
       <span class="sw-note">(이 문장만으로 도출)</span>
     </div>
     {% endif %}
