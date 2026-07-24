@@ -272,13 +272,19 @@ def _pick(item: Item, candidates: list[Passage],
           llm_refine: Callable[[str, Passage], float] | None,
           cap: int | None,
           allow_type_overlap: bool = False):
-    """cap(None=무제한)·유형겹침 규칙 하에 적합도 최고 지문을 고른다. 없으면 None."""
+    """적합도(fit) 최고 지문을 고른다. 없으면 None.
+
+    지문이 충분할 때(cap 有=지문수≥문항수)만 유형군 겹침·스포일러를 회피한다.
+    지문이 적을 때(cap None)는 그 회피가 오히려 '적합도 낮은 지문 강제 배정 →
+    구조 오류'를 부르므로, 오직 출제원리 적합도로만 최적 지문을 고른다(재사용 허용).
+    """
+    plentiful = cap is not None       # 지문수 ≥ 문항수 (재사용 상한이 걸린 경우)
     scored: list[tuple[float, str, str]] = []
     for p in candidates:
         if cap is not None and use_count.get(p.id, 0) >= cap:
             continue
-        # 같은 유형군(어법/주제/어휘/사실확인)이 한 지문에 겹치면 중복 문항 위험 → 회피
-        if not allow_type_overlap and \
+        # (지문 충분할 때만) 같은 유형군이 한 지문에 겹치면 중복 위험 → 회피
+        if plentiful and not allow_type_overlap and \
                 _family(item.type) in {_family(x) for x in type_on.get(p.id, set())}:
             continue
         prof = profiles[p.id]
@@ -288,10 +294,11 @@ def _pick(item: Item, candidates: list[Passage],
         if llm_refine is not None and 0.35 <= s <= 0.65:
             s = llm_refine(item.type, p)
             src = "llm"
-        # 재사용은 페널티(사용 횟수가 적은 지문을 우선 → 고르게 분산)
+        # 재사용은 소폭 페널티(같은 지문에만 몰리지 않게 고르게 분산)
         s -= 0.08 * use_count.get(p.id, 0)
-        # 스포일러 유형과 다른 유형이 한 지문에 섞이지 않게 페널티
-        s -= _spoiler_penalty(item.type, type_on.get(p.id, set()))
+        # (지문 충분할 때만) 스포일러 유형 겹침 페널티 — 적을 땐 적합도 우선
+        if plentiful:
+            s -= _spoiler_penalty(item.type, type_on.get(p.id, set()))
         scored.append((s, p.id, src))
     if not scored:
         return None

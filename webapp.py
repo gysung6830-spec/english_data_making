@@ -203,10 +203,9 @@ RESULT_HTML = """
     </table>
 
     {% if shortage %}
-    <div class=err style="background:#fff8e1;border-color:#ffe08a;color:#8a5a00">
-      ⚠ <b>지문 부족</b> — {{ shortage }}<br>
-      같은 지문이 여러 문항에 재사용되어 유사·중복 문항이 나올 수 있습니다.
-      서로 다른 지문을 더 올리면 품질이 크게 좋아집니다.
+    <div style="background:#eef4ff;border:1px solid #cfe0ff;color:#1e40af;
+                padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:10px">
+      ℹ️ {{ shortage }}
     </div>
     {% endif %}
 
@@ -386,7 +385,7 @@ def generate():
     import json
     logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
     shortage = next((l.get("msg") for l in res.logs
-                     if l.get("note") == "passage_shortage"), "")
+                     if l.get("note") == "passage_reuse"), "")
     school_name = next((s["name"] for s in load_schools_index()
                         if s["school_id"] == school), school)
     return render_template_string(

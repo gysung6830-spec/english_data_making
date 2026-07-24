@@ -63,14 +63,14 @@ def generate_mock(
                      max_workers=max(1, int(workers)))
     exam, logs = generate_all(blueprint, assignments, pmap, ctx)
 
-    # 지문 부족 경고: 서로 다른 지문 수가 문항 수보다 적으면 재사용으로 유사·중복 문항이 난다.
+    # 지문 안내(오류 아님): 지문이 문항보다 적으면 각 유형에 가장 적합한 지문으로 재사용 배정한다.
     n_items = len(blueprint.items)
     if 0 < len(passages) < n_items:
         logs.insert(0, {
-            "note": "passage_shortage", "passages": len(passages), "items": n_items,
-            "msg": (f"지문 {len(passages)}개로 {n_items}문항을 생성했습니다. 지문이 "
-                    f"여러 번 재사용되어 유사·중복 문항이 나올 수 있습니다. 서로 다른 "
-                    f"지문을 {n_items}개 이상 올리면 품질이 크게 향상됩니다.")})
+            "note": "passage_reuse", "passages": len(passages), "items": n_items,
+            "msg": (f"지문 {len(passages)}개로 {n_items}문항을 생성했습니다. 각 문항은 "
+                    f"유형(출제원리)에 가장 적합한 지문으로 배정했으며, 지문이 적어 일부는 "
+                    f"반복 사용되었습니다(정상). 지문을 더 올리면 다양성이 높아집니다.")})
 
     # 문항 재생성 헬퍼(선택형/서술형 공통)
     a_by = {(a.section, a.no): a for a in assignments}
