@@ -27,34 +27,27 @@ chapters:
       would appear to be in decline.
     src: 2024 고3 6월 20번
     cut: AI 비서가 점점 많아져서든 / 자율주행차가 등장해서든 / 의사결정자로서 인간 역할의 필요성은 / 줄어드는 것처럼 보인다.
-    how: the emergence of / the necessity of / in decline 같은 명사화(추상명사)를 동사로 풀어 구체화한다.
-      'the emergence of self-driving cars'=자율주행차가 생겨나는 것, 'in decline'=줄어들고 있다로 동사화해
-      읽는다.
+    how: 명사화(the emergence of/in decline) → 동사로 풀어 '생겨난다/줄어든다'로 읽음.
   - en: Changing political, social and religious landscapes will lead to the emergence
       of new cultures, and with them new culturtainment experiences.
     src: 2026 고3 11월 24번
     cut: 변화하는 정치·사회·종교 지형은 / 새로운 문화의 등장으로 이어질 것이다 / 그리고 그와 함께 새로운 컬처테인먼트 체험(의 등장)으로.
-    how: 명사화 'the emergence of new cultures'가 추상 지점. '새 문화가 생겨난다'로 동사 풀이해 구체화한다. 뒤
-      with them 이하는 lead to the emergence of가 공유·생략된 것으로 '새 체험의 등장으로도 이어진다'로 이어 읽는다.
+    how: 명사화(the emergence of new cultures) → '새 문화가 생겨난다'로 동사 풀이.
   - en: However, in the virtual world, we have a tendency to be less defensive, as
       there appears to be no physical threat to our well‑being.
     src: 2023 고3 6월 22번
     cut: 하지만 / 가상 세계에서는 / 우리는 덜 방어적이게 되는 경향이 있다 / 우리 안녕에 물리적 위협이 없어 보이기 때문에.
-    how: 추상명사 a tendency가 추상 지점. 뒤의 to부정사(to be less defensive)가 그 경향의 내용을 구체화하므로
-      'tendency=~하는 경향'으로 잡고 to부정사를 붙여 읽는다. as절은 이유.
+    how: 추상명사 a tendency → 뒤 to부정사(to be less defensive)로 내용 구체화.
   - en: Often overlooked, but just as important a stakeholder, is the consumer who
       plays a large role in the notion of the privacy paradox.
     src: 2022 고3 6월 22번
     cut: 종종 간과되지만 / 똑같이 중요한 이해당사자인 것은 / 바로 소비자다 / 프라이버시 역설이라는 개념에서 큰 역할을 하는.
-    how: 보어(Often overlooked ~ stakeholder)가 문두로 나온 도치. 원위치 'the consumer is often
-      overlooked'로 뼈대를 잡는다. 추상명사 the notion을 of the privacy paradox가 '프라이버시 역설'로 구체화(동격의
-      of).
+    how: 보어 문두 도치(원위치 the consumer is~) → the notion을 of구가 구체화.
   - en: One very important distinction is that all other animals use one call for
       one message as the general principle of communication.
     src: 2024 고3 9월 40번
     cut: 매우 중요한 한 가지 구별은 / 다른 모든 동물은 한 메시지에 한 신호를 쓴다는 것이다 / 의사소통의 일반 원리로서.
-    how: 추상명사 distinction이 추상 지점. 보어인 that절(that all other animals use one call ~)이
-      그 구별의 내용을 구체화하므로 '구별은 ~라는 것이다'로 that절을 동격 내용으로 붙여 읽는다.
+    how: 추상명사 distinction → 보어 that절을 동격 내용으로 붙여 구체화.
 - id: restate
   title: 재진술 신호로 구체화 — 옆에 쉬운 말이 있다
   point: 추상 문장 뒤엔 대개 쉬운 말이 따라온다. that is / in other words / namely, 그리고 콜론(:)이 그 신호다.
@@ -77,20 +70,17 @@ chapters:
     src: 2023 고3 6월 23번
     cut: 다시 말해 / 박물관이 경쟁 경제에서 살아남으려 애쓰면서 / 예산을 소비 가능한 부분에 우선 배정한다 / 즉 전시관의 인포테인먼트,
       카페·상점의 상품·서비스.
-    how: In other words가 앞 내용을 쉽게 다시 푸는 신호. 콜론(:) 뒤가 추상표현 'those parts that are consumable(소비
-      가능한 부분)'을 구체 예시로 재진술하는 지점으로 읽는다.
+    how: In other words + 콜론(:) → 뒤가 consumable parts를 구체 예시로 재진술.
   - en: Instead, they should concentrate attention on one subject after another, that
       is, in different periods of time.
     src: 2024 고3 11월 40번
     cut: 대신 / 그들은 한 주제에 차례차례 집중해야 한다 / 즉 / 서로 다른 시기로 나눠서.
-    how: that is(즉)가 앞 표현 'one subject after another'를 다시 풀어주는 재진술 신호. 뒤 'in different
-      periods of time'이 그 뜻을 구체화하므로 앞 구절과 같은 뜻으로 이어 읽는다.
+    how: that is(즉) → one subject after another를 뒤 구절로 다시 풀어 읽음.
   - en: Or someone may continue pouring money into a business that is clearly a bad
       idea in the market.
     src: 2022 고3 6월 37번
     cut: 혹은 / 누군가는 계속 돈을 쏟아부을 수도 있다 / 시장에서 명백히 나쁜 아이디어인 사업에.
-    how: 뒤 관계절(that is clearly a bad idea)이 앞 명사 'a business'가 어떤 사업인지 다시 말해 구체화하는
-      지점. 관계절을 앞 명사에 붙여 '~인 사업'으로 읽는다.
+    how: 관계절(that is clearly a bad idea) → 앞 명사 a business를 구체화해 붙임.
 - id: example
   title: 예시·나열로 구체화 — 상위 개념을 사례로 편다
   point: 추상적인 '상위 개념(biometrics, ecosystem services)' 뒤에 such as / like / for example
@@ -112,32 +102,27 @@ chapters:
       from potential fraudsters.
     src: 2022 고3 9월 39번
     cut: 비밀번호, 이중 키 인증, / 그리고 지문·홍채·음성 인식 같은 생체 인식은 / 모두 계정 정보를 잠재적 사기꾼에게서 숨기는 방법이다.
-    how: such as가 추상어 biometrics(생체 인식)를 지문·홍채·음성 인식이라는 예시로 구체화. such as 이하를 앞 명사의
-      예로 붙이고, 문장 뼈대는 'A, B, and C are all ways'로 잡는다.
+    how: 추상어 biometrics → such as 뒤 지문·홍채·음성 예시로 구체화.
   - en: Owners of forest lands have a market incentive to cut down trees rather than
       manage the forest for carbon capture, wildlife habitat, flood protection, and
       other ecosystem services.
     src: 2024 고3 11월 23번
     cut: 산림 소유자는 / 나무를 벨 시장 유인이 있다 / 숲을 관리하기보다 / 탄소 포집·야생동물 서식지·홍수 방지 등 생태계 서비스를 위해.
-    how: 나열된 carbon capture·wildlife habitat·flood protection이 뒤의 추상어 'other ecosystem
-      services(생태계 서비스)'를 예시로 구체화(A, B, C, and other ~ 패턴). rather than 이하는 대조 대상으로
-      처리.
+    how: 추상어 other ecosystem services → 앞 나열(A,B,C,and other~)이 예시.
   - en: Consequently, more consideration is being given to other ways to manage pests,
       such as incorporating greater resistance to pests into cultivars by breeding
       and using other biological control methods.
     src: 2022 고3 6월 38번
     cut: 따라서 / 해충을 관리하는 다른 방법들에 / 더 많은 고려가 주어지고 있다 / 예를 들어 육종으로 품종에 저항성을 더 넣기, 그리고
       다른 생물학적 방제법을 쓰기.
-    how: such as가 추상어 'other ways(다른 방법들)'의 실체를 두 개의 동명사구(incorporating ~ / using
-      ~)로 병렬 예시화. 두 -ing를 and로 나란히 놓고 앞 명사의 구체 내용으로 읽는다.
+    how: 추상어 other ways → such as 뒤 두 동명사구(-ing/-ing)를 예시로 병렬.
   - en: 'As a practical matter, one seldom requires complete autonomy from the start:
       when the agent has had little or no experience, it would have to act randomly
       unless the designer gave some assistance.'
     src: 2023 고3 6월 30번
     cut: 현실적으로 / 처음부터 완전한 자율성이 필요한 경우는 드물다 / 즉 에이전트가 경험이 거의 없을 때는 / 무작위로 행동해야 할 것이다
       / 설계자가 도움을 주지 않는 한.
-    how: 콜론(:) 뒤가 앞 추상 진술 'complete autonomy가 드문 이유'를 구체 상황(경험 없을 때 무작위 행동)으로 예시·부연하는
-      지점. when절/unless절을 조건으로 붙여 읽는다.
+    how: 콜론(:) 뒤 → complete autonomy가 드문 이유를 구체 상황으로 예시·부연.
 - id: contrast
   title: 대비로 구체화 — 'A가 아니라 B'로 정체를 잡는다
   point: 추상어는 '반대말'과 나란히 놓일 때 뜻이 선명해진다. not A but B / rather than / unlike 는 'B는 A의
@@ -159,28 +144,24 @@ chapters:
     src: 2023 고3 6월 34번
     cut: 이성이 지각은 오해를 부른다고 결론 내린 뒤에도 / 진실은 드러난다 / 도형을 지각하는 데서가 아니라 / 그것을 이성적으로 표상하는
       데서.
-    how: not A but B 대비 구문이 추상 지점. 진실의 위치를 'in the perception(지각)'이 아니라 'in its rational
-      representation(이성적 표상)'으로 대조하며 요지를 구체화. not~but~을 축으로 두 in구를 맞세워 읽는다.
+    how: not A but B → 진실을 perception이 아닌 rational representation에 둠.
   - en: Urban transport professionals have largely acquiesced to the view that automobile
       demand in cities needs to be managed rather than accommodated.
     src: 2022 고3 6월 30번
     cut: 도시 교통 전문가들은 / 대체로 그 견해를 받아들였다 / 도시의 자동차 수요는 관리되어야 한다는 / 수용되기보다.
-    how: rather than이 managed(관리) ↔ accommodated(수용)를 대비해 'needs to be managed'의 방향을
-      확정. the view that ~는 동격절로 '~라는 견해'로 붙여 읽는다.
+    how: rather than → managed↔accommodated 대비, the view that~는 동격절.
   - en: Recognizing how she felt about her failure, Ken, her teammate, approached
       her and said, "Jamie, even though you didn't set a personal best time today,
       your performances have improved dramatically.
     src: 2023 고3 11월 19번
     cut: 그녀가 자신의 실패를 어떻게 느끼는지 알아채고서 / 팀원 Ken이 다가와 말했다 / "Jamie, 오늘 개인 최고기록은 못 세웠지만
       / 네 경기력은 극적으로 향상됐어".
-    how: 문두 분사구(Recognizing ~)는 '~하고서'로 주절(Ken approached ~ and said)에 붙인다. even though
-      A ↔ B(향상) 양보 대비가 '경기력은 향상됐다'는 격려 요지를 구체화.
+    how: 문두 분사구(Recognizing~) → '~하고서' 주절에 붙이고, even though 양보 대비.
   - en: An important advantage of disclosure, as opposed to more aggressive forms
       of regulation, is its flexibility and respect for the operation of free markets.
     src: 2023 고3 11월 23번
     cut: 공개의 중요한 이점은 / 더 공격적인 규제와 대비하면 / 바로 그 유연성과 자유시장 작동에 대한 존중이다.
-    how: as opposed to 삽입구가 disclosure ↔ regulation을 대비. 삽입구를 콤마로 떼고 뼈대 'advantage
-      ~ is its flexibility and respect'를 이으면, 그 대조가 추상명사 advantage의 내용을 구체화.
+    how: as opposed to 삽입구 → disclosure↔regulation 대비, 콤마로 떼고 뼈대 이음.
 - id: metaphor
   title: 비유·은유 읽기 — 그림·비유를 실제 뜻으로 바꾼다
   point: 평가원은 추상 개념을 비유로 감춘다(그림자 vs 실체, 옷의 솔기 등). 비유의 '진짜 대상'을 대입해야 뜻이 열린다.
@@ -200,25 +181,21 @@ chapters:
       substance.
     src: 2025 수능 21번
     cut: 이론에만 의존한 사람들은 / 분명 그림자를 좇고 있었다 / 실체가 아니라.
-    how: hunt the shadow, not the substance가 비유 지점. '그림자=겉핥기 지식, 실체=알맹이'로 치환해 뜻을 구체화하고,
-      not the substance 대비로 비유의 방향을 잡는다.
+    how: hunt the shadow, not the substance → '그림자=겉핥기, 실체=알맹이'로 치환.
   - en: We aspire to seamless aesthetics by stitching the seams closely, pressing
       them flat and making sure they are hidden on the inside so that we wear clothing
       rather than pieces of fabric.
     src: 2025 고3 6월 42번
     cut: 우리는 이음매 없는 미학을 추구한다 / 솔기를 촘촘히 꿰매고 / 눌러 펴고 / 안쪽에 감춰서 / 천 조각이 아니라 옷을 입도록.
-    how: 바느질(seams/stitching)이 비유 지점. '이음매=기술·과정의 흔적'으로 읽어 그 흔적을 감춰 매끄럽게 완성한다는 뜻으로
-      구체화. clothing ↔ pieces of fabric 대비가 비유의 요점을 부각.
+    how: 바느질(seams/stitching) 비유 → '이음매=기술 흔적'을 감춰 매끄럽게로 구체화.
   - en: Overall this is a healthy growth sector of the entertainment industry, but
       one that by its very nature is delicate in the face of exploitation.
     src: 2026 고3 11월 24번
     cut: 전반적으로 이것은 / 오락 산업의 건강하게 성장하는 부문이다 / 하지만 / 본질상 착취 앞에서는 연약한 (부문이다).
-    how: healthy(건강한)·delicate(연약한)가 산업을 생명체에 빗댄 비유 지점. one=sector로 받고, healthy ↔
-      delicate 대비 비유가 그 부문의 성격을 구체화. by its very nature 삽입은 괄호처럼 처리.
+    how: healthy↔delicate 비유 → 산업을 생명체에 빗댐, by its nature 삽입은 괄호 처리.
   - en: The team consists of at least one robot and one human and is often called
       a mixed team because it is a mixture of human and robot agents.
     src: 2022 고3 6월 24번
     cut: 그 팀은 / 최소 로봇 하나와 인간 하나로 이루어진다 / 그래서 흔히 혼합 팀이라 불린다 / 왜냐하면 그것은 인간과 로봇 행위자의
       혼합체이기 때문이다.
-    how: 명명 'a mixed team(혼합 팀)'을 because 이하 'is a mixture of ~(A는 B다)'가 정의·은유로 구체화.
-      because절을 근거로 붙여 그 명칭의 뜻을 확정한다.
+    how: 명명 a mixed team → because 뒤 mixture of~ 정의로 명칭 뜻 확정.
