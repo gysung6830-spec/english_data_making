@@ -47,7 +47,7 @@ FORMULA = {
 BAND_TITLE = {
   "18":"목적","19":"심경","20":"주장","21":"함축의미","22":"요지","23":"주제","24":"제목",
   "31-34":"빈칸추론","35":"무관한 문장","36-37":"글의 순서","38-39":"문장 삽입","40":"요약문",
-  "41-45":"장문(제목·지칭)",
+  "41-45":"장문 제목(41)",
 }
 BAND_ORDER = ["18","19","20","21","22","23","24","31-34","35","36-37","38-39","40","41-45"]
 
@@ -90,7 +90,11 @@ def highlight(passage):
             out.append(esc(s))
     return " ".join(out), sorted(set(sig_all))
 
+# 다루는 문항 번호: 21~24 · 31~41 만
+ALLOWED = set(range(21, 25)) | set(range(31, 42))
+
 def select(bank, n):
+    bank = [r for r in bank if r.get("num") in ALLOWED]
     by = {}
     for r in bank:
         by.setdefault(r["band"], []).append(r)
