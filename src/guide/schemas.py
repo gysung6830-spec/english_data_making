@@ -179,7 +179,8 @@ class Diagram(BaseModel):
 class WorkExample(BaseModel):
     en: str                       # 기출 문장(원문)
     src: str = ""                 # 출처
-    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해 — 읽은 '결과')
+    how: str = ""                 # 어떻게 읽나(구조 파악·처리 '방법')
     ab: str = ""                  # A→B 단순화(뼈대 관계) 한 줄
 
 

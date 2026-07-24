@@ -484,6 +484,12 @@ body {
   background: #f7fbf9; border-radius: 6px; padding: 6px 10px; }
 .cut-tag { display: inline-block; background: #08382f; color: #fff; font-weight: 800;
   font-size: 8.5px; padding: 1px 8px; border-radius: 3px; margin-right: 7px; }
+/* 어떻게 읽나(읽는 방법) — 끊어읽기(결과)와 구분되는 골드 톤 */
+.wb-how { font-family: var(--f-body); font-size: 10.5px; color: #4a3b25; margin-top: 5px;
+  background: var(--goldbg); border-radius: 6px; padding: 6px 10px; }
+.how-tag { display: inline-block; background: var(--gold); color: #fff; font-weight: 800;
+  font-size: 8.5px; padding: 1px 8px; border-radius: 3px; margin-right: 7px; }
+.how-tag.infer { background: #6d4bb5; }
 .wb-note { color: var(--muted); font-size: 10px; margin: 10px 0; }
 :root { --goldbg: #fbf3e5; }
 
