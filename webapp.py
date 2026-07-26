@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, render
+from src import bridge, extract, pipeline, render
 from src.client import ClaudeClient
 from src.config import ROOT, OutputsCfg, load_config
 
@@ -117,6 +117,20 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
 
+      <label class=chk><input type=checkbox name=out_bridge value=1> 📗 기초 브릿지 교재 (문법 모르는 학생용 · 표지+요약+학습지)</label>
+
+      <div id=bridgebox style="display:none;background:#f0f7f2;border:1px solid #cfe6d8;border-radius:10px;padding:14px 16px;margin-top:10px">
+        <label style="margin-top:0">🎚️ 학습자 난이도
+          <span class=hint>(슬라이더를 옮기면 설명이 바뀝니다)</span>
+        </label>
+        <input type=range name=bridge_level id=blevel min=1 max=5 step=1 value=1 style="width:100%">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#6b7280;margin-top:2px">
+          <span>1 쉬움</span><span>2</span><span>3</span><span>4</span><span>5 어려움</span>
+        </div>
+        <div id=blevel_key style="font-weight:800;color:#1f7a48;margin-top:8px;font-size:15px"></div>
+        <div id=blevel_desc style="font-size:12.5px;color:#374151;margin-top:2px"></div>
+      </div>
+
       <label class=chk><input type=checkbox name=brand value=1 checked> 🖋️ 분석지에 '은아 T' 문구 넣기 <span class=hint>(직독직해 made by · 출제표 tip · 하단 저작권은 항상 유지)</span></label>
 
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
@@ -140,6 +154,13 @@ INDEX_HTML = """
  file.onchange=show;
  function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
  f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+ // 기초 브릿지 교재 — 난이도 슬라이더
+ const LV={{ levels_json|safe }};
+ const bchk=document.querySelector('input[name=out_bridge]'),bbox=document.getElementById('bridgebox'),
+       bl=document.getElementById('blevel'),bk=document.getElementById('blevel_key'),bd=document.getElementById('blevel_desc');
+ function upLv(){bk.textContent=bl.value+'단계 · '+LV[bl.value].key; bd.textContent=LV[bl.value].desc;}
+ function upBox(){bbox.style.display=bchk.checked?'block':'none';}
+ bchk.addEventListener('change',upBox); bl.addEventListener('input',upLv); upLv(); upBox();
 </script>
 </body></html>
 """
@@ -223,9 +244,18 @@ def login():
 # ---------------------------------------------------------------------------
 # 라우트
 # ---------------------------------------------------------------------------
+import json as _json
+
+
+def _levels_json() -> str:
+    return _json.dumps({str(k): {"key": v["key"], "desc": v["desc"]}
+                        for k, v in bridge.LEVELS.items()}, ensure_ascii=False)
+
+
 @app.route("/")
 def index():
-    return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
+    return render_template_string(INDEX_HTML, has_key=cfg.has_api_key,
+                                  levels_json=_levels_json())
 
 
 @app.route("/analyze", methods=["POST"], endpoint="analyze")
@@ -236,13 +266,19 @@ def analyze_route():
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
 
-    # 만들 자료 선택 (아무것도 안 고르면 분석지만)
+    # 만들 자료 선택
     which = OutputsCfg(
         analysis=bool(request.form.get("out_analysis")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
     )
-    if not (which.analysis or which.wordlist or which.quiz):
+    want_bridge = bool(request.form.get("out_bridge"))
+    try:
+        bridge_level = max(1, min(5, int(request.form.get("bridge_level", 1))))
+    except (TypeError, ValueError):
+        bridge_level = 1
+    # 아무것도 안 고르면 분석지만 (브릿지만 고른 경우는 존중)
+    if not (which.analysis or which.wordlist or which.quiz or want_bridge):
         which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
 
     # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
@@ -253,12 +289,14 @@ def analyze_route():
     custom_base = _safe_name(raw_name) if raw_name else ""
 
     if not files:
-        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
+        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key,
+                                      levels_json=_levels_json())
     if not mock and not key:
         # 키 없고 미리보기도 아님 → 안내
         html = INDEX_HTML.replace("<form id=f",
             "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요.</div><form id=f")
-        return render_template_string(html, has_key=cfg.has_api_key)
+        return render_template_string(html, has_key=cfg.has_api_key,
+                                      levels_json=_levels_json())
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
@@ -272,18 +310,47 @@ def analyze_route():
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
         try:
-            if mock:
-                reports = pipeline._mock_reports_for_pdf(cfg, tmp)
-            else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
-            fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
-            note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
+
+            fitems = []
+            n_pass = 0
+
+            # 분석지/어휘/시험지 (6섹션 분석)
+            if which.analysis or which.wordlist or which.quiz:
+                if mock:
+                    reports = pipeline._mock_reports_for_pdf(cfg, tmp)
+                else:
+                    reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
+                n_pass = len(reports)
+                recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
+                fitems += [{"label": r["label"], "out": r["path"].name} for r in recs]
+
+            # 기초 브릿지 교재 (난이도 맞춤)
+            if want_bridge:
+                lv_key = bridge.level_meta(bridge_level)["key"]
+                if mock:
+                    extractions = [None]
+                else:
+                    extractions = pipeline.build_extractions_for_pdf(client, cfg, tmp)
+                n_pass = max(n_pass, len(extractions))
+                for j, ex in enumerate(extractions, start=1):
+                    suffix = "" if len(extractions) == 1 else f"_{j}"
+                    if mock:
+                        gen = bridge.mock_gen(level=bridge_level)
+                        src = f"{f.filename} · 샘플 미리보기"
+                    else:
+                        gen = bridge.generate(client, cfg, ex, bridge_level)
+                        src = getattr(ex, "source", "") or f.filename
+                    out = OUTPUT_DIR / f"{stem}{suffix}_브릿지교재_{lv_key}.pdf"
+                    bridge.render_pdf(gen, out, bridge_level, source=src)
+                    fitems.append({"label": f"📗 브릿지 교재({bridge_level}·{lv_key})",
+                                   "out": out.name})
+
+            note = f" (지문 {n_pass}개)" if n_pass > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()

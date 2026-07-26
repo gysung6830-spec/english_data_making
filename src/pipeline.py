@@ -46,6 +46,21 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
     return build_reports_for_pdf(client, cfg, src)[0]
 
 
+def build_extractions_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list:
+    """6섹션 분석 없이 지문 추출만 (기초 브릿지 교재 생성용)."""
+    if extract.is_image(src):
+        pset = analyze.extract_passages_image(client, cfg, str(src))
+    else:
+        raw = extract.extract_passage_text(src)
+        if extract.looks_empty(raw):
+            raise ValueError(
+                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
+            )
+        pset = analyze.extract_passages(client, cfg, raw)
+    return list(pset.passages)
+
+
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
                    which=None, brand: str | None = None) -> list[dict]:
     """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성.
