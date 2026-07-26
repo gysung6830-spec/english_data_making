@@ -54,7 +54,7 @@ npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
 ```
 
 디자인 언어(청록/그린 강조, 라운드 배지, 번호 원형 섹션 헤더, 컬러 필 문법 카드,
-2단 끊어읽기 직독직해 표, 그린 헤더 zebra 단어표, 하단 저작권/페이지)는
+끊어읽기(영어 한 줄+한글 한 줄, / 구분), 그린 헤더 zebra 단어표, 하단 저작권/페이지)는
 `preview_pdf.js` 의 HTML/CSS 에 있고, 내용은 `build_v4.js` 와 **같은**
 `data.js` / `splitWorked` / `makeTip` 을 공유한다.
 

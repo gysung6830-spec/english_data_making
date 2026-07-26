@@ -5,7 +5,7 @@
 //   · 리프 그린 강조색(참고 교재 색 추출값 #209050 계열), 라운드 배지(일차·태그)
 //   · 번호 원형 배지 + 제목 + 회색 힌트로 섹션 헤더
 //   · 문법 설명은 컬러 필(핵심 주황/문법 보라/한 단계 위 골드) + 왼쪽 컬러 보더 카드
-//   · 끊어읽기 직독직해는 2단(영어 끊어읽기 | 우리말) 그린 헤더 표
+//   · 끊어읽기 직독직해는 영어 한 줄 + 한글 한 줄(/ 로 구분)로 합쳐서 표시
 //   · 단어 완전정복은 그린 헤더 + 얼룩(zebra) 표
 //   · 하단 저작권 + 페이지 번호
 //
@@ -101,15 +101,18 @@ function vocabTable(cat) {
   return `<table class="vtab"><thead><tr><th class="n">#</th><th>단어</th><th>뜻</th></tr></thead><tbody>${body}</tbody></table>`;
 }
 
-// 끊어읽기 직독직해 2단 표 (showKor=false 면 우리말 칸은 빈칸)
-function chunkTable(chunks, showKor) {
-  const rows = chunks.map(([en, kor], i) => `<tr class="${i % 2 ? 'z' : ''}">
-    <td class="cn">${i + 1}</td>
-    <td class="cen">${esc(en)}</td>
-    <td class="ckor">${showKor ? esc(kor) : '<span class="blankcell"></span>'}</td></tr>`).join('');
-  return `<table class="ctab"><thead><tr>
-    <th class="cn">#</th><th>영어 (끊어읽기)</th><th>우리말 (직독직해)</th>
-  </tr></thead><tbody>${rows}</tbody></table>`;
+// 끊어읽기 직독직해 — 영어 한 줄(/로 구분) + 한글 한 줄(/로 구분)
+// showKor=false 면 한글 줄은 빈칸(학생이 직접 작성).
+function chunkLines(chunks, showKor) {
+  const sep = ' <span class="sl">/</span> ';
+  const en = chunks.map((c) => esc(c[0])).join(sep);
+  const ko = chunks.map((c) => esc(c[1])).join(sep);
+  return `<div class="chbox">
+    <div class="chrow"><span class="chtag en">영어</span><span class="chtxt cen">${en}</span></div>
+    <div class="chrow"><span class="chtag ko">한글</span>${showKor
+      ? `<span class="chtxt ckor">${ko}</span>`
+      : '<span class="chblank"></span>'}</div>
+  </div>`;
 }
 
 function sentHead(s, idx) {
@@ -139,13 +142,13 @@ function tipCard(text) {
 
 function workedBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
-    ${chunkTable(s.chunks, true)}
+    ${chunkLines(s.chunks, true)}
     ${skeletonCard(s.steps)}
     ${catchCard(s.catch)}${tipCard(makeTip(s.chunks))}</div>`;
 }
 function practiceBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
-    ${chunkTable(s.chunks, false)}
+    ${chunkLines(s.chunks, false)}
     ${skeletonBlank()}${writeCard()}
     ${catchCard(s.catch)}${tipCard(makeTip(s.chunks))}</div>`;
 }
@@ -294,14 +297,19 @@ function css() {
     font-size:11px; font-weight:800; margin-right:8px; margin-top:1px; }
   .sen { font-weight:800; font-size:13px; }
   .stag { color:${C.sub}; font-size:10px; font-style:italic; margin-left:6px; align-self:center; }
-  .ctab { border:1px solid ${C.line}; margin:3px 0 8px; }
-  .ctab th { background:${C.greenHdr}; color:#fff; text-align:left; padding:5px 9px; font-weight:700; }
-  .ctab td { padding:5px 9px; border-top:1px solid ${C.line}; vertical-align:top; }
-  .ctab td.cn, .ctab th.cn { width:26px; text-align:center; color:${C.teal}; font-weight:700; }
-  .ctab td.cen { width:52%; font-weight:700; }
-  .ctab td.ckor { color:#333; }
-  .ctab tr.z td { background:${C.zebra}; }
-  .blankcell { display:block; min-height:13px; border-bottom:1px dashed #cbd5d1; }
+  /* 끊어읽기: 영어 한 줄 + 한글 한 줄 */
+  .chbox { border:1px solid ${C.line}; border-left:4px solid ${C.green}; border-radius:6px;
+    padding:8px 12px; margin:4px 0 9px; background:${C.zebra}; }
+  .chrow { display:flex; align-items:baseline; margin:4px 0; }
+  .chtag { flex:none; font-size:9px; font-weight:800; color:#fff; border-radius:9px;
+    padding:1px 8px; margin-right:9px; line-height:1.5; }
+  .chtag.en { background:${C.green}; }
+  .chtag.ko { background:#8a8f98; }
+  .chtxt { flex:1; }
+  .chtxt.cen { font-weight:700; font-size:13px; }
+  .chtxt.ckor { font-size:12px; color:#333; }
+  .sl { color:${C.green}; font-weight:800; padding:0 3px; }
+  .chblank { flex:1; border-bottom:1px dashed #c3ccc6; height:15px; }
 
   /* 콜아웃 */
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
