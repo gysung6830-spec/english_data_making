@@ -75,9 +75,13 @@ function validateData(categories) {
       warnings.push(`[${tag}] title 에 순서 번호 '${expected}' 가 없음 — 목차 재배열 시 번호 갱신 필요(명세 §2)`);
     }
 
-    // worked.length === 2 (핵심 불변식)
-    if (!Array.isArray(cat.worked) || cat.worked.length !== 2) {
-      errors.push(`[${tag}] worked.length === 2 여야 함 (현재 ${Array.isArray(cat.worked) ? cat.worked.length : 'N/A'})`);
+    // worked 는 최소 2개 이상이어야 함. build_v4 가 앞 2개만 "같이 풀어보기" 로 쓰고
+    // 나머지는 steps 를 떼서 practice 로 옮기므로, 최종 산출물의 worked 는 항상 2개가 된다
+    // (명세 §4 불변식은 빌드 결과 기준).
+    if (!Array.isArray(cat.worked) || cat.worked.length < 2) {
+      errors.push(`[${tag}] worked 는 2개 이상이어야 함 (현재 ${Array.isArray(cat.worked) ? cat.worked.length : 'N/A'})`);
+    } else if (cat.worked.length > 2) {
+      warnings.push(`[${tag}] worked ${cat.worked.length}개 중 앞 2개만 '같이 풀어보기', 나머지 ${cat.worked.length - 2}개는 '혼자 풀어보기'로 이동됨`);
     }
     (cat.worked || []).forEach((s, i) =>
       errors.push(...checkSentence(s, `[${tag}] worked[${i}]`, { requireSteps: true })));
