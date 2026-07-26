@@ -185,7 +185,7 @@
    },
    {
     "t": "becomes deeply associated with one’s own enjoyment",
-    "trap": "copy"
+    "trap": "off"
    }
   ],
   "answer_transform": "동의어",
@@ -437,7 +437,7 @@
    },
    {
     "t": "our ancestors maintained a different frame of time",
-    "trap": "copy"
+    "trap": "off"
    },
    {
     "t": "we face the facts but then deny our responsibility",
@@ -825,7 +825,7 @@
    },
    {
     "t": "who has the authority to make decisions about territories",
-    "trap": "copy"
+    "trap": "off"
    }
   ],
   "answer_transform": "동의어",
