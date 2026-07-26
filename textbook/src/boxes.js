@@ -159,7 +159,7 @@ function skeletonBoxBlank() {
 function answerWriteBox() {
   return [
     makeBox(S.WRITE.bg, S.WRITE.border, [
-      boxLabel('✏️ 내 해석 써보기', S.WRITE.border),
+      boxLabel('✏️ 이 문장이 무슨 내용인 것 같아?', S.WRITE.border),
       underlineRow(220),
       underlineRow(40),
     ]),

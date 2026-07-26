@@ -131,7 +131,7 @@ function skeletonBlank() {
     + '<div class="sk">괄호(수식어):</div><div class="ul"></div>');
 }
 function writeCard() {
-  return `<div class="gcard plus"><span class="pill plus">내 해석 써보기</span>
+  return `<div class="gcard plus"><span class="pill plus">이 문장이 무슨 내용인 것 같아?</span>
     <div class="gbody"><div class="ul"></div><div class="ul"></div></div></div>`;
 }
 function catchCard(text) {
