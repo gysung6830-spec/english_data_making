@@ -114,8 +114,17 @@ function tipCard(text) {
   return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
 }
 
+// 문장별 어휘 리스트 — 끊어읽기 팁 바로 앞에 표시(그 문장에 나온 단어·뜻).
+function vocabInline(vocab) {
+  if (!vocab || !vocab.length) return '';
+  const items = vocab.map(([w, m]) =>
+    `<span class="vw">${esc(w)}</span> <span class="vm">${esc(m)}</span>`).join('<span class="vd">·</span>');
+  return `<div class="vinline"><span class="vic">📘 어휘</span>${items}</div>`;
+}
+
 function workedBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
+    ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, true)}
     ${skeletonCard(s.steps)}
@@ -123,6 +132,7 @@ function workedBlock(s, idx) {
 }
 function practiceBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
+    ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, false)}
     ${skeletonBlank()}${writeCard()}</div>`;
@@ -250,6 +260,12 @@ function css() {
     font-size:11px; font-weight:800; margin-right:8px; margin-top:1px; }
   .sen { font-weight:800; font-size:13px; }
   .stag { color:${C.sub}; font-size:10px; font-style:italic; margin-left:6px; align-self:center; }
+  .vinline { background:#fff; border:1px solid ${C.greenLine}; border-left:4px solid ${C.green};
+    border-radius:6px; padding:7px 11px; margin:4px 0 7px; font-size:10.6px; }
+  .vinline .vic { font-weight:800; color:${C.tealDark}; margin-right:9px; }
+  .vw { font-weight:700; }
+  .vm { color:#555; }
+  .vd { color:#c3ccc6; margin:0 8px; }
   .chbox { border:1px solid ${C.line}; border-left:4px solid ${C.green}; border-radius:6px;
     padding:8px 12px; margin:4px 0 9px; background:${C.zebra}; }
   .chrow { display:flex; align-items:baseline; margin:4px 0; }
