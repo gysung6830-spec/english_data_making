@@ -48,6 +48,14 @@ def q_card(qn, typ, ask, src, choices, cite):
             f'{cite_html}</div>'
             f'<div class="src">{esc(src)}</div><ul class="ch">{lis}</ul></div>')
 
+def hl(text, mark, ok):
+    """선지 안 '결정적 단어'를 형광펜 처리. 정답=amber(hok), 오답=pink(htrap)."""
+    if not mark or mark not in text:
+        return esc(text)
+    i = text.index(mark)
+    cls = "hok" if ok else "htrap"
+    return esc(text[:i]) + f'<mark class="{cls}">' + esc(mark) + "</mark>" + esc(text[i+len(mark):])
+
 def a_card(qn, typ, a, choices, src, ex=None, extra=""):
     exrows = (ex or {}).get("rows") or []
     rows = ""
@@ -56,10 +64,12 @@ def a_card(qn, typ, a, choices, src, ex=None, extra=""):
         okcls = ' class="ok"' if t == "ok" else ""
         ko = esc(exrows[j].get("ko","")) if j < len(exrows) else ""
         why = esc(exrows[j].get("why","")) if j < len(exrows) else ""
+        mark = exrows[j].get("mark","") if j < len(exrows) else ""
+        cetext = hl(c.get("t",""), mark, t == "ok")
         detail = ((f'<div class="rko">{ko}</div>' if ko else "")
                   + (f'<div class="rwhy">{"✓ " if t=="ok" else "✗ "}{why}</div>' if why else ""))
         rows += (f'<tr{okcls}><td class="oc">{CIRCLED[j]}</td>'
-                 f'<td><span class="ce">{esc(c.get("t",""))}</span> <span class="badge {cls}">{nm}</span>'
+                 f'<td><span class="ce">{cetext}</span> <span class="badge {cls}">{nm}</span>'
                  f'{detail}</td></tr>')
     srcko = (ex or {}).get("src_ko", "")
     srcline = f'<div class="src-ko">원문 해석 — {esc(srcko)}</div>' if srcko else ""
@@ -139,6 +149,8 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .ak table{ width:100%; border-collapse:collapse; margin-top:3px; }
 .ak td{ padding:3px 6px; border-bottom:1px solid var(--line); font-size:9px; vertical-align:top; } .ak .oc{ font-weight:800; width:18px; } .ak tr.ok{ background:#eaf5f0; }
 .ak .ce{ color:#3a3f45; }
+.ak .ce mark.htrap{ background:#ffd7d2; color:#a5342d; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #e6a49d; }
+.ak .ce mark.hok{ background:var(--amber); color:#7a5c00; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #e0b94a; }
 .ak .src-ko{ font-size:8.9px; font-weight:700; color:#12543d; background:#eef4f1; border-radius:4px; padding:3px 8px; margin:3px 0 4px; }
 .ak .rko{ font-size:8.6px; color:#4a5560; margin-top:2px; }
 .ak .rwhy{ font-size:8.6px; color:#7a1f19; margin-top:1px; } .ak tr.ok .rwhy{ color:#12543d; }
