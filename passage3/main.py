@@ -38,7 +38,7 @@ CALIB = 0.90                          # measure ↔ 실제 PDF 오차 흡수(넘
 FIT_STEPS = ["", "compact", "compact2"]
 
 # 모든 페이지 하단 가운데에 들어가는 고정 저작권 문구
-FOOTER_TEXT = "본 자료는 은아T영어연구소에서 제작되었습니다"
+FOOTER_TEXT = "본 자료는 김은아영어연구소에서 제작되었습니다"
 _FOOTER_FONT = (
     "'NanumMyeongjo','Nanum Myeongjo','나눔명조','Noto Serif CJK KR',serif"
 )
