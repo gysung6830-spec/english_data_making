@@ -73,8 +73,9 @@ function fontFaces() {
 }
 
 // ── 조각 빌더 ─────────────────────────────────────────
-function secHead(num, title, hint, tone = 'teal') {
-  return `<div class="sechead">
+// brk=true 면 이 섹션 헤더가 새 페이지에서 시작한다.
+function secHead(num, title, hint, tone = 'teal', brk = false) {
+  return `<div class="sechead${brk ? ' brk' : ''}">
     <span class="secnum ${tone}">${num}</span>
     <span class="sectitle">${esc(title)}</span>
     ${hint ? `<span class="sechint">${esc(hint)}</span>` : ''}
@@ -183,10 +184,10 @@ function chapterHtml(cat, chIndex) {
   h += secHead(CIRCLED[3], '단어 완전정복', '지문에 나온 단어 · 뜻', 'green');
   h += vocabTable(cat);
 
-  h += secHead(CIRCLED[4], '같이 풀어보기', '쌤이랑 뼈대까지 같이 풀어보자', 'teal');
+  h += secHead(CIRCLED[4], '같이 풀어보기', '쌤이랑 뼈대까지 같이 풀어보자', 'teal', true);
   h += cat.worked.map((s, i) => workedBlock(s, i + 1)).join('');
 
-  h += secHead(CIRCLED[5], '혼자 풀어보기', '직접 끊고, 뼈대 찾고, 해석 써보기 · 정답은 맨 뒤', 'key');
+  h += secHead(CIRCLED[5], '혼자 풀어보기', '직접 끊고, 뼈대 찾고, 해석 써보기 · 정답은 맨 뒤', 'key', true);
   h += cat.practice.map((s, i) => practiceBlock(s, i + 1)).join('');
 
   h += `</section>`;
@@ -256,6 +257,7 @@ function css() {
 
   /* 섹션 헤더 */
   .sechead { display:flex; align-items:center; margin:20px 0 9px; }
+  .sechead.brk { break-before: page; page-break-before: always; margin-top: 2px; }
   .secnum { display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
     border-radius:50%; color:#fff; font-size:12px; font-weight:800; margin-right:8px; }
   .secnum.teal{background:${C.teal};} .secnum.green{background:${C.green};} .secnum.gram{background:${C.gram};} .secnum.key{background:${C.key};}

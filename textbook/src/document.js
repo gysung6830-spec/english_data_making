@@ -94,8 +94,11 @@ function renderPractice(w, idx) {
 // ── 챕터 ─────────────────────────────────────────────
 function chapterParagraphs(cat) {
   const out = [...introSection(cat)];
+  // 같이 풀어보기 · 혼자 풀어보기는 각각 새 페이지에서 시작
+  out.push(B.pageBreak());
   out.push(B.h2('같이 풀어보기'));
   cat.worked.forEach((w) => out.push(...renderWorked(w)));
+  out.push(B.pageBreak());
   out.push(B.h2('혼자 풀어보기 (연습문제)'));
   cat.practice.forEach((w, i) => out.push(...renderPractice(w, i)));
   out.push(B.pageBreak());
