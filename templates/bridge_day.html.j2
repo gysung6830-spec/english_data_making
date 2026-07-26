@@ -1,0 +1,232 @@
+<meta charset="utf-8">
+<style>
+/* ============================================================
+   중등 기초 브릿지 학습지 (WeasyPrint 인쇄용) · 일차별 템플릿
+   대상: 중등 기초가 안 된 고1 / 2학기 내신 대비
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 11mm 11mm 14mm 11mm;
+  @bottom-center {
+    content: "ⓒ2026.김은아영어연구소.All rights reserved   ·   " counter(page) " / " counter(pages);
+    font-family: "NanumGothic","Malgun Gothic",sans-serif;
+    font-size: 8px; color: #9aa0a6;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  font-family: "NanumGothic","Nanum Gothic","Malgun Gothic",sans-serif;
+  color: #23272e; font-size: 10.3px; line-height: 1.5; margin: 0;
+}
+:root {
+  --green:#2f9e5f; --green-d:#1f7a48; --green-bg:#eef7f1;
+  --teal:#2f877e; --teal-bg:#e7f3f1;
+  --amber:#cf8a2a; --amber-bg:#f9f3e7;
+  --purple:#6a54b3; --purple-bg:#f1eefa;
+  --red:#cd5049;
+  --muted:#6b7280; --line:#e2e6ea;
+}
+
+/* ---------- 문서 헤더 ---------- */
+.doc-header{ border-bottom:3px solid var(--green-d); padding-bottom:7px; margin-bottom:11px; }
+.day-badge{ display:inline-block; background:var(--green-d); color:#fff;
+  font-size:12px; font-weight:800; padding:3px 12px; border-radius:20px; margin-bottom:5px; }
+.doc-badge.sub{ display:inline-block; background:#fff; color:var(--green-d); border:1.5px solid var(--green-d);
+  font-size:10px; font-weight:800; padding:2px 9px; border-radius:5px; margin-left:5px; }
+.doc-title{ font-size:17px; font-weight:800; margin:3px 0 2px; }
+.doc-source{ font-size:9.5px; color:var(--muted); }
+.doc-source b{ color:#374151; }
+
+/* ---------- 오늘의 목표 문법 배너 ---------- */
+.goal{ margin:0 0 13px; background:linear-gradient(0deg,#fdf6ea,#fdf6ea); border:1.5px solid #ecd9b6;
+  border-radius:9px; padding:9px 13px; display:flex; align-items:center; gap:10px; }
+.goal-ico{ font-size:15px; }
+.goal-lbl{ display:inline-block; background:var(--amber); color:#fff; font-size:9px; font-weight:800;
+  padding:2px 8px; border-radius:9px; white-space:nowrap; }
+.goal-txt{ font-size:11px; font-weight:800; color:#7a4a12; }
+.goal-txt small{ display:block; font-size:8.8px; font-weight:700; color:#a06a2a; margin-top:1px; }
+
+/* ---------- 섹션 공통 ---------- */
+.section{ margin:0 0 15px; }
+.sec-head{ display:flex; align-items:center; gap:7px; margin-bottom:8px; }
+.sec-num{ display:inline-flex; align-items:center; justify-content:center;
+  width:21px; height:21px; border-radius:50%; color:#fff; font-size:11px; font-weight:800; flex:none; }
+.sec-title{ font-size:14px; font-weight:800; }
+.sec-sub{ font-size:9.5px; color:var(--muted); font-weight:700; margin-left:2px; }
+.s-read .sec-num{ background:var(--green); } .s-read .sec-title{ color:var(--green-d); }
+.s-voc  .sec-num{ background:var(--green); } .s-voc  .sec-title{ color:var(--green-d); }
+.s-gram .sec-num{ background:var(--purple); } .s-gram .sec-title{ color:var(--purple); }
+.s-lit  .sec-num{ background:var(--teal); }  .s-lit  .sec-title{ color:var(--teal); }
+.s-quiz .sec-num{ background:var(--amber); } .s-quiz .sec-title{ color:var(--amber); }
+.page-break{ break-before:page; }
+.avoid{ break-inside:avoid; }
+
+/* ---------- ① 지문 원문 ---------- */
+.passage-box{ background:var(--green-bg); border:1px solid #cfe6d8; border-radius:8px; padding:11px 14px; }
+.p-line{ margin:0 0 6px; padding-left:22px; text-indent:-22px; line-height:1.6; }
+.p-line:last-child{ margin-bottom:0; }
+.p-no{ display:inline-block; width:16px; font-weight:800; color:var(--green-d); }
+.p-part{ font-weight:800; color:var(--green-d); font-size:11px; letter-spacing:.3px; }
+
+/* ---------- ② 단어 ---------- */
+table.voc{ width:100%; border-collapse:collapse; }
+table.voc th{ background:var(--green); color:#fff; font-size:9.5px; font-weight:700; padding:4px 7px; text-align:left; }
+table.voc td{ padding:3.5px 7px; border-bottom:1px solid var(--line); vertical-align:top; }
+table.voc tbody tr:nth-child(even) td{ background:var(--green-bg); }
+.v-no{ width:20px; text-align:center; color:var(--muted); font-weight:800; }
+.v-en{ width:120px; font-weight:800; color:#111827; }
+.v-pron{ width:96px; color:var(--teal); font-size:9.3px; }
+.v-pos{ width:44px; color:var(--purple); font-size:9px; font-weight:700; }
+.v-ko{ }
+.voc-tip{ margin-top:6px; font-size:9.3px; color:var(--muted); background:#fbfbfb; border-left:3px solid var(--green); padding:5px 9px; border-radius:0 5px 5px 0; }
+
+/* ---------- ③ 문법 ---------- */
+.gram-card{ border:1px solid var(--purple-bg); border-left:4px solid var(--purple); border-radius:0 7px 7px 0;
+  padding:9px 12px; margin-bottom:10px; break-inside:avoid; }
+.gram-card.core{ border-left-width:5px; background:#faf9fe; }
+.gram-card.up{ border-left-color:var(--amber); }
+.g-tag{ display:inline-block; background:var(--purple); color:#fff; font-size:9px; font-weight:800;
+  padding:1px 8px; border-radius:9px; margin-right:6px; }
+.gram-card.core .g-tag{ background:var(--red); }
+.gram-card.up .g-tag{ background:var(--amber); }
+.g-title{ font-weight:800; font-size:11.5px; }
+.g-rule{ margin:5px 0 6px; font-size:10px; line-height:1.6; }
+.g-rule b{ background:#f1eefa; padding:0 3px; border-radius:3px; }
+.gram-card.core .g-rule b{ background:#fdeceb; }
+.gram-card.up .g-rule b{ background:#f9f3e7; }
+.g-ex{ background:#faf9fd; border:1px dashed #d6cdf0; border-radius:6px; padding:6px 10px; font-size:9.7px; line-height:1.7; }
+.gram-card.core .g-ex{ background:#fdf7f6; border-color:#eec6c3; }
+.gram-card.up .g-ex{ background:#fdfaf3; border-color:#ecd9b6; }
+.g-ex .en{ font-weight:700; color:#1f2937; }
+.g-ex .arrow{ color:var(--purple); font-weight:800; padding:0 4px; }
+.gram-card.core .g-ex .arrow{ color:var(--red); }
+.gram-card.up .g-ex .arrow{ color:var(--amber); }
+.g-ex .ko{ color:#374151; }
+.hl{ background:#fff3cd; font-weight:800; padding:0 2px; border-radius:3px; }
+
+/* ---------- ④ 끊어읽기 직독직해 ---------- */
+table.lit{ width:100%; border-collapse:collapse; table-layout:fixed; }
+table.lit th{ background:var(--teal); color:#fff; font-size:9.5px; font-weight:700; padding:4px 8px; text-align:left; width:50%; }
+table.lit td{ border:1px solid var(--line); padding:6px 9px; vertical-align:top; width:50%; }
+.lit-row td{ border-bottom:1.5px solid #cfe3e0; }
+.l-snum{ display:inline-block; background:var(--teal); color:#fff; font-size:8.5px; font-weight:800;
+  width:15px; height:15px; line-height:15px; text-align:center; border-radius:50%; margin-right:5px; }
+.l-en{ background:#fff; line-height:1.7; font-size:10.3px; }
+.l-ko{ background:#fbfdfc; line-height:1.7; font-size:10.3px; }
+.slash{ color:#b9c6c3; font-weight:800; padding:0 4px; }
+
+/* ---------- ⑤ 연습문제 ---------- */
+.q-block{ margin-bottom:12px; break-inside:avoid; }
+.q-h{ font-weight:800; font-size:11px; color:var(--amber); margin-bottom:5px; }
+.q-h .q-badge{ display:inline-block; background:var(--amber); color:#fff; font-size:9px; font-weight:800;
+  padding:1px 7px; border-radius:8px; margin-right:5px; }
+table.q{ width:100%; border-collapse:collapse; }
+table.q td{ padding:4px 7px; border-bottom:1px solid var(--line); vertical-align:middle; }
+.q-num{ width:20px; color:var(--muted); font-weight:800; text-align:center; }
+.q-word{ width:135px; font-weight:700; }
+.q-blank{ border-bottom:1px solid #9aa0a6; }
+.q-line{ margin:0 0 9px; line-height:1.9; }
+.q-line .kr{ color:#374151; }
+.q-fill{ display:inline-block; min-width:80px; border-bottom:1px solid #333; text-align:center; }
+.q-fill.lg{ min-width:150px; }
+.q-write{ display:block; border-bottom:1px solid #bbb; min-height:17px; margin-top:5px; }
+
+/* ---------- 정답 ---------- */
+.answer{ background:#f6f8f7; border:1px solid var(--line); border-radius:8px; padding:11px 14px; }
+.ans-title{ display:inline-block; background:#111827; color:#fff; font-size:11px; font-weight:800;
+  padding:2px 10px; border-radius:5px; margin-bottom:8px; }
+.ans-block{ margin-bottom:7px; font-size:9.6px; line-height:1.7; }
+.ans-block b{ color:var(--green-d); }
+
+/* ---------- 하단 ---------- */
+.footer-note{ margin-top:12px; padding-top:7px; border-top:1px solid var(--line);
+  font-size:8.3px; color:var(--muted); text-align:center; }
+</style>
+
+{%- macro slashed(text) -%}
+{{ text.replace(' / ', '§SL§') | e | replace('§SL§', '<span class="slash">/</span>') | safe }}
+{%- endmacro -%}
+
+<!-- ===================== 헤더 ===================== -->
+<div class="doc-header">
+  <span class="day-badge">{{ d.day_no }}일차</span>
+  <span class="doc-badge sub">중등 기초 브릿지</span>
+  <div class="doc-title">{{ d.title }}</div>
+  <div class="doc-source">2022 개정 &nbsp;<b>천재(강상구) 공통영어2</b> &nbsp;|&nbsp; Lesson 1 · {{ d.range_label }} &nbsp;|&nbsp; 고1 2학기 내신 대비</div>
+</div>
+
+<!-- ===================== 오늘의 목표 문법 ===================== -->
+<div class="goal">
+  <span class="goal-ico">🎯</span>
+  <span class="goal-lbl">오늘의 목표</span>
+  <span class="goal-txt">{{ d.goal_grammar }}<small>{{ d.goal_sub }}</small></span>
+</div>
+
+<!-- ===================== ① 지문 원문 ===================== -->
+<div class="section s-read">
+  <div class="sec-head"><span class="sec-num">1</span><span class="sec-title">오늘 배울 지문</span><span class="sec-sub">먼저 소리 내어 한 번 읽어 보기 (몰라도 OK)</span></div>
+  <div class="passage-box">
+    {%- if d.part_heading %}<div class="p-line"><span class="p-part">{{ d.part_heading }}</span></div>{% endif %}
+    {%- for ln in d.passage %}
+    <div class="p-line"><span class="p-no">{{ ln.no }}</span>{{ ln.en }}</div>
+    {%- endfor %}
+  </div>
+</div>
+
+<!-- ===================== ② 단어 완전정복 ===================== -->
+<div class="section s-voc">
+  <div class="sec-head"><span class="sec-num">2</span><span class="sec-title">단어 완전정복</span><span class="sec-sub">지문에 나온 단어 · 발음은 참고용</span></div>
+  <table class="voc">
+    <thead><tr><th class="v-no">#</th><th class="v-en">단어</th><th class="v-pron">발음(참고)</th><th class="v-pos">품사</th><th class="v-ko">뜻</th></tr></thead>
+    <tbody>
+      {%- for w in d.vocab %}
+      <tr><td class="v-no">{{ loop.index }}</td><td class="v-en">{{ w.en }}</td><td class="v-pron">{{ w.pron }}</td><td class="v-pos">{{ w.pos }}</td><td class="v-ko">{{ w.ko }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+  <div class="voc-tip">{{ d.vocab_tip | default('※ 발음은 참고용 한글 표기예요. 단어는 &lsquo;영어→뜻&rsquo;, &lsquo;뜻→영어&rsquo; 양방향으로 외우면 시험에 강해요.') | safe }}</div>
+</div>
+
+<!-- ===================== ③ 오늘의 기초 문법 ===================== -->
+<div class="section s-gram page-break">
+  <div class="sec-head"><span class="sec-num">3</span><span class="sec-title">오늘의 기초 문법</span><span class="sec-sub">중학교 문법부터 밑바닥까지</span></div>
+  {%- for g in d.grammar %}
+  <div class="gram-card {{ g.level }}">
+    <div><span class="g-tag">{{ g.tag }}</span><span class="g-title">{{ g.title }}</span></div>
+    <div class="g-rule">{{ g.rule | safe }}</div>
+    <div class="g-ex">
+      {%- for ex in g.examples %}
+      <span class="en">{{ ex.en | safe }}</span><span class="arrow">→</span><span class="ko">{{ ex.ko | safe }}</span>{% if not loop.last %}<br>{% endif %}
+      {%- endfor %}
+    </div>
+  </div>
+  {%- endfor %}
+</div>
+
+<!-- ===================== ④ 끊어읽기 직독직해 ===================== -->
+<div class="section s-lit page-break">
+  <div class="sec-head"><span class="sec-num">4</span><span class="sec-title">끊어읽기 직독직해</span><span class="sec-sub">/ 에서 끊어 읽고, 왼→오 순서대로 해석</span></div>
+  <table class="lit">
+    <thead><tr><th>영어 (끊어읽기)</th><th>우리말 (직독직해)</th></tr></thead>
+    <tbody>
+      {%- for s in d.literal %}
+      <tr class="lit-row">
+        <td class="l-en"><span class="l-snum">{{ s.no }}</span>{{ slashed(s.en) }}</td>
+        <td class="l-ko">{{ slashed(s.ko) }}</td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== ⑤ 연습문제 ===================== -->
+<div class="section s-quiz page-break">
+  <div class="sec-head"><span class="sec-num">5</span><span class="sec-title">연습문제</span><span class="sec-sub">배운 걸 바로 확인 · 정답은 맨 뒤</span></div>
+  {{ d.quiz_html | safe }}
+  <div class="answer avoid">
+    <div class="ans-title">정답 &amp; 해설</div>
+    {{ d.answer_html | safe }}
+  </div>
+</div>
+
+<div class="footer-note">중등 기초 브릿지 학습지 · {{ d.day_no }}일차 · {{ d.title }} &nbsp;|&nbsp; 지문 출처: 2022 개정 천재(강상구) 공통영어2 &nbsp;|&nbsp; ⓒ2026.김은아영어연구소.All rights reserved</div>
