@@ -2518,4 +2518,198 @@ const categories = [
   }
 ];
 
+// ────────────────────────────────────────────────────────────────
+// 2024년 9월 평가원 모의평가(고3) WORKBOOK 0 추가 연습문제
+//   각 챕터의 '혼자 풀어보기(practice)'를 8문제로 균일화하기 위한 보강분.
+//   src 는 "9월 N" 으로 표기해 2023 수능(② 이후 챕터)과 출처를 구분한다.
+//   기존 데이터는 건드리지 않고 아래에서 practice 뒤에 이어 붙인다.
+// ────────────────────────────────────────────────────────────────
+const MORE = {
+  "전치사구": [
+    {
+      "src": "9월 40",
+      "en": "Human speech differs from the cries of other species in many ways.",
+      "chunks": [
+        ["Human speech differs", "인간의 말은 다르다"],
+        ["from the cries of other species", "다른 종의 울음소리와"],
+        ["in many ways.", "여러 가지 면에서"]
+      ],
+      "catch": "'from + 명사', 'in + 명사'가 각각 '무엇과', '어떤 면에서'를 알려주는 덩어리야 — differ from ~ in ~!",
+      "vocab": [["differ from", "~와 다르다"], ["cries", "울음소리"], ["species", "종"]]
+    },
+    {
+      "src": "9월 20",
+      "en": "Truth is essential for progress and the development of knowledge.",
+      "chunks": [
+        ["Truth is essential", "진실은 필수적이다"],
+        ["for progress and the development of knowledge.", "진보와 지식의 발전에"]
+      ],
+      "catch": "'for + 명사'는 '~에(무엇에 필수적인지)'를 알려줘 — essential for ~ = ~에 필수적인!",
+      "vocab": [["essential", "필수적인"], ["progress", "진보"], ["development", "발전"]]
+    },
+    {
+      "src": "9월 39",
+      "en": "Managers need confidence in the likely outcomes of their interventions.",
+      "chunks": [
+        ["Managers need confidence", "관리자는 확신이 필요하다"],
+        ["in the likely outcomes", "가능한 결과에 대한"],
+        ["of their interventions.", "자기 개입의"]
+      ],
+      "catch": "'in ~ of ~'가 줄줄이 붙어 앞 명사를 꾸며 — confidence in the outcomes of interventions = 개입의 결과에 대한 확신!",
+      "vocab": [["confidence", "확신"], ["outcome", "결과"], ["intervention", "개입"]]
+    },
+    {
+      "src": "9월 38",
+      "en": "Without such an ability, no goal-oriented action would be possible.",
+      "chunks": [
+        ["Without such an ability,", "그러한 능력이 없으면,"],
+        ["no goal-oriented action", "목표 지향적인 행동은"],
+        ["would be possible.", "불가능할 것이다"]
+      ],
+      "catch": "'Without + 명사'는 '~이 없으면'이라는 조건 — 문장 맨 앞의 전치사구는 배경이야!",
+      "vocab": [["ability", "능력"], ["goal-oriented", "목표 지향적인"], ["possible", "가능한"]]
+    },
+    {
+      "src": "9월 40",
+      "en": "In a typical human language there are something like thirty or forty distinctive speech sounds.",
+      "chunks": [
+        ["In a typical human language", "일반적인 인간의 언어에는"],
+        ["there are something like thirty or forty distinctive speech sounds.", "대략 30~40개의 독특한 말소리가 있다"]
+      ],
+      "catch": "'In + 명사'로 시작하면 '~에는'이라는 장소·범위 배경 — 진짜 주어(sounds)는 there are 뒤에 있어!",
+      "vocab": [["typical", "일반적인, 전형적인"], ["distinctive", "독특한"], ["speech sound", "말소리"]]
+    }
+  ],
+  "수동태": [
+    {
+      "src": "9월 40",
+      "en": "These sounds can be combined into chains to form a literally unlimited number of words.",
+      "chunks": [
+        ["These sounds can be combined", "이 소리들은 결합될 수 있다"],
+        ["into chains", "연쇄로"],
+        ["to form a literally unlimited number of words.", "말 그대로 무제한적인 수의 단어를 만들기 위해"]
+      ],
+      "catch": "can be combined = 결합될 수 있다. 소리가 스스로 결합하는 게 아니라 '결합되는' 거라 be + p.p.!",
+      "vocab": [["combine", "결합하다"], ["chain", "연쇄, 사슬"], ["unlimited", "무제한의"]]
+    },
+    {
+      "src": "9월 18",
+      "en": "Just then, she heard an announcement saying that her flight had been \"delayed.\"",
+      "chunks": [
+        ["Just then, she heard an announcement", "바로 그때, 그녀는 안내 방송을 들었다"],
+        ["saying that her flight had been \"delayed.\"", "자신의 항공편이 '지연되었다'고 하는"]
+      ],
+      "catch": "had been delayed = '지연되었다'. 항공편이 스스로 지연한 게 아니라 '지연시켜진' 거라 be + p.p.(delayed)!",
+      "vocab": [["announcement", "안내 방송, 발표"], ["flight", "항공편"], ["delay", "지연시키다"]]
+    },
+    {
+      "src": "9월 21",
+      "en": "Thus, their observations were primarily conducted from their verandas.",
+      "chunks": [
+        ["Thus, their observations were primarily conducted", "그리하여 그들의 관찰은 주로 행해졌다"],
+        ["from their verandas.", "그들의 베란다에서"]
+      ],
+      "catch": "were conducted = 행해졌다(수행되었다). 관찰이 스스로 한 게 아니라 '행해진' 거라 be + p.p.!",
+      "vocab": [["observation", "관찰"], ["primarily", "주로"], ["conduct", "수행하다"]]
+    }
+  ],
+  "to부정사": [
+    {
+      "src": "9월 41-42",
+      "en": "One function of poetry is to depict the world with a fresh perception.",
+      "chunks": [
+        ["One function of poetry is", "시의 한 가지 기능은"],
+        ["to depict the world with a fresh perception.", "신선한 인식으로 세상을 묘사하는 것이다"]
+      ],
+      "catch": "be동사 뒤의 'to + 동사'는 '~하는 것' — 'is to depict = 묘사하는 것이다'처럼 등호로 이어져!",
+      "vocab": [["function", "기능"], ["depict", "묘사하다"], ["perception", "인식"]]
+    }
+  ],
+  "동명사": [
+    {
+      "src": "9월 35",
+      "en": "The best dealers offer a much broader service than merely having their goods on display and 'selling from stock'.",
+      "chunks": [
+        ["The best dealers offer a much broader service", "최고의 판매업자는 훨씬 폭넓은 서비스를 제공한다"],
+        ["than merely having their goods on display", "단지 상품을 전시하는 것보다"],
+        ["and 'selling from stock'.", "그리고 '재고를 판매하는 것'보다"]
+      ],
+      "catch": "than/전치사 뒤라 동사가 -ing! 'having ~ = 전시하는 것', 'selling ~ = 판매하는 것'처럼 '~하는 것'으로 읽어.",
+      "vocab": [["dealer", "판매업자, 상인"], ["broader", "더 폭넓은"], ["on display", "전시되어"]]
+    }
+  ],
+  "분사": [
+    {
+      "src": "9월 43-45",
+      "en": "For months, she had been looking for a Philodendron gloriosum, a Colombian plant with dark, velvety leaves shaped like hearts.",
+      "chunks": [
+        ["For months, she had been looking for", "그녀는 몇 달 동안 ~을 찾고 있었다"],
+        ["a Philodendron gloriosum, a Colombian plant", "필로덴드론 글로리오섬, 즉 콜롬비아 식물을"],
+        ["with dark, velvety leaves", "짙은 벨벳 같은 잎을 가진"],
+        ["shaped like hearts.", "하트 모양의"]
+      ],
+      "catch": "명사 뒤 'shaped(p.p.)'는 '~된 모양의' — 'leaves shaped like hearts = 하트 모양으로 된 잎'. 잎이 스스로 모양 만든 게 아니니 수동 -ed!",
+      "vocab": [["velvety", "벨벳 같은"], ["leaves", "잎(leaf의 복수)"], ["shaped like", "~모양의"]]
+    }
+  ],
+  "분사구문": [
+    {
+      "src": "9월 18",
+      "en": "Letting out a deep sigh, she finally felt at ease.",
+      "chunks": [
+        ["Letting out a deep sigh,", "깊은 한숨을 내쉬며,"],
+        ["she finally felt at ease.", "그녀는 마침내 마음이 편해졌다"]
+      ],
+      "catch": "맨 앞 '-ing, 주어…'는 '~하며/~한 채로' — 'Letting out a sigh = 한숨을 내쉬며' 상황을 깔아줘!",
+      "vocab": [["let out", "(소리를) 내다"], ["sigh", "한숨"], ["at ease", "편안한"]]
+    },
+    {
+      "src": "9월 18",
+      "en": "Worried that she could not get to the boarding gate in time, she rushed through the crowds of people.",
+      "chunks": [
+        ["Worried that she could not get to the boarding gate in time,", "시간 내에 탑승구에 도착 못 할까 봐 걱정하며,"],
+        ["she rushed through the crowds of people.", "그녀는 수많은 사람들을 뚫고 돌진했다"]
+      ],
+      "catch": "'Worried ~,'처럼 p.p.로 시작해도 분사구문! '걱정된 채/걱정해서'라는 이유·상황을 나타내.",
+      "vocab": [["boarding gate", "탑승구"], ["in time", "시간 내에"], ["rush through", "~을 뚫고 돌진하다"]]
+    },
+    {
+      "src": "9월 43-45",
+      "en": "Arriving at the building, Helen could identify Julia by the large paper bag she was holding.",
+      "chunks": [
+        ["Arriving at the building,", "건물에 도착했을 때,"],
+        ["Helen could identify Julia", "Helen은 Julia를 알아볼 수 있었다"],
+        ["by the large paper bag she was holding.", "그녀가 들고 있는 커다란 종이봉투로"]
+      ],
+      "catch": "'Arriving ~,' = '도착했을 때/도착하면서' — 맨 앞 -ing 분사구문이 '언제'인지 알려줘!",
+      "vocab": [["arrive at", "~에 도착하다"], ["identify", "알아보다, 식별하다"], ["hold", "들다"]]
+    },
+    {
+      "src": "9월 43-45",
+      "en": "Laughing, the woman said, \"Yes! Please take good care of this plant.\"",
+      "chunks": [
+        ["Laughing,", "웃으며,"],
+        ["the woman said, \"Yes! Please take good care of this plant.\"", "그 여자는 '네! 이 식물을 잘 돌봐주세요.'라고 말했다"]
+      ],
+      "catch": "'Laughing,' 딱 한 단어도 분사구문! '웃으며'라는 상황을 앞에 붙인 거야.",
+      "vocab": [["laugh", "웃다"], ["take care of", "~을 돌보다"], ["plant", "식물"]]
+    },
+    {
+      "src": "9월 43-45",
+      "en": "Handing over the bag, Julia replied that she was not a plant expert.",
+      "chunks": [
+        ["Handing over the bag,", "봉투를 건네며,"],
+        ["Julia replied", "Julia는 답했다"],
+        ["that she was not a plant expert.", "자신은 식물 전문가가 아니라고"]
+      ],
+      "catch": "'Handing over ~,' = '건네며' — 동작을 하면서 말했다는 걸 -ing 분사구문으로 붙인 거야!",
+      "vocab": [["hand over", "건네주다"], ["reply", "답하다"], ["expert", "전문가"]]
+    }
+  ]
+};
+
+categories.forEach((cat) => {
+  if (MORE[cat.key]) cat.practice.push(...MORE[cat.key]);
+});
+
 module.exports = categories;
