@@ -18,6 +18,49 @@ _TIP = ("※ 발음은 원어민 소리와 다를 수 있는 <b>참고용 한글
 
 
 # ============================================================
+# 교재 표지
+# ============================================================
+COVER = {
+    "title": "영어, 처음부터 다시",
+    "subtitle": "문법을 하나도 몰라도 시작하는 기초 문법·단어·해석 교재",
+    "tag": "고1 2학기 내신 대비 · Lesson 1",
+    "book": "적용 지문 : 2022 개정 천재(강상구) 공통영어2 · Lesson 1 (모기 이야기)",
+    "intro": [
+        "중학 단어·문법을 <b>하나도 몰라도</b> 시작할 수 있게 만들었어요.",
+        "지문에 나온 <b>단어 전부</b>와 <b>끊어읽기 해석</b>을 하루치씩 함께 담았어요.",
+        "문법은 <b>가장 쉬운 것부터</b>, 어려운 건 &lsquo;지금은 몰라도 OK&rsquo;로 표시했어요.",
+        "하루 한 DAY, 마지막엔 <b>직접 풀어보는 문제</b>로 확인합니다.",
+    ],
+}
+
+# ============================================================
+# 글 전체 내용 한 페이지
+# ============================================================
+OVERVIEW = {
+    "source": "2022 개정 천재(강상구) 공통영어2 · Lesson 1 · The Nuisance / The Predator",
+    "oneline": "한 문장 요약 &nbsp;→&nbsp; \"작고 성가신 모기가, 사실은 인류 역사상 가장 많은 사람을 죽인 무서운 존재였다.\"",
+    "parts": [
+        {"title": "PART 1. 성가신 존재", "en": "The Nuisance",
+         "body": "캠핑을 갔는데 <b>모기</b>가 윙윙거리며 다가와 피부를 뚫고 피를 빨아요. 그 자리가 가렵고 빨갛게 붓죠. "
+                 "모기는 우리가 내쉬는 <b>이산화탄소</b>, 땀 냄새, 체온을 감지해 먹잇감을 찾아요. "
+                 "피를 빠는 건 <b>암컷</b>뿐인데, <b>알을 낳을 단백질</b>이 필요하기 때문이에요. 배불리 피를 빨고 물웅덩이에 알을 낳습니다."},
+        {"title": "PART 2. 포식자", "en": "The Predator",
+         "body": "자연에서 인간을 가장 많이 죽인 동물은 상어·사자·곰이 아니라 <b>모기</b>예요. "
+                 "모기가 옮기는 <b>말라리아·황열</b>로 매년 100만 명 넘게 죽고, 역사상 약 <b>520억 명</b>이 목숨을 잃었대요. "
+                 "모기는 <b>로마 제국의 몰락</b>, <b>스코틀랜드의 식민지 실패</b>에도 영향을 줬어요. "
+                 "사람들은 19세기 말이 되어서야 모기가 병을 옮긴다는 걸 알았고, 결국 <b>인간의 역사도 자연의 영향</b>에서 자유롭지 않다는 걸 깨닫죠."},
+    ],
+    "flow": [
+        {"h": "모기가 문다", "t": "피부를 뚫고<br>피를 빤다"},
+        {"h": "먹잇감 찾기", "t": "CO2·땀·체온<br>감지"},
+        {"h": "왜 무나", "t": "암컷이 알 낳을<br>단백질 필요"},
+        {"h": "역사를 바꾼 포식자", "t": "말라리아로<br>제국까지 흔듦"},
+    ],
+    "extra": "<b>본문 외 지문</b> : 정원에 <b>이로운 벌레</b> 이야기 — 무당벌레(진딧물을 먹어 식물을 지킴), 지렁이(흙을 비옥하고 부드럽게 함).",
+}
+
+
+# ============================================================
 # 1일차 — 본문 1~9  (be동사 & 3인칭 -s)
 # ============================================================
 DAY1 = {
@@ -85,38 +128,31 @@ DAY1 = {
     ],
     "vocab_tip": _TIP,
     "grammar": [
-        {"level": "core", "tag": "오늘의 핵심", "title": "be동사 (am · are · is) = ~이다 / ~에 있다",
-         "rule": "주어에 따라 모양이 달라져요. <b>I → am</b>, <b>You/We/They → are</b>, <b>He/She/It(하나) → is</b>. 뜻은 상황에 따라 &lsquo;~이다&rsquo; 또는 &lsquo;~에 있다&rsquo;.",
+        {"level": "core", "tag": "가장 먼저", "title": "문장의 뼈대 — 누가(주어) + 뭐했다(동사)",
+         "rule": "영어 문장은 사람 몸이랑 똑같아요. <b>뼈대</b>가 있고 거기에 <b>살</b>이 붙어요. "
+                 "<b>누가(주어) + 뭐했다(동사)</b> 딱 두 개만 먼저 찾으면 절반은 성공! 나머지(꾸미는 살)는 몰라도 돼요.",
          "examples": [
-             {"en": "You <span class='hl'>are</span> on a camping trip.", "ko": "너는 캠핑 여행 중<b>이다</b>. (are = ~하는 중이다/에 있다)"},
-             {"en": "This <span class='hl'>is</span> a mild allergic reaction.", "ko": "이것<b>은</b> 가벼운 알레르기 반응<b>이다</b>."},
+             {"en": "<span class='hl'>A mosquito</span> <span class='hl'>sneaks</span> in.", "ko": "<b>모기가</b> <b>몰래 들어온다</b> &nbsp;(누가=모기 / 뭐했다=들어온다)"},
+             {"en": "<span class='hl'>It</span> <span class='hl'>fills</span> its belly.", "ko": "<b>그것이</b> <b>채운다</b> &nbsp;(its belly=배를 → 살)"},
          ]},
-        {"level": "core", "tag": "오늘의 핵심", "title": "일반동사에 붙는 -s : 주어가 '하나(he/she/it)'일 때",
-         "rule": "주어가 <b>he, she, it</b> 처럼 &lsquo;하나(3인칭 단수)&rsquo;이면, 현재형 일반동사 뒤에 <b>-s / -es</b> 를 붙여요. 시험 단골 포인트!",
+        {"level": "core", "tag": "오늘의 핵심", "title": "be동사 (am · are · is) = ~이다 / ~에 있다",
+         "rule": "동사 중에 뜻이 거의 없는 <b>be동사</b>가 있어요. <b>&ldquo;= (같다)&rdquo;</b> 기호라고 생각하세요. "
+                 "주어에 따라 <b>I → am</b>, <b>You/We/They → are</b>, <b>He/She/It(하나) → is</b>.",
+         "examples": [
+             {"en": "You <span class='hl'>are</span> on a camping trip.", "ko": "너는 캠핑 여행 중<b>이다</b>. (are = ~에 있다/~하는 중이다)"},
+             {"en": "This <span class='hl'>is</span> a mild allergic reaction.", "ko": "이것<b>은</b> 가벼운 알레르기 반응<b>이다</b>. (This = a reaction)"},
+         ]},
+        {"level": "", "tag": "오늘의 핵심", "title": "일반동사에 붙는 -s : 주어가 '하나'일 때",
+         "rule": "움직임을 나타내는 <b>일반동사</b>는, 주어가 <b>하나(he/she/it)</b>이면 뒤에 <b>-s / -es</b>를 붙여요. 시험 단골 포인트!",
          "examples": [
              {"en": "a mosquito <span class='hl'>sneaks</span> in and <span class='hl'>pierces</span> your skin", "ko": "모기(하나)가 몰래 들어와 피부를 <b>뚫는다</b>"},
-             {"en": "it <span class='hl'>fills</span> its belly … it <span class='hl'>itches</span>", "ko": "그것(모기)이 배를 <b>채운다</b> … 그것이 <b>가렵다</b>"},
+             {"en": "it <span class='hl'>fills</span> its belly", "ko": "그것(모기)이 배를 <b>채운다</b>"},
          ]},
-        {"level": "", "tag": "문법 3", "title": "일반동사 의문문 : 앞에 do / does 를 붙인다",
-         "rule": "일반동사로 질문할 때는 문장 앞에 <b>Do</b>(You/We/They) 또는 <b>Does</b>(He/She/It)를 붙여요. 이때 뒤 동사는 <b>원형</b>(-s 없음).",
+        {"level": "up", "tag": "지금은 몰라도 OK", "title": "오늘 지문의 어려운 문법은 나중에 배워요!",
+         "rule": "이 지문엔 <b>분사구문(Beating~), 관계대명사(which~), the 비교급</b> 같은 어려운 것도 살짝 섞여 있어요. "
+                 "<b>지금은 하나도 몰라도 됩니다.</b> 뒤 DAY에서 하나씩 천천히 배울 거예요. 오늘은 &lsquo;누가/뭐했다&rsquo;와 be동사만 잡으면 성공!",
          "examples": [
-             {"en": "How <span class='hl'>do</span> mosquitoes <span class='hl'>find</span> their victims?", "ko": "모기는 어떻게 먹잇감을 <b>찾을까?</b> (mosquitoes=여럿 → do, find는 원형)"},
-         ]},
-        {"level": "", "tag": "문법 4", "title": "「The 비교급 ~, the 비교급 ~」 = ~하면 할수록 더 …하다",
-         "rule": "&lsquo;the + 비교급&rsquo; 이 두 번 나오면 <b>&ldquo;A 할수록 더 B 하다&rdquo;</b> 로 해석해요.",
-         "examples": [
-             {"en": "<span class='hl'>The more</span> you scratch, <span class='hl'>the more</span> it itches.", "ko": "긁으면 <b>긁을수록</b> 더 가렵다."},
-         ]},
-        {"level": "up", "tag": "한 단계 위", "title": "-ing 로 시작하는 덩어리 = \"~하면서 / ~한 채로\" (분사구문)",
-         "rule": "문장 앞·뒤에 <b>동사+ing</b> 덩어리가 콤마(,)와 함께 오면, 주로 <b>&ldquo;~하면서&rdquo;</b> 로 이어서 해석하면 돼요. 지금은 &lsquo;느낌&rsquo;만 잡아도 충분!",
-         "examples": [
-             {"en": "<span class='hl'>Beating</span> its wings …, a mosquito sneaks in", "ko": "날개를 <b>퍼덕이면서</b>, 모기가 몰래 들어온다"},
-             {"en": "… escapes, <span class='hl'>leaving</span> behind a bump", "ko": "… 달아난다, 혹을 <b>남긴 채로</b>"},
-         ]},
-        {"level": "up", "tag": "한 단계 위", "title": ", which ~ , : 바로 앞 명사를 \"설명해 주는\" 덩어리 (관계대명사)",
-         "rule": "명사 뒤에 <b>, which …,</b> 가 끼어들면 그 명사가 어떤 것인지 <b>추가 설명</b>하는 부분이에요. 괄호 치고 읽으면 문장 뼈대가 보여요.",
-         "examples": [
-             {"en": "Carbon dioxide<span class='hl'>, which humans breathe out,</span> is a key signal.", "ko": "이산화탄소는<b>(인간이 내쉬는 것인데)</b>, 핵심 신호이다."},
+             {"en": "The more you scratch, the more it itches.", "ko": "(참고) 긁을수록 더 가렵다 — &lsquo;~할수록 더~&rsquo;는 나중에!"},
          ]},
     ],
     "literal": [
