@@ -14,8 +14,8 @@ python -m playwright install chromium
 if errorlevel 1 echo    [주의] Chromium 설치에 실패했습니다. 인터넷 확인 후 다시 실행하세요.
 echo.
 echo [3/3] 한글 폰트 안내
-echo    인터넷이 되면 나눔명조 웹폰트가 자동으로 로드됩니다.
-echo    오프라인에서 쓰려면 나눔명조 폰트를 Windows에 직접 설치하세요.
+echo    인터넷이 되면 나눔스퀘어 웹폰트가 자동으로 로드됩니다.
+echo    오프라인에서 쓰려면 나눔스퀘어 폰트를 Windows에 직접 설치하세요.
 echo.
 echo [선택] 자동 OCR, 번역 기능은 ANTHROPIC_API_KEY 설정 시 사용됩니다.
 echo.

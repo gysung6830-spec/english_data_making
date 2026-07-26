@@ -1,6 +1,6 @@
 """디자인 테마 CSS 3종.
 
-- modern   : 확정 테마(참고 디자인 반영). 나눔명조 세리프, 우측 상단 머리글 +
+- modern   : 확정 테마(참고 디자인 반영). 나눔스퀘어, 우측 상단 머리글 +
              전체폭 구분선, 제목 왼쪽 세로 강조막대, 문장마다 연한 구분선.
              페이지 규칙(break-before/inside)과 auto-fit 축소 클래스 포함.
 - textbook : 대안(교재형, 파란 포인트).
@@ -10,15 +10,15 @@
 """
 from __future__ import annotations
 
-# 나눔명조 우선. 시스템에 없을 때를 대비해 Google Fonts @import도 함께 건다
-# (오프라인이면 시스템 NanumMyeongjo / Noto Serif 로 폴백).
+# 나눔스퀘어(NanumSquare) 사용. 온라인이면 웹폰트 @import로 자동 로드,
+# 오프라인이면 시스템 나눔스퀘어 / 나눔고딕 / 맑은고딕으로 폴백.
 FONT_IMPORT = (
-    "@import url('https://fonts.googleapis.com/css2?"
-    "family=Nanum+Myeongjo:wght@400;700;800&display=swap');\n"
+    # 나눔스퀘어 웹폰트(온라인일 때 자동 로드; 오프라인이면 시스템 폰트 사용)
+    "@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');\n"
 )
-SERIF_STACK = (
-    "'NanumMyeongjo','Nanum Myeongjo','나눔명조',"
-    "'Noto Serif CJK KR','Noto Serif KR','Batang',serif"
+FONT_STACK = (
+    "'NanumSquare','나눔스퀘어','NanumSquareOTF','NanumSquareR',"
+    "'NanumGothic','Nanum Gothic','Malgun Gothic',sans-serif"
 )
 
 # ── 페이지 배치 규칙 (모든 테마 공통으로 주입) ─────────────────
@@ -102,7 +102,7 @@ def _modern_css() -> str:
     NUM = "#000000"        # 원문자 번호(검정)
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
-  font-family: {SERIF_STACK};
+  font-family: {FONT_STACK};
   color: {INK};
   font-size: 13.5px;
   line-height: 1.6;
@@ -186,7 +186,7 @@ table.two-col td.col-ko {{ width: 38%; color: {KO}; font-size: 11px; }}
 def _textbook_css() -> str:
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
-  font-family: {SERIF_STACK};
+  font-family: {FONT_STACK};
   color: #20242c;
   font-size: 13.5px;
   line-height: 1.62;
@@ -219,7 +219,7 @@ table.two-col td.col-ko {{ width:38%; color:#3a4048; font-size:11px; }}
 def _middle_css() -> str:
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
-  font-family: {SERIF_STACK};
+  font-family: {FONT_STACK};
   color: #2b2b2b;
   font-size: 14.5px;
   line-height: 1.7;

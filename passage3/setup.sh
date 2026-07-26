@@ -14,19 +14,19 @@ echo "[2/3] 렌더링용 Chromium 설치 중 (playwright)..."
 python -m playwright install chromium || \
   echo "   ⚠ Chromium 자동 설치 실패. 인터넷 연결을 확인하고 'python -m playwright install chromium' 을 다시 실행하세요."
 
-echo "[3/3] 한글 폰트(나눔명조) 설치 확인..."
-if command -v fc-list >/dev/null 2>&1 && fc-list | grep -qi "nanummyeongjo\|나눔명조"; then
-  echo "   나눔명조가 이미 설치되어 있습니다."
+echo "[3/3] 한글 폰트(나눔스퀘어) 설치 확인..."
+if command -v fc-list >/dev/null 2>&1 && fc-list | grep -qi "nanumsquare\|나눔스퀘어"; then
+  echo "   나눔스퀘어가 이미 설치되어 있습니다."
 else
-  echo "   나눔명조를 설치합니다 (관리자 권한이 필요할 수 있음)."
+  echo "   나눔스퀘어를 설치합니다 (관리자 권한이 필요할 수 있음)."
   if command -v apt-get >/dev/null 2>&1; then
-    sudo apt-get update && sudo apt-get install -y fonts-nanum && fc-cache -f || \
-      echo "   ⚠ 자동 설치 실패. '나눔명조' 폰트를 직접 설치해 주세요."
+    sudo apt-get update && sudo apt-get install -y fonts-nanum fonts-nanum-extra && fc-cache -f || \
+      echo "   ⚠ 자동 설치 실패. '나눔스퀘어' 폰트를 직접 설치해 주세요."
   elif command -v brew >/dev/null 2>&1; then
-    brew install --cask font-nanum-myeongjo || \
-      echo "   ⚠ 자동 설치 실패. '나눔명조' 폰트를 직접 설치해 주세요."
+    brew install --cask font-nanum-square || \
+      echo "   ⚠ 자동 설치 실패. '나눔스퀘어' 폰트를 직접 설치해 주세요."
   else
-    echo "   ⚠ 자동 설치 도구를 못 찾았습니다. '나눔명조' 폰트를 직접 설치해 주세요."
+    echo "   ⚠ 자동 설치 도구를 못 찾았습니다. '나눔스퀘어' 폰트를 직접 설치해 주세요."
     echo "     (인터넷이 되면 웹폰트로 자동 로드되므로 없어도 대개 동작합니다.)"
   fi
 fi

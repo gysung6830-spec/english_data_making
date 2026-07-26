@@ -15,7 +15,7 @@ CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
 | 좌지문 우해석 | (지문명)_좌지문우해석.pdf | 좌 영어 / 우 한글 2단 표 |
 
 ## 빠른 설치 (권장)
-한 번에 라이브러리·Chromium·나눔명조 폰트를 설치합니다.
+한 번에 라이브러리·Chromium·나눔스퀘어 폰트를 설치합니다.
 
     cd passage3
     bash setup.sh          # macOS / Linux
@@ -30,8 +30,8 @@ CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
 ## 웹앱 (수동 설치)
     pip install flask pdfplumber playwright anthropic pytesseract pdf2image pillow
     playwright install chromium
-    # 한글 폰트(나눔명조) 설치 — 리눅스:  sudo apt install fonts-nanum
-    #   (Windows·macOS는 '나눔명조'를 직접 설치. 온라인이면 자동으로 웹폰트 사용)
+    # 한글 폰트(나눔스퀘어) 설치 — 리눅스:  sudo apt install fonts-nanum fonts-nanum-extra
+    #   (Windows·macOS는 '나눔스퀘어'를 직접 설치. 온라인이면 자동으로 웹폰트 사용)
     cd passage3
     python webapp.py
     # 브라우저에서 http://localhost:5000
