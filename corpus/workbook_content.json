@@ -2531,7 +2531,7 @@
    },
    {
     "t": "In the last analysis, committing himself to a painting is the collector’s own act.",
-    "role": "gray",
+    "role": "yellow",
     "tags": [
      {
       "sig": "결론",
@@ -7498,7 +7498,7 @@
    },
    {
     "t": "(④) But that also helps them think about what 14－3 might mean because they can imagine walking backwards.",
-    "role": "gray",
+    "role": "yellow",
     "tags": [
      {
       "sig": "역접",
@@ -10568,7 +10568,7 @@
    },
    {
     "t": "Yet there wasn’t a single day when I sat down to write an article, blog post, or book chapter without a string of people waiting for me to get back to them.",
-    "role": "skip",
+    "role": "yellow",
     "tags": [
      {
       "sig": "역접",
@@ -11412,7 +11412,7 @@
    },
    {
     "t": "Killer whales also repeat the same seal hunting technique in front of their offspring, sometimes without even killing the seal, leading researchers to ask why they would repeatedly catch and release a seal if they were not planning to eat it.",
-    "role": "skip",
+    "role": "yellow",
     "tags": []
    },
    {
@@ -14604,7 +14604,7 @@
    },
    {
     "t": "( ③ ) Orienting the building so that the longer face of the structure is parallel with prevailing winds can help.",
-    "role": "gray",
+    "role": "yellow",
     "tags": []
    },
    {

@@ -57,7 +57,7 @@
    },
    {
     "t": "wider influence of cognition on learning cultural contexts",
-    "trap": "off"
+    "trap": "rev"
    }
   ],
   "answer_transform": "압축·일반화",
@@ -113,7 +113,7 @@
    },
    {
     "t": "searching for historical realities revealed within it",
-    "trap": "rev"
+    "trap": "copy"
    },
    {
     "t": "looking inside it, not outside it or beyond it",
@@ -145,7 +145,7 @@
    },
    {
     "t": "lead users encountered in the market",
-    "trap": "copy"
+    "trap": "dist"
    },
    {
     "t": "other firms frequently put into use",
@@ -633,7 +633,7 @@
    },
    {
     "t": "ties firmly in with how her city operates",
-    "trap": "over"
+    "trap": "off"
    }
   ],
   "answer_transform": "구체→추상",

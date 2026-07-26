@@ -38,7 +38,7 @@
     "trap": "off"
    },
    {
-    "t": "Something can strike us as funny only once we are sure it is true rather than made up.",
+    "t": "Something strikes us as funny once we have confirmed that it is true rather than made up.",
     "trap": "rev"
    },
    {
@@ -74,7 +74,7 @@
     "trap": "rev"
    },
    {
-    "t": "The latter works smart precisely because it avoids working hard at all.",
+    "t": "The latter works smart precisely because it avoids the effort of working hard.",
     "trap": "dist"
    },
    {
@@ -130,7 +130,7 @@
     "trap": "ok"
    },
    {
-    "t": "Uncertainty appears only after a wrong path has already taken you to your destination.",
+    "t": "Uncertainty appears after a wrong path has already taken you to your destination.",
     "trap": "dist"
    },
    {
@@ -566,7 +566,7 @@
   "answer": 3,
   "choices": [
    {
-    "t": "Confining ourselves to what we already do well is the only way to keep fear of the unknown from growing.",
+    "t": "Confining ourselves to what we already do well helps keep fear of the unknown from growing.",
     "trap": "rev"
    },
    {
@@ -718,7 +718,7 @@
     "trap": "copy"
    },
    {
-    "t": "Worry tends to fade in everyday situations because it is tied only to distant future events.",
+    "t": "Worry tends to fade in everyday situations because it is tied to distant future events.",
     "trap": "rev"
    },
    {
@@ -938,7 +938,7 @@
     "trap": "rev"
    },
    {
-    "t": "Perceptions turn misleading only when the senses are deliberately fooled by an illusion.",
+    "t": "Perceptions turn misleading when the senses are deliberately fooled by an illusion.",
     "trap": "dist"
    },
    {
@@ -990,7 +990,7 @@
     "trap": "off"
    },
    {
-    "t": "Most attractions have ample space and can always take in additional visitors.",
+    "t": "Most attractions have ample space and can readily take in additional visitors.",
     "trap": "rev"
    },
    {
@@ -1022,7 +1022,7 @@
     "trap": "ok"
    },
    {
-    "t": "Even ideas that are never acted upon reveal the true worth of creative thinking.",
+    "t": "Even ideas that are left unrealized reveal the true worth of creative thinking.",
     "trap": "rev"
    },
    {
@@ -1194,8 +1194,8 @@
     "trap": "off"
    },
    {
-    "t": "We can control the circumstances of a lion's feeding, even if its diet remains beyond us.",
-    "trap": "over"
+    "t": "Controlling where a lion feeds is far easier than influencing how much it eats.",
+    "trap": "off"
    },
    {
     "t": "Controlling a lion's feeding grounds matters less than understanding what it prefers to eat.",
@@ -1466,7 +1466,7 @@
     "trap": "copy"
    },
    {
-    "t": "Language teaching materials should avoid presenting a language as a rule-based system at all.",
+    "t": "Language teaching materials should avoid presenting a language as a rule-based system.",
     "trap": "rev"
    },
    {
@@ -1714,7 +1714,7 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Ideally, an innovation opens up every step beyond what is known at once.",
+    "t": "Ideally, an innovation opens up many steps beyond what is known at once.",
     "trap": "rev"
    },
    {
@@ -1842,8 +1842,8 @@
     "trap": "ok"
    },
    {
-    "t": "Learning tends to be a shallow, fragmented business that leaves the deeper personality untouched.",
-    "trap": "over"
+    "t": "Learning, though analytic and piecemeal, reaches deep into and transforms the personality.",
+    "trap": "rev"
    }
   ]
  },
@@ -1866,7 +1866,7 @@
     "trap": "off"
    },
    {
-    "t": "Take a coin game where a player loses only if three heads appear one after another.",
+    "t": "Take a coin game where a player loses when three heads appear one after another.",
     "trap": "rev"
    },
    {
@@ -1966,7 +1966,7 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Drive puts direct force on your gears, wearing them down until they can barely spin at all.",
+    "t": "Drive puts direct force on your gears, wearing them down until they can barely spin.",
     "trap": "rev"
    },
    {
@@ -2002,7 +2002,7 @@
     "trap": "rev"
    },
    {
-    "t": "Within the same metric structure, variations in tempo and volume are possible only when the melody itself changes.",
+    "t": "Within the same metric structure, variations in tempo and volume become possible once the melody itself changes.",
     "trap": "dist"
    },
    {
@@ -2035,7 +2035,7 @@
    },
    {
     "t": "A long search time signals to the bee that the water source has likely dried up.",
-    "trap": "off"
+    "trap": "rev"
    },
    {
     "t": "Because search time is long, bees prefer collecting nectar to water.",
@@ -2054,7 +2054,7 @@
     "trap": "off"
    },
    {
-    "t": "A family holds a barn-raising party only when it wants to avoid asking others for help.",
+    "t": "A family holds a barn-raising party when it wants to avoid asking others for help.",
     "trap": "rev"
    },
    {
@@ -2066,7 +2066,7 @@
     "trap": "ok"
    },
    {
-    "t": "A barn-raising party is called only if a family needs a new barn, not for repairs.",
+    "t": "A barn-raising party is called when a family needs a new barn, not for repairs.",
     "trap": "dist"
    }
   ]
@@ -2082,7 +2082,7 @@
     "trap": "ok"
    },
    {
-    "t": "Building confidence requires us to avoid vulnerability so that we are never without confidence.",
+    "t": "Building confidence requires us to avoid vulnerability so as to keep our confidence intact.",
     "trap": "rev"
    },
    {
@@ -2174,12 +2174,12 @@
     "trap": "copy"
    },
    {
-    "t": "Rousseau argued that realizing one's potential depends solely on the individual's own effort, not on others.",
-    "trap": "dist"
+    "t": "Rousseau argued that realizing one's potential depends mainly on the individual's own effort rather than on others.",
+    "trap": "rev"
    },
    {
-    "t": "Rousseau claimed people are made by others only when they fail to develop on their own.",
-    "trap": "off"
+    "t": "Rousseau claimed people are made by others when they fail to develop on their own.",
+    "trap": "rev"
    }
   ]
  },
