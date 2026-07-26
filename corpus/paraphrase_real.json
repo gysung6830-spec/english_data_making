@@ -21,7 +21,7 @@
    },
    {
     "t": "critical insight that defeats our prejudices",
-    "trap": "over"
+    "trap": "off"
    },
    {
     "t": "unbiased and objective view of the world",
@@ -105,7 +105,7 @@
   "choices": [
    {
     "t": "putting himself or herself both inside and outside it",
-    "trap": "over"
+    "trap": "rev"
    },
    {
     "t": "finding a middle ground between it and the world",
@@ -153,7 +153,7 @@
    },
    {
     "t": "both users and firms have valued",
-    "trap": "over"
+    "trap": "dist"
    }
   ],
   "answer_transform": "동의어",
@@ -857,7 +857,7 @@
    },
    {
     "t": "constructed frequency patterns from notes with the same name",
-    "trap": "over"
+    "trap": "dist"
    }
   ],
   "answer_transform": "비유→직설",
@@ -1049,7 +1049,7 @@
    },
    {
     "t": "the concept that humans and animals are essentially alike",
-    "trap": "over"
+    "trap": "rev"
    }
   ],
   "answer_transform": "비유→직설",
