@@ -45,6 +45,19 @@ soffice 는 변환에 실패해도 종료 코드 0 을 반환하는 버릇이 �
 **실제 pdf 파일이 새로 생겼는지** 확인한 뒤에만 성공으로 처리한다. 변환이 안 되면
 docx 만 만들고, 위 수동 변환 명령을 안내한다.
 
+### 미리보기 PDF (`npm run preview`)
+
+LibreOffice 가 없거나 깨진 환경에서 **디자인/내용을 눈으로 확인**하려면:
+
+```bash
+npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
+```
+
+같은 `data.js` / `splitWorked` / `makeTip` 로 HTML 을 만들어 Chromium 으로 인쇄한
+미리보기다. 색·박스·레이아웃은 docx 와 맞췄지만 **정식 산출물은 docx** 이고,
+서체(NanumSquareRound)는 설치된 PC 에서 docx 를 열 때 정확히 반영된다.
+(`playwright` 는 optionalDependencies — 미리보기가 필요할 때만 설치.)
+
 ## 폴더 구조 (리팩터링 후)
 
 ```

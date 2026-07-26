@@ -1,3 +1,4 @@
 node_modules/
 output/*.docx
 output/*.pdf
+output/*.html

@@ -7,9 +7,13 @@
   "scripts": {
     "build": "node build_v4.js",
     "build:docx": "node build_v4.js --no-pdf",
-    "validate": "node validate.js"
+    "validate": "node validate.js",
+    "preview": "node preview_pdf.js"
   },
   "dependencies": {
     "docx": "^9.7.1"
+  },
+  "optionalDependencies": {
+    "playwright": "^1.62.0"
   }
 }

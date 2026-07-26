@@ -4,7 +4,8 @@
 //   ① 전치사구 → ② 수동태 → ③ to부정사 → ④ 동명사 → ⑤ 관계사 → ⑥ 분사 → ⑦ 분사구문
 //   ※ 챕터를 추가/재배열하면 title 의 원문자 번호(①~⑦)도 함께 갱신할 것.
 //
-// 자료 출처: 2023학년도 대학수학능력시험 20~24 · 31 · 32 · 35 · 40 · 41-42번 지문.
+// 자료 출처: 2023학년도 수능(② 수동태 ~ ⑦ 분사구문) + 2024년 9월 평가원 모의평가
+//            WORKBOOK 0(① 전치사구, 고3) 지문.
 //
 // 스키마 요약:
 //   Category { key, title, intro[], signal[], method:[label,text][],
@@ -18,9 +19,8 @@
 
 const categories = [
   {
-    // ⚠️ 전치사구 챕터의 worked/practice 예문은 강사가 직접 고르기 전까지 쓰는
-    //    '예시(illustrative)' 문장이다. intro/signal/method(설명)는 완성본이지만,
-    //    문장 자체는 2023 기출을 손으로 확정해 교체할 것(다른 챕터와 동일 스키마).
+    // 전치사구 챕터 예문 출처: 2024년 9월 한국교육과정평가원 모의평가(고3) WORKBOOK 0
+    //   (20·26·32번 지문). 나머지 6챕터는 2023학년도 수능 기반.
     "key": "전치사구",
     "title": "① 전치사구 — '전치사 + 명사' 덩어리로 읽기",
     "intro": [
@@ -49,197 +49,209 @@ const categories = [
     ],
     "worked": [
       {
-        "src": "예시",
-        "en": "The information about the calories helps customers make better choices.",
+        "src": "26",
+        "en": "He went to the United States in 1937, and about a decade later, he started teaching visual design at the Massachusetts Institute of Technology (MIT).",
         "chunks": [
           [
-            "The information",
-            "그 정보는"
+            "He went",
+            "그는 갔다"
           ],
           [
-            "about the calories",
-            "(칼로리에 대한 정보인데)"
+            "to the United States",
+            "미국으로"
           ],
           [
-            "helps customers make better choices.",
-            "손님들이 더 나은 선택을 하도록 돕는다"
+            "in 1937,",
+            "1937년에,"
+          ],
+          [
+            "and about a decade later,",
+            "그리고 약 10년 후,"
+          ],
+          [
+            "he started teaching visual design",
+            "그는 시각 디자인을 가르치기 시작했다"
+          ],
+          [
+            "at the Massachusetts Institute of Technology (MIT).",
+            "매사추세츠 공과대학(MIT)에서"
           ]
         ],
-        "catch": "'about + 명사'는 앞 명사를 꾸며 — 'the information about the calories = 칼로리에 대한 정보'라는 거예요!",
+        "catch": "'to+장소', 'in+연도', 'at+장소'처럼 전치사+명사는 각각 한 덩어리야. '어디로·언제·어디서'를 알려주는 거예요!",
         "vocab": [
           [
-            "information",
-            "정보"
+            "go to",
+            "~로 가다"
           ],
           [
-            "calorie",
-            "칼로리"
+            "a decade",
+            "10년"
           ],
           [
-            "choice",
-            "선택"
+            "institute",
+            "(전문)대학, 연구소"
           ]
         ],
         "steps": [
           [
-            "덩어리",
-            "about the calories = 전치사 about + 명사 calories → '칼로리에 대한'"
+            "덩어리 묶기",
+            "to the United States(미국으로) / in 1937(1937년에) / at MIT(MIT에서) — 전치사+명사를 각각 한 덩어리로"
           ],
           [
             "역할",
-            "바로 앞 명사 information을 꾸밈(형용사 역할) — 어떤 정보? '칼로리에 대한' 정보"
+            "모두 '어디로/언제/어디서'를 알려주는 부사 역할. 뼈대는 He went ~ he started teaching ~"
           ]
         ]
       },
       {
-        "src": "예시",
-        "en": "In a range of medical contexts, checklists reduce serious mistakes.",
+        "src": "20",
+        "en": "One of the greatest threats to the accumulation of knowledge can now be found on social media platforms.",
         "chunks": [
           [
-            "In a range of medical contexts,",
-            "다양한 의학적 상황에서,"
+            "One of the greatest threats",
+            "가장 큰 위협 중 하나가"
           ],
           [
-            "checklists reduce",
-            "체크리스트는 줄인다"
+            "to the accumulation of knowledge",
+            "(지식 축적에 대한 위협인데)"
           ],
           [
-            "serious mistakes.",
-            "심각한 실수를"
+            "can now be found",
+            "이제 발견될 수 있다"
+          ],
+          [
+            "on social media platforms.",
+            "소셜 미디어 플랫폼에서"
           ]
         ],
-        "catch": "문장 맨 앞의 'In + 명사'는 '어디서/어떤 상황에서'를 알려주는 배경이야 — 뼈대(주어+동사)는 그 뒤부터라는 거예요!",
+        "catch": "같은 전치사구라도 'to ~'는 앞 명사(threats)를 꾸미고, 'on ~'은 문장에 '어디서'를 더해 — 위치를 보고 역할을 판단하는 거예요!",
         "vocab": [
           [
-            "a range of",
-            "다양한, 여러"
+            "threat",
+            "위협"
           ],
           [
-            "context",
-            "상황, 맥락"
+            "accumulation",
+            "축적"
           ],
           [
-            "reduce",
-            "줄이다"
+            "platform",
+            "플랫폼, 기반"
           ]
         ],
         "steps": [
           [
-            "덩어리",
-            "In a range of medical contexts = 전치사 In + 명사구 → '다양한 의학적 상황에서'"
+            "덩어리 묶기",
+            "to the accumulation of knowledge = '지식의 축적에 대한' / on social media platforms = '소셜 미디어 플랫폼에서'"
           ],
           [
             "역할",
-            "문장 전체에 '어디서/어떤 상황에서'를 더함(부사 역할). 뼈대는 checklists reduce ~"
+            "앞 to구는 명사 threats를 꾸밈(어떤 위협?), 뒤 on구는 문장에 '어디서'를 더함(부사)"
           ]
         ]
       }
     ],
     "practice": [
       {
-        "src": "예시",
-        "en": "The desire for success can push people too hard.",
+        "src": "26",
+        "en": "He studied painting at the Royal Academy of Fine Arts in Budapest, Hungary.",
         "chunks": [
           [
-            "The desire",
-            "그 욕망은"
+            "He studied painting",
+            "그는 회화를 공부했다"
           ],
           [
-            "for success",
-            "(성공에 대한 욕망인데)"
+            "at the Royal Academy of Fine Arts",
+            "왕립 미술 아카데미에서"
           ],
           [
-            "can push people too hard.",
-            "사람들을 너무 심하게 몰아붙일 수 있다"
+            "in Budapest, Hungary.",
+            "헝가리 부다페스트에 있는"
           ]
         ],
-        "catch": "'for + 명사'가 앞 명사를 꾸며 — 'the desire for success = 성공에 대한 욕망'이라는 거예요!",
+        "catch": "'at+기관', 'in+도시'로 장소를 점점 좁혀 줘 — 큰 덩어리(아카데미) 안에 작은 덩어리(부다페스트)가 들어있는 셈이에요!",
         "vocab": [
           [
-            "desire",
-            "욕망"
+            "academy",
+            "아카데미, 학교"
           ],
           [
-            "success",
-            "성공"
+            "fine arts",
+            "미술"
           ],
           [
-            "push",
-            "몰아붙이다"
+            "painting",
+            "회화, 그림"
           ]
         ]
       },
       {
-        "src": "예시",
-        "en": "With a clear plan, you can manage the risk more easily.",
+        "src": "26",
+        "en": "In 1995, a museum to house his works was established in Eger, Hungary.",
         "chunks": [
           [
-            "With a clear plan,",
-            "명확한 계획이 있으면,"
+            "In 1995,",
+            "1995년에,"
           ],
           [
-            "you can manage the risk",
-            "너는 그 위험을 관리할 수 있다"
+            "a museum to house his works",
+            "그의 작품을 소장하기 위한 박물관이"
           ],
           [
-            "more easily.",
-            "더 쉽게"
+            "was established",
+            "설립되었다"
+          ],
+          [
+            "in Eger, Hungary.",
+            "헝가리 Eger에"
           ]
         ],
-        "catch": "'With + 명사'는 '~이 있으면/~을 가지고'라는 상황을 더해줘 — 뼈대는 그 뒤부터라는 거예요!",
+        "catch": "'In+연도'는 맨 앞에서 '언제'를, 'in+장소'는 '어디서'를 알려줘 — 전치사구가 문장의 시간·장소 배경을 깔아주는 거예요!",
         "vocab": [
           [
-            "clear",
-            "명확한"
+            "museum",
+            "박물관"
           ],
           [
-            "plan",
-            "계획"
+            "house",
+            "소장하다, 보관하다"
           ],
           [
-            "manage",
-            "관리하다"
-          ],
-          [
-            "risk",
-            "위험"
+            "establish",
+            "설립하다"
           ]
         ]
       },
       {
-        "src": "예시",
-        "en": "The writers of sports news are read by many people across the world.",
+        "src": "32",
+        "en": "Take, for example, the installation of fibre-optic communications cable across the African continent.",
         "chunks": [
           [
-            "The writers",
-            "그 작가들은"
+            "Take, for example,",
+            "예를 들어보자,"
           ],
           [
-            "of sports news",
-            "(스포츠 뉴스의 작가들인데)"
+            "the installation of fibre-optic communications cable",
+            "광섬유 통신 케이블의 설치를"
           ],
           [
-            "are read by many people",
-            "많은 사람에게 읽힌다"
-          ],
-          [
-            "across the world.",
-            "전 세계에 걸쳐"
+            "across the African continent.",
+            "아프리카 대륙 전역에 걸친"
           ]
         ],
-        "catch": "전치사구가 한 문장에 여러 개(of ~, by ~, across ~) 붙을 수 있어 — 각각 덩어리로 묶으면 긴 문장도 안 무서워!",
+        "catch": "'of+명사'는 앞 명사를 꾸미고(무엇의 설치?), 'across+명사'는 '어디에 걸쳐'인지 알려줘 — 둘 다 앞 명사에 붙는 덩어리예요!",
         "vocab": [
           [
-            "writer",
-            "작가"
+            "installation",
+            "설치"
           ],
           [
-            "across",
-            "~에 걸쳐, 가로질러"
+            "cable",
+            "케이블"
           ],
           [
-            "world",
-            "세계"
+            "continent",
+            "대륙"
           ]
         ]
       }
