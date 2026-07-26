@@ -78,16 +78,16 @@ function renderWorked(w) {
     ...B.catchBox(w.catch),
   ];
 }
+// 연습문제: 한글 끊어읽기·캐치는 감추고(빈칸), 정답·해설은 맨 뒤 섹션으로 뺀다.
 function renderPractice(w, idx) {
   return [
     B.h3(`연습 ${idx + 1}`),
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
     ...B.tipBox(makeTip(w.chunks)),
-    ...B.chunkBox(w.chunks),
+    ...B.chunkBox(w.chunks, false),
     ...B.skeletonBoxBlank(),
     ...B.answerWriteBox(),
-    ...B.catchBox(w.catch),
   ];
 }
 
@@ -105,15 +105,18 @@ function chapterParagraphs(cat) {
   return out;
 }
 
-// ── 정답 섹션 ────────────────────────────────────────
+// ── 정답·해설 섹션 (맨 뒤, practice 만) ────────────────
+//    문제마다 끊어읽기 정답(영어/한글) + 핵심(캐치)을 실어 해설로 제공.
 function answerParagraphs(categories) {
-  const out = [B.h1('정답 (혼자 풀어보기 · 참고용 해석)')];
+  const out = [B.pageBreak(), B.h1('정답 · 해설 — 혼자 풀어보기')];
+  out.push(B.p('직접 푼 걸 여기서 맞춰보자. 끊어읽기 정답과 이 문장에서 붙잡을 핵심을 정리했어.'));
   categories.forEach((cat) => {
     if (!cat.practice || cat.practice.length === 0) return;
     out.push(B.h2(cat.key));
     cat.practice.forEach((w, i) => {
-      const kor = w.chunks.map((c) => c[1]).join(' ');
-      out.push(B.p(`${i + 1}) ${kor}`));
+      out.push(B.h3(`${i + 1}. ${w.en}  [${w.src}]`));
+      out.push(...B.chunkBox(w.chunks));   // 끊어읽기 정답(영어/한글)
+      out.push(...B.catchBox(w.catch));    // 핵심
     });
   });
   return out;

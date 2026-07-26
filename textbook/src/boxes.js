@@ -107,14 +107,17 @@ function vocabBox(pairs) {
 }
 
 // 3. ✂ 끊어읽기 박스 — 영어(bold, size 22) → 한글(size 19)
-function chunkBox(chunks) {
+//    showKor=false 면 한글은 빈 밑줄(연습문제: 학생이 직접 작성)
+function chunkBox(chunks, showKor = true) {
   const lines = chunks.map(([en, kor]) =>
     new Paragraph({
       spacing: { after: 70 },
       children: [
         new TextRun({ text: en, bold: true, size: 22, font: S.FONT_EN, color: S.CHUNK.txt }),
         new TextRun({ text: '  →  ', bold: true, size: 19, color: S.SLASH, font: S.FONT }),
-        new TextRun({ text: kor, size: 19, color: S.CHUNK.txt, font: S.FONT }),
+        showKor
+          ? new TextRun({ text: kor, size: 19, color: S.CHUNK.txt, font: S.FONT })
+          : new TextRun({ text: '________________', size: 19, color: S.UNDERLINE, font: S.FONT }),
       ],
     }),
   );

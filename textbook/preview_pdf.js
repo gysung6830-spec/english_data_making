@@ -149,12 +149,12 @@ function workedBlock(s, idx) {
     ${skeletonCard(s.steps)}
     ${catchCard(s.catch)}</div>`;
 }
+// 연습문제: 캐치(정답성 핵심)는 문제 밑에 두지 않고 맨 뒤 '정답·해설'로 뺀다.
 function practiceBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
     ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, false)}
-    ${skeletonBlank()}${writeCard()}
-    ${catchCard(s.catch)}</div>`;
+    ${skeletonBlank()}${writeCard()}</div>`;
 }
 
 function chapterHtml(cat, chIndex) {
@@ -194,16 +194,19 @@ function chapterHtml(cat, chIndex) {
   return h;
 }
 
+// 맨 뒤 '정답·해설' — 문제마다 끊어읽기 정답(영어/한글) + 핵심(캐치)
 function answerHtml(cats) {
-  let h = `<section class="chapter answers"><div class="chhead"><span class="daypill">Answers</span></div>
-    <h1>정답 — 혼자 풀어보기 (참고용 해석)</h1>
-    <div class="chsub">끊어 읽은 덩어리를 순서대로 이어 읽으면 이런 뜻이야. 네 해석과 맞춰보자!</div>`;
+  let h = `<section class="chapter answers"><div class="chhead"><span class="daypill">정답 · 해설</span></div>
+    <h1>정답 · 해설 — 혼자 풀어보기</h1>
+    <div class="chsub">직접 푼 걸 여기서 맞춰보자. 끊어읽기 정답과 이 문장에서 붙잡을 핵심을 정리했어.</div>`;
   cats.forEach((cat, ci) => {
     if (!cat.practice.length) return;
     h += secHead(CIRCLED[ci] || (ci + 1), cat.key, null, 'teal');
-    h += '<div class="anslist">' + cat.practice.map((s, i) =>
-      `<div class="ans"><span class="ansn">${i + 1}</span>
-        <span class="anskor">${esc(s.chunks.map((c) => c[1]).join(' '))}</span></div>`).join('') + '</div>';
+    h += cat.practice.map((s, i) => `<div class="sblock">
+      <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span><span class="stag">[${esc(s.src)}]</span></div>
+      ${chunkLines(s.chunks, true)}
+      ${catchCard(s.catch)}
+    </div>`).join('');
   });
   h += `</section>`;
   return h;
