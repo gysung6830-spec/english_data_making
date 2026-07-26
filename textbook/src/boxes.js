@@ -179,13 +179,13 @@ function catchBox(text) {
   ];
 }
 
-// 7. 💡 팁 박스 — "왜 여기서 끊었을까?" (자동 생성 문구를 인자로 받음)
+// ✂ 끊어읽기 팁 박스 — "어디서 끊을까?" (자동 생성 문구를 인자로 받음)
 function tipBox(text) {
   return [
     makeBox(S.TIP.bg, S.TIP.border, [
       new Paragraph({
         children: [
-          new TextRun({ text: '💡 왜 여기서 끊었을까?  ', bold: true, size: 18, color: '333333', font: S.FONT }),
+          new TextRun({ text: '✂ 끊어읽기 팁 — 어디서 끊을까?  ', bold: true, size: 18, color: '333333', font: S.FONT }),
           new TextRun({ text, size: 18, color: S.TIP.txt, font: S.FONT }),
         ],
       }),

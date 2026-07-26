@@ -24,9 +24,9 @@ function makeTip(chunks) {
   }
   const uniq = [...new Set(triggers)].slice(0, 3);
   if (uniq.length === 0) {
-    return '의미가 한 덩어리로 끝나는 지점(주어+동사 뼈대, 수식어 경계)마다 끊었어. 그 덩어리 안에서만 뜻을 붙이면 훨씬 쉬워.';
+    return '의미가 한 덩어리로 끝나는 지점(주어+동사 뼈대, 수식어 경계)마다 끊어 봐. 그 덩어리 안에서만 뜻을 붙이면 훨씬 쉬워.';
   }
-  return `${uniq.join(', ')} 앞에서 끊었어 — 새로운 의미 덩어리가 시작되는 신호야. 이 지점마다 숨 한 번 쉬고 다음 덩어리로 넘어가면 돼.`;
+  return `${uniq.join(', ')} 앞에서 끊어 봐 — 새로운 의미 덩어리가 시작되는 신호야. 이 지점마다 숨 한 번 쉬고 다음 덩어리로 넘어가면 돼.`;
 }
 
 module.exports = { makeTip };

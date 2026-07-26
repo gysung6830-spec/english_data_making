@@ -137,20 +137,23 @@ function catchCard(text) {
   return `<div class="callout catch"><span class="co-ic">✅ 이 정도는 캐치!</span> ${esc(text)}</div>`;
 }
 function tipCard(text) {
-  return `<div class="callout tip"><span class="co-ic">💡 왜 여기서 끊었을까?</span> ${esc(text)}</div>`;
+  return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
 }
 
+// 문장 하나의 순서: 끊어읽기 팁(어디서 끊을지) → 끊어읽기 → 뼈대·괄호 → 이 정도는 캐치
 function workedBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
+    ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, true)}
     ${skeletonCard(s.steps)}
-    ${catchCard(s.catch)}${tipCard(makeTip(s.chunks))}</div>`;
+    ${catchCard(s.catch)}</div>`;
 }
 function practiceBlock(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
+    ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, false)}
     ${skeletonBlank()}${writeCard()}
-    ${catchCard(s.catch)}${tipCard(makeTip(s.chunks))}</div>`;
+    ${catchCard(s.catch)}</div>`;
 }
 
 function chapterHtml(cat, chIndex) {

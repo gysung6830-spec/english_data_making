@@ -67,14 +67,15 @@ function introSection(cat) {
 }
 
 // ── 문장 렌더 ────────────────────────────────────────
+// 순서: 어휘 → 끊어읽기 팁(어디서 끊을지) → 끊어읽기 → 뼈대·괄호 → (내 해석) → 캐치
 function renderWorked(w) {
   return [
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
+    ...B.tipBox(makeTip(w.chunks)),
     ...B.chunkBox(w.chunks),
     ...B.skeletonBox(w.steps),
     ...B.catchBox(w.catch),
-    ...B.tipBox(makeTip(w.chunks)),
   ];
 }
 function renderPractice(w, idx) {
@@ -82,11 +83,11 @@ function renderPractice(w, idx) {
     B.h3(`연습 ${idx + 1}`),
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
+    ...B.tipBox(makeTip(w.chunks)),
     ...B.chunkBox(w.chunks),
     ...B.skeletonBoxBlank(),
     ...B.answerWriteBox(),
     ...B.catchBox(w.catch),
-    ...B.tipBox(makeTip(w.chunks)),
   ];
 }
 
