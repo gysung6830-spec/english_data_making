@@ -77,7 +77,7 @@ const categories = [
             "매사추세츠 공과대학(MIT)에서"
           ]
         ],
-        "catch": "'to+장소', 'in+연도', 'at+장소'처럼 전치사+명사는 각각 한 덩어리야. '어디로·언제·어디서'를 알려주는 거예요!",
+        "catch": "그는 1937년에 미국으로 가서, 약 10년 뒤 MIT에서 시각 디자인을 가르치기 시작했다는 거예요!",
         "vocab": [
           [
             "go to",
@@ -124,7 +124,7 @@ const categories = [
             "소셜 미디어 플랫폼에서"
           ]
         ],
-        "catch": "같은 전치사구라도 'to ~'는 앞 명사(threats)를 꾸미고, 'on ~'은 문장에 '어디서'를 더해 — 위치를 보고 역할을 판단하는 거예요!",
+        "catch": "지식 축적을 위협하는 가장 큰 것 중 하나를 이제 소셜 미디어에서 볼 수 있다는 거예요!",
         "vocab": [
           [
             "threat",
@@ -169,7 +169,7 @@ const categories = [
             "헝가리 부다페스트에 있는"
           ]
         ],
-        "catch": "'at+기관', 'in+도시'로 장소를 점점 좁혀 줘 — 큰 덩어리(아카데미) 안에 작은 덩어리(부다페스트)가 들어있는 셈이에요!",
+        "catch": "그는 헝가리 부다페스트에 있는 왕립 미술 아카데미에서 회화를 공부했다는 거예요!",
         "vocab": [
           [
             "academy",
@@ -206,7 +206,7 @@ const categories = [
             "헝가리 Eger에"
           ]
         ],
-        "catch": "'In+연도'는 맨 앞에서 '언제'를, 'in+장소'는 '어디서'를 알려줘 — 전치사구가 문장의 시간·장소 배경을 깔아주는 거예요!",
+        "catch": "1995년에 그의 작품을 소장할 박물관이 헝가리 Eger에 세워졌다는 거예요!",
         "vocab": [
           [
             "museum",
@@ -239,7 +239,7 @@ const categories = [
             "아프리카 대륙 전역에 걸친"
           ]
         ],
-        "catch": "'of+명사'는 앞 명사를 꾸미고(무엇의 설치?), 'across+명사'는 '어디에 걸쳐'인지 알려줘 — 둘 다 앞 명사에 붙는 덩어리예요!",
+        "catch": "아프리카 대륙 전역에 광섬유 통신 케이블을 까는 일을 예로 들어보자는 거예요!",
         "vocab": [
           [
             "installation",
@@ -2534,7 +2534,7 @@ const MORE = {
         ["from the cries of other species", "다른 종의 울음소리와"],
         ["in many ways.", "여러 가지 면에서"]
       ],
-      "catch": "'from + 명사', 'in + 명사'가 각각 '무엇과', '어떤 면에서'를 알려주는 덩어리야 — differ from ~ in ~!",
+      "catch": "인간의 말은 여러 가지 면에서 다른 동물의 울음소리와 다르다는 거예요!",
       "vocab": [["differ from", "~와 다르다"], ["cries", "울음소리"], ["species", "종"]]
     },
     {
@@ -2544,7 +2544,7 @@ const MORE = {
         ["Truth is essential", "진실은 필수적이다"],
         ["for progress and the development of knowledge.", "진보와 지식의 발전에"]
       ],
-      "catch": "'for + 명사'는 '~에(무엇에 필수적인지)'를 알려줘 — essential for ~ = ~에 필수적인!",
+      "catch": "진실은 진보와 지식의 발전에 꼭 필요하다는 거예요!",
       "vocab": [["essential", "필수적인"], ["progress", "진보"], ["development", "발전"]]
     },
     {
@@ -2555,7 +2555,7 @@ const MORE = {
         ["in the likely outcomes", "가능한 결과에 대한"],
         ["of their interventions.", "자기 개입의"]
       ],
-      "catch": "'in ~ of ~'가 줄줄이 붙어 앞 명사를 꾸며 — confidence in the outcomes of interventions = 개입의 결과에 대한 확신!",
+      "catch": "관리자는 자기 개입이 가져올 결과를 확신할 수 있어야 한다는 거예요!",
       "vocab": [["confidence", "확신"], ["outcome", "결과"], ["intervention", "개입"]]
     },
     {
@@ -2566,7 +2566,7 @@ const MORE = {
         ["no goal-oriented action", "목표 지향적인 행동은"],
         ["would be possible.", "불가능할 것이다"]
       ],
-      "catch": "'Without + 명사'는 '~이 없으면'이라는 조건 — 문장 맨 앞의 전치사구는 배경이야!",
+      "catch": "그런 능력이 없으면 목표를 향한 행동 자체가 불가능하다는 거예요!",
       "vocab": [["ability", "능력"], ["goal-oriented", "목표 지향적인"], ["possible", "가능한"]]
     },
     {
@@ -2576,7 +2576,7 @@ const MORE = {
         ["In a typical human language", "일반적인 인간의 언어에는"],
         ["there are something like thirty or forty distinctive speech sounds.", "대략 30~40개의 독특한 말소리가 있다"]
       ],
-      "catch": "'In + 명사'로 시작하면 '~에는'이라는 장소·범위 배경 — 진짜 주어(sounds)는 there are 뒤에 있어!",
+      "catch": "보통 인간의 언어에는 30~40개쯤의 독특한 말소리가 있다는 거예요!",
       "vocab": [["typical", "일반적인, 전형적인"], ["distinctive", "독특한"], ["speech sound", "말소리"]]
     }
   ],
@@ -2589,7 +2589,7 @@ const MORE = {
         ["into chains", "연쇄로"],
         ["to form a literally unlimited number of words.", "말 그대로 무제한적인 수의 단어를 만들기 위해"]
       ],
-      "catch": "can be combined = 결합될 수 있다. 소리가 스스로 결합하는 게 아니라 '결합되는' 거라 be + p.p.!",
+      "catch": "이 소리들을 이어 붙여서 무한히 많은 단어를 만들 수 있다는 거예요!",
       "vocab": [["combine", "결합하다"], ["chain", "연쇄, 사슬"], ["unlimited", "무제한의"]]
     },
     {
@@ -2599,7 +2599,7 @@ const MORE = {
         ["Just then, she heard an announcement", "바로 그때, 그녀는 안내 방송을 들었다"],
         ["saying that her flight had been \"delayed.\"", "자신의 항공편이 '지연되었다'고 하는"]
       ],
-      "catch": "had been delayed = '지연되었다'. 항공편이 스스로 지연한 게 아니라 '지연시켜진' 거라 be + p.p.(delayed)!",
+      "catch": "바로 그때 그녀는 자기 항공편이 '지연됐다'는 안내 방송을 들었다는 거예요!",
       "vocab": [["announcement", "안내 방송, 발표"], ["flight", "항공편"], ["delay", "지연시키다"]]
     },
     {
@@ -2609,7 +2609,7 @@ const MORE = {
         ["Thus, their observations were primarily conducted", "그리하여 그들의 관찰은 주로 행해졌다"],
         ["from their verandas.", "그들의 베란다에서"]
       ],
-      "catch": "were conducted = 행해졌다(수행되었다). 관찰이 스스로 한 게 아니라 '행해진' 거라 be + p.p.!",
+      "catch": "그래서 그들의 관찰은 주로 자기 베란다에서 이뤄졌다는 거예요!",
       "vocab": [["observation", "관찰"], ["primarily", "주로"], ["conduct", "수행하다"]]
     }
   ],
@@ -2621,7 +2621,7 @@ const MORE = {
         ["One function of poetry is", "시의 한 가지 기능은"],
         ["to depict the world with a fresh perception.", "신선한 인식으로 세상을 묘사하는 것이다"]
       ],
-      "catch": "be동사 뒤의 'to + 동사'는 '~하는 것' — 'is to depict = 묘사하는 것이다'처럼 등호로 이어져!",
+      "catch": "시의 한 가지 기능은 세상을 신선한 눈으로 새롭게 그려내는 것이라는 거예요!",
       "vocab": [["function", "기능"], ["depict", "묘사하다"], ["perception", "인식"]]
     }
   ],
@@ -2634,7 +2634,7 @@ const MORE = {
         ["than merely having their goods on display", "단지 상품을 전시하는 것보다"],
         ["and 'selling from stock'.", "그리고 '재고를 판매하는 것'보다"]
       ],
-      "catch": "than/전치사 뒤라 동사가 -ing! 'having ~ = 전시하는 것', 'selling ~ = 판매하는 것'처럼 '~하는 것'으로 읽어.",
+      "catch": "최고의 판매업자는 그냥 물건을 진열해 파는 것보다 훨씬 폭넓은 서비스를 준다는 거예요!",
       "vocab": [["dealer", "판매업자, 상인"], ["broader", "더 폭넓은"], ["on display", "전시되어"]]
     }
   ],
@@ -2648,7 +2648,7 @@ const MORE = {
         ["with dark, velvety leaves", "짙은 벨벳 같은 잎을 가진"],
         ["shaped like hearts.", "하트 모양의"]
       ],
-      "catch": "명사 뒤 'shaped(p.p.)'는 '~된 모양의' — 'leaves shaped like hearts = 하트 모양으로 된 잎'. 잎이 스스로 모양 만든 게 아니니 수동 -ed!",
+      "catch": "그녀는 하트 모양의 짙은 벨벳 같은 잎을 가진 콜롬비아 식물을 몇 달째 찾고 있었다는 거예요!",
       "vocab": [["velvety", "벨벳 같은"], ["leaves", "잎(leaf의 복수)"], ["shaped like", "~모양의"]]
     }
   ],
@@ -2660,7 +2660,7 @@ const MORE = {
         ["Letting out a deep sigh,", "깊은 한숨을 내쉬며,"],
         ["she finally felt at ease.", "그녀는 마침내 마음이 편해졌다"]
       ],
-      "catch": "맨 앞 '-ing, 주어…'는 '~하며/~한 채로' — 'Letting out a sigh = 한숨을 내쉬며' 상황을 깔아줘!",
+      "catch": "깊은 한숨을 내쉬고 나서 그녀는 마침내 마음이 놓였다는 거예요!",
       "vocab": [["let out", "(소리를) 내다"], ["sigh", "한숨"], ["at ease", "편안한"]]
     },
     {
@@ -2670,7 +2670,7 @@ const MORE = {
         ["Worried that she could not get to the boarding gate in time,", "시간 내에 탑승구에 도착 못 할까 봐 걱정하며,"],
         ["she rushed through the crowds of people.", "그녀는 수많은 사람들을 뚫고 돌진했다"]
       ],
-      "catch": "'Worried ~,'처럼 p.p.로 시작해도 분사구문! '걱정된 채/걱정해서'라는 이유·상황을 나타내.",
+      "catch": "탑승구에 제때 못 갈까 봐 걱정하며 그녀는 인파를 뚫고 달렸다는 거예요!",
       "vocab": [["boarding gate", "탑승구"], ["in time", "시간 내에"], ["rush through", "~을 뚫고 돌진하다"]]
     },
     {
@@ -2681,7 +2681,7 @@ const MORE = {
         ["Helen could identify Julia", "Helen은 Julia를 알아볼 수 있었다"],
         ["by the large paper bag she was holding.", "그녀가 들고 있는 커다란 종이봉투로"]
       ],
-      "catch": "'Arriving ~,' = '도착했을 때/도착하면서' — 맨 앞 -ing 분사구문이 '언제'인지 알려줘!",
+      "catch": "건물에 도착한 Helen은 커다란 종이봉투를 든 걸 보고 Julia를 알아봤다는 거예요!",
       "vocab": [["arrive at", "~에 도착하다"], ["identify", "알아보다, 식별하다"], ["hold", "들다"]]
     },
     {
@@ -2691,7 +2691,7 @@ const MORE = {
         ["Laughing,", "웃으며,"],
         ["the woman said, \"Yes! Please take good care of this plant.\"", "그 여자는 '네! 이 식물을 잘 돌봐주세요.'라고 말했다"]
       ],
-      "catch": "'Laughing,' 딱 한 단어도 분사구문! '웃으며'라는 상황을 앞에 붙인 거야.",
+      "catch": "그 여자는 웃으며 '이 식물을 잘 돌봐 달라'고 말했다는 거예요!",
       "vocab": [["laugh", "웃다"], ["take care of", "~을 돌보다"], ["plant", "식물"]]
     },
     {
@@ -2702,7 +2702,7 @@ const MORE = {
         ["Julia replied", "Julia는 답했다"],
         ["that she was not a plant expert.", "자신은 식물 전문가가 아니라고"]
       ],
-      "catch": "'Handing over ~,' = '건네며' — 동작을 하면서 말했다는 걸 -ing 분사구문으로 붙인 거야!",
+      "catch": "Julia는 봉투를 건네며 자신은 식물 전문가가 아니라고 답했다는 거예요!",
       "vocab": [["hand over", "건네주다"], ["reply", "답하다"], ["expert", "전문가"]]
     }
   ]
