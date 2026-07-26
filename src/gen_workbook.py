@@ -19,7 +19,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BANK = ROOT / "corpus" / "passage_bank.jsonl"
 CONTENT = ROOT / "corpus" / "workbook_content.json"
+CONNECT = ROOT / "corpus" / "workbook_connect.json"
 OUT = ROOT / "samples" / "유형별훈련_워크북.html"
+_CONNECT = {}
 CIRCLED = "①②③④⑤"
 
 SIGNALS = {
@@ -161,6 +163,28 @@ def derive_block(d):
       <ol>{steps}</ol>{concl}{gnote}</div>'''
 
 
+CLUE_CLS = {"지시어":"ck-ref","연결어":"ck-conj","시간":"ck-time","대응":"ck-echo"}
+def connect_block(cn, typ):
+    """순서·삽입 전용 — 노랑 형광펜 대신 지시어·연결어·시간으로 조각을 잇는 연결고리 풀이."""
+    clues = ""
+    for c in cn.get("clues", []):
+        kind = c.get("kind", ""); cls = CLUE_CLS.get(kind, "ck-ref")
+        clues += (f'<div class="clue"><span class="cw">{esc(c.get("marker",""))}</span>'
+                  f'<span class="ck {cls}">{esc(kind)}</span>'
+                  f'<span class="cn">{esc(c.get("note",""))}</span></div>')
+    steps = "".join(f'<li><span class="ln">{i+1}</span>{esc(s)}</li>'
+                    for i, s in enumerate(cn.get("chain", [])))
+    lab = esc(cn.get("answer_label", ""))
+    head = ("🔗 연결고리로 <b>순서를 잇는</b> 과정" if typ == "순서"
+            else "🔗 연결고리로 <b>넣을 자리를 찾는</b> 과정")
+    return f'''<div class="derive connect">
+      <div class="dh">{head} <span style="font-weight:600;color:#3a6ea5;font-size:8.3px">(노랑 형광펜이 아니라 지시어·연결어·시간으로 조각을 연결)</span></div>
+      <div class="clues">{clues}</div>
+      <ol class="chain">{steps}</ol>
+      <div class="concl">→ 정답: <b>{lab}</b></div>
+      <div class="gnote">순서·삽입은 '중요 문장'이 아니라 <b>이어주는 단서(고리)</b>로 푼다.</div></div>'''
+
+
 def paraphrase_line(p):
     if not p:
         return ""
@@ -215,31 +239,47 @@ def render_spread(rec, c, idx):
     formula = FORMULA.get(typ, "")
     src_ans = c.get("answer_src", "given")
     ans_note = "" if src_ans == "given" else " <span style=\"font-size:8px;color:#a86b00\">(정답 미공개 → 풀이로 확정)</span>"
+    # 순서(36·37)·삽입(38·39)은 '연결고리' 풀이법
+    seqtype = "순서" if num in (36, 37) else ("삽입" if num in (38, 39) else "")
+    cn = _CONNECT.get(f'{rec.get("exam_id","")}|{num}') if seqtype else None
+    if seqtype:
+        how = ("🔗 <b>연결고리로 푼다</b> — 노랑 형광펜이 아니라 각 조각의 <b>지시어·연결어·시간 표현</b>을 표시해 이어보세요."
+               if seqtype == "순서" else
+               "🔗 <b>연결고리로 푼다</b> — 주어진 문장의 <b>지시어(this·they)</b>가 가리킬 자리와 <b>흐름이 끊긴 곳</b>을 찾으세요.")
+        g3 = (('<div class="s"><span class="k">1</span>주어진 글 끝 내용 파악</div>'
+               '<div class="s"><span class="k">2</span>각 단락 첫머리 지시어·연결어가 어디를 받나</div>'
+               '<div class="s"><span class="k">3</span>연대·인과로 사슬 잇기 → 배열</div>')
+              if seqtype == "순서" else
+              ('<div class="s"><span class="k">1</span>주어진 문장의 지시어·대명사 확인</div>'
+               '<div class="s"><span class="k">2</span>그 지시어가 가리킬 선행어 위치 찾기</div>'
+               '<div class="s"><span class="k">3</span>넣었을 때 논리 공백이 메워지는 곳</div>'))
+        checks = ('<li>각 조각의 첫 지시어·연결어를 표시했나?</li><li>연대·인과로 사슬이 이어지나?</li><li>대명사가 가리킬 선행어가 앞에 있나?</li>'
+                  if seqtype == "순서" else
+                  '<li>주어진 문장의 지시어(this·they)를 확인했나?</li><li>그 선행어가 있는 위치 뒤인가?</li><li>넣으니 흐름 단절이 메워지나?</li>')
+    else:
+        how = "🖍 신호 사전을 떠올리며 <b>무조건 읽을 문장에 형광펜</b>을 직접 치고, 예시는 넘기며 답을 골라보세요."
+        g3 = ('<div class="s"><span class="k">1</span>묻는 문장부터 읽고 \'무엇을 묻나\' 파악</div>'
+              '<div class="s"><span class="k">2</span>역접·한정·결론 신호 문장만 🟡, 예시는 넘기기</div>'
+              '<div class="s"><span class="k">3</span>지문어 복사 선지 소거 → 바꿔 말한 선지</div>')
+        checks = '<li>근거 신호 문장을 찾아 칠했나?</li><li>예시·양보절은 회색으로 넘겼나?</li><li>지문 단어 그대로 쓴 선지부터 지웠나?</li>'
+    remind_label = "🔗 연결고리 단서" if seqtype else "📢 신호 리마인더"
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
       {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
       <div class="pmain">
-        <div class="how">🖍 신호 사전을 떠올리며 <b>무조건 읽을 문장에 형광펜</b>을 직접 치고, 예시는 넘기며 답을 골라보세요.</div>
+        <div class="how">{how}</div>
         <div class="psg work">{clean_passage(hl, band)}</div>
         <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{opt_lines}</div>
         <div class="pguide"><div class="h">🖍 이렇게 풀어요</div>
-          <div class="g3">
-            <div class="s"><span class="k">1</span>묻는 문장부터 읽고 '무엇을 묻나' 파악</div>
-            <div class="s"><span class="k">2</span>역접·한정·결론 신호 문장만 🟡, 예시는 넘기기</div>
-            <div class="s"><span class="k">3</span>지문어 복사 선지 소거 → 바꿔 말한 선지</div>
-          </div>
+          <div class="g3">{g3}</div>
         </div>
       </div>
       <div class="pside">
-        <div class="mini"><div class="h">📢 신호 리마인더</div>{chips}</div>
+        <div class="mini"><div class="h">{remind_label}</div>{chips}</div>
         <div class="mini"><div class="h">✅ 셀프 체크</div>
-          <ul class="check">
-            <li>근거 신호 문장을 찾아 칠했나?</li>
-            <li>예시·양보절은 회색으로 넘겼나?</li>
-            <li>지문 단어 그대로 쓴 선지부터 지웠나?</li>
-          </ul>
+          <ul class="check">{checks}</ul>
         </div>
         <div class="memo"><div class="h">✍️ 내 풀이</div>
           <div class="row">걸린 시간 <span class="fill"></span></div>
@@ -251,12 +291,15 @@ def render_spread(rec, c, idx):
     </div>
   </div>'''
 
+    step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
+    reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}))
+    pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
     right = f'''<div class="qsolution">
     <div class="card">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">STEP 2 · 훈련 (정답 칠)</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
       <div class="psg">{step2_passage(hl)}</div>
-      {derive_block(c.get("derive", {}))}
-      {paraphrase_line(c.get("paraphrase"))}
+      {reason_block}
+      {pline}
       {opts_block(c.get("opts", []), answer)}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
     </div>
@@ -355,6 +398,9 @@ def build(n=80):
     if CONTENT.exists():
         for c in json.loads(CONTENT.read_text(encoding="utf-8")):
             content[c.get("key")] = c
+    if CONNECT.exists():
+        for c in json.loads(CONNECT.read_text(encoding="utf-8")):
+            _CONNECT[c.get("key")] = c
     groups = {}
     for r in picked:
         groups.setdefault(r["band"], []).append(r)
@@ -489,6 +535,19 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .derive .concl{ font-size:9.6px; font-weight:700; color:#23272e; background:#eaf5f0; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:6px 10px; margin-top:2px; }
 .derive .concl b{ color:var(--ink-d); }
 .derive .gnote{ font-size:8.6px; color:var(--muted); margin-top:5px; padding-left:2px; }
+/* 순서·삽입 연결고리 풀이 (노랑 대신 파랑 계열) */
+.derive.connect{ background:#f2f7fc; border-color:#a9c8e8; }
+.derive.connect .dh{ color:#2f5f92; } .derive.connect .dh b{ color:#1f4d7a; }
+.derive.connect .clues{ margin-bottom:6px; }
+.derive.connect .clue{ display:flex; gap:5px; align-items:baseline; font-size:9.2px; line-height:1.5; margin-bottom:2px; }
+.derive.connect .clue .cw{ flex:none; font-weight:800; color:#1f4d7a; background:#dcebf9; border-radius:3px; padding:0 4px; }
+.derive.connect .clue .ck{ flex:none; font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
+.ck-ref{ background:#2f6fb0; } .ck-conj{ background:#cd5049; } .ck-time{ background:#1f7a5c; } .ck-echo{ background:#8a6a00; }
+.derive.connect .clue .cn{ flex:1; color:#33414d; }
+.derive.connect ol.chain{ margin:4px 0 6px; }
+.derive.connect ol.chain li{ padding-left:20px; font-size:9.4px; }
+.derive.connect ol.chain li .ln{ position:absolute; left:0; top:1px; width:14px; height:14px; line-height:14px; text-align:center; background:#2f6fb0; color:#fff; border-radius:50%; font-size:8px; font-weight:800; }
+.derive.connect .concl{ background:#e6f0f9; border-left-color:#2f6fb0; } .derive.connect .concl b{ color:#1f4d7a; }
 .pline{ margin-top:6px; background:#eef4f1; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:5px 9px; font-size:9.3px; }
 .pline .lb{ font-size:8px; font-weight:800; color:#fff; background:var(--ink); border-radius:8px; padding:1px 6px; margin-right:5px; }
 .pline .sw{ background:#dbe7e0; border-radius:3px; padding:0 4px; font-weight:700; color:var(--ink-d); }

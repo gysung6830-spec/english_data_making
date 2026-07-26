@@ -1,0 +1,641 @@
+[
+ {
+  "key": "2024-수능|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "this behavior",
+    "kind": "지시어",
+    "note": "(C) 첫머리 'Others may then conform to this behavior' — 앞에 '한 사람이 행동을 시작함'이 있어야 하므로 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "then",
+    "kind": "시간·순서",
+    "note": "(C)의 'may then conform' — 주어진 글의 최초 행동 이후 남들이 뒤따르는 순서"
+   },
+   {
+    "marker": "Thus, she may prescribe the behavior to them",
+    "kind": "지시어",
+    "note": "(A)의 'them'은 (C)에서 등장한 'others' — (C) 뒤에 와야 지칭 성립"
+   },
+   {
+    "marker": "But some others will not need to have the behavior prescribed",
+    "kind": "연결어",
+    "note": "(B)의 'But'이 (A)의 '규정하면 따른다'를 뒤집음 — (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 한 사람이 상황에서 스스로 옳다고 여겨 특정 행동을 시작(규범의 발단)",
+   "(C): 'this behavior' + 'then'으로 그 최초 행동을 받아 '다른 이들이 뒤따라 동조'",
+   "(A): (C)의 others를 'them'으로 받아 그녀가 규정·제재하여 일부를 동조시킴",
+   "(B): 'But ... will not need to have the behavior prescribed'로 (A)를 뒤집어 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2024-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "they are fit and grow better",
+    "kind": "지시어",
+    "note": "주어진 문장 'they'는 ① 뒤 'Some individuals'(홀로 미친듯 광합성하는 나무)를 받음 — 그 뒤여야 함"
+   },
+   {
+    "marker": "Some individuals photosynthesize like mad",
+    "kind": "대응·반복",
+    "note": "②의 앞 문장 — 이들이 '더 건강히 자라지만 오래 못 산다'는 주어진 문장으로 이어짐"
+   },
+   {
+    "marker": "This is because a tree can be only as strong as the forest",
+    "kind": "지시어",
+    "note": "②의 'This'는 주어진 문장 '오래 살지 못함'을 받아 그 이유를 설명 — 사이에 주어진 문장이 있어야 논리 공백이 메워짐"
+   }
+  ],
+  "chain": [
+   "① 뒤: '일부 나무(Some individuals)는 홀로 미친듯 광합성한다'",
+   "주어진 문장: 'they(그 나무들)는 건강히 잘 자라지만 오래 살지는 못한다' — they가 그 개체들을 지칭",
+   "② 'This is because ...'가 '오래 못 산다'는 결과의 이유(숲만큼만 강할 수 있다)를 설명 → ②에 삽입"
+  ],
+  "answer_label": "②"
+ },
+ {
+  "key": "2027-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "In saying that",
+    "kind": "지시어",
+    "note": "(C) 첫머리 'In saying that'은 주어진 글의 '문화적 틀 안에서 작동하는 spectacle' 진술을 받음 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "By extension",
+    "kind": "연결어",
+    "note": "(A)의 'By extension'이 (C)의 '문화가 쓰는 전략' 논지를 확장 — (C) 뒤"
+   },
+   {
+    "marker": "but imitation is not enough",
+    "kind": "대응·반복",
+    "note": "(A) 끝의 '모방만으론 부족'을 (B)가 이어받음"
+   },
+   {
+    "marker": "Spectacle must also be spectacular",
+    "kind": "연결어",
+    "note": "(B)의 'also'가 (A)의 '모방만으론 부족'에 '또한 볼거리다워야'를 추가 — (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: spectacle은 문화적 틀·관습 안에서 작동함",
+   "(C): 'In saying that'으로 그 진술을 받아 'spectacle은 문화가 쓰는 전략'이라 규정",
+   "(A): 'By extension'으로 확장 — 문화의 결을 따라 만들되 '모방만으론 부족'",
+   "(B): 'must also be spectacular'로 (A)의 부족함을 채워 '또한 놀라워야' → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2024-수능|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "A favorable mutation",
+    "kind": "지시어",
+    "note": "주어진 문장 'A favorable mutation'은 ③의 'a mutation may occur that increases the fitness'(유리한 돌연변이)를 받음 — ③ 뒤여야 함"
+   },
+   {
+    "marker": "a mutation may occur that increases the fitness",
+    "kind": "대응·반복",
+    "note": "③ 문장 — 유리한 돌연변이 도입, 주어진 문장이 이를 이어받아 '다음 세대에 더 많이 대표됨'을 설명"
+   },
+   {
+    "marker": "By contrast, there is no mechanism",
+    "kind": "연결어",
+    "note": "⑤의 'By contrast'가 주어진 문장(유리한 돌연변이는 확산)과 '책의 오류 정정은 그런 기제가 없다'를 대조 — 주어진 문장 뒤여야 대조 성립"
+   }
+  ],
+  "chain": [
+   "③: '유리하게 적합도를 높이는 돌연변이가 가끔 발생'",
+   "주어진 문장: 'A favorable mutation'이 이를 받아 '자손이 많아 다음 세대에 더 많이 대표됨'",
+   "⑤: 'By contrast'로 '책의 우연한 오류 정정에는 그런 확산 기제가 없다'를 대조 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2023-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "This leads people to continue on paths",
+    "kind": "지시어",
+    "note": "(B)의 'This'는 주어진 글의 '투자한 것을 과대평가하는 성향'을 받음 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "For example, people often remain in terrible relationships",
+    "kind": "연결어",
+    "note": "(B)가 그 성향의 나쁜 사례(관계·사업)를 예시"
+   },
+   {
+    "marker": "Sunk cost doesn’t always have to be a bad thing",
+    "kind": "대응·반복",
+    "note": "(A)가 (B)의 '나쁜 것' 사례를 전환 — '항상 나쁘진 않다'"
+   },
+   {
+    "marker": "Actually, you can leverage this human tendency",
+    "kind": "연결어",
+    "note": "(C)의 'Actually'가 (A)의 '나쁘지만은 않다'를 이어받아 '오히려 활용 가능' — (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 매몰비용 오류 — 투자·소유하면 그것을 과대평가함",
+   "(B): 'This leads people to continue ...'로 그 성향이 '버려야 할 것도 계속하게 함'(나쁜 예시)",
+   "(A): 'Sunk cost doesn’t always have to be a bad thing'으로 전환",
+   "(C): 'Actually, you can leverage this human tendency'로 활용법 제시 → (B)-(A)-(C)"
+  ],
+  "answer_label": "(B)-(A)-(C)"
+ },
+ {
+  "key": "2026-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "also have downsides",
+    "kind": "연결어",
+    "note": "주어진 문장 'also have downsides'는 앞의 긍정적 관심·동기 서술에서 '단점'으로의 전환 신호 — 단점 서술이 시작되는 지점 앞"
+   },
+   {
+    "marker": "Certain types of cute products can be associated with a lack of sophistication",
+    "kind": "대응·반복",
+    "note": "④의 뒤 문장 — '세련미·진지함 결여'라는 실제 단점, 주어진 문장이 이를 도입"
+   },
+   {
+    "marker": "elicit two very different motivations",
+    "kind": "대응·반복",
+    "note": "①~③은 '두 가지 동기'(양육·자기표현)를 긍정적으로 서술 — 여기에 단점 문장이 끼면 흐름이 끊김, 단점은 ④부터"
+   }
+  ],
+  "chain": [
+   "①~③: cute/beautiful 디자인이 각각 양육·자기표현이라는 두 동기를 유발(긍정적 서술)",
+   "주어진 문장: 'But ... also have downsides'로 단점 논의로 전환",
+   "④: 'Certain types of cute products ... lack of sophistication'이 실제 단점을 제시 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2026-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Release the pendulum and note the magnets that it visits",
+    "kind": "대응·반복",
+    "note": "(B)의 첫머리 — 주어진 글의 '진자가 자석 사이를 왕복한다'는 장치 설명을 바로 이어받아 실험을 시작 → 주어진 글 뒤가 (B)"
+   },
+   {
+    "marker": "No matter how much care is taken to start the pendulum in the same position",
+    "kind": "대응·반복",
+    "note": "(C)의 첫머리 — (B)의 '같은 위치에서 다시 놓아도 곧 완전히 달라진다'를 그대로 부연 → (B) 뒤가 (C)"
+   },
+   {
+    "marker": "the iteration",
+    "kind": "대응·반복",
+    "note": "(A)의 'the iteration'은 (C) 끝의 'generated by iteration'을 되받음 → (C) 뒤가 (A)"
+   }
+  ],
+  "chain": [
+   "주어진 글이 자석 진자 장치를 소개 → (B)가 'Release the pendulum'으로 그 진자를 실제로 놓아 관찰",
+   "(B)의 '같은 위치서 다시 놓아도 완전히 달라진다'를 (C)가 'No matter how much care...same position'으로 부연",
+   "(C) 끝의 'iteration'을 (A)의 'the iteration'이 받아 비선형계 이론으로 마무리 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2027-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "Here the lexicon",
+    "kind": "지시어",
+    "note": "③ 뒤 문장의 'Here'는 앞에서 '언어·어휘' 차원이 도입되어야 가리킬 대상이 생김 — 삽입 문장이 그 차원을 여는 자리"
+   },
+   {
+    "marker": "In certain languages",
+    "kind": "대응·반복",
+    "note": "④·⑤('In certain languages'/'In other languages')는 어휘 사례 — 이 사례들의 상위 화제(어휘)가 ③에서 먼저 제시돼야 함"
+   },
+   {
+    "marker": "constructed a chromatic universe",
+    "kind": "대응·반복",
+    "note": "②까지는 red로 색 실험을 한 회화·물질 이야기 → ③에서 어휘 화제로 전환되는 논리 공백을 삽입 문장이 메움"
+   }
+  ],
+  "chain": [
+   "①②는 red가 최초의 색 실험·물질문화의 중심이었다는 내용",
+   "③ 뒤 'Here the lexicon'의 'Here'가 받을 '언어·어휘' 화제가 앞에 없어 공백 발생",
+   "삽입 문장이 어휘 차원을 도입 → 'Here the lexicon'이 이어받고 ④⑤가 언어 사례로 뒷받침 → ③"
+  ],
+  "answer_label": "③"
+ },
+ {
+  "key": "2023-수능|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "If the baby water flea is developing",
+    "kind": "대응·반복",
+    "note": "(B)가 주어진 글의 'adaptive plasticity(적응적 가소성)'가 구체적으로 어떻게 나타나는지(포식자 신호 유무에 따라 투구·가시 형성)를 설명 → 주어진 글 뒤가 (B)"
+   },
+   {
+    "marker": "That’s a clever trick",
+    "kind": "지시어",
+    "note": "(A)의 'That'은 (B)에서 말한 '필요할 때만 투구·가시를 만드는' 행동을 가리킴 → (B) 뒤가 (A)"
+   },
+   {
+    "marker": "So it may well be that this plasticity is an adaptation",
+    "kind": "연결어",
+    "note": "(C)의 'So'와 'this plasticity'가 (A)까지의 설명을 결론(적응)으로 정리 → (A) 뒤가 (C)"
+   }
+  ],
+  "chain": [
+   "주어진 글이 물벼룩의 '적응적 가소성'을 소개 → (B)가 포식자 신호 유무에 따른 투구·가시 형성으로 구체화",
+   "(B)의 '필요할 때만 만든다'는 행동을 (A)의 'That’s a clever trick'이 받아 에너지 절약으로 평가",
+   "(A)의 논의를 (C)의 'So...this plasticity is an adaptation'이 결론지음 → (B)-(A)-(C)"
+  ],
+  "answer_label": "(B)-(A)-(C)"
+ },
+ {
+  "key": "2026-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "all of this walking back and forth along their path",
+    "kind": "지시어",
+    "note": "삽입 문장의 'all of this'는 앞에서 길 걷기를 상상하는 내용이 누적돼야 가리킬 대상이 됨 — ⑤ 앞까지의 상상들(덧셈·뺄셈·눈 감고 길 떠올리기)을 총괄"
+   },
+   {
+    "marker": "If they close their eyes, they might even imagine the shape of the path",
+    "kind": "대응·반복",
+    "note": "⑤ 문장이 '눈을 감고 길·냄새·소리를 상상'하는 절정 → 그 직후 삽입 문장이 '가만히 앉아 상상하지만 발의 움직임을 되산다'로 마무리"
+   },
+   {
+    "marker": "but they are reliving",
+    "kind": "연결어",
+    "note": "'but'으로 '가만히 앉아 있음 vs 발의 움직임을 되삼'을 대비하며 단락을 닫음 → 마지막 위치 ⑤"
+   }
+  ],
+  "chain": [
+   "①~④는 길 걷기 경험으로 산술(덧셈·뺄셈)을 상상하는 과정",
+   "⑤ 'If they close their eyes...'가 상상의 절정(길 모양·냄새·소리)",
+   "삽입 문장의 'all of this walking'이 그 모든 상상을 총괄하며 '앉아서도 발 움직임을 되산다'로 매듭 → ⑤"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2023-수능|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Contingency pricing is the major way",
+    "kind": "대응·반복",
+    "note": "(C)가 주어진 글의 'contingency pricing'을 'In this approach'로 이어받아 정의(합의 전까지 무보수, 이후 수임료의 일정 비율) → 주어진 글 뒤가 (C)"
+   },
+   {
+    "marker": "Therefore, only an outcome in the client’s favor is compensated",
+    "kind": "연결어",
+    "note": "(A)의 'Therefore'가 (C)의 '의뢰인이 받는 돈의 일정 비율만 받는다'에서 도출 → (C) 뒤가 (A)"
+   },
+   {
+    "marker": "By using contingency pricing, clients are ensured that they pay no fees",
+    "kind": "대응·반복",
+    "note": "(B)가 (A) 끝의 '높은 수임료에 대한 두려움'을 해소(합의 전까지 무료 보장) → (A) 뒤가 (B)"
+   }
+  ],
+  "chain": [
+   "주어진 글이 성공보수(contingency pricing) 용어를 도입 → (C)가 'In this approach'로 방식을 정의",
+   "(C)의 '의뢰인 수령액의 일정 비율' → (A)의 'Therefore'가 '유리한 결과만 보상됨'으로 귀결하고 의뢰인의 두려움 언급",
+   "(A)의 '높은 수임료 두려움'을 (B)가 '합의 전 무료 보장'으로 해소하며 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2023-수능|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "There’s a reason for that",
+    "kind": "지시어",
+    "note": "삽입 문장의 'that'은 앞에 언급된 '공원에서 느끼는 급격한 단절감'을 가리킴 — 그 감정이 먼저 나와야 함"
+   },
+   {
+    "marker": "such a feeling",
+    "kind": "지시어",
+    "note": "'such a feeling(그런 느낌)'은 ④의 'a sharp separation from streets, cars, and buildings'를 되받음 → 삽입 문장은 ④ 문장 뒤"
+   },
+   {
+    "marker": "What’s behind this idea",
+    "kind": "지시어",
+    "note": "⑤ 문장의 'this idea'가 삽입 문장(경계에 나무·돌담을 세워 단절감을 만든 설계)을 가리킴 → 삽입 위치는 ⑤"
+   }
+  ],
+  "chain": [
+   "④ 'When entering a city park, people often imagine a sharp separation'이 공원의 단절감을 제시",
+   "삽입 문장 'There’s a reason for that...such a feeling'이 그 단절감('that'/'such a feeling')의 이유(경계 나무·돌담·칸막이)를 설명",
+   "⑤ 'What’s behind this idea'가 삽입 문장의 설계 의도를 받아 부연 → ⑤"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2026-09|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Subsequently",
+    "kind": "시간·순서",
+    "note": "(C)의 첫머리 — 주어진 글의 전통적 방식(주제 배정 후 무간섭 작문) 다음에 '그 후 교사가 걷어 평가한다'로 이어짐"
+   },
+   {
+    "marker": "Such instruction",
+    "kind": "지시어",
+    "note": "(C)의 'Such instruction is product-oriented' — 앞의 전통적 수업을 되받아 규정"
+   },
+   {
+    "marker": "on the other hand",
+    "kind": "연결어",
+    "note": "(A)의 'In process writing, on the other hand' — (C)까지의 product 지향과 대조되는 process writing 도입"
+   },
+   {
+    "marker": "In this way",
+    "kind": "연결어",
+    "note": "(B)의 'In this way' — (A)의 반복 협의·피드백 과정을 받아 결론(평가→수정으로 초점 이동)"
+   }
+  ],
+  "chain": [
+   "주어진 글(전통적 작문 지도) → (C) 'Subsequently'가 그 뒤 '걷어서 평가'로 이어지고 'Such instruction'으로 전통적 방식을 product-oriented라 규정",
+   "(C) 뒤 (A)의 'on the other hand'가 process writing으로 대조 전환",
+   "(A)의 협의·피드백 과정을 (B)의 'In this way'가 받아 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2023-수능|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "Another approach",
+    "kind": "지시어",
+    "note": "주어진 문장 'Another approach' — 앞에 이미 하나의 approach가 제시돼 있어야 함. ③의 time horizon 활용이 그 첫 approach"
+   },
+   {
+    "marker": "the principle may be applied",
+    "kind": "대응·반복",
+    "note": "③의 'issues of principle or precedent'를 되받음 — 원칙 적용 방식 논의의 연속"
+   },
+   {
+    "marker": "For example",
+    "kind": "연결어",
+    "note": "⑤의 'For example, a company may devise a family emergency leave plan' — 주어진 문장(원칙 적용 방식을 다양화)의 구체 예시라 바로 뒤에 와야 함"
+   }
+  ],
+  "chain": [
+   "③은 원칙 문제를 쪼개는 한 방법으로 time horizon 활용을 제시",
+   "주어진 문장 'Another approach'는 그 다음의 또 다른 방법(원칙 적용 방식의 수 변화)을 도입 → ③ 뒤",
+   "⑤의 'For example' 가족 휴가 사례가 이 방법의 예시로 이어짐 → ④"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2026-09|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "You would not be the first",
+    "kind": "대응·반복",
+    "note": "(B)의 첫머리 — 주어진 글의 '수학 글을 이해 못한 경험'을 받아 '당신이 처음은 아니다'로 위로"
+   },
+   {
+    "marker": "how do you recognise some writing is mathematical",
+    "kind": "대응·반복",
+    "note": "(B) 끝의 질문 — 이 질문에 대한 단서로 (A)의 notation 논의가 이어짐"
+   },
+   {
+    "marker": "The complicated notations",
+    "kind": "지시어",
+    "note": "(A)의 첫머리 — 수학 글을 알아보는 'obvious signs'로 기호를 제시"
+   },
+   {
+    "marker": "Put simply",
+    "kind": "연결어",
+    "note": "(C)의 'Put simply' — (A)의 기호 논의를 넘어 '수학적인 무언가가 있어야 수학'이라는 핵심 답으로 정리"
+   }
+  ],
+  "chain": [
+   "주어진 글(수학 글을 이해 못한 경험) → (B) 'You would not be the first'가 그 경험을 받아 위로하고 '어떻게 수학 글임을 알아보나' 질문 제기",
+   "(B)의 질문에 (A)가 'The complicated notations = obvious signs'로 답을 시작하나 기호는 근대적이라 한계 지적",
+   "(A)를 (C) 'Put simply'가 정리해 '수학적 내용이 있어야 수학'이라 결론 → (B)-(A)-(C)"
+  ],
+  "answer_label": "(B)-(A)-(C)"
+ },
+ {
+  "key": "2024-수능|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "But",
+    "kind": "연결어",
+    "note": "주어진 문장 첫머리 역접 'But' — 앞의 '소수의 경쟁만 존재'라는 내용과 상반돼야 함"
+   },
+   {
+    "marker": "only a handful of contests exist",
+    "kind": "대응·반복",
+    "note": "②의 'only a handful of contests exist'와 주어진 문장 'many other contests'가 정면 대조"
+   },
+   {
+    "marker": "By way of example",
+    "kind": "연결어",
+    "note": "④의 'By way of example' 암 치료 사례 — 주어진 문장(여러 부분을 가진 경쟁이 많다)의 구체 예시라 바로 뒤"
+   }
+  ],
+  "chain": [
+   "②는 승자독식 관점이 '소수의 경쟁만 있다는 뜻'이라 부정확하다고 지적",
+   "주어진 문장 'But many other contests...'가 '소수(a handful)'를 역접으로 뒤집어 '여러 부분을 가진 경쟁이 많다'고 제시 → ③",
+   "④의 'By way of example' 암 치료(여러 접근 필요) 사례가 이를 예시로 뒷받침"
+  ],
+  "answer_label": "③"
+ },
+ {
+  "key": "2023-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "also provides tests of the predictions",
+    "kind": "대응·반복",
+    "note": "(C)의 첫머리 — 주어진 글의 '화석은 진화의 증거'에서 'apart from...also' 예측 검증으로 논의 확장, 끝에 단세포→다세포 예측 제시"
+   },
+   {
+    "marker": "this prediction",
+    "kind": "지시어",
+    "note": "(B)의 'The fossil record supports this prediction' — (C) 끝의 단세포 선행 예측을 받음"
+   },
+   {
+    "marker": "the opposite could be found",
+    "kind": "대응·반복",
+    "note": "(B) 끝의 '반대 경우가 발견될 가능성' — (A)가 그 반대 상황을 구체화"
+   },
+   {
+    "marker": "If multicelled organisms were indeed found to have evolved before single-celled",
+    "kind": "지시어",
+    "note": "(A)의 첫머리 — (B)가 말한 'the opposite'(다세포가 단세포보다 먼저 진화)를 이어받아 이론 반증 가능성 논의"
+   }
+  ],
+  "chain": [
+   "주어진 글(화석 = 진화의 증거) → (C) 'also provides tests of the predictions'로 예측 검증 소개, 단세포가 다세포보다 먼저 진화한다는 예측 제시",
+   "(C)의 예측을 (B) 'this prediction'이 받아 화석이 이를 뒷받침한다고 하고, 끝에 '반대 경우 가능성' 언급",
+   "(B)의 'the opposite'를 (A)가 'If multicelled ... before single-celled'로 구체화해 반증 가능성으로 마무리 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2026-09|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "It signals to them",
+    "kind": "지시어",
+    "note": "주어진 문장의 'It'은 앞의 계절 변화(낮 짧아짐·기온 하강)를, 'them'은 나무들을 가리킴 — 잎을 버릴 때임을 신호"
+   },
+   {
+    "marker": "die of thirst",
+    "kind": "대응·반복",
+    "note": "②의 '잎을 유지하면 갈증으로 죽는다'까지가 '잎 보유의 위험'. 여기서 '왜 잎을 버려야 하는가'가 끝남"
+   },
+   {
+    "marker": "First, however",
+    "kind": "시간·순서",
+    "note": "④의 'First, however, trees carefully suck all of the useful nutrients' — 주어진 문장의 '잎을 버릴 때'라는 신호 뒤, 실제로 버리기 전 절차를 서술"
+   }
+  ],
+  "chain": [
+   "①②는 나무가 잎을 유지할 때의 위험(강풍 피해·갈증으로 죽음)을 설명",
+   "주어진 문장 'It signals to them...'이 계절 변화가 나무에게 '잎 버릴 때'임을 신호한다며 위험 설명에서 낙엽 과정으로 전환 → ③",
+   "④의 'First, however'가 잎을 떨구기 전 양분 회수 절차로 이어져 흐름 연결"
+  ],
+  "answer_label": "③"
+ },
+ {
+  "key": "2024-수능|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "the purpose of negotiation is the identification of areas of common interest and conflict",
+    "kind": "대응·반복",
+    "note": "(C) — 주어진 글의 협상 '정의'를 곧바로 '목적'으로 이어받아 부연하므로 주어진 글 뒤"
+   },
+   {
+    "marker": "In this sense",
+    "kind": "연결어",
+    "note": "(C) 후반 — 앞의 정의를 정리·심화하는 연결로, (C)가 도입부임을 뒷받침"
+   },
+   {
+    "marker": "Areas of difference",
+    "kind": "대응·반복",
+    "note": "(A) 첫머리 — (C)의 'areas of common interest and conflict' 중 conflict(차이)를 되받아 남는 이견을 설명 → (C) 뒤"
+   },
+   {
+    "marker": "In these and sometimes other forms of negotiation",
+    "kind": "지시어",
+    "note": "(B) 첫머리 — 'these forms'가 (A)의 적대적·양극화된 관계에서의 협상 형태를 가리킴 → (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글이 협상을 '대립 입장을 조정하는 시도'로 정의",
+   "(C)가 그 정의를 '협상의 목적=공통·갈등 영역의 식별'로 이어받아 부연",
+   "(A)가 (C)의 '갈등(차이)' 영역을 되받아, 남는 이견과 적대적 관계의 협상을 설명",
+   "(B)의 'these forms'가 (A)의 그 협상 형태를 가리키며 다른 기능을 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2027-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "To minimize vortex shedding",
+    "kind": "대응·반복",
+    "note": "주어진 문장 — 바로 앞에서 명명된 'a wind phenomenon called \"vortex shedding\"'를 되받음"
+   },
+   {
+    "marker": "confuse the wind",
+    "kind": "대응·반복",
+    "note": "직전 문장이 서술한 'the wind'(건물 면을 때리고 갈라져 나가는 바람)를 받아, 설계자가 그 바람을 교란한다고 이음 → ①"
+   },
+   {
+    "marker": "The difference in pressures on the front and back faces",
+    "kind": "대응·반복",
+    "note": "삽입 뒤 문장 — 교란 대상인 바람의 압력 차 메커니즘을 이어 설명하여 공백을 메움"
+   }
+  ],
+  "chain": [
+   "① 앞: 바람이 직사각형 건물 면을 때린 뒤 갈라져 나가며 'vortex shedding' 현상이 명명됨",
+   "주어진 문장 'To minimize vortex shedding ... confuse the wind'이 그 명명된 현상과 'the wind'를 되받아 설계자의 대응을 도입",
+   "① 뒤 'The difference in pressures ... gives rise to vortices'가 그 바람의 메커니즘을 이어 서술 → 삽입 위치 ①"
+  ],
+  "answer_label": "①"
+ },
+ {
+  "key": "2026-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Even one century ago",
+    "kind": "시간·순서",
+    "note": "(C) 첫머리 — 주어진 글의 진화적 기원에서 시간이 내려온 '한 세기 전'으로, 주어진 글 뒤"
+   },
+   {
+    "marker": "Our modern world has engineered such activity out of our lives",
+    "kind": "대응·반복",
+    "note": "(C) 끝 — 현대가 활동을 없앴다는 진술로, (A)의 구체적 예시를 예고"
+   },
+   {
+    "marker": "There are fewer manual jobs",
+    "kind": "대응·반복",
+    "note": "(A) 첫머리 — (C)의 '활동을 없앴다'를 구체적 목록(육체노동·이동·수렵)으로 이어받음 → (C) 뒤"
+   },
+   {
+    "marker": "Lack of sufficient physical activity has now been linked to",
+    "kind": "대응·반복",
+    "note": "(B) 첫머리 — (A) 끝의 'many problems'를 신체활동 부족 문제로 구체화 → (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 진화적으로 생존에 높은 신체활동이 필요했다",
+   "(C) 'Even one century ago' — 시간을 내려와 한 세기 전까지도 활동적이어야 했고, 현대가 그 활동을 없앴다",
+   "(A) — 그 '없앰'을 육체노동 감소 등 구체 예로 들고, 변화가 'many problems'도 낳았다고 함",
+   "(B) — 그 'problems'를 '신체활동 부족→17개 질환'으로 구체화 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2023-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "This",
+    "kind": "지시어",
+    "note": "주어진 문장 — ②의 juncos 연구 결과(다수 이탈이 더 큰 도피 반응 유발)를 가리킴 → ② 뒤"
+   },
+   {
+    "marker": "makes sense from the perspective of information reliability",
+    "kind": "대응·반복",
+    "note": "그 결과가 '정보 신뢰성' 관점에서 타당하다고 받으며, 뒤 문장들이 그 신뢰성 논리를 설명"
+   },
+   {
+    "marker": "If one group member departs",
+    "kind": "대응·반복",
+    "note": "삽입 뒤 문장 — 단독 이탈은 포식과 무관할 수 있어 신뢰성이 낮음을 구체화하여 공백을 메움"
+   }
+  ],
+  "chain": [
+   "② juncos 연구가 '단독 이탈'보다 '다수 이탈'이 더 큰 도피 반응을 부른다는 결과를 제시",
+   "주어진 문장 'This makes sense from the perspective of information reliability'가 그 결과를 정보 신뢰성 관점에서 받아들임",
+   "③ 뒤 'If one group member departs ...'가 단독 이탈은 포식과 무관할 수 있음을 들어 신뢰성 논리를 설명 → 삽입 위치 ③"
+  ],
+  "answer_label": "③"
+ }
+]
