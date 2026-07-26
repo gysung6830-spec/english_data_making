@@ -2,10 +2,10 @@
 // preview_pdf.js — 디자인 적용 PDF 생성기 (Chromium 인쇄)
 //
 // 참고 교재(김은아영어연구소 스타일)의 디자인 언어를 반영한다:
-//   · 청록/그린 강조색, 라운드 배지(일차·태그)
+//   · 리프 그린 강조색(참고 교재 색 추출값 #209050 계열), 라운드 배지(일차·태그)
 //   · 번호 원형 배지 + 제목 + 회색 힌트로 섹션 헤더
-//   · 문법 설명은 컬러 필(핵심/문법/한 단계 위) + 왼쪽 컬러 보더 카드
-//   · 끊어읽기 직독직해는 2단(영어 끊어읽기 | 우리말) 청록 헤더 표
+//   · 문법 설명은 컬러 필(핵심 주황/문법 보라/한 단계 위 골드) + 왼쪽 컬러 보더 카드
+//   · 끊어읽기 직독직해는 2단(영어 끊어읽기 | 우리말) 그린 헤더 표
 //   · 단어 완전정복은 그린 헤더 + 얼룩(zebra) 표
 //   · 하단 저작권 + 페이지 번호
 //
@@ -26,17 +26,18 @@ const { makeTip } = require('./src/tip');
 
 const FOOTER_BRAND = '©2026. 김은아영어연구소. All rights reserved.';
 
-// ── 팔레트 ────────────────────────────────────────────
+// ── 팔레트 (참고 교재 색 추출값에 맞춤: 리프 그린 계열) ──
+// 변수명 teal/mint 은 유지하되 값은 그린으로 통일한다.
 const C = {
   ink: '#232323', sub: '#6b7280',
-  teal: '#2E9B87', tealDark: '#217a6b', mint: '#E9F7F1',
-  green: '#35A47E', greenHdr: '#2E9B87', zebra: '#F3FAF7',
-  key: '#D9663A', keyBg: '#FBEDE7',        // 오늘의 핵심(주황)
-  gram: '#6B4FA0', gramBg: '#F1EEF9',       // 문법(보라)
-  plus: '#B0824F', plusBg: '#FBF3E4',       // 한 단계 위(골드)
-  goalBg: '#FFF6E4', goalBar: '#E0A73C',
+  teal: '#279A52', tealDark: '#1E7A40', mint: '#EAF6EC',
+  green: '#279A52', greenHdr: '#279A52', zebra: '#F1F8EF',
+  key: '#C5533F', keyBg: '#FBECEA',         // 오늘의 핵심(주황·빨강)
+  gram: '#6A57B0', gramBg: '#F0EDF9',        // 문법(보라)
+  plus: '#C0821F', plusBg: '#FBF3E0',        // 한 단계 위(골드)
+  goalBg: '#F7EED6', goalBar: '#D9A24A',
   tipBg: '#F2F3F4', tipBar: '#9aa0a6',
-  line: '#e5e7eb',
+  line: '#e5e7eb', greenLine: '#CDE8CF',
 };
 
 function findChrome() {
@@ -260,7 +261,7 @@ function css() {
 
   /* 신호 체크리스트 */
   .signals { display:flex; flex-direction:column; gap:5px; }
-  .sig { background:${C.mint}; border:1px solid #cfe9e1; border-radius:6px; padding:7px 11px; font-size:11px; }
+  .sig { background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:6px; padding:7px 11px; font-size:11px; }
   .chk { color:${C.teal}; font-weight:800; margin-right:7px; }
 
   /* 문법 카드 (핵심/문법/한 단계 위) */
@@ -304,7 +305,7 @@ function css() {
 
   /* 콜아웃 */
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
-  .callout.catch { background:${C.mint}; border:1px solid #bfe6da; }
+  .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
   .callout.tip { background:${C.tipBg}; border-left:4px solid ${C.tipBar}; color:#555; }
   .co-ic { font-weight:800; margin-right:6px; }
   .callout.catch .co-ic { color:${C.tealDark}; }
@@ -321,7 +322,7 @@ function css() {
   .ctitle { font-size:34px; font-weight:800; color:${C.ink}; margin-bottom:14px; }
   .csub { color:${C.teal}; font-weight:700; font-size:15px; margin-bottom:12px; }
   .csrc { color:${C.sub}; font-size:11.5px; font-style:italic; margin-bottom:40px; }
-  .usebox { text-align:left; background:${C.mint}; border:1px solid #cfe9e1; border-radius:10px;
+  .usebox { text-align:left; background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:10px;
     padding:16px 20px; margin:0 40px; }
   .useh { color:${C.tealDark}; font-weight:800; font-size:14px; margin-bottom:8px; }
   .usesteps { display:flex; flex-wrap:wrap; gap:6px 14px; margin:8px 0; }
