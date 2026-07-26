@@ -98,7 +98,7 @@ function vocabTable(cat) {
   }));
   const body = rows.map(([w, m], i) => `<tr class="${i % 2 ? 'z' : ''}">
     <td class="n">${i + 1}</td><td class="w">${esc(w)}</td><td>${esc(m)}</td></tr>`).join('');
-  return `<table class="vtab"><thead><tr><th class="n">#</th><th>단어</th><th>뜻</th></tr></thead><tbody>${body}</tbody></table>`;
+  return `<table class="vtab"><thead><tr><th class="n">#</th><th class="w">단어</th><th>뜻</th></tr></thead><tbody>${body}</tbody></table>`;
 }
 
 // 끊어읽기 직독직해 — 영어 한 줄(/로 구분) + 한글 한 줄(/로 구분)
@@ -285,11 +285,12 @@ function css() {
 
   /* 단어 표 */
   table { border-collapse:collapse; width:100%; font-size:10.8px; }
-  .vtab { margin:4px 0 6px; border:1px solid ${C.line}; }
+  .vtab { margin:4px 0 6px; border:1px solid ${C.line}; table-layout:fixed; }
   .vtab th { background:${C.greenHdr}; color:#fff; text-align:left; padding:6px 9px; font-weight:700; }
   .vtab td { padding:5px 9px; border-top:1px solid ${C.line}; }
-  .vtab td.n, .vtab th.n { width:34px; text-align:center; color:${C.teal}; font-weight:700; }
-  .vtab td.w { font-weight:700; }
+  .vtab td.n, .vtab th.n { width:32px; text-align:center; color:${C.teal}; font-weight:700; }
+  /* 단어 열을 좁게 고정 → 뜻(한글)이 바짝 붙어 영어-한글 사이 여백이 줄어듦 */
+  .vtab td.w, .vtab th.w { width:140px; font-weight:700; }
   .vtab tr.z td { background:${C.zebra}; }
 
   /* 끊어읽기 직독직해 표 */
