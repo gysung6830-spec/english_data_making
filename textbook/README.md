@@ -64,6 +64,41 @@ npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
 
 (`playwright` 는 optionalDependencies — 디자인 PDF 를 만들 때만 설치.)
 
+## 웹앱 — PDF 올리면 AI 가 교재로 (`npm run web`)
+
+수능·평가원 영어 PDF 를 업로드하면 **Claude(claude-opus-5)** 가 문장을 문법 챕터로
+분류하고 끊어읽기·어휘·캐치·뼈대까지 만들어, `data.js` 와 **같은 스키마**의 교재
+데이터로 구조화한다. 그 데이터를 그대로 `src/document.js`(docx) / `src/html.js`(디자인 PDF)
+로 렌더해 다운로드 링크를 준다.
+
+```bash
+cp .env.example .env         # ANTHROPIC_API_KEY=sk-... 채우기
+npm install                  # express·multer·@anthropic-ai/sdk·pdf-parse 설치
+npm run web                  # http://localhost:3000
+```
+
+**파이프라인** (`webapp/server.js`):
+
+```
+PDF 업로드 → src/extract.js(영어 문장 추출) → src/ai.js(Claude 구조화)
+          → src/validate.js(불변식 검증) → src/document.js(docx) + src/html.js(PDF) → 다운로드
+```
+
+- **`src/extract.js`** — `pdf-parse` 로 순수 텍스트를 뽑고, 한글/문항번호/머리말을
+  걸러 **영어 문장 후보**만 정리(중복 제거).
+- **`src/ai.js`** — `@anthropic-ai/sdk` 로 `claude-opus-5` 호출(적응형 사고 · 스트리밍 ·
+  structured outputs). 출력은 README '콘텐츠 작성 가이드라인'을 그대로 프롬프트에 반영한다
+  (캐치=한 줄 핵심 뜻·반말·문법 용어 금지, 끊어읽기=앞에서부터 직독직해 등).
+  챕터 title 의 원문자 번호(①②③…)는 최종 순서에 맞게 자동 재부여.
+- **환경변수**(`.env`): `ANTHROPIC_API_KEY`(필수 — 없으면 아래 MOCK), `ANTHROPIC_MODEL`
+  (기본 `claude-opus-5`), `ANTHROPIC_MOCK=1`(키가 있어도 MOCK 강제), `PORT`(기본 3000).
+
+> **MOCK 폴백**: `ANTHROPIC_API_KEY` 가 없으면 규칙 기반으로 문장을 대충 분류해
+> **형식만 갖춘** 교재를 만든다. 실제 해석/캐치 품질은 없고, 파이프라인(업로드→렌더→
+> 다운로드)이 도는지 확인하는 용도다. 실제 품질은 API 키를 넣어야 나온다.
+
+`.env` 는 커밋하지 않는다(`.gitignore` 등록). 키는 코드에 하드코딩하지 말 것.
+
 ### 폰트 — NanumSquareRound (나눔스퀘어라운드)
 
 `fonts/` 에 NanumSquareRound(L/R/B/EB, OFL-1.1)를 포함한다.
@@ -82,16 +117,25 @@ bash setup_fonts.sh   # fonts/*.ttf → ~/.local/share/fonts + fc-cache
 
 ```
 textbook/
-  data.js              교재 데이터 (6챕터, 명세 §4 스키마)
+  data.js              교재 데이터 (7챕터, 명세 §4 스키마)
   build_v4.js          빌드 진입점: 검증 → docx → pdf (명세 §5.5)
+  preview_pdf.js       디자인 PDF CLI (src/html.js 를 쓰는 얇은 래퍼)
   validate.js          데이터 검증만 단독 실행 (CI/사전 점검)
+  .env.example         웹앱 환경변수 템플릿 (.env 로 복사해서 키 채우기)
   src/
     styles.js          색상·폰트·크기 상수 (명세 §5.4)
     tip.js             "왜 여기서 끊었을까?" 팁 자동 생성 (명세 §5.3)
     boxes.js           재사용 박스/문단 빌더 (명세 §5.2)
-    document.js        표지·챕터·정답 조립 (명세 §5.1)
+    document.js        표지·챕터·정답 조립 → docx (명세 §5.1)
+    html.js            디자인 HTML→PDF 렌더러 (CLI·웹앱 공유)
+    extract.js         업로드 PDF → 영어 문장 추출 (pdf-parse)
+    ai.js              문장 → 교재 데이터 구조화 (Claude / MOCK)
     validate.js        불변식 검증 로직
-  output/              생성물(.docx/.pdf) — git 에는 올리지 않음
+  webapp/
+    server.js          업로드 → 추출 → AI → 검증 → 렌더 (express)
+    public/index.html  업로드 UI
+  fonts/               NanumSquareRound (L/R/B/EB, OFL-1.1)
+  output/              생성물(.docx/.pdf/.html) — git 에는 올리지 않음
 ```
 
 예전 단일 파일이던 렌더러를 위 모듈로 분리했다(명세 우선순위 #2).

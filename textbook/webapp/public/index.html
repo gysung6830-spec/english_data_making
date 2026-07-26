@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영어 해석 교재 자동 생성기</title>
+<style>
+  :root { --green:#279A52; --greenD:#1E7A40; --mint:#EAF6EC; --ink:#232323; --sub:#6b7280; --line:#e5e7eb; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"NanumSquareRound","Noto Sans KR","Malgun Gothic",sans-serif;
+    background:#f6f8f6; color:var(--ink); line-height:1.6; }
+  .wrap { max-width:680px; margin:0 auto; padding:40px 20px 80px; }
+  header h1 { font-size:26px; margin:0 0 6px; }
+  header p { color:var(--sub); margin:0 0 26px; }
+  .badge { display:inline-block; background:var(--green); color:#fff; font-weight:700;
+    font-size:12px; padding:4px 12px; border-radius:20px; margin-bottom:14px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:18px; }
+  .drop { border:2px dashed #bcd8c2; border-radius:12px; background:var(--mint); text-align:center;
+    padding:38px 20px; cursor:pointer; transition:.15s; }
+  .drop.drag { background:#dcefe0; border-color:var(--green); }
+  .drop b { color:var(--greenD); }
+  .drop small { color:var(--sub); display:block; margin-top:6px; }
+  #file { display:none; }
+  .fname { margin-top:12px; font-size:14px; color:var(--greenD); font-weight:700; }
+  button { width:100%; margin-top:16px; background:var(--green); color:#fff; border:0; border-radius:10px;
+    padding:14px; font-size:16px; font-weight:800; cursor:pointer; font-family:inherit; }
+  button:disabled { background:#a9c9b1; cursor:default; }
+  .steps { font-size:13px; color:#374151; }
+  .steps div { padding:5px 0; border-bottom:1px solid #f0f0f0; }
+  .steps div:before { content:"›"; color:var(--green); font-weight:800; margin-right:8px; }
+  .result a { display:inline-block; background:var(--greenD); color:#fff; text-decoration:none;
+    padding:10px 18px; border-radius:8px; font-weight:700; margin:6px 10px 0 0; }
+  .err { color:#b3261e; font-weight:700; }
+  .muted { color:var(--sub); font-size:12.5px; }
+  .spin { display:inline-block; width:15px; height:15px; border:2px solid #cfe4d4; border-top-color:var(--green);
+    border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:6px; }
+  @keyframes sp { to { transform:rotate(360deg); } }
+  .hide { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">문법으로 뚫는 영어 해석</span>
+    <h1>영어 해석 교재 자동 생성기</h1>
+    <p>수능·평가원 영어 PDF 를 올리면, AI 가 문법 챕터별 구문해석 교재(편집용 docx + 배포용 PDF)로 만들어 줘.</p>
+  </header>
+
+  <div class="card">
+    <form id="form">
+      <label class="drop" id="drop">
+        <b>📄 PDF 를 여기에 놓거나 클릭해서 선택</b>
+        <small>수능/평가원 WORKBOOK · 모의고사 지문 PDF (최대 30MB)</small>
+        <input type="file" id="file" name="pdf" accept="application/pdf,.pdf">
+        <div class="fname hide" id="fname"></div>
+      </label>
+      <button type="submit" id="go" disabled>교재 만들기</button>
+    </form>
+  </div>
+
+  <div class="card hide" id="progress">
+    <div class="steps" id="steps"></div>
+  </div>
+
+  <div class="card hide result" id="result"></div>
+
+  <p class="muted" id="mode"></p>
+</div>
+
+<script>
+const fileInput = document.getElementById('file');
+const drop = document.getElementById('drop');
+const fname = document.getElementById('fname');
+const go = document.getElementById('go');
+const form = document.getElementById('form');
+const progress = document.getElementById('progress');
+const stepsEl = document.getElementById('steps');
+const result = document.getElementById('result');
+
+fetch('/api/health').then((r) => r.json()).then((h) => {
+  document.getElementById('mode').textContent = h.hasKey
+    ? `AI 모드: Claude(${h.model}) 로 생성합니다.`
+    : `현재 API 키가 없어 MOCK(형식만) 으로 동작합니다. .env 에 ANTHROPIC_API_KEY 를 넣으면 실제 AI 가 작동해요.`;
+}).catch(() => {});
+
+function setFile(f) {
+  if (!f) return;
+  fname.textContent = '선택됨: ' + f.name;
+  fname.classList.remove('hide');
+  go.disabled = false;
+}
+fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
+['dragover', 'dragenter'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.add('drag'); }));
+['dragleave', 'drop'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.remove('drag'); }));
+drop.addEventListener('drop', (ev) => { const f = ev.dataTransfer.files[0]; if (f) { fileInput.files = ev.dataTransfer.files; setFile(f); } });
+
+form.addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  if (!fileInput.files[0]) return;
+  go.disabled = true;
+  result.classList.add('hide');
+  progress.classList.remove('hide');
+  stepsEl.innerHTML = '<div><span class="spin"></span>업로드하고 AI 가 교재를 만드는 중… (수십 초 걸릴 수 있어요)</div>';
+
+  const fd = new FormData();
+  fd.append('pdf', fileInput.files[0]);
+  try {
+    const r = await fetch('/api/generate', { method: 'POST', body: fd });
+    const data = await r.json();
+    stepsEl.innerHTML = (data.steps || []).map((s) => `<div>${s}</div>`).join('') || '';
+    if (!data.ok) {
+      result.innerHTML = `<p class="err">⚠️ ${data.error}</p>` +
+        (data.detail ? `<p class="muted">${data.detail.slice(0, 8).join('<br>')}</p>` : '');
+    } else {
+      result.innerHTML = `<h3>✅ 완성! (챕터 ${data.chapters}개 · 문장 ${data.sentences}개 · ${data.mode === 'mock' ? 'MOCK' : 'AI'})</h3>` +
+        data.files.map((f) => `<a href="${f.url}" download>${f.label} 다운로드</a>`).join('');
+    }
+  } catch (e) {
+    result.innerHTML = `<p class="err">⚠️ 요청 실패: ${e.message}</p>`;
+  } finally {
+    result.classList.remove('hide');
+    go.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
