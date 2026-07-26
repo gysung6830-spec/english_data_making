@@ -1,8 +1,8 @@
 // data.js — 교재 데이터 (명세 §4 스키마)
 //
-// 목차 순서 (명세 §2, 확정):
-//   ① 수동태 → ② to부정사 → ③ 동명사 → ④ 관계사 → ⑤ 분사 → ⑥ 분사구문
-//   ※ 챕터를 추가/재배열하면 title 의 원문자 번호(①~⑥)도 함께 갱신할 것.
+// 목차 순서 (명세 §2):
+//   ① 전치사구 → ② 수동태 → ③ to부정사 → ④ 동명사 → ⑤ 관계사 → ⑥ 분사 → ⑦ 분사구문
+//   ※ 챕터를 추가/재배열하면 title 의 원문자 번호(①~⑦)도 함께 갱신할 것.
 //
 // 자료 출처: 2023학년도 대학수학능력시험 20~24 · 31 · 32 · 35 · 40 · 41-42번 지문.
 //
@@ -18,8 +18,236 @@
 
 const categories = [
   {
+    // ⚠️ 전치사구 챕터의 worked/practice 예문은 강사가 직접 고르기 전까지 쓰는
+    //    '예시(illustrative)' 문장이다. intro/signal/method(설명)는 완성본이지만,
+    //    문장 자체는 2023 기출을 손으로 확정해 교체할 것(다른 챕터와 동일 스키마).
+    "key": "전치사구",
+    "title": "① 전치사구 — '전치사 + 명사' 덩어리로 읽기",
+    "intro": [
+      "전치사(in, on, of, with, for, by, about, to …)가 나오면, 그 뒤 명사까지 한 덩어리로 묶어서 읽는 거야. 이게 '전치사구'야.",
+      "이 덩어리는 두 가지 일을 해 — ① 바로 앞 명사를 꾸미거나(어떤 명사?), ② 문장 전체에 '언제·어디서·어떻게·왜'를 더해줘.",
+      "단어는 아는데 문장이 길어 보이는 이유가 바로 이 전치사구가 여러 개 붙어서야. 덩어리로 묶으면 확 짧아져!"
+    ],
+    "signal": [
+      "in / on / at / of / with / for / by / about / to / from / through … 같은 전치사가 보인다.",
+      "전치사 바로 뒤에는 (동사가 아니라) 명사·대명사·-ing가 온다.",
+      "전치사구가 명사 바로 뒤에 붙으면 그 명사를 꾸미고(형용사 역할), 그 외엔 대개 문장을 꾸민다(부사 역할)."
+    ],
+    "method": [
+      [
+        "1단계",
+        "전치사부터 그 뒤 명사 끝까지를 한 덩어리로 묶는다."
+      ],
+      [
+        "2단계",
+        "덩어리를 '~에서 / ~로 / ~에 대해 / ~와 함께'처럼 통째로 해석한다."
+      ],
+      [
+        "3단계",
+        "그 덩어리가 앞 명사를 꾸미는지(어떤 명사?), 문장을 꾸미는지(언제·어디서) 판단한다."
+      ]
+    ],
+    "worked": [
+      {
+        "src": "예시",
+        "en": "The information about the calories helps customers make better choices.",
+        "chunks": [
+          [
+            "The information",
+            "그 정보는"
+          ],
+          [
+            "about the calories",
+            "(칼로리에 대한 정보인데)"
+          ],
+          [
+            "helps customers make better choices.",
+            "손님들이 더 나은 선택을 하도록 돕는다"
+          ]
+        ],
+        "catch": "'about + 명사'는 앞 명사를 꾸며 — 'the information about the calories = 칼로리에 대한 정보'라는 거예요!",
+        "vocab": [
+          [
+            "information",
+            "정보"
+          ],
+          [
+            "calorie",
+            "칼로리"
+          ],
+          [
+            "choice",
+            "선택"
+          ]
+        ],
+        "steps": [
+          [
+            "덩어리",
+            "about the calories = 전치사 about + 명사 calories → '칼로리에 대한'"
+          ],
+          [
+            "역할",
+            "바로 앞 명사 information을 꾸밈(형용사 역할) — 어떤 정보? '칼로리에 대한' 정보"
+          ]
+        ]
+      },
+      {
+        "src": "예시",
+        "en": "In a range of medical contexts, checklists reduce serious mistakes.",
+        "chunks": [
+          [
+            "In a range of medical contexts,",
+            "다양한 의학적 상황에서,"
+          ],
+          [
+            "checklists reduce",
+            "체크리스트는 줄인다"
+          ],
+          [
+            "serious mistakes.",
+            "심각한 실수를"
+          ]
+        ],
+        "catch": "문장 맨 앞의 'In + 명사'는 '어디서/어떤 상황에서'를 알려주는 배경이야 — 뼈대(주어+동사)는 그 뒤부터라는 거예요!",
+        "vocab": [
+          [
+            "a range of",
+            "다양한, 여러"
+          ],
+          [
+            "context",
+            "상황, 맥락"
+          ],
+          [
+            "reduce",
+            "줄이다"
+          ]
+        ],
+        "steps": [
+          [
+            "덩어리",
+            "In a range of medical contexts = 전치사 In + 명사구 → '다양한 의학적 상황에서'"
+          ],
+          [
+            "역할",
+            "문장 전체에 '어디서/어떤 상황에서'를 더함(부사 역할). 뼈대는 checklists reduce ~"
+          ]
+        ]
+      }
+    ],
+    "practice": [
+      {
+        "src": "예시",
+        "en": "The desire for success can push people too hard.",
+        "chunks": [
+          [
+            "The desire",
+            "그 욕망은"
+          ],
+          [
+            "for success",
+            "(성공에 대한 욕망인데)"
+          ],
+          [
+            "can push people too hard.",
+            "사람들을 너무 심하게 몰아붙일 수 있다"
+          ]
+        ],
+        "catch": "'for + 명사'가 앞 명사를 꾸며 — 'the desire for success = 성공에 대한 욕망'이라는 거예요!",
+        "vocab": [
+          [
+            "desire",
+            "욕망"
+          ],
+          [
+            "success",
+            "성공"
+          ],
+          [
+            "push",
+            "몰아붙이다"
+          ]
+        ]
+      },
+      {
+        "src": "예시",
+        "en": "With a clear plan, you can manage the risk more easily.",
+        "chunks": [
+          [
+            "With a clear plan,",
+            "명확한 계획이 있으면,"
+          ],
+          [
+            "you can manage the risk",
+            "너는 그 위험을 관리할 수 있다"
+          ],
+          [
+            "more easily.",
+            "더 쉽게"
+          ]
+        ],
+        "catch": "'With + 명사'는 '~이 있으면/~을 가지고'라는 상황을 더해줘 — 뼈대는 그 뒤부터라는 거예요!",
+        "vocab": [
+          [
+            "clear",
+            "명확한"
+          ],
+          [
+            "plan",
+            "계획"
+          ],
+          [
+            "manage",
+            "관리하다"
+          ],
+          [
+            "risk",
+            "위험"
+          ]
+        ]
+      },
+      {
+        "src": "예시",
+        "en": "The writers of sports news are read by many people across the world.",
+        "chunks": [
+          [
+            "The writers",
+            "그 작가들은"
+          ],
+          [
+            "of sports news",
+            "(스포츠 뉴스의 작가들인데)"
+          ],
+          [
+            "are read by many people",
+            "많은 사람에게 읽힌다"
+          ],
+          [
+            "across the world.",
+            "전 세계에 걸쳐"
+          ]
+        ],
+        "catch": "전치사구가 한 문장에 여러 개(of ~, by ~, across ~) 붙을 수 있어 — 각각 덩어리로 묶으면 긴 문장도 안 무서워!",
+        "vocab": [
+          [
+            "writer",
+            "작가"
+          ],
+          [
+            "across",
+            "~에 걸쳐, 가로질러"
+          ],
+          [
+            "world",
+            "세계"
+          ]
+        ]
+      }
+    ]
+  },
+  {
     "key": "수동태",
-    "title": "① 수동태 — 주어가 '당하는' 문장",
+    "title": "② 수동태 — 주어가 '당하는' 문장",
     "intro": [
       "동사 자리에 'be동사(is/are/was/were/been/being) + p.p.'가 보이면 바로 이거야. 주어가 스스로 하는 게 아니라 '~되다/받다/당하다'라는 뜻이라고 생각하면 돼."
     ],
@@ -375,7 +603,7 @@ const categories = [
   },
   {
     "key": "to부정사",
-    "title": "② to부정사 — 'to+동사원형'의 3가지 얼굴",
+    "title": "③ to부정사 — 'to+동사원형'의 3가지 얼굴",
     "intro": [
       "'to + 동사원형' 모양이야. 쌤이 자주 강조하는 건데, 이게 ①명사처럼(~하는 것) ②형용사처럼(~할, 명사 뒤에서 꾸밈) ③부사처럼(~하기 위해서) 이렇게 3가지로 바뀔 수 있어."
     ],
@@ -751,7 +979,7 @@ const categories = [
   },
   {
     "key": "동명사",
-    "title": "③ 동명사 — '동사원형+ing'가 명사가 될 때",
+    "title": "④ 동명사 — '동사원형+ing'가 명사가 될 때",
     "intro": [
       "'동사원형+ing'가 문장의 주어 자리, enjoy/avoid/finish 같은 특정 동사의 목적어 자리, 또는 By/of/in 같은 전치사 바로 뒤에 오면 '~하는 것'이라는 명사로 쓰인 거야."
     ],
@@ -1138,7 +1366,7 @@ const categories = [
   },
   {
     "key": "관계사",
-    "title": "④ 관계사 — 앞의 명사를 자세히 설명해주는 문장",
+    "title": "⑤ 관계사 — 앞의 명사를 자세히 설명해주는 문장",
     "intro": [
       "who / which / that / whose / where 뒤에 (주어나 목적어가 하나 빠진) 문장이 이어지면, 쌤은 그걸 바로 앞 명사를 자세히 설명해주는 걸로 봐. '그런데 그건/그 사람은 ~하는' 이렇게 이해하면 편해."
     ],
@@ -1578,7 +1806,7 @@ const categories = [
   },
   {
     "key": "분사",
-    "title": "⑤ 분사 — 명사 딱 붙어서 꾸며주는 말",
+    "title": "⑥ 분사 — 명사 딱 붙어서 꾸며주는 말",
     "intro": [
       "이번엔 -ing나 p.p. 딱 한 단어(또는 짧은 어구)가 명사 앞이나 뒤에 붙어서 그 명사를 꾸며주는 경우야. -ing는 '~하는/~하게 하는', p.p.는 '~된/~당한'으로 해석하면 돼."
     ],
@@ -1993,7 +2221,7 @@ const categories = [
   },
   {
     "key": "분사구문",
-    "title": "⑥ 분사구문 — 문장에 붙는 곁다리 설명",
+    "title": "⑦ 분사구문 — 문장에 붙는 곁다리 설명",
     "intro": [
       "자, 이번 건 문장 앞·중간·끝에 콤마(,)랑 같이 '동사원형+ing' 또는 'p.p.(과거분사)'로 시작하거나 끝나는 덩어리가 붙어있는 경우야. 이건 진짜 주어+동사가 아니라 쌤이 '곁다리 설명'이라고 부르는 거야."
     ],

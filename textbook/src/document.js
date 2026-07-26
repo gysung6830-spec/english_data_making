@@ -29,7 +29,7 @@ function coverParagraphs() {
   return [
     center([new TextRun({ text: '문법으로 뚫는 영어 해석 교재', bold: true, size: 44, color: S.NAVY, font: S.FONT })], 200),
     // 부제는 실제 챕터 순서(수동태→…→분사구문)에 맞춰 표기
-    center([new TextRun({ text: '수동태 · to부정사 · 동명사 · 관계사 · 분사 · 분사구문', size: 26, color: S.BRASS, bold: true, font: S.FONT })], 100),
+    center([new TextRun({ text: '전치사구 · 수동태 · to부정사 · 동명사 · 관계사 · 분사 · 분사구문', size: 26, color: S.BRASS, bold: true, font: S.FONT })], 100),
     center([new TextRun({ text: '자료 출처: 2023학년도 대학수학능력시험 20~24 · 31 · 32 · 35 · 40 · 41-42번', size: 20, italics: true, font: S.FONT })], 100),
     center([new TextRun({ text: '기초 문법 학습용 · 과외 교재', size: 18, color: '666666', font: S.FONT })], 700),
 
