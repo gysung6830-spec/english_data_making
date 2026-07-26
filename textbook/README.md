@@ -60,9 +60,23 @@ npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
 
 - **`build_v4.js` → docx**: 텍스트 편집용(선생님이 문구 수정). LibreOffice 로 pdf 변환도 가능.
 - **`preview_pdf.js` → pdf**: 위 디자인이 입혀진 배포용. 편집은 `data.js` 에서.
+  각 챕터(목차)는 항상 **새 페이지에서 시작**하고, 하단에 저작권+페이지 번호가 붙는다.
 
-서체(NanumSquareRound)는 설치된 PC 에서 열 때 정확히 반영된다.
 (`playwright` 는 optionalDependencies — 디자인 PDF 를 만들 때만 설치.)
+
+### 폰트 — NanumSquareRound (나눔스퀘어라운드)
+
+`fonts/` 에 NanumSquareRound(L/R/B/EB, OFL-1.1)를 포함한다.
+
+- **디자인 PDF(`preview_pdf.js`)**: `fonts/*.woff2` 를 base64 로 **임베드**하므로,
+  별도 설치 없이 어디서 만들어도 나눔스퀘어라운드로 렌더된다.
+- **docx→LibreOffice PDF(`build_v4.js`)**: docx 는 폰트를 이름으로만 참조하므로,
+  변환 PC 에 폰트가 설치돼 있어야 정확히 렌더된다. 아래로 설치:
+
+```bash
+bash setup_fonts.sh   # fonts/*.ttf → ~/.local/share/fonts + fc-cache
+# Windows: fonts/*.ttf 더블클릭 → '설치'
+```
 
 ## 폴더 구조 (리팩터링 후)
 
@@ -150,6 +164,6 @@ type Category = {
 - [x] 렌더러 모듈 분리 (우선순위 #2)
 - [x] 데이터 검증 스크립트 (우선순위 #3)
 - [x] 실제 2023 수능 기출 문장으로 `data.js` 채움
-- [ ] (선택) NanumSquareRound 폰트 파일 포함 + 로컬 폰트 등록 스크립트 (우선순위 #4)
+- [x] NanumSquareRound 폰트 포함(PDF 임베드) + 로컬 폰트 등록 스크립트 (우선순위 #4)
 - [ ] (선택) 나머지 문법 챕터(동격/비교·도치/간접의문문·명사절/강조구문) 추가 (우선순위 #5)
 - [ ] (선택) WORKBOOK PDF → 문장 후보 추출 파서 (우선순위 #6)

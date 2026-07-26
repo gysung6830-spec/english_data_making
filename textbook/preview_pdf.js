@@ -52,6 +52,25 @@ function findChrome() {
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const CIRCLED = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
 
+// NanumSquareRound 를 base64 woff2 로 임베드해서 PDF 가 항상 이 서체로 렌더되게 함.
+// (fonts/ 의 woff2 는 OFL-1.1, 임베드 허용) — 폰트가 없으면 대체 폰트로 폴백.
+function fontFaces() {
+  const dir = path.join(__dirname, 'fonts');
+  const defs = [
+    ['NanumSquareRoundL.woff2', 300],
+    ['NanumSquareRoundR.woff2', 400],
+    ['NanumSquareRoundB.woff2', 700],
+    ['NanumSquareRoundEB.woff2', 800],
+  ];
+  return defs.map(([file, weight]) => {
+    const fp = path.join(dir, file);
+    if (!fs.existsSync(fp)) return '';
+    const b64 = fs.readFileSync(fp).toString('base64');
+    return `@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:${weight};`
+      + `src:url(data:font/woff2;base64,${b64}) format('woff2');}`;
+  }).join('\n');
+}
+
 // ── 조각 빌더 ─────────────────────────────────────────
 function secHead(num, title, hint, tone = 'teal') {
   return `<div class="sechead">
@@ -208,8 +227,9 @@ function css() {
   html,body { margin:0; }
   body { font-family:"NanumSquareRound","Noto Sans KR","Malgun Gothic",sans-serif;
     color:${C.ink}; font-size:11.5px; line-height:1.5; }
-  .chapter { break-before: page; padding: 2px; }
-  .cover { break-after: page; text-align:center; padding-top:90px; }
+  /* 목차(챕터)마다 반드시 새 페이지에서 시작 */
+  .chapter { break-before: page; page-break-before: always; padding: 2px; }
+  .cover { text-align:center; padding-top:90px; }
 
   /* 챕터 헤더 */
   .chhead { margin-bottom:6px; }
@@ -312,7 +332,7 @@ function css() {
 
 async function main() {
   const cats = splitWorked(categories);
-  const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${css()}</style></head>
+  const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>
     <body>${coverHtml()}${cats.map((c, i) => chapterHtml(c, i)).join('')}${answerHtml(cats)}</body></html>`;
 
   const outDir = path.join(__dirname, 'output');

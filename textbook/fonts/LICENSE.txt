@@ -1,0 +1,7 @@
+NanumSquareRound (나눔스퀘어라운드)
+© NAVER Corporation. Licensed under the SIL Open Font License 1.1 (OFL-1.1).
+출처: 네이버 글꼴 모음 https://hangeul.naver.com/font
+라이선스 안내: https://help.naver.com/service/30016/contents/18088
+
+포함 파일: NanumSquareRound {L,R,B,EB} (.woff2 = HTML/PDF 렌더용, .ttf = LibreOffice/docx 시스템 설치용)
+OFL-1.1 은 폰트 파일의 자유로운 사용·재배포·임베딩을 허용한다.
