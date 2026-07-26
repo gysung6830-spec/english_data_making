@@ -1,0 +1,269 @@
+<meta charset="utf-8">
+<style>
+/* ============================================================
+   "영어, 처음부터 다시" — 기초 문법·해석 교재 (WeasyPrint)
+   대상: 문법을 아예 모르는 고1 / 하루 DAY 하나씩, 아주 작게
+   팔레트: 남색(navy) + 주황(orange)
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 14mm 13mm 15mm 13mm;
+  @bottom-center {
+    content: "ⓒ2026.김은아영어연구소.All rights reserved   ·   " counter(page);
+    font-family: "NanumGothic","Malgun Gothic",sans-serif;
+    font-size: 8px; color: #a2a9b0;
+  }
+}
+@page cover { margin: 0; @bottom-center { content: ""; } }
+* { box-sizing: border-box; }
+body {
+  font-family: "NanumGothic","Nanum Gothic","Malgun Gothic",sans-serif;
+  color: #22303f; font-size: 11px; line-height: 1.65; margin: 0;
+}
+:root {
+  --navy:#1f3a5f; --navy-d:#152a46; --navy-bg:#eef3f8;
+  --orange:#e5773e; --orange-d:#c85f2a; --orange-bg:#fdf1e8;
+  --line:#dfe4ea; --muted:#6b7683;
+  --cream:#fdf6ee;
+}
+b, strong { color: #12283f; }
+
+/* ---------- 표지 ---------- */
+.cover { page: cover; break-after: page; height: 297mm; position: relative;
+  background: linear-gradient(160deg,#213f66 0%,#1a3355 55%,#152a46 100%); color:#fff; }
+.cover-inner { position:absolute; top:0; left:0; right:0; bottom:0; padding: 40mm 24mm; display:flex; flex-direction:column; }
+.cover-kicker { font-size:12px; font-weight:700; letter-spacing:3px; color:#9fc0e8; margin-bottom:14px; }
+.cover-title { font-size:44px; font-weight:800; line-height:1.2; letter-spacing:-1px; }
+.cover-sub { font-size:15px; font-weight:600; color:#cfe0f2; margin-top:10px; }
+.cover-tag { display:inline-block; margin-top:22px; background:var(--orange); color:#fff;
+  font-size:15px; font-weight:800; padding:7px 18px; border-radius:24px; }
+.cover-book { margin-top:20px; font-size:12.5px; color:#bcd2ea; font-weight:600; }
+.cover-intro { margin-top:auto; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.22);
+  border-radius:12px; padding:16px 20px; }
+.cover-intro h3 { margin:0 0 9px; font-size:14px; color:#fff; }
+.cover-intro ul { margin:0; padding-left:16px; }
+.cover-intro li { font-size:11.5px; color:#e7eef7; margin-bottom:5px; line-height:1.55; }
+
+/* ---------- 공통 섹션 헤더(DAY 내부) ---------- */
+.h-band { background:var(--navy); color:#fff; border-radius:8px; padding:11px 16px; margin-bottom:14px; }
+.h-band .day-no { font-size:12px; font-weight:800; letter-spacing:2px; color:#9fc0e8; }
+.h-band .day-title { font-size:20px; font-weight:800; margin-top:2px; }
+
+.goal { background:var(--navy-bg); border-left:4px solid var(--navy); border-radius:0 8px 8px 0;
+  padding:9px 14px; margin-bottom:16px; }
+.goal .lbl { font-weight:800; color:var(--navy); font-size:11.5px; }
+.goal .lbl::before { content:""; display:inline-block; width:9px; height:9px; border-radius:50%;
+  background:var(--orange); box-shadow:0 0 0 2px #fff, 0 0 0 3px var(--orange); margin-right:8px; vertical-align:middle; }
+.teacher .lbl::before { content:"“"; font-weight:800; margin-right:3px; }
+.goal .txt { font-size:11.5px; }
+
+.sec { margin-bottom:15px; }
+.sec-t { font-size:13.5px; font-weight:800; color:var(--navy); border-bottom:2px solid var(--orange);
+  padding-bottom:3px; margin-bottom:9px; }
+.sec-t .n { color:var(--orange); }
+
+/* 쌤 한마디 */
+.teacher { background:var(--orange-bg); border-left:4px solid var(--orange); border-radius:0 8px 8px 0;
+  padding:9px 14px; margin:10px 0; }
+.teacher .lbl { display:inline-block; font-weight:800; color:var(--orange-d); font-size:11px; margin-bottom:2px; }
+.teacher p { margin:0; font-size:11px; line-height:1.6; }
+
+/* 개념 표 */
+table.concept { width:100%; border-collapse:collapse; margin:6px 0; }
+table.concept th { background:var(--navy); color:#fff; font-size:10.5px; font-weight:700; padding:6px 9px; text-align:left; }
+table.concept td { padding:6px 9px; border-bottom:1px solid var(--line); font-size:10.8px; vertical-align:top; }
+table.concept tbody tr:nth-child(even) td { background:var(--navy-bg); }
+.concept .en { font-family:"NanumGothic",sans-serif; color:#12283f; }
+.keyline { background:var(--cream); border:1px dashed var(--orange); border-radius:7px;
+  padding:8px 13px; margin:8px 0; font-size:11.5px; }
+.keyline b { color:var(--orange-d); }
+
+/* STEP / 규칙 박스 */
+.step { border:1px solid var(--line); border-radius:8px; margin-bottom:9px; overflow:hidden; }
+.step-h { background:var(--navy-d); color:#fff; font-weight:800; font-size:11px; padding:6px 13px; }
+.step-b { padding:8px 13px; font-size:11px; line-height:1.6; }
+
+/* 같이 풀어봅시다 / 교과서 적용 — 예문 카드 */
+.ex { border:1px solid var(--line); border-left:4px solid var(--navy); border-radius:0 8px 8px 0;
+  padding:9px 13px; margin-bottom:10px; break-inside:avoid; }
+.ex.tb { border-left-color:var(--orange); background:#fffdfb; }
+.ex-sent { font-size:12.5px; font-weight:800; color:#12283f; margin-bottom:5px; }
+.ex-sent .src { font-size:9px; font-weight:700; color:var(--orange-d); background:var(--orange-bg);
+  padding:1px 7px; border-radius:8px; margin-left:6px; vertical-align:middle; }
+.ex ul { list-style:none; margin:0; padding:0; }
+.ex li { font-size:10.8px; line-height:1.7; padding-left:15px; text-indent:-15px; }
+.ex li .q { font-weight:800; color:var(--navy); }
+.ex .hl { background:#fff2cc; font-weight:800; padding:0 2px; border-radius:3px; }
+.ex .bone { background:#e3edf7; font-weight:800; padding:0 3px; border-radius:3px; color:#12283f; }
+
+/* 혼자 풀어보기 (빈칸 표) */
+.pr { margin-bottom:11px; break-inside:avoid; }
+.pr-q { font-size:12px; font-weight:800; color:#12283f; margin-bottom:3px; }
+.pr-q .n { color:var(--orange); }
+.pr-hint { font-size:9.5px; color:var(--muted); margin-bottom:4px; }
+table.answbox { width:100%; border-collapse:collapse; }
+table.answbox td { border:1px solid var(--line); padding:6px 9px; font-size:10.5px; }
+table.answbox td.lab { width:96px; background:#f4f6f9; font-weight:800; color:var(--navy); }
+.blank { min-height:16px; }
+
+/* 단어 15개 */
+table.voc { width:100%; border-collapse:collapse; }
+table.voc th { background:var(--navy); color:#fff; font-size:10px; font-weight:700; padding:5px 9px; text-align:left; }
+table.voc td { padding:4px 9px; border-bottom:1px solid var(--line); font-size:10.8px; }
+table.voc tbody tr:nth-child(even) td { background:var(--navy-bg); }
+.voc .en { font-weight:800; color:#12283f; width:150px; }
+.voc .pos { width:66px; color:var(--orange-d); font-weight:700; font-size:9.5px; }
+
+/* 정답 */
+.ans { background:#f4f6f9; border:1px solid var(--line); border-radius:8px; padding:10px 14px; margin-top:8px; }
+.ans-t { display:inline-block; background:var(--navy); color:#fff; font-size:10.5px; font-weight:800;
+  padding:2px 10px; border-radius:5px; margin-bottom:6px; }
+.ans p { margin:3px 0; font-size:10px; line-height:1.6; }
+.ans b { color:var(--orange-d); }
+
+/* 전체 요약 페이지 */
+.ov-title { font-size:22px; font-weight:800; color:var(--navy); }
+.ov-sub { font-size:11.5px; color:var(--muted); margin-bottom:14px; }
+.ov-oneline { background:var(--orange-bg); border:1.5px solid #f0c9ac; border-radius:10px;
+  padding:12px 16px; font-size:13px; font-weight:800; color:var(--orange-d); margin-bottom:16px; text-align:center; }
+.part-card { border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin-bottom:12px; }
+.part-card h4 { margin:0 0 6px; font-size:14px; color:var(--navy); }
+.part-card h4 .en { color:var(--muted); font-size:10.5px; font-weight:700; }
+.part-card p { margin:0; font-size:11px; line-height:1.7; }
+.flowbar { display:flex; align-items:stretch; gap:0; margin:4px 0 16px; }
+.flowbar .step2 { flex:1; background:var(--navy-bg); border:1px solid #cfdcea; padding:8px 10px; font-size:10px; line-height:1.4; }
+.flowbar .step2 b { color:var(--navy); display:block; font-size:10.5px; margin-bottom:2px; }
+.flowbar .arw { align-self:center; color:var(--orange); font-weight:800; padding:0 6px; }
+.ov-extra { background:var(--navy-bg); border-radius:8px; padding:10px 14px; font-size:10.5px; margin-top:6px; }
+.ov-extra b { color:var(--navy); }
+
+.page { break-before: page; }
+</style>
+
+{# ===================== 표지 ===================== #}
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-kicker">기초부터 다시 시작하는 영어</div>
+    <div class="cover-title">{{ cover.title }}</div>
+    <div class="cover-sub">{{ cover.subtitle }}</div>
+    <div class="cover-tag">{{ cover.tag }}</div>
+    <div class="cover-book">{{ cover.book }}</div>
+    <div class="cover-intro">
+      <h3>이 교재는요</h3>
+      <ul>
+        {%- for li in cover.intro %}<li>{{ li | safe }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{# ===================== 글 전체 내용 한 페이지 ===================== #}
+<div class="overview">
+  <div class="ov-title">이 글, 무슨 이야기일까?</div>
+  <div class="ov-sub">{{ overview.source }}</div>
+  <div class="ov-oneline">{{ overview.oneline | safe }}</div>
+  {%- for p in overview.parts %}
+  <div class="part-card">
+    <h4>{{ p.title }} <span class="en">{{ p.en }}</span></h4>
+    <p>{{ p.body | safe }}</p>
+  </div>
+  {%- endfor %}
+  {%- if overview.flow %}
+  <div class="flowbar">
+    {%- for f in overview.flow %}
+    {%- if not loop.first %}<span class="arw">▶</span>{% endif %}
+    <div class="step2"><b>{{ f.h }}</b>{{ f.t | safe }}</div>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+  {%- if overview.extra %}<div class="ov-extra">{{ overview.extra | safe }}</div>{% endif %}
+</div>
+
+{# ===================== DAY 반복 ===================== #}
+{%- for d in days %}
+<div class="page">
+  <div class="h-band"><div class="day-no">DAY {{ d.no }}</div><div class="day-title">{{ d.title }}</div></div>
+  <div class="goal"><span class="lbl">오늘의 목표</span> &nbsp;<span class="txt">{{ d.goal | safe }}</span></div>
+
+  {# 1. 쌤이 먼저 말할게요 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">1.</span> 쌤이 먼저 말할게요</div>
+    {{ d.intro_html | safe }}
+    {%- if d.note1 %}<div class="teacher"><span class="lbl">쌤 한마디</span><p>{{ d.note1 | safe }}</p></div>{% endif %}
+  </div>
+
+  {# 2. 개념 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">2.</span> {{ d.concept_title }}</div>
+    {{ d.concept_html | safe }}
+  </div>
+
+  {# 3. 규칙/STEP (선택) #}
+  {%- if d.rules %}
+  <div class="sec">
+    <div class="sec-t"><span class="n">3.</span> {{ d.rule_title }}</div>
+    {%- for r in d.rules %}
+    <div class="step"><div class="step-h">{{ r.label }}</div><div class="step-b">{{ r.html | safe }}</div></div>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {# 4. 같이 풀어봅시다 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">{{ '4' if d.rules else '3' }}.</span> 같이 풀어봅시다</div>
+    {%- for w in d.worked %}
+    <div class="ex">
+      <div class="ex-sent">{{ w.sent | safe }}</div>
+      <ul>{%- for ln in w.lines %}<li>{{ ln | safe }}</li>{% endfor %}</ul>
+      {%- if w.note %}<div class="teacher"><span class="lbl">쌤 한마디</span><p>{{ w.note | safe }}</p></div>{% endif %}
+    </div>
+    {%- endfor %}
+  </div>
+
+  {# 5. 혼자 풀어보기 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">{{ '5' if d.rules else '4' }}.</span> 혼자 풀어보기</div>
+    {%- if d.practice_intro %}<p style="font-size:10.5px;color:#4b5563;margin:0 0 8px;">{{ d.practice_intro | safe }}</p>{% endif %}
+    {%- for p in d.practice %}
+    <div class="pr">
+      <div class="pr-q"><span class="n">{{ loop.index }}.</span> {{ p.sent | safe }}</div>
+      {%- if p.hint %}<div class="pr-hint">힌트: {{ p.hint | safe }}</div>{% endif %}
+      <table class="answbox">
+        {%- for lab in d.answbox_labels %}
+        <tr><td class="lab">{{ lab }}</td><td class="blank"></td></tr>
+        {%- endfor %}
+      </table>
+    </div>
+    {%- endfor %}
+  </div>
+
+  {# 6. 오늘의 단어 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">{{ '6' if d.rules else '5' }}.</span> 오늘의 단어 {{ d.vocab|length }}개</div>
+    <table class="voc">
+      <thead><tr><th>영어</th><th>뜻</th><th style="width:66px;">품사</th></tr></thead>
+      <tbody>{%- for v in d.vocab %}<tr><td class="en">{{ v.en }}</td><td>{{ v.ko }}</td><td class="pos">{{ v.pos }}</td></tr>{% endfor %}</tbody>
+    </table>
+  </div>
+
+  {# 7. 교과서로 적용하기 #}
+  <div class="sec">
+    <div class="sec-t"><span class="n">{{ '7' if d.rules else '6' }}.</span> 교과서로 적용하기 <span style="font-size:9.5px;color:var(--orange-d);font-weight:700;">▶ 우리 지문(모기)으로!</span></div>
+    {%- if d.textbook_intro %}<p style="font-size:10.5px;color:#4b5563;margin:0 0 8px;">{{ d.textbook_intro | safe }}</p>{% endif %}
+    {%- for w in d.textbook %}
+    <div class="ex tb">
+      <div class="ex-sent">{{ w.sent | safe }}<span class="src">교과서</span></div>
+      <ul>{%- for ln in w.lines %}<li>{{ ln | safe }}</li>{% endfor %}</ul>
+    </div>
+    {%- endfor %}
+  </div>
+
+  {# 정답 #}
+  {%- if d.answers_html %}
+  <div class="ans">
+    <div class="ans-t">혼자 풀어보기 · 정답</div>
+    {{ d.answers_html | safe }}
+  </div>
+  {%- endif %}
+</div>
+{%- endfor %}
