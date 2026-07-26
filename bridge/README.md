@@ -22,15 +22,25 @@
 # (최초 1회) 라이브러리·폰트가 없으면
 pip install weasyprint jinja2 pypdf
 sudo apt-get install -y fonts-nanum       # 한글 폰트
-
-# 전체(1~9일차) + 전체합본 PDF 생성
-python -m bridge.build_bridge
-
-# 특정 일차만 (예: 1,3일차)
-python -m bridge.build_bridge 1 3
 ```
 
-→ `output/브릿지_L1_0N일차.pdf` 와 `output/브릿지_L1_전체합본.pdf` 가 생성됩니다.
+### ① 한 권짜리 '교재' (표지 + 전체요약 + 9일치) — 추천
+
+```bash
+python -m bridge.build_book        # 표지+요약+전체 → output/교재_브릿지_L1_전체.pdf
+python -m bridge.build_book 1      # 표지+요약+1일차만 (샘플)
+```
+
+- 맨 앞에 **교재 표지**와 **글 전체 내용 한 페이지 요약**이 붙습니다.
+- DAY 1 문법은 가장 쉬운 것(문장 뼈대→be동사→3인칭 -s)부터, 어려운 문법은 &lsquo;지금은 몰라도 OK&rsquo;로 표시.
+
+### ② 일차별 낱장 학습지 (표지·요약 없이)
+
+```bash
+python -m bridge.build_bridge      # output/브릿지_L1_0N일차.pdf + 전체합본
+python -m bridge.build_bridge 1 3  # 특정 일차만
+```
+
 (PDF는 `.gitignore` 대상이라 저장소에는 올라가지 않고, 스크립트로 언제든 다시 만듭니다.)
 
 ## Lesson 1 커리큘럼 (2022 개정 천재(강상구) 공통영어2)
