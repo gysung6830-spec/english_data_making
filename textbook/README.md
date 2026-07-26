@@ -45,18 +45,24 @@ soffice 는 변환에 실패해도 종료 코드 0 을 반환하는 버릇이 �
 **실제 pdf 파일이 새로 생겼는지** 확인한 뒤에만 성공으로 처리한다. 변환이 안 되면
 docx 만 만들고, 위 수동 변환 명령을 안내한다.
 
-### 미리보기 PDF (`npm run preview`)
+### 디자인 PDF (`npm run preview`) — 배포용 예쁜 버전
 
-LibreOffice 가 없거나 깨진 환경에서 **디자인/내용을 눈으로 확인**하려면:
+참고 교재(김은아영어연구소) 스타일의 디자인을 적용한 **배포용 PDF** 를 만든다:
 
 ```bash
 npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
 ```
 
-같은 `data.js` / `splitWorked` / `makeTip` 로 HTML 을 만들어 Chromium 으로 인쇄한
-미리보기다. 색·박스·레이아웃은 docx 와 맞췄지만 **정식 산출물은 docx** 이고,
-서체(NanumSquareRound)는 설치된 PC 에서 docx 를 열 때 정확히 반영된다.
-(`playwright` 는 optionalDependencies — 미리보기가 필요할 때만 설치.)
+디자인 언어(청록/그린 강조, 라운드 배지, 번호 원형 섹션 헤더, 컬러 필 문법 카드,
+2단 끊어읽기 직독직해 표, 그린 헤더 zebra 단어표, 하단 저작권/페이지)는
+`preview_pdf.js` 의 HTML/CSS 에 있고, 내용은 `build_v4.js` 와 **같은**
+`data.js` / `splitWorked` / `makeTip` 을 공유한다.
+
+- **`build_v4.js` → docx**: 텍스트 편집용(선생님이 문구 수정). LibreOffice 로 pdf 변환도 가능.
+- **`preview_pdf.js` → pdf**: 위 디자인이 입혀진 배포용. 편집은 `data.js` 에서.
+
+서체(NanumSquareRound)는 설치된 PC 에서 열 때 정확히 반영된다.
+(`playwright` 는 optionalDependencies — 디자인 PDF 를 만들 때만 설치.)
 
 ## 폴더 구조 (리팩터링 후)
 
