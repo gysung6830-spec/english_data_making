@@ -6,8 +6,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "Experiencing emotions in such worlds is a clear sign that our thinking has become incoherent and regressed.",
-    "trap": "copy"
+    "t": "The emotions we feel in such worlds often become more intense the longer the story continues.",
+    "trap": "off"
    },
    {
     "t": "Feeling emotions in these imagined worlds does not indicate that we are being irrational or immature.",
@@ -18,8 +18,8 @@
     "trap": "rev"
    },
    {
-    "t": "Our emotional reactions in these worlds reveal that we are only briefly confused about reality.",
-    "trap": "dist"
+    "t": "The emotions we feel in such worlds usually fade once we step away from the fiction.",
+    "trap": "off"
    },
    {
     "t": "The emotions we feel in fictional worlds tend to reflect how coherent our reasoning has become.",
@@ -34,8 +34,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "As long as something is funny, we stay concerned about whether it is real or fictional, true or false.",
-    "trap": "copy"
+    "t": "As long as something is funny, we tend to remember it far longer than serious information.",
+    "trap": "off"
    },
    {
     "t": "Something can strike us as funny only once we are sure it is true rather than made up.",
@@ -50,8 +50,8 @@
     "trap": "ok"
    },
    {
-    "t": "Humor tends to leave us unconcerned with whether things around us are real or true.",
-    "trap": "over"
+    "t": "As long as something is funny, we are inclined to share it with others whether it is real or fictional.",
+    "trap": "off"
    }
   ]
  },
@@ -66,8 +66,8 @@
     "trap": "ok"
    },
    {
-    "t": "Both are working hard, and both of them are also working smart.",
-    "trap": "copy"
+    "t": "Both are working hard, but the latter reached this level after years of steady practice.",
+    "trap": "off"
    },
    {
     "t": "Only the former works hard, while the latter simply works smart instead.",
@@ -78,8 +78,8 @@
     "trap": "dist"
    },
    {
-    "t": "Working smart is what sets successful people apart from the rest.",
-    "trap": "over"
+    "t": "Both put in equal effort, yet the latter tends to earn more recognition for it.",
+    "trap": "off"
    }
   ]
  },
@@ -90,20 +90,20 @@
   "answer": 5,
   "choices": [
    {
-    "t": "Creating tax policy requires a moral goal, though that task can be done without ethics or moral analysis.",
-    "trap": "copy"
+    "t": "Creating tax policy requires identifying a moral goal, which most citizens find difficult to agree on.",
+    "trap": "off"
    },
    {
     "t": "Tax policy ought to be created without appealing to any moral goal or ethical reasoning.",
     "trap": "rev"
    },
    {
-    "t": "Identifying a moral goal is just one optional step among many in creating tax policy.",
-    "trap": "dist"
+    "t": "Creating tax policy requires identifying a moral goal, which is why economists are rarely trusted to design it alone.",
+    "trap": "off"
    },
    {
-    "t": "Sound tax policy is better left to trained ethicists than to policymakers.",
-    "trap": "over"
+    "t": "Because it steers clear of moral goals, creating tax policy has no need for ethics or moral analysis.",
+    "trap": "rev"
    },
    {
     "t": "Designing tax policy demands settling on a moral aim, a job that necessarily draws on ethics and moral reasoning.",
@@ -118,8 +118,8 @@
   "answer": 3,
   "choices": [
    {
-    "t": "Each choice removes the uncertainty about which path will get you to your destination.",
-    "trap": "copy"
+    "t": "Each choice involves picturing how the destination will feel once you finally arrive.",
+    "trap": "off"
    },
    {
     "t": "You can know for certain which path will reach your destination before you decide.",
@@ -134,8 +134,8 @@
     "trap": "dist"
    },
    {
-    "t": "The uncertainty in our choices tends to keep us from reaching our destination.",
-    "trap": "over"
+    "t": "Each choice forces you to weigh how long each path to your destination will take.",
+    "trap": "off"
    }
   ]
  },
@@ -146,8 +146,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "The unlit, unglamorous storerooms are often discussed as spaces that rival the exhibition halls in appeal.",
-    "trap": "copy"
+    "t": "The unlit, unglamorous storerooms take up more floor space than the exhibition halls themselves.",
+    "trap": "off"
    },
    {
     "t": "The dim, plain storerooms are seldom mentioned, and when they are, they are treated merely as support spaces preparing objects for the galleries.",
@@ -158,12 +158,12 @@
     "trap": "rev"
    },
    {
-    "t": "When the storerooms are discussed, they are praised for displaying objects to visitors directly.",
-    "trap": "dist"
+    "t": "The unlit, unglamorous storerooms, when mentioned, are said to hold objects that were donated by wealthy patrons.",
+    "trap": "off"
    },
    {
-    "t": "The storerooms tend to be left out of any serious discussion of the museum.",
-    "trap": "over"
+    "t": "The dim, plain storerooms, when they come up, are described as workshops that repair objects damaged in the exhibition halls.",
+    "trap": "dist"
    }
   ]
  },
@@ -174,8 +174,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "One of the biggest misconceptions is that becoming self-confident really does mean living fearlessly.",
-    "trap": "copy"
+    "t": "One of the biggest misconceptions about becoming self-confident is that it can be achieved fairly quickly.",
+    "trap": "off"
    },
    {
     "t": "It is widely and correctly understood that self-confidence means living without any fear.",
@@ -190,8 +190,8 @@
     "trap": "ok"
    },
    {
-    "t": "Gaining self-confidence generally comes down to learning to live without fear.",
-    "trap": "over"
+    "t": "One of the biggest misconceptions about self-confidence is that it comes mainly from repeated success.",
+    "trap": "off"
    }
   ]
  },
@@ -206,20 +206,20 @@
     "trap": "ok"
    },
    {
-    "t": "What is striking is that the setting and context are present to make the emotion determinate.",
-    "trap": "copy"
+    "t": "What stands out is that viewers tend to fill in the missing setting with their own imagined stories.",
+    "trap": "off"
    },
    {
     "t": "What is remarkable is how clearly the surrounding context pins down each emotion.",
     "trap": "rev"
    },
    {
-    "t": "What is notable is that only the emotion, and not its setting, is left undefined.",
-    "trap": "dist"
+    "t": "What is striking is that the emotions were likely captured without the subjects being aware of it.",
+    "trap": "off"
    },
    {
-    "t": "What stands out is that such works generally fail to stir any real emotion in the viewer.",
-    "trap": "over"
+    "t": "What stands out about them is that a detailed setting is supplied, giving each emotion a definite shape.",
+    "trap": "rev"
    }
   ]
  },
@@ -246,8 +246,8 @@
     "trap": "dist"
    },
    {
-    "t": "An idea carries real worth chiefly when it manages to be both original and useful.",
-    "trap": "over"
+    "t": "Ideas gain their originality mainly through the effort spent refining them over time.",
+    "trap": "off"
    }
   ]
  },
@@ -258,24 +258,24 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Truth builds reliable understanding, yet progress and knowledge advance quite apart from it.",
-    "trap": "copy"
+    "t": "Truth tends to emerge gradually as knowledge accumulates over generations.",
+    "trap": "off"
    },
    {
     "t": "Knowledge and progress can develop even when truth does not underlie them.",
     "trap": "rev"
    },
    {
-    "t": "Truth is one of several foundations that make our understanding reliable and accurate.",
-    "trap": "dist"
+    "t": "The reliability of our understanding is best secured through repeated observation and testing.",
+    "trap": "off"
    },
    {
     "t": "Because dependable and accurate understanding rests on truth, truth is indispensable for advancing knowledge.",
     "trap": "ok"
    },
    {
-    "t": "Truth is the driving force behind genuine progress across our knowledge.",
-    "trap": "over"
+    "t": "Truth supports the growth of knowledge mainly once a reliable understanding has already been built.",
+    "trap": "dist"
    }
   ]
  },
@@ -294,8 +294,8 @@
     "trap": "ok"
    },
    {
-    "t": "Games catch attention, though few things are able to hold it for long.",
-    "trap": "copy"
+    "t": "Games hold attention largely because they reward players with a sense of progress.",
+    "trap": "off"
    },
    {
     "t": "Games are among the many pastimes that briefly draw people's attention.",
@@ -314,20 +314,20 @@
   "answer": 5,
   "choices": [
    {
-    "t": "Our ability to respond to danger is normal, yet worry itself puts our survival at risk.",
-    "trap": "copy"
+    "t": "People differ widely in how quickly they notice signs of danger around them.",
+    "trap": "off"
    },
    {
-    "t": "Feeling worried sharpens our ability to respond to danger, which in turn aids survival.",
-    "trap": "dist"
+    "t": "Worry tends to fade once an uncertain situation becomes familiar and predictable.",
+    "trap": "off"
    },
    {
     "t": "Because reacting to danger rarely helped us survive, anxiety in uncertain situations is unusual.",
     "trap": "rev"
    },
    {
-    "t": "The more worried we feel, the better prepared we tend to be to survive danger.",
-    "trap": "over"
+    "t": "Our survival depends on staying worried, since danger makes uncertain situations feel normal.",
+    "trap": "copy"
    },
    {
     "t": "Since reacting to threats has aided our survival, feeling anxious amid uncertainty is only to be expected.",
@@ -346,8 +346,8 @@
     "trap": "rev"
    },
    {
-    "t": "Lin shows that who you know rests on what you know in shaping social life.",
-    "trap": "copy"
+    "t": "Lin notes that the connections we rely on tend to form early in our careers.",
+    "trap": "off"
    },
    {
     "t": "For Lin, personal connections shape our place in society just as much as our knowledge does.",
@@ -378,16 +378,16 @@
     "trap": "dist"
    },
    {
-    "t": "Because nonverbal behavior is easy to read correctly, listeners seldom need to confirm it aloud.",
-    "trap": "copy"
+    "t": "Skilled listeners tend to attend to tone of voice more than to facial expressions.",
+    "trap": "off"
    },
    {
     "t": "Effective listeners refrain from putting their reading of nonverbal cues into words.",
     "trap": "rev"
    },
    {
-    "t": "Careful listeners come to understand others mainly by turning nonverbal cues into words.",
-    "trap": "over"
+    "t": "Skilled listeners are generally better than most people at picking up subtle nonverbal signals.",
+    "trap": "off"
    }
   ]
  },
@@ -398,8 +398,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Children move between play and a story only with effort, as though the two were quite different.",
-    "trap": "copy"
+    "t": "Children tend to prefer stories they can act out through play over ones they merely sit and listen to.",
+    "trap": "off"
    },
    {
     "t": "Children favor stories over play because both draw them in so completely.",
@@ -434,8 +434,8 @@
     "trap": "ok"
    },
    {
-    "t": "News is constituted by its choice of topics, above all when it is not in televised form.",
-    "trap": "copy"
+    "t": "Television news reaches a far wider audience than print news because of the immediacy of its images.",
+    "trap": "off"
    },
    {
     "t": "Television news is shaped by the stories it chooses but not by the manner in which it presents them.",
@@ -454,8 +454,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "The mental gear itself is what sets people apart, more than the technical and physical progress they make.",
-    "trap": "dist"
+    "t": "A coach can train the mental gear in an athlete much as they build up technical and physical skills.",
+    "trap": "off"
    },
    {
     "t": "The decisive factor is motivation, which harnesses mental effort to get the most out of one's technical and physical gains.",
@@ -470,8 +470,8 @@
     "trap": "rev"
    },
    {
-    "t": "Utilizing the right gear is the drive that produces gains in the technical and physical areas.",
-    "trap": "copy"
+    "t": "Athletes with strong drive tend to recover from setbacks faster than those who rely on technique alone.",
+    "trap": "off"
    }
   ]
  },
@@ -498,8 +498,8 @@
     "trap": "ok"
    },
    {
-    "t": "A society's sense of justice is expressed most clearly through the taxes it imposes.",
-    "trap": "over"
+    "t": "The fairness of a society's taxes ultimately rests on how openly its citizens discuss what justice requires.",
+    "trap": "off"
    }
   ]
  },
@@ -514,16 +514,16 @@
     "trap": "ok"
    },
    {
-    "t": "By eliminating risk, the mathematical theory of probability lets us manage situations more effectively.",
-    "trap": "copy"
+    "t": "The mathematical theory of probability first grew out of efforts to solve problems posed by games of chance.",
+    "trap": "off"
    },
    {
     "t": "The theory of probability manages risk so well that risk itself has effectively disappeared.",
     "trap": "rev"
    },
    {
-    "t": "The better our grasp of probability, the less risk we end up facing.",
-    "trap": "over"
+    "t": "The theory of probability offers little help in managing risk, though it has succeeded in removing much of it.",
+    "trap": "rev"
    },
    {
     "t": "The value of probability theory lies in predicting which risks are worth taking.",
@@ -550,8 +550,8 @@
     "trap": "off"
    },
    {
-    "t": "Since Plato, reason has been treated as the foundation on which genuine knowledge of the world rests.",
-    "trap": "over"
+    "t": "Since Plato, reason has been prized above emotion as the faculty that guides human conduct.",
+    "trap": "off"
    },
    {
     "t": "Since Plato, reason’s dominance has rested on the claim that it can derive genuine knowledge from experience.",
@@ -570,20 +570,20 @@
     "trap": "rev"
    },
    {
-    "t": "Doing the things we know we can do well makes the new and unknown feel more familiar over time.",
-    "trap": "copy"
+    "t": "Fear of the new and unknown tends to fade most quickly when we take on unfamiliar tasks in small steps.",
+    "trap": "off"
    },
    {
     "t": "Sticking to what we are already good at tends to make the unfamiliar seem more frightening.",
     "trap": "ok"
    },
    {
-    "t": "Fear of the unknown grows mainly because we lack the skills to do new things well.",
-    "trap": "dist"
+    "t": "People differ widely in how much the new and unknown actually frightens them.",
+    "trap": "off"
    },
    {
-    "t": "Sticking with what we do well gradually erodes our capacity to grow in any part of life.",
-    "trap": "over"
+    "t": "Sticking to the tasks we handle well tends to increase our fear of failure in general.",
+    "trap": "dist"
    }
   ]
  },
@@ -606,8 +606,8 @@
     "trap": "copy"
    },
    {
-    "t": "The more positive a comment is, the more the person must have valued the experience behind it.",
-    "trap": "over"
+    "t": "People are more likely to post positive comments when they expect others to respond to them.",
+    "trap": "off"
    },
    {
     "t": "The wording people choose reveals how strongly they felt about the experience they describe.",
@@ -626,20 +626,20 @@
     "trap": "rev"
    },
    {
-    "t": "Here, subjective experience remains internal while disciplinary objects and laws stay entirely external to the mind.",
-    "trap": "dist"
+    "t": "In this way, mental institutions tend to endure longer than the physical objects and laws that first gave rise to them.",
+    "trap": "off"
    },
    {
-    "t": "In this manner, mental institutions produce the disciplinary objects, laws, and equipment found in the external environment.",
-    "trap": "copy"
+    "t": "In this manner, individuals gradually come to resist the disciplinary objects and laws placed upon them.",
+    "trap": "off"
    },
    {
     "t": "In this way, inner experience reaches outward, so that external structures such as rules and tools come to function as parts of the mind.",
     "trap": "ok"
    },
    {
-    "t": "This suggests that most of our external surroundings eventually take on the character of mental institutions.",
-    "trap": "over"
+    "t": "In this way, the external environment presses inward, so that rules and tools reshape subjective experience into their own form.",
+    "trap": "rev"
    }
   ]
  },
@@ -662,12 +662,12 @@
     "trap": "rev"
    },
    {
-    "t": "Social media’s unregulated nature allows information to reach millions who serve as its primary source.",
-    "trap": "copy"
+    "t": "Social media companies earn most of their revenue from the rapid sharing of information among millions of users.",
+    "trap": "off"
    },
    {
-    "t": "The more people depend on social media for news, the more misinformation comes to dominate what they see.",
-    "trap": "over"
+    "t": "Traditional news outlets have lost much of their audience as social media keeps expanding.",
+    "trap": "off"
    }
   ]
  },
@@ -678,8 +678,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "Those skilled in this domain express their feelings accurately, and as a result co-workers rarely disagree with one another.",
-    "trap": "copy"
+    "t": "Those skilled in this domain express their emotions accurately, a talent that tends to grow stronger with years of workplace experience.",
+    "trap": "off"
    },
    {
     "t": "People adept in this area can convey their emotions precisely, which can help colleagues communicate more clearly.",
@@ -690,12 +690,12 @@
     "trap": "rev"
    },
    {
-    "t": "People skilled in this area accurately read the emotions of others, thereby easing communication between co-workers.",
-    "trap": "dist"
+    "t": "People skilled in this area express their emotions accurately, and such expressiveness is prized more highly than technical ability among co-workers.",
+    "trap": "off"
    },
    {
-    "t": "Accurately expressing one's emotions is what makes communication among co-workers clear.",
-    "trap": "over"
+    "t": "Those skilled in this area express their emotions accurately, which helps make communication between co-workers faster.",
+    "trap": "dist"
    }
   ]
  },
@@ -706,16 +706,16 @@
   "answer": 5,
   "choices": [
    {
-    "t": "Feelings of worry activated by future events are rarely experienced in everyday situations.",
+    "t": "Feelings of worry, triggered by anticipating future events, are usually harder to manage than other everyday emotions.",
+    "trap": "off"
+   },
+   {
+    "t": "Worry about events still to come tends to appear in everyday situations, particularly among people who plan far ahead.",
+    "trap": "off"
+   },
+   {
+    "t": "Everyday situations are what activate future events, giving rise to feelings of worry.",
     "trap": "copy"
-   },
-   {
-    "t": "Worry arises when we look back on past events and then surfaces in ordinary daily situations.",
-    "trap": "dist"
-   },
-   {
-    "t": "Worry, brought on by anticipating what lies ahead, colors most of the situations we find ourselves in.",
-    "trap": "over"
    },
    {
     "t": "Worry tends to fade in everyday situations because it is tied only to distant future events.",
@@ -746,12 +746,12 @@
     "trap": "dist"
    },
    {
-    "t": "Anonymity requires that the agents' identities determine the collective choice, and neutrality treats the alternatives equally.",
-    "trap": "copy"
+    "t": "Anonymity and neutrality are both easier to guarantee in a small group than in a large body of voters.",
+    "trap": "off"
    },
    {
-    "t": "Anonymity alone is enough to keep a collective choice fair no matter which alternatives are on offer.",
-    "trap": "over"
+    "t": "Anonymity and neutrality are the properties most often debated when a group settles on a collective choice.",
+    "trap": "off"
    }
   ]
  },
@@ -762,16 +762,16 @@
   "answer": 4,
   "choices": [
    {
-    "t": "A simple question about nodding can reveal whether people intend to vote yes.",
-    "trap": "copy"
+    "t": "A simple question about whether nods mean a yes vote can help move a long meeting along more quickly.",
+    "trap": "off"
    },
    {
     "t": "A simple question of this kind is what secures full agreement across a group.",
     "trap": "over"
    },
    {
-    "t": "Asking whether nods mean a yes vote helps the leader decide the outcome of the vote.",
-    "trap": "dist"
+    "t": "Asking a plain question about whether nods signal a yes is a habit leaders pick up as they gain experience.",
+    "trap": "off"
    },
    {
     "t": "Even a plain question such as that one can confirm that everyone shares the same understanding.",
@@ -794,8 +794,8 @@
     "trap": "dist"
    },
    {
-    "t": "This result demonstrates the effect but says little about the songs used in playback experiments.",
-    "trap": "copy"
+    "t": "This result demonstrates the effect and also indicates that playback experiments are cheaper to run than field observations.",
+    "trap": "off"
    },
    {
     "t": "This finding not only proves the effect but also reveals that which songs are chosen for playback experiments matters greatly.",
@@ -806,8 +806,8 @@
     "trap": "rev"
    },
    {
-    "t": "This result shows that the outcome of playback experiments comes down to which songs are chosen.",
-    "trap": "over"
+    "t": "This result demonstrates the effect and explains how the songs for the playback experiments were originally selected.",
+    "trap": "off"
    }
   ]
  },
@@ -826,16 +826,16 @@
     "trap": "ok"
    },
    {
-    "t": "The creator of humour supplies information that happens to place pleasant ideas in people's heads.",
-    "trap": "copy"
+    "t": "The creator of humour plants ideas in people's minds, a skill that listeners tend to appreciate more as they grow older.",
+    "trap": "off"
    },
    {
-    "t": "The creator of humour shares ideas so that listeners will remember the information those ideas carry.",
-    "trap": "dist"
+    "t": "The creator of humour puts ideas into listeners' minds for enjoyment, a task that becomes easier the larger the audience grows.",
+    "trap": "off"
    },
    {
-    "t": "Humour exists to give people pleasant ideas rather than to inform them of anything.",
-    "trap": "over"
+    "t": "The creator of humour holds back from planting ideas in people's minds, seeking to deliver information instead.",
+    "trap": "rev"
    }
   ]
  },
@@ -854,12 +854,12 @@
     "trap": "rev"
    },
    {
-    "t": "A person who turns the driving on and off is himself a joint cognitive system.",
-    "trap": "copy"
+    "t": "Self-driving cars are considered a joint cognitive system mainly because they reduce the driver's workload on long trips.",
+    "trap": "off"
    },
    {
-    "t": "Self-driving cars are the clearest case of what a joint cognitive system is.",
-    "trap": "over"
+    "t": "Self-driving cars, in which a person switches the driving on and off, are becoming more common than other joint cognitive systems.",
+    "trap": "off"
    },
    {
     "t": "Autonomous cars, in which a human switches the driving on and off, illustrate a joint cognitive system.",
@@ -882,16 +882,16 @@
     "trap": "rev"
    },
    {
-    "t": "His comments on young children's minds can be extended to our questions about memory.",
+    "t": "His research on memory was originally designed to study how young children learn language.",
+    "trap": "off"
+   },
+   {
+    "t": "His remarks on memory were later confirmed by studies of young children's minds.",
+    "trap": "off"
+   },
+   {
+    "t": "His remarks on understanding memory can be extended to our answers about young children's minds.",
     "trap": "dist"
-   },
-   {
-    "t": "He said that understanding memory settles all our questions about young children's minds.",
-    "trap": "copy"
-   },
-   {
-    "t": "His view on memory carries over to nearly any question we might raise about the mind.",
-    "trap": "over"
    }
   ]
  },
@@ -902,8 +902,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "Urban delivery vehicles must raise the density of distribution by relying on vans and bicycles.",
-    "trap": "copy"
+    "t": "City delivery vehicles are being redesigned mainly to cut the carbon emissions produced by dense urban distribution.",
+    "trap": "off"
    },
    {
     "t": "City delivery vehicles can be modified to fit the high density of urban distribution, which tends to depend on smaller vehicles like vans and even bicycles.",
@@ -918,8 +918,8 @@
     "trap": "dist"
    },
    {
-    "t": "Adapting to dense cities is largely a matter of shifting deliveries onto compact vehicles like vans and bicycles.",
-    "trap": "over"
+    "t": "City delivery vehicles are adapted mainly to lower the cost of urban distribution, which often relies on smaller vehicles such as vans and bicycles.",
+    "trap": "off"
    }
   ]
  },
@@ -930,8 +930,8 @@
   "answer": 5,
   "choices": [
    {
-    "t": "The discussion in the Republic is itself unreliable and misleading because it depends on the senses.",
-    "trap": "copy"
+    "t": "The discussion in the Republic recommends training the senses so that our perceptions become more reliable.",
+    "trap": "off"
    },
    {
     "t": "Since the senses seldom make mistakes, our perceptions can usually be trusted as accurate.",
@@ -962,16 +962,16 @@
     "trap": "ok"
    },
    {
-    "t": "Multiculturalists propose a model in which immigrants assimilate fully while still preserving their language.",
-    "trap": "dist"
+    "t": "Multiculturalists argue that partial assimilation mainly helps immigrants find better jobs in their new country.",
+    "trap": "off"
    },
    {
     "t": "Multiculturalists recommend that immigrants give up their original customs and beliefs in order to integrate.",
     "trap": "rev"
    },
    {
-    "t": "For immigrants, integrating well tends to require letting go of part of their cultural identity.",
-    "trap": "over"
+    "t": "Multiculturalists reject a model of partial assimilation, holding that immigrants should take on the new culture entirely.",
+    "trap": "rev"
    },
    {
     "t": "Multiculturalism is mainly concerned with teaching immigrants the language of their new country.",
@@ -986,8 +986,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Some attractions have limited capacity because their visitors leave no room for the exhibits.",
-    "trap": "copy"
+    "t": "Certain attractions have limited capacity because they sit in historic buildings that cannot be expanded.",
+    "trap": "off"
    },
    {
     "t": "Most attractions have ample space and can always take in additional visitors.",
@@ -1002,8 +1002,8 @@
     "trap": "ok"
    },
    {
-    "t": "Popular attractions tend to fill to capacity, leaving little room for additional visitors.",
-    "trap": "over"
+    "t": "Attractions with limited capacity often raise their ticket prices to manage the flow of visitors.",
+    "trap": "off"
    }
   ]
  },
@@ -1014,8 +1014,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "Creative ideas are useless because they always fade into a silent death right after being generated.",
-    "trap": "copy"
+    "t": "The ability to generate creative ideas tends to grow stronger the more often a person practices it.",
+    "trap": "off"
    },
    {
     "t": "Being able to come up with creative ideas has little value if those ideas are never developed and quietly fade away.",
@@ -1046,12 +1046,12 @@
     "trap": "rev"
    },
    {
-    "t": "The consensus is that moths seek out lights precisely because the lights end up trapping them.",
-    "trap": "dist"
+    "t": "The consensus is that moths are trapped by lights that shine brighter than the surrounding moonlight.",
+    "trap": "off"
    },
    {
-    "t": "Experts agree that light is what dictates how moths behave once darkness falls.",
-    "trap": "over"
+    "t": "The consensus holds that moths are trapped by lights because of the heat those lights emit.",
+    "trap": "dist"
    },
    {
     "t": "There is agreement that artificial lights disrupt the way moths navigate at night.",
@@ -1070,12 +1070,12 @@
   "answer": 3,
   "choices": [
    {
-    "t": "Literature aids language learning because readers themselves foster it during the process.",
-    "trap": "copy"
+    "t": "Literature helps language learning because it exposes readers to the culture behind the target language.",
+    "trap": "off"
    },
    {
-    "t": "Literature tends to hold back language learning because it fails to involve its readers.",
-    "trap": "rev"
+    "t": "Literature aids language learning most when readers already share the author's cultural background.",
+    "trap": "off"
    },
    {
     "t": "Literature supports language learning by drawing readers into active engagement with the text.",
@@ -1086,8 +1086,8 @@
     "trap": "dist"
    },
    {
-    "t": "Reader engagement is the key that makes language learning succeed.",
-    "trap": "over"
+    "t": "Language learning fosters the engagement that literature creates in its readers.",
+    "trap": "copy"
    }
   ]
  },
@@ -1098,8 +1098,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "When we home in on a goal, our motivational intensity drops once the goal sits in front of us.",
-    "trap": "copy"
+    "t": "Homing in on a goal helps most when the goal is one that others have already reached.",
+    "trap": "off"
    },
    {
     "t": "Widening our focus raises our motivation and clarifies which goal we ought to pursue.",
@@ -1138,8 +1138,8 @@
     "trap": "copy"
    },
    {
-    "t": "Companies want to eliminate the sorts of personal habits that employees carry into the workplace.",
-    "trap": "over"
+    "t": "Businesses often provide training programs to help employees correct such workplace problems.",
+    "trap": "off"
    },
    {
     "t": "Companies mainly worry about how to discipline workers who arrive late rather than about their speech.",
@@ -1162,8 +1162,8 @@
     "trap": "copy"
    },
    {
-    "t": "Imagination becomes the mind's dominant faculty in states like emotion, illness, and sleep.",
-    "trap": "over"
+    "t": "Imagination and perception cooperate most effectively when the body is at rest during sleep.",
+    "trap": "off"
    },
    {
     "t": "Even when perception stops picking out objects—as in emotion, illness, or sleep—imagination keeps working.",
@@ -1190,8 +1190,8 @@
     "trap": "rev"
    },
    {
-    "t": "We may not determine where a lion feeds, but we can regulate what it eats.",
-    "trap": "copy"
+    "t": "Regulating where a lion feeds will in time reshape what it chooses to eat.",
+    "trap": "off"
    },
    {
     "t": "We can control the circumstances of a lion's feeding, even if its diet remains beyond us.",
@@ -1214,12 +1214,12 @@
     "trap": "rev"
    },
    {
-    "t": "Popular formats endure the longer verbal orientation in order to engage an unwilling audience.",
-    "trap": "copy"
+    "t": "Popular formats enhance understanding largely because they cost less to produce than older news formats.",
+    "trap": "off"
    },
    {
-    "t": "Popular formats make the news easier for people to understand, whatever their tastes.",
-    "trap": "over"
+    "t": "Popular formats weaken understanding by driving away audiences who prefer the longer verbal style of older news.",
+    "trap": "rev"
    },
    {
     "t": "Popular formats attract larger audiences, though this comes at the cost of real comprehension.",
@@ -1250,8 +1250,8 @@
     "trap": "ok"
    },
    {
-    "t": "The robots under discussion serve, on the whole, as examples of mixed teams.",
-    "trap": "over"
+    "t": "Mixed teams of robots are becoming more common in entertainment and telecommuting settings.",
+    "trap": "off"
    },
    {
     "t": "Robots for telecommuting outperform entertainment robots when working within mixed teams.",
@@ -1274,12 +1274,12 @@
     "trap": "rev"
    },
    {
-    "t": "Historically, questions of economics and history were less attentive to the drafters of tax legislation.",
-    "trap": "copy"
+    "t": "In the past, drafters of tax legislation consulted economists directly when shaping new tax laws.",
+    "trap": "off"
    },
    {
-    "t": "In the past, tax drafters attended to economics and history while setting moral questions aside.",
-    "trap": "over"
+    "t": "In the past, tax drafters weighed economic and historical concerns more heavily than legal questions.",
+    "trap": "dist"
    },
    {
     "t": "Modern tax drafters have finally learned to weigh economic history against moral principles.",
@@ -1302,8 +1302,8 @@
     "trap": "copy"
    },
    {
-    "t": "Face-recognition cells focus on the fine details of shape and can disregard where a face appears.",
-    "trap": "over"
+    "t": "Face-recognition cells develop their sensitivity to shape through repeated exposure to familiar faces.",
+    "trap": "off"
    },
    {
     "t": "The cells that let us identify faces must register fine differences in shape, though they needn't track position closely.",
@@ -1330,12 +1330,12 @@
     "trap": "ok"
    },
    {
-    "t": "People still eat, but a growing component of food's value is determined by its price.",
-    "trap": "copy"
+    "t": "People still eat, but food's value now depends largely on how conveniently it can be prepared.",
+    "trap": "off"
    },
    {
-    "t": "Food's worth now rests mainly on qualities that have little to do with nutrition.",
-    "trap": "over"
+    "t": "People still eat, but food's value now rests less and less on aspects beyond nutrition.",
+    "trap": "rev"
    },
    {
     "t": "How much people eat has become the main thing that decides the value of their food.",
@@ -1350,8 +1350,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "Commercial success is what makes an audience grow as large as possible.",
-    "trap": "copy"
+    "t": "Reaching commercial success also calls for keeping that large audience satisfied over the long term.",
+    "trap": "off"
    },
    {
     "t": "Reaching commercial success requires drawing the widest possible audience.",
@@ -1366,8 +1366,8 @@
     "trap": "dist"
    },
    {
-    "t": "Commercial success is simply a matter of how large an audience a work manages to attract.",
-    "trap": "over"
+    "t": "To achieve commercial success, a work must reach its audience before rival works do.",
+    "trap": "off"
    }
   ]
  },
@@ -1378,20 +1378,20 @@
   "answer": 5,
   "choices": [
    {
-    "t": "The easiest texts are precisely the ones where what a sentence says matches what it means.",
-    "trap": "copy"
+    "t": "Even in the easiest texts, a sentence's meaning grows clear after it is read several times.",
+    "trap": "off"
    },
    {
-    "t": "In easy texts, what a sentence says is generally the same as what it means.",
-    "trap": "rev"
+    "t": "Even in the easiest texts, readers notice a sentence's tone before they work out its meaning.",
+    "trap": "off"
    },
    {
     "t": "Even in the easiest texts, what a sentence means is often harder to say than to grasp.",
     "trap": "dist"
    },
    {
-    "t": "In no text does the wording of a sentence ever line up with its meaning.",
-    "trap": "over"
+    "t": "Even in the most difficult texts, what a sentence says is often not what it means.",
+    "trap": "dist"
    },
    {
     "t": "Even in simple writing, a sentence's literal wording frequently differs from its intended meaning.",
@@ -1410,20 +1410,20 @@
     "trap": "ok"
    },
    {
-    "t": "Musical behavior and perception can be modeled in a general way, though the process is filled with difficulties.",
-    "trap": "copy"
+    "t": "The difficulties in modeling musical perception stem mainly from differences among listeners' cultures.",
+    "trap": "off"
    },
    {
-    "t": "Modeling musical behavior or perception in a general way turns out to be fairly straightforward.",
-    "trap": "rev"
+    "t": "Modeling musical behavior or perception in a general way depends largely on how much training the listeners have received.",
+    "trap": "off"
    },
    {
     "t": "Any attempt to model the structure of one specific piece of music is filled with difficulties.",
     "trap": "dist"
    },
    {
-    "t": "No aspect of music can ever be captured by a general model.",
-    "trap": "over"
+    "t": "The difficulties filling any general model are what shape musical behavior and perception.",
+    "trap": "copy"
    }
   ]
  },
@@ -1434,8 +1434,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Their flight has no purpose, and they are believed to be drawn toward the pull of the light.",
-    "trap": "copy"
+    "t": "Their flight appears to have no purpose, but they are believed to gather near the light in search of warmth.",
+    "trap": "off"
    },
    {
     "t": "Their flight clearly has a purpose, yet they are not really trying to avoid the light.",
@@ -1450,8 +1450,8 @@
     "trap": "ok"
    },
    {
-    "t": "For these insects, flying is fundamentally an effort to break free from the pull of the light.",
-    "trap": "over"
+    "t": "Their flight appears to have no purpose, but they are believed to steer by keeping the light at a constant angle.",
+    "trap": "off"
    }
   ]
  },
@@ -1478,8 +1478,8 @@
     "trap": "off"
    },
    {
-    "t": "The best teaching materials are those that treat a language primarily as a carrier of social meaning.",
-    "trap": "over"
+    "t": "Core language teaching materials must be updated often to reflect how a language's rules shift over time.",
+    "trap": "off"
    }
   ]
  },
@@ -1490,20 +1490,20 @@
   "answer": 5,
   "choices": [
    {
-    "t": "Thinking through potential scenarios can be helpful to whatever extent a person wishes.",
-    "trap": "copy"
+    "t": "Thinking through potential scenarios is most helpful when it is done together with a group.",
+    "trap": "off"
    },
    {
-    "t": "Thinking through possible scenarios tends to do more harm than good.",
-    "trap": "rev"
+    "t": "Thinking through potential scenarios can be helpful mainly for people who tend to worry about the future.",
+    "trap": "off"
    },
    {
     "t": "To some extent, imagining potential scenarios can be entertaining.",
     "trap": "dist"
    },
    {
-    "t": "Thinking through potential scenarios is what best prepares a person for whatever lies ahead.",
-    "trap": "over"
+    "t": "Thinking through potential scenarios rarely turns out to be helpful.",
+    "trap": "rev"
    },
    {
     "t": "Up to a point, working through possible situations in advance can be useful.",
@@ -1518,16 +1518,16 @@
   "answer": 2,
   "choices": [
    {
-    "t": "In fact, employees commonly break rules because they are well aware their behavior is undesirable.",
-    "trap": "copy"
+    "t": "In fact, a common reason employees give for breaking rules is that they were under too much pressure to meet deadlines.",
+    "trap": "off"
    },
    {
     "t": "In fact, a frequent excuse workers offer for violating rules is that they did not realize their conduct was unwanted.",
     "trap": "ok"
    },
    {
-    "t": "Actually, employees rarely explain their rule-breaking by claiming they did not know what was expected.",
-    "trap": "rev"
+    "t": "In fact, one common reason employees give for breaking rules is that they saw their coworkers doing the same thing.",
+    "trap": "off"
    },
    {
     "t": "In fact, a common reason employees break rules is that they knew the rules but found them unreasonable.",
@@ -1546,8 +1546,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "A coward's disposition to experience fear is what his perceptual disposition affects.",
-    "trap": "copy"
+    "t": "A coward's disposition to experience fear is affected mainly by the situations he grew up in.",
+    "trap": "off"
    },
    {
     "t": "A coward's way of perceiving the world is left untouched by any tendency to feel fear.",
@@ -1562,8 +1562,8 @@
     "trap": "ok"
    },
    {
-    "t": "A person's perception is governed solely by fear whenever that person is a coward.",
-    "trap": "over"
+    "t": "A coward's disposition to experience fear tends to grow stronger the more danger he faces.",
+    "trap": "off"
    }
   ]
  },
@@ -1582,16 +1582,16 @@
     "trap": "ok"
    },
    {
-    "t": "Political institutions must independently ensure that users observe the regulations they are given.",
-    "trap": "copy"
+    "t": "Political institutions at central, regional, and local levels must allow users to devise their own regulations, provided they first receive expert approval.",
+    "trap": "off"
    },
    {
-    "t": "Governments should prevent users from creating regulations unless observance can be guaranteed centrally.",
-    "trap": "rev"
+    "t": "Governing bodies at various levels must let users devise their own regulations so that enforcement becomes cheaper for the state.",
+    "trap": "off"
    },
    {
-    "t": "Effective governance ultimately depends on letting users write and enforce the rules they see fit.",
-    "trap": "over"
+    "t": "Political institutions at the national level must let users devise their own regulations, while enforcement stays with local authorities.",
+    "trap": "dist"
    }
   ]
  },
@@ -1610,12 +1610,12 @@
     "trap": "dist"
    },
    {
-    "t": "Social exclusion is fundamentally a matter of where people stand in the hierarchy of mobility.",
-    "trap": "over"
+    "t": "Those at the bottom of this power rarely recognize how mobility shapes their exclusion.",
+    "trap": "off"
    },
    {
-    "t": "Those at the bottom of this power structure mobility to escape their social exclusion.",
-    "trap": "copy"
+    "t": "Those at the bottom of this power experience social exclusion that tends to fade as they grow older.",
+    "trap": "off"
    },
    {
     "t": "People with little power suffer social exclusion that is shaped by unequal access to mobility.",
@@ -1634,8 +1634,8 @@
     "trap": "rev"
    },
    {
-    "t": "Rather than fundamental, questions of tax are what make morality irrelevant.",
-    "trap": "copy"
+    "t": "Moral questions about taxation come to the fore mainly when citizens debate how fairly the burden should fall across income groups.",
+    "trap": "off"
    },
    {
     "t": "Moral questions matter chiefly for deciding how tax revenue should later be spent.",
@@ -1646,8 +1646,8 @@
     "trap": "ok"
    },
    {
-    "t": "Moral questions are what ultimately determine how taxes ought to be imposed.",
-    "trap": "over"
+    "t": "In practice, moral questions tend to be set aside when the imposition of tax is decided.",
+    "trap": "rev"
    }
   ]
  },
@@ -1662,8 +1662,8 @@
     "trap": "ok"
    },
    {
-    "t": "Creative people change cities because tastes, unsurprisingly, attract them.",
-    "trap": "copy"
+    "t": "Cities shift tastes largely because the creative people they gather tend to inspire one another through frequent face-to-face contact.",
+    "trap": "off"
    },
    {
     "t": "Cities resist changes in taste because the creative people they attract prefer stability.",
@@ -1674,8 +1674,8 @@
     "trap": "dist"
    },
    {
-    "t": "Cities are the true source of shifting tastes, since they gather the creative people who set them.",
-    "trap": "over"
+    "t": "Cities draw creative people largely because of the economic opportunities they offer.",
+    "trap": "off"
    }
   ]
  },
@@ -1686,20 +1686,20 @@
   "answer": 3,
   "choices": [
    {
-    "t": "Consumption remains chiefly about meeting needs rather than expressing a life-style.",
-    "trap": "rev"
+    "t": "Consumption has grown more about life-style partly because rising incomes leave many people with money to spare.",
+    "trap": "off"
    },
    {
-    "t": "Life-style and choice are less and less what consumption is about these days.",
-    "trap": "copy"
+    "t": "As consumption turns toward life-style, brands increasingly compete to shape what counts as a desirable identity.",
+    "trap": "off"
    },
    {
     "t": "Increasingly, what we consume reflects our chosen way of living rather than mere survival.",
     "trap": "ok"
    },
    {
-    "t": "Consumption has become a matter of personal life-style rather than of meeting basic needs.",
-    "trap": "over"
+    "t": "Consumption is gradually becoming as much about life-style as about basic sustenance.",
+    "trap": "dist"
    },
    {
     "t": "Consumption is becoming more about affording basic goods than about personal taste.",
@@ -1718,8 +1718,8 @@
     "trap": "rev"
    },
    {
-    "t": "Ideally, an innovation invites the culture to hop back to what is already known.",
-    "trap": "copy"
+    "t": "Ideally, an innovation succeeds because it arrives just when the culture feels ready to abandon its older habits.",
+    "trap": "off"
    },
    {
     "t": "Innovations are valuable mainly for how far ahead of current knowledge they leap.",
@@ -1730,8 +1730,8 @@
     "trap": "ok"
    },
    {
-    "t": "Ideally, an innovation is what moves a culture forward, carrying it well past the limits of what is currently known.",
-    "trap": "over"
+    "t": "Ideally, what is known opens up the next innovation, inviting the culture to move forward one hop.",
+    "trap": "copy"
    }
   ]
  },
@@ -1750,12 +1750,12 @@
     "trap": "ok"
    },
    {
-    "t": "People are framed as social actors whose roles as hosts and guests have no fixed bounds.",
-    "trap": "copy"
+    "t": "People are framed as social actors whose host and guest roles tend to reverse over the course of a single encounter.",
+    "trap": "off"
    },
    {
-    "t": "People are framed as social actors, and it is these host-and-guest roles that ultimately define who they are.",
-    "trap": "over"
+    "t": "People are framed as social actors whose host and guest roles are assigned to them by the wider community.",
+    "trap": "off"
    },
    {
     "t": "People are described as social actors mainly by how well they perform the host's duties.",
@@ -1782,8 +1782,8 @@
     "trap": "off"
    },
    {
-    "t": "Whenever vulnerable groups are involved, greater economic success is bound to benefit society as a whole.",
-    "trap": "over"
+    "t": "The contribution of greater economic success largely hinges on how fairly the resulting wealth is redistributed.",
+    "trap": "off"
    },
    {
     "t": "It is undeniable that stronger economic performance can help, provided it reaches disadvantaged people.",
@@ -1798,8 +1798,8 @@
   "answer": 2,
   "choices": [
    {
-    "t": "The fact that few people walk in a city is usually what drags the city quality down.",
-    "trap": "copy"
+    "t": "Whether many residents walk in a city depends largely on how pleasant its weather happens to be.",
+    "trap": "off"
    },
    {
     "t": "A low number of pedestrians in a city can, on the contrary, be read as a mark of a well-functioning city.",
@@ -1810,8 +1810,8 @@
     "trap": "rev"
    },
    {
-    "t": "Fewer pedestrians on the streets is a reliable sign that a city ranks among the best in quality.",
-    "trap": "over"
+    "t": "A city where few residents are out walking tends to signal poor city quality.",
+    "trap": "rev"
    },
    {
     "t": "Whether people walk or not reveals little about how safe a city truly is.",
@@ -1826,12 +1826,12 @@
   "answer": 4,
   "choices": [
    {
-    "t": "Learning is frequently a piecemeal process that reshapes the personality in profound ways.",
-    "trap": "copy"
+    "t": "Learning proceeds in a piecemeal way mainly because teachers prefer to present material one topic at a time.",
+    "trap": "off"
    },
    {
-    "t": "Learning usually proceeds as a holistic, integrated experience that reaches deep into who we are.",
-    "trap": "rev"
+    "t": "The piecemeal character of learning is why most people forget much of what they study within a few weeks.",
+    "trap": "off"
    },
    {
     "t": "In most cases, the analytic nature of learning makes it emotionally overwhelming for the learner.",
@@ -1862,16 +1862,16 @@
     "trap": "dist"
    },
    {
-    "t": "For instance, in a coin-tossing game, a win is defined as the very first throw landing on heads.",
-    "trap": "copy"
+    "t": "For instance, in such a coin-tossing game, the players usually agree beforehand on how many rounds they will play.",
+    "trap": "off"
    },
    {
     "t": "Take a coin game where a player loses only if three heads appear one after another.",
     "trap": "rev"
    },
    {
-    "t": "Winning at coin-tossing games of this kind usually comes down to getting three heads in a row.",
-    "trap": "over"
+    "t": "For instance, in such a coin-tossing game, the chance of throwing three heads in a row is fairly slim.",
+    "trap": "off"
    }
   ]
  },
@@ -1890,12 +1890,12 @@
     "trap": "off"
    },
    {
-    "t": "Social capital names relationships that exist despite deep differences in identity, understanding, and values.",
-    "trap": "rev"
+    "t": "Social capital tends to increase as the members of a network spend more years knowing one another.",
+    "trap": "off"
    },
    {
-    "t": "Social capital refers to the relationship networks that arise once people come to share the same identity, norms, and values.",
-    "trap": "over"
+    "t": "Social capital refers to the relationship networks built on mutual benefit and on a partial overlap of identity, norms, and values.",
+    "trap": "dist"
    },
    {
     "t": "Social capital refers to our webs of connection grounded in reciprocity and a common sense of who we are and what we believe.",
@@ -1922,8 +1922,8 @@
     "trap": "ok"
    },
    {
-    "t": "In pharmaceuticals, algorithms have become the driving force behind the search for new treatments across the field.",
-    "trap": "over"
+    "t": "In pharmaceuticals, algorithms are valued mainly because they shorten the time needed to bring a new drug to market.",
+    "trap": "off"
    },
    {
     "t": "Pharmaceutical firms use algorithms to steer research away from rare diseases toward more profitable ones.",
@@ -1946,12 +1946,12 @@
     "trap": "ok"
    },
    {
-    "t": "One is the view that scientific explanation consists in describing broad phenomena in exhaustive, minute detail.",
-    "trap": "copy"
+    "t": "One is the view that scientific explanation succeeds mainly when it wins the agreement of the wider research community.",
+    "trap": "off"
    },
    {
-    "t": "According to one view, scientific explanation works by gathering the whole range of phenomena under a single sweeping generalization.",
-    "trap": "over"
+    "t": "According to one view, scientific explanation lies not in unifying phenomena but in preserving the distinct character of each body of phenomena.",
+    "trap": "rev"
    },
    {
     "t": "One idea is that scientific explanation is chiefly concerned with predicting how future phenomena will behave.",
@@ -1982,8 +1982,8 @@
     "trap": "ok"
    },
    {
-    "t": "It is drive that builds and refines your abilities, making it the real engine behind strong, purposeful performance.",
-    "trap": "over"
+    "t": "Drive is something that tends to develop in people who grew up surrounded by ambitious role models.",
+    "trap": "off"
    }
   ]
  },
@@ -2006,12 +2006,12 @@
     "trap": "dist"
    },
    {
-    "t": "A shared metric structure offers wide potential for varying the lyrics, harmony and instrumentation of a piece.",
+    "t": "A shared metric structure is mainly what lets several performers stay synchronized with one another.",
     "trap": "off"
    },
    {
-    "t": "This freedom to vary tempo, volume, tone and intonation is what makes musical expression possible in the first place.",
-    "trap": "over"
+    "t": "Within the same metric structure, there is wide potential to vary tempo, volume and tonal quality, though the intonation must stay fixed.",
+    "trap": "dist"
    }
   ]
  },
@@ -2034,8 +2034,8 @@
     "trap": "dist"
    },
    {
-    "t": "A long search time is the main reason bees generally stop gathering water.",
-    "trap": "over"
+    "t": "A long search time signals to the bee that the water source has likely dried up.",
+    "trap": "off"
    },
    {
     "t": "Because search time is long, bees prefer collecting nectar to water.",
@@ -2050,8 +2050,8 @@
   "answer": 4,
   "choices": [
    {
-    "t": "A barn-raising party is a repair work that a new family calls for group labor.",
-    "trap": "copy"
+    "t": "A barn-raising party is typically rounded off with a shared meal to thank the neighbors who lend a hand.",
+    "trap": "off"
    },
    {
     "t": "A family holds a barn-raising party only when it wants to avoid asking others for help.",
@@ -2090,8 +2090,8 @@
     "trap": "copy"
    },
    {
-    "t": "Those who embrace vulnerability are the ones who go on to become genuinely confident people.",
-    "trap": "over"
+    "t": "Building confidence demands that we befriend vulnerability because doing so earns us the respect of those around us.",
+    "trap": "off"
    },
    {
     "t": "Confidence comes mainly from choosing supportive friends who shield us from vulnerability.",
@@ -2118,8 +2118,8 @@
     "trap": "ok"
    },
    {
-    "t": "This is how we come to treat places, and indeed most things around us, as fixed containers with clear edges.",
-    "trap": "over"
+    "t": "Likewise, places are treated as containers whose stable boundaries make them easy to defend from outsiders.",
+    "trap": "off"
    },
    {
     "t": "Places are valued for the stable resources their boundaries manage to contain.",
@@ -2142,8 +2142,8 @@
     "trap": "rev"
    },
    {
-    "t": "Indeed, being prone to error is the defining feature of human nature itself.",
-    "trap": "over"
+    "t": "Our capacity for making mistakes has gone largely unrecorded over the years.",
+    "trap": "rev"
    },
    {
     "t": "After all, we tend to document our mistakes far better than our successes.",
@@ -2198,8 +2198,8 @@
     "trap": "copy"
    },
    {
-    "t": "Imaginative engagement with literature is what truly drives learners' success in mastering a foreign language.",
-    "trap": "over"
+    "t": "Engaging with literature exposes learners to the cultural background embedded in the foreign language.",
+    "trap": "off"
    },
    {
     "t": "When learners engage their imagination with literature, they can move their attention past the merely mechanical features of the foreign language.",

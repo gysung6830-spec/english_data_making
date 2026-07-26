@@ -166,7 +166,7 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 {{RPROB}}
 
 <div class="band basic">기초편 · 문장 변환 연습 <small>({{BCOUNT}}문항 — 문장은 실제 기출, 선지는 변환 원리 학습용 예문)</small></div>
-<div class="lead">원문 <b>문장은 실제 평가원 기출</b>이지만, 여기 <b>선지는 5대 변환 원리를 익히기 위한 학습용 예문</b>입니다(저자 작성). 바꿔 말하기 감각을 기르는 기초 훈련입니다.</div>
+<div class="lead">원문 <b>문장은 실제 평가원 기출</b>이며, 선지는 학습용 예문입니다(저자 작성). 단 <b>오답 구성을 실제 평가원 오답 분포에 맞춰 설계</b>했습니다 — 초점 이탈 48%·뜻 반대 26%·세부 왜곡 17%·표면어휘 복사 7%·과도한 일반화 2% (실전편 실측과 평균 0.8%p 차이).</div>
 {{BPROB}}
 
 <div class="answers"><h2>정답 &amp; 해설 — 실전편</h2>{{RANS}}
