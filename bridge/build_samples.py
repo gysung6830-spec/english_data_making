@@ -99,6 +99,7 @@ def _to_grammar(cards):
     out = []
     for c in cards:
         out.append(B.BGrammar(kind=c["kind"], tag=c["tag"], title=c["title"], rule=c["rule"],
+                              form=c.get("form", ""), tip=c.get("tip", ""),
                               examples=[B.BExample(en=e["en"], ko=e["ko"]) for e in c["examples"]]))
     return out
 

@@ -67,8 +67,10 @@ class BGrammar(BaseModel):
     kind: str = Field(description="'core'(오늘의 핵심) / 'normal'(보통) / 'note'(지금은 몰라도 OK)")
     tag: str = Field(description="짧은 배지 문구, 예: '오늘의 핵심', '문법 2', '지금은 몰라도 OK'")
     title: str = Field(description="문법 제목, 예: 'be동사 = ~이다'")
-    rule: str = Field(description="쉬운 설명. 강조는 <b></b>만 사용")
-    examples: list[BExample] = Field(description="지문/쉬운 예문 1~2개")
+    rule: str = Field(description="개념 설명을 넉넉히 2~4문장으로. '무엇을·언제·왜 쓰는지'까지. 강조는 <b></b>만 사용")
+    form: str = Field(default="", description="형태 공식 한 줄. 예: '주어 + be동사 + 보어'. 없으면 빈 문자열")
+    examples: list[BExample] = Field(description="지문/쉬운 예문 2개 (핵심어 <b></b> 강조)")
+    tip: str = Field(default="", description="자주 하는 실수 또는 시험 포인트 한 줄. 없으면 빈 문자열")
 
 
 class BVocab(BaseModel):
@@ -145,8 +147,12 @@ def gen_prompt(title: str, body: str, level: int) -> str:
 [작성 규칙]
 1) passage: 지문을 문장 단위로 번호를 매겨 그대로 싣기(원문 유지).
 2) vocab: 위 난이도 지침대로 뽑고, 발음은 참고용 한글 표기, 품사와 뜻을 정확히.
-3) grammar: 위 난이도 지침대로 개수/난이도를 맞추기. 각 카드는 지문 속 실제 예문으로.
+3) grammar: 위 난이도 지침대로 개수/난이도를 맞추기. 각 카드는 <b>충실하게</b> 채우기.
    - kind는 'core'(가장 중요), 'normal', 'note'(지금은 몰라도 OK) 중 하나.
+   - rule: 개념을 2~4문장으로 넉넉히 — '무엇인지 + 언제 쓰는지 + 왜/어떻게 해석하는지'.
+   - form: 형태 공식을 한 줄로(예: '주어 + be동사 + 보어', 'If + 과거, 주어 would + 원형'). 공식이 없으면 빈 문자열.
+   - examples: 지문 속 실제 문장 1개 + 아주 쉬운 예문 1개 = 2개, 핵심어는 <b></b>로 강조.
+   - tip: 학생이 자주 하는 실수나 시험 포인트를 한 줄로.
    - 1~2단계에서는 어려운 문법을 억지로 설명하지 말고 note 카드로 안심시키기.
 4) literal(끊어읽기): 모든 지문 문장을 의미 단위로 ' / '로 끊고, 우리말도 같은 위치에서 ' / '로 끊어 직독직해.
 5) quiz: 오늘 배운 것 확인 문제. 정답 포함.
@@ -260,7 +266,8 @@ def to_render(gen: BridgeGen, level: int, source: str) -> dict:
         "vocab": [{"en": v.en, "pron": v.pron, "pos": v.pos, "ko": v.ko} for v in gen.vocab],
         "vocab_tip": "※ 발음은 참고용 한글 표기예요. 단어는 &lsquo;영어→뜻&rsquo;, &lsquo;뜻→영어&rsquo; 양방향으로 외우면 좋아요.",
         "grammar": [{"level": _KIND2LEVEL.get(g.kind, ""), "tag": g.tag, "title": g.title,
-                     "rule": g.rule, "examples": [{"en": e.en, "ko": e.ko} for e in g.examples]}
+                     "rule": g.rule, "form": getattr(g, "form", ""), "tip": getattr(g, "tip", ""),
+                     "examples": [{"en": e.en, "ko": e.ko} for e in g.examples]}
                     for g in gen.grammar],
         "literal": [{"no": s.no, "en": s.en, "ko": s.ko} for s in gen.literal],
         "quiz_html": _quiz_html(gen),
@@ -290,12 +297,23 @@ def mock_gen(title: str = "모기는 어떻게 무는가", level: int = 1) -> Br
             BVocab(en="escape", pron="이스케입", pos="동사", ko="달아나다"),
         ],
         grammar=[
-            BGrammar(kind="core", tag="가장 먼저", title="문장의 뼈대 = 주어 + 동사",
-                     rule="<b>누가(주어) + 뭐했다(동사)</b> 두 개만 먼저 찾으면 절반은 성공! 나머지는 살이라 몰라도 돼요.",
-                     examples=[BExample(en="<b>A mosquito</b> <b>sneaks</b> in.", ko="모기가 몰래 들어온다")]),
+            BGrammar(kind="core", tag="가장 먼저", title="문장의 뼈대 — 누가(주어) + 뭐했다(동사)",
+                     rule="영어 문장엔 <b>뼈대</b>가 있어요. <b>누가(주어)</b>와 <b>뭐했다(동사)</b> 딱 둘만 먼저 찾으면 "
+                          "절반은 성공! 나머지 단어는 꾸며 주는 <b>살</b>이라 처음엔 몰라도 돼요. 동사부터 찾고 그 앞 명사를 주어로 잡으세요.",
+                     form="누가(주어) + 뭐했다(동사) + (나머지 = 살)",
+                     examples=[BExample(en="<b>A mosquito</b> <b>sneaks</b> in.", ko="모기가(주어) 몰래 들어온다(동사)"),
+                               BExample(en="<b>It</b> <b>fills</b> its belly with blood.", ko="그것이(주어) 채운다(동사)")],
+                     tip="동사(~하다/~이다)부터 찾고, 그 앞 명사가 주어!"),
+            BGrammar(kind="core", tag="오늘의 핵심", title="be동사 (am · are · is) = ~이다 / ~에 있다",
+                     rule="뜻이 거의 없는 <b>be동사</b>는 <b>&lsquo;=(같다)&rsquo; 기호</b>라고 생각하세요. 주어에 따라 모양만 바뀝니다.",
+                     form="I→am · You/We/They→are · He/She/It(하나)→is",
+                     examples=[BExample(en="You <b>are</b> on a camping trip.", ko="너 = 캠핑 여행 중"),
+                               BExample(en="This <b>is</b> a mild allergic reaction.", ko="이것 = 알레르기 반응")],
+                     tip="am/are/is가 보이면 &lsquo;~이다&rsquo;로 해석!"),
             BGrammar(kind="note", tag="지금은 몰라도 OK", title="어려운 문법은 나중에 배워요!",
-                     rule="지금은 &lsquo;누가/뭐했다&rsquo;만 잡아도 충분해요.",
-                     examples=[BExample(en="It fills its belly with blood.", ko="그것이 배를 피로 채운다")]),
+                     rule="이 지문엔 관계대명사·분사구문 같은 어려운 것도 있어요. <b>지금은 몰라도 됩니다.</b> "
+                          "오늘은 &lsquo;누가/뭐했다&rsquo;와 be동사만 잡으면 대성공!",
+                     examples=[BExample(en="Carbon dioxide, which humans breathe out, is a signal.", ko="(참고) which 덩어리는 뒤 단계에서")]),
         ],
         literal=[
             BLiteral(no=1, en="A mosquito sneaks in / and pierces your skin.",

@@ -94,6 +94,14 @@ table.voc tbody tr:nth-child(even) td { background:var(--green-bg); }
 .gram-card.core .g-ex .arrow { color:var(--red); }
 .gram-card.up .g-ex .arrow { color:var(--amber); }
 .hl { background:#fff3cd; font-weight:800; padding:0 2px; border-radius:3px; }
+.g-form { background:#fff; border:1px solid #d6cdf0; border-radius:6px; padding:4px 9px; margin:0 0 6px;
+  font-size:9.6px; font-weight:700; color:#4a3a94; }
+.g-form .lbl { display:inline-block; background:var(--purple); color:#fff; font-size:8px; font-weight:800;
+  padding:0 6px; border-radius:7px; margin-right:6px; }
+.gram-card.core .g-form { border-color:#eec6c3; } .gram-card.core .g-form .lbl { background:var(--red); }
+.gram-card.up .g-form { border-color:#ecd9b6; } .gram-card.up .g-form .lbl { background:var(--amber); }
+.g-tip { margin-top:6px; font-size:9.2px; color:#7a4a12; background:#fdf6ea; border-radius:6px; padding:4px 9px; }
+.g-tip .lbl { font-weight:800; color:var(--amber); margin-right:4px; }
 
 table.lit { width:100%; border-collapse:collapse; table-layout:fixed; }
 table.lit th { background:var(--teal); color:#fff; font-size:9.5px; font-weight:700; padding:4px 8px; text-align:left; width:50%; }
@@ -181,7 +189,9 @@ table.q td { padding:4px 7px; border-bottom:1px solid var(--line); vertical-alig
   <div class="gram-card {{ g.level }}">
     <div><span class="g-tag">{{ g.tag }}</span><span class="g-title">{{ g.title }}</span></div>
     <div class="g-rule">{{ g.rule | safe }}</div>
+    {%- if g.form %}<div class="g-form"><span class="lbl">형태</span>{{ g.form | safe }}</div>{% endif %}
     <div class="g-ex">{%- for ex in g.examples %}<span class="en">{{ ex.en | safe }}</span><span class="arrow">→</span><span class="ko">{{ ex.ko | safe }}</span>{% if not loop.last %}<br>{% endif %}{% endfor %}</div>
+    {%- if g.tip %}<div class="g-tip"><span class="lbl">✔ 이것만!</span>{{ g.tip | safe }}</div>{% endif %}
   </div>
   {%- endfor %}
 </div>
