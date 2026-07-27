@@ -227,9 +227,18 @@
   @media print{
     body{font-size:12px;background:#fff;line-height:1.7;}
     .wrap{max-width:100%;padding:0 10mm;}
-    .cover{min-height:auto;page-break-after:always;padding:30px 0;}
-    section.chapter{page-break-before:always;}
-    .idiom,.quiz,.practice,.answers,.core-image{break-inside:avoid;}
+    .cover{min-height:auto;page-break-after:always;break-after:page;padding:30px 0;}
+    /* 각 단원(목차 항목)은 새 페이지에서 시작 */
+    section.chapter{page-break-before:always;break-before:page;}
+    /* 블록이 페이지 경계에서 잘리지 않도록 */
+    .idiom,.quiz,.practice,.answers,.core-image,.callout,.note{break-inside:avoid;page-break-inside:avoid;}
+    /* 제목/갈래 라벨이 페이지 끝에 홀로 남지 않도록 */
+    .sec-head,.branch{break-after:avoid;page-break-after:avoid;}
+    .practice ol > li{break-inside:avoid;page-break-inside:avoid;}
+    /* 목차는 한 페이지에 담기도록 압축 */
+    .toc{padding:16px 20px;}
+    .toc .row{padding:7px 8px;}
+    .toc .rn{width:32px;height:32px;flex:0 0 32px;}
     .no-print{display:none;}
   }
   @media (max-width:640px){
@@ -306,6 +315,7 @@
     <a href="#ch07"><div class="row"><span class="rn">07</span><span class="mid"><span class="rt">AGAINST</span><span class="img">맞부딪힘</span></span><span class="rd">-에 대항하여 · -에 맞대어(비교)</span></div></a>
     <a href="#ch08"><div class="row"><span class="rn">08</span><span class="mid"><span class="rt">OVER</span><span class="img">위에서 덮다</span></span><span class="rd">기본 · 선호(A over B) · 지배력 · -에 대해</span></div></a>
     <a href="#ch09"><div class="row"><span class="rn">09</span><span class="mid"><span class="rt">FROM</span><span class="img">-로부터</span></span><span class="rd">원인·출처 · 분리</span></div></a>
+    <a href="#ch10"><div class="row"><span class="rn" style="background:var(--rose)">10</span><span class="mid"><span class="rt">종합 복습</span><span class="img" style="color:var(--rose);background:var(--rose-soft)">통합 문제</span></span><span class="rd">빈칸 · 의미 판별 · 영작 (9개 전치사 혼합)</span></div></a>
   </div>
 </section>
 
@@ -377,6 +387,7 @@
   <div class="idiom">
     <div class="head"><span class="en">the idea of A</span><span class="ko">A라는 생각</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">There was nothing modern about the idea of men making women's clothes.</div><div class="tr">남자가 여자 옷을 만든다는 생각 / 현대적인 것은 없었다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">The idea of quitting never crossed her mind.</div><div class="tr">그만둔다는 생각은 그녀의 머릿속에 결코 떠오르지 않았다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">the fact of A</span><span class="ko">A라는 사실</span></div>
@@ -396,6 +407,7 @@
   <div class="idiom">
     <div class="head"><span class="en">be of concern</span><span class="ko">걱정스럽다 (= worrying)</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">Rising sea levels are of concern to scientists.</div><div class="tr">해수면 상승은 과학자들에게 걱정거리다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">The child's high fever was of great concern to her parents.</div><div class="tr">아이의 고열은 부모에게 큰 걱정거리였다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">be of interest</span><span class="ko">흥미롭다 (= interesting)</span></div>
@@ -481,6 +493,22 @@
       </li>
       <li><div class="prompt">영작하시오. — "모든 선택지 중에서, 첫 번째가 가장 안전했다." <span class="hint">(Of all …로 시작)</span></div></li>
       <li><div class="prompt">어법상 어색한 곳을 고치시오.<br>We must get rid <u>from</u> these outdated rules.</div></li>
+      <li><div class="prompt">우리말 "그의 조언은 큰 가치가 있었다."에 가장 알맞은 것은?</div>
+        <ul class="choices">
+          <li>① His advice had of great value.</li>
+          <li>② His advice was of great value.</li>
+          <li>③ His advice was great value.</li>
+          <li>④ His advice of great value was.</li>
+        </ul>
+      </li>
+      <li><div class="prompt">밑줄 친 of가 <b>부분(~중에서)</b>으로 쓰인 것은?</div>
+        <ul class="choices">
+          <li>① a cup <u>of</u> tea</li>
+          <li>② <u>Of</u> the five candidates, only one remained.</li>
+          <li>③ the sound <u>of</u> music</li>
+          <li>④ a table made <u>of</u> wood</li>
+        </ul>
+      </li>
     </ol>
   </div>
   <div class="answers">
@@ -491,6 +519,8 @@
       <li>(a) <b>동격</b> '외국에 산다는 생각' / (b) <b>목적어</b> '그 제안을 거절함' / (c) <b>형용사화</b> = helpful / (d) <b>박탈</b> rob A of B.</li>
       <li>예시: <b>Of all the options, the first (one) was the safest.</b></li>
       <li><b>from → of</b> — get rid <b>of</b> A가 올바른 형태.</li>
+      <li><b>②</b> — be of + 추상명사 = 형용사(be of value = valuable).</li>
+      <li><b>②</b> — 문두 Of + 복수/집합명사 = '~중에서'. ①은 한 덩어리, ③은 소속(~의), ④는 재료.</li>
     </ol>
   </div>
 </section>
@@ -535,6 +565,7 @@
   <div class="idiom">
     <div class="head"><span class="en">for S V (접속사)</span><span class="ko">왜냐하면 ~ 때문에</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">Nick was miserable, for he had been deprived of his liberty.</div><div class="tr">닉은 비참했다 / 왜냐하면 자유를 빼앗겼기 때문에</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">I couldn't sleep, for the noise outside was terrible.</div><div class="tr">나는 잠들 수 없었다 / 왜냐하면 바깥 소음이 끔찍했기 때문에</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">criticize · blame · scold · punish A for B</span><span class="ko">A를 ~하다 / B 때문에</span></div>
@@ -562,6 +593,15 @@
         </ul>
       </li>
       <li><div class="prompt">영작하시오. — "나는 그녀를 그녀의 언니로 착각했다." <span class="hint">(mistake A for B)</span></div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "그녀는 그의 친절에 대해 그에게 감사했다."<br>She thanked him <span class="blank"></span> his kindness.</div></li>
+      <li><div class="prompt">밑줄 친 for가 <b>이유(왜냐하면)</b>의 접속사인 것은?</div>
+        <ul class="choices">
+          <li>① He left early, <u>for</u> he was tired.</li>
+          <li>② I bought this gift <u>for</u> you.</li>
+          <li>③ We waited <u>for</u> an hour.</li>
+          <li>④ She is famous <u>for</u> her voice.</li>
+        </ul>
+      </li>
     </ol>
   </div>
   <div class="answers">
@@ -571,6 +611,8 @@
       <li><b>for</b> — blame A for B (B 때문에 A를 비난하다).</li>
       <li>(a) <b>교환</b>(대가로) / (b) <b>찬성</b> / (c) <b>이유</b> 접속사 '왜냐하면'.</li>
       <li>예시: <b>I mistook her for her (older) sister.</b></li>
+      <li><b>for</b> — thank A for B (B에 대해 A에게 감사하다).</li>
+      <li><b>①</b> — 뒤에 S+V(he was tired)가 오는 접속사 for '왜냐하면'. ②대상 ③기간 ④이유(명사).</li>
     </ol>
   </div>
 </section>
@@ -613,6 +655,7 @@
   <div class="idiom">
     <div class="head"><span class="en">come about</span><span class="ko">발생하다</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">How did the accident come about?</div><div class="tr">그 사고는 어떻게 발생했나?</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">Great discoveries often come about by chance.</div><div class="tr">위대한 발견은 종종 우연히 일어난다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">bring about O</span><span class="ko">O를 발생시키다 (= cause)</span></div>
@@ -635,6 +678,8 @@
         </ul>
       </li>
       <li><div class="prompt">영작하시오. — "이제 우리가 진지하게 행동해야 할 때다." <span class="hint">(It's about time that …)</span></div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "그 강연은 약 한 시간 동안 계속됐다."<br>The lecture lasted <span class="blank"></span> an hour.</div></li>
+      <li><div class="prompt">come about과 bring about의 차이를 설명하시오.</div></li>
     </ol>
   </div>
   <div class="answers">
@@ -643,6 +688,8 @@
       <li><b>②</b> cause.</li>
       <li>(a) <b>대략</b> / (b) <b>여기저기</b> / (c) <b>~에 관한</b>.</li>
       <li>예시: <b>It's about time (that) we acted seriously.</b> (that절에 과거형 acted를 쓰는 것이 관용적)</li>
+      <li><b>about</b> — 수치 앞 about = 약, 대략.</li>
+      <li><b>come about</b>은 자동사로 '(저절로) 발생하다', <b>bring about</b>은 타동사로 목적어를 '발생시키다(= cause)'. 목적어 유무로 구분한다.</li>
     </ol>
   </div>
 </section>
@@ -671,6 +718,7 @@
   <div class="idiom">
     <div class="head"><span class="en">nothing but A</span><span class="ko">오직 A (= only)</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">He drinks nothing but water.</div><div class="tr">그는 오직 물만 마신다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">There was nothing but silence after the announcement.</div><div class="tr">발표 후에는 오직 침묵뿐이었다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">have no choice but to V</span><span class="ko">V할 수밖에 없다</span></div>
@@ -700,6 +748,8 @@
       </li>
       <li><div class="prompt">"Her cooking is anything but ordinary." 를 우리말로 옮기시오.</div></li>
       <li><div class="prompt">밑줄 부분을 같은 뜻의 부정 표현으로 바꾸시오. — "We had <u>no choice but to</u> wait."</div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "그 소음은 참을 수 없었다(참는 것을 넘어섰다)."<br>The noise was <span class="blank"></span> endurance.</div></li>
+      <li><div class="prompt">"Everyone but John agreed with the plan." — 계획에 <b>동의하지 않은</b> 사람은?</div></li>
     </ol>
   </div>
   <div class="answers">
@@ -708,6 +758,8 @@
       <li><b>②</b> — beyond words = 말을 넘어섬 = 형언할 수 없는.</li>
       <li><b>그녀의 요리는 결코 평범하지 않다.</b> (anything but = 결코 ~아닌)</li>
       <li>예시: <b>We could not help but wait / We could do nothing but wait</b> (기다릴 수밖에 없었다).</li>
+      <li><b>beyond</b> — beyond endurance = 참을 수 없는(한계를 넘어섬 → 부정).</li>
+      <li><b>John</b> — but A = A를 제외하고(= except). 존만 동의하지 않았다.</li>
     </ol>
   </div>
 </section>
@@ -729,6 +781,7 @@
   <div class="idiom">
     <div class="head"><span class="en">show off</span><span class="ko">자랑하다 (= boast of)</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">He likes to show off his new car.</div><div class="tr">그는 새 차를 자랑하기 좋아한다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">Don't show off in front of the guests.</div><div class="tr">손님들 앞에서 잘난 척하지 마라</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">better off / worse off</span><span class="ko">형편이 나은 / 나쁜</span></div>
@@ -754,6 +807,10 @@
       </li>
       <li><div class="prompt">빈칸을 채우시오. — "너의 인내는 언젠가 결실을 맺을 것이다."<br>Your patience will <span class="blank"></span> someday.</div></li>
       <li><div class="prompt">"better off"와 반대되는 표현을 쓰시오.</div></li>
+      <li><div class="prompt">"well-off"의 뜻과 반대말을 쓰시오.</div></li>
+      <li><div class="prompt">"This is off the record."의 의미로 알맞은 것은?</div>
+        <ul class="choices"><li>① 공식적인</li><li>② 비공개의</li><li>③ 기록적인</li><li>④ 정확한</li></ul>
+      </li>
     </ol>
   </div>
   <div class="answers">
@@ -762,6 +819,8 @@
       <li><b>②</b> 무관한(irrelevant) — 요점에서 벗어남.</li>
       <li><b>pay off</b>.</li>
       <li><b>worse off</b> (형편이 더 나쁜).</li>
+      <li>뜻 <b>부유한</b>(= wealthy) / 반대말 <b>badly-off</b>(또는 poor).</li>
+      <li><b>②</b> 비공개의(confidential) — 기록에서 벗어남.</li>
     </ol>
   </div>
 </section>
@@ -823,6 +882,7 @@
   <div class="idiom">
     <div class="head"><span class="en">focus on A</span><span class="ko">A에 집중하다</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">Let's focus on the main issue.</div><div class="tr">핵심 문제에 집중하자</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">Try to focus on your breathing when you feel anxious.</div><div class="tr">불안할 때는 호흡에 집중하려고 해 보라</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">reflect · dwell · deliberate on A</span><span class="ko">A에 대해 숙고하다</span></div>
@@ -858,6 +918,7 @@
   <div class="idiom">
     <div class="head"><span class="en">A is based on B</span><span class="ko">A는 B에 기반한다</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">The movie is based on a true story.</div><div class="tr">그 영화는 실화에 기반한다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">The report is based on solid evidence.</div><div class="tr">그 보고서는 확실한 증거에 기반한다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">on the ground that</span><span class="ko">~라는 이유로</span></div>
@@ -896,6 +957,14 @@
       </li>
       <li><div class="prompt">빈칸을 채우시오. — "그 소식을 듣자마자 그는 뛰어나갔다."<br><span class="blank"></span> hearing the news, he ran out.</div></li>
       <li><div class="prompt">"feed the cat"과 "feed on fish"의 의미 차이를 설명하시오.</div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "정부는 수입품에 관세를 부과했다."<br>The government <span class="blank"></span> tariffs <span class="blank"></span> imports.</div></li>
+      <li><div class="prompt">밑줄 친 on의 갈래(공간 / 계속 / 집중)를 쓰시오.</div>
+        <ul class="choices">
+          <li>(a) a painting <u>on</u> the wall</li>
+          <li>(b) Please carry <u>on</u> with your work.</li>
+          <li>(c) concentrate <u>on</u> the task</li>
+        </ul>
+      </li>
     </ol>
   </div>
   <div class="answers">
@@ -905,6 +974,8 @@
       <li>(a) 이용·의지(의존) / (b) 기반 / (c) 인과(영향) / (d) 표면상.</li>
       <li><b>On</b> (on + V-ing = ~하자마자).</li>
       <li>feed + O = "~에게 먹이를 주다"(고양이에게 먹이를 줌) / feed on + O = "~을 먹고 살다"(생선을 주식으로 함). 즉 주어가 먹는 주체인지, 먹이를 주는 주체인지가 다르다.</li>
+      <li><b>imposed / on</b> — impose A on B (A를 B에 부과하다).</li>
+      <li>(a) <b>공간</b>(접촉) / (b) <b>계속</b> / (c) <b>집중</b>.</li>
     </ol>
   </div>
 </section>
@@ -922,6 +993,7 @@
   <div class="idiom">
     <div class="head"><span class="en">speak out against A</span><span class="ko">A에 반대해 목소리를 내다 (14수능)</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">He spoke out against the use of the guillotine.</div><div class="tr">그는 단두대 사용에 반대해 목소리를 냈다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">Students spoke out against the sudden tuition hike.</div><div class="tr">학생들이 갑작스러운 등록금 인상에 반대해 목소리를 냈다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">compete against A</span><span class="ko">A와 맞서 경쟁하다 (11수능)</span></div>
@@ -961,6 +1033,8 @@
       </li>
       <li><div class="prompt">"compare A against B"에서 실제로 하는 행위는? (대결 / 비교) 중 고르시오.</div></li>
       <li><div class="prompt">영작하시오. — "우리는 그 이론을 새 증거에 맞대어 검증했다." <span class="hint">(test … against …)</span></div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "우리는 이익을 비용에 맞대어 저울질해야 한다."<br>We must <span class="blank"></span> the benefits <span class="blank"></span> the costs.</div></li>
+      <li><div class="prompt">"The rebels rose against the king." 에서 against의 의미는? (대항 / 비교)</div></li>
     </ol>
   </div>
   <div class="answers">
@@ -969,6 +1043,8 @@
       <li>(a) <b>대항</b> / (b) <b>맞대어 비교</b>(저울질).</li>
       <li><b>비교</b> — 두 대상을 맞대어 보는 것이지 싸우는 것이 아니다.</li>
       <li>예시: <b>We tested the theory against the new evidence.</b></li>
+      <li><b>weigh / against</b> — weigh A against B (A를 B에 맞대어 저울질하다).</li>
+      <li><b>대항</b> — rise against A = A에 대항하여 일어나다.</li>
     </ol>
   </div>
 </section>
@@ -1004,6 +1080,7 @@
   <div class="idiom">
     <div class="head"><span class="en">take over</span><span class="ko">지배하다(= dominate) / 맡다</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">The competitively superior species takes over.</div><div class="tr">경쟁적으로 우월한 종이 지배한다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">A younger generation is taking over the industry.</div><div class="tr">더 젊은 세대가 그 산업을 장악하고 있다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">control over A</span><span class="ko">A에 대한 통제력 (18수능)</span></div>
@@ -1041,6 +1118,8 @@
         </ul>
       </li>
       <li><div class="prompt">"think over"를 뜻이 비슷한 다른 전치사 표현으로 바꾸시오.</div></li>
+      <li><div class="prompt">빈칸을 채우시오. — "그들은 그 결정에 대해 오래 숙고했다."<br>They <span class="blank"></span> <span class="blank"></span> the decision for a long time. <span class="hint">(think 활용)</span></div></li>
+      <li><div class="prompt">"The manager has full control over the budget." — over의 갈래는? (선호 / 지배력 / 주제)</div></li>
     </ol>
   </div>
   <div class="answers">
@@ -1049,6 +1128,8 @@
       <li><b>②</b> 커피 — A over B는 A를 택하고 B를 버림.</li>
       <li>(a) <b>지배력</b>(통제) / (b) <b>주제</b>(~에 대해 숙고) / (c) <b>선호</b>.</li>
       <li><b>think about</b> (over ≈ about, ~에 대해).</li>
+      <li><b>thought over</b> — think over A (A에 대해 숙고하다).</li>
+      <li><b>지배력</b> — control over A = A에 대한 통제력.</li>
     </ol>
   </div>
 </section>
@@ -1074,6 +1155,7 @@
   <div class="idiom">
     <div class="head"><span class="en">be free from A</span><span class="ko">A가 없다</span></div>
     <div class="ex"><span class="pin">EX</span><div class="body"><div class="s">The area is now free from pollution.</div><div class="tr">그 지역은 이제 오염이 없다</div></div></div>
+    <div class="ex add"><span class="pin">+추가</span><div class="body"><div class="s">Even a good leader is never free from criticism.</div><div class="tr">훌륭한 리더조차도 결코 비판에서 자유롭지 못하다</div></div></div>
   </div>
   <div class="idiom">
     <div class="head"><span class="en">apart from A</span><span class="ko">A 외에는 / A와 떨어져</span></div>
@@ -1095,6 +1177,13 @@
       <li><div class="prompt">"result in"과 "result from"의 인과 방향을 화살표로 나타내시오.</div></li>
       <li><div class="prompt">빈칸을 채우시오. — "이 제품은 인공 색소가 없다."<br>This product is <span class="blank"></span> <span class="blank"></span> artificial colors.</div></li>
       <li><div class="prompt">영작하시오. — "몇 가지 사소한 문제 외에는, 계획은 완벽하다." <span class="hint">(Apart from …)</span></div></li>
+      <li><div class="prompt">다음 중 result from이 <b>올바르게</b> 쓰인 문장은?</div>
+        <ul class="choices">
+          <li>① Hard work results from success.</li>
+          <li>② Success results from hard work.</li>
+        </ul>
+      </li>
+      <li><div class="prompt">"Her opinion is quite different ___ mine." 빈칸에 알맞은 전치사를 쓰시오.</div></li>
     </ol>
   </div>
   <div class="answers">
@@ -1104,6 +1193,81 @@
       <li>result <b>in</b>: 원인 → 결과 &nbsp;/&nbsp; result <b>from</b>: 결과 ← 원인.</li>
       <li><b>free / from</b> — be free from A (A가 없다).</li>
       <li>예시: <b>Apart from a few minor problems, the plan is perfect.</b></li>
+      <li><b>②</b> — result from B: 결과 ← 원인. 성공(결과)은 노력(원인)으로부터 비롯된다. ①은 인과가 거꾸로.</li>
+      <li><b>from</b> — be different from A (A와 다르다).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= 10 종합 복습 ================= -->
+<section class="chapter" id="ch10">
+  <div class="sec-head"><div class="sec-num" style="background:var(--rose)">10</div><div class="t"><h2>종합 복습</h2><p>9개 전치사를 섞어 푸는 통합 연습문제</p></div></div>
+  <div class="core-image" style="background:linear-gradient(90deg,var(--rose-soft),#fff);border-color:var(--rose-soft);border-left-color:var(--rose)"><span class="lab" style="color:var(--rose)">REVIEW</span><span class="val" style="color:var(--rose)">핵심 이미지로 전치사를 되짚어 본다</span></div>
+
+  <div class="practice" style="border-color:var(--rose)">
+    <span class="plab" style="background:var(--rose)">종합 연습문제 · PART 1 (빈칸)</span>
+    <ol>
+      <li><div class="prompt">The war deprived thousands <span class="blank"></span> their homes. <span class="hint">(박탈)</span></div></li>
+      <li><div class="prompt">You can substitute yogurt <span class="blank"></span> cream in this recipe. <span class="hint">(교환)</span></div></li>
+      <li><div class="prompt">Social media has a huge influence <span class="blank"></span> teenagers. <span class="hint">(영향력)</span></div></li>
+      <li><div class="prompt">Most customers prefer speed <span class="blank"></span> price. <span class="hint">(선호)</span></div></li>
+      <li><div class="prompt">His success resulted <span class="blank"></span> years of effort. <span class="hint">(원인·출처)</span></div></li>
+      <li><div class="prompt">The plan seems simple <span class="blank"></span> the surface. <span class="hint">(표면상)</span></div></li>
+    </ol>
+  </div>
+  <div class="answers">
+    <div class="alab">정답 · PART 1</div>
+    <ol>
+      <li><b>of</b> (deprive A of B)</li>
+      <li><b>for</b> (substitute A for B)</li>
+      <li><b>on</b> (influence on)</li>
+      <li><b>over</b> (prefer A over B)</li>
+      <li><b>from</b> (result from)</li>
+      <li><b>on</b> (on the surface)</li>
+    </ol>
+  </div>
+
+  <div class="practice" style="border-color:var(--rose)">
+    <span class="plab" style="background:var(--rose)">종합 연습문제 · PART 2 (의미 판별)</span>
+    <ol>
+      <li><div class="prompt">"The evidence is beyond dispute." 의 의미로 알맞은 것은?</div>
+        <ul class="choices"><li>① 논쟁이 심하다</li><li>② 논쟁의 여지가 없다(확실하다)</li><li>③ 논쟁을 시작했다</li><li>④ 증거가 부족하다</li></ul>
+      </li>
+      <li><div class="prompt">"A results in B" 와 "A results from B" 의 인과 방향을 각각 화살표로 나타내시오.</div></li>
+      <li><div class="prompt">밑줄 친 전치사의 핵심 이미지를 쓰시오. (예: on → 접촉)</div>
+        <ul class="choices">
+          <li>(a) He was cured <u>of</u> his illness.</li>
+          <li>(b) They competed <u>against</u> rival teams.</li>
+          <li>(c) The book is <u>about</u> ancient Rome.</li>
+        </ul>
+      </li>
+      <li><div class="prompt">"She had no choice but to resign." 을 우리말로 옮기시오.</div></li>
+    </ol>
+  </div>
+  <div class="answers">
+    <div class="alab">정답 &amp; 해설 · PART 2</div>
+    <ol>
+      <li><b>②</b> — beyond dispute = 논쟁을 넘어섬 = 확실한(부정어 기능).</li>
+      <li>result <b>in</b>: A → B (원인→결과) / result <b>from</b>: A ← B (결과←원인).</li>
+      <li>(a) of → <b>분리·박탈</b> / (b) against → <b>맞부딪힘(대항)</b> / (c) about → <b>주변을 맴돎(~에 관한)</b>.</li>
+      <li><b>그녀는 사임할 수밖에 없었다.</b> (have no choice but to V)</li>
+    </ol>
+  </div>
+
+  <div class="practice" style="border-color:var(--rose)">
+    <span class="plab" style="background:var(--rose)">종합 연습문제 · PART 3 (영작)</span>
+    <ol>
+      <li><div class="prompt">그 약은 그에게서 고통을 덜어주었다. <span class="hint">(relieve A of B)</span></div></li>
+      <li><div class="prompt">우리는 이익을 위험에 맞대어 저울질해야 한다. <span class="hint">(weigh A against B)</span></div></li>
+      <li><div class="prompt">그 소식을 듣자마자 그녀는 웃기 시작했다. <span class="hint">(On + V-ing)</span></div></li>
+    </ol>
+  </div>
+  <div class="answers">
+    <div class="alab">정답 예시 · PART 3</div>
+    <ol>
+      <li><b>The medicine relieved him of the pain.</b></li>
+      <li><b>We must weigh the benefits against the risks.</b></li>
+      <li><b>On hearing the news, she began to laugh.</b></li>
     </ol>
   </div>
 </section>
