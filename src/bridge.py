@@ -103,6 +103,12 @@ class BQuizGrammar(BaseModel):
     why: str = Field(description="정답 근거 한 줄. 예: '주어 a mosquito=하나 → 동사에 -s'")
 
 
+class BQuizFill(BaseModel):
+    point: str = Field(description="묻는 문법 이름. 예: '3인칭 -s', '가정법 과거'")
+    question: str = Field(description="지문 문장에 빈칸 '____'을 만들고, 괄호에 힌트(원형/한국어)를 줌. 예: 'A mosquito ____ in and pierces your skin. (sneak을 알맞은 형태로)'")
+    answer: str = Field(description="정답만. 예: 'sneaks'")
+
+
 class BQuizTranslate(BaseModel):
     en: str
     ko: str = Field(description="모범 해석(정답)")
@@ -119,8 +125,9 @@ class BridgeGen(BaseModel):
     vocab: list[BVocab]
     grammar: list[BGrammar]
     literal: list[BLiteral]
-    quiz_word: list[BQuizWord] = Field(description="단어 뜻 쓰기용 8~10개")
-    quiz_grammar: list[BQuizGrammar] = Field(description="핵심 문법 연습문제 4~6개. 반드시 '지문에 실제로 나온 문장'을 그대로 사용하고, 오늘 배운 핵심 문법만 물을 것")
+    quiz_word: list[BQuizWord] = Field(description="단어 테스트용 10개(영↔한 양방향에 함께 사용)")
+    quiz_grammar: list[BQuizGrammar] = Field(description="핵심 문법 연습문제① 4~6개. 반드시 '지문에 실제로 나온 문장'을 그대로 사용하고, 오늘 배운 핵심 문법만 물을 것(괄호 택1)")
+    quiz_fill: list[BQuizFill] = Field(description="핵심 문법 연습문제② 3~4개. 지문 문장에 빈칸을 만들어 '알맞은 형태/말'을 쓰게 하기")
     quiz_translate: list[BQuizTranslate] = Field(description="지문 문장 해석 2개")
 
 
@@ -156,9 +163,11 @@ def gen_prompt(title: str, body: str, level: int) -> str:
    - 1~2단계에서는 어려운 문법을 억지로 설명하지 말고 note 카드로 안심시키기.
 4) literal(끊어읽기): 모든 지문 문장을 의미 단위로 ' / '로 끊고, 우리말도 같은 위치에서 ' / '로 끊어 직독직해.
 5) quiz: 오늘 배운 것 확인 문제. 정답 포함.
-   - quiz_grammar(핵심 문법 연습문제)는 반드시 <b>지문에 실제로 나온 문장</b>을 그대로 가져와서,
-     오늘의 핵심 문법이 걸린 자리를 괄호 택1 '( A / B )' 또는 빈칸 '____' 로 만들 것. 4~6개.
-   - 각 문제에 point(묻는 문법 이름)와 why(정답 근거 한 줄)를 채울 것.
+   - quiz_word: 단어 테스트 10개(영↔한 양방향으로 함께 쓰임).
+   - quiz_grammar(핵심 문법 연습문제①): 반드시 <b>지문에 실제로 나온 문장</b>을 그대로 가져와서,
+     오늘의 핵심 문법이 걸린 자리를 괄호 택1 '( A / B )'로 만들 것. 4~6개. point·why 채우기.
+   - quiz_fill(핵심 문법 연습문제②): 지문 문장에 빈칸 '____'을 만들고 괄호에 힌트(원형/한국어)를 줘서
+     알맞은 형태/말을 쓰게 하기. 3~4개. point·answer 채우기.
 6) 모든 설명은 해당 난이도의 학생이 이해할 수 있는 쉬운 한국어로.
 
 [제목] {title}
@@ -188,50 +197,77 @@ def generate(client, cfg, extraction, level: int) -> BridgeGen:
 _KIND2LEVEL = {"core": "core", "normal": "", "note": "up"}
 
 
-def _quiz_html(gen: BridgeGen) -> str:
-    # A. 단어 뜻 쓰기(영→한)
+def _wordtable(ws, show: str) -> str:
+    """단어 2열 표. show='en'이면 영어 제시(뜻 쓰기), 'ko'이면 뜻 제시(영어 쓰기)."""
     rows = []
-    ws = gen.quiz_word
     half = (len(ws) + 1) // 2
     for i in range(half):
         left = ws[i]
         right = ws[i + half] if i + half < len(ws) else None
-        r = (f'<tr><td class="q-num">{i+1}</td><td class="q-word">{left.en}</td><td class="q-blank"></td>')
+        lv = left.en if show == "en" else left.ko
+        r = f'<tr><td class="q-num">{i+1}</td><td class="q-word">{lv}</td><td class="q-blank"></td>'
         if right:
-            r += f'<td class="q-num">{i+half+1}</td><td class="q-word">{right.en}</td><td class="q-blank"></td>'
+            rv = right.en if show == "en" else right.ko
+            r += f'<td class="q-num">{i+half+1}</td><td class="q-word">{rv}</td><td class="q-blank"></td>'
         else:
             r += '<td></td><td></td><td></td>'
         rows.append(r + "</tr>")
-    a = (f'<div class="q-block"><div class="q-h"><span class="q-badge">A</span>단어 뜻 쓰기 (영어 → 우리말)</div>'
-         f'<table class="q"><tbody>{"".join(rows)}</tbody></table></div>')
+    return f'<table class="q"><tbody>{"".join(rows)}</tbody></table>'
 
-    # B. 핵심 문법 연습문제 (지문 문장 그대로)
+
+def _sub(no, badge, title, body):
+    return (f'<div class="q-block"><div class="q-h"><span class="q-badge">{badge}</span>{title}</div>{body}</div>')
+
+
+def _quiz_html(gen: BridgeGen) -> str:
+    ws = gen.quiz_word
+    # A·B. 단어 테스트 (양방향)
+    a = _sub(1, "A", '단어 테스트 ① <span style="font-weight:600;color:#6b7280;font-size:9.5px">영어 → 우리말 뜻 쓰기</span>',
+             _wordtable(ws, "en"))
+    b = _sub(2, "B", '단어 테스트 ② <span style="font-weight:600;color:#6b7280;font-size:9.5px">우리말 뜻 → 영어 쓰기</span>',
+             _wordtable(ws, "ko"))
+
+    # C. 핵심 문법 연습문제① (괄호 택1)
     gitems = []
     for i, g in enumerate(gen.quiz_grammar):
         point = getattr(g, "point", "")
         badge = f' &nbsp;<span class="g-point">[{point}]</span>' if point else ""
         gitems.append(f'<div class="q-line"><b>{i+1})</b> {g.question}{badge}</div>')
-    glines = "".join(gitems)
-    c = ('<div class="q-block"><div class="q-h"><span class="q-badge">B</span>핵심 문법 연습문제 '
-         '<span style="font-weight:600;color:#6b7280;font-size:9.5px">— 지문 문장에서 알맞은 것 고르기 / 빈칸 채우기</span>'
-         f'</div>{glines}</div>')
+    c = _sub(3, "C", '핵심 문법 연습문제 ① <span style="font-weight:600;color:#6b7280;font-size:9.5px">— 괄호에서 알맞은 것 고르기</span>',
+             "".join(gitems))
 
-    # D. 해석
-    dlines = "".join(f'<div class="q-line">{i+1}) {t.en}<span class="q-write"></span></div>'
+    # D. 핵심 문법 연습문제② (빈칸/형태 쓰기)
+    fitems = []
+    for i, q in enumerate(getattr(gen, "quiz_fill", []) or []):
+        point = getattr(q, "point", "")
+        badge = f' &nbsp;<span class="g-point">[{point}]</span>' if point else ""
+        fitems.append(f'<div class="q-line"><b>{i+1})</b> {q.question}{badge}</div>')
+    d = _sub(4, "D", '핵심 문법 연습문제 ② <span style="font-weight:600;color:#6b7280;font-size:9.5px">— 빈칸에 알맞은 말/형태 쓰기</span>',
+             "".join(fitems)) if fitems else ""
+
+    # E. 문장 해석
+    elines = "".join(f'<div class="q-line">{i+1}) {t.en}<span class="q-write"></span></div>'
                      for i, t in enumerate(gen.quiz_translate))
-    d = (f'<div class="q-block"><div class="q-h"><span class="q-badge">C</span>다음 문장을 우리말로 해석하기</div>{dlines}</div>')
-    return a + c + d
+    e = _sub(5, "E", "다음 문장을 우리말로 해석하기", elines)
+    return a + b + c + d + e
 
 
 def _answer_html(gen: BridgeGen) -> str:
     a = " &nbsp; ".join(f"{i+1} {w.ko}" for i, w in enumerate(gen.quiz_word))
+    b = " &nbsp; ".join(f"{i+1} {w.en}" for i, w in enumerate(gen.quiz_word))
     c = " &nbsp; ".join(
         f"{i+1} <b>{g.answer}</b>{f' ({g.why})' if getattr(g, 'why', '') else ''}"
         for i, g in enumerate(gen.quiz_grammar))
-    d = " &nbsp; ".join(f"{i+1} {t.ko}" for i, t in enumerate(gen.quiz_translate))
-    return (f'<div class="ans-block"><b>A.</b> {a}</div>'
-            f'<div class="ans-block"><b>B.</b> {c}</div>'
-            f'<div class="ans-block"><b>C.</b> {d}</div>')
+    fills = getattr(gen, "quiz_fill", []) or []
+    d = " &nbsp; ".join(f"{i+1} <b>{q.answer}</b>" for i, q in enumerate(fills))
+    e = " &nbsp; ".join(f"{i+1} {t.ko}" for i, t in enumerate(gen.quiz_translate))
+    out = (f'<div class="ans-block"><b>A.</b> {a}</div>'
+           f'<div class="ans-block"><b>B.</b> {b}</div>'
+           f'<div class="ans-block"><b>C.</b> {c}</div>')
+    if fills:
+        out += f'<div class="ans-block"><b>D.</b> {d}</div>'
+    out += f'<div class="ans-block"><b>E.</b> {e}</div>'
+    return out
 
 
 def to_render(gen: BridgeGen, level: int, source: str) -> dict:
@@ -322,7 +358,8 @@ def mock_gen(title: str = "모기는 어떻게 무는가", level: int = 1) -> Br
                      ko="그것은 배를 피로 채운다 / 그런 다음 달아난다."),
         ],
         quiz_word=[BQuizWord(en="mosquito", ko="모기"), BQuizWord(en="pierce", ko="뚫다"),
-                   BQuizWord(en="belly", ko="배"), BQuizWord(en="escape", ko="달아나다")],
+                   BQuizWord(en="belly", ko="배"), BQuizWord(en="escape", ko="달아나다"),
+                   BQuizWord(en="skin", ko="피부"), BQuizWord(en="blood", ko="피")],
         quiz_grammar=[
             BQuizGrammar(point="3인칭 -s", question="A mosquito ( sneak / sneaks ) in and ( pierce / pierces ) your skin.",
                          answer="sneaks, pierces", why="주어 a mosquito=하나 → 동사에 -s"),
@@ -332,6 +369,11 @@ def mock_gen(title: str = "모기는 어떻게 무는가", level: int = 1) -> Br
                          answer="fills", why="주어 It=하나 → -s"),
             BQuizGrammar(point="주어 찾기", question="밑줄 친 진짜 주어에 ○: ( A mosquito ) sneaks in and pierces your skin.",
                          answer="A mosquito", why="동사(sneaks) 앞의 명사가 주어"),
+        ],
+        quiz_fill=[
+            BQuizFill(point="3인칭 -s", question="A mosquito ____ in and pierces your skin. (sneak을 알맞은 형태로)", answer="sneaks"),
+            BQuizFill(point="be동사", question="This ____ a mild allergic reaction. (be동사)", answer="is"),
+            BQuizFill(point="be동사", question="You ____ on a camping trip. (be동사)", answer="are"),
         ],
         quiz_translate=[BQuizTranslate(en="It fills its belly with blood and then escapes.",
                                         ko="그것은 배를 피로 채우고 그런 다음 달아난다.")],

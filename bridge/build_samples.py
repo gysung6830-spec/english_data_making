@@ -95,6 +95,42 @@ QUIZ_GRAMMAR = {
 }
 
 
+# ---- 레벨별 핵심 문법 연습문제 ② (빈칸/형태 쓰기) ----
+def QF(point, question, answer):
+    return B.BQuizFill(point=point, question=question, answer=answer)
+
+QUIZ_FILL = {
+    1: [
+        QF("3인칭 -s", "A mosquito ____ in and pierces your skin. (sneak을 알맞은 형태로)", "sneaks"),
+        QF("be동사", "This ____ a mild allergic reaction. (be동사)", "is"),
+        QF("be동사", "You ____ on a camping trip. (be동사)", "are"),
+        QF("의문문", "How ____ mosquitoes find their victims? (do/does)", "do"),
+    ],
+    2: [
+        QF("to부정사", "they need protein ____ produce eggs. (~하기 위해)", "to"),
+        QF("원급 as~as", "beating its wings as fast ____ 600 times per second (as~as)", "as"),
+        QF("the 비교급", "The more you scratch, ____ more it itches. (the 비교급)", "the"),
+    ],
+    3: [
+        QF("관계대명사", "Carbon dioxide, ____ humans breathe out, is a signal. (관계대명사)", "which"),
+        QF("분사구문", "____ its wings, a mosquito sneaks in. (Beat를 분사구문 형태로)", "Beating"),
+        QF("동격 that", "a signal ____ a nice meal is near. (동격)", "that"),
+    ],
+    4: [
+        QF("가정법 과거", "If our blood ____ not contain protein, they would not bother us. (do의 과거)", "did"),
+        QF("분사구문", "____ its wings, a mosquito sneaks in. (능동 분사구문)", "Beating"),
+        QF("관계사·수 일치", "Carbon dioxide, which humans breathe out, ____ a key signal. (be동사)", "is"),
+        QF("관계대명사", "chemicals ____ attract them (주격 관계대명사)", "that"),
+    ],
+    5: [
+        QF("계속적 용법", "Carbon dioxide, ____ humans breathe out, is a signal. (that 불가 자리)", "which"),
+        QF("가정법 과거", "If our blood ____ not contain protein, they would not bother us. (do의 과거)", "did"),
+        QF("동격 that", "a signal ____ a nice meal is near (동격)", "that"),
+        QF("수 일치", "A mosquito ____ in and pierces your skin. (sneak을 알맞은 형태로)", "sneaks"),
+    ],
+}
+
+
 def _to_grammar(cards):
     out = []
     for c in cards:
@@ -121,6 +157,7 @@ def build_one(level: int) -> B.BridgeGen:
         literal=[B.BLiteral(no=s["no"], en=s["en"], ko=s["ko"]) for s in LITERAL],
         quiz_word=qwords,
         quiz_grammar=QUIZ_GRAMMAR[level],
+        quiz_fill=QUIZ_FILL[level],
         quiz_translate=[
             B.BQuizTranslate(en="This is a mild allergic reaction to the mosquito's saliva.",
                              ko="이것은 모기의 침에 대한 가벼운 알레르기 반응이다."),
