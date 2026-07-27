@@ -325,10 +325,16 @@ def render_spread(rec, c, idx):
     passage_html = connective_passage(hl, cn.get("clues") if cn else []) if (seqtype and cn) else step2_passage(hl)
     clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
                    '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
+    # 3색 범례 — 노랑/연녹/회색을 '언제 긋는지' 안내 (순서·삽입 제외)
+    color_legend = "" if seqtype else (
+        '<div class="color-legend"><span class="clh">형광펜 3색</span>'
+        '<span class="cl m">🟡 정답 핵심<b>무조건 읽기</b></span>'
+        '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
+        '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
-      {clue_legend}
+      {clue_legend}{color_legend}
       <div class="psg">{passage_html}</div>
       {reason_block}
       {pline}
@@ -572,6 +578,13 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .psg{ font-size:11px; line-height:1.85; border:1px solid var(--line); border-radius:6px; padding:9px 11px; margin-bottom:8px; }
 mark.m{ background:var(--must); padding:0 2px; border-radius:2px; }
 mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
+.color-legend{ display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin-bottom:6px; font-size:8.2px; color:#4b5560; }
+.color-legend .clh{ font-weight:800; color:#33414d; margin-right:2px; }
+.color-legend .cl{ display:inline-flex; align-items:center; gap:3px; padding:1px 6px; border-radius:9px; font-weight:700; }
+.color-legend .cl b{ font-weight:800; color:#2b3540; }
+.color-legend .cl.m{ background:var(--must); }
+.color-legend .cl.g{ background:var(--src); }
+.color-legend .cl.sk{ background:#eef0f2; color:#8a929b; } .color-legend .cl.sk b{ color:#7a828b; }
 .sk{ color:var(--skip); }
 .bk{ display:inline-block; min-width:60px; border-bottom:2px solid #111; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
