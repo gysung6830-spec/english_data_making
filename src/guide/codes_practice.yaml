@@ -4,11 +4,12 @@ practice:
     sentence: When our worries exceed our control, however, they cause us unnecessary
       suffering.
     source: 2025 고3 6월 20번
-    prompt: 밑줄 친 문장의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “불필요한 고통이 우리의 걱정을 통제 밖으로 밀어낸다.”'
     options:
-    - 불필요한 고통이 우리의 걱정을 통제 밖으로 밀어낸다.
-    - 걱정이 우리의 통제를 넘어서면, 그 걱정이 우리에게 불필요한 고통을 일으킨다.
-    answer_index: 1
+    - ‘When our worries exceed our control’을 ‘걱정이 통제를 넘어서면’으로 옮긴 부분
+    - however를 ‘그러나’로 이어 문맥을 잡은 부분
+    - ‘they cause us unnecessary suffering’에서 원인(걱정)과 결과(고통)를 뒤바꿔 읽은 부분
+    answer_index: 2
     vocab:
     - word: exceed
       meaning: 넘어서다, 초과하다
@@ -29,11 +30,12 @@ practice:
       showing all the crime, evil, and misery that result from overpopulation and
       unplanned growth.
     source: 2024 고3 9월 29번
-    prompt: that result from ~ 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인구 과잉과 무계획적 성장을 초래하는 모든 범죄·악·비참함”'
     options:
-    - 인구 과잉과 무계획적 성장을 초래하는 모든 범죄·악·비참함
-    - 인구 과잉과 무계획적 성장에서 비롯되는 모든 범죄·악·비참함
-    answer_index: 1
+    - ‘that result from ~’을 ‘초래하는’으로 옮겨 결과를 원인으로 뒤집은 부분
+    - ‘the largest city in the world’를 ‘세계에서 가장 큰 도시’로 옮긴 부분
+    - ‘crime, evil, and misery’를 ‘범죄·악·비참함’으로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: misery
       meaning: 비참함
@@ -54,10 +56,11 @@ practice:
     sentence: The strategy is to analyze all the possible scenarios that the future
       holds and then to see what proportion of them lead to success or failure.
     source: 2023 고3 11월 20번
-    prompt: what proportion of them lead to ~ 의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “얼마나 많은 성공·실패가 그 시나리오들로 이어지는지”'
     options:
-    - 얼마나 많은 성공·실패가 그 시나리오들로 이어지는지
-    - 그중 얼마만큼(의 시나리오)이 성공 또는 실패로 이어지는지
+    - ‘analyze all the possible scenarios’를 ‘모든 가능한 시나리오를 분석하다’로 옮긴 부분
+    - ‘what proportion of them lead to ~’에서 주어(시나리오 비율)와 결과(성공·실패)를 뒤바꾼 부분
+    - ‘that the future holds’를 ‘미래가 품고 있는’으로 옮긴 부분
     answer_index: 1
     vocab:
     - word: scenario
@@ -80,11 +83,12 @@ practice:
     sentence: Agricultural markets are naturally unstable, due to changes in harvest
       size that result from variable weather patterns and other factors.
     source: 2026 고3 11월 31번
-    prompt: 인과의 방향에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “농산물 시장이 불안정하기 때문에 수확량이 변하고 날씨가 변덕스러워진다.”'
     options:
-    - 농산물 시장이 불안정하기 때문에 수확량이 변하고 날씨가 변덕스러워진다.
-    - 농산물 시장은 본래 불안정한데, 이는 변덕스러운 날씨 등에서 비롯된 수확량 변화 때문이다.
-    answer_index: 1
+    - ‘naturally unstable’을 ‘본래 불안정하다’로 옮긴 부분
+    - ‘variable weather patterns’를 ‘변덕스러운 날씨’로 옮긴 부분
+    - ‘due to ... that result from ...’의 인과 방향을 뒤집어 시장 불안정을 원인으로 읽은 부분
+    answer_index: 2
     vocab:
     - word: unstable
       meaning: 불안정한
@@ -106,11 +110,13 @@ practice:
       misinformation, which can influence elections, cause violence, and create widespread
       panic.
     source: 2024 고3 9월 20번
-    prompt: which 이하의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게
+      한다.”'
     options:
-    - 선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게 한다.
-    - 그것(잘못된 정보)이 선거에 영향을 주고 폭력을 일으키며 광범위한 공황을 만들 수 있다.
-    answer_index: 1
+    - ‘which can ... cause violence ...’의 주어를 선거·폭력·공황으로 착각해 인과를 뒤집은 부분
+    - ‘unknowingly participate’를 ‘자신도 모르게 가담하다’로 옮긴 부분
+    - ‘creating and circulating misinformation’을 ‘잘못된 정보를 만들고 퍼뜨리는 것’으로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: circulate
       meaning: 퍼뜨리다, 유통시키다
@@ -272,11 +278,13 @@ practice:
     sentence: However, such commercialization risks culturtainment ' becoming homogeneous
       and losing its original message' that could lead to a dilution of audiences.
     source: 2026 고3 11월 24번
-    prompt: 밑줄 친 부분(that could lead to a dilution of audiences)의 인과 관계를 바르게 해석한 것을
-      고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “관객층의 약화가 그러한 상업화로 하여금 컬처테인먼트를 획일화하고
+      원래의 메시지를 잃게 만드는 위험으로 이어진다”'
     options:
-    - 관객층의 약화가 그러한 상업화로 하여금 컬처테인먼트를 획일화하고 원래의 메시지를 잃게 만드는 위험으로 이어진다
-    - 그러한 상업화는 컬처테인먼트가 획일화되고 원래의 메시지를 잃을 위험을 초래하며, 이것이 관객층의 약화로 이어질 수 있다
+    - ‘such commercialization risks ... becoming homogeneous’를 ‘획일화될 위험을 초래한다’로 옮긴
+      부분
+    - ‘that could lead to a dilution of audiences’의 방향을 뒤집어 관객 약화를 원인으로 읽은 부분
+    - ‘losing its original message’를 ‘원래의 메시지를 잃는 것’으로 옮긴 부분
     answer_index: 1
     vocab:
     - word: commercialization
@@ -305,10 +313,12 @@ practice:
     sentence: In a city like Rome, it is the large number of people standing or sitting
       in squares rather than walking that is conspicuous.
     source: 2024 고3 9월 33번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에
+      띈다.”'
     options:
-    - 로마 같은 도시에서 눈에 띄는 것은, 걷는 사람들이 아니라 광장에 서 있거나 앉아 있는 많은 사람들이다.
-    - 로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에 띈다.
+    - ‘rather than walking’을 무시해 걷는 사람을 눈에 띄는 대상으로 잡은 부분
+    - ‘standing or sitting in squares’를 ‘광장에 서 있거나 앉아 있는’으로 옮긴 부분
+    - ‘that is conspicuous’를 ‘눈에 띄는’으로 옮긴 부분
     answer_index: 0
     vocab:
     - word: conspicuous
@@ -353,11 +363,13 @@ practice:
     sentence: The truth of the matter is revealed not in the perception of the figure
       but in its rational representation.
     source: 2023 고3 6월 34번
-    prompt: not A but B에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그 문제의 진실은 형상의 지각과 그것의 이성적 표상 속에서
+      드러난다.”'
     options:
-    - 그 문제의 진실은 형상의 지각과 그것의 이성적 표상 속에서 드러난다.
-    - 그 문제의 진실은 형상의 지각에서가 아니라 그것의 이성적 표상에서 드러난다.
-    answer_index: 1
+    - ‘the truth of the matter’를 ‘그 문제의 진실’로 옮긴 부분
+    - ‘rational representation’을 ‘이성적 표상’으로 옮긴 부분
+    - ‘not in A but in B’를 ‘A와 B 둘 다’로 읽어 앞의 지각을 부정하지 않은 부분
+    answer_index: 2
     vocab:
     - word: perception
       meaning: 지각, 인식
@@ -404,13 +416,13 @@ practice:
       those of doctors, interns, residents, nurses, and other medical staff who use
       the building regularly.
     source: 2026 고3 11월 33번
-    prompt: While과 differ from에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “병원 행정부가 당신의 고객 역할을 하는 동안, 분명 행정
+      직원들의 관점은 그 건물을 정기적으로 사용하는 의료진의 관점과 크게 다르지 않을 것이다.”'
     options:
-    - 병원 행정부가 당신의 고객 역할을 할 수도 있지만, 분명 행정 직원들의 관점은 그 건물을 정기적으로 사용하는 의사, 인턴, 레지던트, 간호사
-      및 기타 의료진의 관점과 크게 다를 것이다.
-    - 병원 행정부가 당신의 고객 역할을 하는 동안, 분명 행정 직원들의 관점은 그 건물을 정기적으로 사용하는 의료진의 관점과 크게 다르지 않을
-      것이다.
-    answer_index: 0
+    - ‘may serve as your client’를 ‘고객 역할을 할 수도 있다’로 옮긴 부분
+    - While을 ‘~하는 동안’으로, differ from을 ‘다르지 않다’로 뒤집어 대조를 무너뜨린 부분
+    - ‘who use the building regularly’를 ‘건물을 정기적으로 사용하는’으로 옮긴 부분
+    answer_index: 1
     vocab:
     - word: administration
       meaning: 행정부, 경영진
@@ -457,11 +469,13 @@ practice:
       when elites exercise their power to move money, things and people, while they
       themselves do not need to move at all?
     source: 2022 고3 6월 40번
-    prompt: while에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하는 동안,
+      그들 자신도 함께 움직여야 한다.”'
     options:
-    - 엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하는 동안, 그들 자신도 함께 움직여야 한다.
-    - 엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하지만, 정작 그들 자신은 전혀 움직일 필요가 없다.
-    answer_index: 1
+    - ‘while they themselves do not need to move at all’을 ‘함께 움직여야 한다’로 뒤집은 부분
+    - ‘move money, things and people’을 ‘돈, 물건, 사람을 움직이다’로 옮긴 부분
+    - ‘elites exercise their power’를 ‘엘리트들이 힘을 행사한다’로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: immobile mover
       meaning: 움직이지 않는 운동자
@@ -509,13 +523,13 @@ practice:
       basis, glaciers may expand or contract, depending on local and global climatic
       conditions.
     source: 2025 고3 6월 35번
-    prompt: 밑줄 친 문장의 대조(양보) 구조를 바르게 해석한 것을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓이기
+      때문에 여름철의 녹음이 상쇄되고, 그래서 해마다 빙하가 기후 조건에 따라 팽창하거나 수축한다는 것을 의미한다”'
     options:
-    - 일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓이기 때문에 여름철의 녹음이 상쇄되고, 그래서 해마다 빙하가 기후 조건에 따라 팽창하거나
-      수축한다는 것을 의미한다
-    - 일반적으로 이것은, 여름철의 녹음을 상쇄하려면 추운 달 동안 충분한 새 눈이 쌓여야 함을 의미한다. 비록 해마다는 지역적·전 지구적 기후
-      조건에 따라 빙하가 팽창하거나 수축할 수 있지만
-    answer_index: 1
+    - ‘sufficient fresh snow must accumulate’를 ‘충분한 새 눈이 쌓여야 한다’로 옮긴 부분
+    - ‘glaciers may expand or contract’를 ‘빙하가 팽창하거나 수축한다’로 옮긴 부분
+    - although를 ‘~때문에/그래서’의 인과로 바꿔 앞뒤 대조(양보)를 지운 부분
+    answer_index: 2
     vocab:
     - word: accumulate
       meaning: 쌓이다, 축적되다
@@ -573,11 +587,12 @@ practice:
       their budgets often prioritise those parts of themselves that are consumable:
       infotainment in the galleries, goods and services in the cafes and the shops.'
     source: 2023 고3 6월 23번
-    prompt: In other words와 콜론(:)에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 앞과는 다른 새로운 예산 원칙을 세운다.”'
     options:
-    - 다시 말해, 박물관은 앞과는 다른 새로운 예산 원칙을 세운다.
-    - 다시 말해, 박물관은 예산을 '소비 가능한 부분'(전시관의 인포테인먼트, 카페·상점의 상품·서비스)에 우선 배정한다.
-    answer_index: 1
+    - ‘In other words’를 앞 내용의 재진술이 아니라 새 정보로 읽은 부분
+    - ‘struggle to survive in a competitive economy’를 ‘경쟁 경제에서 살아남으려 애쓴다’로 옮긴 부분
+    - ‘parts of themselves that are consumable’을 ‘소비 가능한 부분’으로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: prioritise
       meaning: 우선시하다
@@ -600,11 +615,13 @@ practice:
       the laptop, is one in a collection of integrated, portable digital technologies
       that link their social and working life.
     source: 2022 고3 6월 31번
-    prompt: or more appropriately(or=즉)에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “현세대 예술가에게 컴퓨터냐 노트북이냐를 놓고 더 적절한 것을
+      선택해야 한다.”'
     options:
-    - 현세대 예술가에게 컴퓨터, 더 적절히 말하면 노트북은, 그들의 사회생활과 직장생활을 연결하는 통합적·휴대용 디지털 기술 모음 중 하나이다.
-    - 현세대 예술가에게 컴퓨터냐 노트북이냐를 놓고 더 적절한 것을 선택해야 한다.
-    answer_index: 0
+    - ‘integrated, portable digital technologies’를 ‘통합적·휴대용 디지털 기술’로 옮긴 부분
+    - ‘the computer, or more appropriately, the laptop’의 or를 ‘선택(또는)’으로 읽은 부분
+    - ‘link their social and working life’를 ‘사회생활과 직장생활을 연결한다’로 옮긴 부분
+    answer_index: 1
     vocab:
     - word: appropriately
       meaning: 적절히
@@ -626,11 +643,13 @@ practice:
     sentence: Roads are there all the time, so their speed is the most important fact
       that distinguishes them.
     source: 2026 고3 11월 23번
-    prompt: distinguishes(구별)에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도로는 항상 그 자리에 있으므로, 도로의 속도를 다른 것과
+      구별하기 어렵다.”'
     options:
-    - 도로는 항상 그 자리에 있으므로, 도로의 속도가 도로를 구별해 주는 가장 중요한 사실이다.
-    - 도로는 항상 그 자리에 있으므로, 도로의 속도를 다른 것과 구별하기 어렵다.
-    answer_index: 0
+    - ‘Roads are there all the time’을 ‘도로는 항상 그 자리에 있다’로 옮긴 부분
+    - ‘the most important fact’를 ‘가장 중요한 사실’로 옮긴 부분
+    - ‘the fact that distinguishes them’을 ‘구별하기 어렵다’는 부정 의미로 읽은 부분
+    answer_index: 2
     vocab:
     - word: distinguish
       meaning: 구별하다
@@ -652,11 +671,12 @@ practice:
     sentence: In particular, they define a group as two or more people who interact
       with, and exert mutual influences on, each other.
     source: 2022 고3 9월 40번
-    prompt: define A as B에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “특히 그들은 집단에게 두 명 이상의 사람이 되라고 요구한다.”'
     options:
-    - 특히 그들은 집단에게 두 명 이상의 사람이 되라고 요구한다.
-    - 특히 그들은 집단을 '서로 상호작용하며 상호 영향을 주고받는 둘 이상의 사람'으로 정의한다.
-    answer_index: 1
+    - ‘define a group as ...’의 as를 ‘~되도록/요구’로 읽어 A=B 등호를 깬 부분
+    - ‘interact with ... each other’를 ‘서로 상호작용한다’로 옮긴 부분
+    - ‘exert mutual influences on each other’를 ‘상호 영향을 주고받는다’로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: define A as B
       meaning: A를 B로 정의하다
@@ -678,10 +698,13 @@ practice:
     sentence: The fact that we have not found such a case in countless examinations
       of the fossil record strengthens the case for evolutionary theory.
     source: 2022 고3 6월 36번
-    prompt: the fact that(동격)에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리가 찾아낸 그 사실이 무수한 화석 기록 조사에서 진화론의
+      근거를 강화한다.”'
     options:
-    - 우리가 찾아낸 그 사실이 무수한 화석 기록 조사에서 진화론의 근거를 강화한다.
-    - 무수한 화석 기록 조사에서 그런 사례를 찾지 못했다는 사실이 진화론의 근거를 강화한다.
+    - ‘countless examinations of the fossil record’를 ‘무수한 화석 기록 조사’로 옮긴 부분
+    - ‘The fact that we have not found ...’의 that을 관계사(‘찾아낸 사실’)로 읽고 not found를 놓친
+      부분
+    - ‘strengthens the case for evolutionary theory’를 ‘진화론의 근거를 강화한다’로 옮긴 부분
     answer_index: 1
     vocab:
     - word: countless
@@ -890,11 +913,13 @@ practice:
       can remember without prompting, tend to result in better retention than cued
       recall tests, in which students are given hints about what they need to remember.
     source: 2024 고3 6월 29번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “단서 회상 시험이 자유 회상 시험보다 더 나은 기억 보유를
+      가져오는 경향이 있다”'
     options:
-    - 단서 회상 시험이 자유 회상 시험보다 더 나은 기억 보유를 가져오는 경향이 있다
-    - 자유 회상 시험이 단서 회상 시험보다 더 나은 기억 보유를 가져오는 경향이 있다
-    answer_index: 1
+    - ‘recall as much as they can remember’를 ‘기억나는 만큼 회상한다’로 옮긴 부분
+    - ‘given hints about what they need to remember’를 ‘기억할 것에 대한 단서를 받는다’로 옮긴 부분
+    - ‘better retention than cued recall tests’의 우열을 뒤집어 단서 회상을 우위로 읽은 부분
+    answer_index: 2
     vocab:
     - word: free recall
       meaning: 자유 회상(단서 없이 떠올림)
@@ -916,11 +941,14 @@ practice:
       will not admit to the same fouls or violations as the end goal of winning is
       more important than expressing concern for competitors.
     source: 2026 고3 11월 30번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “경쟁자에 대한 염려를 표현하는 것이 승리라는 최종 목표보다
+      더 중요하기 때문에”'
     options:
-    - 승리라는 최종 목표가 경쟁자에 대한 염려를 표현하는 것보다 더 중요하기 때문에
-    - 경쟁자에 대한 염려를 표현하는 것이 승리라는 최종 목표보다 더 중요하기 때문에
-    answer_index: 0
+    - ‘will not admit to the same fouls or violations’를 ‘같은 반칙을 인정하지 않는다’로 옮긴 부분
+    - ‘winning is more important than expressing ...’의 우열을 뒤집어 염려 표현을 우위로 읽은 부분
+    - ‘once an organized game is played with officials’를 ‘심판이 있는 조직화된 경기가 열리면’으로 옮긴
+      부분
+    answer_index: 1
     vocab:
     - word: admit to
       meaning: ~을 인정하다
@@ -942,11 +970,14 @@ practice:
       the animal is more likely to reach a decision that maximizes its chances of
       winning than if it takes a decision without such information.
     source: 2022 고3 6월 35번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러한 정보 없이 결정을 내릴 때 승리 가능성을 극대화하는
+      결정에 도달할 가능성이 더 높다”'
     options:
-    - 그러한 정보 없이 결정을 내릴 때 승리 가능성을 극대화하는 결정에 도달할 가능성이 더 높다
-    - 그러한 정보 없이 결정을 내리는 경우보다 승리 가능성을 극대화하는 결정에 도달할 가능성이 더 높다
-    answer_index: 1
+    - ‘than if it takes a decision without such information’을 유리한 쪽으로 뒤집어 읽은 부분
+    - ‘taking a little extra time to collect information’을 ‘정보 수집에 약간의 시간을 더 들여’로
+      옮긴 부분
+    - ‘maximizes its chances of winning’을 ‘승리 가능성을 극대화한다’로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: opponent
       meaning: 상대, 적수
@@ -969,11 +1000,15 @@ practice:
       uses a system for communication that is infinitely superior to any system utilized
       by any other animal.
     source: 2024 고3 9월 40번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다른 어떤 동물이 사용하는 체계가 그 아이의 의사소통 체계보다
+      무한히 우월하다”'
     options:
-    - 다른 어떤 동물이 사용하는 어떤 체계보다도 무한히 우월한 의사소통 체계를 사용한다
-    - 다른 어떤 동물이 사용하는 체계가 그 아이의 의사소통 체계보다 무한히 우월하다
-    answer_index: 0
+    - ‘who can communicate by only one word at a time’을 ‘한 번에 한 단어로만 의사소통하는’으로 옮긴
+      부분
+    - ‘superior to any system utilized by any other animal’의 우열을 뒤집어 동물 체계를 우위로 읽은
+      부분
+    - ‘uses a system for communication’을 ‘의사소통 체계를 사용한다’로 옮긴 부분
+    answer_index: 1
     vocab:
     - word: superior to
       meaning: ~보다 우월한
@@ -995,11 +1030,14 @@ practice:
       than manage the forest for carbon capture, wildlife habitat, flood protection,
       and other ecosystem services.
     source: 2024 고3 11월 23번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “나무를 베어내기보다는 탄소 포집, 야생 동물 서식지 등을
+      위해 숲을 관리할 시장 유인이 있다”'
     options:
-    - 탄소 포집, 야생 동물 서식지 등을 위해 숲을 관리하기보다는 나무를 베어낼 시장 유인이 있다
-    - 나무를 베어내기보다는 탄소 포집, 야생 동물 서식지 등을 위해 숲을 관리할 시장 유인이 있다
-    answer_index: 0
+    - ‘have a market incentive’을 ‘시장 유인이 있다’로 옮긴 부분
+    - ‘carbon capture, wildlife habitat, flood protection’을 ‘탄소 포집·야생 동물 서식지·홍수 방지’로
+      옮긴 부분
+    - ‘cut down trees rather than manage the forest’의 택함(벌목)과 배제(관리)를 뒤바꾼 부분
+    answer_index: 2
     vocab:
     - word: incentive
       meaning: 유인, 동기
@@ -1121,11 +1159,14 @@ practice:
       trees rather than manage the forest for carbon capture, wildlife habitat, flood
       protection, and other ecosystem services.
     source: 2024 고3 11월 23번
-    prompt: 밑줄 친 부분(rather than 구문)을 바르게 해석한 것을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “탄소 포집, 야생동물 서식지, 홍수 방지 등 생태계 서비스를
+      위해 나무를 베어내기보다는 숲을 관리할”'
     options:
-    - 탄소 포집, 야생동물 서식지, 홍수 방지 등 생태계 서비스를 위해 나무를 베어내기보다는 숲을 관리할
-    - 탄소 포집, 야생동물 서식지, 홍수 방지 등 생태계 서비스를 위해 숲을 관리하기보다는 나무를 베어낼
-    answer_index: 1
+    - ‘cut down trees rather than manage the forest’에서 A(벌목)와 B(관리)를 뒤집어 관리를 택한 것으로
+      읽은 부분
+    - ‘a market incentive’을 ‘시장 유인’으로 옮긴 부분
+    - ‘other ecosystem services’를 ‘기타 생태계 서비스’로 옮긴 부분
+    answer_index: 0
     vocab:
     - word: incentive
       meaning: 유인, 동기
@@ -1213,11 +1254,13 @@ practice:
     sentence: A crowd can thus force inaction on its members by implying, through
       its passivity, that an event is not an emergency.
     source: 2022 고3 6월 42번
-    prompt: thus의 논리와 문장 구조에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 군중은 그 수동성을 통해 사건이 응급 상황임을 암시함으로써,
+      구성원들에게 행동에 나서라고 강요할 수 있다.”'
     options:
-    - 그러나 군중은 그 수동성을 통해 사건이 응급 상황임을 암시함으로써, 구성원들에게 행동에 나서라고 강요할 수 있다.
-    - 따라서 군중은 그 수동성을 통해 사건이 응급 상황이 아님을 암시함으로써, 구성원들에게 방관(행동하지 않음)을 강요할 수 있다.
-    answer_index: 1
+    - '''through its passivity''를 ''그 수동성을 통해''로 옮긴 부분인가?'
+    - '''by implying''을 ''암시함으로써''로 처리한 부분인가?'
+    - '''thus''를 역접 ''그러나''로 옮겨 인과(따라서) 관계를 뒤집은 곳'
+    answer_index: 2
     vocab:
     - word: inaction
       meaning: 행동하지 않음, 방관
@@ -1241,10 +1284,12 @@ practice:
       are more likely to have a child who does so only when rewarded, cajoled, or
       forced.
     source: 2024 고3 6월 30번
-    prompt: Thus의 논리와 문장 구조에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그럼에도 불구하고 아이에게 숙제를 시키는 부모는, 스스로
+      알아서 숙제하는 아이를 갖게 된다.”'
     options:
-    - 따라서 보상·강요·회유로 숙제를 시키는 부모는, 보상·회유·강요를 받을 때만 숙제하는 아이를 갖기 쉽다.
-    - 그럼에도 불구하고 아이에게 숙제를 시키는 부모는, 스스로 알아서 숙제하는 아이를 갖게 된다.
+    - '''Thus''를 역접 ''그럼에도 불구하고''로 옮겨 인과(따라서)를 뒤집은 곳'
+    - '''parents ... to do homework''를 ''숙제를 시키는 부모''로 옮긴 부분인가?'
+    - '''have a child''를 ''아이를 갖게 된다''로 옮긴 부분인가?'
     answer_index: 0
     vocab:
     - word: cajole
@@ -1267,10 +1312,12 @@ practice:
       were of interest to the media, and consequently few media contacts were expected
       or encouraged.
     source: 2024 고3 11월 42번
-    prompt: consequently의 논리와 문장 구조에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “수십 년 전에는 지구과학자가 언론이 관심 가질 결과를 내는
+      일이 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.”'
     options:
-    - 수십 년 전에는 지구과학자가 언론이 관심 가질 결과를 내는 일이 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.
-    - 수십 년 전에는 지구과학자가 언론이 관심 가질 결과를 내는 일이 드물었고, 그 결과 언론 접촉이 기대되거나 장려되는 일도 거의 없었다.
+    - '''results that were of interest to the media''를 ''언론이 관심 가질 결과''로 옮긴 부분인가?'
+    - '''consequently''를 ''반대로''라는 역접으로 옮겨 결과(그 결과) 관계를 뒤집은 곳'
+    - '''it was unusual ... to have results''를 ''결과를 내는 일이 드물었다''로 옮긴 부분인가?'
     answer_index: 1
     vocab:
     - word: unusual
@@ -1293,11 +1340,13 @@ practice:
     sentence: Moreover, some critics, who admire his work, are little concerned about
       his extensive use of computers in the art-making process.
     source: 2022 고3 6월 31번
-    prompt: Moreover의 논리와 문장 구조에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 그의 작품을 높이 평가하는 일부 비평가들조차, 그가
+      컴퓨터를 광범위하게 사용하는 것을 크게 우려한다.”'
     options:
-    - 게다가 그의 작품을 높이 평가하는 일부 비평가들은, 그가 창작 과정에서 컴퓨터를 광범위하게 사용하는 것에 거의 개의치 않는다.
-    - 그러나 그의 작품을 높이 평가하는 일부 비평가들조차, 그가 컴퓨터를 광범위하게 사용하는 것을 크게 우려한다.
-    answer_index: 0
+    - '''some critics, who admire his work''를 ''작품을 높이 평가하는 비평가들''로 옮긴 부분인가?'
+    - '''his extensive use of computers''를 ''컴퓨터를 광범위하게 사용하는 것''으로 옮긴 부분인가?'
+    - '''Moreover''를 역접 ''그러나''로 옮겨 첨가(게다가) 관계를 뒤집은 곳'
+    answer_index: 2
     vocab:
     - word: admire
       meaning: 높이 평가하다, 감탄하다
@@ -1320,12 +1369,13 @@ practice:
       and automaticity in each of the component skills, and thus they struggle to
       combine skills that experts combine with relative ease and efficiency.
     source: 2023 고3 6월 35번
-    prompt: on the other hand의 논리와 문장 구조에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “반면 초보자도 각 구성 기술에서 똑같은 유창함과 자동성을
+      갖추어, 전문가만큼 쉽게 기술을 결합한다.”'
     options:
-    - 반면 초보자도 각 구성 기술에서 똑같은 유창함과 자동성을 갖추어, 전문가만큼 쉽게 기술을 결합한다.
-    - 반면 초보자는 각 구성 기술에서 (전문가와) 같은 정도의 유창함과 자동성을 갖추지 못했고, 그래서 전문가가 비교적 쉽고 효율적으로 결합하는
-      기술을 결합하는 데 어려움을 겪는다.
-    answer_index: 1
+    - '''have not achieved the same degree''를 ''똑같은 ... 갖추어''로 옮겨 대조(반면)를 무너뜨린 곳'
+    - '''on the other hand''를 ''반면''으로 옮긴 부분인가?'
+    - '''fluency and automaticity''를 ''유창함과 자동성''으로 옮긴 부분인가?'
+    answer_index: 0
     vocab:
     - word: automaticity
       meaning: 자동성
@@ -1478,11 +1528,13 @@ practice:
     sentence: Improving the quality of alternative options, such as walking, cycling,
       and public transport, is a central element of this strategy.
     source: 2022 고3 6월 30번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “대안 수단의 질을 높이는 것은 이 전략의 여러 요소 중 하나이다.”'
     options:
-    - 대안 수단의 질을 높이는 것은 이 전략의 여러 요소 중 하나이다.
-    - 대안 수단(도보·자전거·대중교통)의 질을 높이는 것이 이 전략의 '핵심' 요소다.
-    answer_index: 1
+    - '''Improving the quality of alternative options''를 ''대안 수단의 질을 높이는 것''으로 옮긴
+      부분인가?'
+    - '''of this strategy''를 ''이 전략의''로 옮긴 부분인가?'
+    - '''a central element''를 ''여러 요소 중 하나''로 약화해 강조를 지운 곳'
+    answer_index: 2
     vocab:
     - word: alternative
       meaning: 대안의
@@ -1502,11 +1554,13 @@ practice:
     sentence: Rather than irrelevant, moral questions are fundamental to the imposition
       of tax.
     source: 2022 고3 9월 22번
-    prompt: fundamental에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이
+      있다.”'
     options:
-    - 도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이 있다.
-    - 도덕적 질문은 (무관하기는커녕) 세금 부과에 '근본적'이다.
-    answer_index: 1
+    - '''are fundamental to''를 ''무관하지 않다·어느 정도 관련''으로 약화한 곳'
+    - '''moral questions''를 ''도덕적 질문''으로 옮긴 부분인가?'
+    - '''the imposition of tax''를 ''세금 부과''로 옮긴 부분인가?'
+    answer_index: 0
     vocab:
     - word: irrelevant
       meaning: 무관한
@@ -1528,10 +1582,12 @@ practice:
       function, directly contributing to the mechanism of the decision-making process
       by supplying vital information about the likely outcomes of the various options.
     source: 2022 고3 6월 35번
-    prompt: directly, vital에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “많은 신호는 여러 선택지의 결과에 관한 정보를 대략 제공하며
+      의사결정 과정에 간접적으로 관여한다.”'
     options:
-    - 많은 신호는 여러 선택지의 결과에 관한 정보를 대략 제공하며 의사결정 과정에 간접적으로 관여한다.
-    - 많은 신호는 여러 선택지의 있음직한 결과에 관한 '필수적인' 정보를 제공하여 의사결정 과정의 메커니즘에 '직접' 기여한다.
+    - '''the various options''를 ''여러 선택지''로 옮긴 부분인가?'
+    - '''directly contributing ... vital information''을 ''간접적으로 ... 대략''으로 약화한 곳'
+    - '''the decision-making process''를 ''의사결정 과정''으로 옮긴 부분인가?'
     answer_index: 1
     vocab:
     - word: directly
@@ -1554,11 +1610,13 @@ practice:
       slightly new—when it is compatible with what we already know, so that the old
       patterns need only a little bit of adjustment to accommodate the new knowledge.
     source: 2024 고3 9월 36번
-    prompt: clearly에 유의하여 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “새 정보가 조금만 새로울 때 조정이 작아지는지는 다소 불분명하다.”'
     options:
-    - 새 정보가 조금만 새로울 때 조정이 작아지는지는 다소 불분명하다.
-    - 새 정보가 조금만 새로울 때 조정이 가장 작다는 것은 '분명하다'.
-    answer_index: 1
+    - '''when the new information is only slightly new''를 ''새 정보가 조금만 새로울 때''로 옮긴
+      부분인가?'
+    - '''The adjustments''를 ''조정''으로 옮긴 부분인가?'
+    - '''are clearly smallest''의 ''clearly''를 ''다소 불분명''으로 뒤집은 곳'
+    answer_index: 2
     vocab:
     - word: adjustment
       meaning: 조정
@@ -1681,12 +1739,13 @@ practice:
       characteristic of our topic: the child''s more unruly and imaginative ways of
       talking and thinking.'
     source: 2022 고3 9월 34번
-    prompt: 밑줄 친 부분(we may miss an essential and pervasive characteristic ~)을 바르게
-      해석한 것을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의
+      더 제멋대로이고 상상력 넘치는 말하기·사고방식을 발견하게 될 수 있다.”'
     options:
-    - 우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의 더 제멋대로이고 상상력 넘치는 말하기·사고방식을 발견하게 될 수 있다
-    - 우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의 더 제멋대로이고 상상력 넘치는 말하기·사고방식을 놓칠 수 있다
-    answer_index: 1
+    - '''we may miss''의 ''miss''를 ''발견하게 될 수 있다''로 뒤집은 곳'
+    - '''an essential and pervasive characteristic''를 ''본질적이고 널리 퍼진 특성''으로 옮긴 부분인가?'
+    - 콜론 뒤 '아이들의 제멋대로이고 상상력 넘치는 말하기·사고방식'으로 옮긴 부분인가?
+    answer_index: 0
     vocab:
     - word: bent on
       meaning: ~에 열중하는, 몰두하는
@@ -1747,10 +1806,11 @@ practice:
       into a waiting room may be caused by fire, or it may merely indicate a leak
       in a steam pipe.
     source: 2022 고3 6월 42번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “응급 상황은 결코 그렇게 명확히 표시되지 않는다.”'
     options:
-    - 응급 상황은 결코 그렇게 명확히 표시되지 않는다.
-    - 응급 상황이 항상 그렇게 명확히 표시되는 것은 아니다.
+    - '''Emergencies''를 ''응급 상황''으로 옮긴 부분인가?'
+    - '''not always''를 ''결코 ~않는다''는 전체부정으로 읽은 곳'
+    - '''clearly labeled as such''를 ''그렇게 명확히 표시되다''로 옮긴 부분인가?'
     answer_index: 1
     vocab:
     - word: emergency
@@ -1773,11 +1833,12 @@ practice:
     sentence: Although we each may have the subjective impression that we are careful
       thinkers, we often make snap judgments or no real judgments at all.
     source: 2024 고3 9월 30번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 흔히 성급한 판단을 하거나 진정한 판단을 조금은 한다.”'
     options:
-    - 우리는 흔히 성급한 판단을 하거나 진정한 판단을 조금은 한다.
-    - 우리는 흔히 성급한 판단을 하거나 진정한 판단을 전혀 하지 않는다.
-    answer_index: 1
+    - '''make snap judgments''를 ''성급한 판단을 하다''로 옮긴 부분인가?'
+    - '''we often''을 ''우리는 흔히''로 옮긴 부분인가?'
+    - '''no real judgments at all''을 ''진정한 판단을 조금은 한다''로 뒤집은 곳'
+    answer_index: 2
     vocab:
     - word: subjective
       meaning: 주관적인
@@ -1800,11 +1861,14 @@ practice:
       teacher from offering medical advice or a physician from suggesting ways to
       safely make structural changes to your home.
     source: 2022 고3 9월 30번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는
+      규제가 있다.”'
     options:
-    - 인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는 규제가 있다.
-    - 인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는 규제가 없다.
-    answer_index: 1
+    - '''there are no regulations''를 ''규제가 있다''로 뒤집은 곳'
+    - '''a kindergarten teacher ... offering medical advice''를 ''유치원 교사가 의학적 조언을 제공하는
+      것''으로 옮긴 부분인가?'
+    - '''preventing''을 ''막는''으로 옮긴 부분인가?'
+    answer_index: 0
     vocab:
     - word: regulation
       meaning: 규제
@@ -1827,10 +1891,11 @@ practice:
       and eating foods associated with nature, the nature claimed by the ads was no
       longer the nature that created the foods.
     source: 2024 고3 6월 23번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “광고가 내세우는 자연은 여전히 그 식품을 만들어 낸 자연이었다.”'
     options:
-    - 광고가 내세우는 자연은 여전히 그 식품을 만들어 낸 자연이었다.
-    - 광고가 내세우는 자연은 더 이상 그 식품을 만들어 낸 자연이 아니었다.
+    - '''the nature claimed by the ads''를 ''광고가 내세우는 자연''으로 옮긴 부분인가?'
+    - '''no longer''를 ''여전히 ~이었다''로 뒤집은 곳'
+    - '''the nature that created the foods''를 ''그 식품을 만들어 낸 자연''으로 옮긴 부분인가?'
     answer_index: 1
     vocab:
     - word: be drawn to
@@ -1853,11 +1918,12 @@ practice:
     sentence: Science is sometimes described as a winner-take-all contest, meaning
       that there are no rewards for being second or third.
     source: 2024 고3 11월 38번
-    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “2등이나 3등을 하는 것에도 보상이 있다는 것을 의미한다.”'
     options:
-    - 2등이나 3등을 하는 것에도 보상이 있다는 것을 의미한다.
-    - 2등이나 3등을 하는 것에는 보상이 없다는 것을 의미한다.
-    answer_index: 1
+    - '''for being second or third''를 ''2등이나 3등을 하는 것''으로 옮긴 부분인가?'
+    - '''meaning that''을 ''~을 의미한다''로 옮긴 부분인가?'
+    - '''there are no rewards''를 ''보상이 있다''로 뒤집은 곳'
+    answer_index: 2
     vocab:
     - word: describe A as B
       meaning: A를 B로 묘사하다
