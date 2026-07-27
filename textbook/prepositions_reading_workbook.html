@@ -200,19 +200,17 @@
   .toc .legend span{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:2px 9px;}
   .toc a{text-decoration:none;color:inherit;display:block;border-radius:10px;transition:background .12s;}
   .toc a:hover{background:var(--primary-soft);}
-  .toc .row{display:flex;gap:16px;padding:12px 10px;border-bottom:1px solid var(--line);align-items:center;}
+  .toc .row{display:flex;gap:14px;padding:13px 10px;border-bottom:1px solid var(--line);align-items:flex-start;}
   .toc a:last-child .row{border-bottom:none;}
-  .toc .rn{font-weight:800;color:#fff;background:var(--primary);width:38px;height:38px;flex:0 0 38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+  .toc .rn{font-weight:800;color:#fff;background:var(--primary);width:38px;height:38px;flex:0 0 38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;margin-top:1px;}
   .toc .rn.intro{background:var(--amber);}
-  .toc .mid{flex:0 0 auto;display:flex;flex-direction:column;gap:5px;min-width:132px;}
-  .toc .rt{font-weight:800;font-size:1.06rem;line-height:1.1;}
-  .toc .img{align-self:flex-start;font-size:.74rem;font-weight:800;color:var(--primary);background:var(--primary-soft);padding:2px 9px;border-radius:6px;}
+  .toc .body{flex:1;min-width:0;}
+  .toc .topline{display:flex;align-items:center;gap:10px;margin-bottom:7px;flex-wrap:wrap;}
+  .toc .rt{font-weight:800;font-size:1.08rem;line-height:1.1;}
+  .toc .img{font-size:.74rem;font-weight:800;color:var(--primary);background:var(--primary-soft);padding:3px 9px;border-radius:6px;}
   .toc .img.intro{color:var(--amber);background:var(--amber-soft);}
-  .toc .rd{color:var(--ink-soft);font-size:.85rem;margin-left:auto;text-align:right;max-width:50%;line-height:1.5;font-weight:600;}
-  @media(max-width:560px){
-    .toc .row{flex-wrap:wrap;}
-    .toc .rd{margin-left:54px;text-align:left;max-width:100%;margin-top:6px;}
-  }
+  .toc .tags{display:flex;flex-wrap:wrap;gap:5px;}
+  .toc .tags .tg{font-size:.72rem;font-weight:700;color:var(--amber);background:var(--amber-soft);border:1px solid #f4e2c6;border-radius:6px;padding:2px 8px;line-height:1.5;}
 
   .prose h2{font-size:1.5rem;}
   .prose p{color:var(--ink-soft);}
@@ -236,9 +234,16 @@
     .sec-head,.branch{break-after:avoid;page-break-after:avoid;}
     .practice ol > li{break-inside:avoid;page-break-inside:avoid;}
     /* 목차는 한 페이지에 담기도록 압축 */
-    .toc{padding:16px 20px;}
-    .toc .row{padding:7px 8px;}
-    .toc .rn{width:32px;height:32px;flex:0 0 32px;}
+    .toc{padding:12px 18px;}
+    .toc h2{font-size:1.3rem;}
+    .toc .sub{margin-bottom:4px;}
+    .toc .legend{margin-bottom:8px;padding-bottom:8px;}
+    .toc .row{padding:5px 8px;}
+    .toc .topline{margin-bottom:4px;}
+    .toc .rn{width:28px;height:28px;flex:0 0 28px;font-size:.85rem;}
+    .toc .rt{font-size:1rem;}
+    .toc .tags .tg{font-size:.66rem;padding:1px 6px;}
+    .toc a{break-inside:avoid;page-break-inside:avoid;}
     .no-print{display:none;}
   }
   @media (max-width:640px){
@@ -304,18 +309,18 @@
     <p class="sub">각 전치사를 <b>핵심 이미지</b> 하나로 기억하고, 거기서 갈라지는 <b>의미 갈래</b>로 확장한다.</p>
     <div class="legend"><span>번호</span><span>전치사 · 핵심 이미지</span><span>의미 갈래</span></div>
 
-    <a href="#intro-structure"><div class="row"><span class="rn intro">✦</span><span class="mid"><span class="rt">이 책의 구조</span><span class="img intro">3단 위계로 읽기</span></span><span class="rd">핵심 이미지 → 의미 갈래 → 예문·QUIZ</span></div></a>
-    <a href="#ch00"><div class="row"><span class="rn intro">00</span><span class="mid"><span class="rt">들어가기</span><span class="img intro">조사 vs 어순</span></span><span class="rd">전치사가 한국인에게 어려운 이유</span></div></a>
-    <a href="#ch01"><div class="row"><span class="rn">01</span><span class="mid"><span class="rt">OF</span><span class="img">분리·소속</span></span><span class="rd">기본(-의) · 목적어 · 동격 · 형용사화 · 부분 · 박탈 · 한 덩어리</span></div></a>
-    <a href="#ch02"><div class="row"><span class="rn">02</span><span class="mid"><span class="rt">FOR</span><span class="img">교환</span></span><span class="rd">교환 · 방향(찬반) · 원인·이유</span></div></a>
-    <a href="#ch03"><div class="row"><span class="rn">03</span><span class="mid"><span class="rt">ABOUT</span><span class="img">주변을 맴돌다</span></span><span class="rd">약(수치) · -에 관한 · 여기저기에 · 구문</span></div></a>
-    <a href="#ch04"><div class="row"><span class="rn">04</span><span class="mid"><span class="rt">BEYOND</span><span class="img">한계를 넘어섬</span></span><span class="rd">부정어 기능 · beyond의 친구들</span></div></a>
-    <a href="#ch05"><div class="row"><span class="rn">05</span><span class="mid"><span class="rt">OFF</span><span class="img">분리·이탈</span></span><span class="rd">분리(비공개·무관) · 강조·긍정</span></div></a>
-    <a href="#ch06"><div class="row"><span class="rn">06</span><span class="mid"><span class="rt">ON</span><span class="img">접촉</span></span><span class="rd">공간 · 이용 · feed · 계속 · 집중 · 영향력 · 기반 · 표면상</span></div></a>
-    <a href="#ch07"><div class="row"><span class="rn">07</span><span class="mid"><span class="rt">AGAINST</span><span class="img">맞부딪힘</span></span><span class="rd">-에 대항하여 · -에 맞대어(비교)</span></div></a>
-    <a href="#ch08"><div class="row"><span class="rn">08</span><span class="mid"><span class="rt">OVER</span><span class="img">위에서 덮다</span></span><span class="rd">기본 · 선호(A over B) · 지배력 · -에 대해</span></div></a>
-    <a href="#ch09"><div class="row"><span class="rn">09</span><span class="mid"><span class="rt">FROM</span><span class="img">-로부터</span></span><span class="rd">원인·출처 · 분리</span></div></a>
-    <a href="#ch10"><div class="row"><span class="rn" style="background:var(--rose)">10</span><span class="mid"><span class="rt">종합 복습</span><span class="img" style="color:var(--rose);background:var(--rose-soft)">통합 문제</span></span><span class="rd">빈칸 · 의미 판별 · 영작 (9개 전치사 혼합)</span></div></a>
+    <a href="#intro-structure"><div class="row"><span class="rn intro">✦</span><div class="body"><div class="topline"><span class="rt">이 책의 구조</span><span class="img intro">3단 위계로 읽기</span></div><div class="tags"><span class="tg">핵심 이미지</span><span class="tg">의미 갈래</span><span class="tg">숙어·예문·QUIZ</span></div></div></div></a>
+    <a href="#ch00"><div class="row"><span class="rn intro">00</span><div class="body"><div class="topline"><span class="rt">들어가기</span><span class="img intro">조사 vs 어순</span></div><div class="tags"><span class="tg">위치·관계를 담당</span><span class="tg">의미를 담당</span></div></div></div></a>
+    <a href="#ch01"><div class="row"><span class="rn">01</span><div class="body"><div class="topline"><span class="rt">OF</span><span class="img">분리·소속</span></div><div class="tags"><span class="tg">A of B → B의 A</span><span class="tg">V→N + of → -을/를</span><span class="tg">동사 → 명사화 해석법</span><span class="tg">추상명사 + of → -라는</span><span class="tg">S be of + 추상명사 → 형용사처럼</span><span class="tg">문장 앞 of + 복수명사 → -중에서</span><span class="tg">deprive A of B → 필부엑(부정어)</span><span class="tg">앞에서부터 통째로 읽기</span></div></div></div></a>
+    <a href="#ch02"><div class="row"><span class="rn">02</span><div class="body"><div class="topline"><span class="rt">FOR</span><span class="img">교환</span></div><div class="tags"><span class="tg">서로 맞바꿈</span><span class="tg">for(찬성 →) / against(반대 →←)</span><span class="tg">for S V = 왜냐하면 / 감정·비난동사 + for</span></div></div></div></a>
+    <a href="#ch03"><div class="row"><span class="rn">03</span><div class="body"><div class="topline"><span class="rt">ABOUT</span><span class="img">주변을 맴돌다</span></div><div class="tags"><span class="tg">약, 대략</span><span class="tg">-에 관한 (관해)</span><span class="tg">여기저기에 (주변에)</span><span class="tg">시간·발생</span></div></div></div></a>
+    <a href="#ch04"><div class="row"><span class="rn">04</span><div class="body"><div class="topline"><span class="rt">BEYOND</span><span class="img">한계를 넘어섬</span></div><div class="tags"><span class="tg">한계를 넘어섬 → 문맥상 부정어</span><span class="tg">같은 필부엑(부정어) 전치사</span></div></div></div></a>
+    <a href="#ch05"><div class="row"><span class="rn">05</span><div class="body"><div class="topline"><span class="rt">OFF</span><span class="img">분리·이탈</span></div><div class="tags"><span class="tg">~에서 벗어나 (필부엑)</span><span class="tg">분리에서 확장된 관용</span></div></div></div></a>
+    <a href="#ch06"><div class="row"><span class="rn">06</span><div class="body"><div class="topline"><span class="rt">ON</span><span class="img">접촉</span></div><div class="tags"><span class="tg">접촉이면 위·옆·아래·매달림 모두 on</span><span class="tg">접촉 → 기대어 쓰다</span><span class="tg">붙어서 먹다</span><span class="tg">접촉이 이어짐</span><span class="tg">들러붙어 파고들다</span><span class="tg">접촉 → 영향 · 선택지 최빈출</span><span class="tg">X가 Y 위 → Y가 받침</span><span class="tg">~위에 → 겉보기 = 통념 (반전 주의)</span></div></div></div></a>
+    <a href="#ch07"><div class="row"><span class="rn">07</span><div class="body"><div class="topline"><span class="rt">AGAINST</span><span class="img">맞부딪힘</span></div><div class="tags"><span class="tg">-에 대항하여 (→←)</span><span class="tg">두 대상의 비교</span></div></div></div></a>
+    <a href="#ch08"><div class="row"><span class="rn">08</span><div class="body"><div class="topline"><span class="rt">OVER</span><span class="img">위에서 덮다</span></div><div class="tags"><span class="tg">-위에</span><span class="tg">A over B → A를 B보다 (택하고 버림)</span><span class="tg">-위에서 누르다</span><span class="tg">= about (선택지 주의)</span></div></div></div></a>
+    <a href="#ch09"><div class="row"><span class="rn">09</span><div class="body"><div class="topline"><span class="rt">FROM</span><span class="img">-로부터</span></div><div class="tags"><span class="tg">A from B → A는 B로부터 (A ← B)</span><span class="tg">떨어져 있음 (X … Y)</span></div></div></div></a>
+    <a href="#ch10"><div class="row"><span class="rn" style="background:var(--rose)">10</span><div class="body"><div class="topline"><span class="rt">종합 복습</span><span class="img" style="color:var(--rose);background:var(--rose-soft)">통합 문제</span></div><div class="tags"><span class="tg">빈칸</span><span class="tg">의미 판별</span><span class="tg">영작</span></div></div></div></a>
   </div>
 </section>
 
