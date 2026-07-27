@@ -83,34 +83,29 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 
 /* ---------- 블록 공통 ---------- */
 .block { border:1.5px solid var(--line); border-radius:10px; overflow:hidden; height:100%; }
-.block > .bar { color:#fff; font-weight:800; font-size:11px; padding:5px 12px; letter-spacing:.3px; }
-.block > .body { padding:7px 12px; }
+.block > .bar { color:#fff; font-weight:800; font-size:12px; padding:7px 13px; letter-spacing:.3px; }
+.block > .body { padding:11px 14px; }
 
 /* 템플릿(왼쪽) */
-.tpl .step { margin:0 0 5px; }
-.tpl .slabel { font-weight:800; color:var(--purple); font-size:10.5px; margin-bottom:1px; }
-.tpl .en { font-weight:600; font-size:10.5px; line-height:1.28; }
-.tpl .ko { color:var(--muted); font-size:9px; line-height:1.25; }
+.tpl .step { margin:0 0 14px; }
+.tpl .slabel { font-weight:800; color:var(--purple); font-size:12px; margin-bottom:3px; }
+.tpl .en { font-weight:600; font-size:13px; line-height:1.45; }
+.tpl .ko { color:var(--muted); font-size:10.5px; line-height:1.35; margin-bottom:2px; }
 .tpl .en .bk { color:var(--red); font-weight:800; }
-.tpl .opts { font-size:9px; color:#374151; margin:1px 0 2px; padding-left:9px;
-  line-height:1.28; border-left:2px solid #f0d9d7; }
-.tpl .opts .lab { color:var(--red); font-weight:800; }
-.tpl .opts .w { color:#374151; }
-.tpl .hint { color:var(--muted); font-size:9px; margin-top:3px; border-top:1px dashed var(--line); padding-top:4px; }
+.tpl .hint { color:var(--muted); font-size:10px; margin-top:8px; border-top:1px dashed var(--line); padding-top:7px; }
 
-/* 나만의 답안 작성란 */
-.write { margin-top:8px; border:1.5px solid var(--line); border-radius:9px; overflow:hidden; }
-.write .bar { color:#fff; font-weight:800; font-size:11px; padding:5px 12px; background:var(--blue); }
-.write .body { padding:9px 14px 10px; }
-.write .rule { border-bottom:1px solid #d7dbe0; height:19px; }
-.write .rule:last-child { border-bottom:none; }
+/* 빈칸 번호 배지 */
+.bn { display:inline-block; min-width:13px; height:13px; line-height:13px; text-align:center;
+  background:var(--red); color:#fff; font-size:8.5px; font-weight:800; border-radius:4px;
+  padding:0 3px; margin-left:2px; vertical-align:middle; }
 
-/* 워드뱅크(오른쪽) */
-.wb table { width:100%; border-collapse:collapse; }
-.wb td { padding:4.5px 8px; border-bottom:1px solid #eef1ee; vertical-align:top; }
-.wb .en { font-weight:700; width:46%; }
-.wb .ko { color:#374151; }
-.wb tr:nth-child(odd) td { background:var(--soft); }
+/* 워드뱅크(오른쪽) = 빈칸에 넣을 보기 단어 */
+.wb .wrow { display:flex; gap:9px; padding:8.5px 6px; border-bottom:1px solid #eef1ee; align-items:baseline; }
+.wb .wrow:last-child { border-bottom:none; }
+.wb .wrow:nth-child(odd) { background:var(--soft); }
+.wb .wrow .bn { flex:0 0 auto; min-width:16px; height:16px; line-height:16px; font-size:10px; }
+.wb .wrow .ws { font-size:11px; color:#23272e; line-height:1.4; }
+.wb .wrow .ws b { color:#111827; }
 
 /* ---------- 사용법/표현 페이지 ---------- */
 .card { border:1.5px solid var(--line); border-radius:10px; padding:12px 14px; height:100%; }
@@ -232,32 +227,30 @@ def expressions_html() -> str:
 def unit_html(idx: int, u: dict) -> str:
     accent = ACCENTS[(idx - 1) % len(ACCENTS)]
 
-    # 왼쪽 템플릿 (빈칸별 '보기' 5개 이상 포함)
-    def opts_html(choices):
-        if not choices:
-            return ""
-        multi = len(choices) > 1
-        out = ""
-        for bi, opts in enumerate(choices, 1):
-            words = " · ".join(esc(o) for o in opts)
-            lab = f'<span class="lab">빈칸{"①②③④"[bi-1]} </span>' if multi else '<span class="lab">보기: </span>'
-            out += f'<div class="opts">{lab}<span class="w">{words}</span></div>'
-        return out
-
+    # 빈칸에 순서대로 번호를 매기고, 왼쪽=번호 붙은 문장 / 오른쪽 워드뱅크=번호별 보기 단어
+    n = 0
     steps_html = ""
+    bank = []  # (번호, [보기 단어들])
     for st in u["template"]:
         lines = ""
         for en, ko, choices in st["lines"]:
-            lines += (f'<div class="en">{bold_blanks(en)}</div>'
-                      f'<div class="ko">{esc(ko)}</div>'
-                      f'{opts_html(choices)}')
-        steps_html += (f'<div class="step"><div class="slabel">{esc(st["label"])}</div>{lines}</div>')
+            parts = en.split("____")
+            html_en = esc(parts[0])
+            for k, tail in enumerate(parts[1:]):
+                n += 1
+                opts = choices[k] if k < len(choices) else []
+                bank.append((n, opts))
+                html_en += (f'<span class="bk">____</span><span class="bn">{n}</span>'
+                            + esc(tail))
+            lines += f'<div class="en">{html_en}</div><div class="ko">{esc(ko)}</div>'
+        steps_html += f'<div class="step"><div class="slabel">{esc(st["label"])}</div>{lines}</div>'
 
-    # 오른쪽 워드뱅크
-    wb_rows = "".join(
-        f'<tr><td class="en">{esc(en)}</td><td class="ko">{esc(ko)}</td></tr>'
-        for en, ko in u["words"]
-    )
+    # 오른쪽 워드뱅크: 각 빈칸 번호에 넣을 수 있는 보기 단어 (5개 이상)
+    wb_rows = ""
+    for num, opts in bank:
+        words = " · ".join(esc(o) for o in opts)
+        wb_rows += (f'<div class="wrow"><span class="bn">{num}</span>'
+                    f'<span class="ws">{words}</span></div>')
 
     return f"""
     <div class="page">
@@ -277,21 +270,15 @@ def unit_html(idx: int, u: dict) -> str:
             <div class="bar" style="background:var(--purple);">✏️ 내 의견 말하기 템플릿 · Speak Your Opinion</div>
             <div class="body">
               {steps_html}
-              <div class="hint">빨간 빈칸(____)에 내 생각과 오른쪽 워드뱅크 단어를 넣어 ①~⑤를 이어서 말해 보세요.</div>
+              <div class="hint">빨간 빈칸 <span class="bn">번호</span> 에 맞춰, 오른쪽 워드뱅크의 같은 번호 보기에서 단어를 골라 넣어 ①~⑤를 이어서 말해 보세요.</div>
             </div>
           </div>
         </div>
         <div class="col-right">
           <div class="block wb">
-            <div class="bar" style="background:var(--green);">📚 워드뱅크 · Word Bank (중학 수준)</div>
-            <div class="body"><table>{wb_rows}</table></div>
+            <div class="bar" style="background:var(--green);">📚 워드뱅크 · 빈칸에 넣을 말 (번호 = 왼쪽 빈칸)</div>
+            <div class="body">{wb_rows}</div>
           </div>
-        </div>
-      </div>
-      <div class="write">
-        <div class="bar">🗣️ 나만의 답안 완성하기 · Write Your Own Answer (①~⑤를 이어서)</div>
-        <div class="body">
-          <div class="rule"></div><div class="rule"></div>
         </div>
       </div>
     </div>
@@ -309,9 +296,9 @@ def appendix_html() -> str:
                    f'<table>{rows}</table></div>')
     return f"""
     <div class="page appendix">
-      <h2 class="section-title">전체 워드뱅크 모아보기</h2>
+      <h2 class="section-title">부록 · 중학 필수 어휘 모아보기</h2>
       <p style="color:var(--muted); font-size:10px; margin:0 2px 10px;">
-        10개 단원의 중학 수준 어휘를 한눈에 복습하세요. 아는 단어에 ✓ 표시해 보세요.
+        각 단원 주제와 관련된 중학 수준 어휘입니다. 워드뱅크(빈칸 보기)와 함께 익히면 표현이 풍부해져요. 아는 단어에 ✓ 표시해 보세요.
       </p>
       <div class="cols">{blocks}</div>
     </div>
