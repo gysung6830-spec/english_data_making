@@ -141,9 +141,37 @@ def step2_passage(hl):
     return " ".join(parts)
 
 
-def connective_passage(hl, clues):
-    """순서·삽입 전용 STEP2 지문 — 노랑 형광펜 없이 연결고리(지시어·연결어·시간)만 색칠."""
-    txt = " ".join(seg.get("t", "") for seg in hl).strip()
+INS_MARK = "[삽입 문장]"
+
+
+def _split_insert(hl, insert_en=None):
+    """삽입 문항이면 (삽입문장 텍스트, 본문 텍스트), 아니면 (None, 전체 텍스트).
+    - '[삽입 문장]' 마커가 있으면 그것을 분리.
+    - 없고 insert_en(넣을 문장)이 주어지면: 본문에 그 문장이 박혀 있으면 빼내고(정답 자리엔 번호만 남김),
+      본문에 없으면(이미 분리돼 주어진 문장) 그대로 박스만 표시."""
+    ins, body = None, []
+    for seg in hl:
+        t = seg.get("t", "")
+        if t.startswith(INS_MARK):
+            ins = t[len(INS_MARK):].strip()
+        else:
+            body.append(t)
+    body_txt = " ".join(body).strip()
+    if ins is not None:
+        return ins, body_txt
+    if insert_en:
+        en = insert_en.strip()
+        if en and en in body_txt:
+            body_txt = body_txt.replace(en, " ")
+            body_txt = re.sub(r"\s{2,}", " ", body_txt).strip()
+            body_txt = re.sub(r"\s+([.,;:])", r"\1", body_txt)
+            return en, body_txt
+        return en, body_txt
+    return None, body_txt
+
+
+def _clue_html(txt, clues):
+    """텍스트 안 연결고리(marker)만 색칠해 HTML로."""
     low = txt.lower()
     spans = []
     for c in (clues or []):
@@ -168,13 +196,30 @@ def connective_passage(hl, clues):
     return "".join(out)
 
 
-def clean_passage(hl, band):
-    """STEP1 문제용 깨끗한 지문 = hl 문장들을 그대로 이어붙임(형광펜 없음)."""
-    txt = " ".join(seg.get("t", "") for seg in hl).strip()
-    e = esc(txt)
-    # 밑줄/빈칸 표기 정돈
-    e = re.sub(r'_{3,}', '<span class="bk">&nbsp;&nbsp;&nbsp;</span>', e)
-    return e
+def connective_passage(hl, clues, insert_en=None):
+    """순서·삽입 전용 STEP2 지문 — 노랑 형광펜 없이 연결고리(지시어·연결어·시간)만 색칠.
+       삽입은 '삽입할 문장'을 본문과 띄워 별도 박스로 구분."""
+    ins, body = _split_insert(hl, insert_en)
+    body_html = _clue_html(body, clues)
+    if ins is not None:
+        ins_html = _clue_html(ins, clues)
+        return (f'<div class="insbox"><span class="inslab">삽입할 문장</span>'
+                f'<span class="instext">{ins_html}</span></div>'
+                f'<div class="insbody">{body_html}</div>')
+    return body_html
+
+
+def clean_passage(hl, band, insert_en=None):
+    """STEP1 문제용 깨끗한 지문 = hl 문장들을 그대로 이어붙임(형광펜 없음).
+       삽입은 '삽입할 문장'을 본문과 띄워 별도 박스로 구분."""
+    def _fmt(t):
+        return re.sub(r'_{3,}', '<span class="bk">&nbsp;&nbsp;&nbsp;</span>', esc(t))
+    ins, body = _split_insert(hl, insert_en)
+    if ins is not None:
+        return (f'<div class="insbox"><span class="inslab">삽입할 문장</span>'
+                f'<span class="instext">{_fmt(ins)}</span></div>'
+                f'<div class="insbody">{_fmt(body)}</div>')
+    return _fmt(body)
 
 
 def derive_block(d):
@@ -294,6 +339,13 @@ def render_spread(rec, c, idx):
     # 순서(36·37)·삽입(38·39)은 '연결고리' 풀이법
     seqtype = "순서" if num in (36, 37) else ("삽입" if num in (38, 39) else "")
     cn = _CONNECT.get(f'{rec.get("exam_id","")}|{num}') if seqtype else None
+    # 삽입: 삽입할 문장(seq_direct의 '넣을 문장')을 본문과 분리해 띄워 표시
+    insert_en = None
+    if seqtype == "삽입":
+        _sd = c.get("seq_direct") or {}
+        _p = next((p for p in _sd.get("pieces", []) if p.get("label") == "넣을 문장"), None)
+        if _p:
+            insert_en = _p.get("en")
     if seqtype:
         how = ("🔗 <b>연결고리로 푼다</b> — 노랑 형광펜이 아니라 각 조각의 <b>지시어·연결어·시간 표현</b>을 표시해 이어보세요."
                if seqtype == "순서" else
@@ -322,7 +374,7 @@ def render_spread(rec, c, idx):
     <div class="pbody">
       <div class="pmain">
         <div class="how">{how}</div>
-        <div class="psg work">{clean_passage(hl, band)}</div>
+        <div class="psg work">{clean_passage(hl, band, insert_en)}</div>
         <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{opt_lines}</div>
         <div class="pguide"><div class="h">🖍 이렇게 풀어요</div>
           <div class="g3">{g3}</div>
@@ -347,7 +399,7 @@ def render_spread(rec, c, idx):
     reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}))
     pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
     # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
-    passage_html = connective_passage(hl, cn.get("clues") if cn else []) if (seqtype and cn) else step2_passage(hl)
+    passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
     clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
                    '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
     # 3색 범례 — 노랑/연녹/회색을 '언제 긋는지' 안내 (순서·삽입 제외)
@@ -688,6 +740,12 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .pclue{ font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
 .clue-legend{ font-size:8.2px; color:#33414d; margin-bottom:5px; }
 .clue-legend .pclue{ margin-right:3px; }
+/* 삽입 문항 — 삽입할 문장을 본문과 띄워 구분 */
+.psg .insbox{ background:#eef4fb; border:1px solid #c3d8ee; border-left:4px solid #2f6fb0; border-radius:6px; padding:6px 10px; margin-bottom:11px; }
+.psg .insbox .inslab{ display:inline-block; font-size:8px; font-weight:800; color:#fff; background:#2f6fb0; border-radius:9px; padding:1px 8px; margin-right:7px; vertical-align:1.5px; }
+.psg .insbox .instext{ font-weight:600; }
+.psg .insbody{ }
+.psg.work .insbox{ background:#f4f7fb; }
 .derive.connect .clue .cn{ flex:1; color:#33414d; }
 .derive.connect ol.chain{ margin:4px 0 6px; }
 .derive.connect ol.chain li{ padding-left:20px; font-size:9.4px; }
