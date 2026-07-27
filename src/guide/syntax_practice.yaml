@@ -300,10 +300,10 @@ practice:
     sentence: Worried that she could not get to the boarding gate in time, she rushed
       through the crowds of people.
     source: 2024 고3 9월 19번
-    prompt: 문두 분사구문에 유의하여 밑줄 없이 전체 문장의 의미로 가장 적절한 것을 고르시오.
+    prompt: 분사구문 Worried의 '의미상 주어'를 무엇으로 잡느냐가 관건. 올바른 판단과 해석은?
     options:
-    - 그녀가 제시간에 탑승구에 도착하지 못할까 걱정되었기 때문에, 사람들은 인파를 헤치고 서둘러 갔다.
-    - 제시간에 탑승구에 도착하지 못할까 봐 걱정되어, 그녀는 사람들의 인파를 헤치고 서둘러 갔다.
+    - '[의미상 주어 = 바로 앞 people] 걱정한 건 그녀인데, 인파를 헤치고 서둘러 간 주체는 ''사람들''로 읽음.'
+    - '[의미상 주어 = 주절 주어 she] 제시간에 못 갈까 걱정되어, ''그녀가'' 인파를 헤치고 서둘러 갔다.'
     answer_index: 1
     vocab:
     - word: boarding gate
@@ -2159,12 +2159,11 @@ practice:
       reveal that during this practice period the bird fine-tunes his efforts until
       he produces an accurate copy of the memorized template.
     source: 2024 고3 6월 35번
-    prompt: reveal that의 that절 범위에 유의하여 올바른 해석을 고르시오.
+    prompt: reveal that의 'that'을 무엇으로 보느냐가 해석을 가른다. 올바른 판단과 해석은?
     options:
-    - 그러나 몇 주 또는 몇 달에 걸쳐 녹음된 노래의 음향 그래프가 이 연습 기간 동안 드러나고, 그 새는 암기한 원형의 정확한 복제본을 만들어낼
-      때까지 자신의 노력을 미세하게 조정한다.
-    - 그러나 몇 주 또는 몇 달에 걸쳐 녹음된 노래의 음향 그래프는 이 연습 기간 동안 그 새가 암기한 원형의 정확한 복제본을 만들어낼 때까지
-      자신의 노력을 미세하게 조정한다는 것을 보여준다.
+    - '[that = 새 문장 시작 / reveal을 ''드러나다''로] 음향 그래프가 드러나고, 그 새는 …노력을 미세 조정한다.'
+    - '[that = reveal의 목적어 명사절 / reveal은 ''드러내다''] 음향 그래프는 ''그 새가 …복제본을 만들 때까지 노력을
+      미세 조정한다는 것을'' 보여준다.'
     answer_index: 1
     vocab:
     - word: fine-tune
