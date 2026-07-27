@@ -305,12 +305,10 @@ practice:
     sentence: In a city like Rome, it is the large number of people standing or sitting
       in squares rather than walking that is conspicuous.
     source: 2024 고3 9월 33번
-    prompt: '아래 오역이 잘못된 지점을 고르시오.  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에 띈다.”'
+    prompt: 밑줄 친 부분의 올바른 해석을 고르시오.
     options:
-    - rather than walking을 무시하고, 눈에 띄는 대상을 '걷는 사람들'로 잡았다 — 실제는 '걷는 게 아니라' 서 있거나 앉은
-      사람들.
-    - conspicuous를 '눈에 띄는'으로 옮긴 부분.
-    - in a city like Rome를 '로마 같은 도시에서'로 옮긴 부분.
+    - 로마 같은 도시에서 눈에 띄는 것은, 걷는 사람들이 아니라 광장에 서 있거나 앉아 있는 많은 사람들이다.
+    - 로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에 띈다.
     answer_index: 0
     vocab:
     - word: conspicuous
