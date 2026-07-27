@@ -246,6 +246,31 @@ def direct_block(num, typ, direct):
     return rows
 
 
+def seam_block(seq):
+    """순서·삽입 '이음매형' 해석카드 — 조각별 지시어의 한국어 정체 + 어디에 붙는지."""
+    if not seq:
+        return ""
+    rows = ""
+    for p in seq.get("pieces", []):
+        label = esc(p.get("label", ""))
+        cue = p.get("cue", ""); kind = p.get("cue_kind", "")
+        cls = CLUE_CLS.get(kind, "ck-ref")
+        if cue:
+            cuehtml = f'<span class="pclue {cls}">{esc(cue)}</span>'
+        else:
+            cuehtml = '<span class="nocue">첫머리 단서 없음</span>'
+        refers = p.get("refers", "")
+        refhtml = (f'<span class="rarw">→</span> <span class="refv">{esc(refers)}</span>'
+                   if refers else "")
+        en = esc(p.get("en", "")); ko = esc(p.get("ko", "")); link = esc(p.get("link", ""))
+        rows += (f'<div class="seamrow"><div class="slab">{label}</div>'
+                 f'<div class="sbody"><div class="scue">{cuehtml}{refhtml}</div>'
+                 f'<div class="sen">{en}</div><div class="sko">{ko}</div>'
+                 f'<div class="slink">{link}</div></div></div>')
+    ans = esc(seq.get("answer", ""))
+    return f'<div class="seamwrap">{rows}<div class="seamans">→ 정답: <b>{ans}</b></div></div>'
+
+
 def opt_line(item):
     return item.get("opt_line", "")
 
@@ -340,15 +365,28 @@ def render_spread(rec, c, idx):
       {pline}
       {opts_block(c.get("opts", []), answer)}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
-    </div>
-    <div class="card trans">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">STEP 3 · 해석 (직독직해)</span><span class="tm">🟡문장·선지만</span></div>
+    </div>'''
+    # STEP3 — 순서·삽입은 '이음매형'(조각별 지시어 정체 + 이음), 그 외는 직독직해
+    seqd = c.get("seq_direct") if seqtype else None
+    if seqd:
+        step3_kind = "STEP 3 · 해석 (조각 잇기)"; step3_tm = "🔗 지시어·이음매"
+        step3_head = ("🔗 조각별 해석 — <b>지시어가 가리키는 것</b>과 <b>어디에 붙는지</b>로 순서를 확인"
+                      if seqtype == "순서" else
+                      "🔗 조각별 해석 — <b>넣을 문장의 지시어</b>가 앞을 받아 <b>끊긴 흐름</b>을 메우는지 확인")
+        step3_body = seam_block(seqd)
+    else:
+        step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
+        step3_head = "🟡 무조건 읽는 문장 — 같은 형광펜 색끼리 영↔한 대응"
+        step3_body = direct_block(num, typ, c.get("direct", []))
+    right2 = f'''<div class="card trans">
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
-        <span class="kt">🟡 무조건 읽는 문장 — 같은 형광펜 색끼리 영↔한 대응</span>
-        {direct_block(num, typ, c.get("direct", []))}
+        <span class="kt">{step3_head}</span>
+        {step3_body}
         <div class="opt-line">{opt_line(c)}</div>
       </div>
-    </div>
+    </div>'''
+    right = right + right2 + '''
   </div>'''
     return f'<div class="spread">{left}{right}</div>'
 
@@ -679,6 +717,22 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .hl0{ background:#c9e0ec; } .hl1{ background:#c7e0da; } .hl2{ background:#e8dfb2; } .hl3{ background:#e2dac8; } .hl4{ background:#d5ddb9; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
 .dchl .opt-line .co{ color:var(--src-line); font-weight:800; } .dchl .opt-line .xo{ color:var(--trap); font-weight:700; }
+/* 순서·삽입 이음매형 해석카드 */
+.seamwrap{ margin-top:2px; }
+.seamrow{ display:flex; gap:7px; padding:5px 0; border-bottom:1px dashed #dbe6f0; }
+.seamrow:last-of-type{ border-bottom:none; }
+.seamrow .slab{ flex:none; width:46px; font-size:8.6px; font-weight:800; color:#1f4d7a; background:#e2eefa; border-radius:5px; padding:3px 4px; text-align:center; height:fit-content; }
+.seamrow .sbody{ flex:1; min-width:0; }
+.seamrow .scue{ font-size:9px; margin-bottom:2px; }
+.seamrow .scue .pclue{ font-size:8px; }
+.seamrow .scue .nocue{ font-size:8.2px; color:#8a929b; font-style:italic; }
+.seamrow .scue .rarw{ color:#9bb4cc; font-weight:800; margin:0 3px; }
+.seamrow .scue .refv{ font-weight:800; color:#1f4d7a; background:#eaf2fb; border-radius:3px; padding:0 4px; }
+.seamrow .sen{ font-size:9.6px; line-height:1.7; color:#23272e; }
+.seamrow .sko{ font-size:9.3px; line-height:1.7; color:#33414d; margin-top:1px; }
+.seamrow .slink{ font-size:8.4px; font-weight:700; color:#2f6fb0; margin-top:2px; }
+.seamans{ margin-top:6px; background:#e6f0f9; border-left:3px solid #2f6fb0; border-radius:5px; padding:5px 9px; font-size:9.4px; font-weight:700; color:#1f4d7a; }
+.seamans b{ color:#12406e; }
 </style></head><body>
 <div class="cover">
   <div class="kick">PART 1</div>
