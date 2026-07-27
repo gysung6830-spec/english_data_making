@@ -305,10 +305,12 @@ practice:
     sentence: In a city like Rome, it is the large number of people standing or sitting
       in squares rather than walking that is conspicuous.
     source: 2024 고3 9월 33번
-    prompt: '''rather than walking''을 어떻게 처리하느냐가 ''눈에 띄는 대상''을 가른다. 올바른 판단과 해석은?'
+    prompt: '아래 오역이 잘못된 지점을 고르시오.  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에 띈다.”'
     options:
-    - '[rather than walking = ''걷는 게 아니라'', 대비] 눈에 띄는 건 걷는 사람이 아니라 광장에 서거나 앉은 많은 사람들이다.'
-    - '[rather than을 무시] 눈에 띄는 건 광장에서 걷고 있는 많은 사람들이다.'
+    - rather than walking을 무시하고, 눈에 띄는 대상을 '걷는 사람들'로 잡았다 — 실제는 '걷는 게 아니라' 서 있거나 앉은
+      사람들.
+    - conspicuous를 '눈에 띄는'으로 옮긴 부분.
+    - in a city like Rome를 '로마 같은 도시에서'로 옮긴 부분.
     answer_index: 0
     vocab:
     - word: conspicuous

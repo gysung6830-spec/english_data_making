@@ -300,11 +300,13 @@ practice:
     sentence: Worried that she could not get to the boarding gate in time, she rushed
       through the crowds of people.
     source: 2024 고3 9월 19번
-    prompt: 분사구문 Worried의 '의미상 주어'를 무엇으로 잡느냐가 관건. 올바른 판단과 해석은?
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “제시간에 못 갈까 걱정되어, 사람들이 인파를 헤치고 서둘러
+      갔다.”'
     options:
-    - '[의미상 주어 = 바로 앞 people] 걱정한 건 그녀인데, 인파를 헤치고 서둘러 간 주체는 ''사람들''로 읽음.'
-    - '[의미상 주어 = 주절 주어 she] 제시간에 못 갈까 걱정되어, ''그녀가'' 인파를 헤치고 서둘러 갔다.'
-    answer_index: 1
+    - 분사구문 Worried의 의미상 주어를 주절 주어 she가 아니라 '사람들(people)'로 잡았다.
+    - rushed through the crowds를 '인파를 헤치고 서둘러 갔다'로 옮긴 부분.
+    - Worried that ~ in time을 '제시간에 못 갈까 걱정되어'로 옮긴 부분.
+    answer_index: 0
     vocab:
     - word: boarding gate
       meaning: 탑승구
@@ -2159,12 +2161,12 @@ practice:
       reveal that during this practice period the bird fine-tunes his efforts until
       he produces an accurate copy of the memorized template.
     source: 2024 고3 6월 35번
-    prompt: reveal that의 'that'을 무엇으로 보느냐가 해석을 가른다. 올바른 판단과 해석은?
+    prompt: '아래 오역이 어긋난 지점을 고르시오.  ▷ 오역: “음향 그래프가 이 기간 동안 드러나고, 그 새는 …노력을 미세 조정한다.”'
     options:
-    - '[that = 새 문장 시작 / reveal을 ''드러나다''로] 음향 그래프가 드러나고, 그 새는 …노력을 미세 조정한다.'
-    - '[that = reveal의 목적어 명사절 / reveal은 ''드러내다''] 음향 그래프는 ''그 새가 …복제본을 만들 때까지 노력을
-      미세 조정한다는 것을'' 보여준다.'
-    answer_index: 1
+    - reveal을 '드러나다(자동사)'로 보고 that절을 별개 문장으로 끊었다 — that은 reveal의 목적어 명사절.
+    - over several weeks or months를 '몇 주나 몇 달에 걸쳐'로 옮긴 부분.
+    - fine-tunes his efforts를 '노력을 미세 조정한다'로 옮긴 부분.
+    answer_index: 0
     vocab:
     - word: fine-tune
       meaning: 미세하게 조정하다
