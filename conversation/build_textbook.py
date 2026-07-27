@@ -14,12 +14,43 @@
 from __future__ import annotations
 
 import html as _html
+import os
+import tempfile
 from pathlib import Path
 
 import textbook_data as data
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "output" / "중학영어회화교재_OPIC10.pdf"
+
+# 이모지용 흑백 폰트 (컬러 이모지 대체)
+EMOJI_FONT = "Symbola"
+
+
+def _setup_fontconfig() -> None:
+    """WeasyPrint + '컬러 이모지(Noto Color Emoji)'는 글리프가 줄 위로 크게 떠올라
+    제자리에 배치되지 않는 버그가 있다. 컬러 이모지 폰트를 '거부(reject)'해서
+    정상 metrics 의 흑백 이모지 폰트(Symbola)로 그려지도록 fontconfig 를 구성한다.
+    (리눅스 + /etc/fonts 환경에서만 적용. 그 외에는 그대로 둔다.)"""
+    sys_conf = "/etc/fonts/fonts.conf"
+    if not os.path.exists(sys_conf):
+        return
+    conf = f"""<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <include ignore_missing="yes">{sys_conf}</include>
+  <selectfont><rejectfont>
+    <pattern><patelt name="family"><string>Noto Color Emoji</string></patelt></pattern>
+  </rejectfont></selectfont>
+  <alias><family>emoji</family><prefer><family>{EMOJI_FONT}</family></prefer></alias>
+</fontconfig>
+"""
+    path = Path(tempfile.gettempdir()) / "textbook_fontconfig.conf"
+    path.write_text(conf, encoding="utf-8")
+    os.environ["FONTCONFIG_FILE"] = str(path)
+
+
+_setup_fontconfig()
 
 # 단원마다 돌아가며 쓰는 헤더 강조색
 ACCENTS = ["#445fb0", "#3d8f58", "#6a54b3", "#cf8a2a", "#cd5049",
@@ -41,9 +72,11 @@ CSS = """
 }
 * { box-sizing: border-box; }
 body {
-  font-family: "NanumGothic", "Nanum Gothic", "Malgun Gothic", sans-serif;
+  font-family: "NanumGothic", "Nanum Gothic", "Malgun Gothic", "Symbola", sans-serif;
   color: #23272e; font-size: 11px; line-height: 1.45; margin: 0;
 }
+/* 이모지는 흑백 심볼 폰트로 그려 정확히 배치 (컬러 이모지는 WeasyPrint에서 어긋남) */
+.emoji, .em, .emojis { font-family: "Symbola", "NanumGothic", sans-serif; }
 :root {
   --blue:#445fb0; --green:#3d8f58; --purple:#6a54b3;
   --amber:#cf8a2a; --red:#cd5049; --teal:#2f877e;
@@ -56,7 +89,8 @@ body {
   font-size:12px; font-weight:700; padding:5px 14px; border-radius:6px; letter-spacing:1px; }
 .cover h1 { font-size:40px; font-weight:800; margin:18px 0 8px; color:#1a1f2b; }
 .cover .sub { font-size:15px; color:var(--muted); margin-bottom:30px; }
-.cover .emojis { font-size:32px; letter-spacing:8px; margin-top:26px; }
+.cover .emojis { font-size:24px; letter-spacing:5px; line-height:1.6; margin-top:26px;
+  max-width:80%; margin-left:auto; margin-right:auto; }
 .cover .band { height:8px; width:60%; margin:22px auto 0;
   background:linear-gradient(90deg,var(--blue),var(--green),var(--purple),var(--amber),var(--red)); border-radius:8px; }
 
@@ -128,9 +162,9 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 .expr .grp .ko { color:var(--muted); }
 
 /* 목차 */
-.toc { display:flex; flex-wrap:wrap; gap:8px; }
-.toc .row { flex:1 1 46%; display:flex; align-items:center; gap:10px;
-  border:1.5px solid var(--line); border-radius:9px; padding:7px 12px; }
+.toc { columns:2; column-gap:12px; }
+.toc .row { break-inside:avoid; display:flex; align-items:center; gap:10px;
+  border:1.5px solid var(--line); border-radius:8px; padding:5px 12px; margin-bottom:6px; }
 .toc .num { font-weight:800; color:var(--muted); }
 .toc .em { font-size:18px; }
 .toc .ko { font-weight:700; }
@@ -198,7 +232,9 @@ def intro_html() -> str:
           </div>
         </div>
       </div>
-      <h2 class="section-title" style="margin-top:14px;">목차 (OPIC 주제 {len(data.UNITS)}개)</h2>
+    </div>
+    <div class="page">
+      <h2 class="section-title">목차 (OPIC 주제 {len(data.UNITS)}개)</h2>
       <div class="toc">{toc}</div>
     </div>
     """

@@ -16,7 +16,7 @@
 """
 
 TITLE = "중학 영어 회화 교재"
-SUBTITLE = "OPIC 20개 주제로 말하는 나의 의견 · 중학생 수준 · 템플릿 + 워드뱅크"
+SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 중학생 수준 · 템플릿 + 워드뱅크"
 FOOTER = "중학 영어 회화 교재 · 내 의견 말하기 템플릿 + 워드뱅크"
 
 HOW_TO_USE = [
@@ -933,6 +933,327 @@ UNITS = [
                  "전반적으로, 명절은 저를 ____한 기분이 들게 해요.",
                  [[("happy", "행복한"), ("grateful", "감사한"), ("relaxed", "편안한"),
                    ("excited", "신나는"), ("close to my family", "가족과 가까운")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 21 =====
+    {
+        "emoji": "🚄", "title_ko": "국내 여행", "title_en": "Domestic Trips",
+        "prompt": "Talk about a trip you took in your country.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about a trip I took in Korea.", "제가 국내에서 다녀온 여행에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the best place to visit in Korea.",
+                 "제 생각에 ____이(가) 한국에서 가보기 가장 좋은 곳이에요.",
+                 [[("Jeju Island", "제주도"), ("Busan", "부산"), ("Gyeongju", "경주"),
+                   ("Gangneung", "강릉"), ("Seoul", "서울")]]),
+                ("Personally, I love to travel by ____.",
+                 "개인적으로 저는 ____(으)로 여행하는 것을 좋아해요.",
+                 [[("train", "기차"), ("car", "자동차"), ("bus", "버스"),
+                   ("KTX", "고속열차"), ("plane", "비행기")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that I can ____.",
+                 "가장 큰 이유는 제가 ____할 수 있기 때문이에요.",
+                 [[("enjoy beautiful scenery", "아름다운 경치를 즐기다"), ("try local food", "현지 음식을 먹다"),
+                   ("visit famous spots", "유명한 곳을 가다"), ("relax with family", "가족과 쉬다"),
+                   ("take great photos", "멋진 사진을 찍다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, last year I ____.",
+                 "예를 들어, 작년에 저는 ____했어요.",
+                 [[("went to Busan by train", "기차로 부산에 갔다"), ("visited Jeju Island", "제주도를 방문했다"),
+                   ("traveled with my family", "가족과 여행했다"), ("saw the ocean", "바다를 봤다"),
+                   ("tried famous local dishes", "유명한 현지 음식을 먹었다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, a domestic trip is a ____ way to spend a holiday.",
+                 "전반적으로, 국내 여행은 휴일을 보내는 ____ 방법이에요.",
+                 [[("relaxing", "편안한"), ("fun", "재미있는"), ("cheap", "저렴한"),
+                   ("convenient", "편리한"), ("memorable", "기억에 남는")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 22 =====
+    {
+        "emoji": "🌍", "title_ko": "해외 여행", "title_en": "Traveling Abroad",
+        "prompt": "Talk about traveling to another country.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about traveling to another country.", "다른 나라로 여행하는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the country I most want to visit.",
+                 "제 생각에 ____이(가) 제가 가장 가보고 싶은 나라예요.",
+                 [[("Japan", "일본"), ("France", "프랑스"), ("the USA", "미국"),
+                   ("Italy", "이탈리아"), ("Australia", "호주")]]),
+                ("Personally, I'm most excited about ____.",
+                 "개인적으로 저는 ____이(가) 가장 기대돼요.",
+                 [[("the food", "음식"), ("the culture", "문화"), ("the sights", "명소"),
+                   ("the shopping", "쇼핑"), ("the language", "언어")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that I can ____.",
+                 "가장 큰 이유는 제가 ____할 수 있기 때문이에요.",
+                 [[("experience a new culture", "새로운 문화를 경험하다"), ("see famous landmarks", "유명한 명소를 보다"),
+                   ("try foreign food", "외국 음식을 먹다"), ("meet new people", "새로운 사람을 만나다"),
+                   ("practice English", "영어를 연습하다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, someday I want to ____.",
+                 "예를 들어, 언젠가 저는 ____하고 싶어요.",
+                 [[("visit the Eiffel Tower", "에펠탑을 보다"), ("walk around Tokyo", "도쿄를 거닐다"),
+                   ("see New York", "뉴욕을 보다"), ("try local dishes", "현지 음식을 먹다"),
+                   ("take lots of photos", "사진을 많이 찍다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, traveling abroad would be an ____ experience.",
+                 "전반적으로, 해외여행은 ____ 경험이 될 거예요.",
+                 [[("amazing", "놀라운"), ("exciting", "신나는"), ("unforgettable", "잊을 수 없는"),
+                   ("eye-opening", "견문을 넓히는"), ("valuable", "값진")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 23 =====
+    {
+        "emoji": "🎮", "title_ko": "게임하기", "title_en": "Playing Games",
+        "prompt": "Talk about playing games.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about playing games.", "게임하는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ games are the most fun.",
+                 "제 생각에 ____ 게임이 가장 재미있어요.",
+                 [[("mobile", "모바일"), ("computer", "컴퓨터"), ("board", "보드"),
+                   ("sports", "스포츠"), ("puzzle", "퍼즐")]]),
+                ("Personally, I usually play ____.",
+                 "개인적으로 저는 보통 ____ 게임을 해요.",
+                 [[("on my phone", "휴대폰으로"), ("with friends", "친구들과"), ("on the computer", "컴퓨터로"),
+                   ("after school", "방과 후에"), ("on weekends", "주말에")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I enjoy it is that it is ____.",
+                 "제가 그것을 즐기는 가장 큰 이유는 그것이 ____하기 때문이에요.",
+                 [[("fun and exciting", "재미있고 신나는"), ("a good way to relax", "좋은 휴식"),
+                   ("great with friends", "친구들과 좋은"), ("challenging", "도전적인"),
+                   ("a nice hobby", "좋은 취미")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I sometimes ____.",
+                 "예를 들어, 저는 가끔 ____해요.",
+                 [[("play games online with friends", "온라인으로 친구들과 게임하다"), ("try new games", "새 게임을 해보다"),
+                   ("play for about an hour", "한 시간쯤 놀다"), ("join a team", "팀에 들어가다"),
+                   ("watch game videos", "게임 영상을 보다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, playing games in moderation is ____.",
+                 "전반적으로, 적당히 하는 게임은 ____.",
+                 [[("fun", "재미있는"), ("relaxing", "편안한"), ("a good hobby", "좋은 취미"),
+                   ("enjoyable", "즐거운"), ("exciting", "신나는")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 24 =====
+    {
+        "emoji": "💻", "title_ko": "인터넷·SNS", "title_en": "The Internet & Social Media",
+        "prompt": "Talk about how you use the Internet or social media.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about how I use the Internet.", "제가 인터넷을 어떻게 쓰는지 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the most useful website or app.",
+                 "제 생각에 ____이(가) 가장 유용한 사이트나 앱이에요.",
+                 [[("YouTube", "유튜브"), ("Instagram", "인스타그램"), ("a search engine", "검색 엔진"),
+                   ("a study app", "공부 앱"), ("an online library", "온라인 도서관")]]),
+                ("Personally, I use the Internet to ____.",
+                 "개인적으로 저는 ____하려고 인터넷을 써요.",
+                 [[("watch videos", "영상을 보다"), ("chat with friends", "친구와 대화하다"), ("study", "공부하다"),
+                   ("find information", "정보를 찾다"), ("listen to music", "음악을 듣다")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason it is helpful is that I can ____.",
+                 "그것이 도움이 되는 가장 큰 이유는 제가 ____할 수 있기 때문이에요.",
+                 [[("learn new things", "새로운 걸 배우다"), ("stay in touch with friends", "친구와 연락하다"),
+                   ("find useful information", "유용한 정보를 찾다"), ("have fun", "즐기다"),
+                   ("do research", "자료를 찾다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I often ____.",
+                 "예를 들어, 저는 자주 ____해요.",
+                 [[("watch study videos", "공부 영상을 보다"), ("message my friends", "친구에게 메시지를 보내다"),
+                   ("search for information", "정보를 검색하다"), ("share photos", "사진을 공유하다"),
+                   ("read the news", "뉴스를 읽다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, I try to use the Internet ____.",
+                 "전반적으로, 저는 인터넷을 ____ 쓰려고 해요.",
+                 [[("wisely", "현명하게"), ("safely", "안전하게"), ("in moderation", "적당히"),
+                   ("carefully", "조심스럽게"), ("responsibly", "책임감 있게")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 25 =====
+    {
+        "emoji": "📺", "title_ko": "TV·드라마", "title_en": "TV & Dramas",
+        "prompt": "Talk about the TV shows or dramas you watch.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about the TV shows I watch.", "제가 보는 TV 프로그램에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ shows are the most enjoyable.",
+                 "제 생각에 ____ 프로그램이 가장 즐거워요.",
+                 [[("drama", "드라마"), ("comedy", "코미디"), ("variety", "예능"),
+                   ("documentary", "다큐멘터리"), ("animation", "애니메이션")]]),
+                ("Personally, I usually watch TV ____.",
+                 "개인적으로 저는 보통 ____ TV를 봐요.",
+                 [[("after dinner", "저녁 후에"), ("on weekends", "주말에"), ("with my family", "가족과"),
+                   ("before bed", "자기 전에"), ("in my free time", "여가 시간에")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I like it is that the ____ is interesting.",
+                 "제가 그것을 좋아하는 가장 큰 이유는 ____이(가) 흥미롭기 때문이에요.",
+                 [[("story", "이야기"), ("characters", "등장인물"), ("plot", "줄거리"),
+                   ("acting", "연기"), ("humor", "유머")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I recently watched ____.",
+                 "예를 들어, 저는 최근에 ____을(를) 봤어요.",
+                 [[("a popular drama", "인기 드라마"), ("a funny variety show", "웃긴 예능"),
+                   ("an animated series", "애니메이션"), ("a documentary", "다큐멘터리"),
+                   ("a Korean drama", "한국 드라마")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, watching TV helps me ____.",
+                 "전반적으로, TV를 보는 것은 제가 ____하도록 도와줘요.",
+                 [[("relax", "쉬다"), ("have fun", "즐기다"), ("forget my stress", "스트레스를 잊다"),
+                   ("spend time with family", "가족과 시간을 보내다"), ("enjoy my evening", "저녁을 즐기다")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 26 =====
+    {
+        "emoji": "🌊", "title_ko": "해변 가기", "title_en": "Going to the Beach",
+        "prompt": "Talk about going to the beach or the sea.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about going to the beach.", "해변에 가는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, the beach is the best place to ____.",
+                 "제 생각에 해변은 ____하기에 가장 좋은 곳이에요.",
+                 [[("relax", "쉬다"), ("swim", "수영하다"), ("play", "놀다"),
+                   ("watch the sunset", "노을을 보다"), ("spend summer", "여름을 보내다")]]),
+                ("Personally, my favorite thing to do there is ____.",
+                 "개인적으로 제가 거기서 가장 좋아하는 것은 ____예요.",
+                 [[("swim in the sea", "바다에서 수영하기"), ("build sandcastles", "모래성 쌓기"),
+                   ("walk along the shore", "해안 걷기"), ("collect shells", "조개 줍기"),
+                   ("take photos", "사진 찍기")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I love it is that it is ____.",
+                 "제가 그곳을 좋아하는 가장 큰 이유는 그곳이 ____하기 때문이에요.",
+                 [[("beautiful and relaxing", "아름답고 편안한"), ("fun in summer", "여름에 재미있는"),
+                   ("cool and refreshing", "시원하고 상쾌한"), ("great with friends", "친구와 좋은"),
+                   ("full of fresh air", "공기가 상쾌한")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, last summer I ____.",
+                 "예를 들어, 지난여름에 저는 ____했어요.",
+                 [[("went to the beach with my family", "가족과 해변에 갔다"), ("swam in the ocean", "바다에서 수영했다"),
+                   ("built a sandcastle", "모래성을 만들었다"), ("watched the sunset", "노을을 봤다"),
+                   ("played beach games", "해변 게임을 했다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, a day at the beach makes me feel ____.",
+                 "전반적으로, 해변에서 보내는 하루는 저를 ____한 기분이 들게 해요.",
+                 [[("refreshed", "상쾌한"), ("happy", "행복한"), ("relaxed", "편안한"),
+                   ("free", "자유로운"), ("energized", "활력 넘치는")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 27 =====
+    {
+        "emoji": "📷", "title_ko": "사진 찍기", "title_en": "Taking Photos",
+        "prompt": "Talk about taking photos.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about taking photos.", "사진 찍는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ photos are the most fun to take.",
+                 "제 생각에 ____ 사진이 찍기에 가장 재미있어요.",
+                 [[("nature", "자연"), ("food", "음식"), ("travel", "여행"),
+                   ("selfie", "셀카"), ("pet", "반려동물")]]),
+                ("Personally, I usually take photos with ____.",
+                 "개인적으로 저는 보통 ____와(과) 함께 사진을 찍어요.",
+                 [[("my phone", "휴대폰"), ("a camera", "카메라"), ("my friends", "친구들"),
+                   ("my family", "가족"), ("my pet", "반려동물")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I enjoy it is that I can ____.",
+                 "제가 그것을 즐기는 가장 큰 이유는 제가 ____할 수 있기 때문이에요.",
+                 [[("capture special moments", "특별한 순간을 담다"), ("be creative", "창의적이 되다"),
+                   ("keep memories", "추억을 간직하다"), ("share them online", "온라인에 공유하다"),
+                   ("express myself", "나를 표현하다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I often ____.",
+                 "예를 들어, 저는 자주 ____해요.",
+                 [[("take photos when I travel", "여행할 때 사진을 찍다"), ("photograph my food", "음식을 찍다"),
+                   ("take selfies with friends", "친구들과 셀카를 찍다"), ("post pictures online", "사진을 온라인에 올리다"),
+                   ("save happy moments", "행복한 순간을 저장하다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, taking photos helps me ____.",
+                 "전반적으로, 사진을 찍는 것은 제가 ____하도록 도와줘요.",
+                 [[("keep good memories", "좋은 추억을 남기다"), ("enjoy the moment", "순간을 즐기다"),
+                   ("be creative", "창의적이 되다"), ("share my life", "내 삶을 나누다"),
+                   ("remember special days", "특별한 날을 기억하다")]]),
+            ]),
+        ],
+    },
+    # ===== UNIT 28 =====
+    {
+        "emoji": "🏢", "title_ko": "우리 동네", "title_en": "My Neighborhood",
+        "prompt": "Describe your neighborhood.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me describe my neighborhood.", "우리 동네를 소개할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, my neighborhood is very ____.",
+                 "제 생각에 우리 동네는 매우 ____해요.",
+                 [[("convenient", "편리한"), ("quiet", "조용한"), ("safe", "안전한"),
+                   ("friendly", "정겨운"), ("clean", "깨끗한")]]),
+                ("Personally, my favorite place nearby is ____.",
+                 "개인적으로 제가 가장 좋아하는 근처 장소는 ____예요.",
+                 [[("the park", "공원"), ("the library", "도서관"), ("a café", "카페"),
+                   ("the shopping center", "쇼핑센터"), ("the sports center", "체육관")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I like it is that ____.",
+                 "제가 그곳을 좋아하는 가장 큰 이유는 ____이기 때문이에요.",
+                 [[("everything is close by", "모든 게 가깝다"), ("it is safe and quiet", "안전하고 조용하다"),
+                   ("there are many parks", "공원이 많다"), ("the people are friendly", "사람들이 친절하다"),
+                   ("it has good restaurants", "좋은 식당이 있다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I often ____ in my neighborhood.",
+                 "예를 들어, 저는 동네에서 자주 ____해요.",
+                 [[("walk to the park", "공원까지 걷다"), ("meet friends", "친구를 만나다"),
+                   ("ride my bike", "자전거를 타다"), ("go shopping", "쇼핑을 가다"),
+                   ("study at the library", "도서관에서 공부하다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, I really like living in my ____ neighborhood.",
+                 "전반적으로, 저는 우리 ____ 동네에 사는 것이 정말 좋아요.",
+                 [[("convenient", "편리한"), ("peaceful", "평화로운"), ("friendly", "정겨운"),
+                   ("safe", "안전한"), ("nice", "좋은")]]),
             ]),
         ],
     },
