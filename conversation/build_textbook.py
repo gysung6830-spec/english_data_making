@@ -72,33 +72,37 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 
 /* ---------- 단원 헤더 ---------- */
 .unit-head { display:flex; align-items:center; gap:12px;
-  color:#fff; padding:9px 16px; border-radius:11px; margin-bottom:10px; }
-.unit-head .emoji { font-size:26px; }
-.unit-head .no { font-size:10px; font-weight:700; opacity:.9; letter-spacing:1px; }
-.unit-head .ko { font-size:20px; font-weight:800; line-height:1.15; }
-.unit-head .en { font-size:11px; opacity:.92; }
+  color:#fff; padding:7px 16px; border-radius:10px; margin-bottom:8px; }
+.unit-head .emoji { font-size:24px; }
+.unit-head .no { font-size:9px; font-weight:700; opacity:.9; letter-spacing:1px; }
+.unit-head .ko { font-size:18px; font-weight:800; line-height:1.15; }
+.unit-head .en { font-size:10px; opacity:.92; }
 .unit-head .prompt { margin-left:auto; text-align:right; font-size:11px;
   background:rgba(255,255,255,.18); padding:5px 10px; border-radius:8px; max-width:44%; }
 .unit-head .prompt .q { font-weight:700; }
 
 /* ---------- 블록 공통 ---------- */
 .block { border:1.5px solid var(--line); border-radius:10px; overflow:hidden; height:100%; }
-.block > .bar { color:#fff; font-weight:800; font-size:12px; padding:6px 12px; letter-spacing:.3px; }
-.block > .body { padding:9px 12px; }
+.block > .bar { color:#fff; font-weight:800; font-size:11px; padding:5px 12px; letter-spacing:.3px; }
+.block > .body { padding:7px 12px; }
 
 /* 템플릿(왼쪽) */
-.tpl .step { margin:0 0 8px; }
-.tpl .slabel { font-weight:800; color:var(--purple); font-size:11px; margin-bottom:2px; }
-.tpl .en { font-weight:600; }
-.tpl .ko { color:var(--muted); font-size:9.5px; }
+.tpl .step { margin:0 0 5px; }
+.tpl .slabel { font-weight:800; color:var(--purple); font-size:10.5px; margin-bottom:1px; }
+.tpl .en { font-weight:600; font-size:10.5px; line-height:1.28; }
+.tpl .ko { color:var(--muted); font-size:9px; line-height:1.25; }
 .tpl .en .bk { color:var(--red); font-weight:800; }
-.tpl .hint { color:var(--muted); font-size:9.5px; margin-top:4px; border-top:1px dashed var(--line); padding-top:5px; }
+.tpl .opts { font-size:9px; color:#374151; margin:1px 0 2px; padding-left:9px;
+  line-height:1.28; border-left:2px solid #f0d9d7; }
+.tpl .opts .lab { color:var(--red); font-weight:800; }
+.tpl .opts .w { color:#374151; }
+.tpl .hint { color:var(--muted); font-size:9px; margin-top:3px; border-top:1px dashed var(--line); padding-top:4px; }
 
 /* 나만의 답안 작성란 */
-.write { margin-top:11px; border:1.5px solid var(--line); border-radius:10px; overflow:hidden; }
-.write .bar { color:#fff; font-weight:800; font-size:12px; padding:6px 12px; background:var(--blue); }
-.write .body { padding:12px 14px 14px; }
-.write .rule { border-bottom:1px solid #d7dbe0; height:22px; }
+.write { margin-top:8px; border:1.5px solid var(--line); border-radius:9px; overflow:hidden; }
+.write .bar { color:#fff; font-weight:800; font-size:11px; padding:5px 12px; background:var(--blue); }
+.write .body { padding:9px 14px 10px; }
+.write .rule { border-bottom:1px solid #d7dbe0; height:19px; }
 .write .rule:last-child { border-bottom:none; }
 
 /* 워드뱅크(오른쪽) */
@@ -228,13 +232,25 @@ def expressions_html() -> str:
 def unit_html(idx: int, u: dict) -> str:
     accent = ACCENTS[(idx - 1) % len(ACCENTS)]
 
-    # 왼쪽 템플릿
+    # 왼쪽 템플릿 (빈칸별 '보기' 5개 이상 포함)
+    def opts_html(choices):
+        if not choices:
+            return ""
+        multi = len(choices) > 1
+        out = ""
+        for bi, opts in enumerate(choices, 1):
+            words = " · ".join(esc(o) for o in opts)
+            lab = f'<span class="lab">빈칸{"①②③④"[bi-1]} </span>' if multi else '<span class="lab">보기: </span>'
+            out += f'<div class="opts">{lab}<span class="w">{words}</span></div>'
+        return out
+
     steps_html = ""
     for st in u["template"]:
         lines = ""
-        for en, ko in st["lines"]:
+        for en, ko, choices in st["lines"]:
             lines += (f'<div class="en">{bold_blanks(en)}</div>'
-                      f'<div class="ko">{esc(ko)}</div>')
+                      f'<div class="ko">{esc(ko)}</div>'
+                      f'{opts_html(choices)}')
         steps_html += (f'<div class="step"><div class="slabel">{esc(st["label"])}</div>{lines}</div>')
 
     # 오른쪽 워드뱅크
@@ -275,7 +291,6 @@ def unit_html(idx: int, u: dict) -> str:
       <div class="write">
         <div class="bar">🗣️ 나만의 답안 완성하기 · Write Your Own Answer (①~⑤를 이어서)</div>
         <div class="body">
-          <div class="rule"></div><div class="rule"></div>
           <div class="rule"></div><div class="rule"></div>
         </div>
       </div>
