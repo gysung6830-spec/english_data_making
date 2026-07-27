@@ -1,398 +1,418 @@
 # -*- coding: utf-8 -*-
 """
-초등 4학년 수준 영어 회화 교재 콘텐츠 데이터 (OPIC 주제 기반).
+중학생 수준 영어 회화 교재 콘텐츠 (OPIC 주제 기반 · '내 의견 말하기' 템플릿).
 
-각 단원(UNIT)은 동일한 '템플릿' 구조를 따릅니다.
-  1) 워드뱅크(Word Bank)   - 핵심 단어 + 뜻 + 한글 발음
-  2) 핵심 표현(Patterns)   - 질문/대답 문장 패턴
-  3) 대화 예시(Dialogue)   - A/B 짧은 회화
-  4) 나만의 대답(Template) - 빈칸을 채워 말하기
+가로(landscape) 2단 구성:
+  - 왼쪽: 내 의견 말하기 5단계 템플릿 (빈칸 채워 스스로 의견을 구성)
+  - 오른쪽: 워드뱅크 (중학생 수준 어휘)
 
-초등학생에게 어려운 OPIC 주제(직장/출장/은행/호텔예약 등)는 제외했습니다.
+대화문은 없습니다. OPIC 질문을 받고 '내 의견/소개'를 스스로 말하는 연습용입니다.
 콘텐츠만 수정하면 build_textbook.py 가 그대로 PDF 로 만들어 줍니다.
 """
 
-TITLE = "초등 영어 회화 교재"
-SUBTITLE = "OPIC 주제로 배우는 말하기 · 초등 4학년 눈높이"
-FOOTER = "초등 영어 회화 교재 · 템플릿 + 워드뱅크"
+TITLE = "중학 영어 회화 교재"
+SUBTITLE = "OPIC 주제로 말하는 나의 의견 · 중학생 수준 · 템플릿 + 워드뱅크"
+FOOTER = "중학 영어 회화 교재 · 내 의견 말하기 템플릿 + 워드뱅크"
 
-# 템플릿 사용법 설명 (교재 앞부분)
+# 교재 사용법
 HOW_TO_USE = [
-    ("1. 워드뱅크 익히기", "먼저 단원의 핵심 단어를 소리 내어 읽어 봐요. 한글 발음을 참고하면 쉬워요."),
-    ("2. 핵심 표현 따라 하기", "질문과 대답 문장을 그대로 3번씩 말해 봐요. 회화의 뼈대가 되는 문장이에요."),
-    ("3. 대화 예시 읽기", "친구와 A, B 역할을 나누어 대화를 읽어 봐요. 역할을 바꿔서 한 번 더!"),
-    ("4. 나만의 대답 만들기", "빈칸에 워드뱅크 단어를 넣어 '나만의 문장'을 완성하고 말해 봐요."),
+    ("1. 워드뱅크 익히기", "오른쪽 워드뱅크의 단어와 뜻을 먼저 읽고, 오늘 쓸 단어 2~3개를 골라 둡니다."),
+    ("2. 5단계 템플릿 채우기", "왼쪽 템플릿의 빈칸(____)에 내 생각과 워드뱅크 단어를 넣어 문장을 완성합니다."),
+    ("3. 소리 내어 말하기", "①~⑤ 문장을 이어서 한 편의 '내 의견'으로 30초~1분간 말해 봅니다."),
+    ("4. 응용하기", "예시 대신 자신의 진짜 경험·생각으로 바꿔 말하면 완성도가 올라갑니다."),
 ]
+
+# 5단계 템플릿 골격 설명
+STEPS_GUIDE = [
+    ("① 주제 소개", "무엇에 대해 말할지 밝히기"),
+    ("② 내 의견·선호", "내 생각/선호를 한 문장으로 제시"),
+    ("③ 이유", "그렇게 생각하는 이유 1~2가지"),
+    ("④ 예시·경험", "구체적인 예나 내 경험 들기"),
+    ("⑤ 마무리", "핵심을 다시 정리하며 마무리"),
+]
+
+# 공통 '의견 말하기' 표현 모음 (연결어 · 패턴)
+EXPRESSIONS = [
+    ("의견 제시", [
+        ("In my opinion, ~", "제 생각에는 ~"),
+        ("Personally, I think (that) ~", "개인적으로 저는 ~라고 생각해요"),
+        ("From my point of view, ~", "제 관점에서는 ~"),
+        ("I'd say (that) ~", "~라고 말하고 싶어요"),
+    ]),
+    ("선호 표현", [
+        ("I prefer A to B", "저는 B보다 A를 더 좋아해요"),
+        ("I'm really into ~", "저는 ~에 푹 빠져 있어요"),
+        ("I'm a big fan of ~", "저는 ~의 열렬한 팬이에요"),
+        ("What I like most is ~", "제가 가장 좋아하는 것은 ~예요"),
+    ]),
+    ("이유·연결", [
+        ("The main reason is that ~", "가장 큰 이유는 ~이기 때문이에요"),
+        ("This is (mainly) because ~", "이는 (주로) ~이기 때문이에요"),
+        ("In addition, ~ / Also, ~", "게다가 ~ / 또한 ~"),
+        ("What's more, ~", "더욱이 ~"),
+    ]),
+    ("예시·마무리", [
+        ("For example / For instance, ~", "예를 들어 ~"),
+        ("Overall, ~ / All in all, ~", "전반적으로 ~"),
+        ("That's why ~", "그래서 ~인 거예요"),
+        ("However / On the other hand, ~", "하지만 / 반면에 ~"),
+    ]),
+]
+
+
+def _step(label, lines):
+    return {"label": label, "lines": lines}
+
 
 UNITS = [
     {
-        "emoji": "👪",
-        "title_ko": "나와 가족",
-        "title_en": "Me & My Family",
-        "words": [
-            ("family", "가족", "패밀리"),
-            ("mom", "엄마", "맘"),
-            ("dad", "아빠", "대드"),
-            ("sister", "언니 / 여동생", "시스터"),
-            ("brother", "형 / 남동생", "브라더"),
-            ("grandmother", "할머니", "그랜드마더"),
-            ("grandfather", "할아버지", "그랜드파더"),
-            ("name", "이름", "네임"),
-            ("age", "나이", "에이지"),
-            ("years old", "~살", "이어스 올드"),
-        ],
-        "patterns": [
-            ("What is your name?", "네 이름이 뭐야?", "My name is Jimin.", "내 이름은 지민이야."),
-            ("How old are you?", "몇 살이야?", "I am ten years old.", "나는 열 살이야."),
-            ("How many people are in your family?", "가족이 몇 명이야?", "There are four people in my family.", "우리 가족은 네 명이야."),
-            ("Who is in your family?", "가족이 누구누구야?", "My mom, my dad, and me.", "엄마, 아빠, 그리고 나야."),
-        ],
-        "dialogue": [
-            ("A", "Hi! What's your name?", "안녕! 네 이름이 뭐야?"),
-            ("B", "My name is Jimin. What's your name?", "내 이름은 지민이야. 너는?"),
-            ("A", "I'm Sora. How old are you?", "나는 소라야. 몇 살이야?"),
-            ("B", "I'm ten years old. How about you?", "나는 열 살이야. 너는?"),
-            ("A", "I'm eleven. How many people are in your family?", "나는 열한 살이야. 가족은 몇 명이야?"),
-            ("B", "There are four people. My mom, my dad, my brother, and me.", "네 명이야. 엄마, 아빠, 남동생, 그리고 나."),
-        ],
+        "emoji": "👪", "title_ko": "나와 가족", "title_en": "Me & My Family",
+        "prompt": "Tell me about your family.",
         "template": [
-            "My name is ____________.",
-            "I am ________ years old.",
-            "There are ______ people in my family.",
-            "I love my ____________.",
+            _step("① 주제 소개", [
+                ("I'd like to tell you about my family.", "제 가족에 대해 이야기하고 싶어요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, family is one of the most important things in my life.", "제 생각에 가족은 제 인생에서 가장 중요한 것 중 하나예요."),
+                ("Personally, I think my family is very ____ (close / caring).", "개인적으로 우리 가족은 매우 ____하다고 생각해요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that we ____ (spend a lot of time together).", "가장 큰 이유는 우리가 ____하기 때문이에요."),
+                ("In addition, my parents always ____ (support and encourage me).", "게다가 부모님은 항상 저를 ____해 주세요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, every weekend we ____ (have dinner and share our stories).", "예를 들어, 주말마다 우리는 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, I feel lucky to have such a ____ (supportive) family.", "전반적으로, 저는 이렇게 ____한 가족이 있어 운이 좋다고 느껴요."),
+            ]),
+        ],
+        "words": [
+            ("supportive", "힘이 되어주는 (형)"),
+            ("get along with", "~와 잘 지내다"),
+            ("close-knit", "사이가 돈독한 (형)"),
+            ("rely on", "~에게 의지하다"),
+            ("sibling", "형제자매 (명)"),
+            ("caring", "배려심 있는 (형)"),
+            ("respect", "존중하다 (동)"),
+            ("value", "소중히 여기다 (동)"),
+            ("relative", "친척 (명)"),
+            ("encourage", "격려하다 (동)"),
         ],
     },
     {
-        "emoji": "🏠",
-        "title_ko": "우리 집",
-        "title_en": "My House",
-        "words": [
-            ("house", "집", "하우스"),
-            ("room", "방", "룸"),
-            ("my room", "내 방", "마이 룸"),
-            ("kitchen", "부엌", "키친"),
-            ("living room", "거실", "리빙 룸"),
-            ("bathroom", "화장실", "배쓰룸"),
-            ("bed", "침대", "베드"),
-            ("desk", "책상", "데스크"),
-            ("window", "창문", "윈도우"),
-            ("door", "문", "도어"),
-        ],
-        "patterns": [
-            ("Where do you live?", "어디에 살아?", "I live in Seoul.", "나는 서울에 살아."),
-            ("What is your favorite room?", "제일 좋아하는 방은 어디야?", "My favorite room is my room.", "내가 제일 좋아하는 방은 내 방이야."),
-            ("What is in your room?", "네 방에는 뭐가 있어?", "There is a bed and a desk.", "침대랑 책상이 있어."),
-            ("Is your house big?", "너희 집은 커?", "Yes, it is. / No, it is small.", "응, 커. / 아니, 작아."),
-        ],
-        "dialogue": [
-            ("A", "Where do you live?", "어디에 살아?"),
-            ("B", "I live in Seoul. I live in an apartment.", "나는 서울에 살아. 아파트에 살아."),
-            ("A", "What is your favorite room?", "제일 좋아하는 방은 어디야?"),
-            ("B", "My favorite room is my room. I have a big desk.", "내 방이야. 큰 책상이 있어."),
-            ("A", "What is in your room?", "네 방에는 뭐가 있어?"),
-            ("B", "There is a bed, a desk, and many books.", "침대, 책상, 그리고 책이 많이 있어."),
-        ],
+        "emoji": "🏠", "title_ko": "우리 집", "title_en": "My Home",
+        "prompt": "Describe the place where you live.",
         "template": [
-            "I live in ____________.",
-            "My house has a ____________ and a ____________.",
-            "My favorite room is my ____________.",
-            "There is a ____________ in my room.",
+            _step("① 주제 소개", [
+                ("Let me describe the place where I live.", "제가 사는 곳을 소개할게요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, my home is very ____ (cozy and comfortable).", "제 생각에 우리 집은 매우 ____해요."),
+                ("Personally, my favorite space is ____ (my own room).", "개인적으로 제가 가장 좋아하는 공간은 ____예요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that ____ (it's where I can fully relax).", "가장 큰 이유는 ____이기 때문이에요."),
+                ("In addition, my neighborhood is ____ (quiet and convenient).", "게다가 우리 동네는 ____해요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, after school I usually ____ (relax and listen to music there).", "예를 들어, 방과 후에 저는 보통 거기서 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, my home is a place where I feel ____ (safe and relaxed).", "전반적으로, 우리 집은 제가 ____하다고 느끼는 곳이에요."),
+            ]),
+        ],
+        "words": [
+            ("cozy", "아늑한 (형)"),
+            ("spacious", "널찍한 (형)"),
+            ("furniture", "가구 (명)"),
+            ("neighborhood", "동네, 이웃 (명)"),
+            ("convenient", "편리한 (형)"),
+            ("atmosphere", "분위기 (명)"),
+            ("appliance", "가전제품 (명)"),
+            ("surroundings", "주변 환경 (명)"),
+            ("private", "개인적인, 사적인 (형)"),
+            ("decorate", "장식하다 (동)"),
         ],
     },
     {
-        "emoji": "🏫",
-        "title_ko": "학교 생활",
-        "title_en": "My School",
-        "words": [
-            ("school", "학교", "스쿨"),
-            ("teacher", "선생님", "티처"),
-            ("friend", "친구", "프렌드"),
-            ("classroom", "교실", "클래스룸"),
-            ("subject", "과목", "서브젝트"),
-            ("math", "수학", "매쓰"),
-            ("English", "영어", "잉글리시"),
-            ("science", "과학", "사이언스"),
-            ("homework", "숙제", "홈워크"),
-            ("lunch", "점심", "런치"),
-        ],
-        "patterns": [
-            ("What grade are you in?", "몇 학년이야?", "I am in fourth grade.", "나는 4학년이야."),
-            ("What is your favorite subject?", "제일 좋아하는 과목은?", "My favorite subject is science.", "내가 제일 좋아하는 과목은 과학이야."),
-            ("Who is your best friend?", "제일 친한 친구는 누구야?", "My best friend is Minho.", "제일 친한 친구는 민호야."),
-            ("What do you do at school?", "학교에서 뭐 해?", "I study and play with my friends.", "공부하고 친구들이랑 놀아."),
-        ],
-        "dialogue": [
-            ("A", "What grade are you in?", "몇 학년이야?"),
-            ("B", "I am in fourth grade.", "나는 4학년이야."),
-            ("A", "What is your favorite subject?", "제일 좋아하는 과목은?"),
-            ("B", "My favorite subject is science. It is fun!", "과학이야. 재미있어!"),
-            ("A", "Do you have a best friend?", "제일 친한 친구 있어?"),
-            ("B", "Yes. My best friend is Minho. We play every day.", "응. 민호야. 우리는 매일 놀아."),
-        ],
+        "emoji": "🏫", "title_ko": "학교 생활", "title_en": "My School Life",
+        "prompt": "Talk about your school life.",
         "template": [
-            "I am in ________ grade.",
-            "My favorite subject is ____________.",
-            "My teacher is ____________.",
-            "At school, I like to ____________.",
+            _step("① 주제 소개", [
+                ("Let me talk about my school life.", "제 학교 생활에 대해 이야기할게요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, the best part of school is ____ (being with my friends).", "제 생각에 학교에서 가장 좋은 점은 ____예요."),
+                ("Personally, my favorite subject is ____ because it is ____.", "개인적으로 제가 가장 좋아하는 과목은 ____인데, ____하기 때문이에요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that ____ (it is both fun and challenging).", "가장 큰 이유는 ____이기 때문이에요."),
+                ("Also, my teacher ____ (explains things clearly).", "또한, 선생님이 ____해 주세요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, in ____ class, we often ____ (do interesting experiments).", "예를 들어, ____ 수업에서 우리는 자주 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, school life is ____ (busy but rewarding) for me.", "전반적으로, 학교 생활은 저에게 ____해요."),
+            ]),
+        ],
+        "words": [
+            ("academic", "학업의 (형)"),
+            ("challenging", "어렵지만 해볼 만한 (형)"),
+            ("classmate", "반 친구 (명)"),
+            ("extracurricular", "방과 후의, 교외의 (형)"),
+            ("assignment", "과제 (명)"),
+            ("concentrate", "집중하다 (동)"),
+            ("participate", "참여하다 (동)"),
+            ("achieve", "성취하다 (동)"),
+            ("semester", "학기 (명)"),
+            ("rewarding", "보람 있는 (형)"),
         ],
     },
     {
-        "emoji": "🎨",
-        "title_ko": "취미",
-        "title_en": "My Hobbies",
-        "words": [
-            ("hobby", "취미", "하비"),
-            ("draw", "그림 그리다", "드로우"),
-            ("read", "읽다", "리드"),
-            ("play games", "게임하다", "플레이 게임즈"),
-            ("ride a bike", "자전거 타다", "라이드 어 바이크"),
-            ("sing", "노래하다", "싱"),
-            ("dance", "춤추다", "댄스"),
-            ("free time", "여가 시간", "프리 타임"),
-            ("fun", "재미있는", "펀"),
-            ("every day", "매일", "에브리 데이"),
-        ],
-        "patterns": [
-            ("What is your hobby?", "취미가 뭐야?", "My hobby is drawing.", "내 취미는 그림 그리기야."),
-            ("What do you do in your free time?", "여가 시간에 뭐 해?", "I like to read books.", "나는 책 읽는 걸 좋아해."),
-            ("Do you like drawing?", "그림 그리는 거 좋아해?", "Yes, I do. / No, I don't.", "응, 좋아해. / 아니, 안 좋아해."),
-            ("How often do you draw?", "얼마나 자주 그려?", "Every day. / On weekends.", "매일. / 주말에."),
-        ],
-        "dialogue": [
-            ("A", "What is your hobby?", "취미가 뭐야?"),
-            ("B", "My hobby is drawing. I like to draw animals.", "내 취미는 그림 그리기야. 동물 그리는 걸 좋아해."),
-            ("A", "Cool! What do you do in your free time?", "멋지다! 여가 시간엔 뭐 해?"),
-            ("B", "I read books and ride my bike.", "책 읽고 자전거 타."),
-            ("A", "How often do you ride your bike?", "자전거는 얼마나 자주 타?"),
-            ("B", "I ride my bike every weekend.", "주말마다 타."),
-        ],
+        "emoji": "🎨", "title_ko": "취미", "title_en": "My Hobbies",
+        "prompt": "What do you like to do in your free time?",
         "template": [
-            "My hobby is ____________.",
-            "In my free time, I like to ____________.",
-            "I do it ____________ (every day / on weekends).",
-            "It is so fun!",
+            _step("① 주제 소개", [
+                ("I'd like to talk about what I do in my free time.", "제가 여가 시간에 하는 일에 대해 이야기하고 싶어요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ (drawing) is the perfect way to spend my free time.", "제 생각에 ____은(는) 여가를 보내기에 완벽한 방법이에요."),
+                ("Personally, I'm really passionate about ____.", "개인적으로 저는 ____에 정말 열정적이에요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that it helps me ____ (relieve stress and relax).", "가장 큰 이유는 그것이 저를 ____하게 도와주기 때문이에요."),
+                ("In addition, it makes me feel ____ (creative and productive).", "게다가 그것은 저를 ____하게 느끼게 해요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I usually ____ (spend a few hours drawing on weekends).", "예를 들어, 저는 보통 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, this hobby makes my life much more ____ (enjoyable).", "전반적으로, 이 취미는 제 삶을 훨씬 더 ____하게 만들어요."),
+            ]),
+        ],
+        "words": [
+            ("leisure", "여가 (명)"),
+            ("pastime", "취미, 소일거리 (명)"),
+            ("passionate about", "~에 열정적인"),
+            ("relieve stress", "스트레스를 풀다"),
+            ("relaxing", "편안하게 해주는 (형)"),
+            ("pursue", "추구하다, 즐기다 (동)"),
+            ("creative", "창의적인 (형)"),
+            ("immerse oneself in", "~에 몰입하다"),
+            ("productive", "생산적인 (형)"),
+            ("regularly", "규칙적으로 (부)"),
         ],
     },
     {
-        "emoji": "⚽",
-        "title_ko": "운동",
-        "title_en": "Sports & Exercise",
-        "words": [
-            ("soccer", "축구", "사커"),
-            ("basketball", "농구", "배스킷볼"),
-            ("swimming", "수영", "스위밍"),
-            ("running", "달리기", "러닝"),
-            ("jump rope", "줄넘기", "점프 로프"),
-            ("badminton", "배드민턴", "배드민턴"),
-            ("ball", "공", "볼"),
-            ("team", "팀", "팀"),
-            ("play", "(운동을) 하다", "플레이"),
-            ("good at", "~을 잘하는", "굿 앳"),
-        ],
-        "patterns": [
-            ("What sport do you like?", "무슨 운동 좋아해?", "I like soccer.", "나는 축구를 좋아해."),
-            ("Can you swim?", "수영할 수 있어?", "Yes, I can. / No, I can't.", "응, 할 수 있어. / 아니, 못해."),
-            ("Where do you play?", "어디서 해?", "I play at the park.", "나는 공원에서 해."),
-            ("Who do you play with?", "누구랑 해?", "I play with my friends.", "친구들이랑 해."),
-        ],
-        "dialogue": [
-            ("A", "What sport do you like?", "무슨 운동 좋아해?"),
-            ("B", "I like soccer. I play every Saturday.", "축구 좋아해. 토요일마다 해."),
-            ("A", "Can you swim?", "수영할 수 있어?"),
-            ("B", "Yes, I can. I swim at the pool.", "응. 수영장에서 수영해."),
-            ("A", "Who do you play soccer with?", "축구는 누구랑 해?"),
-            ("B", "I play with my friends at the park.", "공원에서 친구들이랑 해."),
-        ],
+        "emoji": "⚽", "title_ko": "운동", "title_en": "Sports & Exercise",
+        "prompt": "Tell me about a sport or exercise you enjoy.",
         "template": [
-            "I like ____________.",
-            "I play it at the ____________.",
-            "I play with my ____________.",
-            "I am good at ____________.",
+            _step("① 주제 소개", [
+                ("Let me tell you about a sport I enjoy.", "제가 즐기는 운동에 대해 말할게요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ (soccer) is the most exciting sport.", "제 생각에 ____은(는) 가장 신나는 운동이에요."),
+                ("Personally, I prefer ____ to other sports.", "개인적으로 저는 다른 운동보다 ____을(를) 더 좋아해요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that it improves my ____ (fitness and stamina).", "가장 큰 이유는 그것이 제 ____을(를) 향상시키기 때문이에요."),
+                ("Also, it teaches me the importance of ____ (teamwork).", "또한, 그것은 저에게 ____의 중요성을 가르쳐 줘요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I ____ (play soccer with my friends twice a week).", "예를 들어, 저는 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, exercising regularly keeps me ____ (healthy and energetic).", "전반적으로, 규칙적인 운동은 저를 ____하게 유지해 줘요."),
+            ]),
+        ],
+        "words": [
+            ("work out", "운동하다"),
+            ("stamina", "체력, 지구력 (명)"),
+            ("competitive", "경쟁심이 강한 (형)"),
+            ("teamwork", "팀워크 (명)"),
+            ("opponent", "상대 (명)"),
+            ("endurance", "인내력, 지구력 (명)"),
+            ("fitness", "건강, 체력 (명)"),
+            ("energetic", "활기찬 (형)"),
+            ("warm up", "준비운동을 하다"),
+            ("improve", "향상시키다 (동)"),
         ],
     },
     {
-        "emoji": "🍚",
-        "title_ko": "음식",
-        "title_en": "Food & Meals",
-        "words": [
-            ("food", "음식", "푸드"),
-            ("rice", "밥", "라이스"),
-            ("pizza", "피자", "핏자"),
-            ("chicken", "치킨", "치킨"),
-            ("fruit", "과일", "프룻"),
-            ("apple", "사과", "애플"),
-            ("milk", "우유", "밀크"),
-            ("breakfast", "아침밥", "브렉퍼스트"),
-            ("dinner", "저녁밥", "디너"),
-            ("delicious", "맛있는", "딜리셔스"),
-        ],
-        "patterns": [
-            ("What is your favorite food?", "제일 좋아하는 음식은?", "My favorite food is pizza.", "내가 제일 좋아하는 음식은 피자야."),
-            ("What do you eat for breakfast?", "아침에 뭐 먹어?", "I eat rice and eggs.", "밥이랑 계란을 먹어."),
-            ("Do you like fruit?", "과일 좋아해?", "Yes, I love apples.", "응, 사과를 정말 좋아해."),
-            ("Is it delicious?", "맛있어?", "Yes, it is very delicious!", "응, 정말 맛있어!"),
-        ],
-        "dialogue": [
-            ("A", "What is your favorite food?", "제일 좋아하는 음식은?"),
-            ("B", "My favorite food is pizza. It is delicious!", "피자야. 정말 맛있어!"),
-            ("A", "What do you eat for breakfast?", "아침엔 뭐 먹어?"),
-            ("B", "I eat rice and eggs. I drink milk, too.", "밥이랑 계란 먹어. 우유도 마셔."),
-            ("A", "Do you like fruit?", "과일 좋아해?"),
-            ("B", "Yes, I love apples and bananas.", "응, 사과랑 바나나 좋아해."),
-        ],
+        "emoji": "🍚", "title_ko": "음식", "title_en": "Food & Meals",
+        "prompt": "Talk about your favorite food.",
         "template": [
-            "My favorite food is ____________.",
-            "For breakfast, I eat ____________.",
-            "I like ____________, but I don't like ____________.",
-            "It is delicious!",
+            _step("① 주제 소개", [
+                ("I'd like to talk about my favorite food.", "제가 가장 좋아하는 음식에 대해 이야기하고 싶어요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ (pizza) is the most delicious food.", "제 생각에 ____은(는) 가장 맛있는 음식이에요."),
+                ("Personally, I prefer ____ (spicy) food.", "개인적으로 저는 ____한 음식을 더 좋아해요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is its ____ (rich flavor).", "가장 큰 이유는 그것의 ____ 때문이에요."),
+                ("In addition, it is ____ (fairly nutritious and filling).", "게다가 그것은 ____해요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I often ____ (order pizza when I hang out with friends).", "예를 들어, 저는 자주 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, good food always ____ (makes me happy).", "전반적으로, 맛있는 음식은 항상 저를 ____하게 해요."),
+            ]),
+        ],
+        "words": [
+            ("cuisine", "요리, (특정)음식 (명)"),
+            ("flavor", "맛, 풍미 (명)"),
+            ("ingredient", "재료 (명)"),
+            ("nutritious", "영양가 있는 (형)"),
+            ("spicy", "매운 (형)"),
+            ("recipe", "조리법 (명)"),
+            ("appetite", "식욕 (명)"),
+            ("homemade", "집에서 만든 (형)"),
+            ("balanced diet", "균형 잡힌 식단"),
+            ("prefer", "선호하다 (동)"),
         ],
     },
     {
-        "emoji": "🐶",
-        "title_ko": "반려동물",
-        "title_en": "Pets",
-        "words": [
-            ("pet", "반려동물", "펫"),
-            ("dog", "강아지", "도그"),
-            ("cat", "고양이", "캣"),
-            ("rabbit", "토끼", "래빗"),
-            ("fish", "물고기", "피시"),
-            ("bird", "새", "버드"),
-            ("cute", "귀여운", "큐트"),
-            ("feed", "먹이를 주다", "피드"),
-            ("walk", "산책시키다", "워크"),
-            ("name", "이름", "네임"),
-        ],
-        "patterns": [
-            ("Do you have a pet?", "반려동물 있어?", "Yes, I have a dog. / No, I don't.", "응, 강아지가 있어. / 아니, 없어."),
-            ("What is its name?", "이름이 뭐야?", "Its name is Coco.", "이름은 코코야."),
-            ("What does it look like?", "어떻게 생겼어?", "It is small and cute.", "작고 귀여워."),
-            ("What do you do with your pet?", "반려동물이랑 뭐 해?", "I feed it and walk it.", "먹이 주고 산책시켜."),
-        ],
-        "dialogue": [
-            ("A", "Do you have a pet?", "반려동물 있어?"),
-            ("B", "Yes, I have a dog. Its name is Coco.", "응, 강아지 있어. 이름은 코코야."),
-            ("A", "What does Coco look like?", "코코는 어떻게 생겼어?"),
-            ("B", "Coco is small and brown. It is very cute.", "코코는 작고 갈색이야. 정말 귀여워."),
-            ("A", "What do you do with Coco?", "코코랑 뭐 해?"),
-            ("B", "I feed Coco and walk it every day.", "매일 먹이 주고 산책시켜."),
-        ],
+        "emoji": "🐶", "title_ko": "반려동물", "title_en": "Pets",
+        "prompt": "Do you have a pet, or would you like one?",
         "template": [
-            "I have a ____________.",
-            "Its name is ____________.",
-            "It is ____________ and ____________.",
-            "I like to ____________ with my pet.",
+            _step("① 주제 소개", [
+                ("Let me share my thoughts about pets.", "반려동물에 대한 제 생각을 나눌게요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, pets are wonderful ____ (companions).", "제 생각에 반려동물은 훌륭한 ____예요."),
+                ("Personally, I would love to have a ____ (dog).", "개인적으로 저는 ____을(를) 키우고 싶어요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that they are ____ (loyal and affectionate).", "가장 큰 이유는 그들이 ____하기 때문이에요."),
+                ("In addition, taking care of a pet teaches ____ (responsibility).", "게다가 반려동물을 돌보는 것은 ____을(를) 가르쳐 줘요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, a dog will ____ (happily greet you whenever you come home).", "예를 들어, 강아지는 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, having a pet can make life much more ____ (joyful).", "전반적으로, 반려동물을 키우는 것은 삶을 훨씬 더 ____하게 만들 수 있어요."),
+            ]),
+        ],
+        "words": [
+            ("companion", "동반자, 친구 (명)"),
+            ("loyal", "충성스러운 (형)"),
+            ("affectionate", "애정 어린 (형)"),
+            ("responsibility", "책임 (명)"),
+            ("take care of", "~을 돌보다"),
+            ("adopt", "입양하다 (동)"),
+            ("obedient", "순종적인 (형)"),
+            ("be attached to", "~에 정들다"),
+            ("breed", "품종 (명)"),
+            ("groom", "손질하다 (동)"),
         ],
     },
     {
-        "emoji": "🌈",
-        "title_ko": "날씨와 계절",
-        "title_en": "Weather & Seasons",
-        "words": [
-            ("weather", "날씨", "웨더"),
-            ("sunny", "맑은", "써니"),
-            ("rainy", "비 오는", "레이니"),
-            ("snowy", "눈 오는", "스노위"),
-            ("hot", "더운", "핫"),
-            ("cold", "추운", "콜드"),
-            ("spring", "봄", "스프링"),
-            ("summer", "여름", "써머"),
-            ("fall", "가을", "폴"),
-            ("winter", "겨울", "윈터"),
-        ],
-        "patterns": [
-            ("How is the weather today?", "오늘 날씨 어때?", "It is sunny and warm.", "맑고 따뜻해."),
-            ("What is your favorite season?", "제일 좋아하는 계절은?", "My favorite season is summer.", "내가 제일 좋아하는 계절은 여름이야."),
-            ("What do you do in summer?", "여름에 뭐 해?", "I go swimming.", "수영하러 가."),
-            ("Do you like winter?", "겨울 좋아해?", "Yes, I like the snow.", "응, 눈이 좋아."),
-        ],
-        "dialogue": [
-            ("A", "How is the weather today?", "오늘 날씨 어때?"),
-            ("B", "It is sunny and warm.", "맑고 따뜻해."),
-            ("A", "What is your favorite season?", "제일 좋아하는 계절은?"),
-            ("B", "My favorite season is summer. I like to go swimming.", "여름이야. 수영하러 가는 걸 좋아해."),
-            ("A", "I like winter. I can make a snowman!", "나는 겨울이 좋아. 눈사람을 만들 수 있거든!"),
-            ("B", "That sounds fun!", "재미있겠다!"),
-        ],
+        "emoji": "🌈", "title_ko": "날씨와 계절", "title_en": "Weather & Seasons",
+        "prompt": "Talk about your favorite season.",
         "template": [
-            "Today it is ____________.",
-            "My favorite season is ____________.",
-            "In ____________, I like to ____________.",
-            "I don't like ____________ weather.",
+            _step("① 주제 소개", [
+                ("I'd like to talk about my favorite season.", "제가 가장 좋아하는 계절에 대해 이야기하고 싶어요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ (fall) is the most pleasant season.", "제 생각에 ____은(는) 가장 쾌적한 계절이에요."),
+                ("Personally, I prefer ____ (mild) weather.", "개인적으로 저는 ____한 날씨를 더 좋아해요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that the ____ (temperature is cool and comfortable).", "가장 큰 이유는 ____이기 때문이에요."),
+                ("In addition, I can ____ (do many outdoor activities).", "게다가 저는 ____할 수 있어요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, in ____ (fall) I usually ____ (go hiking to enjoy the scenery).", "예를 들어, ____에 저는 보통 ____해요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, the weather really ____ (affects my mood).", "전반적으로, 날씨는 제 ____에 정말 영향을 줘요."),
+            ]),
+        ],
+        "words": [
+            ("climate", "기후 (명)"),
+            ("forecast", "예보 (명)"),
+            ("humid", "습한 (형)"),
+            ("chilly", "쌀쌀한 (형)"),
+            ("mild", "온화한 (형)"),
+            ("temperature", "기온 (명)"),
+            ("breeze", "산들바람 (명)"),
+            ("pleasant", "쾌적한 (형)"),
+            ("gloomy", "우중충한 (형)"),
+            ("affect", "영향을 주다 (동)"),
         ],
     },
     {
-        "emoji": "🎬",
-        "title_ko": "영화와 음악",
-        "title_en": "Movies & Music",
-        "words": [
-            ("movie", "영화", "무비"),
-            ("music", "음악", "뮤직"),
-            ("song", "노래", "송"),
-            ("sing", "노래하다", "싱"),
-            ("listen", "듣다", "리슨"),
-            ("watch", "보다", "워치"),
-            ("funny", "웃긴", "퍼니"),
-            ("exciting", "신나는", "익사이팅"),
-            ("singer", "가수", "싱어"),
-            ("K-pop", "케이팝", "케이팝"),
-        ],
-        "patterns": [
-            ("Do you like movies?", "영화 좋아해?", "Yes, I love movies.", "응, 영화 정말 좋아해."),
-            ("What is your favorite movie?", "제일 좋아하는 영화는?", "My favorite movie is Frozen.", "내가 제일 좋아하는 영화는 겨울왕국이야."),
-            ("What music do you like?", "무슨 음악 좋아해?", "I like K-pop.", "나는 케이팝을 좋아해."),
-            ("Who is your favorite singer?", "제일 좋아하는 가수는?", "My favorite singer is IU.", "내가 제일 좋아하는 가수는 아이유야."),
-        ],
-        "dialogue": [
-            ("A", "Do you like movies?", "영화 좋아해?"),
-            ("B", "Yes! My favorite movie is Frozen. It is exciting.", "응! 제일 좋아하는 영화는 겨울왕국이야. 신나."),
-            ("A", "What music do you like?", "무슨 음악 좋아해?"),
-            ("B", "I like K-pop. I listen to music every day.", "케이팝 좋아해. 매일 음악 들어."),
-            ("A", "Who is your favorite singer?", "제일 좋아하는 가수는?"),
-            ("B", "I like IU. Her songs are great.", "아이유 좋아해. 노래가 정말 좋아."),
-        ],
+        "emoji": "🎬", "title_ko": "영화와 음악", "title_en": "Movies & Music",
+        "prompt": "Talk about the movies or music you enjoy.",
         "template": [
-            "My favorite movie is ____________.",
-            "It is ____________ (funny / exciting).",
-            "I like ____________ music.",
-            "My favorite singer is ____________.",
+            _step("① 주제 소개", [
+                ("Let me talk about the movies and music I enjoy.", "제가 즐기는 영화와 음악에 대해 이야기할게요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ (action) movies are the most entertaining.", "제 생각에 ____ 영화가 가장 재미있어요."),
+                ("Personally, I'm a big fan of ____ (K-pop).", "개인적으로 저는 ____의 열렬한 팬이에요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that the ____ (plot / melody) is really ____ (exciting).", "가장 큰 이유는 ____이(가) 정말 ____하기 때문이에요."),
+                ("Also, the ____ (lyrics / soundtrack) match my mood.", "또한, ____이(가) 제 기분과 잘 맞아요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, I recently enjoyed ____, and it was really ____ (touching).", "예를 들어, 저는 최근에 ____을(를) 즐겼는데, 정말 ____했어요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, movies and music help me ____ (relax and recharge).", "전반적으로, 영화와 음악은 제가 ____하도록 도와줘요."),
+            ]),
+        ],
+        "words": [
+            ("genre", "장르 (명)"),
+            ("plot", "줄거리 (명)"),
+            ("soundtrack", "사운드트랙 (명)"),
+            ("lyrics", "가사 (명)"),
+            ("touching", "감동적인 (형)"),
+            ("catchy", "기억하기 쉬운 (형)"),
+            ("talented", "재능 있는 (형)"),
+            ("entertaining", "재미있는 (형)"),
+            ("recommend", "추천하다 (동)"),
+            ("release", "개봉/발매하다 (동)"),
         ],
     },
     {
-        "emoji": "✈️",
-        "title_ko": "여행과 방학",
-        "title_en": "Travel & Vacation",
-        "words": [
-            ("travel", "여행하다", "트래블"),
-            ("trip", "여행", "트립"),
-            ("vacation", "방학 / 휴가", "베케이션"),
-            ("beach", "해변", "비치"),
-            ("mountain", "산", "마운틴"),
-            ("sea", "바다", "씨"),
-            ("plane", "비행기", "플레인"),
-            ("train", "기차", "트레인"),
-            ("visit", "방문하다", "비짓"),
-            ("fun", "재미있는", "펀"),
-        ],
-        "patterns": [
-            ("Where do you want to go?", "어디에 가고 싶어?", "I want to go to the beach.", "나는 해변에 가고 싶어."),
-            ("What do you do on vacation?", "방학 때 뭐 해?", "I visit my grandmother.", "할머니를 뵈러 가."),
-            ("How do you go there?", "거기 어떻게 가?", "I go by train.", "기차를 타고 가."),
-            ("Was it fun?", "재미있었어?", "Yes, it was so fun!", "응, 정말 재미있었어!"),
-        ],
-        "dialogue": [
-            ("A", "What do you do on vacation?", "방학 때 뭐 해?"),
-            ("B", "I visit my grandmother. She lives in Busan.", "할머니를 뵈러 가. 부산에 사셔."),
-            ("A", "How do you go there?", "거기 어떻게 가?"),
-            ("B", "I go by train. It is fast.", "기차 타고 가. 빨라."),
-            ("A", "Where do you want to go next?", "다음엔 어디 가고 싶어?"),
-            ("B", "I want to go to the beach. I love the sea!", "해변에 가고 싶어. 바다 정말 좋아!"),
-        ],
+        "emoji": "✈️", "title_ko": "여행과 방학", "title_en": "Travel & Vacation",
+        "prompt": "Talk about a trip or how you spend your vacation.",
         "template": [
-            "On vacation, I ____________.",
-            "I want to go to ____________.",
-            "I go there by ____________ (car / plane / train).",
-            "It is so fun!",
+            _step("① 주제 소개", [
+                ("I'd like to talk about how I spend my vacation.", "제가 방학을 어떻게 보내는지 이야기하고 싶어요."),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, traveling is the best way to spend a vacation.", "제 생각에 여행은 방학을 보내는 가장 좋은 방법이에요."),
+                ("Personally, I really want to visit ____ (Jeju Island).", "개인적으로 저는 ____에 정말 가보고 싶어요."),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that I can ____ (experience new cultures and scenery).", "가장 큰 이유는 제가 ____할 수 있기 때문이에요."),
+                ("In addition, traveling helps me ____ (broaden my horizons).", "게다가 여행은 제가 ____하도록 도와줘요."),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, last vacation I ____ (visited the beach and went sightseeing).", "예를 들어, 지난 방학에 저는 ____했어요."),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, a good trip is always ____ (memorable).", "전반적으로, 좋은 여행은 항상 ____해요."),
+            ]),
+        ],
+        "words": [
+            ("destination", "목적지 (명)"),
+            ("sightseeing", "관광 (명)"),
+            ("scenery", "경치 (명)"),
+            ("accommodation", "숙소 (명)"),
+            ("explore", "탐험하다 (동)"),
+            ("memorable", "기억에 남는 (형)"),
+            ("itinerary", "여행 일정 (명)"),
+            ("adventure", "모험 (명)"),
+            ("broaden one's horizons", "견문을 넓히다"),
+            ("local", "현지의 (형)"),
         ],
     },
 ]
