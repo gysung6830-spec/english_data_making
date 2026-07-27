@@ -195,13 +195,24 @@
   /* TOC */
   .toc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px;box-shadow:var(--shadow);}
   .toc h2{margin:0 0 4px;font-size:1.6rem;}
-  .toc .sub{color:var(--muted);margin:0 0 18px;font-weight:600;}
-  .toc a{text-decoration:none;color:inherit;display:block;}
-  .toc .row{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline;}
-  .toc .row:last-child{border-bottom:none;}
-  .toc .rn{font-weight:800;color:var(--primary);width:34px;flex:0 0 34px;}
-  .toc .rt{font-weight:700;}
-  .toc .rd{color:var(--muted);font-size:.88rem;margin-left:auto;text-align:right;max-width:52%;}
+  .toc .sub{color:var(--muted);margin:0 0 6px;font-weight:600;}
+  .toc .legend{display:flex;gap:8px;color:var(--muted);font-size:.72rem;font-weight:700;letter-spacing:.3px;margin:0 0 14px;padding-bottom:12px;border-bottom:2px solid var(--ink);}
+  .toc .legend span{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:2px 9px;}
+  .toc a{text-decoration:none;color:inherit;display:block;border-radius:10px;transition:background .12s;}
+  .toc a:hover{background:var(--primary-soft);}
+  .toc .row{display:flex;gap:16px;padding:12px 10px;border-bottom:1px solid var(--line);align-items:center;}
+  .toc a:last-child .row{border-bottom:none;}
+  .toc .rn{font-weight:800;color:#fff;background:var(--primary);width:38px;height:38px;flex:0 0 38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.95rem;}
+  .toc .rn.intro{background:var(--amber);}
+  .toc .mid{flex:0 0 auto;display:flex;flex-direction:column;gap:5px;min-width:132px;}
+  .toc .rt{font-weight:800;font-size:1.06rem;line-height:1.1;}
+  .toc .img{align-self:flex-start;font-size:.74rem;font-weight:800;color:var(--primary);background:var(--primary-soft);padding:2px 9px;border-radius:6px;}
+  .toc .img.intro{color:var(--amber);background:var(--amber-soft);}
+  .toc .rd{color:var(--ink-soft);font-size:.85rem;margin-left:auto;text-align:right;max-width:50%;line-height:1.5;font-weight:600;}
+  @media(max-width:560px){
+    .toc .row{flex-wrap:wrap;}
+    .toc .rd{margin-left:54px;text-align:left;max-width:100%;margin-top:6px;}
+  }
 
   .prose h2{font-size:1.5rem;}
   .prose p{color:var(--ink-soft);}
@@ -281,17 +292,20 @@
 <section class="chapter" id="toc">
   <div class="toc">
     <h2>목차</h2>
-    <p class="sub">전치사 · 핵심 이미지 · 의미 갈래</p>
-    <a href="#ch00"><div class="row"><span class="rn">00</span><span class="rt">들어가기</span><span class="rd">전치사가 어려운 이유</span></div></a>
-    <a href="#ch01"><div class="row"><span class="rn">01</span><span class="rt">OF</span><span class="rd">-의 / 목적어 / 동격 / 형용사화 / 부분 / 박탈 / 한 덩어리</span></div></a>
-    <a href="#ch02"><div class="row"><span class="rn">02</span><span class="rt">FOR</span><span class="rd">교환 / 방향(찬반) / 원인·이유</span></div></a>
-    <a href="#ch03"><div class="row"><span class="rn">03</span><span class="rt">ABOUT</span><span class="rd">약(수치) / -에 관한 / 여기저기에 / 구문</span></div></a>
-    <a href="#ch04"><div class="row"><span class="rn">04</span><span class="rt">BEYOND</span><span class="rd">부정어 기능 / beyond의 친구들</span></div></a>
-    <a href="#ch05"><div class="row"><span class="rn">05</span><span class="rt">OFF</span><span class="rd">분리·이탈 / 강조·긍정</span></div></a>
-    <a href="#ch06"><div class="row"><span class="rn">06</span><span class="rt">ON</span><span class="rd">공간 / 이용 / 계속 / 집중 / 영향력 / 기반 / 표면상</span></div></a>
-    <a href="#ch07"><div class="row"><span class="rn">07</span><span class="rt">AGAINST</span><span class="rd">-에 대항하여 / -에 맞대어(비교)</span></div></a>
-    <a href="#ch08"><div class="row"><span class="rn">08</span><span class="rt">OVER</span><span class="rd">기본 / 선호(A over B) / 지배력 / -에 대해</span></div></a>
-    <a href="#ch09"><div class="row"><span class="rn">09</span><span class="rt">FROM</span><span class="rd">원인·출처 / 분리</span></div></a>
+    <p class="sub">각 전치사를 <b>핵심 이미지</b> 하나로 기억하고, 거기서 갈라지는 <b>의미 갈래</b>로 확장한다.</p>
+    <div class="legend"><span>번호</span><span>전치사 · 핵심 이미지</span><span>의미 갈래</span></div>
+
+    <a href="#intro-structure"><div class="row"><span class="rn intro">✦</span><span class="mid"><span class="rt">이 책의 구조</span><span class="img intro">3단 위계로 읽기</span></span><span class="rd">핵심 이미지 → 의미 갈래 → 예문·QUIZ</span></div></a>
+    <a href="#ch00"><div class="row"><span class="rn intro">00</span><span class="mid"><span class="rt">들어가기</span><span class="img intro">조사 vs 어순</span></span><span class="rd">전치사가 한국인에게 어려운 이유</span></div></a>
+    <a href="#ch01"><div class="row"><span class="rn">01</span><span class="mid"><span class="rt">OF</span><span class="img">분리·소속</span></span><span class="rd">기본(-의) · 목적어 · 동격 · 형용사화 · 부분 · 박탈 · 한 덩어리</span></div></a>
+    <a href="#ch02"><div class="row"><span class="rn">02</span><span class="mid"><span class="rt">FOR</span><span class="img">교환</span></span><span class="rd">교환 · 방향(찬반) · 원인·이유</span></div></a>
+    <a href="#ch03"><div class="row"><span class="rn">03</span><span class="mid"><span class="rt">ABOUT</span><span class="img">주변을 맴돌다</span></span><span class="rd">약(수치) · -에 관한 · 여기저기에 · 구문</span></div></a>
+    <a href="#ch04"><div class="row"><span class="rn">04</span><span class="mid"><span class="rt">BEYOND</span><span class="img">한계를 넘어섬</span></span><span class="rd">부정어 기능 · beyond의 친구들</span></div></a>
+    <a href="#ch05"><div class="row"><span class="rn">05</span><span class="mid"><span class="rt">OFF</span><span class="img">분리·이탈</span></span><span class="rd">분리(비공개·무관) · 강조·긍정</span></div></a>
+    <a href="#ch06"><div class="row"><span class="rn">06</span><span class="mid"><span class="rt">ON</span><span class="img">접촉</span></span><span class="rd">공간 · 이용 · feed · 계속 · 집중 · 영향력 · 기반 · 표면상</span></div></a>
+    <a href="#ch07"><div class="row"><span class="rn">07</span><span class="mid"><span class="rt">AGAINST</span><span class="img">맞부딪힘</span></span><span class="rd">-에 대항하여 · -에 맞대어(비교)</span></div></a>
+    <a href="#ch08"><div class="row"><span class="rn">08</span><span class="mid"><span class="rt">OVER</span><span class="img">위에서 덮다</span></span><span class="rd">기본 · 선호(A over B) · 지배력 · -에 대해</span></div></a>
+    <a href="#ch09"><div class="row"><span class="rn">09</span><span class="mid"><span class="rt">FROM</span><span class="img">-로부터</span></span><span class="rd">원인·출처 · 분리</span></div></a>
   </div>
 </section>
 
