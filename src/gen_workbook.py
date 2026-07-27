@@ -141,6 +141,33 @@ def step2_passage(hl):
     return " ".join(parts)
 
 
+def connective_passage(hl, clues):
+    """순서·삽입 전용 STEP2 지문 — 노랑 형광펜 없이 연결고리(지시어·연결어·시간)만 색칠."""
+    txt = " ".join(seg.get("t", "") for seg in hl).strip()
+    low = txt.lower()
+    spans = []
+    for c in (clues or []):
+        m = c.get("marker", ""); kind = c.get("kind", "")
+        if not m:
+            continue
+        i = low.find(m.lower())
+        if i >= 0:
+            spans.append((i, i + len(m), CLUE_CLS.get(kind, "ck-ref")))
+    spans.sort()
+    merged = []
+    for a, b, cls in spans:
+        if merged and a < merged[-1][1]:
+            continue
+        merged.append([a, b, cls])
+    out, i = [], 0
+    for a, b, cls in merged:
+        out.append(esc(txt[i:a]))
+        out.append(f'<span class="pclue {cls}">{esc(txt[a:b])}</span>')
+        i = b
+    out.append(esc(txt[i:]))
+    return "".join(out)
+
+
 def clean_passage(hl, band):
     """STEP1 문제용 깨끗한 지문 = hl 문장들을 그대로 이어붙임(형광펜 없음)."""
     txt = " ".join(seg.get("t", "") for seg in hl).strip()
@@ -294,10 +321,15 @@ def render_spread(rec, c, idx):
     step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
     reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}))
     pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
+    # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
+    passage_html = connective_passage(hl, cn.get("clues") if cn else []) if (seqtype and cn) else step2_passage(hl)
+    clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
+                   '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
-      <div class="psg">{step2_passage(hl)}</div>
+      {clue_legend}
+      <div class="psg">{passage_html}</div>
       {reason_block}
       {pline}
       {opts_block(c.get("opts", []), answer)}
@@ -368,6 +400,55 @@ def band_divider(b, recs, seq, total_bands):
     chips = "".join(f'<span class="chip {cl}">{esc(tx)}</span>' for tx, cl in REMIND.get(b, REMIND["31-34"]))
     # 대표 번호 배지(번호대 첫 숫자)
     head_no = b.split("-")[0]
+    seqmode = b in ("36-37", "38-39")
+    if seqmode:
+        stype = "순서" if b == "36-37" else "삽입"
+        formula = "지시어·연결어·시간으로 조각을 잇는다 (노랑 형광펜 아님)"
+        tip = ("각 조각의 <b>첫머리 지시어·연결어</b>가 어느 조각 뒤에 오는지로 사슬을 잇는다. 학생들이 가장 어려워하는 유형 — 지시어만 잡으면 풀린다."
+               if stype == "순서" else
+               "주어진 문장의 <b>지시어(this·they)</b>가 가리킬 선행어 자리, 그리고 <b>흐름이 끊긴 곳</b>을 찾는다. 지시어 추적이 열쇠다.")
+        trap = ('<li>지시어 없는 조각 = 대개 <b>첫 번째</b>(주어진 글 바로 뒤)</li>'
+                '<li>각 조각 <b>첫 단어</b>부터 확인 — 성급히 첫 조각 확정 금지</li>'
+                '<li>연결어 <b>방향</b>(But 역접·also 첨가·so 인과) 어긋나면 오답</li>'
+                if stype == "순서" else
+                '<li>넣을 문장의 <b>지시어</b>부터 → 선행어 있는 위치 <b>뒤</b>만 후보</li>'
+                '<li>넣기 <b>전·후 both</b> 읽어 흐름 끊김 확인</li>'
+                '<li>연결어·지시어가 <b>갑자기 튀는</b> 곳이 정답</li>')
+        attack = f'''
+      <div class="bd-formula"><span class="k">유형 공식</span>{esc(formula)}</div>
+      <div class="bd-tip"><span class="h">이렇게 접근한다</span>{tip}</div>
+      <div class="bd-attack">
+        <div class="atk">
+          <div class="ah">🔎 지시어 잡는 법 — 이 유형의 열쇠</div>
+          <ul>
+            <li><b>this/that/these + 명사</b> → 바로 앞에 그 명사·개념이 있어야 함</li>
+            <li><b>it/they/them</b> → 수(단·복수) 맞는 <b>가장 가까운 앞 명사</b></li>
+            <li><b>such · the same · another</b> → '먼저 나온 것'이 전제</li>
+            <li>핵심: <b>지시어는 늘 '앞'을 가리킨다.</b> 선행어가 앞에 없으면 그 자리엔 못 온다.</li>
+          </ul>
+        </div>
+        <div class="atk trap">
+          <div class="ah">🚫 오답 찍기 방지 체크</div>
+          <ul>{trap}</ul>
+        </div>
+      </div>
+      <div class="bd-drill">
+        <div class="ah">✏️ 지시어 미니 드릴 — 밑줄이 가리키는 것은?</div>
+        <div class="drow">Robots now handle many factory jobs. <u>These changes</u> worry some workers. <span class="ar">→</span> <span class="ans">robots handling factory jobs</span></div>
+        <div class="drow">She solved the puzzle in seconds. <u>Such speed</u> amazed everyone. <span class="ar">→</span> <span class="ans">solving the puzzle in seconds</span></div>
+        <div class="drow">The city built three new parks. <u>They</u> soon became popular. <span class="ar">→</span> <span class="ans">the three new parks</span></div>
+      </div>'''
+        body = attack
+    else:
+        body = f'''
+      <div class="bd-formula"><span class="k">유형 공식</span>{esc(formula)}</div>
+      <div class="bd-tip"><span class="h">이렇게 접근한다</span>{tip}</div>
+      <div class="bd-steps">
+        <div class="st"><span class="k">STEP 1</span><b>직접 풀기</b><span class="d">신호를 떠올리며 직접 형광펜을 치고 답을 고른다 (왼쪽 페이지)</span></div>
+        <div class="st"><span class="k">STEP 2</span><b>훈련 · 정답 칠</b><span class="d">🟡읽을 문장·🔴칠한 근거 + 노랑만으로 정답 도출 + 선지 판정</span></div>
+        <div class="st"><span class="k">STEP 3</span><b>직독직해</b><span class="d">같은 형광펜 색끼리 영↔한 청크 대응 (오른쪽 페이지)</span></div>
+      </div>'''
+    remind_head = "🔗 연결고리 단서" if seqmode else "📢 이 유형 신호 리마인더"
     return f'''<section class="banddiv"><span class="wbm">wbspread</span>
       <div class="bd-top">
         <span class="bd-seq">유형 {seq:02d} / {total_bands:02d}</span>
@@ -379,15 +460,8 @@ def band_divider(b, recs, seq, total_bands):
           <div class="bd-ty">{esc(typ)}</div>
           <div class="bd-meta">{esc(b)}번대 · 실제 기출 <b>{cnt}문항</b></div>
         </div>
-      </div>
-      <div class="bd-formula"><span class="k">유형 공식</span>{esc(formula)}</div>
-      <div class="bd-tip"><span class="h">이렇게 접근한다</span>{tip}</div>
-      <div class="bd-steps">
-        <div class="st"><span class="k">STEP 1</span><b>직접 풀기</b><span class="d">신호를 떠올리며 직접 형광펜을 치고 답을 고른다 (왼쪽 페이지)</span></div>
-        <div class="st"><span class="k">STEP 2</span><b>훈련 · 정답 칠</b><span class="d">🟡읽을 문장·🔴칠한 근거 + 노랑만으로 정답 도출 + 선지 판정</span></div>
-        <div class="st"><span class="k">STEP 3</span><b>직독직해</b><span class="d">같은 형광펜 색끼리 영↔한 청크 대응 (오른쪽 페이지)</span></div>
-      </div>
-      <div class="bd-remind"><span class="h">📢 이 유형 신호 리마인더</span><div class="chips">{chips}</div></div>
+      </div>{body}
+      <div class="bd-remind"><span class="h">{remind_head}</span><div class="chips">{chips}</div></div>
     </section>'''
 
 
@@ -457,6 +531,21 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .bd-steps .st .k{ display:inline-block; font-size:10px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:6px; padding:2px 9px; margin-bottom:6px; }
 .bd-steps .st b{ display:block; font-size:14px; color:var(--ink-d); margin-bottom:5px; }
 .bd-steps .st .d{ font-size:11px; line-height:1.55; color:var(--muted); }
+.bd-attack{ display:flex; gap:11px; margin-bottom:13px; }
+.bd-attack .atk{ flex:1; background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:11px 14px 12px; }
+.bd-attack .atk.trap{ background:#fdf3f2; border-color:#e6bcb7; }
+.bd-attack .ah{ font-size:12px; font-weight:800; color:var(--ink-d); margin-bottom:7px; }
+.bd-attack .atk.trap .ah{ color:#b3453b; }
+.bd-attack .atk ul{ margin:0; padding-left:16px; }
+.bd-attack .atk li{ font-size:11.5px; line-height:1.68; color:#33414d; margin-bottom:4px; }
+.bd-attack .atk li b{ color:var(--ink-d); } .bd-attack .atk.trap li b{ color:#b3453b; }
+.bd-drill{ background:#f3f8ff; border:1.5px solid #cadcf0; border-radius:9px; padding:11px 15px 12px; margin-bottom:14px; }
+.bd-drill .ah{ font-size:12px; font-weight:800; color:#2f6fb0; margin-bottom:8px; }
+.bd-drill .drow{ font-size:12px; line-height:1.5; color:#2b3a34; padding:5px 0; border-bottom:1px dashed #d3e2f1; }
+.bd-drill .drow:last-child{ border-bottom:none; }
+.bd-drill .drow u{ color:#2f6fb0; text-decoration-color:#8ab3dc; font-weight:700; }
+.bd-drill .drow .ar{ color:#9bb4cc; font-weight:800; margin:0 5px; }
+.bd-drill .drow .ans{ display:inline-block; background:#e2eefa; color:#1f4e79; font-weight:700; border-radius:6px; padding:1px 8px; }
 .bd-remind{ margin-top:auto; background:#eef4f1; border-radius:9px; padding:12px 16px; }
 .bd-remind .h{ display:block; font-size:12px; font-weight:800; color:var(--ink-d); margin-bottom:7px; }
 .bd-remind .chip{ font-size:11.5px; padding:2px 10px; }
@@ -543,6 +632,11 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .derive.connect .clue .cw{ flex:none; font-weight:800; color:#1f4d7a; background:#dcebf9; border-radius:3px; padding:0 4px; }
 .derive.connect .clue .ck{ flex:none; font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
 .ck-ref{ background:#2f6fb0; } .ck-conj{ background:#cd5049; } .ck-time{ background:#1f7a5c; } .ck-echo{ background:#8a6a00; }
+/* 지문 속 연결고리 색칠(순서·삽입) */
+.psg .pclue{ color:#fff; font-weight:700; padding:0 3px; border-radius:3px; }
+.pclue{ font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
+.clue-legend{ font-size:8.2px; color:#33414d; margin-bottom:5px; }
+.clue-legend .pclue{ margin-right:3px; }
 .derive.connect .clue .cn{ flex:1; color:#33414d; }
 .derive.connect ol.chain{ margin:4px 0 6px; }
 .derive.connect ol.chain li{ padding-left:20px; font-size:9.4px; }
