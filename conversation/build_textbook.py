@@ -104,8 +104,9 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 .wb .wrow:last-child { border-bottom:none; }
 .wb .wrow:nth-child(odd) { background:var(--soft); }
 .wb .wrow .bn { flex:0 0 auto; min-width:16px; height:16px; line-height:16px; font-size:10px; }
-.wb .wrow .ws { font-size:11px; color:#23272e; line-height:1.4; }
-.wb .wrow .ws b { color:#111827; }
+.wb .wrow .ws { font-size:10.5px; color:#23272e; line-height:1.45; }
+.wb .wrow .ws b { color:#111827; font-weight:700; }
+.wb .wrow .ws .m { color:#6b7280; }
 
 /* ---------- 사용법/표현 페이지 ---------- */
 .card { border:1.5px solid var(--line); border-radius:10px; padding:12px 14px; height:100%; }
@@ -135,15 +136,12 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 .toc .ko { font-weight:700; }
 .toc .en { color:var(--muted); font-size:10px; margin-left:6px; }
 
-/* 부록 워드뱅크 */
-.appendix .cols { columns:2; column-gap:16px; }
-.appendix .ub { break-inside:avoid; border:1.5px solid var(--line); border-radius:9px;
-  overflow:hidden; margin-bottom:10px; }
-.appendix .ub .h { color:#fff; font-weight:800; font-size:11px; padding:5px 10px; }
-.appendix .ub table { width:100%; border-collapse:collapse; }
-.appendix .ub td { padding:3.5px 8px; border-bottom:1px solid #eef1ee; font-size:9.5px; }
-.appendix .ub .en { font-weight:700; width:46%; }
-.appendix .ub .ko { color:#374151; }
+/* 부록 · 단어 사전 (자동 생성) */
+.glossary { columns:3; column-gap:14px; }
+.appendix .grow { break-inside:avoid; display:flex; justify-content:space-between; gap:8px;
+  padding:3.5px 8px; border-bottom:1px solid #eef1ee; font-size:10px; }
+.appendix .grow .ge { font-weight:700; color:#111827; }
+.appendix .grow .gk { color:#6b7280; text-align:right; }
 """
 
 
@@ -200,7 +198,7 @@ def intro_html() -> str:
           </div>
         </div>
       </div>
-      <h2 class="section-title" style="margin-top:14px;">목차 (OPIC 주제 10개)</h2>
+      <h2 class="section-title" style="margin-top:14px;">목차 (OPIC 주제 {len(data.UNITS)}개)</h2>
       <div class="toc">{toc}</div>
     </div>
     """
@@ -245,10 +243,11 @@ def unit_html(idx: int, u: dict) -> str:
             lines += f'<div class="en">{html_en}</div><div class="ko">{esc(ko)}</div>'
         steps_html += f'<div class="step"><div class="slabel">{esc(st["label"])}</div>{lines}</div>'
 
-    # 오른쪽 워드뱅크: 각 빈칸 번호에 넣을 수 있는 보기 단어 (5개 이상)
+    # 오른쪽 워드뱅크: 각 빈칸 번호에 넣을 보기 단어 (영어 + 한글 뜻)
     wb_rows = ""
     for num, opts in bank:
-        words = " · ".join(esc(o) for o in opts)
+        words = " · ".join(f'<b>{esc(oe)}</b> <span class="m">{esc(ok)}</span>'
+                           for oe, ok in opts)
         wb_rows += (f'<div class="wrow"><span class="bn">{num}</span>'
                     f'<span class="ws">{words}</span></div>')
 
@@ -286,21 +285,30 @@ def unit_html(idx: int, u: dict) -> str:
 
 
 def appendix_html() -> str:
-    blocks = ""
-    for i, u in enumerate(data.UNITS, 1):
-        accent = ACCENTS[(i - 1) % len(ACCENTS)]
-        rows = "".join(f'<tr><td class="en">{esc(en)}</td><td class="ko">{esc(ko)}</td></tr>'
-                       for en, ko in u["words"])
-        blocks += (f'<div class="ub"><div class="h" style="background:{accent};">'
-                   f'{u["emoji"]} UNIT {i:02d} · {esc(u["title_ko"])}</div>'
-                   f'<table>{rows}</table></div>')
+    # 모든 단원의 보기 중 '한 단어' 어휘만 자동 수집해 알파벳순 사전으로 만든다
+    # (구/문장 형태의 보기는 각 단원 워드뱅크에서 맥락과 함께 익히므로 제외)
+    glossary = {}
+    for u in data.UNITS:
+        for st in u["template"]:
+            for _en, _ko, choices in st["lines"]:
+                for opts in choices:
+                    for oe, ok in opts:
+                        if " " not in oe:  # 한 단어만
+                            glossary.setdefault(oe, ok)
+    items = sorted(glossary.items(), key=lambda kv: kv[0].lower())
+
+    rows = "".join(
+        f'<div class="grow"><span class="ge">{esc(oe)}</span>'
+        f'<span class="gk">{esc(ok)}</span></div>'
+        for oe, ok in items
+    )
     return f"""
     <div class="page appendix">
-      <h2 class="section-title">부록 · 중학 필수 어휘 모아보기</h2>
+      <h2 class="section-title">부록 · 핵심 단어 사전 ({len(items)}개)</h2>
       <p style="color:var(--muted); font-size:10px; margin:0 2px 10px;">
-        각 단원 주제와 관련된 중학 수준 어휘입니다. 워드뱅크(빈칸 보기)와 함께 익히면 표현이 풍부해져요. 아는 단어에 ✓ 표시해 보세요.
+        워드뱅크 보기 중 '한 단어' 어휘를 알파벳순으로 모았어요. 아는 단어에 ✓ 표시하며 복습해 보세요.
       </p>
-      <div class="cols">{blocks}</div>
+      <div class="glossary">{rows}</div>
     </div>
     """
 
