@@ -1,0 +1,141 @@
+<meta charset="utf-8">
+<title>[샘플] 영문법 핵심교재 1강 · 정동사 vs 준동사 (연습문제 확대판)</title>
+<style>
+@page { size: A4; margin: 15mm 15mm 16mm 15mm;
+  @bottom-center{ content: counter(page) " / " counter(pages); font-size:9px; color:#9aa0a6; } }
+* { box-sizing: border-box; }
+body{ font-family:"NanumGothic","Noto Sans KR","Malgun Gothic",sans-serif;
+  color:#23272e; line-height:1.65; font-size:10.5pt; margin:0; }
+:root{ --blue:#2f4f9e; --blue-bg:#eef1fa; --teal:#22857b; --red:#c0433c; --red-bg:#fbeceb;
+  --amber:#b9791f; --amber-bg:#fbf3e4; --green:#2f8050; --green-bg:#eaf5ee;
+  --ink:#1d2733; --muted:#6b7280; --line:#e3e6ea; --accent:var(--blue); }
+.cover{ border-bottom:3px solid #111827; padding-bottom:12px; margin-bottom:18px; }
+.cover .badge{ display:inline-block; background:#111827; color:#fff; font-size:9pt; font-weight:700; padding:2px 10px; border-radius:5px; }
+.cover .badge.smp{ background:var(--amber); }
+.cover h1{ font-size:19pt; font-weight:800; margin:9px 0 3px; }
+.cover .sub{ color:var(--muted); font-size:10pt; }
+.unit-head{ display:flex; align-items:baseline; gap:10px; margin:6px 0 12px; padding-bottom:7px; border-bottom:2.5px solid var(--accent); }
+.unit-no{ font-size:10pt; font-weight:800; color:#fff; background:var(--accent); padding:3px 10px; border-radius:16px; }
+.unit-head h2{ font-size:15pt; font-weight:800; margin:0; }
+h3{ font-size:12.5pt; font-weight:800; margin:16px 0 8px; padding-left:9px; border-left:5px solid var(--accent); }
+.recap{ background:var(--blue-bg); border:1px solid #cdd7f0; border-left:5px solid var(--accent); border-radius:8px; padding:10px 14px; margin:10px 0; font-size:9.6pt; }
+.recap .t{ font-weight:800; color:var(--accent); margin-bottom:3px; }
+.recap ul{ margin:4px 0 0; padding-left:18px; } .recap li{ margin:2px 0; }
+.fin{ color:var(--blue); font-weight:800; } .ver{ color:var(--teal); font-weight:800; }
+.code{ background:#eef1f5; padding:1px 5px; border-radius:4px; font-family:Consolas,monospace; font-size:9.6pt; }
+.typebar{ margin:16px 0 6px; font-size:11pt; font-weight:800; color:#fff; background:var(--accent);
+  border-radius:6px; padding:5px 12px; }
+.typebar.b{ background:var(--teal); } .typebar.c{ background:var(--amber); } .typebar.d{ background:var(--red); }
+ol.q{ padding-left:24px; margin:8px 0; } ol.q>li{ margin:8px 0; }
+.hint{ color:var(--muted); font-size:9pt; }
+.answers{ break-before:page; }
+.answers h2{ font-size:14pt; border-bottom:2.5px solid var(--green); padding-bottom:6px; color:#111827; margin-top:0; }
+table{ border-collapse:collapse; width:100%; margin:8px 0; font-size:9.3pt; }
+th,td{ border:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; }
+th{ background:var(--green-bg); font-weight:700; color:#256b43; }
+tr:nth-child(even) td{ background:#fcfcfd; }
+td .a{ color:var(--green); font-weight:800; }
+.foot{ margin-top:24px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:8.6pt; text-align:center; }
+.def,.recap,table,ol.q>li{ break-inside:avoid; } h3,.typebar{ break-after:avoid; }
+</style>
+
+<header class="cover">
+  <span class="badge">영문법 핵심교재</span> <span class="badge smp">SAMPLE · 연습문제 확대판</span>
+  <h1>1강 · 정동사 vs 준동사</h1>
+  <div class="sub">문장의 뼈대를 결정짓는 핵심 구분법 — 연습문제 <b>18문항</b> (유형 A·B·C·D) + 정답·해설</div>
+</header>
+
+<section class="unit">
+  <div class="unit-head"><span class="unit-no">UNIT 1</span><h2>정동사 vs 준동사 · 실전 연습</h2></div>
+
+  <div class="recap">
+    <div class="t">핵심 요약 (문제 풀기 전 3초 점검)</div>
+    <ul>
+      <li><b>정동사</b> = 시제·수 일치 O, 절의 뼈대 O, <b>절마다 1개</b>. (runs, ran, is, will go)</li>
+      <li><b>준동사</b> = 시제 X, 뼈대 X, 명사·형용사·부사 역할. (to run, running, run<sub>p.p.</sub>)</li>
+      <li>판별: <b>현재↔과거로 바꿔</b> 자연스러우면 정동사 / <code>to·-ing·p.p.</code> 모양이면 준동사.</li>
+      <li><b>정동사 2개 = 절 2개</b> → 접속사·관계사(연결어) 필요. <b>연결어 = 정동사 − 1</b>.</li>
+    </ul>
+  </div>
+
+  <div class="typebar">유형 A. 정동사 찾기 — 각 문장의 <u>진짜 동사(정동사)</u>에 밑줄 [1~5]</div>
+  <ol class="q">
+    <li>The girl wearing a red hat is my sister.</li>
+    <li>Exhausted after the long trip, the travelers fell asleep quickly.</li>
+    <li>The company planning to expand overseas hired new staff.</li>
+    <li>To finish the marathon requires months of training.</li>
+    <li>The documents printed this morning contain several errors.</li>
+  </ol>
+
+  <div class="typebar b">유형 B. 어법 선택 — 정동사/준동사를 구분해 알맞은 것 고르기 [6~11]</div>
+  <ol class="q" start="6">
+    <li>The novel ( writing / written ) by the young author became a bestseller.</li>
+    <li>My biggest challenge ( is / being ) to manage my time well.</li>
+    <li>She wants ( improving / to improve ) her pronunciation.</li>
+    <li>The scientists ( conducting / conducted ) the study will present the results tomorrow.</li>
+    <li>The children ( playing / played ) in the park looked very happy.</li>
+    <li>His goal ( to become / becoming ) a pilot kept him motivated.</li>
+  </ol>
+
+  <div class="typebar c">유형 C. 어법 판단(O/X) — 틀리면 바르게 고치기 [12~15]</div>
+  <ol class="q" start="12">
+    <li>The train arrived late everyone was frustrated. <span class="hint">(연결어 관점)</span></li>
+    <li>My plan to travel around Europe next summer. <span class="hint">(문장 성립?)</span></li>
+    <li>Surprised by the result, the team celebrated all night.</li>
+    <li>The man standing by the door waved at us and smiled warmly.</li>
+  </ol>
+
+  <div class="typebar d">유형 D. 문장 완성·전환 [16~18]</div>
+  <ol class="q" start="16">
+    <li>정동사를 넣어 완전한 문장으로: <span class="code">The students preparing for the exam ______.</span></li>
+    <li>준동사(분사)를 사용해 두 문장을 하나로: <span class="code">The boy is my cousin. + He is riding a bike.</span></li>
+    <li>밑줄 친 동사꼴이 정동사인지 준동사인지 쓰고 이유를 밝히기: <span class="code">The letter <u>hidden</u> in the drawer was never found.</span></li>
+  </ol>
+</section>
+
+<!-- ===================== 정답 & 해설 ===================== -->
+<section class="answers">
+  <h2>정답 &amp; 해설</h2>
+
+  <h3>유형 A. 정동사 찾기</h3>
+  <table>
+    <tr><th>#</th><th>정동사</th><th>준동사(△)</th><th>해설</th></tr>
+    <tr><td>1</td><td class="a">is</td><td>wearing</td><td>wearing은 girl을 꾸미는 현재분사. 뼈대는 is.</td></tr>
+    <tr><td>2</td><td class="a">fell</td><td>Exhausted</td><td>문두 Exhausted는 분사구문(과거분사). 정동사는 fell.</td></tr>
+    <tr><td>3</td><td class="a">hired</td><td>planning, to expand</td><td>planning은 분사, to expand는 부정사. 뼈대는 hired.</td></tr>
+    <tr><td>4</td><td class="a">requires</td><td>To finish</td><td>주어 자리 To finish는 부정사(명사 역할). 동사는 requires.</td></tr>
+    <tr><td>5</td><td class="a">contain</td><td>printed</td><td>printed는 documents를 꾸미는 과거분사. 뼈대는 contain.</td></tr>
+  </table>
+
+  <h3>유형 B. 어법 선택</h3>
+  <table>
+    <tr><th>#</th><th>정답</th><th>해설</th></tr>
+    <tr><td>6</td><td class="a">written</td><td>소설이 '쓰인'(수동) → 과거분사. 뒤에 정동사 became 존재.</td></tr>
+    <tr><td>7</td><td class="a">is</td><td>주어(challenge)의 정동사 필요 → is. being은 준동사라 뼈대 불가.</td></tr>
+    <tr><td>8</td><td class="a">to improve</td><td>want는 to부정사를 목적어로 취함.</td></tr>
+    <tr><td>9</td><td class="a">conducting</td><td>뒤에 정동사 will present가 있으므로, 주어를 꾸미는 분사 conducting.</td></tr>
+    <tr><td>10</td><td class="a">playing</td><td>뒤에 정동사 looked 존재 → 주어 수식 분사 playing(능동).</td></tr>
+    <tr><td>11</td><td class="a">to become</td><td>His goal의 정동사는 kept. goal을 꾸미는 부정사 to become.</td></tr>
+  </table>
+
+  <h3>유형 C. 어법 판단(O/X)</h3>
+  <table>
+    <tr><th>#</th><th>판정</th><th>해설 / 수정</th></tr>
+    <tr><td>12</td><td class="a">✕</td><td>정동사 2개(arrived, was)인데 연결어 없음(run-on). → arrived late, <b>and</b> everyone was frustrated.</td></tr>
+    <tr><td>13</td><td class="a">✕</td><td>정동사가 없어 문장 미완성. → My plan to travel around Europe next summer <b>excites</b> me. (정동사 추가)</td></tr>
+    <tr><td>14</td><td class="a">○</td><td>Surprised는 분사구문(준동사), 정동사는 celebrated. 정상 문장.</td></tr>
+    <tr><td>15</td><td class="a">○</td><td>standing은 분사, 정동사는 waved·smiled(and로 연결). 정상.</td></tr>
+  </table>
+
+  <h3>유형 D. 문장 완성·전환</h3>
+  <table>
+    <tr><th>#</th><th>정답 예시</th><th>해설</th></tr>
+    <tr><td>16</td><td class="a">… preparing for the exam <b>looked nervous</b>.<br>(또는 The students <b>were</b> preparing …)</td><td>정동사(looked)를 넣어야 문장 성립. be를 넣으면 진행형 정동사화.</td></tr>
+    <tr><td>17</td><td class="a">The boy <b>riding a bike</b> is my cousin.</td><td>is riding의 riding을 분사로 전환해 주어를 수식.</td></tr>
+    <tr><td>18</td><td class="a"><b>준동사</b> (과거분사)</td><td>hidden은 letter를 꾸미는 과거분사(수동). 문장의 정동사는 was(never found). 시제 변화가 없고 뼈대가 아니므로 준동사.</td></tr>
+  </table>
+</section>
+
+<div class="foot">
+  [SAMPLE] 영문법 핵심교재 1강 · 정동사 vs 준동사 — 연습문제 확대판(18문항) · 이 구성으로 전 10강 확대 예정
+</div>
