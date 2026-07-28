@@ -303,7 +303,8 @@
     "comparison",
     "performance"
    ]
-  }
+  },
+  "uline": "the boost is grounded in fiction"
  },
  {
   "key": "2023-06|22",
@@ -2501,7 +2502,8 @@
    "copies": [
     "cause"
    ]
-  }
+  },
+  "uline": "a nonstick frying pan"
  },
  {
   "key": "2024-06|22",
@@ -4598,13 +4600,7 @@
    },
    {
     "t": "There is no single, universal or authoritative version that makes sense, other than as a theoretical construct.",
-    "role": "gray",
-    "tags": [
-     {
-      "sig": "부정",
-      "word": "no"
-     }
-    ]
+    "role": "gray"
    },
    {
     "t": "We can see the world only as it appears to us, not “as it truly is,” because there is no “as it truly is” without a perspective to give it form.",
@@ -4627,6 +4623,10 @@
      {
       "sig": "이유",
       "word": "since"
+     },
+     {
+      "sig": "부정",
+      "word": "no"
      }
     ]
    },
@@ -4862,7 +4862,8 @@
    "from": "a pure, objective form · except from a particular perspective",
    "to": "unbiased and objective view of the world",
    "copies": []
-  }
+  },
+  "uline": "view from nowhere"
  },
  {
   "key": "2024-수능|22",
@@ -6618,13 +6619,7 @@
    },
    {
     "t": "Wasn’t it time to give up the ghost?",
-    "role": "yellow",
-    "tags": [
-     {
-      "sig": "함축",
-      "word": "give up"
-     }
-    ]
+    "role": "yellow"
    }
   ],
   "derive": {
@@ -6820,7 +6815,8 @@
    "from": "no part of the brain unique to humans responsible for consciousness",
    "to": "give up the belief that consciousness is exclusive to humans",
    "copies": []
-  }
+  },
+  "uline": "give up the ghost"
  },
  {
   "key": "2026-09|22",
@@ -8553,13 +8549,7 @@
    },
    {
     "t": "The same is true in music, and music is often described as having two dimensions, one that accounts for tones going up in frequency and another that accounts for the perceptual sense that we’ve come back home again each time we double a tone’s frequency.",
-    "role": "yellow",
-    "tags": [
-     {
-      "sig": "밑줄",
-      "word": "come back home again"
-     }
-    ]
+    "role": "yellow"
    }
   ],
   "derive": {
@@ -8747,7 +8737,8 @@
     "octave",
     "frequency"
    ]
-  }
+  },
+  "uline": "come back home again"
  },
  {
   "key": "2023-수능|22",
@@ -10493,7 +10484,8 @@
     "tenants",
     "land"
    ]
-  }
+  },
+  "uline": "a stick in the bundle"
  },
  {
   "key": "2026-06|22",
@@ -12305,7 +12297,8 @@
    "copies": [
     "diaries"
    ]
-  }
+  },
+  "uline": "make oneself public to oneself"
  },
  {
   "key": "2027-06|22",
@@ -14328,7 +14321,8 @@
    "from": "an empty inbox·reactive work·others’ expectations",
    "to": "satisfy other people’s demands",
    "copies": []
-  }
+  },
+  "uline": "an empty inbox"
  },
  {
   "key": "2023-09|22",
@@ -16067,7 +16061,8 @@
     "natural scientists",
     "Western hosts"
    ]
-  }
+  },
+  "uline": "from their verandas"
  },
  {
   "key": "2025-06|22",

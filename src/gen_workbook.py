@@ -170,6 +170,16 @@ def _split_insert(hl, insert_en=None):
     return None, body_txt
 
 
+def uline_html(html, phrase):
+    """함축의미(21) 지문에서 밑줄 친 부분을 <u>로 표시. 이미 렌더된 HTML 문자열에 적용."""
+    if not phrase:
+        return html
+    p = esc(phrase)
+    if p and p in html:
+        return html.replace(p, f'<u class="uph">{p}</u>', 1)
+    return html
+
+
 def _clue_html(txt, clues):
     """텍스트 안 연결고리(marker)만 색칠해 HTML로."""
     low = txt.lower()
@@ -367,6 +377,8 @@ def render_spread(rec, c, idx):
               '<div class="s"><span class="k">3</span>지문어 복사 선지 소거 → 바꿔 말한 선지</div>')
         checks = '<li>근거 신호 문장을 찾아 칠했나?</li><li>예시·양보절은 회색으로 넘겼나?</li><li>지문 단어 그대로 쓴 선지부터 지웠나?</li>'
     remind_label = "🔗 연결고리 단서" if seqtype else "📢 신호 리마인더"
+    uline = c.get("uline")  # 함축의미(21): 밑줄 친 부분
+    step1_psg = uline_html(clean_passage(hl, band, insert_en), uline)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
@@ -374,7 +386,7 @@ def render_spread(rec, c, idx):
     <div class="pbody">
       <div class="pmain">
         <div class="how">{how}</div>
-        <div class="psg work">{clean_passage(hl, band, insert_en)}</div>
+        <div class="psg work">{step1_psg}</div>
         <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{opt_lines}</div>
         <div class="pguide"><div class="h">🖍 이렇게 풀어요</div>
           <div class="g3">{g3}</div>
@@ -400,6 +412,7 @@ def render_spread(rec, c, idx):
     pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
     # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
     passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
+    passage_html = uline_html(passage_html, uline)
     clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
                    '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
     # 3색 범례 — 노랑/연녹/회색을 '언제 긋는지' 안내 (순서·삽입 제외)
@@ -668,6 +681,7 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .psg{ font-size:11px; line-height:1.85; border:1px solid var(--line); border-radius:6px; padding:9px 11px; margin-bottom:8px; }
 mark.m{ background:var(--must); padding:0 2px; border-radius:2px; }
 mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
+.uph{ text-decoration:underline; text-decoration-thickness:1.6px; text-underline-offset:2.5px; text-decoration-color:#12543d; font-weight:700; }
 .color-legend{ display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin-bottom:6px; font-size:8.2px; color:#4b5560; }
 .color-legend .clh{ font-weight:800; color:#33414d; margin-right:2px; }
 .color-legend .cl{ display:inline-flex; align-items:center; gap:3px; padding:1px 6px; border-radius:9px; font-weight:700; }
