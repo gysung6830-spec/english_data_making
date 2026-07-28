@@ -1,0 +1,79 @@
+<meta charset="utf-8">
+<title>영문법 완전정복 · 전 10강 합본 (이론+연습문제)</title>
+<style>
+@page{ size:A4; margin:15mm 15mm 16mm 15mm;
+  @bottom-center{ content: counter(page); font-family:"NanumGothic",sans-serif; font-size:8.5pt; color:#9aa0a6; } }
+@page:first{ @bottom-center{ content:""; } }
+*{ box-sizing:border-box; }
+body{ font-family:"NanumGothic","Noto Sans KR","Malgun Gothic",sans-serif; color:#23272e; line-height:1.62; font-size:10.3pt; margin:0; }
+:root{
+  --blue:#2f4f9e; --blue-bg:#eef1fa; --teal:#22857b; --teal-bg:#e7f4f2;
+  --red:#c0433c; --red-bg:#fbeceb; --amber:#b9791f; --amber-bg:#fbf3e4;
+  --green:#2f8050; --green-bg:#eaf5ee; --purple:#8a4fbf; --purple-bg:#f5eefb;
+  --ink:#1d2733; --muted:#6b7280; --line:#e3e6ea; --accent:#2f4f9e; --accent-bg:#eef1fa; }
+.u-blue{ --accent:#2f4f9e; --accent-bg:#eef1fa; }
+.u-purple{ --accent:#8a4fbf; --accent-bg:#f5eefb; }
+.u-teal{ --accent:#22857b; --accent-bg:#e7f4f2; }
+.u-green{ --accent:#2f8050; --accent-bg:#eaf5ee; }
+.u-amber{ --accent:#b9791f; --accent-bg:#fbf3e4; }
+.u-red{ --accent:#c0433c; --accent-bg:#fbeceb; }
+
+/* 표지 */
+.book-cover{ text-align:center; padding:70mm 0 0; page-break-after:always; }
+.book-cover .kicker{ display:inline-block; background:#111827; color:#fff; font-size:11pt; font-weight:700; padding:4px 16px; border-radius:20px; letter-spacing:.04em; }
+.book-cover h1{ font-size:30pt; font-weight:800; margin:20px 0 6px; letter-spacing:-.01em; color:#111827; }
+.book-cover .tagline{ font-size:13pt; color:#4b5563; }
+.book-cover .rule{ width:120px; height:4px; background:var(--blue); margin:26px auto; border-radius:2px; }
+.book-cover .scope{ font-size:11pt; color:#6b7280; line-height:1.9; }
+.book-cover .meta{ margin-top:40px; font-size:9.5pt; color:#9aa3b2; }
+
+/* 목차 */
+.toc{ page-break-after:always; padding-top:6mm; }
+.toc h2{ font-size:17pt; font-weight:800; border-bottom:3px solid #111827; padding-bottom:8px; margin:0 0 16px; }
+.toc-row{ display:flex; align-items:center; gap:12px; padding:9px 4px; border-bottom:1px solid var(--line); }
+.toc-no{ display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:30px; border-radius:8px; color:#fff; font-weight:800; font-size:11pt; }
+.toc-t{ font-size:12pt; font-weight:700; } .toc-s{ color:var(--muted); font-size:9.5pt; }
+
+/* 단원 */
+.unit{ page-break-before:always; }
+.unit-head{ display:flex; align-items:baseline; gap:11px; margin:0 0 14px; padding-bottom:8px; border-bottom:2.5px solid var(--accent); }
+.unit-no{ font-size:10.5pt; font-weight:800; color:#fff; background:var(--accent); padding:3px 12px; border-radius:16px; }
+.unit-head h2{ font-size:17pt; font-weight:800; margin:0; }
+.unit-sub{ color:var(--muted); font-size:9.6pt; margin:-8px 0 8px; }
+h3{ font-size:12.5pt; font-weight:800; margin:16px 0 8px; padding-left:9px; border-left:5px solid var(--accent); color:var(--ink); }
+h4{ font-size:10.8pt; font-weight:700; margin:12px 0 6px; color:#374151; }
+p{ margin:7px 0; } strong{ color:#111827; }
+.def{ background:var(--accent-bg); border:1px solid #d3dbec; border-left:5px solid var(--accent); border-radius:8px; padding:10px 14px; margin:10px 0; }
+.def .t{ font-weight:800; color:var(--accent); font-size:10pt; margin-bottom:3px; }
+.rule{ background:var(--red-bg); border:1px solid #f0c9c6; border-left:5px solid var(--red); border-radius:8px; padding:10px 14px; margin:10px 0; }
+.rule .t{ font-weight:800; color:var(--red); font-size:10pt; margin-bottom:3px; }
+.tip{ background:var(--amber-bg); border:1px solid #ecd7a8; border-left:5px solid var(--amber); border-radius:8px; padding:10px 14px; margin:10px 0; }
+.tip .t{ font-weight:800; color:var(--amber); font-size:10pt; margin-bottom:3px; }
+.ex{ margin:7px 0; padding:7px 12px; background:#fbfbfc; border:1px solid var(--line); border-radius:8px; }
+.ex .en{ font-size:10pt; } .ex .ko{ color:var(--muted); font-size:9.2pt; margin-top:2px; }
+.hl{ color:var(--accent); font-weight:800; } .fin{ color:var(--blue); font-weight:800; } .ver{ color:var(--teal); font-weight:800; }
+.rel{ color:#8a4fbf; font-weight:800; } .g{ color:var(--green); font-weight:800; } .r{ color:var(--red); font-weight:800; }
+.ok::before{ content:"○ "; color:var(--green); font-weight:800; } .no::before{ content:"✕ "; color:var(--red); font-weight:800; }
+.no .en{ text-decoration:line-through; text-decoration-color:#e0a6a2; }
+.code{ background:#eef1f5; padding:1px 5px; border-radius:4px; font-family:Consolas,monospace; font-size:9.4pt; }
+.us{ text-decoration:underline; }
+table{ border-collapse:collapse; width:100%; margin:9px 0; font-size:9.3pt; }
+th,td{ border:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; }
+th{ background:#f3f5f8; font-weight:700; color:#374151; } tr:nth-child(even) td{ background:#fcfcfd; }
+.flow{ border:1px dashed #b9c2d6; border-radius:10px; padding:11px 16px; margin:11px 0; background:#fafbff; }
+.flow .step{ margin:5px 0; } .flow .q{ font-weight:700; color:var(--accent); }
+
+/* 연습문제 */
+.prac{ margin-top:16px; }
+.prac-title{ font-size:13pt; font-weight:800; color:var(--accent); background:var(--accent-bg); border-radius:8px; padding:7px 14px; margin:6px 0 10px; }
+.typebar{ margin:13px 0 5px; font-size:10.5pt; font-weight:800; color:#fff; background:var(--accent); border-radius:6px; padding:4px 11px; }
+ol.q{ padding-left:22px; margin:6px 0; } ol.q>li{ margin:6px 0; }
+.hint{ color:var(--muted); font-size:8.8pt; }
+.ans{ margin-top:12px; }
+.ans .h{ font-weight:800; color:var(--green); font-size:11pt; border-left:5px solid var(--green); padding-left:9px; margin:10px 0 6px; }
+.ans table th{ background:var(--green-bg); color:#256b43; }
+.ans .a{ color:var(--green); font-weight:800; }
+
+.foot{ margin-top:22px; padding-top:9px; border-top:1px solid var(--line); color:var(--muted); font-size:8.5pt; text-align:center; }
+.def,.rule,.tip,.ex,.flow,table,ol.q>li{ break-inside:avoid; } h3,h4,.typebar,.prac-title,.ans .h{ break-after:avoid; }
+</style>
