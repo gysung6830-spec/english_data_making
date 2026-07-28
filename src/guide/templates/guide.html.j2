@@ -326,7 +326,7 @@
   <div class="ch-title">{{ p2.title }}</div>
   <div class="ch-signal">{{ p2.intro }}</div>
   <div class="roadmap">
-    <div class="rm-title">📚 이 파트의 구성 — 3갈래 · 10유형</div>
+    <div class="rm-title">📚 이 파트의 구성 — {{ p2.groups | length }}갈래 · {{ p2.groups | map(attribute='chapters') | map('length') | sum }}유형</div>
     {% set r2 = namespace(cn=0) %}
     {% for g in p2.groups %}
     <div class="rm-group">1부 {{ ['A','B','C','D'][loop.index0] }} · {{ g.title }}</div>

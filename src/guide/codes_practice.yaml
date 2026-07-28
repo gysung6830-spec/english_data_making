@@ -104,7 +104,7 @@ practice:
       author_msg: 시장 불안정 ← 수확량 변화 ← 날씨 변동. 원인이 뒤에서 앞으로 거슬러 올라가는 이중 인과다.
       key_points:
       - '''due to changes ... that result from ...'' : due to와 result from이 겹쳐 원인·결과를
-        통째로 뒤집기 쉽다 → 날씨(원인) → 수확량 변화 → 시장 불안정(결과), 뒤에서 앞으로 거슬러 읽어야.'
+        통째로 뒤집기 쉽다 → 날씨(원인) → 수확량 변화 → 시장 불안정(결과), 화살표는 결과←원인이지만 읽기는 앞으로만.'
   - kind: mc
     sentence: Social media users may unknowingly participate in creating and circulating
       misinformation, which can influence elections, cause violence, and create widespread
