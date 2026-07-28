@@ -104,17 +104,26 @@ u {{ text-underline-offset:2px; }}
 /* 정답해설지 */
 .ans-title {{ text-align:center; font-size:16pt; font-weight:700; letter-spacing:8px;
               margin:2px 0 4px; }}
-.ans-rule {{ border:0; border-top:2px solid #000; margin:0 0 12px; }}
-.ans-item {{ break-inside:avoid; margin-bottom:12px; }}
-.ans-no {{ font-weight:700; }}
-.badge {{ border:1px solid #444; border-radius:999px; padding:1px 10px; font-size:8.6pt;
+.ans-rule {{ border:0; border-top:2px solid #000; margin:0 0 10px; }}
+.ans-item {{ break-inside:avoid; margin-bottom:11px; padding-bottom:9px;
+             border-bottom:0.6px dashed #cfcfcf; }}
+.ans-head {{ margin-bottom:3px; }}
+.ans-no {{ font-weight:800; font-size:9.4pt; }}
+.badge {{ border:1px solid #888; border-radius:999px; padding:0 8px; font-size:8pt;
           color:#333; margin-left:6px; }}
-.warn {{ border:1px solid #b00020; border-radius:999px; padding:1px 10px; font-size:8.6pt;
+.warn {{ border:1px solid #b00020; border-radius:999px; padding:0 8px; font-size:8pt;
          color:#b00020; font-weight:700; margin-left:6px; }}
-.warn-note {{ color:#b00020; font-size:8.4pt; margin:2px 0; }}
-.ans-line {{ margin:3px 0; }}
-.ans-line .a {{ font-weight:700; }}
-.exp {{ text-align:justify; }}
+.warn-note {{ color:#b00020; font-size:8.3pt; margin:3px 0 0; }}
+.ans-line {{ margin:2px 0; }}
+.ans-line .a {{ font-weight:800; color:#1d4ed8; }}
+.ans-line .ansval {{ font-weight:800; }}
+/* 해설 본문: 좌측정렬·넉넉한 줄간격, 구조화된 줄(라벨·선지) */
+.exp {{ margin-top:3px; line-height:1.62; }}
+.exp-line {{ margin:2.5px 0; padding-left:13px; text-indent:-13px; text-align:left; }}
+.exp .lbl {{ font-weight:700; color:#0f5aa8; }}
+.exp .lbl.trap {{ color:#b00020; }}
+.exp .ci {{ font-weight:700; }}
+.exp b {{ font-weight:800; }}
 .trap {{ color:#b00020; }}
 """
 
@@ -332,7 +341,8 @@ def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
 
 
 def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    body = ['<div class="ans-title">정 답 및 해 설</div><hr class="ans-rule">']
+    body = ['<div class="ans-title">정 답 및 해 설</div><hr class="ans-rule">',
+            '<div class="flow">']
     for q in exam.questions:
         label = TYPE_LABEL_KO.get(q.type, q.type)
         diff = DIFFICULTY_KO_REV.get(q.difficulty, "중")
@@ -340,34 +350,61 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
         badge = f"{label} · {diff} · {_fmt_score(q.score)}점"
         flag = q.meta.get("review_flag") if isinstance(q.meta, dict) else None
         warn = '<span class="warn">⚠ 확인 권장</span>' if flag else ""
-        body.append(f'<div class="ans-item"><span class="ans-no">{no}</span>'
-                    f'<span class="badge">{html.escape(badge)}</span>{warn}')
+        body.append(f'<div class="ans-item"><div class="ans-head">'
+                    f'<span class="ans-no">{no}</span>'
+                    f'<span class="badge">{html.escape(badge)}</span>{warn}</div>')
+        body.append(f'<div class="ans-line"><span class="a">정답</span> '
+                    f'<span class="ansval">{html.escape(q.answer)}</span></div>')
         if q.answer_notes:
-            body.append(f'<div class="ans-line"><span class="a">정답.</span> '
-                        f'{html.escape(q.answer)}</div>')
             for n in q.answer_notes:
                 body.append(f'<div class="ans-line">· {html.escape(n)}</div>')
-        else:
-            body.append(f'<div class="ans-line"><span class="a">정답.</span> '
-                        f'{html.escape(q.answer)}</div>')
         if q.explanation:
-            body.append(f'<div class="exp"><b>해설.</b> {_exp_html(q.explanation)}</div>')
+            body.append(f'<div class="exp">{_exp_html(q.explanation)}</div>')
         if flag:
             body.append(f'<div class="warn-note">※ 자동 점검 참고: {html.escape(flag)} '
                         '— 정답·선지를 한 번 확인하세요.</div>')
         body.append('</div>')
+    body.append('</div>')   # .flow 닫기
     return _wrap("정답 및 해설", "".join(body), footer_note=_footer_note(exam, footer))
 
 
+# 해설을 줄 단위로 끊는 경계: (1) 라벨:, [오답 함정] 등, 문장 뒤 선지 시작 원문자
+_EXP_LABEL = re.compile(r"(\[[^\]]{1,20}\]|\((?:\d)\)\s*[가-힣 ·]{0,14}[:：])")
+
+
 def _exp_html(text: str) -> str:
-    """[오답 함정] 대괄호 주석은 강조색으로, <b>..</b> 는 굵게 허용, 나머지는 이스케이프."""
-    out = []
-    for t in re.split(r"(<b>|</b>)", text):
-        if t in ("<b>", "</b>"):
-            out.append(t)
+    """긴 해설을 '정답근거 / 오답분석(선지별) / 핵심포인트'로 줄바꿈하고 라벨을 강조.
+
+    LLM 해설의 '(1) 정답 근거:', '[오답 함정]', '[핵심 포인트]', 각 선지(①~⑤) 앞에서
+    줄을 나눠 한 문단 벽글을 읽기 쉬운 목록형으로 만든다.
+    """
+    def esc(s: str) -> str:
+        parts = []
+        for seg in re.split(r"(<b>|</b>)", s):
+            parts.append(seg if seg in ("<b>", "</b>") else html.escape(seg))
+        return "".join(parts)
+
+    t = (text or "").strip()
+    # 문장부호 뒤 '선지 시작' 원문자(뒤에 공백/따옴표가 오는 경우만) 앞에서 줄바꿈
+    t = re.sub(r"(?<=[.。!?\]\)])\s+(?=[①②③④⑤][\s'\"“‘])", "\n", t)
+    # 섹션 라벨 앞에서 줄바꿈
+    t = re.sub(r"\s*(\[[^\]]{1,20}\]|\((?:\d)\)\s*[가-힣 ·]{0,14}[:：])", r"\n\1", t)
+
+    lines = [ln.strip() for ln in t.split("\n") if ln.strip()]
+    out: list[str] = []
+    for ln in lines:
+        h = esc(ln)
+        # 앞머리 라벨 강조([..] 는 오답 함정류=빨강, (N).. 는 파랑 헤더)
+        m = _EXP_LABEL.match(ln)
+        if m:
+            lab = esc(m.group(1))
+            cls = "lbl trap" if ln.startswith("[") and ("함정" in ln[:12] or "오답" in ln[:12]) else "lbl"
+            rest = h[len(lab):]
+            h = f'<span class="{cls}">{lab}</span>{rest}'
         else:
-            out.append(re.sub(r"(\[[^\]]+\])", r'<span class="trap">\1</span>',
-                              html.escape(t)))
+            # 선지 시작 원문자 강조
+            h = re.sub(r"^([①②③④⑤])", r'<span class="ci">\1</span>', h)
+        out.append(f'<div class="exp-line">{h}</div>')
     return "".join(out)
 
 
