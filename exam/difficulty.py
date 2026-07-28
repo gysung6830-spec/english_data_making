@@ -1,0 +1,49 @@
+"""상·중·하 난이도 레버.
+
+한 번의 선택으로 1회(순서~서술형)·2회(A~G) 모든 유형의 출제 난이도를 함께 조절한다.
+동작 방식: 선택한 난이도의 '지침 문장'을 분석 결과(Analysis.difficulty_note)에 심어 두면,
+모든 생성기가 공통으로 쓰는 context() 가 그 지침을 프롬프트에 함께 실어 보낸다.
+(내용일치 유형은 별도 2단계 프롬프트가 있어 plain/hard 로도 매핑한다.)
+
+핵심 원칙: 난이도를 올려도 '정답은 하나로 확정되고 오답은 반박 가능'해야 한다(출제 오류 금지).
+"""
+from __future__ import annotations
+
+HIGH, MID, LOW = "상", "중", "하"
+LEVELS = (HIGH, MID, LOW)
+
+_CLAUSES = {
+    LOW: (
+        "[난이도: 하] 쉬운 수준으로 출제하세요. 오답은 지문과 '분명히' 어긋나게(정반대 또는 "
+        "무관) 만들어 혼동을 줄이고, 정답 단서(연결사·지시어·핵심어)를 비교적 뚜렷하게 "
+        "남깁니다. 어휘·구문 수준도 평이하게 유지하세요."
+    ),
+    MID: (
+        "[난이도: 중] 수능 표준 수준으로 출제하세요. 오답 5개 중 1~2개는 그럴듯하게(부분 일치 "
+        "또는 유의어 위장) 만들되, 나머지는 명확히 어긋나게 하여 변별이 되도록 균형을 잡습니다."
+    ),
+    HIGH: (
+        "[난이도: 상] 어렵게 출제하세요. 오답은 지문 단어를 미끼로 쓰거나(부분 일치·주체 "
+        "바꿔치기·인과 역전) 정답과 비슷해 보이게 만들어 '매력적인 함정'이 되게 하고, 정답은 "
+        "패러프레이즈 강도를 높여 원문과의 축자적 대응을 피합니다. 다만 정답은 반드시 하나로 "
+        "확정되고 오답은 각각 반박 가능해야 합니다(우연 정답·복수 정답 금지)."
+    ),
+}
+
+# 내용일치(content) 유형의 기존 2단계 프롬프트와 매핑
+_CONTENT = {LOW: "plain", MID: "hard", HIGH: "hard"}
+
+
+def normalize(level: str | None) -> str:
+    """알 수 없는 값은 '중'으로."""
+    return level if level in _CLAUSES else MID
+
+
+def clause(level: str | None) -> str:
+    """해당 난이도의 공통 지침 문장."""
+    return _CLAUSES[normalize(level)]
+
+
+def content_difficulty(level: str | None) -> str:
+    """내용일치 유형용 plain/hard 매핑."""
+    return _CONTENT[normalize(level)]

@@ -16,10 +16,14 @@ def context(analysis: Analysis) -> str:
         f"- {t.word} | 유의어: {t.synonym or '-'} | 반의어: {t.antonym or '-'}"
         for t in analysis.key_terms
     )
-    return (
+    base = (
         f"[제목] {analysis.title}\n"
         f"[주제 한 문장] {analysis.main_idea}\n"
         f"[문장]\n{sents}\n"
         f"[핵심어휘·유의어·반의어]\n{terms}\n"
         f"[문법 밀집 문장] {analysis.hardest_sentence}\n"
     )
+    note = getattr(analysis, "difficulty_note", "") or ""
+    if note:
+        base += f"{note}\n"
+    return base

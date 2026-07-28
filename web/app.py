@@ -74,7 +74,9 @@ def generate():
     demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
     vocab_method = request.form.get("vocab_method", "synonym")
-    content_difficulty = request.form.get("content_difficulty", "hard")
+    from exam import difficulty as _diff
+    level = _diff.normalize(request.form.get("level"))   # 상/중/하 (기본 중)
+    content_difficulty = _diff.content_difficulty(level)
 
     # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
     sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
@@ -152,7 +154,7 @@ def generate():
                                max_retries=cfg.processing.max_retries,
                                vocab_method=vocab_method,
                                content_difficulty=content_difficulty,
-                               analyses=analyses)
+                               analyses=analyses, level=level)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 1회", "count": n,
                                 "name": f"{doc_name}_변형문제_1회"})
@@ -169,7 +171,7 @@ def generate():
                     from exam.gen2 import build_exam2
                     build_exam2(client, bodies, out, header_note=header,
                                 max_retries=cfg.processing.max_retries,
-                                analyses=analyses)
+                                analyses=analyses, level=level)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 2회", "count": n,
                                 "name": f"{doc_name}_변형문제_2회"})

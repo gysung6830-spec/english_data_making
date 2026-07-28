@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-from . import analyzer, build2, renderer, validator
+from . import analyzer, build2, difficulty, renderer, validator
 from ._concurrent import run_parallel
 from .generators import grammar as _grammar_gen
 from .generators.base import context
@@ -238,10 +238,14 @@ def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger):
     raise RuntimeError(f"2회 '{t}' 유형 생성 실패: {last_err}")
 
 
-def build_passage2(client, body, max_retries=1, logger=None, analysis=None) -> Passage:
-    """2회 지문 1개 -> A~G. 유형은 병렬 생성, analysis 를 주면 분석을 건너뛴다."""
+def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
+                   level=None) -> Passage:
+    """2회 지문 1개 -> A~G. 유형은 병렬 생성, analysis 를 주면 분석을 건너뛴다.
+    level(상/중/하)로 전체 난이도를 조절한다."""
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
+    if level:
+        analysis.difficulty_note = difficulty.clause(level)
     passage = Passage(title=analysis.title)
 
     def _task(t):
@@ -257,7 +261,7 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None) -> P
 
 
 def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
-                analyses=None) -> Path:
+                analyses=None, level=None) -> Path:
     from .pipeline import analyze_bodies
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
@@ -266,7 +270,7 @@ def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=
         if logger:
             logger.info("[2회 %d/%d] 지문 생성 중 …", i, len(bodies))
         passages.append(build_passage2(client, body, max_retries=max_retries,
-                                       logger=logger, analysis=analysis))
+                                       logger=logger, analysis=analysis, level=level))
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)
     return renderer.render_pdf(passages, out_path, header_note=header_note,

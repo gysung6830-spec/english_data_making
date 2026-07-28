@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from . import analyzer, renderer, validator
+from . import analyzer, difficulty, renderer, validator
 from ._concurrent import run_parallel
 from .generators import content, grammar, insert, order, short_answer, topic, vocab
 from .llm import ClaudeClient
@@ -50,14 +50,19 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
 
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
                   logger=None, vocab_method: str = "synonym",
-                  content_difficulty: str = "hard", analysis=None) -> Passage:
+                  content_difficulty: str = "hard", analysis=None,
+                  level: str | None = None) -> Passage:
     """지문 원문 1개 -> 7종 문제/해설이 채워진 Passage.
 
     유형 7종은 서로 독립이므로 스레드로 동시에 생성한다(속도).
     analysis 를 주면 분석 호출을 건너뛴다(1회·2회 교차 공유용).
+    level(상/중/하)을 주면 모든 유형의 난이도를 함께 조절한다.
     """
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
+    if level:  # 난이도 지침을 분석 결과에 심어 모든 생성기에 공통 전달(병렬 팬아웃 전 단일 스레드)
+        analysis.difficulty_note = difficulty.clause(level)
+        content_difficulty = difficulty.content_difficulty(level)
     passage = Passage(title=analysis.title)
 
     def _task(t):
@@ -105,11 +110,13 @@ def build_exam(
     vocab_method: str = "synonym",
     content_difficulty: str = "hard",
     analyses: list | None = None,
+    level: str | None = None,
 ) -> Path:
     """여러 지문 원문 -> 검증 -> 2단 PDF 한 개.
 
     analyses 를 주면 분석 단계를 건너뛴다(교차 세트 공유).
     지문은 순서대로 조판하되, 각 지문 안의 유형 7종은 병렬로 생성한다.
+    level(상/중/하)로 전체 난이도를 조절한다.
     """
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
@@ -121,7 +128,7 @@ def build_exam(
         passages.append(build_passage(client, body, max_retries=max_retries,
                                        logger=logger, vocab_method=vocab_method,
                                        content_difficulty=content_difficulty,
-                                       analysis=analysis))
+                                       analysis=analysis, level=level))
 
     # 결과물 단계 검증(번호 연속 · 7종 완비)
     validator.validate_passages(passages)

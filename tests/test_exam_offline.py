@@ -336,6 +336,30 @@ def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") 
     print("✓ 병렬 생성·병렬 분석·1회2회 분석 공유 통과")
 
 
+def test_difficulty_lever() -> None:
+    """상/중/하 레버가 분석에 지침을 심고, 모든 생성기 context 에 실려 가는지."""
+    from exam import difficulty, gen2, pipeline
+    from exam.generators.base import context
+
+    assert difficulty.normalize(None) == "중"
+    assert difficulty.normalize("이상한값") == "중"
+    assert difficulty.content_difficulty("하") == "plain"
+    assert difficulty.content_difficulty("상") == "hard"
+
+    client = _FakeClient()
+    # level 을 주면 build_passage 가 분석에 지침을 심고 → context 에 노출된다
+    a = _fake_analysis()
+    a.difficulty_note = difficulty.clause("상")
+    assert "[난이도: 상]" in context(a)
+
+    # 1회·2회 모두 level 경로가 정상 배선되는지
+    p1 = pipeline.build_passage(client, "dummy", level="하")
+    assert p1.types == set(TYPE_ORDER)
+    p2 = gen2.build_passage2(client, "dummy", level="상")
+    assert p2.types == set(TYPE_ORDER2)
+    print("✓ 상/중/하 난이도 레버(지침 주입·1회2회 배선) 통과")
+
+
 if __name__ == "__main__":
     test_demo_validation_and_numbering()
     test_render_html_bold_rules()
@@ -347,4 +371,5 @@ if __name__ == "__main__":
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()
     test_parallel_and_shared_analysis()
+    test_difficulty_lever()
     print("\n모든 오프라인 테스트 통과 ✅")

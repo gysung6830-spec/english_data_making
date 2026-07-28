@@ -44,6 +44,8 @@ class Analysis(BaseModel):
     main_idea: str
     key_terms: list[KeyTerm] = Field(default_factory=list)
     hardest_sentence: str = ""
+    # 상/중/하 난이도 지침(생성 전에 주입, 모든 유형 프롬프트에 공통 전달). LLM 이 채우지 않음.
+    difficulty_note: str = ""
 
     @field_validator("sentences")
     @classmethod
