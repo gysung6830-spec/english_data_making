@@ -39,18 +39,20 @@ def _as_list(analyses) -> list[Analysis]:
 
 
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
-                  compact: bool = False, include_back: bool = True) -> str:
+                  compact: bool = False, include_back: bool = True,
+                  include_guide: bool = True) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
-    footer_note  : 하단 우측 저작권 문구.
-    footer_meta  : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
-    compact      : 압축 밀도(한 지문을 최대한 1페이지에).
-    include_back : 뒷페이지(어휘/흐름) 포함 여부(측정 시 False).
+    footer_note   : 하단 우측 저작권 문구.
+    footer_meta   : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
+    compact       : 압축 밀도(한 지문을 최대한 1페이지에).
+    include_back  : 뒷페이지(어휘/흐름) 포함 여부(측정 시 False).
+    include_guide : 맨 앞 '활용 가이드' 표지 페이지 포함 여부(측정 시 False).
     """
     tmpl = _env.get_template("worksheet_a.html.j2")
     return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
-                       include_back=include_back)
+                       include_back=include_back, include_guide=include_guide)
 
 
 def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:
@@ -64,11 +66,12 @@ def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> s
 
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",
-                brand: str = "은아 T", footer_meta: str = "", compact: bool = False) -> str:
+                brand: str = "은아 T", footer_meta: str = "", compact: bool = False,
+                include_guide: bool = True) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
-                         compact=compact)
+                         compact=compact, include_guide=include_guide)
 
 
 def _analysis_fits_one_page(analyses, compact: bool) -> bool:
@@ -76,7 +79,7 @@ def _analysis_fits_one_page(analyses, compact: bool) -> bool:
     from weasyprint import HTML  # dep
 
     lst = _as_list(analyses)
-    html = render_a_html(lst, compact=compact, include_back=False)
+    html = render_a_html(lst, compact=compact, include_back=False, include_guide=False)
     pages = len(HTML(string=html).render().pages)
     return pages <= len(lst)   # 지문당 1페이지
 
