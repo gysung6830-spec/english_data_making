@@ -17,3 +17,4 @@ scratchpad/
 output/*.png
 output/*.jpg
 output/*.json
+output/test/
