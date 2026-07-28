@@ -86,9 +86,12 @@ body {
 }
 
 /* ---------- 2단 컬럼 ---------- */
+/* column-fill: auto — 왼쪽 단을 위에서부터 채우고 넘칠 때만 오른쪽으로.
+   (자동 균형 배치가 만드는 어색한 빈칸/이동을 막는다. 왼쪽 단이 덜 차도 그대로 둔다.) */
 .columns {
   column-count: 2;
   column-gap: 7mm;
+  column-fill: auto;
   column-rule: 0.6px solid #cfe1d8;   /* 연한 초록 세로 구분선 */
 }
 
@@ -122,16 +125,25 @@ body {
 .passage-title { font-weight: 400; font-size: 9px; }
 
 /* ---------- 문제 항목 ---------- */
+/* 각 문항은 '쪼개지지 않는 한 덩어리'. 남은 칸에 안 들어가면 통째로 다음 칸/쪽으로 넘긴다
+   → 지문 박스가 칸 경계에서 잘리는 어색함을 막는다(왼쪽 단이 덜 차도 자연스럽게). */
 .q-item, .a-item {
   margin-bottom: 2.6mm;
-  break-inside: auto;
+  break-inside: avoid;
 }
+/* 서술형(지문+소문항)도 한 덩어리로 유지해 지문과 문항이 갈라지지 않게 한다.
+   현실적 지문 길이에선 한 칸에 들어가며, 혹시 넘치면 소문항 사이에서만 끊긴다(박스는 보호). */
+.sub-q { break-inside: avoid; }
+/* 해설 본문(산문)은 길면 자연스럽게 이어지도록 칸 넘김 허용 */
+.a-item { break-inside: auto; }
 .q-head { margin-bottom: 1mm; break-after: avoid; }
 .qnum { font-weight: 800; font-size: 1.25em; margin-right: 0.6mm; color: #2f7d61; }  /* 볼드 2 — 브랜드 초록으로 문항 구분 */
 .q-prompt { font-weight: 400; }
 .q-body { font-weight: 400; }
 
 /* ---------- 지문 박스 ---------- */
+/* 테두리 있는 박스는 칸/쪽 경계에서 절대 쪼개지지 않게(잘린 박스 방지) */
+.passage, .given-sentence, .boki { break-inside: avoid; }
 .passage {
   border: 0.8px solid #444;
   padding: 1.8mm 2.2mm;
@@ -180,7 +192,7 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 .cnum { font-weight: 400; }   /* 본문 속 ①②③ 위치·밑줄 번호는 얇게 */
 
 /* ---------- 서술형 ---------- */
-.sub-q { margin: 1.4mm 0; }
+.sub-q { margin: 1.4mm 0; break-inside: avoid; }   /* 소문항(질문+보기 박스)은 묶어서 */
 .sub-label { font-weight: 400; }
 .boki {
   border: 0.8px solid #3f9a7c;
