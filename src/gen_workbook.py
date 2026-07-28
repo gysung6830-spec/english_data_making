@@ -574,6 +574,96 @@ def band_divider(b, recs, seq, total_bands):
     </section>'''
 
 
+def _op_piece(lab, seam_html, mid_html, hook_lb, hook_html, give=False):
+    mid = f'<span class="op-mid">{mid_html}</span>' if mid_html else ""
+    return (f'<div class="op-piece"><div class="op-lab{" give" if give else ""}">{lab}</div>'
+            f'<div class="op-pc"><span class="op-seam">{seam_html}</span> {mid}'
+            f'<div class="op-hook"><span class="op-lb">{hook_lb}</span>{hook_html}</div></div></div>')
+
+
+def onepass_page(seqtype):
+    """순서·삽입 유형 표지 앞에 오는 '한 번에 푸는 법(1-PASS)' 특강 1쪽."""
+    if seqtype == "순서":
+        title = "순서를 '한 번에' 푸는 법"
+        steps = (
+            '<div class="op-st"><span class="k">STEP 1</span><b>끝에서 갈고리 하나</b>'
+            '<span class="d">주어진 글의 <b>끝</b>에서 “다음엔 반드시 ___가 와야 한다”를 <b>딱 하나</b>만 건다.</span></div>'
+            '<div class="op-st"><span class="k">STEP 2</span><b>첫머리만 본다</b>'
+            '<span class="d">(A)(B)(C)의 <b>첫 1~2문장</b>만. 몸통은 건너뛰고 <b>갈고리를 채우는 조각</b>을 고른다.</span></div>'
+            '<div class="op-st"><span class="k">STEP 3</span><b>끝→첫머리 반복</b>'
+            '<span class="d">고른 조각의 <b>끝</b>에서 새 갈고리 → 남은 첫머리에 맞춘다. 되돌아가지 않는다.</span></div>')
+        demo_cap = '각 조각의 <b>첫머리(이음매)</b>만 진하게, <b>몸통</b>은 흐리게 표시했다. 순서는 <b>첫머리 단서</b>만으로 정해진다.'
+        demo_src = "2024학년도 수능 37번"
+        pieces = (
+            _op_piece("주어진 글",
+                      'Norms emerge in groups … Thus, the start of a norm occurs when one person acts …',
+                      "", "갈고리",
+                      "한 사람이 <b>'그 행동'을 시작</b> → 다음엔 <b>그 행동을 이어받는</b> 조각이 와야 함", give=True)
+            + _op_piece("(C)",
+                        'Others may then conform to <span class="op-clue ck-ref">this behavior</span> <span class="op-clue ck-time">then</span> …',
+                        "The person who performed the initial action may think …", "이음매",
+                        "<b>this behavior·then</b> = 주어진 글의 그 행동을 받음 <span class='op-ar'>→</span> <b>주어진 글 바로 뒤</b>")
+            + _op_piece("(A)",
+                        'Thus, she may prescribe the behavior to <span class="op-clue ck-ref">them</span> …',
+                        "Alternately, she may communicate … In addition, she may threaten to sanction them …", "이음매",
+                        "<b>them</b> = (C)의 'others' <span class='op-ar'>→</span> <b>(C) 뒤</b>")
+            + _op_piece("(B)",
+                        '<span class="op-clue ck-conj">But</span> some others will not need to have the behavior prescribed …',
+                        "They will observe the regularity of behavior … either rational or moral reasons.", "이음매",
+                        "<b>But</b> = (A)의 '규정하면 따른다'를 뒤집어 마무리 <span class='op-ar'>→</span> <b>(A) 뒤</b>"))
+        path = ("읽은 것은 <b>이음매 4곳</b>뿐 (몸통 7문장은 안 읽음). &nbsp;주어진 글 <span class='op-arrow'>→</span> (C) "
+                "<span class='op-arrow'>→</span> (A) <span class='op-arrow'>→</span> (B) &nbsp;∴ 정답 <b>(C)-(A)-(B)</b>")
+    else:
+        title = "문장 삽입을 '한 번에' 푸는 법"
+        steps = (
+            '<div class="op-st"><span class="k">STEP 1</span><b>넣을 문장 먼저 · 손잡이 둘</b>'
+            '<span class="d"><b>뒤 손잡이</b>(지시어 this·they·But → 앞에 뭐가 있어야) + <b>앞 손잡이</b>(새 화제 → 뒤에 뭐가 와야).</span></div>'
+            '<div class="op-st"><span class="k">STEP 2</span><b>한 번 훑어 끊긴 곳</b>'
+            '<span class="d">본문을 <b>딱 한 번</b> 훑으며 <b>흐름이 끊긴 한 군데</b>(대명사가 받을 게 없거나 화제가 튀는 곳)를 찾는다.</span></div>'
+            '<div class="op-st"><span class="k">STEP 3</span><b>끊긴 자리 = 정답</b>'
+            '<span class="d">손잡이를 쥐고 들어가니 <b>다섯 자리를 시험하지 않는다.</b></span></div>')
+        demo_cap = '<b>넣을 문장</b>의 손잡이(지시어)를 먼저 뽑고, 본문에서 <b>흐름이 끊긴 한 곳</b>만 찾는다.'
+        demo_src = "2024학년도 6월 39번"
+        pieces = (
+            _op_piece("넣을 문장",
+                      '<span class="op-clue ck-ref">As a result, they</span> are fit and grow better, but they aren’t particularly long-lived.',
+                      "", "손잡이",
+                      "<b>they</b> = 앞의 'Some individuals'(홀로 광합성하는 그 나무들) → <b>그 문장 뒤</b>에 놓여야", give=True)
+            + _op_piece("① 앞 문장",
+                        'Some individuals photosynthesize like mad until sugar positively bubbles …',
+                        "", "이음매",
+                        "여기서 <b>흐름이 끊김</b> — 'they'가 받을 대상이 바로 여기 <span class='op-ar'>→</span> <b>이 뒤(②)가 자리</b>")
+            + _op_piece("② 뒤 문장",
+                        '<span class="op-clue ck-ref">This</span> is because a tree can be only as strong as the forest …',
+                        "", "이음매",
+                        "<b>This</b> = 넣을 문장의 '오래 못 산다'는 결과 <span class='op-ar'>→</span> 그 이유를 이어 <b>공백을 메움</b>"))
+        path = ("<b>넣을 문장</b>의 they를 쥐고 본문을 한 번 훑자 <b>② 자리</b>에서 딱 걸림 (다섯 자리 안 넣어봄). &nbsp;∴ 정답 <b>②</b>")
+
+    demo = (f'<div class="op-demo"><div class="op-cap">{demo_cap} '
+            f'<span class="op-srcnote">({demo_src})</span></div>'
+            f'<div class="op-legend">단서 색: <span class="op-clue ck-ref">지시어</span>'
+            f'<span class="op-clue ck-time">시간·순서</span><span class="op-clue ck-conj">연결어</span></div>'
+            f'<div class="op-pass">{pieces}</div>'
+            f'<div class="op-path">{path}</div></div>')
+    habits = (
+        '<ol><li><b>묻는 것 먼저</b> — 주어진 글·넣을 문장부터. 갈고리를 쥐고 본문에 들어가면 되돌아갈 일이 없다.</li>'
+        '<li><b>몸통 말고 이음매</b> — 조각의 끝과 다음 첫머리만. 가운데 문장은 순서 판단에 필요 없다.</li>'
+        '<li><b>눈으로 외우지 말고 손으로 표시</b> — 지시어→선행어를 화살표로 그으며 간다.</li></ol>')
+    return f'''<section class="onepass"><span class="wbm">wbspread</span>
+      <div class="op-top"><span class="op-badge">1-PASS</span><h1>{title}</h1>
+        <span class="op-sub">형광펜 독해 · 유형 특강</span></div>
+      <div class="op-diag">왜 자꾸 <b>여러 번 읽게</b> 될까? — 조각의 <b>'내용'</b>을 이해하려 읽기 때문.
+        순서·삽입은 이해 문제가 아니라 <b>'어디에 붙나'를 잇는 문제</b>다.
+        읽는 목적을 <b>“무슨 말이지?” → “어디에 붙지?”</b> 로 바꾸면 <b>한 번의 전진 읽기</b>로 끝난다.</div>
+      <div class="op-h2">{"순서" if seqtype=="순서" else "삽입"} — 한 번에 푸는 3단계</div>
+      <div class="op-steps">{steps}</div>
+      <div class="op-h2">시범 — {"몸통은 넘기고 '이음매'만 따라간다" if seqtype=="순서" else "손잡이 뽑고 '끊긴 곳' 한 번에"}</div>
+      {demo}
+      <div class="op-h2">재독을 없애는 습관 3</div>
+      <div class="op-habit">{habits}</div>
+    </section>'''
+
+
 def build(n=80):
     bank = [json.loads(l) for l in BANK.read_text(encoding="utf-8").splitlines() if l.strip()]
     picked = select(bank, n)
@@ -590,6 +680,10 @@ def build(n=80):
     present_bands = [b for b in BAND_ORDER if b in groups]
     body, idx, full = [], 0, 0
     for si, b in enumerate(present_bands, 1):
+        if b == "36-37":
+            body.append(onepass_page("순서"))
+        elif b == "38-39":
+            body.append(onepass_page("삽입"))
         body.append(band_divider(b, groups[b], si, len(present_bands)))
         for r in groups[b]:
             idx += 1
@@ -624,6 +718,41 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 
 /* 번호대 유형 표지 — 한 페이지 가득 */
 .banddiv{ height:274mm; display:flex; flex-direction:column; break-before:page; break-inside:avoid; padding:5mm 3mm; }
+/* 1-PASS 특강 페이지 (순서·삽입 표지 앞) */
+.onepass{ break-before:page; break-inside:avoid; padding:4mm 3mm; }
+.onepass .op-top{ display:flex; align-items:center; gap:10px; border-bottom:3px solid var(--ink); padding-bottom:8px; margin-bottom:12px; }
+.op-badge{ background:var(--ink); color:#fff; font-weight:800; font-size:12px; padding:3px 12px; border-radius:8px; }
+.onepass h1{ font-size:19px; font-weight:800; color:var(--ink-d); margin:0; }
+.op-sub{ margin-left:auto; font-size:10.5px; color:var(--muted); }
+.op-diag{ font-size:12px; line-height:1.65; background:#fff7ef; border:1px solid var(--must-line); border-radius:8px; padding:9px 13px; margin-bottom:13px; }
+.op-diag b{ color:#a8641a; }
+.op-h2{ font-size:13.5px; font-weight:800; color:var(--ink-d); margin:0 0 8px; padding-left:9px; border-left:5px solid var(--ink); }
+.op-steps{ display:flex; gap:10px; margin-bottom:14px; }
+.op-steps .op-st{ flex:1; background:#fff; border:1.5px solid var(--line); border-top:4px solid var(--ink); border-radius:9px; padding:10px 12px; }
+.op-steps .op-st .k{ display:inline-block; font-size:10px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:6px; padding:2px 9px; margin-bottom:6px; }
+.op-steps .op-st b{ display:block; font-size:12.5px; color:var(--ink-d); margin-bottom:4px; }
+.op-steps .op-st .d{ font-size:11px; line-height:1.55; color:#48525c; }
+.op-demo{ border:1.5px solid #cfe0d9; border-radius:10px; padding:11px 15px 6px; margin-bottom:14px; background:#fbfdfc; }
+.op-cap{ font-size:11px; color:var(--muted); margin-bottom:7px; } .op-cap b{ color:var(--ink-d); } .op-srcnote{ color:#8a929b; }
+.op-legend{ font-size:9.5px; color:#5a636c; margin-bottom:5px; }
+.op-clue{ color:#fff; font-weight:700; padding:0 4px; border-radius:3px; margin:0 1px; }
+.op-clue.ck-ref{ background:#2f6fb0; } .op-clue.ck-conj{ background:#cd5049; } .op-clue.ck-time{ background:#1f7a5c; }
+.op-pass{ font-size:12px; line-height:1.75; }
+.op-piece{ display:flex; gap:9px; padding:6px 0; border-bottom:1px dashed #dbe6e1; }
+.op-piece:last-child{ border-bottom:none; }
+.op-lab{ flex:none; width:56px; height:fit-content; text-align:center; font-weight:800; font-size:10px; color:#1f4d7a; background:#e2eefa; border-radius:6px; padding:4px 3px; }
+.op-lab.give{ color:var(--ink-d); background:#e2efe9; }
+.op-pc{ flex:1; min-width:0; }
+.op-seam{ font-family:'Liberation Serif',serif; font-weight:600; }
+.op-mid{ font-family:'Liberation Serif',serif; color:#aab0b6; font-size:10.5px; }
+.op-hook{ font-size:10.5px; color:#1f4d7a; margin-top:3px; }
+.op-hook .op-lb{ display:inline-block; font-size:8.5px; font-weight:800; color:#fff; background:#2f6fb0; border-radius:8px; padding:1px 7px; margin-right:5px; }
+.op-hook b{ color:var(--ink-d); } .op-ar{ color:#9bb4cc; font-weight:800; margin:0 4px; }
+.op-path{ margin-top:9px; background:#eef4f1; border-left:4px solid var(--ink); border-radius:7px; padding:9px 13px; font-size:12px; line-height:1.6; }
+.op-path b{ color:var(--ink-d); } .op-path .op-arrow{ color:var(--ink); font-weight:800; }
+.op-habit{ background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:6px 16px; }
+.op-habit ol{ margin:6px 0; padding-left:18px; } .op-habit li{ font-size:11.5px; line-height:1.65; margin-bottom:5px; }
+.op-habit li b{ color:var(--ink-d); }
 .bd-top{ display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:7px; }
 .bd-top .bd-seq{ font-size:12px; font-weight:800; color:#fff; background:var(--ink); border-radius:6px; padding:3px 12px; }
 .bd-top .bd-part{ font-size:11px; font-weight:800; color:var(--ink-d); letter-spacing:1px; }
