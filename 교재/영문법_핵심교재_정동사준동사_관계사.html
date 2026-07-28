@@ -1,0 +1,552 @@
+<meta charset="utf-8">
+<title>영문법 핵심교재 · 정동사 vs 준동사 / 관계사</title>
+<style>
+/* ============================================================
+   영문법 핵심교재 — 인쇄용(A4) & 화면용 겸용 스타일
+   색상: 문법 뼈대=파랑, 준동사=청록, 규칙/주의=빨강, 예문 강조=노랑
+   ============================================================ */
+@page { size: A4; margin: 14mm 14mm 16mm 14mm; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body{
+  font-family:"Noto Sans KR","NanumGothic","Malgun Gothic","맑은 고딕",sans-serif;
+  color:#23272e; line-height:1.7; font-size:15px;
+  margin:0; padding:0; background:#f4f5f7;
+}
+:root{
+  --blue:#2f4f9e; --blue-bg:#eef1fa;
+  --teal:#22857b; --teal-bg:#e7f4f2;
+  --red:#c0433c; --red-bg:#fbeceb;
+  --amber:#b9791f; --amber-bg:#fbf3e4;
+  --green:#2f8050; --green-bg:#eaf5ee;
+  --ink:#1d2733; --muted:#6b7280; --line:#e3e6ea;
+}
+.page{ max-width:900px; margin:0 auto; background:#fff; padding:40px 46px 60px;
+  box-shadow:0 1px 8px rgba(0,0,0,.06); }
+
+/* 표지/헤더 */
+.cover{ border-bottom:3px solid #111827; padding-bottom:16px; margin-bottom:26px; }
+.cover .badge{ display:inline-block; background:#111827; color:#fff; font-size:12px;
+  font-weight:700; padding:3px 11px; border-radius:5px; letter-spacing:.02em; }
+.cover h1{ font-size:29px; font-weight:800; margin:12px 0 4px; letter-spacing:-.01em; }
+.cover .sub{ color:var(--muted); font-size:14px; }
+
+/* 목차 */
+.toc{ background:#fafbfc; border:1px solid var(--line); border-radius:10px;
+  padding:18px 24px; margin-bottom:34px; }
+.toc h2{ font-size:15px; margin:0 0 10px; color:var(--muted); font-weight:700;
+  letter-spacing:.04em; }
+.toc ol{ margin:0; padding-left:20px; }
+.toc li{ margin:5px 0; font-size:14.5px; }
+.toc a{ color:var(--ink); text-decoration:none; }
+.toc a:hover{ text-decoration:underline; }
+.toc .lv2{ list-style:none; padding-left:6px; color:var(--muted); font-size:13.5px; }
+
+/* 단원 */
+.unit{ margin:0 0 20px; }
+.unit-head{ display:flex; align-items:baseline; gap:12px; margin:44px 0 18px;
+  padding-bottom:10px; border-bottom:2.5px solid var(--blue); }
+.unit-no{ font-size:14px; font-weight:800; color:#fff; background:var(--blue);
+  padding:4px 12px; border-radius:20px; flex:none; }
+.unit-head h2{ font-size:23px; font-weight:800; margin:0; }
+
+h3{ font-size:18px; font-weight:800; margin:30px 0 10px; color:var(--ink);
+  padding-left:11px; border-left:5px solid var(--blue); }
+h4{ font-size:15.5px; font-weight:700; margin:20px 0 8px; color:#374151; }
+p{ margin:9px 0; }
+strong{ color:#111827; }
+
+/* 개념 정의 박스 */
+.def{ background:var(--blue-bg); border:1px solid #cdd7f0; border-left:5px solid var(--blue);
+  border-radius:8px; padding:14px 18px; margin:14px 0; }
+.def .t{ font-weight:800; color:var(--blue); font-size:14px; margin-bottom:4px; }
+
+/* 핵심 규칙 박스 */
+.rule{ background:var(--red-bg); border:1px solid #f0c9c6; border-left:5px solid var(--red);
+  border-radius:8px; padding:14px 18px; margin:14px 0; }
+.rule .t{ font-weight:800; color:var(--red); font-size:14px; margin-bottom:4px; }
+
+/* 팁/요령 */
+.tip{ background:var(--amber-bg); border:1px solid #ecd7a8; border-left:5px solid var(--amber);
+  border-radius:8px; padding:14px 18px; margin:14px 0; }
+.tip .t{ font-weight:800; color:var(--amber); font-size:14px; margin-bottom:4px; }
+
+/* 준동사 청록 강조 */
+.note-teal{ background:var(--teal-bg); border:1px solid #bfe2dd; border-left:5px solid var(--teal);
+  border-radius:8px; padding:14px 18px; margin:14px 0; }
+.note-teal .t{ font-weight:800; color:var(--teal); font-size:14px; margin-bottom:4px; }
+
+/* 예문 */
+.ex{ margin:10px 0; padding:10px 14px; background:#fbfbfc; border:1px solid var(--line);
+  border-radius:8px; }
+.ex .en{ font-size:15px; }
+.ex .ko{ color:var(--muted); font-size:13.5px; margin-top:3px; }
+.ex + .ex{ margin-top:8px; }
+.fin{ color:var(--blue); font-weight:800; border-bottom:2px solid var(--blue); }      /* 정동사 */
+.ver{ color:var(--teal); font-weight:800; border-bottom:2px dotted var(--teal); }      /* 준동사 */
+.rel{ color:#8a4fbf; font-weight:800; }                                                /* 관계사 */
+.ok::before{ content:"○ "; color:var(--green); font-weight:800; }
+.no::before{ content:"✕ "; color:var(--red); font-weight:800; }
+.no .en{ text-decoration:line-through; text-decoration-color:#e0a6a2; }
+
+/* 표 */
+table{ border-collapse:collapse; width:100%; margin:14px 0; font-size:14px; }
+th,td{ border:1px solid var(--line); padding:8px 11px; text-align:left; vertical-align:top; }
+th{ background:#f3f5f8; font-weight:700; color:#374151; }
+td code, .code{ background:#eef1f5; padding:1px 6px; border-radius:4px; font-size:13px;
+  font-family:"SFMono-Regular",Consolas,monospace; }
+tr:nth-child(even) td{ background:#fcfcfd; }
+
+/* 순서도(판별법) */
+.flow{ border:1px dashed #b9c2d6; border-radius:10px; padding:16px 20px; margin:16px 0;
+  background:#fafbff; }
+.flow .step{ margin:8px 0; padding-left:26px; position:relative; }
+.flow .step b{ color:var(--blue); }
+.flow .q{ font-weight:700; }
+.arrow{ color:var(--muted); }
+
+/* 연습문제 */
+.quiz{ background:#fbfcfd; border:1px solid var(--line); border-radius:10px;
+  padding:18px 22px; margin:20px 0; }
+.quiz h4{ margin-top:0; color:var(--blue); }
+.quiz ol{ padding-left:22px; }
+.quiz li{ margin:10px 0; }
+.answer{ margin-top:14px; border-top:1px dashed var(--line); padding-top:12px; }
+.answer .t{ font-weight:800; color:var(--green); margin-bottom:6px; }
+.answer ol{ padding-left:22px; }
+.answer li{ margin:7px 0; font-size:14px; color:#374151; }
+
+/* 페이지 나눔 */
+.pb{ break-before:page; }
+hr{ border:none; border-top:1px solid var(--line); margin:34px 0; }
+.foot{ margin-top:40px; padding-top:14px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:12.5px; text-align:center; }
+
+@media print{
+  body{ background:#fff; font-size:11pt; }
+  .page{ box-shadow:none; max-width:none; padding:0; }
+  .unit-head{ margin-top:0; }
+  .def,.rule,.tip,.note-teal,.ex,.quiz,.flow,table{ break-inside:avoid; }
+  h3,h4{ break-after:avoid; }
+}
+</style>
+
+<div class="page">
+
+<!-- ===================== 표지 ===================== -->
+<header class="cover">
+  <span class="badge">영문법 핵심교재</span>
+  <h1>문장의 뼈대를 읽는 힘</h1>
+  <div class="sub">① 정동사 vs 준동사 &nbsp;·&nbsp; ② 관계사 &nbsp;—&nbsp; 개념 · 판별법 · 예문 · 연습문제</div>
+</header>
+
+<!-- ===================== 목차 ===================== -->
+<nav class="toc">
+  <h2>목 차</h2>
+  <ol>
+    <li><a href="#u1"><b>Unit 1. 정동사 vs 준동사</b> — 문장의 뼈대를 결정짓는 핵심 구분법</a>
+      <ol>
+        <li class="lv2">1-1. 왜 이 구분이 가장 먼저인가</li>
+        <li class="lv2">1-2. 정동사(Finite Verb)의 정체</li>
+        <li class="lv2">1-3. 준동사(Verbals)의 정체 — 부정사·동명사·분사</li>
+        <li class="lv2">1-4. 한눈에 보는 대조표</li>
+        <li class="lv2">1-5. 3단계 판별법(순서도)</li>
+        <li class="lv2">1-6. 절이 2개면 연결어가 필요하다</li>
+        <li class="lv2">1-7. 자주 틀리는 함정 5가지</li>
+        <li class="lv2">1-8. 연습문제 &amp; 정답·해설</li>
+      </ol>
+    </li>
+    <li><a href="#u2"><b>Unit 2. 관계사</b> — 두 문장을 하나로 잇는 연결어</a>
+      <ol>
+        <li class="lv2">2-1. 관계사의 원리: 접속사 + (대)명사·부사</li>
+        <li class="lv2">2-2. 관계대명사: 격(주격·목적격·소유격)과 선택</li>
+        <li class="lv2">2-3. 관계부사: when·where·why·how</li>
+        <li class="lv2">2-4. 결정적 판별: 뒤 문장이 완전한가 불완전한가</li>
+        <li class="lv2">2-5. 한정적 용법 vs 계속적 용법(콤마)</li>
+        <li class="lv2">2-6. 전치사 + 관계대명사</li>
+        <li class="lv2">2-7. that·what의 특수성 / 복합관계사</li>
+        <li class="lv2">2-8. 연습문제 &amp; 정답·해설</li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+
+<!-- ===================================================================
+     UNIT 1
+==================================================================== -->
+<section class="unit" id="u1">
+  <div class="unit-head"><span class="unit-no">UNIT 1</span>
+    <h2>정동사 vs 준동사</h2></div>
+  <p style="color:var(--muted);margin-top:-6px;">문장의 뼈대를 결정짓는 핵심 구분법</p>
+
+  <h3 id="s11">1-1. 왜 이 구분이 가장 먼저인가</h3>
+  <p>영어 한 문장을 정확히 읽고 쓰려면, 가장 먼저 던져야 할 질문은 이것입니다.
+  <strong>"이 문장의 진짜 동사(뼈대)는 무엇인가?"</strong> 문장에는 동사처럼 생긴 말이
+  여러 개 들어 있을 수 있지만, <strong>문장 전체를 떠받치는 '진짜 동사'는 절마다 딱 하나</strong>뿐입니다.
+  그 하나가 바로 <span class="fin">정동사</span>이고, 나머지 동사처럼 생긴 말들은 모두
+  <span class="ver">준동사</span>입니다.</p>
+
+  <div class="def">
+    <div class="t">한 문장 = 뼈대(정동사) + 살(준동사·수식어)</div>
+    정동사를 잘못 잡으면 주어·시제·해석이 전부 어긋납니다. 반대로 정동사만 정확히 찾으면
+    아무리 긴 문장도 구조가 한눈에 들어옵니다. <b>독해·어법·영작의 출발점</b>이 바로 이 구분입니다.
+  </div>
+
+  <div class="ex">
+    <div class="en">The scientist <span class="fin">studying</span>… ← 이게 동사일까?</div>
+    <div class="ko">"연구하는 그 과학자…" — <b>studying</b>은 뼈대가 아니라 명사를 꾸미는 준동사(분사).
+    문장은 아직 끝나지 않았고, 진짜 동사가 뒤에 따로 나온다.</div>
+  </div>
+  <div class="ex">
+    <div class="en">The scientist studying the virus <span class="fin">won</span> the prize.</div>
+    <div class="ko">그 바이러스를 <span class="ver">연구하는</span>(준동사) 과학자가 상을 <span class="fin">받았다</span>(정동사).</div>
+  </div>
+
+  <h3 id="s12">1-2. 정동사(Finite Verb)의 정체</h3>
+  <div class="def">
+    <div class="t">정동사 = 주어와 짝을 이루어 '시제·수·인칭'이 살아 있는 동사</div>
+    정동사는 <b>주어의 인칭·수에 일치</b>하고, <b>시제(현재/과거)를 스스로 표현</b>합니다.
+    그래서 문장(절)의 <b>뼈대</b>가 될 수 있습니다.
+  </div>
+  <ul>
+    <li><b>주어가 있다</b> — 누가/무엇이 그 동작을 하는지 문법적 주어와 짝을 이룹니다.</li>
+    <li><b>시제 변화를 한다</b> — <code>study → studied</code>, <code>is → was</code>처럼 과거·현재로 변합니다.</li>
+    <li><b>수 일치를 한다</b> — <code>He studies</code> / <code>They study</code>.</li>
+    <li><b>절마다 1개</b> — 하나의 절(주어+동사 덩어리)에는 정동사가 정확히 하나.</li>
+  </ul>
+  <div class="tip">
+    <div class="t">판별 팁 — "시제를 바꿔보라"</div>
+    그 동사를 <b>현재↔과거로 바꿨을 때 문장이 자연스럽게 성립</b>하면 정동사입니다.
+    <br>· <span class="code">She <span class="fin">runs</span> → She <span class="fin">ran</span></span> ○ (정동사)
+    <br>· <span class="code">a girl <span class="ver">running</span></span> → "a girl ran…"으로 바꾸면 의미가 달라짐 → 준동사
+  </div>
+
+  <h3 id="s13">1-3. 준동사(Verbals)의 정체 — 부정사·동명사·분사</h3>
+  <div class="note-teal">
+    <div class="t">준동사 = 동사에서 나왔지만 명사·형용사·부사 역할을 하는 말</div>
+    준동사는 <b>스스로 시제·수 일치를 하지 못하고</b>, <b>혼자서는 절의 뼈대가 될 수 없습니다.</b>
+    동사의 '의미'는 가지되, 문장 안에서의 '직책'은 명사·형용사·부사입니다.
+  </div>
+  <table>
+    <tr><th>종류</th><th>형태</th><th>주로 하는 역할</th><th>예</th></tr>
+    <tr><td><b>to부정사</b></td><td>to + 동사원형</td><td>명사·형용사·부사</td>
+      <td>I want <span class="ver">to sleep</span>. (자는 것을 원한다)</td></tr>
+    <tr><td><b>동명사</b></td><td>동사원형 + -ing</td><td>명사(주어·목적어·보어)</td>
+      <td><span class="ver">Reading</span> is fun. (읽는 것)</td></tr>
+    <tr><td><b>현재분사</b></td><td>동사원형 + -ing</td><td>형용사(능동·진행)</td>
+      <td>the <span class="ver">crying</span> baby (우는 아기)</td></tr>
+    <tr><td><b>과거분사</b></td><td>p.p. (-ed/불규칙)</td><td>형용사(수동·완료)</td>
+      <td>a <span class="ver">broken</span> window (깨진 창문)</td></tr>
+  </table>
+  <div class="rule">
+    <div class="t">핵심 — <span style="color:inherit">-ing와 to는 '뼈대'가 아니다</span></div>
+    <code>-ing</code>나 <code>to+동사</code>는 아무리 동사처럼 보여도 <b>그 자체로는 정동사가 될 수 없습니다.</b>
+    진행형·완료형처럼 <b>be동사·have동사(=정동사)의 도움</b>을 받을 때에만 서술어의 일부가 됩니다.
+    <br>· <span class="code">She <span class="fin">is</span> <span class="ver">running</span>.</span> → 뼈대는 <b>is</b>, running은 딸린 부분
+    <br>· <span class="code">a woman <span class="ver">running</span></span> → 정동사 없음 → 아직 문장이 아님(구)
+  </div>
+
+  <h3 id="s14" class="pb">1-4. 한눈에 보는 대조표</h3>
+  <table>
+    <tr><th>구분</th><th><span class="fin">정동사</span> (Finite)</th><th><span class="ver">준동사</span> (Non-finite)</th></tr>
+    <tr><td>시제 표현</td><td>스스로 함 (현재/과거)</td><td>못 함 (형태 고정)</td></tr>
+    <tr><td>주어와 수 일치</td><td>함 (he studies)</td><td>안 함</td></tr>
+    <tr><td>문법상 주어</td><td>있음</td><td>'의미상 주어'만 있음</td></tr>
+    <tr><td>절의 뼈대(서술어)</td><td>될 수 있음</td><td>될 수 없음</td></tr>
+    <tr><td>문장 내 역할</td><td>동사(서술)</td><td>명사·형용사·부사</td></tr>
+    <tr><td>절당 개수</td><td>정확히 1개</td><td>여러 개 가능</td></tr>
+    <tr><td>예</td><td>runs, ran, is, has, will go</td><td>to run, running, run(p.p.)</td></tr>
+  </table>
+
+  <h3 id="s15">1-5. 3단계 판별법(순서도)</h3>
+  <div class="flow">
+    <div class="step q">STEP 1. 동사처럼 생긴 말을 <b>모두</b> 찾아 밑줄 긋는다.</div>
+    <div class="step"><span class="arrow">→</span> to부정사 · -ing · p.p. · 일반동사 · be/have/조동사 전부.</div>
+    <div class="step q">STEP 2. 각각을 <b>현재↔과거로 바꿔</b> 본다.</div>
+    <div class="step"><span class="arrow">→</span> 시제 변화가 <b>가능하고 자연스러우면</b> → <span class="fin">정동사 후보</span></div>
+    <div class="step"><span class="arrow">→</span> <code>to+동사</code>, <code>-ing</code>, <code>p.p.</code> 모양 그대로면 → <span class="ver">준동사</span></div>
+    <div class="step q">STEP 3. <b>주어</b>를 짝지어 본다.</div>
+    <div class="step"><span class="arrow">→</span> 문법상 주어와 수·인칭이 일치하면 그것이 <b>그 절의 정동사</b>.</div>
+  </div>
+  <div class="ex">
+    <div class="en">To master English, students <span class="fin">need</span> to practice speaking daily.</div>
+    <div class="ko">동사꼴: <span class="ver">To master</span>(준·부사), <span class="fin">need</span>(정), <span class="ver">to practice</span>(준·목적어), <span class="ver">speaking</span>(준·목적어)
+    → 뼈대는 <b>need</b> 하나. 주어 students와 일치.</div>
+  </div>
+
+  <h3 id="s16">1-6. 절이 2개면 연결어가 필요하다</h3>
+  <div class="rule">
+    <div class="t">접속의 대원칙</div>
+    <b>정동사가 2개면 절이 2개</b>입니다. 절 2개를 한 문장에 넣으려면 반드시
+    <b>접속사(and, but, because, that, when…)나 관계사</b>가 그 사이에 있어야 합니다.
+    <br>➡ <b>연결어 개수 = 정동사 개수 − 1</b> (정동사 3개면 연결어 최소 2개)
+  </div>
+  <div class="ex no">
+    <div class="en">The train <span class="fin">arrived</span> everyone <span class="fin">cheered</span>.</div>
+    <div class="ko">정동사 2개(arrived, cheered)인데 연결어가 없음 → 비문(run-on).</div>
+  </div>
+  <div class="ex ok">
+    <div class="en">The train arrived, <span class="rel">and</span> everyone cheered.</div>
+    <div class="ko">접속사 and로 두 절을 연결 → 정문. (이 원리가 Unit 2 관계사로 이어진다)</div>
+  </div>
+  <div class="tip">
+    <div class="t">거꾸로도 성립</div>
+    긴 문장에서 <b>접속사·관계사를 발견</b>했다면, 그 뒤에는 <b>또 하나의 정동사(=절)</b>가
+    반드시 온다는 신호입니다. 연결어를 이정표 삼아 절을 끊어 읽으세요.
+  </div>
+
+  <h3 id="s17">1-7. 자주 틀리는 함정 5가지</h3>
+  <table>
+    <tr><th>#</th><th>함정</th><th>바로잡기</th></tr>
+    <tr><td>1</td><td>-ing를 무조건 진행형(정동사)으로 봄</td>
+      <td><b>be동사</b>가 있어야 진행형. be가 없으면 분사·동명사(준동사).</td></tr>
+    <tr><td>2</td><td>준동사만 있는 구를 문장으로 착각</td>
+      <td>정동사가 없으면 문장이 아니라 <b>구(phrase)</b>. (<span class="code">The man walking…</span>)</td></tr>
+    <tr><td>3</td><td>정동사 2개를 접속사 없이 나열</td>
+      <td>연결어를 넣거나, 하나를 <b>준동사로</b> 바꿔라.</td></tr>
+    <tr><td>4</td><td>p.p.를 과거시제(정동사)로 오해</td>
+      <td><span class="code">a letter <span class="ver">written</span> in French</span>의 written은 분사(수동).</td></tr>
+    <tr><td>5</td><td>to부정사를 서술어로 씀</td>
+      <td><span class="code">My plan <span class="ver">to travel</span></span>은 명사수식일 뿐 → 뒤에 정동사(is 등) 필요.</td></tr>
+  </table>
+  <div class="ex no">
+    <div class="en">My goal to become a doctor.</div>
+    <div class="ko">정동사가 없다 → 문장 미완성.</div>
+  </div>
+  <div class="ex ok">
+    <div class="en">My goal <span class="fin">is</span> <span class="ver">to become</span> a doctor.</div>
+    <div class="ko">정동사 is가 뼈대, to become은 보어(준동사). ○</div>
+  </div>
+
+  <!-- 연습문제 -->
+  <div class="quiz" id="s18">
+    <h4>1-8. 연습문제</h4>
+    <p><b>A. 각 문장에서 진짜 동사(정동사)에 ○, 준동사에 △ 하시오.</b></p>
+    <ol>
+      <li>The boy sitting by the window is my brother.</li>
+      <li>To learn a language takes patience and time.</li>
+      <li>Surprised by the noise, the cat jumped off the sofa.</li>
+    </ol>
+    <p><b>B. 어법상 올바른 것을 고르시오.</b></p>
+    <ol start="4">
+      <li>The report ( written / wrote ) by the team impressed everyone.</li>
+      <li>She wants ( becoming / to become ) an engineer.</li>
+      <li>The rain stopped ( the children played / and the children played ) outside.</li>
+    </ol>
+    <p><b>C. 다음 '구'를 정동사를 넣어 완전한 문장으로 고치시오.</b></p>
+    <ol start="7">
+      <li>The students preparing for the final exam.</li>
+    </ol>
+
+    <div class="answer">
+      <div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>is</b>가 정동사(○), <b>sitting</b>은 주어를 꾸미는 현재분사(△). → "창가에 앉아 있는 소년은 내 동생이다."</li>
+        <li><b>takes</b>가 정동사(○). 주어 자리의 <b>To learn</b>은 to부정사(△, 명사 역할). → "언어를 배우는 것은 인내와 시간이 든다."</li>
+        <li><b>jumped</b>가 정동사(○). 문장 앞 <b>Surprised</b>는 분사구문(△, 과거분사). → "소음에 놀라, 고양이가 소파에서 뛰어내렸다."</li>
+        <li><b>written</b>. 뒤에 정동사 impressed가 이미 있으므로, 앞의 동사꼴은 명사(report)를 꾸미는 <b>과거분사(수동)</b>여야 한다. wrote(과거시제)를 쓰면 정동사가 2개가 되어 비문.</li>
+        <li><b>to become</b>. want는 to부정사를 목적어로 취하는 동사.</li>
+        <li><b>and the children played</b>. stopped와 played는 둘 다 정동사 → 접속사 and로 연결해야 한다.</li>
+        <li>예: <b>The students preparing for the final exam <u>looked</u> nervous.</b> (정동사 looked 추가) / 또는 <b>The students <u>were</u> preparing for the final exam.</b> (be동사로 진행형 정동사화)</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     UNIT 2
+==================================================================== -->
+<section class="unit pb" id="u2">
+  <div class="unit-head" style="border-color:#8a4fbf;">
+    <span class="unit-no" style="background:#8a4fbf;">UNIT 2</span>
+    <h2>관계사</h2></div>
+  <p style="color:var(--muted);margin-top:-6px;">두 문장을 하나로 잇는 연결어 — 접속사와 대명사를 동시에</p>
+
+  <h3 id="s21" style="border-color:#8a4fbf;">2-1. 관계사의 원리: 접속사 + (대)명사·부사</h3>
+  <div class="def" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">관계사 = '접속사'와 '(대)명사·부사'를 한 몸에 겸한 말</div>
+    두 문장이 <b>같은 명사</b>를 공유할 때, 그 반복되는 명사를 관계사로 바꿔 <b>한 문장으로 합칩니다.</b>
+    관계사가 이끄는 절(관계절)은 앞의 명사, 즉 <b>선행사(先行詞)</b>를 꾸밉니다.
+  </div>
+  <p><b>두 문장이 합쳐지는 과정</b> — 반복되는 명사를 관계사로 바꾸고 앞으로 보낸다:</p>
+  <div class="ex">
+    <div class="en">I know a man. + <span class="fin">He</span> speaks five languages.</div>
+    <div class="ko">두 문장이 'a man = He'를 공유.</div>
+  </div>
+  <div class="ex ok">
+    <div class="en">I know a man <span class="rel">who</span> speaks five languages.</div>
+    <div class="ko">He를 관계대명사 who로 바꿔 연결. <b>who = and he</b> (접속사+대명사). 선행사 = a man.</div>
+  </div>
+  <div class="tip">
+    <div class="t">Unit 1과의 연결</div>
+    관계사는 <b>연결어</b>이므로, 관계사 뒤에는 반드시 <b>또 하나의 정동사(관계절의 서술어)</b>가 옵니다.
+    "정동사가 2개면 연결어가 있어야 한다"는 원칙(1-6)의 대표 사례입니다.
+  </div>
+
+  <h3 id="s22" style="border-color:#8a4fbf;">2-2. 관계대명사: 격과 선택</h3>
+  <p>관계대명사는 <b>선행사의 종류(사람/사물)</b>와 <b>관계절 안에서의 격(주격·목적격·소유격)</b>에 따라 정해집니다.</p>
+  <table>
+    <tr><th>선행사</th><th>주격</th><th>목적격</th><th>소유격</th></tr>
+    <tr><td>사람</td><td>who</td><td>who(m)</td><td>whose</td></tr>
+    <tr><td>사물·동물</td><td>which</td><td>which</td><td>whose / of which</td></tr>
+    <tr><td>사람·사물 공통</td><td>that</td><td>that</td><td>—</td></tr>
+    <tr><td>선행사 포함</td><td colspan="3">what (= the thing which) — 선행사를 <b>따로 두지 않음</b></td></tr>
+  </table>
+  <div class="ex"><div class="en">The girl <span class="rel">who</span> won the race is my cousin.</div>
+    <div class="ko"><b>주격</b>: 관계절(who won…)에서 주어 자리. 뒤에 동사 won이 바로 옴.</div></div>
+  <div class="ex"><div class="en">The book <span class="rel">which</span> I bought was expensive.</div>
+    <div class="ko"><b>목적격</b>: I bought의 목적어 자리. 뒤에 '주어+동사'가 옴. → 생략 가능.</div></div>
+  <div class="ex"><div class="en">A student <span class="rel">whose</span> essay won first prize gave a speech.</div>
+    <div class="ko"><b>소유격</b>: whose + 명사(essay). "그 학생의 에세이가…"</div></div>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">목적격 관계대명사는 생략 가능</div>
+    <b>목적격</b>(who(m)/which/that)은 흔히 생략합니다. 생략의 신호는
+    <b>「선행사 + (관계사 없이) 주어 + 동사」</b> 배열입니다.
+    <br><span class="code">The book <s>which</s> I bought…</span> = The book I bought…
+  </div>
+
+  <h3 id="s23" style="border-color:#8a4fbf;">2-3. 관계부사: when·where·why·how</h3>
+  <div class="def" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">관계부사 = 접속사 + 부사(전치사+관계대명사)</div>
+    선행사가 <b>시간·장소·이유·방법</b>일 때, '전치사+관계대명사'를 <b>한 단어(관계부사)</b>로 대신합니다.
+  </div>
+  <table>
+    <tr><th>관계부사</th><th>선행사(시간/장소 등)</th><th>= 전치사+which</th><th>예</th></tr>
+    <tr><td>when</td><td>the time, the day…</td><td>on/at/in which</td><td>the day <span class="rel">when</span> we met</td></tr>
+    <tr><td>where</td><td>the place, the house…</td><td>in/at/on which</td><td>the city <span class="rel">where</span> I live</td></tr>
+    <tr><td>why</td><td>the reason</td><td>for which</td><td>the reason <span class="rel">why</span> he left</td></tr>
+    <tr><td>how</td><td>the way</td><td>in which</td><td>the way <span class="rel">how</span> → 둘 중 하나만!</td></tr>
+  </table>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">주의 — the way와 how는 함께 못 쓴다</div>
+    <span class="code">the way how</span>는 <b>비문</b>. <b>the way</b> 또는 <b>how</b> 중 하나만 씁니다.
+    <br>○ the way he speaks &nbsp;/&nbsp; ○ how he speaks &nbsp;/&nbsp; ✕ the way how he speaks
+  </div>
+
+  <h3 id="s24" style="border-color:#8a4fbf;">2-4. 결정적 판별: 뒤 문장이 완전한가 불완전한가</h3>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">관계대명사 ↔ 관계부사, 이 한 가지로 갈린다</div>
+    관계사 <b>뒤의 절</b>을 보라.
+    <br>· 주어·목적어 중 <b>하나가 빠진 불완전한 절</b> → <b>관계대명사</b>(who/which/that)
+    <br>· 주어·목적어가 다 갖춰진 <b>완전한 절</b> → <b>관계부사</b>(when/where/why) 또는 <b>전치사+관계대명사</b>
+  </div>
+  <table>
+    <tr><th>문장</th><th>뒤 절</th><th>정답</th></tr>
+    <tr><td>the house ___ I bought</td><td>I bought (목적어 없음·불완전)</td><td><b>which/that</b> (관계대명사)</td></tr>
+    <tr><td>the house ___ I live</td><td>I live (완전)</td><td><b>where</b> (관계부사)</td></tr>
+    <tr><td>the day ___ changed my life</td><td>주어 없음·불완전</td><td><b>which/that</b></td></tr>
+    <tr><td>the day ___ I was born</td><td>I was born (완전)</td><td><b>when</b></td></tr>
+  </table>
+  <div class="tip">
+    <div class="t">함정 — 선행사 종류에 속지 말 것</div>
+    선행사가 'the day(시간)'라고 무조건 when이 아닙니다. <b>뒤 절의 완전성</b>이 먼저입니다.
+    <br>· the day <b>which</b> changed my life (뒤 절에 주어가 비어 있음 → 관계대명사)
+  </div>
+
+  <h3 id="s25" style="border-color:#8a4fbf;" class="pb">2-5. 한정적 용법 vs 계속적 용법(콤마)</h3>
+  <table>
+    <tr><th>구분</th><th>한정적 용법 (콤마 X)</th><th>계속적 용법 (콤마 O)</th></tr>
+    <tr><td>형태</td><td>선행사 + 관계절</td><td>선행사<b>,</b> + 관계절</td></tr>
+    <tr><td>기능</td><td>선행사를 <b>제한·특정</b></td><td>선행사에 대한 <b>추가 정보(부연)</b></td></tr>
+    <tr><td>해석</td><td>"~하는 (그) ___"</td><td>"그런데/그리고 그것은 ~"</td></tr>
+    <tr><td>that 사용</td><td>가능</td><td><b>불가</b> (that은 콤마 뒤 X)</td></tr>
+    <tr><td>생략</td><td>목적격 생략 가능</td><td>생략 불가</td></tr>
+  </table>
+  <div class="ex"><div class="en">He has two sons <span class="rel">who</span> became doctors.</div>
+    <div class="ko"><b>한정적</b>: 의사가 된 아들이 둘 (다른 아들이 더 있을 수 있음).</div></div>
+  <div class="ex"><div class="en">He has two sons<b>,</b> <span class="rel">who</span> became doctors.</div>
+    <div class="ko"><b>계속적</b>: 아들은 딱 둘이고, 그 둘 다 의사가 되었다(부연).</div></div>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">계속적 용법의 which는 '앞 문장 전체'도 받는다</div>
+    <span class="code">He passed the exam, <span class="rel">which</span> surprised us.</span>
+    → which = "그가 시험에 합격한 사실". <b>이때 that·what은 쓸 수 없다.</b>
+  </div>
+
+  <h3 id="s26" style="border-color:#8a4fbf;">2-6. 전치사 + 관계대명사</h3>
+  <p>관계절 안에서 관계대명사가 <b>전치사의 목적어</b>일 때, 전치사는 뒤에 남기거나 관계대명사 앞으로 옮길 수 있습니다.</p>
+  <div class="ex"><div class="en">the house <span class="rel">which</span> I live <b>in</b> &nbsp;=&nbsp; the house <b>in</b> <span class="rel">which</span> I live</div>
+    <div class="ko">두 문장 모두 정문. 격식체에서는 「전치사+관계대명사」를 선호.</div></div>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">주의 두 가지</div>
+    ① <b>전치사 + that</b>은 불가: <span class="code">in <s>that</s></span> → <b>in which</b>.
+    <br>② 「전치사+관계대명사」 앞으로 옮기면 <b>관계대명사 생략 불가</b>.
+    (in which의 which는 못 지움)
+  </div>
+
+  <h3 id="s27" style="border-color:#8a4fbf;">2-7. that·what의 특수성 / 복합관계사</h3>
+  <h4>① that을 특히 선호하는 경우</h4>
+  <ul>
+    <li>선행사에 <b>최상급·서수·the only/the very/all/every/no</b> 등이 붙을 때
+      <div class="ex"><div class="en">the only thing <span class="rel">that</span> matters</div></div></li>
+    <li>선행사가 <b>「사람 + 사물」</b>일 때 (who/which로 못 묶음)</li>
+  </ul>
+  <h4>② what — 선행사를 품은 관계대명사</h4>
+  <div class="note-teal" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">what = the thing(s) which</div>
+    what은 앞에 <b>선행사가 없습니다.</b> "~하는 것"으로 해석하며, 절 전체가 명사 역할(주어·목적어·보어).
+    <div class="ex" style="margin-top:8px;"><div class="en"><span class="rel">What</span> he said was true.</div>
+      <div class="ko">그가 말한 것은 사실이었다. (What절 = 주어)</div></div>
+  </div>
+  <div class="rule" style="background:#f5eefb;border-color:#e0cdf1;border-left-color:#8a4fbf;">
+    <div class="t" style="color:#8a4fbf;">that vs what 구별</div>
+    앞에 <b>선행사(명사)가 있으면 that</b>, <b>없으면 what</b>.
+    <br>· the thing <b>that</b> I need (선행사 the thing 있음)
+    <br>· <b>what</b> I need (선행사 없음, what이 the thing which를 겸함)
+  </div>
+  <h4>③ 복합관계사 (-ever)</h4>
+  <table>
+    <tr><th>복합관계사</th><th>명사절 "~든지"</th><th>양보 부사절 "비록 ~라도"</th></tr>
+    <tr><td>whatever</td><td>~하는 무엇이든 (anything that)</td><td>무엇을 ~하더라도 (no matter what)</td></tr>
+    <tr><td>whoever</td><td>~하는 누구든 (anyone who)</td><td>누가 ~하더라도 (no matter who)</td></tr>
+    <tr><td>whenever</td><td>—</td><td>언제 ~하더라도 / ~할 때마다</td></tr>
+    <tr><td>wherever</td><td>—</td><td>어디서 ~하더라도 / ~하는 곳마다</td></tr>
+    <tr><td>however</td><td>—</td><td>아무리 ~하더라도 (+ 형/부)</td></tr>
+  </table>
+  <div class="ex"><div class="en"><span class="rel">Whoever</span> comes first will get a prize.</div>
+    <div class="ko">먼저 오는 사람은 누구든 상을 받을 것이다. (명사절, 주어)</div></div>
+  <div class="ex"><div class="en"><span class="rel">However</span> hard it is, don't give up.</div>
+    <div class="ko">그것이 아무리 어렵더라도, 포기하지 마라. (however + 형용사)</div></div>
+
+  <!-- 연습문제 -->
+  <div class="quiz" id="s28" style="border-color:#e0cdf1;">
+    <h4 style="color:#8a4fbf;">2-8. 연습문제</h4>
+    <p><b>A. 빈칸에 알맞은 관계사를 넣으시오.</b></p>
+    <ol>
+      <li>This is the village ______ my grandmother was born.</li>
+      <li>The man ______ car was stolen called the police.</li>
+      <li>______ he wants is a little respect.</li>
+      <li>2025 was the year ______ changed everything.</li>
+    </ol>
+    <p><b>B. 어법상 <u>틀린</u> 부분을 찾아 고치시오.</b></p>
+    <ol start="5">
+      <li>She told me the reason why she was late for which I understood.</li>
+      <li>I have a friend, that lives in Paris.</li>
+      <li>Tell me the way how you solved it.</li>
+    </ol>
+    <p><b>C. 두 문장을 관계사로 연결하시오.</b></p>
+    <ol start="8">
+      <li>He passed the driving test. + It made his parents proud.</li>
+    </ol>
+
+    <div class="answer">
+      <div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>where</b>. 뒤 절(my grandmother was born)이 완전 → 관계부사. 선행사 the village(장소).</li>
+        <li><b>whose</b>. "그 남자의 차" — 소유격. whose + 명사(car).</li>
+        <li><b>What</b>. 앞에 선행사가 없고 "그가 원하는 것"이라는 명사절 주어 → what(= the thing which).</li>
+        <li><b>which</b>(또는 that). 뒤 절에 <b>주어가 비어 있음</b>(___ changed everything) → 완전하지 않으므로 관계부사 when이 아니라 관계대명사. (선행사가 the year라도 뒤 절이 불완전하면 which)</li>
+        <li>~ the reason <b>why</b> she was late, <b>which</b> I understood. → 원문의 for which가 어색. reason은 why로 받고, "그 이유를 이해했다"는 계속적 용법 which로 다시 연결.</li>
+        <li>콤마(계속적 용법) 뒤에는 <b>that을 쓸 수 없다</b> → <b>who</b>로 고친다. "I have a friend, <b>who</b> lives in Paris."</li>
+        <li><b>the way how</b>는 함께 못 씀 → "Tell me <b>how</b> you solved it." 또는 "Tell me <b>the way</b> you solved it."</li>
+        <li>He passed the driving test, <b>which</b> made his parents proud. → 계속적 용법의 which가 <b>앞 문장 전체</b>(그가 시험에 합격한 것)를 선행사로 받는다.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<div class="foot">
+  영문법 핵심교재 · 정동사 vs 준동사 / 관계사 — 개념·판별법·예문·연습문제 수록<br>
+  ⓒ 학습용 자료 · 자유롭게 인쇄하여 사용하세요 (브라우저에서 <b>Ctrl/⌘ + P</b> → PDF 저장 가능)
+</div>
+
+</div>
