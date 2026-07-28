@@ -1,0 +1,549 @@
+<meta charset="utf-8">
+<title>영문법 핵심교재 · 3~9강 어법 완전정복</title>
+<style>
+@page { size: A4; margin: 14mm 14mm 16mm 14mm; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body{ font-family:"Noto Sans KR","NanumGothic","Malgun Gothic","맑은 고딕",sans-serif;
+  color:#23272e; line-height:1.7; font-size:15px; margin:0; padding:0; background:#f4f5f7; }
+:root{
+  --blue:#2f4f9e; --blue-bg:#eef1fa; --teal:#22857b; --teal-bg:#e7f4f2;
+  --red:#c0433c; --red-bg:#fbeceb; --amber:#b9791f; --amber-bg:#fbf3e4;
+  --green:#2f8050; --green-bg:#eaf5ee; --purple:#8a4fbf; --purple-bg:#f5eefb;
+  --ink:#1d2733; --muted:#6b7280; --line:#e3e6ea; --accent:var(--blue);
+}
+.page{ max-width:900px; margin:0 auto; background:#fff; padding:40px 46px 60px; box-shadow:0 1px 8px rgba(0,0,0,.06); }
+.cover{ border-bottom:3px solid #111827; padding-bottom:16px; margin-bottom:26px; }
+.cover .badge{ display:inline-block; background:#111827; color:#fff; font-size:12px; font-weight:700; padding:3px 11px; border-radius:5px; }
+.cover h1{ font-size:28px; font-weight:800; margin:12px 0 4px; }
+.cover .sub{ color:var(--muted); font-size:14px; }
+.unit-head{ display:flex; align-items:baseline; gap:12px; margin:20px 0 16px; padding-bottom:10px; border-bottom:2.5px solid var(--accent); }
+.unit-no{ font-size:14px; font-weight:800; color:#fff; background:var(--accent); padding:4px 12px; border-radius:20px; flex:none; }
+.unit-head h2{ font-size:22px; font-weight:800; margin:0; }
+.unit-sub{ color:var(--muted); margin:-8px 0 4px; font-size:13.5px; }
+h3{ font-size:17.5px; font-weight:800; margin:26px 0 10px; color:var(--ink); padding-left:11px; border-left:5px solid var(--accent); }
+h4{ font-size:15px; font-weight:700; margin:18px 0 8px; color:#374151; }
+p{ margin:9px 0; } strong{ color:#111827; }
+.def{ background:var(--blue-bg); border:1px solid #cdd7f0; border-left:5px solid var(--accent); border-radius:8px; padding:13px 17px; margin:13px 0; }
+.def .t{ font-weight:800; color:var(--accent); font-size:14px; margin-bottom:4px; }
+.rule{ background:var(--red-bg); border:1px solid #f0c9c6; border-left:5px solid var(--red); border-radius:8px; padding:13px 17px; margin:13px 0; }
+.rule .t{ font-weight:800; color:var(--red); font-size:14px; margin-bottom:4px; }
+.tip{ background:var(--amber-bg); border:1px solid #ecd7a8; border-left:5px solid var(--amber); border-radius:8px; padding:13px 17px; margin:13px 0; }
+.tip .t{ font-weight:800; color:var(--amber); font-size:14px; margin-bottom:4px; }
+.ex{ margin:9px 0; padding:9px 13px; background:#fbfbfc; border:1px solid var(--line); border-radius:8px; }
+.ex .en{ font-size:14.5px; } .ex .ko{ color:var(--muted); font-size:13px; margin-top:3px; }
+.hl{ color:var(--accent); font-weight:800; }
+.g{ color:var(--green); font-weight:800; } .r{ color:var(--red); font-weight:800; }
+.ok::before{ content:"○ "; color:var(--green); font-weight:800; }
+.no::before{ content:"✕ "; color:var(--red); font-weight:800; }
+.no .en{ text-decoration:line-through; text-decoration-color:#e0a6a2; }
+table{ border-collapse:collapse; width:100%; margin:13px 0; font-size:13.5px; }
+th,td{ border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+th{ background:#f3f5f8; font-weight:700; color:#374151; }
+tr:nth-child(even) td{ background:#fcfcfd; }
+.code{ background:#eef1f5; padding:1px 6px; border-radius:4px; font-size:13px; font-family:Consolas,monospace; }
+.flow{ border:1px dashed #b9c2d6; border-radius:10px; padding:15px 19px; margin:15px 0; background:#fafbff; }
+.flow .step{ margin:7px 0; } .flow .q{ font-weight:700; color:var(--accent); }
+.quiz{ background:#fbfcfd; border:1px solid var(--line); border-radius:10px; padding:17px 21px; margin:20px 0; }
+.quiz h4{ margin-top:0; color:var(--accent); font-size:15.5px; }
+.quiz ol{ padding-left:22px; } .quiz li{ margin:9px 0; }
+.answer{ margin-top:13px; border-top:1px dashed var(--line); padding-top:11px; }
+.answer .t{ font-weight:800; color:var(--green); margin-bottom:6px; }
+.answer ol{ padding-left:22px; } .answer li{ margin:6px 0; font-size:13.5px; color:#374151; }
+.pb{ break-before:page; } hr{ border:none; border-top:1px solid var(--line); margin:30px 0; }
+.foot{ margin-top:36px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:12.5px; text-align:center; }
+section.unit{ margin-bottom:10px; }
+@media print{ body{ background:#fff; font-size:11pt; } .page{ box-shadow:none; max-width:none; padding:0; }
+  .def,.rule,.tip,.ex,.quiz,.flow,table{ break-inside:avoid; } h3,h4{ break-after:avoid; } }
+</style>
+
+<div class="page">
+<header class="cover">
+  <span class="badge">영문법 핵심교재 · 심화편</span>
+  <h1>어법 완전정복 3~9강</h1>
+  <div class="sub">분사·태 / 수일치 / 병렬·비교 / 대명사·대동사 / 형용사·부사 / 접속사·전치사 / 5형식·부정사·특수구문</div>
+</header>
+
+<!-- =============================== UNIT 3 =============================== -->
+<section class="unit" id="u3" style="--accent:var(--teal);">
+  <div class="unit-head"><span class="unit-no">UNIT 3</span><h2>분사 및 태</h2></div>
+  <p class="unit-sub">능동 vs 수동 · 분사구문 패턴 체화</p>
+
+  <h3>3-1. 태의 원리 — 주어가 '하는가' vs '당하는가'</h3>
+  <div class="def"><div class="t">능동태 vs 수동태</div>
+    주어가 동작을 <b>직접 하면 능동태</b>, 동작을 <b>당하면 수동태</b>. 수동태의 형태는 <b>be + p.p.(과거분사)</b>, 행위자는 <b>by ~</b>로 밝힌다(생략 가능).</div>
+  <div class="ex"><div class="en">The chef <span class="hl">cooked</span> the meal. (능동)</div>
+    <div class="ko">→ The meal <span class="hl">was cooked</span> by the chef. (수동)</div></div>
+  <div class="rule"><div class="t">태 판별 3원칙</div>
+    ① 주어가 행위자면 능동, 대상이면 수동. <br>
+    ② <b>목적어를 가지면 능동</b>(타동사+O), 목적어가 없고 be+p.p.면 수동. <br>
+    ③ <b>자동사는 수동태로 못 쓴다</b>: <span class="code">happen, occur, appear, arrive, exist, consist, seem</span> 등.</div>
+  <div class="ex no"><div class="en">The accident was happened yesterday.</div>
+    <div class="ko">happen은 자동사 → 수동 불가. → The accident <span class="g">happened</span> yesterday.</div></div>
+
+  <h3>3-2. 분사 — 현재분사(능동) vs 과거분사(수동)</h3>
+  <table>
+    <tr><th>분사</th><th>의미</th><th>명사 수식 예</th><th>보어 예</th></tr>
+    <tr><td>현재분사 -ing</td><td>능동·진행 ("~하는")</td><td>a <span class="hl">running</span> dog (달리는 개)</td><td>He kept me <span class="hl">waiting</span>.</td></tr>
+    <tr><td>과거분사 p.p.</td><td>수동·완료 ("~된/당한")</td><td>a <span class="hl">stolen</span> bike (도난당한 자전거)</td><td>I had my car <span class="hl">repaired</span>.</td></tr>
+  </table>
+  <div class="tip"><div class="t">판별 — 꾸밈받는 명사와의 관계</div>
+    명사가 그 동작을 <b>스스로 하면 -ing</b>, <b>당하면 p.p.</b>
+    <br>· the <b>exciting</b> game (게임이 흥분을 '줌' → 능동)  ·  the <b>excited</b> fans (팬들이 흥분을 '느낌' → 수동)</div>
+
+  <h4>감정분사 — 헷갈리는 -ing / -ed</h4>
+  <table>
+    <tr><th>감정을 '유발' (-ing)</th><th>감정을 '느낌' (-ed)</th></tr>
+    <tr><td>boring 지루하게 하는</td><td>bored 지루함을 느끼는</td></tr>
+    <tr><td>interesting 흥미롭게 하는</td><td>interested 흥미를 느끼는</td></tr>
+    <tr><td>surprising 놀라운</td><td>surprised 놀란</td></tr>
+    <tr><td>satisfying 만족시키는</td><td>satisfied 만족한</td></tr>
+  </table>
+  <div class="ex"><div class="en">The movie was <span class="hl">boring</span>, so the kids were <span class="hl">bored</span>.</div>
+    <div class="ko">영화가 '지루하게 함'(-ing) → 아이들이 '지루함을 느낌'(-ed). 사람 주어는 대개 -ed.</div></div>
+
+  <h3>3-3. 분사구문 — 만드는 3단계</h3>
+  <div class="flow">
+    <div class="step q">부사절 → 분사구문 전환</div>
+    <div class="step">① <b>접속사</b>를 지운다 (의미를 남기려면 남겨도 됨).</div>
+    <div class="step">② 주절과 <b>주어가 같으면</b> 부사절 주어를 지운다.</div>
+    <div class="step">③ 동사를 <b>-ing(능동)</b> 또는 <b>(being) p.p.(수동)</b>로 바꾼다.</div>
+  </div>
+  <div class="ex"><div class="en">When she saw the police, she ran away.</div>
+    <div class="ko">→ <span class="hl">Seeing</span> the police, she ran away. (능동 → -ing)</div></div>
+  <div class="ex"><div class="en">Because it was written in haste, the letter had errors.</div>
+    <div class="ko">→ <span class="hl">(Being) Written</span> in haste, the letter had errors. (수동 → p.p.)</div></div>
+  <table>
+    <tr><th>분사구문 의미</th><th>대응 접속사</th></tr>
+    <tr><td>시간</td><td>when, while, as, after</td></tr>
+    <tr><td>이유</td><td>because, since, as</td></tr>
+    <tr><td>조건</td><td>if</td></tr>
+    <tr><td>양보</td><td>though, although</td></tr>
+    <tr><td>동시상황·연속</td><td>and, as</td></tr>
+  </table>
+  <div class="tip"><div class="t">with + 명사 + 분사 (부대상황)</div>
+    "~한 채로/~하면서". 명사와 분사의 관계가 능동이면 -ing, 수동이면 p.p.
+    <br>· She spoke <b>with her eyes closed</b>. (눈이 감긴 채 → 수동 p.p.)
+    <br>· He stood <b>with his dog following</b> him. (개가 따라오며 → 능동 -ing)</div>
+  <div class="rule"><div class="t">현수분사(dangling) 주의</div>
+    분사구문의 <b>의미상 주어 = 주절의 주어</b>여야 한다. 다르면 비문.
+    <br>✕ <span class="code">Walking home, the rain started.</span> (걷는 주체는 the rain이 아님)
+    <br>○ <span class="code">Walking home, <b>I</b> got caught in the rain.</span></div>
+
+  <div class="quiz">
+    <h4>3강 연습문제</h4>
+    <ol>
+      <li>The results were quite ( surprising / surprised ) to the researchers.</li>
+      <li>The building ( damaging / damaged ) by the fire was demolished.</li>
+      <li>( Finishing / Finished ) his homework, he went out to play.</li>
+      <li>어법 판단: <span class="code">A strange thing was happened to me.</span></li>
+      <li>두 문장을 분사구문으로: <span class="code">As I didn't know what to say, I remained silent.</span></li>
+      <li>어법 판단: <span class="code">Written in easy English, I could read the book.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>surprising</b>. 결과가 놀라움을 '줌'(사물 주어·능동).</li>
+        <li><b>damaged</b>. 건물이 불에 '피해를 입은'(수동) → 과거분사.</li>
+        <li><b>Finishing</b>. 그가 숙제를 '끝낸' 능동 → -ing (=Having finished).</li>
+        <li>비문. happen은 자동사 → 수동 불가. → A strange thing <b>happened</b> to me.</li>
+        <li><b>Not knowing</b> what to say, I remained silent. (부정은 분사 앞 not).</li>
+        <li>현수분사 오류. 책이 쉬운 영어로 '쓰인' 것인데 주절 주어가 I → 비문. → <b>As it was written</b> in easy English, I could read the book.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 4 =============================== -->
+<section class="unit pb" id="u4" style="--accent:var(--green);">
+  <div class="unit-head"><span class="unit-no">UNIT 4</span><h2>수일치</h2></div>
+  <p class="unit-sub">수식어구 · 도치 구문 실전 적용</p>
+
+  <h3>4-1. 대원칙 — 주어의 '핵'을 찾아 동사와 맞춘다</h3>
+  <div class="def"><div class="t">주어–동사 수일치</div>
+    동사의 단수/복수는 <b>주어의 핵(head noun)</b>에 맞춘다. 주어와 동사 사이의 <b>수식어구는 무시</b>한다.</div>
+  <div class="rule"><div class="t">동사와 헷갈리게 만드는 '거품' — 수식어구를 걷어내라</div>
+    핵 명사 뒤에 붙는 <b>전치사구 · 관계절 · 분사구</b>는 수에 영향을 주지 않는다.</div>
+  <div class="ex"><div class="en">The <span class="hl">box</span> of old letters <span class="g">is</span> on the table.</div>
+    <div class="ko">핵은 box(단수) → is. of old letters는 거품. (are ✕)</div></div>
+  <div class="ex"><div class="en">The <span class="hl">students</span> who study hard <span class="g">pass</span> the exam.</div>
+    <div class="ko">핵은 students(복수) → pass. 관계절(who study)에 속지 말 것.</div></div>
+
+  <h3>4-2. 조심해야 할 주어들</h3>
+  <table>
+    <tr><th>주어 유형</th><th>수일치 기준</th><th>예</th></tr>
+    <tr><td>동명사·to부정사·명사절</td><td><b>단수</b></td><td>Reading books <b>is</b> fun.</td></tr>
+    <tr><td>each / every + 명사</td><td><b>단수</b></td><td>Every student <b>has</b> a book.</td></tr>
+    <tr><td>either/neither (of)</td><td><b>단수</b></td><td>Neither of them <b>was</b> late.</td></tr>
+    <tr><td>most/some/half/부분 of + N</td><td><b>of 뒤 명사</b>에 일치</td><td>Most of the water <b>is</b> gone.<br>Most of the people <b>are</b> here.</td></tr>
+    <tr><td>a number of + 복수N</td><td><b>복수</b> (많은)</td><td>A number of cars <b>were</b> parked.</td></tr>
+    <tr><td>the number of + 복수N</td><td><b>단수</b> (~의 수)</td><td>The number of cars <b>was</b> small.</td></tr>
+    <tr><td>the + 형용사 (~한 사람들)</td><td><b>복수</b></td><td>The rich <b>are</b> not always happy.</td></tr>
+  </table>
+  <div class="tip"><div class="t">상관접속사 주어의 수일치 — "가까운 쪽" 규칙</div>
+    <table style="margin-top:6px;">
+      <tr><td>both A and B</td><td>항상 <b>복수</b></td></tr>
+      <tr><td>either A or B / neither A nor B</td><td><b>B(뒤)</b>에 일치</td></tr>
+      <tr><td>not only A but also B / A as well as B</td><td><b>B(앞의 A가 아님 주의)</b>에 일치</td></tr>
+    </table>
+    · Not only you but also <b>he</b> <span class="g">is</span> wrong. (B=he → is)
+    <br>· Either you or <b>I</b> <span class="g">am</span> right. (B=I → am)</div>
+
+  <h3>4-3. 도치 구문의 수일치 — 진짜 주어는 동사 뒤에</h3>
+  <div class="rule"><div class="t">도치되면 동사 뒤의 주어에 맞춘다</div></div>
+  <table>
+    <tr><th>도치 유형</th><th>예</th></tr>
+    <tr><td>There + be + 주어</td><td>There <span class="g">are</span> many <b>reasons</b>. (주어=reasons)</td></tr>
+    <tr><td>장소·방향 부사구 도치</td><td>On the hill <span class="g">stands</span> an old <b>castle</b>.</td></tr>
+    <tr><td>부정어 도치 (Never/Hardly/Not only…)</td><td>Never <span class="g">have</span> <b>I</b> seen such a thing.</td></tr>
+    <tr><td>Only + 부사(구) 도치</td><td>Only then <span class="g">did</span> <b>he</b> realize the truth.</td></tr>
+  </table>
+  <div class="ex"><div class="en">Under the tree <span class="g">were</span> two <span class="hl">cats</span>.</div>
+    <div class="ko">장소구가 앞으로 → 도치. 진주어 cats(복수) → were.</div></div>
+
+  <div class="quiz">
+    <h4>4강 연습문제</h4>
+    <ol>
+      <li>The list of the winners ( was / were ) posted online.</li>
+      <li>Each of the rooms ( has / have ) its own bathroom.</li>
+      <li>Not only the players but also the coach ( was / were ) upset.</li>
+      <li>The number of tourists ( has / have ) increased sharply.</li>
+      <li>There ( is / are ) a pen and two books on the desk.</li>
+      <li>어법 판단: <span class="code">Neither of the answers are correct.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>was</b>. 핵은 list(단수), of the winners는 거품.</li>
+        <li><b>has</b>. each of + 복수N이라도 each가 핵 → 단수.</li>
+        <li><b>was</b>. not only A but also B는 B(the coach, 단수)에 일치.</li>
+        <li><b>has</b>. the number of ~ = "~의 수" → 단수.</li>
+        <li><b>is</b>. There + be 도치에서 가까운 주어 a pen(단수)에 일치.</li>
+        <li>어색. neither of ~는 단수 취급이 원칙 → <b>is</b> correct.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 5 =============================== -->
+<section class="unit pb" id="u5" style="--accent:var(--amber);">
+  <div class="unit-head"><span class="unit-no">UNIT 5</span><h2>병렬구조와 비교구문</h2></div>
+  <p class="unit-sub">등위·상관접속사 병렬 · 비교 공식</p>
+
+  <h3>5-1. 병렬구조 — 연결된 것은 '같은 급'</h3>
+  <div class="def"><div class="t">병렬(Parallelism)</div>
+    <b>and · but · or</b>로 연결되는 요소들은 <b>문법적으로 같은 형태/급</b>이어야 한다 (명사↔명사, to부정사↔to부정사, 절↔절).</div>
+  <div class="ex no"><div class="en">She likes swimming, hiking, and to run.</div>
+    <div class="ko">동명사 2개 + to부정사 → 불일치. → swimming, hiking, and <span class="g">running</span>.</div></div>
+  <div class="tip"><div class="t">상관접속사 병렬 — A와 B의 형태를 맞춰라</div>
+    <table style="margin-top:6px;">
+      <tr><td>both A and B</td><td>not only A but also B</td></tr>
+      <tr><td>either A or B</td><td>neither A nor B</td></tr>
+      <tr><td>not A but B</td><td>A as well as B</td></tr>
+    </table>
+    · He is not only <b>smart</b> but also <b>kind</b>. (형용사↔형용사)
+    <br>· I want either <b>to stay</b> or <b>to leave</b>. (to부정사↔to부정사)</div>
+
+  <h3>5-2. 비교구문의 세 형태</h3>
+  <table>
+    <tr><th>형태</th><th>공식</th><th>예</th></tr>
+    <tr><td>원급</td><td>as + 원급 + as</td><td>as <b>tall as</b> his father</td></tr>
+    <tr><td>비교급</td><td>-er / more + than</td><td>taller <b>than</b> me / more useful <b>than</b></td></tr>
+    <tr><td>최상급</td><td>the + -est / most</td><td>the <b>tallest</b> / the <b>most</b> useful</td></tr>
+  </table>
+  <div class="rule"><div class="t">비교 대상도 병렬 — that / those로 반복 회피</div>
+    비교하는 두 대상은 <b>문법적으로 대등</b>해야 한다. 앞 명사의 반복을 피할 때 단수는 <b>that</b>, 복수는 <b>those</b>.
+    <br>✕ The climate of Korea is milder than <b>Canada</b>.
+    <br>○ The climate of Korea is milder than <b>that of Canada</b>. (that = the climate)</div>
+
+  <h3>5-3. 자주 나오는 비교 공식</h3>
+  <table>
+    <tr><th>공식</th><th>의미 / 예</th></tr>
+    <tr><td>much/far/even/still/a lot + 비교급</td><td>비교급 <b>강조</b> "훨씬" (<span class="r">very</span> 비교급 ✕)</td></tr>
+    <tr><td>the 비교급 ~, the 비교급 ~</td><td>"~할수록 더 …" The harder you try, the better you get.</td></tr>
+    <tr><td>배수 + as ~ as / 비교급 than</td><td>twice as large as / three times larger than</td></tr>
+    <tr><td>비교급 + and + 비교급</td><td>"점점 더" hotter and hotter</td></tr>
+    <tr><td>라틴 비교급 (+ to)</td><td>superior/inferior/senior/prior <b>to</b> (than ✕)</td></tr>
+    <tr><td>최상급 대용</td><td>No (other) ~ is as … as / 비교급 than any other</td></tr>
+  </table>
+  <div class="ex no"><div class="en">This car is very faster than that one.</div>
+    <div class="ko">very로 비교급 강조 불가 → <span class="g">much/far</span> faster.</div></div>
+
+  <div class="quiz">
+    <h4>5강 연습문제</h4>
+    <ol>
+      <li>He is good at singing, dancing, and ( act / to act / acting ).</li>
+      <li>The population of China is larger than ( India / that of India ).</li>
+      <li>This problem is ( very / much ) more difficult than the last one.</li>
+      <li>She is not only a teacher but also ( writes novels / a novelist ).</li>
+      <li>Your product is superior ( than / to ) theirs.</li>
+      <li>어법 판단: <span class="code">The more you sleep, the lazier you become.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>acting</b>. 앞의 동명사(singing, dancing)와 병렬.</li>
+        <li><b>that of India</b>. 비교 대상은 인구끼리 → that(=the population) of India.</li>
+        <li><b>much</b>. 비교급 강조는 much/far/even 등. very는 불가.</li>
+        <li><b>a novelist</b>. not only + 명사(a teacher) → but also + 명사로 병렬.</li>
+        <li><b>to</b>. superior는 라틴 비교급 → to.</li>
+        <li>옳음. "the 비교급 ~, the 비교급 ~" 구문(잘수록 게을러진다).</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 6 =============================== -->
+<section class="unit pb" id="u6" style="--accent:var(--red);">
+  <div class="unit-head"><span class="unit-no">UNIT 6</span><h2>대명사와 대동사</h2></div>
+  <p class="unit-sub">지칭 오류를 잡아내는 결정적 트레이닝</p>
+
+  <h3>6-1. 대명사 — 선행사와 수·성 일치</h3>
+  <div class="def"><div class="t">지칭 일치의 원칙</div>
+    대명사는 가리키는 <b>선행 명사와 수·성이 일치</b>해야 한다. 시험은 "단수 명사를 they/their로 받는" 오류를 즐겨 낸다.</div>
+  <div class="ex no"><div class="en">Every student must bring their own laptop.</div>
+    <div class="ko">엄격한 어법에서 every student(단수)는 <span class="g">his or her</span>로 받음(구어에서는 their 허용).</div></div>
+  <div class="ex no"><div class="en">A company should protect their employees.</div>
+    <div class="ko">A company(단수) → <span class="g">its</span> employees.</div></div>
+
+  <h3>6-2. 재귀대명사 · 지시대명사</h3>
+  <table>
+    <tr><th>종류</th><th>쓰임</th><th>예</th></tr>
+    <tr><td>재귀대명사 -self</td><td>주어=목적어일 때 / 강조</td><td>She hurt <b>herself</b>. / I did it <b>myself</b>.</td></tr>
+    <tr><td>that / those</td><td>앞 명사 반복 회피(비교·수식)</td><td>The ears of a rabbit are longer than <b>those</b> of a cat.</td></tr>
+    <tr><td>it vs one</td><td>it=바로 그것 / one=같은 종류의 하나</td><td>I lost my pen; I need to buy <b>one</b>.</td></tr>
+  </table>
+  <div class="rule"><div class="t">one / another / other / others / the other</div>
+    · 둘 중 하나·나머지: <b>one ~ the other</b>
+    <br>· 셋 이상 중 하나·또 하나·나머지 전부: <b>one ~ another ~ the others</b>
+    <br>· 막연한 다른 것들(일부): <b>others</b>  ·  나머지 전부(특정): <b>the others</b></div>
+
+  <h3>6-3. 대동사 — 앞 동사(구)의 반복을 피한다</h3>
+  <div class="def"><div class="t">대동사(pro-verb)</div>
+    앞에 나온 동사(구)를 반복하지 않기 위해 대신 쓰는 말. <b>일반동사는 do/does/did</b>, <b>be·조동사·완료의 have</b>는 그 동사 자체를 반복한다.</div>
+  <div class="ex"><div class="en">He runs faster than I <span class="hl">do</span>. (do = run)</div></div>
+  <div class="ex"><div class="en">She is happier than she <span class="hl">was</span>. (was = be)</div></div>
+  <div class="ex no"><div class="en">She sings better than I sing.</div>
+    <div class="ko">일반동사 반복은 어색 → than I <span class="g">do</span>.</div></div>
+  <div class="tip"><div class="t">So / Neither 도치 — "~도 그렇다"</div>
+    긍정 동의: <b>So + (대)동사 + 주어</b> / 부정 동의: <b>Neither(Nor) + (대)동사 + 주어</b>. 대동사는 앞 문장의 동사 종류를 따른다.
+    <br>· "I like coffee." — "<b>So do I</b>." (일반동사 → do)
+    <br>· "I can't swim." — "<b>Neither can I</b>." (조동사 → can)</div>
+
+  <div class="quiz">
+    <h4>6강 연습문제</h4>
+    <ol>
+      <li>The team celebrated ( its / their ) victory. (엄격한 어법 기준)</li>
+      <li>The weather here is milder than ( that / it ) of London.</li>
+      <li>I have three pens: one is blue, ( another / other ) is red, and ( the other / others ) is black.</li>
+      <li>"I don't like horror films." — "( So / Neither ) do I."</li>
+      <li>He speaks English better than his brother ( does / speaks ).</li>
+      <li>어법 판단: <span class="code">Everyone raised their hand.</span> (규범 문법 관점)</li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>its</b>. team을 단일 집합(단수)으로 보면 its.</li>
+        <li><b>that</b>. 날씨끼리 비교 → that(=the weather) of London.</li>
+        <li><b>another</b> / <b>the other</b>. 셋 중 하나(one)·또 하나(another)·마지막 하나(the other).</li>
+        <li><b>Neither</b>. 부정 동의 → Neither do I.</li>
+        <li><b>does</b>. 일반동사 speaks의 대동사 → does.</li>
+        <li>규범 문법에선 everyone(단수)을 their로 받는 것을 오류로 봄 → <b>his or her hand</b>(구어는 their 허용).</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 7 =============================== -->
+<section class="unit pb" id="u7" style="--accent:var(--blue);">
+  <div class="unit-head"><span class="unit-no">UNIT 7</span><h2>형용사 vs 부사</h2></div>
+  <p class="unit-sub">품사 혼동을 끊어내는 '위치 분석법'</p>
+
+  <h3>7-1. 역할로 구분한다</h3>
+  <table>
+    <tr><th>품사</th><th>수식 대상 / 자리</th><th>예</th></tr>
+    <tr><td>형용사</td><td>① 명사 수식 ② 보어(2·5형식)</td><td>a <b>happy</b> boy / She is <b>happy</b>. / made me <b>happy</b></td></tr>
+    <tr><td>부사</td><td>동사·형용사·부사·문장 수식 (보어 자리 ✕)</td><td>run <b>fast</b> / <b>very</b> tall / <b>Sadly</b>, he left.</td></tr>
+  </table>
+  <div class="def"><div class="t">위치 분석법 — 빈칸의 '역할'을 보라</div>
+    · 명사 앞 / be동사·감각동사 <b>뒤 보어</b> → <b>형용사</b>
+    <br>· 동사·형용사·부사 옆에서 <b>꾸미기만</b> → <b>부사</b></div>
+  <div class="ex no"><div class="en">She sings beautiful.</div>
+    <div class="ko">동사 sings를 꾸밈 → 부사. → sings <span class="g">beautifully</span>.</div></div>
+  <div class="ex no"><div class="en">He drives very carefully and safe.</div>
+    <div class="ko">동사 수식 병렬 → safe도 부사여야 → <span class="g">safely</span>.</div></div>
+
+  <h3>7-2. 감각·상태동사 + 형용사 (2형식)</h3>
+  <div class="rule"><div class="t">look/feel/smell/taste/sound/seem/become + 형용사</div>
+    이 동사들은 <b>보어로 형용사</b>를 취한다. 부사를 쓰면 안 된다.
+    <br>· This soup tastes <span class="g">good</span>. (✕ well)  ·  You look <span class="g">tired</span>. (✕ tiredly)</div>
+
+  <h3>7-3. 형태가 비슷해 헷갈리는 부사</h3>
+  <table>
+    <tr><th>-ly 없는 부사</th><th>-ly 붙은 다른 뜻</th></tr>
+    <tr><td>hard 열심히/단단한</td><td>hardly 거의 ~않다</td></tr>
+    <tr><td>late 늦게/늦은</td><td>lately 최근에</td></tr>
+    <tr><td>near 가까이</td><td>nearly 거의</td></tr>
+    <tr><td>high 높이/높은</td><td>highly 매우</td></tr>
+    <tr><td>most 가장</td><td>mostly 대부분</td></tr>
+  </table>
+  <div class="ex"><div class="en">He works <span class="hl">hard</span> but <span class="hl">hardly</span> rests.</div>
+    <div class="ko">열심히 일하지만 거의 쉬지 않는다. hard(열심히) ≠ hardly(거의 안).</div></div>
+  <div class="tip"><div class="t">enough의 위치</div>
+    형용사·부사를 꾸밀 땐 <b>뒤에</b>: <span class="code">old <b>enough</b></span>, <span class="code">fast <b>enough</b></span>. 명사를 꾸밀 땐 앞: <span class="code"><b>enough</b> money</span>.</div>
+
+  <div class="quiz">
+    <h4>7강 연습문제</h4>
+    <ol>
+      <li>The children were playing ( quiet / quietly ) in the yard.</li>
+      <li>These flowers smell ( sweet / sweetly ).</li>
+      <li>I could ( hard / hardly ) believe my eyes.</li>
+      <li>She is old ( enough / enough old ) to drive.</li>
+      <li>He speaks English fluently and ( accurate / accurately ).</li>
+      <li>어법 판단: <span class="code">The team performed very good.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>quietly</b>. 동사 playing 수식 → 부사.</li>
+        <li><b>sweet</b>. smell은 감각동사 → 형용사 보어.</li>
+        <li><b>hardly</b>. "거의 믿을 수 없었다" → hardly.</li>
+        <li><b>enough</b>. 형용사(old) 뒤 → old enough to drive.</li>
+        <li><b>accurately</b>. 부사 fluently와 병렬(동사 수식).</li>
+        <li>비문. 동사 performed 수식 → <b>very well</b>.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 8 =============================== -->
+<section class="unit pb" id="u8" style="--accent:var(--purple);">
+  <div class="unit-head"><span class="unit-no">UNIT 8</span><h2>접속사 vs 전치사</h2></div>
+  <p class="unit-sub">뒤만 잘 살피면 바로 해결</p>
+
+  <h3>8-1. 결정적 판별 — 뒤에 오는 것이 '절'인가 '구'인가</h3>
+  <div class="def"><div class="t">한 줄 원칙</div>
+    · 뒤에 <b>절(주어 + 동사)</b> → <b>접속사</b>
+    <br>· 뒤에 <b>(동)명사구</b> → <b>전치사</b></div>
+  <div class="flow">
+    <div class="step q">빈칸 뒤를 확인하라</div>
+    <div class="step">"____ + 주어 + 동사 …" → <span class="hl">접속사</span></div>
+    <div class="step">"____ + 명사/-ing …" → <span class="hl">전치사</span></div>
+  </div>
+
+  <h3>8-2. 뜻은 같고 품사만 다른 짝 (최빈출)</h3>
+  <table>
+    <tr><th>의미</th><th>접속사 (+ 절)</th><th>전치사 (+ 명사구)</th></tr>
+    <tr><td>~때문에</td><td>because, since, as</td><td>because of, due to, owing to</td></tr>
+    <tr><td>~에도 불구하고</td><td>although, though, even though</td><td>despite, in spite of</td></tr>
+    <tr><td>~하는 동안</td><td>while</td><td>during</td></tr>
+    <tr><td>~까지</td><td>until (계속)</td><td>until / by (완료 기한)</td></tr>
+    <tr><td>~라면/아니면</td><td>if, unless</td><td>—</td></tr>
+  </table>
+  <div class="ex"><div class="en">We stayed home <span class="hl">because</span> it rained. (뒤에 절)</div></div>
+  <div class="ex"><div class="en">We stayed home <span class="hl">because of</span> the rain. (뒤에 명사구)</div></div>
+  <div class="ex no"><div class="en">Despite it was cold, we went out.</div>
+    <div class="ko">despite 뒤에 절 불가 → <span class="g">Although</span> it was cold, … / 또는 Despite <span class="g">the cold</span>, …</div></div>
+
+  <h3>8-3. 헷갈리는 상관·결과 구문</h3>
+  <table>
+    <tr><th>구문</th><th>형태</th><th>예</th></tr>
+    <tr><td>so ~ that</td><td>so + <b>형/부</b> + that + 절</td><td>so tired <b>that</b> he slept</td></tr>
+    <tr><td>such ~ that</td><td>such + <b>(a) 형 + 명사</b> + that</td><td>such a good movie <b>that</b> …</td></tr>
+    <tr><td>so that</td><td>"~하기 위해"(목적)</td><td>study hard <b>so that</b> you pass</td></tr>
+  </table>
+  <div class="tip"><div class="t">that의 두 얼굴</div>
+    접속사 that(완전한 절을 이끔, "~라는 것") vs 관계대명사 that(불완전한 절). 뒤 절의 완전성으로 구별(2강 참고).</div>
+
+  <div class="quiz">
+    <h4>8강 연습문제</h4>
+    <ol>
+      <li>( Because / Because of ) the heavy snow, schools were closed.</li>
+      <li>( Although / Despite ) he was tired, he kept working.</li>
+      <li>I fell asleep ( during / while ) the movie.</li>
+      <li>It was ( so / such ) a boring lecture that I dozed off.</li>
+      <li>( During / While ) I was cooking, the phone rang.</li>
+      <li>어법 판단: <span class="code">In spite of it was late, they continued.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>Because of</b>. 뒤가 명사구(the heavy snow) → 전치사.</li>
+        <li><b>Although</b>. 뒤가 절(he was tired) → 접속사.</li>
+        <li><b>during</b>. 뒤가 명사(the movie) → 전치사.</li>
+        <li><b>such</b>. such + a + 형 + 명사(a boring lecture).</li>
+        <li><b>While</b>. 뒤가 절(I was cooking) → 접속사.</li>
+        <li>비문. in spite of + 절 불가 → <b>Although</b> it was late, … / In spite of <b>the late hour</b>, ….</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== UNIT 9 =============================== -->
+<section class="unit pb" id="u9" style="--accent:var(--teal);">
+  <div class="unit-head"><span class="unit-no">UNIT 9</span><h2>5형식 · to부정사 · 특수구문</h2></div>
+  <p class="unit-sub">고난도 킬러 패턴 집중 공략</p>
+
+  <h3>9-1. 5형식 — 목적격 보어의 형태가 관건</h3>
+  <div class="def"><div class="t">S + V + O + OC (목적격 보어)</div>
+    "O가 OC이다/하다"의 관계. <b>동사에 따라 목적격 보어의 형태</b>가 정해진다.</div>
+  <table>
+    <tr><th>동사 유형</th><th>목적격 보어</th><th>예</th></tr>
+    <tr><td>call/make/name/find + O</td><td>명사·형용사</td><td>made me <b>happy</b> / call it <b>art</b></td></tr>
+    <tr><td>want/ask/tell/allow/expect</td><td><b>to부정사</b></td><td>told me <b>to wait</b></td></tr>
+    <tr><td>사역 make/have/let + O</td><td><b>원형부정사</b></td><td>made him <b>go</b></td></tr>
+    <tr><td>help + O</td><td>원형 / to부정사</td><td>helped me (to) <b>move</b></td></tr>
+    <tr><td>지각 see/hear/watch/feel</td><td>원형(완료) / -ing(진행) / p.p.(수동)</td><td>saw her <b>cross / crossing</b>; heard it <b>broken</b></td></tr>
+  </table>
+  <div class="ex no"><div class="en">My mom made me to clean my room.</div>
+    <div class="ko">사역 make → 원형 → made me <span class="g">clean</span>.</div></div>
+  <div class="tip"><div class="t">get은 준사역 → to부정사</div>
+    <span class="code">get + O + <b>to</b>부정사</span> (I got him <b>to</b> help). 단, 수동은 get + O + p.p. (got it <b>done</b>).</div>
+
+  <h3>9-2. to부정사 핵심</h3>
+  <table>
+    <tr><th>항목</th><th>내용 / 예</th></tr>
+    <tr><td>3용법</td><td>명사(주어·목적어·보어) / 형용사(명사 수식) / 부사(목적·결과·원인)</td></tr>
+    <tr><td>의미상 주어</td><td>일반: <b>for + 목적격</b> / 사람 성품 형용사: <b>of + 목적격</b><br>It is kind <b>of</b> you to help.</td></tr>
+    <tr><td>가주어–진주어</td><td><b>It</b> is hard <b>to master</b> English. (It=가주어)</td></tr>
+    <tr><td>too ~ to</td><td>"너무 ~해서 …할 수 없다" too young <b>to</b> drive</td></tr>
+    <tr><td>형/부 + enough to</td><td>"…할 만큼 충분히 ~" old <b>enough to</b> vote</td></tr>
+    <tr><td>seem/happen + to</td><td>He seems <b>to know</b> the answer.</td></tr>
+  </table>
+
+  <h3>9-3. 특수구문 — 강조·도치·생략·동격</h3>
+  <table>
+    <tr><th>구문</th><th>형태 / 예</th></tr>
+    <tr><td>It ~ that 강조</td><td>강조어를 It is/was와 that 사이에 <br><b>It was John that</b> broke it. (주어 강조)</td></tr>
+    <tr><td>동사 강조</td><td><b>do/does/did</b> + 원형: I <b>do</b> love you.</td></tr>
+    <tr><td>부정어 도치</td><td><b>Never</b> have I seen… / <b>Not until</b> ~ did …</td></tr>
+    <tr><td>so/such 도치</td><td><b>So</b> beautiful was the view that …</td></tr>
+    <tr><td>동격 that</td><td>the fact <b>that</b> he lied (fact=that절)</td></tr>
+    <tr><td>부분 부정</td><td>not all / not always "모두(항상) ~인 것은 아니다"</td></tr>
+  </table>
+  <div class="rule"><div class="t">강조 It ~ that vs 가주어 It ~ that</div>
+    <b>강조구문</b>은 It is/was와 that을 빼도 문장이 성립(강조어를 제자리로). <b>가주어</b>는 빼면 성립하지 않는다.
+    <br>· It was <u>yesterday</u> that we met. → We met <u>yesterday</u>. (강조구문 ○)</div>
+
+  <div class="quiz">
+    <h4>9강 연습문제</h4>
+    <ol>
+      <li>The teacher had the students ( write / to write ) an essay.</li>
+      <li>I saw a stranger ( enter / to enter ) the building.</li>
+      <li>It was very kind ( for / of ) you to say so.</li>
+      <li>He is ( enough strong / strong enough ) to lift it.</li>
+      <li>( It / That ) was in Paris that they first met.</li>
+      <li>어법 판단: <span class="code">My parents let me to stay up late.</span></li>
+    </ol>
+    <div class="answer"><div class="t">정답 &amp; 해설</div>
+      <ol>
+        <li><b>write</b>. 사역 have + O + 원형부정사.</li>
+        <li><b>enter</b>(또는 entering). 지각동사 see + O + 원형/-ing.</li>
+        <li><b>of</b>. 사람의 성품(kind) 형용사 → of you.</li>
+        <li><b>strong enough</b>. enough는 형용사 뒤.</li>
+        <li><b>It</b>. It ~ that 강조구문(장소 in Paris 강조).</li>
+        <li>비문. let은 사역동사 → 원형 → let me <b>stay</b> up late.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<div class="foot">
+  영문법 핵심교재 · 심화편(3~9강) — 개념·판별법·예문·연습문제 수록<br>
+  최종 점검은 <b>10강 전범위 누적 최종모의고사</b>로. · 브라우저에서 <b>Ctrl/⌘ + P</b> → PDF 저장 가능
+</div>
+</div>
