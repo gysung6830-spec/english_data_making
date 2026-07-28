@@ -66,7 +66,7 @@ CSS = """
   size: A4 landscape;
   margin: 10mm 12mm 12mm 12mm;
   @bottom-center {
-    content: "중학 영어 회화 교재  ·  " counter(page) " / " counter(pages);
+    content: "__TITLE__  ·  " counter(page) " / " counter(pages);
     font-family: "NanumGothic", sans-serif; font-size: 8px; color: #9aa0a6;
   }
 }
@@ -192,7 +192,7 @@ def cover_html() -> str:
     emojis = " ".join(u["emoji"] for u in data.UNITS)
     return f"""
     <div class="cover">
-      <div class="kicker">MIDDLE SCHOOL ENGLISH</div>
+      <div class="kicker">{esc(getattr(data, "KICKER", "ENGLISH"))}</div>
       <h1>{esc(data.TITLE)}</h1>
       <div class="sub">{esc(data.SUBTITLE)}</div>
       <div class="band"></div>
@@ -349,7 +349,7 @@ def appendix_html() -> str:
     """
 
 
-def build() -> Path:
+def build(out_path: Path = OUT) -> Path:
     body = cover_html() + intro_html() + expressions_html()
     for i, u in enumerate(data.UNITS, 1):
         body += unit_html(i, u)
@@ -358,11 +358,27 @@ def build() -> Path:
     doc = f"<!doctype html><html><head><meta charset='utf-8'></head><body>{body}</body></html>"
 
     from weasyprint import CSS as WCSS, HTML  # 지연 임포트(무거움)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    HTML(string=doc).write_pdf(str(OUT), stylesheets=[WCSS(string=CSS)])
-    return OUT
+    css = CSS.replace("__TITLE__", esc(data.TITLE))
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    HTML(string=doc).write_pdf(str(out_path), stylesheets=[WCSS(string=css)])
+    return out_path
+
+
+# 만들 버전들: 인자로 'school' / 'adult' / 'all' 선택 (기본 all)
+TARGETS = {
+    "school": ("textbook_data", ROOT / "output" / "중학영어회화교재_OPIC10.pdf"),
+    "adult":  ("textbook_data_adult", ROOT / "output" / "성인영어회화교재_OPIC20.pdf"),
+}
 
 
 if __name__ == "__main__":
-    p = build()
-    print(f"완성: {p}")
+    import importlib
+    import sys
+
+    which = sys.argv[1] if len(sys.argv) > 1 else "all"
+    names = list(TARGETS) if which == "all" else [which]
+    for name in names:
+        module_name, out_path = TARGETS[name]
+        data = importlib.import_module(module_name)  # noqa: F811 (전역 재지정)
+        p = build(out_path)
+        print(f"완성: {p}")

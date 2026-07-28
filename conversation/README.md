@@ -1,7 +1,14 @@
-# 중학 영어 회화 교재 (OPIC 주제 · 내 의견 말하기)
+# 영어 회화 교재 (OPIC 주제 · 내 의견 말하기)
 
 OPIC 주제를 바탕으로 **자기 의견을 영어로 말하는** 연습용 회화 교재 생성기입니다.
-중학생 수준의 템플릿 문장과 어휘로 구성되며, 대화문 없이 **혼자 의견을 말하는** 데 집중합니다.
+대화문 없이 **혼자 의견을 말하는** 데 집중하며, **두 가지 버전**을 만듭니다.
+
+| 버전 | 대상 | 데이터 파일 | 산출 PDF |
+|---|---|---|---|
+| 중학 | 중학생 수준 · OPIC 28개 주제 | `textbook_data.py` | `output/중학영어회화교재_OPIC10.pdf` |
+| 성인 | 성인·중급 이상 · OPIC 20개 주제(직장·워라밸·자기계발 등 포함) | `textbook_data_adult.py` | `output/성인영어회화교재_OPIC20.pdf` |
+
+두 버전은 **같은 빌더(`build_textbook.py`)** 와 디자인을 공유하고, 콘텐츠 데이터만 다릅니다.
 
 ## 레이아웃 (가로 / 페이지당 1단원)
 
@@ -35,8 +42,10 @@ sudo apt-get install -y fonts-nanum fonts-symbola
 pip install weasyprint
 
 # 교재 PDF 생성
-python conversation/build_textbook.py
-#  -> output/중학영어회화교재_OPIC10.pdf
+python conversation/build_textbook.py          # 두 버전 모두 생성 (기본 all)
+python conversation/build_textbook.py school   # 중학 버전만
+python conversation/build_textbook.py adult    # 성인 버전만
+#  -> output/중학영어회화교재_OPIC10.pdf , output/성인영어회화교재_OPIC20.pdf
 ```
 
 > **이모지 배치 관련**: WeasyPrint는 컬러 이모지(Noto Color Emoji)를 줄 위로 크게 띄워
