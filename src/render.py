@@ -318,6 +318,25 @@ def render_quiz_pdf(reports, out_path: str | Path,
     return out_path
 
 
+def render_train_pdf(reports, out_path: str | Path,
+                     title: str = "모의고사 훈련서", footer_note: str = "",
+                     brand: str = "은아 T") -> Path:
+    """모의고사 훈련서 PDF (입문·60점대: 소재→주제→선지 읽기→구문 훈련).
+
+    train 데이터가 있는 지문만 대상으로 한다. PDF 1개 안에서 지문별로 페이지를 나눈다.
+    """
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = [r for r in _as_list(reports) if getattr(r, "train", None)]
+    tmpl = _env.get_template("train.html.j2")
+    html = tmpl.render(reports=reps, title=title, footer_note=footer_note, brand=brand)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
 def combine_pdfs(pdf_paths: list[Path], out_path: Path) -> Path:
     """여러 지문 PDF 를 하나로 합친다 (pypdf 사용, 없으면 개별 유지)."""
     try:

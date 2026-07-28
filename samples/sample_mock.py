@@ -116,4 +116,88 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                 "관계대명사(who) 두 번, 분사구문(encouraged), 비교구문(longer than), "
                 "5형식(are given)")),
         ]),
+        train=schemas.TrainSection(
+            topic_training=schemas.TopicTraining(
+                clues=[
+                    schemas.TrainClue(word="curiosity", meaning="호기심"),
+                    schemas.TrainClue(word="explore / inquire", meaning="탐구하다 / 질문하다"),
+                    schemas.TrainClue(word="learning / remember", meaning="학습 / 기억하다"),
+                    schemas.TrainClue(word="ask questions", meaning="질문하다"),
+                ],
+                material="호기심과 학습",
+                topic="호기심은 학습과 기억을 돕는 원동력이므로, 교육은 암기보다 질문하는 태도를 길러야 한다.",
+                steps=[
+                    "제목과 첫 문장을 보고 '무엇에 관한 글'인지 한 단어로 잡아 봐.",
+                    "반복되는 단어(curiosity, explore, learning)에 동그라미 쳐 봐 — 그게 소재야.",
+                    "글쓴이가 그 소재를 '좋다/필요하다'처럼 어떻게 평가하는지 찾아봐.",
+                    "소재 + 글쓴이의 생각 = 주제. 한 문장으로 이어 붙여 봐.",
+                ],
+            ),
+            questions=[
+                schemas.TrainQuestion(
+                    qtype="주제",
+                    instruction="다음 글의 주제로 가장 적절한 것은?",
+                    passage_excerpt="",
+                    choices=[
+                        schemas.TrainChoice(symbol="①", text="the importance of memorizing correct answers",
+                                            correct=False, reason="지문과 반대 — 글은 암기보다 질문을 강조함."),
+                        schemas.TrainChoice(symbol="②", text="why curiosity matters in learning",
+                                            correct=True, reason="소재(호기심)+글쓴이 생각(학습에 중요)을 그대로 담음 — 정답."),
+                        schemas.TrainChoice(symbol="③", text="the history of modern education systems",
+                                            correct=False, reason="지문에 없는 내용."),
+                        schemas.TrainChoice(symbol="④", text="how teachers should grade student exams",
+                                            correct=False, reason="너무 좁음 — 지문 일부(시험)만 다룸."),
+                        schemas.TrainChoice(symbol="⑤", text="the difficulty of studying science subjects",
+                                            correct=False, reason="지문에 없는 내용."),
+                    ],
+                    answer="②",
+                    solution=(
+                        "먼저 소재를 잡아요: 반복되는 단어가 curiosity라 '호기심'이 소재예요. "
+                        "글쓴이는 호기심이 학습·기억에 좋다고 말하죠. 그래서 '호기심이 학습에서 왜 중요한가'가 주제예요. "
+                        "①은 반대로 말했고, ③⑤는 지문에 없는 내용, ④는 시험 얘기만 하는 너무 좁은 선지라 지워요."),
+                ),
+                schemas.TrainQuestion(
+                    qtype="요지",
+                    instruction="다음 글의 요지로 가장 적절한 것은?",
+                    passage_excerpt="",
+                    choices=[
+                        schemas.TrainChoice(symbol="①", text="정답을 빨리 외우는 학생이 성적이 좋다.",
+                                            correct=False, reason="지문과 반대."),
+                        schemas.TrainChoice(symbol="②", text="교육은 호기심을 억눌러 집중력을 길러야 한다.",
+                                            correct=False, reason="반대로 말함 — 호기심은 길러야 할 대상."),
+                        schemas.TrainChoice(symbol="③", text="호기심을 자극하는 교육이 학습에 효과적이다.",
+                                            correct=True, reason="소재+주장을 정확히 담음 — 정답."),
+                        schemas.TrainChoice(symbol="④", text="모든 학생은 항상 스스로 공부해야만 한다.",
+                                            correct=False, reason="'모든/항상/~만' 같은 지나친 단정 — 경계 선지."),
+                        schemas.TrainChoice(symbol="⑤", text="시험 성적은 학습에서 가장 중요하지 않다.",
+                                            correct=False, reason="지문이 강조한 핵심(호기심)이 빠짐."),
+                    ],
+                    answer="③",
+                    solution=(
+                        "요지는 주제를 '한 문장 주장'으로 바꾼 거예요. 호기심이 학습에 좋다는 게 핵심이니 ③이 정답. "
+                        "④처럼 '모든/항상/~만'이 들어간 선지는 지나치게 단정적이라 대개 오답이에요."),
+                ),
+                schemas.TrainQuestion(
+                    qtype="빈칸추론",
+                    instruction="다음 빈칸에 들어갈 말로 가장 적절한 것은?",
+                    passage_excerpt="Education should encourage learners to _______ rather than simply memorize answers.",
+                    choices=[
+                        schemas.TrainChoice(symbol="①", text="obey rules", correct=False, reason="지문 내용과 무관."),
+                        schemas.TrainChoice(symbol="②", text="explore and inquire", correct=True,
+                                            reason="반복 어구(explore/inquire)와 일치 — 정답."),
+                        schemas.TrainChoice(symbol="③", text="avoid mistakes", correct=False, reason="지문에 없는 내용."),
+                        schemas.TrainChoice(symbol="④", text="memorize faster", correct=False, reason="빈칸 뒤 '단순 암기 말고'와 모순."),
+                        schemas.TrainChoice(symbol="⑤", text="compete harder", correct=False, reason="지문에 없는 내용."),
+                    ],
+                    answer="②",
+                    solution=(
+                        "빈칸은 'rather than memorize(암기 말고)'와 대비돼요. 그러니 암기의 반대인 '탐구·질문'이 들어가야죠. "
+                        "본문에서 반복된 explore, inquire와 같은 ②가 정답이에요."),
+                ),
+            ],
+            reading_tip=(
+                "선지는 '지문에 있었나?'를 기준으로 읽어요. always·never·only·모든처럼 지나치게 단정적인 말은 대개 오답이고, "
+                "지문 일부만 말하는 '너무 좁은' 선지나 지문 밖까지 넓히는 '너무 넓은' 선지도 지워요. "
+                "남는 하나가 소재+주장을 함께 담고 있으면 그게 정답입니다."),
+        ),
     )

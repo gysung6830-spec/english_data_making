@@ -120,9 +120,12 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         "vocab": (schemas.VocabSection, lambda t, b: prompts.vocab_prompt(t, b, lo, hi)),
         "structure": (schemas.StructureSection, lambda t, b: prompts.structure_prompt(t, b)),
     }
+    # 모의고사 훈련서(⑦)는 선택했을 때만 배치에 포함 (비용 절감)
+    if cfg.outputs.train:
+        section_specs["train"] = (schemas.TrainSection, lambda t, b: prompts.train_prompt(t, b))
     for (fid, pidx), ex in units.items():
         for name, (cls, mk) in section_specs.items():
-            mt = 12000 if name == "literal" else 8000
+            mt = 12000 if name in ("literal", "train") else 8000
             sec_reqs.append({
                 "custom_id": f"{fid}__{pidx}__{name}",
                 "params": build_request(model, prompts.SYSTEM, mk(ex.title, ex.body), cls, mt),
@@ -136,6 +139,10 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
             try:
                 parsed[(fid, pidx)][name] = parse_response_text(text or "", cls)
             except Exception as e:
+                # 훈련서(⑦)는 선택 항목이라 실패해도 지문 전체를 실패시키지 않는다.
+                if name == "train":
+                    logger.warning("훈련서 생성 실패(건너뜀): %s p%s (%s)", fid, pidx, e)
+                    continue
                 failed.setdefault(fid, f"p{pidx}/{name}: {e}")
 
     # ---- 3단계: 지문별 출제 포인트 ----
@@ -171,6 +178,7 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                     summary=p["summary"], literal=p["literal"],
                     grammar=p["grammar"], vocab=p["vocab"],
                     structure=p["structure"], exam=exam,
+                    train=p.get("train"),
                 ))
             pdf = files[fid]
             recs = render_outputs(cfg, reports, _safe_stem(pdf))

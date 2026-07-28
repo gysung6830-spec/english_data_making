@@ -34,10 +34,11 @@ class DesignCfg:
 
 @dataclass
 class OutputsCfg:
-    """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지)."""
+    """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지 / 모의고사 훈련서)."""
     analysis: bool = True
     wordlist: bool = True
     quiz: bool = True
+    train: bool = True   # 모의고사 훈련서(입문·60점대: 소재·주제·선지·구문 훈련)
 
 
 @dataclass
@@ -96,6 +97,7 @@ def load_config(path: str | Path | None = None) -> Config:
             analysis=bool(outputs.get("analysis", True)),
             wordlist=bool(outputs.get("wordlist", True)),
             quiz=bool(outputs.get("quiz", True)),
+            train=bool(outputs.get("train", True)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )

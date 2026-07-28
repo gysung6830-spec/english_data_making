@@ -294,3 +294,160 @@ table.lit2 td {
 .ak-list { columns: 2; column-gap: 22px; font-size: 9.5px; line-height: 1.7; }
 .ak-item { display: block; break-inside: avoid; color: #23272e; }
 .ak-item b { color: var(--voc); }
+
+/* ============================================================
+   모의고사 훈련서 (입문·60점대: 소재→주제→선지 읽기→구문 훈련)
+   ============================================================ */
+:root {
+  --tr:     var(--c-purple);   /* 훈련서 대표색 */
+  --tr-bg:  #f3f1f9;
+  --tr-line:#d9d2ef;
+}
+.tr-doc { font-size: 9.4px; }
+.tr-doc.pgbreak { break-before: page; }
+.tr-header { border-bottom-color: var(--tr); }
+.tr-header .doc-badge { background: var(--tr); }
+.tr-goal {
+  margin-top: 5px; background: var(--tr-bg); color: #3b2e6b;
+  border-radius: 5px; padding: 4px 9px; font-size: 9px; font-weight: 700;
+}
+
+/* 지문 원문 */
+.tr-passage {
+  border: 1px solid var(--tr-line); border-radius: 7px;
+  padding: 9px 12px; margin: 9px 0 10px; background: #fcfbff;
+}
+.tr-plabel {
+  display: inline-block; background: var(--tr); color: #fff;
+  font-size: 9px; font-weight: 800; padding: 1px 8px; border-radius: 9px; margin-bottom: 4px;
+}
+.tr-ptext { margin: 3px 0 0; font-size: 10.5px; line-height: 1.65; color: #1f2430; }
+
+/* STEP 공통 */
+.tr-step { margin: 0 0 9px; break-inside: avoid; }
+.tr-step-head {
+  font-size: 12px; font-weight: 800; color: var(--tr);
+  border-left: 4px solid var(--tr); padding-left: 8px; margin-bottom: 6px;
+}
+.tr-step-head em { font-style: normal; color: #6b7280; font-weight: 700; font-size: 10px; }
+.tr-badge {
+  display: inline-block; background: var(--tr); color: #fff;
+  font-size: 9px; font-weight: 800; padding: 1px 7px; border-radius: 5px; margin-right: 5px;
+}
+
+/* 도움말 / 안내 박스 */
+.tr-help, .tr-guide {
+  background: var(--tr-bg); border-radius: 6px; padding: 6px 10px;
+  font-size: 9.2px; line-height: 1.5; margin-bottom: 6px;
+}
+.tr-help-lbl, .tr-guide-lbl {
+  display: inline-block; background: #fff; color: var(--tr); border: 1px solid var(--tr);
+  font-size: 8.5px; font-weight: 800; padding: 0 7px; border-radius: 9px; margin-right: 6px;
+}
+.tr-steps { margin: 4px 0 0; padding-left: 20px; }
+.tr-steps li { margin-bottom: 2px; line-height: 1.45; }
+
+/* 소재 단서(반복 어구) */
+.tr-clues { margin: 4px 0 6px; }
+.tr-clue {
+  display: inline-block; background: #fff; border: 1px solid var(--tr-line);
+  border-radius: 12px; padding: 1px 9px; margin: 0 5px 4px 0; font-size: 9px;
+}
+.tr-clue b { color: var(--tr); }
+
+/* 학생이 직접 쓰는 칸 */
+.tr-write { font-size: 9.6px; margin-top: 3px; }
+.tr-blank {
+  display: inline-block; border-bottom: 1.3px solid #9aa0a6;
+  min-width: 150px; height: 13px; vertical-align: bottom; margin-left: 4px;
+}
+.tr-blank.long { min-width: 100%; margin: 4px 0 0; }
+
+/* 선지 읽기 팁 */
+.tr-tip {
+  background: #fff7ed; border: 1px dashed var(--c-amber); border-radius: 6px;
+  padding: 6px 10px; margin: 4px 0 9px; font-size: 9.2px; line-height: 1.5;
+}
+.tr-tip-lbl {
+  display: inline-block; background: var(--c-amber); color: #fff;
+  font-size: 8.5px; font-weight: 800; padding: 0 7px; border-radius: 9px; margin-right: 6px;
+}
+
+/* STEP 3 문제 */
+.tr-q { border: 1px solid var(--tr-line); border-radius: 7px; padding: 7px 10px; margin-bottom: 7px; break-inside: avoid; }
+.tr-q-head { margin-bottom: 4px; }
+.tr-qno {
+  display: inline-block; background: var(--tr); color: #fff; width: 15px; height: 15px;
+  line-height: 15px; text-align: center; border-radius: 50%; font-size: 9px; font-weight: 800; margin-right: 5px;
+}
+.tr-qtype {
+  display: inline-block; background: var(--tr-bg); color: var(--tr); border: 1px solid var(--tr-line);
+  font-size: 8.5px; font-weight: 800; padding: 0 7px; border-radius: 9px; margin-right: 6px;
+}
+.tr-qinst { font-weight: 700; font-size: 9.8px; }
+.tr-excerpt {
+  background: #fcfbff; border-left: 3px solid var(--tr); border-radius: 0 5px 5px 0;
+  padding: 5px 9px; margin: 5px 0; font-size: 10px; line-height: 1.55;
+}
+.tr-choices { list-style: none; margin: 4px 0 0; padding: 0; }
+.tr-choices li { padding: 2px 0; font-size: 9.8px; line-height: 1.5; }
+.tr-sym { font-weight: 800; margin-right: 5px; }
+
+/* STEP 4 구문 훈련 */
+.tr-syntax .tr-lit { width: 100%; border-collapse: collapse; }
+.tr-lit td { border-bottom: 1px solid var(--tr-line); padding: 6px 6px; vertical-align: top; }
+.tr-lit-en .lit-line { font-size: 10.5px; line-height: 1.6; }
+.tr-lit-en .lit-line .sl { color: #cbd5e1; padding: 0 3px; font-weight: 700; }
+.tr-lit-en .lit-line .ck { font-weight: 600; }
+.tr-hint { margin-top: 3px; font-size: 8.6px; }
+.tr-hint-tag {
+  display: inline-block; color: var(--tr); border: 1px solid var(--tr-line);
+  border-radius: 3px; padding: 0 5px; margin-right: 4px; font-weight: 700;
+}
+.tr-answer-line { margin-top: 5px; font-size: 9.5px; color: #9aa0a6; font-weight: 700; }
+.tr-uline { display: inline-block; border-bottom: 1.2px solid #c7cdd6; width: 88%; height: 12px; vertical-align: bottom; }
+
+/* 정답 · 해설 */
+.tr-answers { break-before: page; }
+.tr-ans-title {
+  display: inline-block; background: #111827; color: #fff;
+  font-size: 12px; font-weight: 800; padding: 3px 11px; border-radius: 5px; margin-bottom: 9px;
+}
+.tr-ans-title .made-by { font-size: 8.5px; font-weight: 600; color: #cbd5e1; margin-left: 6px; }
+.tr-ans-block { margin-bottom: 10px; break-inside: avoid; }
+.tr-ans-h {
+  font-size: 10.5px; font-weight: 800; color: var(--tr);
+  border-bottom: 1.5px solid var(--tr-line); padding-bottom: 2px; margin-bottom: 5px;
+}
+.tr-ans-row { font-size: 9.6px; margin: 2px 0; line-height: 1.5; }
+.tr-ans-k {
+  display: inline-block; background: var(--tr); color: #fff;
+  font-size: 8.5px; font-weight: 800; padding: 0 7px; border-radius: 9px; margin-right: 6px;
+}
+.tr-ans-q { margin-bottom: 7px; break-inside: avoid; }
+.tr-ans-qhead { font-size: 9.8px; font-weight: 700; margin-bottom: 3px; }
+.tr-ans-mark {
+  display: inline-block; background: var(--c-red); color: #fff;
+  font-size: 10px; font-weight: 800; padding: 0 7px; border-radius: 5px; margin-left: 3px;
+}
+.tr-ans-choices { list-style: none; margin: 3px 0 0; padding: 0; }
+.tr-ans-choices li { font-size: 9.2px; line-height: 1.5; padding: 1px 0; }
+.tr-ans-choices li.ok { color: #166534; font-weight: 700; }
+.tr-ans-choices li.no { color: #4b5563; }
+.tr-oc { display: inline-block; width: 12px; font-weight: 800; text-align: center; margin-right: 3px; }
+.tr-ans-choices li.ok .tr-oc { color: var(--c-green); }
+.tr-ans-choices li.no .tr-oc { color: var(--c-red); }
+.tr-sol {
+  background: var(--tr-bg); border-radius: 5px; padding: 5px 9px; margin-top: 4px;
+  font-size: 9.2px; line-height: 1.5;
+}
+.tr-sol-lbl {
+  display: inline-block; background: var(--tr); color: #fff;
+  font-size: 8.5px; font-weight: 800; padding: 0 7px; border-radius: 9px; margin-right: 6px;
+}
+.tr-ans-lit { margin: 3px 0 0; padding-left: 0; list-style: none; }
+.tr-ans-lit li { font-size: 9.4px; line-height: 1.55; margin-bottom: 2px; }
+.tr-ans-sno {
+  display: inline-block; background: var(--lit); color: #fff; width: 13px; height: 13px;
+  line-height: 13px; text-align: center; border-radius: 50%; font-size: 8px; font-weight: 800; margin-right: 5px;
+}

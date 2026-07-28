@@ -88,7 +88,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지·모의고사 훈련서를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -110,12 +110,13 @@ INDEX_HTML = """
 
       <label>③ 저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
       <input type=text name=basename placeholder="예: 2027수능특강_16강">
-      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
+      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b> · <b>(지문명)_모의고사훈련서</b></div>
 
       <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
+      <label class=chk><input type=checkbox name=out_train value=1 checked> 🏋️ 모의고사 훈련서 <span class=hint>(입문·60점대: 소재→주제→선지 읽기→구문 훈련)</span></label>
 
       <label class=chk><input type=checkbox name=brand value=1 checked> 🖋️ 분석지에 '은아 T' 문구 넣기 <span class=hint>(직독직해 made by · 출제표 tip · 하단 저작권은 항상 유지)</span></label>
 
@@ -241,9 +242,10 @@ def analyze_route():
         analysis=bool(request.form.get("out_analysis")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
+        train=bool(request.form.get("out_train")),
     )
-    if not (which.analysis or which.wordlist or which.quiz):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    if not (which.analysis or which.wordlist or which.quiz or which.train):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False, train=False)
 
     # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
     brand = cfg.design.brand if request.form.get("brand") else ""
@@ -275,7 +277,9 @@ def analyze_route():
             if mock:
                 reports = pipeline._mock_reports_for_pdf(cfg, tmp)
             else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
+                # 훈련서를 고른 경우에만 훈련서용 API 호출을 추가한다.
+                reports = pipeline.build_reports_for_pdf(client, cfg, tmp,
+                                                         want_train=which.train)
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>모의고사 훈련서</title></head>
+<body>
+
+{% macro passage_text(report) -%}
+  {%- for s in report.literal.sentences -%}
+    {%- for c in s.chunks -%}{{ c.english }}{% if not loop.last %} {% endif %}{%- endfor -%}
+    {% if not loop.last %} {% endif %}
+  {%- endfor -%}
+{%- endmacro %}
+
+{% macro sentence_ko(s) -%}
+  {%- for c in s.chunks -%}{{ c.korean }}{% if not loop.last %} / {% endif %}{%- endfor -%}
+{%- endmacro %}
+
+{% macro render_train(report, pno, total) %}
+  <div class="doc-header tr-header">
+    <span class="doc-badge">모의고사 훈련서 · 기초</span>
+    {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
+    <div class="doc-title">{{ report.title }}</div>
+    {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
+    <div class="tr-goal">이 훈련서 목표 — ① 소재 찾기 ② 주제 찾기 ③ 선지(보기) 읽는 연습 ④ 구문 독해</div>
+  </div>
+
+  {# 지문 원문 #}
+  <div class="tr-passage">
+    <div class="tr-plabel">지문 (Passage)</div>
+    <p class="tr-ptext">{{ passage_text(report) }}</p>
+  </div>
+
+  {# STEP 1 · 소재 찾기 #}
+  <div class="tr-step">
+    <div class="tr-step-head"><span class="tr-badge">STEP 1</span> 소재 찾기 — <em>무엇에 관한 글일까?</em></div>
+    <div class="tr-help">
+      <span class="tr-help-lbl">도움말</span>
+      지문에서 <b>반복·강조되는 어구</b>가 소재를 알려줘요. 아래 어구에 동그라미 치며 읽어 보세요.
+    </div>
+    <div class="tr-clues">
+      {% for c in report.train.topic_training.clues %}
+      <span class="tr-clue"><b>{{ c.word }}</b> {{ c.meaning }}</span>
+      {% endfor %}
+    </div>
+    <div class="tr-write">✍ <b>이 글의 소재는?</b> <span class="tr-blank"></span></div>
+  </div>
+
+  {# STEP 2 · 주제 찾기 #}
+  <div class="tr-step">
+    <div class="tr-step-head"><span class="tr-badge">STEP 2</span> 주제 찾기 — <em>글쓴이가 하고 싶은 말은?</em></div>
+    {% if report.train.topic_training.steps %}
+    <div class="tr-guide">
+      <span class="tr-guide-lbl">이렇게 생각해 봐</span>
+      <ol class="tr-steps">
+        {% for st in report.train.topic_training.steps %}<li>{{ st }}</li>{% endfor %}
+      </ol>
+    </div>
+    {% endif %}
+    <div class="tr-write">✍ <b>주제 한 문장:</b> <span class="tr-blank long"></span><span class="tr-blank long"></span></div>
+  </div>
+
+  {# 선지 읽기 팁 #}
+  {% if report.train.reading_tip %}
+  <div class="tr-tip">
+    <span class="tr-tip-lbl">선지(보기) 읽는 법</span>{{ report.train.reading_tip }}
+  </div>
+  {% endif %}
+
+  {# STEP 3 · 유형별 실전 문제 #}
+  <div class="tr-step">
+    <div class="tr-step-head"><span class="tr-badge">STEP 3</span> 유형 문제 — <em>선지를 읽고 골라 보자</em></div>
+    {% for q in report.train.questions %}
+    <div class="tr-q">
+      <div class="tr-q-head">
+        <span class="tr-qno">{{ loop.index }}</span>
+        <span class="tr-qtype">{{ q.qtype }}</span>
+        <span class="tr-qinst">{{ q.instruction }}</span>
+      </div>
+      {% if q.passage_excerpt %}<div class="tr-excerpt">{{ q.passage_excerpt }}</div>{% endif %}
+      <ol class="tr-choices">
+        {% for ch in q.choices %}
+        <li><span class="tr-sym">{{ ch.symbol }}</span>{{ ch.text }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+    {% endfor %}
+  </div>
+
+  {# STEP 4 · 구문(직독직해) 훈련 — 새 페이지 #}
+  <div class="tr-step tr-syntax pgbreak">
+    <div class="tr-step-head"><span class="tr-badge">STEP 4</span> 구문 훈련 — <em>끊어 읽고 직접 해석해 보자</em></div>
+    <div class="tr-help">
+      <span class="tr-help-lbl">방법</span>
+      끊어진 <b>영어 덩어리</b>와 <b>구문 힌트</b>를 보고, 아래 빈칸에 우리말 해석을 적어 보세요. (정답은 맨 뒤에)
+    </div>
+    <table class="tr-lit">
+      <tbody>
+      {% for s in report.literal.sentences %}
+      <tr>
+        <td class="tr-lit-en">
+          <span class="snum">{{ s.no }}</span>
+          <span class="lit-line">
+            {%- for c in s.chunks -%}
+              <span class="ck ck{{ loop.index0 % 8 }}">{{ c.english }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+            {%- endfor -%}
+          </span>
+          {% set hints = [] %}
+          {% for c in s.chunks %}{% if c.syntax %}{% set _ = hints.append(c.syntax) %}{% endif %}{% endfor %}
+          {% if hints %}
+          <div class="tr-hint">💡 {% for h in hints %}<span class="tr-hint-tag">{{ h }}</span>{% endfor %}</div>
+          {% endif %}
+          <div class="tr-answer-line">→ <span class="tr-uline"></span></div>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {# 정답 · 해설 — 새 페이지 #}
+  <div class="tr-answers pgbreak">
+    <div class="tr-ans-title">정답 · 해설{% if total > 1 %} · 지문 {{ pno }}{% endif %}
+      {% if brand %}<span class="made-by">by {{ brand }}</span>{% endif %}
+    </div>
+
+    <div class="tr-ans-block">
+      <div class="tr-ans-h">STEP 1~2 · 소재와 주제</div>
+      <div class="tr-ans-row"><span class="tr-ans-k">소재</span>{{ report.train.topic_training.material }}</div>
+      <div class="tr-ans-row"><span class="tr-ans-k">주제</span>{{ report.train.topic_training.topic }}</div>
+    </div>
+
+    <div class="tr-ans-block">
+      <div class="tr-ans-h">STEP 3 · 문제 정답과 선지 분석</div>
+      {% for q in report.train.questions %}
+      <div class="tr-ans-q">
+        <div class="tr-ans-qhead">
+          <span class="tr-qno">{{ loop.index }}</span>
+          <span class="tr-qtype">{{ q.qtype }}</span>
+          정답 <span class="tr-ans-mark">{{ q.answer }}</span>
+        </div>
+        <ul class="tr-ans-choices">
+          {% for ch in q.choices %}
+          <li class="{{ 'ok' if ch.correct else 'no' }}">
+            <span class="tr-sym">{{ ch.symbol }}</span>
+            <span class="tr-oc">{{ 'O' if ch.correct else 'X' }}</span>
+            {% if ch.reason %}{{ ch.reason }}{% else %}{{ ch.text }}{% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% if q.solution %}<div class="tr-sol"><span class="tr-sol-lbl">풀이</span>{{ q.solution }}</div>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="tr-ans-block">
+      <div class="tr-ans-h">STEP 4 · 구문 훈련 해석</div>
+      <ol class="tr-ans-lit">
+        {% for s in report.literal.sentences %}
+        <li><span class="tr-ans-sno">{{ s.no }}</span>{{ sentence_ko(s) }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+
+  {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+{% endmacro %}
+
+  {% for report in reports %}
+  <div class="tr-doc{{ ' pgbreak' if not loop.first }}">
+    {{ render_train(report, loop.index, reports|length) }}
+  </div>
+  {% endfor %}
+
+</body>
+</html>

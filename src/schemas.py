@@ -180,6 +180,68 @@ class ExamSection(BaseModel):
 
 
 # ---------------------------------------------------------------------------
+# ⑦ 모의고사 훈련서 (모의고사 입문·60점대 학생용 기초 훈련)
+#    소재 찾기 → 주제 찾기 → 선지 읽기(유형별 문제) → 구문(직독직해) 훈련
+# ---------------------------------------------------------------------------
+class TrainClue(BaseModel):
+    """소재를 알려주는 '반복되는 핵심 어구' (소재 찾기 단서)."""
+    word: str        # 지문에서 반복·강조되는 영어 어구
+    meaning: str     # 한글 뜻
+
+
+class TopicTraining(BaseModel):
+    """소재 찾기 · 주제 찾기 훈련 데이터."""
+    clues: list[TrainClue] = Field(default_factory=list)  # 반복 어구(소재 단서)
+    material: str            # 소재 = '무엇에 관한 글인가' (짧은 한글 한 마디)
+    topic: str               # 주제 한 문장 (한글)
+    steps: list[str] = Field(default_factory=list)  # 소재→주제로 가는 사고 과정(학생 안내)
+
+    @field_validator("material", "topic")
+    @classmethod
+    def _non_blank(cls, v: str) -> str:
+        if not (v or "").strip():
+            raise ValueError("소재/주제가 비어 있습니다.")
+        return v
+
+
+class TrainChoice(BaseModel):
+    """유형 문제의 선지 하나 (+ 선지 읽기 훈련용 정오 이유)."""
+    symbol: str            # ① ② ③ ④ ⑤
+    text: str              # 선지 내용
+    correct: bool = False  # 정답 여부
+    reason: str = ""       # 왜 정답/오답인지 (선지 읽기 훈련)
+
+
+class TrainQuestion(BaseModel):
+    qtype: str                 # 유형: 주제 / 요지 / 빈칸추론 등
+    instruction: str           # 발문 (예: '다음 글의 주제로 가장 적절한 것은?')
+    passage_excerpt: str = ""  # 빈칸 유형 등에서 보여줄 지문/빈칸 표시(없으면 공란)
+    choices: list[TrainChoice]
+    answer: str                # 정답 기호 (①~⑤)
+    solution: str = ""         # 풀이: 소재→주제→정답 도출 과정
+
+    @field_validator("choices")
+    @classmethod
+    def _has_choices(cls, v: list[TrainChoice]) -> list[TrainChoice]:
+        if len(v) < 2:
+            raise ValueError("선지는 2개 이상이어야 합니다.")
+        return v
+
+
+class TrainSection(BaseModel):
+    topic_training: TopicTraining
+    questions: list[TrainQuestion]
+    reading_tip: str = ""      # 선지 읽는 법 요약 팁
+
+    @field_validator("questions")
+    @classmethod
+    def _has_questions(cls, v: list[TrainQuestion]) -> list[TrainQuestion]:
+        if not v:
+            raise ValueError("훈련 문제가 비어 있습니다.")
+        return v
+
+
+# ---------------------------------------------------------------------------
 # 최종 조립 결과 (렌더링 입력)
 # ---------------------------------------------------------------------------
 class Report(BaseModel):
@@ -191,3 +253,5 @@ class Report(BaseModel):
     vocab: VocabSection
     structure: StructureSection
     exam: ExamSection
+    # 모의고사 훈련서용(선택). train 출력을 켠 경우에만 채워진다.
+    train: TrainSection | None = None

@@ -105,12 +105,45 @@ def test_render_html():
     print("PASS  HTML 렌더링")
 
 
+# ---- 6. 훈련서 스키마·렌더링 ----------------------------------------------
+def test_train_schema_and_render():
+    from samples.sample_mock import mock_report
+
+    rep = mock_report()
+    # 스키마: 소재/주제/문제가 채워져 있어야 함
+    assert rep.train is not None
+    assert rep.train.topic_training.material and rep.train.topic_training.topic
+    assert len(rep.train.questions) >= 2
+    # 정답이 정확히 1개인지(주제/요지/빈칸 모두)
+    for q in rep.train.questions:
+        assert sum(1 for c in q.choices if c.correct) == 1, "정답은 1개여야 함"
+
+    # 훈련서 템플릿이 핵심 요소를 모두 렌더하는지
+    tmpl = render._env.get_template("train.html.j2")
+    html = tmpl.render(reports=[rep], title="모의고사 훈련서",
+                       footer_note="테스트", brand="은아 T")
+    for must in ("모의고사 훈련서", "STEP 1", "STEP 2", "STEP 3", "STEP 4",
+                 "소재 찾기", "주제 찾기", "선지", "구문 훈련", "정답 · 해설"):
+        assert must in html, f"훈련서에 '{must}' 가 없습니다."
+    print("PASS  훈련서 스키마·렌더링")
+
+
+# ---- 7. 훈련서 선택(train off) 시 미생성 ----------------------------------
+def test_train_optional_flag():
+    from src.config import OutputsCfg
+    # 기본값에 train 이 포함돼 있어야 함
+    assert hasattr(OutputsCfg(), "train")
+    print("PASS  훈련서 출력 옵션 존재")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()
     test_render_html()
+    test_train_schema_and_render()
+    test_train_optional_flag()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

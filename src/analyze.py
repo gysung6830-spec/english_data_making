@@ -32,11 +32,17 @@ def extract_passages_image(client: ClaudeClient, cfg: Config, image_path: str) -
 
 
 def analyze_passage(
-    client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
+    client: ClaudeClient, cfg: Config, extraction: schemas.Extraction,
+    want_train: bool | None = None,
 ) -> schemas.Report:
-    """추출된 본문으로 6개 섹션을 각각 요청하여 Report 조립."""
+    """추출된 본문으로 6개 섹션을 각각 요청하여 Report 조립.
+
+    want_train: 모의고사 훈련서(⑦)까지 생성할지. None 이면 cfg.outputs.train 을 따른다.
+    (훈련서는 별도 API 호출이라, 출력에서 선택했을 때만 만들어 비용을 아낀다.)
+    """
     title, body = extraction.title, extraction.body
     r = cfg.processing.max_retries
+    want_train = cfg.outputs.train if want_train is None else want_train
 
     def do_summary():
         return client.structured(prompts.SYSTEM, prompts.summary_prompt(title, body),
@@ -92,6 +98,17 @@ def analyze_passage(
         max_retries=r,
     )
 
+    # ⑦ 모의고사 훈련서 (선택 시에만 생성; 본문만으로 독립 생성)
+    train = None
+    if want_train:
+        train = client.structured(
+            prompts.SYSTEM,
+            prompts.train_prompt(title, body),
+            schemas.TrainSection,
+            max_tokens=12000,
+            max_retries=r,
+        )
+
     return schemas.Report(
         title=title,
         source=extraction.source,
@@ -101,4 +118,5 @@ def analyze_passage(
         vocab=vocab,
         structure=results["structure"],
         exam=exam,
+        train=train,
     )

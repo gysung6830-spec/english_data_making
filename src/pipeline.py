@@ -26,8 +26,12 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
-def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
-    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
+def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path,
+                          want_train: bool | None = None) -> list[Report]:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로).
+
+    want_train: 모의고사 훈련서(⑦)까지 생성할지. None 이면 cfg.outputs.train 을 따른다.
+    """
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
@@ -38,7 +42,8 @@ def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[
                 "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
         pset = analyze.extract_passages(client, cfg, raw)
-    return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
+    return [analyze.analyze_passage(client, cfg, ex, want_train=want_train)
+            for ex in pset.passages]
 
 
 # 하위 호환용 별칭(단일 Report 반환)
@@ -79,6 +84,13 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         p = cfg.output_dir / f"{stem}_어휘test.pdf"
         render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
         recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
+
+    # 모의고사 훈련서: 훈련 데이터(train)가 있는 지문만 대상
+    if sel.train and any(getattr(r, "train", None) for r in reports):
+        p = cfg.output_dir / f"{stem}_모의고사훈련서.pdf"
+        render.render_train_pdf(reports, p, title=f"{title} — 모의고사 훈련서",
+                                footer_note=fn, brand=brand)
+        recs.append({"kind": "train", "label": "🏋️ 모의고사 훈련서", "path": p})
 
     return recs
 
