@@ -54,16 +54,21 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
 
     - 인라인: 해당 어법 글자는 빨강, 주석은 '①' 빨강.
     - 박스   : '① to부정사의 의미상의 주어' 처럼 원문자 번호와 어법명을 나열.
+
+    ※ 오답형(X)이 달린 토큰은 어법 note 가 없어도 반드시 번호를 매겨 박스에 싣는다
+      (본문에만 (X)가 뜨고 설명이 없는 '고아 (X)' 방지).
     """
     items: list[tuple[int, str, str | None]] = []
     n = 0
     for t in sentence.tokens:
-        if t.note and t.note_kind == "red":
+        is_red = bool(t.note and t.note_kind == "red")
+        if is_red or t.wrong:            # 어법 note 또는 오답형(X) 이 있으면 항목화
             n += 1
-            items.append((n, t.note, t.wrong))
-            t.note = _circled(n)        # 인라인은 원문자 번호만
+            name = t.note if is_red else "어법 오답형 주의"
+            items.append((n, name, t.wrong))
+            t.note = _circled(n)          # 인라인은 원문자 번호만
             t.note_kind = "red"
-            t.color = t.color or "red"  # 어법 글자 빨강
+            t.color = t.color or "red"    # 어법 글자·번호 빨강
     if not items:
         return None
     rows = []

@@ -222,6 +222,23 @@ def test_grammar_numbering():
     print("PASS  어법 넘버링(원문자) + 박스")
 
 
+def test_grammar_orphan_wrong_boxed():
+    # 오답형(X)만 있고 어법 note 가 없어도 반드시 번호+박스로 실려야 한다('고아 (X)' 방지).
+    from src.worksheet import point_builder
+    from src.worksheet.models import Sentence, Token
+    s = Sentence(index=5, lines=[[
+        Token(text="are", note="수일치", note_kind="red", wrong="is(X)"),
+        Token(text="designed", wrong="designing(X)"),   # 어법 note 없이 (X)만
+    ]])
+    gp = point_builder.build_grammar_point(s)
+    assert gp is not None
+    toks = s.tokens
+    assert toks[0].note == "①" and toks[1].note == "②"     # 둘 다 번호가 붙음
+    assert "is(X)" in gp.body_html and "designing(X)" in gp.body_html  # 둘 다 박스에
+    assert "①" in gp.body_html and "②" in gp.body_html
+    print("PASS  고아 오답형(X)도 번호+박스에 포함")
+
+
 def test_feed_point_box():
     # 대명사 지칭 + 함축 = 파랑 '떠먹여주는 Point' 박스로 렌더
     a = mock_analysis()
@@ -338,6 +355,7 @@ def run_all():
     test_render_a_and_b()
     test_render_back_page()
     test_grammar_numbering()
+    test_grammar_orphan_wrong_boxed()
     test_feed_point_box()
     test_pronoun_referent_in_refs()
     test_page_break_per_passage()
