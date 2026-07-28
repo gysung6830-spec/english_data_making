@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8">
+<style>
+@page { size: A4; margin: 10mm 12mm; }
+:root{ --ink:#1f7a5c; --ink-d:#12543d; --must:#ffe9a8; --must-line:#e0b94a;
+  --ref:#2f6fb0; --conj:#cd5049; --time:#1f7a5c; --muted:#6b7280; --line:#e6e8ea; --skip:#aab0b6; }
+*{ box-sizing:border-box; }
+body{ font-family:'NanumSquareRound','Liberation Serif',sans-serif; color:#20262c; margin:0; font-size:12px; line-height:1.6; }
+.en{ font-family:'Liberation Serif',serif; }
+.top{ display:flex; align-items:center; gap:10px; border-bottom:3px solid var(--ink); padding-bottom:9px; margin-bottom:13px; }
+.top .badge{ background:var(--ink); color:#fff; font-weight:800; font-size:12px; padding:3px 12px; border-radius:8px; }
+.top h1{ font-size:19px; font-weight:800; color:var(--ink-d); margin:0; }
+.top .sub{ margin-left:auto; font-size:10.5px; color:var(--muted); }
+.diag{ font-size:12px; background:#fff7ef; border:1px solid var(--must-line); border-radius:8px; padding:8px 13px; margin-bottom:11px; }
+.diag b{ color:#a8641a; }
+.h2{ font-size:13.5px; font-weight:800; color:var(--ink-d); margin:0 0 8px; display:flex; align-items:center; gap:7px; }
+.h2::before{ content:""; width:5px; height:15px; background:var(--ink); border-radius:3px; display:inline-block; }
+.steps{ display:flex; gap:10px; margin-bottom:13px; }
+.steps .st{ flex:1; background:#fff; border:1.5px solid var(--line); border-top:4px solid var(--ink); border-radius:9px; padding:10px 12px; }
+.steps .st .k{ display:inline-block; font-size:10px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:6px; padding:2px 9px; margin-bottom:6px; }
+.steps .st b{ display:block; font-size:12.5px; color:var(--ink-d); margin-bottom:4px; }
+.steps .st .d{ font-size:11px; line-height:1.55; color:#48525c; }
+.demo{ border:1.5px solid #cfe0d9; border-radius:10px; padding:10px 15px 5px; margin-bottom:15px; background:#fbfdfc; }
+.demo .cap{ font-size:11px; color:var(--muted); margin-bottom:9px; }
+.demo .cap b{ color:var(--ink-d); }
+.pass{ font-size:12px; line-height:1.8; }
+.piece{ display:flex; gap:9px; padding:5px 0; border-bottom:1px dashed #dbe6e1; }
+.piece:last-child{ border-bottom:none; }
+.plab{ flex:none; width:52px; height:fit-content; text-align:center; font-weight:800; font-size:10px; color:#1f4d7a; background:#e2eefa; border-radius:6px; padding:4px 3px; }
+.plab.give{ color:var(--ink-d); background:#e2efe9; }
+.pcontent{ flex:1; min-width:0; }
+.seam{ font-weight:600; }
+.mid{ color:var(--skip); font-size:10.5px; }
+.mid .mtag{ font-family:'NanumSquareRound',sans-serif; font-size:8.5px; font-weight:700; color:#9aa0a6; background:#f0f2f4; border-radius:4px; padding:0 5px; margin-right:5px; }
+.clue{ color:#fff; font-weight:700; padding:0 4px; border-radius:3px; }
+.c-ref{ background:var(--ref); } .c-conj{ background:var(--conj); } .c-time{ background:var(--time); }
+.hook{ font-family:'NanumSquareRound',sans-serif; font-size:10.5px; color:#1f4d7a; margin-top:4px; }
+.hook .ar{ color:#9bb4cc; font-weight:800; margin:0 4px; }
+.hook .lb{ display:inline-block; font-size:8.5px; font-weight:800; color:#fff; background:var(--ref); border-radius:8px; padding:1px 7px; margin-right:5px; }
+.path{ margin-top:10px; background:#eef4f1; border-left:4px solid var(--ink); border-radius:7px; padding:9px 13px; font-size:12px; }
+.path b{ color:var(--ink-d); } .path .arrow{ color:var(--ink); font-weight:800; }
+.legend{ font-size:9.5px; color:#5a636c; margin:6px 0 2px; }
+.legend .clue{ margin:0 2px; }
+.two{ display:flex; gap:13px; }
+.two > div{ flex:1; }
+.habit{ background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:11px 14px; }
+.habit li{ font-size:11.5px; line-height:1.65; margin-bottom:6px; }
+.habit li b{ color:var(--ink-d); }
+.habit ol{ margin:0; padding-left:18px; }
+.insproc{ background:#f3f8ff; border:1.5px solid #cadcf0; border-radius:9px; padding:11px 14px; }
+.insproc .t{ font-size:12px; font-weight:800; color:var(--ref); margin-bottom:7px; }
+.insproc li{ font-size:11.5px; line-height:1.65; margin-bottom:5px; }
+.insproc li b{ color:#1f4d7a; }
+.insproc ol{ margin:0; padding-left:18px; }
+.foot{ text-align:center; font-size:9px; color:#aab2ba; margin-top:10px; }
+.demo{ margin-bottom:12px; }
+</style></head><body>
+
+<div class="top">
+  <span class="badge">1-PASS</span>
+  <h1>순서·삽입을 '한 번에' 푸는 법</h1>
+  <span class="sub">형광펜 독해 · 유형 특강</span>
+</div>
+
+<div class="diag">
+  왜 자꾸 <b>여러 번 읽게</b> 될까? — 조각의 <b>'내용'</b>을 이해하려 읽기 때문. 순서·삽입은 이해 문제가 아니라
+  <b>'어디에 붙나'를 잇는 문제</b>다. 읽는 목적을 <b>“무슨 말이지?” → “어디에 붙지?”</b> 로 바꾸면 한 번의 전진 읽기로 끝난다.
+</div>
+
+<div class="h2">순서 — 한 번에 푸는 3단계</div>
+<div class="steps">
+  <div class="st"><span class="k">STEP 1</span><b>끝에서 갈고리 하나</b><span class="d">주어진 글의 <b>끝</b>에서 “다음엔 반드시 ___가 와야 한다”를 <b>딱 하나</b>만 건다.</span></div>
+  <div class="st"><span class="k">STEP 2</span><b>첫머리만 본다</b><span class="d">(A)(B)(C)의 <b>첫 1~2문장</b>만. 몸통은 건너뛰고 <b>갈고리를 채우는 조각</b>을 고른다.</span></div>
+  <div class="st"><span class="k">STEP 3</span><b>끝→첫머리 반복</b><span class="d">고른 조각의 <b>끝</b>에서 새 갈고리 → 남은 첫머리에 맞춘다. 되돌아가지 않는다.</span></div>
+</div>
+
+<div class="h2">시범 — 몸통은 넘기고 '이음매'만 따라간다 <span style="font-weight:600;font-size:10px;color:#6b7280">(2024학년도 수능 37번)</span></div>
+<div class="demo">
+  <div class="cap">각 조각의 <b>첫머리(이음매)</b>만 진하게, <b>몸통</b>은 흐리게 표시했다. 순서는 <b>첫머리 단서</b>만으로 정해진다.</div>
+  <div class="legend">단서 색:
+    <span class="clue c-ref">지시어</span><span class="clue c-time">시간·순서</span><span class="clue c-conj">연결어</span></div>
+
+  <div class="pass">
+    <div class="piece">
+      <div class="plab give">주어진 글</div>
+      <div class="pcontent">
+        <span class="en seam">Norms emerge in groups as a result of people conforming to the behavior of others. Thus, the start of a norm occurs when one person acts in a particular manner …</span>
+        <div class="hook"><span class="lb">갈고리</span>한 사람이 <b>'그 행동'을 시작</b> → 다음엔 <b>그 행동을 이어받는</b> 조각이 와야 함</div>
+      </div>
+    </div>
+
+    <div class="piece">
+      <div class="plab">(C)</div>
+      <div class="pcontent">
+        <span class="en seam">Others may then conform to <span class="clue c-ref">this behavior</span> <span class="clue c-time">then</span> for a number of reasons.</span>
+        <span class="mid en"><span class="mtag">몸통 skip</span>The person who performed the initial action may think that others ought to behave as she behaves…</span>
+        <div class="hook"><span class="lb">이음매</span><b>this behavior·then</b> = 주어진 글의 그 행동을 받음 <span class="ar">→</span> <b>주어진 글 바로 뒤</b>. 끝에서 새 갈고리: 'others'가 어떻게 되나?</div>
+      </div>
+    </div>
+
+    <div class="piece">
+      <div class="plab">(A)</div>
+      <div class="pcontent">
+        <span class="en seam">Thus, she may prescribe the behavior to <span class="clue c-ref">them</span> by uttering the norm statement…</span>
+        <span class="mid en"><span class="mtag">몸통 skip</span>Alternately, she may communicate… In addition, she may threaten to sanction them… This will cause some to conform…</span>
+        <div class="hook"><span class="lb">이음매</span><b>them</b> = (C)의 'others' <span class="ar">→</span> <b>(C) 뒤</b>. 끝에서 새 갈고리: 규정하면 다 따르나?</div>
+      </div>
+    </div>
+
+    <div class="piece">
+      <div class="plab">(B)</div>
+      <div class="pcontent">
+        <span class="en seam"><span class="clue c-conj">But</span> some others will not need to have the behavior prescribed to them.</span>
+        <span class="mid en"><span class="mtag">몸통 skip</span>They will observe the regularity of behavior and decide on their own… They may do so for either rational or moral reasons.</span>
+        <div class="hook"><span class="lb">이음매</span><b>But</b> = (A)의 '규정하면 따른다'를 뒤집어 마무리 <span class="ar">→</span> <b>(A) 뒤</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="path">읽은 것은 <b>이음매 4곳</b>뿐 (몸통 7문장은 안 읽음). &nbsp;주어진 글 <span class="arrow">→</span> (C) <span class="arrow">→</span> (A) <span class="arrow">→</span> (B) &nbsp;∴ 정답 <b>(C)-(A)-(B)</b></div>
+</div>
+
+<div class="two">
+  <div class="insproc">
+    <div class="t">🔎 삽입도 똑같다 — 3단계</div>
+    <ol>
+      <li><b>넣을 문장을 먼저</b> 읽고 손잡이 둘: <b>뒤 손잡이</b>(지시어 this·they·But → 앞에 뭐가 있어야) + <b>앞 손잡이</b>(새 화제 → 뒤에 뭐가 와야).</li>
+      <li>본문을 <b>딱 한 번</b> 훑으며 <b>흐름이 끊긴 곳 한 군데</b>를 찾는다(대명사가 받을 게 없거나 화제가 갑자기 튀는 지점).</li>
+      <li>그 <b>끊긴 자리 = 정답.</b> 손잡이를 쥐고 들어가니 다섯 자리를 시험하지 않는다.</li>
+    </ol>
+  </div>
+  <div class="habit">
+    <div class="t" style="font-size:12px;font-weight:800;color:var(--ink-d);margin-bottom:7px;">✅ 재독을 없애는 습관 3</div>
+    <ol>
+      <li><b>묻는 것 먼저</b> — 주어진 글·넣을 문장부터. 갈고리를 쥐고 본문에 들어가면 되돌아갈 일이 없다.</li>
+      <li><b>몸통 말고 이음매</b> — 조각의 끝과 다음 첫머리만. 가운데 문장은 순서 판단에 필요 없다.</li>
+      <li><b>눈으로 외우지 말고 손으로 표시</b> — 지시어→선행어를 화살표로 그으며 간다.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 1-PASS 특강 (샘플)</div>
+
+</body></html>
