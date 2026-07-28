@@ -11,7 +11,7 @@ build_textbook.py 가 이 파일을 읽어 output/성인영어회화교재_OPIC2
 """
 
 TITLE = "성인 영어 회화 교재"
-SUBTITLE = "OPIC 주제로 말하는 나의 의견 · 성인 · 중급 이상 · 템플릿 + 워드뱅크"
+SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 성인 · 중급 이상 · 템플릿 + 워드뱅크"
 FOOTER = "성인 영어 회화 교재 · 내 의견 말하기 템플릿 + 워드뱅크"
 KICKER = "ADULT · INTERMEDIATE & UP"
 
@@ -875,6 +875,333 @@ UNITS = [
                  "결국, 스트레스를 잘 관리하는 것은 저를 ____하게 유지해 줘요.",
                  [[("balanced", "균형 잡힌"), ("healthy", "건강한"), ("level-headed", "침착한"),
                    ("productive", "생산적인"), ("at peace", "평온한")]]),
+            ]),
+        ],
+    },
+    # ===== U21 =====
+    {
+        "emoji": "⏰", "title_ko": "하루 일과", "title_en": "My Daily Routine",
+        "prompt": "Walk me through a typical day.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me walk you through a typical day of mine.", "제 평범한 하루를 소개할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, my daily routine is fairly ____.",
+                 "제 생각에 제 하루 일과는 꽤 ____해요.",
+                 [[("consistent", "규칙적인"), ("busy", "바쁜"), ("well-organized", "잘 짜인"),
+                   ("flexible", "유연한"), ("relaxed", "여유로운")]]),
+                ("Personally, I'm more of a ____ person.",
+                 "개인적으로 저는 ____ 사람에 가까워요.",
+                 [[("morning", "아침형"), ("night", "저녁형"), ("routine-oriented", "루틴 중심의"),
+                   ("spontaneous", "즉흥적인"), ("early-rising", "일찍 일어나는")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason it works for me is that it helps me ____.",
+                 "그것이 제게 잘 맞는 가장 큰 이유는 제가 ____하도록 돕기 때문이에요.",
+                 [[("stay productive", "생산적으로 지내다"), ("manage my time", "시간을 관리하다"),
+                   ("avoid stress", "스트레스를 피하다"), ("get things done", "일을 해내다"),
+                   ("stay on track", "페이스를 유지하다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, on a usual weekday I ____.",
+                 "예를 들어, 평범한 평일에 저는 ____해요.",
+                 [[("get up early", "일찍 일어나다"), ("start with a coffee", "커피로 시작하다"),
+                   ("head to work", "출근하다"), ("exercise in the evening", "저녁에 운동하다"),
+                   ("wind down before bed", "자기 전에 쉬다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("All in all, keeping a routine keeps me ____.",
+                 "결국, 일과를 지키는 것은 저를 ____하게 유지해 줘요.",
+                 [[("balanced", "균형 잡힌"), ("productive", "생산적인"), ("focused", "집중된"),
+                   ("less stressed", "덜 스트레스받는"), ("in control", "통제감 있는")]]),
+            ]),
+        ],
+    },
+    # ===== U22 =====
+    {
+        "emoji": "🚌", "title_ko": "출퇴근·교통", "title_en": "Commuting",
+        "prompt": "Talk about your commute or how you get around.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about my commute and how I get around.", "제 출퇴근과 이동 방법에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the best way to get around.",
+                 "제 생각에 ____이(가) 이동하기 가장 좋은 방법이에요.",
+                 [[("the subway", "지하철"), ("the bus", "버스"), ("driving", "자가용"),
+                   ("cycling", "자전거"), ("walking", "도보")]]),
+                ("Personally, my commute is usually ____.",
+                 "개인적으로 제 출퇴근은 보통 ____해요.",
+                 [[("quick", "빠른"), ("crowded", "붐비는"), ("long", "긴"),
+                   ("smooth", "원활한"), ("tiring", "피곤한")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I prefer it is that it is ____.",
+                 "제가 그것을 선호하는 가장 큰 이유는 그것이 ____하기 때문이에요.",
+                 [[("fast and reliable", "빠르고 믿을 만한"), ("cheap", "저렴한"),
+                   ("less stressful", "덜 피곤한"), ("good for the environment", "환경에 좋은"),
+                   ("convenient", "편리한")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, on my way to work I usually ____.",
+                 "예를 들어, 출근길에 저는 보통 ____해요.",
+                 [[("listen to a podcast", "팟캐스트를 듣다"), ("read the news", "뉴스를 읽다"),
+                   ("check my phone", "휴대폰을 보다"), ("plan my day", "하루를 계획하다"),
+                   ("just relax", "그냥 쉬다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, my commute is a ____ part of the day.",
+                 "전반적으로, 출퇴근은 하루 중 ____ 부분이에요.",
+                 [[("manageable", "견딜 만한"), ("necessary", "어쩔 수 없는"),
+                   ("surprisingly pleasant", "의외로 괜찮은"), ("tiring but routine", "피곤하지만 익숙한"),
+                   ("useful", "유용한")]]),
+            ]),
+        ],
+    },
+    # ===== U23 =====
+    {
+        "emoji": "🧹", "title_ko": "집안일", "title_en": "Household Chores",
+        "prompt": "Talk about the household chores you do.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about the household chores I do.", "제가 하는 집안일에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the most tedious chore.",
+                 "제 생각에 ____이(가) 가장 귀찮은 집안일이에요.",
+                 [[("doing the dishes", "설거지"), ("doing laundry", "빨래"),
+                   ("cleaning the floor", "바닥 청소"), ("taking out the trash", "쓰레기 버리기"),
+                   ("tidying up", "정리정돈")]]),
+                ("Personally, I don't mind ____ so much.",
+                 "개인적으로 저는 ____은(는) 그렇게 싫지 않아요.",
+                 [[("cooking", "요리"), ("vacuuming", "청소기 돌리기"), ("organizing", "정리"),
+                   ("wiping surfaces", "닦기"), ("watering the plants", "화분에 물 주기")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I keep up with them is that ____.",
+                 "제가 집안일을 꾸준히 하는 가장 큰 이유는 ____이기 때문이에요.",
+                 [[("a clean space feels good", "깨끗한 공간이 기분 좋다"), ("it keeps my home tidy", "집이 깔끔해진다"),
+                   ("it becomes a habit", "습관이 된다"), ("it saves time later", "나중에 시간을 아낀다"),
+                   ("it's part of adult life", "어른 생활의 일부다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, on weekends I usually ____.",
+                 "예를 들어, 주말에 저는 보통 ____해요.",
+                 [[("clean the whole house", "집 전체를 청소하다"), ("do a big laundry load", "빨래를 몰아서 하다"),
+                   ("tidy up my room", "방을 정리하다"), ("sort out the fridge", "냉장고를 정리하다"),
+                   ("take care of the trash", "쓰레기를 처리하다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("All in all, keeping things tidy makes me feel ____.",
+                 "결국, 깔끔하게 유지하는 것은 저를 ____한 기분이 들게 해요.",
+                 [[("refreshed", "상쾌한"), ("comfortable", "편안한"), ("organized", "정돈된"),
+                   ("accomplished", "뿌듯한"), ("at ease", "홀가분한")]]),
+            ]),
+        ],
+    },
+    # ===== U24 =====
+    {
+        "emoji": "🍳", "title_ko": "집밥·요리", "title_en": "Cooking at Home",
+        "prompt": "Talk about cooking at home.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about cooking at home.", "집에서 요리하는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, cooking at home is much more ____ than eating out.",
+                 "제 생각에 집밥은 외식보다 훨씬 더 ____해요.",
+                 [[("healthy", "건강한"), ("affordable", "경제적인"), ("satisfying", "만족스러운"),
+                   ("comforting", "위안이 되는"), ("flexible", "자유로운")]]),
+                ("Personally, I usually make ____.",
+                 "개인적으로 저는 보통 ____을(를) 만들어요.",
+                 [[("simple meals", "간단한 식사"), ("Korean dishes", "한식"), ("pasta", "파스타"),
+                   ("stir-fries", "볶음 요리"), ("whatever is in the fridge", "냉장고에 있는 것")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I prefer it is that I can ____.",
+                 "제가 그것을 선호하는 가장 큰 이유는 제가 ____할 수 있기 때문이에요.",
+                 [[("control what I eat", "먹는 것을 조절하다"), ("save money", "돈을 아끼다"),
+                   ("cook to my taste", "내 입맛대로 요리하다"), ("use fresh ingredients", "신선한 재료를 쓰다"),
+                   ("relax while cooking", "요리하며 쉬다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, on a typical evening I ____.",
+                 "예를 들어, 평범한 저녁에 저는 ____해요.",
+                 [[("cook a quick dinner", "간단히 저녁을 하다"), ("try a new recipe", "새 조리법을 시도하다"),
+                   ("prep meals for the week", "일주일 치를 준비하다"), ("make something simple", "간단한 걸 만들다"),
+                   ("cook with my family", "가족과 요리하다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, home cooking is a ____ habit.",
+                 "전반적으로, 집밥은 ____ 습관이에요.",
+                 [[("healthy", "건강한"), ("money-saving", "돈을 아끼는"), ("rewarding", "보람 있는"),
+                   ("relaxing", "편안한"), ("worthwhile", "가치 있는")]]),
+            ]),
+        ],
+    },
+    # ===== U25 =====
+    {
+        "emoji": "😴", "title_ko": "잠·수면", "title_en": "Sleep & Rest",
+        "prompt": "Talk about your sleep habits.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about my sleep habits.", "제 수면 습관에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, ____ is the key to good sleep.",
+                 "제 생각에 ____이(가) 좋은 수면의 핵심이에요.",
+                 [[("a regular schedule", "규칙적인 시간"), ("avoiding my phone", "휴대폰 멀리하기"),
+                   ("a quiet room", "조용한 방"), ("enough exercise", "충분한 운동"),
+                   ("a comfortable bed", "편한 침대")]]),
+                ("Personally, I usually sleep about ____ a night.",
+                 "개인적으로 저는 보통 하룻밤에 ____ 정도 자요.",
+                 [[("six hours", "6시간"), ("seven hours", "7시간"), ("eight hours", "8시간"),
+                   ("less than I'd like", "원하는 것보다 적게"), ("as much as I can", "최대한 많이")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason sleep matters is that it helps me ____.",
+                 "수면이 중요한 가장 큰 이유는 그것이 제가 ____하도록 돕기 때문이에요.",
+                 [[("feel refreshed", "상쾌해지다"), ("stay focused", "집중력을 유지하다"),
+                   ("recharge", "재충전하다"), ("stay healthy", "건강을 지키다"),
+                   ("handle stress", "스트레스를 견디다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, before bed I usually ____.",
+                 "예를 들어, 자기 전에 저는 보통 ____해요.",
+                 [[("read for a while", "잠시 책을 읽다"), ("take a warm shower", "따뜻하게 샤워하다"),
+                   ("put my phone away", "휴대폰을 치우다"), ("listen to soft music", "잔잔한 음악을 듣다"),
+                   ("dim the lights", "불을 어둡게 하다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("All in all, good sleep keeps me ____.",
+                 "결국, 좋은 수면은 저를 ____하게 유지해 줘요.",
+                 [[("energetic", "활기찬"), ("focused", "집중된"), ("healthy", "건강한"),
+                   ("in a good mood", "기분 좋은"), ("productive", "생산적인")]]),
+            ]),
+        ],
+    },
+    # ===== U26 =====
+    {
+        "emoji": "🐾", "title_ko": "반려동물", "title_en": "Pets",
+        "prompt": "Do you have a pet, or would you like one?",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me share my thoughts on having a pet.", "반려동물에 대한 제 생각을 나눌게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, pets make wonderful ____.",
+                 "제 생각에 반려동물은 훌륭한 ____이(가) 돼요.",
+                 [[("companions", "반려자"), ("family members", "가족"), ("stress relievers", "스트레스 해소원"),
+                   ("everyday friends", "일상의 벗"), ("sources of comfort", "위안의 원천")]]),
+                ("Personally, I'm more of a ____ person.",
+                 "개인적으로 저는 ____ 쪽에 가까워요.",
+                 [[("dog", "강아지파"), ("cat", "고양이파"), ("small-pet", "소동물파"),
+                   ("low-maintenance-pet", "손 덜 가는 반려동물파"), ("no-pet", "반려동물 안 키우는")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason I feel that way is that they ____.",
+                 "제가 그렇게 느끼는 가장 큰 이유는 그들이 ____하기 때문이에요.",
+                 [[("are always there for you", "늘 곁에 있어준다"), ("ease loneliness", "외로움을 달래준다"),
+                   ("bring joy to daily life", "일상에 기쁨을 준다"), ("help me relax", "쉬게 해준다"),
+                   ("ask for little in return", "바라는 게 적다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, ____.",
+                 "예를 들어, ____.",
+                 [[("a dog greets you every day", "강아지는 매일 반겨준다"), ("a cat keeps you company", "고양이는 함께해 준다"),
+                   ("caring for a pet builds routine", "반려동물을 돌보면 규칙이 생긴다"),
+                   ("pets can lift your mood", "반려동물은 기분을 좋게 한다"), ("they teach responsibility", "책임감을 길러준다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, having a pet can make life more ____.",
+                 "전반적으로, 반려동물을 키우면 삶이 더 ____해질 수 있어요.",
+                 [[("joyful", "즐거운"), ("warm", "따뜻한"), ("meaningful", "의미 있는"),
+                   ("lively", "활기찬"), ("fulfilling", "충족되는")]]),
+            ]),
+        ],
+    },
+    # ===== U27 =====
+    {
+        "emoji": "😎", "title_ko": "주말 보내기", "title_en": "Weekends",
+        "prompt": "How do you usually spend your weekends?",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about how I spend my weekends.", "제가 주말을 어떻게 보내는지 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, weekends are best spent ____.",
+                 "제 생각에 주말은 ____ 보내는 게 가장 좋아요.",
+                 [[("relaxing at home", "집에서 쉬며"), ("catching up on rest", "밀린 잠을 자며"),
+                   ("seeing friends", "친구를 만나며"), ("being outdoors", "야외에서"),
+                   ("getting things done", "할 일을 하며")]]),
+                ("Personally, I try to ____ on weekends.",
+                 "개인적으로 저는 주말에 ____하려고 해요.",
+                 [[("recharge", "재충전하다"), ("do something fun", "재미있는 걸 하다"),
+                   ("catch up on errands", "밀린 볼일을 보다"), ("spend time with family", "가족과 시간을 보내다"),
+                   ("take a break from work", "일에서 벗어나다")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason is that I want to ____.",
+                 "가장 큰 이유는 제가 ____하고 싶기 때문이에요.",
+                 [[("unwind after a busy week", "바쁜 한 주 뒤 쉬다"), ("make the most of my free time", "여가를 알차게 보내다"),
+                   ("reset for the week ahead", "다음 주를 준비하다"), ("enjoy some 'me time'", "나만의 시간을 갖다"),
+                   ("feel refreshed", "재충전하다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, on a typical weekend I ____.",
+                 "예를 들어, 평범한 주말에 저는 ____해요.",
+                 [[("sleep in", "늦잠을 자다"), ("meet up with friends", "친구들과 만나다"),
+                   ("go for brunch", "브런치를 먹으러 가다"), ("take a short trip", "짧은 여행을 가다"),
+                   ("just take it easy", "그냥 여유를 부리다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("All in all, a good weekend leaves me ____.",
+                 "결국, 좋은 주말은 저를 ____하게 만들어요.",
+                 [[("recharged", "재충전된"), ("refreshed", "상쾌한"), ("relaxed", "편안한"),
+                   ("ready for the week", "한 주를 맞을 준비된"), ("satisfied", "만족스러운")]]),
+            ]),
+        ],
+    },
+    # ===== U28 =====
+    {
+        "emoji": "🍻", "title_ko": "친구 만나기", "title_en": "Meeting Friends",
+        "prompt": "Talk about meeting up with friends.",
+        "template": [
+            _step("① 주제 소개", [
+                ("Let me talk about meeting up with friends.", "친구들과 만나는 것에 대해 이야기할게요.", []),
+            ]),
+            _step("② 내 의견·선호", [
+                ("In my opinion, the best way to catch up with friends is ____.",
+                 "제 생각에 친구들과 회포를 푸는 가장 좋은 방법은 ____예요.",
+                 [[("over a meal", "식사하며"), ("over coffee", "커피 마시며"),
+                   ("at someone's place", "누군가의 집에서"), ("doing an activity", "활동을 하며"),
+                   ("just chatting", "그냥 수다 떨며")]]),
+                ("Personally, I try to meet my friends ____.",
+                 "개인적으로 저는 친구들을 ____ 만나려고 해요.",
+                 [[("regularly", "정기적으로"), ("whenever we can", "시간 될 때마다"),
+                   ("at least once a month", "적어도 한 달에 한 번"), ("on weekends", "주말에"),
+                   ("after work", "퇴근 후에")]]),
+            ]),
+            _step("③ 이유", [
+                ("The main reason it matters to me is that it helps me ____.",
+                 "그것이 제게 중요한 가장 큰 이유는 제가 ____하도록 돕기 때문이에요.",
+                 [[("stay connected", "관계를 유지하다"), ("relieve stress", "스트레스를 풀다"),
+                   ("recharge socially", "사람들과 어울리며 재충전하다"), ("feel supported", "힘을 얻다"),
+                   ("keep friendships alive", "우정을 이어가다")]]),
+            ]),
+            _step("④ 예시·경험", [
+                ("For example, we usually ____.",
+                 "예를 들어, 우리는 보통 ____해요.",
+                 [[("grab dinner together", "함께 저녁을 먹다"), ("go for a drink", "한잔하러 가다"),
+                   ("meet at a café", "카페에서 만나다"), ("catch a movie", "영화를 보다"),
+                   ("just hang out", "그냥 어울리다")]]),
+            ]),
+            _step("⑤ 마무리", [
+                ("Overall, spending time with friends keeps me ____.",
+                 "전반적으로, 친구들과 시간을 보내는 것은 저를 ____하게 유지해 줘요.",
+                 [[("happy", "행복한"), ("balanced", "균형 잡힌"), ("connected", "연결된"),
+                   ("recharged", "재충전된"), ("in good spirits", "기분 좋은")]]),
             ]),
         ],
     },

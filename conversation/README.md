@@ -6,7 +6,7 @@ OPIC 주제를 바탕으로 **자기 의견을 영어로 말하는** 연습용 �
 | 버전 | 대상 | 데이터 파일 | 산출 PDF |
 |---|---|---|---|
 | 중학 | 중학생 수준 · OPIC 28개 주제 | `textbook_data.py` | `output/중학영어회화교재_OPIC10.pdf` |
-| 성인 | 성인·중급 이상 · OPIC 20개 주제(직장·워라밸·자기계발 등 포함) | `textbook_data_adult.py` | `output/성인영어회화교재_OPIC20.pdf` |
+| 성인 | 성인·중급 이상 · OPIC 28개 주제(직장·워라밸·자기계발 + 하루일과·출퇴근·집안일·집밥·수면·주말 등 일상) | `textbook_data_adult.py` | `output/성인영어회화교재_OPIC20.pdf` |
 
 두 버전은 **같은 빌더(`build_textbook.py`)** 와 디자인을 공유하고, 콘텐츠 데이터만 다릅니다.
 
