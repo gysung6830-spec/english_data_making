@@ -13,3 +13,4 @@ output/*.jpg
 output/*.json
 web_uploads/
 samples/*.pdf
+samples/onepass_sample.pdf
