@@ -107,6 +107,16 @@ SYNTAX_TYPES: list[SyntaxType] = [
                            r"(of|in|on|for|with|to|between|among)\b", re.IGNORECASE),
         min_len=70,
     ),
+    SyntaxType(
+        id="as_compare", title="as·비교 구문",
+        signal="as + 명사/S V(전치사·접속사), as A as B, 비교급·최상급, not all/not always(부분부정)",
+        formula="as 뒤가 명사면 '~로서/처럼', S+V면 '~할 때/때문에'. as A as B는 'B만큼 A한'. not all/always는 '모두/항상 ~인 건 아니다'.",
+        combat="실전 팁 — as는 뒤를 보고 판별(명사→전치사, S+V→접속사). 비교표현은 '강조'이니 필자가 무엇을 동등·우열로 보는지 잡아라. not+전체어(all/always/every)는 부분부정.",
+        pattern=re.compile(r"\bas\s+\w+\s+as\b|\bnot\s+(all|always|every)\b|"
+                           r"\bthe\s+\w+er\b[^.]*\bthe\s+\w+er\b|"
+                           r"\bno\s+(more|less)\s+than\b", re.IGNORECASE),
+        min_len=40,
+    ),
 ]
 
 

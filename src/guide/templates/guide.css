@@ -386,6 +386,48 @@ body {
 .tools-title { font-weight: 800; color: var(--gold); font-size: 11px; margin-bottom: 5px; }
 .tool { font-size: 10px; color: #4b5563; margin: 3px 0; }
 
+/* ── 0부 마인드셋 콜아웃 ── */
+.mindset { margin: 10px 0 14px; background: var(--tint); border: 1px solid var(--tint2);
+  border-left: 4px solid var(--gold); border-radius: 8px; padding: 9px 13px 9px 12px;
+  font-size: 10.5px; color: #33413c; line-height: 1.6; }
+.mindset b { color: var(--navy); }
+.mindset-tag { display: inline-block; background: var(--gold); color: #fff; font-weight: 800;
+  font-size: 8.5px; letter-spacing: 1px; border-radius: 4px; padding: 1px 6px; margin-right: 7px;
+  vertical-align: 1px; }
+
+/* ── 0부 끊고 잇기 실전 엔진 ── */
+.engine { margin-top: 14px; border: 1px solid var(--tint2); border-radius: 10px;
+  overflow: hidden; page-break-inside: avoid; }
+.engine-head { background: linear-gradient(100deg, var(--navy) 0%, var(--navy2) 70%);
+  color: #fff; font-weight: 800; font-size: 13px; padding: 8px 14px; }
+.engine-badge { display: inline-block; background: var(--gold); color: #fff; font-weight: 800;
+  font-size: 8.5px; letter-spacing: 1px; border-radius: 4px; padding: 1px 6px; margin-right: 8px;
+  vertical-align: 1.5px; }
+.engine-intro { font-size: 10px; color: #4b5563; padding: 9px 14px 0; line-height: 1.6; }
+.engine-intro b { color: var(--navy); }
+.engine-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0; padding: 11px 14px 4px; }
+.eg-col { padding: 0 4px; }
+.eg-col.cut { border-right: 1px dashed var(--tint2); padding-right: 12px; }
+.eg-col.link { padding-left: 12px; }
+.eg-title { font-weight: 800; color: var(--navy); font-size: 10.5px; margin-bottom: 6px; }
+.eg-title small { color: var(--muted); font-weight: 600; font-size: 8.5px; margin-left: 5px; }
+.cut-row { display: flex; gap: 7px; align-items: baseline; margin: 4px 0; font-size: 9.5px; }
+.cut-at { flex: 0 0 84px; font-weight: 800; color: var(--navy2); }
+.cut-ex { color: #55605b; font-family: var(--f-en); }
+.cut-ex b { color: var(--gold); font-weight: 800; }
+.link-row { display: flex; gap: 7px; align-items: baseline; margin: 4px 0; font-size: 9.5px; }
+.link-k { flex: 0 0 92px; font-weight: 800; color: var(--navy2); font-family: var(--f-en); }
+.link-v { color: #45504b; line-height: 1.5; }
+.link-v b { color: var(--navy); font-weight: 800; }
+.link-ex { color: var(--muted); font-family: var(--f-en); }
+.link-ex b { color: var(--gold); }
+.prep-gloss { background: var(--tint); border-top: 1px solid var(--tint2); padding: 9px 14px; }
+.pg-title { font-weight: 800; color: var(--navy); font-size: 10px; margin-bottom: 6px; }
+.pg-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.pg-chip { background: #fff; border: 1px solid var(--tint2); border-radius: 5px;
+  padding: 2px 8px; font-size: 9px; color: #4b5563; }
+.pg-chip b { color: var(--navy); font-family: var(--f-en); font-weight: 800; margin-right: 3px; }
+
 /* ── 2부 · 구문별 괄호치기 실전 ────────────────── */
 .card.syntax { border-color: #dfe6f0; }
 .syn-step { font-size: 11.5px; margin: 8px 0 4px; line-height: 1.6; }

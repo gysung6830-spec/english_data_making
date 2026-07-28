@@ -9,6 +9,10 @@ spine: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있�
 intro: >-
   수식어(살)가 뼈대를 덮어서 어려울 뿐이다.
   뼈대부터 잡고 → 관계로 읽고 → 살을 붙여 '앞으로만' 읽는다.
+mindset: >-
+  구문독해는 <b>문법 시험이 아니다.</b> '문장구조를 완벽히 분석하기'가 목표가 아니라
+  '<b>내용이 이어지게, 부드럽게</b>' 읽는 게 목표다. 쓰인 대로 믿고 읽어라 —
+  '여기 that이 들어가는 게 맞나?' 같은 의심은 접어둔다.
 
 methods:
   - step: "STEP 1"
@@ -47,7 +51,55 @@ methods:
       skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
       full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
 
+# ============================================================
+#  끊고 잇기 — 실전 엔진 (긴 문장을 '자르고 → 다시 잇는' 손기술)
+#  원칙: "끊어 읽어왔는데 해석이 안 된다" = 끊어만 놓고 이어 붙이지 않아서다.
+# ============================================================
+engine_title: "끊고 잇기 — 긴 문장 손기술"
+engine_intro: >-
+  긴 문장은 무섭지 않다. <b>신호 앞에서 짧게 끊고</b>, 끊은 조각을
+  <b>다시 매끄럽게 이으면</b> 끝이다. 끊기만 하고 잇지 않으면 해석이 안 된다.
+
+# ── 어디서 자르나 (신호 앞에서 끊는다) ──
+cut_points:
+  - { at: "접속사 앞",        ex: "…, <b>and</b> / <b>but</b> / <b>because</b> / <b>that</b>" }
+  - { at: "관계사 앞",        ex: "the man <b>who</b> … / results <b>that</b> …" }
+  - { at: "전치사 앞",        ex: "obstacles <b>to</b> chimps <b>in</b> assigning …" }
+  - { at: "to부정사 앞",      ex: "difficult <b>to</b> maintain …" }
+  - { at: "분사(V-ing·V-ed) 앞", ex: "a society <b>showing</b> … / talents <b>inherited</b> …" }
+  - { at: "명사 뒤 바로 S+V", ex: "the talents [they have] …  (관계사 생략)" }
+  - { at: "콤마·대시 앞뒤",   ex: "…, <b>Feeling nervous</b>, she …" }
+
+# ── 끊었으면 매끄럽게 잇는다 (손기술) ──
+link_tricks:
+  - { k: "주어 조사",     v: "일반 S는 <b>은/는</b>, 접속사·관계사절 속 S는 <b>이/가</b>", ex: "" }
+  - { k: ", ~ing",        v: "<b>~하면서</b> (부대상황)",            ex: "…, showing off the talents → 재능을 뽐<b>내면서</b>" }
+  - { k: "with + 목적어 + 분사", v: "<b>~한 채로 / ~하면서</b> (동시성 강조)", ex: "with time sliced → 시간이 쪼개<b>지면서</b>" }
+  - { k: "as + 명사",     v: "<b>~로서 / ~처럼</b>",                  ex: "she works <b>as</b> a scientist → 과학자<b>로서</b>" }
+  - { k: "as + S V",      v: "<b>~할 때 / ~때문에</b> (차이 거의 없음)", ex: "<b>as</b> she got ready → 그녀가 준비<b>할 때</b>" }
+  - { k: "as A as B",     v: "뒤 as에만 '만큼' → <b>B만큼 A한</b>",   ex: "services <b>as varied as</b> catering → 케이터링<b>만큼</b> 다양한" }
+  - { k: "how + 형/부",   v: "<b>얼마나</b> (how+명·대명사면 '어떻게')", ex: "<b>how hard</b> a task is → <b>얼마나</b> 어려운지" }
+  - { k: "for us to V",   v: "us는 to V의 <b>의미상 주어</b> → '<b>우리가</b> V하는'", ex: "difficult <b>for us to</b> maintain → <b>우리가</b> 유지하기" }
+  - { k: "맨 앞 To V",    v: "To V ~ 동사 = <b>~하는 것은</b> / To V~, S V = <b>~하기 위해</b>", ex: "" }
+  - { k: "in ~ing / by ~ing", v: "<b>~에 있어서 / ~함으로써</b>",   ex: "" }
+
+# ── 전치사 = 조사 붙이기 (of A of B는 B의 A) ──
+prep_gloss:
+  - { p: "of",   m: "A of B = B의 A" }
+  - { p: "to",   m: "~에, ~에게, ~으로" }
+  - { p: "for",  m: "~를 위해, ~에 대해, ~동안" }
+  - { p: "in",   m: "~에, ~안에" }
+  - { p: "on",   m: "~위에, ~에 관하여" }
+  - { p: "with", m: "~와 함께, ~를 가지고" }
+  - { p: "as",   m: "~로서, ~처럼" }
+  - { p: "by",   m: "~에 의해, ~까지" }
+  - { p: "from", m: "~로부터" }
+  - { p: "at",   m: "~에" }
+
 tools:
   - "ⓐ 되돌아가지 않기 — 청크 단위로 '앞으로만'(직독직해)."
   - "ⓑ 진짜 동사는 하나 — to-V·V-ing·p.p.는 가짜. 진짜 동사부터."
   - "ⓒ 관계가 먼저 — 단어 뜻보다 'A와 B의 관계(인과·대조·재진술)'. 평가원은 논리 시험이다."
+  - "ⓓ 자리가 품사 — 아는 단어라도 S·V·O·C 자리에 맞춰 품사·해석을 바꿔라. (The increase increases increase.)"
+  - "ⓔ 목적어 유무 — 동사 뒤 목적어 있으면 '~시키다'(타동사), 없으면 '~하다'(자동사). (develop = 발달시키다 vs 성장하다)"
+  - "ⓕ 5형식은 equal — 목적어 뒤에 명사·형용사·준동사가 오면 '목적어 = 그것'. (expected [her to help] → her가 help)"

@@ -24,6 +24,12 @@ parts:
   - inversion
   - emphasis
   - parallel
+- id: signal
+  title: 비교·as 신호 구문
+  subtitle: as·비교급 = 'A와 B의 동등·우열'을 강조하는 신호
+  strategy: as는 뒤를 보고 판별(명사→전치사, S+V→접속사)하고, 비교표현은 '강조'로 읽어 필자가 무엇을 동등·우열로 보는지 잡는다.
+  types:
+  - as_compare
 formulas:
   wh_clause:
     point: who/which/that/where/when/why/how 가 명사를 꾸미거나(관계사) 명사절을 만든다.
@@ -72,7 +78,7 @@ formulas:
       how: 콤마 뒤 who는 앞을 죽 이어 설명하는 계속적 용법. and who로 묶인 두 절을 '~하고, 또 ~하는'으로 매끄럽게 이으세요.
       catch: 기술적 이동수단이 인간을 어떤 존재로 바꾸나. 쉬기만 하다 균형 맞추려 스포츠가 필요해진 존재로.
     coach: wh- <b>앞에 명사가 있나 없나</b>, 딱 그것만 보세요. 있으면 <b>'~하는'(수식)</b>, 없으면 <b>'~인지'(명사절)</b>.
-      매년 이 하나로 문제가 갈립니다.
+      매년 이 하나로 문제가 갈립니다.<br>의문사(명사절) 쪽이면 <b>동사까지 눈을 끝까지 밀고 가 ‘~하는지’</b>로 받으세요. 관계사절일 땐 <b>콤마가 없으면 반드시 해석(그 명사를 콕 집어 주는 정보), 콤마가 있으면 부연</b>이라 가볍게. 선행사가 뻔하면 <b>those (people) who~</b>처럼 생략되기도 합니다.
   participle:
     point: 문두·콤마 뒤 V-ing / V-ed 덩어리는 '부대상황'. 주절의 동작에 곁들여지는 살이다.
     strategy: 분사 덩어리를 통째 괄호 → 주절 뼈대부터 읽고, ~하면서 / ~한 채로 / ~해서로 붙인다. 분사의 의미상 주어=주절 주어.
@@ -113,7 +119,7 @@ formulas:
       catch: 빛에서 벗어나려던 나방이 되레 광원 코앞까지 간다. 이 역설을 놓치면 안 됩니다.
     coach: 먼저 <b>'이게 분사구문이 맞나'부터</b> 확인하세요. 문두나 콤마 뒤의 V-ing/V-ed가 <b>주어가 아니고, 뒤에 진짜
       주어·동사(주절)가 따로 있으면</b> 그게 분사구문입니다. (만약 그 V-ing가 <b>주어 자리면 동명사</b>예요!) 확인이 끝나야
-      그다음 함정 — <b>의미상 주어는 언제나 주절 주어</b>라는 걸 적용할 수 있습니다. 앞 명사에 낚이지 마세요.
+      그다음 함정 — <b>의미상 주어는 언제나 주절 주어</b>라는 걸 적용할 수 있습니다. 앞 명사에 낚이지 마세요.<br>한 가지 더 — 형용사·분사로 문장이 시작하면 <b>분사구문 아니면 도치</b>인데, <b>뒤에 진짜 동사가 없으면 분사구문</b>, 있으면 도치예요(<i>Enclosed is a copy…</i>는 동사가 있으니 도치). 분사구문은 <b>배경·부연(가벼운 살)</b>이라, 생략된 접속사를 굳이 유추하지 마세요 — 중요했다면 필자가 접속사를 썼을 겁니다.
   insertion:
     point: — … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리.
     strategy: 대시·콤마 삽입을 통째 괄호치고 없는 셈 → 뼈대부터 읽는다. 삽입을 빼도 문장이 성립하면 제대로 괄호친 것.
@@ -182,7 +188,7 @@ formulas:
       how: 콤마로 낀 the motor는 앞 its great innovation과 같은 대상. '그 혁신, 곧 모터'로 등호처럼 겹치세요.
       catch: 거대한 혁신이 바로 모터라는 동격. 모터가 왔어도 우리는 세상을 떠나 딴 공간으로 가지 않았다.
     coach: '''명사, 명사''나 ''명사 + that절''이 나오면 <b>''=''를 떠올리세요</b>. 뒤가 앞을 다시 풀어 주는 겁니다.
-      새 정보라고 겁먹을 필요 없어요.'
+      새 정보라고 겁먹을 필요 없어요.<br><b>콤마+관계사(, which)</b>도 같은 식구예요 — 콤마가 있으면 부연이라 <b>앞 명사를 이미 안다면 건너뛰어도</b> 되고, , which가 <b>앞 문장 전체</b>를 받기도 합니다.'
   prep_stack:
     point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리
       길어도 안 무너진다.
@@ -266,7 +272,7 @@ formulas:
       how: Not only이 앞에 나오면 뒤는 무조건 도치. is it을 it is로 되돌려 놓고 'A만이 아니라 B도'로 읽으세요.
       catch: 덜 편한 것도 문제지만, 그 이동 과정 자체가 부정적 효과까지 낳는다.
     coach: <b>Not, Never, Only가 문장 맨 앞</b>에 나오면 '아, <b>뒤집히겠구나</b>' 미리 각오하세요. 도치는 놀랄
-      일이 아니라 <b>예고된 신호</b>입니다.
+      일이 아니라 <b>예고된 신호</b>입니다.<br>부정어 말고도 <b>보어(형용사)</b>나 <b>장소부사</b>가 앞으로 나가면 도치돼요(<i>In the darkness was heard a kiss</i>). 어느 쪽이든 <b>되돌리지 말고 신호부터 받고</b> 앞으로 이으세요.
   emphasis:
     point: It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조.
     strategy: It is ~ that 사이(X)가 '강조 대상=답'인 경우가 많다. that절이 완전하면 강조(X 부각), 불완전하면 가주어·진주어.
@@ -299,7 +305,7 @@ formulas:
       how: It was ~ who 사이에 낀 말이 진짜 주인공. 여기선 the designer를 '바로 그가'로 부각해 읽습니다.
       catch: 주역이 뒤집혔다. 유명해진 쪽은 디자이너, 고객은 그 관심에 격상됐을 뿐.
     coach: <b>It과 that 사이</b>에 낀 게 진짜 강조하고 싶은 말입니다. 가주어 it과 헷갈리지 마세요 — <b>that 뒤가
-      완전하면 강조구문, 뭔가 빠져 있으면 관계사</b>예요.
+      완전하면 강조구문, 뭔가 빠져 있으면 관계사</b>예요.<br><b>do/does/did + 동사원형</b>도 강조예요 — <i>I do like you</i>는 ‘정말 좋아한다’. <b>What/All you have to do is study</b>처럼 ‘is + 강조 대상’으로 콕 집어 주기도 합니다.
   parallel:
     point: and / but / or, not only A but also B, both A and B — 같은 급끼리 대칭으로 묶인다.
     strategy: 접속사 앞뒤로 '같은 모양(품사)'을 손가락으로 짚어 짝을 맞춘다. 짝이 안 맞으면 병렬 대상을 잘못 잡은 것.
@@ -383,7 +389,7 @@ formulas:
       how: what we might now call~은 '~라 부를 만한 것' 주어절. 대시 사이 동격을 걷어내면 곧장 has가 나옵니다.
       catch: '''그림자 연구''라 할 만한 것의 뿌리가 실은 고대 아테네에 닿아 있다.'
     coach: <b>what은 그 자체가 '~하는 것'</b>이라는 명사 덩어리입니다. <b>선행사가 없어요</b>. 뒤 문장에서 <b>한 자리(주어나
-      목적어)가 비어 있으면</b>, 거기가 what이 채운 자리입니다.
+      목적어)가 비어 있으면</b>, 거기가 what이 채운 자리입니다.<br>참고로 what은 <b>‘~하는 것’(관계대명사)</b>으로 읽든 <b>‘무엇을 ~하는지’(의문사)</b>로 읽든 <b>뜻이 거의 같으니</b>, 둘 중 자연스러운 쪽으로 받으면 됩니다.
   that_clause:
     point: 인식·전달 동사 + that S+V 는 '~라는 것을'. 접속사 that 뒤엔 완전한 문장이 온다(관계사 that과 구분).
     strategy: that절 전체를 목적어인 '한 문장(명사절)'으로 묶어 '~라는 것을'로 뒤에 붙인다.
@@ -424,3 +430,49 @@ formulas:
       catch: '마흐 밴드 가설: 나방은 광원 둘레의 어둠을 보고 빛을 피해 그리로 간다고.'
     coach: that만 보면 겁먹는데, <b>딱 셋 중 하나</b>예요 — <b>접속사(뒤 완전), 관계사(뒤 불완전), 동격(앞 명사 설명)</b>.
       <b>뒤 문장이 완전한지</b>만 보면 정리됩니다.
+  as_compare:
+    point: as는 전치사·부사·접속사로 두루 쓰이고, as A as B·비교급은 'A와 B가 동등/우열'임을 강조하는 신호다.
+    strategy: as 뒤가 명사면 전치사(~로서/처럼), S+V면 접속사(~할 때/때문에). as A as B는 'B만큼 A한'. not always·not
+      all은 부분부정('항상/모두 ~인 건 아니다').
+    diagram:
+      symbol: as B · A as B → 동등·우열을 강조
+      rows:
+      - en: as + 명사
+        ko: 전치사 → ~로서 / ~처럼
+      - en: as + S V
+        ko: 접속사 → ~할 때 / ~때문에 (차이 거의 없음)
+      - en: as A as B
+        ko: 뒤 as에만 '만큼' → B만큼 A한
+      - en: not all / not always
+        ko: 부분부정 → '모두/항상 ~인 건 아니다'
+    examples:
+    - en: In the latter case, management organization and processes can be equally as
+        relevant as designers' creativity.
+      src: 2022 고3 9월 40번
+      cut: 후자의 경우 / 관리 조직과 과정이 / 디자이너의 창의성만큼이나 / 똑같이 중요할 수 있다.
+      how: as A as B는 'B만큼 A한'. 뒤 as에만 '만큼'을 붙여 relevant를 '창의성만큼 중요한'으로 받으세요.
+      catch: 관리·과정도 디자이너의 창의성 '못지않게' 중요하다 — 둘을 동등하게 본다.
+    - en: Services using electrically assisted delivery tricycles have been successfully
+        implemented in France and are gradually being adopted across Europe for services
+        as varied as parcel and catering deliveries.
+      src: 2023 고3 11월 22번
+      cut: 전기 보조 배달 세발자전거를 이용한 서비스가 / 프랑스에서 시행되었고 / 유럽 전역으로 점차 도입되고 있다 / 소포·케이터링 배달만큼
+        다양한 서비스에.
+      how: as varied as = '~만큼 다양한'. varied를 뒤 명사에 걸어 '소포·케이터링 배달만큼 다양한 서비스'로 받으세요.
+      catch: 배달 자전거 서비스가 소포부터 음식까지 그만큼 폭넓게 유럽에 퍼지고 있다.
+    - en: In a climate of admiration for male artists and their female creations, the
+        dress-designer first flourished as the same sort of creator.
+      src: 2022 고3 9월 33번
+      cut: 남성 예술가와 그들의 여성 창작물에 대한 찬미의 분위기 속에서 / 드레스 디자이너는 / 처음으로 / 똑같은 종류의 창작자로서 / 번성했다.
+      how: as 뒤가 명사(the same sort of creator)죠? 그럼 전치사 as='~로서'. '창작자로서 번성했다'로 받으세요.
+      catch: 드레스 디자이너가 (남성 예술가와) 같은 반열의 '창작자'로 대우받으며 떠올랐다.
+    - en: Chaotic systems are generated by iteration, though not all iteration leads to
+        chaos.
+      src: 2025 고3 6월 37번
+      cut: 혼돈 시스템은 / 반복에 의해 생성된다 / 하지만 모든 반복이 / 혼돈으로 이어지는 것은 아니다.
+      how: not all은 '모두 ~인 건 아니다'(부분부정)이지 '모두 ~아니다'(전체부정)가 아니에요. '반복이 다 혼돈이 되진 않는다'로.
+      catch: 반복이 혼돈을 만들지만, 반복이라고 다 혼돈이 되는 건 아니다 — 일부만.
+    coach: as를 만나면 <b>일단 뒤부터 보세요</b> — <b>명사면 전치사('~로서/처럼')</b>, <b>주어+동사면 접속사('~할 때/때문에',
+      차이 거의 없음)</b>. 비교표현(as A as B·비교급)은 <b>일종의 강조</b>라, 필자가 <b>무엇과 무엇을 동등·우열로 보는지</b>가 곧
+      요지 단서예요. 마지막 함정 — <b>not all·not always는 부분부정</b>('모두/항상 ~인 건 아니다'). 전체부정('결코 아니다')으로 뒤집지
+      마세요.

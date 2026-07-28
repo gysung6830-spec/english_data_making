@@ -126,8 +126,14 @@ class Part0(BaseModel):
     title: str = "3단계 읽기 엔진"
     intro: str = ""
     spine: str = ""          # 관통 철학 한 문장
+    mindset: str = ""        # 구문독해 마인드셋(문법문제 아님) 한 줄
     methods: list[Method] = []
     depth_demos: list[DepthDemo] = []   # '읽기 깊이' 형광펜 예시
+    engine_title: str = ""   # '끊고 잇기' 실전 엔진 제목
+    engine_intro: str = ""   # 실전 엔진 안내 한 줄
+    cut_points: list[dict] = []   # 끊어읽기 위치 [{at, ex}]
+    link_tricks: list[dict] = []  # 매끄럽게 잇기 기술 [{k, v, ex}]
+    prep_gloss: list[dict] = []   # 전치사 조사 [{p, m}]
     tools: list[str] = []    # 미니 도구 한 줄 목록
 
 

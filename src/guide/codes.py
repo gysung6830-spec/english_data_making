@@ -92,7 +92,13 @@ def load_part0(path: str | Path | None = None):
                        passage=d.get("passage", ""), read=d.get("read", ""))
              for d in data.get("depth_demos", [])]
     return Part0(title=data.get("title", "3단계 읽기 엔진"), intro=data.get("intro", ""),
-                 spine=data.get("spine", ""), methods=methods, depth_demos=depth,
+                 spine=data.get("spine", ""), mindset=data.get("mindset", ""),
+                 methods=methods, depth_demos=depth,
+                 engine_title=data.get("engine_title", ""),
+                 engine_intro=data.get("engine_intro", ""),
+                 cut_points=data.get("cut_points", []),
+                 link_tricks=data.get("link_tricks", []),
+                 prep_gloss=data.get("prep_gloss", []),
                  tools=data.get("tools", []))
 
 

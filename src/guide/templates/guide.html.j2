@@ -168,6 +168,7 @@
   <div class="ch-title">{{ p0.title }}</div>
   <div class="spine">“{{ p0.spine }}”</div>
   <div class="ch-signal">{{ p0.intro }}</div>
+  {% if p0.mindset %}<div class="mindset"><span class="mindset-tag">먼저 이것부터</span>{{ p0.mindset | safe }}</div>{% endif %}
 
   {# ── 엔진 요약 배너: 문장이 3단계를 통과한다 ── #}
   <div class="engine-flow">
@@ -197,6 +198,40 @@
     </div>
   {% endfor %}
   </div>
+
+  {# ── 끊고 잇기 실전 엔진: 끊는 위치 · 잇는 손기술 · 전치사 조사 ── #}
+  {% if p0.cut_points or p0.link_tricks %}
+  <div class="engine">
+    <div class="engine-head"><span class="engine-badge">실전</span>{{ p0.engine_title or '끊고 잇기' }}</div>
+    {% if p0.engine_intro %}<div class="engine-intro">{{ p0.engine_intro | safe }}</div>{% endif %}
+    <div class="engine-grid">
+      {% if p0.cut_points %}
+      <div class="eg-col cut">
+        <div class="eg-title">✂️ 어디서 자르나 <small>신호 앞에서 끊는다</small></div>
+        {% for c in p0.cut_points %}
+        <div class="cut-row"><span class="cut-at">{{ c.at }}</span><span class="cut-ex">{{ c.ex | safe }}</span></div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if p0.link_tricks %}
+      <div class="eg-col link">
+        <div class="eg-title">🔗 매끄럽게 잇는다 <small>끊었으면 반드시 이어라</small></div>
+        {% for t in p0.link_tricks %}
+        <div class="link-row"><span class="link-k">{{ t.k }}</span><span class="link-v">{{ t.v | safe }}{% if t.ex %} <span class="link-ex">{{ t.ex | safe }}</span>{% endif %}</span></div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% if p0.prep_gloss %}
+    <div class="prep-gloss">
+      <div class="pg-title">전치사 = 조사 붙이기</div>
+      <div class="pg-chips">
+        {% for g in p0.prep_gloss %}<span class="pg-chip"><b>{{ g.p }}</b> {{ g.m }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
 
   {# ── 지원 도구: 읽기 깊이 · 유추 (STEP 아님, 별도 카드) ── #}
   {% for m in p0.methods if not m.step.startswith('STEP') %}

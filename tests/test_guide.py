@@ -63,8 +63,8 @@ def test_syntax_types():
     ids = {st.id for st in SYNTAX_TYPES}
     assert ids == {"emphasis", "inversion", "parallel", "apposition",
                    "what_clause", "insertion", "participle", "that_clause", "wh_clause",
-                   "prep_stack"}
-    print("PASS  구문 목차(강조·도치·동격·병렬·what·that·wh·삽입·분사·전치사구)")
+                   "prep_stack", "as_compare"}
+    print("PASS  구문 목차(강조·도치·동격·병렬·what·that·wh·삽입·분사·전치사구·as비교)")
 
 
 def test_render_html():
