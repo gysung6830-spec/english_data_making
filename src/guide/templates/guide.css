@@ -526,14 +526,17 @@ body {
   "NanumGothic", "WenQuanYi Zen Hei", serif; font-weight: 800; font-size: 19px;
   color: #2b4a41; flex: 0 0 auto; white-space: nowrap; text-align: center; padding: 14px 16px;
   border: 4px solid var(--navy2); border-radius: 14px; background: #e2f1eb; line-height: 1.15; }
-.f-rows { flex: 1; }
-.f-row { display: flex; align-items: center; padding: 7px 2px; border-bottom: 1px dashed var(--line); }
+.f-rows { flex: 1; min-width: 0; }
+.f-row { display: flex; align-items: center; padding: 7px 2px; border-bottom: 1px dashed var(--line); min-width: 0; }
 .f-row:last-child { border-bottom: none; }
 .f-en { font-family: "Georgia", "Times New Roman", "Noto Serif", "NanumSquareRound", "NanumGothic", "WenQuanYi Zen Hei", serif; font-weight: 800; font-size: 12.5px; flex: 0 0 auto; min-width: 300px; white-space: nowrap; color: #274b40; }
 .f-arrow { color: var(--navy2); font-weight: 800; margin: 0 8px; flex: 0 0 auto; }
 .f-ko { color: #33403a; font-size: 11px; flex: 1 1 auto; white-space: nowrap; }
 /* 해석 공식(심볼+행)에서는 좌측 코드칸을 좁혀 뜻(f-ko)이 한 줄에 들어오게 */
 .f-diagram .f-en { min-width: 150px; }
+/* 해석 공식 박스: 뜻이 길면 박스를 벗어나지 않고 안에서 줄바꿈, 심볼도 과하게 넓어지지 않게 */
+.f-diagram .f-ko { white-space: normal; line-height: 1.4; min-width: 0; }
+.f-diagram .f-symbol { white-space: normal; max-width: 235px; font-size: 17px; }
 
 .wb-strategy { background: var(--goldbg, #fbf3e5); border-left: 4px solid var(--gold);
   border-radius: 0 8px 8px 0; padding: 10px 15px; margin: 12px 0; font-size: 11px; }

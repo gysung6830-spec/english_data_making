@@ -435,16 +435,16 @@ formulas:
     strategy: as 뒤가 명사면 전치사(~로서/처럼), S+V면 접속사(~할 때/때문에). as A as B는 'B만큼 A한'. not always·not
       all은 부분부정('항상/모두 ~인 건 아니다').
     diagram:
-      symbol: as B · A as B → 동등·우열을 강조
+      symbol: A as B → 동등·우열 강조
       rows:
       - en: as + 명사
         ko: 전치사 → ~로서 / ~처럼
       - en: as + S V
-        ko: 접속사 → ~할 때 / ~때문에 (차이 거의 없음)
+        ko: 접속사 → ~할 때 / ~때문에
       - en: as A as B
         ko: 뒤 as에만 '만큼' → B만큼 A한
       - en: not all / not always
-        ko: 부분부정 → '모두/항상 ~인 건 아니다'
+        ko: 부분부정 → 모두/항상 ~인 건 아니다
     examples:
     - en: In the latter case, management organization and processes can be equally as
         relevant as designers' creativity.
