@@ -1,0 +1,9 @@
+{
+  "name": "은아T 클래스",
+  "short_name": "은아T",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAFAFC",
+  "theme_color": "#6C5CE7",
+  "icons": []
+}

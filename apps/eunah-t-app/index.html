@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은아T 클래스</title>
+<link rel="manifest" href="manifest.json">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family:'Nanum Gothic',sans-serif; background:#EFEFEF; min-height:100vh; display:flex; justify-content:center; align-items:flex-start; padding:20px; }
+  .app { width:100%; max-width:420px; background:#FAFAFC; min-height:90vh; border-radius:20px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+  .screen { display:none; padding:20px; }
+  .screen.active { display:block; }
+
+  h1 { font-size:20px; color:#2D2A3D; margin-bottom:4px; }
+  .sub { font-size:12px; color:#9A96AC; margin-bottom:20px; }
+
+  input, select { width:100%; padding:12px; border:1.5px solid #E3DEF7; border-radius:10px; font-size:14px; margin-bottom:12px; font-family:'Nanum Gothic'; }
+  button.primary { width:100%; padding:13px; background:#6C5CE7; color:white; border:none; border-radius:10px; font-size:14px; font-weight:700; font-family:'Nanum Gothic'; cursor:pointer; }
+  button.primary:disabled { background:#C9BFEE; }
+  .error { color:#E85555; font-size:12px; margin-bottom:10px; }
+
+  .header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .avatar { width:36px; height:36px; border-radius:50%; background:#EFEBFC; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .greet { font-size:11px; color:#9A96AC; font-weight:700; }
+  .name { font-size:17px; color:#2D2A3D; font-weight:800; }
+
+  .card { background:white; border-radius:14px; padding:14px 16px; margin-bottom:10px; box-shadow:0 4px 12px rgba(108,92,231,0.06); }
+  .tag { display:inline-block; font-size:10px; font-weight:700; padding:3px 8px; border-radius:8px; background:#EFEBFC; color:#6C5CE7; }
+  .ctitle { font-size:13px; font-weight:700; color:#2D2A3D; margin-top:6px; }
+  .cmeta { font-size:10.5px; color:#9A96AC; margin-top:4px; }
+
+  .menu { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+  .menu-item { background:white; border-radius:14px; padding:16px 8px; text-align:center; font-weight:700; font-size:12px; color:#3D3A52; box-shadow:0 4px 12px rgba(108,92,231,0.06); }
+  .menu-item .ico { font-size:18px; display:block; margin-bottom:6px; }
+
+  .logout { font-size:11px; color:#B0ABC4; text-align:right; margin-top:16px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- 로그인 화면 -->
+  <div class="screen active" id="loginScreen">
+    <h1>은아T 클래스</h1>
+    <div class="sub">이메일로 로그인하세요</div>
+    <div class="error" id="loginError"></div>
+    <input type="email" id="loginEmail" placeholder="이메일">
+    <input type="password" id="loginPassword" placeholder="비밀번호">
+    <button class="primary" onclick="login()">로그인</button>
+  </div>
+
+  <!-- 학생 홈 화면 -->
+  <div class="screen" id="homeScreen">
+    <div class="header">
+      <div class="avatar">🙂</div>
+      <div>
+        <div class="greet">안녕하세요 :)</div>
+        <div class="name" id="userNameDisplay">학생</div>
+      </div>
+    </div>
+
+    <div id="commentFeed">
+      <div class="sub">불러오는 중...</div>
+    </div>
+
+    <div class="menu">
+      <div class="menu-item"><span class="ico">💬</span>은아T comment</div>
+      <div class="menu-item"><span class="ico">🖼️</span>오답노트 제출</div>
+      <div class="menu-item"><span class="ico">✏️</span>영작 Quiz</div>
+      <div class="menu-item"><span class="ico">🎥</span>공부영상 제출</div>
+    </div>
+
+    <div class="logout" onclick="logout()">로그아웃</div>
+  </div>
+
+</div>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorBox = document.getElementById('loginError');
+    errorBox.textContent = '';
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      errorBox.textContent = '로그인 실패: ' + error.message;
+      return;
+    }
+    showHome(data.user);
+  }
+
+  async function logout() {
+    await supabase.auth.signOut();
+    document.getElementById('homeScreen').classList.remove('active');
+    document.getElementById('loginScreen').classList.add('active');
+  }
+
+  async function showHome(user) {
+    document.getElementById('loginScreen').classList.remove('active');
+    document.getElementById('homeScreen').classList.add('active');
+    document.getElementById('userNameDisplay').textContent = user.email;
+    loadComments();
+  }
+
+  async function loadComments() {
+    const feed = document.getElementById('commentFeed');
+    // comments 테이블: id, class_name, title, created_at
+    const { data, error } = await supabase
+      .from('comments')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(5);
+
+    if (error) {
+      feed.innerHTML = `<div class="error">불러오기 실패: ${error.message}</div>
+        <div class="sub">Supabase에 'comments' 테이블이 아직 없으면 README를 참고해 만들어주세요.</div>`;
+      return;
+    }
+    if (!data || data.length === 0) {
+      feed.innerHTML = `<div class="sub">아직 등록된 은아T comment가 없어요.</div>`;
+      return;
+    }
+    feed.innerHTML = data.map(c => `
+      <div class="card">
+        <span class="tag">${c.class_name || '전체'}</span>
+        <div class="ctitle">${c.title}</div>
+        <div class="cmeta">${new Date(c.created_at).toLocaleDateString('ko-KR')}</div>
+      </div>
+    `).join('');
+  }
+
+  // 이미 로그인된 세션이 있으면 자동으로 홈 화면으로
+  supabase.auth.getSession().then(({ data }) => {
+    if (data.session) showHome(data.session.user);
+  });
+</script>
+
+</body>
+</html>
