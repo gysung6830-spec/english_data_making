@@ -90,12 +90,16 @@ class ExamBlueprintOut(BaseModel):
 def _read_exam_text(path: str | Path) -> str:
     """시험지 원문 텍스트(한글 유지). 이중언어 정제를 쓰지 않는다(발문·배점 보존)."""
     p = Path(path)
-    if p.suffix.lower() in (".txt", ".md"):
+    ext = p.suffix.lower()
+    if ext in (".txt", ".md"):
         return p.read_text(encoding="utf-8", errors="ignore")
-    if p.suffix.lower() == ".pdf":
+    if ext == ".pdf":
         import pdfplumber
         with pdfplumber.open(str(p)) as pdf:
             return "\n".join((pg.extract_text() or "") for pg in pdf.pages)
+    if ext in (".hwp", ".hwpx"):
+        from .ingest.loader import _read_hwp
+        return _read_hwp(p)
     return ""
 
 

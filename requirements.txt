@@ -6,3 +6,4 @@ PyYAML>=6.0
 python-dotenv>=1.0
 flask>=3.0
 gunicorn>=21.0
+olefile>=0.47

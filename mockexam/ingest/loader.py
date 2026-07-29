@@ -96,18 +96,103 @@ def _read_image_ocr(path: Path) -> str:
     return pytesseract.image_to_string(Image.open(str(path)), lang="eng+kor")
 
 
+# HWP PARA_TEXT 안에서 8워드(16바이트)를 차지하는 인라인 제어문자
+_HWP_INLINE8 = {1, 2, 3, 11, 12, 14, 15, 16, 17, 18, 21, 22, 23}
+_HWPTAG_PARA_TEXT = 67   # HWPTAG_BEGIN(16) + 51
+
+
+def _hwp_para_text(payload: bytes) -> str:
+    """HWPTAG_PARA_TEXT 레코드(UTF-16LE + 제어문자) → 순수 텍스트."""
+    out: list[str] = []
+    i, n = 0, len(payload)
+    while i + 1 < n:
+        wch = payload[i] | (payload[i + 1] << 8)
+        if wch in (10, 13):          # 줄바꿈/문단 끝
+            out.append("\n"); i += 2
+        elif wch in _HWP_INLINE8:    # 8워드 인라인 제어 → 통째로 건너뜀
+            i += 16
+        elif wch < 32:               # 1워드 제어 → 건너뜀
+            i += 2
+        else:
+            out.append(chr(wch)); i += 2
+    return "".join(out)
+
+
+def _hwp_records(data: bytes):
+    """HWP BodyText 스트림의 레코드(tag, payload) 순회."""
+    i, n = 0, len(data)
+    while i + 4 <= n:
+        header = int.from_bytes(data[i:i + 4], "little"); i += 4
+        tag = header & 0x3FF
+        size = (header >> 20) & 0xFFF
+        if size == 0xFFF:            # 확장 크기(다음 4바이트)
+            if i + 4 > n:
+                break
+            size = int.from_bytes(data[i:i + 4], "little"); i += 4
+        payload = data[i:i + size]; i += size
+        yield tag, payload
+
+
+def _read_hwpx(path: str) -> str:
+    """.hwpx(zip+xml) 본문 텍스트."""
+    import xml.etree.ElementTree as ET
+    import zipfile
+    out: list[str] = []
+    try:
+        with zipfile.ZipFile(path) as z:
+            names = sorted(nm for nm in z.namelist()
+                           if re.search(r"section\d+\.xml$", nm, re.I))
+            for nm in names:
+                try:
+                    root = ET.fromstring(z.read(nm))
+                    out.append("".join(root.itertext()))
+                except Exception:
+                    continue
+    except Exception:
+        return ""
+    return "\n".join(out)
+
+
 def _read_hwp(path: Path) -> str:
-    """HWP 본문 추출(best-effort). 미설치 시 빈 문자열."""
-    try:  # pragma: no cover - 선택 의존성
-        import olefile  # noqa: F401
-        import hwp5  # noqa: F401
+    """HWP 본문 추출. .hwp(5.0 OLE) 는 olefile+zlib 로 직접 파싱, .hwpx 는 zip/xml."""
+    import zipfile
+    p = str(path)
+    if path.suffix.lower() == ".hwpx" or zipfile.is_zipfile(p):
+        return _read_hwpx(p)
+    try:
+        import olefile
+    except Exception:  # olefile 미설치
+        return ""
+    if not olefile.isOleFile(p):
+        return ""
+    import zlib
+    ole = olefile.OleFileIO(p)
+    try:
+        compressed = True
+        if ole.exists("FileHeader"):
+            fh = ole.openstream("FileHeader").read()
+            if len(fh) > 36:
+                compressed = bool(fh[36] & 0x01)   # bit0 = 본문 압축 여부
+        sections: list[tuple[int, str]] = []
+        for entry in ole.listdir():
+            if len(entry) >= 2 and entry[0] == "BodyText" \
+                    and entry[1].lower().startswith("section"):
+                raw = ole.openstream(entry).read()
+                if compressed:
+                    try:
+                        raw = zlib.decompress(raw, -15)   # raw deflate
+                    except Exception:
+                        pass
+                text = "".join(_hwp_para_text(pl) for tag, pl in _hwp_records(raw)
+                               if tag == _HWPTAG_PARA_TEXT)
+                num = int(re.sub(r"\D", "", entry[1]) or 0)
+                sections.append((num, text))
+        sections.sort()
+        return "\n".join(t for _, t in sections)
     except Exception:
         return ""
-    try:  # pragma: no cover
-        from hwp5.hwp5txt import main as _  # noqa: F401
-    except Exception:
-        return ""
-    return ""  # 실제 변환은 환경에 hwp5 CLI 가 있을 때 별도 처리
+    finally:
+        ole.close()
 
 
 def read_text(path: str | Path) -> str:
@@ -122,7 +207,7 @@ def read_text(path: str | Path) -> str:
         return txt
     if ext in IMAGE_EXTS:
         return _read_image_ocr(p)
-    if ext == ".hwp":
+    if ext in {".hwp", ".hwpx"}:
         return _read_hwp(p)
     if ext in {".txt", ".md"}:
         return p.read_text(encoding="utf-8", errors="ignore")

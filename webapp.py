@@ -42,7 +42,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # 생성 모델은 Sonnet 고정(빠르고 우수·합리적 비용). 바꾸려면 MOCK_MODEL 환경변수만.
 MODEL = os.environ.get("MOCK_MODEL", "claude-sonnet-5")
 
-ALLOWED = {".pdf", ".txt", ".md", ".hwp"} | IMAGE_EXTS
+ALLOWED = {".pdf", ".txt", ".md", ".hwp", ".hwpx"} | IMAGE_EXTS
 
 
 def _has_key() -> bool:
@@ -114,7 +114,7 @@ INDEX_HTML = """
         <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
         <p>PDF · JPG · PNG · TXT · HWP</p>
         <input id=file type=file name=files multiple
-               accept=".pdf,.jpg,.jpeg,.png,.txt,.md,.hwp" hidden>
+               accept=".pdf,.jpg,.jpeg,.png,.txt,.md,.hwp,.hwpx" hidden>
       </div>
       <div class=files id=filelist></div>
 
@@ -254,8 +254,8 @@ LEARN_HTML = """
       <div class=drop id=drop>
         <div style="font-size:26px">⬆️</div>
         <p><b>여기를 클릭</b>하거나 시험지를 끌어다 놓으세요</p>
-        <p>PDF · JPG · PNG (문제지 전체)</p>
-        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+        <p>PDF · JPG · PNG · HWP (문제지 전체)</p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx" hidden>
       </div>
       <div class=files id=filelist></div>
 
