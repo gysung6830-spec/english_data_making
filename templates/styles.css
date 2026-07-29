@@ -361,22 +361,6 @@ table.lit2 td {
   padding: 5px 10px; border-radius: 0 6px 6px 0; break-after: avoid;
 }
 
-/* 출제 원리 안내 박스 (상세) */
-.t-principle {
-  border: 1px dashed var(--ws); background: #f4faf9; border-radius: 6px;
-  padding: 7px 11px 8px; margin: 0 0 10px; color: #33413f; break-inside: avoid;
-}
-.t-principle .tp-head { margin-bottom: 4px; }
-.t-principle .tp-lb {
-  display: inline-block; background: var(--ws); color: #fff; font-size: 8.5px; font-weight: 800;
-  padding: 1px 9px; border-radius: 8px; letter-spacing: .3px;
-}
-.tp-list { list-style: none; margin: 0; padding: 0; }
-.tp-list li { font-size: 8.9px; line-height: 1.55; margin: 2px 0; padding-left: 2px; }
-.tp-key {
-  display: inline-block; min-width: 52px; color: var(--ws-dark); font-weight: 800;
-  border-right: 2px solid var(--ws); margin-right: 7px; padding-right: 7px;
-}
 .t-badge { background: var(--ws); color: #fff; font-size: 9px; font-weight: 800;
   padding: 1px 8px; border-radius: 4px; flex: none; }
 .t-name { font-size: 12px; font-weight: 800; color: var(--ws-dark); }
