@@ -4,14 +4,14 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from . import analyze, extract, render
+from . import analyze, extract, hwp, render
 from .client import ClaudeClient
 from .config import Config
 from .logutil import Manifest, setup_logging
 from .schemas import Report
 
 
-INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS
+INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS | hwp.HWP_EXTS
 
 
 def list_pdfs(input_dir: Path) -> list[Path]:
@@ -52,6 +52,14 @@ def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[
     """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
+    elif hwp.is_hwp(src):
+        raw = hwp.extract_hwp_text(src)
+        if extract.looks_empty(raw):
+            raise ValueError(
+                "HWP 에서 텍스트를 찾지 못했습니다(지문이 이미지로 들어간 HWP일 수 있음). "
+                "그 페이지를 PDF나 사진(JPG/PNG)으로 저장해 넣어 주세요."
+            )
+        pset = analyze.extract_passages(client, cfg, raw)
     else:
         pset = _extract_pdf_passages(client, cfg, src)
     return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]

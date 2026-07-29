@@ -12,7 +12,7 @@ import json
 import time
 from pathlib import Path
 
-from . import extract, prompts, render, schemas
+from . import extract, hwp, prompts, render, schemas
 from .client import ClaudeClient, build_request, parse_response_text
 from .config import Config
 from .logutil import Manifest, setup_logging
@@ -90,6 +90,12 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 params = build_request(model, prompts.EXTRACT_SYSTEM,
                                        prompts.extract_image_prompt(), schemas.PassageSet,
                                        image_path=str(pdf))
+            elif hwp.is_hwp(pdf):
+                raw = hwp.extract_hwp_text(pdf)
+                if extract.looks_empty(raw):
+                    raise ValueError("HWP 텍스트 추출 실패(지문이 이미지면 PDF/사진으로)")
+                params = build_request(model, prompts.EXTRACT_SYSTEM,
+                                       prompts.extract_prompt(raw), schemas.PassageSet)
             elif cfg.extraction.pdf_mode == "vision":
                 params = _vision_extract_req(fid, pdf)
             else:
