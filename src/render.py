@@ -508,6 +508,12 @@ def _ws_context(worksheets) -> list[dict]:
                 "explanation": it.explanation,
             })
 
+        # 유형7: 지문 기반 영어 문답
+        qa_items = [{
+            "qno": nxt(), "src": src, "question": q.question, "answer": q.answer,
+            "evidence": q.evidence, "answer_ko": q.answer_ko,
+        } for q in ws.qa.items]
+
         passages.append({
             "no": i, "total": len(reps), "title": ws.title,
             "passage": ws.passage,
@@ -518,6 +524,7 @@ def _ws_context(worksheets) -> list[dict]:
             "compose": comp_items,
             "cloze": cloze_sets,
             "error": err_items,
+            "qa": qa_items,
         })
     return passages
 

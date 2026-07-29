@@ -131,11 +131,14 @@ def analyze_worksheet(
         "error": lambda: client.structured(
             S, prompts.ws_error_prompt(title, body),
             schemas.WSErrorType, max_retries=r),
+        "qa": lambda: client.structured(
+            S, prompts.ws_qa_prompt(title, body),
+            schemas.WSQAType, max_retries=r),
     }
 
     results: dict[str, object] = {}
     if cfg.processing.parallel_sections:
-        with ThreadPoolExecutor(max_workers=6) as ex:
+        with ThreadPoolExecutor(max_workers=7) as ex:
             futs = {name: ex.submit(fn) for name, fn in tasks.items()}
             for name, fut in futs.items():
                 results[name] = fut.result()
@@ -153,4 +156,5 @@ def analyze_worksheet(
         compose=results["compose"],
         choice=results["choice"],
         error=results["error"],
+        qa=results["qa"],
     )

@@ -455,6 +455,12 @@ table.lit2 td {
   border-left: 3px solid var(--ws); border-radius: 0 4px 4px 0; font-weight: 700; line-height: 1.5;
 }
 
+/* 유형7 지문 기반 영어 문답 */
+.qa-q {
+  background: var(--ws-soft); border-left: 3px solid var(--ws);
+  padding: 5px 10px; border-radius: 0 4px 4px 0; font-weight: 700; line-height: 1.5;
+}
+
 /* 유형5 지문형 빈칸 */
 .cloze { margin: 5px 0 3px; }
 .cloze-sent {

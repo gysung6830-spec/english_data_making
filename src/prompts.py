@@ -305,3 +305,21 @@ def ws_error_prompt(title: str, body: str) -> str:
         "- explanation: 틀린 3곳이 각각 어떤 어법 때문에 틀렸고 어떻게 고치는지 한국어로 정리.\n\n"
         + _passage_block(title, body)
     )
+
+
+# 유형 7) 지문 기반 영어 문답 (의문사 질문 → 지문 근거로 영어 답) ----------
+def ws_qa_prompt(title: str, body: str) -> str:
+    return (
+        "[유형7: 지문 기반 영어 문답] 지문 내용에 대해 의문사(What, How, Why, Who, When, Where, "
+        "Which)로 시작하는 영어 질문을 '정확히 2개' 만들고, 각 질문에 '지문에 근거하여' 영어로 답하는 "
+        "모범답안을 작성하세요.\n"
+        "- items: 각 문항 {question, answer, evidence, answer_ko}.\n"
+        "- question: 의문사로 시작하는 자연스러운 영어 질문. 지문을 읽어야만 답할 수 있는 내용이어야 합니다.\n"
+        "- answer: 그 질문에 대한 영어 모범답안(완결된 문장, 1~2문장). "
+        "'반드시 지문에 명시된 내용에만 근거'해야 하며, 지문에 없는 사실을 추론·상상해서 쓰면 안 됩니다.\n"
+        "- 정답은 지문 문장을 그대로 베끼기보다 질문에 맞게 재구성하되, 내용은 지문 근거를 벗어나지 마세요.\n"
+        "- evidence: 그 답의 근거가 된 지문 속 영어 문장(원문 그대로).\n"
+        "- answer_ko: answer 의 한국어 해석.\n"
+        "- 두 질문은 서로 다른 의문사/초점을 사용하세요.\n\n"
+        + _passage_block(title, body)
+    )

@@ -131,6 +131,7 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         "ws_compose": (schemas.WSComposeType, prompts.ws_compose_prompt, 8000),
         "ws_choice": (schemas.WSChoiceType, prompts.ws_choice_prompt, 10000),
         "ws_error": (schemas.WSErrorType, prompts.ws_error_prompt, 8000),
+        "ws_qa": (schemas.WSQAType, prompts.ws_qa_prompt, 8000),
     }
     for (fid, pidx), ex in units.items():
         if need_report:
@@ -205,7 +206,7 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                         title=ex.title, source=ex.source, passage=ex.body,
                         summary=p["ws_summary"], paraphrase=p["ws_paraphrase"],
                         arrange=p["ws_arrange"], compose=p["ws_compose"],
-                        choice=p["ws_choice"], error=p["ws_error"],
+                        choice=p["ws_choice"], error=p["ws_error"], qa=p["ws_qa"],
                     ))
             pdf = files[fid]
             recs = render_outputs(cfg, reports, _safe_stem(pdf), worksheets=worksheets)

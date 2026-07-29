@@ -373,8 +373,27 @@ class WSErrorType(BaseModel):
         return v
 
 
+# 유형 7) 지문 기반 영어 문답 (의문사 질문 → 지문 근거로 영어 답) ----------
+class WSQAItem(BaseModel):
+    question: str                          # 의문사(how/what/why 등)로 시작하는 영어 질문
+    answer: str                            # 지문에 근거한 영어 모범답안(추론 금지)
+    evidence: str = ""                     # 근거가 된 지문 문장(영어)
+    answer_ko: str = ""                    # 정답의 한국어 해석(교사용)
+
+
+class WSQAType(BaseModel):
+    items: list[WSQAItem]
+
+    @field_validator("items")
+    @classmethod
+    def _non_empty(cls, v: list[WSQAItem]) -> list[WSQAItem]:
+        if not v:
+            raise ValueError("영어 문답 문항이 비어 있습니다.")
+        return v
+
+
 class Worksheet(BaseModel):
-    """한 지문에서 만든 서술형 대비 교재(6개 유형)."""
+    """한 지문에서 만든 서술형 대비 교재(7개 유형)."""
     title: str
     source: str = ""
     passage: str = ""               # 원문 지문(유형1 상단에 노출)
@@ -383,7 +402,8 @@ class Worksheet(BaseModel):
     arrange: WSArrangeType          # 유형3 (요지/제목 배열 영작)
     compose: WSComposeType          # 유형4 (조건 영작)
     choice: WSChoiceType            # 유형5 (사용되지 않는 낱말)
-    error: WSErrorType              # 유형6
+    error: WSErrorType              # 유형6 (어법 오류)
+    qa: WSQAType                    # 유형7 (지문 기반 영어 문답)
 
 
 # ---------------------------------------------------------------------------

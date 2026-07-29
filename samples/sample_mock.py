@@ -284,4 +284,16 @@ def mock_worksheet(title: str = "The Value of Curiosity",
                 explanation="① 가정법 과거 If절은 과거형 encouraged. ③ It is ~ that 강조구문의 that. "
                             "⑤ 동사 think 수식은 부사 clearly. ②④는 옳다."),
         ]),
+        qa=schemas.WSQAType(items=[
+            schemas.WSQAItem(
+                question="What do curious students remember longer according to the passage?",
+                answer="They remember information longer.",
+                evidence="Studies show that curious students remember information longer and stay motivated.",
+                answer_ko="그들은 정보를 더 오래 기억한다."),
+            schemas.WSQAItem(
+                question="Why should education encourage students to ask questions?",
+                answer="Because inquiry expands our knowledge and helps us gain new insight.",
+                evidence="It is important to ask, because inquiry expands our knowledge and helps us gain new insight.",
+                answer_ko="질문(탐구)이 지식을 넓히고 새로운 통찰을 얻게 해주기 때문이다."),
+        ]),
     )

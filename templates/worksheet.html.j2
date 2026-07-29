@@ -135,6 +135,23 @@
   </div>
   {% endfor %}
   </div>
+
+  {# ===== 유형7 : 지문 기반 영어 문답 ===== #}
+  <div class="type-block tb7">
+  {{ thead(7, '지문 기반 영어 문답', '지문 내용에 근거하여 영어 질문에 영어로 답하시오. (지문에 없는 내용 추론 금지)') }}
+  {% for q in pg.qa %}
+  <div class="q-card">
+    {{ qhead(q) }}
+    <div class="qa-q">{{ q.question }}</div>
+    {% if reveal %}
+      <div class="ans-line">➜ {{ q.answer }}</div>
+      <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
+    {% else %}
+      <div class="ans-box">➜</div>
+    {% endif %}
+  </div>
+  {% endfor %}
+  </div>
 {% endmacro %}
 
 {# 유형3 카드(요지/제목 공용) #}
@@ -158,6 +175,7 @@
   <div class="qa-row"><span class="qa-t">유형4</span>{% for q in pg.compose %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}</div>
   <div class="qa-row"><span class="qa-t">유형5</span>{% for s in pg.cloze %}<span class="qa-a">{{ s.qno }}. {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</span>{% endfor %}</div>
   <div class="qa-row"><span class="qa-t">유형6</span>{% for q in pg.error %}<span class="qa-a">{{ q.qno }}. {% for w in q.wrong %}{{ w.no | circled }}{{ w.text }}→{{ w.correction }}{% if not loop.last %} / {% endif %}{% endfor %}</span>{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형7</span>{% for q in pg.qa %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}</div>
 {% endmacro %}
 
 {# ---------- 정답 및 해설(한 지문) ---------- #}
@@ -176,6 +194,8 @@
   {% for s in pg.cloze %}<div class="ex-r"><b>{{ s.qno }}. 사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b>{% if s.explanation %}<br><span class="ex-n">{{ s.explanation }}</span>{% endif %}</div>{% endfor %}
   <div class="ex-t">유형6 · 어법 오류 수정</div>
   {% for q in pg.error %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for w in q.wrong %}{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} ({{ w.point }}){% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
+  <div class="ex-t">유형7 · 지문 기반 영어 문답</div>
+  {% for q in pg.qa %}<div class="ex-r"><b>{{ q.qno }}. Q.</b> {{ q.question }}<br>➜ {{ q.answer }}{% if q.answer_ko %} <span class="ex-n">({{ q.answer_ko }})</span>{% endif %}{% if q.evidence %}<br><span class="ex-n">근거: {{ q.evidence }}</span>{% endif %}</div>{% endfor %}
 {% endmacro %}
 
 {% macro part_head(no, label, sub) %}
