@@ -333,6 +333,24 @@ def test_llm_path_wiring() -> None:
     print("✓ LLM 경로(생성기→build→검증→조판) 배선 통과")
 
 
+def test_pdf_merge(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """여러 파트(세트·난이도 조합)를 한 PDF로 합본하는지."""
+    from exam.demo2 import demo_passages_2
+    from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    parts = [
+        {"passages": demo_passages(), "header_note": "변형문제 1회 · 난이도 중",
+         "sections": ["student", "answers"]},
+        {"passages": demo_passages_2(), "header_note": "변형문제 2회 · 난이도 상",
+         "sections": ["student", "answers"], "type_order": TYPE_ORDER2,
+         "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2},
+    ]
+    out = tmp_out / "merge.pdf"
+    renderer.render_pdf_multi(parts, out)
+    assert out.exists() and out.stat().st_size > 2000
+    print("✓ 여러 파트 PDF 합본 통과")
+
+
 def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") -> None:
     """유형 병렬 생성 + 지문 병렬 분석 + 1회·2회 분석 공유가 정상 배선되는지."""
     from exam import gen2, pipeline
@@ -397,6 +415,7 @@ if __name__ == "__main__":
     test_pdf_cleaning()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()
+    test_pdf_merge()
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
     print("\n모든 오프라인 테스트 통과 ✅")

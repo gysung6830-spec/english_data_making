@@ -73,10 +73,11 @@ def generate():
     # 'demo' 버튼을 눌렀을 때만 데모. '시험지 생성'은 항상 입력 지문을 사용한다.
     demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
-    from exam import difficulty as _diff
-    level = _diff.normalize(request.form.get("level"))   # 상/중/하 (기본 중)
-    content_difficulty = _diff.content_difficulty(level)
-    vocab_method = _diff.vocab_method(level)   # 어휘 방식은 난이도에 자동 연동
+
+    # 난이도: 체크박스(상/중/하 다중). 없으면 중 하나. 표시 순서는 하<중<상.
+    LEVEL_ORDER = ["하", "중", "상"]
+    chosen = set(l for l in request.form.getlist("levels") if l in ("상", "중", "하"))
+    levels = [l for l in LEVEL_ORDER if l in chosen] or ["중"]
 
     # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
     sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
@@ -133,51 +134,61 @@ def generate():
             doc_name = "영어지문"
     doc_name = doc_name or "영어지문"
 
-    outputs = []
+    def part_header(sid: str, lv: str | None) -> str:
+        tag = f"변형문제 {sid}회"
+        if lv:
+            tag += f" · 난이도 {lv}"
+        if demo:
+            tag += " (데모)"
+        return f"{tag} — {header}" if header else tag
+
     try:
-        # 실제 모드에서 두 세트가 같은 지문을 쓰면 분석을 '한 번만' 돌려 공유한다(속도·비용).
+        # 실제 모드: 분석을 '한 번만' 돌려 모든 세트·난이도 조합이 공유한다(속도·비용).
         analyses = None
         if not demo:
             from exam.pipeline import analyze_bodies
             analyses = analyze_bodies(client, bodies,
                                       max_retries=cfg.processing.max_retries)
+
+        # 선택한 (세트 × 난이도) 조합을 모두 만들어 한 PDF로 합본한다.
+        # 데모는 난이도 변형이 없으므로 세트당 1개만.
+        combo_levels = [None] if demo else levels
+        parts = []
+        labels = []
         for sid in sets:
-            f2 = uuid.uuid4().hex[:12]
-            out = _pdf_path(f2)
-            if sid == "1":
-                if demo:
-                    ps = demo_passages()
-                    validator.validate_passages(ps)
-                    validator.validate_numbering(ps, start=1)
-                    renderer.render_pdf(ps, out, header_note=header, sections=sections)
-                    n = len(ps)
+            for lv in combo_levels:
+                if sid == "1":
+                    if demo:
+                        ps = demo_passages()
+                        validator.validate_passages(ps)
+                        validator.validate_numbering(ps, start=1)
+                    else:
+                        from exam.pipeline import build_passages
+                        ps = build_passages(client, bodies,
+                                            max_retries=cfg.processing.max_retries,
+                                            analyses=analyses, level=lv)
+                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
+                                  "sections": sections})
                 else:
-                    from exam.pipeline import build_exam
-                    build_exam(client, bodies, out, header_note=header,
-                               max_retries=cfg.processing.max_retries,
-                               vocab_method=vocab_method,
-                               content_difficulty=content_difficulty,
-                               analyses=analyses, level=level, sections=sections)
-                    n = len(bodies)
-                outputs.append({"fid": f2, "label": "변형문제 1회", "count": n,
-                                "name": f"{doc_name}_변형문제_1회"})
-            else:
-                if demo:
-                    ps = demo_passages_2()
-                    validator.validate_passages(ps, TYPE_ORDER2)
-                    validator.validate_numbering(ps, 1, TYPE_ORDER2)
-                    renderer.render_pdf(ps, out, header_note=header,
-                                        type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2,
-                                        labels=TYPE_LABELS2, sections=sections)
-                    n = len(ps)
-                else:
-                    from exam.gen2 import build_exam2
-                    build_exam2(client, bodies, out, header_note=header,
-                                max_retries=cfg.processing.max_retries,
-                                analyses=analyses, level=level, sections=sections)
-                    n = len(bodies)
-                outputs.append({"fid": f2, "label": "변형문제 2회", "count": n,
-                                "name": f"{doc_name}_변형문제_2회"})
+                    if demo:
+                        ps = demo_passages_2()
+                        validator.validate_passages(ps, TYPE_ORDER2)
+                        validator.validate_numbering(ps, 1, TYPE_ORDER2)
+                    else:
+                        from exam.gen2 import build_passages2
+                        ps = build_passages2(client, bodies,
+                                             max_retries=cfg.processing.max_retries,
+                                             analyses=analyses, level=lv)
+                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
+                                  "sections": sections, "type_order": TYPE_ORDER2,
+                                  "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2})
+                labels.append(part_header(sid, lv))
+
+        fid = uuid.uuid4().hex[:12]
+        out = _pdf_path(fid)
+        renderer.render_pdf_multi(parts, out)
+        outputs = [{"fid": fid, "label": "합본 (" + " · ".join(labels) + ")",
+                    "count": len(parts), "name": f"{doc_name}_변형문제_합본"}]
     except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
         return fail(f"생성 실패: {e}", 500)
 

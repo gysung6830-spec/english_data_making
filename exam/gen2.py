@@ -260,8 +260,9 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
     return passage
 
 
-def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
-                analyses=None, level=None, sections=None) -> Path:
+def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
+                    level=None) -> list:
+    """2회 여러 지문 -> 검증된 Passage 리스트(조판 없음). 합본용."""
     from .pipeline import analyze_bodies
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
@@ -273,6 +274,13 @@ def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=
                                        logger=logger, analysis=analysis, level=level))
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)
+    return passages
+
+
+def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
+                analyses=None, level=None, sections=None) -> Path:
+    passages = build_passages2(client, bodies, max_retries=max_retries, logger=logger,
+                               analyses=analyses, level=level)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
                                type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2,
                                sections=sections)

@@ -133,3 +133,34 @@ def render_pdf(
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
+
+
+def render_pdf_multi(parts: list[dict], out_path: str | Path,
+                     footer_note: str = DEFAULT_FOOTER) -> Path:
+    """여러 '파트'를 한 PDF로 합본한다(WeasyPrint 페이지 병합, 외부 라이브러리 불필요).
+
+    part = {passages, header_note, type_order, prompts, labels, sections}.
+    각 파트는 자체 머리글로 시작하고, 파트 사이는 새 쪽에서 이어진다.
+    """
+    from weasyprint import CSS, HTML  # 지연 임포트(무거움)
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
+
+    docs = []
+    for part in parts:
+        html = render_html(
+            part["passages"],
+            header_note=part.get("header_note", ""),
+            footer_note=footer_note,
+            type_order=part.get("type_order", TYPE_ORDER),
+            prompts=part.get("prompts", TYPE_PROMPTS),
+            labels=part.get("labels", TYPE_LABELS),
+            sections=part.get("sections"),
+        )
+        docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+
+    all_pages = [pg for d in docs for pg in d.pages]
+    docs[0].copy(all_pages).write_pdf(str(out_path))
+    return out_path

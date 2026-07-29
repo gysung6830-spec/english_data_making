@@ -122,9 +122,26 @@ def build_exam(
     지문은 순서대로 조판하되, 각 지문 안의 유형 7종은 병렬로 생성한다.
     level(상/중/하)로 전체 난이도를 조절한다.
     """
+    passages = build_passages(client, bodies, max_retries=max_retries, logger=logger,
+                              vocab_method=vocab_method, content_difficulty=content_difficulty,
+                              analyses=analyses, level=level)
+    return renderer.render_pdf(passages, out_path, header_note=header_note,
+                               sections=sections)
+
+
+def build_passages(
+    client: ClaudeClient,
+    bodies: list[str],
+    max_retries: int = 1,
+    logger=None,
+    vocab_method: str = "synonym",
+    content_difficulty: str = "hard",
+    analyses: list | None = None,
+    level: str | None = None,
+) -> list[Passage]:
+    """여러 지문 -> 검증된 Passage 리스트(조판은 하지 않음). 합본용."""
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
-
     passages: list[Passage] = []
     for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
         if logger:
@@ -133,10 +150,6 @@ def build_exam(
                                        logger=logger, vocab_method=vocab_method,
                                        content_difficulty=content_difficulty,
                                        analysis=analysis, level=level))
-
-    # 결과물 단계 검증(번호 연속 · 7종 완비)
     validator.validate_passages(passages)
     validator.validate_numbering(passages, start=1)
-
-    return renderer.render_pdf(passages, out_path, header_note=header_note,
-                               sections=sections)
+    return passages

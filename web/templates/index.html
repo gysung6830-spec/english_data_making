@@ -42,24 +42,23 @@ Second passage goes here."></textarea>
     </label>
   </div>
 
-  <div class="row">
-    <label class="field">
-      <span class="label">난이도 (1회·2회 모든 유형 공통 · 어휘 방식도 자동 연동)</span>
-      <select name="level">
-        <option value="상">상 — 매력적인 함정 오답·강한 패러프레이즈 · 어휘=부정어 삽입형</option>
-        <option value="중" selected>중 — 수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형</option>
-        <option value="하">하 — 오답이 분명히 어긋남·단서 뚜렷(평이) · 어휘=원문 단어형</option>
-      </select>
-      <span class="hint">어휘 문제 방식은 난이도에 따라 자동 결정됩니다(상=부정어삽입 · 중=유의어 · 하=원문단어).</span>
-    </label>
+  <div class="field setbox">
+    <span class="label">난이도 (여러 개 체크 가능 · 어휘 방식도 자동 연동) — 체크한 난이도가 한 PDF에 모두 합쳐집니다.</span>
+    <label class="check"><input type="checkbox" name="levels" value="상">
+      <b>상</b> <span class="hint2">함정 오답·강한 패러프레이즈 · 어휘=부정어 삽입형</span></label>
+    <label class="check"><input type="checkbox" name="levels" value="중" checked>
+      <b>중</b> <span class="hint2">수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형</span></label>
+    <label class="check"><input type="checkbox" name="levels" value="하">
+      <b>하</b> <span class="hint2">오답이 분명히 어긋남·단서 뚜렷(평이) · 어휘=원문 단어형</span></label>
   </div>
 
   <div class="field setbox">
-    <span class="label">출력할 세트 (원하는 것만 체크 — 둘 다 체크하면 각각 별도 PDF)</span>
+    <span class="label">출력할 세트 (여러 개 체크 가능 — 체크한 세트가 한 PDF에 모두 합쳐집니다)</span>
     <label class="check"><input type="checkbox" name="sets" value="1" checked>
       <b>변형문제 1회</b> <span class="hint2">순서·삽입·주제·어휘·어법·내용일치·서술형</span></label>
     <label class="check"><input type="checkbox" name="sets" value="2">
       <b>변형문제 2회</b> <span class="hint2">어법어휘짝짓기·함의추론·어법판별·어순배열·요약빈칸·빈칸추론·내용일치개수</span></label>
+    <span class="hint">세트·난이도·구성을 모두 체크하면 <b>하·중·상 × 1회·2회 전체가 한 PDF 합본</b>으로 나옵니다.</span>
   </div>
 
   <div class="field setbox">
