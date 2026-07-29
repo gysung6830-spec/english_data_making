@@ -213,6 +213,8 @@ def test_render_back_page():
     a = mock_analysis()
     ha = renderer.render_a_html([a])
     assert 'class="bhead"' in ha                       # 뒷페이지 존재
+    assert "원문 · 전체 해석" in ha and 'class="pcols"' in ha  # 어휘 앞 원문·해석 2단
+    assert 'class="pnum"' in ha and "전체 해석" in ha    # 번호 원 + 해석 칸
     assert 'class="vtab"' in ha and 'class="flow"' in ha
     assert 'class="ez"' in ha                          # 논리 흐름 + 쉬운 예시 통합
     assert "impermeable" in ha and "flourish" in ha    # 어휘/유의어

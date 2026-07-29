@@ -152,6 +152,15 @@
   .bhead .tag{ background:var(--navy); color:#fff; font-weight:800; font-size:12px;
                padding:4px 12px; border-radius:4px; }
   .bhead h2{ font-size:16px; font-weight:800; margin:0; color:#1c2030; }
+  /* 원문 · 전체 해석 2단 */
+  .pcols{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pcol{ background:#eef4ec; border:1px solid #cfe0cf; border-radius:9px; padding:9px 11px; }
+  .pclbl{ display:inline-block; background:var(--navy); color:#fff; font-size:9.5px; font-weight:800;
+          padding:1px 9px; border-radius:9px; margin-bottom:6px; }
+  .ptext{ font-size:10.5px; line-height:1.8; color:#232a24; text-align:justify; }
+  .ptext .pnum{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
+                min-width:13px; height:13px; line-height:13px; text-align:center; border-radius:7px;
+                padding:0 2px; margin:0 2px 0 1px; vertical-align:1px; }
   .sec{ margin-bottom:18px; page-break-inside:avoid; }
   .sec > .st{ display:inline-block; font-size:13px; font-weight:800; color:var(--navy);
               border-bottom:2px solid var(--navy); padding-bottom:2px; margin-bottom:9px; }
@@ -343,6 +352,30 @@
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>
     </div>
+
+    {% if a.sentences %}
+    <div class="sec">
+      <div class="st">원문 · 전체 해석</div>
+      <div class="pcols">
+        <div class="pcol">
+          <span class="pclbl">원문</span>
+          <div class="ptext">
+            {%- for s in a.sentences -%}
+              <span class="pnum">{{ s.index }}</span> {{ s.text | replace('(','') | replace(')','') }}{{ ' ' }}
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="pcol">
+          <span class="pclbl">전체 해석</span>
+          <div class="ptext">
+            {%- for s in a.sentences -%}
+              <span class="pnum">{{ s.index }}</span> {{ s.translation }}{{ ' ' }}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
 
     {% if a.vocab %}
     <div class="sec">
