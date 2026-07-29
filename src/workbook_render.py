@@ -138,3 +138,35 @@ def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_not
 def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "") -> Path:
     """단일 지문 렌더 (내부적으로 books=[wb])."""
     return render_workbooks_pdf([wb], out_path, footer_note=footer_note)
+
+
+def merge_pdfs(parts: list[str | Path], out_path: str | Path) -> Path:
+    """여러 PDF 를 순서대로 하나로 합친다. pypdf 우선, 없으면 PyMuPDF(fitz) 사용."""
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    parts = [Path(p) for p in parts if p and Path(p).is_file()]
+    if not parts:
+        raise ValueError("합칠 PDF 가 없습니다.")
+    if len(parts) == 1:
+        # 단일이면 그대로 복사(불필요한 재인코딩 방지)
+        import shutil
+        shutil.copyfile(parts[0], out_path)
+        return out_path
+    try:
+        from pypdf import PdfWriter
+        w = PdfWriter()
+        for p in parts:
+            w.append(str(p))
+        with out_path.open("wb") as f:
+            w.write(f)
+        return out_path
+    except Exception:
+        pass
+    import fitz  # PyMuPDF
+    doc = fitz.open()
+    for p in parts:
+        with fitz.open(str(p)) as src:
+            doc.insert_pdf(src)
+    doc.save(str(out_path))
+    doc.close()
+    return out_path

@@ -113,7 +113,7 @@ INDEX_HTML = """
 
       <label>③ 산출물 종류 <span class=hint>(원하는 것을 모두 선택)</span></label>
       <div class=kinds>
-        <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북</label>
+        <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북 <span class=hint>(+단일유형)</span></label>
         <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 채우기 워크북</label>
       </div>
 
@@ -262,6 +262,7 @@ def analyze_route():
 
     results = []
     wb_books = []       # 통합 워크북 파일간 합본용
+    wb_packs = []       # 단일 유형 산문 워크시트 파일간 합본용
     blank_sets = []     # 빈칸형 파일간 합본용
     n_files_ok = 0      # 산출물을 낸 파일 수(파일간 합본 여부 판단용)
     for f in files:
@@ -275,13 +276,19 @@ def analyze_route():
         stem = _safe_name(Path(f.filename).stem)
         try:
             if do_workbook:
-                # 한 파일에 여러 지문이 있으면 지문별 워크북을 모두 만든다.
-                wbs = ([pipeline._mock_workbook_for_pdf(cfg, tmp)] if mock
-                       else pipeline.build_workbooks_for_pdf(client, cfg, tmp))
+                # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 워크시트를 만든다.
+                if mock:
+                    wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
+                    packs = [pipeline._mock_prose_pack_for_pdf(cfg, tmp)]
+                else:
+                    wbs, packs = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
                 out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-                workbook_render.render_workbooks_pdf(wbs, out, footer_note=cfg.design.footer_note)
+                # 통합 카드(앞) → 단일 유형 4종(뒤)을 한 PDF 로
+                pipeline.render_workbook_with_prose_pdf(
+                    wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR)
                 wb_books.extend(wbs)
-                results.append({"name": f"{f.filename} · 통합 워크북 (지문 {len(wbs)}편)",
+                wb_packs.extend(packs)
+                results.append({"name": f"{f.filename} · 통합 워크북+단일유형 (지문 {len(wbs)}편)",
                                 "ok": True, "out": out.name})
             if do_blanks:
                 file_sets = ([pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)] if mock
@@ -307,7 +314,8 @@ def analyze_route():
     if do_workbook and n_files_ok >= 2 and len(wb_books) >= 2:
         try:
             combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
-            workbook_render.render_workbooks_pdf(wb_books, combined, footer_note=cfg.design.footer_note)
+            pipeline.render_workbook_with_prose_pdf(
+                wb_books, wb_packs, combined, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR)
             results.append({"name": "📚 통합 워크북 합본", "ok": True, "out": combined.name})
         except Exception as e:
             traceback.print_exc()

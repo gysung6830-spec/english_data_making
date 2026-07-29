@@ -12,6 +12,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
+from pydantic import BaseModel, Field
 
 from .blanks_schemas import placeholders_in  # {{Pn}} 재사용
 from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER
@@ -51,6 +52,94 @@ class ProsePack:
     title: str
     subtitle: str
     worksheets: list[ProseWorksheet]
+
+
+# ── LLM 응답 계층 (pydantic) ─────────────────────────────────────────
+class LLMProseItem(BaseModel):
+    id: str            # "P1"
+    display: str       # "[ that / what ]" | "(understand)"
+    answer: str
+
+
+class LLMProseSentence(BaseModel):
+    no: int
+    en: str            # 자리표시자 없는 완전한 원문
+    ko: str
+    grammar_template: str = ""
+    grammar_items: list[LLMProseItem] = Field(default_factory=list)
+    form_template: str = ""
+    form_items: list[LLMProseItem] = Field(default_factory=list)
+    vocab_template: str = ""
+    vocab_items: list[LLMProseItem] = Field(default_factory=list)
+
+
+class LLMProsePack(BaseModel):
+    title: str = ""
+    subtitle: str = ""
+    sentences: list[LLMProseSentence] = Field(default_factory=list)
+
+
+# 워크시트 유형 정의(표시 순서: 어법 → 어형 → 어휘 → 한글해석)
+_WORKSHEET_DEFS = [
+    ("grammar", "어법 양자택일", "둘 중 어법상 알맞은 것을 고르시오.", False,
+     "grammar_template", "grammar_items"),
+    ("form", "어형 변형", "각 빈칸에 괄호 안의 단어를 문맥에 맞게 알맞은 형태로 바꾸어 쓰시오. "
+     "(어형 변화가 필요 없는 경우도 있음)", True, "form_template", "form_items"),
+    ("vocab", "어휘 양자택일", "둘 중 문맥상 알맞은 것을 고르시오.", False,
+     "vocab_template", "vocab_items"),
+]
+
+
+def _align(order: list[str], items: list[LLMProseItem]):
+    """자리표시자(등장 순서) ↔ items 매핑. id 가 맞으면 그 매핑을, 아니면 순서대로."""
+    by_id = {it.id: it for it in items}
+    if set(order) == set(by_id) and len(order) == len(items):
+        return [(pid, by_id[pid]) for pid in order]
+    return list(zip(order, items))
+
+
+def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
+               write: bool, tkey: str, ikey: str) -> ProseWorksheet:
+    sents: list[PSentence] = []
+    for s in llm.sentences:
+        template = getattr(s, tkey) or s.en
+        items_src = getattr(s, ikey)
+        order = placeholders_in(template)
+        # 자리표시자가 하나도 없으면(출제 없음) 원문만 두고 items 는 비운다.
+        pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write)
+                  for pid, src in _align(order, items_src)]
+        sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
+    return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
+
+
+def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) -> ProsePack:
+    """검증된 LLM 응답 -> 어법·어형·어휘·한글해석 4종 워크시트를 담은 ProsePack."""
+    worksheets = [_worksheet(llm, *d) for d in _WORKSHEET_DEFS]
+    # 한글 해석 연습: 표기 없이 원문 + 해석만
+    translate = ProseWorksheet(
+        wtype="translate", label="한글 해석 연습", instruction="주어진 영문을 해석하시오.",
+        sentences=[PSentence(no=s.no, template=s.en, ko=s.ko, items=[]) for s in llm.sentences])
+    worksheets.append(translate)
+    return ProsePack(header=header, title=title or "", subtitle=subtitle or "",
+                     worksheets=worksheets)
+
+
+def validate_llm_prose(llm: LLMProsePack) -> None:
+    """각 유형 template 의 자리표시자 수와 items 수가 일치하는지 검증."""
+    if not llm.sentences:
+        raise ValueError("산문 워크시트 문장이 비어 있습니다.")
+    for s in llm.sentences:
+        for tkey, ikey in (("grammar_template", "grammar_items"),
+                           ("form_template", "form_items"),
+                           ("vocab_template", "vocab_items")):
+            t = getattr(s, tkey)
+            if not t:
+                continue
+            n_ph = len(placeholders_in(t))
+            n_it = len(getattr(s, ikey))
+            if n_ph != n_it:
+                raise ValueError(
+                    f"문장 {s.no} {tkey}: 자리표시자 수({n_ph})와 items 수({n_it})가 다릅니다.")
 
 
 # ── 렌더 ─────────────────────────────────────────────────────────────

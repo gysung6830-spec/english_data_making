@@ -8,6 +8,7 @@ from . import analyze, extract, render
 from . import workbook_generate, workbook_render
 from . import blanks_generate, blanks_render
 from . import blanks_schemas
+from . import prose_generate, prose_render
 from .client import ClaudeClient
 from .config import Config
 from .logutil import Manifest, setup_logging
@@ -82,6 +83,48 @@ def build_workbooks_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> lis
             for ex in _extract_passages_for_pdf(client, cfg, src)]
 
 
+def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
+    """한 파일(여러 지문 가능) -> (지문별 통합 워크북 목록, 지문별 산문 워크시트 팩 목록).
+
+    지문 추출을 1회만 수행해 통합 워크북과 단일 유형 산문 워크시트를 함께 생성한다.
+    """
+    wbs: list[Workbook] = []
+    packs: list[prose_render.ProsePack] = []
+    for ex in _extract_passages_for_pdf(client, cfg, src):
+        wbs.append(workbook_generate.generate_workbook(client, cfg, ex))
+        packs.append(prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title))
+    return wbs, packs
+
+
+def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
+                                   footer_note: str = "", scratch: Path | None = None) -> Path:
+    """통합 워크북(앞) → 단일 유형 산문 워크시트(뒤) 순서로 한 PDF 에 합쳐 출력.
+
+    각 부분을 개별 PDF 로 렌더한 뒤 순서대로 병합한다.
+    """
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    scratch = scratch or out_path.parent
+    stem = out_path.stem
+    parts: list[Path] = []
+    if books:
+        wb_pdf = scratch / f"{stem}__wb.pdf"
+        workbook_render.render_workbooks_pdf(books, wb_pdf, footer_note=footer_note)
+        parts.append(wb_pdf)
+    for i, pk in enumerate(packs, start=1):
+        pr_pdf = scratch / f"{stem}__prose{i}.pdf"
+        prose_render.render_prose_pdf(pk, pr_pdf, footer_note=footer_note)
+        parts.append(pr_pdf)
+    workbook_render.merge_pdfs(parts, out_path)
+    for p in parts:                       # 중간 산출물 정리
+        try:
+            p.unlink(missing_ok=True)
+            p.with_suffix(".html").unlink(missing_ok=True)
+        except Exception:
+            pass
+    return out_path
+
+
 def build_blank_sets_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list:
     """한 파일(여러 지문 가능) -> 지문별 빈칸형 세트(LLMBlankSet) 목록."""
     return [blanks_generate.generate_blank_set(client, cfg, ex)
@@ -117,6 +160,13 @@ def _mock_workbook_for_pdf(cfg: Config, pdf: Path) -> Workbook:
         except Exception:
             pass
     return mock_workbook(title=title)
+
+
+def _mock_prose_pack_for_pdf(cfg: Config, pdf: Path):
+    from samples.prose_mock import mock_prose_pack
+
+    title = _safe_stem(pdf)
+    return mock_prose_pack(title=title, header=title)
 
 
 def _mock_blank_set_for_pdf(cfg: Config, pdf: Path, no: int):
@@ -226,17 +276,24 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
 
     outputs: list[Path] = []
     books: list = []            # 합본 모드에서 모아두는 (지문 순서대로) 워크북
+    packs: list = []            # 합본 모드에서 모아두는 단일 유형 산문 워크시트
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            wbs = [_mock_workbook_for_pdf(cfg, pdf)] if mock else build_workbooks_for_pdf(client, cfg, pdf)
+            if mock:
+                wbs = [_mock_workbook_for_pdf(cfg, pdf)]
+                file_packs = [_mock_prose_pack_for_pdf(cfg, pdf)]
+            else:
+                wbs, file_packs = build_workbook_bundle_for_pdf(client, cfg, pdf)
             if combine:
                 books.extend(wbs)   # 파일 안의 여러 지문을 모두 합본에 포함
+                packs.extend(file_packs)
                 logger.info("[%d/%d] 분석 완료: %s (지문 %d편)", i, total, pdf.name, len(wbs))
             else:
                 out = cfg.output_dir / f"{_safe_stem(pdf)}_워크북.pdf"
-                # 한 파일에 여러 지문이 있으면 한 PDF 에 지문1→답1→지문2→답2… 로 배치
-                workbook_render.render_workbooks_pdf(wbs, out, footer_note=cfg.design.footer_note)
+                # 통합 카드(앞) → 단일 유형 4종(뒤)을 한 PDF 로
+                render_workbook_with_prose_pdf(wbs, file_packs, out,
+                                               footer_note=cfg.design.footer_note)
                 outputs.append(out)
                 manifest.record_success(str(pdf), str(out))
                 logger.info("[%d/%d] 완료: %s -> %s (지문 %d편)", i, total, pdf.name, out.name, len(wbs))
@@ -246,13 +303,14 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
             manifest.record_failure(str(pdf), str(e))
             logger.error("[%d/%d] 실패: %s (%s)", i, total, pdf.name, e)
 
-    # 합본 모드: 모은 지문을 한 PDF 로 배치
+    # 합본 모드: 모은 지문을 한 PDF 로 배치 (통합 앞 → 단일 유형 뒤)
     if combine and books:
         combined = cfg.output_dir / "통합워크북_합본.pdf"
-        workbook_render.render_workbooks_pdf(books, combined, footer_note=cfg.design.footer_note)
+        render_workbook_with_prose_pdf(books, packs, combined,
+                                       footer_note=cfg.design.footer_note)
         outputs.append(combined)
         manifest.record_success("ALL", str(combined))
-        logger.info("합본 워크북 생성: %s (지문 %d편, 지문1→답1→지문2→답2 순서)",
+        logger.info("합본 워크북 생성: %s (지문 %d편, 통합→단일유형 순서)",
                     combined.name, len(books))
 
     logger.info("처리 요약 — 성공 %d, 실패 %d (총 %d)", success, failed, total)
