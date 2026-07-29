@@ -81,6 +81,33 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+def resolve_passage_sentence(answer: str, tokens: list[str] | None,
+                             sentences: list[str], min_score: float = 0.5) -> str | None:
+    """어순배열 정답을 '지문에 실제로 있는 문장'으로 확정한다(원래 배열 보장).
+
+    LLM 이 축약형(it's↔it is)·구두점·미세 단어 차이로 정확히 일치하지 않게 답하는 경우가
+    있어, 하드 실패 대신 '토큰·답과 가장 잘 겹치는 지문 문장'으로 스냅한다.
+    반환: 확정된 지문 문장(그대로) / 매칭 실패 시 None.
+    """
+    na = _norm(answer)
+    for s in sentences:                       # ① 정확히 일치하면 그대로
+        if _norm(s) == na:
+            return s
+    # ② 토큰(학생이 배열하는 낱개 단어) + 답의 단어 집합과 가장 잘 겹치는 문장으로 스냅
+    words = set(na.split())
+    if tokens:
+        words |= set(_norm(" ".join(tokens)).split())
+    best, score = None, 0.0
+    for s in sentences:
+        sw = set(_norm(s).split())
+        if not sw or not words:
+            continue
+        j = len(words & sw) / len(words | sw)
+        if j > score:
+            best, score = s, j
+    return best if (best is not None and score >= min_score) else None
+
+
 def _even_split(total: int, parts: int) -> list[int]:
     """total 을 parts 개의 연속 덩어리로 최대한 고르게 나눈다(각 >=1)."""
     base, rem = divmod(total, parts)
@@ -252,10 +279,12 @@ def make_short(
     q3_prompt: str, q3_before: str, q3_mid: str, q3_after: str,
     q3_cue_a: str, q3_cue_b: str, q3_ans_a: str, q3_ans_b: str, q3_reason: str,
 ) -> tuple[str, str]:
-    # (2) 영작 정답은 '지문에 실제로 있는 문장 그대로'여야 한다(원래 배열 보장)
-    na = _norm(q2_answer)
-    if not any(_norm(s) == na for s in sentences):
-        raise ValueError("서술형(2) 영작 정답은 지문에 실제로 있는 문장이어야 합니다(원래 배열).")
+    # (2) 영작 정답은 '지문에 실제로 있는 문장 그대로'여야 한다(원래 배열 보장).
+    #     정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다.
+    snapped = resolve_passage_sentence(q2_answer, q2_tokens, sentences)
+    if snapped is None:
+        raise ValueError("서술형(2) 영작 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
+    q2_answer = snapped
     summary_html = (
         F.esc(q3_before) + F.blank("A", q3_cue_a)
         + F.esc(q3_mid) + F.blank("B", q3_cue_b)

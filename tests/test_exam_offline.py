@@ -192,6 +192,36 @@ def test_pdf_cleaning() -> None:
     print("✓ PDF 정제(한글·머리글 제거) 통과")
 
 
+def test_arrangement_answer_snap() -> None:
+    """어순배열 정답이 지문 문장과 정확히 일치하지 않아도(축약형·미세 차이) 실패하지 않고
+    토큰·답과 가장 잘 맞는 지문 문장으로 스냅되는지. 무관하면 여전히 실패."""
+    sents = [
+        "People are likely to be more satisfied with a new building.",
+        "Understanding how each user reacts inevitably produces a better building.",
+    ]
+    # produces→produce 처럼 미세하게 어긋난 LLM 답 → 정확한 지문 문장으로 스냅
+    snapped = B.resolve_passage_sentence(
+        "Understanding how each user reacts inevitably produce a better building",
+        ["understanding", "how", "each", "user", "reacts", "inevitably",
+         "produce", "a", "better", "building"], sents)
+    assert snapped == sents[1]
+    # 전혀 무관한 답 → None(진짜 오류는 여전히 걸러냄)
+    assert B.resolve_passage_sentence("Totally unrelated text.", ["totally"], sents) is None
+    # make_short 이 하드 실패 대신 스냅해 정답에 원래 문장이 들어간다
+    _, a = B.make_short(
+        sents, q1_prompt="p", q1_answer="한글",
+        q2_prompt="p",
+        q2_tokens=["understanding", "how", "each", "user", "react", "inevitably",
+                   "produce", "a", "better", "building"],
+        q2_cues=["react", "produce"],
+        q2_answer="Understanding how each user reacts inevitably produce a better building",
+        q3_prompt="p", q3_before="A ", q3_mid=" is ", q3_after=" now.",
+        q3_cue_a="consult", q3_cue_b="reduce", q3_ans_a="consulted", q3_ans_b="reduced",
+        q3_reason="근거.")
+    assert "inevitably produces a better building" in a
+    print("✓ 어순배열 정답 스냅(미세 불일치 교정·무관은 실패) 통과")
+
+
 def test_hwp_ingest() -> None:
     """HWP 인식: (1) .hwpx(ZIP+XML) 추출·정제, (2) .hwp PARA_TEXT 레코드/제어객체 파싱."""
     import io
@@ -479,6 +509,7 @@ if __name__ == "__main__":
     test_error_guards()
     test_set2_demo()
     test_pdf_cleaning()
+    test_arrangement_answer_snap()
     test_hwp_ingest()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()

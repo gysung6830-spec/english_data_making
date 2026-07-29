@@ -163,8 +163,9 @@ def _gen_C(client, analysis, body, max_retries=1):
 
 
 def _gen_D(client, analysis, body, max_retries=1):
-    p = ("아래 정본으로 '어순 배열(D)'을 만드세요. answer 는 반드시 '지문에 실제로 있는 문장 그대로'"
-         "여야 하며(원래 배열이 정답), 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
+    p = ("아래 정본으로 '어순 배열(D)'을 만드세요. 아래 [문장] 목록에서 문장 하나를 골라, answer 는 "
+         "그 문장을 '글자 그대로'(단어·축약형·구두점 포함, 요약·수정·의역 금지) 복사한 것이어야 "
+         "합니다(원래 배열이 정답). 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
          "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
                                   max_tokens=1500, max_retries=max_retries, cache_prefix=context(analysis))

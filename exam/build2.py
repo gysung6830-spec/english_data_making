@@ -44,14 +44,15 @@ def _norm(s: str) -> str:
 
 
 def make_D(sentences, tokens, cues, answer_sentence, reason=""):
-    """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장)."""
+    """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장).
+    정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다."""
     for t in tokens:
         if " " in t.strip():
             raise ValueError(f"낱개 단어여야 합니다(구 묶음 금지): '{t}'")
-    na = _norm(answer_sentence)
-    if not any(_norm(s) == na for s in sentences):
-        raise ValueError("어순 배열 정답은 지문에 실제로 있는 문장이어야 합니다(원래 배열).")
-    return F2.D_q(tokens, cues), F2.D_a(answer_sentence, reason)
+    snapped = B1.resolve_passage_sentence(answer_sentence, tokens, sentences)
+    if snapped is None:
+        raise ValueError("어순 배열 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
+    return F2.D_q(tokens, cues), F2.D_a(snapped, reason)
 
 
 # E · 요약문 빈칸(객관식) ---------------------------------------------------
