@@ -60,9 +60,10 @@ def test_id_mismatch_repair():
     print("PASS  id 불일치 자동 정렬(등장 순서)")
 
 
-# ---- 2-b. 빈 questions 문장은 거부하지 않고 건너뛴다 -------------------------
-def test_empty_questions_skipped():
-    # LLM 이 출제 요소 없는 문장(빈 questions)을 섞어 보내도 전체를 거부하지 않고 건너뛴다.
+# ---- 2-b. 빈 questions 문장은 거부하지 않고 '읽기용'으로 그대로 싣는다 --------
+def test_empty_questions_kept():
+    # LLM 이 출제 요소 없는 문장(빈 questions)을 섞어 보내도 전체를 거부하지 않고,
+    # 문장 자체는 지문 보존을 위해 그대로 싣는다(문항만 없음).
     llm = ws.LLMWorkbook(sentences=[
         ws.LLMSentence(no=1, en_template="No blanks here.", ko="가", questions=[]),
         ws.LLMSentence(no=2, en_template="X {{Q1}} Y", ko="나",
@@ -71,7 +72,16 @@ def test_empty_questions_skipped():
     ])
     ws.validate_llm_workbook(llm)                    # 빈 문장 있어도 통과
     wb = ws.build_workbook(llm, title="T", subtitle="S")
-    assert len(wb.sentences) == 1 and wb.total == 1  # 빈 문장 2개는 제외
+    # 세 문장 모두 남고(지문 보존), 문항 총계는 1
+    assert len(wb.sentences) == 3 and wb.total == 1
+    assert wb.sentences[0].en_template == "No blanks here." and not wb.sentences[0].questions
+    # 자리표시자만 있고 questions 가 없는 (렌더 불가) 문장은 건너뛴다
+    bad = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="Broken {{Q1}}.", ko="가", questions=[]),
+        ws.LLMSentence(no=2, en_template="Y {{Q1}}", ko="나",
+                       questions=[_q("Q1", display="(a)", answer="a")])])
+    wb2 = ws.build_workbook(bad, title="T", subtitle="S")
+    assert len(wb2.sentences) == 1
     # 모든 문장이 비면 재요청되도록 실패해야 함
     empty = ws.LLMWorkbook(sentences=[
         ws.LLMSentence(no=1, en_template="Nothing.", ko="가", questions=[])])
@@ -81,7 +91,7 @@ def test_empty_questions_skipped():
     except ValueError:
         raised = True
     assert raised
-    print("PASS  빈 questions 문장 건너뛰기(+전부 비면 실패)")
+    print("PASS  빈 questions 문장 보존(+렌더불가 건너뛰기 +전부 비면 실패)")
 
 
 # ---- 3. order 표기 검증 ----------------------------------------------------
@@ -165,7 +175,7 @@ def test_multi_passage_layout():
 def run_all():
     test_placeholder_one_to_one()
     test_id_mismatch_repair()
-    test_empty_questions_skipped()
+    test_empty_questions_kept()
     test_order_display_format()
     test_global_numbering()
     test_render_sentence_substitution()

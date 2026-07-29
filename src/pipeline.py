@@ -32,6 +32,14 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
+def _try_stamp(path: Path) -> None:
+    """완성 PDF 에 문서 전체 기준 페이지 번호를 찍는다(실패해도 무시)."""
+    try:
+        workbook_render.stamp_page_numbers(path)
+    except Exception:
+        pass
+
+
 def _empty_extract_error(src: Path) -> str:
     if extract.is_hwp(src):
         return ("HWP 에서 텍스트를 추출하지 못했습니다(암호화·배포용 문서이거나 그림만 있는 경우). "
@@ -138,6 +146,10 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
         blanks_render.render_blanks_pdf(blank_wb, bl_pdf, footer_note=footer_note)
         parts.append(bl_pdf)
     workbook_render.merge_pdfs(parts, out_path)
+    try:
+        workbook_render.stamp_page_numbers(out_path)   # 문서 전체 기준 페이지 번호
+    except Exception:
+        pass
     for p in parts:                       # 중간 산출물 정리
         try:
             p.unlink(missing_ok=True)
@@ -243,6 +255,7 @@ def run_folder_blanks(cfg: Config, mock: bool = False) -> dict:
                     title=file_sets[0].title, subtitle=file_sets[0].subtitle)
                 out = cfg.output_dir / f"{_safe_stem(pdf)}_빈칸워크북.pdf"
                 blanks_render.render_blanks_pdf(wb, out, footer_note=cfg.design.footer_note)
+                _try_stamp(out)
                 outputs.append(out)
                 manifest.record_success(str(pdf), str(out))
             success += 1
@@ -260,6 +273,7 @@ def run_folder_blanks(cfg: Config, mock: bool = False) -> dict:
             title="빈칸 워크북", subtitle="유형 B 지문 빈칸 · 유형 A 요약문 빈칸")
         combined = cfg.output_dir / "빈칸워크북_합본.pdf"
         blanks_render.render_blanks_pdf(wb, combined, footer_note=cfg.design.footer_note)
+        _try_stamp(combined)
         outputs.append(combined)
         manifest.record_success("ALL", str(combined))
         logger.info("합본 빈칸 워크북 생성: %s (지문 %d편)", combined.name, len(sets))

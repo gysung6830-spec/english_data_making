@@ -94,18 +94,43 @@ DEFAULT_FOOTER = branding.FOOTER_BRAND
 
 
 def _footer_template(text: str) -> str:
-    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 저작권 문구 · 페이지 번호(회사 파일 느낌).
+    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 저작권 문구만.
 
-    나눔스퀘어라운드(설치 시)로 표기하며, Chromium 인쇄 푸터의 pageNumber/totalPages 를 쓴다.
+    페이지 번호는 병합 후 문서 전체 기준으로 stamp_page_numbers() 가 따로 찍는다
+    (부분 PDF 를 합치므로 Chromium 의 pageNumber 는 구간마다 재시작하기 때문).
     """
     return (
         '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:center; '
         "font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif; "
         'padding:0 14mm;">'
-        f'{escape(text)} &nbsp;·&nbsp; '
-        '<span class="pageNumber"></span> / <span class="totalPages"></span>'
+        f'{escape(text)}'
         '</div>'
     )
+
+
+def stamp_page_numbers(path: str | Path) -> Path:
+    """완성된(병합된) PDF 에 문서 전체 기준 'n / N' 페이지 번호를 하단 중앙에 찍는다.
+
+    저작권 문구(가운데)와 겹치지 않도록 그 아래쪽 여백에 회색 소형으로 표기한다.
+    숫자·슬래시만 쓰므로 기본 내장 폰트(helv)로 충분하다.
+    """
+    import fitz  # PyMuPDF
+
+    path = Path(path)
+    doc = fitz.open(str(path))
+    n = doc.page_count
+    for i, page in enumerate(doc, start=1):
+        w, h = page.rect.width, page.rect.height
+        label = f"{i} / {n}"
+        tw = fitz.get_text_length(label, fontname="helv", fontsize=8)
+        # 저작권 문구(가운데)와 겹치지 않게 같은 줄 오른쪽에 배치
+        page.insert_text((w - 40 - tw, h - 17.5), label,
+                         fontsize=8, fontname="helv", color=(0.62, 0.66, 0.71))
+    tmp = path.with_name(path.stem + "__num.pdf")
+    doc.save(str(tmp))
+    doc.close()
+    os.replace(tmp, path)
+    return path
 
 
 def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_note: str = "") -> Path:

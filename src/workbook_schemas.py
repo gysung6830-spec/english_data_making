@@ -158,11 +158,16 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
     sentences: list[Sentence] = []
     counter = 0
     for s in llm.sentences:
-        # 출제할 요소가 없는 문장(questions 비어 있음)은 워크북에 넣지 않는다.
+        order = placeholders_in(s.en_template)
+        # 출제할 요소가 없는 문장(questions 비어 있음)이라도 '읽기용'으로 그대로 싣는다
+        # (지문 문장을 절대 누락하지 않기 위해). 단, 자리표시자만 있고 questions 가 없어
+        # 렌더가 불가능한 (드문) 경우에만 건너뛴다.
         if not s.questions:
+            if order:
+                continue
+            sentences.append(Sentence(no=s.no, en_template=s.en_template, ko=s.ko, questions=[]))
             continue
         # en_template 의 자리표시자 등장 순서대로 채번(위첨자 번호가 문장 흐름과 일치).
-        order = placeholders_in(s.en_template)
         by_id = {q.id: q for q in s.questions}
         # id 라벨이 정확히 일치하면 그 매핑을, 아니면(개수만 맞는 경우) '등장 순서'로 정렬한다.
         if set(order) == set(by_id) and len(order) == len(s.questions):
