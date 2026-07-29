@@ -141,6 +141,20 @@
   .page.compact .pbox{ font-size:9.5px; padding:0 9px 6px; }
   .page.compact .pbox .cap{ font-size:9.5px; padding:2px 8px; margin:6px 0 4px; }
   .page.compact .pbox .gn{ font-size:10px; }
+  /* 뒷면(정리) 압축: 원문·전체해석 + 어휘 + 논리흐름을 1페이지에 */
+  .page.compact .bhead{ margin-bottom:9px; }
+  .page.compact .sec{ margin-bottom:8px; }
+  .page.compact .sec > .st{ font-size:12px; margin-bottom:5px; }
+  .page.compact .pcol{ padding:6px 9px; }
+  .page.compact .ptext{ font-size:9px; line-height:1.5; }
+  .page.compact .ptext .pnum{ font-size:7.5px; min-width:12px; height:12px; line-height:12px; }
+  .page.compact .vtab{ font-size:9.5px; }
+  .page.compact .vtab th, .page.compact .vtab td{ padding:3px 6px; }
+  .page.compact .flow .step{ padding:5px 10px 6px; }
+  .page.compact .flow .step .tx{ font-size:11px; }
+  .page.compact .flow .step .ez{ font-size:10.5px; margin-top:3px; padding-top:3px; }
+  .page.compact .flow .step .hd{ font-size:10.5px; }
+  .page.compact .flow .arrow{ font-size:12px; margin:2px 0; }
 
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:var(--amber); }
@@ -347,7 +361,7 @@
   </div>
 
   {% if include_back and a.has_back %}
-  <div class="page{% if compact %} compact{% endif %}">
+  <div class="page compact">   {#- 뒷면(정리)은 항상 압축해 1페이지에 맞춘다 -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>
