@@ -1,6 +1,6 @@
 # 영어 지문 → 3형식 PDF 생성기
 
-영어 지문(PDF·이미지·txt)을 넣으면 **한 지문당 최대 3형식**의 PDF를 만듭니다.
+영어 지문(PDF·HWP·이미지·txt)을 넣으면 **한 지문당 최대 3형식**의 PDF를 만듭니다.
 CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
 
 > 이 폴더(`passage3/`)는 저장소의 기존 "지문 분석 도구"와 **별개**의 독립
@@ -37,7 +37,7 @@ CLI와 **웹앱** 두 가지로 쓸 수 있습니다.
     # 브라우저에서 http://localhost:5000
 
 웹앱 화면에서:
-1. 지문 파일 업로드 — PDF·이미지·txt (스캔/사진은 자동 OCR)
+1. 지문 파일 업로드 — PDF·HWP·이미지·txt (스캔/사진은 자동 OCR)
 2. PDF 파일명(지문명) 입력 — 예: Alan Seeger → 아래에 최종 파일명 실시간 표시
 3. 출력 형식 체크박스 — 한줄해석 / 한줄영어 / 좌지문우해석 중 원하는 만큼 선택
 4. 상단 머리글(선택) — 학원명·자료명 등, 각 페이지 오른쪽 위에 표시
@@ -66,7 +66,8 @@ auto-fit 강도는 main.py의 CALIB(기본 0.90)으로 조절.
     export PLAYWRIGHT_CHROMIUM_EXECUTABLE=/opt/pw-browsers/chromium-XXXX/chrome-linux/chrome
 
 ## 입력 처리 (OCR 자동)
-- 디지털 PDF → pdfplumber 텍스트 추출
+- 디지털 PDF → pdfplumber 텍스트/표 추출 (좌지문 우해석 2단 표 인식)
+- HWP(한글) → .hwp(구형 OLE) / .hwpx(신형 XML) 텍스트 추출 (olefile)
 - 스캔 PDF / 사진 → OCR: ANTHROPIC_API_KEY 있으면 Claude 비전(권장), 없으면 Tesseract(kor 언어팩 필요)
 - txt → 그대로
 

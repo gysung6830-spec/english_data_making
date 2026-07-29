@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import List
 
 try:
+    from .hwp import HWP_EXTS, extract_hwp_text
     from .ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from .parser import Passage, split_passages
     from .pdfparse import pdf_to_passages
@@ -21,6 +22,7 @@ try:
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
+    from hwp import HWP_EXTS, extract_hwp_text
     from ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from parser import Passage, split_passages
     from pdfparse import pdf_to_passages
@@ -107,6 +109,9 @@ def extract_passages(path, api_key: str = None) -> List[Passage]:
 
     if suffix == ".txt":
         return split_passages(p.read_text(encoding="utf-8", errors="replace"))
+
+    if suffix in HWP_EXTS:
+        return split_passages(extract_hwp_text(p))
 
     if suffix in IMAGE_EXTS:
         return split_passages(ocr_file(p, api_key=api_key))

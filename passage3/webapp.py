@@ -30,7 +30,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("APP_SECRET", "passage3-dev-secret")
 app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB
 
-ALLOWED = {".pdf", ".txt", ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
+ALLOWED = {".pdf", ".txt", ".hwp", ".hwpx",
+           ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
 
 # 형식 표시 순서/이름
 FORMAT_ORDER = [
@@ -77,7 +78,7 @@ PAGE = """
 </head>
 <body>
   <h1>영어 지문 → 3형식 PDF 생성기</h1>
-  <p class="sub">지문 파일(PDF·이미지·txt)을 올리면 한줄해석 · 한줄영어 · 좌지문우해석 PDF를 만들어 드립니다.</p>
+  <p class="sub">지문 파일(PDF·HWP·이미지·txt)을 올리면 한줄해석 · 한줄영어 · 좌지문우해석 PDF를 만들어 드립니다.</p>
 
   {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -89,8 +90,8 @@ PAGE = """
     <div class="card">
       <label class="field" for="file">1. 지문 파일</label>
       <input type="file" id="file" name="file"
-             accept=".pdf,.txt,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
-      <div class="hint">PDF · 사진(JPG/PNG 등) · txt 지원. 스캔/사진은 자동 OCR.</div>
+             accept=".pdf,.txt,.hwp,.hwpx,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
+      <div class="hint">PDF · HWP(한글) · 사진(JPG/PNG 등) · txt 지원. 스캔/사진은 자동 OCR.</div>
     </div>
 
     <div class="card">
@@ -174,7 +175,7 @@ def generate():
         flash("지문 파일을 선택하세요.")
         return redirect(url_for("index"))
     if not _ext_ok(file.filename):
-        flash("지원하지 않는 파일 형식입니다. (PDF·이미지·txt)")
+        flash("지원하지 않는 파일 형식입니다. (PDF·HWP·이미지·txt)")
         return redirect(url_for("index"))
     if not formats:
         flash("출력 형식을 하나 이상 선택하세요.")
