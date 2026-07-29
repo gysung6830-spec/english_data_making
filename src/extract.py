@@ -229,3 +229,32 @@ def looks_empty(text: str) -> bool:
     """텍스트가 사실상 비어있는지(스캔본/추출 실패) 판단."""
     letters = re.sub(r"[^A-Za-z]", "", text)
     return len(letters) < 40
+
+
+# ---------------------------------------------------------------------------
+# PDF -> 페이지 이미지 (텍스트 레이어가 깨졌을 때 비전으로 재추출하기 위한 렌더)
+# ---------------------------------------------------------------------------
+def pdf_to_images(pdf_path: str | Path, out_dir: str | Path,
+                  scale: float = 2.0, max_pages: int = 12) -> list[Path]:
+    """PDF 각 페이지를 PNG 로 렌더링해 경로 목록을 돌려준다.
+
+    폰트 subset·2단·스캔 등으로 텍스트 추출이 깨진 PDF를, 화면에 '보이는 그대로'
+    비전(이미지) 경로로 다시 읽기 위한 준비 단계. pypdfium2 를 사용한다.
+    """
+    import pypdfium2 as pdfium
+
+    pdf_path = Path(pdf_path)
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths: list[Path] = []
+    pdf = pdfium.PdfDocument(str(pdf_path))
+    try:
+        n = min(len(pdf), max_pages)
+        for i in range(n):
+            img = pdf[i].render(scale=scale).to_pil()
+            p = out_dir / f"{pdf_path.stem}_p{i + 1}.png"
+            img.save(str(p))
+            paths.append(p)
+    finally:
+        pdf.close()
+    return paths

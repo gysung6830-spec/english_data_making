@@ -35,6 +35,22 @@ def _orphan_punct(text: str) -> bool:
     return bool(re.search(r"\s[.,;:]", text)) or text.strip() in {".", ",", "!", "?"}
 
 
+def raw_text_fragmented(raw_text: str) -> bool:
+    """추출된 '원문 텍스트'가 조각나(문장 앞부분 잘림) 보이는지 사전 판단.
+
+    LLM 지문 추출을 부르기 전에, 비전(PDF→이미지) 재추출로 전환할지 결정하는 데 쓴다.
+    정식 분할기(splitter)는 마침표 뒤 '대문자'가 있어야 끊으므로, 소문자로 시작하는
+    조각은 한 덩어리로 뭉쳐 감지되지 않는다. 여기서는 감지 전용으로 마침표+공백을
+    느슨하게 끊어 '소문자로 시작하는 문장' 비율만 본다.
+    """
+    pieces = re.split(r"(?<=[.!?])\s+", (raw_text or "").strip())
+    sents = [p for p in pieces if len(_ALPHA.findall(p)) >= 3]
+    if len(sents) < 3:
+        return False
+    lower = sum(1 for s in sents if _starts_lowercase(s))
+    return lower >= 2 and lower / len(sents) >= 0.4
+
+
 def fragment_warning(analyses) -> str | None:
     """여러 Analysis 를 훑어 조각남이 의심되면 사용자용 경고 문구를 반환.
 

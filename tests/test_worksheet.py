@@ -440,6 +440,58 @@ def test_fragment_quality_guard():
     print("PASS  조각난 추출 감지(품질 경고)")
 
 
+def test_raw_text_fragmented():
+    from src.worksheet import quality
+    ok = "Conservation keeps things. Restoration changes them. Experts protect items."
+    assert quality.raw_text_fragmented(ok) is False
+    frag = ("its present state, to protect it. restorative aspects, restoring things. "
+            "as protectors. use, rather than interfering.")
+    assert quality.raw_text_fragmented(frag) is True
+    print("PASS  원문 조각남 사전 감지(비전 전환 판단)")
+
+
+def test_vision_fallback_pdf():
+    import tempfile
+    import types as _t
+    from pathlib import Path
+
+    from pypdf import PdfWriter
+
+    from src import extract
+    from src.schemas import Extraction, PassageSet
+    from src.worksheet import pipeline
+
+    def _blank_pdf(path):
+        w = PdfWriter()
+        w.add_blank_page(width=420, height=595)
+        with open(path, "wb") as fh:
+            w.write(fh)
+
+    with tempfile.TemporaryDirectory() as d:
+        pdf = Path(d) / "blank.pdf"
+        _blank_pdf(pdf)
+        # (1) pdf_to_images: 페이지 수만큼 PNG 생성
+        imgs = extract.pdf_to_images(pdf, Path(d) / "imgs")
+        assert len(imgs) == 1 and imgs[0].exists()
+
+    # (2) 비전 폴백: 가짜 client 가 온전한 지문을 돌려주면 병합해 반환
+    fake_ps = PassageSet(passages=[Extraction(title="T", paragraphs=[
+        "Conservation keeps an object safe. Restoration returns it to an earlier state."])])
+
+    class _C:
+        def structured(self, **k):
+            return fake_ps
+
+    cfg = _t.SimpleNamespace(processing=_t.SimpleNamespace(max_retries=1))
+    with tempfile.TemporaryDirectory() as d:
+        pdf = Path(d) / "b.pdf"
+        _blank_pdf(pdf)
+        out = pipeline._extract_via_vision_pdf(_C(), cfg, pdf)
+    assert out is not None and out.passages
+    assert "Conservation" in out.passages[0].body
+    print("PASS  PDF 텍스트 깨짐 → 비전(이미지) 재추출 폴백")
+
+
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
@@ -466,6 +518,8 @@ def run_all():
     test_webapp_worksheet_flow()
     test_hwp_support()
     test_fragment_quality_guard()
+    test_raw_text_fragmented()
+    test_vision_fallback_pdf()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 
 

@@ -117,19 +117,28 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     layout='B' 면 뒷페이지 대신 직독직해(청크·핵심 문법·핵심 단어)를 생성한다.
     """
     from .. import analyze, extract  # 지연 임포트(pdfplumber/anthropic 무거움)
+    from . import quality
 
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
         raw = extract.extract_passage_text_any(src)   # PDF · HWP · HWPX
-        if extract.looks_empty(raw):
-            hint = ("한글(HWP) 문서에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 들어 있으면 "
-                    "그 부분을 사진(JPG/PNG)으로 저장해 넣어 주세요."
-                    if extract.is_hwp(src) else
-                    "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                    "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
-            raise ValueError(hint)
-        pset = analyze.extract_passages(client, cfg, raw)
+        empty = extract.looks_empty(raw)
+        # 텍스트 레이어가 비었/조각났고 PDF 면, 페이지를 이미지로 렌더해 비전으로 재추출.
+        # (폰트 subset·2단·스캔 등으로 문장 앞부분이 잘려 들어오는 경우 대응)
+        pset = None
+        if client is not None and src.suffix.lower() == ".pdf" \
+                and (empty or quality.raw_text_fragmented(raw)):
+            pset = _extract_via_vision_pdf(client, cfg, src)
+        if pset is None:
+            if empty:
+                hint = ("한글(HWP) 문서에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 들어 있으면 "
+                        "그 부분을 사진(JPG/PNG)으로 저장해 넣어 주세요."
+                        if extract.is_hwp(src) else
+                        "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                        "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
+                raise ValueError(hint)
+            pset = analyze.extract_passages(client, cfg, raw)
 
     is_b = layout.upper() == "B"
     total = len(pset.passages)
@@ -139,6 +148,40 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
         out.append(analyze_text(client, ex.body, h, max_retries=max_retries,
                                 with_back=not is_b, with_literal=is_b))
     return out
+
+
+def _extract_via_vision_pdf(client: "ClaudeClient", cfg: "Config", src: Path):
+    """PDF 텍스트가 깨졌을 때: 각 페이지를 이미지로 렌더해 비전으로 지문 재추출.
+
+    실패(렌더 불가·비전 실패·지문 없음)하면 None 을 돌려주어 텍스트 경로로 되돌아간다.
+    화면에 '보이는 그대로' 읽으므로 폰트 subset/2단/스캔 PDF 에 강하다.
+    """
+    import tempfile
+
+    from .. import analyze, extract
+    from ..schemas import PassageSet
+
+    tmpdir = tempfile.mkdtemp(prefix="wsvision_")
+    imgs: list[Path] = []
+    try:
+        imgs = extract.pdf_to_images(src, tmpdir)
+    except Exception:
+        return None
+    all_passages = []
+    for img in imgs:
+        try:
+            ps = analyze.extract_passages_image(client, cfg, str(img))
+            all_passages.extend(ps.passages)
+        except Exception:
+            continue          # 지문 없는 페이지 등은 건너뜀
+    for img in imgs:
+        try:
+            img.unlink()
+        except OSError:
+            pass
+    if not all_passages:
+        return None
+    return PassageSet(passages=all_passages)
 
 
 def mock_analyses_for_file(src: Path, header: Header) -> list[Analysis]:
