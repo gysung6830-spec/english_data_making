@@ -116,20 +116,49 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     return recs
 
 
+_PASSAGE_MARK = re.compile(r"^\s*(?:passage|지문)\s*\d+", re.IGNORECASE)
+_SEP_LINE = re.compile(r"^\s*[-=─—*]{3,}\s*$")
+
+
+def _mock_titles(pdf: Path) -> list[str]:
+    """목 모드에서 파일 안의 '지문 개수'를 추정해 제목 목록을 만든다.
+
+    실제 지문 분리는 API 추출이 하지만, 미리보기(목)에서도 복수 지문 결과를
+    확인할 수 있도록 'Passage/지문 N' 마커 또는 구분선(===)이 있으면 그 수만큼
+    지문을 만든다. 마커가 없으면 지문 1개로 본다(일반 여러 문단 지문 과분할 방지).
+    """
+    base = _safe_stem(pdf)
+    if extract.is_image(pdf):
+        return [base]
+    try:
+        raw = extract.extract_passage_text(pdf)
+    except Exception:
+        return [base]
+    lines = raw.splitlines()
+
+    # 1) 명시적 'Passage N' / '지문 N' 헤딩
+    marks = [ln.strip() for ln in lines if _PASSAGE_MARK.match(ln)]
+    if len(marks) >= 2:
+        return [m[:80] for m in marks[:6]]
+
+    # 2) 구분선(===, ---, *** 등)으로 나뉜 덩어리
+    if any(_SEP_LINE.match(ln) for ln in lines):
+        blocks = [b.strip() for b in re.split(r"(?m)^\s*[-=─—*]{3,}\s*$", raw) if b.strip()]
+        if len(blocks) >= 2:
+            titles = []
+            for i, b in enumerate(blocks[:6]):
+                first = next((l.strip() for l in b.splitlines() if l.strip()), "")
+                titles.append(first[:80] if first else f"{base} — 지문 {i + 1}")
+            return titles
+
+    return [base]
+
+
 def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
-    """목 모드: 실제 API 없이 샘플 Report(들)를 반환."""
+    """목 모드: 실제 API 없이 샘플 Report(들)를 반환(감지된 지문 수만큼)."""
     from samples.sample_mock import mock_report
 
-    title = _safe_stem(pdf)
-    if not extract.is_image(pdf):
-        try:
-            raw = extract.extract_passage_text(pdf)
-            first = next((ln.strip() for ln in raw.splitlines() if ln.strip()), "")
-            if first and len(first) < 80:
-                title = first
-        except Exception:
-            pass
-    return [mock_report(title=title, source=f"{pdf.name}")]
+    return [mock_report(title=t, source=f"{pdf.name}") for t in _mock_titles(pdf)]
 
 
 def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
@@ -137,11 +166,10 @@ def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
 
 
 def _mock_worksheets_for_pdf(cfg: Config, pdf: Path) -> list[Worksheet]:
-    """목 모드: 실제 API 없이 샘플 Worksheet(들)를 반환."""
+    """목 모드: 실제 API 없이 샘플 Worksheet(들)를 반환(감지된 지문 수만큼)."""
     from samples.sample_mock import mock_worksheet
 
-    title = _safe_stem(pdf)
-    return [mock_worksheet(title=title, source=f"{pdf.name}")]
+    return [mock_worksheet(title=t, source=f"{pdf.name}") for t in _mock_titles(pdf)]
 
 
 def run_folder(cfg: Config, mock: bool = False) -> dict:

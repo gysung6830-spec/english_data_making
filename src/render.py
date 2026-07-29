@@ -14,6 +14,24 @@ from . import schemas
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
 
+# @font-face(나눔스퀘어라운드)를 실제로 임베드하려면 FontConfiguration 이 필요하다.
+_FONT_CONFIG = None
+
+
+def _font_config():
+    """WeasyPrint 용 FontConfiguration 싱글턴(지연 생성)."""
+    global _FONT_CONFIG
+    if _FONT_CONFIG is None:
+        from weasyprint.text.fonts import FontConfiguration
+        _FONT_CONFIG = FontConfiguration()
+    return _FONT_CONFIG
+
+
+def _stylesheet():
+    """styles.css 를 FontConfiguration 과 함께 로드한 CSS 객체 반환."""
+    from weasyprint import CSS
+    return CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_font_config())
+
 _env = Environment(
     loader=FileSystemLoader(str(TEMPLATE_DIR)),
     autoescape=select_autoescape(["html", "xml", "j2"]),
@@ -224,7 +242,8 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
 
     def pages(rep):
         html = render_html([rep], footer_note, brand)
-        return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
+        return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(
+            stylesheets=[css], font_config=_font_config()).pages)
 
     if pages(report) <= 2:
         return report
@@ -258,16 +277,17 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
                fit_pages: bool = True, min_vocab: int = 8,
                brand: str = "은아 T") -> Path:
-    from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
+    from weasyprint import HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    css = _stylesheet()
     rlist = _as_list(reports)
 
     def build(rs):
         html = render_html(rs, footer_note, brand)
-        return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
+        return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(
+            stylesheets=[css], font_config=_font_config())
 
     doc = build(rlist)
     # 지문 1개당 2페이지(1p: 요약~어휘, 2p: 직독직해)를 넘기면 어휘를 줄여 다시 렌더
@@ -337,8 +357,9 @@ def render_wordlist_pdf(reports, out_path: str | Path,
                          "words": words, "rows": _pair_rows(words)})
     tmpl = _env.get_template("wordlist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    css = _stylesheet()
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
+        str(out_path), stylesheets=[css], font_config=_font_config())
     return out_path
 
 
@@ -363,8 +384,9 @@ def render_quiz_pdf(reports, out_path: str | Path,
                          "words": shuffled, "rows": _pair_rows(shuffled)})
     tmpl = _env.get_template("quiz.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    css = _stylesheet()
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
+        str(out_path), stylesheets=[css], font_config=_font_config())
     return out_path
 
 
@@ -469,24 +491,81 @@ def _ws_context(worksheets) -> list[dict]:
     return passages
 
 
-# 유형별 '출제 원리' — 각 유형 시작 페이지에 안내로 표시(정적 설명)
+# 유형별 '출제 원리' — 각 유형 시작 페이지에 상세 안내로 표시(정적 설명).
+#   각 항목 = (소제목, 설명) 목록.
 WS_PRINCIPLES = {
-    1: ("지문의 핵심 정보를 한 문장으로 압축한 요약문에서 내용 이해의 열쇠가 되는 단어를 "
-        "빈칸으로 만든다. 정답은 반드시 원문에 등장하는 단어(필요시 어형 변화)로, "
-        "내용 이해와 함께 어휘·어법·철자를 정확히 아는지 평가한다."),
-    2: ("지문의 한 문장을 동의어·구조 변환으로 바꾼 정답 1개와, 반의어·주객 전도·부정/조건 "
-        "왜곡으로 의미를 비튼 오답 4개를 섞는다. 표면적 단어가 아니라 문장 전체의 의미 일치를 "
-        "판단하게 하여 변형 지문에 대비시킨다."),
-    3: ("글의 요지와 제목을 영어로 직접 쓰게 하되, 정답 문장을 이루는 단어를 모두 제시하고 "
-        "어순만 배열하게 한다. 핵심 내용 파악과 함께 주어-동사 구조, 어순 감각을 평가한다."),
-    4: ("지문의 핵심 문장을 우리말로 제시하고, 그 문장에 실제로 쓰인 어법(관계사·분사·비교 등)을 "
-        "조건으로 걸어 영작하게 한다. 지정된 단어 수와 어법 조건을 동시에 충족해야 하므로 "
-        "정밀한 문장 구성 능력을 평가한다."),
-    5: ("하나의 보기(5개)로 여러 빈칸을 채우게 하고, 어디에도 들어갈 수 없는 낱말 1개를 고르게 "
-        "한다. 각 빈칸의 문맥·연어·품사를 종합적으로 판단해야 하므로 어휘력과 문맥 이해를 함께 "
-        "평가한다."),
-    6: ("지문 문장에 어법상 틀린 부분을 한 곳만 심어 두고 찾아 고치게 한다. 수일치·시제·태·"
-        "준동사·관계사 등 내신 빈출 어법을 실제 문장 맥락에서 점검한다."),
+    1: [
+        ("출제 의도", "지문 전체를 관통하는 핵심 정보를 한 문장으로 압축·재진술(paraphrase)한 "
+                    "요약문을 제시하고, 내용 이해의 열쇠가 되는 단어를 빈칸으로 비워 둔다. "
+                    "'내용 파악 + 어휘·어법·철자 정확도'를 동시에 측정한다."),
+        ("문항 구성", "요약문은 원문 문장을 그대로 베끼지 않고 동의어·구문 변형으로 다시 쓴다. "
+                    "한 문항에 빈칸 2개(A·B)를 두며, 정답은 반드시 지문 본문에 등장한 단어를 쓰되 "
+                    "문맥에 맞게 어형(수·시제·품사)을 바꾸도록 설계한다."),
+        ("함정·채점", "동의어를 써도 '원문에 실제로 있는 단어'가 아니면 오답 처리한다. "
+                    "철자·어형 변화(예: nation→national, decide→decision)까지 정확해야 득점되므로 "
+                    "부분 점수 기준을 미리 정해 둔다."),
+        ("대비 포인트", "지문을 읽으며 주제문·핵심어를 표시하고, 요약문의 빈칸 앞뒤 품사·연어를 단서로 "
+                    "정답 단어를 원문에서 되짚는 훈련을 반복한다."),
+    ],
+    2: [
+        ("출제 의도", "지문의 한 문장을 여러 방식으로 변형(paraphrasing)한 뒤, 원문과 의미가 "
+                    "'일치하는' 선지를 고르게 한다. 단어 표면이 아니라 문장 전체의 의미 관계를 "
+                    "이해했는지 평가하며, 지문 변형이 잦은 학교 시험에 대비시킨다."),
+        ("문항 구성", "정답 1개는 동의어 치환·태 변환·구문 재배열로 의미를 '보존'한다. "
+                    "오답 4개는 반의어, 주객(주어-목적어) 전도, 부정/조건 왜곡, 과장·축소 등으로 "
+                    "의미를 미세하게 비튼다. 선지 길이는 서로 비슷하게 맞춘다."),
+        ("함정·채점", "가장 흔한 함정은 '핵심 단어가 그대로 보이는' 오답이다. 겹치는 단어에 현혹되지 "
+                    "말고 인과·주체·정도의 방향이 원문과 같은지를 기준으로 판정한다."),
+        ("대비 포인트", "동의어·반의어 세트를 정리하고, 능동↔수동·비교 구문의 의미 보존/왜곡 패턴을 "
+                    "손으로 바꿔 써 보며 익힌다."),
+    ],
+    3: [
+        ("출제 의도", "글의 요지와 제목을 영어로 직접 산출하게 하되, 정답 문장을 이루는 단어를 모두 "
+                    "'보기'로 제공하고 어순만 배열하게 한다. 핵심 내용 파악과 어순·문장 구조 감각을 "
+                    "함께 평가한다."),
+        ("문항 구성", "요지는 완결된 문장, 제목은 명사구 형태로 낸다. 보기에는 관사·전치사 등 기능어까지 "
+                    "포함하고, 학생이 어형을 바꿔야 하는 단어는 원형으로 준다. 제시된 단어 수를 함께 "
+                    "명시해 답의 길이를 고정한다."),
+        ("함정·채점", "보기 단어를 '모두, 한 번씩' 사용해야 하며 임의로 단어를 추가·생략하면 감점한다. "
+                    "주어-동사 위치, 수식어구의 순서가 핵심 채점 포인트다."),
+        ("대비 포인트", "요지=주제문 재진술, 제목=주제의 압축이라는 차이를 구분하고, 뼈대(주어+동사)를 "
+                    "먼저 세운 뒤 수식어를 붙이는 순서로 배열하는 연습을 한다."),
+    ],
+    4: [
+        ("출제 의도", "지문의 핵심 문장을 우리말로 제시하고, 그 문장에 실제로 쓰인 어법을 '조건'으로 "
+                    "걸어 영작하게 한다. 단어 수와 어법 조건을 동시에 충족해야 하므로 정밀한 문장 "
+                    "구성 능력을 평가한다."),
+        ("문항 구성", "조건에는 관계사·분사구문·비교구문·가정법·도치 등 그 문장에서 실제로 쓰인 어법을 "
+                    "제시한다. 반드시 써야 할 핵심 단어는 원형으로 주고, 어형 변화는 학생 몫으로 남긴다. "
+                    "정답은 지문 원문 문장과 일치시키는 것을 원칙으로 한다."),
+        ("함정·채점", "의미가 맞아도 지정된 어법(예: 관계대명사 who)을 쓰지 않으면 감점한다. "
+                    "단어 수 초과·미달, 시제·수일치 오류도 감점 요소이므로 조건별 배점을 나눠 채점한다."),
+        ("대비 포인트", "어법 조건을 '뼈대'로 삼아 먼저 구조를 잡고 단어를 채우는 훈련을 하고, "
+                    "빈출 어법(관계사·분사·비교)의 정형화된 문형을 암기한다."),
+    ],
+    5: [
+        ("출제 의도", "하나의 보기(5개)로 여러 문장의 빈칸을 채우게 한 뒤, 어디에도 들어갈 수 없어 "
+                    "'사용되지 않는' 낱말 1개를 고르게 한다. 개별 단어 뜻을 넘어 문맥·연어·품사를 "
+                    "종합 판단하는 어휘력을 평가한다."),
+        ("문항 구성", "보기는 서로 헷갈릴 만한(같은 주제·품사 계열의) 고난도 단어로 구성한다. "
+                    "각 문장은 보기 중 '딱 한 단어'만 자연스럽게 들어가도록 설계하고, 4개 문장에 4개가 "
+                    "쓰이며 1개만 남게 만든다."),
+        ("함정·채점", "남는 단어는 대개 뜻은 비슷하나 연어·품사·어법이 맞지 않는 단어다. 문장마다 "
+                    "빈칸에 들어갈 단어를 확정한 뒤 소거법으로 남는 하나를 고르도록 유도한다."),
+        ("대비 포인트", "단어를 뜻만 외우지 말고 자주 함께 쓰이는 연어(collocation)와 품사·문형까지 "
+                    "묶어 익히며, 빈칸의 앞뒤 구조로 품사를 먼저 판단하는 습관을 들인다."),
+    ],
+    6: [
+        ("출제 의도", "지문 문장에 어법상 틀린 부분을 한 곳만 심어 두고 찾아 고치게 한다. "
+                    "내신 빈출 어법을 실제 문장 맥락에서 스스로 진단·수정하는 능력을 평가한다."),
+        ("문항 구성", "오류는 수일치, 시제, 태(수동/능동), 관계사, 준동사(to부정사/동명사/분사), 병렬, "
+                    "형용사↔부사 혼동 등 빈출 포인트에서 낸다. 한 문장에 명확한 오류를 '하나만' 둔다."),
+        ("함정·채점", "정답은 원래 지문의 올바른 표현과 일치해야 하며, 틀린 부분을 '찾기'와 '바르게 "
+                    "고치기'를 모두 요구한다. 어색하지만 어법상 맞는 표현을 오답으로 지목하지 않도록 "
+                    "명확한 오류만 출제한다."),
+        ("대비 포인트", "동사를 보면 주어와의 수·시제·태를, 명사구를 보면 관계사·준동사를 점검하는 "
+                    "체크리스트를 만들어 문장을 스캔하는 훈련을 한다."),
+    ],
 }
 
 
@@ -507,8 +586,9 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
     tmpl = _env.get_template("worksheet.html.j2")
     html = tmpl.render(title=title, passages=passages, principles=WS_PRINCIPLES,
                        footer_note=footer_note, brand=brand)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    css = _stylesheet()
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
+        str(out_path), stylesheets=[css], font_config=_font_config())
     return out_path
 
 

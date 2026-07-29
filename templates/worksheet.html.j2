@@ -11,7 +11,14 @@
     <span class="t-instr">{{ instr }}</span>
   </div>
   {% if principles and principles[n] %}
-  <div class="t-principle"><span class="tp-lb">출제 원리</span>{{ principles[n] }}</div>
+  <div class="t-principle">
+    <div class="tp-head"><span class="tp-lb">출제 원리</span></div>
+    <ul class="tp-list">
+      {% for label, text in principles[n] %}
+      <li><span class="tp-key">{{ label }}</span>{{ text }}</li>
+      {% endfor %}
+    </ul>
+  </div>
   {% endif %}
 {% endmacro %}
 

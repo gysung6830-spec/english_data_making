@@ -43,9 +43,15 @@ ALLOWED = {".pdf"} | extract.IMAGE_EXTS
 # HTML 템플릿 (한 파일로 관리)
 # ---------------------------------------------------------------------------
 BASE_CSS = """
-  :root{--ink:#23272e;--accent:#1d4ed8;--green:#15803d;--muted:#6b7280;--line:#e5e7eb;}
+  @font-face{font-family:'NanumSquareRound';font-weight:400;
+    src:url('/fonts/NanumSquareRoundR.woff2') format('woff2');}
+  @font-face{font-family:'NanumSquareRound';font-weight:700;
+    src:url('/fonts/NanumSquareRoundB.woff2') format('woff2');}
+  @font-face{font-family:'NanumSquareRound';font-weight:800;
+    src:url('/fonts/NanumSquareRoundEB.woff2') format('woff2');}
+  :root{--ink:#23272e;--accent:#0e7c74;--green:#15803d;--muted:#6b7280;--line:#e5e7eb;}
   *{box-sizing:border-box;}
-  body{font-family:'Nanum Gothic','NanumGothic',system-ui,sans-serif;color:var(--ink);
+  body{font-family:'NanumSquareRound','Nanum Gothic','NanumGothic',system-ui,sans-serif;color:var(--ink);
        background:#f6f7f9;margin:0;padding:24px;line-height:1.55;}
   .wrap{max-width:720px;margin:0 auto;}
   .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;
@@ -203,7 +209,7 @@ LOGIN_HTML = """
 def _auth_gate():
     if not APP_PASSWORD:
         return  # 비밀번호 미설정 → 잠금 없음(내 컴퓨터 로컬 사용용)
-    if request.endpoint in ("login", "static"):
+    if request.endpoint in ("login", "static", "fonts"):
         return
     if session.get("auth"):
         return
@@ -313,6 +319,18 @@ def _safe_output(fname: str) -> Path:
     if not str(p).startswith(str(OUTPUT_DIR.resolve())) or not p.is_file():
         abort(404)
     return p
+
+
+FONT_DIR = ROOT / "templates" / "fonts"
+
+
+@app.route("/fonts/<path:fname>")
+def fonts(fname):
+    """웹 UI 용 나눔스퀘어라운드 웹폰트 제공."""
+    p = (FONT_DIR / fname).resolve()
+    if not str(p).startswith(str(FONT_DIR.resolve())) or not p.is_file():
+        abort(404)
+    return send_from_directory(FONT_DIR, fname)
 
 
 @app.route("/download/<path:fname>")
