@@ -48,30 +48,24 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
     raise RuntimeError(f"'{t}' 유형 생성 실패: {last_err}")
 
 
-def resolve_vocab_method(method: str, passage_index: int = 0) -> str:
-    """'mix'(혼합)면 지문 순서대로 반의어/부정어를 번갈아 쓴다(짝수=반의어, 홀수=부정어)."""
-    if method == "mix":
-        return "synonym" if passage_index % 2 == 0 else "negation"
-    return method
-
-
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
-                  logger=None, vocab_method: str = "mix",
+                  logger=None, vocab_method: str = "synonym",
                   content_difficulty: str = "hard", analysis=None,
-                  level: str | None = None, passage_index: int = 0) -> Passage:
+                  level: str | None = None) -> Passage:
     """지문 원문 1개 -> 7종 문제/해설이 채워진 Passage.
 
     유형 7종은 서로 독립이므로 스레드로 동시에 생성한다(속도).
     analysis 를 주면 분석 호출을 건너뛴다(1회·2회 교차 공유용).
-    level(상/중/하)을 주면 모든 유형의 난이도를 함께 조절한다.
-    vocab_method='mix' 면 지문 순서(passage_index)에 따라 어휘 방식을 자동으로 섞는다.
+    level(상/중/하)을 주면 난이도와 함께 어휘 방식도 자동 결정한다
+    (상=부정어삽입 · 중=유의어 · 하=원문단어).
     """
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
+    vm = vocab_method
     if level:  # 난이도 지침을 분석 결과에 심어 모든 생성기에 공통 전달(병렬 팬아웃 전 단일 스레드)
         analysis.difficulty_note = difficulty.clause(level)
         content_difficulty = difficulty.content_difficulty(level)
-    vm = resolve_vocab_method(vocab_method, passage_index)
+        vm = difficulty.vocab_method(level)   # 어휘 방식도 난이도에 연동
     passage = Passage(title=analysis.title)
 
     def _task(t):
@@ -116,7 +110,7 @@ def build_exam(
     header_note: str = "",
     max_retries: int = 1,
     logger=None,
-    vocab_method: str = "mix",
+    vocab_method: str = "synonym",
     content_difficulty: str = "hard",
     analyses: list | None = None,
     level: str | None = None,
@@ -138,8 +132,7 @@ def build_exam(
         passages.append(build_passage(client, body, max_retries=max_retries,
                                        logger=logger, vocab_method=vocab_method,
                                        content_difficulty=content_difficulty,
-                                       analysis=analysis, level=level,
-                                       passage_index=i - 1))
+                                       analysis=analysis, level=level))
 
     # 결과물 단계 검증(번호 연속 · 7종 완비)
     validator.validate_passages(passages)

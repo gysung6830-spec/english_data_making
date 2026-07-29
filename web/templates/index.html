@@ -44,20 +44,13 @@ Second passage goes here."></textarea>
 
   <div class="row">
     <label class="field">
-      <span class="label">어휘 문제 방식</span>
-      <select name="vocab_method">
-        <option value="mix" selected>혼합 (자동 — 지문마다 번갈아)</option>
-        <option value="synonym">반의어형 (정답=반의어, 나머지=유의어)</option>
-        <option value="negation">부정어 삽입형 (원문 그대로 + 정답 문장에 not/no)</option>
-      </select>
-    </label>
-    <label class="field">
-      <span class="label">난이도 (1회·2회 모든 유형 공통)</span>
+      <span class="label">난이도 (1회·2회 모든 유형 공통 · 어휘 방식도 자동 연동)</span>
       <select name="level">
-        <option value="상">상 — 매력적인 함정 오답·강한 패러프레이즈(정답은 하나로 확정)</option>
-        <option value="중" selected>중 — 수능 표준(그럴듯한 오답 1~2 + 명확한 오답)</option>
-        <option value="하">하 — 오답이 분명히 어긋남·단서 뚜렷(평이)</option>
+        <option value="상">상 — 매력적인 함정 오답·강한 패러프레이즈 · 어휘=부정어 삽입형</option>
+        <option value="중" selected>중 — 수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형</option>
+        <option value="하">하 — 오답이 분명히 어긋남·단서 뚜렷(평이) · 어휘=원문 단어형</option>
       </select>
+      <span class="hint">어휘 문제 방식은 난이도에 따라 자동 결정됩니다(상=부정어삽입 · 중=유의어 · 하=원문단어).</span>
     </label>
   </div>
 

@@ -33,6 +33,9 @@ _CLAUSES = {
 # 내용일치(content) 유형의 기존 2단계 프롬프트와 매핑
 _CONTENT = {LOW: "plain", MID: "hard", HIGH: "hard"}
 
+# 어휘(vocab) 방식도 난이도에 연동: 상=부정어삽입, 중=유의어, 하=원문단어
+_VOCAB = {LOW: "original", MID: "synonym", HIGH: "negation"}
+
 
 def normalize(level: str | None) -> str:
     """알 수 없는 값은 '중'으로."""
@@ -47,3 +50,8 @@ def clause(level: str | None) -> str:
 def content_difficulty(level: str | None) -> str:
     """내용일치 유형용 plain/hard 매핑."""
     return _CONTENT[normalize(level)]
+
+
+def vocab_method(level: str | None) -> str:
+    """어휘 방식 매핑: 상=부정어삽입(negation), 중=유의어(synonym), 하=원문단어(original)."""
+    return _VOCAB[normalize(level)]

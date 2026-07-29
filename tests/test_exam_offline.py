@@ -316,17 +316,18 @@ def test_llm_path_wiring() -> None:
     passage = pipeline.build_passage(_FakeClient(), "dummy body")
     assert passage.types == set(TYPE_ORDER)
     validator.check_passage(passage)
-    # 부정어 방식도 배선되는지
-    passage2 = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method="negation")
-    validator.check_passage(passage2)
-    # 혼합(자동): 지문 순서대로 반의어/부정어 번갈아
-    assert pipeline.resolve_vocab_method("mix", 0) == "synonym"
-    assert pipeline.resolve_vocab_method("mix", 1) == "negation"
-    assert pipeline.resolve_vocab_method("mix", 2) == "synonym"
-    assert pipeline.resolve_vocab_method("negation", 5) == "negation"
-    passage3 = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method="mix",
-                                      passage_index=1)
-    validator.check_passage(passage3)
+    # 부정어·원문단어 방식도 배선되는지
+    for m in ("negation", "original"):
+        p = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method=m)
+        validator.check_passage(p)
+    # 어휘 방식은 난이도에 연동: 상=부정어 · 중=유의어 · 하=원문단어
+    from exam import difficulty
+    assert difficulty.vocab_method("상") == "negation"
+    assert difficulty.vocab_method("중") == "synonym"
+    assert difficulty.vocab_method("하") == "original"
+    for lv in ("상", "중", "하"):
+        p = pipeline.build_passage(_FakeClient(), "dummy body", level=lv)
+        validator.check_passage(p)
     html = renderer.render_html([passage])
     assert "정답 및 해설" in html
     print("✓ LLM 경로(생성기→build→검증→조판) 배선 통과")
