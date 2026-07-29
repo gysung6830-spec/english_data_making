@@ -319,6 +319,14 @@ def test_llm_path_wiring() -> None:
     # 부정어 방식도 배선되는지
     passage2 = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method="negation")
     validator.check_passage(passage2)
+    # 혼합(자동): 지문 순서대로 반의어/부정어 번갈아
+    assert pipeline.resolve_vocab_method("mix", 0) == "synonym"
+    assert pipeline.resolve_vocab_method("mix", 1) == "negation"
+    assert pipeline.resolve_vocab_method("mix", 2) == "synonym"
+    assert pipeline.resolve_vocab_method("negation", 5) == "negation"
+    passage3 = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method="mix",
+                                      passage_index=1)
+    validator.check_passage(passage3)
     html = renderer.render_html([passage])
     assert "정답 및 해설" in html
     print("✓ LLM 경로(생성기→build→검증→조판) 배선 통과")

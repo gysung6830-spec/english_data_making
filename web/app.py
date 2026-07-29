@@ -74,6 +74,8 @@ def generate():
     demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
     vocab_method = request.form.get("vocab_method", "synonym")
+    if vocab_method not in ("synonym", "negation", "mix"):
+        vocab_method = "synonym"
     from exam import difficulty as _diff
     level = _diff.normalize(request.form.get("level"))   # 상/중/하 (기본 중)
     content_difficulty = _diff.content_difficulty(level)
