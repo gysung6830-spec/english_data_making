@@ -46,6 +46,19 @@ HEADER_RE = re.compile(
     r"(\[[^\]]*\][^:：\n]*?(\d+)\s*번)\s*[:：]\s*(.*)"
 )
 
+# 대체 헤더:  '31번 2026년 6월 … 고3 …' 처럼 줄이 'N번'으로 시작하는 형식
+#   (EXAM4YOU 워크북 등. 콜론/대괄호 없음)
+HEADER_RE2 = re.compile(r"^\s*(\d{1,3})\s*번\b(.*)$")
+
+# 아라비아 숫자 문장 번호:  줄 시작의 'N. ' (원문자 대신 쓰는 자료)
+_ARABIC_MARK_RE = re.compile(r"(?m)^[ \t]*(\d{1,2})\.[ \t]+")
+
+# 각주 참조:  문장 끝의 '1)' '2)' 같은 위첨자 표기 제거
+_FOOTNOTE_RE = re.compile(r"\s*\d{1,3}\)\s*$")
+
+# 페이지 번호 줄:  '- 14 -', '14' 등
+_PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
+
 # 한글 음절 영역
 _HANGUL_RE = re.compile(r"[가-힣]")
 
@@ -94,6 +107,8 @@ def _split_en_ko(chunk: str) -> Tuple[str, str]:
         line = raw_line.strip()
         if not line:
             continue
+        if _PAGENUM_RE.match(line):
+            continue  # 페이지 번호 줄('- 14 -' 등) 무시
         if _is_korean_line(line):
             if not en_parts:
                 # 아직 영어를 못 잡음 → 같은 줄 혼합 가능성. 분리 시도.
@@ -112,28 +127,38 @@ def _split_en_ko(chunk: str) -> Tuple[str, str]:
     return en.strip(), ko.strip()
 
 
+def _strip_footnote(s: str) -> str:
+    """문장 끝의 각주 참조('...related.1)')를 제거."""
+    return _FOOTNOTE_RE.sub("", s).rstrip()
+
+
 def _parse_sentences(body: str) -> List[Sentence]:
     """지문 본문 → 문장 리스트.
 
-    원문자로 조각을 나눈 뒤 같은 번호는 병합한다.
-    (예: 영어줄 ①… 다음에 한글줄 ①… 이 오면 하나로 합침)
+    문장 번호는 원문자(①②)를 우선 인식하고, 없으면 아라비아 숫자('1.' '2.')
+    를 인식한다. 같은 번호가 두 번 나오면(영어줄 + 한글줄) 하나로 병합한다.
     """
-    # 원문자 위치 수집
-    marks: List[Tuple[int, int]] = []  # (문자열 위치, 번호)
+    # (마커 시작, 본문 시작, 번호)
+    marks: List[Tuple[int, int, int]] = []
     for i, ch in enumerate(body):
         n = circled_to_int(ch)
         if n:
-            marks.append((i, n))
+            marks.append((i, i + 1, n))
+
+    # 원문자가 없으면 아라비아 숫자 문장번호로 대체
+    if not marks:
+        for m in _ARABIC_MARK_RE.finditer(body):
+            marks.append((m.start(), m.end(), int(m.group(1))))
+        marks.sort()
 
     if not marks:
         return []
 
-    # 원문자 앞의 서두(헤더 잔여물 등)는 버린다.
+    # 마커 앞의 서두(헤더/안내문 잔여물)는 버린다.
     chunks: List[Tuple[int, str]] = []
-    for k, (pos, num) in enumerate(marks):
-        start = pos + 1
+    for k, (ms, cs, num) in enumerate(marks):
         end = marks[k + 1][0] if k + 1 < len(marks) else len(body)
-        chunks.append((num, body[start:end]))
+        chunks.append((num, body[cs:end]))
 
     # 번호 순서대로 병합
     merged: "dict[int, List[str]]" = {}
@@ -148,10 +173,32 @@ def _parse_sentences(body: str) -> List[Sentence]:
     for num in order:
         combined = "\n".join(merged[num])
         en, ko = _split_en_ko(combined)
+        en = _strip_footnote(en)
         if not en and not ko:
             continue
         sentences.append(Sentence(num=num, en=en, ko=ko))
     return sentences
+
+
+def _clean_title(s: str) -> str:
+    """제목 문자열 정리(구분자·중복 공백 정돈)."""
+    s = s.replace("┃", " · ").replace("|", " · ")
+    s = " ".join(s.split())
+    return s.strip(" -–—·:：")
+
+
+def _match_header(line: str):
+    """헤더 줄이면 (라벨, 제목) 반환, 아니면 None."""
+    m = HEADER_RE.search(line)
+    if m:
+        return m.group(1).strip(), m.group(3).strip()
+    m = HEADER_RE2.match(line)
+    if m:
+        rest = m.group(2)
+        # 'N번' 뒤에 실제 제목/설명이 있어야 헤더로 인정(문장 오인 방지)
+        if _count_hangul(rest) >= 2 or len(rest.strip()) >= 4:
+            return f"{m.group(1)}번", _clean_title(rest)
+    return None
 
 
 def split_passages(raw: str) -> List[Passage]:
@@ -164,11 +211,9 @@ def split_passages(raw: str) -> List[Passage]:
     # 헤더 줄 위치 찾기
     header_idx: List[Tuple[int, str, str]] = []  # (줄번호, label, title)
     for i, line in enumerate(lines):
-        m = HEADER_RE.search(line)
-        if m:
-            label = m.group(1).strip()
-            title = m.group(3).strip()
-            header_idx.append((i, label, title))
+        hm = _match_header(line)
+        if hm:
+            header_idx.append((i, hm[0], hm[1]))
 
     passages: List[Passage] = []
 
