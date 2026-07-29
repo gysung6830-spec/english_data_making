@@ -271,6 +271,28 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     )
 
     sentences = [s01, s02, s03, s04, s05, s06, s07, s08, s09, s10]
+
+    # 끊어읽기: 직독직해(한글, ' / ' 구분) + 영어 슬래시 경계(토큰 index)
+    _readings = {
+        1: "상상해 보라 / 당신이 세상 최고의 차를 가지고 있고 / 그것을 봉지에 넣는다고 / 스며들지 않는",
+        2: "그것은 / 작용하지 않을 것이다",
+        3: "당신은 그저 만들 수 없을 것이다 / 차 한 잔을",
+        4: "티백이 작용하려면 / 그것은 구멍이 있어야 한다",
+        5: "당신은 해야 한다 / 차와 물이 / 서로 접촉하도록",
+        6: "우리 삶에서도 마찬가지로 / 우리는 살아갈 수도 성장할 수도 없다 / 고립된 채로는",
+        7: "리더는 주의해야 한다 / 벽을 쌓지 않도록 / 자기 주변에 / 사람들이 다가오지 못하게 막는",
+        8: "리더로서 / 당신은 접촉할 수 있어야 한다 / 다른 사람들과",
+        9: "차는 / 섞이도록 의도되었다 / 물과",
+        10: "마찬가지로 / 우리 모두도 설계되었다 / 다른 사람들·팀 / 그리고 더 크게는 사회와 함께 일하도록",
+    }
+    _slashes = {1: [0, 4, 9], 4: [1], 6: [0, 5], 10: [0, 2]}
+    for s in sentences:
+        s.reading_ko = _readings.get(s.index, "")
+        toks = s.tokens
+        for i in _slashes.get(s.index, []):
+            if 0 <= i < len(toks):
+                toks[i].slash = True
+
     _thin_to_strength(sentences, strength)   # 태깅 강도 반영(번호 매기기 전)
     for s in sentences:
         gp = build_grammar_point(s)

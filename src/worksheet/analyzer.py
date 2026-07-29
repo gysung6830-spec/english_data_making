@@ -175,6 +175,11 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- gloss_en / gloss_ko: 직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 문장일 때만, 그 함축 의미를 "
         "쉬운 영어 한 문장(gloss_en)과 한글 한 문장(gloss_ko)으로 '병기'. 아니면 둘 다 빈 문자열.\n"
         "- badge: 서술형 출제 후보면 '서'. (빈출은 뱃지 대신 노란 형광 hl='y' 로 표시)\n"
+        "- 끊어읽기(직독직해): 문장을 의미 단위(끊어 읽는 지점)로 나눕니다.\n"
+        "    · slash: 각 의미 단위의 '마지막 토큰'에 slash=true 를 주어 영어에 끊어읽기 경계(/)를 표시.\n"
+        "    · reading_ko: 그 끊어읽기 순서대로 '직독직해(끊어 읽는 해석)'를 ' / ' 로 이어 씁니다"
+        "(예: '상상해 보라 / 당신이 세상 최고의 차를 가지고 있고 / 그것을 봉지에 넣는다고'). "
+        "translation(온전한 해석)과 달리 어순대로 끊어 읽는 해석입니다.\n"
     )
 
 
@@ -192,6 +197,7 @@ def _tok(spec) -> Token:
         hl=spec.hl or None,
         underline=bool(spec.underline),
         color=spec.color or None,
+        slash=bool(getattr(spec, "slash", False)),
     )
 
 
@@ -203,6 +209,7 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
         index=index,
         lines=lines,
         translation=sa.translation or "",
+        reading_ko=getattr(sa, "reading_ko", "") or "",
         badge=sa.badge or None,
         gloss_en=sa.gloss_en or None,
         gloss_ko=sa.gloss_ko or None,

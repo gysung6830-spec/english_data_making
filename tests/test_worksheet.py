@@ -185,6 +185,18 @@ def test_render_a_and_b():
     print("PASS  렌더러 A/B HTML(직독직해형)")
 
 
+def test_render_reading_and_box():
+    # 끊어읽기: 영어 슬래시(/) + 직독직해(한글) 줄 + 온전한 해석 박스
+    a = mock_analysis()
+    ha = renderer.render_a_html([a])
+    assert 'class="rdko"' in ha and "직독직해" in ha        # 직독직해(끊어읽기) 줄
+    assert 'class="kobox"' in ha and 'class="kblbl"' in ha  # 온전한 해석 박스
+    assert 'class="sl"' in ha                               # 영어 끊어읽기 경계 /
+    # 직독직해 청크가 / 로 나뉘어 렌더되는지
+    assert 'class="rc"' in ha
+    print("PASS  끊어읽기(직독직해) + 온전한 해석 박스")
+
+
 def test_render_guide_cover():
     # 맨 앞 '활용 가이드' 표지: 색·기호 뜻 + 사용법. include_guide 로 토글.
     a = mock_analysis()
@@ -365,6 +377,7 @@ def run_all():
     test_build_points_llm_path()
     test_build_points_fallback_to_rules()
     test_render_a_and_b()
+    test_render_reading_and_box()
     test_render_guide_cover()
     test_render_back_page()
     test_grammar_numbering()

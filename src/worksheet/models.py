@@ -29,6 +29,7 @@ class Token:
     hl: str | None = None              # 'y' | 'g' | None (노랑/연두 하이라이트)
     underline: bool = False            # 밑줄
     color: str | None = None           # 'red' | 'blue' | None (본문 글자색)
+    slash: bool = False                # 이 토큰 뒤에 끊어읽기 경계 '/' 표시
 
     def __post_init__(self) -> None:
         if self.note_kind not in NOTE_KINDS:
@@ -56,7 +57,8 @@ class Sentence:
 
     index: int                                   # 문장 번호(1부터)
     lines: list[list[Token]] = field(default_factory=list)  # 줄바꿈 단위 토큰
-    translation: str = ""                        # 한글 해석
+    translation: str = ""                        # 한글 해석(온전한 해석 = 박스)
+    reading_ko: str = ""                         # 직독직해(끊어읽기) 한글, ' / '로 구분
     badge: str | None = None                     # '빈','서','예시' 등 짧은 뱃지
     gloss_en: str | None = None                  # 함축 의미 영어(떠먹여주는 Point 박스)
     gloss_ko: str | None = None                  # 함축 의미 한글(영어와 병기)

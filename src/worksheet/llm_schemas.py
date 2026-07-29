@@ -24,6 +24,7 @@ class TokenSpec(BaseModel):
     hl: Literal["", "y", "g", "p"] = ""   # 하이라이트: 없음/노랑/연두/라벤더
     underline: bool = False
     color: Literal["", "red", "blue"] = ""
+    slash: bool = False     # 이 토큰 뒤에 끊어읽기 경계 '/' 표시
 
 
 class LineSpec(BaseModel):
@@ -34,7 +35,8 @@ class SentenceAnalysis(BaseModel):
     """한 문장의 태깅 + 해석."""
 
     lines: list[LineSpec] = Field(default_factory=list)
-    translation: str = ""
+    translation: str = ""   # 온전한 해석(자연스러운 한 문장, 박스에 표시)
+    reading_ko: str = ""    # 직독직해(끊어읽기) 한글, 의미 단위를 ' / '로 구분
     badge: str = ""         # '빈'(빈출)·'서'(서술형) 등 짧은 뱃지. 없으면 빈 문자열
     gloss_en: str = ""      # 함축 의미 영어(맥락 없이 안 풀리는 문장에만). 없으면 ""
     gloss_ko: str = ""      # 함축 의미 한글(영어와 병기). 없으면 ""
