@@ -108,9 +108,9 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
 
     if sel.worksheet and worksheets:
-        p = cfg.output_dir / f"{stem}_서술형교재.pdf"
-        render.render_worksheet_pdf(worksheets, p,
-                                    title=f"{title} — 내신 서술형 대비", footer_note=fn, brand=brand)
+        # 파일명 = (입력한 이름)_서술형대비, 제목 = 입력한 이름(=stem) 그대로
+        p = cfg.output_dir / f"{stem}_서술형대비.pdf"
+        render.render_worksheet_pdf(worksheets, p, title=stem, footer_note=fn, brand=brand)
         recs.append({"kind": "worksheet", "label": "🖊️ 서술형 교재", "path": p})
 
     return recs

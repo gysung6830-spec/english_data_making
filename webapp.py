@@ -114,9 +114,9 @@ INDEX_HTML = """
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label>③ 저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
-      <input type=text name=basename placeholder="예: 2027수능특강_16강">
-      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
+      <label>③ 저장 파일명 <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
+      <input type=text name=basename placeholder="예: 공통영어2 1과">
+      <div class=hint>서술형 교재는 <b>(입력)_서술형대비.pdf</b> 로 저장되고, 입력한 이름이 <b>교재 제목</b>으로 쓰입니다.<br>(다른 자료: (입력)_지문분석 · (입력)_어휘리스트 · (입력)_어휘test)</div>
 
       <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
