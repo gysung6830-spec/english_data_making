@@ -1,131 +1,131 @@
 /* ============================================================
-   문장별 복합유형 통합 워크북 스타일 (spec 2 / 4-5)
-   색·배경은 print_background=True 로 인쇄된다.
+   문장별 복합유형 통합 워크북 — 회사 파일 디자인(초록 계열)
+   폰트: 나눔스퀘어라운드로 통일. 배경색은 print_background=True 로 인쇄.
    ============================================================ */
 :root{
-  --ink:#23272e; --muted:#6b7280; --edge:#1c2e44;
+  --ink:#2b2f3a; --muted:#8b93a0; --line:#e6eaef;
+  --green:#2e8267; --green-dark:#256b55; --green-line:#2f8f6d;
+  --green-bg:#eef7f2; --green-soft:#f3f9f6;
+  /* 유형 색 (범례·문제 표기) */
   --v:#2563a0; --a:#158060; --r:#7d3caf; --c:#c47510; --o:#b83232;
   --v-bg:#eef4fb; --a-bg:#eef7f3; --r-bg:#f4eef9; --c-bg:#fdf4e8; --o-bg:#fbeeee;
 }
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
-/* 영어=세리프체, 한글=나눔고딕체.
-   글리프 단위 폴백을 이용해 라틴 문자는 세리프 폰트가, 한글은 나눔고딕이 담당한다.
-   (세리프 폰트에는 한글 글리프가 없어 자동으로 나눔고딕으로 넘어간다.) */
 body{
-  font-family:"Georgia","Times New Roman","Noto Serif","Liberation Serif","DejaVu Serif",
-              "Nanum Gothic","NanumGothic","Malgun Gothic","Apple SD Gothic Neo",serif;
+  font-family:'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운드',
+              'Malgun Gothic','맑은 고딕','Nanum Gothic','Apple SD Gothic Neo',sans-serif;
   color:var(--ink); font-size:10pt; line-height:1.5; font-weight:400;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
 }
 
-/* ── 지문 단위 (복수 지문: 지문1 → 답1 → 지문2 → 답2) ── */
+/* ── 지문 단위 (지문1 → 답1 → 지문2 → 답2) ── */
 .wb-unit.unit-break{ page-break-before:always; break-before:page; }
-.wb-idx{
-  display:inline-block; font-size:9pt; font-weight:700; color:#fff; background:var(--edge);
-  border-radius:5px; padding:1px 8px; margin-right:8px; vertical-align:middle;
-  font-family:"Nanum Gothic","NanumGothic","Malgun Gothic",sans-serif;
-}
 
-/* ── 상단 헤더 ── */
+/* ── 상단 헤더: 초록 이중선 ── */
 .wb-header{
   display:flex; align-items:flex-end; justify-content:space-between;
-  border-bottom:2.5px solid var(--edge); padding-bottom:6px; margin-bottom:10px;
+  border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  padding-bottom:7px; margin-bottom:14px;
 }
-.wb-title{ font-size:16pt; font-weight:700; color:var(--edge); letter-spacing:-.2px; }
-.wb-subtitle{ font-size:8.5pt; color:var(--muted); margin-top:3px; font-weight:400; }
-.wb-meta{ display:flex; gap:10px; align-items:center; }
+.wb-idx{
+  display:inline-block; font-size:9pt; font-weight:800; color:#fff; background:var(--green);
+  border-radius:999px; padding:2px 11px; margin-right:9px; vertical-align:middle;
+}
+.wb-title{ font-size:17pt; font-weight:800; color:#20242c; letter-spacing:-.3px; }
+.wb-subtitle{ font-size:8.6pt; color:var(--muted); margin-top:4px; font-weight:400; }
+.wb-meta{ display:flex; gap:9px; align-items:center; }
 .wb-name,.wb-score{ display:flex; align-items:center; gap:6px; font-size:8pt; }
-.wb-meta .lbl{ font-weight:700; color:var(--edge); letter-spacing:.5px; }
-.wb-name .blank{ display:inline-block; width:70px; border-bottom:1px solid #9aa3af; height:12px; }
-.wb-score .val{ font-weight:700; color:var(--edge); border-bottom:1px solid #9aa3af;
-  padding:0 6px; }
+.wb-meta .lbl{ font-weight:800; color:var(--green-dark); letter-spacing:.5px; }
+.wb-name .blank{ display:inline-block; width:66px; border-bottom:1px solid #b6bfca; height:12px; }
+.wb-score .val{ font-weight:800; color:var(--green-dark); border-bottom:1px solid #b6bfca; padding:0 6px; }
 
-/* ── 유형 범례 바 (5칸 균등) ── */
-.wb-legend{ display:flex; gap:5px; margin-bottom:12px; }
+/* ── 유형 범례 바 (5칸 균등, 알약형) ── */
+.wb-legend{ display:flex; gap:6px; margin-bottom:11px; }
 .wb-legend .lg{
   flex:1 1 0; display:flex; flex-direction:column; align-items:center; gap:2px;
-  justify-content:center; padding:5px 4px; border-radius:6px; text-align:center;
+  justify-content:center; padding:6px 4px; border-radius:999px; text-align:center;
 }
-.wb-legend .name{
-  display:inline-flex; align-items:center; gap:4px; white-space:nowrap;
-  font-size:7.6pt; font-weight:700;
-}
+.wb-legend .name{ display:inline-flex; align-items:center; gap:4px; white-space:nowrap;
+  font-size:7.6pt; font-weight:800; }
 .wb-legend .dot{ width:8px; height:8px; border-radius:50%; flex:none; }
-.wb-legend .how{ font-weight:400; font-size:6.6pt; color:var(--muted); white-space:nowrap; }
+.wb-legend .how{ font-weight:700; font-size:6.6pt; color:var(--muted); white-space:nowrap; }
 .lg-v{ background:var(--v-bg); color:var(--v); } .lg-v .dot{ background:var(--v); }
 .lg-a{ background:var(--a-bg); color:var(--a); } .lg-a .dot{ background:var(--a); }
 .lg-r{ background:var(--r-bg); color:var(--r); } .lg-r .dot{ background:var(--r); }
 .lg-c{ background:var(--c-bg); color:var(--c); } .lg-c .dot{ background:var(--c); }
 .lg-o{ background:var(--o-bg); color:var(--o); } .lg-o .dot{ background:var(--o); }
 
-/* ── 지시문 바 ── */
+/* ── 지시문 바 (연한 초록, 왼쪽 초록 띠) ── */
 .wb-guide{
-  font-size:8pt; color:#4a5568; background:#f7f9fb; border:1px solid #eef1f5;
-  border-radius:6px; padding:6px 10px; margin-bottom:11px; line-height:1.7;
+  font-size:8pt; color:#3f4a44; background:var(--green-soft);
+  border:1px solid #dbeee6; border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0; padding:7px 12px; margin-bottom:12px; line-height:1.75;
 }
-.wb-guide > b{ color:var(--edge); margin-right:6px; }
+.wb-guide > b{ color:var(--green-dark); margin-right:6px; }
 .wb-guide .gi{ margin-right:14px; white-space:nowrap; }
 .wb-guide .gi b{ color:#2b3648; }
-.wb-guide .gn{ font-weight:700; color:var(--edge); }
-.wb-guide .mk{ font-weight:700; padding:0 2px; }
-.wb-guide .mk.v{ color:var(--v); } .wb-guide .mk.sel{ color:var(--edge); }
+.wb-guide .gn{ font-weight:800; color:var(--green-dark); }
+.wb-guide .mk{ font-weight:800; padding:0 2px; }
+.wb-guide .mk.v{ color:var(--v); } .wb-guide .mk.sel{ color:var(--green-dark); }
 .wb-guide .mk.o{ color:var(--o); } .wb-guide .mk.r{ color:var(--r); }
 
 /* ── 문항 카드 ── */
 .wb-cards{ display:flex; flex-direction:column; gap:7px; }
 .card{
   position:relative; display:flex; align-items:stretch; gap:8px;
-  border:1px solid #e6e9ee; border-radius:8px; padding:8px 10px 8px 14px;
-  overflow:hidden; page-break-inside:avoid; break-inside:avoid;
+  border:1px solid var(--line); border-radius:10px; padding:9px 11px 9px 15px;
+  background:#fff; overflow:hidden; page-break-inside:avoid; break-inside:avoid;
 }
-.card .cbar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--edge); }
+.card .cbar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--green); }
 .card .cnum{
-  flex:none; width:24px; height:24px; border-radius:50%; background:#f5f7f9;
-  border:1px solid #dfe3ea; color:var(--edge); font-weight:700; font-size:9pt;
+  flex:none; width:24px; height:24px; border-radius:50%; background:var(--green);
+  color:#fff; font-weight:800; font-size:9pt;
   display:flex; align-items:center; justify-content:center; margin-top:1px;
 }
 .cbody{ flex:1 1 auto; display:flex; gap:10px; align-items:stretch; }
 /* 동사 어형 등 정답을 단어 위에 적을 수 있도록 문제(영문) 행간을 넉넉히 준다. */
 .c-en{ flex:1 1 67%; padding-right:2px; line-height:2.5; }
 .c-ko{
-  flex:0 0 33%; font-size:8pt; color:#404652; line-height:1.45;
-  background:#fafbfc; border-left:1px dashed #c7cdd6; padding:2px 0 2px 9px;
+  flex:0 0 33%; font-size:8pt; color:#404652; line-height:1.5;
+  background:var(--green-soft); border-left:1px dashed #bfd8cd; padding:3px 0 3px 9px; border-radius:0 6px 6px 0;
 }
 
 /* ── 문제 표기 (유형별 색) ── */
-.c-en .q{ font-weight:500; padding:0 1px; white-space:nowrap; }
+.c-en .q{ font-weight:700; padding:0 1px; white-space:nowrap; }
 .q.v{ color:var(--v); } .q.a{ color:var(--a); } .q.r{ color:var(--r); }
 .q.c{ color:var(--c); } .q.o{ color:var(--o); white-space:normal; }
 .c-en .lbl{
-  font-size:6.1pt; font-weight:700; vertical-align:super; margin-left:1px;
-  padding:0 2px; border-radius:3px; line-height:1; color:#fff;
+  font-size:6.1pt; font-weight:800; vertical-align:super; margin-left:1px;
+  padding:0 3px; border-radius:4px; line-height:1; color:#fff;
 }
 .lbl.v{ background:var(--v); } .lbl.a{ background:var(--a); } .lbl.r{ background:var(--r); }
 .lbl.c{ background:var(--c); } .lbl.o{ background:var(--o); }
-.c-en .qn{ font-size:6.1pt; color:var(--muted); font-weight:700; vertical-align:super; }
+.c-en .qn{ font-size:6.1pt; color:var(--muted); font-weight:800; vertical-align:super; }
 
 /* ── 정답 · 해설 (다음 페이지) ── */
 .ans-page{ page-break-before:always; break-before:page; }
 .ans-head{
-  font-size:13pt; font-weight:700; color:var(--edge);
-  border-bottom:2px solid var(--edge); padding-bottom:5px; margin-bottom:10px;
+  font-size:13pt; font-weight:800; color:var(--green-dark);
+  border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  padding-bottom:6px; margin-bottom:12px;
 }
 .ans-head .ans-sub{ font-size:8pt; font-weight:400; color:var(--muted); margin-left:8px; }
 .ans-list{ list-style:none; margin:0; padding:0; }
 .ans-item{
-  display:flex; align-items:baseline; gap:6px; padding:3px 0;
-  border-bottom:1px dotted #e2e6ec; font-size:9pt; line-height:1.45;
+  display:flex; align-items:baseline; gap:7px; padding:4px 2px;
+  border-bottom:1px dotted #e2e6ec; font-size:9pt; line-height:1.5;
   page-break-inside:avoid; break-inside:avoid;
 }
-.ans-item .an{ flex:none; width:26px; font-weight:700; color:var(--edge); text-align:right; }
-.ans-item .aw{ font-weight:700; white-space:nowrap; }
+.ans-item .an{ flex:none; width:26px; font-weight:800; color:var(--green-dark); text-align:right; }
+.ans-item .aw{ font-weight:800; white-space:nowrap; }
 .aw.v{ color:var(--v); } .aw.a{ color:var(--a); } .aw.r{ color:var(--r); }
 .aw.c{ color:var(--c); } .aw.o{ color:var(--o); }
 .ans-item .adash{ color:#aab; }
 .ans-item .ar{ flex:1 1 auto; color:#374151; }
 .ans-item .atag{
-  flex:none; font-size:6.6pt; font-weight:700; color:#fff; padding:1px 5px;
-  border-radius:4px; align-self:center;
+  flex:none; font-size:6.6pt; font-weight:800; color:#fff; padding:2px 6px;
+  border-radius:999px; align-self:center;
 }
 .atag.v{ background:var(--v); } .atag.a{ background:var(--a); } .atag.r{ background:var(--r); }
 .atag.c{ background:var(--c); } .atag.o{ background:var(--o); }

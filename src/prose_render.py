@@ -172,7 +172,9 @@ _env.filters["render_prose"] = render_prose
 
 
 def render_prose_html(pack: ProsePack, footer_note: str = "") -> str:
-    return _env.get_template("prose.html.j2").render(pack=pack, footer_note=footer_note)
+    from . import branding
+    return _env.get_template("prose.html.j2").render(
+        pack=pack, footer_note=footer_note, font_css=branding.font_face_css())
 
 
 def render_prose_pdf(pack: ProsePack, out_path: str | Path, footer_note: str = "") -> Path:

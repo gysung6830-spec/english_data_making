@@ -14,6 +14,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 
+from . import branding
 from .workbook_schemas import Question, Sentence, Workbook
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -56,7 +57,8 @@ _env.filters["render_sentence"] = render_sentence
 def render_workbooks_html(books: list[Workbook], footer_note: str = "") -> str:
     """여러 지문을 한 문서에 배치 (지문1 → 답1 → 지문2 → 답2 …)."""
     tmpl = _env.get_template("workbook.html.j2")
-    return tmpl.render(books=list(books), footer_note=footer_note)
+    return tmpl.render(books=list(books), footer_note=footer_note,
+                       font_css=branding.font_face_css())
 
 
 def render_workbook_html(wb: Workbook, footer_note: str = "") -> str:
@@ -88,15 +90,21 @@ def _chromium_executable() -> str | None:
 
 
 # 하단 저작권 기본 문구 (footer_note 가 비어 있어도 항상 표기)
-DEFAULT_FOOTER = "© 2026. 은아 T. All rights reserved."
+DEFAULT_FOOTER = branding.FOOTER_BRAND
 
 
 def _footer_template(text: str) -> str:
-    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 세리프체로 표기."""
+    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 저작권 문구 · 페이지 번호(회사 파일 느낌).
+
+    나눔스퀘어라운드(설치 시)로 표기하며, Chromium 인쇄 푸터의 pageNumber/totalPages 를 쓴다.
+    """
     return (
         '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:center; '
-        'font-family:Georgia,\'Times New Roman\',serif; padding:0 14mm;">'
-        f'{escape(text)}</div>'
+        "font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif; "
+        'padding:0 14mm;">'
+        f'{escape(text)} &nbsp;·&nbsp; '
+        '<span class="pageNumber"></span> / <span class="totalPages"></span>'
+        '</div>'
     )
 
 

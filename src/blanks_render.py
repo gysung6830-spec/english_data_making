@@ -11,6 +11,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 
+from . import branding
 from .blanks_schemas import BlankSet, BlankWorkbook, BSentence
 from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER
 
@@ -49,7 +50,8 @@ _env.filters["render_summary"] = render_summary
 
 
 def render_blanks_html(wb: BlankWorkbook, footer_note: str = "") -> str:
-    return _env.get_template("blanks.html.j2").render(wb=wb, footer_note=footer_note)
+    return _env.get_template("blanks.html.j2").render(
+        wb=wb, footer_note=footer_note, font_css=branding.font_face_css())
 
 
 def render_blanks_pdf(wb: BlankWorkbook, out_path: str | Path, footer_note: str = "") -> Path:

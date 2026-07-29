@@ -1,37 +1,39 @@
 /* ============================================================
-   빈칸형 워크북 (유형 B 지문 빈칸 + 유형 A 요약문 빈칸)
-   진청 시험지형 · 2단 · 색 조합(초록/청색)만 사용 (spec 6.4)
+   빈칸형 워크북 (유형 B 지문 빈칸 + 유형 A 요약문 빈칸) — 회사 파일 디자인
+   폰트: 나눔스퀘어라운드 통일. 초록 계열 + 지문(초록)/요약(청색) 포인트.
    ============================================================ */
 :root{
-  --navy:#26324f; --ink:#23272e; --muted:#6b7280; --line:#e6e9ee;
-  --pb:#2f7d4f;   /* 지문 빈칸 = 초록 */
+  --ink:#2b2f3a; --muted:#8b93a0; --line:#e6eaef;
+  --green:#2e8267; --green-dark:#256b55; --green-soft:#f3f9f6;
+  --pb:#2e8267;   /* 지문 빈칸 = 초록(주색) */
   --sb:#2f4b8f;   /* 요약문 빈칸 = 청색 */
+  --sb-soft:#eef2fb;
 }
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
 body{
-  font-family:"Georgia","Times New Roman","Liberation Serif","DejaVu Serif",
-              "Malgun Gothic","맑은 고딕","Nanum Gothic",serif;
+  font-family:'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운드',
+              'Malgun Gothic','맑은 고딕','Nanum Gothic','Apple SD Gothic Neo',sans-serif;
   color:var(--ink); font-size:10.5pt; line-height:1.5;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
 }
 .set.set-break{ page-break-before:always; break-before:page; }
 
-/* ── 지문 헤더 ── */
-.set-head{ margin-bottom:10px; }
+/* ── 지문 헤더 (초록 이중선) ── */
+.set-head{ margin-bottom:12px; border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  padding-bottom:7px; }
 .set-idx{
-  display:inline-block; background:var(--navy); color:#fff; font-weight:700;
-  font-size:9pt; border-radius:5px; padding:2px 9px; margin-right:8px;
-  vertical-align:middle; font-family:"Malgun Gothic","맑은 고딕",sans-serif;
+  display:inline-block; background:var(--green); color:#fff; font-weight:800;
+  font-size:9pt; border-radius:999px; padding:2px 11px; margin-right:9px; vertical-align:middle;
 }
-.set-title{ font-size:15pt; font-weight:700; color:var(--navy); }
-.set-sub{ font-size:8.5pt; color:var(--muted); margin-top:4px;
-  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
-.set-rule{ width:120px; height:3px; background:var(--navy); margin-top:6px; border-radius:2px; }
+.set-title{ font-size:15pt; font-weight:800; color:#20242c; }
+.set-sub{ font-size:8.6pt; color:var(--muted); margin-top:4px; }
+.set-rule{ display:none; }
 
 /* ── 구획(유형) 헤더 ── */
 .part-head{
-  font-size:10.5pt; font-weight:700; margin:14px 0 8px; padding-left:9px;
-  border-left:4px solid var(--navy); font-family:"Malgun Gothic","맑은 고딕",sans-serif;
+  font-size:10.5pt; font-weight:800; margin:14px 0 8px; padding:4px 0 4px 10px;
+  border-left:4px solid var(--green);
 }
 .part-head .ph-sub{ font-size:8pt; font-weight:400; color:var(--muted); margin-left:6px; }
 .pb-head{ color:var(--pb); border-left-color:var(--pb); }
@@ -40,60 +42,57 @@ body{
 /* ── 문장 카드 (유형 B, 2단) ── */
 .cards{ display:flex; flex-direction:column; gap:7px; }
 .card{
-  position:relative; display:flex; gap:8px; align-items:stretch;
-  border:1px solid var(--line); border-radius:8px; padding:9px 10px 9px 14px;
+  position:relative; display:flex; gap:8px; align-items:stretch; background:#fff;
+  border:1px solid var(--line); border-radius:10px; padding:9px 11px 9px 15px;
   overflow:hidden; page-break-inside:avoid; break-inside:avoid;
 }
-.card .cbar{ position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--navy); }
+.card .cbar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--pb); }
 .card .cnum{
-  flex:none; width:23px; height:23px; border-radius:50%; background:#fff;
-  border:1.5px solid var(--navy); color:var(--navy); font-weight:700; font-size:9pt;
+  flex:none; width:23px; height:23px; border-radius:50%; background:var(--pb);
+  color:#fff; font-weight:800; font-size:9pt;
   display:flex; align-items:center; justify-content:center; margin-top:1px;
 }
 .cbody{ flex:1 1 auto; display:flex; gap:10px; align-items:stretch; }
 .c-en{ flex:0 0 58%; line-height:2.1; }
 .c-ko{ flex:1 1 42%; font-size:8.5pt; color:#404652; line-height:1.5;
-  border-left:1px solid var(--line); padding-left:10px;
-  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+  border-left:1px dashed #cdd5de; padding-left:10px; }
 
 /* ── 요약문 (유형 A) ── */
-.summary{ position:relative; border:1px solid var(--line); border-radius:8px;
+.summary{ position:relative; border:1px solid var(--line); border-radius:10px; background:#fff;
   padding:10px 12px 10px 16px; line-height:2.1; overflow:hidden; page-break-inside:avoid; }
-.summary .sb-bar{ position:absolute; left:0; top:0; bottom:0; width:6px; background:var(--sb); }
-.sum-text{ }
+.summary .sb-bar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--sb); }
 
 /* ── 단어뱅크 박스 (가운데 정렬) ── */
-.wordbank{ border:1.8px solid var(--navy); border-radius:10px; padding:10px 12px;
+.wordbank{ border:1.5px solid var(--sb); border-radius:12px; padding:11px 12px; background:var(--sb-soft);
   margin-top:10px; text-align:center; page-break-inside:avoid; }
-.wordbank .wb-label{ font-size:8pt; font-weight:700; color:var(--navy); letter-spacing:1px;
-  margin-bottom:7px; font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.wordbank .wb-label{ font-size:8pt; font-weight:800; color:var(--sb); letter-spacing:1px;
+  margin-bottom:8px; }
 .chips{ display:flex; flex-wrap:wrap; gap:7px 9px; justify-content:center; }
-.chip{ display:inline-block; border:1px solid var(--sb); color:var(--sb); background:#f3f6fc;
-  border-radius:999px; padding:3px 12px; font-size:9.5pt; font-weight:700; }
+.chip{ display:inline-block; border:1px solid var(--sb); color:var(--sb); background:#fff;
+  border-radius:999px; padding:3px 13px; font-size:9.5pt; font-weight:800; }
 
 /* ── 빈칸 표기 ── */
-.blk{ font-weight:700; white-space:nowrap; }
+.blk{ font-weight:800; white-space:nowrap; }
 .blk .ul{ display:inline-block; width:66px; border-bottom:1.3px solid; margin-left:1px;
   vertical-align:baseline; height:0.9em; }
 .blk.pb{ color:var(--pb); } .blk.pb .ul{ border-color:var(--pb); }
 .blk.sb{ color:var(--sb); } .blk.sb .ul{ border-color:var(--sb); }
-.bn{ font-size:6.4pt; color:var(--muted); font-weight:700; vertical-align:super; }
+.bn{ font-size:6.4pt; color:var(--muted); font-weight:800; vertical-align:super; }
 
 /* ── 정답 페이지 ── */
 .ans-page{ page-break-before:always; break-before:page; }
-.ans-head{ font-size:13pt; font-weight:700; color:var(--navy);
-  border-bottom:2px solid var(--navy); padding-bottom:5px; margin-bottom:10px;
-  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.ans-head{ font-size:13pt; font-weight:800; color:var(--green-dark);
+  border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  padding-bottom:6px; margin-bottom:11px; }
 .ans-head .ans-sub{ font-size:8pt; font-weight:400; color:var(--muted); margin-left:8px; }
 .ans-set{ margin-bottom:12px; page-break-inside:avoid; }
-.ans-set-title{ font-size:10pt; font-weight:700; color:var(--navy); margin-bottom:5px; }
+.ans-set-title{ font-size:10pt; font-weight:800; color:#20242c; margin-bottom:5px; }
 .ans-cols{ display:flex; gap:16px; }
 .ans-col{ flex:1 1 50%; }
-.ans-col-h{ font-size:8.5pt; font-weight:700; margin-bottom:4px;
-  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.ans-col-h{ font-size:8.5pt; font-weight:800; margin-bottom:4px; }
 .pb-h{ color:var(--pb); } .sb-h{ color:var(--sb); }
 .ans-item{ display:inline-block; font-size:9pt; margin:0 12px 4px 0; }
-.ans-item b{ color:var(--navy); }
+.ans-item b{ color:var(--green-dark); }
 .ans-sum-ko{ margin-top:6px; font-size:8.5pt; color:#404652; line-height:1.5;
-  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+  background:var(--green-soft); border-radius:8px; padding:6px 10px; }
 .ans-sum-ko .ans-col-h{ display:inline; margin-right:6px; }
