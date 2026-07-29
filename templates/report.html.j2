@@ -5,7 +5,8 @@
 
 {% macro render_report(report, pno, total) %}
   <div class="doc-header">
-    <span class="doc-badge">[Main Reading] Full Analysis</span>
+    <span class="doc-badge">지문 분석</span>
+    {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
     <div class="doc-title">{{ report.title }}</div>
     {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
@@ -214,7 +215,7 @@
 {# ---- 앞부분: 원문 + 전체 해석 모음 ---- #}
 {% macro render_source(report, pno, total) %}
   <div class="doc-header">
-    <span class="doc-badge">Reading &amp; Translation</span>
+    <span class="doc-badge">원문 · 전체 해석</span>
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
     <div class="doc-title">{{ report.title }}</div>
     {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
@@ -240,7 +241,7 @@
   {# 1) 전체 원문 + 해석 모음 (여러 지문이면 지문별 페이지) #}
   {% if with_source %}
   {% for report in reports %}
-  <div class="src-page{{ ' pgbreak' if not loop.first }}">
+  <div class="src-page">
     {{ render_source(report, loop.index, reports|length) }}
   </div>
   {% endfor %}
