@@ -6,17 +6,127 @@
 """
 from __future__ import annotations
 
+import html
 import re
+import struct
+import zipfile
+import zlib
 from pathlib import Path
 
 import pdfplumber
 
 # 지원하는 이미지 확장자 (사진/캡처 자동 처리용)
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+# 한글 워드프로세서 파일 (.hwp = 바이너리, .hwpx = XML zip)
+HWP_EXTS = {".hwp", ".hwpx"}
 
 
 def is_image(path: str | Path) -> bool:
     return Path(path).suffix.lower() in IMAGE_EXTS
+
+
+def is_hwp(path: str | Path) -> bool:
+    return Path(path).suffix.lower() in HWP_EXTS
+
+
+# ---------------------------------------------------------------------------
+# HWP / HWPX 본문 텍스트 추출
+# ---------------------------------------------------------------------------
+# PARA_TEXT 레코드 안에서 16바이트(8 wchar)를 차지하는 인라인/확장 컨트롤 코드
+_HWP_LONG_CTRL = {1, 2, 3, 11, 12, 14, 15, 16, 17, 18, 21, 22, 23}
+_HWPTAG_PARA_TEXT = 67  # HWPTAG_BEGIN(0x10) + 51
+
+
+def _hwp_decode_para(rec: bytes) -> str:
+    """PARA_TEXT 레코드(UTF-16LE + 인라인 컨트롤)를 사람이 읽는 텍스트로."""
+    out: list[str] = []
+    j, n = 0, len(rec)
+    while j + 2 <= n:
+        code = rec[j] | (rec[j + 1] << 8)
+        if code < 32:
+            j += 16 if code in _HWP_LONG_CTRL else 2
+            if code in (10, 13):
+                out.append("\n")
+            continue
+        out.append(chr(code))
+        j += 2
+    return "".join(out)
+
+
+def _hwp_section_text(data: bytes) -> str:
+    """섹션 스트림(레코드 나열)에서 문단 텍스트만 뽑는다."""
+    out: list[str] = []
+    i, n = 0, len(data)
+    while i + 4 <= n:
+        header = struct.unpack_from("<I", data, i)[0]
+        i += 4
+        tag_id = header & 0x3FF
+        size = (header >> 20) & 0xFFF
+        if size == 0xFFF:
+            if i + 4 > n:
+                break
+            size = struct.unpack_from("<I", data, i)[0]
+            i += 4
+        rec = data[i:i + size]
+        i += size
+        if tag_id == _HWPTAG_PARA_TEXT:
+            out.append(_hwp_decode_para(rec))
+    return "\n".join(t for t in out if t.strip())
+
+
+def extract_hwp5_text(path: str | Path) -> str:
+    """.hwp(HWP 5.0 바이너리) 본문 텍스트 추출 (olefile + zlib)."""
+    import olefile
+
+    ole = olefile.OleFileIO(str(path))
+    try:
+        header = ole.openstream("FileHeader").read()
+        compressed = bool(header[36] & 0x01) if len(header) > 36 else True
+        sections = sorted(
+            (e for e in ole.listdir()
+             if len(e) >= 2 and e[0] == "BodyText" and e[1].lower().startswith("section")),
+            key=lambda e: int(re.sub(r"\D", "", e[1]) or 0),
+        )
+        parts: list[str] = []
+        for entry in sections:
+            raw = ole.openstream(entry).read()
+            if compressed:
+                try:
+                    raw = zlib.decompress(raw, -15)
+                except zlib.error:
+                    continue
+            parts.append(_hwp_section_text(raw))
+        return "\n\n".join(p for p in parts if p.strip())
+    finally:
+        ole.close()
+
+
+def extract_hwpx_text(path: str | Path) -> str:
+    """.hwpx(OWPML XML zip) 본문 텍스트 추출."""
+    paras: list[str] = []
+    with zipfile.ZipFile(str(path)) as z:
+        names = sorted(n for n in z.namelist()
+                       if re.search(r"section\d+\.xml$", n, re.IGNORECASE))
+        if not names:
+            names = sorted(n for n in z.namelist()
+                           if n.lower().endswith(".xml") and "content" in n.lower())
+        for name in names:
+            xml = z.read(name).decode("utf-8", "ignore")
+            # 문단(<...:p>) 단위로 텍스트 런(<...:t>)을 모은다
+            for block in re.findall(r"<(?:\w+:)?p\b.*?</(?:\w+:)?p>", xml, re.DOTALL):
+                runs = re.findall(r"<(?:\w+:)?t\b[^>]*>(.*?)</(?:\w+:)?t>", block, re.DOTALL)
+                line = "".join(html.unescape(re.sub(r"<[^>]+>", "", r)) for r in runs)
+                if line.strip():
+                    paras.append(line)
+    return "\n".join(paras)
+
+
+def extract_hwp_text(path: str | Path) -> str:
+    """확장자에 따라 .hwp / .hwpx 본문 텍스트를 추출."""
+    p = Path(path)
+    if p.suffix.lower() == ".hwpx":
+        return extract_hwpx_text(p)
+    return extract_hwp5_text(p)
 
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
@@ -63,7 +173,9 @@ def clean_text(raw: str) -> str:
 
 
 def extract_passage_text(pdf_path: str | Path) -> str:
-    """PDF -> (1차 정제된) 지문 후보 텍스트."""
+    """PDF/HWP/HWPX -> (1차 정제된) 지문 후보 텍스트."""
+    if is_hwp(pdf_path):
+        return clean_text(extract_hwp_text(pdf_path))
     return clean_text(extract_raw_text(pdf_path))
 
 

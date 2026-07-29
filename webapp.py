@@ -36,7 +36,7 @@ UPLOAD_DIR = ROOT / "web_uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR = cfg.output_dir
 
-ALLOWED = {".pdf"} | extract.IMAGE_EXTS
+ALLOWED = {".pdf"} | extract.IMAGE_EXTS | extract.HWP_EXTS
 
 
 # ---------------------------------------------------------------------------
@@ -94,15 +94,15 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지·내신 서술형 대비 교재를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)·PDF·한글(HWP/HWPX)을 올리면, 분석지·어휘 리스트·영단어 시험지·내신 서술형 대비 교재를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
-      <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
+      <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
       <div class=drop id=drop>
         <div style="font-size:26px">⬆️</div>
         <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
-        <p>JPG · PNG · PDF</p>
-        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+        <p>JPG · PNG · PDF · HWP · HWPX</p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx" hidden>
       </div>
       <div class=files id=filelist></div>
 
@@ -275,7 +275,7 @@ def analyze_route():
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED:
             results.append({"name": f.filename, "ok": False,
-                            "error": "지원하지 않는 형식(JPG·PNG·PDF만 가능)"})
+                            "error": "지원하지 않는 형식(PDF·JPG·PNG·HWP·HWPX만 가능)"})
             continue
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))

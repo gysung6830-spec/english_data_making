@@ -203,6 +203,30 @@ def test_worksheet_consistency():
     print("PASS  서술형 교재 내용 정합성(오류 검증)")
 
 
+# ---- 9. HWP/HWPX 텍스트 추출 ---------------------------------------------
+def test_hwp_extract():
+    import struct, zipfile, tempfile
+    from pathlib import Path
+    from src import extract
+    # (1) .hwpx: 합성 OWPML zip → 문단 텍스트 추출
+    sec = ('<hml:sec xmlns:hp="x">'
+           '<hp:p><hp:run><hp:t>Curiosity drives us.</hp:t></hp:run></hp:p>'
+           '<hp:p><hp:run><hp:t>Ask questions.</hp:t></hp:run></hp:p></hml:sec>')
+    with tempfile.TemporaryDirectory() as d:
+        hp = Path(d) / "t.hwpx"
+        with zipfile.ZipFile(hp, "w") as z:
+            z.writestr("Contents/section0.xml", sec)
+        out = extract.extract_hwpx_text(hp)
+        assert "Curiosity drives us." in out and "Ask questions." in out
+        assert extract.is_hwp(hp) and not extract.is_hwp("x.pdf")
+    # (2) .hwp 바이너리 레코드 파서: PARA_TEXT + 인라인 컨트롤 무시
+    payload = "Hello".encode("utf-16-le") + struct.pack("<H", 3) + b"\x00" * 14
+    header = 67 | (len(payload) << 20)
+    rec = struct.pack("<I", header) + payload
+    assert extract._hwp_section_text(rec) == "Hello"
+    print("PASS  HWP/HWPX 텍스트 추출")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
@@ -212,6 +236,7 @@ def run_all():
     test_worksheet_schema()
     test_worksheet_render()
     test_worksheet_consistency()
+    test_hwp_extract()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

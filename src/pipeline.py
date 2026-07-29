@@ -11,7 +11,7 @@ from .logutil import Manifest, setup_logging
 from .schemas import Extraction, Report, Worksheet
 
 
-INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS
+INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS | extract.HWP_EXTS
 
 
 def list_pdfs(input_dir: Path) -> list[Path]:
