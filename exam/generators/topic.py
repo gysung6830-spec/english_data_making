@@ -31,6 +31,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: TopicOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
+        cache_prefix=context(analysis),
         model_cls=TopicOut,
         max_tokens=2500,
         max_retries=max_retries,

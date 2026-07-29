@@ -29,6 +29,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: GrammarOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
+        cache_prefix=context(analysis),
         model_cls=GrammarOut,
         max_tokens=3000,
         max_retries=max_retries,

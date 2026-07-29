@@ -23,6 +23,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: InsertOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
+        cache_prefix=context(analysis),
         model_cls=InsertOut,
         max_tokens=1500,
         max_retries=max_retries,

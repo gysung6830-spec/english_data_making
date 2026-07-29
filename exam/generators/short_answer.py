@@ -28,6 +28,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: ShortOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
+        cache_prefix=context(analysis),
         model_cls=ShortOut,
         max_tokens=3500,
         max_retries=max_retries,

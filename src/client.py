@@ -64,11 +64,29 @@ def build_request(
     model_cls: type[BaseModel],
     max_tokens: int = DEFAULT_MAX_TOKENS,
     image_path: str | Path | None = None,
+    cache_prefix: str | None = None,
 ) -> dict:
     """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터.
 
     image_path 가 주어지면 이미지 + 텍스트를 함께 보내는 비전 요청이 된다.
+    cache_prefix 가 주어지면 '지문·분석'처럼 여러 호출이 공유하는 앞부분을
+    system 블록으로 올리고 프롬프트 캐싱(cache_control)을 건다. 유형별로 다른
+    지시문(prompt)만 뒤에 오므로, 같은 지문의 여러 유형 호출이 앞부분을 캐시에서
+    읽어 입력 비용·지연을 크게 줄인다. (Opus 최소 캐시 길이 1024토큰 미만이면
+    자동으로 캐시되지 않으니 무해하다.)
     """
+    if cache_prefix:
+        system_param: Any = [
+            {"type": "text", "text": system},
+            {"type": "text", "text": cache_prefix,
+             "cache_control": {"type": "ephemeral"}},
+        ]
+        # 지문·분석이 프롬프트에도 그대로 들어 있으면 중복되어 캐시 효과가 사라진다.
+        # system 으로 올렸으니 사용자 프롬프트에서는 제거한다(지시문만 남김).
+        prompt = prompt.replace(cache_prefix, "").rstrip()
+    else:
+        system_param = system
+
     if image_path is not None:
         content: Any = [image_block(image_path), {"type": "text", "text": prompt}]
     else:
@@ -76,7 +94,7 @@ def build_request(
     return {
         "model": model,
         "max_tokens": max_tokens,
-        "system": system,
+        "system": system_param,
         "messages": [{"role": "user", "content": content}],
         "output_config": output_format(model_cls),
     }
@@ -113,16 +131,19 @@ class ClaudeClient:
         max_retries: int = 1,
         extra_validate=None,
         image_path: str | Path | None = None,
+        cache_prefix: str | None = None,
     ) -> T:
         """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청.
 
         image_path 가 주어지면 이미지를 함께 보내는 비전 요청으로 동작한다.
+        cache_prefix 는 여러 호출이 공유하는 앞부분(지문·분석)으로, 프롬프트 캐싱에 쓴다.
+        재시도 시 지시문(prompt)만 바뀌고 cache_prefix 는 그대로라 캐시가 계속 재사용된다.
         """
         last_err: Exception | None = None
         cur_prompt = prompt
         for attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
-                                image_path=image_path)
+                                image_path=image_path, cache_prefix=cache_prefix)
             message = self._client.messages.create(**req)
             try:
                 text = extract_text(message)

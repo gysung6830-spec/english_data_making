@@ -216,7 +216,8 @@ def test_analyzer_uses_real_passage() -> None:
 
 class _FakeClient:
     def structured(self, system, prompt, model_cls, max_tokens=8000,
-                   max_retries=1, extra_validate=None, image_path=None):
+                   max_retries=1, extra_validate=None, image_path=None,
+                   cache_prefix=None):
         obj = _FAKE[model_cls.__name__]()
         if extra_validate:
             extra_validate(obj)
@@ -351,6 +352,28 @@ def test_pdf_merge(tmp_out: Path = ROOT / "output" / "test") -> None:
     print("✓ 여러 파트 PDF 합본 통과")
 
 
+def test_prompt_cache_request() -> None:
+    """cache_prefix 를 주면 지문·분석이 system 캐시 블록으로 올라가고, 사용자 프롬프트에서는
+    중복 제거되는지(캐시 효과)."""
+    from src.client import build_request
+
+    ctx = "[문장]\n(1) A sentence here.\n(2) Another one.\n" * 3   # 공유 앞부분
+    prompt = "이 지시문대로 문제를 만드세요.\n\n" + ctx               # 지시문 + 지문
+    req = build_request("claude-opus-4-8", "SYS", prompt, OrderOut,
+                        max_tokens=100, cache_prefix=ctx)
+    # system 은 [SYS, ctx(cache_control)] 형태
+    assert isinstance(req["system"], list) and len(req["system"]) == 2
+    assert req["system"][1]["cache_control"] == {"type": "ephemeral"}
+    assert req["system"][1]["text"] == ctx
+    # 사용자 프롬프트에서 지문은 제거되어 지시문만 남는다(중복 방지)
+    assert ctx not in req["messages"][0]["content"]
+    assert "지시문대로" in req["messages"][0]["content"]
+    # cache_prefix 가 없으면 system 은 문자열 그대로
+    req2 = build_request("claude-opus-4-8", "SYS", prompt, OrderOut, max_tokens=100)
+    assert req2["system"] == "SYS"
+    print("✓ 프롬프트 캐싱 요청 구성(공유 앞부분 캐시·중복 제거) 통과")
+
+
 def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") -> None:
     """유형 병렬 생성 + 지문 병렬 분석 + 1회·2회 분석 공유가 정상 배선되는지."""
     from exam import gen2, pipeline
@@ -415,6 +438,7 @@ if __name__ == "__main__":
     test_pdf_cleaning()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()
+    test_prompt_cache_request()
     test_pdf_merge()
     test_parallel_and_shared_analysis()
     test_difficulty_lever()

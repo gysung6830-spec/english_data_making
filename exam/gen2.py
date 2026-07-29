@@ -141,7 +141,7 @@ def _gen_A(client, analysis, body, max_retries=1):
          "어색한 반대말로). 나머지 3개는 shown=원본. choices 5개는 두 밑줄의 짝(예 'ⓐ, ⓒ'), "
          "answer_no 는 실제 오답 두 개의 짝. reason 은 한국어.\n\n{ctx}")
     out: AOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), AOut,
-                                  max_tokens=2500, max_retries=max_retries)
+                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     return build2.make_A(analysis.sentences, marks, out.answer_no, out.reason, out.choices)
 
@@ -151,7 +151,7 @@ def _gen_B(client, analysis, body, max_retries=1):
          "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 '영어'. 정답=글 전체 논지를 "
          "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 는 한국어.\n\n{ctx}")
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
-                                  max_tokens=2500, max_retries=max_retries)
+                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     wrong = {w.no: w.text for w in out.wrong_reasons}
     return build2.make_B(analysis.sentences, out.phrase, out.choices, out.answer_no,
                          out.reason, wrong)
@@ -167,7 +167,7 @@ def _gen_D(client, analysis, body, max_retries=1):
          "여야 하며(원래 배열이 정답), 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
          "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
-                                  max_tokens=1500, max_retries=max_retries)
+                                  max_tokens=1500, max_retries=max_retries, cache_prefix=context(analysis))
     return build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer, out.reason)
 
 
@@ -181,7 +181,7 @@ def _gen_E(client, analysis, body, max_retries=1):
          "쌍은 '정답 하나뿐'이어야 하고, 그 번호가 answer_no 입니다(우연히 둘 다 맞는 오답이 없게).\n"
          "answer_no·reason 은 한국어.\n\n{ctx}")
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
-                                  max_tokens=2000, max_retries=max_retries)
+                                  max_tokens=2000, max_retries=max_retries, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
     return build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
                          out.answer_no, out.reason)
@@ -195,7 +195,7 @@ def _gen_F(client, analysis, body, max_retries=1):
          "'확실히' 모순·무관이어서 정답으로 읽힐 여지가 없어야 한다. answer_no·reason·wrong_reasons 는 "
          "한국어.\n\n{ctx}")
     out: FOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), FOut,
-                                  max_tokens=2500, max_retries=max_retries)
+                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     # blank_phrase 가 있는 문장을 찾는다
     phrase = out.blank_phrase.strip()
     idx = next((i for i, s in enumerate(analysis.sentences)
@@ -214,7 +214,8 @@ def _gen_G(client, analysis, body, max_retries=1):
          "statements 로, 각 진술의 일치 여부를 matches(bool 5개)로 줍니다. 불일치는 주체·정도·인과를 "
          "뒤집거나 없는 내용. per_stmt 는 각 진술이 왜 일치/불일치인지(한국어). reason 한국어.\n\n{ctx}")
     out: GOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), GOut,
-                                  max_tokens=2500, max_retries=max_retries, extra_validate=_extra)
+                                  max_tokens=2500, max_retries=max_retries, extra_validate=_extra,
+                                  cache_prefix=context(analysis))
     per = {i + 1: t for i, t in enumerate(out.per_stmt)} if out.per_stmt else {}
     return build2.make_G(analysis.sentences, out.statements, sum(out.matches), out.reason, per)
 

@@ -69,6 +69,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: VocabOut = client.structured(
         system=SYSTEM,
         prompt=prompt.format(ctx=context(analysis)),
+        cache_prefix=context(analysis),
         model_cls=VocabOut,
         max_tokens=2500,
         max_retries=max_retries,
