@@ -261,7 +261,7 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
 
 
 def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
-                analyses=None, level=None) -> Path:
+                analyses=None, level=None, sections=None) -> Path:
     from .pipeline import analyze_bodies
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
@@ -274,4 +274,5 @@ def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
-                               type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2)
+                               type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2,
+                               sections=sections)

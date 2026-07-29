@@ -74,6 +74,20 @@ def _blocks(passages: list[Passage], start: int,
 # 자료 하단 저작권 문구 기본값(필요하면 render_pdf(footer_note=...) 로 교체)
 DEFAULT_FOOTER = "ⓒ 2026. 김은아영어연구소. All rights reserved."
 
+# 출력 섹션 키(고정 순서). None 이면 4개 모두.
+SECTION_KEYS = ["student", "teacher", "quick", "answers"]
+
+
+def _resolve_sections(sections) -> tuple[set, str | None]:
+    """선택 섹션을 정규화하고 '첫 섹션'(페이지 브레이크 억제용)을 찾는다."""
+    if not sections:
+        active = list(SECTION_KEYS)
+    else:
+        active = [k for k in SECTION_KEYS if k in sections]
+        if not active:                      # 아무것도 안 고르면 전체
+            active = list(SECTION_KEYS)
+    return set(active), active[0]
+
 
 def render_html(
     passages: list[Passage],
@@ -82,8 +96,10 @@ def render_html(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
+    sections=None,
 ) -> str:
     blocks, quick = _blocks(passages, start, type_order, prompts, labels)
+    active, first_section = _resolve_sections(sections)
     tmpl = _env.get_template("exam.html.j2")
     return tmpl.render(
         blocks=blocks,
@@ -91,6 +107,8 @@ def render_html(
         header_note=header_note,
         doc_title=doc_title,
         footer_note=footer_note,
+        sections=active,
+        first_section=first_section,
     )
 
 
@@ -102,6 +120,7 @@ def render_pdf(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
+    sections=None,
 ) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트(무거움)
 
@@ -109,7 +128,8 @@ def render_pdf(
     out_path.parent.mkdir(parents=True, exist_ok=True)
     html = render_html(passages, header_note=header_note, doc_title=doc_title,
                        start=start, footer_note=footer_note,
-                       type_order=type_order, prompts=prompts, labels=labels)
+                       type_order=type_order, prompts=prompts, labels=labels,
+                       sections=sections)
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

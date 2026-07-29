@@ -68,6 +68,18 @@ Second passage goes here."></textarea>
       <b>변형문제 2회</b> <span class="hint2">어법어휘짝짓기·함의추론·어법판별·어순배열·요약빈칸·빈칸추론·내용일치개수</span></label>
   </div>
 
+  <div class="field setbox">
+    <span class="label">출력할 구성 (원하는 것만 체크 — 한 PDF 안에 순서대로 포함, 모두 해제 시 전체)</span>
+    <label class="check"><input type="checkbox" name="sections" value="student" checked>
+      <b>학생용</b> <span class="hint2">문제만</span></label>
+    <label class="check"><input type="checkbox" name="sections" value="teacher" checked>
+      <b>교사용</b> <span class="hint2">문제 밑에 해설(정답 볼드)</span></label>
+    <label class="check"><input type="checkbox" name="sections" value="quick" checked>
+      <b>빠른 정답</b> <span class="hint2">번호·정답 한눈에</span></label>
+    <label class="check"><input type="checkbox" name="sections" value="answers" checked>
+      <b>해설지</b> <span class="hint2">정답 및 상세 해설</span></label>
+  </div>
+
   <div class="btns">
     <button type="submit" name="action" value="generate" class="btn">시험지 생성 → (API 사용·비용)</button>
     <button type="submit" name="action" value="demo" class="btn ghost">무료 미리보기 (데모 지문·API 미사용)</button>

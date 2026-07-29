@@ -56,7 +56,7 @@ def test_render_html_bold_rules() -> None:
     for cls in ("brand-title", "qnum", "passage-label", "answer-title",
                 "answer-key", "boki-title", "cue"):
         assert cls in html, f"볼드 클래스 누락: {cls}"
-    assert html.index('class="questions"') < html.index('class="answers"')
+    assert html.index('class="questions') < html.index('class="answers')
     assert "○○학원 고3" in html
     # 4개 섹션(학생용 → 교사용 → 빠른 정답 → 해설지)이 순서대로 존재
     for sec in ("학생용", "교사용", "빠른 정답", "정답 및 해설"):
@@ -65,7 +65,18 @@ def test_render_html_bold_rules() -> None:
              html.index("빠른 정답"), html.index("정답 및 해설 · 해설지")]
     assert order == sorted(order), "섹션 순서가 어긋납니다."
     assert "teach-exp" in html and "quick-grid" in html
-    print("✓ 조판 HTML·볼드 5곳·4섹션·머리글 통과")
+    # 섹션 선택: 학생용만 → 교사용/빠른정답/해설지 배너 없음, 첫 섹션 break 해제
+    only_student = renderer.render_html(demo_passages(), sections=["student"])
+    assert "학생용 · 문제" in only_student
+    assert "교사용 · 문제" not in only_student
+    assert "빠른 정답" not in only_student
+    assert "해설지" not in only_student
+    assert "first-sec" in only_student
+    # 교사용만 → 학생용 배너 없이 교사용이 첫 섹션(break 해제)
+    only_teacher = renderer.render_html(demo_passages(), sections=["teacher"])
+    assert "학생용 · 문제" not in only_teacher
+    assert 'class="teacher first-sec"' in only_teacher
+    print("✓ 조판 HTML·볼드 5곳·4섹션·섹션선택·머리글 통과")
 
 
 def test_single_source_shared() -> None:

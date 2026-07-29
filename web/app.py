@@ -80,6 +80,9 @@ def generate():
 
     # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
     sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
+    # 출력할 섹션(없으면 4개 모두)
+    valid_sec = ("student", "teacher", "quick", "answers")
+    sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
     uploads = [f for f in request.files.getlist("files") if f and f.filename]
     doc_name = safe_name(request.form.get("doc_name", ""))
 
@@ -146,7 +149,7 @@ def generate():
                     ps = demo_passages()
                     validator.validate_passages(ps)
                     validator.validate_numbering(ps, start=1)
-                    renderer.render_pdf(ps, out, header_note=header)
+                    renderer.render_pdf(ps, out, header_note=header, sections=sections)
                     n = len(ps)
                 else:
                     from exam.pipeline import build_exam
@@ -154,7 +157,7 @@ def generate():
                                max_retries=cfg.processing.max_retries,
                                vocab_method=vocab_method,
                                content_difficulty=content_difficulty,
-                               analyses=analyses, level=level)
+                               analyses=analyses, level=level, sections=sections)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 1회", "count": n,
                                 "name": f"{doc_name}_변형문제_1회"})
@@ -165,13 +168,13 @@ def generate():
                     validator.validate_numbering(ps, 1, TYPE_ORDER2)
                     renderer.render_pdf(ps, out, header_note=header,
                                         type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2,
-                                        labels=TYPE_LABELS2)
+                                        labels=TYPE_LABELS2, sections=sections)
                     n = len(ps)
                 else:
                     from exam.gen2 import build_exam2
                     build_exam2(client, bodies, out, header_note=header,
                                 max_retries=cfg.processing.max_retries,
-                                analyses=analyses, level=level)
+                                analyses=analyses, level=level, sections=sections)
                     n = len(bodies)
                 outputs.append({"fid": f2, "label": "변형문제 2회", "count": n,
                                 "name": f"{doc_name}_변형문제_2회"})

@@ -111,6 +111,7 @@ def build_exam(
     content_difficulty: str = "hard",
     analyses: list | None = None,
     level: str | None = None,
+    sections=None,
 ) -> Path:
     """여러 지문 원문 -> 검증 -> 2단 PDF 한 개.
 
@@ -134,4 +135,5 @@ def build_exam(
     validator.validate_passages(passages)
     validator.validate_numbering(passages, start=1)
 
-    return renderer.render_pdf(passages, out_path, header_note=header_note)
+    return renderer.render_pdf(passages, out_path, header_note=header_note,
+                               sections=sections)

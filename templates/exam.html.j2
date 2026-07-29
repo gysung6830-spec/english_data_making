@@ -18,10 +18,11 @@
   {% if header_note %}<div class="head-note">{{ header_note|e }}</div>{% endif %}
 </header>
 
+{% if 'student' in sections %}
 {# ============================================================
    ① 학생용 — 문제만
    ============================================================ #}
-<section class="questions">
+<section class="questions{% if first_section == 'student' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">학생용 · 문제</h2>
   <div class="columns">
     {% for block in blocks %}
@@ -40,11 +41,13 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
+{% if 'teacher' in sections %}
 {# ============================================================
    ② 교사용 — 문제 밑에 해설(정답은 볼드)
    ============================================================ #}
-<section class="teacher">
+<section class="teacher{% if first_section == 'teacher' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">교사용 · 문제 + 해설</h2>
   <div class="columns">
     {% for block in blocks %}
@@ -67,11 +70,13 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
+{% if 'quick' in sections %}
 {# ============================================================
    ③ 빠른 정답 — 번호·정답 한눈에
    ============================================================ #}
-<section class="quick">
+<section class="quick{% if first_section == 'quick' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">빠른 정답</h2>
   <div class="quick-grid">
     {% for a in quick %}
@@ -82,11 +87,13 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
+{% if 'answers' in sections %}
 {# ============================================================
    ④ 해설지 — 정답 및 상세 해설
    ============================================================ #}
-<section class="answers">
+<section class="answers{% if first_section == 'answers' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">정답 및 해설 · 해설지</h2>
   <div class="columns">
     {% for block in blocks %}
@@ -105,6 +112,7 @@
     {% endfor %}
   </div>
 </section>
+{% endif %}
 
 </body>
 </html>

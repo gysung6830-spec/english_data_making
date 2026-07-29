@@ -97,6 +97,8 @@ body {
 
 /* 각 섹션은 새 쪽에서 시작(학생용은 머리글 바로 아래) */
 .teacher, .quick, .answers { break-before: page; }
+/* 단, 선택 출력으로 맨 앞이 된 섹션은 새 쪽 강제 해제(빈 첫 쪽 방지) */
+.first-sec { break-before: auto; }
 
 .answer-title {
   font-weight: 700;            /* 볼드 4 */
