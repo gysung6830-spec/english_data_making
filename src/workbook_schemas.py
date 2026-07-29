@@ -49,13 +49,8 @@ class LLMSentence(BaseModel):
     en_template: str              # {{Q1}} 자리표시자를 포함한 영어 문장
     ko: str                       # 한국어 해석
     questions: list[LLMQuestion] = Field(default_factory=list)
-
-    @field_validator("questions")
-    @classmethod
-    def _has_questions(cls, v: list[LLMQuestion]) -> list[LLMQuestion]:
-        if not v:
-            raise ValueError("문장에 출제 문항(questions)이 없습니다.")
-        return v
+    # 출제할 요소가 없는 문장(빈 questions)이 섞여 와도 전체를 거부하지 않는다.
+    # 이런 문장은 build_workbook 에서 건너뛴다(spec: 출제할 요소가 없으면 넣지 않음).
 
 
 class LLMWorkbook(BaseModel):
@@ -129,7 +124,12 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
     - 문항 id 가 문서 전체에서 유일
     - 특수구문(order) display 는 〈 … 〉 형태
     """
+    total_q = 0
     for s in wb.sentences:
+        # 출제할 요소가 없는 문장(빈 questions)은 build_workbook 에서 건너뛰므로 검증도 건너뛴다.
+        if not s.questions:
+            continue
+        total_q += len(s.questions)
         ph = placeholders_in(s.en_template)
         ids = [q.id for q in s.questions]
         if len(ph) != len(set(ph)):
@@ -147,6 +147,9 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
                     raise ValueError(
                         f"문항 {q.id}: 특수구문(order) 표기는 〈 어구/어구 〉 형태여야 합니다(현재: {q.display!r})."
                     )
+    # 모든 문장이 비어 출제 문항이 하나도 없으면 실패로 보고 재요청한다.
+    if total_q == 0:
+        raise ValueError("출제 문항이 하나도 없습니다(모든 문장의 questions 가 비어 있음).")
 
 
 def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
@@ -155,6 +158,9 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
     sentences: list[Sentence] = []
     counter = 0
     for s in llm.sentences:
+        # 출제할 요소가 없는 문장(questions 비어 있음)은 워크북에 넣지 않는다.
+        if not s.questions:
+            continue
         # en_template 의 자리표시자 등장 순서대로 채번(위첨자 번호가 문장 흐름과 일치).
         order = placeholders_in(s.en_template)
         by_id = {q.id: q for q in s.questions}

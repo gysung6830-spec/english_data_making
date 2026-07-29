@@ -60,6 +60,30 @@ def test_id_mismatch_repair():
     print("PASS  id 불일치 자동 정렬(등장 순서)")
 
 
+# ---- 2-b. 빈 questions 문장은 거부하지 않고 건너뛴다 -------------------------
+def test_empty_questions_skipped():
+    # LLM 이 출제 요소 없는 문장(빈 questions)을 섞어 보내도 전체를 거부하지 않고 건너뛴다.
+    llm = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="No blanks here.", ko="가", questions=[]),
+        ws.LLMSentence(no=2, en_template="X {{Q1}} Y", ko="나",
+                       questions=[_q("Q1", display="(a)", answer="a")]),
+        ws.LLMSentence(no=3, en_template="Also nothing.", ko="다", questions=[]),
+    ])
+    ws.validate_llm_workbook(llm)                    # 빈 문장 있어도 통과
+    wb = ws.build_workbook(llm, title="T", subtitle="S")
+    assert len(wb.sentences) == 1 and wb.total == 1  # 빈 문장 2개는 제외
+    # 모든 문장이 비면 재요청되도록 실패해야 함
+    empty = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="Nothing.", ko="가", questions=[])])
+    try:
+        ws.validate_llm_workbook(empty)
+        raised = False
+    except ValueError:
+        raised = True
+    assert raised
+    print("PASS  빈 questions 문장 건너뛰기(+전부 비면 실패)")
+
+
 # ---- 3. order 표기 검증 ----------------------------------------------------
 def test_order_display_format():
     bad = ws.LLMWorkbook(sentences=[
@@ -141,6 +165,7 @@ def test_multi_passage_layout():
 def run_all():
     test_placeholder_one_to_one()
     test_id_mismatch_repair()
+    test_empty_questions_skipped()
     test_order_display_format()
     test_global_numbering()
     test_render_sentence_substitution()
