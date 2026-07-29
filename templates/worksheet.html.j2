@@ -234,13 +234,16 @@
   </div>
 {% endmacro %}
 
-{# ================= PART 1. 학생용 ================= #}
-<div class="doc">
+{% macro doc_header() %}
   <div class="doc-head">
     <span class="doc-badge">서술형 대비 교재</span>
     <div class="doc-title">{{ title }}</div>
-    <div class="doc-sub">학생용 · 교사용 · 빠른 정답 · 정답 및 해설</div>
   </div>
+{% endmacro %}
+
+{# ================= PART 1. 학생용 ================= #}
+<div class="doc">
+  {{ doc_header() }}
   {{ part_head(1, '학생용', '문제만 실려 있습니다. 직접 풀어 보세요.') }}
   {{ render_part(passages, false) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
@@ -248,6 +251,7 @@
 
 {# ================= PART 2. 교사용 ================= #}
 <div class="doc pgbreak">
+  {{ doc_header() }}
   {{ part_head(2, '교사용', '문제에 정답과 해설이 함께 표시됩니다.') }}
   {{ render_part(passages, true) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
@@ -255,6 +259,7 @@
 
 {# ================= PART 3. 빠른 정답 ================= #}
 <div class="doc pgbreak">
+  {{ doc_header() }}
   {{ part_head(3, '빠른 정답', '해설 없이 정답만 모았습니다.') }}
   <div class="qa-block">{{ quick(passages) }}</div>
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
@@ -262,6 +267,7 @@
 
 {# ================= PART 4. 정답 및 해설 ================= #}
 <div class="doc pgbreak">
+  {{ doc_header() }}
   {{ part_head(4, '정답 및 해설', '유형별 정답과 풀이를 정리했습니다.') }}
   {{ explain(passages) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
