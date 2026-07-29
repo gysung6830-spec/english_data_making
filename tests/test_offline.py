@@ -165,6 +165,44 @@ def test_worksheet_render():
     print("PASS  서술형 교재 렌더링(4파트·2지문)")
 
 
+# ---- 8. 서술형 교재 내용 정합성(오류 검증) --------------------------------
+def test_worksheet_consistency():
+    import re
+    from samples.sample_mock import mock_worksheet
+    ws = mock_worksheet()
+    UL = re.compile(r"\{\{(\d+)\|([^}]*)\}\}")
+    LBL = re.compile(r"\[\[([A-Z])\]\]")
+
+    # 어법: 밑줄 마커 수=underlines, 오류 정확히 3곳, 마커텍스트 일치, 오류엔 correction
+    for it in ws.error.items:
+        mm = {int(n): t for n, t in UL.findall(it.sentence)}
+        assert len(mm) == len(it.underlines)
+        assert sum(u.wrong for u in it.underlines) == 3
+        for u in it.underlines:
+            assert mm.get(u.no) == u.text
+            assert (u.correction != "") == u.wrong
+
+    # 보기어휘: used(4) + unused(3) == choices(7), 서로 배타적
+    for s in ws.choice.sets:
+        used = [se.answer for se in s.sentences]
+        assert len(s.unused) == 3
+        assert not (set(used) & set(s.unused))
+        assert sorted(set(used) | set(s.unused)) == sorted(set(s.choices))
+
+    # 문장변형: 오답 2개(정답과 배타), 문장 라벨==blanks 라벨
+    for q in ws.paraphrase.questions:
+        ans = {b.answer for b in q.blanks}
+        assert len(q.distractors) == 2 and not (set(q.distractors) & ans)
+        assert set(LBL.findall(q.sentence)) == {b.label.upper() for b in q.blanks}
+
+    # 문답: 정답 존재 + 근거(evidence)는 반드시 지문 안의 문장(추론 금지)
+    for q in ws.qa.items:
+        assert q.answer.strip()
+        if q.evidence:
+            assert q.evidence.strip().rstrip(".") in ws.passage
+    print("PASS  서술형 교재 내용 정합성(오류 검증)")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
@@ -173,6 +211,7 @@ def run_all():
     test_render_html()
     test_worksheet_schema()
     test_worksheet_render()
+    test_worksheet_consistency()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

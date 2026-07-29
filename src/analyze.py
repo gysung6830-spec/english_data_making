@@ -104,10 +104,23 @@ def analyze_passage(
     )
 
 
+def _qa_evidence_in_passage(qa: schemas.WSQAType, body: str) -> None:
+    """유형7 문답의 '근거(evidence)'가 지문 안의 문장인지 검증(추론 금지).
+
+    근거가 지문에 없으면 ValueError 를 던져 재생성을 유도한다.
+    (공백/개행 차이는 정규화해 비교)
+    """
+    nb = " ".join(body.split())
+    for i, it in enumerate(qa.items, 1):
+        ev = " ".join((it.evidence or "").split()).rstrip(".")
+        if ev and ev not in nb:
+            raise ValueError(f"{i}번 문답의 근거가 지문에 없습니다(추론 금지): {ev[:60]}")
+
+
 def analyze_worksheet(
     client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
 ) -> schemas.Worksheet:
-    """추출된 본문으로 서술형 대비 교재(6개 유형)를 각각 개별 호출로 생성."""
+    """추출된 본문으로 서술형 대비 교재(7개 유형)를 각각 개별 호출로 생성."""
     title, body = extraction.title, extraction.body
     r = cfg.processing.max_retries
     S = prompts.WS_SYSTEM
@@ -133,7 +146,8 @@ def analyze_worksheet(
             schemas.WSErrorType, max_retries=r),
         "qa": lambda: client.structured(
             S, prompts.ws_qa_prompt(title, body),
-            schemas.WSQAType, max_retries=r),
+            schemas.WSQAType, max_retries=r,
+            extra_validate=lambda qa: _qa_evidence_in_passage(qa, body)),
     }
 
     results: dict[str, object] = {}

@@ -293,9 +293,9 @@ def mock_worksheet(title: str = "The Value of Curiosity",
                 evidence="Studies show that curious students remember information longer and stay motivated.",
                 answer_ko="그들은 정보를 더 오래 기억한다."),
             schemas.WSQAItem(
-                question="Why should education encourage students to ask questions?",
-                answer="Because inquiry expands our knowledge and helps us gain new insight.",
-                evidence="It is important to ask, because inquiry expands our knowledge and helps us gain new insight.",
-                answer_ko="질문(탐구)이 지식을 넓히고 새로운 통찰을 얻게 해주기 때문이다."),
+                question="Why should education encourage learners to inquire?",
+                answer="Because curiosity fuels creativity and lifelong learning.",
+                evidence="education should encourage learners to inquire rather than simply memorize answers, because curiosity fuels creativity and lifelong learning.",
+                answer_ko="호기심이 창의성과 평생 학습을 촉진하기 때문이다."),
         ]),
     )
