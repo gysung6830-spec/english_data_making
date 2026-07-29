@@ -56,7 +56,7 @@ def resolve_vocab_method(method: str, passage_index: int = 0) -> str:
 
 
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
-                  logger=None, vocab_method: str = "synonym",
+                  logger=None, vocab_method: str = "mix",
                   content_difficulty: str = "hard", analysis=None,
                   level: str | None = None, passage_index: int = 0) -> Passage:
     """지문 원문 1개 -> 7종 문제/해설이 채워진 Passage.
@@ -116,7 +116,7 @@ def build_exam(
     header_note: str = "",
     max_retries: int = 1,
     logger=None,
-    vocab_method: str = "synonym",
+    vocab_method: str = "mix",
     content_difficulty: str = "hard",
     analyses: list | None = None,
     level: str | None = None,

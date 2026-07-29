@@ -73,9 +73,9 @@ def generate():
     # 'demo' 버튼을 눌렀을 때만 데모. '시험지 생성'은 항상 입력 지문을 사용한다.
     demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
-    vocab_method = request.form.get("vocab_method", "synonym")
+    vocab_method = request.form.get("vocab_method", "mix")
     if vocab_method not in ("synonym", "negation", "mix"):
-        vocab_method = "synonym"
+        vocab_method = "mix"
     from exam import difficulty as _diff
     level = _diff.normalize(request.form.get("level"))   # 상/중/하 (기본 중)
     content_difficulty = _diff.content_difficulty(level)
