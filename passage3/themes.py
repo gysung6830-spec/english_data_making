@@ -90,15 +90,15 @@ VOCAB_RULES = """
 
 
 def _modern_css() -> str:
-    # 업로드 색상 #ecedf1(옅은 청회색) 기반 팔레트.
+    # 딥그린 팔레트.
     # 배경·강조막대·구분선만 색을 쓰고, 글자는 모두 검은색.
-    FILL = "#ecedf1"       # 해석·어휘 박스 배경
+    FILL = "#e7f0ea"       # 해석·어휘 박스 배경(연녹색)
     INK = "#000000"        # 본문 글자(검정)
     KO = "#000000"         # 한글 해석 글자(검정)
     MUTED = "#000000"      # 라벨·머리글 글자(검정)
-    LINE = "#dcdee7"       # 문장 구분선
-    RULE = "#d3d6e1"       # 머리글 아래 굵은 선
-    ACCENT = "#5b6377"     # 제목 왼쪽 강조막대(슬레이트, 글자 아님)
+    LINE = "#d3e3d9"       # 문장 구분선(연녹)
+    RULE = "#c4dccd"       # 머리글 아래 굵은 선
+    ACCENT = "#14532d"     # 제목 왼쪽 강조막대(딥그린, 글자 아님)
     NUM = "#000000"        # 원문자 번호(검정)
     return f"""{FONT_IMPORT}{PAGE_RULES}
 body {{
@@ -176,7 +176,7 @@ table.two-col td.col-en {{ width: 62%; color: {INK}; padding-right: 20px; }}
 table.two-col td.col-ko {{ width: 38%; color: {KO}; font-size: 11px; }}
 {AUTOFIT_RULES}{VOCAB_RULES}
 /* 하단 어휘 박스도 같은 색 계열 (VOCAB_RULES 뒤에서 덮어씀) */
-.vocab {{ border-color: #d7d9e3; background: {FILL}; }}
+.vocab {{ border-color: #cbe0d2; background: {FILL}; }}
 .vocab-title {{ color: {MUTED}; }}
 .vocab-item .w {{ color: {INK}; }}
 .vocab-item .m {{ color: {KO}; }}
