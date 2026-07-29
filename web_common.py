@@ -75,6 +75,8 @@ BASE_CSS = """
   a.dl{color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;}
   .err{background:#fff1f3;border:1px solid #fecdd3;color:#9f1239;padding:10px 12px;border-radius:8px;
        font-size:13px;margin-top:10px;}
+  .warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:8px 10px;border-radius:8px;
+        font-size:12px;line-height:1.5;margin-top:6px;}
   #overlay{position:fixed;inset:0;background:rgba(255,255,255,.85);display:none;
            align-items:center;justify-content:center;flex-direction:column;z-index:10;}
   .spin{width:44px;height:44px;border:5px solid #d1d5db;border-top-color:var(--accent);
@@ -105,6 +107,7 @@ RESULT_HTML = """
               <a class=dl href="{{ url_for('download', fname=fitem.out) }}">다운로드</a>
             </div>
             {% endfor %}
+            {% if r.warn %}<div class=warn>⚠️ {{ r.warn }}</div>{% endif %}
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
         </td>
       </tr>

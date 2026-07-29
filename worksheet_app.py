@@ -19,6 +19,7 @@ from flask import render_template_string, request
 from src import extract
 from src.client import ClaudeClient
 from src.worksheet import pipeline as ws_pipeline
+from src.worksheet import quality as ws_quality
 from src.worksheet.pipeline import Header as WsHeader
 from web_common import (ALLOWED, BASE_CSS, UPLOAD_DIR, OUTPUT_DIR, _safe_name,
                         cfg, make_app, render_result)
@@ -153,7 +154,9 @@ def build_route():
             ws_pipeline.render_worksheet(analyses, out, layout=layout,
                                          footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
-            results.append({"name": f.filename + note, "ok": True,
+            # 추출 품질 점검: 문장 앞부분이 잘려 들어온 조각 지문이면 경고(목 미리보기는 제외).
+            warn = None if mock else ws_quality.fragment_warning(analyses)
+            results.append({"name": f.filename + note, "ok": True, "warn": warn,
                             "files": [{"label": f"✏️ {kind}", "out": out.name}]})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()

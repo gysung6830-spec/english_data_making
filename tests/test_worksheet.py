@@ -408,6 +408,38 @@ def test_hwp_support():
     print("PASS  HWP/HWPX 텍스트 추출 + 학습지 앱 허용")
 
 
+def _mk_analysis(sent_texts):
+    sents = []
+    for i, t in enumerate(sent_texts, start=1):
+        toks = [Token(text=w) for w in t.split(" ")]
+        sents.append(Sentence(index=i, lines=[toks]))
+    return Analysis(title_en="T", sentences=sents)
+
+
+def test_fragment_quality_guard():
+    from src.worksheet import quality
+
+    # 정상 지문(모두 대문자로 시작) → 경고 없음
+    ok = _mk_analysis([
+        "Conservation keeps an object in its present state.",
+        "Restoration involves restoring a historical instrument.",
+        "Conservators see themselves as protectors.",
+    ])
+    assert quality.fragment_warning([ok]) is None
+
+    # 첨부 PDF 처럼 머리 잘린 조각(소문자로 시작) → 경고
+    frag = _mk_analysis([
+        "its present state , to protect it from change , usually",
+        "restorative aspects —restoring a historical musical instrument ,",
+        "as protectors .",
+        "use , rather than interfering as minimally as possible",
+        "deteriorated state , for study , rather than to restore or repair it",
+    ])
+    w = quality.fragment_warning([frag])
+    assert w and "소문자" in w
+    print("PASS  조각난 추출 감지(품질 경고)")
+
+
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
@@ -433,6 +465,7 @@ def run_all():
     test_render_b_from_literal()
     test_webapp_worksheet_flow()
     test_hwp_support()
+    test_fragment_quality_guard()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 
 
