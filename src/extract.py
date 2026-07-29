@@ -82,7 +82,13 @@ def render_pdf_to_images(pdf_path: str | Path, dpi: int = 150,
     """
     import tempfile
 
-    import fitz  # PyMuPDF
+    try:
+        import fitz  # PyMuPDF
+    except ModuleNotFoundError as e:
+        raise ModuleNotFoundError(
+            "PDF를 이미지로 읽으려면 PyMuPDF가 필요합니다. "
+            "'pip install PyMuPDF' 를 실행한 뒤 다시 시도하세요."
+        ) from e
 
     pdf_path = Path(pdf_path)
     out_dir = Path(tempfile.mkdtemp(prefix="pdfimg_"))

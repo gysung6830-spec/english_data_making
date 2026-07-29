@@ -97,7 +97,15 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 params = build_request(model, prompts.EXTRACT_SYSTEM,
                                        prompts.extract_prompt(raw), schemas.PassageSet)
             elif cfg.extraction.pdf_mode == "vision":
-                params = _vision_extract_req(fid, pdf)
+                try:
+                    params = _vision_extract_req(fid, pdf)
+                except ModuleNotFoundError:
+                    # PyMuPDF 미설치 → 텍스트 추출로 폴백
+                    raw = extract.extract_passage_text(pdf)
+                    if extract.looks_empty(raw):
+                        raise ValueError("PDF 읽기에 PyMuPDF 필요('pip install PyMuPDF') 또는 사진으로 저장")
+                    params = build_request(model, prompts.EXTRACT_SYSTEM,
+                                           prompts.extract_prompt(raw), schemas.PassageSet)
             else:
                 raw = extract.extract_passage_text(pdf)
                 if extract.looks_empty(raw):

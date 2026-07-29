@@ -27,20 +27,36 @@ def _safe_stem(path: Path) -> str:
 
 
 def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
-    """PDF -> PassageSet. 설정(pdf_mode)에 따라 비전/텍스트로 추출."""
+    """PDF -> PassageSet. 설정(pdf_mode)에 따라 비전/텍스트로 추출.
+
+    비전 모드인데 PyMuPDF(fitz)가 없으면 텍스트 추출로 자동 폴백한다(중단 방지).
+    """
     mode = cfg.extraction.pdf_mode
-    if mode in ("text", "auto"):
+
+    def _text_extract(require: bool):
         raw = extract.extract_passage_text(src)
         if not extract.looks_empty(raw):
             return analyze.extract_passages(client, cfg, raw)
-        if mode == "text":
+        if require:
             raise ValueError(
-                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                "config.yaml 의 extraction.pdf_mode 를 'vision' 으로 두면 이미지로 읽습니다."
+                "PDF에서 텍스트를 추출하지 못했습니다(스캔본이거나 이미지 PDF). "
+                "PyMuPDF 설치('pip install PyMuPDF') 후 비전 모드로 읽거나, "
+                "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
-        # auto: 비어보이면 vision 으로 보완 (아래로 진행)
+        return None
+
+    if mode in ("text", "auto"):
+        pset = _text_extract(require=(mode == "text"))
+        if pset is not None:
+            return pset
+        # auto: 비어보이면 아래 vision 으로 보완
+
     # vision: PDF 페이지를 이미지로 렌더해 비전으로 읽음
-    imgs = extract.render_pdf_to_images(src, dpi=cfg.extraction.dpi)
+    try:
+        imgs = extract.render_pdf_to_images(src, dpi=cfg.extraction.dpi)
+    except ModuleNotFoundError:
+        # PyMuPDF 미설치 → 텍스트 추출로 폴백(그래도 결과는 나오게)
+        return _text_extract(require=True)
     try:
         return analyze.extract_passages_image(client, cfg, [str(p) for p in imgs])
     finally:
