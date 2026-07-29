@@ -68,7 +68,8 @@ class Chunk(BaseModel):
 class Sentence(BaseModel):
     no: int
     chunks: list[Chunk]
-    note: str = ""   # 문장 내용이 추상적일 때만 붙이는 쉬운 설명(아니면 공란)
+    note: str = ""          # 문장 내용이 추상적일 때만 붙이는 쉬운 설명(아니면 공란)
+    translation: str = ""   # 그 문장 전체를 자연스럽게 완역한 한국어(원문+전체해석 모음용)
 
     @field_validator("chunks")
     @classmethod

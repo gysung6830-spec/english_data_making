@@ -110,14 +110,17 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
-def render_html(reports, footer_note: str = "", brand: str = "은아 T") -> str:
+def render_html(reports, footer_note: str = "", brand: str = "은아 T",
+                with_source: bool = True) -> str:
     """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
 
+    with_source=True 이면 앞부분에 '원문 + 전체 해석' 모음을 먼저 넣고, 그 뒤에 지문별 분석지.
     brand: 직독직해 'made by ~' 와 출제표 '~ tip' 에 넣을 이름. 빈 값이면 브랜드 문구 제거.
     (하단 저작권 footer_note 는 brand 와 무관하게 항상 그대로 표시)
     """
     tmpl = _env.get_template("report.html.j2")
-    return tmpl.render(reports=_as_list(reports), footer_note=footer_note, brand=brand)
+    return tmpl.render(reports=_as_list(reports), footer_note=footer_note,
+                       brand=brand, with_source=with_source)
 
 
 def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
@@ -173,7 +176,8 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
     from weasyprint import HTML
 
     def pages(rep):
-        html = render_html([rep], footer_note, brand)
+        # 분석지 부분만으로 판정(앞의 원문+해석 모음 제외)
+        html = render_html([rep], footer_note, brand, with_source=False)
         return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
 
     if pages(report) <= 2:
@@ -215,16 +219,17 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     rlist = _as_list(reports)
 
-    def build(rs):
-        html = render_html(rs, footer_note, brand)
+    def build(rs, with_source):
+        html = render_html(rs, footer_note, brand, with_source=with_source)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
-    doc = build(rlist)
-    # 지문 1개당 2페이지(1p: 요약~어휘, 2p: 직독직해)를 넘기면 어휘를 줄여 다시 렌더
-    if fit_pages and len(doc.pages) > 2 * len(rlist):
-        rlist = [_fit_report(r, footer_note, css, min_vocab, brand) for r in rlist]
-        doc = build(rlist)
-    doc.write_pdf(str(out_path))
+    # 분석지 부분만으로 페이지 판정(앞의 원문+해석 모음은 제외)
+    if fit_pages:
+        analysis = build(rlist, with_source=False)
+        if len(analysis.pages) > 2 * len(rlist):
+            rlist = [_fit_report(r, footer_note, css, min_vocab, brand) for r in rlist]
+    # 최종 출력은 원문+해석 모음 포함
+    build(rlist, with_source=True).write_pdf(str(out_path))
     return out_path
 
 
