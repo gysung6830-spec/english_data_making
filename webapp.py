@@ -113,9 +113,10 @@ INDEX_HTML = """
 
       <label>③ 산출물 종류 <span class=hint>(원하는 것을 모두 선택)</span></label>
       <div class=kinds>
-        <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북 <span class=hint>(+단일유형)</span></label>
-        <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 채우기 워크북</label>
+        <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북 <span class=hint>(단일유형·빈칸 포함)</span></label>
+        <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 워크북만 <span class=hint>(단독)</span></label>
       </div>
+      <div class=hint>※ 통합 워크북을 선택하면 한 파일에 <b>통합 카드 → 단일 유형 → 빈칸 워크북</b> 순서로 모두 담깁니다.</div>
 
       <label>④ 저장할 PDF 파일명
         <span class=hint>(비우면 자동: <b>지문명_워크북</b>)</span>
@@ -263,7 +264,8 @@ def analyze_route():
     results = []
     wb_books = []       # 통합 워크북 파일간 합본용
     wb_packs = []       # 단일 유형 산문 워크시트 파일간 합본용
-    blank_sets = []     # 빈칸형 파일간 합본용
+    wb_bsets = []       # 통합 워크북에 포함되는 빈칸형(맨 뒤) 파일간 합본용
+    blank_sets = []     # 빈칸형 단독 출력 파일간 합본용
     n_files_ok = 0      # 산출물을 낸 파일 수(파일간 합본 여부 판단용)
     for f in files:
         ext = Path(f.filename).suffix.lower()
@@ -276,21 +278,25 @@ def analyze_route():
         stem = _safe_name(Path(f.filename).stem)
         try:
             if do_workbook:
-                # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 워크시트를 만든다.
+                # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 + 빈칸형을 만든다.
                 if mock:
                     wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
                     packs = [pipeline._mock_prose_pack_for_pdf(cfg, tmp)]
+                    file_bsets = [pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)]
                 else:
-                    wbs, packs = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
+                    wbs, packs, file_bsets = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
                 out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-                # 통합 카드(앞) → 단일 유형 4종(뒤)을 한 PDF 로
+                # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북(맨 뒤)을 한 PDF 로
                 pipeline.render_workbook_with_prose_pdf(
-                    wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR)
+                    wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
+                    blank_wb=pipeline._build_blank_workbook(file_bsets))
                 wb_books.extend(wbs)
                 wb_packs.extend(packs)
-                results.append({"name": f"{f.filename} · 통합 워크북+단일유형 (지문 {len(wbs)}편)",
+                wb_bsets.extend(file_bsets)
+                results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편)",
                                 "ok": True, "out": out.name})
-            if do_blanks:
+            # 빈칸형 '단독' 출력은 통합 워크북을 안 뽑을 때만(통합 선택 시 이미 맨 뒤에 포함됨)
+            if do_blanks and not do_workbook:
                 file_sets = ([pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)] if mock
                              else pipeline.build_blank_sets_for_pdf(client, cfg, tmp))
                 for idx, st in enumerate(file_sets, start=1):
@@ -315,14 +321,15 @@ def analyze_route():
         try:
             combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
             pipeline.render_workbook_with_prose_pdf(
-                wb_books, wb_packs, combined, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR)
+                wb_books, wb_packs, combined, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
+                blank_wb=pipeline._build_blank_workbook(wb_bsets))
             results.append({"name": "📚 통합 워크북 합본", "ok": True, "out": combined.name})
         except Exception as e:
             traceback.print_exc()
             results.append({"name": "📚 통합 합본", "ok": False, "error": str(e)})
 
-    # 빈칸형: 파일 2개 이상일 때만 파일간 합본 추가
-    if do_blanks and n_files_ok >= 2 and len(blank_sets) >= 2:
+    # 빈칸형 단독: 파일 2개 이상일 때만 파일간 합본 추가(통합 워크북 선택 시엔 이미 포함됨)
+    if do_blanks and not do_workbook and n_files_ok >= 2 and len(blank_sets) >= 2:
         try:
             for idx, st in enumerate(blank_sets, start=1):
                 st.no = idx
