@@ -26,6 +26,19 @@ class ProcessingCfg:
 
 
 @dataclass
+class ExtractionCfg:
+    """PDF 지문 추출 방식.
+
+    pdf_mode:
+      - "vision": PDF 를 페이지 이미지로 렌더해 Claude 비전으로 읽음(정확도 최고, 비용 큼)
+      - "text"  : pdfplumber 텍스트 추출(빠르고 저렴하나 표/다단에서 부정확할 수 있음)
+      - "auto"  : text 로 먼저 시도하고, 비어보이면 vision 으로 보완
+    """
+    pdf_mode: str = "vision"
+    dpi: int = 150
+
+
+@dataclass
 class DesignCfg:
     footer_note: str = ""
     one_pdf_per_passage: bool = True
@@ -48,6 +61,7 @@ class Config:
     logs_dir: Path = field(default_factory=lambda: ROOT / "logs")
     vocab: VocabCfg = field(default_factory=VocabCfg)
     processing: ProcessingCfg = field(default_factory=ProcessingCfg)
+    extraction: ExtractionCfg = field(default_factory=ExtractionCfg)
     design: DesignCfg = field(default_factory=DesignCfg)
     outputs: OutputsCfg = field(default_factory=OutputsCfg)
     api_key: str | None = None
@@ -73,6 +87,7 @@ def load_config(path: str | Path | None = None) -> Config:
     paths = data.get("paths", {})
     vocab = data.get("vocab", {})
     proc = data.get("processing", {})
+    extraction = data.get("extraction", {})
     design = data.get("design", {})
     outputs = data.get("outputs", {})
 
@@ -86,6 +101,10 @@ def load_config(path: str | Path | None = None) -> Config:
             parallel_sections=bool(proc.get("parallel_sections", True)),
             max_retries=int(proc.get("max_retries", 1)),
             use_batch_for_bulk=bool(proc.get("use_batch_for_bulk", True)),
+        ),
+        extraction=ExtractionCfg(
+            pdf_mode=str(extraction.get("pdf_mode", "vision")).lower(),
+            dpi=int(extraction.get("dpi", 150)),
         ),
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),

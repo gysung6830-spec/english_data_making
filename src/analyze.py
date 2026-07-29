@@ -19,8 +19,11 @@ def extract_passages(client: ClaudeClient, cfg: Config, raw_text: str) -> schema
     )
 
 
-def extract_passages_image(client: ClaudeClient, cfg: Config, image_path: str) -> schemas.PassageSet:
-    """0단계(사진): 이미지 -> 여러 지문(비전으로 읽음)."""
+def extract_passages_image(client: ClaudeClient, cfg: Config, image_path) -> schemas.PassageSet:
+    """0단계(사진/PDF 이미지): 이미지(들) -> 여러 지문(비전으로 읽음).
+
+    image_path 는 단일 경로 또는 여러 페이지 이미지 경로 리스트일 수 있다.
+    """
     return client.structured(
         system=prompts.EXTRACT_SYSTEM,
         prompt=prompts.extract_image_prompt(),

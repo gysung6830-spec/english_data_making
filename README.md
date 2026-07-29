@@ -107,6 +107,7 @@ python run.py --batch
 
 | 항목 | 설명 |
 |---|---|
+| `extraction.pdf_mode` | PDF 읽는 방식: `vision`(이미지로 렌더해 비전으로 정확히 읽기·기본) / `text`(빠름·저렴) / `auto` |
 | `vocab.min` / `vocab.max` | 어휘 개수 범위 (기본 12~20) |
 | `processing.parallel_sections` | 6개 섹션을 동시에 요청(빠름) |
 | `processing.max_retries` | 검증 실패 시 재요청 횟수 |

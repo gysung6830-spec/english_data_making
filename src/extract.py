@@ -71,3 +71,28 @@ def looks_empty(text: str) -> bool:
     """텍스트가 사실상 비어있는지(스캔본/추출 실패) 판단."""
     letters = re.sub(r"[^A-Za-z]", "", text)
     return len(letters) < 40
+
+
+def render_pdf_to_images(pdf_path: str | Path, dpi: int = 150,
+                         max_pages: int = 12) -> list[Path]:
+    """PDF 각 페이지를 이미지(PNG)로 렌더해 임시 파일 경로 목록을 반환.
+
+    pdfplumber 텍스트 추출이 부정확한 경우, 페이지를 이미지로 만들어
+    Claude 비전으로 직접 읽기 위함(사진 입력과 동일한 정확도).
+    """
+    import tempfile
+
+    import fitz  # PyMuPDF
+
+    pdf_path = Path(pdf_path)
+    out_dir = Path(tempfile.mkdtemp(prefix="pdfimg_"))
+    imgs: list[Path] = []
+    with fitz.open(str(pdf_path)) as doc:
+        for i, page in enumerate(doc):
+            if i >= max_pages:
+                break
+            pix = page.get_pixmap(dpi=dpi)
+            p = out_dir / f"p{i + 1:02d}.png"
+            pix.save(str(p))
+            imgs.append(p)
+    return imgs

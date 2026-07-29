@@ -26,18 +26,34 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
+def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
+    """PDF -> PassageSet. 설정(pdf_mode)에 따라 비전/텍스트로 추출."""
+    mode = cfg.extraction.pdf_mode
+    if mode in ("text", "auto"):
+        raw = extract.extract_passage_text(src)
+        if not extract.looks_empty(raw):
+            return analyze.extract_passages(client, cfg, raw)
+        if mode == "text":
+            raise ValueError(
+                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                "config.yaml 의 extraction.pdf_mode 를 'vision' 으로 두면 이미지로 읽습니다."
+            )
+        # auto: 비어보이면 vision 으로 보완 (아래로 진행)
+    # vision: PDF 페이지를 이미지로 렌더해 비전으로 읽음
+    imgs = extract.render_pdf_to_images(src, dpi=cfg.extraction.dpi)
+    try:
+        return analyze.extract_passages_image(client, cfg, [str(p) for p in imgs])
+    finally:
+        for p in imgs:
+            p.unlink(missing_ok=True)
+
+
 def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
     """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
-        raw = extract.extract_passage_text(src)
-        if extract.looks_empty(raw):
-            raise ValueError(
-                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-            )
-        pset = analyze.extract_passages(client, cfg, raw)
+        pset = _extract_pdf_passages(client, cfg, src)
     return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
 
 

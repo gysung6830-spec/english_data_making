@@ -17,6 +17,14 @@ vocab:
   min: 12
   max: 20
 
+# PDF 지문 추출 방식
+extraction:
+  # vision = PDF를 이미지로 렌더해 Claude 비전으로 읽음(정확도 최고, 사진 입력 수준)
+  # text   = pdfplumber 텍스트 추출(빠르고 저렴하나 표/다단에서 글자가 깨질 수 있음)
+  # auto   = text 로 먼저 시도하고, 비어보이면 vision 으로 보완
+  pdf_mode: "vision"
+  dpi: 150
+
 # 처리 방식
 processing:
   # 한 지문당 6개 섹션을 동시에 요청할지 여부 (true 면 더 빠름)

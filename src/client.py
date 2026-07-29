@@ -63,14 +63,16 @@ def build_request(
     prompt: str,
     model_cls: type[BaseModel],
     max_tokens: int = DEFAULT_MAX_TOKENS,
-    image_path: str | Path | None = None,
+    image_path: str | Path | list | None = None,
 ) -> dict:
     """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터.
 
     image_path 가 주어지면 이미지 + 텍스트를 함께 보내는 비전 요청이 된다.
+    여러 장(list)을 주면 여러 이미지를 순서대로 함께 보낸다(예: PDF 여러 페이지).
     """
     if image_path is not None:
-        content: Any = [image_block(image_path), {"type": "text", "text": prompt}]
+        paths = image_path if isinstance(image_path, (list, tuple)) else [image_path]
+        content: Any = [image_block(p) for p in paths] + [{"type": "text", "text": prompt}]
     else:
         content = prompt
     return {
@@ -112,7 +114,7 @@ class ClaudeClient:
         max_tokens: int = DEFAULT_MAX_TOKENS,
         max_retries: int = 1,
         extra_validate=None,
-        image_path: str | Path | None = None,
+        image_path: str | Path | list | None = None,
     ) -> T:
         """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청.
 

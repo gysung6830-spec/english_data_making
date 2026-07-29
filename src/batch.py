@@ -71,26 +71,38 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     failed: dict[str, str] = {}
 
     # ---- 1단계: 추출 ----
+    def _vision_extract_req(fid, pdf):
+        """PDF 를 페이지 이미지로 렌더해 비전 추출 요청 생성(base64 임베드 후 임시파일 삭제)."""
+        imgs = extract.render_pdf_to_images(pdf, dpi=cfg.extraction.dpi)
+        try:
+            return build_request(model, prompts.EXTRACT_SYSTEM,
+                                 prompts.extract_image_prompt(), schemas.PassageSet,
+                                 image_path=[str(p) for p in imgs])
+        finally:
+            for p in imgs:
+                p.unlink(missing_ok=True)
+
     extract_reqs = []
     for fid, pdf in files.items():
         try:
             if extract.is_image(pdf):
                 # 사진/캡처 → 비전 추출 요청
-                extract_reqs.append({
-                    "custom_id": f"{fid}__extract",
-                    "params": build_request(model, prompts.EXTRACT_SYSTEM,
-                                            prompts.extract_image_prompt(), schemas.PassageSet,
-                                            image_path=str(pdf)),
-                })
+                params = build_request(model, prompts.EXTRACT_SYSTEM,
+                                       prompts.extract_image_prompt(), schemas.PassageSet,
+                                       image_path=str(pdf))
+            elif cfg.extraction.pdf_mode == "vision":
+                params = _vision_extract_req(fid, pdf)
             else:
                 raw = extract.extract_passage_text(pdf)
                 if extract.looks_empty(raw):
-                    raise ValueError("텍스트 추출 실패(스캔본 PDF는 사진으로 저장해 주세요)")
-                extract_reqs.append({
-                    "custom_id": f"{fid}__extract",
-                    "params": build_request(model, prompts.EXTRACT_SYSTEM,
-                                            prompts.extract_prompt(raw), schemas.PassageSet),
-                })
+                    if cfg.extraction.pdf_mode == "auto":
+                        params = _vision_extract_req(fid, pdf)
+                    else:
+                        raise ValueError("텍스트 추출 실패(extraction.pdf_mode 를 vision 으로)")
+                else:
+                    params = build_request(model, prompts.EXTRACT_SYSTEM,
+                                           prompts.extract_prompt(raw), schemas.PassageSet)
+            extract_reqs.append({"custom_id": f"{fid}__extract", "params": params})
         except Exception as e:
             failed[fid] = f"extract-pre: {e}"
 
