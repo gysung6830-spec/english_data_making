@@ -197,14 +197,16 @@ WS_SYSTEM = (
 # 유형 1) 서술형 요약문 완성 -------------------------------------------------
 def ws_summary_prompt(title: str, body: str) -> str:
     return (
-        "[유형1: 서술형 요약문 완성] 지문 전체를 요약한 영어 문장을 만들고, 핵심 단어 일부를 "
-        "빈칸으로 만들어 학생이 '원문에서 찾은 단어'로 채우게 하세요.\n"
-        "- text: 지문 전체를 1~2문장으로 요약한 자연스러운 영어 요약문. 단, 핵심 단어 자리를 "
-        "[[1]], [[2]], [[3]] … 처럼 번호 빈칸으로 바꿔 넣으세요(빈칸 3~6개 권장).\n"
-        "- 빈칸에 들어갈 정답 단어는 '반드시 지문 본문에 실제로 등장하는 단어'여야 합니다(원형/철자 그대로).\n"
-        "- answers: 각 빈칸의 {no, word, note}. word=정답 단어, note=왜 그 단어인지 아주 짧은 한국어 근거(선택).\n"
-        "- translation: 완성된 요약문(빈칸을 정답으로 채운 상태)의 자연스러운 한국어 해석.\n"
-        "- 빈칸 번호는 1부터 순서대로, text 안의 번호와 answers 의 no 를 정확히 일치시키세요.\n\n"
+        "[유형1: 서술형 요약문 완성] 지문을 읽고 빈칸에 알맞은 단어를 '원문에서 찾아' 쓰게 하는 "
+        "요약문 완성 문항을 3~5개 만드세요. 각 문항은 지문 내용을 서로 다르게 요약한 문장입니다.\n"
+        "- items: 각 문항 {sentence, blanks}.\n"
+        "- sentence: 지문을 요약한 영어 문장 1개. 그 안에서 핵심 단어 '정확히 2곳'을 [[A]], [[B]] 로 "
+        "비워 두세요(A가 B보다 앞).\n"
+        "- blanks: 각 빈칸 {label, answer, meaning}. label 은 'A' 또는 'B'. "
+        "answer 는 빈칸에 들어갈 단어(반드시 지문 본문에 등장하는 단어를 쓰되, 문맥상 필요하면 어형을 변화). "
+        "meaning 은 그 단어의 한글 뜻.\n"
+        "- 요약문은 지문 핵심을 담되 원문 문장을 그대로 베끼지 말고 자연스럽게 바꿔 쓰세요.\n"
+        "- sentence 안의 [[A]],[[B]] 와 blanks 의 label 을 정확히 일치시키세요.\n\n"
         + _passage_block(title, body)
     )
 
@@ -212,10 +214,10 @@ def ws_summary_prompt(title: str, body: str) -> str:
 # 유형 2) 문장 변형 대비(paraphrasing) --------------------------------------
 def ws_paraphrase_prompt(title: str, body: str) -> str:
     return (
-        "[유형2: 문장 변형 대비] 지문에서 '변형 출제되기 좋은' 문장을 2~3개 고르세요. "
+        "[유형2: 문장 변형 대비] 지문에서 '변형 출제되기 좋은' 문장을 3개 고르세요. "
         "각 문장마다 5개의 영어 선지를 만들고, 그중 원문과 의미가 '일치하는' 것 1개, "
         "미묘하게 의미가 달라진 오답 4개를 섞으세요.\n"
-        "- questions: 각 문항 {no, original, options(5개), answer, explanation}.\n"
+        "- questions: 각 문항 {original, options(5개), answer, explanation}.\n"
         "- original: 지문에서 고른 원문 문장(그대로).\n"
         "- options: 원문을 paraphrasing 한 5개 영어 문장. 정답 1개는 동의어·구조 변환으로 의미를 보존하고, "
         "오답 4개는 반의어·주객 전도·조건/부정 왜곡·과장 등으로 의미를 살짝 비틀어 만드세요. "
@@ -227,50 +229,55 @@ def ws_paraphrase_prompt(title: str, body: str) -> str:
 
 
 # 유형 3) 요지/제목 배열 영작 -----------------------------------------------
-def ws_compose_idea_prompt(title: str, body: str) -> str:
+def ws_arrange_prompt(title: str, body: str) -> str:
     return (
-        "[유형3: 요지·제목 배열 영작] 지문의 '요지(main idea)'와 '제목(title)'을 영어로 쓰게 하는 "
-        "배열 영작 문제를 만드세요. 학생은 보기로 주어진 단어들을 어순에 맞게 배열해 문장을 완성합니다.\n"
-        "- items 에 정확히 2개: 첫째 label='요지', 둘째 label='제목'.\n"
-        "- 각 item {no, label, korean, given_words, word_count, answer, explanation}.\n"
-        "- answer: 요지/제목에 해당하는 자연스러운 영어 문장(제목은 명사구 형태 가능).\n"
-        "- given_words: 정답 문장을 이루는 단어들을 '뒤섞어' 나열한 보기(정답 어순이 아니게 순서를 섞을 것). "
-        "관사·전치사 등 기능어도 포함하세요.\n"
-        "- word_count: 정답의 단어 수(예: '9단어').\n"
-        "- korean: 그 요지/제목을 우리말로 제시(무엇을 영작해야 하는지).\n"
+        "[유형3: 요지·제목 배열 영작] 학생이 '보기의 단어를 모두 사용하여' 지문의 요지와 제목을 "
+        "영작하게 하는 문제를 만드세요.\n"
+        "- ideas: '글의 요지' 문항 3개. titles: '글의 제목' 문항 3개.\n"
+        "- 각 문항 {korean, given_words, word_count, answer, explanation}.\n"
+        "- korean: 영작할 우리말(요지는 한 문장, 제목은 짧은 어구).\n"
+        "- answer: 그에 해당하는 자연스러운 영어(요지는 완결된 문장, 제목은 명사구/구 형태).\n"
+        "- given_words: answer 를 이루는 단어들을 '전부' 뒤섞어(정답 어순이 아니게) 나열한 보기. "
+        "관사·전치사 등 기능어도 포함하고, 학생이 어형을 바꿔야 하면 원형으로 제시하세요.\n"
+        "- word_count: answer 의 단어 수(예: '12단어').\n"
+        "- ideas 3개는 서로 다른 표현으로 요지를, titles 3개는 서로 다른 각도의 제목을 만드세요.\n"
         "- explanation: 배열 포인트(주어-동사 위치, 핵심 어구)를 한국어로 짧게.\n\n"
         + _passage_block(title, body)
     )
 
 
 # 유형 4) 조건 영작 연습 ----------------------------------------------------
-def ws_compose_cond_prompt(title: str, body: str) -> str:
+def ws_compose_prompt(title: str, body: str) -> str:
     return (
         "[유형4: 조건 영작] 지문에서 문법적으로 의미 있는 문장 3~4개를 골라, 우리말 해석을 주고 "
         "'어법 조건 + 단어 수'에 맞춰 영작하게 하는 문제를 만드세요.\n"
-        "- items 3~4개, 각 {no, korean, conditions, given_words, word_count, answer, explanation}.\n"
+        "- items 3~4개, 각 {korean, conditions, given_words, word_count, answer, explanation}.\n"
         "- korean: 영작해야 할 우리말 문장(지문 문장의 자연스러운 번역).\n"
         "- answer: 지문의 원문 문장(그대로). 정답은 반드시 지문에 있는 문장이어야 합니다.\n"
         "- conditions: 지켜야 할 어법 조건 목록(예: '관계대명사 who 사용', '분사구문으로', '비교급 사용'). "
         "그 문장에 실제로 쓰인 문법을 조건으로 제시하세요.\n"
-        "- given_words: 필요하면 반드시 써야 할 핵심 단어를 원형으로 제시(어형은 학생이 바꾸게). 없으면 빈 배열.\n"
+        "- given_words: 반드시 써야 할 핵심 단어를 원형으로 제시(어형은 학생이 바꾸게). 없으면 빈 배열.\n"
         "- word_count: 정답 문장의 단어 수(예: '12단어').\n"
         "- explanation: 어떤 어법을 어떻게 적용하는지 한국어로 짧게.\n\n"
         + _passage_block(title, body)
     )
 
 
-# 유형 5) 보기 어휘 빈칸 완성(들어갈 수 없는 단어) --------------------------
+# 유형 5) 보기 어휘 빈칸 완성(사용되지 않는 낱말 고르기) --------------------
 def ws_choice_prompt(title: str, body: str) -> str:
     return (
-        "[유형5: 보기 어휘 빈칸 완성] 지문 문맥을 바탕으로, 빈칸에 '들어갈 수 없는' 단어를 고르는 "
-        "문제를 3~4개 만드세요.\n"
-        "- items 3~4개, 각 {no, sentence, choices, answer, explanation}.\n"
-        "- sentence: 빈칸을 ____ 로 표시한 영어 문장(지문 문장을 활용하거나 지문 내용에 맞게).\n"
-        "- choices: 5개 보기 단어. 그중 4개는 문맥·어법상 빈칸에 자연스럽게 들어갈 수 있는 단어(동의어 포함), "
-        "1개는 문맥상 또는 어법상 '들어갈 수 없는' 단어(반의어나 품사 불일치 등).\n"
-        "- answer: '들어갈 수 없는' 단어의 번호(1~5).\n"
-        "- explanation: 왜 그 단어만 들어갈 수 없는지, 나머지는 왜 가능한지 한국어로 간단히.\n\n"
+        "[유형5: 보기 어휘 빈칸 완성] '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 "
+        "낱말을 한 개 고르는' 문항 세트를 2개 만드세요.\n"
+        "- sets: 각 세트 {choices(5개), sentences(4개), unused, explanation}.\n"
+        "- choices: 서로 헷갈릴 만한(같은 주제·품사 계열) 수준 높은 영어 단어 5개. "
+        "지문의 어휘나 지문 주제와 관련된 단어를 우선 쓰되, 어렵고 변별력 있는 단어로 고르세요.\n"
+        "- sentences: 서로 독립된 영어 문장 4개. 각 문장에는 빈칸이 정확히 1개 있으며 "
+        "[[A]],[[B]],[[C]],[[D]] 로 표시합니다(label 도 각각 A,B,C,D). "
+        "각 문장은 choices 중 '딱 한 단어'만 문맥·어법상 자연스럽게 들어가도록 설계하세요.\n"
+        "- 각 sentence 의 answer 는 그 빈칸에 들어갈 choices 중 하나. 4개 문장에서 choices 중 4개가 쓰이고 "
+        "'1개'는 어디에도 쓰이지 않아야 합니다.\n"
+        "- unused: 어디에도 쓰이지 않는(정답으로 골라야 할) 낱말. 반드시 choices 안의 단어여야 합니다.\n"
+        "- explanation: 각 빈칸에 무엇이 들어가고 왜 unused 가 남는지 한국어로 간단히.\n\n"
         + _passage_block(title, body)
     )
 
@@ -280,7 +287,7 @@ def ws_error_prompt(title: str, body: str) -> str:
     return (
         "[유형6: 어법 오류 수정] 지문 문장을 바탕으로, 어법상 '틀린 부분이 하나' 들어간 문장을 "
         "3~5개 만드세요. 학생은 틀린 부분을 찾아 바르게 고칩니다.\n"
-        "- items 3~5개, 각 {no, text, error, correction, explanation}.\n"
+        "- items 3~5개, 각 {text, error, correction, explanation}.\n"
         "- text: 지문 문장을 가져오되 '핵심 어법 한 곳만' 일부러 틀리게 바꾼 문장. "
         "(예: 수일치, 시제, 태(수동/능동), 관계사, 준동사(to부정사/동명사/분사), 병렬, 형용사/부사 혼동 등)\n"
         "- error: 그 문장 안에서 틀린 표현(문장에 나온 그대로).\n"

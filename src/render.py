@@ -110,8 +110,8 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
-# ---- 서술형 교재용 필터 ---------------------------------------------------
-_WS_BLANK_RE = re.compile(r"\[\[(\d+)\]\]")
+# ---- 서술형 교재용 헬퍼 ---------------------------------------------------
+_WS_LBL_RE = re.compile(r"\[\[([A-Za-z])\]\]")
 _CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮"
 
 
@@ -127,22 +127,37 @@ def _circled(n) -> str:
 _env.filters["circled"] = _circled
 
 
-def _ws_blanks(text, answers, reveal: bool) -> Markup:
-    """요약문 text 의 [[n]] 을 학생용(빈칸) 또는 교사용(정답)으로 치환."""
-    ans = {a.no: a.word for a in (answers or [])}
+def _sub_labeled(text: str, answers_by_label: dict, reveal: bool) -> Markup:
+    """문장 속 [[A]],[[B]] 를 '(A) 빈칸' 또는 '(A) 정답'으로 치환."""
     esc = str(escape(text or ""))
 
     def repl(m: "re.Match") -> str:
-        n = int(m.group(1))
+        lab = m.group(1).upper()
         if reveal:
-            word = str(escape(ans.get(n, "____")))
-            return f'<u class="ws-fill">{word}</u><sup class="ws-bn">{n}</sup>'
-        return f'<span class="ws-blank"></span><sup class="ws-bn">{n}</sup>'
+            w = str(escape(answers_by_label.get(lab, "")))
+            return f'<b class="ws-lab">({lab})</b> <u class="ws-fill">{w}</u>'
+        return f'<b class="ws-lab">({lab})</b> <span class="ws-blank"></span>'
 
-    return Markup(_WS_BLANK_RE.sub(repl, esc))
+    return Markup(_WS_LBL_RE.sub(repl, esc))
 
 
-_env.filters["ws_blanks"] = _ws_blanks
+def _underline_words(text: str, words) -> Markup:
+    """지문(교사용) 안에서 정답 단어들을 밑줄로 표시."""
+    if not text:
+        return Markup("")
+    ws = sorted({w.strip() for w in (words or []) if w and w.strip()},
+                key=len, reverse=True)
+    if not ws:
+        return escape(text)
+    pattern = re.compile(r"\b(" + "|".join(re.escape(w) for w in ws) + r")\b", re.IGNORECASE)
+    out: list[str] = []
+    last = 0
+    for m in pattern.finditer(text):
+        out.append(str(escape(text[last:m.start()])))
+        out.append('<u class="ws-key">' + str(escape(m.group(0))) + "</u>")
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
 
 
 def render_html(reports, footer_note: str = "", brand: str = "은아 T") -> str:
@@ -356,38 +371,119 @@ def render_quiz_pdf(reports, out_path: str | Path,
 # ---------------------------------------------------------------------------
 # 내신 서술형 대비 교재 (6개 유형 · 4파트: 학생용/교사용/빠른정답/정답및해설)
 # ---------------------------------------------------------------------------
+def _hint(answer: str) -> str:
+    """정답의 첫 글자만 노출하는 힌트(학생용 답란)."""
+    a = (answer or "").strip()
+    return a[0] if a else ""
+
+
+def _ws_context(worksheets) -> list[dict]:
+    """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료)."""
+    reps = _as_list(worksheets)
+    counter = {"n": 0}
+
+    def nxt() -> int:
+        counter["n"] += 1
+        return counter["n"]
+
+    passages: list[dict] = []
+    for i, ws in enumerate(reps, 1):
+        src = f"지문 {i}"
+
+        # 유형1: 요약문 완성 (지문 상단 노출 + (A)(B) 빈칸)
+        sum_items = []
+        all_answers = []
+        for it in ws.summary.items:
+            amap = {b.label.upper(): b.answer for b in it.blanks}
+            all_answers += [b.answer for b in it.blanks]
+            sum_items.append({
+                "qno": nxt(), "src": src,
+                "student": _sub_labeled(it.sentence, amap, False),
+                "teacher": _sub_labeled(it.sentence, amap, True),
+                "blanks": [{"label": b.label.upper(), "answer": b.answer,
+                            "meaning": b.meaning, "hint": _hint(b.answer)}
+                           for b in it.blanks],
+            })
+
+        # 유형2: 문장 변형
+        para_items = [{
+            "qno": nxt(), "src": src, "original": q.original,
+            "options": list(q.options), "answer": q.answer,
+            "explanation": q.explanation,
+        } for q in ws.paraphrase.questions]
+
+        # 유형3: 요지/제목 배열 영작
+        def arrange(items):
+            return [{
+                "qno": nxt(), "src": src, "korean": it.korean,
+                "given_words": list(it.given_words), "word_count": it.word_count,
+                "answer": it.answer, "explanation": it.explanation,
+            } for it in items]
+        idea_items = arrange(ws.arrange.ideas)
+        title_items = arrange(ws.arrange.titles)
+
+        # 유형4: 조건 영작
+        comp_items = [{
+            "qno": nxt(), "src": src, "korean": it.korean,
+            "conditions": list(it.conditions), "given_words": list(it.given_words),
+            "word_count": it.word_count, "answer": it.answer,
+            "explanation": it.explanation,
+        } for it in ws.compose.items]
+
+        # 유형5: 사용되지 않는 낱말 고르기
+        cloze_sets = []
+        for s in ws.choice.sets:
+            amap = {se.label.upper(): se.answer for se in s.sentences}
+            try:
+                unused_idx = [c.lower() for c in s.choices].index((s.unused or "").lower()) + 1
+            except ValueError:
+                unused_idx = 0
+            cloze_sets.append({
+                "qno": nxt(), "src": src, "choices": list(s.choices),
+                "unused": s.unused, "unused_index": unused_idx,
+                "explanation": s.explanation,
+                "sentences": [{
+                    "label": se.label.upper(), "answer": se.answer,
+                    "student": _sub_labeled(se.text, amap, False),
+                    "teacher": _sub_labeled(se.text, amap, True),
+                } for se in s.sentences],
+            })
+
+        # 유형6: 어법 오류 수정
+        err_items = [{
+            "qno": nxt(), "src": src, "text": it.text, "error": it.error,
+            "correction": it.correction, "explanation": it.explanation,
+        } for it in ws.error.items]
+
+        passages.append({
+            "no": i, "total": len(reps), "title": ws.title,
+            "passage": ws.passage,
+            "passage_teacher": _underline_words(ws.passage, all_answers),
+            "summary": sum_items,
+            "paraphrase": para_items,
+            "ideas": idea_items, "titles": title_items,
+            "compose": comp_items,
+            "cloze": cloze_sets,
+            "error": err_items,
+        })
+    return passages
+
+
 def render_worksheet_pdf(worksheets, out_path: str | Path,
                          title: str = "내신 서술형 대비 교재",
                          footer_note: str = "", brand: str = "은아 T") -> Path:
     """여러 지문의 Worksheet 를 한 PDF 로 만든다.
 
     구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
-    지문이 여러 개면 각 파트 안에서 지문별로 이어서 배치한다.
+    일련번호는 PDF 전체에 걸쳐 이어 붙고, 출처는 '지문 N' 배지로 표시한다.
     """
     from weasyprint import CSS, HTML
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    reps = _as_list(worksheets)
-    # 유형 메타(제목/부제/색 클래스) — 학생/교사용 순서
-    types = [
-        {"key": "summary", "n": 1, "name": "서술형 요약문 완성",
-         "sub": "빈칸에 원문에서 찾은 단어를 쓰시오."},
-        {"key": "paraphrase", "n": 2, "name": "문장 변형 대비",
-         "sub": "원문과 의미가 일치하는 것을 고르시오."},
-        {"key": "compose_idea", "n": 3, "name": "요지·제목 배열 영작",
-         "sub": "보기의 단어를 배열해 요지와 제목을 완성하시오."},
-        {"key": "compose_cond", "n": 4, "name": "조건 영작 연습",
-         "sub": "어법 조건과 단어 수에 맞게 영작하시오."},
-        {"key": "choice", "n": 5, "name": "보기 어휘 빈칸 완성",
-         "sub": "빈칸에 들어갈 수 없는 단어를 고르시오."},
-        {"key": "error", "n": 6, "name": "어법 오류 수정",
-         "sub": "어법상 틀린 부분을 찾아 바르게 고치시오."},
-    ]
-    passages = [{"no": i, "total": len(reps), "ws": ws}
-                for i, ws in enumerate(reps, 1)]
+    passages = _ws_context(worksheets)
     tmpl = _env.get_template("worksheet.html.j2")
-    html = tmpl.render(title=title, passages=passages, types=types,
+    html = tmpl.render(title=title, passages=passages,
                        footer_note=footer_note, brand=brand)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])

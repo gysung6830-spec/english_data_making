@@ -127,9 +127,9 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     ws_specs = {
         "ws_summary": (schemas.WSSummaryType, prompts.ws_summary_prompt, 8000),
         "ws_paraphrase": (schemas.WSParaphraseType, prompts.ws_paraphrase_prompt, 10000),
-        "ws_compose_idea": (schemas.WSComposeType, prompts.ws_compose_idea_prompt, 8000),
-        "ws_compose_cond": (schemas.WSComposeType, prompts.ws_compose_cond_prompt, 8000),
-        "ws_choice": (schemas.WSChoiceType, prompts.ws_choice_prompt, 8000),
+        "ws_arrange": (schemas.WSArrangeType, prompts.ws_arrange_prompt, 8000),
+        "ws_compose": (schemas.WSComposeType, prompts.ws_compose_prompt, 8000),
+        "ws_choice": (schemas.WSChoiceType, prompts.ws_choice_prompt, 10000),
         "ws_error": (schemas.WSErrorType, prompts.ws_error_prompt, 8000),
     }
     for (fid, pidx), ex in units.items():
@@ -202,9 +202,9 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                     ))
                 if need_ws:
                     worksheets.append(schemas.Worksheet(
-                        title=ex.title, source=ex.source,
+                        title=ex.title, source=ex.source, passage=ex.body,
                         summary=p["ws_summary"], paraphrase=p["ws_paraphrase"],
-                        compose_idea=p["ws_compose_idea"], compose_cond=p["ws_compose_cond"],
+                        arrange=p["ws_arrange"], compose=p["ws_compose"],
                         choice=p["ws_choice"], error=p["ws_error"],
                     ))
             pdf = files[fid]

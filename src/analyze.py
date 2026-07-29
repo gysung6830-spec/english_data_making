@@ -119,15 +119,15 @@ def analyze_worksheet(
         "paraphrase": lambda: client.structured(
             S, prompts.ws_paraphrase_prompt(title, body),
             schemas.WSParaphraseType, max_tokens=10000, max_retries=r),
-        "compose_idea": lambda: client.structured(
-            S, prompts.ws_compose_idea_prompt(title, body),
-            schemas.WSComposeType, max_retries=r),
-        "compose_cond": lambda: client.structured(
-            S, prompts.ws_compose_cond_prompt(title, body),
+        "arrange": lambda: client.structured(
+            S, prompts.ws_arrange_prompt(title, body),
+            schemas.WSArrangeType, max_retries=r),
+        "compose": lambda: client.structured(
+            S, prompts.ws_compose_prompt(title, body),
             schemas.WSComposeType, max_retries=r),
         "choice": lambda: client.structured(
             S, prompts.ws_choice_prompt(title, body),
-            schemas.WSChoiceType, max_retries=r),
+            schemas.WSChoiceType, max_tokens=10000, max_retries=r),
         "error": lambda: client.structured(
             S, prompts.ws_error_prompt(title, body),
             schemas.WSErrorType, max_retries=r),
@@ -146,10 +146,11 @@ def analyze_worksheet(
     return schemas.Worksheet(
         title=title,
         source=extraction.source,
+        passage=body,
         summary=results["summary"],
         paraphrase=results["paraphrase"],
-        compose_idea=results["compose_idea"],
-        compose_cond=results["compose_cond"],
+        arrange=results["arrange"],
+        compose=results["compose"],
         choice=results["choice"],
         error=results["error"],
     )

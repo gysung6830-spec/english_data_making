@@ -108,19 +108,26 @@ def test_render_html():
 # ---- 6. 서술형 교재 스키마 검증 ------------------------------------------
 def test_worksheet_schema():
     # 변형 선지는 정확히 5개여야 함
-    ok = {"no": 1, "original": "x", "options": ["a", "b", "c", "d", "e"],
-          "answer": 1, "explanation": ""}
+    ok = {"original": "x", "options": ["a", "b", "c", "d", "e"], "answer": 1}
     schemas.WSParaphraseQ.model_validate(ok)
     try:
         schemas.WSParaphraseQ.model_validate({**ok, "options": ["a", "b", "c"]})
         assert False, "선지 3개는 통과하면 안 됨"
     except Exception:
         pass
-    # 요약문 빈칸은 2개 이상
+    # 요약문 문항은 2개 이상
     try:
         schemas.WSSummaryType.model_validate(
-            {"text": "a [[1]]", "answers": [{"no": 1, "word": "x"}]})
-        assert False, "빈칸 1개는 통과하면 안 됨"
+            {"items": [{"sentence": "a [[A]]", "blanks": [{"label": "A", "answer": "x"}]}]})
+        assert False, "요약 문항 1개는 통과하면 안 됨"
+    except Exception:
+        pass
+    # 어휘 빈칸 세트: 보기는 5개 이상
+    try:
+        schemas.WSClozeSet.model_validate(
+            {"choices": ["a", "b"], "sentences": [{"label": "A", "text": "[[A]]", "answer": "a"}],
+             "unused": "b"})
+        assert False, "보기 2개는 통과하면 안 됨"
     except Exception:
         pass
     print("PASS  서술형 교재 스키마 검증")
@@ -130,12 +137,16 @@ def test_worksheet_schema():
 def test_worksheet_render():
     from samples.sample_mock import mock_worksheet
     from src import render
-    # 빈칸 치환 필터: 학생용은 빈칸, 교사용은 정답 노출
-    ws = mock_worksheet()
-    student = render._ws_blanks(ws.summary.text, ws.summary.answers, False)
-    teacher = render._ws_blanks(ws.summary.text, ws.summary.answers, True)
-    assert "ws-blank" in student and "essential" not in student
-    assert "essential" in teacher
+    # 빈칸 치환: 학생용은 빈칸(정답 숨김), 교사용은 정답 노출
+    student = render._sub_labeled("stay [[A]] in class", {"A": "motivated"}, False)
+    teacher = render._sub_labeled("stay [[A]] in class", {"A": "motivated"}, True)
+    assert "ws-blank" in student and "motivated" not in student
+    assert "motivated" in teacher and "(A)" in teacher
+    # 일련번호가 지문을 넘어 이어지는지(컨텍스트 빌더)
+    passages = render._ws_context([mock_worksheet(), mock_worksheet("Second")])
+    first_nos = [q["qno"] for q in passages[0]["summary"]]
+    assert first_nos == sorted(first_nos)
+    assert passages[1]["summary"][0]["qno"] > passages[0]["error"][-1]["qno"]
     # 전체 PDF 렌더가 예외 없이 되고 파일이 생성되는지
     import tempfile
     from pathlib import Path
