@@ -328,7 +328,21 @@ LEARN_RESULT_HTML = """
       <b>{{ name }}</b>을(를) 고르면 이 시험지 스타일대로 만들어집니다.
       (누적 학습됨: {{ exams }})
     </div>
-    <label>추출된 문항 구조</label>
+
+    <label>학습된 출제원리</label>
+    <table>
+      <tr><td style="width:110px"><b>난이도 경향</b></td><td>{{ difficulty }}</td></tr>
+      <tr><td><b>어법 출제 축</b></td><td>{{ grammar_focus or '—' }}</td></tr>
+      <tr><td><b>발문 문구</b></td><td>{{ n_stems }}개 유형 학습</td></tr>
+    </table>
+    {% if notes %}
+    <label>출제 스타일 특징</label>
+    <ul style="font-size:13px;line-height:1.6;margin:4px 0 0;padding-left:18px">
+      {% for n in notes %}<li>{{ n }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    <label style="margin-top:16px">추출된 문항 구조</label>
     <table>
       <tr><th>#</th><th>구분</th><th>유형</th><th>배점</th></tr>
       {% for it in items %}
@@ -574,11 +588,16 @@ def learn_run():
     items = [{"no": it.no, "section": it.section,
               "type_ko": TYPE_LABEL_KO.get(it.type, it.type),
               "score": _fmt(it.score)} for it in bp.items]
+    _diff_ko = {"high": "상", "mid": "중", "low": "하"}
     return render_template_string(
         LEARN_RESULT_HTML, name=bp.meta.name, grade=bp.meta.grade,
         subject=bp.meta.subject, total=_fmt(bp.meta.total_score),
         n_choice=len(bp.choice_items), n_essay=len(bp.essay_items),
-        exams=", ".join(prof.get("exams_learned", [])), items=items)
+        exams=", ".join(prof.get("exams_learned", [])), items=items,
+        difficulty=_diff_ko.get(prof.get("difficulty_trend"), "중"),
+        grammar_focus=", ".join(prof.get("grammar_focus") or []),
+        n_stems=len(prof.get("stem_style") or {}),
+        notes=prof.get("notes") or [])
 
 
 def _fmt(s: float) -> str:

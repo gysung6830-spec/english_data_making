@@ -5,6 +5,7 @@ blueprint.json 대신 실제 시험지에서 자동으로 뽑아 준다.
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -12,7 +13,7 @@ from pydantic import BaseModel, Field
 
 from .core.models import Blueprint, BlueprintMeta, Item
 from .pipeline import learn_from_blueprint
-from .school import find_school, register_school
+from .school import find_school, register_school, save_profile
 
 _IMG_EXT = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 _UNDERLINE_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd"}
@@ -54,9 +55,10 @@ TYPE_GUIDE = (
 )
 
 SYSTEM = (
-    "당신은 학교 영어 내신 시험지를 분석해 문항 구조를 추출하는 전문가다. 시험지의 각 "
-    "문항을 보고 번호·구분(선다형/서술형)·유형 코드·배점을 정확히 식별한다. 유형은 반드시 "
-    "주어진 코드 목록 중에서만 고른다. 반드시 요구된 JSON 스키마로만 답한다."
+    "당신은 학교 영어 내신 시험지를 분석해 '구조'와 '출제원리'를 함께 추출하는 전문가다. "
+    "각 문항의 번호·구분(선다형/서술형)·유형 코드·배점·발문 문구를 식별하고, 이 학교의 "
+    "어법 출제 축·오답 구성 방식·함정 스타일·난이도 경향을 파악한다. 유형은 반드시 주어진 "
+    "코드 목록 중에서만 고른다. 반드시 요구된 JSON 스키마로만 답한다."
 )
 
 
@@ -66,6 +68,7 @@ class ExamItemOut(BaseModel):
     type: str = Field(..., description="유형 코드(주어진 목록 중 하나)")
     score: float = Field(..., description="이 문항의 배점(점)")
     underlines: int | None = Field(None, description="어법·어휘처럼 밑줄이 있으면 개수, 없으면 null")
+    stem: str = Field("", description="이 문항의 발문(문제 지시문) 문구를 배점 표시 없이 그대로")
 
 
 class ExamBlueprintOut(BaseModel):
@@ -73,6 +76,14 @@ class ExamBlueprintOut(BaseModel):
     subject: str = Field(..., description="과목명(예: 공통영어1)")
     time_min: int = Field(..., description="시험 시간(분)")
     total_score: float = Field(..., description="총점(대개 100)")
+    difficulty: str = Field("중", description="전반적 난이도: '상' 또는 '중' 또는 '하'")
+    grammar_focus: list[str] = Field(default_factory=list, description=(
+        "어법 문항이 자주 다루는 문법 포인트(예: 관계사, 태, 분사, 수일치, 시제). "
+        "어법 문항의 정답을 근거로 3~6개."))
+    style_notes: list[str] = Field(default_factory=list, description=(
+        "이 학교의 출제 스타일 특징 3~6개(예: '오답은 지문 단어를 재활용한 함정', "
+        "'빈칸은 결론부를 비움', '서술형은 본문 단어만 사용 조건', '지문 소재가 과학·환경 위주'). "
+        "각 항목은 한 문장으로 간결하게."))
     items: list[ExamItemOut] = Field(..., description="문항 목록(선다형 먼저, 서술형 나중)")
 
 
@@ -86,6 +97,17 @@ def _read_exam_text(path: str | Path) -> str:
         with pdfplumber.open(str(p)) as pdf:
             return "\n".join((pg.extract_text() or "") for pg in pdf.pages)
     return ""
+
+
+def _clean_stem(s: str) -> str:
+    """발문에서 배점 표시·앞 번호를 제거해 순수 발문 문구만 남긴다."""
+    s = re.sub(r"\[[^\]]*점\]", "", s or "")        # [3점] 제거
+    s = re.sub(r"^\s*\d+\s*[.)]\s*", "", s)          # 앞 번호 '1.' 제거
+    return re.sub(r"\s+", " ", s).strip()
+
+
+_DIFF_MAP = {"상": "high", "중": "mid", "하": "low",
+             "high": "high", "mid": "mid", "low": "low"}
 
 
 def _coerce_type(section: str, t: str) -> str:
@@ -104,9 +126,12 @@ def extract_blueprint(client: Any, files: list[str | Path], grade: int = 1) -> E
 
     prompt = (
         f"{TYPE_GUIDE}\n\n"
-        "아래 학교 시험지를 분석해 '모든 문항'의 번호·구분(choice/essay)·유형 코드·배점을 "
-        "추출하라. 선다형과 서술형을 구분하고, 배점 합이 총점과 맞도록 각 문항 배점을 읽어라. "
-        "어법·어휘 유형이면 밑줄 개수(대개 5)를 underlines 에 넣어라.\n\n"
+        "아래 학교 시험지를 분석하라.\n"
+        "(1) 구조: '모든 문항'의 번호·구분(choice/essay)·유형 코드·배점·발문 문구(stem)를 "
+        "추출한다. 선다형과 서술형을 구분하고, 배점 합이 총점과 맞도록 각 문항 배점을 읽는다. "
+        "어법·어휘 유형이면 밑줄 개수(대개 5)를 underlines 에 넣는다.\n"
+        "(2) 출제원리: 이 학교의 어법 출제 축(grammar_focus), 출제 스타일 특징(style_notes: "
+        "오답 구성·함정·소재·서술형 조건 등), 전반적 난이도(difficulty)를 파악한다.\n\n"
         f"[학교 시험지 내용]\n{body if body else '(첨부 이미지 참조)'}"
     )
     image_path = imgs[0] if imgs and not body else None
@@ -159,4 +184,23 @@ def learn_exam(school_id: str, exam_name: str, files: list[str | Path],
     prof = learn_from_blueprint(school_id, exam_name, bp,
                                 name=school.get("name", name or school_id),
                                 level=school.get("level", level))
+
+    # ── 출제원리 학습분 병합(생성 시 stem_style·grammar_focus·notes·난이도로 주입됨) ──
+    ss = prof.setdefault("stem_style", {})
+    for it in out.items:
+        stem = _clean_stem(it.stem)
+        if len(stem) > 4:                       # 유형별 대표 발문 문구
+            ss[_coerce_type(it.section, it.type)] = stem
+    if out.grammar_focus:
+        prof["grammar_focus"] = list(dict.fromkeys(
+            (prof.get("grammar_focus") or []) + list(out.grammar_focus)))
+    if out.style_notes:
+        notes = prof.get("notes") or []
+        for n in out.style_notes:
+            n = (n or "").strip()
+            if n and n not in notes:
+                notes.append(n)
+        prof["notes"] = notes
+    prof["difficulty_trend"] = _DIFF_MAP.get((out.difficulty or "").strip(), "mid")
+    save_profile(school_id, prof)
     return prof, bp
