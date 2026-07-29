@@ -53,9 +53,20 @@ _NOISE_LINE = re.compile(
 # 여러 지문이 한 파일에 있을 때의 경계(각 지문 끝의 출처 꼬리말)
 _PASSAGE_SPLIT = re.compile(r"\[Flow\s*Edu\][^\n]*", re.IGNORECASE)
 
+# 워크북(WORKBOOK) 워크시트 노이즈
+#  - 러닝 헤더:   "31 2026 6 ┃3 WORKBOOK4 WORKBOOK. 1."  (문제번호 + 연·월 + WORKBOOK)
+#  - 각주 번호:   "related.1)"  "use.2)"  "do.6)"  (문장 끝 참조 숫자)
+#  - 문장 번호:   "1. Ever ~"  ". 2. Taken ~"  (문장 앞 일련번호)
+_WB_HEADER = re.compile(
+    r"\d+\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?", re.IGNORECASE)
+_WB_HEADER_NUM = re.compile(
+    r"(\d+)\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?", re.IGNORECASE)
+_FOOTNOTE = re.compile(r"(?<!\()\b\d{1,3}\)")            # 각주 번호(괄호쌍 (2)은 보호)
+_SENT_NO = re.compile(r"(?<![\w.])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")  # 문장 앞 일련번호
+
 
 def _clean_pdf_text(segment: str) -> str:
-    """한 지문 조각에서 한글·머리글·원번호를 걷어내고 영어 본문만 남긴다."""
+    """한 지문 조각에서 한글·머리글·원번호·워크시트 노이즈를 걷어내고 영어 본문만 남긴다."""
     lines: list[str] = []
     for ln in segment.splitlines():
         if _NOISE_LINE.search(ln):
@@ -63,19 +74,46 @@ def _clean_pdf_text(segment: str) -> str:
         ln = _CIRCLED.sub(" ", ln)
         ln = _HANGUL.sub("", ln)                        # 한글 제거(영어 지문엔 한글 없음)
         ln = ln.replace("­", "")                        # soft hyphen 등
-        if len(re.sub(r"[^A-Za-z]", "", ln)) < 2:       # 영어가 거의 없으면 버림
-            continue
-        lines.append(ln.strip())
-    text = re.sub(r"\s+", " ", " ".join(lines)).strip()
+        lines.append(ln)
+    text = " ".join(lines)
+    # 워크시트 노이즈 제거(줄 경계를 넘나들므로 합친 뒤 한 번에)
+    text = _WB_HEADER.sub(" ", text)                    # WORKBOOK 러닝 헤더
+    text = _FOOTNOTE.sub("", text)                      # 각주 번호 .1) .2) …
+    text = _SENT_NO.sub("", text)                       # 문장 앞 일련번호 1. 2. …
+    text = re.sub(r"\bWORKBOOK\w*\.?", " ", text, flags=re.IGNORECASE)  # 잔여 WORKBOOK
+    text = re.sub(r"\s+", " ", text).strip()
     text = re.sub(r"\s+([,.;:!?)])", r"\1", text)   # 구두점 앞 공백 제거(2단 병합 잔여)
     text = re.sub(r"([,;:])\1+", r"\1", text)         # 중복 구두점 정리
     text = re.sub(r",\s*\.", ".", text)               # ' , .' → '.'
+    text = re.sub(r"\.\s*\.(\s*\.)+", ".", text)      # 연속 마침표 정리
     return text
 
 
+def _split_by_workbook(raw: str) -> list[str] | None:
+    """WORKBOOK 워크시트: 헤더의 '문제번호'가 바뀌는 곳을 지문 경계로 삼는다.
+
+    같은 번호가 이어지면(연속 페이지) 한 지문으로 합치고, 번호가 달라지면 새 지문.
+    헤더가 없으면 None(다른 분리 방식으로 폴백).
+    """
+    matches = list(_WB_HEADER_NUM.finditer(raw))
+    if len(matches) < 2:
+        return None
+    result: list[list[str]] = []      # [[문제번호, 본문], …] 순서 유지
+    for i, m in enumerate(matches):
+        num = m.group(1)
+        seg = raw[m.end():matches[i + 1].start() if i + 1 < len(matches) else len(raw)]
+        if result and result[-1][0] == num:
+            result[-1][1] += " " + seg
+        else:
+            result.append([num, seg])
+    return [seg for _, seg in result]
+
+
 def _passages_from_raw(raw: str) -> list[str]:
-    """추출한 원문 텍스트 → 한글·머리글 제거 후 영어 지문들로 분리(PDF·HWP 공용)."""
-    segments = _PASSAGE_SPLIT.split(raw) if _PASSAGE_SPLIT.search(raw) else [raw]
+    """추출한 원문 텍스트 → 한글·머리글·워크시트 노이즈 제거 후 영어 지문들로 분리."""
+    segments = (_split_by_workbook(raw)                    # ① WORKBOOK 문제번호별
+                or (_PASSAGE_SPLIT.split(raw)              # ② [Flow Edu] 꼬리말별
+                    if _PASSAGE_SPLIT.search(raw) else [raw]))
     passages: list[str] = []
     for seg in segments:
         body = _clean_pdf_text(seg)

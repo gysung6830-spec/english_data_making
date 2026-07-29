@@ -192,6 +192,34 @@ def test_pdf_cleaning() -> None:
     print("✓ PDF 정제(한글·머리글 제거) 통과")
 
 
+def test_workbook_noise() -> None:
+    """WORKBOOK 워크시트 노이즈(러닝 헤더·각주 번호·문장 일련번호)를 걷어내고,
+    문제번호별로 지문을 분리하는지."""
+    import re
+
+    from exam import ingest
+    raw = (
+        "31 2026 6 ┃3 WORKBOOK4 WORKBOOK. 1. Ever since the early Enlightenment, "
+        "preservation and conservation have been closely related.1) 2. Taken as near "
+        "synonyms, their meaning is to maintain an object insofar as possible in its "
+        "present state, to protect it from change, usually for research and display.2) "
+        "3. Conservationists who distinguish their activities emphasize restorative "
+        "aspects of the whole discipline in careful ways.3) "
+        "32 2026 6 ┃3 WORKBOOK4 WORKBOOK. 1. Speakers do not always put everything "
+        "important into words.1) 2. Very often you understand meaning by observing "
+        "nonverbal behaviors such as tone, eye contact, and gestures every day.2) "
+    )
+    ps = ingest._passages_from_raw(raw)
+    assert len(ps) == 2, ps                              # 문제 31·32 → 2개
+    joined = " ".join(ps)
+    assert "WORKBOOK" not in joined                       # 러닝 헤더 제거
+    assert not re.search(r"\d\)", joined)                 # 각주 번호 제거
+    assert not re.search(r"(?<![\w.])\d{1,3}\.\s+[A-Z]", joined)   # 문장 일련번호 제거
+    assert ps[0].startswith("Ever since the early Enlightenment")
+    assert ps[1].startswith("Speakers do not always put")
+    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리 통과")
+
+
 def test_arrangement_answer_snap() -> None:
     """어순배열 정답이 지문 문장과 정확히 일치하지 않아도(축약형·미세 차이) 실패하지 않고
     토큰·답과 가장 잘 맞는 지문 문장으로 스냅되는지. 무관하면 여전히 실패."""
@@ -509,6 +537,7 @@ if __name__ == "__main__":
     test_error_guards()
     test_set2_demo()
     test_pdf_cleaning()
+    test_workbook_noise()
     test_arrangement_answer_snap()
     test_hwp_ingest()
     test_analyzer_uses_real_passage()
