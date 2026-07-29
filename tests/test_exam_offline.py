@@ -58,7 +58,14 @@ def test_render_html_bold_rules() -> None:
         assert cls in html, f"볼드 클래스 누락: {cls}"
     assert html.index('class="questions"') < html.index('class="answers"')
     assert "○○학원 고3" in html
-    print("✓ 조판 HTML·볼드 5곳·배치·머리글 통과")
+    # 4개 섹션(학생용 → 교사용 → 빠른 정답 → 해설지)이 순서대로 존재
+    for sec in ("학생용", "교사용", "빠른 정답", "정답 및 해설"):
+        assert sec in html, f"섹션 누락: {sec}"
+    order = [html.index("학생용 · 문제"), html.index("교사용 · 문제"),
+             html.index("빠른 정답"), html.index("정답 및 해설 · 해설지")]
+    assert order == sorted(order), "섹션 순서가 어긋납니다."
+    assert "teach-exp" in html and "quick-grid" in html
+    print("✓ 조판 HTML·볼드 5곳·4섹션·머리글 통과")
 
 
 def test_single_source_shared() -> None:

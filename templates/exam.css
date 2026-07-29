@@ -95,7 +95,8 @@ body {
   column-rule: 0.6px solid #cfe1d8;   /* 연한 초록 세로 구분선 */
 }
 
-.answers { break-before: page; }
+/* 각 섹션은 새 쪽에서 시작(학생용은 머리글 바로 아래) */
+.teacher, .quick, .answers { break-before: page; }
 
 .answer-title {
   font-weight: 700;            /* 볼드 4 */
@@ -221,3 +222,40 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 .a-body p { margin: 0.6mm 0; }
 .reason { color: #222; }
 .wrong { color: #333; }
+
+/* ---------- 교사용: 문제 밑 해설 박스 ---------- */
+.teach-exp {
+  margin: 1.6mm 0 0.5mm 0;
+  padding: 1.4mm 2mm;
+  background: #f3f8f5;
+  border-left: 2.6px solid #3f9a7c;
+  border-radius: 0 4px 4px 0;
+}
+.teach-tag {
+  display: inline-block;
+  font-weight: 700;
+  color: #2f7d61;
+  font-size: 8.6px;
+  margin-bottom: 0.6mm;
+}
+
+/* ---------- 빠른 정답 격자 ---------- */
+.quick-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm 3mm;
+  margin-top: 3mm;
+}
+.quick-cell {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  min-width: 24mm;
+  border: 1px solid #dbeae2;
+  border-radius: 6px;
+  padding: 1.2mm 2.6mm;
+  background: #fff;
+  break-inside: avoid;
+}
+.quick-no { font-weight: 800; color: #2f7d61; font-size: 1.05em; }
+.quick-key { font-weight: 700; }
