@@ -93,8 +93,8 @@ INDEX_HTML = """
 <title>영어 지문 분석 도구</title><style>""" + BASE_CSS + """</style></head>
 <body><div class=wrap>
   <div class=card>
-    <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)·PDF·한글(HWP/HWPX)을 올리면, 분석지·어휘 리스트·영단어 시험지·내신 서술형 대비 교재를 만들어 드립니다.</div>
+    <h1>🖊️ 내신 서술형 대비 교재 만들기</h1>
+    <div class=sub>지문 사진(JPG/PNG)·PDF·한글(HWP/HWPX)을 올리면, <b>내신 서술형 대비 교재</b>를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
@@ -116,17 +116,11 @@ INDEX_HTML = """
 
       <label>③ 저장 파일명 <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
       <input type=text name=basename placeholder="예: 공통영어2 1과">
-      <div class=hint>서술형 교재는 <b>(입력)_서술형대비.pdf</b> 로 저장되고, 입력한 이름이 <b>교재 제목</b>으로 쓰입니다.<br>(다른 자료: (입력)_지문분석 · (입력)_어휘리스트 · (입력)_어휘test)</div>
+      <div class=hint><b>(입력)_서술형대비.pdf</b> 로 저장되고, 입력한 이름이 <b>교재 제목</b>으로 쓰입니다.</div>
 
-      <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
-      <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
-      <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
-      <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
-      <label class=chk><input type=checkbox name=out_worksheet value=1 checked> 🖊️ 서술형 대비 교재 (6개 유형 · 학생/교사/정답/해설)</label>
+      <div class=hint style="margin-top:14px">📄 결과물: <b>내신 서술형 대비 교재</b> (7개 유형 · 학생용 / 교사용 / 빠른 정답 / 정답 및 해설)</div>
 
-      <label class=chk><input type=checkbox name=brand value=1 checked> 🖋️ 분석지에 '은아 T' 문구 넣기 <span class=hint>(직독직해 made by · 출제표 tip · 하단 저작권은 항상 유지)</span></label>
-
-      <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
+      <label class=chk style="margin-top:12px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
         <button class=btn id=go type=submit>분석 시작</button>
@@ -243,18 +237,9 @@ def analyze_route():
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
 
-    # 만들 자료 선택 (아무것도 안 고르면 분석지만)
-    which = OutputsCfg(
-        analysis=bool(request.form.get("out_analysis")),
-        wordlist=bool(request.form.get("out_wordlist")),
-        quiz=bool(request.form.get("out_quiz")),
-        worksheet=bool(request.form.get("out_worksheet")),
-    )
-    if not (which.analysis or which.wordlist or which.quiz or which.worksheet):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False, worksheet=False)
-
-    # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
-    brand = cfg.design.brand if request.form.get("brand") else ""
+    # 이 웹앱은 '서술형 대비 교재'만 산출한다(다른 자료는 만들지 않음).
+    which = OutputsCfg(analysis=False, wordlist=False, quiz=False, worksheet=True)
+    brand = cfg.design.brand
 
     # 저장 파일명(지문명) — 비우면 올린 파일 이름 사용
     raw_name = (request.form.get("basename") or "").strip()
