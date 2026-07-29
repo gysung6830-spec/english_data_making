@@ -20,7 +20,11 @@
       {% for s in ws.sentences %}
       <li>
         <div class="s-en">{{ s | render_prose(ws.wtype) }}</div>
-        <div class="s-ko">{{ s.ko }}</div>
+        {% if ws.wtype == 'translate' %}
+          <div class="translate-box"></div>
+        {% else %}
+          <div class="s-ko">{{ s.ko }}</div>
+        {% endif %}
       </li>
       {% endfor %}
     </ol>
@@ -33,9 +37,13 @@
     {% for ws in pack.worksheets %}
     <div class="ans-ws">
       <div class="ans-ws-h wt-{{ ws.wtype }}">{{ ws.label }}</div>
-      {% for s in ws.sentences %}{% if s.items %}<div class="ans-row"><b>{{ s.no }}.</b>
-        {% for it in s.items %}<span class="ans-a">{{ it.answer }}</span>{% if not loop.last %}<span class="sep">/</span>{% endif %}{% endfor %}
-      </div>{% endif %}{% endfor %}
+      {% if ws.wtype == 'translate' %}
+        {% for s in ws.sentences %}<div class="ans-row ans-tr"><b>{{ s.no }}.</b> {{ s.ko }}</div>{% endfor %}
+      {% else %}
+        {% for s in ws.sentences %}{% if s.items %}<div class="ans-row"><b>{{ s.no }}.</b>
+          {% for it in s.items %}<span class="ans-a">{{ it.answer }}</span>{% if not loop.last %}<span class="sep">/</span>{% endif %}{% endfor %}
+        </div>{% endif %}{% endfor %}
+      {% endif %}
     </div>
     {% endfor %}
   </section>

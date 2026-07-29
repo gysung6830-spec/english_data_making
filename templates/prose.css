@@ -50,6 +50,10 @@ body{
 .pc.wg{ border-color:var(--grammar); color:var(--grammar); background:#faf5fd; }
 .pc.wv{ border-color:var(--vocab); color:var(--vocab); background:#f0f8f4; }
 
+/* 한글 해석 연습: 영문 아래 분홍 작성칸 */
+.translate-box{ margin-top:7px; height:42px; border:1px solid #f0cddd;
+  background:var(--rose-bg); border-radius:6px; }
+
 /* 정답 페이지 */
 .ans-page{ page-break-before:always; break-before:page; }
 .ans-head{ font-size:13pt; font-weight:700; color:#2b2f3a;
@@ -60,7 +64,9 @@ body{
 .ans-ws-h{ font-size:10pt; font-weight:700; margin-bottom:5px;
   font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
 .wt-form{ color:var(--form); } .wt-grammar{ color:var(--grammar); } .wt-vocab{ color:var(--vocab); }
+.wt-translate{ color:var(--rose); }
 .ans-row{ font-size:9pt; margin-bottom:3px; }
+.ans-tr{ font-family:"Malgun Gothic","맑은 고딕",sans-serif; color:#3a3f4a; line-height:1.5; }
 .ans-row b{ color:#2b2f3a; margin-right:5px; }
 .ans-a{ font-weight:700; }
 .ans-row .sep{ color:#aab; margin:0 5px; }
