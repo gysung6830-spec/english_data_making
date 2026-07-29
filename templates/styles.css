@@ -2,7 +2,20 @@
    영어 지문 분석 자료 - 인쇄용 스타일 (WeasyPrint)
    색상 규칙: 문법=파랑, 어휘=초록, 구조/감정=보라
    밀도: 요약+출제+구조 / 직독직해+문법+어휘 → 약 2페이지 목표
+   폰트: NanumGothic 임베드(어느 컴퓨터에서든 동일하게 보이도록)
    ============================================================ */
+
+/* 프로젝트에 포함된 나눔고딕을 직접 임베드 → OS와 무관하게 항상 동일 폰트 */
+@font-face {
+  font-family: "NanumGothic";
+  src: url("fonts/NanumGothic.ttf") format("truetype");
+  font-weight: normal; font-style: normal;
+}
+@font-face {
+  font-family: "NanumGothic";
+  src: url("fonts/NanumGothicBold.ttf") format("truetype");
+  font-weight: bold; font-style: normal;
+}
 
 @page {
   size: A4;
