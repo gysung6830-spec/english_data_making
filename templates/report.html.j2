@@ -225,7 +225,7 @@
     <tbody><tr>
       <td class="src-en">
         {%- for s in report.literal.sentences -%}
-          <span class="src-no">{{ s.no }}</span>{% for c in s.chunks %}{{ c.english }}{% if not loop.last %} {% endif %}{% endfor %}{% if not loop.last %} {% endif %}
+          <span class="src-no">{{ s.no }}</span>{% if s.english %}{{ s.english }}{% else %}{% for c in s.chunks %}{{ c.english }}{% if not loop.last %} {% endif %}{% endfor %}{% endif %}{% if not loop.last %} {% endif %}
         {%- endfor -%}
       </td>
       <td class="src-ko">
