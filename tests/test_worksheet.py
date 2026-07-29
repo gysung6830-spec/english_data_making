@@ -367,6 +367,47 @@ def test_webapp_worksheet_flow():
     print("PASS  웹앱 학습지 플로우(worksheet_app, 목)")
 
 
+def _make_hwpx(path, paragraphs):
+    """테스트용 최소 HWPX(section0.xml 만 있는 zip) 파일 작성."""
+    import zipfile
+    ns = "http://www.hancom.co.kr/hwpml/2011/paragraph"
+    nss = "http://www.hancom.co.kr/hwpml/2011/section"
+    body = "".join(
+        f"<hp:p><hp:run><hp:t>{p}</hp:t></hp:run></hp:p>"
+        for p in paragraphs
+    )
+    xml = (f'<?xml version="1.0" encoding="UTF-8"?>'
+           f'<hs:sec xmlns:hs="{nss}" xmlns:hp="{ns}">{body}</hs:sec>')
+    with zipfile.ZipFile(str(path), "w") as z:
+        z.writestr("Contents/section0.xml", xml)
+
+
+def test_hwp_support():
+    import tempfile
+    from pathlib import Path
+    from src import extract
+
+    # 확장자 판별 + 학습지 앱의 허용 목록에 HWP 포함
+    assert extract.is_hwp("a.hwp") and extract.is_hwp("b.HWPX")
+    assert not extract.is_hwp("c.pdf")
+    import worksheet_app
+    assert ".hwp" in worksheet_app.ALLOWED_WS and ".hwpx" in worksheet_app.ALLOWED_WS
+    # 6섹션 앱 공용 허용 목록은 HWP 를 포함하지 않아야 함(경계 유지)
+    from web_common import ALLOWED as SHARED_ALLOWED
+    assert ".hwp" not in SHARED_ALLOWED
+
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / "s.hwpx"
+        _make_hwpx(p, ["The cat sat on the mat.", "한글 설명 줄", "Boredom sparks creativity."])
+        raw = extract.extract_hwp_text(p)
+        assert "The cat sat on the mat." in raw
+        # 배치 무관 영어만 남기기까지 통과
+        cleaned = extract.extract_passage_text_any(p)
+        assert "cat" in cleaned and "creativity" in cleaned
+        assert not extract.looks_empty(cleaned)
+    print("PASS  HWP/HWPX 텍스트 추출 + 학습지 앱 허용")
+
+
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
@@ -391,6 +432,7 @@ def run_all():
     test_literal_builder_llm_path()
     test_render_b_from_literal()
     test_webapp_worksheet_flow()
+    test_hwp_support()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 
 

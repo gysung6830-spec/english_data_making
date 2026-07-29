@@ -121,12 +121,14 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
-        raw = extract.extract_passage_text(src)
+        raw = extract.extract_passage_text_any(src)   # PDF · HWP · HWPX
         if extract.looks_empty(raw):
-            raise ValueError(
-                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-            )
+            hint = ("한글(HWP) 문서에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 들어 있으면 "
+                    "그 부분을 사진(JPG/PNG)으로 저장해 넣어 주세요."
+                    if extract.is_hwp(src) else
+                    "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                    "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
+            raise ValueError(hint)
         pset = analyze.extract_passages(client, cfg, raw)
 
     is_b = layout.upper() == "B"

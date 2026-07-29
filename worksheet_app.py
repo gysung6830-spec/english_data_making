@@ -16,6 +16,7 @@ from pathlib import Path
 
 from flask import render_template_string, request
 
+from src import extract
 from src.client import ClaudeClient
 from src.worksheet import pipeline as ws_pipeline
 from src.worksheet.pipeline import Header as WsHeader
@@ -23,6 +24,9 @@ from web_common import (ALLOWED, BASE_CSS, UPLOAD_DIR, OUTPUT_DIR, _safe_name,
                         cfg, make_app, render_result)
 
 app = make_app(__name__)
+
+# 학습지 앱은 한글(HWP/HWPX) 문서도 지원(6섹션 앱과 달리 텍스트 추출 경로 있음).
+ALLOWED_WS = ALLOWED | extract.HWP_EXTS
 
 
 WORKSHEET_HTML = """
@@ -38,12 +42,12 @@ WORKSHEET_HTML = """
     <div class=sub>지문을 문장 단위로 쪼개 <b>구문 태깅 + 해석 + 포인트 박스</b> 학습지를 만듭니다.</div>
     <form id=f method=post action="{{ url_for('build') }}" enctype=multipart/form-data>
 
-      <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
+      <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
       <div class=drop id=drop>
         <div style="font-size:26px">⬆️</div>
         <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
-        <p>JPG · PNG · PDF</p>
-        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+        <p>JPG · PNG · PDF · HWP</p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx" hidden>
       </div>
       <div class=files id=filelist></div>
 
@@ -128,9 +132,9 @@ def build_route():
     results = []
     for idx, f in enumerate(files, start=1):
         ext = Path(f.filename).suffix.lower()
-        if ext not in ALLOWED:
+        if ext not in ALLOWED_WS:
             results.append({"name": f.filename, "ok": False,
-                            "error": "지원하지 않는 형식(JPG·PNG·PDF만 가능)"})
+                            "error": "지원하지 않는 형식(JPG·PNG·PDF·HWP만 가능)"})
             continue
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
