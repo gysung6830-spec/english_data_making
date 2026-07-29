@@ -7,7 +7,13 @@ SYSTEM = (
     "요청된 JSON 스키마에 정확히 맞는 JSON 으로만 응답한다."
 )
 
-_RULES = """[유형 B — 지문 빈칸형]
+_RULES = """[문장 완전성 — 매우 중요]
+- 지문을 '마침표(.)/물음표(?)/느낌표(!)' 기준의 온전한 문장 단위로만 나눈다. 절·구로 쪼개거나
+  문장의 앞부분(주어·도입구)을 생략하지 말 것. 아래 '문장 목록'이 있으면 그 문장을 그대로 쓰고,
+  각 en_template 은 그 문장의 '첫 단어부터 끝 문장부호까지' 원문 그대로 담는다(빈칸만 예외).
+- 지문의 모든 문장을 등장 순서대로 빠짐없이 sentences 에 담는다.
+
+[유형 B — 지문 빈칸형]
 - 원문 지문을 '그대로' 두고, 학습상 핵심 단어를 빈칸으로 뚫는다. 빈칸 자리에는 {{B1}}, {{B2}} … 를 넣는다.
 - '각 문장마다 빈칸을 2개씩' 만든다. 모든 문장이 2개를 목표로 하며, 지문 전체 총 개수 상한은 없다.
   각 문장에서 아래 우선순위로 학습 가치가 높은 2개를 고른다:
@@ -33,11 +39,16 @@ _RULES = """[유형 B — 지문 빈칸형]
 
 
 def blanks_prompt(title: str, body: str, ko: str = "") -> str:
+    from .textutil import sentence_list_block
+
     block = f"[지문 제목] {title}\n\n[지문 본문]\n{body}"
     if ko and ko.strip():
         block += f"\n\n[해석]\n{ko.strip()}"
     else:
         block += "\n\n[해석] (없음 — 문장별로 자연스러운 한국어 해석을 직접 생성)"
+    slb = sentence_list_block(body)
+    if slb:
+        block += "\n\n" + slb
     return (
         "아래 영어 지문으로 '빈칸형 워크북' 한 세트(유형 B → 유형 A)를 만든다.\n"
         "출력은 하나의 세트(LLMBlankSet) JSON 이다. no 는 1, title 은 지문 제목, subtitle 은 한 줄 요지.\n\n"

@@ -72,11 +72,16 @@ _RULES = """[다섯 가지 출제 유형]
 
 
 def _passage_block(title: str, body: str, ko: str = "") -> str:
+    from .textutil import sentence_list_block
+
     block = f"[지문 제목] {title}\n\n[지문 본문]\n{body}"
     if ko and ko.strip():
         block += f"\n\n[해석]\n{ko.strip()}"
     else:
         block += "\n\n[해석] (없음 — 문장별로 자연스러운 한국어 해석을 직접 생성해 ko 에 넣을 것)"
+    slb = sentence_list_block(body)
+    if slb:
+        block += "\n\n" + slb
     return block
 
 

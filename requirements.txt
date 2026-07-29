@@ -7,6 +7,7 @@ playwright>=1.40
 PyYAML>=6.0
 python-dotenv>=1.0
 pypdf>=4.0
+PyMuPDF>=1.24
 olefile>=0.46
 flask>=3.0
 gunicorn>=21.0
