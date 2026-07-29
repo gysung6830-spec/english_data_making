@@ -150,15 +150,28 @@ def analyze_worksheet(
             extra_validate=lambda qa: _qa_evidence_in_passage(qa, body)),
     }
 
+    # 유형 단위 부분 성공: 한 유형이 (재시도까지) 실패해도 None 으로 두고 계속.
+    import sys
+
+    def _safe(name, fn):
+        try:
+            return fn()
+        except Exception as e:  # noqa: BLE001
+            print(f"[경고] 서술형 '{name}' 유형 생성 실패 → 건너뜀: {e}", file=sys.stderr)
+            return None
+
     results: dict[str, object] = {}
     if cfg.processing.parallel_sections:
         with ThreadPoolExecutor(max_workers=7) as ex:
-            futs = {name: ex.submit(fn) for name, fn in tasks.items()}
+            futs = {name: ex.submit(_safe, name, fn) for name, fn in tasks.items()}
             for name, fut in futs.items():
                 results[name] = fut.result()
     else:
         for name, fn in tasks.items():
-            results[name] = fn()
+            results[name] = _safe(name, fn)
+
+    if all(v is None for v in results.values()):
+        raise RuntimeError("서술형 교재의 모든 유형 생성에 실패했습니다.")
 
     return schemas.Worksheet(
         title=title,

@@ -126,15 +126,19 @@ def test_worksheet_schema():
         assert False, "미사용 1개는 통과하면 안 됨"
     except Exception:
         pass
-    # 유형6(어법): 틀린 밑줄은 정확히 3곳
+    # 유형6(어법): 오류가 최소 1곳·정상도 최소 1곳(개수는 완화, 하드 실패 방지)
     good = [{"no": i, "text": "t", "wrong": i <= 3} for i in range(1, 6)]
     schemas.WSErrorItem.model_validate({"sentence": "{{1|t}}", "underlines": good})
+    two = [{"no": i, "text": "t", "wrong": i <= 2} for i in range(1, 6)]
+    schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": two})  # 2곳도 통과
+    # 오류 0곳(전부 정상)은 여전히 거부되어야 함
+    rejected = False
     try:
-        bad = [{"no": i, "text": "t", "wrong": i <= 2} for i in range(1, 6)]
-        schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": bad})
-        assert False, "틀린 밑줄 2곳은 통과하면 안 됨"
+        none_wrong = [{"no": i, "text": "t", "wrong": False} for i in range(1, 6)]
+        schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": none_wrong})
     except Exception:
-        pass
+        rejected = True
+    assert rejected, "오류 0곳은 거부되어야 함"
     print("PASS  서술형 교재 스키마 검증")
 
 

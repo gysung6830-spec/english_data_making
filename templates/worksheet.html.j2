@@ -48,8 +48,9 @@
 {% macro render_part(passages, reveal) %}
 
   {# ===== 유형1 : 보기 어휘 빈칸 완성 ===== #}
+  {% if has.cloze %}
   <div class="type-block tb1">
-  {{ thead(1, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말 3개를 모두 고르시오.') }}
+  {{ thead(1, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말을 모두 고르시오.') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
     <div class="grid2">
@@ -75,7 +76,9 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형2 : 서술형 요약문 완성 ===== #}
+  {% if has.summary %}
   <div class="type-block tb2">
   {{ thead(2, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
   {% for pg in passages %}
@@ -95,9 +98,11 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형3 : 어법 오류 수정 ===== #}
+  {% if has.error %}
   <div class="type-block tb3">
-  {{ thead(3, '어법 오류 수정', '밑줄 친 부분 중 어법상 틀린 3곳을 찾아 바르게 고치시오.') }}
+  {{ thead(3, '어법 오류 수정', '밑줄 친 부분 중 어법상 틀린 부분을 모두 찾아 바르게 고치시오.') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
     {% for q in pg.error %}
@@ -115,7 +120,9 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형4 : 조건 영작 연습 ===== #}
+  {% if has.compose %}
   <div class="type-block tb4">
   {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
   {% for pg in passages %}
@@ -135,7 +142,9 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형5 : 요지·제목 배열 영작 ===== #}
+  {% if has.arrange %}
   <div class="type-block tb5">
   {{ thead(5, '요지·제목 배열 영작', '보기의 단어를 모두 사용하여 영작하시오.') }}
   {% for pg in passages %}
@@ -153,7 +162,9 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형6 : 문장 변형 대비(보기 제공) ===== #}
+  {% if has.paraphrase %}
   <div class="type-block tb6">
   {{ thead(6, '문장 변형 대비', '유의어·구조를 바꾼 문장의 빈칸을, 보기에서 골라 완성하시오.') }}
   {% for pg in passages %}
@@ -173,7 +184,9 @@
   {% endfor %}
   </div>
 
+  {% endif %}
   {# ===== 유형7 : 지문 기반 영어 문답(지문 배치) ===== #}
+  {% if has.qa %}
   <div class="type-block tb7">
   {{ thead(7, '지문 기반 영어 문답', '지문을 읽고, 지문 내용에 근거하여 영어 질문에 영어로 답하시오. (지문에 없는 내용 추론 금지)') }}
   {% for pg in passages %}
@@ -195,35 +208,36 @@
     </div>
   {% endfor %}
   </div>
+  {% endif %}
 {% endmacro %}
 
 {# ---------- 빠른 정답(유형별로 모든 지문 모아서) ---------- #}
 {% macro quick(passages) %}
-  <div class="qa-row"><span class="qa-t">유형1</span>{% for pg in passages %}{% for s in pg.cloze %}<span class="qa-a">{{ s.qno }}. {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형2</span>{% for pg in passages %}{% for q in pg.summary %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형3</span>{% for pg in passages %}{% for q in pg.error %}<span class="qa-a">{{ q.qno }}. {% for w in q.wrong %}{{ w.no | circled }}{{ w.text }}→{{ w.correction }}{% if not loop.last %} / {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형4</span>{% for pg in passages %}{% for q in pg.compose %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형5</span>{% for pg in passages %}{% for q in pg.ideas %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% for q in pg.titles %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형6</span>{% for pg in passages %}{% for q in pg.paraphrase %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형7</span>{% for pg in passages %}{% for q in pg.qa %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
+  {% if has.cloze %}<div class="qa-row"><span class="qa-t">유형1</span>{% for pg in passages %}{% for s in pg.cloze %}<span class="qa-a">{{ s.qno }}. {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.summary %}<div class="qa-row"><span class="qa-t">유형2</span>{% for pg in passages %}{% for q in pg.summary %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.error %}<div class="qa-row"><span class="qa-t">유형3</span>{% for pg in passages %}{% for q in pg.error %}<span class="qa-a">{{ q.qno }}. {% for w in q.wrong %}{{ w.no | circled }}{{ w.text }}→{{ w.correction }}{% if not loop.last %} / {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.compose %}<div class="qa-row"><span class="qa-t">유형4</span>{% for pg in passages %}{% for q in pg.compose %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.arrange %}<div class="qa-row"><span class="qa-t">유형5</span>{% for pg in passages %}{% for q in pg.ideas %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% for q in pg.titles %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.paraphrase %}<div class="qa-row"><span class="qa-t">유형6</span>{% for pg in passages %}{% for q in pg.paraphrase %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>{% endif %}
+  {% if has.qa %}<div class="qa-row"><span class="qa-t">유형7</span>{% for pg in passages %}{% for q in pg.qa %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>{% endif %}
 {% endmacro %}
 
 {# ---------- 정답 및 해설(유형별로 모든 지문 모아서) ---------- #}
 {% macro explain(passages) %}
-  <div class="ex-t">유형1 · 보기 어휘 빈칸 완성</div>
-  {% for pg in passages %}{% for s in pg.cloze %}<div class="ex-r"><b>{{ s.qno }}. 사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b>{% if s.explanation %}<br><span class="ex-n">{{ s.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형2 · 서술형 요약문 완성</div>
-  {% for pg in passages %}{% for q in pg.summary %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형3 · 어법 오류 수정</div>
-  {% for pg in passages %}{% for q in pg.error %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for w in q.wrong %}{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} ({{ w.point }}){% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형4 · 조건 영작 연습</div>
-  {% for pg in passages %}{% for q in pg.compose %}<div class="ex-r"><b>{{ q.qno }}.</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형5 · 요지·제목 배열 영작</div>
-  {% for pg in passages %}{% for q in pg.ideas %}<div class="ex-r"><b>{{ q.qno }}. [요지]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% for q in pg.titles %}<div class="ex-r"><b>{{ q.qno }}. [제목]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형6 · 문장 변형 대비</div>
-  {% for pg in passages %}{% for q in pg.paraphrase %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
-  <div class="ex-t">유형7 · 지문 기반 영어 문답</div>
-  {% for pg in passages %}{% for q in pg.qa %}<div class="ex-r"><b>{{ q.qno }}. Q.</b> {{ q.question }}<br>➜ {{ q.answer }}{% if q.answer_ko %} <span class="ex-n">({{ q.answer_ko }})</span>{% endif %}{% if q.evidence %}<br><span class="ex-n">근거: {{ q.evidence }}</span>{% endif %}</div>{% endfor %}{% endfor %}
+  {% if has.cloze %}<div class="ex-t">유형1 · 보기 어휘 빈칸 완성</div>
+  {% for pg in passages %}{% for s in pg.cloze %}<div class="ex-r"><b>{{ s.qno }}. 사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b>{% if s.explanation %}<br><span class="ex-n">{{ s.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.summary %}<div class="ex-t">유형2 · 서술형 요약문 완성</div>
+  {% for pg in passages %}{% for q in pg.summary %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.error %}<div class="ex-t">유형3 · 어법 오류 수정</div>
+  {% for pg in passages %}{% for q in pg.error %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for w in q.wrong %}{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} ({{ w.point }}){% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.compose %}<div class="ex-t">유형4 · 조건 영작 연습</div>
+  {% for pg in passages %}{% for q in pg.compose %}<div class="ex-r"><b>{{ q.qno }}.</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.arrange %}<div class="ex-t">유형5 · 요지·제목 배열 영작</div>
+  {% for pg in passages %}{% for q in pg.ideas %}<div class="ex-r"><b>{{ q.qno }}. [요지]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% for q in pg.titles %}<div class="ex-r"><b>{{ q.qno }}. [제목]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.paraphrase %}<div class="ex-t">유형6 · 문장 변형 대비</div>
+  {% for pg in passages %}{% for q in pg.paraphrase %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
+  {% if has.qa %}<div class="ex-t">유형7 · 지문 기반 영어 문답</div>
+  {% for pg in passages %}{% for q in pg.qa %}<div class="ex-r"><b>{{ q.qno }}. Q.</b> {{ q.question }}<br>➜ {{ q.answer }}{% if q.answer_ko %} <span class="ex-n">({{ q.answer_ko }})</span>{% endif %}{% if q.evidence %}<br><span class="ex-n">근거: {{ q.evidence }}</span>{% endif %}</div>{% endfor %}{% endfor %}{% endif %}
 {% endmacro %}
 
 {% macro part_head(no, label, sub) %}

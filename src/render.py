@@ -436,7 +436,7 @@ def _ws_context(worksheets) -> list[dict]:
 
         # 요약문 완성 ((A)(B) 빈칸)
         sum_items = []
-        for it in ws.summary.items:
+        for it in (ws.summary.items if ws.summary else []):
             amap = {b.label.upper(): b.answer for b in it.blanks}
             sum_items.append({
                 "src": src,
@@ -449,7 +449,7 @@ def _ws_context(worksheets) -> list[dict]:
 
         # 문장 변형(유의어·구조 변환 후 빈칸 완성 · 보기 제공)
         para_items = []
-        for q in ws.paraphrase.questions:
+        for q in (ws.paraphrase.questions if ws.paraphrase else []):
             amap = {b.label.upper(): b.answer for b in q.blanks}
             answers = [b.answer for b in q.blanks]
             bank = sorted(answers + list(q.distractors), key=str.lower)
@@ -470,8 +470,8 @@ def _ws_context(worksheets) -> list[dict]:
                 "given_words": list(it.given_words), "word_count": it.word_count,
                 "answer": it.answer, "explanation": it.explanation,
             } for it in items]
-        idea_items = arrange(ws.arrange.ideas)
-        title_items = arrange(ws.arrange.titles)
+        idea_items = arrange(ws.arrange.ideas if ws.arrange else [])
+        title_items = arrange(ws.arrange.titles if ws.arrange else [])
 
         # 조건 영작
         comp_items = [{
@@ -479,11 +479,11 @@ def _ws_context(worksheets) -> list[dict]:
             "conditions": list(it.conditions), "given_words": list(it.given_words),
             "word_count": it.word_count, "answer": it.answer,
             "explanation": it.explanation,
-        } for it in ws.compose.items]
+        } for it in (ws.compose.items if ws.compose else [])]
 
-        # 사용되지 않는 낱말 고르기(3개)
+        # 사용되지 않는 낱말 고르기
         cloze_sets = []
-        for s in ws.choice.sets:
+        for s in (ws.choice.sets if ws.choice else []):
             amap = {se.label.upper(): se.answer for se in s.sentences}
             lc = [c.lower() for c in s.choices]
             unused_idx = sorted(lc.index(u.lower()) + 1 for u in s.unused if u.lower() in lc)
@@ -498,9 +498,9 @@ def _ws_context(worksheets) -> list[dict]:
                 } for se in s.sentences],
             })
 
-        # 어법 오류 수정(밑줄 5곳 중 3곳 오류)
+        # 어법 오류 수정(밑줄 중 일부 오류)
         err_items = []
-        for it in ws.error.items:
+        for it in (ws.error.items if ws.error else []):
             by_no = {u.no: {"wrong": u.wrong} for u in it.underlines}
             wrong = [{"no": u.no, "text": u.text, "correction": u.correction,
                       "point": u.point} for u in it.underlines if u.wrong]
@@ -516,7 +516,7 @@ def _ws_context(worksheets) -> list[dict]:
         qa_items = [{
             "src": src, "question": q.question, "answer": q.answer,
             "evidence": q.evidence, "answer_ko": q.answer_ko,
-        } for q in ws.qa.items]
+        } for q in (ws.qa.items if ws.qa else [])]
 
         passages.append({
             "no": i, "total": len(reps), "title": ws.title,
@@ -556,8 +556,18 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     passages = _ws_context(worksheets)
+    # 유형별로 내용이 하나라도 있는지(부분 성공 시 빈 유형 블록은 건너뜀)
+    has = {
+        "cloze": any(p["cloze"] for p in passages),
+        "summary": any(p["summary"] for p in passages),
+        "error": any(p["error"] for p in passages),
+        "compose": any(p["compose"] for p in passages),
+        "arrange": any(p["ideas"] or p["titles"] for p in passages),
+        "paraphrase": any(p["paraphrase"] for p in passages),
+        "qa": any(p["qa"] for p in passages),
+    }
     tmpl = _env.get_template("worksheet.html.j2")
-    html = tmpl.render(title=title, passages=passages,
+    html = tmpl.render(title=title, passages=passages, has=has,
                        footer_note=footer_note, brand=brand)
     css = _stylesheet()
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(

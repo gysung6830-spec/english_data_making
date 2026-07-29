@@ -161,7 +161,12 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
             try:
                 parsed[(fid, pidx)][name] = parse_response_text(text or "", cls)
             except Exception as e:
-                failed.setdefault(fid, f"p{pidx}/{name}: {e}")
+                # 서술형 교재 유형(ws_*)은 하나 실패해도 파일 전체를 실패시키지 않고
+                # 해당 유형만 건너뛴다(유형 단위 부분 성공). 분석지 섹션은 기존대로 실패 처리.
+                if name.startswith("ws_"):
+                    logger.warning("p%s/%s 유형 실패 → 건너뜀: %s", pidx, name, e)
+                else:
+                    failed.setdefault(fid, f"p{pidx}/{name}: {e}")
 
     # ---- 3단계: 지문별 출제 포인트 (분석지가 필요할 때만) ----
     exam_reqs = []
@@ -202,12 +207,19 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                         structure=p["structure"], exam=exam,
                     ))
                 if need_ws:
-                    worksheets.append(schemas.Worksheet(
+                    ws = schemas.Worksheet(
                         title=ex.title, source=ex.source, passage=ex.body,
-                        summary=p["ws_summary"], paraphrase=p["ws_paraphrase"],
-                        arrange=p["ws_arrange"], compose=p["ws_compose"],
-                        choice=p["ws_choice"], error=p["ws_error"], qa=p["ws_qa"],
-                    ))
+                        summary=p.get("ws_summary"), paraphrase=p.get("ws_paraphrase"),
+                        arrange=p.get("ws_arrange"), compose=p.get("ws_compose"),
+                        choice=p.get("ws_choice"), error=p.get("ws_error"), qa=p.get("ws_qa"),
+                    )
+                    # 유형7 근거 검증(배치에도 이식): 근거가 지문에 없는 문답은 제거
+                    if ws.qa is not None:
+                        nb = " ".join(ex.body.split())
+                        kept = [it for it in ws.qa.items
+                                if not (it.evidence and " ".join(it.evidence.split()).rstrip(".") not in nb)]
+                        ws.qa = schemas.WSQAType(items=kept) if kept else None
+                    worksheets.append(ws)
             pdf = files[fid]
             recs = render_outputs(cfg, reports, _safe_stem(pdf), worksheets=worksheets)
             outputs.extend(r["path"] for r in recs)

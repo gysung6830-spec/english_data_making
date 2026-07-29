@@ -5,7 +5,7 @@
 """
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -323,8 +323,9 @@ class WSClozeSet(BaseModel):
     @field_validator("unused")
     @classmethod
     def _unused_count(cls, v: list[str]) -> list[str]:
-        if len(v) != 3:
-            raise ValueError("사용되지 않는 낱말은 정확히 3개여야 합니다.")
+        # 권장은 3개지만 하드 실패를 막기 위해 1개 이상이면 통과.
+        if len(v) < 1:
+            raise ValueError("사용되지 않는 낱말이 최소 1개는 있어야 합니다.")
         return v
 
 
@@ -355,11 +356,16 @@ class WSErrorItem(BaseModel):
 
     @field_validator("underlines")
     @classmethod
-    def _five_with_three_wrong(cls, v: list[WSUnderline]) -> list[WSUnderline]:
-        if len(v) < 4:
-            raise ValueError("밑줄은 4개 이상(권장 5개)이어야 합니다.")
-        if sum(1 for u in v if u.wrong) != 3:
-            raise ValueError("어법상 틀린 밑줄은 정확히 3곳이어야 합니다.")
+    def _has_wrong_and_correct(cls, v: list[WSUnderline]) -> list[WSUnderline]:
+        # 권장은 밑줄 5곳·오류 3곳이지만, 하드 실패를 막기 위해 범위로 완화한다.
+        # (오류가 최소 1곳, 정상도 최소 1곳이면 통과)
+        if len(v) < 3:
+            raise ValueError("밑줄은 3개 이상이어야 합니다.")
+        w = sum(1 for u in v if u.wrong)
+        if w < 1:
+            raise ValueError("어법상 틀린 밑줄이 최소 1곳은 있어야 합니다.")
+        if w >= len(v):
+            raise ValueError("어법상 옳은 밑줄(함정)도 최소 1곳은 있어야 합니다.")
         return v
 
 
@@ -394,17 +400,21 @@ class WSQAType(BaseModel):
 
 
 class Worksheet(BaseModel):
-    """한 지문에서 만든 서술형 대비 교재(7개 유형)."""
+    """한 지문에서 만든 서술형 대비 교재(7개 유형).
+
+    각 유형 필드는 Optional 이다: 특정 유형 생성이 실패하면 None 으로 두고
+    나머지 유형만으로 교재를 만든다(유형 단위 부분 성공).
+    """
     title: str
     source: str = ""
-    passage: str = ""               # 원문 지문(유형1 상단에 노출)
-    summary: WSSummaryType          # 유형1
-    paraphrase: WSParaphraseType    # 유형2
-    arrange: WSArrangeType          # 유형3 (요지/제목 배열 영작)
-    compose: WSComposeType          # 유형4 (조건 영작)
-    choice: WSChoiceType            # 유형5 (사용되지 않는 낱말)
-    error: WSErrorType              # 유형6 (어법 오류)
-    qa: WSQAType                    # 유형7 (지문 기반 영어 문답)
+    passage: str = ""                        # 원문 지문(유형2·7에 노출)
+    summary: Optional[WSSummaryType] = None      # 요약문 완성
+    paraphrase: Optional[WSParaphraseType] = None  # 문장 변형
+    arrange: Optional[WSArrangeType] = None      # 요지/제목 배열 영작
+    compose: Optional[WSComposeType] = None      # 조건 영작
+    choice: Optional[WSChoiceType] = None        # 보기 어휘(사용되지 않는 낱말)
+    error: Optional[WSErrorType] = None          # 어법 오류
+    qa: Optional[WSQAType] = None                # 지문 기반 영어 문답
 
 
 # ---------------------------------------------------------------------------
