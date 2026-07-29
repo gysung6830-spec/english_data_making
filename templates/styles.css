@@ -461,9 +461,14 @@ table.lit2 td {
   padding: 3px 0; border-bottom: 1px dotted var(--line); line-height: 1.6; font-size: 9.6px;
 }
 
-/* 유형6 오류 수정 */
+/* 유형6 오류 수정 (밑줄 5곳) */
+.ul { text-decoration: underline; text-underline-offset: 2px; }
+.uln { font-size: 7.5px; color: var(--muted); font-weight: 800; padding: 0 1px; }
+.wrongword { color: var(--c-red); font-weight: 700; text-decoration-color: var(--c-red); }
 .wrong { color: var(--c-red); text-decoration: line-through; font-weight: 700; }
 .fix { color: var(--ws-dark); font-weight: 800; }
+.fixpair { display: inline-block; margin-right: 4px; white-space: nowrap; }
+.pt { font-size: 8px; color: var(--muted); }
 
 /* 해설 박스 */
 .exp {

@@ -157,38 +157,17 @@ def mock_worksheet(title: str = "The Value of Curiosity",
         paraphrase=schemas.WSParaphraseType(questions=[
             schemas.WSParaphraseQ(
                 original="Curious students remember information longer.",
-                options=[
-                    "Students who are curious retain what they learn for a longer time.",
-                    "Students forget information more quickly when they are curious.",
-                    "Curiosity has no effect on how long students recall information.",
-                    "Teachers remember curious students for a long time.",
-                    "Information makes students more curious over time.",
-                ],
-                answer=1,
-                explanation=("① remember longer → retain for a longer time 로 의미 보존(정답). "
-                             "②는 반의어(forget quickly), ③은 효과 부정으로 의미가 뒤집힘.")),
+                sentence="Learners who are [[A]] tend to [[B]] what they study for a longer time.",
+                blanks=[schemas.WSSummaryBlank(label="A", answer="curious", meaning="호기심 많은"),
+                        schemas.WSSummaryBlank(label="B", answer="retain", meaning="유지·기억하다")],
+                explanation=("curious students→learners who are curious(관계절), "
+                             "remember→retain(유의어)로 구조·어휘를 변형.")),
             schemas.WSParaphraseQ(
-                original="Education should encourage learners to ask questions.",
-                options=[
-                    "Learners should discourage education from asking questions.",
-                    "Education ought to promote learners' questioning.",
-                    "Education must stop learners from asking too many questions.",
-                    "Questions should be answered by education, not learners.",
-                    "Learners should memorize questions given by their teachers.",
-                ],
-                answer=2,
-                explanation="② encourage→promote, ask questions→questioning 로 동일 의미(정답)."),
-            schemas.WSParaphraseQ(
-                original="Curiosity drives us to explore the unknown.",
-                options=[
-                    "The unknown drives our curiosity away from exploration.",
-                    "We explore the unknown only when curiosity disappears.",
-                    "Curiosity pushes us to investigate what we do not yet know.",
-                    "Exploring the unknown makes us less curious over time.",
-                    "The unknown remains unexplored despite our curiosity.",
-                ],
-                answer=3,
-                explanation="③ drives us to explore → pushes us to investigate 로 의미 보존(정답)."),
+                original="Education should encourage students to ask questions.",
+                sentence="Schools ought to [[A]] learners' [[B]] rather than passive memorization.",
+                blanks=[schemas.WSSummaryBlank(label="A", answer="promote", meaning="장려하다"),
+                        schemas.WSSummaryBlank(label="B", answer="questioning", meaning="질문하기")],
+                explanation="encourage→promote, ask questions→questioning(명사구)로 변형."),
         ]),
         arrange=schemas.WSArrangeType(
             ideas=[
@@ -245,7 +224,8 @@ def mock_worksheet(title: str = "The Value of Curiosity",
         ]),
         choice=schemas.WSChoiceType(sets=[
             schemas.WSClozeSet(
-                choices=["retain", "explore", "motivated", "memorize", "discourage"],
+                choices=["retain", "explore", "motivated", "memorize",
+                         "discourage", "abrupt", "curiosity"],
                 sentences=[
                     schemas.WSClozeSentence(label="A",
                         text="Curious students [[A]] information far longer than their peers.",
@@ -260,45 +240,48 @@ def mock_worksheet(title: str = "The Value of Curiosity",
                         text="Rote drills only force children to [[D]] answers without understanding.",
                         answer="memorize"),
                 ],
-                unused="discourage",
-                explanation="A retain, B explore, C motivated, D memorize 가 각각 들어가고 "
-                            "⑤ discourage(막다)만 문맥상 쓸 곳이 없다."),
-            schemas.WSClozeSet(
-                choices=["fuels", "curiosity", "lifelong", "abrupt", "creativity"],
-                sentences=[
-                    schemas.WSClozeSentence(label="A",
-                        text="A sense of wonder [[A]] the desire to keep learning.",
-                        answer="fuels"),
-                    schemas.WSClozeSentence(label="B",
-                        text="Genuine [[B]] leads people to question what they already know.",
-                        answer="curiosity"),
-                    schemas.WSClozeSentence(label="C",
-                        text="Reading widely supports [[C]] learning well into old age.",
-                        answer="lifelong"),
-                    schemas.WSClozeSentence(label="D",
-                        text="Asking questions sparks the [[D]] needed to solve new problems.",
-                        answer="creativity"),
-                ],
-                unused="abrupt",
-                explanation="A fuels, B curiosity, C lifelong, D creativity 가 들어가고 "
-                            "④ abrupt(갑작스러운)는 어느 빈칸과도 어울리지 않는다."),
+                unused=["discourage", "abrupt", "curiosity"],
+                explanation="A retain, B explore, C motivated, D memorize 가 각각 들어가고, "
+                            "⑤ discourage·⑥ abrupt·⑦ curiosity 는 어느 빈칸에도 맞지 않아 남는다."),
         ]),
         error=schemas.WSErrorType(items=[
             schemas.WSErrorItem(
-                text="Curiosity drive us to explore the unknown.",
-                error="drive", correction="drives",
-                explanation="주어 Curiosity 는 3인칭 단수이므로 동사에 -s (수일치)."),
+                sentence=("Curiosity {{1|drive}} us {{2|to explore}} the unknown, a desire "
+                          "{{3|which}} {{4|have}} shaped human progress for {{5|thousand}} of years."),
+                underlines=[
+                    schemas.WSUnderline(no=1, text="drive", point="수일치", wrong=True, correction="drives"),
+                    schemas.WSUnderline(no=2, text="to explore", point="준동사", wrong=False),
+                    schemas.WSUnderline(no=3, text="which", point="관계사", wrong=False),
+                    schemas.WSUnderline(no=4, text="have", point="수일치", wrong=True, correction="has"),
+                    schemas.WSUnderline(no=5, text="thousand", point="수 표현", wrong=True, correction="thousands"),
+                ],
+                explanation="① 주어 Curiosity 단수→drives. ④ 선행사 a desire 단수→has. "
+                            "⑤ thousands of years(복수 표현). ②③은 어법상 옳다."),
             schemas.WSErrorItem(
-                text="Curious students remembers information longer.",
-                error="remembers", correction="remember",
-                explanation="복수 주어 students 에는 동사원형 remember (수일치)."),
+                sentence=("Curious students remember information {{1|longer}} and {{2|stayed}} "
+                          "more {{3|motivating}}, so questions {{4|should be encouraged}} rather "
+                          "than {{5|memorize}} facts."),
+                underlines=[
+                    schemas.WSUnderline(no=1, text="longer", point="비교급", wrong=False),
+                    schemas.WSUnderline(no=2, text="stayed", point="병렬", wrong=True, correction="stay"),
+                    schemas.WSUnderline(no=3, text="motivating", point="분사(형용사)", wrong=True, correction="motivated"),
+                    schemas.WSUnderline(no=4, text="should be encouraged", point="태", wrong=False),
+                    schemas.WSUnderline(no=5, text="memorize", point="준동사", wrong=True, correction="memorizing"),
+                ],
+                explanation="② remember와 병렬이므로 stay. ③ 사람이 동기부여'되는' 것이므로 motivated. "
+                            "⑤ rather than 뒤 동명사 memorizing. ①④는 옳다."),
             schemas.WSErrorItem(
-                text="Children who is encouraged to ask questions stay curious.",
-                error="is", correction="are",
-                explanation="관계대명사 who 의 선행사가 복수(Children)이므로 are."),
-            schemas.WSErrorItem(
-                text="It is important asking questions in class.",
-                error="asking", correction="to ask",
-                explanation="가주어 It 의 진주어는 to부정사(to ask)."),
+                sentence=("If schools {{1|encourage}} inquiry, students {{2|would learn}} faster; "
+                          "it is curiosity {{3|what}} fuels progress, and they think {{4|deeply}} "
+                          "and {{5|clear}}."),
+                underlines=[
+                    schemas.WSUnderline(no=1, text="encourage", point="가정법", wrong=True, correction="encouraged"),
+                    schemas.WSUnderline(no=2, text="would learn", point="가정법", wrong=False),
+                    schemas.WSUnderline(no=3, text="what", point="강조구문", wrong=True, correction="that"),
+                    schemas.WSUnderline(no=4, text="deeply", point="부사", wrong=False),
+                    schemas.WSUnderline(no=5, text="clear", point="형/부사", wrong=True, correction="clearly"),
+                ],
+                explanation="① 가정법 과거 If절은 과거형 encouraged. ③ It is ~ that 강조구문의 that. "
+                            "⑤ 동사 think 수식은 부사 clearly. ②④는 옳다."),
         ]),
     )

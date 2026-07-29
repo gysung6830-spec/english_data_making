@@ -217,18 +217,18 @@ class WSSummaryType(BaseModel):
         return v
 
 
-# 유형 2) 문장 변형 대비(paraphrasing) --------------------------------------
+# 유형 2) 문장 변형 대비(유의어·구조 변환 후 빈칸 완성 · 주관식) --------------
 class WSParaphraseQ(BaseModel):
     original: str                          # 지문에서 고른 원문 문장
-    options: list[str]                     # 5개 변형 선지
-    answer: int                            # 정답 선지 번호(1~5)
-    explanation: str = ""                  # 정답 근거 + 오답 이유
+    sentence: str                          # 유의어·구조 변환한 문장. 빈칸 [[A]],[[B]]
+    blanks: list[WSSummaryBlank]           # 각 빈칸 {label, answer, meaning}
+    explanation: str = ""                  # 변형 포인트/정답 근거
 
-    @field_validator("options")
+    @field_validator("blanks")
     @classmethod
-    def _five_options(cls, v: list[str]) -> list[str]:
-        if len(v) != 5:
-            raise ValueError("변형 선지는 정확히 5개여야 합니다.")
+    def _has_blanks(cls, v: list[WSSummaryBlank]) -> list[WSSummaryBlank]:
+        if not v:
+            raise ValueError("문장 변형 빈칸이 없습니다.")
         return v
 
 
@@ -300,16 +300,16 @@ class WSClozeSentence(BaseModel):
 
 
 class WSClozeSet(BaseModel):
-    choices: list[str]                     # 보기 단어(①~⑤ 순서, 5개)
-    sentences: list[WSClozeSentence]       # 빈칸이 있는 문장들(보통 4개)
-    unused: str                            # 어디에도 쓰이지 않는 낱말(정답)
+    choices: list[str]                     # 보기 단어(①~⑦ 순서, 7개)
+    sentences: list[WSClozeSentence]       # 빈칸이 있는 문장들(4개)
+    unused: list[str]                      # 어디에도 쓰이지 않는 낱말들(3개, 정답)
     explanation: str = ""
 
     @field_validator("choices")
     @classmethod
-    def _five_choices(cls, v: list[str]) -> list[str]:
-        if len(v) < 5:
-            raise ValueError("보기 단어는 5개 이상이어야 합니다.")
+    def _seven_choices(cls, v: list[str]) -> list[str]:
+        if len(v) < 6:
+            raise ValueError("보기 단어는 6개 이상(권장 7개)이어야 합니다.")
         return v
 
     @field_validator("sentences")
@@ -317,6 +317,13 @@ class WSClozeSet(BaseModel):
     def _has_sents(cls, v: list[WSClozeSentence]) -> list[WSClozeSentence]:
         if not v:
             raise ValueError("빈칸 문장이 비어 있습니다.")
+        return v
+
+    @field_validator("unused")
+    @classmethod
+    def _unused_count(cls, v: list[str]) -> list[str]:
+        if len(v) != 3:
+            raise ValueError("사용되지 않는 낱말은 정확히 3개여야 합니다.")
         return v
 
 
@@ -331,12 +338,28 @@ class WSChoiceType(BaseModel):
         return v
 
 
-# 유형 6) 어법 오류 수정 ----------------------------------------------------
+# 유형 6) 어법 오류 수정 (밑줄 5곳 중 3곳 오류) -----------------------------
+class WSUnderline(BaseModel):
+    no: int                                # 밑줄 번호(1~5, ①~⑤)
+    text: str                              # 밑줄 친 표현(문장 속 그대로)
+    point: str = ""                        # 어법 포인트(수일치/준동사/관계사/가정법/비교/강조/형·부사 등)
+    wrong: bool = False                    # 어법상 틀린 밑줄인지
+    correction: str = ""                   # 틀린 경우 바르게 고친 표현
+
+
 class WSErrorItem(BaseModel):
-    text: str                              # 어법 오류가 포함된 문장(오류를 그대로 둔 채)
-    error: str                             # 틀린 표현(문장 속 그대로)
-    correction: str                        # 바르게 고친 표현
-    explanation: str = ""                  # 어법 설명(한국어)
+    sentence: str                          # 밑줄을 {{n|표현}} 으로 표시한 문장
+    underlines: list[WSUnderline]          # 밑줄 5곳(그중 3곳이 오류)
+    explanation: str = ""                  # 오류·수정 근거(한국어)
+
+    @field_validator("underlines")
+    @classmethod
+    def _five_with_three_wrong(cls, v: list[WSUnderline]) -> list[WSUnderline]:
+        if len(v) < 4:
+            raise ValueError("밑줄은 4개 이상(권장 5개)이어야 합니다.")
+        if sum(1 for u in v if u.wrong) != 3:
+            raise ValueError("어법상 틀린 밑줄은 정확히 3곳이어야 합니다.")
+        return v
 
 
 class WSErrorType(BaseModel):

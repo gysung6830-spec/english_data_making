@@ -107,27 +107,32 @@ def test_render_html():
 
 # ---- 6. 서술형 교재 스키마 검증 ------------------------------------------
 def test_worksheet_schema():
-    # 변형 선지는 정확히 5개여야 함
-    ok = {"original": "x", "options": ["a", "b", "c", "d", "e"], "answer": 1}
+    # 유형2(문장 변형·주관식): 빈칸이 있어야 함
+    ok = {"original": "x", "sentence": "a [[A]] b [[B]]",
+          "blanks": [{"label": "A", "answer": "x"}, {"label": "B", "answer": "y"}]}
     schemas.WSParaphraseQ.model_validate(ok)
     try:
-        schemas.WSParaphraseQ.model_validate({**ok, "options": ["a", "b", "c"]})
-        assert False, "선지 3개는 통과하면 안 됨"
+        schemas.WSParaphraseQ.model_validate({**ok, "blanks": []})
+        assert False, "빈칸 0개는 통과하면 안 됨"
     except Exception:
         pass
-    # 요약문 문항은 2개 이상
+    # 유형5(보기 어휘): 사용되지 않는 낱말은 정확히 3개
+    base_set = {"choices": ["a", "b", "c", "d", "e", "f", "g"],
+                "sentences": [{"label": "A", "text": "[[A]]", "answer": "a"}],
+                "unused": ["e", "f", "g"]}
+    schemas.WSClozeSet.model_validate(base_set)
     try:
-        schemas.WSSummaryType.model_validate(
-            {"items": [{"sentence": "a [[A]]", "blanks": [{"label": "A", "answer": "x"}]}]})
-        assert False, "요약 문항 1개는 통과하면 안 됨"
+        schemas.WSClozeSet.model_validate({**base_set, "unused": ["e"]})
+        assert False, "미사용 1개는 통과하면 안 됨"
     except Exception:
         pass
-    # 어휘 빈칸 세트: 보기는 5개 이상
+    # 유형6(어법): 틀린 밑줄은 정확히 3곳
+    good = [{"no": i, "text": "t", "wrong": i <= 3} for i in range(1, 6)]
+    schemas.WSErrorItem.model_validate({"sentence": "{{1|t}}", "underlines": good})
     try:
-        schemas.WSClozeSet.model_validate(
-            {"choices": ["a", "b"], "sentences": [{"label": "A", "text": "[[A]]", "answer": "a"}],
-             "unused": "b"})
-        assert False, "보기 2개는 통과하면 안 됨"
+        bad = [{"no": i, "text": "t", "wrong": i <= 2} for i in range(1, 6)]
+        schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": bad})
+        assert False, "틀린 밑줄 2곳은 통과하면 안 됨"
     except Exception:
         pass
     print("PASS  서술형 교재 스키마 검증")

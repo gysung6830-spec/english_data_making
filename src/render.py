@@ -159,6 +159,24 @@ def _sub_labeled(text: str, answers_by_label: dict, reveal: bool) -> Markup:
     return Markup(_WS_LBL_RE.sub(repl, esc))
 
 
+_WS_UL_RE = re.compile(r"\{\{(\d+)\|([^}]*)\}\}")
+
+
+def _sub_underlines(sentence: str, by_no: dict, reveal: bool) -> Markup:
+    """유형6 문장의 {{n|표현}} 마커를 번호 밑줄로 치환(교사용은 오류 밑줄 강조)."""
+    esc = str(escape(sentence or ""))
+
+    def repl(m: "re.Match") -> str:
+        no = int(m.group(1))
+        txt = m.group(2)
+        u = by_no.get(no)
+        wrong = bool(reveal and u and u.get("wrong"))
+        cls = "ul wrongword" if wrong else "ul"
+        return f'<u class="{cls}">{txt}</u><sup class="uln">{no}</sup>'
+
+    return Markup(_WS_UL_RE.sub(repl, esc))
+
+
 def _underline_words(text: str, words) -> Markup:
     """지문(교사용) 안에서 정답 단어들을 밑줄로 표시."""
     if not text:
@@ -427,12 +445,19 @@ def _ws_context(worksheets) -> list[dict]:
                            for b in it.blanks],
             })
 
-        # 유형2: 문장 변형
-        para_items = [{
-            "qno": nxt(), "src": src, "original": q.original,
-            "options": list(q.options), "answer": q.answer,
-            "explanation": q.explanation,
-        } for q in ws.paraphrase.questions]
+        # 유형2: 문장 변형(유의어·구조 변환 후 빈칸 완성 · 주관식)
+        para_items = []
+        for q in ws.paraphrase.questions:
+            amap = {b.label.upper(): b.answer for b in q.blanks}
+            para_items.append({
+                "qno": nxt(), "src": src, "original": q.original,
+                "student": _sub_labeled(q.sentence, amap, False),
+                "teacher": _sub_labeled(q.sentence, amap, True),
+                "blanks": [{"label": b.label.upper(), "answer": b.answer,
+                            "meaning": b.meaning, "hint": _hint(b.answer)}
+                           for b in q.blanks],
+                "explanation": q.explanation,
+            })
 
         # 유형3: 요지/제목 배열 영작
         def arrange(items):
@@ -452,17 +477,15 @@ def _ws_context(worksheets) -> list[dict]:
             "explanation": it.explanation,
         } for it in ws.compose.items]
 
-        # 유형5: 사용되지 않는 낱말 고르기
+        # 유형5: 사용되지 않는 낱말 고르기(3개)
         cloze_sets = []
         for s in ws.choice.sets:
             amap = {se.label.upper(): se.answer for se in s.sentences}
-            try:
-                unused_idx = [c.lower() for c in s.choices].index((s.unused or "").lower()) + 1
-            except ValueError:
-                unused_idx = 0
+            lc = [c.lower() for c in s.choices]
+            unused_idx = sorted(lc.index(u.lower()) + 1 for u in s.unused if u.lower() in lc)
             cloze_sets.append({
                 "qno": nxt(), "src": src, "choices": list(s.choices),
-                "unused": s.unused, "unused_index": unused_idx,
+                "unused": list(s.unused), "unused_index": unused_idx,
                 "explanation": s.explanation,
                 "sentences": [{
                     "label": se.label.upper(), "answer": se.answer,
@@ -471,11 +494,19 @@ def _ws_context(worksheets) -> list[dict]:
                 } for se in s.sentences],
             })
 
-        # 유형6: 어법 오류 수정
-        err_items = [{
-            "qno": nxt(), "src": src, "text": it.text, "error": it.error,
-            "correction": it.correction, "explanation": it.explanation,
-        } for it in ws.error.items]
+        # 유형6: 어법 오류 수정(밑줄 5곳 중 3곳 오류)
+        err_items = []
+        for it in ws.error.items:
+            by_no = {u.no: {"wrong": u.wrong} for u in it.underlines}
+            wrong = [{"no": u.no, "text": u.text, "correction": u.correction,
+                      "point": u.point} for u in it.underlines if u.wrong]
+            err_items.append({
+                "qno": nxt(), "src": src,
+                "student": _sub_underlines(it.sentence, by_no, False),
+                "teacher": _sub_underlines(it.sentence, by_no, True),
+                "wrong": sorted(wrong, key=lambda x: x["no"]),
+                "explanation": it.explanation,
+            })
 
         passages.append({
             "no": i, "total": len(reps), "title": ws.title,
