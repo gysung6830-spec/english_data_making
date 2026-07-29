@@ -112,7 +112,7 @@ def generate():
                     ext = Path(f.filename).suffix.lower()
                     if not ingest.is_supported(f"x{ext}"):
                         return fail(f"지원하지 않는 형식입니다: {f.filename} "
-                                    "(.txt/.pdf/.jpg/.png/.webp)")
+                                    "(.txt/.pdf/.hwp/.hwpx/.jpg/.png/.webp)")
                     dest = updir / f"upload_{i}{ext}"
                     f.save(dest)
                     paths.append(dest)

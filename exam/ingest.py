@@ -3,9 +3,10 @@
 지원 형식:
   .txt            그대로 읽음(오프라인)
   .pdf            pdfplumber 로 텍스트 추출(오프라인). 스캔본(글자 없음)이면 안내.
+  .hwp/.hwpx      한글 파일에서 텍스트 추출(오프라인). PDF와 동일하게 정제·분리.
   .jpg/.png/...   Claude 비전으로 지문을 읽어 텍스트화(ANTHROPIC_API_KEY 필요)
 
-파일 1개 = 지문 1개로 취급한다.
+파일 1개 = 지문 1개로 취급한다(단, 한 파일에 지문이 여럿이면 각각 분리).
 """
 from __future__ import annotations
 
@@ -13,12 +14,14 @@ import re
 from pathlib import Path
 
 from src import extract  # 기존 분석 도구의 PDF/이미지 유틸 재사용
+from . import hwp as _hwp
 from .schemas import PassageText
 
 TXT_EXTS = {".txt"}
 PDF_EXTS = {".pdf"}
+HWP_EXTS = {".hwp", ".hwpx"}
 IMAGE_EXTS = set(extract.IMAGE_EXTS)
-SUPPORTED_EXTS = TXT_EXTS | PDF_EXTS | IMAGE_EXTS
+SUPPORTED_EXTS = TXT_EXTS | PDF_EXTS | HWP_EXTS | IMAGE_EXTS
 
 _VISION_SYSTEM = (
     "You are a precise OCR assistant. You transcribe English reading passages "
@@ -70,14 +73,8 @@ def _clean_pdf_text(segment: str) -> str:
     return text
 
 
-def read_pdf_passages(path: str | Path) -> list[str]:
-    """PDF에서 '영어 지문'들을 추출한다(여러 지문이면 각각 분리).
-
-    - 영어+한글 2단, 여러 지문이 섞인 워크시트도 한글·머리글을 제거하고
-      지문 단위로 나눠 돌려준다.
-    - 글자 없는(스캔) PDF면 빈 리스트.
-    """
-    raw = extract.extract_raw_text(path)
+def _passages_from_raw(raw: str) -> list[str]:
+    """추출한 원문 텍스트 → 한글·머리글 제거 후 영어 지문들로 분리(PDF·HWP 공용)."""
     segments = _PASSAGE_SPLIT.split(raw) if _PASSAGE_SPLIT.search(raw) else [raw]
     passages: list[str] = []
     for seg in segments:
@@ -86,6 +83,21 @@ def read_pdf_passages(path: str | Path) -> list[str]:
         if len(re.sub(r"[^A-Za-z]", "", body)) >= 120:
             passages.append(body)
     return passages
+
+
+def read_pdf_passages(path: str | Path) -> list[str]:
+    """PDF에서 '영어 지문'들을 추출한다(여러 지문이면 각각 분리).
+
+    - 영어+한글 2단, 여러 지문이 섞인 워크시트도 한글·머리글을 제거하고
+      지문 단위로 나눠 돌려준다.
+    - 글자 없는(스캔) PDF면 빈 리스트.
+    """
+    return _passages_from_raw(extract.extract_raw_text(path))
+
+
+def read_hwp_passages(path: str | Path) -> list[str]:
+    """HWP/HWPX에서 '영어 지문'들을 추출한다(PDF와 동일한 정제·분리)."""
+    return _passages_from_raw(_hwp.read_hwp_any(path))
 
 
 def read_pdf(path: str | Path) -> str:
@@ -124,6 +136,16 @@ def load_body(path: str | Path, client=None) -> str:
             )
         return text
 
+    if ext in HWP_EXTS:
+        passages = read_hwp_passages(p)
+        if not passages:
+            raise ValueError(
+                f"'{p.name}': HWP에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 "
+                "들어 있거나 형식이 특수할 수 있으니, 지문을 복사해 붙여넣거나 "
+                "PDF/사진으로 저장해 올려 주세요."
+            )
+        return " ".join(passages)
+
     if ext in IMAGE_EXTS:  # noqa: RET503
         if client is None:
             raise ValueError(
@@ -131,7 +153,9 @@ def load_body(path: str | Path, client=None) -> str:
             )
         return read_image_text(client, p)
 
-    raise ValueError(f"'{p.name}': 지원하지 않는 형식입니다(.txt/.pdf/.jpg/.png/.webp).")
+    raise ValueError(
+        f"'{p.name}': 지원하지 않는 형식입니다(.txt/.pdf/.hwp/.hwpx/.jpg/.png/.webp)."
+    )
 
 
 def load_bodies(paths, client=None) -> list[tuple[str, str]]:
@@ -143,12 +167,18 @@ def load_bodies(paths, client=None) -> list[tuple[str, str]]:
     out: list[tuple[str, str]] = []
     for p in paths:
         p = Path(p)
-        if p.suffix.lower() in PDF_EXTS:
-            passages = read_pdf_passages(p)
+        ext = p.suffix.lower()
+        if ext in PDF_EXTS or ext in HWP_EXTS:
+            passages = read_pdf_passages(p) if ext in PDF_EXTS else read_hwp_passages(p)
             if not passages:
+                if ext in PDF_EXTS:
+                    raise ValueError(
+                        f"'{p.name}': 글자가 없는(스캔본) PDF로 보입니다. "
+                        "해당 페이지를 사진(JPG/PNG)으로 저장해 올려 주세요."
+                    )
                 raise ValueError(
-                    f"'{p.name}': 글자가 없는(스캔본) PDF로 보입니다. "
-                    "해당 페이지를 사진(JPG/PNG)으로 저장해 올려 주세요."
+                    f"'{p.name}': HWP에서 영어 지문을 찾지 못했습니다. 지문을 복사해 "
+                    "붙여넣거나 PDF/사진으로 저장해 올려 주세요."
                 )
             if len(passages) == 1:
                 out.append((p.name, passages[0]))

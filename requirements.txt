@@ -7,3 +7,4 @@ PyYAML>=6.0
 python-dotenv>=1.0
 pypdf>=4.0
 Flask>=3.0
+olefile>=0.46  # .hwp(HWP5) 텍스트 추출

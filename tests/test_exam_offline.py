@@ -192,6 +192,49 @@ def test_pdf_cleaning() -> None:
     print("✓ PDF 정제(한글·머리글 제거) 통과")
 
 
+def test_hwp_ingest() -> None:
+    """HWP 인식: (1) .hwpx(ZIP+XML) 추출·정제, (2) .hwp PARA_TEXT 레코드/제어객체 파싱."""
+    import io
+    import struct
+    import zipfile
+
+    from exam import hwp, ingest
+
+    # (1) .hwpx — OWPML <hp:t> 에서 영어만 뽑고 한글 지시문은 정제로 제거
+    xml = (
+        '<hs:sec xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph" '
+        'xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section">'
+        '<hp:p><hp:run><hp:t>Involving prospective building users as well as clients '
+        'is even more valuable in the long run for any large institution, because the '
+        'people who use a space every day understand its practical needs far better '
+        'than the client who merely pays for the project.</hp:t>'
+        '</hp:run></hp:p>'
+        '<hp:p><hp:run><hp:t>다음 글의 순서로 가장 적절한 것은?</hp:t></hp:run></hp:p>'
+        '</hs:sec>'
+    )
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("Contents/section0.xml", xml)
+    hwpx = ROOT / "output" / "test" / "sample.hwpx"
+    hwpx.parent.mkdir(parents=True, exist_ok=True)
+    hwpx.write_bytes(buf.getvalue())
+    passages = ingest.read_hwp_passages(hwpx)
+    assert len(passages) == 1
+    assert "prospective building users" in passages[0]
+    assert "순서로" not in passages[0]                    # 한글 지시문 제거
+    hwpx.unlink()
+
+    # (2) .hwp 본문 레코드: PARA_TEXT(UTF-16LE) + 8코드유닛 인라인 제어객체는 건너뛴다
+    body = "Hello".encode("utf-16le") + struct.pack("<H", 2) + b"\x00" * 14 \
+        + " World".encode("utf-16le")
+    header = 0x43 | (len(body) << 20)                     # tag=PARA_TEXT, size
+    rec = struct.pack("<I", header) + body
+    texts = [hwp._decode_para_text(d) for t, d in hwp._iter_records(rec)
+             if t == hwp._HWPTAG_PARA_TEXT]
+    assert "".join(texts).strip() == "Hello World"
+    print("✓ HWP 인식(.hwpx 추출·정제, .hwp 레코드/제어객체 파싱) 통과")
+
+
 def test_analyzer_uses_real_passage() -> None:
     """분석기가 엉뚱한 지문을 내놓아도 '넣은 지문'만 쓰는지."""
     from exam import analyzer
@@ -436,6 +479,7 @@ if __name__ == "__main__":
     test_error_guards()
     test_set2_demo()
     test_pdf_cleaning()
+    test_hwp_ingest()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()
     test_prompt_cache_request()
