@@ -1,0 +1,66 @@
+/* ============================================================
+   단일 유형 산문 워크시트 (어법·어형·어휘)
+   ============================================================ */
+:root{
+  --ink:#23272e; --muted:#6b7280; --line:#e6e9ee;
+  --rose:#b8396b; --rose-bg:#fdeef4;
+  --form:#2563a0; --grammar:#7d3caf; --vocab:#158060;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:"Georgia","Times New Roman","Liberation Serif","DejaVu Serif",
+              "Malgun Gothic","맑은 고딕","Nanum Gothic",serif;
+  color:var(--ink); font-size:10.5pt; line-height:1.55;
+}
+.ws.brk{ page-break-before:always; break-before:page; }
+
+/* 상단 메타 + 워크북 배지 */
+.ws-top{ display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:5px; border-bottom:2px solid #2b2f3a; margin-bottom:9px; }
+.ws-meta{ font-size:9pt; color:#3a3f4a; font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.ws-meta b{ color:var(--rose); }
+.ws-badge{ font-size:8pt; font-weight:700; color:#fff; background:var(--rose);
+  border-radius:5px; padding:2px 9px; font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+
+/* 유형 지시문 바 */
+.ws-instr{ font-size:9pt; color:#3a3f4a; padding:6px 10px; border-left:4px solid var(--rose);
+  background:var(--rose-bg); border-radius:0 6px 6px 0; margin-bottom:12px;
+  font-family:"Malgun Gothic","맑은 고딕",sans-serif; line-height:1.5; }
+.ws-instr .wt-label{ font-weight:700; color:var(--rose); margin-right:6px; }
+
+/* 번호 매긴 문장 목록 */
+.ws-list{ list-style:none; margin:0; padding:0; counter-reset:sent; }
+.ws-list > li{ margin-bottom:14px; page-break-inside:avoid; }
+.ws-list > li::before{ counter-increment:sent; content:counter(sent) ". ";
+  font-weight:700; color:#2b2f3a; }
+.s-en{ display:inline; line-height:2.0; }
+.wf .s-en, .ws-list .s-en{ }
+.s-ko{ margin-top:5px; font-size:8.6pt; color:#555b66; line-height:1.5;
+  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+
+/* 어형 변형: (원형) + 쓰는 밑줄 */
+.pf{ color:var(--form); font-weight:600; white-space:nowrap; }
+.pw{ display:inline-block; width:5.2em; border-bottom:1px solid #9aa3af;
+  margin:0 4px; height:0.95em; vertical-align:baseline; }
+
+/* 양자택일: [ A / B ] 박스 */
+.pc{ display:inline-block; border:1.3px solid #d59; border-radius:6px;
+  padding:0 7px; margin:0 1px; font-weight:600; white-space:nowrap; line-height:1.5; }
+.pc.wg{ border-color:var(--grammar); color:var(--grammar); background:#faf5fd; }
+.pc.wv{ border-color:var(--vocab); color:var(--vocab); background:#f0f8f4; }
+
+/* 정답 페이지 */
+.ans-page{ page-break-before:always; break-before:page; }
+.ans-head{ font-size:13pt; font-weight:700; color:#2b2f3a;
+  border-bottom:2px solid #2b2f3a; padding-bottom:5px; margin-bottom:10px;
+  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.ans-head .ans-sub{ font-size:8pt; font-weight:400; color:var(--muted); margin-left:8px; }
+.ans-ws{ margin-bottom:12px; page-break-inside:avoid; }
+.ans-ws-h{ font-size:10pt; font-weight:700; margin-bottom:5px;
+  font-family:"Malgun Gothic","맑은 고딕",sans-serif; }
+.wt-form{ color:var(--form); } .wt-grammar{ color:var(--grammar); } .wt-vocab{ color:var(--vocab); }
+.ans-row{ font-size:9pt; margin-bottom:3px; }
+.ans-row b{ color:#2b2f3a; margin-right:5px; }
+.ans-a{ font-weight:700; }
+.ans-row .sep{ color:#aab; margin:0 5px; }
