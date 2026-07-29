@@ -469,6 +469,27 @@ def _ws_context(worksheets) -> list[dict]:
     return passages
 
 
+# 유형별 '출제 원리' — 각 유형 시작 페이지에 안내로 표시(정적 설명)
+WS_PRINCIPLES = {
+    1: ("지문의 핵심 정보를 한 문장으로 압축한 요약문에서 내용 이해의 열쇠가 되는 단어를 "
+        "빈칸으로 만든다. 정답은 반드시 원문에 등장하는 단어(필요시 어형 변화)로, "
+        "내용 이해와 함께 어휘·어법·철자를 정확히 아는지 평가한다."),
+    2: ("지문의 한 문장을 동의어·구조 변환으로 바꾼 정답 1개와, 반의어·주객 전도·부정/조건 "
+        "왜곡으로 의미를 비튼 오답 4개를 섞는다. 표면적 단어가 아니라 문장 전체의 의미 일치를 "
+        "판단하게 하여 변형 지문에 대비시킨다."),
+    3: ("글의 요지와 제목을 영어로 직접 쓰게 하되, 정답 문장을 이루는 단어를 모두 제시하고 "
+        "어순만 배열하게 한다. 핵심 내용 파악과 함께 주어-동사 구조, 어순 감각을 평가한다."),
+    4: ("지문의 핵심 문장을 우리말로 제시하고, 그 문장에 실제로 쓰인 어법(관계사·분사·비교 등)을 "
+        "조건으로 걸어 영작하게 한다. 지정된 단어 수와 어법 조건을 동시에 충족해야 하므로 "
+        "정밀한 문장 구성 능력을 평가한다."),
+    5: ("하나의 보기(5개)로 여러 빈칸을 채우게 하고, 어디에도 들어갈 수 없는 낱말 1개를 고르게 "
+        "한다. 각 빈칸의 문맥·연어·품사를 종합적으로 판단해야 하므로 어휘력과 문맥 이해를 함께 "
+        "평가한다."),
+    6: ("지문 문장에 어법상 틀린 부분을 한 곳만 심어 두고 찾아 고치게 한다. 수일치·시제·태·"
+        "준동사·관계사 등 내신 빈출 어법을 실제 문장 맥락에서 점검한다."),
+}
+
+
 def render_worksheet_pdf(worksheets, out_path: str | Path,
                          title: str = "내신 서술형 대비 교재",
                          footer_note: str = "", brand: str = "은아 T") -> Path:
@@ -476,6 +497,7 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
 
     구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
     일련번호는 PDF 전체에 걸쳐 이어 붙고, 출처는 '지문 N' 배지로 표시한다.
+    각 유형은 새 페이지에서 시작하며, 유형 헤더에 '출제 원리'를 함께 안내한다.
     """
     from weasyprint import CSS, HTML
 
@@ -483,7 +505,7 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
     out_path.parent.mkdir(parents=True, exist_ok=True)
     passages = _ws_context(worksheets)
     tmpl = _env.get_template("worksheet.html.j2")
-    html = tmpl.render(title=title, passages=passages,
+    html = tmpl.render(title=title, passages=passages, principles=WS_PRINCIPLES,
                        footer_note=footer_note, brand=brand)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])

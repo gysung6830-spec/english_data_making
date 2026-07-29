@@ -10,6 +10,9 @@
     <span class="t-name">{{ name }}</span>
     <span class="t-instr">{{ instr }}</span>
   </div>
+  {% if principles and principles[n] %}
+  <div class="t-principle"><span class="tp-lb">출제 원리</span>{{ principles[n] }}</div>
+  {% endif %}
 {% endmacro %}
 
 {% macro qhead(q) %}
@@ -25,6 +28,7 @@
   {% if pg.total > 1 %}<div class="p-tag">지문 {{ pg.no }} / {{ pg.total }} · {{ pg.title }}</div>{% endif %}
 
   {# ===== 유형1 : 서술형 요약문 완성 ===== #}
+  <div class="type-block tb1">
   {{ thead(1, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
   {% if pg.passage %}
   <div class="reading">{% if reveal %}{{ pg.passage_teacher }}{% else %}{{ pg.passage }}{% endif %}</div>
@@ -43,8 +47,10 @@
     </div>
   </div>
   {% endfor %}
+  </div>
 
   {# ===== 유형2 : 문장 변형 대비 ===== #}
+  <div class="type-block tb2">
   {{ thead(2, '문장 변형 대비', '다음 문장과 의미가 일치하는 것을 고르시오.') }}
   {% for q in pg.paraphrase %}
   <div class="q-card">
@@ -58,8 +64,10 @@
     {% if reveal %}<div class="exp"><b>정답 {{ q.answer | circled }}</b> {{ q.explanation }}</div>{% endif %}
   </div>
   {% endfor %}
+  </div>
 
   {# ===== 유형3 : 요지/제목 배열 영작 ===== #}
+  <div class="type-block tb3">
   {{ thead(3, '요지·제목 배열 영작', '보기의 단어를 모두 사용하여 영작하시오.') }}
   <div class="two-col">
     <div class="col">
@@ -71,8 +79,10 @@
       {% for q in pg.titles %}{{ arrange_card(q, reveal) }}{% endfor %}
     </div>
   </div>
+  </div>
 
   {# ===== 유형4 : 조건 영작 ===== #}
+  <div class="type-block tb4">
   {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
   {% for q in pg.compose %}
   <div class="q-card">
@@ -84,8 +94,10 @@
     {% else %}<div class="ans-box">➜</div>{% endif %}
   </div>
   {% endfor %}
+  </div>
 
   {# ===== 유형5 : 보기 어휘 빈칸 완성(사용되지 않는 낱말) ===== #}
+  <div class="type-block tb5">
   {{ thead(5, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말을 한 개 고르시오.') }}
   {% for s in pg.cloze %}
   <div class="q-card">
@@ -105,8 +117,10 @@
     {% if reveal %}<div class="exp"><b>사용되지 않는 낱말 {{ s.unused_index | circled }} {{ s.unused }}</b> {{ s.explanation }}</div>{% endif %}
   </div>
   {% endfor %}
+  </div>
 
   {# ===== 유형6 : 어법 오류 수정 ===== #}
+  <div class="type-block tb6">
   {{ thead(6, '어법 오류 수정', '어법상 틀린 부분을 찾아 바르게 고치시오.') }}
   {% for q in pg.error %}
   <div class="q-card">
@@ -118,6 +132,7 @@
     {% else %}<div class="ans-box"><span class="ans-hint">틀린 부분 → 고쳐 쓰기</span></div>{% endif %}
   </div>
   {% endfor %}
+  </div>
 {% endmacro %}
 
 {# 유형3 카드(요지/제목 공용) #}

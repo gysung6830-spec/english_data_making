@@ -327,11 +327,26 @@ table.lit2 td {
   font-size: 9px; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin: 4px 0 8px;
 }
 
+/* 유형별 페이지 나눔 (유형1은 파트 헤더/지문 시작에 이어 붙임) */
+.type-block { break-before: page; }
+.type-block.tb1 { break-before: auto; }
+
 /* 유형 헤더 */
 .t-head {
   display: flex; align-items: baseline; gap: 8px; margin: 12px 0 7px;
   border-left: 5px solid var(--ws); background: var(--ws-soft);
   padding: 5px 10px; border-radius: 0 6px 6px 0; break-after: avoid;
+}
+
+/* 출제 원리 안내 박스 */
+.t-principle {
+  border: 1px dashed var(--ws); background: #f4faf9; border-radius: 6px;
+  padding: 6px 11px; margin: 0 0 9px; font-size: 8.9px; line-height: 1.55; color: #33413f;
+  break-after: avoid;
+}
+.t-principle .tp-lb {
+  display: inline-block; background: var(--ws); color: #fff; font-size: 8px; font-weight: 800;
+  padding: 1px 7px; border-radius: 8px; margin-right: 6px;
 }
 .t-badge { background: var(--ws); color: #fff; font-size: 9px; font-weight: 800;
   padding: 1px 8px; border-radius: 4px; flex: none; }
