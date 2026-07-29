@@ -80,15 +80,17 @@
   {{ thead(2, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
-    {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
-    <div class="grid2">
-    {% for q in pg.summary %}
-    <div class="q-card">
-      {{ qhead(q) }}
-      <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
-      {{ blank_boxes(q.blanks, reveal) }}
-    </div>
-    {% endfor %}
+    <div class="rq2">
+      {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
+      <div class="rq-cards">
+      {% for q in pg.summary %}
+      <div class="q-card">
+        {{ qhead(q) }}
+        <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
+        {{ blank_boxes(q.blanks, reveal) }}
+      </div>
+      {% endfor %}
+      </div>
     </div>
   {% endfor %}
   </div>
@@ -176,18 +178,20 @@
   {{ thead(7, '지문 기반 영어 문답', '지문을 읽고, 지문 내용에 근거하여 영어 질문에 영어로 답하시오. (지문에 없는 내용 추론 금지)') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
-    {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
-    <div class="grid2">
-    {% for q in pg.qa %}
-    <div class="q-card">
-      {{ qhead(q) }}
-      <div class="qa-q">{{ q.question }}</div>
-      {% if reveal %}
-        <div class="ans-line">➜ {{ q.answer }}</div>
-        <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
-      {% else %}<div class="ans-box">➜</div>{% endif %}
-    </div>
-    {% endfor %}
+    <div class="rq2">
+      {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
+      <div class="rq-cards">
+      {% for q in pg.qa %}
+      <div class="q-card">
+        {{ qhead(q) }}
+        <div class="qa-q">{{ q.question }}</div>
+        {% if reveal %}
+          <div class="ans-line">➜ {{ q.answer }}</div>
+          <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
+        {% else %}<div class="ans-box">➜</div>{% endif %}
+      </div>
+      {% endfor %}
+      </div>
     </div>
   {% endfor %}
   </div>
