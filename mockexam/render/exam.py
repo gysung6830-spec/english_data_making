@@ -124,6 +124,24 @@ u {{ text-underline-offset:2px; }}
 .exp .lbl.trap {{ color:#b00020; }}
 .exp .ci {{ font-weight:700; }}
 .exp b {{ font-weight:800; }}
+
+/* 섹션 구분 배너(학생용/교사용/빠른정답/해설) */
+.sec-banner {{ text-align:center; font-size:13pt; font-weight:800; letter-spacing:3px;
+               border:2px solid #000; border-radius:4px; padding:6px 8px; margin-bottom:10px; }}
+/* 교사용: 문항 아래 정답+해설 */
+.t-ans {{ margin-top:4px; font-size:8.6pt; }}
+.t-ans b {{ color:#1d4ed8; font-weight:800; }}
+.q .exp {{ margin:3px 0 2px; padding:5px 8px; background:#f6f8fc;
+           border-left:2px solid #9db8e6; }}
+/* 빠른 정답 */
+.qa-sub {{ font-weight:800; margin:8px 0 4px; font-size:10pt; }}
+.qa-table {{ border-collapse:collapse; margin:2px 0 4px; }}
+.qa-table td {{ border:0.6px solid #999; padding:3px 7px; text-align:center;
+                font-size:10pt; min-width:20px; }}
+.qa-table td.qn {{ font-weight:800; background:#f0f2f5; }}
+.qa-table td.qa {{ font-weight:700; }}
+.qa-essay {{ font-size:9.2pt; line-height:1.6; }}
+.qa-erow {{ margin:2px 0; padding-left:14px; text-indent:-14px; }}
 .trap {{ color:#b00020; }}
 """
 
@@ -231,7 +249,9 @@ def _render_bogi(q: Question) -> str:
     return "".join(out)
 
 
-def _q_html(q: Question) -> str:
+def _q_html(q: Question, teacher: bool = False) -> str:
+    """문항 1개 HTML. teacher=True 면 정답을 볼드 표시하고 해설을 문항 아래에 붙인다."""
+    correct = (q.answer or "").strip()
     parts = [f'<div class="q"><div class="q-head"><span class="no">{q.no}.</span> '
              f'{html.escape(q.stem)} '
              f'<span class="score">[{_fmt_score(q.score)}점]</span></div>']
@@ -240,15 +260,27 @@ def _q_html(q: Question) -> str:
         parts.append(_render_bogi(q))
     if q.choices:
         if q.meta.get("number_only"):
-            # 어법·무관문장 등: 선지는 번호(①~⑤)만 한 줄로
-            labels = " ".join(c.label for c in q.choices)
+            # 어법·무관문장 등: 선지는 번호(①~⑤)만 한 줄로(교사용은 정답 번호 볼드)
+            labels = " ".join(
+                (f'<b>{c.label}</b>' if teacher and c.label == correct else c.label)
+                for c in q.choices)
             parts.append(f'<div class="choices numonly">{labels}</div>')
         else:
             parts.append('<div class="choices">')
             for c in q.choices:
-                parts.append(f'<div>{c.label} {html.escape(c.text)}</div>')
+                line = f'{c.label} {html.escape(c.text)}'
+                if teacher and c.label == correct:
+                    line = f'<b>{line}</b>'
+                parts.append(f'<div>{line}</div>')
             parts.append('</div>')
-    if q.section == "essay":
+    if teacher:
+        parts.append(f'<div class="t-ans">정답 <b>{html.escape(q.answer)}</b></div>')
+        if q.answer_notes:
+            for n in q.answer_notes:
+                parts.append(f'<div class="ans-line">· {html.escape(n)}</div>')
+        if q.explanation:
+            parts.append(f'<div class="exp">{_exp_html(q.explanation)}</div>')
+    elif q.section == "essay":
         parts.append('<div class="answer-space"></div>')
     parts.append('</div>')
     return "".join(parts)
@@ -319,30 +351,64 @@ def _footer_note(exam: MockExam, footer: str) -> str:
 # ---------------------------------------------------------------------------
 # 문제지 / 정답지
 # ---------------------------------------------------------------------------
-def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    """실제 시험지 배치: 2단 흐름(column-fill:auto)으로 왼쪽 단부터 채우며
-    네이티브 페이지네이션으로 자동 분할한다(문항 겹침/오버프린트 없음).
+def _section_banner(text: str) -> str:
+    return f'<div class="sec-banner">{html.escape(text)}</div>'
 
-    선택형은 머리글·유의사항 아래로 2단 흐름, 서술형은 새 페이지에서 시작.
+
+def _problem_body(exam: MockExam, info: dict, teacher: bool = False,
+                  top: str = "") -> str:
+    """문제지 본문(2단 흐름). teacher=True 면 정답 볼드+해설을 각 문항 아래 붙인다.
+
+    top: 첫 페이지 상단에 넣을 블록(머리글 또는 섹션 배너).
     """
-    header = _header_block(exam, info)
-    guide = _guidelines_block(exam, info)
-    choice_flow = "".join(_q_html(q) for q in exam.choice_questions)
-    pages_html = [f'<div class="page">{header}{guide}'
-                  f'<div class="flow">{choice_flow}</div></div>']
+    choice_flow = "".join(_q_html(q, teacher) for q in exam.choice_questions)
+    pages = [f'<div class="page">{top}'
+             f'<div class="flow">{choice_flow}</div></div>']
     if exam.essay_questions:
-        essay_flow = "".join(_q_html(q) for q in exam.essay_questions)
-        pages_html.append('<div class="page">'
-                          '<div class="section-div">&lt; 서 술 형 &gt;</div>'
-                          f'<div class="flow">{essay_flow}</div></div>')
+        essay_flow = "".join(_q_html(q, teacher) for q in exam.essay_questions)
+        pages.append('<div class="page">'
+                     '<div class="section-div">&lt; 서 술 형 &gt;</div>'
+                     f'<div class="flow">{essay_flow}</div></div>')
+    return "".join(pages)
 
+
+def build_problem_html(exam: MockExam, info: dict, footer: str = "") -> str:
+    """학생용 문제지 단독 HTML(머리글+유의사항+2단 흐름)."""
+    top = _header_block(exam, info) + _guidelines_block(exam, info)
+    body = _problem_body(exam, info, teacher=False, top=top)
     title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
-    return _wrap(title, "".join(pages_html), footer_note=_footer_note(exam, footer))
+    return _wrap(title, body, footer_note=_footer_note(exam, footer))
 
 
-def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
-    body = ['<div class="ans-title">정 답 및 해 설</div><hr class="ans-rule">',
-            '<div class="flow">']
+def _quick_answer_body(exam: MockExam) -> str:
+    """빠른 정답: 선택형은 번호-정답 격자, 서술형은 번호-정답 목록."""
+    out = [f'<div class="page">{_section_banner("빠른 정답")}']
+    # 선택형 격자(6칸씩)
+    out.append('<div class="qa-sub">선택형</div><table class="qa-table"><tr>')
+    per_row = 6
+    for i, q in enumerate(exam.choice_questions):
+        if i and i % per_row == 0:
+            out.append('</tr><tr>')
+        out.append(f'<td class="qn">{q.no}</td>'
+                   f'<td class="qa">{html.escape(q.answer)}</td>')
+    # 마지막 줄 빈칸 채우기
+    rem = (-len(exam.choice_questions)) % per_row
+    out.append('<td></td><td></td>' * rem)
+    out.append('</tr></table>')
+    # 서술형 목록
+    if exam.essay_questions:
+        out.append('<div class="qa-sub">서술형</div><div class="qa-essay">')
+        for q in exam.essay_questions:
+            out.append(f'<div class="qa-erow"><b>서술형 {q.no}.</b> '
+                       f'{html.escape(q.answer)}</div>')
+        out.append('</div>')
+    out.append('</div>')
+    return "".join(out)
+
+
+def _answer_body(exam: MockExam) -> str:
+    """정답해설지 본문(2단 흐름, 구조화 해설)."""
+    body = [f'<div class="page">{_section_banner("정답 및 해설")}<div class="flow">']
     for q in exam.questions:
         label = TYPE_LABEL_KO.get(q.type, q.type)
         diff = DIFFICULTY_KO_REV.get(q.difficulty, "중")
@@ -364,8 +430,13 @@ def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
             body.append(f'<div class="warn-note">※ 자동 점검 참고: {html.escape(flag)} '
                         '— 정답·선지를 한 번 확인하세요.</div>')
         body.append('</div>')
-    body.append('</div>')   # .flow 닫기
-    return _wrap("정답 및 해설", "".join(body), footer_note=_footer_note(exam, footer))
+    body.append('</div></div>')   # .flow, .page 닫기
+    return "".join(body)
+
+
+def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
+    return _wrap("정답 및 해설", _answer_body(exam),
+                 footer_note=_footer_note(exam, footer))
 
 
 # 해설을 줄 단위로 끊는 경계: (1) 라벨:, [오답 함정] 등, 문장 뒤 선지 시작 원문자
@@ -441,28 +512,24 @@ def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
     result: dict[str, Path] = {}
     stem = basename or f"mock_form_{form}"
 
-    prob = build_problem_html(exam, info, footer)
-    ans = build_answer_html(exam, info, footer)
-
-    if answer_key == "end":
-        prob = prob.replace("</body></html>",
-                            '<div style="break-before:page"></div>'
-                            + ans.split("<body>")[1].split("</body>")[0]
-                            + "</body></html>")
+    # 한 PDF에 4개 섹션: ① 학생용(문제) → ② 교사용(문제+해설, 정답 볼드)
+    #                    → ③ 빠른 정답 → ④ 정답해설지
+    student_top = _header_block(exam, info) + _guidelines_block(exam, info)
+    teacher_top = _section_banner("교사용 · 문제 + 해설 (정답 볼드)")
+    sections = [
+        _problem_body(exam, info, teacher=False, top=student_top),
+        _problem_body(exam, info, teacher=True, top=teacher_top),
+        _quick_answer_body(exam),
+        _answer_body(exam),
+    ]
+    title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
+    doc = _wrap(title, "".join(sections), footer_note=_footer_note(exam, footer))
 
     p_html = out / f"{stem}.html"
-    p_html.write_text(prob, encoding="utf-8")
+    p_html.write_text(doc, encoding="utf-8")
     result["problem_html"] = p_html
-
-    if answer_key == "separate":
-        a_html = out / f"{stem}_answers.html"
-        a_html.write_text(ans, encoding="utf-8")
-        result["answers_html"] = a_html
-
     if to_pdf:
-        _maybe_pdf(prob, out / f"{stem}.pdf", result, "problem_pdf")
-        if answer_key == "separate":
-            _maybe_pdf(ans, out / f"{stem}_answers.pdf", result, "answers_pdf")
+        _maybe_pdf(doc, out / f"{stem}.pdf", result, "problem_pdf")
     return result
 
 
