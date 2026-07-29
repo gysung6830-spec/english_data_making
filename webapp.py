@@ -24,7 +24,7 @@ from flask import (Flask, abort, redirect, render_template_string, request,
 
 from mockexam.ingest.loader import IMAGE_EXTS
 from mockexam.pipeline import generate_mock
-from mockexam.render.exam import render_exam
+from mockexam.render.exam import TYPE_LABEL_KO, render_exam
 from mockexam.school import load_schools_index
 
 ROOT = Path(__file__).resolve().parent
@@ -74,6 +74,10 @@ BASE_CSS = """
  .btn.gray{background:#374151;}
  .chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:12px;font-weight:600;}
  .hint{font-size:12px;color:var(--muted);margin-top:6px;}
+ .nav{display:flex;gap:8px;margin-bottom:14px;}
+ .nav a{flex:1;text-align:center;padding:11px;border:1px solid var(--line);border-radius:10px;
+        background:#fff;color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;}
+ .nav a.on{background:var(--accent);color:#fff;border-color:var(--accent);}
  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px;}
  table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;}
  td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left;}
@@ -95,6 +99,10 @@ INDEX_HTML = """
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>동형모의고사 생성기</title><style>""" + BASE_CSS + """</style></head>
 <body><div class=wrap>
+  <div class=nav>
+    <a href="{{ url_for('index') }}" class=on>📝 동형모의고사 생성</a>
+    <a href="{{ url_for('learn_page') }}">🎓 학교 시험지 학습</a>
+  </div>
   <div class=card>
     <h1>📝 동형모의고사 자동생성</h1>
     <div class=sub>지문을 올리고 학교·학년·난이도를 고르면, 그 학교 스타일의 동형모의고사를 만들어 드립니다.</div>
@@ -223,6 +231,113 @@ RESULT_HTML = """
     {% endif %}
 
     <div class=row><a class="btn gray" href="{{ url_for('index') }}">← 다시 만들기</a></div>
+  </div>
+</div></body></html>
+"""
+
+LEARN_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>학교 시험지 학습</title><style>""" + BASE_CSS + """</style></head>
+<body><div class=wrap>
+  <div class=nav>
+    <a href="{{ url_for('index') }}">📝 동형모의고사 생성</a>
+    <a href="{{ url_for('learn_page') }}" class=on>🎓 학교 시험지 학습</a>
+  </div>
+  <div class=card>
+    <h1>🎓 학교 시험지 학습</h1>
+    <div class=sub>학교가 낸 <b>실제 시험지</b>를 올리면 문항 유형·배점·문항수를 자동으로 학습합니다.
+      이후 그 학교를 고르면 <b>그 학교 스타일 그대로</b> 동형이 생성됩니다.</div>
+    {% if err %}<div class=err>{{ err }}</div>{% endif %}
+    <form method=post enctype=multipart/form-data id=f>
+      <label>① 시험지 파일 (PDF·사진, 여러 장 가능)</label>
+      <div class=drop id=drop>
+        <div style="font-size:26px">⬆️</div>
+        <p><b>여기를 클릭</b>하거나 시험지를 끌어다 놓으세요</p>
+        <p>PDF · JPG · PNG (문제지 전체)</p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+      </div>
+      <div class=files id=filelist></div>
+
+      <label>② 학교 <span class=hint>(기존 학교에 누적하거나, 아래에 새 학교를 입력)</span></label>
+      <select name=school>
+        <option value="">(새 학교 직접 입력 ↓)</option>
+        {% for s in schools %}
+        <option value="{{ s.school_id }}">{{ s.name }} ({{ '중' if s.level=='middle' else '고' }})
+          {{ '· 학습됨' if s.learned else '· 미학습' }}</option>
+        {% endfor %}
+      </select>
+      <div class=grid style="margin-top:10px">
+        <input type=text name=new_name placeholder="새 학교 이름 (예: 진양고)">
+        <select name=new_level>
+          <option value="high">고등학교</option>
+          <option value="middle">중학교</option>
+        </select>
+      </div>
+
+      <div class=grid>
+        <div><label>③ 학년</label>
+          <select name=grade><option>1</option><option>2</option><option>3</option></select></div>
+        <div><label>④ 시험 이름 <span class=hint>(누적 구분용)</span></label>
+          <input type=text name=exam_name placeholder="예: 2024_2학기_기말"></div>
+      </div>
+
+      <label>⑤ Anthropic API 키 <span class=hint>(학습은 실제 분석이므로 키가 필요합니다)</span></label>
+      <input type=password name=api_key placeholder="sk-ant-..."
+             value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
+             {{ 'readonly' if has_key else '' }}>
+
+      <div class=row>
+        <button class=btn type=submit>이 시험지로 학습하기</button>
+        <span class=hint>분석에 30초~1분 걸릴 수 있어요.</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">시험지 분석 중…</p></div>
+<script>
+ const drop=document.getElementById('drop'),file=document.getElementById('file'),
+       list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
+ drop.onclick=()=>file.click();
+ ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hl');}));
+ ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hl');}));
+ drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
+ file.onchange=show;
+ function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
+ f.onsubmit=()=>{if(!file.files.length){alert('시험지 파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+</script>
+</body></html>
+"""
+
+LEARN_RESULT_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>학습 완료</title><style>""" + BASE_CSS + """</style></head>
+<body><div class=wrap>
+  <div class=nav>
+    <a href="{{ url_for('index') }}">📝 동형모의고사 생성</a>
+    <a href="{{ url_for('learn_page') }}" class=on>🎓 학교 시험지 학습</a>
+  </div>
+  <div class=card>
+    <h1>✅ 학습 완료</h1>
+    <div class=sub><b>{{ name }}</b> · {{ grade }}학년 · {{ subject }} · {{ total }}점
+      · 선다형 {{ n_choice }} / 서술형 {{ n_essay }}</div>
+    <div style="background:#eef4ff;border:1px solid #cfe0ff;color:#1e40af;
+                padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:12px">
+      ℹ️ 이제 <a href="{{ url_for('index') }}"><b>동형모의고사 생성</b></a>에서
+      <b>{{ name }}</b>을(를) 고르면 이 시험지 스타일대로 만들어집니다.
+      (누적 학습됨: {{ exams }})
+    </div>
+    <label>추출된 문항 구조</label>
+    <table>
+      <tr><th>#</th><th>구분</th><th>유형</th><th>배점</th></tr>
+      {% for it in items %}
+      <tr><td>{{ it.no }}</td><td>{{ '서술형' if it.section=='essay' else '선다형' }}</td>
+          <td>{{ it.type_ko }}</td><td>{{ it.score }}점</td></tr>
+      {% endfor %}
+    </table>
+    <div class=row><a class="btn gray" href="{{ url_for('learn_page') }}">← 다른 시험지 학습</a>
+      <a class=btn href="{{ url_for('index') }}">동형모의고사 생성하러 가기 →</a></div>
   </div>
 </div></body></html>
 """
@@ -394,6 +509,80 @@ def generate():
         total=res.blueprint.total_score, mock=mock, shortage=shortage,
         downloads=downloads, verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
+
+
+@app.route("/learn", methods=["GET"])
+def learn_page():
+    return render_template_string(LEARN_HTML, schools=_schools_for_view(),
+                                  has_key=_has_key(), err="")
+
+
+@app.route("/learn", methods=["POST"])
+def learn_run():
+    from mockexam.learn_exam import learn_exam
+    from mockexam.school import find_school
+
+    def _err(msg):
+        return render_template_string(LEARN_HTML, schools=_schools_for_view(),
+                                      has_key=_has_key(), err=msg)
+
+    files = [f for f in request.files.getlist("files") if f and f.filename]
+    if not files:
+        return _err("시험지 파일을 올려주세요.")
+    form_key = (request.form.get("api_key") or "").strip()
+    key = None if "설정됨" in form_key else (form_key or None)
+    key = key or (os.environ.get("ANTHROPIC_API_KEY") if _has_key() else None)
+    if not key:
+        return _err("학습은 실제 분석이 필요합니다. Anthropic API 키를 입력하세요.")
+
+    school_id = (request.form.get("school") or "").strip()
+    new_name = (request.form.get("new_name") or "").strip()
+    new_level = request.form.get("new_level") or "high"
+    grade = int(request.form.get("grade") or 1)
+    exam_name = _safe_name(request.form.get("exam_name") or "") or "exam_1"
+    new_school = False
+    if not school_id:
+        if not new_name:
+            return _err("기존 학교를 고르거나 새 학교 이름을 입력하세요.")
+        school_id = f"sch_{uuid.uuid4().hex[:6]}"
+        new_school = True
+
+    saved: list[Path] = []
+    for f in files:
+        ext = Path(f.filename).suffix.lower()
+        if ext not in ALLOWED:
+            continue
+        p = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
+        f.save(str(p))
+        saved.append(p)
+    if not saved:
+        return _err("지원하는 파일이 없습니다(PDF·JPG·PNG).")
+
+    try:
+        from mockexam.core.llm import get_client
+        client = get_client(key, MODEL)
+        prof, bp = learn_exam(school_id, exam_name, [str(p) for p in saved],
+                              client, name=new_name, level=new_level,
+                              new_school=new_school)
+    except Exception as e:
+        traceback.print_exc()
+        return _err(f"학습 중 오류: {e}")
+    finally:
+        for p in saved:
+            p.unlink(missing_ok=True)
+
+    items = [{"no": it.no, "section": it.section,
+              "type_ko": TYPE_LABEL_KO.get(it.type, it.type),
+              "score": _fmt(it.score)} for it in bp.items]
+    return render_template_string(
+        LEARN_RESULT_HTML, name=bp.meta.name, grade=bp.meta.grade,
+        subject=bp.meta.subject, total=_fmt(bp.meta.total_score),
+        n_choice=len(bp.choice_items), n_essay=len(bp.essay_items),
+        exams=", ".join(prof.get("exams_learned", [])), items=items)
+
+
+def _fmt(s: float) -> str:
+    return str(int(s)) if float(s).is_integer() else f"{s:g}"
 
 
 def _safe_output(fname: str) -> Path:
