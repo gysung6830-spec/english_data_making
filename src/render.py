@@ -128,6 +128,11 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
+# 서술형 교재 유형의 '표시 순서'(type-major 번호 매김에도 사용).
+#   보기어휘 → 요약문 → 어법오류 → 조건영작 → 배열영작 → 문장변형 → 문답
+WS_TYPE_ORDER = ["cloze", "summary", "error", "compose", "arrange", "paraphrase", "qa"]
+
+
 # ---- 서술형 교재용 헬퍼 ---------------------------------------------------
 _WS_LBL_RE = re.compile(r"\[\[([A-Za-z])\]\]")
 _CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮"
@@ -418,26 +423,23 @@ def _hint(answer: str) -> str:
 
 
 def _ws_context(worksheets) -> list[dict]:
-    """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료)."""
-    reps = _as_list(worksheets)
-    counter = {"n": 0}
+    """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료).
 
-    def nxt() -> int:
-        counter["n"] += 1
-        return counter["n"]
+    일련번호(qno)는 '표시 유형 순서(type-major)'로 매긴다:
+      복수 지문이면 각 유형 안에서 지문1→지문2… 순으로 이어진다.
+    """
+    reps = _as_list(worksheets)
 
     passages: list[dict] = []
     for i, ws in enumerate(reps, 1):
         src = f"지문 {i}"
 
-        # 유형1: 요약문 완성 (지문 상단 노출 + (A)(B) 빈칸)
+        # 요약문 완성 ((A)(B) 빈칸)
         sum_items = []
-        all_answers = []
         for it in ws.summary.items:
             amap = {b.label.upper(): b.answer for b in it.blanks}
-            all_answers += [b.answer for b in it.blanks]
             sum_items.append({
-                "qno": nxt(), "src": src,
+                "src": src,
                 "student": _sub_labeled(it.sentence, amap, False),
                 "teacher": _sub_labeled(it.sentence, amap, True),
                 "blanks": [{"label": b.label.upper(), "answer": b.answer,
@@ -445,12 +447,14 @@ def _ws_context(worksheets) -> list[dict]:
                            for b in it.blanks],
             })
 
-        # 유형2: 문장 변형(유의어·구조 변환 후 빈칸 완성 · 주관식)
+        # 문장 변형(유의어·구조 변환 후 빈칸 완성 · 보기 제공)
         para_items = []
         for q in ws.paraphrase.questions:
             amap = {b.label.upper(): b.answer for b in q.blanks}
+            answers = [b.answer for b in q.blanks]
+            bank = sorted(answers + list(q.distractors), key=str.lower)
             para_items.append({
-                "qno": nxt(), "src": src, "original": q.original,
+                "src": src, "original": q.original, "choices": bank,
                 "student": _sub_labeled(q.sentence, amap, False),
                 "teacher": _sub_labeled(q.sentence, amap, True),
                 "blanks": [{"label": b.label.upper(), "answer": b.answer,
@@ -459,32 +463,32 @@ def _ws_context(worksheets) -> list[dict]:
                 "explanation": q.explanation,
             })
 
-        # 유형3: 요지/제목 배열 영작
+        # 요지/제목 배열 영작
         def arrange(items):
             return [{
-                "qno": nxt(), "src": src, "korean": it.korean,
+                "src": src, "korean": it.korean,
                 "given_words": list(it.given_words), "word_count": it.word_count,
                 "answer": it.answer, "explanation": it.explanation,
             } for it in items]
         idea_items = arrange(ws.arrange.ideas)
         title_items = arrange(ws.arrange.titles)
 
-        # 유형4: 조건 영작
+        # 조건 영작
         comp_items = [{
-            "qno": nxt(), "src": src, "korean": it.korean,
+            "src": src, "korean": it.korean,
             "conditions": list(it.conditions), "given_words": list(it.given_words),
             "word_count": it.word_count, "answer": it.answer,
             "explanation": it.explanation,
         } for it in ws.compose.items]
 
-        # 유형5: 사용되지 않는 낱말 고르기(3개)
+        # 사용되지 않는 낱말 고르기(3개)
         cloze_sets = []
         for s in ws.choice.sets:
             amap = {se.label.upper(): se.answer for se in s.sentences}
             lc = [c.lower() for c in s.choices]
             unused_idx = sorted(lc.index(u.lower()) + 1 for u in s.unused if u.lower() in lc)
             cloze_sets.append({
-                "qno": nxt(), "src": src, "choices": list(s.choices),
+                "src": src, "choices": list(s.choices),
                 "unused": list(s.unused), "unused_index": unused_idx,
                 "explanation": s.explanation,
                 "sentences": [{
@@ -494,30 +498,29 @@ def _ws_context(worksheets) -> list[dict]:
                 } for se in s.sentences],
             })
 
-        # 유형6: 어법 오류 수정(밑줄 5곳 중 3곳 오류)
+        # 어법 오류 수정(밑줄 5곳 중 3곳 오류)
         err_items = []
         for it in ws.error.items:
             by_no = {u.no: {"wrong": u.wrong} for u in it.underlines}
             wrong = [{"no": u.no, "text": u.text, "correction": u.correction,
                       "point": u.point} for u in it.underlines if u.wrong]
             err_items.append({
-                "qno": nxt(), "src": src,
+                "src": src,
                 "student": _sub_underlines(it.sentence, by_no, False),
                 "teacher": _sub_underlines(it.sentence, by_no, True),
                 "wrong": sorted(wrong, key=lambda x: x["no"]),
                 "explanation": it.explanation,
             })
 
-        # 유형7: 지문 기반 영어 문답
+        # 지문 기반 영어 문답
         qa_items = [{
-            "qno": nxt(), "src": src, "question": q.question, "answer": q.answer,
+            "src": src, "question": q.question, "answer": q.answer,
             "evidence": q.evidence, "answer_ko": q.answer_ko,
         } for q in ws.qa.items]
 
         passages.append({
             "no": i, "total": len(reps), "title": ws.title,
             "passage": ws.passage,
-            "passage_teacher": _underline_words(ws.passage, all_answers),
             "summary": sum_items,
             "paraphrase": para_items,
             "ideas": idea_items, "titles": title_items,
@@ -526,6 +529,16 @@ def _ws_context(worksheets) -> list[dict]:
             "error": err_items,
             "qa": qa_items,
         })
+
+    # 일련번호: 표시 유형 순서(type-major)로 매긴다.
+    #   유형5(배열영작)은 ideas + titles 를 한 유형으로 이어서 센다.
+    n = 0
+    for key in WS_TYPE_ORDER:
+        for pg in passages:
+            seq = (pg["ideas"] + pg["titles"]) if key == "arrange" else pg[key]
+            for item in seq:
+                n += 1
+                item["qno"] = n
     return passages
 
 

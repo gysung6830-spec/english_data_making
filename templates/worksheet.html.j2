@@ -5,7 +5,7 @@
 
 {# ---------- 공통 매크로 ---------- #}
 {% macro thead(n, name, instr) %}
-  <div class="t-head t-h{{ n }}">
+  <div class="t-head">
     <span class="t-badge">유형 {{ n }}</span>
     <span class="t-name">{{ name }}</span>
     <span class="t-instr">{{ instr }}</span>
@@ -20,141 +20,19 @@
   <div class="chips">{% for w in words %}<span class="chip {{ cls }}">{{ w }}</span>{% endfor %}</div>
 {% endmacro %}
 
-{# ---------- 한 지문의 6개 유형(문제 본체) ---------- #}
-{% macro render_passage(pg, reveal) %}
-  {% if pg.total > 1 %}<div class="p-tag">지문 {{ pg.no }} / {{ pg.total }} · {{ pg.title }}</div>{% endif %}
+{% macro psub(pg) %}<div class="p-sub">지문 {{ pg.no }}. {{ pg.title }}</div>{% endmacro %}
 
-  {# ===== 유형1 : 서술형 요약문 완성 ===== #}
-  <div class="type-block tb1">
-  {{ thead(1, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
-  {% if pg.passage %}
-  <div class="reading">{% if reveal %}{{ pg.passage_teacher }}{% else %}{{ pg.passage }}{% endif %}</div>
-  {% endif %}
-  {% for q in pg.summary %}
-  <div class="q-card">
-    {{ qhead(q) }}
-    <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
-    <div class="sum-boxes">
-      {% for b in q.blanks %}
-      <div class="sum-box">
-        <span class="sum-lb">({{ b.label }})</span>
-        <span class="sum-in{{ ' filled' if reveal }}">{% if reveal %}{{ b.answer }}{% if b.meaning %} <em>({{ b.meaning }})</em>{% endif %}{% else %}{{ b.hint }}{% endif %}</span>
-      </div>
-      {% endfor %}
+{% macro blank_boxes(blanks, reveal) %}
+  <div class="sum-boxes">
+    {% for b in blanks %}
+    <div class="sum-box">
+      <span class="sum-lb">({{ b.label }})</span>
+      <span class="sum-in{{ ' filled' if reveal }}">{% if reveal %}{{ b.answer }}{% if b.meaning %} <em>({{ b.meaning }})</em>{% endif %}{% else %}{{ b.hint }}{% endif %}</span>
     </div>
-  </div>
-  {% endfor %}
-  </div>
-
-  {# ===== 유형2 : 문장 변형 대비(유의어·구조 변환 후 빈칸 · 주관식) ===== #}
-  <div class="type-block tb2">
-  {{ thead(2, '문장 변형 대비', '유의어·구조를 바꾼 문장의 빈칸을 완성하시오.') }}
-  {% for q in pg.paraphrase %}
-  <div class="q-card">
-    {{ qhead(q) }}
-    <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
-    <div class="sum-boxes">
-      {% for b in q.blanks %}
-      <div class="sum-box">
-        <span class="sum-lb">({{ b.label }})</span>
-        <span class="sum-in{{ ' filled' if reveal }}">{% if reveal %}{{ b.answer }}{% if b.meaning %} <em>({{ b.meaning }})</em>{% endif %}{% else %}{{ b.hint }}{% endif %}</span>
-      </div>
-      {% endfor %}
-    </div>
-    {% if reveal %}<div class="exp"><b>원문</b> {{ q.original }}{% if q.explanation %}<br>{{ q.explanation }}{% endif %}</div>{% endif %}
-  </div>
-  {% endfor %}
-  </div>
-
-  {# ===== 유형3 : 요지/제목 배열 영작 ===== #}
-  <div class="type-block tb3">
-  {{ thead(3, '요지·제목 배열 영작', '보기의 단어를 모두 사용하여 영작하시오.') }}
-  <div class="two-col">
-    <div class="col">
-      <div class="col-label idea">글의 요지</div>
-      {% for q in pg.ideas %}{{ arrange_card(q, reveal) }}{% endfor %}
-    </div>
-    <div class="col">
-      <div class="col-label title">글의 제목</div>
-      {% for q in pg.titles %}{{ arrange_card(q, reveal) }}{% endfor %}
-    </div>
-  </div>
-  </div>
-
-  {# ===== 유형4 : 조건 영작 ===== #}
-  <div class="type-block tb4">
-  {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
-  {% for q in pg.compose %}
-  <div class="q-card">
-    {{ qhead(q) }}
-    <div class="ko-target">{{ q.korean }}{% if q.word_count %} <span class="wc">{{ q.word_count }}</span>{% endif %}</div>
-    {% if q.conditions %}<div class="cond"><span class="cond-lb">조건</span>{{ q.conditions | join(' · ') }}</div>{% endif %}
-    {% if q.given_words %}{{ chips(q.given_words, 'g4') }}{% endif %}
-    {% if reveal %}<div class="ans-line">➜ {{ q.answer }}</div>{% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
-    {% else %}<div class="ans-box">➜</div>{% endif %}
-  </div>
-  {% endfor %}
-  </div>
-
-  {# ===== 유형5 : 보기 어휘 빈칸 완성(사용되지 않는 낱말 3개) ===== #}
-  <div class="type-block tb5">
-  {{ thead(5, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말 3개를 모두 고르시오.') }}
-  {% for s in pg.cloze %}
-  <div class="q-card">
-    {{ qhead(s) }}
-    <div class="box-label">&lt;보기&gt;</div>
-    {{ chips(s.choices, 'g5') }}
-    <div class="cloze">
-      {% for se in s.sentences %}
-      <div class="cloze-sent">{% if reveal %}{{ se.teacher }}{% else %}{{ se.student }}{% endif %}</div>
-      {% endfor %}
-    </div>
-    <ol class="opts inline">
-      {% for c in s.choices %}
-      <li class="{{ 'correct' if reveal and loop.index in s.unused_index }}"><span class="cn">{{ loop.index | circled }}</span> {{ c }}</li>
-      {% endfor %}
-    </ol>
-    {% if reveal %}<div class="exp"><b>사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b> {{ s.explanation }}</div>{% endif %}
-  </div>
-  {% endfor %}
-  </div>
-
-  {# ===== 유형6 : 어법 오류 수정(밑줄 5곳 중 3곳) ===== #}
-  <div class="type-block tb6">
-  {{ thead(6, '어법 오류 수정', '밑줄 친 부분 중 어법상 틀린 3곳을 찾아 바르게 고치시오.') }}
-  {% for q in pg.error %}
-  <div class="q-card">
-    {{ qhead(q) }}
-    <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
-    {% if reveal %}
-      <div class="ans-line">
-        {% for w in q.wrong %}<span class="fixpair">{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} <span class="pt">{{ w.point }}</span>{% endif %}</span>{% if not loop.last %} 　 {% endif %}{% endfor %}
-      </div>
-      {% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
-    {% else %}<div class="ans-box"><span class="ans-hint">틀린 3곳: 번호와 고친 표현을 쓰시오</span></div>{% endif %}
-  </div>
-  {% endfor %}
-  </div>
-
-  {# ===== 유형7 : 지문 기반 영어 문답 ===== #}
-  <div class="type-block tb7">
-  {{ thead(7, '지문 기반 영어 문답', '지문 내용에 근거하여 영어 질문에 영어로 답하시오. (지문에 없는 내용 추론 금지)') }}
-  {% for q in pg.qa %}
-  <div class="q-card">
-    {{ qhead(q) }}
-    <div class="qa-q">{{ q.question }}</div>
-    {% if reveal %}
-      <div class="ans-line">➜ {{ q.answer }}</div>
-      <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
-    {% else %}
-      <div class="ans-box">➜</div>
-    {% endif %}
-  </div>
-  {% endfor %}
+    {% endfor %}
   </div>
 {% endmacro %}
 
-{# 유형3 카드(요지/제목 공용) #}
 {% macro arrange_card(q, reveal) %}
   <div class="q-card">
     {{ qhead(q) }}
@@ -166,36 +44,171 @@
   </div>
 {% endmacro %}
 
-{# ---------- 빠른 정답(한 지문) ---------- #}
-{% macro quick(pg) %}
-  {% if pg.total > 1 %}<div class="qa-p">지문 {{ pg.no }}. {{ pg.title }}</div>{% endif %}
-  <div class="qa-row"><span class="qa-t">유형1</span>{% for q in pg.summary %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형2</span>{% for q in pg.paraphrase %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형3</span>{% for q in pg.ideas %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% for q in pg.titles %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형4</span>{% for q in pg.compose %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형5</span>{% for s in pg.cloze %}<span class="qa-a">{{ s.qno }}. {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형6</span>{% for q in pg.error %}<span class="qa-a">{{ q.qno }}. {% for w in q.wrong %}{{ w.no | circled }}{{ w.text }}→{{ w.correction }}{% if not loop.last %} / {% endif %}{% endfor %}</span>{% endfor %}</div>
-  <div class="qa-row"><span class="qa-t">유형7</span>{% for q in pg.qa %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}</div>
+{# ---------- 한 파트(학생용/교사용)의 7개 유형 · type-major ---------- #}
+{% macro render_part(passages, reveal) %}
+
+  {# ===== 유형1 : 보기 어휘 빈칸 완성 ===== #}
+  <div class="type-block tb1">
+  {{ thead(1, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말 3개를 모두 고르시오.') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% for s in pg.cloze %}
+    <div class="q-card">
+      {{ qhead(s) }}
+      <div class="box-label">&lt;보기&gt;</div>
+      {{ chips(s.choices, 'g5') }}
+      <div class="cloze">
+        {% for se in s.sentences %}
+        <div class="cloze-sent">{% if reveal %}{{ se.teacher }}{% else %}{{ se.student }}{% endif %}</div>
+        {% endfor %}
+      </div>
+      <ol class="opts inline">
+        {% for c in s.choices %}
+        <li class="{{ 'correct' if reveal and loop.index in s.unused_index }}"><span class="cn">{{ loop.index | circled }}</span> {{ c }}</li>
+        {% endfor %}
+      </ol>
+      {% if reveal %}<div class="exp"><b>사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b> {{ s.explanation }}</div>{% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  {# ===== 유형2 : 서술형 요약문 완성 ===== #}
+  <div class="type-block tb2">
+  {{ thead(2, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% for q in pg.summary %}
+    <div class="q-card">
+      {{ qhead(q) }}
+      <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
+      {{ blank_boxes(q.blanks, reveal) }}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  {# ===== 유형3 : 어법 오류 수정 ===== #}
+  <div class="type-block tb3">
+  {{ thead(3, '어법 오류 수정', '밑줄 친 부분 중 어법상 틀린 3곳을 찾아 바르게 고치시오.') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% for q in pg.error %}
+    <div class="q-card">
+      {{ qhead(q) }}
+      <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
+      {% if reveal %}
+        <div class="ans-line">
+          {% for w in q.wrong %}<span class="fixpair">{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} <span class="pt">{{ w.point }}</span>{% endif %}</span>{% if not loop.last %} 　 {% endif %}{% endfor %}
+        </div>
+        {% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
+      {% else %}<div class="ans-box"><span class="ans-hint">틀린 3곳: 번호와 고친 표현을 쓰시오</span></div>{% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  {# ===== 유형4 : 조건 영작 연습 ===== #}
+  <div class="type-block tb4">
+  {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% for q in pg.compose %}
+    <div class="q-card">
+      {{ qhead(q) }}
+      <div class="ko-target">{{ q.korean }}{% if q.word_count %} <span class="wc">{{ q.word_count }}</span>{% endif %}</div>
+      {% if q.conditions %}<div class="cond"><span class="cond-lb">조건</span>{{ q.conditions | join(' · ') }}</div>{% endif %}
+      {% if q.given_words %}{{ chips(q.given_words, 'g4') }}{% endif %}
+      {% if reveal %}<div class="ans-line">➜ {{ q.answer }}</div>{% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
+      {% else %}<div class="ans-box">➜</div>{% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  {# ===== 유형5 : 요지·제목 배열 영작 ===== #}
+  <div class="type-block tb5">
+  {{ thead(5, '요지·제목 배열 영작', '보기의 단어를 모두 사용하여 영작하시오.') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    <div class="two-col">
+      <div class="col">
+        <div class="col-label idea">글의 요지</div>
+        {% for q in pg.ideas %}{{ arrange_card(q, reveal) }}{% endfor %}
+      </div>
+      <div class="col">
+        <div class="col-label title">글의 제목</div>
+        {% for q in pg.titles %}{{ arrange_card(q, reveal) }}{% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+  {# ===== 유형6 : 문장 변형 대비(보기 제공) ===== #}
+  <div class="type-block tb6">
+  {{ thead(6, '문장 변형 대비', '유의어·구조를 바꾼 문장의 빈칸을, 보기에서 골라 완성하시오.') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% for q in pg.paraphrase %}
+    <div class="q-card">
+      {{ qhead(q) }}
+      <div class="box-label">&lt;보기&gt;</div>
+      {{ chips(q.choices, 'g6') }}
+      <div class="q-body">{% if reveal %}{{ q.teacher }}{% else %}{{ q.student }}{% endif %}</div>
+      {{ blank_boxes(q.blanks, reveal) }}
+      {% if reveal %}<div class="exp"><b>원문</b> {{ q.original }}{% if q.explanation %}<br>{{ q.explanation }}{% endif %}</div>{% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
+
+  {# ===== 유형7 : 지문 기반 영어 문답(지문 배치) ===== #}
+  <div class="type-block tb7">
+  {{ thead(7, '지문 기반 영어 문답', '지문을 읽고, 지문 내용에 근거하여 영어 질문에 영어로 답하시오. (지문에 없는 내용 추론 금지)') }}
+  {% for pg in passages %}
+    {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
+    {% for q in pg.qa %}
+    <div class="q-card">
+      {{ qhead(q) }}
+      <div class="qa-q">{{ q.question }}</div>
+      {% if reveal %}
+        <div class="ans-line">➜ {{ q.answer }}</div>
+        <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
+      {% else %}<div class="ans-box">➜</div>{% endif %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+  </div>
 {% endmacro %}
 
-{# ---------- 정답 및 해설(한 지문) ---------- #}
-{% macro explain(pg) %}
-  {% if pg.total > 1 %}<div class="ex-p">지문 {{ pg.no }}. {{ pg.title }}</div>{% endif %}
-  <div class="ex-t">유형1 · 서술형 요약문 완성</div>
-  {% for q in pg.summary %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</div>{% endfor %}
-  <div class="ex-t">유형2 · 문장 변형 대비</div>
-  {% for q in pg.paraphrase %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
-  <div class="ex-t">유형3 · 요지·제목 배열 영작</div>
-  {% for q in pg.ideas %}<div class="ex-r"><b>{{ q.qno }}. [요지]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
-  {% for q in pg.titles %}<div class="ex-r"><b>{{ q.qno }}. [제목]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
+{# ---------- 빠른 정답(유형별로 모든 지문 모아서) ---------- #}
+{% macro quick(passages) %}
+  <div class="qa-row"><span class="qa-t">유형1</span>{% for pg in passages %}{% for s in pg.cloze %}<span class="qa-a">{{ s.qno }}. {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형2</span>{% for pg in passages %}{% for q in pg.summary %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형3</span>{% for pg in passages %}{% for q in pg.error %}<span class="qa-a">{{ q.qno }}. {% for w in q.wrong %}{{ w.no | circled }}{{ w.text }}→{{ w.correction }}{% if not loop.last %} / {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형4</span>{% for pg in passages %}{% for q in pg.compose %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형5</span>{% for pg in passages %}{% for q in pg.ideas %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% for q in pg.titles %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형6</span>{% for pg in passages %}{% for q in pg.paraphrase %}<span class="qa-a">{{ q.qno }}. {% for b in q.blanks %}({{ b.label }}){{ b.answer }}{% if not loop.last %} {% endif %}{% endfor %}</span>{% endfor %}{% endfor %}</div>
+  <div class="qa-row"><span class="qa-t">유형7</span>{% for pg in passages %}{% for q in pg.qa %}<span class="qa-a">{{ q.qno }}. {{ q.answer }}</span>{% endfor %}{% endfor %}</div>
+{% endmacro %}
+
+{# ---------- 정답 및 해설(유형별로 모든 지문 모아서) ---------- #}
+{% macro explain(passages) %}
+  <div class="ex-t">유형1 · 보기 어휘 빈칸 완성</div>
+  {% for pg in passages %}{% for s in pg.cloze %}<div class="ex-r"><b>{{ s.qno }}. 사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b>{% if s.explanation %}<br><span class="ex-n">{{ s.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
+  <div class="ex-t">유형2 · 서술형 요약문 완성</div>
+  {% for pg in passages %}{% for q in pg.summary %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}</div>{% endfor %}{% endfor %}
+  <div class="ex-t">유형3 · 어법 오류 수정</div>
+  {% for pg in passages %}{% for q in pg.error %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for w in q.wrong %}{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} ({{ w.point }}){% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
   <div class="ex-t">유형4 · 조건 영작 연습</div>
-  {% for q in pg.compose %}<div class="ex-r"><b>{{ q.qno }}.</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
-  <div class="ex-t">유형5 · 보기 어휘 빈칸 완성</div>
-  {% for s in pg.cloze %}<div class="ex-r"><b>{{ s.qno }}. 사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b>{% if s.explanation %}<br><span class="ex-n">{{ s.explanation }}</span>{% endif %}</div>{% endfor %}
-  <div class="ex-t">유형6 · 어법 오류 수정</div>
-  {% for q in pg.error %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for w in q.wrong %}{{ w.no | circled }} <span class="wrong">{{ w.text }}</span> ➜ <span class="fix">{{ w.correction }}</span>{% if w.point %} ({{ w.point }}){% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}
+  {% for pg in passages %}{% for q in pg.compose %}<div class="ex-r"><b>{{ q.qno }}.</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
+  <div class="ex-t">유형5 · 요지·제목 배열 영작</div>
+  {% for pg in passages %}{% for q in pg.ideas %}<div class="ex-r"><b>{{ q.qno }}. [요지]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% for q in pg.titles %}<div class="ex-r"><b>{{ q.qno }}. [제목]</b> ➜ {{ q.answer }}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
+  <div class="ex-t">유형6 · 문장 변형 대비</div>
+  {% for pg in passages %}{% for q in pg.paraphrase %}<div class="ex-r"><b>{{ q.qno }}.</b> {% for b in q.blanks %}({{ b.label }}) <b>{{ b.answer }}</b>{% if b.meaning %} {{ b.meaning }}{% endif %}{% if not loop.last %} / {% endif %}{% endfor %}{% if q.explanation %}<br><span class="ex-n">{{ q.explanation }}</span>{% endif %}</div>{% endfor %}{% endfor %}
   <div class="ex-t">유형7 · 지문 기반 영어 문답</div>
-  {% for q in pg.qa %}<div class="ex-r"><b>{{ q.qno }}. Q.</b> {{ q.question }}<br>➜ {{ q.answer }}{% if q.answer_ko %} <span class="ex-n">({{ q.answer_ko }})</span>{% endif %}{% if q.evidence %}<br><span class="ex-n">근거: {{ q.evidence }}</span>{% endif %}</div>{% endfor %}
+  {% for pg in passages %}{% for q in pg.qa %}<div class="ex-r"><b>{{ q.qno }}. Q.</b> {{ q.question }}<br>➜ {{ q.answer }}{% if q.answer_ko %} <span class="ex-n">({{ q.answer_ko }})</span>{% endif %}{% if q.evidence %}<br><span class="ex-n">근거: {{ q.evidence }}</span>{% endif %}</div>{% endfor %}{% endfor %}
 {% endmacro %}
 
 {% macro part_head(no, label, sub) %}
@@ -214,28 +227,28 @@
     <div class="doc-sub">학생용 · 교사용 · 빠른 정답 · 정답 및 해설</div>
   </div>
   {{ part_head(1, '학생용', '문제만 실려 있습니다. 직접 풀어 보세요.') }}
-  {% for pg in passages %}<div class="passage{{ ' pgbreak' if not loop.first }}">{{ render_passage(pg, false) }}</div>{% endfor %}
+  {{ render_part(passages, false) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 2. 교사용 ================= #}
 <div class="doc pgbreak">
   {{ part_head(2, '교사용', '문제에 정답과 해설이 함께 표시됩니다.') }}
-  {% for pg in passages %}<div class="passage{{ ' pgbreak' if not loop.first }}">{{ render_passage(pg, true) }}</div>{% endfor %}
+  {{ render_part(passages, true) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 3. 빠른 정답 ================= #}
 <div class="doc pgbreak">
   {{ part_head(3, '빠른 정답', '해설 없이 정답만 모았습니다.') }}
-  {% for pg in passages %}<div class="qa-block">{{ quick(pg) }}</div>{% endfor %}
+  <div class="qa-block">{{ quick(passages) }}</div>
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 4. 정답 및 해설 ================= #}
 <div class="doc pgbreak">
   {{ part_head(4, '정답 및 해설', '유형별 정답과 풀이를 정리했습니다.') }}
-  {% for pg in passages %}<div class="{{ 'pgbreak' if not loop.first }}">{{ explain(pg) }}</div>{% endfor %}
+  {{ explain(passages) }}
   {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 

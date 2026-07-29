@@ -160,6 +160,7 @@ def mock_worksheet(title: str = "The Value of Curiosity",
                 sentence="Learners who are [[A]] tend to [[B]] what they study for a longer time.",
                 blanks=[schemas.WSSummaryBlank(label="A", answer="curious", meaning="호기심 많은"),
                         schemas.WSSummaryBlank(label="B", answer="retain", meaning="유지·기억하다")],
+                distractors=["forget", "bored"],
                 explanation=("curious students→learners who are curious(관계절), "
                              "remember→retain(유의어)로 구조·어휘를 변형.")),
             schemas.WSParaphraseQ(
@@ -167,6 +168,7 @@ def mock_worksheet(title: str = "The Value of Curiosity",
                 sentence="Schools ought to [[A]] learners' [[B]] rather than passive memorization.",
                 blanks=[schemas.WSSummaryBlank(label="A", answer="promote", meaning="장려하다"),
                         schemas.WSSummaryBlank(label="B", answer="questioning", meaning="질문하기")],
+                distractors=["discourage", "silence"],
                 explanation="encourage→promote, ask questions→questioning(명사구)로 변형."),
         ]),
         arrange=schemas.WSArrangeType(

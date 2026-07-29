@@ -222,6 +222,7 @@ class WSParaphraseQ(BaseModel):
     original: str                          # 지문에서 고른 원문 문장
     sentence: str                          # 유의어·구조 변환한 문장. 빈칸 [[A]],[[B]]
     blanks: list[WSSummaryBlank]           # 각 빈칸 {label, answer, meaning}
+    distractors: list[str] = Field(default_factory=list)  # 보기에 넣을 오답 단어(2개)
     explanation: str = ""                  # 변형 포인트/정답 근거
 
     @field_validator("blanks")

@@ -427,6 +427,14 @@ table.lit2 td {
 }
 .chip.g4 { border-color: #7c6bb0; color: #4c3f83; }
 .chip.g5 { border-color: var(--ws-dark); }
+.chip.g6 { border-color: #b8791f; color: #8a5a12; }
+
+/* 유형 안에서 지문별 소제목(복수 지문) */
+.p-sub {
+  display: inline-block; background: #eef2f1; color: var(--ws-dark);
+  font-weight: 800; font-size: 9px; padding: 2px 9px; border-radius: 4px;
+  margin: 8px 0 5px; border-left: 3px solid var(--ws);
+}
 
 /* 유형3·4 영작 */
 .two-col { display: flex; gap: 12px; }

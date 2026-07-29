@@ -147,11 +147,13 @@ def test_worksheet_render():
     teacher = render._sub_labeled("stay [[A]] in class", {"A": "motivated"}, True)
     assert "ws-blank" in student and "motivated" not in student
     assert "motivated" in teacher and "(A)" in teacher
-    # 일련번호가 지문을 넘어 이어지는지(컨텍스트 빌더)
+    # 일련번호가 'type-major'로 매겨지는지(복수 지문이면 유형별로 지문을 모아서)
     passages = render._ws_context([mock_worksheet(), mock_worksheet("Second")])
-    first_nos = [q["qno"] for q in passages[0]["summary"]]
-    assert first_nos == sorted(first_nos)
-    assert passages[1]["summary"][0]["qno"] > passages[0]["error"][-1]["qno"]
+    # 유형1(cloze)이 가장 먼저(1번부터), 지문1 다음 지문2로 이어짐
+    assert passages[0]["cloze"][0]["qno"] == 1
+    assert passages[1]["cloze"][0]["qno"] > passages[0]["cloze"][-1]["qno"]
+    # 유형2(summary) 번호는 유형1(cloze) 전체 번호보다 뒤
+    assert passages[0]["summary"][0]["qno"] > passages[1]["cloze"][-1]["qno"]
     # 전체 PDF 렌더가 예외 없이 되고 파일이 생성되는지
     import tempfile
     from pathlib import Path
