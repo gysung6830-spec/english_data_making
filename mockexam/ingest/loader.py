@@ -301,6 +301,19 @@ _SRC_NOISE = re.compile(
     r"|Copyright[^\n]*|All\s+rights\s+reserved|무단\s*복제[^\n]*", re.I)
 
 
+def _strip_source_noise(text: str) -> str:
+    """지문 본문에서 교재·출처·워터마크·지문/단원 번호(WORKBOOK 32·지문 4 등)를 제거.
+
+    모든 경로(이중언어/일반)의 지문에 공통 적용해, 이런 표기가 LLM 프롬프트→해설로
+    새어 나가지 않게 한다.
+    """
+    t = _SRC_NOISE.sub(" ", text)
+    t = _STUDY_HEADER.sub(" ", t)
+    t = re.sub(r"[ \t]{2,}", " ", t)
+    t = re.sub(r"[ \t]+\n", "\n", t)
+    return t.strip()
+
+
 def _is_bilingual_study(text: str) -> bool:
     """직독직해식 이중언어 자료(영어 지문 + 한글 해석 혼재)인지 판단.
 
@@ -421,6 +434,7 @@ def split_passages(text: str, source_file: str | None = None,
     if _is_bilingual_study(text):
         passages: list[Passage] = []
         for i, body in enumerate(_split_bilingual(text), 1):
+            body = _strip_source_noise(body)
             fmt, speakers = detect_format(body)
             passages.append(Passage(id=f"{id_prefix}{i}", text=body,
                                     format_type=fmt, speakers=speakers,
@@ -450,6 +464,7 @@ def split_passages(text: str, source_file: str | None = None,
 
     passages: list[Passage] = []
     for i, body in enumerate(merged, 1):
+        body = _strip_source_noise(body)
         fmt, speakers = detect_format(body)
         passages.append(Passage(
             id=f"{id_prefix}{i}" if fmt != "dialogue" else f"d{i}",
