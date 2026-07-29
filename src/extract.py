@@ -11,12 +11,20 @@ from pathlib import Path
 
 import pdfplumber
 
+from . import hwp_extract
+
 # 지원하는 이미지 확장자 (사진/캡처 자동 처리용)
 IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+# 지원하는 한글(HWP) 확장자
+HWP_EXTS = {".hwp", ".hwpx"}
 
 
 def is_image(path: str | Path) -> bool:
     return Path(path).suffix.lower() in IMAGE_EXTS
+
+
+def is_hwp(path: str | Path) -> bool:
+    return Path(path).suffix.lower() in HWP_EXTS
 
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
@@ -119,7 +127,9 @@ def clean_text(raw: str) -> str:
 
 
 def extract_passage_text(pdf_path: str | Path) -> str:
-    """PDF -> (1차 정제된) 지문 후보 텍스트."""
+    """PDF/HWP -> (1차 정제된) 지문 후보 텍스트."""
+    if is_hwp(pdf_path):
+        return clean_text(hwp_extract.extract_hwp_text(pdf_path))
     return clean_text(extract_raw_text(pdf_path))
 
 

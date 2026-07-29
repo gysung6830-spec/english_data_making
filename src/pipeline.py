@@ -17,7 +17,7 @@ from .workbook_schemas import Workbook
 from .blanks_schemas import BlankWorkbook
 
 
-INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS
+INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS | extract.HWP_EXTS
 
 
 def list_pdfs(input_dir: Path) -> list[Path]:
@@ -32,17 +32,22 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
+def _empty_extract_error(src: Path) -> str:
+    if extract.is_hwp(src):
+        return ("HWP 에서 텍스트를 추출하지 못했습니다(암호화·배포용 문서이거나 그림만 있는 경우). "
+                "한글에서 '다른 이름으로 저장 → PDF' 로 바꿔 넣거나, 지문 페이지를 사진(JPG/PNG)으로 저장해 주세요.")
+    return ("텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+            "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
+
+
 def _extract_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
-    """한 파일(PDF/사진) -> Extraction (지문 본문). 텍스트/이미지 자동 분기."""
+    """한 파일(PDF/사진/HWP) -> Extraction (지문 본문). 텍스트/이미지 자동 분기."""
     if extract.is_image(src):
         # 사진/캡처 → 비전으로 지문 추출
         return analyze.extract_report_image(client, cfg, str(src))
     raw = extract.extract_passage_text(src)
     if extract.looks_empty(raw):
-        raise ValueError(
-            "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-            "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-        )
+        raise ValueError(_empty_extract_error(src))
     return analyze.extract_report(client, cfg, raw)
 
 
@@ -70,10 +75,7 @@ def _extract_passages_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
         return analyze.extract_passages_image(client, cfg, str(src))
     raw = extract.extract_passage_text(src)
     if extract.looks_empty(raw):
-        raise ValueError(
-            "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-            "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-        )
+        raise ValueError(_empty_extract_error(src))
     return analyze.extract_passages(client, cfg, raw)
 
 
