@@ -6,9 +6,9 @@ from pathlib import Path
 
 from . import analyze, extract, render
 from .client import ClaudeClient
-from .config import Config
+from .config import Config, OutputsCfg
 from .logutil import Manifest, setup_logging
-from .schemas import Report
+from .schemas import Extraction, Report, Worksheet
 
 
 INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS
@@ -26,8 +26,8 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
-def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
-    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
+def extract_passages_for_src(client: ClaudeClient, cfg: Config, src: Path) -> list[Extraction]:
+    """한 파일(PDF/사진)에서 지문 본문(들)을 추출 -> list[Extraction]."""
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
@@ -38,7 +38,30 @@ def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[
                 "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
         pset = analyze.extract_passages(client, cfg, raw)
-    return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
+    return list(pset.passages)
+
+
+def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
+    return [analyze.analyze_passage(client, cfg, ex)
+            for ex in extract_passages_for_src(client, cfg, src)]
+
+
+def build_all_for_pdf(
+    client: ClaudeClient, cfg: Config, src: Path, which: OutputsCfg | None = None,
+) -> tuple[list[Report], list[Worksheet]]:
+    """한 파일에서 지문을 '한 번만' 추출한 뒤, 선택된 산출물에 필요한
+    Report(분석지/어휘/시험지용)와 Worksheet(서술형 교재용)를 함께 만든다.
+
+    반환: (reports, worksheets)
+    """
+    sel = which or cfg.outputs
+    extractions = extract_passages_for_src(client, cfg, src)
+    reports = ([analyze.analyze_passage(client, cfg, ex) for ex in extractions]
+               if sel.needs_report else [])
+    worksheets = ([analyze.analyze_worksheet(client, cfg, ex) for ex in extractions]
+                  if sel.worksheet else [])
+    return reports, worksheets
 
 
 # 하위 호환용 별칭(단일 Report 반환)
@@ -47,38 +70,48 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 
 
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
-                   which=None, brand: str | None = None) -> list[dict]:
-    """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성.
+                   which=None, brand: str | None = None,
+                   worksheets: list[Worksheet] | None = None) -> list[dict]:
+    """선택된 종류(분석지/어휘 리스트/시험지/서술형 교재)의 PDF 를 생성.
 
-    반환: [{"kind": "analysis"|"wordlist"|"quiz", "label": 표시명, "path": Path}, ...]
+    반환: [{"kind": "analysis"|"wordlist"|"quiz"|"worksheet", "label": 표시명, "path": Path}, ...]
 
     - 분석지: 지문이 여러 개여도 한 PDF(지문1→지문2… 순서)로.
     - 어휘 리스트 / 시험지: 지문이 여러 개면 '지문별로 각각' 생성.
+    - 서술형 교재: 지문이 여러 개여도 한 PDF(학생용→교사용→빠른정답→정답및해설).
     brand: 분석지의 'made by ~' · '~ tip' 문구 이름. None 이면 config 값, ""이면 문구 제거.
     (하단 저작권 footer 는 항상 그대로)
     """
     sel = which or cfg.outputs
     brand = cfg.design.brand if brand is None else brand
     fn = cfg.design.footer_note
-    title = reports[0].title if reports else stem
+    worksheets = worksheets or []
+    title = (reports[0].title if reports
+             else (worksheets[0].title if worksheets else stem))
     recs: list[dict] = []
 
-    if sel.analysis:
+    if sel.analysis and reports:
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
         render.render_pdf(reports, p, footer_note=fn,
                           min_vocab=cfg.vocab.min, brand=brand)
         recs.append({"kind": "analysis", "label": "📘 분석지", "path": p})
 
     # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
-    if sel.wordlist:
+    if sel.wordlist and reports:
         p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
         render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘", footer_note=fn)
         recs.append({"kind": "wordlist", "label": "📝 어휘 리스트", "path": p})
 
-    if sel.quiz:
+    if sel.quiz and reports:
         p = cfg.output_dir / f"{stem}_어휘test.pdf"
         render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
         recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
+
+    if sel.worksheet and worksheets:
+        p = cfg.output_dir / f"{stem}_서술형교재.pdf"
+        render.render_worksheet_pdf(worksheets, p,
+                                    title=f"{title} — 내신 서술형 대비", footer_note=fn, brand=brand)
+        recs.append({"kind": "worksheet", "label": "🖊️ 서술형 교재", "path": p})
 
     return recs
 
@@ -101,6 +134,14 @@ def _mock_reports_for_pdf(cfg: Config, pdf: Path) -> list[Report]:
 
 def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
     return _mock_reports_for_pdf(cfg, pdf)[0]
+
+
+def _mock_worksheets_for_pdf(cfg: Config, pdf: Path) -> list[Worksheet]:
+    """목 모드: 실제 API 없이 샘플 Worksheet(들)를 반환."""
+    from samples.sample_mock import mock_worksheet
+
+    title = _safe_stem(pdf)
+    return [mock_worksheet(title=title, source=f"{pdf.name}")]
 
 
 def run_folder(cfg: Config, mock: bool = False) -> dict:
@@ -130,18 +171,24 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            reports = (_mock_reports_for_pdf(cfg, pdf) if mock
-                       else build_reports_for_pdf(client, cfg, pdf))
-            recs = render_outputs(cfg, reports, _safe_stem(pdf))
+            if mock:
+                reports = (_mock_reports_for_pdf(cfg, pdf)
+                           if cfg.outputs.needs_report else [])
+                worksheets = (_mock_worksheets_for_pdf(cfg, pdf)
+                              if cfg.outputs.worksheet else [])
+            else:
+                reports, worksheets = build_all_for_pdf(client, cfg, pdf)
+            recs = render_outputs(cfg, reports, _safe_stem(pdf), worksheets=worksheets)
             outputs.extend(r["path"] for r in recs)
             a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
             analysis_outputs.extend(a_paths)
+            n_passages = max(len(reports), len(worksheets))
             manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
-                                    {"passages": len(reports),
+                                    {"passages": n_passages,
                                      "outputs": [r["path"].name for r in recs]})
             success += 1
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
-                        i, total, pdf.name, len(reports),
+                        i, total, pdf.name, n_passages,
                         ", ".join(r["path"].name for r in recs))
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1

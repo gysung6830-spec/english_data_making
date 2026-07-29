@@ -102,3 +102,54 @@ def analyze_passage(
         structure=results["structure"],
         exam=exam,
     )
+
+
+def analyze_worksheet(
+    client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
+) -> schemas.Worksheet:
+    """추출된 본문으로 서술형 대비 교재(6개 유형)를 각각 개별 호출로 생성."""
+    title, body = extraction.title, extraction.body
+    r = cfg.processing.max_retries
+    S = prompts.WS_SYSTEM
+
+    tasks = {
+        "summary": lambda: client.structured(
+            S, prompts.ws_summary_prompt(title, body),
+            schemas.WSSummaryType, max_retries=r),
+        "paraphrase": lambda: client.structured(
+            S, prompts.ws_paraphrase_prompt(title, body),
+            schemas.WSParaphraseType, max_tokens=10000, max_retries=r),
+        "compose_idea": lambda: client.structured(
+            S, prompts.ws_compose_idea_prompt(title, body),
+            schemas.WSComposeType, max_retries=r),
+        "compose_cond": lambda: client.structured(
+            S, prompts.ws_compose_cond_prompt(title, body),
+            schemas.WSComposeType, max_retries=r),
+        "choice": lambda: client.structured(
+            S, prompts.ws_choice_prompt(title, body),
+            schemas.WSChoiceType, max_retries=r),
+        "error": lambda: client.structured(
+            S, prompts.ws_error_prompt(title, body),
+            schemas.WSErrorType, max_retries=r),
+    }
+
+    results: dict[str, object] = {}
+    if cfg.processing.parallel_sections:
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futs = {name: ex.submit(fn) for name, fn in tasks.items()}
+            for name, fut in futs.items():
+                results[name] = fut.result()
+    else:
+        for name, fn in tasks.items():
+            results[name] = fn()
+
+    return schemas.Worksheet(
+        title=title,
+        source=extraction.source,
+        summary=results["summary"],
+        paraphrase=results["paraphrase"],
+        compose_idea=results["compose_idea"],
+        compose_cond=results["compose_cond"],
+        choice=results["choice"],
+        error=results["error"],
+    )

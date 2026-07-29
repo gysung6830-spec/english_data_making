@@ -105,12 +105,56 @@ def test_render_html():
     print("PASS  HTML 렌더링")
 
 
+# ---- 6. 서술형 교재 스키마 검증 ------------------------------------------
+def test_worksheet_schema():
+    # 변형 선지는 정확히 5개여야 함
+    ok = {"no": 1, "original": "x", "options": ["a", "b", "c", "d", "e"],
+          "answer": 1, "explanation": ""}
+    schemas.WSParaphraseQ.model_validate(ok)
+    try:
+        schemas.WSParaphraseQ.model_validate({**ok, "options": ["a", "b", "c"]})
+        assert False, "선지 3개는 통과하면 안 됨"
+    except Exception:
+        pass
+    # 요약문 빈칸은 2개 이상
+    try:
+        schemas.WSSummaryType.model_validate(
+            {"text": "a [[1]]", "answers": [{"no": 1, "word": "x"}]})
+        assert False, "빈칸 1개는 통과하면 안 됨"
+    except Exception:
+        pass
+    print("PASS  서술형 교재 스키마 검증")
+
+
+# ---- 7. 서술형 교재 렌더링 (4파트 · 6개 유형) -----------------------------
+def test_worksheet_render():
+    from samples.sample_mock import mock_worksheet
+    from src import render
+    # 빈칸 치환 필터: 학생용은 빈칸, 교사용은 정답 노출
+    ws = mock_worksheet()
+    student = render._ws_blanks(ws.summary.text, ws.summary.answers, False)
+    teacher = render._ws_blanks(ws.summary.text, ws.summary.answers, True)
+    assert "ws-blank" in student and "essential" not in student
+    assert "essential" in teacher
+    # 전체 PDF 렌더가 예외 없이 되고 파일이 생성되는지
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d) / "ws.pdf"
+        render.render_worksheet_pdf([mock_worksheet(), mock_worksheet("Second")],
+                                    out, footer_note="테스트")
+        assert out.is_file() and out.stat().st_size > 1000
+    print("PASS  서술형 교재 렌더링(4파트·2지문)")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()
     test_render_html()
+    test_worksheet_schema()
+    test_worksheet_render()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

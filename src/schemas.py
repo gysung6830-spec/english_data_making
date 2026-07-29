@@ -179,6 +179,142 @@ class ExamSection(BaseModel):
         return v
 
 
+# ===========================================================================
+# 내신 서술형 대비 교재 (Worksheet) — 6개 유형
+#   각 유형은 '문제 + 정답 + 해설'을 함께 담는다.
+#   한 데이터로 학생용/교사용/빠른정답/정답및해설 4파트를 만든다.
+# ===========================================================================
+
+# 유형 1) 서술형 요약문 완성 -------------------------------------------------
+class WSBlankAnswer(BaseModel):
+    no: int
+    word: str            # 정답 단어(원문에서 그대로 찾은 단어)
+    note: str = ""       # 해설용 짧은 설명(선택)
+
+
+class WSSummaryType(BaseModel):
+    """유형1: 지문 요약문의 빈칸을 원문 단어로 채우기."""
+    text: str                              # 빈칸을 [[1]],[[2]] 로 표시한 영어 요약문
+    answers: list[WSBlankAnswer]
+    translation: str = ""                  # 요약문 한국어 해석
+
+    @field_validator("answers")
+    @classmethod
+    def _min_blanks(cls, v: list[WSBlankAnswer]) -> list[WSBlankAnswer]:
+        if len(v) < 2:
+            raise ValueError("요약문 빈칸은 2개 이상이어야 합니다.")
+        return v
+
+
+# 유형 2) 문장 변형 대비(paraphrasing) --------------------------------------
+class WSParaphraseQ(BaseModel):
+    no: int
+    original: str                          # 지문에서 고른 원문 문장
+    options: list[str]                     # 5개 변형 선지
+    answer: int                            # 정답 선지 번호(1~5)
+    explanation: str = ""                  # 정답 근거 + 오답 이유
+
+    @field_validator("options")
+    @classmethod
+    def _five_options(cls, v: list[str]) -> list[str]:
+        if len(v) != 5:
+            raise ValueError("변형 선지는 정확히 5개여야 합니다.")
+        return v
+
+
+class WSParaphraseType(BaseModel):
+    questions: list[WSParaphraseQ]
+
+    @field_validator("questions")
+    @classmethod
+    def _min_q(cls, v: list[WSParaphraseQ]) -> list[WSParaphraseQ]:
+        if not v:
+            raise ValueError("문장 변형 문항이 비어 있습니다.")
+        return v
+
+
+# 유형 3·4) 배열 영작 / 조건 영작 -------------------------------------------
+class WSComposeItem(BaseModel):
+    no: int
+    label: str = ""                        # 문항 라벨(예: "요지", "제목")
+    korean: str                            # 영작해야 할 우리말/의미
+    given_words: list[str] = Field(default_factory=list)   # 보기 단어(어순 배열용)
+    word_count: str = ""                   # 단어 수 조건(예: "10단어 내외")
+    conditions: list[str] = Field(default_factory=list)    # 어법 조건(유형4)
+    answer: str                            # 정답 영작
+    explanation: str = ""
+
+
+class WSComposeType(BaseModel):
+    items: list[WSComposeItem]
+
+    @field_validator("items")
+    @classmethod
+    def _min_items(cls, v: list[WSComposeItem]) -> list[WSComposeItem]:
+        if not v:
+            raise ValueError("영작 문항이 비어 있습니다.")
+        return v
+
+
+# 유형 5) 보기 어휘 빈칸 완성(들어갈 수 없는 단어 고르기) --------------------
+class WSChoiceItem(BaseModel):
+    no: int
+    sentence: str                          # 빈칸(____)이 포함된 문장
+    choices: list[str]                     # 보기 단어들
+    answer: int                            # '들어갈 수 없는' 단어 번호
+    explanation: str = ""
+
+    @field_validator("choices")
+    @classmethod
+    def _min_choices(cls, v: list[str]) -> list[str]:
+        if len(v) < 4:
+            raise ValueError("보기 단어는 4개 이상이어야 합니다.")
+        return v
+
+
+class WSChoiceType(BaseModel):
+    items: list[WSChoiceItem]
+
+    @field_validator("items")
+    @classmethod
+    def _min_items(cls, v: list[WSChoiceItem]) -> list[WSChoiceItem]:
+        if not v:
+            raise ValueError("어휘 빈칸 문항이 비어 있습니다.")
+        return v
+
+
+# 유형 6) 어법 오류 수정 ----------------------------------------------------
+class WSErrorItem(BaseModel):
+    no: int
+    text: str                              # 어법 오류가 포함된 문장(오류를 그대로 둔 채)
+    error: str                             # 틀린 표현(문장 속 그대로)
+    correction: str                        # 바르게 고친 표현
+    explanation: str = ""                  # 어법 설명(한국어)
+
+
+class WSErrorType(BaseModel):
+    items: list[WSErrorItem]
+
+    @field_validator("items")
+    @classmethod
+    def _min_items(cls, v: list[WSErrorItem]) -> list[WSErrorItem]:
+        if not v:
+            raise ValueError("어법 오류 문항이 비어 있습니다.")
+        return v
+
+
+class Worksheet(BaseModel):
+    """한 지문에서 만든 서술형 대비 교재(6개 유형)."""
+    title: str
+    source: str = ""
+    summary: WSSummaryType          # 유형1
+    paraphrase: WSParaphraseType    # 유형2
+    compose_idea: WSComposeType     # 유형3 (요지/제목 배열 영작)
+    compose_cond: WSComposeType     # 유형4 (조건 영작)
+    choice: WSChoiceType            # 유형5
+    error: WSErrorType              # 유형6
+
+
 # ---------------------------------------------------------------------------
 # 최종 조립 결과 (렌더링 입력)
 # ---------------------------------------------------------------------------

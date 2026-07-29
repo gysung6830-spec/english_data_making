@@ -34,10 +34,16 @@ class DesignCfg:
 
 @dataclass
 class OutputsCfg:
-    """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지)."""
+    """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지 / 서술형 교재)."""
     analysis: bool = True
     wordlist: bool = True
     quiz: bool = True
+    worksheet: bool = True   # 내신 서술형 대비 교재(6개 유형·4파트)
+
+    @property
+    def needs_report(self) -> bool:
+        """분석지/어휘리스트/시험지 중 하나라도 켜져 있으면 Report 생성이 필요."""
+        return self.analysis or self.wordlist or self.quiz
 
 
 @dataclass
@@ -96,6 +102,7 @@ def load_config(path: str | Path | None = None) -> Config:
             analysis=bool(outputs.get("analysis", True)),
             wordlist=bool(outputs.get("wordlist", True)),
             quiz=bool(outputs.get("quiz", True)),
+            worksheet=bool(outputs.get("worksheet", True)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )

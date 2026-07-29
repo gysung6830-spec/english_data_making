@@ -117,3 +117,141 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                 "5형식(are given)")),
         ]),
     )
+
+
+def mock_worksheet(title: str = "The Value of Curiosity",
+                   source: str = "Mock Reader 2024") -> schemas.Worksheet:
+    """API 없이 서술형 교재 디자인을 미리 볼 수 있는 목 데이터."""
+    return schemas.Worksheet(
+        title=title,
+        source=source,
+        summary=schemas.WSSummaryType(
+            text=("Curiosity is [[1]] because it fuels [[2]], helps students [[3]] "
+                  "information longer, and sparks [[4]]; therefore, education should "
+                  "[[5]] learners to explore rather than simply memorize answers."),
+            answers=[
+                schemas.WSBlankAnswer(no=1, word="essential", note="'필수적인' — 지문 핵심 주장"),
+                schemas.WSBlankAnswer(no=2, word="motivation", note="동기 유발 효과"),
+                schemas.WSBlankAnswer(no=3, word="remember", note="정보를 더 오래 기억"),
+                schemas.WSBlankAnswer(no=4, word="creativity", note="창의성 자극"),
+                schemas.WSBlankAnswer(no=5, word="encourage", note="탐구를 '장려'"),
+            ],
+            translation=("호기심은 동기를 북돋우고, 학생들이 정보를 더 오래 기억하게 하며, "
+                         "창의성을 자극하므로 필수적이다. 따라서 교육은 학습자가 단순히 답을 "
+                         "외우기보다 탐구하도록 장려해야 한다."),
+        ),
+        paraphrase=schemas.WSParaphraseType(questions=[
+            schemas.WSParaphraseQ(
+                no=1,
+                original="Curious students remember information longer.",
+                options=[
+                    "Students who are curious retain what they learn for a longer time.",
+                    "Students forget information more quickly when they are curious.",
+                    "Curiosity has no effect on how long students recall information.",
+                    "Teachers remember curious students for a long time.",
+                    "Information makes students more curious over time.",
+                ],
+                answer=1,
+                explanation=("① remember longer → retain for a longer time 로 의미 보존(정답). "
+                             "②는 반의어(forget quickly), ③은 효과 부정으로 의미가 뒤집힘."),
+            ),
+            schemas.WSParaphraseQ(
+                no=2,
+                original="Education should encourage learners to ask questions.",
+                options=[
+                    "Learners should discourage education from asking questions.",
+                    "Education ought to promote learners' questioning.",
+                    "Education must stop learners from asking too many questions.",
+                    "Questions should be answered by education, not learners.",
+                    "Learners should memorize questions given by their teachers.",
+                ],
+                answer=2,
+                explanation="② encourage→promote, ask questions→questioning 로 동일 의미(정답)."),
+        ]),
+        compose_idea=schemas.WSComposeType(items=[
+            schemas.WSComposeItem(
+                no=1, label="요지",
+                korean="호기심은 학습을 촉진하므로 교육에서 장려되어야 한다.",
+                given_words=["be", "curiosity", "in", "encouraged", "should",
+                             "education", "because", "it", "fuels", "learning"],
+                word_count="10단어",
+                answer="Curiosity should be encouraged in education because it fuels learning.",
+                explanation="주어(Curiosity)+조동사 수동태(should be encouraged) 뼈대를 먼저 잡는다."),
+            schemas.WSComposeItem(
+                no=2, label="제목",
+                korean="호기심의 힘",
+                given_words=["of", "the", "curiosity", "power"],
+                word_count="4단어",
+                answer="The Power of Curiosity",
+                explanation="제목은 'the + 명사 + of + 명사' 명사구 형태."),
+        ]),
+        compose_cond=schemas.WSComposeType(items=[
+            schemas.WSComposeItem(
+                no=1,
+                korean="질문하도록 격려받는 아이들은 호기심을 더 오래 유지한다.",
+                given_words=["encourage", "retain"],
+                conditions=["관계대명사 who 사용", "분사(수동) 활용", "비교급 longer 사용"],
+                word_count="12단어",
+                answer=("Children who are encouraged to ask questions retain their "
+                        "curiosity longer."),
+                explanation="who 관계절 + are encouraged(수동) + longer(비교급)."),
+            schemas.WSComposeItem(
+                no=2,
+                korean="호기심은 우리가 미지의 것을 탐구하도록 이끈다.",
+                given_words=["drive", "explore"],
+                conditions=["5형식(drive+O+to부정사) 사용"],
+                word_count="7단어",
+                answer="Curiosity drives us to explore the unknown.",
+                explanation="drive + 목적어(us) + to explore 의 5형식 구조."),
+            schemas.WSComposeItem(
+                no=3,
+                korean="질문하는 것은 학습에서 중요하다.",
+                given_words=["ask", "matter"],
+                conditions=["동명사 주어 사용"],
+                word_count="6단어",
+                answer="Asking questions matters in learning.",
+                explanation="동명사구(Asking questions)가 주어."),
+        ]),
+        choice=schemas.WSChoiceType(items=[
+            schemas.WSChoiceItem(
+                no=1,
+                sentence="Curiosity ____ us to explore the unknown.",
+                choices=["drives", "pushes", "leads", "prevents", "motivates"],
+                answer=4,
+                explanation="④ prevents(막다)는 문맥상 반대. 나머지는 '이끌다/몰아가다' 계열로 가능."),
+            schemas.WSChoiceItem(
+                no=2,
+                sentence="Curious students ____ information longer.",
+                choices=["retain", "keep", "remember", "lose", "hold"],
+                answer=4,
+                explanation="④ lose(잃다)는 반의어. 나머지는 '유지·기억' 의미로 가능."),
+            schemas.WSChoiceItem(
+                no=3,
+                sentence="Education should ____ learners to inquire.",
+                choices=["encourage", "promote", "inspire", "discourage", "motivate"],
+                answer=4,
+                explanation="④ discourage(막다)는 문맥과 반대. 나머지는 '장려·고무' 의미."),
+        ]),
+        error=schemas.WSErrorType(items=[
+            schemas.WSErrorItem(
+                no=1,
+                text="Curiosity drive us to explore the unknown.",
+                error="drive", correction="drives",
+                explanation="주어 Curiosity 는 3인칭 단수이므로 동사에 -s (수일치)."),
+            schemas.WSErrorItem(
+                no=2,
+                text="Curious students remembers information longer.",
+                error="remembers", correction="remember",
+                explanation="복수 주어 students 에는 동사원형 remember (수일치)."),
+            schemas.WSErrorItem(
+                no=3,
+                text="Children who is encouraged to ask questions stay curious.",
+                error="is", correction="are",
+                explanation="관계대명사 who 의 선행사가 복수(Children)이므로 are."),
+            schemas.WSErrorItem(
+                no=4,
+                text="It is important asking questions in class.",
+                error="asking", correction="to ask",
+                explanation="가주어 It 의 진주어는 to부정사(to ask)."),
+        ]),
+    )

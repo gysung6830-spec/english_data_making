@@ -110,7 +110,10 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         except Exception as e:
             failed[fid] = f"extract: {e}"
 
-    # ---- 2단계: 지문별 5개 섹션 ----
+    # ---- 2단계: 지문별 섹션(분석지용 5개) + 서술형 교재용 6개 유형 ----
+    #   분석지/어휘/시험지가 필요하면 5개 섹션을, 서술형 교재가 필요하면 6개 유형을 요청.
+    need_report = cfg.outputs.needs_report
+    need_ws = cfg.outputs.worksheet
     lo, hi = cfg.vocab.min, cfg.vocab.max
     sec_reqs = []
     section_specs = {
@@ -120,37 +123,59 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
         "vocab": (schemas.VocabSection, lambda t, b: prompts.vocab_prompt(t, b, lo, hi)),
         "structure": (schemas.StructureSection, lambda t, b: prompts.structure_prompt(t, b)),
     }
+    # 서술형 교재 6개 유형: (스키마, 프롬프트, max_tokens)
+    ws_specs = {
+        "ws_summary": (schemas.WSSummaryType, prompts.ws_summary_prompt, 8000),
+        "ws_paraphrase": (schemas.WSParaphraseType, prompts.ws_paraphrase_prompt, 10000),
+        "ws_compose_idea": (schemas.WSComposeType, prompts.ws_compose_idea_prompt, 8000),
+        "ws_compose_cond": (schemas.WSComposeType, prompts.ws_compose_cond_prompt, 8000),
+        "ws_choice": (schemas.WSChoiceType, prompts.ws_choice_prompt, 8000),
+        "ws_error": (schemas.WSErrorType, prompts.ws_error_prompt, 8000),
+    }
     for (fid, pidx), ex in units.items():
-        for name, (cls, mk) in section_specs.items():
-            mt = 12000 if name == "literal" else 8000
-            sec_reqs.append({
-                "custom_id": f"{fid}__{pidx}__{name}",
-                "params": build_request(model, prompts.SYSTEM, mk(ex.title, ex.body), cls, mt),
-            })
+        if need_report:
+            for name, (cls, mk) in section_specs.items():
+                mt = 12000 if name == "literal" else 8000
+                sec_reqs.append({
+                    "custom_id": f"{fid}__{pidx}__{name}",
+                    "params": build_request(model, prompts.SYSTEM, mk(ex.title, ex.body), cls, mt),
+                })
+        if need_ws:
+            for name, (cls, mk, mt) in ws_specs.items():
+                sec_reqs.append({
+                    "custom_id": f"{fid}__{pidx}__{name}",
+                    "params": build_request(model, prompts.WS_SYSTEM, mk(ex.title, ex.body), cls, mt),
+                })
     res2 = _submit_and_collect(client, sec_reqs, logger)
 
     parsed: dict[tuple[str, int], dict[str, object]] = {k: {} for k in units}
     for (fid, pidx), ex in units.items():
-        for name, (cls, _mk) in section_specs.items():
+        specs = {}
+        if need_report:
+            specs.update({n: c for n, (c, _m) in section_specs.items()})
+        if need_ws:
+            specs.update({n: c for n, (c, _m, _t) in ws_specs.items()})
+        for name, cls in specs.items():
             text = res2.get(f"{fid}__{pidx}__{name}")
             try:
                 parsed[(fid, pidx)][name] = parse_response_text(text or "", cls)
             except Exception as e:
                 failed.setdefault(fid, f"p{pidx}/{name}: {e}")
 
-    # ---- 3단계: 지문별 출제 포인트 ----
+    # ---- 3단계: 지문별 출제 포인트 (분석지가 필요할 때만) ----
     exam_reqs = []
-    for (fid, pidx), ex in units.items():
-        if fid in failed:
-            continue
-        g = parsed[(fid, pidx)].get("grammar")
-        v = parsed[(fid, pidx)].get("vocab")
-        exam_reqs.append({
-            "custom_id": f"{fid}__{pidx}__exam",
-            "params": build_request(model, prompts.SYSTEM,
-                                    prompts.exam_prompt(ex.title, ex.body, g, v),
-                                    schemas.ExamSection),
-        })
+    if need_report:
+        for (fid, pidx), ex in units.items():
+            if fid in failed:
+                continue
+            g = parsed[(fid, pidx)].get("grammar")
+            v = parsed[(fid, pidx)].get("vocab")
+            exam_reqs.append({
+                "custom_id": f"{fid}__{pidx}__exam",
+                "params": build_request(model, prompts.SYSTEM,
+                                        prompts.exam_prompt(ex.title, ex.body, g, v),
+                                        schemas.ExamSection),
+            })
     res3 = _submit_and_collect(client, exam_reqs, logger)
 
     # ---- 조립 + 렌더 (파일별로 지문 순서대로, 선택된 종류의 PDF) ----
@@ -162,23 +187,33 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
             continue
         try:
             reports = []
+            worksheets = []
             for pidx in sorted(file_units[fid]):
                 ex = units[(fid, pidx)]
                 p = parsed[(fid, pidx)]
-                exam = parse_response_text(res3.get(f"{fid}__{pidx}__exam") or "", schemas.ExamSection)
-                reports.append(schemas.Report(
-                    title=ex.title, source=ex.source,
-                    summary=p["summary"], literal=p["literal"],
-                    grammar=p["grammar"], vocab=p["vocab"],
-                    structure=p["structure"], exam=exam,
-                ))
+                if need_report:
+                    exam = parse_response_text(
+                        res3.get(f"{fid}__{pidx}__exam") or "", schemas.ExamSection)
+                    reports.append(schemas.Report(
+                        title=ex.title, source=ex.source,
+                        summary=p["summary"], literal=p["literal"],
+                        grammar=p["grammar"], vocab=p["vocab"],
+                        structure=p["structure"], exam=exam,
+                    ))
+                if need_ws:
+                    worksheets.append(schemas.Worksheet(
+                        title=ex.title, source=ex.source,
+                        summary=p["ws_summary"], paraphrase=p["ws_paraphrase"],
+                        compose_idea=p["ws_compose_idea"], compose_cond=p["ws_compose_cond"],
+                        choice=p["ws_choice"], error=p["ws_error"],
+                    ))
             pdf = files[fid]
-            recs = render_outputs(cfg, reports, _safe_stem(pdf))
+            recs = render_outputs(cfg, reports, _safe_stem(pdf), worksheets=worksheets)
             outputs.extend(r["path"] for r in recs)
             a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
             analysis_outputs.extend(a_paths)
             manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
-                                    {"passages": len(reports),
+                                    {"passages": max(len(reports), len(worksheets)),
                                      "outputs": [r["path"].name for r in recs]})
             success += 1
         except Exception as e:

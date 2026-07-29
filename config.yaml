@@ -40,10 +40,12 @@ design:
   brand: "은아 T"
 
 # 어떤 PDF 를 만들지 선택 (true=생성 / false=건너뜀)
-#   - analysis : 지문 분석지 (6개 섹션)
-#   - wordlist : 직독직해 핵심 어휘만 모은 어휘 리스트
-#   - quiz     : 어휘를 무작위로 섞어 뜻을 적게 하는 영단어 시험지(정답 포함)
+#   - analysis  : 지문 분석지 (6개 섹션)
+#   - wordlist  : 직독직해 핵심 어휘만 모은 어휘 리스트
+#   - quiz      : 어휘를 무작위로 섞어 뜻을 적게 하는 영단어 시험지(정답 포함)
+#   - worksheet : 내신 서술형 대비 교재 (6개 유형 · 학생용/교사용/빠른정답/정답및해설 4파트)
 outputs:
   analysis: true
   wordlist: true
   quiz: true
+  worksheet: true

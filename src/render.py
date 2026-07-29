@@ -110,6 +110,41 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
+# ---- 서술형 교재용 필터 ---------------------------------------------------
+_WS_BLANK_RE = re.compile(r"\[\[(\d+)\]\]")
+_CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮"
+
+
+def _circled(n) -> str:
+    """1→①, 2→② … 범위를 벗어나면 '(n)'."""
+    try:
+        i = int(n)
+    except (TypeError, ValueError):
+        return str(n)
+    return _CIRCLED[i - 1] if 1 <= i <= len(_CIRCLED) else f"({i})"
+
+
+_env.filters["circled"] = _circled
+
+
+def _ws_blanks(text, answers, reveal: bool) -> Markup:
+    """요약문 text 의 [[n]] 을 학생용(빈칸) 또는 교사용(정답)으로 치환."""
+    ans = {a.no: a.word for a in (answers or [])}
+    esc = str(escape(text or ""))
+
+    def repl(m: "re.Match") -> str:
+        n = int(m.group(1))
+        if reveal:
+            word = str(escape(ans.get(n, "____")))
+            return f'<u class="ws-fill">{word}</u><sup class="ws-bn">{n}</sup>'
+        return f'<span class="ws-blank"></span><sup class="ws-bn">{n}</sup>'
+
+    return Markup(_WS_BLANK_RE.sub(repl, esc))
+
+
+_env.filters["ws_blanks"] = _ws_blanks
+
+
 def render_html(reports, footer_note: str = "", brand: str = "은아 T") -> str:
     """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
 
@@ -313,6 +348,47 @@ def render_quiz_pdf(reports, out_path: str | Path,
                          "words": shuffled, "rows": _pair_rows(shuffled)})
     tmpl = _env.get_template("quiz.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
+# ---------------------------------------------------------------------------
+# 내신 서술형 대비 교재 (6개 유형 · 4파트: 학생용/교사용/빠른정답/정답및해설)
+# ---------------------------------------------------------------------------
+def render_worksheet_pdf(worksheets, out_path: str | Path,
+                         title: str = "내신 서술형 대비 교재",
+                         footer_note: str = "", brand: str = "은아 T") -> Path:
+    """여러 지문의 Worksheet 를 한 PDF 로 만든다.
+
+    구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
+    지문이 여러 개면 각 파트 안에서 지문별로 이어서 배치한다.
+    """
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = _as_list(worksheets)
+    # 유형 메타(제목/부제/색 클래스) — 학생/교사용 순서
+    types = [
+        {"key": "summary", "n": 1, "name": "서술형 요약문 완성",
+         "sub": "빈칸에 원문에서 찾은 단어를 쓰시오."},
+        {"key": "paraphrase", "n": 2, "name": "문장 변형 대비",
+         "sub": "원문과 의미가 일치하는 것을 고르시오."},
+        {"key": "compose_idea", "n": 3, "name": "요지·제목 배열 영작",
+         "sub": "보기의 단어를 배열해 요지와 제목을 완성하시오."},
+        {"key": "compose_cond", "n": 4, "name": "조건 영작 연습",
+         "sub": "어법 조건과 단어 수에 맞게 영작하시오."},
+        {"key": "choice", "n": 5, "name": "보기 어휘 빈칸 완성",
+         "sub": "빈칸에 들어갈 수 없는 단어를 고르시오."},
+        {"key": "error", "n": 6, "name": "어법 오류 수정",
+         "sub": "어법상 틀린 부분을 찾아 바르게 고치시오."},
+    ]
+    passages = [{"no": i, "total": len(reps), "ws": ws}
+                for i, ws in enumerate(reps, 1)]
+    tmpl = _env.get_template("worksheet.html.j2")
+    html = tmpl.render(title=title, passages=passages, types=types,
+                       footer_note=footer_note, brand=brand)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path

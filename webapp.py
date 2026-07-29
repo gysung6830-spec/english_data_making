@@ -88,7 +88,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)이나 PDF를 올리면, 분석지·어휘 리스트·영단어 시험지·내신 서술형 대비 교재를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF, 여러 개 가능)</label>
@@ -116,6 +116,7 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
+      <label class=chk><input type=checkbox name=out_worksheet value=1 checked> 🖊️ 서술형 대비 교재 (6개 유형 · 학생/교사/정답/해설)</label>
 
       <label class=chk><input type=checkbox name=brand value=1 checked> 🖋️ 분석지에 '은아 T' 문구 넣기 <span class=hint>(직독직해 made by · 출제표 tip · 하단 저작권은 항상 유지)</span></label>
 
@@ -241,9 +242,10 @@ def analyze_route():
         analysis=bool(request.form.get("out_analysis")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
+        worksheet=bool(request.form.get("out_worksheet")),
     )
-    if not (which.analysis or which.wordlist or which.quiz):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    if not (which.analysis or which.wordlist or which.quiz or which.worksheet):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False, worksheet=False)
 
     # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)
     brand = cfg.design.brand if request.form.get("brand") else ""
@@ -273,17 +275,22 @@ def analyze_route():
         f.save(str(tmp))
         try:
             if mock:
-                reports = pipeline._mock_reports_for_pdf(cfg, tmp)
+                reports = (pipeline._mock_reports_for_pdf(cfg, tmp)
+                           if which.needs_report else [])
+                worksheets = (pipeline._mock_worksheets_for_pdf(cfg, tmp)
+                              if which.worksheet else [])
             else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
+                reports, worksheets = pipeline.build_all_for_pdf(client, cfg, tmp, which=which)
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
+            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
+                                           worksheets=worksheets)
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
-            note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
+            n_passages = max(len(reports), len(worksheets))
+            note = f" (지문 {n_passages}개)" if n_passages > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
