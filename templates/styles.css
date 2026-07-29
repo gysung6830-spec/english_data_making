@@ -371,6 +371,10 @@ table.lit2 td {
   border: 1px solid var(--line); border-left: 3px solid var(--ws);
   border-radius: 0 6px 6px 0; padding: 7px 11px 9px; margin: 0 0 8px; break-inside: avoid;
 }
+
+/* 2단(좌/우) 문항 배치 — 유형3(어법)만 제외 */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; align-items: start; }
+.grid2 > .q-card { margin-bottom: 0; }
 .q-head { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
 .q-no {
   display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 18px;

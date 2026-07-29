@@ -52,6 +52,7 @@
   {{ thead(1, '보기 어휘 빈칸 완성', '보기에서 알맞은 낱말을 골라 빈칸을 완성할 때, 사용되지 않는 낱말 3개를 모두 고르시오.') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    <div class="grid2">
     {% for s in pg.cloze %}
     <div class="q-card">
       {{ qhead(s) }}
@@ -70,6 +71,7 @@
       {% if reveal %}<div class="exp"><b>사용되지 않는 낱말 {% for i in s.unused_index %}{{ i | circled }}{% endfor %} ({{ s.unused | join(', ') }})</b> {{ s.explanation }}</div>{% endif %}
     </div>
     {% endfor %}
+    </div>
   {% endfor %}
   </div>
 
@@ -78,6 +80,8 @@
   {{ thead(2, '서술형 요약문 완성', '지문을 읽고 빈칸에 알맞은 단어를 원문에서 찾아 쓰시오. (필요시 어형 변화)') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
+    <div class="grid2">
     {% for q in pg.summary %}
     <div class="q-card">
       {{ qhead(q) }}
@@ -85,6 +89,7 @@
       {{ blank_boxes(q.blanks, reveal) }}
     </div>
     {% endfor %}
+    </div>
   {% endfor %}
   </div>
 
@@ -113,6 +118,7 @@
   {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    <div class="grid2">
     {% for q in pg.compose %}
     <div class="q-card">
       {{ qhead(q) }}
@@ -123,6 +129,7 @@
       {% else %}<div class="ans-box">➜</div>{% endif %}
     </div>
     {% endfor %}
+    </div>
   {% endfor %}
   </div>
 
@@ -149,6 +156,7 @@
   {{ thead(6, '문장 변형 대비', '유의어·구조를 바꾼 문장의 빈칸을, 보기에서 골라 완성하시오.') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
+    <div class="grid2">
     {% for q in pg.paraphrase %}
     <div class="q-card">
       {{ qhead(q) }}
@@ -159,6 +167,7 @@
       {% if reveal %}<div class="exp"><b>원문</b> {{ q.original }}{% if q.explanation %}<br>{{ q.explanation }}{% endif %}</div>{% endif %}
     </div>
     {% endfor %}
+    </div>
   {% endfor %}
   </div>
 
@@ -168,6 +177,7 @@
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
     {% if pg.passage %}<div class="reading">{{ pg.passage }}</div>{% endif %}
+    <div class="grid2">
     {% for q in pg.qa %}
     <div class="q-card">
       {{ qhead(q) }}
@@ -178,6 +188,7 @@
       {% else %}<div class="ans-box">➜</div>{% endif %}
     </div>
     {% endfor %}
+    </div>
   {% endfor %}
   </div>
 {% endmacro %}
