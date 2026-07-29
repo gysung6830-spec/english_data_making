@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, workbook_render, blanks_render, blanks_schemas
+from src import extract, pipeline
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -111,12 +111,11 @@ INDEX_HTML = """
              {{ 'readonly' if has_key else '' }}>
       {% if has_key %}<div class=hint>.env에 저장된 키가 있어 자동으로 사용됩니다.</div>{% endif %}
 
-      <label>③ 산출물 종류 <span class=hint>(원하는 것을 모두 선택)</span></label>
+      <label>③ 산출물 <span class=hint>(자동 생성)</span></label>
       <div class=kinds>
         <label class=kind><input type=checkbox name=kinds value=workbook checked> 통합 워크북 <span class=hint>(단일유형·빈칸 포함)</span></label>
-        <label class=kind><input type=checkbox name=kinds value=blanks> 빈칸 워크북만 <span class=hint>(단독)</span></label>
       </div>
-      <div class=hint>※ 통합 워크북을 선택하면 한 파일에 <b>통합 카드 → 단일 유형 → 빈칸 워크북</b> 순서로 모두 담깁니다.</div>
+      <div class=hint>※ 한 파일에 <b>통합 카드 → 단일 유형 → 빈칸 워크북</b> 순서로 모두 담깁니다.</div>
 
       <label>④ 저장할 PDF 파일명
         <span class=hint>(비우면 자동: <b>지문명_워크북</b>)</span>
@@ -232,7 +231,6 @@ def index():
 def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
-    kinds = request.form.getlist("kinds") or ["workbook"]   # 체크박스(복수 선택). 기본: 통합 워크북
     custom = _safe_name((request.form.get("outname") or "").strip()) if (request.form.get("outname") or "").strip() else ""
     single = len(files) == 1
     form_key = (request.form.get("api_key") or "").strip()
@@ -249,23 +247,17 @@ def analyze_route():
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
-    do_workbook = "workbook" in kinds
-    do_blanks = "blanks" in kinds
-    multi_types = (do_workbook + do_blanks) >= 2
-
+    # 산출물은 통합 워크북 하나로 통일(단일 유형·빈칸 워크북 포함). 항상 생성.
     def out_name(stem, type_suffix, default_suffix):
-        """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사.
-        여러 산출물 유형을 함께 뽑을 땐 custom 뒤에 유형 접미사로 구분."""
+        """사용자 지정명(custom) 우선, 없으면 지문명+기본접미사."""
         if custom:
-            b = custom if single else f"{custom}_{stem}"
-            return f"{b}{type_suffix if multi_types else ''}"
+            return custom if single else f"{custom}_{stem}"
         return f"{stem}{default_suffix}"
 
     results = []
     wb_books = []       # 통합 워크북 파일간 합본용
     wb_packs = []       # 단일 유형 산문 워크시트 파일간 합본용
     wb_bsets = []       # 통합 워크북에 포함되는 빈칸형(맨 뒤) 파일간 합본용
-    blank_sets = []     # 빈칸형 단독 출력 파일간 합본용
     n_files_ok = 0      # 산출물을 낸 파일 수(파일간 합본 여부 판단용)
     for f in files:
         ext = Path(f.filename).suffix.lower()
@@ -277,38 +269,23 @@ def analyze_route():
         f.save(str(tmp))
         stem = _safe_name(Path(f.filename).stem)
         try:
-            if do_workbook:
-                # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 + 빈칸형을 만든다.
-                if mock:
-                    wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
-                    packs = [pipeline._mock_prose_pack_for_pdf(cfg, tmp)]
-                    file_bsets = [pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)]
-                else:
-                    wbs, packs, file_bsets = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
-                out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-                # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북(맨 뒤)을 한 PDF 로
-                pipeline.render_workbook_with_prose_pdf(
-                    wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
-                    blank_wb=pipeline._build_blank_workbook(file_bsets))
-                wb_books.extend(wbs)
-                wb_packs.extend(packs)
-                wb_bsets.extend(file_bsets)
-                results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편)",
-                                "ok": True, "out": out.name})
-            # 빈칸형 '단독' 출력은 통합 워크북을 안 뽑을 때만(통합 선택 시 이미 맨 뒤에 포함됨)
-            if do_blanks and not do_workbook:
-                file_sets = ([pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)] if mock
-                             else pipeline.build_blank_sets_for_pdf(client, cfg, tmp))
-                for idx, st in enumerate(file_sets, start=1):
-                    st.no = idx
-                bwb = blanks_schemas.build_blank_workbook(
-                    blanks_schemas.LLMBlankWorkbook(sets=file_sets),
-                    title=file_sets[0].title, subtitle=file_sets[0].subtitle)
-                out = OUTPUT_DIR / f"{out_name(stem, '_빈칸', '_빈칸워크북')}.pdf"
-                blanks_render.render_blanks_pdf(bwb, out, footer_note=cfg.design.footer_note)
-                blank_sets.extend(file_sets)
-                results.append({"name": f"{f.filename} · 빈칸형 (지문 {len(file_sets)}편)",
-                                "ok": True, "out": out.name})
+            # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 + 빈칸형을 만든다.
+            if mock:
+                wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
+                packs = [pipeline._mock_prose_pack_for_pdf(cfg, tmp)]
+                file_bsets = [pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)]
+            else:
+                wbs, packs, file_bsets = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
+            out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
+            # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북(맨 뒤)을 한 PDF 로
+            pipeline.render_workbook_with_prose_pdf(
+                wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
+                blank_wb=pipeline._build_blank_workbook(file_bsets))
+            wb_books.extend(wbs)
+            wb_packs.extend(packs)
+            wb_bsets.extend(file_bsets)
+            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편)",
+                            "ok": True, "out": out.name})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
@@ -317,7 +294,7 @@ def analyze_route():
             tmp.unlink(missing_ok=True)
 
     # 파일이 '2개 이상'일 때만 파일들을 하나로 합친 합본 추가(단일 파일은 이미 지문별로 다 들어감)
-    if do_workbook and n_files_ok >= 2 and len(wb_books) >= 2:
+    if n_files_ok >= 2 and len(wb_books) >= 2:
         try:
             combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
             pipeline.render_workbook_with_prose_pdf(
@@ -327,21 +304,6 @@ def analyze_route():
         except Exception as e:
             traceback.print_exc()
             results.append({"name": "📚 통합 합본", "ok": False, "error": str(e)})
-
-    # 빈칸형 단독: 파일 2개 이상일 때만 파일간 합본 추가(통합 워크북 선택 시엔 이미 포함됨)
-    if do_blanks and not do_workbook and n_files_ok >= 2 and len(blank_sets) >= 2:
-        try:
-            for idx, st in enumerate(blank_sets, start=1):
-                st.no = idx
-            bwb = blanks_schemas.build_blank_workbook(
-                blanks_schemas.LLMBlankWorkbook(sets=blank_sets),
-                title="빈칸 워크북", subtitle="유형 B 지문 빈칸 · 유형 A 요약문 빈칸")
-            combined = OUTPUT_DIR / f"{(custom + '_빈칸합본') if custom else '빈칸워크북_합본'}.pdf"
-            blanks_render.render_blanks_pdf(bwb, combined, footer_note=cfg.design.footer_note)
-            results.append({"name": "📚 빈칸형 합본", "ok": True, "out": combined.name})
-        except Exception as e:
-            traceback.print_exc()
-            results.append({"name": "📚 빈칸 합본", "ok": False, "error": str(e)})
 
     n_ok = sum(1 for r in results if r["ok"])
     return render_template_string(RESULT_HTML, results=results,
