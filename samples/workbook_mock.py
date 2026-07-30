@@ -32,7 +32,7 @@ def mock_llm_workbook() -> ws.LLMWorkbook:
             no=2,
             en_template=(
                 "Designers {{Q4}} welcome early feedback often avoid costly revisions, "
-                "{{Q5}} those who resist {{Q9}} repeat the same {{Q6}} mistakes."
+                "{{Q5}} those who resist it {{Q9}} repeat the same {{Q6}} mistakes."
             ),
             ko="초기 피드백을 반기는 디자이너들은 값비싼 수정을 자주 피하는 반면, 그것에 저항하는 사람들은 똑같이 피할 수 있었던 실수를 반복한다.",
             questions=[
@@ -41,7 +41,7 @@ def mock_llm_workbook() -> ws.LLMWorkbook:
                 ws.LLMQuestion(id="Q5", type="conj", display="[ while / because ]",
                                answer="while", reason="앞뒤 대조(양보) 흐름 — 인과의 because 는 반대"),
                 ws.LLMQuestion(id="Q9", type="ref",
-                               display="it = [ early feedback / costly revisions / designers ]",
+                               display="= [ early feedback / costly revisions / designers ]",
                                answer="early feedback", reason="it = 앞의 early feedback(초기 피드백)을 가리킴"),
                 ws.LLMQuestion(id="Q6", type="adj", display="[ inevitable / avoidable / preventable ]",
                                answer="avoidable / preventable",

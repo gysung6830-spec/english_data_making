@@ -41,11 +41,14 @@ _RULES = """[다섯 가지 출제 유형]
    display 예: "〈 how / the current medical environment / each type of user / experiences 〉"
    answer 예: "how each type of user experiences the current medical environment"
 6) 대명사 지칭(type=ref) → 지문 속 대명사·지시어(it, they, them, this, that, those 등)가
-   '무엇을 가리키는지'를 고르게 한다. 문장 속 대명사는 그대로 두고, 그 뒤에 = 와 함께 보기를 제시한다.
+   '무엇을 가리키는지'를 고르게 한다.
+   ★ 그 대명사를 '문장에 그대로 남겨 두고', 대명사 '바로 뒤'에 {{Qn}} 자리표시자를 넣는다
+     (대명사를 지우고 {{Qn}} 으로 대체하지 말 것 — 그러면 문장에서 대명사가 사라진다).
+   ★ display 는 '= [ 후보 / 후보 / 후보 ]' 형식이며, 대명사는 문장에 이미 있으므로 display 에는 다시 쓰지 않는다.
    보기는 지문에서 실제로 가리킬 수 있는 후보(정답 1 + 그럴듯한 오답 2)를 지문의 표현으로 넣는다.
-   display 형식: "대명사 = [ 후보 / 후보 / 후보 ]"  (en_template 에서는 그 대명사 자리에 {{Qn}} 을 둔다)
-   display 예: "they = [ teenagers / researchers / reactions ]"  answer 예: "teenagers"
-   reason 예: "they = 앞 문장의 teenagers 를 받음"
+   en_template 예: "..., those who resist it {{Q9}} repeat the same mistakes."  (대명사 it 뒤에 {{Q9}})
+   display 예: "= [ early feedback / costly revisions / designers ]"  answer 예: "early feedback"
+   reason 예: "it = 앞의 early feedback 를 받음"
 
 [문장 완전성 — 매우 중요]
 - 지문을 '마침표(.)/물음표(?)/느낌표(!)' 기준의 온전한 문장 단위로만 나눈다. 절·구 단위로
@@ -53,6 +56,9 @@ _RULES = """[다섯 가지 출제 유형]
 - 각 en_template 은 해당 문장의 '첫 단어부터 끝 문장부호까지' 원문을 '한 글자도 빠뜨리지 말고'
   그대로 담는다(자리표시자로 바뀐 부분만 예외). 예: "Conservation aims to keep an object in its
   present state, to {{Q1}} it from change, ..." 처럼 문장 첫머리부터 포함한다.
+  ★ 자리표시자로 바꾸지 않는 단어(부사·수식어 등)도 하나도 빠뜨리지 말 것.
+    예: "have been closely related" 를 낼 때 부사 'closely' 를 빠뜨리고 "{{Q1}} {{Q2}} related"
+    처럼 쓰면 안 된다. 반드시 "{{Q1}} {{Q2}} closely related" 로 남긴다.
 - 지문의 모든 문장을 '등장 순서대로 빠짐없이' 낸다. (출제할 요소가 전혀 없는 문장은 questions 를
   빈 배열로 두더라도 문장 자체는 그대로 실어 지문이 온전히 보이게 한다.)
 
