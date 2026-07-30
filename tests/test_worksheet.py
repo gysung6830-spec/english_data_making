@@ -416,6 +416,24 @@ def _mk_analysis(sent_texts):
     return Analysis(title_en="T", sentences=sents)
 
 
+def test_clean_passage_keeps_numbered_sentences():
+    # 회귀: 해석연습 WORKBOOK 처럼 지문 문장에 '1. 2.' 번호가 붙으면, 예전엔
+    # clean_text 가 그 줄(문장 앞부분)을 통째로 지워 조각만 남았다. 이제 보존해야 함.
+    from src import extract
+    raw = ("- 14 -\n"
+           "1. Ever since the early Enlightenment, preservation and conservation were related.1)\n"
+           "2. Taken as near synonyms, their meaning is to maintain an object\n"
+           "in its present state, to protect it from change.2)\n")
+    out = extract.clean_passage_text(raw)
+    # 문장 앞부분(주어·동사)이 보존돼야 함
+    assert "Taken as near synonyms, their meaning is to maintain an object" in out
+    assert "Ever since the early Enlightenment" in out
+    assert "- 14 -" not in out                 # 페이지 마커 제거
+    assert "1)" not in out and "2)" not in out  # 각주 표시 제거
+    assert not any(ln.strip().startswith(("1.", "2.")) for ln in out.splitlines())  # 문장 번호 제거
+    print("PASS  워크시트 정제: 번호 붙은 지문 문장 보존")
+
+
 def test_fragment_quality_guard():
     from src.worksheet import quality
 
@@ -525,6 +543,7 @@ def run_all():
     test_render_b_from_literal()
     test_webapp_worksheet_flow()
     test_hwp_support()
+    test_clean_passage_keeps_numbered_sentences()
     test_fragment_quality_guard()
     test_raw_text_fragmented()
     test_vision_fallback_pdf()

@@ -103,6 +103,37 @@ def extract_passage_text(pdf_path: str | Path) -> str:
     return clean_text(strip_korean_keep_english(extract_raw_text(pdf_path)))
 
 
+# 페이지 마커 "- 14 -", 지문 문장 번호 "1. "/"2) ", 각주 표시 "…use.2)"
+_PAGE_MARK_RE = re.compile(r"^\s*-+\s*\d{1,4}\s*-+\s*$")
+_LEAD_NUM_RE = re.compile(r"^\s*\d{1,3}\s*[.)]\s+")
+_FOOTNOTE_RE = re.compile(r"(?<!\()\b\d{1,3}\)")
+
+
+def clean_passage_text(raw: str) -> str:
+    """워크시트용 1차 정제 — '번호 매겨진 지문 문장'을 보존한다.
+
+    6섹션용 clean_text 는 '1. 2.'로 시작하는 줄을 '객관식 문항'으로 보고 통째로
+    지운다. 그러나 해석연습 WORKBOOK 처럼 '지문 문장'마다 번호가 붙는 자료에서는
+    그 줄이 문장의 앞부분(주어·동사)이라 지우면 안 된다. 여기서는 줄을 지우지 않고
+    앞의 문장 번호와 각주 표시(1) 2) …)만 떼어낸다. 실제 문제/보기/해설 제거는
+    뒤따르는 LLM 지문 추출이 담당한다.
+    """
+    kept: list[str] = []
+    for line in raw.splitlines():
+        s = line.rstrip()
+        if not s.strip():
+            kept.append("")
+            continue
+        if _SHORT_NOISE.match(s) or _PAGE_MARK_RE.match(s):
+            continue
+        s = _LEAD_NUM_RE.sub("", s)     # 문장 앞 번호 "1. " 제거(줄은 보존)
+        s = _FOOTNOTE_RE.sub("", s)     # 각주 표시 "2)" 제거
+        kept.append(s.rstrip())
+    text = "\n".join(kept)
+    text = re.sub(r"\n{3,}", "\n\n", text).strip()
+    return text
+
+
 # ---------------------------------------------------------------------------
 # HWP / HWPX 텍스트 추출
 # ---------------------------------------------------------------------------
@@ -222,7 +253,7 @@ def extract_passage_text_any(src: str | Path) -> str:
     """
     src = Path(src)
     raw = extract_hwp_text(src) if is_hwp(src) else extract_raw_text(src)
-    return clean_text(strip_korean_keep_english(raw))
+    return clean_passage_text(strip_korean_keep_english(raw))
 
 
 def looks_empty(text: str) -> bool:

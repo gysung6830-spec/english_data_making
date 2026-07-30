@@ -54,7 +54,9 @@ def split_by_punct(text: str) -> list[str]:
         if ch in ".!?":
             # 다음 유의미 문자
             j = i + 1
-            while j < n and text[j] in ".!?\"')]”’":
+            # 종결부호 바로 뒤 닫는 따옴표/괄호는 문장에 붙인다. 교재 조판이 따옴표를
+            # 뒤집어 쓰는 경우(”...“)가 있어 U+201C(“)도 '공백 없이 붙었을 때만' 포함.
+            while j < n and text[j] in ".!?\"')]”’“":
                 buf.append(text[j])
                 j += 1
             rest = text[j:]
