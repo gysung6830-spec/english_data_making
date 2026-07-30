@@ -53,6 +53,23 @@ def test_clean_keeps_circled_sentences():
     print("PASS  한줄해석 ①②③ 문장 유지(짧은 보기만 제거)")
 
 
+def test_clean_keeps_numbered_sentences():
+    # '해석 연습' 워크시트: 문장이 '1.' '2.' 로 시작하고 끝에 각주 '1)' 이 붙는 형식.
+    # 문장 앞부분(번호 줄)을 지우면 안 되고, 번호·각주만 떼고 본문을 온전히 유지해야 한다.
+    raw = (
+        "1. Ever since the early Enlightenment, preservation and conservation have been closely related.1)\n"
+        "2. Taken as near synonyms, their meaning is to maintain an object in its present state.2)\n"
+        "5. as protectors.\n"          # 짧은 조각(보기성) → 제거
+        "- 14 -\n"                       # 페이지 번호 → 제거
+    )
+    cleaned = extract.clean_text(raw)
+    assert "Ever since the early Enlightenment, preservation and conservation" in cleaned
+    assert "Taken as near synonyms, their meaning is to maintain an object" in cleaned
+    assert ".1)" not in cleaned and ".2)" not in cleaned   # 각주 제거
+    assert "- 14 -" not in cleaned                          # 페이지 번호 제거
+    print("PASS  번호 매긴 지문 문장 유지(번호·각주만 제거, 앞부분 보존)")
+
+
 # ---- 2. 스키마 검증: 문법은 비어있지 않으면 개수 제한 없음 -------------------
 def test_grammar_non_empty():
     try:
@@ -126,6 +143,7 @@ def test_render_html():
 def run_all():
     test_clean_removes_noise()
     test_clean_keeps_circled_sentences()
+    test_clean_keeps_numbered_sentences()
     test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()

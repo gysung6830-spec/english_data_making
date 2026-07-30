@@ -19,8 +19,9 @@ def _q(qid, typ="verb", display="(be)", answer="is", reason="r"):
     return ws.LLMQuestion(id=qid, type=typ, display=display, answer=answer, reason=reason)
 
 
-# ---- 1. 1:1 대응 검증 ------------------------------------------------------
-def test_placeholder_one_to_one():
+# ---- 1. 자리표시자/questions 개수 불일치 관용 처리 -------------------------
+def test_placeholder_mismatch_tolerated():
+    from src.workbook_render import render_sentence
     # 정상: 자리표시자와 questions 가 정확히 대응
     ok = ws.LLMWorkbook(sentences=[
         ws.LLMSentence(no=1, en_template="A {{Q1}} B {{Q2}} C", ko="가나다",
@@ -28,17 +29,27 @@ def test_placeholder_one_to_one():
     ])
     ws.validate_llm_workbook(ok)  # 예외 없어야 함
 
-    # 비정상: questions 에 있는 Q2 가 템플릿에 없음
-    bad = ws.LLMWorkbook(sentences=[
+    # 불일치(LLM 이 {{Q}} 를 빠뜨림): questions 는 1개인데 자리표시자 0개 → 실패시키지 않음
+    miss = ws.LLMWorkbook(sentences=[
         ws.LLMSentence(no=1, en_template="A {{Q1}} B", ko="가",
-                       questions=[_q("Q1"), _q("Q2")]),
+                       questions=[_q("Q1")]),
+        ws.LLMSentence(no=2, en_template="No placeholder here.", ko="나",
+                       questions=[_q("Q2")]),   # 자리표시자 없음(0) vs questions(1)
     ])
-    try:
-        ws.validate_llm_workbook(bad)
-        assert False, "1:1 위반인데 통과하면 안 됨"
-    except ValueError:
-        pass
-    print("PASS  자리표시자 ↔ questions 1:1 대응 검증")
+    ws.validate_llm_workbook(miss)               # 예외 없어야 함(관용)
+    wb = ws.build_workbook(miss, title="T", subtitle="S")
+    # 문장2 는 자리표시자가 없어 그 문항은 조용히 생략되고, 문장은 온전히 남는다
+    assert wb.sentences[1].en_template == "No placeholder here."
+    assert wb.total == 1                          # 짝지어진 문항만 채번
+
+    # 남는 자리표시자({{Q9}})는 렌더에서 노출되지 않는다
+    leak = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="A {{Q1}} B {{Q9}} C", ko="가",
+                       questions=[_q("Q1")])])
+    wb2 = ws.build_workbook(leak, title="T", subtitle="S")
+    out = str(render_sentence(wb2.sentences[0]))
+    assert "{{Q9}}" not in out and "{{" not in out
+    print("PASS  자리표시자/questions 개수 불일치 관용 처리(+누출 없음)")
 
 
 # ---- 2. id 불일치 자동 정렬(등장 순서) --------------------------------------
@@ -173,7 +184,7 @@ def test_multi_passage_layout():
 
 
 def run_all():
-    test_placeholder_one_to_one()
+    test_placeholder_mismatch_tolerated()
     test_id_mismatch_repair()
     test_empty_questions_kept()
     test_order_display_format()

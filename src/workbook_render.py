@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -48,6 +49,8 @@ def render_sentence(s: Sentence) -> Markup:
     html = str(escape(s.en_template))   # 브레이스는 escape 대상이 아니므로 {{Qn}} 은 그대로 남는다
     for q in s.questions:
         html = html.replace("{{" + q.id + "}}", _chunk_html(q))
+    # 짝이 없어 남은 자리표시자({{Qn}})가 그대로 노출되지 않도록 제거
+    html = re.sub(r"\{\{\s*Q\w+\s*\}\}", "", html)
     return Markup(html)
 
 

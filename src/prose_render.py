@@ -125,21 +125,10 @@ def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) 
 
 
 def validate_llm_prose(llm: LLMProsePack) -> None:
-    """각 유형 template 의 자리표시자 수와 items 수가 일치하는지 검증."""
+    """산문 워크시트 응답 검증. 자리표시자 수와 items 수가 달라도 build 가 '등장 순서'로
+    가능한 만큼만 짝지어 렌더하므로 실패시키지 않는다(문장만 비어 있으면 재요청)."""
     if not llm.sentences:
         raise ValueError("산문 워크시트 문장이 비어 있습니다.")
-    for s in llm.sentences:
-        for tkey, ikey in (("grammar_template", "grammar_items"),
-                           ("form_template", "form_items"),
-                           ("vocab_template", "vocab_items")):
-            t = getattr(s, tkey)
-            if not t:
-                continue
-            n_ph = len(placeholders_in(t))
-            n_it = len(getattr(s, ikey))
-            if n_ph != n_it:
-                raise ValueError(
-                    f"문장 {s.no} {tkey}: 자리표시자 수({n_ph})와 items 수({n_it})가 다릅니다.")
 
 
 # ── 렌더 ─────────────────────────────────────────────────────────────
@@ -159,12 +148,15 @@ def _item_html(it: PItem, wtype: str) -> str:
 
 
 def render_prose(s: PSentence, wtype: str) -> Markup:
+    import re
     html = str(escape(s.template))
     by_id = {it.id: it for it in s.items}
     for pid in placeholders_in(s.template):
         it = by_id.get(pid)
         if it:
             html = html.replace("{{" + pid + "}}", _item_html(it, wtype))
+    # 짝이 없어 남은 자리표시자가 그대로 노출되지 않도록 제거
+    html = re.sub(r"\{\{\s*\w+\s*\}\}", "", html)
     return Markup(html)
 
 

@@ -13,19 +13,29 @@ def _set():
     return mock_blank_set()
 
 
-# ---- 1. 자리표시자 1:1 검증 ------------------------------------------------
-def test_placeholder_validation():
+# ---- 1. 자리표시자/blanks 개수 불일치 관용 처리 ---------------------------
+def test_placeholder_mismatch_tolerated():
     st = _set()
     bs.validate_llm_blank_workbook(bs.LLMBlankWorkbook(sets=[st]))  # 정상
-    # 요약문 자리표시자 하나 제거 → 실패해야 함
+    # 요약문 자리표시자 하나 제거해도(개수 불일치) 실패시키지 않고 build 가 처리
     bad = _set()
     bad.summary_template = bad.summary_template.replace("{{S5}}", "isolation")
+    bs.validate_llm_blank_workbook(bs.LLMBlankWorkbook(sets=[bad]))  # 예외 없어야 함
+    wb = bs.build_blank_workbook(bs.LLMBlankWorkbook(sets=[bad]), title="T", subtitle="S")
+    html = render_summary(wb.sets[0])
+    assert "{{" not in str(html)          # 남은 자리표시자 노출 없음
+    # 빈칸이 하나도 없으면 재요청되도록 실패
+    empty = _set()
+    empty.sentences = []
+    empty.summary_template = "no blanks"
+    empty.summary_blanks = []
     try:
-        bs.validate_llm_blank_workbook(bs.LLMBlankWorkbook(sets=[bad]))
-        assert False, "1:1 위반인데 통과"
+        bs.validate_llm_blank_workbook(bs.LLMBlankWorkbook(sets=[empty]))
+        raised = False
     except ValueError:
-        pass
-    print("PASS  자리표시자 1:1 검증")
+        raised = True
+    assert raised
+    print("PASS  자리표시자/blanks 개수 불일치 관용(+빈칸 전무 시 실패)")
 
 
 # ---- 2. 전역 연속 채번(지문→요약) + 단어뱅크 --------------------------------
@@ -66,7 +76,7 @@ def test_html():
 
 
 def run_all():
-    test_placeholder_validation()
+    test_placeholder_mismatch_tolerated()
     test_numbering_and_wordbank()
     test_blank_render()
     test_html()

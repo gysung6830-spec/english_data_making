@@ -28,19 +28,32 @@ def is_hwp(path: str | Path) -> bool:
 
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
-    re.compile(r"^\s*\(?[1-9]\d?\)?\s*[.)]\s"),         # 1) 2. 등 번호 문항
     re.compile(r"^\s*(정답|해설|풀이|어휘|해석|출제|답)\s*[:：)]"),
     re.compile(r"^\s*\[?\s*(정답|해설)\s*\]?"),
     re.compile(r"^\s*(문|문제)\s*\d+"),
     re.compile(r"^\s*[A-E]\)\s"),                       # A) B) 보기
 ]
 
+# 줄 앞머리 번호(1. / 2) / (3)): '해석 연습' 워크시트에서는 '문장 번호',
+# 객관식에서는 '보기'. 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
+_LEADING_NUM = re.compile(r"^\s*\(?([1-9]\d{0,2})\)?\s*[.)]\s+(?P<rest>.+)$")
+
 # 원문자 마커(①②③…): 한줄해석 지문에서는 '문장 번호', 객관식에서는 '보기'.
 # 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
 _CIRCLED = re.compile(r"^\s*[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳]\s*")
 
+# 문장 끝 위첨자 각주 번호(예: "... for use.2)" 의 "2)")를 떼기 위한 패턴
+_FOOTNOTE = re.compile(r'([.!?…”"\'’」])\s*\d{1,3}\)\s*$')
+
+
+def _strip_footnote(s: str) -> str:
+    """문장 끝의 각주 번호(마침표+숫자+")")를 제거한다. 예: 'use.2)' -> 'use.'"""
+    return _FOOTNOTE.sub(r"\1", s)
+
 # 페이지 번호/머리말 같은 짧은 잡음 줄
 _SHORT_NOISE = re.compile(r"^\s*[-–—•·\d\s]{0,4}$")
+# "- 14 -" 같은 페이지 번호 줄
+_PAGE_NUM = re.compile(r"^\s*[-–—]\s*\d{1,4}\s*[-–—]\s*$")
 
 
 def extract_raw_text(pdf_path: str | Path) -> str:
@@ -107,7 +120,7 @@ def clean_text(raw: str) -> str:
         if not s.strip():
             kept.append("")
             continue
-        if _SHORT_NOISE.match(s):
+        if _SHORT_NOISE.match(s) or _PAGE_NUM.match(s):
             continue
         m = _CIRCLED.match(s)
         if m:
@@ -115,11 +128,19 @@ def clean_text(raw: str) -> str:
             if len(rest) < 25:          # 짧으면 객관식 보기로 보고 제거
                 continue
             # 지문 문장이면 마커만 떼고 본문 유지
-            kept.append(rest)
+            kept.append(_strip_footnote(rest))
+            continue
+        mn = _LEADING_NUM.match(s)
+        if mn:
+            rest = mn.group("rest").strip()
+            if len(rest) < 25:          # 짧으면 객관식 보기/목차로 보고 제거
+                continue
+            # '해석 연습' 등 번호 매긴 지문 문장이면 번호만 떼고 본문 유지
+            kept.append(_strip_footnote(rest))
             continue
         if any(p.search(s) for p in _NOISE_PATTERNS):
             continue
-        kept.append(s)
+        kept.append(_strip_footnote(s))
     # 연속 빈 줄 압축
     text = "\n".join(kept)
     text = re.sub(r"\n{3,}", "\n\n", text).strip()

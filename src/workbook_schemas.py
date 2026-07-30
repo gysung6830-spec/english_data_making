@@ -130,16 +130,9 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
         if not s.questions:
             continue
         total_q += len(s.questions)
-        ph = placeholders_in(s.en_template)
-        ids = [q.id for q in s.questions]
-        if len(ph) != len(set(ph)):
-            raise ValueError(f"문장 {s.no}: en_template 에 중복된 자리표시자가 있습니다({ph}).")
-        # 자리표시자 개수와 questions 개수만 맞으면 된다. id 라벨이 어긋나도(전역 연속 번호
-        # 혼동 등) build_workbook 이 '등장 순서'로 자동 정렬하므로 실패시키지 않는다.
-        if len(ph) != len(ids):
-            raise ValueError(
-                f"문장 {s.no}: 자리표시자 수({len(ph)})와 questions 수({len(ids)})가 다릅니다."
-            )
+        # 자리표시자 수와 questions 수가 달라도(예: LLM 이 {{Qn}} 을 안 넣거나 더 넣음)
+        # 전체를 실패시키지 않는다. build_workbook 이 '등장 순서'로 가능한 만큼만 짝지어
+        # 채번하고, 남는 자리표시자/문항은 렌더에서 자연스럽게 정리한다.
         for q in s.questions:
             if q.type == "order":
                 d = q.display.strip()

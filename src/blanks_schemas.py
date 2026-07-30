@@ -128,14 +128,13 @@ class BlankWorkbook:
 # 검증 + 채번 + 단어뱅크 구성
 # ---------------------------------------------------------------------------
 def validate_llm_blank_workbook(wb: LLMBlankWorkbook) -> None:
-    # id 라벨이 어긋나도 개수만 맞으면 build 가 '등장 순서'로 정렬하므로, 개수만 검증한다.
-    for st in wb.sets:
-        for s in st.sentences:
-            if len(placeholders_in(s.en_template)) != len(s.blanks):
-                raise ValueError(
-                    f"세트 {st.no} 문장 {s.no}: 지문 빈칸 자리표시자 수와 blanks 수가 다릅니다.")
-        if len(placeholders_in(st.summary_template)) != len(st.summary_blanks):
-            raise ValueError(f"세트 {st.no}: 요약문 빈칸 자리표시자 수와 summary_blanks 수가 다릅니다.")
+    # 자리표시자 수와 blanks/summary_blanks 수가 달라도 실패시키지 않는다. build 가 '등장
+    # 순서'로 가능한 만큼만 짝지어 채번하고, 남는 자리표시자는 렌더에서 정리한다.
+    # (전체가 비어 빈칸이 하나도 없을 때만 재요청되도록 실패)
+    total = sum(len(s.blanks) for st in wb.sets for s in st.sentences)
+    total += sum(len(st.summary_blanks) for st in wb.sets)
+    if total == 0:
+        raise ValueError("빈칸이 하나도 없습니다.")
 
 
 def _align(order: list[str], items: list):

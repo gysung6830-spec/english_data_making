@@ -31,18 +31,23 @@ def _blank_html(first: str, num: int, css: str) -> str:
             f'<sup class="bn">{num})</sup>')
 
 
+def _strip_placeholders(html: str) -> str:
+    import re
+    return re.sub(r"\{\{\s*\w+\s*\}\}", "", html)
+
+
 def render_bsentence(s: BSentence) -> Markup:
     html = str(escape(s.en_template))
     for b in s.blanks:
         html = html.replace("{{" + b.id + "}}", _blank_html(b.first, b.num, b.css))
-    return Markup(html)
+    return Markup(_strip_placeholders(html))
 
 
 def render_summary(st: BlankSet) -> Markup:
     html = str(escape(st.summary_template))
     for b in st.summary_blanks:
         html = html.replace("{{" + b.id + "}}", _blank_html(b.first, b.num, b.css))
-    return Markup(html)
+    return Markup(_strip_placeholders(html))
 
 
 _env.filters["render_bsentence"] = render_bsentence

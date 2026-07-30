@@ -19,17 +19,24 @@ def _check(name, cond):
     assert cond, name
 
 
-def test_validation_count():
+def test_validation_and_mismatch_tolerated():
+    # 자리표시자 2개 vs items 1개(불일치)라도 실패시키지 않고 build 가 처리한다.
     llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
-        no=1, en="X", ko="엑스",
+        no=1, en="a x b y", ko="엑스",
         grammar_template="a {{P1}} b {{P2}}",
         grammar_items=[pr.LLMProseItem(id="P1", display="[a/b]", answer="a")])])
+    pr.validate_llm_prose(llm)                       # 예외 없어야 함(관용)
+    pack = pr.build_prose_pack(llm, header="H", title="T", subtitle="S")
+    g = next(w for w in pack.worksheets if w.wtype == "grammar")
+    html = str(pr.render_prose(g.sentences[0], "grammar"))
+    _check("남은 자리표시자 노출 없음", "{{" not in html)
+    # 문장이 아예 없으면 재요청되도록 실패
     raised = False
     try:
-        pr.validate_llm_prose(llm)
+        pr.validate_llm_prose(pr.LLMProsePack(sentences=[]))
     except ValueError:
         raised = True
-    _check("자리표시자/items 개수 불일치 검증", raised)
+    _check("문장 전무 시 실패", raised)
 
 
 def test_build_four_worksheets():
@@ -78,7 +85,7 @@ def test_render_html():
 
 
 if __name__ == "__main__":
-    test_validation_count()
+    test_validation_and_mismatch_tolerated()
     test_build_four_worksheets()
     test_form_write_flag()
     test_translate_no_items()
