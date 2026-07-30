@@ -124,21 +124,27 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     else:
         raw = extract.extract_passage_text_any(src)   # PDF · HWP · HWPX
         empty = extract.looks_empty(raw)
-        # 텍스트 레이어가 비었/조각났고 PDF 면, 페이지를 이미지로 렌더해 비전으로 재추출.
-        # (폰트 subset·2단·스캔 등으로 문장 앞부분이 잘려 들어오는 경우 대응)
+        is_pdf = src.suffix.lower() == ".pdf"
+
+        # 1) 텍스트 경로(비어 있지 않을 때)
         pset = None
-        if client is not None and src.suffix.lower() == ".pdf" \
-                and (empty or quality.raw_text_fragmented(raw)):
-            pset = _extract_via_vision_pdf(client, cfg, src)
-        if pset is None:
-            if empty:
-                hint = ("한글(HWP) 문서에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 들어 있으면 "
-                        "그 부분을 사진(JPG/PNG)으로 저장해 넣어 주세요."
-                        if extract.is_hwp(src) else
-                        "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                        "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
-                raise ValueError(hint)
+        if not empty:
             pset = analyze.extract_passages(client, cfg, raw)
+
+        # 2) 텍스트가 비었거나(스캔) 결과가 조각나 보이면 → PDF는 페이지를 이미지로
+        #    렌더해 비전으로 재추출(폰트 subset·2단·스캔 등으로 문장 앞부분이 잘리는 경우).
+        if is_pdf and client is not None and (empty or quality.passages_fragmented(pset)):
+            vpset = _extract_via_vision_pdf(client, cfg, src)
+            if vpset is not None and (pset is None or not quality.passages_fragmented(vpset)):
+                pset = vpset      # 비전 결과가 더 온전할 때만 채택(둘 다 조각이면 유지)
+
+        if pset is None:
+            hint = ("한글(HWP) 문서에서 영어 지문을 찾지 못했습니다. 지문이 이미지로 들어 있으면 "
+                    "그 부분을 사진(JPG/PNG)으로 저장해 넣어 주세요."
+                    if extract.is_hwp(src) else
+                    "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
+                    "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요.")
+            raise ValueError(hint)
 
     is_b = layout.upper() == "B"
     total = len(pset.passages)

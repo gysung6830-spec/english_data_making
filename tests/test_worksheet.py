@@ -447,6 +447,14 @@ def test_raw_text_fragmented():
     frag = ("its present state, to protect it. restorative aspects, restoring things. "
             "as protectors. use, rather than interfering.")
     assert quality.raw_text_fragmented(frag) is True
+
+    # PassageSet 단위 판정: None/조각 → True, 온전 → False
+    from src.schemas import Extraction, PassageSet
+    assert quality.passages_fragmented(None) is True
+    good = PassageSet(passages=[Extraction(title="T", paragraphs=[ok])])
+    bad = PassageSet(passages=[Extraction(title="T", paragraphs=[frag])])
+    assert quality.passages_fragmented(good) is False
+    assert quality.passages_fragmented(bad) is True
     print("PASS  원문 조각남 사전 감지(비전 전환 판단)")
 
 

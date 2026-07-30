@@ -51,6 +51,20 @@ def raw_text_fragmented(raw_text: str) -> bool:
     return lower >= 2 and lower / len(sents) >= 0.4
 
 
+def passages_fragmented(pset) -> bool:
+    """추출된 PassageSet(지문 본문들)이 조각나 보이는지 판단.
+
+    None 이거나 본문들을 이어 봤을 때 소문자 시작 문장이 많으면 True.
+    텍스트 경로 결과가 나쁜지 확인해 비전 재추출로 전환할지 결정하는 데 쓴다.
+    """
+    if pset is None:
+        return True
+    bodies = [getattr(ex, "body", "") or "" for ex in getattr(pset, "passages", []) or []]
+    if not bodies:
+        return True
+    return raw_text_fragmented("\n".join(bodies))
+
+
 def fragment_warning(analyses) -> str | None:
     """여러 Analysis 를 훑어 조각남이 의심되면 사용자용 경고 문구를 반환.
 
