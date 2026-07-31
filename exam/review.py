@@ -10,10 +10,11 @@ PDF 맨 끝 별도 페이지에 모아 준다(해설지 문항에는 배지를 �
 """
 from __future__ import annotations
 
-# 자동 보정 사유(문구는 build 계열이 flags 싱크에 append)
-FIX_ORDER = "자동 보정: 순서 배열 파라미터를 재조정함"
-FIX_INSERT = "자동 보정: 삽입 위치를 지문 내부로 교정함"
-FIX_SNAP = "자동 보정: 영작 정답을 지문 문장으로 스냅함"
+# 검토 항목 문구(교사 점검용) — build 계열이 flags 싱크에 append.
+# '자동 보정' 같은 티가 아니라, 교사가 스스로 점검하는 체크리스트 어투로 적는다.
+FIX_ORDER = "정답 순서 배열 재확인"
+FIX_INSERT = "삽입 문장 위치 재확인"
+FIX_SNAP = "정답 문장 표기 재확인"
 
 # 오답 근거가 '빈약'하다고 볼 최소 글자수(이하이면 근거가 사실상 비어 있음)
 _MIN_REASON = 8
@@ -28,5 +29,5 @@ def weak_distractors(wrong_reasons) -> list[str]:
     weak = [w for w in wrong_reasons
             if len((getattr(w, "text", "") or "").strip()) < _MIN_REASON]
     if weak:
-        return [f"오답 근거 약함: 오답 {len(wrong_reasons)}개 중 {len(weak)}개가 너무 짧음"]
+        return [f"오답 선지 근거 보강 검토 (오답 {len(wrong_reasons)}개 중 {len(weak)}개)"]
     return []

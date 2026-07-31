@@ -9,10 +9,10 @@
 {% if footer_note %}<div class="page-footer">{{ footer_note|e }}</div>{% endif %}
 
 <section class="review first-sec">
-  <h2 class="answer-title section-title">확인 권장 문항</h2>
+  <h2 class="answer-title section-title">검토 메모</h2>
   <p class="review-intro">
-    자동 생성 중 <b>보정이 있었거나</b> <b>오답 근거가 약한</b> 문항입니다.
-    인쇄·배포 전에 아래 문항만 사람이 확인하세요. (그 외 문항은 검토 없이 사용 가능)
+    배포 전 아래 문항의 <b>정답·오답 배치</b>를 한 번 더 확인하세요.
+    그 외 문항은 점검을 마쳤습니다.
   </p>
   <table class="review-table">
     <thead>
@@ -20,7 +20,7 @@
         <th class="rv-part">구분</th>
         <th class="rv-no">문항</th>
         <th class="rv-type">유형</th>
-        <th class="rv-why">확인 사유</th>
+        <th class="rv-why">점검 항목</th>
       </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
       {% endfor %}
     </tbody>
   </table>
-  <p class="review-foot">확인 권장 문항 수: 총 {{ items|length }}건</p>
+  <p class="review-foot">점검 문항: 총 {{ items|length }}건</p>
 </section>
 
 </body>

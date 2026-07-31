@@ -613,7 +613,7 @@ def test_error_reduction_settings() -> None:
 
 
 def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None:
-    """'확인 권장 문항': 자동 보정·오답 근거 약함을 잡아 맨 끝 별도 페이지로 모은다."""
+    """검토 메모: 자동 점검이 필요한 문항을 맨 끝 별도 페이지로 모은다."""
     from pypdf import PdfReader
 
     from exam import review
@@ -648,15 +648,15 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     items = renderer.collect_review(ps, start=1)
     assert [it["no"] for it in items] == [1, 3, 14]
 
-    # 4) 교사용이면 맨 끝에 '확인 권장 문항' 페이지가 붙고, 학생용만이면 붙지 않는다
+    # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = renderer.render_pdf(ps, tmp_out / "rv_teacher.pdf")
     r = PdfReader(str(out))
-    assert "확인 권장 문항" in (r.pages[-1].extract_text() or "")
+    assert "검토 메모" in (r.pages[-1].extract_text() or "")
     out_s = renderer.render_pdf(ps, tmp_out / "rv_student.pdf", sections=["student"])
     rs = PdfReader(str(out_s))
     joined = " ".join((pg.extract_text() or "") for pg in rs.pages)
-    assert "확인 권장 문항" not in joined               # 학생용에는 노출 안 함
+    assert "검토 메모" not in joined                     # 학생용에는 노출 안 함
 
     # 5) 플래그가 하나도 없으면 페이지 자체가 없다(정상 문항만 있는 경우)
     clean = demo_passages()
@@ -671,9 +671,9 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     ]
     outm = renderer.render_pdf_multi(parts, tmp_out / "rv_multi.pdf")
     rm = PdfReader(str(outm))
-    titled = [i for i, pg in enumerate(rm.pages) if "확인 권장 문항" in (pg.extract_text() or "")]
+    titled = [i for i, pg in enumerate(rm.pages) if "검토 메모" in (pg.extract_text() or "")]
     assert titled == [len(rm.pages) - 1]                # 오직 마지막 한 장
-    print("✓ 확인 권장 문항(자동 보정·오답 근거 약함) 수집·맨 끝 페이지·합본 통과")
+    print("✓ 검토 메모(점검 문항) 수집·맨 끝 페이지·합본 통과")
 
 
 def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -> None:
