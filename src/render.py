@@ -53,6 +53,42 @@ def _highlight_words(text: str | None, words) -> Markup:
 _env.filters["highlight_words"] = _highlight_words
 
 
+def _highlight_ko(text: str | None, keywords) -> Markup:
+    """한국어 주제 문장 안에서 핵심 키워드(keywords)를 강조 표시.
+
+    한국어는 \b(단어 경계)가 통하지 않으므로 '부분 문자열'로 매칭한다.
+    긴 키워드를 먼저 매칭해 짧은 키워드에 잘리지 않도록 한다.
+    """
+    if not text:
+        return Markup("")
+    kws = sorted({k.strip() for k in (keywords or []) if k and k.strip()},
+                 key=len, reverse=True)
+    if not kws:
+        return escape(text)
+    pattern = re.compile("(" + "|".join(re.escape(k) for k in kws) + ")")
+    out: list[str] = []
+    last = 0
+    for m in pattern.finditer(text):
+        out.append(str(escape(text[last:m.start()])))
+        out.append('<b class="kw">' + str(escape(m.group(0))) + "</b>")
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+_env.filters["highlight_ko"] = _highlight_ko
+
+
+def _split_blocks(text: str | None) -> list[str]:
+    """빈 줄로 구분된 텍스트를 블록 목록으로 나눈다(함축의미 표현별 묶음용)."""
+    if not text:
+        return []
+    return [b for b in re.split(r"\n\s*\n", text.strip()) if b.strip()]
+
+
+_env.filters["split_blocks"] = _split_blocks
+
+
 # 매칭 시 무시할 기능어(내용어만 남겨 어구를 정확히 찾기 위함)
 _STOP_WORDS = {
     "the", "a", "an", "of", "in", "on", "at", "to", "is", "are", "was", "were",

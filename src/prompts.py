@@ -61,7 +61,10 @@ def summary_prompt(title: str, body: str) -> str:
         "- overall: 지문 전체를 관통하는 주제를 담은 한 문장(한국어). 문단별 요약은 하지 마세요.\n"
         "- theme_en: 이 지문의 주제를 나타내는 '짧은 영어 명사구'(3~8단어, 각 단어 첫 글자 대문자). "
         "자료 제목으로 쓰이므로 간결하고 지문 내용을 대표해야 합니다. "
-        "완결된 문장(마침표)이 아니라 명사구로 쓰세요(예: 'The Value of Learning from Failure').\n\n"
+        "완결된 문장(마침표)이 아니라 명사구로 쓰세요(예: 'The Value of Learning from Failure').\n"
+        "- keywords: 위 overall 문장에서 주제의 핵심을 이루는 '가장 중요한 키워드' 2~4개를 고르세요. "
+        "반드시 overall 문장 안에 '있는 그대로'의 표현(부분 문자열)으로 적어야 하며(강조 표시에 사용), "
+        "조사는 빼고 핵심 명사·개념어 위주로 뽑으세요(예: '호기심', '질문하는 태도').\n\n"
         + _passage_block(title, body)
     )
 

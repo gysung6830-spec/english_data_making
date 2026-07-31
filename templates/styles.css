@@ -123,6 +123,11 @@ body {
   font-weight: 800; color: #fff; background: var(--sum);
   font-size: 9px; padding: 1px 7px; border-radius: 9px; margin-right: 5px;
 }
+/* 주제 문장 속 핵심 키워드 강조 */
+.summary-overall .kw {
+  color: #b23b35; background: #fdecea;
+  padding: 0 3px; border-radius: 3px; font-weight: 800;
+}
 
 /* ---------- ⑥ 핵심 단어 영어 요약문 (직독직해와 같은 페이지에 담기도록 컴팩트) ---------- */
 .s-esum { break-inside: avoid; }        /* 요약문 블록이 페이지 사이에서 쪼개지지 않게 */
@@ -155,25 +160,49 @@ table.grid tbody tr:nth-child(even) td { background: #fafafa; }
 .cell-sent { text-align: center; font-weight: 700; color: var(--voc); }
 td.pre { white-space: pre-line; }   /* 줄바꿈(\n)을 그대로 표시 */
 
-/* 함축의미: 원문 표현 + 문맥상 의미 + 영어 정답 표현 + 직역 함정 */
-.im-head { font-weight: 700; margin-top: 3px; }
-.im-head:first-child { margin-top: 0; }
-.im-sub { padding-left: 8px; }
-.im-trap {
-  padding-left: 8px;
-  color: var(--exam);
-  font-weight: 600;
+/* ---------- ③ 출제 포인트 (유형별 카드) ---------- */
+.exam-cards { display: flex; flex-direction: column; gap: 6px; }
+.exam-card {
+  border: 1px solid #e7e3f0; border-left: 3px solid var(--exam);
+  border-radius: 6px; overflow: hidden; break-inside: avoid;
 }
-.im-gap { height: 4px; }
+.ec-head {
+  background: var(--exam-bg); color: var(--exam);
+  font-size: 10px; font-weight: 800; padding: 3px 10px;
+  border-bottom: 1px solid #e7e3f0;
+}
+.ec-body { padding: 5px 10px; font-size: 9px; line-height: 1.5; }
 
-/* 서술형: 원문 문장 + 밑줄에 적는 문법요소 근거 */
-.sv-sent { font-weight: 700; }
-.sv-reason {
-  display: inline-block;
-  margin-top: 2px;
-  color: var(--exam);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+/* 지칭추론: [문장] 대명사 → 가리키는 대상 */
+.ref-line {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px;
+  padding: 2.5px 0; border-bottom: 1px dotted #efeaf6;
+}
+.ref-line:last-child { border-bottom: none; }
+.ref-loc {
+  background: var(--exam); color: #fff; font-size: 8px; font-weight: 800;
+  padding: 0 6px; border-radius: 8px; flex: none;
+}
+.ref-pron {
+  font-weight: 800; color: var(--exam);
+  background: #f2f0f6; border-radius: 3px; padding: 0 5px;
+}
+.ref-arrow { color: var(--muted); font-weight: 700; }
+.ref-target { color: #23272e; }
+
+/* 함축의미: 표현별 블록 */
+.imp-block { padding: 4px 0; border-top: 1px dotted #efeaf6; }
+.imp-block:first-child { padding-top: 0; border-top: none; }
+.imp-expr { font-weight: 700; color: #23272e; margin-bottom: 1px; }
+.imp-mean { padding-left: 10px; color: #374151; }
+.imp-ans { padding-left: 10px; color: var(--exam); font-weight: 600; }
+.imp-trap { padding-left: 10px; color: var(--c-red); font-weight: 700; }
+
+/* 서술형: 원문 문장 + 문법요소 근거(밑줄) */
+.narr-sent { font-weight: 700; color: #23272e; }
+.narr-reason {
+  display: inline-block; margin-top: 3px;
+  color: var(--exam); text-decoration: underline; text-underline-offset: 2px;
   font-weight: 600;
 }
 

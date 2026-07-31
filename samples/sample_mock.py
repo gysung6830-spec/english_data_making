@@ -15,6 +15,7 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         summary=schemas.SummarySection(
             overall="호기심은 학습과 성장의 원동력이므로 교육은 정답 암기보다 질문하는 태도를 길러야 한다.",
             theme_en="The Value of Curiosity in Learning",
+            keywords=["호기심", "학습과 성장의 원동력", "질문하는 태도"],
         ),
         literal=schemas.LiteralSection(sentences=[
             schemas.Sentence(no=1, chunks=[

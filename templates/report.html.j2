@@ -18,7 +18,7 @@
       <span class="sec-title">주제</span>
       <span class="sec-sub">Theme</span>
     </div>
-    <div class="summary-overall">{{ report.summary.overall }}</div>
+    <div class="summary-overall">{{ report.summary.overall | highlight_ko(report.summary.keywords) }}</div>
   </div>
 
   {# ② 지문 구조 분석 (개조식 + 문장번호) #}
@@ -57,43 +57,60 @@
     </ul>
   </div>
 
-  {# ③ '치밀하게 분석한' 출제 포인트 #}
+  {# ③ '치밀하게 분석한' 출제 포인트 (유형별 카드) #}
   <div class="section s-exam">
     <div class="section-head">
       <span class="sec-num">3</span>
       <span class="sec-title">‘치밀하게 분석한’ 출제 포인트</span>
-      <span class="sec-sub">Exam Points</span>
+      <span class="sec-sub">Exam Points{% if brand %} · {{ brand }} tip{% endif %}</span>
     </div>
-    <table class="grid t-exam">
-      <thead><tr><th style="width:130px">출제 유형</th><th>{{ (brand ~ " tip") if brand else "출제 tip" }}</th></tr></thead>
-      <tbody>
-      {% for e in report.exam.items %}
-        <tr>
-          <td class="cell-point">{{ e.question_type }}</td>
-          {% if '서술형' in e.question_type %}
-          <td class="pre">
-            {%- set lines = e.content.split('\n') -%}
-            {%- for ln in lines if ln.strip() -%}
-              {%- if loop.first -%}<span class="sv-sent">{{ ln }}</span>
-              {%- else -%}<br><span class="sv-reason">{{ ln }}</span>{%- endif -%}
+    <div class="exam-cards">
+    {% for e in report.exam.items %}
+      <div class="exam-card{% if '지칭' in e.question_type %} ec-ref{% elif '함축' in e.question_type %} ec-imp{% elif '서술' in e.question_type %} ec-narr{% endif %}">
+        <div class="ec-head">{{ e.question_type }}</div>
+        <div class="ec-body">
+
+        {%- if '지칭' in e.question_type -%}
+          {%- for ln in e.content.split('\n') if ln.strip() -%}
+            {%- set parts = ln.split(' - ') -%}
+            {%- if parts | length >= 3 -%}
+              <div class="ref-line">
+                <span class="ref-loc">{{ parts[0] | trim }}</span>
+                <span class="ref-pron">{{ parts[1] | trim }}</span>
+                <span class="ref-arrow">→</span>
+                <span class="ref-target">{{ (parts[2:] | join(' - ')) | trim | replace('(', '') | replace(')', '') }}</span>
+              </div>
+            {%- else -%}
+              <div class="ref-line"><span class="ref-target">{{ ln | trim }}</span></div>
+            {%- endif -%}
+          {%- endfor -%}
+
+        {%- elif '함축' in e.question_type -%}
+          {%- for block in e.content | split_blocks -%}
+            <div class="imp-block">
+            {%- for ln in block.split('\n') if ln.strip() -%}
+              {%- if '함정' in ln -%}<div class="imp-trap">{{ ln | trim }}</div>
+              {%- elif '정답 표현' in ln -%}<div class="imp-ans">{{ ln | trim }}</div>
+              {%- elif '문맥상' in ln -%}<div class="imp-mean">{{ ln | trim }}</div>
+              {%- else -%}<div class="imp-expr">{{ ln | trim }}</div>{%- endif -%}
             {%- endfor -%}
-          </td>
-          {% elif '함축' in e.question_type %}
-          <td>
-            {%- for ln in e.content.split('\n') -%}
-              {%- if not ln.strip() -%}<div class="im-gap"></div>
-              {%- elif '함정' in ln -%}<div class="im-trap">{{ ln }}</div>
-              {%- elif ln.lstrip().startswith('·') or '문맥상' in ln or '정답 표현' in ln -%}<div class="im-sub">{{ ln }}</div>
-              {%- else -%}<div class="im-head">{{ ln }}</div>{%- endif -%}
-            {%- endfor -%}
-          </td>
-          {% else %}
-          <td class="pre">{{ e.content }}</td>
-          {% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+            </div>
+          {%- endfor -%}
+
+        {%- elif '서술' in e.question_type -%}
+          {%- for ln in e.content.split('\n') if ln.strip() -%}
+            {%- if loop.first -%}<div class="narr-sent">{{ ln | trim }}</div>
+            {%- else -%}<div class="narr-reason">{{ ln | trim }}</div>{%- endif -%}
+          {%- endfor -%}
+
+        {%- else -%}
+          <div class="pre">{{ e.content }}</div>
+        {%- endif -%}
+
+        </div>
+      </div>
+    {% endfor %}
+    </div>
   </div>
 
   {# ④ 핵심 어휘 · 유의어 · 반의어 #}
