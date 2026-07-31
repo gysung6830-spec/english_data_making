@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>확인 권장 문항</title>
+</head>
+<body>
+
+{% if footer_note %}<div class="page-footer">{{ footer_note|e }}</div>{% endif %}
+
+<section class="review first-sec">
+  <h2 class="answer-title section-title">확인 권장 문항</h2>
+  <p class="review-intro">
+    자동 생성 중 <b>보정이 있었거나</b> <b>오답 근거가 약한</b> 문항입니다.
+    인쇄·배포 전에 아래 문항만 사람이 확인하세요. (그 외 문항은 검토 없이 사용 가능)
+  </p>
+  <table class="review-table">
+    <thead>
+      <tr>
+        <th class="rv-part">구분</th>
+        <th class="rv-no">문항</th>
+        <th class="rv-type">유형</th>
+        <th class="rv-why">확인 사유</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in items %}
+      <tr>
+        <td class="rv-part">{{ it.part|e if it.part else "—" }}</td>
+        <td class="rv-no">{{ it.no }}번{% if it.title %}<span class="rv-title"> · {{ it.title|e }}</span>{% endif %}</td>
+        <td class="rv-type">{{ it.label }}</td>
+        <td class="rv-why">
+          {% for r in it.reasons %}<span class="rv-reason">{{ r|e }}</span>{% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="review-foot">확인 권장 문항 수: 총 {{ items|length }}건</p>
+</section>
+
+</body>
+</html>

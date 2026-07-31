@@ -64,7 +64,7 @@ _PROMPTS = {SYNONYM: _PROMPT_SYNONYM, NEGATION: _PROMPT_NEGATION, ORIGINAL: _PRO
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1, method: str = SYNONYM) -> tuple[str, str]:
+             max_retries: int = 1, method: str = SYNONYM) -> tuple[str, str, list[str]]:
     prompt = _PROMPTS.get(method, _PROMPT_SYNONYM)
     out: VocabOut = client.structured(
         system=SYSTEM,
@@ -78,5 +78,6 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     overrides = None
     if out.override_no and out.override_text.strip():
         overrides = {out.override_no - 1: out.override_text}
-    return B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
+    q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
                         overrides=overrides)
+    return q, a, []

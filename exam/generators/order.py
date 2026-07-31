@@ -20,7 +20,7 @@ _PROMPT = """아래 '정본 지문'으로 '순서 배열' 문제를 만드세요
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1) -> tuple[str, str]:
+             max_retries: int = 1) -> tuple[str, str, list[str]]:
     out: OrderOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -29,5 +29,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_tokens=2500,
         max_retries=max_retries,
     )
-    return B.make_order(analysis.sentences, out.given_n, out.block_sizes,
-                        out.display, out.reason)
+    flags: list[str] = []
+    q, a = B.make_order(analysis.sentences, out.given_n, out.block_sizes,
+                        out.display, out.reason, flags=flags)
+    return q, a, flags

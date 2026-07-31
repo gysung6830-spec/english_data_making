@@ -80,8 +80,9 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER])
     for t in TYPE_ORDER:  # 고정 순서로 채워 넣기(수거는 완료순이라도 조립은 순서대로)
-        q, a = results[t]
+        q, a, fl = results[t]
         passage.set_qa(t, q, a)
+        passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
 
     # 생성 단계 검증(7종 완비 · 유형 집합 일치)
     rep = validator.check_passage(passage)

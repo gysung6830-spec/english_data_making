@@ -26,7 +26,7 @@ _PROMPT = """아래 '정본 지문'으로 '서술형' 문제(세 소문항)를 �
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1) -> tuple[str, str]:
+             max_retries: int = 1) -> tuple[str, str, list[str]]:
     out: ShortOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -35,7 +35,8 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_tokens=3500,
         max_retries=max_retries,
     )
-    return B.make_short(
+    flags: list[str] = []
+    q, a = B.make_short(
         analysis.sentences,
         q1_prompt=out.q1_prompt, q1_answer=out.q1_answer,
         q2_prompt=out.q2_prompt, q2_tokens=out.q2_tokens, q2_cues=out.q2_cues,
@@ -43,4 +44,6 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         q3_prompt=out.q3_prompt, q3_before=out.q3_before, q3_mid=out.q3_mid,
         q3_after=out.q3_after, q3_cue_a=out.q3_cue_a, q3_cue_b=out.q3_cue_b,
         q3_ans_a=out.q3_ans_a, q3_ans_b=out.q3_ans_b, q3_reason=out.q3_reason,
+        flags=flags,
     )
+    return q, a, flags

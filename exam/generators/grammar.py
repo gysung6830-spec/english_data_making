@@ -25,7 +25,7 @@ def _extra_validate(out: GrammarOut) -> None:
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1) -> tuple[str, str]:
+             max_retries: int = 1) -> tuple[str, str, list[str]]:
     out: GrammarOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -37,4 +37,5 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     )
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     reasons = {r.no: r.text for r in out.reasons}
-    return B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons)
+    q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons)
+    return q, a, []

@@ -612,6 +612,70 @@ def test_error_reduction_settings() -> None:
     print("✓ 오류 감축 설정(적응형 사고·effort·재시도·기본값) 통과")
 
 
+def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """'확인 권장 문항': 자동 보정·오답 근거 약함을 잡아 맨 끝 별도 페이지로 모은다."""
+    from pypdf import PdfReader
+
+    from exam import review
+    from exam.types import Passage
+
+    # 1) 자동 보정 감지 — flags 싱크에 사유가 담긴다
+    s = DNA.sentences
+    fl: list[str] = []
+    B.make_order(s, given_n=99, block_sizes=[9, 9], display=[7, 7, 7], reason="r", flags=fl)
+    assert review.FIX_ORDER in fl                       # 파라미터 재분배 감지
+    fl2: list[str] = []
+    B.make_insert(s, remove_idx=0, reason="r", flags=fl2)   # 첫 문장 → 내부로 클램프
+    assert review.FIX_INSERT in fl2
+    # 정상 입력이면 보정 플래그가 없다
+    fl3: list[str] = []
+    B.make_order(s, given_n=1, block_sizes=[2, 2, 2], display=[2, 1, 3], reason="r", flags=fl3)
+    assert fl3 == []
+
+    # 2) 오답 근거 약함 — 짧은 근거는 잡고, 충분한 근거는 통과
+    weak = review.weak_distractors([WrongReason(no=1, text="무관"),
+                                    WrongReason(no=3, text="모순"),
+                                    WrongReason(no=4, text="지문 3문장과 배치되어 사실과 반대됨"),
+                                    WrongReason(no=5, text="지문에 언급되지 않은 내용임")])
+    assert weak and "2개" in weak[0]                    # 4개 중 2개가 짧음
+    assert review.weak_distractors([WrongReason(no=1, text="충분히 길고 구체적인 오답 근거입니다")]) == []
+
+    # 3) collect_review — 문서 연속 번호로 정확히 매긴다(순서=1, 주제=3, 2지문 서술형=14)
+    ps = demo_passages()
+    ps[0].flag(TYPE_ORDER[0], [review.FIX_ORDER])       # 1번(순서)
+    ps[0].flag(TYPE_ORDER[2], ["오답 근거 약함: …"])       # 3번(주제)
+    ps[1].flag(TYPE_ORDER[6], [review.FIX_SNAP])        # 14번(서술형)
+    items = renderer.collect_review(ps, start=1)
+    assert [it["no"] for it in items] == [1, 3, 14]
+
+    # 4) 교사용이면 맨 끝에 '확인 권장 문항' 페이지가 붙고, 학생용만이면 붙지 않는다
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    out = renderer.render_pdf(ps, tmp_out / "rv_teacher.pdf")
+    r = PdfReader(str(out))
+    assert "확인 권장 문항" in (r.pages[-1].extract_text() or "")
+    out_s = renderer.render_pdf(ps, tmp_out / "rv_student.pdf", sections=["student"])
+    rs = PdfReader(str(out_s))
+    joined = " ".join((pg.extract_text() or "") for pg in rs.pages)
+    assert "확인 권장 문항" not in joined               # 학생용에는 노출 안 함
+
+    # 5) 플래그가 하나도 없으면 페이지 자체가 없다(정상 문항만 있는 경우)
+    clean = demo_passages()
+    assert renderer.collect_review(clean, start=1) == []
+
+    # 6) 합본(render_pdf_multi): 여러 파트의 권장 문항을 '단 한 장'으로 모은다
+    p1 = demo_passages(); p1[0].flag(TYPE_ORDER[0], [review.FIX_ORDER])
+    p2 = demo_passages(); p2[0].flag(TYPE_ORDER[2], ["오답 근거 약함"])
+    parts = [
+        {"passages": p1, "header_note": "변형문제 1회", "sections": ["teacher", "answers"]},
+        {"passages": p2, "header_note": "변형문제 1회 · 난이도 상", "sections": ["teacher", "answers"]},
+    ]
+    outm = renderer.render_pdf_multi(parts, tmp_out / "rv_multi.pdf")
+    rm = PdfReader(str(outm))
+    titled = [i for i, pg in enumerate(rm.pages) if "확인 권장 문항" in (pg.extract_text() or "")]
+    assert titled == [len(rm.pages) - 1]                # 오직 마지막 한 장
+    print("✓ 확인 권장 문항(자동 보정·오답 근거 약함) 수집·맨 끝 페이지·합본 통과")
+
+
 def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -> None:
     """조건부 Vision OCR: 글자 있는 PDF 는 vision 안 부르고, 빈(스캔) PDF 만 폴백."""
     from exam import ingest
@@ -672,5 +736,6 @@ if __name__ == "__main__":
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
     test_error_reduction_settings()
+    test_review_flags_and_page()
     test_conditional_vision_fallback()
     print("\n모든 오프라인 테스트 통과 ✅")

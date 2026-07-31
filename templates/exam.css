@@ -261,3 +261,46 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 }
 .quick-no { font-weight: 800; color: #2f7d61; font-size: 1.05em; }
 .quick-key { font-weight: 700; }
+
+/* ---------- 확인 권장 문항(맨 끝 별도 페이지) ---------- */
+.review { break-before: page; }
+.review-intro {
+  font-size: 9.5px;
+  color: #444;
+  margin: 0 0 3mm 0;
+  padding: 1.6mm 2.4mm;
+  background: #fbf5ea;                 /* 옅은 주의색(호박) */
+  border: 1px solid #e6d3a3;
+  border-radius: 6px;
+}
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5px;
+}
+.review-table th, .review-table td {
+  border: 1px solid #cfe1d8;
+  padding: 1.4mm 2mm;
+  text-align: left;
+  vertical-align: top;
+  break-inside: avoid;
+}
+.review-table thead th {
+  background: #eef6f2;
+  color: #2f7d61;
+  font-weight: 700;
+}
+.review-table tbody tr:nth-child(even) { background: #f7fbf9; }
+.rv-part { width: 34%; color: #333; }
+.rv-no   { width: 20%; font-weight: 700; white-space: nowrap; }
+.rv-title { font-weight: 400; color: #666; }
+.rv-type { width: 12%; color: #2f7d61; font-weight: 700; }
+.rv-why  { width: 34%; }
+.rv-reason { display: block; }
+.rv-reason + .rv-reason { margin-top: 0.6mm; }
+.review-foot {
+  margin-top: 3mm;
+  font-size: 9px;
+  color: #777;
+  text-align: right;
+}

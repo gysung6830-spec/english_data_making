@@ -19,7 +19,7 @@ _PROMPT = """아래 '정본 지문'으로 '문장 삽입' 문제를 만드세요
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1) -> tuple[str, str]:
+             max_retries: int = 1) -> tuple[str, str, list[str]]:
     out: InsertOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -28,4 +28,6 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_tokens=1500,
         max_retries=max_retries,
     )
-    return B.make_insert(analysis.sentences, out.remove_no - 1, out.reason)
+    flags: list[str] = []
+    q, a = B.make_insert(analysis.sentences, out.remove_no - 1, out.reason, flags=flags)
+    return q, a, flags

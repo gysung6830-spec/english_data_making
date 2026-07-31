@@ -115,22 +115,29 @@ def _even_split(total: int, parts: int) -> list[int]:
 
 
 def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
-               display: list[int], reason: str) -> tuple[str, str]:
+               display: list[int], reason: str,
+               flags: list[str] | None = None) -> tuple[str, str]:
     """given_n: 앞 몇 문장이 '주어진 글' / block_sizes: 나머지를 3덩어리로 /
     display: (A)(B)(C) 가 각각 원래 몇 번째 덩어리(1~3)인지.
 
     LLM 이 문장 수를 잘못 세어 값이 어긋나도 실패하지 않도록 스스로 보정한다.
+    flags(리스트)를 주면, 실제로 보정이 일어났을 때 '확인 권장' 사유를 담아 준다.
     """
+    from . import review as _rv
+
     n = len(sentences)
     if n < 4:
         raise ValueError("순서 문제를 만들기에 문장이 너무 적습니다(4문장 이상 필요).")
 
+    corrected = False
     # given_n: 최소 1, 나머지로 3덩어리를 만들 수 있도록 최대 n-3 으로 보정
     try:
-        given_n = int(given_n)
+        given_val = int(given_n)
     except (TypeError, ValueError):
-        given_n = 1
-    given_n = max(1, min(given_n, n - 3))
+        given_val, corrected = 1, True
+    given_n = max(1, min(given_val, n - 3))
+    if given_n != given_val:
+        corrected = True
     remaining = n - given_n
 
     # block_sizes: 3개·양수·합==remaining 이 아니면 고르게 재분배
@@ -139,10 +146,15 @@ def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
              and sum(block_sizes) == remaining)
     if not valid:
         block_sizes = _even_split(remaining, 3)
+        corrected = True
 
     # display: 1,2,3 의 순열이 아니면 기본값으로 보정
     if sorted(display or []) != [1, 2, 3]:
         display = [2, 1, 3]
+        corrected = True
+
+    if corrected and flags is not None:
+        flags.append(_rv.FIX_ORDER)
 
     rest = sentences[given_n:]
     given = " ".join(sentences[:given_n])
@@ -178,19 +190,25 @@ def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
 # ---------------------------------------------------------------------------
 # ② 문장 삽입
 # ---------------------------------------------------------------------------
-def make_insert(sentences: list[str], remove_idx: int, reason: str) -> tuple[str, str]:
+def make_insert(sentences: list[str], remove_idx: int, reason: str,
+                flags: list[str] | None = None) -> tuple[str, str]:
     """remove_idx: 빼낼 '주어진 문장'의 인덱스(내부 문장: 1 ~ len-2).
 
     LLM 이 첫/마지막 문장 등 범위를 벗어난 번호를 줘도 내부로 보정한다.
+    flags(리스트)를 주면 실제 보정 시 '확인 권장' 사유를 담아 준다.
     """
+    from . import review as _rv
+
     n = len(sentences)
     if n < 3:
         raise ValueError("삽입 문제를 만들기에 문장이 너무 적습니다(3문장 이상 필요).")
     try:
-        remove_idx = int(remove_idx)
+        idx_val = int(remove_idx)
     except (TypeError, ValueError):
-        remove_idx = 1
-    remove_idx = max(1, min(remove_idx, n - 2))   # 내부 문장으로 보정
+        idx_val = 1
+    remove_idx = max(1, min(idx_val, n - 2))   # 내부 문장으로 보정
+    if remove_idx != idx_val and flags is not None:
+        flags.append(_rv.FIX_INSERT)
     given = sentences[remove_idx]
     rest = [s for i, s in enumerate(sentences) if i != remove_idx]
     gaps = len(rest) - 1                                # rest 문장 사이 간격 수
@@ -278,12 +296,18 @@ def make_short(
     q2_prompt: str, q2_tokens: list[str], q2_cues: list[str], q2_answer: str,
     q3_prompt: str, q3_before: str, q3_mid: str, q3_after: str,
     q3_cue_a: str, q3_cue_b: str, q3_ans_a: str, q3_ans_b: str, q3_reason: str,
+    flags: list[str] | None = None,
 ) -> tuple[str, str]:
+    from . import review as _rv
+
     # (2) 영작 정답은 '지문에 실제로 있는 문장 그대로'여야 한다(원래 배열 보장).
     #     정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다.
     snapped = resolve_passage_sentence(q2_answer, q2_tokens, sentences)
     if snapped is None:
         raise ValueError("서술형(2) 영작 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
+    # 정확 일치가 아니라 '유사도 스냅'으로 바뀐 경우만 확인 권장(부호만 다른 경우는 제외).
+    if _norm(snapped) != _norm(q2_answer) and flags is not None:
+        flags.append(_rv.FIX_SNAP)
     q2_answer = snapped
     summary_html = (
         F.esc(q3_before) + F.blank("A", q3_cue_a)

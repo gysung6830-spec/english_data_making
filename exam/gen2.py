@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-from . import analyzer, build2, difficulty, renderer, validator
+from . import analyzer, build2, difficulty, renderer, review, validator
 from ._concurrent import run_parallel
 from .generators import grammar as _grammar_gen
 from .generators.base import context
@@ -143,7 +143,8 @@ def _gen_A(client, analysis, body, max_retries=1):
     out: AOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), AOut,
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
-    return build2.make_A(analysis.sentences, marks, out.answer_no, out.reason, out.choices)
+    q, a = build2.make_A(analysis.sentences, marks, out.answer_no, out.reason, out.choices)
+    return q, a, []
 
 
 def _gen_B(client, analysis, body, max_retries=1):
@@ -156,12 +157,13 @@ def _gen_B(client, analysis, body, max_retries=1):
     # 따옴표·대시 차이로 밑줄이 안 그어지지 않게, 지문 실제 표기로 교정(못 찾으면 원문 유지)
     _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
     phrase = exact or out.phrase
-    return build2.make_B(analysis.sentences, phrase, out.choices, out.answer_no,
+    q, a = build2.make_B(analysis.sentences, phrase, out.choices, out.answer_no,
                          out.reason, wrong)
+    return q, a, review.weak_distractors(out.wrong_reasons)
 
 
 def _gen_C(client, analysis, body, max_retries=1):
-    # 어법(복수정답)은 1회 생성기를 그대로 재사용
+    # 어법(복수정답)은 1회 생성기를 그대로 재사용(이미 (q, a, flags) 형태를 돌려준다)
     return _grammar_gen.generate(client, analysis, body, max_retries=max_retries)
 
 
@@ -172,7 +174,10 @@ def _gen_D(client, analysis, body, max_retries=1):
          "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
                                   max_tokens=1500, max_retries=max_retries, cache_prefix=context(analysis))
-    return build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer, out.reason)
+    flags: list[str] = []
+    q, a = build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer,
+                         out.reason, flags=flags)
+    return q, a, flags
 
 
 def _gen_E(client, analysis, body, max_retries=1):
@@ -187,8 +192,9 @@ def _gen_E(client, analysis, body, max_retries=1):
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
                                   max_tokens=2000, max_retries=max_retries, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
-    return build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
+    q, a = build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
                          out.answer_no, out.reason)
+    return q, a, []
 
 
 def _gen_F(client, analysis, body, max_retries=1):
@@ -205,8 +211,9 @@ def _gen_F(client, analysis, body, max_retries=1):
     if idx is None:
         raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{out.blank_phrase.strip()}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    return build2.make_F(analysis.sentences, idx, phrase, out.choices,
+    q, a = build2.make_F(analysis.sentences, idx, phrase, out.choices,
                          out.answer_no, out.reason, wrong)
+    return q, a, review.weak_distractors(out.wrong_reasons)
 
 
 def _gen_G(client, analysis, body, max_retries=1):
@@ -219,7 +226,8 @@ def _gen_G(client, analysis, body, max_retries=1):
                                   max_tokens=2500, max_retries=max_retries, extra_validate=_extra,
                                   cache_prefix=context(analysis))
     per = {i + 1: t for i, t in enumerate(out.per_stmt)} if out.per_stmt else {}
-    return build2.make_G(analysis.sentences, out.statements, sum(out.matches), out.reason, per)
+    q, a = build2.make_G(analysis.sentences, out.statements, sum(out.matches), out.reason, per)
+    return q, a, []
 
 
 _GENERATORS2 = {A: _gen_A, B: _gen_B, C: _gen_C, D: _gen_D, E: _gen_E, F: _gen_F, G: _gen_G}
@@ -257,8 +265,9 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
     for t in TYPE_ORDER2:
-        q, a = results[t]
+        q, a, fl = results[t]
         passage.set_qa(t, q, a)
+        passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
     validator.check_passage(passage, TYPE_ORDER2)
     return passage
 

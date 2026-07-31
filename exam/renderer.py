@@ -76,6 +76,8 @@ DEFAULT_FOOTER = "ⓒ 2026. 김은아영어연구소. All rights reserved."
 
 # 출력 섹션 키(고정 순서). None 이면 4개 모두.
 SECTION_KEYS = ["student", "teacher", "quick", "answers"]
+# '확인 권장 문항' 페이지는 교사용 산출물일 때만 붙인다(학생용만 뽑으면 숨김).
+_TEACHER_SECTIONS = {"teacher", "quick", "answers"}
 
 
 def _resolve_sections(sections) -> tuple[set, str | None]:
@@ -87,6 +89,26 @@ def _resolve_sections(sections) -> tuple[set, str | None]:
         if not active:                      # 아무것도 안 고르면 전체
             active = list(SECTION_KEYS)
     return set(active), active[0]
+
+
+def collect_review(passages: list[Passage], start: int = 1,
+                   type_order=TYPE_ORDER, labels=TYPE_LABELS,
+                   part_label: str = "") -> list[dict]:
+    """'확인 권장'으로 표시된 문항을 문서 연속 번호와 함께 모은다.
+
+    _blocks 와 '같은 순회 순서·같은 번호 부여 규칙'을 쓰므로 문항 번호가 정확히 일치한다.
+    part_label 은 합본에서 어느 파트(1회/2회·난이도)인지 구분용.
+    """
+    items: list[dict] = []
+    n = start
+    for p in passages:
+        for t in type_order:
+            reasons = getattr(p, "flags", {}).get(t)
+            if reasons:
+                items.append({"no": n, "label": labels[t], "title": p.title,
+                              "part": part_label, "reasons": list(reasons)})
+            n += 1
+    return items
 
 
 def render_html(
@@ -112,6 +134,19 @@ def render_html(
     )
 
 
+def render_review_html(items: list[dict], footer_note: str = DEFAULT_FOOTER) -> str:
+    """'확인 권장 문항'만 모은 마지막 페이지 HTML(독립 문서)."""
+    tmpl = _env.get_template("review.html.j2")
+    return tmpl.render(items=items, footer_note=footer_note)
+
+
+def _write_docs(docs, out_path: Path) -> Path:
+    """여러 WeasyPrint 문서의 페이지를 한 PDF로 병합해 쓴다."""
+    all_pages = [pg for d in docs for pg in d.pages]
+    docs[0].copy(all_pages).write_pdf(str(out_path))
+    return out_path
+
+
 def render_pdf(
     passages: list[Passage],
     out_path: str | Path,
@@ -126,13 +161,22 @@ def render_pdf(
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    active, _ = _resolve_sections(sections)
     html = render_html(passages, header_note=header_note, doc_title=doc_title,
                        start=start, footer_note=footer_note,
                        type_order=type_order, prompts=prompts, labels=labels,
                        sections=sections)
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
-    return out_path
+    docs = [HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])]
+
+    # 교사용 산출물이면, '확인 권장 문항'을 맨 끝 별도 페이지로 덧붙인다.
+    if active & _TEACHER_SECTIONS:
+        items = collect_review(passages, start, type_order, labels)
+        if items:
+            rhtml = render_review_html(items, footer_note)
+            docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+
+    return _write_docs(docs, out_path)
 
 
 def render_pdf_multi(parts: list[dict], out_path: str | Path,
@@ -141,6 +185,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
 
     part = {passages, header_note, type_order, prompts, labels, sections}.
     각 파트는 자체 머리글로 시작하고, 파트 사이는 새 쪽에서 이어진다.
+    모든 파트의 '확인 권장 문항'은 마지막에 단 한 장의 별도 페이지로 모아 붙인다.
     """
     from weasyprint import CSS, HTML  # 지연 임포트(무거움)
 
@@ -149,18 +194,30 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
     css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
 
     docs = []
+    review_items: list[dict] = []
     for part in parts:
+        type_order = part.get("type_order", TYPE_ORDER)
+        labels = part.get("labels", TYPE_LABELS)
+        sections = part.get("sections")
         html = render_html(
             part["passages"],
             header_note=part.get("header_note", ""),
             footer_note=footer_note,
-            type_order=part.get("type_order", TYPE_ORDER),
+            type_order=type_order,
             prompts=part.get("prompts", TYPE_PROMPTS),
-            labels=part.get("labels", TYPE_LABELS),
-            sections=part.get("sections"),
+            labels=labels,
+            sections=sections,
         )
         docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+        # 각 파트의 확인 권장 문항을 파트 라벨과 함께 모은다(교사용 산출물일 때만).
+        active, _ = _resolve_sections(sections)
+        if active & _TEACHER_SECTIONS:
+            review_items += collect_review(
+                part["passages"], 1, type_order, labels,
+                part_label=part.get("header_note", ""))
 
-    all_pages = [pg for d in docs for pg in d.pages]
-    docs[0].copy(all_pages).write_pdf(str(out_path))
-    return out_path
+    if review_items:
+        rhtml = render_review_html(review_items, footer_note)
+        docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+
+    return _write_docs(docs, out_path)

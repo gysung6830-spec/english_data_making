@@ -73,15 +73,20 @@ def locate_phrase(phrase: str, sentences: list[str]):
     return None, None
 
 
-def make_D(sentences, tokens, cues, answer_sentence, reason=""):
+def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장).
-    정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다."""
+    정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다.
+    flags(리스트)를 주면 유사도 스냅이 실제로 일어났을 때 '확인 권장' 사유를 담는다."""
+    from . import review as _rv
+
     for t in tokens:
         if " " in t.strip():
             raise ValueError(f"낱개 단어여야 합니다(구 묶음 금지): '{t}'")
     snapped = B1.resolve_passage_sentence(answer_sentence, tokens, sentences)
     if snapped is None:
         raise ValueError("어순 배열 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
+    if _norm(snapped) != _norm(answer_sentence) and flags is not None:
+        flags.append(_rv.FIX_SNAP)
     return F2.D_q(tokens, cues), F2.D_a(snapped, reason)
 
 
