@@ -17,6 +17,11 @@ _RULES = """[다섯 가지 출제 유형]
    ★ 지문에 나오는 '모든' 동사와 준동사를 '빠짐없이' (원형)으로 제시한다.
      - 정동사(be·have 포함), to부정사, 동명사, 현재/과거분사(분사구문 포함)를 전부 대상으로 한다.
      - 예외: 특수구문(order)으로 어구 전체를 배열시키는 절 안의 동사는 그 order 문항에 포함되므로 중복 출제하지 않는다.
+   ★ 조동사가 결합된 동사구(완료·수동·진행: have been, has been, had been, is being, will be 등)는
+     각 조동사를 '따로따로 빈칸으로 나누지 말고' 대표 동사원형 하나로만 제시한다.
+     특히 'have been / has been / had been' 은 '(be) 하나로만' 내고 정답을 그 완료형 전체로 쓴다.
+     예: "have been closely related" → display "(be)", answer "have been"  (뒤의 related 는 별도 (relate) 문항).
+     (have)+(be) 처럼 둘로 쪼개지 말 것.
    판단: 수일치, 시제, 태(능동/수동), to부정사/동명사/분사, 조동사 뒤 원형, 정동사 vs 준동사.
    display 예: "(react)"  answer 예: "react"
 2) 형용사·부사(type=adj) → [ 원문 / 유의어 / 반의어 ] 3개를 섞어 제시하고 문맥상 알맞은 것을 고르게 한다.
@@ -45,7 +50,11 @@ _RULES = """[다섯 가지 출제 유형]
    ★ 그 대명사를 '문장에 그대로 남겨 두고', 대명사 '바로 뒤'에 {{Qn}} 자리표시자를 넣는다
      (대명사를 지우고 {{Qn}} 으로 대체하지 말 것 — 그러면 문장에서 대명사가 사라진다).
    ★ display 는 '= [ 후보 / 후보 / 후보 ]' 형식이며, 대명사는 문장에 이미 있으므로 display 에는 다시 쓰지 않는다.
-   보기는 지문에서 실제로 가리킬 수 있는 후보(정답 1 + 그럴듯한 오답 2)를 지문의 표현으로 넣는다.
+   ★ 보기(후보)는 '지문에 실제로 나온 명사(구)를 그대로' 넣는다. 정답 1 + 그럴듯한 오답 2.
+     - 괄호 주석·부연 설명을 붙이지 말 것(예: "him(the speaker)" ❌ → 지문의 명사구 그대로).
+     - 후보로 또 다른 대명사(it/they/him 등)를 넣지 말 것. 명사(구)만 후보로 쓴다.
+   ★ 지문 안에 '명확한 명사구 선행사'가 있는 대명사만 출제한다. 가리키는 대상이 대명사뿐이거나
+     모호하면(예: he/his/him 만 이어지는 구간) 그 자리는 지칭으로 내지 말 것.
    en_template 예: "..., those who resist it {{Q9}} repeat the same mistakes."  (대명사 it 뒤에 {{Q9}})
    display 예: "= [ early feedback / costly revisions / designers ]"  answer 예: "early feedback"
    reason 예: "it = 앞의 early feedback 를 받음"

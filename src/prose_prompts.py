@@ -39,6 +39,9 @@ _RULES = """[문장 완전성 — 매우 중요]
    ★ 그 문장에 나오는 '모든 동사·준동사·동명사'를 빠짐없이 (원형)으로 제시한다.
      정동사(be·have 포함), to부정사, 동명사, 현재/과거분사(분사구문 포함)를 전부 대상으로 한다.
      어형 변화가 필요 없어 원형 그대로가 답인 경우도 그대로 낸다(예: 조동사 뒤 원형).
+   ★ 조동사가 결합된 동사구(have been, has been, had been, is being 등)는 조동사를 따로 나누지 말고
+     대표 동사원형 하나로만 낸다. 특히 'have been'류는 '(be) 하나로만' 내고 정답을 완료형 전체로 쓴다.
+     예: "have been related" → "(be)" answer "have been" + 뒤에 "(relate)" answer "related".
    display 예: "(understand)"   answer 예: "understood"   /   display 예: "(produce)" answer 예: "producing"
 3) 어휘 양자택일(vocab) → display = "[ 원문 / 반의어 ]", 정답은 원문 어휘.
    ★ '시험에 나올 만한' 어휘, 특히 '반의어를 내기 좋은'(대조가 뚜렷한) 내용어만 선별한다.
