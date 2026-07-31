@@ -307,16 +307,22 @@ def test_review_flag_from_confidence_and_verbatim():
     assert _flag_reason(it, o3)
 
 
-def test_answer_key_shows_warn_badge():
-    """review_flag 가 있는 문항은 해설지에 ⚠ 확인 권장 배지가 붙는다(문제지엔 없음)."""
-    from mockexam.render.exam import build_answer_html, build_problem_html
+def test_review_flag_collected_on_separate_last_page(tmp_path):
+    """확인 권장 문항은 해설지 인라인이 아니라 맨 끝 별도 페이지에 모아 표시한다."""
+    from mockexam.render.exam import build_answer_html, _review_summary_body, render_exam
 
     res = generate_mock("jinyang_hs", [SAMPLE], difficulty="중", grade=1, client=None)
     res.exam.questions[0].meta["review_flag"] = "정답 유일성 자가점검에서 '주의'로 표시됨"
+    # 해설지 본문에는 인라인 ⚠·주석이 없어야 한다
     ans = build_answer_html(res.exam, {}, footer="")
-    assert "⚠ 확인 권장" in ans and "자동 점검 참고" in ans
-    prob = build_problem_html(res.exam, {}, footer="")
-    assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
+    assert "⚠ 확인 권장" not in ans and "자동 점검 참고" not in ans
+    # 별도 페이지에는 해당 문항이 모여 나온다
+    summary = _review_summary_body(res.exam)
+    assert "확인 권장 문항" in summary and "1번" in summary
+    # 전체 렌더에도 별도 페이지가 마지막에 포함된다
+    out = render_exam(res.exam, tmp_path, header_info={}, footer="", to_pdf=False)
+    doc = out["problem_html"].read_text(encoding="utf-8")
+    assert "확인 권장 문항" in doc
 
 
 def test_pdf_vision_extraction_and_flag_review():

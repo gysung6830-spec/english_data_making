@@ -142,6 +142,14 @@ u {{ text-underline-offset:2px; }}
 .qa-table td.qa {{ font-weight:700; }}
 .qa-essay {{ font-size:9.2pt; line-height:1.6; }}
 .qa-erow {{ margin:2px 0; padding-left:14px; text-indent:-14px; }}
+/* 확인 권장 문항(맨 끝 별도 페이지) */
+.rev-intro {{ font-size:9pt; color:#8a5a00; background:#fff8e1; border:1px solid #ffe08a;
+              border-radius:6px; padding:8px 10px; margin-bottom:10px; }}
+.rev-table {{ width:100%; border-collapse:collapse; font-size:9.2pt; }}
+.rev-table th, .rev-table td {{ border:0.6px solid #bbb; padding:5px 8px; text-align:left;
+              vertical-align:top; }}
+.rev-table th {{ background:#f0f2f5; font-weight:800; }}
+.rev-table td.rv-no {{ font-weight:800; white-space:nowrap; }}
 .trap {{ color:#b00020; }}
 """
 
@@ -414,11 +422,9 @@ def _answer_body(exam: MockExam) -> str:
         diff = DIFFICULTY_KO_REV.get(q.difficulty, "중")
         no = f"{q.no}번" if q.section == "choice" else f"서술형 {q.no}번"
         badge = f"{label} · {diff} · {_fmt_score(q.score)}점"
-        flag = q.meta.get("review_flag") if isinstance(q.meta, dict) else None
-        warn = '<span class="warn">⚠ 확인 권장</span>' if flag else ""
         body.append(f'<div class="ans-item"><div class="ans-head">'
                     f'<span class="ans-no">{no}</span>'
-                    f'<span class="badge">{html.escape(badge)}</span>{warn}</div>')
+                    f'<span class="badge">{html.escape(badge)}</span></div>')
         body.append(f'<div class="ans-line"><span class="a">정답</span> '
                     f'<span class="ansval">{html.escape(_ko_normalize(q.answer))}</span></div>')
         if q.answer_notes:
@@ -426,9 +432,6 @@ def _answer_body(exam: MockExam) -> str:
                 body.append(f'<div class="ans-line">· {html.escape(_ko_normalize(n))}</div>')
         if q.explanation:
             body.append(f'<div class="exp">{_exp_html(q.explanation)}</div>')
-        if flag:
-            body.append(f'<div class="warn-note">※ 자동 점검 참고: {html.escape(flag)} '
-                        '— 정답·선지를 한 번 확인하세요.</div>')
         body.append('</div>')
     body.append('</div></div>')   # .flow, .page 닫기
     return "".join(body)
@@ -437,6 +440,26 @@ def _answer_body(exam: MockExam) -> str:
 def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
     return _wrap("정답 및 해설", _answer_body(exam),
                  footer_note=_footer_note(exam, footer))
+
+
+def _review_summary_body(exam: MockExam) -> str:
+    """확인 권장 문항(⚠)만 PDF 맨 끝 별도 페이지에 모아 정리. 없으면 빈 문자열."""
+    flagged = [q for q in exam.questions
+               if isinstance(q.meta, dict) and q.meta.get("review_flag")]
+    if not flagged:
+        return ""
+    rows = []
+    for q in flagged:
+        no = f"{q.no}번" if q.section == "choice" else f"서술형 {q.no}번"
+        label = TYPE_LABEL_KO.get(q.type, q.type)
+        reason = _ko_normalize(str(q.meta.get("review_flag", "")))
+        rows.append(f'<tr><td class="rv-no">{no}</td><td>{html.escape(label)}</td>'
+                    f'<td>{html.escape(reason)}</td></tr>')
+    return (f'<div class="page">{_section_banner("확인 권장 문항 (검토용)")}'
+            '<div class="rev-intro">아래 문항은 자동 점검에서 정답·선지의 재확인이 '
+            '권장됩니다. 배부 전 한 번 검토하세요. (이 페이지는 교사용 참고 자료입니다.)</div>'
+            '<table class="rev-table"><tr><th>문항</th><th>유형</th><th>확인 사유</th></tr>'
+            + "".join(rows) + '</table></div>')
 
 
 # LLM 이 이따금 섞는 한자(漢字) → 한글 정규화(안전망). 시험지는 한글로만.
@@ -544,6 +567,7 @@ def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
         _problem_body(exam, info, teacher=True, top=teacher_top),
         _quick_answer_body(exam),
         _answer_body(exam),
+        _review_summary_body(exam),   # ⚠ 확인 권장 문항만 맨 끝 별도 페이지
     ]
     title = info.get("exam_title") or f"{exam.blueprint.meta.name} 동형모의고사"
     doc = _wrap(title, "".join(sections), footer_note=_footer_note(exam, footer))
