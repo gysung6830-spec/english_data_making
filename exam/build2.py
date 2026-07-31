@@ -43,6 +43,36 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+# 문장부호 정규화(길이 보존): 굽은 따옴표·대시·비분할공백을 표준형으로.
+_SOFT = str.maketrans({
+    "’": "'", "‘": "'", "ʼ": "'",            # 굽은 작은따옴표
+    "“": '"', "”": '"',                            # 굽은 큰따옴표
+    "—": "-", "–": "-", "‒": "-", "―": "-",  # 대시
+    " ": " ",                                            # nbsp
+})
+
+
+def _soft(s: str) -> str:
+    return s.translate(_SOFT).lower()
+
+
+def locate_phrase(phrase: str, sentences: list[str]):
+    """LLM 어구를 지문에서 찾되, 따옴표·대시 차이를 무시한다.
+
+    반환: (문장 index, '지문 실제 표기의 정확한 부분문자열') / 못 찾으면 (None, None).
+    _soft 는 문자 1:1 치환+소문자라 길이를 보존하므로, 정규화 위치가 원문 위치와 그대로
+    대응한다 → 원문(굽은 따옴표 등)을 그대로 잘라내 빈칸/밑줄 매칭이 어긋나지 않게 한다.
+    """
+    sp = _soft(phrase.strip())
+    if not sp:
+        return None, None
+    for i, s in enumerate(sentences):
+        j = _soft(s).find(sp)
+        if j >= 0:
+            return i, s[j:j + len(sp)]
+    return None, None
+
+
 def make_D(sentences, tokens, cues, answer_sentence, reason=""):
     """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장).
     정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다."""

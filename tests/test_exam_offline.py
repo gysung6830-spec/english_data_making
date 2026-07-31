@@ -276,6 +276,32 @@ def test_arrangement_answer_snap() -> None:
     print("✓ 어순배열 정답 스냅(미세 불일치 교정·무관은 실패) 통과")
 
 
+def test_blank_phrase_punctuation() -> None:
+    """F(빈칸)·B(함의): LLM 어구가 곧은 따옴표/대시라도 지문(굽은 따옴표)에서 찾아
+    지문 실제 표기로 교정되는지. 못 찾으면 (None, None)."""
+    from exam import build2
+    sents = ["As it is easy to misinterpret nonverbal behavior, effective listeners "
+             "verbally confirm their interpretations of someone’s nonverbal "
+             "communication."]
+    # LLM 은 곧은 따옴표 someone's
+    idx, exact = build2.locate_phrase(
+        "verbally confirm their interpretations of someone's nonverbal communication",
+        sents)
+    assert idx == 0
+    assert "’" in exact                      # 지문의 굽은 따옴표로 교정됨
+    # 교정된 어구로 make_F 가 예외 없이 빈칸을 만든다
+    q, _ = build2.make_F(sents, 0, exact, ["c1", "c2", "c3", "c4", "c5"], 2, "r",
+                         {1: "x", 3: "x", 4: "x", 5: "x"})
+    assert "blank-line" in q or "passage" in q
+    # 대시(—↔-)도 무시
+    s2 = ["This is a case—a hard one—for testing dashes here."]
+    _, ex2 = build2.locate_phrase("a case-a hard one-for testing", s2)
+    assert ex2 is not None and "—" in ex2
+    # 전혀 없는 어구는 None
+    assert build2.locate_phrase("totally absent phrase", sents) == (None, None)
+    print("✓ 빈칸/함의 어구 부호(따옴표·대시) 무시 매칭 통과")
+
+
 def test_hwp_ingest() -> None:
     """HWP 인식: (1) .hwpx(ZIP+XML) 추출·정제, (2) .hwp PARA_TEXT 레코드/제어객체 파싱."""
     import io
@@ -565,6 +591,7 @@ if __name__ == "__main__":
     test_pdf_cleaning()
     test_workbook_noise()
     test_arrangement_answer_snap()
+    test_blank_phrase_punctuation()
     test_hwp_ingest()
     test_analyzer_uses_real_passage()
     test_llm_path_wiring()

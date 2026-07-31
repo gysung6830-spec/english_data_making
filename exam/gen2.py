@@ -153,7 +153,10 @@ def _gen_B(client, analysis, body, max_retries=1):
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    return build2.make_B(analysis.sentences, out.phrase, out.choices, out.answer_no,
+    # 따옴표·대시 차이로 밑줄이 안 그어지지 않게, 지문 실제 표기로 교정(못 찾으면 원문 유지)
+    _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
+    phrase = exact or out.phrase
+    return build2.make_B(analysis.sentences, phrase, out.choices, out.answer_no,
                          out.reason, wrong)
 
 
@@ -197,12 +200,10 @@ def _gen_F(client, analysis, body, max_retries=1):
          "한국어.\n\n{ctx}")
     out: FOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), FOut,
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
-    # blank_phrase 가 있는 문장을 찾는다
-    phrase = out.blank_phrase.strip()
-    idx = next((i for i, s in enumerate(analysis.sentences)
-                if phrase.lower() in s.lower()), None)
+    # blank_phrase 가 있는 문장을 찾는다(따옴표·대시 차이 무시, 지문 실제 표기로 교정)
+    idx, phrase = build2.locate_phrase(out.blank_phrase, analysis.sentences)
     if idx is None:
-        raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{phrase}'")
+        raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{out.blank_phrase.strip()}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
     return build2.make_F(analysis.sentences, idx, phrase, out.choices,
                          out.answer_no, out.reason, wrong)
