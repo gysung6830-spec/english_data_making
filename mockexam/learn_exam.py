@@ -123,24 +123,30 @@ def _coerce_type(section: str, t: str) -> str:
 
 
 def extract_blueprint(client: Any, files: list[str | Path], grade: int = 1) -> ExamBlueprintOut:
-    """시험지 파일들에서 blueprint 구조를 LLM 으로 추출한다."""
-    imgs = [f for f in files if Path(f).suffix.lower() in _IMG_EXT]
-    text_files = [f for f in files if f not in imgs]
-    body = "\n\n".join(_read_exam_text(f) for f in text_files).strip()
+    """시험지(문제파일)에서 blueprint 구조를 LLM 으로 추출한다.
+
+    문제파일은 레이아웃이 복잡하므로 PDF/이미지를 'Claude 비전'으로 직접 보여 정확도를
+    높인다(첫 PDF·이미지 1개). 나머지 파일은 텍스트로 첨부한다.
+    """
+    media_exts = _IMG_EXT | {".pdf"}
+    media = next((f for f in files if Path(f).suffix.lower() in media_exts), None)
+    others = [f for f in files if f is not media]
+    body = "\n\n".join(_read_exam_text(f) for f in others).strip()
+    if media is None and not body:                    # 미디어도 텍스트도 없으면 전부 텍스트로
+        body = "\n\n".join(_read_exam_text(f) for f in files).strip()
 
     prompt = (
         f"{TYPE_GUIDE}\n\n"
-        "아래 학교 시험지를 분석하라.\n"
+        "첨부한 학교 시험지(문제파일)를 분석하라.\n"
         "(1) 구조: '모든 문항'의 번호·구분(choice/essay)·유형 코드·배점·발문 문구(stem)를 "
         "추출한다. 선다형과 서술형을 구분하고, 배점 합이 총점과 맞도록 각 문항 배점을 읽는다. "
         "어법·어휘 유형이면 밑줄 개수(대개 5)를 underlines 에 넣는다.\n"
         "(2) 출제원리: 이 학교의 어법 출제 축(grammar_focus), 출제 스타일 특징(style_notes: "
-        "오답 구성·함정·소재·서술형 조건 등), 전반적 난이도(difficulty)를 파악한다.\n\n"
-        f"[학교 시험지 내용]\n{body if body else '(첨부 이미지 참조)'}"
+        "오답 구성·함정·소재·서술형 조건 등), 전반적 난이도(difficulty)를 파악한다.\n"
+        + (f"\n[추가 텍스트]\n{body}" if body else "")
     )
-    image_path = imgs[0] if imgs and not body else None
     return client.structured(SYSTEM, prompt, ExamBlueprintOut, max_retries=2,
-                             image_path=image_path)
+                             image_path=str(media) if media else None)
 
 
 def _build_blueprint(school_id: str, name: str, level: str,

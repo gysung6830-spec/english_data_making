@@ -17,6 +17,33 @@ from .school import archive_exam, load_profile, resolve_profile, save_profile
 from .verify.verifier import VerifyReport, verify
 
 
+def _load_passages(passage_paths: list[str | Path], client: Any) -> list[Passage]:
+    """지문 로드. API 키(client) 있으면 PDF는 Claude 비전으로 추출(텍스트 오류 원천 차단),
+    실패하거나 미리보기(client=None)면 기존 텍스트 추출로 폴백."""
+    if client is None:
+        return load_passages(passage_paths)
+    from .ingest.vision import extract_passages_pdf_vision
+    out: list[Passage] = []
+    for path in passage_paths:
+        if str(path).lower().endswith(".pdf"):
+            try:
+                vp = extract_passages_pdf_vision(client, path)
+                if vp:
+                    out.extend(vp)
+                    continue
+            except Exception:  # noqa: BLE001 - 비전 실패 시 텍스트로 폴백
+                pass
+        out.extend(load_passages([path]))
+    # id 재부여(파일 간 충돌 방지)
+    ci = di = 0
+    for p in out:
+        if p.format_type == "dialogue":
+            di += 1; p.id = f"d{di}"
+        else:
+            ci += 1; p.id = f"p{ci}"
+    return out
+
+
 @dataclass
 class GenResult:
     exam: MockExam
@@ -49,8 +76,8 @@ def generate_mock(
     # [2] blueprint 구성
     blueprint = blueprint_from_profile(profile, grade)
 
-    # [3] 지문 파싱 + 프로파일링
-    passages = load_passages(passage_paths)
+    # [3] 지문 파싱 + 프로파일링 (API 키 있으면 PDF는 비전 추출로 오류 원천 차단)
+    passages = _load_passages(passage_paths, client)
     pmap: dict[str, Passage] = {p.id: p for p in passages}
     profiles = {p.id: profile_passage(p) for p in passages}
 
@@ -126,8 +153,52 @@ def generate_mock(
                 _regen(q_i)
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
+    # [7] 의심문항(⚠)만 2차 검수 — 무인 운영 오류 저감(비용 최소: 플래그 붙은 문항만)
+    if client is not None:
+        _review_flagged(exam, client, ctx, _regen, logs)
+
     return GenResult(exam, blueprint, assignments, report, logs,
                      num_passages=len(passages))
+
+
+def _review_flagged(exam, client, ctx, regen, logs) -> None:
+    """review_flag 가 붙은 의심문항만 2차 LLM 으로 재검수.
+
+    - 검수 통과 → 플래그 해제(오답경보 해소, 해설지 ⚠ 줄어듦)
+    - 검수 실패 → 1회 재생성 후 그래도 의심이면 이유를 플래그에 남김
+    (이미 재시도로 못 채운 '생성 실패' 문항은 대상에서 제외.)
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    from .verify.review import review_question
+
+    def _flagged():
+        return [i for i, q in enumerate(exam.questions)
+                if isinstance(q.meta, dict) and q.meta.get("review_flag")
+                and not str(q.meta["review_flag"]).startswith("생성 실패")]
+
+    idxs = _flagged()
+    if not idxs:
+        return
+
+    def _one(i):
+        ok, issue = review_question(client, exam.questions[i])
+        return i, ok, issue
+
+    with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
+        results = list(ex.map(_one, idxs))
+
+    to_regen = [i for i, ok, _ in results if not ok]
+    passed = [i for i, ok, _ in results if ok]
+    for i in passed:                      # 검수 통과 → 신뢰, 경보 해제
+        exam.questions[i].meta.pop("review_flag", None)
+    for i, ok, issue in results:
+        if not ok:
+            q = exam.questions[i]
+            logs.append({"no": q.no, "section": q.section, "type": q.type,
+                         "note": "review_failed", "issue": issue[:200]})
+    if to_regen:
+        with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
+            list(ex.map(regen, to_regen))
 
 
 # ---------------------------------------------------------------------------

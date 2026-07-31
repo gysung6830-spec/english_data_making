@@ -77,6 +77,19 @@ def image_block(image_path: str | Path) -> dict:
     return {"type": "image", "source": {"type": "base64", "media_type": media, "data": b64}}
 
 
+def document_block(pdf_path: str | Path) -> dict:
+    """PDF 파일 -> base64 document content 블록 (Claude 네이티브 PDF 비전)."""
+    p = Path(pdf_path)
+    b64 = base64.standard_b64encode(p.read_bytes()).decode("utf-8")
+    return {"type": "document",
+            "source": {"type": "base64", "media_type": "application/pdf", "data": b64}}
+
+
+def media_block(path: str | Path) -> dict:
+    """확장자로 PDF(document)·이미지(image) 블록을 자동 선택."""
+    return document_block(path) if Path(path).suffix.lower() == ".pdf" else image_block(path)
+
+
 def _field_type(spec: dict) -> str:
     t = spec.get("type")
     if t == "array":
@@ -113,7 +126,8 @@ def build_request(
     """messages.create 요청 파라미터. 형식은 프롬프트로 안내(구조화 출력 미사용)."""
     full = f"{prompt}\n\n{json_instructions(model_cls)}"
     if image_path is not None:
-        content: Any = [image_block(image_path), {"type": "text", "text": full}]
+        # PDF(document)·이미지(image) 자동 선택
+        content: Any = [media_block(image_path), {"type": "text", "text": full}]
     else:
         content = full
     return {

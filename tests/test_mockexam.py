@@ -319,6 +319,45 @@ def test_answer_key_shows_warn_badge():
     assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
 
 
+def test_pdf_vision_extraction_and_flag_review():
+    """API 키 있으면 PDF는 비전으로 추출하고, 의심문항(⚠)만 2차 검수로 확정한다."""
+    from mockexam.ingest.vision import VisionPassages, VisionPassage
+    from mockexam.core.llm import ChoiceQuestionOut, EssayQuestionOut
+    from mockexam.verify.review import ReviewVerdict
+
+    class VisFake:
+        def structured(self, system, prompt, model_cls, **kw):
+            n = model_cls.__name__
+            if n == "VisionPassages":
+                assert str(kw.get("image_path", "")).endswith(".pdf")  # PDF가 비전으로
+                return VisionPassages(passages=[VisionPassage(
+                    text=("Preservation and conservation have long been linked; both "
+                          "keep an object in its present state and protect it from change "
+                          "for study and display over many years."),
+                    format="narrative")])
+            if n == "ChoiceQuestionOut":
+                return ChoiceQuestionOut(
+                    passage="①<u>a</u> ②<u>b</u> ③<u>c</u> ④<u>d</u> ⑤<u>e</u>. (A) x (B) y (C) z ____.",
+                    choices=list("abcde"), answer_index=3, explanation="e",
+                    answer_confidence="주의")            # 전부 의심 → 검수 대상
+            if n == "EssayQuestionOut":
+                return EssayQuestionOut(
+                    passage="p ____. [요약문] s ____.", bogi=["w1", "w2"],
+                    conditions=["c"], blank_ko="우리말", answers=["지시 :: 정답"],
+                    explanation="e", answer_confidence="확실")
+            if n == "ReviewVerdict":
+                return ReviewVerdict(ok=True, issue="")   # 검수 통과 → 플래그 해제
+            raise AssertionError(n)
+
+    # .pdf 경로면 비전 분기(가짜 client 가 가로채므로 실제 파일 IO 없음)
+    res = generate_mock("jinyang_hs", ["/tmp/__nofile__.pdf"], difficulty="중",
+                        grade=1, client=VisFake())
+    assert len(res.exam.questions) == 27
+    flagged = [q.no for q in res.exam.questions
+               if isinstance(q.meta, dict) and q.meta.get("review_flag")]
+    assert not flagged, "검수 통과한 의심문항은 ⚠가 해제되어야 한다"
+
+
 def test_transient_generation_failure_auto_recovers():
     """일시적 생성 실패(응답 텍스트 없음 등) 문항은 파이프라인이 자동 재시도로 복구한다."""
     class Flaky(_FakeLLMClient):
