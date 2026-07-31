@@ -68,7 +68,7 @@
     <div class="exam-cards">
     {% for e in report.exam.items %}
       <div class="exam-card{% if '지칭' in e.question_type %} ec-ref{% elif '함축' in e.question_type %} ec-imp{% elif '서술' in e.question_type %} ec-narr{% endif %}">
-        <div class="ec-head">{{ e.question_type }}</div>
+        <div class="ec-head">{% if '서술' in e.question_type %}서술형 출제 예상 문장{% else %}{{ e.question_type }}{% endif %}</div>
         <div class="ec-body">
 
         {%- if '지칭' in e.question_type -%}
