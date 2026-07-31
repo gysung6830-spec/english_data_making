@@ -47,7 +47,8 @@ class PassageSet(BaseModel):
 # ① 내용 전체 요약 정리  (주제 한 문장)
 # ---------------------------------------------------------------------------
 class SummarySection(BaseModel):
-    overall: str  # 지문의 주제를 담은 한 문장
+    overall: str          # 지문의 주제를 담은 한 문장
+    theme_en: str = ""    # 자료 제목용 영어 주제구(짧은 명사구, 예: "The Value of Failure")
 
 
 # ---------------------------------------------------------------------------
@@ -123,7 +124,8 @@ class VocabItem(BaseModel):
     meaning: str            # 한글 의미
     synonyms: str = ""      # 유의어 (없으면 공란)
     antonyms: str = ""      # 반의어 (없으면 공란)
-    example: str = ""       # 지문 속 예문
+    sentence_no: int = 0    # 그 단어가 처음 나온 문장 번호(직독직해 문장과 매칭)
+    example: str = ""       # (미사용 - 이전 호환용)
 
 
 class VocabSection(BaseModel):

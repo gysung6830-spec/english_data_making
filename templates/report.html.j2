@@ -8,8 +8,7 @@
     <span class="doc-badge">지문 분석</span>
     {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
-    <div class="doc-title">{{ report.title }}</div>
-    {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
+    <div class="doc-title">{{ pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
 
   {# ① 주제 #}
@@ -106,7 +105,7 @@
     </div>
     <table class="grid t-voc">
       <thead><tr>
-        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th>지문 예문</th>
+        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th class="th-sent">문장</th>
       </tr></thead>
       <tbody>
       {% for v in report.vocab.items %}
@@ -116,7 +115,7 @@
           <td>{{ v.meaning }}</td>
           <td>{{ v.synonyms }}</td>
           <td>{{ v.antonyms }}</td>
-          <td class="ex-quote">{{ v.example }}</td>
+          <td class="cell-sent">{% if v.sentence_no %}{{ v.sentence_no }}{% endif %}</td>
         </tr>
       {% endfor %}
       </tbody>
@@ -217,8 +216,7 @@
   <div class="doc-header">
     <span class="doc-badge">원문 · 전체 해석</span>
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
-    <div class="doc-title">{{ report.title }}</div>
-    {% if report.source %}<div class="doc-source">출처 · {{ report.source }}</div>{% endif %}
+    <div class="doc-title">{{ pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
     <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석</th></tr></thead>

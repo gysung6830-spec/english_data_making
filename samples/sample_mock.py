@@ -14,6 +14,7 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         source=source,
         summary=schemas.SummarySection(
             overall="호기심은 학습과 성장의 원동력이므로 교육은 정답 암기보다 질문하는 태도를 길러야 한다.",
+            theme_en="The Value of Curiosity in Learning",
         ),
         literal=schemas.LiteralSection(sentences=[
             schemas.Sentence(no=1, chunks=[
@@ -63,20 +64,20 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
             ], start=1)
         ]),
         vocab=schemas.VocabSection(items=[
-            schemas.VocabItem(no=i, word=w, meaning=m, synonyms=s, antonyms=a, example=e)
-            for i, (w, m, s, a, e) in enumerate([
-                ("curiosity", "호기심", "inquisitiveness", "indifference", "Curiosity drives us to explore."),
-                ("explore", "탐구하다", "investigate", "ignore", "to explore the unknown"),
-                ("essential", "필수적인", "vital, crucial", "trivial", "has become essential"),
-                ("encourage", "장려하다", "promote", "discourage", "is encouraged in class"),
-                ("fuel", "촉진하다, 연료를 대다", "stimulate", "hinder", "it fuels learning"),
-                ("retain", "유지하다, 기억하다", "keep", "lose", "retain information longer"),
-                ("motivation", "동기", "drive", "apathy", "boosts motivation"),
-                ("creativity", "창의성", "originality", "conformity", "sparks creativity"),
-                ("inquire", "질문하다, 탐구하다", "ask", "answer", "students who inquire"),
-                ("expand", "확장하다", "broaden", "shrink", "expand their knowledge"),
-                ("engage", "몰두하다", "involve", "withdraw", "engage with problems"),
-                ("insight", "통찰", "understanding", "confusion", "gain new insight"),
+            schemas.VocabItem(no=i, word=w, meaning=m, synonyms=s, antonyms=a, sentence_no=sn)
+            for i, (w, m, s, a, sn) in enumerate([
+                ("curiosity", "호기심", "inquisitiveness", "indifference", 1),
+                ("explore", "탐구하다", "investigate", "ignore", 1),
+                ("essential", "필수적인", "vital, crucial", "trivial", 3),
+                ("encourage", "장려하다", "promote", "discourage", 4),
+                ("fuel", "촉진하다, 연료를 대다", "stimulate", "hinder", 5),
+                ("retain", "유지하다, 기억하다", "keep", "lose", 2),
+                ("motivation", "동기", "drive", "apathy", 5),
+                ("creativity", "창의성", "originality", "conformity", 6),
+                ("inquire", "질문하다, 탐구하다", "ask", "answer", 4),
+                ("expand", "확장하다", "broaden", "shrink", 6),
+                ("engage", "몰두하다", "involve", "withdraw", 3),
+                ("insight", "통찰", "understanding", "confusion", 6),
             ], start=1)
         ], english_summary=(
             "Curiosity is essential because it fuels motivation, helps students retain "
