@@ -183,3 +183,40 @@ def looks_empty(text: str) -> bool:
     """텍스트가 사실상 비어있는지(스캔본/추출 실패) 판단."""
     letters = re.sub(r"[^A-Za-z]", "", text)
     return len(letters) < 40
+
+
+def looks_garbled(text: str) -> bool:
+    """2단(영어+한글 병렬) 편집 등으로 텍스트가 뒤섞였는지 추정.
+
+    한 줄에 '한글과 영어가 함께' 있는 줄이 많으면(=좌우 컬럼이 섞임) True.
+    영어 전용 지문은 한글이 없어 절대 걸리지 않으므로 오탐이 없다.
+    """
+    lines = [ln for ln in text.splitlines() if ln.strip()]
+    if len(lines) < 5:
+        return False
+    mixed = sum(1 for ln in lines
+                if re.search(r"[가-힣]", ln) and re.search(r"[A-Za-z]", ln))
+    return mixed / len(lines) > 0.3
+
+
+def pdf_pages_to_images(pdf_path: str | Path, out_dir: str | Path | None = None,
+                        dpi: int = 170, max_pages: int = 12) -> list[Path]:
+    """PDF 각 페이지를 PNG 이미지로 렌더(비전 재추출용). PyMuPDF 필요."""
+    import fitz  # PyMuPDF
+
+    pdf_path = Path(pdf_path)
+    out_dir = Path(out_dir) if out_dir else pdf_path.parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    paths: list[Path] = []
+    doc = fitz.open(str(pdf_path))
+    try:
+        for i, page in enumerate(doc):
+            if i >= max_pages:
+                break
+            pix = page.get_pixmap(dpi=dpi)
+            p = out_dir / f"{pdf_path.stem}__p{i + 1}.png"
+            pix.save(str(p))
+            paths.append(p)
+    finally:
+        doc.close()
+    return paths

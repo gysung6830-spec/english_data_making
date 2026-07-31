@@ -5,9 +5,13 @@
 """
 from __future__ import annotations
 
+import re
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+_LBL_RE = re.compile(r"\[\[([A-Za-z])\]\]")
+_ULM_RE = re.compile(r"\{\{(\d+)\|([^}]*)\}\}")
 
 
 # ---------------------------------------------------------------------------
@@ -204,6 +208,14 @@ class WSSummaryItem(BaseModel):
             raise ValueError("요약문 빈칸이 없습니다.")
         return v
 
+    @model_validator(mode="after")
+    def _markers_match(self) -> "WSSummaryItem":
+        marks = {m.upper() for m in _LBL_RE.findall(self.sentence)}
+        labels = {b.label.upper() for b in self.blanks}
+        if marks != labels:
+            raise ValueError(f"요약문 빈칸 마커{sorted(marks)}와 정답 라벨{sorted(labels)}이 일치해야 합니다.")
+        return self
+
 
 class WSSummaryType(BaseModel):
     """유형1: 지문 요약문의 (A)(B) 빈칸을 원문 단어로 채우기(여러 문항)."""
@@ -231,6 +243,17 @@ class WSParaphraseQ(BaseModel):
         if not v:
             raise ValueError("문장 변형 빈칸이 없습니다.")
         return v
+
+    @model_validator(mode="after")
+    def _markers_and_distractors(self) -> "WSParaphraseQ":
+        marks = {m.upper() for m in _LBL_RE.findall(self.sentence)}
+        labels = {b.label.upper() for b in self.blanks}
+        if marks != labels:
+            raise ValueError(f"문장 변형 빈칸 마커{sorted(marks)}와 정답 라벨{sorted(labels)}이 일치해야 합니다.")
+        ans = {b.answer.strip().lower() for b in self.blanks}
+        if {d.strip().lower() for d in self.distractors} & ans:
+            raise ValueError("보기의 오답 단어가 정답과 겹칩니다.")
+        return self
 
 
 class WSParaphraseType(BaseModel):
@@ -328,6 +351,19 @@ class WSClozeSet(BaseModel):
             raise ValueError("사용되지 않는 낱말이 최소 1개는 있어야 합니다.")
         return v
 
+    @model_validator(mode="after")
+    def _consistency(self) -> "WSClozeSet":
+        ch = {c.strip().lower() for c in self.choices}
+        used = {se.answer.strip().lower() for se in self.sentences}
+        un = {u.strip().lower() for u in self.unused}
+        if not used <= ch:
+            raise ValueError("빈칸 정답이 보기(choices)에 없습니다.")
+        if not un <= ch:
+            raise ValueError("사용되지 않는 낱말이 보기(choices)에 없습니다.")
+        if un & used:
+            raise ValueError("사용되지 않는 낱말이 실제 정답으로도 쓰였습니다.")
+        return self
+
 
 class WSChoiceType(BaseModel):
     sets: list[WSClozeSet]
@@ -367,6 +403,16 @@ class WSErrorItem(BaseModel):
         if w >= len(v):
             raise ValueError("어법상 옳은 밑줄(함정)도 최소 1곳은 있어야 합니다.")
         return v
+
+    @model_validator(mode="after")
+    def _markers_match(self) -> "WSErrorItem":
+        marks = {int(n): t for n, t in _ULM_RE.findall(self.sentence)}
+        if len(marks) != len(self.underlines):
+            raise ValueError(f"밑줄 마커 수({len(marks)})와 밑줄 정보 수({len(self.underlines)})가 다릅니다.")
+        for u in self.underlines:
+            if marks.get(u.no) != u.text:
+                raise ValueError(f"{u.no}번 밑줄의 문장 마커와 정보(text)가 일치하지 않습니다.")
+        return self
 
 
 class WSErrorType(BaseModel):

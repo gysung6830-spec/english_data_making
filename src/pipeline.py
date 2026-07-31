@@ -26,19 +26,46 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
+def _vision_extract_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Extraction]:
+    """PDF 를 페이지 이미지로 렌더해 비전으로 지문을 재추출(폴백)."""
+    imgs = extract.pdf_pages_to_images(src, out_dir=cfg.output_dir / "_vision_tmp")
+    merged: list[Extraction] = []
+    try:
+        for img in imgs:
+            try:
+                pset = analyze.extract_passages_image(client, cfg, str(img))
+                merged.extend(pset.passages)
+            except Exception:  # 페이지 하나 실패는 건너뜀
+                continue
+    finally:
+        for img in imgs:
+            img.unlink(missing_ok=True)
+    return merged
+
+
 def extract_passages_for_src(client: ClaudeClient, cfg: Config, src: Path) -> list[Extraction]:
-    """한 파일(PDF/사진)에서 지문 본문(들)을 추출 -> list[Extraction]."""
+    """한 파일(PDF/사진/HWP)에서 지문 본문(들)을 추출 -> list[Extraction]."""
     if extract.is_image(src):
-        pset = analyze.extract_passages_image(client, cfg, str(src))
-    else:
-        raw = extract.extract_passage_text(src)
-        if extract.looks_empty(raw):
-            raise ValueError(
-                "텍스트를 추출하지 못했습니다(스캔본 PDF일 수 있음). "
-                "이 경우 해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-            )
-        pset = analyze.extract_passages(client, cfg, raw)
-    return list(pset.passages)
+        return list(analyze.extract_passages_image(client, cfg, str(src)).passages)
+
+    raw = extract.extract_passage_text(src)
+    poor = extract.looks_empty(raw) or extract.looks_garbled(raw)
+
+    # 텍스트가 부실(스캔/2단 병렬)하고 PDF 면 비전으로 재추출 시도(설정 시)
+    if poor and cfg.processing.vision_fallback and src.suffix.lower() == ".pdf":
+        try:
+            passages = _vision_extract_pdf(client, cfg, src)
+            if passages:
+                return passages
+        except Exception:
+            pass  # 비전 폴백 실패 시 아래 텍스트 경로/에러로 진행
+
+    if extract.looks_empty(raw):
+        raise ValueError(
+            "텍스트를 추출하지 못했습니다(스캔본/이미지 PDF일 수 있음). "
+            "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
+        )
+    return list(analyze.extract_passages(client, cfg, raw).passages)
 
 
 def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:

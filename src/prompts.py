@@ -315,6 +315,33 @@ def ws_error_prompt(title: str, body: str) -> str:
     )
 
 
+def _error_items_to_text(err: "schemas.WSErrorType") -> str:
+    lines = []
+    for i, it in enumerate(err.items, 1):
+        lines.append(f"[문항 {i}] 문장: {it.sentence}")
+        for u in it.underlines:
+            mark = "틀림" if u.wrong else "정상"
+            fix = f" → {u.correction}" if u.wrong else ""
+            lines.append(f"  {u.no}) {u.text} [{u.point}] {mark}{fix}")
+    return "\n".join(lines)
+
+
+def ws_error_verify_prompt(title: str, body: str, err: "schemas.WSErrorType") -> str:
+    """어법 유형 2차 검증: 기존 판정을 어법적으로 재채점해 교정본을 만든다."""
+    return (
+        "[유형6 재검증] 아래는 이미 만든 '어법 오류 수정' 문항들과 그 판정입니다. "
+        "각 밑줄이 '실제 어법상' 틀렸는지/옳은지 엄격하게 다시 판정하고, 필요하면 바로잡아 "
+        "'같은 스키마(WSErrorType)'로 교정본을 출력하세요.\n"
+        "- sentence 의 {{n|표현}} 마커와 밑줄(underlines)의 no·text 는 그대로 유지하세요(문장 구조 변경 금지).\n"
+        "- 각 밑줄의 wrong(true/false)과 correction 만 어법적으로 정확하게 바로잡으세요. "
+        "틀린 밑줄에는 정확한 correction 을, 옳은 밑줄에는 빈 correction 을 넣으세요.\n"
+        "- 한 문항 안에서 '틀린 곳 최소 1 + 옳은 곳 최소 1'은 유지되어야 합니다.\n"
+        "- explanation 에는 어법 근거만, 제작 메모는 금지.\n\n"
+        f"[현재 문항·판정]\n{_error_items_to_text(err)}\n\n"
+        + _passage_block(title, body)
+    )
+
+
 # 유형 7) 지문 기반 영어 문답 (의문사 질문 → 지문 근거로 영어 답) ----------
 def ws_qa_prompt(title: str, body: str) -> str:
     return (

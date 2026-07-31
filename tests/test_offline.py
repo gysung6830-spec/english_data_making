@@ -126,19 +126,27 @@ def test_worksheet_schema():
         assert False, "미사용 1개는 통과하면 안 됨"
     except Exception:
         pass
-    # 유형6(어법): 오류가 최소 1곳·정상도 최소 1곳(개수는 완화, 하드 실패 방지)
+    # 유형6(어법): 오류가 최소 1곳·정상도 최소 1곳(개수 완화) + 마커↔밑줄 일치
+    s5 = "".join("{{%d|t}}" % i for i in range(1, 6))  # {{1|t}}..{{5|t}}
     good = [{"no": i, "text": "t", "wrong": i <= 3} for i in range(1, 6)]
-    schemas.WSErrorItem.model_validate({"sentence": "{{1|t}}", "underlines": good})
+    schemas.WSErrorItem.model_validate({"sentence": s5, "underlines": good})
     two = [{"no": i, "text": "t", "wrong": i <= 2} for i in range(1, 6)]
-    schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": two})  # 2곳도 통과
+    schemas.WSErrorItem.model_validate({"sentence": s5, "underlines": two})  # 2곳도 통과
     # 오류 0곳(전부 정상)은 여전히 거부되어야 함
     rejected = False
     try:
         none_wrong = [{"no": i, "text": "t", "wrong": False} for i in range(1, 6)]
-        schemas.WSErrorItem.model_validate({"sentence": "x", "underlines": none_wrong})
+        schemas.WSErrorItem.model_validate({"sentence": s5, "underlines": none_wrong})
     except Exception:
         rejected = True
     assert rejected, "오류 0곳은 거부되어야 함"
+    # 마커 수가 밑줄 수와 다르면 거부(마커↔밑줄 런타임 검증)
+    mism = False
+    try:
+        schemas.WSErrorItem.model_validate({"sentence": "{{1|t}}", "underlines": good})
+    except Exception:
+        mism = True
+    assert mism, "마커/밑줄 불일치는 거부되어야 함"
     print("PASS  서술형 교재 스키마 검증")
 
 
@@ -228,7 +236,12 @@ def test_hwp_extract():
     header = 67 | (len(payload) << 20)
     rec = struct.pack("<I", header) + payload
     assert extract._hwp_section_text(rec) == "Hello"
-    print("PASS  HWP/HWPX 텍스트 추출")
+    # 추출 부실 신호: 영어 전용은 오탐 없음(False), 영한 2단 혼합은 True
+    eng = "\n".join(["Curiosity drives us to explore the unknown."] * 8)
+    mixed = "\n".join(["Criminals leave traces 범죄자는 흔적을 남긴다."] * 8)
+    assert not extract.looks_garbled(eng)
+    assert extract.looks_garbled(mixed)
+    print("PASS  HWP/HWPX 텍스트 추출 + 추출부실 감지")
 
 
 def run_all():

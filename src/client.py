@@ -101,7 +101,8 @@ class ClaudeClient:
     def __init__(self, api_key: str, model: str):
         import anthropic  # 지연 임포트 (mock 모드에서는 불필요)
 
-        self._client = anthropic.Anthropic(api_key=api_key)
+        # 일시적 오류(429 레이트리밋·5xx·과부하)는 SDK 가 지수 백오프로 재시도.
+        self._client = anthropic.Anthropic(api_key=api_key, max_retries=5)
         self.model = model
 
     def structured(

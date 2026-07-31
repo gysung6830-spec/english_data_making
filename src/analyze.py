@@ -117,6 +117,19 @@ def _qa_evidence_in_passage(qa: schemas.WSQAType, body: str) -> None:
             raise ValueError(f"{i}번 문답의 근거가 지문에 없습니다(추론 금지): {ev[:60]}")
 
 
+def _summary_answers_grounded(sec: schemas.WSSummaryType, body: str) -> None:
+    """유형2 요약 정답이 '원문에 근거한 단어'인지 느슨하게 대조(어형 변화 허용)."""
+    low = body.lower()
+    for it in sec.items:
+        for b in it.blanks:
+            a = (b.answer or "").strip().lower()
+            if not a:
+                continue
+            stem = a[:4] if len(a) >= 4 else a  # 어형 변화 허용(앞 4글자)
+            if a not in low and stem not in low:
+                raise ValueError(f"요약 정답 '{b.answer}'가 지문에 없습니다(원문 단어 사용).")
+
+
 def analyze_worksheet(
     client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
 ) -> schemas.Worksheet:
@@ -124,11 +137,23 @@ def analyze_worksheet(
     title, body = extraction.title, extraction.body
     r = cfg.processing.max_retries
     S = prompts.WS_SYSTEM
+    nb = " ".join(body.split())
+
+    def _gen_qa():
+        # 문답 생성 후, 근거가 지문에 없는 항목은 '제거'(유형 전체를 버리지 않음)
+        qa = client.structured(S, prompts.ws_qa_prompt(title, body),
+                               schemas.WSQAType, max_retries=r)
+        kept = [it for it in qa.items
+                if not (it.evidence and " ".join(it.evidence.split()).rstrip(".") not in nb)]
+        if not kept:
+            raise ValueError("문답 근거가 모두 지문 밖입니다.")
+        return schemas.WSQAType(items=kept)
 
     tasks = {
         "summary": lambda: client.structured(
             S, prompts.ws_summary_prompt(title, body),
-            schemas.WSSummaryType, max_retries=r),
+            schemas.WSSummaryType, max_retries=r,
+            extra_validate=lambda s: _summary_answers_grounded(s, body)),
         "paraphrase": lambda: client.structured(
             S, prompts.ws_paraphrase_prompt(title, body),
             schemas.WSParaphraseType, max_tokens=10000, max_retries=r),
@@ -144,10 +169,7 @@ def analyze_worksheet(
         "error": lambda: client.structured(
             S, prompts.ws_error_prompt(title, body),
             schemas.WSErrorType, max_retries=r),
-        "qa": lambda: client.structured(
-            S, prompts.ws_qa_prompt(title, body),
-            schemas.WSQAType, max_retries=r,
-            extra_validate=lambda qa: _qa_evidence_in_passage(qa, body)),
+        "qa": _gen_qa,
     }
 
     # 유형 단위 부분 성공: 한 유형이 (재시도까지) 실패해도 None 으로 두고 계속.
@@ -172,6 +194,17 @@ def analyze_worksheet(
 
     if all(v is None for v in results.values()):
         raise RuntimeError("서술형 교재의 모든 유형 생성에 실패했습니다.")
+
+    # (옵트인) 어법 유형 2차 검증: 모델에게 오류 판정을 재채점시켜 교정본을 채택.
+    #   비용이 늘어나므로 config 의 processing.verify_content=true 일 때만 동작.
+    if cfg.processing.verify_content and results.get("error") is not None:
+        try:
+            fixed = client.structured(
+                S, prompts.ws_error_verify_prompt(title, body, results["error"]),
+                schemas.WSErrorType, max_retries=r)
+            results["error"] = fixed
+        except Exception as e:  # 검증 실패 시 원본 유지
+            print(f"[경고] 어법 2차 검증 실패 → 원본 사용: {e}", file=sys.stderr)
 
     return schemas.Worksheet(
         title=title,

@@ -26,6 +26,12 @@ processing:
   # 대량 처리 시 Batch API 사용 여부 (지문 수가 많을 때 비용 절감)
   #   run.py --batch 로 실행하면 이 값과 상관없이 배치 모드로 동작합니다.
   use_batch_for_bulk: true
+  # 텍스트 추출이 부실(스캔본/2단 영한 병렬)하면 PDF 를 이미지로 렌더해
+  #   비전으로 다시 읽습니다. (문제 있는 파일에만 비전 호출 → 조건부 비용)
+  vision_fallback: true
+  # 어법 유형을 모델에게 한 번 더 재채점시켜 오류 판정을 검증합니다.
+  #   정확도가 올라가지만 어법 유형 API 호출이 1회 더 늘어납니다(비용↑). 기본 꺼짐.
+  verify_content: false
 
 # 출력 PDF 디자인
 design:
