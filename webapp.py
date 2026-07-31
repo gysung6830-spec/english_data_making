@@ -215,7 +215,7 @@ RESULT_HTML = """
     {% endfor %}
     {% if failed %}
     <div class=err>⚠ <b>확인 필요</b> — 생성/배정이 안 된 문항: <b>{{ failed }}</b><br>
-      해당 문항은 PDF 맨 끝 <b>'확인 권장 문항'</b> 페이지에 정리돼 있습니다. API 키·요금제를
+      해당 문항은 PDF 맨 끝 <b>'검토 문항'</b> 페이지에 정리돼 있습니다. API 키·요금제를
       확인하거나 다시 생성하면 채워집니다.
     </div>
     {% endif %}
@@ -478,7 +478,7 @@ def generate():
                 "생성했습니다. 텍스트가 선택되는 PDF로 저장하거나(스캔본은 API 키를 "
                 "넣으면 비전으로 읽힘), HWP는 'PDF로 저장' 후 다시 올려주세요.")
 
-        # 일부 문항 생성 실패 → 실패 문항은 마지막 '확인 권장' 페이지에 정리됨
+        # 일부 문항 생성 실패 → 실패 문항은 마지막 '검토 문항' 페이지에 정리됨
         gen_errs = [l for l in res.logs if l.get("note") == "generation_failed"]
         n_q = len(res.exam.questions) or 1
         if not mock and gen_errs:
@@ -490,7 +490,7 @@ def generate():
             detail = " | ".join(uniq[:2]) or "원인 메시지 없음"
             warnings.append(
                 f"일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
-                f"마지막 '확인 권장' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
+                f"마지막 '검토 문항' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
 
         raw = (request.form.get("outname") or "").strip()
         if raw.lower().endswith(".pdf"):

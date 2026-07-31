@@ -98,7 +98,7 @@ def _flag_reason(item: Item, out: Any) -> str:
     """
     conf = (getattr(out, "answer_confidence", "") or "").strip()
     if conf and not conf.startswith("확실"):
-        return "정답 유일성 자가점검에서 '주의'로 표시됨"
+        return "정답이 유일한지 재확인 권장"
     if item.type in _PARAPHRASE_TYPES:
         try:
             correct = (out.choices[out.answer_index - 1] or "").strip()
@@ -106,7 +106,7 @@ def _flag_reason(item: Item, out: Any) -> str:
             correct = ""
         core = re.sub(r"[^A-Za-z가-힣 ]", "", correct).strip().lower()
         if len(core) >= 12 and core in (out.passage or "").lower():
-            return "정답 선지가 지문 문장과 거의 동일(유의어 패러프레이즈 원리 위반 가능)"
+            return "정답 선지가 지문 문장과 유사 (재확인 권장)"
     return ""
 
 Builder = Callable[[Item, Passage, PassageAnalysis, GenContext], Question]
@@ -218,7 +218,7 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
     else:
         q.choices = make_choices(mock_choices or [f"선택지 {i+1}" for i in range(5)])
         q.answer = mock_answer
-        q.explanation = f"(mock) {item.type}: 정답 {mock_answer}."
+        q.explanation = ""
         q.passage_text = mock_passage if mock_passage is not None else (
             underline_passage(passage.text, item.underlines) if item.underlines else passage.text)
     if number_only:
@@ -272,40 +272,81 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         q.explanation = out.explanation
         conf = (getattr(out, "answer_confidence", "") or "").strip()
         if conf and not conf.startswith("확실"):
-            q.meta["review_flag"] = "정답 확신도 '주의'로 표시됨"
+            q.meta["review_flag"] = "정답 재확인 권장"
     else:
         q.passage_text = passage.text
-        q.answer = "(mock) 서술형 정답 예시"
-        q.answer_notes = [f"{sp}: (mock 정답)" for sp in item.subparts]
-        # 디자인 미리보기용 <보기>/<조건> 박스 데이터(오프라인 자리표시자)
+        q.answer = ""
+        q.answer_notes = list(item.subparts)
+        # 디자인 미리보기용 <보기>/<조건> 박스 데이터(자리표시자, 표기 없이)
         _BOGI = {"dialogue_arrange_inflect", "word_arrange",
                  "arrange_and_translate", "blank_choose_no_change", "chart_fix_and_arrange"}
         _COND = {"condition_write_inflect", "grammar_fix_and_answer",
                  "summary_fill_from_text"}
         if item.type in _BOGI:
-            q.meta["bogi"] = ["(mock)", "word1", "word2", "word3", "word4", "can"]
+            q.meta["bogi"] = ["word", "order", "the", "sentence", "correctly", "can"]
         if item.type in ("dialogue_arrange_inflect", "arrange_and_translate"):
-            q.meta["blank_ko"] = "(mock) 밑줄 친 우리말 의미"
+            q.meta["blank_ko"] = "밑줄 친 우리말"
         if item.type in _COND:
-            q.meta["conditions"] = ["(mock) 주어진 괄호 속 단어를 사용할 것",
-                                    "(mock) 필요시 어형을 변형할 것"]
+            q.meta["conditions"] = ["주어진 괄호 속 단어를 사용할 것",
+                                    "필요시 어형을 변형할 것"]
     return q
 
 
+# 유형별 실제 발문(자리표시자·안전망이 시스템 문구 대신 정상 발문을 쓰도록).
+STEM_FALLBACK = {
+    "grammar": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+    "grammar_vocab_mix": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+    "vocab_odd": "다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
+    "vocab_3blank_abc": "(A), (B), (C)의 각 네모 안에서 문맥에 맞는 낱말로 "
+                        "가장 적절한 것끼리 짝지은 것은?",
+    "main_point": "다음 글의 요지로 가장 적절한 것은?",
+    "title": "다음 글의 제목으로 가장 적절한 것은?",
+    "blank_single": "다음 빈칸에 들어갈 말로 가장 적절한 것은?",
+    "order": "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+    "irrelevant_sentence": "다음 글에서 전체 흐름과 관계 없는 문장은?",
+    "implied_meaning": "밑줄 친 부분이 다음 글에서 의미하는 바로 가장 적절한 것은?",
+    "inference_mismatch": "다음 글의 내용과 일치하지 않는 것은?",
+    "dialogue_mismatch": "다음 대화의 내용과 일치하지 않는 것은?",
+    "notice_match": "다음 안내문의 내용과 일치하는 것은?",
+    "summary_ab": "다음 글의 내용을 한 문장으로 요약하고자 한다. "
+                  "빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?",
+    "prep_find_and_translate": "빈칸에 공통으로 들어갈 전치사를 쓰고, 밑줄 친 문장을 "
+                               "우리말로 해석하시오.",
+    "dialogue_arrange_inflect": "[보기]의 단어를 모두 활용하여(어형 변형 가능) 영작하고, "
+                                "본문에 근거해 우리말로 답하시오.",
+    "condition_write_inflect": "괄호 속 단어를 어형 변형하여 빈칸을 채우고, 본문 단어만으로 "
+                               "영어로 답하시오.",
+    "summary_fill_from_text": "다음 요약문의 빈칸을 본문에 있는 단어로 채우시오.(변형 금지)",
+    "word_arrange": "[보기]의 단어를 알맞게 배열하여 빈칸을 완성하시오.",
+    "arrange_and_translate": "[보기]의 단어를 모두 활용하여 밑줄 친 우리말을 영작하고, "
+                             "본문 내용을 우리말로 답하시오.",
+    "chart_fix_and_arrange": "도표와 일치하지 않는 부분 1곳을 찾아 고치고, 우리말에 맞게 "
+                             "[보기]를 배열하여 영작하시오.",
+    "blank_choose_no_change": "[보기]에서 골라 각 빈칸을 채우시오.(변형 금지, 빈칸당 한 단어)",
+    "grammar_fix_and_answer": "밑줄 친 부분 중 어법상 틀린 곳을 찾아 바르게 고치고, 본문에 "
+                              "근거하여 영어 질문에 영어로 답하시오.",
+}
+
+
+def default_stem(ctx: GenContext, item_type: str) -> str:
+    """학습된 발문(있으면) 또는 유형 표준 발문. 시스템 문구를 노출하지 않는다."""
+    return ctx.stem(item_type, STEM_FALLBACK.get(item_type, "다음 글을 읽고 물음에 답하시오."))
+
+
 def generic_question(item: Item, passage: Passage, ctx: GenContext,
-                     stem: str) -> Question:
-    """어떤 유형이든 최소 구조를 갖춘 mock 문항(등록 안 된 유형 안전망)."""
-    q = Question(no=item.no, section=item.section, type=item.type,
-                 score=item.score, stem=stem, passage_text=passage.text,
+                     stem: str | None = None) -> Question:
+    """등록 안 된 유형·자리표시자용 최소 구조 문항. 시스템 문구 대신 정상 발문을 쓴다."""
+    q = Question(no=item.no, section=item.section, type=item.type, score=item.score,
+                 stem=stem or default_stem(ctx, item.type), passage_text=passage.text,
                  passage_id=passage.id, difficulty=ctx.difficulty,
                  underlines=item.underlines)
     if item.section == "choice":
         q.choices = make_choices([f"선택지 {i+1}" for i in range(5)])
         q.answer = "③"
-        q.explanation = "(mock) 문맥상 ③이 정답."
+        q.explanation = ""
     else:
-        q.answer = "(mock) 서술형 정답 예시"
-        q.answer_notes = [f"소문항: {sp}" for sp in item.subparts]
+        q.answer = ""
+        q.answer_notes = list(item.subparts)
     if item.underlines:
         q.passage_text = underline_passage(passage.text, item.underlines)
     return q

@@ -318,11 +318,11 @@ def test_review_flag_collected_on_separate_last_page(tmp_path):
     assert "⚠ 확인 권장" not in ans and "자동 점검 참고" not in ans
     # 별도 페이지에는 해당 문항이 모여 나온다
     summary = _review_summary_body(res.exam)
-    assert "확인 권장 문항" in summary and "1번" in summary
+    assert "검토 문항" in summary and "1번" in summary
     # 전체 렌더에도 별도 페이지가 마지막에 포함된다
     out = render_exam(res.exam, tmp_path, header_info={}, footer="", to_pdf=False)
     doc = out["problem_html"].read_text(encoding="utf-8")
-    assert "확인 권장 문항" in doc
+    assert "검토 문항" in doc
 
 
 def test_pdf_vision_extraction_and_flag_review():

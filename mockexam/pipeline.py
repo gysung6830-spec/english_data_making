@@ -112,13 +112,14 @@ def generate_mock(
             return
         try:
             exam.questions[q_i] = generate_question(item, p, ctx)  # 성공 시 플래그 사라짐
-        except Exception as e:  # noqa: BLE001 - 재시도 실패는 플래그만 유지
-            exam.questions[q_i].meta["review_flag"] = f"생성 실패 — 재생성 필요 ({str(e)[:60]})"
+        except Exception:  # noqa: BLE001 - 재시도 실패는 플래그만 유지
+            q = exam.questions[q_i]
+            q.meta["gen_failed"] = True
+            q.meta["review_flag"] = "미완성 — 검토·보완 필요"
 
     def _failed_idx() -> list[int]:
         return [i for i, q in enumerate(exam.questions)
-                if isinstance(q.meta, dict)
-                and str(q.meta.get("review_flag", "")).startswith("생성 실패")]
+                if isinstance(q.meta, dict) and q.meta.get("gen_failed")]
 
     # [5-2] 생성 실패(일시적 오류) 문항 즉시 자동 재시도 — 선택형·서술형 공통
     if client is not None:
@@ -174,7 +175,7 @@ def _review_flagged(exam, client, ctx, regen, logs) -> None:
     def _flagged():
         return [i for i, q in enumerate(exam.questions)
                 if isinstance(q.meta, dict) and q.meta.get("review_flag")
-                and not str(q.meta["review_flag"]).startswith("생성 실패")]
+                and not q.meta.get("gen_failed")]
 
     idxs = _flagged()
     if not idxs:

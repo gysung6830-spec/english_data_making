@@ -45,10 +45,9 @@ def generate_all(blueprint: Blueprint, assignments: list[Assignment],
             logs.append({"no": item.no, "section": item.section, "type": item.type,
                          "note": (a.note if a else None) or "no_passage"})
             if skip_missing:
-                q0 = generic_question(
-                    item, _placeholder_passage(item.no, item.type), ctx,
-                    stem=f"[지문 부족] ({item.type})")
-                q0.meta["review_flag"] = "지문 부족으로 미생성 — 확인·재생성 필요"
+                q0 = generic_question(item, _placeholder_passage(item.no, item.type), ctx)
+                q0.meta["gen_failed"] = True
+                q0.meta["review_flag"] = "지문 부족 — 검토·보완 필요"
                 questions[idx] = q0
                 continue
         passage = passages.get(pid) if pid else _placeholder_passage(item.no, item.type)
@@ -69,9 +68,9 @@ def generate_all(blueprint: Blueprint, assignments: list[Assignment],
             item, passage, msg = err
             logs.append({"no": item.no, "section": item.section, "type": item.type,
                          "note": "generation_failed", "error": msg})
-            q = generic_question(item, passage, ctx,
-                                 stem=f"[생성 실패-검토 필요] ({item.type})")
-            q.meta["review_flag"] = f"생성 실패 — 재생성 필요 ({msg[:60]})"
+            q = generic_question(item, passage, ctx)
+            q.meta["gen_failed"] = True
+            q.meta["review_flag"] = "미완성 — 검토·보완 필요"
         questions[idx] = q
 
     exam = MockExam(blueprint=blueprint, questions=[q for q in questions if q])

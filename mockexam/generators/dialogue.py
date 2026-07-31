@@ -17,7 +17,7 @@ def gen_dialogue_mismatch(item, passage, an, ctx):
              f"{src} 내용에서 " + FACT_TWIST +
              f" 나머지 오답 4개는 {src}에 실제 언급된 사실을 정확히 반영해 소거가 어렵게 하라.")
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) 진술 {i+1}" for i in range(5)])
+                        mock_choices=[f"진술 {i+1}" for i in range(5)])
 
 
 @register("notice_match")
@@ -33,4 +33,4 @@ def gen_notice_match(item, passage, an, ctx):
     instr = (f"{keep}선지 5개 중 1개만 {src}과 정확히 일치(=정답)하고, 정답 선지는 {src} "
              f"사실을 그대로 반영하라. 나머지 오답 4개는 {src} 내용을 " + FACT_TWIST)
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) 진술 {i+1}" for i in range(5)])
+                        mock_choices=[f"진술 {i+1}" for i in range(5)])

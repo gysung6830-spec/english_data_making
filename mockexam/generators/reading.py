@@ -14,7 +14,7 @@ def gen_main_point(item, passage, an, ctx):
     stem = ctx.stem("main_point", "다음 글의 요지로 가장 적절한 것은?")
     instr = DISTRACTOR_RULE + " 요지 선지는 **한국어**로 작성하라."
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) 요지 후보 {i+1}" for i in range(5)])
+                        mock_choices=[f"요지 후보 {i+1}" for i in range(5)])
 
 
 @register("title")
@@ -22,7 +22,7 @@ def gen_title(item, passage, an, ctx):
     stem = ctx.stem("title", "다음 글의 제목으로 가장 적절한 것은?")
     instr = DISTRACTOR_RULE + " 제목 선지는 **영어**로 작성하라."
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) Title Candidate {i+1}" for i in range(5)])
+                        mock_choices=[f"Title Candidate {i+1}" for i in range(5)])
 
 
 @register("blank_single")
@@ -37,7 +37,7 @@ def gen_blank(item, passage, an, ctx):
     if an.sentences:
         mock_p = passage.text.replace(an.sentences[-1], "____________ (빈칸)")
     return build_choice(item, passage, ctx, stem, instr, mock_passage=mock_p,
-                        mock_choices=[f"(mock) 빈칸 후보 {i+1}" for i in range(5)])
+                        mock_choices=[f"빈칸 후보 {i+1}" for i in range(5)])
 
 
 @register("order")
@@ -81,7 +81,7 @@ def gen_implied(item, passage, an, ctx):
              "(직역으로는 못 풀게). '무관·모순' 오답은 그 표현을 표면적/축자적으로 읽은 "
              "오독으로 구성하라. 선지는 **영어**로 작성하라.")
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) implied reading {i+1}" for i in range(5)])
+                        mock_choices=[f"implied reading {i+1}" for i in range(5)])
 
 
 @register("inference_mismatch")
@@ -90,7 +90,7 @@ def gen_inference_mismatch(item, passage, an, ctx):
     instr = ("선지 5개 중 1개만 지문과 불일치(=정답). 정답 선지는 지문 내용에서 " + FACT_TWIST +
              " 나머지 오답 4개는 지문에 실제 언급된 사실을 정확히 반영해 소거가 어렵게 하라.")
     return build_choice(item, passage, ctx, stem, instr,
-                        mock_choices=[f"(mock) 진술 {i+1}" for i in range(5)])
+                        mock_choices=[f"진술 {i+1}" for i in range(5)])
 
 
 @register("summary_ab")

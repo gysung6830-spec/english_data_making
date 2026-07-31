@@ -455,9 +455,9 @@ def _review_summary_body(exam: MockExam) -> str:
         reason = _ko_normalize(str(q.meta.get("review_flag", "")))
         rows.append(f'<tr><td class="rv-no">{no}</td><td>{html.escape(label)}</td>'
                     f'<td>{html.escape(reason)}</td></tr>')
-    return (f'<div class="page">{_section_banner("확인 권장 문항 (검토용)")}'
-            '<div class="rev-intro">아래 문항은 자동 점검에서 정답·선지의 재확인이 '
-            '권장됩니다. 배부 전 한 번 검토하세요. (이 페이지는 교사용 참고 자료입니다.)</div>'
+    return (f'<div class="page">{_section_banner("검토 문항 (교사용)")}'
+            '<div class="rev-intro">아래 문항은 정답·선지를 한 번 더 검토하시길 권장합니다. '
+            '(교사용 참고 페이지 — 배부 시 제외)</div>'
             '<table class="rev-table"><tr><th>문항</th><th>유형</th><th>확인 사유</th></tr>'
             + "".join(rows) + '</table></div>')
 
