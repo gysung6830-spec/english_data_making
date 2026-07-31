@@ -274,10 +274,10 @@ def _q_html(q: Question, teacher: bool = False) -> str:
                 parts.append(f'<div>{line}</div>')
             parts.append('</div>')
     if teacher:
-        parts.append(f'<div class="t-ans">정답 <b>{html.escape(q.answer)}</b></div>')
+        parts.append(f'<div class="t-ans">정답 <b>{html.escape(_ko_normalize(q.answer))}</b></div>')
         if q.answer_notes:
             for n in q.answer_notes:
-                parts.append(f'<div class="ans-line">· {html.escape(n)}</div>')
+                parts.append(f'<div class="ans-line">· {html.escape(_ko_normalize(n))}</div>')
         if q.explanation:
             parts.append(f'<div class="exp">{_exp_html(q.explanation)}</div>')
     elif q.section == "essay":
@@ -420,10 +420,10 @@ def _answer_body(exam: MockExam) -> str:
                     f'<span class="ans-no">{no}</span>'
                     f'<span class="badge">{html.escape(badge)}</span>{warn}</div>')
         body.append(f'<div class="ans-line"><span class="a">정답</span> '
-                    f'<span class="ansval">{html.escape(q.answer)}</span></div>')
+                    f'<span class="ansval">{html.escape(_ko_normalize(q.answer))}</span></div>')
         if q.answer_notes:
             for n in q.answer_notes:
-                body.append(f'<div class="ans-line">· {html.escape(n)}</div>')
+                body.append(f'<div class="ans-line">· {html.escape(_ko_normalize(n))}</div>')
         if q.explanation:
             body.append(f'<div class="exp">{_exp_html(q.explanation)}</div>')
         if flag:
@@ -437,6 +437,29 @@ def _answer_body(exam: MockExam) -> str:
 def build_answer_html(exam: MockExam, info: dict, footer: str = "") -> str:
     return _wrap("정답 및 해설", _answer_body(exam),
                  footer_note=_footer_note(exam, footer))
+
+
+# LLM 이 이따금 섞는 한자(漢字) → 한글 정규화(안전망). 시험지는 한글로만.
+_HANJA = {
+    "分析": "분석", "強調": "강조", "强調": "강조", "對照": "대조", "対照": "대조",
+    "反對": "반대", "主張": "주장", "主語": "주어", "動詞": "동사", "名詞": "명사",
+    "形容詞": "형용사", "副詞": "부사", "受動態": "수동태", "能動態": "능동태",
+    "受動": "수동", "能動": "능동", "時制": "시제", "分詞": "분사",
+    "過去分詞": "과거분사", "現在分詞": "현재분사", "關係詞": "관계사",
+    "冠詞": "관사", "前置詞": "전치사", "接續詞": "접속사", "代名詞": "대명사",
+    "複數": "복수", "單數": "단수", "一致": "일치", "語順": "어순", "態": "태",
+    "文脈": "문맥", "論旨": "논지", "例示": "예시", "根據": "근거", "正答": "정답",
+    "誤答": "오답", "文章": "문장", "單語": "단어", "語法": "어법", "解釋": "해석",
+    "要旨": "요지", "主題": "주제", "比較": "비교", "省略": "생략", "強勢": "강세",
+}
+# 긴 항목이 먼저 매칭되도록 길이 내림차순으로 정렬
+_HANJA_RE = re.compile("|".join(map(re.escape,
+                                    sorted(_HANJA, key=len, reverse=True))))
+
+
+def _ko_normalize(text: str) -> str:
+    """한국어 텍스트에 섞인 흔한 한자를 한글로 치환."""
+    return _HANJA_RE.sub(lambda m: _HANJA[m.group(0)], text or "")
 
 
 # 해설을 줄 단위로 끊는 경계: (1) 라벨:, [오답 함정] 등, 문장 뒤 선지 시작 원문자
@@ -455,7 +478,7 @@ def _exp_html(text: str) -> str:
             parts.append(seg if seg in ("<b>", "</b>") else html.escape(seg))
         return "".join(parts)
 
-    t = (text or "").strip()
+    t = _ko_normalize((text or "").strip())
     # 문장부호 뒤 '선지 시작' 원문자(뒤에 공백/따옴표가 오는 경우만) 앞에서 줄바꿈
     t = re.sub(r"(?<=[.。!?\]\)])\s+(?=[①②③④⑤][\s'\"“‘])", "\n", t)
     # 섹션 라벨 앞에서 줄바꿈
