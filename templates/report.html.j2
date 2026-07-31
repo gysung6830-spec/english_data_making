@@ -20,6 +20,8 @@
     <div class="summary-overall">{{ report.summary.overall | highlight_ko(report.summary.keywords) }}</div>
   </div>
 
+  {# ②③ 구조 분석 + 출제 포인트를 2단(좌우)으로 배치 #}
+  <div class="two-col">
   {# ② 지문 구조 분석 (개조식 + 문장번호) #}
   <div class="section s-struc">
     <div class="section-head">
@@ -111,6 +113,7 @@
     {% endfor %}
     </div>
   </div>
+  </div>{# /two-col #}
 
   {# ④ 핵심 어휘 · 유의어 · 반의어 #}
   <div class="section s-voc">

@@ -77,6 +77,9 @@ body {
 
 /* ---------- 섹션 공통 ---------- */
 .section { margin: 0 0 8px; }
+/* ②③ 구조 분석 + 출제 포인트 2단(좌우) 배치 */
+.two-col { display: flex; gap: 11px; align-items: flex-start; }
+.two-col > .section { flex: 1 1 0; min-width: 0; margin-bottom: 8px; }
 .section-head { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
 .sec-num {
   display: inline-flex; align-items: center; justify-content: center;
