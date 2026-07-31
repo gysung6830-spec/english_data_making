@@ -309,6 +309,14 @@ def _strip_source_noise(text: str) -> str:
     """
     t = _SRC_NOISE.sub(" ", text)
     t = _STUDY_HEADER.sub(" ", t)
+    # 워크북 해석연습 지시문·머리말
+    t = re.sub(r"문장\s*전체의\s*자연스러운\s*해석을\s*써\s*보세요\.?", " ", t)
+    t = re.sub(r"해석\s*연습(?:하기)?|해설\s*연습(?:하기)?|단계별", " ", t)
+    t = re.sub(r"\d{4}\s*년\s*\d{1,2}\s*월", " ", t)          # 2026년 6월
+    t = re.sub(r"고[1-3]\b|중[1-3]\b", " ", t)               # 고3·중2 등 학년 표기
+    # 각주 마커(문장부호 뒤 'N)')와 줄머리 문장번호('N. ')
+    t = re.sub(r"(?<=[.!?”\"'’])\s*\d{1,2}\)", "", t)
+    t = re.sub(r"(?m)^[ \t]*\d{1,2}\.\s+", "", t)
     t = re.sub(r"[ \t]{2,}", " ", t)
     t = re.sub(r"[ \t]+\n", "\n", t)
     return t.strip()
@@ -417,6 +425,17 @@ def _split_bilingual(text: str) -> list[str]:
 # ---------------------------------------------------------------------------
 _PASSAGE_MARK = re.compile(r"^\s*(?:지문\s*\d+|passage\s*\d+|\[?\s*\d+\s*\]?)\s*[.:)]?\s*$", re.I)
 
+# 한글 워크북 유닛 헤더(줄 시작 'N번 …') — 문장번호('N.')와 달리 '번'이 붙는다.
+_UNIT_HEADER_LINE = re.compile(r"(?m)^[ \t]*\d{1,3}\s*번(?:[ \t]|$)")
+
+
+def _split_by_unit_header(text: str) -> list[str]:
+    """'31번 …' / '32번 …' 같은 유닛 헤더가 2개 이상이면 그 경계로 지문을 나눈다."""
+    if len(_UNIT_HEADER_LINE.findall(text)) < 2:
+        return []
+    parts = re.split(r"(?m)^(?=[ \t]*\d{1,3}\s*번(?:[ \t]|$))", text)
+    return [c.strip() for c in parts if c.strip()]
+
 
 def split_passages(text: str, source_file: str | None = None,
                    id_prefix: str = "p") -> list[Passage]:
@@ -442,9 +461,12 @@ def split_passages(text: str, source_file: str | None = None,
         if passages:
             return passages
 
-    # 1) 명시적 마커로 분할
+    # 1) 지문 경계 분할 — 워크북 유닛('N번') 우선, 그다음 명시적 마커, 없으면 빈 줄
     chunks: list[str] = []
-    if _has_explicit_markers(text):
+    unit_chunks = _split_by_unit_header(text)
+    if len(unit_chunks) >= 2:
+        chunks = unit_chunks
+    elif _has_explicit_markers(text):
         cur: list[str] = []
         for line in text.split("\n"):
             if _PASSAGE_MARK.match(line):
