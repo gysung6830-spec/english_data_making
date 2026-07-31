@@ -34,9 +34,18 @@ _NOISE_PATTERNS = [
     re.compile(r"^\s*[A-E]\)\s"),                       # A) B) 보기
 ]
 
-# 줄 앞머리 번호(1. / 2) / (3)): '해석 연습' 워크시트에서는 '문장 번호',
-# 객관식에서는 '보기'. 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
-_LEADING_NUM = re.compile(r"^\s*\(?([1-9]\d{0,2})\)?\s*[.)]\s+(?P<rest>.+)$")
+# 줄 앞머리 번호 마커: '해석 연습' 워크시트에서는 '문장 번호', 객관식에서는 '보기'.
+# 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
+# 지원: 1.  2)  (3)  [4]  【5】  〔6〕  <7>  Q8  Q9.  10▶  가.  나) 등
+_LEADING_NUM = re.compile(
+    r"^\s*(?:"
+    r"\(?[1-9]\d{0,2}\)?[.)]"                       # 1.  2)  (3)  (3.
+    r"|[\[【〔<（]\s*[1-9]\d{0,2}\s*[\]】〕>）]"        # [4] 【5】 〔6〕 <7> （8）
+    r"|[QqＱ][1-9]\d{0,2}[.)]?"                      # Q8  Q9.  Q10)
+    r"|[1-9]\d{0,2}\s*[▶►▷»➤]"                       # 10▶  11»
+    r"|[가나다라마바사아자차카타파하]\s*[.)]"              # 가.  나)
+    r")\s+(?P<rest>.+)$"
+)
 
 # 원문자 마커(①②③…): 한줄해석 지문에서는 '문장 번호', 객관식에서는 '보기'.
 # 마커 뒤 내용이 짧으면(보기) 제거, 길면(지문 문장) 유지한다.
@@ -158,3 +167,52 @@ def looks_empty(text: str) -> bool:
     """텍스트가 사실상 비어있는지(스캔본/추출 실패) 판단."""
     letters = re.sub(r"[^A-Za-z]", "", text)
     return len(letters) < 40
+
+
+def diagnose_extraction(text: str) -> dict:
+    """추출된 텍스트 품질을 'API 호출 전에' 무료로 자가진단한다.
+
+    반환: {"level": "ok"|"warn"|"bad", "ok": bool, "messages": [str, ...],
+           "stats": {...}}
+      - bad  : API 를 호출해도 의미 없는 입력(스캔본/그림/암호화 등) → 호출 skip 권장
+      - warn : 진행은 하되 결과가 불완전할 수 있음 → 사용자에게 경고
+      - ok   : 정상
+    본문 문장의 '소문자 시작 비율'이 높으면 문장 앞부분이 잘렸을 가능성으로 본다.
+    """
+    from .textutil import split_sentences
+
+    msgs: list[str] = []
+    letters = re.sub(r"[^A-Za-z]", "", text or "")
+    if len(letters) < 40:
+        return {"level": "bad", "ok": False,
+                "messages": ["영어 텍스트가 거의 추출되지 않았습니다(스캔본·그림·암호화 문서일 수 있음). "
+                             "한글에서 PDF로 저장하거나 지문을 사진(JPG/PNG)으로 넣어 주세요."],
+                "stats": {"letters": len(letters), "sentences": 0}}
+
+    body = (text or "").split("[해석]")[0]
+    sents = split_sentences(body)
+    n = len(sents)
+    if n == 0:
+        return {"level": "bad", "ok": False,
+                "messages": ["완전한 문장을 찾지 못했습니다(형식이 특이하거나 추출이 깨졌을 수 있음)."],
+                "stats": {"letters": len(letters), "sentences": 0}}
+
+    lower_start = sum(1 for s in sents if s[:1].islower())
+    frag_ratio = lower_start / n
+    very_short = sum(1 for s in sents if len(s) < 15)
+    stats = {"letters": len(letters), "sentences": n,
+             "lower_start": lower_start, "frag_ratio": round(frag_ratio, 2)}
+
+    level = "ok"
+    if frag_ratio >= 0.5:
+        level = "warn"
+        msgs.append(f"문장 {n}개 중 {lower_start}개가 소문자로 시작합니다 — 문장 앞부분이 잘렸을 수 있습니다. "
+                    "결과에서 문장이 온전한지 확인하세요.")
+    if very_short >= max(2, n // 2):
+        level = "warn"
+        msgs.append(f"아주 짧은 조각 문장이 {very_short}개입니다 — 지문이 조각나 추출됐을 수 있습니다.")
+    if n < 2:
+        level = "warn"
+        msgs.append("문장이 1개뿐입니다 — 지문 일부만 추출됐을 수 있습니다.")
+
+    return {"level": level, "ok": level != "bad", "messages": msgs, "stats": stats}

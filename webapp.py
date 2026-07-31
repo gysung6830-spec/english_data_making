@@ -20,7 +20,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline
+from src import extract, pipeline, envcheck
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -92,6 +92,7 @@ INDEX_HTML = """
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
     <div class=sub>지문 사진(JPG/PNG)·PDF·HWP를 올리면, 통합 워크북·빈칸 채우기 워크북 PDF를 만들어 드립니다.</div>
+    {{ env_banner|safe }}
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
@@ -222,9 +223,31 @@ def login():
 # ---------------------------------------------------------------------------
 # 라우트
 # ---------------------------------------------------------------------------
+def _env_banner_html() -> str:
+    """환경 자가진단 결과를 배너 HTML 로. 문제 없으면 빈 문자열."""
+    result = envcheck.check_environment(cfg)
+    bad = [it for it in result["items"] if not it["ok"]]
+    if not bad:
+        return ""
+    rows = "".join(f"<li><b>{it['name']}</b> — {it['detail']}</li>" for it in bad)
+    return (
+        '<div class=err style="background:#fff8e1;border-color:#f5d78a;color:#7a5b00">'
+        '<b>⚠️ 실행 환경 점검</b> — 아래 항목을 해결해야 정상 동작합니다.'
+        f'<ul style="margin:6px 0 0 18px;padding:0">{rows}</ul></div>'
+    )
+
+
 @app.route("/")
 def index():
-    return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
+    return render_template_string(INDEX_HTML, has_key=cfg.has_api_key,
+                                  env_banner=_env_banner_html())
+
+
+@app.route("/health")
+def health():
+    """환경 자가진단 결과(JSON). 문제 유무를 프로그램적으로 확인할 때."""
+    from flask import jsonify
+    return jsonify(envcheck.check_environment(cfg))
 
 
 @app.route("/analyze", methods=["POST"], endpoint="analyze")
@@ -238,12 +261,12 @@ def analyze_route():
     key = key or cfg.api_key
 
     if not files:
-        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
+        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key, env_banner="")
     if not mock and not key:
         # 키 없고 미리보기도 아님 → 안내
         html = INDEX_HTML.replace("<form id=f",
             "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요.</div><form id=f")
-        return render_template_string(html, has_key=cfg.has_api_key)
+        return render_template_string(html, has_key=cfg.has_api_key, env_banner="")
 
     client = None if mock else ClaudeClient(key, cfg.model)
 
@@ -268,7 +291,22 @@ def analyze_route():
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
         stem = _safe_name(Path(f.filename).stem)
+        warn_note = ""
         try:
+            # ── 추출 품질 자가진단 (API 호출 전, 비용 0) ──
+            # 텍스트 파일(PDF/HWP)만 사전 점검. 심각하면 API 를 부르지 않고 건너뛴다(비용 절약).
+            if not mock and not extract.is_image(tmp):
+                try:
+                    diag = extract.diagnose_extraction(extract.extract_passage_text(tmp))
+                except Exception:
+                    diag = {"level": "ok", "ok": True, "messages": []}
+                if not diag["ok"]:
+                    results.append({"name": f.filename, "ok": False,
+                                    "error": "⚠️ " + " ".join(diag["messages"])
+                                             + " · AI를 호출하지 않았습니다(비용 절약)."})
+                    continue
+                if diag["level"] == "warn":
+                    warn_note = " ⚠️ " + " ".join(diag["messages"])
             # 한 파일에 여러 지문이 있으면 지문별로 통합 워크북 + 단일 유형 + 빈칸형을 만든다.
             if mock:
                 wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
@@ -284,12 +322,12 @@ def analyze_route():
             wb_books.extend(wbs)
             wb_packs.extend(packs)
             wb_bsets.extend(file_bsets)
-            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편)",
+            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편){warn_note}",
                             "ok": True, "out": out.name})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
-            results.append({"name": f.filename, "ok": False, "error": str(e)})
+            results.append({"name": f.filename, "ok": False, "error": _friendly_error(e)})
         finally:
             tmp.unlink(missing_ok=True)
 
@@ -312,6 +350,28 @@ def analyze_route():
 
 def _safe_name(stem: str) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+
+
+def _friendly_error(e: Exception) -> str:
+    """API·네트워크 오류를 '무엇을 해야 하는지'까지 담은 한국어 안내로 바꾼다."""
+    name = type(e).__name__
+    msg = str(e)
+    low = (name + " " + msg).lower()
+    if "authentication" in low or "invalid x-api-key" in low or "401" in low:
+        return "API 키가 올바르지 않습니다. console.anthropic.com 에서 키를 다시 확인해 입력하세요."
+    if "permission" in low or "403" in low:
+        return "이 API 키로는 접근 권한이 없습니다. 키/결제 상태를 확인하세요."
+    if "rate" in low and "limit" in low or "429" in low:
+        return "요청이 너무 많습니다(사용량 한도). 잠시 후 다시 시도하거나 파일 수를 줄여 주세요."
+    if "credit" in low or "billing" in low or "quota" in low or "insufficient" in low:
+        return "API 사용 크레딧이 부족합니다. console.anthropic.com 결제에서 크레딧을 충전하세요."
+    if "overloaded" in low or "529" in low:
+        return "AI 서버가 일시적으로 혼잡합니다(overloaded). 잠시 후 다시 시도하세요."
+    if "connection" in low or "timeout" in low or "network" in low:
+        return "네트워크 연결에 문제가 있습니다. 인터넷 연결을 확인하고 다시 시도하세요."
+    if "검증 실패" in msg:
+        return msg + " (지문 형식이 특이하면 발생할 수 있습니다. 다른 파일로도 시도해 보세요.)"
+    return msg
 
 
 def _safe_output(fname: str) -> Path:
@@ -338,6 +398,9 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     print("=" * 56)
     print("  영어 지문 분석 웹앱이 실행되었습니다.")
+    # 실행 환경 자가진단 (무엇이 빠졌는지 즉시 표시)
+    print("  " + envcheck.format_report(envcheck.check_environment(cfg)).replace("\n", "\n  "))
+    print("-" * 56)
     print("  브라우저에서 아래 주소로 접속하세요:")
     print(f"      http://localhost:{port}")
     print("  (종료하려면 이 창에서 Ctrl+C)")

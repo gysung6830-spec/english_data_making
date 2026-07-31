@@ -65,8 +65,10 @@ def load_config(path: str | Path | None = None) -> Config:
     proc = data.get("processing", {})
     design = data.get("design", {})
 
+    # 모델은 환경변수 ANTHROPIC_MODEL 로도 바꿀 수 있다(비용 절감용: 예) claude-sonnet-5).
+    model = os.environ.get("ANTHROPIC_MODEL") or data.get("model", "claude-opus-4-8")
     cfg = Config(
-        model=data.get("model", "claude-opus-4-8"),
+        model=model,
         input_dir=_resolve(ROOT, paths.get("input", "input")),
         output_dir=_resolve(ROOT, paths.get("output", "output")),
         logs_dir=_resolve(ROOT, paths.get("logs", "logs")),
