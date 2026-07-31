@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field, field_validator
 class Extraction(BaseModel):
     title: str = Field(default="Untitled")
     source: str = Field(default="")
+    item_no: str = Field(default="")   # 원본 교재의 문항 번호(예: "6", "27강 6번"), 없으면 ""
     paragraphs: list[str] = Field(default_factory=list)
 
     @field_validator("paragraphs")
@@ -190,6 +191,7 @@ class ExamSection(BaseModel):
 class Report(BaseModel):
     title: str
     source: str = ""
+    item_no: str = ""    # 원본 교재의 문항 번호(제목 앞에 표시)
     summary: SummarySection
     literal: LiteralSection
     grammar: GrammarSection

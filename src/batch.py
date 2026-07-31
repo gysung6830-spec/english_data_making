@@ -202,7 +202,7 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                 p = parsed[(fid, pidx)]
                 exam = parse_response_text(res3.get(f"{fid}__{pidx}__exam") or "", schemas.ExamSection)
                 reports.append(schemas.Report(
-                    title=ex.title, source=ex.source,
+                    title=ex.title, source=ex.source, item_no=ex.item_no,
                     summary=p["summary"], literal=p["literal"],
                     grammar=p["grammar"], vocab=p["vocab"],
                     structure=p["structure"], exam=exam,

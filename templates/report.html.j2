@@ -8,7 +8,7 @@
     <span class="doc-badge">지문 분석</span>
     {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
-    <div class="doc-title">{{ pno }}. {{ report.summary.theme_en or report.title }}</div>
+    <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
 
   {# ① 주제 #}
@@ -233,7 +233,7 @@
   <div class="doc-header">
     <span class="doc-badge">원문 · 전체 해석</span>
     {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
-    <div class="doc-title">{{ pno }}. {{ report.summary.theme_en or report.title }}</div>
+    <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
     <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석</th></tr></thead>

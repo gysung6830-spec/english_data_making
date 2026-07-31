@@ -98,6 +98,7 @@ def analyze_passage(
     return schemas.Report(
         title=title,
         source=extraction.source,
+        item_no=extraction.item_no,
         summary=results["summary"],
         literal=results["literal"],
         grammar=grammar,

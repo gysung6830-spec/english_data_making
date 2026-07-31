@@ -8,10 +8,12 @@ from __future__ import annotations
 from src import schemas
 
 
-def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reader 2024") -> schemas.Report:
+def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reader 2024",
+                item_no: str = "") -> schemas.Report:
     return schemas.Report(
         title=title,
         source=source,
+        item_no=item_no,
         summary=schemas.SummarySection(
             overall="호기심은 학습과 성장의 원동력이므로 교육은 정답 암기보다 질문하는 태도를 길러야 한다.",
             theme_en="The Value of Curiosity in Learning",
