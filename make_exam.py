@@ -83,7 +83,8 @@ def main() -> int:
     from exam.pipeline import build_exam
     from exam.llm import ClaudeClient
 
-    client = ClaudeClient(cfg.api_key, cfg.model)
+    client = ClaudeClient(cfg.api_key, cfg.model,
+                          thinking=cfg.processing.thinking, effort=cfg.processing.effort)
 
     # 파일 -> 지문 텍스트(사진은 비전으로 읽음)
     try:

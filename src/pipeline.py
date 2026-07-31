@@ -76,7 +76,8 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
                 "ANTHROPIC_API_KEY 가 설정되지 않았습니다. .env 파일에 키를 입력하거나 "
                 "--mock 옵션으로 디자인만 미리 확인하세요."
             )
-        client = ClaudeClient(cfg.api_key, cfg.model)
+        client = ClaudeClient(cfg.api_key, cfg.model,
+                          thinking=cfg.processing.thinking, effort=cfg.processing.effort)
 
     logger.info("총 %d개 지문 처리 시작 (%s 모드)", total, "MOCK" if mock else "API")
 

@@ -65,6 +65,8 @@ def build_request(
     max_tokens: int = DEFAULT_MAX_TOKENS,
     image_path: str | Path | None = None,
     cache_prefix: str | None = None,
+    thinking: bool = False,
+    effort: str | None = None,
 ) -> dict:
     """messages.create 및 Batch API 에 그대로 쓸 요청 파라미터.
 
@@ -91,13 +93,25 @@ def build_request(
         content: Any = [image_block(image_path), {"type": "text", "text": prompt}]
     else:
         content = prompt
-    return {
+
+    # 구조화 출력(JSON 스키마) + (선택) 추론 강도(effort)
+    output_config: dict = dict(output_format(model_cls))
+    if effort:
+        output_config["effort"] = effort
+
+    req: dict = {
         "model": model,
         "max_tokens": max_tokens,
         "system": system_param,
         "messages": [{"role": "user", "content": content}],
-        "output_config": output_format(model_cls),
+        "output_config": output_config,
     }
+    # 적응형 사고: 정답·오답 설계의 논리 오류를 줄인다(Opus 는 기본 사고 OFF라 명시 필요).
+    # 사고 토큰이 출력에 더해지므로 max_tokens 에 여유를 준다(타임아웃 없는 범위).
+    if thinking:
+        req["thinking"] = {"type": "adaptive"}
+        req["max_tokens"] = max(max_tokens + 6000, 9000)
+    return req
 
 
 def parse_response_text(text: str, model_cls: type[T]) -> T:
@@ -116,11 +130,14 @@ def extract_text(message: Any) -> str:
 class ClaudeClient:
     """동기 처리용 래퍼."""
 
-    def __init__(self, api_key: str, model: str):
+    def __init__(self, api_key: str, model: str,
+                 thinking: bool = False, effort: str | None = None):
         import anthropic  # 지연 임포트 (mock 모드에서는 불필요)
 
         self._client = anthropic.Anthropic(api_key=api_key)
         self.model = model
+        self.thinking = thinking          # 적응형 사고(오류 감축)
+        self.effort = effort              # 추론 강도
 
     def structured(
         self,
@@ -143,7 +160,8 @@ class ClaudeClient:
         cur_prompt = prompt
         for attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
-                                image_path=image_path, cache_prefix=cache_prefix)
+                                image_path=image_path, cache_prefix=cache_prefix,
+                                thinking=self.thinking, effort=self.effort)
             message = self._client.messages.create(**req)
             try:
                 text = extract_text(message)

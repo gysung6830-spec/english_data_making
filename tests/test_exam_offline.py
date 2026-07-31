@@ -581,6 +581,78 @@ def test_difficulty_lever() -> None:
     print("✓ 상/중/하 난이도 레버(지침 주입·1회2회 배선) 통과")
 
 
+def test_error_reduction_settings() -> None:
+    """무인 배치 신뢰도 설정: config 기본값과 build_request 의 thinking/effort 반영."""
+    from src.client import build_request
+    from src.config import ProcessingCfg, load_config
+
+    # 1) 기본값이 '오류 감축' 쪽으로 서 있는지
+    dc = ProcessingCfg()
+    assert dc.thinking is True and dc.effort == "high"
+    assert dc.max_retries == 2 and dc.pdf_vision_fallback is True
+    # load_config 도 같은 기본값을 읽어오는지(파일 없거나 미지정 시)
+    cfg = load_config()
+    assert cfg.processing.thinking is True
+    assert cfg.processing.effort == "high"
+    assert cfg.processing.max_retries >= 2
+    assert cfg.processing.pdf_vision_fallback is True
+
+    # 2) thinking=True → 적응형 사고 + max_tokens 여유 상향
+    req = build_request("claude-opus-4-8", "SYS", "P", OrderOut,
+                        max_tokens=100, thinking=True, effort="high")
+    assert req["thinking"] == {"type": "adaptive"}
+    assert req["max_tokens"] >= 9000                      # 사고 토큰 여유
+    assert req["output_config"]["effort"] == "high"       # 추론 강도는 output_config
+
+    # 3) 기본(thinking off, effort 없음)이면 thinking 키가 없고 max_tokens 그대로
+    req2 = build_request("claude-opus-4-8", "SYS", "P", OrderOut, max_tokens=100)
+    assert "thinking" not in req2
+    assert req2["max_tokens"] == 100
+    assert "effort" not in req2["output_config"]
+    print("✓ 오류 감축 설정(적응형 사고·effort·재시도·기본값) 통과")
+
+
+def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """조건부 Vision OCR: 글자 있는 PDF 는 vision 안 부르고, 빈(스캔) PDF 만 폴백."""
+    from exam import ingest
+
+    calls = {"vision": 0}
+
+    def _fake_vision(client, path, **kw):
+        calls["vision"] += 1
+        return ["Recovered scanned passage body. " * 12]   # 120자↑ 확보
+
+    orig_vision = ingest.read_pdf_passages_vision
+    orig_read = ingest.read_pdf_passages
+    ingest.read_pdf_passages_vision = _fake_vision
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    fake_pdf = tmp_out / "dummy.pdf"
+    fake_pdf.write_bytes(b"%PDF-1.4 dummy")   # 실제 파싱은 monkeypatch 로 우회
+    try:
+        # (a) 글자 PDF: read_pdf_passages 가 본문을 주면 vision 호출 안 함
+        ingest.read_pdf_passages = lambda p: ["Real text passage body. " * 12]
+        out = ingest.load_bodies([fake_pdf], client=object(), vision_fallback=True)
+        assert calls["vision"] == 0 and len(out) == 1
+
+        # (b) 스캔 PDF(텍스트 0) + client·vision_fallback → vision 폴백
+        ingest.read_pdf_passages = lambda p: []
+        out = ingest.load_bodies([fake_pdf], client=object(), vision_fallback=True)
+        assert calls["vision"] == 1 and len(out) == 1
+
+        # (c) vision_fallback=False 면 폴백 안 하고 안내 오류
+        ingest.read_pdf_passages = lambda p: []
+        try:
+            ingest.load_bodies([fake_pdf], client=object(), vision_fallback=False)
+            assert False, "빈 PDF 는 오류여야 함"
+        except ValueError:
+            pass
+        assert calls["vision"] == 1   # 호출 증가 없음
+    finally:
+        ingest.read_pdf_passages_vision = orig_vision
+        ingest.read_pdf_passages = orig_read
+    print("✓ 조건부 Vision OCR 폴백(글자 PDF 건너뜀·스캔만 OCR) 통과")
+
+
 if __name__ == "__main__":
     test_demo_validation_and_numbering()
     test_render_html_bold_rules()
@@ -599,4 +671,6 @@ if __name__ == "__main__":
     test_pdf_merge()
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
+    test_error_reduction_settings()
+    test_conditional_vision_fallback()
     print("\n모든 오프라인 테스트 통과 ✅")

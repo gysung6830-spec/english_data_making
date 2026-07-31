@@ -102,7 +102,9 @@ def generate():
                         "없습니다.) 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
         from exam import ingest
         from exam.llm import ClaudeClient
-        client = ClaudeClient(cfg.api_key, cfg.model)
+        client = ClaudeClient(cfg.api_key, cfg.model,
+                              thinking=cfg.processing.thinking,
+                              effort=cfg.processing.effort)
         try:
             if uploads:
                 updir = OUT / "uploads" / uuid.uuid4().hex[:12]
@@ -116,7 +118,9 @@ def generate():
                     dest = updir / f"upload_{i}{ext}"
                     f.save(dest)
                     paths.append(dest)
-                bodies = [b for _, b in ingest.load_bodies(paths, client=client)]
+                bodies = [b for _, b in ingest.load_bodies(
+                    paths, client=client,
+                    vision_fallback=cfg.processing.pdf_vision_fallback)]
             else:
                 bodies = pasted
         except Exception as e:  # noqa: BLE001

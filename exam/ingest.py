@@ -11,6 +11,8 @@
 from __future__ import annotations
 
 import re
+import shutil
+import tempfile
 from pathlib import Path
 
 from src import extract  # 기존 분석 도구의 PDF/이미지 유틸 재사용
@@ -148,6 +150,40 @@ def read_hwp_passages(path: str | Path) -> list[str]:
     return _passages_from_raw(_hwp.read_hwp_any(path))
 
 
+def read_pdf_passages_vision(client, path: str | Path, max_pages: int = 20,
+                             logger=None) -> list[str]:
+    """텍스트가 없는 '스캔 PDF'만 Claude 비전으로 페이지별 OCR 해 지문을 뽑는다.
+
+    조건부 사용: 글자 PDF 는 pdfplumber(오프라인)로 처리하고, 여기 vision 은 텍스트
+    추출이 실패한 문제(스캔) 파일에만 폴백으로 쓴다(비용·속도 절약). 페이지 1장 = 문제
+    1개로 보고 페이지별로 OCR → 정제한다.
+    """
+    from pdf2image import convert_from_path   # 지연 임포트(무거움)
+
+    tmpdir = Path(tempfile.mkdtemp(prefix="pdfvis_"))
+    passages: list[str] = []
+    try:
+        images = convert_from_path(str(path), dpi=150)
+        n = len(images)
+        if n > max_pages and logger:
+            logger.warning("스캔 PDF %d쪽 중 앞 %d쪽만 OCR 합니다(비용 상한).", n, max_pages)
+        for i, im in enumerate(images[:max_pages], 1):
+            png = tmpdir / f"p{i}.png"
+            im.save(png, "PNG")
+            try:
+                txt = read_image_text(client, png)
+            except Exception as e:  # noqa: BLE001 — 한 쪽 실패는 건너뛴다
+                if logger:
+                    logger.warning("[OCR %d/%d] 실패: %s", i, n, e)
+                continue
+            body = _clean_pdf_text(txt)
+            if len(re.sub(r"[^A-Za-z]", "", body)) >= 120:
+                passages.append(body)
+    finally:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+    return passages
+
+
 def read_pdf(path: str | Path) -> str:
     """글자 PDF에서 지문 텍스트를 추출(정제). 여러 지문이면 이어 붙여 반환."""
     passages = read_pdf_passages(path)
@@ -206,11 +242,13 @@ def load_body(path: str | Path, client=None) -> str:
     )
 
 
-def load_bodies(paths, client=None) -> list[tuple[str, str]]:
+def load_bodies(paths, client=None, vision_fallback: bool = True,
+                logger=None) -> list[tuple[str, str]]:
     """여러 파일 -> [(라벨, 지문본문)] 목록.
 
     보통 파일 1개 = 지문 1개지만, PDF 한 개에 지문이 여러 개면(예: EBS 워크시트)
-    각각을 별도 지문으로 분리한다.
+    각각을 별도 지문으로 분리한다. 글자 없는 '스캔 PDF'는 client·vision_fallback 이
+    있을 때만 조건부로 Claude 비전 OCR 로 처리한다(문제 파일만).
     """
     out: list[tuple[str, str]] = []
     for p in paths:
@@ -218,11 +256,16 @@ def load_bodies(paths, client=None) -> list[tuple[str, str]]:
         ext = p.suffix.lower()
         if ext in PDF_EXTS or ext in HWP_EXTS:
             passages = read_pdf_passages(p) if ext in PDF_EXTS else read_hwp_passages(p)
+            if not passages and ext in PDF_EXTS and vision_fallback and client is not None:
+                # 텍스트가 전혀 없는 스캔 PDF → 조건부 Vision OCR 폴백
+                if logger:
+                    logger.info("[%s] 글자 없는 스캔 PDF — Vision OCR 폴백", p.name)
+                passages = read_pdf_passages_vision(client, p, logger=logger)
             if not passages:
                 if ext in PDF_EXTS:
                     raise ValueError(
-                        f"'{p.name}': 글자가 없는(스캔본) PDF로 보입니다. "
-                        "해당 페이지를 사진(JPG/PNG)으로 저장해 올려 주세요."
+                        f"'{p.name}': 글자가 없는(스캔본) PDF에서 지문을 찾지 못했습니다. "
+                        "API 키가 있으면 자동 OCR 되며, 없으면 사진(JPG/PNG)으로 올려 주세요."
                     )
                 raise ValueError(
                     f"'{p.name}': HWP에서 영어 지문을 찾지 못했습니다. 지문을 복사해 "

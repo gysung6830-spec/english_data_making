@@ -58,7 +58,8 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
     manifest = Manifest(cfg.logs_dir)
     if not cfg.has_api_key:
         raise SystemExit("ANTHROPIC_API_KEY 가 필요합니다.")
-    client = ClaudeClient(cfg.api_key, model)
+    client = ClaudeClient(cfg.api_key, model,
+                          thinking=cfg.processing.thinking, effort=cfg.processing.effort)
 
     pdfs = list_pdfs(cfg.input_dir)
     total = len(pdfs)

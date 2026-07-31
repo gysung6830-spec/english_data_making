@@ -18,14 +18,22 @@ vocab:
   max: 20
 
 # 처리 방식
+#   ※ 아래는 '사람이 일일이 검수하지 않는 무인 배치' 기준의 오류 감축 설정입니다.
+#      속도·비용보다 결과 신뢰도를 우선합니다.
 processing:
   # 한 지문당 6개 섹션을 동시에 요청할지 여부 (true 면 더 빠름)
   parallel_sections: true
-  # 검증 실패(JSON 오류/개수 부족) 시 재요청 횟수
-  max_retries: 1
+  # 검증 실패(JSON 오류/개수 부족) 시 재요청 횟수 (무인 운영이면 2 권장)
+  max_retries: 2
   # 대량 처리 시 Batch API 사용 여부 (지문 수가 많을 때 비용 절감)
   #   run.py --batch 로 실행하면 이 값과 상관없이 배치 모드로 동작합니다.
   use_batch_for_bulk: true
+  # 적응형 사고(추론) 켜기 → 정답·오답 설계 논리 오류를 줄임 (출력 토큰↑, 비용↑)
+  thinking: true
+  # 추론 강도 low/medium/high/xhigh — 높을수록 신중 (비용↑)
+  effort: "high"
+  # 텍스트가 없는 '스캔 PDF(문제 파일)'만 조건부로 Vision OCR 처리 (글자 PDF 는 오프라인)
+  pdf_vision_fallback: true
 
 # 출력 PDF 디자인
 design:

@@ -21,8 +21,12 @@ class VocabCfg:
 @dataclass
 class ProcessingCfg:
     parallel_sections: bool = True
-    max_retries: int = 1
+    max_retries: int = 2                 # 검증 실패 시 재시도(무인 배치 신뢰도)
     use_batch_for_bulk: bool = True
+    # 오류 감축 설정 — 사람이 일일이 검수하지 않는 배치 운영용
+    thinking: bool = True                # 적응형 사고(추론) 켜기 → 정답 설계 오류↓
+    effort: str = "high"                 # low/medium/high/xhigh — 높을수록 신중(비용↑)
+    pdf_vision_fallback: bool = True      # 텍스트 없는 스캔 PDF만 Vision OCR로 조건부 처리
 
 
 @dataclass
@@ -73,8 +77,11 @@ def load_config(path: str | Path | None = None) -> Config:
         vocab=VocabCfg(min=int(vocab.get("min", 12)), max=int(vocab.get("max", 20))),
         processing=ProcessingCfg(
             parallel_sections=bool(proc.get("parallel_sections", True)),
-            max_retries=int(proc.get("max_retries", 1)),
+            max_retries=int(proc.get("max_retries", 2)),
             use_batch_for_bulk=bool(proc.get("use_batch_for_bulk", True)),
+            thinking=bool(proc.get("thinking", True)),
+            effort=str(proc.get("effort", "high")),
+            pdf_vision_fallback=bool(proc.get("pdf_vision_fallback", True)),
         ),
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),
