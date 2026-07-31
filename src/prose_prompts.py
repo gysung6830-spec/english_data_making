@@ -79,9 +79,13 @@ def _passage_block(title: str, body: str, ko: str = "") -> str:
 
 
 def prose_prompt(title: str, body: str, ko: str = "") -> str:
+    from .textutil import STYLE_GUIDE
+
     return (
         "아래 영어 지문으로 '단일 유형 산문 워크시트' 데이터를 만든다.\n\n"
         + _RULES
+        + "\n\n"
+        + STYLE_GUIDE
         + "\n\n"
         + _passage_block(title, body, ko)
     )

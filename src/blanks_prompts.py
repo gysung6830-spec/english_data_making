@@ -49,8 +49,10 @@ def blanks_prompt(title: str, body: str, ko: str = "") -> str:
     slb = sentence_list_block(body)
     if slb:
         block += "\n\n" + slb
+    from .textutil import STYLE_GUIDE
+
     return (
         "아래 영어 지문으로 '빈칸형 워크북' 한 세트(유형 B → 유형 A)를 만든다.\n"
         "출력은 하나의 세트(LLMBlankSet) JSON 이다. no 는 1, title 은 지문 제목, subtitle 은 한 줄 요지.\n\n"
-        + _RULES + "\n\n" + block
+        + _RULES + "\n\n" + STYLE_GUIDE + "\n\n" + block
     )

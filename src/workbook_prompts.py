@@ -107,9 +107,13 @@ def _passage_block(title: str, body: str, ko: str = "") -> str:
 
 
 def workbook_prompt(title: str, body: str, ko: str = "") -> str:
+    from .textutil import STYLE_GUIDE
+
     return (
         "아래 영어 지문으로 '문장별 복합유형 통합 워크북'을 만든다.\n\n"
         + _RULES
+        + "\n\n"
+        + STYLE_GUIDE
         + "\n\n"
         + _passage_block(title, body, ko)
     )
