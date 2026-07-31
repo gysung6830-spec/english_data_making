@@ -31,7 +31,7 @@ class DesignCfg:
     one_pdf_per_passage: bool = True
     brand: str = "은아 T"   # 직독직해 'made by ~' · 출제표 '~ tip' 에 넣는 이름(footer 와 무관)
     make_student: bool = True     # 선생님용과 함께 학생용(필기) PDF 도 생성
-    student_level: str = "slash"  # 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸)
+    student_level: str = "blank"  # 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸)
 
 
 @dataclass
@@ -109,7 +109,7 @@ def load_config(path: str | Path | None = None) -> Config:
             one_pdf_per_passage=bool(design.get("one_pdf_per_passage", True)),
             brand=str(design.get("brand", "은아 T")),
             make_student=bool(design.get("make_student", True)),
-            student_level=str(design.get("student_level", "slash")),
+            student_level=str(design.get("student_level", "blank")),
         ),
         outputs=OutputsCfg(
             analysis=bool(outputs.get("analysis", True)),
