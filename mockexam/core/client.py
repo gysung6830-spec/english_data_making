@@ -142,10 +142,13 @@ def _extract_json(text: str) -> Any:
 
 
 def extract_text(message: Any) -> str:
-    for block in message.content:
-        if getattr(block, "type", None) == "text":
-            return block.text
-    raise ValueError("응답에 텍스트 블록이 없습니다.")
+    """응답의 모든 text 블록을 이어붙여 반환(부분/다중 블록도 견고하게 처리)."""
+    parts = [b.text for b in getattr(message, "content", [])
+             if getattr(b, "type", None) == "text" and getattr(b, "text", "")]
+    if parts:
+        return "\n".join(parts)
+    stop = getattr(message, "stop_reason", None)
+    raise ValueError(f"응답에 텍스트 블록이 없습니다(stop_reason={stop}).")
 
 
 # 일시적(재시도 가능) 오류로 볼 HTTP 상태 코드

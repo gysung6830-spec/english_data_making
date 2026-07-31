@@ -81,8 +81,30 @@ def generate_mock(
         a = a_by.get((q.section, q.no))
         p = pmap.get(a.passage_id) if a and a.passage_id else None
         item = item_by.get((q.section, q.no))
-        if p is not None and item is not None:
-            exam.questions[q_i] = generate_question(item, p, ctx)
+        if p is None or item is None:
+            return
+        try:
+            exam.questions[q_i] = generate_question(item, p, ctx)  # 성공 시 플래그 사라짐
+        except Exception as e:  # noqa: BLE001 - 재시도 실패는 플래그만 유지
+            exam.questions[q_i].meta["review_flag"] = f"생성 실패 — 재생성 필요 ({str(e)[:60]})"
+
+    def _failed_idx() -> list[int]:
+        return [i for i, q in enumerate(exam.questions)
+                if isinstance(q.meta, dict)
+                and str(q.meta.get("review_flag", "")).startswith("생성 실패")]
+
+    # [5-2] 생성 실패(일시적 오류) 문항 즉시 자동 재시도 — 선택형·서술형 공통
+    if client is not None:
+        for _ in range(2):
+            fidx = _failed_idx()
+            if not fidx:
+                break
+            if len(fidx) > 1:
+                from concurrent.futures import ThreadPoolExecutor
+                with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
+                    list(ex.map(_regen, fidx))
+            else:
+                _regen(fidx[0])
 
     # [6] 형식·구조 검증 + 실패 문항 재생성
     structural = client is not None

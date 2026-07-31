@@ -319,6 +319,27 @@ def test_answer_key_shows_warn_badge():
     assert "⚠ 확인 권장" not in prob  # 문제지에는 배지 없음
 
 
+def test_transient_generation_failure_auto_recovers():
+    """일시적 생성 실패(응답 텍스트 없음 등) 문항은 파이프라인이 자동 재시도로 복구한다."""
+    class Flaky(_FakeLLMClient):
+        def __init__(self):
+            self.fail_once = True
+
+        def structured(self, system, prompt, model_cls, **kw):
+            if (model_cls.__name__ == "EssayQuestionOut"
+                    and "밑줄 친 우리말" in prompt and self.fail_once):
+                self.fail_once = False
+                raise RuntimeError("응답에 텍스트 블록이 없습니다.")
+            return super().structured(system, prompt, model_cls, **kw)
+
+    res = generate_mock("jinyang_hs", [SAMPLE], difficulty="중", grade=1,
+                        client=Flaky())
+    failed = [q for q in res.exam.questions
+              if isinstance(q.meta, dict)
+              and str(q.meta.get("review_flag", "")).startswith("생성 실패")]
+    assert not failed, "일시적 실패가 자동 재시도로 복구되어야 한다"
+
+
 def test_dialogue_notice_format_fallback():
     """대화/안내문 지문이 없어 대체된 경우, 지어내지 말고 일반 내용(불)일치로 전환."""
     from mockexam.core.models import Item, Passage
