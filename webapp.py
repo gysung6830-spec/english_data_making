@@ -210,9 +210,12 @@ RESULT_HTML = """
       {% endfor %}
     </table>
 
+    {% for w in warnings %}
+    <div class=err style="background:#fff8e1;border-color:#ffe08a;color:#8a5a00">⚠ {{ w }}</div>
+    {% endfor %}
     {% if failed %}
     <div class=err>⚠ <b>확인 필요</b> — 생성/배정이 안 된 문항: <b>{{ failed }}</b><br>
-      해당 문항은 해설지에 <b>⚠ 확인 권장</b>으로 표시되어 있습니다. API 키·요금제를
+      해당 문항은 PDF 맨 끝 <b>'확인 권장 문항'</b> 페이지에 정리돼 있습니다. API 키·요금제를
       확인하거나 다시 생성하면 채워집니다.
     </div>
     {% endif %}
@@ -461,33 +464,33 @@ def generate():
         from mockexam.core.llm import get_client
         client = get_client(key, MODEL)
 
+    warnings: list[str] = []
     try:
         # 문항 생성 단계에서 구조·정답 유일성을 자가검증한다(별도 검수 패스 없음).
         res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
                             grade=grade, client=client)
-        # 지문을 하나도 못 읽은 경우에만(스캔/HWP 등) 실행 가능한 안내를 준다.
-        if res.num_passages == 0:
-            raise RuntimeError(
-                "업로드한 파일에서 영어 지문 텍스트를 읽지 못했습니다. "
-                "스캔·사진 PDF(그림만 있는 PDF)이거나 HWP일 수 있습니다. "
-                "→ 텍스트가 선택·복사되는 PDF로 저장하거나, HWP는 'PDF로 저장' 후 "
-                "다시 올려주세요. (사진 지문은 OCR 설치가 필요합니다.)")
 
-        # LLM 문항 생성이 (거의) 전부 실패하면 자리표시자만 남으므로,
-        # 감추지 말고 '실제 원인'을 그대로 보여준다(API 키/모델/스키마 등).
+        # ── 아래 조건은 '오류'지만 PDF 는 항상 내보낸다. 경고로만 표시. ──
+        # 지문을 하나도 못 읽은 경우(스캔/HWP 등) → 자리표시자로 생성됨
+        if res.num_passages == 0:
+            warnings.append(
+                "업로드 파일에서 지문 텍스트를 읽지 못해 '지문 부족' 자리표시자로 "
+                "생성했습니다. 텍스트가 선택되는 PDF로 저장하거나(스캔본은 API 키를 "
+                "넣으면 비전으로 읽힘), HWP는 'PDF로 저장' 후 다시 올려주세요.")
+
+        # 일부 문항 생성 실패 → 실패 문항은 마지막 '확인 권장' 페이지에 정리됨
         gen_errs = [l for l in res.logs if l.get("note") == "generation_failed"]
         n_q = len(res.exam.questions) or 1
-        if not mock and len(gen_errs) >= n_q * 0.5:
+        if not mock and gen_errs:
             uniq = []
             for l in gen_errs:
                 msg = l.get("error", "")
                 if msg and msg not in uniq:
                     uniq.append(msg)
-            detail = " | ".join(uniq[:3]) or "원인 메시지 없음"
-            raise RuntimeError(
-                f"문항 생성이 대부분 실패했습니다({len(gen_errs)}/{n_q}). "
-                f"실제 오류: {detail}  ← 이 메시지를 확인해 주세요"
-                "(대개 API 키/모델 이름/요금제 문제).")
+            detail = " | ".join(uniq[:2]) or "원인 메시지 없음"
+            warnings.append(
+                f"일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
+                f"마지막 '확인 권장' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
 
         raw = (request.form.get("outname") or "").strip()
         if raw.lower().endswith(".pdf"):
@@ -533,7 +536,7 @@ def generate():
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
         total=res.blueprint.total_score, mock=mock, shortage=shortage,
-        failed=failed, downloads=downloads,
+        failed=failed, warnings=warnings, downloads=downloads,
         verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
 
