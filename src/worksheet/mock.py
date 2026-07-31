@@ -5,7 +5,7 @@
 - 모든 문장에 성분(S·V·O·OC·C)을 빠짐없이 표기(단어 위).
 - 어법은 정확한 어구에만 red + ①(단어 아래), 유의어/반의어는 해당 어휘에만 파란 밑줄.
 - 빈출/주제/빈칸용 어구는 노란 형광(hl='y'), 담화표지는 라벤더(hl='p').
-- 함축은 영어+한글 병기, 대명사 지칭과 함께 '떠먹여주는 Point'(파랑) 박스로.
+- 함축은 영어+한글 병기, 대명사 지칭과 함께 '독해 Point'(파랑) 박스로.
 """
 from __future__ import annotations
 
@@ -146,7 +146,7 @@ def _thin_to_strength(sentences: list[Sentence], strength: str) -> None:
                     t.note, t.color, t.note_kind = None, None, "lbl"
             elif t.note_kind in ("gray", "blue"):
                 t.note = None         # 지엽적 해석 힌트 제거
-        s.refs = []                   # 지칭(떠먹여주는 Point) 생략
+        s.refs = []                   # 지칭(독해 Point) 생략
         s.gloss_en = s.gloss_ko = None
 
 

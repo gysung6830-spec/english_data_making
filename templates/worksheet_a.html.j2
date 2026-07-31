@@ -115,7 +115,7 @@
   /* 어법 Point = 골드(amber) 알약 + 옅은 크림 배경 */
   .pbox.g{ border-color:#e4d6b8; background:#fbf6ea; }
   .pbox.g .cap{ background:#c0842f; }
-  /* 떠먹여주는 Point(대명사 지칭 + 함축) = 틸(teal) 알약 + 옅은 청록 배경 */
+  /* 독해 Point(대명사 지칭 + 함축) = 틸(teal) 알약 + 옅은 청록 배경 */
   .pbox.feed{ border-color:#c7ddd8; background:#eef6f4; }
   .pbox.feed .cap{ background:#37827b; }
   .pbox.feed .fr{ margin:3px 0; }
@@ -322,7 +322,7 @@
       <span class="gt">라벤더 형광</span> — <span class="gd">담화표지(However, Similarly …)</span></div>
     <div class="gitem"><span class="gpill gold">N번 어법 Point</span>
       <span class="gt gd"> — 문장별 어법을 ①②③로 정리(골드 박스)</span></div>
-    <div class="gitem"><span class="gpill teal">떠먹여주는 Point</span>
+    <div class="gitem"><span class="gpill teal">독해 Point</span>
       <span class="gt gd"> — 대명사 지칭(it→…) · 숨은 함축 의미(틸 박스)</span></div>
   </div>
 
@@ -407,7 +407,7 @@
         {% endfor %}
         {% if s.has_feed %}
         <div class="pbox feed{% if not s_gram %} stu{% endif %}">
-          <span class="cap">{{ s.index }}번 문장 떠먹여주는 Point</span>
+          <span class="cap">{{ s.index }}번 문장 독해 Point</span>
           <div class="body">
             {%- if s_gram -%}
             {%- for r in s.refs %}<div class="fr"><span class="fl">지칭</span> {{ r }}</div>{% endfor -%}

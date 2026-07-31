@@ -60,7 +60,7 @@ class Sentence:
     translation: str = ""                        # 한글 해석(온전한 해석 = 박스)
     reading_ko: str = ""                         # 직독직해(끊어읽기) 한글, ' / '로 구분
     badge: str | None = None                     # '빈','서','예시' 등 짧은 뱃지
-    gloss_en: str | None = None                  # 함축 의미 영어(떠먹여주는 Point 박스)
+    gloss_en: str | None = None                  # 함축 의미 영어(독해 Point 박스)
     gloss_ko: str | None = None                  # 함축 의미 한글(영어와 병기)
     refs: list[str] = field(default_factory=list)  # 대명사 지칭(예: 'it → the teabag')
     points: list[Point] = field(default_factory=list)       # 오른쪽 박스들

@@ -166,7 +166,7 @@ def test_render_a_and_b():
     assert "ribbon" in ha and "pbox" in ha
     assert "necessity of openness" in ha            # 제목
     assert "what(X)" in ha and "designed(X)" in ha  # 오답형 표시
-    assert "어법 Point" in ha and "떠먹여주는 Point" in ha  # 남은 두 종류 박스
+    assert "어법 Point" in ha and "독해 Point" in ha  # 남은 두 종류 박스
     assert "내용 TMI" not in ha                       # 내용 TMI 삭제됨
     assert "①" in ha                                # 어법 넘버링(원문자)
     assert "hl-p" in ha                             # 라벤더 하이라이트(담화표지)
@@ -202,7 +202,7 @@ def test_render_guide_cover():
     a = mock_analysis()
     ha = renderer.render_a_html([a])
     assert "활용법" in ha and "색 · 기호가 뜻하는 것" in ha   # 표지 존재
-    assert "오답형 함정" in ha and "떠먹여주는 Point" in ha    # 색 범례 항목
+    assert "오답형 함정" in ha and "독해 Point" in ha    # 색 범례 항목
     assert "이렇게 쓰세요" in ha                              # 사용법 단계
     # 표지 없이도 렌더 가능(측정/옵션용)
     assert "활용법" not in renderer.render_a_html([a], include_guide=False)
@@ -266,13 +266,13 @@ def test_grammar_orphan_wrong_boxed():
 
 
 def test_feed_point_box():
-    # 대명사 지칭 + 함축 = 파랑 '떠먹여주는 Point' 박스로 렌더
+    # 대명사 지칭 + 함축 = 파랑 '독해 Point' 박스로 렌더
     a = mock_analysis()
     ha = renderer.render_a_html([a])
-    assert 'class="pbox feed"' in ha and "떠먹여주는 Point" in ha
+    assert 'class="pbox feed"' in ha and "독해 Point" in ha
     assert "the teabag" in ha        # 대명사 지칭(refs)
     assert "Even the finest tea" in ha  # 함축(gloss_en) 도 이 박스 안에
-    print("PASS  떠먹여주는 Point(대명사+함축) 박스")
+    print("PASS  독해 Point(대명사+함축) 박스")
 
 
 def test_pronoun_referent_in_refs():
