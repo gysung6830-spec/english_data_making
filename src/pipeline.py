@@ -48,11 +48,21 @@ def extract_passages_for_src(client: ClaudeClient, cfg: Config, src: Path) -> li
     if extract.is_image(src):
         return list(analyze.extract_passages_image(client, cfg, str(src)).passages)
 
+    is_pdf = src.suffix.lower() == ".pdf"
+    # 항상 비전으로 읽는 설정이면 텍스트 추출 없이 바로 비전 경로로.
+    if is_pdf and cfg.processing.pdf_vision_always:
+        try:
+            passages = _vision_extract_pdf(client, cfg, src)
+            if passages:
+                return passages
+        except Exception:
+            pass  # 실패 시 아래 텍스트 경로로 폴백
+
     raw = extract.extract_passage_text(src)
     poor = extract.looks_empty(raw) or extract.looks_garbled(raw)
 
     # 텍스트가 부실(스캔/2단 병렬)하고 PDF 면 비전으로 재추출 시도(설정 시)
-    if poor and cfg.processing.vision_fallback and src.suffix.lower() == ".pdf":
+    if poor and cfg.processing.vision_fallback and is_pdf:
         try:
             passages = _vision_extract_pdf(client, cfg, src)
             if passages:

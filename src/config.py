@@ -25,6 +25,9 @@ class ProcessingCfg:
     use_batch_for_bulk: bool = True
     # 텍스트 추출이 부실(스캔/2단 병렬)하면 그 PDF 를 이미지로 렌더해 비전으로 재추출.
     vision_fallback: bool = True
+    # 모든 PDF 를 (텍스트가 멀쩡해도) 항상 이미지로 렌더해 비전으로 읽는다.
+    #   레이아웃 오류를 원천 차단(정확도 최우선). 비전 호출이 늘어 비용↑.
+    pdf_vision_always: bool = False
     # 어법 유형을 모델에게 한 번 더 재채점시켜 오류 판정을 검증(정확도↑, API 비용↑).
     verify_content: bool = False
 
@@ -97,6 +100,7 @@ def load_config(path: str | Path | None = None) -> Config:
             max_retries=int(proc.get("max_retries", 1)),
             use_batch_for_bulk=bool(proc.get("use_batch_for_bulk", True)),
             vision_fallback=bool(proc.get("vision_fallback", True)),
+            pdf_vision_always=bool(proc.get("pdf_vision_always", False)),
             verify_content=bool(proc.get("verify_content", False)),
         ),
         design=DesignCfg(

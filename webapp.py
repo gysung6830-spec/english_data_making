@@ -77,6 +77,9 @@ BASE_CSS = """
   td,th{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;}
   .ok{color:var(--green);font-weight:700;}
   .fail{color:#be123c;font-weight:700;}
+  .warn{color:#b45309;font-weight:700;}
+  .warnbox{background:#fffbeb;border:1px solid #fde68a;color:#92400e;font-size:12px;
+           padding:5px 8px;border-radius:6px;margin-top:5px;}
   a.dl{color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;}
   .err{background:#fff1f3;border:1px solid #fecdd3;color:#9f1239;padding:10px 12px;border-radius:8px;
        font-size:13px;margin-top:10px;}
@@ -158,7 +161,7 @@ RESULT_HTML = """
       {% for r in results %}
       <tr>
         <td>{{ r.name }}</td>
-        <td>{% if r.ok %}<span class=ok>완료</span>{% else %}<span class=fail>실패</span>{% endif %}</td>
+        <td>{% if r.ok %}{% if r.warn %}<span class=warn>확인 필요</span>{% else %}<span class=ok>완료</span>{% endif %}{% else %}<span class=fail>실패</span>{% endif %}</td>
         <td>
           {% if r.ok %}
             {% for fitem in r.files %}
@@ -168,6 +171,7 @@ RESULT_HTML = """
               <a class=dl href="{{ url_for('download', fname=fitem.out) }}">다운로드</a>
             </div>
             {% endfor %}
+            {% for w in r.warn %}<div class=warnbox>⚠ {{ w }}</div>{% endfor %}
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
         </td>
       </tr>
@@ -282,7 +286,8 @@ def analyze_route():
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
             n_passages = max(len(reports), len(worksheets))
             note = f" (지문 {n_passages}개)" if n_passages > 1 else ""
-            results.append({"name": f.filename + note, "ok": True, "files": fitems})
+            results.append({"name": f.filename + note, "ok": True, "files": fitems,
+                            "warn": _ws_warnings(worksheets)})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})
@@ -296,6 +301,23 @@ def analyze_route():
 
 def _safe_name(stem: str) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+
+
+_WS_TYPE_LABELS = [("summary", "요약문"), ("paraphrase", "문장변형"),
+                   ("arrange", "배열영작"), ("compose", "조건영작"),
+                   ("choice", "보기어휘"), ("error", "어법오류"), ("qa", "문답")]
+
+
+def _ws_warnings(worksheets) -> list:
+    """생성 실패로 '누락된 유형'을 파일별로 표시(무검수 운영 triage용)."""
+    warns = []
+    for i, ws in enumerate(worksheets, 1):
+        missing = [label for field, label in _WS_TYPE_LABELS
+                   if getattr(ws, field, None) is None]
+        if missing:
+            tag = f"지문 {i} · " if len(worksheets) > 1 else ""
+            warns.append(f"{tag}누락 유형: {', '.join(missing)}")
+    return warns
 
 
 def _safe_output(fname: str) -> Path:
