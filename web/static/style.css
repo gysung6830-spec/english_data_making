@@ -47,6 +47,24 @@ textarea:focus,input:focus,select:focus{outline:none;border-color:var(--green);
 input[type=file]{width:100%;font-size:13.5px;padding:8px;border:1px dashed var(--green-100);
   border-radius:10px;background:var(--green-050)}
 
+/* 드래그앤드롭 업로드 */
+.dropzone{display:flex;flex-direction:column;align-items:center;gap:3px;
+  border:2px dashed var(--green-100);border-radius:12px;background:var(--green-050);
+  padding:20px 16px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.dropzone:hover{border-color:var(--green)}
+.dropzone.dragover{border-color:var(--green);background:#e6f1eb;
+  box-shadow:0 0 0 3px rgba(63,154,124,.18)}
+.dz-input{display:none}
+.dz-icon{font-size:22px;color:var(--green);line-height:1}
+.dz-text{font-size:14px}
+.dz-sub{font-size:12px;color:var(--muted)}
+.dz-list{list-style:none;margin:8px 0 0;padding:0}
+.dz-list li{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  font-size:13px;background:#fff;border:1px solid var(--green-100);
+  border-left:4px solid var(--green);border-radius:8px;padding:6px 10px;margin:5px 0}
+.dz-list .dz-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dz-list .rm{color:#b91c1c;font-weight:800;cursor:pointer;padding:0 2px}
+
 .btn{display:inline-block;background:var(--green);color:#fff;border:none;
   border-radius:10px;padding:11px 18px;font-size:15px;font-weight:700;cursor:pointer;
   text-decoration:none}
