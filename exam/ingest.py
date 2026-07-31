@@ -47,7 +47,10 @@ _HANGUL = re.compile(r"[가-힣㄰-㆏ᄀ-ᇿ]")
 _CIRCLED = re.compile(r"[①-⑳]")               # ①~⑳
 _NOISE_LINE = re.compile(
     r"(\[EBS\]|\[Flow\s*Edu\]|flowedu|tistory|올림포스|한줄해석|좌지문|우해석"
-    r"|정답\s*및\s*해설|^\s*Ch\.\s*\d)",
+    r"|정답\s*및\s*해설|^\s*Ch\.\s*\d"
+    r"|모의평가|평가원|해석\s*연습|자연스러운\s*해석|해석을\s*써|단계별"      # 워크북 머리글·안내
+    r"|EXAM\s*4\s*YOU|EXAM4Y[O0]U"                                          # 워크북 로고
+    r"|^\s*[-–]\s*\d{1,4}\s*[-–]\s*$)",                                      # 페이지 번호 (- 14 -)
     re.IGNORECASE,
 )
 # 여러 지문이 한 파일에 있을 때의 경계(각 지문 끝의 출처 꼬리말)
@@ -59,10 +62,16 @@ _PASSAGE_SPLIT = re.compile(r"\[Flow\s*Edu\][^\n]*", re.IGNORECASE)
 #  - 문장 번호:   "1. Ever ~"  ". 2. Taken ~"  (문장 앞 일련번호)
 _WB_HEADER = re.compile(
     r"\d+\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?", re.IGNORECASE)
-_WB_HEADER_NUM = re.compile(
-    r"(\d+)\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?", re.IGNORECASE)
+# 문제(지문) 경계가 되는 워크북 머리글 — 두 형태 모두 인식하고 '문제번호'를 캡처한다.
+#  ① 실제 원본:  "31번 2026년 6월 한국교육과정평가원 모의평가┃고3 단계별 WORKBOOK4 …"
+#  ② 도구 출력형: "31 2026 6 ┃3 WORKBOOK4 WORKBOOK. 1."
+_WB_PROBLEM = re.compile(
+    r"(\d+)\s*번[^\n]*?(?:모의평가|평가원|WORKBOOK)"
+    r"|(\d+)\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?",
+    re.IGNORECASE)
 _FOOTNOTE = re.compile(r"(?<!\()\b\d{1,3}\)")            # 각주 번호(괄호쌍 (2)은 보호)
 _SENT_NO = re.compile(r"(?<![\w.])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")  # 문장 앞 일련번호
+_PAGE_NO = re.compile(r"[-–]\s*\d{1,4}\s*[-–]")          # 페이지 번호 (- 14 -)
 
 
 def _clean_pdf_text(segment: str) -> str:
@@ -78,6 +87,7 @@ def _clean_pdf_text(segment: str) -> str:
     text = " ".join(lines)
     # 워크시트 노이즈 제거(줄 경계를 넘나들므로 합친 뒤 한 번에)
     text = _WB_HEADER.sub(" ", text)                    # WORKBOOK 러닝 헤더
+    text = _PAGE_NO.sub(" ", text)                      # 페이지 번호 - 14 -
     text = _FOOTNOTE.sub("", text)                      # 각주 번호 .1) .2) …
     text = _SENT_NO.sub("", text)                       # 문장 앞 일련번호 1. 2. …
     text = re.sub(r"\bWORKBOOK\w*\.?", " ", text, flags=re.IGNORECASE)  # 잔여 WORKBOOK
@@ -95,12 +105,12 @@ def _split_by_workbook(raw: str) -> list[str] | None:
     같은 번호가 이어지면(연속 페이지) 한 지문으로 합치고, 번호가 달라지면 새 지문.
     헤더가 없으면 None(다른 분리 방식으로 폴백).
     """
-    matches = list(_WB_HEADER_NUM.finditer(raw))
+    matches = list(_WB_PROBLEM.finditer(raw))
     if len(matches) < 2:
         return None
     result: list[list[str]] = []      # [[문제번호, 본문], …] 순서 유지
     for i, m in enumerate(matches):
-        num = m.group(1)
+        num = m.group(1) or m.group(2)
         seg = raw[m.end():matches[i + 1].start() if i + 1 < len(matches) else len(raw)]
         if result and result[-1][0] == num:
             result[-1][1] += " " + seg

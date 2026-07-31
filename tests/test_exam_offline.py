@@ -217,7 +217,33 @@ def test_workbook_noise() -> None:
     assert not re.search(r"(?<![\w.])\d{1,3}\.\s+[A-Z]", joined)   # 문장 일련번호 제거
     assert ps[0].startswith("Ever since the early Enlightenment")
     assert ps[1].startswith("Speakers do not always put")
-    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리 통과")
+
+    # 실제 원본(EXAM4YOU) 형태: 한글 머리글 + 페이지 번호(- 14 -) + 로고
+    raw2 = (
+        "31번 2026년 6월 한국교육과정평가원 모의평가┃고3 단계별 WORKBOOK4 해석 연습하기\n"
+        "WORKBOOK 문장 전체의 자연스러운 해석을 써 보세요.\n"
+        "1. Ever since the early Enlightenment, preservation and conservation have "
+        "been closely related.1)\n"
+        "2. Conservationists who distinguish their activities from preservation "
+        "emphasize restorative aspects of the whole field in careful ways.2)\n"
+        "- 14 -\n"
+        "EXAM4YOU\n"
+        "32번 2026년 6월 한국교육과정평가원 모의평가┃고3 단계별 WORKBOOK4 해석 연습하기\n"
+        "WORKBOOK 문장 전체의 자연스러운 해석을 써 보세요.\n"
+        "1. Speakers do not always put everything important into words in real life.1)\n"
+        "2. Very often you understand meaning by observing nonverbal behaviors and "
+        "gestures across many different social settings every day.2)\n"
+        "- 15 -\n"
+    )
+    ps2 = ingest._passages_from_raw(raw2)
+    assert len(ps2) == 2, ps2
+    j2 = " ".join(ps2)
+    assert "EXAM4YOU" not in j2 and "WORKBOOK" not in j2 and "모의평가" not in j2
+    assert not re.search(r"[-–]\s*\d+\s*[-–]", j2)        # 페이지 번호 제거
+    assert not any("가" <= c <= "힣" for c in j2)          # 한글 없음
+    assert ps2[0].startswith("Ever since the early Enlightenment")
+    assert ps2[1].startswith("Speakers do not always put")
+    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리(실원본 형식 포함) 통과")
 
 
 def test_arrangement_answer_snap() -> None:
