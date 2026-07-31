@@ -163,6 +163,8 @@ class Analysis:
     flow: list[FlowStep] = field(default_factory=list)
     # 직독직해(레이아웃 B) — 비어 있으면 렌더 시 원문/해석만 대체 표기한다.
     literal: list[LiteralSentence] = field(default_factory=list)
+    # 뒷면을 1페이지에 맞추기 위해 더 압축할지(렌더러가 측정해 설정). 장문이면 False 유지.
+    back_tight: bool = False
 
     @property
     def has_points(self) -> bool:

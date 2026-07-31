@@ -160,6 +160,22 @@
   .page.compact .flow .step .ez .ezt{ font-size:8px; padding:1px 5px; }
   .page.compact .flow .arrow{ font-size:10px; margin:1px 0; }
 
+  /* 뒷면이 살짝 넘칠 때만 한 단계 더 압축(측정 후 btight). 장문이면 적용 안 함. */
+  .page.compact.btight{ padding:12px 16px 22px; }
+  .page.compact.btight .bhead{ margin-bottom:6px; }
+  .page.compact.btight .sec{ margin-bottom:5px; }
+  .page.compact.btight .sec > .st{ font-size:11px; margin-bottom:3px; }
+  .page.compact.btight .pcol{ padding:5px 8px; }
+  .page.compact.btight .ptext{ font-size:10px; line-height:1.5; }
+  .page.compact.btight .ptext .pnum{ font-size:8px; min-width:12px; height:12px; line-height:12px; }
+  .page.compact.btight .vtab{ font-size:9px; }
+  .page.compact.btight .vtab th, .page.compact.btight .vtab td{ padding:2px 5px; }
+  .page.compact.btight .flow .step{ padding:3px 8px 4px; }
+  .page.compact.btight .flow .step .lb{ font-size:8.5px; }
+  .page.compact.btight .flow .step .tx{ font-size:9px; }
+  .page.compact.btight .flow .step .ez{ font-size:8.5px; margin-top:1px; padding-top:1px; }
+  .page.compact.btight .flow .arrow{ font-size:9px; margin:0; }
+
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:var(--amber); }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
@@ -242,7 +258,7 @@
 </style>
 </head>
 <body>
-{% if include_guide %}
+{% if include_guide and not only_back %}
 <div class="page">
   <div class="ghead">
     <div class="gribbon">활용<br>가이드</div>
@@ -286,6 +302,7 @@
 </div>
 {% endif %}
 {% for a in analyses %}
+  {% if not only_back %}
   <div class="page{% if compact %} compact{% endif %}">
     <div class="head">
       <div class="ribbon">
@@ -363,9 +380,10 @@
     <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
     {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
   </div>
+  {% endif %}
 
   {% if include_back and a.has_back %}
-  <div class="page compact">   {#- 뒷면(정리)은 항상 압축해 1페이지에 맞춘다 -#}
+  <div class="page compact{% if a.back_tight %} btight{% endif %}">   {#- 뒷면(정리)은 항상 압축; 넘치면 btight 로 더 압축해 1페이지 -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>

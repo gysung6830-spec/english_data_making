@@ -203,8 +203,35 @@ def _tok(spec) -> Token:
     )
 
 
+# 앞 단어에 '공백 없이' 붙어야 하는 문장부호(마침표·쉼표·닫는 괄호/따옴표 등)
+_TRAIL_PUNCT = set(".,;:!?…”’\")]}")
+
+
+def _merge_trailing_punct(lines: list[list[Token]]) -> list[list[Token]]:
+    """문장부호만 있는 토큰을 앞 토큰에 붙인다('protectors' + '.' → 'protectors.').
+
+    LLM 이 마침표·쉼표를 별도 토큰으로 내보내면 렌더 시 'protectors .' 처럼 부호
+    앞에 공백이 생긴다. 부호 토큰을 앞 단어에 병합해 그 공백을 없앤다(슬래시 등
+    앞 토큰 속성은 유지, 부호 토큰의 slash 는 앞 토큰으로 넘긴다).
+    """
+    for line in lines:
+        merged: list[Token] = []
+        for t in line:
+            txt = (t.text or "").strip()
+            if (merged and txt and all(c in _TRAIL_PUNCT for c in txt)
+                    and not t.role and not t.note and not t.wrong and not t.above):
+                prev = merged[-1]
+                prev.text = (prev.text or "") + txt
+                prev.slash = prev.slash or bool(getattr(t, "slash", False))
+            else:
+                merged.append(t)
+        line[:] = merged
+    return lines
+
+
 def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     lines = [[_tok(t) for t in ln.tokens] for ln in sa.lines if ln.tokens]
+    lines = _merge_trailing_punct(lines)
     if not lines:  # LLM 이 lines 를 비우면 원문을 통째로 한 줄로
         lines = [[Token(text=sa.translation or "")]]
     return Sentence(

@@ -7,6 +7,7 @@ API 없이 배관을 확인할 수 있는 규칙기반/목 경로도 함께 제�
 """
 from __future__ import annotations
 
+import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -148,12 +149,39 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
 
     is_b = layout.upper() == "B"
     total = len(pset.passages)
+    # 원본에 '31번/32번'처럼 실제 문제 번호가 있으면 지문별 라벨로 사용(순번 31-1 대신).
+    pnums = _detect_problem_numbers(src) if not extract.is_image(src) else []
     out: list[Analysis] = []
     for i, ex in enumerate(pset.passages, start=1):
         h = header.for_passage(ex, i, total)
+        if len(pnums) == total and pnums[i - 1]:
+            h.lecture_label = pnums[i - 1]      # 실제 문제 번호(예: 31, 32)
         out.append(analyze_text(client, ex.body, h, max_retries=max_retries,
                                 with_back=not is_b, with_literal=is_b))
     return out
+
+
+# 원본 머리글의 문제 번호: 줄 맨 앞 "31번 …", "32번 …"
+_PROBNO_RE = re.compile(r"(?m)^\s*(\d{1,3})\s*번(?![가-힣])")
+
+
+def _detect_problem_numbers(src: Path) -> list[str]:
+    """원본(PDF/HWP) 머리글에서 '31번/32번' 같은 실제 문제 번호를 순서대로 뽑는다.
+
+    한글 제거 전 원문에서 찾는다(제거 후엔 '번'이 사라짐). 못 찾으면 빈 리스트.
+    """
+    from .. import extract
+    try:
+        raw = (extract.extract_hwp_text(src) if extract.is_hwp(src)
+               else extract.extract_raw_text(src))
+    except Exception:
+        return []
+    seen: list[str] = []
+    for m in _PROBNO_RE.finditer(raw):
+        n = m.group(1)
+        if n not in seen:          # 같은 번호가 여러 줄 반복돼도 한 번만
+            seen.append(n)
+    return seen
 
 
 def _extract_via_vision_pdf(client: "ClaudeClient", cfg: "Config", src: Path):

@@ -416,6 +416,34 @@ def _mk_analysis(sent_texts):
     return Analysis(title_en="T", sentences=sents)
 
 
+def test_merge_trailing_punct():
+    # 문장부호만 있는 토큰은 앞 단어에 붙어 'protectors .' 같은 공백이 사라져야 한다.
+    from src.worksheet import analyzer
+    lines = [[Token(text="protectors", slash=True), Token(text="."),
+              Token(text="would"), Token(text=","), Token(text="for example")]]
+    analyzer._merge_trailing_punct(lines)
+    texts = [t.text for t in lines[0]]
+    assert texts == ["protectors.", "would,", "for example"], texts
+    assert lines[0][0].slash is True          # 앞 토큰 슬래시 유지
+    # 역할/주석이 달린 부호 토큰은 병합하지 않음(정보 보존)
+    keep = [[Token(text="x"), Token(text="?", note="의문")]]
+    analyzer._merge_trailing_punct(keep)
+    assert [t.text for t in keep[0]] == ["x", "?"]
+    print("PASS  문장부호 토큰 병합(부호 앞 공백 제거)")
+
+
+def test_detect_problem_numbers_regex():
+    from src.worksheet.pipeline import _PROBNO_RE
+    raw = ("31번 2026년 6월 한국교육과정평가원 모의평가\n"
+           "1. Ever since the early Enlightenment...\n"
+           "- 14 -\n"
+           "32번 2026년 6월 한국교육과정평가원 모의평가\n"
+           "1. Speakers don't always...\n")
+    nums = [m.group(1) for m in _PROBNO_RE.finditer(raw)]
+    assert nums == ["31", "32"], nums          # 문장번호 '1.' 은 매칭 안 됨
+    print("PASS  실제 문제 번호(31번/32번) 인식")
+
+
 def test_clean_passage_keeps_numbered_sentences():
     # 회귀: 해석연습 WORKBOOK 처럼 지문 문장에 '1. 2.' 번호가 붙으면, 예전엔
     # clean_text 가 그 줄(문장 앞부분)을 통째로 지워 조각만 남았다. 이제 보존해야 함.
@@ -543,6 +571,8 @@ def run_all():
     test_render_b_from_literal()
     test_webapp_worksheet_flow()
     test_hwp_support()
+    test_merge_trailing_punct()
+    test_detect_problem_numbers_regex()
     test_clean_passage_keeps_numbered_sentences()
     test_fragment_quality_guard()
     test_raw_text_fragmented()

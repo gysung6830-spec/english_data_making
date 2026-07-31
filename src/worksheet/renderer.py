@@ -40,7 +40,7 @@ def _as_list(analyses) -> list[Analysis]:
 
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
-                  include_guide: bool = True) -> str:
+                  include_guide: bool = True, only_back: bool = False) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -48,11 +48,13 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     compact       : 압축 밀도(한 지문을 최대한 1페이지에).
     include_back  : 뒷페이지(어휘/흐름) 포함 여부(측정 시 False).
     include_guide : 맨 앞 '활용 가이드' 표지 페이지 포함 여부(측정 시 False).
+    only_back     : 뒷면만 렌더(뒷면 페이지 수 측정용).
     """
     tmpl = _env.get_template("worksheet_a.html.j2")
     return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
-                       include_back=include_back, include_guide=include_guide)
+                       include_back=include_back, include_guide=include_guide,
+                       only_back=only_back)
 
 
 def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:
@@ -82,6 +84,33 @@ def _analysis_fits_one_page(analyses, compact: bool) -> bool:
     html = render_a_html(lst, compact=compact, include_back=False, include_guide=False)
     pages = len(HTML(string=html).render().pages)
     return pages <= len(lst)   # 지문당 1페이지
+
+
+def _back_page_count(analysis, tight: bool) -> int:
+    """한 지문의 '뒷면(정리)'만 렌더해 페이지 수를 WeasyPrint 로 측정."""
+    from weasyprint import HTML  # dep
+
+    analysis.back_tight = tight
+    html = render_a_html([analysis], compact=True, include_guide=False, only_back=True)
+    return len(HTML(string=html).render().pages)
+
+
+def _fit_back_pages(analyses) -> None:
+    """지문마다 뒷면을 1페이지에 맞추려 시도한다(장문이면 그대로 둔다).
+
+    기본 압축으로 1페이지면 그대로, 넘치면 btight(추가 압축)로 1페이지가 되는지
+    확인해 될 때만 적용. btight 로도 넘치면 장문이므로 손대지 않는다(2페이지 허용).
+    """
+    for a in _as_list(analyses):
+        if not getattr(a, "has_back", False):
+            continue
+        try:
+            if _back_page_count(a, tight=False) <= 1:
+                a.back_tight = False
+            else:
+                a.back_tight = _back_page_count(a, tight=True) <= 1
+        except Exception:
+            a.back_tight = False
 
 
 # ---------------------------------------------------------------------------
@@ -160,6 +189,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
             compact = not _analysis_fits_one_page(analyses, compact=False)
         except Exception:
             compact = False
+    if layout.upper() == "A":
+        _fit_back_pages(analyses)   # 뒷면을 최대한 1페이지로(장문은 제외)
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact)
 
