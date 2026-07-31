@@ -7,7 +7,6 @@
   <div class="doc-header">
     <span class="doc-badge">지문 분석</span>
     {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
-    {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
     <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
 
@@ -232,7 +231,6 @@
 {% macro render_source(report, pno, total) %}
   <div class="doc-header">
     <span class="doc-badge">원문 · 전체 해석</span>
-    {% if total > 1 %}<span class="passage-tag">지문 {{ pno }} / {{ total }}</span>{% endif %}
     <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
