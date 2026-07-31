@@ -153,6 +153,14 @@ def build_route():
             out = OUTPUT_DIR / f"{stem}_{kind}.pdf"
             ws_pipeline.render_worksheet(analyses, out, layout=layout,
                                          footer_note=footer, density=density)
+            outfiles = [{"label": f"👩‍🏫 선생님용", "out": out.name}]
+            # 학생용(필기) PDF 도 함께 생성(설정 design.make_student, 기본 켜짐).
+            if getattr(cfg.design, "make_student", True):
+                sout = OUTPUT_DIR / f"{stem}_{kind}_학생용.pdf"
+                ws_pipeline.render_worksheet(
+                    analyses, sout, layout=layout, footer_note=footer, density=density,
+                    student=True, slevel=getattr(cfg.design, "student_level", "slash"))
+                outfiles.append({"label": "🧑‍🎓 학생용(필기)", "out": sout.name})
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
             # 무인 품질 게이트: 자동 복구까지 끝난 결과가 미심쩍으면 '검수 권장'으로 표시
             # (목 미리보기·auto_flag 꺼짐이면 생략). 사람은 flag 된 것만 확인하면 된다.
@@ -161,8 +169,7 @@ def build_route():
                 verdict = ws_quality.assess(analyses, min_sentences=cfg.quality.min_sentences)
                 flag, reasons = (not verdict["ok"]), verdict["reasons"]
             results.append({"name": f.filename + note, "ok": True,
-                            "flag": flag, "reasons": reasons,
-                            "files": [{"label": f"✏️ {kind}", "out": out.name}]})
+                            "flag": flag, "reasons": reasons, "files": outfiles})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
             results.append({"name": f.filename, "ok": False, "error": str(e)})

@@ -363,8 +363,9 @@ def test_webapp_worksheet_flow():
             "files": (io.BytesIO(b"x"), "s_ws.pdf")}
     r = c.post("/build", data=data, content_type="multipart/form-data")
     assert r.status_code == 200 and "완료".encode("utf-8") in r.data
-    assert "포인트박스".encode("utf-8") in r.data
-    print("PASS  웹앱 학습지 플로우(worksheet_app, 목)")
+    # 선생님용 + 학생용(필기) 두 PDF 가 함께 나온다
+    assert "선생님용".encode("utf-8") in r.data and "학생용".encode("utf-8") in r.data
+    print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 선생님용+학생용")
 
 
 def _make_hwpx(path, paragraphs):
@@ -502,6 +503,27 @@ def test_front_density_render_classes():
     print("PASS  앞면 밀도 클래스 렌더(normal/compact/ultra)")
 
 
+def test_student_modes_render():
+    from src.worksheet import renderer
+    a = mock_analysis(strength="full")
+    teacher = renderer.render_a_html([a], include_guide=False)
+    assert 'class="blk"' not in teacher and 'class="lbl"' in teacher
+
+    slash = renderer.render_a_html([a], student=True, slevel="slash", include_guide=False)
+    assert 'class="blk"' in slash              # 해석/어법 빈칸
+    assert 'class="lbl"' not in slash          # 성분(SVOC) 라벨 숨김
+    assert 'class="tok tsl"' in slash          # 끊어읽기(/) 유지
+
+    blank = renderer.render_a_html([a], student=True, slevel="blank", include_guide=False)
+    assert 'class="blk"' in blank and 'class="lbl"' not in blank
+    assert 'class="tok tsl"' not in blank      # 완전백지: / 도 없음
+
+    interp = renderer.render_a_html([a], student=True, slevel="interp", include_guide=False)
+    assert 'class="lbl"' in interp             # 성분·어법 유지
+    assert 'class="blk"' in interp             # 직독직해·해석만 빈칸
+    print("PASS  학생용 3모드 렌더(slash/blank/interp)")
+
+
 def test_quality_assess_gate():
     from src.worksheet import quality
     ok = _mk_analysis(["Full sentence one here.", "Full sentence two here.", "Third one here."])
@@ -616,6 +638,7 @@ def run_all():
     test_merge_trailing_punct()
     test_detect_problem_numbers_regex()
     test_front_density_render_classes()
+    test_student_modes_render()
     test_quality_assess_gate()
     test_config_quality_defaults()
     test_clean_passage_keeps_numbered_sentences()

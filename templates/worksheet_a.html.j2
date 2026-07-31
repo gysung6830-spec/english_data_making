@@ -277,9 +277,24 @@
   .gtip{ margin-top:14px; background:#fff; border:1px solid var(--line);
          border-left:5px solid var(--navy); border-radius:9px; padding:9px 12px;
          font-size:12px; line-height:1.55; color:#23272e; }
+
+  /* ---- 학생용(필기) 빈칸 ---- */
+  .blk{ display:inline-block; border-bottom:1px dashed #c2cbd3; min-width:60px;
+        height:12px; vertical-align:bottom; }
+  .kobox .blk, .rdko .blk{ display:block; min-width:0; width:100%; height:13px;
+        margin-top:2px; }
+  .kobox.stu{ min-height:34px; }               /* 해석 필기 공간 */
+  .pbox .body .blk{ display:block; width:100%; height:12px; margin:5px 0; }
+  .pbox.stu .body{ min-height:30px; }
+  .ptext.stu .blk{ display:block; width:100%; height:13px; margin:6px 0; }
+  td.blkcell{ height:20px; }                    /* 어휘표 빈칸 셀 */
 </style>
 </head>
 <body>
+{%- set s_roles = (not student) or slevel == 'interp' -%}
+{%- set s_gram  = (not student) or slevel == 'interp' -%}
+{%- set s_slash = (not student) or slevel != 'blank' -%}
+{%- set s_ko    = not student -%}   {# 직독직해·해석·전체해석·어휘뜻·논리흐름 텍스트 #}
 {% if include_guide and not only_back %}
 <div class="page">
   <div class="ghead">
@@ -344,18 +359,18 @@
         <div>
           <div class="en">
             {% for line in s.lines %}
-            {%- set has_role = line | selectattr('role') | list -%}
+            {%- set has_role = (line | selectattr('role') | list) and s_roles -%}
             <div class="line{% if has_role %} po{% endif %}">
               {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span> {% endif -%}
               {%- for t in line -%}
                 <span class="tok">
-                  {# 위: 문장 성분 라벨 #}
+                  {# 위: 문장 성분 라벨(학생용 blank/slash 는 숨김) #}
                   {%- if has_role %}<span class="over">{% if t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
                   {%- set _a = t.above or '' -%}{%- set _n = t.note or '' -%}
                   {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
-                  <span class="w{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}{% if is_vocab %} vu{% endif %}">{{ t.text | replace('(','') | replace(')','') }}</span>
-                  {# 아래: 어법 번호 / 유의어·반의어 / 오답 #}
-                  {%- if t.above or t.note or t.wrong -%}
+                  <span class="w{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}{% if is_vocab %} vu{% endif %}{% endif %}">{{ t.text | replace('(','') | replace(')','') }}</span>
+                  {# 아래: 어법 번호 / 유의어·반의어 / 오답 (학생용 blank/slash 는 숨김) #}
+                  {%- if s_gram and (t.above or t.note or t.wrong) -%}
                   <span class="unders">
                     {%- if t.above %}<span class="ann {{ 'syn' if t.above.startswith('=') else 'ant' }}">{{ t.above }}</span>{% endif -%}
                     {%- if t.note %}<span class="ann {% if t.note_kind == 'red' %}red{% elif t.note.startswith('=') %}syn{% elif t.note.startswith('↔') %}ant{% else %}gray{% endif %}">{{ t.note }}</span>{% endif -%}
@@ -363,36 +378,40 @@
                   </span>
                   {%- endif -%}
                 </span>
-                {%- if t.slash %}<span class="tok tsl">{% if has_role %}<span class="over"></span>{% endif %}<span class="w">/</span></span>{% endif -%}
+                {%- if t.slash and s_slash %}<span class="tok tsl">{% if has_role %}<span class="over"></span>{% endif %}<span class="w">/</span></span>{% endif -%}
               {%- endfor -%}
             </div>
             {% endfor %}
           </div>
-          {# 끊어읽기: 직독직해(한글, / 구분) #}
+          {# 끊어읽기: 직독직해(한글, / 구분) — 학생용은 빈칸 #}
           {% if s.reading_ko %}
           <div class="rdko"><span class="rdlbl">직독직해</span>
-            {%- for c in s.reading_ko.split(' / ') -%}
-              <span class="rc">{{ c }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
-            {%- endfor -%}
+            {%- if s_ko -%}
+              {%- for c in s.reading_ko.split(' / ') -%}
+                <span class="rc">{{ c }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+              {%- endfor -%}
+            {%- else -%}<span class="blk"></span>{%- endif -%}
           </div>
           {% endif %}
-          {# 온전한 해석: 박스 처리 #}
-          {% if s.translation %}<div class="kobox"><span class="kblbl">해석</span>{{ s.translation }}</div>{% endif %}
+          {# 온전한 해석: 박스 처리 — 학생용은 빈칸 #}
+          {% if s.translation %}<div class="kobox{% if not s_ko %} stu{% endif %}"><span class="kblbl">해석</span>{% if s_ko %}{{ s.translation }}{% else %}<span class="blk"></span>{% endif %}</div>{% endif %}
         </div>
       </div>
       <div class="points">
         {% for p in s.points %}
-        <div class="pbox {{ 'g' if p.is_grammar else 'feed' }}">
+        <div class="pbox {{ 'g' if p.is_grammar else 'feed' }}{% if not s_gram %} stu{% endif %}">
           <span class="cap">{{ p.caption }}</span>
-          <div class="body">{{ p.body_html | safe }}</div>
+          <div class="body">{% if s_gram %}{{ p.body_html | safe }}{% else %}<span class="blk"></span><span class="blk"></span>{% endif %}</div>
         </div>
         {% endfor %}
         {% if s.has_feed %}
-        <div class="pbox feed">
+        <div class="pbox feed{% if not s_gram %} stu{% endif %}">
           <span class="cap">{{ s.index }}번 문장 떠먹여주는 Point</span>
           <div class="body">
+            {%- if s_gram -%}
             {%- for r in s.refs %}<div class="fr"><span class="fl">지칭</span> {{ r }}</div>{% endfor -%}
             {% if s.gloss_en %}<div class="fr"><span class="fl im">함축</span> {{ s.gloss_en }}{% if s.gloss_ko %}<br><span class="gko">{{ s.gloss_ko }}</span>{% endif %}</div>{% endif %}
+            {%- else -%}<span class="blk"></span><span class="blk"></span>{%- endif -%}
           </div>
         </div>
         {% endif %}
@@ -426,10 +445,14 @@
         </div>
         <div class="pcol">
           <span class="pclbl">전체 해석</span>
-          <div class="ptext">
-            {%- for s in a.sentences -%}
-              <span class="pnum">{{ s.index }}</span> {{ s.translation }}{{ ' ' }}
-            {%- endfor -%}
+          <div class="ptext{% if not s_ko %} stu{% endif %}">
+            {%- if s_ko -%}
+              {%- for s in a.sentences -%}
+                <span class="pnum">{{ s.index }}</span> {{ s.translation }}{{ ' ' }}
+              {%- endfor -%}
+            {%- else -%}
+              {%- for s in a.sentences -%}<span class="pnum">{{ s.index }}</span> <span class="blk"></span>{%- endfor -%}
+            {%- endif -%}
           </div>
         </div>
       </div>
@@ -446,9 +469,9 @@
         <tr>
           <td class="vn">{% if v.sent %}{{ v.sent }}번{% endif %}</td>
           <td class="w">{{ v.word }}</td>
-          <td>{{ v.meaning }}</td>
-          <td class="syn">{{ v.syn }}</td>
-          <td class="ant">{{ v.ant }}</td>
+          <td class="{% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.meaning }}{% endif %}</td>
+          <td class="syn {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.syn }}{% endif %}</td>
+          <td class="ant {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.ant }}{% endif %}</td>
         </tr>
         {% endfor %}
       </table>
@@ -461,8 +484,8 @@
       <div class="flow">
         {% for f in a.flow %}
         <div class="step">
-          <div class="row1"><span class="lb">{{ f.label }}</span><span class="tx">{{ f.text }}</span>{% if f.sentences %}<span class="sn">({{ f.sentences }}번)</span>{% endif %}</div>
-          {% if f.easy %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
+          <div class="row1"><span class="lb">{{ f.label }}</span>{% if s_ko %}<span class="tx">{{ f.text }}</span>{% else %}<span class="tx"><span class="blk"></span></span>{% endif %}{% if f.sentences %}<span class="sn">({{ f.sentences }}번)</span>{% endif %}</div>
+          {% if f.easy and s_ko %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
         </div>
         {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
         {% endfor %}

@@ -242,7 +242,9 @@ def mock_analyses_for_file(src: Path, header: Header) -> list[Analysis]:
 def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      brand: str = "은아 T", footer_note: str = "",
                      engine: str = "auto", footer_meta: str = "",
-                     density: str = "auto") -> Path:
+                     density: str = "auto", student: bool = False,
+                     slevel: str = "slash") -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
-                               footer_meta=footer_meta, density=density)
+                               footer_meta=footer_meta, density=density,
+                               student=student, slevel=slevel)

@@ -40,7 +40,8 @@ def _as_list(analyses) -> list[Analysis]:
 
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
-                  include_guide: bool = True, only_back: bool = False) -> str:
+                  include_guide: bool = True, only_back: bool = False,
+                  student: bool = False, slevel: str = "slash") -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -54,7 +55,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
                        include_back=include_back, include_guide=include_guide,
-                       only_back=only_back)
+                       only_back=only_back, student=student, slevel=slevel)
 
 
 def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:
@@ -69,11 +70,13 @@ def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> s
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",
                 brand: str = "은아 T", footer_meta: str = "", compact: bool = False,
-                include_guide: bool = True) -> str:
+                include_guide: bool = True, student: bool = False,
+                slevel: str = "slash") -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
-                         compact=compact, include_guide=include_guide)
+                         compact=compact, include_guide=include_guide,
+                         student=student, slevel=slevel)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -122,13 +125,15 @@ def _page_counts(htmls: list[str]) -> list[int]:
 _FRONT_TIERS = ["normal", "compact", "ultra"]
 
 
-def _fit_pages(analyses, fit_front: bool = True) -> None:
+def _fit_pages(analyses, fit_front: bool = True,
+               student: bool = False, slevel: str = "slash") -> None:
     """앞면(분석)·뒷면(정리)을 지문마다 최대한 1페이지에 맞춘다(넘치는 장문은 2페이지).
 
     - 앞면: normal→compact→ultra 중 1페이지가 되는 가장 큰(덜 압축된) 단계.
     - 뒷면: 기본 압축으로 넘치면 btight 로 1페이지가 될 때만 적용.
     모든 후보를 모아 렌더 엔진 측정을 '한 번'에 수행(대량 처리 시 브라우저 1회).
     fit_front=False 면 앞면은 이미 정해진 밀도를 쓰고 뒷면만 맞춘다.
+    학생용(student)은 빈칸 공간까지 반영해 측정한다.
     """
     lst = _as_list(analyses)
     jobs: list[tuple[int, str, object]] = []   # (지문 index, 'front'|'back', tier)
@@ -138,13 +143,14 @@ def _fit_pages(analyses, fit_front: bool = True) -> None:
             for t in _FRONT_TIERS:
                 a.front_density = t
                 jobs.append((i, "front", t))
-                htmls.append(render_a_html([a], include_back=False, include_guide=False))
+                htmls.append(render_a_html([a], include_back=False, include_guide=False,
+                                           student=student, slevel=slevel))
         if getattr(a, "has_back", False):
             for tight in (False, True):
                 a.back_tight = tight
                 jobs.append((i, "back", tight))
                 htmls.append(render_a_html([a], compact=True, include_guide=False,
-                                           only_back=True))
+                                           only_back=True, student=student, slevel=slevel))
     if not htmls:
         return
     try:
@@ -228,13 +234,16 @@ def _pdf_weasyprint(html: str, out_path: Path) -> None:
 def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                footer_note: str = "", brand: str = "은아 T",
                engine: str = "auto", footer_meta: str = "",
-               density: str = "auto") -> Path:
+               density: str = "auto", student: bool = False,
+               slevel: str = "slash") -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
     brand   : 레이아웃 B 헤더 'made by …' 문구.
     density : 'normal' | 'compact' | 'auto'. 'auto' 는 앞면이 지문당 1페이지를 넘으면
               자동으로 압축 밀도로 다시 맞춘다(레이아웃 A 한정).
+    student : True 면 학생용(필기) — 정답/해석을 비워 빈칸으로.
+    slevel  : 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸).
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -242,13 +251,14 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     compact = (density == "compact")
     if layout.upper() == "A":
         if density == "auto":
-            _fit_pages(analyses, fit_front=True)    # 앞·뒤 모두 최대한 1페이지(장문 제외)
+            _fit_pages(analyses, fit_front=True, student=student, slevel=slevel)
         else:                                        # 'normal' | 'compact' 고정
             for a in _as_list(analyses):
                 a.front_density = density
-            _fit_pages(analyses, fit_front=False)   # 앞면 고정, 뒷면만 맞춤
+            _fit_pages(analyses, fit_front=False, student=student, slevel=slevel)
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
-                       footer_meta=footer_meta, compact=compact)
+                       footer_meta=footer_meta, compact=compact,
+                       student=student, slevel=slevel)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):
