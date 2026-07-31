@@ -76,41 +76,97 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
                          compact=compact, include_guide=include_guide)
 
 
-def _analysis_fits_one_page(analyses, compact: bool) -> bool:
-    """각 지문의 '분석 앞면'이 1페이지에 들어가는지 WeasyPrint 로 측정(뒷페이지 제외)."""
-    from weasyprint import HTML  # dep
+def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
+    """여러 HTML 의 페이지 수를 '실제 렌더 엔진(Chromium)'으로 측정(브라우저 1회 재사용).
 
-    lst = _as_list(analyses)
-    html = render_a_html(lst, compact=compact, include_back=False, include_guide=False)
-    pages = len(HTML(string=html).render().pages)
-    return pages <= len(lst)   # 지문당 1페이지
-
-
-def _back_page_count(analysis, tight: bool) -> int:
-    """한 지문의 '뒷면(정리)'만 렌더해 페이지 수를 WeasyPrint 로 측정."""
-    from weasyprint import HTML  # dep
-
-    analysis.back_tight = tight
-    html = render_a_html([analysis], compact=True, include_guide=False, only_back=True)
-    return len(HTML(string=html).render().pages)
-
-
-def _fit_back_pages(analyses) -> None:
-    """지문마다 뒷면을 1페이지에 맞추려 시도한다(장문이면 그대로 둔다).
-
-    기본 압축으로 1페이지면 그대로, 넘치면 btight(추가 압축)로 1페이지가 되는지
-    확인해 될 때만 적용. btight 로도 넘치면 장문이므로 손대지 않는다(2페이지 허용).
+    최종 출력이 Chromium 이므로 측정도 같은 엔진으로 해야 1페이지 판정이 실제와
+    일치한다(WeasyPrint 와는 경계에서 ±1 어긋날 수 있음). 불가하면 None.
     """
-    for a in _as_list(analyses):
-        if not getattr(a, "has_back", False):
-            continue
-        try:
-            if _back_page_count(a, tight=False) <= 1:
-                a.back_tight = False
-            else:
-                a.back_tight = _back_page_count(a, tight=True) <= 1
-        except Exception:
+    try:
+        from playwright.sync_api import sync_playwright
+    except Exception:
+        return None
+    import tempfile
+
+    import pypdfium2 as pdfium
+    counts: list[int] = []
+    try:
+        with sync_playwright() as p:
+            launch_kw: dict = {"args": ["--no-sandbox"]}
+            exe = _find_chromium()
+            if exe:
+                launch_kw["executable_path"] = exe
+            browser = p.chromium.launch(**launch_kw)
+            page = browser.new_page(viewport=A4_VIEWPORT)
+            for html in htmls:
+                page.set_content(html, wait_until="networkidle")
+                with tempfile.NamedTemporaryFile(suffix=".pdf") as tf:
+                    page.pdf(path=tf.name, format="A4", print_background=True,
+                             margin={"top": "0", "right": "0", "bottom": "0", "left": "0"})
+                    counts.append(len(pdfium.PdfDocument(tf.name)))
+            browser.close()
+        return counts
+    except Exception:
+        return None
+
+
+def _page_counts(htmls: list[str]) -> list[int]:
+    """각 HTML 페이지 수. Chromium(최종 엔진) 우선, 안 되면 WeasyPrint 로 폴백."""
+    counts = _measure_pages_chromium(htmls)
+    if counts is not None:
+        return counts
+    from weasyprint import HTML  # dep
+    return [len(HTML(string=h).render().pages) for h in htmls]
+
+
+_FRONT_TIERS = ["normal", "compact", "ultra"]
+
+
+def _fit_pages(analyses, fit_front: bool = True) -> None:
+    """앞면(분석)·뒷면(정리)을 지문마다 최대한 1페이지에 맞춘다(넘치는 장문은 2페이지).
+
+    - 앞면: normal→compact→ultra 중 1페이지가 되는 가장 큰(덜 압축된) 단계.
+    - 뒷면: 기본 압축으로 넘치면 btight 로 1페이지가 될 때만 적용.
+    모든 후보를 모아 렌더 엔진 측정을 '한 번'에 수행(대량 처리 시 브라우저 1회).
+    fit_front=False 면 앞면은 이미 정해진 밀도를 쓰고 뒷면만 맞춘다.
+    """
+    lst = _as_list(analyses)
+    jobs: list[tuple[int, str, object]] = []   # (지문 index, 'front'|'back', tier)
+    htmls: list[str] = []
+    for i, a in enumerate(lst):
+        if fit_front:
+            for t in _FRONT_TIERS:
+                a.front_density = t
+                jobs.append((i, "front", t))
+                htmls.append(render_a_html([a], include_back=False, include_guide=False))
+        if getattr(a, "has_back", False):
+            for tight in (False, True):
+                a.back_tight = tight
+                jobs.append((i, "back", tight))
+                htmls.append(render_a_html([a], compact=True, include_guide=False,
+                                           only_back=True))
+    if not htmls:
+        return
+    try:
+        counts = _page_counts(htmls)
+    except Exception:
+        for a in lst:
+            if fit_front:
+                a.front_density = "compact"
             a.back_tight = False
+        return
+
+    for i, a in enumerate(lst):
+        if fit_front:
+            chosen = "ultra"
+            for (j, kind, t), c in zip(jobs, counts):
+                if j == i and kind == "front":
+                    if c <= 1:
+                        chosen = t
+                        break
+            a.front_density = chosen
+        backs = {t: c for (j, kind, t), c in zip(jobs, counts) if j == i and kind == "back"}
+        a.back_tight = bool(backs) and backs.get(False, 2) > 1 and backs.get(True, 2) <= 1
 
 
 # ---------------------------------------------------------------------------
@@ -184,13 +240,13 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     compact = (density == "compact")
-    if layout.upper() == "A" and density == "auto":
-        try:
-            compact = not _analysis_fits_one_page(analyses, compact=False)
-        except Exception:
-            compact = False
     if layout.upper() == "A":
-        _fit_back_pages(analyses)   # 뒷면을 최대한 1페이지로(장문은 제외)
+        if density == "auto":
+            _fit_pages(analyses, fit_front=True)    # 앞·뒤 모두 최대한 1페이지(장문 제외)
+        else:                                        # 'normal' | 'compact' 고정
+            for a in _as_list(analyses):
+                a.front_density = density
+            _fit_pages(analyses, fit_front=False)   # 앞면 고정, 뒷면만 맞춤
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact)
 

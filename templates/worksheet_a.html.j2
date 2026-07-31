@@ -176,6 +176,28 @@
   .page.compact.btight .flow .step .ez{ font-size:8.5px; margin-top:1px; padding-top:1px; }
   .page.compact.btight .flow .arrow{ font-size:9px; margin:0; }
 
+  /* 앞면(분석)이 넘칠 때 한 단계 더 압축(ultra). 여백·박스 먼저, 폰트는 바닥선까지만.
+     가독성 바닥선: 영어 11.5px · 한글(직독직해/해석) 9.5px. 그래도 넘치는 장문은 2페이지. */
+  .page.compact.ultra{ padding:11px 15px 20px; }
+  .page.compact.ultra .head{ margin-bottom:4px; min-height:40px; }
+  .page.compact.ultra .row{ margin:3px 0 1px; padding-top:2px; }
+  .page.compact.ultra .en{ margin-top:0; }
+  .page.compact.ultra .en .line{ margin-bottom:2px; }
+  .page.compact.ultra .en .line.po .tok .over{ height:8px; }
+  .page.compact.ultra .tok .w{ font-size:11.5px; line-height:1.15; }
+  .page.compact.ultra .tok .over .lbl{ font-size:7px; }
+  .page.compact.ultra .ann{ font-size:6.5px; }
+  .page.compact.ultra .ann.red{ font-size:9px; }
+  .page.compact.ultra .rdko{ margin-top:2px; font-size:9.5px; line-height:1.35; }
+  .page.compact.ultra .rdlbl{ font-size:8px; padding:1px 6px; }
+  .page.compact.ultra .kobox{ margin-top:2px; font-size:9.5px; line-height:1.3; padding:3px 8px; }
+  .page.compact.ultra .kblbl{ font-size:8px; }
+  .page.compact.ultra .num{ font-size:11.5px; }
+  .page.compact.ultra .points{ gap:4px; }
+  .page.compact.ultra .pbox{ font-size:9px; padding:0 8px 4px; }
+  .page.compact.ultra .pbox .cap{ font-size:9px; padding:2px 7px; margin:4px 0 3px; }
+  .page.compact.ultra .pbox .gn{ font-size:9.5px; }
+
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:var(--amber); }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
@@ -303,7 +325,8 @@
 {% endif %}
 {% for a in analyses %}
   {% if not only_back %}
-  <div class="page{% if compact %} compact{% endif %}">
+  {%- set fd = a.front_density -%}
+  <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}">
     <div class="head">
       <div class="ribbon">
         <div class="no">{{ a.lecture_label or '★' }}</div>

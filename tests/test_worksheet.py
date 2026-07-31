@@ -486,6 +486,22 @@ def test_fragment_quality_guard():
     print("PASS  조각난 추출 감지(품질 경고)")
 
 
+def test_front_density_render_classes():
+    # 앞면 밀도 클래스가 실제로 렌더되는지(ultra 는 compact 위에 얹힘)
+    from src.worksheet import renderer
+    a = mock_analysis(strength="full")
+    a.front_density = "ultra"
+    assert 'class="page compact ultra"' in renderer.render_a_html(
+        [a], include_back=False, include_guide=False)
+    a.front_density = "compact"
+    html = renderer.render_a_html([a], include_back=False, include_guide=False)
+    assert 'class="page compact"' in html and 'class="page compact ultra"' not in html
+    a.front_density = "normal"
+    assert 'class="page"' in renderer.render_a_html(
+        [a], include_back=False, include_guide=False)
+    print("PASS  앞면 밀도 클래스 렌더(normal/compact/ultra)")
+
+
 def test_quality_assess_gate():
     from src.worksheet import quality
     ok = _mk_analysis(["Full sentence one here.", "Full sentence two here.", "Third one here."])
@@ -599,6 +615,7 @@ def run_all():
     test_hwp_support()
     test_merge_trailing_punct()
     test_detect_problem_numbers_regex()
+    test_front_density_render_classes()
     test_quality_assess_gate()
     test_config_quality_defaults()
     test_clean_passage_keeps_numbered_sentences()
