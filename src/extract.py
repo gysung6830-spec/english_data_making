@@ -73,6 +73,38 @@ def looks_empty(text: str) -> bool:
     return len(letters) < 40
 
 
+# 정상 영어 지문이면 반드시 여러 번 등장하는 흔한 기능어
+_COMMON_WORDS = {
+    "the", "and", "of", "to", "a", "in", "is", "that", "it", "for", "as",
+    "with", "was", "on", "are", "be", "this", "by", "not", "or", "have",
+    "from", "but", "an", "they", "we", "he", "she", "his", "her", "which",
+    "you", "their", "can", "at", "all", "has", "would", "when", "who",
+}
+
+
+def looks_garbled(text: str) -> bool:
+    """추출은 됐지만 글자가 깨지거나 조각나서 분석에 부적합한지 판단.
+
+    무인(無人) 배치에서 '문제 파일'을 걸러 비전(vision)으로 다시 읽게 하는 신호.
+    정상 지문을 비전으로 잘못 넘기지 않도록 '명백히 깨진' 경우만 True(보수적).
+    """
+    letters = re.sub(r"[^A-Za-z]", "", text)
+    if len(letters) < 40:
+        return False  # 사실상 비어있는 경우는 looks_empty 가 담당
+    # 1) 공백을 제외한 글자 중 알파벳 비중이 지나치게 낮으면(특수문자/깨진 글자 범벅) 의심
+    visible = re.sub(r"\s", "", text)
+    if visible and len(letters) / len(visible) < 0.55:
+        return True
+    # 2) 정상 영어 지문이면 흔한 기능어(the/and/of...)가 여러 개 나온다.
+    #    충분히 긴데도 거의 없으면 단어가 조각나 깨진 것으로 본다.
+    words = re.findall(r"[A-Za-z]+", text.lower())
+    if len(words) >= 40:
+        common = sum(1 for w in words if w in _COMMON_WORDS)
+        if common / len(words) < 0.08:
+            return True
+    return False
+
+
 def render_pdf_to_images(pdf_path: str | Path, dpi: int = 150,
                          max_pages: int = 12) -> list[Path]:
     """PDF 각 페이지를 이미지(PNG)로 렌더해 임시 파일 경로 목록을 반환.

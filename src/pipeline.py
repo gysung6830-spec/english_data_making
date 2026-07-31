@@ -35,15 +35,19 @@ def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
 
     def _text_extract(require: bool):
         raw = extract.extract_passage_text(src)
-        if not extract.looks_empty(raw):
-            return analyze.extract_passages(client, cfg, raw)
-        if require:
-            raise ValueError(
-                "PDF에서 텍스트를 추출하지 못했습니다(스캔본이거나 이미지 PDF). "
-                "PyMuPDF 설치('pip install PyMuPDF') 후 비전 모드로 읽거나, "
-                "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
-            )
-        return None
+        if extract.looks_empty(raw):
+            if require:
+                raise ValueError(
+                    "PDF에서 텍스트를 추출하지 못했습니다(스캔본이거나 이미지 PDF). "
+                    "PyMuPDF 설치('pip install PyMuPDF') 후 비전 모드로 읽거나, "
+                    "해당 페이지를 사진(JPG/PNG)으로 저장해 넣어 주세요."
+                )
+            return None
+        # auto: 텍스트가 깨져 보이는 '문제 파일'이면 None 을 돌려 아래 vision 으로 보완.
+        #   (비전이 불가한 require 상황에서는 깨졌더라도 그대로 사용해 결과는 내보낸다)
+        if mode == "auto" and not require and extract.looks_garbled(raw):
+            return None
+        return analyze.extract_passages(client, cfg, raw)
 
     if mode in ("text", "auto"):
         pset = _text_extract(require=(mode == "text"))

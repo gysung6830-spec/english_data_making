@@ -108,11 +108,20 @@ def run_folder_batch(cfg: Config, model: str) -> dict:
                                            prompts.extract_prompt(raw), schemas.PassageSet)
             else:
                 raw = extract.extract_passage_text(pdf)
-                if extract.looks_empty(raw):
-                    if cfg.extraction.pdf_mode == "auto":
+                empty = extract.looks_empty(raw)
+                garbled = (cfg.extraction.pdf_mode == "auto"
+                           and not empty and extract.looks_garbled(raw))
+                if (empty or garbled) and cfg.extraction.pdf_mode == "auto":
+                    # 빈/깨진 '문제 파일' → 비전으로 보완(PyMuPDF 없으면 텍스트로 폴백)
+                    try:
                         params = _vision_extract_req(fid, pdf)
-                    else:
-                        raise ValueError("텍스트 추출 실패(extraction.pdf_mode 를 vision 으로)")
+                    except ModuleNotFoundError:
+                        if empty:
+                            raise ValueError("PDF 읽기에 PyMuPDF 필요('pip install PyMuPDF') 또는 사진으로 저장")
+                        params = build_request(model, prompts.EXTRACT_SYSTEM,
+                                               prompts.extract_prompt(raw), schemas.PassageSet)
+                elif empty:
+                    raise ValueError("텍스트 추출 실패(extraction.pdf_mode 를 vision/auto 로)")
                 else:
                     params = build_request(model, prompts.EXTRACT_SYSTEM,
                                            prompts.extract_prompt(raw), schemas.PassageSet)

@@ -19,10 +19,12 @@ vocab:
 
 # PDF 지문 추출 방식
 extraction:
-  # vision = PDF를 이미지로 렌더해 Claude 비전으로 읽음(정확도 최고, 사진 입력 수준)
+  # vision = PDF를 이미지로 렌더해 Claude 비전으로 읽음(정확도 최고, 사진 입력 수준, 비용 큼)
   # text   = pdfplumber 텍스트 추출(빠르고 저렴하나 표/다단에서 글자가 깨질 수 있음)
-  # auto   = text 로 먼저 시도하고, 비어보이면 vision 으로 보완
-  pdf_mode: "vision"
+  # auto   = text 로 먼저 시도하고, 비어있거나 깨져 보이면(문제 파일) vision 으로 보완
+  # ★ 무인 배치 권장값: "auto"
+  #   정상 파일은 저렴한 텍스트로, '문제 파일'만 자동으로 비전으로 다시 읽습니다.
+  pdf_mode: "auto"
   dpi: 150
 
 # 처리 방식
@@ -30,7 +32,8 @@ processing:
   # 한 지문당 6개 섹션을 동시에 요청할지 여부 (true 면 더 빠름)
   parallel_sections: true
   # 검증 실패(JSON 오류/개수 부족) 시 재요청 횟수
-  max_retries: 1
+  #   사람이 검수하기 어려운 무인 배치에서는 2 이상을 권장(오류 결과물 감소).
+  max_retries: 2
   # 대량 처리 시 Batch API 사용 여부 (지문 수가 많을 때 비용 절감)
   #   run.py --batch 로 실행하면 이 값과 상관없이 배치 모드로 동작합니다.
   use_batch_for_bulk: true

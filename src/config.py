@@ -21,7 +21,7 @@ class VocabCfg:
 @dataclass
 class ProcessingCfg:
     parallel_sections: bool = True
-    max_retries: int = 1
+    max_retries: int = 2
     use_batch_for_bulk: bool = True
 
 
@@ -32,9 +32,10 @@ class ExtractionCfg:
     pdf_mode:
       - "vision": PDF 를 페이지 이미지로 렌더해 Claude 비전으로 읽음(정확도 최고, 비용 큼)
       - "text"  : pdfplumber 텍스트 추출(빠르고 저렴하나 표/다단에서 부정확할 수 있음)
-      - "auto"  : text 로 먼저 시도하고, 비어보이면 vision 으로 보완
+      - "auto"  : text 로 먼저 시도하고, 비어있거나 깨져 보이면 vision 으로 보완
+                  (무인 배치 권장값: 정상 파일은 저렴한 텍스트, 문제 파일만 비전)
     """
-    pdf_mode: str = "vision"
+    pdf_mode: str = "auto"
     dpi: int = 150
 
 
@@ -99,11 +100,11 @@ def load_config(path: str | Path | None = None) -> Config:
         vocab=VocabCfg(min=int(vocab.get("min", 12)), max=int(vocab.get("max", 20))),
         processing=ProcessingCfg(
             parallel_sections=bool(proc.get("parallel_sections", True)),
-            max_retries=int(proc.get("max_retries", 1)),
+            max_retries=int(proc.get("max_retries", 2)),
             use_batch_for_bulk=bool(proc.get("use_batch_for_bulk", True)),
         ),
         extraction=ExtractionCfg(
-            pdf_mode=str(extraction.get("pdf_mode", "vision")).lower(),
+            pdf_mode=str(extraction.get("pdf_mode", "auto")).lower(),
             dpi=int(extraction.get("dpi", 150)),
         ),
         design=DesignCfg(
