@@ -210,6 +210,12 @@ RESULT_HTML = """
       {% endfor %}
     </table>
 
+    {% if failed %}
+    <div class=err>⚠ <b>확인 필요</b> — 생성/배정이 안 된 문항: <b>{{ failed }}</b><br>
+      해당 문항은 해설지에 <b>⚠ 확인 권장</b>으로 표시되어 있습니다. API 키·요금제를
+      확인하거나 다시 생성하면 채워집니다.
+    </div>
+    {% endif %}
     {% if shortage %}
     <div style="background:#eef4ff;border:1px solid #cfe0ff;color:#1e40af;
                 padding:10px 12px;border-radius:8px;font-size:13px;margin-bottom:10px">
@@ -515,13 +521,20 @@ def generate():
     logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
     shortage = next((l.get("msg") for l in res.logs
                      if l.get("note") == "passage_reuse"), "")
+    # 생성 실패·지문부족으로 자리표시자가 된 문항 번호(해설지 ⚠와 연동)
+    fail_nos = sorted({f"{'서술형 ' if l.get('section')=='essay' else ''}{l.get('no')}번"
+                       for l in res.logs
+                       if l.get("note") in ("generation_failed", "no_passage",
+                                            "skipped_no_passage")})
+    failed = ", ".join(fail_nos) if (fail_nos and not mock) else ""
     school_name = next((s["name"] for s in load_schools_index()
                         if s["school_id"] == school), school)
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
         total=res.blueprint.total_score, mock=mock, shortage=shortage,
-        downloads=downloads, verify=res.verify_report.summary(), logs=logs,
+        failed=failed, downloads=downloads,
+        verify=res.verify_report.summary(), logs=logs,
         pdf_ready="problem_pdf" in out)
 
 
