@@ -91,13 +91,14 @@ RESULT_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>✅ 완료</h1>
-    <div class=sub>성공 {{ n_ok }}개 · 실패 {{ n_fail }}개 (총 {{ results|length }}개)</div>
+    <div class=sub>성공 {{ n_ok }}개 · 실패 {{ n_fail }}개{% if n_flag %} · <b style="color:#b45309">검수 권장 {{ n_flag }}개</b>{% endif %} (총 {{ results|length }}개)</div>
+    {% if n_flag %}<div class=warn>⚠️ <b>검수 권장 {{ n_flag }}개</b>만 확인하세요. 나머지는 자동 점검 통과.</div>{% endif %}
     <table>
       <tr><th>파일</th><th>상태</th><th>결과 PDF</th></tr>
       {% for r in results %}
       <tr>
         <td>{{ r.name }}</td>
-        <td>{% if r.ok %}<span class=ok>완료</span>{% else %}<span class=fail>실패</span>{% endif %}</td>
+        <td>{% if not r.ok %}<span class=fail>실패</span>{% elif r.flag %}<span style="color:#b45309;font-weight:800">검수 권장</span>{% else %}<span class=ok>정상</span>{% endif %}</td>
         <td>
           {% if r.ok %}
             {% for fitem in r.files %}
@@ -108,6 +109,7 @@ RESULT_HTML = """
             </div>
             {% endfor %}
             {% if r.warn %}<div class=warn>⚠️ {{ r.warn }}</div>{% endif %}
+            {% if r.reasons %}<div class=warn>⚠️ 검수 사유: {% for rs in r.reasons %}{{ rs }}{% if not loop.last %} / {% endif %}{% endfor %}</div>{% endif %}
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
         </td>
       </tr>
@@ -149,8 +151,9 @@ def _safe_output(fname: str) -> Path:
 
 def render_result(results: list[dict]):
     n_ok = sum(1 for r in results if r["ok"])
-    return render_template_string(RESULT_HTML, results=results,
-                                  n_ok=n_ok, n_fail=len(results) - n_ok)
+    n_flag = sum(1 for r in results if r.get("ok") and r.get("flag"))
+    return render_template_string(RESULT_HTML, results=results, n_ok=n_ok,
+                                  n_fail=len(results) - n_ok, n_flag=n_flag)
 
 
 def make_app(import_name: str) -> Flask:

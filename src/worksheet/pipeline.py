@@ -134,7 +134,10 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
 
         # 2) 텍스트가 비었거나(스캔) 결과가 조각나 보이면 → PDF는 페이지를 이미지로
         #    렌더해 비전으로 재추출(폰트 subset·2단·스캔 등으로 문장 앞부분이 잘리는 경우).
-        if is_pdf and client is not None and (empty or quality.passages_fragmented(pset)):
+        #    비전은 '문제 파일에만' 조건부(설정 quality.vision_fallback, 기본 켜짐).
+        vision_on = getattr(getattr(cfg, "quality", None), "vision_fallback", True)
+        if (is_pdf and client is not None and vision_on
+                and (empty or quality.passages_fragmented(pset))):
             vpset = _extract_via_vision_pdf(client, cfg, src)
             if vpset is not None and (pset is None or not quality.passages_fragmented(vpset)):
                 pset = vpset      # 비전 결과가 더 온전할 때만 채택(둘 다 조각이면 유지)

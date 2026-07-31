@@ -154,9 +154,14 @@ def build_route():
             ws_pipeline.render_worksheet(analyses, out, layout=layout,
                                          footer_note=footer, density=density)
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""
-            # 추출 품질 점검: 문장 앞부분이 잘려 들어온 조각 지문이면 경고(목 미리보기는 제외).
-            warn = None if mock else ws_quality.fragment_warning(analyses)
-            results.append({"name": f.filename + note, "ok": True, "warn": warn,
+            # 무인 품질 게이트: 자동 복구까지 끝난 결과가 미심쩍으면 '검수 권장'으로 표시
+            # (목 미리보기·auto_flag 꺼짐이면 생략). 사람은 flag 된 것만 확인하면 된다.
+            flag, reasons = False, []
+            if not mock and getattr(cfg.quality, "auto_flag", True):
+                verdict = ws_quality.assess(analyses, min_sentences=cfg.quality.min_sentences)
+                flag, reasons = (not verdict["ok"]), verdict["reasons"]
+            results.append({"name": f.filename + note, "ok": True,
+                            "flag": flag, "reasons": reasons,
                             "files": [{"label": f"✏️ {kind}", "out": out.name}]})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()

@@ -41,6 +41,19 @@ class OutputsCfg:
 
 
 @dataclass
+class QualityCfg:
+    """무인(대량) 처리용 품질 세팅 — 오류 자동 복구 + 의심 결과 자동 플래그.
+
+    사람이 전수 검수하기 어려운 환경에서: (1) 문제 파일만 조건부로 자동 복구하고,
+    (2) 그래도 미심쩍은 소수만 '검수 권장'으로 표시해 사람이 그것만 보게 한다.
+    """
+    vision_fallback: bool = True   # 문제 파일에만 조건부로 PDF→이미지 비전 재추출
+    auto_flag: bool = True         # 의심 결과를 자동으로 '검수 권장' 표시
+    lower_start_ratio: float = 0.4  # 소문자로 시작하는 문장 비율 임계(조각 판정)
+    min_sentences: int = 2         # 지문당 최소 문장 수(미만이면 추출 실패 의심)
+
+
+@dataclass
 class Config:
     model: str = "claude-opus-4-8"
     input_dir: Path = field(default_factory=lambda: ROOT / "input")
@@ -50,6 +63,7 @@ class Config:
     processing: ProcessingCfg = field(default_factory=ProcessingCfg)
     design: DesignCfg = field(default_factory=DesignCfg)
     outputs: OutputsCfg = field(default_factory=OutputsCfg)
+    quality: QualityCfg = field(default_factory=QualityCfg)
     api_key: str | None = None
 
     @property
@@ -75,6 +89,7 @@ def load_config(path: str | Path | None = None) -> Config:
     proc = data.get("processing", {})
     design = data.get("design", {})
     outputs = data.get("outputs", {})
+    quality = data.get("quality", {})
 
     cfg = Config(
         model=data.get("model", "claude-opus-4-8"),
@@ -96,6 +111,12 @@ def load_config(path: str | Path | None = None) -> Config:
             analysis=bool(outputs.get("analysis", True)),
             wordlist=bool(outputs.get("wordlist", True)),
             quiz=bool(outputs.get("quiz", True)),
+        ),
+        quality=QualityCfg(
+            vision_fallback=bool(quality.get("vision_fallback", True)),
+            auto_flag=bool(quality.get("auto_flag", True)),
+            lower_start_ratio=float(quality.get("lower_start_ratio", 0.4)),
+            min_sentences=int(quality.get("min_sentences", 2)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )

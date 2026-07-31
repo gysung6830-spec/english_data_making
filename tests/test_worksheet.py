@@ -486,6 +486,32 @@ def test_fragment_quality_guard():
     print("PASS  조각난 추출 감지(품질 경고)")
 
 
+def test_quality_assess_gate():
+    from src.worksheet import quality
+    ok = _mk_analysis(["Full sentence one here.", "Full sentence two here.", "Third one here."])
+    for s in ok.sentences:
+        s.translation = "온전한 해석"
+    v = quality.assess([ok])
+    assert v["ok"] and not v["reasons"], v
+
+    # 조각(소문자 시작) + 해석 없음 → 검수 사유 잡힘
+    bad = _mk_analysis(["its present state, to protect it.", "as protectors here.",
+                        "use, rather than interfering here."])
+    v2 = quality.assess([bad])
+    assert not v2["ok"] and v2["reasons"]
+
+    assert quality.assess([])["ok"] is False       # 빈 결과 → 검수
+    print("PASS  무인 품질 게이트(assess: 검수 대상만 플래그)")
+
+
+def test_config_quality_defaults():
+    from src.config import load_config
+    cfg = load_config()
+    assert cfg.quality.vision_fallback is True and cfg.quality.auto_flag is True
+    assert cfg.quality.min_sentences >= 1
+    print("PASS  품질 설정 기본값 로드")
+
+
 def test_raw_text_fragmented():
     from src.worksheet import quality
     ok = "Conservation keeps things. Restoration changes them. Experts protect items."
@@ -573,6 +599,8 @@ def run_all():
     test_hwp_support()
     test_merge_trailing_punct()
     test_detect_problem_numbers_regex()
+    test_quality_assess_gate()
+    test_config_quality_defaults()
     test_clean_passage_keeps_numbered_sentences()
     test_fragment_quality_guard()
     test_raw_text_fragmented()

@@ -97,3 +97,37 @@ def fragment_warning(analyses) -> str | None:
                 "원본 텍스트가 온전히 추출되지 않았을 수 있으니, 해당 지문을 "
                 "사진(JPG/PNG)으로 저장해 올려 보세요.")
     return None
+
+
+def assess(analyses, min_sentences: int = 2) -> dict:
+    """무인 처리용 최종 품질 게이트 — 결과가 미심쩍으면 '검수 권장' 사유를 모은다.
+
+    자동 복구(조건부 비전 재추출)까지 끝난 '최종 결과'를 검사한다. 여기서 사유가
+    잡히면, 사람이 전수 검수하지 않고 이 소수만 확인하면 된다.
+    반환: {'ok': bool, 'reasons': [사유...]}  (ok=True 면 검수 불필요)
+    """
+    reasons: list[str] = []
+    lst = list(analyses or [])
+    total_sents = sum(len(getattr(a, "sentences", []) or []) for a in lst)
+
+    if not lst or total_sents == 0:
+        return {"ok": False, "reasons": ["추출된 문장이 없습니다(추출/인식 실패)."]}
+
+    # 1) 조각남(문장 앞부분 잘림) — 자동 복구로도 못 고친 경우
+    fw = fragment_warning(lst)
+    if fw:
+        reasons.append(fw)
+
+    # 2) 지문당 문장 수가 비정상적으로 적음(추출 실패 의심)
+    thin = [i for i, a in enumerate(lst, 1)
+            if 0 < len(getattr(a, "sentences", []) or []) < min_sentences]
+    if thin:
+        reasons.append(f"지문 {', '.join(map(str, thin))}: 문장 수가 너무 적습니다(추출 실패 의심).")
+
+    # 3) 해석이 비어 있는 문장(LLM 태깅 실패 흔적)
+    empty_tr = sum(1 for a in lst for s in (getattr(a, "sentences", []) or [])
+                   if not (getattr(s, "translation", "") or "").strip())
+    if empty_tr:
+        reasons.append(f"해석이 비어 있는 문장 {empty_tr}개(태깅 누락 가능).")
+
+    return {"ok": not reasons, "reasons": reasons}
