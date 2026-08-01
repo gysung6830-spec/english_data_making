@@ -128,7 +128,7 @@ def build_route():
         return render_template_string(html, has_key=cfg.has_api_key)
 
     client = None if mock else ClaudeClient(key, cfg.model)
-    footer = cfg.design.footer_note or "(C)2026.김은아영어연구소.All rights reserved"
+    footer = cfg.design.footer_note or "(C)2026.Ortica영어.All rights reserved"
 
     results = []
     for idx, f in enumerate(files, start=1):

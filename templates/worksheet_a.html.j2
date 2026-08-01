@@ -210,10 +210,11 @@
   .page.compact.bx-uniform .pbox{ min-height:48px; }
   .page.compact.ultra.bx-uniform .pbox{ min-height:42px; }
 
-  .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
+  /* 페이지 번호 = 오른쪽 하단, 저작권 = 왼쪽 하단 */
+  .foot{ position:absolute; right:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:var(--amber); }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
-  .copyr{ position:absolute; right:22px; bottom:10px; font-size:9.5px; color:var(--gray); }
+  .copyr{ position:absolute; left:22px; bottom:10px; font-size:9.5px; color:var(--gray); }
 
   /* ---- 뒷페이지(요약): 어휘 리스트 / 논리 흐름도 / 쉬운 예시 목차 ---- */
   .bhead{ display:flex; align-items:center; gap:10px; margin:0 0 14px; }
