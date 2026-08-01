@@ -288,7 +288,10 @@ def _fit_pages(analyses, fit_front: bool = True,
 
     for i, a in enumerate(lst):
         if fit_front:
-            chosen = "ultra"
+            # 1페이지에 맞는 가장 큰(=가장 잘 보이는) 티어를 고른다.
+            # 어떤 티어로도 1페이지가 안 되면(장문), '작게 욱여넣기'보다 가독성이 우선이므로
+            # 전면 normal(최대 폰트)로 2페이지에 시원하게 편다. (A4 인쇄 가독성)
+            chosen = "normal"
             for (j, kind, t), c in zip(jobs, counts):
                 if j == i and kind == "front":
                     if c <= 1:
