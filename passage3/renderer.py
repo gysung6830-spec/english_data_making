@@ -47,18 +47,23 @@ def _doc(body_html: str, css: str, header_text: str) -> str:
 </html>"""
 
 
-def _passage_head(idx: int, p: Passage) -> str:
-    """지문 여는 태그 + 머리(라벨: 제목) 한 줄."""
+def _passage_head(idx: int, p: Passage, doc_name: str = "") -> str:
+    """지문 여는 태그 + 머리(뱃지 '파일명 지문번호' + 지문주제)."""
     parts = [f'<div class="passage" id="passage-{idx}">']
-    label = escape(p.label) if p.label else ""
-    title = escape(p.title) if p.title else ""
-    if label or title:
-        # 지문명(라벨)과 지문주제(제목)를 각각 한 줄씩(줄바꿈)으로.
+    # 뱃지 = 파일명 + 지문번호(라벨)
+    bits = []
+    if doc_name and doc_name.strip():
+        bits.append(doc_name.strip())
+    if p.label:
+        bits.append(p.label)
+    badge = " ".join(bits)
+    title = p.title
+    if badge or title:
         inner = ""
-        if label:
-            inner += f'<span class="p-label">{label}</span>'
+        if badge:
+            inner += f'<span class="p-badge">{escape(badge)}</span>'
         if title:
-            inner += f'<span class="p-title">{title}</span>'
+            inner += f'<span class="p-title">{escape(title)}</span>'
         parts.append(f'<h2 class="p-head">{inner}</h2>')
     return "\n".join(parts)
 
@@ -83,12 +88,12 @@ def _vocab_box(p: Passage) -> str:
     )
 
 
-def render_format_a(passages: List[Passage], header_text: str = "", theme: str = "") -> str:
+def render_format_a(passages: List[Passage], header_text: str = "", theme: str = "", doc_name: str = "") -> str:
     """한줄해석: 영어 문장 + 바로 아래 회색박스 한글해석(같은 번호 표기)."""
     css = get_css(theme)
     blocks: List[str] = []
     for i, p in enumerate(passages, start=1):
-        chunk = [_passage_head(i, p)]
+        chunk = [_passage_head(i, p, doc_name)]
         for s in p.sentences:
             num = _circled(s.num)
             en = (
@@ -110,12 +115,12 @@ def render_format_a(passages: List[Passage], header_text: str = "", theme: str =
     return _doc("\n".join(blocks), css, header_text)
 
 
-def render_format_c(passages: List[Passage], header_text: str = "", theme: str = "") -> str:
+def render_format_c(passages: List[Passage], header_text: str = "", theme: str = "", doc_name: str = "") -> str:
     """한줄영어: 영어 문장만 (해석 없음)."""
     css = get_css(theme)
     blocks: List[str] = []
     for i, p in enumerate(passages, start=1):
-        chunk = [_passage_head(i, p)]
+        chunk = [_passage_head(i, p, doc_name)]
         for s in p.sentences:
             num = _circled(s.num)
             chunk.append(
@@ -129,12 +134,12 @@ def render_format_c(passages: List[Passage], header_text: str = "", theme: str =
     return _doc("\n".join(blocks), css, header_text)
 
 
-def render_format_b(passages: List[Passage], header_text: str = "", theme: str = "") -> str:
+def render_format_b(passages: List[Passage], header_text: str = "", theme: str = "", doc_name: str = "") -> str:
     """좌지문 우해석: 좌 영어 / 우 한글 2단 표(우측엔 번호 없음)."""
     css = get_css(theme)
     blocks: List[str] = []
     for i, p in enumerate(passages, start=1):
-        chunk = [_passage_head(i, p)]
+        chunk = [_passage_head(i, p, doc_name)]
         chunk.append('<table class="two-col"><tbody>')
         for s in p.sentences:
             num = _circled(s.num)

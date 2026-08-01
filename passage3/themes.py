@@ -122,13 +122,22 @@ body {{
 .passage {{ margin: 0; }}
 /* 제목: 라벨 + 제목 한 줄, 왼쪽 세로 강조막대 */
 .p-head {{
-  border-left: 4px solid {ACCENT};
-  padding-left: 13px;
-  margin: 0 0 20px 0;
+  margin: 0 0 18px 0;
   line-height: 1.45;
   color: {INK};
 }}
-.p-head .p-label {{ display: block; font-weight: 700; font-size: 13px; color: {MUTED}; margin-bottom: 3px; }}
+/* 지문번호 뱃지: '파일명 + 지문번호' */
+.p-head .p-badge {{
+  display: inline-block;
+  background: {ACCENT};
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 11.5px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  letter-spacing: .2px;
+}}
 .p-head .p-title {{ display: block; font-weight: 800; font-size: 15.5px; color: {INK}; }}
 /* 한줄해석 / 한줄영어 : 문장 블록 */
 .sent {{
@@ -197,11 +206,9 @@ body {{
   text-align:right; font-size:11px; color:#7a8290;
   padding-bottom:8px; border-bottom:1px solid #c9d3e0; margin-bottom:22px;
 }}
-.p-head {{
-  border-left:4px solid #2a5db0; padding-left:13px; margin:0 0 20px 0;
-  line-height:1.45; color:#20242c;
-}}
-.p-head .p-label {{ display:block; font-weight:700; font-size:13px; color:#2a5db0; margin-bottom:3px; }}
+.p-head {{ margin:0 0 18px 0; line-height:1.45; color:#20242c; }}
+.p-head .p-badge {{ display:inline-block; background:#2a5db0; color:#fff; font-weight:700;
+  font-size:11.5px; padding:3px 11px; border-radius:999px; margin-bottom:8px; letter-spacing:.2px; }}
 .p-head .p-title {{ display:block; font-weight:800; font-size:15.5px; color:#20242c; }}
 .sent {{ margin-bottom:14px; padding-bottom:13px; border-bottom:1px dotted #cfd6e0; }}
 .sent:last-child {{ border-bottom:none; padding-bottom:0; }}
@@ -230,11 +237,9 @@ body {{
   text-align:right; font-size:11.5px; color:#a58a6f;
   padding-bottom:8px; border-bottom:1px solid #ffe0c2; margin-bottom:22px;
 }}
-.p-head {{
-  border-left:5px solid #ff8c42; padding-left:13px; margin:0 0 20px 0;
-  line-height:1.45; color:#2b2b2b;
-}}
-.p-head .p-label {{ display:block; font-weight:700; font-size:13.5px; color:#ff8c42; margin-bottom:3px; }}
+.p-head {{ margin:0 0 18px 0; line-height:1.45; color:#2b2b2b; }}
+.p-head .p-badge {{ display:inline-block; background:#ff8c42; color:#fff; font-weight:800;
+  font-size:12px; padding:3px 12px; border-radius:999px; margin-bottom:8px; letter-spacing:.2px; }}
 .p-head .p-title {{ display:block; font-weight:800; font-size:16px; color:#2b2b2b; }}
 .sent {{ margin-bottom:16px; padding-bottom:14px; border-bottom:2px dashed #ffe0c2; }}
 .sent:last-child {{ border-bottom:none; padding-bottom:0; }}

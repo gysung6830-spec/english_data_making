@@ -232,11 +232,12 @@ def generate():
             "b": render_format_b,
         }
 
+        disp_name = (docname or Path(file.filename).stem).strip()  # 뱃지 표시용
         produced = []  # (파일명, bytes)
         for key in [k for k, _, _ in FORMAT_ORDER if k in formats]:
             render_fn = renderers[key]
             suffix = FORMATS[key][1]
-            html_str = render_fn(passages, header_text=header)
+            html_str = render_fn(passages, header_text=header, doc_name=disp_name)
             out_pdf = tmp_path / f"{doc}_{suffix}.pdf"
             try:
                 html_to_pdf(html_str, out_pdf, autofit=True)

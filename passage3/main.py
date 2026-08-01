@@ -301,7 +301,8 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     print("      어휘 리스트 추출(키 있으면)")
     passages = extract_vocab(passages, api_key=api_key)
 
-    doc = safe_filename(docname or input_path.stem)
+    disp_name = (docname or input_path.stem).strip()   # 뱃지 표시용(원본 이름)
+    doc = safe_filename(docname or input_path.stem)      # 파일 저장용(치환)
 
     print("[4/4] PDF 생성")
     produced: List[Path] = []
@@ -310,7 +311,8 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
         if not entry:
             continue
         render_fn, suffix = entry
-        html_str = render_fn(passages, header_text=header, theme=theme)
+        html_str = render_fn(passages, header_text=header, theme=theme,
+                             doc_name=disp_name)
         out_pdf = out_dir / f"{doc}_{suffix}.pdf"
         print(f"  · {out_pdf.name}")
         html_to_pdf(html_str, out_pdf, autofit=True)
