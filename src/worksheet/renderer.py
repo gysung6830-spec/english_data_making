@@ -235,7 +235,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                footer_note: str = "", brand: str = "은아 T",
                engine: str = "auto", footer_meta: str = "",
                density: str = "auto", student: bool = False,
-               slevel: str = "slash") -> Path:
+               slevel: str = "slash", include_guide: bool = True) -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -244,6 +244,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
               자동으로 압축 밀도로 다시 맞춘다(레이아웃 A 한정).
     student : True 면 학생용(필기) — 정답/해석을 비워 빈칸으로.
     slevel  : 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸).
+    include_guide : 맨 앞 '활용 가이드' 표지 포함 여부(합본 시 학생용은 False).
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -258,7 +259,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
             _fit_pages(analyses, fit_front=False, student=student, slevel=slevel)
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact,
-                       student=student, slevel=slevel)
+                       student=student, slevel=slevel, include_guide=include_guide)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):

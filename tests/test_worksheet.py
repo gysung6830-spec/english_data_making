@@ -363,9 +363,9 @@ def test_webapp_worksheet_flow():
             "files": (io.BytesIO(b"x"), "s_ws.pdf")}
     r = c.post("/build", data=data, content_type="multipart/form-data")
     assert r.status_code == 200 and "완료".encode("utf-8") in r.data
-    # 선생님용 + 학생용(필기) 두 PDF 가 함께 나온다
-    assert "선생님용".encode("utf-8") in r.data and "학생용".encode("utf-8") in r.data
-    print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 선생님용+학생용")
+    # 교사용+학생용 합본 PDF 가 나온다
+    assert "학생용".encode("utf-8") in r.data and "합본".encode("utf-8") in r.data
+    print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 교사용+학생용 합본")
 
 
 def _make_hwpx(path, paragraphs):

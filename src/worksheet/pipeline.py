@@ -243,8 +243,39 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      brand: str = "은아 T", footer_note: str = "",
                      engine: str = "auto", footer_meta: str = "",
                      density: str = "auto", student: bool = False,
-                     slevel: str = "slash") -> Path:
+                     slevel: str = "slash", include_guide: bool = True) -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density,
-                               student=student, slevel=slevel)
+                               student=student, slevel=slevel, include_guide=include_guide)
+
+
+def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
+                          footer_note: str = "", density: str = "auto",
+                          make_student: bool = True, slevel: str = "blank") -> Path:
+    """선생님용 + 학생용을 '한 PDF'로 합본한다(복수 지문 시 교사용 전체 → 학생용 전체).
+
+    페이지 순서: [가이드, 지문1 교사, 지문2 교사, …] 다음에 [지문1 학생, 지문2 학생, …].
+    make_student=False 면 교사용만 만든다.
+    """
+    import tempfile
+
+    out_path = Path(out_path)
+    if not make_student:
+        return render_worksheet(analyses, out_path, layout=layout,
+                                footer_note=footer_note, density=density)
+    from pypdf import PdfWriter
+    with tempfile.TemporaryDirectory() as d:
+        tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
+        # 교사용(가이드 포함) → 학생용(가이드 제외)
+        render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
+                         density=density, student=False, include_guide=True)
+        render_worksheet(analyses, sp, layout=layout, footer_note=footer_note,
+                         density=density, student=True, slevel=slevel, include_guide=False)
+        w = PdfWriter()
+        w.append(str(tp))
+        w.append(str(sp))
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "wb") as f:
+            w.write(f)
+    return out_path
