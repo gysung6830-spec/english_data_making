@@ -7,7 +7,9 @@
   <div class="doc-header">
     <span class="doc-badge">지문 분석{% if student %} · 학생용{% endif %}</span>
     {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
-    <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
+    {% set _num = report.item_no or pno %}
+    {% if source_label or _num %}<span class="doc-numbadge">{{ source_label }}{% if source_label and _num %} · {% endif %}{{ _num }}</span>{% endif %}
+    <div class="doc-title">{{ report.summary.theme_en or report.title }}</div>
   </div>
 
   {# ① 주제 #}
@@ -243,7 +245,9 @@
 {% macro render_source(report, pno, total) %}
   <div class="doc-header">
     <span class="doc-badge">원문 · 전체 해석{% if student %} · 학생용{% endif %}</span>
-    <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
+    {% set _num = report.item_no or pno %}
+    {% if source_label or _num %}<span class="doc-numbadge">{{ source_label }}{% if source_label and _num %} · {% endif %}{{ _num }}</span>{% endif %}
+    <div class="doc-title">{{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
     <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석</th></tr></thead>

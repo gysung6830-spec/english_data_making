@@ -193,16 +193,19 @@ def _as_list(reports) -> list:
 
 
 def render_html(reports, footer_note: str = "", brand: str = "",
-                with_source: bool = True, student: bool = False) -> str:
+                with_source: bool = True, student: bool = False,
+                source_label: str = "") -> str:
     """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
 
     with_source=True 이면 앞부분에 '원문 + 전체 해석' 모음을 먼저 넣고, 그 뒤에 지문별 분석지.
     brand: 직독직해 'made by ~' 와 출제표 '~ tip' 에 넣을 이름. 빈 값이면 브랜드 문구 제거.
+    source_label: 지문 번호 뱃지에 함께 표시할 '파일명(지문명)'.
     (하단 저작권 footer_note 는 brand 와 무관하게 항상 그대로 표시)
     """
     tmpl = _env.get_template("report.html.j2")
     return tmpl.render(reports=_as_list(reports), footer_note=footer_note,
-                       brand=brand, with_source=with_source, student=student)
+                       brand=brand, with_source=with_source, student=student,
+                       source_label=source_label)
 
 
 def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
@@ -248,7 +251,7 @@ def _trim_exam_report(report, ref_keep=None, imp_keep=None):
 
 
 def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "",
-                student: bool = False):
+                student: bool = False, source_label: str = ""):
     """한 지문이 2페이지에 들어오도록, 넘칠 때만 단계적으로 분량을 줄인다.
 
     순서(내용 손실이 적은 것부터):
@@ -260,7 +263,8 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "",
 
     def pages(rep):
         # 분석지 부분만으로 판정(앞의 원문+해석 모음 제외)
-        html = render_html([rep], footer_note, brand, with_source=False, student=student)
+        html = render_html([rep], footer_note, brand, with_source=False,
+                           student=student, source_label=source_label)
         return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
 
     if pages(report) <= 2:
@@ -292,39 +296,42 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "",
     return report
 
 
-def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab, css, HTML):
+def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab, css, HTML,
+                     source_label=""):
     """분석지 한 버전(교사용 또는 학생용)을 렌더해 WeasyPrint Document 로 반환."""
     rlist = _as_list(reports)
 
     def build(rs, with_source):
-        html = render_html(rs, footer_note, brand, with_source=with_source, student=student)
+        html = render_html(rs, footer_note, brand, with_source=with_source,
+                           student=student, source_label=source_label)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
     # 분석지 부분만으로 페이지 판정(앞의 원문+해석 모음은 제외)
     if fit_pages:
         analysis = build(rlist, with_source=False)
         if len(analysis.pages) > 2 * len(rlist):
-            rlist = [_fit_report(r, footer_note, css, min_vocab, brand, student) for r in rlist]
+            rlist = [_fit_report(r, footer_note, css, min_vocab, brand, student, source_label)
+                     for r in rlist]
     # 최종 출력은 원문+해석 모음 포함
     return build(rlist, with_source=True)
 
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
                fit_pages: bool = True, min_vocab: int = 8,
-               brand: str = "", student: bool = False) -> Path:
+               brand: str = "", student: bool = False, source_label: str = "") -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     _render_document(reports, footer_note, brand, student, fit_pages,
-                     min_vocab, css, HTML).write_pdf(str(out_path))
+                     min_vocab, css, HTML, source_label).write_pdf(str(out_path))
     return out_path
 
 
 def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
                         min_vocab: int = 8, brand: str = "",
-                        variants=(False,)) -> Path:
+                        variants=(False,), source_label: str = "") -> Path:
     """분석지를 여러 버전 순서대로 '한 PDF'에 이어 붙인다.
 
     variants: 학생플래그 목록. 예) [False]=교사용만, [True]=학생용만,
@@ -335,7 +342,8 @@ def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    docs = [_render_document(reports, footer_note, brand, s, True, min_vocab, css, HTML)
+    docs = [_render_document(reports, footer_note, brand, s, True, min_vocab, css, HTML,
+                             source_label)
             for s in variants]
     if len(docs) == 1:
         docs[0].write_pdf(str(out_path))

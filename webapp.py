@@ -297,7 +297,10 @@ def analyze_route():
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
                 stem = _safe_name(Path(f.filename).stem)
-            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand)
+            # 지문 번호 뱃지에 쓸 '파일명' — 지문명(입력) 또는 업로드 파일 이름(깔끔한 형태)
+            file_label = custom_base or _safe_name(Path(f.filename).stem)
+            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
+                                           source_label=file_label)
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})

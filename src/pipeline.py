@@ -91,7 +91,8 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 
 
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
-                   which=None, brand: str | None = None) -> list[dict]:
+                   which=None, brand: str | None = None,
+                   source_label: str | None = None) -> list[dict]:
     """선택된 종류(분석지/어휘 리스트/시험지)의 PDF 를 생성.
 
     반환: [{"kind": "analysis"|"wordlist"|"quiz", "label": 표시명, "path": Path}, ...]
@@ -99,10 +100,12 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     - 분석지: 지문이 여러 개여도 한 PDF(지문1→지문2… 순서)로.
     - 어휘 리스트 / 시험지: 지문이 여러 개면 '지문별로 각각' 생성.
     brand: 분석지의 'made by ~' · '~ tip' 문구 이름. None 이면 config 값, ""이면 문구 제거.
+    source_label: 지문 번호 뱃지에 함께 표시할 '파일명(지문명)'. None 이면 stem 사용.
     (하단 저작권 footer 는 항상 그대로)
     """
     sel = which or cfg.outputs
     brand = cfg.design.brand if brand is None else brand
+    label = stem if source_label is None else source_label
     fn = cfg.design.footer_note
     title = reports[0].title if reports else stem
     recs: list[dict] = []
@@ -114,17 +117,19 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
         render.render_analysis_pdf(reports, p, footer_note=fn,
                                    min_vocab=cfg.vocab.min, brand=brand,
-                                   variants=[False, True])
+                                   variants=[False, True], source_label=label)
         recs.append({"kind": "analysis", "label": "📘 분석지(교사용+학생용)", "path": p})
     elif want_teacher:
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
         render.render_analysis_pdf(reports, p, footer_note=fn,
-                                   min_vocab=cfg.vocab.min, brand=brand, variants=[False])
+                                   min_vocab=cfg.vocab.min, brand=brand, variants=[False],
+                                   source_label=label)
         recs.append({"kind": "analysis", "label": "📘 분석지(교사용)", "path": p})
     elif want_student:
         p = cfg.output_dir / f"{stem}_지문분석_학생용.pdf"
         render.render_analysis_pdf(reports, p, footer_note=fn,
-                                   min_vocab=cfg.vocab.min, brand=brand, variants=[True])
+                                   min_vocab=cfg.vocab.min, brand=brand, variants=[True],
+                                   source_label=label)
         recs.append({"kind": "student", "label": "📗 분석지(학생용·빈칸)", "path": p})
 
     # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
