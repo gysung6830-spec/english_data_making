@@ -19,15 +19,15 @@ _RULES = """[출제 원리 — 무엇을 '영작 포인트'로 뽑는가]
 단어 하나가 아니라 어순이 꼬이는 '어구 덩어리(보통 3~5개 조각)'를 뽑아 그 안에서만 순서를 섞는다.
 
 아래 우선순위로 문장마다 선별한다(위일수록 우선):
- 1) 어순이 우리말과 크게 다른 곳 — 동사+목적어+전치사구, 재귀대명사 위치 등
-    예: to impose itself on the surroundings
+ 1) 특수구문 — 부분부정(not every), 도치(much less …), 비교(as~as / 비교급+than), 강조·가정법
+    예: Not every living thing / much less alter themselves
  2) 준동사 구조 — to부정사·동명사·분사구(위치·형태를 헷갈림)
     예: compared to the constraints of inheritance
  3) 관계사·접속사 절의 어순 — 간접의문문/관계절에서 주어·동사 순서
- 4) 특수구문 — 부분부정(not every), 도치(much less …), 비교(as~as / 비교급+than), 강조
-    예: Not every living thing / much less alter themselves
+ 4) 수식어 위치 — 빈도부사·정도부사 등(do not perfectly match 의 perfectly 위치)
  5) 연어·관용 전치사구 — regardless of, compared to, in terms of 등 덩어리 표현
- 6) 수식어 위치 — 빈도부사·정도부사 등(do not perfectly match 의 perfectly 위치)
+ 6) 어순이 우리말과 크게 다른 곳 — 동사+목적어+전치사구, 재귀대명사 위치 등
+    예: to impose itself on the surroundings
 
 [뽑지 말 것]
 - 주어·관사·단순 SVO 처럼 어순이 뻔한 곳(배열 문제로 가치 없음).
