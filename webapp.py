@@ -317,17 +317,20 @@ def analyze_route():
             else:
                 wbs, packs, file_bsets, file_wpacks = pipeline.build_workbook_bundle_for_pdf(
                     client, cfg, tmp)
-            out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-            # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북 → 영작 워크북(맨 뒤)을 한 PDF 로
-            pipeline.render_workbook_with_prose_pdf(
-                wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
-                blank_wb=pipeline._build_blank_workbook(file_bsets), writing_packs=file_wpacks)
+            base = out_name(stem, '_통합', '_워크북')
+            # 유형 순서(통합→어형→어법→어휘→영작→해석→빈칸)로 '한글 포함'·'한글 제외' 2개 PDF
+            outs = pipeline.render_workbook_two_versions(
+                wbs, packs, OUTPUT_DIR, base, footer_note=cfg.design.footer_note,
+                scratch=OUTPUT_DIR, blank_wb=pipeline._build_blank_workbook(file_bsets),
+                writing_packs=file_wpacks)
             wb_books.extend(wbs)
             wb_packs.extend(packs)
             wb_bsets.extend(file_bsets)
             wb_wpacks.extend(file_wpacks)
-            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸+영작 (지문 {len(wbs)}편){warn_note}",
-                            "ok": True, "out": out.name})
+            for o in outs:
+                tag = "한글 포함" if o.name.endswith("_한글포함.pdf") else "한글 제외"
+                results.append({"name": f"{f.filename} · 통합 워크북 [{tag}] (지문 {len(wbs)}편){warn_note}",
+                                "ok": True, "out": o.name})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
@@ -338,11 +341,14 @@ def analyze_route():
     # 파일이 '2개 이상'일 때만 파일들을 하나로 합친 합본 추가(단일 파일은 이미 지문별로 다 들어감)
     if n_files_ok >= 2 and len(wb_books) >= 2:
         try:
-            combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
-            pipeline.render_workbook_with_prose_pdf(
-                wb_books, wb_packs, combined, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
-                blank_wb=pipeline._build_blank_workbook(wb_bsets), writing_packs=wb_wpacks)
-            results.append({"name": "📚 통합 워크북 합본", "ok": True, "out": combined.name})
+            base = f"{(custom + '_통합합본') if custom else '통합워크북_합본'}"
+            outs = pipeline.render_workbook_two_versions(
+                wb_books, wb_packs, OUTPUT_DIR, base, footer_note=cfg.design.footer_note,
+                scratch=OUTPUT_DIR, blank_wb=pipeline._build_blank_workbook(wb_bsets),
+                writing_packs=wb_wpacks)
+            for o in outs:
+                tag = "한글 포함" if o.name.endswith("_한글포함.pdf") else "한글 제외"
+                results.append({"name": f"📚 통합 워크북 합본 [{tag}]", "ok": True, "out": o.name})
         except Exception as e:
             traceback.print_exc()
             results.append({"name": "📚 통합 합본", "ok": False, "error": str(e)})

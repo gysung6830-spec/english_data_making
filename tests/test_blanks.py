@@ -75,11 +75,22 @@ def test_html():
     print("PASS  HTML 렌더(구획·단어뱅크·정답·요약문 해석)")
 
 
+def test_show_ko_flag():
+    wb = bs.build_blank_workbook(bs.LLMBlankWorkbook(sets=[_set()]), title="T", subtitle="S")
+    inc = render_blanks_html(wb, show_ko=True)
+    exc = render_blanks_html(wb, show_ko=False)
+    assert 'class="c-ko"' in inc            # 지문 빈칸 문장별 한글
+    assert 'class="c-ko"' not in exc        # 한글 제외 버전은 숨김
+    assert "정답" in exc and "Word Bank" in exc   # 정답·워드뱅크는 유지
+    print("PASS  한글 포함/제외(show_ko) 지문 빈칸 한글 숨김")
+
+
 def run_all():
     test_placeholder_mismatch_tolerated()
     test_numbering_and_wordbank()
     test_blank_render()
     test_html()
+    test_show_ko_flag()
     print("\n빈칸형 워크북 오프라인 테스트 통과 ✅")
 
 

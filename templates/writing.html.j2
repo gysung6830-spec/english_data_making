@@ -21,7 +21,7 @@
     <ol class="ws-list">
       {% for s in pack.sentences %}
       <li>
-        <div class="s-ko">{{ s.ko }}</div>
+        {% if show_ko %}<div class="s-ko">{{ s.ko }}</div>{% endif %}
         <div class="s-en">{{ s | render_writing }}</div>
       </li>
       {% endfor %}

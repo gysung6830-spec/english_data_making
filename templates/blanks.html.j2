@@ -15,7 +15,7 @@
     <div class="set-head">
       <span class="set-idx">지문 {{ st.no }}</span>
       <span class="set-title">{{ st.title }}</span>
-      {% if st.subtitle %}<div class="set-sub">{{ st.subtitle }}</div>{% endif %}
+      {% if show_ko and st.subtitle %}<div class="set-sub">{{ st.subtitle }}</div>{% endif %}
       <div class="set-rule"></div>
     </div>
 
@@ -28,7 +28,7 @@
         <span class="cnum">{{ s.no }}</span>
         <div class="cbody">
           <div class="c-en">{{ s | render_bsentence }}</div>
-          <div class="c-ko">{{ s.ko }}</div>
+          {% if show_ko %}<div class="c-ko">{{ s.ko }}</div>{% endif %}
         </div>
       </div>
       {% endfor %}

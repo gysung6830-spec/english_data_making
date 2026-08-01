@@ -23,7 +23,7 @@
         <div class="s-en">{{ s | render_prose(ws.wtype) }}</div>
         {% if ws.wtype == 'translate' %}
           <div class="translate-box"></div>
-        {% else %}
+        {% elif show_ko %}
           <div class="s-ko">{{ s.ko }}</div>
         {% endif %}
       </li>

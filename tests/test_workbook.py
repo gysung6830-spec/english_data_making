@@ -183,6 +183,19 @@ def test_multi_passage_layout():
     print("PASS  복수 지문 배치(지문1→답1→지문2→답2)")
 
 
+def test_show_ko_flag():
+    from samples.workbook_mock import mock_workbook
+    wb = mock_workbook(subtitle="한 줄 요지")
+    inc = render_workbooks_html([wb], show_ko=True)
+    exc = render_workbooks_html([wb], show_ko=False)
+    assert 'class="c-ko"' in inc and 'class="wb-subtitle"' in inc
+    # 한글 제외: 문장별 한글(c-ko)·요지 부제(wb-subtitle) 숨김
+    assert 'class="c-ko"' not in exc and 'class="wb-subtitle"' not in exc
+    # 정답·해설(한글)은 유지
+    assert "정답 · 해설" in exc
+    print("PASS  한글 포함/제외(show_ko) 문제면 한글 숨김")
+
+
 def run_all():
     test_placeholder_mismatch_tolerated()
     test_id_mismatch_repair()
@@ -192,6 +205,7 @@ def run_all():
     test_render_sentence_substitution()
     test_render_html()
     test_multi_passage_layout()
+    test_show_ko_flag()
     print("\n통합 워크북 오프라인 테스트 통과 ✅")
 
 

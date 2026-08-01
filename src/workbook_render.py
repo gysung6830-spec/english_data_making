@@ -57,16 +57,20 @@ def render_sentence(s: Sentence) -> Markup:
 _env.filters["render_sentence"] = render_sentence
 
 
-def render_workbooks_html(books: list[Workbook], footer_note: str = "") -> str:
-    """여러 지문을 한 문서에 배치 (지문1 → 답1 → 지문2 → 답2 …)."""
+def render_workbooks_html(books: list[Workbook], footer_note: str = "",
+                          show_ko: bool = True) -> str:
+    """여러 지문을 한 문서에 배치 (지문1 → 답1 → 지문2 → 답2 …).
+
+    show_ko=False 이면 문제면의 한국어 해석 줄을 숨긴다(정답·해설면은 그대로).
+    """
     tmpl = _env.get_template("workbook.html.j2")
     return tmpl.render(books=list(books), footer_note=footer_note,
-                       font_css=branding.font_face_css())
+                       show_ko=show_ko, font_css=branding.font_face_css())
 
 
-def render_workbook_html(wb: Workbook, footer_note: str = "") -> str:
+def render_workbook_html(wb: Workbook, footer_note: str = "", show_ko: bool = True) -> str:
     """단일 지문 렌더 (내부적으로 books=[wb])."""
-    return render_workbooks_html([wb], footer_note=footer_note)
+    return render_workbooks_html([wb], footer_note=footer_note, show_ko=show_ko)
 
 
 # ---------------------------------------------------------------------------
@@ -136,17 +140,19 @@ def stamp_page_numbers(path: str | Path) -> Path:
     return path
 
 
-def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_note: str = "") -> Path:
+def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_note: str = "",
+                         show_ko: bool = True) -> Path:
     """여러 지문을 한 PDF 로 배치 (지문1 → 답1 → 지문2 → 답2 …).
 
     A4 세로, 배경색 인쇄 + 모든 페이지 저작권 푸터.
+    show_ko=False 이면 문제면의 한국어 해석을 숨긴다.
     """
     from playwright.sync_api import sync_playwright  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    html = render_workbooks_html(books, footer_note)
+    html = render_workbooks_html(books, footer_note, show_ko=show_ko)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 
@@ -171,9 +177,10 @@ def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_not
     return out_path
 
 
-def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "") -> Path:
+def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "",
+                        show_ko: bool = True) -> Path:
     """단일 지문 렌더 (내부적으로 books=[wb])."""
-    return render_workbooks_pdf([wb], out_path, footer_note=footer_note)
+    return render_workbooks_pdf([wb], out_path, footer_note=footer_note, show_ko=show_ko)
 
 
 def merge_pdfs(parts: list[str | Path], out_path: str | Path) -> Path:

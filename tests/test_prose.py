@@ -84,6 +84,16 @@ def test_render_html():
     _check("자리표시자 누출 없음", "{{P1}}" not in html and "{{P2}}" not in html)
 
 
+def test_show_ko_flag():
+    # show_ko=False 면 어법/어형/어휘 문제면의 문장별 한글(s-ko)을 숨긴다.
+    pack = mock_prose_pack(title="샘플", header="[샘플]")
+    inc = pr.render_prose_html(pack, show_ko=True)
+    exc = pr.render_prose_html(pack, show_ko=False)
+    _check("한글 포함 버전엔 s-ko 존재", 'class="s-ko"' in inc)
+    _check("한글 제외 버전엔 s-ko 없음", 'class="s-ko"' not in exc)
+    _check("한글 제외 버전도 정답 페이지는 유지", "정답" in exc)
+
+
 if __name__ == "__main__":
     test_validation_and_mismatch_tolerated()
     test_build_four_worksheets()
@@ -91,4 +101,5 @@ if __name__ == "__main__":
     test_translate_no_items()
     test_id_mismatch_order()
     test_render_html()
+    test_show_ko_flag()
     print("\n단일 유형 산문 워크시트 오프라인 테스트 통과 ✅")

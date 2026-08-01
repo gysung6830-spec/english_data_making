@@ -80,6 +80,18 @@ def test_render_html():
     _check("지시문 포함", "배열" in html)
 
 
+def test_show_ko_flag():
+    # 한글 포함/제외 두 버전: show_ko=False 면 문장별 한글 길잡이(s-ko)를 숨긴다.
+    pack = mock_writing_pack(title="샘플", header="[샘플]")
+    ko_guide = pack.sentences[0].ko
+    inc = wr.render_writing_html(pack, show_ko=True)
+    exc = wr.render_writing_html(pack, show_ko=False)
+    _check("한글 포함 버전엔 s-ko + 우리말 길잡이 존재", 'class="s-ko"' in inc and ko_guide in inc)
+    _check("한글 제외 버전엔 s-ko 없음", 'class="s-ko"' not in exc and ko_guide not in exc)
+    _check("한글 제외 버전도 영작 박스는 유지", 'class="wo"' in exc)
+    _check("한글 제외 버전도 정답 페이지는 유지", "정답" in exc)
+
+
 if __name__ == "__main__":
     test_shuffle_and_answer()
     test_max_two_boxes()
@@ -87,4 +99,5 @@ if __name__ == "__main__":
     test_answer_from_chunks_when_blank()
     test_validation_empty()
     test_render_html()
+    test_show_ko_flag()
     print("\n영작 워크북 오프라인 테스트 통과 ✅")

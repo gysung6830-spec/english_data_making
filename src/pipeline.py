@@ -124,35 +124,66 @@ def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
         blanks_schemas.LLMBlankWorkbook(sets=blank_sets), title=base_title, subtitle=base_sub)
 
 
+# 유형(파트) 배치 순서: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸
+_PROSE_ORDER = ["form", "grammar", "vocab"]   # 영작 앞까지의 단일 유형(해석은 영작 뒤로 분리)
+
+
+def _prose_subpack(pk, wtype: str):
+    """ProsePack 에서 한 유형(wtype)만 담은 서브 팩을 만든다(없으면 None)."""
+    subs = [w for w in pk.worksheets if w.wtype == wtype]
+    if not subs or not any(w.sentences for w in subs):
+        return None
+    return prose_render.ProsePack(header=pk.header, title=pk.title,
+                                  subtitle=pk.subtitle, worksheets=subs)
+
+
 def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
                                    footer_note: str = "", scratch: Path | None = None,
-                                   blank_wb=None, writing_packs: list | None = None) -> Path:
-    """통합 워크북(앞) → 단일 유형 산문 → 빈칸 워크북 → 영작 워크북(맨 뒤) 순서로 한 PDF 로 병합.
+                                   blank_wb=None, writing_packs: list | None = None,
+                                   show_ko: bool = True) -> Path:
+    """유형 순서대로 한 PDF 로 병합: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸.
 
     각 부분을 개별 PDF 로 렌더한 뒤 순서대로 병합한다.
     blank_wb 가 None 이면 빈칸형은, writing_packs 가 비면 영작형은 생략한다.
+    show_ko=False 이면 모든 문제면의 한국어 해석을 숨긴 '한글 제외' 버전으로 렌더한다.
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     scratch = scratch or out_path.parent
     stem = out_path.stem
     parts: list[Path] = []
+
+    def _emit(tag: str, fn):
+        p = scratch / f"{stem}__{tag}.pdf"
+        fn(p)
+        parts.append(p)
+
+    # 1) 통합 카드
     if books:
-        wb_pdf = scratch / f"{stem}__wb.pdf"
-        workbook_render.render_workbooks_pdf(books, wb_pdf, footer_note=footer_note)
-        parts.append(wb_pdf)
+        _emit("wb", lambda p: workbook_render.render_workbooks_pdf(
+            books, p, footer_note=footer_note, show_ko=show_ko))
+    # 2~4) 어형 → 어법 → 어휘 (지문별로 이어서)
+    for wtype in _PROSE_ORDER:
+        for i, pk in enumerate(packs, start=1):
+            sub = _prose_subpack(pk, wtype)
+            if sub is not None:
+                _emit(f"{wtype}{i}", lambda p, s=sub: prose_render.render_prose_pdf(
+                    s, p, footer_note=footer_note, show_ko=show_ko))
+    # 5) 영작
+    for i, wpk in enumerate(writing_packs or [], start=1):
+        _emit(f"writing{i}", lambda p, w=wpk: writing_render.render_writing_pdf(
+            w, p, footer_note=footer_note, show_ko=show_ko))
+    # 6) 한글 해석 연습 (영작 뒤)
     for i, pk in enumerate(packs, start=1):
-        pr_pdf = scratch / f"{stem}__prose{i}.pdf"
-        prose_render.render_prose_pdf(pk, pr_pdf, footer_note=footer_note)
-        parts.append(pr_pdf)
-    if blank_wb is not None:               # 빈칸 워크북
-        bl_pdf = scratch / f"{stem}__blanks.pdf"
-        blanks_render.render_blanks_pdf(blank_wb, bl_pdf, footer_note=footer_note)
-        parts.append(bl_pdf)
-    for i, wpk in enumerate(writing_packs or [], start=1):   # 영작 워크북은 가장 마지막
-        wr_pdf = scratch / f"{stem}__writing{i}.pdf"
-        writing_render.render_writing_pdf(wpk, wr_pdf, footer_note=footer_note)
-        parts.append(wr_pdf)
+        sub = _prose_subpack(pk, "translate")
+        if sub is not None:
+            _emit(f"translate{i}", lambda p, s=sub: prose_render.render_prose_pdf(
+                s, p, footer_note=footer_note, show_ko=show_ko))
+    # 7) 빈칸 워크북 (맨 뒤)
+    if blank_wb is not None:
+        _emit("blanks", lambda p: blanks_render.render_blanks_pdf(
+            blank_wb, p, footer_note=footer_note, show_ko=show_ko))
+
     workbook_render.merge_pdfs(parts, out_path)
     try:
         workbook_render.stamp_page_numbers(out_path)   # 문서 전체 기준 페이지 번호
@@ -165,6 +196,22 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
         except Exception:
             pass
     return out_path
+
+
+def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Path,
+                                 base_name: str, footer_note: str = "",
+                                 scratch: Path | None = None, blank_wb=None,
+                                 writing_packs: list | None = None) -> list[Path]:
+    """같은 내용을 '한글 포함'·'한글 제외' 두 개의 별도 PDF 로 출력한다."""
+    out_dir = Path(out_dir)
+    outs: list[Path] = []
+    for suffix, show_ko in (("_한글포함", True), ("_한글제외", False)):
+        out = out_dir / f"{base_name}{suffix}.pdf"
+        render_workbook_with_prose_pdf(
+            books, packs, out, footer_note=footer_note, scratch=scratch,
+            blank_wb=blank_wb, writing_packs=writing_packs, show_ko=show_ko)
+        outs.append(out)
+    return outs
 
 
 def build_blank_sets_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list:
@@ -348,31 +395,32 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
                 wpacks.extend(file_wpacks)
                 logger.info("[%d/%d] 분석 완료: %s (지문 %d편)", i, total, pdf.name, len(wbs))
             else:
-                out = cfg.output_dir / f"{_safe_stem(pdf)}_워크북.pdf"
-                # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북 → 영작 워크북(맨 뒤)을 한 PDF 로
-                render_workbook_with_prose_pdf(
-                    wbs, file_packs, out, footer_note=cfg.design.footer_note,
+                # 유형 순서(통합→어형→어법→어휘→영작→해석→빈칸)로 '한글 포함'·'한글 제외' 2개 PDF
+                outs = render_workbook_two_versions(
+                    wbs, file_packs, cfg.output_dir, f"{_safe_stem(pdf)}_워크북",
+                    footer_note=cfg.design.footer_note,
                     blank_wb=_build_blank_workbook(file_bsets), writing_packs=file_wpacks)
-                outputs.append(out)
-                manifest.record_success(str(pdf), str(out))
-                logger.info("[%d/%d] 완료: %s -> %s (지문 %d편)", i, total, pdf.name, out.name, len(wbs))
+                outputs.extend(outs)
+                manifest.record_success(str(pdf), ", ".join(str(o) for o in outs))
+                logger.info("[%d/%d] 완료: %s -> %s (지문 %d편)", i, total, pdf.name,
+                            " · ".join(o.name for o in outs), len(wbs))
             success += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1
             manifest.record_failure(str(pdf), str(e))
             logger.error("[%d/%d] 실패: %s (%s)", i, total, pdf.name, e)
 
-    # 합본 모드: 모은 지문을 한 PDF 로 배치 (통합 → 단일 유형 → 빈칸 → 영작 순서)
+    # 합본 모드: 모은 지문을 유형 순서(통합→어형→어법→어휘→영작→해석→빈칸)로,
+    # '한글 포함'·'한글 제외' 2개 PDF 로 출력한다.
     if combine and books:
-        combined = cfg.output_dir / "통합워크북_합본.pdf"
-        render_workbook_with_prose_pdf(books, packs, combined,
-                                       footer_note=cfg.design.footer_note,
-                                       blank_wb=_build_blank_workbook(bsets),
-                                       writing_packs=wpacks)
-        outputs.append(combined)
-        manifest.record_success("ALL", str(combined))
-        logger.info("합본 워크북 생성: %s (지문 %d편, 통합→단일유형→빈칸→영작 순서)",
-                    combined.name, len(books))
+        outs = render_workbook_two_versions(
+            books, packs, cfg.output_dir, "통합워크북_합본",
+            footer_note=cfg.design.footer_note,
+            blank_wb=_build_blank_workbook(bsets), writing_packs=wpacks)
+        outputs.extend(outs)
+        manifest.record_success("ALL", ", ".join(str(o) for o in outs))
+        logger.info("합본 워크북 생성: %s (지문 %d편, 한글 포함/제외 2벌)",
+                    " · ".join(o.name for o in outs), len(books))
 
     logger.info("처리 요약 — 성공 %d, 실패 %d (총 %d)", success, failed, total)
     return {"total": total, "success": success, "failed": failed,

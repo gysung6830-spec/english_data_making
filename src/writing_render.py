@@ -144,18 +144,20 @@ def render_writing(s: WSentence) -> Markup:
 _env.filters["render_writing"] = render_writing
 
 
-def render_writing_html(pack: WritingPack, footer_note: str = "") -> str:
+def render_writing_html(pack: WritingPack, footer_note: str = "", show_ko: bool = True) -> str:
     from . import branding
     return _env.get_template("writing.html.j2").render(
-        pack=pack, footer_note=footer_note, font_css=branding.font_face_css())
+        pack=pack, footer_note=footer_note, show_ko=show_ko,
+        font_css=branding.font_face_css())
 
 
-def render_writing_pdf(pack: WritingPack, out_path: str | Path, footer_note: str = "") -> Path:
+def render_writing_pdf(pack: WritingPack, out_path: str | Path, footer_note: str = "",
+                       show_ko: bool = True) -> Path:
     from playwright.sync_api import sync_playwright
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_writing_html(pack, footer_note)
+    html = render_writing_html(pack, footer_note, show_ko=show_ko)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 
