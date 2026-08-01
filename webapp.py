@@ -112,7 +112,11 @@ INDEX_HTML = """
       <input type=text name=basename placeholder="예: 2027수능특강_16강">
       <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
 
-      <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
+      <label>④ 시작 문항번호 <span class=hint>(예: 31 — 지문마다 1씩 자동 증가. 비우면 원본 번호/순번 사용)</span></label>
+      <input type=text name=start_no placeholder="예: 31" inputmode=numeric>
+      <div class=hint>제목이 <b>31. 주제</b> → <b>32. 주제</b> → <b>33. 주제</b> … 순으로 매겨집니다.</div>
+
+      <label>⑤ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (교사용·정답 포함)</label>
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
@@ -252,6 +256,13 @@ def analyze_route():
     raw_name = (request.form.get("basename") or "").strip()
     custom_base = _safe_name(raw_name) if raw_name else ""
 
+    # 시작 문항번호 — 입력 시 지문마다 1씩 자동 증가(비우면 원본 번호/순번 사용)
+    raw_start = (request.form.get("start_no") or "").strip()
+    try:
+        running_no = int(raw_start) if raw_start else None
+    except ValueError:
+        running_no = None
+
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
     if not mock and not key:
@@ -276,6 +287,11 @@ def analyze_route():
                 reports = pipeline._mock_reports_for_pdf(cfg, tmp)
             else:
                 reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
+            # 시작 문항번호가 지정되면 지문마다 번호를 1씩 올려 부여(파일 간에도 연속)
+            if running_no is not None:
+                for rep in reports:
+                    rep.item_no = str(running_no)
+                    running_no += 1
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
