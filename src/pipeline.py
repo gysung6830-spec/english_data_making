@@ -186,7 +186,7 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
         page_map=page_map, answers_page=answers_page, source_name=source_name)
 
 
-def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "gloss") -> list:
+def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact") -> list:
     """단일 유형(어형·어법·어휘·영작·해석·빈칸) 정답을 '연속 배치용' 그룹 목록으로 만든다.
 
     style: "gloss"(정답+문장 해석) / "compact"(정답만) / "passage"(정답+지문 전체 해석).
@@ -216,7 +216,7 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
                                    show_ko: bool = True, source_name: str = "",
-                                   answer_style: str = "gloss") -> Path:
+                                   answer_style: str = "compact") -> Path:
     """[표지·목차] → 문제(통합카드→어형→어법→어휘→영작→해석→빈칸)
        → [정답·해설 간지] → 통합카드 정답(유형/지문별 페이지 분할)
        → 단일 유형 정답(유형끼리 페이지 안 나누고 연속, 출처 라벨).
@@ -313,7 +313,7 @@ def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Pa
                                  base_name: str, footer_note: str = "",
                                  scratch: Path | None = None, blank_wb=None,
                                  writing_packs: list | None = None,
-                                 source_name: str = "", answer_style: str = "gloss") -> list[Path]:
+                                 source_name: str = "", answer_style: str = "compact") -> list[Path]:
     """같은 내용을 '한글 포함'·'한글 제외' 두 개의 별도 PDF 로 출력한다."""
     out_dir = Path(out_dir)
     outs: list[Path] = []
