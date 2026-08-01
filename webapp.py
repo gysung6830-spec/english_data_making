@@ -322,7 +322,7 @@ def analyze_route():
             outs = pipeline.render_workbook_two_versions(
                 wbs, packs, OUTPUT_DIR, base, footer_note=cfg.design.footer_note,
                 scratch=OUTPUT_DIR, blank_wb=pipeline._build_blank_workbook(file_bsets),
-                writing_packs=file_wpacks)
+                writing_packs=file_wpacks, source_name=f.filename)
             wb_books.extend(wbs)
             wb_packs.extend(packs)
             wb_bsets.extend(file_bsets)

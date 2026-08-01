@@ -29,34 +29,58 @@ class AnsGroup:
 
 
 # ── 그룹 빌더 ────────────────────────────────────────────────────────
-def group_from_prose(pack, wtype: str, type_name: str, css: str) -> "AnsGroup | None":
+# style: "gloss"(정답+문장 해석 한 줄) / "compact"(정답만) / "passage"(정답+지문 전체 해석 첨부)
+def group_from_prose(pack, wtype: str, type_name: str, css: str,
+                     style: str = "gloss") -> "AnsGroup | None":
     ws = next((w for w in pack.worksheets if w.wtype == wtype), None)
     if ws is None:
         return None
-    block = (wtype == "translate")
+    is_tr = (wtype == "translate")
+    block = is_tr or style == "gloss"
     items: list[str] = []
+    kos: list[str] = []
     for s in ws.sentences:
-        if wtype == "translate":
+        if is_tr:
             if s.ko:
                 items.append(f"{s.no}) {s.ko}")
-        elif s.items:
-            items.append(f"{s.no}) " + " / ".join(it.answer for it in s.items))
+            continue
+        if not s.items:
+            continue
+        ans = " / ".join(it.answer for it in s.items)
+        if style == "gloss" and s.ko:
+            items.append(f"{s.no}) {ans}  —  {s.ko}")
+        else:
+            items.append(f"{s.no}) {ans}")
+        if s.ko:
+            kos.append(f"{s.no}) {s.ko}")
     if not items:
         return None
-    return AnsGroup(label=pack.label, type_name=type_name, css=css, items=items, block=block)
+    note = " ".join(k.split(") ", 1)[-1] for k in kos) if (style == "passage" and not is_tr) else ""
+    return AnsGroup(label=pack.label, type_name=type_name, css=css,
+                    items=items, block=block, note=note)
 
 
-def group_from_writing(wpack, css: str = "o") -> "AnsGroup | None":
-    items = []
+def group_from_writing(wpack, css: str = "o", style: str = "gloss") -> "AnsGroup | None":
+    items: list[str] = []
+    kos: list[str] = []
     for s in wpack.sentences:
-        if s.items:
-            items.append(f"{s.no}) " + " · ".join(it.answer for it in s.items))
+        if not s.items:
+            continue
+        ans = " · ".join(it.answer for it in s.items)
+        if style == "gloss" and s.ko:
+            items.append(f"{s.no}) {ans}  —  {s.ko}")
+        else:
+            items.append(f"{s.no}) {ans}")
+        if s.ko:
+            kos.append(s.ko)
     if not items:
         return None
-    return AnsGroup(label=wpack.label, type_name="영작 워크북", css=css, items=items, block=True)
+    note = " ".join(kos) if style == "passage" else ""
+    return AnsGroup(label=wpack.label, type_name="영작 워크북", css=css,
+                    items=items, block=True, note=note)
 
 
-def groups_from_blanks(blank_wb, css: str = "b") -> list["AnsGroup"]:
+def groups_from_blanks(blank_wb, css: str = "b", style: str = "gloss") -> list["AnsGroup"]:
     out: list[AnsGroup] = []
     for st in blank_wb.sets:
         pb = [f"{b.num}) {b.answer}" for b in st.passage_blanks]
@@ -66,9 +90,17 @@ def groups_from_blanks(blank_wb, css: str = "b") -> list["AnsGroup"]:
             subs.append(("① 지문 빈칸", pb))
         if sb:
             subs.append(("② 요약문 빈칸", sb))
-        if subs:
-            out.append(AnsGroup(label=st.label, type_name="빈칸 워크북", css=css,
-                                subgroups=subs, note=st.summary_ko))
+        if not subs:
+            continue
+        note = st.summary_ko
+        # gloss/passage 는 지문 해석도 함께
+        if style in ("gloss", "passage"):
+            passage_ko = " ".join(s.ko for s in st.sentences if s.ko)
+            if passage_ko:
+                note = (f"[지문] {passage_ko}  ·  [요약문] {st.summary_ko}"
+                        if st.summary_ko else f"[지문] {passage_ko}")
+        out.append(AnsGroup(label=st.label, type_name="빈칸 워크북", css=css,
+                            subgroups=subs, note=note))
     return out
 
 

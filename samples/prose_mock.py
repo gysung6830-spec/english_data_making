@@ -1,61 +1,77 @@
-"""API 없이 단일 유형 산문 워크시트 디자인을 검증하기 위한 목(mock) 데이터."""
+"""API 없이 단일 유형 산문 워크시트 디자인을 검증하기 위한 목(mock) 데이터.
+
+통합/영작/빈칸 목데이터와 '같은 지문'(초기 피드백)을 사용해 샘플 전체가 한 지문으로
+일관되게 보이도록 한다.
+"""
 from __future__ import annotations
 
 from src import prose_render as pr
 
 
 def mock_llm_prose() -> pr.LLMProsePack:
-    """어법·어형·어휘가 골고루 들어간 예시 산문 워크시트(LLM 응답 형태)."""
+    """어법·어형·어휘가 골고루 들어간 예시 산문 워크시트(LLM 응답 형태) — 초기 피드백 지문."""
     def I(pid, disp, ans):
         return pr.LLMProseItem(id=pid, display=disp, answer=ans)
 
     return pr.LLMProsePack(
-        title="Inheritance and the Limits of Adaptation",
-        subtitle="유전의 보수성과 적응의 한계",
+        title="The Value of Early Feedback",
+        subtitle="설계 과정에서 초기 피드백이 전문적 성공의 핵심인 이유",
         sentences=[
             pr.LLMProseSentence(
                 no=1,
-                en=("Darwin understood that since inheritance is conservative, it is in the "
-                    "nature of the organism to impose itself on the surroundings."),
-                ko="다윈은 유전이 보수적이므로, 유기체가 주변 환경에 자신을 강요하는 것이 그 본성이라는 것을 이해했다.",
-                grammar_template=("Darwin understood {{P1}} since inheritance is conservative, it is "
-                                  "in the nature of the organism to impose {{P2}} on the surroundings."),
-                grammar_items=[I("P1", "[ that / what ]", "that"),
-                               I("P2", "[ it / itself ]", "itself")],
-                form_template=("Darwin {{P1}} that since inheritance is conservative, it is in the "
-                               "nature of the organism to impose itself on the surroundings."),
-                form_items=[I("P1", "(understand)", "understood")],
-                vocab_template=("Darwin understood that since inheritance is {{P1}}, it is in the "
-                                "nature of the organism to impose itself on the surroundings."),
-                vocab_items=[I("P1", "[ progressive / conservative ]", "conservative")],
+                en=("Giving clients ample opportunity to react to your designs while in "
+                    "progress is a key to professional success."),
+                ko="진행 중인 설계 작업에 대해 고객이 반응할 충분한 기회를 주는 것이 전문적 성공의 핵심이다.",
+                grammar_template=("Giving clients ample opportunity to react to your designs while in "
+                                  "progress {{P1}} a key to professional success."),
+                grammar_items=[I("P1", "[ is / are ]", "is")],
+                form_template=("{{P1}} clients ample opportunity to {{P2}} to your designs while in "
+                               "progress {{P3}} a key to professional success."),
+                form_items=[I("P1", "(give)", "Giving"), I("P2", "(react)", "react"),
+                            I("P3", "(be)", "is")],
+                vocab_template=("Giving clients {{P1}} opportunity to react to your designs while in "
+                                "progress is a key to professional success."),
+                vocab_items=[I("P1", "[ ample / scarce ]", "ample")],
             ),
             pr.LLMProseSentence(
                 no=2,
-                en="But needs and opportunity do not perfectly match.",
-                ko="하지만 필요와 기회는 완벽하게 일치하지 않는다.",
-                grammar_template="But needs and opportunity {{P1}} not perfectly match.",
-                grammar_items=[I("P1", "[ do / does ]", "do")],
-                form_template="But needs and opportunity do not perfectly {{P1}}.",
-                form_items=[I("P1", "(match)", "match")],
-                vocab_template="But needs and opportunity do not {{P1}} match.",
-                vocab_items=[I("P1", "[ imperfectly / perfectly ]", "perfectly")],
+                en=("Designers who welcome early feedback often avoid costly revisions, while "
+                    "those who resist it repeat the same avoidable mistakes."),
+                ko="초기 피드백을 반기는 디자이너들은 값비싼 수정을 자주 피하는 반면, 그것에 저항하는 사람들은 똑같이 피할 수 있었던 실수를 반복한다.",
+                grammar_template=("Designers {{P1}} welcome early feedback often avoid costly revisions, "
+                                  "{{P2}} those who resist it repeat the same avoidable mistakes."),
+                grammar_items=[I("P1", "[ who / which ]", "who"),
+                               I("P2", "[ while / because ]", "while")],
+                form_template=("Designers who {{P1}} early feedback often {{P2}} costly revisions, while "
+                               "those who {{P3}} it {{P4}} the same avoidable mistakes."),
+                form_items=[I("P1", "(welcome)", "welcome"), I("P2", "(avoid)", "avoid"),
+                            I("P3", "(resist)", "resist"), I("P4", "(repeat)", "repeat")],
+                vocab_template=("Designers who welcome early feedback often avoid {{P1}} revisions, while "
+                                "those who resist it repeat the same {{P2}} mistakes."),
+                vocab_items=[I("P1", "[ costly / cheap ]", "costly"),
+                             I("P2", "[ avoidable / inevitable ]", "avoidable")],
             ),
             pr.LLMProseSentence(
                 no=3,
-                en="As a result, not every living thing can live everywhere.",
-                ko="결과적으로, 모든 생물이 모든 곳에서 살 수 있는 것은 아니다.",
-                grammar_template="As a result, not every {{P1}} thing can live everywhere.",
-                grammar_items=[I("P1", "[ lived / living ]", "living")],
-                form_template="As a result, not every living thing can {{P1}} everywhere.",
-                form_items=[I("P1", "(live)", "live")],
-                vocab_template="As a result, not every living thing can live {{P1}}.",
-                vocab_items=[I("P1", "[ everywhere / nowhere ]", "everywhere")],
+                en=("Only after the deadline passed did they realize how serious the problem was, "
+                    "and the team finally understood what had gone wrong."),
+                ko="마감이 지난 뒤에야 그들은 문제가 얼마나 심각한지 깨달았고, 팀은 마침내 무엇이 잘못되었는지 이해했다.",
+                grammar_template=("Only after the deadline passed {{P1}} how serious the problem was, "
+                                  "and the team finally understood what had gone wrong."),
+                grammar_items=[I("P1", "[ did they realize / they realized ]", "did they realize")],
+                form_template=("Only after the deadline {{P1}} did they {{P2}} how serious the problem "
+                               "was, and the team finally {{P3}} what had {{P4}} wrong."),
+                form_items=[I("P1", "(pass)", "passed"), I("P2", "(realize)", "realize"),
+                            I("P3", "(understand)", "understood"), I("P4", "(go)", "gone")],
+                vocab_template=("Only after the deadline passed did they realize how {{P1}} the problem "
+                                "was, and the team finally understood what had gone wrong."),
+                vocab_items=[I("P1", "[ serious / trivial ]", "serious")],
             ),
         ],
     )
 
 
-def mock_prose_pack(title: str = "샘플 지문", header: str = "") -> pr.ProsePack:
+def mock_prose_pack(title: str = "The Value of Early Feedback", header: str = "") -> pr.ProsePack:
     llm = mock_llm_prose()
     return pr.build_prose_pack(llm, header=header or title,
                                title=title, subtitle=llm.subtitle)

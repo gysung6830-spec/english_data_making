@@ -89,12 +89,13 @@ _env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)),
 
 def render_cover_html(*, header: str, title: str, subtitle: str = "",
                       version_label: str = "", n_passages: int = 1,
-                      sections: list[CoverSection], answers_page: int = 0) -> str:
+                      sections: list[CoverSection], answers_page: int = 0,
+                      source_name: str = "") -> str:
     from . import branding
     return _env.get_template("cover.html.j2").render(
         header=header, title=title, subtitle=subtitle, version_label=version_label,
         n_passages=n_passages, sections=sections, answers_page=answers_page,
-        font_css=branding.font_face_css())
+        source_name=source_name, font_css=branding.font_face_css())
 
 
 def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
@@ -148,7 +149,8 @@ def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
 def render_cover_pdf(out_path: str | Path, *, header: str, title: str, subtitle: str = "",
                      version_label: str = "", n_passages: int = 1,
                      section_keys=None, footer_note: str = "",
-                     page_map: dict | None = None, answers_page: int = 0) -> Path:
+                     page_map: dict | None = None, answers_page: int = 0,
+                     source_name: str = "") -> Path:
     from playwright.sync_api import sync_playwright
 
     out_path = Path(out_path)
@@ -159,7 +161,8 @@ def render_cover_pdf(out_path: str | Path, *, header: str, title: str, subtitle:
             s.page = int(page_map.get(s.key, 0) or 0)
     html = render_cover_html(header=header, title=title, subtitle=subtitle,
                              version_label=version_label, n_passages=n_passages,
-                             sections=sections, answers_page=answers_page)
+                             sections=sections, answers_page=answers_page,
+                             source_name=source_name)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 

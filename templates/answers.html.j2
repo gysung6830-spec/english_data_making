@@ -22,13 +22,15 @@
         {% for it in items %}<span class="ag-chip">{{ it }}</span>{% endfor %}
       </div>
       {% endfor %}
-      {% if g.note %}<div class="ag-note"><b>요약문 해석</b> {{ g.note }}</div>{% endif %}
+      {% if g.note %}<div class="ag-note"><b>해석</b> {{ g.note }}</div>{% endif %}
     {% elif g.block %}
       {% for it in g.items %}<div class="ag-line">{{ it }}</div>{% endfor %}
+      {% if g.note %}<div class="ag-note"><b>지문 해석</b> {{ g.note }}</div>{% endif %}
     {% else %}
       <div class="ag-items">
         {% for it in g.items %}<span class="ag-chip">{{ it }}</span>{% endfor %}
       </div>
+      {% if g.note %}<div class="ag-note"><b>지문 해석</b> {{ g.note }}</div>{% endif %}
     {% endif %}
   </div>
   {% endfor %}

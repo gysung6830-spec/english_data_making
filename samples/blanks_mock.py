@@ -6,34 +6,28 @@ from src import blanks_schemas as bs
 PB, SB, St = bs.LLMPassageBlank, bs.LLMSummaryBlank, bs.LLMBSentence
 
 
-def mock_blank_set(title: str = "The Human Need for Companionship", no: int = 1) -> bs.LLMBlankSet:
+def mock_blank_set(title: str = "The Value of Early Feedback", no: int = 1) -> bs.LLMBlankSet:
     return bs.LLMBlankSet(
         no=no, title=title,
-        subtitle="혼자이고 싶은 마음만큼이나, 인간은 존재와 정체성을 확인받기 위해 타인과의 교제를 갈망한다.",
+        subtitle="설계 과정에서 초기 피드백이 전문적 성공의 핵심인 이유",
         sentences=[
-            St(no=1, en_template="Although the wish to be alone is often {{B1}}, its intensity {{B2}} from person to person.",
-               ko="혼자 있고 싶은 소망은 종종 강하지만, 그 강도는 사람마다 다르다.",
-               blanks=[PB(id="B1", answer="strong"), PB(id="B2", answer="varies")]),
-            St(no=2, en_template="An equally impelling impulse, though, is to {{B3}} the company of others and to spend extended periods of time {{B4}} activities.",
-               ko="하지만 똑같이 뿌리칠 수 없는 충동은 다른 사람과 함께 있는 것을 추구하고 활동을 공유하면서 긴 시간을 보내는 것이다.",
-               blanks=[PB(id="B3", answer="seek"), PB(id="B4", answer="sharing")]),
-            St(no=3, en_template="In these periods we {{B5}} information and feelings in both conversational and {{B6}} forms.",
-               ko="이 시간 동안 우리는 대화의 형태와 비언어적 형태 둘 다로 정보와 감정을 교환한다.",
-               blanks=[PB(id="B5", answer="exchange"), PB(id="B6", answer="non-verbal")]),
-            St(no=4, en_template="We {{B7}} other people to {{B8}} us with love, support, approval and a myriad of other emotional needs.",
-               ko="우리는 우리에게 사랑, 지지, 인정, 그리고 무수히 많은 다른 정서적 필요를 제공해 줄 다른 사람들을 필요로 한다.",
-               blanks=[PB(id="B7", answer="need"), PB(id="B8", answer="provide")]),
-            St(no=5, en_template="In a very basic sense we need others to {{B9}} that we have an identity that is {{B10}} and separate from anyone else.",
-               ko="아주 기본적인 의미에서 우리는 다른 누구와도 구별되는 고유한 정체성을 가지고 있음을 확인받기 위해 다른 사람들을 필요로 한다.",
-               blanks=[PB(id="B9", answer="confirm"), PB(id="B10", answer="unique")]),
+            St(no=1, en_template="Giving clients {{B1}} opportunity to {{B2}} to your designs while in progress is a key to professional success.",
+               ko="진행 중인 설계 작업에 대해 고객이 반응할 충분한 기회를 주는 것이 전문적 성공의 핵심이다.",
+               blanks=[PB(id="B1", answer="ample"), PB(id="B2", answer="react")]),
+            St(no=2, en_template="Designers who {{B3}} early feedback often {{B4}} costly revisions, while those who resist it repeat the same avoidable mistakes.",
+               ko="초기 피드백을 반기는 디자이너들은 값비싼 수정을 자주 피하는 반면, 그것에 저항하는 사람들은 똑같이 피할 수 있었던 실수를 반복한다.",
+               blanks=[PB(id="B3", answer="welcome"), PB(id="B4", answer="avoid")]),
+            St(no=3, en_template="Only after the deadline passed did they {{B5}} how {{B6}} the problem was, and the team finally understood what had gone wrong.",
+               ko="마감이 지난 뒤에야 그들은 문제가 얼마나 심각한지 깨달았고, 팀은 마침내 무엇이 잘못되었는지 이해했다.",
+               blanks=[PB(id="B5", answer="realize"), PB(id="B6", answer="serious")]),
         ],
-        summary_template="Humans crave {{S1}} with others to confirm their own {{S2}} and to satisfy their emotional {{S3}}. Because this {{S4}} sustains us, we can rarely endure long periods of {{S5}}.",
-        summary_blanks=[SB(id="S1", answer="connection"), SB(id="S2", answer="identity"),
-                        SB(id="S3", answer="needs"), SB(id="S4", answer="interaction"),
-                        SB(id="S5", answer="isolation")],
-        summary_ko="인간은 자신의 정체성을 확인받고 정서적 필요를 채우기 위해 타인과의 유대를 갈망하며, 이러한 상호작용이 우리를 지탱해 주기에 오랜 고립을 견디기 어렵다.")
+        summary_template="Regularly {{S1}} client feedback during a project helps designers {{S2}} expensive fixes, whereas {{S3}} it leads to {{S4}} mistakes and late {{S5}}.",
+        summary_blanks=[SB(id="S1", answer="seeking"), SB(id="S2", answer="avoid"),
+                        SB(id="S3", answer="ignoring"), SB(id="S4", answer="repeated"),
+                        SB(id="S5", answer="realization")],
+        summary_ko="프로젝트 도중 고객 피드백을 꾸준히 구하면 값비싼 수정을 피할 수 있지만, 그것을 무시하면 같은 실수를 반복하고 뒤늦게야 문제를 깨닫게 된다.")
 
 
-def mock_blank_workbook(title: str = "The Human Need for Companionship") -> bs.BlankWorkbook:
+def mock_blank_workbook(title: str = "The Value of Early Feedback") -> bs.BlankWorkbook:
     llm = bs.LLMBlankWorkbook(sets=[mock_blank_set(title)])
     return bs.build_blank_workbook(llm, title=title, subtitle="유형 B 지문 빈칸 · 유형 A 요약문 빈칸")

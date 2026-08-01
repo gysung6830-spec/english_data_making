@@ -80,3 +80,5 @@ body{
 .cv-vtag.on{ background:var(--green); color:#fff; }
 .cv-vtag.off{ background:#eef1f4; color:#5b6470; border:1px solid #d7dde3; }
 .cv-vhint{ font-size:7.8pt; color:var(--muted); margin-top:4px; line-height:1.4; }
+.cv-file{ margin-top:14px; text-align:center; font-size:8.2pt; color:#9aa3af;
+  border-top:1px solid #eef1f4; padding-top:8px; word-break:break-all; }

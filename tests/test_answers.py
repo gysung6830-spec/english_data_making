@@ -29,14 +29,18 @@ def test_groups_and_render():
     st = mock_blank_set(title="T", no=1); st.label = "[고1] 9월 30번"
     blank_wb = bs.build_blank_workbook(bs.LLMBlankWorkbook(sets=[st]), title="T", subtitle="S")
 
-    g_form = ar.group_from_prose(pk, "form", "어형 변형", "f")
-    g_tr = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t")
-    g_wr = ar.group_from_writing(wp)
-    g_bl = ar.groups_from_blanks(blank_wb)
-    _check("어형 그룹 생성(인라인 칩)", g_form and not g_form.block and g_form.items)
+    # compact 스타일: 어형은 인라인 칩(block=False)
+    g_form = ar.group_from_prose(pk, "form", "어형 변형", "f", style="compact")
+    g_tr = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t", style="compact")
+    g_wr = ar.group_from_writing(wp, style="compact")
+    g_bl = ar.groups_from_blanks(blank_wb, style="compact")
+    _check("어형 그룹 생성(compact=인라인 칩)", g_form and not g_form.block and g_form.items)
     _check("해석 그룹은 block(줄 단위)", g_tr and g_tr.block)
     _check("영작 그룹 생성", g_wr and g_wr.type_name == "영작 워크북")
     _check("빈칸 그룹은 subgroups(지문/요약)", g_bl and g_bl[0].subgroups)
+    # gloss 스타일: 어형도 block(정답+해석 한 줄)
+    g_form_gloss = ar.group_from_prose(pk, "form", "어형 변형", "f", style="gloss")
+    _check("gloss 어형은 block", g_form_gloss and g_form_gloss.block)
 
     groups = [g for g in [g_form, g_tr, g_wr] if g] + g_bl
     html = ar.render_answers_html(groups)

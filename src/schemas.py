@@ -16,6 +16,8 @@ from pydantic import BaseModel, Field, field_validator
 class Extraction(BaseModel):
     title: str = Field(default="Untitled")
     source: str = Field(default="")
+    topic_ko: str = Field(default="")   # 지문의 한글 주제(한 줄) — 헤더 제목으로 사용
+    q_no: str = Field(default="")       # 문항 번호(예: "30번") — 지문에 확실히 붙어 있을 때만
     paragraphs: list[str] = Field(default_factory=list)
 
     @field_validator("paragraphs")

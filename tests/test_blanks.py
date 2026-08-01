@@ -56,9 +56,9 @@ def test_numbering_and_wordbank():
 def test_blank_render():
     wb = bs.build_blank_workbook(bs.LLMBlankWorkbook(sets=[_set()]), title="T", subtitle="S")
     st = wb.sets[0]
-    # 지문 빈칸: 첫 글자 노출(varies → v), 자리표시자 누출 없음
+    # 지문 빈칸: 첫 글자 노출(ample → a), 자리표시자 누출 없음
     s1 = str(render_bsentence(st.sentences[0]))
-    assert "{{B1}}" not in s1 and 'class="blk pb"' in s1 and ">v<" in s1
+    assert "{{B1}}" not in s1 and 'class="blk pb"' in s1 and ">a<" in s1
     # 요약문 빈칸: 첫 글자 없음(번호만)
     sm = str(render_summary(st))
     assert "{{S1}}" not in sm and 'class="blk sb"' in sm

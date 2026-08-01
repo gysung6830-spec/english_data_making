@@ -100,20 +100,28 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
 
     지문 추출을 1회만 수행해 통합 워크북 · 단일 유형 산문 워크시트 · 빈칸형 · 영작을 함께 생성한다.
     """
-    from .textutil import source_label
+    from .textutil import qno_label
 
     wbs: list[Workbook] = []
     packs: list[prose_render.ProsePack] = []
     blank_sets: list = []
     writing_packs: list[writing_render.WritingPack] = []
     for ex in _extract_passages_for_pdf(client, cfg, src):
-        lbl = source_label(ex.source, fallback=source_label(src.name))
-        wb = workbook_generate.generate_workbook(client, cfg, ex); wb.label = lbl
-        pk = prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title); pk.label = lbl
+        # 헤더 제목 = 지문의 한글 주제, 뱃지 = 문항 번호
+        #  · 문항 번호는 LLM 추출(q_no)을 1순위로, 없으면 파일명 파싱으로 보조
+        topic = (ex.topic_ko or "").strip() or ex.title
+        qno = (ex.q_no or "").strip() or qno_label(ex.source) or qno_label(src.name)
+        wb = workbook_generate.generate_workbook(client, cfg, ex)
+        wb.title = topic; wb.label = qno
+        pk = prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title)
+        pk.title = topic; pk.label = qno
         bs = blanks_generate.generate_blank_set(client, cfg, ex)
-        try: bs.label = lbl
-        except Exception: pass
-        wp = writing_generate.generate_writing_pack(client, cfg, ex, header=ex.title); wp.label = lbl
+        try:
+            bs.title = topic; bs.label = qno
+        except Exception:
+            pass
+        wp = writing_generate.generate_writing_pack(client, cfg, ex, header=ex.title)
+        wp.title = topic; wp.label = qno
         wbs.append(wb); packs.append(pk); blank_sets.append(bs); writing_packs.append(wp)
     return wbs, packs, blank_sets, writing_packs
 
@@ -160,7 +168,8 @@ def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
 
 def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
                       show_ko: bool, footer_note: str,
-                      page_map: dict | None = None, answers_page: int = 0) -> Path:
+                      page_map: dict | None = None, answers_page: int = 0,
+                      source_name: str = "") -> Path:
     """수록된 유형을 감지해 표지 겸 목차/사용 설명서를 렌더한다."""
     from . import branding
 
@@ -174,36 +183,40 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
         out_path, header=branding.BRAND, title=title or "통합 워크북",
         version_label=version_label, n_passages=n_passages,
         section_keys=keys, footer_note=footer_note,
-        page_map=page_map, answers_page=answers_page)
+        page_map=page_map, answers_page=answers_page, source_name=source_name)
 
 
-def _build_answer_groups(packs, writing_packs, blank_wb) -> list:
-    """단일 유형(어형·어법·어휘·영작·해석·빈칸) 정답을 '연속 배치용' 그룹 목록으로 만든다."""
+def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "gloss") -> list:
+    """단일 유형(어형·어법·어휘·영작·해석·빈칸) 정답을 '연속 배치용' 그룹 목록으로 만든다.
+
+    style: "gloss"(정답+문장 해석) / "compact"(정답만) / "passage"(정답+지문 전체 해석).
+    """
     from . import answers_render as ar
     groups = []
     for wtype, name, css in (("form", "어형 변형", "f"), ("grammar", "어법 양자택일", "g"),
                              ("vocab", "어휘 양자택일", "v")):
         for pk in packs or []:
-            g = ar.group_from_prose(pk, wtype, name, css)
+            g = ar.group_from_prose(pk, wtype, name, css, style=style)
             if g:
                 groups.append(g)
     for wpk in writing_packs or []:
-        g = ar.group_from_writing(wpk)
+        g = ar.group_from_writing(wpk, style=style)
         if g:
             groups.append(g)
     for pk in packs or []:
-        g = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t")
+        g = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t", style=style)
         if g:
             groups.append(g)
     if blank_wb is not None:
-        groups += ar.groups_from_blanks(blank_wb)
+        groups += ar.groups_from_blanks(blank_wb, style=style)
     return groups
 
 
 def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
-                                   show_ko: bool = True) -> Path:
+                                   show_ko: bool = True, source_name: str = "",
+                                   answer_style: str = "gloss") -> Path:
     """[표지·목차] → 문제(통합카드→어형→어법→어휘→영작→해석→빈칸)
        → [정답·해설 간지] → 통합카드 정답(유형/지문별 페이지 분할)
        → 단일 유형 정답(유형끼리 페이지 안 나누고 연속, 출처 라벨).
@@ -265,7 +278,7 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
     if books:                                         # 통합카드 정답(유형/지문별 페이지 분할 유지)
         _emit("wb_a", lambda p: workbook_render.render_workbooks_pdf(
             books, p, footer_note=footer_note, show_ko=show_ko, section="a"))
-    groups = _build_answer_groups(packs, writing_packs, blank_wb)   # 단일 유형 정답 연속 배치
+    groups = _build_answer_groups(packs, writing_packs, blank_wb, style=answer_style)
     if groups:
         from . import answers_render
         _emit("answers", lambda p: answers_render.render_answers_pdf(
@@ -274,13 +287,13 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
     # ── 표지·목차 (본문 페이지 수 집계 후 렌더, 표지 페이지 수 보정) ──
     cover_path = scratch / f"{stem}__cover.pdf"
     _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
-                      page_map=toc, answers_page=toc.get("answers", 0))
+                      page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name)
     cpages = _count(cover_path)
     if cpages != cover_guess:                         # 표지가 여러 장이면 목차 페이지를 보정
         shift = cpages - cover_guess
         toc = {k: v + shift for k, v in toc.items()}
         _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
-                          page_map=toc, answers_page=toc.get("answers", 0))
+                          page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name)
 
     workbook_render.merge_pdfs([cover_path] + parts, out_path)
     try:
@@ -299,7 +312,8 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
 def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Path,
                                  base_name: str, footer_note: str = "",
                                  scratch: Path | None = None, blank_wb=None,
-                                 writing_packs: list | None = None) -> list[Path]:
+                                 writing_packs: list | None = None,
+                                 source_name: str = "", answer_style: str = "gloss") -> list[Path]:
     """같은 내용을 '한글 포함'·'한글 제외' 두 개의 별도 PDF 로 출력한다."""
     out_dir = Path(out_dir)
     outs: list[Path] = []
@@ -307,7 +321,8 @@ def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Pa
         out = out_dir / f"{base_name}{suffix}.pdf"
         render_workbook_with_prose_pdf(
             books, packs, out, footer_note=footer_note, scratch=scratch,
-            blank_wb=blank_wb, writing_packs=writing_packs, show_ko=show_ko)
+            blank_wb=blank_wb, writing_packs=writing_packs, show_ko=show_ko,
+            source_name=source_name, answer_style=answer_style)
         outs.append(out)
     return outs
 
@@ -346,49 +361,44 @@ def _mock_workbook_for_pdf(cfg: Config, pdf: Path) -> Workbook:
                 title = first
         except Exception:
             pass
-    wb = mock_workbook(title=title)
-    wb.label = _mock_label(pdf)
+    wb = mock_workbook()
+    wb.title = _MOCK_TOPIC; wb.label = _mock_label(pdf)
     return wb
 
 
+# 목(mock)은 '초기 피드백' 지문 하나로 통일 — 헤더 제목은 한글 주제
+_MOCK_TOPIC = "초기 피드백이 전문적 성공의 핵심인 이유"
+
+
 def _mock_label(pdf: Path) -> str:
-    from .textutil import source_label
-    return source_label(pdf.name, fallback="[샘플] 30번")
+    from .textutil import qno_label
+    return qno_label(pdf.name) or "30번"
 
 
 def _mock_prose_pack_for_pdf(cfg: Config, pdf: Path):
     from samples.prose_mock import mock_prose_pack
 
-    title = _safe_stem(pdf)
-    pk = mock_prose_pack(title=title, header=title)
-    pk.label = _mock_label(pdf)
+    pk = mock_prose_pack()
+    pk.title = _MOCK_TOPIC; pk.label = _mock_label(pdf)
     return pk
 
 
 def _mock_writing_pack_for_pdf(cfg: Config, pdf: Path):
     from samples.writing_mock import mock_writing_pack
 
-    title = _safe_stem(pdf)
-    wp = mock_writing_pack(title=title, header=title)
-    wp.label = _mock_label(pdf)
+    wp = mock_writing_pack()
+    wp.title = _MOCK_TOPIC; wp.label = _mock_label(pdf)
     return wp
 
 
 def _mock_blank_set_for_pdf(cfg: Config, pdf: Path, no: int):
     from samples.blanks_mock import mock_blank_set
 
-    title = _safe_stem(pdf)
-    if not extract.is_image(pdf):
-        try:
-            raw = extract.extract_passage_text(pdf)
-            first = next((ln.strip() for ln in raw.splitlines() if ln.strip()), "")
-            if first and len(first) < 80:
-                title = first
-        except Exception:
-            pass
-    st = mock_blank_set(title=title, no=no)
-    try: st.label = _mock_label(pdf)
-    except Exception: pass
+    st = mock_blank_set(no=no)
+    try:
+        st.title = _MOCK_TOPIC; st.label = _mock_label(pdf)
+    except Exception:
+        pass
     return st
 
 
@@ -511,7 +521,8 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
                 outs = render_workbook_two_versions(
                     wbs, file_packs, cfg.output_dir, f"{_safe_stem(pdf)}_워크북",
                     footer_note=cfg.design.footer_note,
-                    blank_wb=_build_blank_workbook(file_bsets), writing_packs=file_wpacks)
+                    blank_wb=_build_blank_workbook(file_bsets), writing_packs=file_wpacks,
+                    source_name=pdf.name)
                 outputs.extend(outs)
                 manifest.record_success(str(pdf), ", ".join(str(o) for o in outs))
                 logger.info("[%d/%d] 완료: %s -> %s (지문 %d편)", i, total, pdf.name,

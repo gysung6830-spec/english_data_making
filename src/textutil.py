@@ -92,3 +92,26 @@ def source_label(source: str, fallback: str = "") -> str:
     if fallback:
         return fallback
     return (cleaned[:24] + "…") if len(cleaned) > 25 else cleaned
+
+
+def qno_label(source: str) -> str:
+    """파일명 등에서 '문항 번호'만 'NN번' 형태로 뽑는다(LLM 추출 실패 시의 보조 수단).
+
+    확실한 신호(예: '30번', '_30_', '문항 30')만 잡고, 못 찾으면 빈 문자열.
+    LLM 추출(q_no)이 1순위이고 이 함수는 fallback 이다.
+    """
+    s = (source or "").strip()
+    if not s:
+        return ""
+    base = _UUID_PREFIX.sub("", s)
+    base = re.sub(r'\.[A-Za-z0-9]{1,5}$', "", base)
+    m = _QNUM.search(base)                       # 'NN번'
+    if m:
+        return f"{m.group(1)}번"
+    m = re.search(r'문항\s*([1-9][0-9]?)', base)   # '문항 NN'
+    if m:
+        return f"{m.group(1)}번"
+    m = re.search(r'(?:^|[_\s-])([1-9][0-9]?)(?:[_\s-]|$)', base)  # 구분자로 둘러싸인 번호
+    if m:
+        return f"{m.group(1)}번"
+    return ""

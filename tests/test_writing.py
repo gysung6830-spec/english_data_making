@@ -23,7 +23,7 @@ def test_shuffle_and_answer():
     pack = mock_writing_pack(title="T", header="H")
     s1 = pack.sentences[0].items[0]
     _check("display 는 〈 〉 로 감쌈", s1.display.startswith("〈") and s1.display.endswith("〉"))
-    _check("answer 는 바른 배열 보존", s1.answer == "to impose itself on the surroundings")
+    _check("answer 는 바른 배열 보존", s1.answer == "to react to your designs while in progress")
     # 조각이 모두 display 안에 들어 있고(섞였을 뿐), 정답 조각 수와 일치
     for s in pack.sentences:
         for it in s.items:
