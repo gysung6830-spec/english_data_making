@@ -339,7 +339,7 @@
 {%- set s_gram  = (not student) or slevel == 'interp' -%}
 {%- set s_slash = (not student) or slevel != 'blank' -%}
 {%- set s_ko    = not student -%}   {# 직독직해·해석·전체해석·어휘뜻·논리흐름 텍스트 #}
-{% if include_guide and not only_back and not only_answer %}
+{% if include_guide and not only_back and not only_answer and not only_test %}
 <div class="page">
   <div class="ghead">
     <div class="gribbon">활용<br>가이드</div>
@@ -383,7 +383,7 @@
 </div>
 {% endif %}
 {% for a in analyses %}
-  {% if not only_back and not only_answer %}
+  {% if not only_back and not only_answer and not only_test %}
   {%- set fd = a.front_density -%}
   <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
     <div class="head">
@@ -467,7 +467,7 @@
   </div>
   {% endif %}
 
-  {% if include_back and a.has_back and not only_answer %}
+  {% if include_back and a.has_back and not only_answer and not only_test %}
   <div class="page compact{% if a.back_tight %} btight{% endif %}">   {#- 뒷면(정리)은 항상 압축; 넘치면 btight 로 더 압축해 1페이지 -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
@@ -541,7 +541,7 @@
   {% endif %}
 
   {# 지문별 '단어 TEST'(어휘표의 단어만, 유의어/반의어 제외, 랜덤 순서). 정답은 맨 뒤에 따로. #}
-  {% if include_test and not only_answer and a.vocab_test %}
+  {% if (include_test or only_test) and not only_answer and a.vocab_test %}
   <div class="page">
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>

@@ -252,13 +252,15 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      density: str = "auto", student: bool = False,
                      slevel: str = "slash", include_guide: bool = True,
                      boxmode: str = "", include_test: bool = False,
-                     only_answer: bool = False) -> Path:
+                     only_answer: bool = False, only_test: bool = False,
+                     include_back: bool = True) -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density,
                                student=student, slevel=slevel,
                                include_guide=include_guide, boxmode=boxmode,
-                               include_test=include_test, only_answer=only_answer)
+                               include_test=include_test, only_answer=only_answer,
+                               only_test=only_test, include_back=include_back)
 
 
 def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
@@ -273,17 +275,27 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
     import tempfile
 
     out_path = Path(out_path)
-    # 단어 TEST 정답이 실릴 지문이 하나라도 있으면 맨 뒤에 '정답' 장을 붙인다.
+    # 단어 TEST 는 교사용 뒤에 '한 번만'(어휘가 있는 지문이 하나라도 있으면).
     has_test = any(getattr(a, "vocab", None) for a in analyses)
     from pypdf import PdfWriter
+
+    def _append_test_and_answer(w, d):
+        if not has_test:
+            return
+        wt = Path(d) / "w.pdf"             # 단어 TEST(지문별, 교사용 뒤에 1회)
+        render_worksheet(analyses, wt, layout=layout, footer_note=footer_note,
+                         include_guide=False, only_test=True)
+        w.append(str(wt))
+
     if not make_student:
+        # 순서: [교사용 지문분석(+뒷면)] → [단어 TEST] → [정답]
         with tempfile.TemporaryDirectory() as d:
             tp = Path(d) / "t.pdf"
             render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
-                             density=density, include_guide=True, boxmode=boxmode,
-                             include_test=True)
+                             density=density, include_guide=True, boxmode=boxmode)
             w = PdfWriter()
             w.append(str(tp))
+            _append_test_and_answer(w, d)
             if has_test:                    # 정답(맨 마지막, 페이지 나눔 없이 연속)
                 ap = Path(d) / "a.pdf"
                 render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
@@ -294,17 +306,19 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
                 w.write(f)
         _stamp_footer(out_path, footer_note)
         return out_path
+    # 순서: [교사용 지문분석(+뒷면)] → [단어 TEST(1회)] → [학생용(뒷면 없음)] → [정답]
     with tempfile.TemporaryDirectory() as d:
         tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
-        # 교사용(가이드 포함) → 학생용(가이드 제외) → 단어 TEST 정답(맨 뒤 1회)
         render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
                          density=density, student=False, include_guide=True,
-                         boxmode=boxmode, include_test=True)
+                         boxmode=boxmode)
+        # 학생용: 가이드·뒷면(어휘 정리) 없이 지문분석 빈칸만
         render_worksheet(analyses, sp, layout=layout, footer_note=footer_note,
                          density=density, student=True, slevel=slevel,
-                         include_guide=False, boxmode=boxmode, include_test=True)
+                         include_guide=False, boxmode=boxmode, include_back=False)
         w = PdfWriter()
         w.append(str(tp))
+        _append_test_and_answer(w, d)       # 교사용 뒤에 단어 TEST 1회
         w.append(str(sp))
         if has_test:
             ap = Path(d) / "a.pdf"

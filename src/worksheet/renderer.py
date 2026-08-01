@@ -153,7 +153,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   include_guide: bool = True, only_back: bool = False,
                   student: bool = False, slevel: str = "slash",
                   boxmode: str = "", include_test: bool = False,
-                  only_answer: bool = False) -> str:
+                  only_answer: bool = False, only_test: bool = False) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -172,7 +172,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                        include_back=include_back, include_guide=include_guide,
                        only_back=only_back, student=student, slevel=slevel,
                        boxmode=boxmode, include_test=include_test,
-                       only_answer=only_answer)
+                       only_answer=only_answer, only_test=only_test)
     return _inject_fonts(html)
 
 
@@ -191,13 +191,15 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
                 brand: str = "은아 T", footer_meta: str = "", compact: bool = False,
                 include_guide: bool = True, student: bool = False,
                 slevel: str = "slash", boxmode: str = "", include_test: bool = False,
-                only_answer: bool = False) -> str:
+                only_answer: bool = False, only_test: bool = False,
+                include_back: bool = True) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
                          compact=compact, include_guide=include_guide,
                          student=student, slevel=slevel, boxmode=boxmode,
-                         include_test=include_test, only_answer=only_answer)
+                         include_test=include_test, only_answer=only_answer,
+                         only_test=only_test, include_back=include_back)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -359,7 +361,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                density: str = "auto", student: bool = False,
                slevel: str = "slash", include_guide: bool = True,
                boxmode: str = "", include_test: bool = False,
-               only_answer: bool = False) -> Path:
+               only_answer: bool = False, only_test: bool = False,
+               include_back: bool = True) -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -376,7 +379,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     compact = (density == "compact")
-    if layout.upper() == "A" and not only_answer:
+    if layout.upper() == "A" and not only_answer and not only_test:
         if density == "auto":
             _fit_pages(analyses, fit_front=True, student=student, slevel=slevel,
                        boxmode=boxmode)
@@ -389,7 +392,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                        footer_meta=footer_meta, compact=compact,
                        student=student, slevel=slevel, include_guide=include_guide,
                        boxmode=boxmode, include_test=include_test,
-                       only_answer=only_answer)
+                       only_answer=only_answer, only_test=only_test,
+                       include_back=include_back)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):
