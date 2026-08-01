@@ -126,6 +126,23 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
     return wbs, packs, blank_sets, writing_packs
 
 
+def apply_q_numbers(wbs, packs, blank_sets, writing_packs, start: int) -> int:
+    """문항번호를 '시작번호부터 지문마다 1씩 증가'시켜 모든 유형의 뱃지(label)에 강제 부여한다.
+
+    수동 입력이 있으면 자동 추출(q_no·파일명)보다 우선한다. 다음 시작번호를 반환(파일 간 누적용).
+    """
+    n = max(len(wbs or []), len(packs or []), len(blank_sets or []), len(writing_packs or []))
+    for i in range(n):
+        lbl = f"{start + i}번"
+        for seq in (wbs, packs, blank_sets, writing_packs):
+            if seq and i < len(seq):
+                try:
+                    seq[i].label = lbl
+                except Exception:
+                    pass
+    return start + n
+
+
 def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
                           subtitle: str = "유형 B 지문 빈칸 · 유형 A 요약문 빈칸"):
     """LLMBlankSet 목록 -> 렌더용 BlankWorkbook (번호 재부여)."""

@@ -124,6 +124,10 @@ INDEX_HTML = """
       <input type=text name=outname placeholder="예: 올림포스_Unit10_워크북">
       <div class=hint>여러 지문을 올리면 파일명 뒤에 지문 이름이 붙습니다.</div>
 
+      <label>⑤ 시작 문항번호 <span class=hint>(선택 — 비우면 자동 추출)</span></label>
+      <input type=number name=start_no min=1 max=200 placeholder="예: 30">
+      <div class=hint>입력하면 <b>첫 지문 = 그 번호</b>, 이후 지문마다 <b>1씩 자동 증가</b>합니다(30 → 31 → 32 …). 뱃지 오류를 없애는 가장 확실한 방법이에요.</div>
+
       <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
@@ -256,6 +260,13 @@ def analyze_route():
     mock = bool(request.form.get("mock"))
     custom = _safe_name((request.form.get("outname") or "").strip()) if (request.form.get("outname") or "").strip() else ""
     single = len(files) == 1
+    # 수동 문항번호(시작번호) — 있으면 자동 추출보다 우선, 지문마다 1씩 증가
+    try:
+        q_counter = int((request.form.get("start_no") or "").strip())
+        if q_counter < 1:
+            q_counter = None
+    except (TypeError, ValueError):
+        q_counter = None
     form_key = (request.form.get("api_key") or "").strip()
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
@@ -317,6 +328,9 @@ def analyze_route():
             else:
                 wbs, packs, file_bsets, file_wpacks = pipeline.build_workbook_bundle_for_pdf(
                     client, cfg, tmp)
+            # 수동 시작번호가 있으면 문항번호를 강제 부여(지문마다 +1, 파일 간 누적)
+            if q_counter is not None:
+                q_counter = pipeline.apply_q_numbers(wbs, packs, file_bsets, file_wpacks, q_counter)
             base = out_name(stem, '_통합', '_워크북')
             # 유형 순서(통합→어형→어법→어휘→영작→해석→빈칸)로 '한글 포함'·'한글 제외' 2개 PDF
             outs = pipeline.render_workbook_two_versions(
