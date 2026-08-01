@@ -13,8 +13,8 @@
 @page {
   size: A4;
   margin: 12mm 12mm 14mm 12mm;
-  /* 자료 하단 저작권(가운데) + 쪽번호(오른쪽) */
-  @bottom-center {
+  /* 자료 하단 저작권(왼쪽) + 쪽번호(오른쪽) */
+  @bottom-left {
     content: element(footer);
   }
   @bottom-right {
@@ -25,13 +25,13 @@
   }
 }
 
-/* 러닝 요소: 본문 흐름에서 빠져 모든 쪽 하단에 반복 표시된다 */
+/* 러닝 요소: 본문 흐름에서 빠져 모든 쪽 하단 왼쪽에 반복 표시된다 */
 .page-footer {
   position: running(footer);
   font-family: "Noto Serif CJK KR", serif;
   font-size: 8px;
   color: #777;
-  text-align: center;
+  text-align: left;
 }
 
 * { box-sizing: border-box; }

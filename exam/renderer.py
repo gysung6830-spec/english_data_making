@@ -72,7 +72,7 @@ def _blocks(passages: list[Passage], start: int,
 
 
 # 자료 하단 저작권 문구 기본값(필요하면 render_pdf(footer_note=...) 로 교체)
-DEFAULT_FOOTER = "ⓒ 2026. 김은아영어연구소. All rights reserved."
+DEFAULT_FOOTER = "ⓒ 2026. Ortica영어. All rights reserved."
 
 # 출력 섹션 키(고정 순서). None 이면 4개 모두.
 SECTION_KEYS = ["student", "teacher", "quick", "answers"]
