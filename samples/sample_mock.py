@@ -108,7 +108,7 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
         exam=schemas.ExamSection(items=[
             schemas.ExamItem(question_type="지칭추론(대명사)", content=(
                 "1문장 - us - (호기심을 지닌 우리 사람들)\n"
-                "2문장 - they가 나오면 - (curious students, 호기심 많은 학생들)")),
+                "2문장 - they - (curious students, 호기심 많은 학생들)")),
             schemas.ExamItem(question_type="함축의미", content=(
                 "1문장 \"drives us to explore the unknown\"\n"
                 "· 문맥상 의미: 호기심이 우리를 미지의 영역으로 나아가게 하는 원동력이 됨\n"
