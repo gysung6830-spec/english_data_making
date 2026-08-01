@@ -394,7 +394,8 @@ table.lit2 td {
 /* ============================================================
    앞부분: 원문 + 전체 해석 모음 (지문 여러 개를 앞에 모아 배치)
    ============================================================ */
-.src-page { margin-bottom: 14px; }
+/* 원문+해석 모음: 지문 하나의 블록이 페이지 경계에서 잘리지 않게(넘치면 통째로 다음 페이지) */
+.src-page { margin-bottom: 14px; break-inside: avoid; }
 table.src2 {
   width: 100%; border-collapse: separate; border-spacing: 9px 0;
   table-layout: fixed; margin-top: 5px;
