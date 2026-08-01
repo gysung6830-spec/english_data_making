@@ -250,7 +250,7 @@
     <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
-    <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석{% if student %} <span class="src-h-hint">(직접 써보기)</span>{% endif %}</th></tr></thead>
+    <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석</th></tr></thead>
     <tbody><tr>
       <td class="src-en">
         {%- for s in report.literal.sentences -%}
@@ -258,15 +258,9 @@
         {%- endfor -%}
       </td>
       <td class="src-ko">
-        {%- if student -%}
-          {%- for s in report.literal.sentences -%}
-            <div class="src-blank"><span class="src-no">{{ s.no }}</span></div>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for s in report.literal.sentences -%}
-            <span class="src-no">{{ s.no }}</span>{% if s.translation %}{{ s.translation }}{% else %}{% for c in s.chunks %}{{ c.korean }}{% if not loop.last %} {% endif %}{% endfor %}{% endif %}{% if not loop.last %} {% endif %}
-          {%- endfor -%}
-        {%- endif -%}
+        {%- for s in report.literal.sentences -%}
+          <span class="src-no">{{ s.no }}</span>{% if s.translation %}{{ s.translation }}{% else %}{% for c in s.chunks %}{{ c.korean }}{% if not loop.last %} {% endif %}{% endfor %}{% endif %}{% if not loop.last %} {% endif %}
+        {%- endfor -%}
       </td>
     </tr></tbody>
   </table>
