@@ -121,6 +121,10 @@ INDEX_HTML = """
       <input type=text name=basename placeholder="예: 공통영어2 1과">
       <div class=hint><b>(입력)_서술형대비.pdf</b> 로 저장되고, 입력한 이름이 <b>교재 제목</b>으로 쓰입니다.</div>
 
+      <label>④ 시작 문항번호 <span class=hint>(이 번호부터 1씩 자동 증가)</span></label>
+      <input type=number name=start_no min=1 step=1 value=1 style="width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
+      <div class=hint>예: <b>5</b> 를 넣으면 첫 문항이 5번, 그다음 6·7…로 매겨집니다. (여러 지문이면 유형별로 이어서 증가)</div>
+
       <div class=hint style="margin-top:14px">📄 결과물: <b>내신 서술형 대비 교재</b> (7개 유형 · 학생용 / 교사용 / 빠른 정답 / 정답 및 해설)</div>
 
       <label class=chk style="margin-top:12px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
@@ -249,6 +253,12 @@ def analyze_route():
     raw_name = (request.form.get("basename") or "").strip()
     custom_base = _safe_name(raw_name) if raw_name else ""
 
+    # 시작 문항번호(사용자 지정) — 이 번호부터 1씩 자동 증가. 기본 1.
+    try:
+        start_no = max(1, int(request.form.get("start_no") or 1))
+    except (TypeError, ValueError):
+        start_no = 1
+
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
     if not mock and not key:
@@ -282,7 +292,7 @@ def analyze_route():
             else:
                 stem = _safe_name(Path(f.filename).stem)
             recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
-                                           worksheets=worksheets)
+                                           worksheets=worksheets, ws_start_no=start_no)
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
             n_passages = max(len(reports), len(worksheets))
             note = f" (지문 {n_passages}개)" if n_passages > 1 else ""

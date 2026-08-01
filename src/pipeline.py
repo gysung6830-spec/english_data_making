@@ -108,7 +108,8 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
                    which=None, brand: str | None = None,
-                   worksheets: list[Worksheet] | None = None) -> list[dict]:
+                   worksheets: list[Worksheet] | None = None,
+                   ws_start_no: int = 1) -> list[dict]:
     """선택된 종류(분석지/어휘 리스트/시험지/서술형 교재)의 PDF 를 생성.
 
     반환: [{"kind": "analysis"|"wordlist"|"quiz"|"worksheet", "label": 표시명, "path": Path}, ...]
@@ -147,7 +148,8 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     if sel.worksheet and worksheets:
         # 파일명 = (입력한 이름)_서술형대비, 제목 = 입력한 이름(=stem) 그대로
         p = cfg.output_dir / f"{stem}_서술형대비.pdf"
-        render.render_worksheet_pdf(worksheets, p, title=stem, footer_note=fn, brand=brand)
+        render.render_worksheet_pdf(worksheets, p, title=stem, footer_note=fn,
+                                    brand=brand, start_no=ws_start_no)
         recs.append({"kind": "worksheet", "label": "🖊️ 서술형 교재", "path": p})
 
     return recs

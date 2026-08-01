@@ -422,11 +422,12 @@ def _hint(answer: str) -> str:
     return a[0] if a else ""
 
 
-def _ws_context(worksheets) -> list[dict]:
+def _ws_context(worksheets, start_no: int = 1) -> list[dict]:
     """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료).
 
     일련번호(qno)는 '표시 유형 순서(type-major)'로 매긴다:
       복수 지문이면 각 유형 안에서 지문1→지문2… 순으로 이어진다.
+    start_no: 첫 문항 번호(사용자 지정 시작번호). 이후 자동 증가.
     """
     reps = _as_list(worksheets)
 
@@ -532,7 +533,7 @@ def _ws_context(worksheets) -> list[dict]:
 
     # 일련번호: 표시 유형 순서(type-major)로 매긴다.
     #   유형5(배열영작)은 ideas + titles 를 한 유형으로 이어서 센다.
-    n = 0
+    n = int(start_no) - 1
     for key in WS_TYPE_ORDER:
         for pg in passages:
             seq = (pg["ideas"] + pg["titles"]) if key == "arrange" else pg[key]
@@ -544,18 +545,20 @@ def _ws_context(worksheets) -> list[dict]:
 
 def render_worksheet_pdf(worksheets, out_path: str | Path,
                          title: str = "내신 서술형 대비 교재",
-                         footer_note: str = "", brand: str = "은아 T") -> Path:
+                         footer_note: str = "", brand: str = "은아 T",
+                         start_no: int = 1) -> Path:
     """여러 지문의 Worksheet 를 한 PDF 로 만든다.
 
     구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
     일련번호는 PDF 전체에 걸쳐 이어 붙고, 출처는 '지문 N' 배지로 표시한다.
     각 유형은 새 페이지에서 시작한다.
+    start_no: 첫 문항 번호(사용자 지정). 지정하면 그 번호부터 자동 증가.
     """
     from weasyprint import HTML
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    passages = _ws_context(worksheets)
+    passages = _ws_context(worksheets, start_no=start_no)
     # 유형별로 내용이 하나라도 있는지(부분 성공 시 빈 유형 블록은 건너뜀)
     has = {
         "cloze": any(p["cloze"] for p in passages),
