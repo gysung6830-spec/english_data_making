@@ -156,7 +156,8 @@ def build_route():
             ws_pipeline.render_worksheet_pair(
                 analyses, out, layout=layout, footer_note=footer, density=density,
                 make_student=make_student,
-                slevel=getattr(cfg.design, "student_level", "blank"))
+                slevel=getattr(cfg.design, "student_level", "blank"),
+                boxmode=getattr(cfg.design, "box_align", "even"))
             label = "✏️ 교사용+학생용(합본)" if make_student else "✏️ 교사용"
             outfiles = [{"label": label, "out": out.name}]
             note = f" (지문 {len(analyses)}개)" if len(analyses) > 1 else ""

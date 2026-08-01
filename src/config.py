@@ -32,6 +32,7 @@ class DesignCfg:
     brand: str = "은아 T"   # 직독직해 'made by ~' · 출제표 '~ tip' 에 넣는 이름(footer 와 무관)
     make_student: bool = True     # 선생님용과 함께 학생용(필기) PDF 도 생성
     student_level: str = "blank"  # 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸)
+    box_align: str = "even"       # 포인트 박스 정렬: ''(문장 옆) | 'even'(행 균일) | 'uniform'(박스 통일)
 
 
 @dataclass
@@ -110,6 +111,7 @@ def load_config(path: str | Path | None = None) -> Config:
             brand=str(design.get("brand", "은아 T")),
             make_student=bool(design.get("make_student", True)),
             student_level=str(design.get("student_level", "blank")),
+            box_align=str(design.get("box_align", "even")),
         ),
         outputs=OutputsCfg(
             analysis=bool(outputs.get("analysis", True)),

@@ -73,12 +73,12 @@ def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> s
 def render_html(analyses, layout: str = "A", footer_note: str = "",
                 brand: str = "은아 T", footer_meta: str = "", compact: bool = False,
                 include_guide: bool = True, student: bool = False,
-                slevel: str = "slash") -> str:
+                slevel: str = "slash", boxmode: str = "") -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
                          compact=compact, include_guide=include_guide,
-                         student=student, slevel=slevel)
+                         student=student, slevel=slevel, boxmode=boxmode)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -128,7 +128,8 @@ _FRONT_TIERS = ["normal", "compact", "ultra"]
 
 
 def _fit_pages(analyses, fit_front: bool = True,
-               student: bool = False, slevel: str = "slash") -> None:
+               student: bool = False, slevel: str = "slash",
+               boxmode: str = "") -> None:
     """앞면(분석)·뒷면(정리)을 지문마다 최대한 1페이지에 맞춘다(넘치는 장문은 2페이지).
 
     - 앞면: normal→compact→ultra 중 1페이지가 되는 가장 큰(덜 압축된) 단계.
@@ -146,7 +147,7 @@ def _fit_pages(analyses, fit_front: bool = True,
                 a.front_density = t
                 jobs.append((i, "front", t))
                 htmls.append(render_a_html([a], include_back=False, include_guide=False,
-                                           student=student, slevel=slevel))
+                                           student=student, slevel=slevel, boxmode=boxmode))
         if getattr(a, "has_back", False):
             for tight in (False, True):
                 a.back_tight = tight
@@ -237,7 +238,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                footer_note: str = "", brand: str = "은아 T",
                engine: str = "auto", footer_meta: str = "",
                density: str = "auto", student: bool = False,
-               slevel: str = "slash", include_guide: bool = True) -> Path:
+               slevel: str = "slash", include_guide: bool = True,
+               boxmode: str = "") -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -254,14 +256,17 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     compact = (density == "compact")
     if layout.upper() == "A":
         if density == "auto":
-            _fit_pages(analyses, fit_front=True, student=student, slevel=slevel)
+            _fit_pages(analyses, fit_front=True, student=student, slevel=slevel,
+                       boxmode=boxmode)
         else:                                        # 'normal' | 'compact' 고정
             for a in _as_list(analyses):
                 a.front_density = density
-            _fit_pages(analyses, fit_front=False, student=student, slevel=slevel)
+            _fit_pages(analyses, fit_front=False, student=student, slevel=slevel,
+                       boxmode=boxmode)
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact,
-                       student=student, slevel=slevel, include_guide=include_guide)
+                       student=student, slevel=slevel, include_guide=include_guide,
+                       boxmode=boxmode)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):
