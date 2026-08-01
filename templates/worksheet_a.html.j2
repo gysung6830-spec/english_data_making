@@ -95,7 +95,7 @@
   .tsl{ margin:0 1px; }                         /* 영어 끊어읽기 '/' — 단어와 같은 baseline */
   .tsl .w{ color:#b6c0b6; font-weight:700; }
   /* 직독직해 줄: 라벨을 번호(01) 밑에 맞추기 위해 번호 칸(26px)+간격(6px)만큼 왼쪽으로 */
-  .rdko{ margin-top:9px; margin-left:-32px; font-size:11px; line-height:1.7; color:#39424c; }
+  .rdko{ margin-top:9px; margin-left:-32px; font-size:15px; line-height:1.95; color:#39424c; }
   /* 직독직해 라벨: 번호(01) 밑에 맞춰 왼쪽(-32px). 영어 줄을 침범하지 않게 작게. */
   .rdlbl{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
           padding:1px 6px; border-radius:8px; margin-right:6px; vertical-align:1px; }
@@ -113,12 +113,11 @@
               border-radius:20px; padding:2px 10px; margin:7px 0 5px; }
   /* 박스 안 어법 번호 = 인라인과 동일(빨강, 크게) */
   .pbox .gn{ color:var(--red); font-weight:800; font-size:11.5px; }
-  /* 문장별 '합친' 박스 — 한 문장의 두 뱃지는 같은 색, 문장마다 번갈아.
-     뱃지는 '연한 파스텔 채움 + 진한 글자'로 부드럽게(홀수=민트, 짝수=크림). */
-  .pbox.merged.odd{ border-color:#dcebe4; background:#fff; }
-  .pbox.merged.odd .cap{ background:#dcece6; color:#2f6f63; }   /* 민트 파스텔 */
-  .pbox.merged.even{ border-color:#efe6d0; background:#fff; }
-  .pbox.merged.even .cap{ background:#f2e8d3; color:#8a5f22; }  /* 크림 파스텔 */
+  /* 문장별 '합친' 박스(중립 배경). 뱃지 색은 '종류별'로: 어법=민트, 독해=골드
+     (연한 파스텔 채움 + 진한 글자). */
+  .pbox.merged{ border-color:#e5eae6; background:#fff; }
+  .cap.gcap{ background:#dcece6; color:#2f6f63; }   /* 어법 Point = 민트 파스텔 */
+  .cap.fcap{ background:#f4e7cf; color:#8a5f22; }   /* 독해 Point = 골드 파스텔 */
   .pbox .fr{ margin:2px 0; }
   .pbox .fl{ font-weight:800; color:#37827b; }
   .pbox .fl.im{ color:#37827b; }             /* 함축 라벨은 틸 */
@@ -137,7 +136,7 @@
   .page.compact .ann{ font-size:7px; }
   .page.compact .ann.red{ font-size:10px; }
   .page.compact .kotr{ margin-top:6px; font-size:11px; line-height:1.45; }
-  .page.compact .rdko{ margin-top:5px; font-size:10px; line-height:1.5; }
+  .page.compact .rdko{ margin-top:5px; font-size:13px; line-height:1.75; }
   .page.compact .kobox{ margin-top:5px; font-size:9px; line-height:1.4; padding:4px 9px; }
   .page.compact .num{ font-size:13px; }
   .page.compact .points{ gap:6px; }
@@ -190,7 +189,7 @@
   .page.compact.ultra .tok .over .lbl{ font-size:7px; }
   .page.compact.ultra .ann{ font-size:6.5px; }
   .page.compact.ultra .ann.red{ font-size:9px; }
-  .page.compact.ultra .rdko{ margin-top:2px; font-size:9.5px; line-height:1.35; }
+  .page.compact.ultra .rdko{ margin-top:2px; font-size:11.5px; line-height:1.55; }
   .page.compact.ultra .rdlbl{ font-size:7.5px; padding:0 5px; }
   .page.compact.ultra .kobox{ margin-top:2px; font-size:9px; line-height:1.3; padding:3px 8px; }
   .page.compact.ultra .kblbl{ font-size:7.5px; }
@@ -281,9 +280,10 @@
            text-decoration-thickness:1.5px; text-underline-offset:2.5px; }
   .gsw.hy{ background:var(--yellow-hl); padding:0 3px; }
   .gsw.hp{ background:var(--purple-hl); padding:0 3px; }
-  .gpill{ display:inline-block; color:#fff; font-size:9.5px; font-weight:800;
+  .gpill{ display:inline-block; font-size:9.5px; font-weight:800;
           border-radius:11px; padding:1px 8px; }
-  .gpill.gold{ background:#c0842f; } .gpill.teal{ background:#37827b; }
+  .gpill.mint{ background:#dcece6; color:#2f6f63; }   /* 어법 Point = 민트 */
+  .gpill.gold{ background:#f4e7cf; color:#8a5f22; }   /* 독해 Point = 골드 */
   .gsteps{ margin:0; padding-left:20px; font-size:12px; line-height:1.65; color:#23272e; }
   .gsteps li{ margin-bottom:3px; }
   .gsteps b{ font-weight:800; }
@@ -332,18 +332,18 @@
       <span class="gt">노란 형광</span> — <span class="gd">주제문 · 빈칸 출제 예상 어구</span></div>
     <div class="gitem"><span class="gsw hp">However</span>
       <span class="gt">라벤더 형광</span> — <span class="gd">담화표지(However, Similarly …)</span></div>
-    <div class="gitem"><span class="gpill gold">N번 어법 Point</span>
-      <span class="gt gd"> — 문장별 어법을 ①②③로 정리(골드 박스)</span></div>
-    <div class="gitem"><span class="gpill teal">독해 Point</span>
-      <span class="gt gd"> — 대명사 지칭(it→…) · 숨은 함축 의미(틸 박스)</span></div>
+    <div class="gitem"><span class="gpill mint">N문장 - 어법 Point</span>
+      <span class="gt gd"> — 문장별 어법을 ①②③로 정리(민트 박스)</span></div>
+    <div class="gitem"><span class="gpill gold">N문장 - 독해 Point</span>
+      <span class="gt gd"> — 대명사 지칭(it→…) · 숨은 함축 의미(골드 박스)</span></div>
   </div>
 
   <span class="gst">📖 이렇게 쓰세요</span>
   <ol class="gsteps">
     <li>앞면 <b>영어 원문</b>을 소리 내어 한 번 읽는다.</li>
     <li><b>성분(초록)</b>으로 문장의 뼈대(주어·동사)를 먼저 잡는다.</li>
-    <li><b>어법(빨강 ①②③)</b>과 오른쪽 <b>골드 박스</b>로 시험 포인트 확인 — 특히 <b>(X) 함정</b>에 주의.</li>
-    <li><b>틸 박스</b>로 대명사가 가리키는 것과 문장의 숨은 뜻을 확인한다.</li>
+    <li><b>어법(빨강 ①②③)</b>과 오른쪽 <b>민트 박스</b>로 시험 포인트 확인 — 특히 <b>(X) 함정</b>에 주의.</li>
+    <li><b>골드 박스</b>로 대명사가 가리키는 것과 문장의 숨은 뜻을 확인한다.</li>
     <li>아래 <b>한글 해석</b>과 대조하며 직독직해로 한 번 더 읽는다.</li>
     <li><b>뒷면</b>의 핵심 어휘(유의어·반의어)와 논리 흐름으로 복습한다.</li>
   </ol>
@@ -374,7 +374,6 @@
             {% for line in s.lines %}
             {%- set has_role = (line | selectattr('role') | list) and s_roles -%}
             <div class="line{% if has_role %} po{% endif %}">
-              {%- if loop.first and s.badge %}<span class="bdg r">{{ s.badge }}</span> {% endif -%}
               {%- for t in line -%}
                 <span class="tok">
                   {# 위: 문장 성분 라벨(학생용 blank/slash 는 숨김) #}

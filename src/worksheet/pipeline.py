@@ -164,13 +164,17 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     return out
 
 
-# 원본 머리글의 문제 번호: 줄 맨 앞 "31번 …", "32번 …"
-_PROBNO_RE = re.compile(r"(?m)^\s*(\d{1,3})\s*번(?![가-힣])")
+# 원본 머리글의 문제 번호 패턴(우선순위 순):
+#  ① 'N번:' / 'N번 :' — 문제 제목 머리글(예: '… – 30번: 소유가 …')
+#  ② 줄 맨 앞 'N번 …'   — (예: '31번 2026년 …')
+_PROBNO_COLON = re.compile(r"(\d{1,3})\s*번\s*[:：]")
+_PROBNO_LINE = re.compile(r"(?m)^\s*(\d{1,3})\s*번(?![가-힣:：])")
 
 
 def _detect_problem_numbers(src: Path) -> list[str]:
-    """원본(PDF/HWP) 머리글에서 '31번/32번' 같은 실제 문제 번호를 순서대로 뽑는다.
+    """원본(PDF/HWP) 머리글에서 '30번'·'31번' 같은 실제 문제 번호를 순서대로 뽑는다.
 
+    'N번:'(제목 머리글)을 우선 찾고, 없으면 줄 맨 앞 'N번'을 찾는다.
     한글 제거 전 원문에서 찾는다(제거 후엔 '번'이 사라짐). 못 찾으면 빈 리스트.
     """
     from .. import extract
@@ -179,12 +183,15 @@ def _detect_problem_numbers(src: Path) -> list[str]:
                else extract.extract_raw_text(src))
     except Exception:
         return []
-    seen: list[str] = []
-    for m in _PROBNO_RE.finditer(raw):
-        n = m.group(1)
-        if n not in seen:          # 같은 번호가 여러 줄 반복돼도 한 번만
-            seen.append(n)
-    return seen
+    for rex in (_PROBNO_COLON, _PROBNO_LINE):
+        seen: list[str] = []
+        for m in rex.finditer(raw):
+            n = m.group(1)
+            if n not in seen:      # 같은 번호가 여러 번 나와도 한 번만
+                seen.append(n)
+        if seen:
+            return seen
+    return []
 
 
 def _extract_via_vision_pdf(client: "ClaudeClient", cfg: "Config", src: Path):

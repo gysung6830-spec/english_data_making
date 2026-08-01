@@ -467,15 +467,20 @@ def test_merge_trailing_punct():
 
 
 def test_detect_problem_numbers_regex():
-    from src.worksheet.pipeline import _PROBNO_RE
+    from src.worksheet.pipeline import _PROBNO_COLON, _PROBNO_LINE
+    # 줄 맨 앞 'N번' 형식(모의평가 머리글)
     raw = ("31번 2026년 6월 한국교육과정평가원 모의평가\n"
            "1. Ever since the early Enlightenment...\n"
            "- 14 -\n"
            "32번 2026년 6월 한국교육과정평가원 모의평가\n"
            "1. Speakers don't always...\n")
-    nums = [m.group(1) for m in _PROBNO_RE.finditer(raw)]
+    nums = [m.group(1) for m in _PROBNO_LINE.finditer(raw)]
     assert nums == ["31", "32"], nums          # 문장번호 '1.' 은 매칭 안 됨
-    print("PASS  실제 문제 번호(31번/32번) 인식")
+    # 'N번:' 형식(제목 머리글, 예: '– 30번: 소유가 …')
+    raw2 = "[고1] 2025 09월 – 30번: 소유가 많아질수록\n[고1] 2025 09월 – 31번: 다른 지문\n"
+    nums2 = [m.group(1) for m in _PROBNO_COLON.finditer(raw2)]
+    assert nums2 == ["30", "31"], nums2
+    print("PASS  실제 문제 번호(N번 / N번:) 인식")
 
 
 def test_clean_passage_keeps_numbered_sentences():
