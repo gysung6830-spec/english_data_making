@@ -141,8 +141,9 @@ body {
 .a-item { break-inside: auto; }
 .q-head { margin-bottom: 1mm; break-after: avoid; }
 .qnum { font-weight: 800; font-size: 1.25em; margin-right: 0.6mm; color: #2f7d61; }  /* 볼드 2 — 브랜드 초록으로 문항 구분 */
-.q-prompt { font-weight: 400; }
-.q-body { font-weight: 400; }
+/* 문제 글자는 본문 기본(10.2px)보다 살짝 크게 — 발문·지문·선지에 함께 적용(해설은 기본 유지) */
+.q-prompt { font-weight: 400; font-size: 11px; }
+.q-body { font-weight: 400; font-size: 11px; }
 
 /* ---------- 지문 박스 ---------- */
 /* 테두리 있는 박스는 칸/쪽 경계에서 절대 쪼개지지 않게(잘린 박스 방지) */
