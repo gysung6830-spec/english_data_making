@@ -1,0 +1,58 @@
+/* ============================================================
+   영작 워크북 — 문장 속 '영작 포인트' 어구만 〈 〉 로 배열
+   회사 파일 디자인(초록 계열) + 나눔스퀘어라운드 통일.
+   ============================================================ */
+:root{
+  --ink:#2b2f3a; --muted:#8b93a0; --line:#e6eaef;
+  --green:#2e8267; --green-dark:#256b55; --green-soft:#f3f9f6;
+  --amber:#b5761f; --amber-bg:#fbf5e9;
+}
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운드',
+              'Malgun Gothic','맑은 고딕','Nanum Gothic','Apple SD Gothic Neo',sans-serif;
+  color:var(--ink); font-size:10.5pt; line-height:1.55;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+
+/* 상단 메타 + 배지 (초록 이중선) */
+.ws-top{ display:flex; align-items:center; justify-content:space-between;
+  padding-bottom:6px; border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  margin-bottom:11px; }
+.ws-meta{ font-size:9pt; color:#3a3f4a; }
+.ws-meta b{ color:var(--green-dark); }
+.ws-badge{ font-size:8pt; font-weight:800; color:#fff; background:var(--green);
+  border-radius:999px; padding:3px 12px; }
+.ws-sub{ font-size:9pt; color:#5b6470; margin-bottom:10px; }
+
+/* 지시문 바 */
+.ws-instr{ font-size:9pt; color:#3f4a44; padding:7px 12px; border-left:4px solid var(--green);
+  background:var(--green-soft); border-radius:0 8px 8px 0; margin-bottom:14px; line-height:1.5; }
+.ws-instr .wt-label{ font-weight:800; color:var(--green-dark); margin-right:6px; }
+
+/* 번호 매긴 문장 목록 */
+.ws-list{ list-style:none; margin:0; padding:0; counter-reset:sent; }
+.ws-list > li{ margin-bottom:16px; page-break-inside:avoid; }
+.ws-list > li::before{ counter-increment:sent; content:counter(sent);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:19px; height:19px; margin-right:6px; border-radius:50%;
+  background:var(--green); color:#fff; font-weight:800; font-size:8.5pt; vertical-align:1px; }
+.s-ko{ display:inline; font-size:9.4pt; color:#40474f; font-weight:700; }
+.s-en{ margin-top:7px; margin-left:25px; line-height:2.15; }
+
+/* 영작 포인트 배열 박스 〈 … 〉 */
+.wo{ display:inline-block; border:1.3px solid var(--amber); color:var(--amber);
+  background:var(--amber-bg); border-radius:7px; padding:1px 8px; margin:0 2px;
+  font-weight:700; line-height:1.6; }
+
+/* 정답 페이지 */
+.ans-page{ page-break-before:always; break-before:page; }
+.ans-head{ font-size:13pt; font-weight:800; color:var(--green-dark);
+  border-bottom:3px solid var(--green); box-shadow:0 3px 0 0 #cfe6dc;
+  padding-bottom:6px; margin-bottom:12px; }
+.ans-head .ans-sub{ font-size:8pt; font-weight:400; color:var(--muted); margin-left:8px; }
+.ans-row{ font-size:9.4pt; margin-bottom:6px; line-height:1.5; page-break-inside:avoid; }
+.ans-row b{ color:#2b2f3a; margin-right:6px; }
+.ans-a{ font-weight:800; color:var(--green-dark); }
+.ans-row .sep{ color:#c3a15a; margin:0 6px; }

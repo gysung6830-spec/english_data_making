@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ pack.title }} - 영작 워크북</title>
+  <style>{{ font_css }}</style>
+  <style>{% include "writing.css" %}</style>
+</head>
+<body>
+
+  <section class="ws">
+    <div class="ws-top">
+      <span class="ws-meta">{{ pack.header }} &nbsp;·&nbsp; <b>{{ pack.title }}</b></span>
+      <span class="ws-badge">영작 워크북</span>
+    </div>
+    {% if pack.subtitle %}<div class="ws-sub">{{ pack.subtitle }}</div>{% endif %}
+    <div class="ws-instr">
+      <span class="wt-label">영작</span> {{ pack.instruction }}
+    </div>
+
+    <ol class="ws-list">
+      {% for s in pack.sentences %}
+      <li>
+        <div class="s-ko">{{ s.ko }}</div>
+        <div class="s-en">{{ s | render_writing }}</div>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  {# 정답 #}
+  <section class="ans-page">
+    <div class="ans-head">정답 <span class="ans-sub">Answers · 바른 배열</span></div>
+    {% for s in pack.sentences %}
+    <div class="ans-row">
+      <b>{{ s.no }}.</b>
+      {% for it in s.items %}<span class="ans-a">{{ it.answer }}</span>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+    </div>
+    {% endfor %}
+  </section>
+
+</body>
+</html>
