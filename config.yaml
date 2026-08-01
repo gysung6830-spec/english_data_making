@@ -48,7 +48,7 @@ processing:
 # 출력 PDF 디자인
 design:
   # 지문 하단에 넣을 출처/저작권 문구 (비워두면 표시 안 함)
-  footer_note: "(C)2026.김은아영어연구소.All rights reserved"
+  footer_note: "© 2026 Ortica영어. All rights reserved"
   # 지문별로 개별 PDF 를 만들지(true), 하나의 PDF 로 합칠지(false)
   one_pdf_per_passage: true
   # 분석지의 '직독직해 made by ~' 와 출제표 '~ tip' 에 넣는 이름.

@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head><meta charset="utf-8"><title>내신 서술형 대비 교재</title></head>
+<head><meta charset="utf-8"><title>내신 서술형 대비 교재</title>
+<style>
+  /* 교재 전용 페이지 하단: 왼쪽=저작권, 오른쪽=페이지 번호 (전역 중앙 번호는 끔) */
+  @page {
+    @bottom-center { content: none; }
+    @bottom-left {
+      content: "{{ (footer_note or '') | replace('\"', '') }}";
+      font-family: "NanumSquareRound", "NanumGothic", sans-serif;
+      font-size: 8px; color: #9aa0a6;
+    }
+    @bottom-right {
+      content: counter(page) " / " counter(pages);
+      font-family: "NanumSquareRound", "NanumGothic", sans-serif;
+      font-size: 8px; color: #9aa0a6;
+    }
+  }
+</style>
+</head>
 <body>
 
 {# ---------- 공통 매크로 ---------- #}
@@ -303,7 +320,6 @@
     </ul>
   </div>
 
-  {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 1. 학생용 ================= #}
@@ -311,7 +327,6 @@
   {{ doc_header() }}
   {{ part_head(1, '학생용', '문제만 실려 있습니다. 직접 풀어 보세요.') }}
   {{ render_part(passages, false) }}
-  {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 2. 교사용 ================= #}
@@ -319,7 +334,6 @@
   {{ doc_header() }}
   {{ part_head(2, '교사용', '문제에 정답과 해설이 함께 표시됩니다.') }}
   {{ render_part(passages, true) }}
-  {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 3. 빠른 정답 ================= #}
@@ -327,7 +341,6 @@
   {{ doc_header() }}
   {{ part_head(3, '빠른 정답', '해설 없이 정답만 모았습니다.') }}
   <div class="qa-block">{{ quick(passages) }}</div>
-  {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 {# ================= PART 4. 정답 및 해설 ================= #}
@@ -335,7 +348,6 @@
   {{ doc_header() }}
   {{ part_head(4, '정답 및 해설', '유형별 정답과 풀이를 정리했습니다.') }}
   {{ explain(passages) }}
-  {% if footer_note %}<div class="foot">{{ footer_note }}</div>{% endif %}
 </div>
 
 </body>
