@@ -155,7 +155,8 @@ class Analysis:
 
     title_en: str = ""
     title_ko: str = ""
-    lecture_label: str = ""                      # '20' / '14강'
+    lecture_label: str = ""                      # 지문(문항) 번호 '30'
+    source_name: str = ""                        # 파일명(지문명) — 뱃지에 '파일명+지문번호'로 표시
     date: str = ""                               # '2025년 09월'
     sentences: list[Sentence] = field(default_factory=list)
     # 뒷페이지(선택) — 비어 있으면 렌더 시 뒷페이지를 만들지 않는다.

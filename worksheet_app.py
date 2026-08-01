@@ -156,6 +156,10 @@ def build_route():
                 for a in analyses:
                     a.lecture_label = str(counter)
                     counter += 1
+            # 뱃지 '파일명+지문번호'용 파일명: 지문명(basename) 있으면 그걸, 없으면 올린 파일 이름.
+            src_label = raw_name or Path(f.filename).stem
+            for a in analyses:
+                a.source_name = src_label
             if custom_base:
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:

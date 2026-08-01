@@ -48,6 +48,31 @@ def _circled(n: int) -> str:
     return chr(0x2460 + n - 1) if 1 <= n <= 20 else f"({n})"
 
 
+# 회색 주석이라도 '문법 설명'이면 어법 Point 박스로 흡수(본문엔 번호만 남김).
+_GRAMMAR_KW = (
+    "부정사", "관계", "분사", "접속사", "수일치", "수 일치", "일치", "비교급", "동명사",
+    "가정", "병렬", "형식", "의미상", "주어", "목적어", "보어", "부사절", "명사절", "형용사절",
+    "전치사", "수동", "능동", "도치", "강조", "생략", "대명사", "시제", "조동사", "원형",
+    "동격", "간접", "직접", "진주어", "가주어", "부사적", "형용사적", "명사적", "복수", "단수",
+)
+
+
+def _is_grammar_note(t) -> bool:
+    """이 토큰의 note 를 '어법 Point 박스'로 보낼 문법 설명으로 볼지.
+
+    - red note 는 항상 어법. blue/lbl/gray 라도 문법 키워드가 있으면 어법으로 흡수.
+    - 유의어(=)·반의어(↔)·이미 번호(①)인 note 는 제외(어법 아님/처리됨).
+    """
+    nt = (t.note or "").strip()
+    if not nt or t.note_kind not in ("red", "blue", "lbl", "gray"):
+        return False
+    if nt[:1] in ("=", "↔") or (nt and nt[0] in "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"):
+        return False
+    if t.note_kind == "red":
+        return True
+    return any(k in nt for k in _GRAMMAR_KW)
+
+
 def build_grammar_point(sentence: Sentence) -> Point | None:
     """어법 토큰(note_kind='red')을 ①②… 로 번호 매기고, 인라인 주석은 번호로 바꾼 뒤
     오른쪽 '어법 Point' 박스에 '① 어법이름'을 나열한다. (내용 TMI 없음)
@@ -61,12 +86,12 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
     items: list[tuple[int, str, str | None]] = []
     n = 0
     for t in sentence.tokens:
-        is_red = bool(t.note and t.note_kind == "red")
-        if is_red or t.wrong:            # 어법 note 또는 오답형(X) 이 있으면 항목화
+        is_gram = _is_grammar_note(t)    # red 어법 + '문법 설명'인 회색 주석까지 흡수
+        if is_gram or t.wrong:           # 어법 note 또는 오답형(X) 이 있으면 항목화
             n += 1
-            name = t.note if is_red else "어법 오답형 주의"
+            name = t.note if is_gram else "어법 오답형 주의"
             items.append((n, name, t.wrong))
-            t.note = _circled(n)          # 인라인은 원문자 번호만
+            t.note = _circled(n)          # 인라인은 원문자 번호만(본문에서 회색 문법글자 제거)
             t.note_kind = "red"
             t.color = t.color or "red"    # 어법 글자·번호 빨강
     if not items:
