@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title }} - 통합 워크북 사용 안내</title>
+  <style>{{ font_css }}</style>
+  <style>{% include "cover.css" %}</style>
+</head>
+<body>
+
+  <section class="cover">
+
+    {# ── 상단 브랜드 + 표지 제목 ── #}
+    <div class="cv-top">
+      <span class="cv-brand">{{ header }}</span>
+      {% if version_label %}<span class="cv-ver">{{ version_label }}</span>{% endif %}
+    </div>
+
+    <div class="cv-hero">
+      <div class="cv-kicker">INTEGRATED GRAMMAR WORKBOOK</div>
+      <h1 class="cv-title">통합 영어 워크북</h1>
+      <div class="cv-sub">{{ title }}{% if n_passages > 1 %} <span class="cv-n">외 {{ n_passages - 1 }}편</span>{% endif %}{% if subtitle %} · {{ subtitle }}{% endif %}</div>
+    </div>
+
+    {# ── 사용 안내 ── #}
+    <div class="cv-guide-head">이 자료 활용법</div>
+    <div class="cv-note">
+      한 지문을 <b>여러 각도</b>로 반복 학습하도록 구성했습니다. 아래 순서대로 풀면
+      <b>인지 → 어법·어휘 → 산출(영작·해석)</b> 으로 자연스럽게 이어집니다.
+      각 유형은 <b>[문제] 바로 뒤에 [정답·해설]</b> 이 붙어 있어 바로 채점할 수 있습니다.
+    </div>
+
+    {# ── 유형 순서 카드 ── #}
+    <ol class="cv-secs">
+      {% for s in sections %}
+      <li class="cv-sec {{ s.css }}">
+        <span class="cv-badge">{{ s.no }}</span>
+        <div class="cv-body">
+          <div class="cv-name">{{ s.name }} <span class="cv-mark">{{ s.mark }}</span></div>
+          <div class="cv-purpose">{{ s.purpose }}</div>
+          <div class="cv-how"><span class="cv-how-lbl">푸는 법</span> {{ s.how }}</div>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+
+    {# ── 기호 범례 + 버전 안내 ── #}
+    <div class="cv-cols">
+      <div class="cv-legend">
+        <div class="cv-col-h">기호 안내</div>
+        <div class="cv-lg"><span class="cv-sym">( &nbsp; )</span> 안의 동사는 어형을 바꿔 쓰기</div>
+        <div class="cv-lg"><span class="cv-sym">[ A / B ]</span> 둘 중 알맞은 것 고르기</div>
+        <div class="cv-lg"><span class="cv-sym">〈 a / b 〉</span> 어구 순서 바르게 배열</div>
+        <div class="cv-lg"><span class="cv-sym">대명사 = [ ]</span> 가리키는 대상 고르기</div>
+        <div class="cv-lg"><span class="cv-sym">s ____</span> 첫 글자 힌트로 빈칸 채우기</div>
+      </div>
+      <div class="cv-versions">
+        <div class="cv-col-h">한글 포함 / 제외 활용</div>
+        <div class="cv-vrow"><span class="cv-vtag on">한글 포함</span> 문장별 우리말 해석이 함께 — <b>1차 학습·개념 확인</b>에 사용</div>
+        <div class="cv-vrow"><span class="cv-vtag off">한글 제외</span> 해석 없이 영어만 — <b>복습·시험 대비(실전)</b>에 사용</div>
+        <div class="cv-vhint">※ 같은 내용을 두 파일로 제공합니다. 정답·해설과 유형 안내는 두 버전 모두 그대로 들어 있습니다.</div>
+      </div>
+    </div>
+
+  </section>
+
+</body>
+</html>

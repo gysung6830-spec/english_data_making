@@ -19,6 +19,9 @@ GREEN_LINE = "#2f8f6d"
 # 하단 저작권 문구(사용자 지정 유지). 페이지 번호는 인쇄 푸터가 붙인다.
 FOOTER_BRAND = "© 2026. 은아 T. All rights reserved."
 
+# 표지·상단에 쓰는 스튜디오(브랜드) 이름
+BRAND = "김은아영어연구소"
+
 # 통일 폰트 스택 (번들 @font-face 우선, 없으면 시스템 폴백)
 FONT_STACK = ("'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운드',"
               "'Malgun Gothic','맑은 고딕','Nanum Gothic','Apple SD Gothic Neo',sans-serif")

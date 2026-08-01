@@ -10,6 +10,7 @@ from . import blanks_generate, blanks_render
 from . import blanks_schemas
 from . import prose_generate, prose_render
 from . import writing_generate, writing_render
+from . import cover_render
 from .client import ClaudeClient
 from .config import Config
 from .logutil import Manifest, setup_logging
@@ -137,6 +138,33 @@ def _prose_subpack(pk, wtype: str):
                                   subtitle=pk.subtitle, worksheets=subs)
 
 
+def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
+                      show_ko: bool, footer_note: str) -> Path:
+    """수록된 유형을 감지해 표지 겸 사용 설명서를 렌더한다."""
+    from . import branding
+
+    keys: list[str] = []
+    if books:
+        keys.append("workbook")
+    for wtype in ("form", "grammar", "vocab", "translate"):
+        if any(_prose_subpack(pk, wtype) is not None for pk in (packs or [])):
+            keys.append(wtype)
+    if writing_packs:
+        keys.append("writing")
+    if blank_wb is not None:
+        keys.append("blanks")
+
+    title = (books[0].title if books else
+             (packs[0].title if packs else
+              (writing_packs[0].title if writing_packs else "통합 워크북")))
+    n_passages = max(len(books or []), len(packs or []), len(writing_packs or []), 1)
+    version_label = "한글 포함" if show_ko else "한글 제외"
+    return cover_render.render_cover_pdf(
+        out_path, header=branding.BRAND, title=title or "통합 워크북",
+        version_label=version_label, n_passages=n_passages,
+        section_keys=keys, footer_note=footer_note)
+
+
 def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
@@ -158,6 +186,9 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
         fn(p)
         parts.append(p)
 
+    # 0) 표지 겸 사용 설명서 (맨 앞)
+    _emit("cover", lambda p: _render_cover_for(
+        p, books, packs, writing_packs, blank_wb, show_ko, footer_note))
     # 1) 통합 카드
     if books:
         _emit("wb", lambda p: workbook_render.render_workbooks_pdf(
