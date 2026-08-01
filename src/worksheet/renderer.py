@@ -7,6 +7,10 @@
 """
 from __future__ import annotations
 
+import base64
+import functools
+import io
+import re
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -15,6 +19,93 @@ from .models import Analysis
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 TEMPLATE_DIR = ROOT / "templates"
+FONT_DIR = Path(__file__).resolve().parent / "fonts"
+
+# ── 나눔스퀘어라운드 임베드(모든 환경에서 동일한 글꼴·자간 → 줄간격 일정) ──────────
+# HTML 안에 폰트를 base64 로 심어 렌더 엔진(Chromium/WeasyPrint)이 시스템 글꼴 유무와
+# 무관하게 '똑같은 글꼴 메트릭'으로 그린다. 매 렌더마다 실제 쓰인 문자만 서브셋하여
+# 용량을 최소화(수십 KB)한다. 서브셋 결과는 문자 집합 기준으로 캐시(밀도 티어 반복 대비).
+_FONT_FACES = [                      # (font-weight, 파일명)
+    ("400", "NanumSquareRoundR.ttf"),
+    ("700", "NanumSquareRoundB.ttf"),
+    ("800", "NanumSquareRoundEB.ttf"),
+]
+# 항상 포함할 기본 문자: ASCII·원문자 ①~⑳·화살표·따옴표·대시 등
+_BASE_UNI = (
+    set(range(0x0020, 0x007F)) | set(range(0x2460, 0x2474))
+    | {0x2190, 0x2191, 0x2192, 0x2193, 0x2194, 0x2026, 0x00B7, 0x2013, 0x2014,
+       0x2018, 0x2019, 0x201C, 0x201D, 0x2605, 0x2606, 0x00D7, 0x2192}
+)
+_subset_cache: dict[frozenset, str] = {}
+
+
+@functools.lru_cache(maxsize=1)
+def _font_raw() -> list[tuple[str, bytes]]:
+    out: list[tuple[str, bytes]] = []
+    for w, fn in _FONT_FACES:
+        p = FONT_DIR / fn
+        if p.exists():
+            out.append((w, p.read_bytes()))
+    return out
+
+
+def _font_face_css(chars: frozenset) -> str:
+    """주어진 문자 집합만 담은 @font-face(base64) <style> 블록. 실패 시 빈 문자열."""
+    cached = _subset_cache.get(chars)
+    if cached is not None:
+        return cached
+    raw = _font_raw()
+    if not raw:
+        _subset_cache[chars] = ""
+        return ""
+    try:
+        from fontTools.subset import Options, Subsetter
+        from fontTools.ttLib import TTFont
+    except Exception:
+        _subset_cache[chars] = ""
+        return ""
+    opt = Options()
+    opt.name_IDs = ["*"]
+    opt.notdef_outline = True
+    opt.layout_features = []          # 학습지엔 OpenType 피처 불필요 → 용량 절감
+    opt.drop_tables += ["GSUB", "GPOS"]
+    faces: list[str] = []
+    for w, data in raw:
+        try:
+            f = TTFont(io.BytesIO(data))
+            ss = Subsetter(options=opt)
+            ss.populate(unicodes=set(chars))
+            ss.subset(f)
+            buf = io.BytesIO()
+            f.save(buf)
+            f.close()
+            b64 = base64.b64encode(buf.getvalue()).decode("ascii")
+        except Exception:
+            continue
+        faces.append(
+            "@font-face{font-family:'NanumSquareRound';font-style:normal;"
+            f"font-weight:{w};font-display:swap;"
+            f"src:url(data:font/ttf;base64,{b64}) format('truetype');}}"
+        )
+    css = ("<style>" + "".join(faces) + "</style>") if faces else ""
+    _subset_cache[chars] = css
+    return css
+
+
+_STYLE_RE = re.compile(r"<style>", re.IGNORECASE)
+
+
+def _inject_fonts(html: str) -> str:
+    """HTML 에 실제 쓰인 글자만 서브셋한 나눔스퀘어라운드 @font-face 를 앞에 삽입."""
+    chars = frozenset(_BASE_UNI | {ord(c) for c in html if ord(c) > 0x7F})
+    css = _font_face_css(chars)
+    if not css:
+        return html
+    m = _STYLE_RE.search(html)          # 첫 <style> 앞(=head 안)에 폰트를 먼저 선언
+    if not m:
+        return html
+    i = m.start()
+    return html[:i] + css + html[i:]
 
 _env = Environment(
     loader=FileSystemLoader(str(TEMPLATE_DIR)),
@@ -53,11 +144,12 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     only_back     : 뒷면만 렌더(뒷면 페이지 수 측정용).
     """
     tmpl = _env.get_template("worksheet_a.html.j2")
-    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
+    html = tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
                        include_back=include_back, include_guide=include_guide,
                        only_back=only_back, student=student, slevel=slevel,
                        boxmode=boxmode)
+    return _inject_fonts(html)
 
 
 def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:
@@ -67,7 +159,8 @@ def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> s
     핵심 단어를 함께 싣는다. brand 는 헤더 'made by …' 문구(빈 문자열이면 생략).
     """
     tmpl = _env.get_template("worksheet_b.html.j2")
-    return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note, brand=brand)
+    html = tmpl.render(analyses=_as_list(analyses), footer_note=footer_note, brand=brand)
+    return _inject_fonts(html)
 
 
 def render_html(analyses, layout: str = "A", footer_note: str = "",

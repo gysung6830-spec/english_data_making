@@ -308,15 +308,24 @@ def _stamp_footer(path: Path, footer_note: str = "") -> None:
         from pypdf import PdfReader, PdfWriter
         from reportlab.pdfbase import pdfmetrics
         from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+        from reportlab.pdfbase.ttfonts import TTFont as RLTTFont
         from reportlab.pdfgen import canvas
     except Exception:
         return
-    kfont = "Helvetica"
-    try:                                   # 한글(저작권) 지원 CID 폰트
-        pdfmetrics.registerFont(UnicodeCIDFont("HYSMyeongJo-Medium"))
-        kfont = "HYSMyeongJo-Medium"
+    # 본문과 동일하게 나눔스퀘어라운드로 통일(저작권=Regular, 페이지번호=Bold).
+    # 폰트 파일이 없거나 등록 실패 시 CID 명조 → Helvetica 순으로 폴백.
+    from .renderer import FONT_DIR
+    kfont, pfont = "Helvetica", "Helvetica-Bold"
+    try:
+        pdfmetrics.registerFont(RLTTFont("NSR", str(FONT_DIR / "NanumSquareRoundR.ttf")))
+        pdfmetrics.registerFont(RLTTFont("NSR-B", str(FONT_DIR / "NanumSquareRoundB.ttf")))
+        kfont, pfont = "NSR", "NSR-B"
     except Exception:
-        pass
+        try:                               # 폴백: 한글 지원 CID 명조
+            pdfmetrics.registerFont(UnicodeCIDFont("HYSMyeongJo-Medium"))
+            kfont = "HYSMyeongJo-Medium"
+        except Exception:
+            pass
     try:
         reader = PdfReader(str(path))
         total = len(reader.pages)
@@ -331,7 +340,7 @@ def _stamp_footer(path: Path, footer_note: str = "") -> None:
             if footer_note:
                 c.setFont(kfont, 7.5)
                 c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권
-            c.setFont("Helvetica-Bold", 9)
+            c.setFont(pfont, 9)
             c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체
             c.save()
             buf.seek(0)

@@ -662,6 +662,23 @@ def test_vision_fallback_pdf():
     print("PASS  PDF 텍스트 깨짐 → 비전(이미지) 재추출 폴백")
 
 
+def test_font_embed_nanumsquareround():
+    # 렌더 HTML 에 나눔스퀘어라운드가 base64 로 임베드되어(시스템 글꼴 무관 동일 렌더),
+    # 본문 font-family 도 NanumSquareRound 로 지정되는지 확인.
+    from src.worksheet import mock, renderer
+    a = mock.mock_analysis()
+    html = renderer.render_a_html([a])
+    assert "@font-face" in html
+    assert "'NanumSquareRound'" in html or "NanumSquareRound" in html
+    assert "data:font/ttf;base64," in html
+    # 요청 문자만 서브셋 → 원본(1MB)보다 훨씬 작아야 함(과대 임베드 방지)
+    import re as _re
+    b64 = _re.findall(r"base64,([A-Za-z0-9+/=]+)\)", html)
+    assert b64, "임베드된 폰트 데이터가 없음"
+    assert max(len(x) for x in b64) < 900_000, "서브셋이 지나치게 큼"
+    print("PASS  나눔스퀘어라운드 폰트 임베드(서브셋)")
+
+
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
@@ -699,6 +716,7 @@ def run_all():
     test_fragment_quality_guard()
     test_raw_text_fragmented()
     test_vision_fallback_pdf()
+    test_font_embed_nanumsquareround()
     print("\n구문 분석 학습지 오프라인 테스트 모두 통과 ✅")
 
 

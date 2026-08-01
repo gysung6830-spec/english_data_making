@@ -1,0 +1,5 @@
+NanumSquareRound
+Copyright (c) 2017 NAVER Corporation. All rights reserved.
+Font designed by Sandoll Communications.
+나눔글꼴 라이선스에 따라 자유롭게 사용/재배포할 수 있습니다.
+출처: https://github.com/innks/NanumSquareRound (NAVER 나눔글꼴)
