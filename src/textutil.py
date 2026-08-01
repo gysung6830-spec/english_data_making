@@ -115,3 +115,16 @@ def qno_label(source: str) -> str:
     if m:
         return f"{m.group(1)}번"
     return ""
+
+
+def file_tag(name: str, maxlen: int = 16) -> str:
+    """파일명에서 뱃지에 쓸 '짧은 식별자'를 만든다(UUID 접두·확장자 제거, 길면 자름)."""
+    s = (name or "").strip()
+    if not s:
+        return ""
+    base = _UUID_PREFIX.sub("", s)
+    base = re.sub(r'\.[A-Za-z0-9]{1,5}$', "", base)      # 확장자 제거
+    base = re.sub(r'\s+', " ", base).strip(" _-")
+    if len(base) > maxlen:
+        base = base[:maxlen].rstrip(" _-") + "…"
+    return base

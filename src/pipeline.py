@@ -106,11 +106,12 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
     packs: list[prose_render.ProsePack] = []
     blank_sets: list = []
     writing_packs: list[writing_render.WritingPack] = []
-    for ex in _extract_passages_for_pdf(client, cfg, src):
-        # 헤더 제목 = 지문의 한글 주제, 뱃지 = 문항 번호
-        #  · 문항 번호는 LLM 추출(q_no)을 1순위로, 없으면 파일명 파싱으로 보조
+    for i, ex in enumerate(_extract_passages_for_pdf(client, cfg, src)):
+        # 헤더 제목 = 지문의 한글 주제, 뱃지 = 지문번호(문항번호)
+        #  · 번호는 LLM 추출(q_no) 1순위, 없으면 파일명 파싱, 그래도 없으면 지문 순서(i+1)
+        #  · 파일명 접두는 호출부(webapp/CLI)가 apply_q_numbers 로 붙인다
         topic = (ex.topic_ko or "").strip() or ex.title
-        qno = (ex.q_no or "").strip() or qno_label(ex.source) or qno_label(src.name)
+        qno = (ex.q_no or "").strip() or qno_label(ex.source) or qno_label(src.name) or f"{i + 1}번"
         wb = workbook_generate.generate_workbook(client, cfg, ex)
         wb.title = topic; wb.label = qno
         pk = prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title)
@@ -126,21 +127,37 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
     return wbs, packs, blank_sets, writing_packs
 
 
-def apply_q_numbers(wbs, packs, blank_sets, writing_packs, start: int) -> int:
-    """문항번호를 '시작번호부터 지문마다 1씩 증가'시켜 모든 유형의 뱃지(label)에 강제 부여한다.
+def _passage_number(seqs, i: int) -> str:
+    """i번째 지문의 현재 번호 라벨을 읽는다(없으면 빈 문자열)."""
+    for seq in seqs:
+        if seq and i < len(seq):
+            v = getattr(seq[i], "label", "") or ""
+            if v:
+                return v
+    return ""
 
-    수동 입력이 있으면 자동 추출(q_no·파일명)보다 우선한다. 다음 시작번호를 반환(파일 간 누적용).
+
+def apply_q_numbers(wbs, packs, blank_sets, writing_packs,
+                    start: int | None = None, tag: str = "") -> int | None:
+    """모든 유형의 뱃지(label)를 '파일명 + 지문번호' 형태로 맞춘다.
+
+    - start 가 주어지면 지문마다 'start, start+1 …' 로 번호를 새로 부여(수동 입력 우선),
+      없으면 각 지문의 현재 번호(자동 추출/지문 순서)를 그대로 사용한다.
+    - tag(파일명 식별자)가 있으면 '파일명 · N번' 으로 앞에 붙인다.
+    - start 를 준 경우 '다음 시작번호'(start+지문수)를 반환한다(파일 간 누적용).
     """
-    n = max(len(wbs or []), len(packs or []), len(blank_sets or []), len(writing_packs or []))
+    seqs = (wbs, packs, blank_sets, writing_packs)
+    n = max(len(s or []) for s in seqs)
     for i in range(n):
-        lbl = f"{start + i}번"
-        for seq in (wbs, packs, blank_sets, writing_packs):
+        num = f"{start + i}번" if start is not None else (_passage_number(seqs, i) or f"{i + 1}번")
+        lbl = f"{tag} · {num}" if tag else num
+        for seq in seqs:
             if seq and i < len(seq):
                 try:
                     seq[i].label = lbl
                 except Exception:
                     pass
-    return start + n
+    return (start + n) if start is not None else None
 
 
 def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
@@ -527,6 +544,9 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
             else:
                 wbs, file_packs, file_bsets, file_wpacks = build_workbook_bundle_for_pdf(
                     client, cfg, pdf)
+            # 뱃지를 '파일명 · 지문번호'로 통일(파일명은 실제 입력 파일명 기준)
+            from .textutil import file_tag
+            apply_q_numbers(wbs, file_packs, file_bsets, file_wpacks, tag=file_tag(pdf.name))
             if combine:
                 books.extend(wbs)   # 파일 안의 여러 지문을 모두 합본에 포함
                 packs.extend(file_packs)

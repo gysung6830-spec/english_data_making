@@ -328,9 +328,13 @@ def analyze_route():
             else:
                 wbs, packs, file_bsets, file_wpacks = pipeline.build_workbook_bundle_for_pdf(
                     client, cfg, tmp)
-            # 수동 시작번호가 있으면 문항번호를 강제 부여(지문마다 +1, 파일 간 누적)
+            # 뱃지를 '파일명 · 지문번호'로 통일. 수동 시작번호가 있으면 지문마다 +1(파일 간 누적),
+            # 없으면 자동 추출/지문 순서 번호를 그대로 쓰고 파일명만 앞에 붙인다.
+            from src.textutil import file_tag
+            nxt = pipeline.apply_q_numbers(wbs, packs, file_bsets, file_wpacks,
+                                           start=q_counter, tag=file_tag(f.filename))
             if q_counter is not None:
-                q_counter = pipeline.apply_q_numbers(wbs, packs, file_bsets, file_wpacks, q_counter)
+                q_counter = nxt
             base = out_name(stem, '_통합', '_워크북')
             # 유형 순서(통합→어형→어법→어휘→영작→해석→빈칸)로 '한글 포함'·'한글 제외' 2개 PDF
             outs = pipeline.render_workbook_two_versions(
