@@ -41,7 +41,8 @@ def _as_list(analyses) -> list[Analysis]:
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
                   include_guide: bool = True, only_back: bool = False,
-                  student: bool = False, slevel: str = "slash") -> str:
+                  student: bool = False, slevel: str = "slash",
+                  boxmode: str = "") -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -55,7 +56,8 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     return tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
                        include_back=include_back, include_guide=include_guide,
-                       only_back=only_back, student=student, slevel=slevel)
+                       only_back=only_back, student=student, slevel=slevel,
+                       boxmode=boxmode)
 
 
 def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> str:

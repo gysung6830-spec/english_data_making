@@ -200,6 +200,16 @@
   .page.compact.ultra .pbox .cap{ font-size:9px; padding:2px 7px; margin:4px 0 3px; }
   .page.compact.ultra .pbox .gn{ font-size:9.5px; }
 
+  /* ---- 포인트 박스 정렬 모드 ---- */
+  /* even: 문장 행 높이를 균일하게 → 좌우가 규칙적으로 '일렬' */
+  .page.bx-even .row{ min-height:118px; }
+  .page.compact.bx-even .row{ min-height:98px; }
+  .page.compact.ultra.bx-even .row{ min-height:82px; }
+  /* uniform: 모든 포인트 박스 최소 높이를 같게 → 박스 크기 통일 */
+  .page.bx-uniform .pbox{ min-height:58px; }
+  .page.compact.bx-uniform .pbox{ min-height:48px; }
+  .page.compact.ultra.bx-uniform .pbox{ min-height:42px; }
+
   .foot{ position:absolute; left:22px; bottom:10px; font-size:10.5px; color:var(--gray); }
   .foot .dot{ color:var(--amber); }
   .foot .pg{ color:#9aa0b0; font-weight:800; font-size:13px; margin:0 5px; }
@@ -343,7 +353,7 @@
 {% for a in analyses %}
   {% if not only_back %}
   {%- set fd = a.front_density -%}
-  <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}">
+  <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
     <div class="head">
       <div class="ribbon">
         <div class="no">{{ a.lecture_label or '★' }}</div>
