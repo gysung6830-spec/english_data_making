@@ -13,8 +13,8 @@
   {% for ws in pack.worksheets %}
   <section class="ws{{ ' brk' if not loop.first }}">
     <div class="sh-head">
-      <div class="sh-titles"><div class="sh-title">{{ pack.title }}</div></div>
       {% if pack.label %}<span class="sh-badge">{{ pack.label }}</span>{% endif %}
+      <div class="sh-titles"><div class="sh-title">{{ pack.title }}</div></div>
     </div>
     <div class="ws-instr wt-{{ ws.wtype }}">
       <span class="wt-label">{{ ws.label }}</span> {{ ws.instruction }}

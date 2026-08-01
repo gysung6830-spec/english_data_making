@@ -4,17 +4,17 @@
    (색 변수에 의존하지 않도록 명시 색상 사용)
    ============================================================ */
 .sh-head{
-  display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+  display:flex; align-items:center; justify-content:flex-start; gap:10px;
   border-bottom:3px solid #2e8267; box-shadow:0 3px 0 0 #cfe6dc;
   padding-bottom:7px; margin-bottom:12px;
+}
+.sh-badge{                            /* 문항번호 뱃지 — 제목 왼쪽 */
+  flex:none; font-size:9pt; font-weight:800; color:#fff; background:#2e8267;
+  border-radius:999px; padding:3px 13px; white-space:nowrap;
 }
 .sh-titles{ flex:1 1 auto; min-width:0; overflow:hidden; }
 .sh-title{
   font-size:16pt; font-weight:800; color:#20242c; letter-spacing:-.3px;
   white-space:nowrap;                 /* 제목은 최대한 줄바꿈하지 않음 */
   overflow:hidden; text-overflow:ellipsis;
-}
-.sh-badge{
-  flex:none; font-size:9pt; font-weight:800; color:#fff; background:#2e8267;
-  border-radius:999px; padding:3px 13px; white-space:nowrap; align-self:center;
 }
