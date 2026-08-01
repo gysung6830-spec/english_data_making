@@ -83,12 +83,15 @@ body{
   color:#fff; font-weight:800; font-size:9pt;
   display:flex; align-items:center; justify-content:center; margin-top:1px;
 }
-.cbody{ flex:1 1 auto; display:flex; gap:10px; align-items:stretch; }
+.cbody{ flex:1 1 auto; display:flex; gap:10px; align-items:flex-start; }
 /* 동사 어형 등 정답을 단어 위에 적을 수 있도록 문제(영문) 행간을 넉넉히 준다. */
 .c-en{ flex:1 1 67%; padding-right:2px; line-height:2.5; }
+/* 해석 박스는 '글자 높이만큼만' 차지하도록(align-self:flex-start) 해서, 영문이 길어도
+   박스가 늘어나 빈 여백이 생기지 않게 한다. 글자는 자연 줄바꿈되어 박스를 넘지 않는다. */
 .c-ko{
-  flex:0 0 33%; font-size:8pt; color:#404652; line-height:1.5;
-  background:var(--green-soft); border-left:1px dashed #bfd8cd; padding:3px 0 3px 9px; border-radius:0 6px 6px 0;
+  flex:0 0 33%; align-self:flex-start; font-size:8pt; color:#404652; line-height:1.5;
+  background:var(--green-soft); border-left:1px dashed #bfd8cd;
+  padding:6px 8px 6px 9px; border-radius:0 6px 6px 0; word-break:keep-all; overflow-wrap:anywhere;
 }
 
 /* ── 문제 표기 (유형별 색) ── */
