@@ -128,6 +128,14 @@ def make_choices(texts: list[str]) -> list[Choice]:
     return [Choice(LABELS[i], t) for i, t in enumerate(texts[:5])]
 
 
+_CIRCLED_NUM = re.compile(r"\s*[①-⑳㉑-㉟]\s*")
+
+
+def strip_passage_numbering(text: str) -> str:
+    """지문 문장에 붙은 ①②③ 번호를 제거(내용일치·요지·제목 등은 지문에 번호가 없어야 함)."""
+    return re.sub(r"\s{2,}", " ", _CIRCLED_NUM.sub(" ", text or "")).strip()
+
+
 def underline_passage(text: str, n: int) -> str:
     """앞쪽 단어 n개를 ①~⑤ 밑줄 마커로 감싼 지문 텍스트를 만든다(구조 검증용)."""
     words = text.split()
@@ -198,7 +206,10 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         from ..core.models import DIFFICULTY_KO_REV
         ul = (f"\n지문의 밑줄은 정확히 {item.underlines}개를 ①<u>..</u>~ 형식으로 표시하라."
               if item.underlines else "")
-        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}\n\n"
+        # 무관문장·어법·어휘가 아니면 지문 문장에 ①②③ 번호를 붙이지 않는다(표준 형식).
+        nonum = ("" if number_only else
+                 "\n지문 문장 앞에 ①②③ 같은 번호를 붙이지 마라(이 유형은 지문에 번호가 없다).")
+        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}{nonum}\n\n"
                   f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.\n"
                   "[정답 유일성 자가검증] 출력 전에 스스로 다섯 선지를 하나씩 대입해 "
                   "정답이 '오직 1개'만 성립하는지 확인하라. 두 개 이상 정답이 될 여지가 "
@@ -208,7 +219,8 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
         out = ctx.client.structured(sysp, prompt, ChoiceQuestionOut, max_retries=2,
                                     extra_validate=lambda o: _validate_choice_out(item, o))
-        q.passage_text = out.passage
+        # 번호 선지 유형이 아니면 지문에 새어든 ①②③ 문장 번호를 제거(안전망).
+        q.passage_text = out.passage if number_only else strip_passage_numbering(out.passage)
         q.choices = make_choices(out.choices)
         q.answer = LABELS[out.answer_index - 1]
         q.explanation = out.explanation
