@@ -98,7 +98,14 @@
               {%- elif '문맥상' in ln -%}
                 {%- if student -%}<div class="imp-mean">· 문맥상 의미: <span class="blank" style="min-width:220px"></span></div>
                 {%- else -%}<div class="imp-mean">{{ ln | trim }}</div>{%- endif -%}
-              {%- else -%}<div class="imp-expr">{{ ln | trim }}</div>{%- endif -%}
+              {%- else -%}
+                {%- set qp = ln.split('"') -%}
+                {%- if qp | length >= 2 -%}
+                <div class="imp-expr"><span class="imp-loc">{{ qp[0] | trim }}</span><span class="imp-badge">{{ qp[1] | trim }}</span></div>
+                {%- else -%}
+                <div class="imp-expr"><span class="imp-badge">{{ ln | trim }}</span></div>
+                {%- endif -%}
+              {%- endif -%}
             {%- endfor -%}
             </div>
           {%- endfor -%}
