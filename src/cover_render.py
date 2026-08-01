@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from html import escape as escape_html
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -92,6 +93,54 @@ def render_cover_html(*, header: str, title: str, subtitle: str = "",
     return _env.get_template("cover.html.j2").render(
         header=header, title=title, subtitle=subtitle, version_label=version_label,
         n_passages=n_passages, sections=sections, font_css=branding.font_face_css())
+
+
+def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
+                              footer_note: str = "") -> Path:
+    """'정답 · 해설' 간지(구분 페이지) 1장을 렌더한다(문제 뒤 해설 묶음 앞에 삽입)."""
+    from playwright.sync_api import sync_playwright
+    from . import branding
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    css = branding.font_face_css()
+    html = (
+        "<!DOCTYPE html><html lang='ko'><head><meta charset='utf-8'>"
+        f"<style>{css}</style>"
+        "<style>"
+        "html,body{margin:0;padding:0;height:100%;}"
+        "body{font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif;"
+        "-webkit-print-color-adjust:exact;print-color-adjust:exact;}"
+        ".wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;"
+        "height:100vh;color:#2b2f3a;}"
+        ".kick{font-size:9pt;letter-spacing:4px;color:#2e8267;font-weight:800;}"
+        ".big{font-size:30pt;font-weight:800;margin:10px 0 6px;letter-spacing:-0.5px;}"
+        ".en{font-size:11pt;color:#8b93a0;font-weight:700;}"
+        ".rule{width:120px;height:4px;background:#2e8267;border-radius:2px;margin:18px 0 0;}"
+        f".brand{{margin-top:16px;font-size:9.5pt;color:#256b55;font-weight:800;}}"
+        "</style></head><body><div class='wrap'>"
+        "<div class='kick'>ANSWERS &amp; EXPLANATIONS</div>"
+        "<div class='big'>정답 · 해설</div>"
+        "<div class='en'>모든 유형의 정답과 해설을 이 뒤에 모았습니다</div>"
+        "<div class='rule'></div>"
+        + (f"<div class='brand'>{escape_html(header)}</div>" if header else "")
+        + "</div></body></html>"
+    )
+    html_path = out_path.with_suffix(".html")
+    html_path.write_text(html, encoding="utf-8")
+    footer = footer_note.strip() if footer_note and footer_note.strip() else DEFAULT_FOOTER
+    exe = _chromium_executable()
+    launch_kw = {"executable_path": exe} if exe else {}
+    with sync_playwright() as p:
+        b = p.chromium.launch(**launch_kw)
+        pg = b.new_page()
+        pg.goto(f"file://{html_path.resolve()}")
+        pg.pdf(path=str(out_path), format="A4",
+               margin={"top": "12mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
+               print_background=True, display_header_footer=True,
+               header_template="<span></span>", footer_template=_footer_template(footer))
+        b.close()
+    return out_path
 
 
 def render_cover_pdf(out_path: str | Path, *, header: str, title: str, subtitle: str = "",

@@ -11,8 +11,9 @@
   {# 복수 지문: 각 지문마다 [문제] → [정답] 을 한 묶음으로 배치한다.
      지문1 → 답1 → 지문2 → 답2 … (지문별로 새 페이지에서 시작) #}
   {% for wb in books %}
-  <section class="wb-unit{{ ' unit-break' if not loop.first }}">
+  <section class="wb-unit{{ ' unit-break' if not loop.first and section != 'a' }}">
 
+    {% if section != 'a' %}
     {# ── 상단 헤더 ── #}
     <div class="wb-header">
       <div class="wb-titles">
@@ -58,7 +59,9 @@
     </div>
 
     {# 하단 저작권 문구는 Playwright 인쇄 푸터로 모든 페이지에 렌더된다(render_workbook_pdf). #}
+    {% endif %}
 
+    {% if section != 'q' %}
     {# ── 정답 · 해설 (다음 페이지) ── #}
     <div class="ans-page">
       <div class="ans-head">정답 · 해설
@@ -76,6 +79,7 @@
         {% endfor %}
       </ol>
     </div>
+    {% endif %}
 
   </section>
   {% endfor %}

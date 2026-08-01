@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  {% if section != 'a' %}
   <section class="ws">
     <div class="ws-top">
       <span class="ws-meta">{{ pack.header }} &nbsp;·&nbsp; <b>{{ pack.title }}</b></span>
@@ -27,7 +28,9 @@
       {% endfor %}
     </ol>
   </section>
+  {% endif %}
 
+  {% if section != 'q' %}
   {# 정답 #}
   <section class="ans-page">
     <div class="ans-head">정답 <span class="ans-sub">Answers · 바른 배열</span></div>
@@ -38,6 +41,7 @@
     </div>
     {% endfor %}
   </section>
+  {% endif %}
 
 </body>
 </html>

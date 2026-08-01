@@ -58,19 +58,21 @@ _env.filters["render_sentence"] = render_sentence
 
 
 def render_workbooks_html(books: list[Workbook], footer_note: str = "",
-                          show_ko: bool = True) -> str:
+                          show_ko: bool = True, section: str = "all") -> str:
     """여러 지문을 한 문서에 배치 (지문1 → 답1 → 지문2 → 답2 …).
 
     show_ko=False 이면 문제면의 한국어 해석 줄을 숨긴다(정답·해설면은 그대로).
+    section='q' 이면 문제만, 'a' 이면 정답·해설만, 'all' 이면 둘 다 렌더한다.
     """
     tmpl = _env.get_template("workbook.html.j2")
     return tmpl.render(books=list(books), footer_note=footer_note,
-                       show_ko=show_ko, font_css=branding.font_face_css())
+                       show_ko=show_ko, section=section, font_css=branding.font_face_css())
 
 
-def render_workbook_html(wb: Workbook, footer_note: str = "", show_ko: bool = True) -> str:
+def render_workbook_html(wb: Workbook, footer_note: str = "", show_ko: bool = True,
+                         section: str = "all") -> str:
     """단일 지문 렌더 (내부적으로 books=[wb])."""
-    return render_workbooks_html([wb], footer_note=footer_note, show_ko=show_ko)
+    return render_workbooks_html([wb], footer_note=footer_note, show_ko=show_ko, section=section)
 
 
 # ---------------------------------------------------------------------------
@@ -101,13 +103,13 @@ DEFAULT_FOOTER = branding.FOOTER_BRAND
 
 
 def _footer_template(text: str) -> str:
-    """모든 페이지 하단에 인쇄될 저작권 푸터(HTML). 저작권 문구만.
+    """모든 페이지 하단 '왼쪽'에 인쇄될 저작권 푸터(HTML). 저작권 문구만.
 
-    페이지 번호는 병합 후 문서 전체 기준으로 stamp_page_numbers() 가 따로 찍는다
+    페이지 번호는 병합 후 문서 전체 기준으로 stamp_page_numbers() 가 하단 '오른쪽'에 따로 찍는다
     (부분 PDF 를 합치므로 Chromium 의 pageNumber 는 구간마다 재시작하기 때문).
     """
     return (
-        '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:center; '
+        '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:left; '
         "font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif; "
         'padding:0 14mm;">'
         f'{escape(text)}'
@@ -141,18 +143,19 @@ def stamp_page_numbers(path: str | Path) -> Path:
 
 
 def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_note: str = "",
-                         show_ko: bool = True) -> Path:
+                         show_ko: bool = True, section: str = "all") -> Path:
     """여러 지문을 한 PDF 로 배치 (지문1 → 답1 → 지문2 → 답2 …).
 
     A4 세로, 배경색 인쇄 + 모든 페이지 저작권 푸터.
     show_ko=False 이면 문제면의 한국어 해석을 숨긴다.
+    section='q' 문제만 / 'a' 정답만 / 'all' 둘 다.
     """
     from playwright.sync_api import sync_playwright  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    html = render_workbooks_html(books, footer_note, show_ko=show_ko)
+    html = render_workbooks_html(books, footer_note, show_ko=show_ko, section=section)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 
@@ -178,9 +181,10 @@ def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_not
 
 
 def render_workbook_pdf(wb: Workbook, out_path: str | Path, footer_note: str = "",
-                        show_ko: bool = True) -> Path:
+                        show_ko: bool = True, section: str = "all") -> Path:
     """단일 지문 렌더 (내부적으로 books=[wb])."""
-    return render_workbooks_pdf([wb], out_path, footer_note=footer_note, show_ko=show_ko)
+    return render_workbooks_pdf([wb], out_path, footer_note=footer_note,
+                                show_ko=show_ko, section=section)
 
 
 def merge_pdfs(parts: list[str | Path], out_path: str | Path) -> Path:

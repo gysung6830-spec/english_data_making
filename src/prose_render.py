@@ -163,20 +163,21 @@ def render_prose(s: PSentence, wtype: str) -> Markup:
 _env.filters["render_prose"] = render_prose
 
 
-def render_prose_html(pack: ProsePack, footer_note: str = "", show_ko: bool = True) -> str:
+def render_prose_html(pack: ProsePack, footer_note: str = "", show_ko: bool = True,
+                      section: str = "all") -> str:
     from . import branding
     return _env.get_template("prose.html.j2").render(
-        pack=pack, footer_note=footer_note, show_ko=show_ko,
+        pack=pack, footer_note=footer_note, show_ko=show_ko, section=section,
         font_css=branding.font_face_css())
 
 
 def render_prose_pdf(pack: ProsePack, out_path: str | Path, footer_note: str = "",
-                     show_ko: bool = True) -> Path:
+                     show_ko: bool = True, section: str = "all") -> Path:
     from playwright.sync_api import sync_playwright
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_prose_html(pack, footer_note, show_ko=show_ko)
+    html = render_prose_html(pack, footer_note, show_ko=show_ko, section=section)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 

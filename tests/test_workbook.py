@@ -196,6 +196,17 @@ def test_show_ko_flag():
     print("PASS  한글 포함/제외(show_ko) 문제면 한글 숨김")
 
 
+def test_section_split():
+    # 문제/정답 분리: section='q' 는 정답면 없음, 'a' 는 문제 카드 없음
+    from samples.workbook_mock import mock_workbook
+    wb = mock_workbook()
+    q = render_workbooks_html([wb], section="q")
+    a = render_workbooks_html([wb], section="a")
+    assert 'class="ans-page"' not in q and 'class="wb-cards"' in q   # 문제만
+    assert 'class="ans-page"' in a and 'class="wb-cards"' not in a   # 정답만
+    print("PASS  문제/정답 분리(section q/a)")
+
+
 def run_all():
     test_placeholder_mismatch_tolerated()
     test_id_mismatch_repair()
@@ -206,6 +217,7 @@ def run_all():
     test_render_html()
     test_multi_passage_layout()
     test_show_ko_flag()
+    test_section_split()
     print("\n통합 워크북 오프라인 테스트 통과 ✅")
 
 

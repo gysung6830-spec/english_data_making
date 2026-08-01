@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  {% if section != 'a' %}
   {% for ws in pack.worksheets %}
   <section class="ws{{ ' brk' if not loop.first }}">
     <div class="ws-top">
@@ -31,7 +32,9 @@
     </ol>
   </section>
   {% endfor %}
+  {% endif %}
 
+  {% if section != 'q' %}
   {# 정답 #}
   <section class="ans-page">
     <div class="ans-head">정답 <span class="ans-sub">Answers</span></div>
@@ -48,6 +51,7 @@
     </div>
     {% endfor %}
   </section>
+  {% endif %}
 
 </body>
 </html>

@@ -16,11 +16,11 @@ GREEN = "#2e8267"        # 주색 (제목·표 헤더·섹션)
 GREEN_DARK = "#256b55"
 GREEN_LINE = "#2f8f6d"
 
-# 하단 저작권 문구(사용자 지정 유지). 페이지 번호는 인쇄 푸터가 붙인다.
-FOOTER_BRAND = "© 2026. 은아 T. All rights reserved."
+# 하단 저작권 문구. 하단 왼쪽에 배치되며 페이지 번호는 병합 후 하단 오른쪽에 찍힌다.
+FOOTER_BRAND = "© 2026. Ortica영어. All rights reserved."
 
 # 표지·상단에 쓰는 스튜디오(브랜드) 이름
-BRAND = "김은아영어연구소"
+BRAND = "Ortica영어"
 
 # 통일 폰트 스택 (번들 @font-face 우선, 없으면 시스템 폴백)
 FONT_STACK = ("'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운드',"

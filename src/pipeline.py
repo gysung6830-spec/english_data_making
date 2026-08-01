@@ -169,16 +169,43 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
                                    show_ko: bool = True) -> Path:
-    """유형 순서대로 한 PDF 로 병합: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸.
+    """유형 순서대로 '문제'를 먼저 싣고, 모든 '정답·해설'은 맨 뒤에 몰아서 배치한다.
 
-    각 부분을 개별 PDF 로 렌더한 뒤 순서대로 병합한다.
+    배치: [표지] → 문제(통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸)
+          → [정답·해설 간지] → 정답(같은 유형 순서).
     blank_wb 가 None 이면 빈칸형은, writing_packs 가 비면 영작형은 생략한다.
     show_ko=False 이면 모든 문제면의 한국어 해석을 숨긴 '한글 제외' 버전으로 렌더한다.
     """
+    from . import branding
+
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     scratch = scratch or out_path.parent
     stem = out_path.stem
+
+    # 유형 순서대로 (태그, 렌더러) 목록을 만든다. 렌더러는 (path, section) 를 받는다.
+    renderers: list[tuple[str, callable]] = []
+    if books:
+        renderers.append(("wb", lambda p, sec: workbook_render.render_workbooks_pdf(
+            books, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+    for wtype in _PROSE_ORDER:                       # 어형 → 어법 → 어휘
+        for i, pk in enumerate(packs, start=1):
+            sub = _prose_subpack(pk, wtype)
+            if sub is not None:
+                renderers.append((f"{wtype}{i}", lambda p, sec, s=sub: prose_render.render_prose_pdf(
+                    s, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+    for i, wpk in enumerate(writing_packs or [], start=1):   # 영작
+        renderers.append((f"writing{i}", lambda p, sec, w=wpk: writing_render.render_writing_pdf(
+            w, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+    for i, pk in enumerate(packs, start=1):          # 한글 해석 연습
+        sub = _prose_subpack(pk, "translate")
+        if sub is not None:
+            renderers.append((f"translate{i}", lambda p, sec, s=sub: prose_render.render_prose_pdf(
+                s, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+    if blank_wb is not None:                          # 빈칸
+        renderers.append(("blanks", lambda p, sec: blanks_render.render_blanks_pdf(
+            blank_wb, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+
     parts: list[Path] = []
 
     def _emit(tag: str, fn):
@@ -186,34 +213,18 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
         fn(p)
         parts.append(p)
 
-    # 0) 표지 겸 사용 설명서 (맨 앞)
+    # 0) 표지 겸 사용 설명서
     _emit("cover", lambda p: _render_cover_for(
         p, books, packs, writing_packs, blank_wb, show_ko, footer_note))
-    # 1) 통합 카드
-    if books:
-        _emit("wb", lambda p: workbook_render.render_workbooks_pdf(
-            books, p, footer_note=footer_note, show_ko=show_ko))
-    # 2~4) 어형 → 어법 → 어휘 (지문별로 이어서)
-    for wtype in _PROSE_ORDER:
-        for i, pk in enumerate(packs, start=1):
-            sub = _prose_subpack(pk, wtype)
-            if sub is not None:
-                _emit(f"{wtype}{i}", lambda p, s=sub: prose_render.render_prose_pdf(
-                    s, p, footer_note=footer_note, show_ko=show_ko))
-    # 5) 영작
-    for i, wpk in enumerate(writing_packs or [], start=1):
-        _emit(f"writing{i}", lambda p, w=wpk: writing_render.render_writing_pdf(
-            w, p, footer_note=footer_note, show_ko=show_ko))
-    # 6) 한글 해석 연습 (영작 뒤)
-    for i, pk in enumerate(packs, start=1):
-        sub = _prose_subpack(pk, "translate")
-        if sub is not None:
-            _emit(f"translate{i}", lambda p, s=sub: prose_render.render_prose_pdf(
-                s, p, footer_note=footer_note, show_ko=show_ko))
-    # 7) 빈칸 워크북 (맨 뒤)
-    if blank_wb is not None:
-        _emit("blanks", lambda p: blanks_render.render_blanks_pdf(
-            blank_wb, p, footer_note=footer_note, show_ko=show_ko))
+    # 1) 모든 유형의 '문제'를 순서대로
+    for tag, fn in renderers:
+        _emit(f"{tag}_q", lambda p, f=fn: f(p, "q"))
+    # 2) '정답·해설' 간지
+    _emit("ansdiv", lambda p: cover_render.render_answer_divider_pdf(
+        p, header=branding.BRAND, footer_note=footer_note))
+    # 3) 모든 유형의 '정답·해설'을 같은 순서로 맨 뒤에
+    for tag, fn in renderers:
+        _emit(f"{tag}_a", lambda p, f=fn: f(p, "a"))
 
     workbook_render.merge_pdfs(parts, out_path)
     try:
