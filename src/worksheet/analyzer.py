@@ -258,8 +258,9 @@ def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
 
 
 def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
-    lines = [[_tok(t) for t in ln.tokens] for ln in sa.lines if ln.tokens]
-    lines = _merge_trailing_punct(lines)
+    # LLM 이 여러 줄로 쪼개 보내도 한 줄로 펼쳐 자연스럽게 흐르게(화면 폭에 맞춰 자동 줄바꿈).
+    flat = [_tok(t) for ln in sa.lines for t in ln.tokens]
+    lines = _merge_trailing_punct([flat]) if flat else []
     if not lines:  # LLM 이 lines 를 비우면 원문을 통째로 한 줄로
         lines = [[Token(text=sa.translation or "")]]
     reading = getattr(sa, "reading_ko", []) or []
