@@ -266,13 +266,14 @@ def test_grammar_orphan_wrong_boxed():
 
 
 def test_feed_point_box():
-    # 대명사 지칭 + 함축 = 파랑 '독해 Point' 박스로 렌더
+    # 어법·독해 포인트를 문장별 '합친' 박스에, 독해 뱃지(틸 fcap)는 유지
     a = mock_analysis()
     ha = renderer.render_a_html([a])
-    assert 'class="pbox feed"' in ha and "독해 Point" in ha
+    assert "pbox merged" in ha and 'class="cap fcap"' in ha and "독해 Point" in ha
+    assert "pbox merged even" in ha and "pbox merged odd" in ha  # 문장마다 번갈아
     assert "the teabag" in ha        # 대명사 지칭(refs)
     assert "Even the finest tea" in ha  # 함축(gloss_en) 도 이 박스 안에
-    print("PASS  독해 Point(대명사+함축) 박스")
+    print("PASS  합친 포인트 박스(어법+독해, 뱃지 유지, 번갈아 색)")
 
 
 def test_pronoun_referent_in_refs():
