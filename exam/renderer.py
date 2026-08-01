@@ -67,7 +67,8 @@ def _blocks(passages: list[Passage], start: int,
             })
             quick.append({"no": n, "key": key})
             n += 1
-        blocks.append({"label": f"[지문 {i}]", "title": p.title, "rows": rows})
+        disp = getattr(p, "source_label", "") or f"지문 {i}"
+        blocks.append({"label": f"[{disp}]", "title": p.title, "rows": rows})
     return blocks, quick
 
 

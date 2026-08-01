@@ -273,8 +273,11 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
 
 
 def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
-                    level=None) -> list:
-    """2회 여러 지문 -> 검증된 Passage 리스트(조판 없음). 합본용."""
+                    level=None, labels=None) -> list:
+    """2회 여러 지문 -> 검증된 Passage 리스트(조판 없음). 합본용.
+
+    labels 를 주면 각 지문 라벨(원본 PDF 문항번호 등)을 조판 라벨로 쓴다.
+    """
     from .pipeline import analyze_bodies
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
@@ -282,17 +285,20 @@ def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
     for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
         if logger:
             logger.info("[2회 %d/%d] 지문 생성 중 …", i, len(bodies))
-        passages.append(build_passage2(client, body, max_retries=max_retries,
-                                       logger=logger, analysis=analysis, level=level))
+        passage = build_passage2(client, body, max_retries=max_retries,
+                                 logger=logger, analysis=analysis, level=level)
+        if labels and i - 1 < len(labels):
+            passage.source_label = labels[i - 1]
+        passages.append(passage)
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)
     return passages
 
 
 def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
-                analyses=None, level=None, sections=None) -> Path:
+                analyses=None, level=None, sections=None, labels=None) -> Path:
     passages = build_passages2(client, bodies, max_retries=max_retries, logger=logger,
-                               analyses=analyses, level=level)
+                               analyses=analyses, level=level, labels=labels)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
                                type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2,
                                sections=sections)

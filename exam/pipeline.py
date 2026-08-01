@@ -116,16 +116,17 @@ def build_exam(
     analyses: list | None = None,
     level: str | None = None,
     sections=None,
+    labels: list[str] | None = None,
 ) -> Path:
     """여러 지문 원문 -> 검증 -> 2단 PDF 한 개.
 
     analyses 를 주면 분석 단계를 건너뛴다(교차 세트 공유).
     지문은 순서대로 조판하되, 각 지문 안의 유형 7종은 병렬로 생성한다.
-    level(상/중/하)로 전체 난이도를 조절한다.
+    level(상/중/하)로 전체 난이도를 조절한다. labels 로 지문 라벨(문항번호)을 지정.
     """
     passages = build_passages(client, bodies, max_retries=max_retries, logger=logger,
                               vocab_method=vocab_method, content_difficulty=content_difficulty,
-                              analyses=analyses, level=level)
+                              analyses=analyses, level=level, labels=labels)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
                                sections=sections)
 
@@ -139,18 +140,25 @@ def build_passages(
     content_difficulty: str = "hard",
     analyses: list | None = None,
     level: str | None = None,
+    labels: list[str] | None = None,
 ) -> list[Passage]:
-    """여러 지문 -> 검증된 Passage 리스트(조판은 하지 않음). 합본용."""
+    """여러 지문 -> 검증된 Passage 리스트(조판은 하지 않음). 합본용.
+
+    labels 를 주면 각 지문의 라벨(원본 PDF 문항번호 등)을 조판 라벨로 쓴다.
+    """
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
     passages: list[Passage] = []
     for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
         if logger:
             logger.info("[%d/%d] 지문 생성 중 …", i, len(bodies))
-        passages.append(build_passage(client, body, max_retries=max_retries,
-                                       logger=logger, vocab_method=vocab_method,
-                                       content_difficulty=content_difficulty,
-                                       analysis=analysis, level=level))
+        passage = build_passage(client, body, max_retries=max_retries,
+                                logger=logger, vocab_method=vocab_method,
+                                content_difficulty=content_difficulty,
+                                analysis=analysis, level=level)
+        if labels and i - 1 < len(labels):
+            passage.source_label = labels[i - 1]
+        passages.append(passage)
     validator.validate_passages(passages)
     validator.validate_numbering(passages, start=1)
     return passages

@@ -84,6 +84,9 @@ class Passage:
     title: str
     q: dict[str, str] = field(default_factory=dict)
     a: dict[str, str] = field(default_factory=dict)
+    # 지문 라벨: 원본 PDF의 '영어지문 문항번호'(예: "31번"). 비어 있으면 조판 시
+    # 위치 기준 "지문 1/2/…" 로 대체한다.
+    source_label: str = ""
     # 유형 -> '확인 권장' 사유 목록. 자동 보정·오답 근거 약함 등 사람 검수가 필요한
     # 문항만 기록한다(해설지에는 배지를 달지 않고, PDF 맨 끝 별도 페이지에서 모아 보여줌).
     flags: dict[str, list[str]] = field(default_factory=dict)

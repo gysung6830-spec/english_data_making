@@ -106,6 +106,7 @@ def main() -> int:
         logger=logger,
         vocab_method=args.vocab_method,
         content_difficulty=args.content_difficulty,
+        labels=[lbl for lbl, _ in bodies],   # 원본 PDF 문항번호(있으면) → 지문 라벨
     )
     logger.info("시험지 생성 완료: %s", result)
     return 0

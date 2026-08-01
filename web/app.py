@@ -92,6 +92,7 @@ def generate():
 
     # 실제 모드: 지문을 한 번만 확보(두 세트가 같은 지문 공유)
     bodies = None
+    src_labels: list[str] | None = None   # 원본 PDF의 영어지문 문항번호(있으면)
     client = None
     if not demo:
         pasted = split_passages(request.form.get("passages", ""))
@@ -118,9 +119,12 @@ def generate():
                     dest = updir / f"upload_{i}{ext}"
                     f.save(dest)
                     paths.append(dest)
-                bodies = [b for _, b in ingest.load_bodies(
+                pairs = ingest.load_bodies(
                     paths, client=client,
-                    vision_fallback=cfg.processing.pdf_vision_fallback)]
+                    vision_fallback=cfg.processing.pdf_vision_fallback)
+                bodies = [b for _, b in pairs]
+                # 원본 PDF의 '영어지문 문항번호'(예: 31번)가 있으면 지문 라벨로 쓴다.
+                src_labels = [lbl for lbl, _ in pairs]
             else:
                 bodies = pasted
         except Exception as e:  # noqa: BLE001
@@ -170,7 +174,8 @@ def generate():
                         from exam.pipeline import build_passages
                         ps = build_passages(client, bodies,
                                             max_retries=cfg.processing.max_retries,
-                                            analyses=analyses, level=lv)
+                                            analyses=analyses, level=lv,
+                                            labels=src_labels)
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections})
                 else:
@@ -182,7 +187,8 @@ def generate():
                         from exam.gen2 import build_passages2
                         ps = build_passages2(client, bodies,
                                              max_retries=cfg.processing.max_retries,
-                                             analyses=analyses, level=lv)
+                                             analyses=analyses, level=lv,
+                                             labels=src_labels)
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER2,
                                   "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2})

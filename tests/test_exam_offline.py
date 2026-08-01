@@ -243,7 +243,15 @@ def test_workbook_noise() -> None:
     assert not any("가" <= c <= "힣" for c in j2)          # 한글 없음
     assert ps2[0].startswith("Ever since the early Enlightenment")
     assert ps2[1].startswith("Speakers do not always put")
-    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리(실원본 형식 포함) 통과")
+
+    # 문항 번호를 보존한다: 워크북은 31·32, [Flow Edu]·통짜는 번호 없음(None)
+    numbered = ingest._passages_from_raw_numbered(raw)
+    assert [n for n, _ in numbered] == ["31", "32"]
+    numbered2 = ingest._passages_from_raw_numbered(raw2)
+    assert [n for n, _ in numbered2] == ["31", "32"]
+    plain = ingest._passages_from_raw_numbered("Just a single plain English passage. " * 12)
+    assert [n for n, _ in plain] == [None]
+    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리(문항번호 보존 포함) 통과")
 
 
 def test_arrangement_answer_snap() -> None:
@@ -612,6 +620,33 @@ def test_error_reduction_settings() -> None:
     print("✓ 오류 감축 설정(적응형 사고·effort·재시도·기본값) 통과")
 
 
+def test_passage_source_label() -> None:
+    """지문 라벨: 원본 문항번호가 있으면 '[31번]', 없으면 위치 기준 '[지문 i]'."""
+    # 라벨 없음 → 위치 기준
+    html0 = renderer.render_html(demo_passages())
+    assert "[지문 1]" in html0 and "[지문 2]" in html0
+
+    # source_label 지정 → 문항번호로 표기(위치 라벨은 사라짐)
+    ps = demo_passages()
+    ps[0].source_label = "31번"
+    ps[1].source_label = "32번"
+    html = renderer.render_html(ps)
+    assert "[31번]" in html and "[32번]" in html
+    assert "[지문 1]" not in html and "[지문 2]" not in html
+
+    # 일부만 번호가 있으면, 없는 지문은 위치 기준(i)으로 대체
+    ps2 = demo_passages()
+    ps2[0].source_label = "31번"          # 1번째만 번호
+    html2 = renderer.render_html(ps2)
+    assert "[31번]" in html2 and "[지문 2]" in html2
+
+    # 라벨 스레딩: build_passages(labels=…) 가 Passage.source_label 에 실린다
+    client = _FakeClient()
+    ps3 = pipeline.build_passages(client, ["b1", "b2"], labels=["45번", "46번"])
+    assert [p.source_label for p in ps3] == ["45번", "46번"]
+    print("✓ 지문 라벨(원본 문항번호·위치 폴백·labels 스레딩) 통과")
+
+
 def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None:
     """검토 메모: 자동 점검이 필요한 문항을 맨 끝 별도 페이지로 모은다."""
     from pypdf import PdfReader
@@ -687,24 +722,24 @@ def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -
         return ["Recovered scanned passage body. " * 12]   # 120자↑ 확보
 
     orig_vision = ingest.read_pdf_passages_vision
-    orig_read = ingest.read_pdf_passages
+    orig_read = ingest.read_pdf_passages_numbered
     ingest.read_pdf_passages_vision = _fake_vision
     tmp_out.mkdir(parents=True, exist_ok=True)
     fake_pdf = tmp_out / "dummy.pdf"
     fake_pdf.write_bytes(b"%PDF-1.4 dummy")   # 실제 파싱은 monkeypatch 로 우회
     try:
-        # (a) 글자 PDF: read_pdf_passages 가 본문을 주면 vision 호출 안 함
-        ingest.read_pdf_passages = lambda p: ["Real text passage body. " * 12]
+        # (a) 글자 PDF: 텍스트 지문이 나오면 vision 호출 안 함
+        ingest.read_pdf_passages_numbered = lambda p: [(None, "Real text passage body. " * 12)]
         out = ingest.load_bodies([fake_pdf], client=object(), vision_fallback=True)
         assert calls["vision"] == 0 and len(out) == 1
 
         # (b) 스캔 PDF(텍스트 0) + client·vision_fallback → vision 폴백
-        ingest.read_pdf_passages = lambda p: []
+        ingest.read_pdf_passages_numbered = lambda p: []
         out = ingest.load_bodies([fake_pdf], client=object(), vision_fallback=True)
         assert calls["vision"] == 1 and len(out) == 1
 
         # (c) vision_fallback=False 면 폴백 안 하고 안내 오류
-        ingest.read_pdf_passages = lambda p: []
+        ingest.read_pdf_passages_numbered = lambda p: []
         try:
             ingest.load_bodies([fake_pdf], client=object(), vision_fallback=False)
             assert False, "빈 PDF 는 오류여야 함"
@@ -713,7 +748,7 @@ def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -
         assert calls["vision"] == 1   # 호출 증가 없음
     finally:
         ingest.read_pdf_passages_vision = orig_vision
-        ingest.read_pdf_passages = orig_read
+        ingest.read_pdf_passages_numbered = orig_read
     print("✓ 조건부 Vision OCR 폴백(글자 PDF 건너뜀·스캔만 OCR) 통과")
 
 
@@ -736,6 +771,7 @@ if __name__ == "__main__":
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
     test_error_reduction_settings()
+    test_passage_source_label()
     test_review_flags_and_page()
     test_conditional_vision_fallback()
     print("\n모든 오프라인 테스트 통과 ✅")

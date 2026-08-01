@@ -101,11 +101,11 @@ def _clean_pdf_text(segment: str) -> str:
     return text
 
 
-def _split_by_workbook(raw: str) -> list[str] | None:
+def _split_by_workbook(raw: str) -> list[tuple[str, str]] | None:
     """WORKBOOK 워크시트: 헤더의 '문제번호'가 바뀌는 곳을 지문 경계로 삼는다.
 
     같은 번호가 이어지면(연속 페이지) 한 지문으로 합치고, 번호가 달라지면 새 지문.
-    헤더가 없으면 None(다른 분리 방식으로 폴백).
+    반환: [(문제번호, 본문 조각), …] (문항 번호를 함께 보존). 헤더가 없으면 None.
     """
     matches = list(_WB_PROBLEM.finditer(raw))
     if len(matches) < 2:
@@ -118,21 +118,46 @@ def _split_by_workbook(raw: str) -> list[str] | None:
             result[-1][1] += " " + seg
         else:
             result.append([num, seg])
-    return [seg for _, seg in result]
+    return [(num, seg) for num, seg in result]
+
+
+def _numbered_segments(raw: str) -> list[tuple[str | None, str]]:
+    """원문 텍스트를 '지문 단위'로 나눈다. 각 지문에 문항 번호가 있으면 함께 돌려준다.
+
+    ① WORKBOOK 문제번호별(번호 보존) → ② [Flow Edu] 꼬리말별(번호 없음) → ③ 통째로 1개.
+    """
+    wb = _split_by_workbook(raw)
+    if wb is not None:
+        return wb
+    if _PASSAGE_SPLIT.search(raw):
+        return [(None, s) for s in _PASSAGE_SPLIT.split(raw)]
+    return [(None, raw)]
+
+
+def _passages_from_raw_numbered(raw: str) -> list[tuple[str | None, str]]:
+    """정제까지 마친 [(문항번호|None, 영어 본문)] 목록(최소 분량 이상만 채택)."""
+    out: list[tuple[str | None, str]] = []
+    for num, seg in _numbered_segments(raw):
+        body = _clean_pdf_text(seg)
+        # 문제로 쓸 만한 최소 분량(영어 글자 수) 이상만 채택
+        if len(re.sub(r"[^A-Za-z]", "", body)) >= 120:
+            out.append((num, body))
+    return out
 
 
 def _passages_from_raw(raw: str) -> list[str]:
     """추출한 원문 텍스트 → 한글·머리글·워크시트 노이즈 제거 후 영어 지문들로 분리."""
-    segments = (_split_by_workbook(raw)                    # ① WORKBOOK 문제번호별
-                or (_PASSAGE_SPLIT.split(raw)              # ② [Flow Edu] 꼬리말별
-                    if _PASSAGE_SPLIT.search(raw) else [raw]))
-    passages: list[str] = []
-    for seg in segments:
-        body = _clean_pdf_text(seg)
-        # 문제로 쓸 만한 최소 분량(영어 글자 수) 이상만 채택
-        if len(re.sub(r"[^A-Za-z]", "", body)) >= 120:
-            passages.append(body)
-    return passages
+    return [body for _, body in _passages_from_raw_numbered(raw)]
+
+
+def read_pdf_passages_numbered(path: str | Path) -> list[tuple[str | None, str]]:
+    """PDF에서 [(문항번호|None, 영어 본문)] 목록. 워크시트면 문제번호를 함께 보존한다."""
+    return _passages_from_raw_numbered(extract.extract_raw_text(path))
+
+
+def read_hwp_passages_numbered(path: str | Path) -> list[tuple[str | None, str]]:
+    """HWP/HWPX에서 [(문항번호|None, 영어 본문)] 목록(PDF와 동일한 정제·분리)."""
+    return _passages_from_raw_numbered(_hwp.read_hwp_any(path))
 
 
 def read_pdf_passages(path: str | Path) -> list[str]:
@@ -246,6 +271,8 @@ def load_bodies(paths, client=None, vision_fallback: bool = True,
                 logger=None) -> list[tuple[str, str]]:
     """여러 파일 -> [(라벨, 지문본문)] 목록.
 
+    라벨은 원본 PDF의 '영어지문 문항번호'(예: "31번")이며, 번호를 알 수 없으면
+    빈 문자열이다(조판기가 위치 기준 "지문 1/2/…" 로 대체).
     보통 파일 1개 = 지문 1개지만, PDF 한 개에 지문이 여러 개면(예: EBS 워크시트)
     각각을 별도 지문으로 분리한다. 글자 없는 '스캔 PDF'는 client·vision_fallback 이
     있을 때만 조건부로 Claude 비전 OCR 로 처리한다(문제 파일만).
@@ -255,13 +282,14 @@ def load_bodies(paths, client=None, vision_fallback: bool = True,
         p = Path(p)
         ext = p.suffix.lower()
         if ext in PDF_EXTS or ext in HWP_EXTS:
-            passages = read_pdf_passages(p) if ext in PDF_EXTS else read_hwp_passages(p)
-            if not passages and ext in PDF_EXTS and vision_fallback and client is not None:
-                # 텍스트가 전혀 없는 스캔 PDF → 조건부 Vision OCR 폴백
+            numbered = (read_pdf_passages_numbered(p) if ext in PDF_EXTS
+                        else read_hwp_passages_numbered(p))
+            if not numbered and ext in PDF_EXTS and vision_fallback and client is not None:
+                # 텍스트가 전혀 없는 스캔 PDF → 조건부 Vision OCR 폴백(번호는 알 수 없음)
                 if logger:
                     logger.info("[%s] 글자 없는 스캔 PDF — Vision OCR 폴백", p.name)
-                passages = read_pdf_passages_vision(client, p, logger=logger)
-            if not passages:
+                numbered = [(None, b) for b in read_pdf_passages_vision(client, p, logger=logger)]
+            if not numbered:
                 if ext in PDF_EXTS:
                     raise ValueError(
                         f"'{p.name}': 글자가 없는(스캔본) PDF에서 지문을 찾지 못했습니다. "
@@ -271,13 +299,12 @@ def load_bodies(paths, client=None, vision_fallback: bool = True,
                     f"'{p.name}': HWP에서 영어 지문을 찾지 못했습니다. 지문을 복사해 "
                     "붙여넣거나 PDF/사진으로 저장해 올려 주세요."
                 )
-            if len(passages) == 1:
-                out.append((p.name, passages[0]))
-            else:
-                for i, body in enumerate(passages, 1):
-                    out.append((f"{p.name} #{i}", body))
+            # 라벨: 원본에 '영어지문 문항번호'가 있으면 'NN번', 없으면 빈 문자열
+            # (조판기가 위치 기준 "지문 1/2/…" 로 대체). 파일명은 라벨로 쓰지 않는다.
+            for num, body in numbered:
+                out.append((f"{num}번" if num else "", body))
         else:
             body = load_body(p, client=client)
             if body and body.strip():
-                out.append((p.name, body.strip()))
+                out.append(("", body.strip()))
     return out
