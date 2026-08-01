@@ -149,39 +149,57 @@
   .page.compact .pbox{ font-size:11px; padding:0 9px 6px; }
   .page.compact .pbox .cap{ font-size:11px; padding:2px 8px; margin:6px 0 4px; }
   .page.compact .pbox .gn{ font-size:11.5px; }
-  /* 뒷면(정리) 압축: 원문·전체해석 + 어휘 + 논리흐름을 1페이지에 */
-  .page.compact .bhead{ margin-bottom:9px; }
-  .page.compact .sec{ margin-bottom:8px; }
-  .page.compact .sec > .st{ font-size:12px; margin-bottom:5px; }
-  .page.compact .pcol{ padding:6px 9px; }
-  .page.compact .ptext{ font-size:11px; line-height:1.7; }        /* 원문·전체해석 확대 */
-  .page.compact .ptext .pnum{ font-size:8.5px; min-width:13px; height:13px; line-height:13px; }
-  .page.compact .vtab{ font-size:9.5px; }
-  .page.compact .vtab th, .page.compact .vtab td{ padding:3px 6px; }
-  /* 논리 흐름 축소 */
-  .page.compact .flow .step{ padding:4px 9px 5px; }
-  .page.compact .flow .step .lb{ font-size:9px; padding:1px 8px; }
-  .page.compact .flow .step .sn{ font-size:8.5px; }
-  .page.compact .flow .step .tx{ font-size:9.5px; }
-  .page.compact .flow .step .ez{ font-size:9px; margin-top:2px; padding-top:2px; }
-  .page.compact .flow .step .ez .ezt{ font-size:8px; padding:1px 5px; }
-  .page.compact .flow .arrow{ font-size:10px; margin:1px 0; }
+  /* 뒷면(정리) 'mid'(기본): 원문·전체해석 + 어휘 + 논리흐름을 보통 크기로 1면에 */
+  .page.compact .bhead{ margin-bottom:11px; }
+  .page.compact .sec{ margin-bottom:11px; }
+  .page.compact .sec > .st{ font-size:13px; margin-bottom:6px; }
+  .page.compact .pcol{ padding:8px 11px; }
+  .page.compact .ptext{ font-size:11.5px; line-height:1.72; }
+  .page.compact .ptext .pnum{ font-size:9px; min-width:14px; height:14px; line-height:14px; }
+  .page.compact .vtab{ font-size:11px; }
+  .page.compact .vtab th, .page.compact .vtab td{ padding:4px 8px; }
+  .page.compact .vtab th{ font-size:10.5px; }
+  .page.compact .flow .step{ padding:6px 11px 7px; }
+  .page.compact .flow .step .lb{ font-size:10px; padding:2px 8px; }
+  .page.compact .flow .step .sn{ font-size:9px; }
+  .page.compact .flow .step .tx{ font-size:11px; }
+  .page.compact .flow .step .ez{ font-size:10px; margin-top:3px; padding-top:3px; }
+  .page.compact .flow .step .ez .ezt{ font-size:8.5px; padding:1px 5px; }
+  .page.compact .flow .arrow{ font-size:12px; margin:1px 0; }
+
+  /* 뒷면 'fill'(내용 적은 지문): A4 한 면을 시원하게 꽉 채우는 큰 글씨 */
+  .page.compact.bfill .bhead{ margin-bottom:15px; }
+  .page.compact.bfill .sec{ margin-bottom:17px; }
+  .page.compact.bfill .sec > .st{ font-size:15px; margin-bottom:9px; }
+  .page.compact.bfill .pcol{ padding:12px 15px; }
+  .page.compact.bfill .ptext{ font-size:13.5px; line-height:1.95; }
+  .page.compact.bfill .ptext .pnum{ font-size:10.5px; min-width:16px; height:16px; line-height:16px; }
+  .page.compact.bfill .vtab{ font-size:13px; }
+  .page.compact.bfill .vtab th, .page.compact.bfill .vtab td{ padding:6px 10px; }
+  .page.compact.bfill .vtab th{ font-size:12.5px; }
+  .page.compact.bfill .flow .step{ padding:10px 15px 11px; }
+  .page.compact.bfill .flow .step .lb{ font-size:12px; padding:2px 10px; }
+  .page.compact.bfill .flow .step .sn{ font-size:11px; }
+  .page.compact.bfill .flow .step .tx{ font-size:13px; }
+  .page.compact.bfill .flow .step .ez{ font-size:12px; margin-top:5px; padding-top:5px; }
+  .page.compact.bfill .flow .step .ez .ezt{ font-size:10px; padding:1px 6px; }
+  .page.compact.bfill .flow .arrow{ font-size:14px; margin:3px 0; }
 
   /* 뒷면이 살짝 넘칠 때만 한 단계 더 압축(측정 후 btight). 장문이면 적용 안 함. */
-  .page.compact.btight{ padding:12px 16px 22px; }
-  .page.compact.btight .bhead{ margin-bottom:6px; }
-  .page.compact.btight .sec{ margin-bottom:5px; }
-  .page.compact.btight .sec > .st{ font-size:11px; margin-bottom:3px; }
-  .page.compact.btight .pcol{ padding:5px 8px; }
-  .page.compact.btight .ptext{ font-size:10px; line-height:1.5; }
-  .page.compact.btight .ptext .pnum{ font-size:8px; min-width:12px; height:12px; line-height:12px; }
-  .page.compact.btight .vtab{ font-size:9px; }
-  .page.compact.btight .vtab th, .page.compact.btight .vtab td{ padding:2px 5px; }
-  .page.compact.btight .flow .step{ padding:3px 8px 4px; }
-  .page.compact.btight .flow .step .lb{ font-size:8.5px; }
-  .page.compact.btight .flow .step .tx{ font-size:9px; }
-  .page.compact.btight .flow .step .ez{ font-size:8.5px; margin-top:1px; padding-top:1px; }
-  .page.compact.btight .flow .arrow{ font-size:9px; margin:0; }
+  .page.compact.btight{ padding:14px 18px 22px; }
+  .page.compact.btight .bhead{ margin-bottom:9px; }
+  .page.compact.btight .sec{ margin-bottom:9px; }
+  .page.compact.btight .sec > .st{ font-size:12.5px; margin-bottom:5px; }
+  .page.compact.btight .pcol{ padding:7px 10px; }
+  .page.compact.btight .ptext{ font-size:11px; line-height:1.65; }
+  .page.compact.btight .ptext .pnum{ font-size:9px; min-width:13px; height:13px; line-height:13px; }
+  .page.compact.btight .vtab{ font-size:10.5px; }
+  .page.compact.btight .vtab th, .page.compact.btight .vtab td{ padding:3px 6px; }
+  .page.compact.btight .flow .step{ padding:5px 10px 6px; }
+  .page.compact.btight .flow .step .lb{ font-size:10px; }
+  .page.compact.btight .flow .step .tx{ font-size:10.5px; }
+  .page.compact.btight .flow .step .ez{ font-size:10px; margin-top:2px; padding-top:2px; }
+  .page.compact.btight .flow .arrow{ font-size:11px; margin:1px 0; }
 
   /* 앞면(분석)이 넘칠 때 한 단계 더 압축(ultra). 여백·박스 먼저, 폰트는 바닥선까지만.
      가독성 바닥선: 영어 11.5px · 한글(직독직해/해석) 9.5px. 그래도 넘치는 장문은 2페이지. */
@@ -235,7 +253,12 @@
   .ptext .pnum{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
                 min-width:13px; height:13px; line-height:13px; text-align:center; border-radius:7px;
                 padding:0 2px; margin:0 2px 0 1px; vertical-align:1px; }
-  .sec{ margin-bottom:18px; page-break-inside:avoid; }
+  /* 뒷면이 2페이지가 될 때 첫 페이지를 꽉 채우고 남는 것만 넘기도록 자연스러운 분할 허용.
+     (원문/해석 블록·표의 행·흐름 단계는 각자 쪼개지지 않게 유지) */
+  .sec{ margin-bottom:18px; }
+  .pcols{ page-break-inside:avoid; }
+  .vtab tr{ page-break-inside:avoid; }
+  .flow .step{ page-break-inside:avoid; }
   .sec > .st{ display:inline-block; font-size:13px; font-weight:800; color:var(--navy);
               border-bottom:2px solid var(--navy); padding-bottom:2px; margin-bottom:9px; }
   /* 어휘 리스트 표 */
@@ -468,7 +491,7 @@
   {% endif %}
 
   {% if include_back and a.has_back and not only_answer and not only_test %}
-  <div class="page compact{% if a.back_tight %} btight{% endif %}">   {#- 뒷면(정리)은 항상 압축; 넘치면 btight 로 더 압축해 1페이지 -#}
+  <div class="page compact{% if a.back_density == 'fill' %} bfill{% elif a.back_density == 'tight' %} btight{% endif %}">   {#- 뒷면(정리): 1페이지에 맞는 가장 큰 밀도(fill>mid>tight) -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>

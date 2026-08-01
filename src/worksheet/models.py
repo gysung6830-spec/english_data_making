@@ -164,8 +164,10 @@ class Analysis:
     flow: list[FlowStep] = field(default_factory=list)
     # 직독직해(레이아웃 B) — 비어 있으면 렌더 시 원문/해석만 대체 표기한다.
     literal: list[LiteralSentence] = field(default_factory=list)
-    # 뒷면을 1페이지에 맞추기 위해 더 압축할지(렌더러가 측정해 설정). 장문이면 False 유지.
-    back_tight: bool = False
+    # 뒷면(정리) 밀도: 'fill'(크게 꽉 채움) | 'mid'(보통) | 'tight'(압축). 렌더러가 측정해
+    # 1페이지에 맞는 '가장 큰' 단계를 넣는다(A4 한 면을 시원하게 채우도록).
+    back_density: str = "mid"
+    back_tight: bool = False   # (구) 호환용 — 미사용
     # 앞면(분석) 밀도: '' | 'normal' | 'compact' | 'ultra'. 렌더러가 지문별로 측정해
     # 1페이지에 맞는 가장 큰(덜 압축된) 단계를 넣는다. 장문이면 ultra 여도 2페이지.
     front_density: str = ""

@@ -246,6 +246,7 @@ def _page_counts(htmls: list[str]) -> list[int]:
 
 
 _FRONT_TIERS = ["normal", "compact", "ultra"]
+_BACK_TIERS = ["fill", "mid"]     # 뒷면(정리): 1페이지 맞는 가장 큰 걸 택. 둘 다 안 되면 mid로 2쪽(가독성 우선; tight는 안 씀)
 
 
 def _fit_pages(analyses, fit_front: bool = True,
@@ -270,10 +271,10 @@ def _fit_pages(analyses, fit_front: bool = True,
                 htmls.append(render_a_html([a], include_back=False, include_guide=False,
                                            student=student, slevel=slevel, boxmode=boxmode))
         if getattr(a, "has_back", False):
-            for tight in (False, True):
-                a.back_tight = tight
-                jobs.append((i, "back", tight))
-                htmls.append(render_a_html([a], compact=True, include_guide=False,
+            for bd in _BACK_TIERS:            # fill > mid > tight (큰→작은)
+                a.back_density = bd
+                jobs.append((i, "back", bd))
+                htmls.append(render_a_html([a], include_guide=False,
                                            only_back=True, student=student, slevel=slevel))
     if not htmls:
         return
@@ -283,7 +284,7 @@ def _fit_pages(analyses, fit_front: bool = True,
         for a in lst:
             if fit_front:
                 a.front_density = "compact"
-            a.back_tight = False
+            a.back_density = "mid"
         return
 
     for i, a in enumerate(lst):
@@ -298,8 +299,11 @@ def _fit_pages(analyses, fit_front: bool = True,
                         chosen = t
                         break
             a.front_density = chosen
-        backs = {t: c for (j, kind, t), c in zip(jobs, counts) if j == i and kind == "back"}
-        a.back_tight = bool(backs) and backs.get(False, 2) > 1 and backs.get(True, 2) <= 1
+        backs = {bd: c for (j, kind, bd), c in zip(jobs, counts) if j == i and kind == "back"}
+        if backs:
+            # 1페이지에 맞는 '가장 큰' 뒷면 밀도. 어느 것도 1페이지가 안 되면(내용 많음)
+            # 작게 욱여넣지 말고 'mid'(읽기 좋은 크기)로 2페이지에 편다(가독성 우선).
+            a.back_density = next((bd for bd in _BACK_TIERS if backs.get(bd, 2) <= 1), "mid")
 
 
 # ---------------------------------------------------------------------------
