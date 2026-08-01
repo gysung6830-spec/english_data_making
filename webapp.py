@@ -113,7 +113,8 @@ INDEX_HTML = """
       <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
 
       <label>④ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
-      <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (6개 섹션)</label>
+      <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (교사용·정답 포함)</label>
+      <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
 
@@ -239,10 +240,11 @@ def analyze_route():
     # 만들 자료 선택 (아무것도 안 고르면 분석지만)
     which = OutputsCfg(
         analysis=bool(request.form.get("out_analysis")),
+        student=bool(request.form.get("out_student")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
     )
-    if not (which.analysis or which.wordlist or which.quiz):
+    if not (which.analysis or which.student or which.wordlist or which.quiz):
         which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
 
     # '은아 T' 문구 넣기 체크박스 (하단 저작권은 항상 유지)

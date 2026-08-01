@@ -5,7 +5,7 @@
 
 {% macro render_report(report, pno, total) %}
   <div class="doc-header">
-    <span class="doc-badge">지문 분석</span>
+    <span class="doc-badge">지문 분석{% if student %} · 학생용{% endif %}</span>
     {% if brand %}<span class="doc-badge2">{{ brand }}</span>{% endif %}
     <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
@@ -15,9 +15,9 @@
     <div class="section-head">
       <span class="sec-num">1</span>
       <span class="sec-title">주제</span>
-      <span class="sec-sub">Theme</span>
+      <span class="sec-sub">Theme{% if student %} · 빈칸을 채워보세요{% endif %}</span>
     </div>
-    <div class="summary-overall">{{ report.summary.overall | highlight_ko(report.summary.keywords) }}</div>
+    <div class="summary-overall">{% if student %}{{ report.summary.overall | blank_ko(report.summary.keywords) }}{% else %}{{ report.summary.overall | highlight_ko(report.summary.keywords) }}{% endif %}</div>
   </div>
 
   {# ②③ 구조 분석 + 출제 포인트를 2단(좌우)으로 배치 #}
@@ -39,7 +39,7 @@
       {% endif %}
       {% if report.structure.examples %}
       <div class="killer">
-        <span class="killer-lbl">이런 느낌이야</span>
+        <span class="killer-lbl">실생활 예시</span>
         <ol class="killer-list">
           {% for ex in report.structure.examples %}<li>{{ ex }}</li>{% endfor %}
         </ol>
@@ -62,7 +62,7 @@
   <div class="section s-exam">
     <div class="section-head">
       <span class="sec-num">3</span>
-      <span class="sec-title">‘치밀하게 분석한’ 출제 포인트</span>
+      <span class="sec-title">출제 포인트</span>
       <span class="sec-sub">Exam Points{% if brand %} · {{ brand }} tip{% endif %}</span>
     </div>
     <div class="exam-cards">
@@ -79,7 +79,8 @@
                 <span class="ref-loc">{{ parts[0] | trim }}</span>
                 <span class="ref-pron">{{ parts[1] | trim }}</span>
                 <span class="ref-arrow">→</span>
-                <span class="ref-target">{{ (parts[2:] | join(' - ')) | trim | replace('(', '') | replace(')', '') }}</span>
+                {%- if student -%}<span class="blank" style="min-width:180px"></span>
+                {%- else -%}<span class="ref-target">{{ (parts[2:] | join(' - ')) | trim | replace('(', '') | replace(')', '') }}</span>{%- endif -%}
               </div>
             {%- else -%}
               <div class="ref-line"><span class="ref-target">{{ ln | trim }}</span></div>
@@ -91,8 +92,12 @@
             <div class="imp-block">
             {%- for ln in block.split('\n') if ln.strip() -%}
               {%- if '함정' in ln -%}<div class="imp-trap">{{ ln | trim }}</div>
-              {%- elif '정답 표현' in ln -%}<div class="imp-ans">{{ ln | trim }}</div>
-              {%- elif '문맥상' in ln -%}<div class="imp-mean">{{ ln | trim }}</div>
+              {%- elif '정답 표현' in ln -%}
+                {%- if student -%}<div class="imp-ans">· 영어 정답 표현: <span class="blank" style="min-width:220px"></span></div>
+                {%- else -%}<div class="imp-ans">{{ ln | trim }}</div>{%- endif -%}
+              {%- elif '문맥상' in ln -%}
+                {%- if student -%}<div class="imp-mean">· 문맥상 의미: <span class="blank" style="min-width:220px"></span></div>
+                {%- else -%}<div class="imp-mean">{{ ln | trim }}</div>{%- endif -%}
               {%- else -%}<div class="imp-expr">{{ ln | trim }}</div>{%- endif -%}
             {%- endfor -%}
             </div>
@@ -101,6 +106,7 @@
         {%- elif '서술' in e.question_type -%}
           {%- for ln in e.content.split('\n') if ln.strip() -%}
             {%- if loop.first -%}<div class="narr-sent">{{ ln | trim }}</div>
+            {%- elif student -%}<div class="narr-reason narr-blank">쓰인 문법: <span class="blank" style="min-width:240px"></span></div>
             {%- else -%}<div class="narr-reason">{{ ln | trim }}</div>{%- endif -%}
           {%- endfor -%}
 
@@ -131,9 +137,9 @@
         <tr>
           <td class="cell-no">{{ v.no }}</td>
           <td class="cell-word">{{ v.word }}</td>
-          <td>{{ v.meaning }}</td>
-          <td>{{ v.synonyms }}</td>
-          <td>{{ v.antonyms }}</td>
+          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.meaning }}{% endif %}</td>
+          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.synonyms }}{% endif %}</td>
+          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.antonyms }}{% endif %}</td>
           <td class="cell-sent">{% if v.sentence_no %}{{ v.sentence_no }}{% endif %}</td>
         </tr>
       {% endfor %}
@@ -177,14 +183,14 @@
         <td class="lit-ko">
           <span class="lit-line">
             {%- for c in s.chunks -%}
-              <span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
+              {% if student %}<span class="blank" style="min-width:{{ [c.korean|length*7, 44]|max }}px"></span>{% else %}<span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% endif %}{% if not loop.last %}<span class="sl">/</span>{% endif %}
             {%- endfor -%}
           </span>
           {% set allwords = [] %}
           {% for c in s.chunks %}{% for w in c.words %}{% set _ = allwords.append(w) %}{% endfor %}{% endfor %}
           {% if allwords %}
           <span class="lit-words">
-            {%- for w in allwords -%}<b>{{ w.word }}</b> {{ w.meaning }}{% if not loop.last %} · {% endif %}{%- endfor -%}
+            {%- for w in allwords -%}<b>{{ w.word }}</b> {% if student %}<span class="blank" style="min-width:40px"></span>{% else %}{{ w.meaning }}{% endif %}{% if not loop.last %} · {% endif %}{%- endfor -%}
           </span>
           {% endif %}
         </td>
@@ -217,9 +223,9 @@
       <span class="sec-sub">굵은 단어 = 핵심 어휘</span>
     </div>
     <div class="esum-box">
-      {{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}
+      {% if student %}{{ report.vocab.english_summary | blank_words(report.vocab.items | map(attribute='word') | list) }}{% else %}{{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}{% endif %}
     </div>
-    {% if report.vocab.english_summary_ko %}
+    {% if report.vocab.english_summary_ko and not student %}
     <div class="esum-ko">{{ report.vocab.english_summary_ko }}</div>
     {% endif %}
   </div>
@@ -233,11 +239,11 @@
 {# ---- 앞부분: 원문 + 전체 해석 모음 ---- #}
 {% macro render_source(report, pno, total) %}
   <div class="doc-header">
-    <span class="doc-badge">원문 · 전체 해석</span>
+    <span class="doc-badge">원문 · 전체 해석{% if student %} · 학생용{% endif %}</span>
     <div class="doc-title">{{ report.item_no or pno }}. {{ report.summary.theme_en or report.title }}</div>
   </div>
   <table class="src2">
-    <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석</th></tr></thead>
+    <thead><tr><th class="src-h-en">원문</th><th class="src-h-ko">전체 해석{% if student %} <span class="src-h-hint">(직접 써보기)</span>{% endif %}</th></tr></thead>
     <tbody><tr>
       <td class="src-en">
         {%- for s in report.literal.sentences -%}
@@ -245,9 +251,15 @@
         {%- endfor -%}
       </td>
       <td class="src-ko">
-        {%- for s in report.literal.sentences -%}
-          <span class="src-no">{{ s.no }}</span>{% if s.translation %}{{ s.translation }}{% else %}{% for c in s.chunks %}{{ c.korean }}{% if not loop.last %} {% endif %}{% endfor %}{% endif %}{% if not loop.last %} {% endif %}
-        {%- endfor -%}
+        {%- if student -%}
+          {%- for s in report.literal.sentences -%}
+            <div class="src-blank"><span class="src-no">{{ s.no }}</span></div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for s in report.literal.sentences -%}
+            <span class="src-no">{{ s.no }}</span>{% if s.translation %}{{ s.translation }}{% else %}{% for c in s.chunks %}{{ c.korean }}{% if not loop.last %} {% endif %}{% endfor %}{% endif %}{% if not loop.last %} {% endif %}
+          {%- endfor -%}
+        {%- endif -%}
       </td>
     </tr></tbody>
   </table>

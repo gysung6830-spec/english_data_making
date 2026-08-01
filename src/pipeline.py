@@ -111,7 +111,13 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
         render.render_pdf(reports, p, footer_note=fn,
                           min_vocab=cfg.vocab.min, brand=brand)
-        recs.append({"kind": "analysis", "label": "📘 분석지", "path": p})
+        recs.append({"kind": "analysis", "label": "📘 분석지(교사용)", "path": p})
+
+    if getattr(sel, "student", False):
+        p = cfg.output_dir / f"{stem}_지문분석_학생용.pdf"
+        render.render_pdf(reports, p, footer_note=fn,
+                          min_vocab=cfg.vocab.min, brand=brand, student=True)
+        recs.append({"kind": "student", "label": "📗 분석지(학생용·빈칸)", "path": p})
 
     # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
     if sel.wordlist:

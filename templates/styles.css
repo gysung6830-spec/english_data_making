@@ -306,6 +306,18 @@ table.lit2 td {
   font-size: 8px; font-weight: 800; padding: 0 6px; border-radius: 8px; margin-right: 5px;
 }
 
+/* ---------- 학생용 빈칸 ---------- */
+.blank {
+  display: inline-block; min-width: 40px; height: 0.9em;
+  border-bottom: 1px solid #9aa0a6; vertical-align: baseline;
+}
+.blank-cell { width: 92%; min-width: 60px; }
+.src-blank {
+  border-bottom: 1px dashed #cbd5e1; min-height: 20px; margin-bottom: 6px;
+}
+.src-h-hint { font-size: 9px; font-weight: 600; color: var(--muted); }
+.narr-blank { text-decoration: none; }
+
 /* ---------- 하단 출처 ---------- */
 .footer-note {
   margin-top: 9px; padding-top: 6px; border-top: 1px solid var(--line);

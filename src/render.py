@@ -79,6 +79,52 @@ def _highlight_ko(text: str | None, keywords) -> Markup:
 _env.filters["highlight_ko"] = _highlight_ko
 
 
+def _blank_ko(text: str | None, keywords) -> Markup:
+    """학생용: 주제 문장 속 핵심 키워드를 '빈칸'으로 바꿔 학생이 채우게 한다."""
+    if not text:
+        return Markup("")
+    kws = sorted({k.strip() for k in (keywords or []) if k and k.strip()},
+                 key=len, reverse=True)
+    if not kws:
+        return escape(text)
+    pattern = re.compile("(" + "|".join(re.escape(k) for k in kws) + ")")
+    out: list[str] = []
+    last = 0
+    for m in pattern.finditer(text):
+        out.append(str(escape(text[last:m.start()])))
+        w = max(len(m.group(0)) * 12, 34)
+        out.append(f'<span class="blank" style="min-width:{w}px"></span>')
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+_env.filters["blank_ko"] = _blank_ko
+
+
+def _blank_words(text: str | None, words) -> Markup:
+    """학생용: 영어 요약문 속 핵심 단어를 빈칸으로 바꿔 학생이 채우게 한다."""
+    if not text:
+        return Markup("")
+    ws = sorted({w.strip() for w in (words or []) if w and w.strip()},
+                key=len, reverse=True)
+    if not ws:
+        return escape(text)
+    pattern = re.compile(r"\b(" + "|".join(re.escape(w) for w in ws) + r")\b", re.IGNORECASE)
+    out: list[str] = []
+    last = 0
+    for m in pattern.finditer(text):
+        out.append(str(escape(text[last:m.start()])))
+        w = max(len(m.group(0)) * 8, 42)
+        out.append(f'<span class="blank" style="min-width:{w}px"></span>')
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+_env.filters["blank_words"] = _blank_words
+
+
 def _split_blocks(text: str | None) -> list[str]:
     """빈 줄로 구분된 텍스트를 블록 목록으로 나눈다(함축의미 표현별 묶음용)."""
     if not text:
@@ -147,7 +193,7 @@ def _as_list(reports) -> list:
 
 
 def render_html(reports, footer_note: str = "", brand: str = "은아 T",
-                with_source: bool = True) -> str:
+                with_source: bool = True, student: bool = False) -> str:
     """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
 
     with_source=True 이면 앞부분에 '원문 + 전체 해석' 모음을 먼저 넣고, 그 뒤에 지문별 분석지.
@@ -156,7 +202,7 @@ def render_html(reports, footer_note: str = "", brand: str = "은아 T",
     """
     tmpl = _env.get_template("report.html.j2")
     return tmpl.render(reports=_as_list(reports), footer_note=footer_note,
-                       brand=brand, with_source=with_source)
+                       brand=brand, with_source=with_source, student=student)
 
 
 def _cap_report(report: schemas.Report, cap: int) -> schemas.Report:
@@ -201,7 +247,8 @@ def _trim_exam_report(report, ref_keep=None, imp_keep=None):
     return report.model_copy(update={"exam": report.exam.model_copy(update={"items": items})})
 
 
-def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T"):
+def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T",
+                student: bool = False):
     """한 지문이 2페이지에 들어오도록, 넘칠 때만 단계적으로 분량을 줄인다.
 
     순서(내용 손실이 적은 것부터):
@@ -213,7 +260,7 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
 
     def pages(rep):
         # 분석지 부분만으로 판정(앞의 원문+해석 모음 제외)
-        html = render_html([rep], footer_note, brand, with_source=False)
+        html = render_html([rep], footer_note, brand, with_source=False, student=student)
         return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
 
     if pages(report) <= 2:
@@ -247,7 +294,7 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
                fit_pages: bool = True, min_vocab: int = 8,
-               brand: str = "은아 T") -> Path:
+               brand: str = "은아 T", student: bool = False) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
@@ -256,14 +303,14 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
     rlist = _as_list(reports)
 
     def build(rs, with_source):
-        html = render_html(rs, footer_note, brand, with_source=with_source)
+        html = render_html(rs, footer_note, brand, with_source=with_source, student=student)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
     # 분석지 부분만으로 페이지 판정(앞의 원문+해석 모음은 제외)
     if fit_pages:
         analysis = build(rlist, with_source=False)
         if len(analysis.pages) > 2 * len(rlist):
-            rlist = [_fit_report(r, footer_note, css, min_vocab, brand) for r in rlist]
+            rlist = [_fit_report(r, footer_note, css, min_vocab, brand, student) for r in rlist]
     # 최종 출력은 원문+해석 모음 포함
     build(rlist, with_source=True).write_pdf(str(out_path))
     return out_path

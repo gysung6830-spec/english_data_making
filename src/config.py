@@ -52,6 +52,7 @@ class OutputsCfg:
     analysis: bool = True
     wordlist: bool = True
     quiz: bool = True
+    student: bool = False   # 학생용(정답 빈칸) 분석지
 
 
 @dataclass
@@ -116,6 +117,7 @@ def load_config(path: str | Path | None = None) -> Config:
             analysis=bool(outputs.get("analysis", True)),
             wordlist=bool(outputs.get("wordlist", True)),
             quiz=bool(outputs.get("quiz", True)),
+            student=bool(outputs.get("student", False)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )
