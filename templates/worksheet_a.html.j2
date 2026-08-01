@@ -94,11 +94,14 @@
   .sl{ color:#b6c0b6; font-weight:700; padding:0 4px; }
   .tsl{ margin:0 1px; }                         /* 영어 끊어읽기 '/' — 단어와 같은 baseline */
   .tsl .w{ color:#b6c0b6; font-weight:700; }
-  /* 직독직해 줄: 라벨을 번호(01) 밑에 맞추기 위해 번호 칸(26px)+간격(6px)만큼 왼쪽으로 */
-  .rdko{ margin-top:9px; margin-left:-32px; font-size:15px; line-height:1.95; color:#39424c; }
-  /* 직독직해 라벨: 번호(01) 밑에 맞춰 왼쪽(-32px). 영어 줄을 침범하지 않게 작게. */
+  /* 직독직해 줄: [뱃지 | 해석텍스트] 2단 그리드.
+     뱃지는 번호(01) 밑 '왼쪽 여백(gutter)'에만 있고, 한글 해석은 오른쪽 텍스트 칸에서만
+     흐른다 → 줄바꿈돼도 해석이 번호·뱃지 칸(왼쪽 세로선)을 침범하지 않는다. */
+  .rdko{ display:grid; grid-template-columns:auto 1fr; column-gap:6px; align-items:start;
+         margin-top:9px; margin-left:-32px; font-size:15px; line-height:1.95; color:#39424c; }
+  .rdtext{ min-width:0; }                    /* grid 자식 오버플로 방지(줄바꿈 정상) */
   .rdlbl{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
-          padding:1px 6px; border-radius:8px; margin-right:6px; vertical-align:1px; }
+          padding:1px 6px; border-radius:8px; margin-top:5px; white-space:nowrap; }
   .rdko .rc{ font-weight:500; }
   .kobox{ margin-top:7px; background:#eef4ec; border:1px solid #cfe0cf; border-left:4px solid var(--navy);
           border-radius:8px; padding:5px 10px; font-size:9.5px; line-height:1.45; color:#232a24; }
@@ -397,13 +400,13 @@
           </div>
           {# 끊어읽기: 직독직해(한글, / 구분) — 학생용은 빈칸 #}
           {% if s.reading_ko %}
-          <div class="rdko"><span class="rdlbl">직독직해</span>
+          <div class="rdko"><span class="rdlbl">직독직해</span><span class="rdtext">
             {%- if s_ko -%}
               {%- for c in s.reading_ko.split(' / ') -%}
                 <span class="rc">{{ c }}</span>{% if not loop.last %}<span class="sl">/</span>{% endif %}
               {%- endfor -%}
             {%- else -%}<span class="blk"></span>{%- endif -%}
-          </div>
+          </span></div>
           {% endif %}
           {# (온전한 해석 카드는 삭제 — 전체 해석은 뒷면 '원문·전체 해석'에 있음) #}
         </div>

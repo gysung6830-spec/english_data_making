@@ -392,13 +392,56 @@ def test_webapp_worksheet_flow():
     import worksheet_app
     c = worksheet_app.app.test_client()
     assert c.get("/").status_code == 200                      # 학습지 폼이 첫 화면
-    data = {"basename": "t_ws", "lecture_label": "20", "mock": "1",
+    data = {"basename": "t_ws", "start_no": "30", "mock": "1",
             "files": (io.BytesIO(b"x"), "s_ws.pdf")}
     r = c.post("/build", data=data, content_type="multipart/form-data")
     assert r.status_code == 200 and "완료".encode("utf-8") in r.data
     # 교사용+학생용 합본 PDF 가 나온다
     assert "학생용".encode("utf-8") in r.data and "합본".encode("utf-8") in r.data
+    # 폼에 '시작 문항 번호(자동 증가)' 입력이 있다
+    assert "start_no".encode("utf-8") in c.get("/").data
     print("PASS  웹앱 학습지 플로우(worksheet_app, 목) — 교사용+학생용 합본")
+
+
+def test_webapp_start_number_autoincrement():
+    # 수동 시작 문항 번호 → 지문마다 start, start+1, … 로 리본 라벨 자동 증가.
+    import types
+    import worksheet_app as wa
+    from src.worksheet.models import Analysis, Sentence, Token
+
+    def _mk(n):
+        return [Analysis(title_en="T", title_ko="ㅌ", lecture_label="",
+                         sentences=[Sentence(index=i + 1,
+                                    lines=[[Token(text="x")]], translation="ㅋ")
+                                    for i in range(1)])
+                for _ in range(n)]
+
+    captured = {}
+
+    def fake_build(client, cfg, tmp, header, **k):
+        return _mk(3)                     # 한 파일에 지문 3개
+
+    def fake_pair(analyses, out, **k):
+        captured["labels"] = [a.lecture_label for a in analyses]
+        out.write_bytes(b"%PDF-1.4\n%%EOF")   # 렌더 생략(가짜 PDF)
+
+    orig_build, orig_pair = wa.ws_pipeline.build_analyses_for_file, wa.ws_pipeline.render_worksheet_pair
+    orig_assess = wa.ws_quality.assess
+    wa.ws_pipeline.build_analyses_for_file = fake_build
+    wa.ws_pipeline.render_worksheet_pair = fake_pair
+    wa.ws_quality.assess = lambda *a, **k: {"ok": True, "reasons": []}
+    try:
+        c = wa.app.test_client()
+        # 목이 아니라 실제 경로를 타도록 api_key 를 준다(환경키 없을 때만 필요)
+        data = {"start_no": "30", "api_key": "sk-ant-test",
+                "files": (io.BytesIO(b"x"), "wb.pdf")}
+        c.post("/build", data=data, content_type="multipart/form-data")
+    finally:
+        wa.ws_pipeline.build_analyses_for_file = orig_build
+        wa.ws_pipeline.render_worksheet_pair = orig_pair
+        wa.ws_quality.assess = orig_assess
+    assert captured.get("labels") == ["30", "31", "32"], captured
+    print("PASS  웹앱 수동 시작 문항 번호(30→30·31·32 자동 증가)")
 
 
 def _make_hwpx(path, paragraphs):
@@ -704,6 +747,7 @@ def run_all():
     test_literal_builder_llm_path()
     test_render_b_from_literal()
     test_webapp_worksheet_flow()
+    test_webapp_start_number_autoincrement()
     test_hwp_support()
     test_merge_trailing_punct()
     test_detect_problem_numbers_regex()

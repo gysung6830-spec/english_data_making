@@ -58,10 +58,12 @@ WORKSHEET_HTML = """
         <div class=hint style="margin-top:6px">리본 + 구문 분석 + 포인트 박스 · 한 지문을 최대한 1페이지로 자동 압축</div>
       </fieldset>
 
-      <fieldset><legend>③ 강 번호 · 저장 파일명</legend>
-        <label>강 번호</label><input type=text name=lecture_label placeholder="예: 20 / 14강">
-        <label>저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
-        <input type=text name=basename placeholder="예: 2027수능특강_20강">
+      <fieldset><legend>③ 문항 번호 · 저장 파일명</legend>
+        <label>시작 문항 번호 <span class=hint>(리본에 표시 · 지문마다 +1 자동 증가)</span></label>
+        <input type=text name=start_no inputmode=numeric pattern="[0-9]*" placeholder="예: 30  →  30, 31, 32 …">
+        <div class=hint>비우면 PDF 머리글의 ‘N번’을 <b>자동 인식</b>하고, 그것도 없으면 ★로 둡니다.</div>
+        <label style="margin-top:10px">저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름)</span></label>
+        <input type=text name=basename placeholder="예: 2027수능특강_30번">
         <div class=hint>저장 이름: <b>(지문명)_포인트박스</b> · 영문 제목과 한글 부제는 지문 내용을 보고 <b>자동으로</b> 붙습니다.</div>
       </fieldset>
 
@@ -112,11 +114,13 @@ def build_route():
     kind = "포인트박스"   # 저장 파일명: (지문명)_포인트박스.pdf
     strength = "full"    # 태깅 강도는 항상 '전체'로 고정
 
+    # 시작 문항 번호(수동): 있으면 지문마다 start, start+1, … 로 리본 라벨을 자동 증가.
+    # 비우면 base_header.lecture_label 은 빈 값 → 파이프라인이 PDF 머리글의 'N번'을 자동 인식.
+    start_raw = (request.form.get("start_no") or "").strip()
+    start_no = int(start_raw) if start_raw.isdigit() else None
+
     # 영문 제목·한글 부제는 지문 내용에서 자동 생성(사용자 입력 아님). 날짜는 사용하지 않음.
-    base_header = WsHeader(
-        lecture_label=(request.form.get("lecture_label") or "").strip(),
-        strength=strength,
-    )
+    base_header = WsHeader(lecture_label="", strength=strength)
     raw_name = (request.form.get("basename") or "").strip()
     custom_base = _safe_name(raw_name) if raw_name else ""
 
@@ -131,6 +135,7 @@ def build_route():
     footer = cfg.design.footer_note or "(C)2026.Ortica영어.All rights reserved"
 
     results = []
+    counter = start_no          # 파일·지문을 가로질러 이어서 증가(수동 시작번호일 때만)
     for idx, f in enumerate(files, start=1):
         ext = Path(f.filename).suffix.lower()
         if ext not in ALLOWED_WS:
@@ -146,6 +151,11 @@ def build_route():
                 analyses = ws_pipeline.build_analyses_for_file(
                     client, cfg, tmp, base_header,
                     max_retries=cfg.processing.max_retries, layout=layout)
+            # 수동 시작 문항 번호: 지문마다 start, start+1, … 로 리본 라벨을 덮어씀(자동 증가).
+            if start_no is not None:
+                for a in analyses:
+                    a.lecture_label = str(counter)
+                    counter += 1
             if custom_base:
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
             else:
