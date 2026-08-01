@@ -12,7 +12,7 @@
 """
 from __future__ import annotations
 
-from .. import build as B
+from .. import answer_spread, build as B
 from .. import review
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, ContentOut
@@ -62,7 +62,8 @@ _PROMPT_HARD = """아래 '정본 지문'으로 '내용 일치' 문제를 만드�
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1, difficulty: str = HARD) -> tuple[str, str, list[str]]:
+             max_retries: int = 1, difficulty: str = HARD,
+             answer_pos: int | None = None) -> tuple[str, str, list[str]]:
     prompt = _PROMPT_PLAIN if difficulty == PLAIN else _PROMPT_HARD
     out: ContentOut = client.structured(
         system=SYSTEM,
@@ -73,5 +74,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_retries=max_retries,
     )
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    q, a = B.make_content(analysis.sentences, out.choices, out.answer_no, out.reason, wrong)
+    choices, answer_no = out.choices, out.answer_no
+    if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        choices, answer_no, wrong = answer_spread.place_answer(
+            choices, answer_no, answer_pos, wrong)
+    q, a = B.make_content(analysis.sentences, choices, answer_no, out.reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)

@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
-from . import analyzer, build2, difficulty, renderer, review, validator
+from . import analyzer, answer_spread, build2, difficulty, renderer, review, validator
 from ._concurrent import run_parallel
 from .generators import grammar as _grammar_gen
 from .generators.base import context
@@ -135,7 +135,7 @@ class GOut(BaseModel):
 # ---------------------------------------------------------------------------
 # 유형별 생성기
 # ---------------------------------------------------------------------------
-def _gen_A(client, analysis, body, max_retries=1):
+def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '어법·어휘 짝짓기(A)'를 만드세요. 밑줄 5개(ⓐ~ⓔ, marks: sent_no·word·shown).\n"
          "그중 정확히 2개만 오답: 1개는 어법 오류(shown 을 틀린 형태로), 1개는 반의어(shown 을 문맥상 "
          "어색한 반대말로). 나머지 3개는 shown=원본. choices 5개는 두 밑줄의 짝(예 'ⓐ, ⓒ'), "
@@ -143,11 +143,14 @@ def _gen_A(client, analysis, body, max_retries=1):
     out: AOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), AOut,
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
-    q, a = build2.make_A(analysis.sentences, marks, out.answer_no, out.reason, out.choices)
+    choices, answer_no = out.choices, out.answer_no
+    if answer_pos:   # 정답 위치 분산(짝 선지 재배열 — 정오 불변)
+        choices, answer_no, _ = answer_spread.place_answer(choices, answer_no, answer_pos)
+    q, a = build2.make_A(analysis.sentences, marks, answer_no, out.reason, choices)
     return q, a, []
 
 
-def _gen_B(client, analysis, body, max_retries=1):
+def _gen_B(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르고(지문에 "
          "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 '영어'. 정답=글 전체 논지를 "
          "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 는 한국어.\n\n{ctx}")
@@ -157,17 +160,21 @@ def _gen_B(client, analysis, body, max_retries=1):
     # 따옴표·대시 차이로 밑줄이 안 그어지지 않게, 지문 실제 표기로 교정(못 찾으면 원문 유지)
     _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
     phrase = exact or out.phrase
-    q, a = build2.make_B(analysis.sentences, phrase, out.choices, out.answer_no,
+    choices, answer_no = out.choices, out.answer_no
+    if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        choices, answer_no, wrong = answer_spread.place_answer(
+            choices, answer_no, answer_pos, wrong)
+    q, a = build2.make_B(analysis.sentences, phrase, choices, answer_no,
                          out.reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
 
 
-def _gen_C(client, analysis, body, max_retries=1):
-    # 어법(복수정답)은 1회 생성기를 그대로 재사용(이미 (q, a, flags) 형태를 돌려준다)
+def _gen_C(client, analysis, body, max_retries=1, answer_pos=None):
+    # 어법(복수정답)은 1회 생성기를 그대로 재사용(정답 위치가 읽는 순서로 정해져 분산 대상 아님)
     return _grammar_gen.generate(client, analysis, body, max_retries=max_retries)
 
 
-def _gen_D(client, analysis, body, max_retries=1):
+def _gen_D(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '어순 배열(D)'을 만드세요. 아래 [문장] 목록에서 문장 하나를 골라, answer 는 "
          "그 문장을 '글자 그대로'(단어·축약형·구두점 포함, 요약·수정·의역 금지) 복사한 것이어야 "
          "합니다(원래 배열이 정답). 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
@@ -180,7 +187,7 @@ def _gen_D(client, analysis, body, max_retries=1):
     return q, a, flags
 
 
-def _gen_E(client, analysis, body, max_retries=1):
+def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '요약문 빈칸(E)'을 만드세요. 지문을 한 문장 요약하되 핵심어 2곳을 (A)(B)로 "
          "비우고 before/mid/after 로 나눕니다. pairs 5개는 (a,b) 단어쌍 선지입니다.\n"
          "- 정답 쌍: (A)(B) 둘 다 논지에 맞되, 지문 단어를 '그대로 쓰지 말고 유의어(패러프레이즈)'로.\n"
@@ -192,12 +199,15 @@ def _gen_E(client, analysis, body, max_retries=1):
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
                                   max_tokens=2000, max_retries=max_retries, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
+    answer_no = out.answer_no
+    if answer_pos:   # 정답 위치 분산(단어쌍 선지 재배열 — 정오 불변)
+        pairs, answer_no, _ = answer_spread.place_answer(pairs, answer_no, answer_pos)
     q, a = build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
-                         out.answer_no, out.reason)
+                         answer_no, out.reason)
     return q, a, []
 
 
-def _gen_F(client, analysis, body, max_retries=1):
+def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '빈칸추론(F)'을 만드세요. 지문 전체를 보여주되, 글의 '가장 핵심(주제)'을 담은 "
          "어구 하나를 blank_phrase 로 지정합니다(지문에 그대로 있는 표현). 그 어구가 빈칸이 됩니다.\n"
          "choices 5개는 영어. 정답은 blank_phrase 와 '의미가 동일한 정확한 유의어 패러프레이즈'여야 "
@@ -211,12 +221,16 @@ def _gen_F(client, analysis, body, max_retries=1):
     if idx is None:
         raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{out.blank_phrase.strip()}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    q, a = build2.make_F(analysis.sentences, idx, phrase, out.choices,
-                         out.answer_no, out.reason, wrong)
+    choices, answer_no = out.choices, out.answer_no
+    if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        choices, answer_no, wrong = answer_spread.place_answer(
+            choices, answer_no, answer_pos, wrong)
+    q, a = build2.make_F(analysis.sentences, idx, phrase, choices,
+                         answer_no, out.reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
 
 
-def _gen_G(client, analysis, body, max_retries=1):
+def _gen_G(client, analysis, body, max_retries=1, answer_pos=None):
     def _extra(o: GOut):
         o.check()
     p = ("아래 정본으로 '내용일치 개수(G)'를 만드세요. 지문 문장을 패러프레이즈한 한국어 진술 5개를 "
@@ -236,12 +250,12 @@ _GENERATORS2 = {A: _gen_A, B: _gen_B, C: _gen_C, D: _gen_D, E: _gen_E, F: _gen_F
 # ---------------------------------------------------------------------------
 # 오케스트레이션
 # ---------------------------------------------------------------------------
-def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger):
-    """2회 한 유형 생성(실패 시 한 번 더). (q, a) 반환."""
+def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, answer_pos=None):
+    """2회 한 유형 생성(실패 시 한 번 더). (q, a, flags) 반환."""
     last_err = None
     for attempt in range(2):
         try:
-            return gen(client, analysis, body, max_retries=max_retries)
+            return gen(client, analysis, body, max_retries=max_retries, answer_pos=answer_pos)
         except Exception as e:  # noqa: BLE001
             last_err = e
             if logger:
@@ -250,9 +264,10 @@ def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger):
 
 
 def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
-                   level=None) -> Passage:
+                   level=None, passage_index=0) -> Passage:
     """2회 지문 1개 -> A~G. 유형은 병렬 생성, analysis 를 주면 분석을 건너뛴다.
-    level(상/중/하)로 전체 난이도를 조절한다."""
+    level(상/중/하)로 전체 난이도를 조절한다.
+    passage_index 로 정답 위치를 지문마다 다르게 분산한다(정답 번호 몰림 방지)."""
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
     if level:
@@ -261,7 +276,12 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
 
     def _task(t):
         gen = _GENERATORS2[t]
-        return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries, logger)
+        apos = (answer_spread.pick(passage_index, answer_spread.SLOTS2[t],
+                                   len(answer_spread.SLOTS2),
+                                   seed=answer_spread.seed_of(analysis.title))
+                if t in answer_spread.SLOTS2 else None)
+        return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries,
+                                      logger, apos)
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
     for t in TYPE_ORDER2:
@@ -286,7 +306,8 @@ def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
         if logger:
             logger.info("[2회 %d/%d] 지문 생성 중 …", i, len(bodies))
         passage = build_passage2(client, body, max_retries=max_retries,
-                                 logger=logger, analysis=analysis, level=level)
+                                 logger=logger, analysis=analysis, level=level,
+                                 passage_index=i - 1)
         if labels and i - 1 < len(labels):
             passage.source_label = labels[i - 1]
         passages.append(passage)

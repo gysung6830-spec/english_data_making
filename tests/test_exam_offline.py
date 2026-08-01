@@ -620,6 +620,46 @@ def test_error_reduction_settings() -> None:
     print("✓ 오류 감축 설정(적응형 사고·effort·재시도·기본값) 통과")
 
 
+def test_answer_spread() -> None:
+    """정답 위치 분산: 선지 재배열로 정답을 목표 위치로 옮기되 정오·오답근거는 보존."""
+    from exam import answer_spread as A
+
+    # place_answer: 정답이 target 위치로 가고, 나머지는 원래 상대순서 유지
+    choices = ["c1", "c2", "c3", "c4", "c5"]      # 정답 = 2번(c2)
+    wrong = {1: "w1", 3: "w3", 4: "w4", 5: "w5"}  # 오답 근거(정답 2 제외)
+    new_c, new_ans, new_wrong = A.place_answer(choices, 2, 5, wrong)
+    assert new_c[new_ans - 1] == "c2"             # 정답 내용 불변
+    assert new_ans == 5                            # 목표 위치로 이동
+    assert new_c == ["c1", "c3", "c4", "c5", "c2"]   # 나머지 상대순서 유지
+    # 오답 근거가 '새 위치'로 정확히 재매핑되는지(내용은 원래 선지에 붙어 따라감)
+    for pos, text in new_wrong.items():
+        assert new_c[pos - 1] == {"w1": "c1", "w3": "c3", "w4": "c4", "w5": "c5"}[text]
+    assert new_ans not in new_wrong                # 정답 위치엔 오답근거 없음
+
+    # 정답이 이미 목표면 그대로
+    nc, na, _ = A.place_answer(choices, 3, 3, None)
+    assert na == 3 and nc == choices
+
+    # pick: 지문마다 같은 유형이라도 위치가 달라져(몰림 방지) 여러 값이 나온다
+    p0 = [A.pick(0, s, len(A.SLOTS1)) for s in A.SLOTS1.values()]
+    p1 = [A.pick(1, s, len(A.SLOTS1)) for s in A.SLOTS1.values()]
+    assert p0 != p1                                # 지문0과 지문1의 정답 위치 패턴이 다름
+    assert all(1 <= v <= 5 for v in p0 + p1)
+
+    # 통합: 정답 위치가 실제로 여러 값으로 흩어지는지(FakeClient 4지문×주제·내용일치)
+    from exam import renderer
+    client = _FakeClient()
+    ps = pipeline.build_passages(client, ["b1", "b2", "b3", "b4"])
+    keys = []
+    for i, p in enumerate(ps):
+        _, quick = renderer._blocks([p], start=1)
+        for t, cell in zip(TYPE_ORDER, quick):
+            if t in ("topic", "content"):
+                keys.append(cell["key"])
+    assert len(set(keys)) >= 2, keys               # 한 번호로 몰리지 않음
+    print("✓ 정답 위치 분산(재배열·오답근거 재매핑·몰림 방지) 통과")
+
+
 def test_passage_source_label() -> None:
     """지문 라벨: 원본 문항번호가 있으면 '[31번]', 없으면 위치 기준 '[지문 i]'."""
     # 라벨 없음 → 위치 기준
@@ -771,6 +811,7 @@ if __name__ == "__main__":
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
     test_error_reduction_settings()
+    test_answer_spread()
     test_passage_source_label()
     test_review_flags_and_page()
     test_conditional_vision_fallback()

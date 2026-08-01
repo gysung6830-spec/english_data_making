@@ -1,7 +1,7 @@
 """③ 주제 생성기 (영어 선지). 지문은 원본 그대로, 주제만 출제(제목 X)."""
 from __future__ import annotations
 
-from .. import build as B
+from .. import answer_spread, build as B
 from .. import review
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, TopicOut
@@ -28,7 +28,8 @@ _PROMPT = """아래 '정본 지문'으로 '주제' 문제를 만드세요. 지�
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1) -> tuple[str, str, list[str]]:
+             max_retries: int = 1, answer_pos: int | None = None
+             ) -> tuple[str, str, list[str]]:
     out: TopicOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -38,5 +39,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_retries=max_retries,
     )
     wrong = {w.no: w.text for w in out.wrong_reasons}
-    q, a = B.make_topic(analysis.sentences, out.choices, out.answer_no, out.reason, wrong)
+    choices, answer_no = out.choices, out.answer_no
+    if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        choices, answer_no, wrong = answer_spread.place_answer(
+            choices, answer_no, answer_pos, wrong)
+    q, a = B.make_topic(analysis.sentences, choices, answer_no, out.reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)

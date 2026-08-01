@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from . import analyzer, difficulty, renderer, validator
+from . import analyzer, answer_spread, difficulty, renderer, validator
 from ._concurrent import run_parallel
 from .generators import content, grammar, insert, order, short_answer, topic, vocab
 from .llm import ClaudeClient
@@ -51,13 +51,14 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
                   logger=None, vocab_method: str = "synonym",
                   content_difficulty: str = "hard", analysis=None,
-                  level: str | None = None) -> Passage:
+                  level: str | None = None, passage_index: int = 0) -> Passage:
     """지문 원문 1개 -> 7종 문제/해설이 채워진 Passage.
 
     유형 7종은 서로 독립이므로 스레드로 동시에 생성한다(속도).
     analysis 를 주면 분석 호출을 건너뛴다(1회·2회 교차 공유용).
     level(상/중/하)을 주면 난이도와 함께 어휘 방식도 자동 결정한다
     (상=부정어삽입 · 중=유의어 · 하=원문단어).
+    passage_index 로 정답 위치를 지문마다 다르게 분산한다(정답 번호 몰림 방지).
     """
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
@@ -75,6 +76,11 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
             kwargs["method"] = vm
         elif t == CONTENT:
             kwargs["difficulty"] = content_difficulty
+        # 선지 순서가 자유로운 유형은 정답 위치를 고르게 분산(몰림 방지)
+        if t in answer_spread.SLOTS1:
+            kwargs["answer_pos"] = answer_spread.pick(
+                passage_index, answer_spread.SLOTS1[t], len(answer_spread.SLOTS1),
+                seed=answer_spread.seed_of(analysis.title))
         return lambda: _gen_one_type(gen, client, analysis, body, t,
                                      max_retries, logger, kwargs)
 
@@ -155,7 +161,7 @@ def build_passages(
         passage = build_passage(client, body, max_retries=max_retries,
                                 logger=logger, vocab_method=vocab_method,
                                 content_difficulty=content_difficulty,
-                                analysis=analysis, level=level)
+                                analysis=analysis, level=level, passage_index=i - 1)
         if labels and i - 1 < len(labels):
             passage.source_label = labels[i - 1]
         passages.append(passage)

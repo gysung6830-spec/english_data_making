@@ -1,0 +1,66 @@
+"""정답 위치 분산 — 정답 번호가 한쪽(예: 늘 ③)에 몰리지 않게 고르게 흩뿌린다.
+
+LLM 은 객관식 정답을 특정 번호(주로 가운데)에 몰아 배치하는 편향이 있다. 선지 순서가
+'자유로운' 유형(주제·내용일치·2회 A·B·E·F)은 선지를 재배열해 정답을 목표 위치로 옮겨도
+정오가 바뀌지 않으므로, 지문·유형별로 목표 위치를 정해 정답 번호를 고르게 분산한다.
+
+(어휘·어법·순서·삽입·G 등은 정답 위치가 '읽는 순서/개수'로 구조적으로 정해지므로 건드리지
+ 않는다 — 이미 내용에 따라 자연히 달라진다.)
+"""
+from __future__ import annotations
+
+import zlib
+
+# 1~5의 고정 스크램블(단조 증가 회피). 인덱스를 대면 목표 정답 위치가 나온다.
+_ORDER = (3, 5, 2, 4, 1)
+
+# 선지 순서가 자유로워 재배치 가능한 유형 → '지문 내 지역 슬롯'(분산 키)
+SLOTS1 = {"topic": 0, "content": 1}                 # 변형문제 1회
+SLOTS2 = {"A": 0, "B": 1, "E": 2, "F": 3}            # 변형문제 2회
+
+
+def seed_of(text: str) -> int:
+    """지문 내용으로 안정적인(프로세스 무관) 시드를 만든다.
+
+    같은 (지문 위치, 유형)이 시험지마다 늘 같은 번호가 되지 않도록 시작 위치를 지문
+    내용에 따라 다르게 한다(파이썬 hash 는 실행마다 달라 사용하지 않는다).
+    """
+    return zlib.crc32((text or "").encode("utf-8")) % len(_ORDER)
+
+
+def pick(passage_index: int, slot: int, per_passage: int, seed: int = 0) -> int:
+    """지문 index·유형 슬롯(+지문별 시드)으로 목표 정답 위치(1~5)를 정한다.
+
+    passage_index 가 커질수록, 같은 유형도 지문마다 다른 위치를 받아 몰림을 막고,
+    seed 로 시험지·지문마다 시작 위치를 달리해 '늘 같은 패턴'이 되지 않게 한다.
+    """
+    idx = seed + passage_index * per_passage + slot
+    return _ORDER[idx % len(_ORDER)]
+
+
+def place_answer(choices: list, answer_no: int, target_no: int,
+                 extra_by_pos: dict[int, str] | None = None):
+    """선지를 재배열해 정답을 target_no 위치로 옮긴다(정오 불변).
+
+    - choices: 선지 목록(문자열 또는 (a,b) 쌍 등 무엇이든).
+    - answer_no / target_no: 1-based. 나머지 선지는 원래 상대 순서를 유지한다.
+    - extra_by_pos: 위치로 매긴 부가정보(예: 오답 근거 {번호: 설명}) — 새 위치로 재매핑.
+    반환: (새 선지, 새 정답번호, 새 extra_by_pos|None)
+    """
+    n = len(choices)
+    if n == 0:
+        return choices, answer_no, extra_by_pos
+    a = (answer_no - 1) % n
+    t = (target_no - 1) % n
+    perm = [i for i in range(n) if i != a]   # 나머지(상대 순서 유지)
+    perm.insert(t, a)                         # 정답을 목표 슬롯에 끼워 넣음
+    new_choices = [choices[i] for i in perm]
+    new_answer = t + 1
+    new_extra = None
+    if extra_by_pos is not None:
+        new_extra = {}
+        for new_pos, old_i in enumerate(perm, 1):
+            old_pos = old_i + 1
+            if old_pos in extra_by_pos:
+                new_extra[new_pos] = extra_by_pos[old_pos]
+    return new_choices, new_answer, new_extra
