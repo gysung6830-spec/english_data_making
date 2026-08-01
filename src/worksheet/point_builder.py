@@ -77,7 +77,7 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
         if wrong:
             row += f" · <b>{escape(wrong)}</b>"
         rows.append(row)
-    return Point(kind="grammar", caption=f"문장 {sentence.index} 어법 Point",
+    return Point(kind="grammar", caption=f"{sentence.index}문장 - 어법 Point",
                  body_html="<br>".join(rows))
 
 
@@ -88,7 +88,7 @@ def rule_only_points(sentence: Sentence) -> list[Point]:
         return []
     lis = "".join(f"<li>{escape(f)}</li>" for f in facts[:5])
     body = f"<ul>{lis}</ul>"
-    return [Point(kind="grammar", caption=f"문장 {sentence.index} 어법 Point",
+    return [Point(kind="grammar", caption=f"{sentence.index}문장 - 어법 Point",
                   body_html=body)]
 
 
@@ -108,7 +108,7 @@ def build_points_prompt(sentence: Sentence, passage_summary: str, strength: str)
         "\n[작성 규칙]\n"
         f"- 이 문장의 포인트 카드를 {limit} 만드세요. 포인트가 약하면 빈 배열도 허용.\n"
         "- kind: 'reading'(내용 TMI) 또는 'grammar'(어법 Point).\n"
-        f"- caption: 내용 TMI 는 '문장 {n} 내용 TMI', 어법 Point 는 '문장 {n} 어법 Point' 로 정확히.\n"
+        f"- caption: 내용 TMI 는 '{n}문장 - 내용 TMI', 어법 Point 는 '{n}문장 - 어법 Point' 로 정확히.\n"
         "- 내용 TMI(reading): 그 문장이 '무슨 말인지'를 학생 눈높이의 친근한 반말('~야','~거야')로 "
         "1~2문장 풀어주세요. 필요하면 대비(A↔B)·비유를 곁들이되 과하지 않게. body_html 은 보통 평문.\n"
         "- 어법 Point(grammar): 위 analyzer 요소를 근거로 시험 어법을 짚으세요. "

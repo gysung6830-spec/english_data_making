@@ -418,7 +418,7 @@
           <div class="body">{% if s_gram %}{{ p.body_html | safe }}{% else %}<span class="blk"></span><span class="blk"></span>{% endif %}</div>
           {% endfor %}
           {% if s.has_feed %}
-          <span class="cap fcap">문장 {{ s.index }} 독해 Point</span>
+          <span class="cap fcap">{{ s.index }}문장 - 독해 Point</span>
           <div class="body">
             {%- if s_gram -%}
             {%- for r in s.refs %}<div class="fr"><span class="fl">지칭</span> {{ r }}</div>{% endfor -%}
