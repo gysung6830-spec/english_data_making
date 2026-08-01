@@ -132,6 +132,18 @@ def generate():
         if not bodies:
             return fail("지문을 추출하지 못했습니다. 파일 내용을 확인해 주세요.")
 
+        # 시작 문항번호(수동): 입력하면 지문 라벨을 이 번호부터 지문마다 1씩 증가시킨다
+        # (원본 PDF 문항번호/자동 표기를 덮어씀). 비우면 기존 방식 유지.
+        start_raw = (request.form.get("start_no") or "").strip()
+        if start_raw:
+            try:
+                start_n = int(start_raw)
+            except ValueError:
+                return fail("시작 문항번호는 숫자로 입력하세요.")
+            if start_n < 1:
+                return fail("시작 문항번호는 1 이상이어야 합니다.")
+            src_labels = [f"{start_n + i}번" for i in range(len(bodies))]
+
     # 기본 파일명
     if not doc_name:
         if demo:

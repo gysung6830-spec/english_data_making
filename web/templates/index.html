@@ -49,6 +49,16 @@ Second passage goes here."></textarea>
     </label>
   </div>
 
+  <div class="row">
+    <label class="field">
+      <span class="label">시작 문항번호 (선택)</span>
+      <input type="number" name="start_no" min="1" step="1" placeholder="예: 31 (비우면 자동)">
+      <span class="hint">입력하면 지문 라벨이 이 번호부터 <b>지문마다 1씩 증가</b>합니다
+        (예: 31 → <b>[31번] · [32번] …</b>). 비우면 원본 PDF 문항번호나 <b>지문 1·2</b>로 자동 표기.</span>
+    </label>
+    <div class="field"></div>
+  </div>
+
   <div class="field setbox">
     <span class="label">난이도 (여러 개 체크 가능 · 어휘 방식도 자동 연동) — 체크한 난이도가 한 PDF에 모두 합쳐집니다.</span>
     <label class="check"><input type="checkbox" name="levels" value="상" checked>
