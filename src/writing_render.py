@@ -8,11 +8,13 @@ HTML → PDF 는 Playwright(Chromium).
 """
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
+from pydantic import BaseModel, Field
 
 from .blanks_schemas import placeholders_in  # {{An}} 재사용
 from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER
@@ -44,6 +46,78 @@ class WritingPack:
     subtitle: str
     instruction: str
     sentences: list[WSentence]
+
+
+# ── LLM 응답 계층 (pydantic) ─────────────────────────────────────────
+class LLMWritingItem(BaseModel):
+    id: str                                       # "A1"
+    chunks: list[str] = Field(default_factory=list)  # 바른 순서의 조각들
+    answer: str = ""                              # 바른 배열(문장부호 포함). 비면 chunks 로 생성
+
+
+class LLMWritingSentence(BaseModel):
+    no: int
+    ko: str                                       # 우리말 뜻(길잡이)
+    template: str                                 # 원문에서 영작 포인트만 {{An}} 으로 바꾼 문장
+    items: list[LLMWritingItem] = Field(default_factory=list)
+
+
+class LLMWritingPack(BaseModel):
+    title: str = ""
+    subtitle: str = ""
+    sentences: list[LLMWritingSentence] = Field(default_factory=list)
+
+
+_DEFAULT_INSTRUCTION = "우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열하여 문장을 완성하시오."
+
+
+def _shuffled_display(chunks: list[str]) -> str:
+    """조각들을 무작위로 섞어 '〈 a / b / c 〉' 표시 문자열을 만든다.
+    조각이 2개 이상이면 원래 순서와 다르게 되도록 몇 번 다시 섞는다."""
+    parts = [c.strip() for c in chunks if c and c.strip()]
+    if not parts:
+        return "〈 〉"
+    if len(parts) >= 2:
+        shuffled = parts[:]
+        for _ in range(8):
+            random.shuffle(shuffled)
+            if shuffled != parts:
+                break
+        parts = shuffled
+    return "〈 " + " / ".join(parts) + " 〉"
+
+
+def _item_answer(it: LLMWritingItem) -> str:
+    if it.answer and it.answer.strip():
+        return it.answer.strip()
+    return " ".join(c.strip() for c in it.chunks if c and c.strip())
+
+
+def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: str,
+                       instruction: str = "") -> WritingPack:
+    """검증된 LLM 응답 -> 렌더용 WritingPack. display 는 코드가 조각을 섞어 생성한다."""
+    sents: list[WSentence] = []
+    for s in llm.sentences:
+        by_id = {it.id: it for it in s.items}
+        order = placeholders_in(s.template)
+        items: list[WItem] = []
+        # 자리표시자 등장 순서로 짝짓되, id 가 안 맞으면 순서대로 매핑한다.
+        pairs = ([(pid, by_id[pid]) for pid in order]
+                 if set(order) == set(by_id) and len(order) == len(s.items)
+                 else list(zip(order, s.items)))
+        for pid, src in pairs:
+            items.append(WItem(id=pid, display=_shuffled_display(src.chunks),
+                               answer=_item_answer(src)))
+        sents.append(WSentence(no=s.no, template=s.template, ko=s.ko, items=items))
+    return WritingPack(header=header, title=title or "", subtitle=subtitle or "",
+                       instruction=instruction or _DEFAULT_INSTRUCTION, sentences=sents)
+
+
+def validate_llm_writing(llm: LLMWritingPack) -> None:
+    """영작 워크북 응답 검증. 자리표시자 수와 items 수가 달라도 build 가 등장 순서로
+    가능한 만큼만 짝지어 렌더하므로 실패시키지 않는다(문장이 비면 재요청)."""
+    if not llm.sentences:
+        raise ValueError("영작 워크북 문장이 비어 있습니다.")
 
 
 # ── 렌더 ─────────────────────────────────────────────────────────────

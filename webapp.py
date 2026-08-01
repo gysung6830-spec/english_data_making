@@ -281,6 +281,7 @@ def analyze_route():
     wb_books = []       # 통합 워크북 파일간 합본용
     wb_packs = []       # 단일 유형 산문 워크시트 파일간 합본용
     wb_bsets = []       # 통합 워크북에 포함되는 빈칸형(맨 뒤) 파일간 합본용
+    wb_wpacks = []      # 통합 워크북에 포함되는 영작(가장 마지막) 파일간 합본용
     n_files_ok = 0      # 산출물을 낸 파일 수(파일간 합본 여부 판단용)
     for f in files:
         ext = Path(f.filename).suffix.lower()
@@ -312,17 +313,20 @@ def analyze_route():
                 wbs = [pipeline._mock_workbook_for_pdf(cfg, tmp)]
                 packs = [pipeline._mock_prose_pack_for_pdf(cfg, tmp)]
                 file_bsets = [pipeline._mock_blank_set_for_pdf(cfg, tmp, 1)]
+                file_wpacks = [pipeline._mock_writing_pack_for_pdf(cfg, tmp)]
             else:
-                wbs, packs, file_bsets = pipeline.build_workbook_bundle_for_pdf(client, cfg, tmp)
+                wbs, packs, file_bsets, file_wpacks = pipeline.build_workbook_bundle_for_pdf(
+                    client, cfg, tmp)
             out = OUTPUT_DIR / f"{out_name(stem, '_통합', '_워크북')}.pdf"
-            # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북(맨 뒤)을 한 PDF 로
+            # 통합 카드(앞) → 단일 유형 4종 → 빈칸 워크북 → 영작 워크북(맨 뒤)을 한 PDF 로
             pipeline.render_workbook_with_prose_pdf(
                 wbs, packs, out, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
-                blank_wb=pipeline._build_blank_workbook(file_bsets))
+                blank_wb=pipeline._build_blank_workbook(file_bsets), writing_packs=file_wpacks)
             wb_books.extend(wbs)
             wb_packs.extend(packs)
             wb_bsets.extend(file_bsets)
-            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸 (지문 {len(wbs)}편){warn_note}",
+            wb_wpacks.extend(file_wpacks)
+            results.append({"name": f"{f.filename} · 통합+단일유형+빈칸+영작 (지문 {len(wbs)}편){warn_note}",
                             "ok": True, "out": out.name})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
@@ -337,7 +341,7 @@ def analyze_route():
             combined = OUTPUT_DIR / f"{(custom + '_통합합본') if custom else '통합워크북_합본'}.pdf"
             pipeline.render_workbook_with_prose_pdf(
                 wb_books, wb_packs, combined, footer_note=cfg.design.footer_note, scratch=OUTPUT_DIR,
-                blank_wb=pipeline._build_blank_workbook(wb_bsets))
+                blank_wb=pipeline._build_blank_workbook(wb_bsets), writing_packs=wb_wpacks)
             results.append({"name": "📚 통합 워크북 합본", "ok": True, "out": combined.name})
         except Exception as e:
             traceback.print_exc()
