@@ -178,13 +178,16 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "- gloss_en / gloss_ko: 직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 문장일 때만, 그 함축 의미를 "
         "쉬운 영어 한 문장(gloss_en)과 한글 한 문장(gloss_ko)으로 '병기'. 아니면 둘 다 빈 문자열.\n"
         "- badge: 서술형 출제 후보면 '서'. (빈출은 뱃지 대신 노란 형광 hl='y' 로 표시)\n"
-        "- 끊어읽기(직독직해): 문장을 의미 단위로 나누되, '영어 끊는 지점'과 '한글 끊는 지점'이 정확히 일치해야 합니다.\n"
+        "- 끊어읽기(직독직해): 영어와 한글의 '끊는 지점'이 정확히 1:1 이어야 합니다.\n"
         "    · slash: 각 의미 단위의 '마지막 토큰'에 slash=true 로 영어 끊어읽기 경계(/)를 표시.\n"
-        "    · reading_ko: 각 영어 조각을 그 자리 순서 그대로 직독직해해 ' / ' 로 이어 씁니다.\n"
-        "    · ⚠️ 핵심: slash 로 나뉘는 영어 조각의 '개수'와 reading_ko 의 ' / ' 조각 '개수'가 반드시 같아야 하고, "
-        "i번째 한글 조각 = i번째 영어 조각의 해석으로 1:1 대응해야 합니다. 영어를 4조각으로 끊었으면 한글도 정확히 4조각.\n"
-        "      예: 영어 'Imagine / you have the best tea / and you put it into a bag /' (3조각) → "
-        "한글 '상상해 보라 / 당신이 최고의 차를 가지고 있고 / 그것을 봉지에 넣는다고' (3조각).\n"
+        "    · reading_ko: '배열(list)'입니다. slash 로 나눈 '영어 조각마다 정확히 한 개'의 한글 직독직해를 "
+        "같은 순서로 담으세요. 즉 배열 길이 = slash 개수(=영어 조각 수), i번째 원소 = i번째 영어 조각의 해석.\n"
+        "    · ⚠️ 한글을 영어보다 '더 잘게' 쪼개지 마세요. 접속사·부사(그러나·왜냐하면·그래서·즉 등) 뒤에서 임의로 "
+        "더 끊지 말고, 오직 영어 slash 경계에서만 끊습니다. 한 영어 조각 안의 접속사는 그 조각의 한글에 함께 넣으세요.\n"
+        "      예: 영어 3조각 [\"Certain nomadic tribes don't have much,\", \"yet they are happy to share\", "
+        "\"because it is in their interest to do so.\"] → reading_ko(3개) "
+        "[\"어떤 유목 부족들은 가진 것이 많지 않다\", \"그러나 그들은 기꺼이 나눈다\", \"왜냐하면 그렇게 하는 것이 그들에게 이익이기 때문이다\"].\n"
+        "    · 제출 전, 영어 slash 개수와 reading_ko 배열 길이가 같은지 스스로 확인하세요.\n"
         "    · translation(온전한 해석)과 달리 reading_ko 는 어순대로 끊어 읽는 해석입니다.\n"
     )
 
@@ -233,16 +236,40 @@ def _merge_trailing_punct(lines: list[list[Token]]) -> list[list[Token]]:
     return lines
 
 
+def _english_chunk_count(lines: list[list[Token]]) -> int:
+    """영어 끊어읽기 조각 수 = slash 경계 수(마지막 조각에 slash 없으면 +1)."""
+    toks = [t for ln in lines for t in ln]
+    if not toks:
+        return 0
+    slashes = sum(1 for t in toks if t.slash)
+    return slashes if toks[-1].slash else slashes + 1
+
+
+def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
+    """직독직해 표시 문자열을 만든다. 영어 조각 수와 한글 조각 수가 다르면(정렬 실패)
+    슬래시 없이 이어 붙여, 어긋난 '/'가 보이지 않도록 한다(오정렬 방지)."""
+    chunks = [c.strip() for c in (chunks or []) if c and c.strip()]
+    if not chunks:
+        return ""
+    e = _english_chunk_count(lines)
+    if e >= 2 and len(chunks) != e:      # 정렬 불가 → 연속 표기(슬래시 제거)
+        return " ".join(chunks)
+    return " / ".join(chunks)
+
+
 def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     lines = [[_tok(t) for t in ln.tokens] for ln in sa.lines if ln.tokens]
     lines = _merge_trailing_punct(lines)
     if not lines:  # LLM 이 lines 를 비우면 원문을 통째로 한 줄로
         lines = [[Token(text=sa.translation or "")]]
+    reading = getattr(sa, "reading_ko", []) or []
+    if isinstance(reading, str):         # 방어: 문자열이면 분해
+        reading = [c for c in reading.split("/")]
     return Sentence(
         index=index,
         lines=lines,
         translation=sa.translation or "",
-        reading_ko=getattr(sa, "reading_ko", "") or "",
+        reading_ko=_reading_ko_aligned(lines, reading),
         badge=sa.badge or None,
         gloss_en=sa.gloss_en or None,
         gloss_ko=sa.gloss_ko or None,

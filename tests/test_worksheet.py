@@ -130,6 +130,38 @@ def test_analyze_sentence_llm_path():
     print("PASS  analyzer LLM 경로 → Sentence 변환")
 
 
+def test_reading_ko_list_alignment():
+    # 직독직해를 '영어 조각당 한 개' 리스트로 받아 정렬. 개수 맞으면 / 유지.
+    payload = json.dumps({
+        "lines": [{"tokens": [
+            {"text": "Certain tribes don't have much,", "slash": True},
+            {"text": "yet they share", "slash": True},
+            {"text": "because it helps them.", "slash": True},
+        ]}],
+        "translation": "어떤 부족은 가진 게 적지만 나눈다.",
+        "reading_ko": ["어떤 부족은 가진 게 많지 않다", "그러나 그들은 나눈다",
+                       "왜냐하면 그것이 그들에게 도움이 되기 때문이다"],
+    })
+    s = analyzer.analyze_sentence(_fake_client([payload]),
+                                  "Certain tribes don't have much, yet they share because it helps them.",
+                                  3, strength="full")
+    assert s.reading_ko.count(" / ") == 2        # 영어 3조각 = 한글 3조각 → / 유지
+
+    # 한글이 영어보다 잘게 쪼개지면(과분할) → 슬래시 제거하고 연속 표기(오정렬 방지)
+    payload2 = json.dumps({
+        "lines": [{"tokens": [
+            {"text": "A,", "slash": True},
+            {"text": "B", "slash": True},
+            {"text": "C.", "slash": True},
+        ]}],
+        "translation": "가나다.",
+        "reading_ko": ["가", "나", "그러나", "다", "왜냐하면"],   # 5개 vs 영어 3개
+    })
+    s2 = analyzer.analyze_sentence(_fake_client([payload2]), "A, B C.", 4, strength="full")
+    assert " / " not in s2.reading_ko and "가 나 그러나 다 왜냐하면" == s2.reading_ko
+    print("PASS  직독직해 리스트 정렬(개수 일치 / 과분할 시 연속 표기)")
+
+
 def test_build_points_llm_path():
     payload = json.dumps({"points": [
         {"kind": "grammar", "caption": "3번 문장 어법 Point",
@@ -634,6 +666,7 @@ def run_all():
     test_rule_hints()
     test_rule_only_sentence_and_none()
     test_analyze_sentence_llm_path()
+    test_reading_ko_list_alignment()
     test_build_points_llm_path()
     test_build_points_fallback_to_rules()
     test_render_a_and_b()

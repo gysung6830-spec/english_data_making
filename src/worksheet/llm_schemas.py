@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -36,11 +36,20 @@ class SentenceAnalysis(BaseModel):
 
     lines: list[LineSpec] = Field(default_factory=list)
     translation: str = ""   # 온전한 해석(자연스러운 한 문장, 박스에 표시)
-    reading_ko: str = ""    # 직독직해(끊어읽기) 한글, 의미 단위를 ' / '로 구분
+    # 직독직해(끊어읽기): '영어 slash 조각당 한 개'의 한글 배열(순서 1:1 대응).
+    reading_ko: list[str] = Field(default_factory=list)
     badge: str = ""         # '빈'(빈출)·'서'(서술형) 등 짧은 뱃지. 없으면 빈 문자열
     gloss_en: str = ""      # 함축 의미 영어(맥락 없이 안 풀리는 문장에만). 없으면 ""
     gloss_ko: str = ""      # 함축 의미 한글(영어와 병기). 없으면 ""
     refs: list[str] = Field(default_factory=list)  # 대명사 지칭(예: 'it → the teabag'). 없으면 []
+
+    @field_validator("reading_ko", mode="before")
+    @classmethod
+    def _reading_to_list(cls, v):
+        # 구버전 호환: 문자열(' / ' 구분)로 오면 리스트로 변환.
+        if isinstance(v, str):
+            return [c.strip() for c in v.split("/") if c.strip()]
+        return v
 
 
 # ---------------------------------------------------------------------------
