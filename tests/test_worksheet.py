@@ -722,6 +722,28 @@ def test_font_embed_nanumsquareround():
     print("PASS  나눔스퀘어라운드 폰트 임베드(서브셋)")
 
 
+def test_vocab_test_and_answer_key():
+    from src.worksheet import mock, renderer
+    a = mock.mock_analysis()
+    renderer._ensure_vocab_test(a)
+    order = [v.word for v in a.vocab_test]
+    # (1) 결정적 셔플: 같은 지문이면 항상 같은 순서
+    b = mock.mock_analysis()
+    renderer._ensure_vocab_test(b)
+    assert [v.word for v in b.vocab_test] == order
+    # (2) 누락·중복 없이 원본 단어 전부 포함, 순서는 원본과 달라짐(랜덤)
+    assert sorted(order) == sorted(v.word for v in a.vocab)
+    assert order != [v.word for v in a.vocab]
+    # (3) 테스트 페이지: '단어 TEST' 제목 + 영어 단어 등장
+    html_t = renderer.render_a_html([a], include_test=True, include_guide=False)
+    assert "단어 TEST" in html_t and a.vocab[0].word in html_t
+    # (4) 정답장(only_answer): 단어—뜻만, 유의어/반의어 제외
+    html_a = renderer.render_a_html([a], only_answer=True)
+    assert "정답" in html_a and a.vocab[0].meaning in html_a
+    assert a.vocab[0].syn not in html_a          # 유의어는 테스트/정답에서 제외
+    print("PASS  단어 TEST(랜덤·결정적) + 정답장(유의어/반의어 제외)")
+
+
 def run_all():
     test_splitter_circled()
     test_splitter_punct_protects_abbrev_and_decimal()
@@ -746,6 +768,7 @@ def run_all():
     test_overview_builder_llm_path()
     test_literal_builder_llm_path()
     test_render_b_from_literal()
+    test_vocab_test_and_answer_key()
     test_webapp_worksheet_flow()
     test_webapp_start_number_autoincrement()
     test_hwp_support()

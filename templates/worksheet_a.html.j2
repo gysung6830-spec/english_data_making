@@ -304,6 +304,31 @@
   .pbox.stu .body{ min-height:30px; }
   .ptext.stu .blk{ display:block; width:100%; height:13px; margin:6px 0; }
   td.blkcell{ height:20px; }                    /* 어휘표 빈칸 셀 */
+
+  /* ---- 단어 TEST(지문별) : 어휘표의 '단어'만(유의어/반의어 제외) 랜덤 출제 ---- */
+  .wtsub{ font-size:12px; color:#5b6172; margin:2px 0 10px; }
+  .wtest{ display:grid; grid-template-columns:1fr 1fr; gap:0 34px; }
+  .wtrow{ display:grid; grid-template-columns:24px auto 1fr; align-items:end; gap:10px;
+          padding:9px 0 6px; border-bottom:1px dashed #cdd6cd; }
+  .wtn{ color:var(--navy); font-weight:800; font-size:12px; text-align:right; padding-bottom:1px; }
+  .wtw{ font-size:15px; font-weight:700; color:#20242e; white-space:nowrap; }
+  .wtblank{ min-height:15px; }                   /* 뜻을 쓰는 빈칸(밑줄은 .wtrow 하단 점선) */
+
+  /* ---- 단어 TEST 정답(맨 마지막에 모아서, 페이지 나눔 없이 연속) ---- */
+  .answers{ background:var(--page-bg); border-radius:22px; padding:20px 24px 26px;
+            page-break-before:always; }
+  .answers .ahead{ display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+  .answers .ahead .tag{ background:var(--navy); color:#fff; font-weight:800; font-size:13px;
+                        padding:3px 12px; border-radius:6px; }
+  .answers .ahead h2{ font-size:17px; font-weight:800; margin:0; color:#1c2030; }
+  .ansblock{ margin-bottom:11px; break-inside:avoid; page-break-inside:avoid; }
+  .anshd{ font-weight:800; font-size:12px; color:var(--navy);
+          border-bottom:1.5px solid #b9ccb9; padding-bottom:3px; margin-bottom:5px; }
+  .answrap{ display:grid; grid-template-columns:1fr 1fr; gap:2px 26px; }
+  .ansitem{ font-size:11px; line-height:1.55; color:#232a24; }
+  .ansitem .an{ color:var(--navy); font-weight:800; }
+  .ansitem .aw{ font-weight:700; }
+  .ansitem .am{ color:#4a5064; }
 </style>
 </head>
 <body>
@@ -311,7 +336,7 @@
 {%- set s_gram  = (not student) or slevel == 'interp' -%}
 {%- set s_slash = (not student) or slevel != 'blank' -%}
 {%- set s_ko    = not student -%}   {# 직독직해·해석·전체해석·어휘뜻·논리흐름 텍스트 #}
-{% if include_guide and not only_back %}
+{% if include_guide and not only_back and not only_answer %}
 <div class="page">
   <div class="ghead">
     <div class="gribbon">활용<br>가이드</div>
@@ -355,7 +380,7 @@
 </div>
 {% endif %}
 {% for a in analyses %}
-  {% if not only_back %}
+  {% if not only_back and not only_answer %}
   {%- set fd = a.front_density -%}
   <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
     <div class="head">
@@ -385,11 +410,11 @@
                   {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
                   <span class="w{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}{% if is_vocab %} vu{% endif %}{% endif %}">{{ t.text | replace('(','') | replace(')','') }}</span>
                   {# 아래: 어법 번호 / 유의어·반의어 / 오답 (학생용 blank/slash 는 숨김) #}
-                  {%- if s_gram and (t.above or t.note or t.wrong) -%}
+                  {# 아래 주석: (X) 오답형은 어법 Point 박스에 이미 있으므로 본문에선 생략(중복 회색글자 제거) #}
+                  {%- if s_gram and (t.above or t.note) -%}
                   <span class="unders">
                     {%- if t.above %}<span class="ann {{ 'syn' if t.above.startswith('=') else 'ant' }}">{{ t.above }}</span>{% endif -%}
                     {%- if t.note %}<span class="ann {% if t.note_kind == 'red' %}red{% elif t.note.startswith('=') %}syn{% elif t.note.startswith('↔') %}ant{% else %}gray{% endif %}">{{ t.note }}</span>{% endif -%}
-                    {%- if t.wrong %}<span class="ann x">{{ t.wrong }}</span>{% endif -%}
                   </span>
                   {%- endif -%}
                 </span>
@@ -438,7 +463,7 @@
   </div>
   {% endif %}
 
-  {% if include_back and a.has_back %}
+  {% if include_back and a.has_back and not only_answer %}
   <div class="page compact{% if a.back_tight %} btight{% endif %}">   {#- 뒷면(정리)은 항상 압축; 넘치면 btight 로 더 압축해 1페이지 -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
@@ -510,6 +535,37 @@
     {# 저작권(좌)·페이지번호(우)는 합본 완성 후 하단 여백에 스탬프 #}
   </div>
   {% endif %}
+
+  {# 지문별 '단어 TEST'(어휘표의 단어만, 유의어/반의어 제외, 랜덤 순서). 정답은 맨 뒤에 따로. #}
+  {% if include_test and not only_answer and a.vocab_test %}
+  <div class="page">
+    <div class="bhead">
+      <div class="tag">{{ a.lecture_label or '★' }}</div>
+      <h2>{{ a.title_en }} · 단어 TEST</h2>
+    </div>
+    <div class="wtsub">다음 영어 단어의 <b>뜻</b>을 쓰시오. <span style="color:#8a90a0">(정답은 맨 마지막 장에)</span></div>
+    <div class="wtest">
+      {% for v in a.vocab_test %}
+      <div class="wtrow"><span class="wtn">{{ loop.index }}</span><span class="wtw">{{ v.word }}</span><span class="wtblank"></span></div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
 {% endfor %}
+
+{# ── 단어 TEST 정답: 맨 마지막에 모아서, 지문마다 페이지 나눔 없이 연속 ── #}
+{% if only_answer %}
+<div class="answers">
+  <div class="ahead"><span class="tag">정답</span><h2>단어 TEST · 정답</h2></div>
+  {% for a in analyses %}{% if a.vocab_test %}
+  <div class="ansblock">
+    <div class="anshd">{{ a.lecture_label or '★' }}번 · {{ a.title_en }}</div>
+    <div class="answrap">
+      {% for v in a.vocab_test %}<span class="ansitem"><span class="an">{{ loop.index }}.</span> <span class="aw">{{ v.word }}</span> <span class="am">— {{ v.meaning }}</span></span>{% endfor %}
+    </div>
+  </div>
+  {% endif %}{% endfor %}
+</div>
+{% endif %}
 </body>
 </html>

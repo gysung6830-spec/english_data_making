@@ -129,11 +129,31 @@ def _as_list(analyses) -> list[Analysis]:
     return list(analyses)
 
 
+def _ensure_vocab_test(a: Analysis) -> None:
+    """단어 TEST 순서를 '결정적으로' 한 번만 섞어 a.vocab_test 에 채운다.
+
+    지문 내용(제목+단어들)으로 시드를 만들어 매 렌더마다 같은 순서가 나오게 한다
+    (측정 렌더와 최종 렌더, 교사/학생/정답 렌더가 모두 같은 순서를 써야 하기 때문).
+    유의어/반의어는 테스트에서 제외하므로 여기선 단어·뜻만 쓰는 VocabEntry 를 그대로 담는다.
+    """
+    import hashlib
+    import random
+
+    if getattr(a, "vocab_test", None) or not getattr(a, "vocab", None):
+        return
+    seed_src = (a.title_en or "") + "|" + "|".join(v.word for v in a.vocab)
+    seed = int.from_bytes(hashlib.md5(seed_src.encode("utf-8")).digest()[:4], "big")
+    items = list(a.vocab)
+    random.Random(seed).shuffle(items)
+    a.vocab_test = items
+
+
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
                   include_guide: bool = True, only_back: bool = False,
                   student: bool = False, slevel: str = "slash",
-                  boxmode: str = "") -> str:
+                  boxmode: str = "", include_test: bool = False,
+                  only_answer: bool = False) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -143,12 +163,16 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     include_guide : 맨 앞 '활용 가이드' 표지 페이지 포함 여부(측정 시 False).
     only_back     : 뒷면만 렌더(뒷면 페이지 수 측정용).
     """
+    alist = _as_list(analyses)
+    for a in alist:
+        _ensure_vocab_test(a)               # 단어 TEST 순서 결정(테스트/정답 동일 순서)
     tmpl = _env.get_template("worksheet_a.html.j2")
-    html = tmpl.render(analyses=_as_list(analyses), footer_note=footer_note,
+    html = tmpl.render(analyses=alist, footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,
                        include_back=include_back, include_guide=include_guide,
                        only_back=only_back, student=student, slevel=slevel,
-                       boxmode=boxmode)
+                       boxmode=boxmode, include_test=include_test,
+                       only_answer=only_answer)
     return _inject_fonts(html)
 
 
@@ -166,12 +190,14 @@ def render_b_html(analyses, footer_note: str = "", brand: str = "은아 T") -> s
 def render_html(analyses, layout: str = "A", footer_note: str = "",
                 brand: str = "은아 T", footer_meta: str = "", compact: bool = False,
                 include_guide: bool = True, student: bool = False,
-                slevel: str = "slash", boxmode: str = "") -> str:
+                slevel: str = "slash", boxmode: str = "", include_test: bool = False,
+                only_answer: bool = False) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
                          compact=compact, include_guide=include_guide,
-                         student=student, slevel=slevel, boxmode=boxmode)
+                         student=student, slevel=slevel, boxmode=boxmode,
+                         include_test=include_test, only_answer=only_answer)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -332,7 +358,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                engine: str = "auto", footer_meta: str = "",
                density: str = "auto", student: bool = False,
                slevel: str = "slash", include_guide: bool = True,
-               boxmode: str = "") -> Path:
+               boxmode: str = "", include_test: bool = False,
+               only_answer: bool = False) -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -342,12 +369,14 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     student : True 면 학생용(필기) — 정답/해석을 비워 빈칸으로.
     slevel  : 'slash'(끊어읽기만) | 'blank'(완전백지) | 'interp'(해석만 빈칸).
     include_guide : 맨 앞 '활용 가이드' 표지 포함 여부(합본 시 학생용은 False).
+    include_test  : 지문마다 '단어 TEST' 페이지 포함.
+    only_answer   : 단어 TEST '정답'만 렌더(밀도 측정 생략, 맨 뒤 합본용).
     """
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     compact = (density == "compact")
-    if layout.upper() == "A":
+    if layout.upper() == "A" and not only_answer:
         if density == "auto":
             _fit_pages(analyses, fit_front=True, student=student, slevel=slevel,
                        boxmode=boxmode)
@@ -359,7 +388,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     html = render_html(analyses, layout=layout, footer_note=footer_note, brand=brand,
                        footer_meta=footer_meta, compact=compact,
                        student=student, slevel=slevel, include_guide=include_guide,
-                       boxmode=boxmode)
+                       boxmode=boxmode, include_test=include_test,
+                       only_answer=only_answer)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):

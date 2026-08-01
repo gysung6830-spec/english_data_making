@@ -168,6 +168,9 @@ class Analysis:
     # 앞면(분석) 밀도: '' | 'normal' | 'compact' | 'ultra'. 렌더러가 지문별로 측정해
     # 1페이지에 맞는 가장 큰(덜 압축된) 단계를 넣는다. 장문이면 ultra 여도 2페이지.
     front_density: str = ""
+    # 단어 TEST 용 어휘 순서(vocab 를 랜덤 셔플한 사본; 유의어/반의어 제외하고 단어·뜻만 사용).
+    # 렌더러가 지문별로 '한 번' 결정적으로 섞어 채운다(테스트와 정답의 순서를 일치시키기 위함).
+    vocab_test: list[VocabEntry] = field(default_factory=list)
 
     @property
     def has_points(self) -> bool:

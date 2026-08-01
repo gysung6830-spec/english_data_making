@@ -251,12 +251,14 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      engine: str = "auto", footer_meta: str = "",
                      density: str = "auto", student: bool = False,
                      slevel: str = "slash", include_guide: bool = True,
-                     boxmode: str = "") -> Path:
+                     boxmode: str = "", include_test: bool = False,
+                     only_answer: bool = False) -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density,
                                student=student, slevel=slevel,
-                               include_guide=include_guide, boxmode=boxmode)
+                               include_guide=include_guide, boxmode=boxmode,
+                               include_test=include_test, only_answer=only_answer)
 
 
 def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
@@ -271,23 +273,44 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
     import tempfile
 
     out_path = Path(out_path)
+    # 단어 TEST 정답이 실릴 지문이 하나라도 있으면 맨 뒤에 '정답' 장을 붙인다.
+    has_test = any(getattr(a, "vocab", None) for a in analyses)
+    from pypdf import PdfWriter
     if not make_student:
-        render_worksheet(analyses, out_path, layout=layout,
-                         footer_note=footer_note, density=density, boxmode=boxmode)
+        with tempfile.TemporaryDirectory() as d:
+            tp = Path(d) / "t.pdf"
+            render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
+                             density=density, include_guide=True, boxmode=boxmode,
+                             include_test=True)
+            w = PdfWriter()
+            w.append(str(tp))
+            if has_test:                    # 정답(맨 마지막, 페이지 나눔 없이 연속)
+                ap = Path(d) / "a.pdf"
+                render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
+                                 include_guide=False, only_answer=True)
+                w.append(str(ap))
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(out_path, "wb") as f:
+                w.write(f)
         _stamp_footer(out_path, footer_note)
         return out_path
-    from pypdf import PdfWriter
     with tempfile.TemporaryDirectory() as d:
         tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
-        # 교사용(가이드 포함) → 학생용(가이드 제외)
+        # 교사용(가이드 포함) → 학생용(가이드 제외) → 단어 TEST 정답(맨 뒤 1회)
         render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
-                         density=density, student=False, include_guide=True, boxmode=boxmode)
+                         density=density, student=False, include_guide=True,
+                         boxmode=boxmode, include_test=True)
         render_worksheet(analyses, sp, layout=layout, footer_note=footer_note,
                          density=density, student=True, slevel=slevel,
-                         include_guide=False, boxmode=boxmode)
+                         include_guide=False, boxmode=boxmode, include_test=True)
         w = PdfWriter()
         w.append(str(tp))
         w.append(str(sp))
+        if has_test:
+            ap = Path(d) / "a.pdf"
+            render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
+                             include_guide=False, only_answer=True)
+            w.append(str(ap))
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             w.write(f)
