@@ -39,10 +39,10 @@ PAGE_H_PX = 257 * 96 / 25.4          # ≈ 971px
 CALIB = 0.90                          # measure ↔ 실제 PDF 오차 흡수(넘침 방지)
 FIT_STEPS = ["", "compact", "compact2"]
 
-# 모든 페이지 하단 가운데에 들어가는 고정 저작권 문구
-FOOTER_TEXT = "본 자료는 김은아영어연구소에서 제작되었습니다"
+# 하단 왼쪽 저작권 문구 + 하단 오른쪽 페이지 번호
+FOOTER_TEXT = "©2026.Ortica영어.All rights reserved"
 _FOOTER_FONT = (
-    "'NanumMyeongjo','Nanum Myeongjo','나눔명조','Noto Serif CJK KR',serif"
+    "'NanumSquare','나눔스퀘어','NanumGothic','Malgun Gothic',sans-serif"
 )
 
 # 형식 키 → (렌더 함수, 파일명 접미사)
@@ -185,11 +185,15 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
         if autofit:
             _apply_autofit(page)
 
-        # 페이지마다 하단 가운데에 반복되는 저작권 푸터(하단 여백 안에 배치)
+        # 하단 왼쪽=저작권, 하단 오른쪽=페이지 번호 (모든 페이지 반복)
         footer_template = (
-            f'<div style="width:100%; text-align:center; '
-            f'font-family:{_FOOTER_FONT}; font-size:8px; color:#000000; '
-            f'padding:0; margin:0;">{FOOTER_TEXT}</div>'
+            f'<div style="width:100%; box-sizing:border-box; '
+            f'padding:0 18mm; font-family:{_FOOTER_FONT}; font-size:8px; '
+            f'color:#000000; display:flex; justify-content:space-between; '
+            f'align-items:center;">'
+            f'<span>{FOOTER_TEXT}</span>'
+            f'<span class="pageNumber"></span>'
+            f'</div>'
         )
 
         page.pdf(
