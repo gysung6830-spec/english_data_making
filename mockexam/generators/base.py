@@ -136,6 +136,15 @@ def strip_passage_numbering(text: str) -> str:
     return re.sub(r"\s{2,}", " ", _CIRCLED_NUM.sub(" ", text or "")).strip()
 
 
+def number_sentences(text: str, n: int = 5) -> str:
+    """앞쪽 n개 문장 앞에 ①~⑤ 번호를 붙인다(무관문장 유형의 미리보기용)."""
+    sents = [s for s in _SENT_SPLIT.split(text.strip()) if s.strip()]
+    out = []
+    for i, s in enumerate(sents):
+        out.append(f"{LABELS[i]} {s}" if i < min(n, len(LABELS)) else s)
+    return " ".join(out)
+
+
 def underline_passage(text: str, n: int) -> str:
     """앞쪽 단어 n개를 ①~⑤ 밑줄 마커로 감싼 지문 텍스트를 만든다(구조 검증용)."""
     words = text.split()
@@ -231,8 +240,14 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         q.choices = make_choices(mock_choices or [f"선택지 {i+1}" for i in range(5)])
         q.answer = mock_answer
         q.explanation = ""
-        q.passage_text = mock_passage if mock_passage is not None else (
-            underline_passage(passage.text, item.underlines) if item.underlines else passage.text)
+        if mock_passage is not None:
+            q.passage_text = mock_passage
+        elif item.underlines:                       # 어법·어휘: 밑줄 ①~⑤
+            q.passage_text = underline_passage(passage.text, item.underlines)
+        elif number_only:                           # 무관문장: 문장 앞 ①~⑤
+            q.passage_text = number_sentences(passage.text)
+        else:
+            q.passage_text = passage.text
     if number_only:
         # 선지는 지문의 ①~⑤(밑줄/문장 위치)에서 고르므로 번호만 남긴다.
         q.choices = [Choice(lb, "") for lb in LABELS]
