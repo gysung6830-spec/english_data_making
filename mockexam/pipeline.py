@@ -158,8 +158,59 @@ def generate_mock(
     if client is not None:
         _review_flagged(exam, client, ctx, _regen, logs)
 
+    # [8] 정답 번호 분산 — 한 번호에 쏠리거나 3연속되지 않게 고르게 재배치
+    _rebalance_answers(exam)
+
     return GenResult(exam, blueprint, assignments, report, logs,
                      num_passages=len(passages))
+
+
+def _rebalance_answers(exam) -> None:
+    """선택형 정답 번호(①~⑤)를 고르게 분산한다.
+
+    - 텍스트 선지 유형: 선지 '순서'만 바꿔(내용 불변) 정답을 목표 번호로 이동.
+    - 번호형(어법·어휘·무관문장): 정답 위치가 지문에 고정 → 그대로 두고 카운트에만 반영.
+    같은 번호가 3연속되지 않고 다섯 번호가 대체로 균등해지도록 배치한다.
+    """
+    from .core.models import Choice
+    from .generators.base import LABELS
+
+    choice_qs = [q for q in exam.questions if q.section == "choice" and q.choices]
+    counts = {lb: 0 for lb in LABELS}
+    last2: list[str] = []
+
+    def _is_number_only(q) -> bool:
+        return bool(q.meta.get("number_only")) or all(not c.text for c in q.choices)
+
+    def _move(q, target: str) -> None:
+        labels = [c.label for c in q.choices]
+        if q.answer not in labels or target not in labels:
+            return
+        cur, tgt = labels.index(q.answer), labels.index(target)
+        if cur == tgt:
+            return
+        texts = [c.text for c in q.choices]
+        texts[cur], texts[tgt] = texts[tgt], texts[cur]   # 두 선지 위치 교환
+        q.choices = [Choice(LABELS[i], t) for i, t in enumerate(texts)]
+        q.answer = target
+
+    for q in choice_qs:
+        if _is_number_only(q):
+            if q.answer in counts:
+                counts[q.answer] += 1
+                last2 = (last2 + [q.answer])[-2:]
+            continue
+        # 가장 적게 쓰인 번호부터, 단 직전 2개와 같아 3연속이 되는 번호는 회피
+        for lb in sorted(LABELS, key=lambda x: counts[x]):
+            if len(last2) == 2 and last2[0] == last2[1] == lb:
+                continue
+            target = lb
+            break
+        else:
+            target = min(LABELS, key=lambda x: counts[x])
+        _move(q, target)
+        counts[target] += 1
+        last2 = (last2 + [target])[-2:]
 
 
 def _review_flagged(exam, client, ctx, regen, logs) -> None:
