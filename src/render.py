@@ -292,14 +292,8 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
     return report
 
 
-def render_pdf(reports, out_path: str | Path, footer_note: str = "",
-               fit_pages: bool = True, min_vocab: int = 8,
-               brand: str = "은아 T", student: bool = False) -> Path:
-    from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
-
-    out_path = Path(out_path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab, css, HTML):
+    """분석지 한 버전(교사용 또는 학생용)을 렌더해 WeasyPrint Document 로 반환."""
     rlist = _as_list(reports)
 
     def build(rs, with_source):
@@ -312,7 +306,42 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
         if len(analysis.pages) > 2 * len(rlist):
             rlist = [_fit_report(r, footer_note, css, min_vocab, brand, student) for r in rlist]
     # 최종 출력은 원문+해석 모음 포함
-    build(rlist, with_source=True).write_pdf(str(out_path))
+    return build(rlist, with_source=True)
+
+
+def render_pdf(reports, out_path: str | Path, footer_note: str = "",
+               fit_pages: bool = True, min_vocab: int = 8,
+               brand: str = "은아 T", student: bool = False) -> Path:
+    from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    _render_document(reports, footer_note, brand, student, fit_pages,
+                     min_vocab, css, HTML).write_pdf(str(out_path))
+    return out_path
+
+
+def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
+                        min_vocab: int = 8, brand: str = "은아 T",
+                        variants=(False,)) -> Path:
+    """분석지를 여러 버전 순서대로 '한 PDF'에 이어 붙인다.
+
+    variants: 학생플래그 목록. 예) [False]=교사용만, [True]=학생용만,
+              [False, True]=교사 전체 지문 → 학생 전체 지문 순서로 합본.
+    """
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    docs = [_render_document(reports, footer_note, brand, s, True, min_vocab, css, HTML)
+            for s in variants]
+    if len(docs) == 1:
+        docs[0].write_pdf(str(out_path))
+    else:
+        all_pages = [pg for d in docs for pg in d.pages]
+        docs[0].copy(all_pages).write_pdf(str(out_path))
     return out_path
 
 

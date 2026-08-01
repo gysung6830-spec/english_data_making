@@ -107,16 +107,24 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
     title = reports[0].title if reports else stem
     recs: list[dict] = []
 
-    if sel.analysis:
+    want_teacher = sel.analysis
+    want_student = getattr(sel, "student", False)
+    if want_teacher and want_student:
+        # 교사 전체 지문 → 학생 전체 지문 순서로 한 PDF 합본
         p = cfg.output_dir / f"{stem}_지문분석.pdf"
-        render.render_pdf(reports, p, footer_note=fn,
-                          min_vocab=cfg.vocab.min, brand=brand)
+        render.render_analysis_pdf(reports, p, footer_note=fn,
+                                   min_vocab=cfg.vocab.min, brand=brand,
+                                   variants=[False, True])
+        recs.append({"kind": "analysis", "label": "📘 분석지(교사용+학생용)", "path": p})
+    elif want_teacher:
+        p = cfg.output_dir / f"{stem}_지문분석.pdf"
+        render.render_analysis_pdf(reports, p, footer_note=fn,
+                                   min_vocab=cfg.vocab.min, brand=brand, variants=[False])
         recs.append({"kind": "analysis", "label": "📘 분석지(교사용)", "path": p})
-
-    if getattr(sel, "student", False):
+    elif want_student:
         p = cfg.output_dir / f"{stem}_지문분석_학생용.pdf"
-        render.render_pdf(reports, p, footer_note=fn,
-                          min_vocab=cfg.vocab.min, brand=brand, student=True)
+        render.render_analysis_pdf(reports, p, footer_note=fn,
+                                   min_vocab=cfg.vocab.min, brand=brand, variants=[True])
         recs.append({"kind": "student", "label": "📗 분석지(학생용·빈칸)", "path": p})
 
     # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
