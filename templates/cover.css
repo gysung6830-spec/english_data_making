@@ -46,6 +46,10 @@ body{
 .cv-name{ font-size:10pt; font-weight:800; color:var(--ink); margin-bottom:2px; }
 .cv-mark{ font-size:8pt; font-weight:800; color:var(--green-dark); background:var(--green-soft);
   border-radius:6px; padding:1px 7px; margin-left:4px; vertical-align:1px; }
+.cv-pg{ float:right; font-size:8.5pt; font-weight:800; color:var(--green-dark); }
+.cv-toc-head{ margin-top:2px; }
+.cv-ans{ border-left-color:#256b55; }
+.cv-ans .cv-badge{ background:#256b55; font-size:7.5pt; }
 .cv-purpose{ font-size:8.6pt; color:#555b66; line-height:1.45; }
 .cv-how{ font-size:8.4pt; color:#3f4a44; margin-top:3px; line-height:1.45; }
 .cv-how-lbl{ font-weight:800; color:var(--green-dark); margin-right:4px; }

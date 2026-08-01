@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>정답 · 해설 (단일 유형)</title>
+  <style>{{ font_css }}</style>
+  <style>{% include "answers.css" %}</style>
+</head>
+<body>
+
+  {% for g in groups %}
+  <div class="ag">
+    <div class="ag-head">
+      <span class="ag-type ag-{{ g.css }}">{{ g.type_name }}</span>
+      {% if g.label %}<span class="ag-label">{{ g.label }}</span>{% endif %}
+    </div>
+
+    {% if g.subgroups %}
+      {% for sub, items in g.subgroups %}
+      <div class="ag-sub">{{ sub }}</div>
+      <div class="ag-items">
+        {% for it in items %}<span class="ag-chip">{{ it }}</span>{% endfor %}
+      </div>
+      {% endfor %}
+      {% if g.note %}<div class="ag-note"><b>요약문 해석</b> {{ g.note }}</div>{% endif %}
+    {% elif g.block %}
+      {% for it in g.items %}<div class="ag-line">{{ it }}</div>{% endfor %}
+    {% else %}
+      <div class="ag-items">
+        {% for it in g.items %}<span class="ag-chip">{{ it }}</span>{% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+
+</body>
+</html>

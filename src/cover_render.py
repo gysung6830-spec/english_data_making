@@ -27,6 +27,7 @@ class CoverSection:
     purpose: str      # 목적 한 줄
     how: str          # 푸는 법 한 줄
     mark: str         # 기호 예시
+    page: int = 0     # 목차용 시작 페이지 (0이면 표시 안 함)
 
 
 # 유형 카탈로그(워크북 배치 순서와 동일). 있는 것만 골라 표지에 싣는다.
@@ -88,11 +89,12 @@ _env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)),
 
 def render_cover_html(*, header: str, title: str, subtitle: str = "",
                       version_label: str = "", n_passages: int = 1,
-                      sections: list[CoverSection]) -> str:
+                      sections: list[CoverSection], answers_page: int = 0) -> str:
     from . import branding
     return _env.get_template("cover.html.j2").render(
         header=header, title=title, subtitle=subtitle, version_label=version_label,
-        n_passages=n_passages, sections=sections, font_css=branding.font_face_css())
+        n_passages=n_passages, sections=sections, answers_page=answers_page,
+        font_css=branding.font_face_css())
 
 
 def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
@@ -145,15 +147,19 @@ def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
 
 def render_cover_pdf(out_path: str | Path, *, header: str, title: str, subtitle: str = "",
                      version_label: str = "", n_passages: int = 1,
-                     section_keys=None, footer_note: str = "") -> Path:
+                     section_keys=None, footer_note: str = "",
+                     page_map: dict | None = None, answers_page: int = 0) -> Path:
     from playwright.sync_api import sync_playwright
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     sections = build_cover_sections(section_keys or _ORDER)
+    if page_map:
+        for s in sections:
+            s.page = int(page_map.get(s.key, 0) or 0)
     html = render_cover_html(header=header, title=title, subtitle=subtitle,
                              version_label=version_label, n_passages=n_passages,
-                             sections=sections)
+                             sections=sections, answers_page=answers_page)
     html_path = out_path.with_suffix(".html")
     html_path.write_text(html, encoding="utf-8")
 

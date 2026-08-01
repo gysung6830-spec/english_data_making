@@ -144,11 +144,7 @@ def _prose_subpack(pk, wtype: str):
                                   subtitle=pk.subtitle, worksheets=subs)
 
 
-def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
-                      show_ko: bool, footer_note: str) -> Path:
-    """수록된 유형을 감지해 표지 겸 사용 설명서를 렌더한다."""
-    from . import branding
-
+def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
     keys: list[str] = []
     if books:
         keys.append("workbook")
@@ -159,7 +155,16 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
         keys.append("writing")
     if blank_wb is not None:
         keys.append("blanks")
+    return keys
 
+
+def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
+                      show_ko: bool, footer_note: str,
+                      page_map: dict | None = None, answers_page: int = 0) -> Path:
+    """수록된 유형을 감지해 표지 겸 목차/사용 설명서를 렌더한다."""
+    from . import branding
+
+    keys = _cover_keys(books, packs, writing_packs, blank_wb)
     title = (books[0].title if books else
              (packs[0].title if packs else
               (writing_packs[0].title if writing_packs else "통합 워크북")))
@@ -168,76 +173,121 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
     return cover_render.render_cover_pdf(
         out_path, header=branding.BRAND, title=title or "통합 워크북",
         version_label=version_label, n_passages=n_passages,
-        section_keys=keys, footer_note=footer_note)
+        section_keys=keys, footer_note=footer_note,
+        page_map=page_map, answers_page=answers_page)
+
+
+def _build_answer_groups(packs, writing_packs, blank_wb) -> list:
+    """단일 유형(어형·어법·어휘·영작·해석·빈칸) 정답을 '연속 배치용' 그룹 목록으로 만든다."""
+    from . import answers_render as ar
+    groups = []
+    for wtype, name, css in (("form", "어형 변형", "f"), ("grammar", "어법 양자택일", "g"),
+                             ("vocab", "어휘 양자택일", "v")):
+        for pk in packs or []:
+            g = ar.group_from_prose(pk, wtype, name, css)
+            if g:
+                groups.append(g)
+    for wpk in writing_packs or []:
+        g = ar.group_from_writing(wpk)
+        if g:
+            groups.append(g)
+    for pk in packs or []:
+        g = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t")
+        if g:
+            groups.append(g)
+    if blank_wb is not None:
+        groups += ar.groups_from_blanks(blank_wb)
+    return groups
 
 
 def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
                                    show_ko: bool = True) -> Path:
-    """유형 순서대로 '문제'를 먼저 싣고, 모든 '정답·해설'은 맨 뒤에 몰아서 배치한다.
+    """[표지·목차] → 문제(통합카드→어형→어법→어휘→영작→해석→빈칸)
+       → [정답·해설 간지] → 통합카드 정답(유형/지문별 페이지 분할)
+       → 단일 유형 정답(유형끼리 페이지 안 나누고 연속, 출처 라벨).
 
-    배치: [표지] → 문제(통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸)
-          → [정답·해설 간지] → 정답(같은 유형 순서).
+    표지에는 각 유형의 시작 페이지(목차)와 정답 시작 페이지를 표시한다.
     blank_wb 가 None 이면 빈칸형은, writing_packs 가 비면 영작형은 생략한다.
     show_ko=False 이면 모든 문제면의 한국어 해석을 숨긴 '한글 제외' 버전으로 렌더한다.
     """
     from . import branding
+    import fitz  # 페이지 수 집계(PyMuPDF)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     scratch = scratch or out_path.parent
     stem = out_path.stem
 
-    # 유형 순서대로 (태그, 렌더러) 목록을 만든다. 렌더러는 (path, section) 를 받는다.
-    renderers: list[tuple[str, callable]] = []
+    parts: list[Path] = []          # 표지 제외, 본문 순서대로
+    toc: dict[str, int] = {}        # 유형 key -> 시작 페이지(문서 전체 기준)
+    seen: set[str] = set()
+    cover_guess = 1
+    cursor = [cover_guess + 1]      # 첫 본문 페이지 번호
+
+    def _count(p: Path) -> int:
+        d = fitz.open(str(p)); n = d.page_count; d.close(); return n
+
+    def _emit(tag: str, fn, key: str | None = None):
+        p = scratch / f"{stem}__{tag}.pdf"
+        fn(p)
+        parts.append(p)
+        if key and key not in seen:
+            toc[key] = cursor[0]; seen.add(key)
+        cursor[0] += _count(p)
+
+    # ── 문제 ──
     if books:
-        renderers.append(("wb", lambda p, sec: workbook_render.render_workbooks_pdf(
-            books, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+        _emit("wb_q", lambda p: workbook_render.render_workbooks_pdf(
+            books, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="workbook")
     for wtype in _PROSE_ORDER:                       # 어형 → 어법 → 어휘
         for i, pk in enumerate(packs, start=1):
             sub = _prose_subpack(pk, wtype)
             if sub is not None:
-                renderers.append((f"{wtype}{i}", lambda p, sec, s=sub: prose_render.render_prose_pdf(
-                    s, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
-    for i, wpk in enumerate(writing_packs or [], start=1):   # 영작
-        renderers.append((f"writing{i}", lambda p, sec, w=wpk: writing_render.render_writing_pdf(
-            w, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+                _emit(f"{wtype}{i}_q", lambda p, s=sub: prose_render.render_prose_pdf(
+                    s, p, footer_note=footer_note, show_ko=show_ko, section="q"), key=wtype)
+    for i, wpk in enumerate(writing_packs or [], start=1):    # 영작
+        _emit(f"writing{i}_q", lambda p, w=wpk: writing_render.render_writing_pdf(
+            w, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="writing")
     for i, pk in enumerate(packs, start=1):          # 한글 해석 연습
         sub = _prose_subpack(pk, "translate")
         if sub is not None:
-            renderers.append((f"translate{i}", lambda p, sec, s=sub: prose_render.render_prose_pdf(
-                s, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+            _emit(f"translate{i}_q", lambda p, s=sub: prose_render.render_prose_pdf(
+                s, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="translate")
     if blank_wb is not None:                          # 빈칸
-        renderers.append(("blanks", lambda p, sec: blanks_render.render_blanks_pdf(
-            blank_wb, p, footer_note=footer_note, show_ko=show_ko, section=sec)))
+        _emit("blanks_q", lambda p: blanks_render.render_blanks_pdf(
+            blank_wb, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="blanks")
 
-    parts: list[Path] = []
-
-    def _emit(tag: str, fn):
-        p = scratch / f"{stem}__{tag}.pdf"
-        fn(p)
-        parts.append(p)
-
-    # 0) 표지 겸 사용 설명서
-    _emit("cover", lambda p: _render_cover_for(
-        p, books, packs, writing_packs, blank_wb, show_ko, footer_note))
-    # 1) 모든 유형의 '문제'를 순서대로
-    for tag, fn in renderers:
-        _emit(f"{tag}_q", lambda p, f=fn: f(p, "q"))
-    # 2) '정답·해설' 간지
+    # ── 정답·해설 ──
     _emit("ansdiv", lambda p: cover_render.render_answer_divider_pdf(
-        p, header=branding.BRAND, footer_note=footer_note))
-    # 3) 모든 유형의 '정답·해설'을 같은 순서로 맨 뒤에
-    for tag, fn in renderers:
-        _emit(f"{tag}_a", lambda p, f=fn: f(p, "a"))
+        p, header=branding.BRAND, footer_note=footer_note), key="answers")
+    if books:                                         # 통합카드 정답(유형/지문별 페이지 분할 유지)
+        _emit("wb_a", lambda p: workbook_render.render_workbooks_pdf(
+            books, p, footer_note=footer_note, show_ko=show_ko, section="a"))
+    groups = _build_answer_groups(packs, writing_packs, blank_wb)   # 단일 유형 정답 연속 배치
+    if groups:
+        from . import answers_render
+        _emit("answers", lambda p: answers_render.render_answers_pdf(
+            groups, p, footer_note=footer_note))
 
-    workbook_render.merge_pdfs(parts, out_path)
+    # ── 표지·목차 (본문 페이지 수 집계 후 렌더, 표지 페이지 수 보정) ──
+    cover_path = scratch / f"{stem}__cover.pdf"
+    _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
+                      page_map=toc, answers_page=toc.get("answers", 0))
+    cpages = _count(cover_path)
+    if cpages != cover_guess:                         # 표지가 여러 장이면 목차 페이지를 보정
+        shift = cpages - cover_guess
+        toc = {k: v + shift for k, v in toc.items()}
+        _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
+                          page_map=toc, answers_page=toc.get("answers", 0))
+
+    workbook_render.merge_pdfs([cover_path] + parts, out_path)
     try:
         workbook_render.stamp_page_numbers(out_path)   # 문서 전체 기준 페이지 번호
     except Exception:
         pass
-    for p in parts:                       # 중간 산출물 정리
+    for p in [cover_path] + parts:                    # 중간 산출물 정리
         try:
             p.unlink(missing_ok=True)
             p.with_suffix(".html").unlink(missing_ok=True)
