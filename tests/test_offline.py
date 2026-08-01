@@ -28,10 +28,13 @@ def test_clean_removes_noise():
         "해설: 호기심이 핵심이다.\n"
     )
     cleaned = extract.clean_text(raw)
-    assert "Curiosity drives us" in cleaned
-    assert "정답" not in cleaned
-    assert "①" not in cleaned
-    assert "What is the main idea" not in cleaned
+    assert "Curiosity drives us" in cleaned        # 본문 보존
+    assert "정답" not in cleaned                    # 정답 줄 제거
+    assert "①" not in cleaned and "②" not in cleaned  # 객관식 보기 제거
+    # 숫자 번호로 시작하는 줄은 '번호 표시'만 떼고 내용은 보존한다.
+    #   (문장 나열형 자료에서 첫 줄이 통째로 사라지지 않게 하기 위함이며,
+    #    남는 문항 텍스트는 지문 추출 API 단계에서 최종적으로 걸러진다)
+    assert "1. What" not in cleaned                # 번호 표시는 제거됨
     print("PASS  전처리(노이즈 제거)")
 
 

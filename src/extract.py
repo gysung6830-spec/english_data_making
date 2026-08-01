@@ -21,12 +21,15 @@ def is_image(path: str | Path) -> bool:
 # 문제/보기/정답으로 보이는 줄을 걸러내기 위한 패턴
 _NOISE_PATTERNS = [
     re.compile(r"^\s*[①②③④⑤]"),                     # 객관식 보기 마커
-    re.compile(r"^\s*\(?[1-9]\d?\)?\s*[.)]\s"),         # 1) 2. 등 번호 문항
     re.compile(r"^\s*(정답|해설|풀이|어휘|해석|출제|답)\s*[:：)]"),
     re.compile(r"^\s*\[?\s*(정답|해설)\s*\]?"),
     re.compile(r"^\s*(문|문제)\s*\d+"),
     re.compile(r"^\s*[A-E]\)\s"),                       # A) B) 보기
 ]
+
+# 문항/문장 번호 표시( '1.' '2)' '(3)' 등 ) — 줄 전체가 아니라 '번호만' 떼어낸다.
+#   (해석 연습·문장 나열형 자료에서 문장 첫 줄이 통째로 사라지는 것을 방지)
+_NUM_PREFIX = re.compile(r"^\s*\(?[1-9]\d?\)?\s*[.)]\s+")
 
 # 페이지 번호/머리말 같은 짧은 잡음 줄
 _SHORT_NOISE = re.compile(r"^\s*[-–—•·\d\s]{0,4}$")
@@ -55,6 +58,12 @@ def clean_text(raw: str) -> str:
             continue
         if any(p.search(s) for p in _NOISE_PATTERNS):
             continue
+        # 숫자 번호로 시작하는 줄은 줄 전체를 버리지 말고 번호 표시만 떼어 '내용은 보존'.
+        m = _NUM_PREFIX.match(s)
+        if m:
+            s = s[m.end():]
+            if not s.strip():
+                continue
         kept.append(s)
     # 연속 빈 줄 압축
     text = "\n".join(kept)
