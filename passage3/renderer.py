@@ -21,6 +21,19 @@ except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from themes import get_css
 
 
+import re as _re
+
+_NUM_IN_LABEL = _re.compile(r"(\d+)\s*번")
+
+
+def _short_num(label: str) -> str:
+    """라벨에서 '지문번호'만 뽑는다. 'N번' 있으면 'N번', 없으면 라벨 그대로."""
+    if not label:
+        return ""
+    m = _NUM_IN_LABEL.search(label)
+    return f"{m.group(1)}번" if m else label.strip()
+
+
 def _circled(num: int) -> str:
     """정수 → 원문자. 범위 밖이면 'N.' 형태."""
     if 1 <= num <= 20:
@@ -54,8 +67,9 @@ def _passage_head(idx: int, p: Passage, doc_name: str = "") -> str:
     bits = []
     if doc_name and doc_name.strip():
         bits.append(doc_name.strip())
-    if p.label:
-        bits.append(p.label)
+    num = _short_num(p.label)
+    if num:
+        bits.append(num)
     badge = " ".join(bits)
     title = p.title
     if badge or title:
