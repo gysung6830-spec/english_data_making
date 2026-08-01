@@ -279,13 +279,21 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
     has_test = any(getattr(a, "vocab", None) for a in analyses)
     from pypdf import PdfWriter
 
-    def _append_test_and_answer(w, d):
+    def _append_test(w, d):
         if not has_test:
             return
-        wt = Path(d) / "w.pdf"             # 단어 TEST(지문별, 교사용 뒤에 1회)
+        wt = Path(d) / "w.pdf"             # 단어 TEST(지문별, 1회)
         render_worksheet(analyses, wt, layout=layout, footer_note=footer_note,
                          include_guide=False, only_test=True)
         w.append(str(wt))
+
+    def _append_answer(w, d):
+        if not has_test:
+            return
+        ap = Path(d) / "a.pdf"             # 정답(맨 마지막, 페이지 나눔 없이 연속)
+        render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
+                         include_guide=False, only_answer=True)
+        w.append(str(ap))
 
     if not make_student:
         # 순서: [교사용 지문분석(+뒷면)] → [단어 TEST] → [정답]
@@ -295,18 +303,14 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
                              density=density, include_guide=True, boxmode=boxmode)
             w = PdfWriter()
             w.append(str(tp))
-            _append_test_and_answer(w, d)
-            if has_test:                    # 정답(맨 마지막, 페이지 나눔 없이 연속)
-                ap = Path(d) / "a.pdf"
-                render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
-                                 include_guide=False, only_answer=True)
-                w.append(str(ap))
+            _append_test(w, d)
+            _append_answer(w, d)
             out_path.parent.mkdir(parents=True, exist_ok=True)
             with open(out_path, "wb") as f:
                 w.write(f)
         _stamp_footer(out_path, footer_note)
         return out_path
-    # 순서: [교사용 지문분석(+뒷면)] → [단어 TEST(1회)] → [학생용(뒷면 없음)] → [정답]
+    # 순서: [교사용 지문분석(+뒷면)] → [학생용(뒷면 없음)] → [단어 TEST(1회)] → [정답]
     with tempfile.TemporaryDirectory() as d:
         tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
         render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
@@ -317,14 +321,10 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
                          density=density, student=True, slevel=slevel,
                          include_guide=False, boxmode=boxmode, include_back=False)
         w = PdfWriter()
-        w.append(str(tp))
-        _append_test_and_answer(w, d)       # 교사용 뒤에 단어 TEST 1회
-        w.append(str(sp))
-        if has_test:
-            ap = Path(d) / "a.pdf"
-            render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
-                             include_guide=False, only_answer=True)
-            w.append(str(ap))
+        w.append(str(tp))                   # 교사용
+        w.append(str(sp))                   # 학생용
+        _append_test(w, d)                  # 단어 TEST(학생용 뒤 1회)
+        _append_answer(w, d)                # 정답(맨 마지막)
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             w.write(f)
