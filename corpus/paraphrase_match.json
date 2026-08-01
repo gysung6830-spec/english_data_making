@@ -1,0 +1,210 @@
+[
+ {
+  "exam_id": "2023-06",
+  "num": 21,
+  "type": "함축",
+  "answer_text": "unbiased and objective view of the world",
+  "cands": [
+   "It is to say that our version of reality is precisely that: our version, not the version.",
+   "Our view of the world is not given to us from the outside in a pure, objective form",
+   "We can see the world only as it appears to us, not “as it truly is,”",
+   "Philosopher Thomas Nagel argued that there is no “view from nowhere,” since we cannot see the world except from a particular perspective"
+  ],
+  "evi": 1,
+  "maps": [
+   {
+    "from": "in a pure, objective form",
+    "to": "objective view of the world",
+    "pat": "동의어치환"
+   },
+   {
+    "from": "from the outside",
+    "to": "unbiased",
+    "pat": "구체→추상"
+   }
+  ],
+  "note": "밑줄 'view from nowhere'는 외부에서 주어지는 순수·객관적 시각을 뜻하며 근거 문장이 이를 규정함; 나머지는 우리 시각이 주관적임을 부연할 뿐 그 구절의 의미 자체를 정의하지 않는다."
+ },
+ {
+  "exam_id": "2023-수능",
+  "num": 21,
+  "type": "함축",
+  "answer_text": "use writing as a means of reflecting on oneself",
+  "cands": [
+   "Diaries were personal and private; one would write for oneself, or, in Habermas’s formulation, one would make oneself public to oneself.",
+   "They provided a space where one could write daily about her whereabouts, feelings, and thoughts.",
+   "By making the self public in a private sphere, the self also became an object for self-inspection and self-critique.",
+   "the idea of “the self [as] both made and explored with words” emerges"
+  ],
+  "evi": 2,
+  "maps": [
+   {
+    "from": "the self also became an object for self-inspection and self-critique",
+    "to": "reflecting on oneself",
+    "pat": "동의어치환"
+   },
+   {
+    "from": "making the self public in a private sphere",
+    "to": "use writing as a means",
+    "pat": "비유→직설"
+   }
+  ],
+  "note": "근거는 밑줄 구절을 '자기 점검·자기 비판의 대상이 되는 것'으로 재진술해 자기 성찰 의미를 담음; 오답은 일기의 배경·정의·표현일 뿐 밑줄의 의미를 직접 풀지 않는다."
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 23,
+  "type": "주제",
+  "answer_text": "culturally constructed representation of emotions",
+  "cands": [
+   "…there are indeed large and sometimes surprising differences in the words and concepts that different cultures have for describing emotions",
+   "how we interpret, categorize, and name emotions varies according to culture",
+   "However, the emotional states themselves are likely to be quite invariant across cultures.",
+   "…a basic, culturally universal emotion set that is shaped by evolution and implemented in the brain"
+  ],
+  "evi": 1,
+  "maps": [
+   {
+    "from": "interpret, categorize, and name emotions",
+    "to": "representation of emotions",
+    "pat": "구체→추상"
+   },
+   {
+    "from": "varies according to culture",
+    "to": "culturally constructed",
+    "pat": "품사전환"
+   }
+  ],
+  "note": "근거는 감정의 해석·분류·명명(표상)이 문화에 따라 달라진다는 저자 주장; 오답은 감정 상태가 문화 보편적이라는 반대 논지이거나 인용된 데이터 예시라 주제의 직접 근거가 아니다."
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 23,
+  "type": "주제",
+  "answer_text": "consequences of profit-oriented management of museums",
+  "cands": [
+   "In an era when museums are forced to increase their earnings, they often focus their energies on modernising their galleries or mounting temporary exhibitions",
+   "…as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable",
+   "The unlit, unglamorous storerooms, if they are ever discussed, are at best presented as service areas that process objects for the exhibition halls.",
+   "…as museums pour more and more resources into their publicly visible faces, the spaces of storage may even suffer"
+  ],
+  "evi": 3,
+  "maps": [
+   {
+    "from": "pour more and more resources into their publicly visible faces",
+    "to": "profit-oriented management",
+    "pat": "구체→추상"
+   },
+   {
+    "from": "the spaces of storage may even suffer",
+    "to": "consequences",
+    "pat": "구체→추상"
+   }
+  ],
+  "note": "근거는 수익 지향 운영이 수장고를 희생시키는 '결과'를 직접 서술; 오답은 수익 압박이라는 원인이나 수장고의 역할 배경일 뿐 결과 자체를 말하지 않는다."
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 24,
+  "type": "제목",
+  "answer_text": "Better Together: Human and Machine Collaboration",
+  "cands": [
+   "The team consists of at least one robot and one human and is often called a mixed team…",
+   "…a human-machine team where the intelligence is synergistic, arising from the contributions of each agent.",
+   "Self-driving cars, where a person turns on and off the driving, is an example of a joint cognitive system.",
+   "…joint cognitive systems approaches treat robots as helpers such as service animals or sheep dogs."
+  ],
+  "evi": 1,
+  "maps": [
+   {
+    "from": "human-machine team",
+    "to": "Human and Machine",
+    "pat": "동의어치환"
+   },
+   {
+    "from": "the intelligence is synergistic, arising from the contributions of each agent",
+    "to": "Better Together … Collaboration",
+    "pat": "비유→직설"
+   }
+  ],
+  "note": "인간과 로봇이 함께 만들어내는 시너지(협업)를 말한 문장이 제목의 근거. 나머지는 예시(자율차)·구성 설명·역할 비유라 협업의 핵심 주장이 아님."
+ },
+ {
+  "exam_id": "2024-06",
+  "num": 24,
+  "type": "제목",
+  "answer_text": "Is Hyper-mobility Always Good for Cities?",
+  "cands": [
+   "Hyper-mobility ― the notion that more travel at faster speeds covering longer distances generates greater economic success ― seems to be a distinguishing feature of urban areas…",
+   "By 2005, approximately 7.5 billion trips were made each day in cities worldwide.",
+   "Yet, despite the increasing level of urban mobility worldwide, access to places, activities and services has become increasingly difficult.",
+   "Mobility flows have become a key dynamic of urbanization…"
+  ],
+  "evi": 2,
+  "maps": [
+   {
+    "from": "access to places, activities and services has become increasingly difficult",
+    "to": "Always Good? (아니라는 의문)",
+    "pat": "반대구조"
+   },
+   {
+    "from": "urban mobility worldwide",
+    "to": "Cities",
+    "pat": "동의어치환"
+   }
+  ],
+  "note": "이동성이 늘어도 접근성은 나빠졌다는 'Yet' 반전 문장이 '정말 좋은가?'라는 의문 제목의 근거. 나머지는 정의·통계·현상 서술로 부정적 반전을 담지 않음."
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 32,
+  "type": "빈칸",
+  "answer_text": "looking inside it, not outside it or beyond it",
+  "cands": [
+   "The critic who wants to write about literature from a formalist perspective must first be a close and careful reader…",
+   "Such a reader, who respects the autonomy of a work, achieves an understanding of it.",
+   "Instead of examining historical periods, author biographies, or literary styles, for example, he or she will approach a text with the assumption that it is a self-contained entity…",
+   "For example, the correspondences between the characters in James Joyce’s short story “Araby” and the people he knew personally may be interesting…"
+  ],
+  "evi": 2,
+  "maps": [
+   {
+    "from": "Instead of examining historical periods, author biographies, or literary styles",
+    "to": "not outside it or beyond it",
+    "pat": "구체→추상"
+   },
+   {
+    "from": "a self-contained entity",
+    "to": "looking inside it",
+    "pat": "동의어치환"
+   }
+  ],
+  "note": "외부 요소(시대·전기·문체)를 배제하고 텍스트 자체를 자족적 실체로 본다는 문장이 '내부를 본다'는 빈칸의 근거. 나머지는 정의·빈칸 문장 자체·예시라 '안/밖' 대비를 직접 제시하지 않음."
+ },
+ {
+  "exam_id": "2023-06",
+  "num": 34,
+  "type": "빈칸",
+  "answer_text": "appears in an incredible variety of ways",
+  "cands": [
+   "A fugue by Johann Sebastian Bach illustrates how far this process could go…",
+   "Ludwig van Beethoven’s famous Fifth Symphony provides an exceptional example of how much mileage a classical composer can get out of a few notes…",
+   "…we may not always notice how Beethoven keeps finding fresh uses for his motto or how he develops his material into a large, cohesive statement.",
+   "But a lot of the enjoyment we get from that mighty symphony stems from the inventiveness behind it, the impressive development of musical ideas."
+  ],
+  "evi": 2,
+  "maps": [
+   {
+    "from": "keeps finding fresh uses for his motto",
+    "to": "appears in an incredible variety of ways",
+    "pat": "구체→추상"
+   },
+   {
+    "from": "fresh uses",
+    "to": "incredible variety of ways",
+    "pat": "동의어치환"
+   }
+  ],
+  "note": "베토벤이 모티프를 계속 '새롭게 활용한다'는 문장이 '다양한 방식으로 나타난다'는 빈칸의 재진술 근거. 나머지는 바흐 예시·심포니 소개·감상 총평이라 빈칸의 직접 근거가 아님."
+ }
+]

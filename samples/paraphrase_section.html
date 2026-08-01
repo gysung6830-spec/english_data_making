@@ -23,7 +23,8 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
   .dissect{ break-before:page; }
   .q, .dcard{ break-inside:avoid; }
   .answers{ break-before:page; }
-  .pgbreak{ break-before:page; }   /* '5. 연습 문제'는 새 페이지에서 시작 */
+  .pgbreak{ break-before:page; }
+  .apply{ break-before:page; }
 }
 
 /* 섹션 표지 */
@@ -282,8 +283,47 @@ table.t tbody tr:nth-child(even) td{ background:#f1f7f4; }
     </div>
   </div>
 
+  <!-- ===== 6. 유형별 적용법 ===== -->
+  <div class="apply">
+    <div class="h2">6. 유형별 — 정답은 지문의 '무엇'을 바꾸나</div>
+    <div class="principle">패러프레이징은 유형마다 정답이 되는 방식이 다르다. <b>어느 문장을, 어떻게 바꾸는지</b>를 알면 선지 다섯 개 중 정답이 먼저 보인다.</div>
+    <table class="t">
+      <thead><tr><th style="width:16%">유형</th><th style="width:44%">정답이 바꾸는 것</th><th>이 유형 단골 함정</th></tr></thead>
+      <tbody>
+        <tr><td class="pat">요지·주제<br>(22·23)</td><td>역접·결론 문장(주제문)을 <b>추상화</b> — 키워드는 남기고 표현만 교체.</td><td>예시를 주제로 올린 <b>초점 이탈</b> · 지문어 그대로 쓴 <b>표면어휘 복사</b></td></tr>
+        <tr><td class="pat">제목<br>(24)</td><td>주제문을 <b>비유·압축</b>해 한 구절로.</td><td>지문 범위를 넘는 <b>too-broad</b> · 소재만 같은 <b>세부 왜곡</b></td></tr>
+        <tr><td class="pat">함축<br>(21)</td><td>밑줄 구절을 <b>주제에 비추어 추상 재진술</b>(어휘 문제 아님).</td><td>밑줄 단어를 직역한 <b>표면어휘 복사</b> · 긍정↔부정 <b>방향 반대</b></td></tr>
+        <tr><td class="pat">빈칸<br>(31~34)</td><td>빈칸 앞뒤 <b>근거 문장의 재진술</b>. 새 정보가 아니라 이미 한 말.</td><td>익숙해서 끌리는 <b>지문어 복사</b> · 근거 없는 <b>초점 이탈</b></td></tr>
+        <tr><td class="pat">순서·삽입<br>(36~39)</td><td>명시적 단서(지시어·연결어) 외에 <b>재진술·소재 동일</b>이 연결 고리.</td><td>표면 단어가 같아 <b>엉뚱한 조각을 이어 붙임</b></td></tr>
+        <tr><td class="pat">요약문<br>(40)</td><td>요약문 두 빈칸 = 지문 핵심어의 <b>상위어(추상어)</b>.</td><td>정도·조건을 비튼 <b>세부 왜곡</b> · <b>방향 반대</b></td></tr>
+        <tr><td class="pat">무관한 문장<br>(35)</td><td>정답은 패러프레이즈가 아니라 <b>주제에서 벗어나거나 반대</b>인 문장.</td><td>앞 문장 단어를 복사해 <b>익숙하게 위장</b></td></tr>
+      </tbody>
+    </table>
+    <div class="dnote">핵심 하나 — <b>정답은 표현이 바뀌어 낯설고, 오답은 지문 단어가 남아 익숙하다.</b> 익숙함에 끌리면 함정이다.</div>
+  </div>
+
+  <!-- ===== 7. 실전 3단계 ===== -->
+  <div class="apply" style="margin-top:16px">
+    <div class="h2">7. 선지 앞에서 — 3단계로 끊는다</div>
+    <div class="traps" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="trapc ok"><div class="h" style="color:var(--deep)">STEP 1 · 근거 찾기</div>선지마다 <b>“이 말의 근거가 지문 어디?”</b> 자문. 짚이는 <b>근거 문장에 밑줄</b>. 못 짚으면 그 선지는 이미 유력한 오답.</div>
+      <div class="trapc ok"><div class="h" style="color:var(--deep)">STEP 2 · 정답 매칭</div>근거 문장과 <b>뜻은 같고 표현만 바뀐</b> 선지를 연결. 5변환(동의어·추상화·품사·반대구조·비유→직설) 중 무엇으로 바꿨는지 확인.</div>
+      <div class="trapc ok"><div class="h" style="color:var(--deep)">STEP 3 · 오답 소거</div>남은 선지를 아래 <b>네 잣대</b>로 지운다. 하나라도 걸리면 소거.</div>
+    </div>
+    <table class="t" style="margin-top:10px">
+      <thead><tr><th style="width:20%">3초 잣대</th><th style="width:34%">이럴 때 소거</th><th>확인법</th></tr></thead>
+      <tbody>
+        <tr><td class="pat">copy · 복사</td><td>지문 단어가 그대로 보여 익숙하다.</td><td>그 단어의 <b>논리·관계</b>가 지문과 같은지 재확인.</td></tr>
+        <tr><td class="pat">reverse · 반대</td><td>단어는 비슷한데 방향이 반대다.</td><td>부정어(not·no·without)와 <b>인과 방향</b>을 대조.</td></tr>
+        <tr><td class="pat">distort · 왜곡</td><td>90%는 맞는데 한 군데가 어긋난다.</td><td><b>대상·조건·정도</b>를 하나씩 대조(누가/무엇을/얼마나).</td></tr>
+        <tr><td class="pat">off · 이탈</td><td>그럴듯하지만 지문에서 본 적 없다.</td><td><b>근거 문장</b>을 못 짚으면 소거(상식은 근거 아님).</td></tr>
+      </tbody>
+    </table>
+    <div class="dnote">순서는 <b>근거 → 매칭 → 소거</b>. 정답부터 찍지 말고 <b>오답을 지워</b> 남기는 편이 매력적인 오답에 덜 흔들린다.</div>
+  </div>
+
   <!-- ===== 객관식 ===== -->
-  
+
 </div>
 </body>
 </html>

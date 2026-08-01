@@ -17,8 +17,10 @@ ROOT = Path(__file__).resolve().parent.parent
 REAL = ROOT / "corpus" / "paraphrase_real.json"
 ITEMS = ROOT / "corpus" / "paraphrase_items.json"
 EXPLAIN = ROOT / "corpus" / "paraphrase_explain.json"
+MATCH = ROOT / "corpus" / "paraphrase_match.json"
 OUT = ROOT / "samples" / "패러프레이징_50.html"
 CIRCLED = "①②③④⑤"
+ABCD = "ABCD"
 
 TRAP = {
   "ok":  ("정답", "b-ok"),
@@ -78,6 +80,36 @@ def a_card(qn, typ, a, choices, src, ex=None, extra=""):
             f'<span class="badge b-ok">{esc(typ)}</span> '
             f'<span class="src-mini">{esc(src)}</span>{extra}{srcline}<table>{rows}</table></div>')
 
+def m_card(qn, rec):
+    """근거 매칭 문제 — 정답 선지를 주고 그 근거 문장(A~D)을 고르게 한다."""
+    cands = rec.get("cands", [])
+    lis = "".join(f'<li><span class="num">{ABCD[j]}</span>{esc(c)}</li>'
+                  for j, c in enumerate(cands))
+    cite = f"평가원 {exam_label(rec.get('exam_id',''))} {rec.get('num','')}번"
+    return (f'<div class="q"><div class="qhead"><span class="qn">{esc(qn)}</span>'
+            f'<span class="tp">{esc(rec.get("type",""))}</span>'
+            f'<span class="ask">아래 <b>정답 선지</b>가 바꿔 말한 <b>근거 문장</b>은? (A~D)</span>'
+            f'<span class="cite">{cite}</span></div>'
+            f'<div class="src" style="background:#eef4f1;border-color:#cfe6dd">'
+            f'<b>정답 선지</b> — {esc(rec.get("answer_text",""))}</div>'
+            f'<ul class="ch">{lis}</ul></div>')
+
+def m_ans(qn, rec):
+    cands = rec.get("cands", []); evi = rec.get("evi", 0)
+    ev = esc(cands[evi]) if evi < len(cands) else ""
+    maps = ""
+    for m in rec.get("maps", []):
+        maps += (f'<div class="m"><span class="bd">{esc(m.get("pat",""))}</span>'
+                 f'<span class="from">{esc(m.get("from",""))}</span>'
+                 f'<span class="arw">→</span><span class="to">{esc(m.get("to",""))}</span></div>')
+    return (f'<div class="ak"><span class="qn">{esc(qn)}</span> 근거 '
+            f'<span class="cor">{ABCD[evi]}</span> '
+            f'<span class="badge b-ok">{esc(rec.get("type",""))}</span> '
+            f'<span class="src-mini">{exam_label(rec.get("exam_id",""))} {rec.get("num","")}번</span>'
+            f'<div class="src-ko">근거 문장 — {ev}</div>'
+            f'<div class="dmap">{maps}</div>'
+            f'<div class="rwhy" style="margin-top:4px">✓ {esc(rec.get("note",""))}</div></div>')
+
 def build():
     real = json.loads(REAL.read_text(encoding="utf-8")) if REAL.exists() else []
     items = json.loads(ITEMS.read_text(encoding="utf-8")) if ITEMS.exists() else []
@@ -115,13 +147,23 @@ def build():
             it.get("choices",[]), it.get("src",""), explain.get(f"basic|{i}")))
     bcount = len(bprob)
 
+    # ── 근거 매칭 드릴 (지문에서 정답의 근거 문장 찾기) ──
+    match = json.loads(MATCH.read_text(encoding="utf-8")) if MATCH.exists() else []
+    mprob, mans = [], []
+    for i, rec in enumerate(match):
+        qn = f"근거 {i+1}"
+        mprob.append(m_card(qn, rec)); mans.append(m_ans(qn, rec))
+    mcount = len(mprob)
+
     doc = (TPL
         .replace("{{RCOUNT}}", str(rcount)).replace("{{BCOUNT}}", str(bcount))
+        .replace("{{MCOUNT}}", str(mcount))
         .replace("{{TOTAL}}", str(rcount + bcount))
+        .replace("{{MPROB}}", "\n".join(mprob)).replace("{{MANS}}", "\n".join(mans))
         .replace("{{RPROB}}", "\n".join(rprob)).replace("{{RANS}}", "\n".join(rans))
         .replace("{{BPROB}}", "\n".join(bprob)).replace("{{BANS}}", "\n".join(bans)))
     OUT.write_text(doc, encoding="utf-8")
-    print(f"패러프레이징 실전편 {rcount} + 기초편 {bcount} = {rcount+bcount}문항 → {OUT}")
+    print(f"패러프레이징 근거매칭 {mcount} + 실전편 {rcount} + 기초편 {bcount} = {rcount+bcount}(+{mcount}) → {OUT}")
 
 TPL = '''<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>패러프레이징 훈련</title><style>
 @page{ size:A4; margin:11mm 12mm; } *{ box-sizing:border-box; }
@@ -132,7 +174,7 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .cover .t{ font-size:19px; font-weight:800; color:var(--deep-d); } .cover .s{ font-size:10px; color:var(--muted); }
 .band{ font-size:13.5px; font-weight:800; color:#fff; background:var(--deep); border-radius:6px; padding:5px 13px; margin:14px 0 9px; break-after:avoid; }
 .band small{ font-weight:600; opacity:.92; font-size:9.5px; }
-.band.real{ background:var(--deep-d); } .band.basic{ background:#5a6b64; }
+.band.real{ background:var(--deep-d); } .band.basic{ background:#5a6b64; } .band.match{ background:#2f6f8f; }
 .lead{ font-size:9.6px; color:#2b3a34; background:#eef4f1; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:7px 11px; margin-bottom:10px; }
 .lead b{ color:var(--deep-d); }
 .q{ border:1px solid var(--line); border-radius:7px; padding:10px 13px; margin-bottom:9px; break-inside:avoid; }
@@ -161,6 +203,10 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 <div class="cover"><div class="t">패러프레이징 훈련 — {{TOTAL}}문항</div>
 <div class="s">평가원 정답 선지 = 지문을 바꿔 말한 것 / 오답 = 표면어휘 복사·뜻 반대·세부 왜곡·과도한 일반화·초점 이탈.</div></div>
 
+<div class="band match">근거 매칭 · 지문에서 정답의 근거 찾기 <small>({{MCOUNT}}문항 — 실제 기출 정답 선지가 바꿔 말한 '근거 문장'을 A~D에서 고른다)</small></div>
+<div class="lead">시험장에서 정답을 고르는 실제 동작 — <b>정답 선지의 근거 문장을 지문에서 짚는</b> 훈련입니다. 근거를 못 짚으면 그 선지는 오답. 정답이 그 문장을 <b>어떻게 바꿨는지</b>(변환 패턴)까지 해설에서 확인하세요.</div>
+{{MPROB}}
+
 <div class="band real">실전편 · 실제 평가원 선지 <small>({{RCOUNT}}문항 — ①~⑤ 전부 실제 기출 선지, 정답이 지문을 어떻게 바꿨는지 해부)</small></div>
 <div class="lead">여기 선지는 <b>모두 실제 평가원 기출 선지</b>입니다. 정답 선지가 지문(원문)을 어떤 방식으로 바꿔 말했는지, 오답은 어떤 함정인지 뒤 해설에서 확인하세요.</div>
 {{RPROB}}
@@ -169,7 +215,8 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 <div class="lead">원문 <b>문장은 실제 평가원 기출</b>이며, 선지는 학습용 예문입니다(저자 작성). 단 <b>오답 구성을 실제 평가원 오답 분포에 맞춰 설계</b>했습니다 — 초점 이탈 48%·뜻 반대 26%·세부 왜곡 17%·표면어휘 복사 7%·과도한 일반화 2% (실전편 실측 52·26·17·4·1과 근접).</div>
 {{BPROB}}
 
-<div class="answers"><h2>정답 &amp; 해설 — 실전편</h2>{{RANS}}
+<div class="answers"><h2>정답 &amp; 해설 — 근거 매칭</h2>{{MANS}}
+<h2 style="margin-top:14px">정답 &amp; 해설 — 실전편</h2>{{RANS}}
 <h2 style="margin-top:14px">정답 &amp; 해설 — 기초편</h2>{{BANS}}</div>
 </div></body></html>'''
 
