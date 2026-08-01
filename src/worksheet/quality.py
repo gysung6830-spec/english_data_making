@@ -130,4 +130,29 @@ def assess(analyses, min_sentences: int = 2) -> dict:
     if empty_tr:
         reasons.append(f"해석이 비어 있는 문장 {empty_tr}개(태깅 누락 가능).")
 
+    # 4) 끊어읽기 불일치: 영어(/) 조각 수 ≠ 한글 직독직해(/) 조각 수
+    mis = _reading_misaligned(lst)
+    if mis:
+        reasons.append(f"끊어읽기(영어 /)와 직독직해(한글 /)의 구간이 어긋난 문장 {mis}개.")
+
     return {"ok": not reasons, "reasons": reasons}
+
+
+def _reading_misaligned(analyses) -> int:
+    """영어 끊어읽기(slash) 조각 수와 한글 직독직해(' / ') 조각 수가 크게 어긋난 문장 수.
+
+    마지막 조각의 슬래시 유무에 따른 off-by-one 은 허용(차이 2 이상만 불일치로 본다).
+    """
+    bad = 0
+    for a in analyses or []:
+        for s in getattr(a, "sentences", []) or []:
+            rk = (getattr(s, "reading_ko", "") or "").strip()
+            if not rk:
+                continue
+            ko = len([c for c in rk.split(" / ") if c.strip()])
+            en = sum(1 for t in s.tokens if getattr(t, "slash", False))
+            if ko <= 1 or en <= 1:
+                continue
+            if abs(ko - en) >= 2:
+                bad += 1
+    return bad

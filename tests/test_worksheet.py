@@ -525,6 +525,20 @@ def test_student_modes_render():
     print("PASS  학생용 3모드 렌더(slash/blank/interp)")
 
 
+def test_reading_alignment_detect():
+    from src.worksheet import quality
+
+    def mk(slash_idx, ko):
+        toks = [Token(text="w%d" % i, slash=(i in slash_idx)) for i in range(5)]
+        return Analysis(sentences=[Sentence(index=1, lines=[toks], reading_ko=ko)])
+
+    ok = mk({1, 3, 4}, "가 / 나 / 다")       # 영어 3조각 · 한글 3조각 → 정렬
+    assert quality._reading_misaligned([ok]) == 0
+    bad = mk({0, 1, 2, 3, 4}, "가 / 나")     # 영어 5조각 · 한글 2조각 → 불일치
+    assert quality._reading_misaligned([bad]) == 1
+    print("PASS  끊어읽기(영어/한글) 정렬 불일치 감지")
+
+
 def test_quality_assess_gate():
     from src.worksheet import quality
     ok = _mk_analysis(["Full sentence one here.", "Full sentence two here.", "Third one here."])
@@ -640,6 +654,7 @@ def run_all():
     test_detect_problem_numbers_regex()
     test_front_density_render_classes()
     test_student_modes_render()
+    test_reading_alignment_detect()
     test_quality_assess_gate()
     test_config_quality_defaults()
     test_clean_passage_keeps_numbered_sentences()
