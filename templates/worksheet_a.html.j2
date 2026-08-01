@@ -496,7 +496,7 @@
       <div class="flow">
         {% for f in a.flow %}
         <div class="step">
-          <div class="row1"><span class="lb">{{ f.label }}</span>{% if s_ko %}<span class="tx">{{ f.text }}</span>{% else %}<span class="tx"><span class="blk"></span></span>{% endif %}{% if f.sentences %}<span class="sn">({{ f.sentences }}번)</span>{% endif %}</div>
+          <div class="row1"><span class="lb">{{ f.label }}</span>{% if s_ko %}<span class="tx">{{ f.text }}</span>{% else %}<span class="tx"><span class="blk"></span></span>{% endif %}{% if f.sentences %}<span class="sn">(문장 {{ f.sentences }})</span>{% endif %}</div>
           {% if f.easy and s_ko %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
         </div>
         {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
