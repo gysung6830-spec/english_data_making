@@ -19,13 +19,25 @@
 
 @page {
   size: A4;
-  margin: 9mm 10mm 11mm 10mm;
-  @bottom-center {
+  margin: 9mm 10mm 12mm 10mm;
+  /* 하단 왼쪽: 저작권 문구(running element) */
+  @bottom-left {
+    content: element(pgcopyright);
+  }
+  /* 하단 오른쪽: 페이지 번호 */
+  @bottom-right {
     content: counter(page) " / " counter(pages);
     font-family: "NanumGothic", "Malgun Gothic", sans-serif;
     font-size: 8px;
     color: #9aa0a6;
   }
+}
+
+/* 매 페이지 하단 왼쪽에 반복 표시되는 저작권 (running element) */
+.pg-copyright {
+  position: running(pgcopyright);
+  font-family: "NanumGothic", "Malgun Gothic", sans-serif;
+  font-size: 8px; color: #9aa0a6;
 }
 
 * { box-sizing: border-box; }

@@ -237,10 +237,6 @@
     {% endif %}
   </div>
   {% endif %}
-
-  {% if footer_note %}
-  <div class="footer-note">{{ footer_note }}</div>
-  {% endif %}
 {% endmacro %}
 
 {# ---- 앞부분: 원문 + 전체 해석 모음 ---- #}
@@ -264,8 +260,10 @@
       </td>
     </tr></tbody>
   </table>
-  {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
 {% endmacro %}
+
+  {# 매 페이지 하단 왼쪽에 반복 표시할 저작권 (running element) #}
+  {% if footer_note %}<div class="pg-copyright">{{ footer_note }}</div>{% endif %}
 
   {# 1) 전체 원문 + 해석 모음 (여러 지문이면 지문별 페이지) #}
   {% if with_source %}
