@@ -405,8 +405,7 @@
             {%- else -%}<span class="blk"></span>{%- endif -%}
           </div>
           {% endif %}
-          {# 온전한 해석: 박스 처리 — 학생용은 빈칸 #}
-          {% if s.translation %}<div class="kobox{% if not s_ko %} stu{% endif %}"><span class="kblbl">해석</span>{% if s_ko %}{{ s.translation }}{% else %}<span class="blk"></span>{% endif %}</div>{% endif %}
+          {# (온전한 해석 카드는 삭제 — 전체 해석은 뒷면 '원문·전체 해석'에 있음) #}
         </div>
       </div>
       <div class="points">

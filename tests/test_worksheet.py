@@ -186,15 +186,15 @@ def test_render_a_and_b():
 
 
 def test_render_reading_and_box():
-    # 끊어읽기: 영어 슬래시(/) + 직독직해(한글) 줄 + 온전한 해석 박스
+    # 끊어읽기: 영어 슬래시(/) + 직독직해(한글) 줄 (앞면 해석 카드는 삭제됨)
     a = mock_analysis()
     ha = renderer.render_a_html([a])
     assert 'class="rdko"' in ha and "직독직해" in ha        # 직독직해(끊어읽기) 줄
-    assert 'class="kobox"' in ha and 'class="kblbl"' in ha  # 온전한 해석 박스
+    assert 'class="kobox"' not in ha                        # 온전한 해석 카드는 앞면에서 제거
     assert 'class="sl"' in ha                               # 영어 끊어읽기 경계 /
     # 직독직해 청크가 / 로 나뉘어 렌더되는지
     assert 'class="rc"' in ha
-    print("PASS  끊어읽기(직독직해) + 온전한 해석 박스")
+    print("PASS  끊어읽기(직독직해) 줄 — 앞면 해석 카드 제거")
 
 
 def test_render_guide_cover():
