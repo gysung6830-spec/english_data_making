@@ -422,19 +422,21 @@ def _hint(answer: str) -> str:
     return a[0] if a else ""
 
 
-def _ws_context(worksheets, start_no: int = 1, title: str = "") -> list[dict]:
+def _ws_context(worksheets, start_no: int = 1, title: str = "",
+                passage_start_no: int = 1) -> list[dict]:
     """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료).
 
     일련번호(qno)는 '표시 유형 순서(type-major)'로 매긴다:
       복수 지문이면 각 유형 안에서 지문1→지문2… 순으로 이어진다.
     start_no: 첫 문항 번호(사용자 지정 시작번호). 이후 자동 증가.
     title: 파일명(교재 제목). 지문 배지를 '파일명-지문번호'로 표시하는 데 쓴다.
+    passage_start_no: 첫 지문 번호(사용자 지정). 지문이 여러 개면 여기서부터 1씩 증가.
     """
     reps = _as_list(worksheets)
 
     base = (title or "").strip()
     passages: list[dict] = []
-    for i, ws in enumerate(reps, 1):
+    for i, ws in enumerate(reps, int(passage_start_no)):
         src = f"{base}-{i}" if base else f"지문 {i}"
 
         # 요약문 완성 ((A)(B) 빈칸)
@@ -548,7 +550,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "") -> list[dict]:
 def render_worksheet_pdf(worksheets, out_path: str | Path,
                          title: str = "내신 서술형 대비 교재",
                          footer_note: str = "", brand: str = "은아 T",
-                         start_no: int = 1) -> Path:
+                         start_no: int = 1, passage_start_no: int = 1) -> Path:
     """여러 지문의 Worksheet 를 한 PDF 로 만든다.
 
     구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
@@ -560,7 +562,8 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    passages = _ws_context(worksheets, start_no=start_no, title=title)
+    passages = _ws_context(worksheets, start_no=start_no, title=title,
+                           passage_start_no=passage_start_no)
     # 유형별로 내용이 하나라도 있는지(부분 성공 시 빈 유형 블록은 건너뜀)
     has = {
         "cloze": any(p["cloze"] for p in passages),

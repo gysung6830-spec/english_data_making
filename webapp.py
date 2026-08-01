@@ -125,6 +125,10 @@ INDEX_HTML = """
       <input type=number name=start_no min=1 step=1 value=1 style="width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
       <div class=hint>예: <b>5</b> 를 넣으면 첫 문항이 5번, 그다음 6·7…로 매겨집니다. (여러 지문이면 유형별로 이어서 증가)</div>
 
+      <label>⑤ 지문 번호 <span class=hint>(배지 '파일명-지문번호'에 표시 · 여러 지문이면 1씩 증가)</span></label>
+      <input type=number name=passage_start_no min=1 step=1 value=1 style="width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
+      <div class=hint>예: 파일명 <b>올림포스 7강</b>, 지문 번호 <b>3</b> → 배지가 <b>올림포스 7강-3</b> 으로 표시됩니다.</div>
+
       <div class=hint style="margin-top:14px">📄 결과물: <b>내신 서술형 대비 교재</b> (7개 유형 · 학생용 / 교사용 / 빠른 정답 / 정답 및 해설)</div>
 
       <label class=chk style="margin-top:12px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
@@ -258,6 +262,11 @@ def analyze_route():
         start_no = max(1, int(request.form.get("start_no") or 1))
     except (TypeError, ValueError):
         start_no = 1
+    # 지문 시작 번호(사용자 지정) — 배지 '파일명-지문번호'에 반영. 기본 1.
+    try:
+        passage_start_no = max(1, int(request.form.get("passage_start_no") or 1))
+    except (TypeError, ValueError):
+        passage_start_no = 1
 
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
@@ -292,7 +301,8 @@ def analyze_route():
             else:
                 stem = _safe_name(Path(f.filename).stem)
             recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
-                                           worksheets=worksheets, ws_start_no=start_no)
+                                           worksheets=worksheets, ws_start_no=start_no,
+                                           ws_passage_start_no=passage_start_no)
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
             n_passages = max(len(reports), len(worksheets))
             note = f" (지문 {n_passages}개)" if n_passages > 1 else ""
