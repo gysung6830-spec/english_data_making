@@ -54,7 +54,8 @@
       <li>
         <span class="stage">{{ st.stage }}</span>
         <span class="content">{{ st.content }}</span>
-        {% if st.evidence %}<span class="stage-ref">{{ st.evidence }}</span>{% endif %}
+        {% if student %}<span class="stage-ref stage-blank">문장 <span class="blank" style="min-width:40px"></span></span>
+        {% elif st.evidence %}<span class="stage-ref">{{ st.evidence }}</span>{% endif %}
       </li>
       {% endfor %}
     </ul>
@@ -137,7 +138,7 @@
       <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
       <span class="sec-sub">Vocabulary</span>
     </div>
-    <table class="grid t-voc">
+    <table class="grid t-voc{% if student %} stu{% endif %}">
       <thead><tr>
         <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th class="th-sent">문장</th>
       </tr></thead>
@@ -163,8 +164,8 @@
       <span class="sec-title">직독직해 {% if brand %}<span class="made-by">made by {{ brand }}</span>{% endif %}</span>
       <span class="sec-sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>
-    <table class="lit2">
-      <thead><tr><th class="lh-en">영어 원문 + 핵심 문법</th><th class="lh-ko">직독직해 + 핵심 단어</th></tr></thead>
+    <table class="lit2{% if student %} stu{% endif %}">
+      <thead><tr><th class="lh-en">영어 원문{% if student %} (핵심 문법에 ○ 표시){% else %} + 핵심 문법{% endif %}</th><th class="lh-ko">직독직해{% if not student %} + 핵심 단어{% endif %}</th></tr></thead>
       <tbody>
       {% for s in report.literal.sentences %}
       <tr class="lit-row">
@@ -178,12 +179,13 @@
           {% set gitems = report.grammar.items | selectattr('sentence_no', 'equalto', s.no) | list %}
           {% if gitems %}
           <div class="lit-gram">
+            {% if student %}<div class="gram-todo">▶ 아래 핵심 문법이 쓰인 부분을 문장에서 찾아 ○로 표시하세요</div>{% endif %}
             {% for g in gitems %}
             {% set is_key = g.key or (g.point|is_key_grammar) %}
             {% set ci = g.example | chunk_color(s.chunks, g.point) %}
             <div class="gline ck{{ ci }}">
               <span class="gtag{{ ' keytag' if is_key }}">{% if is_key %}★ {% endif %}{{ g.point }}</span>
-              <span class="gexp">{{ g.explanation }}</span>
+              {% if not student %}<span class="gexp">{{ g.explanation }}</span>{% endif %}
             </div>
             {% endfor %}
           </div>
@@ -195,12 +197,15 @@
               {% if student %}<span class="blank" style="min-width:{{ [c.korean|length*7, 44]|max }}px"></span>{% else %}<span class="ck ck{{ loop.index0 % 8 }}">{{ c.korean }}</span>{% endif %}{% if not loop.last %}<span class="sl">/</span>{% endif %}
             {%- endfor -%}
           </span>
+          {# 핵심 단어: 학생용에서는 표시하지 않음 #}
+          {% if not student %}
           {% set allwords = [] %}
           {% for c in s.chunks %}{% for w in c.words %}{% set _ = allwords.append(w) %}{% endfor %}{% endfor %}
           {% if allwords %}
           <span class="lit-words">
-            {%- for w in allwords -%}<b>{{ w.word }}</b> {% if student %}<span class="blank" style="min-width:40px"></span>{% else %}{{ w.meaning }}{% endif %}{% if not loop.last %} · {% endif %}{%- endfor -%}
+            {%- for w in allwords -%}<b>{{ w.word }}</b> {{ w.meaning }}{% if not loop.last %} · {% endif %}{%- endfor -%}
           </span>
+          {% endif %}
           {% endif %}
         </td>
       </tr>
@@ -280,7 +285,7 @@
 
   {# 2) 지문별 분석지 #}
   {% for report in reports %}
-  <div class="passage{{ ' pg' if (with_source or not loop.first) }}">
+  <div class="passage{{ ' pg' if (with_source or not loop.first) }}{% if student %} stu{% endif %}">
     {{ render_report(report, loop.index, reports|length) }}
   </div>
   {% endfor %}

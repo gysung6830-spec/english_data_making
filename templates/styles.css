@@ -350,6 +350,24 @@ table.lit2 td {
 .src-h-hint { font-size: 9px; font-weight: 600; color: var(--muted); }
 .narr-blank { text-decoration: none; }
 
+/* ---- 학생용: 필기 여백 넉넉히 + 문법 동그라미 안내 ---- */
+.gram-todo { font-size: 8px; font-weight: 700; color: var(--gram); margin: 1px 0 4px; }
+.stage-blank { border-style: dashed; }
+.passage.stu .blank { min-height: 13px; }
+/* 주제 문장: 줄 간격 크게 */
+.passage.stu .summary-overall { line-height: 2.3; }
+/* 직독직해 오른쪽(직독직해 쓰기): 줄 간격·밑줄 크게, 행 높이 확보 */
+.passage.stu table.lit2 td { padding: 7px 8px; }
+.passage.stu .lit-ko .lit-line { line-height: 2.9; }
+.passage.stu .lit-ko .blank { height: 1.15em; min-width: 70px; }
+/* 어휘표: 행 높이 키워 필기 공간 확보 */
+.t-voc.stu td { height: 27px; }
+.t-voc.stu .blank-cell { height: 15px; }
+/* 출제 포인트 정답 빈칸: 줄 간격 확보 */
+.passage.stu .ref-line { padding: 5px 0; }
+.passage.stu .imp-mean, .passage.stu .imp-ans { padding-top: 5px; padding-bottom: 4px; }
+.passage.stu .narr-reason.narr-blank { margin-top: 7px; }
+
 /* ---------- 하단 출처 ---------- */
 .footer-note {
   margin-top: 9px; padding-top: 6px; border-top: 1px solid var(--line);
