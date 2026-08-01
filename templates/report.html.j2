@@ -173,7 +173,7 @@
             {% set is_key = g.key or (g.point|is_key_grammar) %}
             {% set ci = g.example | chunk_color(s.chunks, g.point) %}
             <div class="gline ck{{ ci }}">
-              <span class="gtag{{ ' keytag' if is_key }}">{% if is_key %}★필수 {% endif %}{{ g.point }}</span>
+              <span class="gtag{{ ' keytag' if is_key }}">{% if is_key %}★ {% endif %}{{ g.point }}</span>
               <span class="gexp">{{ g.explanation }}</span>
             </div>
             {% endfor %}

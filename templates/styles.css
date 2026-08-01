@@ -283,17 +283,26 @@ table.lit2 td {
 /* 직독직해에 통합된 핵심 문법 (문장별) */
 .lit-gram { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #f0ddc0; }
 .gline { display: block; margin-top: 2px; line-height: 1.35; }
+/* 문법 뱃지 = 파스텔 칩(옅은 배경 + 같은 색 글씨, 테두리 없음) */
 .gtag {
-  display: inline-block; font-size: 8px; font-weight: 700;
-  color: var(--gram); border: 1px solid var(--gram); border-radius: 3px;
-  padding: 0 5px; margin-right: 4px;
+  display: inline-block; font-size: 8px; font-weight: 800;
+  color: var(--gram); background: #eef1f7; border: none; border-radius: 5px;
+  padding: 1px 7px; margin-right: 4px;
 }
-.gtag.keytag { background: #fff7ed; border-color: #ea580c; color: #c2410c; }
+.gtag.keytag { font-weight: 800; }   /* 필수 어법: 색은 그대로, ★ 별표로만 구분 */
 .gexp { font-size: 8.3px; color: #374151; }
 
-/* 문법 태그(포인트명)만 해당 어구(청크) 색과 동일, 설명 문구는 검은색 */
-.gline .gtag { color: inherit; border-color: currentColor; background: transparent; }
-.gline .gtag.keytag { color: inherit; border-color: currentColor; background: transparent; font-weight: 800; }
+/* 직독직해: 뱃지 글씨는 어구(청크) 색, 배경은 그 색의 옅은 틴트 / 설명은 검은색 */
+.gline .gtag { color: inherit; border: none; }
+.gline .gtag.keytag { color: inherit; font-weight: 800; }
+.gline.ck0 .gtag { background: #dfe4f2; }
+.gline.ck1 .gtag { background: #dfece4; }
+.gline.ck2 .gtag { background: #f2e7dc; }
+.gline.ck3 .gtag { background: #e8e3f3; }
+.gline.ck4 .gtag { background: #f5e2e2; }
+.gline.ck5 .gtag { background: #deeae9; }
+.gline.ck6 .gtag { background: #eee8dc; }
+.gline.ck7 .gtag { background: #e3e4f1; }
 .gline .gexp { color: #23272e; }
 .lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #23272e; line-height: 1.5; }
 .lit-words b { color: #23272e; }
