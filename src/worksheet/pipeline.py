@@ -265,8 +265,10 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
 
     out_path = Path(out_path)
     if not make_student:
-        return render_worksheet(analyses, out_path, layout=layout,
-                                footer_note=footer_note, density=density, boxmode=boxmode)
+        render_worksheet(analyses, out_path, layout=layout,
+                         footer_note=footer_note, density=density, boxmode=boxmode)
+        _stamp_footer(out_path, footer_note)
+        return out_path
     from pypdf import PdfWriter
     with tempfile.TemporaryDirectory() as d:
         tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
@@ -282,4 +284,53 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             w.write(f)
+    _stamp_footer(out_path, footer_note)   # 합본 완성 후 저작권(좌)·페이지번호(우) 스탬프
     return out_path
+
+
+def _stamp_footer(path: Path, footer_note: str = "") -> None:
+    """완성된 PDF 하단 여백에 저작권(왼쪽)·'현재/전체' 페이지 번호(오른쪽)를 찍는다.
+
+    모든 페이지 같은 위치(하단 여백)라 페이지별 내용 높이와 무관하게 정렬된다.
+    reportlab 이 없으면 조용히 건너뛴다.
+    """
+    path = Path(path)
+    try:
+        import io
+
+        from pypdf import PdfReader, PdfWriter
+        from reportlab.pdfbase import pdfmetrics
+        from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+        from reportlab.pdfgen import canvas
+    except Exception:
+        return
+    kfont = "Helvetica"
+    try:                                   # 한글(저작권) 지원 CID 폰트
+        pdfmetrics.registerFont(UnicodeCIDFont("HYSMyeongJo-Medium"))
+        kfont = "HYSMyeongJo-Medium"
+    except Exception:
+        pass
+    try:
+        reader = PdfReader(str(path))
+        total = len(reader.pages)
+        writer = PdfWriter()
+        gray = (0.55, 0.58, 0.64)
+        for i, page in enumerate(reader.pages, start=1):
+            w = float(page.mediabox.width)
+            h = float(page.mediabox.height)
+            buf = io.BytesIO()
+            c = canvas.Canvas(buf, pagesize=(w, h))
+            c.setFillColorRGB(*gray)
+            if footer_note:
+                c.setFont(kfont, 7.5)
+                c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권
+            c.setFont("Helvetica-Bold", 9)
+            c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체
+            c.save()
+            buf.seek(0)
+            page.merge_page(PdfReader(buf).pages[0])
+            writer.add_page(page)
+        with open(path, "wb") as f:
+            writer.write(f)
+    except Exception:
+        return

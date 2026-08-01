@@ -432,8 +432,7 @@
     </div>
     {% endfor %}
 
-    <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
-    {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
+    {# 저작권(좌)·페이지번호(우)는 합본 완성 후 하단 여백에 스탬프 #}
   </div>
   {% endif %}
 
@@ -506,8 +505,7 @@
     </div>
     {% endif %}
 
-    <div class="foot"><span class="dot">●</span><span class="pg">{{ loop.index }}-2</span>{% if footer_meta %}{{ footer_meta }}{% endif %}</div>
-    {% if footer_note %}<div class="copyr">{{ footer_note }}</div>{% endif %}
+    {# 저작권(좌)·페이지번호(우)는 합본 완성 후 하단 여백에 스탬프 #}
   </div>
   {% endif %}
 {% endfor %}
