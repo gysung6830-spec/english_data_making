@@ -60,6 +60,22 @@ def safe_filename(name: str) -> str:
     return _FNAME_BAD.sub("_", (name or "").strip()) or "지문"
 
 
+def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
+    """지문 라벨을 '시작번호부터 1씩 증가'하는 문항번호로 덮어쓴다.
+
+    start_no 가 None/빈값이면 그대로 둔다(파일에서 인식한 번호 유지).
+    """
+    if start_no in (None, ""):
+        return passages
+    try:
+        base = int(start_no)
+    except (TypeError, ValueError):
+        return passages
+    for i, p in enumerate(passages):
+        p.label = f"{base + i}번"
+    return passages
+
+
 # ── 입력 라우팅 ───────────────────────────────────────────────
 
 def extract_text(path) -> str:
@@ -255,7 +271,7 @@ def _set_passage_class(page, selector: str, step: str) -> None:
 
 def run(input_path, out_dir, header: str = "", formats: str = "abc",
         do_translate: bool = True, theme: str = "modern",
-        docname: str = "", api_key: str = None) -> List[Path]:
+        docname: str = "", api_key: str = None, start_no=None) -> List[Path]:
     """입력 → 3형식 PDF 생성. 생성된 파일 경로 리스트 반환."""
     input_path = Path(input_path)
     out_dir = Path(out_dir)
@@ -268,6 +284,9 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     if not passages:
         print("  ⚠ 지문을 찾지 못했습니다. 헤더 형식(…N번: 제목)과 원문자(①②)를 확인하세요.")
         return []
+
+    # 문항 시작 번호 지정 시 라벨 재부여(시작번호부터 자동 증가)
+    passages = renumber_passages(passages, start_no)
     print(f"  → 지문 {len(passages)}개, 총 문장 {sum(len(p.sentences) for p in passages)}개")
 
     # 한줄영어(c)만 요청하면 번역 불필요
@@ -316,6 +335,8 @@ def _build_argparser() -> argparse.ArgumentParser:
     ap.add_argument("--header", default="", help="상단 머리글(학원명·자료명 등)")
     ap.add_argument("--name", default="", help="출력 파일명(지문명). 미지정 시 입력 파일명")
     ap.add_argument("--no-translate", action="store_true", help="자동 번역 끄기")
+    ap.add_argument("--start-no", default="",
+                    help="문항 시작 번호. 지정 시 지문마다 시작번호부터 1씩 증가")
     ap.add_argument("--api-key", default="",
                     help="Claude API 키(영어만 있는 자료 자동 번역·비전 OCR용). "
                          "미지정 시 환경변수 ANTHROPIC_API_KEY 사용")
@@ -333,6 +354,7 @@ def main(argv=None) -> int:
         theme=args.theme,
         docname=args.name,
         api_key=args.api_key or None,
+        start_no=args.start_no or None,
     )
     return 0 if produced else 1
 

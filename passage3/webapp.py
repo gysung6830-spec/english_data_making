@@ -16,12 +16,14 @@ from flask import (Flask, flash, redirect, render_template_string, request,
                    send_file, url_for)
 
 try:
-    from .main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
+    from .main import (FORMATS, extract_passages, html_to_pdf,
+                       renumber_passages, safe_filename)
     from .renderer import render_format_a, render_format_b, render_format_c
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # python webapp.py 로 직접 실행할 때
-    from main import (FORMATS, extract_passages, html_to_pdf, safe_filename)
+    from main import (FORMATS, extract_passages, html_to_pdf,
+                      renumber_passages, safe_filename)
     from renderer import render_format_a, render_format_b, render_format_c
     from translator import translate_missing
     from vocab import extract_vocab
@@ -113,13 +115,21 @@ PAGE = """
     </div>
 
     <div class="card">
-      <label class="field" for="header">4. 상단 머리글 (선택)</label>
+      <label class="field" for="startno">4. 문항 시작 번호 (선택)</label>
+      <input type="number" id="startno" name="startno" min="1" step="1"
+             placeholder="예: 26  →  지문마다 26번, 27번, 28번 …">
+      <div class="hint">입력하면 각 지문 제목이 <b>시작번호부터 1씩 증가</b>하는 문항번호로 표시됩니다.
+        비우면 파일에서 인식한 번호를 그대로 사용합니다.</div>
+    </div>
+
+    <div class="card">
+      <label class="field" for="header">5. 상단 머리글 (선택)</label>
       <input type="text" id="header" name="header" placeholder="예: OO영어학원 · 지문 자료">
       <div class="hint">각 페이지 <b>오른쪽 위</b>에 표시됩니다(학원명·자료명 등). 비우면 표시 안 함.</div>
     </div>
 
     <div class="card">
-      <label class="field" for="apikey">5. AI 번역 키 (선택)</label>
+      <label class="field" for="apikey">6. AI 번역 키 (선택)</label>
       <input type="password" id="apikey" name="apikey" placeholder="sk-ant-... (해석 없는 자료를 자동 번역)"
              autocomplete="off">
       <div class="hint">
@@ -170,6 +180,7 @@ def generate():
     header = request.form.get("header", "").strip()
     formats = request.form.getlist("fmt")
     api_key = request.form.get("apikey", "").strip() or None
+    start_no = request.form.get("startno", "").strip() or None
 
     if not file or not file.filename:
         flash("지문 파일을 선택하세요.")
@@ -198,6 +209,9 @@ def generate():
         if not passages:
             flash("지문을 찾지 못했습니다. 헤더 형식(…N번: 제목)과 원문자(①②)를 확인하세요.")
             return redirect(url_for("index"))
+
+        # 문항 시작 번호 지정 시 라벨 재부여
+        passages = renumber_passages(passages, start_no)
 
         # 한줄영어(c)만 선택하면 번역 불필요
         if any(f in formats for f in ("a", "b")):
