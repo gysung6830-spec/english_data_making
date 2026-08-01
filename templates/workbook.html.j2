@@ -5,6 +5,7 @@
   <title>{{ books[0].title }}{% if books|length > 1 %} 외 {{ books|length - 1 }}편{% endif %} - 통합 워크북</title>
   <style>{{ font_css }}</style>
   <style>{% include "workbook.css" %}</style>
+  <style>{% include "_common.css" %}</style>
 </head>
 <body>
 
@@ -14,16 +15,10 @@
   <section class="wb-unit{{ ' unit-break' if not loop.first and section != 'a' }}">
 
     {% if section != 'a' %}
-    {# ── 상단 헤더 ── #}
-    <div class="wb-header">
-      <div class="wb-titles">
-        <div class="wb-title">{% if books|length > 1 %}<span class="wb-idx">지문 {{ loop.index }}</span>{% endif %}{{ wb.title }}</div>
-        {% if show_ko and wb.subtitle %}<div class="wb-subtitle">{{ wb.subtitle }}</div>{% endif %}
-      </div>
-      <div class="wb-meta">
-        <div class="wb-name"><span class="lbl">NAME</span><span class="blank"></span></div>
-        <div class="wb-score"><span class="lbl">SCORE</span><span class="val">/ {{ wb.total }}</span></div>
-      </div>
+    {# ── 상단 헤더 (제목 + 출처 뱃지) ── #}
+    <div class="sh-head">
+      <div class="sh-titles"><div class="sh-title">{{ wb.title }}</div></div>
+      {% if wb.label %}<span class="sh-badge">{{ wb.label }}</span>{% endif %}
     </div>
 
     {# ── 유형 범례 바 (5칸 균등) ── #}
@@ -65,7 +60,7 @@
     {# ── 정답 · 해설 (다음 페이지) ── #}
     <div class="ans-page">
       <div class="ans-head">정답 · 해설
-        <span class="ans-sub">{% if books|length > 1 %}지문 {{ loop.index }} · {% endif %}Answers &amp; Explanations · 총 {{ wb.total }}문항</span>
+        <span class="ans-sub">{% if wb.label %}{{ wb.label }} · {% endif %}통합 카드 · 총 {{ wb.total }}문항</span>
       </div>
       <ol class="ans-list">
         {% for q in wb.all_questions %}

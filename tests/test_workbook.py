@@ -153,44 +153,43 @@ def test_render_sentence_substitution():
 def test_render_html():
     from samples.workbook_mock import mock_workbook
     wb = mock_workbook()
+    wb.label = "[고1] 9월 30번"
     html = render_workbook_html(wb, footer_note="테스트")
-    assert "SCORE" in html and f"/ {wb.total}" in html
+    assert "sh-head" in html and wb.label in html   # 제목 + 출처 뱃지 헤더
+    assert "SCORE" not in html and "NAME" not in html  # NAME/SCORE 삭제
     assert "정답 · 해설" in html               # 정답 페이지 존재
     assert "ans-page" in html                    # page-break-before 대상
     assert "{{Q1}}" not in html                  # 자리표시자 누출 없음
     assert "동사·준동사" in html and "특수구문" in html  # 범례
     assert "※ 문제" in html and "(4)" in html    # 지시문(번호 형식 + 지칭 안내)
     assert "지칭" in html                        # 대명사 지칭(ref) 유형 라벨
-    print("PASS  HTML 렌더(SCORE·정답 페이지·범례·지시문·지칭)")
+    print("PASS  HTML 렌더(제목+뱃지·정답 페이지·범례·지시문·지칭)")
 
 
 # ---- 7. 복수 지문 배치 (지문1→답1→지문2→답2) ----------------------------
 def test_multi_passage_layout():
     from samples.workbook_mock import mock_workbook
-    b1 = mock_workbook(title="Passage One", subtitle="첫째 지문")
-    b2 = mock_workbook(title="Passage Two", subtitle="둘째 지문")
+    b1 = mock_workbook(title="Passage One"); b1.label = "[고1] 9월 30번"
+    b2 = mock_workbook(title="Passage Two"); b2.label = "[고1] 9월 31번"
     html = render_workbooks_html([b1, b2], footer_note="테스트")
-    # 두 지문 모두 제목·지문 번호 배지가 있어야 함
+    # 두 지문 모두 제목·출처 뱃지가 있어야 함
     assert "Passage One" in html and "Passage Two" in html
-    assert "지문 1" in html and "지문 2" in html
+    assert "[고1] 9월 30번" in html and "[고1] 9월 31번" in html
     # 정답 페이지가 지문마다 하나씩(총 2개) 존재 (CSS 정의와 구분하려 class 속성으로 카운트)
     assert html.count('class="ans-page"') == 2
     # 둘째 지문 문제 페이지는 새 페이지에서 시작(unit-break)
     assert 'unit-break' in html
-    # 단일 지문은 지문 번호 배지가 없어야 함
-    solo = render_workbooks_html([b1])
-    assert "지문 1" not in solo and 'class="ans-page"' in solo
     print("PASS  복수 지문 배치(지문1→답1→지문2→답2)")
 
 
 def test_show_ko_flag():
     from samples.workbook_mock import mock_workbook
-    wb = mock_workbook(subtitle="한 줄 요지")
+    wb = mock_workbook()
     inc = render_workbooks_html([wb], show_ko=True)
     exc = render_workbooks_html([wb], show_ko=False)
-    assert 'class="c-ko"' in inc and 'class="wb-subtitle"' in inc
-    # 한글 제외: 문장별 한글(c-ko)·요지 부제(wb-subtitle) 숨김
-    assert 'class="c-ko"' not in exc and 'class="wb-subtitle"' not in exc
+    assert 'class="c-ko"' in inc
+    # 한글 제외: 문장별 한글(c-ko) 숨김
+    assert 'class="c-ko"' not in exc
     # 정답·해설(한글)은 유지
     assert "정답 · 해설" in exc
     print("PASS  한글 포함/제외(show_ko) 문제면 한글 숨김")

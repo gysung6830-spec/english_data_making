@@ -52,6 +52,7 @@ class ProsePack:
     title: str
     subtitle: str
     worksheets: list[ProseWorksheet]
+    label: str = ""    # 출처 기반 문항 라벨 (예: "[고1] 9월 30번")
 
 
 # ── LLM 응답 계층 (pydantic) ─────────────────────────────────────────

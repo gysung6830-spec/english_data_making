@@ -5,6 +5,7 @@
   <title>{{ wb.title }} - 빈칸 워크북</title>
   <style>{{ font_css }}</style>
   <style>{% include "blanks.css" %}</style>
+  <style>{% include "_common.css" %}</style>
 </head>
 <body>
 
@@ -12,12 +13,10 @@
   {% for st in wb.sets %}
   <section class="set{{ ' set-break' if not loop.first }}">
 
-    {# ── 지문 헤더 ── #}
-    <div class="set-head">
-      <span class="set-idx">지문 {{ st.no }}</span>
-      <span class="set-title">{{ st.title }}</span>
-      {% if show_ko and st.subtitle %}<div class="set-sub">{{ st.subtitle }}</div>{% endif %}
-      <div class="set-rule"></div>
+    {# ── 지문 헤더 (제목 + 출처 뱃지) ── #}
+    <div class="sh-head">
+      <div class="sh-titles"><div class="sh-title">{{ st.title }}</div></div>
+      {% if st.label %}<span class="sh-badge">{{ st.label }}</span>{% endif %}
     </div>
 
     {# ── 유형 B: 지문 빈칸형 (첫 글자 + 밑줄, 2단: 영어 / 한글) ── #}

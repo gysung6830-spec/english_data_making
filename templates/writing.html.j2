@@ -5,25 +5,25 @@
   <title>{{ pack.title }} - 영작 워크북</title>
   <style>{{ font_css }}</style>
   <style>{% include "writing.css" %}</style>
+  <style>{% include "_common.css" %}</style>
 </head>
 <body>
 
   {% if section != 'a' %}
   <section class="ws">
-    <div class="ws-top">
-      <span class="ws-meta">{{ pack.header }} &nbsp;·&nbsp; <b>{{ pack.title }}</b></span>
-      <span class="ws-badge">영작 워크북</span>
+    <div class="sh-head">
+      <div class="sh-titles"><div class="sh-title">{{ pack.title }}</div></div>
+      {% if pack.label %}<span class="sh-badge">{{ pack.label }}</span>{% endif %}
     </div>
-    {% if pack.subtitle %}<div class="ws-sub">{{ pack.subtitle }}</div>{% endif %}
-    <div class="ws-instr">
+    <div class="ws-instr wt-writing">
       <span class="wt-label">영작</span> {{ pack.instruction }}
     </div>
 
     <ol class="ws-list">
       {% for s in pack.sentences %}
       <li>
-        {% if show_ko %}<div class="s-ko">{{ s.ko }}</div>{% endif %}
         <div class="s-en">{{ s | render_writing }}</div>
+        {% if show_ko %}<div class="s-ko">{{ s.ko }}</div>{% endif %}
       </li>
       {% endfor %}
     </ol>

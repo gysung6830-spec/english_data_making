@@ -38,8 +38,10 @@ body{
   display:inline-flex; align-items:center; justify-content:center;
   width:19px; height:19px; margin-right:6px; border-radius:50%;
   background:var(--green); color:#fff; font-weight:800; font-size:8.5pt; vertical-align:1px; }
-.s-ko{ display:inline; font-size:9.4pt; color:#40474f; font-weight:700; }
-.s-en{ margin-top:7px; margin-left:25px; line-height:2.15; }
+.s-en{ display:inline; line-height:2.15; }
+/* 문제 아래 한글 해석(다른 유형과 동일한 위치·톤) */
+.s-ko{ display:block; margin-top:6px; margin-left:25px; font-size:8.6pt; color:#555b66;
+  font-weight:400; line-height:1.5; }
 
 /* 영작 포인트 배열 박스 〈 … 〉 */
 .wo{ display:inline-block; border:1.3px solid var(--amber); color:var(--amber);

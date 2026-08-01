@@ -53,3 +53,42 @@ def sentence_list_block(body: str, header: str = "문장 목록") -> str:
         "문장의 앞부분(주어·도입구)을 잘라내거나, 한 문장을 여러 조각으로 쪼개지 말 것.\n"
         + lines
     )
+
+
+# ── 출처(파일명 등) → 문항 라벨 "[고1] 9월 30번" 형태 ──────────────────
+_GRADE = re.compile(r'고\s*([1-3])|고등?\s*([1-3])\s*학년|([1-3])\s*학년')
+_MONTH = re.compile(r'([1-9]|1[0-2])\s*월')
+_QNUM = re.compile(r'([1-9][0-9]?)\s*번')
+_UUID_PREFIX = re.compile(r'^[0-9a-fA-F]{6,}-')
+
+
+def source_label(source: str, fallback: str = "") -> str:
+    """출처 문자열(파일명 등)에서 '[고N] M월 K번' 형태의 문항 라벨을 만든다.
+
+    학년/월/문항번호 중 찾은 것만 조합한다. 하나도 못 찾으면 fallback(또는 정리된 원문)을 돌려준다.
+    예) "고1_9월_30번.pdf" → "[고1] 9월 30번",  "2024 고3 6월 모의고사 21" → "[고3] 6월"
+    """
+    s = (source or "").strip()
+    if not s:
+        return fallback
+    base = _UUID_PREFIX.sub("", s)                 # 업로드 UUID 접두 제거
+    base = re.sub(r'\.[A-Za-z0-9]{1,5}$', "", base)  # 확장자 제거
+    parts: list[str] = []
+    mg = _GRADE.search(base)
+    if mg:
+        g = next((x for x in mg.groups() if x), None)
+        if g:
+            parts.append(f"[고{g}]")
+    mm = _MONTH.search(base)
+    if mm:
+        parts.append(f"{mm.group(1)}월")
+    mq = _QNUM.search(base)
+    if mq:
+        parts.append(f"{mq.group(1)}번")
+    if parts:
+        return " ".join(parts)
+    # 못 찾으면 정리된 파일명(구분자 정돈, 너무 길면 자름)
+    cleaned = re.sub(r'[_]+', " ", base).strip()
+    if fallback:
+        return fallback
+    return (cleaned[:24] + "…") if len(cleaned) > 25 else cleaned

@@ -100,15 +100,21 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
 
     지문 추출을 1회만 수행해 통합 워크북 · 단일 유형 산문 워크시트 · 빈칸형 · 영작을 함께 생성한다.
     """
+    from .textutil import source_label
+
     wbs: list[Workbook] = []
     packs: list[prose_render.ProsePack] = []
     blank_sets: list = []
     writing_packs: list[writing_render.WritingPack] = []
     for ex in _extract_passages_for_pdf(client, cfg, src):
-        wbs.append(workbook_generate.generate_workbook(client, cfg, ex))
-        packs.append(prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title))
-        blank_sets.append(blanks_generate.generate_blank_set(client, cfg, ex))
-        writing_packs.append(writing_generate.generate_writing_pack(client, cfg, ex, header=ex.title))
+        lbl = source_label(ex.source, fallback=source_label(src.name))
+        wb = workbook_generate.generate_workbook(client, cfg, ex); wb.label = lbl
+        pk = prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title); pk.label = lbl
+        bs = blanks_generate.generate_blank_set(client, cfg, ex)
+        try: bs.label = lbl
+        except Exception: pass
+        wp = writing_generate.generate_writing_pack(client, cfg, ex, header=ex.title); wp.label = lbl
+        wbs.append(wb); packs.append(pk); blank_sets.append(bs); writing_packs.append(wp)
     return wbs, packs, blank_sets, writing_packs
 
 
@@ -290,21 +296,32 @@ def _mock_workbook_for_pdf(cfg: Config, pdf: Path) -> Workbook:
                 title = first
         except Exception:
             pass
-    return mock_workbook(title=title)
+    wb = mock_workbook(title=title)
+    wb.label = _mock_label(pdf)
+    return wb
+
+
+def _mock_label(pdf: Path) -> str:
+    from .textutil import source_label
+    return source_label(pdf.name, fallback="[샘플] 30번")
 
 
 def _mock_prose_pack_for_pdf(cfg: Config, pdf: Path):
     from samples.prose_mock import mock_prose_pack
 
     title = _safe_stem(pdf)
-    return mock_prose_pack(title=title, header=title)
+    pk = mock_prose_pack(title=title, header=title)
+    pk.label = _mock_label(pdf)
+    return pk
 
 
 def _mock_writing_pack_for_pdf(cfg: Config, pdf: Path):
     from samples.writing_mock import mock_writing_pack
 
     title = _safe_stem(pdf)
-    return mock_writing_pack(title=title, header=title)
+    wp = mock_writing_pack(title=title, header=title)
+    wp.label = _mock_label(pdf)
+    return wp
 
 
 def _mock_blank_set_for_pdf(cfg: Config, pdf: Path, no: int):
@@ -319,7 +336,10 @@ def _mock_blank_set_for_pdf(cfg: Config, pdf: Path, no: int):
                 title = first
         except Exception:
             pass
-    return mock_blank_set(title=title, no=no)
+    st = mock_blank_set(title=title, no=no)
+    try: st.label = _mock_label(pdf)
+    except Exception: pass
+    return st
 
 
 def run_folder_blanks(cfg: Config, mock: bool = False) -> dict:

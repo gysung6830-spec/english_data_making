@@ -5,15 +5,16 @@
   <title>{{ pack.title }} - 워크북</title>
   <style>{{ font_css }}</style>
   <style>{% include "prose.css" %}</style>
+  <style>{% include "_common.css" %}</style>
 </head>
 <body>
 
   {% if section != 'a' %}
   {% for ws in pack.worksheets %}
   <section class="ws{{ ' brk' if not loop.first }}">
-    <div class="ws-top">
-      <span class="ws-meta">{{ pack.header }} &nbsp;·&nbsp; <b>{{ ws.label }}</b></span>
-      <span class="ws-badge">워크북</span>
+    <div class="sh-head">
+      <div class="sh-titles"><div class="sh-title">{{ pack.title }}</div></div>
+      {% if pack.label %}<span class="sh-badge">{{ pack.label }}</span>{% endif %}
     </div>
     <div class="ws-instr wt-{{ ws.wtype }}">
       <span class="wt-label">{{ ws.label }}</span> {{ ws.instruction }}

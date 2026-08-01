@@ -48,6 +48,7 @@ class LLMBlankSet(BaseModel):
     no: int
     title: str
     subtitle: str = ""
+    label: str = ""                                # 출처 기반 문항 라벨(파이프라인이 채움)
     sentences: list[LLMBSentence]                 # 유형 B (지문 빈칸)
     summary_template: str                          # 유형 A 요약문, 빈칸 자리에 {{S1}}
     summary_blanks: list[LLMSummaryBlank] = Field(default_factory=list)
@@ -110,6 +111,7 @@ class BlankSet:
     summary_blanks: list[Blank]
     wordbank: list[str]                  # 요약문 정답만 랜덤
     summary_ko: str = ""                 # 요약문 한국어 해석(해설용)
+    label: str = ""                      # 출처 기반 문항 라벨
 
     @property
     def passage_blanks(self) -> list[Blank]:
@@ -171,7 +173,7 @@ def build_blank_workbook(llm: LLMBlankWorkbook, title: str, subtitle: str,
         bank = answers[:]
         rng.shuffle(bank)
         sets.append(BlankSet(
-            no=st.no, title=st.title, subtitle=st.subtitle,
+            no=st.no, title=st.title, subtitle=st.subtitle, label=getattr(st, "label", ""),
             sentences=bsents, summary_template=st.summary_template,
             summary_blanks=s_numbered, wordbank=bank, summary_ko=st.summary_ko,
         ))

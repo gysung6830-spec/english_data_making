@@ -103,6 +103,7 @@ class Workbook:
     subtitle: str
     sentences: list[Sentence] = field(default_factory=list)
     total: int = 0     # 총 문항 수 (SCORE 표시용)
+    label: str = ""    # 출처 기반 문항 라벨 (예: "[고1] 9월 30번")
 
     @property
     def all_questions(self) -> list[Question]:
