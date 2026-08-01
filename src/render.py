@@ -192,7 +192,7 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
-def render_html(reports, footer_note: str = "", brand: str = "은아 T",
+def render_html(reports, footer_note: str = "", brand: str = "",
                 with_source: bool = True, student: bool = False) -> str:
     """reports: 단일 Report 또는 여러 Report(list). 여러 지문이면 순서대로 출력.
 
@@ -247,7 +247,7 @@ def _trim_exam_report(report, ref_keep=None, imp_keep=None):
     return report.model_copy(update={"exam": report.exam.model_copy(update={"items": items})})
 
 
-def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T",
+def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "",
                 student: bool = False):
     """한 지문이 2페이지에 들어오도록, 넘칠 때만 단계적으로 분량을 줄인다.
 
@@ -311,7 +311,7 @@ def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab,
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
                fit_pages: bool = True, min_vocab: int = 8,
-               brand: str = "은아 T", student: bool = False) -> Path:
+               brand: str = "", student: bool = False) -> Path:
     from weasyprint import CSS, HTML  # 지연 임포트 (무거움)
 
     out_path = Path(out_path)
@@ -323,7 +323,7 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
 
 
 def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
-                        min_vocab: int = 8, brand: str = "은아 T",
+                        min_vocab: int = 8, brand: str = "",
                         variants=(False,)) -> Path:
     """분석지를 여러 버전 순서대로 '한 PDF'에 이어 붙인다.
 

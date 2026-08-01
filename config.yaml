@@ -44,11 +44,9 @@ design:
   footer_note: "© 2026. Ortica영어. All rights reserved."
   # 지문별로 개별 PDF 를 만들지(true), 하나의 PDF 로 합칠지(false)
   one_pdf_per_passage: true
-  # 분석지의 '직독직해 made by ~' 와 출제표 '~ tip' 에 넣는 이름.
-  #   비우면("") 이 두 문구가 사라진 무(無)브랜드 버전으로 나옵니다.
-  #   (하단 저작권 footer_note 는 이 값과 무관하게 항상 그대로 표시됩니다)
-  #   웹앱에서는 체크박스로 매번 켜고 끌 수 있습니다.
-  brand: "은아 T"
+  # 분석지의 '직독직해 made by ~' 문구에 넣는 브랜드 이름.
+  #   비우면("") 브랜드 문구 없이 나옵니다. (하단 저작권 footer_note 와는 무관)
+  brand: ""
 
 # 어떤 PDF 를 만들지 선택 (true=생성 / false=건너뜀)
 #   - analysis : 지문 분석지 (6개 섹션)

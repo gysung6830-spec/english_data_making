@@ -74,7 +74,7 @@ body {
   --line: #e5e7eb;
 }
 
-/* ---------- 문서 헤더 (김은아영어연구소 브랜드 톤: 초록) ---------- */
+/* ---------- 문서 헤더 (브랜드 톤: 초록) ---------- */
 .doc-header { border-bottom: 3px solid var(--c-green); padding-bottom: 5px; margin-bottom: 9px; }
 .doc-badge {
   display: inline-block; background: var(--c-green); color: #fff;

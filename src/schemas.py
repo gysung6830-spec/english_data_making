@@ -170,7 +170,7 @@ class StructureSection(BaseModel):
 # ---------------------------------------------------------------------------
 class ExamItem(BaseModel):
     question_type: str   # 출제 유형 (지칭추론/함축의미/서술형)
-    content: str         # 은아 T tip 내용 (여러 줄 가능, 줄바꿈으로 구분)
+    content: str         # 출제 tip 내용 (여러 줄 가능, 줄바꿈으로 구분)
     tip: str = ""        # (미사용 - 이전 호환용)
 
 

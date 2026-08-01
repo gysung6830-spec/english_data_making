@@ -43,7 +43,7 @@ class ExtractionCfg:
 class DesignCfg:
     footer_note: str = ""
     one_pdf_per_passage: bool = True
-    brand: str = "은아 T"   # 직독직해 'made by ~' · 출제표 '~ tip' 에 넣는 이름(footer 와 무관)
+    brand: str = ""   # 직독직해 'made by ~' 에 넣는 브랜드 이름(footer 와 무관, 비우면 미표시)
 
 
 @dataclass
@@ -111,7 +111,7 @@ def load_config(path: str | Path | None = None) -> Config:
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),
             one_pdf_per_passage=bool(design.get("one_pdf_per_passage", True)),
-            brand=str(design.get("brand", "은아 T")),
+            brand=str(design.get("brand", "")),
         ),
         outputs=OutputsCfg(
             analysis=bool(outputs.get("analysis", True)),
