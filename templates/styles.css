@@ -28,7 +28,7 @@
   @bottom-right {
     content: counter(page) " / " counter(pages);
     font-family: "NanumGothic", "Malgun Gothic", sans-serif;
-    font-size: 8px;
+    font-size: 11px;
     color: #9aa0a6;
   }
 }
