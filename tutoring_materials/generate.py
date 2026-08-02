@@ -57,8 +57,14 @@ b,strong {{ font-weight:800; }}
 .head .title {{ font-weight:800; font-size:15.5px; }}
 .head .title .k {{ color:{ACCENT}; }}
 .head .part {{ font-size:9px; color:#7d918c; margin-top:1px; }}
-.goal {{ background:{SOFT}; border:1px dashed {ACCENT}; border-radius:9px; padding:6px 11px; margin-top:7px; }}
-.goal .g1 {{ font-weight:800; color:{ACCENT2}; font-size:11.3px; }}
+/* 오늘의 문법 — 눈에 확 띄는 배너 */
+.gbanner {{ display:flex; align-items:center; gap:12px; border:2.5px solid {ACCENT2};
+  border-radius:12px; background:{WARM}; padding:9px 13px; margin:9px 0 3px; page-break-inside:avoid; }}
+.gbanner .lab {{ flex:0 0 auto; background:{ACCENT2}; color:#fff; font-weight:800; font-size:10px;
+  padding:5px 11px; border-radius:9px; text-align:center; line-height:1.35; }}
+.gbanner .gt {{ font-size:15px; font-weight:800; color:{INK}; }}
+.gbanner .gd {{ font-size:9.6px; color:#9a7060; margin-top:2px; }}
+.gbanner .gd b {{ color:{ACCENT2}; }}
 
 /* 은아쌤 말풍선 */
 .saem {{ position:relative; background:{WARM}; border:1.5px solid #f3d3c4; border-radius:12px;
@@ -258,7 +264,15 @@ def render_day_student(d):
         <span class="src">{esc(L1.SOURCE)}<br>{esc(d['part'])}</span></div>
       <div class="body">
         <div class="title"><span class="k">{esc(d['title_en'])}</span> — {esc(d['title_ko'])}</div>
-        <div class="goal"><span class="g1">🎯 오늘의 문법</span> · {esc(d['goal_title'])}</div>
+      </div>
+    </div>""")
+    # 오늘의 문법 배너 (눈에 확 띄게)
+    P.append(f"""
+    <div class="gbanner">
+      <div class="lab">🎯 오늘의<br>문법</div>
+      <div>
+        <div class="gt">{esc(d['goal_title'])}</div>
+        <div class="gd">{bold(d['gnote'])}</div>
       </div>
     </div>""")
     # 은아쌤 오프닝
@@ -317,6 +331,7 @@ def render_day_student(d):
     P.append(f"""
     <div class="sec">
       <div class="h"><span class="n">{n}</span><span class="t">문법, 스스로 찾아보기</span>
+        <span class="rep">{esc(d['goal_title'].split(':')[0].split('(')[0].strip())}</span>
         <span class="tip">규칙을 외우지 말고, 문장을 보고 직접 발견해봐</span></div>
       <div style="font-size:9.3px;color:#7d918c;margin-bottom:2px;">▸ 아래 문장에서 굵은 부분을 잘 봐:</div>
       {ex}
