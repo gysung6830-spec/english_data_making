@@ -43,152 +43,160 @@ CSS = f"""
 @font-face {{ font-family:'NSR'; font-weight:800; src:url(data:font/woff;base64,{FONT_B}) format('woff'); }}
 @page {{ size:A4; margin:12mm 12mm 13mm 12mm;
   @bottom-center {{ content:"{L1.COPYRIGHT}  ·  " counter(page) " / " counter(pages);
-    font-family:'NSR'; font-size:8.3px; color:#9fb3ae; }} }}
+    font-family:'NSR'; font-size:9.5px; color:#9fb3ae; }} }}
 * {{ box-sizing:border-box; }}
-body {{ font-family:'NSR',sans-serif; color:{INK}; font-size:11px; line-height:1.5; margin:0; }}
+body {{ font-family:'NSR',sans-serif; color:{INK}; font-size:12.6px; line-height:1.5; margin:0; }}
 b,strong {{ font-weight:800; }}
 .en {{ font-weight:800; letter-spacing:.2px; }}
 
 .head {{ border:2px solid {ACCENT}; border-radius:12px; overflow:hidden; margin-bottom:8px; page-break-inside:avoid; }}
 .head .top {{ background:{ACCENT}; color:#fff; padding:6px 13px; display:flex; justify-content:space-between; align-items:center; }}
-.head .top .badge {{ font-weight:800; font-size:13px; }}
-.head .top .src {{ font-size:8.5px; opacity:.92; text-align:right; }}
+.head .top .badge {{ font-weight:800; font-size:14.9px; }}
+.head .top .src {{ font-size:9.8px; opacity:.92; text-align:right; }}
 .head .body {{ padding:8px 13px 9px; }}
-.head .title {{ font-weight:800; font-size:15.5px; }}
+.head .title {{ font-weight:800; font-size:17.8px; }}
 .head .title .k {{ color:{ACCENT}; }}
-.head .part {{ font-size:9px; color:#7d918c; margin-top:1px; }}
+.head .part {{ font-size:10.3px; color:#7d918c; margin-top:1px; }}
 /* 오늘의 문법 — 눈에 확 띄는 배너 */
 .gbanner {{ display:flex; align-items:center; gap:12px; border:2.5px solid {ACCENT2};
   border-radius:12px; background:{WARM}; padding:9px 13px; margin:9px 0 3px; page-break-inside:avoid; }}
-.gbanner .lab {{ flex:0 0 auto; background:{ACCENT2}; color:#fff; font-weight:800; font-size:10px;
+.gbanner .lab {{ flex:0 0 auto; background:{ACCENT2}; color:#fff; font-weight:800; font-size:11.5px;
   padding:5px 11px; border-radius:9px; text-align:center; line-height:1.35; }}
-.gbanner .gt {{ font-size:15px; font-weight:800; color:{INK}; }}
-.gbanner .gd {{ font-size:9.6px; color:#9a7060; margin-top:2px; }}
+.gbanner .gt {{ font-size:17.2px; font-weight:800; color:{INK}; }}
+.gbanner .gd {{ font-size:11.0px; color:#9a7060; margin-top:2px; }}
 .gbanner .gd b {{ color:{ACCENT2}; }}
 
 /* 은아쌤 말풍선 */
 .saem {{ position:relative; background:{WARM}; border:1.5px solid #f3d3c4; border-radius:12px;
-  padding:7px 11px 7px 46px; margin:8px 0; font-size:10.2px; color:#6b4a3d; line-height:1.55; page-break-inside:avoid; }}
+  padding:7px 11px 7px 46px; margin:8px 0; font-size:11.7px; color:#6b4a3d; line-height:1.55; page-break-inside:avoid; }}
 .saem .tag {{ position:absolute; left:9px; top:8px; width:30px; height:30px; border-radius:50%;
-  background:{ACCENT2}; color:#fff; font-weight:800; font-size:9px; display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.1; }}
+  background:{ACCENT2}; color:#fff; font-weight:800; font-size:10.3px; display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.1; }}
 .saem b {{ color:{ACCENT2}; }}
 .saem.rule {{ background:{SKY}; border-color:#cfe3f0; color:#2c4a5e; }}
 .saem.rule .tag {{ background:{ACCENT}; }}
 .saem.rule b {{ color:{ACCENT}; }}
 
-.summary {{ background:{SOFT}; border-left:4px solid {ACCENT}; border-radius:6px; padding:8px 12px; margin:8px 0; font-size:10.4px; line-height:1.7; page-break-inside:avoid; }}
-.summary .st {{ font-weight:800; color:{ACCENT}; font-size:10.5px; margin-bottom:3px; }}
+.summary {{ background:{SOFT}; border-left:4px solid {ACCENT}; border-radius:6px; padding:8px 12px; margin:8px 0; font-size:12.0px; line-height:1.7; page-break-inside:avoid; }}
+.summary .st {{ font-weight:800; color:{ACCENT}; font-size:12.1px; margin-bottom:3px; }}
 .summary b {{ color:{ACCENT2}; }}
 
 /* T/F 문제 */
-.tf .row {{ display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px dotted {LINE}; font-size:10.3px; }}
-.tf .row .qn {{ flex:0 0 auto; color:#9fb3ae; font-size:9px; width:16px; }}
+.tf .row {{ display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px dotted {LINE}; font-size:11.8px; }}
+.tf .row .qn {{ flex:0 0 auto; color:#9fb3ae; font-size:10.3px; width:16px; }}
 .tf .row .qt {{ flex:1; }}
-.tf .row .ox {{ flex:0 0 auto; font-weight:800; color:{ACCENT}; font-size:10px; }}
+.tf .row .ox {{ flex:0 0 auto; font-weight:800; color:{ACCENT}; font-size:11.5px; }}
 .tf .row .ox span {{ display:inline-block; border:1.3px solid {LINE}; border-radius:6px; padding:1px 8px; margin-left:4px; color:#9fb3ae; }}
 
 /* 문법 친절 설명 */
 .terms {{ background:#fff; border:1px solid {LINE}; border-radius:8px; padding:6px 10px; margin:5px 0; }}
-.terms .ti {{ font-size:9.6px; margin:2px 0; }}
+.terms .ti {{ font-size:11.0px; margin:2px 0; }}
 .terms .ti b {{ color:{ACCENT}; }}
 .easy {{ margin:4px 0; }}
-.easy .e {{ font-size:10px; margin:2px 0; padding-left:8px; }}
+.easy .e {{ font-size:11.5px; margin:2px 0; padding-left:8px; }}
 .easy .e .en {{ color:{INK}; }}
-.easy .e .ko {{ color:#7d918c; font-size:9px; }}
+.easy .e .ko {{ color:#7d918c; font-size:10.3px; }}
 
 /* 영작 순서 넘버링 */
 .ordwrap {{ margin:3px 0 4px; }}
 .ordchunk {{ display:inline-block; border:1px solid {LINE}; border-radius:7px; padding:3px 8px 3px 4px;
-  margin:2px 4px 2px 0; font-size:10px; font-weight:800; color:{INK}; background:{SOFT}; }}
+  margin:2px 4px 2px 0; font-size:11.5px; font-weight:800; color:{INK}; background:{SOFT}; }}
 .ordchunk .bx {{ display:inline-block; width:16px; height:15px; border:1.3px solid {ACCENT2};
   border-radius:4px; margin-right:5px; vertical-align:middle; }}
 
 .sec {{ margin-top:11px; page-break-inside:avoid; }}
 .sec>.h {{ display:flex; align-items:center; gap:7px; margin-bottom:5px; flex-wrap:wrap; }}
-.sec>.h .n {{ display:inline-flex; width:19px; height:19px; border-radius:50%; background:{ACCENT}; color:#fff; font-weight:800; font-size:10.5px; align-items:center; justify-content:center; flex:0 0 auto; }}
-.sec>.h .t {{ font-weight:800; font-size:12px; }}
-.sec>.h .tip {{ font-size:8.8px; color:#93a7a2; font-weight:400; }}
-.sec>.h .rep {{ background:{ACCENT2}; color:#fff; font-size:8px; font-weight:800; padding:1px 7px; border-radius:20px; }}
-.subt {{ font-weight:800; font-size:10px; color:{ACCENT}; margin:7px 0 3px; }}
-.subt .badge {{ background:{ACCENT}; color:#fff; border-radius:5px; padding:1px 6px; font-size:8.5px; margin-right:4px; }}
+.sec>.h .n {{ display:inline-flex; width:19px; height:19px; border-radius:50%; background:{ACCENT}; color:#fff; font-weight:800; font-size:12.1px; align-items:center; justify-content:center; flex:0 0 auto; }}
+.sec>.h .t {{ font-weight:800; font-size:13.8px; }}
+.sec>.h .tip {{ font-size:10.1px; color:#93a7a2; font-weight:400; }}
+.sec>.h .rep {{ background:{ACCENT2}; color:#fff; font-size:9.2px; font-weight:800; padding:1px 7px; border-radius:20px; }}
+.subt {{ font-weight:800; font-size:11.5px; color:{ACCENT}; margin:7px 0 3px; }}
+.subt .badge {{ background:{ACCENT}; color:#fff; border-radius:5px; padding:1px 6px; font-size:9.8px; margin-right:4px; }}
 
 table {{ border-collapse:collapse; width:100%; }}
 .vtab td,.vtab th {{ border:1px solid {LINE}; padding:4px 6px; vertical-align:middle; }}
-.vtab th {{ background:{SOFT}; font-weight:800; font-size:9.2px; color:#5b6f6b; }}
-.vtab td.num {{ width:20px; text-align:center; color:#9fb3ae; font-size:9px; }}
+.vtab th {{ background:{SOFT}; font-weight:800; font-size:10.6px; color:#5b6f6b; }}
+.vtab td.num {{ width:20px; text-align:center; color:#9fb3ae; font-size:10.3px; }}
 .vtab td.w {{ width:104px; }}
-.vtab td.k {{ width:128px; font-size:10px; }}
-.writeline {{ border-bottom:1.3px dotted #b9c9c5; display:inline-block; min-width:70px; height:14px; }}
-.wl-full {{ border-bottom:1.3px dotted #b9c9c5; display:block; height:16px; margin-top:4px; }}
+.vtab td.k {{ width:128px; font-size:11.5px; }}
+.writeline {{ border-bottom:1.4px dotted #b9c9c5; display:inline-block; min-width:70px; height:17px; }}
+.wl-full {{ border-bottom:1.4px dotted #b9c9c5; display:block; height:19px; margin-top:5px; }}
 
 ol.q {{ margin:0; padding-left:19px; }}
 ol.q li {{ margin:4px 0; }}
-.blank {{ display:inline-block; min-width:82px; border-bottom:1.5px solid {ACCENT}; height:13px; }}
+.blank {{ display:inline-block; min-width:82px; border-bottom:1.6px solid {ACCENT}; height:15px; }}
 .blank.sm {{ min-width:52px; }}
-.hint {{ color:{ACCENT2}; font-size:9px; font-weight:800; }}
-.wordbank {{ background:{SOFT}; border:1px solid {LINE}; border-radius:8px; padding:5px 10px; margin:4px 0 7px; font-weight:800; color:{ACCENT}; font-size:10.2px; }}
+.hint {{ color:{ACCENT2}; font-size:10.3px; font-weight:800; }}
+.wordbank {{ background:{SOFT}; border:1px solid {LINE}; border-radius:8px; padding:5px 10px; margin:4px 0 7px; font-weight:800; color:{ACCENT}; font-size:11.7px; }}
 .wordbank .lab {{ color:#93a7a2; margin-right:6px; }}
 .spell {{ font-weight:800; letter-spacing:2px; }}
 
-.exline {{ font-size:10.5px; margin:2px 0; padding-left:6px; border-left:2px solid {LINE}; }}
+.exline {{ font-size:12.1px; margin:2px 0; padding-left:6px; border-left:2px solid {LINE}; }}
 .exline b {{ color:{ACCENT2}; }}
+
+/* 직독직해 (전 문장) */
+.reads {{ width:100%; border-collapse:collapse; }}
+.reads td {{ border:1px solid {LINE}; padding:5px 8px; vertical-align:top; }}
+.reads td.rn {{ width:20px; text-align:center; color:#9fb3ae; font-size:10.5px; }}
+.reads td.re {{ width:50%; font-size:11.8px; color:{INK}; }}
+.reads td.rk {{ font-size:11.8px; font-weight:800; color:{INK}; }}
+.reads tr:nth-child(even) td {{ background:{SOFT}; }}
 
 /* 지칭 */
 .ref {{ border:1px solid {LINE}; border-radius:8px; padding:6px 10px; margin:5px 0; page-break-inside:avoid; }}
-.ref .rs {{ font-size:10.3px; }}
-.ref .rk {{ font-size:8.8px; color:#93a7a2; margin:1px 0 3px; }}
-.ref .rq {{ font-size:10px; }}
+.ref .rs {{ font-size:11.8px; }}
+.ref .rk {{ font-size:10.1px; color:#93a7a2; margin:1px 0 3px; }}
+.ref .rq {{ font-size:11.5px; }}
 .ref .rq .p {{ color:{ACCENT2}; font-weight:800; }}
 
 /* 문장 외우기 사다리 */
 .ladder {{ border:1px solid {LINE}; border-radius:9px; padding:8px 11px; margin:6px 0; page-break-inside:avoid; }}
-.ladder .u {{ font-size:10.4px; }}
-.ladder .u .ko {{ color:#7d918c; font-size:9px; }}
-.ladder .lv {{ margin-top:5px; font-size:10px; }}
-.ladder .lv .lb {{ display:inline-block; background:{SOFT}; color:{ACCENT}; font-weight:800; border-radius:5px; padding:1px 6px; font-size:8.3px; margin-right:5px; }}
+.ladder .u {{ font-size:12.0px; }}
+.ladder .u .ko {{ color:#7d918c; font-size:10.3px; }}
+.ladder .lv {{ margin-top:5px; font-size:11.5px; }}
+.ladder .lv .lb {{ display:inline-block; background:{SOFT}; color:{ACCENT}; font-weight:800; border-radius:5px; padding:1px 6px; font-size:9.5px; margin-right:5px; }}
 .ladder .sk {{ font-weight:800; letter-spacing:1px; color:{INK}; }}
-.ladder .mztt {{ font-weight:800; font-size:10.5px; color:{INK}; margin-bottom:3px; }}
+.ladder .mztt {{ font-weight:800; font-size:12.1px; color:{INK}; margin-bottom:3px; }}
 
 /* 정답 별지 */
 .answers {{ page-break-before:always; }}
 .ansrow {{ border:1px solid #f3d3c4; background:{WARM}; border-radius:8px; padding:6px 10px; margin-bottom:6px; page-break-inside:avoid; }}
-.ansrow .d {{ font-weight:800; color:{ACCENT2}; font-size:10px; margin-bottom:2px; }}
-.ansrow .b {{ font-size:9px; color:#7a5c50; line-height:1.55; }}
+.ansrow .d {{ font-weight:800; color:{ACCENT2}; font-size:11.5px; margin-bottom:2px; }}
+.ansrow .b {{ font-size:10.3px; color:#7a5c50; line-height:1.55; }}
 .ansrow .b b {{ color:{ACCENT2}; }}
 
-.note {{ font-size:8.8px; color:#93a7a2; margin-top:3px; }}
+.note {{ font-size:10.1px; color:#93a7a2; margin-top:3px; }}
 .pagebreak {{ page-break-before:always; }}
 .tearline {{ border-top:1.5px dashed {ACCENT2}; text-align:center; margin:14px 0 10px; }}
-.tearline span {{ background:#fff; color:{ACCENT2}; font-weight:800; font-size:9px; padding:0 8px; position:relative; top:-8px; }}
+.tearline span {{ background:#fff; color:{ACCENT2}; font-weight:800; font-size:10.3px; padding:0 8px; position:relative; top:-8px; }}
 
 .cover {{ text-align:center; padding-top:44px; }}
-.cover .kie {{ display:inline-block; border:2px solid {ACCENT}; color:{ACCENT}; font-weight:800; padding:4px 14px; border-radius:20px; font-size:12px; }}
-.cover h1 {{ font-size:26px; margin:16px 0 4px; }}
-.cover .sub {{ font-size:12px; color:{ACCENT2}; font-weight:800; }}
-.cover .src {{ font-size:10.5px; color:#7d918c; margin-top:5px; }}
-.cover .list {{ display:inline-block; text-align:left; margin-top:18px; background:{SOFT}; border:1px solid {LINE}; border-radius:12px; padding:13px 22px; font-size:10.5px; line-height:1.85; }}
+.cover .kie {{ display:inline-block; border:2px solid {ACCENT}; color:{ACCENT}; font-weight:800; padding:4px 14px; border-radius:20px; font-size:13.8px; }}
+.cover h1 {{ font-size:29.9px; margin:16px 0 4px; }}
+.cover .sub {{ font-size:13.8px; color:{ACCENT2}; font-weight:800; }}
+.cover .src {{ font-size:12.1px; color:#7d918c; margin-top:5px; }}
+.cover .list {{ display:inline-block; text-align:left; margin-top:18px; background:{SOFT}; border:1px solid {LINE}; border-radius:12px; padding:13px 22px; font-size:12.1px; line-height:1.85; }}
 .cover .list b {{ color:{ACCENT}; }}
-.cover .tip {{ margin-top:16px; font-size:9.8px; color:#7d918c; line-height:1.7; }}
+.cover .tip {{ margin-top:16px; font-size:11.3px; color:#7d918c; line-height:1.7; }}
 
 .examtop {{ display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2px solid {ACCENT}; padding-bottom:6px; margin-bottom:9px; }}
-.examtop .nm {{ font-size:10px; color:#5b6f6b; }}
+.examtop .nm {{ font-size:11.5px; color:#5b6f6b; }}
 .examtop .nm .u {{ display:inline-block; min-width:110px; border-bottom:1.3px solid #b9c9c5; }}
 .examtop .score {{ text-align:center; border:2px solid {ACCENT2}; border-radius:9px; padding:3px 12px; }}
-.examtop .score .s1 {{ font-size:8px; color:{ACCENT2}; font-weight:800; }}
-.examtop .score .s2 {{ font-size:14px; font-weight:800; }}
+.examtop .score .s1 {{ font-size:9.2px; color:{ACCENT2}; font-weight:800; }}
+.examtop .score .s2 {{ font-size:16.1px; font-weight:800; }}
 
 .plan {{ width:100%; border-collapse:collapse; }}
-.plan td,.plan th {{ border:1px solid {LINE}; padding:5px 6px; vertical-align:top; font-size:8.7px; }}
-.plan th {{ background:{ACCENT}; color:#fff; font-weight:800; font-size:9.2px; text-align:center; }}
-.plan .wk {{ background:{SOFT}; font-weight:800; color:{ACCENT}; text-align:center; width:56px; font-size:9px; vertical-align:middle; }}
-.plan .day .dh {{ font-weight:800; color:{INK}; font-size:9px; }}
-.plan .day .gm {{ color:{ACCENT2}; font-weight:800; font-size:8.2px; }}
-.plan .day .tk {{ color:#5b6f6b; font-size:8.2px; margin-top:1px; }}
+.plan td,.plan th {{ border:1px solid {LINE}; padding:5px 6px; vertical-align:top; font-size:10.0px; }}
+.plan th {{ background:{ACCENT}; color:#fff; font-weight:800; font-size:10.6px; text-align:center; }}
+.plan .wk {{ background:{SOFT}; font-weight:800; color:{ACCENT}; text-align:center; width:56px; font-size:10.3px; vertical-align:middle; }}
+.plan .day .dh {{ font-weight:800; color:{INK}; font-size:10.3px; }}
+.plan .day .gm {{ color:{ACCENT2}; font-weight:800; font-size:9.4px; }}
+.plan .day .tk {{ color:#5b6f6b; font-size:9.4px; margin-top:1px; }}
 .plan .soon {{ color:#9fb3ae; }}
-.legend {{ font-size:9px; color:#5b6f6b; margin-top:8px; line-height:1.7; }}
+.legend {{ font-size:10.3px; color:#5b6f6b; margin-top:8px; line-height:1.7; }}
 .box {{ background:{SOFT}; border:1px solid {LINE}; border-radius:10px; padding:10px 13px; margin-top:10px; }}
-.box .bt {{ font-weight:800; color:{ACCENT}; font-size:11px; margin-bottom:4px; }}
-.chip {{ display:inline-block; background:#fff; border:1px solid {LINE}; border-radius:20px; padding:2px 9px; margin:2px 3px 0 0; font-size:9px; font-weight:800; color:{INK}; }}
+.box .bt {{ font-weight:800; color:{ACCENT}; font-size:12.6px; margin-bottom:4px; }}
+.chip {{ display:inline-block; background:#fff; border:1px solid {LINE}; border-radius:20px; padding:2px 9px; margin:2px 3px 0 0; font-size:10.3px; font-weight:800; color:{INK}; }}
 """
 
 
@@ -377,11 +385,11 @@ def render_day_student(d):
     <div class="sec">
       <div class="h"><span class="n">{n}</span><span class="t">오늘의 단어 10개 · 3가지로 익히기</span>
         <span class="tip">같은 단어를 방법을 바꿔 세 번! 이게 진짜 암기법이야</span></div>
-      <div class="subt"><span class="badge">유형 ①</span> 소리 내어 읽으며 <span style="color:{ACCENT2}">영어와 뜻을 함께</span> 두 번 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">(예: mosquito 모기)</span></div>
+      <div class="subt"><span class="badge">유형 ①</span> 소리 내어 읽으며 <span style="color:{ACCENT2}">영어와 뜻을 함께</span> 두 번 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:9.8px;">(예: mosquito 모기)</span></div>
       <table class="vtab"><tr><th class="num">#</th><th>영어</th><th>뜻</th><th>1회 (영어+뜻)</th><th>2회 (영어+뜻)</th></tr>{r1}</table>
-      <div class="subt"><span class="badge">유형 ②</span> 줄 잇기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">— 영어와 알맞은 뜻을 선으로 연결</span></div>
+      <div class="subt"><span class="badge">유형 ②</span> 줄 잇기 <span style="font-weight:400;color:#93a7a2;font-size:9.8px;">— 영어와 알맞은 뜻을 선으로 연결</span></div>
       {match_block(m_left, m_right)}
-      <div class="subt"><span class="badge">유형 ③</span> 뜻만 보고 영어 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">(첫 글자 힌트)</span></div>
+      <div class="subt"><span class="badge">유형 ③</span> 뜻만 보고 영어 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:9.8px;">(첫 글자 힌트)</span></div>
       <ol class="q" style="columns:2; column-gap:24px;">{r3}</ol>
     </div>""")
 
@@ -396,20 +404,32 @@ def render_day_student(d):
       <div class="h"><span class="n">{n}</span><span class="t">오늘의 문법, 쉽게 이해하기</span>
         <span class="rep">{esc(d['goal_title'].split(':')[0].split('(')[0].strip())}</span></div>
       <div class="saem rule"><span class="tag">{esc(L1.TEACHER)}</span>{bold(g['intro'])}</div>
-      <div style="font-size:9.2px;color:#7d918c;margin:5px 0 1px;">▸ 먼저 알아둘 말 (모르면 당연해, 지금 배우면 돼!)</div>
+      <div style="font-size:10.6px;color:#7d918c;margin:5px 0 1px;">▸ 먼저 알아둘 말 (모르면 당연해, 지금 배우면 돼!)</div>
       <div class="terms">{terms}</div>
-      <div style="font-size:9.2px;color:#7d918c;margin:5px 0 1px;">▸ 아주 쉬운 예문부터:</div>
+      <div style="font-size:10.6px;color:#7d918c;margin:5px 0 1px;">▸ 아주 쉬운 예문부터:</div>
       <div class="easy">{easy}</div>
-      <div style="font-size:9.2px;color:#7d918c;margin:5px 0 1px;">▸ 이제 오늘 지문에서 찾아보자 (굵은 부분!):</div>
+      <div style="font-size:10.6px;color:#7d918c;margin:5px 0 1px;">▸ 이제 오늘 지문에서 찾아보자 (굵은 부분!):</div>
       {ex}
-      <div style="margin-top:5px;font-size:10.2px;"><b style="color:{ACCENT2};">❓ {bold(g['ask'])}</b></div>
+      <div style="margin-top:5px;font-size:11.7px;"><b style="color:{ACCENT2};">❓ {bold(g['ask'])}</b></div>
       <div style="margin:3px 0;">내가 찾은 답 → <span class="writeline" style="min-width:66%"></span></div>
       <div class="saem"><span class="tag">{esc(L1.TEACHER)}</span><b style="color:{ACCENT2};">정리!</b> {bold(g['rule'])}</div>
-      <div style="font-size:9.2px;color:#7d918c;margin:4px 0 2px;">▸ 직접 골라보자 (동그라미):</div>
+      <div style="font-size:10.6px;color:#7d918c;margin:4px 0 2px;">▸ 직접 골라보자 (동그라미):</div>
       <ol class="q" style="columns:2; column-gap:24px;">{prac}</ol>
     </div>""")
 
-    # 5) 문장 외우기 : 순서 넘버링 영작 → 점점 지우기 (문장 4개)
+    # 5) 직독직해 — 오늘 지문 전체 문장 (모든 문장 커버)
+    n += 1
+    rr = "".join(
+        f"<tr><td class='rn'>{i}</td><td class='re'>{esc(en)}</td><td class='rk'>{esc(ko)}</td></tr>"
+        for i, (en, ko) in enumerate(d["sentences"], 1))
+    P.append(f"""
+    <div class="sec">
+      <div class="h"><span class="n">{n}</span><span class="t">직독직해 · 오늘 지문 전체</span>
+        <span class="tip">왼쪽 영어를 손가락으로 짚으며 읽고, 오른쪽 우리말로 뜻 확인 (소리 내어!)</span></div>
+      <table class="reads">{rr}</table>
+    </div>""")
+
+    # 6) 문장 외우기 : 순서 넘버링 영작 → 점점 지우기 (문장 4개)
     n += 1
     li = ""
     for si, (full, chunk, ko) in enumerate(d["memorize"], 1):
@@ -419,7 +439,7 @@ def render_day_student(d):
         chunks_html = "".join(f"<span class='ordchunk'><span class='bx'></span>{esc(en_ch[j])}</span>" for j in scr)
         li += f"""
         <div class="ladder">
-          <div class="mztt">문장 {si}. <span style="color:#7d918c;font-weight:400;">{esc(ko.replace(' / ',' '))}</span></div>
+          <div class="mztt">문장 {si}. <b style="color:{INK};">{esc(ko.replace(' / ',' '))}</b></div>
           <div class="lv"><span class="lb">① 순서 맞추기</span>덩어리 앞 □에 <b>1·2·3</b> 순서를 쓰고, 순서대로 문장 완성</div>
           <div class="ordwrap">{chunks_html}</div>
           <div class="lv" style="padding-left:2px;">→ 순서대로 쓰기<span class="wl-full"></span></div>
@@ -475,7 +495,7 @@ def render_review_day_student():
             tds += f"<td style='width:50%;vertical-align:top;padding:0 6px;'><table class='vtab' style='width:100%'>{rows}</table></td>"
         return f"<table style='width:100%'><tr>{tds}</tr></table>"
     gsum = "".join(f"<tr><td class='num'>{i}</td><td class='w'>{esc(day)}</td><td><b>{esc(g)}</b></td>"
-                   f"<td class='k' style='width:auto;font-size:9.2px'>{esc(ex)}</td></tr>"
+                   f"<td class='k' style='width:auto;font-size:10.6px'>{esc(ex)}</td></tr>"
                    for i, (day, g, ex) in enumerate(L1.GRAMMAR_SUMMARY, 1))
     return f"""
     <div class="head"><div class="top"><span class="badge">10일차 · 금요일 · 1과 총복습</span>
@@ -522,19 +542,19 @@ def render_month_plan():
            "<div class='tk'>1과 총복습<br>+ 단어·종합 테스트</div></td>")
     def soon(week_no, items):
         cells = "".join(f"<td class='day'><div class='dh'>{dh}</div><div class='gm soon'>{esc(t)}</div><div class='tk soon'>(다음 제작 예정)</div></td>" for dh, t in items)
-        return f"<tr><td class='wk'>{week_no}주차<br><span style='font-size:8px;color:#93a7a2'>2과</span></td>{cells}</tr>"
+        return f"<tr><td class='wk'>{week_no}주차<br><span style='font-size:9.2px;color:#93a7a2'>2과</span></td>{cells}</tr>"
     w3 = soon("3", [("11일 · 월","3D 점자지도 ①"),("12일 · 화","3D 점자지도 ②"),("13일 · 수","장치 원리"),("14일 · 목","작동·성공"),("15일 · 금","복습·테스트")])
     w4 = soon("4", [("16일 · 월","수어 앱 ①"),("17일 · 화","수어 앱 ②"),("18일 · 수","정확도·미래"),("19일 · 목","자율주행차"),("20일 · 금","2과 총복습·테스트")])
     return f"""
     <div style="text-align:center;margin-bottom:8px;">
-      <div style="display:inline-block;border:2px solid {ACCENT};color:{ACCENT};font-weight:800;padding:3px 12px;border-radius:20px;font-size:11px;">중등 기초 브릿지</div>
-      <div style="font-size:20px;font-weight:800;margin-top:8px;">한 달 학습 플랜 · 교과서 1과 &amp; 2과</div>
-      <div style="font-size:10px;color:#7d918c;margin-top:2px;">{esc(L1.SOURCE.replace(' · Lesson 1',''))}</div>
+      <div style="display:inline-block;border:2px solid {ACCENT};color:{ACCENT};font-weight:800;padding:3px 12px;border-radius:20px;font-size:12.6px;">중등 기초 브릿지</div>
+      <div style="font-size:23.0px;font-weight:800;margin-top:8px;">한 달 학습 플랜 · 교과서 1과 &amp; 2과</div>
+      <div style="font-size:11.5px;color:#7d918c;margin-top:2px;">{esc(L1.SOURCE.replace(' · Lesson 1',''))}</div>
     </div>
     <table class="plan">
       <tr><th style="width:56px;">주차</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr>
-      <tr><td class="wk">1주차<br><span style='font-size:8px;color:#93a7a2'>1과 전반</span></td>{w1}</tr>
-      <tr><td class="wk">2주차<br><span style='font-size:8px;color:#93a7a2'>1과 후반</span></td>{w2}</tr>
+      <tr><td class="wk">1주차<br><span style='font-size:9.2px;color:#93a7a2'>1과 전반</span></td>{w1}</tr>
+      <tr><td class="wk">2주차<br><span style='font-size:9.2px;color:#93a7a2'>1과 후반</span></td>{w2}</tr>
       {w3}{w4}
     </table>
     <div class="box"><div class="bt">▪ 매일 학습 루틴 (하루 20분 정도)</div>
@@ -568,18 +588,18 @@ def render_vocab_test(day_range, title):
     body = f"""
     <div class="examtop"><div class="nm">이름 <span class="u"></span> &nbsp; 날짜 <span class="u" style="min-width:80px"></span></div>
       <div class="score"><div class="s1">SCORE</div><div class="s2">&nbsp; / {total}</div></div></div>
-    <div style="font-weight:800;font-size:14.5px;margin-bottom:2px;">{esc(title)}
-      <span style="font-size:9.5px;color:#93a7a2;font-weight:400;">단어 {total}개</span></div>
+    <div style="font-weight:800;font-size:16.7px;margin-bottom:2px;">{esc(title)}
+      <span style="font-size:10.9px;color:#93a7a2;font-weight:400;">단어 {total}개</span></div>
     <div class="note" style="margin-bottom:9px;">A는 뜻을, B는 영어를 정확히 쓰세요. 철자 하나까지! 한 문제 1점.</div>
     <div class="sec"><div class="h"><span class="n">A</span><span class="t">영어 → 우리말 뜻 쓰기</span></div>{two_col(a,'en2ko',1)}</div>
     <div class="sec pagebreak"><div class="h"><span class="n">B</span><span class="t">우리말 → 영어 단어 쓰기</span></div>{two_col(b,'ko2en',half+1)}</div>"""
     ans = f"""
     <div class="answers"><div class="tearline"><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>
-      <div style="font-weight:800;font-size:13px;margin-bottom:6px;">✔ {esc(title)} · 정답</div>
+      <div style="font-weight:800;font-size:14.9px;margin-bottom:6px;">✔ {esc(title)} · 정답</div>
       <div style="font-weight:800;color:{ACCENT2};margin:4px 0 2px;">A. 영어 → 뜻</div>
-      <div>{''.join(f"<span style='display:inline-block;width:33%;font-size:9px;margin:1.5px 0;'>{i}. <b>{esc(en)}</b> {esc(ko)}</span>" for i,(en,ko) in enumerate(a,1))}</div>
+      <div>{''.join(f"<span style='display:inline-block;width:33%;font-size:10.3px;margin:1.5px 0;'>{i}. <b>{esc(en)}</b> {esc(ko)}</span>" for i,(en,ko) in enumerate(a,1))}</div>
       <div style="font-weight:800;color:{ACCENT2};margin:8px 0 2px;">B. 뜻 → 영어</div>
-      <div>{''.join(f"<span style='display:inline-block;width:33%;font-size:9px;margin:1.5px 0;'>{half+i}. {esc(ko)} <b>{esc(en)}</b></span>" for i,(en,ko) in enumerate(b,1))}</div></div>"""
+      <div>{''.join(f"<span style='display:inline-block;width:33%;font-size:10.3px;margin:1.5px 0;'>{half+i}. {esc(ko)} <b>{esc(en)}</b></span>" for i,(en,ko) in enumerate(b,1))}</div></div>"""
     return body + ans
 
 
@@ -623,8 +643,8 @@ def render_comp_test():
     top = f"""
     <div class="examtop"><div class="nm">이름 <span class="u"></span> &nbsp; 날짜 <span class="u" style="min-width:80px"></span></div>
       <div class="score"><div class="s1">SCORE</div><div class="s2">&nbsp; / 100</div></div></div>
-    <div style="font-weight:800;font-size:14.5px;margin-bottom:2px;">Lesson 1 종합 테스트
-      <span style="font-size:9.5px;color:#93a7a2;font-weight:400;">단어 · 문법 · 해석 · 독해(지칭)</span></div>
+    <div style="font-weight:800;font-size:16.7px;margin-bottom:2px;">Lesson 1 종합 테스트
+      <span style="font-size:10.9px;color:#93a7a2;font-weight:400;">단어 · 문법 · 해석 · 독해(지칭)</span></div>
     <div class="note" style="margin-bottom:9px;">아는 것부터 푸세요. 부분 점수도 있어요!</div>"""
     s1 = (f"<div class='sec'><div class='h'><span class='n'>1</span><span class='t'>단어 (20점)</span></div>"
           f"<table style='width:100%'><tr><td style='width:50%;vertical-align:top;padding-right:8px;'><div class='note' style='margin-bottom:3px;'>(1) 영어 → 뜻</div>"
@@ -640,7 +660,7 @@ def render_comp_test():
           + "".join(f"<li>{esc(q)}<span class='wl-full' style='width:70%'></span></li>" for q, _ in rq) + "</ol></div>")
     ans = f"""
     <div class="answers"><div class="tearline"><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>
-      <div style="font-weight:800;font-size:13px;margin-bottom:6px;">✔ Lesson 1 종합 테스트 · 정답 &amp; 해설</div>
+      <div style="font-weight:800;font-size:14.9px;margin-bottom:6px;">✔ Lesson 1 종합 테스트 · 정답 &amp; 해설</div>
       <div class="ansrow"><div class="d">1. 단어</div><div class="b">
         (1) 영어→뜻 : {' · '.join(f"{i}.{esc(k)}" for i,(e,k) in enumerate(e2k,1))}<br>
         (2) 뜻→영어 : {' · '.join(f"{i}.{esc(v)}" for i,(k,v) in enumerate(k2e,1))}</div></div>
@@ -665,7 +685,7 @@ def main():
     for d in L1.DAYS:
         inner = render_day_student(d)
         inner += ("<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>"
-                  f"<div style='font-weight:800;font-size:12px;margin-bottom:5px;'>✔ {d['day']}일차 정답</div>"
+                  f"<div style='font-weight:800;font-size:13.8px;margin-bottom:5px;'>✔ {d['day']}일차 정답</div>"
                   + render_day_answer(d) + "</div>")
         to_pdf(inner, f"L1_{d['day']:02d}일차_{d['weekday']}_숙제_{d['title_en'].replace(' ','')}.pdf", f"{d['day']}일차 숙제")
     to_pdf(render_review_day_student(), "L1_10일차_금_1과총복습.pdf", "10일차 총복습")
@@ -675,7 +695,7 @@ def main():
         inner += "<div class='pagebreak'></div>" + render_day_student(d)
     inner += "<div class='pagebreak'></div>" + render_review_day_student()
     inner += "<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>"
-    inner += "<div style='font-weight:800;font-size:14px;margin-bottom:7px;'>✔ Lesson 1 숙제 · 선생님용 정답</div>"
+    inner += "<div style='font-weight:800;font-size:16.1px;margin-bottom:7px;'>✔ Lesson 1 숙제 · 선생님용 정답</div>"
     for d in L1.DAYS:
         inner += render_day_answer(d)
     inner += "</div>"

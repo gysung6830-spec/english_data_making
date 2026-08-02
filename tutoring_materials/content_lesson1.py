@@ -487,3 +487,85 @@ GRAMMAR_SUMMARY = [
     ("8일차", "최상급 the+most/-est", "가장 ~한"),
     ("9일차", "동명사 동사+ing", "전치사 뒤에는 ~ing"),
 ]
+
+
+# ── 직독직해: 각 날짜 지문 전체 문장 (영어, 우리말) — '모든 문장' 커버 ──
+SENTENCES = {
+ 1: [
+  ("You are on a camping trip with your family or friends.","너는 가족이나 친구들과 함께 캠핑 여행 중이다."),
+  ("After a long day of hiking, you take a quick shower, sit in your favorite camping chair, pick up a soda, and let out a deep, contented sigh.","등산으로 긴 하루를 보낸 뒤, 너는 간단히 샤워를 하고, 좋아하는 캠핑 의자에 앉아, 탄산음료를 집어 들고, 깊고 흡족한 한숨을 내쉰다."),
+  ("Right at that moment, you hear that annoying and familiar buzzing sound.","바로 그 순간, 너는 그 성가시고 익숙한 윙윙 소리를 듣는다."),
+  ("Beating its wings as fast as 600 times per second, a mosquito sneaks in and pierces your skin with its straw-like mouthparts.","초당 600번만큼 빠르게 날개를 퍼덕이면서, 모기가 몰래 들어와 빨대 같은 주둥이로 네 피부를 뚫는다."),
+  ("Next, it fills its belly with blood and then escapes quickly, leaving behind an itchy red bump.","다음으로, 그것은 배를 피로 채우고 그런 다음 재빨리 달아난다, 가려운 빨간 혹을 남긴 채로."),
+  ("This is a mild allergic reaction to the mosquito's saliva.","이것은 모기의 침에 대한 가벼운 알레르기 반응이다."),
+  ("The more you scratch the bump, the more it itches.","네가 혹을 긁으면 긁을수록, 그것은 더 가렵다."),
+  ("But how do mosquitoes find their victims anyway?","그런데 모기는 대체 어떻게 자기 먹잇감을 찾을까?"),
+  ("Carbon dioxide, which humans and other animals breathe out, is actually a key signal to mosquitoes that a nice meal is near.","이산화탄소는, 인간과 다른 동물들이 내쉬는 것인데, 사실 좋은 먹을거리가 가까이 있다는 모기에게 핵심 신호이다."),
+ ],
+ 2: [
+  ("They are highly sensitive to CO2 and can detect it from far away.","그들은 이산화탄소에 매우 민감하고 그것을 멀리서도 감지할 수 있다."),
+  ("That's not the only cue they use to find their victims.","그것은 그들이 먹잇감을 찾기 위해 이용하는 유일한 단서가 아니다."),
+  ("When you sweat, you release certain chemicals that attract them.","네가 땀을 흘리면, 너는 그들을 유인하는 특정한 화학 물질을 내보낸다."),
+  ("Moreover, they can easily notice that your body temperature has risen.","게다가, 그들은 네 체온이 올라갔다는 것을 쉽게 알아챌 수 있다."),
+  ("Why do they want our blood in the first place?","그들은 애초에 왜 우리의 혈액을 원할까?"),
+  ("It turns out that only females bite us; they need protein to produce eggs.","암컷만 우리를 문다는 것이 드러난다; 그들은 알을 낳기 위해 단백질이 필요하다."),
+ ],
+ 3: [
+  ("If our blood did not contain protein, they would not bother us.","만약 우리 피가 단백질을 담고 있지 않다면, 그들은 우리를 귀찮게 하지 않을 텐데."),
+  ("After the mosquito successfully takes a blood meal of up to three times her own body weight, she quickly lands on the nearest vertical surface.","모기가 자기 체중의 최대 세 배에 달하는 피를 성공적으로 빤 뒤에, 그것은 가장 가까운 수직 표면에 재빨리 내려앉는다."),
+  ("With the aid of gravity, she drains off the water from the blood she took.","중력의 도움을 받아, 그것은 자신이 취한 피에서 수분을 빼낸다."),
+  ("Using this concentrated blood, she develops her eggs over the next few days.","이 농축된 피를 사용해, 그것은 그 후 며칠에 걸쳐 알을 성숙시킨다."),
+  ("She then lays roughly 200 floating eggs on the surface of a small pool of water.","그런 다음 그것은 작은 물웅덩이 표면에 물에 뜨는 약 200개의 알을 낳는다."),
+ ],
+ 4: [
+  ("If you had to choose our greatest predator in nature, which would you pick? Sharks, lions, or bears?","만약 네가 자연에서 우리의 가장 강력한 포식자를 골라야 한다면, 너는 무엇을 고르겠는가? 상어, 사자, 아니면 곰?"),
+  ("According to history professor Timothy Winegard, it is actually the mosquito.","역사학 교수 Timothy Winegard에 따르면, 그것은 사실 모기이다."),
+  ("Mosquitoes can pass on deadly diseases like malaria and yellow fever.","모기는 말라리아와 황열 같은 치명적인 질병을 옮길 수 있다."),
+  ("Over a million people worldwide die of these diseases every year.","전 세계 백만 명이 넘는 사람들이 매년 이런 질병으로 죽는다."),
+  ("Throughout history, Winegard estimates that mosquitoes have killed more people than any other single cause — about fifty-two billion people, nearly half of all humans who have ever lived.","역사를 통틀어, Winegard는 모기가 다른 어떤 단일 원인보다 더 많은 사람을 죽여 왔다고 추정한다 — 약 520억 명, 지금까지 살아 본 모든 인간의 거의 절반."),
+  ("Winegard claims that mosquitoes also played a role in shaping the history of several countries.","Winegard는 모기가 또한 여러 나라의 역사를 형성하는 데 역할을 했다고 주장한다."),
+  ("Take the Roman Empire, for example. The fall of the Western Roman Empire was gradual, spanning over centuries.","로마 제국을 예로 들어보자. 서로마 제국의 몰락은 여러 세기에 걸쳐 점진적이었다."),
+  ("Here are commonly cited reasons for the fall of the empire: invasions by outside forces, economic troubles, and corruption.","여기 제국의 몰락에 대해 흔히 언급되는 이유들이 있다: 외세의 침략, 경제적 문제, 그리고 부패."),
+ ],
+ 5: [
+  ("Diseases like malaria, however, also contributed.","그러나, 말라리아 같은 질병도 또한 기여했다."),
+  ("Rome, the capital of the empire, was once surrounded by a huge stretch of wetland.","제국의 수도였던 로마는, 한때 거대하게 펼쳐진 습지로 둘러싸여 있었다."),
+  ("This was an ideal breeding ground for mosquitoes and hence a hot spot for malaria.","이곳은 모기에게 이상적인 번식지였고 그래서 말라리아의 창궐지였다."),
+  ("On the one hand, mosquitoes helped protect the city against the armies coming to attack it.","한편으로, 모기는 그곳을 공격하러 오는 군대로부터 도시를 보호하는 데 도움이 되었다."),
+  ("However, they eventually spread the disease not only throughout the city, but also throughout the empire, crushing much of the population.","하지만, 그들은 결국 도시 전역뿐만 아니라 제국 전체에도 질병을 퍼뜨려, 인구의 상당수를 궤멸시켰다."),
+  ("Here is another reason why Winegard considers the mosquito a powerful agent of historical change.","여기 Winegard가 모기를 역사 변천의 강력한 동인이라고 여기는 또 하나의 이유가 있다."),
+ ],
+ 6: [
+  ("In 1698, five ships set sail from Scotland, carrying twelve hundred settlers and valuable trade goods.","1698년에, 다섯 척의 배가 1,200명의 정착민과 값진 교역 물자를 싣고 스코틀랜드에서 출항했다."),
+  ("They headed for the Darien region of Panama, where Scotland planned to create a trading center.","그들은 파나마의 다리엔 지역으로 향했다, 그곳에 스코틀랜드는 교역 거점을 만들 계획이었다."),
+  ("After struggling through years of a food crisis, Scotland had hoped this would help raise its economic prospects.","수년간의 식량난을 힘겹게 헤쳐 나온 뒤, 스코틀랜드는 이것이 경제적 전망을 끌어올리는 데 도움이 되기를 바랐었다."),
+  ("The ambitious plan, however, was brought down by the local diseases: yellow fever and malaria.","그러나 그 야심 찬 계획은, 그 지역의 질병들로 무너졌다: 황열과 말라리아."),
+  ("Virtually no one from Scotland had ever encountered any of these diseases before.","스코틀랜드에서 온 사람은 사실상 아무도 이전에 이런 질병들 중 어느 것도 접해 본 적이 없었다."),
+  ("After six months, nearly half of them died, and the survivors returned to their ships and fled.","6개월 후, 그들 중 거의 절반이 죽었고, 생존자들은 배로 돌아가 달아났다."),
+ ],
+ 7: [
+  ("If their immune systems had been much stronger, they would not have lost so many lives in such a short time.","만약 그들의 면역계가 훨씬 더 강했더라면, 그토록 짧은 시간에 그토록 많은 목숨을 잃지 않았을 텐데."),
+  ("Surprisingly, human beings lived with and died of these diseases for thousands of years without understanding how they were spread.","놀랍게도, 인간은 그것들이 어떻게 퍼지는지 알지 못한 채 수천 년 동안 이 질병들과 함께 살고 그로 인해 죽었다."),
+  ("It was not until the end of the nineteenth century that we found out that mosquitoes spread malaria.","19세기 말이 되어서야 비로소 우리는 모기가 말라리아를 퍼뜨린다는 것을 알아냈다."),
+  ("Before this finding, no one imagined that these tiny annoying insects might be affecting our lives so deeply.","이 발견 이전에는, 아무도 이 작고 성가신 곤충들이 우리 삶에 그토록 깊이 영향을 주고 있을지도 모른다는 것을 상상하지 못했다."),
+  ("Now we all know that human history is not free from the workings of the natural world.","이제 우리는 모두 인간의 역사가 자연계의 작용으로부터 자유롭지 못하다는 것을 안다."),
+ ],
+ 8: [
+  ("Ladybugs are probably the most well-known of all the helpful bugs in the garden.","무당벌레는 정원에서 모든 이로운 벌레 중에서 아마도 가장 잘 알려져 있다."),
+  ("First of all, they eat quite a few of the bad bugs that prevent plants from growing.","우선, 그들은 식물이 자라는 것을 막는 나쁜 벌레의 상당수를 먹는다."),
+  ("Each ladybug can eat fifty to sixty aphids per day and over five thousand in its lifetime.","각 무당벌레는 하루에 진딧물 50~60마리를 먹을 수 있고 평생에 5천 마리 넘게 먹을 수 있다."),
+  ("Their young eat aphids, too.","그들의 새끼도 진딧물을 먹는다."),
+  ("If you grow plants that attract ladybugs, such as cilantro or mint, you may not have to worry about harmful bugs anymore.","만약 네가 고수나 박하 같은, 무당벌레를 끌어들이는 식물을 기르면, 너는 더 이상 해로운 벌레에 대해 걱정하지 않아도 될지 모른다."),
+  ("Even better, ladybugs can defend themselves by giving off a certain smell that their predators do not like.","한결 더 좋은 것은, 무당벌레가 그들의 포식자가 좋아하지 않는 특정한 냄새를 내뿜음으로써 스스로를 방어할 수 있다는 것이다."),
+ ],
+ 9: [
+  ("Earthworms are a great addition to your garden as well.","지렁이는 네 정원에 또한 훌륭한 보탬이다."),
+  ("They help keep your soil soft and breathable by digging tunnels that bring air to the roots of plants.","그들은 식물의 뿌리에 공기를 가져다주는 굴을 팜으로써 흙을 부드럽고 통기성 있게 유지하도록 돕는다."),
+  ("They also eat the dead bits of plants that fall to the ground, recycling them back into the soil and helping new plants to grow.","그들은 또한 땅에 떨어진 식물의 죽은 부분을 먹는다, 그것들을 흙으로 다시 재순환시키면서 그리고 새 식물이 자라도록 도우면서."),
+  ("Moreover, their waste makes your soil richer, and they are excellent at breaking down organic matter in your garden.","게다가, 그들의 배설물은 흙을 더 비옥하게 만들고, 그들은 네 정원에서 유기물을 분해하는 것에 탁월하다."),
+  ("However, you should be careful about applying artificial fertilizers to your garden after introducing earthworms.","그러나, 너는 지렁이를 들여놓은 뒤에는 정원에 인공 비료를 사용하는 것을 조심해야 한다."),
+  ("They will find a new home when the soil around them changes.","그들은 그들 주변의 흙이 바뀌면 새로운 서식지를 찾을 것이다."),
+ ],
+}
+for _d in DAYS:
+    _d["sentences"] = SENTENCES[_d["day"]]
