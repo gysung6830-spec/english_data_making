@@ -16,8 +16,11 @@
   @page{ size:A4 portrait; margin:10mm 9mm; }
   *{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
+  /* 한글·영문 '동일 글꼴' 보장: 임베드한 나눔스퀘어라운드만 쓰고, 없을 때만 generic sans.
+     중간에 다른 한글 폰트(맑은고애·나눔고딕 등)를 두면 특정 글자가 그 폰트로 빠지며
+     한글만 영문과 다른 서체로 보일 수 있으므로 스택에서 제거한다(지문독해 한/영 서체 통일). */
   body{
-    font-family:'NanumSquareRound','Nanum Gothic','NanumGothic','Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif;
+    font-family:'NanumSquareRound',sans-serif;
     color:var(--ink); font-size:13px; line-height:1.5; font-weight:400;
   }
   .page{ background:var(--page-bg); border-radius:22px; padding:20px 22px 30px; position:relative;
