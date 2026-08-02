@@ -23,6 +23,8 @@ class ProcessingCfg:
     parallel_sections: bool = True
     max_retries: int = 1
     use_batch_for_bulk: bool = True
+    verify_vocab: bool = True          # 어휘(상) 자동 교차검증 사용 여부
+    verify_model: str = "claude-haiku-4-5"  # 교차검증용 저비용 모델
 
 
 @dataclass
@@ -77,6 +79,8 @@ def load_config(path: str | Path | None = None) -> Config:
             parallel_sections=bool(proc.get("parallel_sections", True)),
             max_retries=int(proc.get("max_retries", 1)),
             use_batch_for_bulk=bool(proc.get("use_batch_for_bulk", True)),
+            verify_vocab=bool(proc.get("verify_vocab", True)),
+            verify_model=str(proc.get("verify_model", "claude-haiku-4-5")),
         ),
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),

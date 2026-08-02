@@ -128,6 +128,7 @@ INDEX_HTML = """
       <input type=number name=start_no min=1 max=200 placeholder="예: 30">
       <div class=hint>입력하면 <b>첫 지문 = 그 번호</b>, 이후 지문마다 <b>1씩 자동 증가</b>합니다(30 → 31 → 32 …). 뱃지 오류를 없애는 가장 확실한 방법이에요.</div>
 
+      <label class=chk><input type=checkbox name=verify_vocab value=1 checked> 어휘(상) 자동 교차검증 <span class=hint>(정답이 정확히 2개인지 저비용 AI가 재검토 · 지문당 비용 +1~2%)</span></label>
       <label class=chk><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
@@ -258,6 +259,8 @@ def health():
 def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
+    # 어휘(상) 자동 교차검증 토글(기본 켜짐). 이번 요청에만 반영.
+    cfg.processing.verify_vocab = bool(request.form.get("verify_vocab"))
     custom = _safe_name((request.form.get("outname") or "").strip()) if (request.form.get("outname") or "").strip() else ""
     single = len(files) == 1
     # 수동 문항번호(시작번호) — 있으면 자동 추출보다 우선, 지문마다 1씩 증가

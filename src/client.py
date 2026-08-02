@@ -113,15 +113,18 @@ class ClaudeClient:
         max_retries: int = 1,
         extra_validate=None,
         image_path: str | Path | None = None,
+        model: str | None = None,
     ) -> T:
         """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청.
 
         image_path 가 주어지면 이미지를 함께 보내는 비전 요청으로 동작한다.
+        model 을 주면 해당 호출만 다른 모델로 처리한다(예: 검증 패스는 저비용 Haiku).
         """
+        use_model = model or self.model
         last_err: Exception | None = None
         cur_prompt = prompt
         for attempt in range(max_retries + 1):
-            req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
+            req = build_request(use_model, system, cur_prompt, model_cls, max_tokens,
                                 image_path=image_path)
             message = self._client.messages.create(**req)
             try:

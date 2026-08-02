@@ -26,6 +26,11 @@ processing:
   # 대량 처리 시 Batch API 사용 여부 (지문 수가 많을 때 비용 절감)
   #   run.py --batch 로 실행하면 이 값과 상관없이 배치 모드로 동작합니다.
   use_batch_for_bulk: true
+  # 어휘 (상) 자동 교차검증: 생성 후 별도 저비용 LLM 이 '정답이 정확히 2개인지' 재검토해
+  #   출제오류 소지가 있는 문항을 자동 제외합니다 (지문당 비용 +1~2% 수준).
+  verify_vocab: true
+  # 교차검증에 쓸 모델 (판정 난이도가 낮아 저비용 Haiku 를 권장)
+  verify_model: "claude-haiku-4-5"
 
 # 출력 PDF 디자인
 design:
