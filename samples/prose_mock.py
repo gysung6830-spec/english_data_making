@@ -10,8 +10,8 @@ from src import prose_render as pr
 
 def mock_llm_prose() -> pr.LLMProsePack:
     """어법·어형·어휘가 골고루 들어간 예시 산문 워크시트(LLM 응답 형태) — 초기 피드백 지문."""
-    def I(pid, disp, ans):
-        return pr.LLMProseItem(id=pid, display=disp, answer=ans)
+    def I(pid, disp, ans, gloss=""):
+        return pr.LLMProseItem(id=pid, display=disp, answer=ans, gloss=gloss)
 
     return pr.LLMProsePack(
         title="The Value of Early Feedback",
@@ -31,10 +31,10 @@ def mock_llm_prose() -> pr.LLMProsePack:
                             I("P3", "(be)", "is")],
                 vocab_template=("Giving clients {{P1}} opportunity to react to your designs while in "
                                 "progress is a key to professional success."),
-                vocab_items=[I("P1", "[ ample / scant ]", "ample")],
+                vocab_items=[I("P1", "[ ample / amble / abundant ]", "ample / abundant", "충분한")],
                 vocab_easy_template=("Giving clients ample opportunity to react to your designs while in "
                                      "progress is a key to professional {{P1}}."),
-                vocab_easy_items=[I("P1", "[ success / failure ]", "success")],
+                vocab_easy_items=[I("P1", "[ success / failure ]", "success", "성공")],
             ),
             pr.LLMProseSentence(
                 no=2,
@@ -51,10 +51,11 @@ def mock_llm_prose() -> pr.LLMProsePack:
                             I("P3", "(resist)", "resist"), I("P4", "(repeat)", "repeat")],
                 vocab_template=("Designers who welcome early feedback often avoid costly revisions, while "
                                 "those who resist it repeat the same {{P1}} mistakes."),
-                vocab_items=[I("P1", "[ avoidable / inevitable ]", "avoidable")],
+                vocab_items=[I("P1", "[ avoidable / available / preventable ]",
+                               "avoidable / preventable", "피할 수 있는")],
                 vocab_easy_template=("Designers who welcome {{P1}} feedback often avoid costly revisions, "
                                      "while those who resist it repeat the same avoidable mistakes."),
-                vocab_easy_items=[I("P1", "[ early / late ]", "early")],
+                vocab_easy_items=[I("P1", "[ early / late ]", "early", "초기의")],
             ),
             pr.LLMProseSentence(
                 no=3,
@@ -70,10 +71,10 @@ def mock_llm_prose() -> pr.LLMProsePack:
                             I("P3", "(understand)", "understood"), I("P4", "(go)", "gone")],
                 vocab_template=("Only after the deadline passed did they realize how {{P1}} the problem "
                                 "was, and the team finally understood what had gone wrong."),
-                vocab_items=[I("P1", "[ serious / superficial ]", "serious")],
+                vocab_items=[I("P1", "[ serious / serial / grave ]", "serious / grave", "심각한")],
                 vocab_easy_template=("Only after the deadline passed did they realize how serious the "
                                      "problem was, and the team finally {{P1}} what had gone wrong."),
-                vocab_easy_items=[I("P1", "[ understood / ignored ]", "understood")],
+                vocab_easy_items=[I("P1", "[ understood / ignored ]", "understood", "이해했다")],
             ),
         ],
     )

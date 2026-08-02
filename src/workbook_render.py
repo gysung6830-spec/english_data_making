@@ -131,10 +131,12 @@ def stamp_page_numbers(path: str | Path) -> Path:
     for i, page in enumerate(doc, start=1):
         w, h = page.rect.width, page.rect.height
         label = f"{i} / {n}"
-        tw = fitz.get_text_length(label, fontname="helv", fontsize=8)
-        # 저작권 문구(가운데)와 겹치지 않게 같은 줄 오른쪽에 배치
+        # 저작권 푸터(11px)와 같은 크기: 11px = 8.25pt
+        fs = 8.25
+        tw = fitz.get_text_length(label, fontname="helv", fontsize=fs)
+        # 저작권 문구(왼쪽)와 겹치지 않게 같은 줄 오른쪽에 배치
         page.insert_text((w - 40 - tw, h - 17.5), label,
-                         fontsize=8, fontname="helv", color=(0.62, 0.66, 0.71))
+                         fontsize=fs, fontname="helv", color=(0.62, 0.66, 0.71))
     tmp = path.with_name(path.stem + "__num.pdf")
     doc.save(str(tmp))
     doc.close()

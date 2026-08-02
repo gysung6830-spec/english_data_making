@@ -36,6 +36,7 @@ def group_from_prose(pack, wtype: str, type_name: str, css: str,
     if ws is None:
         return None
     is_tr = (wtype == "translate")
+    is_vocab = wtype in ("vocab", "vocab_easy")
     block = is_tr or style == "gloss"
     items: list[str] = []
     kos: list[str] = []
@@ -46,7 +47,15 @@ def group_from_prose(pack, wtype: str, type_name: str, css: str,
             continue
         if not s.items:
             continue
-        ans = " / ".join(it.answer for it in s.items)
+        if is_vocab:
+            # 어휘: 각 정답에 한글 '뜻'을 함께 표기 (예: "ample (충분한)")
+            parts = []
+            for it in s.items:
+                g = getattr(it, "gloss", "")
+                parts.append(f"{it.answer} ({g})" if g else it.answer)
+            ans = " / ".join(parts)
+        else:
+            ans = " / ".join(it.answer for it in s.items)
         if style == "gloss" and s.ko:
             items.append(f"{s.no}) {ans}  —  {s.ko}")
         else:

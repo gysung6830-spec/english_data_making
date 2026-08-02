@@ -28,6 +28,7 @@ class PItem:
     display: str       # "(understand)" | "[ that / what ]"
     answer: str
     write: bool = False  # 어형 변형이면 쓰는 밑줄 표시
+    gloss: str = ""    # 어휘 유형: 정답 단어의 한글 뜻(해설에 표기)
 
 
 @dataclass
@@ -60,6 +61,7 @@ class LLMProseItem(BaseModel):
     id: str            # "P1"
     display: str       # "[ that / what ]" | "(understand)"
     answer: str
+    gloss: str = ""    # 어휘 유형에서만: 정답 단어의 한글 뜻
 
 
 class LLMProseSentence(BaseModel):
@@ -88,10 +90,10 @@ _WORKSHEET_DEFS = [
      "grammar_template", "grammar_items"),
     ("form", "어형 변형", "각 빈칸에 괄호 안의 단어를 문맥에 맞게 알맞은 형태로 바꾸어 쓰시오. "
      "(어형 변화가 필요 없는 경우도 있음)", True, "form_template", "form_items"),
-    ("vocab", "어휘 양자택일 (상)", "둘 중 문맥상 알맞은 것을 고르시오. (난도 상)", False,
-     "vocab_template", "vocab_items"),
     ("vocab_easy", "어휘 양자택일 (하)", "둘 중 문맥상 알맞은 것을 고르시오. (난도 하)", False,
      "vocab_easy_template", "vocab_easy_items"),
+    ("vocab", "어휘 (상)", "셋 중 문맥상 알맞은 것 '두 개'를 고르시오. (난도 상)", False,
+     "vocab_template", "vocab_items"),
 ]
 
 
@@ -111,7 +113,8 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         items_src = getattr(s, ikey)
         order = placeholders_in(template)
         # 자리표시자가 하나도 없으면(출제 없음) 원문만 두고 items 는 비운다.
-        pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write)
+        pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write,
+                        gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
