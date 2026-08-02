@@ -111,12 +111,6 @@ function answerWriteCard() {
     <div class="wc-h">✏️ 직접 ' / ' 로 끊고, 그 아래에 뜻을 적어봐</div>
     <div class="wl"></div><div class="wl"></div></div>`;
 }
-// 해설 쪽 끊어읽기 — 초록 '문제' 카드가 아니라 담백한 해설 스타일(영어/한글).
-function chunkExplain(chunks) {
-  const rows = chunks.map((c) =>
-    `<div class="exrow"><span class="exen">${esc(c[0])}</span><span class="exko">${esc(c[1])}</span></div>`).join('');
-  return `<div class="excard"><div class="ex-h">끊어읽기 해석 (모범답안)</div>${rows}</div>`;
-}
 function catchCard(text) {
   return `<div class="callout catch"><span class="co-ic">✅ 이 정도는 캐치!</span> ${esc(text)}</div>`;
 }
@@ -159,10 +153,10 @@ function practiceProblem(s, idx, trap) {
     ${trapCard(trap)}
     ${answerWriteCard()}</div>`;
 }
-// 혼자 풀어보기 — 해설 쪽(오른쪽 페이지): 영어 + 모범 끊어읽기 + 캐치
+// 혼자 풀어보기 — 해설 쪽(오른쪽 페이지): 영어 + 모범 끊어읽기(영어/한글 · / 구분) + 캐치
 function practiceExplain(s, idx) {
   return `<div class="sblock">${sentHead(s, idx)}
-    ${chunkExplain(s.chunks)}
+    ${chunkLines(s.chunks, true)}
     ${catchCard(s.catch)}</div>`;
 }
 
@@ -330,13 +324,6 @@ function css() {
   .wc-h { font-size:10.3px; color:${C.sub}; font-weight:700; margin-bottom:6px; }
   .wl { border-bottom:1px solid #cacaca; height:18px; margin:10px 0; }
   /* 해설 끊어읽기 (담백한 스타일 — 초록 '문제' 카드 아님) */
-  .excard { border:1px solid ${C.greenLine}; border-left:4px solid ${C.tealDark}; border-radius:6px;
-    padding:8px 12px; margin:4px 0 8px; background:#fbfdfb; }
-  .ex-h { font-size:9.5px; font-weight:800; color:${C.tealDark}; margin-bottom:6px; text-transform:none; }
-  .exrow { display:flex; gap:10px; padding:3px 0; border-top:1px dotted #e3ece4; }
-  .exrow:first-of-type { border-top:0; }
-  .exen { flex:1; font-weight:700; font-size:11.3px; }
-  .exko { flex:1; font-size:11px; color:#333; }
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
   .callout.tip { background:${C.tipBg}; border-left:4px solid ${C.tipBar}; color:#555; }
@@ -407,7 +394,7 @@ function passageAnswerKey(p) {
   let h = secHead(CIRCLED[2], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
   h += (p.sentences || []).map((s, i) => `<div class="sblock">
     <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
-    ${chunkExplain(s.chunks)}
+    ${chunkLines(s.chunks, true)}
     ${s.catch ? catchCard(s.catch) : ''}</div>`).join('');
   return h;
 }
