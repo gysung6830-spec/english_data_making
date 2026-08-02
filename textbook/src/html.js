@@ -42,7 +42,19 @@ function findChrome() {
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const CIRCLED = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
 
+// @font-face 를 만든다. base64 는 코드에 박힌 src/fonts-embedded.js 에서 가져오므로
+// fonts/ 폴더 유무·실행 경로·환경과 무관하게 항상 NanumSquareRound 가 임베드된다.
+// (혹시 임베드 모듈이 비어 있으면 fonts/ 의 woff2 를 읽어 보는 안전장치만 둔다.)
 function fontFaces() {
+  const face = (weight, b64) =>
+    `@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:${weight};`
+    + `src:url(data:font/woff2;base64,${b64}) format('woff2');}`;
+
+  let embedded = [];
+  try { embedded = require('./fonts-embedded').FONTS || []; } catch (_) { /* 아래 폴백 */ }
+  if (embedded.length) return embedded.map((f) => face(f.weight, f.b64)).join('\n');
+
+  // 폴백: 임베드 모듈이 없을 때만 파일에서 읽음(개발 중 폰트 교체 직후 등).
   const defs = [
     ['NanumSquareRoundL.woff2', 300], ['NanumSquareRoundR.woff2', 400],
     ['NanumSquareRoundB.woff2', 700], ['NanumSquareRoundEB.woff2', 800],
@@ -50,9 +62,7 @@ function fontFaces() {
   return defs.map(([file, weight]) => {
     const fp = path.join(FONTS_DIR, file);
     if (!fs.existsSync(fp)) return '';
-    const b64 = fs.readFileSync(fp).toString('base64');
-    return `@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:${weight};`
-      + `src:url(data:font/woff2;base64,${b64}) format('woff2');}`;
+    return face(weight, fs.readFileSync(fp).toString('base64'));
   }).join('\n');
 }
 

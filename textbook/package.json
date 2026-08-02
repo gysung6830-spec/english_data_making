@@ -9,7 +9,8 @@
     "build:docx": "node build_v4.js --no-pdf",
     "validate": "node validate.js",
     "preview": "node preview_pdf.js",
-    "web": "node webapp/server.js"
+    "web": "node webapp/server.js",
+    "fonts": "node scripts/gen-fonts-embed.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

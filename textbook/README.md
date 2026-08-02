@@ -103,15 +103,23 @@ PDF 업로드 → src/extract.js(영어 문장 추출) → src/ai.js(Claude 구�
 
 `fonts/` 에 NanumSquareRound(L/R/B/EB, OFL-1.1)를 포함한다.
 
-- **디자인 PDF(`preview_pdf.js`)**: `fonts/*.woff2` 를 base64 로 **임베드**하므로,
-  별도 설치 없이 어디서 만들어도 나눔스퀘어라운드로 렌더된다.
+- **디자인 PDF/HTML(`src/html.js`)**: 폰트 base64 를 **코드에 그대로 박아** 임베드한다.
+  base64 는 `src/fonts-embedded.js`(자동 생성)에 들어 있어, **실행 경로·환경·`fonts/` 폴더
+  유무와 무관하게** 언제나 나눔스퀘어라운드로 렌더된다(파일시스템을 읽지 않음).
+  폰트를 교체하면 아래로 재생성:
+
+  ```bash
+  node scripts/gen-fonts-embed.js   # fonts/*.woff2 → src/fonts-embedded.js 갱신
+  ```
+
+  (혹시 `src/fonts-embedded.js` 가 없을 때만 `fonts/*.woff2` 를 읽는 폴백이 있다.)
 - **docx→LibreOffice PDF(`build_v4.js`)**: docx 는 폰트를 이름으로만 참조하므로,
   변환 PC 에 폰트가 설치돼 있어야 정확히 렌더된다. 아래로 설치:
 
-```bash
-bash setup_fonts.sh   # fonts/*.ttf → ~/.local/share/fonts + fc-cache
-# Windows: fonts/*.ttf 더블클릭 → '설치'
-```
+  ```bash
+  bash setup_fonts.sh   # fonts/*.ttf → ~/.local/share/fonts + fc-cache
+  # Windows: fonts/*.ttf 더블클릭 → '설치'
+  ```
 
 ## 폴더 구조 (리팩터링 후)
 
@@ -128,13 +136,16 @@ textbook/
     boxes.js           재사용 박스/문단 빌더 (명세 §5.2)
     document.js        표지·챕터·정답 조립 → docx (명세 §5.1)
     html.js            디자인 HTML→PDF 렌더러 (CLI·웹앱 공유)
+    fonts-embedded.js  NanumSquareRound base64 (자동 생성, 코드에 임베드)
     extract.js         업로드 PDF → 영어 문장 추출 (pdf-parse)
     ai.js              문장 → 교재 데이터 구조화 (Claude / MOCK)
     validate.js        불변식 검증 로직
   webapp/
     server.js          업로드 → 추출 → AI → 검증 → 렌더 (express)
     public/index.html  업로드 UI
-  fonts/               NanumSquareRound (L/R/B/EB, OFL-1.1)
+  scripts/
+    gen-fonts-embed.js fonts/*.woff2 → src/fonts-embedded.js 생성기
+  fonts/               NanumSquareRound (L/R/B/EB, OFL-1.1) — 임베드 원본·docx 설치용
   output/              생성물(.docx/.pdf/.html) — git 에는 올리지 않음
 ```
 
