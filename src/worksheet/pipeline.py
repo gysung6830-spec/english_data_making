@@ -375,8 +375,8 @@ def _stamp_footer(path: Path, footer_note: str = "") -> None:
             c = canvas.Canvas(buf, pagesize=(w, h))
             c.setFillColorRGB(*gray)
             if footer_note:
-                c.setFont(kfont, 7.5)
-                c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권
+                c.setFont(kfont, 11)
+                c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권(11pt)
             c.setFont(pfont, 9)
             c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체
             c.save()
