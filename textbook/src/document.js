@@ -191,8 +191,9 @@ function passageParagraphs(p, idx) {
 function passageCoverParagraphs(meta = {}) {
   const center = (children, after) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after }, children });
   return [
-    center([new TextRun({ text: meta.title || '지문 구문독해 워크북', bold: true, size: 44, color: S.NAVY, font: S.FONT })], 200),
-    center([new TextRun({ text: '지문 한 편을 온전히 — 끊어읽기로 구문까지', size: 24, color: S.BRASS, bold: true, font: S.FONT })], 100),
+    center([new TextRun({ text: meta.title || '필생보', bold: true, size: 52, color: S.NAVY, font: S.FONT })], 120),
+    center([new TextRun({ text: '필자의 생각이 보이는 영어독해', bold: true, size: 28, color: S.NAVY, font: S.FONT })], 160),
+    center([new TextRun({ text: '소재 → 필자 주장(긍정·부정) → 글 구조 → 재진술(같은 말)', size: 22, color: S.BRASS, bold: true, font: S.FONT })], 100),
     center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, color: '666666', font: S.FONT })], 700),
     new Paragraph({
       spacing: { before: 200, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },

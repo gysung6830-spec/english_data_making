@@ -110,6 +110,6 @@ app.get('/api/health', (req, res) => {
 
 app.listen(PORT, () => {
   const key = process.env.ANTHROPIC_API_KEY ? '있음(실 AI)' : '없음(MOCK 폴백)';
-  console.log(`\n📘 교재 생성 웹앱: http://localhost:${PORT}`);
+  console.log(`\n📘 필생보 교재 생성 웹앱: http://localhost:${PORT}`);
   console.log(`   ANTHROPIC_API_KEY: ${key} · 모델: ${process.env.ANTHROPIC_MODEL || 'claude-opus-5'}\n`);
 });

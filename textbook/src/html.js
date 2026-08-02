@@ -220,23 +220,22 @@ function chapterHtml(cat, chIndex) {
 }
 
 function coverHtml(meta = {}) {
+  const brand = meta.brand || '문법으로 뚫는 영어 해석';
   const subtitle = meta.subtitle || '전치사구 · 수동태 · to부정사 · 동명사 · 관계사 · 분사 · 분사구문';
   const source = meta.source || '2023학년도 수능 · 2024년 9월 평가원 모의평가(고3) 기출 기반';
   return `<section class="cover">
-    <div class="cov-badges"><span class="daypill">문법으로 뚫는 영어 해석</span></div>
+    <div class="cov-badges"><span class="daypill">${esc(brand)}</span></div>
     <div class="ctitle">${esc(meta.title || '영어 해석 구문 워크북')}</div>
     <div class="csub">${esc(subtitle)}</div>
     <div class="csrc">${esc(source)}</div>
     <div class="usebox">
       <div class="useh">📌 쌤이 알려주는 사용법</div>
-      <p>문법 용어가 낯설어도 괜찮아. 순서대로만 따라오면 돼.</p>
+      <p>${esc(meta.useIntro || '문법 용어가 낯설어도 괜찮아. 순서대로만 따라오면 돼.')}</p>
       <div class="usesteps">
-        <div class="ustep"><b>①</b> 이 문법이 뭔지 읽고</div>
-        <div class="ustep"><b>②</b> 찾는 신호를 익히고</div>
-        <div class="ustep"><b>③</b> 해석하는 법을 보고</div>
-        <div class="ustep"><b>④</b> 같이 풀고 → 혼자 풀기!</div>
+        ${(meta.useSteps || ['이 문법이 뭔지 읽고', '찾는 신호를 익히고', '해석하는 법을 보고', '같이 풀고 → 혼자 풀기!'])
+    .map((t, i) => `<div class="ustep"><b>${CIRCLED[i]}</b> ${esc(t)}</div>`).join('')}
       </div>
-      <p class="fine">끊어읽기는 앞에서부터만, 뒤로 돌아가지 말고. 혼자 풀어보기는 <b>왼쪽에서 직접 풀고, 오른쪽 페이지 해설</b>로 바로 맞춰봐.</p>
+      <p class="fine">${meta.useFine || '끊어읽기는 앞에서부터만, 뒤로 돌아가지 말고. 혼자 풀어보기는 <b>왼쪽에서 직접 풀고, 오른쪽 페이지 해설</b>로 바로 맞춰봐.'}</p>
     </div>
   </section>`;
 }
@@ -417,7 +416,7 @@ function passageHtml(p, idx) {
   h += `<div class="chhead"><span class="daypill">지문 ${idx + 1}</span>
     <span class="tagpill">${esc(p.source || '구문해석')}</span></div>`;
   h += `<h1>${esc(p.title || `지문 ${idx + 1}`)}</h1>`;
-  h += '<div class="chsub">문법으로 뚫는 영어 해석 · 지문 한 편을 온전히 이해하기</div>';
+  h += '<div class="chsub">필생보 · 필자의 생각이 보이는 영어독해 — 소재·주장·구조·재진술</div>';
   if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
@@ -434,9 +433,13 @@ function passageHtml(p, idx) {
 // 지문 모드 전체 HTML. passages 는 normalizePassages 결과.
 function buildHtmlPassages(passages, meta = {}) {
   const cover = coverHtml({
-    title: meta.title || '지문 구문독해 워크북',
-    subtitle: meta.subtitle || '지문 한 편을 온전히 — 끊어읽기로 구문까지',
+    brand: meta.brand || '필생보',
+    title: meta.title || '필자의 생각이 보이는 영어독해',
+    subtitle: meta.subtitle || '소재 → 필자 주장(긍정·부정) → 글 구조 → 재진술(같은 말), 한 지문 완전 독해',
     source: meta.source || '업로드한 지문 기반 · 자동 생성',
+    useIntro: '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.',
+    useSteps: ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'],
+    useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
   });
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
     + `<body>${cover}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
