@@ -97,6 +97,7 @@ def load_part0(path: str | Path | None = None):
                  engine_title=data.get("engine_title", ""),
                  engine_intro=data.get("engine_intro", ""),
                  cut_points=data.get("cut_points", []),
+                 cut_demo=data.get("cut_demo", {}),
                  link_tricks=data.get("link_tricks", []),
                  prep_gloss=data.get("prep_gloss", []),
                  tools=data.get("tools", []))

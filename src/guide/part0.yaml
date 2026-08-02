@@ -70,6 +70,18 @@ cut_points:
   - { at: "명사 뒤 바로 S+V", ex: "the talents [they have] …  (관계사 생략)" }
   - { at: "콤마·대시 앞뒤",   ex: "…, <b>Feeling nervous</b>, she …" }
 
+# ── 한 문장으로 확인: 신호마다 끊어 보기 (시연) ──
+cut_demo:
+  marked: >-
+    We can create a society <sig>/</sig> <b>where</b> our children can grow up happily
+    <sig>/</sig> <b>showing off</b> the talents <sig>/</sig> <b>they have</b> inherited from
+    their parents <sig>/</sig> <b>if</b> we do not act selfishly for our own good
+    <sig>/</sig> <b>and</b> observe public order well.
+  read: >-
+    우리는 사회를 만들 수 있다 / 아이들이 행복하게 자라나는 / 재능을 뽐내면서 / 그들이 부모에게서 물려받은 (재능을) /
+    우리가 사욕으로 이기적으로 굴지 않고 / 공공질서를 잘 지킨다면.
+  note: 신호(<b>where·showing·they have·if·and</b>) 앞에서 툭툭 끊고, 조각을 <b>앞으로만</b> 이으면 이 긴 문장도 무너지지 않는다.
+
 # ── 끊었으면 매끄럽게 잇는다 (손기술) ──
 link_tricks:
   - { k: "주어 조사",     v: "일반 S는 <b>은/는</b>, 접속사·관계사절 속 S는 <b>이/가</b>", ex: "" }

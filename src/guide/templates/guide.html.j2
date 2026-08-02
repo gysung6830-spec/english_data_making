@@ -199,32 +199,41 @@
   {% endfor %}
   </div>
 
-  {# ── 끊고 잇기 실전 엔진: 끊는 위치 · 잇는 손기술 · 전치사 조사 ── #}
-  {% if p0.cut_points or p0.link_tricks %}
-  <div class="engine">
-    <div class="engine-head"><span class="engine-badge">실전</span>{{ p0.engine_title or '끊고 잇기' }}</div>
+  {# ── 끊고 잇기 실전 엔진 ①: 어디서 자르나 (한 페이지) ── #}
+  {% if p0.cut_points %}
+  <div class="engine engine-cut">
+    <div class="engine-head"><span class="engine-badge">실전 ①</span>끊어읽기 — 어디서 자르나</div>
     {% if p0.engine_intro %}<div class="engine-intro">{{ p0.engine_intro | safe }}</div>{% endif %}
-    <div class="engine-grid">
-      {% if p0.cut_points %}
-      <div class="eg-col cut">
-        <div class="eg-title">✂️ 어디서 자르나 <small>신호 앞에서 끊는다</small></div>
-        {% for c in p0.cut_points %}
-        <div class="cut-row"><span class="cut-at">{{ c.at }}</span><span class="cut-ex">{{ c.ex | safe }}</span></div>
-        {% endfor %}
-      </div>
-      {% endif %}
-      {% if p0.link_tricks %}
-      <div class="eg-col link">
-        <div class="eg-title">🔗 매끄럽게 잇는다 <small>끊었으면 반드시 이어라</small></div>
-        {% for t in p0.link_tricks %}
-        <div class="link-row"><span class="link-k">{{ t.k }}</span><span class="link-v">{{ t.v | safe }}{% if t.ex %} <span class="link-ex">{{ t.ex | safe }}</span>{% endif %}</span></div>
-        {% endfor %}
-      </div>
-      {% endif %}
+    <div class="cut-list">
+      <div class="eg-title">✂️ 신호 앞에서 끊는다 <small>이 신호가 보이면 그 앞에서 툭</small></div>
+      {% for c in p0.cut_points %}
+      <div class="cut-row"><span class="cut-at">{{ c.at }}</span><span class="cut-ex">{{ c.ex | safe }}</span></div>
+      {% endfor %}
+    </div>
+    {% if p0.cut_demo %}
+    <div class="cut-demo">
+      <div class="cd-title">🔎 한 문장으로 확인 <small>신호마다 끊어 보면</small></div>
+      <div class="cd-marked">{{ p0.cut_demo.marked | safe }}</div>
+      <div class="cd-read">{{ p0.cut_demo.read | safe }}</div>
+      {% if p0.cut_demo.note %}<div class="cd-note">{{ p0.cut_demo.note | safe }}</div>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# ── 끊고 잇기 실전 엔진 ②: 매끄럽게 잇기 · 전치사 조사 (다음 페이지) ── #}
+  {% if p0.link_tricks %}
+  <div class="engine engine-link brk-before">
+    <div class="engine-head"><span class="engine-badge">실전 ②</span>매끄럽게 잇기 — 끊었으면 이어라</div>
+    <div class="engine-intro">끊어만 놓고 이어 붙이지 않으면 해석이 안 된다. 아래 손기술로 조각을 <b>앞으로만</b> 이어라.</div>
+    <div class="link-list">
+      {% for t in p0.link_tricks %}
+      <div class="link-row"><span class="link-k">{{ t.k }}</span><span class="link-v">{{ t.v | safe }}{% if t.ex %} <span class="link-ex">{{ t.ex | safe }}</span>{% endif %}</span></div>
+      {% endfor %}
     </div>
     {% if p0.prep_gloss %}
     <div class="prep-gloss">
-      <div class="pg-title">전치사 = 조사 붙이기</div>
+      <div class="pg-title">전치사 = 조사 붙이기 <small>of A of B = B의 A</small></div>
       <div class="pg-chips">
         {% for g in p0.prep_gloss %}<span class="pg-chip"><b>{{ g.p }}</b> {{ g.m }}</span>{% endfor %}
       </div>

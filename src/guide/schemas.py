@@ -132,6 +132,7 @@ class Part0(BaseModel):
     engine_title: str = ""   # '끊고 잇기' 실전 엔진 제목
     engine_intro: str = ""   # 실전 엔진 안내 한 줄
     cut_points: list[dict] = []   # 끊어읽기 위치 [{at, ex}]
+    cut_demo: dict = {}           # 끊어읽기 시연 {marked, read}
     link_tricks: list[dict] = []  # 매끄럽게 잇기 기술 [{k, v, ex}]
     prep_gloss: list[dict] = []   # 전치사 조사 [{p, m}]
     tools: list[str] = []    # 미니 도구 한 줄 목록
