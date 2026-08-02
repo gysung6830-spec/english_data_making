@@ -5,10 +5,10 @@
 
 설계
   · 은아쌤이 옆에서 말해주는 말투 (AI 티 X)
-  · 지문 요약(무슨 내용) + 지칭 찾기(it·they·this가 뭘 가리키나)
-  · 단어: 같은 10개를 3가지 유형으로 반복 + 누적 복습 확대
+  · 지문 요약(무슨 내용) 먼저 이해
+  · 단어: 같은 10개를 3가지 유형(3번 쓰기·줄 잇기·뜻→영어) + 누적 복습 확대
   · 문법: 예문 보며 스스로 규칙 발견 → 은아쌤 정리
-  · 문장: 생각하며 외우기(빈칸 사다리) — 그냥 베끼기 금지
+  · 문장: 청크 줄잇기 → 순서대로 쓰기 → 점점 지우기 (그냥 베끼기 금지)
   · 정답 별지 분리
 """
 from __future__ import annotations
@@ -123,6 +123,7 @@ ol.q li {{ margin:4px 0; }}
 .ladder .lv {{ margin-top:5px; font-size:10px; }}
 .ladder .lv .lb {{ display:inline-block; background:{SOFT}; color:{ACCENT}; font-weight:800; border-radius:5px; padding:1px 6px; font-size:8.3px; margin-right:5px; }}
 .ladder .sk {{ font-weight:800; letter-spacing:1px; color:{INK}; }}
+.ladder .mztt {{ font-weight:800; font-size:10.5px; color:{INK}; margin-bottom:3px; }}
 
 /* 정답 별지 */
 .answers {{ page-break-before:always; }}
@@ -231,6 +232,30 @@ def blank_keys(sentence, day_words):
     return " ".join(out)
 
 
+def match_block(left, right):
+    """줄 잇기 2단 (flex 대신 table로 안정적 배치)."""
+    return (f"<table style='width:100%'><tr>"
+            f"<td style='width:50%;vertical-align:top;padding-right:12px;'>{left}</td>"
+            f"<td style='width:50%;vertical-align:top;padding-left:12px;'>{right}</td>"
+            f"</tr></table>")
+
+
+def blank_fade(sentence, ratio):
+    """문장에서 긴 단어부터 ratio 비율만큼 빈칸 처리 (점점 지우기)."""
+    toks = sentence.split(" ")
+    cand = [i for i, t in enumerate(toks) if len(re.sub(r"[^A-Za-z']", "", t)) >= 3]
+    n = max(1, round(len(cand) * ratio))
+    chosen = set(sorted(cand, key=lambda i: len(re.sub(r"[^A-Za-z']", "", toks[i])), reverse=True)[:n])
+    out = []
+    for i, t in enumerate(toks):
+        if i in chosen:
+            tail = re.sub(r"^[A-Za-z']+", "", t)
+            out.append("<span class='blank sm'></span>" + esc(tail))
+        else:
+            out.append(esc(t))
+    return " ".join(out)
+
+
 # ── 누적 복습 (확대 12개, 양방향) ────────────────────────────
 def cumulative_review(day_idx):
     if day_idx <= 1:
@@ -307,20 +332,20 @@ def render_day_student(d):
     for i, (en, ko) in enumerate(d["words"], 1):
         r1 += (f"<tr><td class='num'>{i}</td><td class='w'><span class='en'>{esc(en)}</span></td><td class='k'>{esc(ko)}</td>"
                f"<td><span class='writeline'></span></td><td><span class='writeline'></span></td><td><span class='writeline'></span></td></tr>")
-    # 유형2: 뜻 보고 영어 (첫 글자)
-    r2 = "".join(f"<li>{esc(ko)} → <span class='spell'>{spell_hint(en)}</span></li>" for en, ko in d["words"])
-    # 유형3: 영어 보고 뜻 (순서 섞어)
-    shuffled = d["words"][1::2] + d["words"][0::2]
-    r3 = "".join(f"<li><span class='en'>{esc(en)}</span> → <span class='writeline' style='min-width:96px'></span></li>" for en, ko in shuffled)
+    # 유형2: 줄 잇기 (영어 ↔ 뜻, 오른쪽은 순서 섞음)
+    m_left = "".join(f"<div class='row'><span class='en'>{esc(en)}</span><span class='dot'>◦</span></div>" for en, ko in d["words"])
+    m_right = "".join(f"<div class='row'><span class='dot'>◦</span><span>{esc(ko)}</span></div>" for en, ko in reversed(d["words"]))
+    # 유형3: 뜻 보고 영어 (첫 글자)
+    r3 = "".join(f"<li>{esc(ko)} → <span class='spell'>{spell_hint(en)}</span></li>" for en, ko in d["words"])
     P.append(f"""
     <div class="sec">
       <div class="h"><span class="n">{n}</span><span class="t">오늘의 단어 10개 · 3가지로 익히기</span>
         <span class="tip">같은 단어를 방법을 바꿔 세 번! 이게 진짜 암기법이야</span></div>
       <div class="subt"><span class="badge">유형 ①</span> 소리 내어 읽으며 3번 쓰기</div>
       <table class="vtab"><tr><th class="num">#</th><th>영어</th><th>뜻</th><th>쓰기①</th><th>쓰기②</th><th>쓰기③</th></tr>{r1}</table>
-      <div class="subt"><span class="badge">유형 ②</span> 뜻만 보고 영어 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">(첫 글자 힌트)</span></div>
-      <ol class="q" style="columns:2; column-gap:24px;">{r2}</ol>
-      <div class="subt"><span class="badge">유형 ③</span> 영어만 보고 뜻 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">(순서를 섞었어)</span></div>
+      <div class="subt"><span class="badge">유형 ②</span> 줄 잇기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">— 영어와 알맞은 뜻을 선으로 연결</span></div>
+      {match_block(m_left, m_right)}
+      <div class="subt"><span class="badge">유형 ③</span> 뜻만 보고 영어 쓰기 <span style="font-weight:400;color:#93a7a2;font-size:8.5px;">(첫 글자 힌트)</span></div>
       <ol class="q" style="columns:2; column-gap:24px;">{r3}</ol>
     </div>""")
 
@@ -342,34 +367,29 @@ def render_day_student(d):
       <ol class="q">{prac}</ol>
     </div>""")
 
-    # 4) 지칭 찾기
-    n += 1
-    ri = ""
-    for sent, ko, pron, ans in d["refs"]:
-        ri += (f"<div class='ref'><div class='rs'>{esc(sent)}</div><div class='rk'>{esc(ko)}</div>"
-               f"<div class='rq'><span class='p'>{esc(pron)}</span> 는(은) 무엇을 가리킬까? → <span class='writeline' style='min-width:55%'></span></div></div>")
-    P.append(f"""
-    <div class="sec">
-      <div class="h"><span class="n">{n}</span><span class="t">이게 뭘 가리킬까? (지칭 찾기)</span>
-        <span class="tip">it·they·this 같은 말이 가리키는 걸 찾으면 독해가 확 쉬워져</span></div>
-      {ri}
-    </div>""")
-
-    # 5) 문장 외우기 사다리
+    # 4) 문장 외우기 : 청크 줄잇기 → 순서대로 쓰기 → 점점 지우기
     n += 1
     li = ""
-    for full, chunk, ko in d["memorize"]:
+    for si, (full, chunk, ko) in enumerate(d["memorize"], 1):
+        en_ch = [c.strip() for c in chunk.split("/")]
+        ko_ch = [c.strip() for c in ko.split("/")]
+        ko_scr = list(reversed(ko_ch))
+        left = "".join(f"<div class='row'><span class='en'>{esc(c)}</span><span class='dot'>◦</span></div>" for c in en_ch)
+        right = "".join(f"<div class='row'><span class='dot'>◦</span><span>{esc(c)}</span></div>" for c in ko_scr)
         li += f"""
         <div class="ladder">
-          <div class="u"><span class="en">{esc(chunk)}</span><br><span class="ko">{esc(ko)}</span></div>
-          <div class="lv"><span class="lb">1단계</span>빈칸을 채우며 읽기 &nbsp; {blank_keys(full, d['words'])}</div>
-          <div class="lv"><span class="lb">2단계</span>첫 글자 보고 쓰기 &nbsp; {skeleton(full)}</div>
-          <div class="lv"><span class="lb">3단계</span>우리말만 보고 영어로! <span class="wl-full"></span></div>
+          <div class="mztt">문장 {si}. <span style="color:#7d918c;font-weight:400;">{esc(ko.replace(' / ',' '))}</span></div>
+          <div class="lv"><span class="lb">① 줄 잇기</span>영어 덩어리 ↔ 우리말 덩어리를 선으로</div>
+          <div style="margin:3px 0 5px;">{match_block(left, right)}</div>
+          <div class="lv"><span class="lb">② 순서대로 쓰기</span>이어서 문장을 처음부터 끝까지<span class="wl-full"></span></div>
+          <div class="lv" style="margin-top:5px;"><span class="lb">③ 점점 지우기</span>빈칸을 채우며 한 번 더!</div>
+          <div class="lv" style="padding-left:2px;"><span style="color:#93a7a2;font-size:8.5px;">조금 지움 &nbsp;</span>{blank_fade(full, 0.35)}</div>
+          <div class="lv" style="padding-left:2px;"><span style="color:#93a7a2;font-size:8.5px;">많이 지움 &nbsp;</span>{blank_fade(full, 0.7)}</div>
         </div>"""
     P.append(f"""
     <div class="sec">
-      <div class="h"><span class="n">{n}</span><span class="t">문장 외우기 (생각하며!)</span>
-        <span class="tip">그냥 베끼지 말고, 빈칸을 채우며 → 첫 글자 보고 → 우리말만 보고. 3번이면 외워져</span></div>
+      <div class="h"><span class="n">{n}</span><span class="t">문장 외우기</span>
+        <span class="tip">덩어리를 이어보고 → 순서대로 쓰고 → 지워진 걸 채우며 자연스럽게 외우기</span></div>
       {li}
     </div>""")
 
@@ -385,7 +405,6 @@ def render_day_answer(d):
     words = "  ·  ".join(f"<b>{esc(en)}</b> {esc(ko)}" for en, ko in d["words"])
     disc = f"{bold(d['discovery']['answer'])}"
     prac = ", ".join(f"<b>{esc(a)}</b>" for _, a in d["practice"])
-    refs = " / ".join(f"{esc(p)}=<b>{esc(a)}</b>" for _, _, p, a in d["refs"])
     mem = " · ".join(f"<b>{esc(full)}</b>" for full, _, _ in d["memorize"])
     return f"""
     <div class="ansrow">
@@ -394,8 +413,7 @@ def render_day_answer(d):
         <b>지난 단어</b> — {rev_ans}<br>
         <b>오늘 단어</b> — {words}<br>
         <b>문법 발견</b> — {disc} &nbsp;|&nbsp; <b>연습</b> {prac}<br>
-        <b>지칭</b> — {refs}<br>
-        <b>외울 문장</b> — {mem}
+        <b>외울 문장(완성형)</b> — {mem}
       </div>
     </div>"""
 
@@ -443,8 +461,8 @@ def render_cover():
         <div>· 1주차 단어테스트 · 2주차 단어테스트 · 1과 종합테스트</div>
       </div>
       <div class="tip">
-        <b>이렇게 공부해요</b> — ① 지문이 무슨 내용인지 읽고 → ② 단어를 3가지로 익히고 →<br>
-        ③ 문법을 문장에서 <b>스스로</b> 찾고 → ④ ‘it·they’가 뭘 가리키는지 짚고 → ⑤ 문장을 생각하며 외워요.<br>
+        <b>이렇게 공부해요</b> — ① 지문이 무슨 내용인지 읽고 → ② 단어를 3가지로 익히고(쓰기·줄잇기·영작) →<br>
+        ③ 문법을 문장에서 <b>스스로</b> 찾고 → ④ 문장을 덩어리로 이어보며 외워요.<br>
         <b>어제 단어는 오늘 또 나와요</b>(반복). 정답은 맨 뒤 ‘선생님용 정답’에 따로 있어요.
       </div>
     </div>"""
@@ -477,8 +495,8 @@ def render_month_plan():
       {w3}{w4}
     </table>
     <div class="box"><div class="bt">▪ 매일 학습 루틴 (하루 20분 정도)</div>
-      <span class="chip">① 지문 내용 읽기</span><span class="chip">② 단어 3가지로 익히기</span>
-      <span class="chip">③ 문법 스스로 찾기</span><span class="chip">④ 지칭 찾기</span><span class="chip">⑤ 문장 외우기</span>
+      <span class="chip">① 지문 내용 읽기</span><span class="chip">② 단어 3가지(쓰기·줄잇기·영작)</span>
+      <span class="chip">③ 문법 스스로 찾기</span><span class="chip">④ 문장 외우기</span>
       <div class="legend">읽기만으로는 안 외워져요. <b>손으로 쓰고, 스스로 생각하게</b> 만든 구성이에요. 틀린 단어는 그 자리에서 3번 더 쓰기.</div></div>
     <div class="box"><div class="bt">▪ 반복(누적 복습) 시스템</div>
       <div class="legend">· <b>매일</b> : 숙제 맨 위 ‘지난 단어 다시보기’ — 어제·그제 단어가 다시 나옵니다.<br>
