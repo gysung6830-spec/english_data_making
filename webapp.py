@@ -10,6 +10,7 @@
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import secrets
@@ -20,7 +21,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, hwp, pipeline, render
+from src import extract, hwp, pipeline, render, schemas
 from src.client import ClaudeClient
 from src.config import ROOT, OutputsCfg, load_config
 
@@ -130,6 +131,38 @@ INDEX_HTML = """
       </div>
     </form>
   </div>
+
+  <div class=card>
+    <h1 style="font-size:19px">🔁 제목만 수정 (재분석 없음 · API 비용 X)</h1>
+    <div class=sub>이미 분석한 결과와 함께 받은 <b>제목수정용 데이터(.json)</b>를 올리고, 지문명·시작번호만 바꿔 다시 뽑습니다.</div>
+    <form id=f2 method=post action="{{ url_for('reedit') }}" enctype=multipart/form-data>
+      <label>① 제목수정용 데이터 (.json)</label>
+      <div class=drop id=drop2>
+        <div style="font-size:22px">🔁</div>
+        <p><b>여기를 클릭</b>해 .json 파일을 올리세요</p>
+        <p>결과와 함께 받은 ‘🔁 제목수정용 데이터(.json)’</p>
+        <input id=file2 type=file name=bundles multiple accept=".json" hidden>
+      </div>
+      <div class=files id=filelist2></div>
+
+      <label>② 새 지문명 <span class=hint>(제목 뱃지·저장 파일명에 사용)</span></label>
+      <input type=text name=re_basename placeholder="예: 2022올림포스_Ch04">
+
+      <label>③ 시작 문항번호 <span class=hint>(비우면 기존 번호 유지)</span></label>
+      <input type=text name=re_start_no placeholder="예: 11" inputmode=numeric>
+
+      <label>④ 만들 자료</label>
+      <label class=chk><input type=checkbox name=re_analysis value=1 checked> 📘 지문 분석지(교사용)</label>
+      <label class=chk><input type=checkbox name=re_student value=1> 📗 지문 분석지(학생용)</label>
+      <label class=chk><input type=checkbox name=re_wordlist value=1 checked> 📝 어휘 리스트</label>
+      <label class=chk><input type=checkbox name=re_quiz value=1 checked> ✏️ 영단어 시험지</label>
+
+      <div class=row>
+        <button class="btn gray" id=go2 type=submit>제목 바꿔 다시 뽑기</button>
+        <span class=hint>API 재호출 없이 즉시 생성됩니다.</span>
+      </div>
+    </form>
+  </div>
 </div>
 
 <div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">분석 중입니다… 잠시만요</p></div>
@@ -143,6 +176,17 @@ INDEX_HTML = """
  file.onchange=show;
  function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
  f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+
+ // 🔁 제목만 수정 폼
+ const drop2=document.getElementById('drop2'),file2=document.getElementById('file2'),
+       list2=document.getElementById('filelist2'),f2=document.getElementById('f2');
+ drop2.onclick=()=>file2.click();
+ ['dragover','dragenter'].forEach(e=>drop2.addEventListener(e,ev=>{ev.preventDefault();drop2.classList.add('hl');}));
+ ['dragleave','drop'].forEach(e=>drop2.addEventListener(e,ev=>{ev.preventDefault();drop2.classList.remove('hl');}));
+ drop2.addEventListener('drop',ev=>{file2.files=ev.dataTransfer.files;show2();});
+ file2.onchange=show2;
+ function show2(){list2.innerHTML=[...file2.files].map(x=>'📄 '+x.name).join('<br>')||'';}
+ f2.onsubmit=()=>{if(!file2.files.length){alert('제목수정용 데이터(.json)를 올려주세요.');return false;} ov.style.display='flex';};
 </script>
 </body></html>
 """
@@ -166,7 +210,7 @@ RESULT_HTML = """
             {% for fitem in r.files %}
             <div style="margin-bottom:5px">
               <b style="font-size:12px">{{ fitem.label }}</b>&nbsp;
-              <a class=dl href="{{ url_for('view', fname=fitem.out) }}" target=_blank>미리보기</a>
+              {% if not fitem.dl_only %}<a class=dl href="{{ url_for('view', fname=fitem.out) }}" target=_blank>미리보기</a>{% endif %}
               <a class=dl href="{{ url_for('download', fname=fitem.out) }}">다운로드</a>
             </div>
             {% endfor %}
@@ -302,6 +346,9 @@ def analyze_route():
             recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
                                            source_label=file_label)
             fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
+            # 제목만 바꿔 재출력할 수 있게 분석 데이터(JSON) 저장 → 다운로드 제공
+            bundle = _save_bundle(stem, reports, brand)
+            fitems.append({"label": "🔁 제목수정용 데이터(.json)", "out": bundle.name, "dl_only": True})
             note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
@@ -315,8 +362,74 @@ def analyze_route():
                                   n_ok=n_ok, n_fail=len(results) - n_ok)
 
 
+@app.route("/reedit", methods=["POST"], endpoint="reedit")
+def reedit_route():
+    """이미 분석한 결과(제목수정용 .json)를 다시 넣어 제목·번호만 바꿔 재출력(API 미사용)."""
+    files = [f for f in request.files.getlist("bundles") if f and f.filename]
+    which = OutputsCfg(
+        analysis=bool(request.form.get("re_analysis")),
+        student=bool(request.form.get("re_student")),
+        wordlist=bool(request.form.get("re_wordlist")),
+        quiz=bool(request.form.get("re_quiz")),
+    )
+    if not (which.analysis or which.student or which.wordlist or which.quiz):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    brand = cfg.design.brand
+
+    raw_name = (request.form.get("re_basename") or "").strip()
+    custom_base = _safe_name(raw_name) if raw_name else ""
+    raw_start = (request.form.get("re_start_no") or "").strip()
+    try:
+        running_no = int(raw_start) if raw_start else None
+    except ValueError:
+        running_no = None
+
+    if not files:
+        return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
+
+    results = []
+    for idx, f in enumerate(files, start=1):
+        try:
+            data = json.load(f.stream)
+            reports = [schemas.Report.model_validate(d) for d in data.get("reports", [])]
+            if not reports:
+                raise ValueError("제목수정용 데이터에 분석 결과가 없습니다(.json 파일이 맞는지 확인).")
+            # 시작 문항번호 지정 시 지문마다 1씩 증가
+            if running_no is not None:
+                for rp in reports:
+                    rp.item_no = str(running_no)
+                    running_no += 1
+            base_from_file = _safe_name(Path(f.filename).stem.replace("_편집데이터", ""))
+            stem = custom_base or base_from_file
+            if custom_base and len(files) > 1:
+                stem = f"{custom_base}_{idx}"
+            label = custom_base or base_from_file
+            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
+                                           source_label=label)
+            fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
+            bundle = _save_bundle(stem, reports, brand)
+            fitems.append({"label": "🔁 제목수정용 데이터(.json)", "out": bundle.name, "dl_only": True})
+            results.append({"name": f.filename + " → 제목 수정", "ok": True, "files": fitems})
+        except Exception as e:
+            traceback.print_exc()
+            results.append({"name": f.filename, "ok": False, "error": str(e)})
+
+    n_ok = sum(1 for r in results if r["ok"])
+    return render_template_string(RESULT_HTML, results=results,
+                                  n_ok=n_ok, n_fail=len(results) - n_ok)
+
+
 def _safe_name(stem: str) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+
+
+def _save_bundle(stem: str, reports, brand: str) -> Path:
+    """분석 결과(Report들)를 JSON 으로 저장 → 나중에 제목만 바꿔 재출력(무 API)."""
+    bundle = {"meta": {"brand": brand},
+              "reports": [rp.model_dump(mode="json") for rp in reports]}
+    p = OUTPUT_DIR / f"{stem}_편집데이터.json"
+    p.write_text(json.dumps(bundle, ensure_ascii=False), encoding="utf-8")
+    return p
 
 
 def _safe_output(fname: str) -> Path:
