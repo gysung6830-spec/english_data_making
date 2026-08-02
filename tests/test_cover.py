@@ -21,9 +21,10 @@ def test_sections_order_and_filter():
 
 def test_full_catalog_order():
     secs = cr.build_cover_sections(cr._ORDER)
-    _check("전체 순서(통합→어형→어법→어휘→영작→해석→빈칸)",
+    _check("전체 순서(통합→어형→어법→어휘하→어휘상→지칭→영작→해석→빈칸)",
            [s.key for s in secs] ==
-           ["workbook", "form", "grammar", "vocab", "writing", "translate", "blanks"])
+           ["workbook", "form", "grammar", "vocab_easy", "vocab", "ref",
+            "writing", "translate", "blanks"])
 
 
 def test_render_html():

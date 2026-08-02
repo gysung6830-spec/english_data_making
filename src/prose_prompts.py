@@ -67,6 +67,18 @@ _RULES = """[문장 완전성 — 매우 중요]
      - 예: display "[ comprehensive / comprehensible / thorough ]"
           answer "comprehensive / thorough"  gloss "포괄적인"  (comprehensible=형태 유사 오답)
    ※ 상은 학술·추상 어휘 위주로 어렵게, 하는 쉽게 — 난이도 차이가 분명해야 한다.
+4) 대명사 지칭 선택(ref) → 지문 속 대명사·지시어(it, they, them, this, that, those 등)가
+   '무엇을 가리키는지'를 고르게 한다.
+   ★ 그 대명사를 '문장에 그대로 남겨 두고', 대명사 '바로 뒤'에 {{Pn}} 자리표시자를 넣는다
+     (대명사를 지우고 {{Pn}} 으로 대체하지 말 것 — 문장에서 대명사가 사라지면 안 된다).
+   ★ display 는 "= [ 후보 / 후보 / 후보 ]" 형식이며(보기 3개), answer 는 정답 후보 1개다.
+   ★ 아래 (1)·(2) 두 경우만 출제한다. 둘 다 아니면 그 자리는 내지 않는다(억지로 만들지 말 것).
+     (1) 지문에 '명확한 명사구 선행사'가 있는 대명사 → 그 명사구가 정답, 지문에 나온 다른 명사구 2개가 오답.
+     (2) this/that/it 이 '앞 문장(또는 앞 절) 전체'를 가리키는 경우 → 정답 보기를 '앞 문장' 으로 쓴다.
+   ★ 보기 규칙: 지문에 실제로 나온 명사(구)만 원문 그대로. 괄호 주석 금지, 다른 대명사를 보기로 넣지 말 것
+     ((2)의 '앞 문장'만 예외). 가리키는 대상이 모호하면 출제하지 않는다.
+   예: ref_template "…, those who resist it {{P1}} repeat the same mistakes."
+       display "= [ early feedback / costly revisions / designers ]"  answer "early feedback"
 
 [한글 해석 연습(translate)] 은 별도 표기가 없다. en(원문)과 ko(정확한 한국어 해석)만 있으면 된다.
 
@@ -76,7 +88,8 @@ _RULES = """[문장 완전성 — 매우 중요]
    grammar_template, grammar_items:[{id,display,answer}],
    form_template,    form_items:[{id,display,answer}],
    vocab_easy_template,  vocab_easy_items:[{id,display,answer,gloss}],   (어휘 난도 하: 2택1)
-   vocab_template,       vocab_items:[{id,display,answer,gloss}]         (어휘 난도 상: 3중 2택)
+   vocab_template,       vocab_items:[{id,display,answer,gloss}],        (어휘 난도 상: 3중 2택)
+   ref_template,         ref_items:[{id,display,answer}]                 (대명사 지칭 선택)
 }]}
 - 어휘 item 의 gloss 는 정답 단어의 한글 뜻(필수). 다른 유형 item 은 gloss 불필요.
 - en 은 자리표시자 없는 '완전한 원문'이다(한글 해석 연습·정답 근거로 쓰인다).

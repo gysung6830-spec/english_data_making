@@ -47,11 +47,21 @@ _CATALOG: dict[str, dict] = {
         purpose="시험에 나올 만한 어법 포인트 집중 점검",
         how="[ A / B ] 에서 어법상 알맞은 것을 고른다",
         mark="[ A / B ]"),
-    "vocab": dict(
-        name="어휘 양자택일", css="sec-c",
-        purpose="반의어 대비가 뚜렷한 핵심 어휘 확인",
+    "vocab_easy": dict(
+        name="어휘 양자택일 (하)", css="sec-c",
+        purpose="반의어가 뚜렷한 쉬운 어휘 확인",
         how="[ 원문 / 반의어 ] 에서 문맥상 알맞은 것을 고른다",
         mark="[ A / B ]"),
+    "vocab": dict(
+        name="어휘 (상)", css="sec-c",
+        purpose="난도 높은 어휘 — 형태 유사 함정 구분",
+        how="[ A / B / C ] 셋 중 문맥상 알맞은 것 '두 개'를 고른다",
+        mark="[ A / B / C ]"),
+    "ref": dict(
+        name="대명사 (지칭 선택)", css="sec-b",
+        purpose="대명사·지시어가 가리키는 대상 파악",
+        how="대명사 뒤 = [ ] 에서 가리키는 대상을 고른다",
+        mark="= [ A / B / C ]"),
     "writing": dict(
         name="영작 워크북", css="sec-o",
         purpose="자주 틀리는 영작 포인트(어순·구문)만 배열 연습",
@@ -69,7 +79,8 @@ _CATALOG: dict[str, dict] = {
         mark="s____ · Word Bank"),
 }
 
-_ORDER = ["workbook", "form", "grammar", "vocab", "writing", "translate", "blanks"]
+_ORDER = ["workbook", "form", "grammar", "vocab_easy", "vocab", "ref",
+          "writing", "translate", "blanks"]
 
 
 def build_cover_sections(present_keys) -> list[CoverSection]:

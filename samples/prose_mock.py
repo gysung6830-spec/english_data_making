@@ -56,6 +56,10 @@ def mock_llm_prose() -> pr.LLMProsePack:
                 vocab_easy_template=("Designers who welcome {{P1}} feedback often avoid costly revisions, "
                                      "while those who resist it repeat the same avoidable mistakes."),
                 vocab_easy_items=[I("P1", "[ early / late ]", "early", "초기의")],
+                ref_template=("Designers who welcome early feedback often avoid costly revisions, while "
+                              "those who resist it {{P1}} repeat the same avoidable mistakes."),
+                ref_items=[I("P1", "= [ early feedback / costly revisions / designers ]",
+                             "early feedback")],
             ),
             pr.LLMProseSentence(
                 no=3,

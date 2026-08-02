@@ -6,6 +6,7 @@
   --ink:#2b2f3a; --muted:#8b93a0; --line:#e6eaef;
   --green:#2e8267; --green-dark:#256b55; --green-soft:#f3f9f6;
   --form:#2563a0; --grammar:#7d3caf; --vocab:#158060; --rose:#b8396b; --rose-bg:#fdeef4;
+  --ref:#1f7a8c;
 }
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
@@ -38,6 +39,8 @@ body{
 .ws-instr.wt-vocab .wt-label{ color:var(--vocab); }
 .ws-instr.wt-vocab_easy{ border-left-color:var(--vocab); background:#eef7f3; }
 .ws-instr.wt-vocab_easy .wt-label{ color:var(--vocab); }
+.ws-instr.wt-ref{ border-left-color:var(--ref); background:#ecf6f8; }
+.ws-instr.wt-ref .wt-label{ color:var(--ref); }
 .ws-instr.wt-translate{ border-left-color:var(--rose); background:var(--rose-bg); }
 .ws-instr.wt-translate .wt-label{ color:var(--rose); }
 
@@ -62,6 +65,7 @@ body{
   padding:0 7px; margin:0 1px; font-weight:700; white-space:nowrap; line-height:1.5; }
 .pc.wg{ border-color:var(--grammar); color:var(--grammar); background:#faf5fd; }
 .pc.wv{ border-color:var(--vocab); color:var(--vocab); background:#f0f8f4; }
+.pc.wr{ border-color:var(--ref); color:var(--ref); background:#ecf6f8; }
 
 /* 한글 해석 연습: 영문 아래 분홍 작성칸 */
 .translate-box{ margin-top:7px; margin-left:25px; height:42px; border:1px solid #f0cddd;
@@ -76,7 +80,7 @@ body{
 .ans-ws{ margin-bottom:12px; page-break-inside:avoid; }
 .ans-ws-h{ font-size:10pt; font-weight:800; margin-bottom:5px; }
 .wt-form{ color:var(--form); } .wt-grammar{ color:var(--grammar); } .wt-vocab{ color:var(--vocab); }
-.wt-vocab_easy{ color:var(--vocab); }
+.wt-vocab_easy{ color:var(--vocab); } .wt-ref{ color:var(--ref); }
 .wt-translate{ color:var(--rose); }
 .ans-row{ font-size:9pt; margin-bottom:3px; }
 .ans-tr{ color:#3a3f4a; line-height:1.5; }

@@ -76,6 +76,8 @@ class LLMProseSentence(BaseModel):
     vocab_items: list[LLMProseItem] = Field(default_factory=list)
     vocab_easy_template: str = ""                 # 어휘 양자택일 (하: 반의어 뚜렷)
     vocab_easy_items: list[LLMProseItem] = Field(default_factory=list)
+    ref_template: str = ""                        # 대명사 지칭 선택
+    ref_items: list[LLMProseItem] = Field(default_factory=list)
 
 
 class LLMProsePack(BaseModel):
@@ -94,6 +96,8 @@ _WORKSHEET_DEFS = [
      "vocab_easy_template", "vocab_easy_items"),
     ("vocab", "어휘 (상)", "셋 중 문맥상 알맞은 것 '두 개'를 고르시오. (난도 상)", False,
      "vocab_template", "vocab_items"),
+    ("ref", "대명사 (지칭 선택)", "밑줄 친 대명사·지시어가 가리키는 대상을 [ ]에서 고르시오.", False,
+     "ref_template", "ref_items"),
 ]
 
 
@@ -143,7 +147,7 @@ def validate_llm_prose(llm: LLMProsePack) -> None:
 _env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)),
                    autoescape=select_autoescape(["html", "xml", "j2"]))
 
-_WCLASS = {"form": "wf", "grammar": "wg", "vocab": "wv", "vocab_easy": "wv"}
+_WCLASS = {"form": "wf", "grammar": "wg", "vocab": "wv", "vocab_easy": "wv", "ref": "wr"}
 
 
 def _item_html(it: PItem, wtype: str) -> str:

@@ -174,7 +174,7 @@ def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
 
 
 # 유형(파트) 배치 순서: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸
-_PROSE_ORDER = ["form", "grammar", "vocab_easy", "vocab"]   # 어휘 하 → 상 순서(해석은 영작 뒤로)
+_PROSE_ORDER = ["form", "grammar", "vocab_easy", "vocab", "ref"]  # 어휘 하→상, 이어서 지칭(해석은 영작 뒤로)
 
 
 def _prose_subpack(pk, wtype: str):
@@ -190,7 +190,7 @@ def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
     keys: list[str] = []
     if books:
         keys.append("workbook")
-    for wtype in ("form", "grammar", "vocab", "translate"):
+    for wtype in ("form", "grammar", "vocab_easy", "vocab", "ref", "translate"):
         if any(_prose_subpack(pk, wtype) is not None for pk in (packs or [])):
             keys.append(wtype)
     if writing_packs:
@@ -229,7 +229,8 @@ def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact")
     groups = []
     for wtype, name, css in (("form", "어형 변형", "f"), ("grammar", "어법 양자택일", "g"),
                              ("vocab_easy", "어휘 양자택일 (하)", "v"),
-                             ("vocab", "어휘 (상)", "v")):
+                             ("vocab", "어휘 (상)", "v"),
+                             ("ref", "대명사 (지칭 선택)", "b")):
         for pk in packs or []:
             g = ar.group_from_prose(pk, wtype, name, css, style=style)
             if g:
