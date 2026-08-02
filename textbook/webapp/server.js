@@ -22,10 +22,10 @@ const multer = require('multer');
 const { Packer } = require('docx');
 
 const { extractSentences } = require('../src/extract');
-const { structureSentences } = require('../src/ai');
-const { validateData } = require('../src/validate');
-const { buildDocument } = require('../src/document');
-const { buildHtml, renderPdf } = require('../src/html');
+const { structurePassages } = require('../src/ai');
+const { validatePassages } = require('../src/validate');
+const { buildPassageDocument } = require('../src/document');
+const { buildHtmlPassages, renderPdf } = require('../src/html');
 
 const PORT = process.env.PORT || 3000;
 const OUT_DIR = path.join(__dirname, '..', 'output', 'web');
@@ -60,32 +60,32 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
       return res.status(422).json({ ok: false, error: '영어 문장을 충분히 찾지 못했어요. 텍스트가 들어있는 PDF 인지 확인해 주세요.', steps });
     }
 
-    // 3) AI 구조화
-    const { categories, mode } = await structureSentences(sentences);
-    log(`교재 데이터 생성 (${mode === 'mock' ? 'MOCK — API 키 없음' : 'Claude AI'}) · 챕터 ${categories.length}개`);
-    if (!categories.length) {
-      return res.status(422).json({ ok: false, error: '문법 챕터로 분류할 문장이 부족했어요.', steps });
+    // 3) AI 구조화 — 지문(passage) 단위. 문장 원문 순서 유지 + 지문 요지.
+    const { passages, mode } = await structurePassages(sentences);
+    log(`지문 데이터 생성 (${mode === 'mock' ? 'MOCK — API 키 없음' : 'Claude AI'}) · 지문 ${passages.length}개`);
+    if (!passages.length) {
+      return res.status(422).json({ ok: false, error: '지문으로 구성할 문장이 부족했어요.', steps });
     }
 
     // 4) 검증 (에러는 중단, 경고는 통과)
-    const { errors, warnings } = validateData(categories);
+    const { errors, warnings } = validatePassages(passages);
     warnings.forEach((w) => log(`경고: ${w}`));
     if (errors.length) {
       return res.status(422).json({ ok: false, error: `데이터 검증 실패 (${errors.length}건)`, detail: errors, steps });
     }
     log('데이터 검증 통과');
 
-    // 5) 렌더 — 파일명은 타임스탬프 대신 요청 카운터로(스크립트 환경 Date 제약 회피)
+    // 5) 렌더 — 파일명은 요청별 고유값
     const stamp = `book_${Date.now().toString(36)}`;
     const docxPath = path.join(OUT_DIR, `${stamp}.docx`);
     const pdfPath = path.join(OUT_DIR, `${stamp}.pdf`);
     const htmlPath = path.join(OUT_DIR, `${stamp}.html`);
 
-    const buffer = await Packer.toBuffer(buildDocument(categories));
+    const buffer = await Packer.toBuffer(buildPassageDocument(passages));
     fs.writeFileSync(docxPath, buffer);
     log('docx 생성 완료');
 
-    const html = buildHtml(categories, { title: '영어 해석 구문 워크북 (자동 생성)' });
+    const html = buildHtmlPassages(passages, { title: '지문 구문독해 워크북 (자동 생성)' });
     fs.writeFileSync(htmlPath, html);
     try {
       await renderPdf(html, pdfPath);
@@ -97,7 +97,7 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
     const files = [{ label: 'docx (편집용)', url: `/download/${path.basename(docxPath)}` }];
     if (fs.existsSync(pdfPath)) files.unshift({ label: 'PDF (배포용)', url: `/download/${path.basename(pdfPath)}` });
 
-    return res.json({ ok: true, mode, chapters: categories.length, sentences: sentences.length, steps, files });
+    return res.json({ ok: true, mode, passages: passages.length, sentences: sentences.length, steps, files });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ ok: false, error: err.message || '서버 오류', steps });

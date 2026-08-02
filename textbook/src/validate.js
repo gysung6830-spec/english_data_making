@@ -87,4 +87,24 @@ function validateData(categories) {
   return { errors, warnings };
 }
 
-module.exports = { validateData };
+// 지문(passage) 모드 검증 — 각 지문에 sentences, 각 문장에 en/chunks/vocab/catch.
+function validatePassages(passages) {
+  const errors = [];
+  const warnings = [];
+  if (!Array.isArray(passages) || passages.length === 0) {
+    return { errors: ['passages 가 비어있거나 배열이 아님'], warnings };
+  }
+  passages.forEach((p, pi) => {
+    const tag = `지문#${pi + 1}`;
+    if (!nonEmptyStr(p.title)) warnings.push(`${tag}: title 이 비어있음`);
+    if (!nonEmptyStr(p.catch)) warnings.push(`${tag}: 지문 요지(catch) 가 비어있음`);
+    if (!Array.isArray(p.sentences) || p.sentences.length === 0) {
+      errors.push(`${tag}: sentences 가 비어있음`);
+      return;
+    }
+    p.sentences.forEach((s, i) => errors.push(...checkSentence(s, `${tag} 문장[${i}]`)));
+  });
+  return { errors, warnings };
+}
+
+module.exports = { validateData, validatePassages };

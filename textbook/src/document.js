@@ -129,6 +129,81 @@ function answerParagraphs(categories) {
   return out;
 }
 
+// ── 지문(passage) 모드 docx ─────────────────────────
+// 목차=지문, 문장 원문 순서, 문법은 '구문 포인트' 표기, 지문 요지 캐치.
+function passageSentenceParas(s, idx) {
+  const out = [
+    new Paragraph({
+      spacing: { before: 200, after: 40 },
+      children: [
+        new TextRun({ text: `${idx}. `, bold: true, size: 22, color: S.NAVY, font: S.FONT }),
+        new TextRun({ text: s.en, bold: true, size: 24, font: S.FONT_EN, color: '111111' }),
+      ],
+    }),
+  ];
+  if (s.point) {
+    out.push(new Paragraph({
+      spacing: { after: 80 },
+      children: [new TextRun({ text: `구문 포인트 — ${s.point}`, bold: true, size: 18, color: S.BRASS, font: S.FONT })],
+    }));
+  }
+  out.push(...B.vocabBox(s.vocab));
+  out.push(...B.tipBox(makeTip(s.chunks)));
+  out.push(...B.chunkBox(s.chunks));
+  out.push(...B.trapBox(s.trap));
+  if (s.catch) out.push(...B.catchBox(s.catch));
+  return out;
+}
+
+function passageParagraphs(p, idx) {
+  const out = [B.h1(p.title || `지문 ${idx + 1}`)];
+  out.push(B.p(`출처: ${p.source || '지문'}`, { italics: true, color: '666666' }));
+  if (p.topic) { out.push(B.h2('이 지문, 뭐야?')); out.push(B.p(p.topic)); }
+  out.push(B.h2('지문 통째로 읽기'));
+  out.push(new Paragraph({
+    spacing: { after: 160 },
+    children: (p.sentences || []).flatMap((s, i) => [
+      new TextRun({ text: `${i + 1} `, bold: true, color: S.NAVY, size: 20, font: S.FONT }),
+      new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
+    ]),
+  }));
+  out.push(B.h2('한 문장씩 뜯어보기'));
+  (p.sentences || []).forEach((s, i) => out.push(...passageSentenceParas(s, i + 1)));
+  if (p.catch) { out.push(B.h2('이 지문, 이 정도는 캐치!')); out.push(...B.catchBox(p.catch)); }
+  out.push(B.pageBreak());
+  return out;
+}
+
+function passageCoverParagraphs(meta = {}) {
+  const center = (children, after) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after }, children });
+  return [
+    center([new TextRun({ text: meta.title || '지문 구문독해 워크북', bold: true, size: 44, color: S.NAVY, font: S.FONT })], 200),
+    center([new TextRun({ text: '지문 한 편을 온전히 — 끊어읽기로 구문까지', size: 24, color: S.BRASS, bold: true, font: S.FONT })], 100),
+    center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, color: '666666', font: S.FONT })], 700),
+    new Paragraph({
+      spacing: { before: 200, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },
+      children: [new TextRun({ text: '  📌 이렇게 써', bold: true, size: 22, color: S.NAVY, font: S.FONT })],
+    }),
+    B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 끊어읽기·어휘·구문 포인트로 뜯어보고 → ③ 맨 끝 "이 지문 이 정도는 캐치"로 요지 확인.'),
+    B.bullet('문법은 문장마다 "구문 포인트"로 콕 짚어 줘 — 목차는 문법이 아니라 지문 순서야.'),
+    B.pageBreak(),
+  ];
+}
+
+function buildPassageDocument(passages, meta = {}) {
+  const children = [
+    ...passageCoverParagraphs(meta),
+    ...passages.flatMap((p, i) => passageParagraphs(p, i)),
+  ];
+  return new Document({
+    styles: { default: { document: { run: { font: S.FONT, size: 22 } } } },
+    sections: [{
+      properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1000, bottom: 1000, left: 1100, right: 1100 } } },
+      children,
+    }],
+  });
+}
+
 // ── 최상위 조립 ──────────────────────────────────────
 function buildDocument(rawCategories) {
   const categories = splitWorked(rawCategories);
@@ -149,4 +224,7 @@ function buildDocument(rawCategories) {
   });
 }
 
-module.exports = { buildDocument, splitWorked, coverParagraphs, chapterParagraphs, answerParagraphs };
+module.exports = {
+  buildDocument, splitWorked, coverParagraphs, chapterParagraphs, answerParagraphs,
+  buildPassageDocument, passageParagraphs,
+};

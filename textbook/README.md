@@ -77,25 +77,36 @@ npm install                  # express·multer·@anthropic-ai/sdk·pdf-parse 설
 npm run web                  # http://localhost:3000
 ```
 
+**웹앱은 지문(passage) 단위로 구성한다.** 목차를 문법으로 쪼개지 않고, 업로드한 지문의
+문장을 **원문 순서 그대로** 두고 한 지문을 온전히 이해하게 만든다. 문법은 문장별
+**구문 포인트 태그**('수동태','관계사절'…)로 짚어 주고(구문해석 도움은 유지), 지문 맨 위엔
+'이 지문 뭐야?' 안내, 맨 끝엔 **'이 지문, 이 정도는 캐치!'** 요지를 붙인다.
+
+> 손으로 쓴 샘플 교재(`data.js` + `preview_pdf.js` + `build_v4.js`)는 여전히
+> **문법 챕터** 구성이다. 지문 단위 구성은 **웹앱 출력에만** 적용된다.
+
 **파이프라인** (`webapp/server.js`):
 
 ```
-PDF 업로드 → src/extract.js(영어 문장 추출) → src/ai.js(Claude 구조화)
-          → src/validate.js(불변식 검증) → src/document.js(docx) + src/html.js(PDF) → 다운로드
+PDF 업로드 → src/extract.js(영어 문장 추출, 원문 순서 유지)
+          → src/ai.js(structurePassages: Claude 지문 단위 구조화)
+          → src/validate.js(validatePassages 검증)
+          → src/document.js(buildPassageDocument→docx) + src/html.js(buildHtmlPassages→PDF)
+          → 다운로드
 ```
 
 - **`src/extract.js`** — `pdf-parse` 로 순수 텍스트를 뽑고, 한글/문항번호/머리말을
-  걸러 **영어 문장 후보**만 정리(중복 제거).
+  걸러 **영어 문장 후보**만 등장 순서대로 정리(중복 제거).
 - **`src/ai.js`** — `@anthropic-ai/sdk` 로 `claude-opus-5` 호출(적응형 사고 · 스트리밍 ·
-  structured outputs). 출력은 README '콘텐츠 작성 가이드라인'을 그대로 프롬프트에 반영한다
-  (캐치=한 줄 핵심 뜻·반말·문법 용어 금지, 끊어읽기=앞에서부터 직독직해 등).
-  챕터 title 의 원문자 번호(①②③…)는 최종 순서에 맞게 자동 재부여.
+  structured outputs). `structurePassages` 가 문장을 **지문 단위**로 묶고(내용 흐름상
+  여러 지문이면 분리), 문장별 chunks/vocab/catch/trap/**point**(구문 포인트) + 지문
+  topic/**catch**(요지)를 생성한다. 문장 순서는 재배열하지 않는다.
 - **환경변수**(`.env`): `ANTHROPIC_API_KEY`(필수 — 없으면 아래 MOCK), `ANTHROPIC_MODEL`
   (기본 `claude-opus-5`), `ANTHROPIC_MOCK=1`(키가 있어도 MOCK 강제), `PORT`(기본 3000).
 
-> **MOCK 폴백**: `ANTHROPIC_API_KEY` 가 없으면 규칙 기반으로 문장을 대충 분류해
-> **형식만 갖춘** 교재를 만든다. 실제 해석/캐치 품질은 없고, 파이프라인(업로드→렌더→
-> 다운로드)이 도는지 확인하는 용도다. 실제 품질은 API 키를 넣어야 나온다.
+> **MOCK 폴백**: `ANTHROPIC_API_KEY` 가 없으면 규칙 기반으로 문장을 지문(약 8문장씩)
+> 으로 묶어 **형식만 갖춘** 교재를 만든다. 실제 해석/요지 품질은 없고, 파이프라인
+> (업로드→렌더→다운로드)이 도는지 확인하는 용도다. 실제 품질은 API 키를 넣어야 나온다.
 
 `.env` 는 커밋하지 않는다(`.gitignore` 등록). 키는 코드에 하드코딩하지 말 것.
 

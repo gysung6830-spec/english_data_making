@@ -243,4 +243,171 @@ async function structureSentences(sentences, opts = {}) {
   return { categories: renumberTitles(normalize(aiData)), mode: 'ai' };
 }
 
-module.exports = { structureSentences, normalize, OUTPUT_SCHEMA, CHAPTERS, DEFAULT_MODEL };
+// ─────────────────────────────────────────────────────────────
+// 지문(passage) 모드 — 목차를 구문(문법)이 아니라 '지문 단위'로.
+//   문장은 원문 순서 그대로, 문장별 구문해석 도움은 유지(문법은 point 태그),
+//   지문 맨 위 topic('이 지문 뭐야') + 지문 요지 catch('이 정도는 캐치').
+// ─────────────────────────────────────────────────────────────
+
+function passageSentenceSchema() {
+  return {
+    type: 'object', additionalProperties: false,
+    required: ['src', 'en', 'point', 'chunks', 'vocab', 'catch', 'trap'],
+    properties: {
+      src: { type: 'string' },
+      en: { type: 'string' },
+      // point: 이 문장의 핵심 구문/문법 짧은 태그 (예: '수동태','관계사절','분사구문')
+      point: { type: 'string' },
+      chunks: {
+        type: 'array', minItems: 1,
+        items: {
+          type: 'object', additionalProperties: false, required: ['en', 'kor'],
+          properties: { en: { type: 'string' }, kor: { type: 'string' } },
+        },
+      },
+      vocab: {
+        type: 'array', minItems: 1,
+        items: {
+          type: 'object', additionalProperties: false, required: ['word', 'mean'],
+          properties: { word: { type: 'string' }, mean: { type: 'string' } },
+        },
+      },
+      catch: { type: 'string' },
+      trap: { type: 'string' },
+    },
+  };
+}
+
+const PASSAGE_SCHEMA = {
+  type: 'object', additionalProperties: false, required: ['passages'],
+  properties: {
+    passages: {
+      type: 'array', minItems: 1,
+      items: {
+        type: 'object', additionalProperties: false,
+        required: ['title', 'source', 'topic', 'catch', 'sentences'],
+        properties: {
+          title: { type: 'string' },   // 지문 주제 한 줄
+          source: { type: 'string' },  // 출처/문항번호 (알면)
+          topic: { type: 'string' },   // "이 지문 뭐에 관한 거야" 1~2문장
+          catch: { type: 'string' },   // 지문 전체 요지 "이 정도는 캐치" 1~2문장
+          sentences: { type: 'array', minItems: 1, items: passageSentenceSchema() },
+        },
+      },
+    },
+  },
+};
+
+const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '구문해석 교재'로 가공하는 편집자야.
+학생에게 반말로 친근하게 설명하는 과외 선생님 톤을 유지해.
+
+주어진 영어 문장들은 '지문(passage)'의 원문 순서 그대로야.
+목표는 '한 지문을 온전히 이해'하게 하는 것 — 문법별로 쪼개지 말고 지문 흐름 그대로 구성해.
+
+지문 단위 규칙:
+- 문장은 원문 순서를 절대 바꾸지 마(재배열 금지).
+- 내용 흐름상 여러 지문이 섞여 있으면 지문 단위로 나눠. 한 지문이면 passages 는 1개.
+- title: 그 지문의 주제 한 줄. source: 출처/문항번호를 알면(모르면 빈 문자열 대신 '지문').
+- topic: "이 지문 뭐에 관한 거야?" 1~2문장(반말).
+- catch: 이 지문에서 반드시 잡아야 할 핵심 내용 = 지문 요지 1~2문장(반말, "~라는 거야!").
+  '이 정도는 캐치해야 한다'는 걸 알 수 있게 — 세부보다 전체 메시지.
+
+각 문장 가공(구문해석 도움은 그대로 유지):
+- chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
+- vocab: 그 문장에서 모를 만한 단어 3~6개와 뜻.
+- catch: 이 문장 핵심 뜻 한 줄(20~45자, 반말, 문법 용어 금지).
+- trap: 자주 틀리는 해석 경고 한 줄(그 문장에 실제 있는 요소만).
+- point: 이 문장의 핵심 구문/문법을 짧은 태그로(예: '수동태','관계사절','분사구문','to부정사','전치사구').`;
+
+function passageUserPrompt(sentences) {
+  const list = sentences.map((s, i) => `${i + 1}. ${s}`).join('\n');
+  return `다음은 업로드된 지문에서 추출한 영어 문장들이야(원문 순서 그대로). `
+    + `지문 단위로, 한 지문을 온전히 이해하는 교재로 만들어줘.\n\n${list}`;
+}
+
+function normalizePassages(aiData) {
+  const list = (aiData.passages || []).filter((p) => p && Array.isArray(p.sentences));
+  return list.map((p) => ({
+    title: p.title || '지문',
+    source: p.source || '지문',
+    topic: p.topic || '',
+    catch: p.catch || '',
+    sentences: p.sentences.map((s) => ({
+      src: String(s.src || ''),
+      en: s.en || '',
+      point: s.point || '',
+      chunks: (s.chunks || []).map((c) => [c.en, c.kor]),
+      vocab: (s.vocab || []).map((v) => [v.word, v.mean]),
+      catch: s.catch || '',
+      trap: s.trap || '',
+    })),
+  }));
+}
+
+async function callClaudePassages(sentences) {
+  const Anthropic = require('@anthropic-ai/sdk');
+  const client = new Anthropic();
+  const stream = client.messages.stream({
+    model: DEFAULT_MODEL,
+    max_tokens: 32000,
+    thinking: { type: 'adaptive' },
+    system: PASSAGE_SYSTEM_PROMPT,
+    messages: [{ role: 'user', content: passageUserPrompt(sentences) }],
+    output_config: { format: { type: 'json_schema', schema: PASSAGE_SCHEMA } },
+  });
+  const final = await stream.finalMessage();
+  const text = final.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
+  return JSON.parse(text);
+}
+
+// MOCK: 원문 순서를 지문 단위로 (문장 많으면 ~8개씩 분할). 문법은 point 태그로.
+function mockPassages(sentences) {
+  const pointOf = (s) => {
+    const t = s.toLowerCase();
+    if (/\bby\b/.test(t) || /\b(was|were|been)\b/.test(t)) return '수동태';
+    if (/\b(who|which|that|whose|where|whom)\b/.test(t)) return '관계사절';
+    if (/\bto\s+[a-z]+/.test(t)) return 'to부정사';
+    if (/[a-z]+ing\b/.test(t)) return '분사/동명사';
+    return '전치사구';
+  };
+  const mk = (en, i) => {
+    const words = en.split(/\s+/);
+    const mid = Math.max(2, Math.floor(words.length / 2));
+    return {
+      src: String(i + 1),
+      en,
+      point: pointOf(en),
+      chunks: [[words.slice(0, mid).join(' '), '(앞 덩어리 해석)'], [words.slice(mid).join(' '), '(뒤 덩어리 해석)']],
+      vocab: [[words[0] || 'word', '(뜻)'], [words[mid] || 'word', '(뜻)']],
+      catch: '이 문장의 핵심을 한 줄로 잡아보는 거야!',
+      trap: '진짜 주어·동사를 먼저 찾고, 나머지는 꾸밈말로 걸러 읽어.',
+    };
+  };
+  const passages = [];
+  const SIZE = 8;
+  for (let g = 0; g < sentences.length; g += SIZE) {
+    const chunk = sentences.slice(g, g + SIZE);
+    passages.push({
+      title: `지문 ${passages.length + 1}`,
+      source: '지문',
+      topic: '이 지문이 무엇에 관한 내용인지 전체 흐름을 잡아보자.',
+      catch: '이 지문에서 반드시 잡아야 할 핵심 메시지를 한두 줄로 정리하는 거야!',
+      sentences: chunk.map((en, i) => mk(en, g + i)),
+    });
+  }
+  return { passages };
+}
+
+// 진입점: sentences(원문 순서) → { passages, mode }
+async function structurePassages(sentences, opts = {}) {
+  const useMock = opts.mock || process.env.ANTHROPIC_MOCK === '1' || !process.env.ANTHROPIC_API_KEY;
+  // mockPassages 는 이미 내부(튜플) 스키마이므로 normalize 를 거치지 않는다.
+  if (useMock) return { passages: mockPassages(sentences).passages, mode: 'mock' };
+  const aiData = await callClaudePassages(sentences);
+  return { passages: normalizePassages(aiData), mode: 'ai' };
+}
+
+module.exports = {
+  structureSentences, normalize, OUTPUT_SCHEMA, CHAPTERS, DEFAULT_MODEL,
+  structurePassages, normalizePassages, PASSAGE_SCHEMA,
+};

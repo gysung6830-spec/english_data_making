@@ -355,7 +355,65 @@ function css() {
   .usesteps { display:flex; flex-wrap:wrap; gap:6px 14px; margin:8px 0; }
   .ustep { font-size:11px; } .ustep b { color:${C.teal}; }
   .fine { color:${C.sub}; font-size:10.5px; margin-top:6px; }
+  /* 지문 모드 */
+  .ptag { flex:none; align-self:center; margin-left:8px; background:${C.gramBg}; color:${C.gram};
+    border:1px solid #ddd4f2; font-size:9px; font-weight:800; padding:1px 8px; border-radius:10px; }
+  .fulltext { background:#fafafa; border:1px solid ${C.line}; border-radius:8px; padding:12px 15px;
+    margin:6px 0 4px; font-size:12px; line-height:1.75; }
+  .fulltext .fn { color:${C.teal}; font-weight:800; margin-right:3px; }
+  .pcatch { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:5px solid ${C.teal};
+    border-radius:8px; padding:12px 15px; margin:14px 0 4px; font-size:12px; break-inside:avoid; }
+  .pcatch-h { display:block; color:${C.tealDark}; font-weight:800; font-size:13px; margin-bottom:5px; }
   `;
+}
+
+// ── 지문(passage) 모드 렌더 — 목차=지문, 문장 원문 순서, 문법은 point 태그 ──
+function pointTag(point) {
+  return point ? `<span class="ptag">${esc(point)}</span>` : '';
+}
+// 지문 통째로 먼저 읽기(영어 원문 나열)
+function fullTextBlock(sentences) {
+  const body = sentences.map((s, i) =>
+    `<span class="fn">${i + 1}</span>${esc(s.en)} `).join('');
+  return `<div class="fulltext">${body}</div>`;
+}
+// 문장 하나: 영어+포인트태그 → 어휘 → 팁 → 끊어읽기 해석 → 함정 → 문장 캐치
+function passageSentence(s, idx) {
+  return `<div class="sblock">
+    <div class="senth"><span class="sbadge">${idx}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
+    ${vocabInline(s.vocab)}
+    ${tipCard(makeTip(s.chunks))}
+    ${chunkExplain(s.chunks)}
+    ${trapCard(s.trap)}
+    ${s.catch ? catchCard(s.catch) : ''}</div>`;
+}
+function passageHtml(p, idx) {
+  let h = '<section class="chapter">';
+  h += `<div class="chhead"><span class="daypill">지문 ${idx + 1}</span>
+    <span class="tagpill">${esc(p.source || '구문해석')}</span></div>`;
+  h += `<h1>${esc(p.title || `지문 ${idx + 1}`)}</h1>`;
+  h += '<div class="chsub">문법으로 뚫는 영어 해석 · 지문 한 편을 온전히 이해하기</div>';
+  if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
+  h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
+  h += fullTextBlock(p.sentences);
+  h += secHead(CIRCLED[1], '한 문장씩 뜯어보기', '끊어읽기 · 어휘 · 구문 포인트', 'teal');
+  h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
+  if (p.catch) {
+    h += `<div class="pcatch"><span class="pcatch-h">✅ 이 지문, 이 정도는 캐치!</span>${esc(p.catch)}</div>`;
+  }
+  h += '</section>';
+  return h;
+}
+
+// 지문 모드 전체 HTML. passages 는 normalizePassages 결과.
+function buildHtmlPassages(passages, meta = {}) {
+  const cover = coverHtml({
+    title: meta.title || '지문 구문독해 워크북',
+    subtitle: meta.subtitle || '지문 한 편을 온전히 — 끊어읽기로 구문까지',
+    source: meta.source || '업로드한 지문 기반 · 자동 생성',
+  });
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
+    + `<body>${cover}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
 
 // 전체 HTML 문서. rawCategories 는 splitWorked 전(worked 2개 초과 허용) 데이터.
@@ -388,4 +446,4 @@ async function renderPdf(html, pdfPath) {
   }
 }
 
-module.exports = { buildHtml, renderPdf, findChrome };
+module.exports = { buildHtml, buildHtmlPassages, renderPdf, findChrome };

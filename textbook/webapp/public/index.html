@@ -43,7 +43,7 @@
   <header>
     <span class="badge">문법으로 뚫는 영어 해석</span>
     <h1>영어 해석 교재 자동 생성기</h1>
-    <p>수능·평가원 영어 PDF 를 올리면, AI 가 문법 챕터별 구문해석 교재(편집용 docx + 배포용 PDF)로 만들어 줘.</p>
+    <p>수능·평가원 영어 지문 PDF 를 올리면, AI 가 <b>지문 단위</b>로 온전히 이해하는 구문독해 교재(편집용 docx + 배포용 PDF)로 만들어 줘. 문장은 원문 순서 그대로, 문법은 문장별 포인트로 짚어 주고, 지문 요지까지 정리해.</p>
   </header>
 
   <div class="card">
@@ -112,7 +112,7 @@ form.addEventListener('submit', async (ev) => {
       result.innerHTML = `<p class="err">⚠️ ${data.error}</p>` +
         (data.detail ? `<p class="muted">${data.detail.slice(0, 8).join('<br>')}</p>` : '');
     } else {
-      result.innerHTML = `<h3>✅ 완성! (챕터 ${data.chapters}개 · 문장 ${data.sentences}개 · ${data.mode === 'mock' ? 'MOCK' : 'AI'})</h3>` +
+      result.innerHTML = `<h3>✅ 완성! (지문 ${data.passages}개 · 문장 ${data.sentences}개 · ${data.mode === 'mock' ? 'MOCK' : 'AI'})</h3>` +
         data.files.map((f) => `<a href="${f.url}" download>${f.label} 다운로드</a>`).join('');
     }
   } catch (e) {
