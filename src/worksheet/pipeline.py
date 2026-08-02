@@ -377,8 +377,8 @@ def _stamp_footer(path: Path, footer_note: str = "") -> None:
             if footer_note:
                 c.setFont(kfont, 11)
                 c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권(11pt)
-            c.setFont(pfont, 9)
-            c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체
+            c.setFont(pfont, 11)
+            c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체(11pt)
             c.save()
             buf.seek(0)
             page.merge_page(PdfReader(buf).pages[0])
