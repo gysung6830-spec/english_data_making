@@ -47,7 +47,9 @@ _RULES = """[다섯 가지 출제 유형]
    display 예: "[ which / where ]"  answer 예: "which"
 4) 연결사(type=conj) → [ A / B ]로 문맥 흐름에 맞는 것을 고르게 한다.
    오답은 '논리 방향이 반대인 연결어'로 넣는다(첨가/유사 ↔ 대조, 인과 ↔ 양보).
-   display 예: "[ However / Similarly ]"  answer 예: "However"
+   ★ 'rather than / instead of / other than / as ~ as' 같은 비교·병렬·대조 표현의 선택은
+     '관계사(rel)가 아니라 연결사(conj)'로 분류한다(관계사·격과 무관하므로).
+   display 예: "[ However / Similarly ]"  answer 예: "However"  /  "[ rather than / other than ]" answer "rather than"
 5) 특수구문(type=order) → 어구를 뒤섞어 순서를 배열하게 한다.
    대상 구문: 간접의문문 / 강조구문(It is~that) / 도치 / 가정법 / 비교구문(as~as, 비교급+than).
    대소문자·구두점을 살려 슬래시로 구분해 제시하며, 표기는 반드시 〈 … 〉 로 감싼다.
