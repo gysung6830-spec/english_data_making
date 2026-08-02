@@ -76,7 +76,7 @@
   /* 긴 토큰(구절 단위)은 줄바꿈 허용 → 컬럼 폭을 넘겨 포인트 박스를 밀어내는 오류 방지.
      짧은 토큰(주석 달린 단어)은 어차피 한 줄에 들어가 정렬 유지. */
   .tok{ max-width:100%; }
-  .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:normal; overflow-wrap:break-word; }
+  .tok .w{ display:block; font-size:11px; line-height:1.5; white-space:normal; overflow-wrap:break-word; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
   .tok .w.hl-p{ background:var(--purple-hl); }
@@ -107,7 +107,7 @@
      뱃지는 번호(01) 밑 '왼쪽 여백(gutter)'에만 있고, 한글 해석은 오른쪽 텍스트 칸에서만
      흐른다 → 줄바꿈돼도 해석이 번호·뱃지 칸(왼쪽 세로선)을 침범하지 않는다. */
   .rdko{ display:grid; grid-template-columns:auto 1fr; column-gap:6px; align-items:start;
-         margin-top:9px; margin-left:-32px; font-size:15px; line-height:1.95; color:#39424c; }
+         margin-top:9px; margin-left:-32px; font-size:11px; line-height:1.95; color:#39424c; }
   .rdtext{ min-width:0; }                    /* grid 자식 오버플로 방지(줄바꿈 정상) */
   .rdlbl{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
           padding:1px 6px; border-radius:8px; margin-top:5px; white-space:nowrap; }
@@ -143,12 +143,12 @@
   .page.compact .en{ margin-top:1px; }
   .page.compact .en .line{ margin-bottom:6px; }
   .page.compact .en .line.po .tok .over{ height:9px; }
-  .page.compact .tok .w{ font-size:14px; line-height:1.45; }
+  .page.compact .tok .w{ font-size:11px; line-height:1.45; }
   .page.compact .tok .over .lbl{ font-size:8px; }
   .page.compact .ann{ font-size:8.5px; }
   .page.compact .ann.red{ font-size:10px; }
   .page.compact .kotr{ margin-top:6px; font-size:11.5px; line-height:1.45; }
-  .page.compact .rdko{ margin-top:5px; font-size:14px; line-height:1.75; }
+  .page.compact .rdko{ margin-top:5px; font-size:11px; line-height:1.75; }
   .page.compact .kobox{ margin-top:5px; font-size:9.5px; line-height:1.4; padding:4px 9px; }
   .page.compact .num{ font-size:14px; }
   .page.compact .points{ gap:6px; }
