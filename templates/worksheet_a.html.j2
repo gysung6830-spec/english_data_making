@@ -41,7 +41,7 @@
   .titles .ko{ font-size:14px; color:#4a5064; margin-top:3px; font-weight:600; }
 
   /* ---- 문장 행 ---- */
-  .row{ display:grid; grid-template-columns:1fr 200px; gap:12px; margin:18px 0 3px;
+  .row{ display:grid; grid-template-columns:minmax(0,1fr) 200px; gap:12px; margin:18px 0 3px;
         padding-top:6px; page-break-inside:avoid; align-items:start; }
   .row:first-of-type{ margin-top:6px; }
   .analysis{ display:grid; grid-template-columns:26px 1fr; gap:6px; }
@@ -70,7 +70,10 @@
               white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:#7c828c; font-weight:800; font-size:8.5px; }   /* 성분(SVOC) 라벨 = 회색 */
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
-  .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:nowrap; }
+  /* 긴 토큰(구절 단위)은 줄바꿈 허용 → 컬럼 폭을 넘겨 포인트 박스를 밀어내는 오류 방지.
+     짧은 토큰(주석 달린 단어)은 어차피 한 줄에 들어가 정렬 유지. */
+  .tok{ max-width:100%; }
+  .tok .w{ display:block; font-size:15px; line-height:1.5; white-space:normal; overflow-wrap:break-word; }
   .tok .w.hl-y{ background:var(--yellow-hl); }
   .tok .w.hl-g{ background:var(--green-hl); }
   .tok .w.hl-p{ background:var(--purple-hl); }
