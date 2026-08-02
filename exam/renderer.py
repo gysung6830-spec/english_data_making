@@ -141,6 +141,18 @@ def render_review_html(items: list[dict], footer_note: str = DEFAULT_FOOTER) -> 
     return tmpl.render(items=items, footer_note=footer_note)
 
 
+def _stylesheets():
+    """조판용 스타일시트: [임베드 폰트(fonts.css), 레이아웃(exam.css)] 순서.
+
+    fonts.css 는 나눔스퀘어라운드를 base64 로 직접 담고 있어, 시스템에 폰트가 없거나
+    경로가 달라도 항상 같은 폰트로 렌더된다(폰트가 exam.css 보다 먼저 정의돼야 함).
+    """
+    from weasyprint import CSS  # 지연 임포트(무거움)
+
+    return [CSS(filename=str(TEMPLATE_DIR / "fonts.css")),
+            CSS(filename=str(TEMPLATE_DIR / "exam.css"))]
+
+
 def _write_docs(docs, out_path: Path) -> Path:
     """여러 WeasyPrint 문서의 페이지를 한 PDF로 병합해 쓴다."""
     all_pages = [pg for d in docs for pg in d.pages]
@@ -158,7 +170,7 @@ def render_pdf(
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
     sections=None,
 ) -> Path:
-    from weasyprint import CSS, HTML  # 지연 임포트(무거움)
+    from weasyprint import HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -167,15 +179,15 @@ def render_pdf(
                        start=start, footer_note=footer_note,
                        type_order=type_order, prompts=prompts, labels=labels,
                        sections=sections)
-    css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
-    docs = [HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])]
+    css = _stylesheets()
+    docs = [HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css)]
 
     # 교사용 산출물이면, '확인 권장 문항'을 맨 끝 별도 페이지로 덧붙인다.
     if active & _TEACHER_SECTIONS:
         items = collect_review(passages, start, type_order, labels)
         if items:
             rhtml = render_review_html(items, footer_note)
-            docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+            docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
 
     return _write_docs(docs, out_path)
 
@@ -188,11 +200,11 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
     각 파트는 자체 머리글로 시작하고, 파트 사이는 새 쪽에서 이어진다.
     모든 파트의 '확인 권장 문항'은 마지막에 단 한 장의 별도 페이지로 모아 붙인다.
     """
-    from weasyprint import CSS, HTML  # 지연 임포트(무거움)
+    from weasyprint import HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    css = CSS(filename=str(TEMPLATE_DIR / "exam.css"))
+    css = _stylesheets()
 
     docs = []
     review_items: list[dict] = []
@@ -209,7 +221,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
             labels=labels,
             sections=sections,
         )
-        docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+        docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
         # 각 파트의 확인 권장 문항을 파트 라벨과 함께 모은다(교사용 산출물일 때만).
         active, _ = _resolve_sections(sections)
         if active & _TEACHER_SECTIONS:
@@ -219,6 +231,6 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
 
     if review_items:
         rhtml = render_review_html(review_items, footer_note)
-        docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]))
+        docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
 
     return _write_docs(docs, out_path)
