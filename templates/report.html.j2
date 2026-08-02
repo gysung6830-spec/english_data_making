@@ -69,8 +69,8 @@
       <span class="sec-sub">Exam Points{% if brand %} · {{ brand }} tip{% endif %}</span>
     </div>
     <div class="exam-cards">
-    {# 함축의미는 직독직해 표(⑤)에 통합하므로 여기서는 제외 #}
-    {% for e in report.exam.items if '함축' not in e.question_type %}
+    {# 지칭추론은 직독직해 표(⑤)에 어법과 함께 넣으므로 여기서는 제외(함축의미·서술형만) #}
+    {% for e in report.exam.items if '지칭' not in e.question_type %}
       <div class="exam-card{% if '지칭' in e.question_type %} ec-ref{% elif '함축' in e.question_type %} ec-imp{% elif '서술' in e.question_type %} ec-narr{% endif %}">
         <div class="ec-head">{% if '서술' in e.question_type %}서술형 출제 예상 문장{% else %}{{ e.question_type }}{% endif %}</div>
         <div class="ec-body">
@@ -168,7 +168,7 @@
     <table class="lit2{% if student %} stu{% endif %}">
       <thead><tr><th class="lh-en">영어 원문{% if student %} (핵심 문법에 ○ 표시){% else %} + 핵심 문법{% endif %}</th><th class="lh-ko">직독직해{% if not student %} + 핵심 단어{% endif %}</th></tr></thead>
       <tbody>
-      {% set impl = report.exam | implicit_map %}
+      {% set refs = report.exam | ref_map %}
       {% for s in report.literal.sentences %}
       <tr class="lit-row">
         <td class="lit-en">
@@ -192,20 +192,18 @@
             {% endfor %}
           </div>
           {% endif %}
-          {# 함축의미 (출제 포인트에서 이동) — 어법과 함께 표시 #}
-          {% if impl.get(s.no) %}
-          <div class="lit-impl">
-            {% for block in impl[s.no] %}
-            <div class="impl-item">
-              {%- for ln in block.split('\n') if ln.strip() -%}
-                {%- if loop.first -%}
-                  {%- set qp = ln.split('"') -%}
-                  <div class="impl-head"><span class="impl-lbl">함축</span>{% if qp | length >= 2 %}<span class="impl-badge">{{ qp[1] | trim }}</span>{% else %}{{ ln | trim }}{% endif %}</div>
-                {%- elif '함정' in ln -%}<div class="imp-trap">{{ ln | trim }}</div>
-                {%- elif '정답 표현' in ln -%}{% if student %}<div class="imp-ans">· 영어 정답 표현: <span class="blank" style="min-width:170px"></span></div>{% else %}<div class="imp-ans">{{ ln | trim }}</div>{% endif %}
-                {%- elif '문맥상' in ln -%}{% if student %}<div class="imp-mean">· 문맥상 의미: <span class="blank" style="min-width:170px"></span></div>{% else %}<div class="imp-mean">{{ ln | trim }}</div>{% endif %}
-                {%- else -%}<div class="imp-mean">{{ ln | trim }}</div>{%- endif -%}
-              {%- endfor -%}
+          {# 지칭추론 (출제 포인트에서 이동) — 어법과 함께 표시 #}
+          {% if refs.get(s.no) %}
+          <div class="lit-ref">
+            <span class="ref-h-lbl">지칭</span>
+            {% for line in refs[s.no] %}
+            {% set parts = line.split(' - ') %}
+            <div class="lit-ref-item">
+              {%- if parts | length >= 3 -%}
+                <span class="ref-pron2">{{ parts[1] | trim }}</span><span class="ref-arrow2">→</span>{% if student %}<span class="blank" style="min-width:120px"></span>{% else %}<span class="ref-tgt2">{{ (parts[2:] | join(' - ')) | trim | replace('(', '') | replace(')', '') }}</span>{% endif %}
+              {%- else -%}
+                {{ line | trim }}
+              {%- endif -%}
             </div>
             {% endfor %}
           </div>

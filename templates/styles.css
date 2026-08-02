@@ -329,22 +329,19 @@ table.lit2 td {
 .gline.ck6 .gtag { background: #eee8dc; }
 .gline.ck7 .gtag { background: #e3e4f1; }
 .gline .gexp { color: #23272e; }
-/* 직독직해에 통합된 함축의미 */
-.lit-impl { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #e7e3f0; }
-.impl-item { margin-top: 3px; }
-.impl-item:first-child { margin-top: 0; }
-.impl-head { margin-bottom: 1px; }
-.impl-lbl {
+/* 직독직해에 통합된 지칭추론 */
+.lit-ref { margin-top: 5px; padding-top: 3px; border-top: 1px dotted #efeaf6; }
+.ref-h-lbl {
   display: inline-block; background: var(--exam); color: #fff;
   font-size: 7.5px; font-weight: 800; padding: 0 5px; border-radius: 7px; margin-right: 4px;
 }
-.impl-badge {
-  display: inline-block; background: #efeaf7; color: #23272e;
-  font-weight: 700; font-size: 8.5px; border-radius: 5px; padding: 1px 7px;
+.lit-ref-item { font-size: 8.3px; margin-top: 2px; padding-left: 2px; }
+.ref-pron2 {
+  display: inline-block; background: #efeaf7; color: #23272e; font-weight: 700;
+  border-radius: 5px; padding: 0 6px; margin-right: 3px;
 }
-.lit-impl .imp-mean, .lit-impl .imp-ans, .lit-impl .imp-trap { font-size: 8.3px; padding-left: 8px; }
-.lit-impl .imp-ans { color: var(--exam); font-weight: 600; }
-.lit-impl .imp-trap { color: var(--c-red); font-weight: 700; }
+.ref-arrow2 { color: var(--muted); font-weight: 700; margin-right: 3px; }
+.ref-tgt2 { color: #23272e; }
 
 .lit-words { display: block; margin-top: 4px; font-size: 8.8px; color: #23272e; line-height: 1.5; }
 .lit-words b { color: #23272e; }

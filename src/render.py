@@ -155,6 +155,26 @@ def _implicit_map(exam):
 _env.filters["implicit_map"] = _implicit_map
 
 
+def _ref_map(exam):
+    """출제 포인트의 '지칭추론' 줄을 {문장번호: [줄,...]} 로 정리(직독직해 표에 통합용)."""
+    out: dict[int, list[str]] = {}
+    if not exam:
+        return out
+    for e in exam.items:
+        if "지칭" in (e.question_type or ""):
+            for line in (e.content or "").split("\n"):
+                line = line.strip()
+                if not line:
+                    continue
+                m = re.match(r"\s*(\d+)\s*문장", line)
+                key = int(m.group(1)) if m else 0
+                out.setdefault(key, []).append(line)
+    return out
+
+
+_env.filters["ref_map"] = _ref_map
+
+
 # 매칭 시 무시할 기능어(내용어만 남겨 어구를 정확히 찾기 위함)
 _STOP_WORDS = {
     "the", "a", "an", "of", "in", "on", "at", "to", "is", "are", "was", "were",
