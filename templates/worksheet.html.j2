@@ -69,6 +69,60 @@
       </div>
       {% endfor %}
     </div>
+
+    <!-- 유형④ 영어 보고 뜻 쓰기 -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ④</span>
+      <span class="ws-type-title"><b>영어 보고 뜻 쓰기</b></span>
+      <span class="ws-type-ex">(뜻을 한글로)</span>
+    </div>
+    <div class="ws-fill">
+      {% for w in sh.words %}
+      <div class="ws-fill-item">
+        <span class="ws-fill-q ws-fill-en">{{ w.n }}. {{ w.word }}</span>
+        <span class="ws-fill-arrow">→</span>
+        <span class="ws-fill-a"><span class="ws-blank-line"></span></span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- 유형⑤ 철자 뒤섞기(Anagram) -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ⑤</span>
+      <span class="ws-type-title"><b>철자 뒤섞기</b> — 흩어진 글자로 단어 완성</span>
+    </div>
+    <div class="ws-fill">
+      {% for a in sh.anagram %}
+      <div class="ws-fill-item ws-ana-item">
+        <span class="ws-ana-q">{{ a.n }}. {{ a.meaning }}</span>
+        <span class="ws-ana-scr">{{ a.scrambled }}</span>
+        <span class="ws-fill-arrow">→</span>
+        <span class="ws-fill-a">{% for _ in range(a.blanks) %}<span class="ws-blank-letter">_</span>{% endfor %}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if sh.cloze %}
+    <!-- 유형⑥ 문맥 빈칸(Cloze) -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ⑥</span>
+      <span class="ws-type-title"><b>문맥 빈칸 채우기</b> — 지문 문장 속 단어 쓰기</span>
+      <span class="ws-type-ex">(뜻 힌트)</span>
+    </div>
+    <div class="ws-cloze">
+      {% for c in sh.cloze %}
+      <div class="ws-cloze-item">
+        <span class="ws-cloze-no">{{ c.n }}.</span>
+        <span class="ws-cloze-sent">{{ c.before }}<span class="ws-cloze-blank">{% for _ in range(c.blanks) %}_{% endfor %}</span>{{ c.after }}</span>
+        <span class="ws-cloze-hint">({{ c.meaning }})</span>
+      </div>
+      {% endfor %}
+      <div class="ws-akey">
+        <span class="ws-akey-label">유형 ⑥ 정답</span>
+        {% for c in sh.cloze %}<span class="ws-akey-item">{{ c.n }}. {{ c.answer }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endif %}
     {% else %}
     <div class="wl-empty">학습지에 넣을 핵심 어휘가 없습니다.</div>
     {% endif %}
