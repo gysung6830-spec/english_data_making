@@ -364,6 +364,10 @@ function css() {
   .pcatch { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:5px solid ${C.teal};
     border-radius:8px; padding:12px 15px; margin:14px 0 4px; font-size:12px; break-inside:avoid; }
   .pcatch-h { display:block; color:${C.tealDark}; font-weight:800; font-size:13px; margin-bottom:5px; }
+  .catchwrite { background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:6px;
+    padding:8px 12px 10px; margin:7px 0; break-inside:avoid; }
+  .cw-h { font-size:11px; font-weight:800; color:${C.tealDark}; margin-bottom:4px; }
+  .cw-hint { font-weight:600; color:${C.sub}; font-size:9.5px; margin-left:4px; }
   `;
 }
 
@@ -377,15 +381,36 @@ function fullTextBlock(sentences) {
     `<span class="fn">${i + 1}</span>${esc(s.en)} `).join('');
   return `<div class="fulltext">${body}</div>`;
 }
-// 문장 하나: 영어+포인트태그 → 어휘 → 팁 → 끊어읽기 해석 → 함정 → 문장 캐치
+// 해석 직접 쓰는 칸 (정답은 지문 끝 답지)
+function interpretWriteCard() {
+  return `<div class="writecard">
+    <div class="wc-h">✏️ 해석 — 직접 우리말로 써봐 (정답은 지문 끝 '답지'에서 확인)</div>
+    <div class="wl"></div><div class="wl"></div></div>`;
+}
+// 캐치 직접 쓰는 칸 + '잘하는 법' 가이드. 학생이 매 문장 한 줄로 줄여보는 연습.
+function catchWriteCard() {
+  return `<div class="catchwrite">
+    <div class="cw-h">✅ 이 정도는 캐치! <span class="cw-hint">핵심만 한 줄 — 누가/무엇이 → 어쨌다? (곁가지·수식은 버려)</span></div>
+    <div class="wl"></div></div>`;
+}
+// 문장 하나(문제 쪽): 영어+포인트태그 → 어휘 → 팁 → 이거 조심 → 해석(쓰기) → 캐치(쓰기)
 function passageSentence(s, idx) {
   return `<div class="sblock">
     <div class="senth"><span class="sbadge">${idx}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
     ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
-    ${chunkExplain(s.chunks)}
     ${trapCard(s.trap)}
-    ${s.catch ? catchCard(s.catch) : ''}</div>`;
+    ${interpretWriteCard()}
+    ${catchWriteCard()}</div>`;
+}
+// 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
+function passageAnswerKey(p) {
+  let h = secHead(CIRCLED[2], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
+  h += (p.sentences || []).map((s, i) => `<div class="sblock">
+    <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
+    ${chunkExplain(s.chunks)}
+    ${s.catch ? catchCard(s.catch) : ''}</div>`).join('');
+  return h;
 }
 function passageHtml(p, idx) {
   let h = '<section class="chapter">';
@@ -396,10 +421,11 @@ function passageHtml(p, idx) {
   if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
-  h += secHead(CIRCLED[1], '한 문장씩 뜯어보기', '끊어읽기 · 어휘 · 구문 포인트', 'teal');
+  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘·팁·이거조심 보고 → 해석·캐치는 직접', 'teal');
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
+  h += passageAnswerKey(p);
   if (p.catch) {
-    h += `<div class="pcatch"><span class="pcatch-h">✅ 이 지문, 이 정도는 캐치!</span>${esc(p.catch)}</div>`;
+    h += `<div class="pcatch"><span class="pcatch-h">✅ 이 지문, 이 정도는 캐치! (전체 요지)</span>${esc(p.catch)}</div>`;
   }
   h += '</section>';
   return h;

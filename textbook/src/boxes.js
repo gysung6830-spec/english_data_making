@@ -156,6 +156,35 @@ function answerWriteBox() {
   ];
 }
 
+// 해석 직접 쓰는 칸 (지문 모드 — 정답은 지문 끝 답지)
+function interpretWriteBox() {
+  return [
+    makeBox(S.WRITE.bg, S.WRITE.border, [
+      boxLabel("✏️ 해석 — 직접 우리말로 써봐 (정답은 지문 끝 '답지')", S.WRITE.border),
+      underlineRow(220),
+      underlineRow(40),
+    ]),
+    spacer(),
+  ];
+}
+
+// 캐치 직접 쓰는 칸 + '잘하는 법' 가이드 (지문 모드)
+function catchWriteBox() {
+  return [
+    makeBox(S.CATCHBG, S.CATCH.border, [
+      new Paragraph({
+        spacing: { after: 60 },
+        children: [
+          new TextRun({ text: '✅ 이 정도는 캐치!  ', bold: true, size: 19, color: S.CATCH.label, font: S.FONT }),
+          new TextRun({ text: '핵심만 한 줄 — 누가/무엇이 → 어쨌다? (곁가지·수식은 버려)', size: 16, italics: true, color: '8A5A00', font: S.FONT }),
+        ],
+      }),
+      underlineRow(40),
+    ]),
+    spacer(),
+  ];
+}
+
 // 6. ✅ 이 정도는 캐치! 박스
 function catchBox(text) {
   return [
@@ -190,4 +219,5 @@ module.exports = {
   pageBreak, spacer, p, bullet, h1, h2, h3,
   makeBox, boxLabel,
   engHeader, vocabBox, chunkBox, trapBox, answerWriteBox, catchBox, tipBox,
+  interpretWriteBox, catchWriteBox,
 };

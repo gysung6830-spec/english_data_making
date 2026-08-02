@@ -147,11 +147,23 @@ function passageSentenceParas(s, idx) {
       children: [new TextRun({ text: `구문 포인트 — ${s.point}`, bold: true, size: 18, color: S.BRASS, font: S.FONT })],
     }));
   }
+  // 순서: 어휘 → 끊어읽기 팁 → 이거 조심 → 해석(쓰기) → 캐치(쓰기)
   out.push(...B.vocabBox(s.vocab));
   out.push(...B.tipBox(makeTip(s.chunks)));
-  out.push(...B.chunkBox(s.chunks));
   out.push(...B.trapBox(s.trap));
-  if (s.catch) out.push(...B.catchBox(s.catch));
+  out.push(...B.interpretWriteBox());
+  out.push(...B.catchWriteBox());
+  return out;
+}
+
+// 지문 끝 답지 — 문장별 모범 해석(끊어읽기) + 모범 캐치
+function passageAnswerParas(p) {
+  const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
+  (p.sentences || []).forEach((s, i) => {
+    out.push(B.h3(`${i + 1}. ${s.en}  [${s.src}]`));
+    out.push(...B.chunkBox(s.chunks));
+    if (s.catch) out.push(...B.catchBox(s.catch));
+  });
   return out;
 }
 
@@ -167,9 +179,11 @@ function passageParagraphs(p, idx) {
       new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
     ]),
   }));
-  out.push(B.h2('한 문장씩 뜯어보기'));
+  out.push(B.h2('한 문장씩 직접 풀기'));
   (p.sentences || []).forEach((s, i) => out.push(...passageSentenceParas(s, i + 1)));
-  if (p.catch) { out.push(B.h2('이 지문, 이 정도는 캐치!')); out.push(...B.catchBox(p.catch)); }
+  // 지문 끝: 답지(해석·캐치) → 지문 전체 요지
+  out.push(...passageAnswerParas(p));
+  if (p.catch) { out.push(B.h2('이 지문, 이 정도는 캐치! (전체 요지)')); out.push(...B.catchBox(p.catch)); }
   out.push(B.pageBreak());
   return out;
 }
@@ -184,7 +198,8 @@ function passageCoverParagraphs(meta = {}) {
       spacing: { before: 200, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },
       children: [new TextRun({ text: '  📌 이렇게 써', bold: true, size: 22, color: S.NAVY, font: S.FONT })],
     }),
-    B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 끊어읽기·어휘·구문 포인트로 뜯어보고 → ③ 맨 끝 "이 지문 이 정도는 캐치"로 요지 확인.'),
+    B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 [어휘·팁·이거조심] 보고 해석과 캐치를 직접 써 → ③ 지문 끝 "답지"에서 해석·캐치 맞춰보고 → ④ "이 지문 이 정도는 캐치"로 전체 요지 확인.'),
+    B.bullet('캐치는 매 문장 한 줄로 줄여 쓰는 연습이야 — 누가/무엇이 → 어쨌다만 남기고 곁가지는 버려.'),
     B.bullet('문법은 문장마다 "구문 포인트"로 콕 짚어 줘 — 목차는 문법이 아니라 지문 순서야.'),
     B.pageBreak(),
   ];
