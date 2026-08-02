@@ -42,7 +42,8 @@ FIT_STEPS = ["", "compact", "compact2"]
 # 하단 왼쪽 저작권 문구 + 하단 오른쪽 페이지 번호
 FOOTER_TEXT = "©2026.Ortica영어.All rights reserved"
 _FOOTER_FONT = (
-    "'NanumSquare','나눔스퀘어','NanumGothic','Malgun Gothic',sans-serif"
+    "'NanumSquareRound','나눔스퀘어라운드','NanumSquare',"
+    "'NanumGothic','Malgun Gothic',sans-serif"
 )
 
 # 형식 키 → (렌더 함수, 파일명 접미사)
@@ -202,7 +203,14 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
             _apply_autofit(page)
 
         # 하단 왼쪽=저작권, 하단 오른쪽=페이지 번호 (모든 페이지 반복)
+        # 푸터 템플릿은 본문 CSS를 상속받지 않으므로 폰트를 여기에도 임베드.
+        try:
+            from .themes import _font_face_css
+        except ImportError:
+            from themes import _font_face_css
+        footer_font_css = f'<style>{_font_face_css()}</style>'
         footer_template = (
+            footer_font_css +
             f'<div style="width:100%; box-sizing:border-box; '
             f'padding:0 18mm; font-family:{_FOOTER_FONT}; font-size:11px; '
             f'color:#000000; display:flex; justify-content:space-between; '

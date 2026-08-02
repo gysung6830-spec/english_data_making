@@ -1,6 +1,6 @@
 """디자인 테마 CSS 3종.
 
-- modern   : 확정 테마(참고 디자인 반영). 나눔스퀘어, 우측 상단 머리글 +
+- modern   : 확정 테마(참고 디자인 반영). 나눔스퀘어라운드(임베드), 우측 상단 머리글 +
              전체폭 구분선, 제목 왼쪽 세로 강조막대, 문장마다 연한 구분선.
              페이지 규칙(break-before/inside)과 auto-fit 축소 클래스 포함.
 - textbook : 대안(교재형, 파란 포인트).
@@ -10,15 +10,37 @@
 """
 from __future__ import annotations
 
-# 나눔스퀘어(NanumSquare) 사용. 온라인이면 웹폰트 @import로 자동 로드,
-# 오프라인이면 시스템 나눔스퀘어 / 나눔고딕 / 맑은고딕으로 폴백.
-FONT_IMPORT = (
-    # 나눔스퀘어 웹폰트(온라인일 때 자동 로드; 오프라인이면 시스템 폰트 사용)
-    "@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');\n"
-)
+import base64
+import functools
+from pathlib import Path
+
+# 나눔스퀘어라운드(NanumSquareRound)를 base64로 HTML에 직접 임베드한다.
+# → 시스템 폰트 설치·경로·인터넷과 무관하게 항상 동일하게 렌더된다.
+_FONT_DIR = Path(__file__).resolve().parent / "fonts"
+_FONT_FILES = [("NanumSquareRoundR.ttf", 400), ("NanumSquareRoundB.ttf", 700)]
+
+
+@functools.lru_cache(maxsize=1)
+def _font_face_css() -> str:
+    """폰트 파일을 base64 data URI @font-face 로 만든다(1회 인코딩 후 캐시)."""
+    faces = []
+    for fname, weight in _FONT_FILES:
+        fp = _FONT_DIR / fname
+        if not fp.exists():
+            continue
+        b64 = base64.b64encode(fp.read_bytes()).decode("ascii")
+        faces.append(
+            "@font-face{font-family:'NanumSquareRound';font-style:normal;"
+            f"font-weight:{weight};font-display:swap;"
+            f"src:url(data:font/ttf;base64,{b64}) format('truetype');}}"
+        )
+    return ("\n".join(faces) + "\n") if faces else ""
+
+
+FONT_IMPORT = _font_face_css()   # 각 테마 CSS 앞에 삽입되는 임베드 @font-face
 FONT_STACK = (
-    "'NanumSquare','나눔스퀘어','NanumSquareOTF','NanumSquareR',"
-    "'NanumGothic','Nanum Gothic','Malgun Gothic',sans-serif"
+    "'NanumSquareRound','나눔스퀘어라운드','NanumSquareRoundR',"
+    "'NanumSquare','NanumGothic','Malgun Gothic',sans-serif"
 )
 
 # ── 페이지 배치 규칙 (모든 테마 공통으로 주입) ─────────────────
