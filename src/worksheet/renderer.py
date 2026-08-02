@@ -245,7 +245,9 @@ def _page_counts(htmls: list[str]) -> list[int]:
     return [len(HTML(string=h).render().pages) for h in htmls]
 
 
-_FRONT_TIERS = ["normal", "compact", "ultra"]
+# 앞면 밀도 티어: normal=12px(여유 있으면 크게), compact=11px(기본/빠듯할 때).
+# 11px 미만(ultra)은 쓰지 않는다 — 기본 하한이 11px 이므로.
+_FRONT_TIERS = ["normal", "compact"]
 
 
 def _fit_pages(analyses, fit_front: bool = True,
@@ -284,9 +286,9 @@ def _fit_pages(analyses, fit_front: bool = True,
     for i, a in enumerate(lst):
         if fit_front:
             # 1페이지에 맞는 가장 큰(=가장 잘 보이는) 티어를 고른다.
-            # 어떤 티어로도 1페이지가 안 되면(장문), '작게 욱여넣기'보다 가독성이 우선이므로
-            # 전면 normal(최대 폰트)로 2페이지에 시원하게 편다. (A4 인쇄 가독성)
-            chosen = "normal"
+            # normal(12px)이 1페이지에 들어가면 그걸로 '꽉 차게', 넘치면 compact(11px).
+            # 둘 다 1페이지를 못 맞추는 장문이면 '기본' 크기(compact=11px)로 2페이지에 편다.
+            chosen = "compact"
             for (j, kind, t), c in zip(jobs, counts):
                 if j == i and kind == "front":
                     if c <= 1:
