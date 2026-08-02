@@ -167,6 +167,10 @@ def render_workbooks_pdf(books: list[Workbook], out_path: str | Path, footer_not
         b = p.chromium.launch(**launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
+        try:
+            pg.evaluate("async () => { await document.fonts.ready; }")
+        except Exception:
+            pass
         pg.pdf(
             path=str(out_path),
             format="A4",

@@ -156,7 +156,8 @@ def test_render_html():
     wb.label = "[고1] 9월 30번"
     html = render_workbook_html(wb, footer_note="테스트")
     assert "sh-head" in html and wb.label in html   # 제목 + 출처 뱃지 헤더
-    assert "SCORE" not in html and "NAME" not in html  # NAME/SCORE 삭제
+    # NAME/SCORE 블록 삭제 (base64 폰트에 우연히 단어가 들어갈 수 있어 마크업 클래스로 확인)
+    assert 'class="wb-meta"' not in html and 'class="wb-score"' not in html
     assert "정답 · 해설" in html               # 정답 페이지 존재
     assert "ans-page" in html                    # page-break-before 대상
     assert "{{Q1}}" not in html                  # 자리표시자 누출 없음

@@ -36,6 +36,8 @@ body{
 .ws-instr.wt-form .wt-label{ color:var(--form); }
 .ws-instr.wt-vocab{ border-left-color:var(--vocab); background:#eef7f3; }
 .ws-instr.wt-vocab .wt-label{ color:var(--vocab); }
+.ws-instr.wt-vocab_easy{ border-left-color:var(--vocab); background:#eef7f3; }
+.ws-instr.wt-vocab_easy .wt-label{ color:var(--vocab); }
 .ws-instr.wt-translate{ border-left-color:var(--rose); background:var(--rose-bg); }
 .ws-instr.wt-translate .wt-label{ color:var(--rose); }
 
@@ -74,6 +76,7 @@ body{
 .ans-ws{ margin-bottom:12px; page-break-inside:avoid; }
 .ans-ws-h{ font-size:10pt; font-weight:800; margin-bottom:5px; }
 .wt-form{ color:var(--form); } .wt-grammar{ color:var(--grammar); } .wt-vocab{ color:var(--vocab); }
+.wt-vocab_easy{ color:var(--vocab); }
 .wt-translate{ color:var(--rose); }
 .ans-row{ font-size:9pt; margin-bottom:3px; }
 .ans-tr{ color:#3a3f4a; line-height:1.5; }

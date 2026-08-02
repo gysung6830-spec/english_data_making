@@ -42,8 +42,8 @@ def test_validation_and_mismatch_tolerated():
 def test_build_four_worksheets():
     pack = pr.build_prose_pack(mock_llm_prose(), header="H", title="T", subtitle="S")
     types = [w.wtype for w in pack.worksheets]
-    _check("4종 워크시트(어법·어형·어휘·한글해석) 순서",
-           types == ["grammar", "form", "vocab", "translate"])
+    _check("5종 워크시트(어법·어형·어휘상·어휘하·한글해석) 순서",
+           types == ["grammar", "form", "vocab", "vocab_easy", "translate"])
 
 
 def test_form_write_flag():

@@ -174,7 +174,7 @@ def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
 
 
 # 유형(파트) 배치 순서: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸
-_PROSE_ORDER = ["form", "grammar", "vocab"]   # 영작 앞까지의 단일 유형(해석은 영작 뒤로 분리)
+_PROSE_ORDER = ["form", "grammar", "vocab", "vocab_easy"]   # 영작 앞까지(해석은 영작 뒤로 분리)
 
 
 def _prose_subpack(pk, wtype: str):
@@ -228,7 +228,8 @@ def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact")
     from . import answers_render as ar
     groups = []
     for wtype, name, css in (("form", "어형 변형", "f"), ("grammar", "어법 양자택일", "g"),
-                             ("vocab", "어휘 양자택일", "v")):
+                             ("vocab", "어휘 양자택일 (상)", "v"),
+                             ("vocab_easy", "어휘 양자택일 (하)", "v")):
         for pk in packs or []:
             g = ar.group_from_prose(pk, wtype, name, css, style=style)
             if g:

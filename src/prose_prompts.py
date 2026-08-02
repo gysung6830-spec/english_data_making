@@ -51,15 +51,19 @@ _RULES = """[문장 완전성 — 매우 중요]
      대표 동사원형 하나로만 낸다. 특히 'have been'류는 '(be) 하나로만' 내고 정답을 완료형 전체로 쓴다.
      예: "have been related" → "(be)" answer "have been" + 뒤에 "(relate)" answer "related".
    display 예: "(understand)"   answer 예: "understood"   /   display 예: "(produce)" answer 예: "producing"
-3) 어휘 양자택일(vocab) → display = "[ 원문 / 오답 ]", 정답은 원문 어휘.
-   ★ '난도 있는(내신·수능 수준의) 핵심 내용어'를 대상으로 한다. 한 문장에 최대 3개.
-     너무 쉬운 기초 단어(good/bad, big/small, happy 등)는 피하고, 학술적·추상적 어휘 위주로 고른다.
-   ★ 오답은 '뻔한 기초 반의어'를 쓰지 말 것. 대신 '그 자리에 들어가도 문법적으로는 자연스럽지만
-     문맥상 의미가 틀린' — 원문과 '품사·형태·난이도가 비슷한' 헷갈리는 어휘를 넣는다.
-     (반의어여도 되지만 '수준 높은 어휘'라야 하며, 정답이 한눈에 보이는 쉬운 대비는 금지.)
-   display 예: "[ deliberate / arbitrary ]"  answer 예: "deliberate"
-           예: "[ mitigate / aggravate ]"    answer 예: "mitigate"
-   ★ 원문·오답 순서는 매 문항 무작위로 섞어라(원문을 항상 앞에 두지 말 것).
+3) 어휘 양자택일 — '난도 상'과 '난도 하' 두 종류를 '모두' 만든다(같은 문장에 대해 각각).
+   공통: display = "[ 원문 / 오답 ]", 정답은 원문 어휘. 각 유형 template 은 원문에 {{Pn}} 만 삽입.
+        원문·오답 순서는 매 문항 무작위로 섞어라(원문을 항상 앞에 두지 말 것). 한 문장에 각 최대 3개.
+   ★ 난도 상(vocab, vocab_template/vocab_items):
+     - '내신·수능 수준의 난도 높은 핵심 내용어'(학술적·추상적 어휘)를 대상으로 한다.
+     - 오답은 '뻔한 기초 반의어'가 아니라, 그 자리에 넣어도 '문법적으로는 자연스럽지만 문맥상 틀린',
+       원문과 품사·형태·난이도가 비슷한 '헷갈리는 어휘'를 넣는다. 단 '정답이 단 하나로 확실'해야 한다
+       (출제 오류 금지: 오답이 문맥상 참이 될 여지가 있으면 안 됨).
+     - display 예: "[ deliberate / arbitrary ]" answer "deliberate" / "[ mitigate / aggravate ]" answer "mitigate"
+   ★ 난도 하(vocab_easy, vocab_easy_template/vocab_easy_items):
+     - 비교적 쉬운 내용어를 대상으로, 오답은 '뜻이 뚜렷이 반대인 반의어'를 넣어 정답이 분명하게 한다.
+     - display 예: "[ increase / decrease ]" answer "increase" / "[ success / failure ]" answer "success"
+   ※ 두 유형은 '서로 다른 단어'를 골라도 되고 겹쳐도 되지만, 상은 어렵게/하는 쉽게가 분명해야 한다.
 
 [한글 해석 연습(translate)] 은 별도 표기가 없다. en(원문)과 ko(정확한 한국어 해석)만 있으면 된다.
 
@@ -68,7 +72,8 @@ _RULES = """[문장 완전성 — 매우 중요]
    no, en(원문 그대로), ko(자연스러운 한국어 해석),
    grammar_template, grammar_items:[{id,display,answer}],
    form_template,    form_items:[{id,display,answer}],
-   vocab_template,   vocab_items:[{id,display,answer}]
+   vocab_template,       vocab_items:[{id,display,answer}],        (어휘 난도 상)
+   vocab_easy_template,  vocab_easy_items:[{id,display,answer}]    (어휘 난도 하)
 }]}
 - en 은 자리표시자 없는 '완전한 원문'이다(한글 해석 연습·정답 근거로 쓰인다).
 - 어떤 유형에서 그 문장에 출제할 것이 없으면 해당 template = en 그대로, items = [] 로 둔다.

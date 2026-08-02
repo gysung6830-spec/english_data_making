@@ -27,25 +27,36 @@ FONT_STACK = ("'NanumSquareRound','NanumSquareRoundOTF','나눔스퀘어라운�
               "'Malgun Gothic','맑은 고딕','Nanum Gothic','Apple SD Gothic Neo',sans-serif")
 
 
-def _font_url(name: str) -> str:
+import base64
+from functools import lru_cache
+
+
+@lru_cache(maxsize=4)
+def _font_data_uri(name: str) -> str:
+    """폰트 파일을 base64 data URI 로 인코딩(경로·타이밍 문제 없이 HTML 에 임베드)."""
     p = FONT_DIR / name
-    return p.resolve().as_uri()   # file:///... (절대 경로)
+    if not p.exists():
+        return ""
+    b64 = base64.b64encode(p.read_bytes()).decode("ascii")
+    return f"data:font/ttf;base64,{b64}"
 
 
 def font_face_css() -> str:
     """번들된 나눔스퀘어라운드를 @font-face 로 등록하는 CSS(렌더 시 <head>에 주입).
 
-    Regular(400)·Bold(700) 두 굵기. 파일이 없으면 빈 문자열(시스템 폰트 폴백)."""
-    reg = FONT_DIR / "NanumSquareRoundR.ttf"
-    bold = FONT_DIR / "NanumSquareRoundB.ttf"
-    if not (reg.exists() and bold.exists()):
+    폰트 파일을 'base64 data URI' 로 직접 임베드한다. file:// 절대경로 방식은 실행 환경(웹/원격)에
+    따라 경로를 못 찾거나 로딩 타이밍 문제로 시스템 폰트로 폴백될 수 있어, 어디서든 동일하게
+    나눔스퀘어라운드로 렌더되도록 인라인 임베드로 바꿨다. 파일이 없으면 빈 문자열(시스템 폴백)."""
+    reg = _font_data_uri("NanumSquareRoundR.ttf")
+    bold = _font_data_uri("NanumSquareRoundB.ttf")
+    if not (reg and bold):
         return ""
     return (
         "@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:400;"
-        f"src:url('{_font_url('NanumSquareRoundR.ttf')}') format('truetype');}}"
+        f"src:url('{reg}') format('truetype');}}"
         "@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:700;"
-        f"src:url('{_font_url('NanumSquareRoundB.ttf')}') format('truetype');}}"
+        f"src:url('{bold}') format('truetype');}}"
         # 800/900 요청 시에도 Bold 로 매핑(합성 굵기 방지)
         "@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:800;"
-        f"src:url('{_font_url('NanumSquareRoundB.ttf')}') format('truetype');}}"
+        f"src:url('{bold}') format('truetype');}}"
     )

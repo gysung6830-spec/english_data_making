@@ -170,6 +170,10 @@ def render_writing_pdf(pack: WritingPack, out_path: str | Path, footer_note: str
         b = p.chromium.launch(**launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
+        try:
+            pg.evaluate("async () => { await document.fonts.ready; }")
+        except Exception:
+            pass
         pg.pdf(path=str(out_path), format="A4",
                margin={"top": "12mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
                print_background=True, display_header_footer=True,

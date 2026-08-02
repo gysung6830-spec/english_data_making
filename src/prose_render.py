@@ -70,8 +70,10 @@ class LLMProseSentence(BaseModel):
     grammar_items: list[LLMProseItem] = Field(default_factory=list)
     form_template: str = ""
     form_items: list[LLMProseItem] = Field(default_factory=list)
-    vocab_template: str = ""
+    vocab_template: str = ""                      # 어휘 양자택일 (상: 난도 높음)
     vocab_items: list[LLMProseItem] = Field(default_factory=list)
+    vocab_easy_template: str = ""                 # 어휘 양자택일 (하: 반의어 뚜렷)
+    vocab_easy_items: list[LLMProseItem] = Field(default_factory=list)
 
 
 class LLMProsePack(BaseModel):
@@ -80,14 +82,16 @@ class LLMProsePack(BaseModel):
     sentences: list[LLMProseSentence] = Field(default_factory=list)
 
 
-# 워크시트 유형 정의(표시 순서: 어법 → 어형 → 어휘 → 한글해석)
+# 워크시트 유형 정의. 어휘는 난도 상/하 두 종을 모두 낸다.
 _WORKSHEET_DEFS = [
     ("grammar", "어법 양자택일", "둘 중 어법상 알맞은 것을 고르시오.", False,
      "grammar_template", "grammar_items"),
     ("form", "어형 변형", "각 빈칸에 괄호 안의 단어를 문맥에 맞게 알맞은 형태로 바꾸어 쓰시오. "
      "(어형 변화가 필요 없는 경우도 있음)", True, "form_template", "form_items"),
-    ("vocab", "어휘 양자택일", "둘 중 문맥상 알맞은 것을 고르시오.", False,
+    ("vocab", "어휘 양자택일 (상)", "둘 중 문맥상 알맞은 것을 고르시오. (난도 상)", False,
      "vocab_template", "vocab_items"),
+    ("vocab_easy", "어휘 양자택일 (하)", "둘 중 문맥상 알맞은 것을 고르시오. (난도 하)", False,
+     "vocab_easy_template", "vocab_easy_items"),
 ]
 
 
@@ -136,7 +140,7 @@ def validate_llm_prose(llm: LLMProsePack) -> None:
 _env = Environment(loader=FileSystemLoader(str(TEMPLATE_DIR)),
                    autoescape=select_autoescape(["html", "xml", "j2"]))
 
-_WCLASS = {"form": "wf", "grammar": "wg", "vocab": "wv"}
+_WCLASS = {"form": "wf", "grammar": "wg", "vocab": "wv", "vocab_easy": "wv"}
 
 
 def _item_html(it: PItem, wtype: str) -> str:
@@ -189,6 +193,10 @@ def render_prose_pdf(pack: ProsePack, out_path: str | Path, footer_note: str = "
         b = p.chromium.launch(**launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
+        try:
+            pg.evaluate("async () => { await document.fonts.ready; }")
+        except Exception:
+            pass
         pg.pdf(path=str(out_path), format="A4",
                margin={"top": "12mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
                print_background=True, display_header_footer=True,
