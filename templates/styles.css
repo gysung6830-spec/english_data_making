@@ -5,27 +5,8 @@
    글꼴: 나눔스퀘어라운드(NanumSquareRound) — 아래 @font-face 로 내장
    ============================================================ */
 
-/* 나눔스퀘어라운드 (templates/fonts 에 내장한 ttf 사용) */
-@font-face {
-  font-family: "NanumSquareRound";
-  font-weight: 300;
-  src: url("fonts/NanumSquareRoundL.ttf") format("truetype");
-}
-@font-face {
-  font-family: "NanumSquareRound";
-  font-weight: 400;
-  src: url("fonts/NanumSquareRoundR.ttf") format("truetype");
-}
-@font-face {
-  font-family: "NanumSquareRound";
-  font-weight: 700;
-  src: url("fonts/NanumSquareRoundB.ttf") format("truetype");
-}
-@font-face {
-  font-family: "NanumSquareRound";
-  font-weight: 800;
-  src: url("fonts/NanumSquareRoundEB.ttf") format("truetype");
-}
+/* 나눔스퀘어라운드 @font-face 는 렌더 시 base64(data URI)로 인라인 주입한다.
+   (src/render.py 의 _font_css) → 폰트 파일 경로·base_url 에 의존하지 않음. */
 
 @page {
   size: A4;

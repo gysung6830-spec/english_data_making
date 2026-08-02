@@ -32,6 +32,45 @@ def _stylesheet():
     from weasyprint import CSS
     return CSS(filename=str(TEMPLATE_DIR / "styles.css"), font_config=_font_config())
 
+
+# 나눔스퀘어라운드를 base64 data URI 로 인라인 임베드한 @font-face CSS.
+#   폰트 파일 경로/렌더 base_url 에 의존하지 않으므로 어떤 환경에서도 항상 적용된다.
+_FONTS_DIR = TEMPLATE_DIR / "fonts"
+_FONT_FACES = [
+    (300, "NanumSquareRoundL.woff2"),
+    (400, "NanumSquareRoundR.woff2"),
+    (700, "NanumSquareRoundB.woff2"),
+    (800, "NanumSquareRoundEB.woff2"),
+]
+_FONT_CSS_TEXT: str | None = None
+_FONT_CSS_OBJ = None
+
+
+def _font_face_css_text() -> str:
+    """woff2 를 base64 로 인코딩한 @font-face 규칙 문자열(1회 생성 후 캐시)."""
+    global _FONT_CSS_TEXT
+    if _FONT_CSS_TEXT is None:
+        import base64
+        blocks = []
+        for weight, fname in _FONT_FACES:
+            data = base64.b64encode((_FONTS_DIR / fname).read_bytes()).decode()
+            blocks.append(
+                '@font-face{font-family:"NanumSquareRound";font-style:normal;'
+                f'font-weight:{weight};'
+                f'src:url("data:font/woff2;base64,{data}") format("woff2");}}'
+            )
+        _FONT_CSS_TEXT = "".join(blocks)
+    return _FONT_CSS_TEXT
+
+
+def _font_css():
+    """base64 임베드 @font-face 를 담은 WeasyPrint CSS 객체(캐시)."""
+    global _FONT_CSS_OBJ
+    if _FONT_CSS_OBJ is None:
+        from weasyprint import CSS
+        _FONT_CSS_OBJ = CSS(string=_font_face_css_text(), font_config=_font_config())
+    return _FONT_CSS_OBJ
+
 _env = Environment(
     loader=FileSystemLoader(str(TEMPLATE_DIR)),
     autoescape=select_autoescape(["html", "xml", "j2"]),
@@ -266,7 +305,7 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "은아 T
     def pages(rep):
         html = render_html([rep], footer_note, brand)
         return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(
-            stylesheets=[css], font_config=_font_config()).pages)
+            stylesheets=[_font_css(), css], font_config=_font_config()).pages)
 
     if pages(report) <= 2:
         return report
@@ -310,7 +349,7 @@ def render_pdf(reports, out_path: str | Path, footer_note: str = "",
     def build(rs):
         html = render_html(rs, footer_note, brand)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(
-            stylesheets=[css], font_config=_font_config())
+            stylesheets=[_font_css(), css], font_config=_font_config())
 
     doc = build(rlist)
     # 지문 1개당 2페이지(1p: 요약~어휘, 2p: 직독직해)를 넘기면 어휘를 줄여 다시 렌더
@@ -382,7 +421,7 @@ def render_wordlist_pdf(reports, out_path: str | Path,
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = _stylesheet()
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
-        str(out_path), stylesheets=[css], font_config=_font_config())
+        str(out_path), stylesheets=[_font_css(), css], font_config=_font_config())
     return out_path
 
 
@@ -409,7 +448,7 @@ def render_quiz_pdf(reports, out_path: str | Path,
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = _stylesheet()
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
-        str(out_path), stylesheets=[css], font_config=_font_config())
+        str(out_path), stylesheets=[_font_css(), css], font_config=_font_config())
     return out_path
 
 
@@ -579,7 +618,7 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
                        footer_note=footer_note, brand=brand)
     css = _stylesheet()
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(
-        str(out_path), stylesheets=[css], font_config=_font_config())
+        str(out_path), stylesheets=[_font_css(), css], font_config=_font_config())
     return out_path
 
 
