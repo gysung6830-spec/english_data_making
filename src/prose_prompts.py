@@ -51,7 +51,8 @@ _RULES = """[문장 완전성 — 매우 중요]
      대표 동사원형 하나로만 낸다. 특히 'have been'류는 '(be) 하나로만' 내고 정답을 완료형 전체로 쓴다.
      예: "have been related" → "(be)" answer "have been" + 뒤에 "(relate)" answer "related".
    display 예: "(understand)"   answer 예: "understood"   /   display 예: "(produce)" answer 예: "producing"
-3) 어휘 — '난도 하'와 '난도 상' 두 종류를 '모두' 만든다(같은 문장에 대해 각각). 한 문장에 각 최대 3개.
+3) 어휘 — '난도 하'와 '난도 상' 두 종류를 '모두' 만든다(같은 문장에 대해 각각).
+   ★ 각 유형은 '한 문장에 최소 2개, 최대 3개'를 출제한다(어휘가 정말 부족한 아주 짧은 문장만 예외로 1개).
    공통: 각 유형 template 은 원문에 {{Pn}} 만 삽입. 보기 순서는 매 문항 무작위로 섞어라.
    ★ 각 item 에는 정답 단어의 '한글 뜻'을 gloss 에 넣는다(해설에 뜻을 함께 보여주기 위함). 필수.
 
