@@ -204,7 +204,7 @@ def html_to_pdf(html_str: str, out_pdf, autofit: bool = True) -> None:
         # 하단 왼쪽=저작권, 하단 오른쪽=페이지 번호 (모든 페이지 반복)
         footer_template = (
             f'<div style="width:100%; box-sizing:border-box; '
-            f'padding:0 18mm; font-family:{_FOOTER_FONT}; font-size:8px; '
+            f'padding:0 18mm; font-family:{_FOOTER_FONT}; font-size:11px; '
             f'color:#000000; display:flex; justify-content:space-between; '
             f'align-items:center;">'
             f'<span>{FOOTER_TEXT}</span>'
