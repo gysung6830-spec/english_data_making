@@ -526,10 +526,13 @@ def _scramble(word: str, rng: random.Random) -> str:
     return " ".join(sc(t) for t in word.split())
 
 
-def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
-    """한 지문의 핵심 어휘(④)를 size개씩 묶어 학습지 '세트' 목록으로 만든다."""
-    items = [{"word": (v.word or "").strip(), "meaning": (v.meaning or "").strip()}
-             for v in report.vocab.items if (v.word or "").strip()]
+def _worksheet_sets_from_items(items: list[dict], size: int, rng: random.Random) -> list[dict]:
+    """(단어·뜻) 목록을 size개씩 묶어 학습지 '세트' 목록으로 만든다.
+
+    items: [{"word": ..., "meaning": ...}, ...]
+    """
+    items = [{"word": (g.get("word") or "").strip(), "meaning": (g.get("meaning") or "").strip()}
+             for g in items if (g.get("word") or "").strip()]
     sets: list[dict] = []
     for start in range(0, len(items), size):
         group = items[start:start + size]
@@ -555,30 +558,67 @@ def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
     return sets
 
 
-def render_worksheet_pdf(reports, out_path: str | Path,
-                         title: str = "단어 학습지", footer_note: str = "",
-                         set_size: int = 10, seed: int | None = None) -> Path:
-    """핵심 어휘를 10개씩 묶어, 세트마다 3가지 유형으로 익히는 학습지를 만든다.
+def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
+    """한 지문의 핵심 어휘(④)를 size개씩 묶어 학습지 '세트' 목록으로 만든다."""
+    items = [{"word": v.word, "meaning": v.meaning} for v in report.vocab.items]
+    return _worksheet_sets_from_items(items, size, rng)
 
-    세트(10개)마다 한 페이지를 차지한다.
+
+def _build_worksheet_sheets(vocab_lists: list[dict], set_size: int,
+                            seed: int | None) -> list[dict]:
+    """(제목·단어목록) 여러 개를 세트 단위 시트 목록으로 펼친다.
+
+    vocab_lists: [{"title": 제목, "items": [{"word","meaning"}, ...]}, ...]
     """
+    rng = random.Random(seed)
+    sheets: list[dict] = []
+    total = len(vocab_lists)
+    for i, vl in enumerate(vocab_lists, 1):
+        sets = _worksheet_sets_from_items(vl.get("items", []), set_size, rng)
+        for j, s in enumerate(sets, 1):
+            sheets.append({"passage_no": i, "passage_total": total,
+                           "title": vl.get("title", ""),
+                           "set_no": j, "set_total": len(sets), **s})
+    return sheets
+
+
+def _write_worksheet_pdf(sheets: list[dict], out_path: str | Path,
+                         title: str, footer_note: str) -> Path:
     from weasyprint import CSS, HTML
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    reps = _as_list(reports)
-    rng = random.Random(seed)
-    sheets: list[dict] = []
-    for i, rep in enumerate(reps, 1):
-        sets = _worksheet_sets_one(rep, set_size, rng)
-        for j, s in enumerate(sets, 1):
-            sheets.append({"passage_no": i, "passage_total": len(reps),
-                           "title": rep.title, "set_no": j, "set_total": len(sets), **s})
     tmpl = _env.get_template("worksheet.html.j2")
     html = tmpl.render(title=title, sheets=sheets, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
     HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
+
+
+def render_worksheet_pdf(reports, out_path: str | Path,
+                         title: str = "단어 학습지", footer_note: str = "",
+                         set_size: int = 10, seed: int | None = None) -> Path:
+    """분석 Report(들)의 핵심 어휘를 10개씩 묶어 5가지 유형으로 익히는 학습지를 만든다.
+
+    세트(10개)마다 한 페이지를 차지한다.
+    """
+    reps = _as_list(reports)
+    vocab_lists = [{"title": rep.title,
+                    "items": [{"word": v.word, "meaning": v.meaning} for v in rep.vocab.items]}
+                   for rep in reps]
+    sheets = _build_worksheet_sheets(vocab_lists, set_size, seed)
+    return _write_worksheet_pdf(sheets, out_path, title, footer_note)
+
+
+def render_worksheet_from_lists(vocab_lists: list[dict], out_path: str | Path,
+                                title: str = "단어 학습지", footer_note: str = "",
+                                set_size: int = 10, seed: int | None = None) -> Path:
+    """어휘 리스트(단어+뜻)만으로 곧바로 단어 학습지를 만든다(분석 Report 불필요).
+
+    vocab_lists: [{"title": 제목, "items": [{"word","meaning"}, ...]}, ...]
+    """
+    sheets = _build_worksheet_sheets(vocab_lists, set_size, seed)
+    return _write_worksheet_pdf(sheets, out_path, title, footer_note)
 
 
 def combine_pdfs(pdf_paths: list[Path], out_path: Path) -> Path:
