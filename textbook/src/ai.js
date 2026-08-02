@@ -55,15 +55,16 @@ const OUTPUT_SCHEMA = {
               properties: { label: { type: 'string' }, text: { type: 'string' } },
             },
           },
-          worked: { type: 'array', minItems: 2, items: sentenceSchema(true) },
-          practice: { type: 'array', items: sentenceSchema(false) },
+          traps: { type: 'array', items: { type: 'string' } },
+          worked: { type: 'array', minItems: 2, items: sentenceSchema() },
+          practice: { type: 'array', items: sentenceSchema() },
         },
       },
     },
   },
 };
 
-function sentenceSchema(withSteps) {
+function sentenceSchema() {
   const props = {
     src: { type: 'string' },
     en: { type: 'string' },
@@ -84,19 +85,10 @@ function sentenceSchema(withSteps) {
       },
     },
     catch: { type: 'string' },
+    // trap: 이 문장에서 자주 틀리는 해석 포인트 경고(문장별 맞춤)
+    trap: { type: 'string' },
   };
-  const required = ['src', 'en', 'chunks', 'vocab', 'catch'];
-  if (withSteps) {
-    props.steps = {
-      type: 'array', minItems: 1,
-      items: {
-        type: 'object', additionalProperties: false,
-        required: ['label', 'text'],
-        properties: { label: { type: 'string' }, text: { type: 'string' } },
-      },
-    };
-    required.push('steps');
-  }
+  const required = ['src', 'en', 'chunks', 'vocab', 'catch', 'trap'];
   return { type: 'object', additionalProperties: false, required, properties: props };
 }
 
@@ -109,21 +101,20 @@ function normalize(aiData) {
     intro: c.intro || [],
     signal: c.signal || [],
     method: (c.method || []).map((m) => [m.label, m.text]),
-    worked: (c.worked || []).map((s) => normSentence(s, true)),
-    practice: (c.practice || []).map((s) => normSentence(s, false)),
+    traps: Array.isArray(c.traps) ? c.traps : undefined,
+    worked: (c.worked || []).map(normSentence),
+    practice: (c.practice || []).map(normSentence),
   }));
 }
-function normSentence(s, withSteps) {
-  const out = {
+function normSentence(s) {
+  return {
     src: String(s.src || ''),
     en: s.en || '',
     chunks: (s.chunks || []).map((c) => [c.en, c.kor]),
     catch: s.catch || '',
     vocab: (s.vocab || []).map((v) => [v.word, v.mean]),
+    trap: s.trap || '',
   };
-  // worked 만 steps 를 가진다(practice 에 steps 가 있으면 validate 가 막음).
-  if (withSteps && Array.isArray(s.steps)) out.steps = s.steps.map((st) => [st.label, st.text]);
-  return out;
 }
 
 const SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '구문해석 교재' 데이터로 가공하는 편집자야.
@@ -138,11 +129,13 @@ ${CHAPTERS.map((c) => `- ${c.key}`).join('\n')}
 - vocab: 그 문장에서 학생이 모를 만한 단어 3~6개와 뜻.
 - catch: 이 문장에서 딱 이것만 이해하면 통과인 '핵심 뜻 한 줄'. 20~45자, 반말("~는 거야!"),
   문법 용어 쓰지 말고 내용 요약만. 세부(연도·기관명 등)는 압축.
-- steps(같이 풀어보기 worked 문장만): 뼈대(진짜 주어+동사)와 괄호(수식어)를 label/text 로 분석.
+- trap: 이 문장에서 학생이 '자주 틀리는 해석 포인트' 경고 한 줄(반말, "~하지 마 — ~로 읽어야 해").
+  반드시 그 문장에 실제로 있는 요소만 지적해(문장에 없는 단어를 예로 들지 마).
 
 챕터 규칙:
 - 각 챕터는 worked(같이 풀어보기) 2문장 이상 + practice(혼자 풀어보기) 나머지.
-- worked 에만 steps 를 넣고, practice 에는 steps 를 넣지 마.
+- worked·practice 모든 문장에 catch 와 trap 을 넣어.
+- traps: 그 챕터 문법에서 공통으로 조심할 함정 2~3개(문장 특정 단어에 얽매이지 않는 일반 주의)도 채워.
 - 문장이 하나도 없는 챕터는 categories 에서 빼.
 - title 은 원문자 번호(①②③…)를 문법 순서대로 유지해.
 - src 는 원문 문항 번호를 알 수 있으면 그 번호, 모르면 일련번호 문자열.
@@ -199,15 +192,14 @@ function mockStructure(sentences) {
       [words.slice(0, mid).join(' '), '(앞 덩어리 해석)'],
       [words.slice(mid).join(' '), '(뒤 덩어리 해석)'],
     ];
-    const s = {
+    return {
       src: String(o.idx),
       en: o.en,
       chunks,
       catch: '이 문장의 핵심을 한 줄로 잡아보는 거야!',
       vocab: [[words[0] || 'word', '(뜻)'], [words[mid] || 'word', '(뜻)']],
+      trap: '진짜 주어·동사를 먼저 찾고, 나머지는 꾸밈말로 걸러 읽어.',
     };
-    if (withSteps) s.steps = [['뼈대', '(주어+동사)'], ['괄호', '(수식어)']];
-    return s;
   };
 
   const categories = [];
@@ -219,9 +211,10 @@ function mockStructure(sentences) {
       title: ch.title,
       intro: [`'${ch.key}'가 뭔지 예문으로 감을 잡아보자.`, '겁먹지 말고 순서대로 따라와.'],
       signal: [`${ch.key}의 신호를 문장에서 찾아봐.`],
-      method: [['1단계', '덩어리로 끊는다.'], ['2단계', '앞에서부터 해석한다.'], ['한 단계 위', '뼈대와 수식어를 구분한다.']],
-      worked: items.slice(0, 2).map((o) => mkSentence(o, true)),
-      practice: items.slice(2).map((o) => mkSentence(o, false)),
+      method: [['1단계', '덩어리로 끊는다.'], ['2단계', '앞에서부터 해석한다.'], ['한 단계 위', '진짜 동사와 꾸밈말을 구분한다.']],
+      traps: [`'${ch.key}' 신호를 놓치지 마.`, '진짜 주어·동사를 먼저 찾고 나머지는 꾸밈말로 걸러.'],
+      worked: items.slice(0, 2).map((o) => mkSentence(o)),
+      practice: items.slice(2).map((o) => mkSentence(o)),
     });
   });
   return { categories };

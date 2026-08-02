@@ -25,6 +25,7 @@ const C = {
   plus: '#C0821F', plusBg: '#FBF3E0',
   goalBg: '#F7EED6', goalBar: '#D9A24A',
   tipBg: '#F2F3F4', tipBar: '#9aa0a6',
+  trapBg: '#FEF3E2', trapLine: '#F5D9AE', trapBar: '#E08A1E',
   line: '#e5e7eb', greenLine: '#CDE8CF',
 };
 
@@ -94,15 +95,6 @@ function sentHead(s, idx) {
   return `<div class="senth"><span class="sbadge">${idx}</span>
     <span class="sen">${esc(s.en)}</span><span class="stag">[${esc(s.src)}]</span></div>`;
 }
-function skeletonCard(steps) {
-  const body = (steps || []).map(([l, t]) => `<div class="sk"><b>${esc(l)}</b> ${esc(t)}</div>`).join('');
-  return gramCard('뼈대·괄호 분석', 'gram', body);
-}
-function skeletonBlank() {
-  return gramCard('뼈대·괄호 — 직접!', 'gram',
-    '<div class="sk">뼈대(진짜 주어+동사):</div><div class="ul"></div>'
-    + '<div class="sk">괄호(수식어):</div><div class="ul"></div>');
-}
 function writeCard() {
   return `<div class="gcard plus"><span class="pill plus">이 문장이 무슨 내용인 것 같아?</span>
     <div class="gbody"><div class="ul"></div><div class="ul"></div></div></div>`;
@@ -113,6 +105,17 @@ function catchCard(text) {
 function tipCard(text) {
   return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
 }
+// ⚠️ 함정 주의 — 이 문장에서 자주 틀리는 해석 포인트 경고.
+function trapCard(text) {
+  if (!text) return '';
+  return `<div class="callout trap"><span class="co-ic">⚠️ 이거 조심!</span> ${esc(text)}</div>`;
+}
+// 문장별 함정 문구 선택: 문장에 trap 이 있으면 그걸, 없으면 챕터 traps 를 순서대로 순환.
+function pickTrap(cat, s, i) {
+  if (s && s.trap) return s.trap;
+  const arr = cat && cat.traps;
+  return Array.isArray(arr) && arr.length ? arr[i % arr.length] : '';
+}
 
 // 문장별 어휘 리스트 — 끊어읽기 팁 바로 앞에 표시(그 문장에 나온 단어·뜻).
 function vocabInline(vocab) {
@@ -122,20 +125,20 @@ function vocabInline(vocab) {
   return `<div class="vinline"><span class="vic">📘 어휘</span>${items}</div>`;
 }
 
-function workedBlock(s, idx) {
+function workedBlock(s, idx, trap) {
   return `<div class="sblock">${sentHead(s, idx)}
     ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, true)}
-    ${skeletonCard(s.steps)}
+    ${trapCard(trap)}
     ${catchCard(s.catch)}</div>`;
 }
-function practiceBlock(s, idx) {
+function practiceBlock(s, idx, trap) {
   return `<div class="sblock">${sentHead(s, idx)}
     ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
     ${chunkLines(s.chunks, false)}
-    ${skeletonBlank()}${writeCard()}</div>`;
+    ${trapCard(trap)}${writeCard()}</div>`;
 }
 
 function chapterHtml(cat, chIndex) {
@@ -158,10 +161,10 @@ function chapterHtml(cat, chIndex) {
   h += (cat.method || []).map(([l, t], i) => gramCard(l, i === (cat.method.length - 1) ? 'plus' : 'key', esc(t))).join('');
   h += secHead(CIRCLED[3], '단어 완전정복', '지문에 나온 단어 · 뜻', 'green');
   h += vocabTable(cat);
-  h += secHead(CIRCLED[4], '같이 풀어보기', '쌤이랑 뼈대까지 같이 풀어보자', 'teal', true);
-  h += cat.worked.map((s, i) => workedBlock(s, i + 1)).join('');
-  h += secHead(CIRCLED[5], '혼자 풀어보기', '직접 끊고, 뼈대 찾고, 해석 써보기 · 정답은 맨 뒤', 'key', true);
-  h += cat.practice.map((s, i) => practiceBlock(s, i + 1)).join('');
+  h += secHead(CIRCLED[4], '같이 풀어보기', '쌤이랑 함정까지 같이 짚어보자', 'teal', true);
+  h += cat.worked.map((s, i) => workedBlock(s, i + 1, pickTrap(cat, s, i))).join('');
+  h += secHead(CIRCLED[5], '혼자 풀어보기', '직접 끊고, 함정 피하고, 해석 써보기 · 정답은 맨 뒤', 'key', true);
+  h += cat.practice.map((s, i) => practiceBlock(s, i + 1, pickTrap(cat, s, i))).join('');
   h += '</section>';
   return h;
 }
@@ -281,8 +284,10 @@ function css() {
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
   .callout.tip { background:${C.tipBg}; border-left:4px solid ${C.tipBar}; color:#555; }
+  .callout.trap { background:${C.trapBg}; border:1px solid ${C.trapLine}; border-left:4px solid ${C.trapBar}; color:#7a4a12; }
   .co-ic { font-weight:800; margin-right:6px; }
   .callout.catch .co-ic { color:${C.tealDark}; }
+  .callout.trap .co-ic { color:${C.trapBar}; }
   .cov-badges { margin-bottom:20px; }
   .ctitle { font-size:34px; font-weight:800; color:${C.ink}; margin-bottom:14px; }
   .csub { color:${C.teal}; font-weight:700; font-size:15px; margin-bottom:12px; }

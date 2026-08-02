@@ -3,7 +3,6 @@
 // 빌드 전에 data.js 를 검사해, 구조 오류를 조기에 잡는다.
 //  - worked.length === 2 (챕터당 정확히 2문장)
 //  - 모든 문장에 en / chunks / vocab / catch 가 비어있지 않아야 함
-//  - worked 문장은 steps 가 있어야 하고, practice 문장은 steps 가 없어야 함
 //  - title 에 원문자 번호(①~⑥ …)가 챕터 순서와 맞는지 경고
 //  - 초록 계열 색상 하드코딩 여부는 styles 에서 관리하므로 여기서는 다루지 않음
 
@@ -13,7 +12,7 @@ function nonEmptyStr(v) {
   return typeof v === 'string' && v.trim().length > 0;
 }
 
-function checkSentence(s, where, { requireSteps }) {
+function checkSentence(s, where) {
   const errs = [];
   if (!nonEmptyStr(s.src)) errs.push(`${where}: src 가 비어있음`);
   if (!nonEmptyStr(s.en)) errs.push(`${where}: en 이 비어있음`);
@@ -39,14 +38,6 @@ function checkSentence(s, where, { requireSteps }) {
   }
 
   if (!nonEmptyStr(s.catch)) errs.push(`${where}: catch 문구가 비어있음`);
-
-  if (requireSteps) {
-    if (!Array.isArray(s.steps) || s.steps.length === 0) {
-      errs.push(`${where}: worked 문장인데 steps 가 없음`);
-    }
-  } else if (Array.isArray(s.steps) && s.steps.length > 0) {
-    errs.push(`${where}: practice 문장에는 steps 가 없어야 함(학생이 직접 채우는 칸)`);
-  }
   return errs;
 }
 
@@ -84,13 +75,13 @@ function validateData(categories) {
       warnings.push(`[${tag}] worked ${cat.worked.length}개 중 앞 2개만 '같이 풀어보기', 나머지 ${cat.worked.length - 2}개는 '혼자 풀어보기'로 이동됨`);
     }
     (cat.worked || []).forEach((s, i) =>
-      errors.push(...checkSentence(s, `[${tag}] worked[${i}]`, { requireSteps: true })));
+      errors.push(...checkSentence(s, `[${tag}] worked[${i}]`)));
 
     if (!Array.isArray(cat.practice) || cat.practice.length === 0) {
       warnings.push(`[${tag}] practice 가 비어있음 — 정말 나머지 문장이 하나도 없는지 확인`);
     }
     (cat.practice || []).forEach((s, i) =>
-      errors.push(...checkSentence(s, `[${tag}] practice[${i}]`, { requireSteps: false })));
+      errors.push(...checkSentence(s, `[${tag}] practice[${i}]`)));
   });
 
   return { errors, warnings };

@@ -19,7 +19,7 @@ const SLASH = 'C0392B';      // 끊어읽기 화살표(→) — 붉은 계열
 // 박스별 배경(fill) / 테두리(border) / 글자(txt) — 명세 §5.2
 const VOCAB = { bg: 'EAF1FB', border: '5B7FA6', txt: '2C4A6E' }; // 📘 어휘
 const CHUNK = { bg: 'FBEFE0', border: BRASS, txt: '6B4A1E' };    // ✂ 끊어읽기
-const SKEL = { bg: 'ECEAF6', border: '7A5FA6', txt: '4B2E83' };  // 🦴 뼈대·괄호
+const TRAP = { bg: 'FEF3E2', border: 'E08A1E', label: 'B5651D', txt: '7A4A12' }; // ⚠️ 이거 조심(함정)
 const CATCH = { border: BRASS, txt: '5C3D00', label: '8A5A00' }; // ✅ 캐치
 const TIP = { bg: 'F0F0F0', border: '999999', txt: '555555' };   // 💡 팁
 const WRITE = { bg: 'FFFFFF', border: '333333' };                // ✏️ 내 해석 써보기
@@ -28,5 +28,5 @@ const UNDERLINE = 'AAAAAA';  // 빈 밑줄 색
 module.exports = {
   FONT, FONT_EN,
   NAVY, BRASS, LIGHTGRAY, CATCHBG, SLASH,
-  VOCAB, CHUNK, SKEL, CATCH, TIP, WRITE, UNDERLINE,
+  VOCAB, CHUNK, TRAP, CATCH, TIP, WRITE, UNDERLINE,
 };

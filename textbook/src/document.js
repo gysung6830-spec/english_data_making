@@ -17,10 +17,17 @@ function splitWorked(categories) {
   return categories.map((cat) => {
     const keepWorked = cat.worked.slice(0, 2);
     const moved = cat.worked.slice(2).map((w) => ({
-      src: w.src, en: w.en, chunks: w.chunks, catch: w.catch, vocab: w.vocab,
+      src: w.src, en: w.en, chunks: w.chunks, catch: w.catch, vocab: w.vocab, trap: w.trap,
     }));
     return { ...cat, worked: keepWorked, practice: [...moved, ...cat.practice] };
   });
+}
+
+// 문장별 함정 문구 선택: 문장에 trap 이 있으면 그걸, 없으면 챕터 traps 를 순환.
+function pickTrap(cat, s, i) {
+  if (s && s.trap) return s.trap;
+  const arr = cat && cat.traps;
+  return Array.isArray(arr) && arr.length ? arr[i % arr.length] : '';
 }
 
 // ── 표지 ─────────────────────────────────────────────
@@ -40,9 +47,9 @@ function coverParagraphs() {
     }),
     B.p('문법 용어가 낯설어도 괜찮아. 이 교재는 그런 너를 위해 만든 거야 — 순서대로만 따라오면 돼.'),
     B.bullet('챕터마다 순서는 이래: ① 이게 뭔지 쌤이 설명 → ② 어떻게 알아채는지(신호) → ③ 쌤이랑 같이 풀기(2문장) → ④ 너 혼자 풀어보기(나머지 전부)'),
-    B.bullet('문장마다 박스 순서는 이래: 어휘 → 끊어읽기(영어→한글) → 뼈대·괄호 → 이 정도는 캐치 → 왜 여기서 끊었는지 팁.'),
+    B.bullet('문장마다 박스 순서는 이래: 어휘 → 끊어읽기 팁 → 끊어읽기(영어→한글) → ⚠️ 이거 조심(함정) → 이 정도는 캐치.'),
     B.bullet('끊어읽기는 앞에서부터만 읽어, 뒤로 돌아가지 말고 — 그게 진짜 독해야. 영어 원문은 볼드로 크게 표시해뒀어.'),
-    B.bullet('연습문제는 뼈대·괄호 박스와 답 쓰는 칸이 비어있어. 직접 표시하고 써본 다음, 정답은 맨 뒤에서 확인해.'),
+    B.bullet('⚠️ 이거 조심 박스는 자주 틀리는 함정을 미리 알려줘 — 읽기 전에 꼭 체크해. 연습문제는 답 쓰는 칸이 비어있으니 직접 써보고, 정답은 맨 뒤에서 확인해.'),
     B.pageBreak(),
   ];
 }
@@ -67,26 +74,26 @@ function introSection(cat) {
 }
 
 // ── 문장 렌더 ────────────────────────────────────────
-// 순서: 어휘 → 끊어읽기 팁(어디서 끊을지) → 끊어읽기 → 뼈대·괄호 → (내 해석) → 캐치
-function renderWorked(w) {
+// 순서: 어휘 → 끊어읽기 팁(어디서 끊을지) → 끊어읽기 → 함정 주의 → (내 해석) → 캐치
+function renderWorked(w, trap) {
   return [
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
     ...B.tipBox(makeTip(w.chunks)),
     ...B.chunkBox(w.chunks),
-    ...B.skeletonBox(w.steps),
+    ...B.trapBox(trap),
     ...B.catchBox(w.catch),
   ];
 }
 // 연습문제: 한글 끊어읽기·캐치는 감추고(빈칸), 정답·해설은 맨 뒤 섹션으로 뺀다.
-function renderPractice(w, idx) {
+function renderPractice(w, idx, trap) {
   return [
     B.h3(`연습 ${idx + 1}`),
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
     ...B.tipBox(makeTip(w.chunks)),
     ...B.chunkBox(w.chunks, false),
-    ...B.skeletonBoxBlank(),
+    ...B.trapBox(trap),
     ...B.answerWriteBox(),
   ];
 }
@@ -97,10 +104,10 @@ function chapterParagraphs(cat) {
   // 같이 풀어보기 · 혼자 풀어보기는 각각 새 페이지에서 시작
   out.push(B.pageBreak());
   out.push(B.h2('같이 풀어보기'));
-  cat.worked.forEach((w) => out.push(...renderWorked(w)));
+  cat.worked.forEach((w, i) => out.push(...renderWorked(w, pickTrap(cat, w, i))));
   out.push(B.pageBreak());
   out.push(B.h2('혼자 풀어보기 (연습문제)'));
-  cat.practice.forEach((w, i) => out.push(...renderPractice(w, i)));
+  cat.practice.forEach((w, i) => out.push(...renderPractice(w, i, pickTrap(cat, w, i))));
   out.push(B.pageBreak());
   return out;
 }

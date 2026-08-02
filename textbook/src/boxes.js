@@ -127,29 +127,17 @@ function chunkBox(chunks, showKor = true) {
   ];
 }
 
-// 4a. 🦴 뼈대·괄호 박스 — worked (steps 표시)
-function skeletonBox(steps) {
-  const lines = steps.map(([label, text]) =>
-    new Paragraph({
-      spacing: { after: 50 },
-      children: [
-        new TextRun({ text: label + '  ', bold: true, size: 19, color: S.SKEL.txt, font: S.FONT }),
-        new TextRun({ text, size: 19, color: S.SKEL.txt, font: S.FONT }),
-      ],
-    }),
-  );
-  return [makeBox(S.SKEL.bg, S.SKEL.border, [boxLabel('🦴 뼈대 · 괄호', S.SKEL.txt), ...lines]), spacer()];
-}
-
-// 4b. 🦴 뼈대·괄호 박스 — practice (빈칸, 학생이 직접 표시)
-function skeletonBoxBlank() {
+// 4. ⚠️ 함정 주의 박스 — 이 문장에서 자주 틀리는 해석 경고 (worked·practice 공통)
+function trapBox(text) {
+  if (!text) return [];
   return [
-    makeBox(S.SKEL.bg, S.SKEL.border, [
-      boxLabel('🦴 뼈대 · 괄호 — 직접 표시해봐!', S.SKEL.txt),
-      new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: '뼈대(진짜 주어+동사):', size: 19, color: S.SKEL.txt, font: S.FONT })] }),
-      underlineRow(100),
-      new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: '괄호(수식어):', size: 19, color: S.SKEL.txt, font: S.FONT })] }),
-      underlineRow(40),
+    makeBox(S.TRAP.bg, S.TRAP.border, [
+      new Paragraph({
+        children: [
+          new TextRun({ text: '⚠️ 이거 조심!  ', bold: true, size: 19, color: S.TRAP.label, font: S.FONT }),
+          new TextRun({ text, size: 19, color: S.TRAP.txt, font: S.FONT }),
+        ],
+      }),
     ]),
     spacer(),
   ];
@@ -200,5 +188,5 @@ function tipBox(text) {
 module.exports = {
   pageBreak, spacer, p, bullet, h1, h2, h3,
   makeBox, boxLabel,
-  engHeader, vocabBox, chunkBox, skeletonBox, skeletonBoxBlank, answerWriteBox, catchBox, tipBox,
+  engHeader, vocabBox, chunkBox, trapBox, answerWriteBox, catchBox, tipBox,
 };
