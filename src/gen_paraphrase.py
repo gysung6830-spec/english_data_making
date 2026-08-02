@@ -82,21 +82,26 @@ def a_card(qn, typ, a, choices, src, ex=None, extra=""):
 
 def m_card(qn, rec):
     """근거 매칭 문제 — 정답 선지를 주고 그 근거 문장(A~D)을 고르게 한다."""
-    cands = rec.get("cands", [])
-    lis = "".join(f'<li><span class="num">{ABCD[j]}</span>{esc(c)}</li>'
-                  for j, c in enumerate(cands))
+    cands = rec.get("cands", []); ko = rec.get("cands_ko", [])
+    lis = ""
+    for j, c in enumerate(cands):
+        kr = f'<div class="chko">{esc(ko[j])}</div>' if j < len(ko) else ""
+        lis += f'<li><span class="num">{ABCD[j]}</span>{esc(c)}{kr}</li>'
     cite = f"평가원 {exam_label(rec.get('exam_id',''))} {rec.get('num','')}번"
+    ans_ko = rec.get("ans_ko", "")
+    ansko_html = f'<span class="chko" style="display:inline"> — {esc(ans_ko)}</span>' if ans_ko else ""
     return (f'<div class="q"><div class="qhead"><span class="qn">{esc(qn)}</span>'
             f'<span class="tp">{esc(rec.get("type",""))}</span>'
             f'<span class="ask">아래 <b>정답 선지</b>가 바꿔 말한 <b>근거 문장</b>은? (A~D)</span>'
             f'<span class="cite">{cite}</span></div>'
             f'<div class="src" style="background:#eef4f1;border-color:#cfe6dd">'
-            f'<b>정답 선지</b> — {esc(rec.get("answer_text",""))}</div>'
+            f'<b>정답 선지</b> — {esc(rec.get("answer_text",""))}{ansko_html}</div>'
             f'<ul class="ch">{lis}</ul></div>')
 
 def m_ans(qn, rec):
-    cands = rec.get("cands", []); evi = rec.get("evi", 0)
+    cands = rec.get("cands", []); evi = rec.get("evi", 0); ko = rec.get("cands_ko", [])
     ev = esc(cands[evi]) if evi < len(cands) else ""
+    ev_ko = f'<span class="evko"> — {esc(ko[evi])}</span>' if evi < len(ko) else ""
     maps = ""
     for m in rec.get("maps", []):
         maps += (f'<div class="m"><span class="bd">{esc(m.get("pat",""))}</span>'
@@ -106,7 +111,7 @@ def m_ans(qn, rec):
             f'<span class="cor">{ABCD[evi]}</span> '
             f'<span class="badge b-ok">{esc(rec.get("type",""))}</span> '
             f'<span class="src-mini">{exam_label(rec.get("exam_id",""))} {rec.get("num","")}번</span>'
-            f'<div class="src-ko">근거 문장 — {ev}</div>'
+            f'<div class="src-ko">근거 문장 — {ev}{ev_ko}</div>'
             f'<div class="dmap">{maps}</div>'
             f'<div class="rwhy" style="margin-top:4px">✓ {esc(rec.get("note",""))}</div></div>')
 
@@ -175,6 +180,8 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .band{ font-size:13.5px; font-weight:800; color:#fff; background:var(--deep); border-radius:6px; padding:5px 13px; margin:14px 0 9px; break-after:avoid; }
 .band small{ font-weight:600; opacity:.92; font-size:9.5px; }
 .band.real{ background:var(--deep-d); } .band.basic{ background:#5a6b64; } .band.match{ background:#2f6f8f; }
+.ch .chko{ display:block; font-size:8.7px; color:#5a636c; margin:1px 0 0 17px; }
+.ak .src-ko .evko{ font-weight:600; color:#2b4a3f; }
 .lead{ font-size:9.6px; color:#2b3a34; background:#eef4f1; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:7px 11px; margin-bottom:10px; }
 .lead b{ color:var(--deep-d); }
 .q{ border:1px solid var(--line); border-radius:7px; padding:10px 13px; margin-bottom:9px; break-inside:avoid; }
