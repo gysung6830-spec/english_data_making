@@ -85,14 +85,14 @@ function renderWorked(w, trap) {
     ...B.catchBox(w.catch),
   ];
 }
-// 연습문제: 한글 끊어읽기·캐치는 감추고(빈칸), 정답·해설은 맨 뒤 섹션으로 뺀다.
+// 연습문제: 초록 끊어읽기 카드는 빼고, 학생이 직접 끊어 읽고 해석을 쓰는 칸을 준다.
+// (끊어읽기 정답·캐치는 맨 뒤 정답·해설 섹션에서 확인)
 function renderPractice(w, idx, trap) {
   return [
     B.h3(`연습 ${idx + 1}`),
     B.engHeader(w.en, w.src),
     ...B.vocabBox(w.vocab),
     ...B.tipBox(makeTip(w.chunks)),
-    ...B.chunkBox(w.chunks, false),
     ...B.trapBox(trap),
     ...B.answerWriteBox(),
   ];

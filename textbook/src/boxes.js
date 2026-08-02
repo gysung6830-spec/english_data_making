@@ -147,7 +147,8 @@ function trapBox(text) {
 function answerWriteBox() {
   return [
     makeBox(S.WRITE.bg, S.WRITE.border, [
-      boxLabel('✏️ 이 문장이 무슨 내용인 것 같아?', S.WRITE.border),
+      boxLabel("✏️ 직접 ' / ' 로 끊고, 그 아래에 뜻을 적어봐", S.WRITE.border),
+      underlineRow(220),
       underlineRow(220),
       underlineRow(40),
     ]),

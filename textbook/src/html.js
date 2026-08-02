@@ -95,9 +95,17 @@ function sentHead(s, idx) {
   return `<div class="senth"><span class="sbadge">${idx}</span>
     <span class="sen">${esc(s.en)}</span><span class="stag">[${esc(s.src)}]</span></div>`;
 }
-function writeCard() {
-  return `<div class="gcard plus"><span class="pill plus">이 문장이 무슨 내용인 것 같아?</span>
-    <div class="gbody"><div class="ul"></div><div class="ul"></div></div></div>`;
+// ✏️ 직접 끊어 읽고 해석 쓰는 칸 (혼자 풀어보기 문제 쪽 — 초록 카드 대신)
+function answerWriteCard() {
+  return `<div class="writecard">
+    <div class="wc-h">✏️ 직접 ' / ' 로 끊고, 그 아래에 뜻을 적어봐</div>
+    <div class="wl"></div><div class="wl"></div></div>`;
+}
+// 해설 쪽 끊어읽기 — 초록 '문제' 카드가 아니라 담백한 해설 스타일(영어/한글).
+function chunkExplain(chunks) {
+  const rows = chunks.map((c) =>
+    `<div class="exrow"><span class="exen">${esc(c[0])}</span><span class="exko">${esc(c[1])}</span></div>`).join('');
+  return `<div class="excard"><div class="ex-h">끊어읽기 해석 (모범답안)</div>${rows}</div>`;
 }
 function catchCard(text) {
   return `<div class="callout catch"><span class="co-ic">✅ 이 정도는 캐치!</span> ${esc(text)}</div>`;
@@ -133,12 +141,44 @@ function workedBlock(s, idx, trap) {
     ${trapCard(trap)}
     ${catchCard(s.catch)}</div>`;
 }
-function practiceBlock(s, idx, trap) {
+// 혼자 풀어보기 — 문제 쪽(왼쪽 페이지): 영어 + 어휘 + 팁 + 함정 + 직접 쓰는 칸 (초록 카드 없음)
+function practiceProblem(s, idx, trap) {
   return `<div class="sblock">${sentHead(s, idx)}
     ${vocabInline(s.vocab)}
     ${tipCard(makeTip(s.chunks))}
-    ${chunkLines(s.chunks, false)}
-    ${trapCard(trap)}${writeCard()}</div>`;
+    ${trapCard(trap)}
+    ${answerWriteCard()}</div>`;
+}
+// 혼자 풀어보기 — 해설 쪽(오른쪽 페이지): 영어 + 모범 끊어읽기 + 캐치
+function practiceExplain(s, idx) {
+  return `<div class="sblock">${sentHead(s, idx)}
+    ${chunkExplain(s.chunks)}
+    ${catchCard(s.catch)}</div>`;
+}
+
+// 혼자 풀어보기를 '왼쪽=문제 / 오른쪽=해설' 펼침면으로 묶는다.
+// 한 펼침에 SPREAD_N 문제씩 — 양쪽이 각각 한 페이지에 넘치지 않고 들어가도록.
+const SPREAD_N = 3;
+function practiceSpreads(cat) {
+  const items = cat.practice || [];
+  let h = '';
+  for (let g = 0; g < items.length; g += SPREAD_N) {
+    const group = items.slice(g, g + SPREAD_N);
+    const from = g + 1; const to = g + group.length;
+    // 왼쪽(짝수/좌측 페이지): 문제
+    h += `<section class="probpage"><div class="pp-head"><span class="pp-badge">혼자 풀어보기 · 문제</span>
+      <span class="pp-range">${cat.key} ${from}–${to}번</span>
+      <span class="pp-hint">직접 끊어 읽고 해석을 써봐 · 오른쪽 페이지에서 맞춰보기</span></div>`;
+    group.forEach((s, k) => { h += practiceProblem(s, g + k + 1, pickTrap(cat, s, g + k)); });
+    h += '</section>';
+    // 오른쪽(홀수/우측 페이지): 해설
+    h += `<section class="solpage"><div class="sp-head"><span class="sp-badge">해설</span>
+      <span class="pp-range">${cat.key} ${from}–${to}번</span>
+      <span class="pp-hint">왼쪽 문제의 모범 끊어읽기와 핵심</span></div>`;
+    group.forEach((s, k) => { h += practiceExplain(s, g + k + 1); });
+    h += '</section>';
+  }
+  return h;
 }
 
 function chapterHtml(cat, chIndex) {
@@ -163,24 +203,9 @@ function chapterHtml(cat, chIndex) {
   h += vocabTable(cat);
   h += secHead(CIRCLED[4], '같이 풀어보기', '쌤이랑 함정까지 같이 짚어보자', 'teal', true);
   h += cat.worked.map((s, i) => workedBlock(s, i + 1, pickTrap(cat, s, i))).join('');
-  h += secHead(CIRCLED[5], '혼자 풀어보기', '직접 끊고, 함정 피하고, 해석 써보기 · 정답은 맨 뒤', 'key', true);
-  h += cat.practice.map((s, i) => practiceBlock(s, i + 1, pickTrap(cat, s, i))).join('');
   h += '</section>';
-  return h;
-}
-
-function answerHtml(cats) {
-  let h = `<section class="chapter answers"><div class="chhead"><span class="daypill">정답 · 해설</span></div>
-    <h1>정답 · 해설 — 혼자 풀어보기</h1>
-    <div class="chsub">직접 푼 걸 여기서 맞춰보자. 끊어읽기 정답과 이 문장에서 붙잡을 핵심을 정리했어.</div>`;
-  cats.forEach((cat, ci) => {
-    if (!cat.practice.length) return;
-    h += secHead(CIRCLED[ci] || (ci + 1), cat.key, null, 'teal');
-    h += cat.practice.map((s, i) => `<div class="sblock">
-      <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span><span class="stag">[${esc(s.src)}]</span></div>
-      ${chunkLines(s.chunks, true)}${catchCard(s.catch)}</div>`).join('');
-  });
-  h += '</section>';
+  // 혼자 풀어보기는 챕터 섹션 밖에서 '왼쪽 문제 / 오른쪽 해설' 펼침면으로.
+  h += practiceSpreads(cat);
   return h;
 }
 
@@ -201,7 +226,7 @@ function coverHtml(meta = {}) {
         <div class="ustep"><b>③</b> 해석하는 법을 보고</div>
         <div class="ustep"><b>④</b> 같이 풀고 → 혼자 풀기!</div>
       </div>
-      <p class="fine">끊어읽기는 앞에서부터만, 뒤로 돌아가지 말고. 정답은 맨 뒤에서 확인해.</p>
+      <p class="fine">끊어읽기는 앞에서부터만, 뒤로 돌아가지 말고. 혼자 풀어보기는 <b>왼쪽에서 직접 풀고, 오른쪽 페이지 해설</b>로 바로 맞춰봐.</p>
     </div>
   </section>`;
 }
@@ -281,6 +306,27 @@ function css() {
   .chtxt.ckor { font-size:12px; color:#333; }
   .sl { color:${C.green}; font-weight:800; padding:0 3px; }
   .chblank { flex:1; border-bottom:1px dashed #c3ccc6; height:15px; }
+  /* 혼자 풀어보기 펼침면 — 왼쪽 문제(짝수 페이지) / 오른쪽 해설(다음 페이지) */
+  .probpage { break-before: left; page-break-before: left; padding:2px; }
+  .solpage { break-before: page; page-break-before: always; padding:2px; }
+  .pp-head, .sp-head { display:flex; align-items:center; flex-wrap:wrap; gap:5px 10px;
+    margin-bottom:12px; padding-bottom:9px; border-bottom:2px solid ${C.teal}; }
+  .pp-badge { background:${C.key}; color:#fff; font-weight:800; font-size:11px; padding:3px 12px; border-radius:20px; }
+  .sp-badge { background:${C.tealDark}; color:#fff; font-weight:800; font-size:11px; padding:3px 12px; border-radius:20px; }
+  .pp-range { font-weight:800; font-size:15px; }
+  .pp-hint { color:${C.sub}; font-size:10px; }
+  /* 직접 쓰는 칸 */
+  .writecard { border:1px dashed #bcc6bf; border-radius:6px; padding:9px 12px 12px; margin:4px 0 10px; background:#fcfdfc; }
+  .wc-h { font-size:10.3px; color:${C.sub}; font-weight:700; margin-bottom:6px; }
+  .wl { border-bottom:1px solid #cacaca; height:18px; margin:10px 0; }
+  /* 해설 끊어읽기 (담백한 스타일 — 초록 '문제' 카드 아님) */
+  .excard { border:1px solid ${C.greenLine}; border-left:4px solid ${C.tealDark}; border-radius:6px;
+    padding:8px 12px; margin:4px 0 8px; background:#fbfdfb; }
+  .ex-h { font-size:9.5px; font-weight:800; color:${C.tealDark}; margin-bottom:6px; text-transform:none; }
+  .exrow { display:flex; gap:10px; padding:3px 0; border-top:1px dotted #e3ece4; }
+  .exrow:first-of-type { border-top:0; }
+  .exen { flex:1; font-weight:700; font-size:11.3px; }
+  .exko { flex:1; font-size:11px; color:#333; }
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
   .callout.tip { background:${C.tipBg}; border-left:4px solid ${C.tipBar}; color:#555; }
@@ -305,7 +351,7 @@ function css() {
 function buildHtml(rawCategories, meta = {}) {
   const cats = splitWorked(rawCategories);
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
-    + `<body>${coverHtml(meta)}${cats.map((c, i) => chapterHtml(c, i)).join('')}${answerHtml(cats)}</body></html>`;
+    + `<body>${coverHtml(meta)}${cats.map((c, i) => chapterHtml(c, i)).join('')}</body></html>`;
 }
 
 // HTML → PDF (Chromium 인쇄). playwright 가 없으면 명확한 에러.
