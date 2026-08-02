@@ -709,6 +709,22 @@ def main():
         for rng, title, fn in L["tests"]:
             to_pdf(render_vocab_test(rng, title, C), fn)
         to_pdf(render_comp_test(C, comp), f"{code}_테스트_{comp}_종합.pdf")
+
+    # ── 전체 합본: 학습플랜 + 1~20일차 (+ 맨 뒤 선생님용 정답 전체) ──
+    inner = render_month_plan()
+    for L in LESSONS:
+        C = L["C"]
+        for d in C.DAYS:
+            inner += "<div class='pagebreak'></div>" + render_day_student(d, C)
+        inner += "<div class='pagebreak'></div>" + render_review_day_student(C, L["comp"], L["review_no"], "금")
+    inner += "<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 전체 (학생에게 주기 전 분리)</span></div>"
+    inner += "<div style='font-weight:800;font-size:16.1px;margin-bottom:7px;'>✔ 1과·2과 숙제 · 선생님용 정답 전체</div>"
+    for L in LESSONS:
+        C = L["C"]
+        for d in C.DAYS:
+            inner += render_day_answer(d, C)
+    inner += "</div>"
+    to_pdf(inner, "00_전체합본_학습플랜+1-20일차.pdf", "전체 합본")
     print("완료! → tutoring_materials/output/")
 
 
