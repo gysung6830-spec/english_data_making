@@ -316,8 +316,9 @@ function css() {
   .chtxt.ckor { font-size:12px; color:#333; }
   .sl { color:${C.green}; font-weight:800; padding:0 3px; }
   .chblank { flex:1; border-bottom:1px dashed #c3ccc6; height:15px; }
-  /* 혼자 풀어보기 펼침면 — 왼쪽 문제(짝수 페이지) / 오른쪽 해설(다음 페이지) */
-  .probpage { break-before: left; page-break-before: left; padding:2px; }
+  /* 혼자 풀어보기 — 문제 3개 페이지 / 해설 3개 페이지를 그냥 번갈아 출력.
+     (좌/우 짝·홀 강제는 하지 않음 — 빈 페이지가 끼지 않도록 단순 페이지 나눔) */
+  .probpage { break-before: page; page-break-before: always; padding:2px; }
   .solpage { break-before: page; page-break-before: always; padding:2px; }
   .pp-head, .sp-head { display:flex; align-items:center; flex-wrap:wrap; gap:5px 10px;
     margin-bottom:12px; padding-bottom:9px; border-bottom:2px solid ${C.teal}; }
