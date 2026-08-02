@@ -50,6 +50,67 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                     words=[schemas.KeyWord(word="remember", meaning="기억하다")],
                 ),
             ]),
+            schemas.Sentence(
+                no=3,
+                english="Curiosity is essential because it can fuel motivation and creativity.",
+                translation="호기심은 동기와 창의성을 촉진할 수 있기에 필수적이다.",
+                chunks=[
+                    schemas.Chunk(
+                        english="Curiosity is essential",
+                        syntax="2형식(S+V+C)",
+                        korean="호기심은 필수적이다",
+                        words=[schemas.KeyWord(word="essential", meaning="필수적인")],
+                    ),
+                    schemas.Chunk(
+                        english="because it can fuel motivation and creativity",
+                        syntax="이유의 부사절(because)",
+                        korean="그것이 동기와 창의성을 촉진할 수 있기 때문에",
+                        words=[schemas.KeyWord(word="fuel", meaning="촉진하다, 연료를 대다"),
+                               schemas.KeyWord(word="motivation", meaning="동기"),
+                               schemas.KeyWord(word="creativity", meaning="창의성")],
+                    ),
+                ],
+            ),
+            schemas.Sentence(
+                no=4,
+                english="Teachers who encourage students to inquire help them retain and expand their knowledge.",
+                translation="학생들이 질문하도록 장려하는 교사는 학생들이 지식을 오래 기억하고 확장하도록 돕는다.",
+                chunks=[
+                    schemas.Chunk(
+                        english="Teachers who encourage students to inquire",
+                        syntax="관계대명사(who) + 5형식(encourage+O+to부정사)",
+                        korean="학생들이 질문하도록 장려하는 교사는",
+                        words=[schemas.KeyWord(word="encourage", meaning="장려하다"),
+                               schemas.KeyWord(word="inquire", meaning="질문하다, 탐구하다")],
+                    ),
+                    schemas.Chunk(
+                        english="help them retain and expand their knowledge",
+                        syntax="5형식(help+O+원형부정사)",
+                        korean="그들이 지식을 기억하고 확장하도록 돕는다",
+                        words=[schemas.KeyWord(word="retain", meaning="유지하다, 기억하다"),
+                               schemas.KeyWord(word="expand", meaning="확장하다")],
+                    ),
+                ],
+            ),
+            schemas.Sentence(
+                no=5,
+                english="When learners engage with real problems, they gain deeper insight.",
+                translation="학습자가 실제 문제에 몰두할 때, 그들은 더 깊은 통찰을 얻는다.",
+                chunks=[
+                    schemas.Chunk(
+                        english="When learners engage with real problems",
+                        syntax="시간의 부사절(when)",
+                        korean="학습자가 실제 문제에 몰두할 때",
+                        words=[schemas.KeyWord(word="engage", meaning="몰두하다")],
+                    ),
+                    schemas.Chunk(
+                        english="they gain deeper insight",
+                        syntax="비교급(deeper)",
+                        korean="그들은 더 깊은 통찰을 얻는다",
+                        words=[schemas.KeyWord(word="insight", meaning="통찰")],
+                    ),
+                ],
+            ),
         ]),
         grammar=schemas.GrammarSection(items=[
             schemas.GrammarItem(no=i, point=p, example=ex, explanation=exp, sentence_no=(i - 1) % 2 + 1)
@@ -73,14 +134,14 @@ def mock_report(title: str = "The Value of Curiosity", source: str = "Mock Reade
                 ("explore", "탐구하다", "investigate", "ignore", 1),
                 ("essential", "필수적인", "vital, crucial", "trivial", 3),
                 ("encourage", "장려하다", "promote", "discourage", 4),
-                ("fuel", "촉진하다, 연료를 대다", "stimulate", "hinder", 5),
-                ("retain", "유지하다, 기억하다", "keep", "lose", 2),
-                ("motivation", "동기", "drive", "apathy", 5),
-                ("creativity", "창의성", "originality", "conformity", 6),
+                ("fuel", "촉진하다, 연료를 대다", "stimulate", "hinder", 3),
+                ("retain", "유지하다, 기억하다", "keep", "lose", 4),
+                ("motivation", "동기", "drive", "apathy", 3),
+                ("creativity", "창의성", "originality", "conformity", 3),
                 ("inquire", "질문하다, 탐구하다", "ask", "answer", 4),
-                ("expand", "확장하다", "broaden", "shrink", 6),
-                ("engage", "몰두하다", "involve", "withdraw", 3),
-                ("insight", "통찰", "understanding", "confusion", 6),
+                ("expand", "확장하다", "broaden", "shrink", 4),
+                ("engage", "몰두하다", "involve", "withdraw", 5),
+                ("insight", "통찰", "understanding", "confusion", 5),
             ], start=1)
         ], english_summary=(
             "Curiosity is essential because it fuels motivation, helps students retain "
