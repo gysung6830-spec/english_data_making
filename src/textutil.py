@@ -118,12 +118,21 @@ def qno_label(source: str) -> str:
 
 
 def file_tag(name: str, maxlen: int = 16) -> str:
-    """파일명에서 뱃지에 쓸 '짧은 식별자'를 만든다(UUID 접두·확장자 제거, 길면 자름)."""
+    """파일명에서 뱃지에 쓸 '짧은 식별자'를 만든다.
+
+    UUID 접두·확장자 제거 후, 지문번호와 '중복되는 번호 토큰'(예: '30~40번', '30-40', '30번',
+    '문항 30')은 제거한다 → 뱃지가 '파일명 · 30번'에서 파일명이 또 '30~40번'이 되는 중복을 방지.
+    번호를 빼고 남는 설명이 없으면 빈 문자열을 돌려준다(그러면 뱃지는 지문번호만 표시).
+    """
     s = (name or "").strip()
     if not s:
         return ""
     base = _UUID_PREFIX.sub("", s)
     base = re.sub(r'\.[A-Za-z0-9]{1,5}$', "", base)      # 확장자 제거
+    # 번호 토큰 제거: '30~40번', '30-40번', '30~40', '30번', '문항 30' 등
+    base = re.sub(r'문항\s*\d+', " ", base)
+    base = re.sub(r'\d+\s*[~\-–]\s*\d+\s*번?', " ", base)
+    base = re.sub(r'(?<![A-Za-z])\d+\s*번', " ", base)
     base = re.sub(r'\s+', " ", base).strip(" _-")
     if len(base) > maxlen:
         base = base[:maxlen].rstrip(" _-") + "…"

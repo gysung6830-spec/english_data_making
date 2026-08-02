@@ -183,7 +183,7 @@ def _prose_subpack(pk, wtype: str):
     if not subs or not any(w.sentences for w in subs):
         return None
     return prose_render.ProsePack(header=pk.header, title=pk.title,
-                                  subtitle=pk.subtitle, worksheets=subs)
+                                  subtitle=pk.subtitle, worksheets=subs, label=pk.label)
 
 
 def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
