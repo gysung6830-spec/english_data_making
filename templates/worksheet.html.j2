@@ -101,28 +101,6 @@
       </div>
       {% endfor %}
     </div>
-
-    {% if sh.cloze %}
-    <!-- 유형⑥ 문맥 빈칸(Cloze) -->
-    <div class="ws-type">
-      <span class="ws-type-badge">유형 ⑥</span>
-      <span class="ws-type-title"><b>문맥 빈칸 채우기</b> — 지문 문장 속 단어 쓰기</span>
-      <span class="ws-type-ex">(뜻 힌트)</span>
-    </div>
-    <div class="ws-cloze">
-      {% for c in sh.cloze %}
-      <div class="ws-cloze-item">
-        <span class="ws-cloze-no">{{ c.n }}.</span>
-        <span class="ws-cloze-sent">{{ c.before }}<span class="ws-cloze-blank">{% for _ in range(c.blanks) %}_{% endfor %}</span>{{ c.after }}</span>
-        <span class="ws-cloze-hint">({{ c.meaning }})</span>
-      </div>
-      {% endfor %}
-      <div class="ws-akey">
-        <span class="ws-akey-label">유형 ⑥ 정답</span>
-        {% for c in sh.cloze %}<span class="ws-akey-item">{{ c.n }}. {{ c.answer }}</span>{% endfor %}
-      </div>
-    </div>
-    {% endif %}
     {% else %}
     <div class="wl-empty">학습지에 넣을 핵심 어휘가 없습니다.</div>
     {% endif %}

@@ -521,19 +521,3 @@ table.src2 th {
   background: var(--voc-bg); border: 1px solid #cfe0d4; border-radius: 5px;
   font-weight: 800; letter-spacing: 3px; color: #14532d; text-transform: lowercase;
 }
-
-/* 유형⑥ 문맥 빈칸(Cloze) */
-.ws-cloze { margin-top: 5px; }
-.ws-cloze-item { font-size: 11.5px; padding: 5px 0; line-height: 1.7; break-inside: avoid; }
-.ws-cloze-no { font-weight: 800; color: var(--muted); margin-right: 5px; }
-.ws-cloze-sent { color: #1f2937; }
-.ws-cloze-blank { color: #111827; font-weight: 800; letter-spacing: 1px; margin: 0 2px; }
-.ws-cloze-hint { color: var(--c-green); font-weight: 700; font-size: 10px; margin-left: 5px; }
-
-/* 유형⑥ 정답 스트립 */
-.ws-akey { margin-top: 7px; padding-top: 6px; border-top: 1px dashed var(--line); font-size: 9px; color: var(--muted); }
-.ws-akey-label {
-  display: inline-block; background: #111827; color: #fff; font-weight: 800;
-  padding: 1px 7px; border-radius: 3px; margin-right: 8px;
-}
-.ws-akey-item { margin-right: 10px; color: #4b5563; }

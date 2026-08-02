@@ -133,12 +133,7 @@ def test_worksheet_sets():
     # ⑤ anagram 데이터가 세트마다 채워짐
     assert len(first["anagram"]) == 10
     assert first["anagram"][0]["blanks"] == len(first["words"][0]["word"])
-    # ⑥ 문맥 빈칸: 지문 문장에 실제로 나온 단어만 포함(mock: curiosity/explore)
-    answers = {c["answer"] for c in first["cloze"]}
-    assert "curiosity" in answers and "explore" in answers
-    for c in first["cloze"]:
-        assert c["before"] or c["after"]   # 문장 문맥이 남아 있어야 함
-    print("PASS  단어 학습지 세트 구성(④⑤⑥ 포함)")
+    print("PASS  단어 학습지 세트 구성(④⑤ 포함)")
 
 
 def run_all():

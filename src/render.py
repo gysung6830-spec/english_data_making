@@ -490,7 +490,6 @@ def render_quiz_pdf(reports, out_path: str | Path,
 #   유형③ 뜻만 보고 영어 쓰기(첫 글자 힌트)
 #   유형④ 영어 보고 뜻 쓰기(양방향 암기)
 #   유형⑤ 철자 뒤섞기(Anagram) - 스펠링
-#   유형⑥ 문맥 빈칸(Cloze) - 지문 예문 속 단어 채우기 (+정답)
 # ---------------------------------------------------------------------------
 def _hint_segments(word: str) -> list[dict]:
     """첫 글자 힌트용 조각 목록.
@@ -527,41 +526,10 @@ def _scramble(word: str, rng: random.Random) -> str:
     return " ".join(sc(t) for t in word.split())
 
 
-def _sentence_text(sent) -> str:
-    """직독직해 문장의 원문 텍스트(없으면 chunk 들을 이어 붙여 복원)."""
-    if getattr(sent, "english", "").strip():
-        return sent.english.strip()
-    return " ".join((c.english or "").strip() for c in sent.chunks if (c.english or "").strip())
-
-
-def _find_cloze(word: str, sentences, sentence_no: int):
-    """단어가 실제로 나온 지문 문장을 찾아 (앞, 맞은부분, 뒤) 로 반환. 없으면 None.
-
-    매핑된 문장번호를 우선 탐색하고, 없으면 전체 문장에서 찾는다.
-    어미 변화(explore→explores/exploring)까지 넉넉히 매칭한다.
-    """
-    if not word:
-        return None
-    ordered = sorted(sentences, key=lambda s: 0 if s.no == sentence_no else 1)
-    esc = re.escape(word)
-    stem = re.escape(word[:-1]) if (len(word) > 3 and word.lower().endswith("e")) else esc
-    patterns = [re.compile(r"\b" + esc + r"\b", re.IGNORECASE),
-                re.compile(r"\b" + stem + r"[A-Za-z]*\b", re.IGNORECASE)]
-    for s in ordered:
-        text = _sentence_text(s)
-        for pat in patterns:
-            m = pat.search(text)
-            if m:
-                return text[:m.start()], m.group(0), text[m.end():]
-    return None
-
-
 def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
     """한 지문의 핵심 어휘(④)를 size개씩 묶어 학습지 '세트' 목록으로 만든다."""
-    items = [{"word": (v.word or "").strip(), "meaning": (v.meaning or "").strip(),
-              "sent_no": int(getattr(v, "sentence_no", 0) or 0)}
+    items = [{"word": (v.word or "").strip(), "meaning": (v.meaning or "").strip()}
              for v in report.vocab.items if (v.word or "").strip()]
-    sentences = list(report.literal.sentences)
     sets: list[dict] = []
     for start in range(0, len(items), size):
         group = items[start:start + size]
@@ -582,18 +550,8 @@ def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
         anagram = [{"n": w["n"], "meaning": w["meaning"],
                     "scrambled": _scramble(w["word"], rng),
                     "blanks": len(w["word"].replace(" ", ""))} for w in words]
-        # ⑥ 문맥 빈칸(Cloze): 단어가 실제로 나온 문장에서 그 단어만 빈칸 처리
-        cloze = []
-        for w, g in zip(words, group):
-            found = _find_cloze(g["word"], sentences, g["sent_no"])
-            if not found:
-                continue
-            before, matched, after = found
-            cloze.append({"n": len(cloze) + 1, "before": before, "after": after,
-                          "answer": g["word"], "meaning": w["meaning"],
-                          "blanks": max(len(matched.replace(" ", "")), 4)})
         sets.append({"words": words, "match": match, "type3": type3,
-                     "anagram": anagram, "cloze": cloze})
+                     "anagram": anagram})
     return sets
 
 
