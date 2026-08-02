@@ -483,6 +483,81 @@ def render_quiz_pdf(reports, out_path: str | Path,
     return out_path
 
 
+# ---------------------------------------------------------------------------
+# 단어 학습지 (같은 단어를 3가지 방법으로 익히는 암기용 학습지)
+#   유형① 소리 내어 읽으며 영어+뜻 두 번 쓰기
+#   유형② 줄 잇기(영어-뜻 연결)
+#   유형③ 뜻만 보고 영어 쓰기(첫 글자 힌트)
+# ---------------------------------------------------------------------------
+def _hint_segments(word: str) -> list[dict]:
+    """첫 글자 힌트용 조각 목록.
+
+    첫 단어는 '첫 글자 노출 + 나머지 글자 수만큼 빈칸', 뒤 단어(구phrase)는 전부 빈칸.
+    예) "mosquito" -> [{lead:'m', blanks:7}]
+        "give up"  -> [{lead:'g', blanks:3}, {lead:'', blanks:2}]
+    """
+    segs: list[dict] = []
+    for part in word.strip().split():
+        if not part:
+            continue
+        if not segs:
+            segs.append({"lead": part[0], "blanks": max(len(part) - 1, 0)})
+        else:
+            segs.append({"lead": "", "blanks": len(part)})
+    if not segs:
+        segs.append({"lead": "", "blanks": 0})
+    return segs
+
+
+def _worksheet_sets_one(report, size: int, rng: random.Random) -> list[dict]:
+    """한 지문의 핵심 어휘(④)를 size개씩 묶어 학습지 '세트' 목록으로 만든다."""
+    items = [{"word": (v.word or "").strip(), "meaning": (v.meaning or "").strip()}
+             for v in report.vocab.items if (v.word or "").strip()]
+    sets: list[dict] = []
+    for start in range(0, len(items), size):
+        group = items[start:start + size]
+        words = [{"n": i + 1, "word": g["word"], "meaning": g["meaning"]}
+                 for i, g in enumerate(group)]
+        # 줄잇기: 오른쪽 '뜻'을 섞어 배치(선을 그어 연결하게). 2개 이상이면 원래 순서와
+        # 완전히 같지 않도록 몇 번 시도한다.
+        shuffled = words[:]
+        for _ in range(5):
+            rng.shuffle(shuffled)
+            if len(words) < 2 or any(a["n"] != b["n"] for a, b in zip(words, shuffled)):
+                break
+        match = [{"left": w, "right": r} for w, r in zip(words, shuffled)]
+        type3 = [{"n": w["n"], "meaning": w["meaning"],
+                  "segments": _hint_segments(w["word"])} for w in words]
+        sets.append({"words": words, "match": match, "type3": type3})
+    return sets
+
+
+def render_worksheet_pdf(reports, out_path: str | Path,
+                         title: str = "단어 학습지", footer_note: str = "",
+                         set_size: int = 10, seed: int | None = None) -> Path:
+    """핵심 어휘를 10개씩 묶어, 세트마다 3가지 유형으로 익히는 학습지를 만든다.
+
+    세트(10개)마다 한 페이지를 차지한다.
+    """
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = _as_list(reports)
+    rng = random.Random(seed)
+    sheets: list[dict] = []
+    for i, rep in enumerate(reps, 1):
+        sets = _worksheet_sets_one(rep, set_size, rng)
+        for j, s in enumerate(sets, 1):
+            sheets.append({"passage_no": i, "passage_total": len(reps),
+                           "title": rep.title, "set_no": j, "set_total": len(sets), **s})
+    tmpl = _env.get_template("worksheet.html.j2")
+    html = tmpl.render(title=title, sheets=sheets, footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
 def combine_pdfs(pdf_paths: list[Path], out_path: Path) -> Path:
     """여러 지문 PDF 를 하나로 합친다 (pypdf 사용, 없으면 개별 유지)."""
     try:

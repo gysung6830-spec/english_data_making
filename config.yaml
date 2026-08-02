@@ -57,3 +57,4 @@ outputs:
   student: false      # 학생용 분석지(정답 빈칸) — 필요하면 true
   wordlist: true
   quiz: true
+  worksheet: true     # 단어 학습지(같은 단어를 ①쓰기 ②줄잇기 ③첫글자힌트 3가지로 익히기)

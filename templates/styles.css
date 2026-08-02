@@ -455,3 +455,56 @@ table.src2 th {
   font-size: 8.5px; font-weight: 800; border-radius: 50%;
   padding: 0 3px; margin: 0 4px 0 1px; vertical-align: middle;
 }
+
+/* ============================================================
+   단어 학습지 (Word Practice Worksheet) — 10개 단어 · 3유형
+   같은 단어를 ①쓰기 ②줄잇기 ③첫글자힌트 로 세 번 익힌다.
+   ============================================================ */
+.ws-head { border-bottom: 3px solid var(--c-green); }
+.ws-lead { font-size: 13px; margin-top: 3px; color: #1f2937; }
+.ws-lead b { color: var(--c-green); }
+.ws-lead-sub { font-size: 9.5px; color: var(--muted); font-weight: 600; margin-left: 6px; }
+.ws-meta { font-size: 10px; font-weight: 700; margin-top: 4px; color: #374151; }
+.ws-meta .ql { display: inline-block; min-width: 88px; border-bottom: 1px solid #9ca3af; }
+
+.ws-type { margin: 13px 0 5px; }
+.ws-type-badge {
+  display: inline-block; background: var(--c-green); color: #fff;
+  font-size: 10px; font-weight: 800; padding: 2px 10px; border-radius: 20px; margin-right: 7px;
+}
+.ws-type-title { font-size: 12px; font-weight: 700; color: #23272e; }
+.ws-type-title b { color: var(--c-green); }
+.ws-type-ex { font-size: 9px; color: var(--muted); margin-left: 5px; }
+
+/* 유형① 쓰기 표 */
+.t-ws1 { font-size: 11px; margin-top: 3px; table-layout: fixed; }
+.t-ws1 th { background: var(--voc); color: #fff; font-size: 10px; padding: 5px 8px; text-align: left; }
+.t-ws1 td { padding: 0 8px; border-bottom: 1px solid var(--line); height: 25px; vertical-align: middle; }
+.t-ws1 .ws-no { width: 24px; text-align: center; color: var(--muted); font-weight: 800; }
+.t-ws1 .ws-en { width: 116px; font-weight: 800; color: #111827; }
+.t-ws1 .ws-ko { width: 116px; color: #1f2937; }
+.t-ws1 .ws-write .ws-dots { display: block; border-bottom: 1px dotted #9aa3af; height: 0; }
+.t-ws1 tbody tr:nth-child(even) td { background: var(--voc-bg); }
+
+/* 유형② 줄잇기 */
+.ws-match { width: 100%; border-collapse: collapse; margin-top: 4px; table-layout: fixed; }
+.ws-match td { border: none; padding: 4.5px 0; font-size: 12px; }
+.ws-m-left { width: 40%; text-align: right; font-weight: 800; color: #111827; padding-right: 4px; }
+.ws-m-gap { width: 20%; }
+.ws-m-right { width: 40%; text-align: left; color: #1f2937; padding-left: 4px; }
+.ws-dot {
+  display: inline-block; width: 6px; height: 6px; border: 1.4px solid var(--c-green);
+  border-radius: 50%; vertical-align: middle;
+}
+.ws-m-left .ws-dot { margin-left: 8px; }
+.ws-m-right .ws-dot { margin-right: 8px; }
+
+/* 유형③ 첫 글자 힌트 */
+.ws-fill { columns: 2; column-gap: 28px; margin-top: 5px; }
+.ws-fill-item { break-inside: avoid; font-size: 12px; padding: 4px 0; }
+.ws-fill-q { color: #1f2937; }
+.ws-fill-arrow { color: var(--c-green); font-weight: 800; margin: 0 6px; }
+.ws-fill-a { white-space: nowrap; }
+.ws-lead-letter { font-weight: 800; color: #111827; font-size: 13px; }
+.ws-blank-letter { color: #111827; margin-left: 5px; letter-spacing: 1px; }
+.ws-word-gap { display: inline-block; width: 12px; }

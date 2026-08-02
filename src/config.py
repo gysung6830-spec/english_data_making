@@ -52,6 +52,7 @@ class OutputsCfg:
     analysis: bool = True
     wordlist: bool = True
     quiz: bool = True
+    worksheet: bool = True  # 단어 학습지(같은 단어 3가지 방법으로 익히기)
     student: bool = False   # 학생용(정답 빈칸) 분석지
 
 
@@ -117,6 +118,7 @@ def load_config(path: str | Path | None = None) -> Config:
             analysis=bool(outputs.get("analysis", True)),
             wordlist=bool(outputs.get("wordlist", True)),
             quiz=bool(outputs.get("quiz", True)),
+            worksheet=bool(outputs.get("worksheet", True)),
             student=bool(outputs.get("student", False)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,

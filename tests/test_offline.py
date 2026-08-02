@@ -108,12 +108,35 @@ def test_render_html():
     print("PASS  HTML 렌더링")
 
 
+# ---- 6. 단어 학습지 세트 구성 (API 없이) ----------------------------------
+def test_worksheet_sets():
+    from samples.sample_mock import mock_report
+    import random
+
+    rep = mock_report()
+    sets = render._worksheet_sets_one(rep, size=10, rng=random.Random(0))
+    # 어휘 12개 -> 10개 + 2개 = 2세트
+    assert len(sets) == 2
+    assert len(sets[0]["words"]) == 10 and len(sets[1]["words"]) == 2
+    # 줄잇기: 왼쪽(영어)·오른쪽(뜻)이 세트 크기만큼, 첫 세트는 순서가 섞였는지 확인
+    first = sets[0]
+    assert len(first["match"]) == 10
+    assert any(m["left"]["n"] != m["right"]["n"] for m in first["match"])
+    # 첫 글자 힌트: 첫 글자 노출 + 나머지 빈칸 수
+    seg = render._hint_segments("mosquito")
+    assert seg == [{"lead": "m", "blanks": 7}]
+    seg2 = render._hint_segments("give up")
+    assert seg2 == [{"lead": "g", "blanks": 3}, {"lead": "", "blanks": 2}]
+    print("PASS  단어 학습지 세트 구성")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
     test_vocab_count_range()
     test_retry_recovers()
     test_render_html()
+    test_worksheet_sets()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

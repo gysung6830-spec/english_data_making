@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>단어 학습지</title></head>
+<body>
+  {% for sh in sheets %}
+  <div class="ws-sheet{{ ' pgbreak' if not loop.first }}">
+    <div class="doc-header ws-head">
+      <span class="doc-badge">Word Practice</span>
+      {% if sh.passage_total > 1 %}<span class="passage-tag">지문 {{ sh.passage_no }} / {{ sh.passage_total }}</span>{% endif %}
+      {% if sh.set_total > 1 %}<span class="passage-tag">세트 {{ sh.set_no }} / {{ sh.set_total }}</span>{% endif %}
+      <div class="doc-title">{{ sh.title }}</div>
+      <div class="ws-lead"><b>오늘의 단어 {{ sh.words|length }}개 · 3가지로 익히기</b>
+        <span class="ws-lead-sub">같은 단어를 방법을 바꿔 세 번! 이게 진짜 암기법이야</span></div>
+      <div class="ws-meta">이름 <span class="ql">&nbsp;</span>　　날짜 <span class="ql">&nbsp;</span></div>
+    </div>
+
+    {% if sh.words %}
+    <!-- 유형① 소리 내어 읽으며 영어+뜻 두 번 쓰기 -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ①</span>
+      <span class="ws-type-title">소리 내어 읽으며 <b>영어와 뜻을 함께 두 번 쓰기</b></span>
+      <span class="ws-type-ex">(예: mosquito 모기)</span>
+    </div>
+    <table class="grid t-ws1">
+      <thead><tr>
+        <th class="ws-no">#</th><th class="ws-en">영어</th><th class="ws-ko">뜻</th>
+        <th class="ws-write">1회 (영어+뜻)</th><th class="ws-write">2회 (영어+뜻)</th>
+      </tr></thead>
+      <tbody>
+      {% for w in sh.words %}
+        <tr>
+          <td class="ws-no">{{ w.n }}</td>
+          <td class="ws-en">{{ w.word }}</td>
+          <td class="ws-ko">{{ w.meaning }}</td>
+          <td class="ws-write"><span class="ws-dots"></span></td>
+          <td class="ws-write"><span class="ws-dots"></span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- 유형② 줄 잇기 -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ②</span>
+      <span class="ws-type-title"><b>줄 잇기</b> — 영어와 알맞은 뜻을 선으로 연결</span>
+    </div>
+    <table class="ws-match">
+      {% for m in sh.match %}
+      <tr>
+        <td class="ws-m-left">{{ m.left.word }}<span class="ws-dot"></span></td>
+        <td class="ws-m-gap"></td>
+        <td class="ws-m-right"><span class="ws-dot"></span>{{ m.right.meaning }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <!-- 유형③ 뜻만 보고 영어 쓰기 -->
+    <div class="ws-type">
+      <span class="ws-type-badge">유형 ③</span>
+      <span class="ws-type-title"><b>뜻만 보고 영어 쓰기</b></span>
+      <span class="ws-type-ex">(첫 글자 힌트)</span>
+    </div>
+    <div class="ws-fill">
+      {% for t in sh.type3 %}
+      <div class="ws-fill-item">
+        <span class="ws-fill-q">{{ t.n }}. {{ t.meaning }}</span>
+        <span class="ws-fill-arrow">→</span>
+        <span class="ws-fill-a">{% for s in t.segments %}{% if s.lead %}<span class="ws-lead-letter">{{ s.lead }}</span>{% endif %}{% for _ in range(s.blanks) %}<span class="ws-blank-letter">_</span>{% endfor %}{% if not loop.last %}<span class="ws-word-gap"></span>{% endif %}{% endfor %}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="wl-empty">학습지에 넣을 핵심 어휘가 없습니다.</div>
+    {% endif %}
+
+    {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</body>
+</html>

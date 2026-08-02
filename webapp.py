@@ -88,7 +88,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)·PDF·HWP를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)·PDF·HWP를 올리면, 분석지·어휘 리스트·영단어 시험지·단어 학습지를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
@@ -110,7 +110,7 @@ INDEX_HTML = """
 
       <label>③ 저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
       <input type=text name=basename placeholder="예: 2027수능특강_16강">
-      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
+      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b> · <b>(지문명)_단어학습지</b></div>
 
       <label>④ 시작 문항번호 <span class=hint>(예: 31 — 지문마다 1씩 자동 증가. 비우면 원본 번호/순번 사용)</span></label>
       <input type=text name=start_no placeholder="예: 31" inputmode=numeric>
@@ -121,6 +121,7 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
       <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
+      <label class=chk><input type=checkbox name=out_worksheet value=1 checked> 🧩 단어 학습지 (①쓰기·②줄잇기·③첫글자힌트로 암기)</label>
 
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
@@ -245,9 +246,11 @@ def analyze_route():
         student=bool(request.form.get("out_student")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
+        worksheet=bool(request.form.get("out_worksheet")),
     )
-    if not (which.analysis or which.student or which.wordlist or which.quiz):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    if not (which.analysis or which.student or which.wordlist
+            or which.quiz or which.worksheet):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False, worksheet=False)
 
     # 브랜드 문구(직독직해 made by ~). config 값 사용(기본 비어 있음).
     brand = cfg.design.brand

@@ -143,6 +143,11 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
         recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
 
+    if getattr(sel, "worksheet", False):
+        p = cfg.output_dir / f"{stem}_단어학습지.pdf"
+        render.render_worksheet_pdf(reports, p, title=f"{title} — 단어 학습지", footer_note=fn)
+        recs.append({"kind": "worksheet", "label": "🧩 단어 학습지", "path": p})
+
     return recs
 
 
