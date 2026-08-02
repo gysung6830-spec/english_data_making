@@ -49,7 +49,8 @@ class PassageSet(BaseModel):
 # ---------------------------------------------------------------------------
 class SummarySection(BaseModel):
     overall: str          # 지문의 주제를 담은 한 문장
-    theme_en: str = ""    # 자료 제목용 영어 주제구(짧은 명사구, 예: "The Value of Failure")
+    theme_ko: str = ""    # 자료 제목용 한글 주제구(예: "소유가 많아질수록 공유를 덜하게 되는 인간의 경향")
+    theme_en: str = ""    # theme_ko 를 지문 속 영어 단어로 옮긴 영어 주제구(한글과 매칭)
     keywords: list[str] = Field(default_factory=list)  # overall 문장 속 핵심 키워드(강조 표시용)
 
 

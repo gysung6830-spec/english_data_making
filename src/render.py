@@ -135,6 +135,26 @@ def _split_blocks(text: str | None) -> list[str]:
 _env.filters["split_blocks"] = _split_blocks
 
 
+def _implicit_map(exam):
+    """출제 포인트의 '함축의미' 블록을 {문장번호: [블록,...]} 로 정리(직독직해 표에 통합용)."""
+    out: dict[int, list[str]] = {}
+    if not exam:
+        return out
+    for e in exam.items:
+        if "함축" in (e.question_type or ""):
+            for block in re.split(r"\n\s*\n", (e.content or "").strip()):
+                block = block.strip()
+                if not block:
+                    continue
+                m = re.match(r"\s*(\d+)\s*문장", block)
+                key = int(m.group(1)) if m else 0
+                out.setdefault(key, []).append(block)
+    return out
+
+
+_env.filters["implicit_map"] = _implicit_map
+
+
 # 매칭 시 무시할 기능어(내용어만 남겨 어구를 정확히 찾기 위함)
 _STOP_WORDS = {
     "the", "a", "an", "of", "in", "on", "at", "to", "is", "are", "was", "were",
