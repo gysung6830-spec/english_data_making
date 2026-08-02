@@ -146,33 +146,80 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
         raise ValueError("출제 문항이 하나도 없습니다(모든 문장의 questions 가 비어 있음).")
 
 
+_VERB_MAX_RATIO = 0.40   # 동사 문항은 지문 전체 문항의 40% 이하 (균등 분배 A)
+
+
+def _cap_verb_questions(parsed: list[dict]) -> None:
+    """동사 문항이 전체의 40%를 넘으면 초과분을 '되돌린다'(un-ask).
+
+    되돌리기 = en_template 의 해당 {{pid}} 를 정답 단어로 치환해 문장을 원래대로 복원하고
+    그 문항을 제거한다(문장에서 단어가 사라지지 않게). 동사 문항이 많은 문장부터 덜어낸다.
+    """
+    import math
+
+    total = sum(len(p["pairs"]) for p in parsed)
+    # 문항이 적으면(지문 규모가 작으면) 비율 상한은 의미가 없으므로 적용하지 않는다.
+    if total < 5:
+        return
+    verb_pairs = [(pi, qi) for pi, p in enumerate(parsed)
+                  for qi, (_pid, src) in enumerate(p["pairs"]) if src.type == "verb"]
+    verb = len(verb_pairs)
+    if verb <= _VERB_MAX_RATIO * total:
+        return
+    d = math.ceil((verb - _VERB_MAX_RATIO * total) / (1 - _VERB_MAX_RATIO))
+    vcount: dict[int, int] = {}
+    for pi, _ in verb_pairs:
+        vcount[pi] = vcount.get(pi, 0) + 1
+    # 동사가 많은 문장의 동사부터 제거(고르게 분산)
+    order_rm = sorted(verb_pairs, key=lambda x: (-vcount[x[0]], x[0], x[1]))
+    remove = set(order_rm[:d])
+    for pi, p in enumerate(parsed):
+        keep = []
+        for qi, (pid, src) in enumerate(p["pairs"]):
+            if (pi, qi) in remove:
+                p["en"] = p["en"].replace("{{" + pid + "}}", src.answer)  # 단어 복원
+            else:
+                keep.append((pid, src))
+        p["pairs"] = keep
+
+
 def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
-    """검증된 LLM 응답에 전역 연속 번호를 채우고 total 을 집계해 렌더용 Workbook 생성."""
+    """검증된 LLM 응답에 전역 연속 번호를 채우고 total 을 집계해 렌더용 Workbook 생성.
+
+    채번 전에 동사 문항 40% 상한을 적용(균등 분배 A)한다.
+    """
     validate_llm_workbook(llm)
-    sentences: list[Sentence] = []
-    counter = 0
+    # 1) 문장별 (pid, src) 쌍 수집
+    parsed: list[dict] = []
     for s in llm.sentences:
         order = placeholders_in(s.en_template)
-        # 출제할 요소가 없는 문장(questions 비어 있음)이라도 '읽기용'으로 그대로 싣는다
-        # (지문 문장을 절대 누락하지 않기 위해). 단, 자리표시자만 있고 questions 가 없어
-        # 렌더가 불가능한 (드문) 경우에만 건너뛴다.
         if not s.questions:
-            if order:
-                continue
-            sentences.append(Sentence(no=s.no, en_template=s.en_template, ko=s.ko, questions=[]))
+            parsed.append({"no": s.no, "en": s.en_template, "ko": s.ko, "pairs": []})
             continue
-        # en_template 의 자리표시자 등장 순서대로 채번(위첨자 번호가 문장 흐름과 일치).
         by_id = {q.id: q for q in s.questions}
-        # id 라벨이 정확히 일치하면 그 매핑을, 아니면(개수만 맞는 경우) '등장 순서'로 정렬한다.
         if set(order) == set(by_id) and len(order) == len(s.questions):
             pairs = [(pid, by_id[pid]) for pid in order]
         else:
-            pairs = list(zip(order, s.questions))   # 자리표시자 순서 ↔ questions 순서
+            pairs = list(zip(order, s.questions))
+        parsed.append({"no": s.no, "en": s.en_template, "ko": s.ko, "pairs": pairs})
+
+    # 2) 동사 40% 상한 적용(초과분 un-ask)
+    _cap_verb_questions(parsed)
+
+    # 3) 전역 채번 + Sentence 생성
+    sentences: list[Sentence] = []
+    counter = 0
+    for p in parsed:
+        if not p["pairs"]:
+            # 문항이 없고 자리표시자만 남아 렌더 불가한 경우만 건너뛴다(그 외엔 읽기용으로 싣는다).
+            if placeholders_in(p["en"]):
+                continue
+            sentences.append(Sentence(no=p["no"], en_template=p["en"], ko=p["ko"], questions=[]))
+            continue
         qs: list[Question] = []
-        for pid, src in pairs:
+        for pid, src in p["pairs"]:
             counter += 1
-            # Question.id 는 '자리표시자 문자열'로 둔다 → 렌더가 {{pid}} 를 정확히 치환.
             qs.append(Question(id=pid, type=src.type, display=src.display,
                                answer=src.answer, reason=src.reason, num=counter))
-        sentences.append(Sentence(no=s.no, en_template=s.en_template, ko=s.ko, questions=qs))
+        sentences.append(Sentence(no=p["no"], en_template=p["en"], ko=p["ko"], questions=qs))
     return Workbook(title=title, subtitle=subtitle, sentences=sentences, total=counter)

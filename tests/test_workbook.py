@@ -207,6 +207,28 @@ def test_section_split():
     print("PASS  문제/정답 분리(section q/a)")
 
 
+def test_verb_ratio_cap():
+    # 동사 8 + 다른유형 2 = 80% → 40% 이하로 낮추고, 되돌린 동사는 문장에 단어로 복원
+    def Q(i, t):
+        return ws.LLMQuestion(id=f"Q{i}", type=t,
+                              display=("(x)" if t == "verb" else "[a/b]"),
+                              answer=f"W{i}", reason="r")
+    s1 = ws.LLMSentence(no=1, en_template="a {{Q1}} b {{Q2}} c {{Q3}} d {{Q4}} e {{Q5}} f {{Q6}}.",
+                        ko="k", questions=[Q(1, "verb"), Q(2, "verb"), Q(3, "verb"),
+                                           Q(4, "verb"), Q(5, "verb"), Q(6, "rel")])
+    s2 = ws.LLMSentence(no=2, en_template="g {{Q7}} h {{Q8}} i {{Q9}} j {{Q10}}.",
+                        ko="k", questions=[Q(7, "verb"), Q(8, "verb"), Q(9, "verb"), Q(10, "conj")])
+    wb = ws.build_workbook(ws.LLMWorkbook(sentences=[s1, s2]), title="T", subtitle="S")
+    nverb = sum(1 for q in wb.all_questions if q.type == "verb")
+    assert nverb <= 0.4 * wb.total                 # 동사 40% 이하
+    # 되돌린 동사는 자리표시자가 아니라 정답 단어로 복원(문장에 단어가 남음)
+    import re as _re
+    for s in wb.sentences:
+        ph = set(ws.placeholders_in(s.en_template))
+        assert ph == set(q.id for q in s.questions)   # 남은 자리표시자 = 남은 문항 (고아 없음)
+    print("PASS  동사 40% 상한(초과분 되돌리기)")
+
+
 def run_all():
     test_placeholder_mismatch_tolerated()
     test_id_mismatch_repair()
@@ -218,6 +240,7 @@ def run_all():
     test_multi_passage_layout()
     test_show_ko_flag()
     test_section_split()
+    test_verb_ratio_cap()
     print("\n통합 워크북 오프라인 테스트 통과 ✅")
 
 
