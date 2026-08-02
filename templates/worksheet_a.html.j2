@@ -402,13 +402,15 @@
                   {%- if has_role %}<span class="over">{% if t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
                   {%- set _a = t.above or '' -%}{%- set _n = t.note or '' -%}
                   {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
-                  <span class="w{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if t.color %} {{ t.color }}{% endif %}{% if is_vocab %} vu{% endif %}{% endif %}">{{ t.text | replace('(','') | replace(')','') }}</span>
-                  {# 아래: 어법 번호 / 유의어·반의어 / 오답 (학생용 blank/slash 는 숨김) #}
-                  {# 아래 주석: (X) 오답형은 어법 Point 박스에 이미 있으므로 본문에선 생략(중복 회색글자 제거) #}
-                  {%- if s_gram and (t.above or t.note) -%}
+                  {# 빨강 어법 글자색(t.color)은 학생용에도 항상 표시. 형광·밑줄·유의어는 s_gram 때만. #}
+                  <span class="w{% if t.color %} {{ t.color }}{% endif %}{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if is_vocab %} vu{% endif %}{% endif %}">{{ t.text | replace('(','') | replace(')','') }}</span>
+                  {# 아래: 어법 원문자 번호(빨강)는 학생용에도 표시 / 유의어·반의어·해석힌트는 s_gram 때만.
+                     (X) 오답형은 어법 Point 박스에 있으므로 본문에선 생략. #}
+                  {%- set _redmark = t.note and t.note_kind == 'red' -%}
+                  {%- if (s_gram and (t.above or t.note)) or _redmark -%}
                   <span class="unders">
-                    {%- if t.above %}<span class="ann {{ 'syn' if t.above.startswith('=') else 'ant' }}">{{ t.above }}</span>{% endif -%}
-                    {%- if t.note %}<span class="ann {% if t.note_kind == 'red' %}red{% elif t.note.startswith('=') %}syn{% elif t.note.startswith('↔') %}ant{% else %}gray{% endif %}">{{ t.note }}</span>{% endif -%}
+                    {%- if s_gram and t.above %}<span class="ann {{ 'syn' if t.above.startswith('=') else 'ant' }}">{{ t.above }}</span>{% endif -%}
+                    {%- if t.note and (_redmark or s_gram) %}<span class="ann {% if t.note_kind == 'red' %}red{% elif t.note.startswith('=') %}syn{% elif t.note.startswith('↔') %}ant{% else %}gray{% endif %}">{{ t.note }}</span>{% endif -%}
                   </span>
                   {%- endif -%}
                 </span>
