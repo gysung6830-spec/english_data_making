@@ -179,15 +179,18 @@ def analyze_prompt(text: str, index: int, strength: str, hints: list[str]) -> st
         "쉬운 영어 한 문장(gloss_en)과 한글 한 문장(gloss_ko)으로 '병기'. 아니면 둘 다 빈 문자열.\n"
         "- badge: 서술형 출제 후보면 '서'. (빈출은 뱃지 대신 노란 형광 hl='y' 로 표시)\n"
         "- 끊어읽기(직독직해): 영어와 한글의 '끊는 지점'이 정확히 1:1 이어야 합니다.\n"
-        "    · slash: 각 의미 단위의 '마지막 토큰'에 slash=true 로 영어 끊어읽기 경계(/)를 표시.\n"
-        "    · reading_ko: '배열(list)'입니다. slash 로 나눈 '영어 조각마다 정확히 한 개'의 한글 직독직해를 "
-        "같은 순서로 담으세요. 즉 배열 길이 = slash 개수(=영어 조각 수), i번째 원소 = i번째 영어 조각의 해석.\n"
+        "    · slash 는 조각과 조각 '사이'에만 찍습니다. 즉 의미 단위의 마지막 토큰에 slash=true 를 표시하되, "
+        "'문장 맨 끝' 토큰에는 slash 를 찍지 마세요(끝에는 경계가 없습니다). N개 조각 → slash 는 N-1개.\n"
+        "    · reading_ko: '배열(list)'입니다. 영어 조각마다 정확히 한 개의 한글 직독직해를 같은 순서로 담으세요. "
+        "즉 배열 길이 = 영어 조각 수 = slash 개수 + 1, i번째 원소 = i번째 영어 조각의 해석.\n"
         "    · ⚠️ 한글을 영어보다 '더 잘게' 쪼개지 마세요. 접속사·부사(그러나·왜냐하면·그래서·즉 등) 뒤에서 임의로 "
         "더 끊지 말고, 오직 영어 slash 경계에서만 끊습니다. 한 영어 조각 안의 접속사는 그 조각의 한글에 함께 넣으세요.\n"
+        "    · 조각은 너무 잘게 쪼개지 말고 '의미 덩어리(주어부/동사구/목적어/전치사구/절)' 단위로, 한 문장에 3~6조각 정도가 "
+        "자연스럽습니다. 각 한글 조각은 그 자체로 읽어서 뜻이 통하도록 자연스럽게 옮기세요(어색한 직역·토막 금지).\n"
         "      예: 영어 3조각 [\"Certain nomadic tribes don't have much,\", \"yet they are happy to share\", "
-        "\"because it is in their interest to do so.\"] → reading_ko(3개) "
+        "\"because it is in their interest to do so.\"] (slash 2개) → reading_ko(3개) "
         "[\"어떤 유목 부족들은 가진 것이 많지 않다\", \"그러나 그들은 기꺼이 나눈다\", \"왜냐하면 그렇게 하는 것이 그들에게 이익이기 때문이다\"].\n"
-        "    · 제출 전, 영어 slash 개수와 reading_ko 배열 길이가 같은지 스스로 확인하세요.\n"
+        "    · 제출 전, (영어 slash 개수 + 1)과 reading_ko 배열 길이가 같은지, 문장 끝에 slash 가 없는지 스스로 확인하세요.\n"
         "    · translation(온전한 해석)과 달리 reading_ko 는 어순대로 끊어 읽는 해석입니다.\n"
     )
 
@@ -236,8 +239,26 @@ def _merge_trailing_punct(lines: list[list[Token]]) -> list[list[Token]]:
     return lines
 
 
+def _strip_trailing_slash(lines: list[list[Token]]) -> list[list[Token]]:
+    """문장 '맨 끝' 토큰의 slash 를 제거한다.
+
+    LLM 에게 '각 의미 단위의 마지막 토큰에 slash' 규칙을 주면 문장의 마지막 조각
+    끝에도 slash 를 찍어 '...on taste /' 처럼 무의미한 끝 슬래시가 생긴다.
+    끊어읽기 경계는 조각과 조각 '사이'에만 있어야 하므로(N조각 → N-1 경계)
+    마지막 토큰의 slash 는 항상 잘라낸다. 이렇게 하면 영어 조각 수와 한글 조각
+    수 계산도 두 관습(사이-only / 마지막-토큰) 모두에서 일관되게 맞아떨어진다.
+    """
+    toks = [t for ln in lines for t in ln]
+    if toks and toks[-1].slash:
+        toks[-1].slash = False
+    return lines
+
+
 def _english_chunk_count(lines: list[list[Token]]) -> int:
-    """영어 끊어읽기 조각 수 = slash 경계 수(마지막 조각에 slash 없으면 +1)."""
+    """영어 끊어읽기 조각 수 = 조각 사이 slash 경계 수 + 1.
+
+    (마지막 토큰의 slash 는 _strip_trailing_slash 로 이미 제거된 상태를 가정.)
+    """
     toks = [t for ln in lines for t in ln]
     if not toks:
         return 0
@@ -261,6 +282,7 @@ def _to_sentence(index: int, sa: SentenceAnalysis) -> Sentence:
     # LLM 이 여러 줄로 쪼개 보내도 한 줄로 펼쳐 자연스럽게 흐르게(화면 폭에 맞춰 자동 줄바꿈).
     flat = [_tok(t) for ln in sa.lines for t in ln.tokens]
     lines = _merge_trailing_punct([flat]) if flat else []
+    lines = _strip_trailing_slash(lines)   # 문장 끝의 무의미한 '/' 제거
     if not lines:  # LLM 이 lines 를 비우면 원문을 통째로 한 줄로
         lines = [[Token(text=sa.translation or "")]]
     reading = getattr(sa, "reading_ko", []) or []
