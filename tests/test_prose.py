@@ -76,6 +76,22 @@ def test_id_mismatch_order():
     _check("id 불일치시 등장 순서 정렬(P1,P2)", ids == ["P1", "P2"])
 
 
+def test_ref_safeguard():
+    # 지칭: 정답이 보기에 없으면 출제오류이므로 자동 제외, '앞 문장'은 유지
+    bad = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="x", ko="y", ref_template="They {{P1}} go.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ a / b / c ]", answer="zzz")])])
+    r = next(w for w in pr.build_prose_pack(bad, header="H", title="T", subtitle="S").worksheets
+             if w.wtype == "ref")
+    _check("정답이 보기에 없으면 문항 제외", len(r.sentences[0].items) == 0)
+    ok = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="x", ko="y", ref_template="This {{P1}} matters.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ 앞 문장 / a / b ]", answer="앞 문장")])])
+    r2 = next(w for w in pr.build_prose_pack(ok, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref")
+    _check("앞 문장 정답 유지", r2.sentences[0].items[0].answer == "앞 문장")
+
+
 def test_render_html():
     pack = mock_prose_pack(title="샘플", header="[샘플]")
     html = pr.render_prose_html(pack)
@@ -100,6 +116,7 @@ if __name__ == "__main__":
     test_form_write_flag()
     test_translate_no_items()
     test_id_mismatch_order()
+    test_ref_safeguard()
     test_render_html()
     test_show_ko_flag()
     print("\n단일 유형 산문 워크시트 오프라인 테스트 통과 ✅")

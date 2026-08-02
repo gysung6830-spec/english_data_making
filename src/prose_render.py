@@ -101,6 +101,16 @@ _WORKSHEET_DEFS = [
 ]
 
 
+def _ref_answer_in_display(answer: str, display: str) -> bool:
+    """지칭 문항의 정답이 보기('= [ A / B / C ]') 안에 실제로 있는지 확인(출제 오류 방지)."""
+    a = (answer or "").strip()
+    if not a:
+        return False
+    inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
+    cands = [c.strip() for c in inside.split("/")]
+    return a in cands
+
+
 def _align(order: list[str], items: list[LLMProseItem]):
     """자리표시자(등장 순서) ↔ items 매핑. id 가 맞으면 그 매핑을, 아니면 순서대로."""
     by_id = {it.id: it for it in items}
@@ -120,6 +130,10 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write,
                         gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
+        if wtype == "ref":
+            # 안전장치: 지칭 정답이 보기 안에 없으면(출제 오류 소지) 그 문항을 버린다.
+            #   남은 자리표시자는 렌더에서 제거되어 문장은 그대로 보인다.
+            pitems = [it for it in pitems if _ref_answer_in_display(it.answer, it.display)]
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
 
