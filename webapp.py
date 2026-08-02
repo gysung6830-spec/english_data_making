@@ -390,7 +390,23 @@ def reedit_route():
     results = []
     for idx, f in enumerate(files, start=1):
         try:
-            data = json.load(f.stream)
+            if Path(f.filename).suffix.lower() != ".json":
+                raise ValueError(
+                    "‘제목수정용 데이터(.json)’ 파일만 올릴 수 있습니다. "
+                    "결과 PDF가 아니라, 분석 결과와 함께 받은 .json 파일을 올려 주세요."
+                )
+            raw = f.stream.read()
+            try:
+                text = raw.decode("utf-8-sig")  # BOM 있어도 처리
+            except UnicodeDecodeError:
+                raise ValueError(
+                    "이 파일은 텍스트(.json)가 아닙니다(PDF·이미지 등으로 보임). "
+                    "분석 결과와 함께 받은 ‘🔁 제목수정용 데이터(.json)’를 올려 주세요."
+                )
+            try:
+                data = json.loads(text)
+            except json.JSONDecodeError:
+                raise ValueError("제목수정용 데이터(.json)를 읽을 수 없습니다(형식 오류).")
             reports = [schemas.Report.model_validate(d) for d in data.get("reports", [])]
             if not reports:
                 raise ValueError("제목수정용 데이터에 분석 결과가 없습니다(.json 파일이 맞는지 확인).")
