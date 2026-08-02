@@ -19,6 +19,21 @@ _env = Environment(
     autoescape=select_autoescape(["html", "xml", "j2"]),
 )
 
+# 나눔스퀘어라운드 @font-face(임베드). WeasyPrint 는 외부 스타일시트로 넘긴
+# @font-face 를 적용하지 않으므로(폴백 발생), HTML <head> 에 인라인 <style> 로
+# 직접 주입해야 한다. 아래 헬퍼로 모든 렌더 HTML 에 삽입한다.
+_FONT_FACE_CSS = (TEMPLATE_DIR / "fonts.css").read_text(encoding="utf-8")
+
+
+def _with_fonts(html: str) -> str:
+    """렌더 직전 HTML 에 @font-face 인라인 <style> 을 주입한다."""
+    style = "<style>" + _FONT_FACE_CSS + "</style>"
+    if "</head>" in html:
+        return html.replace("</head>", style + "</head>", 1)
+    if "<body" in html:
+        return html.replace("<body", style + "<body", 1)
+    return style + html
+
 # 특히 중요한 핵심 어법 키워드 (부각 표시용)
 KEY_GRAMMAR = ["관계", "분사", "가정법", "비교", "도치", "강조", "5형식", "5 형식", "사역", "지각"]
 
@@ -305,7 +320,7 @@ def _fit_report(report, footer_note, css, min_vocab: int, brand: str = "",
         # 분석지 부분만으로 판정(앞의 원문+해석 모음 제외)
         html = render_html([rep], footer_note, brand, with_source=False,
                            student=student, source_label=source_label)
-        return len(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
+        return len(HTML(string=_with_fonts(html), base_url=str(TEMPLATE_DIR)).render(stylesheets=[css]).pages)
 
     if pages(report) <= 2:
         return report
@@ -344,7 +359,7 @@ def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab,
     def build(rs, with_source):
         html = render_html(rs, footer_note, brand, with_source=with_source,
                            student=student, source_label=source_label)
-        return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
+        return HTML(string=_with_fonts(html), base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
     # 분석지 부분만으로 페이지 판정(앞의 원문+해석 모음은 제외)
     if fit_pages:
@@ -453,7 +468,7 @@ def render_wordlist_pdf(reports, out_path: str | Path,
     tmpl = _env.get_template("wordlist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    HTML(string=_with_fonts(html), base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
 
 
@@ -479,7 +494,7 @@ def render_quiz_pdf(reports, out_path: str | Path,
     tmpl = _env.get_template("quiz.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    HTML(string=_with_fonts(html), base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
 
 
@@ -591,7 +606,7 @@ def _write_worksheet_pdf(sheets: list[dict], out_path: str | Path,
     tmpl = _env.get_template("worksheet.html.j2")
     html = tmpl.render(title=title, sheets=sheets, footer_note=footer_note)
     css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    HTML(string=_with_fonts(html), base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
     return out_path
 
 
