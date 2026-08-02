@@ -313,14 +313,16 @@ def cumulative_review(day_idx, C):
 
 
 # ── 하루치 학생용 ────────────────────────────────────────────
-def render_day_student(d, C):
+def render_day_student(d, C, slot=None, weekday=None):
     idx = d["day"]
+    disp = slot or d["day"]
+    wd = weekday or d["weekday"]
     g = d["grammar"]
     P = []
     # 헤더
     P.append(f"""
     <div class="head">
-      <div class="top"><span class="badge">{idx}일차 · {esc(d['weekday'])}요일 숙제</span>
+      <div class="top"><span class="badge">{disp}일차 · {esc(wd)}요일 숙제</span>
         <span class="src">{esc(C.SOURCE)}<br>{esc(d['part'])}</span></div>
       <div class="body">
         <div class="title"><span class="k">{esc(d['title_en'])}</span> — {esc(d['title_ko'])}</div>
@@ -533,43 +535,44 @@ def render_cover(C, title, sub, days_span, review_no, tests_line):
     </div>"""
 
 
-def render_month_plan():
-    def cell(d):
-        return (f"<td class='day'><div class='dh'>{d['day']}일 · {esc(d['weekday'])}</div>"
-                f"<div class='gm'>{esc(d['title_en'])}</div>"
-                f"<div class='tk'>{esc(d['title_ko'])}<br>문법: {esc(d['goal_title'].split(':')[0].split('(')[0].strip())}</div></td>")
-    w1 = "".join(cell(d) for d in L1.DAYS if d["week"] == 1)
-    w2 = "".join(cell(d) for d in L1.DAYS if d["week"] == 2)
-    w2 += ("<td class='day'><div class='dh'>10일 · 금</div><div class='gm'>Review</div>"
-           "<div class='tk'>1과 총복습<br>+ 단어·종합 테스트</div></td>")
-    w3 = "".join(cell(d) for d in L2.DAYS if d["week"] == 3)
-    w4 = "".join(cell(d) for d in L2.DAYS if d["week"] == 4)
-    w4 += ("<td class='day'><div class='dh'>20일 · 금</div><div class='gm'>Review</div>"
-           "<div class='tk'>2과 총복습<br>+ 단어·종합 테스트</div></td>")
+def render_month_plan(schedule):
+    def cell(e):
+        wd = "월화수목금"[(e["slot"]-1)%5]
+        if e["kind"] == "content":
+            d = e["day"]
+            return (f"<td class='day'><div class='dh'>{e['slot']}일 · {wd}</div>"
+                    f"<div class='gm'>{esc(d['title_en'])}</div>"
+                    f"<div class='tk'>{esc(d['title_ko'])}<br>문법: {esc(d['goal_title'].split(':')[0].split('(')[0].strip())}</div></td>")
+        color = ACCENT2 if e["kind"] == "test" else ACCENT
+        tag = "종합 테스트" if e["kind"] == "test" else "복습"
+        label = e.get("title") or (e.get("comp", "") + " 실전")
+        return (f"<td class='day' style='background:{WARM if e['kind']=='test' else SOFT}'>"
+                f"<div class='dh'>{e['slot']}일 · {wd}</div>"
+                f"<div class='gm' style='color:{color}'>{esc(tag)}</div>"
+                f"<div class='tk'>{esc(label)}</div></td>")
+    rows = ""
+    for w in range(6):
+        cells = "".join(cell(e) for e in schedule[w*5:w*5+5])
+        rows += f"<tr><td class='wk'>{w+1}주차</td>{cells}</tr>"
     return f"""
     <div style="text-align:center;margin-bottom:8px;">
       <div style="display:inline-block;border:2px solid {ACCENT};color:{ACCENT};font-weight:800;padding:3px 12px;border-radius:20px;font-size:12.6px;">중등 기초 브릿지</div>
-      <div style="font-size:23.0px;font-weight:800;margin-top:8px;">한 달 학습 플랜 · 교과서 1과 &amp; 2과</div>
+      <div style="font-size:23.0px;font-weight:800;margin-top:8px;">한 달(30일) 학습 플랜 · 교과서 1과 &amp; 2과</div>
       <div style="font-size:11.5px;color:#7d918c;margin-top:2px;">2022 개정 천재(강상구) 공통영어2 · 고1 2학기 내신 대비</div>
     </div>
     <table class="plan">
-      <tr><th style="width:56px;">주차</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th></tr>
-      <tr><td class="wk">1주차<br><span style='font-size:9.2px;color:#93a7a2'>1과 전반</span></td>{w1}</tr>
-      <tr><td class="wk">2주차<br><span style='font-size:9.2px;color:#93a7a2'>1과 후반</span></td>{w2}</tr>
-      <tr><td class="wk">3주차<br><span style='font-size:9.2px;color:#93a7a2'>2과 전반</span></td>{w3}</tr>
-      <tr><td class="wk">4주차<br><span style='font-size:9.2px;color:#93a7a2'>2과 후반</span></td>{w4}</tr>
+      <tr><th style="width:52px;">주차</th><th>1일</th><th>2일</th><th>3일</th><th>4일</th><th>5일</th></tr>
+      {rows}
     </table>
-    <div class="box"><div class="bt">▪ 매일 학습 루틴 (하루 20분 정도)</div>
-      <span class="chip">① 지문 내용 확인(참/거짓)</span><span class="chip">② 단어 3가지(영어+뜻·줄잇기·영작)</span>
-      <span class="chip">③ 문법 기초부터 쉽게</span><span class="chip">④ 직독직해(전 문장)</span><span class="chip">⑤ 문장 4개 순서 영작</span>
-      <div class="legend">읽기만으로는 안 외워져요. <b>손으로 쓰고, 스스로 생각하게</b> 만든 구성이에요. 틀린 단어는 그 자리에서 3번 더 쓰기.</div></div>
-    <div class="box"><div class="bt">▪ 반복(누적 복습) 시스템 — 모든 문장을 여러 번</div>
-      <div class="legend">· <b>매일</b> : ‘지난 단어 다시보기’(어제·그제 단어) + ‘직독직해’로 그날 <b>모든 문장</b> 확인.<br>
-        · <b>매주 금요일</b> : 그 주 단어 전체 <b>단어 테스트</b>.<br>
-        · <b>2주마다(10·20일차)</b> : 한 과가 끝나면 <b>총복습 + 종합 테스트</b>로 총점검.<br>
-        · 한 달이면 1과 57문장 + 2과 52문장, <b>모든 문장</b>을 직독직해로 다루고 반복하게 됩니다.</div></div>
-    <div class="box"><div class="bt">▪ 진도 체크</div>
-      <div class="legend">1주차 □□□□□ · 2주차 □□□□□(+1과 종합) · 3주차 □□□□□ · 4주차 □□□□□(+2과 종합)</div></div>"""
+    <div class="box"><div class="bt">▪ 30일 구성 (하루 20분 · 월~금 6주)</div>
+      <div class="legend">· <b>1~9일</b> 1과 학습 → <b>10·11일</b> 1과 복습 → <b>12일</b> 1과 종합 테스트<br>
+        · <b>13~21일</b> 2과 학습 → <b>22·23일</b> 2과 복습 → <b>24일</b> 2과 종합 테스트<br>
+        · <b>25~28일</b> 1·2과 통합 복습 → <b>29일</b> 통합 실전 테스트 → <b>30일</b> 최종 마무리<br>
+        · 1과 57문장 + 2과 52문장 <b>전 문장</b>을 직독직해로 다루고, 복습으로 <b>여러 번</b> 반복합니다.</div></div>
+    <div class="box"><div class="bt">▪ 매일 학습 루틴</div>
+      <span class="chip">① 지문 내용 참/거짓(심화)</span><span class="chip">② 단어 3가지</span>
+      <span class="chip">③ 문법 기초부터</span><span class="chip">④ 직독직해(전 문장)</span><span class="chip">⑤ 문장 4개 영작</span>
+      <div class="legend">틀린 단어·문장은 그 자리에서 다시 쓰기. 복습일엔 <b>누적 단어·직독직해·심화 참/거짓</b>으로 총점검.</div></div>"""
 
 
 # ── 단어 테스트 ─────────────────────────────────────────────
@@ -605,21 +608,21 @@ def render_vocab_test(day_range, title, C):
 
 
 # ── 종합 테스트 (과별 자동 생성) ────────────────────────────
-def render_comp_test(C, comp):
-    flat = [(en, ko) for d in C.DAYS for en, ko in d["words"]]
+def render_comp_test(days, comp):
+    flat = [(en, ko) for d in days for en, ko in d["words"]]
     e2k = flat[0::9][:10]
     k2e = [(ko, en) for en, ko in flat[4::9][:10]]
     grammar = []
-    for d in C.DAYS:
+    for d in days:
         q, a = d["practice"][0]
         grammar.append((q, a, d["goal_title"].split(":")[0].split("(")[0].strip()))
     grammar = grammar[:10]
     if len(grammar) < 10:
-        d0 = C.DAYS[0]; q, a = d0["practice"][1]
+        d0 = days[0]; q, a = d0["practice"][1]
         grammar.append((q, a, d0["goal_title"].split(":")[0].strip()))
-    tsrc = [C.DAYS[i] for i in (1, 3, 5, 6, 8)]
+    n=len(days); tsrc = [days[int(i*(n-1)/4)] for i in range(5)]
     translate = [(d["memorize"][0][0], d["memorize"][0][2].replace(" / ", " ")) for d in tsrc]
-    rday = C.DAYS[4]
+    rday = days[n//2]
     reading = " ".join(en for en, ko in rday["sentences"][:3])
     rq = [(q, "참" if v else "거짓") for q, v in rday["tf"]]
 
@@ -657,6 +660,62 @@ def render_comp_test(C, comp):
     return top + s1 + s2 + s3 + s4 + ans
 
 
+# ── 복습일 (누적 단어 + 문법 + 직독직해 + 심화 참/거짓) ─────────
+def render_review_range(slot, weekday, title, src_days, foot_C, intro):
+    words = [(en, ko) for d in src_days for en, ko in d["words"]]
+    if len(words) > 40:
+        step = len(words) / 40.0
+        words = [words[int(i*step)] for i in range(40)]
+    # STEP1 단어: 뜻 → 영어 쓰기
+    half = (len(words) + 1)//2
+    def wcol(items, start):
+        rows="".join(f"<tr><td class='num'>{start+j}</td><td>{esc(ko)}</td>"
+                     f"<td><span class='writeline' style='min-width:120px'></span></td></tr>" for j,(en,ko) in enumerate(items))
+        return f"<td style='width:50%;vertical-align:top;padding:0 6px;'><table class='vtab' style='width:100%'>{rows}</table></td>"
+    wtab=f"<table style='width:100%'><tr>{wcol(words[:half],1)}{wcol(words[half:],half+1)}</tr></table>"
+    # STEP2 문법
+    grows="".join(f"<tr><td class='num'>{i}</td><td class='w'>{esc(d['title_en'])}</td>"
+                  f"<td><b>{esc(d['goal_title'].split(':')[0].split('(')[0].strip())}</b></td>"
+                  f"<td class='k' style='width:auto;font-size:10.6px'>{bold(d['gnote'])}</td></tr>"
+                  for i,d in enumerate(src_days,1))
+    # STEP3 직독직해 (각 지문 2문장씩, 최대 12)
+    reads=[]
+    for d in src_days:
+        for en,ko in d["sentences"][:2]:
+            reads.append((en,ko))
+    reads=reads[:12]
+    rrows="".join(f"<tr><td class='rn'>{i}</td><td class='re'>{esc(en)}</td><td class='rk'>{esc(ko)}</td></tr>"
+                  for i,(en,ko) in enumerate(reads,1))
+    # STEP4 심화 참/거짓 (각 지문 2개, 최대 10)
+    tfs=[]
+    for d in src_days:
+        for q,v in d["tf"][:2]:
+            tfs.append((q,v))
+    tfs=tfs[:10]
+    tfrows="".join(f"<div class='row'><span class='qn'>{i}</span><span class='qt'>{esc(q)}</span>"
+                   f"<span class='ox'><span>참</span> <span>거짓</span></span></div>" for i,(q,v) in enumerate(tfs,1))
+    # 정답
+    wans=" · ".join(f"{esc(ko)}=<b>{esc(en)}</b>" for en,ko in words)
+    tfans=", ".join(f"{i}.<b>{'참' if v else '거짓'}</b>" for i,(q,v) in enumerate(tfs,1))
+    body=f"""
+    <div class="head"><div class="top"><span class="badge">{slot}일차 · {esc(weekday)}요일 · 복습</span>
+        <span class="src">{esc(foot_C.SOURCE)}<br>누적 복습</span></div>
+      <div class="body"><div class="title"><span class="k">복습</span> — {esc(title)}</div></div></div>
+    <div class="saem"><span class="tag">{esc(foot_C.TEACHER)}</span>{bold(intro)}</div>
+    <div class="sec"><div class="h"><span class="n">1</span><span class="t">단어 다시보기 · 뜻 보고 영어 쓰기</span><span class="rep">반복 {len(words)}개</span></div>{wtab}</div>
+    <div class="sec pagebreak"><div class="h"><span class="n">2</span><span class="t">문법 다시보기</span></div>
+      <table class="vtab"><tr><th class="num">#</th><th>지문</th><th>문법</th><th>핵심</th></tr>{grows}</table></div>
+    <div class="sec"><div class="h"><span class="n">3</span><span class="t">직독직해 빠른 점검</span><span class="tip">소리 내어 읽고 뜻 확인</span></div>
+      <table class="reads">{rrows}</table></div>
+    <div class="sec"><div class="h"><span class="n">4</span><span class="t">내용 참/거짓 (심화)</span><span class="tip">헷갈리게 낸 문제! 지문을 떠올려 풀기</span></div>
+      <div class="tf">{tfrows}</div></div>
+    <div class="answers"><div class="tearline"><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>
+      <div style="font-weight:800;font-size:13.8px;margin-bottom:5px;">✔ {slot}일차 복습 정답</div>
+      <div class="ansrow"><div class="d">단어 (뜻→영어)</div><div class="b">{wans}</div></div>
+      <div class="ansrow"><div class="d">참/거짓</div><div class="b">{tfans}</div></div></div>"""
+    return body
+
+
 def wrap(inner, title):
     return f"<html><head><meta charset='utf-8'><title>{esc(title)}</title><style>{CSS}</style></head><body>{inner}</body></html>"
 
@@ -666,65 +725,82 @@ def to_pdf(inner, filename, title=""):
     print(f"  ✓ {filename}  ({(OUT/filename).stat().st_size//1024} KB)")
 
 
-LESSONS = [
-    dict(C=L1, code="L1", comp="1과",
-         title="Lesson 1 숙제 & 테스트", sub="모기 이야기 & 이로운 벌레 · 은아쌤 손글씨판",
-         days_span="1~2주차 · 10일", review_no=10,
-         tests=[(range(1, 6), "1주차 단어 테스트 (1~5일차)", "L1_테스트_1주차_단어.pdf"),
-                (range(6, 10), "2주차 단어 테스트 (6~9일차)", "L1_테스트_2주차_단어.pdf")],
-         tests_line="· 1주차 단어 · 2주차 단어 · 1과 종합"),
-    dict(C=L2, code="L2", comp="2과",
-         title="Lesson 2 숙제 & 테스트", sub="장애인을 위한 발명 & 자율주행차 · 은아쌤 손글씨판",
-         days_span="3~4주차 · 10일", review_no=20,
-         tests=[(range(11, 16), "3주차 단어 테스트 (11~15일차)", "L2_테스트_3주차_단어.pdf"),
-                (range(16, 20), "4주차 단어 테스트 (16~19일차)", "L2_테스트_4주차_단어.pdf")],
-         tests_line="· 3주차 단어 · 4주차 단어 · 2과 종합"),
-]
+WD = lambda slot: "월화수목금"[(slot-1)%5]
+
+
+def build_schedule():
+    sch = []
+    for i, d in enumerate(L1.DAYS):
+        sch.append(dict(slot=i+1, kind="content", C=L1, day=d))
+    sch.append(dict(slot=10, kind="review", C=L1, title="1과 복습 ① · 모기 이야기 (1~5일)", src=L1.DAYS[0:5],
+                    intro="이번 주 배운 1과 앞부분을 몰아서 복습하자! 헷갈리면 앞 숙제를 다시 봐도 괜찮아."))
+    sch.append(dict(slot=11, kind="review", C=L1, title="1과 복습 ② · 포식자와 곤충 (6~9일)", src=L1.DAYS[5:9],
+                    intro="1과 뒷부분 복습! 단어랑 문장이 이제 입에 붙었는지 스스로 확인해 보자."))
+    sch.append(dict(slot=12, kind="test", days=L1.DAYS, comp="1과"))
+    for i, d in enumerate(L2.DAYS):
+        sch.append(dict(slot=13+i, kind="content", C=L2, day=d))
+    sch.append(dict(slot=22, kind="review", C=L2, title="2과 복습 ① · 점자지도 (11~15일)", src=L2.DAYS[0:5],
+                    intro="2과 앞부분(점자지도) 복습! 낯선 단어가 많았지? 반복하면 익숙해져."))
+    sch.append(dict(slot=23, kind="review", C=L2, title="2과 복습 ② · 수어앱·자율주행 (16~19일)", src=L2.DAYS[5:9],
+                    intro="2과 뒷부분 복습! 문법(수동태·what·where·가정법)도 함께 정리하자."))
+    sch.append(dict(slot=24, kind="test", days=L2.DAYS, comp="2과"))
+    sch.append(dict(slot=25, kind="review", C=L1, title="1과 최종 복습 · 총정리", src=L1.DAYS,
+                    intro="1과 전체를 한 번에! 이제 마무리 점검이야. 자신 있는 단어는 빠르게, 약한 건 다시 쓰기."))
+    sch.append(dict(slot=26, kind="review", C=L2, title="2과 최종 복습 · 총정리", src=L2.DAYS,
+                    intro="2과 전체 마무리! 발명·자율주행 단어까지 싹 정리해 보자."))
+    sch.append(dict(slot=27, kind="review", C=L1, title="1·2과 통합 복습 ①", src=L1.DAYS[0:5]+L2.DAYS[0:5],
+                    intro="이제 1과와 2과를 섞어서 복습! 시험은 이렇게 섞여 나와."))
+    sch.append(dict(slot=28, kind="review", C=L2, title="1·2과 통합 복습 ②", src=L1.DAYS[5:9]+L2.DAYS[5:9],
+                    intro="통합 복습 두 번째! 헷갈리는 문법은 표를 다시 보며 정리하자."))
+    sch.append(dict(slot=29, kind="test", days=L1.DAYS+L2.DAYS, comp="1·2과 통합"))
+    sch.append(dict(slot=30, kind="review", C=L1, title="최종 마무리 · 필수 단어 총점검", src=L1.DAYS+L2.DAYS,
+                    intro="드디어 30일 완주! 마지막으로 단어를 몰아서 점검하자. 여기까지 온 너, 정말 대단해! 🎉"))
+    return sch
+
+
+def render_slot(e):
+    slot = e["slot"]; wd = WD(slot)
+    if e["kind"] == "content":
+        d = e["day"]; C = e["C"]
+        html_ = render_day_student(d, C, slot=slot, weekday=wd)
+        html_ += ("<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>"
+                  f"<div style='font-weight:800;font-size:13.8px;margin-bottom:5px;'>✔ {slot}일차 정답</div>"
+                  + render_day_answer(d, C) + "</div>")
+        return html_
+    if e["kind"] == "review":
+        return render_review_range(slot, wd, e["title"], e["src"], e["C"], e["intro"])
+    # test
+    header = (f"<div class='head'><div class='top'><span class='badge'>{slot}일차 · {wd}요일 · {esc(e['comp'])} 종합 테스트</span>"
+              f"<span class='src'>{esc(L1.SOURCE.split(' · Lesson')[0])}<br>실전 점검</span></div>"
+              f"<div class='body'><div class='title'><span class='k'>{esc(e['comp'])} 종합 테스트</span> — 그동안 배운 걸 실전처럼</div></div></div>")
+    return header + render_comp_test(e["days"], e["comp"])
+
+
+def slot_filename(e):
+    slot = e["slot"]
+    if e["kind"] == "content":
+        return f"D{slot:02d}_{e['day']['title_en'].replace(' ','')}.pdf"
+    if e["kind"] == "review":
+        return f"D{slot:02d}_복습.pdf"
+    return f"D{slot:02d}_{e['comp']}_종합테스트.pdf"
 
 
 def main():
     print("PDF 생성 중 …")
-    to_pdf(render_month_plan(), "00_한달_학습플랜.pdf", "한 달 학습 플랜")
-    for L in LESSONS:
-        C = L["C"]; code = L["code"]; comp = L["comp"]
-        for d in C.DAYS:
-            inner = render_day_student(d, C)
-            inner += ("<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>"
-                      f"<div style='font-weight:800;font-size:13.8px;margin-bottom:5px;'>✔ {d['day']}일차 정답</div>"
-                      + render_day_answer(d, C) + "</div>")
-            to_pdf(inner, f"{code}_{d['day']:02d}일차_{d['weekday']}_숙제_{d['title_en'].replace(' ','')}.pdf", f"{d['day']}일차 숙제")
-        review = render_review_day_student(C, comp, L["review_no"], "금")
-        to_pdf(review, f"{code}_{L['review_no']}일차_금_{comp}총복습.pdf", f"{L['review_no']}일차 총복습")
-        # 합본
-        inner = render_cover(C, L["title"], L["sub"], L["days_span"], L["review_no"], L["tests_line"])
-        for d in C.DAYS:
-            inner += "<div class='pagebreak'></div>" + render_day_student(d, C)
-        inner += "<div class='pagebreak'></div>" + review
-        inner += "<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 (학생에게 주기 전 분리)</span></div>"
-        inner += f"<div style='font-weight:800;font-size:16.1px;margin-bottom:7px;'>✔ {comp} 숙제 · 선생님용 정답</div>"
-        for d in C.DAYS:
-            inner += render_day_answer(d, C)
-        inner += "</div>"
-        to_pdf(inner, f"{code}_숙제_합본.pdf", f"{comp} 숙제 합본")
-        for rng, title, fn in L["tests"]:
-            to_pdf(render_vocab_test(rng, title, C), fn)
-        to_pdf(render_comp_test(C, comp), f"{code}_테스트_{comp}_종합.pdf")
-
-    # ── 전체 합본: 학습플랜 + 1~20일차 (+ 맨 뒤 선생님용 정답 전체) ──
-    inner = render_month_plan()
-    for L in LESSONS:
-        C = L["C"]
-        for d in C.DAYS:
-            inner += "<div class='pagebreak'></div>" + render_day_student(d, C)
-        inner += "<div class='pagebreak'></div>" + render_review_day_student(C, L["comp"], L["review_no"], "금")
-    inner += "<div class='answers'><div class='tearline'><span>✂ 여기부터 선생님용 정답 전체 (학생에게 주기 전 분리)</span></div>"
-    inner += "<div style='font-weight:800;font-size:16.1px;margin-bottom:7px;'>✔ 1과·2과 숙제 · 선생님용 정답 전체</div>"
-    for L in LESSONS:
-        C = L["C"]
-        for d in C.DAYS:
-            inner += render_day_answer(d, C)
-    inner += "</div>"
-    to_pdf(inner, "00_전체합본_학습플랜+1-20일차.pdf", "전체 합본")
+    schedule = build_schedule()
+    to_pdf(render_month_plan(schedule), "00_한달_학습플랜.pdf", "한 달 학습 플랜")
+    # 개별 30일 + 합본
+    combined = render_month_plan(schedule)
+    for e in schedule:
+        html_ = render_slot(e)
+        to_pdf(html_, slot_filename(e), f"{e['slot']}일차")
+        combined += "<div class='pagebreak'></div>" + html_
+    to_pdf(combined, "00_전체합본_1-30일차.pdf", "전체 합본 1-30일차")
+    # 주차별 단어 테스트(보조)
+    to_pdf(render_vocab_test(range(1, 6), "1과 단어 테스트 A (1~5일)", L1), "L1_단어테스트_A.pdf")
+    to_pdf(render_vocab_test(range(6, 10), "1과 단어 테스트 B (6~9일)", L1), "L1_단어테스트_B.pdf")
+    to_pdf(render_vocab_test(range(11, 16), "2과 단어 테스트 A (11~15일)", L2), "L2_단어테스트_A.pdf")
+    to_pdf(render_vocab_test(range(16, 20), "2과 단어 테스트 B (16~19일)", L2), "L2_단어테스트_B.pdf")
     print("완료! → tutoring_materials/output/")
 
 
