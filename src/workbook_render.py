@@ -109,7 +109,7 @@ def _footer_template(text: str) -> str:
     (부분 PDF 를 합치므로 Chromium 의 pageNumber 는 구간마다 재시작하기 때문).
     """
     return (
-        '<div style="width:100%; font-size:8px; color:#9aa3af; text-align:left; '
+        '<div style="width:100%; font-size:11px; color:#9aa3af; text-align:left; '
         "font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif; "
         'padding:0 14mm;">'
         f'{escape(text)}'
