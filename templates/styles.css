@@ -366,6 +366,12 @@ table.lit2 td {
 .src-h-hint { font-size: 9px; font-weight: 600; color: var(--muted); }
 .narr-blank { text-decoration: none; }
 
+/* ---- 어휘리스트 & 학생용: 표 행 밑줄(구분선) 제거 ---- */
+.t-wl td { border-bottom: none; }
+.passage.stu .grid td { border-bottom: none; }
+.passage.stu .lit-row td { border-bottom: none; }
+.passage.stu .lit-note-row td { border-bottom: none; }
+
 /* ---- 학생용: 필기 여백 넉넉히 + 문법 동그라미 안내 ---- */
 .gram-todo { font-size: 8px; font-weight: 700; color: var(--gram); margin: 1px 0 4px; }
 .stage-blank { border-style: dashed; }
