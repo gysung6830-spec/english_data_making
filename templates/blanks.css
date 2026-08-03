@@ -57,14 +57,17 @@ body{
 .c-ko{ flex:1 1 42%; font-size:8.5pt; color:#404652; line-height:1.5;
   border-left:1px dashed #cdd5de; padding-left:10px; }
 
+/* ── 요약문 블록: 헤더+워드뱅크+요약문을 한 페이지에 묶는다(워드뱅크 분리 방지) ── */
+.sb-block{ page-break-inside:avoid; break-inside:avoid; }
+
 /* ── 요약문 (유형 A) ── */
 .summary{ position:relative; border:1px solid var(--line); border-radius:10px; background:#fff;
   padding:10px 12px 10px 16px; line-height:2.1; overflow:hidden; page-break-inside:avoid; }
 .summary .sb-bar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--sb); }
 
-/* ── 단어뱅크 박스 (가운데 정렬) ── */
+/* ── 단어뱅크 박스 (가운데 정렬) — 요약문 위에 배치 ── */
 .wordbank{ border:1.5px solid var(--sb); border-radius:12px; padding:11px 12px; background:var(--sb-soft);
-  margin-top:10px; text-align:center; page-break-inside:avoid; }
+  margin-bottom:10px; text-align:center; page-break-inside:avoid; }
 .wordbank .wb-label{ font-size:8pt; font-weight:800; color:var(--sb); letter-spacing:1px;
   margin-bottom:8px; }
 .chips{ display:flex; flex-wrap:wrap; gap:7px 9px; justify-content:center; }

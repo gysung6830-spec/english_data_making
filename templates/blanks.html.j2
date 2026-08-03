@@ -34,16 +34,20 @@
       {% endfor %}
     </div>
 
-    {# ── 유형 A: 요약문 빈칸형 (번호만 + 단어뱅크) ── #}
-    <div class="part-head sb-head">② 요약문 빈칸 <span class="ph-sub">워드뱅크에서 골라 쓰기</span></div>
-    <div class="summary">
-      <span class="cbar sb-bar"></span>
-      <div class="sum-text">{{ st | render_summary }}</div>
-    </div>
-    <div class="wordbank">
-      <div class="wb-label">Word Bank</div>
-      <div class="chips">
-        {% for w in st.wordbank %}<span class="chip">{{ w }}</span>{% endfor %}
+    {# ── 유형 A: 요약문 빈칸형 (번호만 + 단어뱅크) ──
+        헤더·워드뱅크·요약문을 한 덩어리로 묶어 페이지가 갈리며 워드뱅크가
+        요약문과 떨어지지 않게 한다(워드뱅크를 먼저 보여 주고 요약문을 채우게). #}
+    <div class="sb-block">
+      <div class="part-head sb-head">② 요약문 빈칸 <span class="ph-sub">워드뱅크에서 골라 쓰기</span></div>
+      <div class="wordbank">
+        <div class="wb-label">Word Bank</div>
+        <div class="chips">
+          {% for w in st.wordbank %}<span class="chip">{{ w }}</span>{% endfor %}
+        </div>
+      </div>
+      <div class="summary">
+        <span class="cbar sb-bar"></span>
+        <div class="sum-text">{{ st | render_summary }}</div>
       </div>
     </div>
 
