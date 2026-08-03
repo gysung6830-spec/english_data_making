@@ -328,7 +328,8 @@ def test_page_break_per_passage():
 def test_overview_builder_llm_path():
     payload = json.dumps({
         "title_en": "The Value of Curiosity", "title_ko": "호기심의 가치",
-        "summary": "이 지문은 호기심이 성장의 원동력이라고 말한다.",
+        "summary": "호기심이 성장의 원동력이다.",
+        "summary_easy": "궁금하면 스스로 찾아보게 되는 거랑 같음.",
         "vocab": [{"word": "thrive", "meaning": "번성하다", "syn": "flourish",
                    "ant": "decline", "sent": 6}],
         "flow": [{"label": "도입", "text": "화제 제시",
@@ -338,9 +339,9 @@ def test_overview_builder_llm_path():
     from src.worksheet.models import Analysis, Sentence
     client = _fake_client([payload])
     a = Analysis(title_en="", sentences=[Sentence(index=1, lines=[[Token(text="Hi")]])])
-    t_en, t_ko, summary, vocab, flow = overview_builder.build_overview(client, a)
+    t_en, t_ko, summary, summary_easy, vocab, flow = overview_builder.build_overview(client, a)
     assert t_en == "The Value of Curiosity" and t_ko == "호기심의 가치"   # 자동 제목
-    assert summary.startswith("이 지문은")                              # 한눈 요약
+    assert summary.startswith("호기심") and summary_easy.startswith("궁금")  # 주제 + 쉽게
     assert vocab and vocab[0].word == "thrive" and vocab[0].syn == "flourish"
     assert flow and flow[0].label == "도입" and flow[0].easy.startswith("궁금")
     print("PASS  overview_builder LLM 경로(+자동 제목)")

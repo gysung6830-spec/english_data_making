@@ -326,8 +326,8 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
     return Analysis(
         title_en=title_en,
         title_ko="리더의 개방성과 연결의 중요성",
-        summary="이 지문은 물이 스며들지 않는 봉지 속 찻잎처럼, 외부와 단절된 리더는 제 역할을 할 수 없다고 말한다. "
-                "차와 물이 만나야 차가 우러나듯, 리더도 주변과 열린 관계로 연결될 때 비로소 기능한다는 것이 글의 핵심이다.",
+        summary="리더는 외부와 열린 관계로 연결될 때 비로소 제 역할을 할 수 있다.",
+        summary_easy="물이 안 통하는 봉지 속 찻잎은 아무리 좋아도 안 우러나잖아 — 리더도 사람들과 안 섞이면 그렇게 됨.",
         lecture_label=lecture_label,
         date=date,
         sentences=sentences,

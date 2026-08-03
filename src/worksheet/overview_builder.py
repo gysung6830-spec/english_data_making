@@ -43,9 +43,10 @@ def build_prompt(analysis: Analysis) -> str:
         "   ⚠️ 반드시 '한글 → 영어' 방향으로 만들어, 두 제목의 소재·표현·의미가 '완전히 일치'하게 하세요"
         "(영어를 먼저 짓고 한글을 갖다 붙이지 마세요). "
         "예: 먼저 '친환경 전환에 숨은 비용' → 번역 'The Hidden Cost of Going Green'.\n"
-        "0.5) summary: '이 지문은 ~에 대한 내용이다' 식으로, 지문 전체를 한눈에 파악할 수 있는 "
-        "요약 1~2문장(한국어). 소재·핵심 주장·글의 결론이 드러나게 쓰되 담백하게. "
-        "학생이 본문을 읽기 전에 먼저 읽고 큰 그림을 잡는 용도입니다(80~140자 권장, 상투어 금지).\n"
+        "0.5) summary / summary_easy (분석 페이지 상단 요약 박스, 각각 '한 문장'):\n"
+        "   · summary: 지문의 '주제'를 한 문장으로. 글이 말하려는 핵심 주장을 담백하게(40~70자 권장).\n"
+        "   · summary_easy: 그 주제를 '쉽게 말하면' 학생 눈높이의 실생활 비유·예시 한 문장으로 "
+        "(반말/구어 OK, 40~70자 권장). '쉽게 말하면' 같은 접두어는 붙이지 말고 예시 문장만 쓰세요.\n"
         "1) vocab: 지문 핵심 어휘 8~12개. 각 항목 word(단어/표현), meaning(한글 뜻), "
         "syn(유의어, 없으면 '—'), ant(반의어, 없으면 '—'), sent(등장 문장 번호).\n"
         "   ▸ 선정 기준(중요): '유의어·반의어가 뚜렷한' 단어를 최우선으로 고르세요. "
@@ -63,8 +64,8 @@ def build_overview(
     client: ClaudeClient,
     analysis: Analysis,
     max_retries: int = 1,
-) -> tuple[str, str, str, list[VocabEntry], list[FlowStep]]:
-    """LLM 로 제목(영/한) + 한눈 요약 + 뒷페이지(어휘 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 값."""
+) -> tuple[str, str, str, str, list[VocabEntry], list[FlowStep]]:
+    """LLM 로 제목(영/한) + 요약(주제/쉽게) + 뒷페이지(어휘 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 값."""
     try:
         b: OverviewBundle = client.structured(
             system=SYSTEM,
@@ -74,9 +75,10 @@ def build_overview(
             max_retries=max_retries,
         )
     except Exception:
-        return "", "", "", [], []
+        return "", "", "", "", [], []
     vocab = [VocabEntry(word=v.word, meaning=v.meaning, syn=v.syn or "—",
                         ant=v.ant or "—", sent=(v.sent or None)) for v in b.vocab if v.word]
     flow = [FlowStep(label=f.label, text=f.text, easy=f.easy, sentences=f.sentences)
             for f in b.flow if f.label and f.text]
-    return b.title_en.strip(), b.title_ko.strip(), b.summary.strip(), vocab, flow
+    return (b.title_en.strip(), b.title_ko.strip(),
+            b.summary.strip(), b.summary_easy.strip(), vocab, flow)
