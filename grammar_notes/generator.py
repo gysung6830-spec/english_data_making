@@ -243,6 +243,8 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .box-warn .box-label {{ background:#b23a48; }}
 .box-compare {{ border-color:#cfe0f2; background:#f6faff; }}
 .box-compare .box-label {{ background:#2f6fb0; }}
+.box-exam {{ border-color:#e6d3f5; background:#faf6ff; }}
+.box-exam .box-label {{ background:#7c3aed; }}
 
 /* 빈칸 & 정답 */
 .blank {{ display:inline-block; border-bottom:1.4px solid {GREEN}; height:1.05em;
