@@ -50,6 +50,12 @@ HEADER_RE = re.compile(
 #   (EXAM4YOU 워크북 등. 콜론/대괄호 없음)
 HEADER_RE2 = re.compile(r"^\s*(\d{1,3})\s*번\b(.*)$")
 
+# 대체 헤더:  'Ch. 05 Unit 13 - 1번: 제목' / 'Ch. 05 Unit 13 - 수능 대비 ANALYSIS: 제목'
+#   (올림포스 등. Ch/Chapter/Unit/Lesson + 숫자로 시작하고 콜론이 있는 줄)
+HEADER_RE3 = re.compile(
+    r"(?i)^\s*((?:ch(?:apter)?|unit|lesson)\.?\s*\d[^:：\n]*?)\s*[:：]\s*(.+)$"
+)
+
 # 아라비아 숫자 문장 번호:  줄 시작의 'N. ' (원문자 대신 쓰는 자료)
 _ARABIC_MARK_RE = re.compile(r"(?m)^[ \t]*(\d{1,2})\.[ \t]+")
 
@@ -58,6 +64,9 @@ _FOOTNOTE_RE = re.compile(r"\s*\d{1,3}\)\s*$")
 
 # 페이지 번호 줄:  '- 14 -', '14' 등
 _PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
+
+# 자료 머리말/꼬리말(워터마크) 줄:  '[EBS] …', '[Flow Edu] …', 'flowedu.tistory'
+_JUNK_RE = re.compile(r"(?i)(flowedu\.tistory|\[\s*flow\s*edu\s*\]|^\s*\[EBS\])")
 
 # 한글 음절 영역
 _HANGUL_RE = re.compile(r"[가-힣]")
@@ -109,6 +118,8 @@ def _split_en_ko(chunk: str) -> Tuple[str, str]:
             continue
         if _PAGENUM_RE.match(line):
             continue  # 페이지 번호 줄('- 14 -' 등) 무시
+        if _JUNK_RE.search(line):
+            continue  # [EBS]/[Flow Edu] 머리말·꼬리말 무시
         if _is_korean_line(line):
             if not en_parts:
                 # 아직 영어를 못 잡음 → 같은 줄 혼합 가능성. 분리 시도.
@@ -198,13 +209,29 @@ def _match_header(line: str):
         # 'N번' 뒤에 실제 제목/설명이 있어야 헤더로 인정(문장 오인 방지)
         if _count_hangul(rest) >= 2 or len(rest.strip()) >= 4:
             return f"{m.group(1)}번", _clean_title(rest)
+    m = HEADER_RE3.match(line)
+    if m:
+        return _clean_title(m.group(1)), _clean_title(m.group(2))
     return None
+
+
+def _starts_with_marker(line: str) -> bool:
+    """줄이 문장 번호(원문자 또는 'N. ')로 시작하는가."""
+    s = line.lstrip()
+    if not s:
+        return False
+    if s[0] in CIRCLED_SET:
+        return True
+    return bool(re.match(r"\d{1,2}\.[ \t]", s))
 
 
 def split_passages(raw: str) -> List[Passage]:
     """텍스트 전체 → 지문 리스트."""
     if not raw:
         return []
+
+    # PDF 추출에서 섞이는 널문자/소프트하이픈을 공백으로 정규화
+    raw = raw.replace("\x00", " ").replace("\xad", " ")
 
     lines = raw.splitlines()
 
@@ -227,7 +254,20 @@ def split_passages(raw: str) -> List[Passage]:
     for k, (line_no, label, title) in enumerate(header_idx):
         body_start = line_no + 1
         body_end = header_idx[k + 1][0] if k + 1 < len(header_idx) else len(lines)
-        body = "\n".join(lines[body_start:body_end])
+        body_lines = lines[body_start:body_end]
+
+        # 제목이 다음 줄로 이어지는 경우: 첫 문장 마커 전의 줄을 제목에 이어붙임
+        extra = []
+        for bl in body_lines:
+            if _starts_with_marker(bl):
+                break
+            s = bl.strip()
+            if s and not _JUNK_RE.search(s):
+                extra.append(s)
+        if extra:
+            title = _clean_title((title + " " + " ".join(extra)).strip())
+
+        body = "\n".join(body_lines)
         sents = _parse_sentences(body)
         passages.append(Passage(label=label, title=title, sentences=sents))
 
