@@ -371,6 +371,8 @@ table.lit2 td {
 .passage.stu .grid td { border-bottom: none; }
 .passage.stu .lit-row td { border-bottom: none; }
 .passage.stu .lit-note-row td { border-bottom: none; }
+/* 직독직해 표: 가로 밑줄(위/아래 셀 테두리) 제거, 좌우(열 구분)만 유지 */
+.passage.stu table.lit2 td { border-top: none; border-bottom: none; }
 
 /* ---- 학생용: 필기 여백 넉넉히 + 문법 동그라미 안내 ---- */
 .gram-todo { font-size: 8px; font-weight: 700; color: var(--gram); margin: 1px 0 4px; }
