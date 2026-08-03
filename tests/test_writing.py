@@ -62,6 +62,20 @@ def test_answer_from_chunks_when_blank():
     _check("answer 비면 chunks 로 생성", pack.sentences[0].items[0].answer == "put it")
 
 
+def test_single_chunk_box_dropped():
+    # 조각 1개짜리 박스(〈 on 〉)는 배열할 게 없어 무의미 → 문항에서 빼고 단어를 문장에 복원
+    llm = wr.LLMWritingPack(sentences=[wr.LLMWritingSentence(
+        no=1, ko="가", template="It has effect {{A1}} their mind {{A2}} now.",
+        items=[wr.LLMWritingItem(id="A1", chunks=["on"], answer="on"),
+               wr.LLMWritingItem(id="A2", chunks=["right", "now"], answer="right now")])])
+    pack = wr.build_writing_pack(llm, header="H", title="T", subtitle="S")
+    s = pack.sentences[0]
+    _check("1조각 박스 제거(2조각만 남음)", len(s.items) == 1 and s.items[0].id == "A2")
+    _check("제거된 어구는 문장에 복원", "effect on their mind" in s.template)
+    html = str(wr.render_writing(s))
+    _check("무의미 박스 미노출 + 누출 없음", "〈 on 〉" not in html and "{{" not in html)
+
+
 def test_validation_empty():
     raised = False
     try:
@@ -97,6 +111,7 @@ if __name__ == "__main__":
     test_max_two_boxes()
     test_id_mismatch_order()
     test_answer_from_chunks_when_blank()
+    test_single_chunk_box_dropped()
     test_validation_empty()
     test_render_html()
     test_show_ko_flag()

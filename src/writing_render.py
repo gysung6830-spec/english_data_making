@@ -102,14 +102,21 @@ def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: s
         by_id = {it.id: it for it in s.items}
         order = placeholders_in(s.template)
         items: list[WItem] = []
+        template = s.template
         # 자리표시자 등장 순서로 짝짓되, id 가 안 맞으면 순서대로 매핑한다.
         pairs = ([(pid, by_id[pid]) for pid in order]
                  if set(order) == set(by_id) and len(order) == len(s.items)
                  else list(zip(order, s.items)))
         for pid, src in pairs:
+            chunks = [c.strip() for c in src.chunks if c and c.strip()]
+            # 배열할 조각이 2개 미만인 박스(예: 〈 on 〉)는 '배열할 게 없어' 무의미하므로
+            # 문항으로 내지 않고 그 어구를 문장에 그대로 복원한다.
+            if len(chunks) < 2:
+                template = template.replace("{{" + pid + "}}", _item_answer(src))
+                continue
             items.append(WItem(id=pid, display=_shuffled_display(src.chunks),
                                answer=_item_answer(src)))
-        sents.append(WSentence(no=s.no, template=s.template, ko=s.ko, items=items))
+        sents.append(WSentence(no=s.no, template=template, ko=s.ko, items=items))
     return WritingPack(header=header, title=title or "", subtitle=subtitle or "",
                        instruction=instruction or _DEFAULT_INSTRUCTION, sentences=sents)
 
