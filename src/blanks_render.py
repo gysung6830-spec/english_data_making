@@ -13,7 +13,7 @@ from markupsafe import Markup, escape
 
 from . import branding
 from .blanks_schemas import BlankSet, BlankWorkbook, BSentence
-from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER
+from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -78,10 +78,7 @@ def render_blanks_pdf(wb: BlankWorkbook, out_path: str | Path, footer_note: str 
         b = p.chromium.launch(**launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
-        try:
-            pg.evaluate("async () => { await document.fonts.ready; }")
-        except Exception:
-            pass
+        _page_ready(pg)
         pg.pdf(path=str(out_path), format="A4",
                margin={"top": "14mm", "bottom": "16mm", "left": "14mm", "right": "14mm"},
                print_background=True, display_header_footer=True,

@@ -402,8 +402,8 @@ def _mock_workbook_for_pdf(cfg: Config, pdf: Path) -> Workbook:
     return wb
 
 
-# 목(mock)은 '초기 피드백' 지문 하나로 통일 — 헤더 제목은 한글 주제
-_MOCK_TOPIC = "초기 피드백이 전문적 성공의 핵심인 이유"
+# 목(mock)은 '초기 피드백' 지문 하나로 통일 — 헤더 제목은 '핵심 키워드 중심의 짧은' 한글 주제
+_MOCK_TOPIC = "초기 피드백과 전문적 성공"
 
 
 def _mock_label(pdf: Path) -> str:
