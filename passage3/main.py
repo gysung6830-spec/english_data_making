@@ -117,8 +117,8 @@ def extract_passages(path, api_key: str = None) -> List[Passage]:
 
     어떤 형식이든 결과가 일정하도록:
       - txt / 이미지 / 스캔 PDF → 텍스트(또는 OCR) → 텍스트 파서
-      - 디지털 PDF → 표 인식 파서 우선(좌 영어/우 한글 2단 표 등),
-        표에서 못 뽑으면 텍스트 파서로 폴백.
+      - 디지털 PDF → 표 인식 파서와 텍스트 파서를 모두 돌려 '더 좋은' 결과 선택.
+        (테두리 선을 표로 오인해 표 파서가 엉뚱한 결과를 내는 경우 방지)
     api_key 는 OCR(비전)에 쓰인다(스캔·사진일 때).
     """
     p = Path(path)
@@ -136,15 +136,30 @@ def extract_passages(path, api_key: str = None) -> List[Passage]:
     if suffix == ".pdf":
         if is_scanned_pdf(p):
             return split_passages(ocr_file(p, api_key=api_key))
-        # 디지털 PDF: 표 구조 우선(가장 안정적)
+        # 표 파서(2단 표용)와 텍스트 파서를 모두 돌려 더 나은 결과를 채택
         table_passages = pdf_to_passages(p)
-        if table_passages:
-            return table_passages
-        # 표가 없으면 텍스트 추출 후 파싱
-        return split_passages(extract_text(p))
+        text_passages = split_passages(extract_text(p))
+        return _pick_better(table_passages, text_passages)
 
     # 알 수 없는 확장자
     return split_passages(extract_text(p))
+
+
+def _passage_score(passages) -> tuple:
+    """파싱 품질 점수. (영어가 든 문장 수, 총 문장 수) — 클수록 좋음."""
+    if not passages:
+        return (-1, -1)
+    n_en = sum(1 for p in passages for s in p.sentences
+               if s.en and re.search(r"[A-Za-z]", s.en))
+    n_sent = sum(len(p.sentences) for p in passages)
+    return (n_en, n_sent)
+
+
+def _pick_better(table_passages, text_passages):
+    """표 파서 vs 텍스트 파서 결과 중 품질 점수가 높은 쪽 선택(동점이면 표)."""
+    if _passage_score(table_passages) >= _passage_score(text_passages):
+        return table_passages or text_passages or []
+    return text_passages
 
 
 # ── auto-fit PDF 빌더 ─────────────────────────────────────────
