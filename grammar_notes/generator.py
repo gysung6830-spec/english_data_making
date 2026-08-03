@@ -211,9 +211,8 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .intro ul {{ margin:0; padding-left:18px; }}
 .intro li {{ margin:3px 0; }}
 
-/* 포인트 : 각 Point(목차 항목)는 새 페이지에서 시작 */
-.point {{ margin:0 0 20px; }}
-.point.brk, .practice, .wrapup {{ page-break-before:always; }}
+/* 포인트 : 페이지 나눔 없이 이어서 흐름 (개념/박스 단위로만 안 쪼개짐) */
+.point {{ margin:0 0 18px; }}
 .point-head {{ display:flex; align-items:center; gap:8px; border-bottom:2px solid {GREEN};
   padding-bottom:4px; margin:6px 0 8px; page-break-after:avoid; }}
 .point-badge {{ background:{GREEN}; color:#fff; font-weight:700; font-size:9pt;
