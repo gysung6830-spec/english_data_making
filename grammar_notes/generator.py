@@ -170,10 +170,11 @@ def _intro_html(intro: list, teacher: bool) -> str:
     return f'<div class="intro"><ul>{lis}</ul></div>'
 
 
-def _css(teacher: bool) -> str:
+def _css(teacher: bool, unit: dict | None = None) -> str:
     reg, bold = _font_b64("NanumSquareRoundR.woff"), _font_b64("NanumSquareRoundB.woff")
     tag = "교사용 · 정답본" if teacher else "학생용 · 필기본"
     tag_color = "#b23a48" if teacher else GREEN_DARK
+    foot = f'UNIT {unit["no"]} · {unit["title"]}' if unit else "특강 문법"
     return f"""
 @font-face {{ font-family:'NSR'; font-weight:400;
   src:url(data:font/woff;base64,{reg}) format('woff'); }}
@@ -182,7 +183,7 @@ def _css(teacher: bool) -> str:
 
 @page {{
   size: A4; margin: 15mm 14mm 16mm 14mm;
-  @bottom-center {{ content: "특강 문법 · UNIT 01  |  " counter(page); font-family:'NSR'; font-size:8pt; color:#9aa4ab; }}
+  @bottom-center {{ content: "특강 문법 · {foot}  |  " counter(page); font-family:'NSR'; font-size:8pt; color:#9aa4ab; }}
   @top-right {{ content: "{tag}"; font-family:'NSR'; font-size:8pt; color:{tag_color}; font-weight:700; }}
 }}
 * {{ box-sizing:border-box; }}
@@ -275,7 +276,7 @@ table.grid td:first-child {{ font-weight:700; color:{GREEN_DARK}; white-space:no
 
 
 def build_html(unit: dict, teacher: bool) -> str:
-    body = [f"<style>{_css(teacher)}</style>"]
+    body = [f"<style>{_css(teacher, unit)}</style>"]
     body.append(
         f'<div class="banner"><div class="ubadge">UNIT {unit["no"]}</div>'
         f'<div class="utitle">{html.escape(unit["title"])}'
