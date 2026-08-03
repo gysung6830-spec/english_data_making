@@ -250,9 +250,16 @@ class WSParaphraseQ(BaseModel):
         labels = {b.label.upper() for b in self.blanks}
         if marks != labels:
             raise ValueError(f"문장 변형 빈칸 마커{sorted(marks)}와 정답 라벨{sorted(labels)}이 일치해야 합니다.")
+        # 오답이 정답과 겹치면 '거부' 대신 겹치는 오답만 제거(유형 통째 드롭 방지).
         ans = {b.answer.strip().lower() for b in self.blanks}
-        if {d.strip().lower() for d in self.distractors} & ans:
-            raise ValueError("보기의 오답 단어가 정답과 겹칩니다.")
+        seen: set[str] = set()
+        cleaned: list[str] = []
+        for d in self.distractors:
+            key = d.strip().lower()
+            if key and key not in ans and key not in seen:
+                seen.add(key)
+                cleaned.append(d)
+        self.distractors = cleaned
         return self
 
 
