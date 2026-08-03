@@ -505,9 +505,16 @@ if __name__ == "__main__":
         p = build_sample(ROOT / "output" / "샘플_암기페이지_난이도중.pdf", n_units=3)
         print(f"완성(샘플): {p}")
     else:
-        names = list(TARGETS) if which == "all" else [which]
+        # '-memo' 접미사 → 각 단원 뒤에 암기(빈칸) 페이지를 넣은 '빈칸 교재' 생성
+        memo = which.endswith("-memo")
+        key = which[:-5] if memo else which
+        if key == "memo":            # 'memo' 단독 = 전체 암기본
+            key, memo = "all", True
+        names = list(TARGETS) if key == "all" else [key]
         for name in names:
             module_name, out_path = TARGETS[name]
             data = importlib.import_module(module_name)  # noqa: F811 (전역 재지정)
-            p = build(out_path)
+            if memo:
+                out_path = out_path.with_name(out_path.stem + "_암기포함" + out_path.suffix)
+            p = build(out_path, with_memorize=memo)
             print(f"완성: {p}")

@@ -23,7 +23,7 @@ OPIC 주제를 바탕으로 **자기 의견을 영어로 말하는** 연습용 �
 - **왼쪽 — 내 의견 말하기 템플릿**: ①주제 소개 → ②내 의견·선호 → ③이유 → ④예시·경험 → ⑤마무리
   의 5단계 문장 틀. 각 빈칸(`____`)에는 빨간 **번호 배지**가 붙습니다.
 - **오른쪽 — 워드뱅크(빈칸에 넣을 말)**: 왼쪽 빈칸 번호와 짝을 이루어, 그 빈칸에 넣을 수 있는
-  **보기 단어를 번호별로 5~7개씩, 한글 뜻과 함께** 제시합니다. (난이도 중은 빈칸당 7개로 확장)
+  **보기 단어를 번호별로 7개씩, 한글 뜻과 함께** 제시합니다. (세 난이도 모두 빈칸당 7개)
   (예: `2 · science 과학 · English 영어 · math 수학 · history 역사 · music 음악`)
   → 학생은 번호를 맞춰 워드뱅크에서 단어(뜻 확인)를 골라 문장을 완성합니다.
 
@@ -54,6 +54,11 @@ python conversation/build_textbook.py mid      # 난이도 중상(중3)만
 python conversation/build_textbook.py adult    # 난이도 상만
 python conversation/build_textbook.py sample   # 암기 페이지 샘플(난이도 중 3단원)
 #  -> output/OPIC회화교재_난이도중.pdf , _난이도중상.pdf , _난이도상.pdf
+
+# 빈칸(암기) 페이지를 각 단원 뒤에 넣은 '암기포함' 교재
+python conversation/build_textbook.py memo          # 세 버전 암기포함본
+python conversation/build_textbook.py school-memo   # 난이도 중 암기포함본만
+#  -> output/OPIC회화교재_난이도중_암기포함.pdf 등
 ```
 
 > **이모지 배치 관련**: WeasyPrint는 컬러 이모지(Noto Color Emoji)를 줄 위로 크게 띄워
