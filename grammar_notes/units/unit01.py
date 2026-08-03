@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""UNIT 01 주어의 형태 — 특강용 '나만의 문법노트'(직접 필기형) · 간결본.
+"""UNIT 01 주어의 형태 — 특강용 '나만의 문법노트'(빈칸 필기형).
 
-설명은 짧은 핵심 어구·화살표식으로. 예문은 한글 뜻+영작 필기줄.
+컨셉 : 설명·예문에 빈칸을 많이 뚫어, 학생이 강의를 들으며 손으로 채워 완성한다.
+       예문은 '빈칸이 뚫린 인쇄 문장 + 한글 뜻' (빈 필기줄 아님).
 
 빈칸/마크업 : {{정답}} / {{정답||힌트}} / **강조** / __밑줄__
-블록 : point.intro / concept.desc / concept.items / concept.examples[{ko,en}] / concept.space
+블록 : point.intro / concept.desc / concept.items / concept.examples[{en(빈칸포함), ko}]
        boxes[].type = tip(초록)·warn(함정)·compare(비교)
 """
 
@@ -13,10 +14,10 @@ UNIT = {
     "title": "주어의 형태",
     "subtitle": "The Forms of the Subject",
     "intro": [
-        "**주어** = 동작·상태의 주체 (‘~은/는/이/가’). 위치 : 문장 **{{맨 앞||동사 앞}}**.",
-        "주어 자리 = **{{명사 상당어구}}** → ① {{명사·대명사}}  ② {{동명사·to부정사}}  ③ {{명사절}} "
-        "( 형용사·부사 {{불가}} )",
-        "대원칙 ㉠ 주어–동사 **{{수 일치}}**   ㉡ 구·절 주어 = **{{단수}}**",
+        "**주어** = 문장에서 **{{동사}}** 가 나타내는 동작·상태의 **{{주체}}**. 우리말 ‘**{{~은/는/이/가}}**’.",
+        "주어 자리 = 반드시 **{{명사 상당어구}}** → ① {{명사·대명사}}  ② {{동명사·to부정사}}  "
+        "③ {{명사절}}(that절·의문사절)   ( {{형용사·부사}} 는 주어 불가 )",
+        "대원칙 ㉠ 주어–동사는 **{{수}}** 를 일치   ㉡ 구·절 주어는 아무리 길어도 **{{단수}}** 취급",
     ],
     "points": [
         {
@@ -25,28 +26,38 @@ UNIT = {
             "concepts": [
                 {
                     "lead": "명사(구)가 주어",
-                    "desc": "「수식어 + **{{핵심 명사}}**」 덩어리 전체. 동사는 **핵심 명사**에 일치.",
+                    "desc": "「(관사·형용사) + **{{핵심 명사||head}}** + (수식어구)」 덩어리 전체가 주어. "
+                            "동사는 **{{핵심 명사}}** 에 수를 맞춘다. 물질·추상명사는 **{{관사 없이}}** 주어 가능.",
                     "examples": [
-                        {"ko": "그 키 큰 소년은 빨리 달린다.", "en": "The tall boy runs fast."},
-                        {"ko": "우리 반의 성실한 학생들은 열심히 공부한다.",
-                         "en": "The diligent students in my class study hard."},
+                        {"en": "The tall {{boy}} {{runs}} fast.", "ko": "그 키 큰 소년은 빨리 달린다."},
+                        {"en": "The diligent students in my class {{study}} hard.",
+                         "ko": "우리 반의 성실한 학생들은 열심히 공부한다. (주어=students)"},
+                        {"en": "{{Honesty}} is the best policy.", "ko": "정직이 최선의 방책이다."},
                     ],
                 },
                 {
                     "lead": "대명사가 주어",
-                    "desc": "주어 자리 = **{{주격}}** ( I·you·he·she·it·we·they )",
+                    "desc": "주어 자리에는 반드시 **{{주격}}** 을 쓴다 : "
+                            "{{I}}·{{you}}·{{he}}·{{she}}·{{it}}·{{we}}·{{they}}",
                     "examples": [
-                        {"ko": "그녀는 영어를 가르친다.", "en": "She teaches English."},
-                        {"ko": "그들은 나의 반 친구들이다.", "en": "They are my classmates."},
+                        {"en": "{{She}} teaches English.", "ko": "그녀는 영어를 가르친다."},
+                        {"en": "{{They}} are my classmates.", "ko": "그들은 나의 반 친구들이다."},
                     ],
                 },
             ],
             "boxes": [
                 {
+                    "type": "tip", "label": "수 일치",
+                    "lines": [
+                        "3인칭 단수 주어 → 현재형 동사에 **{{-(e)s}}**.",
+                        "My brother {{likes}} soccer. / My brothers {{like}} soccer.",
+                    ],
+                },
+                {
                     "type": "warn", "label": "함정",
                     "lines": [
-                        "목적격 주어 금지 : Me and Tom …(X) → Tom and {{I}} …(O)",
-                        "수식어에 끌리지 말 것 : The box of apples {{is}} heavy. ( 주어=box )",
+                        "① 주어에 **목적격 금지** : Me and Tom …(X) → Tom and {{I}} …(O)",
+                        "② 사이에 낀 **수식어에 끌리지 말 것** : The box of apples {{is}} heavy. (주어={{box}})",
                     ],
                 },
             ],
@@ -54,85 +65,95 @@ UNIT = {
         {
             "no": "02",
             "title": "동명사와 to부정사",
-            "intro": "동사 → 주어 불가. **{{동명사(V-ing)}}** / **{{to부정사}}** 로 바꿔야 함. 둘 다 **{{단수}}**.",
+            "intro": "동사는 그대로 주어가 **{{될 수 없다}}**. **{{동명사(V-ing)}}** 또는 "
+                     "**{{to부정사(to+동사원형)}}** 로 바꿔야 하며, 둘 다 **{{단수}}** 취급.",
             "concepts": [
                 {
                     "lead": "동명사(V-ing)가 주어",
-                    "desc": "‘~하는 것은’. 일반·습관 (구어에서 흔함)",
+                    "desc": "‘**{{~하는 것은}}**’으로 해석. 일반적·습관적 행위, 구어에서 자연스럽다.",
                     "examples": [
-                        {"ko": "책을 읽는 것은 재미있다.", "en": "Reading books is fun."},
-                        {"ko": "매일 운동하는 것은 건강에 좋다.", "en": "Exercising every day is good for health."},
+                        {"en": "{{Reading}} books {{is}} fun.", "ko": "책을 읽는 것은 재미있다."},
+                        {"en": "{{Exercising}} every day {{is}} good for health.",
+                         "ko": "매일 운동하는 것은 건강에 좋다."},
                     ],
                 },
                 {
                     "lead": "to부정사(to+동사원형)가 주어",
-                    "desc": "‘~하는 것은’. 격식·문어. 긴 주어는 보통 **가주어 {{it}}** 으로 (→ Point 04)",
+                    "desc": "역시 ‘~하는 것은’. **{{격식·문어체}}**. 긴 주어는 보통 **가주어 {{it}}** 으로 뒤로 보냄. (→ Point 04)",
                     "examples": [
-                        {"ko": "외국어를 익히는 것은 인내가 필요하다.",
-                         "en": "To master a foreign language requires patience."},
-                        {"ko": "규칙적으로 운동하는 것은 중요하다. (가주어 it)",
-                         "en": "It is important to exercise regularly."},
+                        {"en": "{{To master}} a foreign language {{requires}} patience.",
+                         "ko": "외국어를 익히는 것은 인내가 필요하다."},
+                        {"en": "{{It}} is important {{to exercise}} regularly.",
+                         "ko": "규칙적으로 운동하는 것은 중요하다. (가주어 it)"},
                     ],
                 },
             ],
             "boxes": [
                 {
                     "type": "warn", "label": "함정",
-                    "lines": ["동사원형 주어 불가 : {{Run}} …(X) → {{Running / To run}} …(O)"],
+                    "lines": ["**동사원형은 주어 불가** : {{Run}} …(X) → {{Running / To run}} …(O)"],
                 },
             ],
         },
         {
             "no": "03",
             "title": "that절과 의문사절",
-            "intro": "「S+V」 문장이 통째로 **{{명사절}}** → 주어 가능. **{{단수}}**.",
+            "intro": "「S+V」를 갖춘 문장이 통째로 **{{명사절}}** 이 되어 주어가 된다. 명사절 주어도 **{{단수}}**.",
             "concepts": [
                 {
                     "lead": "that절이 주어",
-                    "desc": "「**{{That}}** + 완전한 문장」 = ‘~라는 것은’ (사실·단정). 보통 **가주어 it** 으로.",
+                    "desc": "「**{{That}}** + 완전한 문장」 = ‘**{{~라는 것은}}**’(사실·단정). "
+                            "딱딱하므로 보통 **가주어 {{it}}** 으로 옮긴다.",
                     "examples": [
-                        {"ko": "지구가 둥글다는 것은 사실이다.", "en": "That the earth is round is true."},
-                        {"ko": "그가 정직하다는 것은 사실이다. (가주어 it)", "en": "It is true that he is honest."},
+                        {"en": "{{That}} the earth is round {{is}} true.", "ko": "지구가 둥글다는 것은 사실이다."},
+                        {"en": "{{It}} is true {{that}} he is honest.",
+                         "ko": "그가 정직하다는 것은 사실이다. (가주어 it)"},
                     ],
                 },
                 {
-                    "lead": "의문사절이 주어",
-                    "desc": "「**{{의문사}} + {{주어}} + {{동사}}**」 = ‘~인지’ (what·who·when·where·why·how·whether)",
+                    "lead": "의문사절(간접의문문)이 주어",
+                    "desc": "「**{{의문사}} + {{주어}} + {{동사}}**」 = ‘~인지’. "
+                            "의문사 : what·who·when·where·why·how·{{whether}}",
                     "examples": [
-                        {"ko": "그가 말한 것이 우리를 놀라게 했다.", "en": "What he said surprised us."},
-                        {"ko": "그녀가 왜 일찍 떠났는지는 미스터리다.", "en": "Why she left early is a mystery."},
+                        {"en": "{{What}} he said {{surprised}} us.", "ko": "그가 말한 것이 우리를 놀라게 했다."},
+                        {"en": "{{Why}} she left early {{is}} a mystery.", "ko": "그녀가 왜 일찍 떠났는지는 미스터리다."},
                     ],
                 },
             ],
             "boxes": [
                 {
-                    "type": "warn", "label": "어순",
+                    "type": "warn", "label": "어순 함정",
                     "lines": [
-                        "평서문 어순 : 「의문사 + {{주어}} + {{동사}}」  ( do/does 안 씀, 도치 X )",
-                        "What he wants …(O) / What does he want …(X)",
+                        "간접의문문 = **{{평서문}}** 어순 : 「의문사 + {{주어}} + {{동사}}」 ( do/does 안 씀, 도치 X )",
+                        "{{What}} he wants is unclear. (O) / What **does he want** is unclear. (X)",
                     ],
+                },
+                {
+                    "type": "compare", "label": "비교",
+                    "lines": ["that절 = {{사실·단정}} ‘~라는 것’  /  의문사절 = {{불확실·의문}} ‘~인지’"],
                 },
             ],
         },
         {
             "no": "04",
             "title": "가주어와 비인칭 주어",
-            "intro": "긴 주어를 앞에 두기 싫어함 → 형식상의 **it** 사용.",
+            "intro": "영어는 **길고 무거운 주어**를 앞에 두기 싫어함 → 형식상의 **{{it}}** 을 세운다.",
             "concepts": [
                 {
-                    "lead": "가주어 it",
-                    "desc": "긴 주어(to부정사·that절)를 뒤로(=**{{진주어}}**), 자리엔 **it**. it 해석 **{{안 함}}**.",
+                    "lead": "가주어 it (진주어를 뒤로)",
+                    "desc": "긴 주어(to부정사구·that절)를 뒤로 보내고(=**{{진주어}}**), 그 자리에 **가주어 {{it}}**. "
+                            "「It + 동사 + 보어 + 진주어」. **it 은 해석하지 {{않는다}}.**",
                     "examples": [
-                        {"ko": "이 문제를 푸는 것은 어렵다.", "en": "It is difficult to solve this problem."},
-                        {"ko": "그가 합격한 것은 놀랍다.", "en": "It is surprising that he passed."},
+                        {"en": "{{It}} is difficult {{to solve}} this problem.", "ko": "이 문제를 푸는 것은 어렵다."},
+                        {"en": "{{It}} is surprising {{that}} he passed.", "ko": "그가 합격한 것은 놀랍다."},
                     ],
                 },
                 {
                     "lead": "비인칭 주어 it",
-                    "desc": "**{{시간·날씨·요일·거리·명암}}**. 해석 **{{안 함}}**.",
+                    "desc": "**{{시간·날씨·요일·거리·명암}}** 등을 나타내는 형식상의 it. 해석하지 **{{않는다}}.**",
                     "examples": [
-                        {"ko": "지금 비가 온다.", "en": "It is raining now."},
-                        {"ko": "역까지 10km이다.", "en": "It is 10 km to the station."},
+                        {"en": "{{It}} is raining now.", "ko": "지금 비가 온다. (날씨)"},
+                        {"en": "{{It}} is 10 km to the station.", "ko": "역까지 10km이다. (거리)"},
                     ],
                 },
             ],
@@ -140,15 +161,15 @@ UNIT = {
                 {
                     "type": "compare", "label": "구별",
                     "lines": [
-                        "가주어 it → 뒤에 **{{진주어 있음}}**",
-                        "비인칭 it → 뒤에 **{{진주어 없음}}**",
+                        "가주어 it → 뒤에 **{{진주어(to부정사·that절)}} 있음**",
+                        "비인칭 it → 뒤에 **{{진주어 없음}}** (날씨·시간·거리)",
                     ],
                 },
             ],
         },
     ],
     "wrapup": {
-        "title": "주어 자리 정리",
+        "title": "주어 자리에 올 수 있는 것 — 한눈에 정리",
         "headers": ["형태", "예", "해석", "수"],
         "rows": [
             ["명사(구)", "The book is new.", "~은/는/이/가", "명사에 일치"],
@@ -171,12 +192,11 @@ UNIT = {
             ],
         },
         {
-            "q": "우리말에 맞게 영작하시오.",
-            "items": [],
+            "q": "빈칸을 채워 문장을 완성하시오.",
             "examples": [
-                {"ko": "규칙적으로 운동하는 것은 중요하다.", "en": "It is important to exercise regularly."},
-                {"ko": "그가 어디에 사는지는 알려져 있지 않다.", "en": "Where he lives is unknown."},
-                {"ko": "그가 정직하다는 것은 사실이다.", "en": "It is true that he is honest."},
+                {"en": "{{It}} is important {{to}} exercise regularly.", "ko": "규칙적으로 운동하는 것은 중요하다."},
+                {"en": "{{Where}} he {{lives}} is unknown.", "ko": "그가 어디에 사는지는 알려져 있지 않다."},
+                {"en": "{{It}} is true {{that}} he is honest.", "ko": "그가 정직하다는 것은 사실이다."},
             ],
         },
         {

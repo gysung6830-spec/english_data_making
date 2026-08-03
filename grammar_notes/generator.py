@@ -79,6 +79,17 @@ def render_inline(text: str, teacher: bool) -> str:
 
 
 # ── 블록 빌더 ─────────────────────────────────────────────────────
+def _examples_html(examples: list, teacher: bool) -> str:
+    """예문 : 인쇄된 영어 문장(빈칸 포함) + 한글 뜻. (필기줄 아님)"""
+    rows = []
+    for ex in examples:
+        en = render_inline(ex["en"], teacher)
+        ko = html.escape(ex.get("ko", ""))
+        gloss = f'<span class="ex-ko">— {ko}</span>' if ko else ""
+        rows.append(f'<li><span class="ex-en">{en}</span> {gloss}</li>')
+    return '<ul class="exlist">' + "".join(rows) + "</ul>"
+
+
 def _box_html(box: dict, teacher: bool) -> str:
     kind = box.get("type", "tip")  # tip(초록) | warn(함정) | compare(비교)
     lines = "".join(
@@ -110,14 +121,7 @@ def _point_html(p: dict, teacher: bool) -> str:
                 blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
             blocks.append("  </ul>")
         if c.get("examples"):
-            blocks.append('  <div class="ex-label">▪ 예문 — 직접 써 보기</div>')
-            for ex in c["examples"]:
-                ko = render_inline(ex.get("ko", ""), teacher)
-                ans = render_inline(ex["en"], teacher) if teacher else ""
-                blocks.append(
-                    f'  <div class="wline"><span class="wko">{ko}</span>'
-                    f'<div class="wrule"><span class="wans">{ans}</span></div></div>'
-                )
+            blocks.append(_examples_html(c["examples"], teacher))
         for _ in range(c.get("space", 0)):
             blocks.append('  <div class="space-line"></div>')
         blocks.append("</div>")
@@ -153,13 +157,8 @@ def _practice_html(items: list, teacher: bool) -> str:
             for it in grp["items"]:
                 blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
             blocks.append("  </ol>")
-        for ex in grp.get("examples", []):
-            ko = render_inline(ex.get("ko", ""), teacher)
-            ans = render_inline(ex["en"], teacher) if teacher else ""
-            blocks.append(
-                f'  <div class="wline"><span class="wko">{ko}</span>'
-                f'<div class="wrule"><span class="wans">{ans}</span></div></div>'
-            )
+        if grp.get("examples"):
+            blocks.append(_examples_html(grp["examples"], teacher))
         blocks.append("</div>")
     blocks.append("</div>")
     return "\n".join(blocks)
@@ -220,14 +219,12 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .items {{ margin:4px 0 6px; padding-left:20px; }}
 .items li {{ margin:6px 0; }}
 
-/* ✍ 직접 쓰는 예문 필기줄 */
-.ex-label {{ font-size:8.8pt; font-weight:700; color:{GREEN}; margin:8px 0 2px; padding-left:2px; }}
-.wline {{ margin:0 0 4px; padding-left:14px; }}
-.wko {{ display:block; color:#6b7280; font-size:9.2pt; margin-bottom:1px; }}
-.wko::before {{ content:"›  "; color:{GREEN}; font-weight:700; }}
-.wrule {{ border-bottom:1px solid #c2ccd4; min-height:1.9em; display:flex;
-  align-items:flex-end; padding:0 2px 2px; }}
-.wans {{ color:{ANSWER_FG}; font-weight:700; }}
+/* 예문 : 빈칸 포함 인쇄 문장 + 한글 뜻 */
+.exlist {{ list-style:none; margin:4px 0 4px; padding-left:16px; }}
+.exlist li {{ margin:6px 0; text-indent:-13px; padding-left:13px; }}
+.exlist li::before {{ content:"e.g. "; color:{GREEN}; font-weight:700; font-size:8.6pt; }}
+.ex-en {{ }}
+.ex-ko {{ color:#7a8792; font-size:9.2pt; }}
 /* 자유 필기 공간(빈 줄) */
 .space-line {{ border-bottom:1px solid #d7dee4; height:1.9em; margin:0 0 3px; margin-left:14px; }}
 
