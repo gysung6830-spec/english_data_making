@@ -15,14 +15,21 @@ _ABBR = [
 _SENT_BOUNDARY = re.compile(r'(?<=[.!?])["”’)\]]?\s+(?=[A-Z"“‘(\[])')
 
 
+# 이름 이니셜(예: "Paul R. Ehrlich", "George W. Bush", "J. K. Rowling")의 마침표.
+#   '앞에 다른 글자가 붙지 않은 대문자 한 글자 + 마침표'는 문장 끝이 아니라 이니셜로 본다.
+_INITIAL = re.compile(r'(?<![A-Za-z])([A-Z])\.')
+
+
 def split_sentences(text: str) -> list[str]:
-    """영어 지문을 완전한 문장 리스트로 분리(문장 끝부호 유지, 약어 보호)."""
+    """영어 지문을 완전한 문장 리스트로 분리(문장 끝부호 유지, 약어·이니셜 보호)."""
     if not text:
         return []
     t = re.sub(r"\s+", " ", text.replace("\n", " ")).strip()
     # 약어의 마침표를 임시로 치환해 분리 대상에서 제외
     for ab in _ABBR:
         t = t.replace(ab, ab.replace(".", "\x00"))
+    # 이름 이니셜의 마침표도 보호(예: "Paul R. Ehrlich" 를 "Paul R." 와 "Ehrlich…" 로 쪼개지 않게)
+    t = _INITIAL.sub(lambda m: m.group(1) + "\x00", t)
     parts = _SENT_BOUNDARY.split(t)
     out = [p.replace("\x00", ".").strip() for p in parts if p.strip()]
     return out

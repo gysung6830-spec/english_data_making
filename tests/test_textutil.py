@@ -44,8 +44,21 @@ def test_short_body_no_list():
     _check("문장 1개면 목록 생략", sentence_list_block("Just one sentence.") == "")
 
 
+def test_name_initials_not_split():
+    # 이름 이니셜(Paul R. Ehrlich)에서 문장을 쪼개면 안 된다(과거 '앞 문장' 오류의 원인).
+    body = ("The American biologist Paul R. Ehrlich wrote The Population Bomb. "
+            "In 1970 he predicted disaster.")
+    s = split_sentences(body)
+    _check("이니셜에서 분리 안 함(2문장)", len(s) == 2)
+    _check("Paul R. Ehrlich 한 문장 유지", s[0].startswith("The American biologist Paul R. Ehrlich"))
+    # 문두 연속 이니셜도 보호
+    _check("J. K. 연속 이니셜 보호", split_sentences("J. K. Rowling wrote it. She was famous.")[0]
+           == "J. K. Rowling wrote it.")
+
+
 if __name__ == "__main__":
     test_split_keeps_full_sentences()
     test_prompts_embed_verbatim_list()
     test_short_body_no_list()
+    test_name_initials_not_split()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")
