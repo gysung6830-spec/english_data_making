@@ -63,6 +63,17 @@ PAGE = """
   input[type=text], input[type=file] { width:100%; padding:9px 11px; font-size:14px;
           border:1px solid #d6d6da; border-radius:8px; background:#fff; color:#1c1c1e; }
   input[type=text]::placeholder { color:#9a9a9f; }
+  /* 드래그앤드롭 파일 영역 */
+  .dropzone { position:relative; border:2px dashed #c4dccd; border-radius:10px;
+              background:#f4f9f6; padding:24px 14px; text-align:center; cursor:pointer;
+              transition:border-color .15s, background .15s; }
+  .dropzone.dragover { border-color:#14532d; background:#e7f0ea; }
+  .dropzone .file-input { position:absolute; inset:0; width:100%; height:100%;
+              opacity:0; cursor:pointer; }
+  .dz-inner { pointer-events:none; color:#4b5563; font-size:13.5px; line-height:1.5; }
+  .dz-inner b { color:#14532d; }
+  .dz-icon { font-size:22px; color:#14532d; margin-bottom:4px; }
+  .dz-name { display:inline-block; margin-top:2px; font-size:13px; color:#14532d; font-weight:700; }
   .fmt { display:flex; align-items:flex-start; gap:10px; padding:10px;
          border:1px solid #ececee; border-radius:8px; margin-bottom:8px; cursor:pointer; }
   .fmt input { margin-top:3px; }
@@ -90,9 +101,15 @@ PAGE = """
 
   <form method="post" action="{{ url_for('generate') }}" enctype="multipart/form-data">
     <div class="card">
-      <label class="field" for="file">1. 지문 파일</label>
-      <input type="file" id="file" name="file"
-             accept=".pdf,.txt,.hwp,.hwpx,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
+      <label class="field">1. 지문 파일</label>
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="file" name="file" class="file-input"
+               accept=".pdf,.txt,.hwp,.hwpx,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
+        <div class="dz-inner" id="dzText">
+          <div class="dz-icon">⬆</div>
+          <div><b>파일을 여기로 끌어다 놓거나</b> 클릭해서 선택</div>
+        </div>
+      </div>
       <div class="hint">PDF · HWP(한글) · 사진(JPG/PNG 등) · txt 지원. 스캔/사진은 자동 OCR.</div>
     </div>
 
@@ -158,6 +175,34 @@ PAGE = """
     }
   }
   updatePreview();
+
+  // 드래그앤드롭 파일 선택
+  (function(){
+    const dz = document.getElementById('dropzone');
+    const fileInput = document.getElementById('file');
+    const dzText = document.getElementById('dzText');
+    function showName(){
+      if (fileInput.files && fileInput.files.length){
+        dzText.innerHTML = '<div class="dz-icon">📄</div>선택된 파일: '
+          + '<span class="dz-name">' + fileInput.files[0].name + '</span>'
+          + '<div style="font-size:12px;color:#6b7280;margin-top:3px">다른 파일을 끌어다 놓거나 클릭해 변경</div>';
+      }
+    }
+    fileInput.addEventListener('change', showName);
+    ['dragenter','dragover'].forEach(function(ev){
+      dz.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); dz.classList.add('dragover'); });
+    });
+    ['dragleave','dragend','drop'].forEach(function(ev){
+      dz.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); dz.classList.remove('dragover'); });
+    });
+    dz.addEventListener('drop', function(e){
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (files && files.length){
+        try { fileInput.files = files; } catch(_) {}
+        showName();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
