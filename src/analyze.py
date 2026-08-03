@@ -1,6 +1,8 @@
 """한 지문에 대해 추출 + 6개 섹션을 개별 호출로 분석하고 Report 로 조립."""
 from __future__ import annotations
 
+import json
+import sys
 from concurrent.futures import ThreadPoolExecutor
 
 from . import prompts, schemas
@@ -149,14 +151,36 @@ def analyze_worksheet(
             raise ValueError("문답 근거가 모두 지문 밖입니다.")
         return schemas.WSQAType(items=kept)
 
+    def _gen_paraphrase():
+        # 표준 구조화 호출(재시도 포함). 성공하면 그대로 사용.
+        try:
+            return client.structured(
+                S, prompts.ws_paraphrase_prompt(title, body),
+                schemas.WSParaphraseType, max_tokens=10000, max_retries=r)
+        except Exception as e:
+            print(f"[정보] 문장변형 표준 파싱 실패 → 문항 단위 살리기 시도: {e}", file=sys.stderr)
+        # 살리기: 원시 JSON 을 받아 '유효한 문항만' 골라 구성(1개라도 있으면 유형 유지).
+        from .client import build_request, extract_text
+        req = build_request(client.model, S, prompts.ws_paraphrase_prompt(title, body),
+                            schemas.WSParaphraseType, max_tokens=10000)
+        msg = client.raw.messages.create(**req)
+        data = json.loads(extract_text(msg))
+        good = []
+        for q in data.get("questions", []):
+            try:
+                good.append(schemas.WSParaphraseQ.model_validate(q))
+            except Exception:
+                continue
+        if not good:
+            raise ValueError("문장변형 유효 문항이 없습니다.")
+        return schemas.WSParaphraseType(questions=good)
+
     tasks = {
         "summary": lambda: client.structured(
             S, prompts.ws_summary_prompt(title, body),
             schemas.WSSummaryType, max_retries=r,
             extra_validate=lambda s: _summary_answers_grounded(s, body)),
-        "paraphrase": lambda: client.structured(
-            S, prompts.ws_paraphrase_prompt(title, body),
-            schemas.WSParaphraseType, max_tokens=10000, max_retries=r),
+        "paraphrase": _gen_paraphrase,
         "arrange": lambda: client.structured(
             S, prompts.ws_arrange_prompt(title, body),
             schemas.WSArrangeType, max_retries=r),
@@ -173,8 +197,6 @@ def analyze_worksheet(
     }
 
     # 유형 단위 부분 성공: 한 유형이 (재시도까지) 실패해도 None 으로 두고 계속.
-    import sys
-
     def _safe(name, fn):
         try:
             return fn()
