@@ -6,9 +6,10 @@ OPIC 주제를 바탕으로 **자기 의견을 영어로 말하는** 연습용 �
 | 버전 | 난이도 | 데이터 파일 | 산출 PDF |
 |---|---|---|---|
 | 난이도 중 | OPIC 중급 · 28개 주제 | `textbook_data.py` | `output/OPIC회화교재_난이도중.pdf` |
+| 난이도 중상 | OPIC 중상급 · **중3 수준** · 28개 주제 | `textbook_data_mid.py` | `output/OPIC회화교재_난이도중상.pdf` |
 | 난이도 상 | OPIC 고급 · 28개 주제(직장·워라밸·자기계발 + 하루일과·출퇴근·집안일 등 일상) | `textbook_data_adult.py` | `output/OPIC회화교재_난이도상.pdf` |
 
-두 버전은 **같은 빌더(`build_textbook.py`)** 와 디자인을 공유하고, 콘텐츠 데이터만 다릅니다.
+세 버전은 **같은 빌더(`build_textbook.py`)** 와 디자인을 공유하고, 콘텐츠 데이터만 다릅니다.
 모든 페이지 하단에 **ⓒ 김은아영어연구소** 저작권이 표기됩니다.
 
 ### 암기 체크 페이지 (빈칸 뚫기)
@@ -47,11 +48,12 @@ sudo apt-get install -y fonts-nanum fonts-symbola
 pip install weasyprint
 
 # 교재 PDF 생성
-python conversation/build_textbook.py          # 두 버전 모두 생성 (기본 all)
+python conversation/build_textbook.py          # 세 버전 모두 생성 (기본 all)
 python conversation/build_textbook.py school   # 난이도 중만
+python conversation/build_textbook.py mid      # 난이도 중상(중3)만
 python conversation/build_textbook.py adult    # 난이도 상만
 python conversation/build_textbook.py sample   # 암기 페이지 샘플(난이도 중 3단원)
-#  -> output/OPIC회화교재_난이도중.pdf , output/OPIC회화교재_난이도상.pdf
+#  -> output/OPIC회화교재_난이도중.pdf , _난이도중상.pdf , _난이도상.pdf
 ```
 
 > **이모지 배치 관련**: WeasyPrint는 컬러 이모지(Noto Color Emoji)를 줄 위로 크게 띄워

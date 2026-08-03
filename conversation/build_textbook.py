@@ -68,11 +68,11 @@ CSS = """
   margin: 10mm 12mm 12mm 12mm;
   @bottom-center {
     content: "__TITLE__  ·  " counter(page) " / " counter(pages);
-    font-family: "NanumGothic", sans-serif; font-size: 8px; color: #9aa0a6;
+    font-family: "NanumGothic", sans-serif; font-size: 11px; color: #9aa0a6;
   }
   @bottom-right {
     content: "ⓒ 김은아영어연구소";
-    font-family: "NanumGothic", sans-serif; font-size: 8px; color: #9aa0a6;
+    font-family: "NanumGothic", sans-serif; font-size: 11px; color: #9aa0a6;
   }
 }
 * { box-sizing: border-box; }
@@ -188,6 +188,7 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 .memo .ms { font-size:15px; font-weight:600; line-height:2.1; }
 .memo .ms .blk { color:var(--red); font-weight:800; letter-spacing:1px;
   border-bottom:1.5px solid var(--red); padding:0 2px; }
+.memo .ms .blk.key { color:transparent; border-bottom:2px solid var(--red); }
 .memo .mk { color:var(--muted); font-size:11px; margin:1px 0 4px; }
 .memo .ansbox { margin-top:10px; padding-top:7px; border-top:1px dashed var(--line);
   color:#b0b4bb; font-size:9px; }
@@ -374,43 +375,61 @@ _STOP = set(
 )
 
 
-def _cloze(text: str, max_blanks: int = 3):
-    """완성문에서 내용어 몇 개를 골라 '첫 글자 + 빈칸'으로 뚫는다.
-    반환: (빈칸 표시 HTML, 정답 단어 리스트)"""
-    parts = re.split(r"([A-Za-z][A-Za-z'\-]*)", text)  # 단어/비단어 번갈아
+def _cloze_light(text: str, n: int):
+    """정적 텍스트에서 내용어 n개를 '첫 글자 + 빈칸' 힌트로 뚫는다.
+    반환: (HTML, 정답 리스트, 실제로 뚫은 개수)"""
+    if n <= 0:
+        return esc(text), [], 0
+    parts = re.split(r"([A-Za-z][A-Za-z'\-]*)", text)
     cand = [i for i, p in enumerate(parts)
             if re.fullmatch(r"[A-Za-z][A-Za-z'\-]*", p or "")
-            and p.lower() not in _STOP and len(p) >= 3]
-    if len(cand) > max_blanks:
-        step = len(cand) / max_blanks
-        picks = {cand[min(len(cand) - 1, round(k * step))] for k in range(max_blanks)}
+            and p.lower() not in _STOP and len(p) >= 4]
+    if len(cand) > n:
+        step = len(cand) / n
+        picks = {cand[min(len(cand) - 1, round(k * step))] for k in range(n)}
     else:
         picks = set(cand)
-
     out, answers = [], []
     for i, p in enumerate(parts):
         if i in picks:
             answers.append(p)
-            blank = esc(p[0]) + "_" * (len(p) - 1)
-            out.append(f'<span class="blk">{blank}</span>')
+            out.append(f'<span class="blk">{esc(p[0])}{"_" * (len(p) - 1)}</span>')
         else:
             out.append(esc(p))
+    return "".join(out), answers, len(picks)
+
+
+def _memorize_line(en: str, choices):
+    """원래 빈칸(____)이던 자리는 '완전 공백'으로, 그 외 몇 단어는 첫 글자 힌트로 뚫는다."""
+    parts = en.split("____")
+    n_orig = len(parts) - 1
+    budget = 2 if n_orig == 0 else (1 if n_orig == 1 else 0)  # 원래 빈칸이 많으면 힌트 빈칸은 줄임
+    out, answers = [], []
+    for i, seg in enumerate(parts):
+        seg_html, seg_ans, used = _cloze_light(seg, budget)
+        budget -= used
+        out.append(seg_html)
+        answers += seg_ans
+        if i < n_orig:                       # 원래 빈칸 자리 = 완전 공백
+            opt = choices[i][0][0]
+            answers.append(opt)
+            width = min(26, max(9, len(opt) + 2))
+            out.append(f'<span class="blk key">{"_" * width}</span>')
     return "".join(out), answers
 
 
 def memorize_html(idx: int, u: dict) -> str:
-    """단원 뒤에 붙는 '암기 체크' 페이지: 완성문(보기 1번으로 채움)에서
-    몇 개 단어를 빈칸으로 뚫고, 한글 뜻을 단서로 준다. 하단에 정답."""
+    """단원 뒤에 붙는 '암기 체크' 페이지.
+    원래 템플릿 빈칸은 완전 공백, 그 밖의 단어 몇 개는 첫 글자 힌트. 하단에 정답."""
     accent = ACCENTS[(idx - 1) % len(ACCENTS)]
     steps, answers = "", []
     for st in u["template"]:
         lines = ""
         for en, ko, choices in st["lines"]:
-            model_en, model_ko = en, ko
+            model_ko = ko
             for opts in choices:
-                model_en = model_en.replace("____", opts[0][0], 1)
                 model_ko = model_ko.replace("____", opts[0][1], 1)
-            cloze_html, ans = _cloze(model_en)
+            cloze_html, ans = _memorize_line(en, choices)
             answers += ans
             lines += f'<div class="ms">{cloze_html}</div><div class="mk">{esc(model_ko)}</div>'
         steps += f'<div class="mstep"><div class="mslabel">{esc(st["label"])}</div>{lines}</div>'
@@ -466,9 +485,10 @@ def build_sample(out_path: Path, n_units: int = 3) -> Path:
     return _render(body, out_path)
 
 
-# 만들 버전들: 인자로 'level-중' / 'level-상' / 'all' / 'sample' 선택 (기본 all)
+# 만들 버전들: 인자로 'school'(중) / 'mid'(중상) / 'adult'(상) / 'all' / 'sample' 선택 (기본 all)
 TARGETS = {
     "school": ("textbook_data", ROOT / "output" / "OPIC회화교재_난이도중.pdf"),
+    "mid":    ("textbook_data_mid", ROOT / "output" / "OPIC회화교재_난이도중상.pdf"),
     "adult":  ("textbook_data_adult", ROOT / "output" / "OPIC회화교재_난이도상.pdf"),
 }
 
