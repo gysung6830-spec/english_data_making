@@ -15,10 +15,10 @@
 부록의 '단어 사전'은 모든 보기 단어를 자동 수집해 만들어집니다(별도 작성 불필요).
 """
 
-TITLE = "중학 영어 회화 교재"
-SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 중학생 수준 · 템플릿 + 워드뱅크"
-FOOTER = "중학 영어 회화 교재 · 내 의견 말하기 템플릿 + 워드뱅크"
-KICKER = "MIDDLE SCHOOL ENGLISH"
+TITLE = "OPIC 회화 교재 · 난이도 중"
+SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 난이도 중(중급) · 템플릿 + 워드뱅크"
+FOOTER = "OPIC 회화 교재 · 난이도 중"
+KICKER = "OPIC SPEAKING · 난이도 중 (INTERMEDIATE)"
 
 HOW_TO_USE = [
     ("1. 워드뱅크 보기 익히기", "오른쪽 워드뱅크에서 각 번호에 들어갈 보기 단어와 뜻을 먼저 읽어 봅니다."),

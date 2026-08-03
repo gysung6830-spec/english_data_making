@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import html as _html
 import os
+import re
 import tempfile
 from pathlib import Path
 
@@ -180,6 +181,17 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
   padding:3.5px 8px; border-bottom:1px solid #eef1ee; font-size:10px; }
 .appendix .grow .ge { font-weight:700; color:#111827; }
 .appendix .grow .gk { color:#6b7280; text-align:right; }
+
+/* 암기 체크(빈칸 뚫기) 페이지 */
+.memo .mstep { margin:0 0 13px; }
+.memo .mslabel { font-weight:800; color:var(--teal); font-size:12px; margin-bottom:4px; }
+.memo .ms { font-size:15px; font-weight:600; line-height:2.1; }
+.memo .ms .blk { color:var(--red); font-weight:800; letter-spacing:1px;
+  border-bottom:1.5px solid var(--red); padding:0 2px; }
+.memo .mk { color:var(--muted); font-size:11px; margin:1px 0 4px; }
+.memo .ansbox { margin-top:10px; padding-top:7px; border-top:1px dashed var(--line);
+  color:#b0b4bb; font-size:9px; }
+.memo .ansbox b { color:#9aa0a6; }
 """
 
 
@@ -353,14 +365,82 @@ def appendix_html() -> str:
     """
 
 
-def build(out_path: Path = OUT) -> Path:
-    body = cover_html() + intro_html() + expressions_html()
-    for i, u in enumerate(data.UNITS, 1):
-        body += unit_html(i, u)
-    body += appendix_html()
+# 암기 페이지에서 빈칸으로 뚫지 않는 기능어(관사/전치사/대명사 등)
+_STOP = set(
+    "a an the this that these those and or but so if to of in on at by for with as from into "
+    "i you we they he she it my your our their his her its me us them him "
+    "is am are was were be been being do does did have has had will would can could should "
+    "not no more most much very just also too than then there here".split()
+)
 
+
+def _cloze(text: str, max_blanks: int = 3):
+    """완성문에서 내용어 몇 개를 골라 '첫 글자 + 빈칸'으로 뚫는다.
+    반환: (빈칸 표시 HTML, 정답 단어 리스트)"""
+    parts = re.split(r"([A-Za-z][A-Za-z'\-]*)", text)  # 단어/비단어 번갈아
+    cand = [i for i, p in enumerate(parts)
+            if re.fullmatch(r"[A-Za-z][A-Za-z'\-]*", p or "")
+            and p.lower() not in _STOP and len(p) >= 3]
+    if len(cand) > max_blanks:
+        step = len(cand) / max_blanks
+        picks = {cand[min(len(cand) - 1, round(k * step))] for k in range(max_blanks)}
+    else:
+        picks = set(cand)
+
+    out, answers = [], []
+    for i, p in enumerate(parts):
+        if i in picks:
+            answers.append(p)
+            blank = esc(p[0]) + "_" * (len(p) - 1)
+            out.append(f'<span class="blk">{blank}</span>')
+        else:
+            out.append(esc(p))
+    return "".join(out), answers
+
+
+def memorize_html(idx: int, u: dict) -> str:
+    """단원 뒤에 붙는 '암기 체크' 페이지: 완성문(보기 1번으로 채움)에서
+    몇 개 단어를 빈칸으로 뚫고, 한글 뜻을 단서로 준다. 하단에 정답."""
+    accent = ACCENTS[(idx - 1) % len(ACCENTS)]
+    steps, answers = "", []
+    for st in u["template"]:
+        lines = ""
+        for en, ko, choices in st["lines"]:
+            model_en, model_ko = en, ko
+            for opts in choices:
+                model_en = model_en.replace("____", opts[0][0], 1)
+                model_ko = model_ko.replace("____", opts[0][1], 1)
+            cloze_html, ans = _cloze(model_en)
+            answers += ans
+            lines += f'<div class="ms">{cloze_html}</div><div class="mk">{esc(model_ko)}</div>'
+        steps += f'<div class="mstep"><div class="mslabel">{esc(st["label"])}</div>{lines}</div>'
+
+    ans_html = "  ·  ".join(esc(a) for a in answers)
+    return f"""
+    <div class="page">
+      <div class="unit-head" style="background:{accent};">
+        <div class="emoji">{u["emoji"]}</div>
+        <div>
+          <div class="no">UNIT {idx:02d} · 암기 체크</div>
+          <div class="ko">{esc(u["title_ko"])} <span style="font-size:12px; font-weight:600; opacity:.9;">— 빈칸 암기</span></div>
+          <div class="en">Fill in the blanks from memory</div>
+        </div>
+        <div class="prompt"><div class="q">🧠 앞 페이지로 익힌 뒤, 빈칸을 채워 보세요</div>
+          <div style="opacity:.9; font-size:9.5px;">첫 글자가 힌트예요</div></div>
+      </div>
+      <div class="block memo">
+        <div class="bar" style="background:var(--teal);">🧠 문장 암기 · Fill from Memory</div>
+        <div class="body">
+          {steps}
+          <div class="ansbox"><b>정답:</b> {ans_html}</div>
+        </div>
+      </div>
+    </div>
+    """
+
+
+def _render(body: str, out_path: Path) -> Path:
     doc = f"<!doctype html><html><head><meta charset='utf-8'></head><body>{body}</body></html>"
-
     from weasyprint import CSS as WCSS, HTML  # 지연 임포트(무거움)
     css = CSS.replace("__TITLE__", esc(data.TITLE))
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -368,10 +448,28 @@ def build(out_path: Path = OUT) -> Path:
     return out_path
 
 
-# 만들 버전들: 인자로 'school' / 'adult' / 'all' 선택 (기본 all)
+def build(out_path: Path = OUT, with_memorize: bool = False) -> Path:
+    body = cover_html() + intro_html() + expressions_html()
+    for i, u in enumerate(data.UNITS, 1):
+        body += unit_html(i, u)
+        if with_memorize:                 # 단원 페이지 뒤에 암기 체크 페이지
+            body += memorize_html(i, u)
+    body += appendix_html()
+    return _render(body, out_path)
+
+
+def build_sample(out_path: Path, n_units: int = 3) -> Path:
+    """앞쪽 몇 개 단원만: [단원 페이지 + 암기 페이지] 를 번갈아 보여 주는 샘플."""
+    body = cover_html()
+    for i, u in enumerate(data.UNITS[:n_units], 1):
+        body += unit_html(i, u) + memorize_html(i, u)
+    return _render(body, out_path)
+
+
+# 만들 버전들: 인자로 'level-중' / 'level-상' / 'all' / 'sample' 선택 (기본 all)
 TARGETS = {
-    "school": ("textbook_data", ROOT / "output" / "중학영어회화교재_OPIC10.pdf"),
-    "adult":  ("textbook_data_adult", ROOT / "output" / "성인영어회화교재_OPIC20.pdf"),
+    "school": ("textbook_data", ROOT / "output" / "OPIC회화교재_난이도중.pdf"),
+    "adult":  ("textbook_data_adult", ROOT / "output" / "OPIC회화교재_난이도상.pdf"),
 }
 
 
@@ -380,9 +478,16 @@ if __name__ == "__main__":
     import sys
 
     which = sys.argv[1] if len(sys.argv) > 1 else "all"
-    names = list(TARGETS) if which == "all" else [which]
-    for name in names:
-        module_name, out_path = TARGETS[name]
-        data = importlib.import_module(module_name)  # noqa: F811 (전역 재지정)
-        p = build(out_path)
-        print(f"완성: {p}")
+
+    if which == "sample":
+        # 암기 페이지 샘플 (난이도 중 앞 3개 단원)
+        data = importlib.import_module("textbook_data")  # noqa: F811
+        p = build_sample(ROOT / "output" / "샘플_암기페이지_난이도중.pdf", n_units=3)
+        print(f"완성(샘플): {p}")
+    else:
+        names = list(TARGETS) if which == "all" else [which]
+        for name in names:
+            module_name, out_path = TARGETS[name]
+            data = importlib.import_module(module_name)  # noqa: F811 (전역 재지정)
+            p = build(out_path)
+            print(f"완성: {p}")

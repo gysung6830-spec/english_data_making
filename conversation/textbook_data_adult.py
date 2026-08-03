@@ -10,10 +10,10 @@
 build_textbook.py 가 이 파일을 읽어 output/성인영어회화교재_OPIC20.pdf 를 만듭니다.
 """
 
-TITLE = "성인 영어 회화 교재"
-SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 성인 · 중급 이상 · 템플릿 + 워드뱅크"
-FOOTER = "성인 영어 회화 교재 · 내 의견 말하기 템플릿 + 워드뱅크"
-KICKER = "ADULT · INTERMEDIATE & UP"
+TITLE = "OPIC 회화 교재 · 난이도 상"
+SUBTITLE = "OPIC 28개 주제로 말하는 나의 의견 · 난이도 상(고급) · 템플릿 + 워드뱅크"
+FOOTER = "OPIC 회화 교재 · 난이도 상"
+KICKER = "OPIC SPEAKING · 난이도 상 (ADVANCED)"
 
 HOW_TO_USE = [
     ("1. 워드뱅크 보기 익히기", "오른쪽 워드뱅크에서 각 번호에 들어갈 보기 단어·표현과 뜻을 먼저 확인합니다."),
