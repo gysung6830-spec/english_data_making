@@ -55,11 +55,16 @@ python conversation/build_textbook.py adult    # 난이도 상만
 python conversation/build_textbook.py sample   # 암기 페이지 샘플(난이도 중 3단원)
 #  -> output/OPIC회화교재_난이도중.pdf , _난이도중상.pdf , _난이도상.pdf
 
-# 빈칸(암기) 페이지를 각 단원 뒤에 넣은 '암기포함' 교재
-python conversation/build_textbook.py memo          # 세 버전 암기포함본
+# 암기(빈칸) 페이지 — 두 가지 방식
+python conversation/build_textbook.py memo          # 본책 각 단원 뒤에 끼운 '암기포함' 교재(3버전)
+python conversation/build_textbook.py blank         # 암기 페이지만 모은 '별도 빈칸 교재'(3버전)
 python conversation/build_textbook.py school-memo   # 난이도 중 암기포함본만
-#  -> output/OPIC회화교재_난이도중_암기포함.pdf 등
+python conversation/build_textbook.py school-blank  # 난이도 중 빈칸 교재만
+#  -> _암기포함.pdf (본책+암기) / _빈칸.pdf (암기만 별도)
 ```
+
+빈칸 교재는 **본책과 분리된 별도 PDF**로, 표지 + 28단원 암기 페이지만 담습니다.
+암기 페이지 규칙: **힌트 없는 빈칸 = 원래 정답 단어 / 첫 글자 있는 빈칸 = 추가 암기**, 하단에 정답.
 
 > **이모지 배치 관련**: WeasyPrint는 컬러 이모지(Noto Color Emoji)를 줄 위로 크게 띄워
 > 배치가 어긋나는 버그가 있어, 빌더가 컬러 이모지 폰트를 거부(fontconfig)하고

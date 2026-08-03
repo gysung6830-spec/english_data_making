@@ -444,8 +444,8 @@ def memorize_html(idx: int, u: dict) -> str:
           <div class="ko">{esc(u["title_ko"])} <span style="font-size:12px; font-weight:600; opacity:.9;">— 빈칸 암기</span></div>
           <div class="en">Fill in the blanks from memory</div>
         </div>
-        <div class="prompt"><div class="q">🧠 앞 페이지로 익힌 뒤, 빈칸을 채워 보세요</div>
-          <div style="opacity:.9; font-size:9.5px;">첫 글자가 힌트예요</div></div>
+        <div class="prompt"><div class="q">🧠 외운 문장을 떠올리며 빈칸을 채워 보세요</div>
+          <div style="opacity:.9; font-size:9.5px;">힌트 없는 빈칸 = 원래 정답 단어 · 첫 글자 있는 빈칸 = 추가 암기</div></div>
       </div>
       <div class="block memo">
         <div class="bar" style="background:var(--teal);">🧠 문장 암기 · Fill from Memory</div>
@@ -485,6 +485,14 @@ def build_sample(out_path: Path, n_units: int = 3) -> Path:
     return _render(body, out_path)
 
 
+def build_blank_only(out_path: Path) -> Path:
+    """암기(빈칸) 페이지만 모은 '별도 빈칸 교재' (표지 + 28단원 암기 페이지)."""
+    body = cover_html()
+    for i, u in enumerate(data.UNITS, 1):
+        body += memorize_html(i, u)
+    return _render(body, out_path)
+
+
 # 만들 버전들: 인자로 'school'(중) / 'mid'(중상) / 'adult'(상) / 'all' / 'sample' 선택 (기본 all)
 TARGETS = {
     "school": ("textbook_data", ROOT / "output" / "OPIC회화교재_난이도중.pdf"),
@@ -505,16 +513,26 @@ if __name__ == "__main__":
         p = build_sample(ROOT / "output" / "샘플_암기페이지_난이도중.pdf", n_units=3)
         print(f"완성(샘플): {p}")
     else:
-        # '-memo' 접미사 → 각 단원 뒤에 암기(빈칸) 페이지를 넣은 '빈칸 교재' 생성
-        memo = which.endswith("-memo")
-        key = which[:-5] if memo else which
-        if key == "memo":            # 'memo' 단독 = 전체 암기본
-            key, memo = "all", True
+        # 접미사로 종류 선택:
+        #   '-memo'  → 각 단원 뒤에 암기 페이지를 끼운 '암기포함' 교재
+        #   '-blank' → 암기(빈칸) 페이지만 모은 '별도 빈칸 교재'
+        mode = "plain"
+        key = which
+        for suf, m in (("-memo", "memo"), ("-blank", "blank")):
+            if key.endswith(suf):
+                key, mode = key[:-len(suf)], m
+        if key in ("memo", "blank"):   # 'memo'/'blank' 단독 = 세 버전 모두
+            mode, key = key, "all"
         names = list(TARGETS) if key == "all" else [key]
         for name in names:
             module_name, out_path = TARGETS[name]
             data = importlib.import_module(module_name)  # noqa: F811 (전역 재지정)
-            if memo:
+            if mode == "blank":
+                out_path = out_path.with_name(out_path.stem + "_빈칸" + out_path.suffix)
+                p = build_blank_only(out_path)
+            elif mode == "memo":
                 out_path = out_path.with_name(out_path.stem + "_암기포함" + out_path.suffix)
-            p = build(out_path, with_memorize=memo)
+                p = build(out_path, with_memorize=True)
+            else:
+                p = build(out_path)
             print(f"완성: {p}")
