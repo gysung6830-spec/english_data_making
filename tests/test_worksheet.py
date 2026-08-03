@@ -158,8 +158,8 @@ def test_reading_ko_list_alignment():
         "reading_ko": ["가", "나", "그러나", "다", "왜냐하면"],   # 5개 vs 영어 3개
     })
     s2 = analyzer.analyze_sentence(_fake_client([payload2]), "A, B C.", 4, strength="full")
-    # 영어 3조각(끝 슬래시 제거) → 한글 5개를 3개로 병합: [가 나 / 그러나 다 / 왜냐하면]
-    assert s2.reading_ko == "가 나 / 그러나 다 / 왜냐하면"
+    # 영어 3조각(끝 슬래시 제거, 길이 A,=2 · B=1 · C.=2) → 한글 5개를 길이비율로 [2,1,2] 병합
+    assert s2.reading_ko == "가 나 / 그러나 / 다 왜냐하면"
     print("PASS  직독직해 리스트 정렬(개수 일치 / 과분할 시 병합)")
 
 
@@ -367,7 +367,7 @@ def test_reading_alignment_and_no_false_review():
     under2 = _reading_ko_aligned([en_line(3)], ["가", "나"])              # 영어4/한글2 → 연속
     inner = _reading_ko_aligned([en_line(2)], ["a / x", "b", "c"])        # 조각 내 '/' 제거
     assert exact == "a / b / c"
-    assert off1 == "a b / c / d"          # 4→3 병합(영어 3조각에 맞춤), 슬래시 유지
+    assert off1 == "a / b / c d"          # 4→3 병합(끝 조각 'end'가 길어 c,d 가 묶임)
     assert over == "a b / c d"            # 4→2 병합(영어 2조각에 맞춤)
     assert " / " not in under2 and under2 == "가 나"   # 한글 부족(2개 차이) → 연속 표기
     assert inner == "a x / b / c"         # 내부 '/' 제거로 조각 수 부풀지 않음

@@ -266,21 +266,54 @@ def _english_chunk_count(lines: list[list[Token]]) -> int:
     return slashes if toks[-1].slash else slashes + 1
 
 
-def _merge_ko_to(chunks: list[str], n: int) -> list[str]:
-    """한글 조각이 영어 조각보다 '더 잘게' 쪼개졌을 때(과분할), 순서를 유지한 채 인접
-    조각을 균등하게 묶어 n개로 줄인다. 어순은 그대로이므로 영어 조각과 대략 1:1로 맞는다.
-    (예: 4조각을 2개로 → [0+1, 2+3])."""
-    n = max(1, n)
-    if len(chunks) <= n:
+def _english_chunk_sizes(lines: list[list[Token]]) -> list[int]:
+    """영어 끊어읽기 조각별 '글자 수'(가중치). 조각 병합 시 긴 영어 조각에 한글을 더 많이
+    배분해 경계가 자연스럽게 맞도록 하는 데 쓴다. 조각 수는 _english_chunk_count 와 동일."""
+    toks = [t for ln in lines for t in ln]
+    sizes: list[int] = []
+    cur = 0
+    for t in toks:
+        cur += max(1, len((t.text or "").strip()))
+        if getattr(t, "slash", False):
+            sizes.append(cur)
+            cur = 0
+    if cur > 0 or not sizes:
+        sizes.append(cur)
+    return sizes
+
+
+def _merge_ko_weighted(chunks: list[str], sizes: list[int]) -> list[str]:
+    """한글 조각이 영어보다 '더 잘게' 쪼개졌을 때(과분할), 순서를 유지한 채 인접 조각을
+    묶어 len(sizes)개로 줄인다. 각 영어 조각의 '길이 비율'만큼 한글 조각을 배분해(반올림)
+    경계가 영어와 자연스럽게 대응되게 한다.
+    (예: 영어 ['In fact,','they should expect them'](길이 8:22) + 한글 4개
+         → 배분 [1,3] → ['사실,','그들은 예상해야 한다 그것들을'])."""
+    E = len(sizes)
+    K = len(chunks)
+    if E <= 0 or K <= E:
         return chunks
+    total = sum(sizes) or E
+    counts = [max(1, round(K * s / total)) for s in sizes]   # 길이 비율 배분(각 최소 1)
+    # 반올림 오차로 합이 K 와 달라지면, 비율이 가장 어긋난 조각부터 ±1 로 보정
+    diff = K - sum(counts)
+    while diff > 0:                                   # 부족 → 가장 '덜 받은'(size/count 큰) 조각에 +1
+        j = max(range(E), key=lambda i: sizes[i] / counts[i])
+        counts[j] += 1
+        diff -= 1
+    while diff < 0:                                   # 초과 → 가장 '많이 받은' 조각(단, >1)에서 -1
+        cand = [i for i in range(E) if counts[i] > 1]
+        if not cand:
+            break
+        j = min(cand, key=lambda i: sizes[i] / counts[i])
+        counts[j] -= 1
+        diff += 1
     out: list[str] = []
-    total = len(chunks)
-    base, rem = divmod(total, n)
-    i = 0
-    for g in range(n):
-        take = base + (1 if g < rem else 0)
-        out.append(" ".join(chunks[i:i + take]))
-        i += take
+    idx = 0
+    for c in counts:
+        out.append(" ".join(chunks[idx:idx + c]))
+        idx += c
+    if idx < K:                                       # 보정 실패 시 잔여를 마지막 조각에 붙임
+        out[-1] = (out[-1] + " " + " ".join(chunks[idx:])).strip()
     return out
 
 
@@ -298,8 +331,11 @@ def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
     if not chunks:
         return ""
     e = _english_chunk_count(lines)
-    if e >= 2 and len(chunks) > e:             # 한글 과분할 → 영어 수에 맞춰 병합
-        chunks = _merge_ko_to(chunks, e)
+    if e >= 2 and len(chunks) > e:             # 한글 과분할 → 영어 조각 길이에 맞춰 병합
+        sizes = _english_chunk_sizes(lines)
+        if len(sizes) != e:                    # 방어: 조각 수 불일치 시 균등 가중
+            sizes = [1] * e
+        chunks = _merge_ko_weighted(chunks, sizes)
     if e >= 2 and abs(len(chunks) - e) >= 2:   # 여전히 크게 어긋남 → 연속 표기(슬래시 제거)
         return " ".join(chunks)
     return " / ".join(chunks)
