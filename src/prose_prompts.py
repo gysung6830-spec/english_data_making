@@ -50,6 +50,11 @@ _RULES = """[문장 완전성 — 매우 중요]
    ★ 조동사가 결합된 동사구(have been, has been, had been, is being 등)는 조동사를 따로 나누지 말고
      대표 동사원형 하나로만 낸다. 특히 'have been'류는 '(be) 하나로만' 내고 정답을 완료형 전체로 쓴다.
      예: "have been related" → "(be)" answer "have been" + 뒤에 "(relate)" answer "related".
+   ★★ (원형)으로 낼 동사는 '문장에서 그 동사(와 딸린 to·조동사)를 지우고' 자리표시자만 남긴다.
+     자리표시자 바로 옆에 같은 동사를 '또' 남겨 중복시키지 말 것.
+     올바른 예: "We need to dramatically reduce our use" → form_template "We need to dramatically {{P1}} our use"
+       (display "(reduce)", answer "reduce").
+     금지 예: "We need {{P1}} dramatically reduce our use" (display "(to reduce)") — reduce 가 남아 중복됨.
    display 예: "(understand)"   answer 예: "understood"   /   display 예: "(produce)" answer 예: "producing"
 3) 어휘 — '난도 하'와 '난도 상' 두 종류를 '모두' 만든다(같은 문장에 대해 각각).
    ★ 각 유형은 '한 문장에 최소 2개, 최대 3개'를 출제한다(어휘가 정말 부족한 아주 짧은 문장만 예외로 1개).
