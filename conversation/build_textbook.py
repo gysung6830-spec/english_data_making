@@ -69,6 +69,10 @@ CSS = """
     content: "__TITLE__  ·  " counter(page) " / " counter(pages);
     font-family: "NanumGothic", sans-serif; font-size: 8px; color: #9aa0a6;
   }
+  @bottom-right {
+    content: "ⓒ 김은아영어연구소";
+    font-family: "NanumGothic", sans-serif; font-size: 8px; color: #9aa0a6;
+  }
 }
 * { box-sizing: border-box; }
 body {
