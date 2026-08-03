@@ -155,6 +155,7 @@ class Analysis:
 
     title_en: str = ""
     title_ko: str = ""
+    summary: str = ""                            # 지문 한눈 요약(1~2문장) — 분석 페이지 상단 박스
     lecture_label: str = ""                      # 지문(문항) 번호 '30'
     source_name: str = ""                        # 파일명(지문명) — 뱃지에 '파일명+지문번호'로 표시
     date: str = ""                               # '2025년 09월'

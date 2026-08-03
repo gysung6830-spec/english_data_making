@@ -87,6 +87,7 @@ class OverviewBundle(BaseModel):
     # ⚠️ 한글 제목을 '먼저' 정하고, 그것을 영어로 번역 → title_ko 를 앞에 둬 생성 순서 유도.
     title_ko: str = ""       # 지문 내용 기반 한글 제목(먼저 생성)
     title_en: str = ""       # title_ko 를 그대로 옮긴 영문 제목(뒤에 생성)
+    summary: str = ""        # 지문 한눈 요약(1~2문장) — 분석 페이지 상단 박스
     vocab: list[VocabSpec] = Field(default_factory=list)
     flow: list[FlowSpec] = Field(default_factory=list)
 
