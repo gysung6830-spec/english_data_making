@@ -102,9 +102,10 @@ def _box_html(box: dict, teacher: bool) -> str:
     )
 
 
-def _point_html(p: dict, teacher: bool) -> str:
+def _point_html(p: dict, teacher: bool, first: bool = False) -> str:
+    cls = "point" if first else "point brk"
     blocks = [
-        f'<div class="point">',
+        f'<div class="{cls}">',
         f'  <div class="point-head"><span class="point-badge">Point {p["no"]}</span>'
         f'<span class="point-title">{html.escape(p["title"])}</span></div>',
     ]
@@ -204,8 +205,9 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .intro ul {{ margin:0; padding-left:18px; }}
 .intro li {{ margin:3px 0; }}
 
-/* 포인트 : point는 페이지를 넘겨도 되고, 개념/박스 단위로만 안 쪼개지게 */
+/* 포인트 : 각 Point(목차 항목)는 새 페이지에서 시작 */
 .point {{ margin:0 0 20px; }}
+.point.brk, .practice, .wrapup {{ page-break-before:always; }}
 .point-head {{ display:flex; align-items:center; gap:8px; border-bottom:2px solid {GREEN};
   padding-bottom:4px; margin:6px 0 8px; page-break-after:avoid; }}
 .point-badge {{ background:{GREEN}; color:#fff; font-weight:700; font-size:9pt;
@@ -278,8 +280,8 @@ def build_html(unit: dict, teacher: bool) -> str:
         f'<small>{html.escape(unit["subtitle"])}</small></div></div>'
     )
     body.append(_intro_html(unit["intro"], teacher))
-    for p in unit["points"]:
-        body.append(_point_html(p, teacher))
+    for i, p in enumerate(unit["points"]):
+        body.append(_point_html(p, teacher, first=(i == 0)))
     body.append(_practice_html(unit["practice"], teacher))
     body.append(_wrapup_html(unit["wrapup"], teacher))
     return "<!doctype html><meta charset='utf-8'>" + "\n".join(body)
