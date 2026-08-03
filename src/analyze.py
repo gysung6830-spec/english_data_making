@@ -206,6 +206,17 @@ def analyze_worksheet(
         except Exception as e:  # 검증 실패 시 원본 유지
             print(f"[경고] 어법 2차 검증 실패 → 원본 사용: {e}", file=sys.stderr)
 
+    # (옵트인) 문장 변형 2차 검증: 정답을 넣은 완성문이 문법적·무중복인지 재검수.
+    #   'was observed noticed' 같은 빈칸-원어 중복 비문을 잡아낸다. verify_content=true 일 때만.
+    if cfg.processing.verify_content and results.get("paraphrase") is not None:
+        try:
+            fixed = client.structured(
+                S, prompts.ws_paraphrase_verify_prompt(title, body, results["paraphrase"]),
+                schemas.WSParaphraseType, max_tokens=10000, max_retries=r)
+            results["paraphrase"] = fixed
+        except Exception as e:  # 검증 실패 시 원본 유지
+            print(f"[경고] 문장변형 2차 검증 실패 → 원본 사용: {e}", file=sys.stderr)
+
     return schemas.Worksheet(
         title=title,
         source=extraction.source,

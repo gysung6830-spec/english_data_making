@@ -357,6 +357,42 @@ def ws_error_verify_prompt(title: str, body: str, err: "schemas.WSErrorType") ->
     )
 
 
+def _paraphrase_items_to_text(para: "schemas.WSParaphraseType") -> str:
+    lines = []
+    for i, q in enumerate(para.questions, 1):
+        amap = {b.label.upper(): b.answer for b in q.blanks}
+        filled = q.sentence
+        for lab, ans in amap.items():
+            filled = filled.replace(f"[[{lab}]]", ans)
+        lines.append(f"[문항 {i}]")
+        lines.append(f"  원문: {q.original}")
+        lines.append(f"  변형(빈칸): {q.sentence}")
+        lines.append(f"  정답: " + " / ".join(f"({b.label}) {b.answer}" for b in q.blanks))
+        lines.append(f"  정답 넣은 완성문: {filled}")
+        lines.append(f"  오답(보기): {', '.join(q.distractors)}")
+    return "\n".join(lines)
+
+
+def ws_paraphrase_verify_prompt(title: str, body: str,
+                                para: "schemas.WSParaphraseType") -> str:
+    """문장 변형 2차 검증: 정답을 넣은 완성문이 문법적·무중복인지 재검수해 교정."""
+    return (
+        "[유형2 재검증] 아래는 이미 만든 '문장 변형' 문항들입니다. 각 문항의 '정답 넣은 완성문'을 "
+        "원어민 교사의 눈으로 엄격히 읽고, 문제가 있으면 바로잡아 '같은 스키마(WSParaphraseType)'로 "
+        "교정본을 출력하세요.\n"
+        "- ★ 핵심 점검: [[A]]·[[B]] 에 정답을 넣은 완성문이 (1) 문법적으로 완전하고 (2) 중복·잉여 단어가 "
+        "없어야 합니다. 특히 원래 단어를 지우지 않아 'was observed noticed' 처럼 단어가 겹치는 비문이 "
+        "있으면, 잉여 단어를 제거하거나 sentence 를 자연스럽게 고치세요.\n"
+        "- 완성문이 어색하거나 의미가 원문과 달라졌으면 sentence·answer 를 다듬으세요. "
+        "단, 각 문항은 '유의어·구조 변환된 새 문장 + 빈칸 2곳' 형식과 원문의 의미를 유지해야 합니다.\n"
+        "- sentence 에는 빈칸 2곳을 [[A]],[[B]] 로 두고(A가 앞), blanks 의 label 과 정확히 일치시키세요.\n"
+        "- distractors(오답 2개)는 정답과 겹치지 않고 어느 빈칸에도 들어갈 수 없어야 합니다. 문제 있으면 교체.\n"
+        "- explanation 에는 변환·정답 근거만, 제작 메모는 금지.\n\n"
+        f"[현재 문항]\n{_paraphrase_items_to_text(para)}\n\n"
+        + _passage_block(title, body)
+    )
+
+
 # 유형 7) 지문 기반 영어 문답 (의문사 질문 → 지문 근거로 영어 답) ----------
 def ws_qa_prompt(title: str, body: str) -> str:
     return (
