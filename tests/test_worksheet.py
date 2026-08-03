@@ -147,7 +147,7 @@ def test_reading_ko_list_alignment():
                                   3, strength="full")
     assert s.reading_ko.count(" / ") == 2        # 영어 3조각 = 한글 3조각 → / 유지
 
-    # 한글이 영어보다 잘게 쪼개지면(과분할) → 슬래시 제거하고 연속 표기(오정렬 방지)
+    # 한글이 영어보다 잘게 쪼개지면(과분할) → 영어 조각 수에 맞춰 인접 조각을 균등 병합
     payload2 = json.dumps({
         "lines": [{"tokens": [
             {"text": "A,", "slash": True},
@@ -158,8 +158,9 @@ def test_reading_ko_list_alignment():
         "reading_ko": ["가", "나", "그러나", "다", "왜냐하면"],   # 5개 vs 영어 3개
     })
     s2 = analyzer.analyze_sentence(_fake_client([payload2]), "A, B C.", 4, strength="full")
-    assert " / " not in s2.reading_ko and "가 나 그러나 다 왜냐하면" == s2.reading_ko
-    print("PASS  직독직해 리스트 정렬(개수 일치 / 과분할 시 연속 표기)")
+    # 영어 3조각(끝 슬래시 제거) → 한글 5개를 3개로 병합: [가 나 / 그러나 다 / 왜냐하면]
+    assert s2.reading_ko == "가 나 / 그러나 다 / 왜냐하면"
+    print("PASS  직독직해 리스트 정렬(개수 일치 / 과분할 시 병합)")
 
 
 def test_build_points_llm_path():
@@ -361,17 +362,19 @@ def test_reading_alignment_and_no_false_review():
 
     # 영어 3조각(슬래시 2) 기준
     exact = _reading_ko_aligned([en_line(2)], ["a", "b", "c"])
-    off1 = _reading_ko_aligned([en_line(2)], ["a", "b", "c", "d"])     # 1개 차이 → 유지
-    off2 = _reading_ko_aligned([en_line(2)], ["a", "b", "c", "d", "e"])  # 2개 차이 → 연속
-    inner = _reading_ko_aligned([en_line(2)], ["a / x", "b", "c"])      # 조각 내 '/' 제거
+    off1 = _reading_ko_aligned([en_line(2)], ["a", "b", "c", "d"])       # 과분할 1 → 병합
+    over = _reading_ko_aligned([en_line(1)], ["a", "b", "c", "d"])       # 영어2/한글4 → 병합
+    under2 = _reading_ko_aligned([en_line(3)], ["가", "나"])              # 영어4/한글2 → 연속
+    inner = _reading_ko_aligned([en_line(2)], ["a / x", "b", "c"])        # 조각 내 '/' 제거
     assert exact == "a / b / c"
-    assert off1 == "a / b / c / d"        # 슬래시 유지(가독성)
-    assert " / " not in off2 and off2 == "a b c d e"   # 연속 표기(어긋난 '/' 숨김)
+    assert off1 == "a b / c / d"          # 4→3 병합(영어 3조각에 맞춤), 슬래시 유지
+    assert over == "a b / c d"            # 4→2 병합(영어 2조각에 맞춤)
+    assert " / " not in under2 and under2 == "가 나"   # 한글 부족(2개 차이) → 연속 표기
     assert inner == "a x / b / c"         # 내부 '/' 제거로 조각 수 부풀지 않음
 
     a = Analysis(sentences=[
         Sentence(index=1, lines=[en_line(2)], reading_ko=off1, translation="t"),
-        Sentence(index=2, lines=[en_line(2)], reading_ko=off2, translation="t"),
+        Sentence(index=2, lines=[en_line(3)], reading_ko=under2, translation="t"),
         Sentence(index=3, lines=[en_line(2)], reading_ko=inner, translation="t"),
     ])
     assert quality._reading_misaligned([a]) == 0        # 검수 '어긋남' 0건

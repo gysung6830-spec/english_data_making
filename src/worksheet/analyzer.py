@@ -266,20 +266,41 @@ def _english_chunk_count(lines: list[list[Token]]) -> int:
     return slashes if toks[-1].slash else slashes + 1
 
 
+def _merge_ko_to(chunks: list[str], n: int) -> list[str]:
+    """한글 조각이 영어 조각보다 '더 잘게' 쪼개졌을 때(과분할), 순서를 유지한 채 인접
+    조각을 균등하게 묶어 n개로 줄인다. 어순은 그대로이므로 영어 조각과 대략 1:1로 맞는다.
+    (예: 4조각을 2개로 → [0+1, 2+3])."""
+    n = max(1, n)
+    if len(chunks) <= n:
+        return chunks
+    out: list[str] = []
+    total = len(chunks)
+    base, rem = divmod(total, n)
+    i = 0
+    for g in range(n):
+        take = base + (1 if g < rem else 0)
+        out.append(" ".join(chunks[i:i + take]))
+        i += take
+    return out
+
+
 def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
     """직독직해 표시 문자열을 만든다.
 
     - 각 한글 조각 안에 섞여 들어온 '/'(LLM 오류)는 제거해, 조각 수가 부풀지 않게 한다
       (그래야 렌더의 '/'와 검수(quality)의 조각 수 계산이 항상 일치한다).
-    - 영어 조각 수와 한글 조각 수가 '크게'(2개 이상) 어긋나면 정렬 실패로 보고 슬래시 없이
-      이어 붙인다(어긋난 '/' 노출 방지). 1개 차이(경계 하나 정도)는 그대로 두어 끊어읽기의
-      가독성을 살린다."""
+    - 한글이 영어보다 '더 잘게' 쪼개졌으면(과분할), 영어 조각 수에 맞춰 인접 조각을 균등
+      병합해 끊어읽기를 살린다(연속 표기로 뭉개지 않음).
+    - 그래도 2개 이상 크게 어긋나면(한글이 오히려 부족한 경우 등) 정렬 실패로 보고 슬래시
+      없이 이어 붙인다(어긋난 '/' 노출 방지). 1개 차이는 그대로 두어 가독성을 살린다."""
     chunks = [" ".join(c.replace("/", " ").split()) for c in (chunks or []) if c and c.strip()]
     chunks = [c for c in chunks if c]
     if not chunks:
         return ""
     e = _english_chunk_count(lines)
-    if e >= 2 and abs(len(chunks) - e) >= 2:   # 크게 어긋남 → 연속 표기(슬래시 제거)
+    if e >= 2 and len(chunks) > e:             # 한글 과분할 → 영어 수에 맞춰 병합
+        chunks = _merge_ko_to(chunks, e)
+    if e >= 2 and abs(len(chunks) - e) >= 2:   # 여전히 크게 어긋남 → 연속 표기(슬래시 제거)
         return " ".join(chunks)
     return " / ".join(chunks)
 
