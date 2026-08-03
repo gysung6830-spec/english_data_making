@@ -55,7 +55,7 @@ def _blank(answer: str, hint: str | None, teacher: bool) -> str:
     return f'<span class="blank" style="min-width:{w}em">{hint_html}</span>'
 
 
-def render_inline(text: str, teacher: bool) -> str:
+def render_inline(text: str, teacher: bool, promote: bool = False) -> str:
     # 1) 빈칸을 sentinel(\x00N\x00)로 보호 → 강조(**),밑줄(__)이 빈칸을 감싸도 안전
     tokens: list[str] = []
 
@@ -66,6 +66,17 @@ def render_inline(text: str, teacher: bool) -> str:
         return f"\x00{len(tokens) - 1}\x00"
 
     protected = re.sub(r"\{\{(.*?)\}\}", _stash, text)
+
+    # 1-2) promote=True면 굵게 강조된 핵심어(**X**)를 빈칸으로 승격 (이미 빈칸이면 유지)
+    if promote:
+        def _promote(m: re.Match) -> str:
+            inner = m.group(1)
+            if "\x00" in inner:  # 이미 빈칸을 감싼 굵게 → 그대로 둠
+                return m.group(0)
+            tokens.append(_blank(inner, None, teacher))
+            return f"\x00{len(tokens) - 1}\x00"
+
+        protected = re.sub(r"\*\*([^*]+?)\*\*", _promote, protected)
     # 2) 이스케이프 후 강조 적용 (sentinel은 일반 문자라 그대로 통과)
     result = _emphasize(html.escape(protected))
     # 3) sentinel 복원
@@ -91,9 +102,12 @@ def _examples_html(examples: list, teacher: bool) -> str:
 
 
 def _box_html(box: dict, teacher: bool) -> str:
-    kind = box.get("type", "tip")  # tip(초록) | warn(함정) | compare(비교)
+    kind = box.get("type", "tip")  # tip·warn·compare·exam·read
+    # 개념형 박스(tip/warn/compare)는 강조어를 빈칸으로 승격, 설명형(exam/read)은 읽히도록 유지
+    promote = kind in ("tip", "warn", "compare")
     lines = "".join(
-        f'<div class="box-line">{render_inline(ln, teacher)}</div>' for ln in box["lines"]
+        f'<div class="box-line">{render_inline(ln, teacher, promote=promote)}</div>'
+        for ln in box["lines"]
     )
     return (
         f'<div class="box box-{kind}">'
@@ -120,7 +134,7 @@ def _point_html(p: dict, teacher: bool, first: bool = False) -> str:
         blocks.append('<div class="concept">')
         blocks.append(f'  <div class="lead">▪ {render_inline(c["lead"], teacher)}</div>')
         if c.get("desc"):
-            blocks.append(f'  <div class="desc">{render_inline(c["desc"], teacher)}</div>')
+            blocks.append(f'  <div class="desc">{render_inline(c["desc"], teacher, promote=True)}</div>')
         if c.get("items"):
             blocks.append('  <ul class="items">')
             for it in c["items"]:
