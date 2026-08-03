@@ -83,7 +83,13 @@ def _clean_pdf_text(segment: str) -> str:
         if _NOISE_LINE.search(ln):
             continue
         ln = _CIRCLED.sub(" ", ln)
-        ln = _HANGUL.sub("", ln)                        # 한글 제거(영어 지문엔 한글 없음)
+        # '한줄해석'처럼 한글이 우세한 줄은 통째로 버린다. (한글만 지우면 그 줄의 마침표·
+        #  괄호가 남아 영어 문장에 붙어 'communication..' · '(), ().' 같은 잔재가 생긴다.)
+        hangul = len(_HANGUL.findall(ln))
+        latin = len(re.findall(r"[A-Za-z]", ln))
+        if hangul and latin <= hangul:
+            continue
+        ln = _HANGUL.sub("", ln)                        # 영어 위주 줄에 낀 한글만 제거
         ln = ln.replace("­", "")                        # soft hyphen 등
         lines.append(ln)
     text = " ".join(lines)
@@ -93,11 +99,12 @@ def _clean_pdf_text(segment: str) -> str:
     text = _FOOTNOTE.sub("", text)                      # 각주 번호 .1) .2) …
     text = _SENT_NO.sub("", text)                       # 문장 앞 일련번호 1. 2. …
     text = re.sub(r"\bWORKBOOK\w*\.?", " ", text, flags=re.IGNORECASE)  # 잔여 WORKBOOK
+    text = re.sub(r"\(\s*\)", "", text)               # 빈 괄호 () 제거(한글 지운 잔재)
     text = re.sub(r"\s+", " ", text).strip()
     text = re.sub(r"\s+([,.;:!?)])", r"\1", text)   # 구두점 앞 공백 제거(2단 병합 잔여)
     text = re.sub(r"([,;:])\1+", r"\1", text)         # 중복 구두점 정리
     text = re.sub(r",\s*\.", ".", text)               # ' , .' → '.'
-    text = re.sub(r"\.\s*\.(\s*\.)+", ".", text)      # 연속 마침표 정리
+    text = re.sub(r"\.\s*\.+", ".", text)             # 연속 마침표(.. 포함) 정리
     return text
 
 

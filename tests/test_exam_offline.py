@@ -176,6 +176,8 @@ def test_set2_demo() -> None:
 
 def test_pdf_cleaning() -> None:
     """PDF 정제: 한글·머리글 제거, 영어 지문만 남기기."""
+    import re
+
     from exam import ingest
     seg = (
         "[EBS] 올림포스 영어독해 기본1 ­ 한줄해석 (좌지문 우해석)\n"
@@ -189,7 +191,28 @@ def test_pdf_cleaning() -> None:
     assert "We need other people" in out
     assert "올림포스" not in out and "Ch." not in out and "flowedu" not in out
     assert not any("가" <= c <= "힣" for c in out)      # 한글 없음
-    print("✓ PDF 정제(한글·머리글 제거) 통과")
+
+    # EBS 올림포스 형식: 영어 문장 아래 '한줄해석'(한글 번역) 줄이 별도로 온다.
+    # 한글만 지우면 번역 줄의 마침표·괄호가 남아 'communication..'·'(), ().' 잔재가 생김 →
+    # 한글 우세 줄은 통째로 버려야 한다(실제 업로드 자료에서 나온 버그).
+    ebs = (
+        "[EBS] 올림포스 영어독해 기본1 - 한줄해석\n"
+        "Ch. 05 Unit 13 - 수능 대비 ANALYSIS: 연설을 공연이 아닌 의사소통으로\n"
+        "① One of the biggest reasons people are concerned about making a mistake\n"
+        "in a speech is that they view speechmaking as an act of communication.\n"
+        "① 사람들이 연설에서 실수하는 것을 걱정하는 이유 중 하나는 공연으로 생각하기 때문이다.\n"
+        "② They feel the audience is judging them against a scale of absolute\n"
+        "perfection in which every misstated word will count against them.\n"
+        "② 그들은 (자신이) 잘못 말한 단어 하나, (자신의) 어색한 제스처 하나라도 느낀다.\n"
+        "[Flow Edu] flowedu.tistory.com\n"
+    )
+    o2 = ingest._clean_pdf_text(ebs)
+    assert ".." not in o2                                # 이중 마침표 없음
+    assert not re.search(r"\(\s*\)", o2)                 # 빈 괄호 없음
+    assert not any("가" <= c <= "힣" for c in o2)         # 한글 잔재 없음
+    assert o2.startswith("One of the biggest reasons")
+    assert "communication. They feel" in o2              # 단일 마침표로 자연 연결
+    print("✓ PDF 정제(한글·머리글·한줄해석 잔재 제거) 통과")
 
 
 def test_workbook_noise() -> None:
