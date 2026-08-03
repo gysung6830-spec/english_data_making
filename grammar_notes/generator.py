@@ -83,7 +83,7 @@ def _examples_html(examples: list, teacher: bool) -> str:
     """예문 : 인쇄된 영어 문장(빈칸 포함) + 한글 뜻. (필기줄 아님)"""
     rows = []
     for ex in examples:
-        en = render_inline(ex["en"], teacher)
+        en = render_inline(ex["en"], teacher).replace("\n", "<br>")
         ko = html.escape(ex.get("ko", ""))
         gloss = f'<span class="ex-ko">— {ko}</span>' if ko else ""
         rows.append(f'<li><span class="ex-en">{en}</span> {gloss}</li>')
@@ -110,7 +110,12 @@ def _point_html(p: dict, teacher: bool, first: bool = False) -> str:
         f'<span class="point-title">{html.escape(p["title"])}</span></div>',
     ]
     if p.get("intro"):
-        blocks.append(f'  <div class="point-intro">{render_inline(p["intro"], teacher)}</div>')
+        intro = p["intro"]
+        if isinstance(intro, (list, tuple)):
+            inner = "".join(f'<div class="pi-line">{render_inline(x, teacher)}</div>' for x in intro)
+        else:
+            inner = render_inline(intro, teacher)
+        blocks.append(f'  <div class="point-intro">{inner}</div>')
     for c in p["concepts"]:
         blocks.append('<div class="concept">')
         blocks.append(f'  <div class="lead">▪ {render_inline(c["lead"], teacher)}</div>')
@@ -216,6 +221,7 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .point-title {{ font-weight:700; font-size:12pt; color:{GREEN_DARK}; }}
 .point-intro {{ background:{GREEN_SOFT}; border-left:3px solid {GREEN};
   padding:6px 11px; border-radius:0 6px 6px 0; margin:2px 0 10px; page-break-inside:avoid; }}
+.pi-line {{ margin:3px 0; }}
 .concept {{ margin:8px 0 14px; page-break-inside:avoid; }}
 .lead {{ font-weight:700; color:{INK}; margin-bottom:4px; page-break-after:avoid; }}
 .desc {{ color:#374151; margin:2px 0 6px; padding-left:14px; }}
@@ -246,6 +252,8 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .box-compare .box-label {{ background:#2f6fb0; }}
 .box-exam {{ border-color:#e6d3f5; background:#faf6ff; }}
 .box-exam .box-label {{ background:#7c3aed; }}
+.box-read {{ border-color:#f3d9b8; background:#fff9f1; }}
+.box-read .box-label {{ background:#c2691f; }}
 
 /* 빈칸 & 정답 */
 .blank {{ display:inline-block; border-bottom:1.4px solid {GREEN}; height:1.05em;

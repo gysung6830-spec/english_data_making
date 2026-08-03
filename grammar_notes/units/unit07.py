@@ -1,47 +1,57 @@
 # -*- coding: utf-8 -*-
-"""UNIT 07 비교 표현 — 특강용 문법 필기 교재 (중 수위 빈칸 + 시험 tip)."""
+"""UNIT 07 비교 표현 — 특강용 문법 필기 교재 (개념·역할·해석 상세본)."""
 
 UNIT = {
     "no": "07",
     "title": "비교 표현",
     "subtitle": "Comparison",
     "intro": [
-        "형용사·부사의 형태를 바꿔 정도를 비교한다 : **{{원급}}**(as~as)·**{{비교급}}**(-er/more)·"
-        "**{{최상급}}**(-est/most).",
-        "비교급·최상급 규칙 : 짧은 말 -er/-est, 긴 말(3음절↑) **more/most**. "
-        "불규칙 good–better–best, bad–worse–worst.",
+        "**비교 표현이 왜 필요한가?**  둘 이상을 견주어 ‘**더·덜·가장**’ 정도를 나타내려고. "
+        "이때 형용사·부사의 **모양을 바꾼다.**",
+        "**3단계**  **{{원급}}**(as~as, 동등) · **{{비교급}}**(-er/more + than, 우열) · "
+        "**{{최상급}}**(-est/most, 최고).",
+        "**만드는 법**  짧은 말 -er/-est, 긴 말(3음절↑) **more/most**. 불규칙 good–better–best, bad–worse–worst.",
     ],
     "points": [
         {
             "no": "01",
             "title": "원급·비교급 구문",
+            "intro": [
+                "**형태**  원급「as + 원급 + as」 / 비교급「비교급 + **{{than}}**」.",
+                "**해석**  ‘~만큼 …한(원급)’ / ‘~보다 더 …한(비교급)’.",
+            ],
             "concepts": [
                 {
                     "lead": "원급·비교급 기본",
-                    "desc": "원급 「as + **{{원급}}** + as」 = ~만큼 …한. 비교급 「비교급 + **{{than}}**」 = ~보다 …한.",
+                    "desc": "동등 비교는 as 사이에 **{{원급}}**(원형), 우열 비교는 **비교급 + than**. "
+                            "‘몇 배’는 「배수 + as 원급 as」.",
                     "examples": [
                         {"en": "Tom is as {{tall}} as Bill.", "ko": "Tom은 Bill만큼 키가 크다. (동등)"},
                         {"en": "Tom is {{taller}} than Bill.", "ko": "Tom은 Bill보다 키가 크다. (우등)"},
-                        {"en": "This room is twice as {{large}} as that one.", "ko": "이 방은 저 방의 두 배 크다. (배수)"},
+                        {"en": "This room is twice as {{large}} as that one.", "ko": "이 방은 저 방의 두 배 크다."},
                     ],
                 },
             ],
             "boxes": [
                 {"type": "warn", "label": "함정",
-                 "lines": ["as ~ as 사이엔 **원급(원형)**, than 앞엔 **비교급**. as taller as (X)."]},
+                 "lines": ["as ~ as 사이엔 **원급(원형)**, than 앞엔 **비교급** : as taller as (X)."]},
                 {"type": "exam", "label": "시험",
-                 "lines": ["as~as 사이 **원급**, than 앞 **비교급**, 배수 표현(twice as ~ as)."]},
+                 "lines": ["as~as 사이 원급, than 앞 비교급, 배수 표현(twice as ~ as)."]},
             ],
         },
         {
             "no": "02",
             "title": "원급·비교급 표현",
-            "intro": "비교를 활용한 다양한 관용 표현.",
+            "intro": [
+                "**무엇?**  비교급을 활용한 관용 표현.",
+                "**핵심**  비교급 **강조는 much/far**(very X). 「the 비교급, the 비교급」 = ~할수록 더 ….",
+                "**해석**  아래 예문의 우리말을 그대로 익힌다.",
+            ],
             "concepts": [
                 {
                     "lead": "주요 비교 표현",
-                    "desc": "비교급 강조 = **{{much/far/even/still/a lot}}** + 비교급 (very X). "
-                            "「the 비교급 …, the 비교급 …」 = ~할수록 더 ….",
+                    "desc": "강조 **{{much/far/even/a lot}}** + 비교급. 「the 비교급 …, the 비교급 …」(~할수록 더 …). "
+                            "「비교급 and 비교급」(점점 더).",
                     "examples": [
                         {"en": "This is {{much}} bigger than that.", "ko": "이것은 저것보다 훨씬 크다. (강조)"},
                         {"en": "The {{harder}} you study, the {{better}} you get.",
@@ -51,23 +61,28 @@ UNIT = {
                 },
             ],
             "boxes": [
+                {"type": "read", "label": "the 비교급 해석",
+                 "lines": ["「The + 비교급 …, the + 비교급 …」 = ‘**앞을 …할수록, 뒤도 더 …하다**’ 로 짝지어 해석."]},
                 {"type": "warn", "label": "함정",
                  "lines": ["비교급 강조는 **very가 아니라 much/far/even/a lot**."]},
                 {"type": "exam", "label": "시험",
-                 "lines": ["**비교급 강조어**(much), **the+비교급, the+비교급**, 비교급 and 비교급."]},
+                 "lines": ["비교급 강조어(much), the+비교급 the+비교급, 비교급 and 비교급."]},
             ],
         },
         {
             "no": "03",
             "title": "최상급 구문",
-            "intro": "「the + 최상급 + in/of ~」 = 가장 …한.",
+            "intro": [
+                "**형태**  「the + 최상급 + in/of ~」.",
+                "**핵심**  범위가 단수 장소·집단이면 **in**, 복수·전체면 **of**.",
+                "**해석**  ‘(범위)에서 가장 …한’.",
+            ],
             "concepts": [
                 {
                     "lead": "최상급 기본",
-                    "desc": "「the + **{{최상급}}** + in(단수 범위)/of(복수 전체)」. "
-                            "「one of the + 최상급 + **{{복수명사}}**」 = 가장 ~한 것들 중 하나.",
+                    "desc": "「the + **{{최상급}}** + in/of」. 「one of the + 최상급 + **{{복수명사}}**」 = 가장 ~한 것들 중 하나.",
                     "examples": [
-                        {"en": "She is the {{tallest}} in her class.", "ko": "그녀는 반에서 가장 키가 크다."},
+                        {"en": "She is the {{tallest}} in her class.", "ko": "그녀는 반에서 가장 키가 크다. (in + 집단)"},
                         {"en": "It's one of the {{best}} movies.", "ko": "그것은 최고의 영화들 중 하나다."},
                     ],
                 },
@@ -76,16 +91,20 @@ UNIT = {
                 {"type": "warn", "label": "함정",
                  "lines": ["**in**(단수 장소·집단) / **of**(복수·전체). one of the 최상급 + **복수명사**."]},
                 {"type": "exam", "label": "시험",
-                 "lines": ["최상급 **the**, in/of 구별, **one of the 최상급 + 복수명사**."]},
+                 "lines": ["최상급 the, in/of 구별, one of the 최상급 + 복수명사."]},
             ],
         },
         {
             "no": "04",
             "title": "최상급 표현",
-            "intro": "**원급·비교급으로 최상급 의미**를 나타낼 수 있다.",
+            "intro": [
+                "**왜?**  최상급 뜻을 **원급·비교급으로도** 나타낼 수 있다(같은 뜻, 다른 형태).",
+                "**핵심**  ‘부정 주어 + 원급/비교급’ = 최상급.",
+                "**해석**  ‘어떤 것도 A만큼 ~하지 않다 = A가 가장 ~하다’.",
+            ],
             "concepts": [
                 {
-                    "lead": "최상급 = 원급/비교급 전환",
+                    "lead": "최상급 ↔ 원급/비교급 전환",
                     "desc": "「No (other) ~ as 원급 as A」 = 「A ~ 비교급 than any other 단수」 = 「the 최상급」.",
                     "examples": [
                         {"en": "Everest is higher than {{any other}} mountain.",
@@ -97,12 +116,12 @@ UNIT = {
             ],
             "boxes": [
                 {"type": "tip", "label": "전환 공식",
-                 "lines": [
-                     "the 최상급 = No other 단수 ~ as 원급 as = 비교급 than any other 단수 "
-                     "= 비교급 than all the other 복수.",
-                 ]},
+                 "lines": ["the 최상급 = No other 단수 ~ as 원급 as = 비교급 than any other 단수 "
+                           "= 비교급 than all the other 복수."]},
+                {"type": "read", "label": "해석",
+                 "lines": ["부정 주어(No other)로 시작해도 결국 ‘**A가 가장 ~하다**’로 해석한다."]},
                 {"type": "exam", "label": "시험",
-                 "lines": ["**최상급 ↔ 원급/비교급 전환**, any other + 단수명사."]},
+                 "lines": ["최상급 ↔ 원급/비교급 전환, any other + 단수명사."]},
             ],
         },
     ],
@@ -131,8 +150,7 @@ UNIT = {
             "q": "빈칸을 채워 문장을 완성하시오.",
             "examples": [
                 {"en": "The {{more}} you have, the {{more}} you want.", "ko": "많이 가질수록 더 원한다."},
-                {"en": "No mountain is higher than {{any other}}… (= Everest is the highest).",
-                 "ko": "에베레스트가 가장 높다."},
+                {"en": "Everest is higher than {{any other}} mountain.", "ko": "에베레스트가 가장 높다."},
             ],
         },
         {
