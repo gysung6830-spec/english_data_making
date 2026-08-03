@@ -59,7 +59,10 @@
         padding-top:6px; page-break-inside:avoid; align-items:start; }
   .row:first-of-type{ margin-top:6px; }
   .analysis{ display:grid; grid-template-columns:26px 1fr; gap:6px; }
+  /* 번호는 '본문 첫 단어 줄'과 높이를 맞춘다. 첫 줄에 성분(SVOC) 라벨이 있으면 그 라벨
+     높이만큼 내려야 단어와 나란해진다(.analysis.lbl). 라벨이 없으면(학생용 등) 그대로 위. */
   .num{ color:var(--navy); font-weight:800; font-size:12px; line-height:1.4; }
+  .analysis.lbl .num{ margin-top:13px; }
 
   /* 뱃지(함/빈/서) + 함축 영어줄 */
   .bdg{ display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
@@ -117,11 +120,13 @@
   /* 직독직해 줄: [뱃지 | 해석텍스트] 2단 그리드.
      뱃지는 번호(01) 밑 '왼쪽 여백(gutter)'에만 있고, 한글 해석은 오른쪽 텍스트 칸에서만
      흐른다 → 줄바꿈돼도 해석이 번호·뱃지 칸(왼쪽 세로선)을 침범하지 않는다. */
-  .rdko{ display:grid; grid-template-columns:auto 1fr; column-gap:6px; align-items:start;
-         margin-top:9px; margin-left:-32px; font-size:12px; line-height:1.95; color:#39424c; }
-  .rdtext{ min-width:0; }                    /* grid 자식 오버플로 방지(줄바꿈 정상) */
-  .rdlbl{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
-          padding:1px 6px; border-radius:8px; margin-top:5px; white-space:nowrap; }
+  /* 직독직해 줄: 한글 해석을 위 영어 본문과 '같은 왼쪽 위치'에서 시작하게 하고,
+     '직독직해' 뱃지는 번호(01) 밑 왼쪽 여백(gutter)에 절대배치해 본문을 밀지 않는다. */
+  .rdko{ position:relative; margin-top:9px; font-size:12px; line-height:1.95; color:#39424c; }
+  .rdtext{ display:block; min-width:0; padding-left:3.5px; }  /* 첫 토큰(margin 3.5px)과 좌측 정렬 */
+  .rdlbl{ position:absolute; left:-32px; top:3px; width:30px; box-sizing:border-box; text-align:center;
+          background:var(--navy); color:#fff; font-size:7px; font-weight:800;
+          padding:1px 2px; border-radius:7px; white-space:nowrap; letter-spacing:-.3px; }
   .rdko .rc{ font-weight:500; }
   .kobox{ margin-top:7px; background:#eef4ec; border:1px solid #cfe0cf; border-left:4px solid var(--navy);
           border-radius:8px; padding:5px 10px; font-size:9.5px; line-height:1.45; color:#232a24; }
@@ -411,8 +416,9 @@
     {% endif %}
 
     {% for s in a.sentences %}
+    {%- set first_has_role = s_roles and s.lines and (s.lines[0] | selectattr('role') | list) -%}
     <div class="row">
-      <div class="analysis">
+      <div class="analysis{% if first_has_role %} lbl{% endif %}">
         <div class="num">{{ "%02d"|format(s.index) }}</div>
         <div>
           <div class="en">
