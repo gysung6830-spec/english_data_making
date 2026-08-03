@@ -101,14 +101,38 @@ _WORKSHEET_DEFS = [
 ]
 
 
+def _ref_candidates(display: str) -> list[str]:
+    """지칭 보기('= [ A / B / C ]')에서 후보 목록을 뽑는다."""
+    inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
+    return [c.strip() for c in inside.split("/")]
+
+
 def _ref_answer_in_display(answer: str, display: str) -> bool:
     """지칭 문항의 정답이 보기('= [ A / B / C ]') 안에 실제로 있는지 확인(출제 오류 방지)."""
     a = (answer or "").strip()
     if not a:
         return False
-    inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
-    cands = [c.strip() for c in inside.split("/")]
-    return a in cands
+    return a in _ref_candidates(display)
+
+
+import re as _re
+_HANGUL = _re.compile(r"[가-힣]")
+_REF_ALLOWED_KO = {"앞 문장", "앞 문장의 내용", "앞문장"}
+
+
+def _ref_candidates_clean(display: str) -> bool:
+    """지칭 보기가 규칙에 맞는지: 영어 명사구 또는 '앞 문장'만 허용(한글 보기 혼입 방지).
+
+    대명사가 '행동·구'(예: '양쪽 살피기')를 가리켜 영어 명사구 보기가 없을 때 LLM 이 한글을
+    보기에 끼워 넣는 출제오류를 막는다. 허용된 '앞 문장' 외에 한글이 든 보기가 있으면 False.
+    """
+    cands = _ref_candidates(display)
+    if len(cands) < 2:
+        return False
+    for c in cands:
+        if _HANGUL.search(c) and c not in _REF_ALLOWED_KO:
+            return False
+    return True
 
 
 def _align(order: list[str], items: list[LLMProseItem]):
@@ -137,9 +161,12 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                         gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
         if wtype == "ref":
-            # 안전장치: 지칭 정답이 보기 안에 없으면(출제 오류 소지) 그 문항을 버린다.
-            #   남은 자리표시자는 렌더에서 제거되어 문장은 그대로 보인다.
-            pitems = [it for it in pitems if _ref_answer_in_display(it.answer, it.display)]
+            # 안전장치: 지칭 정답이 보기 안에 없거나(출제 오류) 보기에 한글이 섞이면
+            #   (예: [ Vision / the street / 양쪽 살피기 ]) 그 문항을 버린다.
+            #   남은 자리표시자는 렌더에서 제거되어 대명사가 든 문장은 그대로 보인다.
+            pitems = [it for it in pitems
+                      if _ref_answer_in_display(it.answer, it.display)
+                      and _ref_candidates_clean(it.display)]
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
 

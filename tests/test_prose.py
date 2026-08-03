@@ -90,6 +90,14 @@ def test_ref_safeguard():
     r2 = next(w for w in pr.build_prose_pack(ok, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "ref")
     _check("앞 문장 정답 유지", r2.sentences[0].items[0].answer == "앞 문장")
+    # 보기에 한글이 섞이면(오직 '앞 문장'만 예외) 출제오류로 보고 제외
+    ko_mixed = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="x", ko="y", ref_template="It {{P1}} matters.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ Vision / the street / 양쪽 살피기 ]",
+                                   answer="양쪽 살피기")])])
+    r3 = next(w for w in pr.build_prose_pack(ko_mixed, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref")
+    _check("한글 보기 혼입 문항 제외", len(r3.sentences[0].items) == 0)
 
 
 def test_corrupt_template_falls_back_to_en():

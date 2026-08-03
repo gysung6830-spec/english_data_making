@@ -100,8 +100,11 @@ _RULES = """[문장 완전성 — 매우 중요]
      (2) this/that/it 이 '앞 문장(또는 앞 절) 전체의 내용'을 가리키는 경우
          → 정답 보기를 '앞 문장' 으로 쓰고 answer="앞 문장". (보기에 '앞 문장'을 반드시 포함)
          ※ 지문의 '첫 문장'에는 앞 문장이 없으므로 '앞 문장' 정답을 쓰지 말 것.
-   ★ 보기는 지문에 실제로 나온 명사(구)만 원문 그대로. 괄호 주석 금지, 다른 대명사를 보기로 넣지 말 것
+   ★ 보기는 지문에 실제로 나온 명사(구)만 '영어 원문 그대로'. 괄호 주석 금지, 다른 대명사를 보기로 넣지 말 것
      ((2)의 '앞 문장'만 예외). 일반적 you/we/they 나 he/his/him 만 이어지는 모호한 경우는 출제하지 않는다.
+   ★★ 보기에 '한글'을 넣지 말 것(오직 '앞 문장'만 예외). 대명사가 '행동·구'(예: 길 건너기 전 '양쪽 살피기')를
+     가리켜 마땅한 '영어 명사구' 보기가 없으면, 그 자리는 아예 출제하지 말 것(items 에서 제외).
+     금지 예: "it = [ Vision / the street / 양쪽 살피기 ]" — 한글 보기 혼입은 출제오류.
    예1(명사구): ref_template "…, those who resist it {{P1}} repeat the same mistakes."
        display "= [ early feedback / costly revisions / designers ]"  answer "early feedback"
    예2(앞 문장): ref_template "This {{P1}} explains why we adapt so quickly."
