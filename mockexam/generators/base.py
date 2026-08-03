@@ -273,9 +273,11 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                   "3) 영작 유형이면 학생이 영작할 한국어를 blank_ko 에 넣어라.\n"
                   "4) 각 소문항 정답을 answers 에 '지시 :: 정답' 형식으로.\n"
                   "5) explanation 에 각 소문항의 정답 근거·어형변형/어순/문법 포인트·본문 "
-                  "근거를 자세히 써라.")
+                  "근거를 핵심 위주로 '간결히' 써라(600자 이내, 장황하게 늘어놓지 말 것).")
+        from ..core.client import ESSAY_MAX_TOKENS
         sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
         out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2,
+                                    max_tokens=ESSAY_MAX_TOKENS,
                                     extra_validate=lambda o: _validate_essay_out(item, o))
         q.passage_text = out.passage
         if out.bogi:

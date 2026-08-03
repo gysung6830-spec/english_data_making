@@ -18,7 +18,8 @@ from pydantic import BaseModel, ValidationError
 
 T = TypeVar("T", bound=BaseModel)
 
-DEFAULT_MAX_TOKENS = 8000
+DEFAULT_MAX_TOKENS = 10000       # 선택형 여유
+ESSAY_MAX_TOKENS = 16000         # 서술형은 보기·조건·정답·해설이 많아 더 넉넉히
 
 
 # ---------------------------------------------------------------------------
