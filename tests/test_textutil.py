@@ -4,7 +4,7 @@
 """
 from __future__ import annotations
 
-from src.textutil import split_sentences, sentence_list_block, file_tag
+from src.textutil import split_sentences, sentence_list_block, file_tag, dedup_placeholder
 from src import workbook_prompts as wp
 from src import prose_prompts as pp
 from src import blanks_prompts as bp
@@ -63,10 +63,25 @@ def test_file_tag_cleanup():
     _check("범위 번호 제거", file_tag("30~40번 워크북.pdf") == "워크북")
 
 
+def test_dedup_placeholder():
+    # 정답 어구가 자리표시자 옆에 남아 중복되면 제거(통합카드 배열/어형 오류 정리)
+    _check("앞 중복 제거",
+           dedup_placeholder("index {{Q5}} how long a resource {{Q6}}.", "{{Q6}}",
+                             "how long a resource would last") == "index {{Q5}} {{Q6}}.")
+    _check("뒤 중복 제거",
+           dedup_placeholder("how it might {{Q6}} run", "{{Q6}}", "be run") == "how it might {{Q6}}")
+    # 중복이 아니면 그대로(정상 문장 보존)
+    _check("겹침 없으면 유지",
+           dedup_placeholder("Forecasters {{Q1}} predict", "{{Q1}}", "who") == "Forecasters {{Q1}} predict")
+    _check("어구 무관하면 유지",
+           dedup_placeholder("We {{Q1}} the race", "{{Q1}}", "run") == "We {{Q1}} the race")
+
+
 if __name__ == "__main__":
     test_split_keeps_full_sentences()
     test_prompts_embed_verbatim_list()
     test_short_body_no_list()
     test_name_initials_not_split()
     test_file_tag_cleanup()
+    test_dedup_placeholder()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

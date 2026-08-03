@@ -47,6 +47,45 @@ STYLE_GUIDE = """[문체 — 경력 있는 교사가 손수 만들고 검수한 
 - 전반적으로 'AI가 자동 생성한 티'가 나지 않게 담백하고 실무적으로 쓴다."""
 
 
+def _norm_word(w: str) -> str:
+    return w.strip(".,;:'\"()[]?!’“”").lower()
+
+
+def dedup_placeholder(template: str, marker: str, answer: str) -> str:
+    """자리표시자(marker) 바로 앞/뒤에 정답(answer)과 '겹치는 단어'가 남아 있으면 제거한다.
+
+    통합카드 등에서 배열/어형 문항을 만들 때, 정답 어구를 자리표시자로 바꾸고도 그 어구를
+    문장 본문에 그대로 남겨 '중복'되는 오류를 정리한다.
+      예) "estimate how long a resource {{Q}}"  answer "how long a resource would last"
+          → "estimate {{Q}}" (앞의 'how long a resource' 중복 제거)
+      예) "might {{Q}} run"  answer "be run"  → "might {{Q}}" (뒤의 'run' 중복 제거)
+    실제로 겹칠 때만 제거하므로(정답 경계 단어와 정확히 일치) 일반 문장은 건드리지 않는다.
+    """
+    if marker not in template or not (answer or "").strip():
+        return template
+    before, after = template.split(marker, 1)
+    ans = [_norm_word(w) for w in answer.split()]
+    if not ans:
+        return template
+    bt = before.split()
+    at = after.split()
+    # 앞부분의 끝 k개가 정답의 앞 k개와 같으면(중복) 제거
+    for k in range(min(len(bt), len(ans)), 0, -1):
+        if [_norm_word(x) for x in bt[-k:]] == ans[:k]:
+            bt = bt[:-k]
+            break
+    # 뒷부분의 앞 j개가 정답의 끝 j개와 같으면(중복) 제거
+    for j in range(min(len(at), len(ans)), 0, -1):
+        if [_norm_word(x) for x in at[:j]] == ans[-j:]:
+            at = at[j:]
+            break
+    left = (" ".join(bt) + " ") if bt else ""
+    right = (" " + " ".join(at)) if at else ""
+    result = left + marker + right
+    result = re.sub(r"\s+([.,;:!?’”)])", r"\1", result)   # 구두점 앞 공백 제거
+    return re.sub(r"\s{2,}", " ", result).strip()
+
+
 def sentence_list_block(body: str, header: str = "문장 목록") -> str:
     """프롬프트에 붙일 '그대로 쓸 문장 목록' 블록. 문장이 1개 이하면 빈 문자열."""
     sents = split_sentences(body)

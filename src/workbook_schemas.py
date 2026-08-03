@@ -16,6 +16,8 @@ from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from . import textutil
+
 # 출제 유형 (spec 1의 5유형 + 대명사 지칭 ref)
 #   ref = 대명사가 가리키는 대상을 고르는 지칭 추론 (관계사·대명사와 같은 보라색 계열)
 QTYPE = Literal["verb", "adj", "rel", "conj", "order", "ref"]
@@ -165,7 +167,12 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
             pairs = [(pid, by_id[pid]) for pid in order]
         else:
             pairs = list(zip(order, s.questions))
-        parsed.append({"no": s.no, "en": s.en_template, "ko": s.ko, "pairs": pairs})
+        # 정답 어구가 자리표시자 옆에 그대로 남아 중복되는 경우(예: "(run) run",
+        #   "how long a resource {{Q}}")를 정리한다.
+        en = s.en_template
+        for pid, q in pairs:
+            en = textutil.dedup_placeholder(en, "{{" + pid + "}}", q.answer)
+        parsed.append({"no": s.no, "en": en, "ko": s.ko, "pairs": pairs})
 
     # 2) 전역 채번 + Sentence 생성
     sentences: list[Sentence] = []
