@@ -186,9 +186,8 @@ h2.section-title { font-size:18px; font-weight:800; margin:0 0 10px;
 .memo .mstep { margin:0 0 13px; }
 .memo .mslabel { font-weight:800; color:var(--teal); font-size:12px; margin-bottom:4px; }
 .memo .ms { font-size:15px; font-weight:600; line-height:2.1; }
-.memo .ms .blk { color:var(--red); font-weight:800; letter-spacing:1px;
-  border-bottom:1.5px solid var(--red); padding:0 2px; }
-.memo .ms .blk.key { color:transparent; border-bottom:2px solid var(--red); }
+.memo .ms .blk { color:var(--red); font-weight:800; letter-spacing:1px; padding:0 1px; }
+.memo .ms .blk.key { color:var(--red); }  /* 원래 빈칸: 첫 글자 없이 밑줄만 */
 .memo .mk { color:var(--muted); font-size:11px; margin:1px 0 4px; }
 .memo .ansbox { margin-top:10px; padding-top:7px; border-top:1px dashed var(--line);
   color:#b0b4bb; font-size:9px; }
