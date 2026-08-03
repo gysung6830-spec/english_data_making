@@ -73,28 +73,39 @@ def render_inline(text: str, teacher: bool) -> str:
 
 
 # ── 블록 빌더 ─────────────────────────────────────────────────────
+def _box_html(box: dict, teacher: bool) -> str:
+    kind = box.get("type", "tip")  # tip(초록) | warn(함정) | compare(비교)
+    lines = "".join(
+        f'<div class="box-line">{render_inline(ln, teacher)}</div>' for ln in box["lines"]
+    )
+    return (
+        f'<div class="box box-{kind}">'
+        f'  <div class="box-label">{html.escape(box["label"])}</div>'
+        f'  <div class="box-body">{lines}</div></div>'
+    )
+
+
 def _point_html(p: dict, teacher: bool) -> str:
     blocks = [
         f'<div class="point">',
         f'  <div class="point-head"><span class="point-badge">Point {p["no"]}</span>'
         f'<span class="point-title">{html.escape(p["title"])}</span></div>',
     ]
+    if p.get("intro"):
+        blocks.append(f'  <div class="point-intro">{render_inline(p["intro"], teacher)}</div>')
     for c in p["concepts"]:
         blocks.append('<div class="concept">')
         blocks.append(f'  <div class="lead">▪ {render_inline(c["lead"], teacher)}</div>')
+        if c.get("desc"):
+            blocks.append(f'  <div class="desc">{render_inline(c["desc"], teacher)}</div>')
         blocks.append('  <ul class="items">')
         for it in c["items"]:
             blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
         blocks.append("  </ul>")
         blocks.append("</div>")
-    if p.get("tip"):
-        t = p["tip"]
-        blocks.append('<div class="tip">')
-        blocks.append(f'  <div class="tip-label">{html.escape(t["label"])}</div>')
-        blocks.append('  <div class="tip-body">')
-        for ln in t["lines"]:
-            blocks.append(f'    <div class="tip-line">{render_inline(ln, teacher)}</div>')
-        blocks.append("  </div></div>")
+    boxes = p.get("boxes") or ([p["tip"]] if p.get("tip") else [])
+    for box in boxes:
+        blocks.append(_box_html(box, teacher))
     blocks.append("</div>")
     return "\n".join(blocks)
 
@@ -173,19 +184,27 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .point-badge {{ background:{GREEN}; color:#fff; font-weight:700; font-size:9pt;
   padding:2px 8px; border-radius:11px; }}
 .point-title {{ font-weight:700; font-size:12pt; color:{GREEN_DARK}; }}
-.concept {{ margin:5px 0 6px; }}
+.point-intro {{ background:{GREEN_SOFT}; border-left:3px solid {GREEN};
+  padding:5px 10px; border-radius:0 6px 6px 0; margin:2px 0 8px; }}
+.concept {{ margin:6px 0 7px; }}
 .lead {{ font-weight:700; color:{INK}; margin-bottom:2px; }}
+.desc {{ color:#374151; margin:1px 0 3px; padding-left:14px; }}
 .items {{ margin:2px 0 4px; padding-left:20px; }}
-.items li {{ margin:2.5px 0; }}
+.items li {{ margin:3px 0; }}
 
-/* 팁 박스 */
-.tip {{ display:flex; gap:0; border:1px solid {GREEN_LINE}; border-radius:7px;
-  overflow:hidden; margin:6px 0 2px; background:#fafffb; }}
-.tip-label {{ background:{GREEN_DARK}; color:#fff; font-weight:700; font-size:8.6pt;
-  writing-mode:horizontal-tb; padding:8px 9px; display:flex; align-items:center;
-  min-width:52px; justify-content:center; text-align:center; }}
-.tip-body {{ padding:6px 10px; flex:1; }}
-.tip-line {{ margin:2px 0; }}
+/* 색상별 박스: tip(초록)·warn(함정)·compare(비교) */
+.box {{ display:flex; gap:0; border:1px solid {GREEN_LINE}; border-radius:7px;
+  overflow:hidden; margin:6px 0 4px; background:#fafffb; page-break-inside:avoid; }}
+.box-label {{ color:#fff; font-weight:700; font-size:8.6pt; padding:8px 9px;
+  display:flex; align-items:center; min-width:54px; justify-content:center; text-align:center; }}
+.box-body {{ padding:6px 10px; flex:1; }}
+.box-line {{ margin:2.5px 0; }}
+.box-tip {{ border-color:{GREEN_LINE}; background:#fafffb; }}
+.box-tip .box-label {{ background:{GREEN_DARK}; }}
+.box-warn {{ border-color:#f0c9cf; background:#fff7f8; }}
+.box-warn .box-label {{ background:#b23a48; }}
+.box-compare {{ border-color:#cfe0f2; background:#f6faff; }}
+.box-compare .box-label {{ background:#2f6fb0; }}
 
 /* 빈칸 & 정답 */
 .blank {{ display:inline-block; border-bottom:1.4px solid {GREEN}; height:1.05em;
