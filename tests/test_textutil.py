@@ -4,7 +4,7 @@
 """
 from __future__ import annotations
 
-from src.textutil import split_sentences, sentence_list_block
+from src.textutil import split_sentences, sentence_list_block, file_tag
 from src import workbook_prompts as wp
 from src import prose_prompts as pp
 from src import blanks_prompts as bp
@@ -56,9 +56,17 @@ def test_name_initials_not_split():
            == "J. K. Rowling wrote it.")
 
 
+def test_file_tag_cleanup():
+    # 뱃지 파일명 태그: 번호 토큰 제거 후 남는 고아 '번'·쉼표를 정리해 깔끔하게.
+    _check("고아 번·쉼표 정리", file_tag("1번올림포스 4강, 3.pdf") == "올림포스 4강 3")
+    _check("이미 깨진 태그도 정리", file_tag("번올림포스 4강 , 3") == "올림포스 4강 3")
+    _check("범위 번호 제거", file_tag("30~40번 워크북.pdf") == "워크북")
+
+
 if __name__ == "__main__":
     test_split_keeps_full_sentences()
     test_prompts_embed_verbatim_list()
     test_short_body_no_list()
     test_name_initials_not_split()
+    test_file_tag_cleanup()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

@@ -140,7 +140,10 @@ def file_tag(name: str, maxlen: int = 16) -> str:
     base = re.sub(r'문항\s*\d+', " ", base)
     base = re.sub(r'\d+\s*[~\-–]\s*\d+\s*번?', " ", base)
     base = re.sub(r'(?<![A-Za-z])\d+\s*번', " ", base)
-    base = re.sub(r'\s+', " ", base).strip(" _-")
+    base = re.sub(r'\s*[,·]\s*', " ", base)             # 쉼표·가운뎃점 → 공백
+    base = re.sub(r'\s+', " ", base).strip(" _-,·")
+    base = re.sub(r'^번\s*', "", base)                  # 맨 앞 고아 '번'(번호 제거 잔여) 정리
+    base = base.strip(" _-,·")
     if len(base) > maxlen:
         base = base[:maxlen].rstrip(" _-") + "…"
     return base

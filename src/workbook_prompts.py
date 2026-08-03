@@ -91,6 +91,19 @@ _RULES = """[다섯 가지 출제 유형] — 아래는 '출제 우선순위' �
     처럼 쓰면 안 된다. 반드시 "{{Q1}} {{Q2}} closely related" 로 남긴다.
   ★ 자리표시자를 넣고 남은 문장은 '반드시 문법적으로 온전'해야 한다. 특히 각 절의 '본동사'가
     자리표시자로 사라져 문장에 동사가 없어지는 일이 없도록 한다(관계사·연결사 문항을 만들 때 흔한 실수).
+  ★★ [자리표시자 = 원문에서 그 어구를 '뺀' 자리] {{Qn}} 은 '테스트할 그 어구가 원래 있던 바로 그 위치'에
+     놓고, 그 어구는 문장 본문에서 '완전히 제거'한다. 아래 두 실수를 절대 하지 말 것:
+     (가) 중복: 배열(order) 〈 〉 로 낼 어구를 문장 본문에도 그대로 남기면 안 된다.
+         금지 예: "estimate how long a resource {{Q}}"(={{Q}}=〈how long a resource would last〉)
+                 → 'how long a resource' 가 본문·보기에 '두 번' 나와 중복.
+         올바른 예: "estimate {{Q}}"(={{Q}}=〈how/long/a/resource/would/last〉).
+     (나) 이동·소실: 접속사·연결사(conj)를 낼 때는 '그 접속사의 원래 자리'에 {{Qn}}을 놓는다.
+         문장 맨 앞 접속사(Although 등)를 테스트하려면 그 '맨 앞'에 {{Qn}}을 두고, 문장 끝의 다른
+         단어(resolved 등)를 지워 그 자리에 넣지 말 것.
+         금지 예: "Although team members … want their ideas considered and {{Q}}"(정답 Although)
+                 → 앞의 Although 는 그대로 두고 끝의 resolved 를 지워 옮긴 오류.
+         올바른 예: "{{Q}} team members … want their ideas considered and resolved."(정답 Although)
+   ※ 요약: 자리표시자를 뺀 나머지 문장은 원문과 '한 단어도 다르지 않게'(추가·중복·삭제·이동 없이) 같아야 한다.
 - 지문의 모든 문장을 '등장 순서대로 빠짐없이' 낸다. (출제할 요소가 전혀 없는 문장은 questions 를
   빈 배열로 두더라도 문장 자체는 그대로 실어 지문이 온전히 보이게 한다.)
 
