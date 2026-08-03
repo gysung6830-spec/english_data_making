@@ -347,6 +347,37 @@ def test_overview_builder_llm_path():
     print("PASS  overview_builder LLM 경로(+자동 제목)")
 
 
+def test_reading_alignment_and_no_false_review():
+    """직독직해 정렬: 1개 차이는 슬래시 유지, 2개 이상 차이는 연속 표기.
+    두 경우 모두 품질 검수(assess)에서 '끊어읽기 어긋남'으로 잡히지 않아야 한다."""
+    from src.worksheet.analyzer import _reading_ko_aligned
+    from src.worksheet.models import Analysis, Sentence, Token
+    from src.worksheet import quality
+
+    def en_line(nslash):
+        toks = [Token(text=f"w{i}", slash=True) for i in range(nslash)]
+        toks.append(Token(text="end"))
+        return toks
+
+    # 영어 3조각(슬래시 2) 기준
+    exact = _reading_ko_aligned([en_line(2)], ["a", "b", "c"])
+    off1 = _reading_ko_aligned([en_line(2)], ["a", "b", "c", "d"])     # 1개 차이 → 유지
+    off2 = _reading_ko_aligned([en_line(2)], ["a", "b", "c", "d", "e"])  # 2개 차이 → 연속
+    inner = _reading_ko_aligned([en_line(2)], ["a / x", "b", "c"])      # 조각 내 '/' 제거
+    assert exact == "a / b / c"
+    assert off1 == "a / b / c / d"        # 슬래시 유지(가독성)
+    assert " / " not in off2 and off2 == "a b c d e"   # 연속 표기(어긋난 '/' 숨김)
+    assert inner == "a x / b / c"         # 내부 '/' 제거로 조각 수 부풀지 않음
+
+    a = Analysis(sentences=[
+        Sentence(index=1, lines=[en_line(2)], reading_ko=off1, translation="t"),
+        Sentence(index=2, lines=[en_line(2)], reading_ko=off2, translation="t"),
+        Sentence(index=3, lines=[en_line(2)], reading_ko=inner, translation="t"),
+    ])
+    assert quality._reading_misaligned([a]) == 0        # 검수 '어긋남' 0건
+    print("PASS  직독직해 정렬 + 검수 오탐 없음")
+
+
 def test_literal_builder_llm_path():
     payload = json.dumps({
         "sentences": [{

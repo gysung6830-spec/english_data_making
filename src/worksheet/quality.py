@@ -138,10 +138,25 @@ def assess(analyses, min_sentences: int = 2) -> dict:
     return {"ok": not reasons, "reasons": reasons}
 
 
-def _reading_misaligned(analyses) -> int:
-    """영어 끊어읽기(slash) 조각 수와 한글 직독직해(' / ') 조각 수가 크게 어긋난 문장 수.
+def _en_chunk_count(s) -> int:
+    """영어 끊어읽기 '조각 수'(= 조각 사이 slash 수 + 1). 렌더러의 계산과 동일하게 맞춘다.
 
-    마지막 조각의 슬래시 유무에 따른 off-by-one 은 허용(차이 2 이상만 불일치로 본다).
+    마지막 토큰의 slash 는 문장 끝의 무의미한 경계이므로 조각 수에 더하지 않는다.
+    """
+    toks = list(getattr(s, "tokens", []) or [])
+    if not toks:
+        return 0
+    slashes = sum(1 for t in toks if getattr(t, "slash", False))
+    return slashes if getattr(toks[-1], "slash", False) else slashes + 1
+
+
+def _reading_misaligned(analyses) -> int:
+    """영어 끊어읽기 '조각 수'와 한글 직독직해(' / ') 조각 수가 크게 어긋난 문장 수.
+
+    렌더러(analyzer._reading_ko_aligned)는 2개 이상 어긋나면 슬래시를 지워 연속 표기하고,
+    1개 차이까지만 슬래시를 남긴다. 여기서도 '조각 수(=slash+1)' 기준으로, 실제로 슬래시가
+    남아 있는(ko>=2) 문장만 대상으로 2개 이상 차이날 때만 불일치로 센다 → 자동 생성물에서는
+    사실상 0(정렬기가 이미 안전 처리). 외부에서 만든 데이터의 방어용으로만 남긴다.
     """
     bad = 0
     for a in analyses or []:
@@ -150,7 +165,7 @@ def _reading_misaligned(analyses) -> int:
             if not rk:
                 continue
             ko = len([c for c in rk.split(" / ") if c.strip()])
-            en = sum(1 for t in s.tokens if getattr(t, "slash", False))
+            en = _en_chunk_count(s)
             if ko <= 1 or en <= 1:
                 continue
             if abs(ko - en) >= 2:

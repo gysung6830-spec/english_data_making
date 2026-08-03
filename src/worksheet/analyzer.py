@@ -267,13 +267,19 @@ def _english_chunk_count(lines: list[list[Token]]) -> int:
 
 
 def _reading_ko_aligned(lines: list[list[Token]], chunks: list[str]) -> str:
-    """직독직해 표시 문자열을 만든다. 영어 조각 수와 한글 조각 수가 다르면(정렬 실패)
-    슬래시 없이 이어 붙여, 어긋난 '/'가 보이지 않도록 한다(오정렬 방지)."""
-    chunks = [c.strip() for c in (chunks or []) if c and c.strip()]
+    """직독직해 표시 문자열을 만든다.
+
+    - 각 한글 조각 안에 섞여 들어온 '/'(LLM 오류)는 제거해, 조각 수가 부풀지 않게 한다
+      (그래야 렌더의 '/'와 검수(quality)의 조각 수 계산이 항상 일치한다).
+    - 영어 조각 수와 한글 조각 수가 '크게'(2개 이상) 어긋나면 정렬 실패로 보고 슬래시 없이
+      이어 붙인다(어긋난 '/' 노출 방지). 1개 차이(경계 하나 정도)는 그대로 두어 끊어읽기의
+      가독성을 살린다."""
+    chunks = [" ".join(c.replace("/", " ").split()) for c in (chunks or []) if c and c.strip()]
+    chunks = [c for c in chunks if c]
     if not chunks:
         return ""
     e = _english_chunk_count(lines)
-    if e >= 2 and len(chunks) != e:      # 정렬 불가 → 연속 표기(슬래시 제거)
+    if e >= 2 and abs(len(chunks) - e) >= 2:   # 크게 어긋남 → 연속 표기(슬래시 제거)
         return " ".join(chunks)
     return " / ".join(chunks)
 
