@@ -146,47 +146,11 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
         raise ValueError("출제 문항이 하나도 없습니다(모든 문장의 questions 가 비어 있음).")
 
 
-_VERB_MAX_RATIO = 0.40   # 동사 문항은 지문 전체 문항의 40% 이하 (균등 분배 A)
-
-
-def _cap_verb_questions(parsed: list[dict]) -> None:
-    """동사 문항이 전체의 40%를 넘으면 초과분을 '되돌린다'(un-ask).
-
-    되돌리기 = en_template 의 해당 {{pid}} 를 정답 단어로 치환해 문장을 원래대로 복원하고
-    그 문항을 제거한다(문장에서 단어가 사라지지 않게). 동사 문항이 많은 문장부터 덜어낸다.
-    """
-    import math
-
-    total = sum(len(p["pairs"]) for p in parsed)
-    # 문항이 적으면(지문 규모가 작으면) 비율 상한은 의미가 없으므로 적용하지 않는다.
-    if total < 5:
-        return
-    verb_pairs = [(pi, qi) for pi, p in enumerate(parsed)
-                  for qi, (_pid, src) in enumerate(p["pairs"]) if src.type == "verb"]
-    verb = len(verb_pairs)
-    if verb <= _VERB_MAX_RATIO * total:
-        return
-    d = math.ceil((verb - _VERB_MAX_RATIO * total) / (1 - _VERB_MAX_RATIO))
-    vcount: dict[int, int] = {}
-    for pi, _ in verb_pairs:
-        vcount[pi] = vcount.get(pi, 0) + 1
-    # 동사가 많은 문장의 동사부터 제거(고르게 분산)
-    order_rm = sorted(verb_pairs, key=lambda x: (-vcount[x[0]], x[0], x[1]))
-    remove = set(order_rm[:d])
-    for pi, p in enumerate(parsed):
-        keep = []
-        for qi, (pid, src) in enumerate(p["pairs"]):
-            if (pi, qi) in remove:
-                p["en"] = p["en"].replace("{{" + pid + "}}", src.answer)  # 단어 복원
-            else:
-                keep.append((pid, src))
-        p["pairs"] = keep
-
-
 def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
     """검증된 LLM 응답에 전역 연속 번호를 채우고 total 을 집계해 렌더용 Workbook 생성.
 
-    채번 전에 동사 문항 40% 상한을 적용(균등 분배 A)한다.
+    출제 원리(문장당 최소 3개·최대 5개, 어형변형 2개, 5유형 지문 전체 커버)는 프롬프트가 담당하며,
+    이 함수는 응답을 그대로 채번한다(동사 비율 상한은 '어형변형 2개/문장' 원칙과 상충하므로 두지 않는다).
     """
     validate_llm_workbook(llm)
     # 1) 문장별 (pid, src) 쌍 수집
@@ -203,10 +167,7 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
             pairs = list(zip(order, s.questions))
         parsed.append({"no": s.no, "en": s.en_template, "ko": s.ko, "pairs": pairs})
 
-    # 2) 동사 40% 상한 적용(초과분 un-ask)
-    _cap_verb_questions(parsed)
-
-    # 3) 전역 채번 + Sentence 생성
+    # 2) 전역 채번 + Sentence 생성
     sentences: list[Sentence] = []
     counter = 0
     for p in parsed:

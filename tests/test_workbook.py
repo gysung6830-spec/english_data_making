@@ -207,8 +207,9 @@ def test_section_split():
     print("PASS  문제/정답 분리(section q/a)")
 
 
-def test_verb_ratio_cap():
-    # 동사 8 + 다른유형 2 = 80% → 40% 이하로 낮추고, 되돌린 동사는 문장에 단어로 복원
+def test_no_verb_cap():
+    # 새 출제원리: '어형변형 2개/문장'을 위해 동사 비율 상한을 두지 않는다.
+    #   동사 문항이 40%를 넘어도 되돌리지 않고 그대로 채번되어야 한다.
     def Q(i, t):
         return ws.LLMQuestion(id=f"Q{i}", type=t,
                               display=("(x)" if t == "verb" else "[a/b]"),
@@ -220,13 +221,11 @@ def test_verb_ratio_cap():
                         ko="k", questions=[Q(7, "verb"), Q(8, "verb"), Q(9, "verb"), Q(10, "conj")])
     wb = ws.build_workbook(ws.LLMWorkbook(sentences=[s1, s2]), title="T", subtitle="S")
     nverb = sum(1 for q in wb.all_questions if q.type == "verb")
-    assert nverb <= 0.4 * wb.total                 # 동사 40% 이하
-    # 되돌린 동사는 자리표시자가 아니라 정답 단어로 복원(문장에 단어가 남음)
-    import re as _re
+    assert wb.total == 10 and nverb == 8            # 모든 문항 보존(동사 되돌림 없음)
     for s in wb.sentences:
         ph = set(ws.placeholders_in(s.en_template))
-        assert ph == set(q.id for q in s.questions)   # 남은 자리표시자 = 남은 문항 (고아 없음)
-    print("PASS  동사 40% 상한(초과분 되돌리기)")
+        assert ph == set(q.id for q in s.questions)   # 자리표시자 ↔ 문항 대응 온전(고아 없음)
+    print("PASS  동사 비율 상한 제거(어형변형 2개/문장 우선, 문항 보존)")
 
 
 def run_all():
@@ -240,7 +239,7 @@ def run_all():
     test_multi_passage_layout()
     test_show_ko_flag()
     test_section_split()
-    test_verb_ratio_cap()
+    test_no_verb_cap()
     print("\n통합 워크북 오프라인 테스트 통과 ✅")
 
 
