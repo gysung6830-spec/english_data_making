@@ -28,26 +28,26 @@
   .page:last-child{ page-break-after:auto; }
 
   /* ---- 제비꼬리 리본 + 제목 ---- */
-  .head{ display:flex; align-items:flex-start; gap:16px; margin:0 0 12px; min-height:74px; }
-  .ribbon{ position:relative; width:74px; flex:0 0 74px; background:var(--navy); color:#fff;
-           text-align:center; padding:16px 4px 22px; margin-top:-4px;
+  .head{ display:flex; align-items:flex-start; gap:12px; margin:0 0 7px; min-height:52px; }
+  .ribbon{ position:relative; width:54px; flex:0 0 54px; background:var(--navy); color:#fff;
+           text-align:center; padding:8px 4px 13px; margin-top:-4px;
            box-shadow:inset 0 0 0 2px rgba(255,255,255,.28); }
-  .ribbon .no{ font-size:32px; font-weight:800; line-height:1.05; }
+  .ribbon .no{ font-size:22px; font-weight:800; line-height:1.05; }
   .ribbon::after{ /* 하단 제비꼬리 V홈 (page-bg 삼각형이 아래 가운데를 파냄) */
     content:""; position:absolute; left:0; bottom:-1px; width:0; height:0;
-    border-left:37px solid transparent; border-right:37px solid transparent;
-    border-bottom:15px solid var(--page-bg); }
-  .titles{ padding-top:8px; }
+    border-left:27px solid transparent; border-right:27px solid transparent;
+    border-bottom:11px solid var(--page-bg); }
+  .titles{ padding-top:2px; }
   .titles .srcbadge{ display:inline-block; background:#eaf1ec; color:#2f6f4a; border:1px solid #cfe0d3;
-                     font-size:11px; font-weight:800; padding:2px 9px; border-radius:11px; margin-bottom:4px; }
-  .titles h1{ font-size:19px; font-weight:800; margin:0; line-height:1.22; color:#1c2030; }
-  .titles .ko{ font-size:14px; color:#4a5064; margin-top:3px; font-weight:600; }
+                     font-size:10px; font-weight:800; padding:1px 8px; border-radius:10px; margin-bottom:2px; }
+  .titles h1{ font-size:16px; font-weight:800; margin:0; line-height:1.2; color:#1c2030; }
+  .titles .ko{ font-size:11.5px; color:#4a5064; margin-top:1px; font-weight:600; }
 
   /* ---- 지문 한눈 요약 박스(제목 밑, 본문 위) ---- */
-  .summary{ margin:12px 0 2px; padding:9px 13px; background:#fff; border:1px solid var(--line);
-            border-left:4px solid var(--navy); border-radius:9px; page-break-inside:avoid; }
+  .summary{ margin:7px 0 2px; padding:6px 12px; background:#fff; border:1px solid var(--line);
+            border-left:4px solid var(--navy); border-radius:8px; page-break-inside:avoid; }
   .summary .srow{ display:flex; align-items:baseline; gap:8px; }
-  .summary .srow + .srow{ margin-top:4px; }
+  .summary .srow + .srow{ margin-top:3px; }
   .summary .slbl{ flex:0 0 auto; min-width:64px; text-align:center; box-sizing:border-box;
                   background:var(--navy); color:#fff; font-size:8.5px; font-weight:800;
                   border-radius:9px; padding:2px 8px; letter-spacing:.2px; }
@@ -151,7 +151,7 @@
 
   /* ---- 압축(compact) 밀도: 한 지문을 최대한 1페이지에 ---- */
   .page.compact{ padding:14px 18px 26px; }
-  .page.compact .head{ margin-bottom:8px; min-height:60px; }
+  .page.compact .head{ margin-bottom:5px; min-height:48px; }
   .page.compact .row{ margin:9px 0 2px; padding-top:3px; }
   .page.compact .en{ margin-top:1px; }
   .page.compact .en .line{ margin-bottom:6px; }
