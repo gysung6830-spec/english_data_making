@@ -69,7 +69,13 @@ def render_inline(text: str, teacher: bool) -> str:
     # 2) 이스케이프 후 강조 적용 (sentinel은 일반 문자라 그대로 통과)
     result = _emphasize(html.escape(protected))
     # 3) sentinel 복원
-    return re.sub(r"\x00(\d+)\x00", lambda m: tokens[int(m.group(1))], result)
+    result = re.sub(r"\x00(\d+)\x00", lambda m: tokens[int(m.group(1))], result)
+    # 4) 빈칸 바로 뒤 구두점이 홀로 줄바꿈되지 않도록 묶기
+    result = re.sub(
+        r'(<span class="blank"[^>]*></span>)\s*([.,;:!?)\]])',
+        r'<span class="nb">\1\2</span>', result,
+    )
+    return result
 
 
 # ── 블록 빌더 ─────────────────────────────────────────────────────
@@ -98,10 +104,22 @@ def _point_html(p: dict, teacher: bool) -> str:
         blocks.append(f'  <div class="lead">▪ {render_inline(c["lead"], teacher)}</div>')
         if c.get("desc"):
             blocks.append(f'  <div class="desc">{render_inline(c["desc"], teacher)}</div>')
-        blocks.append('  <ul class="items">')
-        for it in c["items"]:
-            blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
-        blocks.append("  </ul>")
+        if c.get("items"):
+            blocks.append('  <ul class="items">')
+            for it in c["items"]:
+                blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
+            blocks.append("  </ul>")
+        if c.get("examples"):
+            blocks.append('  <div class="ex-label">▪ 예문 — 직접 써 보기</div>')
+            for ex in c["examples"]:
+                ko = render_inline(ex.get("ko", ""), teacher)
+                ans = render_inline(ex["en"], teacher) if teacher else ""
+                blocks.append(
+                    f'  <div class="wline"><span class="wko">{ko}</span>'
+                    f'<div class="wrule"><span class="wans">{ans}</span></div></div>'
+                )
+        for _ in range(c.get("space", 0)):
+            blocks.append('  <div class="space-line"></div>')
         blocks.append("</div>")
     boxes = p.get("boxes") or ([p["tip"]] if p.get("tip") else [])
     for box in boxes:
@@ -130,10 +148,19 @@ def _practice_html(items: list, teacher: bool) -> str:
     for i, grp in enumerate(items, 1):
         blocks.append('<div class="pgroup">')
         blocks.append(f'  <div class="pq">{i}. {render_inline(grp["q"], teacher)}</div>')
-        blocks.append('  <ol class="plist">')
-        for it in grp["items"]:
-            blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
-        blocks.append("  </ol></div>")
+        if grp.get("items"):
+            blocks.append('  <ol class="plist">')
+            for it in grp["items"]:
+                blocks.append(f'    <li>{render_inline(it, teacher)}</li>')
+            blocks.append("  </ol>")
+        for ex in grp.get("examples", []):
+            ko = render_inline(ex.get("ko", ""), teacher)
+            ans = render_inline(ex["en"], teacher) if teacher else ""
+            blocks.append(
+                f'  <div class="wline"><span class="wko">{ko}</span>'
+                f'<div class="wrule"><span class="wans">{ans}</span></div></div>'
+            )
+        blocks.append("</div>")
     blocks.append("</div>")
     return "\n".join(blocks)
 
@@ -159,9 +186,10 @@ def _css(teacher: bool) -> str:
   @top-right {{ content: "{tag}"; font-family:'NSR'; font-size:8pt; color:{tag_color}; font-weight:700; }}
 }}
 * {{ box-sizing:border-box; }}
-body {{ font-family:'NSR'; color:{INK}; font-size:10.3pt; line-height:1.5; margin:0; }}
+body {{ font-family:'NSR'; color:{INK}; font-size:10.4pt; line-height:1.7; margin:0; }}
 strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .ul {{ text-decoration:underline; text-underline-offset:2px; }}
+.nb {{ white-space:nowrap; }}
 
 /* 헤더 배너 */
 .banner {{ display:flex; align-items:stretch; margin-bottom:10px; page-break-after:avoid; }}
@@ -177,20 +205,31 @@ strong {{ font-weight:700; color:{GREEN_DARK}; }}
 .intro ul {{ margin:0; padding-left:18px; }}
 .intro li {{ margin:3px 0; }}
 
-/* 포인트 */
-.point {{ margin:0 0 12px; page-break-inside:avoid; }}
+/* 포인트 : point는 페이지를 넘겨도 되고, 개념/박스 단위로만 안 쪼개지게 */
+.point {{ margin:0 0 20px; }}
 .point-head {{ display:flex; align-items:center; gap:8px; border-bottom:2px solid {GREEN};
-  padding-bottom:3px; margin-bottom:6px; }}
+  padding-bottom:4px; margin:6px 0 8px; page-break-after:avoid; }}
 .point-badge {{ background:{GREEN}; color:#fff; font-weight:700; font-size:9pt;
   padding:2px 8px; border-radius:11px; }}
 .point-title {{ font-weight:700; font-size:12pt; color:{GREEN_DARK}; }}
 .point-intro {{ background:{GREEN_SOFT}; border-left:3px solid {GREEN};
-  padding:5px 10px; border-radius:0 6px 6px 0; margin:2px 0 8px; }}
-.concept {{ margin:6px 0 7px; }}
-.lead {{ font-weight:700; color:{INK}; margin-bottom:2px; }}
-.desc {{ color:#374151; margin:1px 0 3px; padding-left:14px; }}
-.items {{ margin:2px 0 4px; padding-left:20px; }}
-.items li {{ margin:3px 0; }}
+  padding:6px 11px; border-radius:0 6px 6px 0; margin:2px 0 10px; page-break-inside:avoid; }}
+.concept {{ margin:8px 0 14px; page-break-inside:avoid; }}
+.lead {{ font-weight:700; color:{INK}; margin-bottom:4px; page-break-after:avoid; }}
+.desc {{ color:#374151; margin:2px 0 6px; padding-left:14px; }}
+.items {{ margin:4px 0 6px; padding-left:20px; }}
+.items li {{ margin:6px 0; }}
+
+/* ✍ 직접 쓰는 예문 필기줄 */
+.ex-label {{ font-size:8.8pt; font-weight:700; color:{GREEN}; margin:8px 0 2px; padding-left:2px; }}
+.wline {{ margin:0 0 4px; padding-left:14px; }}
+.wko {{ display:block; color:#6b7280; font-size:9.2pt; margin-bottom:1px; }}
+.wko::before {{ content:"›  "; color:{GREEN}; font-weight:700; }}
+.wrule {{ border-bottom:1px solid #c2ccd4; min-height:1.9em; display:flex;
+  align-items:flex-end; padding:0 2px 2px; }}
+.wans {{ color:{ANSWER_FG}; font-weight:700; }}
+/* 자유 필기 공간(빈 줄) */
+.space-line {{ border-bottom:1px solid #d7dee4; height:1.9em; margin:0 0 3px; margin-left:14px; }}
 
 /* 색상별 박스: tip(초록)·warn(함정)·compare(비교) */
 .box {{ display:flex; gap:0; border:1px solid {GREEN_LINE}; border-radius:7px;
