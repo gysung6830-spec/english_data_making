@@ -92,6 +92,22 @@ def test_ref_safeguard():
     _check("앞 문장 정답 유지", r2.sentences[0].items[0].answer == "앞 문장")
 
 
+def test_corrupt_template_falls_back_to_en():
+    # template 이 손상돼('P P1}}') 정상 자리표시자가 없고 items 만 있으면 원문(en)으로 대체하고
+    # 문항을 버려 'P P1}}' 같은 조각이 노출되지 않아야 한다.
+    llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="They will delete the content.", ko="삭제",
+        vocab_template="P P1}}",
+        vocab_items=[pr.LLMProseItem(id="P1", display="[ a / b / c ]", answer="a / b", gloss="뜻")])])
+    w = next(x for x in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
+             if x.wtype == "vocab")
+    s = w.sentences[0]
+    html = str(pr.render_prose(s, "vocab"))
+    _check("손상 template → 원문(en) 대체", s.template == "They will delete the content.")
+    _check("깨진 조각(P1}}) 미노출", "P1}}" not in html and "}}" not in html and "{{" not in html)
+    _check("손상 문항 버림", len(s.items) == 0)
+
+
 def test_render_html():
     pack = mock_prose_pack(title="샘플", header="[샘플]")
     html = pr.render_prose_html(pack)
@@ -117,6 +133,7 @@ if __name__ == "__main__":
     test_translate_no_items()
     test_id_mismatch_order()
     test_ref_safeguard()
+    test_corrupt_template_falls_back_to_en()
     test_render_html()
     test_show_ko_flag()
     print("\n단일 유형 산문 워크시트 오프라인 테스트 통과 ✅")

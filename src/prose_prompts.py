@@ -59,6 +59,13 @@ _RULES = """[문장 완전성 — 매우 중요]
 3) 어휘 — '난도 하'와 '난도 상' 두 종류를 '모두' 만든다(같은 문장에 대해 각각).
    ★ 각 유형은 '한 문장에 최소 2개, 최대 3개'를 출제한다(어휘가 정말 부족한 아주 짧은 문장만 예외로 1개).
    공통: 각 유형 template 은 원문에 {{Pn}} 만 삽입. 보기 순서는 매 문항 무작위로 섞어라.
+   ★★ {{Pn}} 은 '원래 그 단어가 있던 자리에 정확히' 놓는다. 주변 단어(주어·동사 등)를 옮기거나
+     빠뜨리지 말 것. template 은 그 단어만 {{Pn}} 으로 바뀔 뿐, 나머지는 원문 문장 그대로 온전해야 한다.
+     (금지 예: 원문 "The reason pessimists sound smart is that they can avoid being wrong" 에서
+      avoid 를 낼 때 "The reason {{P1}} sound smart is that they can being wrong" 처럼 주어 pessimists 를
+      지우거나 avoid 를 딴 데로 옮기면 안 된다. 올바른: "…is that they can {{P1}} being 'wrong'".)
+   ★ template 에는 반드시 그 문장의 원문 텍스트가 담겨야 한다. 자리표시자만 달랑 넣거나(예: "{{P1}}"),
+     문장을 비우지 말 것.
    ★ 각 item 에는 정답 단어의 '한글 뜻'을 gloss 에 넣는다(해설에 뜻을 함께 보여주기 위함). 필수.
 
    ★ 난도 하(vocab_easy) — '양자택일'(2개 중 1개):

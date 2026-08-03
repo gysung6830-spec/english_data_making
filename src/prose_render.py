@@ -126,7 +126,13 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         template = getattr(s, tkey) or s.en
         items_src = getattr(s, ikey)
         order = placeholders_in(template)
-        # 자리표시자가 하나도 없으면(출제 없음) 원문만 두고 items 는 비운다.
+        # 안전장치: 문항(items)은 있는데 template 에 정상 자리표시자({{Pn}})가 하나도 없으면
+        #   template 이 손상된 것(예: LLM 이 "P1}}" 같은 깨진 문자열 반환 → "P P1}}" 노출)이다.
+        #   이 경우 깨진 template 대신 '원문(en)'을 보여 주고 문항은 버린다(문장은 온전히 보이게).
+        if items_src and not order:
+            template = s.en
+        order = placeholders_in(template)
+        # 자리표시자가 하나도 없으면(출제 없음/손상) 원문만 두고 items 는 비운다.
         pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write,
                         gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
@@ -183,6 +189,11 @@ def render_prose(s: PSentence, wtype: str) -> Markup:
             html = html.replace("{{" + pid + "}}", _item_html(it, wtype))
     # 짝이 없어 남은 자리표시자가 그대로 노출되지 않도록 제거
     html = re.sub(r"\{\{\s*\w+\s*\}\}", "", html)
+    # 방어: 부분 손상으로 남은 조각(예: "P1}}", "{{P2")도 노출되지 않게 정리한다.
+    #   중괄호에 붙은 자리표시자형 토큰(대문자+숫자)과 남은 낱개 중괄호만 제거(일반 본문은 건드리지 않음).
+    html = re.sub(r"[A-Z]\d+\s*\}{1,2}", "", html)   # "P1}}", "P2}"
+    html = re.sub(r"\{{1,2}\s*[A-Z]\d+", "", html)   # "{{P1", "{P2"
+    html = html.replace("{{", "").replace("}}", "")
     return Markup(html)
 
 
