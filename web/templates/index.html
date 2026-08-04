@@ -212,34 +212,62 @@ Second passage goes here."></textarea>
   });
 
   // 페이지 다른 곳에 파일을 떨어뜨려도 브라우저가 파일을 열지 않도록
+  // (지문 드롭존 dz, JSON 드롭존 jsonzone 안은 예외 — 각자 처리한다)
   ['dragover', 'drop'].forEach(function (ev) {
     window.addEventListener(ev, function (e) {
       if (e.target === dz || dz.contains(e.target)) return;
+      var jz = document.getElementById('jsonzone');
+      if (jz && (e.target === jz || jz.contains(e.target))) return;
       e.preventDefault();
     });
   });
 })();
 
-// 분석 결과 JSON 재입력: 선택한 파일명 표시 + 드롭 지원
+// 분석 결과 JSON 재입력: 선택한 파일명 표시 + 드래그앤드롭
 (function () {
   var jz = document.getElementById('jsonzone');
   var ji = document.getElementById('jsonInput');
   var jn = document.getElementById('jsonName');
   if (!jz || !ji) return;
+
+  function setFile(file) {
+    // DataTransfer 로 input.files 를 채운다(브라우저 호환·폼 제출 확실).
+    var dt = new DataTransfer();
+    dt.items.add(file);
+    ji.files = dt.files;
+    jn.textContent = file.name;
+  }
+
   ji.addEventListener('change', function () {
-    jn.textContent = (ji.files && ji.files.length) ? ji.files[0].name : '선택된 파일 없음';
+    if (ji.files && ji.files.length) jn.textContent = ji.files[0].name;
   });
+
   ['dragenter', 'dragover'].forEach(function (ev) {
-    jz.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); jz.classList.add('dragover'); });
+    jz.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation(); jz.classList.add('dragover');
+    });
   });
-  ['dragleave', 'dragend', 'drop'].forEach(function (ev) {
-    jz.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); jz.classList.remove('dragover'); });
+  ['dragleave', 'dragend'].forEach(function (ev) {
+    jz.addEventListener(ev, function (e) {
+      e.preventDefault(); e.stopPropagation(); jz.classList.remove('dragover');
+    });
   });
   jz.addEventListener('drop', function (e) {
-    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
-      ji.files = e.dataTransfer.files;
-      jn.textContent = e.dataTransfer.files[0].name;
+    e.preventDefault(); e.stopPropagation();
+    jz.classList.remove('dragover');
+    var files = e.dataTransfer && e.dataTransfer.files;
+    if (!files || !files.length) return;
+    // 여러 개면 .json 을 우선 선택
+    var pick = null;
+    for (var i = 0; i < files.length; i++) {
+      if (/\.json$/i.test(files[i].name)) { pick = files[i]; break; }
     }
+    pick = pick || files[0];
+    if (!/\.json$/i.test(pick.name)) {
+      jn.textContent = '⚠ .json 파일을 넣어 주세요 (넣은 파일: ' + pick.name + ')';
+      return;
+    }
+    setFile(pick);
   });
 })();
 </script>
