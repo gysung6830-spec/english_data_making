@@ -419,9 +419,16 @@ RETITLE_HTML = """
  const drop=document.getElementById('drop'),file=document.getElementById('file'),
        list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
  drop.onclick=()=>file.click();
- ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hl');}));
- ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hl');}));
- drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
+ ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();ev.stopPropagation();drop.classList.add('hl');}));
+ ['dragleave','dragend'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();ev.stopPropagation();drop.classList.remove('hl');}));
+ drop.addEventListener('drop',ev=>{
+   ev.preventDefault();ev.stopPropagation();drop.classList.remove('hl');
+   // 단일 파일 input 은 dataTransfer.files 직접 대입이 무시될 수 있어 .json 만 골라 새로 담는다.
+   const picked=[...(ev.dataTransfer&&ev.dataTransfer.files||[])]
+       .filter(x=>/\\.json$/i.test(x.name));
+   if(!picked.length){alert('.json 파일을 올려주세요.');return;}
+   const dt=new DataTransfer();dt.items.add(picked[0]);file.files=dt.files;show();
+ });
  file.onchange=show;
  function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
  f.onsubmit=()=>{if(!file.files.length){alert('.exam.json 파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
