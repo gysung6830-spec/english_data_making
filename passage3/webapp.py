@@ -195,9 +195,13 @@ PAGE = """
     const dzText = document.getElementById('dzText');
     function showName(){
       if (fileInput.files && fileInput.files.length){
-        dzText.innerHTML = '<div class="dz-icon">📄</div>선택된 파일: '
-          + '<span class="dz-name">' + fileInput.files[0].name + '</span>'
-          + '<div style="font-size:12px;color:#6b7280;margin-top:3px">다른 파일을 끌어다 놓거나 클릭해 변경</div>';
+        var fn = fileInput.files[0].name;
+        var isJson = /\.json$/i.test(fn);
+        var extra = isJson
+          ? '<div style="font-size:12px;color:#14532d;margin-top:3px;font-weight:700">분석 JSON 재입력 — 제목만 바꿔 재분석 없이 재생성됩니다</div>'
+          : '<div style="font-size:12px;color:#6b7280;margin-top:3px">다른 파일을 끌어다 놓거나 클릭해 변경</div>';
+        dzText.innerHTML = '<div class="dz-icon">' + (isJson ? '🔄' : '📄') + '</div>'
+          + '선택된 파일: <span class="dz-name">' + fn + '</span>' + extra;
       }
     }
     fileInput.addEventListener('change', showName);
