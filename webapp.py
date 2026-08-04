@@ -10,6 +10,7 @@
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import secrets
@@ -20,7 +21,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, pipeline, envcheck
+from src import extract, pipeline, envcheck, bundle
 from src.client import ClaudeClient
 from src.config import ROOT, load_config
 
@@ -137,6 +138,16 @@ INDEX_HTML = """
       </div>
     </form>
   </div>
+
+  <div class=card>
+    <h1>✏️ 제목만 바꾸기 <span class=hint style="font-weight:400">(API 재분석 없이 · 무료)</span></h1>
+    <div class=sub>이미 분석해서 받은 <b>분석데이터(JSON)</b> 파일을 올리면, 분석은 그대로 두고 <b>제목만</b> 고쳐 다시 뽑습니다.</div>
+    <form method=post action="{{ url_for('retitle') }}" enctype=multipart/form-data>
+      <label>분석데이터(JSON) 파일 <span class=hint>(결과 표의 «💾 분석데이터(JSON)» 로 받은 파일)</span></label>
+      <input type=file name=bundle accept=".json" required>
+      <div class=row><button class="btn gray" type=submit>제목 수정하러 가기 →</button></div>
+    </form>
+  </div>
 </div>
 
 <div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">분석 중입니다… 잠시만요</p></div>
@@ -172,6 +183,7 @@ RESULT_HTML = """
           {% if r.ok %}
             <a class=dl href="{{ url_for('view', fname=r.out) }}" target=_blank>미리보기</a>
             <a class=dl href="{{ url_for('download', fname=r.out) }}">다운로드</a>
+            {% if r.json %}<a class=dl href="{{ url_for('download', fname=r.json) }}" title="제목만 바꿔 다시 뽑을 때 이 파일을 올리세요">💾 분석데이터(JSON)</a>{% endif %}
           {% else %}<span class=hint>{{ r.error }}</span>{% endif %}
         </td>
       </tr>
@@ -180,6 +192,39 @@ RESULT_HTML = """
     <div class=row><a class="btn gray" href="{{ url_for('index') }}">← 다른 파일 분석하기</a></div>
   </div>
 </div></body></html>
+"""
+
+
+RETITLE_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>제목 수정</title><style>""" + BASE_CSS + """</style></head>
+<body><div class=wrap>
+  <div class=card>
+    <h1>✏️ 제목 수정</h1>
+    <div class=sub>분석 내용은 그대로 두고 제목만 바꿉니다. (API 재분석 없음 · 무료)</div>
+    {% if err %}<div class=err>{{ err }}</div>{% endif %}
+    <form id=f method=post action="{{ url_for('retitle_apply') }}" enctype=multipart/form-data>
+      <input type=hidden name=token value="{{ token }}">
+      {% for t in titles %}
+      <label>지문 {{ loop.index }} 제목</label>
+      <input type=text name="title_{{ loop.index0 }}" value="{{ t }}">
+      {% endfor %}
+      <label>저장할 PDF 파일명 <span class=hint>(비우면 원래 이름 유지)</span></label>
+      <input type=text name=outname value="{{ outname }}" placeholder="예: 올림포스_Unit10_워크북">
+      <div class=row>
+        <button class=btn id=go type=submit>제목 바꿔 다시 뽑기</button>
+        <a class="btn gray" href="{{ url_for('index') }}">← 취소</a>
+      </div>
+    </form>
+  </div>
+</div>
+<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">다시 뽑는 중입니다…</p></div>
+<script>
+ const f=document.getElementById('f'),ov=document.getElementById('overlay');
+ f.onsubmit=()=>{ov.style.display='flex';};
+</script>
+</body></html>
 """
 
 
@@ -344,14 +389,23 @@ def analyze_route():
                 wbs, packs, OUTPUT_DIR, base, footer_note=cfg.design.footer_note,
                 scratch=OUTPUT_DIR, blank_wb=pipeline._build_blank_workbook(file_bsets),
                 writing_packs=file_wpacks, source_name=f.filename)
+            # 분석 결과(JSON) 저장 — 나중에 '제목만' 바꿔 재렌더링(API 재호출 없이)할 때 쓴다.
+            json_name = f"{base}_분석데이터.json"
+            try:
+                bundle.save_json(
+                    bundle.dump_bundle(wbs, packs, file_bsets, file_wpacks, source_name=f.filename),
+                    OUTPUT_DIR / json_name)
+            except Exception:
+                json_name = ""
             wb_books.extend(wbs)
             wb_packs.extend(packs)
             wb_bsets.extend(file_bsets)
             wb_wpacks.extend(file_wpacks)
-            for o in outs:
+            for idx, o in enumerate(outs):
                 tag = "한글 포함" if o.name.endswith("_한글포함.pdf") else "한글 제외"
                 results.append({"name": f"{f.filename} · 통합 워크북 [{tag}] (지문 {len(wbs)}편){warn_note}",
-                                "ok": True, "out": o.name})
+                                "ok": True, "out": o.name,
+                                "json": json_name if idx == 0 else ""})
             n_files_ok += 1
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()
@@ -377,6 +431,71 @@ def analyze_route():
     n_ok = sum(1 for r in results if r["ok"])
     return render_template_string(RESULT_HTML, results=results,
                                   n_ok=n_ok, n_fail=len(results) - n_ok)
+
+
+# ---------------------------------------------------------------------------
+# 제목만 수정 (분석 JSON 재사용 · API 재호출 없음)
+# ---------------------------------------------------------------------------
+@app.route("/retitle", methods=["POST"])
+def retitle():
+    """분석데이터(JSON) 업로드 → 임시 저장 후 제목 편집 폼을 보여준다."""
+    up = request.files.get("bundle")
+    if not up or not up.filename:
+        return render_template_string(RETITLE_HTML, err="JSON 파일을 올려주세요.",
+                                      token="", titles=[], outname="")
+    try:
+        data = json.loads(up.read().decode("utf-8"))
+        wbs, packs, bsets, wpacks, source = bundle.load_bundle(data)
+        titles = bundle.passage_titles(wbs, packs, wpacks, bsets)
+    except Exception as e:
+        return render_template_string(
+            RETITLE_HTML, err="올바른 ORTICA 분석데이터(JSON)가 아닙니다: " + str(e),
+            token="", titles=[], outname="")
+    token = uuid.uuid4().hex
+    (UPLOAD_DIR / f"{token}.json").write_text(json.dumps(data, ensure_ascii=False),
+                                              encoding="utf-8")
+    outname = _safe_name(Path(source).stem) if source else ""
+    return render_template_string(RETITLE_HTML, err="", token=token, titles=titles,
+                                  outname=outname)
+
+
+@app.route("/retitle_apply", methods=["POST"])
+def retitle_apply():
+    """편집한 제목을 반영해 다시 렌더링(분석은 저장된 JSON 그대로 재사용)."""
+    token = re.sub(r"[^0-9a-f]", "", (request.form.get("token") or ""))[:32]
+    tmp = UPLOAD_DIR / f"{token}.json"
+    if not token or not tmp.is_file():
+        return render_template_string(RETITLE_HTML, err="세션이 만료되었습니다. 다시 올려주세요.",
+                                      token="", titles=[], outname="")
+    try:
+        data = json.loads(tmp.read_text(encoding="utf-8"))
+        wbs, packs, bsets, wpacks, source = bundle.load_bundle(data)
+        for i in range(len(bundle.passage_titles(wbs, packs, wpacks, bsets))):
+            new_t = (request.form.get(f"title_{i}") or "").strip()
+            if new_t:
+                bundle.set_passage_title(wbs, packs, wpacks, bsets, i, new_t)
+        base = _safe_name((request.form.get("outname") or "").strip()) \
+            or (_safe_name(Path(source).stem) if source else "통합워크북")
+        outs = pipeline.render_workbook_two_versions(
+            wbs, packs, OUTPUT_DIR, base, footer_note=cfg.design.footer_note,
+            scratch=OUTPUT_DIR, blank_wb=pipeline._build_blank_workbook(bsets),
+            writing_packs=wpacks, source_name=source)
+        json_name = f"{base}_분석데이터.json"
+        bundle.save_json(bundle.dump_bundle(wbs, packs, bsets, wpacks, source_name=source),
+                         OUTPUT_DIR / json_name)
+    except Exception as e:
+        traceback.print_exc()
+        return render_template_string(RETITLE_HTML, err="다시 뽑기 실패: " + _friendly_error(e),
+                                      token=token, titles=[], outname="")
+    finally:
+        tmp.unlink(missing_ok=True)
+
+    results = []
+    for idx, o in enumerate(outs):
+        tag = "한글 포함" if o.name.endswith("_한글포함.pdf") else "한글 제외"
+        results.append({"name": f"✏️ 제목 수정본 · 통합 워크북 [{tag}]", "ok": True,
+                        "out": o.name, "json": json_name if idx == 0 else ""})
+    return render_template_string(RESULT_HTML, results=results, n_ok=len(results), n_fail=0)
 
 
 def _safe_name(stem: str) -> str:
