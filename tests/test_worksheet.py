@@ -348,6 +348,35 @@ def test_overview_builder_llm_path():
     print("PASS  overview_builder LLM 경로(+자동 제목)")
 
 
+def test_analysis_json_roundtrip():
+    """분석 결과 → JSON → 복원이 손실 없이 되고, 제목만 바꿔 재렌더(무-API)가 되는지."""
+    from src.worksheet import serialize
+    from src.worksheet.mock import mock_analysis
+    from src.worksheet import renderer
+
+    a = mock_analysis()
+    js = serialize.analyses_to_json([a])
+    back = serialize.analyses_from_json(js)
+    assert len(back) == 1
+    b = back[0]
+    # 핵심 필드 보존
+    assert b.title_en == a.title_en and b.title_ko == a.title_ko
+    assert b.summary == a.summary and b.summary_easy == a.summary_easy
+    assert len(b.sentences) == len(a.sentences)
+    assert b.sentences[0].reading_ko == a.sentences[0].reading_ko
+    assert len(b.sentences[0].tokens) == len(a.sentences[0].tokens)
+    assert len(b.vocab) == len(a.vocab) and len(b.flow) == len(a.flow)
+    # 제목만 바꿔 무-API 렌더가 되는지(HTML 안에 새 제목이 들어감)
+    b.title_en = "Edited Title Only"
+    b.title_ko = "제목만 수정"
+    html = renderer.render_a_html([b])
+    assert "Edited Title Only" in html and "제목만 수정" in html
+    # compact(한 줄) 직렬화도 동일하게 복원되는지
+    compact = serialize.analyses_to_json([a], indent=None)
+    assert "\\n" not in compact and len(serialize.analyses_from_json(compact)) == 1
+    print("PASS  분석결과 JSON 왕복 + 제목만 수정 렌더")
+
+
 def test_reading_alignment_and_no_false_review():
     """직독직해 정렬: 1개 차이는 슬래시 유지, 2개 이상 차이는 연속 표기.
     두 경우 모두 품질 검수(assess)에서 '끊어읽기 어긋남'으로 잡히지 않아야 한다."""
