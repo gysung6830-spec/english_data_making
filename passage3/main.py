@@ -19,6 +19,7 @@ try:
     from .parser import Passage, split_passages
     from .pdfparse import pdf_to_passages
     from .renderer import render_format_a, render_format_b, render_format_c
+    from .serialize import load_passages_json, passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
@@ -27,6 +28,7 @@ except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from parser import Passage, split_passages
     from pdfparse import pdf_to_passages
     from renderer import render_format_a, render_format_b, render_format_c
+    from serialize import load_passages_json, passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
 
@@ -123,6 +125,10 @@ def extract_passages(path, api_key: str = None) -> List[Passage]:
     """
     p = Path(path)
     suffix = p.suffix.lower()
+
+    if suffix == ".json":
+        # 이미 분석된 ORTICA JSON → 재분석 없이 그대로 로드(API 비용 없음)
+        return load_passages_json(p)
 
     if suffix == ".txt":
         return split_passages(p.read_text(encoding="utf-8", errors="replace"))
@@ -312,20 +318,28 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     passages = renumber_passages(passages, start_no)
     print(f"  → 지문 {len(passages)}개, 총 문장 {sum(len(p.sentences) for p in passages)}개")
 
-    # 한줄영어(c)만 요청하면 번역 불필요
-    needs_ko = any(f in formats for f in ("a", "b"))
-    if do_translate and needs_ko:
-        print("[3/4] 해석 없는 문장 번역(키 있으면)")
-        passages = translate_missing(passages, api_key=api_key)
+    # JSON 재입력(이미 분석된 자료)이면 번역·어휘 추출 생략 → API 비용 0
+    is_json_input = input_path.suffix.lower() == ".json"
+    if is_json_input:
+        print("[3/4] JSON 재입력 → 재분석 생략(API 비용 없음)")
     else:
-        print("[3/4] 번역 생략")
-
-    # 하단 어휘 리스트(키 있으면 자동 추출, 없으면 빈 박스)
-    print("      어휘 리스트 추출(키 있으면)")
-    passages = extract_vocab(passages, api_key=api_key)
+        needs_ko = any(f in formats for f in ("a", "b"))
+        if do_translate and needs_ko:
+            print("[3/4] 해석 없는 문장 번역(키 있으면)")
+            passages = translate_missing(passages, api_key=api_key)
+        else:
+            print("[3/4] 번역 생략")
+        print("      어휘 리스트 추출(키 있으면)")
+        passages = extract_vocab(passages, api_key=api_key)
 
     disp_name = (docname or input_path.stem).strip()   # 뱃지 표시용(원본 이름)
     doc = safe_filename(docname or input_path.stem)      # 파일 저장용(치환)
+
+    # 재사용용 분석 JSON 저장(제목만 바꿔 재생성할 때 이 파일을 다시 입력)
+    json_path = out_dir / f"{doc}_ORTICA.json"
+    json_path.write_text(passages_to_json(passages, docname=disp_name),
+                         encoding="utf-8")
+    print(f"      분석 JSON 저장: {json_path.name} (재편집·재생성용)")
 
     print("[4/4] PDF 생성")
     produced: List[Path] = []

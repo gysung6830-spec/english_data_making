@@ -19,12 +19,14 @@ try:
     from .main import (FORMATS, extract_passages, html_to_pdf,
                        renumber_passages, safe_filename)
     from .renderer import render_format_a, render_format_b, render_format_c
+    from .serialize import passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # python webapp.py 로 직접 실행할 때
     from main import (FORMATS, extract_passages, html_to_pdf,
                       renumber_passages, safe_filename)
     from renderer import render_format_a, render_format_b, render_format_c
+    from serialize import passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
 
@@ -32,7 +34,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("APP_SECRET", "passage3-dev-secret")
 app.config["MAX_CONTENT_LENGTH"] = 60 * 1024 * 1024  # 60MB
 
-ALLOWED = {".pdf", ".txt", ".hwp", ".hwpx",
+ALLOWED = {".pdf", ".txt", ".hwp", ".hwpx", ".json",
            ".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}
 
 # 형식 표시 순서/이름
@@ -91,7 +93,8 @@ PAGE = """
 </head>
 <body>
   <h1>영어 지문 → 3형식 PDF 생성기</h1>
-  <p class="sub">지문 파일(PDF·HWP·이미지·txt)을 올리면 한줄해석 · 한줄영어 · 좌지문우해석 PDF를 만들어 드립니다.</p>
+  <p class="sub">지문 파일(PDF·HWP·이미지·txt)을 올리면 한줄해석 · 한줄영어 · 좌지문우해석 PDF를 만들어 드립니다.
+    <br>이미 만든 <b>분석 JSON</b>을 다시 넣으면 <b>제목만 바꿔 재생성</b>(재분석·API 비용 없음)됩니다.</p>
 
   {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -104,13 +107,14 @@ PAGE = """
       <label class="field">1. 지문 파일</label>
       <div id="dropzone" class="dropzone">
         <input type="file" id="file" name="file" class="file-input"
-               accept=".pdf,.txt,.hwp,.hwpx,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
+               accept=".pdf,.txt,.hwp,.hwpx,.json,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" required>
         <div class="dz-inner" id="dzText">
           <div class="dz-icon">⬆</div>
           <div><b>파일을 여기로 끌어다 놓거나</b> 클릭해서 선택</div>
         </div>
       </div>
-      <div class="hint">PDF · HWP(한글) · 사진(JPG/PNG 등) · txt 지원. 스캔/사진은 자동 OCR.</div>
+      <div class="hint">PDF · HWP(한글) · 사진(JPG/PNG 등) · txt · <b>분석 JSON</b> 지원. 스캔/사진은 자동 OCR.
+        분석 JSON을 넣으면 재분석 없이 바로 재생성됩니다.</div>
     </div>
 
     <div class="card">
@@ -154,6 +158,14 @@ PAGE = """
         비우면 해석칸은 빈 채로 나옵니다. (해석이 이미 있는 자료는 키 없이 그대로 사용)
         키는 이번 생성에만 쓰이며 저장되지 않습니다.
       </div>
+    </div>
+
+    <div class="card">
+      <label class="fmt" style="margin-bottom:0">
+        <input type="checkbox" name="savejson" value="1" checked>
+        <span><b>7. 분석 데이터(JSON) 함께 받기</b>
+          <span>나중에 <b>제목만 바꿔 재생성</b>할 때 이 JSON을 다시 넣으면 API 비용 없이 즉시 생성됩니다.</span></span>
+      </label>
     </div>
 
     <button type="submit">PDF 생성 · 다운로드</button>
@@ -226,6 +238,7 @@ def generate():
     formats = request.form.getlist("fmt")
     api_key = request.form.get("apikey", "").strip() or None
     start_no = request.form.get("startno", "").strip() or None
+    save_json = request.form.get("savejson") == "1"
 
     if not file or not file.filename:
         flash("지문 파일을 선택하세요.")
@@ -258,18 +271,20 @@ def generate():
         # 문항 시작 번호 지정 시 라벨 재부여
         passages = renumber_passages(passages, start_no)
 
-        # 한줄영어(c)만 선택하면 번역 불필요
-        if any(f in formats for f in ("a", "b")):
+        # 분석 JSON 재입력이면 재분석(번역·어휘) 생략 → API 비용 없음
+        is_json_input = Path(file.filename).suffix.lower() == ".json"
+        if not is_json_input:
+            # 한줄영어(c)만 선택하면 번역 불필요
+            if any(f in formats for f in ("a", "b")):
+                try:
+                    passages = translate_missing(passages, api_key=api_key)
+                except Exception:
+                    traceback.print_exc()  # 번역 실패는 치명적이지 않음
+            # 하단 어휘 리스트(키 있으면 자동 추출)
             try:
-                passages = translate_missing(passages, api_key=api_key)
+                passages = extract_vocab(passages, api_key=api_key)
             except Exception:
-                traceback.print_exc()  # 번역 실패는 치명적이지 않음
-
-        # 하단 어휘 리스트(키 있으면 자동 추출)
-        try:
-            passages = extract_vocab(passages, api_key=api_key)
-        except Exception:
-            traceback.print_exc()  # 어휘 추출 실패도 치명적이지 않음
+                traceback.print_exc()  # 어휘 추출 실패도 치명적이지 않음
 
         renderers = {
             "a": render_format_a,
@@ -292,16 +307,24 @@ def generate():
                 return redirect(url_for("index"))
             produced.append((out_pdf.name, out_pdf.read_bytes()))
 
-        if len(produced) == 1:
+        # 재사용용 분석 JSON (제목만 바꿔 재생성할 때 다시 입력)
+        json_bytes = None
+        if save_json:
+            json_bytes = passages_to_json(passages, docname=disp_name).encode("utf-8")
+
+        # 형식 1개 + JSON 미포함 → PDF 그대로
+        if len(produced) == 1 and not json_bytes:
             name, data = produced[0]
             return send_file(io.BytesIO(data), mimetype="application/pdf",
                              as_attachment=True, download_name=name)
 
-        # 여러 개 → zip
+        # 그 외 → zip (PDF들 + 분석 JSON)
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
             for name, data in produced:
                 zf.writestr(name, data)
+            if json_bytes:
+                zf.writestr(f"{doc}_ORTICA.json", json_bytes)
         buf.seek(0)
         return send_file(buf, mimetype="application/zip", as_attachment=True,
                          download_name=f"{doc}_PDF.zip")
