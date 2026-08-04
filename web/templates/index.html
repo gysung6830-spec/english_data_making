@@ -98,6 +98,32 @@ Second passage goes here."></textarea>
     <b>‘무료 미리보기’</b>는 내장 예시 지문(DNA·star manager)으로 <b>디자인만</b> 보며 <b>API를 전혀 쓰지 않습니다</b>.</p>
 </form>
 
+<form method="post" action="{{ url_for('rerender') }}" class="card reuse" enctype="multipart/form-data">
+  <div class="field">
+    <span class="label">♻ 이미 만든 결과 다시 쓰기 — <b>제목만 바꿔 재출력</b> (재분석·API 비용 없음)</span>
+    <span class="hint">앞서 저장한 <b>분석 결과(.json)</b> 파일을 넣으면, 새로 분석하지 않고 그대로 다시 PDF로 뽑습니다.
+      머리글(제목)만 바꿔 재출력할 때 쓰세요. 지문 제목 등은 JSON 파일을 직접 열어 고쳐도 됩니다.</span>
+    <label class="dropzone small" id="jsonzone" for="jsonInput">
+      <input type="file" name="analysis_json" id="jsonInput" class="dz-input" accept=".json">
+      <span class="dz-text"><b>분석 결과(.json)</b>를 끌어다 놓거나 클릭해서 선택</span>
+      <span class="dz-sub" id="jsonName">선택된 파일 없음</span>
+    </label>
+  </div>
+  <div class="row">
+    <label class="field">
+      <span class="label">새 머리글/제목 (선택)</span>
+      <input type="text" name="header" placeholder="예: ○○학원 4월 모의고사 (비우면 기존 제목 유지)">
+    </label>
+    <label class="field">
+      <span class="label">저장 파일명 (선택)</span>
+      <input type="text" name="doc_name" placeholder="예: Unit10 교재_v2">
+    </label>
+  </div>
+  <div class="btns">
+    <button type="submit" class="btn">제목만 바꿔 재출력 (무료 · API 미사용)</button>
+  </div>
+</form>
+
 <details class="help">
   <summary>사용 팁</summary>
   <ul>
@@ -191,6 +217,29 @@ Second passage goes here."></textarea>
       if (e.target === dz || dz.contains(e.target)) return;
       e.preventDefault();
     });
+  });
+})();
+
+// 분석 결과 JSON 재입력: 선택한 파일명 표시 + 드롭 지원
+(function () {
+  var jz = document.getElementById('jsonzone');
+  var ji = document.getElementById('jsonInput');
+  var jn = document.getElementById('jsonName');
+  if (!jz || !ji) return;
+  ji.addEventListener('change', function () {
+    jn.textContent = (ji.files && ji.files.length) ? ji.files[0].name : '선택된 파일 없음';
+  });
+  ['dragenter', 'dragover'].forEach(function (ev) {
+    jz.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); jz.classList.add('dragover'); });
+  });
+  ['dragleave', 'dragend', 'drop'].forEach(function (ev) {
+    jz.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); jz.classList.remove('dragover'); });
+  });
+  jz.addEventListener('drop', function (e) {
+    if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+      ji.files = e.dataTransfer.files;
+      jn.textContent = e.dataTransfer.files[0].name;
+    }
   });
 })();
 </script>

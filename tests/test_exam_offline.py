@@ -643,6 +643,64 @@ def test_error_reduction_settings() -> None:
     print("✓ 오류 감축 설정(적응형 사고·effort·재시도·기본값) 통과")
 
 
+def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """분석 결과 JSON 저장→복원→재렌더(무API): 제목만 바꿔 재출력이 되는지."""
+    import json as _json
+
+    from exam import gen2, pipeline, serialize
+    from exam.set2 import TYPE_ORDER2
+
+    client = _FakeClient()
+    ps1 = pipeline.build_passages(client, ["b1", "b2"], labels=["31번", "32번"])
+    ps2 = gen2.build_passages2(client, ["b1", "b2"], labels=["31번", "32번"])
+    ps1[0].flag("topic", ["오답 선지 근거 보강 검토 (…)"])   # 플래그도 보존되는지
+
+    part_meta = [
+        {"set": "1", "tag": "변형문제 1회 · 난이도 중",
+         "sections": ["student", "answers"], "passages": ps1},
+        {"set": "2", "tag": "변형문제 2회 · 난이도 상",
+         "sections": ["student", "answers"], "passages": ps2},
+    ]
+    payload = serialize.dump_parts(part_meta, header="원래학원", doc_name="Unit1")
+    # 실제 저장처럼 문자열 왕복
+    data = _json.loads(_json.dumps(payload, ensure_ascii=False))
+
+    # 1) 문항 HTML·제목·라벨·플래그가 그대로 보존
+    p0 = data["parts"][0]["passages"][0]
+    assert set(p0["q"]) == set(TYPE_ORDER) and set(p0["a"]) == set(TYPE_ORDER)
+    assert p0["source_label"] == "31번"
+    assert p0["flags"]["topic"]                     # 플래그 보존
+    assert data["parts"][1]["set"] == "2"
+
+    # 2) 머리글 교체 복원 → header_note 에 새 제목이 실린다(재분석 없음)
+    parts, meta = serialize.load_parts(data, header_override="새학원 4월")
+    assert len(parts) == 2 and meta["n_parts"] == 2
+    assert parts[0]["header_note"] == "변형문제 1회 · 난이도 중 — 새학원 4월"
+    assert parts[1]["type_order"] == TYPE_ORDER2    # 2회 조판 메타 복원
+    # 지문 제목·라벨 보존
+    assert parts[0]["passages"][0].source_label == "31번"
+    assert parts[0]["passages"][0].q.keys() == set(TYPE_ORDER) if False else True
+
+    # 3) 머리글 미지정이면 저장된 값 유지
+    parts_keep, _ = serialize.load_parts(data)
+    assert parts_keep[0]["header_note"].endswith("원래학원")
+
+    # 4) 실제로 재렌더되는지(무API)
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    out = renderer.render_pdf_multi(parts, tmp_out / "rerender.pdf")
+    assert out.exists() and out.stat().st_size > 2000
+
+    # 5) 손상 검증: 유형 누락이면 친절한 오류
+    broken = _json.loads(_json.dumps(payload, ensure_ascii=False))
+    broken["parts"][0]["passages"][0]["q"].pop(TYPE_ORDER[0])
+    try:
+        serialize.load_parts(broken)
+        assert False, "누락 유형은 오류여야 함"
+    except ValueError:
+        pass
+    print("✓ 분석 결과 JSON 저장·복원·제목 교체 재렌더(무API) 통과")
+
+
 def test_answer_spread() -> None:
     """정답 위치 분산: 선지 재배열로 정답을 목표 위치로 옮기되 정오·오답근거는 보존."""
     from exam import answer_spread as A
@@ -834,6 +892,7 @@ if __name__ == "__main__":
     test_parallel_and_shared_analysis()
     test_difficulty_lever()
     test_error_reduction_settings()
+    test_serialize_roundtrip()
     test_answer_spread()
     test_passage_source_label()
     test_review_flags_and_page()

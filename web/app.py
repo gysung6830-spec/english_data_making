@@ -8,6 +8,7 @@
 """
 from __future__ import annotations
 
+import json
 import os
 import re
 import uuid
@@ -59,6 +60,12 @@ def _pdf_path(fid: str) -> Path:
     if not _FID_RE.match(fid):
         abort(404)
     return OUT / f"exam_{fid}.pdf"
+
+
+def _json_path(fid: str) -> Path:
+    if not _FID_RE.match(fid):
+        abort(404)
+    return OUT / f"exam_{fid}.json"
 
 
 @app.get("/")
@@ -154,12 +161,17 @@ def generate():
             doc_name = "영어지문"
     doc_name = doc_name or "영어지문"
 
-    def part_header(sid: str, lv: str | None) -> str:
+    def part_tag(sid: str, lv: str | None) -> str:
+        """머리글(header)을 뺀 파트 제목 — JSON 저장·복원 시 새 머리글과 다시 합쳐진다."""
         tag = f"변형문제 {sid}회"
         if lv:
             tag += f" · 난이도 {lv}"
         if demo:
             tag += " (데모)"
+        return tag
+
+    def part_header(sid: str, lv: str | None) -> str:
+        tag = part_tag(sid, lv)
         return f"{tag} — {header}" if header else tag
 
     try:
@@ -174,6 +186,7 @@ def generate():
         # 데모는 난이도 변형이 없으므로 세트당 1개만.
         combo_levels = [None] if demo else levels
         parts = []
+        part_meta = []      # JSON 저장용(재분석·재생성 없이 제목만 바꿔 재출력)
         labels = []
         for sid in sets:
             for lv in combo_levels:
@@ -204,13 +217,24 @@ def generate():
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER2,
                                   "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2})
+                part_meta.append({"set": sid, "tag": part_tag(sid, lv),
+                                  "sections": sections, "passages": ps})
                 labels.append(part_header(sid, lv))
 
         fid = uuid.uuid4().hex[:12]
         out = _pdf_path(fid)
         renderer.render_pdf_multi(parts, out)
+        # 실제 생성 결과는 JSON 으로도 저장 → 다음에 제목만 바꿔 재출력(무료).
+        has_json = False
+        if not demo:
+            from exam import serialize
+            payload = serialize.dump_parts(part_meta, header=header, doc_name=doc_name)
+            _json_path(fid).write_text(
+                json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+            has_json = True
         outputs = [{"fid": fid, "label": "합본 (" + " · ".join(labels) + ")",
-                    "count": len(parts), "name": f"{doc_name}_변형문제_합본"}]
+                    "count": len(parts), "name": f"{doc_name}_변형문제_합본",
+                    "has_json": has_json}]
     except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
         return fail(f"생성 실패: {e}", 500)
 
@@ -233,3 +257,61 @@ def download(fid: str):
     base = safe_name(request.args.get("name", "")) or "영어지문_변형문제"
     return send_file(p, mimetype="application/pdf", as_attachment=True,
                      download_name=f"{base}.pdf")
+
+
+@app.get("/json/<fid>")
+def result_json(fid: str):
+    """분석·문항 결과(JSON) 다운로드 — 나중에 제목만 바꿔 재출력할 때 다시 넣는다."""
+    p = _json_path(fid)
+    if not p.exists():
+        abort(404)
+    base = safe_name(request.args.get("name", "")) or "영어지문_변형문제"
+    return send_file(p, mimetype="application/json", as_attachment=True,
+                     download_name=f"{base}.json")
+
+
+@app.post("/rerender")
+def rerender():
+    """분석 결과 JSON 을 다시 받아, 제목(머리글)만 바꿔 재출력한다(API 미사용·무료)."""
+    cfg = load_config()
+
+    def fail(msg: str, code: int = 400):
+        return render_template("index.html", has_api_key=_api_available(cfg), error=msg), code
+
+    up = request.files.get("analysis_json")
+    if not up or not up.filename:
+        return fail("분석 결과 JSON 파일(.json)을 올려 주세요.")
+    if Path(up.filename).suffix.lower() != ".json":
+        return fail("확장자가 .json 인 분석 결과 파일을 올려 주세요.")
+    try:
+        data = json.loads(up.read().decode("utf-8"))
+    except Exception as e:  # noqa: BLE001
+        return fail(f"JSON 을 읽지 못했습니다: {e}")
+
+    # 새 머리글: 입력하면 교체, 비우면 JSON 에 저장된 머리글 유지.
+    new_header_raw = request.form.get("header", "")
+    header_override = new_header_raw.strip() if new_header_raw.strip() else None
+    new_doc = safe_name(request.form.get("doc_name", ""))
+
+    from exam import serialize
+    try:
+        parts, meta = serialize.load_parts(data, header_override=header_override)
+    except Exception as e:  # noqa: BLE001
+        return fail(f"분석 결과를 재구성하지 못했습니다: {e}")
+
+    doc_name = new_doc or meta.get("doc_name") or "영어지문"
+    header = header_override if header_override is not None else meta.get("header", "")
+    try:
+        fid = uuid.uuid4().hex[:12]
+        renderer.render_pdf_multi(parts, _pdf_path(fid))
+        # 재출력분도 (바뀐 제목 반영해) JSON 다시 저장 → 계속 재활용 가능.
+        _json_path(fid).write_text(
+            json.dumps({**data, "header": header, "doc_name": doc_name},
+                       ensure_ascii=False, indent=1), encoding="utf-8")
+        outputs = [{"fid": fid, "label": f"재출력 · {meta['n_parts']}개 파트",
+                    "count": meta["n_parts"], "name": f"{doc_name}_변형문제_합본",
+                    "has_json": True}]
+    except Exception as e:  # noqa: BLE001
+        return fail(f"재출력 실패: {e}", 500)
+
+    return render_template("result.html", outputs=outputs, demo=False, header=header)

@@ -16,10 +16,20 @@
   {% for o in outputs %}
   <div class="dl-row">
     <span class="dl-label"><b>{{ o.label }}</b> · 지문 {{ o.count }}개</span>
-    <a class="btn" href="{{ url_for('download', fid=o.fid, name=o.name) }}">{{ o.name }}.pdf 다운로드</a>
+    <span class="dl-btns">
+      <a class="btn" href="{{ url_for('download', fid=o.fid, name=o.name) }}">{{ o.name }}.pdf 다운로드</a>
+      {% if o.has_json %}
+      <a class="btn ghost" href="{{ url_for('result_json', fid=o.fid, name=o.name) }}">분석 결과(.json) 저장</a>
+      {% endif %}
+    </span>
   </div>
   {% endfor %}
 </div>
+{% if outputs and outputs[0].has_json %}
+<p class="hint">💡 <b>분석 결과(.json)</b>를 저장해 두면, 다음에 제목만 바꿔 재출력할 때
+  아래 첫 화면의 <b>‘이미 만든 결과 다시 쓰기’</b>에 그 파일을 넣으면 됩니다
+  (재분석·API 비용 없이 즉시 재출력).</p>
+{% endif %}
 
 {% if outputs %}
 <h3 class="preview-title">미리보기 — {{ outputs[0].label }}</h3>
