@@ -142,9 +142,15 @@ INDEX_HTML = """
   <div class=card>
     <h1>✏️ 제목만 바꾸기 <span class=hint style="font-weight:400">(API 재분석 없이 · 무료)</span></h1>
     <div class=sub>이미 분석해서 받은 <b>분석데이터(JSON)</b> 파일을 올리면, 분석은 그대로 두고 <b>제목만</b> 고쳐 다시 뽑습니다.</div>
-    <form method=post action="{{ url_for('retitle') }}" enctype=multipart/form-data>
+    <form id=jf method=post action="{{ url_for('retitle') }}" enctype=multipart/form-data>
       <label>분석데이터(JSON) 파일 <span class=hint>(결과 표의 «💾 분석데이터(JSON)» 로 받은 파일)</span></label>
-      <input type=file name=bundle accept=".json" required>
+      <div class=drop id=jdrop>
+        <div style="font-size:24px">💾</div>
+        <p><b>여기를 클릭</b>하거나 JSON 파일을 끌어다 놓으세요</p>
+        <p>분석데이터(JSON)</p>
+        <input id=jfile type=file name=bundle accept=".json" hidden>
+      </div>
+      <div class=files id=jlist></div>
       <div class=row><button class="btn gray" type=submit>제목 수정하러 가기 →</button></div>
     </form>
   </div>
@@ -161,6 +167,17 @@ INDEX_HTML = """
  file.onchange=show;
  function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
  f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+
+ // '제목만 바꾸기' JSON 드래그 앤 드롭
+ const jdrop=document.getElementById('jdrop'),jfile=document.getElementById('jfile'),
+       jlist=document.getElementById('jlist'),jf=document.getElementById('jf');
+ jdrop.onclick=()=>jfile.click();
+ ['dragover','dragenter'].forEach(e=>jdrop.addEventListener(e,ev=>{ev.preventDefault();jdrop.classList.add('hl');}));
+ ['dragleave','drop'].forEach(e=>jdrop.addEventListener(e,ev=>{ev.preventDefault();jdrop.classList.remove('hl');}));
+ jdrop.addEventListener('drop',ev=>{jfile.files=ev.dataTransfer.files;jshow();});
+ jfile.onchange=jshow;
+ function jshow(){jlist.innerHTML=[...jfile.files].map(x=>'💾 '+x.name).join('<br>')||'';}
+ jf.onsubmit=()=>{if(!jfile.files.length){alert('분석데이터(JSON) 파일을 올려주세요.');return false;}};
 </script>
 </body></html>
 """
