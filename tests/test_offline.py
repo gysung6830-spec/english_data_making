@@ -256,6 +256,34 @@ def test_hwp_extract():
     print("PASS  HWP/HWPX 텍스트 추출 + 추출부실 감지")
 
 
+# ---- 10. 서술형 교재 JSON 저장/복원(API 없이 제목만 바꿔 재렌더) ----------
+def test_worksheet_json_roundtrip():
+    import tempfile
+    from pathlib import Path
+    from samples.sample_mock import mock_worksheet
+    from src import pipeline
+
+    ws = [mock_worksheet(), mock_worksheet("Second")]
+    with tempfile.TemporaryDirectory() as d:
+        jp = Path(d) / "ws.json"
+        pipeline.save_worksheets_json(ws, jp, title="원제목", start_no=3, passage_start_no=2)
+        ws2, meta = pipeline.load_worksheets_json(jp)
+        # 데이터가 그대로 복원되고 메타(제목·시작번호)도 유지되어야 함
+        assert len(ws2) == 2
+        assert meta["title"] == "원제목" and meta["start_no"] == 3 and meta["passage_start_no"] == 2
+        assert ws2[0].error.items[0].sentence == ws[0].error.items[0].sentence
+        # 형식이 아닌 JSON 은 거부
+        bad = Path(d) / "bad.json"
+        bad.write_text('{"kind":"other"}', encoding="utf-8")
+        rejected = False
+        try:
+            pipeline.load_worksheets_json(bad)
+        except Exception:
+            rejected = True
+        assert rejected, "형식 불일치 JSON 은 거부되어야 함"
+    print("PASS  서술형 교재 JSON 저장/복원(무API 재편집)")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
@@ -266,6 +294,7 @@ def run_all():
     test_worksheet_render()
     test_worksheet_consistency()
     test_hwp_extract()
+    test_worksheet_json_roundtrip()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

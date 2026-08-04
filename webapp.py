@@ -36,7 +36,7 @@ UPLOAD_DIR = ROOT / "web_uploads"
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR = cfg.output_dir
 
-ALLOWED = {".pdf"} | extract.IMAGE_EXTS | extract.HWP_EXTS
+ALLOWED = {".pdf", ".json"} | extract.IMAGE_EXTS | extract.HWP_EXTS
 
 
 # ---------------------------------------------------------------------------
@@ -104,10 +104,11 @@ INDEX_HTML = """
       <div class=drop id=drop>
         <div style="font-size:26px">⬆️</div>
         <p><b>여기를 클릭</b>하거나 파일을 끌어다 놓으세요</p>
-        <p>JPG · PNG · PDF · HWP · HWPX</p>
-        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx" hidden>
+        <p>JPG · PNG · PDF · HWP · HWPX · <b>JSON(재편집)</b></p>
+        <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.json" hidden>
       </div>
       <div class=files id=filelist></div>
+      <div class=hint>💾 이미 뽑은 결과의 <b>재편집용 데이터(JSON)</b>를 올리면 <b>API 없이</b> 제목·번호만 바꿔 다시 뽑습니다.</div>
 
       <label>② Anthropic API 키
         <span class=hint>(console.anthropic.com 에서 발급 · 미리보기만 할 거면 비워도 됨)</span>
@@ -175,7 +176,7 @@ RESULT_HTML = """
             {% for fitem in r.files %}
             <div style="margin-bottom:5px">
               <b style="font-size:12px">{{ fitem.label }}</b>&nbsp;
-              <a class=dl href="{{ url_for('view', fname=fitem.out) }}" target=_blank>미리보기</a>
+              {% if fitem.pdf %}<a class=dl href="{{ url_for('view', fname=fitem.out) }}" target=_blank>미리보기</a>{% endif %}
               <a class=dl href="{{ url_for('download', fname=fitem.out) }}">다운로드</a>
             </div>
             {% endfor %}
@@ -270,13 +271,16 @@ def analyze_route():
 
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
-    if not mock and not key:
-        # 키 없고 미리보기도 아님 → 안내
+    # JSON(재편집용 데이터)만 올린 경우는 분석이 없으므로 API 키가 필요 없다.
+    json_only = all(Path(f.filename).suffix.lower() == ".json" for f in files)
+    if not mock and not key and not json_only:
+        # 키 없고 미리보기도 아니고 JSON 재편집도 아님 → 안내
         html = INDEX_HTML.replace("<form id=f",
-            "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요.</div><form id=f")
+            "<div class=err>API 키가 없습니다. 키를 입력하거나 '샘플 미리보기'를 체크하세요."
+            " (재편집용 JSON만 올릴 때는 키가 필요 없습니다.)</div><form id=f")
         return render_template_string(html, has_key=cfg.has_api_key)
 
-    client = None if mock else ClaudeClient(key, cfg.model)
+    client = None if (mock or not key) else ClaudeClient(key, cfg.model)
 
     results = []
     for idx, f in enumerate(files, start=1):
@@ -288,24 +292,38 @@ def analyze_route():
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
         try:
-            if mock:
+            reports = []
+            if ext == ".json":
+                # 재편집용 데이터: API 없이 제목·번호만 바꿔 재렌더
+                worksheets, meta = pipeline.load_worksheets_json(tmp)
+            elif mock:
                 reports = (pipeline._mock_reports_for_pdf(cfg, tmp)
                            if which.needs_report else [])
                 worksheets = (pipeline._mock_worksheets_for_pdf(cfg, tmp)
                               if which.worksheet else [])
+            elif client is None:
+                results.append({"name": f.filename, "ok": False,
+                                "error": "API 키가 필요합니다(이 파일은 분석이 필요함)."})
+                continue
             else:
                 reports, worksheets = pipeline.build_all_for_pdf(client, cfg, tmp, which=which)
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
+            elif ext == ".json":
+                # 파일명 미입력 시 원래 이름에서 '_서술형대비' 접미사를 떼어 기본값으로
+                stem = _safe_name(re.sub(r"_서술형대비$", "", Path(f.filename).stem))
             else:
                 stem = _safe_name(Path(f.filename).stem)
             recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
                                            worksheets=worksheets, ws_start_no=start_no,
                                            ws_passage_start_no=passage_start_no)
-            fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
+            fitems = [{"label": r["label"], "out": r["path"].name,
+                       "pdf": r["path"].suffix.lower() == ".pdf"} for r in recs]
             n_passages = max(len(reports), len(worksheets))
             note = f" (지문 {n_passages}개)" if n_passages > 1 else ""
+            if ext == ".json":
+                note += " · 🔁 재편집(API 미사용)"
             results.append({"name": f.filename + note, "ok": True, "files": fitems,
                             "warn": _ws_warnings(worksheets)})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음

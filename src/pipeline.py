@@ -1,6 +1,7 @@
 """폴더 단위 처리 오케스트레이션 (동기 모드 + 목 모드)."""
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -12,6 +13,45 @@ from .schemas import Extraction, Report, Worksheet
 
 
 INPUT_EXTS = {".pdf"} | extract.IMAGE_EXTS | extract.HWP_EXTS
+
+# 분석이 끝난 서술형 교재 데이터를 담는 JSON(재렌더용). API 재호출 없이 제목만
+# 바꿔 다시 뽑을 수 있도록 Worksheet 목록 + 메타를 그대로 직렬화한다.
+WS_JSON_KIND = "ortica-worksheet"
+WS_JSON_VERSION = 1
+
+
+def save_worksheets_json(worksheets: list[Worksheet], path: Path, *, title: str = "",
+                         start_no: int = 1, passage_start_no: int = 1) -> Path:
+    """서술형 교재 데이터(Worksheet 목록)를 JSON 으로 저장한다."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "kind": WS_JSON_KIND,
+        "version": WS_JSON_VERSION,
+        "title": title,
+        "start_no": start_no,
+        "passage_start_no": passage_start_no,
+        "worksheets": [w.model_dump(mode="json") for w in worksheets],
+    }
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return path
+
+
+def load_worksheets_json(path: Path) -> tuple[list[Worksheet], dict]:
+    """저장해 둔 서술형 교재 JSON 을 읽어 (Worksheet 목록, 메타) 로 복원한다."""
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or data.get("kind") != WS_JSON_KIND:
+        raise ValueError("서술형 교재 JSON 형식이 아닙니다(kind 불일치).")
+    ws_raw = data.get("worksheets")
+    if not isinstance(ws_raw, list) or not ws_raw:
+        raise ValueError("서술형 교재 JSON 에 worksheets 데이터가 없습니다.")
+    worksheets = [Worksheet.model_validate(w) for w in ws_raw]
+    meta = {
+        "title": data.get("title", ""),
+        "start_no": int(data.get("start_no", 1) or 1),
+        "passage_start_no": int(data.get("passage_start_no", 1) or 1),
+    }
+    return worksheets, meta
 
 
 def list_pdfs(input_dir: Path) -> list[Path]:
@@ -109,7 +149,8 @@ def build_report_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> Report
 def render_outputs(cfg: Config, reports: list[Report], stem: str,
                    which=None, brand: str | None = None,
                    worksheets: list[Worksheet] | None = None,
-                   ws_start_no: int = 1, ws_passage_start_no: int = 1) -> list[dict]:
+                   ws_start_no: int = 1, ws_passage_start_no: int = 1,
+                   save_ws_json: bool = True) -> list[dict]:
     """선택된 종류(분석지/어휘 리스트/시험지/서술형 교재)의 PDF 를 생성.
 
     반환: [{"kind": "analysis"|"wordlist"|"quiz"|"worksheet", "label": 표시명, "path": Path}, ...]
@@ -152,6 +193,12 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
                                     brand=brand, start_no=ws_start_no,
                                     passage_start_no=ws_passage_start_no)
         recs.append({"kind": "worksheet", "label": "🖊️ 서술형 교재", "path": p})
+        # 분석 데이터 JSON 도 함께 저장 → 나중에 API 없이 제목만 바꿔 재렌더 가능.
+        if save_ws_json:
+            jp = cfg.output_dir / f"{stem}_서술형대비.json"
+            save_worksheets_json(worksheets, jp, title=stem,
+                                 start_no=ws_start_no, passage_start_no=ws_passage_start_no)
+            recs.append({"kind": "worksheet_json", "label": "💾 재편집용 데이터(JSON)", "path": jp})
 
     return recs
 
