@@ -102,6 +102,7 @@ INDEX_HTML = """
   <div class=nav>
     <a href="{{ url_for('index') }}" class=on>📝 동형모의고사 생성</a>
     <a href="{{ url_for('learn_page') }}">🎓 학교 시험지 학습</a>
+    <a href="{{ url_for('retitle_page') }}">🔤 제목만 수정</a>
   </div>
   <div class=card>
     <h1>📝 동형모의고사 자동생성</h1>
@@ -209,6 +210,10 @@ RESULT_HTML = """
             <a class=dl href="{{ url_for('download', fname=f.name) }}">다운로드</a></td></tr>
       {% endfor %}
     </table>
+    <div class=hint style="margin-top:8px">
+      💡 <b>.exam.json</b> 파일은 <b>제목만 수정</b> 탭에 다시 올리면
+      API 재분석 없이 제목·과목만 바꿔 PDF를 다시 뽑을 수 있어요. (비용 없음)
+    </div>
 
     {% for w in warnings %}
     <div class=err style="background:#fff8e1;border-color:#ffe08a;color:#8a5a00">⚠ {{ w }}</div>
@@ -252,6 +257,7 @@ LEARN_HTML = """
   <div class=nav>
     <a href="{{ url_for('index') }}">📝 동형모의고사 생성</a>
     <a href="{{ url_for('learn_page') }}" class=on>🎓 학교 시험지 학습</a>
+    <a href="{{ url_for('retitle_page') }}">🔤 제목만 수정</a>
   </div>
   <div class=card>
     <h1>🎓 학교 시험지 학습</h1>
@@ -326,6 +332,7 @@ LEARN_RESULT_HTML = """
   <div class=nav>
     <a href="{{ url_for('index') }}">📝 동형모의고사 생성</a>
     <a href="{{ url_for('learn_page') }}" class=on>🎓 학교 시험지 학습</a>
+    <a href="{{ url_for('retitle_page') }}">🔤 제목만 수정</a>
   </div>
   <div class=card>
     <h1>✅ 학습 완료</h1>
@@ -363,6 +370,63 @@ LEARN_RESULT_HTML = """
       <a class=btn href="{{ url_for('index') }}">동형모의고사 생성하러 가기 →</a></div>
   </div>
 </div></body></html>
+"""
+
+RETITLE_HTML = """
+<!doctype html><html lang=ko><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>제목만 수정</title><style>""" + BASE_CSS + """</style></head>
+<body><div class=wrap>
+  <div class=nav>
+    <a href="{{ url_for('index') }}">📝 동형모의고사 생성</a>
+    <a href="{{ url_for('learn_page') }}">🎓 학교 시험지 학습</a>
+    <a href="{{ url_for('retitle_page') }}" class=on>🔤 제목만 수정</a>
+  </div>
+  <div class=card>
+    <h1>🔤 제목만 수정 (재분석·비용 없음)</h1>
+    <div class=sub>이미 생성된 결과의 <b>.exam.json</b> 파일을 올리고 새 제목만 입력하면,
+      API 재분석 없이 <b>제목·과목·파일명만 바꿔</b> PDF를 다시 뽑습니다.
+      (생성 결과 페이지에서 받은 <b>.exam.json</b>을 그대로 올리세요.)</div>
+    {% if err %}<div class=err>{{ err }}</div>{% endif %}
+    <form method=post enctype=multipart/form-data id=f>
+      <label>① 분석 결과 파일 (.exam.json)</label>
+      <div class=drop id=drop>
+        <div style="font-size:26px">⬆️</div>
+        <p><b>여기를 클릭</b>하거나 .exam.json 파일을 끌어다 놓으세요</p>
+        <p>생성 결과에서 받은 <b>*.exam.json</b></p>
+        <input id=file type=file name=exam accept=".json" hidden>
+      </div>
+      <div class=files id=filelist></div>
+
+      <label>② 새 시험지 머리글 <span class=hint>(비우면 기존 값 유지)</span></label>
+      <div class=grid>
+        <input type=text name=exam_title placeholder="2026학년도 1학기 2차 시험">
+        <input type=text name=subject placeholder="공통영어1">
+      </div>
+
+      <label>③ 저장할 파일 이름 <span class=hint>(비우면 자동)</span></label>
+      <input type=text name=outname placeholder="예: 1학년_2차_동형A_수정본">
+
+      <div class=row>
+        <button class=btn type=submit>제목 바꿔 다시 뽑기</button>
+        <span class=hint>바로 만들어집니다 (API 호출 없음).</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div id=overlay><div class=spin></div><p style="margin-top:14px;font-weight:700">다시 뽑는 중…</p></div>
+<script>
+ const drop=document.getElementById('drop'),file=document.getElementById('file'),
+       list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
+ drop.onclick=()=>file.click();
+ ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hl');}));
+ ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hl');}));
+ drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
+ file.onchange=show;
+ function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
+ f.onsubmit=()=>{if(!file.files.length){alert('.exam.json 파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+</script>
+</body></html>
 """
 
 LOGIN_HTML = """
@@ -517,9 +581,11 @@ def generate():
             p.unlink(missing_ok=True)
 
     downloads = [{"name": p.name} for k, p in out.items()
-                 if k in ("problem_pdf", "problem_html")]
-    # PDF 를 우선 노출
-    downloads.sort(key=lambda d: (0 if d["name"].endswith(".pdf") else 1))
+                 if k in ("problem_pdf", "problem_html", "exam_json")]
+    # PDF → HTML → JSON 순으로 노출
+    def _ord(n):
+        return 0 if n.endswith(".pdf") else (1 if n.endswith(".html") else 2)
+    downloads.sort(key=lambda d: _ord(d["name"]))
     import json
     logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
     shortage = next((l.get("msg") for l in res.logs
@@ -614,6 +680,67 @@ def learn_run():
         grammar_focus=", ".join(prof.get("grammar_focus") or []),
         n_stems=len(prof.get("stem_style") or {}),
         notes=prof.get("notes") or [])
+
+
+@app.route("/retitle", methods=["GET"])
+def retitle_page():
+    return render_template_string(RETITLE_HTML, err="")
+
+
+@app.route("/retitle", methods=["POST"])
+def retitle_run():
+    from mockexam.render.exam_io import load_exam_json
+
+    def _err(msg):
+        return render_template_string(RETITLE_HTML, err=msg)
+
+    f = request.files.get("exam")
+    if not f or not f.filename:
+        return _err(".exam.json 파일을 올려주세요.")
+    try:
+        exam, info = load_exam_json(f.read())
+    except Exception as e:
+        traceback.print_exc()
+        return _err(f"파일을 읽지 못했습니다(.exam.json 형식이 맞는지 확인하세요): {e}")
+    if not exam.questions:
+        return _err("문항 데이터가 비어 있습니다. 올바른 .exam.json 인지 확인하세요.")
+
+    # 제목·과목만 새 값으로 덮어쓴다(입력이 없으면 기존 값 유지).
+    info = dict(info or {})
+    if request.form.get("exam_title"):
+        info["exam_title"] = request.form["exam_title"].strip()
+    if request.form.get("subject"):
+        info["subject"] = request.form["subject"].strip()
+
+    raw = (request.form.get("outname") or "").strip()
+    if raw.lower().endswith(".pdf"):
+        raw = raw[:-4]
+    stem = _unique_stem(_safe_name(raw) if raw else
+                        f"{exam.blueprint.meta.school_id}_동형모의고사_수정본")
+
+    try:
+        out = render_exam(exam, OUTPUT_DIR, header_info=info,
+                          footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                          answer_key="end", basename=stem)
+    except Exception as e:
+        traceback.print_exc()
+        return _err(f"재출력 중 오류: {e}")
+
+    downloads = [{"name": p.name} for k, p in out.items()
+                 if k in ("problem_pdf", "problem_html", "exam_json")]
+    def _ord(n):
+        return 0 if n.endswith(".pdf") else (1 if n.endswith(".html") else 2)
+    downloads.sort(key=lambda d: _ord(d["name"]))
+    return render_template_string(
+        RESULT_HTML, school=exam.blueprint.meta.name or "—",
+        grade=exam.blueprint.meta.grade or "—",
+        difficulty="—",
+        n_choice=len(exam.choice_questions), n_essay=len(exam.essay_questions),
+        total=_fmt(exam.blueprint.meta.total_score or 0), mock=False,
+        shortage="", failed="",
+        warnings=["제목만 바꿔 다시 출력했습니다(API 재분석 없음). 문항 내용은 그대로입니다."],
+        downloads=downloads, verify="제목 수정 재출력 — 문항은 검증 없이 그대로 유지",
+        logs="", pdf_ready="problem_pdf" in out)
 
 
 def _fmt(s: float) -> str:

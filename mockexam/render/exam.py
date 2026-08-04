@@ -575,6 +575,9 @@ def render_exam(exam: MockExam, out_dir: str | Path, form: str = "A",
     p_html = out / f"{stem}.html"
     p_html.write_text(doc, encoding="utf-8")
     result["problem_html"] = p_html
+    # 재편집용 데이터(JSON) — 나중에 제목만 바꿔 재출력할 때 쓴다(API 재호출 없음).
+    from .exam_io import save_exam_json
+    result["exam_json"] = save_exam_json(exam, info, out / f"{stem}.exam.json")
     if to_pdf:
         _maybe_pdf(doc, out / f"{stem}.pdf", result, "problem_pdf")
     return result
