@@ -232,6 +232,17 @@ def _as_list(reports) -> list:
     return list(reports)
 
 
+def _display_title(rep) -> str:
+    """모든 산출물(분석본·어휘리스트·시험지)에서 지문 영어 제목을 동일하게 맞춘다.
+
+    분석본 제목과 같은 규칙(summary.theme_en 우선, 없으면 추출 단계 title)을 써서
+    같은 지문이 산출물마다 다른 영어 제목으로 보이는 일을 방지한다.
+    """
+    summary = getattr(rep, "summary", None)
+    theme_en = getattr(summary, "theme_en", None) if summary else None
+    return theme_en or rep.title
+
+
 def render_html(reports, footer_note: str = "", brand: str = "",
                 with_source: bool = True, student: bool = False,
                 source_label: str = "") -> str:
@@ -448,7 +459,7 @@ def render_wordlist_pdf(reports, out_path: str | Path,
     passages = []
     for i, rep in enumerate(reps, 1):
         words = _collect_words_one(rep)
-        passages.append({"no": i, "total": len(reps), "title": rep.title,
+        passages.append({"no": i, "total": len(reps), "title": _display_title(rep),
                          "words": words, "rows": _pair_rows(words)})
     tmpl = _env.get_template("wordlist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
@@ -474,7 +485,7 @@ def render_quiz_pdf(reports, out_path: str | Path,
         rng.shuffle(shuffled)
         for j, w in enumerate(shuffled):   # 섞은 뒤 번호 재부여
             w["no"] = j + 1
-        passages.append({"no": i, "total": len(reps), "title": rep.title,
+        passages.append({"no": i, "total": len(reps), "title": _display_title(rep),
                          "words": shuffled, "rows": _pair_rows(shuffled)})
     tmpl = _env.get_template("quiz.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
