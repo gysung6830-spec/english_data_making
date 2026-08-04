@@ -116,6 +116,33 @@ def test_corrupt_template_falls_back_to_en():
     _check("손상 문항 버림", len(s.items) == 0)
 
 
+def test_vocab_word_loss_guard():
+    # 어휘 보기 박스가 엉뚱한 자리에 놓여 원문 단어가 사라지면(예: intense 소실) 원문으로 되돌림
+    en = ("When the brain is overexcited due to any other intense emotion, "
+          "the child is not able to contain their mood.")
+    lossy = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en=en, ko="가",
+        vocab_template=("When the brain is {{P1}} due to any other {{P2}} emotion, "
+                        "the child is not able to their mood."),
+        vocab_items=[pr.LLMProseItem(id="P1", display="[ overexcited / overstimulated / overestimated ]",
+                                     answer="overexcited / overstimulated", gloss="흥분한"),
+                     pr.LLMProseItem(id="P2", display="[ contain / control / contend ]",
+                                     answer="contain / control", gloss="억누르다")])])
+    w = next(x for x in pr.build_prose_pack(lossy, header="H", title="T", subtitle="S").worksheets
+             if x.wtype == "vocab")
+    s = w.sentences[0]
+    _check("단어 소실 어휘 문항 → 원문 대체+문항 버림", s.template == en and len(s.items) == 0)
+    # 정상 문장(소실 없음)은 박스 유지
+    ok = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="These media have become so prolific.", ko="나",
+        vocab_template="These media have become so {{P1}}.",
+        vocab_items=[pr.LLMProseItem(id="P1", display="[ prolific / abundant / prolix ]",
+                                     answer="prolific / abundant", gloss="많은")])])
+    w2 = next(x for x in pr.build_prose_pack(ok, header="H", title="T", subtitle="S").worksheets
+              if x.wtype == "vocab")
+    _check("정상 어휘 문장은 박스 유지", len(w2.sentences[0].items) == 1)
+
+
 def test_render_html():
     pack = mock_prose_pack(title="샘플", header="[샘플]")
     html = pr.render_prose_html(pack)
@@ -142,6 +169,7 @@ if __name__ == "__main__":
     test_id_mismatch_order()
     test_ref_safeguard()
     test_corrupt_template_falls_back_to_en()
+    test_vocab_word_loss_guard()
     test_render_html()
     test_show_ko_flag()
     print("\n단일 유형 산문 워크시트 오프라인 테스트 통과 ✅")

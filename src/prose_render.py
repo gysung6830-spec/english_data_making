@@ -143,6 +143,23 @@ def _align(order: list[str], items: list[LLMProseItem]):
     return list(zip(order, items))
 
 
+def _vocab_template_lossy(en: str, template: str, items) -> bool:
+    """어휘 template 이 원문(en)의 단어를 '잃어버렸는지' 검사한다.
+
+    어휘 유형은 answer 의 '원문'(첫 항목)이 문장 속 실제 단어와 같아야 한다. 따라서
+    'template 에서 {{Pn}} 을 뺀 단어들' + '각 정답의 원문 단어'를 합치면 en 의 내용어를 모두
+    포함해야 한다. 그렇지 않으면(예: 보기 박스가 엉뚱한 자리에 놓여 원래 단어가 사라짐,
+    또는 어떤 단어가 통째로 누락) '단어 소실'로 보고 True 를 돌려준다.
+    보수적으로, '4글자 이상 내용어'가 하나라도 빠졌을 때만 소실로 판정한다.
+    """
+    import re
+    words = lambda t: [w.lower() for w in re.findall(r"[A-Za-z]+", t)]
+    have = set(words(re.sub(r"\{\{\s*\w+\s*\}\}", " ", template)))
+    for it in items:
+        have.update(words((it.answer or "").split("/")[0]))
+    return any(len(w) >= 4 and w not in have for w in words(en))
+
+
 def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                write: bool, tkey: str, ikey: str) -> ProseWorksheet:
     sents: list[PSentence] = []
@@ -155,6 +172,13 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         #   이 경우 깨진 template 대신 '원문(en)'을 보여 주고 문항은 버린다(문장은 온전히 보이게).
         if items_src and not order:
             template = s.en
+        # 안전장치: 어휘 유형에서 보기 박스가 엉뚱한 자리에 놓이거나 단어가 누락돼 원문 단어가
+        #   사라진 경우(예: "not able to their mood" — contain 소실), 깨진 template 대신 원문(en)을
+        #   보여 주고 문항을 버린다(잘못된 문항보다 온전한 문장이 낫다).
+        elif wtype in ("vocab", "vocab_easy") and items_src and \
+                _vocab_template_lossy(s.en, template, items_src):
+            template = s.en
+            items_src = []
         order = placeholders_in(template)
         # 자리표시자가 하나도 없으면(출제 없음/손상) 원문만 두고 items 는 비운다.
         pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write,
