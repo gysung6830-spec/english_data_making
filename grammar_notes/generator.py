@@ -203,6 +203,7 @@ def _css(teacher: bool, unit: dict | None = None) -> str:
 @page {{
   size: A4; margin: 15mm 14mm 16mm 14mm;
   @bottom-center {{ content: "특강 문법 · {foot}  |  " counter(page); font-family:'NSR'; font-size:8pt; color:#9aa4ab; }}
+  @bottom-right {{ content: "© 김은아영어연구소"; font-family:'NSR'; font-size:7.5pt; color:#aab3ba; }}
   @top-right {{ content: "{tag}"; font-family:'NSR'; font-size:8pt; color:{tag_color}; font-weight:700; }}
 }}
 * {{ box-sizing:border-box; }}
@@ -309,6 +310,70 @@ def build_html(unit: dict, teacher: bool) -> str:
     body.append(_practice_html(unit["practice"], teacher))
     body.append(_wrapup_html(unit["wrapup"], teacher))
     return "<!doctype html><meta charset='utf-8'>" + "\n".join(body)
+
+
+def _cover_html(teacher: bool, units: list[tuple[str, str]]) -> str:
+    reg, bold = _font_b64("NanumSquareRoundR.woff"), _font_b64("NanumSquareRoundB.woff")
+    tag = "교사용 · 정답본" if teacher else "학생용 · 필기본"
+    chips = "".join(
+        f'<div class="uchip"><b>UNIT {no}</b>&nbsp;{html.escape(title)}</div>'
+        for no, title in units
+    )
+    css = f"""
+@font-face {{ font-family:'NSR'; font-weight:400; src:url(data:font/woff;base64,{reg}) format('woff'); }}
+@font-face {{ font-family:'NSR'; font-weight:700; src:url(data:font/woff;base64,{bold}) format('woff'); }}
+@page {{ size:A4; margin:0; }}
+* {{ box-sizing:border-box; margin:0; padding:0; }}
+body {{ font-family:'NSR'; color:{INK}; }}
+.cover {{ width:210mm; height:297mm; padding:24mm 22mm; position:relative;
+  display:flex; flex-direction:column;
+  background:linear-gradient(160deg,{GREEN_SOFT} 0%, #ffffff 42%); }}
+.cover::before {{ content:""; position:absolute; top:0; left:0; right:0; height:14mm;
+  background:linear-gradient(90deg,{GREEN_DARK},{GREEN}); }}
+.tagpill {{ align-self:flex-end; margin-top:4mm; background:{'#b23a48' if teacher else GREEN_DARK};
+  color:#fff; font-weight:700; font-size:10pt; padding:5px 14px; border-radius:14px; }}
+.hero {{ margin-top:30mm; }}
+.kicker {{ color:{GREEN}; font-weight:700; font-size:13pt; letter-spacing:1px; margin-bottom:8mm; }}
+.concept {{ font-size:22pt; color:{INK}; font-weight:700; }}
+.title {{ font-size:52pt; font-weight:700; color:{GREEN_DARK}; line-height:1.1; margin:2mm 0 4mm; }}
+.title .accent {{ color:{GREEN}; }}
+.subeng {{ font-size:12pt; color:#7a8792; letter-spacing:1px; }}
+.rule {{ height:3px; width:44mm; background:{GREEN}; border-radius:3px; margin:9mm 0; }}
+.units {{ display:grid; grid-template-columns:1fr 1fr; gap:3mm 7mm; }}
+.uchip {{ font-size:10.5pt; color:{INK}; padding:2.5mm 0; border-bottom:1px dashed {GREEN_LINE}; }}
+.uchip b {{ color:{GREEN_DARK}; }}
+.namebar {{ margin-top:auto; display:flex; gap:10mm; align-items:flex-end; padding-top:10mm; }}
+.namebar .field {{ font-size:12pt; color:{INK}; }}
+.namebar .line {{ display:inline-block; width:46mm; border-bottom:1.6px solid {GREEN}; }}
+.copyright {{ position:absolute; right:22mm; bottom:14mm; color:#8a949b; font-size:9pt; font-weight:700; }}
+"""
+    body = (
+        '<div class="cover">'
+        f'<div class="tagpill">{tag}</div>'
+        '<div class="hero">'
+        '<div class="kicker">특강용 문법 필기 교재</div>'
+        '<div class="concept">내 손으로 완성하는</div>'
+        '<div class="title">중학 <span class="accent">문법노트</span></div>'
+        '<div class="subeng">Complete Your Own Grammar Note</div>'
+        '<div class="rule"></div>'
+        f'<div class="units">{chips}</div>'
+        "</div>"
+        '<div class="namebar">'
+        '<div class="field">이름 <span class="line"></span></div>'
+        '<div class="field">반 <span class="line" style="width:26mm"></span></div>'
+        "</div>"
+        '<div class="copyright">© 김은아영어연구소</div>'
+        "</div>"
+    )
+    return f"<!doctype html><meta charset='utf-8'><style>{css}</style>{body}"
+
+
+def build_cover_pdf(teacher: bool, out_dir: Path, units: list[tuple[str, str]]) -> Path:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    suffix = "교사용" if teacher else "학생용"
+    out = out_dir / f"_표지_{suffix}.pdf"
+    HTML(string=_cover_html(teacher, units), base_url=str(ROOT)).write_pdf(str(out))
+    return out
 
 
 def build_pdf(unit: dict, out_dir: Path) -> list[Path]:
