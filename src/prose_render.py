@@ -173,9 +173,10 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         if items_src and not order:
             template = s.en
         # 안전장치: 어휘 유형에서 보기 박스가 엉뚱한 자리에 놓이거나 단어가 누락돼 원문 단어가
-        #   사라진 경우(예: "not able to their mood" — contain 소실), 깨진 template 대신 원문(en)을
-        #   보여 주고 문항을 버린다(잘못된 문항보다 온전한 문장이 낫다).
-        elif wtype in ("vocab", "vocab_easy") and items_src and \
+        #   사라진 경우, 깨진 template 대신 원문(en)을 보여 주고 문항을 버린다.
+        #   (예: "not able to their mood" — contain 소실 / "outside their part" — rational 소실.
+        #    후자는 보기 박스도 없이 단어만 빠져 items 가 비므로, items 유무와 무관하게 검사한다.)
+        elif wtype in ("vocab", "vocab_easy") and \
                 _vocab_template_lossy(s.en, template, items_src):
             template = s.en
             items_src = []

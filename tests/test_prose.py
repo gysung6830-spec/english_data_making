@@ -141,6 +141,15 @@ def test_vocab_word_loss_guard():
     w2 = next(x for x in pr.build_prose_pack(ok, header="H", title="T", subtitle="S").worksheets
               if x.wtype == "vocab")
     _check("정상 어휘 문장은 박스 유지", len(w2.sentences[0].items) == 1)
+    # 보기 박스도 없이 단어만 누락된 경우(items 비어 있음)도 원문으로 복구
+    en3 = "Literally, the child is outside themselves, outside their rational part."
+    drop = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en=en3, ko="다",
+        vocab_template="Literally, the child is outside themselves, outside their part.",
+        vocab_items=[])])
+    w3 = next(x for x in pr.build_prose_pack(drop, header="H", title="T", subtitle="S").worksheets
+              if x.wtype == "vocab")
+    _check("박스 없이 단어 누락(rational)도 원문 복구", w3.sentences[0].template == en3)
 
 
 def test_render_html():
