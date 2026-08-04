@@ -487,11 +487,14 @@ table.lit2 td {
 .qa-block { break-inside: avoid; margin-bottom: 8px; }
 .qa-p { font-weight: 800; font-size: 10px; color: var(--ws-dark); margin: 6px 0 3px; }
 .qa-row {
-  display: flex; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--line);
-  align-items: baseline; line-height: 1.6;
+  display: flex; flex-wrap: wrap; gap: 4px 8px; padding: 4px 0;
+  border-bottom: 1px solid var(--line); align-items: baseline; line-height: 1.6;
 }
 .qa-t { flex: none; width: 40px; font-weight: 800; color: var(--ws-dark); font-size: 9px; }
 .qa-a { display: inline-block; margin-right: 12px; }
+/* 문장형 답(유형4·5·7)은 넘치지 않게 한 답씩 세로로(남은 폭 사용, 자동 줄바꿈) */
+.qa-list { flex: 1 1 0; min-width: 0; }
+.qa-list .qa-a { display: block; margin: 1px 0; }
 
 /* PART 4 정답 및 해설 */
 .ex-p { background: var(--ws-dark); color: #fff; font-weight: 800; font-size: 10px;

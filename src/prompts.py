@@ -301,7 +301,9 @@ def ws_choice_prompt(title: str, body: str) -> str:
         "나머지 '3개'는 어디에도 쓰이지 않아야 합니다.\n"
         "- unused: 어디에도 쓰이지 않는(정답으로 골라야 할) 낱말 3개. 모두 choices 안의 단어여야 하며, "
         "sentences 의 answer 로 쓰인 4개와 겹치지 않아야 합니다.\n"
-        "- explanation: 각 빈칸에 무엇이 들어가고 왜 그 3개가 남는지 한국어로 간단히.\n\n"
+        "- explanation: 각 빈칸에 무엇이 들어가고 왜 그 3개가 남는지 한국어로 간단히. "
+        "'choices 는 7개', '4개가 쓰이고 3개가 남으므로' 같은 개수·구성 언급이나 문제 제작 메모는 "
+        "절대 쓰지 말고, 오직 각 단어의 의미·문맥 근거만 담으세요.\n\n"
         + _passage_block(title, body)
     )
 
