@@ -80,6 +80,8 @@ BASE_CSS = """
   .warn{color:#b45309;font-weight:700;}
   .warnbox{background:#fffbeb;border:1px solid #fde68a;color:#92400e;font-size:12px;
            padding:5px 8px;border-radius:6px;margin-top:5px;}
+  .remode{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;font-size:13px;
+          padding:9px 12px;border-radius:8px;margin-top:10px;}
   a.dl{color:var(--accent);font-weight:700;text-decoration:none;margin-right:12px;}
   .err{background:#fff1f3;border:1px solid #fecdd3;color:#9f1239;padding:10px 12px;border-radius:8px;
        font-size:13px;margin-top:10px;}
@@ -108,7 +110,8 @@ INDEX_HTML = """
         <input id=file type=file name=files multiple accept=".pdf,.jpg,.jpeg,.png,.hwp,.hwpx,.json" hidden>
       </div>
       <div class=files id=filelist></div>
-      <div class=hint>💾 이미 뽑은 결과의 <b>재편집용 데이터(JSON)</b>를 올리면 <b>API 없이</b> 제목·번호만 바꿔 다시 뽑습니다.</div>
+      <div class=hint>💾 이미 뽑은 결과의 <b>재편집용 데이터(JSON)</b>를 <b>끌어다 놓거나</b> 선택하면 <b>API 없이</b> 제목·번호만 바꿔 다시 뽑습니다.</div>
+      <div id=remode class=remode style="display:none">🔁 <b>재편집 모드</b> — API를 사용하지 않고 제목·번호만 바꿔 다시 뽑습니다. 아래 <b>③ 저장 파일명</b>에 새 제목을 입력하세요.</div>
 
       <label>② Anthropic API 키
         <span class=hint>(console.anthropic.com 에서 발급 · 미리보기만 할 거면 비워도 됨)</span>
@@ -146,13 +149,26 @@ INDEX_HTML = """
 <script>
  const drop=document.getElementById('drop'),file=document.getElementById('file'),
        list=document.getElementById('filelist'),f=document.getElementById('f'),ov=document.getElementById('overlay');
+ const remode=document.getElementById('remode'),go=document.getElementById('go');
  drop.onclick=()=>file.click();
  ['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('hl');}));
  ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('hl');}));
- drop.addEventListener('drop',ev=>{file.files=ev.dataTransfer.files;show();});
+ drop.addEventListener('drop',ev=>{ev.preventDefault();file.files=ev.dataTransfer.files;show();});
  file.onchange=show;
- function show(){list.innerHTML=[...file.files].map(x=>'📄 '+x.name).join('<br>')||'';}
- f.onsubmit=()=>{if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;} ov.style.display='flex';};
+ function isJson(n){return n.toLowerCase().endsWith('.json');}
+ function show(){
+   const fs=[...file.files];
+   list.innerHTML=fs.map(x=>(isJson(x.name)?'💾 ':'📄 ')+x.name).join('<br>')||'';
+   const reedit=fs.length>0 && fs.every(x=>isJson(x.name));
+   remode.style.display=reedit?'block':'none';
+   go.textContent=reedit?'제목 바꿔 다시 뽑기':'분석 시작';
+ }
+ f.onsubmit=()=>{
+   if(!file.files.length){alert('파일을 먼저 올려주세요.');return false;}
+   const fs=[...file.files], reedit=fs.every(x=>isJson(x.name));
+   ov.querySelector('p').textContent=reedit?'제목을 바꿔 다시 만드는 중입니다…':'분석 중입니다… 잠시만요';
+   ov.style.display='flex';
+ };
 </script>
 </body></html>
 """
