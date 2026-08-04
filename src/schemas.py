@@ -197,6 +197,19 @@ class WSSummaryBlank(BaseModel):
     meaning: str = ""     # 한글 뜻(교사용 표시)
 
 
+def _dedup_blanks(blanks: list) -> list:
+    """같은 라벨(대문자 기준)의 빈칸이 중복되면 첫 번째만 남긴다.
+    (모델이 같은 라벨을 두 번 낼 때 '(B) …/(B) …'처럼 중복 표시되는 오류 방지)"""
+    seen: set[str] = set()
+    out = []
+    for b in blanks:
+        key = b.label.strip().upper()
+        if key not in seen:
+            seen.add(key)
+            out.append(b)
+    return out
+
+
 class WSSummaryItem(BaseModel):
     sentence: str                          # 요약문. 빈칸은 [[A]], [[B]] 로 표시
     blanks: list[WSSummaryBlank]
@@ -210,6 +223,8 @@ class WSSummaryItem(BaseModel):
 
     @model_validator(mode="after")
     def _markers_match(self) -> "WSSummaryItem":
+        # 같은 라벨의 빈칸이 중복되면 첫 번째만 남긴다((B)가 두 번 표시되는 오류 방지).
+        self.blanks = _dedup_blanks(self.blanks)
         marks = {m.upper() for m in _LBL_RE.findall(self.sentence)}
         labels = {b.label.upper() for b in self.blanks}
         if marks != labels:
@@ -246,6 +261,7 @@ class WSParaphraseQ(BaseModel):
 
     @model_validator(mode="after")
     def _markers_and_distractors(self) -> "WSParaphraseQ":
+        self.blanks = _dedup_blanks(self.blanks)   # 중복 라벨 빈칸 제거
         marks = {m.upper() for m in _LBL_RE.findall(self.sentence)}
         labels = {b.label.upper() for b in self.blanks}
         if marks != labels:

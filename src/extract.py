@@ -186,17 +186,39 @@ def looks_empty(text: str) -> bool:
 
 
 def looks_garbled(text: str) -> bool:
-    """2단(영어+한글 병렬) 편집 등으로 텍스트가 뒤섞였는지 추정.
+    """2단(영어+한글 병렬)·한줄해석 등으로 지문 문장이 조각났는지 추정.
 
-    한 줄에 '한글과 영어가 함께' 있는 줄이 많으면(=좌우 컬럼이 섞임) True.
-    영어 전용 지문은 한글이 없어 절대 걸리지 않으므로 오탐이 없다.
+    다음 중 하나면 True(→ 비전으로 재추출) — 영어 전용 지문은 어디에도 안 걸림:
+      (a) 한 줄에 한글+영어가 함께 있는 줄이 많음(좌우 2단 컬럼이 섞임).
+      (b) 'EBS ~ 한줄해석/한 줄 해석' 처럼 영어 조각과 한글 해석을 줄 단위로
+          번갈아 싣는 포맷 표지가 있음(문장이 조각나 추출됨).
+      (c) '한글만 있는 줄'과 '영어만 있는 줄'이 둘 다 여러 개 → 해석이 함께
+          실린 자료(직독직해/해설지)로, 영어가 완전한 문장이 아닐 위험이 큼.
     """
     lines = [ln for ln in text.splitlines() if ln.strip()]
     if len(lines) < 5:
         return False
-    mixed = sum(1 for ln in lines
-                if re.search(r"[가-힣]", ln) and re.search(r"[A-Za-z]", ln))
-    return mixed / len(lines) > 0.3
+    # (b) 한줄해석류 포맷 표지
+    if re.search(r"한\s*줄\s*해석|한줄\s*해설", text):
+        return True
+    ko_re = re.compile(r"[가-힣]")
+    en_re = re.compile(r"[A-Za-z]")
+    mixed = ko_only = en_only = 0
+    for ln in lines:
+        has_ko, has_en = bool(ko_re.search(ln)), bool(en_re.search(ln))
+        if has_ko and has_en:
+            mixed += 1
+        elif has_ko:
+            ko_only += 1
+        elif has_en:
+            en_only += 1
+    # (a) 한 줄에 영/한 혼재가 많음
+    if mixed / len(lines) > 0.3:
+        return True
+    # (c) 한글 해석 줄과 영어 줄이 둘 다 여러 개(해석이 함께 실린 자료)
+    if ko_only >= 3 and en_only >= 3:
+        return True
+    return False
 
 
 def pdf_pages_to_images(pdf_path: str | Path, out_dir: str | Path | None = None,

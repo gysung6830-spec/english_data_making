@@ -241,6 +241,18 @@ def test_hwp_extract():
     mixed = "\n".join(["Criminals leave traces 범죄자는 흔적을 남긴다."] * 8)
     assert not extract.looks_garbled(eng)
     assert extract.looks_garbled(mixed)
+    # 한줄해석(영어 조각 ↔ 한글 해석 세로 스택) 포맷도 감지되어야 함
+    hanjul = ("[EBS] 올림포스 영어독해 기본1 한줄해석\n"
+              "shoppers a sample of coffee from one of the mugs\n"
+              "유쾌함을 포함한 품질을 위한 맛을 평가하도록 요청했다.\n"
+              "mug the same drinks tasted up to 27 percent more bitter\n"
+              "느껴졌다.\n"
+              "go for a round bowl and mug\n"
+              "머그잔을 사용하는 것이 좋다.")
+    assert extract.looks_garbled(hanjul)
+    # 영어 지문 + 한글 헤더 1줄은 오탐 없어야(False)
+    mostly_en = "\n".join(["The value of curiosity is well documented."] * 6 + ["출처: 어딘가"])
+    assert not extract.looks_garbled(mostly_en)
     print("PASS  HWP/HWPX 텍스트 추출 + 추출부실 감지")
 
 
