@@ -103,7 +103,8 @@ def test_render_html():
     from samples.sample_mock import mock_report
     html = render.render_html(mock_report(), footer_note="테스트", brand="테스트브랜드")
     assert "직독직해" in html and "made by 테스트브랜드" in html
-    assert "핵심 어휘" in html and "출제 포인트" in html
+    assert "핵심 어휘" in html and "해석 포인트(함축의미)" in html
+    assert "서술형 출제 예상 문장" in html
     assert "The Value of Curiosity" in html
     print("PASS  HTML 렌더링")
 

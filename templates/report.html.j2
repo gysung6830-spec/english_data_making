@@ -65,14 +65,13 @@
   <div class="section s-exam">
     <div class="section-head">
       <span class="sec-num">3</span>
-      <span class="sec-title">출제 포인트</span>
-      <span class="sec-sub">Exam Points{% if brand %} · {{ brand }} tip{% endif %}</span>
+      <span class="sec-title">해석 포인트(함축의미)</span>
+      <span class="sec-sub">Implied Meaning{% if brand %} · {{ brand }} tip{% endif %}</span>
     </div>
     <div class="exam-cards">
-    {# 지칭추론은 직독직해 표(⑤)에 어법과 함께 넣으므로 여기서는 제외(함축의미·서술형만) #}
-    {% for e in report.exam.items if '지칭' not in e.question_type %}
-      <div class="exam-card{% if '지칭' in e.question_type %} ec-ref{% elif '함축' in e.question_type %} ec-imp{% elif '서술' in e.question_type %} ec-narr{% endif %}">
-        <div class="ec-head">{% if '서술' in e.question_type %}서술형 출제 예상 문장{% else %}{{ e.question_type }}{% endif %}</div>
+    {# 지칭추론은 직독직해 표(⑤)에, 서술형은 목차 7 에 배치 → 여기서는 함축의미만 #}
+    {% for e in report.exam.items if '함축' in e.question_type %}
+      <div class="exam-card ec-imp">
         <div class="ec-body">
 
         {%- if '지칭' in e.question_type -%}
@@ -260,6 +259,32 @@
     {% if report.vocab.english_summary_ko and not student %}
     <div class="esum-ko">{{ report.vocab.english_summary_ko }}</div>
     {% endif %}
+  </div>
+  {% endif %}
+
+  {# ⑦ 서술형 출제 예상 문장 — 별도 섹션 #}
+  {% set ns_narr = namespace(has=false) %}
+  {% for e in report.exam.items if '서술' in e.question_type %}{% set ns_narr.has = true %}{% endfor %}
+  {% if ns_narr.has %}
+  <div class="section s-narr">
+    <div class="section-head">
+      <span class="sec-num">7</span>
+      <span class="sec-title">서술형 출제 예상 문장</span>
+      <span class="sec-sub">Guided Writing</span>
+    </div>
+    <div class="exam-cards">
+    {% for e in report.exam.items if '서술' in e.question_type %}
+      <div class="exam-card ec-narr">
+        <div class="ec-body">
+          {%- for ln in e.content.split('\n') if ln.strip() -%}
+            {%- if loop.first -%}<div class="narr-sent">{{ ln | trim }}</div>
+            {%- elif student -%}<div class="narr-reason narr-blank">쓰인 문법: <span class="blank" style="min-width:240px"></span></div>
+            {%- else -%}<div class="narr-reason">{{ ln | trim }}</div>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
   </div>
   {% endif %}
 {% endmacro %}

@@ -135,6 +135,8 @@ body {
 .s-voc   .sec-title { color: var(--voc); }
 .s-struc .sec-title { color: var(--struc); }
 .s-exam  .sec-title { color: var(--exam); }
+.s-narr  .sec-num { background: var(--exam); }
+.s-narr  .sec-title { color: var(--exam); }
 
 /* ---------- ① 요약 ---------- */
 .summary-overall {
