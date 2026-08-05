@@ -521,10 +521,11 @@
   {% endif %}
 
   {% if include_back and a.has_back and not only_answer and not only_test %}
-  <div class="page compact">   {#- 뒷면(정리): 읽기 좋은 고정 크기. 내용 많으면 자연 분할로 2쪽(첫 쪽부터 꽉) -#}
+  {% if a.sentences %}
+  <div class="page compact">   {#- 뒷면①: 원문·전체 해석(별도 페이지) -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
-      <h2>{{ a.title_en }} · 정리</h2>
+      <h2>{{ a.title_en }} · 원문 해석</h2>
     </div>
 
     {% if a.sentences %}
@@ -554,25 +555,14 @@
       </div>
     </div>
     {% endif %}
+  </div>
+  {% endif %}
 
-    {% if a.vocab %}
-    <div class="sec">
-      <div class="st">핵심 어휘 · 유의어 · 반의어</div>
-      <table class="vtab">
-        <tr><th style="width:8%">문장</th><th style="width:21%">단어</th><th style="width:24%">뜻</th>
-            <th style="width:23.5%">유의어(=)</th><th style="width:23.5%">반의어(↔)</th></tr>
-        {% for v in a.vocab %}
-        <tr>
-          <td class="vn">{% if v.sent %}{{ v.sent }}번{% endif %}</td>
-          <td class="w">{{ v.word }}</td>
-          <td class="{% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.meaning }}{% endif %}</td>
-          <td class="syn {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.syn }}{% endif %}</td>
-          <td class="ant {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.ant }}{% endif %}</td>
-        </tr>
-        {% endfor %}
-      </table>
+  <div class="page compact">   {#- 뒷면②: 정리 — 논리흐름 → 함축의미 → 핵심어휘(한 페이지 목표) -#}
+    <div class="bhead">
+      <div class="tag">{{ a.lecture_label or '★' }}</div>
+      <h2>{{ a.title_en }} · 정리</h2>
     </div>
-    {% endif %}
 
     {% if a.flow %}
     <div class="sec">
@@ -603,6 +593,25 @@
         </div>
         {% endfor %}
       </div>
+    </div>
+    {% endif %}
+
+    {% if a.vocab %}
+    <div class="sec">
+      <div class="st">핵심 어휘 · 유의어 · 반의어</div>
+      <table class="vtab">
+        <tr><th style="width:8%">문장</th><th style="width:21%">단어</th><th style="width:24%">뜻</th>
+            <th style="width:23.5%">유의어(=)</th><th style="width:23.5%">반의어(↔)</th></tr>
+        {% for v in a.vocab %}
+        <tr>
+          <td class="vn">{% if v.sent %}{{ v.sent }}번{% endif %}</td>
+          <td class="w">{{ v.word }}</td>
+          <td class="{% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.meaning }}{% endif %}</td>
+          <td class="syn {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.syn }}{% endif %}</td>
+          <td class="ant {% if not s_ko %}blkcell{% endif %}">{% if s_ko %}{{ v.ant }}{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </table>
     </div>
     {% endif %}
 

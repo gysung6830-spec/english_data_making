@@ -318,12 +318,16 @@ def test_pronoun_referent_in_refs():
 
 
 def test_page_break_per_passage():
-    # 지문마다 앞면 .head + 뒷면 .bhead 페이지로 분리되는지 확인.
+    # 지문마다 앞면 .head + 뒷면 2쪽(원문해석 + 정리)으로 분리되는지 확인.
     a = mock_analysis()
     html = renderer.render_a_html([a, a, a])
-    assert html.count('class="head"') == 3      # 앞면 3개
-    assert html.count('class="bhead"') == 3     # 뒷면 3개
-    print("PASS  지문당 페이지 분리(앞/뒤)")
+    assert html.count('class="head"') == 3          # 앞면 3개
+    assert html.count('class="bhead"') == 6         # 뒷면 = 지문당 2쪽(원문해석·정리) × 3
+    # 정리 페이지 섹션 순서: 논리흐름 → 함축의미 → 핵심어휘 (섹션 제목 div 기준)
+    order = [html.find('st">글의 논리 흐름'), html.find('st">출제 포인트 · 함축의미'),
+             html.find('st">핵심 어휘 · 유의어')]
+    assert order[0] < order[1] < order[2] and order[0] != -1
+    print("PASS  지문당 페이지 분리(앞1 + 뒤2) · 정리 섹션 순서")
 
 
 def test_overview_builder_llm_path():
