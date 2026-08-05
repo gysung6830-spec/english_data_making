@@ -137,6 +137,10 @@ def step2_passage(hl):
         else:
             inner = _inline_tags(txt, seg.get("tags"))
             cls = "m" if role == "yellow" else "g"
+            # 신호어 없는 노랑 = '위치·주제 신호' → 왜 노랑인지 칩 표시
+            pos = seg.get("pos")
+            if role == "yellow" and not seg.get("tags") and pos:
+                inner = f'<span class="tag pos">{esc(pos)}</span>' + inner
             parts.append(f'<mark class="{cls}">{inner}</mark>')
     return " ".join(parts)
 
@@ -420,7 +424,9 @@ def render_spread(rec, c, idx):
         '<div class="color-legend"><span class="clh">형광펜 3색</span>'
         '<span class="cl m">🟡 정답 핵심<b>무조건 읽기</b></span>'
         '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
-        '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span></div>')
+        '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
+        '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">주제</span> '
+        '신호어 🔴 없이도 <b>위치·주제</b>로 읽는 노랑</span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
@@ -822,6 +828,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .bk{ display:inline-block; min-width:60px; border-bottom:2px solid #111; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
+.tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
 
 /* 문제 페이지(왼쪽) */

@@ -7,17 +7,20 @@
    {
     "t": "Basing your self-worth on climbing performance puts you at the whim of external factors.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "These factors may be random and misleading.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "Comparison is one source of illusion.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "Perhaps you felt that you performed well on a certain climb because your partner was having an off day and found the climbing very difficult.",
@@ -354,7 +357,8 @@
    {
     "t": "Armed with tools that can provide them options, the consumer moves from passive bystander to active participant.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    }
   ],
   "derive": {
@@ -600,7 +604,8 @@
    {
     "t": "Being longer-lived puts a greater premium on learning and memory, and less on automatic preprogrammed behaviors.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "In addition, living a long time or having the capacity to travel for long distances is more likely to expose an animal to significant changes in the environment.",
@@ -832,7 +837,8 @@
    {
     "t": "Different parts of the brain’s visual system get information on a need-to-know basis.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Cells that help your hand muscles reach out to an object need to know the size and location of the object, but they don’t need to know about color.",
@@ -1100,7 +1106,8 @@
    {
     "t": "Most often, we mistake being told what effect someone’s appearance has for an account of that appearance.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "The poet Mallarmé’s advice ― Peindre non la chose, mais l’effet qu’elle produit (‘Paint not the thing itself but the effect it produces’) sounds like a self-denying ordinance.",
@@ -1120,7 +1127,8 @@
    {
     "t": "When, in one of his novels, Evelyn Waugh says of a new character, that ‘he had just the kind of appearance one would expect a young man of his type to have’ and nothing else, you still feel as if you",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "빈칸"
    }
   ],
   "derive": {
@@ -1309,7 +1317,8 @@
    {
     "t": "Plants have a remarkable ability to recover from disaster.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "This is largely because they have preferential access to the tissues that rebuild their organs.",
@@ -1319,7 +1328,8 @@
    {
     "t": "Throughout their life cycle, plants retain meristems, which are regions of undifferentiated tissue that can differentiate into new shoots and other organs.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "정의"
    },
    {
     "t": "This phenomenon occurs at very different scales, ranging from the healing of a small scar to the regrowth of an entire plant.",
@@ -1339,7 +1349,8 @@
    {
     "t": "After being disturbed, a plant community can adjust its composition through regeneration, mainly resprouting and reseeding.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    }
   ],
   "derive": {
@@ -1521,7 +1532,8 @@
    {
     "t": "Norms emerge in groups as a result of people conforming to the behavior of others.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "Thus, the start of a norm occurs when one person acts in a particular manner in a particular situation because she thinks she ought to.",
@@ -1546,7 +1558,8 @@
    {
     "t": "The person who performed the initial action may think that others ought to behave as she behaves in situations of this sort.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "(A) Thus, she may prescribe the behavior to them by uttering the norm statement in a prescriptive manner.",
@@ -1976,7 +1989,8 @@
    {
     "t": "(①) Some individuals photosynthesize like mad until sugar positively bubbles along their trunk.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "(②) This is because a tree can be only as strong as the forest that surrounds it.",
@@ -2196,7 +2210,8 @@
    {
     "t": "How you focus your attention plays a critical role in how you deal with stress.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Scattered attention harms your ability to let go of stress, because even though your attention is scattered, it is narrowly focused, for you are able to fixate only on the stressful parts of your experience.",
@@ -2211,7 +2226,8 @@
    {
     "t": "When your attentional spotlight is widened, you can more easily let go of stress.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "You can put in perspective many more aspects of any situation and not get locked into one part that ties you down to superficial and anxiety-provoking levels of attention.",
@@ -2231,12 +2247,14 @@
    {
     "t": "One anxiety-provoking detail is less important than the bigger picture.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "It’s like transforming yourself into a nonstick frying pan.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "밑줄"
    },
    {
     "t": "You can still fry an egg, but the egg won’t stick to the pan.",
@@ -2513,7 +2531,8 @@
    {
     "t": "When it comes to the Internet, it just pays to be a little paranoid (but not a lot).",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Given the level of anonymity with all that resides on the Internet, it’s sensible to question the validity of any data that you may receive.",
@@ -2757,7 +2776,8 @@
    {
     "t": "Writing is an invaluable tool for accomplishing these tasks.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Unfortunately, too many times, when class discussion begins, pens and pencils go down.",
@@ -2812,7 +2832,8 @@
    {
     "t": "Note taking helps to keep you active and alert; it allows you to impose some organization on the discussion; and it can prepare you to speak.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    }
   ],
   "derive": {
@@ -3019,7 +3040,8 @@
    {
     "t": "The concept of overtourism rests on a particular assumption about people and places common in tourism studies and the social sciences in general.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "Both are seen as clearly defined and demarcated.",
@@ -3084,7 +3106,8 @@
    {
     "t": "What is excessive or out of proportion is highly relative and might be more related to other aspects than physical capacity, such as natural degradation and economic leakages (not to mention politics and local power dynamics).",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    }
   ],
   "derive": {
@@ -3314,7 +3337,8 @@
    {
     "t": "The dependent and shifting nature of art values, not only on the market but inherently, is uppermost in the mind of today’s art collector, whether he buys for himself or as the representative of an institution.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Acquiring a work is acquiring a piece of art history, or it is acquiring nothing (beyond, that is, an object of personal enjoyment in the same class as a cat or a souvenir).",
@@ -3339,7 +3363,8 @@
    {
     "t": "This consensus is all but certain to be displaced, as others have been in the past.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "In the last analysis, committing himself to a painting is the collector’s own act.",
@@ -3610,7 +3635,8 @@
    {
     "t": "These factors include manager reliance on face-to-face management practices, lack of telecommuting training within an organization, misperceptions of and discomfort with flexible workplace programs, and a limited understanding of their implications for an organization’s bottom line.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "One dominant barrier is the belief that physical presence is essential to genuine productivity.",
@@ -4873,7 +4899,8 @@
    {
     "t": "Being able to prioritize your responses allows you to connect more deeply with individual customers, be it a one-off interaction around a particularly delightful or upsetting experience, or the development of a longer-term relationship with a significantly influential individual within your customer base.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "If you’ve ever posted a favorable comment ― or any comment, for that matter ― about a brand, product or service, think about what it would feel like if you were personally acknowledged by the brand manager, for example, as a result.",
@@ -4913,7 +4940,8 @@
    {
     "t": "These are lost opportunities to understand what drove the compliments and create a solid fan based on them.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    }
   ],
   "derive": {
@@ -5385,7 +5413,8 @@
    {
     "t": "Hyper-mobility ― the notion that more travel at faster speeds covering longer distances generates greater economic success ― seems to be a distinguishing feature of urban areas, where more than half of the world’s population currently reside.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "By 2005, approximately 7.5 billion trips were made each day in cities worldwide.",
@@ -6619,7 +6648,8 @@
    },
    {
     "t": "Wasn’t it time to give up the ghost?",
-    "role": "yellow"
+    "role": "yellow",
+    "pos": "밑줄"
    }
   ],
   "derive": {
@@ -7928,7 +7958,8 @@
    {
     "t": "Release the pendulum and note the magnets that it visits, and in what order.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "If the pendulum is released from the same position a second time, the pattern of movement may at first be the same but soon it will become completely different.",
@@ -8549,7 +8580,8 @@
    },
    {
     "t": "The same is true in music, and music is often described as having two dimensions, one that accounts for tones going up in frequency and another that accounts for the perceptual sense that we’ve come back home again each time we double a tone’s frequency.",
-    "role": "yellow"
+    "role": "yellow",
+    "pos": "밑줄"
    }
   ],
   "derive": {
@@ -8748,7 +8780,8 @@
    {
     "t": "Urban delivery vehicles can be adapted to better suit the density of urban distribution, which often involves smaller vehicles such as vans, including bicycles.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "The latter have the potential to become a preferred ‘last-mile’ vehicle, particularly in high-density and congested areas.",
@@ -9307,7 +9340,8 @@
    {
     "t": "The rise of restaurants eventually led to a class of diners who prided themselves on being critics of taste, food and cooking.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "Brillat-Savarin is probably the best known of the ‘culinary philosophers’ or, in today’s parlance, a ‘foodie’.",
@@ -9706,7 +9740,8 @@
    {
     "t": "A fascinating species of water flea exhibits a kind of flexibility that evolutionary biologists call adaptive plasticity.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "(B) If the baby water flea is developing into an adult in water that includes the chemical signatures of creatures that prey on water fleas, it develops a helmet and spines to defend itself against predators.",
@@ -10289,7 +10324,8 @@
    {
     "t": "When you say It’s mine in reference to a resource, often that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "Often, though, we split the sticks up, as for a piece of land: there may be a landowner, a bank with a mortgage, a tenant with a lease, a plumber with a license to enter the land, an oil company with mineral rights.",
@@ -10304,7 +10340,8 @@
    {
     "t": "Each of these parties owns a stick in the bundle.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "밑줄"
    }
   ],
   "derive": {
@@ -14878,12 +14915,14 @@
    {
     "t": "We generally call this ‘expressivity’.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "정의"
    },
    {
     "t": "This explains why we do not lose interest when we hear different artists perform the same piece of music.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "It also explains why it is worthwhile for following generations to repeat the same repertoire.",
@@ -15104,7 +15143,8 @@
    {
     "t": "Killer whales also repeat the same seal hunting technique in front of their offspring, sometimes without even killing the seal, leading researchers to ask why they would repeatedly catch and release a seal if they were not planning to eat it.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "Considering the amount of energy they’d have to expend, there would need to be a good reason, and that reason might be teaching.",
@@ -15340,7 +15380,8 @@
    {
     "t": "Perhaps at some point you have seen some mathematical writing and not understood it.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "첫문장"
    },
    {
     "t": "(B) You would not be the first; rest assured, even professional mathematicians sometimes have to rely on discussions with colleagues to properly understand problems they are looking at. But how do you recognise some writing is mathematical in the first place?",
@@ -15365,7 +15406,8 @@
    {
     "t": "(C) Put simply, there has to be something mathematical going on for us to say that it is mathematics. And if we are dealing with writing from a very distant past, in a language that is not familiar to us, from a time even before recorded language, that can be sometimes difficult to recognise.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "끝문장"
    }
   ],
   "derive": {
@@ -15657,7 +15699,8 @@
    {
     "t": "This is an extreme view of the nature of scientific contests.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "주제"
    },
    {
     "t": "(①) Even those who describe scientific contests in such a way note that it is a somewhat inaccurate description, given that replication and verification have social value and are common in science.",
@@ -19124,7 +19167,8 @@
    {
     "t": "( ③ ) Orienting the building so that the longer face of the structure is parallel with prevailing winds can help.",
     "role": "yellow",
-    "tags": []
+    "tags": [],
+    "pos": "근거"
    },
    {
     "t": "( ④ ) Chopping or rounding off corners of a building can likewise make it more aerodynamic.",
