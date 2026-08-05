@@ -148,7 +148,7 @@ body {
 }
 /* 주제 문장 속 핵심 키워드 강조 */
 .summary-overall .kw {
-  color: var(--sum); background: #dbeee2;
+  color: #c0342c; background: #fdeceb;
   padding: 0 3px; border-radius: 3px; font-weight: 800;
 }
 
@@ -159,7 +159,7 @@ body {
   padding: 7px 10px; border-radius: 0 5px 5px 0;
   font-size: 9.6px; line-height: 1.5;
 }
-.esum-box .kw { color: var(--voc); font-weight: 800; }
+.esum-box .kw { color: #c0342c; font-weight: 800; }
 .esum-ko { margin-top: 4px; padding-left: 3px; font-size: 9px; color: #4b5563; line-height: 1.45; }
 
 /* ---------- 공통 표 (zebra) ---------- */
