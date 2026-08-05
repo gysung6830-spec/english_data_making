@@ -426,7 +426,7 @@ def render_spread(rec, c, idx):
         '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
         '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
         '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">주제</span> '
-        '신호어 🔴 없이도 <b>위치·주제</b>로 읽는 노랑</span></div>')
+        '= 신호어(🔴)는 없지만 <b>이 칩이 노랑인 이유</b> — 주제·근거라서 꼭 읽는다</span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
