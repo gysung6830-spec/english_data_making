@@ -234,7 +234,7 @@
                padding:4px 12px; border-radius:4px; }
   .bhead h2{ font-size:16px; font-weight:800; margin:0; color:#1c2030; }
   /* 원문 · 전체 해석 2단 */
-  .pcols{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pcols{ display:grid; grid-template-columns:1fr; gap:8px; }   /* 원문·전체해석 = 세로 1단 */
   .pcol{ background:#eef4ec; border:1px solid #cfe0cf; border-radius:9px; padding:9px 11px; }
   .pclbl{ display:inline-block; background:var(--navy); color:#fff; font-size:9px; font-weight:800;
           padding:1px 9px; border-radius:9px; margin-bottom:6px; }
@@ -375,7 +375,7 @@
   .answers .ahead .tag{ background:var(--navy); color:#fff; font-weight:800; font-size:13px;
                         padding:3px 12px; border-radius:6px; }
   .answers .ahead h2{ font-size:17px; font-weight:800; margin:0; color:#1c2030; }
-  .ansblock{ margin-bottom:11px; break-inside:avoid; page-break-inside:avoid; }
+  .ansblock{ margin-bottom:11px; }   /* 페이지 나눔 방지 해제 — 정답은 끊김 없이 연속으로 채움 */
   .anshd{ font-weight:800; font-size:12px; color:var(--navy);
           border-bottom:1.5px solid #b9ccb9; padding-bottom:3px; margin-bottom:5px; }
   .answrap{ display:grid; grid-template-columns:1fr 1fr; gap:2px 26px; }
