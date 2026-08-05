@@ -277,11 +277,11 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
     """섹션을 재배치해 '한 PDF'로 합본하고, 활용 가이드에 페이지 목차를 싣는다.
 
     페이지 순서:
-      ① 활용 가이드(+목차)  ② 지문 분석(교사용)  ③ 정리(논리흐름·함축·어휘)
-      ④ 단어 테스트  ⑤ 정답  ⑥ 학생용(빈칸)  ⑦ 원문(지문별 페이지 나눔)
+      ① 활용 가이드(+목차)  ② 지문 분석(학습용)  ③ 정리(논리흐름·함축·어휘)
+      ④ 단어 테스트  ⑤ 정답  ⑥ 빈칸채우기용  ⑦ 원문(지문별 페이지 나눔)
 
     각 섹션을 개별 렌더해 페이지 수를 세고, 시작 페이지로 목차를 만든 뒤 가이드에 실어
-    맨 앞에 붙인다. make_student=False 면 학생용(⑥)을 생략한다.
+    맨 앞에 붙인다. make_student=False 면 빈칸채우기용(⑥)을 생략한다.
     """
     import tempfile
 
@@ -302,7 +302,7 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
         dd = Path(d)
         # ── 콘텐츠 섹션을 개별 렌더(가이드 제외). (라벨, 파일, 렌더러 kwargs) ──
         specs: list[tuple[str, Path, dict]] = []
-        specs.append(("지문 분석 (교사용)", dd / "front.pdf",
+        specs.append(("지문 분석 (학습용)", dd / "front.pdf",
                       dict(density=density, student=False, only_front=True)))
         if has_back:
             specs.append(("정리 (논리 흐름·함축·어휘)", dd / "summary.pdf",
@@ -311,7 +311,7 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
             specs.append(("단어 테스트", dd / "test.pdf", dict(only_test=True)))
             specs.append(("정답", dd / "answer.pdf", dict(only_answer=True)))
         if make_student:
-            specs.append(("학생용 (빈칸)", dd / "student.pdf",
+            specs.append(("빈칸채우기용", dd / "student.pdf",
                           dict(density=density, student=True, slevel=slevel,
                                only_front=True)))
         if has_source:
