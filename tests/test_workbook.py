@@ -228,8 +228,38 @@ def test_no_verb_cap():
     print("PASS  동사 비율 상한 제거(어형변형 2개/문장 우선, 문항 보존)")
 
 
+def test_misplacement_restore():
+    # 원문과 대조: 보기 박스가 엉뚱한 자리에 놓여 원문 단어가 사라지면 문항 버리고 원문 복원
+    from src.textutil import split_sentences
+    body = ("Project leaders should not be surprised when disagreements emerge within the team. "
+            "If they remain hidden, the leader may even want to seek them out for two reasons.")
+    orig = split_sentences(body)
+
+    def Q(i, t, a):
+        return ws.LLMQuestion(id=f"Q{i}", type=t, display="(x)", answer=a, reason="r")
+
+    # 오배치: seek 자리에 remain(정답) 박스 → 원문의 'seek' 소실
+    bad = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="Project leaders should not {{Q1}} surprised when disagreements emerge within the team.",
+                       ko="k", questions=[Q(1, "verb", "be")]),
+        ws.LLMSentence(no=2, en_template="If they remain hidden, the leader may even want {{Q2}} them out for two reasons.",
+                       ko="k", questions=[Q(2, "verb", "remain")]),
+    ])
+    wb = ws.build_workbook(bad, title="T", subtitle="S", originals=orig)
+    assert "to seek them out" in wb.sentences[1].en_template and not wb.sentences[1].questions
+    assert len(wb.sentences[0].questions) == 1     # 정상 문장은 유지
+    # 정상 배치(seek 자리에 seek)는 유지
+    good = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=2, en_template="If they remain hidden, the leader may even want {{Q1}} them out for two reasons.",
+                       ko="k", questions=[Q(1, "verb", "to seek")])])
+    wb2 = ws.build_workbook(good, title="T", subtitle="S", originals=orig)
+    assert len(wb2.sentences[0].questions) == 1
+    print("PASS  의미 오배치 후처리(원문 대조 복원, 정상 유지)")
+
+
 def run_all():
     test_placeholder_mismatch_tolerated()
+    test_misplacement_restore()
     test_id_mismatch_repair()
     test_empty_questions_kept()
     test_order_display_format()

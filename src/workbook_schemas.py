@@ -148,11 +148,61 @@ def validate_llm_workbook(wb: LLMWorkbook) -> None:
         raise ValueError("출제 문항이 하나도 없습니다(모든 문장의 questions 가 비어 있음).")
 
 
-def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
+def _content_words(text: str) -> list[str]:
+    return [w.lower() for w in re.findall(r"[A-Za-z]+", text)]
+
+
+def _covered(w: str, pool: list[str]) -> bool:
+    """단어 w 가 pool 안의 어떤 단어와 (어형 변화 허용) 대응되는가."""
+    return any(x == w or (len(w) >= 4 and len(x) >= 4 and (x.startswith(w[:4]) or w.startswith(x[:4])))
+               for x in pool)
+
+
+def _best_match(solved_words: list[str], originals_words: list[list[str]]) -> tuple[int, float]:
+    """solved 문장이 어떤 원문 문장과 가장 겹치는지(index, 겹침 비율)."""
+    sset = set(solved_words)
+    best, bi = 0.0, -1
+    for i, ow in enumerate(originals_words):
+        if not ow:
+            continue
+        ratio = len(sset & set(ow)) / max(1, len(set(ow)))
+        if ratio > best:
+            best, bi = ratio, i
+    return bi, best
+
+
+def _restore_misplaced(parsed: list[dict], originals: list[str]) -> None:
+    """의미 오배치·단어 소실 후처리 검증.
+
+    각 문장의 '정답을 채운 완성 문장'(solved)을 만들어 가장 잘 맞는 '원문 문장'과 대조한다.
+    원문의 내용어(4글자 이상)가 완성 문장에서 사라졌으면(예: 보기 박스가 엉뚱한 자리에 놓여
+    'seek' 이 없어지고 'remain' 이 대신 들어감), 그 문장은 문항을 버리고 원문으로 되돌린다
+    (깨진 문항보다 온전한 문장이 낫다). 중복·자리표시자 손상은 앞 단계에서 이미 정리된다.
+    """
+    ow_list = [_content_words(o) for o in originals]
+    for p in parsed:
+        if not p["pairs"]:
+            continue
+        solved = p["en"]
+        for pid, q in p["pairs"]:
+            solved = solved.replace("{{" + pid + "}}", (q.answer or "").split("/")[0].strip())
+        sw = _content_words(solved)
+        bi, ratio = _best_match(sw, ow_list)
+        if bi < 0 or ratio < 0.6:          # 확실히 대응되는 원문이 없으면 건드리지 않는다
+            continue
+        lost = [w for w in ow_list[bi] if len(w) >= 4 and not _covered(w, sw)]
+        if lost:                            # 원문 내용어가 사라짐 → 오배치/소실로 보고 원문 복원
+            p["en"] = originals[bi].strip()
+            p["pairs"] = []
+
+
+def build_workbook(llm: LLMWorkbook, title: str, subtitle: str,
+                   originals: list[str] | None = None) -> Workbook:
     """검증된 LLM 응답에 전역 연속 번호를 채우고 total 을 집계해 렌더용 Workbook 생성.
 
     출제 원리(문장당 최소 3개·최대 5개, 어형변형 2개, 5유형 지문 전체 커버)는 프롬프트가 담당하며,
     이 함수는 응답을 그대로 채번한다(동사 비율 상한은 '어형변형 2개/문장' 원칙과 상충하므로 두지 않는다).
+    originals(원문 문장 목록)를 주면 의미 오배치·단어 소실을 후처리로 검증해 되돌린다.
     """
     validate_llm_workbook(llm)
     # 1) 문장별 (pid, src) 쌍 수집
@@ -173,6 +223,10 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str) -> Workbook:
         for pid, q in pairs:
             en = textutil.dedup_placeholder(en, "{{" + pid + "}}", q.answer)
         parsed.append({"no": s.no, "en": en, "ko": s.ko, "pairs": pairs})
+
+    # 1-b) 의미 오배치·단어 소실 후처리(원문과 대조) — originals 가 있을 때만
+    if originals:
+        _restore_misplaced(parsed, originals)
 
     # 2) 전역 채번 + Sentence 생성
     sentences: list[Sentence] = []

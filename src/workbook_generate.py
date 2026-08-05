@@ -26,4 +26,6 @@ def generate_workbook(client: ClaudeClient, cfg: Config, extraction: Extraction)
         extra_validate=ws.validate_llm_workbook,   # 자리표시자·questions 개수 검증
     )
     subtitle = extraction.source or "문장별 복합유형 통합 워크북"
-    return ws.build_workbook(llm, title=title, subtitle=subtitle)
+    from .textutil import split_sentences
+    return ws.build_workbook(llm, title=title, subtitle=subtitle,
+                             originals=split_sentences(body))
