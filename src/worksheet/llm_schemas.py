@@ -83,6 +83,14 @@ class FlowSpec(BaseModel):
     sentences: str = ""      # 관련 문장 번호(예: '1~3')
 
 
+class ImplicitSpec(BaseModel):
+    sent: int = 0            # 문장 번호
+    phrase: str = ""         # 원문 핵심 함축 표현(영어)
+    meaning_ko: str = ""     # 문맥상 의미(한글)
+    answer_en: str = ""      # 영어 정답 표현(쉬운 영어 한 문장)
+    trap_ko: str = ""        # ⚠️ 직역 함정(한글)
+
+
 class OverviewBundle(BaseModel):
     # ⚠️ 한글 제목을 '먼저' 정하고, 그것을 영어로 번역 → title_ko 를 앞에 둬 생성 순서 유도.
     title_ko: str = ""       # 지문 내용 기반 한글 제목(먼저 생성)
@@ -91,6 +99,7 @@ class OverviewBundle(BaseModel):
     summary_easy: str = ""   # '쉽게 말하면' 실생활 예시 한 문장 — 상단 박스(둘째 줄)
     vocab: list[VocabSpec] = Field(default_factory=list)
     flow: list[FlowSpec] = Field(default_factory=list)
+    implicit: list[ImplicitSpec] = Field(default_factory=list)   # 출제 포인트·함축의미
 
 
 # ---------------------------------------------------------------------------

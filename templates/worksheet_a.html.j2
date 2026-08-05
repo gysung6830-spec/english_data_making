@@ -275,6 +275,23 @@
   .flow .arrow{ text-align:center; color:var(--navy); font-size:14px; line-height:1;
                 margin:3px 0; font-weight:800; }
 
+  /* 출제 포인트 · 함축의미 — 2단 카드(보라 톤) */
+  .impl{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:start; }
+  .icard{ background:#f6f4fb; border:1px solid #e0daf1; border-left:4px solid var(--purple);
+          border-radius:9px; padding:7px 10px 8px; page-break-inside:avoid; }
+  .icard .isnt{ display:inline-block; background:var(--purple); color:#fff; font-size:8.5px;
+                font-weight:800; padding:1px 7px; border-radius:8px; }
+  .icard .iph{ display:block; font-weight:800; color:#2b2450; font-size:11px; line-height:1.35;
+               margin:3px 0 4px; }
+  .icard .il{ font-size:10px; line-height:1.5; color:#33384a; margin:2px 0; }
+  .icard .il b{ color:var(--purple); font-weight:800; margin-right:3px; }
+  .icard .itrap{ font-size:9.5px; line-height:1.45; color:#8a5f22; background:#fff5e0;
+                 border-radius:7px; padding:3px 8px; margin-top:5px; }
+  .page.compact .impl{ gap:7px; }
+  .page.compact .icard .iph{ font-size:10.5px; }
+  .page.compact .icard .il{ font-size:9.5px; }
+  .page.compact .icard .itrap{ font-size:9px; }
+
   /* ---- 맨 앞 활용 가이드(표지) ---- */
   .ghead{ display:flex; align-items:center; gap:14px; margin:2px 0 16px; }
   .gribbon{ flex:0 0 auto; background:var(--navy); color:#fff; font-weight:800; font-size:14px;
@@ -552,6 +569,23 @@
           {% if f.easy and s_ko %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
         </div>
         {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {% if a.implicit and s_ko %}
+    <div class="sec">
+      <div class="st">출제 포인트 · 함축의미</div>
+      <div class="impl">
+        {% for im in a.implicit %}
+        <div class="icard">
+          {% if im.sent %}<span class="isnt">{{ im.sent }}문장</span>{% endif %}
+          {% if im.phrase %}<span class="iph">{{ im.phrase }}</span>{% endif %}
+          {% if im.meaning_ko %}<div class="il"><b>문맥상 의미</b> {{ im.meaning_ko }}</div>{% endif %}
+          {% if im.answer_en %}<div class="il"><b>영어 정답 표현</b> {{ im.answer_en }}</div>{% endif %}
+          {% if im.trap_ko %}<div class="itrap">⚠️ 직역 함정 · {{ im.trap_ko }}</div>{% endif %}
+        </div>
         {% endfor %}
       </div>
     </div>

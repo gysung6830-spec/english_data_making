@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from ..client import ClaudeClient
 from .llm_schemas import OverviewBundle
-from .models import Analysis, FlowStep, VocabEntry
+from .models import Analysis, FlowStep, ImplicitPoint, VocabEntry
 
 SYSTEM = (
     "당신은 한국 고등학교 영어 지문 학습지의 '요약 정리 페이지'를 만드는 전문 강사입니다. "
@@ -57,6 +57,15 @@ def build_prompt(analysis: Analysis) -> str:
         "2) flow: 글의 논리 흐름을 4~6단계로. 각 단계에 논리와 쉬운 예시를 '함께' 담습니다. "
         "label(도입/전개/전환/주장/결론 등 짧은 이름), text(개조식 논리 한 줄), "
         "easy(그 단계를 학생 눈높이 반말로 풀어준 쉬운 비유 한 줄), sentences(관련 문장 번호, 예 '1~3').\n"
+        "3) implicit(출제 포인트·함축의미): '직역만으로는 뜻이 안 통하고 맥락을 알아야 풀리는' "
+        "함축·비유 표현(빈칸·함축추론 출제 후보)이 있는 문장을 1~3개 고릅니다. 그런 표현이 뚜렷하지 "
+        "않으면 빈 배열. 각 항목:\n"
+        "   · sent: 문장 번호.\n"
+        "   · phrase: 그 문장에서 핵심이 되는 '영어 표현'을 원문 그대로(구/절 단위, 너무 길지 않게).\n"
+        "   · meaning_ko: 그 표현의 '문맥상 의미'를 한글로(왜 그런 뜻이 되는지 맥락 포함, 1~2문장).\n"
+        "   · answer_en: 그 함축을 '쉬운 영어'로 바꿔 쓴 정답 표현 한 문장(패러프레이즈, 서술형/빈칸 정답감).\n"
+        "   · trap_ko: '직역 함정' — 그 표현을 단순 직역하면 놓치는 맥락을 한 문장으로 경고 "
+        "(예: \"'the norm rather than the rule'을 '규칙보다 규범'으로 직역하면 표준화되었다는 맥락을 놓친다\").\n"
     )
 
 
@@ -64,8 +73,8 @@ def build_overview(
     client: ClaudeClient,
     analysis: Analysis,
     max_retries: int = 1,
-) -> tuple[str, str, str, str, list[VocabEntry], list[FlowStep]]:
-    """LLM 로 제목(영/한) + 요약(주제/쉽게) + 뒷페이지(어휘 / 논리 흐름+쉬운 예시) 생성. 실패 시 빈 값."""
+) -> tuple[str, str, str, str, list[VocabEntry], list[FlowStep], list[ImplicitPoint]]:
+    """LLM 로 제목(영/한) + 요약(주제/쉽게) + 뒷페이지(어휘 / 논리 흐름 / 함축의미) 생성. 실패 시 빈 값."""
     try:
         b: OverviewBundle = client.structured(
             system=SYSTEM,
@@ -75,10 +84,13 @@ def build_overview(
             max_retries=max_retries,
         )
     except Exception:
-        return "", "", "", "", [], []
+        return "", "", "", "", [], [], []
     vocab = [VocabEntry(word=v.word, meaning=v.meaning, syn=v.syn or "—",
                         ant=v.ant or "—", sent=(v.sent or None)) for v in b.vocab if v.word]
     flow = [FlowStep(label=f.label, text=f.text, easy=f.easy, sentences=f.sentences)
             for f in b.flow if f.label and f.text]
+    implicit = [ImplicitPoint(sent=(i.sent or 0), phrase=i.phrase, meaning_ko=i.meaning_ko,
+                              answer_en=i.answer_en, trap_ko=i.trap_ko)
+                for i in b.implicit if (i.phrase or i.meaning_ko)]
     return (b.title_en.strip(), b.title_ko.strip(),
-            b.summary.strip(), b.summary_easy.strip(), vocab, flow)
+            b.summary.strip(), b.summary_easy.strip(), vocab, flow, implicit)

@@ -9,8 +9,8 @@ from __future__ import annotations
 import json
 from dataclasses import asdict
 
-from .models import (Analysis, FlowStep, GrammarChip, KeyWord, LitChunk,
-                     LiteralSentence, Point, Sentence, Token, VocabEntry)
+from .models import (Analysis, FlowStep, GrammarChip, ImplicitPoint, KeyWord,
+                     LitChunk, LiteralSentence, Point, Sentence, Token, VocabEntry)
 
 SCHEMA = "ortica.worksheet.analysis/1"      # 파일 형식 식별자(버전 포함)
 
@@ -79,6 +79,12 @@ def _flow(d: dict) -> FlowStep:
                     easy=d.get("easy", ""), sentences=d.get("sentences", ""))
 
 
+def _implicit(d: dict) -> ImplicitPoint:
+    return ImplicitPoint(sent=int(d.get("sent", 0) or 0), phrase=d.get("phrase", ""),
+                         meaning_ko=d.get("meaning_ko", ""), answer_en=d.get("answer_en", ""),
+                         trap_ko=d.get("trap_ko", ""))
+
+
 def _keyword(d: dict) -> KeyWord:
     return KeyWord(word=d.get("word", ""), meaning=d.get("meaning", ""))
 
@@ -114,6 +120,7 @@ def _analysis(d: dict) -> Analysis:
         sentences=[_sentence(s) for s in d.get("sentences", [])],
         vocab=[_vocab(v) for v in d.get("vocab", [])],
         flow=[_flow(f) for f in d.get("flow", [])],
+        implicit=[_implicit(i) for i in d.get("implicit", [])],
         literal=[_literal(l) for l in d.get("literal", [])],
         back_tight=bool(d.get("back_tight", False)),
         front_density=d.get("front_density", "") or "",

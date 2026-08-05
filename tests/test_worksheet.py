@@ -335,16 +335,21 @@ def test_overview_builder_llm_path():
                    "ant": "decline", "sent": 6}],
         "flow": [{"label": "도입", "text": "화제 제시",
                   "easy": "궁금하면 스스로 파고드는 거랑 같음", "sentences": "1"}],
+        "implicit": [{"sent": 2, "phrase": "a hidden gem",
+                      "meaning_ko": "겉으론 안 보여도 가치 있는 것", "answer_en": "an underrated value",
+                      "trap_ko": "'숨은 보석'으로만 직역하면 맥락을 놓친다"}],
     })
     from src.worksheet import overview_builder
     from src.worksheet.models import Analysis, Sentence
     client = _fake_client([payload])
     a = Analysis(title_en="", sentences=[Sentence(index=1, lines=[[Token(text="Hi")]])])
-    t_en, t_ko, summary, summary_easy, vocab, flow = overview_builder.build_overview(client, a)
+    (t_en, t_ko, summary, summary_easy, vocab, flow,
+     implicit) = overview_builder.build_overview(client, a)
     assert t_en == "The Value of Curiosity" and t_ko == "호기심의 가치"   # 자동 제목
     assert summary.startswith("호기심") and summary_easy.startswith("궁금")  # 주제 + 쉽게
     assert vocab and vocab[0].word == "thrive" and vocab[0].syn == "flourish"
     assert flow and flow[0].label == "도입" and flow[0].easy.startswith("궁금")
+    assert implicit and implicit[0].sent == 2 and implicit[0].phrase == "a hidden gem"  # 함축의미
     print("PASS  overview_builder LLM 경로(+자동 제목)")
 
 
@@ -366,6 +371,10 @@ def test_analysis_json_roundtrip():
     assert b.sentences[0].reading_ko == a.sentences[0].reading_ko
     assert len(b.sentences[0].tokens) == len(a.sentences[0].tokens)
     assert len(b.vocab) == len(a.vocab) and len(b.flow) == len(a.flow)
+    assert len(b.implicit) == len(a.implicit)                       # 함축의미 카드 보존
+    if a.implicit:
+        assert b.implicit[0].phrase == a.implicit[0].phrase
+        assert b.implicit[0].trap_ko == a.implicit[0].trap_ko
     # 제목만 바꿔 무-API 렌더가 되는지(HTML 안에 새 제목이 들어감)
     b.title_en = "Edited Title Only"
     b.title_ko = "제목만 수정"

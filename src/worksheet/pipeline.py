@@ -80,9 +80,9 @@ def analyze_text(client: "ClaudeClient", raw_text: str, header: Header,
         sentences=sentences,
     )
     if with_back:
-        t_en, t_ko, summary, summary_easy, vocab, flow = overview_builder.build_overview(
+        t_en, t_ko, summary, summary_easy, vocab, flow, implicit = overview_builder.build_overview(
             client, analysis, max_retries=max_retries)
-        analysis.vocab, analysis.flow = vocab, flow
+        analysis.vocab, analysis.flow, analysis.implicit = vocab, flow, implicit
         # 영문 제목·한글 부제는 자동 생성값 우선(사용자 입력 없음)
         analysis.title_en = t_en or analysis.title_en
         analysis.title_ko = t_ko or analysis.title_ko

@@ -140,6 +140,21 @@ class VocabEntry:
 
 
 @dataclass
+class ImplicitPoint:
+    """함축 의미 '출제 포인트' 카드(뒷면). 밑줄·비유 표현의 맥락 의미 + 영어 정답 표현 + 직역 함정.
+
+    직역만으로는 뜻이 안 통하고 '맥락을 알아야 풀리는' 함축 표현(빈칸·함축추론 출제 후보)을
+    카드로 정리한다. 프런트의 gloss(독해 Point) 보다 '출제 관점'으로 자세히 담는다.
+    """
+
+    sent: int = 0            # 문장 번호
+    phrase: str = ""         # 원문의 핵심 함축 표현(영어)
+    meaning_ko: str = ""     # 문맥상 의미(한글)
+    answer_en: str = ""      # 영어 정답 표현(쉬운 영어로 바꿔 쓴 한 문장)
+    trap_ko: str = ""        # ⚠️ 직역 함정(단순 직역 시 놓치는 맥락, 한글)
+
+
+@dataclass
 class FlowStep:
     """논리 흐름도의 한 단계 (쉬운 예시를 같은 목차에 포함)."""
 
@@ -164,6 +179,7 @@ class Analysis:
     # 뒷페이지(선택) — 비어 있으면 렌더 시 뒷페이지를 만들지 않는다.
     vocab: list[VocabEntry] = field(default_factory=list)
     flow: list[FlowStep] = field(default_factory=list)
+    implicit: list[ImplicitPoint] = field(default_factory=list)  # 출제 포인트·함축의미 카드(뒷면)
     # 직독직해(레이아웃 B) — 비어 있으면 렌더 시 원문/해석만 대체 표기한다.
     literal: list[LiteralSentence] = field(default_factory=list)
     back_tight: bool = False   # (구) 호환용 — 미사용(뒷면은 고정 크기 렌더)
@@ -180,7 +196,7 @@ class Analysis:
 
     @property
     def has_back(self) -> bool:
-        return bool(self.vocab or self.flow)
+        return bool(self.vocab or self.flow or self.implicit)
 
     @property
     def has_literal(self) -> bool:

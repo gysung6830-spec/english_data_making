@@ -9,8 +9,8 @@
 """
 from __future__ import annotations
 
-from .models import (Analysis, FlowStep, GrammarChip, KeyWord, LitChunk,
-                     LiteralSentence, Sentence, Token, VocabEntry)
+from .models import (Analysis, FlowStep, GrammarChip, ImplicitPoint, KeyWord,
+                     LitChunk, LiteralSentence, Sentence, Token, VocabEntry)
 from .point_builder import build_grammar_point
 
 
@@ -328,6 +328,18 @@ def mock_analysis(title_en: str = "A necessity of openness and connection in lea
         title_ko="리더의 개방성과 연결의 중요성",
         summary="리더는 외부와 열린 관계로 연결될 때 비로소 제 역할을 할 수 있다.",
         summary_easy="물이 안 통하는 봉지 속 찻잎은 아무리 좋아도 안 우러나잖아 — 리더도 사람들과 안 섞이면 그렇게 됨.",
+        implicit=[
+            ImplicitPoint(
+                sent=1, phrase="a bag that's impermeable",
+                meaning_ko="물이 스며들지 못하는 봉지 = 외부와 단절되어 소통이 통하지 않는 리더를 비유한 표현이다.",
+                answer_en="a leader who is completely closed off from others",
+                trap_ko="'impermeable'을 '방수의'로만 직역하면 '외부와 단절됨'이라는 비유적 의미를 놓친다."),
+            ImplicitPoint(
+                sent=6, phrase="we cannot survive and thrive in isolation",
+                meaning_ko="고립된 채로는 생존도 성장도 못 한다 = 사람은 서로 연결될 때 비로소 번성한다는 뜻.",
+                answer_en="people can only flourish when they stay connected to others",
+                trap_ko="'in isolation'을 단순히 '혼자서'로 직역하면 '단절이 성장 자체를 막는다'는 논지를 놓친다."),
+        ],
         lecture_label=lecture_label,
         date=date,
         sentences=sentences,
