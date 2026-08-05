@@ -275,8 +275,13 @@
   .flow .arrow{ text-align:center; color:var(--navy); font-size:14px; line-height:1;
                 margin:3px 0; font-weight:800; }
 
-  /* 출제 포인트 · 함축의미 — 2단 카드(청록 톤) */
-  .impl{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:start; }
+  /* 정리 2단: 논리흐름(왼쪽) · 함축의미(오른쪽). 한쪽만 있으면 전체 폭 */
+  .twocol{ display:grid; grid-template-columns:1fr 1fr; gap:0 16px; align-items:start; }
+  .twocol > .sec{ margin-bottom:10px; }
+  .twocol > .sec:only-child{ grid-column:1 / -1; }
+
+  /* 출제 포인트 · 함축의미 — 카드(청록 톤). 2단 안에선 세로로 쌓임 */
+  .impl{ display:grid; grid-template-columns:1fr; gap:7px; align-items:start; }
   .icard{ background:#eef6f4; border:1px solid #cde6e1; border-left:4px solid #0f8378;
           border-radius:9px; padding:7px 10px 8px; page-break-inside:avoid; }
   .icard .isnt{ display:inline-block; background:#0f8378; color:#fff; font-size:8.5px;
@@ -566,37 +571,40 @@
       <h2>{{ a.title_en }} · 정리</h2>
     </div>
 
-    {% if a.flow %}
-    <div class="sec">
-      <div class="st">글의 논리 흐름 · 쉬운 예시</div>
-      <div class="flow">
-        {% for f in a.flow %}
-        <div class="step">
-          <div class="row1"><span class="lb">{{ f.label }}</span>{% if s_ko %}<span class="tx">{{ f.text }}</span>{% else %}<span class="tx"><span class="blk"></span></span>{% endif %}{% if f.sentences %}<span class="sn">(문장 {{ f.sentences }})</span>{% endif %}</div>
-          {% if f.easy and s_ko %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
+    {# 논리흐름(왼쪽) · 함축의미(오른쪽) 2단. 한쪽만 있으면 전체 폭 차지(:only-child) #}
+    <div class="twocol">
+      {% if a.flow %}
+      <div class="sec">
+        <div class="st">글의 논리 흐름 · 쉬운 예시</div>
+        <div class="flow">
+          {% for f in a.flow %}
+          <div class="step">
+            <div class="row1"><span class="lb">{{ f.label }}</span>{% if s_ko %}<span class="tx">{{ f.text }}</span>{% else %}<span class="tx"><span class="blk"></span></span>{% endif %}{% if f.sentences %}<span class="sn">(문장 {{ f.sentences }})</span>{% endif %}</div>
+            {% if f.easy and s_ko %}<div class="ez"><span class="ezt">쉬운 예시</span>{{ f.easy }}</div>{% endif %}
+          </div>
+          {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
+          {% endfor %}
         </div>
-        {% if not loop.last %}<div class="arrow">▼</div>{% endif %}
-        {% endfor %}
       </div>
-    </div>
-    {% endif %}
+      {% endif %}
 
-    {% if a.implicit and s_ko %}
-    <div class="sec">
-      <div class="st">출제 포인트 · 함축의미</div>
-      <div class="impl">
-        {% for im in a.implicit %}
-        <div class="icard">
-          {% if im.sent %}<span class="isnt">{{ im.sent }}문장</span>{% endif %}
-          {% if im.phrase %}<span class="iph">{{ im.phrase }}</span>{% endif %}
-          {% if im.meaning_ko %}<div class="il"><b>문맥상 의미</b> {{ im.meaning_ko }}</div>{% endif %}
-          {% if im.answer_en %}<div class="il"><b>영어 정답 표현</b> {{ im.answer_en }}</div>{% endif %}
-          {% if im.trap_ko %}<div class="itrap">⚠️ 직역 함정 · {{ im.trap_ko }}</div>{% endif %}
+      {% if a.implicit and s_ko %}
+      <div class="sec">
+        <div class="st">출제 포인트 · 함축의미</div>
+        <div class="impl">
+          {% for im in a.implicit %}
+          <div class="icard">
+            {% if im.sent %}<span class="isnt">{{ im.sent }}문장</span>{% endif %}
+            {% if im.phrase %}<span class="iph">{{ im.phrase }}</span>{% endif %}
+            {% if im.meaning_ko %}<div class="il"><b>문맥상 의미</b> {{ im.meaning_ko }}</div>{% endif %}
+            {% if im.answer_en %}<div class="il"><b>영어 정답 표현</b> {{ im.answer_en }}</div>{% endif %}
+            {% if im.trap_ko %}<div class="itrap">⚠️ 직역 함정 · {{ im.trap_ko }}</div>{% endif %}
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
+      {% endif %}
     </div>
-    {% endif %}
 
     {% if a.vocab %}
     <div class="sec">
