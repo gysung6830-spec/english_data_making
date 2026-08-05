@@ -50,9 +50,9 @@
                   background:var(--navy); color:#fff; font-size:8.5px; font-weight:800;
                   border-radius:9px; padding:2px 8px; letter-spacing:.2px; }
   .summary .slbl.easy{ background:var(--amber); }        /* '쉽게 말하면' = 주황 */
-  .summary .stx{ font-size:8px; line-height:1.6; color:#2c3340; font-weight:600; }
+  .summary .stx{ font-size:11px; line-height:1.6; color:#2c3340; font-weight:600; }
   .page.compact .summary{ margin:9px 0 2px; padding:7px 11px; }
-  .page.compact .summary .stx{ font-size:8px; line-height:1.55; }
+  .page.compact .summary .stx{ font-size:11px; line-height:1.55; }
 
   /* ---- 문장 행 ---- */
   .row{ display:grid; grid-template-columns:minmax(0,1fr) 200px; gap:12px; margin:18px 0 3px;
@@ -105,7 +105,7 @@
   /* 아래(unders) = 어법 번호(빨강) + 유의어(= 파랑)/반의어(↔ 회색) + 오답(X) */
   .ann{ font-size:9px; line-height:1.12; white-space:nowrap; text-align:center;
         max-width:160px; }   /* 아주 긴 주석만 방어적으로 제한(대개 짧음) */
-  .ann.red{ color:var(--red); font-weight:800; font-size:10.5px; line-height:1; }
+  .ann.red{ color:var(--red); font-weight:800; font-size:9px; line-height:1; }
   .ann.syn{ color:var(--green); }   /* 유의어(=) 초록 글씨(밑줄 없음) */
   .ann.ant{ color:var(--gray); }    /* 반의어(↔) 차분한 회색 */
   .ann.gray{ color:var(--gray); }
@@ -136,7 +136,7 @@
   /* ---- 우측 박스 : 알약형 헤더 + 라운드 박스(이전 스타일). 초록 톤과 어울리는 두 색으로 구별 ---- */
   .points{ display:flex; flex-direction:column; gap:9px; }
   .pbox{ background:#fff; border:1.5px solid var(--line); border-radius:13px; padding:0 11px 10px;
-         font-size:11px; line-height:1.55; }
+         font-size:10px; line-height:1.55; }
   .pbox .cap{ display:block; text-align:center; font-weight:800; font-size:10px; color:#fff;
               border-radius:20px; padding:2px 9px; margin:7px 0 5px; }
   /* 박스 안 어법 번호 = 인라인과 동일(빨강, 크게) */
@@ -162,13 +162,13 @@
   .page.compact .tok .w{ font-size:11px; line-height:1.45; }
   .page.compact .tok .over .lbl{ font-size:8px; }
   .page.compact .ann{ font-size:8.5px; }
-  .page.compact .ann.red{ font-size:10px; }
+  .page.compact .ann.red{ font-size:9px; }
   .page.compact .kotr{ margin-top:6px; font-size:11.5px; line-height:1.45; }
   .page.compact .rdko{ margin-top:5px; font-size:11px; line-height:1.75; }
   .page.compact .kobox{ margin-top:5px; font-size:9.5px; line-height:1.4; padding:4px 9px; }
   .page.compact .num{ font-size:11px; }
   .page.compact .points{ gap:6px; }
-  .page.compact .pbox{ font-size:11px; padding:0 9px 6px; }
+  .page.compact .pbox{ font-size:10px; padding:0 9px 6px; }
   .page.compact .pbox .cap{ font-size:9.5px; padding:2px 8px; margin:6px 0 4px; }
   .page.compact .pbox .gn{ font-size:11.5px; }
   /* 뒷면(정리): 원문·전체해석 + 어휘 + 논리흐름 — '읽기 좋은' 고정 크기(작다는 피드백 반영해 확대).
