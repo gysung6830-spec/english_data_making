@@ -14,13 +14,15 @@
     "t": "These factors may be random and misleading.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "factors"
    },
    {
     "t": "Comparison is one source of illusion.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "Comparison"
    },
    {
     "t": "Perhaps you felt that you performed well on a certain climb because your partner was having an off day and found the climbing very difficult.",
@@ -605,7 +607,8 @@
     "t": "Being longer-lived puts a greater premium on learning and memory, and less on automatic preprogrammed behaviors.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "learning"
    },
    {
     "t": "In addition, living a long time or having the capacity to travel for long distances is more likely to expose an animal to significant changes in the environment.",
@@ -1107,7 +1110,8 @@
     "t": "Most often, we mistake being told what effect someone’s appearance has for an account of that appearance.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "appearance"
    },
    {
     "t": "The poet Mallarmé’s advice ― Peindre non la chose, mais l’effet qu’elle produit (‘Paint not the thing itself but the effect it produces’) sounds like a self-denying ordinance.",
@@ -1329,7 +1333,8 @@
     "t": "Throughout their life cycle, plants retain meristems, which are regions of undifferentiated tissue that can differentiate into new shoots and other organs.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "정의",
+    "posword": "meristems"
    },
    {
     "t": "This phenomenon occurs at very different scales, ranging from the healing of a small scar to the regrowth of an entire plant.",
@@ -1559,7 +1564,8 @@
     "t": "The person who performed the initial action may think that others ought to behave as she behaves in situations of this sort.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "ought"
    },
    {
     "t": "(A) Thus, she may prescribe the behavior to them by uttering the norm statement in a prescriptive manner.",
@@ -1990,7 +1996,8 @@
     "t": "(①) Some individuals photosynthesize like mad until sugar positively bubbles along their trunk.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "individual"
    },
    {
     "t": "(②) This is because a tree can be only as strong as the forest that surrounds it.",
@@ -2227,7 +2234,8 @@
     "t": "When your attentional spotlight is widened, you can more easily let go of stress.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "stress"
    },
    {
     "t": "You can put in perspective many more aspects of any situation and not get locked into one part that ties you down to superficial and anxiety-provoking levels of attention.",
@@ -2777,7 +2785,8 @@
     "t": "Writing is an invaluable tool for accomplishing these tasks.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "정의",
+    "posword": "Writing"
    },
    {
     "t": "Unfortunately, too many times, when class discussion begins, pens and pencils go down.",
@@ -3364,7 +3373,8 @@
     "t": "This consensus is all but certain to be displaced, as others have been in the past.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "consensus"
    },
    {
     "t": "In the last analysis, committing himself to a painting is the collector’s own act.",
@@ -3636,7 +3646,8 @@
     "t": "These factors include manager reliance on face-to-face management practices, lack of telecommuting training within an organization, misperceptions of and discomfort with flexible workplace programs, and a limited understanding of their implications for an organization’s bottom line.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "factors"
    },
    {
     "t": "One dominant barrier is the belief that physical presence is essential to genuine productivity.",
@@ -7959,7 +7970,8 @@
     "t": "Release the pendulum and note the magnets that it visits, and in what order.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "pendulum"
    },
    {
     "t": "If the pendulum is released from the same position a second time, the pattern of movement may at first be the same but soon it will become completely different.",
@@ -9341,7 +9353,8 @@
     "t": "The rise of restaurants eventually led to a class of diners who prided themselves on being critics of taste, food and cooking.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "restaurants"
    },
    {
     "t": "Brillat-Savarin is probably the best known of the ‘culinary philosophers’ or, in today’s parlance, a ‘foodie’.",
@@ -10325,7 +10338,8 @@
     "t": "When you say It’s mine in reference to a resource, often that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "sticks"
    },
    {
     "t": "Often, though, we split the sticks up, as for a piece of land: there may be a landowner, a bank with a mortgage, a tenant with a lease, a plumber with a license to enter the land, an oil company with mineral rights.",
@@ -14916,13 +14930,15 @@
     "t": "We generally call this ‘expressivity’.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "정의",
+    "posword": "expressivity"
    },
    {
     "t": "This explains why we do not lose interest when we hear different artists perform the same piece of music.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "music"
    },
    {
     "t": "It also explains why it is worthwhile for following generations to repeat the same repertoire.",
@@ -15144,7 +15160,8 @@
     "t": "Killer whales also repeat the same seal hunting technique in front of their offspring, sometimes without even killing the seal, leading researchers to ask why they would repeatedly catch and release a seal if they were not planning to eat it.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "researchers"
    },
    {
     "t": "Considering the amount of energy they’d have to expend, there would need to be a good reason, and that reason might be teaching.",
@@ -15700,7 +15717,8 @@
     "t": "This is an extreme view of the nature of scientific contests.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "contests"
    },
    {
     "t": "(①) Even those who describe scientific contests in such a way note that it is a somewhat inaccurate description, given that replication and verification have social value and are common in science.",
@@ -19168,7 +19186,8 @@
     "t": "( ③ ) Orienting the building so that the longer face of the structure is parallel with prevailing winds can help.",
     "role": "yellow",
     "tags": [],
-    "pos": "핵심"
+    "pos": "반복어",
+    "posword": "building"
    },
    {
     "t": "( ④ ) Chopping or rounding off corners of a building can likewise make it more aerodynamic.",

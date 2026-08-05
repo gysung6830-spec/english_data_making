@@ -137,9 +137,12 @@ def step2_passage(hl):
         else:
             inner = _inline_tags(txt, seg.get("tags"))
             cls = "m" if role == "yellow" else "g"
-            # 신호어 없는 노랑 = '위치·주제 신호' → 왜 노랑인지 칩 표시
+            # 신호어 없는 노랑 = 시험장에서 미리 잡는 신호(위치·반복어·정의) 칩 표시
             pos = seg.get("pos")
             if role == "yellow" and not seg.get("tags") and pos:
+                pw = seg.get("posword")
+                if pw and esc(pw) in inner:
+                    inner = inner.replace(esc(pw), f'<u class="rep">{esc(pw)}</u>', 1)
                 inner = f'<span class="tag pos">{esc(pos)}</span>' + inner
             parts.append(f'<mark class="{cls}">{inner}</mark>')
     return " ".join(parts)
@@ -425,8 +428,8 @@ def render_spread(rec, c, idx):
         '<span class="cl m">🟡 정답 핵심<b>무조건 읽기</b></span>'
         '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
         '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
-        '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">첫문장</span> '
-        '= 신호어 없이 <b>그 자리라서</b> 읽는 노랑</span></div>')
+        '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">반복어</span> '
+        '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
@@ -829,6 +832,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
 .tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }
+.psg .rep{ text-decoration:underline; text-decoration-color:#c99a2e; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:700; }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
 
 /* 문제 페이지(왼쪽) */
