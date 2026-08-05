@@ -121,6 +121,8 @@ def circled(n: int) -> str:
 
 
 _env.globals["circled"] = circled
+# 매칭 문제 오른쪽 보기 라벨: 0→A, 1→B … (25 초과는 순환 방지용 숫자 폴백)
+_env.globals["abc"] = lambda i: chr(65 + i) if 0 <= i < 26 else str(i + 1)
 
 
 def _as_list(analyses) -> list[Analysis]:
@@ -148,6 +150,43 @@ def _ensure_vocab_test(a: Analysis) -> None:
     a.vocab_test = items
 
 
+def _ensure_vocab_match(a: Analysis) -> None:
+    """유의어(=)·반의어(↔) '줄 잇기(매칭)' 문제 데이터를 결정적으로 만들어 붙인다.
+
+    각 단어의 유의어/반의어(첫 항목)를 오른쪽 보기로 두고 '한 번만' 섞어(제목 시드),
+    학생이 왼쪽 단어와 오른쪽 보기를 선으로 잇게 한다. 정답(왼쪽 i ↔ 오른쪽 위치)도 함께.
+    match_syn / match_ant 는 렌더 전용 임시 속성(직렬화 대상 아님).
+    """
+    import hashlib
+    import random
+
+    if getattr(a, "match_syn", None) is not None:
+        return
+    _DASH = {"—", "-", ""}
+
+    def build(kind: str) -> dict:
+        pairs = []
+        for v in (a.vocab or []):
+            raw = (getattr(v, kind, "") or "").strip()
+            first = raw.split(",")[0].strip() if raw else ""
+            if first and first not in _DASH and v.word:
+                pairs.append((v.word, first))
+        if len(pairs) < 3:          # 매칭으로 내기엔 너무 적으면 생략
+            return {}
+        pairs = pairs[:8]           # 페이지에 맞게 최대 8쌍
+        seed = int.from_bytes(
+            hashlib.md5(((a.title_en or "") + "|" + kind).encode("utf-8")).digest()[:4], "big")
+        order = list(range(len(pairs)))
+        random.Random(seed).shuffle(order)
+        right = [pairs[i][1] for i in order]        # 섞인 보기(오른쪽)
+        pos = {order[j]: j for j in range(len(order))}
+        answer = [pos[i] for i in range(len(pairs))]  # 왼쪽 i → 오른쪽 위치
+        return {"items": [p[0] for p in pairs], "right": right, "answer": answer}
+
+    a.match_syn = build("syn")
+    a.match_ant = build("ant")
+
+
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
                   include_guide: bool = True, only_back: bool = False,
@@ -166,6 +205,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     alist = _as_list(analyses)
     for a in alist:
         _ensure_vocab_test(a)               # 단어 TEST 순서 결정(테스트/정답 동일 순서)
+        _ensure_vocab_match(a)              # 유의어·반의어 줄잇기 매칭 데이터
     tmpl = _env.get_template("worksheet_a.html.j2")
     html = tmpl.render(analyses=alist, footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,

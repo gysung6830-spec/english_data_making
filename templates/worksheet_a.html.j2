@@ -346,6 +346,21 @@
   .wtw{ font-size:15px; font-weight:700; color:#20242e; white-space:nowrap; }
   .wtblank{ min-height:15px; }                   /* 뜻을 쓰는 빈칸(밑줄은 .wtrow 하단 점선) */
 
+  /* ---- 유의어·반의어 줄 잇기(매칭) : 왼쪽 단어 ↔ 오른쪽 보기(섞음)를 선으로 연결 ---- */
+  .msec{ margin-top:14px; break-inside:avoid; page-break-inside:avoid; }
+  .msec .mtitle{ margin:2px 0 4px; }
+  .msec .mtag{ display:inline-block; background:var(--navy); color:#fff; font-weight:800;
+               font-size:12px; padding:3px 13px; border-radius:11px; }
+  .match{ display:grid; grid-template-columns:1fr 1fr; gap:0 64px; padding:4px 10px 2px; }
+  .match .mrow{ display:flex; align-items:center; gap:9px; padding:7px 0; font-size:14px;
+                border-bottom:1px dashed #e3e8e3; }
+  .match .mleft .mrow{ flex-direction:row-reverse; text-align:right; }  /* 점 = 가운데(오른쪽) */
+  .match .mn, .match .ml{ color:var(--navy); font-weight:800; font-size:12px; flex:0 0 auto; }
+  .match .mw{ font-weight:700; color:#20242e; }
+  .match .mleft .mw{ margin-left:auto; }                                /* 단어를 안쪽(점)으로 붙임 */
+  .match .mdot{ width:9px; height:9px; border:1.7px solid var(--navy); border-radius:50%;
+                flex:0 0 auto; background:#fff; }
+
   /* ---- 단어 TEST 정답(맨 마지막에 모아서, 페이지 나눔 없이 연속) ---- */
   .answers{ background:var(--page-bg); border-radius:22px; padding:20px 24px 26px;
             page-break-before:always; }
@@ -610,6 +625,36 @@
     </div>
   </div>
   {% endif %}
+
+  {# 유의어·반의어 줄 잇기(매칭) 문제 — 어휘의 유의어/반의어를 보기로 섞어 선으로 잇게 함 #}
+  {% if (include_test or only_test) and not only_answer and (a.match_syn or a.match_ant) %}
+  <div class="page">
+    <div class="bhead">
+      <div class="tag">{{ a.lecture_label or '★' }}</div>
+      <h2>{{ a.title_en }} · 유의어·반의어 연결</h2>
+    </div>
+    <div class="wtsub">왼쪽 단어와 뜻이 통하는 오른쪽 보기를 <b>선으로 이으시오.</b> <span style="color:#8a90a0">(정답은 맨 마지막 장에)</span></div>
+    {% for m, mlabel in [(a.match_syn, '유의어 (=) 연결'), (a.match_ant, '반의어 (↔) 연결')] %}
+    {% if m %}
+    <div class="msec">
+      <div class="mtitle"><span class="mtag">{{ mlabel }}</span></div>
+      <div class="match">
+        <div class="mcol mleft">
+          {% for w in m['items'] %}
+          <div class="mrow"><span class="mn">{{ loop.index }}</span><span class="mw">{{ w }}</span><span class="mdot"></span></div>
+          {% endfor %}
+        </div>
+        <div class="mcol mright">
+          {% for r in m['right'] %}
+          <div class="mrow"><span class="mdot"></span><span class="ml">{{ abc(loop.index0) }}</span><span class="mw">{{ r }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
 {% endfor %}
 
 {# ── 단어 TEST 정답: 맨 마지막에 모아서, 지문마다 페이지 나눔 없이 연속 ── #}
@@ -622,6 +667,12 @@
     <div class="answrap">
       {% for v in a.vocab_test %}<span class="ansitem"><span class="an">{{ loop.index }}.</span> <span class="aw">{{ v.word }}</span> <span class="am">— {{ v.meaning }}</span></span>{% endfor %}
     </div>
+    {% if a.match_syn or a.match_ant %}
+    <div class="answrap" style="margin-top:5px">
+      {% if a.match_syn %}<span class="ansitem"><span class="an">유의어 연결</span> {% for w in a.match_syn['items'] %}{{ loop.index }}-{{ abc(a.match_syn['answer'][loop.index0]) }}{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}
+      {% if a.match_ant %}<span class="ansitem"><span class="an">반의어 연결</span> {% for w in a.match_ant['items'] %}{{ loop.index }}-{{ abc(a.match_ant['answer'][loop.index0]) }}{% if not loop.last %}, {% endif %}{% endfor %}</span>{% endif %}
+    </div>
+    {% endif %}
   </div>
   {% endif %}{% endfor %}
 </div>

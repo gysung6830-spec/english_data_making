@@ -353,6 +353,29 @@ def test_overview_builder_llm_path():
     print("PASS  overview_builder LLM 경로(+자동 제목)")
 
 
+def test_vocab_match_problem():
+    """유의어·반의어 줄잇기 매칭: 보기 섞임 + 정답 매핑이 실제 유의어/반의어와 일치."""
+    from src.worksheet.renderer import _ensure_vocab_match
+    from src.worksheet.models import Analysis, VocabEntry
+
+    a = Analysis(title_en="Demo", vocab=[
+        VocabEntry(word="thrive", meaning="번성하다", syn="flourish, prosper", ant="decline"),
+        VocabEntry(word="isolation", meaning="고립", syn="seclusion", ant="connection"),
+        VocabEntry(word="prevent", meaning="막다", syn="stop", ant="allow"),
+        VocabEntry(word="rare", meaning="드문", syn="", ant=""),   # 유의어/반의어 없음 → 제외
+    ])
+    _ensure_vocab_match(a)
+    ms = a.match_syn
+    assert ms and ms["items"] == ["thrive", "isolation", "prevent"]     # 유의어 있는 것만
+    assert set(ms["right"]) == {"flourish", "seclusion", "stop"}         # 첫 유의어만, 섞임
+    # 정답 매핑이 실제 유의어를 가리키는지
+    first_syn = {"thrive": "flourish", "isolation": "seclusion", "prevent": "stop"}
+    for i, w in enumerate(ms["items"]):
+        assert ms["right"][ms["answer"][i]] == first_syn[w]
+    assert a.match_ant and a.match_ant["items"] == ["thrive", "isolation", "prevent"]
+    print("PASS  유의어·반의어 매칭 문제(보기 섞임 + 정답 일치)")
+
+
 def test_analysis_json_roundtrip():
     """분석 결과 → JSON → 복원이 손실 없이 되고, 제목만 바꿔 재렌더(무-API)가 되는지."""
     from src.worksheet import serialize
