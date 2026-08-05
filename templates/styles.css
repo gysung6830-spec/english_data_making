@@ -301,8 +301,8 @@ table.lit2 td {
 .lit-line .ck { font-weight: 600; }
 
 /* 청크 색상 팔레트 — 영어와 한글이 같은 색으로 대응 (채도 중간 톤) */
-.ck0 { color: #3a58ad; } .ck1 { color: #3a8a56; } .ck2 { color: #ac6b28; }
-.ck3 { color: #6d51b5; } .ck4 { color: #c14a48; } .ck5 { color: #2f7d73; }
+.ck0 { color: #c14a48; } .ck1 { color: #3a58ad; } .ck2 { color: #ac6b28; }
+.ck3 { color: #2f7d73; } .ck4 { color: #6d51b5; } .ck5 { color: #3a8a56; }
 .ck6 { color: #977028; } .ck7 { color: #4d55a8; }
 
 /* 직독직해에 통합된 핵심 문법 (문장별) */
@@ -320,12 +320,12 @@ table.lit2 td {
 /* 직독직해: 뱃지 글씨는 검은색으로 통일, 배경만 어구(청크) 색의 옅은 틴트 */
 .gline .gtag { color: #23272e; border: none; }
 .gline .gtag.keytag { color: #23272e; font-weight: 800; }
-.gline.ck0 .gtag { background: #dfe4f2; }
-.gline.ck1 .gtag { background: #dfece4; }
+.gline.ck0 .gtag { background: #f5e2e2; }
+.gline.ck1 .gtag { background: #dfe4f2; }
 .gline.ck2 .gtag { background: #f2e7dc; }
-.gline.ck3 .gtag { background: #e8e3f3; }
-.gline.ck4 .gtag { background: #f5e2e2; }
-.gline.ck5 .gtag { background: #deeae9; }
+.gline.ck3 .gtag { background: #deeae9; }
+.gline.ck4 .gtag { background: #e8e3f3; }
+.gline.ck5 .gtag { background: #dfece4; }
 .gline.ck6 .gtag { background: #eee8dc; }
 .gline.ck7 .gtag { background: #e3e4f1; }
 .gline .gexp { color: #23272e; }
