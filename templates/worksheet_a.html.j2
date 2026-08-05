@@ -275,16 +275,16 @@
   .flow .arrow{ text-align:center; color:var(--navy); font-size:14px; line-height:1;
                 margin:3px 0; font-weight:800; }
 
-  /* 출제 포인트 · 함축의미 — 2단 카드(보라 톤) */
+  /* 출제 포인트 · 함축의미 — 2단 카드(청록 톤) */
   .impl{ display:grid; grid-template-columns:1fr 1fr; gap:8px; align-items:start; }
-  .icard{ background:#f6f4fb; border:1px solid #e0daf1; border-left:4px solid var(--purple);
+  .icard{ background:#eef6f4; border:1px solid #cde6e1; border-left:4px solid #0f8378;
           border-radius:9px; padding:7px 10px 8px; page-break-inside:avoid; }
-  .icard .isnt{ display:inline-block; background:var(--purple); color:#fff; font-size:8.5px;
+  .icard .isnt{ display:inline-block; background:#0f8378; color:#fff; font-size:8.5px;
                 font-weight:800; padding:1px 7px; border-radius:8px; }
-  .icard .iph{ display:block; font-weight:800; color:#2b2450; font-size:11px; line-height:1.35;
+  .icard .iph{ display:block; font-weight:800; color:#123f3a; font-size:11px; line-height:1.35;
                margin:3px 0 4px; }
   .icard .il{ font-size:10px; line-height:1.5; color:#33384a; margin:2px 0; }
-  .icard .il b{ color:var(--purple); font-weight:800; margin-right:3px; }
+  .icard .il b{ color:#0f8378; font-weight:800; margin-right:3px; }
   .icard .itrap{ font-size:9.5px; line-height:1.45; color:#8a5f22; background:#fff5e0;
                  border-radius:7px; padding:3px 8px; margin-top:5px; }
   .page.compact .impl{ gap:7px; }
@@ -337,28 +337,30 @@
   .ptext.stu .blk{ display:block; width:100%; height:13px; margin:6px 0; }
   td.blkcell{ height:20px; }                    /* 어휘표 빈칸 셀 */
 
-  /* ---- 단어 TEST(지문별) : 어휘표의 '단어'만(유의어/반의어 제외) 랜덤 출제 ---- */
-  .wtsub{ font-size:12px; color:#5b6172; margin:2px 0 10px; }
+  /* ---- 단어 TEST(지문별) : [뜻 쓰기] + [유의어·반의어 줄 잇기]를 한 페이지에 ---- */
+  .wtsub{ font-size:12px; color:#5b6172; margin:2px 0 7px; }
+  .wtsub .qtag{ display:inline-block; background:var(--navy); color:#fff; font-weight:800;
+                font-size:11px; padding:2px 10px; border-radius:10px; margin-right:6px; }
   .wtest{ display:grid; grid-template-columns:1fr 1fr; gap:0 34px; }
-  .wtrow{ display:grid; grid-template-columns:24px auto 1fr; align-items:end; gap:10px;
-          padding:9px 0 6px; border-bottom:1px dashed #cdd6cd; }
-  .wtn{ color:var(--navy); font-weight:800; font-size:12px; text-align:right; padding-bottom:1px; }
-  .wtw{ font-size:15px; font-weight:700; color:#20242e; white-space:nowrap; }
-  .wtblank{ min-height:15px; }                   /* 뜻을 쓰는 빈칸(밑줄은 .wtrow 하단 점선) */
+  .wtrow{ display:grid; grid-template-columns:22px auto 1fr; align-items:end; gap:9px;
+          padding:6px 0 4px; border-bottom:1px dashed #cdd6cd; }
+  .wtn{ color:var(--navy); font-weight:800; font-size:11px; text-align:right; padding-bottom:1px; }
+  .wtw{ font-size:13px; font-weight:700; color:#20242e; white-space:nowrap; }
+  .wtblank{ min-height:13px; }                   /* 뜻을 쓰는 빈칸(밑줄은 .wtrow 하단 점선) */
 
-  /* ---- 유의어·반의어 줄 잇기(매칭) : 왼쪽 단어 ↔ 오른쪽 보기(섞음)를 선으로 연결 ---- */
-  .msec{ margin-top:14px; break-inside:avoid; page-break-inside:avoid; }
-  .msec .mtitle{ margin:2px 0 4px; }
-  .msec .mtag{ display:inline-block; background:var(--navy); color:#fff; font-weight:800;
-               font-size:12px; padding:3px 13px; border-radius:11px; }
-  .match{ display:grid; grid-template-columns:1fr 1fr; gap:0 64px; padding:4px 10px 2px; }
-  .match .mrow{ display:flex; align-items:center; gap:9px; padding:7px 0; font-size:14px;
-                border-bottom:1px dashed #e3e8e3; }
+  /* 유의어·반의어 줄 잇기(매칭) : 왼쪽 단어 ↔ 오른쪽 보기(섞음)를 선으로 연결 */
+  .msec{ margin-top:7px; break-inside:avoid; page-break-inside:avoid; }
+  .msec .mtitle{ margin:2px 0 2px; }
+  .msec .mtag{ display:inline-block; background:#2f9e5f; color:#fff; font-weight:800;
+               font-size:11px; padding:2px 11px; border-radius:10px; }
+  .match{ display:grid; grid-template-columns:1fr 1fr; gap:0 56px; padding:2px 10px 0; }
+  .match .mrow{ display:flex; align-items:center; gap:8px; padding:4px 0; font-size:12.5px;
+                border-bottom:1px dashed #e6ebe6; }
   .match .mleft .mrow{ flex-direction:row-reverse; text-align:right; }  /* 점 = 가운데(오른쪽) */
-  .match .mn, .match .ml{ color:var(--navy); font-weight:800; font-size:12px; flex:0 0 auto; }
+  .match .mn, .match .ml{ color:var(--navy); font-weight:800; font-size:11px; flex:0 0 auto; }
   .match .mw{ font-weight:700; color:#20242e; }
   .match .mleft .mw{ margin-left:auto; }                                /* 단어를 안쪽(점)으로 붙임 */
-  .match .mdot{ width:9px; height:9px; border:1.7px solid var(--navy); border-radius:50%;
+  .match .mdot{ width:8px; height:8px; border:1.6px solid var(--navy); border-radius:50%;
                 flex:0 0 auto; background:#fff; }
 
   /* ---- 단어 TEST 정답(맨 마지막에 모아서, 페이지 나눔 없이 연속) ---- */
@@ -619,34 +621,29 @@
   </div>
   {% endif %}
 
-  {# 지문별 '단어 TEST'(어휘표의 단어만, 유의어/반의어 제외, 랜덤 순서). 정답은 맨 뒤에 따로. #}
-  {% if (include_test or only_test) and not only_answer and a.vocab_test %}
+  {# 지문별 '단어 TEST' — 한 페이지에 [단어 뜻 쓰기] + [유의어·반의어 줄 잇기] 함께 #}
+  {% if (include_test or only_test) and not only_answer and (a.vocab_test or a.match_syn or a.match_ant) %}
   <div class="page">
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 단어 TEST</h2>
     </div>
-    <div class="wtsub">다음 영어 단어의 <b>뜻</b>을 쓰시오. <span style="color:#8a90a0">(정답은 맨 마지막 장에)</span></div>
+
+    {% if a.vocab_test %}
+    <div class="wtsub"><span class="qtag">뜻 쓰기</span> 다음 영어 단어의 뜻을 쓰시오. <span style="color:#8a90a0">(정답은 맨 마지막 장에)</span></div>
     <div class="wtest">
       {% for v in a.vocab_test %}
       <div class="wtrow"><span class="wtn">{{ loop.index }}</span><span class="wtw">{{ v.word }}</span><span class="wtblank"></span></div>
       {% endfor %}
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
 
-  {# 유의어·반의어 줄 잇기(매칭) 문제 — 어휘의 유의어/반의어를 보기로 섞어 선으로 잇게 함 #}
-  {% if (include_test or only_test) and not only_answer and (a.match_syn or a.match_ant) %}
-  <div class="page">
-    <div class="bhead">
-      <div class="tag">{{ a.lecture_label or '★' }}</div>
-      <h2>{{ a.title_en }} · 유의어·반의어 연결</h2>
-    </div>
-    <div class="wtsub">왼쪽 단어와 뜻이 통하는 오른쪽 보기를 <b>선으로 이으시오.</b> <span style="color:#8a90a0">(정답은 맨 마지막 장에)</span></div>
-    {% for m, mlabel in [(a.match_syn, '유의어 (=) 연결'), (a.match_ant, '반의어 (↔) 연결')] %}
+    {% if a.match_syn or a.match_ant %}
+    <div class="wtsub" style="margin-top:13px"><span class="qtag">연결</span> 왼쪽 단어와 뜻이 통하는 오른쪽 보기를 <b>선으로 이으시오.</b></div>
+    {% for m, mlabel in [(a.match_syn, '유의어 (=)'), (a.match_ant, '반의어 (↔)')] %}
     {% if m %}
     <div class="msec">
-      <div class="mtitle"><span class="mtag">{{ mlabel }}</span></div>
+      <div class="mtitle"><span class="mtag">{{ mlabel }} 연결</span></div>
       <div class="match">
         <div class="mcol mleft">
           {% for w in m['items'] %}
@@ -662,6 +659,7 @@
     </div>
     {% endif %}
     {% endfor %}
+    {% endif %}
   </div>
   {% endif %}
 {% endfor %}

@@ -173,7 +173,7 @@ def _ensure_vocab_match(a: Analysis) -> None:
                 pairs.append((v.word, first))
         if len(pairs) < 3:          # 매칭으로 내기엔 너무 적으면 생략
             return {}
-        pairs = pairs[:8]           # 페이지에 맞게 최대 8쌍
+        pairs = pairs[:6]           # 뜻쓰기와 한 페이지에 담기 위해 최대 6쌍
         seed = int.from_bytes(
             hashlib.md5(((a.title_en or "") + "|" + kind).encode("utf-8")).digest()[:4], "big")
         order = list(range(len(pairs)))
