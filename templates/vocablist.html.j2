@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>핵심 어휘 리스트</title></head>
+<body>
+  {% for pg in passages %}
+  <div class="wl-passage{{ ' wl-gap' if not loop.first }}">
+    <div class="doc-header">
+      <span class="doc-badge">Vocabulary List</span>
+      {% if pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
+      <div class="doc-title">{{ pg.title }}</div>
+      <div class="doc-source">핵심 어휘 · 유의어 · 반의어 · 총 {{ pg.vocab|length }}개</div>
+    </div>
+
+    {% if pg.vocab %}
+    <table class="grid t-voc">
+      <thead><tr>
+        <th class="wl-no">No</th><th class="vl-word">단어</th><th>의미</th>
+        <th>유의어</th><th>반의어</th><th class="th-sent">문장</th>
+      </tr></thead>
+      <tbody>
+      {% for v in pg.vocab %}
+        <tr>
+          <td class="cell-no">{{ v.no }}</td>
+          <td class="cell-word">{{ v.word }}</td>
+          <td>{{ v.meaning }}</td>
+          <td>{{ v.synonyms }}</td>
+          <td>{{ v.antonyms }}</td>
+          <td class="cell-sent">{% if v.sentence_no %}{{ v.sentence_no }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="wl-empty">핵심 어휘가 없습니다.</div>
+    {% endif %}
+
+    {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+  </div>
+  {% endfor %}
+</body>
+</html>

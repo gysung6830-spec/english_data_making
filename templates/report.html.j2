@@ -131,36 +131,53 @@
   </div>
   </div>{# /two-col #}
 
-  {# ④ 핵심 어휘 · 유의어 · 반의어 #}
-  <div class="section s-voc">
+  {# ④ 핵심 단어 영어 요약문 (직독직해 앞) #}
+  {% if report.vocab.english_summary %}
+  <div class="section s-esum">
     <div class="section-head">
       <span class="sec-num">4</span>
-      <span class="sec-title">핵심 어휘 · 유의어 · 반의어</span>
-      <span class="sec-sub">Vocabulary</span>
+      <span class="sec-title">핵심 단어 영어 요약문</span>
+      <span class="sec-sub">굵은 단어 = 핵심 어휘</span>
     </div>
-    <table class="grid t-voc{% if student %} stu{% endif %}">
-      <thead><tr>
-        <th>No</th><th>단어</th><th>의미</th><th>유의어</th><th>반의어</th><th class="th-sent">문장</th>
-      </tr></thead>
-      <tbody>
-      {% for v in report.vocab.items %}
-        <tr>
-          <td class="cell-no">{{ v.no }}</td>
-          <td class="cell-word">{{ v.word }}</td>
-          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.meaning }}{% endif %}</td>
-          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.synonyms }}{% endif %}</td>
-          <td>{% if student %}<span class="blank blank-cell"></span>{% else %}{{ v.antonyms }}{% endif %}</td>
-          <td class="cell-sent">{% if v.sentence_no %}{{ v.sentence_no }}{% endif %}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    <div class="esum-box">
+      {% if student %}{{ report.vocab.english_summary | blank_words(report.vocab.items | map(attribute='word') | list) }}{% else %}{{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}{% endif %}
+    </div>
+    {% if report.vocab.english_summary_ko and not student %}
+    <div class="esum-ko">{{ report.vocab.english_summary_ko }}</div>
+    {% endif %}
   </div>
+  {% endif %}
 
-  {# ⑤ 직독직해 (핵심 문법 통합) — 새 페이지에 단독 배치 #}
-  <div class="section s-lit page-break">
+  {# ⑤ 서술형 출제 예상 문장 (직독직해 앞) #}
+  {% set ns_narr = namespace(has=false) %}
+  {% for e in report.exam.items if '서술' in e.question_type %}{% set ns_narr.has = true %}{% endfor %}
+  {% if ns_narr.has %}
+  <div class="section s-narr">
     <div class="section-head">
       <span class="sec-num">5</span>
+      <span class="sec-title">서술형 출제 예상 문장</span>
+      <span class="sec-sub">Guided Writing</span>
+    </div>
+    <div class="exam-cards">
+    {% for e in report.exam.items if '서술' in e.question_type %}
+      <div class="exam-card ec-narr">
+        <div class="ec-body">
+          {%- for ln in e.content.split('\n') if ln.strip() -%}
+            {%- if loop.first -%}<div class="narr-sent">{{ ln | trim }}</div>
+            {%- elif student -%}<div class="narr-reason narr-blank">쓰인 문법: <span class="blank" style="min-width:240px"></span></div>
+            {%- else -%}<div class="narr-reason">{{ ln | trim }}</div>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {# ⑥ 직독직해 (핵심 문법 통합) — 새 페이지에 단독 배치 #}
+  <div class="section s-lit page-break">
+    <div class="section-head">
+      <span class="sec-num">6</span>
       <span class="sec-title">직독직해 {% if brand %}<span class="made-by">made by {{ brand }}</span>{% endif %}</span>
       <span class="sec-sub">문장별 핵심 문법 포함 · ★ = 관계사·분사·가정법·비교·도치·강조·5형식 필수 어법</span>
     </div>
@@ -244,49 +261,6 @@
       </tbody>
     </table>
   </div>
-
-  {# ⑥ 핵심 단어 영어 요약문 — 직독직해 뒤에 배치 #}
-  {% if report.vocab.english_summary %}
-  <div class="section s-esum">
-    <div class="section-head">
-      <span class="sec-num">6</span>
-      <span class="sec-title">핵심 단어 영어 요약문</span>
-      <span class="sec-sub">굵은 단어 = 핵심 어휘</span>
-    </div>
-    <div class="esum-box">
-      {% if student %}{{ report.vocab.english_summary | blank_words(report.vocab.items | map(attribute='word') | list) }}{% else %}{{ report.vocab.english_summary | highlight_words(report.vocab.items | map(attribute='word') | list) }}{% endif %}
-    </div>
-    {% if report.vocab.english_summary_ko and not student %}
-    <div class="esum-ko">{{ report.vocab.english_summary_ko }}</div>
-    {% endif %}
-  </div>
-  {% endif %}
-
-  {# ⑦ 서술형 출제 예상 문장 — 별도 섹션 #}
-  {% set ns_narr = namespace(has=false) %}
-  {% for e in report.exam.items if '서술' in e.question_type %}{% set ns_narr.has = true %}{% endfor %}
-  {% if ns_narr.has %}
-  <div class="section s-narr">
-    <div class="section-head">
-      <span class="sec-num">7</span>
-      <span class="sec-title">서술형 출제 예상 문장</span>
-      <span class="sec-sub">Guided Writing</span>
-    </div>
-    <div class="exam-cards">
-    {% for e in report.exam.items if '서술' in e.question_type %}
-      <div class="exam-card ec-narr">
-        <div class="ec-body">
-          {%- for ln in e.content.split('\n') if ln.strip() -%}
-            {%- if loop.first -%}<div class="narr-sent">{{ ln | trim }}</div>
-            {%- elif student -%}<div class="narr-reason narr-blank">쓰인 문법: <span class="blank" style="min-width:240px"></span></div>
-            {%- else -%}<div class="narr-reason">{{ ln | trim }}</div>{%- endif -%}
-          {%- endfor -%}
-        </div>
-      </div>
-    {% endfor %}
-    </div>
-  </div>
-  {% endif %}
 {% endmacro %}
 
 {# ---- 앞부분: 원문 + 전체 해석 모음 ---- #}

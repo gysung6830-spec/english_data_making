@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>핵심 어휘 시험지</title></head>
+<body>
+  {# 지문별: 문제(뜻쓰기 → 유의어 줄긋기 → 반의어 줄긋기) #}
+  {% for pg in passages %}
+  <div class="wl-passage{{ ' pgbreak' if not loop.first }}">
+    <div class="doc-header">
+      <span class="doc-badge">Vocabulary Test</span>
+      {% if pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
+      <div class="doc-title">{{ pg.title }}</div>
+      <div class="quiz-meta">
+        이름 <span class="ql">&nbsp;</span>　　　점수 <span class="ql short">&nbsp;</span>
+      </div>
+    </div>
+
+    {# ① 단어 뜻 쓰기 #}
+    <div class="vt-part">Ⅰ. 다음 단어의 뜻을 쓰세요. (순서 무작위)</div>
+    {% if pg.mean %}
+    <table class="grid t-quiz">
+      <thead><tr>
+        <th class="wl-no">No</th><th class="wl-en">단어</th><th class="q-blank">뜻 쓰기</th>
+        <th class="wl-no">No</th><th class="wl-en">단어</th><th class="q-blank">뜻 쓰기</th>
+      </tr></thead>
+      <tbody>
+      {% for l, r in pg.mean_rows %}
+        <tr>
+          <td class="wl-no">{{ l.qno }}</td><td class="wl-en">{{ l.word }}</td><td class="q-blank"></td>
+          {% if r %}
+          <td class="wl-no">{{ r.qno }}</td><td class="wl-en">{{ r.word }}</td><td class="q-blank"></td>
+          {% else %}<td></td><td></td><td class="q-blank"></td>{% endif %}
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {# ② 유의어 줄긋기 #}
+    {% if pg.syn %}
+    <div class="vt-part">Ⅱ. 단어와 <b>유의어</b>를 선으로 이으세요.</div>
+    <table class="match">
+      <tbody>
+      {% for i in range(pg.syn.L|length) %}
+        <tr>
+          <td class="mt-left"><span class="mt-no">{{ pg.syn.L[i].no }}</span> {{ pg.syn.L[i].word }} <span class="mt-dot">○</span></td>
+          <td class="mt-gap"></td>
+          <td class="mt-right">{% if i < pg.syn.R|length %}<span class="mt-dot">○</span> <span class="mt-sym">{{ pg.syn.R[i].sym }}</span> {{ pg.syn.R[i].target }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {# ③ 반의어 줄긋기 #}
+    {% if pg.ant %}
+    <div class="vt-part">Ⅲ. 단어와 <b>반의어</b>를 선으로 이으세요.</div>
+    <table class="match">
+      <tbody>
+      {% for i in range(pg.ant.L|length) %}
+        <tr>
+          <td class="mt-left"><span class="mt-no">{{ pg.ant.L[i].no }}</span> {{ pg.ant.L[i].word }} <span class="mt-dot">○</span></td>
+          <td class="mt-gap"></td>
+          <td class="mt-right">{% if i < pg.ant.R|length %}<span class="mt-dot">○</span> <span class="mt-sym">{{ pg.ant.R[i].sym }}</span> {{ pg.ant.R[i].target }}{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
+  </div>
+  {% endfor %}
+
+  {# 정답: 문제 뒤에 지문별로 모아서 #}
+  {% for pg in passages %}
+  <div class="answer-key pgbreak">
+    <div class="ak-title">정답 (Answer Key){% if pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
+
+    <div class="ak-sub">Ⅰ. 단어 뜻</div>
+    <div class="ak-list">
+      {% for w in pg.answers %}<span class="ak-item"><b>{{ w.word }}</b> — {{ w.meaning }}</span>{% endfor %}
+    </div>
+
+    {% if pg.syn %}
+    <div class="ak-sub">Ⅱ. 유의어 줄긋기</div>
+    <div class="ak-list">
+      {% for l in pg.syn.L %}<span class="ak-item"><b>{{ l.no }}.</b> {{ l.word }} → {{ l.ans_sym }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if pg.ant %}
+    <div class="ak-sub">Ⅲ. 반의어 줄긋기</div>
+    <div class="ak-list">
+      {% for l in pg.ant.L %}<span class="ak-item"><b>{{ l.no }}.</b> {{ l.word }} → {{ l.ans_sym }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</body>
+</html>

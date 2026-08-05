@@ -558,6 +558,113 @@ def render_quiz_pdf(reports, out_path: str | Path,
     return out_path
 
 
+# ---------------------------------------------------------------------------
+# 핵심 어휘 리스트 / 핵심 어휘 시험지 (분석지의 '핵심 어휘·유의어·반의어' 기반)
+# ---------------------------------------------------------------------------
+def _collect_vocab_one(report) -> list[dict]:
+    """한 지문의 핵심 어휘(의미·유의어·반의어 포함)를 번호순으로 모은다."""
+    out = []
+    for v in report.vocab.items:
+        word = (v.word or "").strip()
+        if not word:
+            continue
+        out.append({
+            "no": v.no, "word": word, "meaning": (v.meaning or "").strip(),
+            "synonyms": (v.synonyms or "").strip(), "antonyms": (v.antonyms or "").strip(),
+            "sentence_no": v.sentence_no,
+        })
+    return out
+
+
+def _first_term(s: str) -> str:
+    """'vital, crucial' → 'vital' (줄긋기 매칭용 대표 1개)."""
+    if not s:
+        return ""
+    return re.split(r"[,/·;]| or ", s)[0].strip()
+
+
+def render_vocablist_pdf(reports, out_path: str | Path,
+                         title: str = "핵심 어휘 리스트", footer_note: str = "") -> Path:
+    """분석지의 '핵심 어휘·유의어·반의어'를 별도 어휘 리스트 PDF 로 만든다.
+
+    (직독직해 단어 기반 '어휘리스트'와는 별개의 산출물)
+    """
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = _as_list(reports)
+    passages = []
+    for i, rep in enumerate(reps, 1):
+        passages.append({"no": i, "total": len(reps), "title": _display_title(rep),
+                         "vocab": _collect_vocab_one(rep)})
+    tmpl = _env.get_template("vocablist.html.j2")
+    html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
+# 줄긋기 오른쪽 보기 기호 (가나다… 표준 순서; 폰트 글립 있는 상용 음절만)
+_MATCH_SYMS = list("가나다라마바사아자차카타파하거너더러머버서어저처커터퍼허")
+
+
+def _match_block(pairs: list[dict], rng: random.Random) -> dict:
+    """줄긋기용: 왼쪽(단어)·오른쪽(대상)을 각각 섞고 정답 기호를 매긴다."""
+    left = pairs[:]
+    rng.shuffle(left)
+    right = pairs[:]
+    rng.shuffle(right)
+    syms = [_MATCH_SYMS[k] if k < len(_MATCH_SYMS) else str(k + 1)
+            for k in range(len(right))]
+    sym_of = {}
+    R = []
+    for k, p in enumerate(right):
+        sym_of.setdefault(p["target"], syms[k])
+        R.append({"sym": syms[k], "target": p["target"]})
+    L = []
+    for k, p in enumerate(left):
+        L.append({"no": k + 1, "word": p["word"], "ans_sym": sym_of[p["target"]]})
+    return {"L": L, "R": R}
+
+
+def render_vocabtest_pdf(reports, out_path: str | Path,
+                         title: str = "핵심 어휘 시험지", footer_note: str = "",
+                         seed: int | None = None) -> Path:
+    """핵심 어휘 리스트 기반 시험지: ①단어 뜻쓰기 ②유의어 줄긋기 ③반의어 줄긋기 (+정답)."""
+    from weasyprint import CSS, HTML
+
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    reps = _as_list(reports)
+    rng = random.Random(seed)
+    passages = []
+    for i, rep in enumerate(reps, 1):
+        items = _collect_vocab_one(rep)
+        # ① 뜻 쓰기 (순서 무작위)
+        mean = items[:]
+        rng.shuffle(mean)
+        for j, w in enumerate(mean):
+            w["qno"] = j + 1
+        # ② 유의어 / ③ 반의어 줄긋기 (대표어가 있는 항목만)
+        syn_pairs = [{"word": it["word"], "target": _first_term(it["synonyms"])}
+                     for it in items if _first_term(it["synonyms"])]
+        ant_pairs = [{"word": it["word"], "target": _first_term(it["antonyms"])}
+                     for it in items if _first_term(it["antonyms"])]
+        passages.append({
+            "no": i, "total": len(reps), "title": _display_title(rep),
+            "mean": mean, "mean_rows": _pair_rows(mean),
+            "syn": _match_block(syn_pairs, rng) if syn_pairs else None,
+            "ant": _match_block(ant_pairs, rng) if ant_pairs else None,
+            "answers": items,
+        })
+    tmpl = _env.get_template("vocabtest.html.j2")
+    html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
+    css = CSS(filename=str(TEMPLATE_DIR / "styles.css"))
+    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    return out_path
+
+
 def combine_pdfs(pdf_paths: list[Path], out_path: Path) -> Path:
     """여러 지문 PDF 를 하나로 합친다 (pypdf 사용, 없으면 개별 유지)."""
     try:

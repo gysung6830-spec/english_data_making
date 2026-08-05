@@ -120,8 +120,10 @@ INDEX_HTML = """
       <label>⑤ 만들 자료 선택 <span class=hint>(직독직해 핵심 어휘로 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (교사용·정답 포함)</label>
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
-      <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (단어+뜻 정리)</label>
+      <label class=chk><input type=checkbox name=out_wordlist value=1 checked> 📝 어휘 리스트 (직독직해 단어+뜻)</label>
       <label class=chk><input type=checkbox name=out_quiz value=1 checked> ✏️ 영단어 시험지 (뜻 맞히기·정답 포함)</label>
+      <label class=chk><input type=checkbox name=out_vocablist value=1 checked> 📚 핵심 어휘 리스트 (유의어·반의어)</label>
+      <label class=chk><input type=checkbox name=out_vocabtest value=1 checked> 🧩 핵심 어휘 시험지 (뜻쓰기+유의어/반의어 줄긋기)</label>
 
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
@@ -156,6 +158,8 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=re_student value=1> 📗 지문 분석지(학생용)</label>
       <label class=chk><input type=checkbox name=re_wordlist value=1 checked> 📝 어휘 리스트</label>
       <label class=chk><input type=checkbox name=re_quiz value=1 checked> ✏️ 영단어 시험지</label>
+      <label class=chk><input type=checkbox name=re_vocablist value=1 checked> 📚 핵심 어휘 리스트</label>
+      <label class=chk><input type=checkbox name=re_vocabtest value=1 checked> 🧩 핵심 어휘 시험지</label>
 
       <div class=row>
         <button class="btn gray" id=go2 type=submit>제목 바꿔 다시 뽑기</button>
@@ -289,9 +293,13 @@ def analyze_route():
         student=bool(request.form.get("out_student")),
         wordlist=bool(request.form.get("out_wordlist")),
         quiz=bool(request.form.get("out_quiz")),
+        vocablist=bool(request.form.get("out_vocablist")),
+        vocabtest=bool(request.form.get("out_vocabtest")),
     )
-    if not (which.analysis or which.student or which.wordlist or which.quiz):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    if not (which.analysis or which.student or which.wordlist or which.quiz
+            or which.vocablist or which.vocabtest):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False,
+                           vocablist=False, vocabtest=False)
 
     # 브랜드 문구(직독직해 made by ~). config 값 사용(기본 비어 있음).
     brand = cfg.design.brand
@@ -371,9 +379,13 @@ def reedit_route():
         student=bool(request.form.get("re_student")),
         wordlist=bool(request.form.get("re_wordlist")),
         quiz=bool(request.form.get("re_quiz")),
+        vocablist=bool(request.form.get("re_vocablist")),
+        vocabtest=bool(request.form.get("re_vocabtest")),
     )
-    if not (which.analysis or which.student or which.wordlist or which.quiz):
-        which = OutputsCfg(analysis=True, wordlist=False, quiz=False)
+    if not (which.analysis or which.student or which.wordlist or which.quiz
+            or which.vocablist or which.vocabtest):
+        which = OutputsCfg(analysis=True, wordlist=False, quiz=False,
+                           vocablist=False, vocabtest=False)
     brand = cfg.design.brand
 
     raw_name = (request.form.get("re_basename") or "").strip()

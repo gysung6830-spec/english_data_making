@@ -143,6 +143,18 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
         recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
 
+    # 핵심 어휘 리스트(유의어·반의어) — 분석지의 어휘 기반, 별도 PDF
+    if getattr(sel, "vocablist", False):
+        p = cfg.output_dir / f"{stem}_핵심어휘리스트.pdf"
+        render.render_vocablist_pdf(reports, p, title=f"{title} — 핵심 어휘", footer_note=fn)
+        recs.append({"kind": "vocablist", "label": "📚 핵심 어휘 리스트", "path": p})
+
+    # 핵심 어휘 시험지(뜻쓰기 + 유의어/반의어 줄긋기)
+    if getattr(sel, "vocabtest", False):
+        p = cfg.output_dir / f"{stem}_핵심어휘test.pdf"
+        render.render_vocabtest_pdf(reports, p, title=f"{title} — 핵심 어휘 시험", footer_note=fn)
+        recs.append({"kind": "vocabtest", "label": "🧩 핵심 어휘 시험지", "path": p})
+
     return recs
 
 

@@ -434,6 +434,28 @@ table.lit2 td {
 .ak-list { columns: 2; column-gap: 22px; font-size: 9.5px; line-height: 1.7; }
 .ak-item { display: block; break-inside: avoid; color: #23272e; }
 .ak-item b { color: var(--voc); }
+.ak-sub { font-size: 10px; font-weight: 800; color: var(--voc); margin: 8px 0 3px; }
+
+/* 핵심 어휘 리스트 단어 열 폭 */
+.vl-word { width: 108px; font-weight: 700; color: #111827; }
+
+/* 핵심 어휘 시험지: 파트 안내 + 줄긋기(matching) */
+.vt-part { font-size: 10.5px; font-weight: 800; color: var(--voc); margin: 11px 0 5px; }
+.vt-part b { color: #c0342c; }
+table.match { width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 4px; }
+.match td { padding: 5px 4px; vertical-align: middle; font-size: 10px; }
+.mt-left { text-align: right; color: #1f2937; }
+.mt-right { text-align: left; color: #1f2937; }
+.mt-gap { width: 34%; }
+.mt-no {
+  display: inline-block; min-width: 15px; text-align: center; font-weight: 800;
+  color: #fff; background: var(--voc); border-radius: 50%; font-size: 8.5px; padding: 1px 0; margin-right: 3px;
+}
+.mt-sym {
+  display: inline-block; min-width: 15px; text-align: center; font-weight: 800;
+  color: var(--voc); border: 1px solid var(--voc); border-radius: 50%; font-size: 8.5px; padding: 0 3px; margin-right: 3px;
+}
+.mt-dot { color: var(--voc); font-weight: 800; }
 
 /* ============================================================
    앞부분: 원문 + 전체 해석 모음 (지문 여러 개를 앞에 모아 배치)
