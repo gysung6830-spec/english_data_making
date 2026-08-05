@@ -59,17 +59,18 @@ body {
   --c-red:    #cd5049;
   --c-teal:   #2f877e;
 
-  --sum:   var(--c-red);      /* 주제 */
-  --lit:   var(--c-blue);     /* 직독직해(동사·어형) */
-  --gram:  var(--c-blue);     /* 문법 */
-  --gram-bg: #eef1f7;
-  --voc:   var(--c-green);    /* 어휘(유의어·반의어) */
+  /* ── 초록 단색 계열: 모든 섹션을 그린~틸~올리브의 명도 차이로 구분 ── */
+  --sum:   #1a7a4a;           /* 주제 (딥 에메랄드 · 최상위 강조) */
+  --lit:   #2f7d74;           /* 직독직해(동사·어형, 딥 틸그린) */
+  --gram:  #2f7d74;           /* 문법 */
+  --gram-bg: #e9f2ef;
+  --voc:   var(--c-green);    /* 어휘(유의어·반의어, 브랜드 그린) */
   --voc-bg: #eef4ef;
-  --struc: var(--c-amber);    /* 구조 분석(흐름) */
-  --struc-bg: #f7f2e8;
-  --exam:  var(--c-purple);   /* 출제 포인트(어법·지칭) */
-  --exam-bg: #f2f0f6;
-  --esum:  var(--c-teal);     /* 핵심 단어 영어 요약문(직독직해와 구분) */
+  --struc: #7a9a44;           /* 구조 분석(흐름, 세이지·올리브 그린) */
+  --struc-bg: #f1f4e6;
+  --exam:  #2b6f5c;           /* 해석 포인트·서술형(파인 그린) */
+  --exam-bg: #e8f2ee;
+  --esum:  var(--c-teal);     /* 핵심 단어 영어 요약문(틸) */
   --muted: #6b7280;
   --line: #e5e7eb;
 }
@@ -150,7 +151,7 @@ body {
 }
 /* 주제 문장 속 핵심 키워드 강조 */
 .summary-overall .kw {
-  color: #b23b35; background: #fdecea;
+  color: var(--sum); background: #dbeee2;
   padding: 0 3px; border-radius: 3px; font-weight: 800;
 }
 
