@@ -192,7 +192,10 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   include_guide: bool = True, only_back: bool = False,
                   student: bool = False, slevel: str = "slash",
                   boxmode: str = "", include_test: bool = False,
-                  only_answer: bool = False, only_test: bool = False) -> str:
+                  only_answer: bool = False, only_test: bool = False,
+                  only_guide: bool = False, only_front: bool = False,
+                  only_source: bool = False, only_summary: bool = False,
+                  toc: list | None = None) -> str:
     """레이아웃 A(분석 학습지형) HTML.
 
     footer_note   : 하단 우측 저작권 문구.
@@ -201,6 +204,8 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     include_back  : 뒷페이지(어휘/흐름) 포함 여부(측정 시 False).
     include_guide : 맨 앞 '활용 가이드' 표지 페이지 포함 여부(측정 시 False).
     only_back     : 뒷면만 렌더(뒷면 페이지 수 측정용).
+    only_guide/only_front/only_source/only_summary/only_test/only_answer :
+                    특정 섹션만 렌더(합본 순서 재배치용). toc: 가이드 목차 항목.
     """
     alist = _as_list(analyses)
     for a in alist:
@@ -212,7 +217,10 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                        include_back=include_back, include_guide=include_guide,
                        only_back=only_back, student=student, slevel=slevel,
                        boxmode=boxmode, include_test=include_test,
-                       only_answer=only_answer, only_test=only_test)
+                       only_answer=only_answer, only_test=only_test,
+                       only_guide=only_guide, only_front=only_front,
+                       only_source=only_source, only_summary=only_summary,
+                       toc=toc or [])
     return _inject_fonts(html)
 
 
@@ -232,14 +240,19 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
                 include_guide: bool = True, student: bool = False,
                 slevel: str = "slash", boxmode: str = "", include_test: bool = False,
                 only_answer: bool = False, only_test: bool = False,
-                include_back: bool = True) -> str:
+                include_back: bool = True, only_guide: bool = False,
+                only_front: bool = False, only_source: bool = False,
+                only_summary: bool = False, toc: list | None = None) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
                          compact=compact, include_guide=include_guide,
                          student=student, slevel=slevel, boxmode=boxmode,
                          include_test=include_test, only_answer=only_answer,
-                         only_test=only_test, include_back=include_back)
+                         only_test=only_test, include_back=include_back,
+                         only_guide=only_guide, only_front=only_front,
+                         only_source=only_source, only_summary=only_summary,
+                         toc=toc)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -400,7 +413,9 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                slevel: str = "slash", include_guide: bool = True,
                boxmode: str = "", include_test: bool = False,
                only_answer: bool = False, only_test: bool = False,
-               include_back: bool = True) -> Path:
+               include_back: bool = True, only_guide: bool = False,
+               only_front: bool = False, only_source: bool = False,
+               only_summary: bool = False, toc: list | None = None) -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -417,7 +432,9 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     compact = (density == "compact")
-    if layout.upper() == "A" and not only_answer and not only_test:
+    # 밀도 자동맞춤은 앞면(분석) 렌더에만 필요 — 정답/테스트/가이드/원문/정리 단독 렌더는 생략.
+    _skip_fit = only_answer or only_test or only_guide or only_source or only_summary
+    if layout.upper() == "A" and not _skip_fit:
         if density == "auto":
             _fit_pages(analyses, fit_front=True, student=student, slevel=slevel,
                        boxmode=boxmode)
@@ -431,7 +448,9 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                        student=student, slevel=slevel, include_guide=include_guide,
                        boxmode=boxmode, include_test=include_test,
                        only_answer=only_answer, only_test=only_test,
-                       include_back=include_back)
+                       include_back=include_back, only_guide=only_guide,
+                       only_front=only_front, only_source=only_source,
+                       only_summary=only_summary, toc=toc)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):

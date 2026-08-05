@@ -246,16 +246,17 @@ def test_render_back_page():
     a = mock_analysis()
     ha = renderer.render_a_html([a])
     assert 'class="bhead"' in ha                       # 뒷페이지 존재
-    assert "원문 · 전체 해석" in ha and 'class="pcols"' in ha  # 어휘 앞 원문·해석 2단
+    assert 'srcsec' in ha and 'class="writebox"' in ha  # 원문·해석 + 필기 박스
     assert 'class="pnum"' in ha and "전체 해석" in ha    # 번호 원 + 해석 칸
     assert 'class="vtab"' in ha and 'class="flow"' in ha
     assert 'class="ez"' in ha                          # 논리 흐름 + 쉬운 예시 통합
     assert "impermeable" in ha and "flourish" in ha    # 어휘/유의어
     assert "비유 제시" in ha                             # 흐름 단계
-    # 뒷페이지 데이터가 없는 Analysis 는 back 페이지를 만들지 않는다
+    # 뒷페이지 데이터(어휘·흐름·함축)가 없으면 '정리' 페이지는 만들지 않는다
+    # (원문 페이지는 문장만 있으면 항상 만든다)
     from src.worksheet.models import Analysis
-    plain = Analysis(title_en="x", sentences=a.sentences)
-    assert 'class="bhead"' not in renderer.render_a_html([plain])
+    plain = renderer.render_a_html([Analysis(title_en="x", sentences=a.sentences)])
+    assert 'class="vtab"' not in plain and 'class="flow"' not in plain
     print("PASS  뒷페이지(어휘 + 논리흐름·쉬운예시)")
 
 

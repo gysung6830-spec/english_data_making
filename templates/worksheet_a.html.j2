@@ -242,6 +242,21 @@
   .ptext .pnum{ display:inline-block; background:var(--navy); color:#fff; font-size:8px; font-weight:800;
                 min-width:13px; height:13px; line-height:13px; text-align:center; border-radius:7px;
                 padding:0 2px; margin:0 2px 0 1px; vertical-align:1px; }
+
+  /* 원문 페이지: 원문/해석 각각 아래에 필기용 빈 박스. 한 페이지로 압축(작은 폰트) */
+  .srcsec{ margin-bottom:8px; }
+  .source .st{ margin-bottom:5px; }
+  .source .ptext{ font-size:10.5px; line-height:1.65; }
+  .writebox{ position:relative; margin-top:6px; height:78px; border:1px dashed #c3cdd6;
+             border-radius:8px; background:repeating-linear-gradient(#fcfdfe,#fcfdfe 25px,#eef1f4 25px,#eef1f4 26px); }
+  .writebox .wblbl{ position:absolute; top:4px; left:8px; font-size:8.5px; font-weight:800; color:#9aa4b0; }
+
+  /* 활용 가이드 목차 */
+  .gtoc{ margin-top:3px; }
+  .gtocrow{ display:flex; align-items:baseline; font-size:12px; padding:3px 2px; }
+  .gtoct{ font-weight:700; color:#2c3340; }
+  .gtocdots{ flex:1; border-bottom:1px dotted #b7c0ca; margin:0 7px 3px; }
+  .gtocpg{ font-weight:800; color:var(--navy); }
   /* 뒷면이 2페이지가 될 때 첫 페이지를 꽉 채우고 남는 것만 넘기도록 자연스러운 분할 허용.
      (원문/해석 블록·표의 행·흐름 단계는 각자 쪼개지지 않게 유지) */
   .sec{ margin-bottom:18px; }
@@ -390,7 +405,9 @@
 {%- set s_gram  = (not student) or slevel == 'interp' -%}
 {%- set s_slash = (not student) or slevel != 'blank' -%}
 {%- set s_ko    = not student -%}   {# 직독직해·해석·전체해석·어휘뜻·논리흐름 텍스트 #}
-{% if include_guide and not only_back and not only_answer and not only_test %}
+{# 섹션 격리 플래그: 하나라도 켜지면 '그 섹션만' 렌더(합본 순서 재배치용) #}
+{%- set _only = only_guide or only_front or only_source or only_summary or only_test or only_answer -%}
+{% if only_guide or (include_guide and not _only) %}
 <div class="page">
   <div class="ghead">
     <div class="gribbon">활용<br>가이드</div>
@@ -431,10 +448,19 @@
   </ol>
 
   <div class="gtip">💡 <b>Tip.</b> 번호 <b>①②③</b>는 본문과 오른쪽 박스가 서로 <b>짝</b>이에요. 본문에서 색·번호를 먼저 보고, 박스에서 그 이유를 확인하세요.</div>
+
+  {% if toc %}
+  <span class="gst">📑 목차</span>
+  <div class="gtoc">
+    {% for it in toc %}
+    <div class="gtocrow"><span class="gtoct">{{ it.label }}</span><span class="gtocdots"></span><span class="gtocpg">{{ it.page }}</span></div>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 {% endif %}
 {% for a in analyses %}
-  {% if not only_back and not only_answer and not only_test %}
+  {% if only_front or not _only %}
   {%- set fd = a.front_density -%}
   <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
     <div class="head">
@@ -527,45 +553,37 @@
   </div>
   {% endif %}
 
-  {% if include_back and a.has_back and not only_answer and not only_test %}
-  {% if a.sentences %}
-  <div class="page compact">   {#- 뒷면①: 원문·전체 해석(별도 페이지) -#}
+  {% if (only_source or (include_back and not _only)) and a.sentences %}
+  <div class="page compact source">   {#- 원문(지문별 페이지 나눔): 원문+필기 / 해석+필기, 한 페이지 압축 -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
-      <h2>{{ a.title_en }} · 원문 해석</h2>
+      <h2>{{ a.title_en }} · 원문 · 해석</h2>
     </div>
 
-    {% if a.sentences %}
-    <div class="sec">
-      <div class="st">원문 · 전체 해석</div>
-      <div class="pcols">
-        <div class="pcol">
-          <span class="pclbl">원문</span>
-          <div class="ptext">
-            {%- for s in a.sentences -%}
-              <span class="pnum">{{ s.index }}</span> {{ s.text | replace('(','') | replace(')','') }}{{ ' ' }}
-            {%- endfor -%}
-          </div>
-        </div>
-        <div class="pcol">
-          <span class="pclbl">전체 해석</span>
-          <div class="ptext{% if not s_ko %} stu{% endif %}">
-            {%- if s_ko -%}
-              {%- for s in a.sentences -%}
-                <span class="pnum">{{ s.index }}</span> {{ s.translation }}{{ ' ' }}
-              {%- endfor -%}
-            {%- else -%}
-              {%- for s in a.sentences -%}<span class="pnum">{{ s.index }}</span> <span class="blk"></span>{%- endfor -%}
-            {%- endif -%}
-          </div>
+    <div class="sec srcsec">
+      <div class="st">원문</div>
+      <div class="pcol">
+        <div class="ptext">
+          {%- for s in a.sentences -%}<span class="pnum">{{ s.index }}</span> {{ s.text | replace('(','') | replace(')','') }}{{ ' ' }}{%- endfor -%}
         </div>
       </div>
+      <div class="writebox"><span class="wblbl">필기</span></div>
     </div>
-    {% endif %}
+
+    <div class="sec srcsec">
+      <div class="st">전체 해석</div>
+      <div class="pcol">
+        <div class="ptext">
+          {%- for s in a.sentences -%}<span class="pnum">{{ s.index }}</span> {{ s.translation }}{{ ' ' }}{%- endfor -%}
+        </div>
+      </div>
+      <div class="writebox"><span class="wblbl">필기</span></div>
+    </div>
   </div>
   {% endif %}
 
-  <div class="page compact">   {#- 뒷면②: 정리 — 논리흐름 → 함축의미 → 핵심어휘(한 페이지 목표) -#}
+  {% if only_summary or (include_back and a.has_back and not _only) %}
+  <div class="page compact">   {#- 정리 — 논리흐름 → 함축의미 → 핵심어휘(한 페이지 목표) -#}
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>
       <h2>{{ a.title_en }} · 정리</h2>
@@ -630,7 +648,7 @@
   {% endif %}
 
   {# 지문별 '단어 TEST' — 한 페이지에 [단어 뜻 쓰기] + [유의어·반의어 줄 잇기] 함께 #}
-  {% if (include_test or only_test) and not only_answer and (a.vocab_test or a.match_syn or a.match_ant) %}
+  {% if (only_test or (include_test and not _only)) and (a.vocab_test or a.match_syn or a.match_ant) %}
   <div class="page">
     <div class="bhead">
       <div class="tag">{{ a.lecture_label or '★' }}</div>

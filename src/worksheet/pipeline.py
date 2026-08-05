@@ -255,78 +255,98 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      slevel: str = "slash", include_guide: bool = True,
                      boxmode: str = "", include_test: bool = False,
                      only_answer: bool = False, only_test: bool = False,
-                     include_back: bool = True) -> Path:
+                     include_back: bool = True, only_guide: bool = False,
+                     only_front: bool = False, only_source: bool = False,
+                     only_summary: bool = False, toc: list | None = None) -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density,
                                student=student, slevel=slevel,
                                include_guide=include_guide, boxmode=boxmode,
                                include_test=include_test, only_answer=only_answer,
-                               only_test=only_test, include_back=include_back)
+                               only_test=only_test, include_back=include_back,
+                               only_guide=only_guide, only_front=only_front,
+                               only_source=only_source, only_summary=only_summary,
+                               toc=toc)
 
 
 def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
                           footer_note: str = "", density: str = "auto",
                           make_student: bool = True, slevel: str = "blank",
                           boxmode: str = "") -> Path:
-    """선생님용 + 학생용을 '한 PDF'로 합본한다(복수 지문 시 교사용 전체 → 학생용 전체).
+    """섹션을 재배치해 '한 PDF'로 합본하고, 활용 가이드에 페이지 목차를 싣는다.
 
-    페이지 순서: [가이드, 지문1 교사, 지문2 교사, …] 다음에 [지문1 학생, 지문2 학생, …].
-    make_student=False 면 교사용만 만든다.
+    페이지 순서:
+      ① 활용 가이드(+목차)  ② 지문 분석(교사용)  ③ 정리(논리흐름·함축·어휘)
+      ④ 단어 테스트  ⑤ 정답  ⑥ 학생용(빈칸)  ⑦ 원문(지문별 페이지 나눔)
+
+    각 섹션을 개별 렌더해 페이지 수를 세고, 시작 페이지로 목차를 만든 뒤 가이드에 실어
+    맨 앞에 붙인다. make_student=False 면 학생용(⑥)을 생략한다.
     """
     import tempfile
 
+    from pypdf import PdfReader, PdfWriter
+
     out_path = Path(out_path)
-    # 단어 TEST 는 교사용 뒤에 '한 번만'(어휘가 있는 지문이 하나라도 있으면).
     has_test = any(getattr(a, "vocab", None) for a in analyses)
-    from pypdf import PdfWriter
+    has_back = any(getattr(a, "has_back", False) for a in analyses)
+    has_source = any(getattr(a, "sentences", None) for a in analyses)
 
-    def _append_test(w, d):
-        if not has_test:
-            return
-        wt = Path(d) / "w.pdf"             # 단어 TEST(지문별, 1회)
-        render_worksheet(analyses, wt, layout=layout, footer_note=footer_note,
-                         include_guide=False, only_test=True)
-        w.append(str(wt))
+    def _pages(p: Path) -> int:
+        try:
+            return len(PdfReader(str(p)).pages)
+        except Exception:
+            return 0
 
-    def _append_answer(w, d):
-        if not has_test:
-            return
-        ap = Path(d) / "a.pdf"             # 정답(맨 마지막, 페이지 나눔 없이 연속)
-        render_worksheet(analyses, ap, layout=layout, footer_note=footer_note,
-                         include_guide=False, only_answer=True)
-        w.append(str(ap))
-
-    if not make_student:
-        # 순서: [교사용 지문분석(+뒷면)] → [단어 TEST] → [정답]
-        with tempfile.TemporaryDirectory() as d:
-            tp = Path(d) / "t.pdf"
-            render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
-                             density=density, include_guide=True, boxmode=boxmode)
-            w = PdfWriter()
-            w.append(str(tp))
-            _append_test(w, d)
-            _append_answer(w, d)
-            out_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(out_path, "wb") as f:
-                w.write(f)
-        _stamp_footer(out_path, footer_note)
-        return out_path
-    # 순서: [교사용 지문분석(+뒷면)] → [학생용(뒷면 없음)] → [단어 TEST(1회)] → [정답]
     with tempfile.TemporaryDirectory() as d:
-        tp, sp = Path(d) / "t.pdf", Path(d) / "s.pdf"
-        render_worksheet(analyses, tp, layout=layout, footer_note=footer_note,
-                         density=density, student=False, include_guide=True,
-                         boxmode=boxmode)
-        # 학생용: 가이드·뒷면(어휘 정리) 없이 지문분석 빈칸만
-        render_worksheet(analyses, sp, layout=layout, footer_note=footer_note,
-                         density=density, student=True, slevel=slevel,
-                         include_guide=False, boxmode=boxmode, include_back=False)
+        dd = Path(d)
+        # ── 콘텐츠 섹션을 개별 렌더(가이드 제외). (라벨, 파일, 렌더러 kwargs) ──
+        specs: list[tuple[str, Path, dict]] = []
+        specs.append(("지문 분석 (교사용)", dd / "front.pdf",
+                      dict(density=density, student=False, only_front=True)))
+        if has_back:
+            specs.append(("정리 (논리 흐름·함축·어휘)", dd / "summary.pdf",
+                          dict(only_summary=True)))
+        if has_test:
+            specs.append(("단어 테스트", dd / "test.pdf", dict(only_test=True)))
+            specs.append(("정답", dd / "answer.pdf", dict(only_answer=True)))
+        if make_student:
+            specs.append(("학생용 (빈칸)", dd / "student.pdf",
+                          dict(density=density, student=True, slevel=slevel,
+                               only_front=True)))
+        if has_source:
+            specs.append(("원문", dd / "source.pdf", dict(only_source=True)))
+
+        sections: list[tuple[str, Path, int]] = []
+        for label, path, kw in specs:
+            render_worksheet(analyses, path, layout=layout, footer_note=footer_note,
+                             include_guide=False, boxmode=boxmode, **kw)
+            n = _pages(path)
+            if n > 0:
+                sections.append((label, path, n))
+
+        # ── 목차: 가이드 다음 페이지부터 각 섹션 시작 페이지 계산(가이드 길이 G 반영) ──
+        def _build_toc(guide_pages: int) -> list[dict]:
+            toc, pg = [], guide_pages + 1
+            for label, _p, n in sections:
+                toc.append({"label": label, "page": pg})
+                pg += n
+            return toc
+
+        gp = dd / "guide.pdf"
+        # 가이드는 보통 1페이지 — 우선 1페이지 가정으로 목차를 넣어 렌더한 뒤 실제 길이 확인.
+        render_worksheet(analyses, gp, layout=layout, footer_note=footer_note,
+                         include_guide=True, only_guide=True, toc=_build_toc(1))
+        real_g = _pages(gp)
+        if real_g != 1:                    # 가이드가 2페이지 이상이면 목차 페이지 재계산
+            render_worksheet(analyses, gp, layout=layout, footer_note=footer_note,
+                             include_guide=True, only_guide=True,
+                             toc=_build_toc(real_g))
+
         w = PdfWriter()
-        w.append(str(tp))                   # 교사용
-        w.append(str(sp))                   # 학생용
-        _append_test(w, d)                  # 단어 TEST(학생용 뒤 1회)
-        _append_answer(w, d)                # 정답(맨 마지막)
+        w.append(str(gp))
+        for _label, path, _n in sections:
+            w.append(str(path))
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             w.write(f)
