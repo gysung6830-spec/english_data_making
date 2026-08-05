@@ -407,8 +407,70 @@ def render_analysis_pdf(reports, out_path: str | Path, footer_note: str = "",
 # ---------------------------------------------------------------------------
 # 어휘 리스트 / 영단어 시험지 (직독직해 오른쪽 열 단어들 기반)
 # ---------------------------------------------------------------------------
+# 중·고등 수준 어휘만 어휘 리스트/시험지에 담기 위해, 초등 수준의 매우 기초적인
+# 단어(기능어·기본 동사/명사/형용사·문법성 숙어)는 제외한다. (직독직해 본문의
+# 문장별 단어 풀이에는 영향을 주지 않고, 어휘 리스트·시험지 수집에만 적용)
+_EASY_WORDS = {
+    # 관사·대명사·접속사·전치사 등 기능어
+    "a", "an", "the", "and", "or", "but", "so", "if", "as", "of", "to", "in",
+    "on", "at", "by", "for", "with", "from", "into", "onto", "than", "then",
+    "that", "this", "these", "those", "it", "its", "they", "them", "their",
+    "theirs", "we", "us", "our", "ours", "you", "your", "yours", "he", "him",
+    "his", "she", "her", "hers", "who", "whom", "whose", "which", "what",
+    "when", "where", "why", "how", "not", "no", "yes", "all", "any", "some",
+    "each", "every", "both", "either", "neither", "one", "two", "three",
+    "up", "down", "out", "off", "over", "under", "again", "here", "there",
+    "now", "well", "very", "just", "also", "too", "even", "still", "back",
+    "more", "most", "much", "many", "few", "less", "least", "own", "same",
+    "other", "another", "such", "only", "about",
+    # 기본 동사
+    "be", "am", "is", "are", "was", "were", "been", "being", "do", "does",
+    "did", "done", "have", "has", "had", "get", "got", "go", "goes", "went",
+    "gone", "make", "made", "take", "took", "taken", "come", "came", "see",
+    "saw", "seen", "know", "knew", "known", "think", "thought", "want",
+    "use", "used", "find", "found", "give", "gave", "given", "tell", "told",
+    "say", "said", "become", "became", "change", "follow", "keep", "kept",
+    "let", "put", "run", "ran", "bring", "brought", "form", "help", "hold",
+    "held", "close", "call", "ask", "work", "need", "feel", "felt", "look",
+    "seem", "turn", "show", "shown", "mean", "meant", "live", "play", "move",
+    "like", "start", "try", "leave", "left", "begin", "began", "add", "open",
+    "read", "write", "wrote", "hear", "heard", "talk", "walk", "meet", "met",
+    "send", "sent", "buy", "bought", "pay", "paid", "wait", "speak", "stop",
+    # 기본 명사
+    "thing", "things", "way", "ways", "day", "days", "time", "times", "year",
+    "years", "week", "month", "people", "person", "man", "men", "woman",
+    "women", "child", "children", "kid", "part", "parts", "place", "places",
+    "world", "home", "house", "hand", "hands", "eye", "eyes", "word", "words",
+    "name", "names", "number", "numbers", "kind", "side", "life", "phone",
+    "computer", "message", "messages", "media", "water", "food", "book",
+    "books", "school", "friend", "friends", "family", "room", "car", "city",
+    "country", "hour", "minute", "night", "morning", "boy", "girl", "head",
+    "heart", "mind", "body", "story", "idea", "ideas", "problem", "problems",
+    "group", "point", "fact", "area", "case", "question", "reason", "reasons",
+    "mood", "tablet", "rule", "rate", "means", "post",
+    # 기본 형용사·부사
+    "good", "bad", "big", "small", "large", "little", "new", "old", "high",
+    "low", "long", "short", "tall", "hot", "cold", "warm", "easy", "hard",
+    "fast", "slow", "early", "late", "right", "wrong", "true", "real", "sure",
+    "able", "ready", "full", "free", "best", "better", "worse", "worst",
+    "happy", "sad", "nice", "great", "next", "last", "first", "main",
+    "public", "private",
+    # 문법성·기초 숙어 (학습 가치가 낮은 것만)
+    "the number of", "be able to", "be told", "be spent on", "a lot of",
+    "kind of", "sort of", "make up",
+}
+
+
+def _is_easy_word(word: str) -> bool:
+    """어휘 리스트/시험지에서 제외할 '너무 쉬운' 단어인지 판단."""
+    return word.strip().lower() in _EASY_WORDS
+
+
 def _collect_words_one(report) -> list[dict]:
-    """한 지문(report)의 직독직해 chunk words 를 순서대로 모으고 중복 제거."""
+    """한 지문(report)의 직독직해 chunk words 를 순서대로 모으고 중복 제거.
+
+    중·고등 수준 어휘만 남기도록 초등 수준의 기초 단어는 제외한다.
+    """
     seen: dict[str, dict] = {}
     order: list[str] = []
     for s in report.literal.sentences:
@@ -417,6 +479,8 @@ def _collect_words_one(report) -> list[dict]:
                 word = (w.word or "").strip()
                 meaning = (w.meaning or "").strip()
                 if not word:
+                    continue
+                if _is_easy_word(word):
                     continue
                 key = word.lower()
                 if key not in seen:

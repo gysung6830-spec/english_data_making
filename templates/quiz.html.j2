@@ -2,6 +2,7 @@
 <html lang="ko">
 <head><meta charset="utf-8"><title>영단어 시험지</title></head>
 <body>
+  {# 배치: 지문1 문제 → 지문2 문제 → … → 지문1 답 → 지문2 답 → … #}
   {% for pg in passages %}
   <div class="wl-passage{{ ' pgbreak' if not loop.first }}">
     <div class="doc-header">
@@ -31,19 +32,23 @@
       {% endfor %}
       </tbody>
     </table>
-
-    <div class="answer-key pgbreak">
-      <div class="ak-title">정답 (Answer Key){% if pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
-      <div class="ak-list">
-        {% for w in pg.words %}<span class="ak-item"><b>{{ w.no }}.</b> {{ w.word }} — {{ w.meaning }}</span>{% endfor %}
-      </div>
-    </div>
     {% else %}
     <div class="wl-empty">직독직해에서 수집된 핵심 어휘가 없습니다.</div>
     {% endif %}
 
     {% if footer_note %}<div class="footer-note">{{ footer_note }}</div>{% endif %}
   </div>
+  {% endfor %}
+
+  {% for pg in passages %}
+  {% if pg.words %}
+  <div class="answer-key pgbreak">
+    <div class="ak-title">정답 (Answer Key){% if pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
+    <div class="ak-list">
+      {% for w in pg.words %}<span class="ak-item"><b>{{ w.no }}.</b> {{ w.word }} — {{ w.meaning }}</span>{% endfor %}
+    </div>
+  </div>
+  {% endif %}
   {% endfor %}
 </body>
 </html>

@@ -413,6 +413,8 @@ table.lit2 td {
 .wl-empty { margin-top: 14px; color: var(--muted); font-size: 11px; }
 /* 지문별/정답 페이지 구분 */
 .pgbreak { break-before: page; }
+/* 어휘 리스트: 페이지 나눔 없이 지문을 몰아서 이어붙일 때 지문 간 간격 */
+.wl-gap { margin-top: 20px; }
 
 /* 시험지: 뜻 쓰는 빈칸 */
 .q-blank { min-height: 20px; }

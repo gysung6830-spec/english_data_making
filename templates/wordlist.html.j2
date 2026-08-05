@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><title>핵심 어휘 리스트</title></head>
 <body>
   {% for pg in passages %}
-  <div class="wl-passage{{ ' pgbreak' if not loop.first }}">
+  <div class="wl-passage{{ ' wl-gap' if not loop.first }}">
     <div class="doc-header">
       <span class="doc-badge">Word List</span>
       {% if pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
