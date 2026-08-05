@@ -357,14 +357,14 @@ def _render_document(reports, footer_note, brand, student, fit_pages, min_vocab,
                            student=student, source_label=source_label)
         return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=[css])
 
-    # 분석지 부분만으로 페이지 판정(앞의 원문+해석 모음은 제외)
+    # 분석지 부분만으로 페이지 판정
     if fit_pages:
         analysis = build(rlist, with_source=False)
         if len(analysis.pages) > 2 * len(rlist):
             rlist = [_fit_report(r, footer_note, css, min_vocab, brand, student, source_label)
                      for r in rlist]
-    # 최종 출력은 원문+해석 모음 포함
-    return build(rlist, with_source=True)
+    # 원문·전체해석 모음은 제외하고 분석지만 출력
+    return build(rlist, with_source=False)
 
 
 def render_pdf(reports, out_path: str | Path, footer_note: str = "",
