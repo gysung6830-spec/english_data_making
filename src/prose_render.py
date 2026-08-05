@@ -160,6 +160,18 @@ def _vocab_template_lossy(en: str, template: str, items) -> bool:
     return any(len(w) >= 4 and w not in have for w in words(en))
 
 
+def _ref_template_lossy(en: str, template: str) -> bool:
+    """지칭 template 은 원문(en)에 {{Pn}} 만 '삽입'하므로 en 의 모든 단어를 담아야 한다.
+
+    대명사를 지우고 {{Pn}} 으로 대체했거나(대명사 소실), 명사(예: 'technologies')가 누락되는 등
+    원문 단어가 사라지면 True. 지칭은 원문 그대로(어형 변화 없음)라 2글자 이상 단어를 모두 본다.
+    """
+    import re
+    words = lambda t: [w.lower() for w in re.findall(r"[A-Za-z]+", t)]
+    have = set(words(re.sub(r"\{\{\s*\w+\s*\}\}", " ", template)))
+    return any(len(w) >= 2 and w not in have for w in words(en))
+
+
 def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                write: bool, tkey: str, ikey: str) -> ProseWorksheet:
     sents: list[PSentence] = []
@@ -192,6 +204,11 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             pitems = [it for it in pitems
                       if _ref_answer_in_display(it.answer, it.display)
                       and _ref_candidates_clean(it.display)]
+            # 안전장치: 지칭은 원문에 {{Pn}} 만 삽입해야 하는데 원문 단어가 사라졌으면
+            #   (대명사 소실·명사 누락) 문항을 버리고 원문(en)을 그대로 보여 준다.
+            if pitems and _ref_template_lossy(s.en, template):
+                template = s.en
+                pitems = []
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
 

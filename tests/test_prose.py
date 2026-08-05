@@ -98,6 +98,26 @@ def test_ref_safeguard():
     r3 = next(w for w in pr.build_prose_pack(ko_mixed, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "ref")
     _check("한글 보기 혼입 문항 제외", len(r3.sentences[0].items) == 0)
+    # 지칭 template 에서 원문 단어가 사라지면(대명사/명사 누락) 원문 복구 + 문항 제외
+    en = "Users of these technologies have posted many messages."
+    lost = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en=en, ko="라",
+        ref_template="Users of these {{P1}} have posted many messages.",   # technologies 소실
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ technologies / messages / users ]",
+                                   answer="technologies")])])
+    r4 = next(w for w in pr.build_prose_pack(lost, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref")
+    _check("지칭 단어 소실 → 원문 복구+문항 제외",
+           r4.sentences[0].template == en and len(r4.sentences[0].items) == 0)
+    # 정상 지칭(대명사 유지 + {{Pn}} 삽입)은 유지
+    ok2 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="Designers who resist it repeat the same mistakes.", ko="마",
+        ref_template="Designers who resist it {{P1}} repeat the same mistakes.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ early feedback / mistakes / designers ]",
+                                   answer="early feedback")])])
+    r5 = next(w for w in pr.build_prose_pack(ok2, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref")
+    _check("정상 지칭 문항 유지", len(r5.sentences[0].items) == 1)
 
 
 def test_corrupt_template_falls_back_to_en():
