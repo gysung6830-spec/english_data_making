@@ -72,10 +72,17 @@ npm run preview   # output/output_v4_preview.pdf (Chromium 인쇄)
 로 렌더해 다운로드 링크를 준다.
 
 ```bash
-cp .env.example .env         # ANTHROPIC_API_KEY=sk-... 채우기
-npm install                  # express·multer·@anthropic-ai/sdk·pdf-parse 설치
-npm run web                  # http://localhost:3000
+npm install                  # 최초 1회
+npm run web                  # http://localhost:3000 (브라우저 자동 열림)
 ```
+
+- **가장 쉬운 실행(더블클릭)**: Windows `필생보_실행.bat` / Mac `필생보_실행_Mac.command`
+  를 더블클릭하면 (필요 시) 설치 후 서버가 켜지고 브라우저가 자동으로 열린다.
+- **API 키**: 웹 화면의 입력칸에 붙여넣으면 그 요청에만 사용(브라우저 로컬 저장, 외부 전송 없음).
+  키가 없으면 MOCK(형식만). `.env` 의 `ANTHROPIC_API_KEY` 로도 지정 가능.
+- **대량 지문 처리**: 문장이 많으면(WORKBOOK 등) 한 번에 다 보내면 출력이 잘리므로,
+  `src/ai.js` 가 **① 지문 경계만 싸게 나누고 → ② 지문별로 나눠 생성(동시 3개)** 한 뒤 합친다
+  (한 호출당 최대 ~12문장). 그래서 "Unexpected end of JSON input"(잘림)이 안 난다.
 
 **웹앱 교재 제목: 「필생보 — 필자의 생각이 보이는 영어독해」.** 목표는 구문해석을 넘어
 `소재 → 필자 주장(긍정·부정) → 글 구조 → 재진술(같은 말)` 을 잡는 독해 훈련이다.

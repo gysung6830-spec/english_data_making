@@ -51,7 +51,10 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ ok: false, error: 'PDF 파일이 없어요.' });
 
-    log(`업로드 받음: ${req.file.originalname} (${(req.file.size / 1024).toFixed(0)}KB)`);
+    // 한글 파일명이 latin1 로 들어오는 경우 복원
+    let fileName = req.file.originalname;
+    try { fileName = Buffer.from(fileName, 'latin1').toString('utf8'); } catch (_) { /* 그대로 */ }
+    log(`업로드 받음: ${fileName} (${(req.file.size / 1024).toFixed(0)}KB)`);
 
     // 2) 문장 추출
     const { sentences } = await extractSentences(req.file.buffer);
@@ -60,8 +63,11 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
       return res.status(422).json({ ok: false, error: '영어 문장을 충분히 찾지 못했어요. 텍스트가 들어있는 PDF 인지 확인해 주세요.', steps });
     }
 
-    // 3) AI 구조화 — 지문(passage) 단위. 문장 원문 순서 유지 + 지문 요지.
-    const { passages, mode } = await structurePassages(sentences);
+    // 3) AI 구조화 — 지문(passage) 단위. 대량이면 지문별로 나눠 생성(잘림 방지).
+    //    웹에서 입력한 API 키(있으면)를 그 요청에만 사용. (로그·저장 안 함)
+    const apiKey = (req.body && req.body.apiKey ? String(req.body.apiKey).trim() : '') || undefined;
+    if (apiKey) log('API 키 확인 — 실제 AI 로 생성 (지문이 많으면 몇 분 걸릴 수 있어요)');
+    const { passages, mode } = await structurePassages(sentences, { apiKey, onProgress: log });
     log(`지문 데이터 생성 (${mode === 'mock' ? 'MOCK — API 키 없음' : 'Claude AI'}) · 지문 ${passages.length}개`);
     if (!passages.length) {
       return res.status(422).json({ ok: false, error: '지문으로 구성할 문장이 부족했어요.', steps });
@@ -100,16 +106,47 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
     return res.json({ ok: true, mode, passages: passages.length, sentences: sentences.length, steps, files });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ ok: false, error: err.message || '서버 오류', steps });
+    let msg = err.message || '서버 오류';
+    const status = err.status || err.statusCode;
+    if (status === 401) msg = 'Claude API 키가 올바르지 않아요. 키를 다시 확인해 주세요.';
+    else if (status === 403) msg = '이 키로는 접근 권한이 없어요. (결제/권한 확인)';
+    else if (status === 404) msg = '모델을 찾을 수 없어요. 키에 해당 모델(claude-opus-5) 권한이 있는지 확인해 주세요.';
+    else if (status === 429) msg = '요청이 많아 잠시 후 다시 시도해 주세요 (rate limit).';
+    else if (status === 529) msg = 'AI 서버가 혼잡해요. 잠시 후 다시 시도해 주세요.';
+    else if (/Unexpected end of JSON|Unexpected token|JSON/i.test(msg)) msg = 'AI 응답이 잘렸어요. 다시 시도하거나 더 짧은 PDF 로 나눠서 올려 주세요.';
+    return res.status(500).json({ ok: false, error: msg, steps });
   }
+});
+
+// 미들웨어(multer 등) 에러를 JSON 으로 — 프런트가 이유를 볼 수 있게
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  let msg = err.message || '요청 오류';
+  if (err.code === 'LIMIT_FILE_SIZE') msg = 'PDF 가 너무 커요 (최대 30MB).';
+  return res.status(400).json({ ok: false, error: msg });
 });
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, hasKey: !!process.env.ANTHROPIC_API_KEY, model: process.env.ANTHROPIC_MODEL || 'claude-opus-5' });
 });
 
+// 서버가 준비되면 기본 브라우저를 자동으로 연다(더블클릭 실행 편의). NO_OPEN=1 이면 끔.
+function openBrowser(url) {
+  if (process.env.NO_OPEN) return;
+  try {
+    const { exec } = require('child_process');
+    const cmd = process.platform === 'win32' ? `start "" "${url}"`
+      : process.platform === 'darwin' ? `open "${url}"` : `xdg-open "${url}"`;
+    exec(cmd, () => {});
+  } catch (_) { /* 무시 */ }
+}
+
 app.listen(PORT, () => {
-  const key = process.env.ANTHROPIC_API_KEY ? '있음(실 AI)' : '없음(MOCK 폴백)';
-  console.log(`\n📘 필생보 교재 생성 웹앱: http://localhost:${PORT}`);
-  console.log(`   ANTHROPIC_API_KEY: ${key} · 모델: ${process.env.ANTHROPIC_MODEL || 'claude-opus-5'}\n`);
+  const url = `http://localhost:${PORT}`;
+  console.log(`\n📘 필생보 교재 생성 웹앱이 켜졌어요 → ${url}`);
+  console.log('   브라우저가 자동으로 열립니다. (안 열리면 위 주소를 직접 입력)');
+  console.log('   이 창을 닫으면 웹앱도 꺼집니다. 끄려면 Ctrl + C.\n');
+  console.log('   API 키: 웹 화면의 입력칸에 붙여넣으면 실제 AI 로 생성 (비우면 MOCK).\n');
+  openBrowser(url);
 });

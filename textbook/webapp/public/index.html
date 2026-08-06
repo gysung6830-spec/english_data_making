@@ -15,19 +15,39 @@
   .badge { display:inline-block; background:var(--green); color:#fff; font-weight:700;
     font-size:12px; padding:4px 12px; border-radius:20px; margin-bottom:14px; }
   .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:18px; }
-  .drop { border:2px dashed #bcd8c2; border-radius:12px; background:var(--mint); text-align:center;
-    padding:38px 20px; cursor:pointer; transition:.15s; }
+
+  /* API 키 입력 */
+  .field { margin-bottom:18px; }
+  .field label { display:block; font-weight:700; font-size:14px; margin-bottom:7px; }
+  .field .opt { color:var(--sub); font-weight:400; font-size:12.5px; }
+  .keybox { display:flex; gap:8px; }
+  .keybox input { flex:1; min-width:0; padding:11px 12px; border:1px solid var(--line);
+    border-radius:9px; font-size:14px; font-family:inherit; }
+  .keybox input:focus { outline:none; border-color:var(--green); }
+  .keybox .toggle { flex:none; width:auto; margin:0; border:1px solid var(--line); background:#fff;
+    border-radius:9px; padding:0 14px; cursor:pointer; font-size:12.5px; font-weight:700; color:var(--sub); }
+  .keyhelp { color:var(--sub); font-size:12px; margin-top:7px; }
+  .keyhelp a { color:var(--green); }
+
+  /* 드롭 존 */
+  .drop { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+    width:100%; min-height:150px; border:2px dashed #bcd8c2; border-radius:12px; background:var(--mint);
+    text-align:center; padding:24px 20px; cursor:pointer; transition:.15s; }
   .drop.drag { background:#dcefe0; border-color:var(--green); }
-  .drop b { color:var(--greenD); }
-  .drop small { color:var(--sub); display:block; margin-top:6px; }
+  .drop .di { font-size:28px; line-height:1; }
+  .drop .dt { display:block; color:var(--greenD); font-size:16px; font-weight:800; }
+  .drop .ds { display:block; color:var(--sub); font-size:12.5px; }
+  .fname { margin-top:4px; font-size:13.5px; color:var(--greenD); font-weight:700; word-break:break-all; }
   #file { display:none; }
-  .fname { margin-top:12px; font-size:14px; color:var(--greenD); font-weight:700; }
+
   button { width:100%; margin-top:16px; background:var(--green); color:#fff; border:0; border-radius:10px;
     padding:14px; font-size:16px; font-weight:800; cursor:pointer; font-family:inherit; }
   button:disabled { background:#a9c9b1; cursor:default; }
   .steps { font-size:13px; color:#374151; }
   .steps div { padding:5px 0; border-bottom:1px solid #f0f0f0; }
+  .steps div:last-child { border-bottom:0; }
   .steps div:before { content:"›"; color:var(--green); font-weight:800; margin-right:8px; }
+  .result h3 { margin:0 0 10px; }
   .result a { display:inline-block; background:var(--greenD); color:#fff; text-decoration:none;
     padding:10px 18px; border-radius:8px; font-weight:700; margin:6px 10px 0 0; }
   .err { color:#b3261e; font-weight:700; }
@@ -48,47 +68,57 @@
 
   <div class="card">
     <form id="form">
-      <label class="drop" id="drop">
-        <b>📄 PDF 를 여기에 놓거나 클릭해서 선택</b>
-        <small>수능/평가원 WORKBOOK · 모의고사 지문 PDF (최대 30MB)</small>
-        <input type="file" id="file" name="pdf" accept="application/pdf,.pdf">
-        <div class="fname hide" id="fname"></div>
-      </label>
+      <!-- API 키 -->
+      <div class="field">
+        <label for="apikey">🔑 Claude API 키 <span class="opt">(선택 — 넣으면 실제 AI, 비우면 형식만 MOCK)</span></label>
+        <div class="keybox">
+          <input type="password" id="apikey" placeholder="sk-ant-..." autocomplete="off" spellcheck="false">
+          <button type="button" class="toggle" id="toggleKey">보기</button>
+        </div>
+        <div class="keyhelp">키는 <b>이 브라우저에만 저장</b>되고, 교재 만들 때 내 컴퓨터의 로컬 서버로만 전달돼(외부 전송 없음). <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">API 키 발급받기 ↗</a></div>
+      </div>
+
+      <!-- PDF 드롭 -->
+      <div class="field">
+        <label>📄 지문 PDF</label>
+        <label class="drop" id="drop">
+          <span class="di">📄</span>
+          <span class="dt">PDF 를 여기에 끌어다 놓거나 클릭해서 선택</span>
+          <span class="ds">수능/평가원 WORKBOOK · 모의고사 지문 PDF (최대 30MB)</span>
+          <input type="file" id="file" name="pdf" accept="application/pdf,.pdf">
+          <div class="fname hide" id="fname"></div>
+        </label>
+      </div>
+
       <button type="submit" id="go" disabled>교재 만들기</button>
     </form>
   </div>
 
-  <div class="card hide" id="progress">
-    <div class="steps" id="steps"></div>
-  </div>
-
+  <div class="card hide" id="progress"><div class="steps" id="steps"></div></div>
   <div class="card hide result" id="result"></div>
-
   <p class="muted" id="mode"></p>
 </div>
 
 <script>
-const fileInput = document.getElementById('file');
-const drop = document.getElementById('drop');
-const fname = document.getElementById('fname');
-const go = document.getElementById('go');
-const form = document.getElementById('form');
-const progress = document.getElementById('progress');
-const stepsEl = document.getElementById('steps');
-const result = document.getElementById('result');
+const $ = (id) => document.getElementById(id);
+const fileInput = $('file'), drop = $('drop'), fname = $('fname'), go = $('go');
+const form = $('form'), progress = $('progress'), stepsEl = $('steps'), result = $('result');
+const apikey = $('apikey'), modeEl = $('mode');
 
-fetch('/api/health').then((r) => r.json()).then((h) => {
-  document.getElementById('mode').textContent = h.hasKey
-    ? `AI 모드: Claude(${h.model}) 로 생성합니다.`
-    : `현재 API 키가 없어 MOCK(형식만) 으로 동작합니다. .env 에 ANTHROPIC_API_KEY 를 넣으면 실제 AI 가 작동해요.`;
-}).catch(() => {});
-
-function setFile(f) {
-  if (!f) return;
-  fname.textContent = '선택됨: ' + f.name;
-  fname.classList.remove('hide');
-  go.disabled = false;
+// API 키 저장/복원 (이 브라우저 로컬)
+apikey.value = localStorage.getItem('pilsaengbo_key') || '';
+apikey.addEventListener('input', () => { localStorage.setItem('pilsaengbo_key', apikey.value.trim()); updateMode(); });
+$('toggleKey').addEventListener('click', () => {
+  const on = apikey.type === 'password'; apikey.type = on ? 'text' : 'password'; $('toggleKey').textContent = on ? '숨김' : '보기';
+});
+function updateMode() {
+  modeEl.textContent = apikey.value.trim()
+    ? 'AI 모드: 입력한 Claude 키로 실제 해석·분석을 생성합니다.'
+    : 'MOCK 모드: 키가 비어 있어 형식만 만듭니다. 위에 키를 넣으면 실제 AI 로 생성돼요.';
 }
+updateMode();
+
+function setFile(f) { if (!f) return; fname.textContent = '선택됨: ' + f.name; fname.classList.remove('hide'); go.disabled = false; }
 fileInput.addEventListener('change', () => setFile(fileInput.files[0]));
 ['dragover', 'dragenter'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.add('drag'); }));
 ['dragleave', 'drop'].forEach((e) => drop.addEventListener(e, (ev) => { ev.preventDefault(); drop.classList.remove('drag'); }));
@@ -97,29 +127,26 @@ drop.addEventListener('drop', (ev) => { const f = ev.dataTransfer.files[0]; if (
 form.addEventListener('submit', async (ev) => {
   ev.preventDefault();
   if (!fileInput.files[0]) return;
-  go.disabled = true;
-  result.classList.add('hide');
-  progress.classList.remove('hide');
-  stepsEl.innerHTML = '<div><span class="spin"></span>업로드하고 AI 가 교재를 만드는 중… (수십 초 걸릴 수 있어요)</div>';
+  go.disabled = true; result.classList.add('hide'); progress.classList.remove('hide');
+  stepsEl.innerHTML = '<div><span class="spin"></span>업로드하고 교재를 만드는 중… (지문이 많으면 몇 분 걸릴 수 있어요)</div>';
 
   const fd = new FormData();
   fd.append('pdf', fileInput.files[0]);
+  if (apikey.value.trim()) fd.append('apiKey', apikey.value.trim());
   try {
     const r = await fetch('/api/generate', { method: 'POST', body: fd });
     const data = await r.json();
     stepsEl.innerHTML = (data.steps || []).map((s) => `<div>${s}</div>`).join('') || '';
     if (!data.ok) {
-      result.innerHTML = `<p class="err">⚠️ ${data.error}</p>` +
-        (data.detail ? `<p class="muted">${data.detail.slice(0, 8).join('<br>')}</p>` : '');
+      result.innerHTML = `<p class="err">⚠️ ${data.error}</p>` + (data.detail ? `<p class="muted">${data.detail.slice(0, 8).join('<br>')}</p>` : '');
     } else {
       result.innerHTML = `<h3>✅ 완성! (지문 ${data.passages}개 · 문장 ${data.sentences}개 · ${data.mode === 'mock' ? 'MOCK' : 'AI'})</h3>` +
         data.files.map((f) => `<a href="${f.url}" download>${f.label} 다운로드</a>`).join('');
     }
   } catch (e) {
-    result.innerHTML = `<p class="err">⚠️ 요청 실패: ${e.message}</p>`;
+    result.innerHTML = `<p class="err">⚠️ 요청 실패: ${e.message}. 서버(검은 창)가 켜져 있는지 확인해줘.</p>`;
   } finally {
-    result.classList.remove('hide');
-    go.disabled = false;
+    result.classList.remove('hide'); go.disabled = false;
   }
 });
 </script>

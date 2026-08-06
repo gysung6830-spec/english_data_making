@@ -382,9 +382,9 @@ function normalizePassages(aiData) {
   }));
 }
 
-async function callClaudePassages(sentences) {
+async function callClaudePassages(sentences, apiKey) {
   const Anthropic = require('@anthropic-ai/sdk');
-  const client = new Anthropic();
+  const client = new Anthropic(apiKey ? { apiKey } : undefined);
   const stream = client.messages.stream({
     model: DEFAULT_MODEL,
     max_tokens: 32000,
@@ -396,6 +396,67 @@ async function callClaudePassages(sentences) {
   const final = await stream.finalMessage();
   const text = final.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
   return JSON.parse(text);
+}
+
+// ── 대량 처리: 한 번에 다 보내면 출력이 토큰 한도를 넘어 JSON 이 잘린다.
+//    그래서 (1) 지문 경계만 싸게 나누고 (2) 지문별로 따로 생성해 합친다. ──
+const MAX_PER_CALL = 12; // 한 생성 호출이 다루는 최대 문장 수(잘림 방지 안전선)
+const GEN_CONCURRENCY = 3; // 동시 생성 호출 수(레이트리밋 여유)
+
+// 지정 동시성으로 순서를 보존하며 매핑
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  const worker = async () => {
+    while (i < items.length) { const idx = i; i += 1; out[idx] = await fn(items[idx], idx); }
+  };
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return out;
+}
+
+// [start,end](1-based) 그룹이 MAX_PER_CALL 을 넘으면 잘게 쪼갠다.
+function splitLargeGroups(groups) {
+  const out = [];
+  groups.forEach(([a, b]) => {
+    for (let s = a; s <= b; s += MAX_PER_CALL) out.push([s, Math.min(b, s + MAX_PER_CALL - 1)]);
+  });
+  return out;
+}
+
+// 문장이 적으면 통짜, 실패 시 폴백용 균등 분할
+function evenGroups(n, size) {
+  const g = [];
+  for (let s = 1; s <= n; s += size) g.push([s, Math.min(n, s + size - 1)]);
+  return g;
+}
+
+// Phase 1: 지문 경계 나누기 (작은 출력 → 잘리지 않음)
+async function segmentPassages(sentences, apiKey) {
+  if (sentences.length <= MAX_PER_CALL) return [[1, sentences.length]];
+  const Anthropic = require('@anthropic-ai/sdk');
+  const client = new Anthropic(apiKey ? { apiKey } : undefined);
+  const N = sentences.length;
+  const list = sentences.map((s, i) => `${i + 1}. ${s}`).join('\n');
+  const schema = {
+    type: 'object', additionalProperties: false, required: ['starts'],
+    properties: { starts: { type: 'array', items: { type: 'integer' } } },
+  };
+  const sys = '너는 영어 문장 목록을 원래 지문(passage) 단위로 나누는 편집자야. '
+    + '문장은 원문 순서야. 내용 흐름(주제 전환, 편지/이야기/설명문 등)을 보고 '
+    + '각 지문이 "시작하는 문장 번호"만 오름차순으로 돌려줘(첫 지문은 1). 한 지문은 보통 4~10문장이야.';
+  const stream = client.messages.stream({
+    model: DEFAULT_MODEL, max_tokens: 2000, system: sys,
+    messages: [{ role: 'user', content: `다음 문장들을 지문 단위로 나눠, 각 지문 시작 문장 번호를 starts 로 줘.\n\n${list}` }],
+    output_config: { format: { type: 'json_schema', schema } },
+  });
+  const final = await stream.finalMessage();
+  const text = final.content.filter((b) => b.type === 'text').map((b) => b.text).join('');
+  let starts = [];
+  try { starts = (JSON.parse(text).starts || []).filter((x) => Number.isInteger(x) && x >= 1 && x <= N); } catch (_) { /* 폴백 */ }
+  starts = [...new Set([1, ...starts])].sort((a, b) => a - b);
+  if (starts.length < 1) return evenGroups(N, 8);
+  // 시작번호만으로 [1..N] 을 빈틈없이 타일링
+  return starts.map((s, i) => [s, i + 1 < starts.length ? starts[i + 1] - 1 : N]);
 }
 
 // MOCK: 원문 순서를 지문 단위로 (문장 많으면 ~8개씩 분할). 문법은 point 태그로.
@@ -441,11 +502,40 @@ function mockPassages(sentences) {
 
 // 진입점: sentences(원문 순서) → { passages, mode }
 async function structurePassages(sentences, opts = {}) {
-  const useMock = opts.mock || process.env.ANTHROPIC_MOCK === '1' || !process.env.ANTHROPIC_API_KEY;
+  // 웹에서 넘어온 키(opts.apiKey) 우선, 없으면 환경변수.
+  const apiKey = opts.apiKey || process.env.ANTHROPIC_API_KEY;
+  const useMock = opts.mock || process.env.ANTHROPIC_MOCK === '1' || !apiKey;
   // mockPassages 는 이미 내부(튜플) 스키마이므로 normalize 를 거치지 않는다.
   if (useMock) return { passages: mockPassages(sentences).passages, mode: 'mock' };
-  const aiData = await callClaudePassages(sentences);
-  return { passages: normalizePassages(aiData), mode: 'ai' };
+
+  const onProgress = typeof opts.onProgress === 'function' ? opts.onProgress : () => {};
+
+  // 1) 지문 경계 나누기 (작은 출력) → 각 그룹이 너무 크면 잘게 쪼갠다(잘림 방지)
+  let groups = await segmentPassages(sentences, apiKey);
+  groups = splitLargeGroups(groups).filter(([a, b]) => a <= b);
+  onProgress(`지문 ${groups.length}개로 나눔 — 지문별로 생성 시작`);
+
+  // 2) 지문별 생성(동시성 제한). 한 지문이 실패해도 나머지는 살린다.
+  let done = 0;
+  const results = await mapLimit(groups, GEN_CONCURRENCY, async ([a, b]) => {
+    const sub = sentences.slice(a - 1, b);
+    try {
+      const aiData = await callClaudePassages(sub, apiKey);
+      const norm = normalizePassages(aiData);
+      done += 1; onProgress(`지문 생성 ${done}/${groups.length} 완료`);
+      return norm;
+    } catch (e) {
+      // 키·모델·권한 문제(401/403/404)는 전체 공통 원인 → 건너뛰지 말고 바로 알림
+      const st = e.status || e.statusCode;
+      if (st === 401 || st === 403 || st === 404) throw e;
+      done += 1; onProgress(`지문 ${done}/${groups.length} 생성 실패(건너뜀): ${e.message}`);
+      return [];
+    }
+  });
+
+  const passages = results.flat();
+  if (!passages.length) throw new Error('모든 지문 생성이 실패했어요. (키·모델 권한·네트워크 확인)');
+  return { passages, mode: 'ai' };
 }
 
 module.exports = {
