@@ -225,7 +225,9 @@ function structureTypesPageParas() {
 function passageAnswerParas(p) {
   const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
   (p.sentences || []).forEach((s, i) => {
-    out.push(B.h3(`${i + 1}. ${s.en}  [${s.src}]`));
+    // src(문항번호)가 짧은 라벨일 때만 표시. AI 가 문장 전체를 넣는 경우는 생략.
+    const tag = s.src && String(s.src).length <= 10 ? `  [${s.src}]` : '';
+    out.push(B.h3(`${i + 1}. ${s.en}${tag}`));
     out.push(...B.chunkBox(s.chunks));
     if (s.catch) out.push(...B.catchBox(s.catch));
   });

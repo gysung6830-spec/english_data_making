@@ -551,10 +551,13 @@ function predictReveal(p) {
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
   let h = secHead(CIRCLED[3], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
-  h += (p.sentences || []).map((s, i) => `<div class="sblock">
-    <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
+  h += (p.sentences || []).map((s, i) => {
+    const tag = s.src && String(s.src).length <= 10 ? `<span class="stag">[${esc(s.src)}]</span>` : '';
+    return `<div class="sblock">
+    <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}${tag}</div>
     ${chunkLines(s.chunks, true)}
-    ${s.catch ? catchCard(s.catch) : ''}</div>`).join('');
+    ${s.catch ? catchCard(s.catch) : ''}</div>`;
+  }).join('');
   return h;
 }
 function passageHtml(p, idx) {

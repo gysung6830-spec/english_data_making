@@ -41,15 +41,17 @@ function stripNoise(text) {
   return text
     .replace(/\r/g, '')
     .replace(/[ \t]+/g, ' ')
-    // 약어의 마침표를 없애 문장 분리 오작동 방지 (5 p.m. → 5 pm, e.g. → eg …)
+    // 1) 각주 번호 먼저 제거 (문장 끝 1) 2) … — 단, (1937) 같은 연도·괄호는 보존).
+    //    p.m. 뒤에 각주가 붙는 경우가 있어(예: "7 p.m.5)"), p.m. 처리보다 먼저 한다.
+    .replace(/(?<![\d(])\d{1,3}\)/g, ' ')
+    .replace(/^\s*\(?\d{1,2}\)?[.)]\s*/gm, '')  // 줄 앞 문항 번호/불릿
+    .replace(/^\s*[①-⑳]\s*/gm, '')
+    // 2) p.m./a.m.: 문장 끝(뒤에 대문자로 새 문장 시작)이면 마침표 1개 보존해 문장 분리 유지,
+    //    그 외(뒤에 콤마·소문자 등 문장 중간)면 마침표를 없애 오분리 방지.
+    .replace(/\b([ap])\.\s*m\.(\s+)(?=["'(]?[A-Z])/gi, '$1m.$2')
     .replace(/\b([ap])\.\s*m\./gi, '$1m ')
     .replace(/\b(Mr|Mrs|Ms|Dr|St|vs|etc|Inc|Jr|Sr|Prof|No)\./g, '$1')
-    .replace(/\be\.g\./gi, 'eg').replace(/\bi\.e\./gi, 'ie').replace(/\bU\.S\./g, 'US')
-    // 각주 번호 제거 (문장 끝의 1) 2) … — 단, (1937) 같은 연도·괄호는 보존)
-    .replace(/(?<![\d(])\d{1,3}\)/g, ' ')
-    // 줄 앞의 문항 번호/불릿 제거
-    .replace(/^\s*\(?\d{1,2}\)?[.)]\s*/gm, '')
-    .replace(/^\s*[①-⑳]\s*/gm, '');
+    .replace(/\be\.g\./gi, 'eg').replace(/\bi\.e\./gi, 'ie').replace(/\bU\.S\./g, 'US');
 }
 
 // 여러 줄에 걸쳐 끊긴 영어 문장을 이어 붙인 뒤, 문장 단위로 분리.
