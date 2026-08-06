@@ -629,6 +629,35 @@ def test_detect_problem_numbers_regex():
     print("PASS  실제 문제 번호(N번 / N번:) 인식")
 
 
+def test_problem_number_range_and_spans():
+    # 범위 표기(장문·순서 유형) '43~45번'·'41 ~ 42번' → 한 라벨로 정규화
+    from src.worksheet.pipeline import _norm_probno, _problem_spans, _merge_passages
+    assert _norm_probno("43~45") == "43~45"
+    assert _norm_probno("41 ~ 42") == "41~42"
+    assert _norm_probno("40-42") == "40~42"
+
+    # 장문(반복 페이지 머리글 'WORKBOOK4'가 본문 중간에 있어도) → '번' 경계로 한 덩어리.
+    raw = ("41~42번 2025년 9월\nWORKBOOK4\nMay I help you are the worst.\n"
+           "WORKBOOK4\nThe four words draw out a response.\n"
+           "43~45번 2025년 9월\nWORKBOOK4\nDave was thirsty that afternoon.\n")
+    spans = _problem_spans(raw)
+    assert [lbl for lbl, _ in spans] == ["41~42", "43~45"], spans
+    # 첫 장문 청크 안에 페이지 머리글이 반복돼도 '쪼개지지 않고' 한 청크로 남는다
+    assert spans[0][1].count("WORKBOOK4") == 2
+    # 단일 문제(경계 1개)면 빈 리스트 → 호출부가 기존 단일 추출로 폴백
+    assert _problem_spans("43~45번 2025년 9월\nWORKBOOK4\nonly one passage.\n") == []
+
+    # _merge_passages: 한 문제에서 쪼개져 나온 조각들을 한 지문으로 병합
+    from src.schemas import Extraction
+    merged = _merge_passages(
+        [Extraction(title="T1", paragraphs=["p1"]), Extraction(title="", paragraphs=["p2"])],
+        "43~45")
+    assert merged is not None and merged.paragraphs == ["p1", "p2"]
+    assert merged.title == "T1"
+    assert _merge_passages([], "x") is None      # 조각 없음 → None(폴백)
+    print("PASS  범위 문제번호 + 문제 단위 분리/병합(장문 보호)")
+
+
 def test_clean_passage_keeps_numbered_sentences():
     # 회귀: 해석연습 WORKBOOK 처럼 지문 문장에 '1. 2.' 번호가 붙으면, 예전엔
     # clean_text 가 그 줄(문장 앞부분)을 통째로 지워 조각만 남았다. 이제 보존해야 함.
@@ -877,6 +906,7 @@ def run_all():
     test_hwp_support()
     test_merge_trailing_punct()
     test_detect_problem_numbers_regex()
+    test_problem_number_range_and_spans()
     test_front_density_render_classes()
     test_student_modes_render()
     test_reading_alignment_detect()

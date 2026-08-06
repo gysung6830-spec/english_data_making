@@ -122,6 +122,7 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     from .. import analyze, extract  # 지연 임포트(pdfplumber/anthropic 무거움)
     from . import quality
 
+    smart_labels: list[str] | None = None
     if extract.is_image(src):
         pset = analyze.extract_passages_image(client, cfg, str(src))
     else:
@@ -129,16 +130,25 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
         empty = extract.looks_empty(raw)
         is_pdf = src.suffix.lower() == ".pdf"
 
-        # 1) 텍스트 경로(비어 있지 않을 때)
         pset = None
-        if not empty:
+        # 0) (신규) 문제번호 단위 추출: 장문(범위 번호)이 반복 페이지머리글로 쪼개지거나,
+        #    지문 수가 많아 일괄 처리 토큰 한도에 걸려 뒤 지문이 통째로 누락되는 것을 막는다.
+        #    문제 경계(≥2)를 못 찾으면 아래 기존 단일 호출로 폴백.
+        if not empty and client is not None:
+            smart = _extract_passages_by_problem(client, cfg, src, max_retries=max_retries)
+            if smart is not None:
+                pset, smart_labels = smart
+
+        # 1) 텍스트 경로(단일 호출) — 스마트 경로가 적용되지 않았을 때만.
+        if pset is None and not empty:
             pset = analyze.extract_passages(client, cfg, raw)
 
         # 2) 텍스트가 비었거나(스캔) 결과가 조각나 보이면 → PDF는 페이지를 이미지로
         #    렌더해 비전으로 재추출(폰트 subset·2단·스캔 등으로 문장 앞부분이 잘리는 경우).
         #    비전은 '문제 파일에만' 조건부(설정 quality.vision_fallback, 기본 켜짐).
+        #    문제 단위 추출이 성공했으면(smart_labels) 그 결과를 신뢰하고 비전 폴백은 건너뛴다.
         vision_on = getattr(getattr(cfg, "quality", None), "vision_fallback", True)
-        if (is_pdf and client is not None and vision_on
+        if (smart_labels is None and is_pdf and client is not None and vision_on
                 and (empty or quality.passages_fragmented(pset))):
             vpset = _extract_via_vision_pdf(client, cfg, src)
             if vpset is not None and (pset is None or not quality.passages_fragmented(vpset)):
@@ -155,7 +165,11 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
     is_b = layout.upper() == "B"
     total = len(pset.passages)
     # 원본에 '31번/32번'처럼 실제 문제 번호가 있으면 지문별 라벨로 사용(순번 31-1 대신).
-    pnums = _detect_problem_numbers(src) if not extract.is_image(src) else []
+    # 문제 단위 추출이 성공했으면 그때 얻은 라벨(지문과 1:1 정렬)을 그대로 쓴다.
+    if smart_labels is not None:
+        pnums = smart_labels
+    else:
+        pnums = _detect_problem_numbers(src) if not extract.is_image(src) else []
     out: list[Analysis] = []
     for i, ex in enumerate(pset.passages, start=1):
         h = header.for_passage(ex, i, total)
@@ -204,6 +218,98 @@ def _detect_problem_numbers(src: Path) -> list[str]:
         if seen:
             return seen
     return []
+
+
+def _problem_spans(raw: str) -> list[tuple[str, str]]:
+    """원문(한글 포함)을 '문제번호 머리글' 경계로 잘라 [(라벨, 청크텍스트), …] 로.
+
+    장문(예: '43~45번')은 페이지 머리글('WORKBOOK4')이 본문 중간에 반복돼도
+    '번' 머리글 기준으로는 한 덩어리로 남는다. 연속으로 같은 번호가 나오면(반복 페이지
+    머리글) 새 경계로 보지 않고 합친다. 머리글이 2개 미만이면 빈 리스트(→ 단일 처리).
+    """
+    for rex in (_PROBNO_COLON, _PROBNO_LINE):
+        marks = [(m.start(), _norm_probno(m.group(1))) for m in rex.finditer(raw)]
+        if len(marks) < 2:
+            continue
+        bounds: list[tuple[int, str]] = []
+        for pos, lbl in marks:
+            if bounds and bounds[-1][1] == lbl:
+                continue              # 같은 문제의 반복 머리글 → 새 경계 아님
+            bounds.append((pos, lbl))
+        if len(bounds) < 2:
+            continue
+        spans: list[tuple[str, str]] = []
+        for i, (pos, lbl) in enumerate(bounds):
+            end = bounds[i + 1][0] if i + 1 < len(bounds) else len(raw)
+            chunk = raw[pos:end].strip()
+            if chunk:
+                spans.append((lbl, chunk))
+        if len(spans) >= 2:
+            return spans
+    return []
+
+
+def _merge_passages(passages, label: str):
+    """한 문제 청크에서 나온 지문 조각들을 '한 지문'으로 병합(문단 이어붙임).
+
+    장문이 페이지 머리글 때문에 여러 개로 쪼개져 나와도 하나로 되돌린다.
+    빈 문단만 있으면 None.
+    """
+    from ..schemas import Extraction
+    paras: list[str] = []
+    title, source = "", ""
+    for p in passages:
+        for para in getattr(p, "paragraphs", []) or []:
+            if para and para.strip():
+                paras.append(para.strip())
+        if not title and getattr(p, "title", ""):
+            title = p.title
+        if not source and getattr(p, "source", ""):
+            source = p.source
+    if not paras:
+        return None
+    return Extraction(title=title or "Untitled", source=source, paragraphs=paras)
+
+
+def _extract_passages_by_problem(client, cfg, src: Path, max_retries: int = 1):
+    """문제번호 단위로 나눠 각각 추출 → '문제당 한 지문'으로 병합.
+
+    장문이 쪼개지거나(반복 페이지 머리글) 전체 일괄 처리의 토큰 한도로 뒤 지문이
+    누락되는 것을 막는다. 경계를 못 찾거나 실패하면 None(→ 호출부가 기존 단일 호출로 폴백).
+    반환: (PassageSet, labels) | None
+    """
+    from .. import analyze, extract
+    from ..schemas import PassageSet
+    try:
+        rawh = (extract.extract_hwp_text(src) if extract.is_hwp(src)
+                else extract.extract_raw_text(src))
+    except Exception:
+        return None
+    spans = _problem_spans(rawh)
+    if len(spans) < 2:
+        return None                     # 문제 경계가 불명확 → 기존 방식이 안전
+
+    def _one(span):
+        _label, chunk = span
+        try:
+            ps = analyze.extract_passages(client, cfg, chunk)
+        except Exception:
+            return None
+        return _merge_passages(getattr(ps, "passages", []) or [], _label)
+
+    try:
+        with ThreadPoolExecutor(max_workers=min(6, len(spans))) as ex:
+            merged = list(ex.map(_one, spans))
+    except Exception:
+        return None
+    passages, labels = [], []
+    for (label, _chunk), m in zip(spans, merged):
+        if m is not None:
+            passages.append(m)
+            labels.append(label)
+    if len(passages) < 2:               # 문제 단위 추출이 의미 있으려면 최소 2개
+        return None
+    return PassageSet(passages=passages), labels
 
 
 def _extract_via_vision_pdf(client: "ClaudeClient", cfg: "Config", src: Path):
