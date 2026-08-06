@@ -227,6 +227,8 @@
     section.chapter{page-break-before:always;break-before:page;}
     /* 작은 블록이 페이지 경계에서 잘리지 않도록 */
     .idiom,.quiz,.core-image,.callout,.note{break-inside:avoid;page-break-inside:avoid;}
+    /* 연습문제(유형별 카드)는 새 페이지에서 시작 */
+    .practice{break-before:page;page-break-before:always;}
     /* 각 정답·해설은 새 페이지에서 시작하고, 그 뒤 내용도 새 페이지로 → 해설만 있는 페이지 */
     .answers{break-before:page;page-break-before:always;break-after:page;page-break-after:always;}
     .answers .alab{break-after:avoid;page-break-after:avoid;}
@@ -453,11 +455,10 @@
   </div>
 
   <!-- PRACTICE OF -->
-  <div class="practice">
-    <span class="plab">연습문제 · OF</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · OF · 기본연습</span>
     <ol>
-      <li><div class="prompt">밑줄 친 of의 성격이 <b>나머지와 다른</b> 것은?</div>
+<li><div class="prompt">밑줄 친 of의 성격이 <b>나머지와 다른</b> 것은?</div>
         <ul class="choices">
           <li>① the leg <u>of</u> the table</li>
           <li>② the color <u>of</u> the sky</li>
@@ -465,8 +466,8 @@
           <li>④ the price <u>of</u> the ticket</li>
         </ul>
       </li>
-      <li><div class="prompt">우리말에 맞게 빈칸을 채우시오. — "그 약은 그녀의 두통을 덜어주었다."<br>The medicine <span class="blank"></span> her <span class="blank"></span> her headache.</div></li>
-      <li><div class="prompt">다음을 밑줄 친 of의 의미(동격/목적어/박탈/형용사화)로 분류하시오.</div>
+<li><div class="prompt">우리말에 맞게 빈칸을 채우시오. — "그 약은 그녀의 두통을 덜어주었다."<br>The medicine <span class="blank"></span> her <span class="blank"></span> her headache.</div></li>
+<li><div class="prompt">다음을 밑줄 친 of의 의미(동격/목적어/박탈/형용사화)로 분류하시오.</div>
         <ul class="choices">
           <li>(a) the idea <u>of</u> living abroad</li>
           <li>(b) his rejection <u>of</u> the offer</li>
@@ -474,9 +475,9 @@
           <li>(d) The thief robbed him <u>of</u> his wallet.</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "모든 선택지 중에서, 첫 번째가 가장 안전했다." <span class="hint">(Of all …로 시작)</span></div></li>
-      <li><div class="prompt">어법상 어색한 곳을 고치시오.<br>We must get rid <u>from</u> these outdated rules.</div></li>
-      <li><div class="prompt">우리말 "그의 조언은 큰 가치가 있었다."에 가장 알맞은 것은?</div>
+<li><div class="prompt">영작하시오. — "모든 선택지 중에서, 첫 번째가 가장 안전했다." <span class="hint">(Of all …로 시작)</span></div></li>
+<li><div class="prompt">어법상 어색한 곳을 고치시오.<br>We must get rid <u>from</u> these outdated rules.</div></li>
+<li><div class="prompt">우리말 "그의 조언은 큰 가치가 있었다."에 가장 알맞은 것은?</div>
         <ul class="choices">
           <li>① His advice had of great value.</li>
           <li>② His advice was of great value.</li>
@@ -484,7 +485,7 @@
           <li>④ His advice of great value was.</li>
         </ul>
       </li>
-      <li><div class="prompt">밑줄 친 of가 <b>부분(~중에서)</b>으로 쓰인 것은?</div>
+<li><div class="prompt">밑줄 친 of가 <b>부분(~중에서)</b>으로 쓰인 것은?</div>
         <ul class="choices">
           <li>① a cup <u>of</u> tea</li>
           <li>② <u>Of</u> the five candidates, only one remained.</li>
@@ -492,7 +493,7 @@
           <li>④ a table made <u>of</u> wood</li>
         </ul>
       </li>
-          <li><div class="prompt">"the destruction of the rainforest"에서 of의 성격은?</div>
+<li><div class="prompt">"the destruction of the rainforest"에서 of의 성격은?</div>
         <ul class="choices">
           <li>① 소유(~의)</li>
           <li>② 목적어</li>
@@ -500,8 +501,8 @@
           <li>④ 박탈</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 소식은 우리에게 큰 관심거리였다."<br>The news was <span class="blank"></span> great interest to us.</div></li>
-      <li><div class="prompt">다음 중 <b>박탈</b>의 of가 <u>아닌</u> 것은?</div>
+<li><div class="prompt">빈칸을 채우시오. — "그 소식은 우리에게 큰 관심거리였다."<br>The news was <span class="blank"></span> great interest to us.</div></li>
+<li><div class="prompt">다음 중 <b>박탈</b>의 of가 <u>아닌</u> 것은?</div>
         <ul class="choices">
           <li>① rob him <u>of</u> his watch</li>
           <li>② cure her <u>of</u> the disease</li>
@@ -509,21 +510,13 @@
           <li>④ deprive them <u>of</u> their rights</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "다양한 꽃들이 그 정원에 있다." <span class="hint">(a variety of)</span></div></li>
-      <li><div class="prompt">"There is little chance of his coming." 에서 of의 역할(동격/목적어)을 쓰시오.</div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "America's perception of China as a threat needs to change."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "Of all the reasons, location mattered most."</div></li>
-      <li><div class="prompt">영작하시오. — "그 소설의 영어 번역은 2년이 걸렸다." <span class="hint">(translation of A into B)</span></div></li>
-      <li><div class="prompt">영작하시오. — "우리는 이 낡은 파일들을 없애야 한다." <span class="hint">(get rid of)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "This tool will be <span class="blank"></span> use in an emergency."</div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OF · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"America's perception of China"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"America's perception of China"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 미국에 비친 중국의 자아상</li>
           <li>② 미국의 중국에 대한 인식</li>
@@ -531,7 +524,7 @@
           <li>④ 중국의 미국에 대한 인식</li>
         </ul>
       </li>
-      <li><div class="prompt">"the idea of women living longer than men"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"the idea of women living longer than men"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 여자를 남자보다 오래 살게 하려는 생각</li>
           <li>② 여자가 남자보다 오래 산다는 생각</li>
@@ -539,7 +532,7 @@
           <li>④ 남녀의 수명이 비슷하다는 생각</li>
         </ul>
       </li>
-      <li><div class="prompt">"The war deprived them of their homes."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The war deprived them of their homes."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그들은 전쟁 중에도 집에 머물렀다</li>
           <li>② 그들이 전쟁으로부터 집을 지켜냈다</li>
@@ -547,7 +540,7 @@
           <li>④ 전쟁이 그들에게서 집을 앗아갔다</li>
         </ul>
       </li>
-      <li><div class="prompt">"This tool will be of use in an emergency."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"This tool will be of use in an emergency."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 이 도구는 비상시에 쓸모가 있을 것이다</li>
           <li>② 이 도구는 비상용으로 특별히 제작되었다</li>
@@ -555,7 +548,7 @@
           <li>④ 이 도구를 쓰면 오히려 비상 상황이 벌어진다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Of all the senses, only visual memory has been studied."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Of all the senses, only visual memory has been studied."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 시각 기억을 위해 모든 감각이 동원되었다</li>
           <li>② 모든 감각의 시각 기억이 함께 연구되어 왔다</li>
@@ -563,7 +556,7 @@
           <li>④ 모든 감각 중에서 시각 기억만 연구되어 왔다</li>
         </ul>
       </li>
-      <li><div class="prompt">"His criticism of the new design was constructive."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"His criticism of the new design was constructive."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그의 건설적인 디자인이 비판을 받았다</li>
           <li>② 새 디자인이 그를 향해 던진 비판은 건설적이었다</li>
@@ -571,7 +564,7 @@
           <li>④ 그를 겨냥한 새 디자인 비평은 건설적이었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The medicine relieved him of the pain."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The medicine relieved him of the pain."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그가 그 약의 부작용을 견뎌 냈다</li>
           <li>② 그 약이 그에게 통증을 안겨 주었다</li>
@@ -579,7 +572,7 @@
           <li>④ 그 약이 그의 통증을 없애 주었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"We need to get rid of these old files."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"We need to get rid of these old files."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 우리는 이 낡은 파일들을 잘 보관해야 한다</li>
           <li>② 우리는 이 낡은 파일들을 없애야 한다</li>
@@ -587,7 +580,7 @@
           <li>④ 우리에게는 이 낡은 파일들이 꼭 필요하다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The results fell short of our expectations."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The results fell short of our expectations."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 결과가 우리 기대와 정확히 맞아떨어졌다</li>
           <li>② 결과가 우리 기대를 훌쩍 뛰어넘었다</li>
@@ -595,7 +588,7 @@
           <li>④ 우리는 결과에 대한 기대를 접었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The fact of her leaving surprised everyone."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The fact of her leaving surprised everyone."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀를 떠나보낸 사실이 모두를 놀라게 했다</li>
           <li>② 그녀가 남긴 사실 하나가 모두를 놀라게 했다</li>
@@ -605,43 +598,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OF · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "America's perception of China as a threat needs to change."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "Of all the reasons, location mattered most."</div></li>
+<li><div class="prompt">영작하시오. — "그 소설의 영어 번역은 2년이 걸렸다." <span class="hint">(translation of A into B)</span></div></li>
+<li><div class="prompt">영작하시오. — "우리는 이 낡은 파일들을 없애야 한다." <span class="hint">(get rid of)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "This tool will be <span class="blank"></span> use in an emergency."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "His criticism of the design was constructive."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "The fact of her leaving surprised everyone."</div></li>
+      <li><div class="prompt">영작하시오. — "그 결과는 우리 기대에 미치지 못했다." <span class="hint">(fall short of)</span></div></li>
+      <li><div class="prompt">영작하시오. — "그 약은 그에게서 고통을 덜어주었다." <span class="hint">(relieve A of B)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "There is little chance <span class="blank"></span> his coming."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · OF</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>③</b> — ①②④는 소유·소속의 기본 '~의'. ③은 control이 동사 control에서 온 명사라 of가 <b>목적어</b>('언론을 통제함')를 잇는다.</li>
-      <li><b>relieved / of</b> — relieve A of B (A에게서 B를 덜어주다).</li>
-      <li>(a) <b>동격</b> '외국에 산다는 생각' / (b) <b>목적어</b> '그 제안을 거절함' / (c) <b>형용사화</b> = helpful / (d) <b>박탈</b> rob A of B.</li>
-      <li>예시: <b>Of all the options, the first (one) was the safest.</b></li>
-      <li><b>from → of</b> — get rid <b>of</b> A가 올바른 형태.</li>
-      <li><b>②</b> — be of + 추상명사 = 형용사(be of value = valuable).</li>
-      <li><b>②</b> — 문두 Of + 복수/집합명사 = '~중에서'. ①은 한 덩어리, ③은 소속(~의), ④는 재료.</li>
-          <li><b>②</b> 목적어 — destruction ← destroy, "열대우림을 파괴함".</li>
-      <li><b>of</b> — be of interest = 관심거리다(형용사화).</li>
-      <li><b>③</b> — table의 다리(소유/기본). 나머지는 모두 박탈의 of.</li>
-      <li>예시: <b>A variety of flowers are in the garden.</b></li>
-      <li><b>동격</b> — the chance of his coming = "그가 온다는" 가능성.</li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>미국이 중국을 위협으로 보는 인식은 바뀌어야 한다. <b>(of=목적어)</b></li>
-      <li>모든 이유 중에서 위치가 가장 중요했다. <b>(부분 of)</b></li>
-      <li><b>The translation of the novel into English took two years.</b></li>
-      <li><b>We need to get rid of these old files.</b></li>
-      <li><b>of</b> — be of use = 유용한(=useful). "이 도구는 비상시에 유용할 것이다."</li>
+<li><b>③</b> — ①②④는 소유·소속의 기본 '~의'. ③은 control이 동사 control에서 온 명사라 of가 <b>목적어</b>('언론을 통제함')를 잇는다.</li>
+<li><b>relieved / of</b> — relieve A of B (A에게서 B를 덜어주다).</li>
+<li>(a) <b>동격</b> '외국에 산다는 생각' / (b) <b>목적어</b> '그 제안을 거절함' / (c) <b>형용사화</b> = helpful / (d) <b>박탈</b> rob A of B.</li>
+<li>예시: <b>Of all the options, the first (one) was the safest.</b></li>
+<li><b>from → of</b> — get rid <b>of</b> A가 올바른 형태.</li>
+<li><b>②</b> — be of + 추상명사 = 형용사(be of value = valuable).</li>
+<li><b>②</b> — 문두 Of + 복수/집합명사 = '~중에서'. ①은 한 덩어리, ③은 소속(~의), ④는 재료.</li>
+<li><b>②</b> 목적어 — destruction ← destroy, "열대우림을 파괴함".</li>
+<li><b>of</b> — be of interest = 관심거리다(형용사화).</li>
+<li><b>③</b> — table의 다리(소유/기본). 나머지는 모두 박탈의 of.</li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>②</b> America가 주체·China가 대상(of=목적어). 주체·대상을 뒤집으면 오답.</li>
-      <li><b>②</b> of=동격('~라는'). '여자들의 생각'으로 읽으면 오답.</li>
-      <li><b>④</b> deprive A of B=A에게서 B를 빼앗다.</li>
-      <li><b>①</b> be of use=유용하다(=useful).</li>
-      <li><b>④</b> 문두 Of+복수=~중에서(부분).</li>
-      <li><b>③</b> criticism of A=A를 비판함(목적어).</li>
-      <li><b>④</b> relieve A of B=A에게서 B(고통)를 덜어 줌.</li>
-      <li><b>②</b> get rid of=제거하다.</li>
-      <li><b>③</b> fall short of=~에 못 미치다.</li>
-      <li><b>③</b> the fact of A=A라는 사실(동격).</li>
+<li><b>②</b> America가 주체·China가 대상(of=목적어). 주체·대상을 뒤집으면 오답.</li>
+<li><b>②</b> of=동격('~라는'). '여자들의 생각'으로 읽으면 오답.</li>
+<li><b>④</b> deprive A of B=A에게서 B를 빼앗다.</li>
+<li><b>①</b> be of use=유용하다(=useful).</li>
+<li><b>④</b> 문두 Of+복수=~중에서(부분).</li>
+<li><b>③</b> criticism of A=A를 비판함(목적어).</li>
+<li><b>④</b> relieve A of B=A에게서 B(고통)를 덜어 줌.</li>
+<li><b>②</b> get rid of=제거하다.</li>
+<li><b>③</b> fall short of=~에 못 미치다.</li>
+<li><b>③</b> the fact of A=A라는 사실(동격).</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>미국이 중국을 위협으로 보는 인식은 바뀌어야 한다. <b>(of=목적어)</b></li>
+<li>모든 이유 중에서 위치가 가장 중요했다. <b>(부분 of)</b></li>
+<li><b>The translation of the novel into English took two years.</b></li>
+<li><b>We need to get rid of these old files.</b></li>
+<li><b>of</b> — be of use = 유용한(=useful). "이 도구는 비상시에 유용할 것이다."</li>
+      <li>그 디자인에 대한 그의 비판은 건설적이었다. <b>(criticism of=목적어)</b></li>
+      <li>그녀가 떠났다는 사실이 모두를 놀라게 했다. <b>(동격 of)</b></li>
+      <li><b>The results fell short of our expectations.</b></li>
+      <li><b>The medicine relieved him of the pain.</b></li>
+      <li><b>of</b> — 동격. "그가 온다는 가능성은 거의 없다."</li>
     </ol>
   </div>
 
@@ -699,24 +710,23 @@
   </div>
 
   <!-- PRACTICE FOR -->
-  <div class="practice">
-    <span class="plab">연습문제 · FOR</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · FOR · 기본연습</span>
     <ol>
-      <li><div class="prompt">"She substituted margarine for butter." — 그녀가 <b>실제로 사용한</b> 것은?</div>
+<li><div class="prompt">"She substituted margarine for butter." — 그녀가 <b>실제로 사용한</b> 것은?</div>
         <ul class="choices"><li>① 버터</li><li>② 마가린</li><li>③ 둘 다</li><li>④ 알 수 없음</li></ul>
       </li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣으시오. — "그들은 그를 부주의함 때문에 비난했다."<br>They blamed him <span class="blank"></span> his carelessness.</div></li>
-      <li><div class="prompt">밑줄 친 for의 의미(교환 / 이유 / 찬성)를 쓰시오.</div>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣으시오. — "그들은 그를 부주의함 때문에 비난했다."<br>They blamed him <span class="blank"></span> his carelessness.</div></li>
+<li><div class="prompt">밑줄 친 for의 의미(교환 / 이유 / 찬성)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) I paid ten dollars <u>for</u> this book.</li>
           <li>(b) The senator is <u>for</u> the reform.</li>
           <li>(c) He was arrested, <u>for</u> he had broken the law.</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "나는 그녀를 그녀의 언니로 착각했다." <span class="hint">(mistake A for B)</span></div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "그녀는 그의 친절에 대해 그에게 감사했다."<br>She thanked him <span class="blank"></span> his kindness.</div></li>
-      <li><div class="prompt">밑줄 친 for가 <b>이유(왜냐하면)</b>의 접속사인 것은?</div>
+<li><div class="prompt">영작하시오. — "나는 그녀를 그녀의 언니로 착각했다." <span class="hint">(mistake A for B)</span></div></li>
+<li><div class="prompt">빈칸을 채우시오. — "그녀는 그의 친절에 대해 그에게 감사했다."<br>She thanked him <span class="blank"></span> his kindness.</div></li>
+<li><div class="prompt">밑줄 친 for가 <b>이유(왜냐하면)</b>의 접속사인 것은?</div>
         <ul class="choices">
           <li>① He left early, <u>for</u> he was tired.</li>
           <li>② I bought this gift <u>for</u> you.</li>
@@ -724,7 +734,7 @@
           <li>④ She is famous <u>for</u> her voice.</li>
         </ul>
       </li>
-          <li><div class="prompt">"I paid $20 for the book." — 20달러와 <b>교환한</b> 것은?</div>
+<li><div class="prompt">"I paid $20 for the book." — 20달러와 <b>교환한</b> 것은?</div>
         <ul class="choices">
           <li>① 책</li>
           <li>② 돈</li>
@@ -732,33 +742,26 @@
           <li>④ 알 수 없음</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그는 지각한 것에 대해 사과했다."<br>He apologized <span class="blank"></span> being late.</div></li>
-      <li><div class="prompt">밑줄 친 for의 의미(이유/찬성)를 쓰시오.</div>
+<li><div class="prompt">빈칸을 채우시오. — "그는 지각한 것에 대해 사과했다."<br>He apologized <span class="blank"></span> being late.</div></li>
+<li><div class="prompt">밑줄 친 for의 의미(이유/찬성)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) She was punished <u>for</u> cheating.</li>
           <li>(b) Please vote <u>for</u> the candidate.</li>
         </ul>
       </li>
-      <li><div class="prompt">"substitute A for B"에서 <b>밀려나는(사라지는)</b> 것은?</div>
+<li><div class="prompt">"substitute A for B"에서 <b>밀려나는(사라지는)</b> 것은?</div>
         <ul class="choices">
           <li>① A</li>
           <li>② B</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "그녀는 그 실수에 대해 나를 탓했다." <span class="hint">(blame A for B)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "Nick was miserable, for he had been deprived of his liberty."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "He repeated my message word for word."</div></li>
-      <li><div class="prompt">영작하시오. — "설탕 대신 꿀을 써도 된다." <span class="hint">(substitute A for B)</span></div></li>
-      <li><div class="prompt">영작하시오. — "그녀는 그 사고를 자기 탓으로 여긴다." <span class="hint">(blame A for B)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "I mistook him <span class="blank"></span> his brother."</div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · FOR · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"He substituted a Hyundai for a Porsche."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He substituted a Hyundai for a Porsche."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 포르쉐를 팔아 현대를 두 대 샀다</li>
           <li>② 그는 현대를 포르쉐로 개조했다</li>
@@ -766,7 +769,7 @@
           <li>④ 그는 현대 대신 포르쉐를 택했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"I mistook him for his brother."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"I mistook him for his brother."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 나는 그의 형을 그로 잘못 봤다</li>
           <li>② 나는 그를 그의 형으로 잘못 봤다</li>
@@ -774,7 +777,7 @@
           <li>④ 나는 그를 형 대신 앞세웠다</li>
         </ul>
       </li>
-      <li><div class="prompt">"You can substitute honey for sugar."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"You can substitute honey for sugar."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 꿀과 설탕을 반반 섞어야 한다</li>
           <li>② 설탕 대신 꿀을 써도 된다</li>
@@ -782,7 +785,7 @@
           <li>④ 꿀 대신 설탕을 써도 된다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Marie blames herself for the accident."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Marie blames herself for the accident."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 사고가 마리를 곤경에 빠뜨렸다</li>
           <li>② 마리는 사고 책임을 남에게 돌린다</li>
@@ -790,7 +793,7 @@
           <li>④ 마리는 그 사고를 들어 자신을 변호한다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Nick was miserable, for he had been deprived of his liberty."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Nick was miserable, for he had been deprived of his liberty."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 닉은 비참했는데, 자유를 빼앗겼기 때문이다</li>
           <li>② 닉은 자유를 얻으려고 비참함을 참았다</li>
@@ -798,7 +801,7 @@
           <li>④ 닉은 비참함을 무릅쓰고 자유를 되찾았다</li>
         </ul>
       </li>
-      <li><div class="prompt">"She thanked him for his help."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She thanked him for his help."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 그를 돕고 나서 스스로 뿌듯해했다</li>
           <li>② 그녀는 그의 도움을 정중히 사양했다</li>
@@ -806,7 +809,7 @@
           <li>④ 그녀는 도와준 것에 대해 그에게 고마워했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Are you for or against shorter working hours?"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Are you for or against shorter working hours?"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 근무시간을 늘리는 데 찬성인가?</li>
           <li>② 근무시간 단축이 언제부터 시행되는가?</li>
@@ -814,7 +817,7 @@
           <li>④ 근무시간 단축을 누구와 논의했는가?</li>
         </ul>
       </li>
-      <li><div class="prompt">"He repeated my message word for word."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He repeated my message word for word."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 내 말에 한마디를 슬쩍 덧붙였다</li>
           <li>② 그는 내 말을 토씨 하나 안 틀리고 그대로 옮겼다</li>
@@ -822,7 +825,7 @@
           <li>④ 그는 내 말 가운데 한 단어만 되풀이했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The coach praised the team for their effort."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The coach praised the team for their effort."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 감독은 노력한 것에 대해 팀을 칭찬했다</li>
           <li>② 감독은 노력 부족을 이유로 팀을 나무랐다</li>
@@ -830,7 +833,7 @@
           <li>④ 감독은 팀을 위해 스스로 애썼다고 자랑했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"She exchanged the dress for a larger size."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She exchanged the dress for a larger size."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 드레스를 큰 사이즈와 함께 샀다</li>
           <li>② 그녀는 더 큰 사이즈를 그 드레스로 바꿨다</li>
@@ -840,42 +843,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · FOR · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "Nick was miserable, for he had been deprived of his liberty."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "He repeated my message word for word."</div></li>
+<li><div class="prompt">영작하시오. — "설탕 대신 꿀을 써도 된다." <span class="hint">(substitute A for B)</span></div></li>
+<li><div class="prompt">영작하시오. — "그녀는 그 사고를 자기 탓으로 여긴다." <span class="hint">(blame A for B)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "I mistook him <span class="blank"></span> his brother."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "She thanked him for his help."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "Are you for or against the plan?"</div></li>
+      <li><div class="prompt">영작하시오. — "그 코치는 노력에 대해 팀을 칭찬했다." <span class="hint">(praise A for B)</span></div></li>
+      <li><div class="prompt">영작하시오. — "그녀는 그 드레스를 더 큰 사이즈로 교환했다." <span class="hint">(exchange A for B)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Marie blames herself <span class="blank"></span> the accident."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · FOR</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> — substitute A for B = B 대신 A를 쓰다. 앞의 A(margarine)를 실제로 사용, B(butter)는 밀려남.</li>
-      <li><b>for</b> — blame A for B (B 때문에 A를 비난하다).</li>
-      <li>(a) <b>교환</b>(대가로) / (b) <b>찬성</b> / (c) <b>이유</b> 접속사 '왜냐하면'.</li>
-      <li>예시: <b>I mistook her for her (older) sister.</b></li>
-      <li><b>for</b> — thank A for B (B에 대해 A에게 감사하다).</li>
-      <li><b>①</b> — 뒤에 S+V(he was tired)가 오는 접속사 for '왜냐하면'. ②대상 ③기간 ④이유(명사).</li>
-          <li><b>①</b> 책 — for는 교환의 대가. 20달러를 주고 책을 얻음.</li>
-      <li><b>for</b> — apologize (to A) for B.</li>
-      <li>(a) <b>이유</b> / (b) <b>찬성</b>.</li>
-      <li><b>②</b> B — substitute A for B는 B 대신 A를 씀.</li>
-      <li>예시: <b>She blamed me for the mistake.</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>닉은 비참했는데, 자유를 빼앗겼기 때문이다. <b>(for=왜냐하면)</b></li>
-      <li>그는 내 말을 토씨 하나 안 틀리고 그대로 되풀이했다. <b>(word for word)</b></li>
-      <li><b>You can substitute honey for sugar.</b></li>
-      <li><b>She blames herself for the accident.</b></li>
-      <li><b>for</b> — mistake A for B = A를 B로 오해하다. "그를 그의 형으로 착각했다."</li>
+<li><b>②</b> — substitute A for B = B 대신 A를 쓰다. 앞의 A(margarine)를 실제로 사용, B(butter)는 밀려남.</li>
+<li><b>for</b> — blame A for B (B 때문에 A를 비난하다).</li>
+<li>(a) <b>교환</b>(대가로) / (b) <b>찬성</b> / (c) <b>이유</b> 접속사 '왜냐하면'.</li>
+<li>예시: <b>I mistook her for her (older) sister.</b></li>
+<li><b>for</b> — thank A for B (B에 대해 A에게 감사하다).</li>
+<li><b>①</b> — 뒤에 S+V(he was tired)가 오는 접속사 for '왜냐하면'. ②대상 ③기간 ④이유(명사).</li>
+<li><b>①</b> 책 — for는 교환의 대가. 20달러를 주고 책을 얻음.</li>
+<li><b>for</b> — apologize (to A) for B.</li>
+<li>(a) <b>이유</b> / (b) <b>찬성</b>.</li>
+<li><b>②</b> B — substitute A for B는 B 대신 A를 씀.</li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>③</b> substitute A for B=B 대신 A. 결국 현대.</li>
-      <li><b>②</b> mistake A for B=A를 B로 오해.</li>
-      <li><b>②</b> substitute honey for sugar=설탕 대신 꿀.</li>
-      <li><b>③</b> blame A for B=B 때문에 A를 탓함.</li>
-      <li><b>①</b> 콤마+for S V=왜냐하면(이유 접속사).</li>
-      <li><b>④</b> thank A for B=B에 대해 A에게 감사.</li>
-      <li><b>③</b> for/against=찬성/반대.</li>
-      <li><b>②</b> word for word=정확히 그대로.</li>
-      <li><b>①</b> praise A for B=B에 대해 A를 칭찬.</li>
-      <li><b>④</b> exchange A for B=A를 B로 교환.</li>
+<li><b>③</b> substitute A for B=B 대신 A. 결국 현대.</li>
+<li><b>②</b> mistake A for B=A를 B로 오해.</li>
+<li><b>②</b> substitute honey for sugar=설탕 대신 꿀.</li>
+<li><b>③</b> blame A for B=B 때문에 A를 탓함.</li>
+<li><b>①</b> 콤마+for S V=왜냐하면(이유 접속사).</li>
+<li><b>④</b> thank A for B=B에 대해 A에게 감사.</li>
+<li><b>③</b> for/against=찬성/반대.</li>
+<li><b>②</b> word for word=정확히 그대로.</li>
+<li><b>①</b> praise A for B=B에 대해 A를 칭찬.</li>
+<li><b>④</b> exchange A for B=A를 B로 교환.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>닉은 비참했는데, 자유를 빼앗겼기 때문이다. <b>(for=왜냐하면)</b></li>
+<li>그는 내 말을 토씨 하나 안 틀리고 그대로 되풀이했다. <b>(word for word)</b></li>
+<li><b>You can substitute honey for sugar.</b></li>
+<li><b>She blames herself for the accident.</b></li>
+<li><b>for</b> — mistake A for B = A를 B로 오해하다. "그를 그의 형으로 착각했다."</li>
+      <li>그녀는 그의 도움에 대해 그에게 고마워했다. <b>(thank A for B)</b></li>
+      <li>당신은 그 계획에 찬성인가요, 반대인가요? <b>(for/against)</b></li>
+      <li><b>The coach praised the team for their effort.</b></li>
+      <li><b>She exchanged the dress for a larger size.</b></li>
+      <li><b>for</b> — blame A for B = B 때문에 A를 탓하다.</li>
     </ol>
   </div>
 
@@ -927,24 +949,23 @@
   </div>
 
   <!-- PRACTICE ABOUT -->
-  <div class="practice">
-    <span class="plab">연습문제 · ABOUT</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · ABOUT · 기본연습</span>
     <ol>
-      <li><div class="prompt">bring about과 바꿔 쓸 수 있는 동사는?</div>
+<li><div class="prompt">bring about과 바꿔 쓸 수 있는 동사는?</div>
         <ul class="choices"><li>① prevent</li><li>② cause</li><li>③ delay</li><li>④ avoid</li></ul>
       </li>
-      <li><div class="prompt">밑줄 친 about의 의미(대략 / 관한 / 여기저기)를 쓰시오.</div>
+<li><div class="prompt">밑줄 친 about의 의미(대략 / 관한 / 여기저기)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) The journey takes <u>about</u> two hours.</li>
           <li>(b) Toys lay <u>about</u> the floor.</li>
           <li>(c) a documentary <u>about</u> climate change</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "이제 우리가 진지하게 행동해야 할 때다." <span class="hint">(It's about time that …)</span></div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 강연은 약 한 시간 동안 계속됐다."<br>The lecture lasted <span class="blank"></span> an hour.</div></li>
-      <li><div class="prompt">come about과 bring about의 차이를 설명하시오.</div></li>
-          <li><div class="prompt">"It's about time you apologized." 의 뉘앙스로 알맞은 것은?</div>
+<li><div class="prompt">영작하시오. — "이제 우리가 진지하게 행동해야 할 때다." <span class="hint">(It's about time that …)</span></div></li>
+<li><div class="prompt">빈칸을 채우시오. — "그 강연은 약 한 시간 동안 계속됐다."<br>The lecture lasted <span class="blank"></span> an hour.</div></li>
+<li><div class="prompt">come about과 bring about의 차이를 설명하시오.</div></li>
+<li><div class="prompt">"It's about time you apologized." 의 뉘앙스로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 사과할 필요 없다</li>
           <li>② 진작 사과했어야 한다</li>
@@ -952,15 +973,15 @@
           <li>④ 곧 사과할 것이다</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "회의는 약 30분 걸렸다."<br>The meeting took <span class="blank"></span> 30 minutes.</div></li>
-      <li><div class="prompt">밑줄 친 about의 의미(대략/관한/여기저기)를 쓰시오.</div>
+<li><div class="prompt">빈칸을 채우시오. — "회의는 약 30분 걸렸다."<br>The meeting took <span class="blank"></span> 30 minutes.</div></li>
+<li><div class="prompt">밑줄 친 about의 의미(대략/관한/여기저기)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) papers lying <u>about</u> the desk</li>
           <li>(b) a book <u>about</u> history</li>
           <li>(c) <u>about</u> 100 people</li>
         </ul>
       </li>
-      <li><div class="prompt">bring about와 뜻이 <u>다른</u> 것은?</div>
+<li><div class="prompt">bring about와 뜻이 <u>다른</u> 것은?</div>
         <ul class="choices">
           <li>① cause</li>
           <li>② give rise to</li>
@@ -968,20 +989,14 @@
           <li>④ lead to</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "그 변화는 어떻게 일어났는가?" <span class="hint">(come about)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "It's about time that AI ethics were standardized."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "The new policy brought about major changes."</div></li>
-      <li><div class="prompt">영작하시오. — "그 사고는 어쩌다 일어났는가?" <span class="hint">(come about)</span></div></li>
-      <li><div class="prompt">영작하시오. — "수리비는 약 300달러가 들 것이다." <span class="hint">(about)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Books were scattered <span class="blank"></span> the room."</div></li>
+<li><div class="prompt">영작하시오. — "그 변화는 어떻게 일어났는가?" <span class="hint">(come about)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · ABOUT · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"I woke up at about 6 a.m."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"I woke up at about 6 a.m."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 나는 6시에 대해 이야기하다 잠들었다</li>
           <li>② 나는 정확히 6시 정각에 일어났다</li>
@@ -989,7 +1004,7 @@
           <li>④ 나는 6시가 되기 훨씬 전에 일어났다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Books were scattered about the room."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Books were scattered about the room."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 책들이 방 여기저기에 흩어져 있었다</li>
           <li>② 책들이 방 한가운데 가지런히 쌓여 있었다</li>
@@ -997,7 +1012,7 @@
           <li>④ 책 몇 권이 방 밖으로 옮겨졌다</li>
         </ul>
       </li>
-      <li><div class="prompt">"It's about time that AI ethics are standardized."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"It's about time that AI ethics are standardized."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① AI 윤리를 표준화하는 데 한 시간쯤 걸린다</li>
           <li>② AI 윤리 표준화에 대한 시간표가 발표됐다</li>
@@ -1005,7 +1020,7 @@
           <li>④ 이제는 AI 윤리를 표준화할 때가 됐다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The new policy brought about major changes."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The new policy brought about major changes."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 오히려 큰 변화가 새 정책을 이끌어 냈다</li>
           <li>② 새 정책이 큰 변화를 불러왔다</li>
@@ -1013,7 +1028,7 @@
           <li>④ 새 정책은 사소한 변화만 가져왔다</li>
         </ul>
       </li>
-      <li><div class="prompt">"How did the accident come about?"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"How did the accident come about?"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 사고는 어디까지 번졌는가?</li>
           <li>② 그 사고는 대략 언제쯤 났는가?</li>
@@ -1021,7 +1036,7 @@
           <li>④ 그 사고는 어쩌다 일어났는가?</li>
         </ul>
       </li>
-      <li><div class="prompt">"What's your opinion about his book?"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"What's your opinion about his book?"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그의 생각을 담은 책은 어떤 거야?</li>
           <li>② 그의 책에 대한 네 생각은 어때?</li>
@@ -1029,7 +1044,7 @@
           <li>④ 그 책 주변에서 무슨 일이 있었어?</li>
         </ul>
       </li>
-      <li><div class="prompt">"The repairs will cost about $300."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The repairs will cost about $300."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 수리비는 정확히 300달러로 확정됐다</li>
           <li>② 수리비 300달러가 여기저기 나뉘어 든다</li>
@@ -1037,7 +1052,7 @@
           <li>④ 수리는 300달러짜리 부품에 관한 것이다</li>
         </ul>
       </li>
-      <li><div class="prompt">"They argued about who should pay."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"They argued about who should pay."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그들은 누가 낼지를 두고 다퉜다</li>
           <li>② 그들은 계산대 주변을 서성였다</li>
@@ -1045,7 +1060,7 @@
           <li>④ 그들은 지불 방법을 대략 정해 두었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Tourists wandered about the old town."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Tourists wandered about the old town."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 관광객들이 구시가지를 서둘러 떠났다</li>
           <li>② 관광객들이 구시가지를 이리저리 거닐었다</li>
@@ -1053,7 +1068,7 @@
           <li>④ 관광객 약 한 무리가 구시가지에 들렀다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The invention brought about a revolution in learning."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The invention brought about a revolution in learning."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 발명은 혁명의 뒷전으로 밀려났다</li>
           <li>② 그 발명은 학습에 혁명을 일으켰다</li>
@@ -1063,41 +1078,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · ABOUT · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "It's about time that AI ethics were standardized."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "The new policy brought about major changes."</div></li>
+<li><div class="prompt">영작하시오. — "그 사고는 어쩌다 일어났는가?" <span class="hint">(come about)</span></div></li>
+<li><div class="prompt">영작하시오. — "수리비는 약 300달러가 들 것이다." <span class="hint">(about)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Books were scattered <span class="blank"></span> the room."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "What's your opinion about his book?"</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "Tourists wandered about the town."</div></li>
+      <li><div class="prompt">영작하시오. — "그들은 누가 낼지를 두고 다퉜다." <span class="hint">(argue about)</span></div></li>
+      <li><div class="prompt">영작하시오. — "나는 약 6시에 일어났다." <span class="hint">(about)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "The lecture lasted <span class="blank"></span> an hour."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · ABOUT</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> cause.</li>
-      <li>(a) <b>대략</b> / (b) <b>여기저기</b> / (c) <b>~에 관한</b>.</li>
-      <li>예시: <b>It's about time (that) we acted seriously.</b> (that절에 과거형 acted를 쓰는 것이 관용적)</li>
-      <li><b>about</b> — 수치 앞 about = 약, 대략.</li>
-      <li><b>come about</b>은 자동사로 '(저절로) 발생하다', <b>bring about</b>은 타동사로 목적어를 '발생시키다(= cause)'. 목적어 유무로 구분한다.</li>
-          <li><b>②</b> — It's about time + 과거시제 = 진작 했어야 한다(가벼운 질책).</li>
-      <li><b>about</b> — 수치 앞 about = 약, 대략.</li>
-      <li>(a) <b>여기저기</b> / (b) <b>~에 관한</b> / (c) <b>대략</b>.</li>
-      <li><b>③</b> prevent(막다) — 나머지는 모두 "일으키다".</li>
-      <li>예시: <b>How did the change come about?</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>이제는 AI 윤리를 표준화할 때가 됐다. <b>(It's about time that S V)</b></li>
-      <li>새 정책은 큰 변화를 불러왔다. <b>(bring about=cause)</b></li>
-      <li><b>How did the accident come about?</b></li>
-      <li><b>The repairs will cost about $300.</b></li>
-      <li><b>about</b> — 여기저기에. "책들이 방 여기저기에 흩어져 있었다."</li>
+<li><b>②</b> cause.</li>
+<li>(a) <b>대략</b> / (b) <b>여기저기</b> / (c) <b>~에 관한</b>.</li>
+<li>예시: <b>It's about time (that) we acted seriously.</b> (that절에 과거형 acted를 쓰는 것이 관용적)</li>
+<li><b>about</b> — 수치 앞 about = 약, 대략.</li>
+<li><b>come about</b>은 자동사로 '(저절로) 발생하다', <b>bring about</b>은 타동사로 목적어를 '발생시키다(= cause)'. 목적어 유무로 구분한다.</li>
+<li><b>②</b> — It's about time + 과거시제 = 진작 했어야 한다(가벼운 질책).</li>
+<li><b>about</b> — 수치 앞 about = 약, 대략.</li>
+<li>(a) <b>여기저기</b> / (b) <b>~에 관한</b> / (c) <b>대략</b>.</li>
+<li><b>③</b> prevent(막다) — 나머지는 모두 "일으키다".</li>
+<li>예시: <b>How did the change come about?</b></li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>③</b> about+수치=약,대략.</li>
-      <li><b>①</b> about+장소=여기저기에.</li>
-      <li><b>④</b> It's about time that S V=진작 ~할 때다.</li>
-      <li><b>②</b> bring about=일으키다(=cause).</li>
-      <li><b>④</b> come about=발생하다.</li>
-      <li><b>②</b> about=~에 관한.</li>
-      <li><b>③</b> about+금액=약.</li>
-      <li><b>①</b> about=~을 두고(관해).</li>
-      <li><b>②</b> wander about=여기저기 돌아다니다.</li>
-      <li><b>②</b> bring about=일으키다.</li>
+<li><b>③</b> about+수치=약,대략.</li>
+<li><b>①</b> about+장소=여기저기에.</li>
+<li><b>④</b> It's about time that S V=진작 ~할 때다.</li>
+<li><b>②</b> bring about=일으키다(=cause).</li>
+<li><b>④</b> come about=발생하다.</li>
+<li><b>②</b> about=~에 관한.</li>
+<li><b>③</b> about+금액=약.</li>
+<li><b>①</b> about=~을 두고(관해).</li>
+<li><b>②</b> wander about=여기저기 돌아다니다.</li>
+<li><b>②</b> bring about=일으키다.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>이제는 AI 윤리를 표준화할 때가 됐다. <b>(It's about time that S V)</b></li>
+<li>새 정책은 큰 변화를 불러왔다. <b>(bring about=cause)</b></li>
+<li><b>How did the accident come about?</b></li>
+<li><b>The repairs will cost about $300.</b></li>
+<li><b>about</b> — 여기저기에. "책들이 방 여기저기에 흩어져 있었다."</li>
+      <li>그의 책에 대한 네 의견은 뭐야? <b>(about=~에 관한)</b></li>
+      <li>관광객들이 그 도시를 이리저리 돌아다녔다. <b>(about=여기저기)</b></li>
+      <li><b>They argued about who should pay.</b></li>
+      <li><b>I woke up at about six.</b></li>
+      <li><b>about</b> — 약, 대략.</li>
     </ol>
   </div>
 
@@ -1143,11 +1178,10 @@
   </div>
 
   <!-- PRACTICE BEYOND -->
-  <div class="practice">
-    <span class="plab">연습문제 · BEYOND</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · BEYOND · 기본연습</span>
     <ol>
-      <li><div class="prompt">"The beauty of the view was beyond words." 의 의미로 가장 알맞은 것은?</div>
+<li><div class="prompt">"The beauty of the view was beyond words." 의 의미로 가장 알맞은 것은?</div>
         <ul class="choices">
           <li>① 경치가 말이 많았다</li>
           <li>② 경치의 아름다움은 말로 표현할 수 없었다</li>
@@ -1155,11 +1189,11 @@
           <li>④ 경치를 말로 설명했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Her cooking is anything but ordinary." 를 우리말로 옮기시오.</div></li>
-      <li><div class="prompt">밑줄 부분을 같은 뜻의 부정 표현으로 바꾸시오. — "We had <u>no choice but to</u> wait."</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 소음은 참을 수 없었다(참는 것을 넘어섰다)."<br>The noise was <span class="blank"></span> endurance.</div></li>
-      <li><div class="prompt">"Everyone but John agreed with the plan." — 계획에 <b>동의하지 않은</b> 사람은?</div></li>
-          <li><div class="prompt">"The task was beyond me." 의 의미로 알맞은 것은?</div>
+<li><div class="prompt">"Her cooking is anything but ordinary." 를 우리말로 옮기시오.</div></li>
+<li><div class="prompt">밑줄 부분을 같은 뜻의 부정 표현으로 바꾸시오. — "We had <u>no choice but to</u> wait."</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "그 소음은 참을 수 없었다(참는 것을 넘어섰다)."<br>The noise was <span class="blank"></span> endurance.</div></li>
+<li><div class="prompt">"Everyone but John agreed with the plan." — 계획에 <b>동의하지 않은</b> 사람은?</div></li>
+<li><div class="prompt">"The task was beyond me." 의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 나에게 쉬웠다</li>
           <li>② 내 능력 밖이었다</li>
@@ -1167,28 +1201,22 @@
           <li>④ 나와 관련 없다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The damage is beyond repair." 를 부정 의미로 해석하시오.</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "그를 제외한 모두가 왔다."<br>Everyone <span class="blank"></span> him came.</div></li>
-      <li><div class="prompt">"Her excuse was anything but honest." 의 의미로 알맞은 것은?</div>
+<li><div class="prompt">"The damage is beyond repair." 를 부정 의미로 해석하시오.</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "그를 제외한 모두가 왔다."<br>Everyone <span class="blank"></span> him came.</div></li>
+<li><div class="prompt">"Her excuse was anything but honest." 의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 매우 정직한</li>
           <li>② 결코 정직하지 않은</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "우리는 웃을 수밖에 없었다." <span class="hint">(cannot help / nothing but)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "The scene was beyond description."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "Her response was anything but expected."</div></li>
-      <li><div class="prompt">영작하시오. — "그는 오직 물만 마신다." <span class="hint">(nothing but)</span></div></li>
-      <li><div class="prompt">영작하시오. — "나는 그 제안을 받아들일 수밖에 없었다." <span class="hint">(have no choice but to)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "Everyone <span class="blank"></span> Tom passed the exam."</div></li>
+<li><div class="prompt">영작하시오. — "우리는 웃을 수밖에 없었다." <span class="hint">(cannot help / nothing but)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · BEYOND · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"That's beyond doubt."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"That's beyond doubt."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그것은 의심 너머에 감춰져 있다</li>
           <li>② 그것은 의심할 여지가 없다</li>
@@ -1196,7 +1224,7 @@
           <li>④ 그것은 한번 의심해 볼 만하다</li>
         </ul>
       </li>
-      <li><div class="prompt">"She is beyond hope of recovery."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She is beyond hope of recovery."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 기대 이상으로 회복했다</li>
           <li>② 그녀는 회복할 가망이 없다</li>
@@ -1204,7 +1232,7 @@
           <li>④ 그녀는 곧 회복될 것으로 보인다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The scene was beyond description."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The scene was beyond description."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 광경은 말로 다 할 수 없었다</li>
           <li>② 그 광경은 설명이 유난히 길었다</li>
@@ -1212,7 +1240,7 @@
           <li>④ 그 광경은 설명하기에 그리 어렵지 않았다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Her response was anything but expected."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Her response was anything but expected."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀의 반응은 전혀 예상 밖이었다</li>
           <li>② 그녀의 반응만 빼면 다 예상대로였다</li>
@@ -1220,7 +1248,7 @@
           <li>④ 그녀는 어떤 반응이든 미리 내다봤다</li>
         </ul>
       </li>
-      <li><div class="prompt">"He drinks nothing but water."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He drinks nothing but water."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 물조차 입에 대지 않는다</li>
           <li>② 그는 물만 빼고 다 마신다</li>
@@ -1228,7 +1256,7 @@
           <li>④ 그는 아무것도 마시지 않는다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Everyone but Tom passed the exam."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Everyone but Tom passed the exam."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 아무도 시험에 붙지 못했다</li>
           <li>② 톰만 시험에 붙었다</li>
@@ -1236,7 +1264,7 @@
           <li>④ 톰만 빼고 모두 시험에 붙었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"I had no choice but to accept the offer."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"I had no choice but to accept the offer."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 나는 결국 그 제안을 물렸다</li>
           <li>② 나는 그 제안을 받을지 고를 수 있었다</li>
@@ -1244,7 +1272,7 @@
           <li>④ 나는 그 제안을 거절할 수밖에 없었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Love is beyond all human control."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Love is beyond all human control."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 사랑은 굳이 통제할 필요가 없다</li>
           <li>② 사랑은 인간이 마음대로 다스릴 수 있다</li>
@@ -1252,7 +1280,7 @@
           <li>④ 사랑은 인간이 어찌할 수 있는 것이 아니다</li>
         </ul>
       </li>
-      <li><div class="prompt">"I don't eat anything other than vegetables."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"I don't eat anything other than vegetables."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 나는 채소 말고는 아무것도 먹지 않는다</li>
           <li>② 나는 채소만 빼고 다 먹는다</li>
@@ -1260,7 +1288,7 @@
           <li>④ 나는 채소는 입에 대지 않는다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The problem is beyond my comprehension."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The problem is beyond my comprehension."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 문제는 내 이해를 벗어난다</li>
           <li>② 그 문제는 나도 쉽게 이해한다</li>
@@ -1270,41 +1298,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · BEYOND · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "The scene was beyond description."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "Her response was anything but expected."</div></li>
+<li><div class="prompt">영작하시오. — "그는 오직 물만 마신다." <span class="hint">(nothing but)</span></div></li>
+<li><div class="prompt">영작하시오. — "나는 그 제안을 받아들일 수밖에 없었다." <span class="hint">(have no choice but to)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "Everyone <span class="blank"></span> Tom passed the exam."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "That's beyond doubt."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "The problem is beyond my comprehension."</div></li>
+      <li><div class="prompt">영작하시오. — "그녀는 회복할 가망이 없다." <span class="hint">(beyond hope)</span></div></li>
+      <li><div class="prompt">영작하시오. — "나는 채소 외에는 아무것도 안 먹는다." <span class="hint">(other than)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "Her response was <span class="blank"></span> but expected."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · BEYOND</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> — beyond words = 말을 넘어섬 = 형언할 수 없는.</li>
-      <li><b>그녀의 요리는 결코 평범하지 않다.</b> (anything but = 결코 ~아닌)</li>
-      <li>예시: <b>We could not help but wait / We could do nothing but wait</b> (기다릴 수밖에 없었다).</li>
-      <li><b>beyond</b> — beyond endurance = 참을 수 없는(한계를 넘어섬 → 부정).</li>
-      <li><b>John</b> — but A = A를 제외하고(= except). 존만 동의하지 않았다.</li>
-          <li><b>②</b> 내 능력 밖이었다 — beyond me = 이해·능력을 넘어섬.</li>
-      <li>손상이 수리를 넘어섬 = <b>수리할 수 없다</b>(repair 불가).</li>
-      <li><b>but</b> (= except).</li>
-      <li><b>②</b> 결코 정직하지 않은 — anything but = 결코 ~아닌.</li>
-      <li>예시: <b>We could not help laughing.</b> / We could do nothing but laugh.</li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>그 광경은 이루 말로 표현할 수 없었다. <b>(beyond=부정)</b></li>
-      <li>그녀의 반응은 전혀 예상 밖이었다. <b>(anything but=결코 ~아닌)</b></li>
-      <li><b>He drinks nothing but water.</b></li>
-      <li><b>I had no choice but to accept the offer.</b></li>
-      <li><b>but</b> — ~을 제외하고(=except). "톰을 제외한 모두가 시험에 붙었다."</li>
+<li><b>②</b> — beyond words = 말을 넘어섬 = 형언할 수 없는.</li>
+<li><b>그녀의 요리는 결코 평범하지 않다.</b> (anything but = 결코 ~아닌)</li>
+<li>예시: <b>We could not help but wait / We could do nothing but wait</b> (기다릴 수밖에 없었다).</li>
+<li><b>beyond</b> — beyond endurance = 참을 수 없는(한계를 넘어섬 → 부정).</li>
+<li><b>John</b> — but A = A를 제외하고(= except). 존만 동의하지 않았다.</li>
+<li><b>②</b> 내 능력 밖이었다 — beyond me = 이해·능력을 넘어섬.</li>
+<li>손상이 수리를 넘어섬 = <b>수리할 수 없다</b>(repair 불가).</li>
+<li><b>but</b> (= except).</li>
+<li><b>②</b> 결코 정직하지 않은 — anything but = 결코 ~아닌.</li>
+<li>예시: <b>We could not help laughing.</b> / We could do nothing but laugh.</li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>②</b> beyond doubt=확실(부정 기능).</li>
-      <li><b>②</b> beyond hope=희망 없음.</li>
-      <li><b>①</b> beyond description=형언 불가.</li>
-      <li><b>①</b> anything but=결코 ~아닌.</li>
-      <li><b>③</b> nothing but=오직(=only). but=except로 오해 금물.</li>
-      <li><b>④</b> but=~을 제외하고.</li>
-      <li><b>③</b> have no choice but to V=V할 수밖에.</li>
-      <li><b>④</b> beyond control=통제 불가.</li>
-      <li><b>①</b> other than=~이외에.</li>
-      <li><b>①</b> beyond comprehension=이해 불가.</li>
+<li><b>②</b> beyond doubt=확실(부정 기능).</li>
+<li><b>②</b> beyond hope=희망 없음.</li>
+<li><b>①</b> beyond description=형언 불가.</li>
+<li><b>①</b> anything but=결코 ~아닌.</li>
+<li><b>③</b> nothing but=오직(=only). but=except로 오해 금물.</li>
+<li><b>④</b> but=~을 제외하고.</li>
+<li><b>③</b> have no choice but to V=V할 수밖에.</li>
+<li><b>④</b> beyond control=통제 불가.</li>
+<li><b>①</b> other than=~이외에.</li>
+<li><b>①</b> beyond comprehension=이해 불가.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>그 광경은 이루 말로 표현할 수 없었다. <b>(beyond=부정)</b></li>
+<li>그녀의 반응은 전혀 예상 밖이었다. <b>(anything but=결코 ~아닌)</b></li>
+<li><b>He drinks nothing but water.</b></li>
+<li><b>I had no choice but to accept the offer.</b></li>
+<li><b>but</b> — ~을 제외하고(=except). "톰을 제외한 모두가 시험에 붙었다."</li>
+      <li>그것은 의심의 여지가 없다. <b>(beyond=부정)</b></li>
+      <li>그 문제는 내 이해를 벗어난다. <b>(이해 불가)</b></li>
+      <li><b>She is beyond hope of recovery.</b></li>
+      <li><b>I don't eat anything other than vegetables.</b></li>
+      <li><b>anything</b> — anything but = 결코 ~아닌. "전혀 예상 밖이었다."</li>
     </ol>
   </div>
 
@@ -1344,20 +1392,19 @@
   </div>
 
   <!-- PRACTICE OFF -->
-  <div class="practice">
-    <span class="plab">연습문제 · OFF</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · OFF · 기본연습</span>
     <ol>
-      <li><div class="prompt">"His remark was off the point." 에서 off the point의 의미는?</div>
+<li><div class="prompt">"His remark was off the point." 에서 off the point의 의미는?</div>
         <ul class="choices"><li>① 정확한</li><li>② 무관한</li><li>③ 무례한</li><li>④ 재치 있는</li></ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "너의 인내는 언젠가 결실을 맺을 것이다."<br>Your patience will <span class="blank"></span> someday.</div></li>
-      <li><div class="prompt">"better off"와 반대되는 표현을 쓰시오.</div></li>
-      <li><div class="prompt">"well-off"의 뜻과 반대말을 쓰시오.</div></li>
-      <li><div class="prompt">"This is off the record."의 의미로 알맞은 것은?</div>
+<li><div class="prompt">빈칸을 채우시오. — "너의 인내는 언젠가 결실을 맺을 것이다."<br>Your patience will <span class="blank"></span> someday.</div></li>
+<li><div class="prompt">"better off"와 반대되는 표현을 쓰시오.</div></li>
+<li><div class="prompt">"well-off"의 뜻과 반대말을 쓰시오.</div></li>
+<li><div class="prompt">"This is off the record."의 의미로 알맞은 것은?</div>
         <ul class="choices"><li>① 공식적인</li><li>② 비공개의</li><li>③ 기록적인</li><li>④ 정확한</li></ul>
       </li>
-          <li><div class="prompt">"Keep off the grass." 의 의미로 알맞은 것은?</div>
+<li><div class="prompt">"Keep off the grass." 의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 잔디를 밟아라</li>
           <li>② 잔디에 들어가지 마라</li>
@@ -1365,8 +1412,8 @@
           <li>④ 잔디를 깎아라</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 발언은 비공식(비공개)이다."<br>The remark is <span class="blank"></span> the record.</div></li>
-      <li><div class="prompt">"Their efforts finally paid off." 의 의미로 알맞은 것은?</div>
+<li><div class="prompt">빈칸을 채우시오. — "그 발언은 비공식(비공개)이다."<br>The remark is <span class="blank"></span> the record.</div></li>
+<li><div class="prompt">"Their efforts finally paid off." 의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 실패했다</li>
           <li>② 성과를 냈다</li>
@@ -1374,21 +1421,15 @@
           <li>④ 미뤄졌다</li>
         </ul>
       </li>
-      <li><div class="prompt">다음 off 표현의 뜻을 우리말로 쓰시오.<br>(a) off the record &nbsp;/&nbsp; (b) well-off &nbsp;/&nbsp; (c) pay off</div></li>
-      <li><div class="prompt">영작하시오. — "그는 자신의 부를 과시한다." <span class="hint">(show off)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "All he is saying is off the point."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "Your efforts will pay off."</div></li>
-      <li><div class="prompt">영작하시오. — "그는 새 차를 자랑하기 좋아한다." <span class="hint">(show off)</span></div></li>
-      <li><div class="prompt">영작하시오. — "고정금리 대출이면 형편이 더 나을 것이다." <span class="hint">(better off)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "This is <span class="blank"></span> the record."</div></li>
+<li><div class="prompt">다음 off 표현의 뜻을 우리말로 쓰시오.<br>(a) off the record &nbsp;/&nbsp; (b) well-off &nbsp;/&nbsp; (c) pay off</div></li>
+<li><div class="prompt">영작하시오. — "그는 자신의 부를 과시한다." <span class="hint">(show off)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OFF · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"This is off the record."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"This is off the record."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 이건 기록을 갈아치운 성과다</li>
           <li>② 이건 공식 기록으로 남길 말이다</li>
@@ -1396,7 +1437,7 @@
           <li>④ 이건 기록을 바로잡으려는 것이다</li>
         </ul>
       </li>
-      <li><div class="prompt">"All he is saying is off the point."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"All he is saying is off the point."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 요점만 간추려 말한다</li>
           <li>② 그의 말은 하나같이 핵심을 정확히 찌른다</li>
@@ -1404,7 +1445,7 @@
           <li>④ 그의 말은 죄다 요점을 벗어나 있다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The train went off the rails."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The train went off the rails."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 기차가 선로를 벗어났다</li>
           <li>② 기차가 새 선로를 깔며 나아갔다</li>
@@ -1412,7 +1453,7 @@
           <li>④ 기차가 선로를 따라 힘차게 달렸다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Your efforts will pay off."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Your efforts will pay off."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 너의 노력은 언젠가 보상을 받을 것이다</li>
           <li>② 너는 그 노력의 대가를 물어줘야 한다</li>
@@ -1420,7 +1461,7 @@
           <li>④ 너의 노력은 결국 헛수고가 될 것이다</li>
         </ul>
       </li>
-      <li><div class="prompt">"You'll be better off with a fixed-rate loan."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"You'll be better off with a fixed-rate loan."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 고정금리 대출이면 형편이 더 나빠진다</li>
           <li>② 고정금리 대출이면 형편이 더 나을 것이다</li>
@@ -1428,7 +1469,7 @@
           <li>④ 고정금리 대출은 아예 피하는 게 낫다</li>
         </ul>
       </li>
-      <li><div class="prompt">"They come from a well-off family."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"They come from a well-off family."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그들은 화목하기로 소문난 집안 출신이다</li>
           <li>② 그들은 형편이 어려운 집안 출신이다</li>
@@ -1436,7 +1477,7 @@
           <li>④ 그들은 넉넉한 집안 출신이다</li>
         </ul>
       </li>
-      <li><div class="prompt">"He likes to show off his new car."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He likes to show off his new car."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 새 차에서 내리기 싫어한다</li>
           <li>② 그는 새 차의 시동을 자주 꺼 둔다</li>
@@ -1444,7 +1485,7 @@
           <li>④ 그는 새 차를 남몰래 숨겨 둔다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Keep off the grass."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Keep off the grass."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 잔디밭에 들어가지 마시오</li>
           <li>② 잔디를 정성껏 가꾸어 주시오</li>
@@ -1452,7 +1493,7 @@
           <li>④ 잔디밭을 계속 밟고 다니시오</li>
         </ul>
       </li>
-      <li><div class="prompt">"They are worse off than before."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"They are worse off than before."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그들은 예전보다 더 멀리 이사했다</li>
           <li>② 그들은 예전보다 형편이 더 어려워졌다</li>
@@ -1460,7 +1501,7 @@
           <li>④ 그들은 예전보다 나쁜 동네로 옮겼다</li>
         </ul>
       </li>
-      <li><div class="prompt">"She showed off her knowledge to impress them."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She showed off her knowledge to impress them."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 잘 보이려고 지식을 뽐냈다</li>
           <li>② 그녀는 지식이 달려 자리를 피했다</li>
@@ -1470,41 +1511,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OFF · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "All he is saying is off the point."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "Your efforts will pay off."</div></li>
+<li><div class="prompt">영작하시오. — "그는 새 차를 자랑하기 좋아한다." <span class="hint">(show off)</span></div></li>
+<li><div class="prompt">영작하시오. — "고정금리 대출이면 형편이 더 나을 것이다." <span class="hint">(better off)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "This is <span class="blank"></span> the record."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "The train went off the rails."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "They come from a well-off family."</div></li>
+      <li><div class="prompt">영작하시오. — "잔디밭에 들어가지 마시오." <span class="hint">(keep off)</span></div></li>
+      <li><div class="prompt">영작하시오. — "그들은 예전보다 형편이 나빠졌다." <span class="hint">(worse off)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 말을 넣고 그 뜻을 쓰시오. — "His remark was <span class="blank"></span> the point."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · OFF</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> 무관한(irrelevant) — 요점에서 벗어남.</li>
-      <li><b>pay off</b>.</li>
-      <li><b>worse off</b> (형편이 더 나쁜).</li>
-      <li>뜻 <b>부유한</b>(= wealthy) / 반대말 <b>badly-off</b>(또는 poor).</li>
-      <li><b>②</b> 비공개의(confidential) — 기록에서 벗어남.</li>
-          <li><b>②</b> 들어가지 마라 — off = ~에서 떨어져.</li>
-      <li><b>off</b> — off the record = 비공개.</li>
-      <li><b>②</b> 성과를 냈다(결실을 맺다).</li>
-      <li>(a) <b>비공개</b> / (b) <b>부유한</b> / (c) <b>결실을 맺다</b>.</li>
-      <li>예시: <b>He shows off his wealth.</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>그가 하는 말은 죄다 요점에서 벗어나 있다. <b>(off the point=무관한)</b></li>
-      <li>너의 노력은 (언젠가) 결실을 맺을 것이다. <b>(pay off)</b></li>
-      <li><b>He likes to show off his new car.</b></li>
-      <li><b>You'll be better off with a fixed-rate loan.</b></li>
-      <li><b>off</b> — off the record = 비공개. "이건 비공개로 하는 말이다."</li>
+<li><b>②</b> 무관한(irrelevant) — 요점에서 벗어남.</li>
+<li><b>pay off</b>.</li>
+<li><b>worse off</b> (형편이 더 나쁜).</li>
+<li>뜻 <b>부유한</b>(= wealthy) / 반대말 <b>badly-off</b>(또는 poor).</li>
+<li><b>②</b> 비공개의(confidential) — 기록에서 벗어남.</li>
+<li><b>②</b> 들어가지 마라 — off = ~에서 떨어져.</li>
+<li><b>off</b> — off the record = 비공개.</li>
+<li><b>②</b> 성과를 냈다(결실을 맺다).</li>
+<li>(a) <b>비공개</b> / (b) <b>부유한</b> / (c) <b>결실을 맺다</b>.</li>
+<li>예시: <b>He shows off his wealth.</b></li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>③</b> off the record=비공개.</li>
-      <li><b>④</b> off the point=무관한.</li>
-      <li><b>①</b> go off=~에서 벗어나다.</li>
-      <li><b>①</b> pay off=결실을 맺다('지불/손해'로 오해 금물).</li>
-      <li><b>②</b> better off=형편이 나은.</li>
-      <li><b>④</b> well-off=부유한.</li>
-      <li><b>③</b> show off=과시하다.</li>
-      <li><b>①</b> keep off=~에서 떨어져 있다.</li>
-      <li><b>②</b> worse off=형편이 더 나쁜.</li>
-      <li><b>①</b> show off=과시하다.</li>
+<li><b>③</b> off the record=비공개.</li>
+<li><b>④</b> off the point=무관한.</li>
+<li><b>①</b> go off=~에서 벗어나다.</li>
+<li><b>①</b> pay off=결실을 맺다('지불/손해'로 오해 금물).</li>
+<li><b>②</b> better off=형편이 나은.</li>
+<li><b>④</b> well-off=부유한.</li>
+<li><b>③</b> show off=과시하다.</li>
+<li><b>①</b> keep off=~에서 떨어져 있다.</li>
+<li><b>②</b> worse off=형편이 더 나쁜.</li>
+<li><b>①</b> show off=과시하다.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>그가 하는 말은 죄다 요점에서 벗어나 있다. <b>(off the point=무관한)</b></li>
+<li>너의 노력은 (언젠가) 결실을 맺을 것이다. <b>(pay off)</b></li>
+<li><b>He likes to show off his new car.</b></li>
+<li><b>You'll be better off with a fixed-rate loan.</b></li>
+<li><b>off</b> — off the record = 비공개. "이건 비공개로 하는 말이다."</li>
+      <li>열차가 선로를 벗어났다(탈선했다). <b>(go off=벗어나다)</b></li>
+      <li>그들은 부유한 집안 출신이다. <b>(well-off=부유한)</b></li>
+      <li><b>Keep off the grass.</b></li>
+      <li><b>They are worse off than before.</b></li>
+      <li><b>off</b> — off the point = 요점에서 벗어난(무관한).</li>
     </ol>
   </div>
 
@@ -1627,12 +1688,11 @@
   </div>
 
   <!-- PRACTICE ON -->
-  <div class="practice">
-    <span class="plab">연습문제 · ON</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · ON · 기본연습</span>
     <ol>
-      <li><div class="prompt">"the influence of the media on public opinion" — 영향을 <b>주는 쪽</b>과 <b>받는 쪽</b>을 각각 쓰시오.</div></li>
-      <li><div class="prompt">밑줄 친 on의 갈래(공간/이용/집중/인과/기반/표면상)를 쓰시오.</div>
+<li><div class="prompt">"the influence of the media on public opinion" — 영향을 <b>주는 쪽</b>과 <b>받는 쪽</b>을 각각 쓰시오.</div></li>
+<li><div class="prompt">밑줄 친 on의 갈래(공간/이용/집중/인과/기반/표면상)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) The result depends <u>on</u> your effort.</li>
           <li>(b) The theory is based <u>on</u> data.</li>
@@ -1640,19 +1700,19 @@
           <li>(d) <u>On</u> the surface, it looks fine.</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 소식을 듣자마자 그는 뛰어나갔다."<br><span class="blank"></span> hearing the news, he ran out.</div></li>
-      <li><div class="prompt">"feed the cat"과 "feed on fish"의 의미 차이를 설명하시오.</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "정부는 수입품에 관세를 부과했다."<br>The government <span class="blank"></span> tariffs <span class="blank"></span> imports.</div></li>
-      <li><div class="prompt">밑줄 친 on의 갈래(공간 / 계속 / 집중)를 쓰시오.</div>
+<li><div class="prompt">빈칸을 채우시오. — "그 소식을 듣자마자 그는 뛰어나갔다."<br><span class="blank"></span> hearing the news, he ran out.</div></li>
+<li><div class="prompt">"feed the cat"과 "feed on fish"의 의미 차이를 설명하시오.</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "정부는 수입품에 관세를 부과했다."<br>The government <span class="blank"></span> tariffs <span class="blank"></span> imports.</div></li>
+<li><div class="prompt">밑줄 친 on의 갈래(공간 / 계속 / 집중)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) a painting <u>on</u> the wall</li>
           <li>(b) Please carry <u>on</u> with your work.</li>
           <li>(c) concentrate <u>on</u> the task</li>
         </ul>
       </li>
-          <li><div class="prompt">"The book had a great effect on me." — 영향을 <b>준</b> 것과 <b>받은</b> 것을 각각 쓰시오.</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "우리는 그 문제에 집중해야 한다."<br>We must focus <span class="blank"></span> the problem.</div></li>
-      <li><div class="prompt">"on the ground that"의 의미로 알맞은 것은?</div>
+<li><div class="prompt">"The book had a great effect on me." — 영향을 <b>준</b> 것과 <b>받은</b> 것을 각각 쓰시오.</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "우리는 그 문제에 집중해야 한다."<br>We must focus <span class="blank"></span> the problem.</div></li>
+<li><div class="prompt">"on the ground that"의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① ~에도 불구하고</li>
           <li>② ~라는 이유로</li>
@@ -1660,21 +1720,14 @@
           <li>④ ~하기 위해</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "소는 풀을 먹고 산다."<br>Cows feed <span class="blank"></span> grass.</div></li>
-      <li><div class="prompt">영작하시오. — "그는 도착하자마자 전화했다." <span class="hint">(On + V-ing)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "The influence of advertisers on audiences is huge."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "On hearing the news, she burst into tears."</div></li>
-      <li><div class="prompt">영작하시오. — "정부는 사치품에 새 세금을 부과했다." <span class="hint">(impose A on B)</span></div></li>
-      <li><div class="prompt">영작하시오. — "핵심 문제에 집중하자." <span class="hint">(focus on)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Owls feed <span class="blank"></span> small rodents."</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "소는 풀을 먹고 산다."<br>Cows feed <span class="blank"></span> grass.</div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · ON · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"the influence of advertisers on audiences"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"the influence of advertisers on audiences"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 청중이 광고주에게 미치는 영향</li>
           <li>② 광고주가 청중에게 미치는 영향</li>
@@ -1682,7 +1735,7 @@
           <li>④ 청중을 겨냥한 광고주의 평판</li>
         </ul>
       </li>
-      <li><div class="prompt">"Your body draws on its reserves of fat."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Your body draws on its reserves of fat."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 몸이 지방을 계속 쌓아 둔다</li>
           <li>② 몸이 지방을 몸 밖으로 밀어낸다</li>
@@ -1690,7 +1743,7 @@
           <li>④ 몸이 지방 위에 무늬를 그린다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Owls feed on small rodents."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Owls feed on small rodents."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 올빼미는 작은 설치류에게 먹이를 물어다 준다</li>
           <li>② 올빼미는 작은 설치류를 잡아먹고 산다</li>
@@ -1698,7 +1751,7 @@
           <li>④ 올빼미는 설치류 곁에서 함께 산다</li>
         </ul>
       </li>
-      <li><div class="prompt">"On hearing the news, she burst into tears."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"On hearing the news, she burst into tears."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 소식을 전한 뒤에야 그녀가 눈물지었다</li>
           <li>② 그 소식을 듣자마자 그녀는 울음을 터뜨렸다</li>
@@ -1706,7 +1759,7 @@
           <li>④ 그 소식을 듣는 내내 그녀는 흐느꼈다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The movie is based on a true story."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The movie is based on a true story."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 영화는 실화와는 아무 상관이 없다</li>
           <li>② 그 영화는 실화를 바탕으로 한다</li>
@@ -1714,7 +1767,7 @@
           <li>④ 어떤 실화가 그 영화를 바탕으로 삼았다</li>
         </ul>
       </li>
-      <li><div class="prompt">"He was fired on the ground that he was late."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He was fired on the ground that he was late."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 해고를 핑계로 지각을 일삼았다</li>
           <li>② 그는 지각했지만 해고만은 면했다</li>
@@ -1722,7 +1775,7 @@
           <li>④ 그는 지각한 그 자리에서 곧장 해고됐다</li>
         </ul>
       </li>
-      <li><div class="prompt">"On the surface, the plan seems simple."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"On the surface, the plan seems simple."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 겉보기에는 그 계획이 단순해 보인다</li>
           <li>② 그 계획이 수면 위로 막 떠올랐다</li>
@@ -1730,7 +1783,7 @@
           <li>④ 실제로도 그 계획은 아주 단순하다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The strikes inflicted serious damage on the economy."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The strikes inflicted serious damage on the economy."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 파업은 경제가 좋아지는 계기가 되었다</li>
           <li>② 파업은 경제와 무관하게 벌어졌다</li>
@@ -1738,7 +1791,7 @@
           <li>④ 파업은 경제에 심각한 타격을 입혔다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The government imposed new taxes on luxury goods."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The government imposed new taxes on luxury goods."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 정부는 사치품에 새 세금을 매겼다</li>
           <li>② 사치품 업계가 정부에 세금을 물렸다</li>
@@ -1746,7 +1799,7 @@
           <li>④ 정부는 사치품을 세금 대신 사들였다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Let's focus on the main issue."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Let's focus on the main issue."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 핵심 문제 위에 새 안건을 얹자</li>
           <li>② 핵심 문제는 잠시 접어 두자</li>
@@ -1756,42 +1809,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · ON · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "The influence of advertisers on audiences is huge."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "On hearing the news, she burst into tears."</div></li>
+<li><div class="prompt">영작하시오. — "정부는 사치품에 새 세금을 부과했다." <span class="hint">(impose A on B)</span></div></li>
+<li><div class="prompt">영작하시오. — "핵심 문제에 집중하자." <span class="hint">(focus on)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Owls feed <span class="blank"></span> small rodents."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "The movie is based on a true story."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "On the surface, the plan seems simple."</div></li>
+      <li><div class="prompt">영작하시오. — "그는 지각했다는 이유로 해고됐다." <span class="hint">(on the ground that)</span></div></li>
+      <li><div class="prompt">영작하시오. — "파업은 경제에 심각한 피해를 입혔다." <span class="hint">(inflict A on B)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Your body draws <span class="blank"></span> its reserves of fat."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · ON</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li>주는 쪽 = <b>the media</b> (of = 주체), 받는 쪽 = <b>public opinion</b> (on = 대상).</li>
-      <li>(a) 이용·의지(의존) / (b) 기반 / (c) 인과(영향) / (d) 표면상.</li>
-      <li><b>On</b> (on + V-ing = ~하자마자).</li>
-      <li>feed + O = "~에게 먹이를 주다"(고양이에게 먹이를 줌) / feed on + O = "~을 먹고 살다"(생선을 주식으로 함). 즉 주어가 먹는 주체인지, 먹이를 주는 주체인지가 다르다.</li>
-      <li><b>imposed / on</b> — impose A on B (A를 B에 부과하다).</li>
-      <li>(a) <b>공간</b>(접촉) / (b) <b>계속</b> / (c) <b>집중</b>.</li>
-          <li>준 것 = <b>the book</b>, 받은 것 = <b>me</b> (A's effect on B).</li>
-      <li><b>on</b> — focus on A.</li>
-      <li><b>②</b> ~라는 이유로.</li>
-      <li><b>on</b> — feed on grass = 풀을 먹고 살다.</li>
-      <li>예시: <b>On arriving, he called.</b> (= As soon as he arrived, he called.)</li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>광고주가 청중에게 미치는 영향은 크다. <b>(of=주체, on=대상)</b></li>
-      <li>그 소식을 듣자마자 그녀는 울음을 터뜨렸다. <b>(on+V-ing=~하자마자)</b></li>
-      <li><b>The government imposed new taxes on luxury goods.</b></li>
-      <li><b>Let's focus on the main issue.</b></li>
-      <li><b>on</b> — feed on = ~을 먹고 살다. "올빼미는 작은 설치류를 먹고 산다."</li>
+<li>주는 쪽 = <b>the media</b> (of = 주체), 받는 쪽 = <b>public opinion</b> (on = 대상).</li>
+<li>(a) 이용·의지(의존) / (b) 기반 / (c) 인과(영향) / (d) 표면상.</li>
+<li><b>On</b> (on + V-ing = ~하자마자).</li>
+<li>feed + O = "~에게 먹이를 주다"(고양이에게 먹이를 줌) / feed on + O = "~을 먹고 살다"(생선을 주식으로 함). 즉 주어가 먹는 주체인지, 먹이를 주는 주체인지가 다르다.</li>
+<li><b>imposed / on</b> — impose A on B (A를 B에 부과하다).</li>
+<li>(a) <b>공간</b>(접촉) / (b) <b>계속</b> / (c) <b>집중</b>.</li>
+<li>준 것 = <b>the book</b>, 받은 것 = <b>me</b> (A's effect on B).</li>
+<li><b>on</b> — focus on A.</li>
+<li><b>②</b> ~라는 이유로.</li>
+<li><b>on</b> — feed on grass = 풀을 먹고 살다.</li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>②</b> of=주체, on=대상.</li>
-      <li><b>③</b> draw on A=A를 끌어다 이용.</li>
-      <li><b>②</b> feed on=~을 먹고 살다(주어가 먹는 쪽).</li>
-      <li><b>②</b> on+V-ing=~하자마자.</li>
-      <li><b>②</b> be based on=~에 기반하다.</li>
-      <li><b>③</b> on the ground that=~라는 이유로.</li>
-      <li><b>①</b> on the surface=표면상(겉보기).</li>
-      <li><b>④</b> inflict A on B=B에 A를 가함.</li>
-      <li><b>①</b> impose A on B=B에 A를 부과.</li>
-      <li><b>③</b> focus on=~에 집중.</li>
+<li><b>②</b> of=주체, on=대상.</li>
+<li><b>③</b> draw on A=A를 끌어다 이용.</li>
+<li><b>②</b> feed on=~을 먹고 살다(주어가 먹는 쪽).</li>
+<li><b>②</b> on+V-ing=~하자마자.</li>
+<li><b>②</b> be based on=~에 기반하다.</li>
+<li><b>③</b> on the ground that=~라는 이유로.</li>
+<li><b>①</b> on the surface=표면상(겉보기).</li>
+<li><b>④</b> inflict A on B=B에 A를 가함.</li>
+<li><b>①</b> impose A on B=B에 A를 부과.</li>
+<li><b>③</b> focus on=~에 집중.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>광고주가 청중에게 미치는 영향은 크다. <b>(of=주체, on=대상)</b></li>
+<li>그 소식을 듣자마자 그녀는 울음을 터뜨렸다. <b>(on+V-ing=~하자마자)</b></li>
+<li><b>The government imposed new taxes on luxury goods.</b></li>
+<li><b>Let's focus on the main issue.</b></li>
+<li><b>on</b> — feed on = ~을 먹고 살다. "올빼미는 작은 설치류를 먹고 산다."</li>
+      <li>그 영화는 실화에 기반한다. <b>(based on)</b></li>
+      <li>겉보기에는 그 계획이 단순해 보인다. <b>(on the surface=표면상)</b></li>
+      <li><b>He was fired on the ground that he was late.</b></li>
+      <li><b>The strikes inflicted serious damage on the economy.</b></li>
+      <li><b>on</b> — draw on = ~을 이용·의지하다.</li>
     </ol>
   </div>
 
@@ -1838,53 +1910,46 @@
   </div>
 
   <!-- PRACTICE AGAINST -->
-  <div class="practice">
-    <span class="plab">연습문제 · AGAINST</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · AGAINST · 기본연습</span>
     <ol>
-      <li><div class="prompt">밑줄 친 against의 의미(대항 / 맞대어 비교)를 쓰시오.</div>
+<li><div class="prompt">밑줄 친 against의 의미(대항 / 맞대어 비교)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) The rebels fought <u>against</u> the army.</li>
           <li>(b) Weigh the risks <u>against</u> the rewards.</li>
         </ul>
       </li>
-      <li><div class="prompt">"compare A against B"에서 실제로 하는 행위는? (대결 / 비교) 중 고르시오.</div></li>
-      <li><div class="prompt">영작하시오. — "우리는 그 이론을 새 증거에 맞대어 검증했다." <span class="hint">(test … against …)</span></div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "우리는 이익을 비용에 맞대어 저울질해야 한다."<br>We must <span class="blank"></span> the benefits <span class="blank"></span> the costs.</div></li>
-      <li><div class="prompt">"The rebels rose against the king." 에서 against의 의미는? (대항 / 비교)</div></li>
-          <li><div class="prompt">"compete against rivals" 에서 하는 행위는?</div>
+<li><div class="prompt">"compare A against B"에서 실제로 하는 행위는? (대결 / 비교) 중 고르시오.</div></li>
+<li><div class="prompt">영작하시오. — "우리는 그 이론을 새 증거에 맞대어 검증했다." <span class="hint">(test … against …)</span></div></li>
+<li><div class="prompt">빈칸을 채우시오. — "우리는 이익을 비용에 맞대어 저울질해야 한다."<br>We must <span class="blank"></span> the benefits <span class="blank"></span> the costs.</div></li>
+<li><div class="prompt">"The rebels rose against the king." 에서 against의 의미는? (대항 / 비교)</div></li>
+<li><div class="prompt">"compete against rivals" 에서 하는 행위는?</div>
         <ul class="choices">
           <li>① 협력</li>
           <li>② 경쟁(대항)</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그들은 그 법에 반대해 시위했다."<br>They protested <span class="blank"></span> the law.</div></li>
-      <li><div class="prompt">밑줄 친 against의 의미(대항/비교)를 쓰시오.</div>
+<li><div class="prompt">빈칸을 채우시오. — "그들은 그 법에 반대해 시위했다."<br>They protested <span class="blank"></span> the law.</div></li>
+<li><div class="prompt">밑줄 친 against의 의미(대항/비교)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) balance freedom <u>against</u> security</li>
           <li>(b) fight <u>against</u> injustice</li>
         </ul>
       </li>
-      <li><div class="prompt">"measure A against B"의 의미로 알맞은 것은?</div>
+<li><div class="prompt">"measure A against B"의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① A를 B로 대체하다</li>
           <li>② A를 B에 맞대어 측정하다</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "우리는 그 이론을 사실에 맞대어 검증했다." <span class="hint">(test A against B)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "We have to weigh the benefits against the costs."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "The courts must balance liberty against security."</div></li>
-      <li><div class="prompt">영작하시오. — "그들은 그 이론을 데이터에 맞대어 검증했다." <span class="hint">(test A against B)</span></div></li>
-      <li><div class="prompt">영작하시오. — "가난한 이들이 억압 정권에 맞서 일어섰다." <span class="hint">(rise against)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Measure your present self <span class="blank"></span> your past self."</div></li>
+<li><div class="prompt">영작하시오. — "우리는 그 이론을 사실에 맞대어 검증했다." <span class="hint">(test A against B)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · AGAINST · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"The courts must balance liberty against security."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The courts must balance liberty against security."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 법원은 자유와 안보를 모두 제한해야 한다</li>
           <li>② 법원은 자유와 안보를 견주어 균형을 잡아야 한다</li>
@@ -1892,7 +1957,7 @@
           <li>④ 법원은 안보에 맞서 자유를 지켜내야 한다</li>
         </ul>
       </li>
-      <li><div class="prompt">"They tested the theory against the data."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"They tested the theory against the data."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그들은 그 이론을 데이터에 비추어 검증했다</li>
           <li>② 그들은 이론과 데이터를 모두 폐기했다</li>
@@ -1900,7 +1965,7 @@
           <li>④ 그들은 이론을 앞세워 데이터를 반박했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"He spoke out against the use of the guillotine."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He spoke out against the use of the guillotine."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 단두대를 다른 방식과 견주어 봤다</li>
           <li>② 그는 단두대 사용에 반대하는 목소리를 냈다</li>
@@ -1908,7 +1973,7 @@
           <li>④ 그는 단두대 문제에는 입을 닫았다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Everyone is competing against everybody else."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Everyone is competing against everybody else."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 모두가 서로를 상대로 경쟁하고 있다</li>
           <li>② 모두가 서로의 실력을 견주어 보고 있다</li>
@@ -1916,7 +1981,7 @@
           <li>④ 모두가 경쟁을 슬슬 피하고 있다</li>
         </ul>
       </li>
-      <li><div class="prompt">"We have to weigh the benefits against the costs."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"We have to weigh the benefits against the costs."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 우리는 이익과 비용을 단순히 합산해야 한다</li>
           <li>② 우리는 비용에 맞서 이익을 사수해야 한다</li>
@@ -1924,7 +1989,7 @@
           <li>④ 우리는 비용으로 이익을 눌러 없애야 한다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The poor rose against the oppressive regime."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The poor rose against the oppressive regime."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 가난한 이들이 정권과 자신을 견주어 봤다</li>
           <li>② 가난한 이들이 정권보다 높은 자리에 올랐다</li>
@@ -1932,7 +1997,7 @@
           <li>④ 가난한 이들이 정권을 떠받치며 일어섰다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Measure your present self against your past self."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Measure your present self against your past self."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 과거의 나를 위해 지금의 나를 버려라</li>
           <li>② 지금의 나를 과거의 나와 견주어 보라</li>
@@ -1940,7 +2005,7 @@
           <li>④ 지금과 과거의 나를 모두 잊어버려라</li>
         </ul>
       </li>
-      <li><div class="prompt">"The team competed against last year's champions."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The team competed against last year's champions."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 팀은 지난해 우승팀을 상대로 겨뤘다</li>
           <li>② 그 팀은 지난해 우승에 반대표를 던졌다</li>
@@ -1948,7 +2013,7 @@
           <li>④ 그 팀은 지난해 우승팀과 기록만 견주어졌다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Analysts benchmarked sales against last year's."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Analysts benchmarked sales against last year's."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 분석가들은 매출을 지난해와 견주어 비교했다</li>
           <li>② 분석가들은 지난해 매출에 맞서 다투었다</li>
@@ -1956,7 +2021,7 @@
           <li>④ 분석가들은 지난해에 매출을 팔아넘겼다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Many protested against the new law."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Many protested against the new law."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 많은 이들이 새 법 앞에서 발길을 멈췄다</li>
           <li>② 많은 이들이 새 법을 지지하며 나섰다</li>
@@ -1966,41 +2031,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · AGAINST · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "We have to weigh the benefits against the costs."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "The courts must balance liberty against security."</div></li>
+<li><div class="prompt">영작하시오. — "그들은 그 이론을 데이터에 맞대어 검증했다." <span class="hint">(test A against B)</span></div></li>
+<li><div class="prompt">영작하시오. — "가난한 이들이 억압 정권에 맞서 일어섰다." <span class="hint">(rise against)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Measure your present self <span class="blank"></span> your past self."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "He spoke out against the plan."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "Everyone is competing against everybody else."</div></li>
+      <li><div class="prompt">영작하시오. — "많은 이들이 새 법에 반대해 시위했다." <span class="hint">(protest against)</span></div></li>
+      <li><div class="prompt">영작하시오. — "그 팀은 지난해 우승팀과 맞붙어 겨뤘다." <span class="hint">(compete against)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "They tested the theory <span class="blank"></span> the data."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · AGAINST</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li>(a) <b>대항</b> / (b) <b>맞대어 비교</b>(저울질).</li>
-      <li><b>비교</b> — 두 대상을 맞대어 보는 것이지 싸우는 것이 아니다.</li>
-      <li>예시: <b>We tested the theory against the new evidence.</b></li>
-      <li><b>weigh / against</b> — weigh A against B (A를 B에 맞대어 저울질하다).</li>
-      <li><b>대항</b> — rise against A = A에 대항하여 일어나다.</li>
-          <li><b>②</b> 경쟁(대항).</li>
-      <li><b>against</b>.</li>
-      <li>(a) <b>비교</b>(저울질) / (b) <b>대항</b>.</li>
-      <li><b>②</b> A를 B에 맞대어 측정하다.</li>
-      <li>예시: <b>We tested the theory against the facts.</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>우리는 이익을 비용에 견주어 저울질해야 한다. <b>(맞대어 비교)</b></li>
-      <li>법원은 자유를 안보와 견주어 균형을 잡아야 한다. <b>(맞대어, 대항 아님)</b></li>
-      <li><b>They tested the theory against the data.</b></li>
-      <li><b>The poor rose against the oppressive regime.</b></li>
-      <li><b>against</b> — ~에 맞대어(비교). "현재의 나를 과거의 나와 견주어 재보라."</li>
+<li>(a) <b>대항</b> / (b) <b>맞대어 비교</b>(저울질).</li>
+<li><b>비교</b> — 두 대상을 맞대어 보는 것이지 싸우는 것이 아니다.</li>
+<li>예시: <b>We tested the theory against the new evidence.</b></li>
+<li><b>weigh / against</b> — weigh A against B (A를 B에 맞대어 저울질하다).</li>
+<li><b>대항</b> — rise against A = A에 대항하여 일어나다.</li>
+<li><b>②</b> 경쟁(대항).</li>
+<li><b>against</b>.</li>
+<li>(a) <b>비교</b>(저울질) / (b) <b>대항</b>.</li>
+<li><b>②</b> A를 B에 맞대어 측정하다.</li>
+<li>예시: <b>We tested the theory against the facts.</b></li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>②</b> balance A against B=맞대어 균형(대항 아님).</li>
-      <li><b>①</b> test A against B=맞대어 검증.</li>
-      <li><b>②</b> speak out against=~에 반대.</li>
-      <li><b>①</b> compete against=~와 맞서 경쟁.</li>
-      <li><b>③</b> weigh A against B=맞대어 저울질.</li>
-      <li><b>③</b> rise against=~에 대항해 일어나다.</li>
-      <li><b>②</b> measure A against B=맞대어 측정.</li>
-      <li><b>①</b> compete against=~와 맞서 경쟁.</li>
-      <li><b>①</b> against=맞대어 비교.</li>
-      <li><b>④</b> protest against=~에 반대.</li>
+<li><b>②</b> balance A against B=맞대어 균형(대항 아님).</li>
+<li><b>①</b> test A against B=맞대어 검증.</li>
+<li><b>②</b> speak out against=~에 반대.</li>
+<li><b>①</b> compete against=~와 맞서 경쟁.</li>
+<li><b>③</b> weigh A against B=맞대어 저울질.</li>
+<li><b>③</b> rise against=~에 대항해 일어나다.</li>
+<li><b>②</b> measure A against B=맞대어 측정.</li>
+<li><b>①</b> compete against=~와 맞서 경쟁.</li>
+<li><b>①</b> against=맞대어 비교.</li>
+<li><b>④</b> protest against=~에 반대.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>우리는 이익을 비용에 견주어 저울질해야 한다. <b>(맞대어 비교)</b></li>
+<li>법원은 자유를 안보와 견주어 균형을 잡아야 한다. <b>(맞대어, 대항 아님)</b></li>
+<li><b>They tested the theory against the data.</b></li>
+<li><b>The poor rose against the oppressive regime.</b></li>
+<li><b>against</b> — ~에 맞대어(비교). "현재의 나를 과거의 나와 견주어 재보라."</li>
+      <li>그는 그 계획에 반대해 목소리를 냈다. <b>(speak out against)</b></li>
+      <li>모두가 다른 모두와 맞서 경쟁한다. <b>(compete against)</b></li>
+      <li><b>Many protested against the new law.</b></li>
+      <li><b>The team competed against last year's champions.</b></li>
+      <li><b>against</b> — test A against B = ~에 맞대어 검증.</li>
     </ol>
   </div>
 
@@ -2060,24 +2145,23 @@
   </div>
 
   <!-- PRACTICE OVER -->
-  <div class="practice">
-    <span class="plab">연습문제 · OVER</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · OVER · 기본연습</span>
     <ol>
-      <li><div class="prompt">"She prefers coffee over tea." — 그녀가 <b>택한</b> 것은?</div>
+<li><div class="prompt">"She prefers coffee over tea." — 그녀가 <b>택한</b> 것은?</div>
         <ul class="choices"><li>① 차</li><li>② 커피</li><li>③ 둘 다</li><li>④ 알 수 없음</li></ul>
       </li>
-      <li><div class="prompt">밑줄 친 over의 갈래(기본/선호/지배/주제)를 쓰시오.</div>
+<li><div class="prompt">밑줄 친 over의 갈래(기본/선호/지배/주제)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) He has no control <u>over</u> his temper.</li>
           <li>(b) Let me think it <u>over</u>.</li>
           <li>(c) I prefer tea <u>over</u> coffee.</li>
         </ul>
       </li>
-      <li><div class="prompt">"think over"를 뜻이 비슷한 다른 전치사 표현으로 바꾸시오.</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "그들은 그 결정에 대해 오래 숙고했다."<br>They <span class="blank"></span> <span class="blank"></span> the decision for a long time. <span class="hint">(think 활용)</span></div></li>
-      <li><div class="prompt">"The manager has full control over the budget." — over의 갈래는? (선호 / 지배력 / 주제)</div></li>
-          <li><div class="prompt">"I prefer tea over coffee." — <b>택한</b> 것은?</div>
+<li><div class="prompt">"think over"를 뜻이 비슷한 다른 전치사 표현으로 바꾸시오.</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "그들은 그 결정에 대해 오래 숙고했다."<br>They <span class="blank"></span> <span class="blank"></span> the decision for a long time. <span class="hint">(think 활용)</span></div></li>
+<li><div class="prompt">"The manager has full control over the budget." — over의 갈래는? (선호 / 지배력 / 주제)</div></li>
+<li><div class="prompt">"I prefer tea over coffee." — <b>택한</b> 것은?</div>
         <ul class="choices">
           <li>① 차</li>
           <li>② 커피</li>
@@ -2085,34 +2169,28 @@
           <li>④ 알 수 없음</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 다리는 강 위에 걸쳐 있다."<br>The bridge stretches <span class="blank"></span> the river.</div></li>
-      <li><div class="prompt">"take over the company" 의 의미로 알맞은 것은?</div>
+<li><div class="prompt">빈칸을 채우시오. — "그 다리는 강 위에 걸쳐 있다."<br>The bridge stretches <span class="blank"></span> the river.</div></li>
+<li><div class="prompt">"take over the company" 의 의미로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 회사를 떠나다</li>
           <li>② 회사를 인수·장악하다</li>
         </ul>
       </li>
-      <li><div class="prompt">밑줄 친 over의 갈래(선호/지배/주제)를 쓰시오.</div>
+<li><div class="prompt">밑줄 친 over의 갈래(선호/지배/주제)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) control <u>over</u> money</li>
           <li>(b) argue <u>over</u> politics</li>
           <li>(c) choose A <u>over</u> B</li>
         </ul>
       </li>
-      <li><div class="prompt">영작하시오. — "건강을 부보다 우선시하라." <span class="hint">(prioritize A over B)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "People prefer looser teas over tightly rolled ones."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "The farmers have lost control over their production."</div></li>
-      <li><div class="prompt">영작하시오. — "건강보다 맛을 우선시하지 마라." <span class="hint">(prioritize A over B)</span></div></li>
-      <li><div class="prompt">영작하시오. — "가능한 모든 결과를 곰곰이 따져 보라." <span class="hint">(think over)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "She chose stability <span class="blank"></span> excitement."</div></li>
+<li><div class="prompt">영작하시오. — "건강을 부보다 우선시하라." <span class="hint">(prioritize A over B)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OVER · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"People prefer looser teas over tightly rolled ones."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"People prefer looser teas over tightly rolled ones."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 사람들은 단단히 만 차보다 느슨하게 만 차를 더 좋아한다</li>
           <li>② 사람들은 두 종류를 똑같이 즐긴다</li>
@@ -2120,7 +2198,7 @@
           <li>④ 사람들은 찻잎을 겹겹이 포개어 우린다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Most people prioritize taste over health."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Most people prioritize taste over health."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 대부분은 맛과 건강을 똑같이 여긴다</li>
           <li>② 대부분은 맛을 건강 위에 얹어 먹는다</li>
@@ -2128,7 +2206,7 @@
           <li>④ 대부분은 맛보다 건강을 앞세운다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The farmers have lost control over their production."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The farmers have lost control over their production."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 농부들은 자기 생산에 대한 통제력을 잃었다</li>
           <li>② 농부들은 생산 현장 위에서 균형을 잃고 넘어졌다</li>
@@ -2136,7 +2214,7 @@
           <li>④ 생산량이 도리어 농부들을 좌지우지하게 됐다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Think over all possible outcomes."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Think over all possible outcomes."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 가능한 모든 결과를 곰곰이 따져 보라</li>
           <li>② 결과가 나오면 곧바로 넘겨 버려라</li>
@@ -2144,7 +2222,7 @@
           <li>④ 가능한 모든 결과를 훌쩍 건너뛰어라</li>
         </ul>
       </li>
-      <li><div class="prompt">"She was run over by a truck."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She was run over by a truck."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 트럭을 향해 달려들었다</li>
           <li>② 그녀는 트럭 위를 뛰어서 건넜다</li>
@@ -2152,7 +2230,7 @@
           <li>④ 그녀는 트럭을 가까스로 피했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The competitively superior species takes over."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The competitively superior species takes over."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 경쟁에서 앞선 종이 자리를 물려주길 거부한다</li>
           <li>② 경쟁에서 앞선 종이 더 높은 곳으로 이동한다</li>
@@ -2160,7 +2238,7 @@
           <li>④ 경쟁에서 앞선 종이 서식지를 떠난다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The dog jumped over the fence."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The dog jumped over the fence."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 개가 울타리를 들이받아 넘어뜨렸다</li>
           <li>② 개가 울타리 위에 올라앉았다</li>
@@ -2168,7 +2246,7 @@
           <li>④ 개가 울타리를 뛰어넘었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"the dilemma over scientific truth"의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"the dilemma over scientific truth"의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 과학적 진실보다 한 수 위인 딜레마</li>
           <li>② 과학적 진실을 둘러싼 딜레마</li>
@@ -2176,7 +2254,7 @@
           <li>④ 과학적 진실 위에 덧씌워진 딜레마</li>
         </ul>
       </li>
-      <li><div class="prompt">"She chose stability over excitement."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"She chose stability over excitement."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀는 안정 위에 짜릿함을 더했다</li>
           <li>② 그녀는 짜릿함보다 안정을 택했다</li>
@@ -2184,7 +2262,7 @@
           <li>④ 그녀는 안정보다 짜릿함을 택했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"A younger generation is taking over the industry."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"A younger generation is taking over the industry."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 젊은 세대가 그 산업에서 밀려나고 있다</li>
           <li>② 그 산업이 도리어 젊은 세대를 떠맡는다</li>
@@ -2194,41 +2272,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · OVER · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "People prefer looser teas over tightly rolled ones."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "The farmers have lost control over their production."</div></li>
+<li><div class="prompt">영작하시오. — "건강보다 맛을 우선시하지 마라." <span class="hint">(prioritize A over B)</span></div></li>
+<li><div class="prompt">영작하시오. — "가능한 모든 결과를 곰곰이 따져 보라." <span class="hint">(think over)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "She chose stability <span class="blank"></span> excitement."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "She was run over by a truck."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "the dilemma over scientific truth"</div></li>
+      <li><div class="prompt">영작하시오. — "그 개가 울타리를 뛰어넘었다." <span class="hint">(jump over)</span></div></li>
+      <li><div class="prompt">영작하시오. — "젊은 세대가 그 산업을 장악하고 있다." <span class="hint">(take over)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "People prefer tea <span class="blank"></span> coffee."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · OVER</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> 커피 — A over B는 A를 택하고 B를 버림.</li>
-      <li>(a) <b>지배력</b>(통제) / (b) <b>주제</b>(~에 대해 숙고) / (c) <b>선호</b>.</li>
-      <li><b>think about</b> (over ≈ about, ~에 대해).</li>
-      <li><b>thought over</b> — think over A (A에 대해 숙고하다).</li>
-      <li><b>지배력</b> — control over A = A에 대한 통제력.</li>
-          <li><b>①</b> 차 — A over B는 A를 택하고 B를 버림.</li>
-      <li><b>over</b> — 위를 덮듯 걸쳐 있음.</li>
-      <li><b>②</b> 인수·장악하다.</li>
-      <li>(a) <b>지배력</b> / (b) <b>주제</b>(~에 대해 다투다) / (c) <b>선호</b>.</li>
-      <li>예시: <b>Prioritize health over wealth.</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>사람들은 단단히 만 차보다 느슨하게 만 차를 선호한다. <b>(A over B=B보다 A)</b></li>
-      <li>농부들은 자기 생산에 대한 통제력을 잃었다. <b>(control over=지배력)</b></li>
-      <li><b>Don't prioritize taste over health.</b></li>
-      <li><b>Think over all possible outcomes.</b></li>
-      <li><b>over</b> — A over B = B보다 A를 택함. "그녀는 짜릿함보다 안정을 택했다."</li>
+<li><b>②</b> 커피 — A over B는 A를 택하고 B를 버림.</li>
+<li>(a) <b>지배력</b>(통제) / (b) <b>주제</b>(~에 대해 숙고) / (c) <b>선호</b>.</li>
+<li><b>think about</b> (over ≈ about, ~에 대해).</li>
+<li><b>thought over</b> — think over A (A에 대해 숙고하다).</li>
+<li><b>지배력</b> — control over A = A에 대한 통제력.</li>
+<li><b>①</b> 차 — A over B는 A를 택하고 B를 버림.</li>
+<li><b>over</b> — 위를 덮듯 걸쳐 있음.</li>
+<li><b>②</b> 인수·장악하다.</li>
+<li>(a) <b>지배력</b> / (b) <b>주제</b>(~에 대해 다투다) / (c) <b>선호</b>.</li>
+<li>예시: <b>Prioritize health over wealth.</b></li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>①</b> prefer A over B=B보다 A를 선호.</li>
-      <li><b>③</b> prioritize A over B=B보다 A 우선.</li>
-      <li><b>①</b> control over A=A에 대한 통제력.</li>
-      <li><b>①</b> think over=곰곰이 숙고(over≈about).</li>
-      <li><b>③</b> run over=(차로) 치다.</li>
-      <li><b>③</b> take over=지배·장악.</li>
-      <li><b>④</b> over=~을 뛰어넘어(기본).</li>
-      <li><b>②</b> over=~을 둘러싼(=about).</li>
-      <li><b>②</b> A over B=B보다 A를 택함.</li>
-      <li><b>④</b> take over=넘겨받아 장악.</li>
+<li><b>①</b> prefer A over B=B보다 A를 선호.</li>
+<li><b>③</b> prioritize A over B=B보다 A 우선.</li>
+<li><b>①</b> control over A=A에 대한 통제력.</li>
+<li><b>①</b> think over=곰곰이 숙고(over≈about).</li>
+<li><b>③</b> run over=(차로) 치다.</li>
+<li><b>③</b> take over=지배·장악.</li>
+<li><b>④</b> over=~을 뛰어넘어(기본).</li>
+<li><b>②</b> over=~을 둘러싼(=about).</li>
+<li><b>②</b> A over B=B보다 A를 택함.</li>
+<li><b>④</b> take over=넘겨받아 장악.</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>사람들은 단단히 만 차보다 느슨하게 만 차를 선호한다. <b>(A over B=B보다 A)</b></li>
+<li>농부들은 자기 생산에 대한 통제력을 잃었다. <b>(control over=지배력)</b></li>
+<li><b>Don't prioritize taste over health.</b></li>
+<li><b>Think over all possible outcomes.</b></li>
+<li><b>over</b> — A over B = B보다 A를 택함. "그녀는 짜릿함보다 안정을 택했다."</li>
+      <li>그녀는 트럭에 치였다. <b>(run over)</b></li>
+      <li>과학적 진실을 둘러싼 딜레마. <b>(over=~에 대해)</b></li>
+      <li><b>The dog jumped over the fence.</b></li>
+      <li><b>A younger generation is taking over the industry.</b></li>
+      <li><b>over</b> — prefer A over B = (B보다) A를 선호.</li>
     </ol>
   </div>
 
@@ -2267,51 +2365,43 @@
   </div>
 
   <!-- PRACTICE FROM -->
-  <div class="practice">
-    <span class="plab">연습문제 · FROM</span>
-    <div class="sublab">① 기본 연습 (객관식·단답·영작)</div>
+    <div class="practice">
+    <span class="plab">연습문제 · FROM · 기본연습</span>
     <ol>
-      <li><div class="prompt">"The accident resulted from carelessness." 에서 <b>원인</b>은?</div>
+<li><div class="prompt">"The accident resulted from carelessness." 에서 <b>원인</b>은?</div>
         <ul class="choices"><li>① the accident</li><li>② carelessness</li><li>③ 둘 다</li><li>④ 알 수 없음</li></ul>
       </li>
-      <li><div class="prompt">"result in"과 "result from"의 인과 방향을 화살표로 나타내시오.</div></li>
-      <li><div class="prompt">빈칸을 채우시오. — "이 제품은 인공 색소가 없다."<br>This product is <span class="blank"></span> <span class="blank"></span> artificial colors.</div></li>
-      <li><div class="prompt">영작하시오. — "몇 가지 사소한 문제 외에는, 계획은 완벽하다." <span class="hint">(Apart from …)</span></div></li>
-      <li><div class="prompt">다음 중 result from이 <b>올바르게</b> 쓰인 문장은?</div>
+<li><div class="prompt">"result in"과 "result from"의 인과 방향을 화살표로 나타내시오.</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "이 제품은 인공 색소가 없다."<br>This product is <span class="blank"></span> <span class="blank"></span> artificial colors.</div></li>
+<li><div class="prompt">영작하시오. — "몇 가지 사소한 문제 외에는, 계획은 완벽하다." <span class="hint">(Apart from …)</span></div></li>
+<li><div class="prompt">다음 중 result from이 <b>올바르게</b> 쓰인 문장은?</div>
         <ul class="choices">
           <li>① Hard work results from success.</li>
           <li>② Success results from hard work.</li>
         </ul>
       </li>
-      <li><div class="prompt">"Her opinion is quite different ___ mine." 빈칸에 알맞은 전치사를 쓰시오.</div></li>
-          <li><div class="prompt">"The disease stems from a virus." — <b>원인</b>은?</div>
+<li><div class="prompt">"Her opinion is quite different ___ mine." 빈칸에 알맞은 전치사를 쓰시오.</div></li>
+<li><div class="prompt">"The disease stems from a virus." — <b>원인</b>은?</div>
         <ul class="choices">
           <li>① the disease</li>
           <li>② a virus</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "그 방은 소음이 없다."<br>The room is <span class="blank"></span> from noise.</div></li>
-      <li><div class="prompt">밑줄 친 from의 의미(원인·출처/분리)를 쓰시오.</div>
+<li><div class="prompt">빈칸을 채우시오. — "그 방은 소음이 없다."<br>The room is <span class="blank"></span> from noise.</div></li>
+<li><div class="prompt">밑줄 친 from의 의미(원인·출처/분리)를 쓰시오.</div>
         <ul class="choices">
           <li>(a) suffer <u>from</u> stress</li>
           <li>(b) apart <u>from</u> you</li>
         </ul>
       </li>
-      <li><div class="prompt">빈칸을 채우시오. — "부주의한 운전은 사고를 초래한다." (원인→결과)<br>Careless driving <span class="blank"></span> accidents. <span class="hint">(result 활용)</span></div></li>
-      <li><div class="prompt">영작하시오. — "그의 성공은 노력에서 비롯되었다." <span class="hint">(result from)</span></div></li>
-</ol>
-    <div class="sublab">② 서술형 (해석·영작·서술)</div>
-    <ol>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "His failure resulted from laziness."</div></li>
-      <li><div class="prompt">다음을 우리말로 해석하시오. — "Apart from a few errors, the essay is good."</div></li>
-      <li><div class="prompt">영작하시오. — "그 지역은 이제 오염이 없다." <span class="hint">(free from)</span></div></li>
-      <li><div class="prompt">영작하시오. — "그 무엇도 그가 진실을 말하는 것을 막지 못했다." <span class="hint">(prevent A from V-ing)</span></div></li>
-      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Success results <span class="blank"></span> hard work."</div></li>
+<li><div class="prompt">빈칸을 채우시오. — "부주의한 운전은 사고를 초래한다." (원인→결과)<br>Careless driving <span class="blank"></span> accidents. <span class="hint">(result 활용)</span></div></li>
     </ol>
-    <div class="sublab">③ 해석 판별 (객관식)</div>
+  </div>
+  <div class="practice">
+    <span class="plab">연습문제 · FROM · 객관식</span>
     <p class="hint" style="margin:2px 0 6px">각 문장의 뜻으로 알맞은 것을 고르시오.</p>
     <ol>
-      <li><div class="prompt">"His failure resulted from laziness."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"His failure resulted from laziness."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그의 실패는 게으름에서 비롯됐다</li>
           <li>② 그의 실패가 그를 게으르게 만들었다</li>
@@ -2319,7 +2409,7 @@
           <li>④ 게으름이 그의 실패에서 생겨났다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Success results from hard work."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Success results from hard work."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 성공과 노력은 서로 무관하다</li>
           <li>② 노력이 성공에서 흘러나온다</li>
@@ -2327,7 +2417,7 @@
           <li>④ 성공이 노력을 만들어 낸다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The area is now free from pollution."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The area is now free from pollution."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 지역은 이제 오염이 없다</li>
           <li>② 그 지역은 오염을 돈 주고 사들였다</li>
@@ -2335,7 +2425,7 @@
           <li>④ 그 지역은 공짜라서 오염됐다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Apart from a few errors, the essay is good."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Apart from a few errors, the essay is good."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 몇몇 오류 탓에 그 글은 형편없다</li>
           <li>② 몇몇 오류를 빼면 그 글은 훌륭하다</li>
@@ -2343,7 +2433,7 @@
           <li>④ 오류 덕분에 그 글이 돋보인다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Her style is quite different from mine."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Her style is quite different from mine."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그녀의 스타일은 내 것에서 갈라져 나왔다</li>
           <li>② 그녀의 스타일은 내 것과 꽤 다르다</li>
@@ -2351,7 +2441,7 @@
           <li>④ 그녀의 스타일은 내 것과 사뭇 닮았다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Many diseases stem from poor diet."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Many diseases stem from poor diet."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 많은 병이 나쁜 식습관에서 비롯된다</li>
           <li>② 많은 병이 나쁜 식습관을 불러들인다</li>
@@ -2359,7 +2449,7 @@
           <li>④ 나쁜 식습관이 병에서 자라난다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Nothing could prevent him from telling the truth."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Nothing could prevent him from telling the truth."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 스스로 진실을 감추기로 했다</li>
           <li>② 그 무엇도 그가 진실을 말하는 것을 막지 못했다</li>
@@ -2367,7 +2457,7 @@
           <li>④ 그 무엇도 그가 거짓말하는 것을 막지 못했다</li>
         </ul>
       </li>
-      <li><div class="prompt">"He suffers from chronic headaches."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"He suffers from chronic headaches."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그는 만성 두통을 즐기며 산다</li>
           <li>② 두통이 그를 떠나 버렸다</li>
@@ -2375,7 +2465,7 @@
           <li>④ 그는 만성 두통에 시달린다</li>
         </ul>
       </li>
-      <li><div class="prompt">"The crash resulted from a mechanical failure."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"The crash resulted from a mechanical failure."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 그 사고가 기계 결함을 일으켰다</li>
           <li>② 사고와 결함은 아무 관련이 없다</li>
@@ -2383,7 +2473,7 @@
           <li>④ 기계 결함이 그 사고를 겪었다</li>
         </ul>
       </li>
-      <li><div class="prompt">"Keep the children away from the fire."의 뜻으로 알맞은 것은?</div>
+<li><div class="prompt">"Keep the children away from the fire."의 뜻으로 알맞은 것은?</div>
         <ul class="choices">
           <li>① 아이들에게 불을 지키게 하라</li>
           <li>② 아이들을 불에서 멀리 떼어 놓아라</li>
@@ -2393,42 +2483,61 @@
       </li>
     </ol>
   </div>
+  <div class="practice">
+    <span class="plab">연습문제 · FROM · 서술형</span>
+    <ol>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "His failure resulted from laziness."</div></li>
+<li><div class="prompt">다음을 우리말로 해석하시오. — "Apart from a few errors, the essay is good."</div></li>
+<li><div class="prompt">영작하시오. — "그 지역은 이제 오염이 없다." <span class="hint">(free from)</span></div></li>
+<li><div class="prompt">영작하시오. — "그 무엇도 그가 진실을 말하는 것을 막지 못했다." <span class="hint">(prevent A from V-ing)</span></div></li>
+<li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "Success results <span class="blank"></span> hard work."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "Her style is quite different from mine."</div></li>
+      <li><div class="prompt">다음을 우리말로 해석하시오. — "He suffers from chronic headaches."</div></li>
+      <li><div class="prompt">영작하시오. — "많은 병이 나쁜 식습관에서 비롯된다." <span class="hint">(stem from)</span></div></li>
+      <li><div class="prompt">영작하시오. — "아이들을 불에서 멀리 떼어 놓아라." <span class="hint">(away from)</span></div></li>
+      <li><div class="prompt">빈칸에 알맞은 전치사를 넣고 그 뜻을 쓰시오. — "The crash resulted <span class="blank"></span> a mechanical failure."</div></li>
+    </ol>
+  </div>
   <div class="answers">
     <div class="alab">정답 &amp; 해설 · FROM</div>
-    <div class="sublab">① 기본 연습</div>
+    <div class="sublab">① 기본연습</div>
     <ol>
-      <li><b>②</b> carelessness — result from B = B(원인)로부터 비롯됨. 사고 ← 부주의.</li>
-      <li>result <b>in</b>: 원인 → 결과 &nbsp;/&nbsp; result <b>from</b>: 결과 ← 원인.</li>
-      <li><b>free / from</b> — be free from A (A가 없다).</li>
-      <li>예시: <b>Apart from a few minor problems, the plan is perfect.</b></li>
-      <li><b>②</b> — result from B: 결과 ← 원인. 성공(결과)은 노력(원인)으로부터 비롯된다. ①은 인과가 거꾸로.</li>
-      <li><b>from</b> — be different from A (A와 다르다).</li>
-          <li><b>②</b> a virus — stem from B = B에서 비롯됨(결과 ← 원인).</li>
-      <li><b>free</b> — be free from A(A가 없다).</li>
-      <li>(a) <b>원인·출처</b> / (b) <b>분리</b>.</li>
-      <li><b>results in</b> — 원인→결과이므로 result in.</li>
-      <li>예시: <b>His success resulted from his effort.</b></li>
-</ol>
-    <div class="sublab">② 서술형</div>
-    <ol>
-      <li>그의 실패는 게으름에서 비롯됐다. <b>(result from: 결과←원인)</b></li>
-      <li>몇몇 오류를 빼면 그 글은 훌륭하다. <b>(apart from=~외에는)</b></li>
-      <li><b>The area is now free from pollution.</b></li>
-      <li><b>Nothing could prevent him from telling the truth.</b></li>
-      <li><b>from</b> — result from = ~로부터 비롯되다. "성공은 노력에서 비롯된다."</li>
+<li><b>②</b> carelessness — result from B = B(원인)로부터 비롯됨. 사고 ← 부주의.</li>
+<li>result <b>in</b>: 원인 → 결과 &nbsp;/&nbsp; result <b>from</b>: 결과 ← 원인.</li>
+<li><b>free / from</b> — be free from A (A가 없다).</li>
+<li>예시: <b>Apart from a few minor problems, the plan is perfect.</b></li>
+<li><b>②</b> — result from B: 결과 ← 원인. 성공(결과)은 노력(원인)으로부터 비롯된다. ①은 인과가 거꾸로.</li>
+<li><b>from</b> — be different from A (A와 다르다).</li>
+<li><b>②</b> a virus — stem from B = B에서 비롯됨(결과 ← 원인).</li>
+<li><b>free</b> — be free from A(A가 없다).</li>
+<li>(a) <b>원인·출처</b> / (b) <b>분리</b>.</li>
+<li><b>results in</b> — 원인→결과이므로 result in.</li>
     </ol>
-    <div class="sublab">③ 해석 판별</div>
+    <div class="sublab">② 객관식</div>
     <ol>
-      <li><b>①</b> result from B=결과←원인(실패←게으름).</li>
-      <li><b>③</b> result from=~로부터 비롯됨.</li>
-      <li><b>①</b> free from A=A가 없다.</li>
-      <li><b>②</b> apart from=~외에는.</li>
-      <li><b>②</b> different from=~와 다르다.</li>
-      <li><b>①</b> stem from=~에서 비롯됨.</li>
-      <li><b>②</b> prevent A from V-ing=A가 ~하는 것을 막다.</li>
-      <li><b>④</b> suffer from=~로 고통받다.</li>
-      <li><b>③</b> result from=결과←원인.</li>
-      <li><b>②</b> away from=~에서 멀리(분리).</li>
+<li><b>①</b> result from B=결과←원인(실패←게으름).</li>
+<li><b>③</b> result from=~로부터 비롯됨.</li>
+<li><b>①</b> free from A=A가 없다.</li>
+<li><b>②</b> apart from=~외에는.</li>
+<li><b>②</b> different from=~와 다르다.</li>
+<li><b>①</b> stem from=~에서 비롯됨.</li>
+<li><b>②</b> prevent A from V-ing=A가 ~하는 것을 막다.</li>
+<li><b>④</b> suffer from=~로 고통받다.</li>
+<li><b>③</b> result from=결과←원인.</li>
+<li><b>②</b> away from=~에서 멀리(분리).</li>
+    </ol>
+    <div class="sublab">③ 서술형</div>
+    <ol>
+<li>그의 실패는 게으름에서 비롯됐다. <b>(result from: 결과←원인)</b></li>
+<li>몇몇 오류를 빼면 그 글은 훌륭하다. <b>(apart from=~외에는)</b></li>
+<li><b>The area is now free from pollution.</b></li>
+<li><b>Nothing could prevent him from telling the truth.</b></li>
+<li><b>from</b> — result from = ~로부터 비롯되다. "성공은 노력에서 비롯된다."</li>
+      <li>그녀의 스타일은 내 것과 꽤 다르다. <b>(different from)</b></li>
+      <li>그는 만성 두통에 시달린다. <b>(suffer from)</b></li>
+      <li><b>Many diseases stem from poor diet.</b></li>
+      <li><b>Keep the children away from the fire.</b></li>
+      <li><b>from</b> — result from = ~로부터 비롯되다(결과←원인).</li>
     </ol>
   </div>
 
