@@ -89,7 +89,7 @@ INDEX_HTML = """
 <body><div class=wrap>
   <div class=card>
     <h1>📘 영어 지문 자동 분석</h1>
-    <div class=sub>지문 사진(JPG/PNG)·PDF·HWP를 올리면, 분석지·어휘 리스트·영단어 시험지를 만들어 드립니다.</div>
+    <div class=sub>지문 사진(JPG/PNG)·PDF·HWP를 올리면, 분석지·핵심 어휘 리스트·핵심 어휘 시험지를 만들어 드립니다.</div>
     <form id=f method=post action="{{ url_for('analyze') }}" enctype=multipart/form-data>
 
       <label>① 지문 파일 (사진·PDF·HWP, 여러 개 가능)</label>
@@ -111,7 +111,7 @@ INDEX_HTML = """
 
       <label>③ 저장 파일명 (지문명) <span class=hint>(비우면 올린 파일 이름 사용)</span></label>
       <input type=text name=basename placeholder="예: 2027수능특강_16강">
-      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_어휘리스트</b> · <b>(지문명)_어휘test</b></div>
+      <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_핵심어휘리스트</b> · <b>(지문명)_핵심어휘test</b></div>
 
       <label>④ 시작 문항번호 <span class=hint>(예: 31 — 지문마다 1씩 자동 증가. 비우면 원본 번호/순번 사용)</span></label>
       <input type=text name=start_no placeholder="예: 31" inputmode=numeric>
