@@ -237,20 +237,43 @@ const STRUCTURE_TYPES = [
   '통념 → 반박(반전)', '주장 → 근거·예시', '문제 → 해결(방안)',
   '비교 · 대조', '시간 · 순서(나열)', '예시 → 일반화(결론)',
 ];
-function structureChoiceParas() {
-  const out = [B.p('해석하기 전에, 전체 흐름을 보고 이 글의 구조를 하나 골라 ✓ 해봐.')];
+// 해석 전 예측 4코너(소재·필자주장·구조·재진술) — 직접 쓰는 체크 목록
+function predictChoiceParas(p) {
+  const out = [];
+  out.push(B.p('통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', { bold: true }));
+  out.push(B.p('🔎 소재 — 이 지문, 뭐에 관한 글이야? (한 줄):  ______________________________________'));
+  out.push(B.p('🗣️ 필자 주장 — 필자 입장은?   ☐ 긍정적   ☐ 부정적·비판적   ☐ 중립적'));
+  out.push(B.p('     한 줄 요약: ____________________________   ·   근거 문장 번호: __________'));
+  out.push(B.p('🧩 이 글, 어떤 구조야? (하나 ✓ · 앞 “글의 구조” 페이지 참고)'));
   STRUCTURE_TYPES.forEach((t) => out.push(new Paragraph({
-    spacing: { after: 40 }, indent: { left: 220 },
-    children: [new TextRun({ text: `☐  ${t}`, size: 22, font: S.FONT })],
+    spacing: { after: 30 }, indent: { left: 240 },
+    children: [new TextRun({ text: `☐  ${t}`, size: 21, font: S.FONT })],
   })));
-  out.push(B.p('그렇게 본 근거(전환·연결 표현이나 문장 번호): ____________________________'));
+  out.push(B.p('     근거(전환·연결 표현이나 문장 번호): ____________________________'));
+  if (p.paraphrases && p.paraphrases.length) {
+    out.push(B.p('🔗 재진술(같은 말) 찾기 — 아래 표현과 같은 뜻으로 바꿔 쓴 말을 지문에서 찾아 써봐:'));
+    p.paraphrases.forEach(([a]) => out.push(new Paragraph({
+      spacing: { after: 30 }, indent: { left: 240 },
+      children: [new TextRun({ text: `${a}  ≈  ______________________________`, size: 21, font: S.FONT })],
+    })));
+  }
+  return out;
+}
+// 지문 끝: 해석 전 예측 정답 공개
+function predictRevealParas(p) {
+  const out = [B.h2('해석 전 예측 — 정답 확인')];
+  if (p.topic) out.push(B.p(`🔎 소재: ${p.topic}`));
+  if (p.claim && p.claim.stance) out.push(B.p(`🗣️ 필자 주장: ${p.claim.stance}${p.claim.why ? ` — ${p.claim.why}` : ''}`));
+  if (p.structure && p.structure.type) out.push(B.p(`🧩 글의 구조: ${p.structure.type}${p.structure.why ? ` — ${p.structure.why}` : ''}`));
+  if (p.paraphrases && p.paraphrases.length) {
+    out.push(B.p(`🔗 재진술: ${p.paraphrases.map(([a, b]) => `${a} ≈ ${b}`).join('  ·  ')}`));
+  }
   return out;
 }
 
 function passageParagraphs(p, idx) {
   const out = [B.h1(p.title || `지문 ${idx + 1}`)];
   out.push(B.p(`출처: ${p.source || '지문'}`, { italics: true, color: '666666' }));
-  if (p.topic) { out.push(B.h2('이 지문, 뭐야?')); out.push(B.p(p.topic)); }
   out.push(B.h2('지문 통째로 읽기'));
   out.push(new Paragraph({
     spacing: { after: 160 },
@@ -259,16 +282,13 @@ function passageParagraphs(p, idx) {
       new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
     ]),
   }));
-  out.push(B.h2('글의 구조 — 해석 전에 예측!'));
-  out.push(...structureChoiceParas());
+  out.push(B.h2('해석 전 예측 — 소재·주장·구조·재진술'));
+  out.push(...predictChoiceParas(p));
   out.push(B.h2('한 문장씩 직접 풀기'));
   (p.sentences || []).forEach((s, i) => out.push(...passageSentenceParas(s, i + 1)));
-  // 지문 끝: 답지(해석·캐치) → 글의 구조 정답 → 지문 전체 요지
+  // 지문 끝: 답지(해석·캐치) → 해석 전 예측 정답 → 지문 전체 요지
   out.push(...passageAnswerParas(p));
-  if (p.structure && p.structure.type) {
-    out.push(B.h2('이 글의 구조 (정답)'));
-    out.push(B.p(`${p.structure.type}${p.structure.why ? ` — ${p.structure.why}` : ''}`));
-  }
+  out.push(...predictRevealParas(p));
   if (p.catch) { out.push(B.h2('이 지문, 이 정도는 캐치! (전체 요지)')); out.push(...B.catchBox(p.catch)); }
   out.push(B.pageBreak());
   return out;

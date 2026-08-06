@@ -450,9 +450,15 @@ function css() {
   .st-box { width:13px; height:13px; border:1.6px solid ${C.gram}; border-radius:3px; background:#fff; display:inline-block; }
   .st-why { font-size:10.3px; color:${C.sub}; }
   .st-line { display:inline-block; border-bottom:1px solid #b9b1d6; min-width:210px; vertical-align:bottom; }
+  .st-line.long { min-width:340px; }
+  .structbox + .structbox { margin-top:-4px; }
+  .para-q { font-size:11.3px; margin:5px 0; }
+  .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }
   .struct-reveal { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
-    border-radius:8px; padding:10px 14px; margin:12px 0 4px; font-size:11.5px; break-inside:avoid; }
-  .sr-h { font-weight:800; color:${C.gram}; margin-right:6px; }
+    border-radius:8px; padding:10px 14px; margin:12px 0 4px; font-size:11.3px; break-inside:avoid; }
+  .sr-h { display:block; font-weight:800; color:${C.gram}; margin-bottom:5px; font-size:12.5px; }
+  .pr-line { margin:3px 0; }
+  .pr-lab { font-weight:800; color:${C.gram}; margin-right:6px; }
   `;
 }
 
@@ -496,20 +502,51 @@ const STRUCTURE_TYPES = [
   '시간 · 순서(나열)',
   '예시 → 일반화(결론)',
 ];
+// 🔎 소재 — 이 지문 뭐에 관한 글인지 한 줄로(직접)
+function subjectCard() {
+  return `<div class="structbox">
+    <div class="st-h">🔎 소재 — 이 지문, 뭐에 관한 글이야? <span class="st-hint">한 줄로 써봐 · 정답은 지문 끝</span></div>
+    <div class="wl"></div></div>`;
+}
+// 🗣️ 필자 주장 — 필자 입장(긍정/부정/중립) + 한 줄 + 근거(직접)
+function claimCard() {
+  const opts = ['긍정적', '부정적·비판적', '중립적'].map((t) => `<label class="st-opt"><span class="st-box"></span>${esc(t)}</label>`).join('');
+  return `<div class="structbox">
+    <div class="st-h">🗣️ 필자 주장 — 필자가 하고 싶은 말은? <span class="st-hint">해석하기 전에 예측 · 정답은 지문 끝</span></div>
+    <div class="st-opts">${opts}</div>
+    <div class="st-why">한 줄 요약: <span class="st-line long"></span></div>
+    <div class="st-why">근거가 된 문장 번호: <span class="st-line"></span></div>
+  </div>`;
+}
 // 🧩 글의 구조 고르기 — 해석 전에 전체 흐름 보고 예측(직접 ✓)
 function structureChoiceCard() {
   const opts = STRUCTURE_TYPES.map((t) => `<label class="st-opt"><span class="st-box"></span>${esc(t)}</label>`).join('');
   return `<div class="structbox">
-    <div class="st-h">🧩 이 글, 어떤 구조야? <span class="st-hint">해석하기 전에 · 전체 흐름을 보고 하나에 ✓</span></div>
+    <div class="st-h">🧩 이 글, 어떤 구조야? <span class="st-hint">전체 흐름을 보고 하나에 ✓ (앞 '글의 구조' 페이지 참고)</span></div>
     <div class="st-opts">${opts}</div>
     <div class="st-why">그렇게 본 근거(전환·연결 표현이나 문장 번호): <span class="st-line"></span></div>
   </div>`;
 }
-// 지문 끝: 글의 구조 정답 공개
-function structureReveal(p) {
-  if (!p.structure || !p.structure.type) return '';
-  const { type, why } = p.structure;
-  return `<div class="struct-reveal"><span class="sr-h">🧩 이 글의 구조 (정답)</span> <b>${esc(type)}</b>${why ? ` — ${esc(why)}` : ''}</div>`;
+// 🔗 재진술(같은 말) 찾기 — 지문에서 같은 뜻으로 바꿔 쓴 표현 짝짓기(직접)
+function paraphraseCard(p) {
+  if (!p.paraphrases || !p.paraphrases.length) return '';
+  const rows = p.paraphrases.map(([a]) => `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`).join('');
+  return `<div class="structbox">
+    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">아래 표현과 '같은 뜻으로 바꿔 쓴 말'을 지문에서 찾아 써봐</span></div>
+    ${rows}</div>`;
+}
+// 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 한꺼번에 공개
+function predictReveal(p) {
+  const parts = [];
+  if (p.topic) parts.push(`<div class="pr-line"><span class="pr-lab">🔎 소재</span> ${esc(p.topic)}</div>`);
+  if (p.claim && p.claim.stance) parts.push(`<div class="pr-line"><span class="pr-lab">🗣️ 필자 주장</span> <b>${esc(p.claim.stance)}</b>${p.claim.why ? ` — ${esc(p.claim.why)}` : ''}</div>`);
+  if (p.structure && p.structure.type) parts.push(`<div class="pr-line"><span class="pr-lab">🧩 글의 구조</span> <b>${esc(p.structure.type)}</b>${p.structure.why ? ` — ${esc(p.structure.why)}` : ''}</div>`);
+  if (p.paraphrases && p.paraphrases.length) {
+    const pr = p.paraphrases.map(([a, b]) => `${esc(a)} ≈ ${esc(b)}`).join(' &nbsp;·&nbsp; ');
+    parts.push(`<div class="pr-line"><span class="pr-lab">🔗 재진술</span> ${pr}</div>`);
+  }
+  if (!parts.length) return '';
+  return `<div class="struct-reveal"><span class="sr-h">✅ 해석 전 예측 — 정답 확인</span>${parts.join('')}</div>`;
 }
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
@@ -526,15 +563,14 @@ function passageHtml(p, idx) {
     <span class="tagpill">${esc(p.source || '구문해석')}</span></div>`;
   h += `<h1>${esc(p.title || `지문 ${idx + 1}`)}</h1>`;
   h += '<div class="chsub">필생보 · 필자의 생각이 보이는 영어독해 — 소재·주장·구조·재진술</div>';
-  if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
-  h += secHead(CIRCLED[1], '글의 구조 — 해석 전에 예측!', '전체를 읽고, 이 글이 어떤 짜임인지 먼저 골라봐', 'gram');
-  h += structureChoiceCard();
+  h += secHead(CIRCLED[1], '해석 전 예측 — 소재·주장·구조·재진술', '통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', 'gram');
+  h += subjectCard() + claimCard() + structureChoiceCard() + paraphraseCard(p);
   h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal');
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
-  h += structureReveal(p);
+  h += predictReveal(p);
   if (p.catch) {
     h += `<div class="pcatch"><span class="pcatch-h">✅ 이 지문, 이 정도는 캐치! (전체 요지)</span>${esc(p.catch)}</div>`;
   }

@@ -285,18 +285,34 @@ const PASSAGE_SCHEMA = {
       type: 'array', minItems: 1,
       items: {
         type: 'object', additionalProperties: false,
-        required: ['title', 'source', 'topic', 'catch', 'structure', 'sentences'],
+        required: ['title', 'source', 'topic', 'catch', 'claim', 'structure', 'paraphrases', 'sentences'],
         properties: {
           title: { type: 'string' },   // 지문 주제 한 줄
           source: { type: 'string' },  // 출처/문항번호 (알면)
-          topic: { type: 'string' },   // "이 지문 뭐에 관한 거야" 1~2문장
+          topic: { type: 'string' },   // 소재 = "이 지문 뭐에 관한 거야" 1~2문장
           catch: { type: 'string' },   // 지문 전체 요지 "이 정도는 캐치" 1~2문장
+          claim: {                     // 필자 주장(정답) — 입장 + 근거
+            type: 'object', additionalProperties: false,
+            required: ['stance', 'why'],
+            properties: {
+              stance: { type: 'string', description: "필자 입장: '긍정적' / '부정적·비판적' / '중립적' 중 하나에 짧은 설명을 덧붙여" },
+              why: { type: 'string' },
+            },
+          },
           structure: {                 // 글의 구조(정답) — 유형 + 근거
             type: 'object', additionalProperties: false,
             required: ['type', 'why'],
             properties: {
               type: { type: 'string', description: "통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) / 비교·대조 / 시간·순서(나열) / 예시→일반화(결론) 중 하나(또는 근접한 표현)" },
               why: { type: 'string' },
+            },
+          },
+          paraphrases: {               // 재진술(같은 말) 쌍 2~4개
+            type: 'array',
+            items: {
+              type: 'object', additionalProperties: false,
+              required: ['a', 'b'],
+              properties: { a: { type: 'string' }, b: { type: 'string' } },
             },
           },
           sentences: { type: 'array', minItems: 1, items: passageSentenceSchema() },
@@ -319,9 +335,13 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - topic: "이 지문 뭐에 관한 거야?" 1~2문장(반말).
 - catch: 이 지문에서 반드시 잡아야 할 핵심 내용 = 지문 요지 1~2문장(반말, "~라는 거야!").
   '이 정도는 캐치해야 한다'는 걸 알 수 있게 — 세부보다 전체 메시지.
+- claim: 필자 주장. stance 는 '긍정적'/'부정적·비판적'/'중립적' 중 하나에 짧은 설명을 덧붙이고,
+  why 는 필자가 하고 싶은 말과 근거(전환어·결론 문장)를 한 줄로.
 - structure: 이 글의 구조. type 은 [통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) /
   비교·대조 / 시간·순서(나열) / 예시→일반화(결론)] 중 가장 알맞은 하나(또는 근접 표현),
   why 는 그렇게 본 근거(전환어 But/However, 예시, 시간표현 등)를 한 줄로.
+- paraphrases: 지문에서 '같은 뜻을 다르게 표현한' 재진술 쌍 2~4개. a·b 는 지문에 실제 나온
+  표현으로(영어 어구 또는 우리말), 서로 문맥상 같은 개념을 가리켜야 해.
 
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
@@ -344,8 +364,12 @@ function normalizePassages(aiData) {
     source: p.source || '지문',
     topic: p.topic || '',
     catch: p.catch || '',
+    claim: p.claim && p.claim.stance
+      ? { stance: p.claim.stance, why: p.claim.why || '' } : undefined,
     structure: p.structure && p.structure.type
       ? { type: p.structure.type, why: p.structure.why || '' } : undefined,
+    paraphrases: Array.isArray(p.paraphrases)
+      ? p.paraphrases.map((x) => [x.a, x.b]) : undefined,
     sentences: p.sentences.map((s) => ({
       src: String(s.src || ''),
       en: s.en || '',
@@ -406,7 +430,9 @@ function mockPassages(sentences) {
       source: '지문',
       topic: '이 지문이 무엇에 관한 내용인지 전체 흐름을 잡아보자.',
       catch: '이 지문에서 반드시 잡아야 할 핵심 메시지를 한두 줄로 정리하는 거야!',
+      claim: { stance: '중립적', why: '(MOCK: 실제로는 필자 입장을 긍정/부정/중립으로 판단)' },
       structure: { type: '주장 → 근거·예시', why: '(MOCK: 실제로는 전환어·예시·시간표현을 보고 판단)' },
+      paraphrases: [],
       sentences: chunk.map((en, i) => mk(en, g + i)),
     });
   }
