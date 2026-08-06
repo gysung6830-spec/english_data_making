@@ -23,6 +23,9 @@ if not exist "node_modules" (
   echo.
   call npm install
   echo.
+  echo [First run] Installing PDF engine (Chromium browser)...
+  call npx playwright install chromium
+  echo.
 )
 
 echo Starting the web app. Your browser will open shortly.

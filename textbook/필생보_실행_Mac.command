@@ -12,6 +12,8 @@ fi
 if [ ! -d node_modules ]; then
   echo "[최초 1회] 필요한 파일 설치 중... 1~3분 걸립니다."
   npm install
+  echo "[최초 1회] PDF 엔진(Chromium 브라우저) 설치 중..."
+  npx playwright install chromium
 fi
 echo "웹앱을 켭니다. 잠시 후 브라우저가 자동으로 열립니다."
 echo "안 열리면 http://localhost:3000 을 직접 여세요.  종료: Ctrl + C"

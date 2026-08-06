@@ -91,14 +91,9 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
     fs.writeFileSync(docxPath, buffer);
     log('docx 생성 완료');
 
-    const html = buildHtmlPassages(passages, { title: '지문 구문독해 워크북 (자동 생성)' });
+    const html = buildHtmlPassages(passages);
     fs.writeFileSync(htmlPath, html);
-    try {
-      await renderPdf(html, pdfPath);
-      log('디자인 PDF 생성 완료');
-    } catch (e) {
-      log(`PDF 렌더 건너뜀(playwright/Chromium 없음): ${e.message}`);
-    }
+    await renderPdfEnsuringBrowser(html, pdfPath, log);
 
     const files = [{ label: 'docx (편집용)', url: `/download/${path.basename(docxPath)}` }];
     if (fs.existsSync(pdfPath)) files.unshift({ label: 'PDF (배포용)', url: `/download/${path.basename(pdfPath)}` });
@@ -130,6 +125,34 @@ app.use((err, req, res, next) => {
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, hasKey: !!process.env.ANTHROPIC_API_KEY, model: process.env.ANTHROPIC_MODEL || 'claude-opus-5' });
 });
+
+// PDF 렌더. 브라우저(Chromium)가 없으면 최초 1회 자동 설치 후 재시도해 PDF 도 꼭 나오게 한다.
+let browserInstallTried = false;
+async function renderPdfEnsuringBrowser(html, pdfPath, log) {
+  try {
+    await renderPdf(html, pdfPath);
+    log('디자인 PDF 생성 완료');
+    return true;
+  } catch (e1) {
+    if (!browserInstallTried) {
+      browserInstallTried = true;
+      log('PDF용 브라우저(Chromium)가 없어 설치를 시도합니다 (최초 1회, 1~2분 걸려요)…');
+      try {
+        require('child_process').execSync('npx playwright install chromium', {
+          cwd: path.join(__dirname, '..'), stdio: 'ignore',
+        });
+        await renderPdf(html, pdfPath);
+        log('브라우저 설치 완료 · 디자인 PDF 생성 완료');
+        return true;
+      } catch (e2) {
+        log(`PDF 생성 실패 — 터미널에서  npx playwright install chromium  실행 후 다시 시도해 주세요. (docx 는 정상)`);
+        return false;
+      }
+    }
+    log('PDF 생성 실패 — 브라우저 미설치 (docx 는 정상). npx playwright install chromium 후 재시도.');
+    return false;
+  }
+}
 
 // 서버가 준비되면 기본 브라우저를 자동으로 연다(더블클릭 실행 편의). NO_OPEN=1 이면 끔.
 function openBrowser(url) {
