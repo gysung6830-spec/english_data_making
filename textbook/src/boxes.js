@@ -134,7 +134,7 @@ function trapBox(text) {
     makeBox(S.TRAP.bg, S.TRAP.border, [
       new Paragraph({
         children: [
-          new TextRun({ text: '⚠️ 이거 조심!  ', bold: true, size: 19, color: S.TRAP.label, font: S.FONT }),
+          new TextRun({ text: '⚠️ 이거 조심! (오역 주의)  ', bold: true, size: 19, color: S.TRAP.label, font: S.FONT }),
           new TextRun({ text, size: 19, color: S.TRAP.txt, font: S.FONT }),
         ],
       }),

@@ -147,12 +147,38 @@ function passageSentenceParas(s, idx) {
       children: [new TextRun({ text: `구문 포인트 — ${s.point}`, bold: true, size: 18, color: S.BRASS, font: S.FONT })],
     }));
   }
-  // 순서: 어휘 → 끊어읽기 팁 → 이거 조심 → 해석(쓰기) → 캐치(쓰기)
+  // 순서: 어휘 → 이거 조심(오역 주의) → 해석(쓰기) → 캐치(쓰기)
+  //   (끊어읽기 원리는 책 앞 '끊어읽기 팁 — 어디서 끊을까?' 페이지에 한 번)
   out.push(...B.vocabBox(s.vocab));
-  out.push(...B.tipBox(makeTip(s.chunks)));
   out.push(...B.trapBox(s.trap));
   out.push(...B.interpretWriteBox());
   out.push(...B.catchWriteBox());
+  return out;
+}
+
+// 책 앞 '끊어읽기 팁 — 어디서 끊을까?' 페이지 (목차 항목 1회)
+const CUT_SIGNALS_DOCX = [
+  ['① 전치사 앞 (in/on/at/of/with/for…)', "전치사구(전치사+명사)는 한 덩어리 — 예) in 1937 → ‘1937년에’"],
+  ['② to부정사 앞 (to+동사원형)', "‘~하는 것/~할/~하기 위해’ 덩어리 — 예) to house his works → ‘작품을 소장하기 위한’"],
+  ['③ 접속사 앞 (and/but/that/because/when…)', '뒤에 새 절(주어+동사)이 붙어 — 예) …, and he started teaching → 새 사건 시작'],
+  ['④ 관계사 앞 (who/which/that/where…)', '앞 명사를 꾸미는 절의 시작 — 예) the man who lives … → ‘…하는 그 남자’'],
+  ['⑤ 분사 · 콤마 (-ing/-ed 수식, ,)', '새 수식 덩어리 시작·이미 찍힌 경계 — 예) …, was established → 콤마·수동에서 끊기'],
+];
+function principlePageParas() {
+  const out = [B.h1('끊어읽기 팁 — 어디서 끊을까?')];
+  out.push(B.p('핵심 원리: 진짜 주어+동사(뼈대)를 먼저 잡고, 나머지 수식 덩어리는 신호어 앞에서 끊어 앞에서부터 붙여 읽어 — 되돌아가지 않기!', { bold: true }));
+  out.push(B.h2('끊는 신호 5가지'));
+  CUT_SIGNALS_DOCX.forEach(([name, rule]) => {
+    out.push(new Paragraph({
+      spacing: { after: 40 }, indent: { left: 200 },
+      children: [
+        new TextRun({ text: `${name}  `, bold: true, size: 21, color: S.NAVY, font: S.FONT }),
+        new TextRun({ text: rule, size: 20, font: S.FONT }),
+      ],
+    }));
+  });
+  out.push(B.p('끊는 자리는 늘 ‘새 덩어리가 시작되는 신호어 앞’ — 지문에서 이 5개만 찾으면 문장이 저절로 끊긴다.'));
+  out.push(B.pageBreak());
   return out;
 }
 
@@ -209,6 +235,7 @@ function passageCoverParagraphs(meta = {}) {
 function buildPassageDocument(passages, meta = {}) {
   const children = [
     ...passageCoverParagraphs(meta),
+    ...principlePageParas(),
     ...passages.flatMap((p, i) => passageParagraphs(p, i)),
   ];
   return new Document({

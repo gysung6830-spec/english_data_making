@@ -117,19 +117,34 @@ function catchCard(text) {
 function tipCard(text) {
   return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
 }
-// ✂ 끊어읽기 원리 박스 — 지문마다 한 번(어디서 끊는지 5신호 + 뼈대 우선 원리).
-function principleCard() {
-  const sigs = PRINCIPLES.map((t, i) => `<span class="psig"><b>${CIRCLED[i]}</b> ${esc(t)}</span>`).join('');
-  return `<div class="principle">
-    <div class="pr-h">✂ 끊어읽기 원리 — 어디서 끊을까?</div>
-    <div class="pr-core">뼈대(진짜 <b>주어+동사</b>)를 먼저 잡고, 나머지 수식 덩어리는 <b>신호어 앞</b>에서 끊어 앞에서부터 붙여 읽어. (되돌아가지 않기)</div>
-    <div class="pr-sigs">${sigs}</div>
-  </div>`;
+// ✂ 끊어읽기 팁 — 어디서 끊을까? (책 앞쪽 별도 페이지, 목차 항목 1회)
+const CUT_SIGNALS = [
+  ['전치사 앞', 'in / on / at / of / with / for …', '전치사구(전치사+명사)는 한 덩어리', "in 1937 → “1937년에”"],
+  ['to부정사 앞', 'to + 동사원형', "‘~하는 것 / ~할 / ~하기 위해’ 덩어리", "to house his works → “작품을 소장하기 위한”"],
+  ['접속사 앞', 'and / but / that / because / when …', '뒤에 새 절(주어+동사)이 붙어', "…, and he started teaching → 새 사건 시작"],
+  ['관계사 앞', 'who / which / that / where …', '앞 명사를 꾸미는 절의 시작', "the man who lives … → “…하는 그 남자”"],
+  ['분사 · 콤마', '-ing / -ed 수식, 그리고 ,', '새 수식 덩어리 시작 · 이미 찍힌 경계', "…, was established → 콤마·수동에서 끊기"],
+];
+function principlePageHtml() {
+  const cards = CUT_SIGNALS.map(([name, trig, rule, ex], i) => `<div class="cutcard">
+    <div class="cut-top"><span class="cut-n">${CIRCLED[i]}</span><span class="cut-name">${esc(name)}</span>
+      <span class="cut-trig">${esc(trig)}</span></div>
+    <div class="cut-rule">${esc(rule)}</div>
+    <div class="cut-ex">예) ${esc(ex)}</div>
+  </div>`).join('');
+  return `<section class="chapter">
+    <div class="chhead"><span class="daypill">끊어읽기 원리</span><span class="tagpill">한 번만 익히면 끝</span></div>
+    <h1>끊어읽기 팁 — 어디서 끊을까?</h1>
+    <div class="chsub">필생보 · 필자의 생각이 보이는 영어독해 — 모든 지문에 이 원리를 그대로 써먹어</div>
+    <div class="goal"><span class="goal-ic">핵심 원리</span> 뼈대(진짜 <b>주어+동사</b>)를 먼저 잡고, 나머지 수식 덩어리는 <b>신호어 앞</b>에서 끊어 <b>앞에서부터</b> 붙여 읽어 — 되돌아가지 않기!</div>
+    <div class="cutgrid">${cards}</div>
+    <div class="pcatch"><span class="pcatch-h">✅ 이 페이지만 기억해!</span>끊는 자리는 늘 <b>‘새 덩어리가 시작되는 신호어 앞’</b>이야. 지문에서 이 5개만 찾으면 문장이 저절로 끊겨.</div>
+  </section>`;
 }
-// ⚠️ 함정 주의 — 이 문장에서 자주 틀리는 해석 포인트 경고.
+// ⚠️ 이거 조심 — 이 문장에서 '오역하기 쉬운 부분'을 미리 경고(오역 주의).
 function trapCard(text) {
   if (!text) return '';
-  return `<div class="callout trap"><span class="co-ic">⚠️ 이거 조심!</span> ${esc(text)}</div>`;
+  return `<div class="callout trap"><span class="co-ic">⚠️ 이거 조심! (오역 주의)</span> ${esc(text)}</div>`;
 }
 // 문장별 함정 문구 선택: 문장에 trap 이 있으면 그걸, 없으면 챕터 traps 를 순서대로 순환.
 function pickTrap(cat, s, i) {
@@ -363,13 +378,17 @@ function css() {
     padding:8px 12px 10px; margin:7px 0; break-inside:avoid; }
   .cw-h { font-size:11px; font-weight:800; color:${C.tealDark}; margin-bottom:4px; }
   .cw-hint { font-weight:600; color:${C.sub}; font-size:9.5px; margin-left:4px; }
-  .principle { background:${C.tipBg}; border:1px solid ${C.line}; border-left:5px solid ${C.tipBar};
-    border-radius:8px; padding:10px 13px; margin:6px 0 12px; break-inside:avoid; }
-  .pr-h { font-weight:800; font-size:12px; color:#333; margin-bottom:5px; }
-  .pr-core { font-size:10.6px; color:#444; margin-bottom:7px; }
-  .pr-sigs { display:flex; flex-wrap:wrap; gap:5px 8px; }
-  .psig { background:#fff; border:1px solid ${C.line}; border-radius:12px; padding:2px 9px; font-size:9.7px; color:#444; }
-  .psig b { color:${C.teal}; margin-right:2px; }
+  .cutgrid { display:flex; flex-direction:column; gap:8px; margin:10px 0; }
+  .cutcard { border:1px solid ${C.line}; border-left:5px solid ${C.teal}; border-radius:7px;
+    padding:9px 13px; background:#fbfdfb; break-inside:avoid; }
+  .cut-top { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+  .cut-n { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;
+    border-radius:50%; background:${C.teal}; color:#fff; font-size:11px; font-weight:800; }
+  .cut-name { font-weight:800; font-size:13px; }
+  .cut-trig { color:${C.tealDark}; font-size:10.5px; font-weight:700; background:${C.mint};
+    border:1px solid ${C.greenLine}; border-radius:10px; padding:1px 9px; }
+  .cut-rule { font-size:11px; color:#333; }
+  .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
   `;
 }
 
@@ -400,7 +419,6 @@ function passageSentence(s, idx) {
   return `<div class="sblock">
     <div class="senth"><span class="sbadge">${idx}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
     ${vocabInline(s.vocab)}
-    ${tipCard(makeTip(s.chunks))}
     ${trapCard(s.trap)}
     ${interpretWriteCard()}
     ${catchWriteCard()}</div>`;
@@ -423,8 +441,7 @@ function passageHtml(p, idx) {
   if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
-  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘·팁·이거조심 보고 → 해석·캐치는 직접', 'teal');
-  h += principleCard();
+  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘·오역주의 보고 → 해석·캐치는 직접 (끊어읽기 원리는 앞 페이지)', 'teal');
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
   if (p.catch) {
@@ -446,7 +463,7 @@ function buildHtmlPassages(passages, meta = {}) {
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
   });
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
-    + `<body>${cover}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
+    + `<body>${cover}${principlePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
 
 // 전체 HTML 문서. rawCategories 는 splitWorked 전(worked 2개 초과 허용) 데이터.

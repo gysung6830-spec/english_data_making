@@ -316,7 +316,8 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
 - vocab: 그 문장에서 모를 만한 단어 3~6개와 뜻.
 - catch: 이 문장 핵심 뜻 한 줄(20~45자, 반말, 문법 용어 금지).
-- trap: 자주 틀리는 해석 경고 한 줄(그 문장에 실제 있는 요소만).
+- trap: 이 문장에서 **오역하기 쉬운 부분을 미리** 짚어줘. "A로 잘못 읽기 쉬운데, 실제론 B야" 형식으로,
+  그 문장에 실제 있는 요소만(없는 단어 지어내지 마).
 - point: 이 문장의 핵심 구문/문법을 짧은 태그로(예: '수동태','관계사절','분사구문','to부정사','전치사구').`;
 
 function passageUserPrompt(sentences) {
@@ -380,7 +381,7 @@ function mockPassages(sentences) {
       chunks: [[words.slice(0, mid).join(' '), '(앞 덩어리 해석)'], [words.slice(mid).join(' '), '(뒤 덩어리 해석)']],
       vocab: [[words[0] || 'word', '(뜻)'], [words[mid] || 'word', '(뜻)']],
       catch: '이 문장의 핵심을 한 줄로 잡아보는 거야!',
-      trap: '진짜 주어·동사를 먼저 찾고, 나머지는 꾸밈말로 걸러 읽어.',
+      trap: '수식어를 주어로 잘못 읽기 쉬운데, 진짜 주어·동사부터 찾아 읽어야 해.',
     };
   };
   const passages = [];
