@@ -50,8 +50,8 @@ class DesignCfg:
 class OutputsCfg:
     """어떤 PDF 를 생성할지 선택 (분석지 / 어휘 리스트 / 영단어 시험지)."""
     analysis: bool = True
-    wordlist: bool = True
-    quiz: bool = True
+    wordlist: bool = False      # (사용 안 함) 직독직해 단어 기반 어휘 리스트
+    quiz: bool = False          # (사용 안 함) 직독직해 단어 기반 영단어 시험지
     student: bool = False       # 학생용(정답 빈칸) 분석지
     vocablist: bool = True      # 핵심 어휘 리스트(유의어·반의어)
     vocabtest: bool = True      # 핵심 어휘 시험지(뜻쓰기+유의어/반의어 줄긋기)

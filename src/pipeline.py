@@ -132,17 +132,6 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
                                    source_label=label)
         recs.append({"kind": "student", "label": "📗 분석지(학생용·빈칸)", "path": p})
 
-    # 어휘 리스트·시험지: PDF 는 파일당 1개, 안에서 지문별로 페이지를 나눔
-    if sel.wordlist:
-        p = cfg.output_dir / f"{stem}_어휘리스트.pdf"
-        render.render_wordlist_pdf(reports, p, title=f"{title} — 핵심 어휘", footer_note=fn)
-        recs.append({"kind": "wordlist", "label": "📝 어휘 리스트", "path": p})
-
-    if sel.quiz:
-        p = cfg.output_dir / f"{stem}_어휘test.pdf"
-        render.render_quiz_pdf(reports, p, title=f"{title} — 영단어 시험", footer_note=fn)
-        recs.append({"kind": "quiz", "label": "✏️ 시험지", "path": p})
-
     # 핵심 어휘 리스트(유의어·반의어) — 분석지의 어휘 기반, 별도 PDF
     if getattr(sel, "vocablist", False):
         p = cfg.output_dir / f"{stem}_핵심어휘리스트.pdf"
