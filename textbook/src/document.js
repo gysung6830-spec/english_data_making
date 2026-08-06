@@ -147,12 +147,12 @@ function passageSentenceParas(s, idx) {
       children: [new TextRun({ text: `구문 포인트 — ${s.point}`, bold: true, size: 18, color: S.BRASS, font: S.FONT })],
     }));
   }
-  // 순서: 어휘 → 이거 조심(오역 주의) → 해석(쓰기) → 캐치(쓰기)
+  // 순서: 어휘 → 해석(쓰기) → 캐치(쓰기) → 이거 조심(오역 주의)
   //   (끊어읽기 원리는 책 앞 '끊어읽기 팁 — 어디서 끊을까?' 페이지에 한 번)
   out.push(...B.vocabBox(s.vocab));
-  out.push(...B.trapBox(s.trap));
   out.push(...B.interpretWriteBox());
   out.push(...B.catchWriteBox());
+  out.push(...B.trapBox(s.trap));
   return out;
 }
 

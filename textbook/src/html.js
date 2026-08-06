@@ -419,9 +419,9 @@ function passageSentence(s, idx) {
   return `<div class="sblock">
     <div class="senth"><span class="sbadge">${idx}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
     ${vocabInline(s.vocab)}
-    ${trapCard(s.trap)}
     ${interpretWriteCard()}
-    ${catchWriteCard()}</div>`;
+    ${catchWriteCard()}
+    ${trapCard(s.trap)}</div>`;
 }
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
@@ -441,7 +441,7 @@ function passageHtml(p, idx) {
   if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
-  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘·오역주의 보고 → 해석·캐치는 직접 (끊어읽기 원리는 앞 페이지)', 'teal');
+  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal');
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
   if (p.catch) {
