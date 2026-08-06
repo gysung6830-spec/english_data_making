@@ -143,18 +143,38 @@ function principlePageHtml() {
 }
 
 // 글의 구조 안내 페이지 (책 앞쪽 별도 페이지, 목차 항목 1회) — 모의고사 지문 기준
+// [유형, 통념/앞단계 신호, 반전/뒷단계 신호, 흐름, 예]
 const STRUCTURE_GUIDE = [
-  ['통념 → 반박(반전)', 'But / However / Yet / In fact / Contrary to', '흔한 생각(통념)을 던진 뒤 뒤집어 필자 주장을 편다', '“많은 이가 X라 여긴다. 하지만 실제론 Y다.”'],
-  ['주장 → 근거·예시', 'because / since / for example / studies show / therefore', '필자 주장을 먼저 내세우고 이유·연구·예시로 뒷받침', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
-  ['문제 → 해결(방안)', 'problem / challenge / solution / one way to / should', '문제를 제기하고 해결책·방안을 제시', '“이런 문제가 있다. 이를 해결하려면 …”'],
-  ['비교 · 대조', 'while / whereas / unlike / in contrast / on the other hand', 'A와 B의 공통점·차이점을 견줌', '“A는 …인 반면, B는 …이다.”'],
-  ['시간 · 순서(나열)', 'first / then / later / after / in 1937 / finally', '사건·과정을 시간·순서대로(전기·실험·역사)', '“먼저 …, 그다음 …, 마침내 …”'],
-  ['예시 → 일반화(결론)', 'for instance … / thus / therefore / in short / this suggests', '구체 사례들을 든 뒤 일반 원리·결론으로 묶음', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
+  ['통념 → 반박(반전)',
+    '통념 세팅: many people think/believe · it is widely[commonly] believed · traditionally · we tend to think · most people assume · at first glance',
+    '반전: But · However · Yet · In fact · In reality · Contrary to · Nevertheless',
+    '흔한 생각(통념)을 깔아둔 뒤 뒤집어 필자 주장을 편다', '“Many people believe X. But in fact, Y.”'],
+  ['주장 → 근거·예시',
+    '주장: should · must · it is important that · I argue',
+    '근거·예시: because · since · for example · for instance · research[studies] show · therefore',
+    '주장을 먼저 내세우고 이유·연구·예시로 뒷받침', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
+  ['문제 → 해결(방안)',
+    '문제: problem · challenge · issue · difficulty · concern',
+    '해결: solution · solve · address · one way to · need to · should',
+    '문제를 제기하고 해결책·방안을 제시', '“이런 문제가 있다. 이를 해결하려면 …”'],
+  ['비교 · 대조',
+    '대조: while · whereas · unlike · in contrast · on the other hand · by contrast',
+    '비교: similarly · likewise · just as · like · both … and',
+    'A와 B의 공통점·차이점을 견줌', '“A는 …인 반면, B는 …이다.”'],
+  ['시간 · 순서(나열)',
+    '순서: first · second · next · then · later · after · before · finally',
+    '시간: in 1937 · meanwhile · over time · eventually · subsequently',
+    '사건·과정을 시간·순서대로(전기·실험·역사)', '“먼저 …, 그다음 …, 마침내 …”'],
+  ['예시 → 일반화(결론)',
+    '예시: for example · for instance · such as · consider · take … as an example',
+    '일반화·결론: thus · therefore · in short · in conclusion · this suggests[shows] · overall',
+    '구체 사례들을 든 뒤 일반 원리·결론으로 묶음', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
 ];
 function structurePageHtml() {
-  const cards = STRUCTURE_GUIDE.map(([name, sig, flow, ex], i) => `<div class="cutcard gram">
+  const cards = STRUCTURE_GUIDE.map(([name, sig1, sig2, flow, ex], i) => `<div class="cutcard gram">
     <div class="cut-top"><span class="cut-n gram">${CIRCLED[i]}</span><span class="cut-name">${esc(name)}</span></div>
-    <div class="cut-trig gram">신호어 · ${esc(sig)}</div>
+    <div class="st-sig">🔎 ${esc(sig1)}</div>
+    <div class="st-sig">↳ ${esc(sig2)}</div>
     <div class="cut-rule">${esc(flow)}</div>
     <div class="cut-ex">예) ${esc(ex)}</div>
   </div>`).join('');
@@ -417,7 +437,7 @@ function css() {
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
   .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
   .cut-n.gram { background:${C.gram}; }
-  .cut-trig.gram { color:${C.gram}; background:#fff; border-color:#ddd4f2; }
+  .st-sig { font-size:10px; color:${C.gram}; font-weight:700; margin:2px 0; line-height:1.45; }
   .daypill.gram { background:${C.gram}; }
   .goal.gram { background:${C.gramBg}; border-left-color:${C.gram}; }
   .goal-ic.gram { background:${C.gram}; }
