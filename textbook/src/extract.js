@@ -41,6 +41,12 @@ function stripNoise(text) {
   return text
     .replace(/\r/g, '')
     .replace(/[ \t]+/g, ' ')
+    // 약어의 마침표를 없애 문장 분리 오작동 방지 (5 p.m. → 5 pm, e.g. → eg …)
+    .replace(/\b([ap])\.\s*m\./gi, '$1m ')
+    .replace(/\b(Mr|Mrs|Ms|Dr|St|vs|etc|Inc|Jr|Sr|Prof|No)\./g, '$1')
+    .replace(/\be\.g\./gi, 'eg').replace(/\bi\.e\./gi, 'ie').replace(/\bU\.S\./g, 'US')
+    // 각주 번호 제거 (문장 끝의 1) 2) … — 단, (1937) 같은 연도·괄호는 보존)
+    .replace(/(?<![\d(])\d{1,3}\)/g, ' ')
     // 줄 앞의 문항 번호/불릿 제거
     .replace(/^\s*\(?\d{1,2}\)?[.)]\s*/gm, '')
     .replace(/^\s*[①-⑳]\s*/gm, '');
