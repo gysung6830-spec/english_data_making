@@ -658,11 +658,25 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
         rng.shuffle(mean)
         for j, w in enumerate(mean):
             w["qno"] = j + 1
-        # ② 유의어 / ③ 반의어 줄긋기 (대표어가 있는 항목만)
-        syn_pairs = [{"word": it["word"], "target": _first_term(it["synonyms"])}
-                     for it in items if _first_term(it["synonyms"])]
-        ant_pairs = [{"word": it["word"], "target": _first_term(it["antonyms"])}
-                     for it in items if _first_term(it["antonyms"])]
+        # ② 유의어 / ③ 반의어 줄긋기 — 각 단어를 '한 곳에만' 배정(중복 없이 절반씩)
+        syn_pairs: list[dict] = []
+        ant_pairs: list[dict] = []
+        both: list[tuple] = []
+        for it in items:
+            s = _first_term(it["synonyms"])
+            a = _first_term(it["antonyms"])
+            if s and a:
+                both.append((it, s, a))       # 둘 다 가능 → 균형 맞춰 나중에 배정
+            elif s:
+                syn_pairs.append({"word": it["word"], "target": s})
+            elif a:
+                ant_pairs.append({"word": it["word"], "target": a})
+        rng.shuffle(both)
+        for it, s, a in both:                 # 두 블록 크기가 비슷해지도록 번갈아 배정
+            if len(syn_pairs) <= len(ant_pairs):
+                syn_pairs.append({"word": it["word"], "target": s})
+            else:
+                ant_pairs.append({"word": it["word"], "target": a})
         passages.append({
             "no": i, "total": len(reps), "title": _display_title(rep),
             "mean": mean, "mean_rows": _pair_rows(mean),
