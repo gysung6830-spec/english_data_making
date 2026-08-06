@@ -382,6 +382,28 @@ function normalizePassages(aiData) {
   }));
 }
 
+// AI 출력의 사소한 흠(빈 끊어읽기 조각/어휘, 빈 src·catch 등)을 자동 보정해
+// 검증(불변식)을 통과하도록 정리한다. 못 살리는 문장·지문은 조용히 버린다.
+function sanitizePassages(passages) {
+  const ne = (v) => typeof v === 'string' && v.trim().length > 0;
+  return passages.map((p) => {
+    const sentences = (p.sentences || []).map((s, i) => {
+      const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && ne(c[0]) && ne(c[1]));
+      const vocab = (s.vocab || []).filter((v) => Array.isArray(v) && ne(v[0]) && ne(v[1]));
+      return {
+        src: ne(s.src) ? s.src : String(i + 1),
+        en: s.en || '',
+        point: s.point || '',
+        chunks,
+        vocab: vocab.length ? vocab : [[(String(s.en || '').split(/\s+/)[0] || 'word'), '뜻']],
+        catch: ne(s.catch) ? s.catch : '이 문장의 핵심을 한 줄로 잡아보자.',
+        trap: s.trap || '',
+      };
+    }).filter((s) => ne(s.en) && s.chunks.length > 0);
+    return { ...p, sentences };
+  }).filter((p) => p.sentences.length > 0);
+}
+
 async function callClaudePassages(sentences, apiKey) {
   const Anthropic = require('@anthropic-ai/sdk');
   const client = new Anthropic(apiKey ? { apiKey } : undefined);
@@ -533,12 +555,12 @@ async function structurePassages(sentences, opts = {}) {
     }
   });
 
-  const passages = results.flat();
+  const passages = sanitizePassages(results.flat());
   if (!passages.length) throw new Error('모든 지문 생성이 실패했어요. (키·모델 권한·네트워크 확인)');
   return { passages, mode: 'ai' };
 }
 
 module.exports = {
   structureSentences, normalize, OUTPUT_SCHEMA, CHAPTERS, DEFAULT_MODEL,
-  structurePassages, normalizePassages, PASSAGE_SCHEMA,
+  structurePassages, normalizePassages, sanitizePassages, PASSAGE_SCHEMA,
 };
