@@ -4,7 +4,7 @@
 <body>
   {# 지문별: 문제(뜻쓰기 → 유의어 줄긋기 → 반의어 줄긋기) #}
   {% for pg in passages %}
-  <div class="wl-passage{{ ' pgbreak' if not loop.first }}">
+  <div class="wl-passage vt-page{{ ' pgbreak' if not loop.first }}">
     <div class="doc-header">
       <span class="doc-badge">Vocabulary Test</span>
       {% if pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}

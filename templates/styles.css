@@ -457,6 +457,15 @@ table.match { width: 100%; border-collapse: collapse; table-layout: fixed; margi
 }
 .mt-dot { color: var(--voc); font-weight: 800; }
 
+/* 핵심 어휘 시험지: 한 지문당 문제를 1쪽에 담기 위한 압축 배치 */
+.vt-page .doc-header { padding-bottom: 3px; margin-bottom: 6px; }
+.vt-page .quiz-meta { margin: 2px 0 1px; }
+.vt-page .vt-part { margin: 7px 0 3px; font-size: 9.5px; }
+.vt-page table.t-quiz td { padding: 2px 8px; }
+.vt-page .t-quiz tbody td { height: 15px; }
+.vt-page table.match td { padding: 1.5px 4px; font-size: 9px; }
+.vt-page .mt-no, .vt-page .mt-sym { font-size: 8px; }
+
 /* ============================================================
    앞부분: 원문 + 전체 해석 모음 (지문 여러 개를 앞에 모아 배치)
    ============================================================ */
