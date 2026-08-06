@@ -169,14 +169,24 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
 # 원본 머리글의 문제 번호 패턴(우선순위 순):
 #  ① 'N번:' / 'N번 :' — 문제 제목 머리글(예: '… – 30번: 소유가 …')
 #  ② 줄 맨 앞 'N번 …'   — (예: '31번 2026년 …')
-_PROBNO_COLON = re.compile(r"(\d{1,3})\s*번\s*[:：]")
-_PROBNO_LINE = re.compile(r"(?m)^\s*(\d{1,3})\s*번(?![가-힣:：])")
+# 범위 표기('43~45번','40-42번' 장문·순서 유형)도 하나의 번호로 인식한다.
+_NUM = r"\d{1,3}(?:\s*[~∼〜－\-–—]\s*\d{1,3})?"
+_PROBNO_COLON = re.compile(rf"({_NUM})\s*번\s*[:：]")
+_PROBNO_LINE = re.compile(rf"(?m)^\s*({_NUM})\s*번(?![가-힣:：])")
+
+
+def _norm_probno(s: str) -> str:
+    """'43 ~ 45' 처럼 공백·구분자가 섞인 범위를 '43~45'로 정규화."""
+    import re as _re
+    s = _re.sub(r"\s+", "", s)
+    return _re.sub(r"[∼〜－\-–—]", "~", s)
 
 
 def _detect_problem_numbers(src: Path) -> list[str]:
-    """원본(PDF/HWP) 머리글에서 '30번'·'31번' 같은 실제 문제 번호를 순서대로 뽑는다.
+    """원본(PDF/HWP) 머리글에서 '30번'·'43~45번' 같은 실제 문제 번호를 순서대로 뽑는다.
 
     'N번:'(제목 머리글)을 우선 찾고, 없으면 줄 맨 앞 'N번'을 찾는다.
+    장문·순서 유형의 범위 표기('43~45번')는 하나의 라벨로 취급한다.
     한글 제거 전 원문에서 찾는다(제거 후엔 '번'이 사라짐). 못 찾으면 빈 리스트.
     """
     from .. import extract
@@ -188,7 +198,7 @@ def _detect_problem_numbers(src: Path) -> list[str]:
     for rex in (_PROBNO_COLON, _PROBNO_LINE):
         seen: list[str] = []
         for m in rex.finditer(raw):
-            n = m.group(1)
+            n = _norm_probno(m.group(1))
             if n not in seen:      # 같은 번호가 여러 번 나와도 한 번만
                 seen.append(n)
         if seen:
