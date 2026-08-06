@@ -298,10 +298,12 @@ def opts_block(opts, answer):
 
 
 def direct_block(num, typ, direct):
+    """해석카드 = 형광펜 색 없이 슬래시(/)로 끊어 읽기 (영↔한 청크 대응)."""
+    SL = ' <span class="sl">/</span> '
     rows = ""
     for i, r in enumerate(direct):
-        en = " ".join(f'<span class="{c[1]}">{esc(c[0])}</span>' for c in r.get("en", []))
-        ko = " ".join(f'<span class="{c[1]}">{esc(c[0])}</span>' for c in r.get("ko", []))
+        en = SL.join(esc(c[0]) for c in r.get("en", []))
+        ko = SL.join(esc(c[0]) for c in r.get("ko", []))
         note = f' <span style="color:#8a6a00;font-weight:700">← {esc(r["note"])}</span>' if r.get("note") else ""
         rows += (f'<div class="row"><span class="bn">{i+1}</span>'
                  f'<div class="en">{en}</div><div class="ko">{ko}{note}</div></div>')
@@ -450,7 +452,7 @@ def render_spread(rec, c, idx):
         step3_body = seam_block(seqd)
     else:
         step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
-        step3_head = "🟡 무조건 읽는 문장 — 같은 형광펜 색끼리 영↔한 대응"
+        step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
         step3_body = direct_block(num, typ, c.get("direct", []))
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
@@ -925,6 +927,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .dchl .bn{ position:absolute; left:0; top:1px; width:14px; height:14px; line-height:14px; text-align:center; background:var(--src-line); color:#fff; border-radius:50%; font-size:8px; font-weight:800; }
 .dchl .en{ font-size:10.2px; line-height:1.95; color:#23272e; }
 .dchl .ko{ font-size:9.6px; line-height:1.95; color:#23272e; margin-top:2px; }
+.dchl .sl{ color:#b3beb6; font-weight:400; padding:0 1px; }
 .hl0,.hl1,.hl2,.hl3,.hl4{ color:#23272e; padding:1px 4px; border-radius:3px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .hl0{ background:#c9e0ec; } .hl1{ background:#c7e0da; } .hl2{ background:#e8dfb2; } .hl3{ background:#e2dac8; } .hl4{ background:#d5ddb9; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
