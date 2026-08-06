@@ -22,9 +22,17 @@ if not exist "node_modules" (
   echo [First run] Installing required files... 1-3 minutes.
   echo.
   call npm install
+  if errorlevel 1 (
+    echo.
+    echo [ERROR] npm install failed. Check your internet connection and run again.
+    echo.
+    pause
+    exit /b
+  )
   echo.
-  echo [First run] Installing PDF engine (Chromium browser)...
-  call npx playwright install chromium
+  echo [First run] Installing PDF engine ^(Chromium browser^)...
+  echo   ^(If this step is skipped, PDF is still auto-installed on first use.^)
+  call npx --yes playwright install chromium
   echo.
 )
 
