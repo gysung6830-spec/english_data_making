@@ -16,6 +16,9 @@ _CIRCLED_RE = re.compile(f"[{CIRCLED}]")
 _ABBREV = {
     "mr", "mrs", "ms", "dr", "prof", "st", "vs", "etc", "e.g", "i.e",
     "no", "fig", "inc", "ltd", "co", "jr", "sr", "u.s", "u.k",
+    # 학위·시각·이니셜(마침표를 문장 끝으로 오인하기 쉬움)
+    "ph", "ph.d", "b.a", "m.a", "b.s", "m.s", "m.d", "ed.d",
+    "a.m", "p.m", "d.c", "u.s.a",
 }
 
 
@@ -80,7 +83,12 @@ def split_by_punct(text: str) -> list[str]:
             while k < n and text[k] == " ":
                 k += 1
             nxt = text[k] if k < n else ""
-            if (j >= n or nxt == "" or nxt in "\"“‘([" or nxt.isupper()
+            upper_boundary = nxt.isupper()
+            # 이니셜/약어 보호: 마침표 뒤 '공백 없이' 대문자가 바로 붙고(예: 'Ph.D.','U.S.A.')
+            # 그 앞 단어가 1~2글자 이니셜이면 문장 경계가 아니다. (진짜 문장 끝은 보통 공백이 있음)
+            if upper_boundary and k == j and len(word) <= 2 and word.replace(".", "").isalpha():
+                upper_boundary = False
+            if (j >= n or nxt == "" or nxt in "\"“‘([" or upper_boundary
                     or text[k:k + 3] == "..."):
                 sentences.append("".join(buf).strip())
                 buf = []

@@ -125,6 +125,21 @@ _env.globals["circled"] = circled
 _env.globals["abc"] = lambda i: chr(65 + i) if 0 <= i < 26 else str(i + 1)
 
 
+def _strip_ans_markers(text: str) -> str:
+    """본문 표시용: 정답 표기 괄호만 제거하고 '정상 괄호'는 살린다.
+
+    (X)·(O)·(A) 같은 '한 글자 정답/오답 표기'는 지우되, (Friday)·(2020)·(Country)
+    처럼 내용이 든 괄호는 그대로 둔다. 예전에는 모든 '(' ')' 를 지워
+    '12th (Friday)' 가 '12thFriday' 로 뭉치는 문제가 있었다.
+    """
+    import re
+    s = re.sub(r"\(\s*[A-Za-z0-9]\s*\)", "", str(text))   # (X)·(1) 등 한 글자 표기만 제거
+    return re.sub(r"\s{2,}", " ", s).strip()
+
+
+_env.filters["ansclean"] = _strip_ans_markers
+
+
 def _as_list(analyses) -> list[Analysis]:
     if isinstance(analyses, Analysis):
         return [analyses]
