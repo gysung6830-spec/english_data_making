@@ -193,6 +193,21 @@ function passageAnswerParas(p) {
   return out;
 }
 
+// 🧩 글의 구조 고르기 (해석 전에) — 체크 목록
+const STRUCTURE_TYPES = [
+  '통념 → 반박(반전)', '주장 → 근거·예시', '문제 → 해결(방안)',
+  '비교 · 대조', '시간 · 순서(나열)', '예시 → 일반화(결론)',
+];
+function structureChoiceParas() {
+  const out = [B.p('해석하기 전에, 전체 흐름을 보고 이 글의 구조를 하나 골라 ✓ 해봐.')];
+  STRUCTURE_TYPES.forEach((t) => out.push(new Paragraph({
+    spacing: { after: 40 }, indent: { left: 220 },
+    children: [new TextRun({ text: `☐  ${t}`, size: 22, font: S.FONT })],
+  })));
+  out.push(B.p('그렇게 본 근거(전환·연결 표현이나 문장 번호): ____________________________'));
+  return out;
+}
+
 function passageParagraphs(p, idx) {
   const out = [B.h1(p.title || `지문 ${idx + 1}`)];
   out.push(B.p(`출처: ${p.source || '지문'}`, { italics: true, color: '666666' }));
@@ -205,10 +220,16 @@ function passageParagraphs(p, idx) {
       new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
     ]),
   }));
+  out.push(B.h2('글의 구조 — 해석 전에 예측!'));
+  out.push(...structureChoiceParas());
   out.push(B.h2('한 문장씩 직접 풀기'));
   (p.sentences || []).forEach((s, i) => out.push(...passageSentenceParas(s, i + 1)));
-  // 지문 끝: 답지(해석·캐치) → 지문 전체 요지
+  // 지문 끝: 답지(해석·캐치) → 글의 구조 정답 → 지문 전체 요지
   out.push(...passageAnswerParas(p));
+  if (p.structure && p.structure.type) {
+    out.push(B.h2('이 글의 구조 (정답)'));
+    out.push(B.p(`${p.structure.type}${p.structure.why ? ` — ${p.structure.why}` : ''}`));
+  }
   if (p.catch) { out.push(B.h2('이 지문, 이 정도는 캐치! (전체 요지)')); out.push(...B.catchBox(p.catch)); }
   out.push(B.pageBreak());
   return out;

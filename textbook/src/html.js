@@ -389,6 +389,18 @@ function css() {
     border:1px solid ${C.greenLine}; border-radius:10px; padding:1px 9px; }
   .cut-rule { font-size:11px; color:#333; }
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
+  .structbox { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
+    border-radius:8px; padding:11px 14px; margin:6px 0 12px; break-inside:avoid; }
+  .st-h { font-weight:800; font-size:13px; color:${C.gram}; margin-bottom:8px; }
+  .st-hint { font-weight:600; color:${C.sub}; font-size:9.7px; margin-left:5px; }
+  .st-opts { display:flex; flex-wrap:wrap; gap:7px 14px; margin-bottom:9px; }
+  .st-opt { display:inline-flex; align-items:center; gap:6px; font-size:11.5px; font-weight:700; color:#333; }
+  .st-box { width:13px; height:13px; border:1.6px solid ${C.gram}; border-radius:3px; background:#fff; display:inline-block; }
+  .st-why { font-size:10.3px; color:${C.sub}; }
+  .st-line { display:inline-block; border-bottom:1px solid #b9b1d6; min-width:210px; vertical-align:bottom; }
+  .struct-reveal { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
+    border-radius:8px; padding:10px 14px; margin:12px 0 4px; font-size:11.5px; break-inside:avoid; }
+  .sr-h { font-weight:800; color:${C.gram}; margin-right:6px; }
   `;
 }
 
@@ -423,9 +435,33 @@ function passageSentence(s, idx) {
     ${catchWriteCard()}
     ${trapCard(s.trap)}</div>`;
 }
+// 글의 구조 유형(학생이 해석 전에 하나 고름)
+const STRUCTURE_TYPES = [
+  '통념 → 반박(반전)',
+  '주장 → 근거·예시',
+  '문제 → 해결(방안)',
+  '비교 · 대조',
+  '시간 · 순서(나열)',
+  '예시 → 일반화(결론)',
+];
+// 🧩 글의 구조 고르기 — 해석 전에 전체 흐름 보고 예측(직접 ✓)
+function structureChoiceCard() {
+  const opts = STRUCTURE_TYPES.map((t) => `<label class="st-opt"><span class="st-box"></span>${esc(t)}</label>`).join('');
+  return `<div class="structbox">
+    <div class="st-h">🧩 이 글, 어떤 구조야? <span class="st-hint">해석하기 전에 · 전체 흐름을 보고 하나에 ✓</span></div>
+    <div class="st-opts">${opts}</div>
+    <div class="st-why">그렇게 본 근거(전환·연결 표현이나 문장 번호): <span class="st-line"></span></div>
+  </div>`;
+}
+// 지문 끝: 글의 구조 정답 공개
+function structureReveal(p) {
+  if (!p.structure || !p.structure.type) return '';
+  const { type, why } = p.structure;
+  return `<div class="struct-reveal"><span class="sr-h">🧩 이 글의 구조 (정답)</span> <b>${esc(type)}</b>${why ? ` — ${esc(why)}` : ''}</div>`;
+}
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
-  let h = secHead(CIRCLED[2], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
+  let h = secHead(CIRCLED[3], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
   h += (p.sentences || []).map((s, i) => `<div class="sblock">
     <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
     ${chunkLines(s.chunks, true)}
@@ -441,9 +477,12 @@ function passageHtml(p, idx) {
   if (p.topic) h += `<div class="goal"><span class="goal-ic">이 지문, 뭐야?</span> ${esc(p.topic)}</div>`;
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
-  h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal');
+  h += secHead(CIRCLED[1], '글의 구조 — 해석 전에 예측!', '전체를 읽고, 이 글이 어떤 짜임인지 먼저 골라봐', 'gram');
+  h += structureChoiceCard();
+  h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal');
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
+  h += structureReveal(p);
   if (p.catch) {
     h += `<div class="pcatch"><span class="pcatch-h">✅ 이 지문, 이 정도는 캐치! (전체 요지)</span>${esc(p.catch)}</div>`;
   }
