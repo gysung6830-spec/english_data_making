@@ -561,6 +561,16 @@ def render_quiz_pdf(reports, out_path: str | Path,
 # ---------------------------------------------------------------------------
 # 핵심 어휘 리스트 / 핵심 어휘 시험지 (분석지의 '핵심 어휘·유의어·반의어' 기반)
 # ---------------------------------------------------------------------------
+# 유의어·반의어 '없음' 표시(대시류/없음) — 리스트엔 '—'로 보이고 줄긋기 매칭에선 제외
+_DASH_NONE = {"", "-", "—", "–", "―", "ー", "없음", "n/a", "na"}
+
+
+def _norm_synant(s: str) -> str:
+    """빈 값/대시류를 통일된 '—' 로 정규화(리스트 표시용)."""
+    v = (s or "").strip()
+    return "—" if v.lower() in _DASH_NONE else v
+
+
 def _collect_vocab_one(report) -> list[dict]:
     """한 지문의 핵심 어휘(의미·유의어·반의어 포함)를 번호순으로 모은다."""
     out = []
@@ -570,17 +580,19 @@ def _collect_vocab_one(report) -> list[dict]:
             continue
         out.append({
             "no": v.no, "word": word, "meaning": (v.meaning or "").strip(),
-            "synonyms": (v.synonyms or "").strip(), "antonyms": (v.antonyms or "").strip(),
+            "synonyms": _norm_synant(v.synonyms), "antonyms": _norm_synant(v.antonyms),
             "sentence_no": v.sentence_no,
         })
     return out
 
 
 def _first_term(s: str) -> str:
-    """'vital, crucial' → 'vital' (줄긋기 매칭용 대표 1개)."""
-    if not s:
+    """'vital, crucial' → 'vital' (줄긋기 매칭용 대표 1개). '없음(—)'이면 빈 문자열."""
+    v = (s or "").strip()
+    if v.lower() in _DASH_NONE:
         return ""
-    return re.split(r"[,/·;]| or ", s)[0].strip()
+    first = re.split(r"[,/·;]| or ", v)[0].strip()
+    return "" if first.lower() in _DASH_NONE else first
 
 
 def render_vocablist_pdf(reports, out_path: str | Path,
