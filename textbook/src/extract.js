@@ -62,9 +62,14 @@ function joinAndSplit(text) {
   for (const line of lines) {
     const hangul = (line.match(/[가-힣]/g) || []).length;
     const latin = (line.match(/[A-Za-z]/g) || []).length;
+    const lower = (line.match(/[a-z]/g) || []).length;
     // 영어 위주 줄만 이어붙임. 짧은 제목(예: 'WORKBOOK')이 지문에 섞이지 않도록
     // 최소 영문 글자 수(10)와 한글 대비 우세를 함께 요구.
-    const isEngLine = latin >= 10 && latin > hangul;
+    // 예외: 대사/서사에서 한 줄로 쪼개진 짧은 문장 조각("That was 처럼 10자 미만)도
+    //   한글이 전혀 없고 소문자가 있는 '진짜 문장' 조각이면 이어붙인다.
+    //   (대문자만인 헤더 'WORKBOOK'·'SINCERELY' 등은 소문자 조건으로 계속 배제)
+    const isEngLine = (latin >= 10 && latin > hangul)
+      || (hangul === 0 && lower >= 2 && latin >= 5);
     if (!isEngLine) { if (buf) { paras.push(buf); buf = ''; } continue; }
     buf = buf ? `${buf} ${line}` : line;
     if (/[.!?]["')\]]?$/.test(line)) { paras.push(buf); buf = ''; }
@@ -75,7 +80,31 @@ function joinAndSplit(text) {
   const out = [];
   for (const para of paras) {
     const parts = para.match(/[^.!?]+[.!?]+["')\]]?/g) || [para];
-    parts.forEach((p) => out.push(p.trim()));
+    // 문장 분리 후 남는 '온전한 문장이 못 되는 짧은 조각'(뒤 looksEnglish 의 25자·5단어
+    //   기준 미달)은 버리지 말고 이웃 문장에 도로 붙여 원문을 보존한다.
+    //   - 꼬리 조각("I'll let her know ...", "10:00.")은 앞 문장에 붙임
+    //   - 선두 조각("Finally, the telephone rang.")은 다음 문장 앞에 붙임(carry)
+    //   설명문 지문은 이런 조각이 없어 영향이 없다.
+    const isShort = (s) => s.length < 25 || s.split(/\s+/).filter(Boolean).length < 5;
+    const merged = [];
+    let carry = '';
+    for (const raw of parts) {
+      const t = raw.trim();
+      if (!t) continue;
+      const piece = carry ? `${carry} ${t}` : t;
+      carry = '';
+      if (isShort(piece)) {
+        if (merged.length) merged[merged.length - 1] += ` ${piece}`;
+        else carry = piece;
+      } else {
+        merged.push(piece);
+      }
+    }
+    if (carry) {
+      if (merged.length) merged[merged.length - 1] += ` ${carry}`;
+      else merged.push(carry);
+    }
+    merged.forEach((p) => out.push(p));
   }
   return out;
 }
@@ -97,4 +126,4 @@ async function extractSentences(buffer) {
   return { raw, sentences };
 }
 
-module.exports = { extractSentences, looksEnglish };
+module.exports = { extractSentences, looksEnglish, stripNoise, joinAndSplit };
