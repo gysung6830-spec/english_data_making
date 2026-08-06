@@ -182,6 +182,36 @@ function principlePageParas() {
   return out;
 }
 
+// 책 앞 '글의 구조 — 어떤 짜임이 있나?' 페이지 (목차 항목 1회, 모의고사 지문 기준)
+const STRUCTURE_GUIDE_DOCX = [
+  ['① 통념 → 반박(반전)', 'But/However/Yet/In fact', '흔한 생각(통념)을 던진 뒤 뒤집어 필자 주장을 편다'],
+  ['② 주장 → 근거·예시', 'because/for example/studies show', '주장을 먼저 내세우고 이유·연구·예시로 뒷받침'],
+  ['③ 문제 → 해결(방안)', 'problem/solution/one way to/should', '문제를 제기하고 해결책·방안을 제시'],
+  ['④ 비교 · 대조', 'while/whereas/unlike/in contrast', 'A와 B의 공통점·차이점을 견줌'],
+  ['⑤ 시간 · 순서(나열)', 'first/then/later/in 1937/finally', '사건·과정을 시간·순서대로(전기·실험·역사)'],
+  ['⑥ 예시 → 일반화(결론)', 'for instance…/thus/therefore/in short', '구체 사례들을 든 뒤 일반 원리·결론으로 묶음'],
+];
+function structureTypesPageParas() {
+  const out = [B.h1('글의 구조 — 어떤 짜임이 있나?')];
+  out.push(B.p('글의 구조 = 필자가 생각을 배치한 ‘틀’. 전환어(But/However…)와 연결어를 신호로 잡으면 구조가 보이고, 구조가 보이면 요지·필자 주장이 빨리 잡힌다. (모의고사·수능 독해 지문 기준 6가지)', { bold: true }));
+  STRUCTURE_GUIDE_DOCX.forEach(([name, sig, flow]) => {
+    out.push(new Paragraph({
+      spacing: { after: 30 }, indent: { left: 200 },
+      children: [new TextRun({ text: `${name}`, bold: true, size: 21, color: S.NAVY, font: S.FONT })],
+    }));
+    out.push(new Paragraph({
+      spacing: { after: 70 }, indent: { left: 360 },
+      children: [
+        new TextRun({ text: `신호어 · ${sig}  `, size: 18, italics: true, color: '6A57B0', font: S.FONT }),
+        new TextRun({ text: flow, size: 20, font: S.FONT }),
+      ],
+    }));
+  });
+  out.push(B.p('지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰본다.'));
+  out.push(B.pageBreak());
+  return out;
+}
+
 // 지문 끝 답지 — 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerParas(p) {
   const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
@@ -257,6 +287,7 @@ function buildPassageDocument(passages, meta = {}) {
   const children = [
     ...passageCoverParagraphs(meta),
     ...principlePageParas(),
+    ...structureTypesPageParas(),
     ...passages.flatMap((p, i) => passageParagraphs(p, i)),
   ];
   return new Document({

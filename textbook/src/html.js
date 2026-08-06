@@ -141,6 +141,32 @@ function principlePageHtml() {
     <div class="pcatch"><span class="pcatch-h">✅ 이 페이지만 기억해!</span>끊는 자리는 늘 <b>‘새 덩어리가 시작되는 신호어 앞’</b>이야. 지문에서 이 5개만 찾으면 문장이 저절로 끊겨.</div>
   </section>`;
 }
+
+// 글의 구조 안내 페이지 (책 앞쪽 별도 페이지, 목차 항목 1회) — 모의고사 지문 기준
+const STRUCTURE_GUIDE = [
+  ['통념 → 반박(반전)', 'But / However / Yet / In fact / Contrary to', '흔한 생각(통념)을 던진 뒤 뒤집어 필자 주장을 편다', '“많은 이가 X라 여긴다. 하지만 실제론 Y다.”'],
+  ['주장 → 근거·예시', 'because / since / for example / studies show / therefore', '필자 주장을 먼저 내세우고 이유·연구·예시로 뒷받침', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
+  ['문제 → 해결(방안)', 'problem / challenge / solution / one way to / should', '문제를 제기하고 해결책·방안을 제시', '“이런 문제가 있다. 이를 해결하려면 …”'],
+  ['비교 · 대조', 'while / whereas / unlike / in contrast / on the other hand', 'A와 B의 공통점·차이점을 견줌', '“A는 …인 반면, B는 …이다.”'],
+  ['시간 · 순서(나열)', 'first / then / later / after / in 1937 / finally', '사건·과정을 시간·순서대로(전기·실험·역사)', '“먼저 …, 그다음 …, 마침내 …”'],
+  ['예시 → 일반화(결론)', 'for instance … / thus / therefore / in short / this suggests', '구체 사례들을 든 뒤 일반 원리·결론으로 묶음', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
+];
+function structurePageHtml() {
+  const cards = STRUCTURE_GUIDE.map(([name, sig, flow, ex], i) => `<div class="cutcard gram">
+    <div class="cut-top"><span class="cut-n gram">${CIRCLED[i]}</span><span class="cut-name">${esc(name)}</span></div>
+    <div class="cut-trig gram">신호어 · ${esc(sig)}</div>
+    <div class="cut-rule">${esc(flow)}</div>
+    <div class="cut-ex">예) ${esc(ex)}</div>
+  </div>`).join('');
+  return `<section class="chapter">
+    <div class="chhead"><span class="daypill gram">글의 구조</span><span class="tagpill">모의고사 지문 기준</span></div>
+    <h1>글의 구조 — 어떤 짜임이 있나?</h1>
+    <div class="chsub">필생보 · 모의고사·수능 독해 지문에 자주 나오는 6가지 글의 틀</div>
+    <div class="goal gram"><span class="goal-ic gram">핵심</span> 글의 구조 = 필자가 생각을 배치한 ‘틀’. <b>전환어(But/However…)와 연결어</b>를 신호로 잡으면 구조가 보이고, 구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡혀.</div>
+    <div class="cutgrid">${cards}</div>
+    <div class="struct-reveal"><span class="sr-h">🧩 이렇게 써먹어</span> 지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰봐.</div>
+  </section>`;
+}
 // ⚠️ 이거 조심 — 이 문장에서 '오역하기 쉬운 부분'을 미리 경고(오역 주의).
 function trapCard(text) {
   if (!text) return '';
@@ -389,6 +415,12 @@ function css() {
     border:1px solid ${C.greenLine}; border-radius:10px; padding:1px 9px; }
   .cut-rule { font-size:11px; color:#333; }
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
+  .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
+  .cut-n.gram { background:${C.gram}; }
+  .cut-trig.gram { color:${C.gram}; background:#fff; border-color:#ddd4f2; }
+  .daypill.gram { background:${C.gram}; }
+  .goal.gram { background:${C.gramBg}; border-left-color:${C.gram}; }
+  .goal-ic.gram { background:${C.gram}; }
   .structbox { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
     border-radius:8px; padding:11px 14px; margin:6px 0 12px; break-inside:avoid; }
   .st-h { font-weight:800; font-size:13px; color:${C.gram}; margin-bottom:8px; }
@@ -502,7 +534,7 @@ function buildHtmlPassages(passages, meta = {}) {
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
   });
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
-    + `<body>${cover}${principlePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
+    + `<body>${cover}${principlePageHtml()}${structurePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
 
 // 전체 HTML 문서. rawCategories 는 splitWorked 전(worked 2개 초과 허용) 데이터.
