@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 const { splitWorked } = require('./document');
-const { makeTip } = require('./tip');
+const { makeTip, PRINCIPLES } = require('./tip');
 
 const FONTS_DIR = path.join(__dirname, '..', 'fonts');
 const FOOTER_BRAND = '©2026. 김은아영어연구소. All rights reserved.';
@@ -116,6 +116,15 @@ function catchCard(text) {
 }
 function tipCard(text) {
   return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
+}
+// ✂ 끊어읽기 원리 박스 — 지문마다 한 번(어디서 끊는지 5신호 + 뼈대 우선 원리).
+function principleCard() {
+  const sigs = PRINCIPLES.map((t, i) => `<span class="psig"><b>${CIRCLED[i]}</b> ${esc(t)}</span>`).join('');
+  return `<div class="principle">
+    <div class="pr-h">✂ 끊어읽기 원리 — 어디서 끊을까?</div>
+    <div class="pr-core">뼈대(진짜 <b>주어+동사</b>)를 먼저 잡고, 나머지 수식 덩어리는 <b>신호어 앞</b>에서 끊어 앞에서부터 붙여 읽어. (되돌아가지 않기)</div>
+    <div class="pr-sigs">${sigs}</div>
+  </div>`;
 }
 // ⚠️ 함정 주의 — 이 문장에서 자주 틀리는 해석 포인트 경고.
 function trapCard(text) {
@@ -354,6 +363,13 @@ function css() {
     padding:8px 12px 10px; margin:7px 0; break-inside:avoid; }
   .cw-h { font-size:11px; font-weight:800; color:${C.tealDark}; margin-bottom:4px; }
   .cw-hint { font-weight:600; color:${C.sub}; font-size:9.5px; margin-left:4px; }
+  .principle { background:${C.tipBg}; border:1px solid ${C.line}; border-left:5px solid ${C.tipBar};
+    border-radius:8px; padding:10px 13px; margin:6px 0 12px; break-inside:avoid; }
+  .pr-h { font-weight:800; font-size:12px; color:#333; margin-bottom:5px; }
+  .pr-core { font-size:10.6px; color:#444; margin-bottom:7px; }
+  .pr-sigs { display:flex; flex-wrap:wrap; gap:5px 8px; }
+  .psig { background:#fff; border:1px solid ${C.line}; border-radius:12px; padding:2px 9px; font-size:9.7px; color:#444; }
+  .psig b { color:${C.teal}; margin-right:2px; }
   `;
 }
 
@@ -408,6 +424,7 @@ function passageHtml(p, idx) {
   h += secHead(CIRCLED[0], '지문 통째로 읽기', '먼저 전체 흐름을 쭉 훑어봐', 'green');
   h += fullTextBlock(p.sentences);
   h += secHead(CIRCLED[1], '한 문장씩 직접 풀기', '어휘·팁·이거조심 보고 → 해석·캐치는 직접', 'teal');
+  h += principleCard();
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
   if (p.catch) {
