@@ -532,7 +532,7 @@
         <div class="pbox merged {{ 'odd' if s.index % 2 == 1 else 'even' }}{% if not s_gram %} stu{% endif %}">
           {% for p in s.points %}
           <span class="cap {{ 'gcap' if p.is_grammar else 'fcap' }}">{{ p.caption }}</span>
-          <div class="body">{% if s_gram %}{{ p.body_html | safe }}{% else %}<span class="blk"></span><span class="blk"></span>{% endif %}</div>
+          <div class="body">{% if s_gram %}{{ p.body_html | safe }}{% endif %}</div>
           {% endfor %}
           {% if s.has_feed %}
           <span class="cap fcap">{{ s.index }}문장 - 독해 Point</span>
@@ -540,7 +540,7 @@
             {%- if s_gram -%}
             {%- for r in s.refs %}<div class="fr"><span class="fl">지칭</span> {{ r }}</div>{% endfor -%}
             {% if s.gloss_en %}<div class="fr"><span class="fl im">함축</span> {{ s.gloss_en }}{% if s.gloss_ko %}<br><span class="gko">{{ s.gloss_ko }}</span>{% endif %}</div>{% endif %}
-            {%- else -%}<span class="blk"></span><span class="blk"></span>{%- endif -%}
+            {%- endif -%}
           </div>
           {% endif %}
         </div>
