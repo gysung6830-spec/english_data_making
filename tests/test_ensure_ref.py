@@ -41,14 +41,28 @@ def _extraction():
 
 
 def _main_pack(ref_items_counts):
-    """문장 3개짜리 통합 결과. ref_items_counts 로 문장별 ref 개수를 지정."""
+    """문장 3개짜리 통합 결과. ref_items_counts 로 문장별 '출제 가능한' ref 개수를 지정.
+
+    실제 지칭처럼 대명사를 남기고 그 뒤에 {{Pn}} 을 넣어, render 가드를 통과(=renderable)하도록
+    구성한다. 정답은 보기 안에 있고 한글·가주어·원문소실이 없다.
+    """
     sents = []
-    ens = ["He found the photo.", "She kept it.", "They left."]
-    for i, (en, n) in enumerate(zip(ens, ref_items_counts), start=1):
-        items = [pr.LLMProseItem(id=f"P{j+1}", display="= [ a / b / c ]", answer="a")
+    # (en, 대명사 뒤에 {{Pn}} 을 넣은 base 문장 조각, 보기)
+    specs = [
+        ("He found the photo.", "He {ph} found the photo.",
+         "= [ Compean / a rescue team / the police ]", "Compean"),
+        ("She kept it in her bag.", "She kept it {ph} in her bag.",
+         "= [ the photo / a signal / her bag ]", "the photo"),
+        ("They left the camp.", "They {ph} left the camp.",
+         "= [ the hikers / the police / the camp ]", "the hikers"),
+    ]
+    for i, (n, (en, base, disp, ans)) in enumerate(zip(ref_items_counts, specs), start=1):
+        phs = "".join(f"{{{{P{j+1}}}}}" for j in range(n))         # {{P1}}{{P2}}...
+        template = base.format(ph=phs) if n else en
+        items = [pr.LLMProseItem(id=f"P{j+1}", display=disp, answer=ans)
                  for j in range(n)]
         sents.append(pr.LLMProseSentence(no=i, en=en, ko="가",
-                                         ref_template=en, ref_items=items))
+                                         ref_template=template, ref_items=items))
     return pr.LLMProsePack(sentences=sents)
 
 
@@ -102,9 +116,40 @@ def test_fail_open_on_exception():
            sum(len(s.ref_items) for s in llm.sentences) == 0)
 
 
+def test_nonrenderable_raw_still_triggers():
+    # raw ref_items 는 많지만(3+) render 가드에서 전부 버려지는 경우(가주어 it 등)
+    # → renderable 수는 0 이므로 폴백이 켜지고, 버려질 문장을 폴백 결과로 덮어써야 한다.
+    cfg = load_config()
+    bad = pr.LLMProseItem(id="P1", display="= [ 앞 문장 / a / b ]", answer="앞 문장")
+    # 가주어 it: _ref_is_expletive 로 render 에서 버려짐 → renderable 0
+    llm = pr.LLMProsePack(sentences=[
+        pr.LLMProseSentence(no=1, en="It turns out that a photo helped.", ko="가",
+                            ref_template="It {{P1}} turns out that a photo helped.",
+                            ref_items=[bad]),
+        pr.LLMProseSentence(no=2, en="She kept it.", ko="나",
+                            ref_template="She kept it.", ref_items=[]),
+        pr.LLMProseSentence(no=3, en="They left.", ko="다",
+                            ref_template="They left.", ref_items=[]),
+    ])
+    _check("raw 는 있으나 renderable 0", pr.renderable_ref_count(llm) == 0)
+    ref_pack = pr.LLMProsePack(sentences=[
+        pr.LLMProseSentence(no=2, en="She kept it.", ko="나",
+                            ref_template="She kept it {{P1}}.",
+                            ref_items=[pr.LLMProseItem(id="P1",
+                                       display="= [ the photo / She / They ]",
+                                       answer="the photo")]),
+    ])
+    fc = _FakeClient(ref_pack=ref_pack)
+    pg._ensure_ref(fc, cfg, _extraction(), llm)
+    _check("renderable 0 이면 폴백 재호출", fc.calls == 1)
+    _check("빈 문장에 폴백 지칭 채움", llm.sentences[1].ref_items[0].answer == "the photo")
+    _check("버려질 가주어 문장은 그대로(덮어쓸 폴백 없음)", llm.sentences[0].ref_items[0] is bad)
+
+
 if __name__ == "__main__":
     test_enough_ref_skips_call()
     test_low_ref_merges_by_no()
     test_does_not_overwrite_existing_ref()
     test_fail_open_on_exception()
+    test_nonrenderable_raw_still_triggers()
     print("\n지칭 전용 재생성 보강 오프라인 테스트 통과 ✅")

@@ -37,6 +37,15 @@ def test_validation_and_mismatch_tolerated():
     except ValueError:
         raised = True
     _check("문장 전무 시 실패", raised)
+    # 지문 문장 수에 비해 응답이 너무 적으면(예: mega-call 이 1문장만 반환) 실패 → 재요청
+    one = pr.LLMProsePack(sentences=[pr.LLMProseSentence(no=1, en="a", ko="가")])
+    raised2 = False
+    try:
+        pr.validate_llm_prose(one, min_sentences=10)   # 지문 12문장급인데 1문장뿐 → 실패
+    except ValueError:
+        raised2 = True
+    _check("문장 과소(1<최소10) 시 실패", raised2)
+    pr.validate_llm_prose(one, min_sentences=1)         # 기본(하위호환)은 통과
 
 
 def test_build_four_worksheets():

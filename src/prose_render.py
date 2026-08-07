@@ -195,6 +195,32 @@ def _ref_template_lossy(en: str, template: str) -> bool:
     return any(len(w) >= 3 and w not in have for w in words(en))
 
 
+def renderable_ref_items(s: LLMProseSentence) -> list[LLMProseItem]:
+    """이 문장에서 render 단계의 지칭 가드를 '통과해 실제로 출제될' ref 문항만 반환.
+
+    _worksheet 의 ref 분기와 동일한 판정(자리표시자 손상·정답 보기 불일치·한글 혼입·
+    가주어/there·원문 단어 소실)을 적용한다. 지칭이 '겉보기엔 있으나 전부 버려지는' 경우를
+    _ensure_ref 가 감지해 재생성하도록, 실제 출제 가능한 문항 수를 세는 데 쓴다.
+    """
+    template = s.ref_template or s.en
+    items_src = s.ref_items
+    order = placeholders_in(template)
+    if items_src and not order:          # template 손상 → 전부 버려짐
+        return []
+    surviving = [src for pid, src in _align(order, items_src)
+                 if _ref_answer_in_display(src.answer, src.display)
+                 and _ref_candidates_clean(src.display)
+                 and not _ref_is_expletive(template, pid)]
+    if surviving and _ref_template_lossy(s.en, template):   # 원문 단어 소실 → 버려짐
+        return []
+    return surviving
+
+
+def renderable_ref_count(llm: LLMProsePack) -> int:
+    """지문 전체에서 render 가드를 통과해 실제로 출제될 지칭 문항 수(추정)."""
+    return sum(len(renderable_ref_items(s)) for s in llm.sentences)
+
+
 def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                write: bool, tkey: str, ikey: str) -> ProseWorksheet:
     sents: list[PSentence] = []
@@ -249,11 +275,22 @@ def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) 
                      worksheets=worksheets)
 
 
-def validate_llm_prose(llm: LLMProsePack) -> None:
+def validate_llm_prose(llm: LLMProsePack, min_sentences: int = 1) -> None:
     """산문 워크시트 응답 검증. 자리표시자 수와 items 수가 달라도 build 가 '등장 순서'로
-    가능한 만큼만 짝지어 렌더하므로 실패시키지 않는다(문장만 비어 있으면 재요청)."""
+    가능한 만큼만 짝지어 렌더하므로 그 부분은 실패시키지 않는다.
+
+    다만 '문장 자체'가 비었거나(0개) 지문 문장 수에 비해 지나치게 적으면(예: 6종 mega-call 이
+    도중에 degenerate 하게 1문장만 반환) 모든 유형 워크시트가 통째로 비므로, min_sentences 미만이면
+    실패로 보고 재요청(client 가 위반 피드백과 함께 재시도)한다.
+    """
     if not llm.sentences:
         raise ValueError("산문 워크시트 문장이 비어 있습니다.")
+    if len(llm.sentences) < min_sentences:
+        raise ValueError(
+            f"지문 문장 수에 비해 응답 문장이 너무 적습니다"
+            f"(응답 {len(llm.sentences)}개 < 최소 {min_sentences}개). "
+            f"지문의 '모든 문장'을 등장 순서대로 하나도 빠뜨리지 말고 포함하세요."
+        )
 
 
 # ── 렌더 ─────────────────────────────────────────────────────────────

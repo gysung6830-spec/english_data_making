@@ -16,13 +16,20 @@ def generate_prose_pack(client: ClaudeClient, cfg: Config, extraction: Extractio
     교차검증해 '정답이 정확히 2개가 아닌' 출제오류 소지 문항을 자동 제외한다.
     """
     title, body = extraction.title, extraction.body
+    # 6종 mega-call 이 이따금 degenerate 하게 '1문장'만 반환해 모든 유형 워크시트가 통째로
+    # 비는 사고가 있었다. 지문 문장 수의 80% 이상은 반드시 담기게 검증해 부족하면 재요청한다.
+    from .textutil import split_sentences
+    expected = len(split_sentences(body))
+    # 0.7 배: LLM 의 문장 분할이 우리와 조금 달라도(±) 헛재시도가 없게 여유를 두되,
+    # '41문장 → 1문장' 같은 붕괴는 확실히 잡히는 선.
+    min_sentences = max(1, int(expected * 0.7))
     llm = client.structured(
         system=pp.SYSTEM,
         prompt=pp.prose_prompt(title, body),
         model_cls=pr.LLMProsePack,
         max_tokens=16000,   # 6종×문장×(어법/어휘 2~4개) → 출력이 큼(잘리면 client 가 자동 증량)
         max_retries=max(2, cfg.processing.max_retries),
-        extra_validate=pr.validate_llm_prose,
+        extra_validate=lambda p: pr.validate_llm_prose(p, min_sentences=min_sentences),
     )
     _ensure_ref(client, cfg, extraction, llm)
     do_verify = cfg.processing.verify_vocab if verify_vocab is None else verify_vocab
@@ -46,8 +53,10 @@ def _ensure_ref(client: ClaudeClient, cfg: Config, extraction: Extraction,
     ref 문항 수가 기준 미만이면 저렴한 별도 호출로 지칭만 다시 뽑아 문장 단위로 채워 넣는다.
     실패(예외)해도 기존 결과를 유지하도록 fail-open 한다.
     """
-    ref_count = sum(len(s.ref_items) for s in llm.sentences)
-    if ref_count >= _REF_MIN:
+    # ★ raw 개수가 아니라 'render 가드를 통과해 실제로 출제될' 지칭 수로 판단한다.
+    #   mega-call 이 지칭을 냈어도 전부 가주어·오류라 render 에서 버려지면 최종 워크시트가
+    #   비므로, 그 경우까지 폴백이 켜지도록 renderable 수를 센다.
+    if pr.renderable_ref_count(llm) >= _REF_MIN:
         return
     try:
         ref_llm = client.structured(
@@ -67,8 +76,9 @@ def _ensure_ref(client: ClaudeClient, cfg: Config, extraction: Extraction,
         tgt = by_no.get(rs.no) or by_en.get(rs.en.strip())
         if tgt is None:
             continue
-        # 기존에 이미 ref 가 있으면 덮어쓰지 않는다(중복 방지). 비어 있을 때만 채운다.
-        if tgt.ref_items:
+        # 그 문장에 '이미 출제 가능한(render 통과) 지칭'이 있으면 덮지 않는다. 비었거나
+        # 기존 지칭이 전부 버려질 것(renderable 0)이면 폴백 결과로 채운다.
+        if pr.renderable_ref_items(tgt):
             continue
         tgt.ref_template = rs.ref_template or tgt.ref_template
         tgt.ref_items = rs.ref_items
