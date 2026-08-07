@@ -160,6 +160,28 @@ def _vocab_template_lossy(en: str, template: str, items) -> bool:
     return any(len(w) >= 4 and w not in have for w in words(en))
 
 
+def _ref_is_expletive(template: str, pid: str) -> bool:
+    """지칭 대상이 없는 '가주어 it / 유도부사 there' 를 출제한 경우인지 판정(출제 오류).
+
+    예: "It turns out that …", "It is important that …", "There is …" — it/there 는 특정 명사를
+    가리키지 않으므로 지칭 문제로 낼 수 없다.
+    """
+    import re
+    m = re.search(r"\b(it|there)\s*\{\{\s*" + re.escape(pid) + r"\s*\}\}\s*"
+                  r"(turns\s+out|seems|appears|happens|follows|is|are|was|were|takes|took|matters)\b",
+                  template, re.IGNORECASE)
+    if not m:
+        return False
+    pron, verb = m.group(1).lower(), m.group(2).lower().split()[0]
+    if pron == "there":
+        return True                       # 유도부사 there
+    if verb in ("turns", "seems", "appears", "happens", "follows"):
+        return True                       # it turns out / seems / appears …
+    # it is/was/takes … 는 뒤에 that/to 절이 이어지면 가주어(it is … that / it takes … to)
+    tail = template[m.end():m.end() + 60]
+    return bool(re.search(r"\b(that|to)\b", tail))
+
+
 def _ref_template_lossy(en: str, template: str) -> bool:
     """지칭 template 은 원문(en)에 {{Pn}} 만 '삽입'하므로 en 의 모든 단어를 담아야 한다.
 
@@ -204,7 +226,8 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             #   남은 자리표시자는 렌더에서 제거되어 대명사가 든 문장은 그대로 보인다.
             pitems = [it for it in pitems
                       if _ref_answer_in_display(it.answer, it.display)
-                      and _ref_candidates_clean(it.display)]
+                      and _ref_candidates_clean(it.display)
+                      and not _ref_is_expletive(template, it.id)]   # 가주어 it/there 제외
             # 안전장치: 지칭은 원문에 {{Pn}} 만 삽입해야 하는데 원문 단어가 사라졌으면
             #   (대명사 소실·명사 누락) 문항을 버리고 원문(en)을 그대로 보여 준다.
             if pitems and _ref_template_lossy(s.en, template):

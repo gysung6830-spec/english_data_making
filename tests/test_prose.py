@@ -118,6 +118,15 @@ def test_ref_safeguard():
     r5 = next(w for w in pr.build_prose_pack(ok2, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "ref")
     _check("정상 지칭 문항 유지", len(r5.sentences[0].items) == 1)
+    # 가주어 it("It turns out that …")은 가리키는 대상이 없으므로 제외
+    expl = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="It turns out that a photo played a key role.", ko="바",
+        ref_template="It {{P1}} turns out that a photo played a key role.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ 앞 문장 / a photo / a key role ]",
+                                   answer="앞 문장")])])
+    r6 = next(w for w in pr.build_prose_pack(expl, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref")
+    _check("가주어 it 문항 제외", len(r6.sentences[0].items) == 0)
 
 
 def test_corrupt_template_falls_back_to_en():
