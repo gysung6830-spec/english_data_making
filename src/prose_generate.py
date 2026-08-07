@@ -20,7 +20,7 @@ def generate_prose_pack(client: ClaudeClient, cfg: Config, extraction: Extractio
         system=pp.SYSTEM,
         prompt=pp.prose_prompt(title, body),
         model_cls=pr.LLMProsePack,
-        max_tokens=12000,
+        max_tokens=16000,   # 6종×문장×(어법/어휘 2~4개) → 출력이 큼(잘리면 client 가 자동 증량)
         max_retries=max(2, cfg.processing.max_retries),
         extra_validate=pr.validate_llm_prose,
     )

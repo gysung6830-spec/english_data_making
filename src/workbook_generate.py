@@ -21,7 +21,7 @@ def generate_workbook(client: ClaudeClient, cfg: Config, extraction: Extraction)
         system=wp.SYSTEM,
         prompt=wp.workbook_prompt(title, body),
         model_cls=ws.LLMWorkbook,
-        max_tokens=12000,
+        max_tokens=16000,   # 문장당 3~5문항 → 출력이 큼(잘리면 client 가 자동 증량)
         max_retries=max(2, cfg.processing.max_retries),
         extra_validate=ws.validate_llm_workbook,   # 자리표시자·questions 개수 검증
     )

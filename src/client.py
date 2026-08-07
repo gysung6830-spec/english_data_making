@@ -17,6 +17,8 @@ from pydantic import BaseModel, ValidationError
 T = TypeVar("T", bound=BaseModel)
 
 DEFAULT_MAX_TOKENS = 8000
+# 출력이 잘릴 때 자동으로 키우는 상한 (모델의 최대 출력 토큰 범위 내 안전값)
+MAX_OUTPUT_TOKENS = 32000
 
 
 # ---------------------------------------------------------------------------
@@ -123,10 +125,16 @@ class ClaudeClient:
         use_model = model or self.model
         last_err: Exception | None = None
         cur_prompt = prompt
-        for attempt in range(max_retries + 1):
-            req = build_request(use_model, system, cur_prompt, model_cls, max_tokens,
+        cur_max = max_tokens
+        attempt = 0
+        # 출력이 잘려(max_tokens) 재시도할 때는 한도를 키우므로, 그런 재시도는 소진 횟수에서 제외해
+        #   '길이 부족'과 '스키마 위반'을 각각 충분히 재시도하게 한다.
+        truncation_retries = 0
+        while attempt <= max_retries:
+            req = build_request(use_model, system, cur_prompt, model_cls, cur_max,
                                 image_path=image_path)
             message = self._client.messages.create(**req)
+            truncated = getattr(message, "stop_reason", None) == "max_tokens"
             try:
                 text = extract_text(message)
                 obj = parse_response_text(text, model_cls)
@@ -135,6 +143,17 @@ class ClaudeClient:
                 return obj
             except (ValidationError, ValueError, json.JSONDecodeError) as e:
                 last_err = e
+                if truncated and cur_max < MAX_OUTPUT_TOKENS and truncation_retries < 4:
+                    # 응답이 잘렸다 → 토큰 한도를 키워 다시 시도(이 재시도는 소진에서 제외)
+                    cur_max = min(int(cur_max * 1.7) + 1, MAX_OUTPUT_TOKENS)
+                    truncation_retries += 1
+                    cur_prompt = (
+                        prompt
+                        + "\n\n[주의] 직전 출력이 도중에 잘렸습니다. 같은 내용을 '더 간결하게'(불필요한 "
+                        "군더더기 없이) 만들되, 반드시 '완결된 JSON'으로 끝까지 닫아서 응답하세요."
+                    )
+                    continue
+                attempt += 1
                 cur_prompt = (
                     prompt
                     + f"\n\n[주의] 직전 응답이 조건을 위반했습니다: {e}\n"
