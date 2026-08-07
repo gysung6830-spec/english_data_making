@@ -567,6 +567,12 @@ if __name__ == "__main__":
     print("  영어 지문 분석 웹앱이 실행되었습니다.")
     # 실행 환경 자가진단 (무엇이 빠졌는지 즉시 표시)
     print("  " + envcheck.format_report(envcheck.check_environment(cfg)).replace("\n", "\n  "))
+    # PDF 생성용 브라우저(Chromium)를 시작 시점에 준비(없으면 자동 설치, 최초 1회)
+    try:
+        from src.workbook_render import ensure_chromium
+        ensure_chromium(log=lambda m: print("  " + m))
+    except Exception:
+        pass
     print("-" * 56)
     print("  브라우저에서 아래 주소로 접속하세요:")
     print(f"      http://localhost:{port}")

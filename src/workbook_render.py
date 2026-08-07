@@ -99,38 +99,98 @@ def _chromium_executable() -> str | None:
 
 
 _CHROMIUM_INSTALLED = False
+_INSTALL_HINT = (
+    "PDF 생성에 필요한 브라우저(Chromium)가 설치되어 있지 않습니다.\n"
+    "자동 설치를 시도했지만 실패했습니다(인터넷/방화벽/권한 문제일 수 있음).\n"
+    "명령 프롬프트(cmd)에서 아래 한 줄을 직접 실행한 뒤 다시 시도하세요:\n"
+    "    python -m playwright install chromium"
+)
 
 
-def _install_chromium() -> None:
-    """Playwright 브라우저(Chromium)를 자동 설치한다(비개발자용 자가치유).
+def _install_chromium() -> bool:
+    """Playwright 브라우저(Chromium + headless shell)를 자동 설치한다(비개발자용 자가치유).
 
-    Windows 등에서 'Executable doesn't exist … playwright install' 오류가 날 때,
-    'python -m playwright install chromium' 을 한 번 실행해 브라우저를 내려받는다.
+    여러 실행 방식을 시도하고, 다운로드 스킵 환경변수를 무력화한다. 성공하면 True.
     """
     global _CHROMIUM_INSTALLED
-    if _CHROMIUM_INSTALLED:
-        return
+    _CHROMIUM_INSTALLED = True   # 반복 설치 방지(세션당 1회)
+    import os
     import subprocess
     import sys
 
-    _CHROMIUM_INSTALLED = True   # 재귀·반복 설치 방지(성공/실패와 무관하게 1회만)
+    env = dict(os.environ)
+    # 브라우저 다운로드를 막는 환경변수가 켜져 있으면 해제(설치가 조용히 스킵되는 원인)
+    env.pop("PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD", None)
+    env.pop("PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS", None)
+    # 두 가지 호출 방식을 순서대로 시도(파이썬 모듈 → CLI). --with-deps 는 실패해도 무시.
+    cmds = [
+        [sys.executable, "-m", "playwright", "install", "chromium"],
+        ["playwright", "install", "chromium"],
+    ]
+    for cmd in cmds:
+        try:
+            r = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=900)
+            if r.returncode == 0:
+                return True
+        except Exception:
+            continue
+    return False
+
+
+def _browser_missing(msg: str) -> bool:
+    return ("Executable doesn't exist" in msg or "playwright install" in msg
+            or "chrome-headless-shell" in msg or "Please run the following command" in msg)
+
+
+def ensure_chromium(log=print) -> bool:
+    """시작 시 Chromium 유무를 확인하고 없으면 설치한다(최초 1회). 사용 가능하면 True.
+
+    웹앱/CLI 시작 시 호출하면, 렌더링 도중이 아니라 시작 시점에 브라우저를 준비할 수 있다.
+    """
     try:
-        subprocess.run([sys.executable, "-m", "playwright", "install", "chromium"],
-                       check=False, timeout=600)
+        from playwright.sync_api import sync_playwright
     except Exception:
-        pass
+        return False
+    exe = _chromium_executable()
+    launch_kw = {"executable_path": exe} if exe else {}
+
+    def _try() -> tuple[bool, str]:
+        try:
+            with sync_playwright() as p:
+                b = p.chromium.launch(**launch_kw)
+                b.close()
+            return True, ""
+        except Exception as e:
+            return False, str(e)
+
+    ok, msg = _try()
+    if ok:
+        return True
+    if not _browser_missing(msg):
+        return True   # 다른 문제라면 시작을 막지 않는다(렌더 시 처리)
+    log("PDF 생성용 브라우저(Chromium)를 처음 한 번 내려받습니다. 수 분 걸릴 수 있어요…")
+    if not _install_chromium():
+        log("⚠️ 브라우저 자동 설치 실패. 명령 프롬프트에서 'python -m playwright install chromium' 을 실행해 주세요.")
+        return False
+    ok, _ = _try()
+    log("✅ 브라우저 준비 완료." if ok else "⚠️ 브라우저 준비 실패.")
+    return ok
 
 
 def _launch_chromium(p, launch_kw: dict):
-    """Chromium 실행. 브라우저 미설치로 실패하면 자동 설치 후 한 번 재시도한다."""
+    """Chromium 실행. 브라우저 미설치로 실패하면 자동 설치 후 재시도, 그래도 안 되면 안내."""
     try:
         return p.chromium.launch(**launch_kw)
     except Exception as e:
-        msg = str(e)
-        if "Executable doesn't exist" in msg or "playwright install" in msg:
-            _install_chromium()
+        if not _browser_missing(str(e)):
+            raise
+        _install_chromium()
+        try:
             return p.chromium.launch(**launch_kw)   # 재설치 후 재시도
-        raise
+        except Exception as e2:
+            if _browser_missing(str(e2)):
+                raise RuntimeError(_INSTALL_HINT) from e2
+            raise
 
 
 # 상단 한글 제목(.sh-title)을 '한 줄·한 페이지 안'에 담기 위한 자동 축소 스크립트.
