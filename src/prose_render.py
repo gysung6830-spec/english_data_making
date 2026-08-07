@@ -15,7 +15,7 @@ from markupsafe import Markup, escape
 from pydantic import BaseModel, Field
 
 from .blanks_schemas import placeholders_in  # {{Pn}} 재사용
-from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready
+from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready, _launch_chromium
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -291,7 +291,7 @@ def render_prose_pdf(pack: ProsePack, out_path: str | Path, footer_note: str = "
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
     with sync_playwright() as p:
-        b = p.chromium.launch(**launch_kw)
+        b = _launch_chromium(p, launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
         _page_ready(pg)

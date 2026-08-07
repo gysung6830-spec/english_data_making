@@ -137,7 +137,7 @@ def render_answers_pdf(groups: list[AnsGroup], out_path: str | Path,
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
     with sync_playwright() as p:
-        b = p.chromium.launch(**launch_kw)
+        b = _launch_chromium(p, launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
         try:

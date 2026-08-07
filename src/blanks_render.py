@@ -13,7 +13,7 @@ from markupsafe import Markup, escape
 
 from . import branding
 from .blanks_schemas import BlankSet, BlankWorkbook, BSentence
-from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready
+from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready, _launch_chromium
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -97,7 +97,7 @@ def render_blanks_pdf(wb: BlankWorkbook, out_path: str | Path, footer_note: str 
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
     with sync_playwright() as p:
-        b = p.chromium.launch(**launch_kw)
+        b = _launch_chromium(p, launch_kw)
         # 뷰포트 폭을 'A4 인쇄영역 폭(182mm≈688px)'에 맞춰야 화면 측정값이 실제 인쇄 줄바꿈과
         # 일치한다(그래야 지문 높이 계산이 정확해 한 페이지 맞춤이 제대로 동작한다).
         pg = b.new_page(viewport={"width": 688, "height": 1009})

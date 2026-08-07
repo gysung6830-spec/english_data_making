@@ -146,7 +146,7 @@ def render_answer_divider_pdf(out_path: str | Path, *, header: str = "",
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
     with sync_playwright() as p:
-        b = p.chromium.launch(**launch_kw)
+        b = _launch_chromium(p, launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
         try:
@@ -185,7 +185,7 @@ def render_cover_pdf(out_path: str | Path, *, header: str, title: str, subtitle:
     exe = _chromium_executable()
     launch_kw = {"executable_path": exe} if exe else {}
     with sync_playwright() as p:
-        b = p.chromium.launch(**launch_kw)
+        b = _launch_chromium(p, launch_kw)
         pg = b.new_page()
         pg.goto(f"file://{html_path.resolve()}")
         try:
