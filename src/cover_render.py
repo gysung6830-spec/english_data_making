@@ -12,7 +12,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER
+from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _launch_chromium
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
