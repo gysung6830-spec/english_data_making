@@ -86,7 +86,45 @@ def test_no_truncation_single_call():
     _check("정상 응답은 1회 호출", obj.x == 7 and len(fake.calls) == 1)
 
 
+class _Stream:
+    def __init__(self, msg):
+        self._msg = msg
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *a):
+        return False
+
+    def get_final_message(self):
+        return self._msg
+
+
+def test_uses_streaming_when_available():
+    # messages.stream 이 있으면 스트리밍 경로(get_final_message)를 쓴다(긴 요청 대응).
+    c = ClaudeClient.__new__(ClaudeClient)
+    c.model = "m"
+    calls = {"stream": 0, "create": 0}
+
+    class Msgs:
+        def stream(self, **req):
+            calls["stream"] += 1
+            return _Stream(_Msg('{"x": 5}', "end_turn"))
+
+        def create(self, **req):
+            calls["create"] += 1
+            return _Msg('{"x": 0}', "end_turn")
+
+    class Fake:
+        messages = Msgs()
+
+    c._client = Fake()
+    obj = c.structured(system="s", prompt="p", model_cls=_M, max_tokens=16000, max_retries=1)
+    _check("스트리밍 경로 사용", obj.x == 5 and calls["stream"] == 1 and calls["create"] == 0)
+
+
 if __name__ == "__main__":
     test_truncation_autoscale()
     test_no_truncation_single_call()
+    test_uses_streaming_when_available()
     print("\nclient 출력 잘림 자동 증량 오프라인 테스트 통과 ✅")

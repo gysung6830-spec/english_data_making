@@ -106,6 +106,18 @@ class ClaudeClient:
         self._client = anthropic.Anthropic(api_key=api_key)
         self.model = model
 
+    def _stream_message(self, req: dict):
+        """스트리밍으로 최종 메시지를 받는다(긴 요청 대응). stream 이 없으면 create 로 대체.
+
+        Anthropic SDK 는 max_tokens 가 커 응답이 10분을 넘길 수 있으면 비스트리밍 요청을
+        거부한다(스트리밍 필수). messages.stream 컨텍스트로 끝까지 모아 최종 Message 를 반환한다.
+        """
+        msgs = self._client.messages
+        if hasattr(msgs, "stream"):
+            with msgs.stream(**req) as stream:
+                return stream.get_final_message()
+        return msgs.create(**req)   # 목/구버전 대체 경로
+
     def structured(
         self,
         system: str,
@@ -133,7 +145,9 @@ class ClaudeClient:
         while attempt <= max_retries:
             req = build_request(use_model, system, cur_prompt, model_cls, cur_max,
                                 image_path=image_path)
-            message = self._client.messages.create(**req)
+            # 스트리밍으로 받는다: max_tokens 가 커 응답이 10분을 넘길 수 있으면 SDK 가 비스트리밍
+            #   요청을 거부하므로(긴 요청은 스트리밍 필수), stream 으로 최종 메시지를 모은다.
+            message = self._stream_message(req)
             truncated = getattr(message, "stop_reason", None) == "max_tokens"
             try:
                 text = extract_text(message)
