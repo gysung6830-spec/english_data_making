@@ -73,6 +73,24 @@ def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, 
     ]
 
 
+def order_marks(sentences: list[str], marks: list[tuple[int, str, str]]):
+    """밑줄 marks 를 '지문 읽는 순서'(문장 index → 문장 내 등장 위치)로 정렬한다.
+
+    LLM 이 밑줄을 읽는 순서와 다르게 돌려줘도, 번호 ①②③…가 항상 본문 순서대로 매겨지게
+    한다(예: ⑤가 ④보다 앞에 나오는 오류 방지). 옛 1-based 번호 → 새 1-based 번호 매핑을
+    함께 돌려줘 정답 번호를 다시 맞춘다.
+    """
+    def _key(i: int):
+        idx, word, _shown = marks[i]
+        s = sentences[idx].lower() if 0 <= idx < len(sentences) else ""
+        pos = s.find(str(word).lower())
+        return (idx, pos if pos >= 0 else len(s) + i)
+
+    order = sorted(range(len(marks)), key=_key)   # 안정 정렬(동률은 원래 순서 유지)
+    remap = {old + 1: new + 1 for new, old in enumerate(order)}
+    return [marks[i] for i in order], remap
+
+
 # ---------------------------------------------------------------------------
 # ① 순서 배열
 # ---------------------------------------------------------------------------
@@ -271,6 +289,9 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     """
     if len(marks) != 5:
         raise ValueError("어휘 밑줄은 5개여야 합니다.")
+    # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호도 그에 맞춰 재매핑
+    marks, remap = order_marks(sentences, marks)
+    answer_no = remap.get(answer_no, answer_no)
     marked = _passage_html(sentences, _underline_marks(marks), overrides)
     return F.vocab_q(marked), F.vocab_a(answer_no, reason)
 
@@ -283,6 +304,10 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
     """marks: [(문장idx, 원본단어, 표시단어)] 2~8개. 틀린 것은 표시단어가 오답형."""
     if not (2 <= len(marks) <= 8):
         raise ValueError("어법 밑줄은 2~8개여야 합니다.")
+    # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호·근거 키도 그에 맞춰 재매핑
+    marks, remap = order_marks(sentences, marks)
+    answer_nos = sorted(remap.get(n, n) for n in answer_nos)
+    reasons = {remap.get(n, n): t for n, t in reasons.items()}
     marked = _passage_html(sentences, _underline_marks(marks))
     return F.grammar_q(marked), F.grammar_a(answer_nos, reasons)
 

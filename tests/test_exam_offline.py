@@ -701,6 +701,42 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
     print("✓ 분석 결과 JSON 저장·복원·제목 교체 재렌더(무API) 통과")
 
 
+def test_underline_reading_order() -> None:
+    """어휘·어법 밑줄 번호는 LLM 이 순서를 뒤섞어 줘도 '지문 읽는 순서'로 매겨지고,
+    정답 번호도 그에 맞게 재매핑돼야 한다(상 난이도 ⑤가 ④보다 앞서던 오류)."""
+    import re
+
+    s = ["The alpha comes first here.",
+         "The beta follows in second.",
+         "The gamma sits in the third.",
+         "The delta is fourth here.",
+         "The omega ends it last."]
+
+    # 어휘: LLM 이 마지막 문장 단어(omega)를 4번째로 앞세워 돌려준 경우
+    vmarks = [(0, "alpha", "alpha"), (1, "beta", "beta"), (2, "gamma", "gamma"),
+              (4, "omega", "omega"), (3, "delta", "delta")]
+    q, a = B.make_vocab(s, vmarks, answer_no=4, reason="r")   # 정답 = omega(원래 4번)
+    plain = re.sub(r"<[^>]+>", "", q)
+    nums = re.findall(r"[①②③④⑤]", plain)
+    assert nums == ["①", "②", "③", "④", "⑤"], nums          # 읽는 순서대로 번호
+    assert re.search(r"⑤\s*omega", plain)                     # omega 는 마지막 → ⑤
+    assert re.search(r'answer-key">⑤', a)                     # 정답도 ⑤ 로 재매핑
+
+    # 어법: 복수정답·근거 키도 재매핑되는지(뒤섞인 입력)
+    gmarks = [(4, "omega", "omigo"), (0, "alpha", "alfa"), (2, "gamma", "gamma")]
+    # 원래 번호 1(omega, 마지막)·2(alpha, 처음)가 정답
+    gq, ga = B.make_grammar(s, gmarks, answer_nos=[1, 2],
+                            reasons={1: "오메가근거", 2: "알파근거"})
+    gnums = re.findall(r"[①②③]", re.sub(r"<[^>]+>", "", gq))
+    assert gnums == ["①", "②", "③"]                          # alpha①·gamma②·omega③
+    # 정답: alpha→①, omega→③ → 정답 ①③, 근거도 그 번호에 붙는다
+    assert "①" in ga and "③" in ga
+    assert "알파근거" in ga and "오메가근거" in ga
+    keys = re.search(r'answer-key">([^<]+)</span>', ga).group(1)
+    assert "①" in keys and "③" in keys and "②" not in keys
+    print("✓ 어휘·어법 밑줄 번호 읽는 순서 정렬·정답 재매핑 통과")
+
+
 def test_answer_spread() -> None:
     """정답 위치 분산: 선지 재배열로 정답을 목표 위치로 옮기되 정오·오답근거는 보존."""
     from exam import answer_spread as A
@@ -893,6 +929,7 @@ if __name__ == "__main__":
     test_difficulty_lever()
     test_error_reduction_settings()
     test_serialize_roundtrip()
+    test_underline_reading_order()
     test_answer_spread()
     test_passage_source_label()
     test_review_flags_and_page()
