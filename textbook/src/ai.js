@@ -307,12 +307,15 @@ const PASSAGE_SCHEMA = {
               why: { type: 'string' },
             },
           },
-          paraphrases: {               // 재진술(같은 말) 쌍 2~4개
+          paraphrases: {               // 재진술(같은 말) 쌍 0~4개 (핵심 개념 위주, 없으면 빈 배열)
             type: 'array',
             items: {
               type: 'object', additionalProperties: false,
               required: ['a', 'b'],
-              properties: { a: { type: 'string' }, b: { type: 'string' } },
+              properties: {
+                a: { type: 'string', description: '지문 속 표현 (핵심 개념)' },
+                b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현' },
+              },
             },
           },
           sentences: { type: 'array', minItems: 1, items: passageSentenceSchema() },
@@ -340,8 +343,17 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - structure: 이 글의 구조. type 은 [통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) /
   비교·대조 / 시간·순서(나열) / 예시→일반화(결론)] 중 가장 알맞은 하나(또는 근접 표현),
   why 는 그렇게 본 근거(전환어 But/However, 예시, 시간표현 등)를 한 줄로.
-- paraphrases: 지문에서 '같은 뜻을 다르게 표현한' 재진술 쌍 2~4개. a·b 는 지문에 실제 나온
-  표현으로(영어 어구 또는 우리말), 서로 문맥상 같은 개념을 가리켜야 해.
+- paraphrases: '재진술(같은 말)' 짝 0~4개. 재진술은 수능 독해의 핵심 원리 — 필자가 같은 생각을
+  지문의 '다른 위치'에서 '다른 표현'으로 되풀이하는 거야. 이걸 찾는 훈련이 빈칸·함의·요지의 뿌리야.
+  아래 출제원리를 지켜:
+  1) a·b 는 지문에 '실제로 나온' 서로 다른 위치의 표현이어야 해(같은 문장 안 동어반복 금지, 지어내기 금지).
+  2) 주제·필자 주장·요지와 맞닿은 '핵심 개념'을 담을 것(곁가지·단순 예시 나열은 X).
+  3) 표면 어휘는 다르되 뜻은 같게 — 다음 치환 장치 중 하나로 연결돼야 자연스러워:
+     ① 동의어·유의어 치환(important→key)  ② 추상↔구체(traces↔hairs, soil: 상위어↔예시)
+     ③ 명사화↔동사화(she contributed↔her contributions)  ④ 능동↔수동(X caused Y↔Y was caused by X)
+     ⑤ 긍정↔이중부정(always leaves↔never leaves without)  ⑥ 비유↔직설(mother of ~↔most important person in ~).
+  4) a 에는 앞쪽/주제 표현, b 에는 그것을 되받은 재진술을 넣어(방향을 일관되게).
+  5) 지문에 '뚜렷한' 재진술이 없으면 억지로 만들지 말고 개수를 줄이거나 빈 배열([])로 둬.
 
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
