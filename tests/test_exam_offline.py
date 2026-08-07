@@ -734,7 +734,21 @@ def test_underline_reading_order() -> None:
     assert "알파근거" in ga and "오메가근거" in ga
     keys = re.search(r'answer-key">([^<]+)</span>', ga).group(1)
     assert "①" in keys and "③" in keys and "②" not in keys
-    print("✓ 어휘·어법 밑줄 번호 읽는 순서 정렬·정답 재매핑 통과")
+
+    # 2회 A유형: ⓐ~ⓔ 문자도 읽는 순서로, 선지 문자열이 그에 맞게 재표기되는지
+    from exam import build2
+    amarks = [(4, "omega", "omega"), (0, "alpha", "alpha"), (1, "beta", "beta"),
+              (2, "gamma", "gamma"), (3, "delta", "delta")]
+    # 정답 선지(2번) = "ⓐ, ⓑ" (원래 omega·alpha 짝) — 재정렬 후 alpha=ⓐ, omega=ⓔ
+    achoices = ["ⓒ, ⓓ", "ⓐ, ⓑ", "ⓑ, ⓔ", "ⓐ, ⓔ", "ⓓ, ⓔ"]
+    aq, aa = build2.make_A(s, amarks, answer_no=2, reason="r", choices=achoices)
+    ap = re.sub(r"<[^>]+>", "", aq)
+    aletters = re.findall(r"[ⓐ-ⓔ]", ap)
+    assert aletters[:5] == ["ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ"]        # 본문 문자 읽는 순서
+    assert re.search(r"ⓐ\s*alpha", ap) and re.search(r"ⓔ\s*omega", ap)
+    # 정답 선지(2번)의 문자가 omega·alpha → ⓐ,ⓔ 로 재표기됐는지
+    assert "ⓐ, ⓔ" in aq.split("</div>")[-1] or "ⓔ, ⓐ" in aq.split("</div>")[-1]
+    print("✓ 어휘·어법·A유형 밑줄 번호 읽는 순서 정렬·정답/선지 재매핑 통과")
 
 
 def test_answer_spread() -> None:

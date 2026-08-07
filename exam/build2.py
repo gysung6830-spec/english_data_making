@@ -22,6 +22,13 @@ def make_A(sentences, marks, answer_no, reason, choices):
     """marks: [(문장idx, 원본단어, 표시단어)] 5개(ⓐ~ⓔ). choices: 5개 짝 문자열."""
     if len(marks) != 5:
         raise ValueError("A 유형 밑줄은 5개여야 합니다.")
+    # 밑줄 문자 ⓐ~ⓔ 를 '읽는 순서'로 매기고, 선지 문자열의 문자도 같은 순서로 재표기
+    # (선지는 그대로 두고 문자만 상호 치환하므로 정답 번호는 불변).
+    marks, remap = B1.order_marks(sentences, marks)
+    if remap and any(o != n for o, n in remap.items()):
+        trans = {ord(F2.CIRC_LETTER[o - 1]): F2.CIRC_LETTER[n - 1]
+                 for o, n in remap.items() if o - 1 < len(F2.CIRC_LETTER)}
+        choices = [c.translate(trans) for c in choices]
     lettered = [(idx, word, F2.uletter(i, shown)) for i, (idx, word, shown) in enumerate(marks, 1)]
     marked = B1._passage_html(sentences, lettered)
     return F2.A_q(marked, choices), F2.A_a(answer_no, reason)
