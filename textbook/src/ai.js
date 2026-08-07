@@ -386,21 +386,33 @@ function normalizePassages(aiData) {
 // 검증(불변식)을 통과하도록 정리한다. 못 살리는 문장·지문은 조용히 버린다.
 function sanitizePassages(passages) {
   const ne = (v) => typeof v === 'string' && v.trim().length > 0;
+  // 영어여야 하는 필드(en·끊어읽기 영어쪽·단어)에 섞인 한글은 제거(방어).
+  const deK = (v) => String(v == null ? '' : v).replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')
+    .replace(/[（(]\s*[)）]|\[\s*\]|【\s*】/g, ' ')  // 남은 빈 괄호 제거
+    .replace(/\s+([,.;:!?)\]}])/g, '$1').replace(/([([{])\s+/g, '$1')
+    .replace(/\s{2,}/g, ' ').trim();
   return passages.map((p) => {
     const sentences = (p.sentences || []).map((s, i) => {
-      const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && ne(c[0]) && ne(c[1]));
-      const vocab = (s.vocab || []).filter((v) => Array.isArray(v) && ne(v[0]) && ne(v[1]));
+      const chunks = (s.chunks || [])
+        .map((c) => (Array.isArray(c) ? [deK(c[0]), c[1]] : c))   // 영어쪽만 한글 제거
+        .filter((c) => Array.isArray(c) && ne(c[0]) && ne(c[1]));
+      const vocab = (s.vocab || [])
+        .map((v) => (Array.isArray(v) ? [deK(v[0]), v[1]] : v))
+        .filter((v) => Array.isArray(v) && ne(v[0]) && ne(v[1]));
       return {
         src: ne(s.src) ? s.src : String(i + 1),
-        en: s.en || '',
+        en: deK(s.en || ''),
         point: s.point || '',
         chunks,
-        vocab: vocab.length ? vocab : [[(String(s.en || '').split(/\s+/)[0] || 'word'), '뜻']],
+        vocab: vocab.length ? vocab : [[(deK(s.en || '').split(/\s+/)[0] || 'word'), '뜻']],
         catch: ne(s.catch) ? s.catch : '이 문장의 핵심을 한 줄로 잡아보자.',
         trap: s.trap || '',
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);
-    return { ...p, sentences };
+    // 재진술: 양쪽 값이 모두 있는 짝만 유지(없으면 빈 배열 → 렌더에서 미출력).
+    const paraphrases = (p.paraphrases || [])
+      .filter((x) => Array.isArray(x) && ne(x[0]) && ne(x[1]));
+    return { ...p, paraphrases, sentences };
   }).filter((p) => p.sentences.length > 0);
 }
 

@@ -36,6 +36,17 @@ function looksEnglish(line) {
   return /[.!?]["')\]]?\s*$/.test(s);                 // 문장부호로 끝남
 }
 
+// 영어 문장 안에 잘못 섞인 한글(및 그로 인해 남는 빈 괄호·중복 공백)을 제거.
+function stripHangul(s) {
+  return String(s)
+    .replace(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g, ' ')       // 한글 음절/자모 제거
+    .replace(/[（(]\s*[)）]|\[\s*\]|【\s*】/g, ' ') // 남은 빈 괄호 제거
+    .replace(/\s+([,.;:!?)\]}])/g, '$1')          // 구두점 앞 공백 정리
+    .replace(/([([{])\s+/g, '$1')                 // 여는 괄호 뒤 공백 정리
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
 // 문항 번호("20.", "[41~42]", "32번" 등)와 페이지 머리말 제거
 function stripNoise(text) {
   return text
@@ -118,12 +129,16 @@ async function extractSentences(buffer) {
   const sentences = [];
   for (const c of candidates) {
     if (!looksEnglish(c)) continue;
-    const key = c.toLowerCase().replace(/[^a-z0-9]/g, '');
+    // 영어 문장으로 통과했더라도 안에 섞인 한글(고유명사 옆 주석·병기 해석 등)은 지운다.
+    // 영어 지문 문장은 원래 한글이 없으므로, 남은 한글은 잘못 붙은 것 → 제거 후 공백 정리.
+    const clean = stripHangul(c);
+    if (clean.replace(/[^A-Za-z]/g, '').length < 15) continue; // 한글 제거 후 영어가 부족하면 버림
+    const key = clean.toLowerCase().replace(/[^a-z0-9]/g, '');
     if (seen.has(key)) continue;                      // 중복 문장 제거
     seen.add(key);
-    sentences.push(c);
+    sentences.push(clean);
   }
   return { raw, sentences };
 }
 
-module.exports = { extractSentences, looksEnglish, stripNoise, joinAndSplit };
+module.exports = { extractSentences, looksEnglish, stripNoise, joinAndSplit, stripHangul };

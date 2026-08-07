@@ -252,23 +252,51 @@ function predictChoiceParas(p) {
     children: [new TextRun({ text: `☐  ${t}`, size: 21, font: S.FONT })],
   })));
   out.push(B.p('     근거(전환·연결 표현이나 문장 번호): ____________________________'));
-  if (p.paraphrases && p.paraphrases.length) {
+  const paraQ = (p.paraphrases || []).filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim());
+  if (paraQ.length) {
     out.push(B.p('🔗 재진술(같은 말) 찾기 — 아래 표현과 같은 뜻으로 바꿔 쓴 말을 지문에서 찾아 써봐:'));
-    p.paraphrases.forEach(([a]) => out.push(new Paragraph({
+    paraQ.forEach(([a]) => out.push(new Paragraph({
       spacing: { after: 30 }, indent: { left: 240 },
       children: [new TextRun({ text: `${a}  ≈  ______________________________`, size: 21, font: S.FONT })],
     })));
   }
   return out;
 }
-// 지문 끝: 해석 전 예측 정답 공개
+// 지문 끝: 해석 전 예측 정답 공개 — 별도 페이지 + 항목별 카드(가독성↑)
+const GRAM = '6A57B0'; const GRAMBG = 'F0EDF9'; const GRAMLINE = 'DDD4F2';
+function revealItem(label, main, why) {
+  const kids = [new Paragraph({
+    spacing: { after: why ? 50 : 0 },
+    children: [
+      new TextRun({ text: `${label}  `, bold: true, size: 22, color: GRAM, font: S.FONT }),
+      new TextRun({ text: main, bold: true, size: 22, font: S.FONT }),
+    ],
+  })];
+  if (why) kids.push(new Paragraph({ children: [new TextRun({ text: why, size: 20, color: '4B4B57', font: S.FONT })] }));
+  return B.makeBox(GRAMBG, GRAMLINE, kids);
+}
 function predictRevealParas(p) {
-  const out = [B.h2('해석 전 예측 — 정답 확인')];
-  if (p.topic) out.push(B.p(`🔎 소재: ${p.topic}`));
-  if (p.claim && p.claim.stance) out.push(B.p(`🗣️ 필자 주장: ${p.claim.stance}${p.claim.why ? ` — ${p.claim.why}` : ''}`));
-  if (p.structure && p.structure.type) out.push(B.p(`🧩 글의 구조: ${p.structure.type}${p.structure.why ? ` — ${p.structure.why}` : ''}`));
-  if (p.paraphrases && p.paraphrases.length) {
-    out.push(B.p(`🔗 재진술: ${p.paraphrases.map(([a, b]) => `${a} ≈ ${b}`).join('  ·  ')}`));
+  // 재진술: 양쪽 값이 모두 있는 짝만
+  const pairs = (p.paraphrases || []).filter((x) => Array.isArray(x)
+    && String(x[0] == null ? '' : x[0]).trim() && String(x[1] == null ? '' : x[1]).trim());
+  const out = [B.pageBreak(), B.h2('✅ 해석 전 예측 — 정답 확인  ·  소재 · 필자 주장 · 글의 구조 · 재진술')];
+  if (p.topic) { out.push(revealItem('🔎 소재', p.topic, '')); out.push(B.spacer()); }
+  if (p.claim && p.claim.stance) { out.push(revealItem('🗣️ 필자 주장', p.claim.stance, p.claim.why || '')); out.push(B.spacer()); }
+  if (p.structure && p.structure.type) { out.push(revealItem('🧩 글의 구조', p.structure.type, p.structure.why || '')); out.push(B.spacer()); }
+  if (pairs.length) {
+    const kids = [new Paragraph({
+      spacing: { after: 70 },
+      children: [new TextRun({ text: '🔗 재진술 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
+    })];
+    pairs.forEach(([a, b]) => kids.push(new Paragraph({
+      spacing: { after: 50 },
+      children: [
+        new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
+        new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),
+        new TextRun({ text: b, size: 20, color: '4B4B57', font: S.FONT }),
+      ],
+    })));
+    out.push(B.makeBox(GRAMBG, GRAMLINE, kids)); out.push(B.spacer());
   }
   return out;
 }
@@ -286,6 +314,7 @@ function passageParagraphs(p, idx) {
   }));
   out.push(B.h2('해석 전 예측 — 소재·주장·구조·재진술'));
   out.push(...predictChoiceParas(p));
+  out.push(B.pageBreak());
   out.push(B.h2('한 문장씩 직접 풀기'));
   (p.sentences || []).forEach((s, i) => out.push(...passageSentenceParas(s, i + 1)));
   // 지문 끝: 답지(해석·캐치) → 해석 전 예측 정답 → 지문 전체 요지

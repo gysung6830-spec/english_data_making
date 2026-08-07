@@ -459,6 +459,29 @@ function css() {
   .sr-h { display:block; font-weight:800; color:${C.gram}; margin-bottom:5px; font-size:12.5px; }
   .pr-line { margin:3px 0; }
   .pr-lab { font-weight:800; color:${C.gram}; margin-right:6px; }
+  /* 해석 전 예측 — 정답 해설지 (별도 페이지 · 항목별 카드로 가독성↑) */
+  .revealpage { break-before: page; page-break-before: always; padding:2px; }
+  .rv-head { display:flex; align-items:center; flex-wrap:wrap; gap:5px 10px;
+    margin-bottom:14px; padding-bottom:9px; border-bottom:2px solid ${C.gram}; }
+  .rv-badge { background:${C.gram}; color:#fff; font-weight:800; font-size:12px; padding:4px 13px; border-radius:20px; }
+  .rv-htitle { font-weight:800; font-size:15px; color:${C.ink}; }
+  .rv-hint { color:${C.sub}; font-size:10px; }
+  .rv-item { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
+    border-radius:9px; padding:11px 15px 12px; margin:10px 0; break-inside:avoid; }
+  .rv-top { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .rv-ic { font-size:15px; }
+  .rv-lab { font-weight:800; font-size:13.5px; color:${C.gram}; letter-spacing:.2px; }
+  .rv-main { font-size:12.5px; line-height:1.65; color:${C.ink}; }
+  .rv-stance { display:inline-block; background:${C.gram}; color:#fff; font-size:11.5px;
+    font-weight:800; padding:2px 11px; border-radius:12px; }
+  .rv-why { font-size:11.5px; line-height:1.65; color:#4b4b57; margin-top:6px;
+    padding-top:6px; border-top:1px dashed #d6cdf0; }
+  .rv-paras { display:flex; flex-direction:column; gap:6px; margin-top:2px; }
+  .rv-para { display:flex; align-items:baseline; gap:8px; background:#fff;
+    border:1px solid #e4ddf5; border-radius:6px; padding:6px 10px; font-size:11.5px; line-height:1.6; }
+  .rv-a { flex:1; font-weight:700; color:${C.ink}; }
+  .rv-eq { flex:none; color:${C.gram}; font-weight:800; }
+  .rv-b { flex:1; color:#4b4b57; }
   `;
 }
 
@@ -528,25 +551,46 @@ function structureChoiceCard() {
   </div>`;
 }
 // 🔗 재진술(같은 말) 찾기 — 지문에서 같은 뜻으로 바꿔 쓴 표현 짝짓기(직접)
+// 재진술 짝에서 '왼쪽 표현(a)'이 있는 것만 남긴다(빈 값·형식 오류 제거).
+function validPairs(p) {
+  return (p && p.paraphrases ? p.paraphrases : [])
+    .filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim());
+}
 function paraphraseCard(p) {
-  if (!p.paraphrases || !p.paraphrases.length) return '';
-  const rows = p.paraphrases.map(([a]) => `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`).join('');
+  const pairs = validPairs(p);
+  if (!pairs.length) return ''; // 재진술이 없으면 아예 출력하지 않음
+  const rows = pairs.map(([a]) => `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`).join('');
   return `<div class="structbox">
     <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">아래 표현과 '같은 뜻으로 바꿔 쓴 말'을 지문에서 찾아 써봐</span></div>
     ${rows}</div>`;
 }
-// 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 한꺼번에 공개
+// 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 — 별도 페이지, 항목별 카드로 가독성↑
 function predictReveal(p) {
-  const parts = [];
-  if (p.topic) parts.push(`<div class="pr-line"><span class="pr-lab">🔎 소재</span> ${esc(p.topic)}</div>`);
-  if (p.claim && p.claim.stance) parts.push(`<div class="pr-line"><span class="pr-lab">🗣️ 필자 주장</span> <b>${esc(p.claim.stance)}</b>${p.claim.why ? ` — ${esc(p.claim.why)}` : ''}</div>`);
-  if (p.structure && p.structure.type) parts.push(`<div class="pr-line"><span class="pr-lab">🧩 글의 구조</span> <b>${esc(p.structure.type)}</b>${p.structure.why ? ` — ${esc(p.structure.why)}` : ''}</div>`);
-  if (p.paraphrases && p.paraphrases.length) {
-    const pr = p.paraphrases.map(([a, b]) => `${esc(a)} ≈ ${esc(b)}`).join(' &nbsp;·&nbsp; ');
-    parts.push(`<div class="pr-line"><span class="pr-lab">🔗 재진술</span> ${pr}</div>`);
+  const cards = [];
+  const card = (ic, lab, main, why) => `<div class="rv-item">
+    <div class="rv-top"><span class="rv-ic">${ic}</span><span class="rv-lab">${esc(lab)}</span></div>
+    <div class="rv-main">${main}</div>${why ? `<div class="rv-why">${esc(why)}</div>` : ''}</div>`;
+
+  if (p.topic) cards.push(card('🔎', '소재', esc(p.topic), ''));
+  if (p.claim && p.claim.stance) cards.push(card('🗣️', '필자 주장', `<b class="rv-stance">${esc(p.claim.stance)}</b>`, p.claim.why || ''));
+  if (p.structure && p.structure.type) cards.push(card('🧩', '글의 구조', `<b class="rv-stance">${esc(p.structure.type)}</b>`, p.structure.why || ''));
+
+  // 재진술: 양쪽(a·b)이 모두 있는 짝만, 있을 때만 출력
+  const pairs = validPairs(p).filter(([, b]) => String(b == null ? '' : b).trim());
+  if (pairs.length) {
+    const rows = pairs.map(([a, b]) =>
+      `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}</span></div>`).join('');
+    cards.push(`<div class="rv-item">
+      <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
+      <div class="rv-paras">${rows}</div></div>`);
   }
-  if (!parts.length) return '';
-  return `<div class="struct-reveal"><span class="sr-h">✅ 해석 전 예측 — 정답 확인</span>${parts.join('')}</div>`;
+
+  if (!cards.length) return '';
+  return `<section class="revealpage">
+    <div class="rv-head"><span class="rv-badge">해석 전 예측 · 정답</span>
+      <span class="rv-htitle">소재 · 필자 주장 · 글의 구조 · 재진술</span>
+      <span class="rv-hint">앞에서 예측한 걸 여기서 맞춰봐</span></div>
+    ${cards.join('')}</section>`;
 }
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
@@ -570,7 +614,7 @@ function passageHtml(p, idx) {
   h += fullTextBlock(p.sentences);
   h += secHead(CIRCLED[1], '해석 전 예측 — 소재·주장·구조·재진술', '통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', 'gram');
   h += subjectCard() + claimCard() + structureChoiceCard() + paraphraseCard(p);
-  h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal');
+  h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal', true);
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
   h += predictReveal(p);
