@@ -751,6 +751,26 @@ def test_underline_reading_order() -> None:
     print("✓ 어휘·어법·A유형 밑줄 번호 읽는 순서 정렬·정답/선지 재매핑 통과")
 
 
+def test_d_cue_marking() -> None:
+    """D(어순배열): 원형으로 바꾼 동사는 LLM 이 cues 에 빠뜨려도 제시어(볼드)로 표시,
+    구두점이 붙은 토큰('find,')도 cue('find')로 매칭된다."""
+    import re
+
+    from exam import build2
+    sents = ["Second, when conflicting viewpoints are found, they are more easily "
+             "resolved earlier rather than later in the project."]
+    tokens = ["Second,", "when", "conflicting", "viewpoints", "are", "find,", "they",
+              "are", "more", "easily", "resolve", "earlier", "rather", "than", "later",
+              "in", "the", "project."]
+    # LLM 이 'resolve'만 cue 로 주고 'find'(found→find)는 빠뜨린 상황
+    q, _ = build2.make_D(sents, tokens, cues=["resolve"], answer_sentence=sents[0])
+    cued = {re.sub(r"[^a-z]", "", c.lower())
+            for c in re.findall(r'class="cue">([^<]+)</span>', q)}
+    assert "find" in cued and "resolve" in cued          # 두 원형 동사 모두 표시
+    assert "viewpoints" not in cued and "are" not in cued  # 원형 아닌 건 표시 안 함
+    print("✓ D유형 제시어 자동 표시(원형 동사·구두점 무시) 통과")
+
+
 def test_answer_spread() -> None:
     """정답 위치 분산: 선지 재배열로 정답을 목표 위치로 옮기되 정오·오답근거는 보존."""
     from exam import answer_spread as A
@@ -944,6 +964,7 @@ if __name__ == "__main__":
     test_error_reduction_settings()
     test_serialize_roundtrip()
     test_underline_reading_order()
+    test_d_cue_marking()
     test_answer_spread()
     test_passage_source_label()
     test_review_flags_and_page()

@@ -94,6 +94,11 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
         raise ValueError("어순 배열 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
     if _norm(snapped) != _norm(answer_sentence) and flags is not None:
         flags.append(_rv.FIX_SNAP)
+    # 제시어(원형으로 바꾼 동사) 자동 보강: 정답 문장에 '그대로' 없는 토큰은 어형이
+    # 변형된 것이므로 cue 로 표시한다(LLM 이 cues 에 빠뜨려도 학생이 알아볼 수 있게).
+    ans_words = {F2._bareword(w) for w in answer_sentence.split()}
+    cues = list(cues) + [tk for tk in tokens
+                         if F2._bareword(tk) and F2._bareword(tk) not in ans_words]
     return F2.D_q(tokens, cues), F2.D_a(snapped, reason)
 
 

@@ -1,9 +1,16 @@
 """변형문제 2회(A~G) 전용 HTML 조각 빌더. 볼드 규칙은 1회와 동일(format.py 재사용)."""
 from __future__ import annotations
 
+import re
+
 from . import format as F
 
 CIRC_LETTER = ["ⓐ", "ⓑ", "ⓒ", "ⓓ", "ⓔ", "ⓕ", "ⓖ", "ⓗ"]
+
+
+def _bareword(w: str) -> str:
+    """비교용: 앞뒤 구두점 제거 + 소문자('found,' → 'found', 'Second' → 'second')."""
+    return re.sub(r"[^a-z0-9']+", "", w.lower())
 
 
 def cletter(i: int) -> str:
@@ -89,10 +96,11 @@ def F_a(answer_no: int, reason: str, wrong: dict[int, str]) -> str:
 
 # D · 어순 배열(서술형) -----------------------------------------------------
 def D_q(tokens: list[str], cues: list[str]) -> str:
-    cue_set = {c.strip().lower() for c in cues}
+    # 구두점에 영향받지 않게 '맨몸 단어'로 비교(예: 'find,' 토큰도 cue 'find' 로 볼드).
+    cue_set = {_bareword(c) for c in cues if _bareword(c)}
     toks = []
     for tk in tokens:
-        if tk.strip().lower() in cue_set:
+        if _bareword(tk) in cue_set:
             toks.append(f'<span class="cue">{F.esc(tk)}</span>')
         else:
             toks.append(F.esc(tk))
