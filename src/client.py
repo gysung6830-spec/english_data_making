@@ -128,7 +128,10 @@ class ClaudeClient:
         for attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, cur_max,
                                 image_path=image_path)
-            message = self._client.messages.create(**req)
+            # max_tokens 가 크면 비스트리밍 요청은 SDK가 막는다(10분 초과 가능).
+            # 스트리밍으로 받아 최종 메시지를 조립한다.
+            with self._client.messages.stream(**req) as stream:
+                message = stream.get_final_message()
             # 응답이 max_tokens 로 잘렸으면(JSON 미완성) 프롬프트가 아니라 한도가 문제.
             # 같은 한도로 재시도해봐야 또 잘리므로, 토큰 한도를 키워 다시 요청한다.
             if getattr(message, "stop_reason", None) == "max_tokens":

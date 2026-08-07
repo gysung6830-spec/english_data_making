@@ -66,16 +66,32 @@ def test_vocab_count_range():
 
 
 # ---- 4. 재시도 로직 (가짜 클라이언트) --------------------------------------
+class _FakeStream:
+    """messages.stream(...) 컨텍스트 매니저 흉내."""
+    def __init__(self, message):
+        self._message = message
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
+
+    def get_final_message(self):
+        return self._message
+
+
 class _FakeMessages:
     def __init__(self, responses):
         self._responses = list(responses)
         self.calls = 0
 
-    def create(self, **kwargs):
+    def stream(self, **kwargs):
         text = self._responses[min(self.calls, len(self._responses) - 1)]
         self.calls += 1
         block = types.SimpleNamespace(type="text", text=text)
-        return types.SimpleNamespace(content=[block])
+        msg = types.SimpleNamespace(content=[block], stop_reason="end_turn")
+        return _FakeStream(msg)
 
 
 def test_retry_recovers():
