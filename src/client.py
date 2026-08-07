@@ -16,7 +16,9 @@ from pydantic import BaseModel, ValidationError
 
 T = TypeVar("T", bound=BaseModel)
 
-DEFAULT_MAX_TOKENS = 8000
+DEFAULT_MAX_TOKENS = 16000
+# 응답이 max_tokens 로 잘리면 재시도 시 이 상한까지 토큰 한도를 2배씩 키운다.
+MAX_TOKENS_CAP = 32000
 
 
 # ---------------------------------------------------------------------------
@@ -122,10 +124,21 @@ class ClaudeClient:
         """
         last_err: Exception | None = None
         cur_prompt = prompt
+        cur_max = max_tokens
         for attempt in range(max_retries + 1):
-            req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
+            req = build_request(self.model, system, cur_prompt, model_cls, cur_max,
                                 image_path=image_path)
             message = self._client.messages.create(**req)
+            # 응답이 max_tokens 로 잘렸으면(JSON 미완성) 프롬프트가 아니라 한도가 문제.
+            # 같은 한도로 재시도해봐야 또 잘리므로, 토큰 한도를 키워 다시 요청한다.
+            if getattr(message, "stop_reason", None) == "max_tokens":
+                last_err = ValueError(
+                    f"응답이 최대 토큰({cur_max})에 걸려 잘렸습니다(지문이 길어 출력이 큼)."
+                )
+                if cur_max < MAX_TOKENS_CAP:
+                    cur_max = min(cur_max * 2, MAX_TOKENS_CAP)
+                cur_prompt = prompt  # 잘림은 내용 문제가 아니므로 프롬프트는 원본 유지
+                continue
             try:
                 text = extract_text(message)
                 obj = parse_response_text(text, model_cls)

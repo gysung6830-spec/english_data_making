@@ -14,7 +14,7 @@ def extract_passages(client: ClaudeClient, cfg: Config, raw_text: str) -> schema
         system=prompts.EXTRACT_SYSTEM,
         prompt=prompts.extract_prompt(raw_text),
         model_cls=schemas.PassageSet,
-        max_tokens=12000,
+        max_tokens=24000,
         max_retries=cfg.processing.max_retries,
     )
 
@@ -28,7 +28,7 @@ def extract_passages_image(client: ClaudeClient, cfg: Config, image_path) -> sch
         system=prompts.EXTRACT_SYSTEM,
         prompt=prompts.extract_image_prompt(),
         model_cls=schemas.PassageSet,
-        max_tokens=12000,
+        max_tokens=24000,
         max_retries=cfg.processing.max_retries,
         image_path=image_path,
     )
@@ -47,7 +47,7 @@ def analyze_passage(
 
     def do_literal():
         return client.structured(prompts.SYSTEM, prompts.literal_prompt(title, body),
-                                 schemas.LiteralSection, max_tokens=12000, max_retries=r)
+                                 schemas.LiteralSection, max_tokens=24000, max_retries=r)
 
     def do_grammar():
         return client.structured(prompts.SYSTEM, prompts.grammar_prompt(title, body),
