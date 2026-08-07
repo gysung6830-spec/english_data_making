@@ -586,13 +586,43 @@ def _collect_vocab_one(report) -> list[dict]:
     return out
 
 
-def _first_term(s: str) -> str:
-    """'vital, crucial' → 'vital' (줄긋기 매칭용 대표 1개). '없음(—)'이면 빈 문자열."""
+def _terms(s: str) -> list[str]:
+    """'vital, crucial' → ['vital', 'crucial'] (줄긋기 후보). '없음(—)'이면 빈 리스트."""
     v = (s or "").strip()
     if v.lower() in _DASH_NONE:
-        return ""
-    first = re.split(r"[,/·;]| or ", v)[0].strip()
-    return "" if first.lower() in _DASH_NONE else first
+        return []
+    out = []
+    for part in re.split(r"[,/·;]| or ", v):
+        t = part.strip()
+        if t and t.lower() not in _DASH_NONE:
+            out.append(t)
+    return out
+
+
+def _first_term(s: str) -> str:
+    """'vital, crucial' → 'vital' (대표 1개). '없음(—)'이면 빈 문자열."""
+    ts = _terms(s)
+    return ts[0] if ts else ""
+
+
+def _assign_unique_targets(pairs: list[dict]) -> None:
+    """한 블록 안에서 보기(대상)가 겹치지 않도록 각 단어에 대표어를 배정.
+
+    같은 대표어가 이미 쓰였으면 그 단어의 다음 후보어로 바꾼다(모두 겹치면 첫 후보 사용).
+    pairs 의 각 항목은 'terms'(후보 리스트)를 갖고, 결과로 'target' 을 채운다.
+    """
+    used: set[str] = set()
+    for p in pairs:
+        chosen = None
+        for t in p.get("terms", []):
+            if t.lower() not in used:
+                chosen = t
+                break
+        if chosen is None:
+            terms = p.get("terms", [])
+            chosen = terms[0] if terms else ""
+        p["target"] = chosen
+        used.add(chosen.lower())
 
 
 def render_vocablist_pdf(reports, out_path: str | Path,
@@ -663,20 +693,23 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
         ant_pairs: list[dict] = []
         both: list[tuple] = []
         for it in items:
-            s = _first_term(it["synonyms"])
-            a = _first_term(it["antonyms"])
-            if s and a:
-                both.append((it, s, a))       # 둘 다 가능 → 균형 맞춰 나중에 배정
-            elif s:
-                syn_pairs.append({"word": it["word"], "target": s})
-            elif a:
-                ant_pairs.append({"word": it["word"], "target": a})
+            st = _terms(it["synonyms"])
+            at = _terms(it["antonyms"])
+            if st and at:
+                both.append((it, st, at))     # 둘 다 가능 → 균형 맞춰 나중에 배정
+            elif st:
+                syn_pairs.append({"word": it["word"], "terms": st})
+            elif at:
+                ant_pairs.append({"word": it["word"], "terms": at})
         rng.shuffle(both)
-        for it, s, a in both:                 # 두 블록 크기가 비슷해지도록 번갈아 배정
+        for it, st, at in both:               # 두 블록 크기가 비슷해지도록 번갈아 배정
             if len(syn_pairs) <= len(ant_pairs):
-                syn_pairs.append({"word": it["word"], "target": s})
+                syn_pairs.append({"word": it["word"], "terms": st})
             else:
-                ant_pairs.append({"word": it["word"], "target": a})
+                ant_pairs.append({"word": it["word"], "terms": at})
+        # 같은 블록 안에서 보기(대상)가 중복되지 않도록 대표어 배정
+        _assign_unique_targets(syn_pairs)
+        _assign_unique_targets(ant_pairs)
         passages.append({
             "no": i, "total": len(reps), "title": _display_title(rep),
             "mean": mean, "mean_rows": _pair_rows(mean),
