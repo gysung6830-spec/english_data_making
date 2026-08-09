@@ -374,6 +374,63 @@ def item_signals(hl):
     return chips[:7]
 
 
+# ---------- 재진술(패러프레이징) — 문항마다 내장되는 추가 훈련 ----------
+
+_RROLE = {"주제문": "r-main", "재진술": "r-re", "정답근거": "r-ans"}
+
+
+def restate_mission(rt):
+    """STEP1 왼쪽 — 학생이 먼저 풀 '재진술 추가 문제'."""
+    if not rt:
+        return ""
+    comp = rt.get("kind") == "compare"
+    extra = ('<li>비교되는 <b>두 소재</b>가 각각 어떻게 재진술되며 전개되는지 나눠 적기</li>'
+             if comp else '')
+    return (f'<div class="mini rmiss"><div class="h">🔁 재진술 미션 <span class="add">추가 문제</span></div>'
+            f'<ul class="rmk"><li>필자의 <b>핵심 주장·소재</b>를 한 줄로 적기</li>'
+            f'<li>지문에서 그것을 <b>다른 말로 되풀이</b>(재진술)한 문장에 표시</li>{extra}</ul>'
+            f'<div class="rmline">핵심 <span class="fill"></span></div></div>')
+
+
+def restate_card(rt):
+    """STEP3 오른쪽 — 재진술 지도(필자 주장·소재의 되풀이). single=사슬 / compare=두 소재 전개."""
+    if not rt:
+        return ""
+    thesis = esc(rt.get("thesis", ""))
+    echo = esc(rt.get("echo", ""))
+    kind = rt.get("kind", "single")
+    subs = rt.get("subjects") or []
+    if kind == "compare" and len(subs) >= 2:
+        cols = ""
+        for s in subs[:2]:
+            trail = "".join(
+                f'<div class="rt"><span class="ren">{esc(t.get("en",""))}</span>'
+                f'<span class="rko">{esc(t.get("ko",""))}</span></div>'
+                for t in (s.get("trail") or []))
+            cols += f'<div class="rsub"><div class="rname">{esc(s.get("name",""))}</div>{trail}</div>'
+        body = f'<div class="rsubs">{cols}</div>'
+    else:
+        rows = ""
+        for seg in rt.get("chain", []):
+            role = seg.get("role", "재진술"); rc = _RROLE.get(role, "r-re")
+            how = seg.get("how", "")
+            howhtml = f'<span class="rhow">{esc(how)}</span>' if (how and how != "—") else ""
+            rows += (f'<div class="rc"><span class="rrole {rc}">{esc(role)}</span>{howhtml}'
+                     f'<span class="ren">{esc(seg.get("en",""))}</span>'
+                     f'<span class="rko">{esc(seg.get("ko",""))}</span></div>')
+        body = f'<div class="rchain">{rows}</div>'
+    thesis_html = f'<div class="thesis"><span class="lb">핵심</span>{thesis}</div>' if thesis else ""
+    echo_html = f'<div class="rEcho"><span class="lb">정답</span>{echo}</div>' if echo else ""
+    return f'''<div class="card restate">
+      <div class="hd"><span class="no rno">🔁</span><span class="ty">재진술 지도</span>
+        <span class="kind" style="color:#8a5a1a;border-color:#e0b94a">추가 문제 · 필자 주장·소재의 되풀이</span>
+        <span class="tm">패러프레이징</span></div>
+      {thesis_html}
+      {body}
+      {echo_html}
+    </div>'''
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -424,6 +481,8 @@ def render_spread(rec, c, idx):
     remind_label = "🔗 연결고리 단서" if seqtype else "📢 신호 리마인더"
     uline = c.get("uline")  # 함축의미(21): 밑줄 친 부분
     step1_psg = uline_html(clean_passage(hl, band, insert_en), uline)
+    rt = c.get("restate")  # 재진술 지도(추가 문제)
+    rmission = restate_mission(rt)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
@@ -439,6 +498,7 @@ def render_spread(rec, c, idx):
       </div>
       <div class="pside">
         <div class="mini"><div class="h">{remind_label}</div>{chips}</div>
+        {rmission}
         <div class="mini"><div class="h">✅ 셀프 체크</div>
           <ul class="check">{checks}</ul>
         </div>
@@ -499,7 +559,7 @@ def render_spread(rec, c, idx):
         <div class="opt-line">{opt_line(c)}</div>
       </div>
     </div>'''
-    right = right + right2 + '''
+    right = right + right2 + restate_card(rt) + '''
   </div>'''
     return f'<div class="spread">{left}{right}</div>'
 
@@ -850,7 +910,9 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
   /* 워크북은 유형 표지(1쪽)가 좌우 짝을 깨므로 강제 좌/우 정렬을 쓰지 않는다
      → 표지·문제·해설이 빈 페이지 없이 연달아 흐르도록 break-before:page 만 사용 */
   .qproblem{ break-before:page; break-inside:avoid; }
-  .qsolution{ break-before:page; break-inside:avoid; }
+  /* 해설면은 STEP2·STEP3·재진술 3카드 → 한 장을 넘으면 카드 경계에서 자연스럽게 흐르게 */
+  .qsolution{ break-before:page; }
+  .qsolution .card{ break-inside:avoid; }
   .card.solo{ break-inside:avoid; }
 }
 .spread{ margin-bottom:6px; }
@@ -998,6 +1060,37 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .seamrow .slink{ font-size:8.4px; font-weight:700; color:#2f6fb0; margin-top:2px; }
 .seamans{ margin-top:6px; background:#e6f0f9; border-left:3px solid #2f6fb0; border-radius:5px; padding:5px 9px; font-size:9.4px; font-weight:700; color:#1f4d7a; }
 .seamans b{ color:#12406e; }
+/* STEP1 재진술 미션(추가 문제) */
+.rmiss .h{ color:#8a5a1a; } .rmiss .h .add{ font-size:7.5px; font-weight:800; color:#fff; background:#c9a24a; border-radius:8px; padding:1px 6px; margin-left:4px; vertical-align:1px; }
+.rmiss .rmk{ list-style:none; margin:4px 0 5px; padding:0; }
+.rmiss .rmk li{ font-size:8.6px; line-height:1.4; margin-bottom:4px; padding-left:13px; position:relative; color:#4a5560; }
+.rmiss .rmk li::before{ content:"🔁"; position:absolute; left:0; font-size:7px; top:1px; }
+.rmiss .rmk li b{ color:#8a5a1a; }
+.rmiss .rmline{ font-size:8.6px; color:#8a6a00; } .rmiss .rmline .fill{ display:inline-block; min-width:90px; border-bottom:1.4px solid #e0b94a; margin-left:4px; }
+/* STEP3 재진술 지도 카드 */
+.card.restate{ border-left:5px solid #e0b94a; background:#fffdf6; }
+.card.restate .hd{ border-bottom-color:#e0b94a; }
+.card.restate .rno{ background:none; font-size:14px; padding:0; }
+.card.restate .ty{ color:#8a5a1a; }
+.card.restate .tm{ color:#a58a3a; }
+.restate .thesis{ font-size:9.8px; font-weight:700; color:#7a5416; background:#fff4d9; border-radius:6px; padding:6px 10px; margin-bottom:7px; }
+.restate .thesis .lb, .restate .rEcho .lb{ display:inline-block; font-size:7.6px; font-weight:800; color:#fff; background:#c9a24a; border-radius:7px; padding:1px 7px; margin-right:6px; vertical-align:1px; }
+.restate .rchain{ margin-bottom:2px; }
+.restate .rc{ display:flex; flex-wrap:wrap; align-items:baseline; gap:5px; padding:5px 0; border-bottom:1px dashed #ecdcb0; }
+.restate .rc:last-child{ border-bottom:none; }
+.restate .rrole{ flex:none; font-size:7.6px; font-weight:800; color:#fff; border-radius:7px; padding:1px 7px; }
+.restate .rrole.r-main{ background:#8a6a00; } .restate .rrole.r-re{ background:#c9a24a; } .restate .rrole.r-ans{ background:#1f7a5c; }
+.restate .rhow{ flex:none; font-size:7.6px; font-weight:800; color:#a5342d; background:#ffe0dd; border-radius:7px; padding:1px 7px; }
+.restate .ren{ font-size:9.5px; font-weight:600; color:#23272e; background:var(--must); border-radius:3px; padding:0 3px; }
+.restate .rko{ flex-basis:100%; font-size:8.8px; color:#5a636c; padding-left:2px; }
+/* compare — 두 소재 전개 */
+.restate .rsubs{ display:flex; gap:8px; margin-bottom:2px; }
+.restate .rsub{ flex:1; min-width:0; background:#fff; border:1px solid #ecdcb0; border-radius:7px; padding:6px 9px; }
+.restate .rsub .rname{ font-size:9px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:3px; margin-bottom:4px; }
+.restate .rsub .rt{ padding:2px 0; }
+.restate .rsub .ren{ display:inline; font-size:9px; }
+.restate .rsub .rko{ display:block; font-size:8.4px; color:#5a636c; margin-top:1px; }
+.restate .rEcho{ margin-top:6px; font-size:9.4px; font-weight:700; color:#12543d; background:#eaf5f0; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:5px 10px; }
 </style></head><body>
 <div class="cover">
   <div class="kick">PART 1</div>

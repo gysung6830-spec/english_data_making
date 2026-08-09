@@ -10,21 +10,19 @@ render(){ "$CHROME" --headless --no-sandbox --disable-gpu \
   --print-to-pdf="$DIR/$2.pdf" --no-pdf-header-footer "file://$DIR/$1.html" 2>/dev/null; }
 
 # 문제은행 재생성(지문 은행/데이터 기반) — 레포 루트에서 실행
-( cd "$DIR/.." && python3 -m src.gen_workbook 80 && python3 -m src.gen_paraphrase ) >/dev/null 2>&1 || true
+( cd "$DIR/.." && python3 -m src.gen_workbook 80 ) >/dev/null 2>&1 || true
 
 render cover_toc _cover
 render reading_principles _principles
 render strategy_compact_sample 형광펜독해_샘플
-render paraphrase_section 패러프레이징_훈련
-render 패러프레이징_50 _pp50
 render 유형별훈련_워크북 _workbook
 
 python3 - "$DIR" <<'PY'
 import sys, fitz
 d=sys.argv[1]; out=fitz.open()
-# 표지·목차 → PART0 신호사전+PART1 대표카드(형광펜독해_샘플) → PART1 유형별 훈련 80(_workbook)
-#          → PART2 패러프레이징(방법론·해부·50문항)
-for f in ["_cover","_principles","형광펜독해_샘플","_workbook","패러프레이징_훈련","_pp50"]:
+# 표지·목차 → PART0 원리+신호사전 → PART1 대표카드(형광펜독해_샘플)
+#          → PART1 유형별 훈련(문항마다 재진술 훈련 내장)
+for f in ["_cover","_principles","형광펜독해_샘플","_workbook"]:
     out.insert_pdf(fitz.open(f"{d}/{f}.pdf"))
 out.save(f"{d}/_book_raw.pdf")
 print("병합 완료:", out.page_count, "pages")
