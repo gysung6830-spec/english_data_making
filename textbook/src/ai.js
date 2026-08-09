@@ -358,9 +358,10 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
   이 사슬을 잡는 훈련이 빈칸·함의·요지의 뿌리야. 아래 원리를 지켜:
   1) ★기준★ '필자 주장·핵심 소재'가 되는 키워드의 사슬만 뽑아. 곁가지·사소한 세부의
      반복은 넣지 마. 한 사슬 = 같은 개념 하나.
-  2) links: 그 키워드를 지문에서 다시 말한 표현들을 '나온 순서대로' 2~5개. 모두 지문에
-     실제로 있는 표현이어야 하고(지어내기 금지), 표면 어휘는 다르되 뜻은 같아야 해.
-     변주는 다음 치환 장치로: 동의어 / 추상↔구체 / 명사화↔동사화 / 능동↔수동 /
+  2) links: 그 키워드를 지문에서 다시 말한 표현들을 '나온 순서대로' 2~5개.
+     ★반드시 지문 문장에 있는 어구를 '그대로(verbatim) 복사'해서 넣어★ — 요약하거나 단어를
+     바꾸지 마(학생이 지문에서 찾아 써야 하므로 글자 그대로여야 함). 표면 어휘는 서로 다르되
+     뜻은 같은 어구들이어야 해. 변주 장치: 동의어 / 추상↔구체 / 명사화↔동사화 / 능동↔수동 /
      긍정↔이중부정 / 비유↔직설.
   3) keyword: 그 사슬의 핵심 개념을 짧은 이름으로. 비교·대조로 소재가 2개면 사슬을 2개로
      나눠 각각 keyword 를 다르게(예: '전통 의학' 사슬, '현대 의학' 사슬) — 두 소재가 각각
@@ -440,8 +441,12 @@ function sanitizePassages(passages) {
         trap: s.trap || '',
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);
-    // 재진술 사슬: 각 사슬의 links 를 정리(빈 값·중복 제거, 순서 유지). 링크가 2개 미만이면
-    //   사슬 자체를 버림(없으면 렌더에서 미출력). keyword·why 는 그대로.
+    // 재진술 사슬: 링크를 정리한다.
+    //   1) 빈 값·중복 제거,  2) '지문에 실제로 있는' 표현만 남김(못 찾는 빈칸·틀린 답 방지),
+    //   3) 지문 등장 순서로 정렬(첫 표현=실제 첫 등장, 화살표 A→A′→A″ 방향 보장).
+    //   정리 후 링크가 2개 미만인 사슬은 버림(없으면 렌더에서 미출력).
+    const passageNorm = sentences.map((s) => s.en).join(' ').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const norm = (v) => String(v).toLowerCase().replace(/[^a-z0-9]/g, '');
     const paraphrases = (Array.isArray(p.paraphrases) ? p.paraphrases : [])
       .map((ch) => {
         const seen = new Set();
@@ -450,9 +455,16 @@ function sanitizePassages(passages) {
           if (!ne(v)) return;
           const t = v.trim(); const k = t.toLowerCase();
           if (seen.has(k)) return;
-          seen.add(k); links.push(t);
+          const pos = passageNorm.indexOf(norm(t));
+          if (pos < 0) return;               // 지문에 없는 표현 → 못 찾는 빈칸이 되므로 제거
+          seen.add(k); links.push({ t, pos });
         });
-        return { keyword: ne(ch && ch.keyword) ? ch.keyword.trim() : '', links, why: ne(ch && ch.why) ? ch.why.trim() : '' };
+        links.sort((a, b) => (a.pos === b.pos ? 0 : a.pos - b.pos));  // 지문 등장 순서
+        return {
+          keyword: ne(ch && ch.keyword) ? ch.keyword.trim() : '',
+          links: links.map((x) => x.t),
+          why: ne(ch && ch.why) ? ch.why.trim() : '',
+        };
       })
       .filter((ch) => ch.links.length >= 2);
     return { ...p, paraphrases, sentences };
