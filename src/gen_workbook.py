@@ -388,30 +388,39 @@ def restate_problem(rt):
         return ""
     kind = rt.get("kind", "single")
     subs = rt.get("subjects") or []
-    if kind == "compare" and len(subs) >= 2:
+    # 재진술이 실제로 있는 만큼만 문제화 — 없으면(사슬<2) 문제 자체를 내지 않는다.
+    compare = kind == "compare" and len(subs) >= 2 and any(len(s.get("trail") or []) >= 2 for s in subs[:2])
+    if compare:
         cols = ""
         for li, s in zip(["A", "B"], subs[:2]):
-            n = max(2, len(s.get("trail") or []))
+            n = len(s.get("trail") or [])
+            if n < 1:
+                continue
             rows = "".join(
                 f'<div class="rqrow"><span class="pr">{_prime(li, i)}</span>'
-                f'<span class="rqlab">{"소재" if i == 0 else "→ 재진술 "+"①②③④⑤"[i-1]}</span>'
+                f'<span class="rqlab">{"소재" if i == 0 else "→ 재진술 "+"①②③④⑤⑥"[i-1]}</span>'
                 f'<span class="ln"></span></div>' for i in range(n))
             cols += (f'<div class="rqsub"><div class="rqname"><span class="pr big">{li}</span>'
-                     f'비교 소재 {li}</div>{rows}</div>')
+                     f'비교 소재 {li} <span class="rqcnt">재진술 {max(0,n-1)}개</span></div>{rows}</div>')
         body = f'<div class="rqsubs">{cols}</div>'
-        guide = '두 <b>핵심 소재 A·B</b>를 잡고, 각각이 지문에서 <b>A→A′→A″ · B→B′→B″</b>로 되풀이된 표현을 찾아 잇는다.'
+        guide = '두 <b>핵심 소재 A·B</b>를 잡고, 각 소재가 지문에서 <b>재진술된 만큼</b> 표현을 찾아 A→A′… · B→B′…로 잇는다.'
+        nlab = "소재 2개"
     else:
-        n = max(2, len(rt.get("chain") or []))
+        chain = rt.get("chain") or []
+        n = len(chain)
+        if n < 2:  # 재진술이 없으면 억지로 문제 만들지 않음
+            return ""
         rows = "".join(
             f'<div class="rqrow"><span class="pr">{_prime("A", i)}</span>'
             f'<span class="rqlab">{_RQLAB[i] if i < len(_RQLAB) else "→ 재진술"}</span>'
             f'<span class="ln"></span></div>' for i in range(n))
         body = f'<div class="rqchain">{rows}</div>'
-        guide = '<b>핵심 소재·주장(A)</b>을 잡고, 지문에서 그것을 <b>다른 말로 바꾼 표현</b>을 순서대로 <b>A′→A″→A‴</b>로 잇는다.'
+        guide = '<b>핵심 소재·주장(A)</b>을 잡고, 지문에서 그것을 <b>다른 말로 바꾼 표현</b>을 나온 <b>만큼</b> A′→A″…로 잇는다.'
+        nlab = f"재진술 {n-1}개"
     return f'''<div class="rquiz">
       <div class="rqh"><span class="ico">🔁</span>재진술 연결 문제<span class="add">추가 문제</span>
-        <span class="rqno">{"소재 2개" if kind == "compare" and len(subs) >= 2 else "소재 1개"}</span></div>
-      <div class="rqg">{guide} <b style="color:#a5342d">중요 소재만 — 지엽적 어구는 잇지 않는다.</b></div>
+        <span class="rqno">{nlab}</span></div>
+      <div class="rqg">{guide} <b style="color:#a5342d">실제 재진술만 — 없으면 잇지 않는다.</b></div>
       {body}
     </div>'''
 
@@ -442,7 +451,10 @@ def restate_card(rt):
     echo = esc(rt.get("echo", ""))
     kind = rt.get("kind", "single")
     subs = rt.get("subjects") or []
-    if kind == "compare" and len(subs) >= 2:
+    compare = kind == "compare" and len(subs) >= 2 and any(len(s.get("trail") or []) >= 2 for s in subs[:2])
+    if not compare and len(rt.get("chain") or []) < 2:
+        return ""  # 재진술 없음 → 정답 카드도 내지 않음(문제와 짝)
+    if compare:
         blocks = ""
         for li, s in zip(["A", "B"], subs[:2]):
             blocks += (f'<div class="rsub"><div class="rname"><span class="pr big">{li}</span>'
@@ -1109,6 +1121,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .rquiz .rqsubs{ display:flex; gap:12px; }
 .rquiz .rqsub{ flex:1; min-width:0; }
 .rquiz .rqsub .rqname{ display:flex; align-items:center; gap:5px; font-size:9.3px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:4px; margin-bottom:6px; }
+.rquiz .rqcnt{ margin-left:auto; font-size:7.6px; font-weight:800; color:#8a6a00; background:#fff4d9; border-radius:7px; padding:1px 6px; }
 .rquiz .rqsub .rqrow .rqlab{ width:52px; }
 /* STEP3 재진술 지도 카드 */
 .card.restate{ border-left:5px solid #e0b94a; background:#fffdf6; }
