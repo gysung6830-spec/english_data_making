@@ -440,6 +440,7 @@ def render_spread(rec, c, idx):
       {reason_block}
       {pline}
       {opts_block(c.get("opts", []), answer)}
+      {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
     </div>'''
     # STEP3 — 순서·삽입은 '이음매형'(조각별 지시어 정체 + 이음), 그 외는 직독직해
@@ -834,6 +835,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
 .tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }
+.reconnote{ font-size:8.2px; color:#8a6a00; background:#fffdf3; border:1px dashed var(--must-line); border-radius:5px; padding:4px 8px; margin-top:6px; }
 .psg .rep{ text-decoration:underline; text-decoration-color:#c99a2e; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:700; }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
 

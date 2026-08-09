@@ -21448,5 +21448,1621 @@
     "감정 어휘"
    ]
   }
+ },
+ {
+  "key": "2026-06|40",
+  "answer": 2,
+  "answer_src": "given",
+  "recon_opts": true,
+  "hl": [
+   {
+    "t": "A serious deterioration in people’s working lives would be deeply disturbing to the social order.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Indeed, few consequences of technological change would be as dangerous.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Today, the world of work is the main way that we share out the fruits of growth: for most people, their job is their main, if not their only, source of income.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "work"
+   },
+   {
+    "t": "Technological unemployment would weaken that longstanding arrangement, encouraging an even more extreme version of inequality in which some people receive more income than others and many receive nothing at all.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "encouraging"
+     }
+    ]
+   },
+   {
+    "t": "Nor would the disturbance be only economic.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "Nor … only"
+     }
+    ]
+   },
+   {
+    "t": "For many people, their work is both a source of income and of meaning.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "people"
+   },
+   {
+    "t": "And with that in mind, the threat is even broader: not only that the labor market might be hollowed out, leaving some unable to find a good job and a reliable income, but that this sense of fulfilment that some people are fortunate to feel in their jobs might be hollowed out as well, leaving them unable to find purpose and live a satisfying life.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "By creating unemployment, technology would upset the social order, affecting the of wealth and possibly eliminating the emotional that some discover in work.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "일은 성장의 <b>결실을 나누는(분배)</b> 주된 방식이자 소득의 원천이다",
+     "an": "— 부의 '분배(distribution)'가 핵심 (A)"
+    },
+    {
+     "ko": "기술 실업은 이 방식을 무너뜨려 <b>불평등</b>을 키운다",
+     "an": "— (A) 부의 분배가 흔들림"
+    },
+    {
+     "ko": "일은 소득이자 <b>의미·성취감</b>의 원천이라, 그 성취감마저 사라질 수 있다",
+     "an": "— (B) 정서적 '보상(rewards)'이 없어짐"
+    }
+   ],
+   "concl": "→ 실업은 부의 '분배(A)'를 흔들고, 일이 주는 정서적 '보상(B)'을 없앤다 = <b>②</b>",
+   "gnote": "회색(도입·강조 문장)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Today,",
+      "hl0"
+     ],
+     [
+      "the world of work is the main way",
+      "hl1"
+     ],
+     [
+      "that we share out the fruits of growth:",
+      "hl2"
+     ],
+     [
+      "for most people, their job is their main, if not their only,",
+      "hl3"
+     ],
+     [
+      "source of income.",
+      "hl4"
+     ]
+    ],
+    "ko": [
+     [
+      "오늘날,",
+      "hl0"
+     ],
+     [
+      "일의 세계는 주된 방식이다",
+      "hl1"
+     ],
+     [
+      "우리가 성장의 결실을 나누어 갖는:",
+      "hl2"
+     ],
+     [
+      "대부분의 사람에게, 그들의 일자리는 유일하지는 않더라도 주된,",
+      "hl3"
+     ],
+     [
+      "소득의 원천이다.",
+      "hl4"
+     ]
+    ],
+    "note": "근거: 일이 소득 분배의 주된 통로"
+   },
+   {
+    "en": [
+     [
+      "Technological unemployment would weaken",
+      "hl0"
+     ],
+     [
+      "that longstanding arrangement,",
+      "hl1"
+     ],
+     [
+      "encouraging an even more extreme version of inequality",
+      "hl2"
+     ],
+     [
+      "in which some people receive more income than others",
+      "hl3"
+     ],
+     [
+      "and many receive nothing at all.",
+      "hl4"
+     ]
+    ],
+    "ko": [
+     [
+      "기술적 실업은 약화시킬 것이다",
+      "hl0"
+     ],
+     [
+      "그 오래된 체제를,",
+      "hl1"
+     ],
+     [
+      "훨씬 더 극단적인 형태의 불평등을 조장하면서",
+      "hl2"
+     ],
+     [
+      "그 안에서 어떤 사람들은 남보다 더 많은 소득을 받고",
+      "hl3"
+     ],
+     [
+      "많은 이들은 전혀 아무것도 받지 못하는.",
+      "hl4"
+     ]
+    ],
+    "note": "근거: 기술적 실업이 소득 불평등을 심화"
+   },
+   {
+    "en": [
+     [
+      "Nor would the disturbance be",
+      "hl0"
+     ],
+     [
+      "only economic.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 혼란이 ~인 것도 아닐 것이다",
+      "hl0"
+     ],
+     [
+      "오직 경제적인 것만.",
+      "hl1"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "For many people,",
+      "hl0"
+     ],
+     [
+      "their work is both a source of income",
+      "hl1"
+     ],
+     [
+      "and of meaning.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "많은 사람들에게,",
+      "hl0"
+     ],
+     [
+      "그들의 일은 소득의 원천이자",
+      "hl1"
+     ],
+     [
+      "의미의 원천이기도 하다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 일은 소득이자 의미의 원천"
+   },
+   {
+    "en": [
+     [
+      "And with that in mind,",
+      "hl0"
+     ],
+     [
+      "the threat is even broader:",
+      "hl1"
+     ],
+     [
+      "not only that the labor market might be hollowed out, leaving some unable to find a good job and a reliable income,",
+      "hl2"
+     ],
+     [
+      "but that this sense of fulfilment that some people are fortunate to feel in their jobs might be hollowed out as well,",
+      "hl3"
+     ],
+     [
+      "leaving them unable to find purpose and live a satisfying life.",
+      "hl4"
+     ]
+    ],
+    "ko": [
+     [
+      "그리고 그 점을 염두에 두면,",
+      "hl0"
+     ],
+     [
+      "그 위협은 훨씬 더 광범위하다:",
+      "hl1"
+     ],
+     [
+      "노동 시장이 텅 비어 일부가 좋은 일자리와 안정적 소득을 찾지 못하게 될 뿐 아니라,",
+      "hl2"
+     ],
+     [
+      "일부가 운 좋게 일에서 느끼는 이 성취감마저 텅 비게 될 수 있다는 것이다,",
+      "hl3"
+     ],
+     [
+      "그들이 목적을 찾고 만족스러운 삶을 살지 못하게 만들면서.",
+      "hl4"
+     ]
+    ],
+    "note": "근거: 소득뿐 아니라 일에서의 성취감(의미)까지 위협받음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "distribution … burdens",
+    "verdict": "x",
+    "jd": "✘ (B) 왜곡: 정서적 '보상'이지 '부담'이 아님"
+   },
+   {
+    "n": 2,
+    "tx": "distribution … rewards",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "concentration … conflicts",
+    "verdict": "x",
+    "jd": "✘ (A)(B) 모두 왜곡·미언급"
+   },
+   {
+    "n": 4,
+    "tx": "investment … challenges",
+    "verdict": "x",
+    "jd": "✘ (A) '투자' 미언급"
+   },
+   {
+    "n": 5,
+    "tx": "investment … <span class=\"reuse\">fulfilment</span>",
+    "verdict": "x",
+    "jd": "✘ (A) '투자'로 왜곡"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 부의 분배(A)·정서적 보상(B) · <span class=\"xo\">①</span>(B)를 '부담'으로 뒤집음 <span class=\"xo\">③④⑤</span>(A) 집중/투자로 왜곡·미언급",
+  "paraphrase": {
+   "from": "share out the fruits of growth·sense of fulfilment",
+   "to": "distribution·rewards",
+   "copies": [
+    "concentration",
+    "conflicts",
+    "challenges"
+   ]
+  }
+ },
+ {
+  "key": "2024-06|40",
+  "answer": 2,
+  "answer_src": "given",
+  "recon_opts": true,
+  "hl": [
+   {
+    "t": "The evolutionary process works on the genetic variation that is available.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It follows that natural selection is unlikely to lead to the evolution of perfect, ‘maximally fit’ individuals.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "It follows that"
+     }
+    ]
+   },
+   {
+    "t": "Rather, organisms come to match their environments by being ‘the fittest available’ or ‘the fittest yet’: they are not ‘the best imaginable’.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "Rather"
+     }
+    ]
+   },
+   {
+    "t": "Part of the lack of fit arises because the present properties of an organism have not all originated in an environment similar in every respect to the one in which it now lives.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "because"
+     }
+    ]
+   },
+   {
+    "t": "Over the course of its evolutionary history, an organism’s remote ancestors may have evolved a set of characteristics ― evolutionary ‘baggage’ ― that subsequently constrain future evolution.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "constrain"
+     }
+    ]
+   },
+   {
+    "t": "For many millions of years, the evolution of vertebrates has been limited to what can be achieved by organisms with a vertebral column.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Moreover, much of what we now see as precise matches between an organism and its environment may equally be seen as constraints: koala bears live successfully on Eucalyptus foliage, but, from another perspective, koala bears cannot live without Eucalyptus foliage.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "The survival characteristics that an organism currently carries may act as a(n) to its adaptability when the organism finds itself coping with changes that arise in",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "자연선택은 <b>완벽하지 않은</b> '현재 가능한 최적'만 만든다",
+     "an": "— 적합에는 한계가 있음"
+    },
+    {
+     "ko": "조상이 물려준 <b>진화적 '짐'</b>이 미래 진화를 제약한다",
+     "an": "— (A) 적응을 막는 '장애물(obstacle)'"
+    },
+    {
+     "ko": "정밀한 적합조차 <b>제약</b>이 될 수 있다(코알라=유칼립투스)",
+     "an": "— (B) 환경(surroundings) 변화 시 걸림돌이 됨"
+    }
+   ],
+   "concl": "→ 현재의 생존 특성은 적응의 '장애물(A)'이 되며, 그 변화는 '환경(B)'에서 생긴다 = <b>②</b>",
+   "gnote": "회색(도입·부연)과 척추동물 예시(skip)는 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "It follows that",
+      "hl0"
+     ],
+     [
+      "natural selection is unlikely to lead to",
+      "hl1"
+     ],
+     [
+      "the evolution of perfect, ‘maximally fit’ individuals.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서 ~라는 결론이 나온다",
+      "hl0"
+     ],
+     [
+      "자연 선택은 ~로 이어질 가능성이 낮다",
+      "hl1"
+     ],
+     [
+      "완벽한, '최대로 적합한' 개체들의 진화로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 자연 선택은 완벽한 개체를 만들지 않음"
+   },
+   {
+    "en": [
+     [
+      "Rather,",
+      "hl0"
+     ],
+     [
+      "organisms come to match their environments",
+      "hl1"
+     ],
+     [
+      "by being ‘the fittest available’ or ‘the fittest yet’:",
+      "hl2"
+     ],
+     [
+      "they are not ‘the best imaginable’.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "오히려,",
+      "hl0"
+     ],
+     [
+      "유기체들은 자신의 환경에 맞춰지게 된다",
+      "hl1"
+     ],
+     [
+      "'이용 가능한 것 중 가장 적합한' 또는 '지금까지 중 가장 적합한' 것이 됨으로써:",
+      "hl2"
+     ],
+     [
+      "그것들은 '상상할 수 있는 최선'이 아니다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 최선이 아니라 '가용한 것 중 최적'"
+   },
+   {
+    "en": [
+     [
+      "Over the course of its evolutionary history,",
+      "hl0"
+     ],
+     [
+      "an organism’s remote ancestors may have evolved a set of characteristics",
+      "hl1"
+     ],
+     [
+      "― evolutionary ‘baggage’ ―",
+      "hl2"
+     ],
+     [
+      "that subsequently constrain future evolution.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그 진화의 역사에 걸쳐,",
+      "hl0"
+     ],
+     [
+      "한 유기체의 먼 조상들은 일련의 특성들을 진화시켰을 수 있다",
+      "hl1"
+     ],
+     [
+      "― 진화적 '짐' ―",
+      "hl2"
+     ],
+     [
+      "그리고 그것이 이후 미래의 진화를 제약한다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 조상에게서 물려받은 특성이 진화를 제약"
+   },
+   {
+    "en": [
+     [
+      "Moreover,",
+      "hl0"
+     ],
+     [
+      "much of what we now see as precise matches between an organism and its environment",
+      "hl1"
+     ],
+     [
+      "may equally be seen as constraints:",
+      "hl2"
+     ],
+     [
+      "koala bears live successfully on Eucalyptus foliage,",
+      "hl3"
+     ],
+     [
+      "but, from another perspective, koala bears cannot live without Eucalyptus foliage.",
+      "hl4"
+     ]
+    ],
+    "ko": [
+     [
+      "게다가,",
+      "hl0"
+     ],
+     [
+      "우리가 지금 유기체와 그 환경 사이의 정밀한 조화라고 보는 것의 상당 부분은",
+      "hl1"
+     ],
+     [
+      "똑같이 제약으로 볼 수도 있다:",
+      "hl2"
+     ],
+     [
+      "코알라는 유칼립투스 잎으로 성공적으로 살아가지만,",
+      "hl3"
+     ],
+     [
+      "그러나 다른 관점에서, 코알라는 유칼립투스 잎 없이는 살 수 없다.",
+      "hl4"
+     ]
+    ],
+    "note": "근거: 정밀한 적응은 곧 제약이기도 함"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "improvement … diet",
+    "verdict": "x",
+    "jd": "✘ (A) '개선'은 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "obstacle … surroundings",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "advantage … environments",
+    "verdict": "x",
+    "jd": "✘ (A) '이점'은 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "regulator … mechanisms",
+    "verdict": "x",
+    "jd": "✘ (A) '조절자' 미언급"
+   },
+   {
+    "n": 5,
+    "tx": "guide … <span class=\"reuse\">environments</span>",
+    "verdict": "x",
+    "jd": "✘ (A) '안내자'로 왜곡"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 적응의 장애물(A)·환경 변화(B) · <span class=\"xo\">①③⑤</span>(A)를 개선/이점/안내로 반전 <span class=\"xo\">④</span>(A) '조절자' 미언급",
+  "paraphrase": {
+   "from": "constrain future evolution·may equally be seen as constraints",
+   "to": "obstacle·surroundings",
+   "copies": [
+    "improvement",
+    "advantage",
+    "regulator"
+   ]
+  }
+ },
+ {
+  "key": "2023-06|40",
+  "answer": 1,
+  "answer_src": "given",
+  "recon_opts": true,
+  "hl": [
+   {
+    "t": "Mobilities in transit offer a broad field to be explored by different disciplines in all faculties, in addition to the humanities.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In spite of increasing acceleration, for example in travelling through geographical or virtual space, our body becomes more and more a passive non-moving container, which is transported by artefacts or loaded up with inner feelings of being mobile in the so-called information society.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "In spite of"
+     }
+    ]
+   },
+   {
+    "t": "Technical mobilities turn human beings into some kind of terminal creatures, who spend most of their time at rest and who need to participate in sports in order to balance their daily disproportion of motion and rest.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Have we come closer to Aristotle’s image of God as the immobile mover, when elites exercise their power to move money, things and people, while they themselves do not need to move at all?",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "while"
+     }
+    ]
+   },
+   {
+    "t": "Others, at the bottom of this power, are victims of mobility-structured social exclusion.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "power"
+   },
+   {
+    "t": "They cannot decide how and where to move, but are just moved around or locked out or even locked in without either the right to move or the right to stay.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "In a technology and information society, human beings, whose bodily movement is less , appear to have gained increased mobility and power, and such a mobility-related human condition raises the issue of social",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "몸은 점점 <b>수동적·비이동</b> 상태의 컨테이너가 된다",
+     "an": "— 신체 이동이 덜 '필요(necessary)'해짐 (A)"
+    },
+    {
+     "ko": "엘리트는 <b>스스로 움직이지 않고도</b> 권력을 행사한다",
+     "an": "— 이동이 덜 필요한데도 이동성·권력↑"
+    },
+    {
+     "ko": "밑바닥의 타인은 <b>사회적 배제</b>의 희생자다",
+     "an": "— 사회적 '불평등(inequality)' 문제 제기 (B)"
+    }
+   ],
+   "concl": "→ 신체 이동이 덜 '필요(A)'해도 이동성·권력을 얻고, 이는 사회적 '불평등(B)' 문제를 낳는다 = <b>①</b>",
+   "gnote": "회색(도입·휴식/부연 문장)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In spite of increasing acceleration,",
+      "hl0"
+     ],
+     [
+      "for example in travelling through geographical or virtual space,",
+      "hl1"
+     ],
+     [
+      "our body becomes more and more a passive non-moving container,",
+      "hl2"
+     ],
+     [
+      "which is transported by artefacts",
+      "hl3"
+     ],
+     [
+      "or loaded up with inner feelings of being mobile in the so-called information society.",
+      "hl4"
+     ]
+    ],
+    "ko": [
+     [
+      "증가하는 가속에도 불구하고,",
+      "hl0"
+     ],
+     [
+      "예를 들어 지리적 혹은 가상 공간을 이동할 때,",
+      "hl1"
+     ],
+     [
+      "우리 몸은 점점 더 수동적이고 움직이지 않는 용기가 된다,",
+      "hl2"
+     ],
+     [
+      "그리고 그것은 인공물에 의해 운반되거나",
+      "hl3"
+     ],
+     [
+      "이른바 정보 사회에서 이동하고 있다는 내적 느낌으로 채워진다.",
+      "hl4"
+     ]
+    ],
+    "note": "근거: 가속의 시대에 몸은 오히려 수동적·부동의 용기가 됨"
+   },
+   {
+    "en": [
+     [
+      "Have we come closer to Aristotle’s image of God as the immobile mover,",
+      "hl0"
+     ],
+     [
+      "when elites exercise their power to move money, things and people,",
+      "hl1"
+     ],
+     [
+      "while they themselves do not need to move at all?",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 부동의 운동자로서의 신에 대한 아리스토텔레스의 이미지에 더 가까워졌는가,",
+      "hl0"
+     ],
+     [
+      "엘리트들이 돈과 사물과 사람을 움직이는 권력을 행사하면서,",
+      "hl1"
+     ],
+     [
+      "정작 그들 자신은 전혀 움직일 필요가 없을 때?",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 권력을 가진 엘리트는 움직이지 않고 남을 움직임"
+   },
+   {
+    "en": [
+     [
+      "Others, at the bottom of this power,",
+      "hl0"
+     ],
+     [
+      "are victims of mobility-structured social exclusion.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "다른 이들은, 이 권력의 맨 아래에서,",
+      "hl0"
+     ],
+     [
+      "이동성으로 구조화된 사회적 배제의 희생자이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 하층은 이동성 구조에 의한 사회적 배제의 희생자"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "necessary … inequality",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "necessary … growth",
+    "verdict": "x",
+    "jd": "✘ (B) '성장'은 미언급"
+   },
+   {
+    "n": 3,
+    "tx": "limited … cohesion",
+    "verdict": "x",
+    "jd": "✘ (A) '제한된' 왜곡·(B) 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "desirable … service",
+    "verdict": "x",
+    "jd": "✘ (A) '바람직한' 왜곡"
+   },
+   {
+    "n": 5,
+    "tx": "desirable … <span class=\"reuse\">divide</span>",
+    "verdict": "x",
+    "jd": "✘ (A) '바람직한' 왜곡"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 이동이 덜 필요함(A)·사회적 불평등(B) · <span class=\"xo\">②</span>(B) '성장' 미언급 <span class=\"xo\">③</span>(A) '제한'·(B) 반전 <span class=\"xo\">④⑤</span>(A) '바람직한'으로 왜곡",
+  "paraphrase": {
+   "from": "do not need to move at all·social exclusion",
+   "to": "necessary·inequality",
+   "copies": [
+    "desirable",
+    "growth",
+    "divide"
+   ]
+  }
+ },
+ {
+  "key": "2026-09|40",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "In most fiction, characters’ lives are limited to the individual work.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Readers may disagree on the characteristics and traits of fictional figures, and in drama there is room for different interpretations of characters.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "However, it is less common for characters in literary fiction to reappear in subsequent works than in genre fiction, where series featuring the same central characters are common.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "However"
+     }
+    ]
+   },
+   {
+    "t": "This is even more pronounced in comics, which are typically serialized in newspaper strips or comic books.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Thus characters introduced in the 1930s, like Superman and Batman, may still enjoy new adventures decades later.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "Thus"
+     }
+    ]
+   },
+   {
+    "t": "During these characters’ long histories, they change in various ways for a variety of reasons.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "characters"
+   },
+   {
+    "t": "If a character is created by a single author, like Sherlock Holmes, the character’s core traits may change little from story to story, but readers learn more about him with each successive story.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "On the other hand, if characters are the work of several hands over decades, they may change considerably.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "On the other hand"
+     }
+    ]
+   },
+   {
+    "t": "While characters in most literary fiction hardly ever in successive works, those in genre fiction and comics often do so, and may undergo their traits especially when written about by different authors over time.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "문학 소설 인물은 후속작에 <b>재등장이 드물다</b>(장르물·만화는 자주 등장)",
+     "an": "— (A) 장르물·만화 인물은 후속작에 계속 '등장한다(feature)'"
+    },
+    {
+     "ko": "긴 역사 속에서 인물은 <b>다양하게 변한다</b>",
+     "an": "— 형질이 고정이 아니라 바뀜"
+    },
+    {
+     "ko": "여러 작가의 손을 거치면 <b>상당히 변형된다</b>",
+     "an": "— (B) 형질의 '변형(transformation)'을 겪음"
+    }
+   ],
+   "concl": "→ 장르물·만화 인물은 후속작에 '등장하고(A)' 형질이 '변형됨(B)' = <b>④</b>",
+   "gnote": "회색(도입 문장·Superman/Batman 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "However,",
+      "hl0"
+     ],
+     [
+      "it is less common for characters in literary fiction to reappear in subsequent works",
+      "hl1"
+     ],
+     [
+      "than in genre fiction,",
+      "hl2"
+     ],
+     [
+      "where series featuring the same central characters are common.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나,",
+      "hl0"
+     ],
+     [
+      "순수 문학의 등장인물이 후속 작품에 다시 등장하는 것은 덜 흔하다",
+      "hl1"
+     ],
+     [
+      "장르 소설에서보다,",
+      "hl2"
+     ],
+     [
+      "장르 소설에서는 같은 중심 인물이 나오는 시리즈가 흔하다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 인물의 재등장은 장르 소설에서 흔함"
+   },
+   {
+    "en": [
+     [
+      "During these characters’ long histories,",
+      "hl0"
+     ],
+     [
+      "they change in various ways",
+      "hl1"
+     ],
+     [
+      "for a variety of reasons.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 인물들의 긴 역사 동안,",
+      "hl0"
+     ],
+     [
+      "그들은 다양한 방식으로 변한다",
+      "hl1"
+     ],
+     [
+      "다양한 이유로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 인물은 여러 이유로 다양하게 변함"
+   },
+   {
+    "en": [
+     [
+      "If a character is created by a single author, like Sherlock Holmes,",
+      "hl0"
+     ],
+     [
+      "the character’s core traits may change little from story to story,",
+      "hl1"
+     ],
+     [
+      "but readers learn more about him with each successive story.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "만약 한 인물이 셜록 홈즈처럼 단일 작가에 의해 창조되면,",
+      "hl0"
+     ],
+     [
+      "그 인물의 핵심 특성은 이야기마다 거의 변하지 않을 수 있지만,",
+      "hl1"
+     ],
+     [
+      "독자들은 이어지는 이야기마다 그에 대해 더 많이 알게 된다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 단일 작가 인물은 변화가 적음"
+   },
+   {
+    "en": [
+     [
+      "On the other hand,",
+      "hl0"
+     ],
+     [
+      "if characters are the work of several hands over decades,",
+      "hl1"
+     ],
+     [
+      "they may change considerably.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "반면에,",
+      "hl0"
+     ],
+     [
+      "만약 인물들이 수십 년에 걸쳐 여러 사람의 손으로 만들어진다면,",
+      "hl1"
+     ],
+     [
+      "그들은 상당히 변할 수 있다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 여러 작가의 인물은 크게 변함"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "resurface … simplification",
+    "verdict": "x",
+    "jd": "✘ (B) 왜곡: 형질이 '단순화'가 아니라 변형됨"
+   },
+   {
+    "n": 2,
+    "tx": "endure … degradation",
+    "verdict": "x",
+    "jd": "✘ (B) 왜곡: 단순 '악화'가 아님"
+   },
+   {
+    "n": 3,
+    "tx": "fade … preservation",
+    "verdict": "x",
+    "jd": "✘ (A)(B) 반대: 사라지지도, 보존되지도 않음"
+   },
+   {
+    "n": 4,
+    "tx": "feature … transformation",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "<span class=\"reuse\">disappear</span> … fossilization",
+    "verdict": "x",
+    "jd": "✘ (A) 반대: 사라지는 게 아니라 재등장"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 장르·만화 인물은 후속작에 계속 등장(A)하고 형질이 변형됨(B) · <span class=\"xo\">①②</span>(B)를 단순화/악화로 왜곡 <span class=\"xo\">③⑤</span>(A) 사라짐으로 반전",
+  "paraphrase": {
+   "from": "reappear in subsequent works·may change considerably",
+   "to": "feature … transformation",
+   "copies": [
+    "disappear",
+    "fade"
+   ]
+  },
+  "recon_opts": true
+ },
+ {
+  "key": "2027-06|40",
+  "answer": 5,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "In the pharmaceutical industry, algorithms are being employed to find treatments and drugs for rare diseases that to date haven’t received much attention.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The hard truth has always been that pharma devotes more research and development resources to diseases that affect the rich.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "been"
+   },
+   {
+    "t": "The definition of rare has too often been associated with poor ― that is, even if a disease is quite prevalent in a population that cannot aﬀord to pay for it (for example, people living in the developing world), the disease has been neglected compared to First World illnesses.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "that is"
+     }
+    ]
+   },
+   {
+    "t": "By lowering the cost of data collection, mining, and analysis in drug development and clinical trials, AI can help oﬀset imbalances in the pharmaceutical industry that direct attention to diseases that “pay,” whether because the disease is more common or because it is prevalent among demographics that can pay more.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "development"
+   },
+   {
+    "t": "We see the democratizing power of AI to broaden the attention of the medical and research communities to find cures to traditionally neglected health issues and among traditionally neglected populations.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "attention"
+   },
+   {
+    "t": "By lowering the cost of pharmaceutical research and development, AI can help reduce the imbalance in investment that has led to the of less profitable diseases, thereby broadening the focus of medical research to include populations.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "제약업계는 자원을 <b>부자 질병에 편중</b>한다",
+     "an": "— 돈 되는 병에 관심이 쏠리는 불균형"
+    },
+    {
+     "ko": "가난한 집단의 질병은 <b>방치(neglected)</b>되어 왔다",
+     "an": "— (A) 덜 수익성 있는 질병의 '방치(disregard)'"
+    },
+    {
+     "ko": "AI가 관심을 넓혀 <b>방치된 질병·집단</b>까지 포함",
+     "an": "— (B) 전통적으로 소외된 '취약(underserved)' 집단"
+    }
+   ],
+   "concl": "→ AI가 투자 불균형을 줄여 수익성 낮은 질병의 '방치(A)'를 완화하고 '소외된(B)' 집단까지 초점을 넓힘 = <b>⑤</b>",
+   "gnote": "회색(도입·개발도상국 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The hard truth has always been that",
+      "hl0"
+     ],
+     [
+      "pharma devotes more research and development resources",
+      "hl1"
+     ],
+     [
+      "to diseases that affect the rich.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "냉혹한 진실은 늘 ~라는 것이었다",
+      "hl0"
+     ],
+     [
+      "제약업계가 더 많은 연구 개발 자원을 쏟는다",
+      "hl1"
+     ],
+     [
+      "부유한 사람들에게 영향을 미치는 질병에.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 제약 R&D는 부자의 질병에 집중"
+   },
+   {
+    "en": [
+     [
+      "The definition of rare has too often been associated with poor ―",
+      "hl0"
+     ],
+     [
+      "that is, even if a disease is quite prevalent in a population that cannot afford to pay for it",
+      "hl1"
+     ],
+     [
+      "(for example, people living in the developing world),",
+      "hl2"
+     ],
+     [
+      "the disease has been neglected compared to First World illnesses.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "'희귀'라는 정의는 너무 자주 '가난'과 결부되어 왔다 ―",
+      "hl0"
+     ],
+     [
+      "즉, 어떤 질병이 그 비용을 지불할 여유가 없는 인구 집단에서 상당히 흔하더라도",
+      "hl1"
+     ],
+     [
+      "(예를 들어, 개발도상국에 사는 사람들),",
+      "hl2"
+     ],
+     [
+      "그 질병은 선진국의 질병에 비해 방치되어 왔다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 지불 능력 없는 집단의 질병은 방치됨"
+   },
+   {
+    "en": [
+     [
+      "By lowering the cost of data collection, mining, and analysis in drug development and clinical trials,",
+      "hl0"
+     ],
+     [
+      "AI can help offset imbalances in the pharmaceutical industry",
+      "hl1"
+     ],
+     [
+      "that direct attention to diseases that “pay,”",
+      "hl2"
+     ],
+     [
+      "whether because the disease is more common or because it is prevalent among demographics that can pay more.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "신약 개발과 임상 시험에서 데이터 수집, 채굴, 분석의 비용을 낮춤으로써,",
+      "hl0"
+     ],
+     [
+      "AI는 제약 산업의 불균형을 상쇄하는 데 도움을 줄 수 있다",
+      "hl1"
+     ],
+     [
+      "'돈이 되는' 질병으로 관심을 돌리는 그 불균형을,",
+      "hl2"
+     ],
+     [
+      "그 질병이 더 흔해서든 아니면 더 많이 지불할 수 있는 계층에서 만연해서든.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: AI가 비용을 낮춰 제약 산업의 불균형을 상쇄"
+   },
+   {
+    "en": [
+     [
+      "We see the democratizing power of AI",
+      "hl0"
+     ],
+     [
+      "to broaden the attention of the medical and research communities",
+      "hl1"
+     ],
+     [
+      "to find cures to traditionally neglected health issues",
+      "hl2"
+     ],
+     [
+      "and among traditionally neglected populations.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 AI의 민주화하는 힘을 본다",
+      "hl0"
+     ],
+     [
+      "의학 및 연구 공동체의 관심을 넓혀",
+      "hl1"
+     ],
+     [
+      "전통적으로 방치된 건강 문제에 대한 치료법을 찾도록,",
+      "hl2"
+     ],
+     [
+      "그리고 전통적으로 방치된 인구 집단 사이에서.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: AI가 방치된 질병·집단으로 관심을 넓힘(민주화)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "prevention … marginalized",
+    "verdict": "x",
+    "jd": "✘ (A) 왜곡: '예방'이 아니라 방치를 뜻함"
+   },
+   {
+    "n": 2,
+    "tx": "spread … privileged",
+    "verdict": "x",
+    "jd": "✘ (A)(B) 반대: 확산·특권층이 아님"
+   },
+   {
+    "n": 3,
+    "tx": "overlook … affluent",
+    "verdict": "x",
+    "jd": "✘ (B) 반대: '부유층'이 아니라 소외 집단"
+   },
+   {
+    "n": 4,
+    "tx": "ignorance … <span class=\"reuse\">wealthy</span>",
+    "verdict": "x",
+    "jd": "✘ (B) 반대: '부유한' 집단이 아님"
+   },
+   {
+    "n": 5,
+    "tx": "disregard … underserved",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 수익성 낮은 질병의 방치(A)를 줄여 소외된(B) 집단까지 초점 확대 · <span class=\"xo\">①②</span>(A)를 예방/확산으로 왜곡 <span class=\"xo\">③④</span>(B)를 부유층으로 반전",
+  "paraphrase": {
+   "from": "the disease has been neglected·traditionally neglected populations",
+   "to": "disregard … underserved",
+   "copies": [
+    "prevention",
+    "wealthy"
+   ]
+  },
+  "recon_opts": true
+ },
+ {
+  "key": "2023-수능|40",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "“Craftsmanship” may suggest a way of life that declined with the arrival of industrial society ― but this is misleading.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "Craftsmanship names an enduring, basic human impulse, the desire to do a job well for its own sake.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "Craftsmanship"
+   },
+   {
+    "t": "Craftsmanship cuts a far wider swath than skilled manual labor; it serves the computer programmer, the doctor, and the artist; parenting improves when it is practiced as a skilled craft, as does citizenship.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "In all these domains, craftsmanship focuses on objective standards, on the thing in itself.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Social and economic conditions, however, often stand in the way of the craftsman’s discipline and commitment: schools may fail to provide the tools to do good work, and workplaces may not truly value the aspiration for quality.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "however"
+     }
+    ]
+   },
+   {
+    "t": "And though craftsmanship can reward an individual with a sense of pride in work, this reward is not simple.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "though"
+     }
+    ]
+   },
+   {
+    "t": "The craftsman often faces conflicting objective standards of excellence; the desire to do something well for its own sake can be weakened by competitive pressure, by frustration, or by obsession.",
+    "role": "yellow",
+    "tags": [],
+    "pos": "반복어",
+    "posword": "often"
+   },
+   {
+    "t": "Craftsmanship, a human desire that has time in diverse contexts, often encounters factors that its full development.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "장인 정신이 쇠퇴했다는 통념은 <b>오해</b>다",
+     "an": "— 사실은 여러 맥락에서 '지속(persisted)'됨(A)"
+    },
+    {
+     "ko": "그것은 <b>지속적이고 근본적인 인간 욕구</b>다",
+     "an": "— (A) 시대·맥락에 걸쳐 '지속됨(persisted)'"
+    },
+    {
+     "ko": "그러나 사회·경제 조건과 여러 요인이 <b>발현을 가로막고 약화</b>시킨다",
+     "an": "— (B) 완전한 발전을 '제한함(limit)'"
+    }
+   ],
+   "concl": "→ 장인 정신은 다양한 맥락에서 '지속되어(A)' 왔으나, 그 온전한 발전을 '제한하는(B)' 요인을 자주 만남 = <b>②</b>",
+   "gnote": "회색(프로그래머·의사 등 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "“Craftsmanship” may suggest a way of life",
+      "hl0"
+     ],
+     [
+      "that declined with the arrival of industrial society ―",
+      "hl1"
+     ],
+     [
+      "but this is misleading.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "'장인 정신'은 하나의 삶의 방식을 떠올리게 할 수 있다",
+      "hl0"
+     ],
+     [
+      "산업 사회의 도래와 함께 쇠퇴한 ―",
+      "hl1"
+     ],
+     [
+      "그러나 이것은 오해를 불러일으킨다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 장인 정신이 산업 사회로 쇠퇴했다는 통념은 오해"
+   },
+   {
+    "en": [
+     [
+      "Craftsmanship names an enduring, basic human impulse,",
+      "hl0"
+     ],
+     [
+      "the desire to do a job well",
+      "hl1"
+     ],
+     [
+      "for its own sake.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "장인 정신은 지속적이고 기본적인 인간의 충동을 가리킨다,",
+      "hl0"
+     ],
+     [
+      "일을 잘 해내려는 욕구,",
+      "hl1"
+     ],
+     [
+      "그 자체를 위해.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 장인 정신은 일 자체를 잘하려는 지속적 인간 충동"
+   },
+   {
+    "en": [
+     [
+      "Social and economic conditions, however, often stand in the way of the craftsman’s discipline and commitment:",
+      "hl0"
+     ],
+     [
+      "schools may fail to provide the tools to do good work,",
+      "hl1"
+     ],
+     [
+      "and workplaces may not truly value the aspiration for quality.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 사회적, 경제적 조건은 흔히 장인의 규율과 헌신을 가로막는다:",
+      "hl0"
+     ],
+     [
+      "학교는 좋은 일을 할 도구를 제공하지 못할 수 있고,",
+      "hl1"
+     ],
+     [
+      "직장은 질에 대한 열망을 진정으로 가치 있게 여기지 않을 수 있다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 사회·경제적 조건이 장인의 헌신을 방해"
+   },
+   {
+    "en": [
+     [
+      "The craftsman often faces conflicting objective standards of excellence;",
+      "hl0"
+     ],
+     [
+      "the desire to do something well for its own sake can be weakened",
+      "hl1"
+     ],
+     [
+      "by competitive pressure, by frustration, or by obsession.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "장인은 흔히 상충하는 객관적 우수성의 기준에 직면한다;",
+      "hl0"
+     ],
+     [
+      "그 자체를 위해 무언가를 잘 하려는 욕구는 약화될 수 있다",
+      "hl1"
+     ],
+     [
+      "경쟁적 압박, 좌절, 또는 집착에 의해.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 경쟁·좌절·집착이 장인 정신을 약화시킴"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "persisted … enhance",
+    "verdict": "x",
+    "jd": "✘ (B) 반대: 발전을 '촉진'이 아니라 제한"
+   },
+   {
+    "n": 2,
+    "tx": "persisted … limit",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "evolved … accelerate",
+    "verdict": "x",
+    "jd": "✘ (A)(B) 반대: 진화·가속이 아님"
+   },
+   {
+    "n": 4,
+    "tx": "<span class=\"reuse\">diminished</span> … shape",
+    "verdict": "x",
+    "jd": "✘ (A) 반대: '약화'가 아니라 지속"
+   },
+   {
+    "n": 5,
+    "tx": "diminished … restrict",
+    "verdict": "x",
+    "jd": "✘ (A) 반대: (B)는 맞으나 (A) '약화'가 틀림"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 장인 정신은 여러 맥락에서 지속됨(A), 발전을 제한(B)하는 요인 만남 · <span class=\"xo\">①③</span>(B)를 촉진/가속으로 반전 <span class=\"xo\">④⑤</span>(A) '약화됨'으로 반대",
+  "paraphrase": {
+   "from": "an enduring, basic human impulse·stand in the way·can be weakened",
+   "to": "persisted … limit",
+   "copies": [
+    "diminished",
+    "evolved"
+   ]
+  },
+  "recon_opts": true
  }
 ]
