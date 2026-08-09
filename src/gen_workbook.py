@@ -5,7 +5,7 @@
 각 문항 = 2쪽 펼침면:
   · STEP 1 (왼쪽) 직접 풀기 — 깨끗한 지문 + 선지 + 셀프체크
   · STEP 2 (오른쪽 상) 훈련(정답 칠) — 🟡형광펜·🔴신호 + 노랑 도출 + 선지 판정 + 공식
-  · STEP 3 (오른쪽 하) 해석(직독직해) — 같은 형광펜 색끼리 영↔한 청크 대응
+  · STEP 3 (오른쪽 하) 해석(직독직해) — 슬래시(/)로 끊어 읽기 · 영↔한 청크 대응
 
 콘텐츠(도출·직독직해·판정)는 corpus/workbook_content.json 에서 읽는다
 (subagent가 지문별로 생성). 콘텐츠가 없는 문항은 간이 훈련 카드로 폴백.
@@ -603,7 +603,7 @@ def band_divider(b, recs, seq, total_bands):
       <div class="bd-steps">
         <div class="st"><span class="k">STEP 1</span><b>직접 풀기</b><span class="d">신호를 떠올리며 직접 형광펜을 치고 답을 고른다 (왼쪽 페이지)</span></div>
         <div class="st"><span class="k">STEP 2</span><b>훈련 · 정답 칠</b><span class="d">🟡읽을 문장·🔴칠한 근거 + 노랑만으로 정답 도출 + 선지 판정</span></div>
-        <div class="st"><span class="k">STEP 3</span><b>직독직해</b><span class="d">같은 형광펜 색끼리 영↔한 청크 대응 (오른쪽 페이지)</span></div>
+        <div class="st"><span class="k">STEP 3</span><b>직독직해</b><span class="d">슬래시(/)로 끊어 읽기 · 영↔한 청크 대응 (오른쪽 페이지)</span></div>
       </div>'''
     remind_head = "🔗 연결고리 단서" if seqmode else "📢 이 유형 신호 리마인더"
     return f'''<section class="banddiv"><span class="wbm">wbspread</span>
