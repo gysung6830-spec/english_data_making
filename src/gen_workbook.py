@@ -348,6 +348,32 @@ def exam_src(eid):
     return f"{esc(y)}학년도 {esc(m)}"
 
 
+def item_signals(hl):
+    """이 문항에 '실제로 쓰인' 노랑 신호로 리마인더 칩 생성 → 노랑 형광펜과 일치."""
+    chips, seen, has_skip = [], set(), False
+    def add(label, cls):
+        if label and label not in seen:
+            seen.add(label); chips.append((label, cls))
+    for seg in hl:
+        role = seg.get("role")
+        if role == "skip":
+            has_skip = True; continue
+        if role not in ("yellow", "gray"):
+            continue
+        cls = "y" if role == "yellow" else "g"
+        for t in (seg.get("tags") or []):
+            sig, word = t.get("sig", ""), t.get("word", "")
+            if sig:
+                add(f"{sig} {word}".strip(), cls)
+        pos = seg.get("pos")
+        if role == "yellow" and pos and not seg.get("tags"):
+            pw = seg.get("posword")
+            add(f"{pos} {pw}".strip() if pw else pos, "y")
+    if has_skip:
+        add("예시·부연 ✕ 넘김", "g")
+    return chips[:7]
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -359,13 +385,14 @@ def render_spread(rec, c, idx):
     opt_lines = ""
     for k in sorted(int(x) for x in choices):
         opt_lines += f'<span class="o">{CIRCLED[k-1]} {esc(choices[str(k)])}</span>'
-    # 신호 리마인더 칩
-    chips = "".join(f'<span class="chip {cl}">{esc(tx)}</span>' for tx, cl in REMIND.get(band, REMIND["31-34"]))
     formula = FORMULA.get(typ, "")
     src_ans = c.get("answer_src", "given")
     ans_note = "" if src_ans == "given" else " <span style=\"font-size:8px;color:#a86b00\">(정답 미공개 → 풀이로 확정)</span>"
     # 순서(36·37)·삽입(38·39)은 '연결고리' 풀이법
     seqtype = "순서" if num in (36, 37) else ("삽입" if num in (38, 39) else "")
+    # 신호 리마인더 칩 — 순서·삽입은 연결고리(고정), 그 외는 '이 문항 실제 노랑 신호'로 생성
+    _sig = REMIND.get(band, REMIND["31-34"]) if seqtype else (item_signals(hl) or REMIND.get(band, REMIND["31-34"]))
+    chips = "".join(f'<span class="chip {cl}">{esc(tx)}</span>' for tx, cl in _sig)
     cn = _CONNECT.get(f'{rec.get("exam_id","")}|{num}') if seqtype else None
     # 삽입: 삽입할 문장(seq_direct의 '넣을 문장')을 본문과 분리해 띄워 표시
     insert_en = None
