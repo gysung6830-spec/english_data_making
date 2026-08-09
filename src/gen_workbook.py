@@ -386,6 +386,8 @@ def restate_problem(rt):
     """STEP1 문제면 하단 — 지문을 주고 A→A′→A″(→A‴) / A·B 로 '직접 잇는' 재진술 연결 문제."""
     if not rt:
         return ""
+    if rt.get("has_restate") is False:
+        return ""  # 재진술 없음 → 문제 미출제
     kind = rt.get("kind", "single")
     subs = rt.get("subjects") or []
     # 재진술이 실제로 있는 만큼만 문제화 — 없으면(사슬<2) 문제 자체를 내지 않는다.
@@ -446,6 +448,8 @@ def _rrows(letter, seq):
 def restate_card(rt):
     """STEP3 오른쪽 — 재진술 지도. 한 소재 A→A′→A″→A‴ / 두 소재 A…·B…로 되풀이를 추적."""
     if not rt:
+        return ""
+    if rt.get("has_restate") is False:
         return ""
     thesis = esc(rt.get("thesis", ""))
     echo = esc(rt.get("echo", ""))

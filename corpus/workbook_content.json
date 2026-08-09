@@ -313,6 +313,7 @@
   "restate": {
    "thesis": "등반 성취감을 외부 요인에 두면 착각·허구에 근거한 것이 된다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "puts you at the whim of external factors",
@@ -571,6 +572,7 @@
   "restate": {
    "thesis": "데이터 수집을 깊이 이해하면 소비자는 주체적 참여자가 된다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the consumer who plays a large role in the notion of the privacy paradox",
@@ -890,6 +892,7 @@
   "restate": {
    "thesis": "동물의 크기가 수명과 생존 방식(본능 대 학습)을 좌우한다",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "A telescoping of time correlates with size",
@@ -1190,6 +1193,7 @@
   "restate": {
    "thesis": "뇌의 시각 처리는 요소별로 분리·독립되어 있다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Different parts of the brain’s visual system get information on a need-to-know basis",
@@ -1457,6 +1461,7 @@
   "restate": {
    "thesis": "작가는 실제 묘사 없이도 독자가 정확히 묘사받은 듯 느끼게 한다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "they have simply given you an outline to fill in",
@@ -1467,14 +1472,8 @@
     {
      "en": "we mistake being told what effect someone’s appearance has for an account of that appearance",
      "ko": "외모의 효과를 실제 묘사로 착각한다",
-     "role": "재진술",
-     "how": "동의어"
-    },
-    {
-     "en": "he had just the kind of appearance one would expect a young man of his type to have",
-     "ko": "흔히 예상되는 외모 정도만 말함",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "동의어"
     }
    ],
    "echo": "'채워 넣을 윤곽만 준다'가 빈칸 '정확히 묘사받은 듯 느낀다'를 재진술"
@@ -1698,6 +1697,7 @@
   "restate": {
    "thesis": "식물은 분열조직으로 재해에서 재생하는 능력을 지닌다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Plants have a remarkable ability to recover from disaster",
@@ -2146,33 +2146,22 @@
   "restate": {
    "thesis": "규범은 한 사람의 행동을 남들이 따르며 생겨난다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
-     "en": "the start of a norm occurs when one person acts in a particular manner",
-     "ko": "규범은 한 사람이 행동할 때 시작된다",
+     "en": "Norms emerge in groups as a result of people conforming to the behavior of others",
+     "ko": "규범은 남의 행동을 따르며 생겨난다",
      "role": "주제문",
      "how": "—"
     },
     {
      "en": "Others may then conform to this behavior",
      "ko": "그러면 남들이 그 행동을 따른다",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "she may prescribe the behavior to them",
-     "ko": "그녀가 그들에게 행동을 규정한다",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "some others will not need to have the behavior prescribed to them",
-     "ko": "일부는 규정 없이 스스로 따른다",
      "role": "정답근거",
-     "how": "반대구조"
+     "how": "반복"
     }
    ],
-   "echo": "대명사 흐름(she→others→them, But)이 순서 (C)-(A)-(B)를 확정"
+   "echo": "'남들이 그 행동을 따른다'가 규범의 순응적 생성을 반복해 재진술"
   }
  },
  {
@@ -2432,23 +2421,24 @@
    ]
   },
   "restate": {
-   "thesis": "홀로 자란 강한 나무는 잘 자라도 오래 살지 못한다",
+   "thesis": "나무는 둘러싼 숲이 있어야 가장 잘 자랄 수 있다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
-     "en": "Some individuals photosynthesize like mad until sugar positively bubbles along their trunk",
-     "ko": "어떤 나무는 미친 듯 광합성해 당이 넘친다(강자)",
+     "en": "each tree can grow into the best tree it can be",
+     "ko": "함께 자라면 각 나무가 최선으로 자란다",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "This is because a tree can be only as strong as the forest that surrounds it",
-     "ko": "나무는 둘러싼 숲만큼만 강할 수 있기 때문",
+     "en": "a tree can be only as strong as the forest that surrounds it",
+     "ko": "나무는 둘러싼 숲만큼만 강할 수 있다",
      "role": "정답근거",
      "how": "추상화"
     }
    ],
-   "echo": "①강자 등장→삽입문(오래 못 삶)→②'This is because'의 인과 공백이 ②"
+   "echo": "'숲만큼만 강하다'가 '함께 자라야 최선'을 추상화해 재진술"
   }
  },
  {
@@ -2773,8 +2763,9 @@
   },
   "uline": "a nonstick frying pan",
   "restate": {
-   "thesis": "주의를 넓게 두면 스트레스를 더 큰 관점으로 흘려보낼 수 있다.",
+   "thesis": "주의를 넓게 두면 스트레스를 더 큰 관점으로 흘려보낼 수 있다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "How you focus your attention plays a critical role in how you deal with stress.",
@@ -2801,8 +2792,7 @@
      "how": "비유→직설"
     }
    ],
-   "subjects": [],
-   "echo": "정답은 'widened focus·broader perspective·egg won’t stick'을 '스트레스 요소를 넘어선 더 큰 관점'으로 재진술."
+   "echo": "정답은 '넓힌 주의·더 큰 관점·안 붙는 계란'을 '스트레스를 넘어선 관점'으로 재진술"
   }
  },
  {
@@ -3027,6 +3017,7 @@
   "restate": {
    "thesis": "익명의 인터넷 정보는 진위를 신중히 의심·검증해야 한다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "it just pays to be a little paranoid",
@@ -3342,6 +3333,7 @@
   "restate": {
    "thesis": "토론에서의 필기는 능동적 참여에 중요한 도구다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Writing is an invaluable tool for accomplishing these tasks",
@@ -3662,26 +3654,15 @@
    ]
   },
   "restate": {
-   "thesis": "오버투어리즘은 단순히 사람·장소(물리적 포화)의 문제가 아니다",
+   "thesis": "오버투어리즘의 포화는 단순 물리 문제가 아니라 상대적이다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
-    {
-     "en": "stable containers with clear boundaries",
-     "ko": "경계 뚜렷한 안정된 그릇",
-     "role": "주제문",
-     "how": "—"
-    },
-    {
-     "en": "full of people",
-     "ko": "사람으로 가득 참",
-     "role": "재진술",
-     "how": "동의어"
-    },
     {
      "en": "things become more complex",
      "ko": "문제가 더 복잡해진다",
-     "role": "재진술",
-     "how": "반대구조"
+     "role": "주제문",
+     "how": "—"
     },
     {
      "en": "highly relative",
@@ -3690,7 +3671,7 @@
      "how": "추상화"
     }
    ],
-   "echo": "지문의 more complex·highly relative를 '단순히 사람·장소의 문제가 아님'으로 재진술"
+   "echo": "more complex·highly relative가 '단순히 사람·장소의 문제가 아님'을 재진술"
   }
  },
  {
@@ -3982,8 +3963,9 @@
    "copies": []
   },
   "restate": {
-   "thesis": "가치는 유동적이나 수집가는 용기 있게 확신을 단언한다",
+   "thesis": "예술 가치는 의존적·유동적이어서 합의는 결국 밀려난다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "dependent and shifting nature of art values",
@@ -3995,22 +3977,16 @@
      "en": "only the validation of a present-day consensus",
      "ko": "기껏해야 현재의 합의뿐",
      "role": "재진술",
-     "how": "동의어"
+     "how": "추상화"
     },
     {
      "en": "all but certain to be displaced",
      "ko": "거의 확실히 밀려날 것",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "courageously affirms",
-     "ko": "용기 있게 단언한다",
      "role": "정답근거",
-     "how": "반대구조"
+     "how": "반복"
     }
    ],
-   "echo": "유동적 합의에도 courageously affirms하는 확신을 '작품의 독창성은 흔들리지 않는다'로 재진술"
+   "echo": "유동적 합의에도 courageously affirms하는 확신을 '독창성은 흔들리지 않는다'로 재진술"
   }
  },
  {
@@ -4252,8 +4228,9 @@
    "copies": []
   },
   "restate": {
-   "thesis": "유연근무(재택) 수용은 여러 장벽에 의해 제한된다",
+   "thesis": "유연근무 수용은 여러 장벽에 의해 제한된다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "limited by a variety of factors",
@@ -4262,14 +4239,8 @@
      "how": "—"
     },
     {
-     "en": "physical presence is essential to genuine productivity",
-     "ko": "물리적 존재가 생산성에 필수라는 믿음",
-     "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
-     "en": "evaluate workers by results rather than by hours seen at a desk",
-     "ko": "자리 시간이 아닌 성과로 평가",
+     "en": "Only when these barriers are removed will flexible workplace programs gain full acceptance",
+     "ko": "장벽이 제거될 때에야 완전히 수용됨",
      "role": "정답근거",
      "how": "반대구조"
     }
@@ -4674,8 +4645,9 @@
    ]
   },
   "restate": {
-   "thesis": "장관은 문화적 틀 안에서 기존과 혁신을 결합해 만들어진다",
+   "thesis": "장관은 문화적 틀 안에서 그 문화의 결을 따라 만들어진다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "spectacle works primarily within a cultural frame",
@@ -4684,25 +4656,13 @@
      "how": "—"
     },
     {
-     "en": "blending the innovative with the established",
-     "ko": "혁신과 기존을 결합",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "imitation is not enough",
-     "ko": "모방만으론 부족",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
-     "en": "Spectacle must also be spectacular",
-     "ko": "장관은 놀라워야 한다",
+     "en": "working with the grain of a particular culture",
+     "ko": "특정 문화의 결을 따라 작업",
      "role": "정답근거",
-     "how": "반복"
+     "how": "동의어"
     }
    ],
-   "echo": "지시어 In saying that·By extension·also가 재진술로 (C)-(A)-(B) 순서를 연결 = ④"
+   "echo": "지시어 In saying that·By extension이 문화적 틀 재진술로 (C)-(A)-(B) 연결 = ④"
   }
  },
  {
@@ -5047,8 +5007,9 @@
    ]
   },
   "restate": {
-   "thesis": "유리한 돌연변이는 다음 세대로 퍼지나 책엔 그런 기제가 없다",
+   "thesis": "적응도를 높이는 돌연변이는 곧 유리한 돌연변이다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "a mutation may occur that increases the fitness",
@@ -5059,23 +5020,11 @@
     {
      "en": "A favorable mutation",
      "ko": "유리한 돌연변이",
-     "role": "재진술",
-     "how": "동의어"
-    },
-    {
-     "en": "more heavily represented in the next generation",
-     "ko": "다음 세대에 더 많이 나타남",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "By contrast, there is no mechanism by which a book",
-     "ko": "반면 책엔 그런 기제 없음",
      "role": "정답근거",
-     "how": "반대구조"
+     "how": "동의어"
     }
    ],
-   "echo": "삽입문 A favorable mutation이 앞 문장 increases the fitness를 지시로 재진술 = ④ 자리"
+   "echo": "삽입문 A favorable mutation이 앞 문장 increases the fitness를 재진술 = ④ 자리"
   }
  },
  {
@@ -5377,6 +5326,7 @@
   "restate": {
    "thesis": "우리는 관점을 통해서만 세계를 볼 뿐 순수 객관적 시각은 없다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "given to us from the outside in a pure, objective form",
@@ -5403,7 +5353,7 @@
      "how": "비유→직설"
     }
    ],
-   "echo": "'view from nowhere'는 곧 관점 없는 unbiased and objective view를 재진술 = ⑤"
+   "echo": "'view from nowhere'는 관점 없는 unbiased and objective view를 재진술 = ⑤"
   }
  },
  {
@@ -5637,6 +5587,7 @@
   "restate": {
    "thesis": "고객의 브랜드 칭찬에 응답하는 것이 관계 형성에 중요하다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "prioritize your responses allows you to connect more deeply",
@@ -5645,19 +5596,13 @@
      "how": "—"
     },
     {
-     "en": "most brand compliments go unanswered",
-     "ko": "대부분의 브랜드 칭찬은 무응답",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
      "en": "lost opportunities to understand what drove the compliments and create a solid fan",
      "ko": "팬을 만들 기회를 놓침",
      "role": "정답근거",
-     "how": "추상화"
+     "how": "반대구조"
     }
    ],
-   "echo": "무응답 칭찬이 lost opportunities라는 재진술로 '칭찬에 응답하는 것이 중요'를 도출 = ②"
+   "echo": "무응답 칭찬이 lost opportunities라는 재진술로 '칭찬에 응답이 중요' 도출 = ②"
   }
  },
  {
@@ -5947,6 +5892,7 @@
   "restate": {
    "thesis": "문화가 구성하는 것은 감정 자체가 아니라 감정의 표상이다",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "do not actually show that different cultures have different emotions",
@@ -5958,7 +5904,7 @@
      "en": "how we interpret, categorize, and name emotions varies according to culture",
      "ko": "해석·범주화·명명은 문화 따라 다름",
      "role": "재진술",
-     "how": "예시→일반화"
+     "how": "추상화"
     },
     {
      "en": "the emotional states themselves are likely to be quite invariant",
@@ -6233,27 +6179,28 @@
   "restate": {
    "thesis": "초이동성이 늘어도 접근성 위기를 낳아 늘 좋은 것은 아니다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
-     "en": "generates greater economic success",
-     "ko": "더 큰 경제적 성공을 낳는다는 통념",
+     "en": "access to places, activities and services has become increasingly difficult",
+     "ko": "장소·활동·서비스 접근이 점점 더 어려워짐",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "access to places, activities and services has become increasingly difficult",
-     "ko": "장소·서비스 접근은 오히려 더 어려워짐",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
      "en": "unprecedented accessibility crisis",
      "ko": "유례없는 접근성 위기",
-     "role": "정답근거",
+     "role": "재진술",
      "how": "추상화"
+    },
+    {
+     "en": "unsustainable mobility systems",
+     "ko": "지속 불가능한 이동성 체계",
+     "role": "정답근거",
+     "how": "동의어"
     }
    ],
-   "echo": "이동성 증가에도 accessibility crisis라는 역접으로 'Is Hyper-mobility Always Good?' 제목 도출 = ①"
+   "echo": "접근성 어려움 강조 → '초이동성 늘 좋은가?' 제목 도출"
   }
  },
  {
@@ -6487,18 +6434,19 @@
    ]
   },
   "restate": {
-   "thesis": "도시는 사람들 간 최대의 접촉을 제공해 언어·유행 혁신을 이끈다.",
+   "thesis": "도시는 사람들 간 최대의 접촉을 제공해 언어·유행 혁신을 이끈다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Slang, or, if you prefer, “lexical innovation,” has always started in cities ― an outgrowth of all those different people so frequently exposed to one another.",
-     "ko": "언어 혁신은 서로 자주 노출된 다양한 사람들에게서 도시에서 시작된다",
+     "ko": "언어 혁신은 서로 자주 노출된 다양한 사람들 덕에 도시에서 시작",
      "role": "주제문",
      "how": "—"
     },
     {
      "en": "language innovation would happen where the most people heard and talked to the most other people",
-     "ko": "가장 많은 사람이 서로 듣고 말하는 곳에서 언어 혁신이 일어난다",
+     "ko": "가장 많은 사람이 서로 듣고 말하는 곳에서 언어 혁신",
      "role": "재진술",
      "how": "동의어"
     },
@@ -6509,8 +6457,7 @@
      "how": "반복"
     }
    ],
-   "subjects": [],
-   "echo": "정답은 'exposed to one another·heard and talked to the most other people'를 '타인에게 최대의 노출을 제공한다'로 재진술."
+   "echo": "정답은 'exposed to one another·heard and talked to the most other people'를 '타인에게 최대의 노출을 제공'으로 재진술"
   }
  },
  {
@@ -6743,8 +6690,9 @@
    "copies": []
   },
   "restate": {
-   "thesis": "어린 새는 본(template)과 연습으로 어른 새 노래를 재현한다",
+   "thesis": "어린 새는 학습과 연습으로 어른 새 노래를 재현한다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "learn to reproduce the song of an adult tutor",
@@ -6753,16 +6701,10 @@
      "how": "—"
     },
     {
-     "en": "stores it as a kind of template",
-     "ko": "일종의 본으로 저장",
-     "role": "재진술",
-     "how": "동의어"
-    },
-    {
-     "en": "matches the stored template",
-     "ko": "저장된 본에 맞춰 감",
+     "en": "an accurate copy produced through this long process of listening and self-correction",
+     "ko": "듣기와 자기교정의 긴 과정으로 만든 정확한 복제",
      "role": "정답근거",
-     "how": "반복"
+     "how": "동의어"
     }
    ],
    "echo": "'colorful feathers ~ attract mates' 외형·번식 문장은 노래 학습 흐름과 무관 = ④"
@@ -7053,6 +6995,7 @@
   "restate": {
    "thesis": "매몰비용 성향은 나쁘기만 한 게 아니라 이롭게 활용할 수 있다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the sunk cost fallacy",
@@ -7061,25 +7004,19 @@
      "how": "—"
     },
     {
-     "en": "you overvalue that thing",
-     "ko": "그것을 과대평가한다",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
      "en": "Sunk cost doesn’t always have to be a bad thing",
      "ko": "매몰비용이 늘 나쁜 건 아니다",
      "role": "재진술",
      "how": "반대구조"
     },
     {
-     "en": "leverage this human tendency to your benefit",
+     "en": "you can leverage this human tendency to your benefit",
      "ko": "이 성향을 이롭게 활용할 수 있다",
      "role": "정답근거",
      "how": "추상화"
     }
    ],
-   "echo": "‘과대평가→This’와 ‘나쁘지 않다→Actually 활용’의 재진술로 (B)-(A)-(C) 순서가 된다."
+   "echo": "‘나쁘지 않다→Actually 활용’의 재진술로 (B)-(A)-(C) 순서가 된다."
   }
  },
  {
@@ -7290,57 +7227,18 @@
    ]
   },
   "restate": {
-   "thesis": "귀여운·아름다운 디자인은 다른 동기를 유발하며 각각 단점도 있다.",
-   "kind": "compare",
+   "thesis": "귀엽고 아름다운 디자인은 서로 다른 두 동기를 유발한다.",
+   "kind": "single",
+   "has_restate": false,
    "chain": [
     {
      "en": "cute and beautiful designs elicit two very different motivations",
      "ko": "귀엽고 아름다운 디자인은 두 다른 동기를 유발",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "reduce performance expectations",
-     "ko": "성능 기대를 낮춤(귀여움의 단점)",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
-     "en": "may not attract attention over time",
-     "ko": "시간이 지나면 주목받지 못함(아름다움의 단점)",
-     "role": "정답근거",
-     "how": "반복"
     }
    ],
-   "subjects": [
-    {
-     "name": "귀여운 디자인",
-     "trail": [
-      {
-       "en": "a nurturing motivation",
-       "ko": "돌보고 싶은 양육 동기"
-      },
-      {
-       "en": "reduce performance expectations",
-       "ko": "성능 기대 저하(단점)"
-      }
-     ]
-    },
-    {
-     "name": "아름다운 디자인",
-     "trail": [
-      {
-       "en": "a self-expressive, or signaling, motivation",
-       "ko": "자기표현·신호 동기"
-      },
-      {
-       "en": "may not attract attention over time",
-       "ko": "시간이 지나면 주목 못 받음(단점)"
-      }
-     ]
-    }
-   ],
-   "echo": "‘단점도 있다’를 ④에 넣어 긍정(동기)→부정(단점) 전환점으로 ④·⑤를 묶는다."
+   "echo": "동기(긍정)→단점(부정)은 새 정보 전개이며 핵심의 재진술이 아니다."
   }
  },
  {
@@ -7607,6 +7505,7 @@
   "restate": {
    "thesis": "동물도 내면세계를 지니며 의식은 인간만의 것이 아니다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "animal cognition ought to be taken seriously",
@@ -7623,7 +7522,7 @@
     {
      "en": "any part of the brain unique to humans",
      "ko": "인간에게만 고유한 뇌 부위는 없다",
-     "role": "정답근거",
+     "role": "재진술",
      "how": "반대구조"
     },
     {
@@ -7633,7 +7532,7 @@
      "how": "비유→직설"
     }
    ],
-   "echo": "‘give up the ghost’는 의식이 인간만의 것이라는 믿음을 버리라는 뜻으로 재진술한 것."
+   "echo": "‘give up the ghost’는 의식이 인간만의 것이라는 믿음을 버리라는 뜻으로 재진술."
   }
  },
  {
@@ -7866,6 +7765,7 @@
   "restate": {
    "thesis": "소셜 미디어는 인맥망을 넓혀 사회적 자본을 키운다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "increase our social capital",
@@ -8087,6 +7987,7 @@
   "restate": {
    "thesis": "산림의 비시장 가치가 목재 가치를 넘어서 벌목은 비효율적이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "market incentives that provide financial rewards for exploitation",
@@ -8103,7 +8004,7 @@
     {
      "en": "cutting down the trees is economically inefficient",
      "ko": "나무 베기는 경제적으로 비효율",
-     "role": "정답근거",
+     "role": "재진술",
      "how": "추상화"
     },
     {
@@ -8113,7 +8014,7 @@
      "how": "동의어"
     }
    ],
-   "echo": "정답은 ‘non-market values may exceed’를 비시장 가치를 따지는 일의 중요성으로 재진술."
+   "echo": "정답은 비시장 가치가 목재 가치를 넘어섬을 강조하는 재진술이다."
   }
  },
  {
@@ -8325,6 +8226,7 @@
   "restate": {
    "thesis": "관광산업은 1950년대 이후 분절(개별)에서 통합으로 변화했다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "tourism was very much an industry which was fragmented",
@@ -8345,7 +8247,7 @@
      "how": "반대구조"
     }
    ],
-   "echo": "정답 제목은 ‘fragmented·independent→integrated’를 분리에서 결합으로 재진술."
+   "echo": "제목은 ‘분절·독립→통합’을 분리에서 결합으로 재진술."
   }
  },
  {
@@ -8579,6 +8481,7 @@
   "restate": {
    "thesis": "너무 오래 좁혀진 상태를 유지하면 단서를 놓치고 성과가 떨어진다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "we start to miss cues and signals",
@@ -8599,7 +8502,7 @@
      "how": "반복"
     }
    ],
-   "echo": "빈칸은 ‘locked in·stuck narrowed in for too long’을 ‘너무 오래 좁혀진 채 유지’로 재진술."
+   "echo": "빈칸은 ‘locked in·stuck narrowed’를 ‘너무 오래 좁혀진 채 유지’로 재진술."
   }
  },
  {
@@ -8811,6 +8714,7 @@
   "restate": {
    "thesis": "전문 서적상은 재고 없이 카탈로그 유통으로 도달 범위를 넓힌다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "do not keep large stocks of any specific title",
@@ -9187,18 +9091,13 @@
   "restate": {
    "thesis": "진자의 혼돈은 반복에서 생기나 모든 반복이 혼돈은 아니다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
-    {
-     "en": "Release the pendulum and note the magnets that it visits",
-     "ko": "진자를 놓아 방문 순서를 관찰",
-     "role": "주제문",
-     "how": "—"
-    },
     {
      "en": "soon it will become completely different",
      "ko": "같은 위치에서 놓아도 곧 완전히 달라짐",
-     "role": "재진술",
-     "how": "동의어"
+     "role": "주제문",
+     "how": "—"
     },
     {
      "en": "it will visit an entirely different set of points on the two occasions",
@@ -9210,10 +9109,10 @@
      "en": "Chaotic systems are generated by iteration, though not all iteration leads to chaos",
      "ko": "혼돈은 반복에서 생기나 모든 반복이 혼돈은 아님",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "추상화"
     }
    ],
-   "echo": "‘같은 위치→완전히 다름’을 ‘iteration→모두 혼돈은 아님’으로 일반화해 (B)-(C)-(A)로 이어진다."
+   "echo": "‘같은 위치→완전히 다름’을 ‘반복→모두 혼돈은 아님’으로 정리해 (B)-(C)-(A)."
   }
  },
  {
@@ -9469,8 +9368,9 @@
    ]
   },
   "restate": {
-   "thesis": "서구에서 빨강은 유일한 진짜 색이자 색채 어휘의 기원이었다.",
+   "thesis": "서구에서 빨강은 유일한 진짜 색이자 색채의 기원이었다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "red was the only color worthy of that name, the only true color",
@@ -9479,20 +9379,19 @@
      "how": "—"
     },
     {
-     "en": "It was with red that humans did their first color experiments, achieved their first successes, and then constructed a chromatic universe",
-     "ko": "빨강으로 인간은 첫 색 실험을 하고 색채 우주를 구성했다",
+     "en": "it exceeded all others",
+     "ko": "빨강은 다른 모든 색을 능가했다",
      "role": "재진술",
-     "how": "예시→일반화"
+     "how": "추상화"
     },
     {
-     "en": "Here the lexicon seems in keeping with pictorial practices and coloring techniques",
-     "ko": "여기서 그 어휘는 회화적 관행과 부합해 보인다",
+     "en": "It was with red that humans did their first color experiments, achieved their first successes, and then constructed a chromatic universe",
+     "ko": "빨강으로 인간은 첫 색 실험을 하고 색채 우주를 구성했다",
      "role": "정답근거",
-     "how": "품사전환"
+     "how": "반복"
     }
    ],
-   "subjects": [],
-   "echo": "삽입문의 '가장 오래된 색채 용어(color terms)'가 뒤 문장의 'Here the lexicon'으로 재진술되어 ③ 자리가 성립."
+   "echo": "삽입문의 ‘색채 용어(color terms)’를 뒤 문장 ‘the lexicon’이 받아 ③ 성립."
   }
  },
  {
@@ -9749,29 +9648,30 @@
   },
   "uline": "come back home again",
   "restate": {
-   "thesis": "빨강은 서구 최초의 진정한 색이며 언어(어휘)가 이를 뒷받침한다.",
+   "thesis": "주파수를 2배·절반으로 하면 비슷한 음이 되어 음 이름이 반복된다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
-     "en": "red was the only color worthy of that name, the only true color",
-     "ko": "빨강이 유일한 진정한 색이었다",
+     "en": "Note names repeat",
+     "ko": "음 이름이 반복된다",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "It was with red that humans did their first color experiments",
-     "ko": "빨강으로 첫 색 실험을 했다",
+     "en": "a note that sounds remarkably similar to the one we started out with",
+     "ko": "시작한 음과 놀랄 만큼 비슷하게 들리는 음",
      "role": "재진술",
-     "how": "예시→일반화"
+     "how": "추상화"
     },
     {
-     "en": "Here the lexicon seems in keeping with pictorial practices and coloring techniques",
-     "ko": "그 어휘는 회화적 관행과 부합",
+     "en": "we’ve come back home again each time we double a tone’s frequency",
+     "ko": "주파수를 2배 할 때마다 같은 곳(집)으로 되돌아옴",
      "role": "정답근거",
-     "how": "동의어"
+     "how": "비유→직설"
     }
    ],
-   "echo": "삽입문의 ‘color terms’를 뒤 문장이 ‘Here the lexicon’으로 받아야 재진술이 성립 = ③."
+   "echo": "‘come back home’은 옥타브—같은 이름·다른 음높이로 반복됨을 뜻한다."
   }
  },
  {
@@ -10048,6 +9948,7 @@
   "restate": {
    "thesis": "도시 배송에서 자전거는 효율적인 배송 수단이 될 수 있다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Urban delivery vehicles can be adapted to better suit the density of urban distribution",
@@ -10066,16 +9967,10 @@
      "ko": "선진국·개도국 모두에서 큰 잠재력",
      "role": "재진술",
      "how": "반복"
-    },
-    {
-     "en": "particularly encouraged when combined with policies that restrict motor vehicle access",
-     "ko": "차량 진입 제한 정책과 결합될 때 특히 권장됨",
-     "role": "정답근거",
-     "how": "예시→일반화"
     }
    ],
    "subjects": [],
-   "echo": "'preferred last-mile vehicle·much potential'을 '효율적인 배송 수단'으로 재진술."
+   "echo": "'preferred last-mile vehicle·much potential'을 '효율적 배송 수단'으로 재진술."
   }
  },
  {
@@ -10323,6 +10218,7 @@
   "restate": {
    "thesis": "정보 공개는 규제와 달리 선택의 자유를 존중하는 이점이 있다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "An important advantage of disclosure, as opposed to more aggressive forms of regulation, is its flexibility and respect for the operation of free markets",
@@ -10565,28 +10461,17 @@
   "restate": {
    "thesis": "음식은 단순한 필수품을 넘어 하나의 문화로 부상했다.",
    "kind": "single",
+   "has_restate": false,
    "chain": [
-    {
-     "en": "the focus of those involved with food ... was on its production, preservation, distribution, pricing",
-     "ko": "음식은 생산·보존·가격 같은 실용적 관심 대상이었다",
-     "role": "주제문",
-     "how": "—"
-    },
     {
      "en": "Food became more than just a life necessity",
      "ko": "음식은 단순한 생계 필수품 그 이상이 되었다",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
-     "en": "The rise of restaurants eventually led to a class of diners who prided themselves on being critics of taste, food and cooking",
-     "ko": "레스토랑의 부상으로 맛·요리를 비평하는 식객 계층이 생겼다",
-     "role": "정답근거",
-     "how": "예시→일반화"
+     "role": "주제문",
+     "how": "—"
     }
    ],
    "subjects": [],
-   "echo": "'more than a life necessity·rise of restaurants'를 '필수품을 넘어선 음식 문화의 부상'으로 재진술."
+   "echo": "핵심 'more than a life necessity'는 이후 역사적 전개·예시로만 이어져 되풀이된 재진술 표현이 없음."
   }
  },
  {
@@ -10821,6 +10706,7 @@
   "restate": {
    "thesis": "진리는 지각이 아니라 그 이성적 표상에서 드러난다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the distinction between sensual perceptions and rational knowledge",
@@ -10832,13 +10718,13 @@
      "en": "perceptions are inherently unreliable and misleading",
      "ko": "지각은 본래 믿을 수 없고 오해를 부른다",
      "role": "재진술",
-     "how": "품사전환"
+     "how": "반대구조"
     },
     {
      "en": "Only the rational discourse has the tools to overcome illusions and to point towards true knowledge",
      "ko": "오직 이성적 담론만이 환상을 극복해 참된 지식을 가리킨다",
      "role": "재진술",
-     "how": "반대구조"
+     "how": "동의어"
     },
     {
      "en": "the truth of the matter is revealed",
@@ -11147,6 +11033,7 @@
   "restate": {
    "thesis": "물벼룩의 적응적 가소성은 진화적 적응이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "a kind of flexibility that evolutionary biologists call adaptive plasticity",
@@ -11155,26 +11042,14 @@
      "how": "—"
     },
     {
-     "en": "it develops a helmet and spines to defend itself against predators",
-     "ko": "포식자 방어를 위해 투구와 가시를 만든다",
-     "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
-     "en": "That’s a clever trick, because producing spines and a helmet is costly",
-     "ko": "가시·투구는 비용이 커서 그것은 영리한 방책이다",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
      "en": "this plasticity is an adaptation",
      "ko": "이 가소성은 하나의 적응이다",
      "role": "정답근거",
-     "how": "추상화"
+     "how": "품사전환"
     }
    ],
    "subjects": [],
-   "echo": "조건부 발달(B)→'clever trick'(A)→'adaptation'(C)으로 재진술되며 (B)-(A)-(C)로 전개."
+   "echo": "'adaptive plasticity'를 결론에서 'this plasticity is an adaptation'으로 재진술."
   }
  },
  {
@@ -11449,34 +11324,17 @@
   "restate": {
    "thesis": "걷기의 신체 경험이 수학 개념 이해를 돕는다.",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
      "en": "our everyday physical experiences in the world contribute to our understanding of mathematical concepts",
      "ko": "일상의 신체 경험이 수학 개념 이해에 기여한다",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "The experience of walking along a path ... can be a metaphor for thinking about arithmetic",
-     "ko": "길을 걷는 경험은 산수 사고의 비유가 될 수 있다",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "they can imagine walking backwards",
-     "ko": "그들은 뒤로 걷는 것을 상상할 수 있다",
-     "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
-     "en": "imagine the shape of the path, the smell of the trees, and the sound that is made when they step on the dried leaves",
-     "ko": "길의 모양·냄새·소리까지 상상한다",
-     "role": "정답근거",
-     "how": "예시→일반화"
     }
    ],
    "subjects": [],
-   "echo": "삽입문의 'all of this walking'이 ①~⑤의 걷기 상상 전체를 받아 ⑤ 뒤에서 마무리."
+   "echo": "삽입 문항으로, 걷기 예시·세부만 이어질 뿐 핵심을 다른 말로 되풀이한 재진술 표현이 없음."
   }
  },
  {
@@ -11710,6 +11568,7 @@
   "restate": {
    "thesis": "소유권은 분리·재결합 가능한 여러 권리의 묶음이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "ownership as a bundle of sticks",
@@ -11724,16 +11583,10 @@
      "how": "비유→직설"
     },
     {
-     "en": "the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing",
-     "ko": "팔 권리·빌려줄 권리·저당·양도 등 개별 권리",
-     "role": "재진술",
-     "how": "예시"
-    },
-    {
      "en": "Each of these parties owns a stick in the bundle",
      "ko": "각 당사자가 묶음 속 막대기 하나를 갖는다",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "반복"
     }
    ],
    "subjects": [],
@@ -11966,6 +11819,7 @@
   "restate": {
    "thesis": "정보를 해석해야 비로소 의미가 생긴다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Information and meaning are, clearly, not the same thing",
@@ -11977,7 +11831,7 @@
      "en": "the latter refers to the interpretation of the data or sensory states",
      "ko": "의미는 데이터·감각 상태의 해석을 가리킨다",
      "role": "재진술",
-     "how": "반대구조"
+     "how": "추상화"
     },
     {
      "en": "Interpretation is at the core of everything we do, think about, and feel",
@@ -12209,6 +12063,7 @@
   "restate": {
    "thesis": "삶을 이야기하는 방식별로 개인적 기억이 하는 역할이 다르다.",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "the life narrator and the biographer engage different kinds of evidence",
@@ -12221,12 +12076,6 @@
      "ko": "서술자에게는 대조적으로 개인적 기억이 주요 자료다",
      "role": "재진술",
      "how": "반대구조"
-    },
-    {
-     "en": "employ that evidence to support, supplement, or offer commentary on their personalized acts of remembering",
-     "ko": "다른 증거도 개인적 기억을 뒷받침하려 쓴다",
-     "role": "정답근거",
-     "how": "추상화"
     }
    ],
    "subjects": [
@@ -12235,7 +12084,7 @@
      "trail": [
       {
        "en": "Most biographers incorporate multiple forms of evidence",
-       "ko": "여러 형태의 증거를 종합한다"
+       "ko": "여러 형태의 외부 증거를 종합한다"
       },
       {
        "en": "Relatively few biographers use their personal memories of their subject as reliable evidence",
@@ -12252,7 +12101,7 @@
       },
       {
        "en": "support, supplement, or offer commentary on their personalized acts of remembering",
-       "ko": "다른 증거도 개인적 기억을 뒷받침한다"
+       "ko": "다른 증거도 개인적 기억을 뒷받침·보완한다"
       }
      ]
     }
@@ -12517,6 +12366,7 @@
   "restate": {
    "thesis": "인간과 기계가 팀으로 협력해 시너지를 낸다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "treats a robot as part of a human-machine team where the intelligence is synergistic",
@@ -12529,12 +12379,6 @@
      "ko": "행위자들이 팀 목표를 위해 어떻게 협력·조율하는가",
      "role": "재진술",
      "how": "동의어"
-    },
-    {
-     "en": "treat robots as helpers such as service animals or sheep dogs",
-     "ko": "로봇을 보조 동물 같은 조력자로 다룬다",
-     "role": "재진술",
-     "how": "비유"
     },
     {
      "en": "robots that can be intelligent enough to be good team members",
@@ -12789,18 +12633,13 @@
   "restate": {
    "thesis": "숲의 다양성이 비숲을 숲으로 바꾸는 정당화가 될 순 없다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests",
      "ko": "숲은 비교적 다양하나 비숲을 숲으로 바꾸는 근거는 아니다",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "Wetlands, meadows, and grasslands have a unique biota too",
-     "ko": "습지·초원도 고유한 생물군을 가진다",
-     "role": "재진술",
-     "how": "예시"
     },
     {
      "en": "ecologists frequently complain about the Commission’s work",
@@ -12810,7 +12649,7 @@
     }
    ],
    "subjects": [],
-   "echo": "'forests diverse but·unique biota·ecologists complain'을 '비숲을 숲으로 바꾸는 정당화가 될 수 없음'으로 재진술."
+   "echo": "'converting nonforests into forests는 정당화되지 않음'을 '생태학자들의 비판'으로 재진술."
   }
  },
  {
@@ -13135,8 +12974,9 @@
    ]
   },
   "restate": {
-   "thesis": "성공보수(contingency pricing)는 결과가 난 뒤에만 비율로 값을 받는 방식이다.",
+   "thesis": "성공보수는 결과가 확정된 뒤에만 비율로 받는 방식이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "a practice called contingency pricing",
@@ -13148,7 +12988,7 @@
      "en": "lawyers do not receive fees or payment until the case is settled",
      "ko": "사건이 해결될 때까지 수임료를 받지 않음",
      "role": "재진술",
-     "how": "추상화"
+     "how": "비유→직설"
     },
     {
      "en": "only an outcome in the client’s favor is compensated",
@@ -13160,10 +13000,10 @@
      "en": "they pay no fees until they receive a settlement",
      "ko": "합의를 받기 전엔 수임료를 내지 않음",
      "role": "정답근거",
-     "how": "반복"
+     "how": "품사전환"
     }
    ],
-   "echo": "In this approach→Therefore→By using contingency pricing의 연결이 (C)-(A)-(B) 순서를 확정한다."
+   "echo": "성공보수 정의의 반복 흐름으로 (C)-(A)-(B) 순서가 확정된다."
   }
  },
  {
@@ -13453,8 +13293,9 @@
    ]
   },
   "restate": {
-   "thesis": "공원은 도시와 자연을 대립으로 보는 서양 사상이 구현된 분리감의 공간이다.",
+   "thesis": "공원은 도시와 자연을 대립으로 보는 사상이 구현된 분리의 공간이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "a sharp separation from streets, cars, and buildings",
@@ -13463,25 +13304,13 @@
      "how": "—"
     },
     {
-     "en": "such a feeling",
-     "ko": "그런 (분리의) 느낌",
-     "role": "재진술",
-     "how": "동의어"
-    },
-    {
-     "en": "this idea",
-     "ko": "이 생각(분리를 구현하려는 발상)",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
      "en": "antithetical spaces and oppositional forces",
      "ko": "대립하는 공간이자 상반된 힘",
      "role": "정답근거",
      "how": "추상화"
     }
    ],
-   "echo": "‘분리감(a sharp separation)’ 뒤에 그 느낌을 만든 방식을 넣어야 ‘this idea’로 이어져 ⑤가 답이다."
+   "echo": "'분리(separation)'가 'antithetical'로 재진술돼 ⑤가 답."
   }
  },
  {
@@ -13754,6 +13583,7 @@
   "restate": {
    "thesis": "일기 쓰기는 자아를 말로 만들고 스스로 성찰하게 하는 매체다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "insights and narratives about the self",
@@ -13780,7 +13610,7 @@
      "how": "동의어"
     }
    ],
-   "echo": "밑줄 make oneself public to oneself·self-inspection은 글로 자기를 되비추어 성찰함(①)을 재진술한다."
+   "echo": "밑줄이 self-inspection·말로 만든 자아로 성찰(①)을 재진술."
   }
  },
  {
@@ -14048,18 +13878,13 @@
   "restate": {
    "thesis": "소비자 심리를 반영한 성나고 무서운 외관의 차가 인기를 끈다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
-    {
-     "en": "people form emotional attachments to automobile ‘faces’",
-     "ko": "사람들은 자동차 ‘얼굴’에 감정적 애착을 가짐",
-     "role": "주제문",
-     "how": "—"
-    },
     {
      "en": "the trend was toward angrier, scarier vehicles’ faces",
      "ko": "흐름이 더 성나고 무서운 얼굴로 향함",
-     "role": "재진술",
-     "how": "추상화"
+     "role": "주제문",
+     "how": "—"
     },
     {
      "en": "the ‘scary look’ shows no sign of slowing",
@@ -14071,10 +13896,10 @@
      "en": "customers are happy with this look",
      "ko": "고객은 이 룩에 만족함",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "동의어"
     }
    ],
-   "echo": "angrier, scarier faces·Buoyant sales·customers are happy가 ‘성난 외관 자동차가 인기’(①)로 요약된다."
+   "echo": "성난 외관의 인기·지속이 '성난 차 인기'(①)로 재진술된다."
   }
  },
  {
@@ -14379,6 +14204,7 @@
   "restate": {
    "thesis": "이익 지향 운영은 전시실을 앞세우고 수장고를 희생시킨다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "emphasise what happens in the galleries over the activities that take place in its unseen zones",
@@ -14399,7 +14225,7 @@
      "how": "반대구조"
     }
    ],
-   "echo": "prioritise consumable parts·storage may suffer가 이익 지향 운영의 결과(④)를 재진술한다."
+   "echo": "consumable 우선·storage suffer가 이익지향 결과(④)를 재진술."
   }
  },
  {
@@ -14690,6 +14516,7 @@
   "restate": {
    "thesis": "수도원은 세상과 분리돼 있으면서도 사회에 기여한 고독의 은총이었다.",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "self-imposed isolation from the wider community",
@@ -14732,12 +14559,12 @@
      "name": "사회에의 기여(attached)",
      "trail": [
       {
-       "en": "provided intellectual leadership",
-       "ko": "지적 리더십을 제공"
-      },
-      {
        "en": "for the benefit of wider society",
        "ko": "더 넓은 사회의 이익을 위해"
+      },
+      {
+       "en": "penances on behalf of the community",
+       "ko": "공동체를 위한 속죄"
       },
       {
        "en": "the power to save themselves and others",
@@ -14746,7 +14573,7 @@
      ]
     }
    ],
-   "echo": "self-imposed isolation와 for the benefit of wider society의 병치가 ‘Detached from but Attached to Society’(③)로 재진술된다."
+   "echo": "isolation과 benefit의 병치가 'Detached but Attached'(③)."
   }
  },
  {
@@ -15029,6 +14856,7 @@
   "restate": {
    "thesis": "한 주제씩 탐구하면 지식이 단순화 저장돼 새 학습 여지를 남긴다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "concentrate attention on one subject after another",
@@ -15037,19 +14865,25 @@
      "how": "—"
     },
     {
-     "en": "simplified by condensing into formulas or greatly abbreviated symbols",
-     "ko": "공식·기호로 압축돼 단순화됨",
+     "en": "the brain adapts to universal science in time but not in space",
+     "ko": "뇌는 공간이 아니라 시간 속에서 적응함",
      "role": "재진술",
      "how": "추상화"
+    },
+    {
+     "en": "each topic was explored during a specific period of time",
+     "ko": "각 주제는 특정 시기에 탐구됨",
+     "role": "재진술",
+     "how": "반복"
     },
     {
      "en": "sufficient space remains for the perception and learning of new images",
      "ko": "새 것을 배울 충분한 공간이 남음",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "—"
     }
    ],
-   "echo": "retained in simplified forms·sufficient space remains가 ‘새 학습 공간을 남긴다(leaves room)’(①)로 재진술된다."
+   "echo": "'한 주제씩'·'공간이 남음'이 요약문(①)으로 재진술된다."
   }
  },
  {
@@ -15371,33 +15205,16 @@
   "restate": {
    "thesis": "쓰기 지도의 강조점을 결과 평가에서 과정 중심 수정으로 옮긴다.",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
-     "en": "assign topics for students to write on",
-     "ko": "주제를 주고 학생이 쓰게 함(전통 방식)",
+     "en": "Process writing shifts the emphasis in teaching writing from evaluation to revision",
+     "ko": "과정 중심 쓰기는 강조점을 평가에서 수정으로 옮김",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "teachers collect and evaluate what students have written",
-     "ko": "교사가 걷어 평가함",
-     "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
-     "en": "In process writing, on the other hand",
-     "ko": "반면 과정 중심 쓰기에서는",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
-     "en": "shifts the emphasis in teaching writing from evaluation to revision",
-     "ko": "강조점을 평가에서 수정으로 옮김",
-     "role": "정답근거",
-     "how": "추상화"
     }
    ],
-   "echo": "Subsequently·on the other hand·In this way의 연결이 주어진글-(C)-(A)-(B)(④) 흐름을 확정한다."
+   "echo": "연결어(Subsequently·on the other hand)로 순서 확정, 재진술 없음."
   }
  },
  {
@@ -15660,6 +15477,7 @@
   "restate": {
    "thesis": "큰 협상 사안을 작은 조각으로 나누는 살라미 전술을 설명한다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "slice a large issue into smaller pieces",
@@ -15668,19 +15486,13 @@
      "how": "—"
     },
     {
-     "en": "use the time horizon",
-     "ko": "시간 지평을 이용해 쪼갬(첫 방법)",
+     "en": "fractionate the issue",
+     "ko": "사안을 잘게 쪼갬",
      "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
-     "en": "Another approach is to vary the number of ways that the principle may be applied",
-     "ko": "원칙 적용 방식의 수를 달리함(둘째 방법)",
-     "role": "정답근거",
-     "how": "반복"
+     "how": "동의어"
     }
    ],
-   "echo": "use the time horizon(첫 방법) 뒤 Another approach(둘째 방법)가 와야 자연스러워 ④에 삽입된다."
+   "echo": "slice=fractionate 재진술; 첫 방법 뒤 Another approach라 ④."
   }
  },
  {
@@ -16008,6 +15820,7 @@
   "restate": {
    "thesis": "남의 요구보다 창의적 일을 먼저 하라.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "switch to creative work first, reactive work second",
@@ -16026,10 +15839,15 @@
      "ko": "빈 편지함을 위해 꿈을 버린다",
      "role": "정답근거",
      "how": "비유→직설"
+    },
+    {
+     "en": "sacrificing your potential for the illusion of professionalism",
+     "ko": "허울뿐인 프로다움을 위해 잠재력을 희생함",
+     "role": "재진술",
+     "how": "반복"
     }
    ],
-   "subjects": [],
-   "echo": "정답은 'an empty inbox·reactive work·others’ expectations'를 '남의 요구를 만족시키는 일'로 재진술."
+   "echo": "empty inbox·others’ expectations가 '남의 요구'로 재진술."
   }
  },
  {
@@ -16294,6 +16112,7 @@
   "restate": {
    "thesis": "세법 제정의 핵심은 도덕적 목표를 설정하는 일이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the moral questions of taxation are at the very heart of the creation of tax laws",
@@ -16308,19 +16127,13 @@
      "how": "반복"
     },
     {
-     "en": "economics cannot, in a vacuum, identify the goal",
-     "ko": "경제학은 목표 자체를 정하지 못함",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
      "en": "Creating tax policy requires identifying a moral goal",
      "ko": "세금 정책 수립은 도덕적 목표 설정을 요구함",
      "role": "정답근거",
      "how": "동의어"
     }
    ],
-   "echo": "moral questions are fundamental·requires identifying a moral goal이 ‘도덕적 목표 설정이 중요하다’(⑤)로 재진술된다."
+   "echo": "'도덕적 문제가 핵심'·'도덕적 목표 설정'이 요지(⑤) 재진술."
   }
  },
  {
@@ -16576,6 +16389,7 @@
   "restate": {
    "thesis": "패러다임은 믿음의 대상이 아니라 연구에서 쓰이는 '기능'이다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Scientists use paradigms rather than believing them.",
@@ -16585,15 +16399,15 @@
     },
     {
      "en": "need not presuppose any comparable unity in scientists' beliefs",
-     "ko": "신념의 통일성을 전제할 필요가 없다",
+     "ko": "공유된 실행이 신념의 통일성을 전제할 필요는 없다",
      "role": "재진술",
      "how": "추상화"
     },
     {
      "en": "one role of a paradigm is to enable scientists to work successfully",
-     "ko": "패러다임의 역할: 상세한 설명 없이도 연구를 성공시킴",
-     "role": "정답근거",
-     "how": "추상화"
+     "ko": "패러다임의 역할은 상세한 설명 없이도 연구를 성공시키는 것",
+     "role": "재진술",
+     "how": "품사전환"
     }
    ],
    "echo": "'use·role'(사용·역할)을 '패러다임의 기능적 측면'으로 재진술한 ⑤"
@@ -16836,6 +16650,7 @@
   "restate": {
    "thesis": "음악의 아름다움은 악보에서의 표현적 일탈(변주)에 있다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the beauty of music lies in an expressive deviation from the exactly defined score",
@@ -16845,21 +16660,15 @@
     },
     {
      "en": "a wide potential of variations in tempo, volume, tonal quality and intonation",
-     "ko": "빠르기·음량·음색·음정의 폭넓은 변주",
+     "ko": "빠르기·음량·음색·음정의 폭넓은 변주 가능성",
      "role": "재진술",
      "how": "동의어"
     },
     {
      "en": "We generally call this 'expressivity'",
-     "ko": "이를 '표현성'이라 부른다",
+     "ko": "우리는 이를 '표현성'이라 부른다",
      "role": "재진술",
      "how": "추상화"
-    },
-    {
-     "en": "why we do not lose interest when we hear different artists perform the same piece",
-     "ko": "연주자마다 달라도 흥미를 잃지 않는 이유",
-     "role": "정답근거",
-     "how": "예시→일반화"
     }
    ],
    "echo": "'expressive deviation·variation'을 'Value of Variation'으로 재진술한 ②"
@@ -17135,6 +16944,7 @@
   "restate": {
    "thesis": "동물의 '가르침'은 측정 어려운 의도성을 전제한다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "animals can, in fact, teach one another",
@@ -17143,16 +16953,10 @@
      "how": "—"
     },
     {
-     "en": "sometimes without even killing the seal",
-     "ko": "범고래는 먹지도 않을 물범을 잡았다 놓아준다",
-     "role": "재진술",
-     "how": "예시"
-    },
-    {
      "en": "there would need to be a good reason, and that reason might be teaching",
-     "ko": "합당한 이유가 있어야 하고 그 이유가 가르침일 수 있다",
+     "ko": "합당한 이유가 있어야 하고, 그 이유가 가르침일 수 있다",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "반복"
     }
    ],
    "echo": "'a good reason·to assist'(목적 있는 행동)을 '의도성(intentionality)'으로 재진술한 ⑤"
@@ -17474,33 +17278,16 @@
   "restate": {
    "thesis": "무엇이 '수학적 글'인지 알아보는 기준을 묻는 글",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
-     "en": "seen some mathematical writing and not understood it",
-     "ko": "수학 글을 보고 이해 못 한 적이 있을 것",
+     "en": "how do you recognise some writing is mathematical in the first place?",
+     "ko": "애초에 그게 수학적 글인 줄은 어떻게 아는가",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "how do you recognise some writing is mathematical in the first place?",
-     "ko": "애초에 그게 수학 글인 줄은 어떻게 아는가",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "The complicated notations ... are obvious signs, but a lot of those are really quite modern",
-     "ko": "복잡한 기호가 단서지만 그것들은 사실 현대의 것",
-     "role": "재진술",
-     "how": "예시"
-    },
-    {
-     "en": "there has to be something mathematical going on for us to say that it is mathematics",
-     "ko": "수학적인 무언가가 있어야 수학이라 할 수 있다",
-     "role": "정답근거",
-     "how": "예시→일반화"
     }
    ],
-   "echo": "'not understood→how recognise?→notations' 흐름으로 (B)-(A)-(C)인 ②"
+   "echo": "재진술 없음: '이해못함→인지 질문→기호' 흐름 연결인 순서 (B)-(A)-(C) ②"
   }
  },
  {
@@ -17747,6 +17534,7 @@
   "restate": {
    "thesis": "과학 경쟁의 '승자독식'은 극단적·부정확한 관점이다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Science is sometimes described as a winner-take-all contest",
@@ -17756,24 +17544,18 @@
     },
     {
      "en": "This is an extreme view of the nature of scientific contests",
-     "ko": "이는 극단적 관점이다",
+     "ko": "이는 과학 경쟁 본질에 대한 극단적 관점이다",
      "role": "재진술",
      "how": "추상화"
     },
     {
      "en": "It is also inaccurate to the extent that it suggests that only a handful of contests exist",
-     "ko": "소수의 경쟁만 존재한다고 시사해 부정확하다",
+     "ko": "소수의 경쟁만 존재한다고 시사하는 점에서도 부정확하다",
      "role": "재진술",
      "how": "반복"
-    },
-    {
-     "en": "But many other contests have multiple parts",
-     "ko": "하지만 다른 많은 경쟁은 여러 부분으로 이루어진다",
-     "role": "정답근거",
-     "how": "반대구조"
     }
    ],
-   "echo": "'only a handful of contests exist'(소수)를 받고 'But 많은 경쟁'으로 대조되는 삽입 위치 ③"
+   "echo": "'winner-take-all'을 'extreme·inaccurate view'로 재진술, 삽입 위치 ③"
   }
  },
  {
@@ -17958,18 +17740,13 @@
   "restate": {
    "thesis": "초기 민족지학자는 연구 대상과 직접 접촉이 거의 없었다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
-    {
-     "en": "one should at least spend significant time actually observing and talking to the people",
-     "ko": "적어도 실제로 관찰·대화하며 상당한 시간을 보내야 한다",
-     "role": "주제문",
-     "how": "—"
-    },
     {
      "en": "generally did not spend significant time with the local people",
      "ko": "대체로 현지인과 의미 있는 시간을 보내지 않았다",
-     "role": "재진술",
-     "how": "반대구조"
+     "role": "주제문",
+     "how": "—"
     },
     {
      "en": "their observations were primarily conducted from their verandas",
@@ -17978,7 +17755,7 @@
      "how": "비유→직설"
     }
    ],
-   "echo": "'from their verandas'라는 비유를 'little direct contact(직접 접촉 거의 없음)'로 재진술한 ③"
+   "echo": "'from their verandas'라는 비유를 'little direct contact'로 재진술한 ③"
   }
  },
  {
@@ -18215,6 +17992,7 @@
   "restate": {
    "thesis": "말(소통)의 평등이 공유·상호부조 가치를 형성했다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the diffusion of speech shaped values",
@@ -18238,7 +18016,7 @@
      "en": "sharing and mutual aid are right and proper",
      "ko": "나눔과 상호부조가 옳고 마땅하다",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "품사전환"
     }
    ],
    "echo": "'equal access to speech'가 'sharing·mutual aid' 가치의 토대임을 재진술한 ④"
@@ -18478,6 +18256,7 @@
   "restate": {
    "thesis": "놀이는 유년 이후에도 형태를 바꿔 계속된다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Children can move effortlessly between play and absorption in a story",
@@ -18495,7 +18274,7 @@
      "en": "the bases and interests of this activity change and develop to playing and watching sports, to the fiction of plays, novels, and movies, and nowadays to video games",
      "ko": "그 활동의 토대가 스포츠·소설·영화·비디오게임으로 변화·발전한다",
      "role": "정답근거",
-     "how": "예시"
+     "how": "품사전환"
     }
    ],
    "echo": "'give up … but not so · change and develop'를 '형태를 바꿔 지속되는 놀이'로 재진술한 ④"
@@ -18739,6 +18518,7 @@
   "restate": {
    "thesis": "수리·복원은 산업화 후에도 남은 창의적 손기술이다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Mending and restoring objects often require even more creativity than original production",
@@ -19049,6 +18829,7 @@
   "restate": {
    "thesis": "선호가 갈리는 경우엔 무작위·동점 처리 수단이 필요하다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "there is no deterministic way of selecting a single alternative without violating one of two basic fairness conditions",
@@ -19066,10 +18847,10 @@
      "en": "only deterministic as long as there is no tie, which is usually resolved by drawing a lot",
      "ko": "동점이 없을 때만 결정론적이고, 동점은 제비뽑기로 해결된다",
      "role": "정답근거",
-     "how": "예시"
+     "how": "반복"
     }
    ],
-   "echo": "'no deterministic way … drawing a lot'을 'randomization/tiebreaking이 필요'로 재진술한 ①"
+   "echo": "'no deterministic way … drawing a lot'을 'randomization/tiebreaking 필요'로 재진술한 ①"
   }
  },
  {
@@ -19420,34 +19201,16 @@
   "restate": {
    "thesis": "화석 기록은 진화 이론의 예측을 검증하는 증거다.",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
      "en": "The fossil record provides evidence of evolution.",
      "ko": "화석 기록은 진화의 증거를 제공한다",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "the fossil record also provides tests of the predictions made from evolutionary theory",
-     "ko": "화석 기록은 진화 이론의 예측 검증도 제공한다",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "The fossil record supports this prediction",
-     "ko": "화석 기록이 이 예측을 뒷받침한다",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "the theory of evolution would be rejected",
-     "ko": "(반대가 밝혀지면) 진화 이론은 폐기될 것이다",
-     "role": "정답근거",
-     "how": "반대구조"
     }
    ],
-   "subjects": [],
-   "echo": "(C)의 'this prediction' 예측이 (B)에서 뒷받침되고 (A)의 'If절'로 그 반대 가정을 이어받아 (C)-(B)-(A) 순서가 성립."
+   "echo": "재진술 없음: '증거→예측검증→뒷받침→반대가정'은 논증 전개인 순서 (C)-(B)-(A)"
   }
  },
  {
@@ -19725,6 +19488,7 @@
   "restate": {
    "thesis": "겨울이 오면 나무는 노화(senescence)로 잎을 능동적으로 떨어뜨린다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "an active process of clever recycling called senescence",
@@ -19733,19 +19497,13 @@
      "how": "—"
     },
     {
-     "en": "It signals to them that it is time to lose their leaves",
-     "ko": "나무에게 잎을 떨어뜨릴 때임을 알림",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
      "en": "trees carefully suck all of the useful nutrients out of the leaves",
-     "ko": "잎에서 유용한 양분을 빨아들임(과정의 시작)",
-     "role": "정답근거",
-     "how": "추상화"
+     "ko": "잎에서 유용한 양분을 회수함(=재활용)",
+     "role": "재진술",
+     "how": "비유→직설"
     }
    ],
-   "echo": "삽입문의 It·them이 앞의 'this change'와 'trees'를 되받아 ③ 자리에 놓인다."
+   "echo": "'clever recycling'이 '양분을 빨아들여 회수'로 직설 재진술됨."
   }
  },
  {
@@ -19978,27 +19736,28 @@
   "restate": {
    "thesis": "다른 문화가 다르게 생각·행동할 권리를 인정해야 한다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
-     "en": "a model of partial assimilation in which immigrants retain some of their customs, beliefs, and language",
-     "ko": "이민자가 관습·신념·언어를 일부 유지하는 부분적 동화",
+     "en": "the challenge is to recognize that other cultures think and act differently and that they have the right to do so",
+     "ko": "다른 문화의 다를 권리를 인정하는 것이 과제",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "these conflicts are greatly determined by the community to which one migrates",
-     "ko": "갈등은 이민자가 향하는 공동체가 좌우함",
+     "en": "a model of partial assimilation in which immigrants retain some of their customs, beliefs, and language",
+     "ko": "이민자가 관습·신념·언어를 일부 유지하는 부분적 동화",
      "role": "재진술",
-     "how": "추상화"
+     "how": "동의어"
     },
     {
-     "en": "the challenge is to recognize that other cultures think and act differently and that they have the right to do so",
-     "ko": "다른 문화의 다를 권리를 인정하는 것이 과제",
+     "en": "immigrants will no longer be strangers among us",
+     "ko": "이민자가 더는 이방인이 아니게 됨",
      "role": "정답근거",
-     "how": "동의어"
+     "how": "비유→직설"
     }
    ],
-   "echo": "'the right to do so'가 이민자의 정체성 유지 권리를 인정하라는 요지로 재진술됨."
+   "echo": "'the right to do so'가 정체성 유지·수용의 요지로 되풀이됨."
   }
  },
  {
@@ -20304,8 +20063,9 @@
    ]
   },
   "restate": {
-   "thesis": "상업 라디오는 최대 청중 확보를 위해 안전한 선곡으로 재생목록을 제한한다.",
+   "thesis": "상업 라디오의 최우선 목표는 최대한 큰 청중을 확보하는 것이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "that audience must be as large as possible",
@@ -20315,24 +20075,18 @@
     },
     {
      "en": "broadcasters attempt to maximise their audience size by playing music that is popular",
-     "ko": "인기곡을 틀어 청중 규모 극대화",
+     "ko": "인기곡을 틀어 청중 규모를 극대화",
      "role": "재진술",
-     "how": "반복"
+     "how": "동의어"
     },
     {
-     "en": "a high degree of risk aversion frequently marks out the ‘successful’ radio music programmer",
-     "ko": "성공적 프로그래머는 위험 회피 성향이 강함",
+     "en": "Audience retention is a key value",
+     "ko": "청중 유지가 핵심 가치",
      "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "Playlists are restricted, and often very small",
-     "ko": "재생목록이 제한적이고 매우 작음",
-     "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "동의어"
     }
    ],
-   "echo": "'maximise audience size'가 위험 회피·제한된 선곡이라는 결과로 재진술됨."
+   "echo": "'as large as possible'가 'maximise size'·'retention'으로 되풀이됨."
   }
  },
  {
@@ -20616,29 +20370,24 @@
    ]
   },
   "restate": {
-   "thesis": "미술 속 그림자 표현은 선사시대부터 지금까지 진화해 온 여정이다.",
+   "thesis": "미술 속 그림자 표현은 선사시대부터 진화해 온 여정이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "prehistoric cave artists skillfully used modeling shadows",
-     "ko": "선사 동굴 화가가 모델링 그림자 사용",
+     "ko": "선사 동굴 화가가 이미 그림자를 사용",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "the first to make the transition from modeling shadows to cast shadows",
-     "ko": "그리스·로마가 투영 그림자로 전환한 최초",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
      "en": "the practice of portraying shadows has evolved",
-     "ko": "그림자 묘사가 계속 진화해 옴",
-     "role": "정답근거",
+     "ko": "그림자 묘사가 그 이래 계속 진화해 옴",
+     "role": "재진술",
      "how": "추상화"
     }
    ],
-   "echo": "'32,000 years ago … Ever since … evolved'가 제목의 '그림자의 여정'으로 재진술됨."
+   "echo": "'32,000 years ago … Ever since evolved'가 제목의 '그림자의 여정'으로 재진술됨."
   }
  },
  {
@@ -20874,8 +20623,9 @@
    "copies": []
   },
   "restate": {
-   "thesis": "보존가는 변화를 관리해 원하는 상태로 만들고, 보존론자는 원형을 그대로 지킨다.",
+   "thesis": "보존가는 변화를 관리해 원하는 상태로 이끌고, 보존론자는 원형을 그대로 지킨다.",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "try to manage it in order to prolong ______ state",
@@ -20884,14 +20634,14 @@
      "how": "—"
     },
     {
-     "en": "restorative aspects ― restoring a historical musical instrument",
+     "en": "emphasize conservation’s restorative aspects",
      "ko": "복원 측면을 강조함",
      "role": "재진술",
-     "how": "예시→일반화"
+     "how": "동의어"
     },
     {
      "en": "an additional priority on yield or harvest or use",
-     "ko": "산출·수확·사용에 추가 우선순위를 둠",
+     "ko": "산출·수확·사용에 우선순위를 둠",
      "role": "정답근거",
      "how": "추상화"
     }
@@ -21290,6 +21040,7 @@
   "restate": {
    "thesis": "협상은 공통 이익과 갈등 영역을 확인하는 과정이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "an attempt to explore and reconcile conflicting positions in order to reach an acceptable outcome",
@@ -21299,24 +21050,12 @@
     },
     {
      "en": "the purpose of negotiation is the identification of areas of common interest and conflict",
-     "ko": "협상 목적=공통 이익·갈등 영역 확인",
+     "ko": "협상 목적은 공통 이익·갈등 영역의 확인",
      "role": "재진술",
      "how": "동의어"
-    },
-    {
-     "en": "Areas of difference can and do frequently remain",
-     "ko": "차이 영역이 자주 남음",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "In these and sometimes other forms of negotiation",
-     "ko": "이런 형태의 협상들에서",
-     "role": "정답근거",
-     "how": "반복"
     }
    ],
-   "echo": "'outcome→conflict→In these'의 연결이 (C)-(A)-(B) 순서를 지시함."
+   "echo": "협상의 정의가 (C)의 '공통 이익·갈등 영역 확인'으로 재진술됨."
   }
  },
  {
@@ -21595,24 +21334,13 @@
   "restate": {
    "thesis": "초고층 설계자는 소용돌이 흘림을 줄이려 바람을 교란시킨다.",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
      "en": "skyscraper designers do everything in their powers to confuse the wind",
      "ko": "설계자가 바람을 교란시킴",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "The difference in pressures on the front and back faces of the building gives rise to vortices",
-     "ko": "압력 차가 소용돌이를 만듦",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
-     "en": "Orienting the building so that the longer face of the structure is parallel with prevailing winds can help",
-     "ko": "긴 면을 바람과 나란히 두면 도움",
-     "role": "정답근거",
-     "how": "예시→일반화"
     }
    ],
    "echo": "'confuse the wind' 주제문이 'The difference'(그 압력 차) 앞, 즉 ① 자리에 놓임."
@@ -21934,6 +21662,7 @@
   "restate": {
    "thesis": "도덕은 인간 사회에서 학습되는 문화적 도구다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Moral responsibility is not some universal concept like entropy or temperature",
@@ -22206,6 +21935,7 @@
   "restate": {
    "thesis": "자본주의 광고 속에서 'fresh·natural' 같은 단어가 본래 의미와 분리·변질된다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the nature claimed by the ads was no longer the nature that created the foods",
@@ -22223,10 +21953,10 @@
      "en": "new definitions of words such as “fresh” and “natural”",
      "ko": "'fresh'·'natural'의 새 정의(전통 뜻과 반대)",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "비유→직설"
     }
    ],
-   "echo": "'the decline of the referentials'가 식품 광고 단어들의 '의미 변화'라는 주제로 재진술됨."
+   "echo": "'the decline of the referentials'가 식품 광고 단어들의 '의미 변화'로 재진술됨."
   }
  },
  {
@@ -22483,6 +22213,7 @@
   "restate": {
    "thesis": "사무실 디자인은 직선적 진보가 아니라 반복되는 순환이다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "It might seem that there is a straight line of progress, but it’s a myth",
@@ -22500,7 +22231,7 @@
      "en": "circled back around to essentially the same style",
      "ko": "같은 스타일로 회귀",
      "role": "정답근거",
-     "how": "예시→일반화"
+     "how": "동의어"
     }
    ],
    "echo": "'a cycle that repeats·circled back'가 제목 'What Goes Around Comes Around'로 재진술됨."
@@ -22769,6 +22500,7 @@
   "restate": {
    "thesis": "익숙한 영화 음악은 관객을 낯선 세계에 편안히 진입하게 돕는다.",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "present musical scores that possess familiar structures and cadences",
@@ -23185,8 +22917,9 @@
    ]
   },
   "restate": {
-   "thesis": "진화적으로 필수였던 신체활동을 현대가 없애 건강 문제가 생겼다",
+   "thesis": "진화적으로 필수였던 신체활동을 현대가 없애 문제가 생겼다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "high levels of physical activity were required for survival",
@@ -23196,24 +22929,12 @@
     },
     {
      "en": "most people needed to be physically active",
-     "ko": "한 세기 전에도 활동이 필요했다",
+     "ko": "한 세기 전에도 사람들은 신체활동이 필요했다",
      "role": "재진술",
      "how": "반복"
-    },
-    {
-     "en": "Our modern world has engineered such activity out of our lives",
-     "ko": "현대 세계가 그 활동을 삶에서 없앴다",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
-     "en": "they have also created many problems",
-     "ko": "그 변화가 문제도 낳았다(활동 부족→질병)",
-     "role": "정답근거",
-     "how": "추상화"
     }
    ],
-   "echo": "활동을 없앤 '현대 세계'가 '이런 변화'→'문제'로 재진술되어 순서가 (C)-(A)-(B)로 이어진다"
+   "echo": "'생존에 필수였던 신체활동'을 '한 세기 전에도 활동 필요'로 되풀이한 재진술"
   }
  },
  {
@@ -23528,8 +23249,9 @@
    ]
   },
   "restate": {
-   "thesis": "여럿이 동시에 떠나야 진짜 위협으로 신뢰할 수 있다는 집단 탐지 원리",
+   "thesis": "여럿이 동시에 떠나야 진짜 위협으로 신뢰할 수 있다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the departure of multiple individuals causes a greater escape response",
@@ -23538,19 +23260,13 @@
      "how": "—"
     },
     {
-     "en": "for a number of reasons that have little to do with predation threat",
-     "ko": "한 마리 이탈은 포식과 무관할 수 있다",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
      "en": "a true threat is much more likely to be present",
      "ko": "여럿 동시 이탈은 진짜 위협일 가능성이 높다",
      "role": "정답근거",
      "how": "반복"
     }
    ],
-   "echo": "'더 큰 도피 반응'이라는 연구 결과를 '정보 신뢰성상 타당'으로 재진술한 삽입문이 ③에 들어간다"
+   "echo": "'여럿이 떠나면 큰 도피 반응'을 '동시 이탈은 진짜 위협'으로 재진술한 것이 ③ 근거"
   }
  },
  {
@@ -23830,6 +23546,7 @@
   "restate": {
    "thesis": "감정 이해 능력은 집단 내 소통과 협력을 촉진한다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "particularly relevant in group settings",
@@ -23844,19 +23561,13 @@
      "how": "추상화"
     },
     {
-     "en": "accommodate their own needs as well as the needs of others (i.e. cooperate)",
-     "ko": "자타의 요구를 아우르는 협력",
-     "role": "재진술",
-     "how": "예시→일반화"
-    },
-    {
      "en": "promotes constructive conflict resolution and improved group functioning",
      "ko": "건설적 갈등 해결과 집단 기능 향상",
      "role": "정답근거",
      "how": "반복"
     }
    ],
-   "echo": "'명확한 소통·협력·집단 기능 향상'을 '집단 내 소통과 협력 촉진'으로 재진술한 것이 정답"
+   "echo": "'집단서 유의미'를 '집단 기능 향상'으로 재진술 → 소통·협력 촉진이 요지"
   }
  },
  {
@@ -24183,8 +23894,9 @@
    ]
   },
   "restate": {
-   "thesis": "기술 실업은 부의 분배를 흔들고 일이 주는 정서적 보상마저 없앤다",
+   "thesis": "기술 실업은 부의 분배를 흔들고 정서적 보상마저 없앤다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "the world of work is the main way that we share out the fruits of growth",
@@ -24194,24 +23906,18 @@
     },
     {
      "en": "encouraging an even more extreme version of inequality",
-     "ko": "기술 실업이 불평등을 키운다",
+     "ko": "기술 실업이 불평등을 키운다(분배 붕괴)",
      "role": "재진술",
      "how": "반대구조"
     },
     {
-     "en": "their work is both a source of income and of meaning",
-     "ko": "일은 소득이자 의미의 원천이다",
-     "role": "재진술",
-     "how": "추상화"
-    },
-    {
      "en": "this sense of fulfilment that some people are fortunate to feel in their jobs might be hollowed out as well",
-     "ko": "그 성취감마저 사라질 수 있다",
+     "ko": "일이 주는 성취감마저 사라질 수 있다",
      "role": "정답근거",
-     "how": "반복"
+     "how": "추상화"
     }
    ],
-   "echo": "'결실을 나눔'과 '성취감'을 각각 '분배(A)'와 '보상(B)'으로 재진술한 것이 정답"
+   "echo": "'결실을 나눔'→'분배(A)', '성취감'→'정서적 보상(B)'으로 재진술"
   }
  },
  {
@@ -24507,6 +24213,7 @@
   "restate": {
    "thesis": "생물의 현재 생존 특성은 환경 변화 시 적응의 장애물이 된다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "natural selection is unlikely to lead to the evolution of perfect",
@@ -24522,12 +24229,12 @@
     },
     {
      "en": "may equally be seen as constraints",
-     "ko": "정밀한 적합조차 제약이 될 수 있다(코알라=유칼립투스)",
+     "ko": "정밀한 적합조차 제약이 될 수 있다",
      "role": "정답근거",
      "how": "반복"
     }
    ],
-   "echo": "'미래 진화를 제약'을 '장애물(A)'로, 변화가 일어나는 곳을 '환경(B)'으로 재진술한 것이 정답"
+   "echo": "'미래 진화를 제약'을 '장애물(A)'로 재진술, 변화가 이는 곳=환경(B)"
   }
  },
  {
@@ -24753,8 +24460,9 @@
    ]
   },
   "restate": {
-   "thesis": "신체 이동이 덜 필요해도 이동성·권력을 얻어 사회적 불평등을 낳는다",
+   "thesis": "신체 이동이 덜 필요해도 이동성·권력을 얻어 불평등을 낳는다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "our body becomes more and more a passive non-moving container",
@@ -24764,7 +24472,7 @@
     },
     {
      "en": "they themselves do not need to move at all",
-     "ko": "엘리트는 스스로 움직이지 않고도 권력을 행사한다",
+     "ko": "엘리트는 스스로 움직일 필요가 전혀 없다",
      "role": "재진술",
      "how": "반복"
     },
@@ -24775,7 +24483,7 @@
      "how": "반대구조"
     }
    ],
-   "echo": "'움직일 필요 없음'을 '필요(A)'로, '사회적 배제'를 '불평등(B)'으로 재진술한 것이 정답"
+   "echo": "'움직일 필요 없음'→'필요(A)', '사회적 배제'→'불평등(B)'으로 재진술"
   }
  },
  {
@@ -25046,8 +24754,9 @@
   },
   "recon_opts": true,
   "restate": {
-   "thesis": "문학 소설 인물과 달리 장르물·만화 인물은 재등장하며 크게 변형된다",
+   "thesis": "문학 소설 인물과 달리 장르물·만화 인물은 재등장하며 변형된다",
    "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "less common for characters in literary fiction to reappear in subsequent works",
@@ -25106,7 +24815,7 @@
      ]
     }
    ],
-   "echo": "'재등장'을 '등장(A)'으로, '상당히 변함'을 '변형(B)'으로 재진술한 것이 정답"
+   "echo": "'재등장'을 '등장(A)', '상당히 변함'을 '변형(B)'으로 재진술한 것이 정답"
   }
  },
  {
@@ -25367,8 +25076,9 @@
   },
   "recon_opts": true,
   "restate": {
-   "thesis": "AI가 투자 불균형을 줄여 방치된 질병과 소외된 집단으로 관심을 넓힌다",
+   "thesis": "AI가 투자 불균형을 줄여 방치된 질병과 소외 집단으로 관심을 넓힌다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "pharma devotes more research and development resources to diseases that affect the rich",
@@ -25383,19 +25093,13 @@
      "how": "반복"
     },
     {
-     "en": "broaden the attention of the medical and research communities",
-     "ko": "AI가 의료·연구계의 관심을 넓힌다",
-     "role": "재진술",
-     "how": "반대구조"
-    },
-    {
      "en": "traditionally neglected health issues and among traditionally neglected populations",
-     "ko": "전통적으로 소외된 질병·집단까지 포함",
+     "ko": "전통적으로 소외된 질병·집단",
      "role": "정답근거",
      "how": "추상화"
     }
    ],
-   "echo": "'방치된 질병'을 '방치(A)'로, '소외된 집단'을 '취약 집단(B)'으로 재진술한 것이 정답"
+   "echo": "'방치된 질병'→'방치(A)', '소외된 집단'→'취약 집단(B)'으로 재진술"
   }
  },
  {
@@ -25650,20 +25354,15 @@
   },
   "recon_opts": true,
   "restate": {
-   "thesis": "장인 정신은 다양한 맥락에서 지속되나 발전을 제한하는 요인을 자주 만난다",
+   "thesis": "장인 정신은 지속되나 발전을 제한하는 요인을 자주 만난다",
    "kind": "single",
+   "has_restate": true,
    "chain": [
     {
      "en": "Craftsmanship names an enduring, basic human impulse",
      "ko": "장인 정신은 지속적·근본적 인간 욕구다",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "craftsmanship cuts a far wider swath than skilled manual labor",
-     "ko": "숙련 육체노동을 넘어 다양한 영역에 미친다",
-     "role": "재진술",
-     "how": "예시→일반화"
     },
     {
      "en": "Social and economic conditions, however, often stand in the way",
@@ -25673,12 +25372,12 @@
     },
     {
      "en": "can be weakened by competitive pressure, by frustration, or by obsession",
-     "ko": "여러 요인에 의해 약화될 수 있다",
+     "ko": "경쟁·좌절·집착에 의해 약화될 수 있다",
      "role": "정답근거",
      "how": "반복"
     }
    ],
-   "echo": "'지속적 욕구'를 '지속(A)'으로, '가로막고 약화됨'을 '제한(B)'으로 재진술한 것이 정답"
+   "echo": "'가로막음'을 '약화됨'으로 되풀이한 재진술 → 지속(A)·제한(B)이 정답"
   }
  },
  {
@@ -25905,27 +25604,16 @@
   "restate": {
    "thesis": "로빈은 위치와 친숙한 노래를 연관지어 이웃과 낯선 새를 구별한다",
    "kind": "single",
+   "has_restate": false,
    "chain": [
     {
      "en": "they were able to discriminate between the songs of neighbors and strangers",
      "ko": "이웃과 낯선 새의 노래를 구별했다",
      "role": "주제문",
      "how": "—"
-    },
-    {
-     "en": "played by a loudspeaker placed at the boundary",
-     "ko": "그 이웃 영역 경계에서 틀 때만 차이가 났다",
-     "role": "재진술",
-     "how": "반복"
-    },
-    {
-     "en": "it was treated as the call of a stranger",
-     "ko": "다른 경계선에서 튼 같은 노래는 낯선 새로 취급됐다",
-     "role": "정답근거",
-     "how": "반대구조"
     }
    ],
-   "echo": "경계 위치에 따라 반응이 달라짐을 '위치와 친숙한 노래를 연관짓는다'로 재진술한 것이 정답"
+   "echo": "실험은 경계 위치에 따른 반응 차이를 보일 뿐, 핵심을 되풀이한 재진술은 없다"
   }
  }
 ]
