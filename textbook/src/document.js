@@ -239,6 +239,24 @@ const STRUCTURE_TYPES = [
   '통념 → 반박(반전)', '주장 → 근거·예시', '문제 → 해결(방안)',
   '비교 · 대조', '시간 · 순서(나열)', '예시 → 일반화(결론)',
 ];
+// 재진술 객관식 도우미(html.js 와 동일 규칙 — 같은 회전으로 정답 번호 일치)
+const CIRC = ['①', '②', '③', '④', '⑤'];
+function rotate(arr, n) {
+  const k = ((n % arr.length) + arr.length) % arr.length;
+  return arr.slice(k).concat(arr.slice(0, k));
+}
+function mcFor(pair, i) {
+  const dists = (Array.isArray(pair[2]) ? pair[2] : [])
+    .filter((d) => d && String(d).trim() && d !== pair[1]);
+  if (dists.length < 2) return null;
+  const opts = rotate([pair[1], dists[0], dists[1]], i % 3);
+  return { opts, correct: opts.indexOf(pair[1]) };
+}
+function validParaPairs(p) {
+  return (p.paraphrases || []).filter((x) => Array.isArray(x)
+    && String(x[0] == null ? '' : x[0]).trim() && String(x[1] == null ? '' : x[1]).trim());
+}
+
 // 해석 전 예측 4코너(소재·필자주장·구조·재진술) — 직접 쓰는 체크 목록
 function predictChoiceParas(p) {
   const out = [];
@@ -252,13 +270,31 @@ function predictChoiceParas(p) {
     children: [new TextRun({ text: `☐  ${t}`, size: 21, font: S.FONT })],
   })));
   out.push(B.p('     근거(전환·연결 표현이나 문장 번호): ____________________________'));
-  const paraQ = (p.paraphrases || []).filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim());
+  const paraQ = validParaPairs(p);
   if (paraQ.length) {
-    out.push(B.p('🔗 재진술(같은 말) 찾기 — 아래 표현과 같은 뜻으로 바꿔 쓴 말을 지문에서 찾아 써봐:'));
-    paraQ.forEach(([a]) => out.push(new Paragraph({
-      spacing: { after: 30 }, indent: { left: 240 },
-      children: [new TextRun({ text: `${a}  ≈  ______________________________`, size: 21, font: S.FONT })],
-    })));
+    out.push(B.p('🔗 재진술(같은 말) 찾기 — 각 표현과 같은 뜻인 보기를 하나 골라 ✓ (정답은 지문 끝):'));
+    paraQ.forEach((pair, i) => {
+      const a = pair[0];
+      const mc = mcFor(pair, i);
+      if (!mc) { // 폴백: 직접 쓰는 빈칸
+        out.push(new Paragraph({
+          spacing: { after: 30 }, indent: { left: 240 },
+          children: [new TextRun({ text: `${a}  ≈  ______________________________`, size: 21, font: S.FONT })],
+        }));
+        return;
+      }
+      out.push(new Paragraph({
+        spacing: { before: 40, after: 20 }, indent: { left: 200 },
+        children: [new TextRun({ text: `${a}  →  같은 뜻은?`, bold: true, size: 21, font: S.FONT })],
+      }));
+      mc.opts.forEach((o, k) => out.push(new Paragraph({
+        spacing: { after: 20 }, indent: { left: 440 },
+        children: [
+          new TextRun({ text: `${CIRC[k]}  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
+          new TextRun({ text: o, size: 21, font: S.FONT }),
+        ],
+      })));
+    });
   }
   return out;
 }
@@ -276,9 +312,7 @@ function revealItem(label, main, why) {
   return B.makeBox(GRAMBG, GRAMLINE, kids);
 }
 function predictRevealParas(p) {
-  // 재진술: 양쪽 값이 모두 있는 짝만
-  const pairs = (p.paraphrases || []).filter((x) => Array.isArray(x)
-    && String(x[0] == null ? '' : x[0]).trim() && String(x[1] == null ? '' : x[1]).trim());
+  const pairs = validParaPairs(p);
   const out = [B.pageBreak(), B.h2('✅ 해석 전 예측 — 정답 확인  ·  소재 · 필자 주장 · 글의 구조 · 재진술')];
   if (p.topic) { out.push(revealItem('🔎 소재', p.topic, '')); out.push(B.spacer()); }
   if (p.claim && p.claim.stance) { out.push(revealItem('🗣️ 필자 주장', p.claim.stance, p.claim.why || '')); out.push(B.spacer()); }
@@ -288,14 +322,17 @@ function predictRevealParas(p) {
       spacing: { after: 70 },
       children: [new TextRun({ text: '🔗 재진술 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
     })];
-    pairs.forEach(([a, b]) => kids.push(new Paragraph({
-      spacing: { after: 50 },
-      children: [
+    pairs.forEach((pair, i) => {
+      const [a, b] = pair;
+      const mc = mcFor(pair, i);
+      const kids2 = [
         new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
         new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),
         new TextRun({ text: b, size: 20, color: '4B4B57', font: S.FONT }),
-      ],
-    })));
+      ];
+      if (mc) kids2.push(new TextRun({ text: `   (정답 ${CIRC[mc.correct]})`, bold: true, size: 19, color: GRAM, font: S.FONT }));
+      kids.push(new Paragraph({ spacing: { after: 50 }, children: kids2 }));
+    });
     out.push(B.makeBox(GRAMBG, GRAMLINE, kids)); out.push(B.spacer());
   }
   return out;

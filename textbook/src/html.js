@@ -454,6 +454,18 @@ function css() {
   .structbox + .structbox { margin-top:-4px; }
   .para-q { font-size:11.3px; margin:5px 0; }
   .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }
+  /* 재진술 객관식(초보자용) */
+  .para-mc { margin:7px 0 9px; break-inside:avoid; }
+  .mc-q { font-size:11.8px; margin-bottom:4px; }
+  .mc-qa { font-weight:800; color:${C.ink}; }
+  .mc-ask { color:${C.gram}; font-weight:700; margin-left:5px; font-size:11px; }
+  .mc-opts { display:flex; flex-direction:column; gap:4px; padding-left:4px; }
+  .mc-opt { display:flex; align-items:baseline; gap:7px; background:#fff; border:1px solid #e4ddf5;
+    border-radius:6px; padding:5px 10px; font-size:11.2px; }
+  .mc-num { flex:none; color:${C.gram}; font-weight:800; }
+  .mc-txt { flex:1; }
+  .rv-ans { display:inline-block; background:${C.gram}; color:#fff; font-size:10.5px; font-weight:800;
+    padding:1px 9px; border-radius:11px; margin-left:9px; }
   .struct-reveal { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
     border-radius:8px; padding:10px 14px; margin:12px 0 4px; font-size:11.3px; break-inside:avoid; }
   .sr-h { display:block; font-weight:800; color:${C.gram}; margin-bottom:5px; font-size:12.5px; }
@@ -551,17 +563,42 @@ function structureChoiceCard() {
   </div>`;
 }
 // 🔗 재진술(같은 말) 찾기 — 지문에서 같은 뜻으로 바꿔 쓴 표현 짝짓기(직접)
-// 재진술 짝에서 '왼쪽 표현(a)'이 있는 것만 남긴다(빈 값·형식 오류 제거).
+// 재진술 짝에서 a·b 가 모두 있는 것만 남긴다(빈 값·형식 오류 제거). x[2]=오답 보기.
 function validPairs(p) {
   return (p && p.paraphrases ? p.paraphrases : [])
-    .filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim());
+    .filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim()
+      && String(x[1] == null ? '' : x[1]).trim());
 }
+// 배열을 왼쪽으로 n칸 회전(정답 위치를 문항마다 바꿔 정답이 늘 같은 번호에 오지 않게).
+function rotate(arr, n) {
+  const k = ((n % arr.length) + arr.length) % arr.length;
+  return arr.slice(k).concat(arr.slice(0, k));
+}
+// 객관식 보기 구성: [정답b, 오답1, 오답2] → i 로 회전. 보기 2개 미만이면 null(빈칸 폴백).
+function mcFor(pair, i) {
+  const dists = (Array.isArray(pair[2]) ? pair[2] : []).filter((d) => d && String(d).trim() && d !== pair[1]);
+  if (dists.length < 2) return null;
+  const opts = rotate([pair[1], dists[0], dists[1]], i % 3);
+  return { opts, correct: opts.indexOf(pair[1]) };
+}
+// 🔗 재진술 찾기 — 초보자용 객관식(정답+오답2). 보기 없으면 빈칸 폴백.
 function paraphraseCard(p) {
   const pairs = validPairs(p);
   if (!pairs.length) return ''; // 재진술이 없으면 아예 출력하지 않음
-  const rows = pairs.map(([a]) => `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`).join('');
+  const rows = pairs.map((pair, i) => {
+    const a = pair[0];
+    const mc = mcFor(pair, i);
+    if (!mc) { // 폴백: 직접 쓰는 빈칸
+      return `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`;
+    }
+    const opts = mc.opts.map((o, k) =>
+      `<label class="mc-opt"><span class="mc-num">${CIRCLED[k]}</span><span class="mc-txt">${esc(o)}</span></label>`).join('');
+    return `<div class="para-mc">
+      <div class="mc-q"><span class="mc-qa">${esc(a)}</span><span class="mc-ask">와 같은 뜻은?</span></div>
+      <div class="mc-opts">${opts}</div></div>`;
+  }).join('');
   return `<div class="structbox">
-    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">아래 표현과 '같은 뜻으로 바꿔 쓴 말'을 지문에서 찾아 써봐</span></div>
+    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">각 표현과 '같은 뜻'인 보기를 하나 골라 ✓ (정답은 지문 끝)</span></div>
     ${rows}</div>`;
 }
 // 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 — 별도 페이지, 항목별 카드로 가독성↑
@@ -575,11 +612,15 @@ function predictReveal(p) {
   if (p.claim && p.claim.stance) cards.push(card('🗣️', '필자 주장', `<b class="rv-stance">${esc(p.claim.stance)}</b>`, p.claim.why || ''));
   if (p.structure && p.structure.type) cards.push(card('🧩', '글의 구조', `<b class="rv-stance">${esc(p.structure.type)}</b>`, p.structure.why || ''));
 
-  // 재진술: 양쪽(a·b)이 모두 있는 짝만, 있을 때만 출력
-  const pairs = validPairs(p).filter(([, b]) => String(b == null ? '' : b).trim());
+  // 재진술: 있을 때만 출력. 객관식이면 정답 번호(①②③)도 함께 — 문제 카드와 같은 회전 사용.
+  const pairs = validPairs(p);
   if (pairs.length) {
-    const rows = pairs.map(([a, b]) =>
-      `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}</span></div>`).join('');
+    const rows = pairs.map((pair, i) => {
+      const [a, b] = pair;
+      const mc = mcFor(pair, i);
+      const ans = mc ? `<span class="rv-ans">정답 ${CIRCLED[mc.correct]}</span>` : '';
+      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${ans}</span></div>`;
+    }).join('');
     cards.push(`<div class="rv-item">
       <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
       <div class="rv-paras">${rows}</div></div>`);

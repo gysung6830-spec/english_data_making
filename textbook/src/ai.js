@@ -311,10 +311,15 @@ const PASSAGE_SCHEMA = {
             type: 'array',
             items: {
               type: 'object', additionalProperties: false,
-              required: ['a', 'b'],
+              required: ['a', 'b', 'distractors'],
               properties: {
                 a: { type: 'string', description: '지문 속 표현 (핵심 개념)' },
-                b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현' },
+                b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현 (=객관식 정답)' },
+                distractors: {
+                  type: 'array', minItems: 2, maxItems: 2,
+                  items: { type: 'string' },
+                  description: 'b 와 헷갈리는 오답 보기 2개 — 표면은 비슷하되 뜻은 다른 표현(가능하면 지문 속 표현)',
+                },
               },
             },
           },
@@ -358,6 +363,9 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
      확신이 서는 '진짜' 재진술만 넣고, 하나도 확실치 않으면 [] 로 둬. 품질 > 개수.
   6) 장르 힌트: 논설문·설명문은 재진술이 흔하지만, 서사문(이야기)·편지/안내문·대화문·
      단순 시간순 나열 지문은 재진술이 대개 없어 → 이런 글은 주저 없이 [] 로.
+  7) distractors(오답 보기 2개): 초보자용 객관식 문제로 낼 거야. b(정답)와 헷갈리도록
+     '표면은 비슷하지만 뜻은 다른' 오답 2개를 만들어(가능하면 지문 속 다른 표현을 활용).
+     너무 뻔한(전혀 상관없는) 오답 말고, 진짜 헷갈릴 만한 걸로. 정답 b 와 겹치지 않게.
 
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
@@ -385,7 +393,7 @@ function normalizePassages(aiData) {
     structure: p.structure && p.structure.type
       ? { type: p.structure.type, why: p.structure.why || '' } : undefined,
     paraphrases: Array.isArray(p.paraphrases)
-      ? p.paraphrases.map((x) => [x.a, x.b]) : undefined,
+      ? p.paraphrases.map((x) => [x.a, x.b, Array.isArray(x.distractors) ? x.distractors : []]) : undefined,
     sentences: p.sentences.map((s) => ({
       src: String(s.src || ''),
       en: s.en || '',
@@ -426,8 +434,10 @@ function sanitizePassages(passages) {
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);
     // 재진술: 양쪽 값이 모두 있는 짝만 유지(없으면 빈 배열 → 렌더에서 미출력).
+    //   3번째 원소는 객관식 오답 보기(distractors) — 비어있는 것 제거, 최대 2개.
     const paraphrases = (p.paraphrases || [])
-      .filter((x) => Array.isArray(x) && ne(x[0]) && ne(x[1]));
+      .filter((x) => Array.isArray(x) && ne(x[0]) && ne(x[1]))
+      .map((x) => [x[0], x[1], (Array.isArray(x[2]) ? x[2] : []).filter(ne).slice(0, 2)]);
     return { ...p, paraphrases, sentences };
   }).filter((p) => p.sentences.length > 0);
 }
