@@ -335,14 +335,21 @@ function predictRevealParas(p) {
     })];
     const ans = pairs.length >= 2 ? matchModel(pairs).answer : null;
     pairs.forEach((pair, i) => {
-      const [a, b] = pair;
+      const [a, b, why] = pair;
       const kids2 = [
         new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
         new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),
         new TextRun({ text: b, size: 20, color: '4B4B57', font: S.FONT }),
       ];
       if (ans) kids2.push(new TextRun({ text: `   (${i + 1} → ${RLAB[ans[i]]})`, bold: true, size: 19, color: GRAM, font: S.FONT }));
-      kids.push(new Paragraph({ spacing: { after: 50 }, children: kids2 }));
+      kids.push(new Paragraph({ spacing: { after: why ? 20 : 50 }, children: kids2 }));
+      if (why) kids.push(new Paragraph({
+        spacing: { after: 60 }, indent: { left: 200 },
+        children: [
+          new TextRun({ text: '↳ 왜 같은 말?  ', bold: true, size: 18, color: GRAM, font: S.FONT }),
+          new TextRun({ text: why, size: 18, color: '5B5B66', font: S.FONT }),
+        ],
+      }));
     });
     out.push(B.makeBox(GRAMBG, GRAMLINE, kids)); out.push(B.spacer());
   }

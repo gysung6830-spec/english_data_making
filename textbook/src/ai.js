@@ -311,10 +311,15 @@ const PASSAGE_SCHEMA = {
             type: 'array',
             items: {
               type: 'object', additionalProperties: false,
-              required: ['a', 'b'],
+              required: ['a', 'b', 'why'],
               properties: {
                 a: { type: 'string', description: '지문 속 표현 (핵심 개념)' },
                 b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현' },
+                why: {
+                  type: 'string',
+                  description: "왜 a·b 가 '같은 말'인지 한 줄 설명(반말) — 어떤 치환인지 밝혀. "
+                    + "예: '능동↔수동으로 같은 사건을 뒤집어 말한 거야', '추상적인 흔적을 머리카락·흙이라는 구체 예시로 바꿨어'",
+                },
               },
             },
           },
@@ -358,8 +363,11 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
      확신이 서는 '진짜' 재진술만 넣고, 하나도 확실치 않으면 [] 로 둬. 품질 > 개수.
   6) 장르 힌트: 논설문·설명문은 재진술이 흔하지만, 서사문(이야기)·편지/안내문·대화문·
      단순 시간순 나열 지문은 재진술이 대개 없어 → 이런 글은 주저 없이 [] 로.
+  7) why: 각 짝마다 '왜 이게 같은 말인지'를 한 줄(반말)로 꼭 설명해. 위 6가지 치환 장치 중
+     무엇으로 바뀌었는지 밝혀줘(예: '능동을 수동으로 뒤집어 같은 사건을 말한 거야').
   ※ 이 짝들은 초보자용 '줄 긋기(같은 말끼리 잇기)' 문제로 낼 거야. 그러니 a·b 각각이
-     짧고 자족적인 표현이어야 하고, 여러 짝의 b 끼리 서로 뜻이 뚜렷이 달라야 해(혼동 방지).
+     짧고 자족적인 표현이어야 하고, 여러 짝의 a 끼리·b 끼리 서로 겹치거나 똑같으면 안 돼
+     (뜻이 뚜렷이 달라야 매칭 답이 하나로 정해져 — 중복 금지).
 
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
@@ -387,7 +395,7 @@ function normalizePassages(aiData) {
     structure: p.structure && p.structure.type
       ? { type: p.structure.type, why: p.structure.why || '' } : undefined,
     paraphrases: Array.isArray(p.paraphrases)
-      ? p.paraphrases.map((x) => [x.a, x.b]) : undefined,
+      ? p.paraphrases.map((x) => [x.a, x.b, x.why || '']) : undefined,
     sentences: p.sentences.map((s) => ({
       src: String(s.src || ''),
       en: s.en || '',
@@ -427,10 +435,19 @@ function sanitizePassages(passages) {
         trap: s.trap || '',
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);
-    // 재진술: 양쪽 값이 모두 있는 짝만 유지(없으면 빈 배열 → 렌더에서 미출력).
-    const paraphrases = (p.paraphrases || [])
+    // 재진술: 양쪽 값이 모두 있는 짝만. a·b 가 앞 짝과 겹치거나(중복) a==b 이면 제거
+    //   (줄 긋기 매칭에서 답이 중복/모호해지는 걸 막음). why 는 '왜 같은 말인지' 설명.
+    const seenA = new Set(); const seenB = new Set();
+    const paraphrases = [];
+    (p.paraphrases || [])
       .filter((x) => Array.isArray(x) && ne(x[0]) && ne(x[1]))
-      .map((x) => [x[0], x[1]]);
+      .forEach((x) => {
+        const a = x[0].trim(); const b = x[1].trim();
+        const ka = a.toLowerCase(); const kb = b.toLowerCase();
+        if (ka === kb || seenA.has(ka) || seenB.has(kb) || seenA.has(kb) || seenB.has(ka)) return;
+        seenA.add(ka); seenB.add(kb);
+        paraphrases.push([a, b, ne(x[2]) ? x[2].trim() : '']);
+      });
     return { ...p, paraphrases, sentences };
   }).filter((p) => p.sentences.length > 0);
 }

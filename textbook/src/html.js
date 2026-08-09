@@ -498,6 +498,9 @@ function css() {
   .rv-a { flex:1; font-weight:700; color:${C.ink}; }
   .rv-eq { flex:none; color:${C.gram}; font-weight:800; }
   .rv-b { flex:1; color:#4b4b57; }
+  .rv-why-para { margin:1px 0 3px; padding:4px 10px 5px; font-size:10.6px; line-height:1.55;
+    color:#5b5b66; background:#faf9fe; border:1px dashed #d6cdf0; border-radius:6px; }
+  .rv-why-ic { font-weight:800; color:${C.gram}; margin-right:4px; }
   `;
 }
 
@@ -623,9 +626,10 @@ function predictReveal(p) {
   if (pairs.length) {
     const ans = pairs.length >= 2 ? matchModel(pairs).answer : null; // left i → 오른쪽 슬롯 index
     const rows = pairs.map((pair, i) => {
-      const [a, b] = pair;
+      const [a, b, why] = pair;
       const tag = ans ? `<span class="rv-ans">${i + 1} → ${RLAB[ans[i]]}</span>` : '';
-      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>`;
+      const whyRow = why ? `<div class="rv-why-para"><span class="rv-why-ic">↳ 왜 같은 말?</span> ${esc(why)}</div>` : '';
+      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>${whyRow}`;
     }).join('');
     cards.push(`<div class="rv-item">
       <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
