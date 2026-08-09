@@ -14373,7 +14373,8 @@
    "to": "satisfy other people’s demands",
    "copies": []
   },
-  "uline": "an empty inbox"
+  "uline": "an empty inbox",
+  "daepyo": true
  },
  {
   "key": "2023-09|22",
@@ -23064,5 +23065,227 @@
    ]
   },
   "recon_opts": true
+ },
+ {
+  "key": "2022-06|34",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Emma Brindley has investigated the responses of European robins to the songs of neighbors and strangers.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Despite the large and complex song repertoire of European robins, they were able to discriminate between the songs of neighbors and strangers.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "양보",
+      "word": "Despite"
+     }
+    ]
+   },
+   {
+    "t": "When they heard a tape recording of a stranger, they began to sing sooner, sang more songs, and overlapped their songs with the playback more often than they did on hearing a neighbor’s song.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "As Brindley suggests, the overlapping of song may be an aggressive response.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "However, this difference in responding to neighbor versus stranger occurred only when the neighbor’s song was played by a loudspeaker placed at the boundary between that neighbor’s territory and the territory of the bird being tested.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "However"
+     },
+     {
+      "sig": "한정",
+      "word": "only"
+     }
+    ]
+   },
+   {
+    "t": "If the same neighbor’s song was played at another boundary, one separating the territory of the test subject from another neighbor, it was treated as the call of a stranger.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "조건",
+      "word": "If"
+     }
+    ]
+   },
+   {
+    "t": "Not only does this result demonstrate that , but it also shows that the choice of songs used in playback experiments is highly important. [3점]",
+    "role": "yellow",
+    "tags": [],
+    "pos": "끝문장"
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "이웃 대 낯선 새 반응 차이는 <b>그 이웃 영역 경계</b>에서 노래를 틀 때만 나타났다",
+     "an": "— 위치가 조건(However·only)"
+    },
+    {
+     "ko": "같은 이웃 노래라도 <b>다른 경계</b>에서 틀면 <b>낯선 새로 취급</b>됐다",
+     "an": "— 장소 바뀌면 친숙함이 사라짐"
+    },
+    {
+     "ko": "따라서 이 결과는 <b>~라는 것</b>을 보여준다 (빈칸)",
+     "an": "— 빈칸: 무엇을 입증하나?"
+    }
+   ],
+   "concl": "→ 같은 노래도 장소가 달라지면 낯설게 반응: 로빈은 <b>위치와 친숙한 노래를 연관</b>짓는다 = <b>④</b>",
+   "gnote": "회색(복잡한 레퍼토리·공격적 반응)은 배경 설명; 핵심은 '장소가 바뀌면 같은 노래도 낯설게 반응'."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "However, this difference in responding to neighbor versus stranger occurred",
+      "hl0"
+     ],
+     [
+      "only when the neighbor’s song was played by a loudspeaker",
+      "hl1"
+     ],
+     [
+      "placed at the boundary between that neighbor’s territory",
+      "hl2"
+     ],
+     [
+      "and the territory of the bird being tested.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "하지만, 이웃 대 낯선 새에 반응하는 이 차이가 나타났다",
+      "hl0"
+     ],
+     [
+      "오직 그 이웃의 노래가 확성기로 재생될 때만",
+      "hl1"
+     ],
+     [
+      "그 이웃의 영역 사이 경계에 놓인,",
+      "hl2"
+     ],
+     [
+      "그리고 테스트받는 새의 영역.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 차이는 '그 이웃의 경계'에서 틀 때만(only) 나타남 → 위치 조건"
+   },
+   {
+    "en": [
+     [
+      "If the same neighbor’s song was played at another boundary,",
+      "hl0"
+     ],
+     [
+      "one separating the territory of the test subject from another neighbor,",
+      "hl1"
+     ],
+     [
+      "it was treated as the call of a stranger.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "만약 같은 이웃의 노래가 다른 경계에서 재생되면,",
+      "hl0"
+     ],
+     [
+      "그것은 실험 대상의 영역을 다른 이웃과 나누는 경계인데,",
+      "hl1"
+     ],
+     [
+      "그것은 낯선 새의 울음으로 취급되었다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 같은 노래도 장소(경계)가 바뀌면 낯선 새로 취급됨"
+   },
+   {
+    "en": [
+     [
+      "Not only does this result demonstrate that ,",
+      "hl0"
+     ],
+     [
+      "but it also shows that the choice of songs",
+      "hl1"
+     ],
+     [
+      "used in playback experiments is highly important.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 결과는 ~라는 것을 입증할 뿐만 아니라,",
+      "hl0"
+     ],
+     [
+      "그것은 또한 노래의 선택이 ~라는 것도 보여준다",
+      "hl1"
+     ],
+     [
+      "재생 실험에서 사용되는, 매우 중요하다는.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "variety and complexity characterize the robins’ songs",
+    "verdict": "x",
+    "jd": "✘ 함정(large and complex repertoire) 재활용, 핵심 아님"
+   },
+   {
+    "n": 2,
+    "tx": "song volume affects the robins’ aggressive behavior",
+    "verdict": "x",
+    "jd": "✘ 없음(음량 언급 없음)"
+   },
+   {
+    "n": 3,
+    "tx": "the robins’ poor territorial sense is a key to survival",
+    "verdict": "x",
+    "jd": "✘ 반대(영역 감각이 오히려 예리함)"
+   },
+   {
+    "n": 4,
+    "tx": "the robins associate locality with familiar songs",
+    "verdict": "ok",
+    "jd": "✔ 근거: 같은 노래도 장소 바뀌면 낯설게 반응 = 위치와 친숙한 노래 연관"
+   },
+   {
+    "n": 5,
+    "tx": "the robins are less responsive to recorded songs",
+    "verdict": "x",
+    "jd": "✘ 반대(녹음에 오히려 반응함)"
+   }
+  ],
+  "opt_line": "<span class=\"xo\">①</span>노래의 다양성·복잡성이 특징 <span class=\"xo\">②</span>음량이 공격성에 영향 <span class=\"xo\">③</span>빈약한 영역 감각이 생존의 열쇠 · <span class=\"co\">④정답</span> 로빈은 위치와 친숙한 노래를 연관짓는다 <span class=\"xo\">⑤</span>녹음된 노래에 덜 반응",
+  "paraphrase": {
+   "from": "at the boundary between that neighbor’s territory · at another boundary → treated as a stranger",
+   "to": "associate locality with familiar songs",
+   "copies": []
+  },
+  "daepyo": true
  }
 ]

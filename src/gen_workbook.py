@@ -427,7 +427,7 @@ def render_spread(rec, c, idx):
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
-      {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="psrc">평가원 {exam_src(rec.get("exam_id",""))} {num}번</span><span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
+      {'<span class="daepyo">⭐ 대표</span>' if c.get("daepyo") else ''}{'<span class="pt">'+pts+'</span>' if pts else ''}<span class="psrc">평가원 {exam_src(rec.get("exam_id",""))} {num}번</span><span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
       <div class="pmain">
         <div class="how">{how}</div>
@@ -712,9 +712,17 @@ def onepass_page(seqtype):
     </section>'''
 
 
+DAEPYO = ["2022-06|21", "2022-06|34"]  # 대표 문항 — 유형편 각 유형 맨 앞에 배치
+
+
 def build(n=80):
     bank = [json.loads(l) for l in BANK.read_text(encoding="utf-8").splitlines() if l.strip()]
+    bankmap = {f'{r["exam_id"]}|{r["num"]}': r for r in bank}
     picked = select(bank, n)
+    pk = {f'{r["exam_id"]}|{r["num"]}' for r in picked}
+    for k in DAEPYO:  # 대표 강제 포함
+        if k not in pk and k in bankmap:
+            picked.append(bankmap[k]); pk.add(k)
     content = {}
     if CONTENT.exists():
         for c in json.loads(CONTENT.read_text(encoding="utf-8")):
@@ -725,6 +733,8 @@ def build(n=80):
     groups = {}
     for r in picked:
         groups.setdefault(r["band"], []).append(r)
+    for b in groups:  # 대표를 각 유형 맨 앞으로
+        groups[b].sort(key=lambda r: 0 if f'{r["exam_id"]}|{r["num"]}' in DAEPYO else 1)
     present_bands = [b for b in BAND_ORDER if b in groups]
     body, idx, full = [], 0, 0
     for si, b in enumerate(present_bands, 1):
@@ -881,6 +891,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .pbanner .ty{ font-size:15px; font-weight:800; }
 .pbanner .pt{ font-size:9px; font-weight:700; background:var(--trap); padding:1px 8px; border-radius:9px; }
 .pbanner .psrc{ font-size:9px; font-weight:700; color:#12543d; background:#ffe9a8; padding:2px 9px; border-radius:9px; }
+.pbanner .daepyo{ font-size:9px; font-weight:800; color:#fff; background:#cd5049; padding:2px 9px; border-radius:9px; }
 .pbanner .step{ margin-left:auto; font-size:9px; font-weight:800; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:11px; }
 .pbody{ border:2px solid var(--ink-d); border-top:none; border-radius:0 0 9px 9px; padding:15px 17px; display:flex; gap:15px; min-height:600px; }
 .pmain{ flex:2; display:flex; flex-direction:column; }
