@@ -222,35 +222,51 @@ function structureTypesPageParas() {
   return out;
 }
 
-// 필자 입장(긍정/부정/중립) 신호 어휘 안내 페이지
-const STANCE_GUIDE_DOCX = [
-  ['👍 긍정 — 필자가 좋게 봄', '279A52',
-    'benefit · beneficial · valuable · crucial · essential · vital · effective · advantage · merit · improve · enhance · reinforce · support · promising · desirable · in favor of',
-    "'좋다·중요하다·이롭다·권장한다' 느낌의 평가어 → 그 대상에 긍정"],
-  ['👎 부정 — 필자가 비판·경계', 'C5533F',
-    'drawback · downside · flaw · weakness · problem · harmful · worthless · misleading · fail · lack · neglect · ignore · overlook · dismiss · criticize · doubt · mere · side effect · myth',
-    "'문제·결함·해롭다·무시·실패·비판' 느낌의 평가어 → 그 대상에 부정"],
-  ['🤔 중립 · 유보 — 단정하지 않음', '6B7280',
-    'may · might · tend to · some · often · not necessarily · it depends · on the other hand · (사실을) describe · explain',
-    '평가 없이 사실만 설명하거나 양쪽을 견주기만 하면 → 중립'],
-];
+// 필자 입장 신호 어휘 — 김은아영어Lab VOCA(DAY 31·32·33) 전량, 뉘앙스별 그룹.
+const STANCE_POS_DOCX = ['이익·유익', 'benefit · beneficial · fruitful · merit · valuable · priceless · work(효과가 있다)',
+  '중요·핵심·필수', 'core · key · point · critical · crucial · essential · integral · indispensable · necessary · fundamental · vital · significant · substantial · prime · principal · prevailing · matter · count · be of importance · relevant',
+  '집중·주목', 'center on · concentrate on · focus on · attend to',
+  '강조·강화·향상', 'emphasize · stress · enhance · reinforce · prioritize',
+  '필요·추구·선호', 'need · require · seek to V · fond of · desirable · in favor of',
+  '강조 구문·부사', 'only · invariably · substantially · nothing but · not just A but also B · without A · It is … that V · win out'];
+const STANCE_NEG_DOCX = ['버리다·제거', 'abandon · discard · scrap · drop · remove · eliminate · discharge · leave out · rule out · removal',
+  '무시·간과', 'disregard · ignore · overlook · neglect · dismiss',
+  '부족·부재·결핍', 'lack · shortage · absence · absent from · free from · incapable of · of little account',
+  '제한·회피·벗어남', 'restrict · limit · avoid · sidestep · bypass · shy away from · deviate from · break away from · move away from · disengage from · apart from · aside from · departure from · quit · detach',
+  '거절·거부·금지', 'refuse · reject · resist · exclude · deny · say no to · disapprove · discourage · forbid',
+  '방해·차단·단절', 'interfere with · stand in the way of · cut off · break with · displace · stop/prevent/keep A from Ving',
+  '실패·상실·약화', 'fail · lose out · diminish',
+  '비판·의심·이의', 'criticize · question · doubt · obscure · challenge',
+  '무가치·문제·결함', 'drawback · downside · side effect · flaw · myth · misleading · worthless · irrelevant · unnecessary · poor · costly · challenging · mere',
+  '무관·독립', 'have nothing to do with · have no bearing on · have no idea of · independent of A · independently · immune to · isolation',
+  '부정 부사·구문', "hardly · rarely · by no means · don't bother · unlikely to V · allergic to · erroneously · other than · at the price[expense] of · It is of no use to V · It's not so much … but ~ · strip[free] A of B · reluctance · exception"];
+const STANCE_NEU_DOCX = ['유보·추측(단정 회피)', 'may · might · can · tend to · seem · appear · suggest · some · often · in some cases · not necessarily',
+  '양면·균형 제시', 'on one hand … on the other hand · while ~ · both A and B · it depends · vary',
+  '객관 서술(관찰·보고)', 'describe · explain · report · note · observe · according to · studies show (해석 없이 나열만)'];
+function stancePanelParas(title, color, arr, note) {
+  const out = [new Paragraph({
+    spacing: { before: 120, after: note ? 30 : 50 },
+    children: [new TextRun({ text: title, bold: true, size: 22, color, font: S.FONT })],
+  })];
+  if (note) out.push(new Paragraph({ spacing: { after: 40 }, indent: { left: 200 }, children: [new TextRun({ text: note, size: 17, color: '555555', font: S.FONT })] }));
+  for (let i = 0; i < arr.length; i += 2) {
+    out.push(new Paragraph({
+      spacing: { after: 40 }, indent: { left: 200 },
+      children: [
+        new TextRun({ text: `${arr[i]}   `, bold: true, size: 17, color, font: S.FONT }),
+        new TextRun({ text: arr[i + 1], size: 18, font: S.FONT }),
+      ],
+    }));
+  }
+  return out;
+}
 function stanceTypesPageParas() {
   const out = [B.h1('필자의 입장 — 어떤 어휘로 드러나나?')];
-  out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘(형용사·동사)’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다.', { bold: true }));
-  STANCE_GUIDE_DOCX.forEach(([name, color, words, rule]) => {
-    out.push(new Paragraph({
-      spacing: { before: 60, after: 15 }, indent: { left: 200 },
-      children: [new TextRun({ text: name, bold: true, size: 22, color, font: S.FONT })],
-    }));
-    out.push(new Paragraph({
-      spacing: { after: 10 }, indent: { left: 360 },
-      children: [new TextRun({ text: words, bold: true, size: 19, font: S.FONT })],
-    }));
-    out.push(new Paragraph({
-      spacing: { after: 70 }, indent: { left: 360 },
-      children: [new TextRun({ text: rule, size: 18, color: '555555', font: S.FONT })],
-    }));
-  });
+  out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다. (김은아영어Lab VOCA 기반)', { bold: true }));
+  out.push(...stancePanelParas('👍 긍정 · 중요 — 필자가 좋게·중요하게 봄', '279A52', STANCE_POS_DOCX));
+  out.push(...stancePanelParas('👎 부정 — 필자가 비판·경계·배제·부정', 'C5533F', STANCE_NEG_DOCX));
+  out.push(...stancePanelParas('🤔 중립 — 좋다·나쁘다 평가가 없을 때', '6B7280', STANCE_NEU_DOCX,
+    '긍정·부정 평가어가 뚜렷이 없고, 판단을 유보하거나 양쪽을 균형 있게 보여주면 중립이다(한쪽으로 몰지 않음).'));
   out.push(B.p('지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라본다.'));
   out.push(B.pageBreak());
   return out;

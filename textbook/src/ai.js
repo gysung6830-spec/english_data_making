@@ -354,7 +354,9 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
       improve·enhance·support·in favor of 같은 칭찬·권장 → 그 대상에 긍정.
     · 부정 신호: drawback·flaw·weakness·problem·harmful·worthless·misleading·fail·lack·
       neglect·ignore·overlook·criticize·doubt·mere·side effect·myth 같은 비판·경계 → 부정.
-    · 중립 신호: may·tend to·some·often·not necessarily 등 유보, 또는 사실 설명·양쪽 비교만 → 중립.
+    · 중립: 긍정·부정 평가어가 뚜렷이 '없고', ⑴ 유보·추측(may·might·tend to·seem·some·often),
+      ⑵ 양쪽 균형 제시(on one hand…on the other·both A and B·it depends),
+      ⑶ 평가 없는 객관 서술(describe·explain·report·according to)일 때만 중립. 한쪽으로 몰면 중립 아님.
   이런 어휘가 지문에 있으면 그걸 근거로 입장을 정하고, why 에 '어떤 평가 어휘/문장을 보고
   그렇게 판단했는지'를 한 줄로 짚어줘(예: "'valuable·should'로 권장하니 긍정").
 - structure: 이 글의 구조. type 은 [통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) /

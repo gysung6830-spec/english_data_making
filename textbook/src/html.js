@@ -187,30 +187,46 @@ function structurePageHtml() {
     <div class="struct-reveal"><span class="sr-h">🧩 이렇게 써먹어</span> 지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰봐.</div>
   </section>`;
 }
-// 필자 입장(긍정/부정/중립) 신호 어휘 안내 페이지 — 평가어를 보고 필자 태도 판단
-const STANCE_GUIDE = [
-  ['pos', '👍', '긍정 — 필자가 좋게 봄',
-    'benefit · beneficial · valuable · crucial · essential · vital · effective · advantage · merit · improve · enhance · reinforce · promote · support · promising · desirable · in favor of',
-    "'좋다 · 중요하다 · 이롭다 · 권장한다' 느낌의 평가어가 보이면 → 그 대상에 긍정"],
-  ['neg', '👎', '부정 — 필자가 비판·경계',
-    'drawback · downside · flaw · weakness · shortcoming · problem · harmful · worthless · misleading · ineffective · fail · lack · neglect · ignore · overlook · dismiss · criticize · doubt · mere · side effect · myth',
-    "'문제 · 결함 · 해롭다 · 무시 · 실패 · 비판' 느낌의 평가어가 보이면 → 그 대상에 부정"],
-  ['neu', '🤔', '중립 · 유보 — 단정하지 않음',
-    'may · might · could · tend to · some · often · not necessarily · it depends · on the other hand · (사실을) describe · explain',
-    '평가 없이 사실만 설명하거나 양쪽을 견주기만 하면 → 중립'],
-];
+// 필자 입장 신호 어휘 — 김은아영어Lab VOCA(DAY 31 긍정·중요 / DAY 32·33 부정) 전량을
+// 뉘앙스별로 묶어 수록. 중립은 '평가어 없음 + 유보/양면'을 명확한 예로 제시.
+const STANCE_POS = ['이익·유익', 'benefit · beneficial · fruitful · merit · valuable · priceless · work(효과가 있다)',
+  '중요·핵심·필수', 'core · key · point · critical · crucial · essential · integral · indispensable · necessary · fundamental · vital · significant · substantial · prime · principal · prevailing · matter · count · be of importance · relevant',
+  '집중·주목', 'center on · concentrate on · focus on · attend to',
+  '강조·강화·향상', 'emphasize · stress · enhance · reinforce · prioritize',
+  '필요·추구·선호', 'need · require · seek to V · fond of · desirable · in favor of',
+  '강조 구문·부사', 'only · invariably · substantially · nothing but · not just A but also B · without A · It is … that V · win out'];
+const STANCE_NEG = ['버리다·제거', 'abandon · discard · scrap · drop · remove · eliminate · discharge · leave out · rule out · removal',
+  '무시·간과', 'disregard · ignore · overlook · neglect · dismiss',
+  '부족·부재·결핍', 'lack · shortage · absence · absent from · free from · incapable of · of little account',
+  '제한·회피·벗어남', 'restrict · limit · avoid · sidestep · bypass · shy away from · deviate from · break away from · move away from · disengage from · apart from · aside from · departure from · quit · detach',
+  '거절·거부·금지', 'refuse · reject · resist · exclude · deny · say no to · disapprove · discourage · forbid',
+  '방해·차단·단절', 'interfere with · stand in the way of · cut off · break with · displace · stop/prevent/keep A from Ving',
+  '실패·상실·약화', 'fail · lose out · diminish',
+  '비판·의심·이의', 'criticize · question · doubt · obscure · challenge',
+  '무가치·문제·결함', 'drawback · downside · side effect · flaw · myth · misleading · worthless · irrelevant · unnecessary · poor · costly · challenging · mere',
+  '무관·독립', 'have nothing to do with · have no bearing on · have no idea of · independent of A · independently · immune to · isolation',
+  '부정 부사·구문', "hardly · rarely · by no means · don't bother · unlikely to V · allergic to · erroneously · other than · at the price[expense] of · It is of no use to V · It's not so much … but ~ · strip[free] A of B · reluctance · exception"];
+const STANCE_NEU = ['유보·추측(단정 회피)', 'may · might · can · tend to · seem · appear · suggest · some · often · in some cases · not necessarily',
+  '양면·균형 제시', 'on one hand … on the other hand · while ~ · both A and B · it depends · vary',
+  '객관 서술(관찰·보고)', 'describe · explain · report · note · observe · according to · studies show (해석 없이 나열만)'];
+function stanceGroupsHtml(arr) {
+  let h = '';
+  for (let i = 0; i < arr.length; i += 2) {
+    h += `<div class="sg-row"><span class="sg-lab">${esc(arr[i])}</span><span class="sg-words">${esc(arr[i + 1])}</span></div>`;
+  }
+  return h;
+}
 function stancePageHtml() {
-  const cards = STANCE_GUIDE.map(([cls, ic, name, words, rule]) => `<div class="cutcard stance ${cls}">
-    <div class="cut-top"><span class="cut-n ${cls}">${ic}</span><span class="cut-name">${esc(name)}</span></div>
-    <div class="stance-words">${esc(words)}</div>
-    <div class="cut-rule">${esc(rule)}</div>
-  </div>`).join('');
   return `<section class="chapter">
     <div class="chhead"><span class="daypill key">필자 입장 신호</span><span class="tagpill">긍정·부정 어휘로 태도 읽기</span></div>
     <h1>필자의 입장 — 어떤 어휘로 드러나나?</h1>
-    <div class="chsub">필생보 · 필자가 대상을 '좋게 보나 / 나쁘게 보나'는 평가 어휘에서 새어 나온다</div>
-    <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘(형용사·동사)</b>를 잡으면 입장이 보여. 그리고 진짜 주장은 보통 <b>마지막 문장</b>(therefore · thus · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
-    <div class="cutgrid">${cards}</div>
+    <div class="chsub">필생보 · 김은아영어Lab VOCA 기반 · 필자가 대상을 '좋게 / 나쁘게' 보는지는 평가 어휘에서 새어 나온다</div>
+    <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘</b>를 잡으면 입장이 보여. 진짜 주장은 보통 <b>마지막 문장</b>(therefore · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
+    <div class="spanel pos"><div class="sp-head">👍 긍정 · 중요 — 필자가 좋게·중요하게 봄</div>${stanceGroupsHtml(STANCE_POS)}</div>
+    <div class="spanel neg"><div class="sp-head">👎 부정 — 필자가 비판·경계·배제·부정</div>${stanceGroupsHtml(STANCE_NEG)}</div>
+    <div class="spanel neu"><div class="sp-head">🤔 중립 — 좋다·나쁘다 평가가 없을 때</div>
+      <div class="sp-note">긍정·부정 평가어가 <b>뚜렷이 없고</b>, 아래처럼 <b>판단을 유보</b>하거나 <b>양쪽을 균형 있게</b> 보여주면 중립이야. (한쪽으로 몰지 않음)</div>
+      ${stanceGroupsHtml(STANCE_NEU)}</div>
     <div class="pcatch"><span class="pcatch-h">✅ 이렇게 써먹어</span> 지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라봐. 정답은 지문 끝에서 맞춰보고.</div>
   </section>`;
 }
@@ -464,12 +480,18 @@ function css() {
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
   .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
   .cut-n.gram { background:${C.gram}; }
-  /* 필자 입장 신호어 카드(긍정=초록 / 부정=빨강 / 중립=회색) */
-  .cutcard.stance.pos { border-left-color:${C.teal}; background:${C.mint}; }
-  .cutcard.stance.neg { border-left-color:${C.key}; background:${C.keyBg}; }
-  .cutcard.stance.neu { border-left-color:${C.sub}; background:#f4f5f6; }
-  .cut-n.pos { background:${C.teal}; } .cut-n.neg { background:${C.key}; } .cut-n.neu { background:${C.sub}; }
-  .stance-words { font-size:11px; font-weight:700; color:#333; line-height:1.7; margin:3px 0 5px; }
+  /* 필자 입장 신호어 — 뉘앙스별 그룹 패널(긍정=초록 / 부정=빨강 / 중립=회색) */
+  .spanel { border:1px solid ${C.line}; border-radius:9px; padding:0 0 8px; margin:11px 0; overflow:hidden; }
+  .spanel .sp-head { font-weight:800; font-size:12.5px; color:#fff; padding:7px 13px; margin-bottom:6px; }
+  .spanel.pos { border-color:${C.greenLine}; } .spanel.pos .sp-head { background:${C.teal}; }
+  .spanel.neg { border-color:${C.trapLine}; } .spanel.neg .sp-head { background:${C.key}; }
+  .spanel.neu { border-color:#d6d8dc; } .spanel.neu .sp-head { background:${C.sub}; }
+  .spanel.pos { background:${C.mint}; } .spanel.neg { background:${C.keyBg}; } .spanel.neu { background:#f4f5f6; }
+  .sp-note { font-size:10.5px; color:#555; padding:0 13px 4px; }
+  .sg-row { display:flex; gap:9px; padding:4px 13px; align-items:baseline; }
+  .sg-row + .sg-row { border-top:1px dashed rgba(0,0,0,.06); }
+  .sg-lab { flex:none; width:100px; font-weight:800; font-size:10px; color:${C.ink}; }
+  .sg-words { flex:1; font-size:10.6px; font-weight:600; color:#333; line-height:1.6; }
   .st-sig { font-size:10px; color:${C.gram}; font-weight:700; margin:2px 0; line-height:1.45; }
   .daypill.gram { background:${C.gram}; }
   .goal.gram { background:${C.gramBg}; border-left-color:${C.gram}; }
