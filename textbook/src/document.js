@@ -240,19 +240,16 @@ const STRUCTURE_TYPES = [
   '통념 → 반박(반전)', '주장 → 근거·예시', '문제 → 해결(방안)',
   '비교 · 대조', '시간 · 순서(나열)', '예시 → 일반화(결론)',
 ];
-// 재진술 줄 긋기(매칭) 도우미 — html.js 와 동일 규칙(오른쪽 1칸 밀어 섞음, 정답 기호 일치)
-const RLAB = ['㉮', '㉯', '㉰', '㉱', '㉲', '㉳'];
-function validParaPairs(p) {
-  return (p.paraphrases || []).filter((x) => Array.isArray(x)
-    && String(x[0] == null ? '' : x[0]).trim() && String(x[1] == null ? '' : x[1]).trim());
-}
-function matchModel(pairs) {
-  const n = pairs.length;
-  const slotPair = pairs.map((_, k) => (k + 1) % n);
-  const left = pairs.map((pr, i) => ({ num: i + 1, a: pr[0] }));
-  const right = slotPair.map((pi, k) => ({ lab: RLAB[k], b: pairs[pi][1] }));
-  const answer = pairs.map((_, i) => (i - 1 + n) % n); // left i → 오른쪽 슬롯 index
-  return { left, right, answer };
+// 재진술 '사슬' 도우미 — html.js 와 동일 규칙(핵심어 하나가 A→A′→A″ 로 반복, links 2개 이상만)
+function validChains(p) {
+  return (Array.isArray(p.paraphrases) ? p.paraphrases : [])
+    .map((ch) => ({
+      keyword: ch && ch.keyword ? String(ch.keyword) : '',
+      why: ch && ch.why ? String(ch.why) : '',
+      links: (ch && Array.isArray(ch.links) ? ch.links : [])
+        .filter((v) => v && String(v).trim()).map((v) => String(v).trim()),
+    }))
+    .filter((ch) => ch.links.length >= 2);
 }
 
 // 해석 전 예측 4코너(소재·필자주장·구조·재진술) — 직접 쓰는 체크 목록
@@ -270,46 +267,29 @@ function predictChoiceParas(p) {
     children: [new TextRun({ text: `☐  ${t}`, size: 21, font: S.FONT })],
   })));
   out.push(B.p('     근거(전환·연결 표현이나 문장 번호): ____________________________'));
-  const paraQ = validParaPairs(p);
-  if (paraQ.length >= 2) {
-    out.push(B.p("🔗 재진술(같은 말) 찾기 — 왼쪽 표현과 '같은 뜻'인 오른쪽을 선으로 이어봐 (정답은 지문 끝):"));
-    out.push(...matchTableParas(paraQ));
-  } else if (paraQ.length === 1) {
-    out.push(B.p("🔗 재진술(같은 말) 확인 — 아래 두 표현이 같은 뜻인지 확인해봐 (정답은 지문 끝):"));
-    out.push(new Paragraph({
-      spacing: { after: 30 }, indent: { left: 240 },
-      children: [new TextRun({ text: `${paraQ[0][0]}   ≈   ${paraQ[0][1]}`, bold: true, size: 21, font: S.FONT })],
-    }));
+  const chains = validChains(p);
+  if (chains.length) {
+    out.push(B.p('🔗 재진술 사슬 찾기 — 첫 표현이 지문에서 같은 뜻으로 어떻게 다시 나오는지 순서대로 찾아 써봐 (정답은 지문 끝):'));
+    chains.forEach((ch) => out.push(...chainQuestionParas(ch)));
   }
   return out;
 }
-// 줄 긋기용 2열 표: [왼쪽 번호+a] | [오른쪽 기호+b]. 학생이 손으로 선을 그음.
-function matchTableParas(pairs) {
-  const m = matchModel(pairs);
-  const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
-  const noBorders = {
-    top: noBorder, bottom: noBorder, left: noBorder, right: noBorder,
-    insideHorizontal: noBorder, insideVertical: noBorder,
-  };
-  const cell = (children) => new TableCell({
-    width: { size: 50, type: WidthType.PERCENTAGE }, borders: noBorders,
-    margins: { top: 60, bottom: 60, left: 120, right: 120 },
-    children,
+// 재진술 사슬 문제: [핵심어] 첫 표현 A → ______ → ______ (학생이 지문에서 찾아 씀)
+function chainQuestionParas(ch) {
+  const out = [];
+  if (ch.keyword) {
+    out.push(new Paragraph({
+      spacing: { before: 40, after: 15 }, indent: { left: 200 },
+      children: [new TextRun({ text: `[ ${ch.keyword} ]`, bold: true, size: 20, color: GRAM, font: S.FONT })],
+    }));
+  }
+  const kids = [new TextRun({ text: ch.links[0], bold: true, size: 21, font: S.FONT })];
+  ch.links.slice(1).forEach(() => {
+    kids.push(new TextRun({ text: '  →  ', bold: true, size: 21, color: GRAM, font: S.FONT }));
+    kids.push(new TextRun({ text: '________________', size: 21, font: S.FONT }));
   });
-  const leftPara = (x) => new Paragraph({ children: [
-    new TextRun({ text: `${x.num}.  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
-    new TextRun({ text: x.a, bold: true, size: 21, font: S.FONT }),
-    new TextRun({ text: '   ●', size: 21, color: GRAM, font: S.FONT }),
-  ] });
-  const rightPara = (x) => new Paragraph({ children: [
-    new TextRun({ text: '●   ', size: 21, color: GRAM, font: S.FONT }),
-    new TextRun({ text: `${x.lab}  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
-    new TextRun({ text: x.b, size: 21, color: '3F3F46', font: S.FONT }),
-  ] });
-  const rows = m.left.map((lx, i) => new TableRow({
-    children: [cell([leftPara(lx)]), cell([rightPara(m.right[i])])],
-  }));
-  return [new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: noBorders, rows }), B.spacer()];
+  out.push(new Paragraph({ spacing: { after: 40 }, indent: { left: 240 }, children: kids }));
+  return out;
 }
 // 지문 끝: 해석 전 예측 정답 공개 — 별도 페이지 + 항목별 카드(가독성↑)
 const GRAM = '6A57B0'; const GRAMBG = 'F0EDF9'; const GRAMLINE = 'DDD4F2';
@@ -325,41 +305,32 @@ function revealItem(label, main, why) {
   return B.makeBox(GRAMBG, GRAMLINE, kids);
 }
 function predictRevealParas(p) {
-  const pairs = validParaPairs(p);
+  const chains = validChains(p);
   const out = [B.pageBreak(), B.h2('✅ 해석 전 예측 — 정답 확인  ·  소재 · 필자 주장 · 글의 구조 · 재진술')];
   if (p.topic) { out.push(revealItem('🔎 소재', p.topic, '')); out.push(B.spacer()); }
   if (p.claim && p.claim.stance) { out.push(revealItem('🗣️ 필자 주장', p.claim.stance, p.claim.why || '')); out.push(B.spacer()); }
   if (p.structure && p.structure.type) { out.push(revealItem('🧩 글의 구조', p.structure.type, p.structure.why || '')); out.push(B.spacer()); }
-  if (pairs.length) {
+  if (chains.length) {
     const kids = [new Paragraph({
       spacing: { after: 70 },
-      children: [new TextRun({ text: '🔗 재진술 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
+      children: [new TextRun({ text: '🔗 재진술 사슬 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
     })];
-    const ans = pairs.length >= 2 ? matchModel(pairs).answer : null;
-    const distinctThemes = [...new Set(pairs.map((x) => (x[3] || '').trim()).filter(Boolean))];
-    const grouped = distinctThemes.length >= 2;
-    let prevTheme = null;
-    pairs.forEach((pair, i) => {
-      const [a, b, why, theme] = pair;
-      if (grouped && theme && theme !== prevTheme) {
-        prevTheme = theme;
-        kids.push(new Paragraph({
-          spacing: { before: 100, after: 40 },
-          children: [new TextRun({ text: `📂 소재 · ${theme}`, bold: true, size: 20, color: GRAM, font: S.FONT })],
-        }));
-      }
-      const kids2 = [
-        new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
-        new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),
-        new TextRun({ text: b, size: 20, color: '4B4B57', font: S.FONT }),
-      ];
-      if (ans) kids2.push(new TextRun({ text: `   (${i + 1} → ${RLAB[ans[i]]})`, bold: true, size: 19, color: GRAM, font: S.FONT }));
-      kids.push(new Paragraph({ spacing: { after: why ? 20 : 50 }, children: kids2 }));
-      if (why) kids.push(new Paragraph({
+    chains.forEach((ch) => {
+      if (ch.keyword) kids.push(new Paragraph({
+        spacing: { before: 80, after: 30 },
+        children: [new TextRun({ text: `📂 ${ch.keyword}`, bold: true, size: 20, color: GRAM, font: S.FONT })],
+      }));
+      const flow = [];
+      ch.links.forEach((l, i) => {
+        if (i) flow.push(new TextRun({ text: '  →  ', bold: true, size: 20, color: GRAM, font: S.FONT }));
+        flow.push(new TextRun({ text: l, bold: i === 0, size: 20, color: i === 0 ? '000000' : '4B4B57', font: S.FONT }));
+      });
+      kids.push(new Paragraph({ spacing: { after: ch.why ? 20 : 50 }, children: flow }));
+      if (ch.why) kids.push(new Paragraph({
         spacing: { after: 60 }, indent: { left: 200 },
         children: [
-          new TextRun({ text: '↳ 왜 같은 말?  ', bold: true, size: 18, color: GRAM, font: S.FONT }),
-          new TextRun({ text: why, size: 18, color: '5B5B66', font: S.FONT }),
+          new TextRun({ text: '↳ 변주  ', bold: true, size: 18, color: GRAM, font: S.FONT }),
+          new TextRun({ text: ch.why, size: 18, color: '5B5B66', font: S.FONT }),
         ],
       }));
     });

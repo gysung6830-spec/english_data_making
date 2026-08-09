@@ -307,23 +307,23 @@ const PASSAGE_SCHEMA = {
               why: { type: 'string' },
             },
           },
-          paraphrases: {               // 재진술(같은 말) 쌍 0~4개 (핵심 개념 위주, 없으면 빈 배열)
+          paraphrases: {               // 재진술 '사슬' 0~3개 (핵심어가 지문에서 반복 재진술되는 흐름)
             type: 'array',
             items: {
               type: 'object', additionalProperties: false,
-              required: ['a', 'b', 'why', 'theme'],
+              required: ['keyword', 'links', 'why'],
               properties: {
-                a: { type: 'string', description: '지문 속 표현 (필자 주장·핵심 소재를 담은 것 위주)' },
-                b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현' },
+                keyword: {
+                  type: 'string',
+                  description: "이 사슬의 핵심 개념/소재 짧은 이름(2~10자). 비교·대조로 소재가 2개면 각각 다르게(예: '전통 의학').",
+                },
+                links: {
+                  type: 'array', minItems: 2, maxItems: 5, items: { type: 'string' },
+                  description: "지문에 나온 순서대로, 같은 개념을 재진술한 표현들 A→A′→A″… (지문 속 실제 표현, 2개 이상).",
+                },
                 why: {
                   type: 'string',
-                  description: "왜 a·b 가 '같은 말'인지 한 줄 설명(반말) — 어떤 치환인지 밝혀. "
-                    + "예: '능동↔수동으로 같은 사건을 뒤집어 말한 거야', '추상적인 흔적을 머리카락·흙이라는 구체 예시로 바꿨어'",
-                },
-                theme: {
-                  type: 'string',
-                  description: "이 짝이 '어느 소재/대상'의 재진술인지 짧은 이름(2~8자). "
-                    + "비교·대조로 소재가 2개면 각각을 구분(예: '전통 의학', '현대 의학'). 소재가 하나뿐이면 ''(빈 문자열).",
+                  description: "이 사슬이 어떻게 변주됐는지 한 줄(반말). 예: '소유 부정 → 관리인 비유로 같은 뜻을 바꿔 말해'.",
                 },
               },
             },
@@ -353,32 +353,22 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - structure: 이 글의 구조. type 은 [통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) /
   비교·대조 / 시간·순서(나열) / 예시→일반화(결론)] 중 가장 알맞은 하나(또는 근접 표현),
   why 는 그렇게 본 근거(전환어 But/However, 예시, 시간표현 등)를 한 줄로.
-- paraphrases: '재진술(같은 말)' 짝 0~4개. 재진술은 수능 독해의 핵심 원리 — 필자가 같은 생각을
-  지문의 '다른 위치'에서 '다른 표현'으로 되풀이하는 거야. 이걸 찾는 훈련이 빈칸·함의·요지의 뿌리야.
-  아래 출제원리를 지켜:
-  1) a·b 는 지문에 '실제로 나온' 서로 다른 위치의 표현이어야 해(같은 문장 안 동어반복 금지, 지어내기 금지).
-  2) ★기준★ '필자 주장'과 '핵심 소재'를 재진술한 짝을 최우선으로 뽑아 — 그 지문이 결국
-     '무엇에 대해, 무슨 말을 하려는가'가 다르게 표현된 걸 잇게 해. 곁가지·부수 정보의
-     재진술(사소한 세부·배경)은 넣지 마.
-  3) 표면 어휘는 다르되 뜻은 같게 — 다음 치환 장치 중 하나로 연결돼야 자연스러워:
-     ① 동의어·유의어 치환(important→key)  ② 추상↔구체(traces↔hairs, soil: 상위어↔예시)
-     ③ 명사화↔동사화(she contributed↔her contributions)  ④ 능동↔수동(X caused Y↔Y was caused by X)
-     ⑤ 긍정↔이중부정(always leaves↔never leaves without)  ⑥ 비유↔직설(mother of ~↔most important person in ~).
-  4) a 에는 앞쪽/주제 표현, b 에는 그것을 되받은 재진술을 넣어(방향을 일관되게).
-  5) ★가장 중요★ 재진술이 없으면 '절대' 억지로 넣지 마 — 빈 배열([])이 정답이야.
-     억지로 지어낸/희미한 재진술은 없는 것만 못해. 개수(2~4개)를 채우려 하지 마.
-     확신이 서는 '진짜' 재진술만 넣고, 하나도 확실치 않으면 [] 로 둬. 품질 > 개수.
-  6) 장르 힌트: 논설문·설명문은 재진술이 흔하지만, 서사문(이야기)·편지/안내문·대화문·
-     단순 시간순 나열 지문은 재진술이 대개 없어 → 이런 글은 주저 없이 [] 로.
-  7) why: 각 짝마다 '왜 이게 같은 말인지'를 한 줄(반말)로 꼭 설명해. 위 6가지 치환 장치 중
-     무엇으로 바뀌었는지 밝혀줘(예: '능동을 수동으로 뒤집어 같은 사건을 말한 거야').
-  8) theme(소재 태그): 비교·대조로 '소재가 2개'인 지문이면, 각 짝이 어느 소재의 재진술인지
-     theme 에 짧게 적어(예: '전통 의학' vs '현대 의학'). 그리고 두 소재 각각이 지문 안에서
-     어떻게 다시 표현되는지 '소재별로 골고루' 재진술 짝을 뽑아(한쪽 소재만 몰지 마).
-     같은 소재의 짝끼리 이어서 나열해. 소재가 하나뿐이면 theme 는 '' 로 둬.
-  ※ 이 짝들은 초보자용 '줄 긋기(같은 말끼리 잇기)' 문제로 낼 거야. 그러니 a·b 각각이
-     짧고 자족적인 표현이어야 하고, 여러 짝의 a 끼리·b 끼리 서로 겹치거나 똑같으면 안 돼
-     (뜻이 뚜렷이 달라야 매칭 답이 하나로 정해져 — 중복 금지).
+- paraphrases: 재진술 '사슬' 0~3개. 재진술은 보통 '핵심 키워드 하나가 지문에서 표현만 바꿔
+  반복'되는 사슬이야 — A(첫 등장) → A′(동의어로) → A″(구체 예시로) → A‴(결론에서 다시).
+  이 사슬을 잡는 훈련이 빈칸·함의·요지의 뿌리야. 아래 원리를 지켜:
+  1) ★기준★ '필자 주장·핵심 소재'가 되는 키워드의 사슬만 뽑아. 곁가지·사소한 세부의
+     반복은 넣지 마. 한 사슬 = 같은 개념 하나.
+  2) links: 그 키워드를 지문에서 다시 말한 표현들을 '나온 순서대로' 2~5개. 모두 지문에
+     실제로 있는 표현이어야 하고(지어내기 금지), 표면 어휘는 다르되 뜻은 같아야 해.
+     변주는 다음 치환 장치로: 동의어 / 추상↔구체 / 명사화↔동사화 / 능동↔수동 /
+     긍정↔이중부정 / 비유↔직설.
+  3) keyword: 그 사슬의 핵심 개념을 짧은 이름으로. 비교·대조로 소재가 2개면 사슬을 2개로
+     나눠 각각 keyword 를 다르게(예: '전통 의학' 사슬, '현대 의학' 사슬) — 두 소재가 각각
+     어떻게 재진술되는지 보이게.
+  4) why: 이 사슬이 어떻게 변주됐는지 한 줄(반말). 예: '소유 부정 → 관리인 비유로 바꿔 말해'.
+  5) ★가장 중요★ 이런 사슬이 뚜렷하지 않으면 '절대' 억지로 넣지 마 — 빈 배열([])이 정답이야.
+     서사문(이야기)·편지/안내문·대화문·단순 시간순 나열 지문은 대개 사슬이 없어 → [] 로.
+     확신이 서는 '진짜' 사슬만. 품질 > 개수.
 
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
@@ -406,7 +396,11 @@ function normalizePassages(aiData) {
     structure: p.structure && p.structure.type
       ? { type: p.structure.type, why: p.structure.why || '' } : undefined,
     paraphrases: Array.isArray(p.paraphrases)
-      ? p.paraphrases.map((x) => [x.a, x.b, x.why || '', x.theme || '']) : undefined,
+      ? p.paraphrases.map((x) => ({
+        keyword: x.keyword || '',
+        links: Array.isArray(x.links) ? x.links.slice() : [],
+        why: x.why || '',
+      })) : undefined,
     sentences: p.sentences.map((s) => ({
       src: String(s.src || ''),
       en: s.en || '',
@@ -446,19 +440,21 @@ function sanitizePassages(passages) {
         trap: s.trap || '',
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);
-    // 재진술: 양쪽 값이 모두 있는 짝만. a·b 가 앞 짝과 겹치거나(중복) a==b 이면 제거
-    //   (줄 긋기 매칭에서 답이 중복/모호해지는 걸 막음). why 는 '왜 같은 말인지' 설명.
-    const seenA = new Set(); const seenB = new Set();
-    const paraphrases = [];
-    (p.paraphrases || [])
-      .filter((x) => Array.isArray(x) && ne(x[0]) && ne(x[1]))
-      .forEach((x) => {
-        const a = x[0].trim(); const b = x[1].trim();
-        const ka = a.toLowerCase(); const kb = b.toLowerCase();
-        if (ka === kb || seenA.has(ka) || seenB.has(kb) || seenA.has(kb) || seenB.has(ka)) return;
-        seenA.add(ka); seenB.add(kb);
-        paraphrases.push([a, b, ne(x[2]) ? x[2].trim() : '', ne(x[3]) ? x[3].trim() : '']);
-      });
+    // 재진술 사슬: 각 사슬의 links 를 정리(빈 값·중복 제거, 순서 유지). 링크가 2개 미만이면
+    //   사슬 자체를 버림(없으면 렌더에서 미출력). keyword·why 는 그대로.
+    const paraphrases = (Array.isArray(p.paraphrases) ? p.paraphrases : [])
+      .map((ch) => {
+        const seen = new Set();
+        const links = [];
+        (ch && Array.isArray(ch.links) ? ch.links : []).forEach((v) => {
+          if (!ne(v)) return;
+          const t = v.trim(); const k = t.toLowerCase();
+          if (seen.has(k)) return;
+          seen.add(k); links.push(t);
+        });
+        return { keyword: ne(ch && ch.keyword) ? ch.keyword.trim() : '', links, why: ne(ch && ch.why) ? ch.why.trim() : '' };
+      })
+      .filter((ch) => ch.links.length >= 2);
     return { ...p, paraphrases, sentences };
   }).filter((p) => p.sentences.length > 0);
 }

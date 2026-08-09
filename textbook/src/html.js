@@ -460,22 +460,20 @@ function css() {
   .structbox + .structbox { margin-top:-4px; }
   .para-q { font-size:11.3px; margin:5px 0; }
   .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }
-  /* 재진술 줄 긋기(매칭 · 초보자용) */
-  .mt-wrap { display:flex; gap:34px; margin:8px 2px 4px; align-items:stretch; }
-  .mt-col { flex:1; display:flex; flex-direction:column; gap:12px; }
-  .mt-row { display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #e4ddf5;
-    border-radius:7px; padding:8px 11px; font-size:11.4px; min-height:34px; }
-  .mt-row.rt { }
-  .mt-n { flex:none; display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px;
-    border-radius:50%; background:${C.gram}; color:#fff; font-size:10.5px; font-weight:800; }
-  .mt-lab { flex:none; font-weight:800; color:${C.gram}; font-size:12.5px; }
-  .mt-txt { flex:1; font-weight:700; color:${C.ink}; }
-  .mt-right .mt-txt { font-weight:600; color:#3f3f46; }
-  .mt-dot { flex:none; width:9px; height:9px; border-radius:50%; border:2px solid ${C.gram}; background:#fff; }
-  .mt-left .mt-row { text-align:left; }            /* 점은 오른쪽 끝 */
-  .mt-left .mt-dot { margin-left:auto; }
-  .rv-ans { display:inline-block; background:${C.gram}; color:#fff; font-size:10.5px; font-weight:800;
-    padding:1px 9px; border-radius:11px; margin-left:9px; }
+  /* 재진술 '사슬' 잇기 — 첫 표현 + 빈칸(A→A′→A″) */
+  .ch-row { margin:8px 0; padding:8px 11px; background:#fff; border:1px solid #e4ddf5; border-radius:7px; }
+  .ch-kw { display:inline-block; background:${C.gram}; color:#fff; font-size:10px; font-weight:800;
+    padding:1px 9px; border-radius:10px; margin-bottom:6px; }
+  .ch-flow { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+  .ch-first { font-weight:800; color:${C.ink}; font-size:11.4px; background:${C.mint};
+    border:1px solid ${C.greenLine}; border-radius:6px; padding:3px 9px; }
+  .ch-arrow { color:${C.gram}; font-weight:800; }
+  .ch-blank { flex:1; min-width:120px; border-bottom:1px dashed #b9b1d6; height:18px; }
+  /* 재진술 사슬 정답(해설) */
+  .rv-chain { display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:3px 0 2px; }
+  .rv-link { font-size:11.3px; font-weight:700; color:${C.ink}; background:#fff;
+    border:1px solid #e4ddf5; border-radius:6px; padding:3px 9px; }
+  .rv-arrow { color:${C.gram}; font-weight:800; }
   .struct-reveal { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
     border-radius:8px; padding:10px 14px; margin:12px 0 4px; font-size:11.3px; break-inside:avoid; }
   .sr-h { display:block; font-weight:800; color:${C.gram}; margin-bottom:5px; font-size:12.5px; }
@@ -580,46 +578,32 @@ function structureChoiceCard() {
     <div class="st-why">그렇게 본 근거(전환·연결 표현이나 문장 번호): <span class="st-line"></span></div>
   </div>`;
 }
-// 🔗 재진술(같은 말) 찾기 — 지문에서 같은 뜻으로 바꿔 쓴 표현 짝짓기(직접)
-// 재진술 짝에서 a·b 가 모두 있는 것만 남긴다(빈 값·형식 오류 제거). x[2]=오답 보기.
-function validPairs(p) {
-  return (p && p.paraphrases ? p.paraphrases : [])
-    .filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim()
-      && String(x[1] == null ? '' : x[1]).trim());
+// 🔗 재진술 '사슬' — 핵심어 하나가 A→A′→A″ 로 반복 재진술되는 흐름.
+//   links 가 2개 이상인 사슬만 남기고, 링크 문자열을 정리한다.
+function validChains(p) {
+  return (p && Array.isArray(p.paraphrases) ? p.paraphrases : [])
+    .map((ch) => ({
+      keyword: ch && ch.keyword ? String(ch.keyword) : '',
+      why: ch && ch.why ? String(ch.why) : '',
+      links: (ch && Array.isArray(ch.links) ? ch.links : [])
+        .filter((v) => v && String(v).trim()).map((v) => String(v).trim()),
+    }))
+    .filter((ch) => ch.links.length >= 2);
 }
-// 오른쪽(재진술) 보기 기호
-const RLAB = ['㉮', '㉯', '㉰', '㉱', '㉲', '㉳'];
-// 재진술 매칭 구성: 왼쪽 a(원래 순서) ↔ 오른쪽 b(1칸 밀어 섞음).
-//   n>=2 일 때 오른쪽 슬롯 k 는 pair (k+1)%n 의 b 를 보여줌(같은 줄에 정답이 안 오게).
-//   반환: { left:[{n,a}], right:[{lab,b}], answer:[오른쪽 기호 index] } (left i 의 정답 오른쪽 index)
-function matchModel(pairs) {
-  const n = pairs.length;
-  const slotPair = pairs.map((_, k) => (k + 1) % n); // 오른쪽 슬롯 k → pair index
-  const left = pairs.map((pr, i) => ({ num: i + 1, a: pr[0] }));
-  const right = slotPair.map((pi, k) => ({ lab: RLAB[k], b: pairs[pi][1] }));
-  // left i 의 정답 오른쪽 슬롯 k: slotPair[k]===i  →  k=(i-1+n)%n
-  const answer = pairs.map((_, i) => (i - 1 + n) % n);
-  return { left, right, answer };
-}
-// 🔗 재진술 찾기 — 초보자용 '줄 긋기'(같은 말끼리 선으로 잇기). 1개뿐이면 확인용 한 줄.
+// 🔗 재진술 사슬 찾기 — 첫 표현(A)만 주고, 나머지를 지문에서 순서대로 찾아 쓰는 잇기 문제.
 function paraphraseCard(p) {
-  const pairs = validPairs(p);
-  if (!pairs.length) return ''; // 재진술이 없으면 아예 출력하지 않음
-  if (pairs.length < 2) {
-    const [a, b] = pairs[0];
-    return `<div class="structbox">
-      <div class="st-h">🔗 재진술(같은 말) 확인 <span class="st-hint">아래 두 표현이 '같은 뜻'인지 확인해봐 (정답은 지문 끝)</span></div>
-      <div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <b>${esc(b)}</b></div></div>`;
-  }
-  const m = matchModel(pairs);
-  const leftRows = m.left.map((x) =>
-    `<div class="mt-row"><span class="mt-n">${x.num}</span><span class="mt-txt">${esc(x.a)}</span><span class="mt-dot"></span></div>`).join('');
-  const rightRows = m.right.map((x) =>
-    `<div class="mt-row rt"><span class="mt-dot"></span><span class="mt-lab">${x.lab}</span><span class="mt-txt">${esc(x.b)}</span></div>`).join('');
+  const chains = validChains(p);
+  if (!chains.length) return ''; // 사슬이 없으면 아예 출력하지 않음
+  const rows = chains.map((ch) => {
+    const kw = ch.keyword ? `<span class="ch-kw">${esc(ch.keyword)}</span>` : '';
+    const first = `<span class="ch-first">${esc(ch.links[0])}</span>`;
+    const blanks = ch.links.slice(1).map(() =>
+      '<span class="ch-arrow">→</span><span class="ch-blank"></span>').join('');
+    return `<div class="ch-row">${kw}<div class="ch-flow">${first}${blanks}</div></div>`;
+  }).join('');
   return `<div class="structbox">
-    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">왼쪽 표현과 '같은 뜻'인 오른쪽을 선으로 이어봐 (정답은 지문 끝)</span></div>
-    <div class="mt-wrap"><div class="mt-col mt-left">${leftRows}</div><div class="mt-col mt-right">${rightRows}</div></div>
-  </div>`;
+    <div class="st-h">🔗 재진술 사슬 찾기 <span class="st-hint">첫 표현이 지문에서 같은 뜻으로 어떻게 다시 나오는지 순서대로 찾아 써봐 (정답은 지문 끝)</span></div>
+    ${rows}</div>`;
 }
 // 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 — 별도 페이지, 항목별 카드로 가독성↑
 function predictReveal(p) {
@@ -632,25 +616,19 @@ function predictReveal(p) {
   if (p.claim && p.claim.stance) cards.push(card('🗣️', '필자 주장', `<b class="rv-stance">${esc(p.claim.stance)}</b>`, p.claim.why || ''));
   if (p.structure && p.structure.type) cards.push(card('🧩', '글의 구조', `<b class="rv-stance">${esc(p.structure.type)}</b>`, p.structure.why || ''));
 
-  // 재진술: 있을 때만 출력. 줄 긋기면 '번호 → 기호' 정답도 함께 — 문제 카드와 같은 섞기 사용.
-  const pairs = validPairs(p);
-  if (pairs.length) {
-    const ans = pairs.length >= 2 ? matchModel(pairs).answer : null; // left i → 오른쪽 슬롯 index
-    // 소재가 2개 이상(비교·대조)이면 소재별로 묶어 '각 소재가 어떻게 재진술되는지' 보이게.
-    const distinctThemes = [...new Set(pairs.map((x) => (x[3] || '').trim()).filter(Boolean))];
-    const grouped = distinctThemes.length >= 2;
-    let prevTheme = null;
-    const rows = pairs.map((pair, i) => {
-      const [a, b, why, theme] = pair;
-      let head = '';
-      if (grouped && theme && theme !== prevTheme) { head = `<div class="rv-theme">📂 소재 · ${esc(theme)}</div>`; prevTheme = theme; }
-      const tag = ans ? `<span class="rv-ans">${i + 1} → ${RLAB[ans[i]]}</span>` : '';
-      const whyRow = why ? `<div class="rv-why-para"><span class="rv-why-ic">↳ 왜 같은 말?</span> ${esc(why)}</div>` : '';
-      return `${head}<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>${whyRow}`;
+  // 재진술 사슬: 있을 때만 출력. 핵심어별로 A→A′→A″ 전체 사슬을 보여줌.
+  const chains = validChains(p);
+  if (chains.length) {
+    const items = chains.map((ch) => {
+      const kw = ch.keyword ? `<div class="rv-theme">📂 ${esc(ch.keyword)}</div>` : '';
+      const flow = ch.links.map((l, i) =>
+        `${i ? '<span class="rv-arrow">→</span>' : ''}<span class="rv-link">${esc(l)}</span>`).join('');
+      const whyRow = ch.why ? `<div class="rv-why-para"><span class="rv-why-ic">↳ 변주</span> ${esc(ch.why)}</div>` : '';
+      return `${kw}<div class="rv-chain">${flow}</div>${whyRow}`;
     }).join('');
     cards.push(`<div class="rv-item">
-      <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
-      <div class="rv-paras">${rows}</div></div>`);
+      <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 사슬 (같은 말)</span></div>
+      ${items}</div>`);
   }
 
   if (!cards.length) return '';
