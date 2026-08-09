@@ -187,6 +187,33 @@ function structurePageHtml() {
     <div class="struct-reveal"><span class="sr-h">🧩 이렇게 써먹어</span> 지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰봐.</div>
   </section>`;
 }
+// 필자 입장(긍정/부정/중립) 신호 어휘 안내 페이지 — 평가어를 보고 필자 태도 판단
+const STANCE_GUIDE = [
+  ['pos', '👍', '긍정 — 필자가 좋게 봄',
+    'benefit · beneficial · valuable · crucial · essential · vital · effective · advantage · merit · improve · enhance · reinforce · promote · support · promising · desirable · in favor of',
+    "'좋다 · 중요하다 · 이롭다 · 권장한다' 느낌의 평가어가 보이면 → 그 대상에 긍정"],
+  ['neg', '👎', '부정 — 필자가 비판·경계',
+    'drawback · downside · flaw · weakness · shortcoming · problem · harmful · worthless · misleading · ineffective · fail · lack · neglect · ignore · overlook · dismiss · criticize · doubt · mere · side effect · myth',
+    "'문제 · 결함 · 해롭다 · 무시 · 실패 · 비판' 느낌의 평가어가 보이면 → 그 대상에 부정"],
+  ['neu', '🤔', '중립 · 유보 — 단정하지 않음',
+    'may · might · could · tend to · some · often · not necessarily · it depends · on the other hand · (사실을) describe · explain',
+    '평가 없이 사실만 설명하거나 양쪽을 견주기만 하면 → 중립'],
+];
+function stancePageHtml() {
+  const cards = STANCE_GUIDE.map(([cls, ic, name, words, rule]) => `<div class="cutcard stance ${cls}">
+    <div class="cut-top"><span class="cut-n ${cls}">${ic}</span><span class="cut-name">${esc(name)}</span></div>
+    <div class="stance-words">${esc(words)}</div>
+    <div class="cut-rule">${esc(rule)}</div>
+  </div>`).join('');
+  return `<section class="chapter">
+    <div class="chhead"><span class="daypill key">필자 입장 신호</span><span class="tagpill">긍정·부정 어휘로 태도 읽기</span></div>
+    <h1>필자의 입장 — 어떤 어휘로 드러나나?</h1>
+    <div class="chsub">필생보 · 필자가 대상을 '좋게 보나 / 나쁘게 보나'는 평가 어휘에서 새어 나온다</div>
+    <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘(형용사·동사)</b>를 잡으면 입장이 보여. 그리고 진짜 주장은 보통 <b>마지막 문장</b>(therefore · thus · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
+    <div class="cutgrid">${cards}</div>
+    <div class="pcatch"><span class="pcatch-h">✅ 이렇게 써먹어</span> 지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라봐. 정답은 지문 끝에서 맞춰보고.</div>
+  </section>`;
+}
 // ⚠️ 이거 조심 — 이 문장에서 '오역하기 쉬운 부분'을 미리 경고(오역 주의).
 function trapCard(text) {
   if (!text) return '';
@@ -437,6 +464,12 @@ function css() {
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
   .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
   .cut-n.gram { background:${C.gram}; }
+  /* 필자 입장 신호어 카드(긍정=초록 / 부정=빨강 / 중립=회색) */
+  .cutcard.stance.pos { border-left-color:${C.teal}; background:${C.mint}; }
+  .cutcard.stance.neg { border-left-color:${C.key}; background:${C.keyBg}; }
+  .cutcard.stance.neu { border-left-color:${C.sub}; background:#f4f5f6; }
+  .cut-n.pos { background:${C.teal}; } .cut-n.neg { background:${C.key}; } .cut-n.neu { background:${C.sub}; }
+  .stance-words { font-size:11px; font-weight:700; color:#333; line-height:1.7; margin:3px 0 5px; }
   .st-sig { font-size:10px; color:${C.gram}; font-weight:700; margin:2px 0; line-height:1.45; }
   .daypill.gram { background:${C.gram}; }
   .goal.gram { background:${C.gramBg}; border-left-color:${C.gram}; }
@@ -683,7 +716,7 @@ function buildHtmlPassages(passages, meta = {}) {
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
   });
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
-    + `<body>${cover}${principlePageHtml()}${structurePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
+    + `<body>${cover}${principlePageHtml()}${structurePageHtml()}${stancePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
 
 // 전체 HTML 문서. rawCategories 는 splitWorked 전(worked 2개 초과 허용) 데이터.

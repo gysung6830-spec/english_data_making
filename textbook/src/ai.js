@@ -348,8 +348,15 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - topic: "이 지문 뭐에 관한 거야?" 1~2문장(반말).
 - catch: 이 지문에서 반드시 잡아야 할 핵심 내용 = 지문 요지 1~2문장(반말, "~라는 거야!").
   '이 정도는 캐치해야 한다'는 걸 알 수 있게 — 세부보다 전체 메시지.
-- claim: 필자 주장. stance 는 '긍정적'/'부정적·비판적'/'중립적' 중 하나에 짧은 설명을 덧붙이고,
-  why 는 필자가 하고 싶은 말과 근거(전환어·결론 문장)를 한 줄로.
+- claim: 필자 주장(입장). stance 는 '긍정적'/'부정적·비판적'/'중립적' 중 하나.
+  ★판단 기준★ 필자가 대상을 두고 쓴 '평가 어휘'와 마지막·전환(But/However) 문장을 봐:
+    · 긍정 신호: benefit·beneficial·valuable·crucial·essential·effective·advantage·merit·
+      improve·enhance·support·in favor of 같은 칭찬·권장 → 그 대상에 긍정.
+    · 부정 신호: drawback·flaw·weakness·problem·harmful·worthless·misleading·fail·lack·
+      neglect·ignore·overlook·criticize·doubt·mere·side effect·myth 같은 비판·경계 → 부정.
+    · 중립 신호: may·tend to·some·often·not necessarily 등 유보, 또는 사실 설명·양쪽 비교만 → 중립.
+  이런 어휘가 지문에 있으면 그걸 근거로 입장을 정하고, why 에 '어떤 평가 어휘/문장을 보고
+  그렇게 판단했는지'를 한 줄로 짚어줘(예: "'valuable·should'로 권장하니 긍정").
 - structure: 이 글의 구조. type 은 [통념→반박(반전) / 주장→근거·예시 / 문제→해결(방안) /
   비교·대조 / 시간·순서(나열) / 예시→일반화(결론)] 중 가장 알맞은 하나(또는 근접 표현),
   why 는 그렇게 본 근거(전환어 But/However, 예시, 시간표현 등)를 한 줄로.

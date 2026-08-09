@@ -222,6 +222,40 @@ function structureTypesPageParas() {
   return out;
 }
 
+// 필자 입장(긍정/부정/중립) 신호 어휘 안내 페이지
+const STANCE_GUIDE_DOCX = [
+  ['👍 긍정 — 필자가 좋게 봄', '279A52',
+    'benefit · beneficial · valuable · crucial · essential · vital · effective · advantage · merit · improve · enhance · reinforce · support · promising · desirable · in favor of',
+    "'좋다·중요하다·이롭다·권장한다' 느낌의 평가어 → 그 대상에 긍정"],
+  ['👎 부정 — 필자가 비판·경계', 'C5533F',
+    'drawback · downside · flaw · weakness · problem · harmful · worthless · misleading · fail · lack · neglect · ignore · overlook · dismiss · criticize · doubt · mere · side effect · myth',
+    "'문제·결함·해롭다·무시·실패·비판' 느낌의 평가어 → 그 대상에 부정"],
+  ['🤔 중립 · 유보 — 단정하지 않음', '6B7280',
+    'may · might · tend to · some · often · not necessarily · it depends · on the other hand · (사실을) describe · explain',
+    '평가 없이 사실만 설명하거나 양쪽을 견주기만 하면 → 중립'],
+];
+function stanceTypesPageParas() {
+  const out = [B.h1('필자의 입장 — 어떤 어휘로 드러나나?')];
+  out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘(형용사·동사)’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다.', { bold: true }));
+  STANCE_GUIDE_DOCX.forEach(([name, color, words, rule]) => {
+    out.push(new Paragraph({
+      spacing: { before: 60, after: 15 }, indent: { left: 200 },
+      children: [new TextRun({ text: name, bold: true, size: 22, color, font: S.FONT })],
+    }));
+    out.push(new Paragraph({
+      spacing: { after: 10 }, indent: { left: 360 },
+      children: [new TextRun({ text: words, bold: true, size: 19, font: S.FONT })],
+    }));
+    out.push(new Paragraph({
+      spacing: { after: 70 }, indent: { left: 360 },
+      children: [new TextRun({ text: rule, size: 18, color: '555555', font: S.FONT })],
+    }));
+  });
+  out.push(B.p('지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라본다.'));
+  out.push(B.pageBreak());
+  return out;
+}
+
 // 지문 끝 답지 — 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerParas(p) {
   const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
@@ -386,6 +420,7 @@ function buildPassageDocument(passages, meta = {}) {
     ...passageCoverParagraphs(meta),
     ...principlePageParas(),
     ...structureTypesPageParas(),
+    ...stanceTypesPageParas(),
     ...passages.flatMap((p, i) => passageParagraphs(p, i)),
   ];
   return new Document({
