@@ -334,8 +334,18 @@ function predictRevealParas(p) {
       children: [new TextRun({ text: '🔗 재진술 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
     })];
     const ans = pairs.length >= 2 ? matchModel(pairs).answer : null;
+    const distinctThemes = [...new Set(pairs.map((x) => (x[3] || '').trim()).filter(Boolean))];
+    const grouped = distinctThemes.length >= 2;
+    let prevTheme = null;
     pairs.forEach((pair, i) => {
-      const [a, b, why] = pair;
+      const [a, b, why, theme] = pair;
+      if (grouped && theme && theme !== prevTheme) {
+        prevTheme = theme;
+        kids.push(new Paragraph({
+          spacing: { before: 100, after: 40 },
+          children: [new TextRun({ text: `📂 소재 · ${theme}`, bold: true, size: 20, color: GRAM, font: S.FONT })],
+        }));
+      }
       const kids2 = [
         new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
         new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),

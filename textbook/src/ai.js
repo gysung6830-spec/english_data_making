@@ -311,14 +311,19 @@ const PASSAGE_SCHEMA = {
             type: 'array',
             items: {
               type: 'object', additionalProperties: false,
-              required: ['a', 'b', 'why'],
+              required: ['a', 'b', 'why', 'theme'],
               properties: {
-                a: { type: 'string', description: '지문 속 표현 (핵심 개념)' },
+                a: { type: 'string', description: '지문 속 표현 (필자 주장·핵심 소재를 담은 것 위주)' },
                 b: { type: 'string', description: 'a 를 다른 위치에서 다르게 말한 재진술 표현' },
                 why: {
                   type: 'string',
                   description: "왜 a·b 가 '같은 말'인지 한 줄 설명(반말) — 어떤 치환인지 밝혀. "
                     + "예: '능동↔수동으로 같은 사건을 뒤집어 말한 거야', '추상적인 흔적을 머리카락·흙이라는 구체 예시로 바꿨어'",
+                },
+                theme: {
+                  type: 'string',
+                  description: "이 짝이 '어느 소재/대상'의 재진술인지 짧은 이름(2~8자). "
+                    + "비교·대조로 소재가 2개면 각각을 구분(예: '전통 의학', '현대 의학'). 소재가 하나뿐이면 ''(빈 문자열).",
                 },
               },
             },
@@ -352,7 +357,9 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
   지문의 '다른 위치'에서 '다른 표현'으로 되풀이하는 거야. 이걸 찾는 훈련이 빈칸·함의·요지의 뿌리야.
   아래 출제원리를 지켜:
   1) a·b 는 지문에 '실제로 나온' 서로 다른 위치의 표현이어야 해(같은 문장 안 동어반복 금지, 지어내기 금지).
-  2) 주제·필자 주장·요지와 맞닿은 '핵심 개념'을 담을 것(곁가지·단순 예시 나열은 X).
+  2) ★기준★ '필자 주장'과 '핵심 소재'를 재진술한 짝을 최우선으로 뽑아 — 그 지문이 결국
+     '무엇에 대해, 무슨 말을 하려는가'가 다르게 표현된 걸 잇게 해. 곁가지·부수 정보의
+     재진술(사소한 세부·배경)은 넣지 마.
   3) 표면 어휘는 다르되 뜻은 같게 — 다음 치환 장치 중 하나로 연결돼야 자연스러워:
      ① 동의어·유의어 치환(important→key)  ② 추상↔구체(traces↔hairs, soil: 상위어↔예시)
      ③ 명사화↔동사화(she contributed↔her contributions)  ④ 능동↔수동(X caused Y↔Y was caused by X)
@@ -365,6 +372,10 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
      단순 시간순 나열 지문은 재진술이 대개 없어 → 이런 글은 주저 없이 [] 로.
   7) why: 각 짝마다 '왜 이게 같은 말인지'를 한 줄(반말)로 꼭 설명해. 위 6가지 치환 장치 중
      무엇으로 바뀌었는지 밝혀줘(예: '능동을 수동으로 뒤집어 같은 사건을 말한 거야').
+  8) theme(소재 태그): 비교·대조로 '소재가 2개'인 지문이면, 각 짝이 어느 소재의 재진술인지
+     theme 에 짧게 적어(예: '전통 의학' vs '현대 의학'). 그리고 두 소재 각각이 지문 안에서
+     어떻게 다시 표현되는지 '소재별로 골고루' 재진술 짝을 뽑아(한쪽 소재만 몰지 마).
+     같은 소재의 짝끼리 이어서 나열해. 소재가 하나뿐이면 theme 는 '' 로 둬.
   ※ 이 짝들은 초보자용 '줄 긋기(같은 말끼리 잇기)' 문제로 낼 거야. 그러니 a·b 각각이
      짧고 자족적인 표현이어야 하고, 여러 짝의 a 끼리·b 끼리 서로 겹치거나 똑같으면 안 돼
      (뜻이 뚜렷이 달라야 매칭 답이 하나로 정해져 — 중복 금지).
@@ -395,7 +406,7 @@ function normalizePassages(aiData) {
     structure: p.structure && p.structure.type
       ? { type: p.structure.type, why: p.structure.why || '' } : undefined,
     paraphrases: Array.isArray(p.paraphrases)
-      ? p.paraphrases.map((x) => [x.a, x.b, x.why || '']) : undefined,
+      ? p.paraphrases.map((x) => [x.a, x.b, x.why || '', x.theme || '']) : undefined,
     sentences: p.sentences.map((s) => ({
       src: String(s.src || ''),
       en: s.en || '',
@@ -446,7 +457,7 @@ function sanitizePassages(passages) {
         const ka = a.toLowerCase(); const kb = b.toLowerCase();
         if (ka === kb || seenA.has(ka) || seenB.has(kb) || seenA.has(kb) || seenB.has(ka)) return;
         seenA.add(ka); seenB.add(kb);
-        paraphrases.push([a, b, ne(x[2]) ? x[2].trim() : '']);
+        paraphrases.push([a, b, ne(x[2]) ? x[2].trim() : '', ne(x[3]) ? x[3].trim() : '']);
       });
     return { ...p, paraphrases, sentences };
   }).filter((p) => p.sentences.length > 0);

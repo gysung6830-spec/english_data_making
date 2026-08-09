@@ -501,6 +501,8 @@ function css() {
   .rv-why-para { margin:1px 0 3px; padding:4px 10px 5px; font-size:10.6px; line-height:1.55;
     color:#5b5b66; background:#faf9fe; border:1px dashed #d6cdf0; border-radius:6px; }
   .rv-why-ic { font-weight:800; color:${C.gram}; margin-right:4px; }
+  .rv-theme { margin:8px 0 3px; font-size:11.5px; font-weight:800; color:#fff;
+    background:${C.gram}; display:inline-block; padding:2px 12px; border-radius:11px; }
   `;
 }
 
@@ -625,11 +627,17 @@ function predictReveal(p) {
   const pairs = validPairs(p);
   if (pairs.length) {
     const ans = pairs.length >= 2 ? matchModel(pairs).answer : null; // left i → 오른쪽 슬롯 index
+    // 소재가 2개 이상(비교·대조)이면 소재별로 묶어 '각 소재가 어떻게 재진술되는지' 보이게.
+    const distinctThemes = [...new Set(pairs.map((x) => (x[3] || '').trim()).filter(Boolean))];
+    const grouped = distinctThemes.length >= 2;
+    let prevTheme = null;
     const rows = pairs.map((pair, i) => {
-      const [a, b, why] = pair;
+      const [a, b, why, theme] = pair;
+      let head = '';
+      if (grouped && theme && theme !== prevTheme) { head = `<div class="rv-theme">📂 소재 · ${esc(theme)}</div>`; prevTheme = theme; }
       const tag = ans ? `<span class="rv-ans">${i + 1} → ${RLAB[ans[i]]}</span>` : '';
       const whyRow = why ? `<div class="rv-why-para"><span class="rv-why-ic">↳ 왜 같은 말?</span> ${esc(why)}</div>` : '';
-      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>${whyRow}`;
+      return `${head}<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>${whyRow}`;
     }).join('');
     cards.push(`<div class="rv-item">
       <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
