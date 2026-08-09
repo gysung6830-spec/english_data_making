@@ -260,8 +260,10 @@ function predictChoiceParas(p) {
   const out = [];
   out.push(B.p('통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', { bold: true }));
   out.push(B.p('🔎 소재 — 이 지문, 뭐에 관한 글이야? (한 줄):  ______________________________________'));
-  out.push(B.p('🗣️ 필자 주장 — 필자 입장은?   ☐ 긍정적   ☐ 부정적·비판적   ☐ 중립적'));
-  out.push(B.p('     한 줄 요약: ____________________________   ·   근거 문장 번호: __________'));
+  out.push(B.p('🗣️ 필자 주장 — 긍정 · 부정 · 중립?   ☐ 긍정적   ☐ 부정적·비판적   ☐ 중립적   (평가어·마지막 문장으로 판단)'));
+  out.push(B.p('     · 긍정: 좋다·이롭다 / should · thanks to · valuable 같은 칭찬·권장', { color: '279A52' }));
+  out.push(B.p('     · 부정: 문제·해롭다 / But·However 뒤집기 · overlook·fail · should not 같은 비판·경고', { color: 'C5533F' }));
+  out.push(B.p('     · 중립: 사실 설명·양쪽 비교만, 편들지 않음', { color: '6B7280' }));
   out.push(B.p('🧩 이 글, 어떤 구조야? (하나 ✓ · 앞 “글의 구조” 페이지 참고)'));
   STRUCTURE_TYPES.forEach((t) => out.push(new Paragraph({
     spacing: { after: 30 }, indent: { left: 240 },

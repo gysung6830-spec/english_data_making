@@ -451,6 +451,12 @@ function css() {
   .st-why { font-size:10.3px; color:${C.sub}; }
   .st-line { display:inline-block; border-bottom:1px solid #b9b1d6; min-width:210px; vertical-align:bottom; }
   .st-line.long { min-width:340px; }
+  .stance-tip { margin-top:8px; padding:8px 11px; background:#faf9fe; border:1px dashed #d6cdf0;
+    border-radius:7px; display:flex; flex-direction:column; gap:4px; }
+  .stance-row { font-size:10.4px; color:#4b4b57; line-height:1.5; }
+  .stag { display:inline-block; color:#fff; font-weight:800; font-size:9.5px; padding:1px 8px;
+    border-radius:9px; margin-right:6px; }
+  .stag.pos { background:#279A52; } .stag.neg { background:#C5533F; } .stag.neu { background:#6b7280; }
   .structbox + .structbox { margin-top:-4px; }
   .para-q { font-size:11.3px; margin:5px 0; }
   .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }
@@ -552,14 +558,17 @@ function subjectCard() {
     <div class="st-h">🔎 소재 — 이 지문, 뭐에 관한 글이야? <span class="st-hint">한 줄로 써봐 · 정답은 지문 끝</span></div>
     <div class="wl"></div></div>`;
 }
-// 🗣️ 필자 주장 — 필자 입장(긍정/부정/중립) + 한 줄 + 근거(직접)
+// 🗣️ 필자 주장 — 필자 입장(긍정/부정/중립) 고르기 + 판별 힌트(평가어·마지막 문장)
 function claimCard() {
   const opts = ['긍정적', '부정적·비판적', '중립적'].map((t) => `<label class="st-opt"><span class="st-box"></span>${esc(t)}</label>`).join('');
   return `<div class="structbox">
-    <div class="st-h">🗣️ 필자 주장 — 필자가 하고 싶은 말은? <span class="st-hint">해석하기 전에 예측 · 정답은 지문 끝</span></div>
+    <div class="st-h">🗣️ 필자 주장 — 긍정 · 부정 · 중립? <span class="st-hint">평가어(형용사)와 마지막 문장으로 판단 · 정답은 지문 끝</span></div>
     <div class="st-opts">${opts}</div>
-    <div class="st-why">한 줄 요약: <span class="st-line long"></span></div>
-    <div class="st-why">근거가 된 문장 번호: <span class="st-line"></span></div>
+    <div class="stance-tip">
+      <div class="stance-row"><span class="stag pos">긍정</span> 좋다·이롭다·중요하다 / should · thanks to · valuable·effective 같은 <b>칭찬·권장</b></div>
+      <div class="stance-row"><span class="stag neg">부정</span> 문제·해롭다 / But·However 로 뒤집기 · overlook·fail · should not 같은 <b>비판·경고</b></div>
+      <div class="stance-row"><span class="stag neu">중립</span> 사실을 설명하거나 양쪽을 비교(on the other hand)만 하고 <b>편들지 않음</b></div>
+    </div>
   </div>`;
 }
 // 🧩 글의 구조 고르기 — 해석 전에 전체 흐름 보고 예측(직접 ✓)
