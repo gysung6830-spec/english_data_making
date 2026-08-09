@@ -339,6 +339,15 @@ def opt_line(item):
     return item.get("opt_line", "")
 
 
+def exam_src(eid):
+    """exam_id '2026-06' → '2026학년도 6월', '2024-수능' → '2024학년도 수능'."""
+    if not eid or "-" not in eid:
+        return esc(eid or "")
+    y, m = eid.split("-", 1)
+    m = {"06": "6월", "09": "9월", "수능": "수능", "11": "수능"}.get(m, m)
+    return f"{esc(y)}학년도 {esc(m)}"
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -391,7 +400,7 @@ def render_spread(rec, c, idx):
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
-      {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
+      {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="psrc">평가원 {exam_src(rec.get("exam_id",""))} {num}번</span><span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
       <div class="pmain">
         <div class="how">{how}</div>
@@ -434,7 +443,7 @@ def render_spread(rec, c, idx):
         '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">{esc(rec.get("exam_id",""))} · #{idx}{ans_note}</span></div>
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
       {clue_legend}{color_legend}
       <div class="psg">{passage_html}</div>
       {reason_block}
@@ -844,6 +853,7 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .pbanner .no{ background:#fff; color:var(--ink-d); font-weight:800; font-size:15px; padding:2px 11px; border-radius:6px; }
 .pbanner .ty{ font-size:15px; font-weight:800; }
 .pbanner .pt{ font-size:9px; font-weight:700; background:var(--trap); padding:1px 8px; border-radius:9px; }
+.pbanner .psrc{ font-size:9px; font-weight:700; color:#12543d; background:#ffe9a8; padding:2px 9px; border-radius:9px; }
 .pbanner .step{ margin-left:auto; font-size:9px; font-weight:800; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:11px; }
 .pbody{ border:2px solid var(--ink-d); border-top:none; border-radius:0 0 9px 9px; padding:15px 17px; display:flex; gap:15px; min-height:600px; }
 .pmain{ flex:2; display:flex; flex-direction:column; }
