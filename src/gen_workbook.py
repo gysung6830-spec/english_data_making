@@ -379,17 +379,41 @@ def item_signals(hl):
 _RROLE = {"주제문": "r-main", "재진술": "r-re", "정답근거": "r-ans"}
 
 
-def restate_mission(rt):
-    """STEP1 왼쪽 — 학생이 먼저 풀 '재진술 추가 문제'."""
+_RQLAB = ["핵심 소재·주장", "→ 재진술 ①", "→ 재진술 ②", "→ 재진술 ③", "→ 재진술 ④", "→ 재진술 ⑤"]
+
+
+def restate_problem(rt):
+    """STEP1 문제면 하단 — 지문을 주고 A→A′→A″(→A‴) / A·B 로 '직접 잇는' 재진술 연결 문제."""
     if not rt:
         return ""
-    comp = rt.get("kind") == "compare"
-    task = ('<li>두 소재를 <b>A·B</b>로 잡고, 각각 <b>A→A′→A″ / B→B′→B″</b>로 어떻게 되풀이되는지 추적</li>'
-            if comp else
-            '<li>그 소재를 <b>A</b>로 잡고, 지문에서 <b>A→A′→A″→A‴</b>로 표현만 바뀌며 되풀이된 곳에 표시</li>')
-    return (f'<div class="mini rmiss"><div class="h">🔁 재진술 미션 <span class="add">추가 문제</span></div>'
-            f'<ul class="rmk"><li>필자의 <b>핵심 주장·소재</b>를 한 줄로 적기</li>{task}</ul>'
-            f'<div class="rmline">핵심(A) <span class="fill"></span></div></div>')
+    kind = rt.get("kind", "single")
+    subs = rt.get("subjects") or []
+    if kind == "compare" and len(subs) >= 2:
+        cols = ""
+        for li, s in zip(["A", "B"], subs[:2]):
+            n = max(2, len(s.get("trail") or []))
+            rows = "".join(
+                f'<div class="rqrow"><span class="pr">{_prime(li, i)}</span>'
+                f'<span class="rqlab">{"소재" if i == 0 else "→ 재진술 "+"①②③④⑤"[i-1]}</span>'
+                f'<span class="ln"></span></div>' for i in range(n))
+            cols += (f'<div class="rqsub"><div class="rqname"><span class="pr big">{li}</span>'
+                     f'비교 소재 {li}</div>{rows}</div>')
+        body = f'<div class="rqsubs">{cols}</div>'
+        guide = '두 <b>핵심 소재 A·B</b>를 잡고, 각각이 지문에서 <b>A→A′→A″ · B→B′→B″</b>로 되풀이된 표현을 찾아 잇는다.'
+    else:
+        n = max(2, len(rt.get("chain") or []))
+        rows = "".join(
+            f'<div class="rqrow"><span class="pr">{_prime("A", i)}</span>'
+            f'<span class="rqlab">{_RQLAB[i] if i < len(_RQLAB) else "→ 재진술"}</span>'
+            f'<span class="ln"></span></div>' for i in range(n))
+        body = f'<div class="rqchain">{rows}</div>'
+        guide = '<b>핵심 소재·주장(A)</b>을 잡고, 지문에서 그것을 <b>다른 말로 바꾼 표현</b>을 순서대로 <b>A′→A″→A‴</b>로 잇는다.'
+    return f'''<div class="rquiz">
+      <div class="rqh"><span class="ico">🔁</span>재진술 연결 문제<span class="add">추가 문제</span>
+        <span class="rqno">{"소재 2개" if kind == "compare" and len(subs) >= 2 else "소재 1개"}</span></div>
+      <div class="rqg">{guide} <b style="color:#a5342d">중요 소재만 — 지엽적 어구는 잇지 않는다.</b></div>
+      {body}
+    </div>'''
 
 
 def _prime(letter, i):
@@ -432,7 +456,7 @@ def restate_card(rt):
     echo_html = f'<div class="rEcho"><span class="lb">정답</span>{echo}</div>' if echo else ""
     return f'''<div class="card restate">
       <div class="hd"><span class="no rno">🔁</span><span class="ty">재진술 지도</span>
-        <span class="kind" style="color:#8a5a1a;border-color:#e0b94a">추가 문제 · 소재의 되풀이(A→A′→A″)</span>
+        <span class="kind" style="color:#8a5a1a;border-color:#e0b94a">재진술 연결 문제 · 정답</span>
         <span class="tm">패러프레이징</span></div>
       {thesis_html}
       <div class="rhint">{hint}</div>
@@ -491,8 +515,8 @@ def render_spread(rec, c, idx):
     remind_label = "🔗 연결고리 단서" if seqtype else "📢 신호 리마인더"
     uline = c.get("uline")  # 함축의미(21): 밑줄 친 부분
     step1_psg = uline_html(clean_passage(hl, band, insert_en), uline)
-    rt = c.get("restate")  # 재진술 지도(추가 문제)
-    rmission = restate_mission(rt)
+    rt = c.get("restate")  # 재진술(추가 문제)
+    rquiz = restate_problem(rt)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
@@ -508,7 +532,6 @@ def render_spread(rec, c, idx):
       </div>
       <div class="pside">
         <div class="mini"><div class="h">{remind_label}</div>{chips}</div>
-        {rmission}
         <div class="mini"><div class="h">✅ 셀프 체크</div>
           <ul class="check">{checks}</ul>
         </div>
@@ -520,6 +543,7 @@ def render_spread(rec, c, idx):
         <div class="ptip"><div class="h">💡 {esc(typ)} 팁</div>{esc(formula)}</div>
       </div>
     </div>
+    {rquiz}
   </div>'''
 
     step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
@@ -1070,13 +1094,22 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .seamrow .slink{ font-size:8.4px; font-weight:700; color:#2f6fb0; margin-top:2px; }
 .seamans{ margin-top:6px; background:#e6f0f9; border-left:3px solid #2f6fb0; border-radius:5px; padding:5px 9px; font-size:9.4px; font-weight:700; color:#1f4d7a; }
 .seamans b{ color:#12406e; }
-/* STEP1 재진술 미션(추가 문제) */
-.rmiss .h{ color:#8a5a1a; } .rmiss .h .add{ font-size:7.5px; font-weight:800; color:#fff; background:#c9a24a; border-radius:8px; padding:1px 6px; margin-left:4px; vertical-align:1px; }
-.rmiss .rmk{ list-style:none; margin:4px 0 5px; padding:0; }
-.rmiss .rmk li{ font-size:8.6px; line-height:1.4; margin-bottom:4px; padding-left:13px; position:relative; color:#4a5560; }
-.rmiss .rmk li::before{ content:"🔁"; position:absolute; left:0; font-size:7px; top:1px; }
-.rmiss .rmk li b{ color:#8a5a1a; }
-.rmiss .rmline{ font-size:8.6px; color:#8a6a00; } .rmiss .rmline .fill{ display:inline-block; min-width:90px; border-bottom:1.4px solid #e0b94a; margin-left:4px; }
+/* STEP1 재진술 연결 문제(추가 문제, 풀칸) */
+.rquiz{ margin-top:10px; border:1.5px solid #e0b94a; border-radius:9px; background:#fffdf6; padding:11px 15px; }
+.rquiz .rqh{ font-size:11.5px; font-weight:800; color:#8a5a1a; display:flex; align-items:center; gap:6px; }
+.rquiz .rqh .ico{ font-size:12px; } .rquiz .rqh .add{ font-size:8px; font-weight:800; color:#fff; background:#c9a24a; border-radius:8px; padding:1px 7px; }
+.rquiz .rqh .rqno{ margin-left:auto; font-size:8.5px; font-weight:800; color:#8a5a1a; background:#ffe9a8; border:1px solid #e0b94a; border-radius:8px; padding:1px 8px; }
+.rquiz .rqg{ font-size:9px; line-height:1.5; color:#6e5316; margin:5px 0 9px; } .rquiz .rqg b{ color:#8a5a1a; }
+.rquiz .rqchain{ display:flex; flex-direction:column; gap:7px; }
+.rquiz .rqrow{ display:flex; align-items:center; gap:8px; }
+.rquiz .rqrow .pr{ flex:none; min-width:22px; text-align:center; font-size:10px; font-weight:800; color:#7a5416; background:#ffe9a8; border:1px solid #e0b94a; border-radius:6px; padding:1px 5px; }
+.rquiz .rqrow .pr.big{ font-size:11px; margin-right:4px; }
+.rquiz .rqrow .rqlab{ flex:none; width:74px; font-size:8.6px; font-weight:700; color:#8a6a00; }
+.rquiz .rqrow .ln{ flex:1; border-bottom:1.4px dotted #d7b968; height:15px; }
+.rquiz .rqsubs{ display:flex; gap:12px; }
+.rquiz .rqsub{ flex:1; min-width:0; }
+.rquiz .rqsub .rqname{ display:flex; align-items:center; gap:5px; font-size:9.3px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:4px; margin-bottom:6px; }
+.rquiz .rqsub .rqrow .rqlab{ width:52px; }
 /* STEP3 재진술 지도 카드 */
 .card.restate{ border-left:5px solid #e0b94a; background:#fffdf6; }
 .card.restate .hd{ border-bottom-color:#e0b94a; }
