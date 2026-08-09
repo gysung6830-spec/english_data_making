@@ -384,16 +384,34 @@ def restate_mission(rt):
     if not rt:
         return ""
     comp = rt.get("kind") == "compare"
-    extra = ('<li>비교되는 <b>두 소재</b>가 각각 어떻게 재진술되며 전개되는지 나눠 적기</li>'
-             if comp else '')
+    task = ('<li>두 소재를 <b>A·B</b>로 잡고, 각각 <b>A→A′→A″ / B→B′→B″</b>로 어떻게 되풀이되는지 추적</li>'
+            if comp else
+            '<li>그 소재를 <b>A</b>로 잡고, 지문에서 <b>A→A′→A″→A‴</b>로 표현만 바뀌며 되풀이된 곳에 표시</li>')
     return (f'<div class="mini rmiss"><div class="h">🔁 재진술 미션 <span class="add">추가 문제</span></div>'
-            f'<ul class="rmk"><li>필자의 <b>핵심 주장·소재</b>를 한 줄로 적기</li>'
-            f'<li>지문에서 그것을 <b>다른 말로 되풀이</b>(재진술)한 문장에 표시</li>{extra}</ul>'
-            f'<div class="rmline">핵심 <span class="fill"></span></div></div>')
+            f'<ul class="rmk"><li>필자의 <b>핵심 주장·소재</b>를 한 줄로 적기</li>{task}</ul>'
+            f'<div class="rmline">핵심(A) <span class="fill"></span></div></div>')
+
+
+def _prime(letter, i):
+    """A, A′, A″, A‴ … 재진술 사슬 라벨."""
+    return letter + ("′" * i)
+
+
+def _rrows(letter, seq):
+    out = ""
+    for i, seg in enumerate(seq or []):
+        lab = _prime(letter, i)
+        how = seg.get("how", "")
+        howhtml = f'<span class="rhow">{esc(how)}</span>' if (how and how != "—") else ""
+        arw = '<span class="rarw">↓</span>' if i > 0 else ""
+        out += (f'<div class="rc"><span class="pr">{esc(lab)}</span>{arw}{howhtml}'
+                f'<span class="ren">{esc(seg.get("en",""))}</span>'
+                f'<span class="rko">{esc(seg.get("ko",""))}</span></div>')
+    return out
 
 
 def restate_card(rt):
-    """STEP3 오른쪽 — 재진술 지도(필자 주장·소재의 되풀이). single=사슬 / compare=두 소재 전개."""
+    """STEP3 오른쪽 — 재진술 지도. 한 소재 A→A′→A″→A‴ / 두 소재 A…·B…로 되풀이를 추적."""
     if not rt:
         return ""
     thesis = esc(rt.get("thesis", ""))
@@ -401,31 +419,23 @@ def restate_card(rt):
     kind = rt.get("kind", "single")
     subs = rt.get("subjects") or []
     if kind == "compare" and len(subs) >= 2:
-        cols = ""
-        for s in subs[:2]:
-            trail = "".join(
-                f'<div class="rt"><span class="ren">{esc(t.get("en",""))}</span>'
-                f'<span class="rko">{esc(t.get("ko",""))}</span></div>'
-                for t in (s.get("trail") or []))
-            cols += f'<div class="rsub"><div class="rname">{esc(s.get("name",""))}</div>{trail}</div>'
-        body = f'<div class="rsubs">{cols}</div>'
+        blocks = ""
+        for li, s in zip(["A", "B"], subs[:2]):
+            blocks += (f'<div class="rsub"><div class="rname"><span class="pr big">{li}</span>'
+                       f'{esc(s.get("name",""))}</div>{_rrows(li, s.get("trail"))}</div>')
+        body = f'<div class="rsubs">{blocks}</div>'
+        hint = '두 소재를 <b>A→A′→A″</b> · <b>B→B′→B″</b>로 나란히 추적 — 각 소재가 표현만 바뀌며 되풀이된다'
     else:
-        rows = ""
-        for seg in rt.get("chain", []):
-            role = seg.get("role", "재진술"); rc = _RROLE.get(role, "r-re")
-            how = seg.get("how", "")
-            howhtml = f'<span class="rhow">{esc(how)}</span>' if (how and how != "—") else ""
-            rows += (f'<div class="rc"><span class="rrole {rc}">{esc(role)}</span>{howhtml}'
-                     f'<span class="ren">{esc(seg.get("en",""))}</span>'
-                     f'<span class="rko">{esc(seg.get("ko",""))}</span></div>')
-        body = f'<div class="rchain">{rows}</div>'
-    thesis_html = f'<div class="thesis"><span class="lb">핵심</span>{thesis}</div>' if thesis else ""
+        body = f'<div class="rchain">{_rrows("A", rt.get("chain"))}</div>'
+        hint = '같은 소재 <b>A</b>가 <b>A→A′→A″→A‴</b>로 표현만 바뀌며 되풀이 → 마지막이 정답 선지'
+    thesis_html = f'<div class="thesis"><span class="lb">핵심(A)</span>{thesis}</div>' if thesis else ""
     echo_html = f'<div class="rEcho"><span class="lb">정답</span>{echo}</div>' if echo else ""
     return f'''<div class="card restate">
       <div class="hd"><span class="no rno">🔁</span><span class="ty">재진술 지도</span>
-        <span class="kind" style="color:#8a5a1a;border-color:#e0b94a">추가 문제 · 필자 주장·소재의 되풀이</span>
+        <span class="kind" style="color:#8a5a1a;border-color:#e0b94a">추가 문제 · 소재의 되풀이(A→A′→A″)</span>
         <span class="tm">패러프레이징</span></div>
       {thesis_html}
+      <div class="rhint">{hint}</div>
       {body}
       {echo_html}
     </div>'''
@@ -1075,21 +1085,23 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .card.restate .tm{ color:#a58a3a; }
 .restate .thesis{ font-size:9.8px; font-weight:700; color:#7a5416; background:#fff4d9; border-radius:6px; padding:6px 10px; margin-bottom:7px; }
 .restate .thesis .lb, .restate .rEcho .lb{ display:inline-block; font-size:7.6px; font-weight:800; color:#fff; background:#c9a24a; border-radius:7px; padding:1px 7px; margin-right:6px; vertical-align:1px; }
+.restate .rhint{ font-size:8.5px; color:#8a6a00; background:#fff8e6; border-radius:6px; padding:4px 9px; margin-bottom:6px; } .restate .rhint b{ color:#8a5a1a; font-weight:800; }
 .restate .rchain{ margin-bottom:2px; }
 .restate .rc{ display:flex; flex-wrap:wrap; align-items:baseline; gap:5px; padding:5px 0; border-bottom:1px dashed #ecdcb0; }
 .restate .rc:last-child{ border-bottom:none; }
-.restate .rrole{ flex:none; font-size:7.6px; font-weight:800; color:#fff; border-radius:7px; padding:1px 7px; }
-.restate .rrole.r-main{ background:#8a6a00; } .restate .rrole.r-re{ background:#c9a24a; } .restate .rrole.r-ans{ background:#1f7a5c; }
+.restate .pr{ flex:none; min-width:20px; text-align:center; font-size:9.5px; font-weight:800; color:#7a5416; background:#ffe9a8; border:1px solid #e0b94a; border-radius:6px; padding:0 5px; }
+.restate .pr.big{ font-size:10.5px; margin-right:5px; }
+.restate .rarw{ flex:none; color:#c9a24a; font-weight:800; font-size:9px; margin:0 -1px; }
 .restate .rhow{ flex:none; font-size:7.6px; font-weight:800; color:#a5342d; background:#ffe0dd; border-radius:7px; padding:1px 7px; }
 .restate .ren{ font-size:9.5px; font-weight:600; color:#23272e; background:var(--must); border-radius:3px; padding:0 3px; }
-.restate .rko{ flex-basis:100%; font-size:8.8px; color:#5a636c; padding-left:2px; }
-/* compare — 두 소재 전개 */
+.restate .rko{ flex-basis:100%; font-size:8.8px; color:#5a636c; padding-left:23px; }
+/* compare — 두 소재를 A…·B…로 나란히 */
 .restate .rsubs{ display:flex; gap:8px; margin-bottom:2px; }
 .restate .rsub{ flex:1; min-width:0; background:#fff; border:1px solid #ecdcb0; border-radius:7px; padding:6px 9px; }
-.restate .rsub .rname{ font-size:9px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:3px; margin-bottom:4px; }
-.restate .rsub .rt{ padding:2px 0; }
-.restate .rsub .ren{ display:inline; font-size:9px; }
-.restate .rsub .rko{ display:block; font-size:8.4px; color:#5a636c; margin-top:1px; }
+.restate .rsub .rname{ display:flex; align-items:center; font-size:9px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:3px; margin-bottom:4px; }
+.restate .rsub .rc{ padding:4px 0; }
+.restate .rsub .ren{ font-size:9px; }
+.restate .rsub .rko{ padding-left:23px; }
 .restate .rEcho{ margin-top:6px; font-size:9.4px; font-weight:700; color:#12543d; background:#eaf5f0; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:5px 10px; }
 </style></head><body>
 <div class="cover">
