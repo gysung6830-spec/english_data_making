@@ -59,11 +59,20 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 .foot{ text-align:center; font-size:9px; color:#aab2ba; margin-top:16px; }
 .two{ display:flex; gap:13px; } .two>div{ flex:1; }
 .punc li b{ font-family:'NanumSquareRound',sans-serif; }
+/* 글의 구조 6틀 */
+.struct{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:2px; }
+.sc{ background:#fff; border:1.5px solid var(--line); border-left:4px solid var(--ink); border-radius:9px; padding:10px 13px; }
+.sc .sch{ font-size:13px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
+.sc .sch .scn{ display:inline-block; width:17px; height:17px; line-height:17px; text-align:center; background:var(--ink); color:#fff; border-radius:50%; font-size:10px; font-weight:800; margin-right:6px; vertical-align:1px; }
+.sc .sig{ font-size:10px; line-height:1.55; color:#3a4a44; margin-bottom:2px; }
+.sc .sig b{ color:var(--ink-d); } .sc .sig .en{ font-family:'NanumSquareRound',sans-serif; color:#33414d; }
+.sc .scd{ font-size:10.5px; color:#2b3a34; margin-top:4px; font-weight:600; }
+.sc .sce{ font-size:9.5px; color:var(--muted); margin-top:2px; }
 </style></head><body>
 
 <!-- ===== P1. 태도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 05</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 06</span></div>
 
   <div class="lead">
     <b>“정확하게 모든 문장을 해석하는 것”</b> 과 <b>“좋은 점수”</b> 는 비례하지 않는다.
@@ -96,7 +105,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P2. 완급조절 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 05</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 06</span></div>
 
   <div class="lead">모든 문장을 <b>똑같이 강하게</b> 읽을 필요는 없다. 한 단락엔 주제가 <b>하나</b>뿐.
     <b>강·약을 조절</b>하는 <b>능동적 독해</b>를 하자. 완급 없이 직독직해만 하면 남는 정보가 없다.</div>
@@ -131,7 +140,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P3. 추론 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 05</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 06</span></div>
 
   <div class="lead">영어는 흔히 <b>General → Specific</b> 순서. <b>추상적인 말이 앞</b>에 오면 <b>대개 뒤에 구체적인 정보</b>가 따라온다.
     모르는 단어에 멈추지 말고 <b>'뒤가 알려줄 것'</b>이라 믿고 읽어라.</div>
@@ -166,7 +175,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P4. 연결사 지도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 05</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 06</span></div>
 
   <div class="lead">연결사(접속부사)는 <b>문장과 문장의 관계</b>를 알려주는 표지다. 문장 어디에 있든
     <b>앞 문장과 뒷 문장 '사이'에 놓고</b> 읽어라. 특히 <b>역접</b>은 완급의 분기점이다.</div>
@@ -218,7 +227,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P5. 순접 + 패러프레이징 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>순접 연결사 · Paraphrasing (G–S)</h1><span class="pno">05 / 05</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>순접 연결사 · Paraphrasing (G–S)</h1><span class="pno">05 / 06</span></div>
 
   <div class="lead">순접 연결사는 <b>General / Specific 둘 중 하나만 이해되면</b> 된다.
     그리고 독해의 최종 기술은 <b>재진술(Paraphrasing)</b> — 명시적 단서 없이도 <b>“비슷한 말이구나”</b>를 느끼는 것.</div>
@@ -249,6 +258,65 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
   <div class="ex"><span class="lb">범주 묶기</span><span class="e">서울 = 대한민국의 수도 = 한국에서 천만이 사는 곳</span>
     <span class="kr">표현은 달라도 <b>하나의 범주</b>임을 느끼는 것이 재진술 독해다.</span></div>
 
+  <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
+</section>
+
+<!-- ===== P6. 글의 구조 6틀 ===== -->
+<section class="pg">
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>글의 구조 — 어떤 짜임이 있나?</h1><span class="pno">06 / 06</span></div>
+  <div class="lead">글의 구조 = 필자가 생각을 배치한 <b>‘틀’</b>. <b>전환어(But/However…)</b>와 연결어를 신호로 잡으면 구조가 보이고,
+    구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡힌다. 아래 <b>6가지 틀</b> 중 하나를 예측하며 읽자.</div>
+
+  <div class="struct">
+    <div class="sc">
+      <div class="sch"><span class="scn">1</span>통념 → 반박(반전)</div>
+      <div class="sig">🔎 <b>통념 세팅</b> <span class="en">many people think · it is widely believed · traditionally · we tend to think</span></div>
+      <div class="sig">↳ <b>반전</b> <span class="en">But · However · Yet · In fact · In reality · Contrary to</span></div>
+      <div class="scd">흔한 생각(통념)을 깔아둔 뒤 <b>뒤집어</b> 필자 주장을 편다.</div>
+      <div class="sce">예) “Many people believe X. <b>But in fact,</b> Y.”</div>
+    </div>
+    <div class="sc">
+      <div class="sch"><span class="scn">2</span>주장 → 근거·예시</div>
+      <div class="sig">🔎 <b>주장</b> <span class="en">should · must · it is important that · I argue</span></div>
+      <div class="sig">↳ <b>근거·예시</b> <span class="en">because · since · for example · research shows · therefore</span></div>
+      <div class="scd">주장을 먼저 내세우고 <b>이유·연구·예시</b>로 뒷받침.</div>
+      <div class="sce">예) “X가 중요하다. 예를 들어 …, 연구에 따르면 …”</div>
+    </div>
+    <div class="sc">
+      <div class="sch"><span class="scn">3</span>문제 → 해결(방안)</div>
+      <div class="sig">🔎 <b>문제</b> <span class="en">problem · challenge · issue · difficulty · concern</span></div>
+      <div class="sig">↳ <b>해결</b> <span class="en">solution · solve · address · one way to · need to</span></div>
+      <div class="scd">문제를 제기하고 <b>해결책·방안</b>을 제시.</div>
+      <div class="sce">예) “이런 문제가 있다. <b>이를 해결하려면</b> …”</div>
+    </div>
+    <div class="sc">
+      <div class="sch"><span class="scn">4</span>비교 · 대조</div>
+      <div class="sig">🔎 <b>대조</b> <span class="en">while · whereas · unlike · in contrast · on the other hand</span></div>
+      <div class="sig">↳ <b>비교</b> <span class="en">similarly · likewise · just as · like · both … and</span></div>
+      <div class="scd">A와 B의 <b>공통점·차이점</b>을 견줌.</div>
+      <div class="sce">예) “A는 …인 <b>반면</b>, B는 …이다.”</div>
+    </div>
+    <div class="sc">
+      <div class="sch"><span class="scn">5</span>시간 · 순서(나열)</div>
+      <div class="sig">🔎 <b>순서</b> <span class="en">first · second · next · then · later · finally</span></div>
+      <div class="sig">↳ <b>시간</b> <span class="en">in 1937 · meanwhile · over time · eventually · subsequently</span></div>
+      <div class="scd">사건·과정을 <b>시간·순서대로</b>(전기·실험·역사).</div>
+      <div class="sce">예) “먼저 …, 그다음 …, <b>마침내</b> …”</div>
+    </div>
+    <div class="sc">
+      <div class="sch"><span class="scn">6</span>예시 → 일반화(결론)</div>
+      <div class="sig">🔎 <b>예시</b> <span class="en">for example · such as · consider · take … as an example</span></div>
+      <div class="sig">↳ <b>일반화·결론</b> <span class="en">thus · therefore · in short · this suggests · overall</span></div>
+      <div class="scd">구체 사례를 든 뒤 <b>일반 원리·결론</b>으로 묶음.</div>
+      <div class="sce">예) “예: …. 이런 사례들은 <b>결국</b> …임을 보여준다.”</div>
+    </div>
+  </div>
+
+  <div class="h2" style="margin-top:14px">이렇게 써먹어</div>
+  <ul class="pt">
+    <li>지문마다 <b>‘해석 전에’ 이 6개 중 하나를 예측</b>하고, 지문 끝에서 맞았는지 확인한다.</li>
+    <li>전환어(<b>But·However</b>)가 보이면 <b>①통념→반박</b>, 대조어가 보이면 <b>④비교·대조</b> — 신호가 곧 구조다.</li>
+  </ul>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
 </section>
 
