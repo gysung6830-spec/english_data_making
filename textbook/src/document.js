@@ -6,6 +6,7 @@
 
 const {
   Document, Paragraph, TextRun, AlignmentType, ShadingType,
+  Table, TableRow, TableCell, WidthType, BorderStyle,
 } = require('docx');
 const S = require('./styles');
 const B = require('./boxes');
@@ -239,22 +240,19 @@ const STRUCTURE_TYPES = [
   '통념 → 반박(반전)', '주장 → 근거·예시', '문제 → 해결(방안)',
   '비교 · 대조', '시간 · 순서(나열)', '예시 → 일반화(결론)',
 ];
-// 재진술 객관식 도우미(html.js 와 동일 규칙 — 같은 회전으로 정답 번호 일치)
-const CIRC = ['①', '②', '③', '④', '⑤'];
-function rotate(arr, n) {
-  const k = ((n % arr.length) + arr.length) % arr.length;
-  return arr.slice(k).concat(arr.slice(0, k));
-}
-function mcFor(pair, i) {
-  const dists = (Array.isArray(pair[2]) ? pair[2] : [])
-    .filter((d) => d && String(d).trim() && d !== pair[1]);
-  if (dists.length < 2) return null;
-  const opts = rotate([pair[1], dists[0], dists[1]], i % 3);
-  return { opts, correct: opts.indexOf(pair[1]) };
-}
+// 재진술 줄 긋기(매칭) 도우미 — html.js 와 동일 규칙(오른쪽 1칸 밀어 섞음, 정답 기호 일치)
+const RLAB = ['㉮', '㉯', '㉰', '㉱', '㉲', '㉳'];
 function validParaPairs(p) {
   return (p.paraphrases || []).filter((x) => Array.isArray(x)
     && String(x[0] == null ? '' : x[0]).trim() && String(x[1] == null ? '' : x[1]).trim());
+}
+function matchModel(pairs) {
+  const n = pairs.length;
+  const slotPair = pairs.map((_, k) => (k + 1) % n);
+  const left = pairs.map((pr, i) => ({ num: i + 1, a: pr[0] }));
+  const right = slotPair.map((pi, k) => ({ lab: RLAB[k], b: pairs[pi][1] }));
+  const answer = pairs.map((_, i) => (i - 1 + n) % n); // left i → 오른쪽 슬롯 index
+  return { left, right, answer };
 }
 
 // 해석 전 예측 4코너(소재·필자주장·구조·재진술) — 직접 쓰는 체크 목록
@@ -271,32 +269,45 @@ function predictChoiceParas(p) {
   })));
   out.push(B.p('     근거(전환·연결 표현이나 문장 번호): ____________________________'));
   const paraQ = validParaPairs(p);
-  if (paraQ.length) {
-    out.push(B.p('🔗 재진술(같은 말) 찾기 — 각 표현과 같은 뜻인 보기를 하나 골라 ✓ (정답은 지문 끝):'));
-    paraQ.forEach((pair, i) => {
-      const a = pair[0];
-      const mc = mcFor(pair, i);
-      if (!mc) { // 폴백: 직접 쓰는 빈칸
-        out.push(new Paragraph({
-          spacing: { after: 30 }, indent: { left: 240 },
-          children: [new TextRun({ text: `${a}  ≈  ______________________________`, size: 21, font: S.FONT })],
-        }));
-        return;
-      }
-      out.push(new Paragraph({
-        spacing: { before: 40, after: 20 }, indent: { left: 200 },
-        children: [new TextRun({ text: `${a}  →  같은 뜻은?`, bold: true, size: 21, font: S.FONT })],
-      }));
-      mc.opts.forEach((o, k) => out.push(new Paragraph({
-        spacing: { after: 20 }, indent: { left: 440 },
-        children: [
-          new TextRun({ text: `${CIRC[k]}  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
-          new TextRun({ text: o, size: 21, font: S.FONT }),
-        ],
-      })));
-    });
+  if (paraQ.length >= 2) {
+    out.push(B.p("🔗 재진술(같은 말) 찾기 — 왼쪽 표현과 '같은 뜻'인 오른쪽을 선으로 이어봐 (정답은 지문 끝):"));
+    out.push(...matchTableParas(paraQ));
+  } else if (paraQ.length === 1) {
+    out.push(B.p("🔗 재진술(같은 말) 확인 — 아래 두 표현이 같은 뜻인지 확인해봐 (정답은 지문 끝):"));
+    out.push(new Paragraph({
+      spacing: { after: 30 }, indent: { left: 240 },
+      children: [new TextRun({ text: `${paraQ[0][0]}   ≈   ${paraQ[0][1]}`, bold: true, size: 21, font: S.FONT })],
+    }));
   }
   return out;
+}
+// 줄 긋기용 2열 표: [왼쪽 번호+a] | [오른쪽 기호+b]. 학생이 손으로 선을 그음.
+function matchTableParas(pairs) {
+  const m = matchModel(pairs);
+  const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+  const noBorders = {
+    top: noBorder, bottom: noBorder, left: noBorder, right: noBorder,
+    insideHorizontal: noBorder, insideVertical: noBorder,
+  };
+  const cell = (children) => new TableCell({
+    width: { size: 50, type: WidthType.PERCENTAGE }, borders: noBorders,
+    margins: { top: 60, bottom: 60, left: 120, right: 120 },
+    children,
+  });
+  const leftPara = (x) => new Paragraph({ children: [
+    new TextRun({ text: `${x.num}.  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
+    new TextRun({ text: x.a, bold: true, size: 21, font: S.FONT }),
+    new TextRun({ text: '   ●', size: 21, color: GRAM, font: S.FONT }),
+  ] });
+  const rightPara = (x) => new Paragraph({ children: [
+    new TextRun({ text: '●   ', size: 21, color: GRAM, font: S.FONT }),
+    new TextRun({ text: `${x.lab}  `, bold: true, size: 21, color: GRAM, font: S.FONT }),
+    new TextRun({ text: x.b, size: 21, color: '3F3F46', font: S.FONT }),
+  ] });
+  const rows = m.left.map((lx, i) => new TableRow({
+    children: [cell([leftPara(lx)]), cell([rightPara(m.right[i])])],
+  }));
+  return [new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, borders: noBorders, rows }), B.spacer()];
 }
 // 지문 끝: 해석 전 예측 정답 공개 — 별도 페이지 + 항목별 카드(가독성↑)
 const GRAM = '6A57B0'; const GRAMBG = 'F0EDF9'; const GRAMLINE = 'DDD4F2';
@@ -322,15 +333,15 @@ function predictRevealParas(p) {
       spacing: { after: 70 },
       children: [new TextRun({ text: '🔗 재진술 (같은 말)', bold: true, size: 22, color: GRAM, font: S.FONT })],
     })];
+    const ans = pairs.length >= 2 ? matchModel(pairs).answer : null;
     pairs.forEach((pair, i) => {
       const [a, b] = pair;
-      const mc = mcFor(pair, i);
       const kids2 = [
         new TextRun({ text: a, bold: true, size: 20, font: S.FONT }),
         new TextRun({ text: '  ≈  ', bold: true, size: 20, color: GRAM, font: S.FONT }),
         new TextRun({ text: b, size: 20, color: '4B4B57', font: S.FONT }),
       ];
-      if (mc) kids2.push(new TextRun({ text: `   (정답 ${CIRC[mc.correct]})`, bold: true, size: 19, color: GRAM, font: S.FONT }));
+      if (ans) kids2.push(new TextRun({ text: `   (${i + 1} → ${RLAB[ans[i]]})`, bold: true, size: 19, color: GRAM, font: S.FONT }));
       kids.push(new Paragraph({ spacing: { after: 50 }, children: kids2 }));
     });
     out.push(B.makeBox(GRAMBG, GRAMLINE, kids)); out.push(B.spacer());

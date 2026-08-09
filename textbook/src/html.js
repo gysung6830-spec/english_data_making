@@ -454,16 +454,20 @@ function css() {
   .structbox + .structbox { margin-top:-4px; }
   .para-q { font-size:11.3px; margin:5px 0; }
   .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }
-  /* 재진술 객관식(초보자용) */
-  .para-mc { margin:7px 0 9px; break-inside:avoid; }
-  .mc-q { font-size:11.8px; margin-bottom:4px; }
-  .mc-qa { font-weight:800; color:${C.ink}; }
-  .mc-ask { color:${C.gram}; font-weight:700; margin-left:5px; font-size:11px; }
-  .mc-opts { display:flex; flex-direction:column; gap:4px; padding-left:4px; }
-  .mc-opt { display:flex; align-items:baseline; gap:7px; background:#fff; border:1px solid #e4ddf5;
-    border-radius:6px; padding:5px 10px; font-size:11.2px; }
-  .mc-num { flex:none; color:${C.gram}; font-weight:800; }
-  .mc-txt { flex:1; }
+  /* 재진술 줄 긋기(매칭 · 초보자용) */
+  .mt-wrap { display:flex; gap:34px; margin:8px 2px 4px; align-items:stretch; }
+  .mt-col { flex:1; display:flex; flex-direction:column; gap:12px; }
+  .mt-row { display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #e4ddf5;
+    border-radius:7px; padding:8px 11px; font-size:11.4px; min-height:34px; }
+  .mt-row.rt { }
+  .mt-n { flex:none; display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px;
+    border-radius:50%; background:${C.gram}; color:#fff; font-size:10.5px; font-weight:800; }
+  .mt-lab { flex:none; font-weight:800; color:${C.gram}; font-size:12.5px; }
+  .mt-txt { flex:1; font-weight:700; color:${C.ink}; }
+  .mt-right .mt-txt { font-weight:600; color:#3f3f46; }
+  .mt-dot { flex:none; width:9px; height:9px; border-radius:50%; border:2px solid ${C.gram}; background:#fff; }
+  .mt-left .mt-row { text-align:left; }            /* 점은 오른쪽 끝 */
+  .mt-left .mt-dot { margin-left:auto; }
   .rv-ans { display:inline-block; background:${C.gram}; color:#fff; font-size:10.5px; font-weight:800;
     padding:1px 9px; border-radius:11px; margin-left:9px; }
   .struct-reveal { background:${C.gramBg}; border:1px solid #ddd4f2; border-left:5px solid ${C.gram};
@@ -569,37 +573,39 @@ function validPairs(p) {
     .filter((x) => Array.isArray(x) && String(x[0] == null ? '' : x[0]).trim()
       && String(x[1] == null ? '' : x[1]).trim());
 }
-// 배열을 왼쪽으로 n칸 회전(정답 위치를 문항마다 바꿔 정답이 늘 같은 번호에 오지 않게).
-function rotate(arr, n) {
-  const k = ((n % arr.length) + arr.length) % arr.length;
-  return arr.slice(k).concat(arr.slice(0, k));
+// 오른쪽(재진술) 보기 기호
+const RLAB = ['㉮', '㉯', '㉰', '㉱', '㉲', '㉳'];
+// 재진술 매칭 구성: 왼쪽 a(원래 순서) ↔ 오른쪽 b(1칸 밀어 섞음).
+//   n>=2 일 때 오른쪽 슬롯 k 는 pair (k+1)%n 의 b 를 보여줌(같은 줄에 정답이 안 오게).
+//   반환: { left:[{n,a}], right:[{lab,b}], answer:[오른쪽 기호 index] } (left i 의 정답 오른쪽 index)
+function matchModel(pairs) {
+  const n = pairs.length;
+  const slotPair = pairs.map((_, k) => (k + 1) % n); // 오른쪽 슬롯 k → pair index
+  const left = pairs.map((pr, i) => ({ num: i + 1, a: pr[0] }));
+  const right = slotPair.map((pi, k) => ({ lab: RLAB[k], b: pairs[pi][1] }));
+  // left i 의 정답 오른쪽 슬롯 k: slotPair[k]===i  →  k=(i-1+n)%n
+  const answer = pairs.map((_, i) => (i - 1 + n) % n);
+  return { left, right, answer };
 }
-// 객관식 보기 구성: [정답b, 오답1, 오답2] → i 로 회전. 보기 2개 미만이면 null(빈칸 폴백).
-function mcFor(pair, i) {
-  const dists = (Array.isArray(pair[2]) ? pair[2] : []).filter((d) => d && String(d).trim() && d !== pair[1]);
-  if (dists.length < 2) return null;
-  const opts = rotate([pair[1], dists[0], dists[1]], i % 3);
-  return { opts, correct: opts.indexOf(pair[1]) };
-}
-// 🔗 재진술 찾기 — 초보자용 객관식(정답+오답2). 보기 없으면 빈칸 폴백.
+// 🔗 재진술 찾기 — 초보자용 '줄 긋기'(같은 말끼리 선으로 잇기). 1개뿐이면 확인용 한 줄.
 function paraphraseCard(p) {
   const pairs = validPairs(p);
   if (!pairs.length) return ''; // 재진술이 없으면 아예 출력하지 않음
-  const rows = pairs.map((pair, i) => {
-    const a = pair[0];
-    const mc = mcFor(pair, i);
-    if (!mc) { // 폴백: 직접 쓰는 빈칸
-      return `<div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <span class="st-line long"></span></div>`;
-    }
-    const opts = mc.opts.map((o, k) =>
-      `<label class="mc-opt"><span class="mc-num">${CIRCLED[k]}</span><span class="mc-txt">${esc(o)}</span></label>`).join('');
-    return `<div class="para-mc">
-      <div class="mc-q"><span class="mc-qa">${esc(a)}</span><span class="mc-ask">와 같은 뜻은?</span></div>
-      <div class="mc-opts">${opts}</div></div>`;
-  }).join('');
+  if (pairs.length < 2) {
+    const [a, b] = pairs[0];
+    return `<div class="structbox">
+      <div class="st-h">🔗 재진술(같은 말) 확인 <span class="st-hint">아래 두 표현이 '같은 뜻'인지 확인해봐 (정답은 지문 끝)</span></div>
+      <div class="para-q"><b>${esc(a)}</b> <span class="para-eq">≈</span> <b>${esc(b)}</b></div></div>`;
+  }
+  const m = matchModel(pairs);
+  const leftRows = m.left.map((x) =>
+    `<div class="mt-row"><span class="mt-n">${x.num}</span><span class="mt-txt">${esc(x.a)}</span><span class="mt-dot"></span></div>`).join('');
+  const rightRows = m.right.map((x) =>
+    `<div class="mt-row rt"><span class="mt-dot"></span><span class="mt-lab">${x.lab}</span><span class="mt-txt">${esc(x.b)}</span></div>`).join('');
   return `<div class="structbox">
-    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">각 표현과 '같은 뜻'인 보기를 하나 골라 ✓ (정답은 지문 끝)</span></div>
-    ${rows}</div>`;
+    <div class="st-h">🔗 재진술(같은 말) 찾기 <span class="st-hint">왼쪽 표현과 '같은 뜻'인 오른쪽을 선으로 이어봐 (정답은 지문 끝)</span></div>
+    <div class="mt-wrap"><div class="mt-col mt-left">${leftRows}</div><div class="mt-col mt-right">${rightRows}</div></div>
+  </div>`;
 }
 // 지문 끝: 해석 전 예측(소재·주장·구조·재진술) 정답 — 별도 페이지, 항목별 카드로 가독성↑
 function predictReveal(p) {
@@ -612,14 +618,14 @@ function predictReveal(p) {
   if (p.claim && p.claim.stance) cards.push(card('🗣️', '필자 주장', `<b class="rv-stance">${esc(p.claim.stance)}</b>`, p.claim.why || ''));
   if (p.structure && p.structure.type) cards.push(card('🧩', '글의 구조', `<b class="rv-stance">${esc(p.structure.type)}</b>`, p.structure.why || ''));
 
-  // 재진술: 있을 때만 출력. 객관식이면 정답 번호(①②③)도 함께 — 문제 카드와 같은 회전 사용.
+  // 재진술: 있을 때만 출력. 줄 긋기면 '번호 → 기호' 정답도 함께 — 문제 카드와 같은 섞기 사용.
   const pairs = validPairs(p);
   if (pairs.length) {
+    const ans = pairs.length >= 2 ? matchModel(pairs).answer : null; // left i → 오른쪽 슬롯 index
     const rows = pairs.map((pair, i) => {
       const [a, b] = pair;
-      const mc = mcFor(pair, i);
-      const ans = mc ? `<span class="rv-ans">정답 ${CIRCLED[mc.correct]}</span>` : '';
-      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${ans}</span></div>`;
+      const tag = ans ? `<span class="rv-ans">${i + 1} → ${RLAB[ans[i]]}</span>` : '';
+      return `<div class="rv-para"><span class="rv-a">${esc(a)}</span><span class="rv-eq">≈</span><span class="rv-b">${esc(b)}${tag}</span></div>`;
     }).join('');
     cards.push(`<div class="rv-item">
       <div class="rv-top"><span class="rv-ic">🔗</span><span class="rv-lab">재진술 (같은 말)</span></div>
