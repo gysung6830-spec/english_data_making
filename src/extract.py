@@ -37,14 +37,31 @@ _NUM_PREFIX = re.compile(r"^\s*(?:\(?[1-9]\d?\)?\s*[.)]|[" + _CIRCLED + r"])\s+"
 _SHORT_NOISE = re.compile(r"^\s*[-–—•·\d\s]{0,4}$")
 
 
-def extract_raw_text(pdf_path: str | Path) -> str:
-    """PDF 전체에서 텍스트를 뽑는다."""
+def _extract_page_columns(page) -> str:
+    """페이지를 좌/우 2단으로 나눠 '왼쪽 칼럼 전체 → 오른쪽 칼럼' 순서로 읽는다.
+
+    모의고사처럼 2단 편집인 시험지에서 좌우 칼럼이 한 줄로 뒤섞이는 것을 방지한다.
+    """
+    mid = page.width / 2.0
+    left = page.crop((0, 0, mid, page.height)).extract_text() or ""
+    right = page.crop((mid, 0, page.width, page.height)).extract_text() or ""
+    return left + "\n" + right
+
+
+def extract_raw_text(pdf_path: str | Path, two_column: bool = False) -> str:
+    """PDF 전체에서 텍스트를 뽑는다.
+
+    two_column=True 이면 각 페이지를 좌/우 칼럼 순서로 읽는다(2단 시험지용).
+    일반 지문·교재는 two_column=False(기본) 로 그대로 읽어 부작용이 없다.
+    """
     pdf_path = Path(pdf_path)
     parts: list[str] = []
     with pdfplumber.open(str(pdf_path)) as pdf:
         for page in pdf.pages:
-            txt = page.extract_text() or ""
-            parts.append(txt)
+            if two_column:
+                parts.append(_extract_page_columns(page))
+            else:
+                parts.append(page.extract_text() or "")
     return "\n".join(parts)
 
 
@@ -73,9 +90,31 @@ def clean_text(raw: str) -> str:
     return text
 
 
-def extract_passage_text(pdf_path: str | Path) -> str:
-    """PDF -> (1차 정제된) 지문 후보 텍스트."""
-    return clean_text(extract_raw_text(pdf_path))
+# 모의고사 듣기 영역 종료 안내 문구(이 뒤부터가 독해 영역).
+#   예) "이제 듣기 문제가 끝났습니다. 18번부터는 문제지의 지시에 따라 …"
+_LISTENING_END = re.compile(
+    r"이제\s*듣기[^\n]{0,20}끝났습니다"
+    r"|\d+\s*번부터는\s*문제지의\s*지시"
+)
+
+
+def strip_listening(text: str) -> str:
+    """모의고사면 듣기(1~17) 안내 문구를 찾아 그 앞부분을 잘라내고 독해 영역만 남긴다.
+
+    안내 문구가 없으면(일반 지문·교재) 원문을 그대로 반환하므로 부작용이 없다.
+    """
+    m = _LISTENING_END.search(text)
+    if not m:
+        return text
+    return text[m.end():]
+
+
+def extract_passage_text(pdf_path: str | Path, two_column: bool = False) -> str:
+    """PDF -> (2단 처리 + 듣기 영역 제거 + 1차 정제된) 지문 후보 텍스트.
+
+    two_column=True 는 2단 시험지(모의고사)일 때만 사용한다.
+    """
+    return clean_text(strip_listening(extract_raw_text(pdf_path, two_column)))
 
 
 def looks_empty(text: str) -> bool:

@@ -35,20 +35,39 @@ _MULTI_RULES = (
 )
 
 
-def extract_image_prompt() -> str:
+def _exam_focus_rules(focus_items: str) -> str:
+    """모의고사/시험지에서 '지정한 문항 번호'의 독해 지문만 뽑도록 하는 추가 지시."""
+    if not focus_items:
+        return ""
+    return (
+        "\n\n[모의고사 독해 영역 · 문항 지정]\n"
+        f"- 이 자료는 시험지(모의고사)일 수 있습니다. '독해 영역'에서 다음 문항 번호에 해당하는 "
+        f"영어 지문만 추출하세요: {focus_items}\n"
+        "- 위 범위 밖의 문항(듣기·도표·안내문 등 지정되지 않은 번호)은 무시하세요.\n"
+        "- 한 지문에 여러 문항이 딸린 '장문'(예: 41~42번, 43~45번)은 '하나의 지문'으로 묶고, "
+        "item_no 에 '41-42'처럼 묶은 번호를 적으세요.\n"
+        "- 각 지문의 item_no 에는 그 지문의 '문항 번호'를 정확히 담으세요(예: '18', '29', '43-45').\n"
+        "- 빈칸(밑줄/괄호로 비운 부분), (A)/(B)/(C) 표시, 밑줄, [3점], 선택지 ①~⑤, 한글 발문은 "
+        "모두 제거하고 '영어 지문 본문'만 남기세요. 순서 배열 문항의 (A)(B)(C) 단락은 원문에 나온 순서대로 이어 붙이세요.\n"
+    )
+
+
+def extract_image_prompt(focus_items: str = "") -> str:
     """사진/캡처 이미지에서 지문 본문(들)을 추출할 때 쓰는 프롬프트."""
     return (
         "첨부된 이미지는 영어 지문이 담긴 시험지/교재 사진 또는 캡처입니다. "
         "이미지 속 '영어 지문 본문'만 정확히 읽어 정리하세요.\n"
         + _MULTI_RULES +
         "\n- 한국어 번역이 함께 있어도 영어 원문만 추출하세요."
+        + _exam_focus_rules(focus_items)
     )
 
 
-def extract_prompt(raw_text: str) -> str:
+def extract_prompt(raw_text: str, focus_items: str = "") -> str:
     return (
         "다음은 PDF 에서 추출된 원문 텍스트입니다. 이 안에서 '영어 지문 본문'만 식별해 정리하세요.\n"
-        + _MULTI_RULES +
+        + _MULTI_RULES
+        + _exam_focus_rules(focus_items) +
         f"\n\n[원문 텍스트]\n{raw_text}"
     )
 

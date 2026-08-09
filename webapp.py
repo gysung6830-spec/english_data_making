@@ -117,6 +117,10 @@ INDEX_HTML = """
       <input type=text name=start_no placeholder="예: 31" inputmode=numeric>
       <div class=hint>제목이 <b>31. 주제</b> → <b>32. 주제</b> → <b>33. 주제</b> … 순으로 매겨집니다.</div>
 
+      <label>④-2 모의고사 문항 범위 <span class=hint>(모의고사 시험지일 때만. 예: 18-24,29-43 — 듣기(1~17)는 자동 제외. 비우면 전체 지문)</span></label>
+      <input type=text name=exam_range placeholder="예: 18-24,29-43">
+      <div class=hint>모의고사 원본을 넣으면 지정한 <b>독해 문항 번호</b>의 지문만 분석합니다. (일반 지문·교재는 비워두세요)</div>
+
       <label>⑤ 만들 자료 선택 <span class=hint>(핵심 어휘 리스트·시험지도 함께)</span></label>
       <label class=chk><input type=checkbox name=out_analysis value=1 checked> 📘 지문 분석지 (교사용·정답 포함)</label>
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
@@ -303,6 +307,9 @@ def analyze_route():
     raw_name = (request.form.get("basename") or "").strip()
     custom_base = _safe_name(raw_name) if raw_name else ""
 
+    # 모의고사 문항 범위(예: 18-24,29-43) — 허용 문자만 남겨 정제(비우면 전체)
+    exam_range = re.sub(r"[^0-9,\-~ ]", "", (request.form.get("exam_range") or "")).strip()
+
     # 시작 문항번호 — 입력 시 지문마다 1씩 자동 증가(비우면 원본 번호/순번 사용)
     raw_start = (request.form.get("start_no") or "").strip()
     try:
@@ -333,7 +340,8 @@ def analyze_route():
             if mock:
                 reports = pipeline._mock_reports_for_pdf(cfg, tmp)
             else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp)
+                reports = pipeline.build_reports_for_pdf(client, cfg, tmp,
+                                                         focus_items=exam_range)
             # 시작 문항번호가 지정되면 지문마다 번호를 1씩 올려 부여(파일 간에도 연속)
             if running_no is not None:
                 for rep in reports:

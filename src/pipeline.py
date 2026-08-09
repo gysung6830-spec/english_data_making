@@ -26,15 +26,18 @@ def _safe_stem(path: Path) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", path.stem).strip() or "passage"
 
 
-def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
+def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path,
+                          focus_items: str = ""):
     """PDF -> PassageSet. 설정(pdf_mode)에 따라 비전/텍스트로 추출.
 
     비전 모드인데 PyMuPDF(fitz)가 없으면 텍스트 추출로 자동 폴백한다(중단 방지).
+    focus_items: 모의고사 독해에서 뽑을 문항 번호(예: '18-24,29-43').
     """
     mode = cfg.extraction.pdf_mode
 
     def _text_extract(require: bool):
-        raw = extract.extract_passage_text(src)
+        # 모의고사 문항 지정(focus_items)이 있으면 2단 시험지로 보고 칼럼 순서로 읽는다.
+        raw = extract.extract_passage_text(src, two_column=bool(focus_items))
         if extract.looks_empty(raw):
             if require:
                 raise ValueError(
@@ -47,7 +50,7 @@ def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
         #   (비전이 불가한 require 상황에서는 깨졌더라도 그대로 사용해 결과는 내보낸다)
         if mode == "auto" and not require and extract.looks_garbled(raw):
             return None
-        return analyze.extract_passages(client, cfg, raw)
+        return analyze.extract_passages(client, cfg, raw, focus_items)
 
     if mode in ("text", "auto"):
         pset = _text_extract(require=(mode == "text"))
@@ -62,26 +65,31 @@ def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path):
         # PyMuPDF 미설치 → 텍스트 추출로 폴백(그래도 결과는 나오게)
         return _text_extract(require=True)
     try:
-        return analyze.extract_passages_image(client, cfg, [str(p) for p in imgs])
+        return analyze.extract_passages_image(client, cfg, [str(p) for p in imgs],
+                                              focus_items)
     finally:
         for p in imgs:
             p.unlink(missing_ok=True)
 
 
-def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path) -> list[Report]:
-    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로)."""
+def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path,
+                          focus_items: str = "") -> list[Report]:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로).
+
+    focus_items: 모의고사 독해에서 뽑을 문항 번호 범위(예: '18-24,29-43'). 비우면 전체.
+    """
     if extract.is_image(src):
-        pset = analyze.extract_passages_image(client, cfg, str(src))
+        pset = analyze.extract_passages_image(client, cfg, str(src), focus_items)
     elif hwp.is_hwp(src):
-        raw = hwp.extract_hwp_text(src)
+        raw = extract.strip_listening(hwp.extract_hwp_text(src))
         if extract.looks_empty(raw):
             raise ValueError(
                 "HWP 에서 텍스트를 찾지 못했습니다(지문이 이미지로 들어간 HWP일 수 있음). "
                 "그 페이지를 PDF나 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
-        pset = analyze.extract_passages(client, cfg, raw)
+        pset = analyze.extract_passages(client, cfg, raw, focus_items)
     else:
-        pset = _extract_pdf_passages(client, cfg, src)
+        pset = _extract_pdf_passages(client, cfg, src, focus_items)
     return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
 
 

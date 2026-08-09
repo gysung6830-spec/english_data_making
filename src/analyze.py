@@ -8,25 +8,30 @@ from .client import ClaudeClient
 from .config import Config
 
 
-def extract_passages(client: ClaudeClient, cfg: Config, raw_text: str) -> schemas.PassageSet:
-    """0단계(PDF): 원문 텍스트 -> 여러 지문(제목/출처/문단)."""
+def extract_passages(client: ClaudeClient, cfg: Config, raw_text: str,
+                     focus_items: str = "") -> schemas.PassageSet:
+    """0단계(PDF): 원문 텍스트 -> 여러 지문(제목/출처/문단).
+
+    focus_items 가 주어지면(예: '18-24,29-43') 모의고사 독해에서 그 문항만 추출한다.
+    """
     return client.structured(
         system=prompts.EXTRACT_SYSTEM,
-        prompt=prompts.extract_prompt(raw_text),
+        prompt=prompts.extract_prompt(raw_text, focus_items),
         model_cls=schemas.PassageSet,
         max_tokens=24000,
         max_retries=cfg.processing.max_retries,
     )
 
 
-def extract_passages_image(client: ClaudeClient, cfg: Config, image_path) -> schemas.PassageSet:
+def extract_passages_image(client: ClaudeClient, cfg: Config, image_path,
+                           focus_items: str = "") -> schemas.PassageSet:
     """0단계(사진/PDF 이미지): 이미지(들) -> 여러 지문(비전으로 읽음).
 
     image_path 는 단일 경로 또는 여러 페이지 이미지 경로 리스트일 수 있다.
     """
     return client.structured(
         system=prompts.EXTRACT_SYSTEM,
-        prompt=prompts.extract_image_prompt(),
+        prompt=prompts.extract_image_prompt(focus_items),
         model_cls=schemas.PassageSet,
         max_tokens=24000,
         max_retries=cfg.processing.max_retries,
