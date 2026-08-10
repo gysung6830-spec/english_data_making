@@ -414,12 +414,26 @@ function passageParagraphs(p, idx) {
 }
 
 function passageCoverParagraphs(meta = {}) {
-  const center = (children, after) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after }, children });
+  const TEAL = '279A52'; const TEALD = '1E7A40'; const GRAY = '6B7280';
+  const center = (children, after, before) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after, before }, children });
+  const gray = (t, extra) => new TextRun({ text: t, color: GRAY, font: S.FONT, ...extra });
+  const hl = (t, size) => new TextRun({ text: t, bold: true, color: TEAL, font: S.FONT, size });
   return [
-    center([new TextRun({ text: meta.title || '필생보', bold: true, size: 52, color: S.NAVY, font: S.FONT })], 120),
-    center([new TextRun({ text: '필자의 생각이 보이는 영어독해', bold: true, size: 28, color: S.NAVY, font: S.FONT })], 160),
-    center([new TextRun({ text: '소재 → 필자 주장(긍정·부정) → 글 구조 → 재진술(같은 말)', size: 22, color: S.BRASS, bold: true, font: S.FONT })], 100),
-    center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, color: '666666', font: S.FONT })], 700),
+    center([new TextRun({ text: '수능·평가원 독해 훈련', bold: true, size: 20, color: TEALD, font: S.FONT })], 200, 700),
+    center([new TextRun({ text: '필 생 보', bold: true, size: 108, color: TEAL, font: S.FONT })], 60),
+    // 필·생·보 = 필자의 생각이 보이는 (앞 글자 강조)
+    center([hl('필', 26), gray('자의 ', { size: 26, bold: true }), hl('생', 26), gray('각이 ', { size: 26, bold: true }), hl('보', 26), gray('이는', { size: 26, bold: true })], 140),
+    center([new TextRun({ text: '영 어 독 해', bold: true, size: 44, color: S.NAVY, font: S.FONT })], 160),
+    center([
+      new TextRun({ text: '소재', bold: true, size: 22, color: TEALD, font: S.FONT }),
+      new TextRun({ text: '  ›  ', bold: true, size: 22, color: TEAL, font: S.FONT }),
+      new TextRun({ text: '필자 주장', bold: true, size: 22, color: TEALD, font: S.FONT }),
+      new TextRun({ text: '  ›  ', bold: true, size: 22, color: TEAL, font: S.FONT }),
+      new TextRun({ text: '글 구조', bold: true, size: 22, color: TEALD, font: S.FONT }),
+      new TextRun({ text: '  ›  ', bold: true, size: 22, color: TEAL, font: S.FONT }),
+      new TextRun({ text: '재진술', bold: true, size: 22, color: TEALD, font: S.FONT }),
+    ], 120),
+    center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, italics: true, color: '888888', font: S.FONT })], 620),
     new Paragraph({
       spacing: { before: 200, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },
       children: [new TextRun({ text: '  📌 이렇게 써', bold: true, size: 22, color: S.NAVY, font: S.FONT })],

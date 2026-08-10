@@ -330,22 +330,36 @@ function chapterHtml(cat, chIndex) {
 }
 
 function coverHtml(meta = {}) {
-  const brand = meta.brand || '문법으로 뚫는 영어 해석';
-  const subtitle = meta.subtitle || '전치사구 · 수동태 · to부정사 · 동명사 · 관계사 · 분사 · 분사구문';
-  const source = meta.source || '2023학년도 수능 · 2024년 9월 평가원 모의평가(고3) 기출 기반';
+  const edition = meta.edition || meta.brand || '수능·평가원 독해 훈련';
+  const mark = meta.mark || meta.brand || '';                 // 큰 표제(예: 필생보)
+  const expandHtml = meta.expandHtml || '';                   // 마크 풀이(예: 필자의 생각이 보이는)
+  const main = meta.title || '영어 독해';                      // 메인 타이틀
+  const source = meta.source || '업로드한 지문 기반 · 자동 생성';
+  const pillars = meta.pillars || ['소재', '필자 주장', '글 구조', '재진술'];
+  const heroMark = mark
+    ? `<div class="cov-mark">${esc(mark)}</div>${expandHtml ? `<div class="cov-expand">${expandHtml}</div>` : ''}`
+    : '';
+  const pillarRow = pillars.length
+    ? `<div class="cov-pillars">${pillars.map((t) => `<span class="cov-pill">${esc(t)}</span>`).join('<span class="cov-arw">›</span>')}</div>`
+    : '';
   return `<section class="cover">
-    <div class="cov-badges"><span class="daypill">${esc(brand)}</span></div>
-    <div class="ctitle">${esc(meta.title || '영어 해석 구문 워크북')}</div>
-    <div class="csub">${esc(subtitle)}</div>
-    <div class="csrc">${esc(source)}</div>
+    <div class="cov-deco"></div>
+    <div class="cov-top"><span class="cov-edition">${esc(edition)}</span></div>
+    <div class="cov-hero">
+      ${heroMark}
+      <div class="cov-main">${esc(main)}</div>
+      <div class="cov-rule"></div>
+      ${pillarRow}
+    </div>
+    <div class="cov-src">${esc(source)}</div>
     <div class="usebox">
       <div class="useh">📌 쌤이 알려주는 사용법</div>
-      <p>${esc(meta.useIntro || '문법 용어가 낯설어도 괜찮아. 순서대로만 따라오면 돼.')}</p>
+      <p>${esc(meta.useIntro || '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.')}</p>
       <div class="usesteps">
-        ${(meta.useSteps || ['이 문법이 뭔지 읽고', '찾는 신호를 익히고', '해석하는 법을 보고', '같이 풀고 → 혼자 풀기!'])
+        ${(meta.useSteps || ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'])
     .map((t, i) => `<div class="ustep"><b>${CIRCLED[i]}</b> ${esc(t)}</div>`).join('')}
       </div>
-      <p class="fine">${meta.useFine || '끊어읽기는 앞에서부터만, 뒤로 돌아가지 말고. 혼자 풀어보기는 <b>왼쪽에서 직접 풀고, 오른쪽 페이지 해설</b>로 바로 맞춰봐.'}</p>
+      <p class="fine">${meta.useFine || '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.'}</p>
     </div>
   </section>`;
 }
@@ -357,7 +371,7 @@ function css() {
   body { font-family:"NanumSquareRound","Noto Sans KR","Malgun Gothic",sans-serif;
     color:${C.ink}; font-size:11.5px; line-height:1.5; }
   .chapter { break-before: page; page-break-before: always; padding: 2px; }
-  .cover { text-align:center; padding-top:90px; }
+  .cover { text-align:center; position:relative; padding-top:70px; overflow:hidden; }
   .chhead { margin-bottom:6px; }
   .daypill { display:inline-block; background:${C.teal}; color:#fff; font-weight:700;
     font-size:11px; padding:3px 12px; border-radius:20px; }
@@ -447,11 +461,26 @@ function css() {
   .co-ic { font-weight:800; margin-right:6px; }
   .callout.catch .co-ic { color:${C.tealDark}; }
   .callout.trap .co-ic { color:${C.trapBar}; }
-  .cov-badges { margin-bottom:20px; }
-  .ctitle { font-size:34px; font-weight:800; color:${C.ink}; margin-bottom:14px; }
-  .csub { color:${C.teal}; font-weight:700; font-size:15px; margin-bottom:12px; }
-  .csrc { color:${C.sub}; font-size:11.5px; font-style:italic; margin-bottom:40px; }
-  .usebox { text-align:left; background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:10px;
+  /* ── 표지(프리미엄) ── */
+  .cov-deco { position:absolute; top:-160px; left:50%; transform:translateX(-50%);
+    width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle at 50% 40%, ${C.mint} 0%, rgba(234,246,236,.35) 55%, rgba(234,246,236,0) 72%); z-index:0; }
+  .cov-top { position:relative; z-index:1; margin-bottom:26px; }
+  .cov-edition { display:inline-block; letter-spacing:3px; font-size:11px; font-weight:800; color:${C.tealDark};
+    border:1.5px solid ${C.teal}; border-radius:20px; padding:5px 18px; background:#fff; }
+  .cov-hero { position:relative; z-index:1; }
+  .cov-mark { font-size:76px; font-weight:800; letter-spacing:6px; color:${C.teal}; line-height:1.05;
+    text-shadow:0 2px 0 rgba(30,122,64,.12); }
+  .cov-expand { font-size:15px; font-weight:700; color:${C.sub}; letter-spacing:2px; margin-top:6px; }
+  .cov-expand .cov-hl { color:${C.teal}; font-weight:800; }
+  .cov-main { font-size:30px; font-weight:800; color:${C.ink}; letter-spacing:8px; margin-top:12px; }
+  .cov-rule { width:64px; height:4px; border-radius:3px; background:${C.teal}; margin:16px auto 14px; }
+  .cov-pillars { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; }
+  .cov-pill { font-size:12px; font-weight:800; color:${C.tealDark}; background:${C.mint};
+    border:1px solid ${C.greenLine}; border-radius:20px; padding:4px 14px; }
+  .cov-arw { color:${C.teal}; font-weight:800; font-size:13px; }
+  .cov-src { position:relative; z-index:1; color:${C.sub}; font-size:11.5px; font-style:italic; margin:22px 0 40px; }
+  .usebox { position:relative; z-index:1; text-align:left; background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:10px;
     padding:16px 20px; margin:0 40px; }
   .useh { color:${C.tealDark}; font-weight:800; font-size:14px; margin-bottom:8px; }
   .usesteps { display:flex; flex-wrap:wrap; gap:6px 14px; margin:8px 0; }
@@ -737,10 +766,13 @@ function passageHtml(p, idx) {
 // 지문 모드 전체 HTML. passages 는 normalizePassages 결과.
 function buildHtmlPassages(passages, meta = {}) {
   const cover = coverHtml({
-    brand: meta.brand || '필생보',
-    title: meta.title || '필자의 생각이 보이는 영어독해',
-    subtitle: meta.subtitle || '소재 → 필자 주장(긍정·부정) → 글 구조 → 재진술(같은 말), 한 지문 완전 독해',
+    edition: meta.edition || '수능·평가원 독해 훈련',
+    mark: meta.mark || '필생보',
+    // 필·생·보 = 필자의 생각이 보이는 (앞 글자를 브랜드색으로 강조)
+    expandHtml: meta.expandHtml || '<b class="cov-hl">필</b>자의 <b class="cov-hl">생</b>각이 <b class="cov-hl">보</b>이는',
+    title: meta.title || '영어 독해',
     source: meta.source || '업로드한 지문 기반 · 자동 생성',
+    pillars: meta.pillars || ['소재', '필자 주장', '글 구조', '재진술'],
     useIntro: '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.',
     useSteps: ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'],
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
