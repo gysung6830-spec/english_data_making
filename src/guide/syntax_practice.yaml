@@ -19,8 +19,7 @@ practice:
     - word: room
       meaning: 공간, 여지
     solution:
-      cut: 실제로 / 사례들이 있다 / [수용 능력이 제한되어 있고(that have ~) / 더 많은 방문객을 위한 공간이 실제로 없는(where
-        there is ~)] 특정 명소들의.
+      cut: 실제로 / 사례들이 있다 / [수용 능력이 제한되어 있고 / 더 많은 방문객을 위한 공간이 실제로 없는] 특정 명소들의.
       wrong: 수용 능력을 어떻게 제한하고 어디에 방문객을 위한 공간이 없는지를 보여 주는 명소들
       wrong_why: that과 where 둘 다 attractions(명소)를 꾸미는 관계사절이다. where는 '어디에'라는 의문사가
         아니라 '~한 (장소)'을 뜻하는 관계부사(= in which)이므로 '어디에 ~인지'로 옮기면 안 된다.
@@ -50,8 +49,8 @@ practice:
     - word: aspect
       meaning: 측면
     solution:
-      cut: 과학적 사고자는 찾는다 / 그 대상의 특징들을 / [주관성이 제거될 수 있는(that ~)], 이상적으로는 / [정량화될 수 있고(that
-        ~) / 그래서 그 값이 관찰자마다 결코 변하지 않는(whose values ~)] 그런 측면들을.
+      cut: 과학적 사고자는 찾는다 / 그 대상의 특징들을 / [주관성이 제거될 수 있는], / 이상적으로는 / [정량화될 수 있고 / 그래서
+        그 값이 관찰자마다 결코 변하지 않는] 그런 측면들을.
       wrong: 어떤 측면이 정량화될 수 있고 누구의 값이 변하지 않는지
       wrong_why: that은 aspects를 꾸미는 주격 관계대명사, whose values는 '그 (측면들의) 값'을 뜻하는 소유격
         관계대명사다. '어떤/누구의 ~인지'를 묻는 의문사절이 아니다.
@@ -81,8 +80,8 @@ practice:
     - word: lose interest
       meaning: 흥미를 잃다
     solution:
-      cut: 만약 당신이 듣는다면 / [명확하지 않고(who is ~) / 주제에 머물지 못하며(who cannot ~) / 정보를 너무 많거나
-        적게 주는(who offers ~)] 사람의 말을, / 당신은 곧 흥미를 잃을 것이다 / 대화에.
+      cut: 만약 당신이 듣는다면 / [명확하지 않고 / 주제에 머물지 못하며 / 정보를 너무 많거나 적게 주는] 사람의 말을, / 당신은
+        곧 흥미를 잃을 것이다 / 대화에.
       wrong: 누가 명확하지 않고 누가 주제에서 벗어나는지를 듣는다면
       wrong_why: 세 개의 who는 모두 someone을 꾸미는 주격 관계대명사(병렬)다. '누가 ~인지'를 묻는 의문사 명사절이 아니라
         '~한 사람'이라는 수식이다.
@@ -104,8 +103,7 @@ practice:
     - word: quality
       meaning: 질
     solution:
-      cut: 반대로 / 주장될 수 있다 / [많은 사람이 걷고 있지 않은(in which ~)] 도시가 / 흔히 나타낸다고 / 좋은 도시의
-        질을.
+      cut: 반대로 / 주장될 수 있다 / [많은 사람이 걷고 있지 않은] 도시가 / 흔히 나타낸다고 / 좋은 도시의 질을.
       wrong: 많은 사람이 걷지 않는 곳이 어디인지가 도시의 질을 보여 준다.
       wrong_why: in which many people are not walking은 a city를 꾸미는 관계사절('~한 도시')이다.
         in which를 '어디에 ~인지'로 읽으면 안 되고, indicates의 주어는 a city다.
@@ -137,7 +135,7 @@ practice:
     - word: perspective
       meaning: 관점
     solution:
-      cut: to guide / how to respond — 안내하기 위해 / 어떻게 대응할지를
+      cut: 안내하기 위해 / 어떻게 대응할지를.
       wrong: how를 정도(얼마나 많이)를 묻는 것으로 보아 '얼마나 대응하는지'로 옮긴 해석
       wrong_why: how to respond의 how는 뒤에 형용사·부사(much/many 등)를 동반하지 않고 to부정사와 결합해 '어떻게
         ~할지'라는 방법을 나타내는 의문사이다. 정도의 how라면 how much/how many처럼 수량 표현이 뒤따라야 한다. 여기서는
@@ -166,10 +164,8 @@ practice:
     - word: adverse
       meaning: 부정적인
     solution:
-      cut: consider / the uncertainties (involved in predicting climatic changes),
-        / how ecosystems are likely to respond to climatic changes, / and the likely
-        efficacy of actions (that might be taken ...) — 고려하라 / (기후 변화 예측에 관련된) 불확실성을,
-        / 생태계가 기후 변화에 어떻게 반응할 가능성이 있는지를, / 그리고 (…취해질 수 있는) 조치들의 있음직한 효능을
+      cut: 고려하라 / (기후 변화를 예측하는 데 관련된) 불확실성을, / 생태계가 기후 변화에 어떻게 반응할 가능성이 있는지를, / 그리고
+        (기후 변화의 부정적 영향에 대응하려 취해질 수 있는) 조치들의 있음직한 효능을.
       wrong: how절을 앞 명사 uncertainties를 꾸미는 수식어로 보거나, consider의 목적어가 아니라 부사적으로 처리한
         해석
       wrong_why: how ecosystems ... respond는 consider의 세 목적어(the uncertainties / how
@@ -201,12 +197,8 @@ practice:
     - word: statement
       meaning: (예술적) 표현
     solution:
-      cut: Just as we don't always see / the intricate brushwork (that goes into the
-        creation of a painting), / we may not always notice / how Beethoven keeps
-        finding fresh uses for his motto / or how he develops his material into a
-        large, cohesive statement — 우리가 …을 항상 보지는 못하듯이 / (그림 창작에 들어가는) 정교한 붓놀림을 /
-        우리는 항상 알아차리지는 못할 수도 있다 / 베토벤이 모티프의 참신한 쓰임을 어떻게 계속 찾아내는지 / 또는 소재를 어떻게 크고 응집력
-        있는 작품으로 발전시키는지를
+      cut: 우리가 항상 보지는 못하듯이 / (그림 창작에 들어가는) 정교한 붓놀림을 / 우리는 항상 알아차리지는 못할 수도 있다 / 베토벤이
+        자신의 모티프의 참신한 쓰임을 어떻게 계속 찾아내는지 / 또는 자신의 소재를 어떻게 크고 응집력 있는 작품으로 발전시키는지를.
       wrong: how를 '~하는 방식'이라는 관계부사(선행사 수식)로 보아 앞 명사를 꾸미는 것으로 옮기거나, 두 how절이 병렬임을 놓친
         해석
       wrong_why: 두 how절은 모두 동사 notice의 목적어인 의문사 명사절('어떻게 ~하는지')로, or로 병렬 연결된다. 앞 that(brushwork
@@ -237,11 +229,8 @@ practice:
     - word: release
       meaning: 놓아주다
     solution:
-      cut: Killer whales also repeat the same seal hunting technique / in front of
-        their offspring, / ... leading researchers to ask / why they would repeatedly
-        catch and release a seal / if they were not planning to eat it — 범고래는 똑같은
-        물개 사냥 기술을 반복한다 / 새끼 앞에서, / … 연구자들이 묻게 만든다 / 왜 그들이 반복적으로 물개를 잡았다가 놓아주려 하는지를
-        / 먹을 계획이 아니었다면
+      cut: 범고래는 똑같은 물개 사냥 기술을 반복한다 / 새끼 앞에서, / … 연구자들이 묻게 만든다 / 왜 그들이 반복적으로 물개를 잡았다가
+        놓아주려 하는지를 / 만약 먹을 계획이 아니었다면.
       wrong: why를 이유를 나타내는 부사절(왜냐하면)로 보거나, leading을 killer whales를 꾸미는 것으로 처리한 해석
       wrong_why: why they would ... release a seal는 동사 ask의 목적어인 의문사 명사절('왜 ~하는지')이다.
         leading researchers to ask ...는 앞 절 전체를 부연하는 분사구문(그 결과 ~하게 만든다)이며, would는
@@ -271,8 +260,7 @@ practice:
     - word: accomplish
       meaning: 이루다, 달성하다
     solution:
-      cut: The design process / concentrates on / how the agents will cooperate and
-        coordinate with each other / to accomplish the team goals.
+      cut: 그 설계 과정은 / 집중한다 / 에이전트들이 서로 어떻게 협력하고 조정할지에 / 팀 목표를 달성하기 위해.
       wrong: how를 정도(얼마나)로 보아 '얼마나 협력하는지'로 오독.
       wrong_why: 여기서 how는 전치사 on의 목적어가 되는 명사절을 이끄는 의문사/관계부사로 '어떻게(방법)'를 뜻한다. how many/much처럼
         정도를 나타내는 용법이 아니다.
@@ -295,8 +283,7 @@ practice:
     - word: far less
       meaning: 훨씬 덜
     solution:
-      cut: Culture operates / in ways (we can consciously consider and discuss) /
-        but also in ways (of which we are far less cognizant).
+      cut: 문화는 작동한다 / (우리가 의식적으로 고려하고 논의할 수 있는) 방식으로 / 하지만 또한 (우리가 훨씬 덜 인식하는) 방식으로도.
       wrong: of which를 놓쳐 뒤 관계절을 선행사 ways에 걸지 못하고 문장을 끊어 오독.
       wrong_why: of which we are far less cognizant는 ways를 수식하는 관계절로, be cognizant
         of의 of가 관계대명사 which와 함께 앞으로 이동한 형태다. '그 방식에 대해 우리가 훨씬 덜 인식하는'으로 선행사 ways에
@@ -324,7 +311,7 @@ practice:
     - word: rush through
       meaning: 헤치고 서둘러 가다
     solution:
-      cut: ([그녀가 제시간에 탑승구에 못 갈까] 걱정되어)(분사구문, 이유 ~해서) / 그녀는 / 서둘러 갔다 / 사람들의 인파를 헤치고.
+      cut: (제시간에 탑승구에 못 갈까 걱정되어) / 그녀는 / 서둘러 갔다 / 사람들의 인파를 헤치고.
       wrong: 그녀가 제시간에 탑승구에 도착하지 못할까 걱정되었기 때문에, 사람들은 인파를 헤치고 서둘러 갔다.
       wrong_why: 분사구문 (Being) Worried의 의미상 주어는 주절 주어 she다. 서둘러 간 주체는 사람들(people)이
         아니라 그녀(she)이며, 주절 뼈대는 she rushed through the crowds다.
@@ -352,8 +339,7 @@ practice:
     - word: encouraging
       meaning: 격려하는
     solution:
-      cut: ([그녀가 실패에 대해 어떻게 느끼는지] 알아차리고)(분사구문, ~하고) / Ken이 / 그녀에게 다가가 / 몇 마디 격려의 말을
-        했다.
+      cut: ([그녀가 실패에 대해 어떻게 느끼는지] 알아차리고) / 켄이 / 그녀에게 다가가 / 몇 마디 격려의 말을 했다.
       wrong: 자신의 실패에 대해 어떻게 느끼는지 알아차린 그녀는, 팀 동료 Ken에게 다가가 몇 마디 격려의 말을 건넸다.
       wrong_why: Recognizing 분사구문의 의미상 주어는 콤마 뒤 주절 주어 Ken이다. 알아차리고 다가간 주체는 she가 아니라
         Ken이며, 주절 뼈대는 Ken approached her and said이다.
@@ -380,11 +366,8 @@ practice:
     - word: aesthetics
       meaning: 미학
     solution:
-      cut: Considering the metaphor of seams in clothing, / we can say that we aspire
-        to seamless aesthetics / by stitching the seams closely, pressing them flat
-        and making sure they are hidden on the inside / so that we wear clothing rather
-        than pieces of fabric. — Considering는 분사구문, stitching·pressing·making이 by에
-        병렬로 걸림.
+      cut: (옷의 솔기라는 비유를 고려하면) / 우리는 이음매 없는 미학을 추구한다고 말할 수 있다 / 솔기를 촘촘히 꿰매고, 납작하게 눌러
+        다리며, 안쪽에 숨겨지도록 확실히 함으로써 / 그리하여 우리가 천 조각이 아니라 옷을 입도록.
       wrong: Considering를 주절 동사로 보거나, pressing·making을 stitching과 무관한 별개 동작으로 끊어 by의
         목적어 병렬임을 놓침.
       wrong_why: Considering ~ clothing은 '~을 고려하면'의 분사구문이다. by 뒤의 stitching, pressing,
@@ -412,10 +395,8 @@ practice:
     - word: grasp
       meaning: 파악하다
     solution:
-      cut: Moving up in scale, / without some awareness of how phenomena are arranged
-        on Earth's surface, / it is difficult to make ~ judgments, make sense of events,
-        or grasp some of the basic forces / shaping life on the planet. — Moving up
-        in scale는 분사구문, shaping ~ planet은 forces를 수식하는 현재분사.
+      cut: (규모를 키워 나갈 때) / (현상들이 지구 표면에 어떻게 배열되어 있는지에 대한 어느 정도의 인식이 없으면) / 합리적인 사업적·정책적
+        판단을 내리거나, 사건을 이해하거나, 근본적인 힘들 중 일부를 파악하기가 어렵다 / (지구상의 생명을 형성하는).
       wrong: shaping life on the planet를 앞 동사와 병렬로 보아 '생명을 형성한다'로 별개 동작으로 읽거나, Moving
         up in scale의 주어를 phenomena로 잡음.
       wrong_why: shaping ~ planet은 바로 앞 the basic forces를 수식하는 현재분사구('생명을 형성하는 힘')다.
@@ -446,9 +427,8 @@ practice:
     - word: irrelevant
       meaning: 무관한
     solution:
-      cut: Questions of morality / are often pushed to the side / in legislative debate,
-        / labeled too controversial, / too difficult to answer, / or ... irrelevant
-        to the project.
+      cut: 도덕성의 문제들은 / 흔히 뒷전으로 밀려난다 / 입법 논쟁에서, / 너무 논쟁적이라고 분류되어, / 답하기 너무 어렵다고, /
+        또는 가장 나쁘게는 그 사안과 무관하다고.
       wrong: labeled를 능동으로 보아 '~라고 규정짓는다'로 오독.
       wrong_why: labeled는 (being) labeled의 수동 분사구문으로, 주어 Questions of morality가 '~라고
         분류되는' 대상이다. 능동으로 무언가를 규정하는 것이 아니다.
@@ -477,8 +457,7 @@ practice:
     - word: timber
       meaning: 목재
     solution:
-      cut: But the economic benefits (provided by these services), / based on their
-        non‑market values, / may exceed / the economic value of the timber.
+      cut: 그러나 (이 서비스들이 제공하는) 경제적 이익은, / 그것들의 비시장 가치에 근거하여, / 초과할 수 있다 / 목재의 경제적 가치를.
       wrong: 삽입된 분사구문 based on their non‑market values의 their를 timber로 잘못 연결.
       wrong_why: based on their non‑market values는 (being) based on의 삽입 분사구문으로, their는
         앞의 these services(그 이익의 원천)를 가리킨다. 목재가 아니라 서비스의 비시장 가치에 근거해 산정된 이익이다.
@@ -508,9 +487,8 @@ practice:
     - word: insufficient
       meaning: 불충분한
     solution:
-      cut: Formal training programs, / (developed in advance and delivered according
-        to a preset schedule), / are insufficient / to address shifting training needs
-        / and encourage timely information sharing.
+      cut: 공식 훈련 프로그램은, / (미리 개발되어 정해진 일정에 따라 전달되는데), / 불충분하다 / 변화하는 훈련 요구를 다루기에 /
+        그리고 적시의 정보 공유를 촉진하기에.
       wrong: developed/delivered를 능동 본동사로 보아 '개발하고 전달한다'로 오독.
       wrong_why: developed와 delivered는 주어 Formal training programs를 수식하는 과거분사(수동)의
         삽입 분사구문이며, 문장의 본동사는 are insufficient이다.
@@ -533,9 +511,8 @@ practice:
     - word: substance
       meaning: 실체, 내용
     solution:
-      cut: In this sense, / depending on the intentions of the parties, / the areas
-        of common interest / may be clarified, refined / and given negotiated form
-        and substance.
+      cut: 이런 의미에서, / (당사자들의 의도에 따라), / 공동의 관심 영역은 / 명확해지고 다듬어지며 / 협상된 형태와 실체를 부여받을
+        수 있다.
       wrong: depending on을 '~에 의존하는 (관심 영역)'처럼 명사 수식으로 보거나 주어로 오해.
       wrong_why: depending on the intentions of the parties는 문두 분사구문(= as it depends
         on ~)으로 '당사자들의 의도에 따라'라는 부사·조건 의미이며, 주절의 주어는 the areas of common interest이다.
@@ -560,8 +537,8 @@ practice:
     - word: individual
       meaning: 개인, 사람
     solution:
-      cut: Individual perspectives / may also be context dependent, / meaning that
-        ... / the same individual may make different choices.
+      cut: 개인의 관점 또한 / 맥락에 의존적일 수 있는데, / 이는 (다른 상황에서, 다른 시간에, 그들이 다르게 느끼고 있을 때) …라는
+        것을 의미한다 / 같은 사람이 다른 선택을 할 수도 있음을.
       wrong: meaning을 '의미 있는'이라는 형용사나 be동사의 목적으로 오독.
       wrong_why: meaning that ...은 앞 절 전체를 부연하는 분사구문(= which means that)으로, '즉 ~을
         의미한다'로 이어 읽어야 한다.
@@ -587,10 +564,8 @@ practice:
     - word: per hectare
       meaning: 헥타르당
     solution:
-      cut: a United Nations initiative has estimated / that the economic benefits
-        of ecosystem services (provided by tropical forests), / including climate
-        regulation, water purification, and erosion prevention, / are over three times
-        greater per hectare / than the market benefits.
+      cut: 한 유엔 계획은 추정했다 / (열대림이 제공하는) 생태계 서비스의 경제적 이익이 / (기후 조절, 수질 정화, 침식 방지를 포함하여)
+        / 헥타르당 세 배 넘게 크다고 / 시장 이익보다.
       wrong: including을 본동사나 '~을 포함시킨다'로 보아 that절 구조를 깨뜨림.
       wrong_why: including ...은 ecosystem services를 부연하는 콤마 분사구(= which include)로
         삽입된 예시이며, that절의 본동사는 are (greater)이다.
@@ -620,8 +595,8 @@ practice:
     - word: container
       meaning: 용기, 그릇
     solution:
-      cut: 가속의 증가에도 불구하고 / 우리 몸은 된다 / [점점 더 수동적인 비이동 용기가] / , which(그런데 그것은) / 이동되거나
-        채워진다 / [인공물에 의해 / 이동한다는 내적 느낌으로].
+      cut: (가속의 증가에도 불구하고) / 우리 몸은 된다 / [점점 더 수동적인 비이동 용기가] / (그런데 그것은) / 이동되거나 채워진다
+        / [인공물에 의해 / 이동한다는 내적 느낌으로].
       wrong: 우리 몸을 비이동 용기로 바꾸는 인공물이 우리 몸을 이동시킨다.
       wrong_why: ', which의 선행사는 a passive non-moving container(우리 몸)이다. which절은 그
         용기를 보충 설명하는 삽입(계속적 용법)이지, 인공물을 주어로 만드는 것이 아니다.'
@@ -653,7 +628,7 @@ practice:
       meaning: 휴대 가능한
     solution:
       cut: 현세대 예술가에게 / 컴퓨터는 / (더 적절히 말하면 노트북은) / 하나이다 / [통합적·휴대 가능한 디지털 기술 집합의] /
-        that(그것들은) 연결한다 / [그들의 사회·직장 생활을].
+        (그것들은) 연결한다 / [그들의 사회·직장 생활을].
       wrong: 컴퓨터가 노트북을 더 적절하게 만들어 기술이 되었다.
       wrong_why: '''or more appropriately, the laptop''은 주어 the computer를 바꿔 말하는 동격
         삽입일 뿐, 컴퓨터가 노트북에 무언가를 하는 동사구가 아니다. 문장의 동사는 is이다.'
@@ -679,9 +654,8 @@ practice:
     - word: evidence
       meaning: 증거
     solution:
-      cut: 다행히도 / [1660년 이후 시기에는] / , when ~ subject(그 시기에는 더 많은 의복이 남아 이해를 풍부하게 하는데)
-        / there are also / [많은 그림·판화·사진·영상 증거 자료가] / [옷 입은 사람들에 대한] / , caught in
-        movement(움직임 속에 포착된).
+      cut: 다행히도 / [1660년 이후 시기에는] / (그 시기에는 더 많은 의복이 남아 그 주제의 역사에 대한 이해를 풍부하게 하는데)
+        / 또한 있다 / [많은 그림·판화·사진·영상 증거 자료가] / [옷 입은 사람들에 대한] / (움직임 속에 포착된).
       wrong: 1660년 이후 시기가 우리의 이해를 풍부하게 하여, 옷을 붙잡는 많은 증거가 있다.
       wrong_why: ''', when ~ subject,''는 the period를 보충 설명하는 콤마 삽입절이고, ''caught in
         movement''는 people(또는 sources)을 꾸미는 콤마 삽입 분사구이다. 둘 다 빼면 뼈대 there are also
@@ -715,11 +689,8 @@ practice:
     - word: mobile
       meaning: 이동하는
     solution:
-      cut: In spite of increasing acceleration, / (for example in travelling through
-        geographical or virtual space,) / our body becomes more and more a passive
-        non‑moving container, / which is transported by artefacts... — 콤마 사이의 for
-        example ~ space를 걷어내면 In spite of increasing acceleration + our body becomes
-        ~ container가 뼈대.
+      cut: (가속의 증가에도 불구하고) / (예를 들어 지리적 혹은 가상 공간을 이동하는 데서) / 우리 몸은 점점 더 수동적인 비이동 용기가
+        된다 / (그런데 그것은 인공물에 의해 이동된다…).
       wrong: 삽입된 예시구(travelling through ~ space)를 문장의 주어로 오인해 '여행하는 것이 우리 몸을 만든다'로
         읽음.
       wrong_why: for example로 시작하는 콤마 삽입구는 앞의 acceleration을 부연하는 예시일 뿐 문장의 주어가 될 수
@@ -752,11 +723,8 @@ practice:
     - word: persistent
       meaning: 잔류성의
     solution:
-      cut: Since that time, / it has become apparent / that broadly effective pesticides
-        can have harmful effects on beneficial insects, / (which can negate their
-        effects in controlling pests,) / and that persistent pesticides can damage
-        non‑target organisms... — it ~ apparent 뒤에 that절 두 개가 병렬. 중간의 which절은 삽입된
-        부연.
+      cut: 그때 이후로, / 분명해졌다 / 폭넓게 효과적인 살충제가 이로운 곤충에 해로운 영향을 끼칠 수 있다는 것이, / (그것은 해충
+        방제에서의 효과를 무효화할 수 있는데,) / 그리고 잔류성 살충제가 생태계의 비표적 생물에 해를 끼칠 수 있다는 것이 (새와 사람 같은).
       wrong: 삽입된 관계사절(which can negate ~ pests)을 주된 내용으로 오인해 이를 문장의 핵심 주어로 읽음.
       wrong_why: which절은 앞의 harmful effects on beneficial insects를 부연하는 삽입절이다. 문장의
         뼈대는 it has become apparent that A and that B라는 두 that절이다.
@@ -788,10 +756,8 @@ practice:
     - word: immoral
       meaning: 부도덕한
     solution:
-      cut: Even though there is good reason to consider a dog a sentient being ~ plans
-        / —(so that we might suppose it could have conceived of acting otherwise)—
-        / we're unlikely to think it is wicked and immoral for attacking a child.
-        — 대시 사이를 걷어내면 Even though ~ plans + we're unlikely to think ~ 이 뼈대.
+      cut: 비록 개를 [선택과 계획을 할 수 있는] 지각 있는 존재로 여길 만한 충분한 이유가 있더라도 / (그래서 개가 달리 행동할 수도
+        있었다고 우리가 추측할 만큼) / 우리는 개가 아이를 공격한 것이 사악하고 부도덕하다고 생각하지는 않을 것이다.
       wrong: 대시 사이의 삽입절(so that we might suppose ~ otherwise)을 주절로 오인하고, 정작 주절인 we're
         unlikely to think를 무시함.
       wrong_why: 두 대시 사이는 부연 삽입이다. Even though(양보절) 다음의 실제 주절은 we're unlikely to think
@@ -818,10 +784,8 @@ practice:
     - word: subsequently
       meaning: 이후에
     solution:
-      cut: Over the course of its evolutionary history, / an organism's remote ancestors
-        may have evolved a set of characteristics / —(evolutionary baggage)— / that
-        subsequently constrain future evolution. — 대시 사이 evolutionary baggage는 characteristics를
-        다시 말한 동격 삽입.
+      cut: (그것의 진화 역사를 거치는 동안) / 한 유기체의 먼 조상들은 일련의 특성들을 진화시켜 왔을 수 있다 / (즉 진화적 짐을)
+        / (이후 미래의 진화를 제약하는).
       wrong: 대시 사이 evolutionary baggage를 별개의 새 목적어로 보아 '특성과 진화적 짐을 진화시켰다'로 두 개를 나열해
         읽음.
       wrong_why: 대시 사이는 앞의 a set of characteristics를 바꿔 부르는 동격 삽입이다. 또한 that절은 characteristics를
@@ -847,8 +811,8 @@ practice:
     - word: so that
       meaning: ~하도록
     solution:
-      cut: One function of poetry / is to depict the world with a fresh perception
-        / —to make it strange— / so that we will listen to language once again.
+      cut: 시의 한 가지 기능은 / 세상을 신선한 지각으로 묘사하는 것이다 / (즉 세상을 낯설게 만드는 것) / 그리하여 우리가 언어에
+        다시 한번 귀 기울이도록.
       wrong: 대시 쌍 —to make it strange—를 앞의 to depict와 병렬된 별개의 목적으로 오독.
       wrong_why: —to make it strange—는 대시 쌍으로 삽입된 부연으로, 바로 앞 'a fresh perception으로
         묘사하기'를 다시 풀어 설명한다. 문장의 골격은 One function is to depict ... so that ...이다.
@@ -872,8 +836,8 @@ practice:
     - word: masked
       meaning: 가려진, 감춰진
     solution:
-      cut: But here too / there is iteration / —the repeated burning of molecules
-        of wax— / so this too is an iterative process, / although at first masked.
+      cut: 그러나 여기에도 / 반복이 있다 / (즉 밀랍 분자가 반복적으로 연소되는 것) / 그래서 이것 역시 반복적인 과정이다, / 비록
+        처음에는 가려져 있었지만.
       wrong: 대시 쌍 삽입을 별개의 절이나 본동사구로 보아 there is ... so ... 골격을 놓침.
       wrong_why: —the repeated burning of molecules of wax—는 대시 쌍으로 삽입된 iteration의
         동격 부연이다. 삽입구를 걷어내면 there is iteration so this too is an iterative process가
@@ -903,8 +867,8 @@ practice:
     - word: mortgage
       meaning: 저당(잡히다)
     solution:
-      cut: 흔히 그것은 뜻한다 / 당신이 그 막대기들을 상당수 소유하고 있음을 / [온전한 묶음을 이루는] / 콜론(:) 뒤 = 즉, 판매
-        막대기·임대 막대기·저당·양도·증여, 심지어 파괴할 권리까지.
+      cut: 흔히 그것은 뜻한다 / 당신이 그 막대기들을 상당수 소유하고 있음을 / [온전한 묶음을 이루는] / 즉, 판매 막대기·임대 막대기·저당·양도·증여,
+        심지어 그것을 파괴할 권리까지.
       wrong: 콜론(:) 뒤 나열을 the full bundle과 '별개의' 항목으로 보고, 소유하려 '한다'는 의지로 오독한 것.
       wrong_why: 콜론(:)은 the full bundle(the sticks)을 구체적으로 풀어 쓰는 동격 표지 — 뒤의 목록은 그
         막대기들의 '내용'이다. that means는 '즉 ~이다'의 재진술로 현재 소유 '상태'를 서술한다.
@@ -937,11 +901,8 @@ practice:
     - word: escape response
       meaning: 도피 반응
     solution:
-      cut: 'Studies on dark‑eyed juncos (a type of bird) support the ( ) view / 검은눈방울새(새의
-        일종)에 관한 연구들은 다음 관점을 뒷받침한다 / that nonvigilant animals attend to departures
-        of individual group mates / 즉 비경계 동물들이 개별 무리 짝의 이탈에 주의를 기울인다는(the view that~
-        : 동격) / but that the departure of multiple individuals causes a greater escape
-        response. / 그러나 다수의 이탈은 더 큰 도피 반응을 일으킨다는 (관점을).'
+      cut: 검은눈방울새(새의 일종)에 관한 연구들은 그 관점을 뒷받침한다 / 즉 비경계 동물들이 개별 무리 짝의 이탈에 주의를 기울인다는
+        / 그러나 다수 개체의 이탈은 비경계 개체들에게 더 큰 도피 반응을 일으킨다는 (관점을).
       wrong: that절을 view를 수식하는 관계절(=관점을 관찰·연구한)로 보고 support의 목적어 구조를 놓침.
       wrong_why: the view 뒤의 that은 view의 내용을 그대로 풀어 주는 동격 접속사이다(the view = 그 뒤 절 내용).
         문장의 골격은 'Studies support the view that ...'이므로 '연구가 ~라는 관점을 뒷받침한다'로 읽는다.
@@ -973,10 +934,8 @@ practice:
     - word: reside
       meaning: 거주하다
     solution:
-      cut: Hyper‑mobility—the notion that more travel at faster speeds covering longer
-        distances generates greater economic success— / 초이동성—즉 더 빠른 속도로 더 먼 거리를 이동하는
-        것이 더 큰 경제적 성공을 낳는다는 개념(대시 사이=Hyper‑mobility의 동격)— / seems to be a distinguishing
-        feature of urban areas. / 은 도시 지역의 두드러진 특징으로 보인다.
+      cut: 초이동성은 / (즉 더 빠른 속도로 더 먼 거리를 이동하는 것이 더 큰 경제적 성공을 낳는다는 개념은) / 도시 지역의 두드러진
+        특징으로 보인다 / (그곳에는 현재 세계 인구의 절반 이상이 거주한다).
       wrong: 대시 사이 삽입을 주절의 동사로 오해해 문장 뼈대(주어=Hyper-mobility, 동사=seems)를 놓침.
       wrong_why: 두 개의 대시(—…—) 사이는 주어 Hyper‑mobility를 다시 설명하는 동격 어구이다. 이를 걷어내면 'Hyper‑mobility
         seems to be a distinguishing feature ...'가 뼈대이다.
@@ -1005,10 +964,8 @@ practice:
     - word: give away
       meaning: 거저 주다, 양도하다
     solution:
-      cut: 'that means you own a lot of the sticks that make up the full bundle: /
-        그것은 당신이 그 전체 다발을 이루는 많은 막대를 소유한다는 뜻이다: (콜론=the sticks의 구체적 목록) / the sell
-        stick, the rent stick, the right to mortgage, license, give away, even destroy
-        the thing. / 즉 팔 권리, 빌려줄 권리, 저당·허가·양도, 심지어 그것을 파괴할 권리.'
+      cut: 그것은 뜻한다 / 당신이 [그 전체 다발을 이루는] 많은 막대를 소유한다는 것을 / 즉 팔 막대, 빌려줄 막대, 저당·허가·양도,
+        심지어 그것을 파괴할 권리까지.
       wrong: 콜론 뒤 목록을 앞 동사(own)의 또 다른 목적어나 명령의 대상으로 오독.
       wrong_why: 콜론은 앞의 the sticks(막대들)가 구체적으로 무엇인지 나열해 동격으로 풀어 주는 신호이다. 뒤의 명사구들은
         the sticks와 같은 것을 가리킨다.
@@ -1038,11 +995,8 @@ practice:
     - word: overlook
       meaning: 간과하다
     solution:
-      cut: 'In larger‑scale projects, however, even where a strong personality exercises
-        powerful influence, / 그러나 대규모 프로젝트에서는, 강한 개성의 인물이 강력한 영향력을 행사하는 경우에도, / the
-        fact that substantial numbers of designers are employed in implementing a
-        concept / 상당수의 디자이너가 어떤 개념을 구현하는 데 고용된다는 사실이(the fact that~ : 동격) / can easily
-        be overlooked. / 쉽게 간과될 수 있다.'
+      cut: 그러나 대규모 프로젝트에서는, / (강한 개성의 인물이 강력한 영향력을 행사하는 경우에도), / [상당수의 디자이너가 어떤 개념을
+        구현하는 데 고용된다는] 사실이 / 쉽게 간과될 수 있다.
       wrong: the fact that를 동격으로 보지 않고 that절을 별도 동사의 목적어처럼 끊어 문장 주어(the fact)를 놓침.
       wrong_why: the fact 뒤 that은 그 fact의 내용을 그대로 밝혀 주는 동격 접속사이다. 문장의 주어는 'the fact
         that ...' 전체이고 동사는 can be overlooked이다.
@@ -1066,10 +1020,8 @@ practice:
     - word: demand
       meaning: 수요
     solution:
-      cut: 'In recent years urban transport professionals globally have largely acquiesced
-        to the view / 최근 몇 년간 전 세계 도시 교통 전문가들은 그 견해를 대체로 받아들여 왔다 / that automobile
-        demand in cities needs to be managed rather than accommodated. / 즉 도시의 자동차
-        수요가 수용되기보다는 관리되어야 한다는(the view that~ : 동격).'
+      cut: 최근 몇 년간 / 전 세계 도시 교통 전문가들은 / 그 견해를 대체로 받아들여 왔다 / 즉 도시의 자동차 수요가 수용되기보다는
+        관리되어야 한다는 (견해를).
       wrong: the view 뒤 that을 view를 수식하는 관계절('바라보는 견해')로 오독.
       wrong_why: the view 다음 that은 그 견해의 내용을 그대로 풀어 주는 동격 접속사이다(the view = 그 뒤 절).
         '~라는 견해'로 that절 전체를 view와 동일시해 읽는다.
@@ -1099,8 +1051,8 @@ practice:
     - word: livability
       meaning: 거주 적합성
     solution:
-      cut: '[밀집한 도시들의 물리적 제약]과 [접근성·이동성·안전·대기 오염·도시 거주 적합성에 대한 그에 상응하는 요구]가 / 모두 제한한다
-        / [도로망을 확장하는 선택지를] / [이 늘어나는 수요를 수용하기 위해서만].'
+      cut: (기후 변화의 절박한 요구가 없더라도) / [밀집한 도시들의 물리적 제약]과 [접근성·이동성·안전·대기 오염·도시 거주 적합성에
+        대한 그에 상응하는 요구]가 / 모두 제한한다 / [도로망을 확장하는 선택지를] / [오직 이 늘어나는 수요를 수용하기 위해].
       wrong: 밀집한 도시들이 접근성, 이동성, 안전 등을 제약하며 그것들이 도로망을 확장한다.
       wrong_why: 뼈대 주어는 두 개의 명사구 'the physical constraints ... and the corresponding
         demands ...'이고 동사는 'limit'. of/of 전치사구 속 'cities'나 'accessibility' 등은 주어가
@@ -1131,8 +1083,8 @@ practice:
     - word: mineral rights
       meaning: 광물권
     solution:
-      cut: '흔히 우리는 그 권리들을 나눈다 / 한 필지의 땅에서처럼 : / [토지 소유자], [저당권을 가진 은행], [임차권을 가진 세입자],
-        [그 땅에 들어갈 허가를 가진 배관공], [광물권을 가진 석유 회사]가 있을 수 있다.'
+      cut: '그러나 흔히 우리는 그 막대들을 나눈다 / 한 필지의 땅에서처럼: / [토지 소유자], [저당권을 가진 은행], [임차권을 가진
+        세입자], [그 땅에 들어갈 허가를 가진 배관공], [광물권을 가진 석유 회사]가 있을 수 있다.'
       wrong: 저당이 은행을, 임차권이 세입자를, 허가가 배관공을 소유한다.
       wrong_why: 각 항목의 뼈대 명사는 a bank, a tenant, a plumber, an oil company이고, 'with
         + 명사'는 그 명사가 '무엇을 가지고 있는지'를 꾸미는 전치사구다. with 뒤 명사(mortgage, lease...)는 주어가
@@ -1193,8 +1145,7 @@ practice:
     - word: contemporary
       meaning: 동시대의
     solution:
-      cut: their broader journalistic role / of covering sport / in its many forms
-        — 그들의 더 폭넓은 언론인으로서의 역할 / 스포츠를 다루는 (역할) / 그 여러 형태로
+      cut: 그들의 더 폭넓은 언론인으로서의 역할 / 스포츠를 다루는 (역할) / 그 여러 형태로.
       wrong: in its many forms를 role에 붙여 '여러 형태로 된 역할'로 옮긴 해석
       wrong_why: of covering sport는 role을 수식하는 전치사구(스포츠를 다루는 역할)이고, in its many forms는
         다시 그 안의 covering sport를 수식한다(스포츠를 여러 형태로 다룸). 전치사구가 of(role 수식) → in(covering
@@ -1229,8 +1180,7 @@ practice:
     - word: avatar
       meaning: 아바타
     solution:
-      cut: through interaction / of your own body / with the external world — …을 통해
-        / 당신 자신의 몸의 (상호작용) / 외부 세계와의 (상호작용) → '당신의 몸이 외부 세계와 하는 상호작용을 통해'
+      cut: 상호작용을 통해 / 당신 자신의 몸의 / 외부 세계와의 (상호작용).
       wrong: with the external world를 앞의 동사 perceiving에 붙여 '외부 세계와 더불어 지각한다'로 옮긴 해석
       wrong_why: interaction of A with B는 'A가 B와 하는 상호작용'을 뜻하는 한 덩어리로, of your own
         body와 with the external world가 모두 interaction을 수식한다. with구를 동사 perceiving에
@@ -1266,10 +1216,8 @@ practice:
     - word: illness
       meaning: 질병
     solution:
-      cut: to be away from the company / for a period of no longer than three hours,
-        / and no more than once a month, / for illness in the employee's immediate
-        family — 회사를 떠나 있는 (기회) / 세 시간을 넘지 않는 기간 동안, / 그리고 한 달에 한 번을 넘지 않게, / 직원의
-        직계 가족의 질병으로 (인해)
+      cut: 회사를 떠나 있는 (기회) / 세 시간을 넘지 않는 기간 동안, / 그리고 한 달에 한 번을 넘지 않게, / 직원의 직계 가족의
+        질병으로 인해.
       wrong: 두 개의 for를 같은 뜻으로 보아 마지막 for illness도 '기간·목적'처럼 옮기고, in the employee's
         immediate family를 illness가 아닌 다른 말에 붙인 해석
       wrong_why: 첫 번째 for(a period ...)는 '기간(~ 동안)'을 나타내고, 마지막 for(illness)는 '이유(~
@@ -1302,8 +1250,7 @@ practice:
     - word: deliver value
       meaning: 가치를 전달하다
     solution:
-      cut: the risks and rewards / of delivering value / to the buyer — 위험과 보상을 /
-        가치를 전달하는 것의 / 구매자에게 (전달하는)
+      cut: 위험과 보상을 / 가치를 전달하는 것의 / 구매자에게 (전달하는).
       wrong: to the buyer를 share나 allows 같은 동사에 붙여 '구매자에게 공유하다'로 옮기거나, of delivering
         value의 수식 범위를 놓친 해석
       wrong_why: of delivering value는 risks and rewards를 수식하고, to the buyer는 다시 그
@@ -1337,8 +1284,7 @@ practice:
     - word: responsibility
       meaning: 책임
     solution:
-      cut: hidden from view / the extent / of the responsibility / of those of us
-        / alive now — 시야에서 가려 왔다 / 그 정도를 / 책임의 / 우리들의 / 지금 살아 있는
+      cut: 시야에서 가려 왔다 / 그 정도(범위)를 / 책임의 / 우리들의 / 지금 살아 있는.
       wrong: hidden from view에서 목적어(the extent ...)가 뒤로 밀린 것을 놓쳐 from view를 목적어로 오독하거나,
         연쇄되는 of구의 수식 관계를 뒤섞은 해석
       wrong_why: hidden from view X는 'X를 시야에서 가리다'로, 긴 목적어 the extent of the responsibility
@@ -1366,9 +1312,8 @@ practice:
     - word: common ancestor
       meaning: 공통 조상
     solution:
-      cut: Sequential changes are found / in many fossils / showing the change / of
-        certain features / over time / from a common ancestor, / as in the case of
-        the horse.
+      cut: 순차적인 변화는 발견된다 / 많은 화석에서 / (그 변화를 보여 주는) / 특정 형질들의 / 시간에 걸쳐 / 공통 조상으로부터,
+        / 말의 경우에서처럼.
       wrong: '''from a common ancestor''를 앞의 동사 are found에 걸어 ''공통 조상에게서 화석이 발견된다''처럼
         읽는 오역.'
       wrong_why: 명사 the change를 of·over·from 세 전치사구가 연달아 수식하는 중첩 구조인데, 마지막 from구를
@@ -1394,9 +1339,8 @@ practice:
     - word: sign
       meaning: 기미, 징후
     solution:
-      cut: Consumer engagement levels / in all manner / of digital experiences and
-        communities / have simply exploded / —and they show / little or no signs /
-        of slowing.
+      cut: 소비자 참여 수준이 / 모든 종류의 / 디지털 경험과 커뮤니티에서의 / 그야말로 폭발적으로 증가했다 / —그리고 그것들은 보인다
+        / 거의 혹은 전혀 기미를 / 둔화될.
       wrong: '''in all manner''까지만 주어로 보거나 of구를 동사에 걸어, have exploded의 진짜 주어를 놓치고
         문장 구조를 오독.'
       wrong_why: 주어의 핵 명사 levels를 'in all manner of digital experiences and communities'라는
@@ -1427,8 +1371,7 @@ practice:
     - word: bifurcation
       meaning: 분기(점)
     solution:
-      cut: '''~도 아니다'' 신호 받기 → 모든 비선형 시스템이 혼돈적인 것도 아니다(Nor are all nonlinear systems
-        chaotic) / 콜론 뒤 → 그렇게 되려면(to become so) / 분기점이라 불리는 특정 지점 너머로 밀려나야 한다.'
+      cut: 모든 비선형 시스템이 혼돈적인 것도 아니다 / (그렇게 되려면) / 그것들은 분기점이라 불리는 특정 지점 너머로 밀려나야 한다.
       wrong: 모든 시스템이 혼돈적이며 밀려나야 한다.
       wrong_why: Nor + 도치는 앞 내용에 이어 '~도 아니다'라는 부정 첨가. 긍정으로 읽어 not all(부분부정)의 극성을 뒤집었다.
         도치를 되돌릴 필요 없이 Nor부터 부정으로 받으면 된다.
@@ -1455,8 +1398,8 @@ practice:
     - word: the very process
       meaning: 바로 그 과정 자체
     solution:
-      cut: '''~뿐 아니라'' 받기 → 도시에서 장소 접근이 (시간·비용·편의 면에서) 덜 편할 뿐 아니라(Not only is it less
-        convenient) / 이어서 → 이동 과정 자체가(but the very process) / 여러 부정적 외부효과를 낳는다.'
+      cut: 도시에서 장소에 접근하는 것이 (시간·비용·편의 면에서) 덜 편리할 뿐 아니라 / 도시에서 이동하는 과정 자체가 / 여러 부정적
+        외부효과를 낳는다.
       wrong: 도시 접근이 편리해서 이동이 이롭다.
       wrong_why: Not only + 도치는 '~뿐 아니라'. less convenient(덜 편한)와 negative를 놓쳐 극성을
         뒤집었다. 도치를 되돌릴 필요 없이 신호부터 받으면 된다.
@@ -1478,8 +1421,7 @@ practice:
     - word: predict
       meaning: 예측하다
     solution:
-      cut: '''거의 ~않다'' 신호 받기 → 증거는 거의 존재하지 않는다(Little evidence exists) / that절 → 현대
-        AI의 무오류성을 시사하거나(suggests) / 미래에 그것을 예측하는.'
+      cut: 증거는 거의 존재하지 않는다 / 현대 AI의 무오류성을 시사하거나 / 미래에 그것을 예측하는.
       wrong: AI의 무오류성을 보여 주는 증거가 조금 존재한다.
       wrong_why: 문두 Little은 '조금 있는'이 아니라 '거의 없는'이라는 부정어. 긍정으로 읽으면 극성이 뒤집힌다. 신호부터 부정으로
         받고 that절을 evidence에 걸어 이어 읽으면 된다.
@@ -1508,9 +1450,8 @@ practice:
     - word: be pushed beyond
       meaning: ~을 넘어서도록 밀리다
     solution:
-      cut: 'Nor are all nonlinear systems chaotic: / (그리고 모든 비선형 시스템이 혼돈적인 것도 아니다)
-        / to become so / (그렇게 되려면) / they need to be pushed beyond a certain point,
-        / (그것들은 어떤 지점을 넘어서도록 밀려야 한다) / called a bifurcation. / (분기점이라 불리는)'
+      cut: 그리고 모든 비선형 시스템이 혼돈적인 것도 아니다 / (그렇게 되려면) / 그것들은 어떤 지점을 넘어서도록 밀려야 한다 / (분기점이라
+        불리는).
       wrong: not all의 부분부정을 전체부정으로 오독해 '어떤 것도 혼돈적이지 않다'로 옮긴 해석.
       wrong_why: 부정어 Nor가 문두에 와서 조동사 are와 주어 all nonlinear systems가 도치된 문장이다. all
         ... not 형태는 부분부정('모두가 ~인 것은 아니다')이므로, 일부는 혼돈적일 수 있다. '어떤 것도 아니다'라는 전체부정은 틀리다.
@@ -1535,8 +1476,7 @@ practice:
     - word: rather than
       meaning: ~라기보다는
     solution:
-      cut: 로마 같은 도시에서 / 눈에 띄는 것은 바로(it is ~ that) / [광장에 서 있거나 앉아 있는 많은 사람들이다] / 걷기보다는(rather
-        than walking).
+      cut: 로마 같은 도시에서 / 눈에 띄는 것은 바로 / [광장에 서 있거나 앉아 있는 많은 사람들이다] / 걷기보다는.
       wrong: 로마 같은 도시에서, 그것은 광장에 서 있거나 앉아 있는 많은 사람들이 눈에 띈다는 것이다.
       wrong_why: it is ~ that을 가주어-진주어로 오해했다. 실제로는 It is X that 강조구문 — it과 that을 걷어내도
         문장이 성립하며, 사이의 X(많은 사람들)를 부각한다.
@@ -1564,10 +1504,8 @@ practice:
     - word: attraction
       meaning: 인력, 끌어당김
     solution:
-      cut: 'But the reason for eclipses is ultimately the same as that of the succession
-        of night and day: / 하지만 일식의 원인은 궁극적으로 밤낮 교대의 원인과 같다: / the movement of celestial
-        bodies, / (즉) 천체의 운동인데, / which itself is based on the Newtonian law of attraction
-        / 그 운동 자체는(which itself : 관계사+재귀 강조) 뉴턴의 인력 법칙에 기반을 둔다.'
+      cut: 하지만 일식의 원인은 궁극적으로 밤낮 교대의 원인과 같다 / 즉 천체의 운동인데, / 그 운동 자체는 / 뉴턴의 인력 법칙과 /
+        그것이 우리가 물체를 놓을 때 왜 떨어지는지를 설명하는 방식에 기반을 둔다.
       wrong: which itself를 별개의 대상으로 보거나 itself를 무시하고 앞 명사와 끊어 읽음.
       wrong_why: which의 선행사는 the movement of celestial bodies이고, itself는 그 선행사(운동)를
         강조하는 재귀대명사이다. 따라서 '그 운동 자체가 ~에 기반을 둔다'로 이어 읽어야 한다.
@@ -1596,9 +1534,8 @@ practice:
     - word: unpredictable
       meaning: 예측 불가능한
     solution:
-      cut: 안타깝게도 / [보호 구역 관리에 가장 유용한] 규모, 정확도, 정밀도에서 / 미래는 / 전례 없을 것으로 예상될 뿐 아니라(not
-        only promises to be unprecedented) / 예측 불가능할 것으로도 예상된다(but it also promises
-        to be unpredictable).
+      cut: 안타깝게도 / [보호 구역 관리에 가장 유용한] 규모, 정확도, 정밀도에서 / 미래는 / 전례 없을 것으로 예상될 뿐 아니라 /
+        예측 불가능할 것으로도 예상된다.
       wrong: 미래는 전례 없는 것을 약속하지 않고 그저 예측 불가능함만을 약속한다.
       wrong_why: 'not only A but also B는 ''A뿐 아니라 B도''(둘 다 긍정)이다. A(전례 없음)를 부정으로 읽어
         ''A가 아니라 B''로 옮기면 오역. 병렬 짝: promises to be unprecedented ↔ promises to be
@@ -1628,8 +1565,8 @@ practice:
     - word: competence
       meaning: 역량, 능력
     solution:
-      cut: '[대안 중에서 선택하고 결정을 내리는 방법을 배우는 것]은 / 요구한다 / 좋은 개인적 가치관뿐 아니라(not only good
-        personal values) / 해당 사업 분야의 지식 역량도(but also knowledge competence).'
+      cut: '[대안 중에서 선택하고 결정을 내리는 방법을 배우는 것]은 / 요구한다 / 좋은 개인적 가치관뿐 아니라 / 해당 사업 분야의
+        지식 역량도.'
       wrong: 좋은 개인적 가치관은 요구하지만, 해당 사업 분야의 지식 역량은 요구하지 않는다.
       wrong_why: 'not only A but also B는 A와 B를 모두 requires의 목적어로 아우른다(둘 다 필요). B를
         부정으로 옮기면 오역. 병렬 짝: good personal values ↔ knowledge competence(명사구, 둘 다 requires의
@@ -1658,9 +1595,8 @@ practice:
     - word: connective thread
       meaning: 연결하는 실, 연결 고리
     solution:
-      cut: '[누구나 어디선가 들어본] 그 서두의 da-da-da-DUM은 / 등장한다 / 놀랄 만큼 다양한 방식으로 / 1악장뿐 아니라(not
-        only the opening movement) / 나머지 세 악장에 걸쳐서도(but the remaining three movements)
-        / 일종의 모토나 연결하는 실처럼.'
+      cut: '[누구나 어디선가 들어본] 그 서두의 다-다-다-덤은 / 등장한다 / 놀랄 만큼 다양한 방식으로 / 1악장뿐 아니라 / 나머지
+        세 악장에 걸쳐서도 / 일종의 모토나 연결하는 실처럼.'
       wrong: 1악장 전체에 걸쳐 놀랄 만큼 다양한 방식으로 등장한다.
       wrong_why: 'throughout의 목적어가 not only A but B로 두 개(the opening movement, the
         remaining three movements)이다. A만 옮기고 B(나머지 세 악장)를 빠뜨리면 오역. 병렬 짝: the opening
@@ -1682,8 +1618,8 @@ practice:
     - word: rooted in
       meaning: ~에 뿌리내린
     solution:
-      cut: 때때로 / [우리가 만드는] 이 내적 이야기들은 / 형성할 뿐 아니라(not only shape) / 우리의 믿음과 의견을 /
-        뿌리내리기도 한다(but also become rooted) / 우리의 정체성에 깊이.
+      cut: 때때로 / [우리가 만드는] 이 내적 이야기들은 / 형성할 뿐 아니라 / 우리의 믿음과 의견을 / 뿌리내리기도 한다 / 우리의
+        정체성에 깊이.
       wrong: 내적 이야기는 믿음을 형성하지만 정체성에는 뿌리내리지 못한다.
       wrong_why: 'not only A but also B는 ''A뿐 아니라 B도''(둘 다 긍정). B를 부정으로 읽으면 안 된다.
         병렬 짝: shape ↔ become rooted(동사).'
@@ -1707,9 +1643,8 @@ practice:
     - word: antithetical
       meaning: 대립하는, 상반되는
     solution:
-      cut: '[이 생각의 배후에 있는 것]은 / 조경가들의 욕망뿐 아니라(not only landscape architects'' desire)
-        / 미학적으로 시사하는 바가 있는 공원 공간을 설계하려는 / 훨씬 더 긴 서구 사상의 역사이기도 하다(but a much longer
-        history) / [도시와 자연을 대립 공간이자 대립하는 힘으로 여기는].'
+      cut: '[이 생각의 배후에 있는 것]은 / 조경가들의 욕망뿐 아니라 / (미학적으로 시사하는 바가 있는 공원 공간을 설계하려는) /
+        훨씬 더 긴 서구 사상의 역사이기도 하다 / [도시와 자연을 대립하는 공간이자 대립하는 힘으로 여기는].'
       wrong: 이 생각의 배후에 있는 것은 조경가들의 욕망이지 서구 사상의 역사는 아니다.
       wrong_why: 'not only A but B는 is의 보어 두 개(A, B)를 모두 긍정으로 아우른다. B를 배제하면 오역. 병렬
         짝: landscape architects'' desire ↔ a much longer history of Western thought(명사구).'
@@ -1740,12 +1675,8 @@ practice:
     - word: on the part of
       meaning: ~ 쪽의/~ 편의
     solution:
-      cut: If a certain player ends up consistently with the desired outcome, / (어떤
-        선수가 지속적으로 바라던 결과로 끝나고) / defeating all who challenge that player, / (그 선수에게
-        도전하는 모두를 이기면서) / then we tend to interpret the outcome / (그러면 우리는 그 결과를 해석하는
-        경향이 있다) / either as the work of Fortune, / (행운의 작품으로) / or else as clever
-        and undetectable cheating / (아니면 영리하고 발각되지 않는 부정행위로) / on the part of the
-        winning player. (이긴 선수 쪽의)
+      cut: (어떤 선수가 지속적으로 바라던 결과로 끝나고) / (그 선수에게 도전하는 모두를 이기면서) / 그러면 우리는 그 결과를 해석하는
+        경향이 있다 / 행운의 작품으로 / 아니면 영리하고 발각되지 않는 부정행위로 / 이긴 선수 쪽의.
       wrong: either A or B의 짝을 as the work of Fortune / as clever로 잘못 끊어, undetectable
         cheating을 별개 요소로 처리한 해석.
       wrong_why: either ~ or else ~로 짝이 되는 두 요소는 전치사 as로 시작하는 'as the work of Fortune'과
@@ -1779,9 +1710,7 @@ practice:
     - word: framework
       meaning: 틀
     solution:
-      cut: We understand that the segregation of our consciousness into present, past,
-        and future / (우리는 우리 의식을 현재, 과거, 미래로 나누는 것이 ~임을 이해한다) / is both a fiction
-        and an oddly self‑referential framework; / (허구이자 동시에 이상하리만치 자기 지시적인 틀이라는 것을)
+      cut: 우리는 이해한다 / [우리 의식을 현재, 과거, 미래로 나누는 것]이 / 허구이자 동시에 이상하리만치 자기 지시적인 틀이라는 것을.
       wrong: both A and B의 B를 'oddly'와 'self-referential framework'로 쪼개 세 요소로 본 해석.
       wrong_why: both A and B에서 A는 'a fiction', B는 'an oddly self-referential framework'
         두 개다. 'oddly'는 형용사 self-referential를 꾸미는 부사이므로 별개 요소가 될 수 없어, 둘로 묶어야 한다.
@@ -1811,9 +1740,8 @@ practice:
     - word: connective thread
       meaning: 연결하는 실/맥락
     solution:
-      cut: The opening da‑da‑da‑DUM ... appears in an incredible variety of ways /
-        (그 도입부 다-다-다-덤은 놀랄 만큼 다양한 방식으로 나타난다) / throughout not only the opening movement,
-        / (첫 악장뿐만 아니라) / but the remaining three movements, / (나머지 세 악장에 걸쳐서도)
+      cut: 그 도입부 다-다-다-덤은 놀랄 만큼 다양한 방식으로 나타난다 / 첫 악장뿐만 아니라 / 나머지 세 악장에 걸쳐서도 / 일종의
+        모토나 연결하는 실처럼.
       wrong: not only를 '오직 ~이 아니라'로 오독해 첫 악장을 배제하고 나머지 세 악장에만 국한한 해석.
       wrong_why: not only A but (also) B는 'A뿐만 아니라 B도'로 A와 B를 모두 포함한다. 첫 악장을 제외하는
         것이 아니라 첫 악장과 나머지 세 악장 모두에 나타난다는 뜻이다.
@@ -1834,8 +1762,7 @@ practice:
     - word: refreshment
       meaning: 원기 회복/생기
     solution:
-      cut: Now, they both knew / (이제 그들은 둘 다 알았다) / that the place would provide them
-        with energy and refreshment. / (그곳이 자신들에게 활력과 원기를 제공해 줄 것임을)
+      cut: 이제 그들은 둘 다 알았다 / 그곳이 자신들에게 활력과 원기를 제공해 줄 것임을.
       wrong: energy and refreshment를 provide의 짝(B)으로 묶지 못하고 refreshment를 별개 문장 성분으로
         본 해석.
       wrong_why: provide A with B 구문에서 B는 with의 목적어 'energy and refreshment'로 and로
@@ -1857,10 +1784,8 @@ practice:
     - word: unavailable
       meaning: 이용할 수 없는
     solution:
-      cut: Many states that might wish to use it for education and information / (그것을
-        교육과 정보 제공에 사용하고 싶어 할 수도 있는 많은 국가들은) / may not only find it too expensive /
-        (그것이 너무 비싸다는 것을 알게 될 뿐만 아니라) / but also simply unavailable to them. / (또한
-        자신들에게 그저 이용 불가능하다는 것도)
+      cut: '[그것을 교육과 정보 제공에 사용하고 싶어 할 수도 있는] 많은 국가들은 / 그것이 너무 비싸다는 것을 알게 될 뿐만 아니라
+        / 또한 자신들에게 그저 이용할 수 없다는 것도 (알게 될 수 있다).'
       wrong: not only ~ but also ~를 find의 목적보어끼리(too expensive / unavailable)가 아니라
         별개 절로 나눠, unavailable을 독립된 서술로 본 해석.
       wrong_why: find it [too expensive]에서 not only가 걸린 too expensive와 but also 뒤의
@@ -1885,8 +1810,7 @@ practice:
     - word: be defined as
       meaning: ~로 정의되다
     solution:
-      cut: Creativity is commonly defined as the production of ideas / (창의성은 흔히 아이디어의
-        생산으로 정의된다) / that are both novel and useful. / (새로우면서 동시에 유용한)
+      cut: 창의성은 흔히 아이디어의 생산으로 정의된다 / [새로우면서(독창적이고, 새롭고) 동시에 유용한(적절하고, 실현 가능한)].
       wrong: both A and B를 아이디어의 별개 두 종류(새로운 것과 유용한 것)로 나눠, 한 아이디어가 두 속성을 함께 갖는다는
         점을 놓친 해석.
       wrong_why: both novel and useful은 관계절 that are의 보어로 병렬된 두 형용사다. 동일한 아이디어가 novel하면서
@@ -1915,8 +1839,7 @@ practice:
     - word: justify
       meaning: 정당화하다
     solution:
-      cut: '[보편적 기준이나 법이 없을 때] / 중요한 것은(what matters = ~한 것) / 결과 또는 결말이다 / 그래서 /
-        목적이 수단을 정당화한다.'
+      cut: '[보편적 기준이나 법이 없을 때] / 중요한 것은 / 결과 또는 결말이다 / 그래서 / 목적이 수단을 정당화한다.'
       wrong: 무엇이 문제인가는 결과이다.
       wrong_why: what을 의문사 '무엇'으로 좁게 읽었다. 여기서 what matters는 [중요한 것]이라는 하나의 명사 덩어리로
         문장의 주어다.
@@ -2077,9 +2000,7 @@ practice:
     - word: constraints
       meaning: 제약
     solution:
-      cut: Moreover, much of what we now see as precise matches / (게다가, 우리가 지금 정밀한
-        일치라고 여기는 것의 상당 부분은) / between an organism and its environment / (유기체와 그 환경
-        사이의) / may equally be seen as constraints / (똑같이 제약으로도 보일 수 있다)
+      cut: 게다가, [우리가 지금 정밀한 일치라고 여기는 것]의 상당 부분은 / 유기체와 그 환경 사이의 / 똑같이 제약으로도 보일 수 있다.
       wrong: what을 관계대명사(the thing which)가 아니라 의문사 '얼마나/무엇을'로 오독하고, much를 명사가 아닌 정도부사로
         본 해석.
       wrong_why: 밑줄의 'what we now see as precise matches'는 see A as B 구문의 A 자리에 온
@@ -2111,8 +2032,7 @@ practice:
     - word: tough challenges
       meaning: 힘든 도전
     solution:
-      cut: It shows me / (그것은 나에게 보여준다) / what it means to live / (산다는 것이 무엇을 의미하는지를)
-        / while facing life's tough challenges. / (인생의 힘든 도전에 맞서면서)
+      cut: 그것은 나에게 보여준다 / 산다는 것이 무엇을 의미하는지를 / 인생의 힘든 도전에 맞서면서.
       wrong: 동사 means를 명사 '수단(means)'으로 오독하고, 가주어 it과 진주어 to live의 구조를 놓친 해석.
       wrong_why: 밑줄의 'what it means to live'에서 it은 가주어, to live가 진주어이고 means는 동사(의미하다)다.
         즉 '산다는 것이 무엇을 의미하는지'라는 what 명사절이다. means를 명사 '수단'으로 보면 구조가 성립하지 않는다.
@@ -2138,9 +2058,8 @@ practice:
     - word: not to mention
       meaning: ~은 말할 것도 없고
     solution:
-      cut: What is excessive or out of proportion / (무엇이 과도하거나 균형에 맞지 않는가는) / is highly
-        relative / (매우 상대적이며) / and might be more related to other aspects than physical
-        capacity / (물리적 수용력보다 다른 측면들과 더 관련이 있을 수 있다)
+      cut: '[무엇이 과도하거나 균형에 맞지 않는가]는 / 매우 상대적이며 / 물리적 수용력보다 다른 측면들과 더 관련이 있을 수 있다 /
+        (자연 훼손과 경제적 누출 같은).'
       wrong: 문두 What을 의문사로 읽어 별개 질문처럼 떼어내고, 뒤의 is를 주절 동사로 연결하지 못한 해석.
       wrong_why: 밑줄의 'What is excessive or out of proportion'은 문장 전체의 주어인 관계대명사 what
         명사절(= 과도하거나 균형에 맞지 않는 것)이며, 그 뒤의 is highly relative가 주절의 동사다. 하나의 명사 덩어리가
@@ -2167,9 +2086,7 @@ practice:
     - word: as a result
       meaning: 그 결과로
     solution:
-      cut: think about / (생각해 보라) / what it would feel like / (어떤 느낌일지를) / if you
-        were personally acknowledged by the brand manager / (당신이 브랜드 관리자에게 개인적으로 인정받는다면)
-        / as a result. / (그 결과로)
+      cut: 생각해 보라 / 어떤 느낌일지를 / 당신이 브랜드 관리자에게 개인적으로 인정받는다면 / 그 결과로.
       wrong: what을 무시하고 'about what it would feel like'를 단순한 감정 표현으로 뭉뚱그려, if 조건절과의
         연결을 놓친 해석.
       wrong_why: 밑줄의 'what it would feel like'는 전치사 about의 목적어인 관계대명사 what 명사절(= 어떤
@@ -2196,11 +2113,8 @@ practice:
     - word: bottom line
       meaning: 최종 수익/핵심
     solution:
-      cut: Public debates about streets are typically rooted in emotional assumptions
-        / (거리에 관한 공개 토론은 대개 감정적 추정에 뿌리를 둔다) / about how a change will affect a person's
-        commute, ability to park, / (변화가 어떤 사람의 통근, 주차 능력에 어떻게 영향을 미칠지에 대한) / belief
-        about what is safe and what isn't, / (무엇이 안전하고 무엇이 안전하지 않은지에 대한 믿음) / or the
-        bottom line of a local business. / (또는 지역 사업체의 최종 수익)
+      cut: 거리에 관한 공개 토론은 대개 감정적 추정에 뿌리를 둔다 / 변화가 어떤 사람의 통근, 주차 능력에 어떻게 영향을 미칠지에 대한
+        / 무엇이 안전하고 무엇이 안전하지 않은지에 대한 믿음 / 또는 지역 사업체의 최종 수익에.
       wrong: what is safe and what isn't를 belief와 별개로 떼어 독립된 질문처럼 옮기고, belief about의
         목적어로 묶지 못한 해석.
       wrong_why: 밑줄의 'what is safe and what isn't'는 belief about의 목적어인 두 개의 what 명사절(무엇이
@@ -2227,10 +2141,8 @@ practice:
     - word: ought to
       meaning: ~해야 한다
     solution:
-      cut: anthropologists trained in the natural sciences began to reimagine / (자연
-        과학 교육을 받은 인류학자들은 다시 상상하기 시작했다) / what a science of humanity should look like
-        / (인간에 관한 과학이 어떤 모습이어야 하는지를) / and how social scientists ought to go about
-        studying cultural groups. / (그리고 사회 과학자들이 문화 집단을 어떻게 연구해 나가야 하는지를)
+      cut: 자연 과학 교육을 받은 인류학자들은 다시 상상하기 시작했다 / 인간에 관한 과학이 어떤 모습이어야 하는지를 / 그리고 사회 과학자들이
+        문화 집단을 어떻게 연구해 나가야 하는지를.
       wrong: what a science of humanity should look like를 reimagine의 목적어 명사절로 묶지 못하고,
         look like를 별개 서술로 끊어 옮긴 해석.
       wrong_why: 밑줄의 'what a science of humanity should look like'는 reimagine의 목적어인
@@ -2261,8 +2173,8 @@ practice:
     - word: template
       meaning: 원형, 본보기
     solution:
-      cut: 그러나 / [몇 주 또는 몇 달에 걸쳐 녹음된 노래의] 음향 그래프는 / 보여준다 / [이 연습 기간 동안 그 새가 (암기한 원형의
-        정확한 복제본을 만들어낼 때까지) 자신의 노력을 미세하게 조정한다는 것을](that ~).
+      cut: 그러나 / [몇 주 또는 몇 달에 걸쳐 녹음된 노래의] 음향 그래프는 / 보여준다 / [이 연습 기간 동안 그 새가 (기억된 원형의
+        정확한 복제본을 만들어낼 때까지) 자신의 노력을 미세하게 조정한다는 것을].
       wrong: 음향 그래프가 이 연습 기간 동안 드러나고, 그 새는 ~ 노력을 조정한다.
       wrong_why: reveal은 타동사이고 뒤의 that절 전체가 목적어(명사절)이다. reveal을 '드러나다'라는 자동사로 보고 that절을
         별개의 문장으로 끊으면 오역이다.
@@ -2291,8 +2203,8 @@ practice:
     - word: faux pas
       meaning: 실수, 결례
     solution:
-      cut: 우리가 얼굴을 붉힐 때 / 그것은 [다른 사람들에게 알리는] 신호이다 / [우리가 (사회적 규범이 깨졌다는 것을) 인식하고 있다는](signal과
-        동격 that) ; / 그것은 실수에 대한 사과이다.
+      cut: 우리가 얼굴을 붉힐 때 / 그것은 다른 사람들에게 보내는 신호이다 / [우리가 (사회적 규범이 깨졌다는 것을) 인식하고 있다는]
+        / 그것은 실수에 대한 사과이다.
       wrong: 그것은 다른 사람들에게 보내는 신호인데, 그 신호를 우리는 사회적 규범이 깨진 것으로 인식한다.
       wrong_why: 첫 번째 that은 a signal의 내용을 설명하는 동격 that('~라는 신호')이지, signal을 목적어로 받는
         관계사가 아니다. 두 번째 that은 recognize의 목적어 명사절이다.
@@ -2324,8 +2236,8 @@ practice:
     - word: explore
       meaning: 탐구하다
     solution:
-      cut: 따라서 / [서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때] / 깨달아라(명령문) / [각 주제가 특정한
-        기간 동안 탐구되었다는 것을](that ~).
+      cut: 따라서 / [서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때] / 깨달아라 / [각 주제가 특정한 기간 동안
+        탐구되었다는 것을].
       wrong: 각 주제가 탐구되었던 그 특정한 기간을 깨달아라.
       wrong_why: realize 뒤의 that은 목적어 명사절을 이끄는 접속사(that 뒤 완전한 절)이지, '기간(period)'을
         수식하는 관계사가 아니다. that절 전체가 '~라는 것을'로 목적어가 된다.
@@ -2351,7 +2263,7 @@ practice:
       meaning: 목적/기능을 하다
     solution:
       cut: 그러나 / [우리가 무심코 얼굴이 빨개질 때 사라지고 싶기도 하지만] / 심리학자들은 주장한다 / [얼굴 붉힘이 실제로 긍정적
-        사회적 기능을 한다는 것을](that ~).
+        사회적 기능을 한다는 것을].
       wrong: 심리학자들은 얼굴 붉힘이 긍정적 기능을 한다고 주장하는 것에 반대한다.
       wrong_why: argue that S+V는 '~라고 주장하다'(that = 목적어 명사절)이다. 부정·반대의 의미가 아니다.
       author_msg: 인식·전달 동사(argue) + that S+V = '~라는 것을 주장하다'. that절 전체가 목적어 덩어리다.
@@ -2373,7 +2285,7 @@ practice:
       meaning: 기하학적 원근법
     solution:
       cut: 하지만 / [논리적 추론의 적용]은 / 드러낼 것이다 / [그 형상이 (기하학적 원근법의 법칙을 따르기 때문에) 단지 작게 보일
-        뿐이라는 것을](that ~).
+        뿐이라는 것을].
       wrong: 논리적 추론의 적용이 드러날 것이고, 그 형상은 단지 작게 보일 뿐이다.
       wrong_why: reveal은 타동사이며 뒤의 that절 전체가 목적어 명사절이다. reveal을 자동사('드러나다')로 보고 that절을
         끊으면 안 된다.
@@ -2398,8 +2310,8 @@ practice:
     - word: stimuli
       meaning: 자극(stimulus의 복수)
     solution:
-      cut: 태어날 때부터 / 유아들은 [인간의 얼굴과 목소리 쪽으로] 우선적으로 향한다 / [아는 것처럼 보이며](seeming to know)
-        / [그러한 자극이 자신들에게 특히 의미가 있다는 것을](that ~).
+      cut: 태어날 때부터 / 유아들은 [인간의 얼굴과 목소리 쪽으로] 우선적으로 향한다 / 아는 것처럼 보이며 / [그러한 자극이 자신들에게
+        특히 의미가 있다는 것을].
       wrong: 유아들은 ~ 향하는데, 그러한 자극을 아는 것이 자신들에게 특히 의미가 있어 보인다.
       wrong_why: know의 목적어는 that절 전체('~라는 것을')이다. that을 관계사처럼 끊어 stimuli만 목적어로 보면
         오역이다.
@@ -2433,10 +2345,8 @@ practice:
     - word: appropriate
       meaning: 적절한
     solution:
-      cut: they just say / that ... varies according to culture / and that we learn
-        / in a particular culture / the social context / in which it is appropriate
-        to express emotions — 그들은 그저 말한다 / (감정을 …하는 방식이) 문화에 따라 다르다고 / 그리고 우리가 배운다고
-        / 특정 문화 안에서 / 그 사회적 맥락을 / 감정을 표현하는 것이 적절한 (사회적 맥락을)
+      cut: 그들은 그저 말한다 / (우리가 감정을 해석·범주화·명명하는 방식이) 문화에 따라 다르다고 / 그리고 우리가 배운다고 / 특정
+        문화 안에서 / 그 사회적 맥락을 / 감정을 표현하는 것이 적절한 (사회적 맥락을).
       wrong: 두 번째 that을 앞의 culture를 꾸미는 동격/관계사로 보아 '~하는 문화'로 처리한 해석
       wrong_why: 두 번째 that은 첫 번째 that절(how ... varies ...)과 나란히 동사 say의 목적어가 되는 접속사
         that이다(say A and B). 또한 learn은 부사구 in a particular culture 뒤에 목적어 the social
@@ -2472,8 +2382,7 @@ practice:
     - word: rational representation
       meaning: 이성적 표상
     solution:
-      cut: reason concludes / that perception is misleading — 이성은 결론짓는다 / 지각이 오해를
-        불러일으킨다고
+      cut: 이성은 결론짓는다 / 지각이 오해를 불러일으킨다고.
       wrong: that을 perception을 꾸미는 관계대명사로 보아 '오해를 불러일으키는 그 지각'이라 옮기고 그것을 concludes의
         목적어로 처리한 해석
       wrong_why: that 뒤 'perception is misleading'은 주어(perception)+동사(is)+보어(misleading)를
@@ -2502,11 +2411,8 @@ practice:
     - word: socioeconomic revolution
       meaning: 사회경제적 혁명
     solution:
-      cut: The longer we continue to believe / that computers will take us to a magical
-        new world, / the longer we will delay / their natural fusion with our lives,
-        / the hallmark of every major movement / that aspires to be called a socioeconomic
-        revolution — 우리가 …라고 계속 믿을수록 / 컴퓨터가 우리를 마법의 신세계로 데려가리라고 / 우리는 그만큼 더 지연시킬 것이다
-        / 컴퓨터와 우리 삶의 자연스러운 융합을 / 즉 모든 주요 운동의 특징을 / 사회경제적 혁명이라 불리기를 열망하는 (운동의)
+      cut: 우리가 …라고 계속 믿을수록 / 컴퓨터가 우리를 마법의 신세계로 데려가리라고 / 우리는 그만큼 더 지연시킬 것이다 / 컴퓨터와
+        우리 삶의 자연스러운 융합을 / 즉 모든 주요 운동의 특징을 / 사회경제적 혁명이라 불리기를 열망하는 (운동의).
       wrong: 두 that을 같은 종류로 보아, 특히 movement 뒤 that을 believe 뒤 that처럼 명사절로 옮겨 '~라는
         것' 식으로 처리한 해석
       wrong_why: 첫 번째 that(believe 뒤)은 뒤에 완전한 절이 와서 believe의 목적어절을 이끄는 접속사 that이다.
@@ -2535,10 +2441,8 @@ practice:
     - word: memorized template
       meaning: 기억된 원형(견본)
     solution:
-      cut: sound graphs of songs (recorded over several weeks or months) / reveal
-        / that ... the bird fine-tunes his efforts / until he produces an accurate
-        copy of the memorized template — (…에 걸쳐 녹음된) 노래의 음향 그래프는 / 보여준다 / 그 새가 자신의
-        노력을 미세 조정한다는 것을 / 기억된 원형의 정확한 복제본을 만들어낼 때까지
+      cut: (여러 주 또는 몇 달에 걸쳐 녹음된) 노래의 음향 그래프는 / 보여준다 / 이 연습 기간 동안 그 새가 자신의 노력을 미세 조정한다는
+        것을 / 기억된 원형의 정확한 복제본을 만들어낼 때까지.
       wrong: reveal 뒤 that절의 앞머리 부사구 during this practice period를 주어로 오인하거나, that을
         songs를 꾸미는 관계사로 본 해석
       wrong_why: that 뒤에는 부사구 during this practice period가 먼저 나오고 그다음 진짜 주어 the bird와
@@ -2566,10 +2470,8 @@ practice:
     - word: wish to
       meaning: ~하고 싶다
     solution:
-      cut: Before you attend the world championships next month, / on behalf of everyone
-        in Millstown, / I wish to let you know / that we are supporting you all the
-        way — 다음 달 세계 선수권 대회에 참가하기 전에 / Millstown 모두를 대표하여 / 저는 당신에게 알려 드리고 싶습니다 /
-        우리가 끝까지 응원하고 있다는 것을
+      cut: 다음 달 세계 선수권 대회에 참가하기 전에 / 밀스타운의 모든 사람을 대표하여 / 저는 당신에게 알려 드리고 싶습니다 / 우리가
+        끝까지 당신을 응원하고 있다는 것을.
       wrong: that을 you를 꾸미는 관계사로 보거나, let you know that을 '~라는 것을 아는 당신'처럼 명사 수식으로
         옮긴 해석
       wrong_why: let you know 뒤 that절은 뒤에 'we are supporting you'라는 완전한 절이 오므로 know의

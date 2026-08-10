@@ -19,7 +19,7 @@ practice:
     - word: in decline
       meaning: 쇠퇴하는
     solution:
-      cut: the emergence of self-driving cars / the necessity of the role of humans
+      cut: 자율주행차가 생겨나는 것 / 인간 역할이 필요하다는 것
       wrong: 명사 덩어리를 명사 그대로 두고 억지로 인과(결과·원인)로 붙임
       wrong_why: the emergence of A는 'A가 생겨나는 것', the necessity of B는 'B가 필요하다는 것'으로
         동사로 풀어야 하는데, 명사화를 그대로 둔 채 없는 인과관계를 만들어 오역했다.
@@ -50,8 +50,8 @@ practice:
     - word: lead to
       meaning: ~로 이어지다
     solution:
-      cut: 변화하는 정치·사회·종교적 지형은(Changing ~ landscapes) / 이어질 것이다 / 새로운 문화의 출현으로(the
-        emergence of new cultures) / 그리고 그와 함께 / 새로운 '컬처테인먼트' 경험으로.
+      cut: 변화하는 정치·사회·종교적 지형은 / 이어질 것이다 / 새로운 문화가 생겨나는 것으로 / 그리고 그와 함께 / 새로운 '컬처테인먼트'
+        경험으로
       wrong: emergence를 '출현물'이라는 사물 명사로 굳혀 읽음
       wrong_why: lead to the emergence of A는 'A가 생겨나게 된다'로 동사로 풀어야 하는데, emergence를
         명사 사물로 처리해 뜻이 어색해졌다.
@@ -76,9 +76,8 @@ practice:
     - word: kinaesthetically
       meaning: 운동감각적으로
     solution:
-      cut: 다시 말해(In other words) / 그들은 타고난 능력을 가질 뿐 아니라(not only have an innate capacity)
-        / 자신의 운동감각으로 경험한 신체 움직임을 / 시각적으로 지각된 타인의 움직임과 맞추는 / 그렇게 하려는 타고난 욕구도 가진다(an
-        innate drive to do so).
+      cut: 다시 말해 / 그들은 타고난 능력을 가질 뿐 아니라 / 자신의 운동감각으로 경험한 신체 움직임을 / 시각적으로 지각된 타인의 움직임과
+        맞추는 / 그렇게 하려는 타고난 욕구도 가진다
       wrong: capacity for matching을 '맞춤이라는 능력'처럼 명사 덩어리로 굳혀 옮김
       wrong_why: capacity for -ing는 '~할 수 있는 능력'으로 동사로 풀어야 하는데, matching을 명사로 두면 무엇을
         무엇과 맞추는지 관계가 흐려진다.
@@ -112,11 +111,8 @@ practice:
     - word: fixate on
       meaning: ~에 집착하다, 고정되다
     solution:
-      cut: Scattered attention(흩어진 주의력은) / harms your ability to let go of stress(스트레스를
-        떨쳐 버리는 당신의 능력을 해친다), / because even though your attention is scattered(당신의
-        주의력이 흩어져 있어도), / it is narrowly focused(그것은 좁게 집중되어 있다), / for you are able
-        to fixate only on the stressful parts of your experience(당신이 경험의 스트레스를 주는
-        부분에만 집착할 수 있기 때문이다).
+      cut: 흩어진 주의력은 / 스트레스를 떨쳐 버리는 당신의 능력을 해친다 / 당신의 주의력이 흩어져 있어도 / 그것은 좁게 집중되어 있다
+        / 당신이 경험의 스트레스를 주는 부분에만 집착할 수 있기 때문이다
       wrong: to let go of stress를 목적(~하기 위해)의 부사구로 보아 '스트레스를 떨쳐 버리기 위해 능력을 해친다'로 읽음.
       wrong_why: 'to부정사는 앞의 추상명사 ability를 뒤에서 구체화하는 형용사적 용법이다(ability to V: ~할 능력).
         목적의 부사적 용법이 아니므로 harms의 목적어는 ''your ability to let go of stress'' 전체다.'
@@ -146,10 +142,8 @@ practice:
     - word: perspective
       meaning: 관점, 시각
     solution:
-      cut: Our view of the world(세계에 대한 우리의 관점은) / is not given to us from the outside
-        in a pure, objective form(순수하고 객관적인 형태로 외부에서 우리에게 주어지는 것이 아니다); / it is shaped
-        by our mental abilities, our shared cultural perspectives and our unique values
-        and beliefs(그것은 우리의 정신적 능력, 공유된 문화적 관점, 그리고 고유한 가치관과 신념에 의해 형성된다).
+      cut: 세계에 대한 우리의 관점은 / 순수하고 객관적인 형태로 외부에서 우리에게 주어지는 것이 아니다 / 그것은 우리의 정신적 능력,
+        공유된 문화적 관점, 그리고 고유한 가치관과 신념에 의해 형성된다
       wrong: view를 '경치·풍경'으로, of the world를 소유격 '세계의'로 보아 '세계의 풍경'으로 읽음.
       wrong_why: '여기서 view는 추상명사 ''관점·견해''이고, of the world는 ''무엇에 대한 관점인지'' 그 내용을
         구체화한다(view of ~: ~에 대한 관점). 뒤의 shaped by our mental abilities, cultural perspectives,
@@ -180,10 +174,8 @@ practice:
     - word: fundamental
       meaning: 근본적인
     solution:
-      cut: People involved in the conception and engineering of robots designed to
-        perceive and act(지각하고 행동하도록 설계된 로봇의 구상과 공학에 관여하는 사람들은) / know how fundamental
-        is the ability to discriminate oneself from other entities in the environment(자기
-        자신을 환경 속의 다른 개체들과 구별하는 능력이 얼마나 근본적인지를 안다).
+      cut: 지각하고 행동하도록 설계된 로봇의 구상과 공학에 관여하는 사람들은 / 자기 자신을 환경 속의 다른 개체들과 구별하는 능력이 얼마나
+        근본적인지를 안다
       wrong: to discriminate 이하를 목적(~하기 위해)의 부사구로 떼어 '다른 개체들과 구별하기 위해 그 능력이 근본적이다'로
         읽음.
       wrong_why: the ability to discriminate ~는 '추상명사 + to부정사'로, to부정사가 ability의 내용(무엇을
@@ -212,10 +204,8 @@ practice:
     - word: reasonably
       meaning: 상당히, 꽤
     solution:
-      cut: To decide whether and how to intervene in ecosystems(생태계에 개입할지 여부와 어떻게
-        개입할지를 결정하기 위해), / protected area managers normally need a reasonably clear
-        idea(보호구역 관리자들은 보통 상당히 명확한 개념을 필요로 한다) / of what future ecosystems would be
-        like if they did not intervene(만약 그들이 개입하지 않는다면 미래의 생태계가 어떤 모습일지에 대한).
+      cut: 생태계에 개입할지 여부와 어떻게 개입할지를 결정하기 위해 / 보호구역 관리자들은 보통 상당히 명확한 개념을 필요로 한다 / 만약
+        그들이 개입하지 않는다면 미래의 생태계가 어떤 모습일지에 대한
       wrong: what future ecosystems would be like의 like를 동사 '좋아하다'로 보아 '미래 생태계가 무엇을
         좋아할지'로 읽음.
       wrong_why: of what future ecosystems would be like는 추상명사 idea의 내용을 구체화하는 부분이고,
@@ -242,10 +232,8 @@ practice:
     - word: social reality
       meaning: 사회적 현실
     solution:
-      cut: In some cases, however(그러나 어떤 경우에는), / we are far less aware of(우리는 ~을
-        훨씬 덜 인식한다) / why we believe a certain claim to be true(우리가 어떤 주장을 참이라고 믿는
-        이유), / or how we are to explain why certain social realities exist(또는 특정한
-        사회적 현실이 왜 존재하는지를 우리가 어떻게 설명해야 하는지를).
+      cut: 그러나 어떤 경우에는 / 우리는 ~을 훨씬 덜 인식한다 / 우리가 어떤 주장을 참이라고 믿는 이유 / 또는 특정한 사회적 현실이
+        왜 존재하는지를 우리가 어떻게 설명해야 하는지를
       wrong: how we are to explain을 'how we explain(어떻게 설명하는가)'으로 보아 be to의 당위·방법
         의미를 놓치고, aware of 뒤의 절을 본동사와 분리해 읽음.
       wrong_why: aware of 뒤의 why절과 how절이 병렬로 '무엇을 인식하는지' 그 내용을 구체화한다. how we are to
@@ -272,10 +260,8 @@ practice:
     - word: inform
       meaning: 정보를 알리다, 전달하다
     solution:
-      cut: Learning to understand the built-in limitations of our mental processes(우리
-        정신 과정의 내재된 한계를 이해하는 법을 배우는 것은) / can also help us(또한 우리를 도와줄 수 있다) / improve
-        our ability to inform others more effectively(다른 사람에게 더 효과적으로 정보를 전달하는 능력을
-        향상시키도록).
+      cut: 우리 정신 과정의 내재된 한계를 이해하는 법을 배우는 것은 / 또한 우리를 도와줄 수 있다 / 다른 사람에게 더 효과적으로 정보를
+        전달하는 능력을 향상시키도록
       wrong: to inform을 목적(~하기 위해)으로 보아 '더 효과적으로 알리기 위해 능력을 향상시킨다'로 읽음.
       wrong_why: ability to inform others는 추상명사 ability를 to부정사가 구체화하는 형태('~하는 능력')이다.
         목적의 부사가 아니다.
@@ -298,9 +284,7 @@ practice:
     - word: printed
       meaning: 인쇄된
     solution:
-      cut: Concert performances(콘서트 연주는) / become interesting and gain in attraction(흥미로워지고
-        매력을 더한다) / from the fact that they go far beyond the information printed in
-        the score(그것이 악보에 인쇄된 정보를 훨씬 넘어선다는 사실로부터).
+      cut: 콘서트 연주는 / 흥미로워지고 매력을 더한다 / 그것이 악보에 인쇄된 정보를 훨씬 넘어선다는 사실로부터
       wrong: the fact that의 that을 관계대명사로 보아 '~하는 사실'로 얼버무리거나, that they go far beyond를
         fact와 분리해 읽음.
       wrong_why: the fact that ~는 동격의 that으로, that절 전체가 추상명사 fact의 내용을 구체화한다('~라는
@@ -325,9 +309,7 @@ practice:
     - word: fundamental to
       meaning: ~에 필수적인, 근본적인
     solution:
-      cut: An ability to switch between the "pragmatic attitude" of everyday life
-        and an "aesthetic attitude"(일상생활의 '실용적 태도'와 '심미적 태도' 사이를 오갈 수 있는 능력은) / is
-        fundamental to a balanced life(균형 잡힌 삶에 근본적이다).
+      cut: 일상생활의 '실용적 태도'와 '심미적 태도' 사이를 오갈 수 있는 능력은 / 균형 잡힌 삶에 근본적이다
       wrong: to switch를 목적으로 보거나 ability의 내용을 놓쳐 '~하기 위한 능력'으로 읽고, between A and B의
         대등한 짝(A·B)을 어긋나게 읽음.
       wrong_why: ability to switch between A and B는 추상명사 ability를 to부정사가 구체화하며, A='실용적
@@ -353,9 +335,7 @@ practice:
     - word: egalitarianism
       meaning: 평등주의
     solution:
-      cut: The fact that everyone was going to be able to speak and listen(모든 사람이
-        말하고 들을 수 있게 되리라는 사실은) / had to be accommodated ethically(윤리적으로 수용되어야 했다),
-        / and it was via a rough egalitarianism(그리고 그것은 대략적인 평등주의를 통해서였다).
+      cut: 모든 사람이 말하고 들을 수 있게 되리라는 사실은 / 윤리적으로 수용되어야 했다 / 그리고 그것은 대략적인 평등주의를 통해서였다
       wrong: The fact that의 that을 관계사·지시어로 보아 주어를 'the fact(그 사실)'만으로 끊고, that everyone
         ~ listen을 별개 문장으로 읽음.
       wrong_why: the fact that everyone ... listen은 동격 that절로, 주어는 'The fact that
@@ -384,9 +364,8 @@ practice:
     - word: infotainment
       meaning: 정보와 오락을 결합한 것(인포테인먼트)
     solution:
-      cut: 다시 말해(In other words) / 박물관이 살아남으려 애쓰면서(as museums struggle to survive)
-        / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 소비될 수 있는 자기 부분들을(those parts ~ consumable)
-        / 즉 전시실의 인포테인먼트, 카페·상점의 상품과 서비스(콜론 뒤 구체화).
+      cut: 다시 말해 / 박물관이 살아남으려 애쓰면서 / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 소비될 수 있는 자기 부분들을
+        / 즉 전시실의 인포테인먼트, 카페·상점의 상품과 서비스
       wrong: 0번
       wrong_why: '''prioritise(우선시한다)''를 ''우선시되지 않도록 막는다''로 정반대로 뒤집었다. 원문에는 부정어가 없으며
         예산이 소비 가능한 부분을 ''우선시''한다.'
@@ -411,8 +390,7 @@ practice:
     - word: that is
       meaning: 즉, 다시 말해
     solution:
-      cut: 대신에(Instead) / 그들은 주의를 집중해야 한다 / 한 주제에 이어 다른 주제로(one subject after another)
-        / 즉(that is) / 서로 다른 시간대에 걸쳐(in different periods of time).
+      cut: 대신에 / 그들은 주의를 집중해야 한다 / 한 주제에 이어 다른 주제로 / 즉 / 서로 다른 시간대에 걸쳐
       wrong: that is를 '그것은 ~이다'로 오독하는 경우
       wrong_why: that is는 주어+동사가 아니라 '즉, 다시 말해'라는 재진술 연결어이다. 이를 문장 술어로 보면 구조가 무너진다.
       author_msg: that is는 새 정보를 추가하지 않는다. 여러 주제를 잇따라 다룬다는 것을 '서로 다른 시간대에 걸쳐'라고 같은
@@ -444,11 +422,8 @@ practice:
     - word: beyond
       meaning: ~을 넘어선
     solution:
-      cut: If learning were simply a matter of accumulating lists of facts(만약 학습이
-        단지 사실의 목록을 쌓는 문제라면), / then it shouldn't make any difference(그렇다면 아무런 차이가
-        없어야 할 것이다) / if we are presented with information that is just a little bit
-        beyond what we already know(우리가 이미 알고 있는 것보다 조금 넘어선 정보를 제시받든) / or totally
-        new information(완전히 새로운 정보를 제시받든).
+      cut: 만약 학습이 단지 사실의 목록을 쌓는 문제라면 / 그렇다면 아무런 차이가 없어야 할 것이다 / 우리가 이미 알고 있는 것보다 조금
+        넘어선 정보를 제시받든 / 완전히 새로운 정보를 제시받든
       wrong: or totally new information을 beyond의 목적어로 붙여 '우리가 이미 아는 것이나 완전히 새로운 정보를
         조금 넘어선 정보'로 읽음.
       wrong_why: or은 'information that is just a little bit beyond what we already
@@ -480,11 +455,8 @@ practice:
     - word: regardless of
       meaning: ~와 상관없이
     solution:
-      cut: One of those downsides is that(그 단점들 중 하나는 ~라는 것이다) / anyone who so chooses(그렇게
-        하기로 선택한 사람은 누구나) / can pick up the virtual megaphone that is the Internet(인터넷이라는
-        가상의 확성기를 집어 들고) / and put in their two cents on any of an infinite number
-        of topics(무수히 많은 주제 중 어느 것에 대해서든 한마디 거들 수 있다는 것이다), / regardless of their
-        qualifications(자신의 자격과 상관없이).
+      cut: 그 단점들 중 하나는 ~라는 것이다 / 그렇게 하기로 선택한 사람은 누구나 / 인터넷이라는 가상의 확성기를 집어 들고 / 무수히
+        많은 주제 중 어느 것에 대해서든 한마디 거들 수 있다는 것이다 / 자신의 자격과 상관없이
       wrong: that is the Internet을 별개의 부가 정보로 보아 '가상의 확성기를 든다, 그런데 그것이 인터넷이다'처럼 벌려
         읽고, put in their two cents를 직역 '2센트를 넣다'로 읽음.
       wrong_why: the virtual megaphone that is the Internet에서 that is는 은유적 추상 표현 'the
@@ -517,10 +489,8 @@ practice:
     - word: and/or
       meaning: 그리고/또는
     solution:
-      cut: However, that is not a realistic option(그러나 그것은 현실적인 선택지가 아니다) / for scientists
-        who feel a strong sense of responsibility(강한 책임감을 느끼는 과학자들에게는) / to inform
-        the public and policymakers(대중과 정책 입안자에게 정보를 알리고) / and/or to offer suggestions(그리고/또는
-        제안을 하려는).
+      cut: 그러나 그것은 현실적인 선택지가 아니다 / 강한 책임감을 느끼는 과학자들에게는 / 대중과 정책 입안자에게 정보를 알리고 / 그리고/또는
+        제안을 하려는
       wrong: to inform·to offer를 목적(~하기 위해)의 부사구로 보아 '정보를 알리고 제안하기 위해 강한 책임감을 느끼는'으로
         읽음.
       wrong_why: a sense of responsibility to V는 추상명사 responsibility의 내용을 to부정사가 구체화한다('~할
@@ -554,10 +524,8 @@ practice:
     - word: residual
       meaning: 잔여의, 남은
     solution:
-      cut: The polluter thus has an incentive to reduce emissions(따라서 오염자는 배출을 줄일
-        유인을 가진다) / in any manner that is less costly per unit of abatement(저감 단위당
-        비용이 덜 드는 어떤 방식으로든) / than the tax on each unit of residual emissions(잔여 배출량
-        각 단위에 부과되는 세금보다).
+      cut: 따라서 오염자는 배출을 줄일 유인을 가진다 / 저감 단위당 비용이 덜 드는 어떤 방식으로든 / 잔여 배출량 각 단위에 부과되는
+        세금보다
       wrong: 비교 대상을 뒤바꿔 '세금이 (저감 단위당) 비용보다 덜 드는 방식'으로, less costly ~ than의 주체(manner)와
         기준(the tax)을 반대로 읽음.
       wrong_why: that is less costly ~ than the tax에서 비교의 주체는 관계절이 수식하는 any manner(그
@@ -586,10 +554,7 @@ practice:
     - word: dried leaves
       meaning: 마른 잎, 낙엽
     solution:
-      cut: If they close their eyes(만약 그들이 눈을 감으면), / they might even imagine(그들은
-        심지어 상상할 수도 있다) / the shape of the path, the smell of the trees(길의 모양, 나무의
-        냄새), / and the sound that is made when they step on the dried leaves(그리고 마른
-        잎을 밟을 때 나는 소리를).
+      cut: 만약 그들이 눈을 감으면 / 그들은 심지어 상상할 수도 있다 / 길의 모양, 나무의 냄새 / 그리고 마른 잎을 밟을 때 나는 소리를
       wrong: the sound that is made를 the smell of the trees와 잘못 병렬하거나, that is made를
         'that is(즉)'로 보아 관계절을 놓침.
       wrong_why: imagine의 목적어는 the shape / the smell / the sound 세 명사구의 병렬이다. the
@@ -619,10 +584,8 @@ practice:
     - word: unknown
       meaning: 미지의, 알려지지 않은
     solution:
-      cut: In films that tell of futuristic worlds(미래 세계를 다루는 영화에서), / composers,
-        much like sound designers(작곡가들은, 음향 디자이너들과 매우 흡사하게), / have added freedom(추가적인
-        자유를 지녀 왔다) / to create a world that is unknown and new to the viewer(관객에게
-        미지의, 새로운 세계를 창조할).
+      cut: 미래 세계를 다루는 영화에서 / 작곡가들은, 음향 디자이너들과 매우 흡사하게 / 추가적인 자유를 지녀 왔다 / 관객에게 미지의,
+        새로운 세계를 창조할
       wrong: much like sound designers를 주어의 일부로 보거나, that is unknown and new를 'that
         is(즉)'로 끊어 관계절을 놓치고, freedom to create를 목적으로 오독함.
       wrong_why: much like sound designers는 콤마 삽입구다. a world that is unknown and new는
@@ -650,9 +613,7 @@ practice:
     - word: example
       meaning: 사례, 예
     solution:
-      cut: Recently, in the comments section(최근에, 댓글난에서), / there have been some examples
-        of language(언어의 사례들이 몇 가지 있어 왔다) / that is inappropriate for younger viewers(어린
-        시청자들에게 부적절한).
+      cut: 최근에, 댓글난에서 / 언어의 사례들이 몇 가지 있어 왔다 / 어린 시청자들에게 부적절한
       wrong: that is inappropriate의 선행사를 examples로 보거나 'that is(즉)'로 끊어, language의
         구체화를 놓침.
       wrong_why: that is inappropriate ~의 선행사는 language이다(단수 동사 is와 호응). that is 관계절이
@@ -679,9 +640,7 @@ practice:
     - word: surface
       meaning: 표면
     solution:
-      cut: That is because(그것은 ~때문이다) / geography starts from the premise(지리학이 전제에서
-        출발한다) / that it matters where something takes place on Earth's surface(어떤
-        것이 지구 표면의 어디에서 일어나는지가 중요하다는).
+      cut: 그것은 ~때문이다 / 지리학이 전제에서 출발한다 / 어떤 것이 지구 표면의 어디에서 일어나는지가 중요하다는
       wrong: the premise that의 that을 관계사로 보거나, it matters의 it을 대명사 '그것'으로 보아 가주어-진주어(where절)
         구조를 놓침.
       wrong_why: the premise that ~는 동격 that절로 추상명사 premise의 내용을 구체화한다('~라는 전제').
@@ -710,8 +669,8 @@ practice:
     - word: fraudster
       meaning: 사기꾼
     solution:
-      cut: 비밀번호·이중 키 인증, 그리고 생체 인식은(biometrics) / 예컨대 지문·홍채·음성 인식(such as ~) / 모두
-        ~하는 방법이다 / 계정 정보를 숨기는 / 잠재적 사기꾼으로부터(from potential fraudsters).
+      cut: 비밀번호·이중 키 인증, 그리고 생체 인식은 / 예컨대 지문·홍채·음성 인식 / 모두 ~하는 방법이다 / 계정 정보를 숨기는 /
+        잠재적 사기꾼으로부터
       wrong: 지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술
       wrong_why: such as는 앞의 상위 개념을 뒤의 사례로 구체화하는 표현인데, 이를 '구별되는 별도의 것'으로 반대로 읽은 오역이다.
       author_msg: such as 뒤 나열은 상위 개념의 예시입니다. biometrics(생체 인식)라는 큰 범주를 '지문, 홍채, 음성
@@ -735,9 +694,8 @@ practice:
     - word: flood protection
       meaning: 홍수 방지
     solution:
-      cut: 산림 소유자는(Owners of forest lands) / 나무를 벨 시장 유인이 있다(a market incentive to
-        cut down) / 숲을 관리하기보다(rather than manage) / 탄소 포집·야생동물 서식지·홍수 방지 / 그리고 다른
-        생태계 서비스를 위해(other ecosystem services).
+      cut: 산림 소유자는 / 나무를 벨 시장 유인이 있다 / 숲을 관리하기보다 / 탄소 포집·야생동물 서식지·홍수 방지 / 그리고 다른 생태계
+        서비스를 위해
       wrong: carbon capture, wildlife habitat, flood protection을 서로 무관한 별개 항목으로 봄
       wrong_why: and other ~는 앞의 나열이 결국 뒤 상위 개념의 사례임을 알려주는 표지인데 이를 놓친 것이다.
       author_msg: '''A, B, C, and other X'' 구조에서 X가 상위 개념입니다. 탄소 포집·서식지·홍수 방지는 모두
@@ -768,10 +726,8 @@ practice:
     - word: mental institutions
       meaning: 정신적 제도(장치)
     solution:
-      cut: the external environment / with its disciplinary objects (such as institutional
-        laws and equipment) / becomes mental institutions / that affect our subjective
-        experience — 외부 환경이 / (제도적 법률과 장비 '같은') 통제적 대상들을 지닌 채 / 정신적 제도가 된다 / 그리고 그것이
-        우리의 주관적 경험에 영향을 준다
+      cut: 외부 환경이 / (제도적 법률과 장비 '같은') 통제적 대상들을 지닌 채 / 정신적 제도가 된다 / 그리고 그것이 우리의 주관적
+        경험에 영향을 준다
       wrong: such as 이하(institutional laws and equipment)를 mental institutions의 예시로
         잘못 붙여, '정신적 제도=제도적 법률과 장비'로 읽음.
       wrong_why: such as institutional laws and equipment는 바로 앞의 its disciplinary
@@ -805,10 +761,8 @@ practice:
     - word: envision
       meaning: 마음속에 그리다, 상상하다
     solution:
-      cut: 'this must sound like magical thinking / : / you''re saying (that) you
-        will imagine something so hard / (that) it''ll pop into someone else''s head
-        / exactly the way you envision it — 이것은 마법적 사고처럼 들림에 틀림없다 / 즉 / 당신은 무언가를 아주
-        강렬하게 상상해서 / 그것이 다른 사람 머릿속에 떠오를 거라고 말하는 셈이다 / 당신이 그리는 그대로'
+      cut: 이것은 마법적 사고처럼 들림에 틀림없다 / 즉 / 당신은 무언가를 아주 강렬하게 상상해서 / 그것이 다른 사람 머릿속에 떠오를
+        거라고 말하는 셈이다 / 당신이 그리는 그대로
       wrong: 콜론(:)을 앞말과 무관한 별개의 진술로 보아, magical thinking과 뒤 내용을 대비/단절 관계('~지만 별개로')로
         읽음.
       wrong_why: 콜론은 앞의 추상어 magical thinking이 '무엇인지'를 풀어 설명(구체화)하는 신호이다. 뒤의 you're
@@ -839,10 +793,7 @@ practice:
     - word: housewares
       meaning: 가정용품, 생활용품
     solution:
-      cut: in some product categories / , particularly relatively small objects with
-        a low degree of technological complexity / , such as furniture, lighting,
-        small appliances, and housewares — 일부 제품 범주에서 / 특히 기술적 복잡성이 낮은 비교적 작은 물건들
-        / 즉 가구·조명·소형 가전·생활용품 같은 것들에서
+      cut: 일부 제품 범주에서 / 특히 기술적 복잡성이 낮은 비교적 작은 물건들 / 즉 가구·조명·소형 가전·생활용품 같은 것들에서
       wrong: particularly 이하와 such as 이하를 각각 별개의 병렬 대상으로 나열해, small objects / low
         complexity / furniture 등을 서로 다른 범주로 읽음.
       wrong_why: particularly relatively small objects, with a low degree of technological
@@ -875,9 +826,7 @@ practice:
     - word: lay down chemical trails
       meaning: 화학적 자취를 남기다
     solution:
-      cut: a behavior (called tandem running) / , in which they touch their bodies
-        to the body of a novice ant / as they lay down chemical trails — '나란히 달리기'라고
-        '불리는' 행동 / 그 행동에서 그들은 초보 개미의 몸에 자기 몸을 맞댄다 / 화학적 자취를 남기'면서'
+      cut: '''나란히 달리기''라고 ''불리는'' 행동 / 그 행동에서 그들은 초보 개미의 몸에 자기 몸을 맞댄다 / 화학적 자취를 남기면서'
       wrong: called를 '부르면서'(분사구문), as를 원인('때문에')으로 잘못 보아, tandem running을 행동의 이름이
         아니라 초보 개미를 부르는 호칭처럼 읽음.
       wrong_why: For example로 시작하는 이 문장은 앞의 추상적 논지를 사례로 구체화한다. called tandem running은
@@ -904,10 +853,8 @@ practice:
     - word: fraudster
       meaning: 사기꾼
     solution:
-      cut: Passwords, double‑key identification, and biometrics (such as fingerprint‑,
-        iris‑, and voice recognition) / are all ways / of keeping the account details
-        hidden from potential fraudsters / , of keeping your data dark — 비밀번호·이중 키
-        인증·생체 인식(지문·홍채·음성 인식 '같은')은 / 모두 방법이다 / 계정 정보를 사기꾼에게서 숨기는 / 즉 데이터를 감춰 두는
+      cut: 비밀번호·이중 키 인증·생체 인식(지문·홍채·음성 인식 '같은')은 / 모두 방법이다 / 계정 정보를 사기꾼에게서 숨기는 / 즉
+        데이터를 감춰 두는
       wrong: such as 이하를 주어 목록에 나란히 더해 '지문·홍채·음성 인식'을 biometrics와 별개의 네 번째 주어로 읽음.
       wrong_why: such as fingerprint‑, iris‑, and voice recognition은 바로 앞 biometrics의
         예시이므로 주어는 세 개(passwords / double‑key identification / biometrics)이다. 또 뒤의
@@ -933,9 +880,7 @@ practice:
     - word: attribute
       meaning: 속성, 특성
     solution:
-      cut: potential car purchasers can trade safety concerns / against other attributes
-        / , such as price and styling — 잠재적 구매자는 안전에 대한 우려를 견줄 수 있다 / 다른 속성들에 대비하여
-        / 즉 가격과 스타일 '같은' 것들과
+      cut: 잠재적 구매자는 안전에 대한 우려를 견줄 수 있다 / 다른 속성들에 대비하여 / 즉 가격과 스타일 '같은' 것들과
       wrong: such as price and styling을 safety concerns의 예시로 붙여 '가격·스타일 같은 안전 우려'로
         읽음.
       wrong_why: such as price and styling은 바로 앞 other attributes를 구체화하는 예시이다. trade
@@ -961,10 +906,8 @@ practice:
     - word: could well be considered
       meaning: ~라고 볼 만하다
     solution:
-      cut: helped shoppers become accustomed to new definitions of words (such as
-        "fresh" and "natural") / , definitions that could well be considered opposite
-        of their traditional meanings — 쇼핑객이 단어들의 새로운 정의에 익숙해지도록 도왔다('fresh'와 'natural'
-        '같은') / 즉 전통적 의미와 정반대라 볼 만한 그 정의들
+      cut: 쇼핑객이 'fresh'와 'natural' 같은 단어의 새로운 정의에 익숙해지도록 도왔다 / 즉 전통적 의미와 정반대라 볼 만한
+        그 정의들
       wrong: such as "fresh" and "natural"을 definitions의 예시로 보아 '신선·자연 같은 정의'로 읽거나,
         뒤의 definitions를 새 주어로 끊어 읽음.
       wrong_why: such as "fresh" and "natural"은 앞 words의 예시이다. 콤마 뒤 definitions that
@@ -990,10 +933,8 @@ practice:
     - word: A and B alike
       meaning: A와 B 모두 똑같이
     solution:
-      cut: Due to their low acquisition and maintenance costs / , cargo bicycles convey
-        much potential / in developed and developing countries alike / , such as the
-        becak (a three‑wheeled bicycle) in Indonesia — 낮은 구입·유지 비용 때문에 / 화물 자전거는 큰
-        잠재력을 지닌다 / 선진국과 개도국 모두에서 / 인도네시아의 becak(삼륜 자전거) '같은' 예로
+      cut: 낮은 구입·유지 비용 때문에 / 화물 자전거는 큰 잠재력을 지닌다 / 선진국과 개도국 모두에서 / 인도네시아의 becak(삼륜
+        자전거) '같은' 예로
       wrong: such as the becak을 countries의 예시로 보아 '인도네시아 becak 같은 나라'로 읽음.
       wrong_why: such as the becak (a three‑wheeled bicycle)은 becak이 곧 cargo bicycles(화물
         자전거)의 한 예임을 보여 준다. becak 뒤 괄호 (a three‑wheeled bicycle)가 동격으로 그것이 '자전거'임을
@@ -1024,8 +965,7 @@ practice:
     - word: rational representation
       meaning: 이성적 표상
     solution:
-      cut: 사안의 진실은(The truth of the matter) / 드러난다 / 형상의 지각에서가 아니라(not in the perception
-        of the figure) / 그것의 이성적 재현에서(but in its rational representation).
+      cut: 사안의 진실은 / 드러난다 / 형상의 지각에서가 아니라 / 그것의 이성적 재현에서
       wrong: 1번은 A와 B를 뒤바꾼 오역이다.
       wrong_why: 진리가 '지각에서 드러난다'고 한 뒤 '이성적 표상에서는 드러나지 않는다'고 옮긴 것은, not A but B가 부정하는
         것(A=지각)과 긍정하는 것(B=이성적 표상)을 정반대로 배치한 것이다.
@@ -1048,8 +988,7 @@ practice:
     - word: accommodate
       meaning: 수용하다, 받아주다
     solution:
-      cut: 도시 교통 전문가들은(Urban transport professionals) / 대체로 받아들였다(acquiesced to) /
-        ~라는 견해를(the view that) / 도시의 자동차 수요는 / 관리되어야 한다 / 수용되기보다(rather than accommodated).
+      cut: 도시 교통 전문가들은 / 대체로 받아들였다 / ~라는 견해를 / 도시의 자동차 수요는 / 관리되어야 한다 / 수용되기보다
       wrong: rather than을 놓치고 '관리'와 '수용'을 나란한 것으로 옮기면 안 된다.
       wrong_why: rather than은 앞의 것(managed)을 택하고 뒤의 것(accommodated)을 물리치는 대비 표현이다.
         '관리되고 수용되어야 한다'처럼 둘을 병렬로 처리하면, 전문가들이 물리친 태도(수요를 그대로 받아주는 것)를 오히려 인정하는 반대 뜻이
@@ -1082,9 +1021,7 @@ practice:
     - word: cadence
       meaning: (음악의) 종지, 억양
     solution:
-      cut: However, / unlike sound designers, / composers often shy away from creating
-        unique pieces / that reflect these new worlds — 그러나 / 음향 디자이너와 '달리' / 작곡가들은
-        흔히 독특한 작품 만들기를 '꺼린다' / 이 새로운 세계를 반영하는 (작품)
+      cut: 그러나 / 음향 디자이너와 '달리' / 작곡가들은 흔히 독특한 작품 만들기를 '꺼린다' / 이 새로운 세계를 반영하는 (작품)
       wrong: unlike를 like('~처럼')로, shy away from ~ing를 '수줍게 ~하다'로 잘못 읽어, 작곡가가 음향 디자이너와
         같은 부류인 것처럼 읽음.
       wrong_why: unlike sound designers는 '음향 디자이너와 달리'라는 대비 표지로, 뒤에 이어질 composers의
@@ -1115,10 +1052,8 @@ practice:
     - word: legal framework
       meaning: 법적 틀/체계
     solution:
-      cut: 'On the contrary, / it comes close to Hobbes''s outlook / : / man''s violent
-        and conflict‑prone nature / makes it necessary / to establish and maintain
-        an effective legal framework — 오히려 / 그것은 홉스의 관점에 ''가깝다'' / 즉 / 인간의 폭력적이고 갈등을
-        일으키기 쉬운 본성이 / (~을) 필요하게 만든다 / 효과적인 법적 틀을 확립·유지하는 것을'
+      cut: 오히려 / 그것은 홉스의 관점에 '가깝다' / 즉 / 인간의 폭력적이고 갈등을 일으키기 쉬운 본성이 / (~을) 필요하게 만든다
+        / 효과적인 법적 틀을 확립·유지하는 것을
       wrong: comes close to를 '거리가 멀다'로, makes it necessary to establish를 '세울 필요가 없게
         만든다'로 뒤집어, 앞 문장과의 대비 방향까지 반대로 읽음.
       wrong_why: On the contrary는 앞 진술을 뒤집는 표지이고, 콜론(:)은 그 뒤가 Hobbes's outlook을 구체적으로
@@ -1149,8 +1084,7 @@ practice:
     - word: pedal
       meaning: (자전거) 페달을 밟다
     solution:
-      cut: I can't wait to ride / while watching those beautiful waves — 나는 자전거 타는
-        게 너무 기대돼 / 저 아름다운 파도를 바라보'면서'
+      cut: 나는 자전거 타는 게 너무 기대돼 / 저 아름다운 파도를 바라보'면서'
       wrong: while을 대조('~와 달리')로 보아 '파도를 보는 것'과 '자전거를 타는 것'을 대비되는 두 행동으로 읽음.
       wrong_why: while은 대조(반면에)뿐 아니라 '~하면서'(동시 동작)로도 쓰인다. 여기서는 ride와 watching이 동시에
         일어나는 한 장면이며 대비 대상이 없으므로 '파도를 바라보면서 자전거를 타다'가 맞다. while + ‑ing는 특히 동시 동작을 나타내기
@@ -1180,9 +1114,7 @@ practice:
     - word: agency
       meaning: 행위 주체성
     solution:
-      cut: While sentience and volition are aspects of mind and agency / , morals
-        are cultural tools / developed to influence social behaviour — 지각력과 의지가 마음·행위
-        주체성의 측면인 '반면' / 도덕은 문화적 도구이다 / 사회적 행동에 영향을 주기 위해 개발된
+      cut: 지각력과 의지가 마음·행위 주체성의 측면인 '반면' / 도덕은 문화적 도구이다 / 사회적 행동에 영향을 주기 위해 개발된
       wrong: While을 '~하는 동안'(시간)으로만 보아 두 절을 대비가 아닌 동시 상황으로 읽음.
       wrong_why: 문두의 While이 서로 다른 두 주어(sentience/volition vs morals)의 성격을 맞세우고 있으므로
         '반면에'라는 대조로 읽어야 한다. 이 대조가 morals의 정체(마음의 속성이 아니라 사회적 행동을 조절하는 '문화적 도구')를 또렷하게
@@ -1207,9 +1139,7 @@ practice:
     - word: disorganized
       meaning: 체계가 없는, 무질서한
     solution:
-      cut: it is considerably more difficult to take notes from discussions than from
-        lectures / , for, / unlike lectures, / discussions tend to be disorganized
-        — 토론에서 필기하는 것이 강의에서보다 상당히 더 어렵다 / 왜냐하면 / 강의와 '달리' / 토론은 체계가 없는 경향이 있(기 때문이)다
+      cut: 토론에서 필기하는 것이 강의에서보다 상당히 더 어렵다 / 왜냐하면 / 강의와 '달리' / 토론은 체계가 없는 경향이 있(기 때문이)다
       wrong: unlike lectures를 '강의처럼'으로 읽거나, for를 전치사('~을 위해')로 보아 이유절을 놓침.
       wrong_why: unlike lectures는 '강의와 달리'로, 토론이 강의와 반대되는 성질(무질서·난해)을 지님을 구체화한다. 콤마
         뒤 for는 이유를 이끄는 접속사('왜냐하면')이고, unlike lectures는 그 이유절 안에 삽입된 대비구이다. more ~
@@ -1235,9 +1165,7 @@ practice:
     - word: set oneself apart
       meaning: 자신을 차별화하다
     solution:
-      cut: While scholars might initially find these entrepreneurial concepts alien
-        / , they actually engage in similar practices / when they set themselves apart
-        — 학자들이 처음엔 이 기업가적 개념을 낯설게 느낄 수도 있'지만' / 그들은 실제로 비슷한 관행을 한다 / 자신을 차별화할 때
+      cut: 학자들이 처음엔 이 기업가적 개념을 낯설게 느낄 수도 있'지만' / 그들은 실제로 비슷한 관행을 한다 / 자신을 차별화할 때
       wrong: While을 '~하는 동안'(시간)으로 보아 앞뒤를 대조가 아닌 동시 상황으로 읽고, find ~ alien을 'find(발견하다)+alien'으로
         끊어 읽음.
       wrong_why: 문두 While은 앞절(낯설게 느낌)과 뒷절(실제로는 비슷한 관행을 함)을 맞세우는 양보·대조('~지만')이다. 이
@@ -1262,10 +1190,7 @@ practice:
     - word: waste discharge
       meaning: 폐기물 배출(물)
     solution:
-      cut: Nevertheless, / the technologies (available for monitoring the concentrations
-        and flows of particular substances in waste discharges) / have been developing
-        rapidly — 그럼에도 불구하고 / (폐기물 배출에서 특정 물질의 농도와 흐름을 감시하는 데 이용 가능한) 기술은 / 빠르게 발전해
-        왔다
+      cut: 그럼에도 불구하고 / (폐기물 배출에서 특정 물질의 농도와 흐름을 감시하는 데 이용 가능한) 기술은 / 빠르게 발전해 왔다
       wrong: available ~ discharges의 긴 수식어를 주어로 착각해 substances나 discharges를 동사 have
         been developing의 주어로 읽음.
       wrong_why: Nevertheless는 앞 내용을 뒤집는 대비 표지로, '한계에도 불구하고 기술은 발전해 왔다'는 반전을 예고한다.
@@ -1291,10 +1216,8 @@ practice:
     - word: be famous for
       meaning: ~로 유명하다
     solution:
-      cut: While the other passengers were gathering their bags / , Jessica quickly
-        got off the bus / and she ran up the cliff / that was famous for its ocean
-        views — 다른 승객들이 가방을 챙기고 있는 '동안' / Jessica는 재빨리 버스에서 내렸다 / 그리고 절벽 위로 뛰어 올라갔다
-        / 바다 전망으로 유명한 (절벽)
+      cut: 다른 승객들이 가방을 챙기고 있는 '동안' / Jessica는 재빨리 버스에서 내렸다 / 그리고 절벽 위로 뛰어 올라갔다 / 바다
+        전망으로 유명한 (절벽)
       wrong: While을 대조('~와 달리/반면에')로 보아 승객들과 Jessica의 행동을 맞세워 읽음.
       wrong_why: 여기서 While은 진행형(were gathering)과 함께 쓰여 '~하는 동안'(동시 상황)을 나타낸다. 두 절이
         성질을 맞세우는 대조가 아니라, 같은 시간에 벌어지는 장면이므로 '동안'이 자연스럽다. 관계절 that was famous ~는 앞의
@@ -1323,8 +1246,7 @@ practice:
     - word: substance
       meaning: 실체, 본질(알맹이)
     solution:
-      cut: 이론에만 의존하는 사람들은(Those who rely only upon theories) / 분명히 / 그림자를 쫓고 있었다(hunting
-        the shadow) / 실체가 아니라(not the substance).
+      cut: 이론에만 의존하는 사람들은 / 분명히 / 그림자를 쫓고 있었다 / 실체가 아니라
       wrong: 실제 그림자를 뒤쫓느라 정작 물체 자체는 사냥하지 못하는 어리석은 사냥꾼의 모습을 묘사한다.
       wrong_why: '''shadow''와 ''substance''를 사냥 장면의 문자 그대로의 그림자와 물체로 읽어, 이론 의존이라는
         문맥이 부여한 비유적 의미를 놓쳤다.'
@@ -1349,9 +1271,8 @@ practice:
     - word: aesthetics
       meaning: 미학, 심미성
     solution:
-      cut: 우리는 이음매 없는 미학을 추구한다(seamless aesthetics) / 솔기를 촘촘히 꿰매고(stitching the seams
-        closely) / 평평하게 눌러 / 안쪽에 숨김으로써 / 그래서 우리가 입는 것이 옷이 되도록(we wear clothing) /
-        천 조각이 아니라(rather than pieces of fabric).
+      cut: 우리는 이음매 없는 미학을 추구한다 / 솔기를 촘촘히 꿰매고 / 평평하게 눌러 / 안쪽에 숨김으로써 / 그래서 우리가 입는 것이
+        옷이 되도록 / 천 조각이 아니라
       wrong: 실제 바느질로 옷의 솔기를 안쪽에 숨기는 재봉 기술만을 설명한 것으로 읽는 것.
       wrong_why: 솔기를 문자 그대로의 옷감 봉제로만 이해하면, 이 문장이 기술의 이음매를 감추는 매끄러운 설계를 빗댄 비유임을 놓친다.
       author_msg: 옷의 솔기 감추기는 기술의 이음매(구성 요소 간 경계)를 감춰 사용자가 조각이 아닌 완결된 전체로 경험하게 하는 설계를
@@ -1383,9 +1304,8 @@ practice:
     - word: internal processes
       meaning: 내적 과정
     solution:
-      cut: Because the environment plays a significant role / in aiding meaningful
-        internal processes, / 주관적 경험과 환경은 / 하나의 결합된 시스템으로서 작동한다 (act as a coupled
-        system) / 이 결합된 시스템은 / 그 자체로 완전한 인지 체계로 볼 수 있다 (can be seen as ~)
+      cut: 환경이 중요한 역할을 하기 때문에 / 의미 있는 내적 과정을 돕는 데 / 주관적 경험과 환경은 / 하나의 결합된 시스템으로서 작동한다
+        / 이 결합된 시스템은 / 그 자체로 완전한 인지 체계로 볼 수 있다
       wrong: act as를 '~을 향해 행동하다/연기하다'로 읽어 두 대상이 각자 따로 행동하는 것으로 오해
       wrong_why: act as X는 'X로서 기능하다/작용하다'라는 비유 표현으로, 주관적 경험과 환경을 하나의 X(결합 시스템)에 빗대어
         묶는 것이지 각각이 능동적으로 '행동'하는 것이 아니다. 뒤 문장에서 This coupled system을 단수 하나로 되받는 것도
@@ -1414,9 +1334,8 @@ practice:
     - word: competently
       meaning: 유능하게, 잘
     solution:
-      cut: If there is a clear line / between burned out and not, / 전구의 경우에 (그런 경계가)
-        있는 것처럼 (as there is with a lightbulb), / then 우리는 ~를 분류할 좋은 방법이 없다 / 번아웃이라
-        말하면서도 여전히 유능하게 일을 해내는 사람들을
+      cut: 소진과 아님 사이에 / 뚜렷한 경계가 있다면 / 전구의 경우에 (그런 경계가) 있는 것처럼 / 그렇다면 우리는 ~를 분류할 좋은
+        방법이 없다 / 번아웃이라 말하면서도 여전히 유능하게 일을 해내는 사람들을
       wrong: as there is with a lightbulb를 '전구와 함께 있듯이'로 읽어 with를 물리적 동반('~와 함께')으로
         오해
       wrong_why: there is ~ with a lightbulb는 '전구에는(전구의 경우에는) 그런 뚜렷한 선이 존재한다'는 뜻으로,
@@ -1448,9 +1367,8 @@ practice:
     - word: inaccurate
       meaning: 부정확한
     solution:
-      cut: Even those / who describe scientific contests in such a way / = 과학을 그런
-        식의 경쟁(시합)으로 묘사하는 사람들조차 / note that / it is a somewhat inaccurate description,
-        / given that / 재현과 검증은 사회적 가치가 있고 / 과학에서 흔하다는 점을 고려하면
+      cut: 과학을 그런 식의 경쟁(시합)으로 묘사하는 사람들조차 / 지적한다 / 그것이 다소 부정확한 묘사임을 / ~을 고려하면 / 재현과
+        검증은 사회적 가치가 있고 / 과학에서 흔하다는 점을
       wrong: scientific contests를 실제로 개최되는 '과학 경연대회'로 읽어 그 대회를 소개하는 것으로 오해
       wrong_why: 여기서 contests는 과학 활동을 경쟁/승부에 빗댄 비유이며, 뒤에서 그 화자들 스스로 '다소 부정확한 묘사'라고
         인정한다. 실제 대회가 아니라 '과학=경쟁'이라는 관점을 가리킨다. it is a somewhat inaccurate description의
@@ -1479,9 +1397,7 @@ practice:
     - word: hive
       meaning: 벌집, 벌통
     solution:
-      cut: The entrance to a honeybee colony, / often referred to as the dancefloor,
-        / 벌집 입구는 = 흔히 무도장이라 불리는 / 정보가 오가는 장이다 (is a market place for information)
-        / about the state of the colony / and the environment outside the hive
+      cut: 벌집 입구는 / 흔히 무도장이라 불리는 / 정보가 오가는 장이다 / 군집의 상태에 관한 / 그리고 벌통 바깥 환경에 관한
       wrong: a market place를 문자 그대로 '물건(정보)을 돈 주고 매매하는 상업 시장'으로 오해
       wrong_why: 벌집 입구를 dancefloor·market place에 빗댄 비유로, 꿀벌들이 군집과 바깥 환경에 관한 정보를 주고받는
         '장(場)'을 뜻한다. 상거래가 이뤄지는 실제 시장이 아니라 정보 교환의 중심지를 이미지화한 표현이다
@@ -1506,9 +1422,8 @@ practice:
     - word: well‑being
       meaning: 행복, 안녕
     solution:
-      cut: 'Adrianne Hardman has summarized / this serious situation for public health:
-        / 신체 활동 부족은 = Physical inactivity is / a waste of human potential / for health
-        and well‑being'
+      cut: Adrianne Hardman은 요약했다 / 공중 보건에 관한 이 심각한 상황을 / 신체 활동 부족은 (~이다) / 인간 잠재력의
+        낭비 / 건강과 행복을 위한
       wrong: is a waste of를 '~을 낭비한다(동사)'로 읽어 주어가 능동적으로 무엇을 버리는 것으로 오해
       wrong_why: Physical inactivity is a waste of ~는 'A는 B의 낭비다'라는 A=B 등치(비유) 구문으로,
         신체 활동 부족 자체를 '인간 잠재력의 낭비'라는 이미지에 등치한다. inactivity가 능동적으로 잠재력을 낭비하는 행위 주체가
@@ -1533,9 +1448,8 @@ practice:
     - word: visual subject
       meaning: 시각적(눈으로 보는) 주제
     solution:
-      cut: The history of surviving dress / really only starts in the century, / and
-        like all artefacts / described as fine or decorative art, / is a highly visual
-        subject
+      cut: 현존하는 의복의 역사는 / 사실상 그 세기에 와서야 비로소 시작된다 / 그리고 모든 인공물과 마찬가지로 / 순수미술이나 장식미술로
+        분류되는 / 매우 시각적인 주제이다
       wrong: like를 동사 '좋아하다'로 읽거나, like all artefacts를 뒤 is의 주어로 오해
       wrong_why: like all artefacts ~는 '~인 모든 인공물과 마찬가지로'라는 비유 전치사구(삽입)로, 뒤의 is a
         highly visual subject의 주어는 여전히 앞의 The history(of surviving dress)이다. like는
@@ -1560,9 +1474,7 @@ practice:
     - word: argumentation
       meaning: 논증
     solution:
-      cut: Unlike scientific methods, / 과학적 방법과 달리 / philosophizing is a non‑empirical
-        approach / that attempts to validate concepts / through logical thinking and
-        argumentation
+      cut: 과학적 방법과 달리 / 철학함은 비경험적 접근법이다 / 개념을 검증하려는 / 논리적 사고와 논증을 통해
       wrong: Unlike를 '좋아하지 않는다'로, 또는 is a non‑empirical approach의 approach를 동사 '접근하다'로
         오해
       wrong_why: Unlike scientific methods는 '과학적 방법과 달리'라는 대비 전치사구이고, philosophizing
@@ -1589,9 +1501,7 @@ practice:
     - word: invented
       meaning: 만들어진, 고안된
     solution:
-      cut: Instead of the old rule / that dressmaking is a craft, / 옷 만들기는 공예다라는 오래된
-        규칙 대신 / a modern connection between dress‑design and art / was invented /
-        that had not been there before
+      cut: 옷 만들기는 공예라는 오래된 규칙 대신 / 의상 디자인과 예술 사이의 현대적 연결이 / 만들어졌다 / 이전에는 존재하지 않았던
       wrong: that dressmaking is a craft의 that을 관계대명사로 보아 the old rule을 수식하는 것으로 오해하거나,
         was invented를 '발명했다(능동)'로 오독
       wrong_why: that dressmaking is a craft는 the old rule의 내용을 밝히는 동격 that절('옷 만들기는

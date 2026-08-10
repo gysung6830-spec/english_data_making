@@ -69,8 +69,7 @@ chapters:
     - word: category
       meaning: 범주
     solution:
-      cut: 하지만(However) / 대부분의 범주와 달리(unlike most of the categories) / 그 영역들을 이루는(that
-        make up those areas) / 그것은 유동적이다(it is fluid) / 고정적이기보다(rather than static).
+      cut: 하지만 / 대부분의 범주와 달리 / 그것들을 이루는 영역은 유동적이다 / 고정적이기보다
       wrong: fluid = '고정된, 확립된'.
       wrong_why: rather than static(고정적이지 않고)의 대조를 놓치면 반대로 읽는다.
       author_msg: fluid = '유동적인'. 다른 범주들과 달리 그것은 고정돼 있지 않고 계속 변한다는 뜻.
@@ -95,8 +94,8 @@ chapters:
     - word: iris
       meaning: 홍채
     solution:
-      cut: 비밀번호·이중 키 인증, 그리고 생체 인식은(biometrics) / 예컨대 지문·홍채·음성 인식(such as ~) / 모두
-        ~하는 방법이다 / 계정 정보를 숨기는 / 잠재적 사기꾼으로부터(from potential fraudsters).
+      cut: 비밀번호·이중 키 인증, 그리고 생체 인식은 / 예컨대 지문·홍채·음성 인식은 / 모두 방법이다 / 계정 정보를 숨기는 / 잠재적
+        사기꾼으로부터
       wrong: biometrics = '암호를 자주 바꾸는 정책'.
       wrong_why: 앞의 passwords에 이끌려 암호 관련으로 착각한다.
       author_msg: biometrics = '생체 인식'. 지문·홍채·음성 같은 신체 특징으로 본인을 확인하는 방식이라는 뜻.
@@ -120,8 +119,7 @@ chapters:
     - word: innovation
       meaning: 혁신
     solution:
-      cut: 지나치게 경직된 습관과 관습은(Overly rigid habits and conventions) / — 아무리 잘 고려되고 좋은
-        의도라 해도(no matter how ~) / 혁신을 위협한다(threaten innovation).
+      cut: 지나치게 경직된 습관과 관습은 / — 아무리 잘 고려되고 좋은 의도라 해도 / 혁신을 위협한다
       wrong: rigid = '유연한, 융통성 있는'.
       wrong_why: 습관·관습을 좋게 보아 긍정적 뉘앙스로 오해한다.
       author_msg: rigid = '경직된'. 지나치게 굳어 버린 습관과 관습은 혁신을 위협한다는 뜻.
@@ -145,8 +143,8 @@ chapters:
     - word: conclude
       meaning: 결론짓다
     solution:
-      cut: 당신은 그것이 약간만 어렵다고 느껴(only slightly difficult) / 결론짓는다 / 자신이 꽤 잘 오르고 있었다고
-        / 그러나 실제로는(when in fact) / 평소보다 나을 게 없이 오르고 있었다(no better than usual).
+      cut: 당신은 그것이 약간만 어렵다고 느껴 / 결론짓는다 / 자신이 꽤 잘 오르고 있었다고 / 그러나 실제로는 / 평소보다 나을 게 없이
+        오르고 있었다
       wrong: no better than = '평소보다 훨씬 나은'.
       wrong_why: better만 보고 '더 낫다'로 읽으면 no의 부정을 놓친다.
       author_msg: no better than usual = '평소와 다를 바 없는'. 잘 오른다고 착각했지만 사실은 평소만큼밖에 못
@@ -170,9 +168,8 @@ chapters:
     - word: habitat
       meaning: 서식지
     solution:
-      cut: 산림 소유자는(Owners of forest lands) / 나무를 벨 시장 유인이 있다(a market incentive to
-        cut down) / 숲을 관리하기보다(rather than manage) / 탄소 포집·야생동물 서식지·홍수 방지 / 그리고 다른
-        생태계 서비스를 위해(other ecosystem services).
+      cut: 산림 소유자는 / 나무를 벨 시장 유인이 있다 / 숲을 관리하기보다 / 탄소 포집·야생동물 서식지·홍수 방지 / 그리고 다른 생태계
+        서비스를 위해
       wrong: ecosystem services = '생태계에 요금을 매기는 서비스업'.
       wrong_why: services를 상업적 '서비스업'으로만 읽으면 오해한다.
       author_msg: ecosystem services = '생태계 서비스'. 탄소 흡수·서식지·홍수 방지처럼 숲(생태계)이 제공하는 이로움을
@@ -194,8 +191,7 @@ chapters:
     - word: practical
       meaning: 실질적인
     solution:
-      cut: 실질적으로(As a practical matter) / 사람은 / 좀처럼 요구하지 않는다(seldom requires) / 완전한
-        자율성을 / 집단으로부터(from the group).
+      cut: 실질적으로 / 사람은 / 좀처럼 요구하지 않는다 / 완전한 자율성을 / 집단으로부터
       wrong: autonomy = '집단에 대한 복종, 소속감'.
       wrong_why: from the group을 '집단에 속함'으로 뒤집어 읽으면 반대가 된다.
       author_msg: autonomy = '자율성, 독립성'. 현실적으로 집단에서 완전히 독립할 필요는 좀처럼 없다는 뜻.
@@ -218,10 +214,8 @@ chapters:
     - word: famine
       meaning: 기근
     solution:
-      cut: 동시에(At the same time) / 인식하는 것이 중요하다 / 아무리 빨리 성장해도(no matter how fast they
-        grow) / 인구의 상당수가(a large part of the population) / 불안정한 원천에서 생계를 얻는(derive
-        their livelihood from uncertain sources) / 나라들은 / 기근을 막기를 바랄 수 없다는 것을(cannot
-        hope to prevent famines).
+      cut: 동시에 / 인식하는 것이 중요하다 / 아무리 빨리 성장해도 / 인구의 상당수가 / 불안정한 원천에서 생계를 얻는 / 나라들은 /
+        기근을 막기를 바랄 수 없다는 것을
       wrong: livelihood = '삶의 활기, 생기'.
       wrong_why: live-가 들어가 'liveliness(활기)'와 혼동한다.
       author_msg: livelihood = '생계'. 인구 상당수가 불안정한 원천에서 생계를 얻는 나라는 기근을 막기 어렵다는 뜻.
@@ -243,9 +237,7 @@ chapters:
     - word: component
       meaning: 구성 요소의
     solution:
-      cut: 반면에(on the other hand) / 초보자는 / 도달하지 못했다(have not achieved) / 같은 정도의 유창함과
-        자동성에(the same degree of fluency and automaticity) / 각각의 구성 기술에서(in each of
-        the component skills).
+      cut: 반면에 / 초보자는 / 도달하지 못했다 / 같은 정도의 유창함과 자동성에 / 각각의 구성 기술에서
       wrong: automaticity = '기계적이고 무성의한 태도'.
       wrong_why: '''자동''을 부정적 ''기계적''으로만 읽으면 오해한다.'
       author_msg: automaticity = '자동성'. 각 세부 기술이 의식적 노력 없이 자동으로 수행되는 능숙한 상태로, 초보자는

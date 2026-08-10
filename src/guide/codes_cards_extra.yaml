@@ -14,9 +14,8 @@ contrast:
   so_what: 널리 쓰이는 정의가 정작 창의성의 핵심(창의적 아이디어 생성은 최종 목표가 아님)을 놓치고 있다.
   subj: 정의 this definition / 창의성의 한 측면 aspect of creativity
   act: 널리 쓰이다 is widely used ↔ 종종 무시되다 is often ignored
-  cut: 'While this definition is widely used in research (~이지만) / an important aspect
-    of creativity / is often ignored: / Generating creative ideas / rarely is the
-    final goal.'
+  cut: 이 정의가 연구에서 널리 쓰이지만 / 창의성의 중요한 한 측면은 / 종종 간과된다 / 창의적 아이디어를 만들어 내는 것은 / 좀처럼 최종
+    목표가 아니다
 - code: Although
   code_ko: 비록 ~이지만(양보/대조)
   dir: ''
@@ -30,8 +29,7 @@ contrast:
   so_what: 전공 지식은 정식 교육으로 배우지만, 좋은 과학자가 되는 법은 정식으로 가르쳐지지 않는다.
   subj: 과학자들 scientists
   act: 훈련받다 are trained ↔ 배우지 못하다 are not formally instructed
-  cut: Although scientists are trained (~이지만) / in the substantive content of their
-    discipline, / they are not formally instructed / in how 'to be a good scientist'.
+  cut: 과학자들은 훈련받지만 / 자기 분야의 실질적 내용에서 / 그들은 공식적으로 배우지 않는다 / '좋은 과학자가 되는 법'을
 comparison:
 - code: rather than
   code_ko: ~가 아니라/~보다는(비교·선호)
@@ -45,8 +43,7 @@ comparison:
   so_what: 조건이 갖춰지지 않으면 로봇이 목표물(블록) 대신 엉뚱하게 자기 자신을 쫓게 된다.
   subj: 로봇 the robot
   act: 쫓다 chase (자기 자신 itself, 블록 아님 not the blocks)
-  cut: If not, / the robot might endlessly chase / itself / rather than the blocks
-    (~가 아니라).
+  cut: 그렇지 않으면 / 로봇은 끝없이 쫓을지도 모른다 / 자기 자신을 / 블록이 아니라
 connective:
 - code: Instead
   code_ko: 그 대신에(앞 내용을 부정하고 전환)
@@ -63,9 +60,8 @@ connective:
   so_what: 도덕적 가치는 정식 교육이 아니라 동료로부터 자연스럽게 흡수되는 사회화로 습득된다.
   subj: 견습 과학자 the apprentice scientist
   act: 이해를 얻다 gains understanding (흡수·사회화 by absorption—socialization)
-  cut: Instead (그 대신), / much like the young child learning how to play 'nicely',
-    / the apprentice scientist gains his or her understanding / of the moral values
-    inherent in the role / by absorption from their colleagues—socialization.
+  cut: 그 대신 / 어린아이가 '얌전히' 노는 법을 배우는 것처럼 / 견습 과학자는 이해를 얻는다 / 그 역할에 내재된 도덕적 가치에 대한 /
+    동료로부터의 흡수, 즉 사회화를 통해
 - code: Accordingly
   code_ko: 그에 따라서(앞 내용의 결과)
   dir: ''
@@ -81,9 +77,8 @@ connective:
   so_what: 사용자 필요를 중시하는 흐름의 결과로, 제조업체들이 필요 조사·제품개발 조직을 갖추게 되었다.
   subj: 제조업체들 manufacturers
   act: 설립했다 have set up (시장조사 부서·제품개발 팀 departments, groups)
-  cut: Accordingly (그에 따라), / manufacturers have set up / market-research departments
-    to explore the needs of users / in the target market, / product-development groups
-    to think up suitable products / to address those needs, / and so forth.
+  cut: 그에 따라 / 제조업체들은 설립했다 / 사용자의 필요를 조사할 시장조사 부서 / 표적 시장에서 / 적합한 제품을 구상할 제품개발 팀 /
+    그 필요를 충족할 / 등등을
 - code: Thus
   code_ko: 따라서(결론·귀결)
   dir: ''
@@ -99,9 +94,8 @@ connective:
   so_what: 덜 읽히는 작품일수록 그 형식의 낯섦이 오히려 감상에 미적 태도가 필요함을 일깨운다.
   subj: 관습에서 벗어남 its departure from conventional forms
   act: 상기시키다 reminds (관람자·독자에게 the viewer or reader)
-  cut: Thus (따라서), / when the work is less "readable" (or easily interpreted), / its
-    departure from conventional forms / reminds the viewer or reader / that an "aesthetic
-    attitude" is needed / to appreciate the whole episode.
+  cut: 따라서 / 작품이 덜 '읽기 쉬울'(또는 쉽게 해석되지 않을) 때 / 관습적 형식에서 벗어난 그 점이 / 관람자나 독자에게 상기시킨다
+    / '미적 태도'가 필요함을 / 전체를 감상하려면
 polarity_positive:
 - code: significant
   code_ko: 유의미한/상당한(강조)
@@ -117,11 +111,8 @@ polarity_positive:
   so_what: 여러 분야에 걸쳐 단순 공식이 전문가보다 유의미하게 더 나은 예측을 하는 경우가 많다.
   subj: 단순 공식 (simple formulas)
   act: 유의미하게 더 나은 예측을 한다 (make better significant predictions)
-  cut: In over studies across many different domains (여러 다른 분야에 걸친 연구들에서) / half of
-    all cases show (전체 사례의 절반은 ~을 보여준다) / simple formulas make better significant
-    predictions (단순 공식이 유의미하게 더 나은 예측을 함을) / than human experts (인간 전문가보다) / and the
-    remainder (그리고 나머지는) / (except a very small handful) (아주 소수를 제외하고) / show a tie
-    between the two (둘 사이의 무승부를 보여준다)
+  cut: 여러 다른 분야에 걸친 연구들에서 / 전체 사례의 절반은 보여준다 / 단순 공식이 유의미하게 더 나은 예측을 함을 / 인간 전문가보다
+    / 그리고 나머지는 / 아주 소수를 제외하고 / 둘 사이의 무승부를 보여준다
 - code: highly
   code_ko: 매우/고도로(강조)
   dir: ''
@@ -136,10 +127,8 @@ polarity_positive:
   so_what: 고도로 재현적인 작품에서는 초점이 일상 같은 소재에 있고, 배경 양식은 심적 모형 구성을 돕는 역할을 한다.
   subj: 초점 (the focus)
   act: 일상 닮은 소재에 있다 (is on subject matter resembling everyday life)
-  cut: In highly representational paintings, plays, or stories (매우 재현적인 그림·연극·이야기에서는)
-    / the focus is on subject matter (초점은 소재에 있다) / that resembles everyday life (일상생활을
-    닮은) / and the role of background style is (그리고 배경 양식의 역할은) / to facilitate the
-    construction of mental models (심적 모형의 구성을 촉진하는 것이다)
+  cut: 매우 재현적인 그림·연극·이야기에서는 / 초점은 소재에 있다 / 일상생활을 닮은 / 그리고 배경 양식의 역할은 / 심적 모형의 구성을
+    촉진하는 것이다
 polarity_negative:
 - code: Lack of
   code_ko: ~의 부족/결여(부정)
@@ -155,10 +144,8 @@ polarity_negative:
   so_what: 신체 활동 부족이 대부분 만성질환이거나 그 위험 요인인 건강 문제들과 연결된다.
   subj: 충분한 신체 활동의 부족 (Lack of sufficient physical activity)
   act: 건강 문제와 연결되어 왔다 (has been linked to unhealthy conditions)
-  cut: Lack of sufficient physical activity (충분한 신체 활동의 부족이) / has now been linked
-    to (이제 ~와 연결되어 왔다) / at least unhealthy conditions (적어도 건강하지 못한 상태들과) / almost
-    all of which are chronic diseases (그것들의 거의 전부는 만성질환이거나) / or considered risk factors
-    for chronic diseases (만성질환의 위험 요인으로 여겨진다)
+  cut: 충분한 신체 활동의 부족이 / 이제 ~와 연결되어 왔다 / 적어도 건강하지 못한 상태들과 / 그것들의 거의 전부는 만성질환이거나 / 만성질환의
+    위험 요인으로 여겨진다
 - code: not all
   code_ko: 모두 ~인 것은 아니다(부분 부정)
   dir: ''
@@ -173,7 +160,5 @@ polarity_negative:
   so_what: 현재 환경과 맞지 않는 부분이 생기는 것은 생물 속성의 일부가 지금과 다른 환경에서 유래했기 때문이다.
   subj: 생물의 현재 속성 (present properties of an organism)
   act: 전부 그런 환경에서 생겨난 것은 아니다 (have not all originated)
-  cut: ''' Part of the lack of fit arises (부적합함의 일부는 생겨난다) / because the present properties
-    of an organism (생물의 현재 속성들이) / have not all originated (모두 다 생겨난 것은 아니기 때문에) /
-    in an environment similar in every respect (모든 면에서 유사한 환경에서) / to the one in which
-    it now lives (그것이 지금 사는 환경과)'
+  cut: 부적합함의 일부는 생겨난다 / 생물의 현재 속성들이 / 모두 다 생겨난 것은 아니기 때문에 / 모든 면에서 유사한 환경에서 / 그것이
+    지금 사는 환경과
