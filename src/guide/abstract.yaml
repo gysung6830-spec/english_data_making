@@ -4,8 +4,7 @@ intro: 평가원 문장이 어려운 건 추상적이기 때문이다. 아래 6�
 chapters:
 - id: nominalization
   title: 명사화 풀기 — 추상명사를 동사로 되돌린다
-  point: 영어는 동작을 '추상명사'로 굳혀 쓴다(the emergence of ~). 이를 동사로 풀면(생겨나는 것) 구체적으로 잡힌다. 특히
-    'the/a + 추상명사 + of/to' 형태를 노려라.
+  point: 영어는 동작을 '추상명사'로 굳혀 쓴다 — the emergence of ~ 처럼. 'the/a + 추상명사 + of/to' 형태가 그 신호다.
   strategy: '''the + 추상명사 + of A'' 를 보면 → ''A가 ~하는 것 / A를 ~하는 것'' 으로 동사처럼 풀어 읽는다.
     명사 속에 숨은 ''동사''를 꺼내는 것이 핵심.'
   exprs:
@@ -59,7 +58,6 @@ chapters:
 - id: restate
   title: 재진술 신호로 구체화 — 옆에 쉬운 말이 있다
   point: 추상 문장 뒤엔 대개 쉬운 말이 따라온다. that is / in other words / namely, 그리고 콜론(:)이 그 신호다.
-    신호 뒤가 곧 앞의 '쉬운 번역'이다.
   strategy: 이 신호가 보이면 → 바로 뒤(또는 앞)의 '구체 설명'을 잡아 추상 문장을 갈음한다. 추상 문장과 재진술은 '같은 말'이므로,
     둘 중 쉬운 쪽으로 이해하면 된다.
   exprs:
@@ -97,8 +95,7 @@ chapters:
     catch: 누가 계속 돈을 쏟아붓는 그 사업이, 시장에선 대놓고 나쁜 아이디어라는 반전.
 - id: example
   title: 예시·나열로 구체화 — 상위 개념을 사례로 편다
-  point: 추상적인 '상위 개념(biometrics, ecosystem services)' 뒤에 such as / like / for example
-    로 구체 사례가 나열된다. 그 사례 목록이 곧 상위 개념의 '정체'다.
+  point: 추상적인 '상위 개념(biometrics, ecosystem services)' 뒤에 such as / like / for example 로 구체 사례가 나열된다.
   strategy: such as / like / for example / including 을 보면 → 뒤의 나열을 '상위 개념 = 이런 것들'로
     묶어 읽는다. 사례를 보면 모르던 상위 개념도 손에 잡힌다.
   exprs:
@@ -144,8 +141,7 @@ chapters:
     catch: 경험 없는 에이전트는 도움 없으면 무작위로 움직인다 — 그래서 처음부터 완전 자율은 드물다는 것.
 - id: contrast
   title: 대비로 구체화 — 'A가 아니라 B'로 정체를 잡는다
-  point: 추상어는 '반대말'과 나란히 놓일 때 뜻이 선명해진다. not A but B / rather than / unlike 는 'B는 A의
-    반대'라고 알려주는 구체화 장치다.
+  point: 추상어는 '반대말'과 나란히 놓일 때 뜻이 선명해진다. not A but B / rather than / unlike 가 그 신호다.
   strategy: not A but B, rather than, unlike 를 보면 → 아는 쪽(A 또는 B)의 '반대'로 모르는 쪽을 잡는다.
     대비 자체가 추상어의 정의를 대신한다.
   exprs:
@@ -189,7 +185,7 @@ chapters:
     catch: 공개의 강점은 공격적 규제와 달리 유연하고 자유시장을 존중한다는 것, 대비로 읽으면 선명.
 - id: metaphor
   title: 비유·은유 읽기 — 그림·비유를 실제 뜻으로 바꾼다
-  point: 평가원은 추상 개념을 비유로 감춘다(그림자 vs 실체, 옷의 솔기 등). 비유의 '진짜 대상'을 대입해야 뜻이 열린다.
+  point: 평가원은 추상 개념을 비유로 감춘다 — 그림자 vs 실체, 옷의 솔기처럼.
   strategy: 비유 표현이 나오면 → 'A는 사실 무엇을 빗댄 걸까?'를 묻고, 문맥이 주는 실제 대상으로 치환한다. 비유는 장식이 아니라
     '핵심 주장'을 담는 그릇이다.
   exprs:
