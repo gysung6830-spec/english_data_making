@@ -140,9 +140,13 @@ REL_SIG = [
 ]
 
 
-def _mark_sentence(text, tags, is_yellow, rel_cap=2):
-    """노랑/회색 문장을 마킹 — ①기존 신호(빨강 sig) ②노랑이면 논리 관계어(파랑) 자동 표시.
-       겹치면 신호 우선, 관계어는 문장당 rel_cap개까지."""
+POL_POS = r"\b(critical|crucial|essential|vital|fundamental|indispensable|significant|beneficial|benefit(?:s)?|valuable|invaluable|priceless|advantage(?:s|ous)?|useful|powerful|effective|strength(?:s)?|thrive[sd]?|flourish(?:es|ed)?|promising|emphasi[sz]e[sd]?|enhance[sd]?|reinforce[sd]?|prioriti[sz]e[sd]?|prominent|paramount|pivotal)\b"
+POL_NEG = r"\b(abandon(?:s|ed)?|discard(?:s|ed)?|eliminate[sd]?|neglect(?:s|ed)?|ignore[sd]?|dismiss(?:es|ed)?|overlook(?:s|ed)?|reject(?:s|ed)?|refuse[sd]?|den(?:y|ies|ied)|forbid(?:s|den)?|hinder(?:s|ed)?|diminish(?:es|ed)?|obscure[sd]?|undermine[sd]?|disregard(?:s|ed)?|lack(?:s|ed|ing)?|absence|flaw(?:s|ed)?|drawback|fail(?:s|ed|ing)?|problem(?:s|atic)?|threat(?:s|en(?:s|ed)?)?|harm(?:s|ed|ful)?|damage[sd]?|weaken(?:s|ed)?|suffer(?:s|ed|ing)?|danger(?:ous)?|useless|worthless|destroy(?:s|ed)?|hardly|rarely|scarcely|by no means)\b"
+
+
+def _mark_sentence(text, tags, is_yellow, rel_cap=2, pol_cap=2):
+    """노랑/회색 문장 마킹 — ①근거 신호(빨강) ②노랑이면 논리 관계어(파랑) ③노랑이면 ±어휘(＋녹/−적).
+       겹치면 신호>관계어>±어휘 우선, 관계어·±는 문장당 각 cap개까지."""
     spans, unmatched = [], []
     for t in (tags or []):
         w, sig = t.get("word", ""), t.get("sig", "")
@@ -157,17 +161,26 @@ def _mark_sentence(text, tags, is_yellow, rel_cap=2):
         for name, cls, pat in REL_SIG:
             for m in re.finditer(pat, text, re.I):
                 spans.append((m.start(), m.end(), "rel:" + cls, name))
-    # 겹침 제거 — 신호 우선, 그다음 이른 위치
-    spans.sort(key=lambda s: (s[0], 0 if s[2] == "sig" else 1))
-    chosen, occ, reln = [], [], 0
+        for m in re.finditer(POL_POS, text, re.I):
+            spans.append((m.start(), m.end(), "pol:pl", "＋"))
+        for m in re.finditer(POL_NEG, text, re.I):
+            spans.append((m.start(), m.end(), "pol:mn", "−"))
+    # 겹침 제거 — 신호(0) > 관계어(1) > ±(2), 그다음 이른 위치
+    prio = lambda k: 0 if k == "sig" else (1 if k.startswith("rel") else 2)
+    spans.sort(key=lambda s: (s[0], prio(s[2])))
+    chosen, occ, reln, poln = [], [], 0, 0
     for s in spans:
-        a, b = s[0], s[1]
+        a, b, kind = s[0], s[1], s[2]
         if any(not (b <= x or a >= y) for x, y in occ):
             continue
-        if s[2].startswith("rel"):
+        if kind.startswith("rel"):
             if reln >= rel_cap:
                 continue
             reln += 1
+        elif kind.startswith("pol"):
+            if poln >= pol_cap:
+                continue
+            poln += 1
         chosen.append(s); occ.append((a, b))
     chosen.sort()
     out, i = [], 0
@@ -175,9 +188,12 @@ def _mark_sentence(text, tags, is_yellow, rel_cap=2):
         out.append(esc(text[i:a]))
         if kind == "sig":
             out.append(f'<span class="tag hot">{esc(label)}</span><span class="rk">{esc(text[a:b])}</span>')
-        else:
+        elif kind.startswith("rel"):
             cls = kind.split(":", 1)[1]
             out.append(f'<span class="tag rel {cls}">{esc(label)}</span><u class="ru {cls}">{esc(text[a:b])}</u>')
+        else:
+            cls = kind.split(":", 1)[1]
+            out.append(f'<u class="pu {cls}">{esc(text[a:b])}</u><sup class="pm {cls}">{label}</sup>')
         i = b
     tail = "".join(out) + esc(text[i:])
     pre = "".join(f'<span class="tag hot">{esc(s)}</span> ' for s in unmatched)
@@ -663,7 +679,9 @@ def render_spread(rec, c, idx):
         '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">반복어</span> '
         '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span>'
         '<span class="cl" style="background:#fff"><span class="tag rel eq" style="font-size:7px">관계어</span> '
-        '= <b>인과·등호·대조·비교</b> 논리 신호 <span style="color:#8a929b">(PART 0 구문 사전)</span></span></div>')
+        '= <b>인과·등호·대조·비교</b> 논리 신호 <span style="color:#8a929b">(PART 0 구문 사전)</span></span>'
+        '<span class="cl" style="background:#fff"><u class="pu pl">긍정</u><sup class="pm pl">＋</sup> '
+        '<u class="pu mn">부정</u><sup class="pm mn">−</sup> = <b>±어휘</b> <span style="color:#8a929b">(PART 0 ± 사전)</span></span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
@@ -1086,6 +1104,11 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .tag.rel.cause{ background:#1f7a5c; } .tag.rel.eq{ background:#2f6fb0; } .tag.rel.contr{ background:#0f766e; } .tag.rel.comp{ background:#b8860b; } .tag.rel.repl{ background:#64748b; }
 u.ru{ text-decoration:underline; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:600; }
 u.ru.cause{ text-decoration-color:#1f7a5c; } u.ru.eq{ text-decoration-color:#2f6fb0; } u.ru.contr{ text-decoration-color:#0f766e; } u.ru.comp{ text-decoration-color:#b8860b; } u.ru.repl{ text-decoration-color:#64748b; }
+/* ±(긍정/부정) 어휘 — 콤팩트한 ＋/− 부호 + 밑줄 */
+u.pu{ text-decoration:underline; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:600; }
+u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b; }
+.pm{ font-size:7.5px; font-weight:800; vertical-align:3px; }
+.pm.pl{ color:#12543d; } .pm.mn{ color:#a5342d; }
 .reconnote{ font-size:8.2px; color:#8a6a00; background:#fffdf3; border:1px dashed var(--must-line); border-radius:5px; padding:4px 8px; margin-top:6px; }
 .psg .rep{ text-decoration:underline; text-decoration-color:#c99a2e; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:700; }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
