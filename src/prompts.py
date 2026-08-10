@@ -81,6 +81,15 @@ def _passage_block(title: str, body: str) -> str:
     return f"[지문 제목] {title}\n\n[지문 본문]\n{body}"
 
 
+# 안내문·도표 등 맨 위 '제목/머리글 줄'을 문장으로 세지 않도록 하는 공용 규칙
+#   (직독직해·문법·어휘·구조·출제의 문장 번호가 서로 어긋나지 않게 모두 동일 적용)
+_HEADING_RULE = (
+    "- 안내문·도표 등 맨 위에 '제목/머리글 한 줄'(마침표로 끝나는 완결된 문장이 아닌 표제, "
+    "예: '2025 Library Bookmark Design Contest', 'Father-Daughter Sock Hop')이 있으면 "
+    "그 줄은 '문장으로 세지 마세요'. 본문의 첫 '완결된 문장'을 1번으로 하여 번호를 매기세요.\n"
+)
+
+
 # ① 요약 -------------------------------------------------------------------
 def summary_prompt(title: str, body: str) -> str:
     return (
@@ -115,7 +124,8 @@ def literal_prompt(title: str, body: str) -> str:
         "- note: 문장의 '내용 자체'가 너무 추상적이어서 직역만으로 이해가 어려운 경우에만, "
         "고등학생이 이해할 수 있는 쉬운 설명을 1문장 붙이세요. 그렇지 않으면 빈 문자열로 두세요.\n"
         "- translation: 그 문장 '전체'를 자연스러운 한국어로 매끄럽게 완역한 문장(직독직해가 아닌 완결된 해석).\n"
-        "- sentences 배열에 문장 순서대로 담고, no 는 1부터 매깁니다.\n\n"
+        "- sentences 배열에 문장 순서대로 담고, no 는 1부터 매깁니다.\n"
+        + _HEADING_RULE + "\n"
         + _passage_block(title, body)
     )
 
@@ -125,6 +135,7 @@ def grammar_prompt(title: str, body: str) -> str:
     return (
         "아래 지문을 문장 단위로 앞에서부터 1,2,3... 번호를 매긴 뒤, "
         "각 문장에서 문법적으로 짚어줄 만한 사항이 있으면 '모두' 뽑으세요. (개수 제한 없음)\n"
+        + _HEADING_RULE +
         "- 문법 사항이 없는 문장은 건너뛰어도 됩니다. 한 문장에 여러 개면 여러 항목으로 나누세요.\n"
         "- 각 항목: no(전체 순번, 1부터), point(문법 포인트명), example(그 문장에서의 실제 예문), "
         "explanation(핵심 설명, 한국어), key(핵심 어법 여부 true/false), "
@@ -148,6 +159,7 @@ def vocab_prompt(title: str, body: str, lo: int, hi: int) -> str:
         "- 특히 의미가 까다롭거나, 다의어이거나, 수준 높은 어휘, 유의어 구별이 중요한 단어를 우선합니다. "
         "누구나 아는 아주 쉬운 기초 단어는 넣지 마세요.\n"
         "- 먼저 지문을 문장 단위로 앞에서부터 1,2,3... 번호를 매기세요(직독직해의 문장 번호와 동일 기준).\n"
+        + _HEADING_RULE +
         "- 각 항목: no(1부터, 우선순위가 높은 것부터), word(단어/표현), meaning(한글 의미), "
         "synonyms(유의어), antonyms(반의어), "
         "sentence_no(그 단어가 지문에서 처음 나오는 문장 번호, 정수).\n"
@@ -187,6 +199,7 @@ def structure_prompt(title: str, body: str) -> str:
         "(예: 445 billion=4450억, 15 billion=150억). 큰 수를 임의로 줄여 자릿수를 바꾸지 마세요.\n"
         "- 먼저 지문을 문장 단위로 앞에서부터 1,2,3... 번호를 매기고(직독직해와 동일 기준), "
         "가장 마지막 문장의 번호(=전체 문장 수)를 확인하세요.\n"
+        + _HEADING_RULE +
         "- evidence 에는 영어 문장을 인용하지 말고, 해당 단계가 지문의 몇 번째 문장인지만 "
         "'문장 3', '문장 3~5' 형태로 적으세요. "
         "이때 문장 번호는 '전체 문장 수를 절대 넘지 않게' 하세요"
@@ -217,7 +230,8 @@ def exam_prompt(title: str, body: str, grammar: schemas.GrammarSection | None,
         "  1) 지칭추론(대명사)  2) 함축의미  3) 서술형\n"
         "- 각 항목: question_type(위 3개 중 하나), content(아래 형식대로 상세히, 여러 줄이면 줄바꿈 \\n 으로 구분). "
         "tip 은 빈 문자열로 두세요.\n"
-        "- 먼저 지문을 문장 단위로 앞에서부터 1,2,3... 번호를 매겨 두고, 아래에서 그 번호를 사용하세요.\n\n"
+        "- 먼저 지문을 문장 단위로 앞에서부터 1,2,3... 번호를 매겨 두고, 아래에서 그 번호를 사용하세요.\n"
+        + _HEADING_RULE + "\n"
         "[지칭추론] 지문에 나오는 '모든' 대명사·지시어(it, its, this, that, these, those, they, them, "
         "their, one, which 등)를 빠짐없이 문장 순서대로 골라, 각각이 가리키는 대상을 밝히세요"
         "(시험 출제 가능성과 무관하게 전부). 각 줄 형식:\n"
