@@ -92,11 +92,25 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 .flip{ background:#fff7ef; border:1px solid var(--must-line); border-radius:8px; padding:9px 13px; margin-bottom:11px; }
 .flip .fh{ font-size:11px; font-weight:800; color:#a8641a; margin-bottom:4px; }
 .flip .fw{ font-family:'NanumSquareRound',sans-serif; color:#7a4a12; font-weight:700; }
+/* 논리 관계 구문 사전 */
+.relhead{ display:flex; align-items:center; gap:8px; margin:15px 0 7px; }
+.relhead:first-of-type{ margin-top:0; }
+.rsym{ font-size:15px; font-weight:800; color:#fff; width:26px; height:26px; line-height:26px; text-align:center; border-radius:7px; flex:none; }
+.rsym.cause{ background:var(--ink); } .rsym.eq{ background:var(--ref); } .rsym.contr{ background:var(--conj); } .rsym.comp{ background:#b8860b; }
+.relhead .rt{ font-size:13.5px; font-weight:800; color:var(--ink-d); }
+.relhead .rn{ font-size:10px; color:var(--muted); font-weight:700; }
+table.rel{ width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:9px; }
+table.rel td{ border:1px solid #e0e6e2; padding:5px 9px; vertical-align:top; }
+table.rel .grp{ font-weight:800; color:var(--ink-d); white-space:nowrap; width:22%; }
+table.rel .w{ font-family:'NanumSquareRound',sans-serif; color:#2b3540; }
+table.rel tr:nth-child(even) td{ background:#f7faf9; }
+.rellink{ font-size:9.5px; color:#6e5316; background:#fffdf3; border:1px solid var(--must-line); border-radius:7px; padding:5px 10px; margin-bottom:12px; }
+.rellink b{ color:#8a5a1a; }
 </style></head><body>
 
 <!-- ===== P1. 태도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 11</span></div>
 
   <div class="lead">
     <b>“정확하게 모든 문장을 해석하는 것”</b> 과 <b>“좋은 점수”</b> 는 비례하지 않는다.
@@ -129,7 +143,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P2. 완급조절 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 11</span></div>
 
   <div class="lead">모든 문장을 <b>똑같이 강하게</b> 읽을 필요는 없다. 한 단락엔 주제가 <b>하나</b>뿐.
     <b>강·약을 조절</b>하는 <b>능동적 독해</b>를 하자. 완급 없이 직독직해만 하면 남는 정보가 없다.</div>
@@ -164,7 +178,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P3. 추론 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 11</span></div>
 
   <div class="lead">영어는 흔히 <b>General → Specific</b> 순서. <b>추상적인 말이 앞</b>에 오면 <b>대개 뒤에 구체적인 정보</b>가 따라온다.
     모르는 단어에 멈추지 말고 <b>'뒤가 알려줄 것'</b>이라 믿고 읽어라.</div>
@@ -199,7 +213,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P4. 연결사 지도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 11</span></div>
 
   <div class="lead">연결사(접속부사)는 <b>문장과 문장의 관계</b>를 알려주는 표지다. 문장 어디에 있든
     <b>앞 문장과 뒷 문장 '사이'에 놓고</b> 읽어라. 특히 <b>역접</b>은 완급의 분기점이다.</div>
@@ -251,7 +265,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P5. 재진술(Paraphrasing) 원리 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술(Paraphrasing) — 같은 말을 알아채기</h1><span class="pno">05 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술(Paraphrasing) — 같은 말을 알아채기</h1><span class="pno">05 / 11</span></div>
 
   <div class="lead">독해의 최종 기술은 <b>재진술</b> — 명시적 단서 없이도 <b>“앞의 그 말을 바꿔 한 거구나”</b>를 느끼는 것.
     필자는 <b>핵심 주장·소재</b>를 한 번만 말하지 않고 <b>표현을 바꿔 되풀이</b>하고, 정답 선지는 그 되풀이의 <b>마지막 한 번</b>이다.</div>
@@ -282,7 +296,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P6. 재진술로 정답 만들기 (5변환 · 함정) ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술로 정답을 만든다 — 5변환 · 함정</h1><span class="pno">06 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술로 정답을 만든다 — 5변환 · 함정</h1><span class="pno">06 / 11</span></div>
 
   <div class="lead"><b>정답 = 뜻은 그대로, 단어만 바꾼다.</b> &nbsp;<b>오답 = 단어는 그대로 두고, 뜻을 왜곡한다.</b>
     그래서 <b>지문 단어가 그대로 보이는 선지</b>부터 의심하고, <b>표현이 바뀌어 낯선 선지</b>를 정답 후보로 본다.</div>
@@ -315,7 +329,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P7. 글의 구조 6틀 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>글의 구조 — 어떤 짜임이 있나?</h1><span class="pno">07 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>글의 구조 — 어떤 짜임이 있나?</h1><span class="pno">07 / 11</span></div>
   <div class="lead">글의 구조 = 필자가 생각을 배치한 <b>‘틀’</b>. <b>전환어(But/However…)</b>와 연결어를 신호로 잡으면 구조가 보이고,
     구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡힌다. 아래 <b>6가지 틀</b> 중 하나를 예측하며 읽자.</div>
 
@@ -374,7 +388,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P8. 긍정/부정(±) 어휘 사전 ① ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ①</h1><span class="pno">08 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ①</h1><span class="pno">08 / 11</span></div>
   <div class="lead">필자는 <b>무엇을 지지(＋)하고 무엇을 버리는지(−)</b>로 글을 끌고 간다. 그래서 문장 뜻을 다 몰라도
     <b>핵심어의 ± 방향</b>만 잡으면 요지·함축·정답 선지가 보인다. 아래 어휘는 <b>“이 단어가 나오면 필자 태도가 어느 쪽인지”</b>를 알려주는 방향 표지다.</div>
 
@@ -407,7 +421,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 
 <!-- ===== P9. 긍정/부정(±) 어휘 사전 ② — 방향 전환·적용 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ② — 방향 전환·적용</h1><span class="pno">09 / 09</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ② — 방향 전환·적용</h1><span class="pno">09 / 11</span></div>
   <div class="lead">가장 중요한 건 <b>방향을 ‘뒤집는’ 표현</b>이다. 긍정 대상 앞에 부정어가 붙으면 순식간에 −가 된다.
     이 <b>극성 전환</b>을 놓치면 정반대로 읽는다 — 평가원 오답의 단골(<b>반대구조</b>)이 바로 이 지점이다.</div>
 
@@ -435,6 +449,65 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
     <span class="kr">‘꿈을 <b>버린다</b>’(−)를 잡으면, 밑줄이 <b>부정적</b>임을 즉시 판정 → ＋방향 선지 소거.</span></div>
 
   <div class="pointer">🖍 <b>워크북 STEP 2</b>에서 바로 쓴다 — 함축·무관·빈칸의 <b>±(긍정/부정) 판정</b>과 <b>반대구조 함정 소거</b>에서 이 표를 근거로 삼는다.</div>
+  <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
+</section>
+
+<!-- ===== P10. 논리 관계 구문 사전 ① — 인과·등호 ===== -->
+<section class="pg">
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>논리 관계 구문 사전 ① — 인과·등호</h1><span class="pno">10 / 11</span></div>
+  <div class="lead">독해는 결국 문장들의 <b>‘관계’</b>를 잡는 일이다. 관계는 넷뿐 — <b>인과(→)·등호(=)·대조(↔)·비교(&gt;)</b>.
+    이 표현들이 보이면 <b>구조가 즉시 드러난다.</b> 연결사·구두점이 없어도 이 구문이 같은 신호 역할을 한다.</div>
+
+  <div class="relhead"><span class="rsym cause">→</span><span class="rt">인과 — A가 B를 낳거나(→) B에서 비롯(←)</span></div>
+  <table class="rel">
+    <tr><td class="grp">A → B (일으킴)</td><td class="w">result in, lead to, cause, bring about, bring on, trigger, prompt, give rise to, contribute to, be the source of</td></tr>
+    <tr><td class="grp">A ← B (비롯)</td><td class="w">result from, stem from, arise from, draw from, spring from, be derived from, originate in/from, be rooted in, be based on, be anchored in</td></tr>
+    <tr><td class="grp">영향·의존</td><td class="w">influence, have an effect on, have implication for, depend on, be induced by, in response to</td></tr>
+    <tr><td class="grp">근거·이유</td><td class="w">due to, attribute A to B, be a basis for, rationale, justification, outcome, A in that B(B라는 점에서)</td></tr>
+    <tr><td class="grp">결과 연결</td><td class="w">so ~ that, such ~ that, so that S V, it follows that S V, insofar as</td></tr>
+  </table>
+  <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>인과(therefore·thus)</b> · 글의 구조 <b>③문제→해결·⑥예시→일반화</b>. 인과 구문이 보이면 <b>‘결과=필자 결론(＋)’</b>에 형광펜.</div>
+
+  <div class="relhead"><span class="rsym eq">=</span><span class="rt">등호·정의 — A = B (같다·라 부른다·상징한다)</span></div>
+  <table class="rel">
+    <tr><td class="grp">정의·명명</td><td class="w">A is B, be called, be termed, define A as B, refer to A as B</td></tr>
+    <tr><td class="grp">상징·반영</td><td class="w">reflect, mirror, represent, embody, illustrate, exemplify</td></tr>
+    <tr><td class="grp">간주·여김</td><td class="w">regard/see/view/treat A as B, recognize A as B, describe A as B</td></tr>
+    <tr><td class="grp">동일시·상응</td><td class="w">identify A with, be equivalent to, amount to, equation of A with B</td></tr>
+    <tr><td class="grp">재진술·예시</td><td class="w">that is, i.e., in short, in this light / such as, like, including, e.g.</td></tr>
+  </table>
+  <div class="rellink">🔗 <b>연계</b> — 추론 페이지의 <b>BE동사 정의(A=B)·콜론(:)</b> · <b>재진술(A=A′)</b>. ‘A=B’가 보이면 <b>한쪽만 이해</b>하면 나머지는 약하게.</div>
+  <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
+</section>
+
+<!-- ===== P11. 논리 관계 구문 사전 ② — 대조·비교 ===== -->
+<section class="pg">
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>논리 관계 구문 사전 ② — 대조·비교</h1><span class="pno">11 / 11</span></div>
+  <div class="lead">대조(↔)·비교(&gt;)는 <b>두 대상을 견주는</b> 관계 — 양쪽을 다 챙기되 <b>필자가 어느 쪽을 미는지</b>가 핵심이다.
+    특히 <b>not A but B·A rather than B</b> 류는 <b>초점을 B로 못박는</b> 결정적 신호다.</div>
+
+  <div class="relhead"><span class="rsym contr">↔</span><span class="rt">구별·대조 — A ↔ B (다르다·반대다)</span></div>
+  <table class="rel">
+    <tr><td class="grp">다름·구별</td><td class="w">differ from, distinguish A from B, discriminate between, separate A from B, set A apart from, boundary between</td></tr>
+    <tr><td class="grp">대조·상반</td><td class="w">contrast with, contrary to, unlike, opposed to, opposite, counter, whereas, on the other hand</td></tr>
+    <tr><td class="grp">전자/후자</td><td class="w">the former, the latter, vice versa, the other way around, two-edged sword(양날의 검)</td></tr>
+  </table>
+  <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>대조(Contrast, 양쪽 다 중요)</b> · 글의 구조 <b>④비교·대조</b> · 재진술 <b>비교 지문(A·B 두 소재)</b>.</div>
+
+  <div class="relhead"><span class="rsym comp">&gt;</span><span class="rt">비교·대체·선호 — A &gt; B (우열·대체·고름)</span></div>
+  <table class="rel">
+    <tr><td class="grp">우열·능가</td><td class="w">more/less than, outweigh, surpass, exceed, prevail over, outperform, outnumber, superior/inferior to</td></tr>
+    <tr><td class="grp">대체·전환</td><td class="w">replace, displace, be substituted/supplanted by, give way to, switch to, shift/transition from A to B</td></tr>
+    <tr><td class="grp">선호·선택</td><td class="w">prefer A to B, favor A over B, choose/select A over B, A rather than B, A instead of B</td></tr>
+    <tr><td class="grp">압도·가림</td><td class="w">be overwhelmed/overcome by, be overshadowed by, be dwarfed by, be sacrificed for</td></tr>
+    <tr><td class="grp">초점 못박기</td><td class="w"><b>not A but B</b>, not so much A as B, far from A B, less A than B</td></tr>
+  </table>
+  <div class="rellink">🔗 <b>연계</b> — 완급조절(<b>필자가 무엇을 우선</b>) · 함축·요지(<b>선호·강조 대상이 곧 주제</b>). <b>not A but B</b>가 나오면 <b>B에 형광펜</b>.</div>
+
+  <div class="ex"><span class="lb">초점 못박기</span><span class="src">비교·대체 구문</span><span class="e"><b>not</b> the technology <b>but</b> the way we use it</span>
+    <span class="kr">‘A가 아니라 B’ — <b>B(우리가 쓰는 방식)</b>가 필자의 초점. A는 버리는 미끼(−).</span></div>
+
+  <div class="pointer">🖍 <b>워크북에서 바로 쓴다</b> — 이 네 관계(→ = ↔ &gt;)는 STEP 2에서 <b>노랑 문장을 잡는 신호</b>이자 순서·삽입의 <b>연결고리</b>다.</div>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
 </section>
 
