@@ -130,6 +130,60 @@ def _inline_tags(text, tags):
 _CIRC = "①②③④⑤⑥⑦⑧⑨⑩"
 
 
+# 논리 관계 구문(PART0 사전) 신호 — 노랑 문장에서 자동 감지해 파란 '관계어' 태그로 표시
+REL_SIG = [
+    ("인과", "cause", r"\b(lead(?:s|ing)? to|led to|result(?:s|ed|ing)? in|bring(?:s|ing)? about|brought about|give(?:s)? rise to|gave rise to|contribute(?:s|d)? to|stem(?:s|med)? from|arise(?:s)? from|arose from|derive(?:s|d)? from|result(?:s|ed|ing)? from|owing to|due to|thereby)\b"),
+    ("등호", "eq", r"\b(reflect(?:s|ed)?|mirror(?:s|ed)?|represent(?:s|ed)?|embod(?:y|ies|ied)|illustrate(?:s|d)?|exemplif(?:y|ies|ied)|amount(?:s|ed)? to|is equivalent to|are equivalent to)\b"),
+    ("대조", "contr", r"\b(unlike|whereas|in contrast|by contrast|on the other hand|on the contrary|contrary to|differ(?:s|ed)? from|as opposed to|opposed to|conversely)\b"),
+    ("비교", "comp", r"\b(outweigh(?:s|ed)?|surpass(?:es|ed)?|exceed(?:s|ed)?|prevail(?:s|ed)? over|superior to|inferior to|outnumber(?:s|ed)?|outperform(?:s|ed)?|rather than|instead of)\b"),
+    ("대체", "repl", r"\b(replace(?:s|d)?|displace(?:s|d)?|substitute(?:s|d)? for|give(?:s)? way to|gave way to|switch(?:es|ed)? to)\b"),
+]
+
+
+def _mark_sentence(text, tags, is_yellow, rel_cap=2):
+    """노랑/회색 문장을 마킹 — ①기존 신호(빨강 sig) ②노랑이면 논리 관계어(파랑) 자동 표시.
+       겹치면 신호 우선, 관계어는 문장당 rel_cap개까지."""
+    spans, unmatched = [], []
+    for t in (tags or []):
+        w, sig = t.get("word", ""), t.get("sig", "")
+        if not sig:
+            continue
+        m = re.search(re.escape(w), text, re.I) if w else None
+        if m:
+            spans.append((m.start(), m.end(), "sig", sig))
+        else:
+            unmatched.append(sig)
+    if is_yellow:
+        for name, cls, pat in REL_SIG:
+            for m in re.finditer(pat, text, re.I):
+                spans.append((m.start(), m.end(), "rel:" + cls, name))
+    # 겹침 제거 — 신호 우선, 그다음 이른 위치
+    spans.sort(key=lambda s: (s[0], 0 if s[2] == "sig" else 1))
+    chosen, occ, reln = [], [], 0
+    for s in spans:
+        a, b = s[0], s[1]
+        if any(not (b <= x or a >= y) for x, y in occ):
+            continue
+        if s[2].startswith("rel"):
+            if reln >= rel_cap:
+                continue
+            reln += 1
+        chosen.append(s); occ.append((a, b))
+    chosen.sort()
+    out, i = [], 0
+    for a, b, kind, label in chosen:
+        out.append(esc(text[i:a]))
+        if kind == "sig":
+            out.append(f'<span class="tag hot">{esc(label)}</span><span class="rk">{esc(text[a:b])}</span>')
+        else:
+            cls = kind.split(":", 1)[1]
+            out.append(f'<span class="tag rel {cls}">{esc(label)}</span><u class="ru {cls}">{esc(text[a:b])}</u>')
+        i = b
+    tail = "".join(out) + esc(text[i:])
+    pre = "".join(f'<span class="tag hot">{esc(s)}</span> ' for s in unmatched)
+    return pre + tail
+
+
 def step2_passage(hl):
     parts = []
     ynum = 0  # 노랑 문장 번호 → 하단 도출 '노랑①②'와 매칭
@@ -139,7 +193,7 @@ def step2_passage(hl):
         if role == "skip":
             parts.append(f'<span class="sk">{esc(txt)}</span>')
         else:
-            inner = _inline_tags(txt, seg.get("tags"))
+            inner = _mark_sentence(txt, seg.get("tags"), role == "yellow")
             cls = "m" if role == "yellow" else "g"
             # 신호어 없는 노랑 = 시험장에서 미리 잡는 신호(위치·반복어·정의) 칩 표시
             pos = seg.get("pos")
@@ -607,7 +661,9 @@ def render_spread(rec, c, idx):
         '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
         '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
         '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">반복어</span> '
-        '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span></div>')
+        '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span>'
+        '<span class="cl" style="background:#fff"><span class="tag rel eq" style="font-size:7px">관계어</span> '
+        '= <b>인과·등호·대조·비교</b> 논리 신호 <span style="color:#8a929b">(PART 0 구문 사전)</span></span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
@@ -1025,6 +1081,11 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
 .tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }
+/* 논리 관계어 태그(파랑 계열) — 빨강 '근거 신호'와 구분 */
+.tag.rel{ color:#fff; border:none; }
+.tag.rel.cause{ background:#1f7a5c; } .tag.rel.eq{ background:#2f6fb0; } .tag.rel.contr{ background:#0f766e; } .tag.rel.comp{ background:#b8860b; } .tag.rel.repl{ background:#64748b; }
+u.ru{ text-decoration:underline; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:600; }
+u.ru.cause{ text-decoration-color:#1f7a5c; } u.ru.eq{ text-decoration-color:#2f6fb0; } u.ru.contr{ text-decoration-color:#0f766e; } u.ru.comp{ text-decoration-color:#b8860b; } u.ru.repl{ text-decoration-color:#64748b; }
 .reconnote{ font-size:8.2px; color:#8a6a00; background:#fffdf3; border:1px dashed var(--must-line); border-radius:5px; padding:4px 8px; margin-top:6px; }
 .psg .rep{ text-decoration:underline; text-decoration-color:#c99a2e; text-decoration-thickness:1.4px; text-underline-offset:2px; font-weight:700; }
 .rk{ background:#f4b8b2; color:#7a1f19; font-weight:700; padding:0 2px; border-radius:2px; box-shadow:inset 0 -2px 0 #d98b84; }
