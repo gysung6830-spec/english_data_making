@@ -639,6 +639,7 @@ def render_vocablist_pdf(reports, out_path: str | Path,
     passages = []
     for i, rep in enumerate(reps, 1):
         passages.append({"no": i, "total": len(reps), "title": _display_title(rep),
+                         "item_no": (getattr(rep, "item_no", "") or "").strip(),
                          "vocab": _collect_vocab_one(rep)})
     tmpl = _env.get_template("vocablist.html.j2")
     html = tmpl.render(title=title, passages=passages, footer_note=footer_note)
@@ -712,6 +713,7 @@ def render_vocabtest_pdf(reports, out_path: str | Path,
         _assign_unique_targets(ant_pairs)
         passages.append({
             "no": i, "total": len(reps), "title": _display_title(rep),
+            "item_no": (getattr(rep, "item_no", "") or "").strip(),
             "mean": mean, "mean_rows": _pair_rows(mean),
             "syn": _match_block(syn_pairs, rng) if syn_pairs else None,
             "ant": _match_block(ant_pairs, rng) if ant_pairs else None,

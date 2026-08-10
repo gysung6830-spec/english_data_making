@@ -7,7 +7,7 @@
   <div class="wl-passage vt-page{{ ' pgbreak' if not loop.first }}">
     <div class="doc-header">
       <span class="doc-badge">Vocabulary Test</span>
-      {% if pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
+      {% if pg.item_no %}<span class="passage-tag">{{ pg.item_no }}번</span>{% elif pg.total > 1 %}<span class="passage-tag">지문 {{ pg.no }} / {{ pg.total }}</span>{% endif %}
       <div class="doc-title">{{ pg.title }}</div>
       <div class="quiz-meta">
         이름 <span class="ql">&nbsp;</span>　　　점수 <span class="ql short">&nbsp;</span>
@@ -74,7 +74,7 @@
   {# 정답: 문제 뒤에 지문별로 모아서 #}
   {% for pg in passages %}
   <div class="answer-key pgbreak">
-    <div class="ak-title">정답 (Answer Key){% if pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
+    <div class="ak-title">정답 (Answer Key){% if pg.item_no %} · {{ pg.item_no }}번{% elif pg.total > 1 %} · 지문 {{ pg.no }}{% endif %}</div>
 
     <div class="ak-sub">Ⅰ. 단어 뜻</div>
     <div class="ak-list">
