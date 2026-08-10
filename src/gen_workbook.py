@@ -348,8 +348,27 @@ def exam_src(eid):
     return f"{esc(y)}학년도 {esc(m)}"
 
 
+def _norm_q(s):
+    return re.sub(r"[‘’“”]", "'", s or "").lower()
+
+
+def _verbatim_word(word, sent):
+    """리마인더 칩에는 '지문(노랑 문장)에 실제로 있는' 표현만 남긴다.
+       word가 문장에 그대로 있으면 그대로, 아니면 …·;·, 로 쪼갠 조각 중 문장에
+       있는 것만 ' … '로 이어 반환. 하나도 없으면 '' (→ 신호명만 표시)."""
+    if not word:
+        return ""
+    ns = _norm_q(sent)
+    if _norm_q(word) in ns:
+        return word
+    frags = [f.strip() for f in re.split(r"\.\.\.|[…;,]", word) if f.strip()]
+    keep = [f for f in frags if len(f) >= 4 and _norm_q(f) in ns]
+    return " … ".join(keep)
+
+
 def item_signals(hl):
-    """이 문항에 '실제로 쓰인' 노랑 신호로 리마인더 칩 생성 → 노랑 형광펜과 일치."""
+    """이 문항에 '실제로 쓰인' 노랑 신호로 리마인더 칩 생성 → 노랑 형광펜과 일치.
+       칩에 적는 표현은 해당 노랑/회색 문장에 verbatim으로 존재하는 것만(없으면 신호명만)."""
     chips, seen, has_skip = [], set(), False
     def add(label, cls):
         if label and label not in seen:
@@ -361,13 +380,15 @@ def item_signals(hl):
         if role not in ("yellow", "gray"):
             continue
         cls = "y" if role == "yellow" else "g"
+        sent = seg.get("t", "")
         for t in (seg.get("tags") or []):
             sig, word = t.get("sig", ""), t.get("word", "")
             if sig:
-                add(f"{sig} {word}".strip(), cls)
+                vw = _verbatim_word(word, sent)
+                add(f"{sig} {vw}".strip(), cls)
         pos = seg.get("pos")
         if role == "yellow" and pos and not seg.get("tags"):
-            pw = seg.get("posword")
+            pw = _verbatim_word(seg.get("posword", ""), sent)
             add(f"{pos} {pw}".strip() if pw else pos, "y")
     if has_skip:
         add("예시·부연 ✕ 넘김", "g")
