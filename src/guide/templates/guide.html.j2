@@ -328,22 +328,18 @@
 {# ===================== 1부 — 구문해석 · 해석공식 시각화 ===================== #}
 {% if guide.part2 %}
 {% set p2 = guide.part2 %}
-<section class="chapter part-opener" id="part2">
-  <div class="ch-kicker">1부 · 구문해석</div>
-  <div class="ch-title">{{ p2.title }}</div>
-  <div class="ch-signal">{{ p2.intro }}</div>
-  <div class="op-lead">구문을 '읽는 동작'이 같은 것끼리 <b>네 갈래</b>로 묶었다. 갈래마다 <b>전략은 하나</b> — 그 하나를 반복 적용하면 된다.</div>
-  <div class="op-strats">
-    <div class="op-strats-h">🧭 이 파트의 네 갈래 읽기 전략</div>
+<section class="pcover" id="part2">
+  <div class="pc-kick">PART 1 · 구문해석</div>
+  <div class="pc-title">{{ p2.title }}</div>
+  <div class="pc-rule"></div>
+  <div class="pc-intro">구문을 '읽는 동작'이 같은 것끼리 <b style="color:#fff">네 갈래</b>로 묶었다. 갈래마다 전략은 하나 — 그 하나를 반복 적용하면 된다.</div>
+  <div class="pc-strats">
+    <div class="pc-list-h">🧭 이 파트의 네 갈래 읽기 전략</div>
     {% for g in p2.groups %}
-    <div class="op-card">
-      <div class="op-card-h"><span class="op-g">1부 {{ ['A','B','C','D'][loop.index0] }}</span><span class="op-ct">{{ g.title }}</span><span class="op-cn">{{ g.chapters|length }}개 유형</span></div>
-      {% if g.subtitle %}<div class="op-sub">{{ g.subtitle }}</div>{% endif %}
-      <div class="op-st"><b>읽기 전략</b> · {{ g.strategy }}</div>
-    </div>
+    <div class="pc-row"><div class="pc-rh"><span class="pc-g">1부 {{ ['A','B','C','D'][loop.index0] }}</span><span class="pc-t">{{ g.title }}</span><span class="pc-n">{{ g.chapters|length }}개 유형</span></div><div class="pc-s">{{ g.strategy }}</div></div>
     {% endfor %}
   </div>
-  <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 각 유형은 <b>해석 공식(도식) → 기출 예문 4개(끊어읽기) → 실전적용 문제·해설</b> 순서로 익힌다. 공식으로 '읽는 동작'을 먼저 손에 익히고, 예문에서 그 동작을 확인한 뒤, 문제로 스스로 적용해 본다.</div>
+  <div class="pc-tip">🎯 <b>이렇게 공부하세요</b> · 해석 공식(도식) → 기출 예문 4개(끊어읽기) → 실전적용 문제·해설 순서로 익힌다.</div>
 </section>
 
 {% set bletters = ['A','B','C','D','E','F'] %}
@@ -436,23 +432,18 @@
 {% endif %}
 {# ===================== 2부 — 평가원 코드 ===================== #}
 {% if guide.chapters %}
-<section class="chapter part-opener" id="part1">
-  <div class="ch-kicker">2부 · 평가원 기능어 특집</div>
-  <div class="ch-title">평가원 코드 — 필자가 의도하는 바를 파악하기</div>
-  <div class="ch-signal">
-    평가원 문장은 추상적이고 수식어가 많다. 그런데 <b>기능어(평가원 코드)</b>만 정확히 잡으면
-    문장이 어느 방향으로 흐르는지 — 그리고 답이 어디로 이어지는지 — 가 보인다.
-  </div>
-  <div class="op-strats">
-    <div class="op-strats-h">🧭 이 파트의 7가지 코드, 이렇게 잡는다</div>
+<section class="pcover" id="part1">
+  <div class="pc-kick">PART 2 · 평가원 기능어 특집</div>
+  <div class="pc-title">평가원 코드 — 필자가 의도하는 바를 파악하기</div>
+  <div class="pc-rule"></div>
+  <div class="pc-intro">평가원 문장은 추상적이고 수식어가 많다. 그런데 <b style="color:#fff">기능어(평가원 코드)</b>만 정확히 잡으면 문장이 어느 방향으로 흐르는지 — 그리고 답이 어디로 이어지는지 — 가 보인다.</div>
+  <div class="pc-strats">
+    <div class="pc-list-h">🧭 이 파트의 7가지 코드, 이렇게 잡는다</div>
     {% for c in guide.chapters %}
-    <div class="op-card op-card-sm">
-      <div class="op-card-h"><span class="op-g">2-{{ loop.index }}</span><span class="op-ct">{{ c.title }}</span></div>
-      <div class="op-st"><b>코드를 만나면</b> · {{ c.tip }}</div>
-    </div>
+    <div class="pc-row"><div class="pc-rh"><span class="pc-g">2-{{ loop.index }}</span><span class="pc-t">{{ c.title }}</span></div><div class="pc-s">{{ c.tip }}</div></div>
     {% endfor %}
   </div>
-  <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 각 코드는 <b>오역 ↔ 정답 카드</b>로 '흔한 함정'과 '올바른 방향'을 나란히 본 뒤, 실전적용 문제로 스스로 방향을 잡는다. 코드를 만나면 <b>화살표 방향(원인↔결과, 앞↔뒤)</b>부터 확정하는 습관을 들인다.</div>
+  <div class="pc-tip">🎯 <b>이렇게 공부하세요</b> · 오역 ↔ 정답 카드로 함정과 방향을 나란히 본 뒤, 실전적용 문제로 스스로 방향을 잡는다.</div>
 </section>
 
 {% for chapter in guide.chapters %}
@@ -524,20 +515,18 @@
 {# ===================== 추상 → 구체 ===================== #}
 {% if guide.abstract %}
 {% set ab = guide.abstract %}
-<section class="chapter part-opener" id="partAbs">
-  <div class="ch-kicker">3부 · 추상 → 구체</div>
-  <div class="ch-title">{{ ab.title }}</div>
-  <div class="ch-signal">{{ ab.intro }}</div>
-  <div class="op-strats">
-    <div class="op-strats-h">🧭 추상을 구체로 푸는 다섯 갈래</div>
+<section class="pcover" id="partAbs">
+  <div class="pc-kick">PART 3 · 추상 → 구체</div>
+  <div class="pc-title">{{ ab.title }}</div>
+  <div class="pc-rule"></div>
+  <div class="pc-intro">{{ ab.intro }}</div>
+  <div class="pc-strats">
+    <div class="pc-list-h">🧭 추상을 구체로 푸는 다섯 갈래</div>
     {% for c in ab.chapters %}
-    <div class="op-card">
-      <div class="op-card-h"><span class="op-g">3-{{ loop.index }}</span><span class="op-ct">{{ c.title }}</span></div>
-      <div class="op-st"><b>구체화 전략</b> · {{ c.strategy }}</div>
-    </div>
+    <div class="pc-row"><div class="pc-rh"><span class="pc-g">3-{{ loop.index }}</span><span class="pc-t">{{ c.title }}</span></div><div class="pc-s">{{ c.strategy }}</div></div>
     {% endfor %}
   </div>
-  <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 추상 표현을 만나면 당황하지 말고 <b>바로 옆·뒤의 구체화 장치</b>(재진술·예시·대비·비유)를 찾는다. 그 장치가 곧 추상어의 '쉬운 번역'이다. 각 길마다 기출 예문의 끊어읽기로 '구체화되는 지점'을 눈에 익힌다.</div>
+  <div class="pc-tip">🎯 <b>이렇게 공부하세요</b> · 추상 표현을 만나면 바로 옆·뒤의 구체화 장치(재진술·예시·대비·비유)를 찾는다. 그 장치가 곧 추상어의 '쉬운 번역'이다.</div>
 </section>
 
 {% for chapter in ab.chapters %}
