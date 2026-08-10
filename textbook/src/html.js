@@ -209,10 +209,13 @@ const STANCE_NEG = ['버리다·제거', 'abandon · discard · scrap · drop ·
 const STANCE_NEU = ['유보·추측(단정 회피)', 'may · might · can · tend to · seem · appear · suggest · some · often · in some cases · not necessarily',
   '양면·균형 제시', 'on one hand … on the other hand · while ~ · both A and B · it depends · vary',
   '객관 서술(관찰·보고)', 'describe · explain · report · note · observe · according to · studies show (해석 없이 나열만)'];
-function stanceGroupsHtml(arr) {
+// 어휘를 칩(태그)으로 렌더. 칩 안 글씨는 검은색(색은 테두리로만 구분).
+function stanceChips(arr, cls) {
   let h = '';
   for (let i = 0; i < arr.length; i += 2) {
-    h += `<div class="sg-row"><span class="sg-lab">${esc(arr[i])}</span><span class="sg-words">${esc(arr[i + 1])}</span></div>`;
+    const words = arr[i + 1].split(' · ')
+      .map((x) => `<span class="chip ${cls}">${esc(x)}</span>`).join('');
+    h += `<div class="chgrp"><span class="chgrp-lab">${esc(arr[i])}</span><span class="chips">${words}</span></div>`;
   }
   return h;
 }
@@ -222,11 +225,11 @@ function stancePageHtml() {
     <h1>필자의 입장 — 어떤 어휘로 드러나나?</h1>
     <div class="chsub">필생보 · 김은아영어Lab VOCA 기반 · 필자가 대상을 '좋게 / 나쁘게' 보는지는 평가 어휘에서 새어 나온다</div>
     <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘</b>를 잡으면 입장이 보여. 진짜 주장은 보통 <b>마지막 문장</b>(therefore · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
-    <div class="spanel pos"><div class="sp-head">👍 긍정 · 중요 — 필자가 좋게·중요하게 봄</div>${stanceGroupsHtml(STANCE_POS)}</div>
-    <div class="spanel neg"><div class="sp-head">👎 부정 — 필자가 비판·경계·배제·부정</div>${stanceGroupsHtml(STANCE_NEG)}</div>
-    <div class="spanel neu"><div class="sp-head">🤔 중립 — 좋다·나쁘다 평가가 없을 때</div>
-      <div class="sp-note">긍정·부정 평가어가 <b>뚜렷이 없고</b>, 아래처럼 <b>판단을 유보</b>하거나 <b>양쪽을 균형 있게</b> 보여주면 중립이야. (한쪽으로 몰지 않음)</div>
-      ${stanceGroupsHtml(STANCE_NEU)}</div>
+    <div class="b-block pos"><div class="b-head">👍 긍정 · 중요 — 필자가 좋게·중요하게 봄</div>${stanceChips(STANCE_POS, 'pos')}</div>
+    <div class="b-block neg"><div class="b-head">👎 부정 — 필자가 비판·경계·배제·부정</div>${stanceChips(STANCE_NEG, 'neg')}</div>
+    <div class="b-block neu"><div class="b-head">🤔 중립 — 좋다·나쁘다 평가가 없을 때</div>
+      <div class="b-note">긍정·부정 평가어가 <b>뚜렷이 없고</b>, 아래처럼 <b>판단을 유보</b>하거나 <b>양쪽을 균형 있게</b> 보여주면 중립이야. (한쪽으로 몰지 않음)</div>
+      ${stanceChips(STANCE_NEU, 'neu')}</div>
     <div class="pcatch"><span class="pcatch-h">✅ 이렇게 써먹어</span> 지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라봐. 정답은 지문 끝에서 맞춰보고.</div>
   </section>`;
 }
@@ -480,18 +483,23 @@ function css() {
   .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
   .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
   .cut-n.gram { background:${C.gram}; }
-  /* 필자 입장 신호어 — 뉘앙스별 그룹 패널(긍정=초록 / 부정=빨강 / 중립=회색) */
-  .spanel { border:1px solid ${C.line}; border-radius:9px; padding:0 0 8px; margin:11px 0; overflow:hidden; }
-  .spanel .sp-head { font-weight:800; font-size:12.5px; color:#fff; padding:7px 13px; margin-bottom:6px; }
-  .spanel.pos { border-color:${C.greenLine}; } .spanel.pos .sp-head { background:${C.teal}; }
-  .spanel.neg { border-color:${C.trapLine}; } .spanel.neg .sp-head { background:${C.key}; }
-  .spanel.neu { border-color:#d6d8dc; } .spanel.neu .sp-head { background:${C.sub}; }
-  .spanel.pos { background:${C.mint}; } .spanel.neg { background:${C.keyBg}; } .spanel.neu { background:#f4f5f6; }
-  .sp-note { font-size:10.5px; color:#555; padding:0 13px 4px; }
-  .sg-row { display:flex; gap:9px; padding:4px 13px; align-items:baseline; }
-  .sg-row + .sg-row { border-top:1px dashed rgba(0,0,0,.06); }
-  .sg-lab { flex:none; width:100px; font-weight:800; font-size:10px; color:${C.ink}; }
-  .sg-words { flex:1; font-size:10.6px; font-weight:600; color:#333; line-height:1.6; }
+  /* 필자 입장 신호어 — 칩(태그) 그리드. 칩 글씨는 검은색, 카테고리는 테두리색으로 구분 */
+  .b-block { border-radius:10px; padding:0 0 10px; margin:11px 0; overflow:hidden; }
+  .b-block.pos { background:#F3FAF4; border:1px solid ${C.greenLine}; }
+  .b-block.neg { background:#FDF3F1; border:1px solid ${C.trapLine}; }
+  .b-block.neu { background:#f6f7f8; border:1px solid #d6d8dc; }
+  .b-head { font-weight:800; font-size:12.5px; color:#fff; padding:8px 13px; margin-bottom:8px; }
+  .b-block.pos .b-head { background:${C.teal}; }
+  .b-block.neg .b-head { background:${C.key}; }
+  .b-block.neu .b-head { background:${C.sub}; }
+  .b-note { font-size:10.3px; color:#555; padding:0 13px 6px; }
+  .chgrp { display:flex; gap:9px; padding:4px 13px; align-items:baseline; }
+  .chgrp-lab { flex:none; width:82px; font-weight:800; font-size:9.8px; color:#444; padding-top:3px; }
+  .chips { flex:1; display:flex; flex-wrap:wrap; gap:4px; }
+  .chip { font-size:9.8px; font-weight:700; color:${C.ink}; background:#fff; border-radius:11px; padding:2px 9px; }
+  .chip.pos { border:1px solid #9fd3ac; }
+  .chip.neg { border:1px solid #eeb98f; }
+  .chip.neu { border:1px solid #cfd3d8; }
   .st-sig { font-size:10px; color:${C.gram}; font-weight:700; margin:2px 0; line-height:1.45; }
   .daypill.gram { background:${C.gram}; }
   .goal.gram { background:${C.gramBg}; border-left-color:${C.gram}; }
