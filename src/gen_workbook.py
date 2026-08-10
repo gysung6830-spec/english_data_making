@@ -482,7 +482,23 @@ _RROLE = {"주제문": "r-main", "재진술": "r-re", "정답근거": "r-ans"}
 _RQLAB = ["핵심 소재·주장", "→ 재진술 ①", "→ 재진술 ②", "→ 재진술 ③", "→ 재진술 ④", "→ 재진술 ⑤"]
 
 
-def restate_problem(rt):
+def contrast_cue(hl):
+    """노랑 문장에서 '소재 2개' 단서가 되는 대조·비교 관계어를 뽑는다."""
+    pats = [pat for name, cls, pat in REL_SIG if cls in ("contr", "comp")]
+    found, seen = [], set()
+    for seg in (hl or []):
+        if seg.get("role") != "yellow":
+            continue
+        t = seg.get("t", "")
+        for pat in pats:
+            for m in re.finditer(pat, t, re.I):
+                w = m.group(0); lw = w.lower()
+                if lw not in seen:
+                    seen.add(lw); found.append(w)
+    return found[:4]
+
+
+def restate_problem(rt, cue=None):
     """STEP1 문제면 하단 — 지문을 주고 A→A′→A″(→A‴) / A·B 로 '직접 잇는' 재진술 연결 문제."""
     if not rt:
         return ""
@@ -504,7 +520,14 @@ def restate_problem(rt):
                 f'<span class="ln"></span></div>' for i in range(n))
             cols += (f'<div class="rqsub"><div class="rqname"><span class="pr big">{li}</span>'
                      f'비교 소재 {li} <span class="rqcnt">재진술 {max(0,n-1)}개</span></div>{rows}</div>')
-        body = f'<div class="rqsubs">{cols}</div>'
+        if cue:
+            cue_html = ' · '.join(f'<b>{esc(w)}</b>' for w in cue)
+            cbox = (f'<div class="rqcue">🔍 <b>소재 2개</b> 단서 — 지문의 <b>대조·비교 신호</b> {cue_html} '
+                    f'→ A·B 두 소재를 견준다</div>')
+        else:
+            cbox = ('<div class="rqcue">🔍 이 글은 <b>두 소재(A·B)</b>를 나란히 견준다 '
+                    '— 대조·비교 흐름을 잡아 각 소재의 재진술을 따로 추적</div>')
+        body = cbox + f'<div class="rqsubs">{cols}</div>'
         guide = '두 <b>핵심 소재 A·B</b>를 잡고, 각 소재가 지문에서 <b>재진술된 만큼</b> 표현을 찾아 A→A′… · B→B′…로 잇는다.'
         nlab = "소재 2개"
     else:
@@ -632,7 +655,8 @@ def render_spread(rec, c, idx):
     uline = c.get("uline")  # 함축의미(21): 밑줄 친 부분
     step1_psg = uline_html(clean_passage(hl, band, insert_en), uline)
     rt = c.get("restate")  # 재진술(추가 문제)
-    rquiz = restate_problem(rt)
+    _cue = contrast_cue(hl) if (rt and rt.get("kind") == "compare") else None
+    rquiz = restate_problem(rt, _cue)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
     <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
@@ -1232,6 +1256,8 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .rquiz .rqh .ico{ font-size:12px; } .rquiz .rqh .add{ font-size:8px; font-weight:800; color:#fff; background:#c9a24a; border-radius:8px; padding:1px 7px; }
 .rquiz .rqh .rqno{ margin-left:auto; font-size:8.5px; font-weight:800; color:#8a5a1a; background:#ffe9a8; border:1px solid #e0b94a; border-radius:8px; padding:1px 8px; }
 .rquiz .rqg{ font-size:9px; line-height:1.5; color:#6e5316; margin:5px 0 9px; } .rquiz .rqg b{ color:#8a5a1a; }
+.rquiz .rqcue{ font-size:8.8px; line-height:1.5; color:#0f5f57; background:#e7f4f2; border:1px solid #a9d6cf; border-radius:6px; padding:5px 9px; margin-bottom:9px; }
+.rquiz .rqcue b{ color:#0f766e; }
 .rquiz .rqchain{ display:flex; flex-direction:column; gap:7px; }
 .rquiz .rqrow{ display:flex; align-items:center; gap:8px; }
 .rquiz .rqrow .pr{ flex:none; min-width:22px; text-align:center; font-size:10px; font-weight:800; color:#7a5416; background:#ffe9a8; border:1px solid #e0b94a; border-radius:6px; padding:1px 5px; }
