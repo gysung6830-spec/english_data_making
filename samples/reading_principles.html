@@ -71,11 +71,32 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 .sc .sig b{ color:var(--ink-d); } .sc .sig .en{ font-family:'NanumSquareRound',sans-serif; color:#33414d; }
 .sc .scd{ font-size:10.5px; color:#2b3a34; margin-top:4px; font-weight:600; }
 .sc .sce{ font-size:9.5px; color:var(--muted); margin-top:2px; }
+/* 긍정/부정(±) 어휘 사전 */
+.poltop{ display:flex; gap:12px; margin-bottom:12px; }
+.polcard{ flex:1; border-radius:10px; padding:10px 14px; }
+.polcard.p{ background:#eaf5f0; border:1.5px solid var(--ink); }
+.polcard.n{ background:#fdf2f1; border:1.5px solid #d98b84; }
+.polcard .ph{ font-size:14px; font-weight:800; margin-bottom:3px; }
+.polcard.p .ph{ color:var(--ink-d); } .polcard.n .ph{ color:#b3453b; }
+.polcard .pd{ font-size:10.5px; line-height:1.55; color:#3f4952; }
+table.pol{ width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:10px; }
+table.pol th{ color:#fff; font-weight:800; padding:5px 9px; text-align:left; font-size:11px; }
+table.pol.p th{ background:var(--ink-d); } table.pol.n th{ background:#b3453b; }
+table.pol td{ border:1px solid #e0e6e2; padding:5px 9px; vertical-align:top; }
+table.pol .grp{ font-weight:800; white-space:nowrap; }
+table.pol.p .grp{ color:var(--ink-d); } table.pol.n .grp{ color:#b3453b; }
+table.pol .w{ font-family:'NanumSquareRound',sans-serif; color:#2b3540; }
+table.pol tr:nth-child(even) td{ background:#f7faf9; }
+.polsign{ font-size:9.5px; font-weight:800; border-radius:6px; padding:1px 6px; color:#fff; }
+.polsign.pl{ background:var(--ink); } .polsign.mn{ background:var(--conj); }
+.flip{ background:#fff7ef; border:1px solid var(--must-line); border-radius:8px; padding:9px 13px; margin-bottom:11px; }
+.flip .fh{ font-size:11px; font-weight:800; color:#a8641a; margin-bottom:4px; }
+.flip .fw{ font-family:'NanumSquareRound',sans-serif; color:#7a4a12; font-weight:700; }
 </style></head><body>
 
 <!-- ===== P1. 태도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모의고사 점수는 '태도'에서 나온다</h1><span class="pno">01 / 09</span></div>
 
   <div class="lead">
     <b>“정확하게 모든 문장을 해석하는 것”</b> 과 <b>“좋은 점수”</b> 는 비례하지 않는다.
@@ -108,7 +129,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P2. 완급조절 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>완급조절 — OLD / NEW·MAIN / SUPPORT</h1><span class="pno">02 / 09</span></div>
 
   <div class="lead">모든 문장을 <b>똑같이 강하게</b> 읽을 필요는 없다. 한 단락엔 주제가 <b>하나</b>뿐.
     <b>강·약을 조절</b>하는 <b>능동적 독해</b>를 하자. 완급 없이 직독직해만 하면 남는 정보가 없다.</div>
@@ -143,7 +164,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P3. 추론 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>모르는 것은 '추론'한다 — 어순·구두점</h1><span class="pno">03 / 09</span></div>
 
   <div class="lead">영어는 흔히 <b>General → Specific</b> 순서. <b>추상적인 말이 앞</b>에 오면 <b>대개 뒤에 구체적인 정보</b>가 따라온다.
     모르는 단어에 멈추지 말고 <b>'뒤가 알려줄 것'</b>이라 믿고 읽어라.</div>
@@ -178,7 +199,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P4. 연결사 지도 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>연결사 = “어디가 중요한지 알려줄게”</h1><span class="pno">04 / 09</span></div>
 
   <div class="lead">연결사(접속부사)는 <b>문장과 문장의 관계</b>를 알려주는 표지다. 문장 어디에 있든
     <b>앞 문장과 뒷 문장 '사이'에 놓고</b> 읽어라. 특히 <b>역접</b>은 완급의 분기점이다.</div>
@@ -230,7 +251,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P5. 재진술(Paraphrasing) 원리 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술(Paraphrasing) — 같은 말을 알아채기</h1><span class="pno">05 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술(Paraphrasing) — 같은 말을 알아채기</h1><span class="pno">05 / 09</span></div>
 
   <div class="lead">독해의 최종 기술은 <b>재진술</b> — 명시적 단서 없이도 <b>“앞의 그 말을 바꿔 한 거구나”</b>를 느끼는 것.
     필자는 <b>핵심 주장·소재</b>를 한 번만 말하지 않고 <b>표현을 바꿔 되풀이</b>하고, 정답 선지는 그 되풀이의 <b>마지막 한 번</b>이다.</div>
@@ -261,7 +282,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P6. 재진술로 정답 만들기 (5변환 · 함정) ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술로 정답을 만든다 — 5변환 · 함정</h1><span class="pno">06 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>재진술로 정답을 만든다 — 5변환 · 함정</h1><span class="pno">06 / 09</span></div>
 
   <div class="lead"><b>정답 = 뜻은 그대로, 단어만 바꾼다.</b> &nbsp;<b>오답 = 단어는 그대로 두고, 뜻을 왜곡한다.</b>
     그래서 <b>지문 단어가 그대로 보이는 선지</b>부터 의심하고, <b>표현이 바뀌어 낯선 선지</b>를 정답 후보로 본다.</div>
@@ -294,7 +315,7 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
 
 <!-- ===== P7. 글의 구조 6틀 ===== -->
 <section class="pg">
-  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>글의 구조 — 어떤 짜임이 있나?</h1><span class="pno">07 / 07</span></div>
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>글의 구조 — 어떤 짜임이 있나?</h1><span class="pno">07 / 09</span></div>
   <div class="lead">글의 구조 = 필자가 생각을 배치한 <b>‘틀’</b>. <b>전환어(But/However…)</b>와 연결어를 신호로 잡으면 구조가 보이고,
     구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡힌다. 아래 <b>6가지 틀</b> 중 하나를 예측하며 읽자.</div>
 
@@ -348,6 +369,72 @@ table.map tr:nth-child(even) td{ background:#f6faf8; }
     <li>지문마다 <b>‘해석 전에’ 이 6개 중 하나를 예측</b>하고, 지문 끝에서 맞았는지 확인한다.</li>
     <li>전환어(<b>But·However</b>)가 보이면 <b>①통념→반박</b>, 대조어가 보이면 <b>④비교·대조</b> — 신호가 곧 구조다.</li>
   </ul>
+  <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
+</section>
+
+<!-- ===== P8. 긍정/부정(±) 어휘 사전 ① ===== -->
+<section class="pg">
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ①</h1><span class="pno">08 / 09</span></div>
+  <div class="lead">필자는 <b>무엇을 지지(＋)하고 무엇을 버리는지(−)</b>로 글을 끌고 간다. 그래서 문장 뜻을 다 몰라도
+    <b>핵심어의 ± 방향</b>만 잡으면 요지·함축·정답 선지가 보인다. 아래 어휘는 <b>“이 단어가 나오면 필자 태도가 어느 쪽인지”</b>를 알려주는 방향 표지다.</div>
+
+  <div class="poltop">
+    <div class="polcard p"><div class="ph">＋ 긍정 방향</div><div class="pd">중요하다·이익이다·강조한다 → 필자가 <b>부각·지지</b>. 대개 <b>노랑(핵심)</b>·정답 쪽.</div></div>
+    <div class="polcard n"><div class="ph">− 부정 방향</div><div class="pd">버린다·부족하다·무시한다 → 필자가 <b>비판·배제</b>. 통념(OLD)이나 <b>반대 대상</b>일 때가 많다.</div></div>
+  </div>
+
+  <div class="h2"><span class="polsign pl">＋</span> 필자가 <b>중시·지지</b>하는 어휘</div>
+  <table class="pol p">
+    <tr><th style="width:20%">갈래</th><th>대표 어휘</th></tr>
+    <tr><td class="grp">중요·필수</td><td class="w">critical, crucial, essential, vital, key, fundamental, indispensable, integral, significant, principal, prime</td></tr>
+    <tr><td class="grp">이익·가치</td><td class="w">benefit(ial), valuable, priceless, fruitful, merit, desirable, relevant</td></tr>
+    <tr><td class="grp">강조·강화</td><td class="w">emphasize, stress, enhance, reinforce, prioritize, matter, count, be of importance</td></tr>
+    <tr><td class="grp">집중·추구</td><td class="w">focus on, concentrate on, center on, attend to, seek to V, in favor of</td></tr>
+    <tr><td class="grp">강조 부사</td><td class="w">invariably, substantially, only, nothing but, not just A but also B</td></tr>
+  </table>
+
+  <div class="h2"><span class="polsign mn">−</span> 필자가 <b>버리거나 부정</b>하는 어휘</div>
+  <table class="pol n">
+    <tr><th style="width:20%">갈래</th><th>대표 어휘</th></tr>
+    <tr><td class="grp">버림·제거</td><td class="w">abandon, discard, scrap, drop, remove, eliminate, discharge, leave out, rule out, exclude, removal</td></tr>
+    <tr><td class="grp">부족·결핍</td><td class="w">lack, shortage, absence, absent from, drawback, flaw, downside, side effect</td></tr>
+    <tr><td class="grp">무시·경시</td><td class="w">disregard, ignore, overlook, neglect, dismiss, of little account</td></tr>
+    <tr><td class="grp">거부·반대</td><td class="w">refuse, reject, resist, deny, disapprove, forbid, discourage, say no to</td></tr>
+    <tr><td class="grp">방해·감소·실패</td><td class="w">interfere with, stand in the way of, diminish, obscure, prevent A from Ving, fail, lose out</td></tr>
+  </table>
+  <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
+</section>
+
+<!-- ===== P9. 긍정/부정(±) 어휘 사전 ② — 방향 전환·적용 ===== -->
+<section class="pg">
+  <div class="top"><span class="kick">PART 0 · 독해의 원리</span><h1>긍정/부정(±) 어휘 사전 ② — 방향 전환·적용</h1><span class="pno">09 / 09</span></div>
+  <div class="lead">가장 중요한 건 <b>방향을 ‘뒤집는’ 표현</b>이다. 긍정 대상 앞에 부정어가 붙으면 순식간에 −가 된다.
+    이 <b>극성 전환</b>을 놓치면 정반대로 읽는다 — 평가원 오답의 단골(<b>반대구조</b>)이 바로 이 지점이다.</div>
+
+  <div class="h2">극성을 <b>뒤집는</b> 신호 — ±를 반대로</div>
+  <div class="flip"><div class="fh">부정어 · 결여 · 분리</div>
+    <span class="fw">not, no, never, no longer, hardly, rarely, by no means / free from, absent from, immune to, independent of, apart from, other than / far from, cease, stop</span></div>
+  <table class="pol n">
+    <tr><th style="width:34%">원래 방향</th><th>전환 표현이 붙으면</th></tr>
+    <tr><td class="w">shrink (−, 줄다)</td><td class="w"><b>does not</b> shrink = <span class="polsign pl">＋</span> expands (늘다)</td></tr>
+    <tr><td class="w">bias (−, 편향)</td><td class="w"><b>free from</b> bias = <span class="polsign pl">＋</span> 객관적</td></tr>
+    <tr><td class="w">affect (영향)</td><td class="w"><b>immune to</b> = <span class="polsign mn">−</span> 영향받지 않음</td></tr>
+    <tr><td class="w">necessary (＋)</td><td class="w"><b>not necessarily</b> = 반드시 ~는 아님(약화)</td></tr>
+  </table>
+
+  <div class="h2">독해에 이렇게 적용한다</div>
+  <table class="map">
+    <tr><th style="width:22%">유형</th><th>± 어휘로 푸는 법</th></tr>
+    <tr><td><b>함축 (21)</b></td><td>밑줄 표현이 <b>＋인지 −인지</b>만 판정 → 방향이 다른 선지 <b>절반을 먼저 소거</b>. (어휘 뜻 몰라도 됨)</td></tr>
+    <tr><td><b>패러프레이징 함정</b></td><td>정답의 ± 방향이 지문과 <b>반대면 오답</b>(반대구조). 예: 지문 −인데 선지 ＋.</td></tr>
+    <tr><td><b>완급조절</b></td><td>도입 <b>통념(OLD)=−</b> → 역접 뒤 <b>주제(NEW)=＋</b> 전환을 ± 어휘로 감지.</td></tr>
+    <tr><td><b>무관·빈칸</b></td><td>주제의 <b>± 방향과 어긋나는</b> 문장·선지를 배제.</td></tr>
+  </table>
+
+  <div class="ex"><span class="lb">＋/− 판정</span><span class="src">2022 6월 21번</span><span class="e"><b>abandon</b> your dreams for an empty inbox <span class="polsign mn">−</span></span>
+    <span class="kr">‘꿈을 <b>버린다</b>’(−)를 잡으면, 밑줄이 <b>부정적</b>임을 즉시 판정 → ＋방향 선지 소거.</span></div>
+
+  <div class="pointer">🖍 <b>워크북 STEP 2</b>에서 바로 쓴다 — 함축·무관·빈칸의 <b>±(긍정/부정) 판정</b>과 <b>반대구조 함정 소거</b>에서 이 표를 근거로 삼는다.</div>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
 </section>
 
