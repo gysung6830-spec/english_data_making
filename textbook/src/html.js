@@ -1,6 +1,6 @@
 // html.js — 디자인 PDF용 HTML 렌더러 (재사용 모듈)
 //
-// 참고 교재(김은아영어연구소 스타일) 디자인을 HTML/CSS 로 구현하고,
+// 참고 교재(Ortica 영어 스타일) 디자인을 HTML/CSS 로 구현하고,
 // Chromium 으로 인쇄해 PDF 를 만든다. preview_pdf.js(CLI)와 webapp 이 공유한다.
 //   - buildHtml(categories)  → 전체 HTML 문자열
 //   - renderPdf(html, pdfPath) → Chromium 으로 PDF 저장
@@ -13,7 +13,7 @@ const { splitWorked } = require('./document');
 const { makeTip, PRINCIPLES } = require('./tip');
 
 const FONTS_DIR = path.join(__dirname, '..', 'fonts');
-const FOOTER_BRAND = '©2026. 김은아영어연구소. All rights reserved.';
+const FOOTER_BRAND = '©2026. Ortica 영어. All rights reserved.';
 
 // ── 팔레트 (참고 교재 색 추출값: 리프 그린 계열) ──
 const C = {
@@ -187,7 +187,7 @@ function structurePageHtml() {
     <div class="struct-reveal"><span class="sr-h">🧩 이렇게 써먹어</span> 지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰봐.</div>
   </section>`;
 }
-// 필자 입장 신호 어휘 — 김은아영어Lab VOCA(DAY 31 긍정·중요 / DAY 32·33 부정) 전량을
+// 필자 입장 신호 어휘 — Ortica 영어 VOCA(DAY 31 긍정·중요 / DAY 32·33 부정) 전량을
 // 뉘앙스별로 묶어 수록. 중립은 '평가어 없음 + 유보/양면'을 명확한 예로 제시.
 const STANCE_POS = ['이익·유익', 'benefit · beneficial · fruitful · merit · valuable · priceless · work(효과가 있다)',
   '중요·핵심·필수', 'core · key · point · critical · crucial · essential · integral · indispensable · necessary · fundamental · vital · significant · substantial · prime · principal · prevailing · matter · count · be of importance · relevant',
@@ -223,7 +223,7 @@ function stancePageHtml() {
   return `<section class="chapter">
     <div class="chhead"><span class="daypill key">필자 입장 신호</span><span class="tagpill">긍정·부정 어휘로 태도 읽기</span></div>
     <h1>필자의 입장 — 어떤 어휘로 드러나나?</h1>
-    <div class="chsub">필생보 · 김은아영어Lab VOCA 기반 · 필자가 대상을 '좋게 / 나쁘게' 보는지는 평가 어휘에서 새어 나온다</div>
+    <div class="chsub">필생보 · Ortica 영어 VOCA 기반 · 필자가 대상을 '좋게 / 나쁘게' 보는지는 평가 어휘에서 새어 나온다</div>
     <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘</b>를 잡으면 입장이 보여. 진짜 주장은 보통 <b>마지막 문장</b>(therefore · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
     <div class="b-block pos"><div class="b-head">👍 긍정 · 중요 — 필자가 좋게·중요하게 봄</div>${stanceChips(STANCE_POS, 'pos')}</div>
     <div class="b-block neg"><div class="b-head">👎 부정 — 필자가 비판·경계·배제·부정</div>${stanceChips(STANCE_NEG, 'neg')}</div>

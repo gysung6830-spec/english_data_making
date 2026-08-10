@@ -223,7 +223,7 @@ function structureTypesPageParas() {
   return out;
 }
 
-// 필자 입장 신호 어휘 — 김은아영어Lab VOCA(DAY 31·32·33) 전량, 뉘앙스별 그룹.
+// 필자 입장 신호 어휘 — Ortica 영어 VOCA(DAY 31·32·33) 전량, 뉘앙스별 그룹.
 const STANCE_POS_DOCX = ['이익·유익', 'benefit · beneficial · fruitful · merit · valuable · priceless · work(효과가 있다)',
   '중요·핵심·필수', 'core · key · point · critical · crucial · essential · integral · indispensable · necessary · fundamental · vital · significant · substantial · prime · principal · prevailing · matter · count · be of importance · relevant',
   '집중·주목', 'center on · concentrate on · focus on · attend to',
@@ -263,7 +263,7 @@ function stancePanelParas(title, color, arr, note) {
 }
 function stanceTypesPageParas() {
   const out = [B.h1('필자의 입장 — 어떤 어휘로 드러나나?')];
-  out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다. (김은아영어Lab VOCA 기반)', { bold: true }));
+  out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다. (Ortica 영어 VOCA 기반)', { bold: true }));
   out.push(...stancePanelParas('👍 긍정 · 중요 — 필자가 좋게·중요하게 봄', '279A52', STANCE_POS_DOCX));
   out.push(...stancePanelParas('👎 부정 — 필자가 비판·경계·배제·부정', 'C5533F', STANCE_NEG_DOCX));
   out.push(...stancePanelParas('🤔 중립 — 좋다·나쁘다 평가가 없을 때', '6B7280', STANCE_NEU_DOCX,
