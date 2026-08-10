@@ -294,19 +294,28 @@
 <section class="chapter wb" id="inf-{{ chapter.id }}">
   <div class="ch-kicker">어휘 유추 · 원리</div>
   <div class="ch-title chap">{{ chapter.title }}</div>
-  {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">원리</span>{{ chapter.point }}</div>{% endif %}
-  {% if chapter.exprs %}
-  <div class="formula">
-    <div class="f-label">유추의 단서</div>
-    <div class="f-rows">
-      {% for r in chapter.exprs %}
-      <div class="f-row"><span class="f-en">{{ r.en }}</span>
-        <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
-      {% endfor %}
-    </div>
+  {% if chapter.point %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">1</span><span class="wb-step-t">원리</span><span class="wb-step-hint">— 이게 무엇인가</span></div>
+    <div class="wb-box point">{{ chapter.point }}</div>
   </div>
   {% endif %}
-  {% if chapter.strategy %}<div class="wb-strategy">🎯 <b>유추 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+  {% if chapter.exprs or chapter.strategy %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">2</span><span class="wb-step-t">이렇게 읽어라</span><span class="wb-step-hint">— 단서 + 전략</span></div>
+    {% if chapter.strategy %}<div class="method-lead">🎯 <b>유추 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+    {% if chapter.exprs %}
+    <div class="formula joined">
+      <div class="f-rows">
+        {% for r in chapter.exprs %}
+        <div class="f-row"><span class="f-en">{{ r.en }}</span>
+          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
   {% if chapter.examples %}
   <div class="ex-label">유추 시연 <span>· 단서로 뜻 뚫기</span></div>
   <ol class="wb-ex">
@@ -367,30 +376,37 @@
   <div class="ch-title chap">{{ chapter.title }}</div>
 
   {% if chapter.point %}
-  <div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>
-  {% endif %}
-
-  {% if chapter.coach %}
-  <div class="coach"><span class="coach-tag">🖊 한 마디</span>{{ chapter.coach | safe }}</div>
-  {% endif %}
-
-  {% if chapter.diagram %}
-  <div class="formula">
-    <div class="f-label">해석 공식</div>
-    <div class="f-diagram">
-      <div class="f-symbol">{{ chapter.diagram.symbol }}</div>
-      <div class="f-rows">
-        {% for r in chapter.diagram.rows %}
-        <div class="f-row"><span class="f-en">{{ r.en }}</span>
-          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
-        {% endfor %}
-      </div>
-    </div>
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">1</span><span class="wb-step-t">원리</span><span class="wb-step-hint">— 이게 무엇인가</span></div>
+    <div class="wb-box point">{{ chapter.point }}</div>
   </div>
   {% endif %}
 
-  {% if chapter.strategy %}
-  <div class="wb-strategy">🎯 <b>실전 해석 전략</b> · {{ chapter.strategy }}</div>
+  {% if chapter.diagram or chapter.strategy %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">2</span><span class="wb-step-t">이렇게 읽어라</span><span class="wb-step-hint">— 공식 + 전략</span></div>
+    {% if chapter.strategy %}<div class="method-lead">🎯 <b>전략</b> · {{ chapter.strategy }}</div>{% endif %}
+    {% if chapter.diagram %}
+    <div class="formula joined">
+      <div class="f-diagram">
+        <div class="f-symbol">{{ chapter.diagram.symbol }}</div>
+        <div class="f-rows">
+          {% for r in chapter.diagram.rows %}
+          <div class="f-row"><span class="f-en">{{ r.en }}</span>
+            <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if chapter.coach %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">3</span><span class="wb-step-t">코치 한 마디</span><span class="wb-step-hint">— 함정·요령</span></div>
+    <div class="coach">{{ chapter.coach | safe }}</div>
+  </div>
   {% endif %}
 
   {% if chapter.training %}
@@ -534,21 +550,29 @@
   <div class="ch-kicker">3-{{ loop.index }} · 추상→구체</div>
   <div class="ch-title chap">{{ chapter.title }}</div>
 
-  {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>{% endif %}
-
-  {% if chapter.exprs %}
-  <div class="formula">
-    <div class="f-label">이 길에 쓰이는 표현</div>
-    <div class="f-rows">
-      {% for r in chapter.exprs %}
-      <div class="f-row"><span class="f-en">{{ r.en }}</span>
-        <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
-      {% endfor %}
-    </div>
+  {% if chapter.point %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">1</span><span class="wb-step-t">원리</span><span class="wb-step-hint">— 이게 무엇인가</span></div>
+    <div class="wb-box point">{{ chapter.point }}</div>
   </div>
   {% endif %}
 
-  {% if chapter.strategy %}<div class="wb-strategy">🎯 <b>구체화 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+  {% if chapter.exprs or chapter.strategy %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">2</span><span class="wb-step-t">이렇게 읽어라</span><span class="wb-step-hint">— 표현 + 전략</span></div>
+    {% if chapter.strategy %}<div class="method-lead">🎯 <b>구체화 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+    {% if chapter.exprs %}
+    <div class="formula joined">
+      <div class="f-rows">
+        {% for r in chapter.exprs %}
+        <div class="f-row"><span class="f-en">{{ r.en }}</span>
+          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
 
   {% if chapter.examples %}
   <div class="ex-label">기출 예문 <span>· 구체화</span></div>
