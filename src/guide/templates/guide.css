@@ -146,6 +146,12 @@ body {
   padding: 11px 16px; border-radius: 9px;
 }
 .ch-signal { color: var(--muted); font-size: 10.5px; margin: 6px 0 14px; }
+/* 챕터 제목(부 표지 아님): 라이트 tint 헤더 — 반복 피로↓, 가독성↑ */
+.ch-title.chap {
+  background: var(--tint); color: var(--navy);
+  border-left: 5px solid var(--gold); border-radius: 7px;
+  font-size: 18px; padding: 9px 15px;
+}
 
 /* 챕터 도입 박스: 대표 오역 + 공통 팁 */
 .ch-intro {

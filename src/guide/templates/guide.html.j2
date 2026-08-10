@@ -293,7 +293,7 @@
 {% for chapter in inf.chapters %}
 <section class="chapter wb" id="inf-{{ chapter.id }}">
   <div class="ch-kicker">어휘 유추 · 원리</div>
-  <div class="ch-title">{{ chapter.title }}</div>
+  <div class="ch-title chap">{{ chapter.title }}</div>
   {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">원리</span>{{ chapter.point }}</div>{% endif %}
   {% if chapter.exprs %}
   <div class="formula">
@@ -368,7 +368,7 @@
 {% set bns.cn = bns.cn + 1 %}
 <section class="chapter wb" id="sx-{{ chapter.id }}">
   <div class="ch-kicker">1-{{ bns.cn }} · 구문</div>
-  <div class="ch-title">{{ chapter.title }}</div>
+  <div class="ch-title chap">{{ chapter.title }}</div>
 
   {% if chapter.point %}
   <div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>
@@ -458,7 +458,7 @@
 {% for chapter in guide.chapters %}
 <section class="chapter" id="ch-{{ chapter.id }}">
   <div class="ch-kicker">2-{{ loop.index }} · 코드</div>
-  <div class="ch-title">{{ chapter.title }}</div>
+  <div class="ch-title chap">{{ chapter.title }}</div>
   <div class="ch-signal">{{ chapter.signal }}</div>
   <div class="ch-intro">
     <div><span class="lbl">이 유형의 대표 오역 ·</span>
@@ -543,7 +543,7 @@
 {% for chapter in ab.chapters %}
 <section class="chapter wb" id="abs-{{ chapter.id }}">
   <div class="ch-kicker">3-{{ loop.index }} · 추상→구체</div>
-  <div class="ch-title">{{ chapter.title }}</div>
+  <div class="ch-title chap">{{ chapter.title }}</div>
 
   {% if chapter.point %}<div class="wb-box point"><span class="wb-tab">Point</span>{{ chapter.point }}</div>{% endif %}
 
