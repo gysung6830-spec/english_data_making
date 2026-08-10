@@ -15,18 +15,18 @@ const { makeTip, PRINCIPLES } = require('./tip');
 const FONTS_DIR = path.join(__dirname, '..', 'fonts');
 const FOOTER_BRAND = '©2026. Ortica 영어. All rights reserved.';
 
-// ── 팔레트 (참고 교재 색 추출값: 리프 그린 계열) ──
+// ── 팔레트 (필생보 딥그린 테마) ──
 const C = {
-  ink: '#232323', sub: '#6b7280',
-  teal: '#279A52', tealDark: '#1E7A40', mint: '#EAF6EC',
-  green: '#279A52', greenHdr: '#279A52', zebra: '#F1F8EF',
-  key: '#C5533F', keyBg: '#FBECEA',
-  gram: '#6A57B0', gramBg: '#F0EDF9',
-  plus: '#C0821F', plusBg: '#FBF3E0',
-  goalBg: '#F7EED6', goalBar: '#D9A24A',
+  ink: '#1c2620', sub: '#5f6b64',
+  teal: '#14603A', tealDark: '#0C3F26', mint: '#E6F1EA',
+  green: '#14603A', greenHdr: '#14603A', zebra: '#EEF5F0',
+  key: '#B24A38', keyBg: '#FBECEA',
+  gram: '#5E4C9E', gramBg: '#EFEDF8',
+  plus: '#B07A1C', plusBg: '#FBF3E0',
+  goalBg: '#E6F1EA', goalBar: '#14603A',
   tipBg: '#F2F3F4', tipBar: '#9aa0a6',
-  trapBg: '#FEF3E2', trapLine: '#F5D9AE', trapBar: '#E08A1E',
-  line: '#e5e7eb', greenLine: '#CDE8CF',
+  trapBg: '#FEF3E2', trapLine: '#F5D9AE', trapBar: '#C77A17',
+  line: '#dfe6e1', greenLine: '#BAD5C2',
 };
 
 function findChrome() {
@@ -800,7 +800,7 @@ function css() {
   .hs-m { font-size:10.5px; font-weight:700; color:${C.tealDark}; line-height:1.4; }
   /* 필자 입장 신호어 — 칩(태그) 그리드. 칩 글씨는 검은색, 카테고리는 테두리색으로 구분 */
   .b-block { border-radius:10px; padding:0 0 10px; margin:11px 0; overflow:hidden; }
-  .b-block.pos { background:#F3FAF4; border:1px solid ${C.greenLine}; }
+  .b-block.pos { background:#EFF6F1; border:1px solid ${C.greenLine}; }
   .b-block.neg { background:#FDF3F1; border:1px solid ${C.trapLine}; }
   .b-block.neu { background:#f6f7f8; border:1px solid #d6d8dc; }
   .b-head { font-weight:800; font-size:12.5px; color:#fff; padding:8px 13px; margin-bottom:8px; }
@@ -812,7 +812,7 @@ function css() {
   .chgrp-lab { flex:none; width:82px; font-weight:800; font-size:10.5px; color:#444; padding-top:3px; }
   .chips { flex:1; display:flex; flex-wrap:wrap; gap:4px; }
   .chip { font-size:10.6px; font-weight:700; color:${C.ink}; background:#fff; border-radius:11px; padding:3px 10px; }
-  .chip.pos { border:1px solid #9fd3ac; }
+  .chip.pos { border:1px solid #93c7a6; }
   .chip.neg { border:1px solid #eeb98f; }
   .chip.neu { border:1px solid #cfd3d8; }
   .st-sig { font-size:10px; color:${C.gram}; font-weight:700; margin:2px 0; line-height:1.45; }
@@ -834,7 +834,7 @@ function css() {
   .stance-row { font-size:10.4px; color:#4b4b57; line-height:1.5; }
   .stag { display:inline-block; color:#fff; font-weight:800; font-size:9.5px; padding:1px 8px;
     border-radius:9px; margin-right:6px; }
-  .stag.pos { background:#279A52; } .stag.neg { background:#C5533F; } .stag.neu { background:#6b7280; }
+  .stag.pos { background:${C.teal}; } .stag.neg { background:${C.key}; } .stag.neu { background:${C.sub}; }
   .structbox + .structbox { margin-top:-4px; }
   .para-q { font-size:11.3px; margin:5px 0; }
   .para-eq { color:${C.gram}; font-weight:800; margin:0 4px; }

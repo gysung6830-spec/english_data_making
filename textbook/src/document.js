@@ -185,7 +185,7 @@ function principlePageParas() {
 }
 
 // ── 독해의 원리(PART0) — Ortica 영어 '형광펜 독해' 원리 총론 (docx) ──
-const PP_TEAL = '279A52'; const PP_GRAM = '6A57B0';
+const PP_TEAL = '14603A'; const PP_GRAM = '5E4C9E';
 function ppH(t, sub) {
   const out = [B.h1(t)];
   if (sub) out.push(B.p(sub, { italics: true, color: '666666' }));
@@ -233,8 +233,8 @@ function principlesFrontParas() {
     ],
   });
   out.push(wex('OLD · 부사절', '6B7280', 'Although the plan looks simple,', '문두 배경(부사절·전치사구) — 약하게'));
-  out.push(wex('MAIN · 주절', '279A52', 'it often fails in practice,', '진짜 하고 싶은 말(주절) — 가장 강하게'));
-  out.push(wex('SUPPORT · 분사구문', 'C0821F', 'leaving many beginners confused.', '뒤 부연(분사구문·관계사) — 약하게'));
+  out.push(wex('MAIN · 주절', '14603A', 'it often fails in practice,', '진짜 하고 싶은 말(주절) — 가장 강하게'));
+  out.push(wex('SUPPORT · 분사구문', 'B07A1C', 'leaving many beginners confused.', '뒤 부연(분사구문·관계사) — 약하게'));
   out.push(B.p('▶ 문두 부사절·전치사구(OLD)와 뒤의 분사구문·「,which」관계사(SUPPORT)는 약하게, 가운데 주절(MAIN)에 힘준다.'));
   out.push(ppKV('OLD (배경)', '문두 부사절(Although~)·전치사구(In~) → 약하게'));
   out.push(ppKV('MAIN (주제)', '주절 — 필자가 진짜 하고 싶은 말 → 가장 강하게'));
@@ -350,7 +350,7 @@ function structureTypesPageParas() {
     }));
     out.push(new Paragraph({
       spacing: { after: 90 }, indent: { left: 360 },
-      children: [new TextRun({ text: `🔎 ${sig}`, size: 18, italics: true, color: '6A57B0', font: S.FONT })],
+      children: [new TextRun({ text: `🔎 ${sig}`, size: 18, italics: true, color: '5E4C9E', font: S.FONT })],
     }));
   });
   out.push(B.p('지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰본다.'));
@@ -399,11 +399,11 @@ function stancePanelParas(title, color, arr, note) {
 function stanceTypesPageParas() {
   const out = [B.h1('필자의 입장 — 어떤 어휘로 드러나나?')];
   out.push(B.p('필자가 대상을 두고 쓴 ‘평가 어휘’를 잡으면 입장이 보인다. 진짜 주장은 보통 마지막 문장(therefore·in conclusion)이나 But·However 뒤, should·must 에서 터져 나온다. (Ortica 영어 VOCA 기반)', { bold: true }));
-  out.push(...stancePanelParas('👍 긍정 · 중요 — 필자가 좋게·중요하게 봄', '279A52', STANCE_POS_DOCX));
-  out.push(...stancePanelParas('👎 부정 — 필자가 비판·경계·배제·부정', 'C5533F', STANCE_NEG_DOCX));
+  out.push(...stancePanelParas('👍 긍정 · 중요 — 필자가 좋게·중요하게 봄', '14603A', STANCE_POS_DOCX));
+  out.push(...stancePanelParas('👎 부정 — 필자가 비판·경계·배제·부정', 'B24A38', STANCE_NEG_DOCX));
   out.push(...stancePanelParas('🤔 중립 — 좋다·나쁘다 평가가 없을 때', '6B7280', STANCE_NEU_DOCX,
     '긍정·부정 평가어가 뚜렷이 없고, 판단을 유보하거나 양쪽을 균형 있게 보여주면 중립이다(한쪽으로 몰지 않음).'));
-  out.push(new Paragraph({ spacing: { before: 120, after: 30 }, children: [new TextRun({ text: '🔄 ± 방향을 뒤집는 신호 — 놓치면 정반대로 읽는다(평가원 오답 단골 ‘반대구조’)', bold: true, size: 20, color: 'E08A1E', font: S.FONT })] }));
+  out.push(new Paragraph({ spacing: { before: 120, after: 30 }, children: [new TextRun({ text: '🔄 ± 방향을 뒤집는 신호 — 놓치면 정반대로 읽는다(평가원 오답 단골 ‘반대구조’)', bold: true, size: 20, color: 'C77A17', font: S.FONT })] }));
   out.push(B.bullet('부정·결여·분리: not·no·never·no longer·hardly·rarely·by no means·free from·absent from·immune to·independent of·apart from·far from·cease·stop'));
   out.push(B.bullet('전환 예: does not shrink=＋expands · free from bias=＋객관적 · immune to=−영향 안 받음 · not necessarily=약화'));
   out.push(B.p('문장 뜻을 다 몰라도 핵심어의 ± 방향만 잡으면 요지·함축·정답 선지가 보인다.'));
@@ -447,8 +447,8 @@ function predictChoiceParas(p) {
   out.push(B.p('통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', { bold: true }));
   out.push(B.p('🔎 소재 — 이 지문, 뭐에 관한 글이야? (한 줄):  ______________________________________'));
   out.push(B.p('🗣️ 필자 주장 — 긍정 · 부정 · 중립?   ☐ 긍정적   ☐ 부정적·비판적   ☐ 중립적   (평가어·마지막 문장으로 판단)'));
-  out.push(B.p('     · 긍정: 좋다·이롭다 / should · thanks to · valuable 같은 칭찬·권장', { color: '279A52' }));
-  out.push(B.p('     · 부정: 문제·해롭다 / But·However 뒤집기 · overlook·fail · should not 같은 비판·경고', { color: 'C5533F' }));
+  out.push(B.p('     · 긍정: 좋다·이롭다 / should · thanks to · valuable 같은 칭찬·권장', { color: '14603A' }));
+  out.push(B.p('     · 부정: 문제·해롭다 / But·However 뒤집기 · overlook·fail · should not 같은 비판·경고', { color: 'B24A38' }));
   out.push(B.p('     · 중립: 사실 설명·양쪽 비교만, 편들지 않음', { color: '6B7280' }));
   out.push(B.p('🧩 이 글, 어떤 구조야? (하나 ✓ · 앞 “글의 구조” 페이지 참고)'));
   STRUCTURE_TYPES.forEach((t) => out.push(new Paragraph({
@@ -481,7 +481,7 @@ function chainQuestionParas(ch) {
   return out;
 }
 // 지문 끝: 해석 전 예측 정답 공개 — 별도 페이지 + 항목별 카드(가독성↑)
-const GRAM = '6A57B0'; const GRAMBG = 'F0EDF9'; const GRAMLINE = 'DDD4F2';
+const GRAM = '5E4C9E'; const GRAMBG = 'F0EDF9'; const GRAMLINE = 'DDD4F2';
 function revealItem(label, main, why) {
   const kids = [new Paragraph({
     spacing: { after: why ? 50 : 0 },
@@ -553,7 +553,7 @@ function passageParagraphs(p, idx) {
 }
 
 function passageCoverParagraphs(meta = {}) {
-  const TEAL = '279A52'; const TEALD = '1E7A40'; const GRAY = '6B7280';
+  const TEAL = '14603A'; const TEALD = '0C3F26'; const GRAY = '6B7280';
   const center = (children, after, before) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after, before }, children });
   const gray = (t, extra) => new TextRun({ text: t, color: GRAY, font: S.FONT, ...extra });
   const hl = (t, size) => new TextRun({ text: t, bold: true, color: TEAL, font: S.FONT, size });
@@ -578,7 +578,7 @@ function passageCoverParagraphs(meta = {}) {
 
 // 목차 + 사용법 페이지(표지 다음)
 function passageTocParagraphs(passages) {
-  const TEAL = '279A52'; const GRAM = '6A57B0';
+  const TEAL = '14603A'; const GRAM = '5E4C9E';
   const out = [B.h1('목차 · Contents')];
   out.push(B.p('먼저 독해 원리를 익히고 → 지문으로 훈련하는 순서다.', { color: '666666' }));
   const tocRow = (name, tag, num, color) => new Paragraph({

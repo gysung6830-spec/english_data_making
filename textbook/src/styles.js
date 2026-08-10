@@ -9,9 +9,9 @@
 const FONT = 'NanumSquareRound';
 const FONT_EN = 'NanumSquareRound'; // 영어도 동일 폰트, 볼드+확대로 강조
 
-// 문서 공통 색
-const NAVY = '1F3864';       // 제목/소제목
-const BRASS = 'B08D57';      // 강조(초록 대체), 박스 테두리
+// 문서 공통 색 (필생보 딥그린 테마)
+const NAVY = '0C3F26';       // 제목/소제목 — 딥그린
+const BRASS = '2E7D50';      // 소제목·박스 테두리 — 미드그린 액센트
 const LIGHTGRAY = 'F2F2F2';  // 사용법 안내 배경
 const CATCHBG = 'FFF3D6';    // 캐치 박스 배경
 const SLASH = 'C0392B';      // 끊어읽기 화살표(→) — 붉은 계열
