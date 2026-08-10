@@ -117,6 +117,19 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
 .wl.rel .c{ color:#33414d; background:#f2f6f4; border-color:#d3ddd7; }
 .wl.rel .c b{ color:#12543d; }
 table.pol td, table.rel td{ padding:6px 9px; }
+/* 인과 — 원인/결과가 드러나는 구문 카드 */
+.cau,.eff{ font-weight:800; color:#fff; border-radius:5px; padding:0 5px; }
+.cau{ background:var(--ink); } .eff{ background:#c98a1a; }
+.cxlegend{ font-size:10px; color:#4a5560; margin-bottom:9px; }
+.cxlegend .cau,.cxlegend .eff{ margin:0 2px; }
+.cxlane{ margin-bottom:10px; }
+.cxlane .lh{ font-size:11.5px; font-weight:800; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+.cxlane.fw .lh{ color:var(--ink-d); } .cxlane.bw .lh{ color:#8a5a1a; }
+.cxlane .lh .ar{ color:#9bb4cc; font-weight:900; }
+.czs{ display:flex; flex-wrap:wrap; gap:5px 6px; }
+.cz{ display:inline-flex; align-items:center; gap:3px; font-family:'NanumSquareRound',sans-serif; font-size:10px; background:#fff; border:1px solid #dbe4df; border-radius:9px; padding:2px 7px; }
+.cz .vb{ color:#33414d; }
+.cxnote{ font-size:9.5px; color:#5a636c; margin-top:3px; } .cxnote b{ color:var(--ink-d); }
 </style></head><body>
 
 <!-- ===== P1. 태도 ===== -->
@@ -470,13 +483,12 @@ table.pol td, table.rel td{ padding:6px 9px; }
     이 표현들이 보이면 <b>구조가 즉시 드러난다.</b> 연결사·구두점이 없어도 이 구문이 같은 신호 역할을 한다.</div>
 
   <div class="relhead"><span class="rsym cause">→</span><span class="rt">인과 — A가 B를 낳거나(→) B에서 비롯(←)</span></div>
-  <table class="rel">
-    <tr><td class="grp">A → B (일으킴)</td><td class="w"><div class="wl rel"><span class="c">result in</span><span class="c">lead to</span><span class="c">cause</span><span class="c">bring about</span><span class="c">bring on</span><span class="c">trigger</span><span class="c">prompt</span><span class="c">give rise to</span><span class="c">contribute to</span><span class="c">be the source of</span></div></td></tr>
-    <tr><td class="grp">A ← B (비롯)</td><td class="w"><div class="wl rel"><span class="c">result from</span><span class="c">stem from</span><span class="c">arise from</span><span class="c">draw from</span><span class="c">spring from</span><span class="c">be derived from</span><span class="c">originate in/from</span><span class="c">be rooted in</span><span class="c">be based on</span><span class="c">be anchored in</span></div></td></tr>
-    <tr><td class="grp">영향·의존</td><td class="w"><div class="wl rel"><span class="c">influence</span><span class="c">have an effect on</span><span class="c">have implication for</span><span class="c">depend on</span><span class="c">be induced by</span><span class="c">in response to</span></div></td></tr>
-    <tr><td class="grp">근거·이유</td><td class="w"><div class="wl rel"><span class="c">due to</span><span class="c">attribute A to B</span><span class="c">be a basis for</span><span class="c">rationale</span><span class="c">justification</span><span class="c">outcome</span><span class="c">A in that B(B라는 점에서)</span></div></td></tr>
-    <tr><td class="grp">결과 연결</td><td class="w"><div class="wl rel"><span class="c">so ~ that</span><span class="c">such ~ that</span><span class="c">so that S V</span><span class="c">it follows that S V</span><span class="c">insofar as</span></div></td></tr>
-  </table>
+  <div class="cxlegend"><span class="cau">초록</span> = 원인(cause) &nbsp; <span class="eff">주황</span> = 결과(effect) &nbsp;— 색으로 <b>어느 쪽이 원인·결과</b>인지 바로 보인다. (예: <span class="cau">A</span> lead to <span class="eff">B</span> = A가 원인·B가 결과)</div>
+  <div class="cxlane fw"><div class="lh">원인 <span class="ar">→</span> 결과 &nbsp;<span style="font-weight:600;color:#6b7280;font-size:10px">A가 B를 일으킨다</span></div>
+    <div class="czs"><span class="cz"><span class="cau">A</span><span class="vb">result in</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">lead to</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">cause</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">bring about</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">bring on</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">trigger</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">prompt</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">give rise to</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">contribute to</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">be the source of</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">influence</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">have an effect on</span><span class="eff">B</span></span><span class="cz"><span class="cau">A</span><span class="vb">be a basis for</span><span class="eff">B</span></span></div></div>
+  <div class="cxlane bw"><div class="lh">결과 <span class="ar">←</span> 원인 &nbsp;<span style="font-weight:600;color:#6b7280;font-size:10px">A가 B에서 비롯·근거한다</span></div>
+    <div class="czs"><span class="cz"><span class="eff">A</span><span class="vb">result from</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">stem from</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">arise from</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">derive from</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">spring from</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">originate in</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">be rooted in</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">be based on</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">be anchored in</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">be induced by</span><span class="cau">B</span></span><span class="cz"><span class="vb">attribute</span><span class="eff">A</span><span class="vb">to</span><span class="cau">B</span></span><span class="cz"><span class="eff">A</span><span class="vb">due to</span><span class="cau">B</span></span></div></div>
+  <div class="cxnote"><b>결과를 여는 신호(절 단위)</b> — so ~ that / such ~ that / it follows that S V / insofar as. &nbsp; <b>명사</b> — outcome(결과) · rationale·justification(근거).</div>
   <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>인과(therefore·thus)</b> · 글의 구조 <b>③문제→해결·⑥예시→일반화</b>. 인과 구문이 보이면 <b>‘결과=필자 결론(＋)’</b>에 형광펜.</div>
 
   <div class="relhead"><span class="rsym eq">=</span><span class="rt">등호·정의 — A = B (같다·라 부른다·상징한다)</span></div>
