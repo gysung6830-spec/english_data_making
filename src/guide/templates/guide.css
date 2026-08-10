@@ -12,7 +12,12 @@
   /* 영어=세리프 + 목차/제목 한글=나눔명조 */
   --f-myeongjo: "Georgia", "Times New Roman", "NanumMyeongjo", "Nanum Myeongjo",
                 "Batang", "WenQuanYi Zen Hei", serif;
+  /* 정답·출처표기 등 라벨: 숫자까지 나눔스퀘어라운드로 */
+  --f-round: "NanumSquareRound", "NanumSquare Round", "NanumGothic", "Nanum Gothic",
+             "Malgun Gothic", "WenQuanYi Zen Hei", sans-serif;
 }
+/* 정답 라벨 · 출처표기(2024 고3 …번) 등은 나눔스퀘어라운드 적용 */
+.src-chip, .dd-src, .prob-answer, .dq-correct, .ab .tag { font-family: var(--f-round); }
 
 @page {
   size: A4;
