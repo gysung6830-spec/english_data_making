@@ -480,7 +480,7 @@
   {% endif %}
   <div class="ex-label">예시 <span>중난이도·고난이도 기출</span></div>
   {% for card in chapter.cards %}
-  <div class="card">
+  <div class="card card-c{{ loop.index0 % 5 }}">
     <div class="card-head">
       <span class="code-chip">{{ card.code }}</span>
       <span class="code-ko">{{ card.code_ko }}</span>

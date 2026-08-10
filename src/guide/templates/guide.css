@@ -219,6 +219,12 @@ body {
   padding: 2px 10px; border-radius: 4px; font-size: 11px; white-space: nowrap;
 }
 .code-ko { color: var(--muted); font-size: 10px; }
+/* 카드마다 악센트 색을 돌려 초록 일색 탈피 (좌측 보더 + 코드칩) */
+.card-c0 { border-left: 5px solid #0f7a6b; } .card-c0 .code-chip { background: #0f7a6b; }
+.card-c1 { border-left: 5px solid #b7791f; } .card-c1 .code-chip { background: #b7791f; }
+.card-c2 { border-left: 5px solid #3f6ea5; } .card-c2 .code-chip { background: #3f6ea5; }
+.card-c3 { border-left: 5px solid #9b5a7d; } .card-c3 .code-chip { background: #9b5a7d; }
+.card-c4 { border-left: 5px solid #4b7a3f; } .card-c4 .code-chip { background: #4b7a3f; }
 .dir-badge {
   margin-left: auto; background: #f0ece1; color: #8a6d3b;
   font-size: 9px; padding: 2px 8px; border-radius: 10px; white-space: nowrap;
