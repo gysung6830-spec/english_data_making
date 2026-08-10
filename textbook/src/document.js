@@ -184,6 +184,128 @@ function principlePageParas() {
   return out;
 }
 
+// ── 독해의 원리(PART0) — Ortica 영어 '형광펜 독해' 원리 총론 (docx) ──
+const PP_TEAL = '279A52'; const PP_GRAM = '6A57B0';
+function ppH(t, sub) {
+  const out = [B.h1(t)];
+  if (sub) out.push(B.p(sub, { italics: true, color: '666666' }));
+  return out;
+}
+function ppGoal(t) { return B.p(`핵심 — ${t}`, { bold: true }); }
+function ppKV(k, v) {
+  return new Paragraph({
+    spacing: { after: 40 }, indent: { left: 200 },
+    children: [
+      new TextRun({ text: `${k}  `, bold: true, size: 20, color: PP_TEAL, font: S.FONT }),
+      new TextRun({ text: v, size: 19, font: S.FONT }),
+    ],
+  });
+}
+function ppEx(label, en, note) {
+  return [
+    new Paragraph({
+      spacing: { before: 30, after: note ? 10 : 40 }, indent: { left: 240 },
+      children: [
+        new TextRun({ text: `[${label}] `, bold: true, size: 17, color: PP_GRAM, font: S.FONT }),
+        new TextRun({ text: en, italics: true, size: 19, font: S.FONT }),
+      ],
+    }),
+  ].concat(note ? [new Paragraph({ spacing: { after: 40 }, indent: { left: 300 }, children: [new TextRun({ text: `↳ ${note}`, size: 18, color: '555555', font: S.FONT })] })] : []);
+}
+// 태도·완급·추론·연결사·재진술·5변환 (글의 구조 앞)
+function principlesFrontParas() {
+  const out = [];
+  out.push(...ppH('모의고사 점수는 ‘태도’에서 나온다', '“정확히 모든 문장 해석” ≠ “좋은 점수” — 점수는 글의 중심 내용을 잡은 사람에게 간다'));
+  out.push(ppGoal('구문을 완벽히 분석한 사람이 아니라 “무슨 말을 하려는가”를 잡은 사람이 점수를 가져간다.'));
+  out.push(B.bullet('공부할 때 = 걸어다니는 사전: 단어·구문을 끝까지 정확히(실력의 바탕).'));
+  out.push(B.bullet('시험 칠 때 = 모르는 건 추론: 멈추지 말고 문맥으로 추론, “무슨 말을 하려는가”만.'));
+  out.push(B.bullet('HOW: 초반 3문장을 관통하는 하나의 키워드를 잡는다(반복되는 말). 주제 문제 정답=그 키워드(같은 용어 아니어도).'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('완급조절 — OLD / NEW·MAIN / SUPPORT', '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 한 단락엔 주제가 하나뿐'));
+  out.push(ppKV('OLD (배경·통념)', '도입부·마이너스 → 약하게 “음~ 그렇구나”'));
+  out.push(ppKV('NEW·MAIN (주제)', '필자가 진짜 하고 싶은 말 → 가장 강하게'));
+  out.push(ppKV('SUPPORT (부연)', '예시·상술 → 선명하면 약하게'));
+  out.push(B.bullet('OLD 신호: 문두에서 컴마로 끊기는 부사절·분사구문·전치사구(컴마 없으면 주절 핵심).'));
+  out.push(...ppEx('OLD→NEW', 'Although this is true, it has also become a tired argument.', '양보(OLD)는 약하게 → 주절 ‘진부한 주장’(NEW·핵심)이 하고 싶은 말.'));
+  out.push(...ppEx(',관계사', '…rediscovered Mendel’s work, which of course had been there all along.', '「,which」이하는 부연 — 핵심은 ‘세 과학자가 재발견’.'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('모르는 것은 ‘추론’한다 — 어순·구두점', '영어는 General → Specific · 추상적인 말이 앞에 오면 뒤에 구체 정보'));
+  out.push(ppGoal('모르는 단어에 멈추지 말고 ‘뒤가 알려줄 것’이라 믿고 읽어라.'));
+  out.push(ppKV('BE동사 (A=B)', '정의를 여는 신호. Tax is the application… → ‘Tax=분배 정의 이론의 적용’.'));
+  out.push(ppKV('콜론 :', '부연·재진술·열거. A:B에서 A 이해되면 B는 확인만.'));
+  out.push(ppKV('대쉬 —', '상술. 앞 이해되면 약하게(중간 삽입=대쉬, 끝=콜론).'));
+  out.push(ppKV('세미콜론 ;', '두 문장 연결(and·but·so). ‘관련 있구나’만.'));
+  out.push(ppKV('따옴표 “ ”', '인용·강조, 또는 단어를 비틀어 씀(필자 의도).'));
+  out.push(ppKV('병렬 A,B and C', '하나만 알면 나머지는 비슷한 문맥으로 넘긴다.'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('연결사 = “어디가 중요한지 알려줄게”', '문장 어디에 있든 앞뒤 ‘사이’에 놓고 읽어라 · 역접은 완급의 분기점'));
+  out.push(ppKV('Switching (A‹B)', '‘그러나·대신에’ 뒤가 핵심, 앞은 약하게 — however·but·still·nevertheless·instead·rather'));
+  out.push(ppKV('Contrast (A=B)', '‘반면에’ 두 대상 다 중요 — on the other hand·by contrast·conversely'));
+  out.push(B.bullet('but/however: 1순위 그러나·반면에 / 2순위 강조(Emphasis).'));
+  out.push(B.bullet('In fact: 순접(사실상)/역접(하지만 사실은). on the contrary: 오히려(앞 부정·강조) ≠ on the other hand.'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('재진술(Paraphrasing) — 같은 말을 알아채기', '독해의 최종 기술 · 명시적 단서 없이 “앞의 그 말을 바꿔 한 거구나”를 느끼는 것'));
+  out.push(ppGoal('필자는 핵심을 한 번만 말하지 않고 표현을 바꿔 되풀이하며, 정답 선지는 그 되풀이의 마지막 한 번이다.'));
+  out.push(B.p('🔁 이 교재에선 지문마다 「재진술 사슬」 문제로 훈련 — 소재 하나면 A→A′→A″…, 비교 지문이면 A→A′… · B→B′… (억지로 만들지 않음).'));
+  out.push(ppKV('재진술', 'that is · in other words · in effect · indeed'));
+  out.push(ppKV('예시·요약', 'for example · for instance / in short · in conclusion'));
+  out.push(ppKV('나열·인과', 'similarly · moreover / therefore · thus · as a result'));
+  out.push(B.bullet('재진술 독해 = G(일반화)↔S(구체화)를 오간다. 표현 달라도 하나의 범주면 같은 말.'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('재진술로 정답을 만든다 — 5변환 · 오답 함정', '정답=뜻 그대로 단어만 바꿈 / 오답=단어 그대로 두고 뜻 왜곡'));
+  out.push(ppKV('① 동의어 치환', 'proper·forces·detailed → careful·drives·thorough'));
+  out.push(ppKV('② 구체→추상', 'a songwriter·a boundary → creative people·locality'));
+  out.push(ppKV('③ 품사 전환', 'decide(동사) → decision-making(명사)'));
+  out.push(ppKV('④ 반대구조', 'does not shrink → expands'));
+  out.push(ppKV('⑤ 비유→직설', 'a window to other worlds → unfamiliar perspectives'));
+  out.push(B.bullet('오답 4잣대: copy(지문 단어 그대로)·reverse(방향 반대)·distort(한 군데 어긋남)·off(근거 없음).'));
+  out.push(B.bullet('흔한 오해: all·always·only 극단어=오답은 사설 요령. 평가원은 ‘지문 근거와의 관계’로 오답을 만든다.'));
+  out.push(B.pageBreak());
+  return out;
+}
+// 논리관계 구문 ①②, 형광펜 신호 사전 (필자 입장 뒤)
+const HIGHLIGHT_SIGNALS_DOCX = [
+  ['① 역접·대조', 'However·But·Yet·Nevertheless·In contrast·On the contrary·Instead·Conversely·Unlike·Whereas·Still·No longer·not A but B — 앞을 뒤집는다=필자 주장'],
+  ['② 결론·귀결', 'Thus·Therefore·Hence·So·Consequently·As a result·In conclusion·In short·Ultimately — 글을 닫는 문장=주제'],
+  ['③ 인과', 'because·since·due to·owing to·lead to·result in·give rise to·thereby·in order to — 논리의 뼈대'],
+  ['④ 강조·주장', 'should·must·ought to·need to·important·essential·crucial·vital·key·In fact·Indeed·above all — 대놓고 미는 문장'],
+  ['⑤ 최상·유일·한정', 'the most·the best·the only·first·only when·only if·unless·except·as long as — 정답 단골 자리'],
+  ['⑥ 통념·반전', 'Many believe·It is thought·Traditionally·Contrary to popular belief·Surprisingly·Ironically — 통념 깨는 곳=주제'],
+  ['⑦ 정의·재정의', 'is defined as·means·refers to·that is·in other words·콜론(:)·대시(—) 뒤 — 개념 못 박는 문장'],
+  ['⑧ 태도·평가어(±)', '＋ benefit·valuable·effective ↔ − problem·risk·illusion·myth·fail·drawback — 정답의 방향(＋/−)'],
+  ['⑨ 예시 후 일반화', 'In each case·In general·Overall·This suggests/shows/means — 예시 접고 결론 복귀'],
+  ['⑩ 위치', '글 첫 문장·각 단락 첫 문장·마지막 문장·빈칸/밑줄 문장+앞뒤 — 무조건 읽는 자리'],
+  ['⑪ 지시·연결', 'this·these·that·those·such(a)·one·another·the former·the latter — 순서·삽입의 핵심'],
+  ['⑫ 첨가·병렬', 'not only~but also·moreover·furthermore·in addition·similarly·likewise — 같은 방향 추가(주제 강화)'],
+];
+function principlesBackParas() {
+  const out = [];
+  out.push(...ppH('논리관계 구문 — 인과(→) · 등호(=)', '독해 = 문장들의 ‘관계’ 잡기 · 관계는 넷 — 인과·등호·대조·비교'));
+  out.push(ppKV('원인 → 결과', 'A cause/lead to/result in/bring about/give rise to/trigger/contribute to B'));
+  out.push(ppKV('결과 ← 원인', 'A result from/stem from/arise from/derive from/be based on/attribute A to B'));
+  out.push(ppKV('등호·정의 A=B', 'A is B/be called/define A as/refer to A as/represent/regard A as B (신호: that is·i.e.·such as)'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('논리관계 구문 — 대조(↔) · 비교(>)', '이 표현=글에 소재가 둘(A·B)이라는 신호 · 관계를 기호로 잡아라'));
+  out.push(ppKV('A > B (우위)', 'more A than B·outweigh·surpass·exceed·prevail over·prefer A to B·A rather than B'));
+  out.push(ppKV('A < B (밀림)', 'less A than B·inferior to·be overwhelmed/overshadowed/dwarfed by'));
+  out.push(ppKV('A ↔ B (대조)', 'differ from·distinguish A from B·unlike·whereas·on the other hand·the former/the latter'));
+  out.push(ppKV('A ⇒ B (대체)', 'replace·displace·give way to·shift/move from A to B'));
+  out.push(B.bullet('초점: not A but B — B가 필자의 초점, A는 버리는 미끼(−). 필자가 미는 쪽(>·B)이 곧 주제.'));
+  out.push(B.pageBreak());
+
+  out.push(...ppH('형광펜 독해 — 무엇을 읽고 무엇을 버릴까', '아래 신호가 보이면 무조건 읽는다 · 훑기 → 칠하기 → 찍기'));
+  HIGHLIGHT_SIGNALS_DOCX.forEach(([k, v]) => out.push(ppKV(k, v)));
+  out.push(B.bullet('스킵: for example·such as·take/consider(예시) · 숫자·연도·인명 나열 · Although/Despite 양보절 · 긴 관계절(, which~) — 주절·주장만.'));
+  out.push(B.pageBreak());
+  return out;
+}
+
 // 책 앞 '글의 구조 — 어떤 짜임이 있나?' 페이지 (목차 항목 1회, 모의고사 지문 기준)
 const STRUCTURE_GUIDE_DOCX = [
   ['① 통념 → 반박(반전)',
@@ -268,7 +390,10 @@ function stanceTypesPageParas() {
   out.push(...stancePanelParas('👎 부정 — 필자가 비판·경계·배제·부정', 'C5533F', STANCE_NEG_DOCX));
   out.push(...stancePanelParas('🤔 중립 — 좋다·나쁘다 평가가 없을 때', '6B7280', STANCE_NEU_DOCX,
     '긍정·부정 평가어가 뚜렷이 없고, 판단을 유보하거나 양쪽을 균형 있게 보여주면 중립이다(한쪽으로 몰지 않음).'));
-  out.push(B.p('지문마다 ‘해석 전 예측 — 필자 주장’에서, 위 어휘가 보이면 그걸 근거로 긍정·부정·중립을 골라본다.'));
+  out.push(new Paragraph({ spacing: { before: 120, after: 30 }, children: [new TextRun({ text: '🔄 ± 방향을 뒤집는 신호 — 놓치면 정반대로 읽는다(평가원 오답 단골 ‘반대구조’)', bold: true, size: 20, color: 'E08A1E', font: S.FONT })] }));
+  out.push(B.bullet('부정·결여·분리: not·no·never·no longer·hardly·rarely·by no means·free from·absent from·immune to·independent of·apart from·far from·cease·stop'));
+  out.push(B.bullet('전환 예: does not shrink=＋expands · free from bias=＋객관적 · immune to=−영향 안 받음 · not necessarily=약화'));
+  out.push(B.p('문장 뜻을 다 몰라도 핵심어의 ± 방향만 잡으면 요지·함축·정답 선지가 보인다.'));
   out.push(B.pageBreak());
   return out;
 }
@@ -474,9 +599,11 @@ function buildPassageDocument(passages, meta = {}) {
   const children = [
     ...passageCoverParagraphs(meta),
     ...passageTocParagraphs(passages),
-    ...principlePageParas(),
-    ...structureTypesPageParas(),
-    ...stanceTypesPageParas(),
+    ...principlePageParas(),      // 끊어읽기 원리
+    ...principlesFrontParas(),    // 태도·완급·추론·연결사·재진술·5변환
+    ...structureTypesPageParas(), // 글의 구조
+    ...stanceTypesPageParas(),    // 필자 입장(± 어휘)
+    ...principlesBackParas(),     // 논리관계 ①②·형광펜 신호
     ...passages.flatMap((p, i) => passageParagraphs(p, i)),
   ];
   return new Document({
