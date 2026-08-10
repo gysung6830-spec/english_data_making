@@ -271,28 +271,30 @@ function attitudePageHtml() {
     + '<div class="pcatch"><span class="pcatch-h">✅ 주제 문제의 정답 원리</span> 키워드는 반드시 선지에 담긴다 — 같은 용어를 쓰지 않더라도. (단, 가장 많이 쓰인 단어가 곧 답인 건 아님)</div>');
 }
 
-// P2 · 완급조절 — 예시 단락을 OLD/MAIN/SUPPORT 로 직접 나눠 보여준다
+// P2 · 완급조절 — 한 문장을 OLD(문두 부사절·전치사구) / MAIN(주절) / SUPPORT(분사구문·관계사)로 쪼갠다
 function pacePageHtml() {
   const worked = `<div class="wex">
-    <div class="wex-h">📖 예시로 나눠보기 — 이 단락을 강·약으로 읽어봐</div>
-    <div class="wex-row old"><span class="wex-tag old">OLD · 약하게</span><span class="wex-s"><b>①</b> Many people assume that natural talent decides success.</span><span class="wex-k">통념(배경) “음~ 그렇구나”, 흘려 읽기</span></div>
-    <div class="wex-row main"><span class="wex-tag main">MAIN · 강하게</span><span class="wex-s"><b>②</b> <u>However</u>, what truly matters is steady, deliberate practice.</span><span class="wex-k">However 뒤 = 필자의 진짜 주장(핵심)</span></div>
-    <div class="wex-row sup"><span class="wex-tag sup">SUPPORT · 약하게</span><span class="wex-s"><b>③</b> <u>For instance</u>, top musicians simply practiced more.</span><span class="wex-k">예시 = 주제를 뒷받침·확인만</span></div>
-    <div class="wex-note">▶ <b>①</b> 통념은 흘려 읽고, <b>②</b> However 뒤 주제에 힘주고, <b>③</b> 예시는 ②를 확인만 — 이렇게 강·약을 나누는 게 완급조절이야.</div>
+    <div class="wex-h">📖 예시로 나눠보기 — 한 문장을 세 역할로 쪼개봐</div>
+    <div class="wex-row old"><span class="wex-tag old">OLD · 부사절</span><span class="wex-s"><u>Although the plan looks simple,</u></span><span class="wex-k">문두 배경(부사절·전치사구) — <b>약하게</b></span></div>
+    <div class="wex-row main"><span class="wex-tag main">MAIN · 주절</span><span class="wex-s">it often fails in practice,</span><span class="wex-k">진짜 하고 싶은 말(주절) — <b>가장 강하게</b></span></div>
+    <div class="wex-row sup"><span class="wex-tag sup">SUPPORT · 분사구문</span><span class="wex-s"><u>leaving many beginners confused.</u></span><span class="wex-k">뒤에 덧붙인 부연(분사구문·관계사) — <b>약하게</b></span></div>
+    <div class="wex-note">▶ 문두 <b>부사절·전치사구</b>(OLD)와 뒤의 <b>분사구문·「,which」관계사</b>(SUPPORT)는 약하게, 가운데 <b>주절(MAIN)</b>에 힘줘 — 이게 완급조절이야.</div>
   </div>`;
   const flow = `<div class="flow3">
-    <div class="fl old"><div class="fl-h">OLD (배경·통념)</div><div class="fl-b">도입부 · 마이너스<br><b>약하게</b> “음~ 그렇구나”</div></div>
+    <div class="fl old"><div class="fl-h">OLD (배경)</div><div class="fl-b">문두 <b>부사절·전치사구</b><br>(Although/When/In…) · <b>약하게</b></div></div>
     <div class="fl-arw">→</div>
-    <div class="fl new"><div class="fl-h">NEW · MAIN (주제)</div><div class="fl-b">필자가 진짜 하고 싶은 말<br><b>가장 강하게</b></div></div>
+    <div class="fl new"><div class="fl-h">MAIN (주제)</div><div class="fl-b"><b>주절</b> — 진짜 하고 싶은 말<br><b>가장 강하게</b></div></div>
     <div class="fl-arw">→</div>
-    <div class="fl sup"><div class="fl-h">SUPPORT (부연)</div><div class="fl-b">예시 · 상술<br>선명하면 <b>약하게</b></div></div>
+    <div class="fl sup"><div class="fl-h">SUPPORT (부연)</div><div class="fl-b">뒤의 <b>분사구문·관계사</b><br>(, -ing/-ed · , which) · <b>약하게</b></div></div>
   </div>`;
   return ppage('독해의 원리 ②', '완급조절', '완급조절 — OLD / MAIN / SUPPORT로 나눠 읽기',
-    '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 한 단락엔 주제가 하나뿐',
-    '강·약을 조절하는 <b>능동적 독해</b>를 하자. 아래 예시처럼 세 역할로 나눠 읽어봐.',
+    '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 문장은 주절(MAIN)에 힘이 실린다',
+    '문두 배경과 뒤 부연은 약하게, <b>주절</b>에 힘주는 <b>능동적 독해</b>를 하자. 아래처럼 세 역할로 쪼개봐.',
     worked + flow
-    + pcard('🔎', 'OLD를 알아채는 신호 — 컴마(,)가 붙은 앞자리', '<div class="cut-rule">문두에서 컴마로 끊기는 <b>부사절·분사구문·전치사구</b>가 흔히 배경(OLD) 신호. (컴마가 없으면 주절 핵심 정보일 때가 많다.)</div>'
-      + pex('OLD→MAIN', 'Although this is true, it has also become a tired argument.', '양보(OLD)를 약하게 → 주절 ‘진부한 주장’(MAIN)이 진짜 하고 싶은 말.'), 'neg'));
+    + '<div class="cutgrid">'
+    + pcard('🔎', 'OLD 신호 — 컴마(,)가 붙은 앞자리', '<div class="cut-rule">문두에서 컴마로 끊기는 <b>부사절(Although~)·전치사구(In~)</b>가 배경(OLD). 컴마가 없으면 주절 핵심일 때가 많다.</div>', 'neg')
+    + pcard('✅', 'SUPPORT 신호 — 뒤에 붙는 분사·관계사', '<div class="cut-rule"><b>분사구문(, -ing/-ed)</b>과 <b>「,which」비제한 관계사</b>는 부연 — 약하게. (관계사만 있으면 필요한 정보이니 챙긴다.)</div>', 'pos')
+    + '</div>');
 }
 
 // P3 · 추론(어순·구두점)

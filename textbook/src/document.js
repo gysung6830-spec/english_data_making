@@ -222,8 +222,8 @@ function principlesFrontParas() {
   out.push(B.bullet('HOW: 초반 3문장을 관통하는 하나의 키워드를 잡는다(반복되는 말). 주제 문제 정답=그 키워드(같은 용어 아니어도).'));
   out.push(B.pageBreak());
 
-  out.push(...ppH('완급조절 — OLD / MAIN / SUPPORT로 나눠 읽기', '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 한 단락엔 주제가 하나뿐'));
-  out.push(B.p('📖 예시로 나눠보기 — 이 단락을 강·약으로 읽어봐', { bold: true }));
+  out.push(...ppH('완급조절 — OLD / MAIN / SUPPORT로 나눠 읽기', '한 문장은 주절(MAIN)에 힘이 실린다 · 문두 배경과 뒤 부연은 약하게'));
+  out.push(B.p('📖 예시로 나눠보기 — 한 문장을 세 역할로 쪼개봐 (Although the plan looks simple, it often fails in practice, leaving many beginners confused.)', { bold: true }));
   const wex = (tag, tagColor, en, note) => new Paragraph({
     spacing: { after: 40 }, indent: { left: 200 },
     children: [
@@ -232,14 +232,14 @@ function principlesFrontParas() {
       new TextRun({ text: `  → ${note}`, size: 17, color: '666666', font: S.FONT }),
     ],
   });
-  out.push(wex('OLD · 약하게', '6B7280', '① Many people assume that natural talent decides success.', '통념(배경), 흘려 읽기'));
-  out.push(wex('MAIN · 강하게', '279A52', '② However, what truly matters is steady, deliberate practice.', 'However 뒤 = 필자의 진짜 주장'));
-  out.push(wex('SUPPORT · 약하게', 'C0821F', '③ For instance, top musicians simply practiced more.', '예시 = 주제 확인만'));
-  out.push(B.p('▶ ① 통념은 흘려 읽고, ② However 뒤 주제에 힘주고, ③ 예시는 ②를 확인만 — 이렇게 강·약을 나누는 게 완급조절이다.'));
-  out.push(ppKV('OLD (배경·통념)', '도입부·마이너스 → 약하게 “음~ 그렇구나”'));
-  out.push(ppKV('MAIN (주제)', '필자가 진짜 하고 싶은 말 → 가장 강하게'));
-  out.push(ppKV('SUPPORT (부연)', '예시·상술 → 선명하면 약하게'));
-  out.push(B.bullet('OLD 신호: 문두에서 컴마로 끊기는 부사절·분사구문·전치사구(컴마 없으면 주절 핵심).'));
+  out.push(wex('OLD · 부사절', '6B7280', 'Although the plan looks simple,', '문두 배경(부사절·전치사구) — 약하게'));
+  out.push(wex('MAIN · 주절', '279A52', 'it often fails in practice,', '진짜 하고 싶은 말(주절) — 가장 강하게'));
+  out.push(wex('SUPPORT · 분사구문', 'C0821F', 'leaving many beginners confused.', '뒤 부연(분사구문·관계사) — 약하게'));
+  out.push(B.p('▶ 문두 부사절·전치사구(OLD)와 뒤의 분사구문·「,which」관계사(SUPPORT)는 약하게, 가운데 주절(MAIN)에 힘준다.'));
+  out.push(ppKV('OLD (배경)', '문두 부사절(Although~)·전치사구(In~) → 약하게'));
+  out.push(ppKV('MAIN (주제)', '주절 — 필자가 진짜 하고 싶은 말 → 가장 강하게'));
+  out.push(ppKV('SUPPORT (부연)', '뒤의 분사구문(, -ing/-ed)·관계사(, which) → 약하게'));
+  out.push(B.bullet('OLD 신호: 문두에서 컴마로 끊기는 부사절·전치사구. SUPPORT 신호: 뒤에 붙는 분사구문·「,which」비제한 관계사.'));
   out.push(...ppEx('OLD→NEW', 'Although this is true, it has also become a tired argument.', '양보(OLD)는 약하게 → 주절 ‘진부한 주장’(NEW·핵심)이 하고 싶은 말.'));
   out.push(...ppEx(',관계사', '…rediscovered Mendel’s work, which of course had been there all along.', '「,which」이하는 부연 — 핵심은 ‘세 과학자가 재발견’.'));
   out.push(B.pageBreak());
