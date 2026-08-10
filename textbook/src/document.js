@@ -577,25 +577,38 @@ function passageCoverParagraphs(meta = {}) {
 }
 
 // 목차 + 사용법 페이지(표지 다음)
+const TOC_GUIDE = [
+  ['끊어읽기 원리', '어디서 끊을까 — 5가지 신호'],
+  ['독해 태도', '점수는 태도에서 나온다'],
+  ['완급조절', 'OLD / MAIN / SUPPORT'],
+  ['추론 — 어순·구두점', '모르는 건 추론한다'],
+  ['연결사 지도', 'Switching vs Contrast'],
+  ['재진술', '같은 말을 알아채기'],
+  ['재진술 5변환·함정', '정답이 만들어지는 법'],
+  ['글의 구조', '6가지 글의 틀'],
+  ['필자 입장 신호', '긍정·부정(±) 어휘'],
+  ['논리관계 구문 ①', '인과 · 등호'],
+  ['논리관계 구문 ②', '대조 · 비교'],
+  ['형광펜 신호 사전', '무엇을 읽고 버릴까'],
+];
 function passageTocParagraphs(passages) {
   const TEAL = '14603A'; const GRAM = '5E4C9E';
   const out = [B.h1('목차 · Contents')];
   out.push(B.p('먼저 독해 원리를 익히고 → 지문으로 훈련하는 순서다.', { color: '666666' }));
-  const tocRow = (name, tag, num, color) => new Paragraph({
-    spacing: { after: 40 }, indent: { left: 120 },
-    tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX, leader: LeaderType.DOT }],
+  // 매거진 인덱스 스타일: 큰 번호 + 굵은 제목 + 오른쪽 설명 태그
+  const mgRow = (numText, name, tag, color) => new Paragraph({
+    spacing: { after: 60 }, indent: { left: 100 },
+    tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX }],
     children: [
-      new TextRun({ text: num ? `${num}. ` : '• ', bold: true, size: 21, color, font: S.FONT }),
-      new TextRun({ text: name, bold: true, size: 21, font: S.FONT }),
+      new TextRun({ text: `${numText}   `, bold: true, size: 30, color, font: S.FONT }),
+      new TextRun({ text: name, bold: true, size: 22, font: S.FONT }),
       new TextRun({ text: `\t${tag}`, size: 18, color: '888888', font: S.FONT }),
     ],
   });
-  out.push(new Paragraph({ spacing: { before: 120, after: 40 }, children: [new TextRun({ text: 'STEP 1 · 먼저 익히는 독해 원리', bold: true, size: 22, color: TEAL, font: S.FONT })] }));
-  out.push(tocRow('끊어읽기 원리', '어디서 끊을까 — 5가지 신호', null, TEAL));
-  out.push(tocRow('글의 구조', '6가지 글의 틀', null, TEAL));
-  out.push(tocRow('필자 입장 신호', '긍정·부정 어휘로 태도 읽기', null, TEAL));
-  out.push(new Paragraph({ spacing: { before: 160, after: 40 }, children: [new TextRun({ text: `STEP 2 · 지문으로 훈련 · 지문 ${(passages || []).length}편`, bold: true, size: 22, color: GRAM, font: S.FONT })] }));
-  (passages || []).forEach((p, i) => out.push(tocRow(p.title || `지문 ${i + 1}`, p.source || '지문', i + 1, GRAM)));
+  out.push(new Paragraph({ spacing: { before: 140, after: 60 }, children: [new TextRun({ text: 'STEP 1 — 먼저 익히는 독해 원리', bold: true, size: 22, color: TEAL, font: S.FONT })] }));
+  TOC_GUIDE.forEach(([name, tag], i) => out.push(mgRow(String(i + 1).padStart(2, '0'), name, tag, TEAL)));
+  out.push(new Paragraph({ spacing: { before: 200, after: 60 }, children: [new TextRun({ text: `STEP 2 — 지문으로 훈련 · 지문 ${(passages || []).length}편`, bold: true, size: 22, color: GRAM, font: S.FONT })] }));
+  (passages || []).forEach((p, i) => out.push(mgRow(String(i + 1), p.title || `지문 ${i + 1}`, p.source || '지문', GRAM)));
   // 사용법
   out.push(new Paragraph({
     spacing: { before: 260, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },

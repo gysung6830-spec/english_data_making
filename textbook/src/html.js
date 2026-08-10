@@ -561,7 +561,7 @@ function tocPageHtml(passages, meta = {}) {
   const guideRows = [
     ['✂', '끊어읽기 원리', '어디서 끊을까 — 5가지 신호'],
     ['🎯', '독해 태도', '점수는 태도에서 나온다'],
-    ['🎚️', '완급조절', 'OLD / NEW·MAIN / SUPPORT'],
+    ['🎚️', '완급조절', 'OLD / MAIN / SUPPORT'],
     ['🧩', '추론 — 어순·구두점', '모르는 건 추론한다'],
     ['🔗', '연결사 지도', 'Switching vs Contrast'],
     ['🔁', '재진술', '같은 말을 알아채기'],
@@ -571,22 +571,16 @@ function tocPageHtml(passages, meta = {}) {
     ['➡️', '논리관계 구문 ①', '인과 · 등호'],
     ['⚖️', '논리관계 구문 ②', '대조 · 비교'],
     ['🖍️', '형광펜 신호 사전', '무엇을 읽고 버릴까'],
-  ].map((r) => `<div class="toc-row"><span class="toc-ic">${r[0]}</span><span class="toc-name">${esc(r[1])}</span><span class="toc-dot"></span><span class="toc-tag">${esc(r[2])}</span></div>`).join('');
-  const passRows = (passages || []).map((p, i) => `<div class="toc-row">
-    <span class="toc-num">${i + 1}</span><span class="toc-name">${esc(p.title || `지문 ${i + 1}`)}</span>
-    <span class="toc-dot"></span><span class="toc-tag">${esc(p.source || '지문')}</span></div>`).join('');
+  ].map((r, i) => `<div class="mg-row"><span class="mg-n">${String(i + 1).padStart(2, '0')}</span><span class="mg-name">${esc(r[1])}</span><span class="mg-tag">${esc(r[2])}</span></div>`).join('');
+  const passRows = (passages || []).map((p, i) => `<div class="mg-row alt"><span class="mg-n">${i + 1}</span><span class="mg-name">${esc(p.title || `지문 ${i + 1}`)}</span><span class="mg-tag">${esc(p.source || '지문')}</span></div>`).join('');
   return `<section class="chapter tocpage">
     <div class="chhead"><span class="daypill">${esc(meta.mark || '필생보')}</span><span class="tagpill">이 책 사용법 &amp; 목차</span></div>
     <h1>목차 · Contents</h1>
     <div class="chsub">먼저 독해 원리를 익히고 → 지문으로 훈련하는 순서야</div>
-    <div class="toc-part">
-      <div class="toc-part-h"><span class="tp-step">STEP 1</span> 먼저 익히는 독해 원리</div>
-      ${guideRows}
-    </div>
-    <div class="toc-part">
-      <div class="toc-part-h alt"><span class="tp-step alt">STEP 2</span> 지문으로 훈련 · 지문 ${(passages || []).length}편</div>
-      ${passRows}
-    </div>
+    <div class="mg-step">STEP 1 — 먼저 익히는 독해 원리</div>
+    ${guideRows}
+    <div class="mg-step alt">STEP 2 — 지문으로 훈련 · 지문 ${(passages || []).length}편</div>
+    ${passRows}
     ${useboxHtml(meta)}
   </section>`;
 }
@@ -708,21 +702,15 @@ function css() {
   .cov-arw { color:${C.teal}; font-weight:800; font-size:13px; }
   .cov-src { position:relative; z-index:1; color:${C.sub}; font-size:11.5px; font-style:italic; margin:22px 0 40px; }
   /* ── 목차 페이지 ── */
-  .toc-part { margin:12px 0 16px; }
-  .toc-part-h { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:800; color:${C.ink};
-    padding-bottom:7px; margin-bottom:8px; border-bottom:2px solid ${C.teal}; }
-  .toc-part-h.alt { border-bottom-color:${C.gram}; }
-  .tp-step { font-size:10px; font-weight:800; color:#fff; background:${C.teal}; border-radius:12px; padding:2px 10px; letter-spacing:1px; }
-  .tp-step.alt { background:${C.gram}; }
-  .toc-row { display:flex; align-items:center; gap:9px; padding:7px 6px; }
-  .toc-row + .toc-row { border-top:1px solid #f0f1f2; }
-  .toc-ic { flex:none; width:24px; text-align:center; font-size:14px; }
-  .toc-num { flex:none; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
-    border-radius:7px; background:${C.gramBg}; color:${C.gram}; font-size:11px; font-weight:800; border:1px solid #ddd4f2; }
-  .toc-name { flex:none; font-size:12.5px; font-weight:800; color:${C.ink}; }
-  .toc-dot { flex:1; border-bottom:2px dotted #d6d9dd; margin:0 4px; transform:translateY(-3px); }
-  .toc-tag { flex:none; font-size:10px; font-weight:700; color:${C.sub}; }
-  .tocpage .usebox { margin:18px 0 0; }
+  /* 목차 — 매거진 인덱스(큰 번호) */
+  .mg-step { font-weight:800; font-size:13px; color:${C.teal}; letter-spacing:.5px; margin:16px 0 4px; }
+  .mg-step.alt { color:${C.gram}; margin-top:22px; }
+  .mg-row { display:flex; align-items:baseline; gap:14px; padding:9px 4px; border-bottom:1px solid #eef2ee; }
+  .mg-n { flex:none; width:40px; font-size:22px; font-weight:800; color:${C.teal}; line-height:1; }
+  .mg-row.alt .mg-n { color:${C.gram}; }
+  .mg-name { flex:1; font-size:13.5px; font-weight:800; color:${C.ink}; }
+  .mg-tag { flex:none; font-size:10.5px; font-weight:600; color:${C.sub}; }
+  .tocpage .usebox { margin:20px 0 0; }
   .usebox { position:relative; z-index:1; text-align:left; background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:10px;
     padding:16px 20px; margin:0 40px; }
   .useh { color:${C.tealDark}; font-weight:800; font-size:14px; margin-bottom:8px; }
