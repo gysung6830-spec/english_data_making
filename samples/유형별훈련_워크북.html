@@ -91,9 +91,10 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
   .spread{ display:block; }
   /* 워크북은 유형 표지(1쪽)가 좌우 짝을 깨므로 강제 좌/우 정렬을 쓰지 않는다
      → 표지·문제·해설이 빈 페이지 없이 연달아 흐르도록 break-before:page 만 사용 */
-  .qproblem{ break-before:page; break-inside:avoid; }
-  /* 해설면은 STEP2·STEP3·재진술 3카드 → 한 장을 넘으면 카드 경계에서 자연스럽게 흐르게 */
-  .qsolution{ break-before:page; }
+  /* 한 문항 = 3면 나눔:  ① 문제(+재진술 연결 문제)  ② 훈련(정답 칠)  ③ 해석(직독직해)+재진술 정답 */
+  .qproblem{ break-before:page; break-inside:avoid; }        /* ① 문제면 */
+  .qsolution{ break-before:page; }                            /* ② 훈련(STEP2)면 시작 */
+  .qsolution .card.trans{ break-before:page; }                /* ③ 해석면 시작(STEP3+재진술은 같은 면) */
   .qsolution .card{ break-inside:avoid; }
   .card.solo{ break-inside:avoid; }
 }
