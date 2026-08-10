@@ -32,7 +32,7 @@
       {% if p.source %}<span class="src-chip">📄 {{ p.source }}</span>{% endif %}
     </div>
     <div class="prob-sentence">{{ p.sentence }}</div>
-    <div class="prob-prompt">Q. {{ p.prompt }}</div>
+    <div class="prob-prompt">Q. {{ p.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
     {% if p.kind == 'mc' %}
       {% for opt in p.options %}
       <div class="prob-opt">{{ nums[loop.index0] }} {{ opt }}</div>
@@ -59,10 +59,10 @@
   {% for pr in practice %}
   <div class="dq-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-kind {{ pr.kind }}">{{ '객관식' if pr.kind=='mc' else '주관식' }} {{ pr.no }}</span>
+      <span class="dq-kind {{ pr.kind }}">{{ '객관식' if pr.kind=='mc' else '주관식' }}</span>
       <span class="dq-sent">{{ pr.sentence }}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
     </div>
-    <div class="dq-prompt">Q. {{ pr.prompt }}</div>
+    <div class="dq-prompt">Q. {{ pr.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
     {% if pr.kind == 'mc' %}
       {% for opt in pr.options %}<div class="dq-opt">{{ dnums[loop.index0] }} {{ opt }}</div>{% endfor %}
     {% else %}
@@ -78,7 +78,6 @@
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="sol-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-kind {{ pr.kind }}">{{ '객관식' if pr.kind=='mc' else '주관식' }} {{ pr.no }}</span>
       <span class="dq-sent">{{ pr.sentence }}
         {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ dnums[pr.answer_index] }}</span>{% endif %}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
     </div>
@@ -334,16 +333,6 @@
   <div class="ch-kicker">1부 · 구문해석</div>
   <div class="ch-title">{{ p2.title }}</div>
   <div class="ch-signal">{{ p2.intro }}</div>
-  <div class="roadmap">
-    <div class="rm-title">📚 이 파트의 구성 — {{ p2.groups | length }}갈래 · {{ p2.groups | map(attribute='chapters') | map('length') | sum }}유형</div>
-    {% set r2 = namespace(cn=0) %}
-    {% for g in p2.groups %}
-    <div class="rm-group">1부 {{ ['A','B','C','D'][loop.index0] }} · {{ g.title }}</div>
-    {% for c in g.chapters %}{% set r2.cn = r2.cn + 1 %}
-    <div class="rm-item"><span class="rm-no">1-{{ r2.cn }}</span><span class="rm-t">{{ c.title }}</span></div>
-    {% endfor %}
-    {% endfor %}
-  </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 각 유형은 <b>해석 공식(도식) → 기출 예문 4개(끊어읽기) → 실전적용 문제·해설</b> 순서로 익힌다. 공식으로 '읽는 동작'을 먼저 손에 익히고, 예문에서 그 동작을 확인한 뒤, 문제로 스스로 적용해 본다.</div>
 </section>
 
@@ -446,12 +435,6 @@
     같은 유형의 코드를 모아, 흔한 <b style="color:var(--wrong)">오역</b>과
     <b style="color:var(--right)">올바른 해석 방향</b>을 나란히 익힌다.
   </div>
-  <div class="roadmap">
-    <div class="rm-title">📚 이 파트의 구성 — 7가지 코드 유형</div>
-    {% for c in guide.chapters %}
-    <div class="rm-item"><span class="rm-no">2-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span></div>
-    {% endfor %}
-  </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 각 코드는 <b>오역 ↔ 정답 카드</b>로 '흔한 함정'과 '올바른 방향'을 나란히 본 뒤, 실전적용 문제로 스스로 방향을 잡는다. 코드를 만나면 <b>화살표 방향(원인↔결과, 앞↔뒤)</b>부터 확정하는 습관을 들인다.</div>
 </section>
 
@@ -528,12 +511,6 @@
   <div class="ch-kicker">3부 · 추상 → 구체</div>
   <div class="ch-title">{{ ab.title }}</div>
   <div class="ch-signal">{{ ab.intro }}</div>
-  <div class="roadmap">
-    <div class="rm-title">📚 이 파트의 구성 — 5가지 '구체화의 길'</div>
-    {% for c in ab.chapters %}
-    <div class="rm-item"><span class="rm-no">3-{{ loop.index }}</span><span class="rm-t">{{ c.title }}</span></div>
-    {% endfor %}
-  </div>
   <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 추상 표현을 만나면 당황하지 말고 <b>바로 옆·뒤의 구체화 장치</b>(재진술·예시·대비·비유)를 찾는다. 그 장치가 곧 추상어의 '쉬운 번역'이다. 각 길마다 기출 예문의 끊어읽기로 '구체화되는 지점'을 눈에 익힌다.</div>
 </section>
 
