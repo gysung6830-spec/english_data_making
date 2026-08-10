@@ -342,6 +342,7 @@ function coverHtml(meta = {}) {
   const pillarRow = pillars.length
     ? `<div class="cov-pillars">${pillars.map((t) => `<span class="cov-pill">${esc(t)}</span>`).join('<span class="cov-arw">›</span>')}</div>`
     : '';
+  const showUse = meta.showUse !== false; // 표지에 사용법 노출 여부(지문 모드는 false → 목차 페이지로)
   return `<section class="cover">
     <div class="cov-deco"></div>
     <div class="cov-top"><span class="cov-edition">${esc(edition)}</span></div>
@@ -352,15 +353,46 @@ function coverHtml(meta = {}) {
       ${pillarRow}
     </div>
     <div class="cov-src">${esc(source)}</div>
-    <div class="usebox">
-      <div class="useh">📌 쌤이 알려주는 사용법</div>
-      <p>${esc(meta.useIntro || '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.')}</p>
-      <div class="usesteps">
-        ${(meta.useSteps || ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'])
-    .map((t, i) => `<div class="ustep"><b>${CIRCLED[i]}</b> ${esc(t)}</div>`).join('')}
-      </div>
-      <p class="fine">${meta.useFine || '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.'}</p>
+    ${showUse ? useboxHtml(meta) : ''}
+  </section>`;
+}
+
+// 📌 쌤이 알려주는 사용법 박스(표지 또는 목차 페이지에서 재사용)
+function useboxHtml(meta = {}) {
+  const steps = meta.useSteps || ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'];
+  return `<div class="usebox">
+    <div class="useh">📌 쌤이 알려주는 사용법</div>
+    <p>${esc(meta.useIntro || '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.')}</p>
+    <div class="usesteps">
+      ${steps.map((t, i) => `<div class="ustep"><b>${CIRCLED[i]}</b> ${esc(t)}</div>`).join('')}
     </div>
+    <p class="fine">${meta.useFine || '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.'}</p>
+  </div>`;
+}
+
+// 목차 + 사용법 페이지 (표지 다음). 목차는 STEP 1(원리) / STEP 2(지문)로 구성.
+function tocPageHtml(passages, meta = {}) {
+  const guideRows = [
+    ['✂', '끊어읽기 원리', '어디서 끊을까 — 5가지 신호'],
+    ['🧩', '글의 구조', '6가지 글의 틀'],
+    ['🗣️', '필자 입장 신호', '긍정·부정 어휘로 태도 읽기'],
+  ].map((r) => `<div class="toc-row"><span class="toc-ic">${r[0]}</span><span class="toc-name">${esc(r[1])}</span><span class="toc-dot"></span><span class="toc-tag">${esc(r[2])}</span></div>`).join('');
+  const passRows = (passages || []).map((p, i) => `<div class="toc-row">
+    <span class="toc-num">${i + 1}</span><span class="toc-name">${esc(p.title || `지문 ${i + 1}`)}</span>
+    <span class="toc-dot"></span><span class="toc-tag">${esc(p.source || '지문')}</span></div>`).join('');
+  return `<section class="chapter tocpage">
+    <div class="chhead"><span class="daypill">${esc(meta.mark || '필생보')}</span><span class="tagpill">이 책 사용법 &amp; 목차</span></div>
+    <h1>목차 · Contents</h1>
+    <div class="chsub">먼저 독해 원리를 익히고 → 지문으로 훈련하는 순서야</div>
+    <div class="toc-part">
+      <div class="toc-part-h"><span class="tp-step">STEP 1</span> 먼저 익히는 독해 원리</div>
+      ${guideRows}
+    </div>
+    <div class="toc-part">
+      <div class="toc-part-h alt"><span class="tp-step alt">STEP 2</span> 지문으로 훈련 · 지문 ${(passages || []).length}편</div>
+      ${passRows}
+    </div>
+    ${useboxHtml(meta)}
   </section>`;
 }
 
@@ -480,6 +512,22 @@ function css() {
     border:1px solid ${C.greenLine}; border-radius:20px; padding:4px 14px; }
   .cov-arw { color:${C.teal}; font-weight:800; font-size:13px; }
   .cov-src { position:relative; z-index:1; color:${C.sub}; font-size:11.5px; font-style:italic; margin:22px 0 40px; }
+  /* ── 목차 페이지 ── */
+  .toc-part { margin:12px 0 16px; }
+  .toc-part-h { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:800; color:${C.ink};
+    padding-bottom:7px; margin-bottom:8px; border-bottom:2px solid ${C.teal}; }
+  .toc-part-h.alt { border-bottom-color:${C.gram}; }
+  .tp-step { font-size:10px; font-weight:800; color:#fff; background:${C.teal}; border-radius:12px; padding:2px 10px; letter-spacing:1px; }
+  .tp-step.alt { background:${C.gram}; }
+  .toc-row { display:flex; align-items:center; gap:9px; padding:7px 6px; }
+  .toc-row + .toc-row { border-top:1px solid #f0f1f2; }
+  .toc-ic { flex:none; width:24px; text-align:center; font-size:14px; }
+  .toc-num { flex:none; display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
+    border-radius:7px; background:${C.gramBg}; color:${C.gram}; font-size:11px; font-weight:800; border:1px solid #ddd4f2; }
+  .toc-name { flex:none; font-size:12.5px; font-weight:800; color:${C.ink}; }
+  .toc-dot { flex:1; border-bottom:2px dotted #d6d9dd; margin:0 4px; transform:translateY(-3px); }
+  .toc-tag { flex:none; font-size:10px; font-weight:700; color:${C.sub}; }
+  .tocpage .usebox { margin:18px 0 0; }
   .usebox { position:relative; z-index:1; text-align:left; background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:10px;
     padding:16px 20px; margin:0 40px; }
   .useh { color:${C.tealDark}; font-weight:800; font-size:14px; margin-bottom:8px; }
@@ -773,12 +821,16 @@ function buildHtmlPassages(passages, meta = {}) {
     title: meta.title || '영어 독해',
     source: meta.source || '업로드한 지문 기반 · 자동 생성',
     pillars: meta.pillars || ['소재', '필자 주장', '글 구조', '재진술'],
+    showUse: false, // 사용법은 표지 다음 '목차 페이지'로
+  });
+  const uses = {
+    mark: meta.mark || '필생보',
     useIntro: '지문 한 편을 통째로 이해하는 훈련이야. 순서대로만 따라와.',
     useSteps: ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'],
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
-  });
+  };
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
-    + `<body>${cover}${principlePageHtml()}${structurePageHtml()}${stancePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
+    + `<body>${cover}${tocPageHtml(passages, uses)}${principlePageHtml()}${structurePageHtml()}${stancePageHtml()}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
 
 // 전체 HTML 문서. rawCategories 는 splitWorked 전(worked 2개 초과 허용) 데이터.

@@ -7,6 +7,7 @@
 const {
   Document, Paragraph, TextRun, AlignmentType, ShadingType,
   Table, TableRow, TableCell, WidthType, BorderStyle,
+  TabStopType, TabStopPosition, LeaderType,
 } = require('docx');
 const S = require('./styles');
 const B = require('./boxes');
@@ -434,20 +435,46 @@ function passageCoverParagraphs(meta = {}) {
       new TextRun({ text: '재진술', bold: true, size: 22, color: TEALD, font: S.FONT }),
     ], 120),
     center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, italics: true, color: '888888', font: S.FONT })], 620),
-    new Paragraph({
-      spacing: { before: 200, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },
-      children: [new TextRun({ text: '  📌 이렇게 써', bold: true, size: 22, color: S.NAVY, font: S.FONT })],
-    }),
-    B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 [어휘·팁·이거조심] 보고 해석과 캐치를 직접 써 → ③ 지문 끝 "답지"에서 해석·캐치 맞춰보고 → ④ "이 지문 이 정도는 캐치"로 전체 요지 확인.'),
-    B.bullet('캐치는 매 문장 한 줄로 줄여 쓰는 연습이야 — 누가/무엇이 → 어쨌다만 남기고 곁가지는 버려.'),
-    B.bullet('문법은 문장마다 "구문 포인트"로 콕 짚어 줘 — 목차는 문법이 아니라 지문 순서야.'),
     B.pageBreak(),
   ];
+}
+
+// 목차 + 사용법 페이지(표지 다음)
+function passageTocParagraphs(passages) {
+  const TEAL = '279A52'; const GRAM = '6A57B0';
+  const out = [B.h1('목차 · Contents')];
+  out.push(B.p('먼저 독해 원리를 익히고 → 지문으로 훈련하는 순서다.', { color: '666666' }));
+  const tocRow = (name, tag, num, color) => new Paragraph({
+    spacing: { after: 40 }, indent: { left: 120 },
+    tabStops: [{ type: TabStopType.RIGHT, position: TabStopPosition.MAX, leader: LeaderType.DOT }],
+    children: [
+      new TextRun({ text: num ? `${num}. ` : '• ', bold: true, size: 21, color, font: S.FONT }),
+      new TextRun({ text: name, bold: true, size: 21, font: S.FONT }),
+      new TextRun({ text: `\t${tag}`, size: 18, color: '888888', font: S.FONT }),
+    ],
+  });
+  out.push(new Paragraph({ spacing: { before: 120, after: 40 }, children: [new TextRun({ text: 'STEP 1 · 먼저 익히는 독해 원리', bold: true, size: 22, color: TEAL, font: S.FONT })] }));
+  out.push(tocRow('끊어읽기 원리', '어디서 끊을까 — 5가지 신호', null, TEAL));
+  out.push(tocRow('글의 구조', '6가지 글의 틀', null, TEAL));
+  out.push(tocRow('필자 입장 신호', '긍정·부정 어휘로 태도 읽기', null, TEAL));
+  out.push(new Paragraph({ spacing: { before: 160, after: 40 }, children: [new TextRun({ text: `STEP 2 · 지문으로 훈련 · 지문 ${(passages || []).length}편`, bold: true, size: 22, color: GRAM, font: S.FONT })] }));
+  (passages || []).forEach((p, i) => out.push(tocRow(p.title || `지문 ${i + 1}`, p.source || '지문', i + 1, GRAM)));
+  // 사용법
+  out.push(new Paragraph({
+    spacing: { before: 260, after: 100 }, shading: { type: ShadingType.CLEAR, fill: S.LIGHTGRAY },
+    children: [new TextRun({ text: '  📌 쌤이 알려주는 사용법', bold: true, size: 22, color: S.NAVY, font: S.FONT })],
+  }));
+  out.push(B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 [어휘·팁·이거조심] 보고 해석과 캐치를 직접 써 → ③ 지문 끝 "답지"에서 해석·캐치 맞춰보고 → ④ "이 지문 이 정도는 캐치"로 전체 요지 확인.'));
+  out.push(B.bullet('캐치는 매 문장 한 줄로 줄여 쓰는 연습이야 — 누가/무엇이 → 어쨌다만 남기고 곁가지는 버려.'));
+  out.push(B.bullet('목차는 문법이 아니라 지문 순서야 — 소재·필자 주장·글 구조·재진술을 잡는 게 목표.'));
+  out.push(B.pageBreak());
+  return out;
 }
 
 function buildPassageDocument(passages, meta = {}) {
   const children = [
     ...passageCoverParagraphs(meta),
+    ...passageTocParagraphs(passages),
     ...principlePageParas(),
     ...structureTypesPageParas(),
     ...stanceTypesPageParas(),
