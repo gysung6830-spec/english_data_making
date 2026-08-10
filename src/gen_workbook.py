@@ -241,8 +241,9 @@ def clean_passage(hl, band, insert_en=None):
 
 def derive_block(d):
     steps = ""
+    _CIR = "①②③④⑤⑥⑦⑧⑨⑩"
     for i, s in enumerate(d.get("steps", [])):
-        yb = f'노랑{CIRCLED[i]}' if i < 5 else '노랑'
+        yb = f'노랑{_CIR[i]}' if i < len(_CIR) else '노랑'
         an = f' <span class="an">— {s.get("an","")}</span>' if s.get("an") else ""
         steps += f'<li><span class="yb">{yb}</span>{s.get("ko","")}{an}</li>'
     concl = f'<div class="concl">{d.get("concl","")}</div>' if d.get("concl") else ""
