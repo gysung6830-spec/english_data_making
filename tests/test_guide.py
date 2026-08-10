@@ -80,8 +80,7 @@ def test_render_html():
     assert "관계로 읽기" in html                    # 0부 STEP2 관계 원리
     assert "어휘 유추" in html and "유추의 다섯 단서" in html   # 어휘 유추 별도 목차
     assert "대비로 구체화" in html                 # 추상→구체 신규 패턴
-    assert html.count('class="sv-line"') >= 8      # 모든 정답 카드에 A→B 관계 도식
-    assert "sv-label" in html                     # 관계 도식 라벨
+    assert 'class="sv-line"' not in html          # '관계'(주체→행위) 줄 삭제됨
     assert "sw-basis" not in html                 # '이런 내용' 근거 라인 삭제
     assert "실전적용 해설" in html                 # 목차별 문제→해설
     assert html.count('class="chapter drill-q"') >= 5    # 문제 묶음(목차별 1섹션)
