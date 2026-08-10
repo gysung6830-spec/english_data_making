@@ -334,7 +334,7 @@ function coverHtml(meta = {}) {
   const mark = meta.mark || meta.brand || '';                 // 큰 표제(예: 필생보)
   const expandHtml = meta.expandHtml || '';                   // 마크 풀이(예: 필자의 생각이 보이는)
   const main = meta.title || '영어 독해';                      // 메인 타이틀
-  const source = meta.source || '업로드한 지문 기반 · 자동 생성';
+  const source = meta.source || '';
   const pillars = meta.pillars || ['소재', '필자 주장', '글 구조', '재진술'];
   const heroMark = mark
     ? `<div class="cov-mark">${esc(mark)}</div>${expandHtml ? `<div class="cov-expand">${expandHtml}</div>` : ''}`
@@ -352,7 +352,7 @@ function coverHtml(meta = {}) {
       <div class="cov-rule"></div>
       ${pillarRow}
     </div>
-    <div class="cov-src">${esc(source)}</div>
+    ${source ? `<div class="cov-src">${esc(source)}</div>` : ''}
     ${showUse ? useboxHtml(meta) : ''}
   </section>`;
 }
@@ -819,7 +819,7 @@ function buildHtmlPassages(passages, meta = {}) {
     // 필·생·보 = 필자의 생각이 보이는 (앞 글자를 브랜드색으로 강조)
     expandHtml: meta.expandHtml || '<b class="cov-hl">필</b>자의 <b class="cov-hl">생</b>각이 <b class="cov-hl">보</b>이는',
     title: meta.title || '영어 독해',
-    source: meta.source || '업로드한 지문 기반 · 자동 생성',
+    source: meta.source || '',
     pillars: meta.pillars || ['소재', '필자 주장', '글 구조', '재진술'],
     showUse: false, // 사용법은 표지 다음 '목차 페이지'로
   });

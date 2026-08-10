@@ -434,7 +434,6 @@ function passageCoverParagraphs(meta = {}) {
       new TextRun({ text: '  ›  ', bold: true, size: 22, color: TEAL, font: S.FONT }),
       new TextRun({ text: '재진술', bold: true, size: 22, color: TEALD, font: S.FONT }),
     ], 120),
-    center([new TextRun({ text: '업로드한 지문 기반 · 자동 생성', size: 18, italics: true, color: '888888', font: S.FONT })], 620),
     B.pageBreak(),
   ];
 }
@@ -466,7 +465,7 @@ function passageTocParagraphs(passages) {
   }));
   out.push(B.bullet('지문마다: ① 통째로 쭉 읽고 → ② 한 문장씩 [어휘·팁·이거조심] 보고 해석과 캐치를 직접 써 → ③ 지문 끝 "답지"에서 해석·캐치 맞춰보고 → ④ "이 지문 이 정도는 캐치"로 전체 요지 확인.'));
   out.push(B.bullet('캐치는 매 문장 한 줄로 줄여 쓰는 연습이야 — 누가/무엇이 → 어쨌다만 남기고 곁가지는 버려.'));
-  out.push(B.bullet('목차는 문법이 아니라 지문 순서야 — 소재·필자 주장·글 구조·재진술을 잡는 게 목표.'));
+  out.push(B.bullet('목표는 하나 — 소재·필자 주장·글 구조·재진술을 잡아 한 지문을 통째로 읽어내는 거야.'));
   out.push(B.pageBreak());
   return out;
 }
