@@ -36,8 +36,15 @@ def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path,
     mode = cfg.extraction.pdf_mode
 
     def _text_extract(require: bool):
-        # 모의고사 문항 지정(focus_items)이 있으면 2단 시험지로 보고 칼럼 순서로 읽는다.
-        raw = extract.extract_passage_text(src, two_column=bool(focus_items))
+        if focus_items:
+            # 모의고사: 2단 추출 → 듣기 제거 → 문항별 분할·라벨.
+            #   (문항 번호를 정확히 매기려면 clean_text 가 'NN.'을 떼기 전에 분할해야 함)
+            raw = extract.segment_exam_questions(
+                extract.strip_listening(extract.extract_raw_text(src, two_column=True)),
+                focus_items,
+            )
+        else:
+            raw = extract.extract_passage_text(src)
         if extract.looks_empty(raw):
             if require:
                 raise ValueError(

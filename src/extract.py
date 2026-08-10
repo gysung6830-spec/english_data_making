@@ -98,6 +98,59 @@ _LISTENING_END = re.compile(
 )
 
 
+# 문항 번호 마커(줄 시작 'NN.') — 독해 영역 18~45번
+_Q_MARK = re.compile(r"(?:^|\n)\s*(\d{2})\.\s")
+
+
+def parse_ranges(spec: str) -> list[tuple[int, int]]:
+    """'18-24,29-43' → [(18,24),(29,43)]. 단일 번호 '18' → (18,18)."""
+    out: list[tuple[int, int]] = []
+    for part in re.split(r"[,\s]+", (spec or "").strip()):
+        if not part:
+            continue
+        m = re.match(r"(\d+)\s*[-~]\s*(\d+)$", part)
+        if m:
+            a, b = int(m.group(1)), int(m.group(2))
+            out.append((min(a, b), max(a, b)))
+        elif part.isdigit():
+            out.append((int(part), int(part)))
+    return out
+
+
+def _in_ranges(n: int, ranges: list[tuple[int, int]]) -> bool:
+    return any(lo <= n <= hi for lo, hi in ranges)
+
+
+def segment_exam_questions(text: str, focus_items: str) -> str:
+    """듣기 제거된 독해 텍스트를 '문항 번호'로 잘라, 요청한 번호의 블록만 남겨
+    각 블록에 '===== [문항 N] =====' 라벨을 붙여 돌려준다.
+
+    이렇게 하면 모델이 지문↔문항 번호를 헷갈리지 않고 item_no 를 정확히 매길 수 있다.
+    focus_items 가 비었거나 마커를 못 찾으면 원문을 그대로 반환(폴백).
+    """
+    ranges = parse_ranges(focus_items)
+    if not ranges:
+        return text
+    marks = [(int(m.group(1)), m.start()) for m in _Q_MARK.finditer(text)
+             if 18 <= int(m.group(1)) <= 45]
+    if not marks:
+        return text
+    # 위치순으로 보되, '번호가 증가하는' 정상 시퀀스만 채택(지문 속 우연한 'NN.' 배제)
+    marks.sort(key=lambda x: x[1])
+    seq: list[tuple[int, int]] = []
+    last = 0
+    for n, s in marks:
+        if n > last:
+            seq.append((n, s))
+            last = n
+    kept: list[str] = []
+    for i, (n, s) in enumerate(seq):
+        end = seq[i + 1][1] if i + 1 < len(seq) else len(text)
+        if _in_ranges(n, ranges):
+            kept.append(f"===== [문항 {n}] =====\n{text[s:end].strip()}")
+    return "\n\n".join(kept) if kept else text
+
+
 def strip_listening(text: str) -> str:
     """모의고사면 듣기(1~17) 안내 문구를 찾아 그 앞부분을 잘라내고 독해 영역만 남긴다.
 
