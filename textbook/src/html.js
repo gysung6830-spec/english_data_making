@@ -271,8 +271,15 @@ function attitudePageHtml() {
     + '<div class="pcatch"><span class="pcatch-h">✅ 주제 문제의 정답 원리</span> 키워드는 반드시 선지에 담긴다 — 같은 용어를 쓰지 않더라도. (단, 가장 많이 쓰인 단어가 곧 답인 건 아님)</div>');
 }
 
-// P2 · 완급조절
+// P2 · 완급조절 — 예시 단락을 OLD/MAIN/SUPPORT 로 직접 나눠 보여준다
 function pacePageHtml() {
+  const worked = `<div class="wex">
+    <div class="wex-h">📖 예시로 나눠보기 — 이 단락을 강·약으로 읽어봐</div>
+    <div class="wex-row old"><span class="wex-tag old">OLD · 약하게</span><span class="wex-s"><b>①</b> Many people assume that natural talent decides success.</span><span class="wex-k">통념(배경) “음~ 그렇구나”, 흘려 읽기</span></div>
+    <div class="wex-row main"><span class="wex-tag main">MAIN · 강하게</span><span class="wex-s"><b>②</b> <u>However</u>, what truly matters is steady, deliberate practice.</span><span class="wex-k">However 뒤 = 필자의 진짜 주장(핵심)</span></div>
+    <div class="wex-row sup"><span class="wex-tag sup">SUPPORT · 약하게</span><span class="wex-s"><b>③</b> <u>For instance</u>, top musicians simply practiced more.</span><span class="wex-k">예시 = 주제를 뒷받침·확인만</span></div>
+    <div class="wex-note">▶ <b>①</b> 통념은 흘려 읽고, <b>②</b> However 뒤 주제에 힘주고, <b>③</b> 예시는 ②를 확인만 — 이렇게 강·약을 나누는 게 완급조절이야.</div>
+  </div>`;
   const flow = `<div class="flow3">
     <div class="fl old"><div class="fl-h">OLD (배경·통념)</div><div class="fl-b">도입부 · 마이너스<br><b>약하게</b> “음~ 그렇구나”</div></div>
     <div class="fl-arw">→</div>
@@ -280,14 +287,12 @@ function pacePageHtml() {
     <div class="fl-arw">→</div>
     <div class="fl sup"><div class="fl-h">SUPPORT (부연)</div><div class="fl-b">예시 · 상술<br>선명하면 <b>약하게</b></div></div>
   </div>`;
-  return ppage('독해의 원리 ②', '완급조절', '완급조절 — OLD / NEW·MAIN / SUPPORT',
+  return ppage('독해의 원리 ②', '완급조절', '완급조절 — OLD / MAIN / SUPPORT로 나눠 읽기',
     '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 한 단락엔 주제가 하나뿐',
-    '강·약을 조절하는 <b>능동적 독해</b>를 하자. 완급 없이 직독직해만 하면 남는 정보가 없어.',
-    flow
+    '강·약을 조절하는 <b>능동적 독해</b>를 하자. 아래 예시처럼 세 역할로 나눠 읽어봐.',
+    worked + flow
     + pcard('🔎', 'OLD를 알아채는 신호 — 컴마(,)가 붙은 앞자리', '<div class="cut-rule">문두에서 컴마로 끊기는 <b>부사절·분사구문·전치사구</b>가 흔히 배경(OLD) 신호. (컴마가 없으면 주절 핵심 정보일 때가 많다.)</div>'
-      + pex('OLD→NEW', 'Although this is true, it has also become a tired argument.', '‘맞는 말이다’(양보·OLD)를 약하게 → 주절 ‘진부한 주장’(NEW·핵심)이 진짜 하고 싶은 말.'), 'neg')
-    + pcard('✅', 'SUPPORT — 선명함으로 완급을 정한다', '<div class="cut-rule">MAIN이 이해됨(선명↑) → SUPPORT는 <b>약하게</b> 대충(확인만). 이해 안 됨(선명↓) → SUPPORT를 <b>강하게</b> 천천히. (단 MAIN·SUPPORT가 충돌하면 안 됨)</div>'
-      + pex(',관계사', '…rediscovered Mendel’s work, which of course had been there all along.', '「,which」이하는 부연(비제한) — 핵심은 ‘세 과학자가 멘델의 연구를 재발견’.'), 'pos'));
+      + pex('OLD→MAIN', 'Although this is true, it has also become a tired argument.', '양보(OLD)를 약하게 → 주절 ‘진부한 주장’(MAIN)이 진짜 하고 싶은 말.'), 'neg'));
 }
 
 // P3 · 추론(어순·구두점)
@@ -745,40 +750,52 @@ function css() {
   .cut-trig { color:${C.tealDark}; font-size:10.5px; font-weight:700; background:${C.mint};
     border:1px solid ${C.greenLine}; border-radius:10px; padding:1px 9px; }
   .cut-rule { font-size:11px; color:#333; }
-  .cut-ex { font-size:10px; color:${C.sub}; margin-top:2px; }
+  .cut-ex { font-size:10.8px; line-height:1.5; color:${C.sub}; margin-top:2px; }
   .cutcard.gram { border-left-color:${C.gram}; background:${C.gramBg}; }
   .cut-n.gram { background:${C.gram}; }
   .cutcard.pos { border-left-color:${C.teal}; background:${C.mint}; }
   .cutcard.neg { border-left-color:${C.key}; background:${C.keyBg}; }
   .cut-n.pos { background:${C.teal}; } .cut-n.neg { background:${C.key}; } .cut-n.neu { background:${C.sub}; }
-  /* 독해 원리(PART0) 페이지 공용 */
-  .ptable { border:1px solid ${C.line}; margin:9px 0; font-size:10.5px; }
-  .ptable th { background:${C.teal}; color:#fff; text-align:left; padding:5px 9px; font-weight:800; font-size:10.5px; }
-  .ptable td { padding:5px 9px; border-top:1px solid ${C.line}; vertical-align:top; line-height:1.55; }
+  /* 독해 원리(PART0) 페이지 공용 — 가독성 위주(넉넉한 글자·여백) */
+  .ptable { border:1px solid ${C.line}; margin:11px 0; font-size:11.5px; border-radius:6px; overflow:hidden; }
+  .ptable th { background:${C.teal}; color:#fff; text-align:left; padding:7px 11px; font-weight:800; font-size:11.5px; }
+  .ptable td { padding:8px 11px; border-top:1px solid ${C.line}; vertical-align:top; line-height:1.7; }
   .ptable td.k { font-weight:800; color:${C.ink}; white-space:nowrap; width:1%; }
   .ptable tr:nth-child(even) td { background:${C.zebra}; }
-  .pex { background:#fff; border:1px solid ${C.line}; border-left:3px solid ${C.teal}; border-radius:5px; padding:6px 10px; margin:5px 0 2px; }
-  .pex-lab { font-size:9px; font-weight:800; color:#fff; background:${C.tealDark}; border-radius:8px; padding:1px 7px; margin-right:6px; }
-  .pex-en { font-size:11px; font-weight:700; font-style:italic; color:#222; }
-  .pex-note { font-size:10px; color:#555; margin-top:3px; }
-  .flow3 { display:flex; align-items:stretch; gap:6px; margin:12px 0; }
-  .fl { flex:1; border-radius:8px; padding:9px 11px; text-align:center; }
-  .fl .fl-h { font-weight:800; font-size:11.5px; margin-bottom:4px; }
-  .fl .fl-b { font-size:10.3px; line-height:1.5; }
+  .pex { background:#fff; border:1px solid ${C.line}; border-left:4px solid ${C.teal}; border-radius:6px; padding:9px 12px; margin:8px 0 3px; }
+  .pex-lab { font-size:10px; font-weight:800; color:#fff; background:${C.tealDark}; border-radius:9px; padding:2px 9px; margin-right:7px; }
+  .pex-en { font-size:12.5px; font-weight:700; font-style:italic; color:#222; }
+  .pex-note { font-size:11px; color:#555; margin-top:5px; line-height:1.6; }
+  .flow3 { display:flex; align-items:stretch; gap:8px; margin:14px 0; }
+  .fl { flex:1; border-radius:9px; padding:12px 13px; text-align:center; }
+  .fl .fl-h { font-weight:800; font-size:13px; margin-bottom:6px; }
+  .fl .fl-b { font-size:11.3px; line-height:1.6; }
   .fl.old { background:#f4f5f6; border:1px solid #d6d8dc; } .fl.old .fl-h { color:${C.sub}; }
   .fl.new { background:${C.mint}; border:1px solid ${C.greenLine}; } .fl.new .fl-h { color:${C.tealDark}; }
   .fl.sup { background:${C.plusBg}; border:1px solid ${C.trapLine}; } .fl.sup .fl-h { color:${C.plus}; }
-  .fl-arw { align-self:center; color:${C.teal}; font-weight:800; font-size:16px; }
-  .flipbox { background:${C.trapBg}; border:1px solid ${C.trapLine}; border-left:5px solid ${C.trapBar}; border-radius:8px; padding:10px 13px; margin:11px 0 4px; }
-  .flip-h { font-weight:800; font-size:12px; color:${C.trapBar}; margin-bottom:6px; }
-  .flip-row { font-size:10.5px; line-height:1.7; margin:3px 0; } .flip-row b { color:${C.ink}; }
+  .fl-arw { align-self:center; color:${C.teal}; font-weight:800; font-size:18px; }
+  /* 완급조절 워크드 예시 — 문장별 OLD/MAIN/SUPPORT 분해 */
+  .wex { border:1px solid ${C.greenLine}; border-radius:10px; padding:4px 0 10px; margin:12px 0; overflow:hidden; }
+  .wex-h { background:${C.teal}; color:#fff; font-weight:800; font-size:12.5px; padding:8px 14px; margin-bottom:8px; }
+  .wex-row { display:flex; align-items:center; gap:11px; padding:8px 14px; }
+  .wex-row + .wex-row { border-top:1px solid #eef1ee; }
+  .wex-row.old { background:#f6f7f8; } .wex-row.main { background:${C.mint}; } .wex-row.sup { background:${C.plusBg}; }
+  .wex-tag { flex:none; width:96px; text-align:center; font-size:10px; font-weight:800; color:#fff; border-radius:11px; padding:3px 0; }
+  .wex-tag.old { background:${C.sub}; } .wex-tag.main { background:${C.teal}; } .wex-tag.sup { background:${C.plus}; }
+  .wex-s { flex:1; font-size:12.5px; color:#1a1a1a; line-height:1.5; }
+  .wex-s u { text-decoration-color:${C.key}; text-underline-offset:2px; font-weight:800; }
+  .wex-k { flex:none; width:190px; font-size:10px; color:#555; line-height:1.45; }
+  .wex-note { font-size:11px; color:#444; padding:8px 14px 0; line-height:1.6; }
+  .flipbox { background:${C.trapBg}; border:1px solid ${C.trapLine}; border-left:5px solid ${C.trapBar}; border-radius:8px; padding:11px 14px; margin:12px 0 4px; }
+  .flip-h { font-weight:800; font-size:12.5px; color:${C.trapBar}; margin-bottom:7px; }
+  .flip-row { font-size:11.3px; line-height:1.85; margin:4px 0; } .flip-row b { color:${C.ink}; }
   .flip-row .pp { color:${C.teal}; } .flip-row .nn { color:${C.key}; }
-  .hs-grid { display:flex; flex-direction:column; gap:5px; margin:10px 0; }
-  .hs-row { display:grid; grid-template-columns:96px 1fr 150px; gap:9px; align-items:baseline;
-    background:#fff; border:1px solid ${C.line}; border-left:4px solid ${C.plus}; border-radius:6px; padding:6px 10px; }
-  .hs-h { font-weight:800; font-size:11px; color:${C.ink}; }
-  .hs-w { font-size:10px; font-weight:600; color:#333; line-height:1.55; }
-  .hs-m { font-size:9.8px; font-weight:700; color:${C.tealDark}; }
+  .hs-grid { display:flex; flex-direction:column; gap:6px; margin:11px 0; }
+  .hs-row { display:grid; grid-template-columns:104px 1fr 154px; gap:11px; align-items:baseline;
+    background:#fff; border:1px solid ${C.line}; border-left:4px solid ${C.plus}; border-radius:7px; padding:8px 12px; }
+  .hs-h { font-weight:800; font-size:11.8px; color:${C.ink}; }
+  .hs-w { font-size:10.8px; font-weight:600; color:#333; line-height:1.65; }
+  .hs-m { font-size:10.5px; font-weight:700; color:${C.tealDark}; line-height:1.4; }
   /* 필자 입장 신호어 — 칩(태그) 그리드. 칩 글씨는 검은색, 카테고리는 테두리색으로 구분 */
   .b-block { border-radius:10px; padding:0 0 10px; margin:11px 0; overflow:hidden; }
   .b-block.pos { background:#F3FAF4; border:1px solid ${C.greenLine}; }
@@ -790,9 +807,9 @@ function css() {
   .b-block.neu .b-head { background:${C.sub}; }
   .b-note { font-size:10.3px; color:#555; padding:0 13px 6px; }
   .chgrp { display:flex; gap:9px; padding:4px 13px; align-items:baseline; }
-  .chgrp-lab { flex:none; width:82px; font-weight:800; font-size:9.8px; color:#444; padding-top:3px; }
+  .chgrp-lab { flex:none; width:82px; font-weight:800; font-size:10.5px; color:#444; padding-top:3px; }
   .chips { flex:1; display:flex; flex-wrap:wrap; gap:4px; }
-  .chip { font-size:9.8px; font-weight:700; color:${C.ink}; background:#fff; border-radius:11px; padding:2px 9px; }
+  .chip { font-size:10.6px; font-weight:700; color:${C.ink}; background:#fff; border-radius:11px; padding:3px 10px; }
   .chip.pos { border:1px solid #9fd3ac; }
   .chip.neg { border:1px solid #eeb98f; }
   .chip.neu { border:1px solid #cfd3d8; }
