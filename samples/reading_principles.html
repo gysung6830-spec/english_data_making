@@ -93,7 +93,7 @@ table.pol tr:nth-child(even) td{ background:#f7faf9; }
 .flip .fh{ font-size:11px; font-weight:800; color:#a8641a; margin-bottom:4px; }
 .flip .fw{ font-family:'NanumSquareRound',sans-serif; color:#7a4a12; font-weight:700; }
 /* 논리 관계 구문 사전 */
-.relhead{ display:flex; align-items:center; gap:8px; margin:15px 0 7px; }
+.relhead{ display:flex; align-items:center; gap:8px; margin:20px 0 10px; }
 .relhead:first-of-type{ margin-top:0; }
 .rsym{ font-size:15px; font-weight:800; color:#fff; width:26px; height:26px; line-height:26px; text-align:center; border-radius:7px; flex:none; }
 .rsym.cause{ background:var(--ink); } .rsym.eq{ background:var(--ref); } .rsym.contr{ background:var(--conj); } .rsym.comp{ background:#b8860b; }
@@ -107,8 +107,8 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
 .rellink{ font-size:9.5px; color:#6e5316; background:#fffdf3; border:1px solid var(--must-line); border-radius:7px; padding:5px 10px; margin-bottom:12px; }
 .rellink b{ color:#8a5a1a; }
 /* 어휘 칩(가독성) — 쉼표 뭉치 대신 낱개 알약으로 */
-.wl{ display:flex; flex-wrap:wrap; gap:4px 5px; }
-.wl .c{ font-family:'NanumSquareRound',sans-serif; font-size:10px; line-height:1.4; padding:1.5px 8px; border-radius:10px; border:1px solid; white-space:nowrap; }
+.wl{ display:flex; flex-wrap:wrap; gap:7px 8px; }
+.wl .c{ font-family:'NanumSquareRound',sans-serif; font-size:10px; line-height:1.4; padding:3px 10px; border-radius:11px; border:1px solid; white-space:nowrap; }
 .wl .c b{ font-weight:800; }
 .wl.pos .c{ color:#24614a; background:#eef6f2; border-color:#b6d8c7; }
 .wl.pos .c b{ color:#12543d; }
@@ -116,25 +116,25 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
 .wl.neg .c b{ color:#8a2f27; }
 .wl.rel .c{ color:#33414d; background:#f2f6f4; border-color:#d3ddd7; }
 .wl.rel .c b{ color:#12543d; }
-table.pol td, table.rel td{ padding:6px 9px; }
+table.pol td, table.rel td{ padding:9px 10px; }
 /* 인과 — 원인/결과가 드러나는 구문 카드 */
 .cau,.eff{ font-weight:800; color:#fff; border-radius:5px; padding:0 5px; }
 .cau{ background:var(--ink); } .eff{ background:#c98a1a; }
 .cxlegend{ font-size:10px; color:#4a5560; margin-bottom:9px; }
 .cxlegend .cau,.cxlegend .eff{ margin:0 2px; }
-.cxlane{ margin-bottom:10px; }
-.cxlane .lh{ font-size:11.5px; font-weight:800; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+.cxlane{ margin-bottom:16px; }
+.cxlane .lh{ font-size:11.5px; font-weight:800; margin-bottom:9px; display:flex; align-items:center; gap:5px; }
 .cxlane.fw .lh{ color:var(--ink-d); } .cxlane.bw .lh{ color:#8a5a1a; }
 .cxlane .lh .ar{ color:#9bb4cc; font-weight:900; }
-.czs{ display:flex; flex-wrap:wrap; gap:5px 6px; }
-.cz{ display:inline-flex; align-items:center; gap:3px; font-family:'NanumSquareRound',sans-serif; font-size:10px; background:#fff; border:1px solid #dbe4df; border-radius:9px; padding:2px 7px; }
+.czs{ display:flex; flex-wrap:wrap; gap:8px 9px; }
+.cz{ display:inline-flex; align-items:center; gap:4px; font-family:'NanumSquareRound',sans-serif; font-size:10.5px; background:#fff; border:1px solid #dbe4df; border-radius:10px; padding:3px 10px; }
 .cz .vb{ color:#33414d; }
 .cxnote{ font-size:9.5px; color:#5a636c; margin-top:3px; } .cxnote b{ color:var(--ink-d); }
 /* 대조·비교 — 기호(A>B·A<B·A↔B·A⇒B)로 잡는다 */
-.symlane{ margin-bottom:9px; }
-.symlane .sh{ display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+.symlane{ margin-bottom:16px; }
+.symlane .sh{ display:flex; align-items:center; gap:8px; margin-bottom:9px; }
 .symb{ font-weight:800; color:#fff; border-radius:6px; padding:2px 10px; font-size:13px; flex:none; }
-.symb.gt{ background:#b8860b; } .symb.lt{ background:#7a6a3a; } .symb.ct{ background:var(--conj); } .symb.rp{ background:var(--ref); } .symb.fc{ background:var(--ink-d); }
+.symb.gt{ background:#b8860b; } .symb.lt{ background:#7a6a3a; } .symb.ct{ background:var(--conj); } .symb.rp{ background:var(--ref); } .symb.fc{ background:var(--ink-d); } .symb.eq{ background:var(--ref); }
 .symlane .sd{ font-size:10.5px; color:#5a636c; font-weight:700; }
 .cz .tk{ font-weight:800; color:#33414d; background:#eaeeeb; border-radius:5px; padding:0 5px; }
 .cz .drop{ font-weight:800; color:#9aa0a6; background:#f0f1f3; border-radius:5px; padding:0 5px; text-decoration:line-through; }
@@ -501,13 +501,9 @@ table.pol td, table.rel td{ padding:6px 9px; }
   <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>인과(therefore·thus)</b> · 글의 구조 <b>③문제→해결·⑥예시→일반화</b>. 인과 구문이 보이면 <b>‘결과=필자 결론(＋)’</b>에 형광펜.</div>
 
   <div class="relhead"><span class="rsym eq">=</span><span class="rt">등호·정의 — A = B (같다·라 부른다·상징한다)</span></div>
-  <table class="rel">
-    <tr><td class="grp">정의·명명</td><td class="w"><div class="wl rel"><span class="c">A is B</span><span class="c">be called</span><span class="c">be termed</span><span class="c">define A as B</span><span class="c">refer to A as B</span></div></td></tr>
-    <tr><td class="grp">상징·반영</td><td class="w"><div class="wl rel"><span class="c">reflect</span><span class="c">mirror</span><span class="c">represent</span><span class="c">embody</span><span class="c">illustrate</span><span class="c">exemplify</span></div></td></tr>
-    <tr><td class="grp">간주·여김</td><td class="w"><div class="wl rel"><span class="c">regard/see/view/treat A as B</span><span class="c">recognize A as B</span><span class="c">describe A as B</span></div></td></tr>
-    <tr><td class="grp">동일시·상응</td><td class="w"><div class="wl rel"><span class="c">identify A with</span><span class="c">be equivalent to</span><span class="c">amount to</span><span class="c">equation of A with B</span></div></td></tr>
-    <tr><td class="grp">재진술·예시</td><td class="w"><div class="wl rel"><span class="c">that is</span><span class="c">i.e.</span><span class="c">in short</span><span class="c">in this light / such as</span><span class="c">like</span><span class="c">including</span><span class="c">e.g.</span></div></td></tr>
-  </table>
+  <div class="symlane"><div class="sd" style="margin-bottom:9px">A를 B라 하거나 <b>A=B</b>로 놓는다 — 정의·명명·상징·간주·동일시</div>
+    <div class="czs"><span class="cz"><span class="tk">A</span><span class="vb">is</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">be called</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">be termed</span><span class="tk">B</span></span><span class="cz"><span class="vb">define</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">refer to</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">reflect</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">mirror</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">represent</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">embody</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">illustrate</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">exemplify</span><span class="tk">B</span></span><span class="cz"><span class="vb">regard</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">see</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">view</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">treat</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">recognize</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">describe</span><span class="tk">A</span><span class="vb">as</span><span class="tk">B</span></span><span class="cz"><span class="vb">identify</span><span class="tk">A</span><span class="vb">with</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">be equivalent to</span><span class="tk">B</span></span><span class="cz"><span class="tk">A</span><span class="vb">amount to</span><span class="tk">B</span></span></div></div>
+  <div class="cxnote"><b>A=B를 여는 신호</b> — that is · i.e. · in short &nbsp;/&nbsp; such as · like · including · e.g. (재진술·예시)</div>
   <div class="rellink">🔗 <b>연계</b> — 추론 페이지의 <b>BE동사 정의(A=B)·콜론(:)</b> · <b>재진술(A=A′)</b>. ‘A=B’가 보이면 <b>한쪽만 이해</b>하면 나머지는 약하게.</div>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
 </section>
