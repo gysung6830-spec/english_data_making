@@ -16,6 +16,9 @@ contrast:
   act: 널리 쓰이다 is widely used ↔ 종종 무시되다 is often ignored
   cut: 이 정의가 연구에서 널리 쓰이지만 / 창의성의 중요한 한 측면은 / 종종 간과된다 / 창의적 아이디어를 만들어 내는 것은 / 좀처럼 최종
     목표가 아니다
+  cut_en: 'While this definition is widely used in research, / an important aspect of
+    creativity / is often ignored: / Generating creative ideas / rarely is the final
+    goal.'
 - code: Although
   code_ko: 비록 ~이지만(양보/대조)
   dir: ''
@@ -30,6 +33,8 @@ contrast:
   subj: 과학자들 scientists
   act: 훈련받다 are trained ↔ 배우지 못하다 are not formally instructed
   cut: 과학자들은 훈련받지만 / 자기 분야의 실질적 내용에서 / 그들은 공식적으로 배우지 않는다 / '좋은 과학자가 되는 법'을
+  cut_en: Although scientists are trained / in the substantive content of their discipline,
+    / they are not formally instructed / in how ' to be a good scientist'.
 comparison:
 - code: rather than
   code_ko: ~가 아니라/~보다는(비교·선호)
@@ -44,6 +49,7 @@ comparison:
   subj: 로봇 the robot
   act: 쫓다 chase (자기 자신 itself, 블록 아님 not the blocks)
   cut: 그렇지 않으면 / 로봇은 끝없이 쫓을지도 모른다 / 자기 자신을 / 블록이 아니라
+  cut_en: If not, / the robot might endlessly chase / itself / rather than the blocks.
 connective:
 - code: Instead
   code_ko: 그 대신에(앞 내용을 부정하고 전환)
@@ -62,6 +68,9 @@ connective:
   act: 이해를 얻다 gains understanding (흡수·사회화 by absorption—socialization)
   cut: 그 대신 / 어린아이가 '얌전히' 노는 법을 배우는 것처럼 / 견습 과학자는 이해를 얻는다 / 그 역할에 내재된 도덕적 가치에 대한 /
     동료로부터의 흡수, 즉 사회화를 통해
+  cut_en: Instead, / much like the young child learning how to play ' nicely', / the
+    apprentice scientist gains his or her understanding / of the moral values inherent
+    in the role / by absorption from their colleagues—socialization.
 - code: Accordingly
   code_ko: 그에 따라서(앞 내용의 결과)
   dir: ''
@@ -79,6 +88,9 @@ connective:
   act: 설립했다 have set up (시장조사 부서·제품개발 팀 departments, groups)
   cut: 그에 따라 / 제조업체들은 설립했다 / 사용자의 필요를 조사할 시장조사 부서 / 표적 시장에서 / 적합한 제품을 구상할 제품개발 팀 /
     그 필요를 충족할 / 등등을
+  cut_en: Accordingly, / manufacturers have set up / market‑research departments to
+    explore the needs of users / in the target market, / product‑development groups
+    to think up suitable products / to address those needs, / and so forth.
 - code: Thus
   code_ko: 따라서(결론·귀결)
   dir: ''
@@ -96,6 +108,9 @@ connective:
   act: 상기시키다 reminds (관람자·독자에게 the viewer or reader)
   cut: 따라서 / 작품이 덜 '읽기 쉬울'(또는 쉽게 해석되지 않을) 때 / 관습적 형식에서 벗어난 그 점이 / 관람자나 독자에게 상기시킨다
     / '미적 태도'가 필요함을 / 전체를 감상하려면
+  cut_en: Thus, / when the work is less "readable" (or easily interpreted), / '( its
+    departure from conventional forms / reminds the viewer ) or reader / that an "aesthetic
+    attitude" is needed / to appreciate the whole episode.
 polarity_positive:
 - code: significant
   code_ko: 유의미한/상당한(강조)
@@ -113,6 +128,9 @@ polarity_positive:
   act: 유의미하게 더 나은 예측을 한다 (make better significant predictions)
   cut: 여러 다른 분야에 걸친 연구들에서 / 전체 사례의 절반은 보여준다 / 단순 공식이 유의미하게 더 나은 예측을 함을 / 인간 전문가보다
     / 그리고 나머지는 / 아주 소수를 제외하고 / 둘 사이의 무승부를 보여준다
+  cut_en: In over studies across many different domains, / half of all cases show /
+    simple formulas make better significant predictions / than human experts, / and
+    the remainder / (except ( ) a very small handful), / show a tie between the two.
 - code: highly
   code_ko: 매우/고도로(강조)
   dir: ''
@@ -129,6 +147,9 @@ polarity_positive:
   act: 일상 닮은 소재에 있다 (is on subject matter resembling everyday life)
   cut: 매우 재현적인 그림·연극·이야기에서는 / 초점은 소재에 있다 / 일상생활을 닮은 / 그리고 배경 양식의 역할은 / 심적 모형의 구성을
     촉진하는 것이다
+  cut_en: In highly representational paintings, plays, or stories, / the focus is on
+    subject matter / that resembles everyday life / and the role of background style
+    / is to facilitate the construction of mental models.
 polarity_negative:
 - code: Lack of
   code_ko: ~의 부족/결여(부정)
@@ -146,6 +167,9 @@ polarity_negative:
   act: 건강 문제와 연결되어 왔다 (has been linked to unhealthy conditions)
   cut: 충분한 신체 활동의 부족이 / 이제 ~와 연결되어 왔다 / 적어도 건강하지 못한 상태들과 / 그것들의 거의 전부는 만성질환이거나 / 만성질환의
     위험 요인으로 여겨진다
+  cut_en: Lack of sufficient physical activity / has now been linked to / at least
+    unhealthy conditions, / almost all of which are chronic diseases / or considered
+    risk factors for chronic diseases.
 - code: not all
   code_ko: 모두 ~인 것은 아니다(부분 부정)
   dir: ''
@@ -162,3 +186,6 @@ polarity_negative:
   act: 전부 그런 환경에서 생겨난 것은 아니다 (have not all originated)
   cut: 부적합함의 일부는 생겨난다 / 생물의 현재 속성들이 / 모두 다 생겨난 것은 아니기 때문에 / 모든 면에서 유사한 환경에서 / 그것이
     지금 사는 환경과
+  cut_en: ''' Part of the lack of fit arises / because the present properties of an
+    organism / have not all originated / in an environment similar in every respect
+    / to the one in which it now lives.'

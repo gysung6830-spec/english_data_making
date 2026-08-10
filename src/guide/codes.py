@@ -115,7 +115,7 @@ def load_abstract(path: str | Path | None = None):
             id=c["id"], title=c["title"], point=c.get("point", ""),
             strategy=c.get("strategy", ""),
             exprs=[FormulaRow(en=e["en"], ko=e["ko"]) for e in c.get("exprs", [])],
-            examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""), how=e.get("how", ""), catch=e.get("catch", ""))
+            examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""), cut_en=e.get("cut_en", ""), how=e.get("how", ""), catch=e.get("catch", ""))
                       for e in c.get("examples", []) if keep_source(e.get("src", ""))],
             practice=aprac.get(c["id"], []),
         ))
@@ -155,7 +155,7 @@ def load_inference(path: str | Path | None = None):
             id=c["id"], title=c["title"], point=c.get("point", ""),
             strategy=c.get("strategy", ""),
             exprs=[FormulaRow(en=e["en"], ko=e["ko"]) for e in c.get("exprs", [])],
-            examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""), how=e.get("how", ""), catch=e.get("catch", ""))
+            examples=[WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""), cut_en=e.get("cut_en", ""), how=e.get("how", ""), catch=e.get("catch", ""))
                       for e in c.get("examples", []) if keep_source(e.get("src", ""))],
             practice=prac,
         ))
@@ -186,6 +186,7 @@ def load_part2_workbook(path: str | Path | None = None):
             diagram = Diagram(symbol=dia.get("symbol", ""),
                               rows=[FormulaRow(en=r["en"], ko=r["ko"]) for r in dia.get("rows", [])])
         examples = [WorkExample(en=e["en"], src=e.get("src", ""), cut=e.get("cut", ""),
+                                cut_en=e.get("cut_en", ""),
                                 how=e.get("how", ""), catch=e.get("catch", ""), ab=e.get("ab", ""))
                     for e in f.get("examples", []) if keep_source(e.get("src", ""))]
         training = [TrainStep(level=t.get("level", ""), en=t.get("en", ""), ko=t.get("ko", ""))

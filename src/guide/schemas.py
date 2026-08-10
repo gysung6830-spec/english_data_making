@@ -24,7 +24,8 @@ class CardBody(BaseModel):
     subject: str = Field(default="", description="주체(누가) — 문장의 진짜 주어를 짧게")
     action: str = Field(default="", description="행위(무엇을 한다) — 진짜 동사+목적어를 짧게")
     skeleton: str = Field(default="", description="이 문장의 뼈대(핵심 주어+동사)만 뽑은 한 줄(선택)")
-    cut: str = Field(default="", description="끊어읽기 — 의미 단위 슬래시(/) 직독직해(선택)")
+    cut: str = Field(default="", description="끊어읽기 — 의미 단위 슬래시(/) 직독직해(선택, 한글)")
+    cut_en: str = Field(default="", description="끊어읽기 영어 원문에 / 표시(한글과 매칭, 선택)")
 
 
 class CodeCard(BaseModel):
@@ -60,7 +61,8 @@ class Problem(BaseModel):
 
 # ── 실전적용: 문제 페이지 ↔ 해설 페이지 ─────────────────────
 class PracticeSolution(BaseModel):
-    cut: str = ""                 # 끊어읽기(슬래시 직독직해)
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해 · 한글)
+    cut_en: str = ""              # 끊어읽기 영어 원문에 / 표시(한글과 매칭)
     wrong: str = ""               # 오역(흔한 실수)
     wrong_why: str = ""           # 왜 틀렸나
     author_msg: str = ""          # 필자가 하고싶은 말
@@ -186,7 +188,8 @@ class Diagram(BaseModel):
 class WorkExample(BaseModel):
     en: str                       # 기출 문장(원문)
     src: str = ""                 # 출처
-    cut: str = ""                 # 끊어읽기(슬래시 직독직해 — 읽은 '결과')
+    cut: str = ""                 # 끊어읽기(슬래시 직독직해 — 읽은 '결과', 한글)
+    cut_en: str = ""              # 끊어읽기 영어 원문에 / 표시(한글과 매칭)
     how: str = ""                 # 어떻게 읽나(구조 파악·처리 '방법')
     catch: str = ""               # 이 정도는 캐치(문장 읽고 잡아야 할 핵심 정보)
     ab: str = ""                  # A→B 단순화(뼈대 관계) 한 줄

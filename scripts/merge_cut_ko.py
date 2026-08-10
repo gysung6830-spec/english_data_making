@@ -28,14 +28,15 @@ for ch, idxmap in mp.items():
             missing.append(f"{ch}[{i}](범위초과)")
             continue
         it = items[i]
-        if field == "solution.cut":
+        if field.startswith("solution."):
+            sub = field.split(".", 1)[1]
             sol = it.get("solution")
             if not sol:
                 missing.append(f"{ch}[{i}](solution없음)")
                 continue
-            sol["cut"] = newcut
-        else:  # 'cut'
-            it["cut"] = newcut
+            sol[sub] = newcut
+        else:  # item-level field ('cut' or 'cut_en')
+            it[field] = newcut
         n += 1
 
 open(target, "w", encoding="utf-8").write(

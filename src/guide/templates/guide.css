@@ -638,6 +638,8 @@ body {
   background: #f7fbf9; border-radius: 6px; padding: 6px 10px; }
 .cut-tag { display: inline-block; background: #08382f; color: #fff; font-weight: 800;
   font-size: 8.5px; padding: 1px 8px; border-radius: 3px; margin-right: 7px; }
+/* 영어 문장 자체에 찍는 끊어읽기 슬래시 — 눈에 띄게 금색 */
+.cslash { color: var(--gold); font-weight: 800; padding: 0 1px; }
 /* 어떻게 읽나(읽는 방법) — 끊어읽기(결과)와 구분되는 골드 톤 */
 .wb-how { font-family: var(--f-body); font-size: 10.5px; color: #4a3b25; margin-top: 5px;
   background: var(--goldbg); border-radius: 6px; padding: 6px 10px; }

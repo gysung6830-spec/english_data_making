@@ -25,6 +25,8 @@ practice:
       key_points:
       - '''they cause us unnecessary suffering'' : they(원인=our worries)와 suffering(결과)을
         뒤바꿔 ''고통이 걱정을 밀어낸다''로 읽기 쉽다 → cause A B는 A(they)가 B(고통)를 일으킴.'
+      cut_en: When our worries / exceed our control, / however, / they cause us /
+        unnecessary suffering.
   - kind: mc
     sentence: In the south there was London, already the largest city in the world,
       showing all the crime, evil, and misery that result from overpopulation and
@@ -52,6 +54,9 @@ practice:
       key_points:
       - '''that result from ~'' : ''초래하는''으로 방향을 뒤집어 범죄·악·비참을 원인으로 읽기 쉽다 → A result
         from B는 A(범죄·악·비참)가 B(인구 과잉·성장)에서 비롯됨, B가 원인.'
+      cut_en: In the south / there was London, / already the largest city in the world,
+        / showing [all the crime, evil, and misery] / [that result from overpopulation
+        and unplanned growth].
   - kind: mc
     sentence: The strategy is to analyze all the possible scenarios that the future
       holds and then to see what proportion of them lead to success or failure.
@@ -79,6 +84,9 @@ practice:
       key_points:
       - '''what proportion of them lead to ~'' : 주어(시나리오 비율)와 결과(성공·실패)를 뒤바꿔 ''성공·실패가
         시나리오로 이어진다''로 읽기 쉽다 → lead to의 주어는 proportion(시나리오), 그것이 성공/실패로 이어짐.'
+      cut_en: The strategy is / to analyze / [all the possible scenarios that the
+        future holds] / and then / to see / [what proportion of them / lead to success
+        or failure].
   - kind: mc
     sentence: Agricultural markets are naturally unstable, due to changes in harvest
       size that result from variable weather patterns and other factors.
@@ -105,6 +113,8 @@ practice:
       key_points:
       - '''due to changes ... that result from ...'' : due to와 result from이 겹쳐 원인·결과를
         통째로 뒤집기 쉽다 → 날씨(원인) → 수확량 변화 → 시장 불안정(결과), 화살표는 결과←원인이지만 읽기는 앞으로만.'
+      cut_en: Agricultural markets are / naturally unstable, / due to / [changes in
+        harvest size] / [that result from variable weather patterns and other factors].
   - kind: mc
     sentence: Social media users may unknowingly participate in creating and circulating
       misinformation, which can influence elections, cause violence, and create widespread
@@ -134,6 +144,9 @@ practice:
       key_points:
       - '''which can ... cause violence ...'' : 뒤의 선거·폭력·공황을 주어로 착각해 인과를 뒤집기 쉽다 →
         주어는 which(=misinformation), 그것이 선거·폭력·공황을 일으킴.'
+      cut_en: Social media users / may unknowingly / participate in [creating and
+        circulating misinformation], / which can / influence elections, / cause violence,
+        / and create widespread panic.
   - kind: short
     sentence: Whether it be due to the growing presence of AI assistants or the emergence
       of self-driving cars, the necessity of the role of humans as the decision makers
@@ -158,6 +171,9 @@ practice:
         역할의 감소.'
       - '''the necessity of the role of humans'' : 전치사구가 겹쳐 in decline의 주어를 humans로
         잘못 잡기 쉽다 → 줄어드는 것은 ''필요성(necessity)''.'
+      cut_en: Whether it be due to / [the growing presence of AI assistants] or [the
+        emergence of self-driving cars], / the necessity of the role of humans as
+        the decision makers / would appear to be in decline.
   - kind: short
     sentence: Living your values only some of the time does not contribute to the
       creation and maintenance of culture.
@@ -179,6 +195,8 @@ practice:
       key_points:
       - '''does not contribute to ~'' : does not을 놓쳐 ''기여한다''는 긍정으로 극성을 뒤집기 쉽다 → 핵심은
         부정, ''기여하지 않는다''.'
+      cut_en: '[Living your values / only some of the time] / does not contribute
+        to / [the creation and maintenance of culture].'
   - kind: short
     sentence: Excessive specificity may result in information from outside the domain
       being underestimated and unavailable, which leads to fixedness of thinking,
@@ -204,6 +222,10 @@ practice:
       key_points:
       - '''result in ~ being underestimated'' : result in을 result from처럼 방향을 뒤집어 정보를
         원인으로 읽기 쉽다 → A result in B는 A(구체성)가 B(정보 과소평가)를 낳음.'
+      cut_en: Excessive specificity / may result in / [information from outside the
+        domain / being underestimated and unavailable], / which leads to / fixedness
+        of thinking, / whereas / excessive generality / causes / chaos, vagueness,
+        and shallowness.
   - kind: short
     sentence: Changing political, social and religious landscapes will lead to the
       emergence of new cultures, and with them new culturtainment experiences.
@@ -226,6 +248,8 @@ practice:
       key_points:
       - '''landscapes will lead to the emergence ...'' : 주어(지형 변화)와 결과(새 문화)를 뒤바꿔
         ''문화가 지형을 이끈다''로 읽기 쉽다 → lead to의 주어는 landscapes(원인).'
+      cut_en: Changing / political, social and religious landscapes / will lead to
+        / [the emergence of new cultures], / and with them / [new culturtainment experiences].
   - kind: short
     sentence: Departure from the group may signal danger to nonvigilant animals and
       cause what appears to be a coordinated flushing of prey from the area.
@@ -249,6 +273,9 @@ practice:
       key_points:
       - '''cause what appears to be ... flushing of prey'' : 뒤의 먹잇감 몰이를 주어로 착각해 인과를
         뒤집기 쉽다 → cause의 주어는 Departure(이탈), 그것이 먹잇감 몰이를 일으킴.'
+      cut_en: '[Departure from the group] / may signal danger / to nonvigilant animals
+        / and cause / [what appears to be a coordinated / flushing of prey from the
+        area].'
   - kind: short
     sentence: And it's not due to necessity but rather that the city quality is so
       inviting.
@@ -271,6 +298,8 @@ practice:
       key_points:
       - '''not due to A but rather B'' : not/but의 위치를 놓쳐 원인을 A(necessity)로 잡기 쉽다 →
         부정되는 원인은 A, 진짜 원인은 B(도시의 매력).'
+      cut_en: And it's / not due to / necessity / but rather / that the city quality
+        / is so inviting.
   - kind: mc
     sentence: However, such commercialization risks culturtainment ' becoming homogeneous
       and losing its original message' that could lead to a dilution of audiences.
@@ -304,6 +333,8 @@ practice:
       - 'lead to (인과 표지) : ''이끌다/앞의 것이 결과'' 로 오독 → ''A(앞)가 원인, B(뒤)가 결과''로 방향 고정'
       - 'risks + -ing : ''위험을 무릅쓰다''로만 보고 넘김 → ''risk A -ing = A가 ~하게 될 위험을 초래하다''로
         처리'
+      cut_en: However, such commercialization risks / culturtainment ' becoming homogeneous
+        and losing its original message' / that could lead to a dilution of audiences.
   contrast:
   - kind: mc
     sentence: In a city like Rome, it is the large number of people standing or sitting
@@ -331,6 +362,8 @@ practice:
       key_points:
       - '''rather than walking'' : ''걷는 사람''을 눈에 띄는 대상으로 착각하기 쉽다 → 강조 대상은 ''광장에 서
         있거나 앉아 있는 사람들'', walking은 배제됨.'
+      cut_en: In a city like Rome, / it is [the large number of people standing or
+        sitting in squares] / rather than walking / that is conspicuous.
   - kind: short
     sentence: However, unlike most of the categories of collection and study that
       make up those areas, it is fluid rather than static.
@@ -353,6 +386,8 @@ practice:
       key_points:
       - '''unlike ... fluid rather than static'' : unlike를 ''~처럼''으로, fluid rather
         than static을 ''정적''으로 뒤집어 읽기 쉽다 → 다른 범주와 ''달리'' 그것은 ''정적이 아니라 유동적''.'
+      cut_en: However, / unlike most of the categories of collection and study that
+        make up those areas, / it is fluid rather than static.
   - kind: mc
     sentence: The truth of the matter is revealed not in the perception of the figure
       but in its rational representation.
@@ -379,6 +414,8 @@ practice:
       key_points:
       - '''not in A but in B'' : ''A와 B 둘 다''로 읽어 A를 살려두기 쉽다 → A(형상 지각)는 부정, 진실이 드러나는
         곳은 B(이성적 표상)뿐.'
+      cut_en: The truth of the matter / is revealed / not in the perception of the
+        figure / but in its rational representation.
   - kind: short
     sentence: While many city shoppers were clearly drawn to the notion of buying
       and eating foods associated with nature, the nature claimed by the ads was no
@@ -403,6 +440,9 @@ practice:
       key_points:
       - '''While ... no longer ...'' : While을 ''~하는 동안''(시간)으로 읽고 no longer를 놓치면 양보
         대조가 사라진다 → ''비록 이끌렸지만'' 광고 속 자연은 ''더 이상'' 그 자연이 아님.'
+      cut_en: While many city shoppers were clearly drawn to / the notion of buying
+        and eating foods associated with nature, / the nature claimed by the ads /
+        was no longer the nature that created the foods.
   - kind: mc
     sentence: While the hospital administration may serve as your client, no doubt
       the perspectives of administration personnel will differ significantly from
@@ -432,6 +472,10 @@ practice:
       key_points:
       - '''While ... differ significantly from ~'' : While을 ''~하는 동안''으로, differ from을
         ''다르지 않다''로 뒤집으면 대조가 무너진다 → ''비록 ~이지만'' 두 관점은 ''크게 다르다''.'
+      cut_en: While the hospital administration may serve as your client, / no doubt
+        the perspectives of administration personnel / will differ significantly /
+        from those of doctors, interns, residents, nurses, and other medical staff
+        who use the building regularly.
   - kind: short
     sentence: Philosophers tend to ask questions rather than provide definitive answers,
       and their contributions often consist of challenging established assumptions
@@ -456,6 +500,9 @@ practice:
       key_points:
       - '''ask questions rather than provide answers'' : rather than provide를 ''and
         제공한다''로 읽어 대조를 지우기 쉽다 → 택하는 쪽은 질문, provide answers는 배제됨.'
+      cut_en: Philosophers tend to / ask questions / rather than provide definitive
+        answers, / and their contributions often consist of / challenging established
+        assumptions and proposing new research approaches.
   - kind: mc
     sentence: Have we come closer to Aristotle's image of God as the immobile mover,
       when elites exercise their power to move money, things and people, while they
@@ -486,6 +533,9 @@ practice:
       - '''while they themselves do not need to move at all'' : while을 ''~하는 동안''으로
         읽고 do not ... at all을 놓치면 ''남은 움직이나 자신은 안 움직인다''는 대조가 사라진다 → while은 ''~인 반면'',
         엘리트 자신은 전혀 안 움직임.'
+      cut_en: Have we come closer / to Aristotle's image of God as the immobile mover,
+        / when elites exercise their power to move money, things and people, / while
+        they themselves do not need to move at all?
   - kind: short
     sentence: Urban transport professionals have largely acquiesced to the view that
       automobile demand in cities needs to be managed rather than accommodated.
@@ -508,6 +558,8 @@ practice:
       key_points:
       - '''managed rather than accommodated'' : A와 B 순서를 뒤집어 ''관리보다 수용''으로 읽기 쉽다 →
         택하는 쪽은 managed(관리), accommodated(수용)는 배제됨.'
+      cut_en: Urban transport professionals / have largely acquiesced to the view
+        / that automobile demand in cities / needs to be managed / rather than accommodated.
   - kind: mc
     sentence: Generally, this implies that sufficient fresh snow must accumulate during
       the cold months to offset melting during the summer, although on a year‑to‑year
@@ -542,6 +594,10 @@ practice:
       - 'although (양보·대조 표지) : because/so의 인과로 오독 → ''비록 ~이지만''으로 앞뒤를 대조'
       - 'to offset : ''상쇄되다''라는 결과로 오독 → ''must accumulate ~ to offset(상쇄하기 위해 쌓여야)''의
         목적으로 처리'
+      cut_en: Generally, this implies that sufficient fresh snow must accumulate during
+        the cold months / to offset melting during the summer, / although on a year‑to‑year
+        basis, glaciers may expand or contract, depending on local and global climatic
+        conditions.
   - kind: short
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached
       her and said, "Jamie, even though you didn't set a personal best time today,
@@ -568,6 +624,9 @@ practice:
       author_msg: 기록은 못 세웠지만 경기력은 크게 나아졌다며 Ken이 그녀를 격려한다.
       key_points:
       - 'even though (양보·대조 표지) : 앞뒤를 같은 방향(둘 다 부정)으로 오독 → ''비록 A(부정)지만 B(긍정)''로 대조'
+      cut_en: Recognizing how she felt about her failure, / Ken, her teammate, approached
+        her and said, / "Jamie, even though you didn't set a personal best time today,
+        / your performances have improved dramatically."
   equivalence:
   - kind: mc
     sentence: 'In other words, as museums struggle to survive in a competitive economy,
@@ -597,6 +656,9 @@ practice:
       key_points:
       - '''In other words ... consumable: ...'' : In other words를 새 정보로, 콜론(:)을 새
         항목으로 오해하기 쉽다 → In other words는 앞 내용 재진술, 콜론 뒤는 ''소비 가능한 부분''의 구체 예시.'
+      cut_en: 'In other words, / as museums struggle to survive in a competitive economy,
+        / their budgets often prioritise / [those parts of themselves that are consumable]:
+        / infotainment in the galleries, goods and services in the cafes and the shops.'
   - kind: mc
     sentence: For the present generation of artists, the computer, or more appropriately,
       the laptop, is one in a collection of integrated, portable digital technologies
@@ -626,6 +688,9 @@ practice:
       key_points:
       - '''the computer, or (more appropriately), the laptop'' : or를 ''선택(또는)''으로
         읽어 ''둘 중 고르라''로 오해하기 쉽다 → 여기 or는 동격(=즉), computer를 laptop으로 바꿔 부른 것.'
+      cut_en: For the present generation of artists, / the computer, or more appropriately,
+        the laptop, / is one in / [a collection of integrated, portable digital technologies]
+        / that link their social and working life.
   - kind: mc
     sentence: Roads are there all the time, so their speed is the most important fact
       that distinguishes them.
@@ -653,6 +718,8 @@ practice:
       key_points:
       - '''the fact that distinguishes them'' : distinguish를 ''구별하기 어렵다''는 부정 의미로
         넘겨짚기 쉽다 → that절은 fact를 꾸며 ''도로를 구별해 주는'' 사실, 부정 의미 없음.'
+      cut_en: Roads are there all the time, / so / their speed is / [the most important
+        fact] / that distinguishes them.
   - kind: mc
     sentence: In particular, they define a group as two or more people who interact
       with, and exert mutual influences on, each other.
@@ -679,6 +746,8 @@ practice:
       key_points:
       - '''define A as B'' : as를 ''~로서/되도록''으로 읽어 ''되라고 요구''로 오해하기 쉽다 → define A as
         B는 A=B 등호(집단=상호작용하는 둘 이상).'
+      cut_en: In particular, / they define / a group / as [two or more people] / who
+        interact with, and exert mutual influences on, each other.
   - kind: mc
     sentence: The fact that we have not found such a case in countless examinations
       of the fossil record strengthens the case for evolutionary theory.
@@ -707,6 +776,8 @@ practice:
       key_points:
       - '''The fact that we have not found ...'' : that을 관계사로 읽어 ''찾아낸 사실''로, not
         found를 긍정으로 뒤집기 쉽다 → that은 동격(fact=반례를 못 찾았다는 것), 부정이 핵심.'
+      cut_en: The fact / [that we have not found such a case] / in countless examinations
+        of the fossil record / strengthens / the case for evolutionary theory.
   - kind: short
     sentence: In other words, they not only have an innate capacity for matching their
       own kinaesthetically experienced bodily movements with those of others that
@@ -732,6 +803,9 @@ practice:
       key_points:
       - '''innate capacity ... innate drive'' : innate(타고난)를 ''학습으로 얻는''으로 오해하기 쉽다
         → 능력도 욕구도 ''타고난'' 것, not only A; (also) B로 둘 다 강조.'
+      cut_en: In other words, / they not only / have [an innate capacity] / for matching
+        their own kinaesthetically experienced bodily movements with those of others
+        that are visually perceived; / they have an innate drive to do so.
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another,
       that is, in different periods of time.
@@ -754,6 +828,8 @@ practice:
       key_points:
       - '''one after another, that is, in different periods'' : that is를 놓쳐 in different
         periods를 새 항목으로 나열하기 쉽다 → that is는 ''즉'', 앞말을 시간 관점으로 바꿔 말한 재진술.'
+      cut_en: Instead, / they should concentrate attention / on [one subject after
+        another], / that is, / in different periods of time.
   - kind: short
     sentence: When you say "It's mine" in reference to a resource, often that means
       you own a lot of the sticks that make up the full bundle.
@@ -778,6 +854,8 @@ practice:
       key_points:
       - '''the sticks that make up the full bundle'' : make up을 ''만들다''로 오해하기 쉽다 →
         make up은 ''구성하다·이루다'', that절은 sticks를 꾸미는 관계사절.'
+      cut_en: When you say "It's mine" / in reference to a resource, / often that
+        means / you own a lot of the sticks / that make up the full bundle.
   - kind: short
     sentence: Moreover, equal access to speech and hearing promoted the notion that
       property should be held in common, that goods and food in particular should
@@ -803,6 +881,9 @@ practice:
       key_points:
       - '''the notion that ..., that ..., and that ...'' : 세 that을 관계사로 읽어 ''관념이 소유·공유된다''로
         오해하기 쉽다 → 세 that절은 모두 notion과 동격(관념의 내용) 병렬.'
+      cut_en: Moreover, / equal access to speech and hearing / promoted / the notion
+        / [that property should be held in common, that goods and food in particular
+        should be shared, and that everyone had a duty to take care of everyone else].
   - kind: short
     sentence: After all, didn't they demonstrate those qualities on the journey to
       Oz, a journey motivated by little more than an expectation, an idea about the
@@ -829,6 +910,9 @@ practice:
       key_points:
       - '''a journey ...; an expectation, an idea ...'' : 콤마 뒤 명사들을 별개 나열 항목으로 읽기
         쉽다 → 각각 앞말을 다시 부르는 동격(여정=기대에 동기부여된 여정, 기대=미래 가능성에 대한 생각).'
+      cut_en: After all, / didn't they demonstrate those qualities / on the journey
+        to Oz, / [a journey motivated by little more than an expectation], / [an idea
+        about the future likelihood of getting something they wanted]?
   - kind: short
     sentence: By design, we set up challenges in which the individual must validate
       how they know us by presenting scenarios, ( ) names or acquaintances, or evidence
@@ -857,6 +941,9 @@ practice:
       key_points:
       - 'that is (환언·동치 표지) : 지시대명사 ''그것은''으로 오독 → ''즉''으로 보고 앞 명사(evidence)를 뒤(photographs)로
         구체화'
+      cut_en: By design, / we set up challenges in which the individual must validate
+        how they know us / by presenting scenarios, ( ) names or acquaintances, or
+        evidence by which to validate / (that is, photographs).
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another
       (that is, in different periods of time), ( ) although later work will weaken
@@ -886,6 +973,9 @@ practice:
       key_points:
       - 'that is (환언·동치 표지) : ''그것은''으로 오독 → ''즉''으로 보고 앞 어구(one subject after another)를
         뒤(in different periods of time)로 환언'
+      cut_en: Instead, they should concentrate attention on one subject after another
+        / (that is, in different periods of time), / ( ) although later work will
+        weaken earlier attainments in the other spheres.
   comparison:
   - kind: mc
     sentence: Free recall tests, in which students need to recall as much as they
@@ -915,6 +1005,10 @@ practice:
       key_points:
       - '''better retention than cued recall tests'' : 삽입절(in which ...)이 길어 비교 주어를
         놓치고 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어 Free recall tests, than 뒤 cued recall이 열위.'
+      cut_en: Free recall tests, / [in which students need to recall as much as they
+        can remember without prompting], / tend to result in better retention / than
+        cued recall tests, / [in which students are given hints about what they need
+        to remember].
   - kind: mc
     sentence: But, once an organized game is played with officials, most athletes
       will not admit to the same fouls or violations as the end goal of winning is
@@ -943,6 +1037,9 @@ practice:
       key_points:
       - '''winning is more important than expressing ...'' : more important than의
         우열을 뒤집기 쉽다 → 더 중요한 쪽은 주어 winning, than 뒤 염려 표현이 열위.'
+      cut_en: But, / once an organized game is played with officials, / most athletes
+        will not admit to the same fouls or violations / as the end goal of winning
+        / is more important / than expressing concern for competitors.
   - kind: mc
     sentence: By taking a little extra time to collect information about the opponent,
       the animal is more likely to reach a decision that maximizes its chances of
@@ -972,6 +1069,9 @@ practice:
       key_points:
       - '''more likely ... than if it takes a decision without ...'' : than 뒤 가정(정보
         없이)을 유리한 쪽으로 뒤집기 쉽다 → 우위는 앞쪽(정보 수집), ''정보 없이''가 비교의 열위.'
+      cut_en: By taking a little extra time to collect information about the opponent,
+        / the animal / is more likely to reach a decision / [that maximizes its chances
+        of winning] / than if it takes a decision / without such information.
   - kind: mc
     sentence: Even a small child, who can communicate by only one word at a time,
       uses a system for communication that is infinitely superior to any system utilized
@@ -1002,6 +1102,9 @@ practice:
       key_points:
       - '''superior to any system utilized by any other animal'' : than 없이 to를 써 방향을
         혼동해 우열을 뒤집기 쉽다 → 우월한 쪽은 아이가 쓰는 체계, to 뒤 동물 체계가 열위.'
+      cut_en: Even a small child, / [who can communicate by only one word at a time],
+        / uses a system for communication / [that is infinitely superior / to any
+        system utilized by any other animal].
   - kind: mc
     sentence: Owners of forest lands have a market incentive to cut down trees rather
       than manage the forest for carbon capture, wildlife habitat, flood protection,
@@ -1032,6 +1135,9 @@ practice:
       key_points:
       - '''cut down trees rather than manage the forest'' : rather than으로 택하는 것과 배제하는
         것을 뒤바꾸기 쉽다 → 택하는 쪽은 cut down(벌목), manage(관리)는 배제됨.'
+      cut_en: Owners of forest lands / have a market incentive / to cut down trees
+        / rather than manage the forest / for carbon capture, wildlife habitat, flood
+        protection, and other ecosystem services.
   - kind: short
     sentence: Cued recall tests, in turn, are better than recognition tests, such
       as multiple-choice answers, where the correct answer needs to be recognized
@@ -1057,6 +1163,9 @@ practice:
       key_points:
       - '''better than recognition tests'' : better than의 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어
         Cued recall tests, than 뒤 recognition tests가 열위.'
+      cut_en: Cued recall tests, / in turn, / are better / than recognition tests,
+        / [such as multiple-choice answers], / [where the correct answer needs to
+        be recognized but not generated].
   - kind: short
     sentence: You found it only slightly difficult and conclude that you were climbing
       quite well, when in fact you were climbing no better than usual.
@@ -1079,6 +1188,8 @@ practice:
       key_points:
       - '''no better than usual'' : no를 놓쳐 ''평소보다 더 잘''로 읽기 쉽다 → no better than은 ''조금도
         낫지 않은''(사실상 부정), 평소와 같음.'
+      cut_en: You / found it only slightly difficult / and conclude / [that you were
+        climbing quite well], / when in fact / you were climbing no better than usual.
   - kind: short
     sentence: Rather than treating robots as peer agents with their own completely
       independent agenda, joint cognitive systems approaches treat robots as helpers
@@ -1104,6 +1215,9 @@ practice:
       key_points:
       - '''Rather than treating ... as peer agents'' : 문두 Rather than을 ''~하기 위해''로
         오해하기 쉽다 → ''~하기보다는''의 배제, peer agents로 취급하는 것은 부정됨.'
+      cut_en: Rather than treating robots / [as peer agents with their own completely
+        independent agenda], / joint cognitive systems approaches / treat robots /
+        as helpers / [such as service animals or sheep dogs].
   - kind: short
     sentence: A company may devise a family emergency leave plan that allows employees
       the opportunity to be away from the company for a period of no longer than three
@@ -1130,6 +1244,10 @@ practice:
       key_points:
       - '''no longer than three hours ... no more than once a month'' : ''이상''으로 읽어
         상한을 하한으로 뒤집기 쉽다 → 둘 다 ''~을 넘지 않는'' 상한(최대 3시간, 월 최대 1회).'
+      cut_en: A company / may devise a family emergency leave plan / [that allows
+        employees the opportunity] / [to be away from the company / for a period of
+        no longer than three hours, / and no more than once a month], / for illness
+        in the employee's immediate family.
   - kind: mc
     sentence: For example, owners of forest lands have a market incentive to cut down
       trees rather than manage the forest for carbon capture, wildlife habitat, flood
@@ -1162,6 +1280,9 @@ practice:
       key_points:
       - 'A rather than B : A와 B의 선후를 뒤집어 ''B rather than A''로 오독 → ''B하기보다 A한다''로
         A쪽에 무게'
+      cut_en: For example, owners of forest lands have a market incentive / to cut
+        down trees / rather than manage the forest for carbon capture, wildlife habitat,
+        flood protection, and other ecosystem services.
   - kind: short
     sentence: But it's important to recognize the cumulative impact of not prioritizing
       self‑care and to make sure that in the long term, this is the exception rather
@@ -1189,6 +1310,9 @@ practice:
       key_points:
       - 'A rather than B : A와 B를 뒤집어 ''예외가 아니라 표준''으로 오독 → ''B(the norm)가 아니라 A(the
         exception)''로 A에 무게'
+      cut_en: But it's important to recognize the cumulative impact of not prioritizing
+        self‑care / and to make sure that in the long term, / this is the exception
+        rather than the norm.
   - kind: short
     sentence: The emphasis on individuality is therefore problematic― rather than
       actually designing, many successful designer ' personalities' function more
@@ -1219,6 +1343,9 @@ practice:
         무게'
       - 'function more as : more를 빠뜨리고 단순 ''~로 기능'' → ''~로서 기능하는 편이 더 많다''는 비교 강조로
         처리'
+      cut_en: The emphasis on individuality is therefore problematic― / rather than
+        actually designing, / many successful designer ' personalities' function more
+        as creative managers.
   connective:
   - kind: mc
     sentence: A crowd can thus force inaction on its members by implying, through
@@ -1249,6 +1376,8 @@ practice:
       - '''thus ... force inaction ... not an emergency'' : thus를 역접(그러나)으로, force
         inaction·not an emergency를 반대로 읽기 쉽다 → thus는 인과(따라서), ''응급 아님''을 암시해 ''방관''을
         강요.'
+      cut_en: A crowd / can thus force / inaction on its members / by implying, /
+        [through its passivity], / [that an event is not an emergency].
   - kind: mc
     sentence: Thus, parents who reward, force, or cajole their child to do homework
       are more likely to have a child who does so only when rewarded, cajoled, or
@@ -1276,6 +1405,9 @@ practice:
       key_points:
       - '''Thus ... a child who does so only when rewarded ...'' : Thus를 역접으로 읽어 결론을
         뒤집기 쉽다 → Thus는 인과(따라서), 강요하면 ''보상받을 때만'' 하는 아이가 됨.'
+      cut_en: Thus, / parents [who reward, force, or cajole their child to do homework]
+        / are more likely to have / a child [who does so only when rewarded, cajoled,
+        or forced].
   - kind: mc
     sentence: Decades ago, it was unusual for Earth scientists to have results that
       were of interest to the media, and consequently few media contacts were expected
@@ -1305,6 +1437,9 @@ practice:
       key_points:
       - '''consequently few media contacts were ...'' : consequently를 역접으로, few를 긍정으로
         읽기 쉽다 → consequently는 결과(그 결과), few는 ''거의 없는''(같은 방향의 부정 귀결).'
+      cut_en: Decades ago, / it was unusual / [for Earth scientists to have results
+        that were of interest to the media], / and consequently / few media contacts
+        were expected or encouraged.
   - kind: mc
     sentence: Moreover, some critics, who admire his work, are little concerned about
       his extensive use of computers in the art-making process.
@@ -1333,6 +1468,8 @@ practice:
       key_points:
       - '''Moreover ... are little concerned ...'' : Moreover를 역접으로, little concerned를
         ''크게 우려''로 뒤집기 쉽다 → Moreover는 첨가(게다가), little concerned는 ''거의 개의치 않는''(부정).'
+      cut_en: Moreover, / some critics, [who admire his work], / are little concerned
+        / about [his extensive use of computers in the art-making process].
   - kind: mc
     sentence: Beginners, on the other hand, have not achieved the same degree of fluency
       and automaticity in each of the component skills, and thus they struggle to
@@ -1362,6 +1499,10 @@ practice:
       key_points:
       - '''on the other hand ... have not achieved ...'' : have not achieved의 부정을
         무시해 전문가와 같다고 읽으면 대조가 무너진다 → on the other hand는 대조, 초보자는 ''갖추지 못함''.'
+      cut_en: Beginners, / on the other hand, / have not achieved / [the same degree
+        of fluency and automaticity in each of the component skills], / and thus /
+        they struggle / to combine skills / [that experts combine with relative ease
+        and efficiency].
   - kind: short
     sentence: According to connectionist theory, however, our knowledge is organized
       into patterns of activity, and each time we learn something new we have to modify
@@ -1387,6 +1528,10 @@ practice:
       key_points:
       - '''however ... have to modify the old patterns'' : however를 인과(그래서)로, modify를
         ''그대로 둔다''로 뒤집기 쉽다 → however는 역접(그러나), 기존 패턴을 ''수정해야'' 함.'
+      cut_en: According to connectionist theory, / however, / our knowledge / is organized
+        / into patterns of activity, / and / [each time we learn something new] /
+        we have to modify / the old patterns / [so as to keep the old material while
+        adding the new information].
   - kind: short
     sentence: However, they retain their power of fascination for large, if not massive
       audiences, who prize the experiential, risk-loaded and one-time event quality
@@ -1412,6 +1557,9 @@ practice:
       key_points:
       - '''However ... retain ... prize ...'' : However를 인과(따라서)로, retain·prize를 ''잃고·대수롭지
         않게''로 뒤집기 쉽다 → However는 역접(그러나), 여전히 ''지니고'' 관객은 ''소중히 여김''.'
+      cut_en: However, / they / retain / their power of fascination / for [large,
+        if not massive] audiences, / [who prize / the experiential, risk-loaded and
+        one-time event quality / they afford].
   - kind: short
     sentence: If we are trying to understand something totally new, however, we need
       to make larger adjustments to the units of the patterns we already have, which
@@ -1438,6 +1586,10 @@ practice:
       key_points:
       - '''however ... larger adjustments ... difficult'' : however를 인과(그래서)로 읽고 larger·difficult를
         반대로 뒤집기 쉽다 → however는 역접(익숙한 경우와 대비), ''더 큰 조정''이 필요한 ''어려운'' 과정.'
+      cut_en: '[If we are trying to understand something totally new], / however,
+        / we / need to make larger adjustments / [to the units of the patterns we
+        already have], / which / requires / [changing the strengths of large numbers
+        of connections in our brain], / and this / is a difficult, tiring process.'
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection
       between dress-design and art was invented that had not been there before.
@@ -1461,6 +1613,9 @@ practice:
       key_points:
       - '''Instead of the old rule ... had not been there before'' : Instead of를 첨가(~에
         더해)로, had not been을 긍정으로 뒤집기 쉽다 → Instead of는 대체(~대신에), 새 연결은 ''이전엔 없던'' 것.'
+      cut_en: Instead of the old rule / [that dressmaking is a craft], / a modern
+        connection / [between dress-design and art] / was invented / [that had not
+        been there before].
   - kind: short
     sentence: '"It''ll be amazing to see how he communicated the feelings " of isolation
       and loneliness in his work," she said eagerly." However, after searching all
@@ -1489,6 +1644,10 @@ practice:
       author_msg: 작품을 볼 기대에 들떴지만, 정작 전시실 어디에서도 반 고흐의 걸작을 찾지 못했다.
       key_points:
       - 'However (역접 담화표지) : ''그래서/게다가''의 순접으로 오독 → ''그러나''로 앞의 기대와 뒤의 좌절을 반전'
+      cut_en: '"It''ll be amazing to see how he communicated the feelings " of isolation
+        and loneliness in his work," / she said eagerly." / However, / after searching
+        all the exhibition rooms, / Emilia and Layla couldn''t find van Gogh''s masterpiece
+        anywhere.'
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling,
@@ -1516,6 +1675,8 @@ practice:
       key_points:
       - '''a central element'' : central을 ''여러 요소 중 하나''로 흘려 강조를 지우기 쉽다 → central은
         ''핵심'' 요소, 필자 주장의 중심.'
+      cut_en: '[Improving the quality of alternative options, such as walking, cycling,
+        and public transport], / is / a central element of this strategy.'
   - kind: mc
     sentence: Rather than irrelevant, moral questions are fundamental to the imposition
       of tax.
@@ -1543,6 +1704,8 @@ practice:
       key_points:
       - '''are fundamental to ~'' : fundamental을 ''무관하지 않다''로 약화하기 쉽다 → fundamental은
         ''근본적''(단순 관련이 아니라 핵심 토대).'
+      cut_en: Rather than irrelevant, / moral questions are / fundamental to the imposition
+        of tax.
   - kind: mc
     sentence: Many signals are now seen as having this information gathering or assessment
       function, directly contributing to the mechanism of the decision-making process
@@ -1571,6 +1734,10 @@ practice:
       key_points:
       - '''directly contributing ... vital information'' : directly·vital을 ''대략·간접''으로
         약화하기 쉽다 → 신호는 ''직접'' 기여하고 ''필수'' 정보를 제공(결정적 역할 강조).'
+      cut_en: Many signals are now seen as / having this information gathering or
+        assessment function, / directly contributing / to the mechanism of the decision-making
+        process / by supplying vital information / about the likely outcomes of the
+        various options.
   - kind: mc
     sentence: The adjustments are clearly smallest when the new information is only
       slightly new—when it is compatible with what we already know, so that the old
@@ -1599,6 +1766,10 @@ practice:
       key_points:
       - '''are clearly smallest'' : clearly를 ''불분명''으로 뒤집기 쉽다 → clearly는 ''분명히''(필자가
         확신하는 논지), 조정이 가장 작음이 확실.'
+      cut_en: The adjustments are clearly smallest / when the new information is only
+        slightly new— / when it is compatible with what we already know, / so that
+        the old patterns need only a little bit of adjustment / to accommodate the
+        new knowledge.
   - kind: short
     sentence: At the same time, it is important to recognize that, no matter how fast
       they grow, countries where a large part of the population derive their livelihood
@@ -1626,6 +1797,10 @@ practice:
       - '''no matter how fast they grow ... cannot hope to prevent ... without ~''
         : no matter how ~를 조건으로 오해해 ''성장하면 막는다''로 뒤집기 쉽다 → 아무리 성장해도 ''직접 개입 없이는''
         못 막음이 핵심.'
+      cut_en: At the same time, / it is important to recognize that, / no matter how
+        fast they grow, / countries where a large part of the population derive their
+        livelihood from uncertain sources / cannot hope to prevent famines / without
+        specialized entitlement protection mechanisms involving direct public intervention.
   - kind: short
     sentence: In fact, this attention to audience and appropriateness may be even
       more important in writing than in conversation because writing does not permit
@@ -1651,6 +1826,10 @@ practice:
       key_points:
       - '''even more important in writing than in conversation'' : even more important를
         ''비슷하게''로 흘려 비교 우위를 지우기 쉽다 → ''대화보다 글쓰기에서 훨씬 더'' 중요.'
+      cut_en: In fact, / this attention to audience and appropriateness / may be even
+        more important / in writing than in conversation / because writing does not
+        permit / the nonverbal communication and immediate feedback / that are part
+        of conversation.
   - kind: short
     sentence: Since that time, it has become apparent that broadly effective pesticides
       can have harmful effects on beneficial insects, which can negate their effects
@@ -1676,6 +1855,10 @@ practice:
       key_points:
       - '''it has become apparent that ~'' : apparent를 ''막연한 추측''으로 약화하기 쉽다 → apparent는
         ''분명해진 사실''(확정성 강조).'
+      cut_en: Since that time, / it has become apparent / that broadly effective pesticides
+        can have harmful effects on beneficial insects, / which can negate their effects
+        in controlling pests, / and that persistent pesticides can damage non-target
+        organisms in the ecosystem, / such as birds and people.
   - kind: short
     sentence: Overly rigid habits and conventions, no matter how well-considered or
       well-intentioned, threaten innovation.
@@ -1698,6 +1881,8 @@ practice:
       key_points:
       - '''no matter how well-considered ... threaten innovation'' : no matter how
         well ~를 빼먹고 ''좋으니 돕는다''로 뒤집기 쉽다 → ''아무리 좋아도'' 경직된 습관은 혁신을 ''위협''.'
+      cut_en: Overly rigid habits and conventions, / no matter how well-considered
+        or well-intentioned, / threaten innovation.
   - kind: mc
     sentence: 'If we psychologists are too bent on identifying the orderly pattern,
       the regularities of children''s minds, we may miss an essential and pervasive
@@ -1732,6 +1917,10 @@ practice:
       - 'essential and pervasive (강조 신호) : 강조어에 이끌려 긍정 결과로 오독 → 강조된 핵심을 ''miss(놓칠)''
         수 있다는 경고로 처리'
       - 'may miss : miss를 ''발견/포착''으로 뒤집음 → ''놓치다''의 부정 방향 유지'
+      cut_en: 'If we psychologists are too bent on identifying the orderly pattern,
+        / the regularities of children''s minds, / we may miss an essential and pervasive
+        characteristic of our topic: / the child''s more unruly and imaginative ways
+        of talking and thinking.'
   - kind: short
     sentence: Many signals are now seen as having this information gathering or assessment'
       function, directly contributing to ' the mechanism of the decision‑making process
@@ -1760,6 +1949,10 @@ practice:
       key_points:
       - 'vital (강조 신호) : ''생명의/활기찬''으로 약하게 오독 → ''필수적인, 매우 중요한''으로 핵심성 강조'
       - 'directly contributing : ''간접적으로 관련''으로 약화 → ''직접적으로 기여한다''는 강한 긍정으로 처리'
+      cut_en: Many signals are now seen as having this information gathering or assessment'
+        function, / directly contributing to ' the mechanism of the decision‑making
+        process / by supplying vital information about the likely outcomes of the
+        various options.
   polarity_negative:
   - kind: mc
     sentence: Emergencies are not always clearly labeled as such; "smoke" pouring
@@ -1789,6 +1982,9 @@ practice:
       key_points:
       - '''not always clearly labeled'' : not always를 전체부정(''결코 아니다'')으로 읽기 쉽다 → not
         always는 부분부정(''항상 ~인 것은 아니다'').'
+      cut_en: Emergencies / are not always clearly labeled as such; / "smoke" pouring
+        into a waiting room / may be caused by fire, / or it may merely indicate a
+        leak in a steam pipe.
   - kind: mc
     sentence: Although we each may have the subjective impression that we are careful
       thinkers, we often make snap judgments or no real judgments at all.
@@ -1816,6 +2012,8 @@ practice:
       key_points:
       - '''no real judgments at all'' : no·at all을 놓쳐 ''조금은 한다''는 긍정으로 뒤집기 쉽다 → ''진정한
         판단을 전혀 하지 않는다''(완전부정).'
+      cut_en: Although we each / may have the subjective impression that we are careful
+        thinkers, / we often / make snap judgments / or no real judgments at all.
   - kind: mc
     sentence: On the Internet, there are no regulations preventing a kindergarten
       teacher from offering medical advice or a physician from suggesting ways to
@@ -1846,6 +2044,9 @@ practice:
       key_points:
       - '''there are no regulations preventing ~'' : no를 놓쳐 ''규제가 있다''로 뒤집기 쉽다 → ''막는
         규제가 없다''(존재 자체의 부정).'
+      cut_en: On the Internet, / there are no regulations preventing / a kindergarten
+        teacher from offering medical advice / or a physician from suggesting ways
+        / to safely make structural changes to your home.
   - kind: mc
     sentence: While many city shoppers were clearly drawn to the notion of buying
       and eating foods associated with nature, the nature claimed by the ads was no
@@ -1874,6 +2075,9 @@ practice:
       key_points:
       - '''no longer the nature that created the foods'' : no longer를 놓쳐 ''여전히 ~이었다''로
         뒤집기 쉽다 → no longer는 ''더 이상 ~아니다''(이전 상태의 종료).'
+      cut_en: While many city shoppers / were clearly drawn to the notion of buying
+        and eating foods associated with nature, / the nature claimed by the ads /
+        was no longer / the nature that created the foods.
   - kind: mc
     sentence: Science is sometimes described as a winner-take-all contest, meaning
       that there are no rewards for being second or third.
@@ -1899,6 +2103,8 @@ practice:
       key_points:
       - '''there are no rewards for being second or third'' : no를 놓쳐 ''보상이 있다''로 뒤집기
         쉽다 → ''2·3등에는 보상이 없다''(승자 독식).'
+      cut_en: Science / is sometimes described as a winner-take-all contest, / meaning
+        that / there are no rewards for being second or third.
   - kind: short
     sentence: By using contingency pricing, clients are ensured that they pay no fees
       until they receive a settlement.
@@ -1921,6 +2127,8 @@ practice:
       key_points:
       - '''pay no fees until ~'' : no를 놓쳐 ''수수료를 낸다''는 긍정으로 뒤집기 쉽다 → ''어떠한 수수료도 내지
         않는다''(합의 전까지).'
+      cut_en: By using contingency pricing, / clients are ensured / that they pay
+        no fees / until they receive a settlement.
   - kind: short
     sentence: In his early studies on musical performance, Carl Seashore discovered
       that musicians only rarely play two equal notes in exactly the same way.
@@ -1945,6 +2153,9 @@ practice:
       key_points:
       - '''only rarely play ...'' : rarely를 놓쳐 ''자주''로 빈도를 뒤집기 쉽다 → only rarely는 ''극히
         드물게만''(준부정).'
+      cut_en: In his early studies on musical performance, / Carl Seashore discovered
+        / that musicians only rarely play / two equal notes / in exactly the same
+        way.
   - kind: short
     sentence: We can see the world only as it appears to us, not as it truly is, because
       there is no as it truly is without a perspective to give it form.
@@ -1969,6 +2180,8 @@ practice:
       key_points:
       - '''there is no ... without a perspective'' : no ... without의 이중 부정을 놓쳐 ''관점
         없이도 있다''로 뒤집기 쉽다 → ''형태를 주는 관점 없이는 있는 그대로가 없다''.'
+      cut_en: We can see the world / only as it appears to us, / not as it truly is,
+        / because there is no as it truly is / without a perspective to give it form.
   - kind: short
     sentence: However, in the virtual world, we have a tendency to be less defensive,
       as there appears to be no physical threat to our well-being.
@@ -1991,6 +2204,8 @@ practice:
       key_points:
       - '''less defensive ... no physical threat'' : less와 no를 놓쳐 ''더 방어적'', ''위협이
         있다''로 두 곳의 극성을 뒤집기 쉽다 → ''덜 방어적'', ''물리적 위협이 없어 보임''.'
+      cut_en: However, in the virtual world, / we have a tendency / to be less defensive,
+        / as there appears to be no / physical threat to our well-being.
   - kind: short
     sentence: Moreover farmers can rarely acquire payoff information on more than
       a few of the production methods they might use.
@@ -2014,3 +2229,5 @@ practice:
       key_points:
       - '''can rarely acquire ...'' : rarely를 놓쳐 ''자주 얻을 수 있다''로 뒤집기 쉽다 → rarely는
         ''좀처럼 ~않다''(준부정).'
+      cut_en: Moreover farmers / can rarely acquire / payoff information / on more
+        than a few / of the production methods / they might use.

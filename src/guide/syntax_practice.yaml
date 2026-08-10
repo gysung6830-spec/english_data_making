@@ -29,6 +29,8 @@ practice:
         쉽다.'
       - 'that have ... and where ... : 두 관계사절이 선행사 attractions를 병렬 수식하는데, 이를 놓치면 ''어떻게
         제한하고 어디에 없는지''로 갈라 읽게 된다.'
+      cut_en: Indeed, / there are examples / of particular attractions / [that have
+        limited capacity / and where there is actually no room for more visitors].
   - kind: mc
     sentence: The scientific thinker looks for features of the thing that can be stripped
       of subjectivity, ideally, those aspects that can be quantified and whose values
@@ -60,6 +62,9 @@ practice:
         의문사절로 읽기 쉽다.'
       - 'those aspects that can be quantified : that을 ''어떤 측면이 ~인지'' 의문사로 읽기 쉽지만 aspects를
         꾸미는 주격 관계대명사.'
+      cut_en: The scientific thinker looks for / features of the thing / [that can
+        be stripped of subjectivity], / ideally, / those aspects [that can be quantified
+        / and whose values will thus never change from one observer to the next].
   - kind: mc
     sentence: If you listen to someone who is not clear, who cannot stay on the topic,
       or who offers too much or too little information, you will quickly lose interest
@@ -89,6 +94,9 @@ practice:
       key_points:
       - 'someone who ~, who ~, or who ~ : 세 who를 ''누가 ~인지'' 의문사로 읽기 쉽지만 모두 someone을
         병렬 수식하는 주격 관계대명사.'
+      cut_en: If you listen to / someone [who is not clear, / who cannot stay on the
+        topic, / or who offers too much or too little information], / you will quickly
+        lose interest / in the conversation.
   - kind: short
     sentence: Conversely, it can be claimed that a city in which many people are not
       walking often indicates good city quality.
@@ -111,6 +119,8 @@ practice:
       key_points:
       - 'a city in which S+V : in which를 ''어디에 ~인지''로 읽어 주어를 흐리기 쉽다 → ''a city''를
         꾸미는 관계사절이고 indicates의 주어는 a city.'
+      cut_en: Conversely, / it can be claimed that / a city [in which many people
+        are not walking] / often indicates / good city quality.
   - kind: mc
     sentence: 'If we understand critical thinking as: the identification and evaluation
       of evidence to guide decision‑making'', then '' ethical thinking is about identifying
@@ -143,6 +153,7 @@ practice:
       author_msg: 비판적 사고가 증거의 식별·평가라면, 윤리적 사고는 윤리적 쟁점을 여러 관점에서 평가해 어떻게 대응할지를 이끄는 것이다.
       key_points:
       - '의문사 how + to부정사 : ''어떻게 ~할지''(방법) — 정도의 how(얼마나)와 혼동 금지, 수량어가 뒤따르지 않음'
+      cut_en: to guide / how to respond.
   - kind: short
     sentence: To illustrate this, consider the uncertainties involved in predicting
       climatic changes, how ecosystems are likely to respond to climatic changes,
@@ -175,6 +186,10 @@ practice:
       key_points:
       - 'consider A, how ..., and B : how 의문사절이 동사의 목적어로 명사 A·B와 병렬 — 앞 명사 수식으로 오독
         금지'
+      cut_en: To illustrate this, consider / the uncertainties (involved in predicting
+        climatic changes), / how ecosystems are likely to respond to climatic changes,
+        / and the likely efficacy of actions (that might be taken to counter adverse
+        effects of climatic changes).
   - kind: short
     sentence: Just as we don't always see the intricate brushwork that goes into the
       creation of a painting, we may not always Beethoven notice how Beethoven keeps
@@ -208,6 +223,10 @@ practice:
       key_points:
       - 'notice how ... or how ... : 두 how 의문사절이 동사 목적어로 병렬(or)'
       - 'brushwork that goes into ... : 주격 관계대명사 that(주어 결여)'
+      cut_en: Just as we don't always see / the intricate brushwork (that goes into
+        the creation of a painting), / we may not always Beethoven notice / how Beethoven
+        keeps finding fresh uses for his motto / or how he develops his material into
+        a large, cohesive statement.
   - kind: short
     sentence: Killer whales also repeat the same seal hunting technique in front of
       their offspring, sometimes without even killing the seal, leading researchers
@@ -239,6 +258,10 @@ practice:
       key_points:
       - 'ask why + S + would ... : why 의문사절이 ask의 목적어(왜 ~하는지) — 이유 부사절로 오독 금지'
       - 'leading researchers to ask ... : 결과를 나타내는 분사구문'
+      cut_en: Killer whales also repeat the same seal hunting technique / in front
+        of their offspring, / sometimes without even killing the seal, / leading researchers
+        to ask / why they would repeatedly catch and release a seal / if they were
+        not planning to eat it.
   - kind: mc
     sentence: The design process concentrates on how the agents will cooperate and
       coordinate with each other to accomplish the team goals.
@@ -267,6 +290,8 @@ practice:
       author_msg: 설계의 초점은 에이전트들이 '어떻게' 협력·조정할지, 즉 그 방법에 있다.
       key_points:
       - 'how 명사절 : 정도(얼마나) 오독 → 방법(어떻게)의 명사절로 처리'
+      cut_en: The design process / concentrates on / how the agents will cooperate
+        and coordinate with each other / to accomplish the team goals.
   - kind: short
     sentence: Culture operates in ways we can consciously consider and discuss but
       also in ways of which we are far less cognizant.
@@ -291,6 +316,8 @@ practice:
       author_msg: 문화는 우리가 인식하는 방식뿐 아니라 거의 인식하지 못하는 방식으로도 작동한다.
       key_points:
       - 'of which 관계절 : 전치사+관계대명사가 선행사 ways 수식 → be cognizant of의 of가 앞으로 이동'
+      cut_en: Culture operates / in ways (we can consciously consider and discuss)
+        / but also in ways (of which we are far less cognizant).
   participle:
   - kind: mc
     sentence: Worried that she could not get to the boarding gate in time, she rushed
@@ -320,6 +347,8 @@ practice:
       key_points:
       - '(Being) Worried that ~ : 의미상 주어는 주절 주어 she인데, 앞의 crowds of people에 끌려 ''사람들이
         서둘러 갔다''로 주체를 바꾸기 쉽다.'
+      cut_en: (Worried that she could not get to the boarding gate in time), / she
+        / rushed / through the crowds of people.
   - kind: mc
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached
       her and said a few encouraging words.
@@ -347,6 +376,8 @@ practice:
       key_points:
       - 'Recognizing how ~ : 분사구문 주체는 콤마 뒤 주절 주어 Ken인데, 앞 절 목적어 her에 끌려 ''그녀가 알아차리고
         다가갔다''로 주어를 바꾸기 쉽다.'
+      cut_en: (Recognizing [how she felt about her failure]), / Ken, her teammate,
+        / approached her / and said a few encouraging words.
   - kind: short
     sentence: Considering the metaphor of seams in clothing, we can say that we aspire
       to seamless aesthetics by stitching the seams closely, pressing them flat and
@@ -376,6 +407,10 @@ practice:
       key_points:
       - '문두 Considering : 주절 동사로 오독 → 분사구문 ''~을 고려하면'' / stitching·pressing·making
         : by에 걸리는 동명사 병렬로 처리'
+      cut_en: (Considering the metaphor of seams in clothing), / we can say that we
+        aspire to seamless aesthetics / by stitching the seams closely, pressing them
+        flat and making sure they are hidden on the inside / so that we wear clothing
+        rather than pieces of fabric.
   - kind: short
     sentence: Moving up in scale, without some awareness of how phenomena are arranged
       on Earth's surface, it is difficult to make reasoned business or policy judgments,
@@ -405,6 +440,10 @@ practice:
       key_points:
       - '문두 Moving up in scale : 주절 주어로 오독 → 분사구문 ''~할 때'' / forces shaping ~ : 병렬
         동사로 오독 → forces를 수식하는 현재분사로 처리'
+      cut_en: (Moving up in scale), / (without some awareness of how phenomena are
+        arranged on Earth's surface), / it is difficult to make reasoned business
+        or policy judgments, make sense of events, or grasp some of the basic forces
+        / (shaping life on the planet).
   - kind: mc
     sentence: Questions of morality are often pushed to the side in legislative debate,
       labeled too controversial, too difficult to answer, or, worst of all, irrelevant
@@ -435,6 +474,9 @@ practice:
       author_msg: 도덕 문제는 논쟁적·난해·무관하다는 딱지가 붙어 뒷전으로 밀린다.
       key_points:
       - '과거분사 분사구문 labeled : 능동 오독 → (being) labeled 수동, 주어가 분류되는 대상'
+      cut_en: Questions of morality / are often pushed to the side / in legislative
+        debate, / labeled too controversial, / too difficult to answer, / or, worst
+        of all, irrelevant to the project.
   - kind: mc
     sentence: But the economic benefits provided by these services, based on their
       non‑market values, may exceed the economic value of the timber.
@@ -464,6 +506,8 @@ practice:
       author_msg: 서비스의 비시장 가치를 반영하면 그 이익이 목재 가치를 넘어설 수 있다.
       key_points:
       - '삽입 분사구문 based on : their를 timber로 오독 → these services(이익의 원천)에 연결'
+      cut_en: But the economic benefits (provided by these services), / based on their
+        non‑market values, / may exceed / the economic value of the timber.
   - kind: mc
     sentence: Formal training programs, developed in advance and delivered according
       to a preset schedule, are insufficient to address shifting training needs and
@@ -495,6 +539,9 @@ practice:
       author_msg: 미리 짜여 정해진 일정대로 제공되는 공식 훈련은 변화하는 요구에 대응하기 부족하다.
       key_points:
       - '과거분사 삽입구 developed/delivered : 능동 본동사 오독 → 수동 수식, 본동사는 are insufficient'
+      cut_en: Formal training programs, / (developed in advance and delivered according
+        to a preset schedule), / are insufficient / to address shifting training needs
+        / and encourage timely information sharing.
   - kind: short
     sentence: In this sense, depending on the intentions of the parties, the areas
       of common interest may be clarified, refined and given negotiated form and substance.
@@ -519,6 +566,9 @@ practice:
       author_msg: 당사자 의도에 따라 공동 관심사는 구체적 형태를 갖추게 된다.
       key_points:
       - '문두 분사구문 depending on : 명사수식/주어 오독 → 부사적 조건(~에 따라)'
+      cut_en: In this sense, / (depending on the intentions of the parties), / the
+        areas of common interest / may be clarified, refined / and given negotiated
+        form and substance.
   - kind: short
     sentence: Individual perspectives may also be context dependent, meaning that
       under different circumstances, at a different time, when they are feeling a
@@ -545,6 +595,9 @@ practice:
       author_msg: 관점은 맥락에 좌우되어 같은 사람도 상황에 따라 다르게 선택한다.
       key_points:
       - '콤마 분사구문 meaning that : 형용사/목적어 오독 → 앞 절 부연(= which means)'
+      cut_en: Individual perspectives may also / be context dependent, / meaning that
+        (under different circumstances, at a different time, when they are feeling
+        a different way) / the same individual may make different choices.
   - kind: short
     sentence: For example, a United Nations initiative has estimated that the economic
       benefits of ecosystem services provided by tropical forests, including climate
@@ -572,6 +625,10 @@ practice:
       author_msg: 기후조절·정화·침식방지 등 생태계 서비스의 가치가 목재 시장가치의 세 배를 넘는다.
       key_points:
       - '콤마 분사구 including : 본동사 오독 → 예시 삽입 분사구, that절 본동사는 are greater'
+      cut_en: For example, a United Nations initiative has estimated that / the economic
+        benefits of ecosystem services (provided by tropical forests), / (including
+        climate regulation, water purification, and erosion prevention), / are over
+        three times greater per hectare / than the market benefits.
   insertion:
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through
@@ -605,6 +662,10 @@ practice:
       key_points:
       - ', which is transported ~ : '', which''를 빼면 뼈대(our body becomes a container)가
         남는데, which절 속 artefacts를 주어로 삼아 ''인공물이 몸을 이동시킨다''로 뼈대를 잘못 잡기 쉽다.'
+      cut_en: (In spite of increasing acceleration, for example in travelling through
+        geographical or virtual space,) / our body becomes / [more and more a passive
+        non-moving container], / (which is transported by artefacts / or loaded up
+        with inner feelings of being mobile in the so-called information society).
   - kind: mc
     sentence: For the present generation of artists, the computer, or more appropriately,
       the laptop, is one in a collection of integrated, portable digital technologies
@@ -637,6 +698,9 @@ practice:
       key_points:
       - 'or more appropriately, the laptop : the computer를 재진술하는 동격 삽입인데, appropriately를
         동사처럼 보아 ''컴퓨터가 노트북을 적절하게 만들어''로 읽기 쉽다 → 본동사는 is.'
+      cut_en: For the present generation of artists, / the computer, / (or more appropriately,
+        the laptop), / is one / [in a collection of integrated, portable digital technologies]
+        / that link / [their social and working life].
   - kind: short
     sentence: Fortunately, in the period after 1660, when more items of dress survive
       to enrich our understanding of the history of the subject, there are also many
@@ -665,6 +729,10 @@ practice:
       key_points:
       - ', when ... subject / , caught in movement : 두 콤마 삽입을 빼면 뼈대(there are also
         many sources of evidence)인데, 삽입절 술어나 caught를 주절로 오인하기 쉽다.'
+      cut_en: Fortunately, / [in the period after 1660], / (when more items of dress
+        survive to enrich our understanding of the history of the subject), / there
+        are also / [many painted, printed, photographed and filmed sources of evidence]
+        / [of people in clothing], / (caught in movement).
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through
       geographical or virtual space, our body becomes more and more a passive non‑moving
@@ -699,6 +767,10 @@ practice:
       key_points:
       - 'for example, ... 콤마 삽입 예시구 : 주절 주어로 오독 → 걷어내고 뒤의 our body becomes를 주어·동사로
         잡기'
+      cut_en: (In spite of increasing acceleration,) / (for example in travelling
+        through geographical or virtual space,) / our body becomes more and more a
+        passive non‑moving container, / (which is transported by artefacts or loaded
+        up with inner feelings of being mobile in the so‑called information society).
   - kind: mc
     sentence: Since that time, it has become apparent that broadly effective pesticides
       can have harmful effects on beneficial insects, which can negate their effects
@@ -731,6 +803,10 @@ practice:
       author_msg: 효과 좋은 살충제도 이로운 곤충과 표적 아닌 생물에 해를 끼친다는 점이 드러났다.
       key_points:
       - 'which ~ , 콤마 사이 관계사 삽입절 : 주절 내용으로 오독 → 걷어내고 병렬된 두 that절을 뼈대로 잡기'
+      cut_en: Since that time, / it has become apparent / that broadly effective pesticides
+        can have harmful effects on beneficial insects, / (which can negate their
+        effects in controlling pests), / and that persistent pesticides can damage
+        non‑target organisms in the ecosystem, / (such as birds and people).
   - kind: mc
     sentence: Even though there is good reason to consider a dog a sentient being
       capable of making choices and plans—so ' that we might suppose it could have
@@ -766,6 +842,10 @@ practice:
       key_points:
       - '—so that ~ otherwise— 대시 삽입절 : 주절로 오독 → 걷어내고 양보절 + we''re unlikely to think를
         뼈대로 잡기'
+      cut_en: Even though there is good reason to consider a dog a sentient being
+        [capable of making choices and plans] / (—so ' that we might suppose it could
+        have conceived of acting ' otherwise'—) / we're unlikely to think it is wicked
+        and immoral for attacking a child.
   - kind: short
     sentence: Over the course of its evolutionary history, an organism's remote ancestors
       may have evolved a set of characteristics ' —evolutionary baggage'—that subsequently
@@ -794,6 +874,9 @@ practice:
       key_points:
       - '— evolutionary baggage — 대시 동격 삽입 : 새 목적어로 오독 → 앞 명사 characteristics의 다른
         이름으로 처리'
+      cut_en: (Over the course of its evolutionary history), / an organism's remote
+        ancestors may have evolved a set of characteristics / (' —evolutionary baggage'—)
+        / (that subsequently constrain future evolution).
   - kind: short
     sentence: One function of poetry is to depict the world with a fresh perception—to
       make it strange—so that we will listen to language once again.
@@ -819,6 +902,8 @@ practice:
       author_msg: 시는 세상을 낯설게 함으로써 언어에 다시 주목하게 한다.
       key_points:
       - '대시 쌍 삽입 —to make it strange— : 병렬 목적 오독 → 앞 어구의 부연(삽입)'
+      cut_en: One function of poetry is / to depict the world with a fresh perception
+        / (—to make it strange—) / so that we will listen to language once again.
   - kind: short
     sentence: But here too there is iteration—the repeated burning of molecules of
       wax—so this too is an iterative process, although at first masked.
@@ -845,6 +930,8 @@ practice:
       author_msg: 밀랍이 반복 연소되므로 이것도 결국 반복적 과정이다.
       key_points:
       - '대시 쌍 삽입 : 별개 절 오독 → iteration의 동격 부연, 골격은 there is iteration ... so ...'
+      cut_en: But here too / there is iteration / (—the repeated burning of molecules
+        of wax—) / so this too is an iterative process, / although at first masked.
   apposition:
   - kind: mc
     sentence: 'When you say "It''s mine" in reference to a resource, often that means
@@ -877,6 +964,10 @@ practice:
       - '콜론(:) 뒤 나열 : the full bundle(the sticks)을 ''즉''으로 풀어 쓰는 동격인데, 콜론 뒤를 별개 항목으로
         보태 읽기 쉽다 → A : B는 A=B(내용).'
       - 'that means : 현재 소유 ''상태''의 재진술인데 ''소유하려 한다''는 의지로 오독하기 쉽다.'
+      cut_en: 'When you say "It''s mine" in reference to a resource, / often that
+        means / you own a lot of the sticks / [that make up the full bundle]: / the
+        sell stick, the rent stick, the right to mortgage, license, give away, even
+        destroy the thing.'
   - kind: mc
     sentence: Studies on dark‑eyed juncos (a type of bird) support the ( ) view that
       nonvigilant animals attend to departures of individual group mates but that
@@ -909,6 +1000,10 @@ practice:
       author_msg: 새 연구는 비경계 동물이 짝의 이탈에 주의하되, 여러 마리가 떠날수록 더 크게 도피 반응을 보인다는 견해를 뒷받침한다.
       key_points:
       - 'the view that : that을 관계절로 오독 → 명사의 내용을 재진술하는 동격 that절로 처리'
+      cut_en: Studies on dark‑eyed juncos (a type of bird) support the ( ) view /
+        that nonvigilant animals attend to departures of individual group mates /
+        but that the departure of multiple individuals causes a greater escape response
+        in the nonvigilant individuals.
   - kind: mc
     sentence: Hyper‑mobility—the notion that more travel at faster speeds covering
       longer distances generates greater economic success—seems to be a distinguishing
@@ -942,6 +1037,10 @@ practice:
       author_msg: 초이동성, 즉 더 빠르고 멀리 이동할수록 경제적으로 성공한다는 관념은 도시의 두드러진 특징이다.
       key_points:
       - '대시(—…—) 동격 : 삽입구를 본동사로 오독 → 앞 명사를 재정의하는 동격으로 걷어내고 seems를 본동사로 처리'
+      cut_en: Hyper‑mobility / (—the notion that more travel at faster speeds covering
+        longer distances generates greater economic success—) / seems to be a distinguishing
+        feature of urban areas, / (where more than half of the world's population
+        currently reside).
   - kind: mc
     sentence: 'When you say It''s mine in reference to a resource, often.'' that means
       you own a lot of the sticks that make up the full bundle: the sell stick, the
@@ -972,6 +1071,10 @@ practice:
       author_msg: 무언가를 '내 것'이라 함은, 팔고 빌려주고 저당 잡히고 넘겨주고 없앨 권리 같은 여러 권리 다발을 갖는다는 뜻이다.
       key_points:
       - '콜론(:) 동격 : 목록을 동사의 목적어로 오독 → 앞 명사(the sticks)를 열거·재진술하는 동격으로 처리'
+      cut_en: 'When you say It''s mine in reference to a resource, often.'' / that
+        means / you own a lot of the sticks / [that make up the full bundle]: / the
+        sell stick, the rent stick, the right to mortgage, license, give away, even
+        destroy the thing.'
   - kind: mc
     sentence: In larger‑scale projects, however, even where a strong personality exercises
       powerful influence, the fact that substantial numbers of designers are employed
@@ -1003,6 +1106,9 @@ practice:
       author_msg: 대규모 프로젝트에서는 스타 디자이너가 부각되어, 실제로 다수의 디자이너가 개념 구현에 투입된다는 사실이 쉽게 묻힌다.
       key_points:
       - 'the fact that : that절을 분리해 주어를 놓침 → the fact의 내용을 밝히는 동격 that절로 묶어 주어로 처리'
+      cut_en: In larger‑scale projects, however, / (even where a strong personality
+        exercises powerful influence), / the fact [that substantial numbers of designers
+        are employed in implementing a concept] / can easily be overlooked.
   - kind: short
     sentence: In recent years urban transport professionals globally have largely
       acquiesced to the view that automobile demand in cities needs to be managed
@@ -1028,6 +1134,9 @@ practice:
       author_msg: 도시 교통 전문가들은 자동차 수요를 무한정 수용하기보다 관리해야 한다는 견해를 대체로 수용하게 되었다.
       key_points:
       - 'the view that : 관계절로 오독 → 견해의 내용을 밝히는 동격 that절(''~라는 견해'')로 처리'
+      cut_en: In recent years / urban transport professionals globally / have largely
+        acquiesced to the view / that automobile demand in cities needs to be managed
+        rather than accommodated.
   prep_stack:
   - kind: mc
     sentence: Even without the imperative of climate change, the physical constraints
@@ -1062,6 +1171,10 @@ practice:
       key_points:
       - 'the constraints of ... and the demands of ... all limit : of 뒤 cities/accessibility에
         눈이 쏠려 이를 주어로 오인하기 쉽다 → 주어 뼈대는 constraints and demands, 동사는 limit.'
+      cut_en: (Even without the imperative of climate change), / [the physical constraints
+        of densely inhabited cities] and [the corresponding demands of accessibility,
+        mobility, safety, air pollution, and urban livability] / all limit / [the
+        option of expanding road networks] / [purely to accommodate this rising demand].
   - kind: mc
     sentence: 'Often, though, we split the sticks up, as for a piece of land: there
       may be a landowner, a bank with a mortgage, a tenant with a lease, a plumber
@@ -1094,6 +1207,10 @@ practice:
       key_points:
       - 'a bank with a mortgage : ''with+명사''는 앞 명사를 꾸미는 수식구(''저당권을 가진 은행'')인데, with
         뒤 mortgage를 주어로 삼아 ''저당이 은행을 소유''로 뒤집기 쉽다 → 뼈대는 there may be A, B, C 나열.'
+      cut_en: 'Often, though, we split the sticks up, / as for a piece of land: /
+        there may be / a landowner, / [a bank with a mortgage], / [a tenant with a
+        lease], / [a plumber with a license to enter the land], / [an oil company
+        with mineral rights].'
   - kind: short
     sentence: A transit project that could speed travel for tens of thousands of people
       can be stopped by objections to the loss of a few parking spaces or by the simple
@@ -1119,6 +1236,9 @@ practice:
       key_points:
       - 'A transit project ... can be stopped by A or by B : 긴 주어 속 for tens of thousands
         of people에 끌려 주어를 놓치기 쉽다 → 핵은 project, by 이하는 중단의 두 이유.'
+      cut_en: A transit project [that could speed travel for tens of thousands of
+        people] / can be stopped / [by objections to the loss of a few parking spaces]
+        / [or by the simple fear that the project won't work].
   - kind: mc
     sentence: In discharging their usual responsibilities of description and commentary,
       reporters' accounts of sports events are eagerly consulted by sports fans, while
@@ -1155,6 +1275,7 @@ practice:
       key_points:
       - 'role of covering sport in its many forms : of는 role을, in은 covering sport를
         수식 — in구를 앞 명사에 잘못 붙이지 말 것'
+      cut_en: their broader journalistic role / of covering sport / in its many forms.
   - kind: mc
     sentence: 'The feedback loop of perception and action that enables you to navigate
       the world around you is now one step removed: instead of perceiving primarily
@@ -1190,6 +1311,7 @@ practice:
       key_points:
       - 'interaction of A with B : of구와 with구가 모두 interaction을 수식(A가 B와 하는 상호작용) —
         with구를 동사에 붙이지 말 것'
+      cut_en: through interaction / of your own body / with the external world.
   - kind: mc
     sentence: For example, a company may devise a family emergency leave plan that
       allows employees the opportunity to be away from the company for a period of
@@ -1229,6 +1351,9 @@ practice:
       - 'for a period ...(기간) vs for illness ...(이유) : 같은 for라도 기간/이유로 기능이 다름'
       - 'illness in the employee''s immediate family : in구는 앞 명사 illness를 수식(직계 가족의
         질병)'
+      cut_en: to be away from the company / for a period of no longer than three hours,
+        / and no more than once a month, / for illness in the employee's immediate
+        family.
   - kind: short
     sentence: In these and other instances of contingency pricing, the economic value
       of the service is hard to determine before the service, and providers develop
@@ -1263,6 +1388,7 @@ practice:
       - 'risks and rewards of delivering value to the buyer : of구는 명사를, to구는 delivering
         value를 수식하는 중첩 구조'
       - 'a price that allows ... : price를 수식하는 주격 관계대명사 that'
+      cut_en: the risks and rewards / of delivering value / to the buyer.
   - kind: short
     sentence: In the case of climate change, however, the sharp division of time into
       past, present, and future has been desperately ( ) misleading and has, most
@@ -1295,6 +1421,8 @@ practice:
       - 'the extent of the responsibility of those of us alive now : of가 연쇄되는 명사구(…의
         …의 정도)'
       - 'hidden from view + (긴 목적어) : 부사구 뒤로 목적어가 후치된 어순'
+      cut_en: hidden from view / the extent / of the responsibility / of those of
+        us / alive now.
   - kind: short
     sentence: Sequential changes are found in many fossils showing the change of certain
       features over time from a common ancestor, as in the case of the horse.
@@ -1322,6 +1450,9 @@ practice:
       key_points:
       - 'the change of certain features over time from a common ancestor : from구를
         found에 걸어 ''조상에게서 발견''으로 오독 → of·over·from 세 구가 모두 change를 수식하는 중첩 구조로 처리'
+      cut_en: Sequential changes are found / in many fossils / (showing the change)
+        / of certain features / over time / from a common ancestor, / as in the case
+        of the horse.
   - kind: short
     sentence: Consumer engagement levels in all manner of digital experiences and
       communities have simply exploded—and they show little or no signs of slowing.
@@ -1350,6 +1481,9 @@ practice:
       - 'levels in all manner of digital experiences and communities : in구에서 끊어 주어를
         짧게 잡음 → in all manner of ... 전체를 levels를 꾸미는 수식 덩어리로 묶고 have exploded를 술어로
         처리'
+      cut_en: Consumer engagement levels / in all manner of / digital experiences
+        and communities / have simply exploded / —and they show / little or no signs
+        / of slowing.
   inversion:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be
@@ -1379,6 +1513,8 @@ practice:
       key_points:
       - 'Nor are all ~ chaotic : 도치를 되돌리려다 ''모두 혼돈적이며''로 긍정으로 읽기 쉽다 → Nor부터 ''~도 아니다''로
         받고 not all은 부분부정.'
+      cut_en: 'Nor are all nonlinear systems chaotic: / (to become so) / they need
+        to be pushed beyond a certain point, called a bifurcation.'
   - kind: mc
     sentence: Not only is it less convenient—in terms of time, cost and comfort—to
       access locations in cities, but the very process of moving around in cities
@@ -1407,6 +1543,9 @@ practice:
       key_points:
       - 'Not only is it less convenient ~ : 도치와 less convenient/negative를 놓쳐 ''편리해서
         이롭다''로 극성을 뒤집기 쉽다 → ''A뿐 아니라 B도''로 받기.'
+      cut_en: Not only is it less convenient—in terms of time, cost and comfort—to
+        access locations in cities, / but the very process of moving around in cities
+        / generates a number of negative externalities.
   - kind: short
     sentence: Little evidence exists that suggests modern AI's infallibility or predicts
       it in the future.
@@ -1429,6 +1568,8 @@ practice:
       key_points:
       - 'Little evidence exists : 문두 Little을 ''조금 있는''으로 읽어 긍정으로 뒤집기 쉽다 → ''거의 없는''의
         부정 신호.'
+      cut_en: Little evidence exists / that suggests modern AI's infallibility / or
+        predicts it in the future.
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they '' need to
       be pushed beyond a certain point, called a bifurcation.'
@@ -1459,6 +1600,8 @@ practice:
       key_points:
       - 'Nor + 조동사 are + 주어 도치 : 부정어 Nor 문두 → 주어·동사 도치. all ~ not은 부분부정("모두가 ~은 아니다")이지
         전체부정이 아님'
+      cut_en: 'Nor are all nonlinear systems chaotic: / (to become so) / they '' need
+        to be pushed beyond a certain point, / (called a bifurcation).'
   emphasis:
   - kind: short
     sentence: In a city like Rome, it is the large number of people standing or sitting
@@ -1485,6 +1628,8 @@ practice:
       key_points:
       - 'It is X that ~ : It is ~ that을 가주어-진주어로 오해하기 쉽다 → it·that을 지워도 문장이 성립하는 강조구문,
         강조 대상은 사이의 X(광장에 머무는 많은 사람들).'
+      cut_en: In a city like Rome, / it is / [the large number of people standing
+        or sitting in squares] / rather than walking / that is conspicuous.
   - kind: short
     sentence: 'But the reason for eclipses is ultimately the same as that of the succession
       of night and day: the movement of celestial bodies, which itself is based on
@@ -1512,6 +1657,10 @@ practice:
       author_msg: 일식의 원인은 밤낮 교대와 같은 천체 운동이며, 그 운동은 다시 뉴턴의 인력 법칙에 뿌리를 둔다.
       key_points:
       - 'which itself : itself를 별개 주어로 오독 → 선행사를 강조하는 재귀대명사로 처리'
+      cut_en: 'But the reason for eclipses is ultimately the same as that of the succession
+        of night and day: / the movement of celestial bodies, / which itself is based
+        on / the Newtonian law of attraction / and how it explains why things fall
+        when we let them go.'
   parallel:
   - kind: mc
     sentence: Unfortunately, at the scales, accuracy, and precision most useful to
@@ -1543,6 +1692,9 @@ practice:
       key_points:
       - 'not only ... unprecedented, but ... unpredictable : A(전례 없음)를 부정으로 읽어 ''A가
         아니라 B''로 옮기기 쉽다 → 둘 다 긍정, 짝은 promises to be unprecedented ↔ ... unpredictable.'
+      cut_en: Unfortunately, / at the scales, accuracy, and precision [most useful
+        to protected area management], / the future / not only promises to be unprecedented,
+        / but it also promises to be unpredictable.
   - kind: mc
     sentence: Learning how to choose from alternatives and make a decision requires
       not only good personal values, but also knowledge competence in the business
@@ -1574,6 +1726,9 @@ practice:
       key_points:
       - 'requires not only A but also B : B(지식 역량)를 ''요구하지 않는다''로 부정해 읽기 쉽다 → A·B
         모두 requires의 목적어.'
+      cut_en: '[Learning how to choose from alternatives and make a decision] / requires
+        / not only good personal values, / but also knowledge competence in the business
+        area of concern.'
   - kind: mc
     sentence: The opening da-da-da-DUM that everyone has heard somewhere or another
       appears in an incredible variety of ways throughout not only the opening movement,
@@ -1604,6 +1759,10 @@ practice:
       key_points:
       - 'throughout not only A but B : also 없이 이어져 B(the remaining three movements,
         나머지 세 악장)를 빠뜨리기 쉽다 → throughout의 목적어 둘 다 포함.'
+      cut_en: The opening da-da-da-DUM [that everyone has heard somewhere or another]
+        / appears / in an incredible variety of ways / throughout not only the opening
+        movement, / but the remaining three movements, / like a kind of motto or a
+        connective thread.
   - kind: short
     sentence: Sometimes these internal narratives we form not only shape our beliefs
       and opinions but also become deeply rooted in our identity.
@@ -1626,6 +1785,8 @@ practice:
       key_points:
       - 'not only shape ... but also become ~ : B(정체성에 뿌리내림)를 ''못한다''로 부정해 읽기 쉽다 →
         shape ↔ become 둘 다 긍정.'
+      cut_en: Sometimes / these internal narratives [we form] / not only shape / our
+        beliefs and opinions / but also become deeply rooted / in our identity.
   - kind: short
     sentence: What's behind this idea is not only landscape architects' desire to
       design aesthetically suggestive park spaces, but a much longer history of Western
@@ -1651,6 +1812,10 @@ practice:
       key_points:
       - 'is not only A but B : is의 보어 B(a much longer history of Western thought)를
         배제해 ''A이지 B는 아니다''로 읽기 쉽다 → A·B 둘 다 보어.'
+      cut_en: '[What''s behind this idea] / is not only landscape architects'' desire
+        / (to design aesthetically suggestive park spaces), / but a much longer history
+        of Western thought / [that envisions cities and nature as antithetical spaces
+        and oppositional forces].'
   - kind: mc
     sentence: If a certain player ends up consistently with the desired outcome, defeating
       all who challenge that player, then we tend to interpret the outcome either
@@ -1686,6 +1851,10 @@ practice:
       key_points:
       - 'either A or B : A=as the work of Fortune, B=as clever and undetectable cheating로
         as구 두 개가 대등 → clever만 떼어 A에 붙이면 오독'
+      cut_en: (If a certain player ends up consistently with the desired outcome),
+        / (defeating all who challenge that player), / then we tend to interpret the
+        outcome / either as the work of ' Fortune, / or else as clever and undetectable
+        cheating / on the part of the winning player.
   - kind: mc
     sentence: We understand that the segregation of our consciousness into present,
       past, and future is both a fiction and an oddly self‑referential framework;
@@ -1718,6 +1887,8 @@ practice:
       key_points:
       - 'both A and B : A=a fiction, B=an oddly self-referential framework의 두 요소 →
         oddly를 독립 요소로 떼면 오독'
+      cut_en: We understand that / [the segregation of our consciousness into present,
+        past, and future] / is both a fiction and an oddly self‑referential framework;
   - kind: mc
     sentence: The opening da‑da‑da‑DUM that everyone has heard somewhere or another
       appears in an incredible variety of ‑ ‑ ‑ ways throughout not only the opening
@@ -1749,6 +1920,10 @@ practice:
       key_points:
       - 'not only A but B : A=the opening movement, B=the remaining three movements
         모두 포함 → not only를 "오직 ~이 아니라"로 읽어 A를 배제하면 오독'
+      cut_en: The opening da‑da‑da‑DUM that everyone has heard somewhere or another
+        appears in an incredible variety of ‑ ‑ ‑ ways / throughout not only the opening
+        movement, / but the remaining three movements, / like a kind of motto or a
+        connective thread.
   - kind: short
     sentence: But after today, I really ' feel like it'll be our place."." Now, they
       both knew that the place would provide them with energy and refreshment.
@@ -1771,6 +1946,8 @@ practice:
       key_points:
       - 'provide A with B : B=energy and refreshment로 and가 묶은 두 명사 → refreshment를
         떼어내면 오독'
+      cut_en: Now, they both knew that / the place would provide them with energy
+        and refreshment.
   - kind: short
     sentence: Many states that might wish to use it for education and information
       may not only find it too expensive but also simply unavailable to them.
@@ -1794,6 +1971,8 @@ practice:
       key_points:
       - 'not only A but also B : find it A / B로 too expensive와 unavailable가 목적보어 병렬
         → unavailable을 독립절로 읽으면 오독'
+      cut_en: Many states [that might wish to use it for education and information]
+        / may not only find it too expensive / but also simply unavailable to them.
   - kind: short
     sentence: Creativity is commonly defined as the production of ideas ( ) that are
       both novel (original, new) and useful (appropriate, ( ) feasible).
@@ -1819,6 +1998,8 @@ practice:
       key_points:
       - 'both A and B : are의 보어로 novel과 useful 두 형용사 병렬 → 새로운 아이디어와 유용한 아이디어를 따로 보면
         오독'
+      cut_en: Creativity is commonly defined as the production of ideas ( ) / [that
+        are both novel (original, new) and useful (appropriate, ( ) feasible)].
   what_clause:
   - kind: mc
     sentence: In the absence of a universal standard or law, what matters is the outcome
@@ -1846,6 +2027,8 @@ practice:
       author_msg: what을 보면 반사적으로 '무엇'이 아니라 [ ]로 묶어 '~하는 것'으로 먼저 읽어 보라.
       key_points:
       - 'what matters : 의문사 ''무엇이 ~인가''로 읽기 쉽지만 ''중요한 것''이라는 명사절(문장 주어).'
+      cut_en: '[In the absence of a universal standard or law], / what matters / is
+        the outcome or consequences; / so, / the end justifies the means.'
   - kind: mc
     sentence: Suddenly, you judge everyone from the university by what you've experienced
       on just a few unfortunate occasions.
@@ -1873,6 +2056,8 @@ practice:
       key_points:
       - 'by what you''ve experienced : 간접의문문 ''무엇을 경험했는지''로 읽기 쉽지만 전치사 by의 목적어인 명사절
         ''경험한 것''.'
+      cut_en: Suddenly, / you judge everyone from the university / [by what you've
+        experienced on just a few unfortunate occasions].
   - kind: mc
     sentence: Labor sharing groups are part of what has been called a moral economy
       since no one keeps formal records on how much any family puts in or takes out.
@@ -1901,6 +2086,9 @@ practice:
       key_points:
       - 'part of what has been called ~ : 의문사 ''무엇이 ~불렸는가''로 읽기 쉽지만 of의 목적어 명사절 ''~라고
         불려 온 것''.'
+      cut_en: Labor sharing groups / are part of [what has been called a moral economy]
+        / since no one keeps formal records / on how much any family puts in or takes
+        out.
   - kind: short
     sentence: We tend not to notice those cultural norms until they violate what we
       consider to be common sense, good judgment, or the nature of things.
@@ -1925,6 +2113,8 @@ practice:
       key_points:
       - 'what we consider to be ~ : ''우리가 무엇을 상식이라 여기는지''로 읽기 쉽지만 violate의 목적어 명사절
         ''우리가 ~라고 여기는 것''.'
+      cut_en: We / tend not to notice those cultural norms / until they violate /
+        [what we consider to be common sense, good judgment, or the nature of things].
   - kind: short
     sentence: Becoming competent in another culture means looking beyond behavior
       to see if we can understand the attitudes, beliefs, and values that motivate
@@ -1950,6 +2140,9 @@ practice:
       key_points:
       - 'what we observe : ''우리가 무엇을 관찰하는지''로 읽기 쉽지만 motivate의 목적어 명사절 ''우리가 관찰하는
         것''.'
+      cut_en: Becoming competent in another culture / means looking beyond behavior
+        / to see if we can understand / the attitudes, beliefs, and values / that
+        motivate [what we observe].
   - kind: short
     sentence: We must know who this person is, who these other people are, what their
       relationship is, what is at stake in the scene, and the like.
@@ -1975,6 +2168,8 @@ practice:
       key_points:
       - 'what is at stake : 앞의 who is/what is와 병렬된 간접의문문이라 ''무엇이 위태로운지''인데, 습관적으로
         관계대명사 ''~하는 것''으로 좁혀 읽기 쉽다.'
+      cut_en: We must know / [who this person is], [who these other people are], [what
+        their relationship is], [what is at stake in the scene], / and the like.
   - kind: mc
     sentence: 'Moreover, much of what we now see as precise matches between an organism
       and its environment may equally be seen as constraints: koala bears live successfully
@@ -2010,6 +2205,8 @@ practice:
       key_points:
       - 'much of what ~ : what=the thing which(관계대명사)로 명사 덩어리, much of가 그것을 받는 주어
         → what을 의문사로 읽으면 오독'
+      cut_en: 'Moreover, much of [what we now see as precise matches] / between an
+        organism and its environment / may equally be seen as constraints:'
   - kind: mc
     sentence: Just Clara " like swimming, riding makes me feel truly alive."." She
       added, "It shows me what it means to live while " facing life's tough challenges."."
@@ -2040,6 +2237,7 @@ practice:
       key_points:
       - 'what it means to live : it=가주어, to live=진주어, means=동사 → means를 명사 "수단"으로
         읽으면 오독'
+      cut_en: It shows me / what it means to live / while " facing life's tough challenges.
   - kind: short
     sentence: What is excessive or out of proportion is highly relative and might
       be more related to other aspects than physical ( ) ( ) capacity, such as natural
@@ -2068,6 +2266,10 @@ practice:
       key_points:
       - 'What ~ is ... : 문두 what절 전체가 주어, 뒤의 is가 본동사 → what을 독립 의문으로 떼면 주술 연결이 무너져
         오독'
+      cut_en: '[What is excessive or out of proportion] / is highly relative / and
+        might be more related to other aspects than physical ( ) ( ) capacity, / (such
+        as natural degradation and economic leakages (not to mention politics and
+        local power dynamics)).'
   - kind: short
     sentence: If you've ever posted a favorable comment—or any comment, for that matter—about
       a brand, product or service, think about what it would feel like if you were
@@ -2095,6 +2297,8 @@ practice:
       key_points:
       - 'what it would feel like : 전치사 about의 목적어인 what절(명사 덩어리) → if 조건절과 끊어 별개로
         보면 오독'
+      cut_en: think about / what it would feel like / if you were personally acknowledged
+        by the brand manager, / for example, as a result.
   - kind: short
     sentence: Public debates about streets are typically rooted in emotional assumptions
       about how a change will affect a person's commute, ability to park, belief about
@@ -2123,6 +2327,9 @@ practice:
       key_points:
       - 'what is safe and what isn''t : belief about의 목적어인 두 what 명사절 병렬 → belief와
         끊어 독립 질문으로 보면 오독'
+      cut_en: Public debates about streets are typically rooted in emotional assumptions
+        / about how a change will affect a person's commute, ability to park, / belief
+        about what is safe and what isn't, / or the bottom line of a local business.
   - kind: short
     sentence: Around the turn of the twentieth century, anthropologists trained in
       the natural sciences began to reimagine what a science of humanity should look
@@ -2152,6 +2359,10 @@ practice:
       key_points:
       - 'what a science of humanity should look like : reimagine의 목적어 what 명사절, and
         how절과 병렬 → look like를 독립 서술로 끊으면 오독'
+      cut_en: Around the turn of the twentieth century, / anthropologists trained
+        in the natural sciences began to reimagine / what a science of humanity should
+        look like / and how social scientists ought to go about studying cultural
+        groups.
   that_clause:
   - kind: mc
     sentence: However, sound graphs of songs recorded over several weeks or months
@@ -2183,6 +2394,9 @@ practice:
       key_points:
       - 'reveal that S+V : reveal을 ''드러나다'' 자동사로 보고 that절을 별개 문장으로 끊기 쉽다 → that절 전체가
         목적어.'
+      cut_en: However, / sound graphs of songs [recorded over several weeks or months]
+        / reveal / [that during this practice period the bird fine-tunes his efforts
+        (until he produces an accurate copy of the memorized template)].
   - kind: mc
     sentence: When we blush, it's a signal to others that we recognize that a social
       norm has been broken; it is an apology for a faux pas.
@@ -2214,6 +2428,8 @@ practice:
       - 'a signal ... that we recognize ~ : 첫 that을 signal을 목적어로 받는 관계사로 오해하기 쉽다 →
         signal과 동격(''~라는 신호'').'
       - 'recognize that ~ : 둘째 that은 recognize의 목적어 명사절 → 두 that의 층위를 구분.'
+      cut_en: When we blush, / it's a signal to others / [that we recognize (that
+        a social norm has been broken)]; / it is an apology for a faux pas.
   - kind: mc
     sentence: Thus, when we are astonished by someone with publications in different
       scientific fields, realize that each topic was explored during a specific period
@@ -2246,6 +2462,9 @@ practice:
       key_points:
       - 'realize that ... a specific period : that을 뒤의 period를 꾸미는 관계사로 오해해 ''그 기간을
         깨달아라''로 읽기 쉽다 → that절 전체가 realize의 목적어.'
+      cut_en: Thus, / [when we are astonished by someone with publications in different
+        scientific fields], / realize / [that each topic was explored during a specific
+        period of time].
   - kind: short
     sentence: However, while we sometimes want to disappear when we involuntarily
       go bright red, psychologists argue that blushing actually serves a positive
@@ -2270,6 +2489,9 @@ practice:
       key_points:
       - 'argue that S+V : ''~라는 것을 주장하다''인데 argue를 ''반대·논쟁''으로 보아 부정 뉘앙스로 읽기 쉽다 →
         that절이 목적어.'
+      cut_en: However, / [while we sometimes want to disappear when we involuntarily
+        go bright red], / psychologists argue / [that blushing actually serves a positive
+        social purpose].
   - kind: short
     sentence: Yet, the application of logical reasoning will reveal that the figure
       only appears small because it obeys the laws of geometrical perspective.
@@ -2294,6 +2516,8 @@ practice:
       key_points:
       - 'reveal that the figure only appears small ~ : reveal을 ''드러나다'' 자동사로 보고 that절을
         끊기 쉽다 → the figure ~ perspective 전체가 목적어 절.'
+      cut_en: Yet, / [the application of logical reasoning] / will reveal / [that
+        the figure only appears small (because it obeys the laws of geometrical perspective)].
   - kind: short
     sentence: From birth, infants will orient preferentially towards the human face
       and voice, seeming to know that such stimuli are particularly meaningful for
@@ -2319,6 +2543,9 @@ practice:
       key_points:
       - 'know that such stimuli are ~ : that을 관계사처럼 끊어 stimuli만 목적어로 보기 쉽다 → that절
         전체가 know의 목적어.'
+      cut_en: From birth, / infants will orient preferentially [towards the human
+        face and voice], / seeming to know / [that such stimuli are particularly meaningful
+        for them].
   - kind: mc
     sentence: As for, say, color vision, they just say that, despite the same internal
       processing architecture, how we interpret, categorize, and name emotions varies
@@ -2359,6 +2586,10 @@ practice:
         번째 목적어절임을 파악'
       - 'we learn (in a particular culture) the social context : 부사구가 끼어들어 목적어가 뒤로
         밀린 어순으로 처리'
+      cut_en: As for, say, color vision, / they just say that, / despite the same
+        internal processing architecture, / how we interpret, categorize, and name
+        emotions / varies according to culture / and that we learn / in a particular
+        culture / the social context / in which it is appropriate to express emotions.
   - kind: mc
     sentence: Nevertheless, even after the perspectival correction is applied and
       reason concludes that perception is misleading, the figure still appears small,
@@ -2393,6 +2624,7 @@ practice:
       key_points:
       - '접속사 that vs 관계대명사 that : 뒤 절이 완전하면 접속사(목적어절), 성분이 빠졌으면 관계사 — 여기서는 완전한 절이므로
         접속사 that'
+      cut_en: reason concludes / that perception is misleading.
   - kind: short
     sentence: The longer we continue to believe that computers will take us to a magical
       new world, the longer we will delay their natural fusion with our lives, the
@@ -2423,6 +2655,10 @@ practice:
       - 'believe that (완전한 절) : 접속사 that, 목적어절'
       - 'movement that aspires ... : 주어가 빠진 관계사절 → 주격 관계대명사 that'
       - 'the hallmark of ... : natural fusion을 다시 말하는 동격 명사구(콤마 동격)'
+      cut_en: The longer we continue to believe that / computers will take us to a
+        magical new world, / the longer we will delay / their natural fusion with
+        our lives, / the hallmark of every major movement / that aspires to be called
+        a socioeconomic revolution.
   - kind: short
     sentence: However, sound graphs of songs recorded over several weeks or months
       reveal that during this practice period the bird fine‑tunes his efforts until
@@ -2452,6 +2688,9 @@ practice:
       key_points:
       - 'reveal that + (부사구) + S + V : that 직후 부사구에 속지 말고 뒤의 진짜 주어(the bird)를 찾을 것
         — 접속사 that 목적어절'
+      cut_en: However, / sound graphs of songs (recorded over several weeks or months)
+        / reveal / that during this practice period the bird fine‑tunes his efforts
+        / until he produces an accurate copy of the memorized template.
   - kind: short
     sentence: Olivia Spikes Millstown Before you attend the world championships next
       month, on behalf of everyone in Millstown, I wish to let you Millstown know
@@ -2479,3 +2718,6 @@ practice:
       author_msg: 세계 선수권 출전을 앞둔 상대에게, 온 마을을 대표해 끝까지 응원하겠다는 뜻을 전하고 싶다는 격려의 메시지다.
       key_points:
       - 'let + 목적어 + know + that절 : 접속사 that, know의 목적어절(완전한 절)'
+      cut_en: Before you attend the world championships next month, / on behalf of
+        everyone in Millstown, / I wish to let you Millstown know / that we are supporting
+        you all the way.

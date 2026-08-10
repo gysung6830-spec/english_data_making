@@ -63,7 +63,8 @@ def _load_extra_cards():
                 body=CardBody(highlight=d.get("hit", ""), literal_trap=d.get("trap", ""),
                               trap_why=d.get("why", ""), correct=d.get("correct", ""),
                               so_what=d.get("so_what", ""), subject=d.get("subj", ""),
-                              action=d.get("act", ""), cut=d.get("cut", "")),
+                              action=d.get("act", ""), cut=d.get("cut", ""),
+                              cut_en=d.get("cut_en", "")),
             ))
         out[cid] = lst
     return out
@@ -71,12 +72,13 @@ def _load_extra_cards():
 
 # ── 1부: 평가원 코드 카드 (출처 → 오역 → 정답 → 진짜 의미) ──────
 def _code(code, code_ko, dir_, sentence, hit, trap, why, correct, so_what,
-          basis="", para="", subj="", act="", cut=""):
+          basis="", para="", subj="", act="", cut="", cut_en=""):
     src, dif = _meta(sentence)
     return CodeCard(
         code=code, code_ko=code_ko, dir=dir_, sentence=sentence, source=src, difficulty=dif,
         body=CardBody(highlight=hit, literal_trap=trap, trap_why=why, correct=correct,
-                      so_what=so_what, so_what_basis=basis, subject=subj, action=act, cut=cut),
+                      so_what=so_what, so_what_basis=basis, subject=subj, action=act, cut=cut,
+                      cut_en=cut_en),
     )
 
 
@@ -291,6 +293,7 @@ def mock_guide() -> Guide:
                 "and shoots—are active.",
                 subj="(이 능력) this ability", act="분열조직의 활동 때문에 생긴다",
                 cut="이 능력은 ~ 때문이다(is due to) / 식물 분열조직의 활동 / — 즉 뿌리·줄기의 미분화 조직이며(regions ~ tissue) / 분열할 수 있는(that can divide).",
+                cut_en="This ability is due to / the activity of plant meristems, / regions of undifferentiated tissue in roots and shoots / that can divide.",
             ), _code(
                 "lead to", "A가 B로 이어지다(A=원인)", "forward",
                 "Rising incomes inevitably lead to increases in motorization.",
@@ -303,6 +306,7 @@ def mock_guide() -> Guide:
                 para="As incomes rise, car ownership and use are bound to increase.",
                 subj="소득 증가 rising incomes", act="자동차화 증가로 이어진다",
                 cut="소득 증가는 / 필연적으로(inevitably) / ~로 이어진다(lead to) / 자동차화의 증가로.",
+                cut_en="Rising incomes / inevitably / lead to / increases in motorization.",
             )],
         ),
         Chapter(
@@ -321,6 +325,7 @@ def mock_guide() -> Guide:
                 "즉, ‘동물은 못 하는데 식물은 한다’는 차이가 이 문장이 말하려는 핵심이다.",
                 subj="그들(식물) they", act="동물과 달리, 평생 새 기관·조직을 만든다",
                 cut="그것은 주로 ~때문이다(largely because) / 동물과 달리(unlike animals) / 그들(식물)은 만들 수 있다 / 새 기관·조직을 / 평생에 걸쳐(throughout their life cycle).",
+                cut_en="It is largely because, / unlike animals, / they can generate / new organs and tissues / throughout their life cycle.",
             ), _code(
                 "although", "비록 ~일지라도(양보)", "",
                 "Although this is true, it has also become a tired and played-out argument.",
@@ -331,6 +336,7 @@ def mock_guide() -> Guide:
                 "즉, 맞는 말이긴 해도 너무 여러 번 우려먹어 더는 신선하지 않다는 평가.",
                 subj="그것(이 주장) it", act="사실이지만, 낡고 진부한 주장이 되었다",
                 cut="비록 이것이 사실이지만(Although this is true) / 그것은 또한 되었다 / 낡고 진부한 주장이.",
+                cut_en="Although this is true, / it has also become / a tired and played-out argument.",
             )],
         ),
         Chapter(
@@ -349,6 +355,7 @@ def mock_guide() -> Guide:
                 "즉, 돈이 걸리니 박물관도 관람객 눈에 보이는 전시 위주로 예산을 쓴다는 뜻.",
                 subj="박물관 예산 their budgets", act="대중에 공개되는 부분을 우선 배정한다",
                 cut="다시 말해(In other words) / 박물관이 살아남으려 애쓰며(as museums struggle to survive) / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 대중에게 공개되는 부분을(those parts ~ open to the public).",
+                cut_en="In other words, / as museums struggle to survive / in a competitive economy, / their budgets often prioritise / those parts of themselves that are open to the public.",
             )],
         ),
         Chapter(
@@ -367,6 +374,7 @@ def mock_guide() -> Guide:
                 "즉, 차가 늘면 길을 넓혀 받아주던 방식을 버리고 수요 자체를 억제·관리하자는 입장.",
                 subj="도시의 자동차 수요 automobile demand", act="수용이 아니라 '관리'되어야 한다",
                 cut="도시 교통 전문가들은 / 대체로 받아들였다(acquiesced to) / ~라는 견해를(the view that) / 도시의 자동차 수요는 / 관리되어야 한다 / 수용되기보다(rather than accommodated).",
+                cut_en="Urban transport professionals / have largely acquiesced to / the view that / automobile demand in cities / needs to be managed / rather than accommodated.",
             )],
         ),
         Chapter(
@@ -385,6 +393,7 @@ def mock_guide() -> Guide:
                 "즉, 겉보기 데이터와 달리, 감정을 뇌에 구현된 핵심 상태로 보면 문화 간 감정은 다르지 않다는 반박.",
                 subj="그 데이터 those data", act="문화별 감정 차이를 '보여주지 못한다'",
                 cut="하지만(However) / 그 데이터는 실제로 보여주지 못한다(do not actually show) / 문화마다 감정이 다르다는 것을 / 감정을 ~로 본다면(if we think of emotions as) / 핵심적·신경적으로 구현된 상태로.",
+                cut_en="However, / those data do not actually show / that different cultures have different emotions, / if we think of emotions as / central, neurally implemented states.",
             )],
         ),
         Chapter(
@@ -403,6 +412,7 @@ def mock_guide() -> Guide:
                 "즉, 필자는 차를 줄이는 정책의 성패가 ‘대안 교통을 얼마나 좋게 만드느냐’에 달렸다고 못박는 것.",
                 subj="대안 수단의 질 개선 improving alternatives", act="이 전략의 '핵심' 요소다",
                 cut="대안 수단의 질을 높이는 것은(Improving the quality ~) / — 도보·자전거·대중교통 같은 / ~이다 / 이 전략의 '핵심' 요소(a central element).",
+                cut_en="Improving the quality of alternative options, / such as walking, cycling, and public transport, / is / a central element of this strategy.",
             ), _code(
                 "fundamental", "근본적인, 핵심적인", "",
                 "Rather than irrelevant, moral questions are fundamental to the imposition of tax.",
@@ -413,6 +423,7 @@ def mock_guide() -> Guide:
                 "즉, 세금을 매기는 일은 숫자·행정이 아니라 ‘무엇이 옳은가’라는 도덕 문제가 핵심이라는 주장.",
                 subj="도덕적 질문 moral questions", act="세금 부과에 '근본적으로' 중요하다",
                 cut="무관하기는커녕(Rather than irrelevant) / 도덕적 질문은 / 근본적으로 중요하다(are fundamental to) / 세금 부과에.",
+                cut_en="Rather than irrelevant, / moral questions / are fundamental to / the imposition of tax.",
             )],
         ),
         Chapter(
@@ -470,6 +481,7 @@ def mock_guide() -> Guide:
                 para="Although these young artists use digital tools, they seldom mention computers.",
                 subj="디지털 기술을 쓰는 젊은 예술가들", act="컴퓨터를 좀처럼 언급하지 않는다",
                 cut="젊은 현대 예술가들은(Young contemporary artists) / 작업에 디지털 기술을 쓰는(who employ digital technologies) / 좀처럼 ~않는다(rarely) / 컴퓨터를 언급하다(make reference to computers).",
+                cut_en="Young contemporary artists / who employ digital technologies in their practice / rarely / make reference to computers.",
             ), _code(
                 "unlikely to", "~할 가능성이 없는", "",
                 "It follows that natural selection is unlikely to lead to the evolution of "
@@ -482,6 +494,7 @@ def mock_guide() -> Guide:
                 para="Natural selection will probably not produce perfectly, maximally fit individuals.",
                 subj="자연선택 natural selection", act="완벽한 개체의 진화로 이어지지 않는다",
                 cut="~라는 결론이 나온다(It follows that) / 자연선택은 / ~할 가능성이 낮다(is unlikely to) / 이어질 / 완벽하고 최고로 적합한 개체의 진화로.",
+                cut_en="It follows that / natural selection / is unlikely to / lead to / the evolution of perfect, maximally fit individuals.",
             )],
         ),
     ]

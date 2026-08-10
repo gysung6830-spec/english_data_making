@@ -4,7 +4,8 @@ intro: 평가원 문장이 어려운 건 추상적이기 때문이다. 아래 5�
 chapters:
 - id: nominalization
   title: 명사화 풀기 — 추상명사를 동사로 되돌린다
-  point: 영어는 동작을 '추상명사'로 굳혀 쓴다 — the emergence of ~ 처럼. 'the/a + 추상명사 + of/to' 형태가 그 신호다.
+  point: 영어는 동작을 '추상명사'로 굳혀 쓴다 — the emergence of ~ 처럼. 'the/a + 추상명사 + of/to' 형태가
+    그 신호다.
   strategy: '''the + 추상명사 + of A'' 를 보면 → ''A가 ~하는 것 / A를 ~하는 것'' 으로 동사처럼 풀어 읽는다.
     명사 속에 숨은 ''동사''를 꺼내는 것이 핵심.'
   exprs:
@@ -28,6 +29,9 @@ chapters:
     cut: AI 비서가 점점 많아져서든 / 자율주행차가 등장해서든 / 의사결정자로서 인간 역할의 필요성은 / 줄어드는 것처럼 보인다.
     how: the emergence of, in decline — 명사 속에 동사가 숨어 있죠? '생겨난다, 줄어든다'로 되살리면 뜻이 확 또렷해져요.
     catch: 결론은 간단. AI 비서든 자율주행이든, 의사결정자로서 인간이 덜 필요해진다는 얘기.
+    cut_en: Whether it be due to the growing presence of AI assistants / or the emergence
+      of self-driving cars, / the necessity of the role of humans as the decision
+      makers / would appear to be in decline.
   - en: Changing political, social and religious landscapes will lead to the emergence
       of new cultures, and with them new culturtainment experiences.
     src: 2026 고3 11월 24번
@@ -35,12 +39,16 @@ chapters:
     how: the emergence of new cultures, 명사 덩어리에 겁먹지 마세요. '새 문화가 생겨난다'로 동사처럼 풀면 술술
       읽힙니다.
     catch: 원인은 정치·사회·종교 지형의 변화, 결과는 새 문화와 그에 딸린 컬처테인먼트 체험.
+    cut_en: Changing political, social and religious landscapes / will lead to the
+      emergence of new cultures, / and with them new culturtainment experiences.
   - en: However, in the virtual world, we have a tendency to be less defensive, as
       there appears to be no physical threat to our well‑being.
     src: 2023 고3 6월 22번
     cut: 하지만 / 가상 세계에서는 / 우리는 덜 방어적이게 되는 경향이 있다 / 우리 안녕에 물리적 위협이 없어 보이기 때문에.
     how: a tendency 하나만 보면 막연하죠. 규칙 하나 — 바로 뒤 to부정사가 '무슨 경향인지' 채워 주니 붙여 읽기.
     catch: 가상 세계엔 물리적 위협이 없어 보이니, 우리 경계심이 슬며시 느슨해진다는 말.
+    cut_en: However, / in the virtual world, / we have a tendency to be less defensive,
+      / as there appears to be no physical threat to our well‑being.
   - en: Often overlooked, but just as important a stakeholder, is the consumer who
       plays a large role in the notion of the privacy paradox.
     src: 2022 고3 6월 22번
@@ -48,6 +56,8 @@ chapters:
     how: 보어가 앞으로 튀어나온 도치. 되돌리지 말고 튀어나온 보어부터 받고 뒤의 주어(the consumer)로 이어 앞으로 읽으세요. the
       notion은 뒤 of구가 무슨 개념인지 설명해 줍니다.
     catch: 간과되지만 알고 보면 중요한 당사자가 소비자, 프라이버시 역설에서 한 축을 맡죠.
+    cut_en: Often overlooked, but / just as important a stakeholder, / is the consumer
+      / who plays a large role in the notion of the privacy paradox.
   - en: One very important distinction is that all other animals use one call for
       one message as the general principle of communication.
     src: 2024 고3 9월 40번
@@ -55,6 +65,8 @@ chapters:
     how: distinction만 딱 있으면 '무슨 구별?' 싶잖아요. 뒤 that절이 그 내용을 통째로 채워 주니 '~라는 구별'로 묶으면
       끝.
     catch: 다른 동물은 한 메시지에 신호 하나씩 — 이게 바로 그 '중요한 구별'의 알맹이.
+    cut_en: One very important distinction / is that all other animals use one call
+      for one message / as the general principle of communication.
 - id: restate
   title: 재진술 신호로 구체화 — 옆에 쉬운 말이 있다
   point: 추상 문장 뒤엔 대개 쉬운 말이 따라온다. that is / in other words / namely, 그리고 콜론(:)이 그 신호다.
@@ -79,6 +91,9 @@ chapters:
     how: In other words에 콜론까지, 둘 다 '다시 말하면' 신호예요. 콜론 뒤 예시가 앞의 consumable parts를 그대로
       풀어 줍니다.
     catch: 박물관이 예산을 몰아주는 '소비 가능한 부분' = 갤러리 인포테인먼트, 카페·상점 상품.
+    cut_en: 'In other words, / as museums struggle to survive in a competitive economy,
+      / their budgets often prioritise those parts of themselves that are consumable:
+      / infotainment in the galleries, goods and services in the cafes and the shops.'
   - en: Instead, they should concentrate attention on one subject after another, that
       is, in different periods of time.
     src: 2024 고3 11월 40번
@@ -86,6 +101,8 @@ chapters:
     how: that is가 뭘 하냐고요? '즉' 하고 되짚어 주는 표시. one subject after another를 '서로 다른 시기로'라고
       쉽게 풀어 줍니다.
     catch: '''한 주제씩 차례로''라는 말을 ''시기를 나눠서''로 바꿔 말한 것뿐.'
+    cut_en: Instead, / they should concentrate attention on one subject after another,
+      / that is, / in different periods of time.
   - en: Or someone may continue pouring money into a business that is clearly a bad
       idea in the market.
     src: 2022 고3 6월 37번
@@ -93,9 +110,12 @@ chapters:
     how: that is clearly a bad idea, 앞 명사 a business에 그냥 붙이세요. 어떤 사업인지 콕 짚어 주는 수식일
       뿐입니다.
     catch: 누가 계속 돈을 쏟아붓는 그 사업이, 시장에선 대놓고 나쁜 아이디어라는 반전.
+    cut_en: Or / someone may continue pouring money / into a business that is clearly
+      a bad idea in the market.
 - id: example
   title: 예시·나열로 구체화 — 상위 개념을 사례로 편다
-  point: 추상적인 '상위 개념(biometrics, ecosystem services)' 뒤에 such as / like / for example 로 구체 사례가 나열된다.
+  point: 추상적인 '상위 개념(biometrics, ecosystem services)' 뒤에 such as / like / for example
+    로 구체 사례가 나열된다.
   strategy: such as / like / for example / including 을 보면 → 뒤의 나열을 '상위 개념 = 이런 것들'로
     묶어 읽는다. 사례를 보면 모르던 상위 개념도 손에 잡힌다.
   exprs:
@@ -116,6 +136,9 @@ chapters:
     how: biometrics 같은 상위어 뒤에 such as가 오면 예시 신호. 지문·홍채·음성 인식을 '예를 들면'으로 이어 붙이면 그림이
       잡혀요.
     catch: biometrics = 지문·홍채·음성 인식. 상위어와 예시 목록을 같은 걸로 묶으세요.
+    cut_en: Passwords, double-key identification, / and biometrics such as fingerprint,
+      iris, and voice recognition / are all ways of keeping the account details hidden
+      from potential fraudsters.
   - en: Owners of forest lands have a market incentive to cut down trees rather than
       manage the forest for carbon capture, wildlife habitat, flood protection, and
       other ecosystem services.
@@ -123,6 +146,9 @@ chapters:
     cut: 산림 소유자는 / 나무를 벨 시장 유인이 있다 / 숲을 관리하기보다 / 탄소 포집·야생동물 서식지·홍수 방지 등 생태계 서비스를 위해.
     how: 핵심어는 other ecosystem services. 앞에 늘어놓은 탄소 포집·서식지·홍수 방지가 곧 그 서비스의 실제 예시들.
     catch: '''생태계 서비스''란 탄소 포집·서식지·홍수 방지 같은 것 — 나무 베기와 맞서는 가치죠.'
+    cut_en: Owners of forest lands / have a market incentive to cut down trees / rather
+      than manage the forest / for carbon capture, wildlife habitat, flood protection,
+      and other ecosystem services.
   - en: Consequently, more consideration is being given to other ways to manage pests,
       such as incorporating greater resistance to pests into cultivars by breeding
       and using other biological control methods.
@@ -131,6 +157,9 @@ chapters:
       다른 생물학적 방제법을 쓰기.
     how: other ways, 무슨 방법일까요? such as 뒤 두 -ing 구가 나란히 예를 들어 주니 '예컨대'로 묶으면 그만이에요.
     catch: '''해충 관리의 다른 방법'' = 저항성 육종 + 생물학적 방제, such as가 확정해 줍니다.'
+    cut_en: Consequently, / more consideration is being given / to other ways to manage
+      pests, / such as incorporating greater resistance to pests into cultivars by
+      breeding and using other biological control methods.
   - en: 'As a practical matter, one seldom requires complete autonomy from the start:
       when the agent has had little or no experience, it would have to act randomly
       unless the designer gave some assistance.'
@@ -139,6 +168,9 @@ chapters:
       / 설계자가 도움을 주지 않는 한.
     how: 콜론(:) 뒤 문장은 앞말의 이유를 예로 풀어 주는 자리. 완전 자율성이 왜 드문지 상황을 하나 들어 설명해 줘요.
     catch: 경험 없는 에이전트는 도움 없으면 무작위로 움직인다 — 그래서 처음부터 완전 자율은 드물다는 것.
+    cut_en: 'As a practical matter, / one seldom requires complete autonomy from the
+      start: / when the agent has had little or no experience, / it would have to
+      act randomly / unless the designer gave some assistance.'
 - id: contrast
   title: 대비로 구체화 — 'A가 아니라 B'로 정체를 잡는다
   point: 추상어는 '반대말'과 나란히 놓일 때 뜻이 선명해진다. not A but B / rather than / unlike 가 그 신호다.
@@ -162,6 +194,9 @@ chapters:
     how: not A but B, 앞은 버리고 뒤를 취하는 구문. 진실은 perception이 아니라 rational representation
       쪽이라고 못 박습니다.
     catch: 진실이 사는 곳은 도형의 '지각'이 아니라 '이성적 표상' — not A but B로 자리 확정.
+    cut_en: Even after reason concludes that perception is misleading, / the truth
+      of the matter is revealed / not in the perception of the figure / but in its
+      rational representation.
   - en: Urban transport professionals have largely acquiesced to the view that automobile
       demand in cities needs to be managed rather than accommodated.
     src: 2022 고3 6월 30번
@@ -169,6 +204,8 @@ chapters:
     how: rather than이 managed와 accommodated를 맞세우는 거 보이죠? the view that~은 그 견해의 알맹이를
       담은 동격절.
     catch: 전문가들이 대체로 동의한 견해 — 도시 자동차 수요는 '수용'이 아니라 '관리' 대상.
+    cut_en: Urban transport professionals / have largely acquiesced to the view /
+      that automobile demand in cities needs to be managed / rather than accommodated.
   - en: Recognizing how she felt about her failure, Ken, her teammate, approached
       her and said, "Jamie, even though you didn't set a personal best time today,
       your performances have improved dramatically.
@@ -177,12 +214,18 @@ chapters:
       / 네 경기력은 극적으로 향상됐어".
     how: Recognizing은 분사. 주절은 Ken approached. '~하고 나서'로 앞에 얹으면 끝.
     catch: 여기서 속지 마세요. 격려한 주체는 팀원 Ken. 기록은 못 세웠어도 경기력은 확 늘었다고 다독인 장면.
+    cut_en: Recognizing how she felt about her failure, / Ken, her teammate, approached
+      her and said, / "Jamie, even though you didn't set a personal best time today,
+      / your performances have improved dramatically.
   - en: An important advantage of disclosure, as opposed to more aggressive forms
       of regulation, is its flexibility and respect for the operation of free markets.
     src: 2023 고3 11월 23번
     cut: 공개의 중요한 이점은 / 더 공격적인 규제와 대비하면 / 바로 그 유연성과 자유시장 작동에 대한 존중이다.
     how: as opposed to~ regulation은 콤마로 낀 삽입구. 잠깐 괄호 치듯 빼 두고 주절부터 이으세요.
     catch: 공개의 강점은 공격적 규제와 달리 유연하고 자유시장을 존중한다는 것, 대비로 읽으면 선명.
+    cut_en: An important advantage of disclosure, / as opposed to more aggressive
+      forms of regulation, / is its flexibility and respect for the operation of free
+      markets.
 - id: metaphor
   title: 비유·은유 읽기 — 그림·비유를 실제 뜻으로 바꾼다
   point: 평가원은 추상 개념을 비유로 감춘다 — 그림자 vs 실체, 옷의 솔기처럼.
@@ -204,6 +247,8 @@ chapters:
     cut: 이론에만 의존한 사람들은 / 분명 그림자를 좇고 있었다 / 실체가 아니라.
     how: the shadow와 the substance, 무슨 비유일까요? 그림자는 겉핥기, 실체는 알맹이 — 이렇게 치환하면 대비가 살아납니다.
     catch: 그림자=겉, 실체=속. 이론에만 매달린 이들은 알맹이 아닌 껍데기만 좇았다는 뜻.
+    cut_en: Those who rely only upon theories / were obviously hunting the shadow,
+      / not the substance.
   - en: We aspire to seamless aesthetics by stitching the seams closely, pressing
       them flat and making sure they are hidden on the inside so that we wear clothing
       rather than pieces of fabric.
@@ -211,6 +256,9 @@ chapters:
     cut: 우리는 이음매 없는 미학을 추구한다 / 솔기를 촘촘히 꿰매고 / 눌러 펴고 / 안쪽에 감춰서 / 천 조각이 아니라 옷을 입도록.
     how: 솔기를 촘촘히 꿰매 감춘다는 바느질 비유예요. 이음매는 곧 '기술의 흔적', 그걸 숨겨 매끈하게 만든다는 얘기.
     catch: 솔기(기술 흔적)를 감추듯 이음매 없는 매끄러움을 좇아, 천 조각이 아닌 '옷'을 걸치게 한다.
+    cut_en: We aspire to seamless aesthetics / by stitching the seams closely, / pressing
+      them flat / and making sure they are hidden on the inside / so that we wear
+      clothing rather than pieces of fabric.
   - en: Overall this is a healthy growth sector of the entertainment industry, but
       one that by its very nature is delicate in the face of exploitation.
     src: 2026 고3 11월 24번
@@ -218,6 +266,8 @@ chapters:
     how: healthy·delicate로 산업을 생명체처럼 그렸어요. by its very nature 삽입구는 잠깐 떼어 두고 뼈대부터 이으면
       편합니다.
     catch: 산업 = 생명체. 자라나긴 하지만 착취 앞에선 여리다, healthy↔delicate 대비가 요지.
+    cut_en: Overall this is / a healthy growth sector of the entertainment industry,
+      / but / one that by its very nature is delicate in the face of exploitation.
   - en: The team consists of at least one robot and one human and is often called
       a mixed team because it is a mixture of human and robot agents.
     src: 2022 고3 6월 24번
@@ -225,3 +275,5 @@ chapters:
       혼합체이기 때문이다.
     how: 명칭 a mixed team이 먼저, because 뒤에 mixture of~로 정의가 따라와요. 이름과 뜻을 짝지어 읽는 게 요령.
     catch: '''혼합 팀''이라 부르는 까닭 = 인간과 로봇의 혼합체라서. 명칭과 정의를 포개면 뜻 확정.'
+    cut_en: The team / consists of at least one robot and one human / and is often
+      called a mixed team / because it is a mixture of human and robot agents.

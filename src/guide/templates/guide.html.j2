@@ -77,11 +77,11 @@
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="sol-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{{ pr.sentence }}
+      <span class="dq-sent">{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
         {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ dnums[pr.answer_index] }}</span>{% endif %}{% if pr.source %}<span class="src-chip">📄 {{ pr.source }}</span>{% endif %}</span>
     </div>
     {% if s %}
-    {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어 읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
+    {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
     {% if s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
       {% for k in s.key_points %}<div class="kp">{{ k }}</div>{% endfor %}</div>{% endif %}
@@ -320,7 +320,7 @@
   <div class="ex-label">유추 시연 <span>· 단서로 뜻 뚫기</span></div>
   <ol class="wb-ex">
     {% for e in chapter.examples %}
-    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+    <li><span class="n">{{ loop.index }}</span>{{ (e.cut_en or e.en) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag infer">유추</span>{{ e.how }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
@@ -426,7 +426,7 @@
   <div class="ex-label">기출 예문 <span>· 밑줄=구문 신호</span></div>
   <ol class="wb-ex">
     {% for e in chapter.examples %}
-    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+    <li><span class="n">{{ loop.index }}</span>{{ (e.cut_en or e.en) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
       {% if e.ab %}<div class="wb-ab"><span class="ab-tag">A→B</span>{{ e.ab }}</div>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag">어떻게 읽나</span>{{ e.how }}</div>{% endif %}
@@ -490,7 +490,7 @@
     </div>
     {% if card.source %}<div class="src-chip">📄 {{ card.source }}</div>{% endif %}
     <div class="sentence">
-      {{ card.sentence | highlight_code(card.body.highlight) }}
+      {% if card.body.cut_en %}{{ card.body.cut_en | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{% else %}{{ card.sentence | highlight_code(card.body.highlight) }}{% endif %}
     </div>
     <div class="rows">
       <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}
@@ -578,7 +578,7 @@
   <div class="ex-label">기출 예문 <span>· 구체화</span></div>
   <ol class="wb-ex">
     {% for e in chapter.examples %}
-    <li><span class="n">{{ loop.index }}</span>{{ e.en }}
+    <li><span class="n">{{ loop.index }}</span>{{ (e.cut_en or e.en) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
       {% if e.src %}<span class="src-chip">📄 {{ e.src }}</span>{% endif %}
       {% if e.how %}<div class="wb-how"><span class="how-tag">구체화</span>{{ e.how }}</div>{% endif %}
       {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}

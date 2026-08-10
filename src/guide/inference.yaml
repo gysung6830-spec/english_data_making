@@ -27,6 +27,8 @@ chapters:
     how: profligate 몰라도 겁먹지 마요. Unlike his frugal brother가 힌트 — 검소한 형과 반대니 '펑펑 쓰는'으로
       찍으면 맞습니다.
     catch: profligate = 아끼는 형의 정반대, 곧 '헤프게 낭비하는'. 대조어 Unlike가 답을 줍니다.
+    cut_en: Unlike his frugal brother, who saved every coin, / Tom was profligate
+      / and spent his salary within a week.
   - en: If so, how?' The scientific thinker looks for features of the thing that can
       be stripped of subjectivity—ideally, those aspects that can be quantified and
       whose values will thus never change from one observer to the next.
@@ -35,6 +37,10 @@ chapters:
       그래서 관찰자마다 값이 결코 변하지 않는 측면들을.
     how: subjectivity가 낯설죠? 대시(—) 뒤 재진술을 보세요. 관찰자마다 값이 달라지는 것이라니, 그 반대가 이 단어의 뜻.
     catch: subjectivity = 관찰자마다 값이 흔들리는 것, 즉 '주관성'. 대시 뒤 풀이가 열쇠.
+    cut_en: If so, how?' / The scientific thinker / looks for features of the thing
+      that can be stripped of subjectivity / —ideally, / those aspects that can be
+      quantified / and whose values will thus never change from one observer to the
+      next.
   - en: Occasionally, however, a mutation may occur that increases the fitness of
       the organism, just as an accidental failure to reproduce the text of the first
       edition might provide more accurate or updated information.
@@ -43,6 +49,9 @@ chapters:
       정확하거나 갱신된 정보를 줄 수도 있는 것처럼.
     how: mutation이 막막하면 just as 뒤 비유로 가세요. 우연한 복제 오류에 빗댔으니 '원본이 뜻밖에 바뀌는 변화'로 읽어요.
     catch: mutation = 적합도를 높일 수도 있는 우연한 변화, 곧 '돌연변이'. 복제 오류 비유가 단서.
+    cut_en: Occasionally, however, / a mutation may occur that increases the fitness
+      of the organism, / just as / an accidental failure to reproduce the text of
+      the first edition / might provide more accurate or updated information.
   - en: Economics can go a long way towards helping a legislature determine whether
       or not a particular tax law will help achieve a particular goal, but economics
       cannot, in a vacuum, identify the goal.
@@ -51,6 +60,9 @@ chapters:
       없이 홀로는 / 그 목표 자체를 정하지 못한다.
     how: in a vacuum이 어려워도 but이 구원투수. 앞의 '도움 된다'와 맞세우면 '맥락 없이 홀로는'이라는 뜻이 잡혀요.
     catch: in a vacuum = 맥락 없이 홀로, 즉 '고립되어'. 도움은 주되 목표 자체는 못 정한다는 한계.
+    cut_en: Economics / can go a long way towards / helping a legislature determine
+      whether or not a particular tax law will help achieve a particular goal, / but
+      / economics / cannot, in a vacuum, / identify the goal.
   practice:
   - kind: mc
     sentence: However, unlike most of the categories of collection and study that
@@ -76,6 +88,8 @@ chapters:
       key_points:
       - '단서: rather than static — A rather than B에서 A(fluid)는 B(static)의 반대.'
       - '단서: unlike(대조).'
+      cut_en: However, / unlike most of the categories of collection and study / that
+        make up those areas, it is fluid / rather than static.
   - kind: mc
     sentence: Passwords, double-key identification, and biometrics such as fingerprint,
       iris, and voice recognition are all ways of keeping the account details hidden
@@ -102,6 +116,9 @@ chapters:
       key_points:
       - '단서: such as fingerprint, iris, and voice recognition — 예시가 곧 정의.'
       - '단서: 신체 특징 나열.'
+      cut_en: Passwords, double-key identification, and biometrics / such as fingerprint,
+        iris, and voice recognition / are all ways / of keeping the account details
+        hidden / from potential fraudsters.
   - kind: mc
     sentence: Overly rigid habits and conventions, no matter how well-considered or
       well-intentioned, threaten innovation.
@@ -126,6 +143,8 @@ chapters:
       key_points:
       - '단서: threaten innovation(혁신을 위협) — 부정적 극성.'
       - '단서: Overly(지나치게)가 부정 강조.'
+      cut_en: Overly rigid habits and conventions, / no matter how well-considered
+        or well-intentioned, / threaten innovation.
   - kind: mc
     sentence: You found it only slightly difficult and conclude that you were climbing
       quite well, when in fact you were climbing no better than usual.
@@ -152,6 +171,8 @@ chapters:
       key_points:
       - '단서: when in fact(실제로는) — 앞 결론과 대조.'
       - '단서: no + better = 더 낫지 않음(부정).'
+      cut_en: You found it only slightly difficult / and conclude / that you were
+        climbing quite well, / when in fact / you were climbing no better than usual.
   - kind: short
     sentence: Owners of forest lands have a market incentive to cut down trees rather
       than manage the forest for carbon capture, wildlife habitat, flood protection,
@@ -177,6 +198,9 @@ chapters:
       key_points:
       - '단서: and other ecosystem services — 앞 나열 항목을 한데 묶는 상위어.'
       - '단서: such-example식 나열(carbon capture, habitat, flood protection).'
+      cut_en: Owners of forest lands / have a market incentive to cut down trees /
+        rather than manage the forest / for carbon capture, wildlife habitat, flood
+        protection, / and other ecosystem services.
   - kind: short
     sentence: As a practical matter, one seldom requires complete autonomy from the
       group.
@@ -198,6 +222,8 @@ chapters:
       key_points:
       - '단서: from the group — ''~로부터의'' 독립을 의미.'
       - '단서: complete(완전한)가 독립의 정도를 수식.'
+      cut_en: As a practical matter, / one / seldom requires / complete autonomy /
+        from the group.
   - kind: short
     sentence: At the same time, it is important to recognize that, no matter how fast
       they grow, countries where a large part of the population derive their livelihood
@@ -222,6 +248,9 @@ chapters:
       key_points:
       - '단서: derive ... from uncertain sources(불안정한 원천에서 얻음).'
       - '단서: cannot ... prevent famines(기근) — 먹고사는 문제와 직결.'
+      cut_en: At the same time, / it is important to recognize that, / no matter how
+        fast they grow, / countries where a large part of the population / derive
+        their livelihood / from uncertain sources / cannot hope to prevent famines.
   - kind: short
     sentence: Beginners, on the other hand, have not achieved the same degree of fluency
       and automaticity in each of the component skills.
@@ -245,3 +274,5 @@ chapters:
       key_points:
       - '단서: on the other hand — 숙련자와 대조되는 ''아직 못 이룬'' 능력.'
       - '단서: fluency and automaticity — 유창함과 나란히 놓인 긍정적 숙련도.'
+      cut_en: Beginners, / on the other hand, / have not achieved / the same degree
+        of fluency and automaticity / in each of the component skills.

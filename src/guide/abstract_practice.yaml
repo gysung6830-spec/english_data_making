@@ -29,6 +29,9 @@ practice:
         AI와 억지로 원인·결과로 엮기 쉽다 → ''A가 생겨나는 것''으로 동사화.'
       - 'the necessity of the role of humans : ''필요성(명사)''로 두면 무엇이 in decline인지 안
         잡힌다 → ''인간 역할이 필요하다는 것''으로 동사화.'
+      cut_en: Whether it be due to the growing presence of AI assistants / or the
+        emergence of self-driving cars, / the necessity of the role of humans as the
+        decision makers / would appear to be in decline.
     kind: mc
   - sentence: Changing political, social and religious landscapes will lead to the
       emergence of new cultures, and with them new culturtainment experiences.
@@ -60,6 +63,8 @@ practice:
       - 'the emergence of new cultures : emergence를 ''출현물(사물)''로 굳혀 새 문화를 결과물로 오독하기
         쉽다 → ''A가 생겨나는 것''으로 동사화.'
       - 'lead to A : 사물 목적어로 받아 ''A를 이끌다''로 오독하기 쉽다 → ''A가 생겨나게 된다''로 통째 동사화.'
+      cut_en: Changing political, social and religious landscapes / will lead to /
+        the emergence of new cultures, / and with them / new culturtainment experiences.
     kind: mc
   - sentence: In other words, they not only have an innate capacity for matching their
       own kinaesthetically experienced bodily movements with those of others that
@@ -88,6 +93,9 @@ practice:
         A·B 관계가 흐려진다 → ''~할 수 있다는 것''으로 동사화.'
       - 'those of others that are visually perceived : those가 앞 movements를 받는 것을 놓쳐
         엉뚱한 대상과 맞추기 쉽다 → ''타인의 (움직임)''으로 복원.'
+      cut_en: In other words, / they not only have an innate capacity / for matching
+        their own kinaesthetically experienced bodily movements / with those of others
+        that are visually perceived; / they have an innate drive to do so.
     kind: short
   - kind: mc
     sentence: Scattered attention harms your ability to let go of stress, because
@@ -120,6 +128,9 @@ practice:
       key_points:
       - 'ability to V : to를 목적(~하기 위해)으로 오독 → 추상명사 ability를 뒤에서 구체화하는 ''~할 능력''으로
         붙여 읽기'
+      cut_en: Scattered attention / harms your ability to let go of stress, / because
+        even though your attention is scattered, / it is narrowly focused, / for you
+        are able to fixate only on the stressful parts of your experience.
   - kind: mc
     sentence: Our view of the world is not given to us from the outside in a pure,
       objective form; it is shaped by our mental abilities, our shared cultural perspectives
@@ -152,6 +163,9 @@ practice:
       key_points:
       - 'view of N : view를 ''경치'', of를 소유격으로 오독 → 추상명사 view를 구체화하는 ''N에 대한 관점''으로
         처리'
+      cut_en: Our view of the world / is not given to us from the outside in a pure,
+        objective form; / it is shaped by our mental abilities, our shared cultural
+        perspectives and our unique values and beliefs.
   - kind: mc
     sentence: People involved in the conception and engineering of robots designed
       to perceive and act know how fundamental is the ability to discriminate oneself
@@ -183,6 +197,9 @@ practice:
       author_msg: 환경 속에서 자기와 남을 구별하는 능력은 지각·행동 로봇에게 근본적이다.
       key_points:
       - 'ability to V : to를 목적으로 오독 → 추상명사 ability를 구체화하는 ''~하는 능력''으로 붙여 읽기'
+      cut_en: People involved in the conception and engineering of robots designed
+        to perceive and act / know how fundamental is the ability to discriminate
+        oneself from other entities in the environment.
   - kind: mc
     sentence: To decide whether and how to intervene in ecosystems, protected area
       managers normally need a reasonably clear idea of what future ecosystems would
@@ -215,6 +232,9 @@ practice:
       key_points:
       - 'idea of what ~ would be like : like를 동사 ''좋아하다''로 오독 → 추상명사 idea를 구체화하는 ''무엇과
         같을지(어떤 모습일지)에 대한 개념'''
+      cut_en: To decide whether and how to intervene in ecosystems, / protected area
+        managers normally need a reasonably clear idea / of what future ecosystems
+        would be like if they did not intervene.
   - kind: short
     sentence: In some cases, however, we are far less aware of why we believe a certain
       claim to be true, or how we are to explain why certain social realities exist.
@@ -243,6 +263,9 @@ practice:
       - 'aware of + why/how절 : of의 목적어를 놓치고 절을 따로 읽음 → of가 이끄는 why·how 명사절이 인식 대상을
         구체화'
       - 'be to부정사 : 단순 현재로 오독 → ''~해야 한다(당위·방법)'''
+      cut_en: In some cases, however, / we are far less aware / of why we believe
+        a certain claim to be true, / or how we are to explain why certain social
+        realities exist.
   - kind: short
     sentence: Learning to understand the built‑in limitations of our mental processes
       can also help us improve our ability to inform others more effectively.
@@ -268,6 +291,8 @@ practice:
       author_msg: 정신의 내재적 한계를 이해하면 남에게 더 잘 정보를 전달하는 능력이 향상된다.
       key_points:
       - 'ability to V : to를 목적으로 오독 → 추상명사 ability를 구체화하는 ''~하는 능력'''
+      cut_en: Learning to understand the built-in limitations of our mental processes
+        / can also help us / improve our ability to inform others more effectively.
   - kind: short
     sentence: Concert performances become interesting and gain in attraction from
       the fact that they go far beyond the information printed in the score.
@@ -292,6 +317,8 @@ practice:
       author_msg: 콘서트 연주의 매력은 악보에 적힌 정보 이상을 보여준다는 데서 나온다.
       key_points:
       - 'the fact that절 : that을 관계사로 오독 → 동격 that으로 보아 ''~라는 사실''로 추상명사 내용을 구체화'
+      cut_en: Concert performances / become interesting and gain in attraction / from
+        the fact that they go far beyond the information printed in the score.
   - kind: short
     sentence: An ability to switch between the "pragmatic attitude" of ' everyday
       life and an "aesthetic attitude" is fundamental to ' a balanced life.
@@ -318,6 +345,8 @@ practice:
       key_points:
       - 'ability to V between A and B : to를 목적으로, A·B 짝을 어긋나게 오독 → to부정사가 ability를
         구체화하고 A와 B가 오가는 두 대상'
+      cut_en: An ability to switch between the "pragmatic attitude" of everyday life
+        and an "aesthetic attitude" / is fundamental to a balanced life.
   - kind: short
     sentence: The fact that everyone was going to be able to speak and listen had
       to be accommodated ethically, and it was via a rough egalitarianism.
@@ -344,6 +373,8 @@ practice:
       key_points:
       - 'the fact that절 : that을 관계사로 보고 주어를 짧게 끊음 → 동격 that절 전체가 주어(추상명사 fact의 내용
         구체화)'
+      cut_en: The fact that everyone was going to be able to speak and listen / had
+        to be accommodated ethically, / and it was via a rough egalitarianism.
   restate:
   - sentence: 'In other words, as museums struggle to survive in a competitive economy,
       their budgets often prioritise those parts of themselves that are consumable:
@@ -375,6 +406,10 @@ practice:
       - '콜론(:) 뒤 infotainment ... goods and services : 새 정보로 착각하기 쉽다 → 앞 ''소비 가능한
         부분''과 같은 대상의 구체적 재진술.'
       - 'prioritise : 부정어가 없는데도 문맥상 ''막는다·우선시 안 함''으로 방향을 뒤집기 쉽다 → ''우선시한다'' 그대로 살리기.'
+      cut_en: 'In other words, / as museums struggle to survive / in a competitive
+        economy, / their budgets often prioritise / those parts of themselves that
+        are consumable: / infotainment in the galleries, goods and services in the
+        cafes and the shops.'
     kind: mc
   - sentence: Instead, they should concentrate attention on one subject after another,
       that is, in different periods of time.
@@ -399,6 +434,8 @@ practice:
       - 'that is : 주어+동사 ''그것은 ~이다''로 오독해 술어로 잡으면 구조가 무너진다 → ''즉''이라는 재진술 연결어로 처리.'
       - 'in different periods of time : 새 정보로 보면 앞 one subject after another와 따로 놀기
         쉽다 → 같은 상황을 시간 관점으로 되풀이한 재진술.'
+      cut_en: Instead, / they should concentrate attention / on one subject after
+        another, / that is, / in different periods of time.
     kind: short
   - kind: mc
     sentence: If learning were simply a matter of accumulating lists of facts, then
@@ -433,6 +470,9 @@ practice:
       key_points:
       - 'or 병렬 범위 : or을 beyond의 목적어로 붙임 → ''information that is ~ know''와 ''totally
         new information'' 두 명사구를 대등 연결'
+      cut_en: If learning were simply a matter of accumulating lists of facts, / then
+        it shouldn't make any difference / if we are presented with information that
+        is just a little bit beyond what we already know / or totally new information.
   - kind: mc
     sentence: One of those downsides is that anyone who so chooses can pick up the
       virtual megaphone that is the Internet and put in their two cents on any of
@@ -466,6 +506,9 @@ practice:
       key_points:
       - 'N that is N'' : that is를 별개 절로 오독 → 앞 은유적 표현을 쉬운 말로 재진술(N=N'')하는 관계절'
       - 'put in one''s two cents : 직역 ''2센트를 넣다'' → 관용구 ''한마디 거들다'''
+      cut_en: One of those downsides is that / anyone who so chooses / can pick up
+        the virtual megaphone that is the Internet / and put in their two cents on
+        any of an infinite number of topics, / regardless of their qualifications.
   - kind: mc
     sentence: However, that is not a realistic option for scientists who feel a strong
       sense of responsibility to inform the public / and policymakers and/or to offer
@@ -500,6 +543,9 @@ practice:
       - 'sense of responsibility to V : to를 목적으로 오독 → 추상명사 responsibility를 구체화하는 ''~할
         책임감'''
       - 'and/or : 두 to부정사(to inform·to offer)를 대등 연결'
+      cut_en: However, that is not a realistic option / for scientists who feel a
+        strong sense of responsibility / to inform the public and policymakers / and/or
+        to offer suggestions.
   - kind: mc
     sentence: The polluter thus has an incentive to reduce emissions in any manner
       that is less costly per unit of abatement than the tax on each unit of residual
@@ -535,6 +581,9 @@ practice:
       key_points:
       - 'N that is 비교급 than ~ : 비교 주체·기준을 뒤바꿈 → 관계절이 수식하는 N(manner)이 than 이하(the tax)보다
         비용이 덜 듦'
+      cut_en: The polluter thus has an incentive to reduce emissions / in any manner
+        that is less costly per unit of abatement / than the tax on each unit of residual
+        emissions.
   - kind: short
     sentence: If they close their eyes, they might even imagine the shape of the path,
       the smell of the trees, and the sound that is made when they step on the dried
@@ -565,6 +614,9 @@ practice:
       - 'the sound that is made ~ : that is made를 놓치거나 오독 → ''the sound''를 구체화하는 관계절
         ''~할 때 나는 소리'''
       - '병렬 : imagine의 목적어 세 명사구(shape·smell·sound)'
+      cut_en: If they close their eyes, / they might even imagine / the shape of the
+        path, the smell of the trees, / and the sound that is made when they step
+        on the dried leaves.
   - kind: short
     sentence: In films that tell of futuristic worlds, composers, much like sound
       designers, have added freedom to create a world that is unknown and new to the
@@ -596,6 +648,9 @@ practice:
       - 'a world that is ~ : 관계절을 놓쳐 world를 막연히 둠 → that is 관계절이 world를 ''낯설고 새로운''
         것으로 구체화'
       - 'freedom to V : 목적으로 오독 → ''~할 자유'''
+      cut_en: In films that tell of futuristic worlds, / composers, much like sound
+        designers, / have added freedom / to create a world that is unknown and new
+        to the viewer.
   - kind: short
     sentence: Recently, in the comments section, there have been some examples of
       language that is inappropriate for younger viewers.
@@ -623,6 +678,8 @@ practice:
       key_points:
       - 'language that is ~ : 선행사를 examples로 오인 → is(단수)와 호응하는 선행사는 language, 관계절이
         그 내용을 구체화'
+      cut_en: Recently, in the comments section, / there have been some examples of
+        language / that is inappropriate for younger viewers.
   - kind: short
     sentence: ''' That is because geography starts from the premise that it matters
       where something takes place on Earth''s surface.'
@@ -649,6 +706,8 @@ practice:
       key_points:
       - 'the premise that절 : that을 관계사로 오독 → 동격 that으로 premise의 내용 구체화'
       - '가주어 it ~ where절 : it을 대명사로 오독 → it은 가주어, where절이 진주어'
+      cut_en: That is because / geography starts from the premise / that it matters
+        where something takes place on Earth's surface.
   example:
   - sentence: Passwords, double-key identification, and biometrics such as fingerprint,
       iris, and voice recognition are all ways of keeping the account details hidden
@@ -678,6 +737,9 @@ practice:
       key_points:
       - 'biometrics such as A, B, and C : such as를 ''~와는 구별되는''으로 반대로 읽어 예시를 별개 기술로
         오독하기 쉽다 → 상위 biometrics를 좁혀 준 구체 예시.'
+      cut_en: Passwords, double-key identification, and biometrics / such as fingerprint,
+        iris, and voice recognition / are all ways of / keeping the account details
+        hidden / from potential fraudsters.
     kind: mc
   - sentence: Owners of forest lands have a market incentive to cut down trees rather
       than manage the forest for carbon capture, wildlife habitat, flood protection,
@@ -703,6 +765,9 @@ practice:
       key_points:
       - 'A, B, C, and other X : ''and other''를 놓치면 나열을 서로 무관한 별개 항목으로 읽기 쉽다 → A·B·C가
         상위 X(ecosystem services)의 사례임을 알리는 표지.'
+      cut_en: Owners of forest lands / have a market incentive to cut down trees /
+        rather than manage the forest / for carbon capture, wildlife habitat, flood
+        protection, / and other ecosystem services.
     kind: short
   - kind: mc
     sentence: In this manner, subjective experience is extended into the external
@@ -740,6 +805,10 @@ practice:
         구체화하는 예시로 처리'
       - 'with its disciplinary objects : 주어 the external environment를 수식하는 부대 상황 →
         becomes의 주어는 여전히 environment'
+      cut_en: In this manner, / subjective experience is extended into the external
+        environment and vice versa; / the external environment / with its disciplinary
+        objects such as institutional laws and equipment / becomes mental institutions
+        / that affect our subjective experience and solutions.
   - kind: mc
     sentence: 'To a scientific thinker, this must sound like magical thinking: you''re
       saying you will imagine something so hard it''ll pop into someone else''s head
@@ -772,6 +841,10 @@ practice:
       key_points:
       - '콜론(:) : 대비·단절로 오독 → 앞 추상어(magical thinking)를 구체적으로 풀어 주는 환언 신호로 처리'
       - 'so hard it''ll pop ~ : ''so + 형용사/부사 + (that) 절'' 결과 구문 → ''너무 ~해서 …하다'''
+      cut_en: 'To a scientific thinker, this must sound like magical thinking: / you''re
+        saying you will imagine something so hard / it''ll pop into someone else''s
+        head / exactly the way you envision it? / The artist has sought the opposite
+        of the scientist''s observer-independent reality.'
   - kind: mc
     sentence: Personal flair is without doubt an absolute necessity in some product
       categories, particularly relatively small objects, with a low degree of technological
@@ -804,6 +877,10 @@ practice:
       - 'such as ~ : 별개 항목의 나열로 오독 → 바로 앞 small objects(작은 물건들)를 구체화하는 예시로 처리'
       - 'particularly ~, with ~ : 콤마로 이어진 삽입·수식 → some product categories를 좁혀 설명(범주→예시로
         구체화)'
+      cut_en: Personal flair is without doubt an absolute necessity / in some product
+        categories, / particularly relatively small objects, with a low degree of
+        technological complexity, / such as furniture, lighting, small appliances,
+        and housewares.
   - kind: mc
     sentence: For example, skilled ants engage in a behavior called ' tandem running,
       in which they touch their bodies to the body of a novice ant as they lay down
@@ -837,6 +914,9 @@ practice:
       - 'a behavior called ~ : called를 ''부르면서''로 오독 → ''~라고 불리는 (행동)'' 과거분사 수식으로 처리(예시의
         이름 붙이기)'
       - 'as they lay down ~ : ''때문에''(원인)로 오독 → ''~하면서''(동시 동작)로 처리'
+      cut_en: For example, skilled ants engage in a behavior called tandem running,
+        / in which they touch their bodies to the body of a novice ant / as they lay
+        down chemical trails, / presumably to assist the newcomer with route learning.
   - kind: short
     sentence: Passwords, double‑key identification, and biometrics such as fingerprint‑,
       iris‑, and voice recognition are all ways of keeping the account details hidden
@@ -864,6 +944,9 @@ practice:
       - 'biometrics such as ~ : 예시를 주어로 오독 → biometrics를 구체화하는 사례로 처리'
       - 'of keeping ~ hidden, of keeping ~ dark : 두 번째 of구는 앞을 다시 말한 환언 → ''즉 ~하는''으로
         연결'
+      cut_en: Passwords, double-key identification, and biometrics such as fingerprint-,
+        iris-, and voice recognition / are all ways / of keeping the account details
+        hidden from potential fraudsters, / of keeping your data dark.
   - kind: short
     sentence: If automobile manufacturers are required to measure and publicize the
       safety characteristics of cars, potential car purchasers can trade safety concerns
@@ -890,6 +973,9 @@ practice:
       key_points:
       - 'such as ~ : 앞 명사(other attributes)를 구체화 → safety concerns의 예시로 붙이면 오독'
       - 'trade A against B : ''A를 B에 견주어/맞바꾸어 보다'' → A와 B가 대비되는 두 대상'
+      cut_en: If automobile manufacturers are required to measure and publicize the
+        safety characteristics of cars, / potential car purchasers can trade safety
+        concerns / against other attributes, / such as price and styling.
   - kind: short
     sentence: Increasingly, food ads helped shoppers become accustomed ', to new definitions
       of words such as "fresh" and "natural," ' definitions that could well be considered
@@ -917,6 +1003,9 @@ practice:
       - 'words such as "fresh" and "natural" : 예시가 꾸미는 것은 words → definitions로 붙이면
         오독'
       - '..., definitions that ~ : 콤마 뒤 명사는 앞 new definitions의 동격 반복 → ''즉 ~한 그 정의들'''
+      cut_en: Increasingly, food ads helped shoppers become accustomed to new definitions
+        of words such as "fresh" and "natural," / definitions that could well be considered
+        opposite of their traditional meanings.
   - kind: short
     sentence: Due to their low acquisition and maintenance costs, cargo bicycles convey
       much potential in developed and becak( ) developing countries alike, such as
@@ -945,6 +1034,9 @@ practice:
       - 'such as the becak : countries의 예로 오독 → cargo bicycles의 구체적 사례로 처리(괄호 동격이
         ''자전거''임을 확정)'
       - 'A and B alike : ''A와 B 모두 똑같이'' → alike를 ''비슷한''으로 떼어 읽지 않기'
+      cut_en: Due to their low acquisition and maintenance costs, / cargo bicycles
+        convey much potential / in developed and developing countries alike, / such
+        as the becak (a three-wheeled bicycle) in Indonesia.
   contrast:
   - sentence: The truth of the matter is revealed not in the perception of the figure
       but in its rational representation.
@@ -974,6 +1066,8 @@ practice:
       key_points:
       - 'not A but B : not이 걸리는 A(지각)를 놓쳐 A·B 자리를 뒤바꿔 ''지각에서 드러난다''로 뒤집기 쉽다 → 부정은
         지각, 긍정은 이성적 표상.'
+      cut_en: The truth of the matter / is revealed / not in the perception of the
+        figure / but in its rational representation.
     kind: mc
   - sentence: Urban transport professionals have largely acquiesced to the view that
       automobile demand in cities needs to be managed rather than accommodated.
@@ -999,6 +1093,8 @@ practice:
       key_points:
       - 'managed rather than accommodated : rather than을 ''그리고''처럼 병렬로 읽어 배제된 accommodated(수용)를
         인정하는 정반대 뜻이 되기 쉽다 → B(관리)를 택하고 A(수용)를 배제.'
+      cut_en: Urban transport professionals / have largely acquiesced / to the view
+        that / automobile demand in cities / needs to be managed / rather than accommodated.
     kind: short
   - kind: mc
     sentence: However, unlike sound designers, composers often shy away from creating
@@ -1031,6 +1127,9 @@ practice:
       key_points:
       - 'unlike + 명사 : like로 오독 → ''~와 달리''라는 대비 표지로 처리(뒤 내용이 반대 방향)'
       - 'shy away from ~ing : ''수줍게 ~하다''로 오독 → ''~하기를 꺼리다/피하다'''
+      cut_en: However, / unlike sound designers, / composers often shy away from creating
+        unique pieces / that reflect these new worlds / and often present musical
+        scores / that possess familiar structures and cadences.
   - kind: mc
     sentence: 'On the contrary, it comes close to Hobbes''s outlook: man''s violent
       and conflict‑prone nature makes it necessary to establish and maintain an effective
@@ -1064,6 +1163,9 @@ practice:
       - '콜론(:) after Hobbes''s outlook : 대비로 오독 → 앞의 추상어(홉스의 관점)를 구체화하는 환언으로 처리'
       - 'makes it necessary to establish : it은 가목적어, to establish가 진목적어 → ''확립하는 것을
         필요하게 만든다''(부정 아님)'
+      cut_en: 'On the contrary, / it comes close to Hobbes''s outlook: / man''s violent
+        and conflict-prone nature / makes it necessary / to establish and maintain
+        an effective legal framework / in order to secure peace.'
   - kind: mc
     sentence: I can't wait to ride while watching those "! beautiful waves!"!" Emma
       and Clara jumped on their bikes and started to Emma Clara pedal toward the white
@@ -1093,6 +1195,9 @@ practice:
       key_points:
       - 'while + ‑ing : 무조건 대조로 오독 → ''~하면서''(동시 동작)인지 문맥으로 판별'
       - 'can''t wait to ~ : ''기다릴 수 없다''가 아니라 ''몹시 ~하고 싶다/기대되다'''
+      cut_en: I can't wait to ride / while watching those beautiful waves! / Emma
+        and Clara jumped on their bikes / and started to pedal toward the white cliff
+        / where the beach road ended.
   - kind: mc
     sentence: 'While sentience and volition are aspects of mind and agency, morals
       are cultural tools developed to influence social behaviour: to cultivate the
@@ -1123,6 +1228,9 @@ practice:
       key_points:
       - '문두 While + 서로 다른 두 주어 : ''~하는 동안''(시간)으로 오독 → ''반면에''(대조)로 처리'
       - 'colon(:) 뒤 to cultivate ~ : influence social behaviour의 목적을 구체화한 환언'
+      cut_en: 'While sentience and volition are aspects of mind and agency, / morals
+        are cultural tools / developed to influence social behaviour: / to cultivate
+        the desirable and discourage the harmful.'
   - kind: short
     sentence: Admittedly, it is considerably more difficult to take notes from discussions
       than from lectures, for, unlike lectures, discussions tend to be disorganized
@@ -1149,6 +1257,9 @@ practice:
       - 'unlike lectures : ''강의처럼''으로 오독 → ''강의와 달리''(대비)로 처리'
       - 'for, unlike lectures, discussions ~ : for는 이유 접속사, 그 사이 unlike lectures는
         삽입 대비구 → 걷어내고 뼈대(discussions tend to be ~) 잡기'
+      cut_en: Admittedly, it is considerably more difficult to take notes from discussions
+        than from lectures, / for, / unlike lectures, / discussions tend to be disorganized
+        and difficult to follow.
   - kind: short
     sentence: While scholars might initially find these entrepreneurial concepts alien,
       they actually engage in similar practices when they set themselves apart in
@@ -1175,6 +1286,9 @@ practice:
       key_points:
       - '문두 While : ''~하는 동안''으로 오독 → 앞뒤 대비의 ''~지만''(양보)으로 처리'
       - 'find these concepts alien : 5형식(find+O+C) → ''이 개념을 낯설게 여기다'''
+      cut_en: While scholars might initially find these entrepreneurial concepts alien,
+        / they actually engage in similar practices / when they set themselves apart
+        in their academic writing.
   - kind: short
     sentence: Nevertheless, the technologies available for monitoring the concentrations
       and flows of particular substances in waste discharges have been developing
@@ -1201,6 +1315,9 @@ practice:
       - 'Nevertheless : 앞 논지를 뒤집는 대비 표지 → ''그럼에도 불구하고''로 반전 예고'
       - 'the technologies available for ~ have been developing : 긴 수식어에 속아 substances/discharges를
         주어로 오독 → 주어는 the technologies'
+      cut_en: Nevertheless, / the technologies available for monitoring the concentrations
+        and flows of particular substances in waste discharges / have been developing
+        rapidly.
   - kind: short
     sentence: While the other passengers were gathering their bags, Jessica quickly
       got off the bus and she ran up the cliff Jessica that was famous for its ocean
@@ -1226,6 +1343,9 @@ practice:
       key_points:
       - 'While + 진행형 : 대조로 오독 → ''~하는 동안''(동시 상황)으로 처리'
       - 'the cliff that was famous ~ : that절은 the cliff를 수식하는 관계절 → ''~로 유명한 절벽'''
+      cut_en: While the other passengers were gathering their bags, / Jessica quickly
+        got off the bus / and she ran up the cliff / that was famous for its ocean
+        views.
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow,
       not the substance.
@@ -1255,6 +1375,8 @@ practice:
       key_points:
       - 'hunting the shadow, not the substance : shadow·substance를 사냥 장면의 실제 그림자·물체로
         읽기 쉽다 → 문맥이 지정한 비유(겉핥기 허상 대 본질)로 치환.'
+      cut_en: Those who rely only upon theories / were obviously / hunting the shadow,
+        / not the substance.
     kind: mc
   - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing
       them flat and making sure they are hidden on the inside so that we wear clothing
@@ -1280,6 +1402,9 @@ practice:
       key_points:
       - 'the seams (hidden ... rather than pieces of fabric) : 솔기 감추기를 실제 옷 봉제로만 읽기
         쉽다 → 기술의 이음매(구성 요소 경계)를 감춰 조각이 아닌 완결된 전체로 경험하게 하는 설계 비유.'
+      cut_en: We aspire to seamless aesthetics / by stitching the seams closely, /
+        pressing them flat / and making sure they are hidden on the inside / so that
+        we wear clothing / rather than pieces of fabric.
     kind: short
   - kind: mc
     sentence: Because the environment plays a significant role in aiding meaningful
@@ -1313,6 +1438,10 @@ practice:
       author_msg: 주관적 경험과 환경은 분리된 둘이 아니라 하나로 맞물린 시스템으로 작동한다
       key_points:
       - 'act as ~ : ''~을 향해 행동하다''로 문자적 오독 → ''~로서 기능하다(하나의 ~에 비유)''로 처리'
+      cut_en: Because the environment plays a significant role / in aiding meaningful
+        internal processes, / subjective experience and the environment / act as a
+        coupled system. / This coupled system / can be seen as a complete cognitive
+        system of its own.
   - kind: mc
     sentence: If there is a clear line between burned out and not, as there is with
       a lightbulb, then we have no good way to categorize people who say they are
@@ -1345,6 +1474,9 @@ practice:
       key_points:
       - 'as there is with N : ''N와 함께 있듯이''로 오독 → ''N의 경우에 (그것이) 있듯이''로 앞 명사를 되받는
         비유로 처리'
+      cut_en: If there is a clear line / between burned out and not, / as there is
+        with a lightbulb, / then we have no good way to categorize / people who say
+        they are burned out but still manage to do their work competently.
   - kind: mc
     sentence: Even those who describe scientific contests in such a way note that
       it is a somewhat inaccurate description, given that replication and verification
@@ -1376,6 +1508,9 @@ practice:
       author_msg: 과학을 경쟁으로 그리는 관점조차, 재현·검증의 협력적 가치를 생각하면 부정확한 비유임을 인정한다
       key_points:
       - 'scientific contests : ''과학 경연대회(실물)''로 오독 → ''과학을 경쟁·시합에 빗댄 비유''로 처리'
+      cut_en: Even those who describe scientific contests in such a way / note / that
+        it is a somewhat inaccurate description, / given that / replication and verification
+        have social value / and are common in science.
   - kind: mc
     sentence: The entrance to a honeybee colony, often referred to as the dancefloor,
       is a market place for information about the state of the colony and the environment
@@ -1405,6 +1540,9 @@ practice:
       key_points:
       - 'is a market place for information : ''정보를 매매하는 실제 시장''으로 오독 → ''정보가 오가는 장(場)''이라는
         비유로 처리'
+      cut_en: The entrance to a honeybee colony, / often referred to as the dancefloor,
+        / is a market place for information / about the state of the colony / and
+        the environment outside the hive.
   - kind: short
     sentence: 'Adrianne Hardman has summarized this serious situation for public health:
       "Physical inactivity is a waste of human potential for health and well‑being."'
@@ -1431,6 +1569,9 @@ practice:
       author_msg: 신체 활동 부족은 건강과 행복을 위한 인간 잠재력을 헛되이 버리는 것이나 다름없다
       key_points:
       - 'A is a waste of B : ''A가 B를 낭비한다''로 오독 → ''A는 곧 B의 낭비다''라는 등치 비유로 처리'
+      cut_en: 'Adrianne Hardman has summarized / this serious situation for public
+        health: / "Physical inactivity is / a waste of human potential / for health
+        and well-being."'
   - kind: short
     sentence: The history of surviving dress really only starts in the century, and
       like all artefacts described as fine or decorative art, is a highly visual subject.
@@ -1458,6 +1599,9 @@ practice:
       key_points:
       - 'like all artefacts ~ : like를 동사로/삽입구를 주어로 오독 → ''~와 마찬가지로''라는 비유 전치사구로 처리하고
         본동사 is의 주어는 The history'
+      cut_en: The history of surviving dress / really only starts in the century,
+        / and like all artefacts / described as fine or decorative art, / is a highly
+        visual subject.
   - kind: short
     sentence: Unlike scientific methods, philosophizing is a non‑empirical approach
       that attempts to validate concepts through logical thinking and argumentation.
@@ -1484,6 +1628,8 @@ practice:
       key_points:
       - 'is a non‑empirical approach : approach를 동사로/Unlike를 부정 동사로 오독 → ''A는 B(접근법)이다''라는
         정의로 처리'
+      cut_en: Unlike scientific methods, / philosophizing is a non-empirical approach
+        / that attempts to validate concepts / through logical thinking and argumentation.
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection
       between dress‑design and art was invented that had not been there before.
@@ -1511,3 +1657,5 @@ practice:
       key_points:
       - 'dressmaking is a craft : that을 관계사로/is a를 문자적으로 오독 → 동격 that절 안의 ''A는 B다''
         정의 비유로 처리'
+      cut_en: Instead of the old rule that dressmaking is a craft, / a modern connection
+        between dress-design and art / was invented / that had not been there before.
