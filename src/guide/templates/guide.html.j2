@@ -494,10 +494,6 @@
     </div>
     <div class="rows">
       <div class="ab right"><span class="tag">정답</span>{{ card.body.correct }}
-        {% if card.body.subject and card.body.action %}
-        <div class="sv-line"><span class="sv-label">관계</span><span class="sv-s">{{ card.body.subject }}</span>
-          <span class="sv-arrow">→</span><span class="sv-v">{{ card.body.action }}</span></div>
-        {% endif %}
         {% if card.body.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ card.body.cut }}</div>{% endif %}
       </div>
     </div>
