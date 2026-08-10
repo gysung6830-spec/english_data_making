@@ -127,8 +127,12 @@ def _inline_tags(text, tags):
     return out
 
 
+_CIRC = "①②③④⑤⑥⑦⑧⑨⑩"
+
+
 def step2_passage(hl):
     parts = []
+    ynum = 0  # 노랑 문장 번호 → 하단 도출 '노랑①②'와 매칭
     for seg in hl:
         role = seg.get("role", "skip")
         txt = seg.get("t", "")
@@ -144,6 +148,10 @@ def step2_passage(hl):
                 if pw and esc(pw) in inner:
                     inner = inner.replace(esc(pw), f'<u class="rep">{esc(pw)}</u>', 1)
                 inner = f'<span class="tag pos">{esc(pos)}</span>' + inner
+            if role == "yellow":
+                badge = _CIRC[ynum] if ynum < len(_CIRC) else f"{ynum+1}"
+                ynum += 1
+                inner = f'<span class="ynum">{badge}</span>' + inner
             parts.append(f'<mark class="{cls}">{inner}</mark>')
     return " ".join(parts)
 
@@ -249,7 +257,7 @@ def derive_block(d):
     concl = f'<div class="concl">{d.get("concl","")}</div>' if d.get("concl") else ""
     gnote = f'<div class="gnote">{esc(d.get("gnote",""))}</div>' if d.get("gnote") else ""
     return f'''<div class="derive">
-      <div class="dh">🟡 노란색 문장만으로 정답이 나오는 과정 <span style="font-weight:600;color:#a58a3a;font-size:8.3px">(지문 속 노란 라벨 = 그 문장을 칠한 이유·신호)</span></div>
+      <div class="dh">🟡 노란색 문장만으로 정답이 나오는 과정 <span style="font-weight:600;color:#a58a3a;font-size:8.3px">(노랑①②③ = 위 지문에 <b>같은 번호</b>로 칠한 노랑 문장)</span></div>
       <ol>{steps}</ol>{concl}{gnote}</div>'''
 
 
@@ -1003,6 +1011,7 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .psg{ font-size:11px; line-height:1.85; border:1px solid var(--line); border-radius:6px; padding:9px 11px; margin-bottom:8px; }
 mark.m{ background:var(--must); padding:0 2px; border-radius:2px; }
 mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
+.ynum{ font-size:10px; font-weight:800; color:#b3610d; margin-right:1px; vertical-align:0.5px; }
 .uph{ text-decoration:underline; text-decoration-thickness:1.6px; text-underline-offset:2.5px; text-decoration-color:#12543d; font-weight:700; }
 .color-legend{ display:flex; align-items:center; flex-wrap:wrap; gap:5px; margin-bottom:6px; font-size:8.2px; color:#4b5560; }
 .color-legend .clh{ font-weight:800; color:#33414d; margin-right:2px; }
