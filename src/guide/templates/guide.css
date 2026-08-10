@@ -445,6 +445,27 @@ body {
 .cd-note { margin-top: 10px; font-size: 9.5px; color: #55605b; line-height: 1.6; }
 .cd-note b { color: var(--navy); font-weight: 800; }
 
+/* ── 부 표지(part opener): 핵심 전략으로 한 페이지 채우기 ── */
+.part-opener { display: flex; flex-direction: column; min-height: 250mm; }
+.op-lead { font-size: 11px; color: #45504b; margin: 10px 0 2px; line-height: 1.65; }
+.op-lead b { color: var(--navy); }
+.op-strats { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: space-between;
+  margin: 14px 0; }
+.op-strats-h { font-weight: 800; color: var(--navy); font-size: 13px; margin-bottom: 4px; }
+.op-card { border: 1px solid var(--tint2); border-left: 5px solid var(--navy2); border-radius: 10px;
+  padding: 15px 20px; background: #f6fbf9; }
+.op-card-h { display: flex; align-items: center; gap: 10px; }
+.op-g { background: var(--navy); color: #fff; font-weight: 800; font-size: 10px; letter-spacing: .5px;
+  border-radius: 5px; padding: 2px 9px; }
+.op-ct { font-family: var(--f-myeongjo), "Noto Serif KR", serif; font-weight: 800; color: var(--navy); font-size: 16px; }
+.op-cn { margin-left: auto; color: var(--gold); font-weight: 800; font-size: 10px; }
+.op-sub { color: var(--muted); font-size: 10px; margin: 7px 0 0; }
+.op-st { font-size: 11.5px; color: #33413c; line-height: 1.6; margin-top: 7px; }
+.op-st b { color: var(--navy2); font-weight: 800; }
+.op-card-sm { padding: 10px 18px; }
+.op-card-sm .op-ct { font-size: 14px; }
+.op-card-sm .op-st { font-size: 10.5px; margin-top: 4px; }
+
 /* ── 2부 · 구문별 괄호치기 실전 ────────────────── */
 .card.syntax { border-color: #dfe6f0; }
 .syn-step { font-size: 11.5px; margin: 8px 0 4px; line-height: 1.6; }
