@@ -106,6 +106,17 @@ table.rel .w{ font-family:'NanumSquareRound',sans-serif; color:#2b3540; }
 table.rel tr:nth-child(even) td{ background:#f7faf9; }
 .rellink{ font-size:9.5px; color:#6e5316; background:#fffdf3; border:1px solid var(--must-line); border-radius:7px; padding:5px 10px; margin-bottom:12px; }
 .rellink b{ color:#8a5a1a; }
+/* 어휘 칩(가독성) — 쉼표 뭉치 대신 낱개 알약으로 */
+.wl{ display:flex; flex-wrap:wrap; gap:4px 5px; }
+.wl .c{ font-family:'NanumSquareRound',sans-serif; font-size:10px; line-height:1.4; padding:1.5px 8px; border-radius:10px; border:1px solid; white-space:nowrap; }
+.wl .c b{ font-weight:800; }
+.wl.pos .c{ color:#24614a; background:#eef6f2; border-color:#b6d8c7; }
+.wl.pos .c b{ color:#12543d; }
+.wl.neg .c{ color:#9a3c34; background:#fbeeec; border-color:#e3b7b2; }
+.wl.neg .c b{ color:#8a2f27; }
+.wl.rel .c{ color:#33414d; background:#f2f6f4; border-color:#d3ddd7; }
+.wl.rel .c b{ color:#12543d; }
+table.pol td, table.rel td{ padding:6px 9px; }
 </style></head><body>
 
 <!-- ===== P1. 태도 ===== -->
@@ -400,21 +411,21 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
   <div class="h2"><span class="polsign pl">＋</span> 필자가 <b>중시·지지</b>하는 어휘</div>
   <table class="pol p">
     <tr><th style="width:20%">갈래</th><th>대표 어휘</th></tr>
-    <tr><td class="grp">중요·필수</td><td class="w">critical, crucial, essential, vital, key, fundamental, indispensable, integral, significant, principal, prime</td></tr>
-    <tr><td class="grp">이익·가치</td><td class="w">benefit(ial), valuable, priceless, fruitful, merit, desirable, relevant</td></tr>
-    <tr><td class="grp">강조·강화</td><td class="w">emphasize, stress, enhance, reinforce, prioritize, matter, count, be of importance</td></tr>
-    <tr><td class="grp">집중·추구</td><td class="w">focus on, concentrate on, center on, attend to, seek to V, in favor of</td></tr>
-    <tr><td class="grp">강조 부사</td><td class="w">invariably, substantially, only, nothing but, not just A but also B</td></tr>
+    <tr><td class="grp">중요·필수</td><td class="w"><div class="wl pos"><span class="c">critical</span><span class="c">crucial</span><span class="c">essential</span><span class="c">vital</span><span class="c">key</span><span class="c">fundamental</span><span class="c">indispensable</span><span class="c">integral</span><span class="c">significant</span><span class="c">principal</span><span class="c">prime</span></div></td></tr>
+    <tr><td class="grp">이익·가치</td><td class="w"><div class="wl pos"><span class="c">benefit(ial)</span><span class="c">valuable</span><span class="c">priceless</span><span class="c">fruitful</span><span class="c">merit</span><span class="c">desirable</span><span class="c">relevant</span></div></td></tr>
+    <tr><td class="grp">강조·강화</td><td class="w"><div class="wl pos"><span class="c">emphasize</span><span class="c">stress</span><span class="c">enhance</span><span class="c">reinforce</span><span class="c">prioritize</span><span class="c">matter</span><span class="c">count</span><span class="c">be of importance</span></div></td></tr>
+    <tr><td class="grp">집중·추구</td><td class="w"><div class="wl pos"><span class="c">focus on</span><span class="c">concentrate on</span><span class="c">center on</span><span class="c">attend to</span><span class="c">seek to V</span><span class="c">in favor of</span></div></td></tr>
+    <tr><td class="grp">강조 부사</td><td class="w"><div class="wl pos"><span class="c">invariably</span><span class="c">substantially</span><span class="c">only</span><span class="c">nothing but</span><span class="c">not just A but also B</span></div></td></tr>
   </table>
 
   <div class="h2"><span class="polsign mn">−</span> 필자가 <b>버리거나 부정</b>하는 어휘</div>
   <table class="pol n">
     <tr><th style="width:20%">갈래</th><th>대표 어휘</th></tr>
-    <tr><td class="grp">버림·제거</td><td class="w">abandon, discard, scrap, drop, remove, eliminate, discharge, leave out, rule out, exclude, removal</td></tr>
-    <tr><td class="grp">부족·결핍</td><td class="w">lack, shortage, absence, absent from, drawback, flaw, downside, side effect</td></tr>
-    <tr><td class="grp">무시·경시</td><td class="w">disregard, ignore, overlook, neglect, dismiss, of little account</td></tr>
-    <tr><td class="grp">거부·반대</td><td class="w">refuse, reject, resist, deny, disapprove, forbid, discourage, say no to</td></tr>
-    <tr><td class="grp">방해·감소·실패</td><td class="w">interfere with, stand in the way of, diminish, obscure, prevent A from Ving, fail, lose out</td></tr>
+    <tr><td class="grp">버림·제거</td><td class="w"><div class="wl neg"><span class="c">abandon</span><span class="c">discard</span><span class="c">scrap</span><span class="c">drop</span><span class="c">remove</span><span class="c">eliminate</span><span class="c">discharge</span><span class="c">leave out</span><span class="c">rule out</span><span class="c">exclude</span><span class="c">removal</span></div></td></tr>
+    <tr><td class="grp">부족·결핍</td><td class="w"><div class="wl neg"><span class="c">lack</span><span class="c">shortage</span><span class="c">absence</span><span class="c">absent from</span><span class="c">drawback</span><span class="c">flaw</span><span class="c">downside</span><span class="c">side effect</span></div></td></tr>
+    <tr><td class="grp">무시·경시</td><td class="w"><div class="wl neg"><span class="c">disregard</span><span class="c">ignore</span><span class="c">overlook</span><span class="c">neglect</span><span class="c">dismiss</span><span class="c">of little account</span></div></td></tr>
+    <tr><td class="grp">거부·반대</td><td class="w"><div class="wl neg"><span class="c">refuse</span><span class="c">reject</span><span class="c">resist</span><span class="c">deny</span><span class="c">disapprove</span><span class="c">forbid</span><span class="c">discourage</span><span class="c">say no to</span></div></td></tr>
+    <tr><td class="grp">방해·감소·실패</td><td class="w"><div class="wl neg"><span class="c">interfere with</span><span class="c">stand in the way of</span><span class="c">diminish</span><span class="c">obscure</span><span class="c">prevent A from Ving</span><span class="c">fail</span><span class="c">lose out</span></div></td></tr>
   </table>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
 </section>
@@ -460,21 +471,21 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
 
   <div class="relhead"><span class="rsym cause">→</span><span class="rt">인과 — A가 B를 낳거나(→) B에서 비롯(←)</span></div>
   <table class="rel">
-    <tr><td class="grp">A → B (일으킴)</td><td class="w">result in, lead to, cause, bring about, bring on, trigger, prompt, give rise to, contribute to, be the source of</td></tr>
-    <tr><td class="grp">A ← B (비롯)</td><td class="w">result from, stem from, arise from, draw from, spring from, be derived from, originate in/from, be rooted in, be based on, be anchored in</td></tr>
-    <tr><td class="grp">영향·의존</td><td class="w">influence, have an effect on, have implication for, depend on, be induced by, in response to</td></tr>
-    <tr><td class="grp">근거·이유</td><td class="w">due to, attribute A to B, be a basis for, rationale, justification, outcome, A in that B(B라는 점에서)</td></tr>
-    <tr><td class="grp">결과 연결</td><td class="w">so ~ that, such ~ that, so that S V, it follows that S V, insofar as</td></tr>
+    <tr><td class="grp">A → B (일으킴)</td><td class="w"><div class="wl rel"><span class="c">result in</span><span class="c">lead to</span><span class="c">cause</span><span class="c">bring about</span><span class="c">bring on</span><span class="c">trigger</span><span class="c">prompt</span><span class="c">give rise to</span><span class="c">contribute to</span><span class="c">be the source of</span></div></td></tr>
+    <tr><td class="grp">A ← B (비롯)</td><td class="w"><div class="wl rel"><span class="c">result from</span><span class="c">stem from</span><span class="c">arise from</span><span class="c">draw from</span><span class="c">spring from</span><span class="c">be derived from</span><span class="c">originate in/from</span><span class="c">be rooted in</span><span class="c">be based on</span><span class="c">be anchored in</span></div></td></tr>
+    <tr><td class="grp">영향·의존</td><td class="w"><div class="wl rel"><span class="c">influence</span><span class="c">have an effect on</span><span class="c">have implication for</span><span class="c">depend on</span><span class="c">be induced by</span><span class="c">in response to</span></div></td></tr>
+    <tr><td class="grp">근거·이유</td><td class="w"><div class="wl rel"><span class="c">due to</span><span class="c">attribute A to B</span><span class="c">be a basis for</span><span class="c">rationale</span><span class="c">justification</span><span class="c">outcome</span><span class="c">A in that B(B라는 점에서)</span></div></td></tr>
+    <tr><td class="grp">결과 연결</td><td class="w"><div class="wl rel"><span class="c">so ~ that</span><span class="c">such ~ that</span><span class="c">so that S V</span><span class="c">it follows that S V</span><span class="c">insofar as</span></div></td></tr>
   </table>
   <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>인과(therefore·thus)</b> · 글의 구조 <b>③문제→해결·⑥예시→일반화</b>. 인과 구문이 보이면 <b>‘결과=필자 결론(＋)’</b>에 형광펜.</div>
 
   <div class="relhead"><span class="rsym eq">=</span><span class="rt">등호·정의 — A = B (같다·라 부른다·상징한다)</span></div>
   <table class="rel">
-    <tr><td class="grp">정의·명명</td><td class="w">A is B, be called, be termed, define A as B, refer to A as B</td></tr>
-    <tr><td class="grp">상징·반영</td><td class="w">reflect, mirror, represent, embody, illustrate, exemplify</td></tr>
-    <tr><td class="grp">간주·여김</td><td class="w">regard/see/view/treat A as B, recognize A as B, describe A as B</td></tr>
-    <tr><td class="grp">동일시·상응</td><td class="w">identify A with, be equivalent to, amount to, equation of A with B</td></tr>
-    <tr><td class="grp">재진술·예시</td><td class="w">that is, i.e., in short, in this light / such as, like, including, e.g.</td></tr>
+    <tr><td class="grp">정의·명명</td><td class="w"><div class="wl rel"><span class="c">A is B</span><span class="c">be called</span><span class="c">be termed</span><span class="c">define A as B</span><span class="c">refer to A as B</span></div></td></tr>
+    <tr><td class="grp">상징·반영</td><td class="w"><div class="wl rel"><span class="c">reflect</span><span class="c">mirror</span><span class="c">represent</span><span class="c">embody</span><span class="c">illustrate</span><span class="c">exemplify</span></div></td></tr>
+    <tr><td class="grp">간주·여김</td><td class="w"><div class="wl rel"><span class="c">regard/see/view/treat A as B</span><span class="c">recognize A as B</span><span class="c">describe A as B</span></div></td></tr>
+    <tr><td class="grp">동일시·상응</td><td class="w"><div class="wl rel"><span class="c">identify A with</span><span class="c">be equivalent to</span><span class="c">amount to</span><span class="c">equation of A with B</span></div></td></tr>
+    <tr><td class="grp">재진술·예시</td><td class="w"><div class="wl rel"><span class="c">that is</span><span class="c">i.e.</span><span class="c">in short</span><span class="c">in this light / such as</span><span class="c">like</span><span class="c">including</span><span class="c">e.g.</span></div></td></tr>
   </table>
   <div class="rellink">🔗 <b>연계</b> — 추론 페이지의 <b>BE동사 정의(A=B)·콜론(:)</b> · <b>재진술(A=A′)</b>. ‘A=B’가 보이면 <b>한쪽만 이해</b>하면 나머지는 약하게.</div>
   <div class="foot">© 2026. 김은아영어연구소 · 형광펜 독해 — 독해의 원리</div>
@@ -488,19 +499,19 @@ table.rel tr:nth-child(even) td{ background:#f7faf9; }
 
   <div class="relhead"><span class="rsym contr">↔</span><span class="rt">구별·대조 — A ↔ B (다르다·반대다)</span></div>
   <table class="rel">
-    <tr><td class="grp">다름·구별</td><td class="w">differ from, distinguish A from B, discriminate between, separate A from B, set A apart from, boundary between</td></tr>
-    <tr><td class="grp">대조·상반</td><td class="w">contrast with, contrary to, unlike, opposed to, opposite, counter, whereas, on the other hand</td></tr>
-    <tr><td class="grp">전자/후자</td><td class="w">the former, the latter, vice versa, the other way around, two-edged sword(양날의 검)</td></tr>
+    <tr><td class="grp">다름·구별</td><td class="w"><div class="wl rel"><span class="c">differ from</span><span class="c">distinguish A from B</span><span class="c">discriminate between</span><span class="c">separate A from B</span><span class="c">set A apart from</span><span class="c">boundary between</span></div></td></tr>
+    <tr><td class="grp">대조·상반</td><td class="w"><div class="wl rel"><span class="c">contrast with</span><span class="c">contrary to</span><span class="c">unlike</span><span class="c">opposed to</span><span class="c">opposite</span><span class="c">counter</span><span class="c">whereas</span><span class="c">on the other hand</span></div></td></tr>
+    <tr><td class="grp">전자/후자</td><td class="w"><div class="wl rel"><span class="c">the former</span><span class="c">the latter</span><span class="c">vice versa</span><span class="c">the other way around</span><span class="c">two-edged sword(양날의 검)</span></div></td></tr>
   </table>
   <div class="rellink">🔗 <b>연계</b> — 연결사 지도의 <b>대조(Contrast, 양쪽 다 중요)</b> · 글의 구조 <b>④비교·대조</b> · 재진술 <b>비교 지문(A·B 두 소재)</b>.</div>
 
   <div class="relhead"><span class="rsym comp">&gt;</span><span class="rt">비교·대체·선호 — A &gt; B (우열·대체·고름)</span></div>
   <table class="rel">
-    <tr><td class="grp">우열·능가</td><td class="w">more/less than, outweigh, surpass, exceed, prevail over, outperform, outnumber, superior/inferior to</td></tr>
-    <tr><td class="grp">대체·전환</td><td class="w">replace, displace, be substituted/supplanted by, give way to, switch to, shift/transition from A to B</td></tr>
-    <tr><td class="grp">선호·선택</td><td class="w">prefer A to B, favor A over B, choose/select A over B, A rather than B, A instead of B</td></tr>
-    <tr><td class="grp">압도·가림</td><td class="w">be overwhelmed/overcome by, be overshadowed by, be dwarfed by, be sacrificed for</td></tr>
-    <tr><td class="grp">초점 못박기</td><td class="w"><b>not A but B</b>, not so much A as B, far from A B, less A than B</td></tr>
+    <tr><td class="grp">우열·능가</td><td class="w"><div class="wl rel"><span class="c">more/less than</span><span class="c">outweigh</span><span class="c">surpass</span><span class="c">exceed</span><span class="c">prevail over</span><span class="c">outperform</span><span class="c">outnumber</span><span class="c">superior/inferior to</span></div></td></tr>
+    <tr><td class="grp">대체·전환</td><td class="w"><div class="wl rel"><span class="c">replace</span><span class="c">displace</span><span class="c">be substituted/supplanted by</span><span class="c">give way to</span><span class="c">switch to</span><span class="c">shift/transition from A to B</span></div></td></tr>
+    <tr><td class="grp">선호·선택</td><td class="w"><div class="wl rel"><span class="c">prefer A to B</span><span class="c">favor A over B</span><span class="c">choose/select A over B</span><span class="c">A rather than B</span><span class="c">A instead of B</span></div></td></tr>
+    <tr><td class="grp">압도·가림</td><td class="w"><div class="wl rel"><span class="c">be overwhelmed/overcome by</span><span class="c">be overshadowed by</span><span class="c">be dwarfed by</span><span class="c">be sacrificed for</span></div></td></tr>
+    <tr><td class="grp">초점 못박기</td><td class="w"><div class="wl rel"><span class="c"><b>not A but B</b></span><span class="c">not so much A as B</span><span class="c">far from A B</span><span class="c">less A than B</span></div></td></tr>
   </table>
   <div class="rellink">🔗 <b>연계</b> — 완급조절(<b>필자가 무엇을 우선</b>) · 함축·요지(<b>선호·강조 대상이 곧 주제</b>). <b>not A but B</b>가 나오면 <b>B에 형광펜</b>.</div>
 
