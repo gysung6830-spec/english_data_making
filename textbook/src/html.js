@@ -11,6 +11,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { splitWorked } = require('./document');
 const { makeTip, PRINCIPLES } = require('./tip');
+const { tokenizeSignals } = require('./signals');
 
 const FONTS_DIR = path.join(__dirname, '..', 'fonts');
 const FOOTER_BRAND = '©2026. Ortica 영어. All rights reserved.';
@@ -792,15 +793,15 @@ function css() {
   /* 해설 끊어읽기 (담백한 스타일 — 초록 '문제' 카드 아님) */
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
-  /* 답지 '이 정도는 캐치' — 하고 싶은 말 + 쉬운 예시 */
-  .c2 { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:5px solid ${C.teal};
-    border-radius:7px; padding:8px 12px; margin:7px 0; break-inside:avoid; }
-  .c2-h { font-weight:800; color:${C.tealDark}; font-size:11.5px; margin-bottom:5px; }
-  .c2-sub { font-weight:600; color:${C.sub}; font-size:9.7px; }
-  .c2-say { font-size:11.4px; line-height:1.6; color:${C.ink}; margin-bottom:6px; }
-  .c2-exbox { background:${C.plusBg}; border:1px solid #F0D9A8; border-radius:6px;
-    padding:6px 10px; font-size:10.8px; line-height:1.55; color:#6a4d12; }
-  .c2-exlab { font-weight:800; color:${C.plus}; margin-right:5px; white-space:nowrap; }
+  /* 답지 '이 정도는 캐치' — 하고 싶은 말 + 쉬운 예시 (컴팩트) */
+  .c2 { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:4px solid ${C.teal};
+    border-radius:6px; padding:5px 10px 6px; margin:5px 0; break-inside:avoid; }
+  .c2-h { font-weight:800; color:${C.tealDark}; font-size:9.8px; margin-bottom:3px; }
+  .c2-sub { font-weight:600; color:${C.sub}; font-size:8.4px; }
+  .c2-say { font-size:10.2px; line-height:1.5; color:${C.ink}; margin-bottom:4px; }
+  .c2-exbox { background:${C.plusBg}; border:1px solid #F0D9A8; border-radius:5px;
+    padding:4px 8px; font-size:9.6px; line-height:1.45; color:#6a4d12; }
+  .c2-exlab { font-weight:800; color:${C.plus}; margin-right:4px; white-space:nowrap; }
   .anl { display:flex; gap:9px; align-items:center; background:${C.plusBg}; border:1px solid #F0D9A8;
     border-left:5px solid ${C.plus}; border-radius:8px; padding:9px 13px; margin:2px 0 12px; break-inside:avoid; }
   .anl-ic { font-size:17px; flex:none; } .anl-t { font-size:11px; color:#6a4d12; line-height:1.55; }
@@ -849,8 +850,16 @@ function css() {
   .ptag { flex:none; align-self:center; margin-left:8px; background:${C.gramBg}; color:${C.gram};
     border:1px solid #ddd4f2; font-size:9px; font-weight:800; padding:1px 8px; border-radius:10px; }
   .fulltext { background:#fafafa; border:1px solid ${C.line}; border-radius:8px; padding:12px 15px;
-    margin:6px 0 4px; font-size:12px; line-height:1.75; }
+    margin:6px 0 4px; font-size:12px; line-height:1.9; }
   .fulltext .fn { color:${C.teal}; font-weight:800; margin-right:3px; }
+  /* PART0 신호 형광펜 */
+  .hl-legend { font-size:9.3px; color:#666; margin:2px 0 5px; display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+  .hl-legend b { color:${C.tealDark}; }
+  .hl-legend .hl-note { color:#9aa; background:none; padding:0; }
+  .hl-sig { background:#FFF0A6; border-radius:3px; padding:0 2px; }
+  .hl-skip { background:#E9EBED; color:#7a7f86; border-radius:3px; padding:0 2px; }
+  .hl-pos { background:#D9EFE1; color:${C.tealDark}; border-radius:3px; padding:0 2px; font-weight:700; }
+  .hl-neg { background:#FBE0DB; color:${C.key}; border-radius:3px; padding:0 2px; font-weight:700; }
   .pcatch { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:5px solid ${C.teal};
     border-radius:8px; padding:12px 15px; margin:14px 0 4px; font-size:12px; break-inside:avoid; }
   .pcatch-h { display:block; color:${C.tealDark}; font-weight:800; font-size:13px; margin-bottom:5px; }
@@ -1128,10 +1137,20 @@ function pointTag(point) {
   return point ? `<span class="ptag">${esc(point)}</span>` : '';
 }
 // 지문 통째로 먼저 읽기(영어 원문 나열)
+// PART0 신호를 지문에 형광펜으로 칠한다(연결·신호=노랑 / 예시·양보=회색 / ±어휘=초록·빨강)
+function highlightSignals(en) {
+  return tokenizeSignals(en)
+    .map((tok) => (tok.cls ? `<span class="hl-${tok.cls}">${esc(tok.t)}</span>` : esc(tok.t)))
+    .join('');
+}
 function fullTextBlock(sentences) {
   const body = sentences.map((s, i) =>
-    `<span class="fn">${i + 1}</span>${esc(s.en)} `).join('');
-  return `<div class="fulltext">${body}</div>`;
+    `<span class="fn">${i + 1}</span>${highlightSignals(s.en)} `).join('');
+  const legend = `<div class="hl-legend"><b>🖍️ 형광펜</b>`
+    + `<span class="hl-sig">연결·신호</span><span class="hl-skip">예시·양보(스킵)</span>`
+    + `<span class="hl-pos">＋어휘</span><span class="hl-neg">−어휘</span>`
+    + `<span class="hl-note">PART 0 신호가 지문에 나오면 자동 표시</span></div>`;
+  return `${legend}<div class="fulltext">${body}</div>`;
 }
 // 해석 직접 쓰는 칸 (정답은 지문 끝 답지)
 function interpretWriteCard() {

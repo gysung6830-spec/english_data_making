@@ -12,6 +12,20 @@ const {
 const S = require('./styles');
 const B = require('./boxes');
 const { makeTip } = require('./tip');
+const { tokenizeSignals } = require('./signals');
+
+// 지문 문장 → PART0 신호 형광펜이 칠해진 docx TextRun 배열
+const HL_STYLE = {
+  sig: { highlight: 'yellow' },
+  skip: { shading: { type: ShadingType.CLEAR, fill: 'E9EBED' }, color: '7A7F86' },
+  pos: { shading: { type: ShadingType.CLEAR, fill: 'D9EFE1' }, color: '0C3F26', bold: true },
+  neg: { shading: { type: ShadingType.CLEAR, fill: 'FBE0DB' }, color: 'B24A38', bold: true },
+};
+function hlRunsDocx(en) {
+  return tokenizeSignals(en).map((tok) => new TextRun({
+    text: tok.t, size: 22, font: S.FONT_EN, ...(tok.cls ? HL_STYLE[tok.cls] : {}),
+  }));
+}
 
 // 각 챕터의 worked 를 앞 2문장만 "같이 풀어보기" 로 쓰고, 나머지는 steps 를
 // 떼어 "혼자 풀어보기(practice)" 앞쪽으로 이동시킨다(명세 §4). 원본은 건드리지 않음.
@@ -433,20 +447,20 @@ function catchAnswerParas(say, ex) {
   if (!say && !ex) return [];
   const kids = [
     new Paragraph({
-      spacing: { after: say ? 40 : 0 },
+      spacing: { after: say ? 20 : 0 },
       children: [
-        new TextRun({ text: '✅ 이 정도는 캐치!  ', bold: true, size: 19, color: '0C3F26', font: S.FONT }),
-        new TextRun({ text: '— 필자가 이 문장으로 하고 싶은 말', size: 15, color: '5F6B64', font: S.FONT }),
+        new TextRun({ text: '✅ 이 정도는 캐치!  ', bold: true, size: 16, color: '0C3F26', font: S.FONT }),
+        new TextRun({ text: '— 필자가 이 문장으로 하고 싶은 말', size: 13, color: '5F6B64', font: S.FONT }),
       ],
     }),
   ];
-  if (say) kids.push(new Paragraph({ spacing: { after: ex ? 60 : 0 }, children: [new TextRun({ text: say, size: 18, color: '1C2620', font: S.FONT })] }));
+  if (say) kids.push(new Paragraph({ spacing: { after: ex ? 40 : 0 }, children: [new TextRun({ text: say, size: 15, color: '1C2620', font: S.FONT })] }));
   if (ex) {
     kids.push(new Paragraph({
-      shading: { type: ShadingType.CLEAR, fill: 'FBF3E0' }, spacing: { before: 20 },
+      shading: { type: ShadingType.CLEAR, fill: 'FBF3E0' }, spacing: { before: 10 },
       children: [
-        new TextRun({ text: '💡 쉬운 예시  ', bold: true, size: 16, color: 'B07A1C', font: S.FONT }),
-        new TextRun({ text: ex, size: 16, color: '6A4D12', font: S.FONT }),
+        new TextRun({ text: '💡 쉬운 예시  ', bold: true, size: 14, color: 'B07A1C', font: S.FONT }),
+        new TextRun({ text: ex, size: 14, color: '6A4D12', font: S.FONT }),
       ],
     }));
   }
@@ -604,10 +618,22 @@ function passageParagraphs(p, idx) {
   out.push(B.p(`출처: ${p.source || '지문'}`, { italics: true, color: '666666' }));
   out.push(B.h2('지문 통째로 읽기'));
   out.push(new Paragraph({
+    spacing: { after: 40 },
+    children: [
+      new TextRun({ text: '🖍️ 형광펜 — ', bold: true, size: 15, color: '0C3F26', font: S.FONT }),
+      new TextRun({ text: '연결·신호', size: 15, highlight: 'yellow', font: S.FONT }),
+      new TextRun({ text: ' / ', size: 15, color: '888888', font: S.FONT }),
+      new TextRun({ text: '＋어휘', size: 15, color: '0C3F26', shading: { type: ShadingType.CLEAR, fill: 'D9EFE1' }, font: S.FONT }),
+      new TextRun({ text: ' / ', size: 15, color: '888888', font: S.FONT }),
+      new TextRun({ text: '−어휘', size: 15, color: 'B24A38', shading: { type: ShadingType.CLEAR, fill: 'FBE0DB' }, font: S.FONT }),
+      new TextRun({ text: '  (PART 0 신호가 지문에 나오면 자동 표시)', size: 13, color: '9AA0A6', font: S.FONT }),
+    ],
+  }));
+  out.push(new Paragraph({
     spacing: { after: 160 },
     children: (p.sentences || []).flatMap((s, i) => [
       new TextRun({ text: `${i + 1} `, bold: true, color: S.NAVY, size: 20, font: S.FONT }),
-      new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
+      ...hlRunsDocx(`${s.en} `),
     ]),
   }));
   out.push(B.h2('해석 전 예측 — 소재·주장·구조·재진술'));
