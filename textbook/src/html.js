@@ -1105,7 +1105,7 @@ function fullTextBlock(sentences) {
 function interpretWriteCard() {
   return `<div class="writecard">
     <div class="wc-h">✏️ 해석 — 직접 우리말로 써봐 (정답은 지문 끝 '답지'에서 확인)</div>
-    <div class="wl"></div><div class="wl"></div></div>`;
+    <div class="wl"></div></div>`;
 }
 // 캐치 직접 쓰는 칸 + '잘하는 법' 가이드. 학생이 매 문장 한 줄로 줄여보는 연습.
 function catchWriteCard() {
