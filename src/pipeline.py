@@ -548,9 +548,8 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
             else:
                 wbs, file_packs, file_bsets, file_wpacks = build_workbook_bundle_for_pdf(
                     client, cfg, pdf)
-            # 뱃지를 '파일명 · 지문번호'로 통일(파일명은 실제 입력 파일명 기준)
-            from .textutil import file_tag
-            apply_q_numbers(wbs, file_packs, file_bsets, file_wpacks, tag=file_tag(pdf.name))
+            # 뱃지 = 지문번호('단원-문항' 예: 10-1). 파일명 접두는 붙이지 않는다.
+            apply_q_numbers(wbs, file_packs, file_bsets, file_wpacks, tag="")
             if combine:
                 books.extend(wbs)   # 파일 안의 여러 지문을 모두 합본에 포함
                 packs.extend(file_packs)

@@ -393,11 +393,10 @@ def analyze_route():
             else:
                 wbs, packs, file_bsets, file_wpacks = pipeline.build_workbook_bundle_for_pdf(
                     client, cfg, tmp)
-            # 뱃지를 '파일명 · 지문번호'로 통일. 수동 시작번호가 있으면 지문마다 +1(파일 간 누적),
-            # 없으면 자동 추출/지문 순서 번호를 그대로 쓰고 파일명만 앞에 붙인다.
-            from src.textutil import file_tag
+            # 뱃지 = 지문번호('단원-문항' 예: 10-1). 파일명 접두는 붙이지 않는다(사용자 요청).
+            # 수동 시작번호가 있으면 지문마다 +1(파일 간 누적), 없으면 자동('10-1' 등)을 그대로 쓴다.
             nxt = pipeline.apply_q_numbers(wbs, packs, file_bsets, file_wpacks,
-                                           start=q_counter, tag=file_tag(f.filename))
+                                           start=q_counter, tag="")
             if q_counter is not None:
                 q_counter = nxt
             base = out_name(stem, '_통합', '_워크북')
