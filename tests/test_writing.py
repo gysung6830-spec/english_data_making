@@ -35,6 +35,21 @@ def test_shuffle_and_answer():
                for s in pack.sentences for it in s.items))
 
 
+def test_display_never_equals_answer_order():
+    # 조각을 '정답과 다른 순서'로 넣어도(입력≠정답), 셔플이 우연히 '정답 순서'로 떨어지면 안 된다.
+    # 예: chunks 입력 ["Compean","where","was"], answer "where Compean was"
+    #     → display 를 "where / Compean / was"(정답순)로 내면 문제 무의미.
+    for _ in range(50):   # 무작위이므로 여러 번 반복해 확률적 실패 방지
+        llm = wr.LLMWritingPack(sentences=[wr.LLMWritingSentence(
+            no=1, en="x", ko="가", template="They still didn't have any idea {{A1}}.",
+            items=[wr.LLMWritingItem(id="A1", chunks=["Compean", "where", "was"],
+                                     answer="where Compean was")])])
+        pack = wr.build_writing_pack(llm, header="H", title="T", subtitle="S")
+        disp = pack.sentences[0].items[0].display.strip("〈〉 ")
+        order = " ".join(p.strip() for p in disp.split(" / "))
+        _check("display 순서 ≠ 정답 어순", order != "where Compean was")
+
+
 def test_max_two_boxes():
     pack = mock_writing_pack(title="T", header="H")
     _check("문장당 박스 최대 2개", all(len(s.items) <= 2 for s in pack.sentences))
@@ -108,6 +123,7 @@ def test_show_ko_flag():
 
 if __name__ == "__main__":
     test_shuffle_and_answer()
+    test_display_never_equals_answer_order()
     test_max_two_boxes()
     test_id_mismatch_order()
     test_answer_from_chunks_when_blank()

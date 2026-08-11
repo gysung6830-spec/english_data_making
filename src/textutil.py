@@ -33,6 +33,33 @@ def shuffle_choices(display: str, seed_text: str) -> str:
     random.Random(seed).shuffle(order)
     return prefix + "[ " + " / ".join(order) + " ]"
 
+
+def _norm_seq(s: str) -> str:
+    """어순 비교용 정규화(소문자·영숫자만, 공백 1칸)."""
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+
+def shuffle_order_display(display: str, answer: str = "") -> str:
+    """순서배열 어구 '〈 a / b / c 〉' 를 '정답 어순과도 다르게' 다시 섞는다.
+
+    LLM 이 순서배열을 '정답 순서 그대로' 내보내면(예: 〈 It / was / not / until … 〉 정답
+    "It was not until …") 문제가 무의미해진다. 정답 어순·입력 순서 둘 다와 다를 때까지 섞는다.
+    '〈 … 〉' 형식이 아니면 그대로 둔다.
+    """
+    s = display.strip()
+    if not (s.startswith("〈") and s.endswith("〉")):
+        return display
+    parts = [p.strip() for p in s[1:-1].split("/") if p.strip()]
+    if len(parts) < 2:
+        return display
+    correct = _norm_seq(answer) if answer and answer.strip() else _norm_seq(" ".join(parts))
+    order = parts[:]
+    for _ in range(20):
+        random.shuffle(order)
+        if order != parts and _norm_seq(" ".join(order)) != correct:
+            break
+    return "〈 " + " / ".join(order) + " 〉"
+
 # 마침표가 문장 끝이 아닌 흔한 약어(뒤에 대문자가 와도 문장 분리하면 안 됨)
 _ABBR = [
     "e.g.", "i.e.", "etc.", "vs.", "cf.", "al.", "Mr.", "Mrs.", "Ms.",

@@ -96,6 +96,19 @@ def test_shuffle_choices():
     _check("정답(첫 보기) 위치 분산", firsts.count("a") < 30 and len(set(firsts)) >= 2)
 
 
+def test_shuffle_order_display():
+    from src.textutil import shuffle_order_display
+    # 정답 어순 그대로 들어와도 '정답과 다르게' 섞임(여러 번 반복해 확률적 실패 방지)
+    for _ in range(50):
+        d = shuffle_order_display("〈 It / was / not / until 〉", "It was not until")
+        order = " ".join(p.strip() for p in d.strip("〈〉 ").split(" / "))
+        _check("순서배열 ≠ 정답 어순", order != "It was not until")
+        _check("조각 집합 보존", sorted(order.split()) == sorted(["It", "was", "not", "until"]))
+    # 〈 〉 형식이 아니면 그대로
+    _check("비〈〉 그대로", shuffle_order_display("[ a / b ]", "") == "[ a / b ]")
+    _check("1조각 그대로", shuffle_order_display("〈 only 〉", "only") == "〈 only 〉")
+
+
 if __name__ == "__main__":
     test_split_keeps_full_sentences()
     test_prompts_embed_verbatim_list()
@@ -104,4 +117,5 @@ if __name__ == "__main__":
     test_file_tag_cleanup()
     test_dedup_placeholder()
     test_shuffle_choices()
+    test_shuffle_order_display()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

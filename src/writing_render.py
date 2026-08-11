@@ -72,17 +72,28 @@ class LLMWritingPack(BaseModel):
 _DEFAULT_INSTRUCTION = "우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열하여 문장을 완성하시오."
 
 
-def _shuffled_display(chunks: list[str]) -> str:
+def _norm_seq(s: str) -> str:
+    """어순 비교용 정규화(소문자·영숫자만, 공백 1칸)."""
+    import re
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+
+def _shuffled_display(chunks: list[str], answer: str = "") -> str:
     """조각들을 무작위로 섞어 '〈 a / b / c 〉' 표시 문자열을 만든다.
-    조각이 2개 이상이면 원래 순서와 다르게 되도록 몇 번 다시 섞는다."""
+
+    ★ '정답(바른 배열) 순서'와도, '입력 조각 순서'와도 다르게 섞는다. LLM 이 조각을 이미
+    섞어 넘겨도(입력≠정답) 셔플이 우연히 '정답 순서'로 떨어지면(예: 〈 where / Compean / was 〉
+    정답 "where Compean was") 문제가 무의미해지므로, 정답 어순과 일치하지 않을 때까지 다시 섞는다.
+    """
     parts = [c.strip() for c in chunks if c and c.strip()]
     if not parts:
         return "〈 〉"
     if len(parts) >= 2:
+        correct = _norm_seq(answer) if answer and answer.strip() else _norm_seq(" ".join(parts))
         shuffled = parts[:]
-        for _ in range(8):
+        for _ in range(20):
             random.shuffle(shuffled)
-            if shuffled != parts:
+            if shuffled != parts and _norm_seq(" ".join(shuffled)) != correct:
                 break
         parts = shuffled
     return "〈 " + " / ".join(parts) + " 〉"
@@ -114,7 +125,7 @@ def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: s
             if len(chunks) < 2:
                 template = template.replace("{{" + pid + "}}", _item_answer(src))
                 continue
-            items.append(WItem(id=pid, display=_shuffled_display(src.chunks),
+            items.append(WItem(id=pid, display=_shuffled_display(src.chunks, _item_answer(src)),
                                answer=_item_answer(src)))
         sents.append(WSentence(no=s.no, template=template, ko=s.ko, items=items))
     return WritingPack(header=header, title=title or "", subtitle=subtitle or "",
