@@ -24,11 +24,14 @@ _RULES = """[다섯 가지 출제 유형] — 아래는 '출제 우선순위' �
    ★ '한 문장에 2개'를 목표로 낸다(문장에 동사·준동사가 2개 이상이면 2개, 1개뿐이면 1개).
    ★ '준동사(to부정사·동명사·분사) 위주'로 고른다. 준동사가 있으면 그것을 먼저 낸다.
      준동사가 부족하면 시제·태(수동)·수일치 판단이 헷갈리는 정동사로 채운다.
-   ★ 조동사가 결합된 동사구(완료·수동·진행: have been, has been, had been, is being, will be 등)는
-     각 조동사를 '따로따로 빈칸으로 나누지 말고' 대표 동사원형 하나로만 제시한다.
-     특히 'have been / has been / had been' 은 '(be) 하나로만' 내고 정답을 그 완료형 전체로 쓴다.
-     예: "have been closely related" → display "(be)", answer "have been"  (뒤의 related 는 별도 (relate) 문항).
-     (have)+(be) 처럼 둘로 쪼개지 말 것.
+   ★★★ 완료형(had/have/has+p.p.), 수동태(be+p.p.), 진행형(be+-ing), 완료수동(have/had been+p.p.) 처럼
+     '조동사 + 본동사'로 된 동사구는 — 조동사(be·have·had 등)를 '문장에 남기거나 미리 채워 두지 말고' —
+     '본동사 원형 하나'만 (원형)으로 제시한다. 동사구 전체(조동사·사이 부사 포함)를 지우고 자리표시자 하나만
+     두며, 정답에는 '조동사까지 포함한 완성된 동사구 전체'를 쓴다. 절대 두 칸으로 쪼개지 말 것.
+       "was found" → "(find)" / "was found"      "had destroyed" → "(destroy)" / "had destroyed"
+       "were covered" → "(cover)" / "were covered"   "were hanging" → "(hang)" / "were hanging"
+       "have been related" → "(relate)" / "have been related"   ('(be)'+'(relate)' 로 쪼개지 말 것)
+     ★ 금지: "was (find)", "had (destroy)" 처럼 조동사를 문장에 남기는 것 / (have)+(be) 처럼 둘로 쪼개는 것.
    판단: to부정사/동명사/분사, 태(능동/수동), 수일치, 시제, 조동사 뒤 원형, 정동사 vs 준동사.
    display 예: "(react)"  answer 예: "react"  /  display 예: "(produce)" answer 예: "producing"
 3) 형용사·부사(type=adj) → [ 원문 / 유의어 / 반의어 ] 3개를 섞어 제시하고 문맥상 알맞은 것을 고르게 한다.
@@ -87,8 +90,11 @@ _RULES = """[다섯 가지 출제 유형] — 아래는 '출제 우선순위' �
   그대로 담는다(자리표시자로 바뀐 부분만 예외). 예: "Conservation aims to keep an object in its
   present state, to {{Q1}} it from change, ..." 처럼 문장 첫머리부터 포함한다.
   ★ 자리표시자로 바꾸지 않는 단어(부사·수식어 등)도 하나도 빠뜨리지 말 것.
-    예: "have been closely related" 를 낼 때 부사 'closely' 를 빠뜨리고 "{{Q1}} {{Q2}} related"
-    처럼 쓰면 안 된다. 반드시 "{{Q1}} {{Q2}} closely related" 로 남긴다.
+    예: "They quickly posted the picture" 에서 post 를 낼 때 부사 'quickly' 를 빠뜨리지 말고
+    "They quickly {{Q1}} the picture" 로 남긴다(quickly 유지).
+    ※ 단, '조동사+본동사' 동사구(have been closely related, was recently rescued 등)를 (원형) 한 칸으로
+      낼 때는 그 동사구 '전체'(조동사·사이 부사 포함)를 지우고 정답에 담는다:
+      "have been closely related" → "(relate)" 정답 "have been closely related".
   ★ 자리표시자를 넣고 남은 문장은 '반드시 문법적으로 온전'해야 한다. 특히 각 절의 '본동사'가
     자리표시자로 사라져 문장에 동사가 없어지는 일이 없도록 한다(관계사·연결사 문항을 만들 때 흔한 실수).
   ★★ [자리표시자 = 원문에서 그 어구를 '뺀' 자리] {{Qn}} 은 '테스트할 그 어구가 원래 있던 바로 그 위치'에

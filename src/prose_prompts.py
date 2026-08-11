@@ -55,10 +55,21 @@ _RULES = """[문장 완전성 — 매우 중요]
    ★ 그 문장에 나오는 '모든 동사·준동사·동명사'를 빠짐없이 (원형)으로 제시한다.
      정동사(be·have 포함), to부정사, 동명사, 현재/과거분사(분사구문 포함)를 전부 대상으로 한다.
      어형 변화가 필요 없어 원형 그대로가 답인 경우도 그대로 낸다(예: 조동사 뒤 원형).
-   ★ 조동사가 결합된 동사구(have been, has been, had been, is being 등)는 조동사를 따로 나누지 말고
-     대표 동사원형 하나로만 낸다. 특히 'have been'류는 '(be) 하나로만' 내고 정답을 완료형 전체로 쓴다.
-     예: "have been related" → "(be)" answer "have been" + 뒤에 "(relate)" answer "related".
-   ★★ (원형)으로 낼 동사는 '문장에서 그 동사(와 딸린 to·조동사)를 지우고' 자리표시자만 남긴다.
+   ★★★ 완료형(had/have/has + p.p.), 수동태(be + p.p.), 진행형(be + -ing), 완료수동(have/had been + p.p.)
+     처럼 '조동사 + 본동사'로 된 동사구는 — 조동사(be·have·had 등)를 '문장에 남기거나 미리 채워 두지 말고'
+     — '본동사 원형 하나'만 (원형)으로 제시한다. 그 동사구 전체(조동사·사이에 낀 부사 포함)를 지우고
+     자리표시자만 두며, 정답에는 '조동사까지 포함한 완성된 동사구 전체'를 쓴다. '한 칸(placeholder 1개)'으로만 낸다.
+       "was found"        → 표기 "(find)"    정답 "was found"
+       "had destroyed"    → 표기 "(destroy)" 정답 "had destroyed"
+       "had planned"      → 표기 "(plan)"    정답 "had planned"
+       "were covered"     → 표기 "(cover)"   정답 "were covered"
+       "were hanging"     → 표기 "(hang)"    정답 "were hanging"
+       "have been related"→ 표기 "(relate)"  정답 "have been related"   (be 와 relate 로 쪼개지 말 것)
+       "was recently rescued" → 표기 "(rescue)" 정답 "was recently rescued"  (사이 부사도 정답에 포함)
+     ★ 금지: "was (find)", "had (destroy)", "were (hang)" 처럼 조동사를 문장에 남겨 두는 것.
+     ★ 금지: 하나의 동사구를 "(be)" + "(p.p.)" 처럼 '두 칸'으로 쪼개는 것.
+   ★ 조동사(will/can/must/should 등) + 동사원형은 조동사를 문장에 남기고 본동사만 (원형)으로 낸다(원형이 답).
+   ★★ (원형)으로 낼 동사는 '문장에서 그 동사(와 딸린 to·조동사·부사)를 지우고' 자리표시자만 남긴다.
      자리표시자 바로 옆에 같은 동사를 '또' 남겨 중복시키지 말 것.
      올바른 예: "We need to dramatically reduce our use" → form_template "We need to dramatically {{P1}} our use"
        (display "(reduce)", answer "reduce").
