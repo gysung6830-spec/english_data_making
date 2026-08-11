@@ -96,6 +96,23 @@ def test_shuffle_choices():
     _check("정답(첫 보기) 위치 분산", firsts.count("a") < 30 and len(set(firsts)) >= 2)
 
 
+def test_format_qno():
+    from src.textutil import format_qno
+    # '단원-문항' 형식: 10-A / 10-1 / 10-2 / 10-3, 서술형·논술형은 그대로
+    _check("ANALYSIS → 10-A", format_qno("", "Ch. 04 Unit 10 - 수능 대비 ANALYSIS") == "10-A")
+    _check("1번 + Unit 10 → 10-1", format_qno("1번", "Ch. 04 Unit 10") == "10-1")
+    _check("2번 → 10-2", format_qno("2번", "Ch. 04 Unit 10") == "10-2")
+    _check("3번 → 10-3", format_qno("3번", "Ch. 04 Unit 10") == "10-3")
+    _check("서술형 유지", format_qno("서술형") == "서술형")
+    _check("논술형 유지", format_qno("논술형") == "논술형")
+    _check("이미 최종형식 유지(10-A)", format_qno("10-A") == "10-A")
+    _check("이미 최종형식 유지(10-1)", format_qno("10-1") == "10-1")
+    _check("Ch.04 는 단원 아님(Unit 10 사용)", format_qno("1번", "Ch. 04 Unit 10") == "10-1")
+    _check("단원 없으면 문항만(1번)", format_qno("1번") == "1번")
+    _check("판단 불가 시 빈 문자열", format_qno("", "그냥 제목") == "")
+    _check("힌트의 서술형 감지", format_qno("", "Unit 10 - 서술형") == "서술형")
+
+
 def test_shuffle_order_display():
     from src.textutil import shuffle_order_display
     # 정답 어순 그대로 들어와도 '정답과 다르게' 섞임(여러 번 반복해 확률적 실패 방지)
@@ -117,5 +134,6 @@ if __name__ == "__main__":
     test_file_tag_cleanup()
     test_dedup_placeholder()
     test_shuffle_choices()
+    test_format_qno()
     test_shuffle_order_display()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

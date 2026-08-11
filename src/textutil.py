@@ -216,6 +216,49 @@ def qno_label(source: str) -> str:
     return ""
 
 
+_UNIT_EN = re.compile(r'[Uu]nit\s*0*([0-9]+)')      # "Unit 10"
+_UNIT_KO = re.compile(r'([0-9]+)\s*과')             # "10과"
+_DESC_LABELS = ("서술형", "논술형")                    # 번호 대신 그대로 두는 라벨
+
+
+def _unit_of(*texts: str) -> str:
+    """여러 텍스트에서 '단원(Unit) 번호'만 뽑는다(예: 'Ch. 04 Unit 10' → '10')."""
+    for t in texts:
+        m = _UNIT_EN.search(t or "") or _UNIT_KO.search(t or "")
+        if m:
+            return m.group(1)
+    return ""
+
+
+def format_qno(q_no: str, *hints: str) -> str:
+    """지문 라벨을 '단원-문항' 형식으로 정규화한다.
+
+    예: q_no '1번' + 힌트 'Ch. 04 Unit 10' → '10-1'
+        ANALYSIS(수능대비 분석) 지문 → '10-A'
+        '서술형' / '논술형' 은 그대로 둔다.
+    - LLM 이 이미 '10-1' / '10-A' 형태로 주면 그대로 사용한다.
+    - 단원/문항을 못 정하면 빈 문자열을 돌려준다(상위 fallback 이 처리).
+    """
+    s = (q_no or "").strip()
+    if re.fullmatch(r'[0-9]+-([0-9]+|[A-Za-z])', s):   # 이미 최종 형식(10-1, 10-A)
+        return s
+    if s in _DESC_LABELS:
+        return s
+    blob = " ".join([s, *[h or "" for h in hints]])
+    for d in _DESC_LABELS:                              # 서술형/논술형은 그대로
+        if d in blob:
+            return d
+    unit = _unit_of(s, *hints)
+    # 문항 식별: 'N번' → N, ANALYSIS → A
+    m = re.search(r'([0-9]+)\s*번', s) or re.search(r'([0-9]+)\s*번', blob)
+    item = m.group(1) if m else ("A" if re.search(r'analysis', blob, re.I) else "")
+    if unit and item:
+        return f"{unit}-{item}"
+    if item:                                           # 단원 못 찾음 → 문항만
+        return item if item == "A" else f"{item}번"
+    return ""                                           # 판단 불가 → 상위 fallback
+
+
 def file_tag(name: str, maxlen: int = 16) -> str:
     """파일명에서 뱃지에 쓸 '짧은 식별자'를 만든다.
 
