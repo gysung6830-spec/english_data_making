@@ -56,7 +56,7 @@ const OUTPUT_SCHEMA = {
             },
           },
           traps: { type: 'array', items: { type: 'string' } },
-          worked: { type: 'array', minItems: 2, items: sentenceSchema() },
+          worked: { type: 'array', minItems: 1, items: sentenceSchema() },
           practice: { type: 'array', items: sentenceSchema() },
         },
       },
@@ -327,8 +327,10 @@ const PASSAGE_SCHEMA = {
                   description: "이 사슬의 핵심 개념/소재 짧은 이름(2~10자). 비교·대조로 소재가 2개면 각각 다르게(예: '전통 의학').",
                 },
                 links: {
-                  type: 'array', minItems: 2, maxItems: 5, items: { type: 'string' },
-                  description: "지문에 나온 순서대로, 같은 개념을 재진술한 표현들 A→A′→A″… (지문 속 실제 표현, 2개 이상).",
+                  // ⚠️ structured outputs 는 array 의 minItems 로 0/1 만 허용(2 이상 400 에러).
+                  //    개수 규칙(2~5개)은 프롬프트 + sanitizePassages(2개 미만 제거·5개 초과 컷)로 강제한다.
+                  type: 'array', minItems: 1, items: { type: 'string' },
+                  description: "지문에 나온 순서대로, 같은 개념을 재진술한 표현들 A→A′→A″… (지문 속 실제 표현, 2~5개).",
                 },
                 why: {
                   type: 'string',
@@ -499,7 +501,7 @@ function sanitizePassages(passages) {
         links.sort((a, b) => (a.pos === b.pos ? 0 : a.pos - b.pos));  // 지문 등장 순서
         return {
           keyword: ne(ch && ch.keyword) ? ch.keyword.trim() : '',
-          links: links.map((x) => x.t),
+          links: links.slice(0, 5).map((x) => x.t),  // 사슬은 최대 5개(스키마 maxItems 대체)
           why: ne(ch && ch.why) ? ch.why.trim() : '',
         };
       })
