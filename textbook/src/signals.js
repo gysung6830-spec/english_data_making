@@ -47,7 +47,9 @@ function buildRe() {
   });
   const phrases = [...map.keys()].sort((a, b) => b.length - a.length)
     .map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  return { re: new RegExp('\\b(' + phrases.join('|') + ')\\b', 'gi'), map };
+  // 앞뒤에 '글자·하이픈'이 붙은 경우는 제외 → 하이픈 합성어(self-enhance, worn-out,
+  // non-verbal 등)의 '일부'가 잘려 형광펜 칠해지는 것을 막는다.
+  return { re: new RegExp('(?<![A-Za-z-])(' + phrases.join('|') + ')(?![A-Za-z-])', 'gi'), map };
 }
 const { re, map } = buildRe();
 
