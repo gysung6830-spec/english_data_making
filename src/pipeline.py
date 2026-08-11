@@ -100,7 +100,7 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
 
     지문 추출을 1회만 수행해 통합 워크북 · 단일 유형 산문 워크시트 · 빈칸형 · 영작을 함께 생성한다.
     """
-    from .textutil import qno_label
+    from .textutil import qno_label, format_qno
 
     wbs: list[Workbook] = []
     packs: list[prose_render.ProsePack] = []
