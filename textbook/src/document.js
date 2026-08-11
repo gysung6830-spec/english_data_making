@@ -9,10 +9,24 @@ const {
   Table, TableRow, TableCell, WidthType, BorderStyle,
   TabStopType, TabStopPosition, LeaderType,
 } = require('docx');
+const fs = require('fs');
+const path = require('path');
 const S = require('./styles');
 const B = require('./boxes');
 const { makeTip } = require('./tip');
 const { tokenizeSignals } = require('./signals');
+
+// DOCX 에 NanumSquareRound TTF 를 '임베드'해서, 폰트가 설치되지 않은 어떤 PC 에서도
+// 나눔스퀘어라운드로 열리게 한다. (docx 라이브러리가 난독화·fontTable·관계를 처리)
+// Regular 하나만 임베드 — 굵은 글자는 Word 가 합성(faux-bold). 파일이 없으면 임베드 생략.
+function embedFonts() {
+  try {
+    const ttf = path.join(__dirname, '..', 'fonts', 'NanumSquareRoundR.ttf');
+    if (fs.existsSync(ttf)) return [{ name: S.FONT, data: fs.readFileSync(ttf) }];
+  } catch (_) { /* 임베드 실패해도 문서 생성은 계속 */ }
+  return [];
+}
+const EMBED_FONTS = embedFonts();
 
 // 지문 문장 → PART0 신호 형광펜이 칠해진 docx TextRun 배열
 const HL_STYLE = {
@@ -496,13 +510,48 @@ function korChunkBoxParas(chunks) {
     B.spacer(),
   ];
 }
+// 답지 헤더: 번호 + 끊어읽기(/)된 영어에 PART0 신호 형광펜 (조각 폴백 시 원문 전체)
+function answerHeadParas(s, idx, tag) {
+  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
+  let pieces;
+  if (chunks.length >= 2) {
+    const joined = chunks.map((c) => c[0]).join(' ');
+    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
+    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
+    pieces = (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85)
+      ? chunks.map((c) => c[0]) : [s.en || ''];
+  } else pieces = [s.en || ''];
+  const kids = [new TextRun({ text: `${idx}. `, bold: true, size: 22, color: S.NAVY, font: S.FONT })];
+  pieces.forEach((piece, k) => {
+    if (k > 0) kids.push(new TextRun({ text: '  /  ', bold: true, size: 22, color: '14603A', font: S.FONT }));
+    hlRunsDocx(piece).forEach((r) => kids.push(r));
+  });
+  if (tag) kids.push(new TextRun({ text: tag, italics: true, size: 16, color: '888888', font: S.FONT }));
+  return new Paragraph({ spacing: { before: 160, after: 40 }, children: kids });
+}
+function hlLegendParas() {
+  return [new Paragraph({
+    spacing: { after: 60 },
+    children: [
+      new TextRun({ text: '🖍️ 형광펜 — ', bold: true, size: 15, color: '0C3F26', font: S.FONT }),
+      new TextRun({ text: '연결·신호', size: 15, highlight: 'yellow', font: S.FONT }),
+      new TextRun({ text: ' · ', size: 15, color: '888888', font: S.FONT }),
+      new TextRun({ text: '＋어휘', size: 15, color: '0C3F26', shading: { type: ShadingType.CLEAR, fill: 'D9EFE1' }, font: S.FONT }),
+      new TextRun({ text: ' · ', size: 15, color: '888888', font: S.FONT }),
+      new TextRun({ text: '−어휘', size: 15, color: 'B24A38', shading: { type: ShadingType.CLEAR, fill: 'FBE0DB' }, font: S.FONT }),
+      new TextRun({ text: ' · ', size: 15, color: '888888', font: S.FONT }),
+      new TextRun({ text: '예시·양보(스킵)', size: 15, color: '7A7F86', shading: { type: ShadingType.CLEAR, fill: 'E9EBED' }, font: S.FONT }),
+    ],
+  })];
+}
 function passageAnswerParas(p) {
-  const out = [B.pageBreak(), B.h1('답지 — 끊어읽기 · 캐치'), B.p('위에서 직접 푼 걸 여기서 맞춰보자 (영어 문장에 / 로 끊어읽기).')];
+  const out = [B.pageBreak(), B.h1('답지 — 끊어읽기 · 캐치'), B.p('영어 문장에 / 로 끊어읽기 + PART 0 신호 형광펜.')];
+  out.push(...hlLegendParas());
   out.push(...analogyBannerParas(p.analogy));
   (p.sentences || []).forEach((s, i) => {
     // src(문항번호)가 짧은 라벨일 때만 표시. AI 가 문장 전체를 넣는 경우는 생략.
     const tag = s.src && String(s.src).length <= 10 ? `  [${s.src}]` : '';
-    out.push(B.h3(`${i + 1}. ${headChunkedEn(s)}${tag}`));
+    out.push(answerHeadParas(s, i + 1, tag));
     out.push(...korChunkBoxParas(s.chunks));
     out.push(...catchAnswerParas(s.catch, s.ex));
   });
@@ -618,22 +667,10 @@ function passageParagraphs(p, idx) {
   out.push(B.p(`출처: ${p.source || '지문'}`, { italics: true, color: '666666' }));
   out.push(B.h2('지문 통째로 읽기'));
   out.push(new Paragraph({
-    spacing: { after: 40 },
-    children: [
-      new TextRun({ text: '🖍️ 형광펜 — ', bold: true, size: 15, color: '0C3F26', font: S.FONT }),
-      new TextRun({ text: '연결·신호', size: 15, highlight: 'yellow', font: S.FONT }),
-      new TextRun({ text: ' / ', size: 15, color: '888888', font: S.FONT }),
-      new TextRun({ text: '＋어휘', size: 15, color: '0C3F26', shading: { type: ShadingType.CLEAR, fill: 'D9EFE1' }, font: S.FONT }),
-      new TextRun({ text: ' / ', size: 15, color: '888888', font: S.FONT }),
-      new TextRun({ text: '−어휘', size: 15, color: 'B24A38', shading: { type: ShadingType.CLEAR, fill: 'FBE0DB' }, font: S.FONT }),
-      new TextRun({ text: '  (PART 0 신호가 지문에 나오면 자동 표시)', size: 13, color: '9AA0A6', font: S.FONT }),
-    ],
-  }));
-  out.push(new Paragraph({
     spacing: { after: 160 },
     children: (p.sentences || []).flatMap((s, i) => [
       new TextRun({ text: `${i + 1} `, bold: true, color: S.NAVY, size: 20, font: S.FONT }),
-      ...hlRunsDocx(`${s.en} `),
+      new TextRun({ text: `${s.en} `, size: 22, font: S.FONT_EN }),
     ]),
   }));
   out.push(B.h2('해석 전 예측 — 소재·주장·구조·재진술'));
@@ -730,6 +767,7 @@ function buildPassageDocument(passages, meta = {}) {
     ...passages.flatMap((p, i) => passageParagraphs(p, i)),
   ];
   return new Document({
+    ...(EMBED_FONTS.length ? { fonts: EMBED_FONTS } : {}),
     styles: { default: { document: { run: { font: S.FONT, size: 22 } } } },
     sections: [{
       properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1000, bottom: 1000, left: 1100, right: 1100 } } },
@@ -748,6 +786,7 @@ function buildDocument(rawCategories) {
   ];
 
   return new Document({
+    ...(EMBED_FONTS.length ? { fonts: EMBED_FONTS } : {}),
     styles: { default: { document: { run: { font: S.FONT, size: 22 } } } },
     sections: [{
       properties: {
@@ -758,7 +797,37 @@ function buildDocument(rawCategories) {
   });
 }
 
+// docx 를 버퍼로 만들되, 폰트를 임베드했으면 settings.xml 에 <w:embedTrueTypeFonts/> 를
+// (스키마 순서에 맞춰) 주입해 Word 가 임베드 폰트를 확실히 사용하도록 한다.
+// → 모든 .docx 생성은 Packer.toBuffer 대신 이 함수를 쓴다.
+async function packDocx(doc) {
+  const { Packer } = require('docx');
+  let buf = await Packer.toBuffer(doc);
+  if (!EMBED_FONTS.length) return buf;
+  try {
+    const JSZip = require('jszip');
+    const zip = await JSZip.loadAsync(buf);
+    const f = zip.file('word/settings.xml');
+    if (f) {
+      let xml = await f.async('string');
+      if (!/embedTrueTypeFonts/.test(xml)) {
+        const inject = '<w:embedTrueTypeFonts/><w:saveSubsetFonts/>';
+        if (/<w:displayBackgroundShape[^>]*\/>/.test(xml)) {
+          xml = xml.replace(/(<w:displayBackgroundShape[^>]*\/>)/, `$1${inject}`);
+        } else if (/<w:evenAndOddHeaders/.test(xml)) {
+          xml = xml.replace(/(<w:evenAndOddHeaders)/, `${inject}$1`);
+        } else {
+          xml = xml.replace(/(<w:settings[^>]*>)/, `$1${inject}`);
+        }
+        zip.file('word/settings.xml', xml);
+        buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
+      }
+    }
+  } catch (_) { /* 주입 실패해도 임베드 자체는 유효하므로 그대로 반환 */ }
+  return buf;
+}
+
 module.exports = {
   buildDocument, splitWorked, coverParagraphs, chapterParagraphs, answerParagraphs,
-  buildPassageDocument, passageParagraphs,
+  buildPassageDocument, passageParagraphs, packDocx,
 };

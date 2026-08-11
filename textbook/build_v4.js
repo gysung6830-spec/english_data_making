@@ -19,7 +19,7 @@ const { execFileSync } = require('child_process');
 const { Packer } = require('docx');
 
 const categories = require('./data');
-const { buildDocument } = require('./src/document');
+const { buildDocument, packDocx } = require('./src/document');
 const { validateData } = require('./src/validate');
 
 function parseArgs(argv) {
@@ -76,7 +76,7 @@ async function main() {
   const docxPath = path.join(outDir, `${opts.out}.docx`);
 
   const doc = buildDocument(categories);
-  const buffer = await Packer.toBuffer(doc);
+  const buffer = await packDocx(doc);
   fs.writeFileSync(docxPath, buffer);
   console.log('✓ docx 생성:', path.relative(process.cwd(), docxPath));
 

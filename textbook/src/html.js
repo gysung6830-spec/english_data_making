@@ -1053,22 +1053,25 @@ function css() {
   .tcard-d { font-size:10.6px; color:#444; line-height:1.6; }
   /* 완급조절 흐름 3박스(OLD/NEW·MAIN/SUPPORT) — .flow3 재사용, old 배경 회색 */
   .flow3 .fl.old { background:#f4f5f6; border:1px solid #e2e5e3; } .flow3 .fl.old .fl-h { color:${C.sub}; }
-  /* +/- 어휘 방향 헤더 카드 */
-  .dirgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:11px 0 6px; }
-  .dircard { border-radius:8px; padding:10px 13px; }
+  /* +/- 어휘 방향 헤더 카드 (한 페이지 압축) */
+  .dirgrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:8px 0 4px; }
+  .dircard { border-radius:7px; padding:6px 11px; }
   .dircard.pos { background:#EFF6F1; border:1px solid ${C.greenLine}; }
   .dircard.neg { background:#FDF3F1; border:1px solid ${C.trapLine}; }
-  .dir-h { font-weight:800; font-size:12.5px; margin-bottom:4px; }
+  .dir-h { font-weight:800; font-size:11.5px; margin-bottom:2px; }
   .dircard.pos .dir-h { color:${C.teal}; } .dircard.neg .dir-h { color:${C.key}; }
-  .dir-d { font-size:10.5px; color:#444; line-height:1.55; }
-  .voca-h { font-weight:800; font-size:12.5px; margin:12px 0 5px; }
+  .dir-d { font-size:9.7px; color:#444; line-height:1.45; }
+  .voca-h { font-weight:800; font-size:11.5px; margin:8px 0 3px; }
   .voca-h.pos { color:${C.teal}; } .voca-h.neg { color:${C.key}; }
-  .voca-badge { display:inline-block; width:17px; height:17px; line-height:17px; text-align:center;
-    color:#fff; border-radius:50%; font-size:10px; font-weight:800; margin-right:4px; }
+  .voca-badge { display:inline-block; width:15px; height:15px; line-height:15px; text-align:center;
+    color:#fff; border-radius:50%; font-size:9px; font-weight:800; margin-right:4px; }
   .voca-badge.pos { background:${C.teal}; } .voca-badge.neg { background:${C.key}; }
+  .ptable.voca td { padding:4px 9px; line-height:1.4; }
+  .ptable.voca th { padding:5px 9px; }
   .ptable.voca td.k { color:${C.tealDark}; }
   .ptable.voca.neg th { background:${C.key}; } .ptable.voca.neg td.k { color:${C.key}; }
-  .ptable .chips { display:flex; flex-wrap:wrap; gap:4px; }
+  .ptable .chips { display:flex; flex-wrap:wrap; gap:3px; }
+  .ptable.voca .chip { font-size:9.4px; padding:1px 7px; border-radius:9px; }
   /* 극성/판정 칩 */
   .pchip { display:inline-block; background:${C.teal}; color:#fff; font-weight:800; font-size:9.5px; padding:0 6px; border-radius:9px; }
   .nchip { display:inline-block; background:${C.key}; color:#fff; font-weight:800; font-size:9.5px; padding:0 6px; border-radius:9px; }
@@ -1137,20 +1140,23 @@ function pointTag(point) {
   return point ? `<span class="ptag">${esc(point)}</span>` : '';
 }
 // 지문 통째로 먼저 읽기(영어 원문 나열)
-// PART0 신호를 지문에 형광펜으로 칠한다(연결·신호=노랑 / 예시·양보=회색 / ±어휘=초록·빨강)
+// PART0 신호를 형광펜으로 칠한다(연결·신호=노랑 / 예시·양보=회색 / ±어휘=초록·빨강)
+// ※ 형광펜은 '답지(해설)의 영어 문장'에만 적용한다. 지문 통째로 읽기는 깨끗하게 둔다.
 function highlightSignals(en) {
   return tokenizeSignals(en)
     .map((tok) => (tok.cls ? `<span class="hl-${tok.cls}">${esc(tok.t)}</span>` : esc(tok.t)))
     .join('');
 }
-function fullTextBlock(sentences) {
-  const body = sentences.map((s, i) =>
-    `<span class="fn">${i + 1}</span>${highlightSignals(s.en)} `).join('');
-  const legend = `<div class="hl-legend"><b>🖍️ 형광펜</b>`
+function hlLegend() {
+  return `<div class="hl-legend"><b>🖍️ 형광펜</b>`
     + `<span class="hl-sig">연결·신호</span><span class="hl-skip">예시·양보(스킵)</span>`
     + `<span class="hl-pos">＋어휘</span><span class="hl-neg">−어휘</span>`
     + `<span class="hl-note">PART 0 신호가 지문에 나오면 자동 표시</span></div>`;
-  return `${legend}<div class="fulltext">${body}</div>`;
+}
+function fullTextBlock(sentences) {
+  const body = sentences.map((s, i) =>
+    `<span class="fn">${i + 1}</span>${esc(s.en)} `).join('');
+  return `<div class="fulltext">${body}</div>`;
 }
 // 해석 직접 쓰는 칸 (정답은 지문 끝 답지)
 function interpretWriteCard() {
@@ -1282,10 +1288,10 @@ function chunkedHeadEn(s) {
     const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
     const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
     if (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85) {
-      return chunks.map((c) => esc(c[0])).join(sl);
+      return chunks.map((c) => highlightSignals(c[0])).join(sl);  // 형광펜은 답지 영어에만
     }
   }
-  return esc(s.en || '');
+  return highlightSignals(s.en || '');
 }
 // 답지 한글 끊어읽기(영어는 위 헤더에 있으니 한글만) — 조각 위치를 헤더와 매칭
 function korChunkRow(chunks) {
@@ -1295,7 +1301,8 @@ function korChunkRow(chunks) {
   return `<div class="chbox one"><div class="chrow"><span class="chtag ko">한글</span><span class="chtxt ckor">${ko}</span></div></div>`;
 }
 function passageAnswerKey(p) {
-  let h = secHead(CIRCLED[3], '답지 — 끊어읽기 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐 (영어 문장에 / 로 끊어읽기)', 'key', true);
+  let h = secHead(CIRCLED[3], '답지 — 끊어읽기 · 캐치', '영어 문장에 / 로 끊어읽기 + PART 0 신호 형광펜', 'key', true);
+  h += hlLegend();
   h += analogyBanner(p.analogy);
   h += (p.sentences || []).map((s, i) => {
     const tag = s.src && String(s.src).length <= 10 ? `<span class="stag">[${esc(s.src)}]</span>` : '';

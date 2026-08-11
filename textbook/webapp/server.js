@@ -24,7 +24,7 @@ const { Packer } = require('docx');
 const { extractSentences } = require('../src/extract');
 const { structurePassages } = require('../src/ai');
 const { validatePassages } = require('../src/validate');
-const { buildPassageDocument } = require('../src/document');
+const { buildPassageDocument, packDocx } = require('../src/document');
 const { buildHtmlPassages, renderPdf } = require('../src/html');
 
 const PORT = process.env.PORT || 3000;
@@ -87,7 +87,7 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
     const pdfPath = path.join(OUT_DIR, `${stamp}.pdf`);
     const htmlPath = path.join(OUT_DIR, `${stamp}.html`);
 
-    const buffer = await Packer.toBuffer(buildPassageDocument(passages));
+    const buffer = await packDocx(buildPassageDocument(passages));
     fs.writeFileSync(docxPath, buffer);
     log('docx 생성 완료');
 
