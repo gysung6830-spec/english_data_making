@@ -716,6 +716,9 @@ body {
 .sol.msg { background: var(--tint2); border-left: 3px solid var(--navy2); } .sol.msg .sol-tag { background: var(--navy); }
 .sol.key { background: var(--goldbg); } .sol.key .sol-tag { background: var(--gold); }
 .sol.key .kp { margin: 2px 0; font-size: 9.3px; color: #5b4a1e; line-height: 1.45; }
+/* 오역 진단 박스에 합쳐진 주요 구문(문법 포인트) — 오역 설명과 시각적으로 구분 */
+.sol.wrong .sol-kp { margin-top: 6px; padding-top: 5px; border-top: 1px dashed #e6c6c2; }
+.sol.wrong .sol-kp .kp { margin: 2px 0; font-size: 9.3px; color: #5f4a4a; line-height: 1.5; }
 
 /* 구체화 근거 */
 .sw-basis { margin-top: 5px; font-size: 9.5px; color: #7a6a3b;

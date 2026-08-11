@@ -83,10 +83,11 @@
     {% if s %}
     {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
-    {% if s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
-      {% for k in s.key_points %}<div class="kp">{{ k }}</div>{% endfor %}</div>{% endif %}
-    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역</span>{{ s.wrong }}
-      {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}</div>{% endif %}
+    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역 진단</span>{{ s.wrong }}
+      {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}
+      {% if s.key_points %}<div class="sol-kp">{% for k in s.key_points %}<div class="kp">▪ {{ k }}</div>{% endfor %}</div>{% endif %}</div>
+    {% elif s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
+      <div class="sol-kp">{% for k in s.key_points %}<div class="kp">▪ {{ k }}</div>{% endfor %}</div></div>{% endif %}
     {% endif %}
   </div>
   {% endfor %}
