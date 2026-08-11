@@ -142,281 +142,377 @@ function principlePageHtml() {
   </section>`;
 }
 
-// 글의 구조 안내 페이지 (책 앞쪽 별도 페이지, 목차 항목 1회) — 모의고사 지문 기준
-// [유형, 통념/앞단계 신호, 반전/뒷단계 신호, 흐름, 예]
-const STRUCTURE_GUIDE = [
-  ['통념 → 반박(반전)',
-    '통념 세팅: many people think/believe · it is widely[commonly] believed · traditionally · we tend to think · most people assume · at first glance',
-    '반전: But · However · Yet · In fact · In reality · Contrary to · Nevertheless',
-    '흔한 생각(통념)을 깔아둔 뒤 뒤집어 필자 주장을 편다', '“Many people believe X. But in fact, Y.”'],
-  ['주장 → 근거·예시',
-    '주장: should · must · it is important that · I argue',
-    '근거·예시: because · since · for example · for instance · research[studies] show · therefore',
-    '주장을 먼저 내세우고 이유·연구·예시로 뒷받침', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
-  ['문제 → 해결(방안)',
-    '문제: problem · challenge · issue · difficulty · concern',
-    '해결: solution · solve · address · one way to · need to · should',
-    '문제를 제기하고 해결책·방안을 제시', '“이런 문제가 있다. 이를 해결하려면 …”'],
-  ['비교 · 대조',
-    '대조: while · whereas · unlike · in contrast · on the other hand · by contrast',
-    '비교: similarly · likewise · just as · like · both … and',
-    'A와 B의 공통점·차이점을 견줌', '“A는 …인 반면, B는 …이다.”'],
-  ['시간 · 순서(나열)',
-    '순서: first · second · next · then · later · after · before · finally',
-    '시간: in 1937 · meanwhile · over time · eventually · subsequently',
-    '사건·과정을 시간·순서대로(전기·실험·역사)', '“먼저 …, 그다음 …, 마침내 …”'],
-  ['예시 → 일반화(결론)',
-    '예시: for example · for instance · such as · consider · take … as an example',
-    '일반화·결론: thus · therefore · in short · in conclusion · this suggests[shows] · overall',
-    '구체 사례들을 든 뒤 일반 원리·결론으로 묶음', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
-];
-function structurePageHtml() {
-  const cards = STRUCTURE_GUIDE.map(([name, sig1, sig2, flow, ex], i) => `<div class="cutcard gram">
-    <div class="cut-top"><span class="cut-n gram">${CIRCLED[i]}</span><span class="cut-name">${esc(name)}</span></div>
-    <div class="st-sig">🔎 ${esc(sig1)}</div>
-    <div class="st-sig">↳ ${esc(sig2)}</div>
-    <div class="cut-rule">${esc(flow)}</div>
-    <div class="cut-ex">예) ${esc(ex)}</div>
-  </div>`).join('');
-  return `<section class="chapter">
-    <div class="chhead"><span class="daypill gram">글의 구조</span><span class="tagpill">모의고사 지문 기준</span></div>
-    <h1>글의 구조 — 어떤 짜임이 있나?</h1>
-    <div class="chsub">필생보 · 모의고사·수능 독해 지문에 자주 나오는 6가지 글의 틀</div>
-    <div class="goal gram"><span class="goal-ic gram">핵심</span> 글의 구조 = 필자가 생각을 배치한 ‘틀’. <b>전환어(But/However…)와 연결어</b>를 신호로 잡으면 구조가 보이고, 구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡혀.</div>
-    <div class="cutgrid">${cards}</div>
-    <div class="struct-reveal"><span class="sr-h">🧩 이렇게 써먹어</span> 지문마다 ‘글의 구조 — 해석 전에 예측!’에서 이 6개 중 하나를 골라 보고, 지문 끝에서 정답과 맞춰봐.</div>
+// ══════════════════════════════════════════════════════════════════════════
+//  PART 0 · 독해의 원리 — Ortica 영어 '형광펜 독해' 원리 총론(전 12면) 재현
+//  (업로드 PART0 지면을 필생보 딥그린으로 1:1 재구성)
+// ══════════════════════════════════════════════════════════════════════════
+const PART0_PILL = 'PART 0 · 독해의 원리';
+// 공용 스캐폴드: 좌측 알약 + 제목 + 우측 페이지번호 + 초록 룰 + 히어로 박스
+function ppage(no, h1, hero, body) {
+  return `<section class="chapter part0">
+    <div class="phead"><span class="ppill">${PART0_PILL}</span><span class="ph-title">${h1}</span>${no ? `<span class="ph-no">${no} / 11</span>` : ''}</div>
+    <div class="phrule"></div>
+    ${hero ? `<div class="phero">${hero}</div>` : ''}
+    ${body}
+    <div class="pfoot">© 2026. Ortica 영어 · 형광펜 독해 — 독해의 원리</div>
   </section>`;
 }
-// 필자 입장 신호 어휘 — Ortica 영어 VOCA(DAY 31 긍정·중요 / DAY 32·33 부정) 전량을
-// 뉘앙스별로 묶어 수록. 중립은 '평가어 없음 + 유보/양면'을 명확한 예로 제시.
-const STANCE_POS = ['이익·유익', 'benefit · beneficial · fruitful · merit · valuable · priceless · work(효과가 있다)',
-  '중요·핵심·필수', 'core · key · point · critical · crucial · essential · integral · indispensable · necessary · fundamental · vital · significant · substantial · prime · principal · prevailing · matter · count · be of importance · relevant',
-  '집중·주목', 'center on · concentrate on · focus on · attend to',
-  '강조·강화·향상', 'emphasize · stress · enhance · reinforce · prioritize',
-  '필요·추구·선호', 'need · require · seek to V · fond of · desirable · in favor of',
-  '강조 구문·부사', 'only · invariably · substantially · nothing but · not just A but also B · without A · It is … that V · win out'];
-const STANCE_NEG = ['버리다·제거', 'abandon · discard · scrap · drop · remove · eliminate · discharge · leave out · rule out · removal',
-  '무시·간과', 'disregard · ignore · overlook · neglect · dismiss',
-  '부족·부재·결핍', 'lack · shortage · absence · absent from · free from · incapable of · of little account',
-  '제한·회피·벗어남', 'restrict · limit · avoid · sidestep · bypass · shy away from · deviate from · break away from · move away from · disengage from · apart from · aside from · departure from · quit · detach',
-  '거절·거부·금지', 'refuse · reject · resist · exclude · deny · say no to · disapprove · discourage · forbid',
-  '방해·차단·단절', 'interfere with · stand in the way of · cut off · break with · displace · stop/prevent/keep A from Ving',
-  '실패·상실·약화', 'fail · lose out · diminish',
-  '비판·의심·이의', 'criticize · question · doubt · obscure · challenge',
-  '무가치·문제·결함', 'drawback · downside · side effect · flaw · myth · misleading · worthless · irrelevant · unnecessary · poor · costly · challenging · mere',
-  '무관·독립', 'have nothing to do with · have no bearing on · have no idea of · independent of A · independently · immune to · isolation',
-  '부정 부사·구문', "hardly · rarely · by no means · don't bother · unlikely to V · allergic to · erroneously · other than · at the price[expense] of · It is of no use to V · It's not so much … but ~ · strip[free] A of B · reluctance · exception"];
-const STANCE_NEU = ['유보·추측(단정 회피)', 'may · might · can · tend to · seem · appear · suggest · some · often · in some cases · not necessarily',
-  '양면·균형 제시', 'on one hand … on the other hand · while ~ · both A and B · it depends · vary',
-  '객관 서술(관찰·보고)', 'describe · explain · report · note · observe · according to · studies show (해석 없이 나열만)'];
-// 어휘를 칩(태그)으로 렌더. 칩 안 글씨는 검은색(색은 테두리로만 구분).
-function stanceChips(arr, cls) {
-  let h = '';
-  for (let i = 0; i < arr.length; i += 2) {
-    const words = arr[i + 1].split(' · ')
-      .map((x) => `<span class="chip ${cls}">${esc(x)}</span>`).join('');
-    h += `<div class="chgrp"><span class="chgrp-lab">${esc(arr[i])}</span><span class="chips">${words}</span></div>`;
-  }
-  return h;
-}
-function stancePageHtml() {
-  return `<section class="chapter">
-    <div class="chhead"><span class="daypill key">필자 입장 신호</span><span class="tagpill">긍정·부정 어휘로 태도 읽기</span></div>
-    <h1>필자의 입장 — 어떤 어휘로 드러나나?</h1>
-    <div class="chsub">필생보 · Ortica 영어 VOCA 기반 · 필자가 대상을 '좋게 / 나쁘게' 보는지는 평가 어휘에서 새어 나온다</div>
-    <div class="goal"><span class="goal-ic">핵심</span> 필자가 대상을 두고 쓴 <b>평가 어휘</b>를 잡으면 입장이 보여. 진짜 주장은 보통 <b>마지막 문장</b>(therefore · in conclusion)이나 <b>But · However 뒤</b>, <b>should · must</b> 에서 터져 나와.</div>
-    <div class="b-block pos"><div class="b-head">👍 긍정 · 중요 — 필자가 좋게·중요하게 봄</div>${stanceChips(STANCE_POS, 'pos')}</div>
-    <div class="b-block neg"><div class="b-head">👎 부정 — 필자가 비판·경계·배제·부정</div>${stanceChips(STANCE_NEG, 'neg')}</div>
-    <div class="b-block neu"><div class="b-head">🤔 중립 — 좋다·나쁘다 평가가 없을 때</div>
-      <div class="b-note">긍정·부정 평가어가 <b>뚜렷이 없고</b>, 아래처럼 <b>판단을 유보</b>하거나 <b>양쪽을 균형 있게</b> 보여주면 중립이야. (한쪽으로 몰지 않음)</div>
-      ${stanceChips(STANCE_NEU, 'neu')}</div>
-    <div class="flipbox">
-      <div class="flip-h">🔄 ± 방향을 뒤집는 신호 — 놓치면 정반대로 읽는다 (평가원 오답 단골 '반대구조')</div>
-      <div class="flip-row"><b>부정·결여·분리</b> not · no · never · no longer · hardly · rarely · by no means · free from · absent from · immune to · independent of · apart from · far from · cease · stop</div>
-      <div class="flip-row"><b>전환 예</b> does not shrink = <b class="pp">＋</b>expands · free from bias = <b class="pp">＋</b>객관적 · immune to = <b class="nn">−</b>영향 안 받음 · not necessarily = 약화(반드시 ~는 아님)</div>
-    </div>
-    <div class="pcatch"><span class="pcatch-h">✅ 이렇게 써먹어</span> 문장 뜻을 다 몰라도 핵심어의 <b>± 방향</b>만 잡으면 요지·함축·정답 선지가 보여. 지문마다 ‘필자 주장’에서 이 방향으로 예측해봐.</div>
-  </section>`;
-}
-// ── 독해의 원리(PART0) — Ortica 영어 '형광펜 독해' 원리 총론을 필생보 스타일로 수록 ──
-// 공용 스캐폴드/헬퍼
-function ppage(pill, tag, h1, sub, goal, body) {
-  return `<section class="chapter">
-    <div class="chhead"><span class="daypill key">${esc(pill)}</span><span class="tagpill">${esc(tag)}</span></div>
-    <h1>${esc(h1)}</h1>
-    <div class="chsub">${esc(sub)}</div>
-    ${goal ? `<div class="goal"><span class="goal-ic">핵심</span> ${goal}</div>` : ''}
-    ${body}</section>`;
-}
+// 초록 세로바 소제목
+function psec(t) { return `<div class="psec">${t}</div>`; }
+// 불릿 리스트(› 마커)
+function pbul(items) { return `<ul class="pbul">${items.map((x) => `<li>${x}</li>`).join('')}</ul>`; }
+// 표
 function ptable(headers, rows) {
-  const th = headers.map((h) => `<th>${esc(h)}</th>`).join('');
+  const th = headers.map((h) => `<th>${h}</th>`).join('');
   const tb = rows.map((r) => `<tr>${r.map((c, i) => `<td class="${i === 0 ? 'k' : ''}">${c}</td>`).join('')}</tr>`).join('');
   return `<table class="ptable"><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table>`;
 }
-function pcard(ic, name, body, cls) {
-  return `<div class="cutcard ${cls || ''}"><div class="cut-top"><span class="cut-n ${cls || ''}">${ic}</span><span class="cut-name">${esc(name)}</span></div>${body}</div>`;
+// 기출 예시 인용 박스 (라벨 + 회차 + 영문[하이라이트 가능] + 해설)
+function qbox(lab, cite, en, note, cls) {
+  return `<div class="qbox ${cls || ''}"><div class="q-top"><span class="q-lab">${lab}</span>${cite ? `<span class="q-cite">${cite}</span>` : ''}<span class="q-en">${en}</span></div>${note ? `<div class="q-note">${note}</div>` : ''}</div>`;
 }
-function pex(label, en, note) {
-  return `<div class="pex"><span class="pex-lab">${esc(label)}</span> <span class="pex-en">${esc(en)}</span>${note ? `<div class="pex-note">${esc(note)}</div>` : ''}</div>`;
+// A/B 배지 칩 — 'A lead to B' 처럼 A·B 를 배지로 렌더
+function abChips(list) {
+  const one = (s) => {
+    const parts = esc(s).split(/\b(A|B)\b/);
+    const html = parts.map((p) => (p === 'A' ? '<span class="ab-badge ab-a">A</span>' : p === 'B' ? '<span class="ab-badge ab-b">B</span>' : p)).join('');
+    return `<span class="abchip">${html}</span>`;
+  };
+  return `<div class="abchips">${list.map(one).join('')}</div>`;
 }
 
-// P1 · 독해 태도
+// ── P1 (01/11) · 독해 태도 ─────────────────────────────────────────────
 function attitudePageHtml() {
-  return ppage('독해의 원리 ①', '태도', '모의고사 점수는 ‘태도’에서 나온다',
-    '“정확하게 모든 문장을 해석하는 것” ≠ “좋은 점수” — 점수는 글의 중심 내용을 잡은 사람에게 간다',
-    '구문을 완벽히 분석한 사람이 아니라, <b>글이 무슨 말을 하려는가</b>를 잡은 사람이 점수를 가져가.',
-    pcard('📖', '공부할 때 — 걸어다니는 사전', '<div class="cut-rule">단어·구문을 끝까지 정확히. 실력의 바탕을 쌓는 시간.</div>', 'pos')
-    + pcard('✍', '시험 칠 때 — 모르는 건 추론', '<div class="cut-rule">모르는 단어에 멈추지 말고 문맥으로 추론. “무슨 말을 하려는가”만 고민.</div>', 'neg')
-    + pcard('🔑', 'HOW — 초반에 멈춰 ‘관통 키워드’를 잡는다', '<div class="cut-rule">글 초반 3문장쯤 읽고 멈춰: <b>세 문장을 관통하는 하나의 키워드</b>는? 반복되는 말을 찾아라. 예시가 있으면 앞 문장과 어떻게 같은지 생각(General → for example Specific).</div>', 'gram')
-    + '<div class="pcatch"><span class="pcatch-h">✅ 주제 문제의 정답 원리</span> 키워드는 반드시 선지에 담긴다 — 같은 용어를 쓰지 않더라도. (단, 가장 많이 쓰인 단어가 곧 답인 건 아님)</div>');
-}
-
-// P2 · 완급조절 — 한 문장을 OLD(문두 부사절·전치사구) / MAIN(주절) / SUPPORT(분사구문·관계사)로 쪼갠다
-function pacePageHtml() {
-  const worked = `<div class="wex">
-    <div class="wex-h">📖 예시로 나눠보기 — 한 문장을 세 역할로 쪼개봐</div>
-    <div class="wex-row old"><span class="wex-tag old">OLD · 부사절</span><span class="wex-s"><u>Although the plan looks simple,</u></span><span class="wex-k">문두 배경(부사절·전치사구) — <b>약하게</b></span></div>
-    <div class="wex-row main"><span class="wex-tag main">MAIN · 주절</span><span class="wex-s">it often fails in practice,</span><span class="wex-k">진짜 하고 싶은 말(주절) — <b>가장 강하게</b></span></div>
-    <div class="wex-row sup"><span class="wex-tag sup">SUPPORT · 분사구문</span><span class="wex-s"><u>leaving many beginners confused.</u></span><span class="wex-k">뒤에 덧붙인 부연(분사구문·관계사) — <b>약하게</b></span></div>
-    <div class="wex-note">▶ 문두 <b>부사절·전치사구</b>(OLD)와 뒤의 <b>분사구문·「,which」관계사</b>(SUPPORT)는 약하게, 가운데 <b>주절(MAIN)</b>에 힘줘 — 이게 완급조절이야.</div>
-  </div>`;
-  const flow = `<div class="flow3">
-    <div class="fl old"><div class="fl-h">OLD (배경)</div><div class="fl-b">문두 <b>부사절·전치사구</b><br>(Although/When/In…) · <b>약하게</b></div></div>
-    <div class="fl-arw">→</div>
-    <div class="fl new"><div class="fl-h">MAIN (주제)</div><div class="fl-b"><b>주절</b> — 진짜 하고 싶은 말<br><b>가장 강하게</b></div></div>
-    <div class="fl-arw">→</div>
-    <div class="fl sup"><div class="fl-h">SUPPORT (부연)</div><div class="fl-b">뒤의 <b>분사구문·관계사</b><br>(, -ing/-ed · , which) · <b>약하게</b></div></div>
-  </div>`;
-  return ppage('독해의 원리 ②', '완급조절', '완급조절 — OLD / MAIN / SUPPORT로 나눠 읽기',
-    '모든 문장을 똑같이 강하게 읽을 필요는 없다 · 문장은 주절(MAIN)에 힘이 실린다',
-    '문두 배경과 뒤 부연은 약하게, <b>주절</b>에 힘주는 <b>능동적 독해</b>를 하자. 아래처럼 세 역할로 쪼개봐.',
-    worked + flow
-    + '<div class="cutgrid">'
-    + pcard('🔎', 'OLD 신호 — 컴마(,)가 붙은 앞자리', '<div class="cut-rule">문두에서 컴마로 끊기는 <b>부사절(Although~)·전치사구(In~)</b>가 배경(OLD). 컴마가 없으면 주절 핵심일 때가 많다.</div>', 'neg')
-    + pcard('✅', 'SUPPORT 신호 — 뒤에 붙는 분사·관계사', '<div class="cut-rule"><b>분사구문(, -ing/-ed)</b>과 <b>「,which」비제한 관계사</b>는 부연 — 약하게. (관계사만 있으면 필요한 정보이니 챙긴다.)</div>', 'pos')
-    + '</div>');
-}
-
-// P3 · 추론(어순·구두점)
-function inferPageHtml() {
-  return ppage('독해의 원리 ③', '추론', '모르는 것은 ‘추론’한다 — 어순·구두점',
-    '영어는 흔히 General → Specific · 추상적인 말이 앞에 오면 대개 뒤에 구체 정보가 따라온다',
-    '모르는 단어에 멈추지 말고 <b>‘뒤가 알려줄 것’</b>이라 믿고 읽어라.',
-    pcard('=', '정의를 여는 신호 — BE동사 (A=B)', pex('A=B', 'Tax is the application of a society’s theories of distributive justice.', 'be동사 뒤에서 정의됨 → ‘Tax = 분배 정의 이론의 적용’. 뒤가 알려줄 거라 믿고 읽는다.'), 'gram')
-    + '<div class="cutgrid">'
-    + pcard(':', '콜론 — 부연·재진술·열거', '<div class="cut-rule">A : B 에서 A가 이해되면 B는 읽을 필요 없이 확인만.</div>')
-    + pcard('—', '대쉬 — 상술', '<div class="cut-rule">대쉬 이하는 앞을 상술. 앞이 이해되면 약하게. (중간 삽입=대쉬, 끝=콜론)</div>')
-    + pcard(';', '세미콜론 — 두 문장 연결', '<div class="cut-rule">and·but·so 역할. ‘내용상 관련 있구나’만 생각하고 넘긴다.</div>')
-    + pcard('“”', '따옴표 — 인용·강조', '<div class="cut-rule">인용·강조, 또는 단어의 본래 의미를 비틀어 쓸 때(필자의 의도).</div>')
-    + '</div>'
-    + pcard('·', '병렬·나열 [and / or] — 하나만 알면 된다', pex('나열', '…variations in tempo, volume, tonal quality and intonation.', '‘tempo’ 하나만 알아도 ‘여러 변주 요소’ 나열임을 안다 — 나머지는 넘겨도 됨.'), 'pos'));
-}
-
-// P4 · 연결사 지도
-function connectivePageHtml() {
-  return ppage('독해의 원리 ④', '연결사', '연결사 = “어디가 중요한지 알려줄게”',
-    '연결사는 문장과 문장의 관계 표지 · 문장 어디에 있든 앞뒤 ‘사이’에 놓고 읽어라',
-    '특히 <b>역접</b>은 완급의 분기점이야.',
-    '<div class="cutgrid">'
-    + pcard('↔', 'Switching — 앞을 뒤집고 뒤가 핵심', '<div class="cut-rule">‘그러나·대신에’ · <b>A ‹ B</b> 뒤가 중요, 앞은 약하게.</div><div class="cut-ex">however · but · still · nevertheless · instead · rather</div>', 'neg')
-    + pcard('=', 'Contrast — 두 대상 다 중요', '<div class="cut-rule">‘반면에’ · <b>A = B</b> 비교·대조, 양쪽 다 챙긴다.</div><div class="cut-ex">on the other hand · by contrast · conversely</div>', 'gram')
-    + '</div>'
-    + ptable(['표현', '1순위', '2순위(놓치기 쉬움)'], [
-      ['but / however', '그러나(Switching) / 반면에(Contrast)', '역접 아닐 땐 <b>강조</b>(Emphasis)'],
-      ['In fact', '사실상·실제로(순접·강조)', '하지만 사실은(역접)'],
-      ['on the contrary', '오히려·도리어(앞 진술 부정·강조)', '≠ on the other hand(반면에)와 혼동 주의'],
-      ['on the other hand', '반면에(by contrast)', '다른 한편으로는(첨가)'],
-    ]));
-}
-
-// P5 · 재진술 원리
-function restatePrinciplePageHtml() {
-  return ppage('독해의 원리 ⑤', '재진술', '재진술(Paraphrasing) — 같은 말을 알아채기',
-    '독해의 최종 기술 = 재진술 · 명시적 단서 없이도 “앞의 그 말을 바꿔 한 거구나”를 느끼는 것',
-    '필자는 핵심을 <b>한 번만 말하지 않고</b> 표현을 바꿔 되풀이하고, <b>정답 선지는 그 되풀이의 마지막 한 번</b>이야.',
-    '<div class="pcatch" style="margin-top:2px"><span class="pcatch-h">🔁 이 교재에선</span> 지문마다 「재진술 사슬」 문제로 훈련해 — 소재가 하나면 A→A′→A″…, 비교 지문이면 A→A′… · B→B′… 로 두 소재를 나란히. (지문에 실제 되풀이된 만큼만, 억지로 만들지 않음)</div>'
-    + ptable(['기능', '방향', '대표 연결사'], [
-      ['재진술', 'G/S → 다시 말하면 → G/S', 'that is · in other words · in effect · indeed'],
-      ['예시·요약', '일반 ↔ 구체', 'for example · for instance / in short · in conclusion'],
-      ['나열·첨가', '같은 주제에 항목을 더함', 'similarly · likewise · also · moreover · furthermore'],
-      ['인과', '결과 ← 원인', 'as a result · therefore · thus · hence · so'],
+  return ppage('01', '모의고사 점수는 ‘태도’에서 나온다',
+    '“정확하게 모든 문장을 해석하는 것” 과 “좋은 점수” 는 비례하지 않는다. 점수는 <b>구문을 완벽히 분석한 사람</b>이 아니라 <b>글의 중심 내용을 잘 파악한 사람</b>에게 간다.',
+    `<div class="tgrid">
+       <div class="tcard"><span class="tbadge co">공부할 때</span><div class="tcard-t">걸어다니는 사전</div><div class="tcard-d">단어·구문을 끝까지 정확히. 실력의 바탕을 쌓는 시간.</div></div>
+       <div class="tcard"><span class="tbadge co">시험 칠 때</span><div class="tcard-t">모르는 건 추론</div><div class="tcard-d">모르는 단어에 멈추지 말고 <b>문맥으로 추론</b>. “무슨 말을 하려는가”만 고민.</div></div>
+     </div>`
+    + psec('“무슨 글이지?” 의문을 가지며 읽기')
+    + pbul([
+      '하나의 영어 단락은 결국 <b>하나의 주제</b>로 귀결된다. 다양한 정보는 그 주제를 설명하려는 것일 뿐 — <b>장황한 표현에 속지 말 것</b>.',
+      '주어진 정보를 다 소화하며 읽으면 지친다. <b>무엇을 부각하는지</b> 찾으며 읽자.',
+      '<b>(what)</b> 이 글이 무엇에 대한 글인가? → <b>(기준)</b> ‘A에 대한 글이구나’ 잡고 <b>필자의 의견</b>(키워드의 개념·주장)을 생각하며 읽기.',
     ])
-    + pcard('🧠', '재진술 독해 = G(일반화) ↔ S(구체화)를 오간다', '<div class="cut-rule">서울 = 대한민국의 수도 = 한국에서 천만이 사는 곳 — 표현은 달라도 <b>하나의 범주</b>임을 느끼는 것. 정답 선지는 지문을 이렇게 바꿔 말한다.</div>', 'gram'));
+    + psec('HOW — 초반에 멈춰 ‘관통 키워드’를 잡는다')
+    + pbul([
+      '글의 초반 3문장쯤 읽고 <b>멈춰서</b> 생각한다: 세 문장을 <b>관통하는 하나의 키워드</b>는? <b>반복되는 말</b>을 찾아라.',
+      '잘 안 보이면 잠시 멈춘다. 예시가 있으면 앞 문장과 어떻게 같은지 생각한다. (앞 문장 <span class="ktag g">General</span> → for example <span class="ktag o">Specific</span>)',
+      '주제 문제는 키워드가 <b>반드시 선지에 담긴다</b> — 같은 용어를 쓰지 않더라도.',
+    ])
+    + `<div class="pcatch"><span class="pcatch-h">✅ 주제 선지</span> 편견 없는 실험(본문) → <b>객관적인 실험의 중요성</b>(선지) ✔<br><span class="pc-warn">주의 — 가장 많이 쓰인 단어가 선지에 있다고 해서 답인 것은 아니다.</span></div>`);
 }
 
-// P6 · 재진술 5변환·함정
+// ── P2 (02/11) · 완급조절 ──────────────────────────────────────────────
+function pacePageHtml() {
+  const flow = `<div class="flow3">
+    <div class="fl old"><div class="fl-h">OLD (배경·통념)</div><div class="fl-b">도입부 / 마이너스<br>약하게 “음~ 그렇구나”</div></div>
+    <div class="fl-arw">→</div>
+    <div class="fl new"><div class="fl-h">NEW · MAIN (주제)</div><div class="fl-b">필자가 진짜 하고 싶은 말<br><b>가장 강하게</b></div></div>
+    <div class="fl-arw">→</div>
+    <div class="fl sup"><div class="fl-h">SUPPORT (부연)</div><div class="fl-b">예시·상술<br>선명하면 약하게</div></div>
+  </div>`;
+  return ppage('02', '완급조절 — OLD / NEW·MAIN / SUPPORT',
+    '모든 문장을 똑같이 강하게 읽을 필요는 없다. 한 단락엔 주제가 <b>하나뿐</b>. 강·약을 조절하는 <b>능동적 독해</b>를 하자. 완급 없이 직독직해만 하면 남는 정보가 없다.',
+    flow
+    + psec('OLD를 알아채는 신호 — 컴마(,)가 붙은 앞자리')
+    + pbul([
+      '문두에서 <b>컴마로 끊기는 부사절·분사구문·전치사구</b>가 흔히 배경(OLD) 신호. (컴마가 없으면 주절 핵심 정보일 때가 많다.)',
+      'OLD는 <b>약하게</b>(해석을 하지 말라는 게 아니다). 진부한 통념(~)을 던져 <b>뒤 내용을 강조</b>하는 <b>대비 효과(contrast effect)</b>다.',
+    ])
+    + qbox('OLD → NEW', '2023 6월 37번', '<span class="ol">Although</span> this is true, <span class="q-hl">it has also become a tired and played-out argument.</span>', '‘맞는 말이다’(양보·OLD) → 하지만 ‘진부한 주장’(NEW·핵심). 양보절은 약하게, 주절이 진짜 하고 싶은 말.')
+    + psec('SUPPORT — 선명함으로 완급을 정한다')
+    + pbul([
+      '선명함 <b>높음</b>(MAIN이 이해됨) → SUPPORT는 <b>약하게</b> 대충. support로 MAIN을 확인.',
+      '선명함 <b>낮음</b>(이해 안 됨) → SUPPORT를 <b>강하게</b> 천천히. 단, MAIN과 SUPPORT 정보가 충돌하면 안 된다.',
+      '「<b>, 관계사,</b>」는 약하게(독자가 모를 것 같아 덧붙인 정보). 관계사만 있으면 필요한 정보이니 챙긴다.',
+    ])
+    + qbox(', 관계사', '2024 9월 33번', '… three different scientists each independently rediscovered Mendel’s forgotten work, <span class="q-hl">which</span> of course had been there all along.', '「, which」이하는 부연(비제한) — 핵심은 ‘세 과학자가 멘델의 연구를 재발견’.'));
+}
+
+// ── P3 (03/11) · 추론(어순·구두점) ─────────────────────────────────────
+function inferPageHtml() {
+  return ppage('03', '모르는 것은 ‘추론’한다 — 어순·구두점',
+    '영어는 흔히 <b>General → Specific</b> 순서. 추상적인 말이 앞에 오면 대개 뒤에 구체적인 정보가 따라온다. 모르는 단어에 멈추지 말고 <b>‘뒤가 알려줄 것’</b>이라 믿고 읽어라.',
+    psec('정의를 여는 신호 — BE동사 (A = B)')
+    + qbox('A = B', '2023 9월 22번', '<b>Tax is</b> the application of a society’s theories of distributive justice.', '모르는 말도 be동사 뒤에서 정의됨 — ‘Tax = 분배 정의 이론의 적용’. ‘뒤가 알려줄 것’이라 믿고 읽는다.')
+    + psec('구두점 — 필자가 남긴 독해 신호')
+    + pbul([
+      '<b>세미콜론 ;</b> = 두 문장을 잇는 <b>연결(and·but·so 역할)</b>. ‘내용상 관련 있구나’만 생각하고 넘긴다.',
+      '<b>콜론 :</b> = 부연·재진술·열거. 실전에선 <b>A : B</b> 에서 A가 이해되면 B는 읽을 필요 없다.',
+      '<b>대쉬 –</b> = 콜론과 유사(상술). 부연을 중간에 넣을 땐 대쉬, 끝에 넣을 땐 콜론.',
+      '<b>따옴표 “ ” ‘ ’</b> = 인용·강조, 또는 단어의 본래 의미를 <b>비틀어 쓸 때</b>(필자의 의도).',
+    ])
+    + `<div class="qcols">
+        ${qbox('콜론 :', '2022 6월 36번', 'This isn’t really a paradox: landmarks are themselves, but they also define neighborhoods around themselves.', '콜론 앞(‘역설이 아니다’)이 이해되면 뒤(부연)는 확인만 — B 약하게.')}
+        ${qbox('대쉬 —', '2023 6월 20번', 'What can make the difference is drive — utilizing the mental gear to maximize gains made in the technical and physical areas.', '대쉬 이하는 ‘drive’를 상술 — 앞이 이해되면 약하게.')}
+      </div>`
+    + psec('병렬·나열 [and / or] — 하나만 알면 된다')
+    + pbul(['<b>A, B and C / A, B or C</b> 에서 셋 중 <b>하나라도 이해되면</b> 나머지는 ‘비슷한 문맥’으로 넘긴다.'])
+    + qbox('나열', '2023 9월 24번', '… a wide potential of variations in tempo, volume, tonal quality and intonation.', '‘tempo’ 하나만 알아도 ‘여러 변주 요소’ 나열임을 안다 — 나머지는 넘겨도 됨.'));
+}
+
+// ── P4 (04/11) · 연결사 지도 ───────────────────────────────────────────
+function connectivePageHtml() {
+  return ppage('04', '연결사 = “어디가 중요한지 알려줄게”',
+    '연결사(접속부사)는 문장과 문장의 <b>관계</b>를 알려주는 표지다. 문장 어디에 있든 <b>앞 문장과 뒷 문장 ‘사이’</b>에 놓고 읽어라. 특히 <b>역접</b>은 완급의 분기점이다.',
+    psec('역접 — Switching vs Contrast')
+    + `<div class="tgrid">
+        <div class="tcard sw"><span class="tbadge sw">Switching</span><div class="tcard-t">A ‹ B · 뒤가 중요</div><div class="tcard-d">‘그러나·대신에’. 앞을 뒤집고 <b>뒷 내용이 핵심</b>. 앞은 약하게.</div></div>
+        <div class="tcard co"><span class="tbadge co">Contrast</span><div class="tcard-t">A = B · 둘 다 중요</div><div class="tcard-d">‘반면에’. 두 대상을 <b>비교·대조</b> — 양쪽 다 챙긴다.</div></div>
+      </div>`
+    + `<div class="qcols">
+        ${qbox('Switching', '2023 6월 23번', '<b>However,</b> the emotional states themselves are likely to be quite invariant across cultures.', '앞 통념을 <b>뒤집어</b> 필자 주장으로 — 뒷내용이 핵심.')}
+        ${qbox('Contrast', '2024 6월 33번', 'The artist, <b>on the other hand,</b> relies on the strength of her artistry to effect a marriage between subjectivities.', '앞 대상 ↔ ‘the artist’를 <b>대조</b> — 양쪽 다 중요.')}
+      </div>`
+    + ptable(['묶음', '뜻', '대표 연결사'], [
+      ['반대·전환', '그러나', 'however, but, still, though, nevertheless, nonetheless, even so'],
+      ['대체·대신', '대신에', 'instead, rather'],
+      ['대조·대비', '반면에', 'on the other hand, by contrast, conversely, but, however'],
+    ])
+    + pbul(['<b>그러나</b> = 앞 내용 <b>전체</b>를 뒤집음.&nbsp;&nbsp;<b>대신에</b> = 앞 내용 <b>일부</b>를 대체(‘대신’을 ‘그러나’로 못 바꿈).'])
+    + `<div class="qcols">
+        ${qbox('그러나', '2022 6월 22번', 'It does, <b>however,</b> greatly improve its chances.', 'however가 문장 중간에 있어도 앞뒤 사이에 놓고 역접으로 읽는다.')}
+        ${qbox('대신에', '2022 6월 23번', '<b>Instead,</b> the bases and interests of this activity change and develop to playing and watching sports.', '앞 내용의 <b>대체</b>로 전개 — ‘그러나’로 바꾸면 어색.')}
+      </div>`
+    + psec('헷갈리는 다의어 — 2순위 해석까지 챙기기')
+    + ptable(['표현', '1순위', '2순위'], [
+      ['but / however', '그러나(Switching) / 반면에(Contrast)', '역접 아닐 땐 <b>강조</b>(Emphasis)'],
+      ['In fact', '사실상·실제로 (순접)', '하지만 사실은 (역접)'],
+      ['on the contrary', '오히려·도리어 (앞 진술을 부정·강조)', '≠ on the other hand(반면에)와 혼동 주의'],
+      ['on the other hand', '반면에 (by contrast)', '다른 한편으로는 (첨가)'],
+    ])
+    + `<div class="qcols">
+        ${qbox('In fact', '2025 6월 32번', '<b>In fact,</b> the ability to generate creative ideas is essentially useless if these ideas subsequently die.', '여기선 <b>순접</b>(사실상) — 앞을 강조·부연(‘역접’ 아님).')}
+        ${qbox('다른 한편', '2026 9월 40번', '<b>On the other hand,</b> if characters are the work of several hands over decades, they may change considerably.', '역접이 아니라 <b>다른 경우를 첨가</b> — ‘다른 한편으로는’.')}
+      </div>`);
+}
+
+// ── P5 (05/11) · 재진술 원리 ───────────────────────────────────────────
+function restatePrinciplePageHtml() {
+  return ppage('05', '재진술(Paraphrasing) — 같은 말을 알아채기',
+    '독해의 최종 기술은 <b>재진술</b> — 명시적 단서 없이도 “앞의 그 말을 <b>바꿔 한 거구나</b>”를 느끼는 것. 필자는 핵심 주장·소재를 한 번만 말하지 않고 <b>표현을 바꿔 되풀이</b>하고, 정답 선지는 그 되풀이의 <b>마지막 한 번</b>이다.',
+    `<div class="pnote"><span class="pnote-ic">🔁</span>PART 1에는 재진술이 뚜렷한 문항마다 「재진술 연결 문제」가 붙어 있다 — 소재가 하나면 A → A′ → A″ …로, 비교 지문이면 A → A′ … · B → B′ …로 두 소재를 나란히, <b>지문에 실제로 되풀이된 만큼</b> 이어 본다(억지로 만들지 않는다). <b>마지막 재진술이 곧 정답 선지</b>임을 지문을 풀며 확인한다.</div>`
+    + psec('순접 연결사 — 소재는 달라도 주제는 같다')
+    + ptable(['기능', '방향', '대표 연결사'], [
+      ['재진술', 'G/S → 다시 말하면 → G/S', 'that is, in other words, in effect, indeed'],
+      ['예시·요약', '일반 ↔ 구체', 'for example, for instance / in short, in conclusion'],
+      ['나열·첨가', '같은 주제에 항목을 더함', 'similarly, likewise, also, moreover, furthermore'],
+      ['인과', '결과 ← 원인', 'as a result, therefore, thus, hence, so'],
+    ])
+    + qbox('재진술', '2022 수능 40번', '<b>That is,</b> the explanation of scientific generalizations comes from the causal mechanisms that produce the regularities.', '앞 문장을 같은 뜻으로 다시 말함 — that is가 없어도 이 관계를 느끼는 것이 재진술 독해.')
+    + psec('재진술 독해 = G(일반화) ↔ S(구체화)를 오간다')
+    + pbul([
+      '표현이 달라도 <b>문맥상 하나의 범주</b>면 같은 말이다 — 둘 중 하나만 이해되면 나머지는 약하게.',
+      '까다로운 순서·삽입도 명시적 단서가 아니라 <b>재진술(소재 동일)</b>을 답의 근거로 낸다.',
+    ])
+    + qbox('범주 묶기', '', '서울 = 대한민국의 수도 = 한국에서 천만이 사는 곳', '표현은 달라도 <b>하나의 범주</b>임을 느끼는 것 — 정답 선지는 지문을 이렇게 바꿔 말한다.'));
+}
+
+// ── P6 (06/11) · 재진술 5변환·함정 ─────────────────────────────────────
 function transformPageHtml() {
-  return ppage('독해의 원리 ⑥', '5변환·함정', '재진술로 정답을 만든다 — 5변환 · 오답 함정',
-    '정답 = 뜻은 그대로, 단어만 바꾼다 · 오답 = 단어는 그대로, 뜻을 왜곡한다',
-    '그래서 <b>지문 단어가 그대로 보이는 선지부터 의심</b>하고, 표현이 바뀌어 낯선 선지를 정답 후보로 봐.',
-    ptable(['평가원 단골 5변환', '지문 표현 → 정답 선지'], [
+  return ppage('06', '재진술로 정답을 만든다 — 5변환 · 함정',
+    '정답 = 뜻은 그대로, <b>단어만 바꾼다</b>. 오답 = 단어는 그대로 두고, <b>뜻을 왜곡한다</b>. 그래서 <b>지문 단어가 그대로 보이는 선지부터 의심</b>하고, 표현이 바뀌어 낯선 선지를 정답 후보로 본다.',
+    psec('평가원 단골 변환 5패턴 — 지문 → 정답 선지')
+    + ptable(['변환', '지문 표현 → 정답 선지'], [
       ['① 동의어 치환', 'proper · forces · detailed → careful · drives · thorough'],
       ['② 구체 → 추상', 'a songwriter · a boundary → creative people · locality'],
       ['③ 품사 전환', 'decide(동사) → decision-making(명사)'],
       ['④ 반대구조(부정↔긍정)', 'does not shrink → expands'],
       ['⑤ 비유 → 직설', 'a window to other worlds → unfamiliar perspectives'],
     ])
-    + ptable(['오답 3초 잣대', '이럴 때 소거'], [
-      ['copy · 복사', '지문 단어가 그대로 보여 익숙하다 → 논리·관계가 같은지 재확인'],
-      ['reverse · 반대', '단어는 비슷한데 방향이 반대다 → 부정어·인과 방향 대조'],
-      ['distort · 왜곡', '90%는 맞는데 한 군데가 어긋난다 → 대상·조건·정도 대조'],
-      ['off · 이탈', '그럴듯한데 지문에서 본 적 없다 → 근거 문장 못 짚으면 소거(상식 ≠ 근거)'],
+    + psec('오답은 이 4잣대로 소거한다')
+    + ptable(['3초 잣대', '이럴 때 소거', '확인법'], [
+      ['copy · 복사', '지문 단어가 그대로 보여 익숙하다', '그 단어의 <b>논리·관계</b>가 지문과 같은지 재확인'],
+      ['reverse · 반대', '단어는 비슷한데 방향이 반대다', '<b>부정어·인과 방향</b>을 대조'],
+      ['distort · 왜곡', '90%는 맞는데 한 군데가 어긋난다', '<b>대상·조건·정도</b>를 하나씩 대조'],
+      ['off · 이탈', '그럴듯하지만 지문에서 본 적 없다', '<b>근거 문장</b>을 못 짚으면 소거(상식 ≠ 근거)'],
     ])
-    + '<div class="pcatch"><span class="pcatch-h">⚠️ 흔한 오해</span> “all·always·only 같은 극단어가 있으면 오답” = 사설·토익식 요령. 평가원은 극단어가 아니라 <b>‘지문 근거와의 관계’</b>로 오답을 만든다.</div>');
+    + `<div class="pnote"><span class="pnote-ic">⚠️ 흔한 오해</span>“all·always·only 같은 극단어가 있으면 오답” — 사설·토익식 요령. 실제 평가원 오답에서 극단어는 드물다. 평가원은 극단어가 아니라 <b>‘지문 근거와의 관계’</b>로 오답을 만든다.</div>`
+    + `<div class="pnote"><span class="pnote-ic">🔁</span>PART 1에서 이렇게 훈련한다 — 각 문항 STEP 1의 「재진술 미션」에서 필자 주장·소재를 먼저 잡고, STEP 3의 「재진술 지도」에서 그것이 어떻게 되풀이되어 정답이 됐는지 확인한다.</div>`);
 }
 
-// P10 · 논리관계 구문 ① 인과·등호
-function logicCausePageHtml() {
-  return ppage('독해의 원리 ⑦', '논리관계 ①', '논리관계 구문 — 인과(→) · 등호(=)',
-    '독해는 결국 문장들의 ‘관계’를 잡는 일 · 관계는 넷뿐 — 인과(→) · 등호(=) · 대조(↔) · 비교(>)',
-    '연결사·구두점이 없어도 이 구문들이 같은 <b>신호 역할</b>을 해.',
-    pcard('→', '인과 — 원인 → 결과 / 결과 ← 원인', '<div class="cut-rule"><b>원인→결과</b>: A cause / lead to / result in / bring about / give rise to / trigger / contribute to / be the source of B</div><div class="cut-rule"><b>결과←원인</b>: A result from / stem from / arise from / derive from / be based on / be rooted in / attribute A to B · A due to B</div><div class="cut-ex">결과 신호(절): so~that · such~that · it follows that · 명사 outcome · rationale · justification</div>', 'neg')
-    + pcard('=', '등호·정의 — A = B (같다·라 부른다·상징한다)', '<div class="cut-rule">A is B · be called / be termed / define A as / refer to A as / represent / embody / illustrate / regard[see·view·treat] A as / identify A with B · be equivalent to</div><div class="cut-ex">여는 신호: that is · i.e. · in short / such as · like · including · e.g. — 한쪽만 이해하면 나머지는 약하게</div>', 'gram'));
-}
-
-// P11 · 논리관계 구문 ② 대조·비교
-function logicContrastPageHtml() {
-  return ppage('독해의 원리 ⑧', '논리관계 ②', '논리관계 구문 — 대조(↔) · 비교(>)',
-    '이 표현이 보이면 = 글에 소재가 둘(A·B)이라는 신호 · 뜻을 외우지 말고 관계를 기호로 잡아라',
-    '재진술의 <b>비교 지문(A·B 추적)</b>과 바로 연결돼. 필자가 미는 쪽(&gt; · B)이 곧 주제야.',
-    '<div class="cutgrid">'
-    + pcard('&gt;', 'A &gt; B — A가 우위', '<div class="cut-ex">more A than B · outweigh · surpass · exceed · prevail over · outperform · prefer A to B · A rather than B · A instead of B</div>', 'pos')
-    + pcard('&lt;', 'A &lt; B — A가 밀림', '<div class="cut-ex">less A than B · inferior to · be overwhelmed[overcome·overshadowed·dwarfed] by · be sacrificed for</div>', 'neg')
-    + pcard('↔', 'A ↔ B — 다름·대조', '<div class="cut-ex">differ from · distinguish[separate·set apart] A from B · contrast with · unlike · whereas · on the other hand · contrary to · the former · the latter</div>', 'gram')
-    + pcard('⇒', 'A ⇒ B — 대체·전환', '<div class="cut-ex">replace · displace · be substituted[supplanted] by · give way to · switch to · shift[transition·move] from A to B</div>')
-    + '</div>'
-    + '<div class="pcatch"><span class="pcatch-h">🎯 초점 못 박기</span> <b>not A but B</b> (not so much A as B / far from A) — B가 필자의 초점, A는 버리는 미끼(−). 예) not the technology but the way we use it.</div>');
-}
-
-// P12 · 형광펜 신호 사전
-const HIGHLIGHT_SIGNALS = [
-  ['① 역접·대조', 'However · But · Yet · Nevertheless · In contrast · On the contrary · Instead · Conversely · Unlike · Whereas · Rather(than) · Still · No longer · not A but B', '앞을 뒤집는다 = 필자의 진짜 주장'],
-  ['② 결론·귀결', 'Thus · Therefore · Hence · So · Consequently · As a result · In conclusion · In short · Ultimately · That is why', '글을 닫는 문장 = 주제'],
-  ['③ 인과', 'because · since · due to · owing to · lead to · result in · give rise to · thereby · in order to · this is because', '논리의 뼈대(원인 → 결과)'],
-  ['④ 강조·주장', 'should · must · ought to · need to · important · essential · crucial · vital · key · In fact · Indeed · above all · especially · notably · clearly', '필자가 대놓고 미는 문장'],
-  ['⑤ 최상·유일·한정', 'the most · the best · the only · first · only when · only if · unless · except · as long as', '정답이 숨는 단골 자리'],
-  ['⑥ 통념·반전', 'Many believe · It is (often) thought · Traditionally · Contrary to popular belief · Surprisingly · Paradoxically · Ironically', '통념을 깨는 곳 = 주제'],
-  ['⑦ 정의·재정의', 'is defined as · means · refers to · that is · in other words · 콜론( : ) · 대시( — ) 뒤', '개념을 못 박는 문장'],
-  ['⑧ 태도·평가어(±)', '＋ benefit · advantage · valuable · effective · promising  ↔  − problem · risk · illusion · myth · fail · drawback', '대의·함축·정답의 방향(＋/−)'],
-  ['⑨ 예시 후 일반화', 'In each case · In general · Overall · This suggests / shows / means', '예시를 접고 결론으로 복귀'],
-  ['⑩ 위치', '글 첫 문장 · 각 단락 첫 문장 · 마지막 문장 · 빈칸/밑줄 문장 + 바로 앞뒤', '신호어 없어도 무조건 읽는 자리'],
-  ['⑪ 지시·연결(대용어)', 'this · these · that · those · such (a) · one · another · the former · the latter', '순서·삽입의 핵심 — 앞 문장을 가리킨다'],
-  ['⑫ 첨가·병렬', 'not only ~ but also · moreover · furthermore · in addition · as well as · similarly · likewise · just as', '같은 방향 추가·강조(주제 강화)'],
+// ── P7 (07/11) · 글의 구조 6가지 ───────────────────────────────────────
+const STRUCTURE_GUIDE = [
+  ['통념 → 반박(반전)', 'many people think · it is widely believed · traditionally · we tend to think', 'But · However · Yet · In fact · In reality · Contrary to', '흔한 생각(통념)을 깔아둔 뒤 뒤집어 필자 주장을 편다.', '“Many people believe X. But in fact, Y.”'],
+  ['주장 → 근거·예시', 'should · must · it is important that · I argue', 'because · since · for example · research shows · therefore', '주장을 먼저 내세우고 이유·연구·예시로 뒷받침.', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
+  ['문제 → 해결(방안)', 'problem · challenge · issue · difficulty · concern', 'solution · solve · address · one way to · need to', '문제를 제기하고 해결책·방안을 제시.', '“이런 문제가 있다. 이를 해결하려면 …”'],
+  ['비교 · 대조', 'while · whereas · unlike · in contrast · on the other hand', 'similarly · likewise · just as · like · both … and', 'A와 B의 공통점·차이점을 견줌.', '“A는 …인 반면, B는 …이다.”'],
+  ['시간 · 순서(나열)', 'first · second · next · then · later · finally', 'in 1937 · meanwhile · over time · eventually · subsequently', '사건·과정을 시간·순서대로(전기·실험·역사).', '“먼저 …, 그다음 …, 마침내 …”'],
+  ['예시 → 일반화(결론)', 'for example · such as · consider · take … as an example', 'thus · therefore · in short · this suggests · overall', '구체 사례를 든 뒤 일반 원리·결론으로 묶음.', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
 ];
-function highlightSignalPageHtml() {
-  const rows = HIGHLIGHT_SIGNALS.map((s) => `<div class="hs-row"><div class="hs-h">${esc(s[0])}</div><div class="hs-w">${esc(s[1])}</div><div class="hs-m">→ ${esc(s[2])}</div></div>`).join('');
-  return ppage('독해의 원리 ⑨', '형광펜 신호 사전', '형광펜 독해 — 무엇을 읽고 무엇을 버릴까',
-    '정답을 몰라도 아래 신호가 보이면 🟡 무조건 읽는다 · 이 표가 눈에 익으면 읽을 문장이 먼저 보인다',
-    '<b>훑기</b>(첫 문장·빈칸/밑줄로 ‘무엇을 묻나’) → <b>칠하기</b>(①~⑫ 신호만 🟡, 예시·양보는 스킵) → <b>찍기</b>(노랑 문장으로 근거 → 재진술로 선지 확정)',
-    `<div class="hs-grid">${rows}</div>`
-    + '<div class="pcatch"><span class="pcatch-h">⬜ 스킵해도 되는 곳</span> for example · such as · take/consider/imagine(예시 도입) · 숫자·연도·인명 나열 · Although·Despite 딸린 양보절 · 긴 관계절(, which ~) — 주절·주장만 챙기면 돼.</div>');
+function structurePageHtml() {
+  const cards = STRUCTURE_GUIDE.map((r, i) => `<div class="scard">
+    <div class="sc-top"><span class="sc-n">${CIRCLED[i]}</span><span class="sc-name">${esc(r[0])}</span></div>
+    <div class="sc-sig"><span class="sc-mag">🔎 통념/앞</span> ${esc(r[1])}</div>
+    <div class="sc-sig"><span class="sc-arw">↳ 반전/뒤</span> ${esc(r[2])}</div>
+    <div class="sc-flow">${esc(r[3])}</div>
+    <div class="sc-ex">예) ${esc(r[4])}</div>
+  </div>`).join('');
+  return ppage('07', '글의 구조 — 어떤 짜임이 있나?',
+    '글의 구조 = 필자가 생각을 배치한 ‘틀’. <b>전환어(But/However…)와 연결어</b>를 신호로 잡으면 구조가 보이고, 구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡힌다. 아래 <b>6가지 틀</b> 중 하나를 예측하며 읽자.',
+    `<div class="scardgrid">${cards}</div>`
+    + psec('이렇게 써먹어')
+    + pbul([
+      '지문마다 <b>‘해석 전에’</b> 이 6개 중 하나를 예측하고, 지문 끝에서 맞았는지 확인한다.',
+      '전환어(But·However)가 보이면 <b>①통념→반박</b>, 대조어가 보이면 <b>④비교·대조</b> — 신호가 곧 구조다.',
+    ]));
 }
 
-// 원리 페이지 묶음(끊어읽기 원리 다음, 지문 앞)
+// ── P8 (08/11) · 긍정/부정(±) 어휘 사전 ① ──────────────────────────────
+const STANCE_POS = [
+  '중요·필수', 'critical · crucial · essential · vital · key · fundamental · indispensable · integral · significant · substantial · principal · prime · core · necessary',
+  '이익·가치', 'benefit · beneficial · valuable · priceless · fruitful · merit · desirable · relevant · work(효과 있다)',
+  '강조·강화', 'emphasize · stress · enhance · reinforce · prioritize · matter · count · be of importance',
+  '집중·추구·선호', 'focus on · concentrate on · center on · attend to · seek to V · in favor of · need · require · fond of',
+  '강조 구문·부사', 'only · invariably · substantially · nothing but · not just A but also B · It is … that · win out',
+];
+const STANCE_NEG = [
+  '버림·제거', 'abandon · discard · scrap · drop · remove · eliminate · discharge · leave out · rule out · removal',
+  '무시·간과', 'disregard · ignore · overlook · neglect · dismiss · of little account',
+  '부족·부재·결핍', 'lack · shortage · absence · absent from · free from · incapable of · drawback · flaw · downside · side effect',
+  '거부·반대·금지', 'refuse · reject · resist · exclude · deny · disapprove · discourage · forbid · say no to',
+  '방해·차단·약화·실패', 'interfere with · stand in the way of · cut off · displace · prevent[keep/stop] A from Ving · diminish · obscure · fail · lose out',
+  '비판·의심·무가치', 'criticize · question · doubt · challenge · myth · misleading · worthless · irrelevant · unnecessary · costly',
+];
+function stanceChips(arr, cls) {
+  let h = '';
+  for (let i = 0; i < arr.length; i += 2) {
+    const words = arr[i + 1].split(' · ')
+      .map((x) => `<span class="chip ${cls}">${esc(x)}</span>`).join('');
+    h += `<tr><td class="k">${esc(arr[i])}</td><td><span class="chips">${words}</span></td></tr>`;
+  }
+  return h;
+}
+function stanceVocabPageHtml() {
+  return ppage('08', '긍정/부정(±) 어휘 사전 ①',
+    '필자는 무엇을 <b>지지(＋)</b>하고 무엇을 <b>버리는지(−)</b>로 글을 끌고 간다. 그래서 문장 뜻을 다 몰라도 핵심어의 <b>± 방향</b>만 잡으면 요지·함축·정답 선지가 보인다. 아래 어휘는 “이 단어가 나오면 필자 태도가 어느 쪽인지”를 알려주는 <b>방향 표지</b>다.',
+    `<div class="dirgrid">
+       <div class="dircard pos"><div class="dir-h">＋ 긍정 방향</div><div class="dir-d">중요하다·이익이다·강조한다 → 필자가 <b>부각·지지</b>. 대개 노랑(핵심)·정답 쪽.</div></div>
+       <div class="dircard neg"><div class="dir-h">− 부정 방향</div><div class="dir-d">버린다·부족하다·무시한다 → 필자가 <b>비판·배제</b>. 통념(OLD)이나 반대 대상일 때가 많다.</div></div>
+     </div>`
+    + `<div class="voca-h pos"><span class="voca-badge pos">＋</span> 필자가 중시·지지하는 어휘</div>`
+    + `<table class="ptable voca"><thead><tr><th>갈래</th><th>대표 어휘</th></tr></thead><tbody>${stanceChips(STANCE_POS, 'pos')}</tbody></table>`
+    + `<div class="voca-h neg"><span class="voca-badge neg">−</span> 필자가 버리거나 부정하는 어휘</div>`
+    + `<table class="ptable voca neg"><thead><tr><th>갈래</th><th>대표 어휘</th></tr></thead><tbody>${stanceChips(STANCE_NEG, 'neg')}</tbody></table>`);
+}
+
+// ── P9 (09/11) · 긍정/부정(±) 어휘 사전 ② — 방향 전환·적용 ───────────────
+function stancePolarityPageHtml() {
+  return ppage('09', '긍정/부정(±) 어휘 사전 ② — 방향 전환·적용',
+    '가장 중요한 건 방향을 <b>‘뒤집는’ 표현</b>이다. 긍정 대상 앞에 부정어가 붙으면 순식간에 −가 된다. 이 <b>극성 전환</b>을 놓치면 정반대로 읽는다 — 평가원 오답의 단골(<b>반대구조</b>)이 바로 이 지점이다.',
+    psec('극성을 뒤집는 신호 — ±를 반대로')
+    + `<div class="pnote flip"><b>부정어 · 결어 · 분리</b><br>not, no, never, no longer, hardly, rarely, by no means / free from, absent from, immune to, independent of, apart from, other than / far from, cease, stop</div>`
+    + ptable(['원래 방향', '전환 표현이 붙으면'], [
+      ['shrink <span class="dim">(−, 줄다)</span>', '<b>does not</b> shrink = <span class="pchip">＋</span> expands (늘다)'],
+      ['bias <span class="dim">(−, 편향)</span>', '<b>free from</b> bias = <span class="pchip">＋</span> 객관적'],
+      ['affect <span class="dim">(영향)</span>', '<b>immune to</b> = <span class="nchip">−</span> 영향받지 않음'],
+      ['necessary <span class="dim">(＋)</span>', '<b>not</b> necessarily = 반드시 ~는 아님(약화)'],
+    ])
+    + psec('독해에 이렇게 적용한다')
+    + ptable(['유형', '± 어휘로 푸는 법'], [
+      ['함축 (21)', '밑줄 표현이 ＋인지 −인지만 판정 → 방향이 다른 선지 절반을 먼저 소거. (어휘 뜻 몰라도 됨)'],
+      ['패러프레이징 함정', '정답의 ± 방향이 지문과 <b>반대면 오답</b>(반대구조). 예: 지문 −인데 선지 ＋.'],
+      ['완급조절', '도입 통념(OLD)=− → 역접 뒤 주제(NEW)=＋ 전환을 ± 어휘로 감지.'],
+      ['무관·빈칸', '주제의 ± 방향과 <b>어긋나는</b> 문장·선지를 배제.'],
+    ])
+    + qbox('+/− 판정', '2022 6월 21번', 'abandon your dreams for an empty inbox <span class="nchip">−</span>', '‘꿈을 버린다’(−)를 잡으면, 밑줄이 부정적임을 즉시 판정 → ＋방향 선지 소거.')
+    + `<div class="pnote"><span class="pnote-ic">✏️</span>워크북 STEP 2에서 바로 쓴다 — 함축·무관·빈칸의 ±(긍정/부정) 판정과 반대구조 함정 소거에서 이 표를 근거로 삼는다.</div>`);
+}
+
+// ── P10 (10/11) · 논리관계 구문 ① 인과·등호 ────────────────────────────
+function logicCausePageHtml() {
+  return ppage('10', '논리 관계 구문 사전 ① — 인과·등호',
+    '독해는 결국 문장들의 <b>‘관계’</b>를 잡는 일이다. 관계는 넷뿐 — <b>인과(→) · 등호(=) · 대조(↔) · 비교(&gt;)</b>. 이 표현들이 보이면 <b>구조가 즉시 드러난다</b>. 연결사·구두점이 없어도 이 구문이 같은 신호 역할을 한다.',
+    `<div class="rel-sec"><span class="rel-ic cause">→</span> <b>인과 — A가 B를 낳거나(→) B에서 비롯(←)</b></div>`
+    + `<div class="ab-leg"><span class="ab-badge ab-a">A</span>=원인(cause) &nbsp; <span class="ab-badge ab-b">B</span>=결과(effect) — 색으로 어느 쪽이 원인·결과인지 바로 보인다.</div>`
+    + `<div class="abgrp-lab">원인 → 결과 <span class="sub">A가 B를 일으킨다</span></div>`
+    + abChips(['A result in B', 'A lead to B', 'A cause B', 'A bring about B', 'A bring on B', 'A trigger B', 'A prompt B', 'A give rise to B', 'A contribute to B', 'A be the source of B', 'A influence B', 'A have an effect on B', 'A be a basis for B'])
+    + `<div class="abgrp-lab">결과 ← 원인 <span class="sub">A가 B에서 비롯·근거한다</span></div>`
+    + abChips(['A result from B', 'A stem from B', 'A arise from B', 'A derive from B', 'A spring from B', 'A originate in B', 'A be rooted in B', 'A be based on B', 'A be anchored in B', 'A be induced by B', 'attribute A to B', 'A due to B'])
+    + `<div class="ab-note">결과를 여는 신호(절 단위) — so ~ that / such ~ that / it follows that S V / insofar as. &nbsp;명사 — outcome(결과) · rationale · justification(근거).</div>`
+    + `<div class="pnote"><span class="pnote-ic">🔗 연계</span>연결사 지도의 인과(therefore·thus) · 글의 구조 ③문제→해결·⑥예시→일반화. 인과 구문이 보이면 ‘결과=필자 결론(＋)’에 형광펜.</div>`
+    + `<div class="rel-sec"><span class="rel-ic eq">=</span> <b>등호·정의 — A = B (같다·라 부른다·상징한다)</b></div>`
+    + `<div class="abgrp-lab">A를 B라 하거나 A=B로 놓는다 <span class="sub">정의·명명·상징·간주·동일시</span></div>`
+    + abChips(['A is B', 'A be called B', 'A be termed B', 'define A as B', 'refer to A as B', 'A reflect B', 'A mirror B', 'A represent B', 'A embody B', 'A illustrate B', 'regard A as B', 'see A as B', 'view A as B', 'treat A as B', 'recognize A as B', 'describe A as B', 'identify A with B', 'A be equivalent to B', 'A amount to B'])
+    + `<div class="ab-note">A=B를 여는 신호 — that is · i.e. · in short / such as · like · including · e.g. (재진술·예시)</div>`
+    + `<div class="pnote"><span class="pnote-ic">🔗 연계</span>추론 페이지의 BE동사 정의(A=B)·콜론(:) · 재진술(A=A′). ‘A=B’가 보이면 한쪽만 이해하면 나머지는 약하게.</div>`);
+}
+
+// ── P11 (11/11) · 논리관계 구문 ② 대조·비교 ────────────────────────────
+function relGroup(labCls, lab, sub, list) {
+  return `<div class="relgrp"><span class="rel-lab ${labCls}">${lab}<span class="rel-sub">${sub}</span></span>${abChips(list)}</div>`;
+}
+function logicContrastPageHtml() {
+  return ppage('11', '논리 관계 구문 사전 ② — 대조·비교',
+    '이 표현들이 보이면 = 글에 <b>소재가 둘(A·B)</b>이라는 신호다. 뜻을 하나하나 외우지 말고, <b>두 소재의 관계를 기호로</b> 잡아라 — A&gt;B · A&lt;B · A↔B · A⇒B. 재진술의 <b>비교 지문(A·B 추적)</b>과 바로 연결된다.',
+    relGroup('rel-gt', 'A &gt; B', 'A가 B보다 우위', ['more A than B', 'A outweigh B', 'A surpass B', 'A exceed B', 'A prevail over B', 'A outperform B', 'A outnumber B', 'A outshine B', 'A outlive B', 'A beat B', 'A trump B', 'A precede B', 'A superior to B', 'prefer A to B', 'favor A over B', 'choose A over B', 'A rather than B', 'A instead of B'])
+    + relGroup('rel-lt', 'A &lt; B', 'A가 B에 밀림', ['less A than B', 'A inferior to B', 'A be overwhelmed by B', 'A be overcome by B', 'A be overshadowed by B', 'A be dwarfed by B', 'A is weakened by B', 'A be sacrificed for B'])
+    + relGroup('rel-diff', 'A ↔ B', 'A와 B가 다름·대조', ['A differ from B', 'distinguish A from B', 'separate A from B', 'set A apart from B', 'boundary between A and B', 'A contrast with B', 'unlike', 'whereas', 'on the other hand', 'opposed to', 'contrary to', 'the former', 'the latter', 'vice versa'])
+    + relGroup('rel-sub2', 'A ⇒ B', 'A가 B로 대체·전환', ['A replace B', 'A displace B', 'A be substituted by B', 'A be supplanted by B', 'A give way to B', 'switch to B', 'shift from A to B', 'transition from A to B', 'move from A to B'])
+    + relGroup('rel-focus', '→ B', 'not A but B — B가 초점, A는 버림', ['not A but B', 'not so much A as B', 'far from A'])
+    + `<div class="pnote"><span class="pnote-ic">🔗 연계</span>연결사 대조(whereas·on the other hand) · 글의 구조 ④비교·대조 · 재진술 비교 지문(A·B 두 소재). 필자가 미는 쪽(&gt;·B)이 곧 주제.</div>`
+    + qbox('초점 못박기', '비교·대체 구문', '<b>not</b> the technology <b>but</b> the way we use it', '‘A가 아니라 B’ — B(우리가 쓰는 방식)가 필자의 초점. A는 버리는 미끼(−).')
+    + `<div class="pnote"><span class="pnote-ic">✏️</span>워크북에서 바로 쓴다 — 이 네 관계(→ = ↔ &gt;)는 STEP 2에서 노랑 문장을 잡는 신호이자 순서·삽입의 연결고리다.</div>`);
+}
+
+// ── P12 (요약) · 형광펜 신호 사전 포스터 ───────────────────────────────
+// [번호/제목, 신호어(italic), → 의미, 예시 en, 예시 해설]
+const HIGHLIGHT_SIGNALS = [
+  ['① 역접·대조', 'However · But · Yet · Nevertheless · In contrast · By contrast · On the contrary · Instead · Conversely · Unlike · Whereas · Rather(than) · Still · No longer · not A but B', '앞 내용을 뒤집는다 = 필자의 진짜 주장', 'It looks simple. However, it often fails.', 'However 뒤가 정답'],
+  ['② 결론·귀결', 'Thus · Therefore · Hence · So · Consequently · As a result · In conclusion · In short · In sum · Ultimately · That is why', '글을 닫는 문장 = 주제', 'Therefore, planning matters most.', '결론=주제'],
+  ['③ 인과', 'because · since · due to · owing to · lead to · result in · give rise to · thereby · in order to · this is because', '논리의 뼈대(원인 → 결과)', 'It grew because demand rose.', '원인이 논리 핵심'],
+  ['④ 강조·주장', 'should · must · ought to · need to / important · essential · crucial · vital · key / In fact · Indeed · Above all · especially · notably · clearly', '필자가 대놓고 미는 문장', 'You must plan first.', '당위=주제'],
+  ['⑤ 최상·유일·한정', 'the most · the best · the only · the single · first / only · only when · only if · unless · except · as long as', '정답이 숨는 단골 자리', 'It works only when cold.', '조건이 정답 근거'],
+  ['⑥ 통념·반전', 'Many believe · It is (often) thought · Traditionally · Contrary to popular belief · Surprisingly · Paradoxically · Ironically', '통념을 깨는 곳 = 주제', 'Many believe X. But actually Y.', 'Y가 주제'],
+  ['⑦ 정의·재정의', 'is defined as · means · refers to · that is · in other words / 콜론( : ) · 대시( — ) 뒤', '개념을 못박는 문장', 'Freedom means real choice.', '정의=핵심'],
+  ['⑧ 태도·평가어(±)', '＋ benefit · advantage · valuable · effective · promising ↔ − problem · risk · illusion · myth · fail · drawback', '대의·함축·정답의 방향(＋/−)', 'an illusion, not a real gain', '필자 태도는 (−)'],
+  ['⑨ 예시 후 일반화', 'In each case · In general · Overall · This suggests / shows / means', '예시를 접고 결론으로 복귀', 'In each case, limits helped.', '예시 끝, 결론 복귀'],
+  ['⑩ 위치', '글 첫 문장 · 각 단락 첫 문장 · 마지막 문장 · 빈칸/밑줄 문장 + 바로 앞뒤', '신호어 없어도 무조건 읽는 자리', '빈칸 문장과 그 앞뒤는 항상 노랑', ''],
+  ['⑪ 지시·연결(대용어)', 'this · these · that · those · such (a) · one · another · its · the former · the latter', '순서·삽입(35~38)의 핵심 — 앞 문장을 가리킨다', 'This problem… / Such a view…', '앞에 그 대상이 있어야 함'],
+  ['⑫ 첨가·병렬', 'not only ~ but also · moreover · furthermore · in addition · as well as · besides / (비교) similarly · likewise · just as', '같은 방향 추가·강조(주제 강화)', 'Not only A but also B', 'B에 방점'],
+];
+const HIGHLIGHT_SKIP = [
+  ['스킵 · 예시', 'For example · For instance · such as · like · e.g. · to illustrate · including · namely / take · consider · imagine · suppose', '주장의 근거일 뿐, 주장 자체가 아님', 'Take/Consider/Imagine ~', '예시 도입, 통째 스킵'],
+  ['스킵 · 부연/양보', '숫자·연도·인명·지명 나열 · 재진술 반복 · Although · Though · Despite · In spite of / 딸린 절 · 긴 관계절( , which ~ )', '양보절은 스킵, 주절이 핵심', 'Despite the noise, it worked.', '주절(worked)만'],
+];
+function sigCard(s, skip) {
+  return `<div class="sig"><span class="sig-h${skip ? ' skip' : ''}">${esc(s[0])}</span>
+    <div class="sig-w">${esc(s[1])}</div>
+    <div class="sig-m">→ ${esc(s[2])}</div>
+    ${s[3] ? `<div class="sig-ex"><b>${esc(s[3])}</b>${s[4] ? ` → ${esc(s[4])}` : ''}</div>` : ''}</div>`;
+}
+function highlightPosterPageHtml() {
+  const left = [0, 2, 4, 6, 8, 10];
+  const right = [1, 3, 5, 7, 9, 11];
+  const col = (idxs, extra) => idxs.map((i) => sigCard(HIGHLIGHT_SIGNALS[i])).join('') + (extra ? sigCard(extra, true) : '');
+  return `<section class="chapter part0 poster-page">
+    <div class="poster-title">형광펜 독해 — 수능 영어, ‘칠하는 법’을 배운다</div>
+    <div class="poster-sub">노란색 ‘신호’로 무엇을 읽고 무엇을 버릴까 — 이 표 한 장이 출발점</div>
+    <div class="poster">
+      <div class="poster-h">🖍️ 신호 사전 — 노란색은 ‘신호’로 찾는다</div>
+      <div class="poster-lead">정답을 몰라도 아래 신호가 보이면 🟡 무조건 읽는다. 이 표가 눈에 익으면 어떤 지문이든 읽을 문장이 먼저 보인다.</div>
+      <div class="poster-cols">
+        <div class="poster-col">${col(left, HIGHLIGHT_SKIP[0])}</div>
+        <div class="poster-col">${col(right, HIGHLIGHT_SKIP[1])}</div>
+      </div>
+      <div class="poster-steps">
+        <div class="pstep"><div><span class="pstep-n">1</span><span class="pstep-t">훑기</span></div><div class="pstep-d">첫 문장·빈칸/밑줄 문장 먼저 → ‘무엇을 묻나’ 파악</div></div>
+        <div class="pstep"><div><span class="pstep-n">2</span><span class="pstep-t">칠하기</span></div><div class="pstep-d">①~⑫ 신호가 보이는 문장만 🟡 형광펜, 예시·양보는 ⬜ 스킵</div></div>
+        <div class="pstep"><div><span class="pstep-n">3</span><span class="pstep-t">찍기</span></div><div class="pstep-d">노랑 문장으로 정답 근거 → 패러프레이즈로 선지 확정</div></div>
+      </div>
+    </div>
+    <div class="pfoot">© 2026. Ortica 영어 · 형광펜 독해 — 독해의 원리</div>
+  </section>`;
+}
+
+// 원리 페이지 묶음(지문 앞) — 업로드 PART0 순서 그대로 12면
 function principlesSectionHtml() {
   return attitudePageHtml() + pacePageHtml() + inferPageHtml() + connectivePageHtml()
-    + restatePrinciplePageHtml() + transformPageHtml()
-    + logicCausePageHtml() + logicContrastPageHtml() + highlightSignalPageHtml();
+    + restatePrinciplePageHtml() + transformPageHtml() + structurePageHtml()
+    + stanceVocabPageHtml() + stancePolarityPageHtml()
+    + logicCausePageHtml() + logicContrastPageHtml() + highlightPosterPageHtml();
 }
 
 // ⚠️ 이거 조심 — 이 문장에서 '오역하기 쉬운 부분'을 미리 경고(오역 주의).
@@ -559,15 +655,15 @@ function useboxHtml(meta = {}) {
 // 목차 + 사용법 페이지 (표지 다음). 목차는 STEP 1(원리) / STEP 2(지문)로 구성.
 function tocPageHtml(passages, meta = {}) {
   const guideRows = [
-    ['✂', '끊어읽기 원리', '어디서 끊을까 — 5가지 신호'],
     ['🎯', '독해 태도', '점수는 태도에서 나온다'],
-    ['🎚️', '완급조절', 'OLD / MAIN / SUPPORT'],
+    ['🎚️', '완급조절', 'OLD / NEW·MAIN / SUPPORT'],
     ['🧩', '추론 — 어순·구두점', '모르는 건 추론한다'],
     ['🔗', '연결사 지도', 'Switching vs Contrast'],
     ['🔁', '재진술', '같은 말을 알아채기'],
     ['🔄', '재진술 5변환·함정', '정답이 만들어지는 법'],
     ['🏗️', '글의 구조', '6가지 글의 틀'],
-    ['🗣️', '필자 입장 신호', '긍정·부정(±) 어휘'],
+    ['🗣️', '±어휘 사전 ①', '긍정·부정 어휘'],
+    ['🔀', '±어휘 사전 ②', '방향 전환·적용'],
     ['➡️', '논리관계 구문 ①', '인과 · 등호'],
     ['⚖️', '논리관계 구문 ②', '대조 · 비교'],
     ['🖍️', '형광펜 신호 사전', '무엇을 읽고 버릴까'],
@@ -873,6 +969,125 @@ function css() {
   .rv-why-ic { font-weight:800; color:${C.gram}; margin-right:4px; }
   .rv-theme { margin:8px 0 3px; font-size:11.5px; font-weight:800; color:#fff;
     background:${C.gram}; display:inline-block; padding:2px 12px; border-radius:11px; }
+
+  /* ══ PART 0 · 독해의 원리(업로드 PART0 1:1 재현) ══ */
+  .part0 h1 { display:none; }
+  .phead { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+  .ppill { flex:none; background:${C.tealDark}; color:#fff; font-weight:800; font-size:10.5px;
+    letter-spacing:.3px; padding:5px 12px; border-radius:6px; }
+  .ph-title { flex:1; font-size:18px; font-weight:800; color:${C.tealDark}; line-height:1.2; }
+  .ph-no { flex:none; font-size:10.5px; font-weight:700; color:#b7c1ba; }
+  .phrule { height:3px; background:${C.teal}; border-radius:2px; margin:0 0 12px; }
+  .phero { background:${C.mint}; border-left:5px solid ${C.teal}; border-radius:6px;
+    padding:11px 15px; font-size:11.6px; line-height:1.72; color:${C.ink}; margin-bottom:4px; }
+  .phero b { color:${C.tealDark}; }
+  .pfoot { text-align:center; font-size:8.5px; color:#c2cbc4; margin-top:16px; }
+  .psec { border-left:5px solid ${C.teal}; padding-left:10px; margin:15px 0 7px;
+    font-weight:800; font-size:13.5px; color:${C.tealDark}; }
+  .pbul { list-style:none; margin:5px 0 4px; padding:0; }
+  .pbul li { position:relative; padding:3px 0 3px 17px; font-size:11.4px; line-height:1.7; color:${C.ink}; }
+  .pbul li::before { content:'›'; position:absolute; left:2px; top:3px; color:${C.teal}; font-weight:800; }
+  .ktag { display:inline-block; color:#fff; font-size:9px; font-weight:800; padding:1px 7px; border-radius:9px; vertical-align:1px; }
+  .ktag.g { background:${C.teal}; } .ktag.o { background:${C.plus}; }
+  .pcatch .pc-warn { display:block; margin-top:4px; font-size:10.4px; color:${C.key}; font-weight:700; }
+  /* 기출 예시 인용 박스 */
+  .qbox { background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:8px; padding:8px 12px; margin:8px 0; }
+  .qbox .q-top { line-height:1.55; }
+  .q-lab { display:inline-block; font-size:9px; font-weight:800; color:#fff; background:${C.tealDark};
+    border-radius:9px; padding:1px 8px; margin-right:5px; white-space:nowrap; }
+  .q-cite { font-size:9px; font-weight:800; color:${C.gram}; margin-right:5px; white-space:nowrap; }
+  .q-en { font-size:11.6px; color:#1a1a1a; }
+  .q-en .ol { background:#eef0f1; padding:0 3px; border-radius:3px; color:${C.sub}; font-weight:700; }
+  .q-hl { background:#FFF0A6; padding:0 2px; border-radius:3px; }
+  .q-note { font-size:10.3px; color:#555; margin-top:4px; line-height:1.55; }
+  .qcols { display:flex; gap:10px; align-items:stretch; }
+  .qcols .qbox { flex:1; margin:8px 0 0; }
+  /* 태도/연결사 상단 컬러 카드 */
+  .tgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:11px 0 4px; }
+  .tcard { border:1px solid ${C.line}; border-top:4px solid ${C.teal}; border-radius:8px; padding:11px 13px; background:#fff; }
+  .tcard.sw { border-top-color:${C.key}; } .tcard.co { border-top-color:#3B6BB0; }
+  .tbadge { display:inline-block; font-size:9.5px; font-weight:800; color:#fff; border-radius:11px; padding:2px 11px; margin-bottom:6px; }
+  .tbadge.sw { background:${C.key}; } .tbadge.co { background:#3B6BB0; }
+  .tcard-t { font-weight:800; font-size:12.5px; color:${C.ink}; margin-bottom:3px; }
+  .tcard-d { font-size:10.6px; color:#444; line-height:1.6; }
+  /* 완급조절 흐름 3박스(OLD/NEW·MAIN/SUPPORT) — .flow3 재사용, old 배경 회색 */
+  .flow3 .fl.old { background:#f4f5f6; border:1px solid #e2e5e3; } .flow3 .fl.old .fl-h { color:${C.sub}; }
+  /* +/- 어휘 방향 헤더 카드 */
+  .dirgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:11px 0 6px; }
+  .dircard { border-radius:8px; padding:10px 13px; }
+  .dircard.pos { background:#EFF6F1; border:1px solid ${C.greenLine}; }
+  .dircard.neg { background:#FDF3F1; border:1px solid ${C.trapLine}; }
+  .dir-h { font-weight:800; font-size:12.5px; margin-bottom:4px; }
+  .dircard.pos .dir-h { color:${C.teal}; } .dircard.neg .dir-h { color:${C.key}; }
+  .dir-d { font-size:10.5px; color:#444; line-height:1.55; }
+  .voca-h { font-weight:800; font-size:12.5px; margin:12px 0 5px; }
+  .voca-h.pos { color:${C.teal}; } .voca-h.neg { color:${C.key}; }
+  .voca-badge { display:inline-block; width:17px; height:17px; line-height:17px; text-align:center;
+    color:#fff; border-radius:50%; font-size:10px; font-weight:800; margin-right:4px; }
+  .voca-badge.pos { background:${C.teal}; } .voca-badge.neg { background:${C.key}; }
+  .ptable.voca td.k { color:${C.tealDark}; }
+  .ptable.voca.neg th { background:${C.key}; } .ptable.voca.neg td.k { color:${C.key}; }
+  .ptable .chips { display:flex; flex-wrap:wrap; gap:4px; }
+  /* 극성/판정 칩 */
+  .pchip { display:inline-block; background:${C.teal}; color:#fff; font-weight:800; font-size:9.5px; padding:0 6px; border-radius:9px; }
+  .nchip { display:inline-block; background:${C.key}; color:#fff; font-weight:800; font-size:9.5px; padding:0 6px; border-radius:9px; }
+  .dim { color:${C.sub}; font-weight:600; font-size:10px; }
+  .pnote.flip { background:${C.trapBg}; }
+  /* 오렌지 노트 박스 */
+  .pnote { background:${C.trapBg}; border:1px solid ${C.trapLine}; border-radius:8px;
+    padding:9px 13px; margin:10px 0; font-size:10.8px; line-height:1.65; color:#6a4d12; }
+  .pnote-ic { font-weight:800; color:${C.trapBar}; margin-right:5px; white-space:nowrap; }
+  /* 글의 구조 6카드 */
+  .scardgrid { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:11px 0 4px; }
+  .scard { border:1px solid ${C.line}; border-left:4px solid ${C.teal}; border-radius:8px; padding:9px 12px; background:#fff; break-inside:avoid; }
+  .sc-top { display:flex; align-items:center; gap:7px; margin-bottom:5px; }
+  .sc-n { flex:none; width:19px; height:19px; line-height:19px; text-align:center; background:${C.teal}; color:#fff; border-radius:50%; font-size:11px; font-weight:800; }
+  .sc-name { font-weight:800; font-size:12px; color:${C.ink}; }
+  .sc-sig { font-size:9.8px; color:#3a4640; line-height:1.55; margin:1px 0; }
+  .sc-mag { color:${C.teal}; font-weight:800; } .sc-arw { color:${C.key}; font-weight:800; }
+  .sc-flow { font-size:10.5px; color:${C.ink}; font-weight:700; margin:4px 0 2px; }
+  .sc-ex { font-size:9.6px; color:${C.sub}; font-style:italic; }
+  /* A/B 배지 칩 (논리관계) */
+  .abchips { display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 4px; }
+  .abchip { display:inline-flex; align-items:center; gap:4px; font-size:10.3px; font-weight:600;
+    color:${C.ink}; background:#fff; border:1px solid ${C.line}; border-radius:7px; padding:3px 8px; }
+  .ab-badge { display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
+    color:#fff; font-size:9px; font-weight:800; border-radius:4px; padding:0 2px; }
+  .ab-a { background:${C.teal}; } .ab-b { background:${C.plus}; }
+  .abgrp-lab { font-size:11px; font-weight:800; color:${C.tealDark}; margin:9px 0 4px; }
+  .abgrp-lab .sub { font-weight:600; color:${C.sub}; font-size:9.6px; margin-left:5px; }
+  .ab-leg { font-size:10px; color:#444; margin:3px 0 2px; }
+  .ab-note { font-size:9.8px; color:${C.sub}; margin:4px 0 2px; line-height:1.5; }
+  .rel-sec { font-size:13px; color:${C.tealDark}; margin:13px 0 5px; }
+  .rel-ic { display:inline-block; width:20px; height:20px; line-height:20px; text-align:center;
+    color:#fff; border-radius:5px; font-weight:800; font-size:12px; margin-right:5px; vertical-align:2px; }
+  .rel-ic.cause { background:${C.teal}; } .rel-ic.eq { background:#3B6BB0; }
+  /* 대조·비교 관계 그룹 */
+  .relgrp { margin:8px 0; break-inside:avoid; }
+  .rel-lab { display:inline-block; font-size:11px; font-weight:800; color:#fff; border-radius:6px; padding:3px 11px; margin-bottom:5px; }
+  .rel-lab .rel-sub { font-weight:600; opacity:.92; margin-left:7px; font-size:9.6px; }
+  .rel-gt { background:${C.plus}; } .rel-lt { background:${C.tealDark}; } .rel-diff { background:${C.key}; }
+  .rel-sub2 { background:#3B6BB0; } .rel-focus { background:${C.teal}; }
+  /* 형광펜 포스터(요약면) */
+  .poster-page { padding:2px; }
+  .poster-title { text-align:center; font-weight:800; font-size:17px; color:${C.tealDark}; margin:2px 0 3px; }
+  .poster-sub { text-align:center; font-size:10.3px; color:${C.sub}; margin-bottom:11px; }
+  .poster { border:2px solid ${C.teal}; border-radius:12px; padding:13px 16px; }
+  .poster-h { font-weight:800; font-size:14px; color:${C.tealDark}; margin-bottom:3px; }
+  .poster-lead { font-size:10px; color:${C.sub}; margin-bottom:10px; }
+  .poster-cols { display:grid; grid-template-columns:1fr 1fr; gap:9px 18px; }
+  .poster-col { display:flex; flex-direction:column; gap:9px; }
+  .sig { break-inside:avoid; }
+  .sig-h { display:inline-block; font-size:10.3px; font-weight:800; color:#fff; background:${C.teal}; border-radius:10px; padding:1px 9px; margin-bottom:2px; }
+  .sig-h.skip { background:${C.sub}; }
+  .sig-w { font-size:9.3px; font-style:italic; color:#333; line-height:1.5; }
+  .sig-m { font-size:9.4px; font-weight:700; color:${C.tealDark}; margin:1px 0; }
+  .sig-ex { font-size:9.1px; color:#2a5c40; background:${C.mint}; border-radius:5px; padding:3px 7px; margin-top:2px; line-height:1.45; }
+  .poster-steps { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px; }
+  .pstep { border:1px solid ${C.greenLine}; border-radius:8px; padding:9px 11px; background:${C.mint}; }
+  .pstep-n { display:inline-block; width:17px; height:17px; line-height:17px; text-align:center; background:${C.teal}; color:#fff; border-radius:50%; font-size:9.5px; font-weight:800; margin-right:5px; }
+  .pstep-t { font-weight:800; font-size:11px; color:${C.tealDark}; }
+  .pstep-d { font-size:9.6px; color:#444; margin-top:3px; line-height:1.5; }
   `;
 }
 
@@ -1055,11 +1270,7 @@ function buildHtmlPassages(passages, meta = {}) {
     useSteps: ['지문 통째로 읽고', '한 문장씩 어휘·팁·이거조심 보고', '해석·캐치 직접 쓰고', '지문 끝 답지로 맞춰보기!'],
     useFine: '캐치는 매 문장 <b>한 줄</b>로 — 누가/무엇이 → 어쨌다. 이렇게 <b>소재·필자 주장·글 구조·재진술</b>을 잡는 게 목표야.',
   };
-  const front = principlePageHtml()
-    + attitudePageHtml() + pacePageHtml() + inferPageHtml() + connectivePageHtml()
-    + restatePrinciplePageHtml() + transformPageHtml()
-    + structurePageHtml() + stancePageHtml()
-    + logicCausePageHtml() + logicContrastPageHtml() + highlightSignalPageHtml();
+  const front = principlesSectionHtml();
   return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>${fontFaces()}\n${css()}</style></head>`
     + `<body>${cover}${tocPageHtml(passages, uses)}${front}${passages.map((p, i) => passageHtml(p, i)).join('')}</body></html>`;
 }
