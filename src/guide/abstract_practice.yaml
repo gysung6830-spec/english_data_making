@@ -9,7 +9,7 @@ practice:
     options:
     - '''the growing presence of AI assistants''를 ''AI 비서의 증가하는 존재''로 본 곳'
     - '''would appear to be in decline''을 ''쇠퇴하는 것으로 보인다''로 본 곳'
-    - '''the emergence of''·''the necessity of''를 명사로 굳힌 채 없는 인과(결과·원인)로 억지로 엮은 곳'
+    - '''the emergence of''·''the necessity of''를 명사 그대로 두고 인과로 엮어 읽은 곳'
     answer_index: 2
     vocab:
     - word: emergence
@@ -39,8 +39,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “새로운 문화의 출현물과 그것들이 지닌 새로운 컬처테인먼트
       경험을 이끄는 것이다.”'
     options:
-    - '''lead to the emergence of new cultures''의 emergence를 ''출현물''이라는 사물로 굳혀 읽은
-      곳'
+    - '''lead to the emergence of new cultures''의 emergence를 ''출현물''이라는 사물 명사로 본 곳'
     - '''Changing political, social and religious landscapes''를 ''변화하는 정치·사회·종교적 지형''으로
       본 곳'
     - '''with them new culturtainment experiences''를 ''그와 함께 새로운 컬처테인먼트 경험''으로 본 곳'
@@ -106,7 +105,7 @@ practice:
       해친다.”'
     options:
     - '''Scattered attention''을 ''흩어진 주의력''으로 본 곳'
-    - '''your ability to let go of stress''의 to를 목적(~하기 위해)의 부사구로 떼어 읽은 곳'
+    - '''ability to let go of stress''의 to를 목적으로 본 곳'
     - '''harms your ability''를 ''당신의 능력을 해친다''로 본 곳'
     answer_index: 1
     vocab:
@@ -141,7 +140,7 @@ practice:
     options:
     - '''in a pure, objective form''을 ''순수하고 객관적인 형태로''로 본 곳'
     - '''is not given to us from the outside''를 ''외부에서 우리에게 주어지는 것이 아니다''로 본 곳'
-    - '''Our view of the world''의 view를 ''풍경·경치'', of를 소유격으로 본 곳'
+    - '''Our view of the world''의 view를 ''풍경·경치''로, of를 소유격으로 본 곳'
     answer_index: 2
     vocab:
     - word: view
@@ -174,7 +173,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “자기 자신을 다른 개체들과 구별하기 위해 그 능력이 얼마나
       근본적인지를 안다.”'
     options:
-    - '''the ability to discriminate oneself''의 to를 목적(~하기 위해)의 부사구로 떼어 읽은 곳'
+    - '''the ability to discriminate oneself''의 to를 목적으로 본 곳'
     - '''how fundamental is the ability''를 ''그 능력이 얼마나 근본적인지''로 본 곳'
     - '''other entities in the environment''를 ''환경 속의 다른 개체들''로 본 곳'
     answer_index: 0
@@ -208,7 +207,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “미래의 생태계가 무엇을 좋아할지에 대한 상당히 명확한 개념.”'
     options:
     - '''a reasonably clear idea of''를 ''상당히 명확한 개념''으로 본 곳'
-    - '''what future ecosystems would be like''의 like를 동사 ''좋아하다''로 읽은 곳'
+    - '''what future ecosystems would be like''의 like를 ''좋아하다''로 본 곳'
     - '''future ecosystems''를 ''미래의 생태계''로 본 곳'
     answer_index: 1
     vocab:
@@ -383,7 +382,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 경쟁적 경제 속에서 살아남으려 애쓰면서,
       소비될 수 있는 자기 부분들 즉 전시실의 인포테인먼트, 카페와 상점의 상품 및 서비스가 예산에서 우선시되지 않도록 막는다.”'
     options:
-    - '''their budgets often prioritise''를 ''우선시되지 않도록 막는다''로 방향을 뒤집어 읽은 곳'
+    - '''their budgets often prioritise''를 ''예산에서 우선시되지 않도록 막는다''로 본 곳'
     - 콜론 뒤 'infotainment ... goods and services'를 '전시실 인포테인먼트, 상품·서비스'로 본 곳
     - '''those parts of themselves that are consumable''을 ''소비될 수 있는 자기 부분들''로 본 곳'
     answer_index: 0
@@ -447,7 +446,7 @@ practice:
     options:
     - '''information that is just a little bit beyond''를 ''조금 넘어선 정보''로 본 곳'
     - '''what we already know''를 ''우리가 이미 아는 것''으로 본 곳'
-    - '''or totally new information''을 beyond의 목적어로 붙여, 두 정보의 대등 대비를 놓친 곳'
+    - '''or totally new information''을 beyond의 목적어로 붙여 읽은 곳'
     answer_index: 2
     vocab:
     - word: a matter of
@@ -481,7 +480,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “가상의 확성기를 집어 드는데, 그것이 곧 인터넷이며, 자신의
       2센트를 (거기에) 넣을 수 있다.”'
     options:
-    - '''the virtual megaphone that is the Internet''의 that is를 별개 부가 절로 떼어 읽은 곳'
+    - '''the virtual megaphone that is the Internet''의 that is를 별개 절로 본 곳'
     - '''pick up the virtual megaphone''을 ''가상의 확성기를 집어 들다''로 본 곳'
     - '''regardless of their qualifications''를 ''자격과 무관하게''로 본 곳'
     answer_index: 0
@@ -518,8 +517,7 @@ practice:
       책임감을 느끼는 과학자들.”'
     options:
     - '''inform the public and policymakers''를 ''대중과 정책 입안자에게 알리다''로 본 곳'
-    - '''a strong sense of responsibility to inform ... to offer''의 to를 목적(~하기 위해)으로
-      떼어 읽은 곳'
+    - '''a strong sense of responsibility to inform''의 to를 목적으로 본 곳'
     - '''that is not a realistic option''을 ''현실적인 선택지가 아니다''로 본 곳'
     answer_index: 1
     vocab:
@@ -556,7 +554,7 @@ practice:
     options:
     - '''an incentive to reduce emissions''를 ''배출을 줄일 유인''으로 본 곳'
     - '''per unit of abatement''를 ''저감 단위당''으로 본 곳'
-    - '''less costly ... than the tax''의 비교 주체(any manner)와 기준(the tax)을 뒤바꾼 곳'
+    - '''less costly ... than the tax''를 ''세금이 (비용이) 덜 드는''으로 본 곳'
     answer_index: 2
     vocab:
     - word: polluter
@@ -715,8 +713,7 @@ practice:
     source: 2022 고3 9월 39번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술.”'
     options:
-    - '''biometrics such as fingerprint, iris, and voice recognition''의 such as를 ''~와는
-      구별되는''으로 뒤집어 읽은 곳'
+    - '''biometrics such as ...''의 such as를 ''~와는 구별되는''으로 본 곳'
     - '''fingerprint, iris, and voice recognition''을 ''지문, 홍채, 음성 인식''으로 본 곳'
     - '''biometrics''를 ''생체 인식''으로 본 곳'
     answer_index: 0
@@ -779,8 +776,7 @@ practice:
       같은 것이 되어 우리의 주관적 경험에 영향을 준다.”'
     options:
     - '''becomes mental institutions''를 ''정신적 제도가 된다''로 본 곳'
-    - '''such as institutional laws and equipment''를 앞의 disciplinary objects가 아니라
-      뒤의 mental institutions의 예시로 붙인 곳'
+    - '''such as institutional laws and equipment''를 mental institutions의 예시로 본 곳'
     - '''affect our subjective experience''를 ''우리의 주관적 경험에 영향을 준다''로 본 곳'
     answer_index: 1
     vocab:
@@ -819,7 +815,7 @@ practice:
       당신은 무언가를 아주 강렬하게 상상하겠다고 말하고 있다.”'
     options:
     - '''this must sound like magical thinking''을 ''마법적 사고처럼 들림에 틀림없다''로 본 곳'
-    - 콜론(:)을 '~지만 별개로'라는 대비·단절로 끊어, 앞말을 풀어 주는 환언임을 놓친 곳
+    - 이 문장의 콜론(:)을 '~지만 별개로'라는 대비·단절 관계로 앞말과 끊어 읽은 곳
     - '''exactly the way you envision it''을 ''당신이 그리는 그대로''로 본 곳'
     answer_index: 1
     vocab:
@@ -856,7 +852,7 @@ practice:
     - '''furniture, lighting, small appliances, and housewares''를 ''가구·조명·소형 가전·생활용품''으로
       본 곳'
     - '''a low degree of technological complexity''를 ''기술적 복잡성이 낮은''으로 본 곳'
-    - '''particularly ... such as ...''를 별개 병렬 항목으로 나눠, 범주→작은 물건→예시의 한 덩어리임을 놓친 곳'
+    - '''particularly ... such as ...''를 서로 다른 별개의 병렬 항목으로 나눠 읽은 곳'
     answer_index: 2
     vocab:
     - word: personal flair
@@ -889,8 +885,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “초보 개미를 ''나란히 달리기''라고 부르면서, 화학적 자취
       때문에 초보 개미의 몸에 자기 몸을 맞대는 행동.”'
     options:
-    - '''a behavior called tandem running''의 called를 ''~라고 부르면서''로 보아 행동의 이름을 초보 개미
-      호칭으로 읽은 곳'
+    - '''a behavior called tandem running''의 called를 ''~라고 부르면서''로 본 곳'
     - '''they touch their bodies to the body of a novice ant''를 ''초보 개미의 몸에 자기 몸을
       맞대다''로 본 곳'
     - '''to assist the newcomer with route learning''을 ''초보의 경로 학습을 돕기 위해''로 본 곳'
@@ -1046,8 +1041,7 @@ practice:
     options:
     - '''the perception of the figure''를 ''형상에 대한 지각''으로 본 곳'
     - '''its rational representation''을 ''그것의 이성적 표상''으로 본 곳'
-    - '''not in the perception ... but in its rational representation''의 A(지각)와 B(표상)
-      자리를 뒤바꾼 곳'
+    - '''not in the perception ... but ...''을 ''지각에서 드러난다''로 본 곳'
     answer_index: 2
     vocab:
     - word: reveal
@@ -1104,7 +1098,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “음향 디자이너처럼 작곡가들도 흔히 이 새로운 세계를 반영하는
       독특한 작품을 수줍게 만들어낸다.”'
     options:
-    - '''unlike sound designers''를 ''음향 디자이너처럼''으로 읽어 대비 축을 뒤집은 곳'
+    - '''unlike sound designers''를 ''음향 디자이너처럼''으로 본 곳'
     - '''unique pieces that reflect these new worlds''를 ''새로운 세계를 반영하는 독특한 작품''으로
       본 곳'
     - '''composers often''을 ''작곡가들은 흔히''로 본 곳'
@@ -1140,7 +1134,7 @@ practice:
     options:
     - '''man''s violent and conflict-prone nature''를 ''인간의 폭력적이고 갈등을 일으키기 쉬운 본성''으로
       본 곳'
-    - '''it comes close to Hobbes''s outlook''을 ''홉스의 관점과는 거리가 멀다''로 뒤집어 읽은 곳'
+    - '''it comes close to Hobbes''s outlook''을 ''홉스의 관점과는 거리가 멀다''로 본 곳'
     - '''an effective legal framework''를 ''효과적인 법적 틀''로 본 곳'
     answer_index: 1
     vocab:
@@ -1175,7 +1169,7 @@ practice:
       것이 너무 기대돼.”'
     options:
     - '''those beautiful waves''를 ''저 아름다운 파도''로 본 곳'
-    - '''ride while watching''의 while을 ''~와 달리''라는 대조로 보아 두 행동을 맞세운 곳'
+    - '''ride while watching''의 while을 ''~와 달리''라는 대조로 본 곳'
     - '''can''t wait to ride''를 ''자전거 타는 게 너무 기대돼''로 본 곳'
     answer_index: 1
     vocab:
@@ -1209,7 +1203,7 @@ practice:
     - '''aspects of mind and agency''를 ''마음과 행위 주체성의 측면''으로 본 곳'
     - '''cultural tools developed to influence social behaviour''를 ''영향을 주기 위해 개발된
       문화적 도구''로 본 곳'
-    - 문두 'While'을 '~하는 동안'(시간)으로만 보아 두 절의 대비(반면에)를 놓친 곳
+    - 문두 'While'을 앞뒤 두 절에 걸친 '~하는 동안'(시간·동시)의 뜻으로 본 곳
     answer_index: 2
     vocab:
     - word: sentience
@@ -1353,8 +1347,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “실제 그림자를 뒤쫓느라 정작 물체 자체는 사냥하지 못하는
       어리석은 사냥꾼의 모습을 묘사한다.”'
     options:
-    - '''hunting the shadow, not the substance''의 shadow·substance를 실제 그림자·물체로 문자
-      그대로 읽은 곳'
+    - '''hunting the shadow, not the substance''를 실제 그림자·물체로 본 곳'
     - '''Those who rely only upon theories''를 ''이론에만 의존하는 자들''로 본 곳'
     - '''were obviously''를 ''분명히 ~였다''로 본 곳'
     answer_index: 0
@@ -1416,7 +1409,7 @@ practice:
       능동적으로) 행동을 취한다.”'
     options:
     - '''a coupled system''을 ''하나의 결합된 시스템''으로 본 곳'
-    - '''act as a coupled system''의 act as를 ''~을 향해 행동하다''로 문자적으로 읽은 곳'
+    - '''act as a coupled system''의 act as를 ''~을 향해 행동하다''로 본 곳'
     - '''subjective experience and the environment''를 ''주관적 경험과 환경''으로 본 곳'
     answer_index: 1
     vocab:
@@ -1450,7 +1443,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “전구와 함께 있듯이(전구가 곁에 놓여 있듯이).”'
     options:
     - '''a clear line between burned out and not''을 ''소진과 아님 사이의 뚜렷한 경계''로 본 곳'
-    - '''as there is with a lightbulb''의 with를 ''전구와 함께''라는 물리적 동반으로 읽은 곳'
+    - '''as there is with a lightbulb''의 with를 ''전구와 함께''라는 물리적 동반으로 본 곳'
     - '''people who say they are burned out''을 ''소진되었다고 말하는 사람들''로 본 곳'
     answer_index: 1
     vocab:
@@ -1487,7 +1480,7 @@ practice:
     - '''describe ... in such a way''를 ''그런 식으로 묘사하다''로 본 곳'
     - '''note that it is a somewhat inaccurate description''을 ''다소 부정확한 묘사임을 지적한다''로
       본 곳'
-    - '''scientific contests''를 실제 열리는 ''과학 경연대회''로 문자 그대로 읽은 곳'
+    - '''scientific contests''를 실제 열리는 ''과학 경연대회''로 본 곳'
     answer_index: 2
     vocab:
     - word: contest
@@ -1518,7 +1511,7 @@ practice:
     source: 2023 고3 11월 33번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “정보를 돈 주고 사고파는 실제 시장(상점)이다.”'
     options:
-    - '''a market place for information''을 정보를 돈 주고 매매하는 실제 시장으로 읽은 곳'
+    - '''a market place for information''을 ''정보를 매매하는 실제 시장''으로 본 곳'
     - '''the entrance to a honeybee colony''를 ''꿀벌 군집의 입구''로 본 곳'
     - '''often referred to as the dancefloor''를 ''흔히 댄스플로어라 불리는''으로 본 곳'
     answer_index: 0
