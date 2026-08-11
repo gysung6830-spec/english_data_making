@@ -161,7 +161,7 @@ function interpretWriteBox() {
   return [
     makeBox(S.WRITE.bg, S.WRITE.border, [
       boxLabel("✏️ 해석 — 직접 우리말로 써봐 (정답은 지문 끝 '답지')", S.WRITE.border),
-      underlineRow(220),
+      underlineRow(120),
     ]),
     spacer(),
   ];

@@ -767,9 +767,10 @@ function css() {
   .pp-range { font-weight:800; font-size:15px; }
   .pp-hint { color:${C.sub}; font-size:10px; }
   /* 직접 쓰는 칸 */
-  .writecard { border:1px dashed #bcc6bf; border-radius:6px; padding:9px 12px 12px; margin:4px 0 10px; background:#fcfdfc; }
-  .wc-h { font-size:10.3px; color:${C.sub}; font-weight:700; margin-bottom:6px; }
+  .writecard { border:1px dashed #bcc6bf; border-radius:6px; padding:7px 12px 7px; margin:4px 0 9px; background:#fcfdfc; }
+  .wc-h { font-size:10.3px; color:${C.sub}; font-weight:700; margin-bottom:4px; }
   .wl { border-bottom:1px solid #cacaca; height:18px; margin:10px 0; }
+  .writecard .wl, .catchwrite .wl { height:13px; margin:5px 0 3px; }
   /* 해설 끊어읽기 (담백한 스타일 — 초록 '문제' 카드 아님) */
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
@@ -823,7 +824,7 @@ function css() {
     border-radius:8px; padding:12px 15px; margin:14px 0 4px; font-size:12px; break-inside:avoid; }
   .pcatch-h { display:block; color:${C.tealDark}; font-weight:800; font-size:13px; margin-bottom:5px; }
   .catchwrite { background:${C.mint}; border:1px solid ${C.greenLine}; border-radius:6px;
-    padding:8px 12px 10px; margin:7px 0; break-inside:avoid; }
+    padding:6px 12px 7px; margin:6px 0; break-inside:avoid; }
   .cw-h { font-size:11px; font-weight:800; color:${C.tealDark}; margin-bottom:4px; }
   .cw-hint { font-weight:600; color:${C.sub}; font-size:9.5px; margin-left:4px; }
   .cutgrid { display:flex; flex-direction:column; gap:8px; margin:10px 0; }
