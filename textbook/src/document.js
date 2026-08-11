@@ -412,14 +412,55 @@ function stanceTypesPageParas() {
 }
 
 // 지문 끝 답지 — 문장별 모범 해석(끊어읽기) + 모범 캐치
+// 답지 맨 위: 이 지문을 관통하는 비유 하나(쉬운 예시의 통일성)
+function analogyBannerParas(analogy) {
+  if (!analogy || !analogy.name) return [];
+  const ic = analogy.ic || '💡';
+  return [
+    B.makeBox('FBF3E0', 'F0D9A8', [
+      new Paragraph({
+        children: [
+          new TextRun({ text: `${ic} 이 지문의 비유 — ‘${analogy.name}’  `, bold: true, size: 19, color: 'B07A1C', font: S.FONT }),
+          new TextRun({ text: analogy.desc || '', size: 17, color: '6A4D12', font: S.FONT }),
+        ],
+      }),
+    ]),
+    B.spacer(),
+  ];
+}
+// '이 정도는 캐치' 답지 = 필자가 하고 싶은 말(say) + 쉬운 예시(ex, 지문 공통 비유)
+function catchAnswerParas(say, ex) {
+  if (!say && !ex) return [];
+  const kids = [
+    new Paragraph({
+      spacing: { after: say ? 40 : 0 },
+      children: [
+        new TextRun({ text: '✅ 이 정도는 캐치!  ', bold: true, size: 19, color: '0C3F26', font: S.FONT }),
+        new TextRun({ text: '— 필자가 이 문장으로 하고 싶은 말', size: 15, color: '5F6B64', font: S.FONT }),
+      ],
+    }),
+  ];
+  if (say) kids.push(new Paragraph({ spacing: { after: ex ? 60 : 0 }, children: [new TextRun({ text: say, size: 18, color: '1C2620', font: S.FONT })] }));
+  if (ex) {
+    kids.push(new Paragraph({
+      shading: { type: ShadingType.CLEAR, fill: 'FBF3E0' }, spacing: { before: 20 },
+      children: [
+        new TextRun({ text: '💡 쉬운 예시  ', bold: true, size: 16, color: 'B07A1C', font: S.FONT }),
+        new TextRun({ text: ex, size: 16, color: '6A4D12', font: S.FONT }),
+      ],
+    }));
+  }
+  return [B.makeBox('E6F1EA', 'BAD5C2', kids), B.spacer()];
+}
 function passageAnswerParas(p) {
   const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
+  out.push(...analogyBannerParas(p.analogy));
   (p.sentences || []).forEach((s, i) => {
     // src(문항번호)가 짧은 라벨일 때만 표시. AI 가 문장 전체를 넣는 경우는 생략.
     const tag = s.src && String(s.src).length <= 10 ? `  [${s.src}]` : '';
     out.push(B.h3(`${i + 1}. ${s.en}${tag}`));
     out.push(...B.chunkBox(s.chunks));
-    if (s.catch) out.push(...B.catchBox(s.catch));
+    out.push(...catchAnswerParas(s.catch, s.ex));
   });
   return out;
 }

@@ -272,7 +272,8 @@ function passageSentenceSchema() {
           properties: { word: { type: 'string' }, mean: { type: 'string' } },
         },
       },
-      catch: { type: 'string' },
+      catch: { type: 'string' },   // '이 정도는 캐치' = 필자가 이 문장으로 하고 싶은 말(한 줄)
+      ex: { type: 'string' },      // 쉬운 예시 — 지문 전체를 관통하는 '하나의 비유'로 이어진 일상 예 (없으면 빈 문자열)
       trap: { type: 'string' },
     },
   };
@@ -291,6 +292,14 @@ const PASSAGE_SCHEMA = {
           source: { type: 'string' },  // 출처/문항번호 (알면)
           topic: { type: 'string' },   // 소재 = "이 지문 뭐에 관한 거야" 1~2문장
           catch: { type: 'string' },   // 지문 전체 요지 "이 정도는 캐치" 1~2문장
+          analogy: {                   // 이 지문 전체를 관통하는 '쉬운 예시(비유)' 하나 (억지면 생략)
+            type: 'object', additionalProperties: false,
+            required: ['name', 'desc'],
+            properties: {
+              name: { type: 'string', description: "비유 이름 짧게(예: '골대 옮기기', '배터리 충전'). 지문 논리 흐름 전체에 들어맞는 하나만." },
+              desc: { type: 'string', description: '이 비유로 지문을 어떻게 따라 읽는지 한 줄 안내(반말).' },
+            },
+          },
           claim: {                     // 필자 주장(정답) — 입장 + 근거
             type: 'object', additionalProperties: false,
             required: ['stance', 'why'],
@@ -348,6 +357,13 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 - topic: "이 지문 뭐에 관한 거야?" 1~2문장(반말).
 - catch: 이 지문에서 반드시 잡아야 할 핵심 내용 = 지문 요지 1~2문장(반말, "~라는 거야!").
   '이 정도는 캐치해야 한다'는 걸 알 수 있게 — 세부보다 전체 메시지.
+- analogy: 이 지문 '전체'를 관통하는 '쉬운 예시(비유)'를 딱 하나만 골라.
+  · name: 짧은 비유 이름(예: '골대 옮기기','배터리 충전','그림 보여주는 아이').
+  · desc: 그 비유로 지문을 어떻게 따라 읽는지 한 줄 안내(반말).
+  ★규칙★ 지문의 논리 흐름(통념→반박→근거 등)에 '처음부터 끝까지' 들어맞는 비유 하나만.
+   문장마다 다른 비유를 쓰지 마 — 한 지문 = 하나의 비유로 통일. 각 문장의 ex 가 이 비유를
+   '이어서' 전개해야 해. 지문 안에 이미 비유(goalposts 등)가 있으면 그걸 살려 써.
+   억지 비유는 금지 — 자연스러운 비유가 없으면 analogy 를 생략(빈 값)하고 ex 도 비워.
 - claim: 필자 주장(입장). stance 는 '긍정적'/'부정적·비판적'/'중립적' 중 하나.
   ★판단 기준★ 필자가 대상을 두고 쓴 '평가 어휘'와 마지막·전환(But/However) 문장을 봐:
     · 긍정 신호: benefit·beneficial·valuable·crucial·essential·effective·advantage·merit·
@@ -383,7 +399,11 @@ const PASSAGE_SYSTEM_PROMPT = `너는 한국 수능/평가원 영어 지문을 '
 각 문장 가공(구문해석 도움은 그대로 유지):
 - chunks(끊어읽기): 앞에서부터 순서대로 의미 덩어리로 끊고 직독직해(en=영어조각, kor=우리말).
 - vocab: 그 문장에서 모를 만한 단어 3~6개와 뜻.
-- catch: 이 문장 핵심 뜻 한 줄(20~45자, 반말, 문법 용어 금지).
+- catch: '이 정도는 캐치' = **필자가 이 문장으로 하고 싶은 말** 한 줄(반말, 문법 용어 금지).
+  단순 직역이 아니라 "이 문장이 글에서 하는 역할(통념/반박/근거/대안 등)"까지 담아.
+- ex: 위 catch 를 '쉬운 예시(비유)'로 풀어줘 — ★반드시 이 지문의 analogy(지문 공통 비유)를
+  '이어받아'★ 그 비유 안에서 이 문장을 설명해. (analogy 가 없으면 ex 도 빈 문자열)
+  예: analogy 가 '골대 옮기기'면, 각 문장의 ex 는 전부 골대·슛·경기 비유로 이어져야 해.
 - trap: 이 문장에서 **오역하기 쉬운 부분을 미리** 짚어줘. "A로 잘못 읽기 쉬운데, 실제론 B야" 형식으로,
   그 문장에 실제 있는 요소만(없는 단어 지어내지 마).
 - point: 이 문장의 핵심 구문/문법을 짧은 태그로(예: '수동태','관계사절','분사구문','to부정사','전치사구').`;
@@ -401,6 +421,8 @@ function normalizePassages(aiData) {
     source: p.source || '지문',
     topic: p.topic || '',
     catch: p.catch || '',
+    analogy: p.analogy && p.analogy.name
+      ? { name: p.analogy.name, desc: p.analogy.desc || '', ic: p.analogy.ic || '' } : undefined,
     claim: p.claim && p.claim.stance
       ? { stance: p.claim.stance, why: p.claim.why || '' } : undefined,
     structure: p.structure && p.structure.type
@@ -418,6 +440,7 @@ function normalizePassages(aiData) {
       chunks: (s.chunks || []).map((c) => [c.en, c.kor]),
       vocab: (s.vocab || []).map((v) => [v.word, v.mean]),
       catch: s.catch || '',
+      ex: s.ex || '',
       trap: s.trap || '',
     })),
   }));
@@ -447,6 +470,7 @@ function sanitizePassages(passages) {
         chunks,
         vocab: vocab.length ? vocab : [[(deK(s.en || '').split(/\s+/)[0] || 'word'), '뜻']],
         catch: ne(s.catch) ? s.catch : '이 문장의 핵심을 한 줄로 잡아보자.',
+        ex: s.ex || '',
         trap: s.trap || '',
       };
     }).filter((s) => ne(s.en) && s.chunks.length > 0);

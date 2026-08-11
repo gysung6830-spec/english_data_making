@@ -111,8 +111,24 @@ function answerWriteCard() {
     <div class="wc-h">✏️ 직접 ' / ' 로 끊고, 그 아래에 뜻을 적어봐</div>
     <div class="wl"></div><div class="wl"></div></div>`;
 }
-function catchCard(text) {
-  return `<div class="callout catch"><span class="co-ic">✅ 이 정도는 캐치!</span> ${esc(text)}</div>`;
+// 답지의 '이 정도는 캐치' — 필자가 하고 싶은 말(say) + 쉬운 예시(ex).
+// ex 는 지문 전체를 관통하는 하나의 비유로 이어진다(analogyBanner 참고).
+function catchCard(say, ex) {
+  if (!say && !ex) return '';
+  return `<div class="c2">
+    <div class="c2-h">✅ 이 정도는 캐치! <span class="c2-sub">— 필자가 이 문장으로 하고 싶은 말</span></div>
+    ${say ? `<div class="c2-say">${esc(say)}</div>` : ''}
+    ${ex ? `<div class="c2-exbox"><span class="c2-exlab">💡 쉬운 예시</span> ${esc(ex)}</div>` : ''}
+  </div>`;
+}
+// 지문 답지 맨 위: 이 지문을 관통하는 비유 하나를 소개(쉬운 예시의 통일성)
+function analogyBanner(analogy) {
+  if (!analogy) return '';
+  const name = typeof analogy === 'string' ? analogy : (analogy.name || '');
+  const desc = typeof analogy === 'object' && analogy ? (analogy.desc || '') : '';
+  const ic = (typeof analogy === 'object' && analogy && analogy.ic) ? analogy.ic : '💡';
+  if (!name) return '';
+  return `<div class="anl"><span class="anl-ic">${esc(ic)}</span><span class="anl-t"><b>이 지문의 비유 — ‘${esc(name)}’</b> ${esc(desc)}</span></div>`;
 }
 function tipCard(text) {
   return `<div class="callout tip"><span class="co-ic">✂ 끊어읽기 팁 — 어디서 끊을까?</span> ${esc(text)}</div>`;
@@ -774,6 +790,19 @@ function css() {
   /* 해설 끊어읽기 (담백한 스타일 — 초록 '문제' 카드 아님) */
   .callout { border-radius:6px; padding:8px 12px; margin:7px 0; font-size:10.8px; break-inside:avoid; }
   .callout.catch { background:${C.mint}; border:1px solid ${C.greenLine}; }
+  /* 답지 '이 정도는 캐치' — 하고 싶은 말 + 쉬운 예시 */
+  .c2 { background:${C.mint}; border:1px solid ${C.greenLine}; border-left:5px solid ${C.teal};
+    border-radius:7px; padding:8px 12px; margin:7px 0; break-inside:avoid; }
+  .c2-h { font-weight:800; color:${C.tealDark}; font-size:11.5px; margin-bottom:5px; }
+  .c2-sub { font-weight:600; color:${C.sub}; font-size:9.7px; }
+  .c2-say { font-size:11.4px; line-height:1.6; color:${C.ink}; margin-bottom:6px; }
+  .c2-exbox { background:${C.plusBg}; border:1px solid #F0D9A8; border-radius:6px;
+    padding:6px 10px; font-size:10.8px; line-height:1.55; color:#6a4d12; }
+  .c2-exlab { font-weight:800; color:${C.plus}; margin-right:5px; white-space:nowrap; }
+  .anl { display:flex; gap:9px; align-items:center; background:${C.plusBg}; border:1px solid #F0D9A8;
+    border-left:5px solid ${C.plus}; border-radius:8px; padding:9px 13px; margin:2px 0 12px; break-inside:avoid; }
+  .anl-ic { font-size:17px; flex:none; } .anl-t { font-size:11px; color:#6a4d12; line-height:1.55; }
+  .anl-t b { color:${C.plus}; }
   .callout.tip { background:${C.tipBg}; border-left:4px solid ${C.tipBar}; color:#555; }
   .callout.trap { background:${C.trapBg}; border:1px solid ${C.trapLine}; border-left:4px solid ${C.trapBar}; color:#7a4a12; }
   .co-ic { font-weight:800; margin-right:6px; }
@@ -1223,12 +1252,13 @@ function predictReveal(p) {
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
 function passageAnswerKey(p) {
   let h = secHead(CIRCLED[3], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
+  h += analogyBanner(p.analogy);
   h += (p.sentences || []).map((s, i) => {
     const tag = s.src && String(s.src).length <= 10 ? `<span class="stag">[${esc(s.src)}]</span>` : '';
     return `<div class="sblock">
     <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}${tag}</div>
     ${chunkLines(s.chunks, true)}
-    ${s.catch ? catchCard(s.catch) : ''}</div>`;
+    ${catchCard(s.catch, s.ex)}</div>`;
   }).join('');
   return h;
 }
