@@ -222,13 +222,53 @@ def _detect_problem_numbers(src: Path) -> list[str]:
     return []
 
 
-def _problem_spans(raw: str) -> list[tuple[str, str]]:
-    """원문(한글 포함)을 '문제번호 머리글' 경계로 잘라 [(라벨, 청크텍스트), …] 로.
+# 단원형 머리글: 'Unit N - {ANALYSIS|분석|M번}'(교재 워크북). Ch./Lesson 등 접두는 무시.
+# 라벨은 '유닛-문항'으로 유일하게: '10-1'(1번) · '10-A'(Analysis).
+#   → 유닛마다 1·2·3이 반복돼도 안 겹치고, Analysis 지문도 독립 경계가 된다.
+_UNIT_HDR = re.compile(
+    r"(?i)\bUnit\s*(\d{1,3})\s*[-–—][^\n:：]*?(?:(\d{1,3})\s*번|(ANALYSIS|분석))")
 
-    장문(예: '43~45번')은 페이지 머리글('WORKBOOK4')이 본문 중간에 반복돼도
-    '번' 머리글 기준으로는 한 덩어리로 남는다. 연속으로 같은 번호가 나오면(반복 페이지
-    머리글) 새 경계로 보지 않고 합친다. 머리글이 2개 미만이면 빈 리스트(→ 단일 처리).
+
+def _unit_spans(raw: str) -> list[tuple[str, str]]:
+    """'Unit N - 항목' 머리글로 원문을 지문 단위로 잘라 [(라벨, 청크), …].
+
+    라벨 = 'N-M'(M번) 또는 'N-A'(Analysis/분석). 머리글이 2개 미만이면 빈 리스트.
     """
+    marks: list[tuple[int, str]] = []
+    for m in _UNIT_HDR.finditer(raw):
+        unit, prob, ana = m.group(1), m.group(2), m.group(3)
+        label = f"{unit}-{prob}" if prob else f"{unit}-A"
+        marks.append((m.start(), label))
+    if len(marks) < 2:
+        return []
+    bounds: list[tuple[int, str]] = []
+    for pos, lbl in marks:
+        if bounds and bounds[-1][1] == lbl:
+            continue                 # 같은 지문의 반복 페이지 머리글 → 새 경계 아님
+        bounds.append((pos, lbl))
+    if len(bounds) < 2:
+        return []
+    spans: list[tuple[str, str]] = []
+    for i, (pos, lbl) in enumerate(bounds):
+        end = bounds[i + 1][0] if i + 1 < len(bounds) else len(raw)
+        chunk = raw[pos:end].strip()
+        if chunk:
+            spans.append((lbl, chunk))
+    return spans if len(spans) >= 2 else []
+
+
+def _problem_spans(raw: str) -> list[tuple[str, str]]:
+    """원문(한글 포함)을 '지문 머리글' 경계로 잘라 [(라벨, 청크텍스트), …] 로.
+
+    ① 단원형('Unit 10 - 1번' / 'Unit 10 - Analysis')이 있으면 '유닛-문항'(10-1/10-A)으로
+       우선 분리 — 유닛 간 번호 중복·Analysis 흡수를 막는다.
+    ② 없으면 '문제번호(N번)' 머리글로 분리(모의고사형). 장문(예: '43~45번')은 본문 중간에
+       페이지 머리글('WORKBOOK4')이 반복돼도 한 덩어리로 남고, 첫 머리글 앞의 번호 없는
+       선두 지문도 라벨 없는 조각으로 보존한다. 머리글 2개 미만이면 빈 리스트(→ 단일 처리).
+    """
+    unit = _unit_spans(raw)
+    if unit:
+        return unit
     for rex in (_PROBNO_COLON, _PROBNO_LINE):
         marks = [(m.start(), _norm_probno(m.group(1))) for m in rex.finditer(raw)]
         if len(marks) < 2:

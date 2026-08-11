@@ -666,6 +666,18 @@ def test_problem_number_range_and_spans():
     spans2 = _problem_spans(raw2)
     assert [lbl for lbl, _ in spans2] == ["", "1", "2"], spans2  # 선두 지문 살아남음
 
+    # 다중 유닛(교재 워크북): 'Unit N - {ANALYSIS|M번}' → '유닛-문항'(10-1/10-A)로 유일 라벨.
+    # 유닛 간 1·2 번호 중복·Analysis 흡수 없이 지문마다 독립.
+    raw3 = (
+        "Ch. 04 Unit 10 - 수능 대비 ANALYSIS: 제목\n"
+        "Many developmental theorists have recognized the role of fear in development.\n"
+        "Ch. 04 Unit 10 - 1번: 제목\nOur complex brains might have evolved to bond.\n"
+        "Ch. 04 Unit 10 - 2번: 제목\nAlthough the wish to be alone is often strong here.\n"
+        "Ch. 04 Unit 11 - ANALYSIS: 제목\nThis is the eleventh unit analysis passage now.\n"
+        "Ch. 04 Unit 11 - 1번: 제목\nAnother passage for unit eleven problem one here.\n")
+    assert [lbl for lbl, _ in _problem_spans(raw3)] == \
+        ["10-A", "10-1", "10-2", "11-A", "11-1"], _problem_spans(raw3)
+
     # _merge_passages: 한 문제에서 쪼개져 나온 조각들을 한 지문으로 병합
     from src.schemas import Extraction
     merged = _merge_passages(
