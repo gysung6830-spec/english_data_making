@@ -452,14 +452,44 @@ function catchAnswerParas(say, ex) {
   }
   return [B.makeBox('E6F1EA', 'BAD5C2', kids), B.spacer()];
 }
+// 답지 헤더 영어에 끊어읽기(/) 직접 표시 (조각이 원문을 못 덮으면 원문 그대로)
+function headChunkedEn(s) {
+  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
+  if (chunks.length >= 2) {
+    const joined = chunks.map((c) => c[0]).join(' ');
+    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
+    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85) {
+      return chunks.map((c) => c[0]).join(' / ');
+    }
+  }
+  return s.en || '';
+}
+// 답지 한글 끊어읽기(영어는 헤더에 있으니 한글만)
+function korChunkBoxParas(chunks) {
+  const list = (chunks || []).filter((c) => Array.isArray(c) && c[1]);
+  if (!list.length) return [];
+  const ko = list.map((c) => c[1]).join('  /  ');
+  return [
+    B.makeBox('F2F4F5', '8A8F98', [
+      new Paragraph({
+        children: [
+          new TextRun({ text: '한글  ', bold: true, size: 16, color: '8A8F98', font: S.FONT }),
+          new TextRun({ text: ko, size: 19, color: '333333', font: S.FONT }),
+        ],
+      }),
+    ]),
+    B.spacer(),
+  ];
+}
 function passageAnswerParas(p) {
-  const out = [B.pageBreak(), B.h1('답지 — 해석 · 캐치'), B.p('위에서 직접 쓴 걸 여기서 맞춰보자.')];
+  const out = [B.pageBreak(), B.h1('답지 — 끊어읽기 · 캐치'), B.p('위에서 직접 푼 걸 여기서 맞춰보자 (영어 문장에 / 로 끊어읽기).')];
   out.push(...analogyBannerParas(p.analogy));
   (p.sentences || []).forEach((s, i) => {
     // src(문항번호)가 짧은 라벨일 때만 표시. AI 가 문장 전체를 넣는 경우는 생략.
     const tag = s.src && String(s.src).length <= 10 ? `  [${s.src}]` : '';
-    out.push(B.h3(`${i + 1}. ${s.en}${tag}`));
-    out.push(...B.chunkBox(s.chunks));
+    out.push(B.h3(`${i + 1}. ${headChunkedEn(s)}${tag}`));
+    out.push(...korChunkBoxParas(s.chunks));
     out.push(...catchAnswerParas(s.catch, s.ex));
   });
   return out;

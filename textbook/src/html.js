@@ -753,6 +753,8 @@ function css() {
     width:20px; height:20px; border-radius:50%; background:${C.teal}; color:#fff;
     font-size:11px; font-weight:800; margin-right:8px; margin-top:1px; }
   .sen { font-weight:800; font-size:13px; }
+  .sen .sl { color:${C.teal}; font-weight:800; padding:0 4px; }
+  .chbox.one { border-left-color:#8a8f98; }
   .stag { color:${C.sub}; font-size:10px; font-style:italic; margin-left:6px; align-self:center; }
   .vinline { background:#fff; border:1px solid ${C.greenLine}; border-left:4px solid ${C.green};
     border-radius:6px; padding:7px 11px; margin:4px 0 7px; font-size:10.6px; }
@@ -1250,14 +1252,37 @@ function predictReveal(p) {
     ${cards.join('')}</section>`;
 }
 // 지문 끝 답지: 문장별 모범 해석(끊어읽기) + 모범 캐치
+// 답지 헤더용 영어 — 끊어읽기(/)를 문장 위에 직접 표시.
+// 조각(chunk)들을 이어붙이면 원문이 되도록 AI 가 넣지만, 생략(…)이 섞이거나
+// 조각이 원문을 제대로 못 덮으면 원문 전체를 그대로 보여준다(안전장치).
+function chunkedHeadEn(s) {
+  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
+  const sl = ' <span class="sl">/</span> ';
+  if (chunks.length >= 2) {
+    const joined = chunks.map((c) => c[0]).join(' ');
+    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
+    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85) {
+      return chunks.map((c) => esc(c[0])).join(sl);
+    }
+  }
+  return esc(s.en || '');
+}
+// 답지 한글 끊어읽기(영어는 위 헤더에 있으니 한글만) — 조각 위치를 헤더와 매칭
+function korChunkRow(chunks) {
+  const list = (chunks || []).filter((c) => Array.isArray(c) && c[1]);
+  if (!list.length) return '';
+  const ko = list.map((c) => esc(c[1])).join(' <span class="sl">/</span> ');
+  return `<div class="chbox one"><div class="chrow"><span class="chtag ko">한글</span><span class="chtxt ckor">${ko}</span></div></div>`;
+}
 function passageAnswerKey(p) {
-  let h = secHead(CIRCLED[3], '답지 — 해석 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐', 'key', true);
+  let h = secHead(CIRCLED[3], '답지 — 끊어읽기 · 캐치', '위에서 직접 푼 걸 여기서 맞춰봐 (영어 문장에 / 로 끊어읽기)', 'key', true);
   h += analogyBanner(p.analogy);
   h += (p.sentences || []).map((s, i) => {
     const tag = s.src && String(s.src).length <= 10 ? `<span class="stag">[${esc(s.src)}]</span>` : '';
     return `<div class="sblock">
-    <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}${tag}</div>
-    ${chunkLines(s.chunks, true)}
+    <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${chunkedHeadEn(s)}</span>${pointTag(s.point)}${tag}</div>
+    ${korChunkRow(s.chunks)}
     ${catchCard(s.catch, s.ex)}</div>`;
   }).join('');
   return h;
