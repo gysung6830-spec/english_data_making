@@ -7,7 +7,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “수용 능력을 어떻게 제한하고 어디에 더 많은 방문객을 위한
       공간이 없는지를 보여 주는 명소들”'
     options:
-    - that·where를 '어떻게/어디에 ~인지' 의문사로 읽었다 — 둘 다 attractions를 꾸미는 관계사절(where=in which)이다.
+    - that·where를 '어떻게/어디에 ~인지' 의문사로 읽은 부분.
     - have limited capacity를 '수용 능력이 제한된'으로 옮긴 부분.
     - no room for more visitors를 '더 많은 방문객을 위한 공간이 없다'로 옮긴 부분.
     answer_index: 0
@@ -40,7 +40,7 @@ practice:
       않는지 하는 문제”'
     options:
     - can be quantified를 '정량화될 수 있는'으로 옮긴 부분.
-    - whose values를 '누구의 값이 ~인지' 의문사로 읽었다 — 실은 '그 값이 ~한'이라는 소유격 관계대명사다.
+    - whose values를 '누구의 값이 ~인지' 의문사로 읽은 부분.
     - never change from one observer to the next를 '관찰자에 따라 변하지 않는'으로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -75,7 +75,7 @@ practice:
     options:
     - cannot stay on the topic를 '주제에서 벗어나며'로 옮긴 부분.
     - too much or too little information을 '정보를 너무 많거나 적게'로 옮긴 부분.
-    - 세 who를 '누가 ~인지' 의문사로 읽었다 — 모두 someone을 꾸미는 주격 관계대명사(병렬)다.
+    - 세 who를 '누가 ~인지' 의문사로 읽은 부분.
     answer_index: 2
     vocab:
     - word: stay on the topic
@@ -129,7 +129,7 @@ practice:
     source: 2024 고3 6월 42번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “얼마나 많이 대응하는지를 안내하기 위해”'
     options:
-    - how to respond의 how를 '얼마나(정도)'로 읽었다 — 여기서는 '어떻게 ~할지'라는 방법의 how다.
+    - how to respond의 how를 '얼마나(정도)'로 읽은 부분.
     - to guide를 '안내하기 위해'로 옮긴 부분.
     - respond를 '대응하다'로 옮긴 부분.
     answer_index: 0
@@ -270,7 +270,7 @@ practice:
       얼마나 협력하고 조정하는지에 집중한다”'
     options:
     - to accomplish the team goals를 '팀 목표를 달성하기 위해'로 옮긴 부분.
-    - how the agents will cooperate의 how를 '얼마나(정도)'로 읽었다 — 전치사 on의 목적어 명사절로 '어떻게(방법)'다.
+    - how the agents will cooperate의 how를 '얼마나(정도)'로 읽은 부분.
     - cooperate and coordinate with each other를 '서로 협력하고 조정한다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -326,7 +326,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그녀가 제시간에 탑승구에 도착하지 못할까 걱정되었기 때문에,
       사람들은 인파를 헤치고 서둘러 갔다.”'
     options:
-    - 분사구문 Worried의 의미상 주어를 주절 주어 she가 아니라 '사람들(people)'로 잡았다.
+    - 분사구문 Worried의 의미상 주어를 '사람들(people)'로 잡은 부분.
     - rushed through the crowds를 '인파를 헤치고 서둘러 갔다'로 옮긴 부분.
     - Worried that ~ in time을 '제시간에 못 갈까 걱정되어'로 옮긴 부분.
     answer_index: 0
@@ -358,7 +358,7 @@ practice:
     options:
     - how she felt about her failure를 '그녀가 실패에 대해 어떻게 느끼는지'로 옮긴 부분.
     - said a few encouraging words를 '몇 마디 격려의 말을 했다'로 옮긴 부분.
-    - Recognizing 분사구문의 의미상 주어를 Ken이 아니라 she(그녀)로 잡았다 — 다가간 주체는 Ken이다.
+    - Recognizing 분사구문의 의미상 주어를 she(그녀)로 잡은 부분.
     answer_index: 2
     vocab:
     - word: recognize
@@ -452,7 +452,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도덕성의 문제들은 입법 논쟁에서 종종 뒷전으로 밀려나며,
       사람들을 너무 논쟁적이고 답하기 어렵다고 규정짓는다.”'
     options:
-    - labeled를 능동('~라고 규정짓는다')으로 읽었다 — (being) labeled 수동 분사로 주어가 '~라고 분류되는' 대상이다.
+    - labeled를 능동('~라고 규정짓는다')으로 읽은 부분.
     - pushed to the side를 '뒷전으로 밀려나는'으로 옮긴 부분.
     - too controversial, too difficult to answer를 '너무 논쟁적이고 답하기 너무 어렵다'로 옮긴 부분.
     answer_index: 0
@@ -485,8 +485,7 @@ practice:
       가치에 근거하여, 그 경제적 가치를 초과할 수 있다.”'
     options:
     - benefits provided by these services를 '이 서비스들이 제공하는 경제적 이익'으로 옮긴 부분.
-    - based on their non-market values의 their를 timber(목재)로 연결했다 — 실은 these services(그
-      이익의 원천)를 가리킨다.
+    - based on their non-market values의 their를 timber(목재)로 연결한 부분.
     - may exceed를 '초과할 수 있다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -516,8 +515,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “공식 훈련 프로그램은 미리 개발하고 정해진 일정에 따라 전달하기
       때문에, 변화하는 훈련 요구를 다루기에 불충분하다.”'
     options:
-    - developed/delivered를 능동 본동사('개발하고 전달한다')로 읽었다 — 주어를 꾸미는 과거분사 삽입구이고 본동사는 are
-      insufficient다.
+    - developed/delivered를 능동 본동사('개발하고 전달한다')로 읽은 부분.
     - shifting training needs를 '변화하는 훈련 요구'로 옮긴 부분.
     - are insufficient를 '불충분하다'로 옮긴 부분.
     answer_index: 0
@@ -641,8 +639,7 @@ practice:
     options:
     - In spite of increasing acceleration을 '증가하는 가속에도 불구하고'로 옮긴 부분.
     - a passive non-moving container를 '수동적인 비이동 용기'로 옮긴 부분.
-    - ', which is transported의 which절 속 artefacts를 주어로 삼았다 — which의 선행사는 our body(=container)이고
-      뼈대는 our body becomes a container다.'
+    - ', which is transported의 which절 속 artefacts를 주어로 삼은 부분.'
     answer_index: 2
     vocab:
     - word: acceleration
@@ -676,8 +673,7 @@ practice:
     options:
     - a collection of integrated, portable digital technologies를 '통합적이고 휴대 가능한 디지털
       기술 집합'으로 옮긴 부분.
-    - or more appropriately, the laptop을 '컴퓨터가 노트북을 적절하게 만들어'라는 동사구로 읽었다 — the computer를
-      바꿔 말하는 동격 삽입이고 본동사는 is다.
+    - or more appropriately, the laptop을 '컴퓨터가 노트북을 적절하게 만들어'라는 동사구로 읽은 부분.
     - that link their social and working life를 '그들의 사회생활과 직장생활을 연결하는'으로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -742,8 +738,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “지리적 혹은 가상 공간을 여행하는 것은, 점점 더 빨라지는
       가속에 의해 우리 몸을 점점 더 수동적이고 움직이지 않는 그릇으로 만든다.”'
     options:
-    - for example in travelling through ~ space를 문장의 주어('여행하는 것이 ~ 만든다')로 읽었다 — acceleration을
-      부연하는 예시 삽입구이고 주어·동사는 our body becomes다.
+    - for example in travelling through ~ space를 문장의 주어('여행하는 것이 ~ 만든다')로 읽은 부분.
     - In spite of increasing acceleration을 '점점 빨라지는 가속에도 불구하고'로 옮긴 부분.
     - a passive non-moving container를 '수동적이고 움직이지 않는 그릇'으로 옮긴 부분.
     answer_index: 0
@@ -782,8 +777,7 @@ practice:
     options:
     - beneficial insects를 '이로운 곤충'으로 옮긴 부분.
     - it has become apparent를 '분명해졌다'로 옮긴 부분.
-    - which can negate their effects in controlling pests(삽입 관계절)를 문장의 핵심 주어로 읽었다
-      — 뼈대는 병렬된 두 개의 that절이다.
+    - which can negate their effects in controlling pests(삽입 관계절)를 문장의 핵심 주어로 읽은 부분.
     answer_index: 2
     vocab:
     - word: pesticides
@@ -816,8 +810,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리가 개는 달리 행동할 수도 있었다고 생각할 수 있으므로,
       개가 아이를 공격한 것은 사악하고 부도덕한 일이다.”'
     options:
-    - —so that we might suppose ~ otherwise—(대시 삽입)을 주절로 읽어 '사악하고 부도덕하다'로 결론지었다 —
-      실제 주절은 we're unlikely to think(그렇게 생각하지 않을 것)다.
+    - —so that we might suppose ~ otherwise—(대시 삽입)을 주절로 읽어 '사악하고 부도덕하다'로 결론지은 부분.
     - a sentient being capable of making choices and plans를 '선택과 계획을 할 수 있는 지각 있는
       존재'로 옮긴 부분.
     - attacking a child를 '아이를 공격한 것'으로 옮긴 부분.
@@ -941,8 +934,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “‘그건 내 거야’라고 말할 때, 그것은 온전한 묶음을 이루는
       막대기들, 그리고 그와는 별개인 판매·임대·저당·양도·증여·파괴 권리까지 소유한다는 뜻이다.”'
     options:
-    - 콜론(:) 뒤 나열을 the sticks와 '별개의' 항목으로 읽었다 — 콜론은 the full bundle(the sticks)의 내용을
-      풀어 쓰는 동격(A:B는 A=B)이다.
+    - 콜론(:) 뒤 나열을 the sticks와 '별개의' 항목으로 읽은 부분.
     - the sticks that make up the full bundle을 '온전한 묶음을 이루는 막대기들'로 옮긴 부분.
     - the sell stick, the rent stick을 '판매·임대 막대기'로 옮긴 부분.
     answer_index: 0
@@ -978,8 +970,7 @@ practice:
       관점을 관찰한 연구들”'
     options:
     - individual group mates를 '개별 무리 짝'으로 옮긴 부분.
-    - the view 뒤 that절을 view를 수식하는 관계절('관점을 관찰한')로 읽었다 — view의 내용을 풀어 주는 동격 that절이고
-      골격은 'Studies support the view that ...'이다.
+    - the view 뒤 that절을 view를 수식하는 관계절('관점을 관찰한')로 읽은 부분.
     - nonvigilant animals attend to departures를 '비경계 동물들이 이탈에 주의를 기울인다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1016,8 +1007,7 @@ practice:
     - more travel at faster speeds covering longer distances를 '더 빠른 속도로 더 먼 거리를 이동'으로
       옮긴 부분.
     - generates greater economic success를 '더 큰 경제적 성공을 낳는다'로 옮긴 부분.
-    - 대시(—…—) 사이 삽입을 주절의 동사로 읽었다 — Hyper-mobility를 다시 설명하는 동격이고 뼈대는 'Hyper-mobility
-      seems to be a distinguishing feature'다.
+    - 대시(—…—) 사이 삽입을 주절의 동사로 읽은 부분.
     answer_index: 2
     vocab:
     - word: hyper‑mobility
@@ -1049,7 +1039,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “당신이 그 다발을 이루는 많은 막대를 소유한다는 뜻인데,
       그 막대에게 그것을 팔고 빌려주고 저당 잡히라고 요구한다”'
     options:
-    - 콜론(:) 뒤 목록을 앞 동사(own)의 또 다른 목적어/명령 대상으로 읽었다 — 콜론은 the sticks가 무엇인지 나열하는 동격이다.
+    - 콜론(:) 뒤 목록을 앞 동사(own)의 또 다른 목적어/명령 대상으로 읽은 부분.
     - you own a lot of the sticks를 '많은 막대를 소유한다'로 옮긴 부분.
     - the sticks that make up the full bundle을 '그 다발을 이루는 막대'로 옮긴 부분.
     answer_index: 0
@@ -1084,8 +1074,7 @@ practice:
       것은 쉽게 간과된다”'
     options:
     - substantial numbers of designers를 '상당수의 디자이너'로 옮긴 부분.
-    - the fact 뒤 that절을 끊어 the fact를 주어에서 놓쳤다 — the fact의 내용을 밝히는 동격 that절이 the fact와
-      묶여 주어이고 동사는 can be overlooked다.
+    - the fact 뒤 that절을 끊어 the fact를 주어에서 놓친 부분.
     - employed in implementing a concept을 '어떤 개념을 구현하는 데 고용된다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1147,8 +1136,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “기후 변화의 명령이 없어도, 밀집한 도시들은 접근성, 이동성,
       안전, 대기 오염, 도시 거주 적합성을 물리적으로 제약하며, 그것들이 도로망을 확장한다.”'
     options:
-    - of 뒤 cities/accessibility 등을 주어로 잡았다 — 주어 뼈대는 the physical constraints ... and
-      the corresponding demands ...이고 동사는 limit다.
+    - of 뒤 cities/accessibility 등을 주어로 잡은 부분.
     - Even without the imperative of climate change를 '기후 변화의 명령이 없어도'로 옮긴 부분.
     - densely inhabited cities를 '밀집한 도시들'로 옮긴 부분.
     answer_index: 0
@@ -1184,8 +1172,7 @@ practice:
       임차권이 세입자를, 허가가 배관공을, 광물권이 석유 회사를 소유한다.”'
     options:
     - we split the sticks up을 '우리는 막대기를 쪼갠다'로 옮긴 부분.
-    - '''with+명사''(with a mortgage 등)의 뒤 명사를 주어로 삼아 ''저당이 은행을 소유''로 뒤집었다 — with구는
-      앞 명사(a bank 등)를 꾸미는 수식구이고 뼈대는 there may be A, B, C 나열이다.'
+    - '''with+명사''(with a mortgage 등)의 뒤 명사를 주어로 삼아 ''저당이 은행을 소유''로 뒤집은 부분.'
     - as for a piece of land를 '한 필지의 땅에서처럼'으로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1248,8 +1235,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “여러 형태로 된 그들의 더 폭넓은 언론적 역할 속에서 스포츠를
       다루는 것”'
     options:
-    - in its many forms를 맨 앞 명사 role에 붙여 '여러 형태로 된 역할'로 읽었다 — in구는 covering sport를
-      수식한다(스포츠를 여러 형태로 다룸).
+    - in its many forms를 맨 앞 명사 role에 붙여 '여러 형태로 된 역할'로 읽은 부분.
     - their broader journalistic role를 '그들의 더 폭넓은 언론적 역할'로 옮긴 부분.
     - covering sport를 '스포츠를 다루는'으로 옮긴 부분.
     answer_index: 0
@@ -1286,8 +1272,7 @@ practice:
     options:
     - your own body를 '당신 자신의 몸'으로 옮긴 부분.
     - interaction을 '상호작용'으로 옮긴 부분.
-    - with the external world를 동사 perceiving에 붙여 '외부 세계와 더불어 지각'으로 읽었다 — of your own
-      body와 with the external world 둘 다 interaction을 수식한다(몸이 외부 세계와 하는 상호작용).
+    - with the external world를 동사 perceiving에 붙여 '외부 세계와 더불어 지각'으로 읽은 부분.
     answer_index: 2
     vocab:
     - word: feedback loop
@@ -1322,8 +1307,7 @@ practice:
       넘지 않게, 직원의 직계 가족을 위한 질병으로”'
     options:
     - for a period of no longer than three hours를 '세 시간을 넘지 않는 기간 동안'으로 옮긴 부분.
-    - illness in the employee's immediate family의 in구를 illness에 제대로 걸지 못했다 — in구는
-      바로 앞 illness를 수식해 '직계 가족의 질병'이다.
+    - illness in the employee's immediate family의 in구를 illness에 제대로 걸지 못한 부분.
     - no more than once a month를 '한 달에 한 번을 넘지 않게'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1492,7 +1476,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “모든 비선형 시스템은 혼돈적이며, 그렇게 되기 위해 특정
       지점 너머로 밀려나야 한다.”'
     options:
-    - 문두 Nor의 부정 극성을 놓쳐 'Nor are all ~ chaotic'을 긍정('모두 혼돈적이다')으로 뒤집어 읽었다.
+    - 문두 Nor의 부정 극성을 놓쳐 'Nor are all ~ chaotic'을 긍정('모두 혼돈적이다')으로 뒤집어 읽은 부분.
     - to become so ~ pushed beyond a certain point를 '그렇게 되려면 특정 지점 너머로 밀려나야 한다'로 옮긴
       부분.
     - called a bifurcation을 '분기점이라 불리는'으로 옮긴 부분.
@@ -1524,7 +1508,7 @@ practice:
     options:
     - in terms of time, cost and comfort를 '시간·비용·편의 면에서'로 옮긴 부분.
     - the very process of moving around in cities를 '도시에서 이동하는 과정 자체'로 옮긴 부분.
-    - '''Not only is it less convenient''의 부정(덜 편함) 극성을 놓쳐 ''편리해서 이롭다''로 뒤집어 읽었다.'
+    - '''Not only is it less convenient''의 부정(덜 편함) 극성을 놓쳐 ''편리해서 이롭다''로 뒤집어 읽은 부분.'
     answer_index: 2
     vocab:
     - word: convenient
@@ -1577,8 +1561,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “또한 어떤 비선형 시스템도 혼돈적이지 않다.”'
     options:
     - chaotic을 '혼돈적'으로 옮긴 부분.
-    - '''all nonlinear systems ... not''을 전체부정으로 읽어, 부분부정(''모두가 ~은 아니다'')을 ''어떤 것도
-      아니다''로 옮겼다.'
+    - '''all nonlinear systems ... not''을 전체부정(''어떤 것도 아니다'')으로 읽은 부분.'
     - 문두 Nor를 앞 내용에 이어지는 부정('~도 아니다')으로 받은 부분.
     answer_index: 1
     vocab:
@@ -1672,7 +1655,7 @@ practice:
     options:
     - at the scales, accuracy, and precision most useful to ~를 '~에 가장 유용한 규모, 정확도,
       정밀도에서'로 옮긴 부분.
-    - '''not only ... unprecedented''의 A를 부정으로 읽어 ''A가 아니라 B''로 옮겼다(A·B 둘 다 긍정).'
+    - '''not only ... unprecedented''의 A를 부정으로 읽어 ''A가 아니라 B''로 옮긴 부분.'
     - unpredictable을 '예측 불가능한'으로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1703,8 +1686,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “대안 중에서 선택하고 결정을 내리는 방법을 배우는 것은 좋은
       개인적 가치관을 요구하지만, 해당 사업 분야의 지식 역량은 요구하지 않는다.”'
     options:
-    - '''but also knowledge competence''의 B를 ''요구하지 않는다''로 부정해 읽었다(A·B 모두 requires의
-      목적어).'
+    - '''but also knowledge competence''의 B를 ''요구하지 않는다''로 부정해 읽은 부분.'
     - Learning how to choose from alternatives and make a decision을 '대안 중 선택하고 결정
       내리는 방법을 배우는 것'으로 옮긴 부분.
     - good personal values를 '좋은 개인적 가치관'으로 옮긴 부분.
@@ -1739,8 +1721,7 @@ practice:
     options:
     - an incredible variety of ways를 '놀랄 만큼 다양한 방식'으로 옮긴 부분.
     - like a kind of motto or a connective thread를 '일종의 모토나 연결하는 실처럼'으로 옮긴 부분.
-    - throughout의 목적어인 'but the remaining three movements'(B, 나머지 세 악장)를 빠뜨리고 A(1악장)만
-      옮겼다.
+    - throughout의 목적어인 'but the remaining three movements'(나머지 세 악장)를 빠뜨린 부분.
     answer_index: 2
     vocab:
     - word: movement
@@ -1826,8 +1807,7 @@ practice:
       이긴 선수의 발각되지 않는 부정행위로 해석하는 경향이 있다.”'
     options:
     - the work of Fortune을 '행운의 작품'으로 옮긴 부분.
-    - '''clever and undetectable cheating''을 and로 묶인 한 덩어리로 보지 않고 clever만 앞쪽(A)에 붙여
-      either/or 짝을 잘못 끊었다.'
+    - '''clever and undetectable cheating''을 clever만 앞쪽(A)에 붙여 either/or 짝을 잘못 끊은 부분.'
     - on the part of the winning player를 '이긴 선수 쪽의'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -1864,7 +1844,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리 의식을 현재, 과거, 미래로 나누는 것이 허구이자 기이한
       것이며 자기 지시적인 틀이라는 것을.”'
     options:
-    - both A and B의 B에서 'oddly'를 self-referential를 꾸미는 부사로 보지 않고 독립 요소로 떼어 세 요소로 쪼갰다.
+    - both A and B의 B에서 'oddly'를 독립 요소로 떼어 세 요소로 쪼갠 부분.
     - a fiction을 '허구'로 옮긴 부분.
     - the segregation of our consciousness into present, past, and future를 '의식을 현재·과거·미래로
       나누는 것'으로 옮긴 부분.
@@ -1899,7 +1879,7 @@ practice:
     options:
     - the remaining three movements를 '나머지 세 악장'으로 옮긴 부분.
     - the opening movement를 '첫 악장'으로 옮긴 부분.
-    - '''not only''를 ''오직 ~이 아니라(A 배제)''로 읽어 첫 악장을 제외하고 나머지 세 악장에만 국한했다.'
+    - '''not only''를 ''오직 ~이 아니라(A 배제)''로 읽어 나머지 세 악장에만 국한한 부분.'
     answer_index: 2
     vocab:
     - word: appears
@@ -2010,7 +1990,7 @@ practice:
     options:
     - In the absence of a universal standard or law를 '보편적 기준이나 법이 없을 때'로 옮긴 부분.
     - the end justifies the means를 '목적이 수단을 정당화한다'로 옮긴 부분.
-    - '''what matters''의 what을 의문사(''무엇이'')로 읽었다(실은 ''중요한 것''이라는 명사절 주어).'
+    - '''what matters''의 what을 의문사(''무엇이'')로 읽은 부분.'
     answer_index: 2
     vocab:
     - word: in the absence of
@@ -2035,8 +2015,7 @@ practice:
     source: 2026 고3 11월 38번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “네가 무엇을 단지 몇 번의 불운한 경우에 경험했는지에 의해.”'
     options:
-    - '''by what you''ve experienced''의 what을 간접의문문(''무엇을 ~했는지'')으로 읽었다(실은 by의 목적어
-      명사절 ''경험한 것'').'
+    - '''by what you''ve experienced''의 what을 간접의문문(''무엇을 ~했는지'')으로 읽은 부분.'
     - on just a few unfortunate occasions를 '단지 몇 번의 불운한 경우에'로 옮긴 부분.
     - you've experienced를 '(네가) 경험한'으로 옮긴 부분.
     answer_index: 0
@@ -2065,8 +2044,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “무엇이 도덕 경제라고 불려 왔는가의 일부.”'
     options:
     - a moral economy를 '도덕 경제'로 옮긴 부분.
-    - '''what has been called a moral economy''의 what을 의문사(''무엇이 ~인가'')로 읽었다(실은 of의
-      목적어 명사절 ''~라고 불려 온 것'').'
+    - '''what has been called a moral economy''의 what을 의문사(''무엇이 ~인가'')로 읽은 부분.'
     - Labor sharing groups are part of ~를 '노동 공유 집단은 ~의 일부이다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -2182,8 +2160,7 @@ practice:
     - precise matches between an organism and its environment를 '유기체와 그 환경 사이의 정밀한
       일치'로 옮긴 부분.
     - may equally be seen as constraints를 '똑같이 제약으로 여겨질 수 있다'로 옮긴 부분.
-    - '''much of what we now see as ~''에서 what을 관계대명사로, much를 명사로 보지 않고 의문사·정도부사로
-      읽어 주어 덩어리(''~것의 상당 부분'')를 놓쳤다.'
+    - '''much of what we now see as ~''에서 what을 의문사, much를 정도부사로 읽은 부분.'
     answer_index: 2
     vocab:
     - word: precise
@@ -2216,8 +2193,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그것은 나에게 인생의 힘든 도전에 맞서 살아가는 데 필요한
       수단이 무엇인지 보여준다.”'
     options:
-    - '''what it means to live''의 means를 동사가 아니라 명사 ''수단''으로 읽어 가주어 it·진주어 to live
-      구조를 놓쳤다.'
+    - '''what it means to live''의 means를 명사 ''수단''으로 읽은 부분.'
     - facing life's tough challenges를 '인생의 힘든 도전에 맞서'로 옮긴 부분.
     - It shows me ~를 '그것은 나에게 ~을 보여준다'로 옮긴 부분.
     answer_index: 0
@@ -2372,7 +2348,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “음향 그래프가 이 연습 기간 동안 드러나고, 그 새는 기억된
       원형의 정확한 복제를 만들어 낼 때까지 노력을 미세 조정한다.”'
     options:
-    - reveal을 '드러나다(자동사)'로 보고 that절을 별개 문장으로 끊었다 — that은 reveal의 목적어 명사절.
+    - reveal을 '드러나다(자동사)'로 보고 that절을 별개 문장으로 끊은 부분.
     - over several weeks or months를 '몇 주나 몇 달에 걸쳐'로 옮긴 부분.
     - fine-tunes his efforts를 '노력을 미세 조정한다'로 옮긴 부분.
     answer_index: 0
@@ -2405,8 +2381,7 @@ practice:
       사회적 규범이 깨진 것으로 인식하며, 그것은 실수에 대한 사과이다.”'
     options:
     - that a social norm has been broken을 recognize의 목적어 '사회적 규범이 깨졌다는 것을'로 옮긴 부분.
-    - 첫 번째 that을 signal을 목적어로 받는 관계사로 보아 '그 신호를 우리가 인식한다'로 읽었다(실은 signal의 동격 '~라는
-      신호').
+    - 첫 번째 that을 signal을 목적어로 받는 관계사로 보아 '그 신호를 우리가 인식한다'로 읽은 부분.
     - it is an apology for a faux pas를 '그것은 실수에 대한 사과이다'로 옮긴 부분.
     answer_index: 1
     vocab:
@@ -2441,8 +2416,7 @@ practice:
     - when we are astonished by someone with publications in different scientific
       fields를 '서로 다른 과학 분야에 출판물을 낸 누군가에게 놀랄 때'로 옮긴 부분.
     - each topic was explored를 '각 주제가 탐구되었다'로 옮긴 부분.
-    - realize 뒤의 that을 period를 꾸미는 관계사로 보아 '그 특정 기간을 깨달아라'로 읽었다(실은 that절 전체가 realize의
-      목적어절).
+    - realize 뒤의 that을 period를 꾸미는 관계사로 보아 '그 특정 기간을 깨달아라'로 읽은 부분.
     answer_index: 2
     vocab:
     - word: astonished
@@ -2555,8 +2529,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “감정을 표현하는 것이 적절한 사회적 맥락을 우리가 특정 문화에서
       배운다는 (바로 그) 문화에 따라.”'
     options:
-    - 두 번째 that을 앞의 culture를 꾸미는 관계사/동격으로 보아 '~하는 문화'로 읽었다(실은 say의 두 번째 목적어절을 이끄는
-      접속사 that).
+    - 두 번째 that을 앞의 culture를 꾸미는 관계사/동격으로 보아 '~하는 문화'로 읽은 부분.
     - how we interpret, categorize, and name emotions varies according to culture를
       '우리가 감정을 해석·분류·명명하는 방식이 문화에 따라 다르다'로 옮긴 부분.
     - the social context in which it is appropriate to express emotions를 '감정을 표현하는
@@ -2599,8 +2572,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “이성은 오해를 불러일으키는 그 지각을 결론짓는다.”'
     options:
     - even after the perspectival correction is applied를 '원근 보정이 적용된 후에도'로 옮긴 부분.
-    - concludes 뒤의 that을 perception을 꾸미는 관계대명사로 보아 '오해를 불러일으키는 그 지각'으로 읽었다(뒤 절이 완전하므로
-      목적어절 접속사 that).
+    - concludes 뒤의 that을 perception을 꾸미는 관계대명사로 보아 '오해를 불러일으키는 그 지각'으로 읽은 부분.
     - the figure still appears small을 '그 형상은 여전히 작아 보인다'로 옮긴 부분.
     answer_index: 1
     vocab:

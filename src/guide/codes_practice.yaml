@@ -8,7 +8,7 @@ practice:
     options:
     - ‘When our worries exceed our control’을 ‘걱정이 통제를 넘어서면’으로 옮긴 부분
     - however를 ‘그러나’로 이어 문맥을 잡은 부분
-    - ‘they cause us unnecessary suffering’에서 원인(걱정)과 결과(고통)를 뒤바꿔 읽은 부분
+    - ‘they cause us unnecessary suffering’을 ‘고통이 걱정을 밀어낸다’로 읽은 부분
     answer_index: 2
     vocab:
     - word: exceed
@@ -34,7 +34,7 @@ practice:
     source: 2024 고3 9월 29번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인구 과잉과 무계획적 성장을 초래하는 모든 범죄·악·비참함”'
     options:
-    - ‘that result from ~’을 ‘초래하는’으로 옮겨 결과를 원인으로 뒤집은 부분
+    - ‘that result from ~’을 ‘~을 초래하는’으로 읽은 부분
     - ‘the largest city in the world’를 ‘세계에서 가장 큰 도시’로 옮긴 부분
     - ‘crime, evil, and misery’를 ‘범죄·악·비참함’으로 옮긴 부분
     answer_index: 0
@@ -64,7 +64,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “얼마나 많은 성공·실패가 그 시나리오들로 이어지는지”'
     options:
     - ‘analyze all the possible scenarios’를 ‘모든 가능한 시나리오를 분석하다’로 옮긴 부분
-    - ‘what proportion of them lead to ~’에서 주어(시나리오 비율)와 결과(성공·실패)를 뒤바꾼 부분
+    - ‘what proportion of them lead to ~’를 ‘성공·실패가 시나리오로 이어진다’로 읽은 부분
     - ‘that the future holds’를 ‘미래가 품고 있는’으로 옮긴 부분
     answer_index: 1
     vocab:
@@ -95,7 +95,7 @@ practice:
     options:
     - ‘naturally unstable’을 ‘본래 불안정하다’로 옮긴 부분
     - ‘variable weather patterns’를 ‘변덕스러운 날씨’로 옮긴 부분
-    - ‘due to ... that result from ...’의 인과 방향을 뒤집어 시장 불안정을 원인으로 읽은 부분
+    - ‘due to ... that result from ...’을 ‘시장이 불안정해서 날씨가 변한다’로 읽은 부분
     answer_index: 2
     vocab:
     - word: unstable
@@ -123,7 +123,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게
       한다.”'
     options:
-    - ‘which can ... cause violence ...’의 주어를 선거·폭력·공황으로 착각해 인과를 뒤집은 부분
+    - ‘which can ... cause violence ...’를 ‘선거·폭력·공황이 정보를 만들게 한다’로 읽은 부분
     - ‘unknowingly participate’를 ‘자신도 모르게 가담하다’로 옮긴 부분
     - ‘creating and circulating misinformation’을 ‘잘못된 정보를 만들고 퍼뜨리는 것’으로 옮긴 부분
     answer_index: 0
@@ -309,7 +309,7 @@ practice:
     options:
     - ‘such commercialization risks ... becoming homogeneous’를 ‘획일화될 위험을 초래한다’로 옮긴
       부분
-    - ‘that could lead to a dilution of audiences’의 방향을 뒤집어 관객 약화를 원인으로 읽은 부분
+    - ‘that could lead to a dilution of audiences’를 ‘관객 약화가 상업화 위험을 낳는다’로 읽은 부분
     - ‘losing its original message’를 ‘원래의 메시지를 잃는 것’으로 옮긴 부분
     answer_index: 1
     vocab:
@@ -343,7 +343,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에
       띈다.”'
     options:
-    - ‘rather than walking’을 무시해 걷는 사람을 눈에 띄는 대상으로 잡은 부분
+    - ‘rather than walking’을 ‘걷고 있는 사람들이 눈에 띈다’로 읽은 부분
     - ‘standing or sitting in squares’를 ‘광장에 서 있거나 앉아 있는’으로 옮긴 부분
     - ‘that is conspicuous’를 ‘눈에 띄는’으로 옮긴 부분
     answer_index: 0
@@ -397,7 +397,7 @@ practice:
     options:
     - ‘the truth of the matter’를 ‘그 문제의 진실’로 옮긴 부분
     - ‘rational representation’을 ‘이성적 표상’으로 옮긴 부분
-    - ‘not in A but in B’를 ‘A와 B 둘 다’로 읽어 앞의 지각을 부정하지 않은 부분
+    - ‘not in A but in B’를 ‘A와 B 둘 다’로 읽은 부분
     answer_index: 2
     vocab:
     - word: perception
@@ -453,7 +453,7 @@ practice:
       직원들의 관점은 그 건물을 정기적으로 사용하는 의료진의 관점과 크게 다르지 않을 것이다.”'
     options:
     - ‘may serve as your client’를 ‘고객 역할을 할 수도 있다’로 옮긴 부분
-    - While을 ‘~하는 동안’으로, differ from을 ‘다르지 않다’로 뒤집어 대조를 무너뜨린 부분
+    - While을 ‘~하는 동안’으로, differ from을 ‘다르지 않다’로 읽은 부분
     - ‘who use the building regularly’를 ‘건물을 정기적으로 사용하는’으로 옮긴 부분
     answer_index: 1
     vocab:
@@ -511,7 +511,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하는 동안,
       그들 자신도 함께 움직여야 한다.”'
     options:
-    - ‘while they themselves do not need to move at all’을 ‘함께 움직여야 한다’로 뒤집은 부분
+    - ‘while they themselves do not need to move at all’을 ‘함께 움직여야 한다’로 읽은 부분
     - ‘move money, things and people’을 ‘돈, 물건, 사람을 움직이다’로 옮긴 부분
     - ‘elites exercise their power’를 ‘엘리트들이 힘을 행사한다’로 옮긴 부분
     answer_index: 0
@@ -571,7 +571,7 @@ practice:
     options:
     - ‘sufficient fresh snow must accumulate’를 ‘충분한 새 눈이 쌓여야 한다’로 옮긴 부분
     - ‘glaciers may expand or contract’를 ‘빙하가 팽창하거나 수축한다’로 옮긴 부분
-    - although를 ‘~때문에/그래서’의 인과로 바꿔 앞뒤 대조(양보)를 지운 부분
+    - although를 ‘~때문에·그래서’로 읽은 부분
     answer_index: 2
     vocab:
     - word: accumulate
@@ -635,7 +635,7 @@ practice:
     source: 2023 고3 6월 23번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 앞과는 다른 새로운 예산 원칙을 세운다.”'
     options:
-    - ‘In other words’를 앞 내용의 재진술이 아니라 새 정보로 읽은 부분
+    - ‘In other words’를 앞과 다른 새 정보로 읽은 부분
     - ‘struggle to survive in a competitive economy’를 ‘경쟁 경제에서 살아남으려 애쓴다’로 옮긴 부분
     - ‘parts of themselves that are consumable’을 ‘소비 가능한 부분’으로 옮긴 부분
     answer_index: 0
@@ -700,7 +700,7 @@ practice:
     options:
     - ‘Roads are there all the time’을 ‘도로는 항상 그 자리에 있다’로 옮긴 부분
     - ‘the most important fact’를 ‘가장 중요한 사실’로 옮긴 부분
-    - ‘the fact that distinguishes them’을 ‘구별하기 어렵다’는 부정 의미로 읽은 부분
+    - ‘the fact that distinguishes them’을 ‘구별하기 어렵다’로 읽은 부분
     answer_index: 2
     vocab:
     - word: distinguish
@@ -726,7 +726,7 @@ practice:
     source: 2022 고3 9월 40번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “특히 그들은 집단에게 두 명 이상의 사람이 되라고 요구한다.”'
     options:
-    - ‘define a group as ...’의 as를 ‘~되도록/요구’로 읽어 A=B 등호를 깬 부분
+    - ‘define a group as ...’의 as를 ‘~되라고 요구’로 읽은 부분
     - ‘interact with ... each other’를 ‘서로 상호작용한다’로 옮긴 부분
     - ‘exert mutual influences on each other’를 ‘상호 영향을 주고받는다’로 옮긴 부분
     answer_index: 0
@@ -756,8 +756,7 @@ practice:
       근거를 강화한다.”'
     options:
     - ‘countless examinations of the fossil record’를 ‘무수한 화석 기록 조사’로 옮긴 부분
-    - ‘The fact that we have not found ...’의 that을 관계사(‘찾아낸 사실’)로 읽고 not found를 놓친
-      부분
+    - ‘The fact that we have not found ...’을 ‘우리가 찾아낸 사실’로 읽은 부분
     - ‘strengthens the case for evolutionary theory’를 ‘진화론의 근거를 강화한다’로 옮긴 부분
     answer_index: 1
     vocab:
@@ -987,7 +986,7 @@ practice:
     options:
     - ‘recall as much as they can remember’를 ‘기억나는 만큼 회상한다’로 옮긴 부분
     - ‘given hints about what they need to remember’를 ‘기억할 것에 대한 단서를 받는다’로 옮긴 부분
-    - ‘better retention than cued recall tests’의 우열을 뒤집어 단서 회상을 우위로 읽은 부분
+    - ‘better retention than cued recall tests’를 ‘단서 회상이 더 낫다’로 읽은 부분
     answer_index: 2
     vocab:
     - word: free recall
@@ -1018,7 +1017,7 @@ practice:
       더 중요하기 때문에”'
     options:
     - ‘will not admit to the same fouls or violations’를 ‘같은 반칙을 인정하지 않는다’로 옮긴 부분
-    - ‘winning is more important than expressing ...’의 우열을 뒤집어 염려 표현을 우위로 읽은 부분
+    - ‘winning is more important than expressing ...’을 ‘염려 표현이 더 중요하다’로 읽은 부분
     - ‘once an organized game is played with officials’를 ‘심판이 있는 조직화된 경기가 열리면’으로 옮긴
       부분
     answer_index: 1
@@ -1048,7 +1047,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러한 정보 없이 결정을 내릴 때 승리 가능성을 극대화하는
       결정에 도달할 가능성이 더 높다”'
     options:
-    - ‘than if it takes a decision without such information’을 유리한 쪽으로 뒤집어 읽은 부분
+    - ‘than if it takes a decision without such information’을 ‘정보 없이가 더 유리하다’로 읽은 부분
     - ‘taking a little extra time to collect information’을 ‘정보 수집에 약간의 시간을 더 들여’로
       옮긴 부분
     - ‘maximizes its chances of winning’을 ‘승리 가능성을 극대화한다’로 옮긴 부분
@@ -1082,8 +1081,7 @@ practice:
     options:
     - ‘who can communicate by only one word at a time’을 ‘한 번에 한 단어로만 의사소통하는’으로 옮긴
       부분
-    - ‘superior to any system utilized by any other animal’의 우열을 뒤집어 동물 체계를 우위로 읽은
-      부분
+    - ‘superior to any system utilized by any other animal’을 ‘동물 체계가 더 우월하다’로 읽은 부분
     - ‘uses a system for communication’을 ‘의사소통 체계를 사용한다’로 옮긴 부분
     answer_index: 1
     vocab:
@@ -1116,7 +1114,7 @@ practice:
     - ‘have a market incentive’을 ‘시장 유인이 있다’로 옮긴 부분
     - ‘carbon capture, wildlife habitat, flood protection’을 ‘탄소 포집·야생 동물 서식지·홍수 방지’로
       옮긴 부분
-    - ‘cut down trees rather than manage the forest’의 택함(벌목)과 배제(관리)를 뒤바꾼 부분
+    - ‘cut down trees rather than manage the forest’를 ‘베어내기보다 숲을 관리할’로 읽은 부분
     answer_index: 2
     vocab:
     - word: incentive
@@ -1256,8 +1254,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “탄소 포집, 야생동물 서식지, 홍수 방지 등 생태계 서비스를
       위해 나무를 베어내기보다는 숲을 관리할”'
     options:
-    - ‘cut down trees rather than manage the forest’에서 A(벌목)와 B(관리)를 뒤집어 관리를 택한 것으로
-      읽은 부분
+    - ‘cut down trees rather than manage the forest’를 ‘베어내기보다 숲을 관리할’로 읽은 부분
     - ‘a market incentive’을 ‘시장 유인’으로 옮긴 부분
     - ‘other ecosystem services’를 ‘기타 생태계 서비스’로 옮긴 부분
     answer_index: 0
@@ -1356,7 +1353,7 @@ practice:
     options:
     - '''through its passivity''를 ''그 수동성을 통해''로 옮긴 부분인가?'
     - '''by implying''을 ''암시함으로써''로 처리한 부분인가?'
-    - '''thus''를 역접 ''그러나''로 옮겨 인과(따라서) 관계를 뒤집은 곳'
+    - '''thus''를 ''그러나''로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: inaction
@@ -1386,7 +1383,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그럼에도 불구하고 아이에게 숙제를 시키는 부모는, 스스로
       알아서 숙제하는 아이를 갖게 된다.”'
     options:
-    - '''Thus''를 역접 ''그럼에도 불구하고''로 옮겨 인과(따라서)를 뒤집은 곳'
+    - '''Thus''를 ''그럼에도 불구하고''로 옮긴 부분인가?'
     - '''parents ... to do homework''를 ''숙제를 시키는 부모''로 옮긴 부분인가?'
     - '''have a child''를 ''아이를 갖게 된다''로 옮긴 부분인가?'
     answer_index: 0
@@ -1417,7 +1414,7 @@ practice:
       일이 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.”'
     options:
     - '''results that were of interest to the media''를 ''언론이 관심 가질 결과''로 옮긴 부분인가?'
-    - '''consequently''를 ''반대로''라는 역접으로 옮겨 결과(그 결과) 관계를 뒤집은 곳'
+    - '''consequently''를 ''반대로''로 옮긴 부분인가?'
     - '''it was unusual ... to have results''를 ''결과를 내는 일이 드물었다''로 옮긴 부분인가?'
     answer_index: 1
     vocab:
@@ -1449,7 +1446,7 @@ practice:
     options:
     - '''some critics, who admire his work''를 ''작품을 높이 평가하는 비평가들''로 옮긴 부분인가?'
     - '''his extensive use of computers''를 ''컴퓨터를 광범위하게 사용하는 것''으로 옮긴 부분인가?'
-    - '''Moreover''를 역접 ''그러나''로 옮겨 첨가(게다가) 관계를 뒤집은 곳'
+    - '''Moreover''를 ''그러나''로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: admire
@@ -1478,7 +1475,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “반면 초보자도 각 구성 기술에서 똑같은 유창함과 자동성을
       갖추어, 전문가만큼 쉽게 기술을 결합한다.”'
     options:
-    - '''have not achieved the same degree''를 ''똑같은 ... 갖추어''로 옮겨 대조(반면)를 무너뜨린 곳'
+    - '''have not achieved the same degree''를 ''똑같은 정도를 갖추어''로 옮긴 부분인가?'
     - '''on the other hand''를 ''반면''으로 옮긴 부분인가?'
     - '''fluency and automaticity''를 ''유창함과 자동성''으로 옮긴 부분인가?'
     answer_index: 0
@@ -1658,7 +1655,7 @@ practice:
     - '''Improving the quality of alternative options''를 ''대안 수단의 질을 높이는 것''으로 옮긴
       부분인가?'
     - '''of this strategy''를 ''이 전략의''로 옮긴 부분인가?'
-    - '''a central element''를 ''여러 요소 중 하나''로 약화해 강조를 지운 곳'
+    - '''a central element''를 ''여러 요소 중 하나''로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: alternative
@@ -1684,7 +1681,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이
       있다.”'
     options:
-    - '''are fundamental to''를 ''무관하지 않다·어느 정도 관련''으로 약화한 곳'
+    - '''are fundamental to''를 ''무관하지 않다·어느 정도 관련''으로 옮긴 부분인가?'
     - '''moral questions''를 ''도덕적 질문''으로 옮긴 부분인가?'
     - '''the imposition of tax''를 ''세금 부과''로 옮긴 부분인가?'
     answer_index: 0
@@ -1715,7 +1712,7 @@ practice:
       의사결정 과정에 간접적으로 관여한다.”'
     options:
     - '''the various options''를 ''여러 선택지''로 옮긴 부분인가?'
-    - '''directly contributing ... vital information''을 ''간접적으로 ... 대략''으로 약화한 곳'
+    - '''directly contributing ... vital information''을 ''간접적으로 ... 대략''으로 옮긴 부분인가?'
     - '''the decision-making process''를 ''의사결정 과정''으로 옮긴 부분인가?'
     answer_index: 1
     vocab:
@@ -1748,7 +1745,7 @@ practice:
     - '''when the new information is only slightly new''를 ''새 정보가 조금만 새로울 때''로 옮긴
       부분인가?'
     - '''The adjustments''를 ''조정''으로 옮긴 부분인가?'
-    - '''are clearly smallest''의 ''clearly''를 ''다소 불분명''으로 뒤집은 곳'
+    - '''are clearly smallest''의 ''clearly''를 ''다소 불분명''으로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: adjustment
@@ -1892,7 +1889,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의
       더 제멋대로이고 상상력 넘치는 말하기·사고방식을 발견하게 될 수 있다.”'
     options:
-    - '''we may miss''의 ''miss''를 ''발견하게 될 수 있다''로 뒤집은 곳'
+    - '''we may miss''의 ''miss''를 ''발견하게 될 수 있다''로 옮긴 부분인가?'
     - '''an essential and pervasive characteristic''를 ''본질적이고 널리 퍼진 특성''으로 옮긴 부분인가?'
     - 콜론 뒤 '아이들의 제멋대로이고 상상력 넘치는 말하기·사고방식'으로 옮긴 부분인가?
     answer_index: 0
@@ -1962,7 +1959,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “응급 상황은 결코 그렇게 명확히 표시되지 않는다.”'
     options:
     - '''Emergencies''를 ''응급 상황''으로 옮긴 부분인가?'
-    - '''not always''를 ''결코 ~않는다''는 전체부정으로 읽은 곳'
+    - '''not always''를 ''결코 ~않는다''로 옮긴 부분인가?'
     - '''clearly labeled as such''를 ''그렇게 명확히 표시되다''로 옮긴 부분인가?'
     answer_index: 1
     vocab:
@@ -1993,7 +1990,7 @@ practice:
     options:
     - '''make snap judgments''를 ''성급한 판단을 하다''로 옮긴 부분인가?'
     - '''we often''을 ''우리는 흔히''로 옮긴 부분인가?'
-    - '''no real judgments at all''을 ''진정한 판단을 조금은 한다''로 뒤집은 곳'
+    - '''no real judgments at all''을 ''진정한 판단을 조금은 한다''로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: subjective
@@ -2022,7 +2019,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는
       규제가 있다.”'
     options:
-    - '''there are no regulations''를 ''규제가 있다''로 뒤집은 곳'
+    - '''there are no regulations''를 ''규제가 있다''로 옮긴 부분인가?'
     - '''a kindergarten teacher ... offering medical advice''를 ''유치원 교사가 의학적 조언을 제공하는
       것''으로 옮긴 부분인가?'
     - '''preventing''을 ''막는''으로 옮긴 부분인가?'
@@ -2055,7 +2052,7 @@ practice:
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “광고가 내세우는 자연은 여전히 그 식품을 만들어 낸 자연이었다.”'
     options:
     - '''the nature claimed by the ads''를 ''광고가 내세우는 자연''으로 옮긴 부분인가?'
-    - '''no longer''를 ''여전히 ~이었다''로 뒤집은 곳'
+    - '''no longer''를 ''여전히 ~이었다''로 옮긴 부분인가?'
     - '''the nature that created the foods''를 ''그 식품을 만들어 낸 자연''으로 옮긴 부분인가?'
     answer_index: 1
     vocab:
@@ -2086,7 +2083,7 @@ practice:
     options:
     - '''for being second or third''를 ''2등이나 3등을 하는 것''으로 옮긴 부분인가?'
     - '''meaning that''을 ''~을 의미한다''로 옮긴 부분인가?'
-    - '''there are no rewards''를 ''보상이 있다''로 뒤집은 곳'
+    - '''there are no rewards''를 ''보상이 있다''로 옮긴 부분인가?'
     answer_index: 2
     vocab:
     - word: describe A as B
