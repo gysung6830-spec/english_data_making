@@ -127,8 +127,8 @@ def mock_part2() -> Part2:
                 [{"phrase": "who both want to play in college", "kind": "관계사절",
                   "connector": "~하는", "meaning": "둘 다 대학에서 (운동을) 뛰고 싶어하는"}],
                 "둘 다 대학에서 뛰고 싶어하는 두 선수를 생각해 보라.",
-                "즉, '둘 다 대학에서 뛰고 싶어하는' 선수가 두 명 있다는 것 — 목표가 같은 두 사람을 상정한 문장. "
-                "(그 다음에 무엇을 할지는 이 문장엔 없다.)",
+                "'둘 다 대학에서 뛰고 싶어하는' 선수 두 명, 곧 목표가 같은 두 사람을 세워 둔 문장이다. "
+                "(둘이 뭘 할지는 뒤에 이어질 이야기다.)",
                 "다음 문장에서 who~ 절에 직접 괄호쳐 보자.",
                 para="Picture two athletes who each hope to compete at the college level.",
                 subj="두 선수 two athletes", act="(독자에게) 생각해 보라",
@@ -164,7 +164,7 @@ def mock_part2() -> Part2:
                 [{"phrase": "or more appropriately, the laptop", "kind": "삽입(동격)",
                   "connector": "즉", "meaning": "더 정확히 말하면 노트북"}],
                 "요즘 세대 예술가에게 컴퓨터, 더 정확히는 노트북은 여러 지능형 도구 중 하나다.",
-                "즉, 요즘 예술가에겐 노트북이 특별한 게 아니라 붓·물감처럼 흔한 작업 도구일 뿐이라는 뜻.",
+                "요즘 예술가에겐 노트북이 특별한 물건이 아니라 붓·물감처럼 흔한 작업 도구일 뿐이라는 얘기다.",
             )],
         ),
         SyntaxChapter(
@@ -181,7 +181,7 @@ def mock_part2() -> Part2:
                  {"phrase": "for our summer swim camp", "kind": "전치사구",
                   "connector": "~을 위한", "meaning": "저희 여름 수영 캠프를 위해"}],
                 "지난주에 저는 여름 수영 캠프를 위해 귀사의 수영장 중 하나를 예약했습니다.",
-                "즉, '무엇을·무엇을 위해'는 전치사구가 담당할 뿐, 뼈대는 그냥 '예약했다'이다.",
+                "'무엇을·무엇을 위해'는 전치사구가 맡을 뿐, 뼈대는 그냥 '예약했다'이다.",
             )],
         ),
         SyntaxChapter(
@@ -218,7 +218,7 @@ def mock_part2() -> Part2:
                   "connector": "~면에서", "meaning": "시간·비용·편의 면에서"}],
                 "도시에서 (시간·비용·편의 면에서) 장소에 접근하기가 덜 편할 뿐 아니라, 도시를 "
                 "돌아다니는 과정 자체가 여러 부정적 외부효과를 낳는다.",
-                "즉, 도시 이동은 '불편하다'로 끝이 아니라, 그 이동이 매연·혼잡 같은 사회적 비용까지 만든다는 이중고.",
+                "도시 이동은 '불편하다'로 끝이 아니라, 그 이동 자체가 매연·혼잡 같은 사회적 비용까지 낳는 이중고다.",
             )],
         ),
         SyntaxChapter(
@@ -253,8 +253,8 @@ def mock_part2() -> Part2:
                   "벗어난 표현적 일탈에 있다는"}],
                 "음악가와 심리학자뿐 아니라 열성적인 음악 애호가와 전문가들도, 음악의 아름다움은 "
                 "정확히 정해진 악보에서 벗어난 '표현적 일탈'에 있다는 의견을 자주 낸다.",
-                "즉, 악보를 완벽히 지킨 연주가 아니라 살짝 벗어나 감정을 실은 연주가 아름답다고 "
-                "전문가부터 애호가까지 입을 모은다는 뜻.",
+                "악보를 완벽히 지킨 연주가 아니라 살짝 벗어나 감정을 실은 연주가 아름답다고 "
+                "전문가부터 애호가까지 입을 모은다.",
                 "A(musicians and psychologists)와 B(enthusiasts and experts)에 각각 괄호쳐 보자.",
             )],
         ),
@@ -286,8 +286,8 @@ def mock_guide() -> Guide:
                 "이 능력이 식물 분열조직의 활동을 '일으킨다'(능력이 원인).",
                 "'be due to'는 역방향 — A(능력)가 원인이 아니라 결과다. 원인은 뒤(분열조직 활동).",
                 "이 능력은 식물 분열조직의 활동 '덕분에/때문에' 생긴다(활동이 원인).",
-                "즉, (이 능력)의 원인은 뿌리·줄기의 미분화 조직인 분열조직이 세포를 분열시키는 활동에 있다는 뜻. "
-                "('이 능력'이 무엇인지는 이 문장만으론 알 수 없어 그대로 둔다.)",
+                "(이 능력)의 원인은 뿌리·줄기의 미분화 조직인 분열조직이 세포를 분열시키는 활동에 있다. "
+                "('이 능력'이 정확히 무엇인지는 문장 밖 이야기라 그대로 둔다.)",
                 basis="근거: 동격〈regions of undifferentiated tissue … that can divide〉 — '활동'의 정체를 '세포를 분열시키는'으로 구체화. (this ability는 문장 밖이라 미해결로 둠)",
                 para="(This ability) exists because plant meristems—dividing tissue in roots "
                 "and shoots—are active.",
@@ -322,7 +322,7 @@ def mock_guide() -> Guide:
                 "동물과 마찬가지로, 그들(식물)도 새 기관을 만들 수 있기 때문이다.",
                 "'unlike'는 대조 — 동물과 ‘달리’다. 같은 방향으로 읽으면 식물과 동물의 대비가 사라진다.",
                 "동물과 ‘달리’ 그들(식물)은 평생에 걸쳐 새로운 기관과 조직을 만들 수 있기 때문이다.",
-                "즉, ‘동물은 못 하는데 식물은 한다’는 차이가 이 문장이 말하려는 핵심이다.",
+                "‘동물은 못 하는데 식물은 한다’ — 이 문장이 짚으려는 건 바로 그 차이다.",
                 subj="그들(식물) they", act="동물과 달리, 평생 새 기관·조직을 만든다",
                 cut="그것은 주로 ~때문이다(largely because) / 동물과 달리(unlike animals) / 그들(식물)은 만들 수 있다 / 새 기관·조직을 / 평생에 걸쳐(throughout their life cycle).",
                 cut_en="It is largely because, / unlike animals, / they can generate / new organs and tissues / throughout their life cycle.",
@@ -352,7 +352,7 @@ def mock_guide() -> Guide:
                 "그리고 또 다른 정보로, 박물관은 예산을 배정한다.",
                 "'in other words' 뒤는 새 정보가 아니라 앞 문장의 재진술(=)이다. 새 논점으로 세면 논지가 흩어진다.",
                 "다시 말해, 박물관은 경쟁 경제에서 살아남으려 예산을 ‘대중에게 공개되는 부분’에 우선 배정한다.",
-                "즉, 돈이 걸리니 박물관도 관람객 눈에 보이는 전시 위주로 예산을 쓴다는 뜻.",
+                "돈이 걸리니 박물관도 관람객 눈에 보이는 전시 위주로 예산을 쓴다는 얘기다.",
                 subj="박물관 예산 their budgets", act="대중에 공개되는 부분을 우선 배정한다",
                 cut="다시 말해(In other words) / 박물관이 살아남으려 애쓰며(as museums struggle to survive) / 경쟁 경제에서 / 그들의 예산은 흔히 우선시한다 / 대중에게 공개되는 부분을(those parts ~ open to the public).",
                 cut_en="In other words, / as museums struggle to survive / in a competitive economy, / their budgets often prioritise / those parts of themselves that are open to the public.",
@@ -390,7 +390,7 @@ def mock_guide() -> Guide:
                 "따라서 그 데이터는 문화마다 감정이 다름을 보여준다.",
                 "'however'는 역접 — 앞 내용을 뒤집는다. ‘따라서’로 읽으면 앞 주장을 그대로 이어받아 정반대가 된다.",
                 "하지만 그 데이터가 문화마다 감정이 ‘다르다’는 것을 실제로 보여주는 건 아니다.",
-                "즉, 겉보기 데이터와 달리, 감정을 뇌에 구현된 핵심 상태로 보면 문화 간 감정은 다르지 않다는 반박.",
+                "겉보기 데이터와 달리, 감정을 뇌에 구현된 핵심 상태로 보면 문화 간 감정은 다르지 않다는 반박이다.",
                 subj="그 데이터 those data", act="문화별 감정 차이를 '보여주지 못한다'",
                 cut="하지만(However) / 그 데이터는 실제로 보여주지 못한다(do not actually show) / 문화마다 감정이 다르다는 것을 / 감정을 ~로 본다면(if we think of emotions as) / 핵심적·신경적으로 구현된 상태로.",
                 cut_en="However, / those data do not actually show / that different cultures have different emotions, / if we think of emotions as / central, neurally implemented states.",
@@ -476,8 +476,8 @@ def mock_guide() -> Guide:
                 "디지털 기술을 쓰는 젊은 예술가들은 컴퓨터를 자주 언급한다.",
                 "'rarely(좀처럼 ~않다)'를 놓치면 문장 극성이 정반대가 되어 필자 의견과 완전히 멀어진다.",
                 "디지털 기술을 쓰는 젊은 현대 예술가들은 정작 컴퓨터를 ‘좀처럼 언급하지 않는다’.",
-                "즉, 디지털 기술을 도구로 쓰는 젊은 예술가인데도 정작 ‘컴퓨터’라는 말은 거의 꺼내지 않는다는 것. "
-                "(문장 안의 대비만으로 도출됨.)",
+                "디지털 기술을 도구로 쓰는 젊은 예술가인데도 정작 ‘컴퓨터’라는 말은 거의 꺼내지 않는다. "
+                "(이 대비는 문장 안에서 그대로 드러난다.)",
                 para="Although these young artists use digital tools, they seldom mention computers.",
                 subj="디지털 기술을 쓰는 젊은 예술가들", act="컴퓨터를 좀처럼 언급하지 않는다",
                 cut="젊은 현대 예술가들은(Young contemporary artists) / 작업에 디지털 기술을 쓰는(who employ digital technologies) / 좀처럼 ~않는다(rarely) / 컴퓨터를 언급하다(make reference to computers).",
@@ -490,7 +490,7 @@ def mock_guide() -> Guide:
                 "자연선택은 완벽한 개체의 진화로 이어질 가능성이 높다.",
                 "'unlikely to(~할 가능성이 없는)'를 놓치면 극성이 정반대 — 필자는 ‘이어지지 않는다’고 말하는 중이다.",
                 "자연선택이 완벽하고 최고로 적합한 개체의 진화로 이어질 가능성은 낮다.",
-                "즉, 자연선택으로는 ‘완벽하게 최적화된 개체’가 나오기 어렵다는 것. (무엇이 대신 나오는지는 이 문장엔 없다.)",
+                "자연선택으로는 ‘완벽하게 최적화된 개체’가 나오기 어렵다. (그럼 무엇이 나오는지까지는 이 문장이 말해 주지 않는다.)",
                 para="Natural selection will probably not produce perfectly, maximally fit individuals.",
                 subj="자연선택 natural selection", act="완벽한 개체의 진화로 이어지지 않는다",
                 cut="~라는 결론이 나온다(It follows that) / 자연선택은 / ~할 가능성이 낮다(is unlikely to) / 이어질 / 완벽하고 최고로 적합한 개체의 진화로.",

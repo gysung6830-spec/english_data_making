@@ -382,7 +382,7 @@ practice:
       wrong: 대부분의 수집 및 연구 범주들처럼 그것은 고정적이다.
       wrong_why: unlike(~와 달리)를 like(~처럼)로, static rather than fluid로 뒤집어 읽으면 대조가
         정반대로 무너진다.
-      author_msg: 다른 범주들은 고정적이지만 이것만은 예외적으로 계속 변한다는 점을 대비시킨다.
+      author_msg: 다른 범주들은 고정적이지만, 이것만은 예외적으로 계속 변한다.
       key_points:
       - '''unlike ... fluid rather than static'' : unlike를 ''~처럼''으로, fluid rather
         than static을 ''정적''으로 뒤집어 읽기 쉽다 → 다른 범주와 ''달리'' 그것은 ''정적이 아니라 유동적''.'
@@ -410,7 +410,7 @@ practice:
       cut: 그 문제의 진실은 / 드러난다 / 형상의 지각에서가 아니라 / 그것의 이성적 표상에서
       wrong: 형상의 지각과 그것의 이성적 표상 속에서 드러난다.
       wrong_why: not A but B를 'A와 B 둘 다'로 읽으면 앞의 A를 부정하는 대조가 사라진다.
-      author_msg: 진실은 눈에 보이는 형상 지각이 아니라 이성적 표상에서 드러난다는 것이 핵심.
+      author_msg: 진실은 눈에 보이는 형상 지각이 아니라 이성적 표상에서 드러난다.
       key_points:
       - '''not in A but in B'' : ''A와 B 둘 다''로 읽어 A를 살려두기 쉽다 → A(형상 지각)는 부정, 진실이 드러나는
         곳은 B(이성적 표상)뿐.'
@@ -468,7 +468,7 @@ practice:
         간호사 및 기타 의료진의 관점과
       wrong: 행정부가 고객 역할을 하는 동안, 행정 직원의 관점은 의료진의 관점과 다르지 않을 것이다.
       wrong_why: While을 '~하는 동안'으로, differ from을 '다르지 않다'로 뒤집으면 대조 구조가 정반대로 무너진다.
-      author_msg: 돈을 내는 고객(행정부)과 실제 건물 사용자(의료진)의 관점이 크게 갈린다는 점을 강조한다.
+      author_msg: 돈을 내는 고객(행정부)과 실제로 건물을 쓰는 사람(의료진)은 보는 눈이 크게 다르다.
       key_points:
       - '''While ... differ significantly from ~'' : While을 ''~하는 동안''으로, differ from을
         ''다르지 않다''로 뒤집으면 대조가 무너진다 → ''비록 ~이지만'' 두 관점은 ''크게 다르다''.'
@@ -496,7 +496,7 @@ practice:
         / 확립된 가정에 이의를 제기하고 새로운 연구 접근법을 제안하는 것
       wrong: 철학자들은 질문을 하고 확정적인 답도 제공하는 경향이 있다.
       wrong_why: rather than provide(제공하기보다는)를 'and 제공한다'로 읽으면 부정·대조가 사라져 의미가 뒤집힌다.
-      author_msg: 철학자의 역할은 정답 제시가 아니라 질문 던지기와 기존 가정에 도전하기에 있다는 점이 핵심.
+      author_msg: 철학자가 하는 일은 정답을 내놓기보다 질문을 던지고 기존 가정에 이의를 제기하는 데 있다.
       key_points:
       - '''ask questions rather than provide answers'' : rather than provide를 ''and
         제공한다''로 읽어 대조를 지우기 쉽다 → 택하는 쪽은 질문, provide answers는 배제됨.'
@@ -528,7 +528,7 @@ practice:
       wrong: 엘리트들이 힘을 행사하는 동안, 그들 자신도 함께 움직여야 한다.
       wrong_why: while을 '~하는 동안'으로 읽고 do not need to move를 놓치면 '남은 움직이나 자신은 안 움직인다'는
         대조가 사라진다.
-      author_msg: 엘리트는 세상을 움직이면서도 정작 자신은 움직이지 않는 '부동의 운동자'와 닮았다는 점을 대비한다.
+      author_msg: 엘리트는 세상을 움직이면서도 정작 자신은 꿈쩍하지 않는 '부동의 운동자'를 닮았다.
       key_points:
       - '''while they themselves do not need to move at all'' : while을 ''~하는 동안''으로
         읽고 do not ... at all을 놓치면 ''남은 움직이나 자신은 안 움직인다''는 대조가 사라진다 → while은 ''~인 반면'',
@@ -1791,7 +1791,7 @@ practice:
         국가들은 / 기근을 막으리라 기대할 수 없다 / 직접적 공적 개입을 수반하는 전문화된 자격 보호 장치 없이는
       wrong: 국가들이 빠르게 성장하면 기근을 막을 수 있다는 점이 중요하다.
       wrong_why: no matter how fast they grow(아무리 빨리 성장해도)를 조건으로 오해하면 필자의 강조점이 뒤집힌다
-        — 성장만으로는 안 되고 '직접 개입'이 필요하다는 것이 핵심.
+        — 성장만으로는 안 되고 '직접 개입'이 있어야 한다는 말이다.
       author_msg: 경제 성장 속도와 무관하게, 기근 방지에는 직접적 공적 개입 장치가 반드시 필요하다.
       key_points:
       - '''no matter how fast they grow ... cannot hope to prevent ... without ~''
@@ -2040,7 +2040,7 @@ practice:
       wrong: 인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는 규제가 있다.
       wrong_why: there are no regulations는 '규제가 없다'는 부정이다. no를 놓쳐 '규제가 있다'는 긍정으로 극성을
         뒤집었다.
-      author_msg: 인터넷에는 자격 없는 사람의 조언을 막을 규제가 없다는 것이 핵심이다.
+      author_msg: 인터넷에는 자격 없는 사람의 조언을 걸러 낼 규제가 아예 없다.
       key_points:
       - '''there are no regulations preventing ~'' : no를 놓쳐 ''규제가 있다''로 뒤집기 쉽다 → ''막는
         규제가 없다''(존재 자체의 부정).'
@@ -2123,7 +2123,7 @@ practice:
       wrong: 의뢰인은 합의금을 받을 때까지 수수료를 낸다는 것을 보장받는다.
       wrong_why: pay no fees는 '어떠한 수수료도 내지 않는다'는 부정이다. no를 놓치면 '수수료를 낸다'는 긍정이 되어 극성이
         정반대로 뒤집힌다 (−).
-      author_msg: 성공 보수제에서는 결과(합의)를 받기 전까지 의뢰인이 돈을 낼 필요가 없다는 것이 핵심이다.
+      author_msg: 성공 보수제에서는 결과(합의)가 나오기 전까지 의뢰인이 돈을 낼 필요가 없다.
       key_points:
       - '''pay no fees until ~'' : no를 놓쳐 ''수수료를 낸다''는 긍정으로 뒤집기 쉽다 → ''어떠한 수수료도 내지
         않는다''(합의 전까지).'
@@ -2149,7 +2149,7 @@ practice:
       wrong: 음악가들이 두 개의 같은 음을 정확히 같은 방식으로 자주 연주한다는 것을 발견했다.
       wrong_why: only rarely는 '극히 드물게만'이라는 준부정 표현이다. rarely를 놓쳐 '자주'로 읽으면 빈도의 극성이
         정반대로 뒤집힌다 (−).
-      author_msg: 같은 음이라도 음악가는 매번 미묘하게 다르게 연주한다는 것을, 드물다는 표현으로 강조한다.
+      author_msg: 같은 음이라도 음악가는 매번 미묘하게 다르게 연주한다 — 똑같이 치는 일은 좀처럼 없다.
       key_points:
       - '''only rarely play ...'' : rarely를 놓쳐 ''자주''로 빈도를 뒤집기 쉽다 → only rarely는 ''극히
         드물게만''(준부정).'
