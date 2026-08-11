@@ -138,6 +138,37 @@ def test_ref_safeguard():
     _check("가주어 it 문항 제외", len(r6.sentences[0].items) == 0)
 
 
+def test_grammar_agreement_dropped():
+    # 순수 수일치 쌍(is/are·does/do·has/have) 어법 문항은 렌더에서 제외, 다른 어법은 유지
+    llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="Musicians are left-brained, which shows the point.", ko="가",
+        grammar_template="Musicians {{P1}} left-brained, {{P2}} shows the point.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ is / are ]", answer="are"),
+                       pr.LLMProseItem(id="P2", display="[ which / what ]", answer="which")])])
+    g = next(w for w in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
+             if w.wtype == "grammar")
+    ids = [it.id for it in g.sentences[0].items]
+    _check("수일치(is/are) 문항 제외", "P1" not in ids)
+    _check("비수일치(관계사 which/what) 문항 유지", "P2" in ids)
+    # 일반동사 3인칭 단수 수일치(happens/happen)도 제외
+    llm3 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="This happens often.", ko="다",
+        grammar_template="This {{P1}} often.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ happens / happen ]", answer="happens")])])
+    g3 = next(w for w in pr.build_prose_pack(llm3, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "grammar")
+    _check("일반동사 수일치(happens/happen) 제외", len(g3.sentences[0].items) == 0)
+    # has/have, does/do 도 제외
+    llm2 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="Concepts have changed and someone does care.", ko="나",
+        grammar_template="Concepts {{P1}} changed and someone {{P2}} care.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ have / has ]", answer="have"),
+                       pr.LLMProseItem(id="P2", display="[ does / do ]", answer="does")])])
+    g2 = next(w for w in pr.build_prose_pack(llm2, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "grammar")
+    _check("has/have·does/do 수일치 제외", len(g2.sentences[0].items) == 0)
+
+
 def test_corrupt_template_falls_back_to_en():
     # template 이 손상돼('P P1}}') 정상 자리표시자가 없고 items 만 있으면 원문(en)으로 대체하고
     # 문항을 버려 'P P1}}' 같은 조각이 노출되지 않아야 한다.
@@ -215,6 +246,7 @@ if __name__ == "__main__":
     test_translate_no_items()
     test_id_mismatch_order()
     test_ref_safeguard()
+    test_grammar_agreement_dropped()
     test_corrupt_template_falls_back_to_en()
     test_vocab_word_loss_guard()
     test_render_html()

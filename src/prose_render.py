@@ -222,6 +222,31 @@ def renderable_ref_count(llm: LLMProsePack) -> int:
     return sum(len(renderable_ref_items(s)) for s in llm.sentences)
 
 
+# '주어 수일치만' 묻는 be/do/have 선택 → 난도가 낮아 출제 지양(프롬프트로 막아도 LLM 이 종종 냄).
+#   is/are · does/do · has/have 는 '순수 수일치'라 렌더에서 드롭한다.
+#   was/were 는 가정법(if I were …) 소지가 있어 제외(프롬프트에만 맡김).
+_AGREEMENT_SETS = ({"is", "are"}, {"does", "do"}, {"has", "have"})
+
+
+def _is_agreement_choice(display: str) -> bool:
+    """어법 보기 '[ A / B ]' 가 순수 주어-수일치 쌍인지.
+
+    - be/do/have 불규칙: is/are · does/do · has/have
+    - 일반동사 3인칭 단수: 한쪽이 다른 쪽 + 's'/'es' (예: happen/happens, run/runs) —
+      단, 짧은 대명사 오탐(it/its) 방지를 위해 원형 길이 3 이상일 때만.
+    was/were 는 가정법 소지가 있어 여기서 제외(프롬프트로만 지양).
+    """
+    inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
+    opts = [c.strip().lower() for c in inside.split("/") if c.strip()]
+    if set(opts) in _AGREEMENT_SETS:
+        return True
+    if len(opts) == 2:
+        a, b = sorted(opts, key=len)           # a = 더 짧은 쪽(원형)
+        if len(a) >= 3 and b in (a + "s", a + "es"):
+            return True
+    return False
+
+
 def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                write: bool, tkey: str, ikey: str) -> ProseWorksheet:
     sents: list[PSentence] = []
@@ -250,6 +275,9 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                                  else textutil.shuffle_choices(src.display, f"{s.no}:{pid}:{src.display}")),
                         answer=src.answer, write=write, gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
+        if wtype == "grammar":
+            # 수일치 지양: 순수 주어-수일치 쌍(is/are·does/do·has/have) 문항을 버린다.
+            pitems = [it for it in pitems if not _is_agreement_choice(it.display)]
         if wtype == "ref":
             # 안전장치: 지칭 정답이 보기 안에 없거나(출제 오류) 보기에 한글이 섞이면
             #   (예: [ Vision / the street / 양쪽 살피기 ]) 그 문항을 버린다.
