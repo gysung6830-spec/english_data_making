@@ -66,6 +66,28 @@ function stripNoise(text) {
 }
 
 // 여러 줄에 걸쳐 끊긴 영어 문장을 이어 붙인 뒤, 문장 단위로 분리.
+// 문장이 '인용부호가 열린 채' 끝나는지 판정(인용 안 닫힘 → 다음 문장이 같은 인용의 연속).
+// 큰따옴표는 짝(홀수=열림), 작은따옴표는 '축약형 아포스트로피'를 빼고 여닫기만 센다.
+function quoteOpen(s) {
+  const sdq = (s.match(/"/g) || []).length;              // 곧은 큰따옴표
+  const cdo = (s.match(/“/g) || []).length;          // 여는 큰따옴표 “
+  const cdc = (s.match(/”/g) || []).length;          // 닫는 큰따옴표 ”
+  if (sdq % 2 === 1) return true;
+  if (cdo > cdc) return true;
+  const so = (s.match(/(^|[\s(\[])['‘]/g) || []).length;         // 인용 여는 작은따옴표
+  const sc = (s.match(/['’]([\s).,!?;:\]]|$)/g) || []).length;   // 인용 닫는 작은따옴표
+  return so > sc;
+}
+// 인용부호가 문장 경계를 넘어 열린 채면(예: "…the end will come. And by …humanity.'")
+// 다음 문장과 합쳐 한 문장으로 — 인용문 내부의 마침표에서 잘못 쪼개지는 것을 복원.
+function mergeQuoted(arr) {
+  const out = [];
+  for (const s of arr) {
+    if (out.length && quoteOpen(out[out.length - 1])) out[out.length - 1] += ` ${s}`;
+    else out.push(s);
+  }
+  return out;
+}
 function joinAndSplit(text) {
   const lines = text.split('\n').map((l) => l.trim()).filter(Boolean);
   const paras = [];
@@ -117,7 +139,7 @@ function joinAndSplit(text) {
     }
     merged.forEach((p) => out.push(p));
   }
-  return out;
+  return mergeQuoted(out);
 }
 
 async function extractSentences(buffer) {
