@@ -678,6 +678,15 @@ def test_problem_number_range_and_spans():
     assert [lbl for lbl, _ in _problem_spans(raw3)] == \
         ["10-A", "10-1", "10-2", "11-A", "11-1"], _problem_spans(raw3)
 
+    # 'Ch. N -' 접두 + 서술형/논술형 Practice 도 지문 헤더로 인식(유형명 라벨)
+    raw4 = (
+        "Ch. 04 - 서술형 Practice: 제목\nThere is no question that learning to sing changes.\n"
+        "Ch. 04 - 논술형 Practice: 제목\nContainer texture affects how sweet a drink tastes here.\n"
+        "Unit 13 - 수능 대비 ANALYSIS: 제목\nOne of the biggest reasons people are concerned now.\n"
+        "Unit 13 - 1번: 제목\nSome ecosystems over a wide range of sites persist well.\n")
+    assert [lbl for lbl, _ in _problem_spans(raw4)] == \
+        ["서술형", "논술형", "13-A", "13-1"], _problem_spans(raw4)
+
     # _merge_passages: 한 문제에서 쪼개져 나온 조각들을 한 지문으로 병합
     from src.schemas import Extraction
     merged = _merge_passages(

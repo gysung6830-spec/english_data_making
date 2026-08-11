@@ -222,23 +222,38 @@ def _detect_problem_numbers(src: Path) -> list[str]:
     return []
 
 
-# 단원형 머리글: 'Unit N - {ANALYSIS|분석|M번}'(교재 워크북). Ch./Lesson 등 접두는 무시.
-# 라벨은 '유닛-문항'으로 유일하게: '10-1'(1번) · '10-A'(Analysis).
-#   → 유닛마다 1·2·3이 반복돼도 안 겹치고, Analysis 지문도 독립 경계가 된다.
-_UNIT_HDR = re.compile(
-    r"(?i)\bUnit\s*(\d{1,3})\s*[-–—][^\n:：]*?(?:(\d{1,3})\s*번|(ANALYSIS|분석))")
+# 단원형 머리글: '{Unit|Ch|Lesson} N - {M번 | ANALYSIS | 서술형 | 논술형 …}'(교재 워크북).
+# 라벨을 지문마다 유일하게: 'N-M'(M번) · 'N-A'(Analysis) · '서술형'/'논술형'(유형 지문).
+#   → 유닛마다 1·2·3이 반복돼도 안 겹치고, Analysis·서술형·논술형 지문도 독립 경계가 된다.
+_SEC_HDR = re.compile(
+    r"(?i)\b(?:Unit|Ch(?:apter)?|Lesson)\.?\s*(\d{1,3})\s*[-–—]"
+    r"[^\n:：]*?(?:(\d{1,3})\s*번|(서술형)|(논술형)|(ANALYSIS|분석))")
+
+
+def _sec_label(num: str, prob, seosul, nonsul, ana) -> str | None:
+    """머리글 항목을 지문 라벨로. M번→'N-M', Analysis→'N-A', 서술형/논술형→유형명."""
+    if prob:
+        return f"{num}-{prob}"
+    if seosul:
+        return "서술형"
+    if nonsul:
+        return "논술형"
+    if ana:
+        return f"{num}-A"
+    return None
 
 
 def _unit_spans(raw: str) -> list[tuple[str, str]]:
-    """'Unit N - 항목' 머리글로 원문을 지문 단위로 잘라 [(라벨, 청크), …].
+    """'{Unit|Ch|Lesson} N - 항목' 머리글로 원문을 지문 단위로 잘라 [(라벨, 청크), …].
 
-    라벨 = 'N-M'(M번) 또는 'N-A'(Analysis/분석). 머리글이 2개 미만이면 빈 리스트.
+    라벨 = 'N-M'(M번) · 'N-A'(Analysis) · '서술형'/'논술형'(유형 지문).
+    머리글이 2개 미만이면 빈 리스트.
     """
     marks: list[tuple[int, str]] = []
-    for m in _UNIT_HDR.finditer(raw):
-        unit, prob, ana = m.group(1), m.group(2), m.group(3)
-        label = f"{unit}-{prob}" if prob else f"{unit}-A"
-        marks.append((m.start(), label))
+    for m in _SEC_HDR.finditer(raw):
+        label = _sec_label(m.group(1), m.group(2), m.group(3), m.group(4), m.group(5))
+        if label:
+            marks.append((m.start(), label))
     if len(marks) < 2:
         return []
     bounds: list[tuple[int, str]] = []
