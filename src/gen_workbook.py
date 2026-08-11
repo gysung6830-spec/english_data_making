@@ -132,11 +132,11 @@ _CIRC = "①②③④⑤⑥⑦⑧⑨⑩"
 
 # 논리 관계 구문(PART0 사전) 신호 — 노랑 문장에서 자동 감지해 파란 '관계어' 태그로 표시
 REL_SIG = [
-    ("인과", "cause", r"\b(lead(?:s|ing)? to|led to|result(?:s|ed|ing)? in|bring(?:s|ing)? about|brought about|give(?:s)? rise to|gave rise to|contribute(?:s|d)? to|stem(?:s|med)? from|arise(?:s)? from|arose from|derive(?:s|d)? from|result(?:s|ed|ing)? from|owing to|due to|thereby)\b"),
-    ("등호", "eq", r"\b(reflect(?:s|ed)?|mirror(?:s|ed)?|represent(?:s|ed)?|embod(?:y|ies|ied)|illustrate(?:s|d)?|exemplif(?:y|ies|ied)|amount(?:s|ed)? to|is equivalent to|are equivalent to)\b"),
-    ("대조", "contr", r"\b(unlike|whereas|in contrast|by contrast|on the other hand|on the contrary|contrary to|differ(?:s|ed)? from|as opposed to|opposed to|conversely)\b"),
-    ("비교", "comp", r"\b(outweigh(?:s|ed)?|surpass(?:es|ed)?|exceed(?:s|ed)?|prevail(?:s|ed)? over|superior to|inferior to|outnumber(?:s|ed)?|outperform(?:s|ed)?|rather than|instead of)\b"),
-    ("대체", "repl", r"\b(replace(?:s|d)?|displace(?:s|d)?|substitute(?:s|d)? for|give(?:s)? way to|gave way to|switch(?:es|ed)? to)\b"),
+    ("인과", "cause", r"\b(lead(?:s|ing)? to|led to|result(?:s|ed|ing)? in|bring(?:s|ing)? about|brought about|give(?:s)? rise to|gave rise to|contribute(?:s|d)? to|stem(?:s|med)? from|arise(?:s)? from|arose from|derive(?:s|d)? from|result(?:s|ed|ing)? from|owing to|due to|thereby|responsible for|account(?:s|ed)? for|drive(?:s|n)?|drove|shape(?:s|d)?|determine(?:s|d)?|be based on|is based on|are based on|rooted in)\b"),
+    ("등호", "eq", r"\b(reflect(?:s|ed)?|mirror(?:s|ed)?|represent(?:s|ed)?|embod(?:y|ies|ied)|illustrate(?:s|d)?|exemplif(?:y|ies|ied)|amount(?:s|ed)? to|is equivalent to|are equivalent to|define(?:s|d)?|is defined as|be defined as|known as|referred to as|serve(?:s|d)? as|act(?:s|ed)? as|namely)\b"),
+    ("대조", "contr", r"\b(unlike|whereas|in contrast|by contrast|on the other hand|on the contrary|contrary to|differ(?:s|ed)? from|different from|distinct from|distinguish(?:es|ed)?|as opposed to|opposed to|conversely|in comparison|compared (?:to|with))\b"),
+    ("비교", "comp", r"\b(outweigh(?:s|ed)?|surpass(?:es|ed)?|exceed(?:s|ed)?|prevail(?:s|ed)? over|superior to|inferior to|outnumber(?:s|ed)?|outperform(?:s|ed)?|greater than|less than|more than|rather than|instead of|prefer(?:s|red)?)\b"),
+    ("대체", "repl", r"\b(replace(?:s|d)?|displace(?:s|d)?|substitute(?:s|d)? for|give(?:s)? way to|gave way to|switch(?:es|ed)? to|shift(?:s|ed)? from|transition(?:s|ed)? from)\b"),
 ]
 
 
@@ -144,9 +144,10 @@ POL_POS = r"\b(critical|crucial|essential|vital|fundamental|indispensable|signif
 POL_NEG = r"\b(abandon(?:s|ed)?|discard(?:s|ed)?|eliminate[sd]?|neglect(?:s|ed)?|ignore[sd]?|dismiss(?:es|ed)?|overlook(?:s|ed)?|reject(?:s|ed)?|refuse[sd]?|den(?:y|ies|ied)|forbid(?:s|den)?|hinder(?:s|ed)?|diminish(?:es|ed)?|obscure[sd]?|undermine[sd]?|disregard(?:s|ed)?|lack(?:s|ed|ing)?|absence|flaw(?:s|ed)?|drawback|fail(?:s|ed|ing)?|problem(?:s|atic)?|threat(?:s|en(?:s|ed)?)?|harm(?:s|ed|ful)?|damage[sd]?|weaken(?:s|ed)?|suffer(?:s|ed|ing)?|danger(?:ous)?|useless|worthless|destroy(?:s|ed)?|hardly|rarely|scarcely|by no means)\b"
 
 
-def _mark_sentence(text, tags, is_yellow, rel_cap=2, pol_cap=2):
-    """노랑/회색 문장 마킹 — ①근거 신호(빨강) ②노랑이면 논리 관계어(파랑) ③노랑이면 ±어휘(＋녹/−적).
-       겹치면 신호>관계어>±어휘 우선, 관계어·±는 문장당 각 cap개까지."""
+def _mark_sentence(text, tags, mark_rel, rel_cap=2, pol_cap=2):
+    """노랑/회색 문장 마킹 — ①근거 신호(빨강) ②논리 관계어(파랑) ③±어휘(＋녹/−적).
+       관계어·±는 노랑·회색 문장에 표시(mark_rel=True), 겹치면 신호>관계어>±,
+       각 유형 문장당 cap개까지."""
     spans, unmatched = [], []
     for t in (tags or []):
         w, sig = t.get("word", ""), t.get("sig", "")
@@ -157,7 +158,7 @@ def _mark_sentence(text, tags, is_yellow, rel_cap=2, pol_cap=2):
             spans.append((m.start(), m.end(), "sig", sig))
         else:
             unmatched.append(sig)
-    if is_yellow:
+    if mark_rel:
         for name, cls, pat in REL_SIG:
             for m in re.finditer(pat, text, re.I):
                 spans.append((m.start(), m.end(), "rel:" + cls, name))
@@ -209,7 +210,7 @@ def step2_passage(hl):
         if role == "skip":
             parts.append(f'<span class="sk">{esc(txt)}</span>')
         else:
-            inner = _mark_sentence(txt, seg.get("tags"), role == "yellow")
+            inner = _mark_sentence(txt, seg.get("tags"), role in ("yellow", "gray"))
             cls = "m" if role == "yellow" else "g"
             # 신호어 없는 노랑 = 시험장에서 미리 잡는 신호(위치·반복어·정의) 칩 표시
             pos = seg.get("pos")
@@ -487,7 +488,7 @@ def contrast_cue(hl):
     pats = [pat for name, cls, pat in REL_SIG if cls in ("contr", "comp")]
     found, seen = [], set()
     for seg in (hl or []):
-        if seg.get("role") != "yellow":
+        if seg.get("role") not in ("yellow", "gray"):
             continue
         t = seg.get("t", "")
         for pat in pats:
