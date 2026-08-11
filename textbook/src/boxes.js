@@ -94,13 +94,17 @@ function engHeader(text, src) {
   });
 }
 
-// 2. 📘 어휘 박스 (한 줄에 " / " 로 연결)
+// 2. 📘 어휘 박스 (라벨+뜻을 한 줄로 — 컴팩트)
 function vocabBox(pairs) {
   const text = pairs.map(([w, m]) => `${w} – ${m}`).join('   /   ');
   return [
     makeBox(S.VOCAB.bg, S.VOCAB.border, [
-      boxLabel('📘 어휘', S.VOCAB.txt),
-      new Paragraph({ children: [new TextRun({ text, size: 19, color: S.VOCAB.txt, font: S.FONT })] }),
+      new Paragraph({
+        children: [
+          new TextRun({ text: '📘 어휘  ', bold: true, size: 15, color: S.VOCAB.txt, font: S.FONT }),
+          new TextRun({ text, size: 16, color: S.VOCAB.txt, font: S.FONT }),
+        ],
+      }),
     ]),
     spacer(),
   ];

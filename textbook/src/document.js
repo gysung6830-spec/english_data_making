@@ -177,11 +177,10 @@ function passageSentenceParas(s, idx) {
       children: [new TextRun({ text: `구문 포인트 — ${s.point}`, bold: true, size: 18, color: S.BRASS, font: S.FONT })],
     }));
   }
-  // 순서: 어휘 → 해석(쓰기) → 캐치(쓰기) → 이거 조심(오역 주의)
-  //   (끊어읽기 원리는 책 앞 '끊어읽기 팁 — 어디서 끊을까?' 페이지에 한 번)
+  // 순서: 어휘 → 해석(쓰기) → 이거 조심(오역 주의)
+  //   ('이 정도는 캐치' 쓰기칸은 제거 — 캐치는 답지에서 확인)
   out.push(...B.vocabBox(s.vocab));
   out.push(...B.interpretWriteBox());
-  out.push(...B.catchWriteBox());
   out.push(...B.trapBox(s.trap));
   return out;
 }
@@ -480,24 +479,20 @@ function catchAnswerParas(say, ex) {
   }
   return [B.makeBox('E6F1EA', 'BAD5C2', kids), B.spacer()];
 }
-// 답지 헤더 영어에 끊어읽기(/) 직접 표시 (조각이 원문을 못 덮으면 원문 그대로)
-function headChunkedEn(s) {
-  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
-  if (chunks.length >= 2) {
-    const joined = chunks.map((c) => c[0]).join(' ');
-    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
-    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85) {
-      return chunks.map((c) => c[0]).join(' / ');
-    }
-  }
-  return s.en || '';
+// 영어·한글이 '함께' 쓰는 끊어읽기 판정 (불일치 방지)
+function canChunkDoc(s) {
+  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0] && c[1]);
+  if (chunks.length < 2) return false;
+  const joined = chunks.map((c) => c[0]).join(' ');
+  const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
+  const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
+  return !hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85;
 }
-// 답지 한글 끊어읽기(영어는 헤더에 있으니 한글만)
-function korChunkBoxParas(chunks) {
-  const list = (chunks || []).filter((c) => Array.isArray(c) && c[1]);
+// 답지 한글 끊어읽기 — 영어를 끊었을 때만 한글도 / 로 끊는다
+function korChunkBoxParas(s) {
+  const list = ((s.chunks) || []).filter((c) => Array.isArray(c) && c[1]);
   if (!list.length) return [];
-  const ko = list.map((c) => c[1]).join('  /  ');
+  const ko = list.map((c) => c[1]).join(canChunkDoc(s) ? '  /  ' : ' ');
   return [
     B.makeBox('F2F4F5', '8A8F98', [
       new Paragraph({
@@ -510,17 +505,10 @@ function korChunkBoxParas(chunks) {
     B.spacer(),
   ];
 }
-// 답지 헤더: 번호 + 끊어읽기(/)된 영어에 PART0 신호 형광펜 (조각 폴백 시 원문 전체)
+// 답지 헤더: 번호 + 끊어읽기(/)된 영어에 PART0 신호 형광펜 (폴백 시 원문 전체·안 끊음)
 function answerHeadParas(s, idx, tag) {
   const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
-  let pieces;
-  if (chunks.length >= 2) {
-    const joined = chunks.map((c) => c[0]).join(' ');
-    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
-    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
-    pieces = (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85)
-      ? chunks.map((c) => c[0]) : [s.en || ''];
-  } else pieces = [s.en || ''];
+  const pieces = canChunkDoc(s) ? chunks.map((c) => c[0]) : [s.en || ''];
   const kids = [new TextRun({ text: `${idx}. `, bold: true, size: 22, color: S.NAVY, font: S.FONT })];
   pieces.forEach((piece, k) => {
     if (k > 0) kids.push(new TextRun({ text: '  /  ', bold: true, size: 22, color: '14603A', font: S.FONT }));
@@ -552,7 +540,7 @@ function passageAnswerParas(p) {
     // src(문항번호)가 짧은 라벨일 때만 표시. AI 가 문장 전체를 넣는 경우는 생략.
     const tag = s.src && String(s.src).length <= 10 ? `  [${s.src}]` : '';
     out.push(answerHeadParas(s, i + 1, tag));
-    out.push(...korChunkBoxParas(s.chunks));
+    out.push(...korChunkBoxParas(s));
     out.push(...catchAnswerParas(s.catch, s.ex));
   });
   return out;

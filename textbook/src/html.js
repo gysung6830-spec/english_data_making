@@ -351,21 +351,22 @@ function transformPageHtml() {
 }
 
 // ── P7 (07/11) · 글의 구조 6가지 ───────────────────────────────────────
+// [이름, [앞단계 라벨, 뒷단계 라벨], 앞 신호, 뒷 신호, 흐름, 예]
 const STRUCTURE_GUIDE = [
-  ['통념 → 반박(반전)', 'many people think · it is widely believed · traditionally · we tend to think', 'But · However · Yet · In fact · In reality · Contrary to', '흔한 생각(통념)을 깔아둔 뒤 뒤집어 필자 주장을 편다.', '“Many people believe X. But in fact, Y.”'],
-  ['주장 → 근거·예시', 'should · must · it is important that · I argue', 'because · since · for example · research shows · therefore', '주장을 먼저 내세우고 이유·연구·예시로 뒷받침.', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
-  ['문제 → 해결(방안)', 'problem · challenge · issue · difficulty · concern', 'solution · solve · address · one way to · need to', '문제를 제기하고 해결책·방안을 제시.', '“이런 문제가 있다. 이를 해결하려면 …”'],
-  ['비교 · 대조', 'while · whereas · unlike · in contrast · on the other hand', 'similarly · likewise · just as · like · both … and', 'A와 B의 공통점·차이점을 견줌.', '“A는 …인 반면, B는 …이다.”'],
-  ['시간 · 순서(나열)', 'first · second · next · then · later · finally', 'in 1937 · meanwhile · over time · eventually · subsequently', '사건·과정을 시간·순서대로(전기·실험·역사).', '“먼저 …, 그다음 …, 마침내 …”'],
-  ['예시 → 일반화(결론)', 'for example · such as · consider · take … as an example', 'thus · therefore · in short · this suggests · overall', '구체 사례를 든 뒤 일반 원리·결론으로 묶음.', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
+  ['통념 → 반박(반전)', ['통념/앞', '반전/뒤'], 'many people think · it is widely believed · traditionally · we tend to think', 'But · However · Yet · In fact · In reality · Contrary to', '흔한 생각(통념)을 깔아둔 뒤 뒤집어 필자 주장을 편다.', '“Many people believe X. But in fact, Y.”'],
+  ['주장 → 근거·예시', ['주장', '근거·예시'], 'should · must · it is important that · I argue', 'because · since · for example · research shows · therefore', '주장을 먼저 내세우고 이유·연구·예시로 뒷받침.', '“X가 중요하다. 예를 들어 …, 연구에 따르면 …”'],
+  ['문제 → 해결(방안)', ['문제', '해결'], 'problem · challenge · issue · difficulty · concern', 'solution · solve · address · one way to · need to', '문제를 제기하고 해결책·방안을 제시.', '“이런 문제가 있다. 이를 해결하려면 …”'],
+  ['비교 · 대조', ['대상 A', '대상 B'], 'while · whereas · unlike · in contrast · on the other hand', 'similarly · likewise · just as · like · both … and', 'A와 B의 공통점·차이점을 견줌.', '“A는 …인 반면, B는 …이다.”'],
+  ['시간 · 순서(나열)', ['먼저', '다음·마지막'], 'first · second · next · then · later · finally', 'in 1937 · meanwhile · over time · eventually · subsequently', '사건·과정을 시간·순서대로(전기·실험·역사).', '“먼저 …, 그다음 …, 마침내 …”'],
+  ['예시 → 일반화(결론)', ['예시', '일반화'], 'for example · such as · consider · take … as an example', 'thus · therefore · in short · this suggests · overall', '구체 사례를 든 뒤 일반 원리·결론으로 묶음.', '“예: …. 이런 사례들은 결국 …임을 보여준다.”'],
 ];
 function structurePageHtml() {
   const cards = STRUCTURE_GUIDE.map((r, i) => `<div class="scard">
     <div class="sc-top"><span class="sc-n">${CIRCLED[i]}</span><span class="sc-name">${esc(r[0])}</span></div>
-    <div class="sc-sig"><span class="sc-mag">🔎 통념/앞</span> ${esc(r[1])}</div>
-    <div class="sc-sig"><span class="sc-arw">↳ 반전/뒤</span> ${esc(r[2])}</div>
-    <div class="sc-flow">${esc(r[3])}</div>
-    <div class="sc-ex">예) ${esc(r[4])}</div>
+    <div class="sc-sig"><span class="sc-mag">🔎 ${esc(r[1][0])}</span> ${esc(r[2])}</div>
+    <div class="sc-sig"><span class="sc-arw">↳ ${esc(r[1][1])}</span> ${esc(r[3])}</div>
+    <div class="sc-flow">${esc(r[4])}</div>
+    <div class="sc-ex">예) ${esc(r[5])}</div>
   </div>`).join('');
   return ppage('07', '글의 구조 — 어떤 짜임이 있나?',
     '글의 구조 = 필자가 생각을 배치한 ‘틀’. <b>전환어(But/However…)와 연결어</b>를 신호로 잡으면 구조가 보이고, 구조가 보이면 <b>요지·필자 주장</b>이 빨리 잡힌다. 아래 <b>6가지 틀</b> 중 하나를 예측하며 읽자.',
@@ -749,20 +750,24 @@ function css() {
   .vtab td.w, .vtab th.w { width:140px; font-weight:700; }
   .vtab tr.z td { background:${C.zebra}; }
   .sblock { break-inside:avoid; margin:12px 0 16px; }
+  /* 답지(문제 아님) 블록은 더 촘촘하게 — 짧은 지문은 한 페이지에 */
+  .sblock:not(.practice) { margin:8px 0 9px; }
   .senth { display:flex; align-items:flex-start; margin:6px 0 5px; }
+  .sblock:not(.practice) .senth { margin:3px 0 4px; }
   .sbadge { flex:none; display:inline-flex; align-items:center; justify-content:center;
     width:20px; height:20px; border-radius:50%; background:${C.teal}; color:#fff;
     font-size:11px; font-weight:800; margin-right:8px; margin-top:1px; }
   .sen { font-weight:800; font-size:13px; }
+  .sblock:not(.practice) .sen { font-size:12px; }
   .sen .sl { color:${C.teal}; font-weight:800; padding:0 4px; }
-  .chbox.one { border-left-color:#8a8f98; }
+  .chbox.one { border-left-color:#8a8f98; padding:5px 11px; margin:3px 0 5px; }
   .stag { color:${C.sub}; font-size:10px; font-style:italic; margin-left:6px; align-self:center; }
-  .vinline { background:#fff; border:1px solid ${C.greenLine}; border-left:4px solid ${C.green};
-    border-radius:6px; padding:7px 11px; margin:4px 0 7px; font-size:10.6px; }
-  .vinline .vic { font-weight:800; color:${C.tealDark}; margin-right:9px; }
+  .vinline { background:#fff; border:1px solid ${C.greenLine}; border-left:3px solid ${C.green};
+    border-radius:5px; padding:4px 9px; margin:3px 0 5px; font-size:9.6px; line-height:1.45; }
+  .vinline .vic { font-weight:800; color:${C.tealDark}; margin-right:7px; font-size:9.2px; }
   .vw { font-weight:700; }
   .vm { color:#555; }
-  .vd { color:#c3ccc6; margin:0 8px; }
+  .vd { color:#c3ccc6; margin:0 6px; }
   .chbox { border:1px solid ${C.line}; border-left:4px solid ${C.green}; border-radius:6px;
     padding:8px 12px; margin:4px 0 9px; background:${C.zebra}; }
   .chrow { display:flex; align-items:baseline; margin:4px 0; }
@@ -1170,13 +1175,13 @@ function catchWriteCard() {
     <div class="cw-h">✅ 이 정도는 캐치! <span class="cw-hint">핵심만 한 줄 — 누가/무엇이 → 어쨌다? (곁가지·수식은 버려)</span></div>
     <div class="wl"></div></div>`;
 }
-// 문장 하나(문제 쪽): 영어+포인트태그 → 어휘 → 팁 → 이거 조심 → 해석(쓰기) → 캐치(쓰기)
+// 문장 하나(문제 쪽): 영어+포인트태그 → 어휘 → 해석(쓰기) → 이거 조심
+// ('이 정도는 캐치' 쓰기칸은 제거 — 캐치는 답지에서 확인. 지면도 절약)
 function passageSentence(s, idx) {
-  return `<div class="sblock">
+  return `<div class="sblock practice">
     <div class="senth"><span class="sbadge">${idx}</span><span class="sen">${esc(s.en)}</span>${pointTag(s.point)}</div>
     ${vocabInline(s.vocab)}
     ${interpretWriteCard()}
-    ${catchWriteCard()}
     ${trapCard(s.trap)}</div>`;
 }
 // 글의 구조 유형(학생이 해석 전에 하나 고름)
@@ -1280,24 +1285,29 @@ function predictReveal(p) {
 // 답지 헤더용 영어 — 끊어읽기(/)를 문장 위에 직접 표시.
 // 조각(chunk)들을 이어붙이면 원문이 되도록 AI 가 넣지만, 생략(…)이 섞이거나
 // 조각이 원문을 제대로 못 덮으면 원문 전체를 그대로 보여준다(안전장치).
+// 영어 조각을 이어붙이면 원문이 (거의) 복원되는지 — 이 판정을 영어·한글이 '함께' 써서
+// "영어는 안 끊기고 한글만 끊기는" 불일치를 막는다.
+function canChunk(s) {
+  const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0] && c[1]);
+  if (chunks.length < 2) return false;
+  const joined = chunks.map((c) => c[0]).join(' ');
+  const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
+  const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
+  return !hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85;
+}
 function chunkedHeadEn(s) {
   const chunks = (s.chunks || []).filter((c) => Array.isArray(c) && c[0]);
-  const sl = ' <span class="sl">/</span> ';
-  if (chunks.length >= 2) {
-    const joined = chunks.map((c) => c[0]).join(' ');
-    const hasEllipsis = chunks.some((c) => /…|\.\.\./.test(c[0]));
-    const nrm = (x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (!hasEllipsis && nrm(joined).length >= nrm(s.en || '').length * 0.85) {
-      return chunks.map((c) => highlightSignals(c[0])).join(sl);  // 형광펜은 답지 영어에만
-    }
+  if (canChunk(s)) {
+    return chunks.map((c) => highlightSignals(c[0])).join(' <span class="sl">/</span> ');  // 형광펜은 답지 영어에만
   }
-  return highlightSignals(s.en || '');
+  return highlightSignals(s.en || '');  // 폴백: 원문 전체(끊지 않음) → 한글도 끊지 않음
 }
-// 답지 한글 끊어읽기(영어는 위 헤더에 있으니 한글만) — 조각 위치를 헤더와 매칭
-function korChunkRow(chunks) {
-  const list = (chunks || []).filter((c) => Array.isArray(c) && c[1]);
+// 답지 한글 끊어읽기(영어는 헤더에 있으니 한글만). 영어를 끊었을 때만 한글도 / 로 끊는다.
+function korChunkRow(s) {
+  const list = ((s.chunks) || []).filter((c) => Array.isArray(c) && c[1]);
   if (!list.length) return '';
-  const ko = list.map((c) => esc(c[1])).join(' <span class="sl">/</span> ');
+  const sep = canChunk(s) ? ' <span class="sl">/</span> ' : ' ';
+  const ko = list.map((c) => esc(c[1])).join(sep);
   return `<div class="chbox one"><div class="chrow"><span class="chtag ko">한글</span><span class="chtxt ckor">${ko}</span></div></div>`;
 }
 function passageAnswerKey(p) {
@@ -1308,7 +1318,7 @@ function passageAnswerKey(p) {
     const tag = s.src && String(s.src).length <= 10 ? `<span class="stag">[${esc(s.src)}]</span>` : '';
     return `<div class="sblock">
     <div class="senth"><span class="sbadge">${i + 1}</span><span class="sen">${chunkedHeadEn(s)}</span>${pointTag(s.point)}${tag}</div>
-    ${korChunkRow(s.chunks)}
+    ${korChunkRow(s)}
     ${catchCard(s.catch, s.ex)}</div>`;
   }).join('');
   return h;
@@ -1323,7 +1333,7 @@ function passageHtml(p, idx) {
   h += fullTextBlock(p.sentences);
   h += secHead(CIRCLED[1], '해석 전 예측 — 소재·주장·구조·재진술', '통째로 읽고, 해석 들어가기 전에 먼저 예측해봐! (정답은 지문 끝)', 'gram');
   h += subjectCard() + claimCard() + structureChoiceCard() + paraphraseCard(p);
-  h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석·캐치 직접 쓰고 → 오역 주의로 점검 (끊어읽기 원리는 앞 페이지)', 'teal', true);
+  h += secHead(CIRCLED[2], '한 문장씩 직접 풀기', '어휘 보고 → 해석 직접 쓰고 → 오역 주의로 점검 (캐치는 답지에서 확인)', 'teal', true);
   h += (p.sentences || []).map((s, i) => passageSentence(s, i + 1)).join('');
   h += passageAnswerKey(p);
   h += predictReveal(p);
