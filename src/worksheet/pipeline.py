@@ -184,7 +184,9 @@ def build_analyses_for_file(client: "ClaudeClient", cfg: "Config", src: Path,
 #  ① 'N번:' / 'N번 :' — 문제 제목 머리글(예: '… – 30번: 소유가 …')
 #  ② 줄 맨 앞 'N번 …'   — (예: '31번 2026년 …')
 # 범위 표기('43~45번','40-42번' 장문·순서 유형)도 하나의 번호로 인식한다.
-_NUM = r"\d{1,3}(?:\s*[~∼〜－\-–—]\s*\d{1,3})?"
+# ⚠️ 물결(~)은 공백이 있어도 범위로 보되, 붙임표(-)는 '공백 없이 붙었을 때만' 범위로 본다.
+#    ('Unit 10 - 1번' 처럼 단원-문제 구분의 ' - '를 범위 '10~1'로 오인하지 않도록.)
+_NUM = r"\d{1,3}(?:\s*[~∼〜]\s*\d{1,3}|[－\-–—]\d{1,3})?"
 _PROBNO_COLON = re.compile(rf"({_NUM})\s*번\s*[:：]")
 _PROBNO_LINE = re.compile(rf"(?m)^\s*({_NUM})\s*번(?![가-힣:：])")
 
@@ -238,6 +240,11 @@ def _problem_spans(raw: str) -> list[tuple[str, str]]:
             bounds.append((pos, lbl))
         if len(bounds) < 2:
             continue
+        # 첫 '번' 머리글 앞에 '번호 없는 지문'(예: ANALYSIS 지문·서두 지문)이 있으면
+        # 통째로 버리지 말고 라벨 없는 선두 조각으로 살린다(영문이 충분히 있을 때만).
+        lead = raw[:bounds[0][0]]
+        if sum(1 for c in lead if c.isascii() and c.isalpha()) >= 80:
+            bounds.insert(0, (0, ""))
         spans: list[tuple[str, str]] = []
         for i, (pos, lbl) in enumerate(bounds):
             end = bounds[i + 1][0] if i + 1 < len(bounds) else len(raw)

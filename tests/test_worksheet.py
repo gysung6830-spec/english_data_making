@@ -631,10 +631,21 @@ def test_detect_problem_numbers_regex():
 
 def test_problem_number_range_and_spans():
     # 범위 표기(장문·순서 유형) '43~45번'·'41 ~ 42번' → 한 라벨로 정규화
-    from src.worksheet.pipeline import _norm_probno, _problem_spans, _merge_passages
+    from src.worksheet.pipeline import (_norm_probno, _problem_spans,
+                                        _merge_passages, _PROBNO_COLON, _PROBNO_LINE)
     assert _norm_probno("43~45") == "43~45"
     assert _norm_probno("41 ~ 42") == "41~42"
     assert _norm_probno("40-42") == "40~42"
+
+    def _probe(t, rex):
+        return [_norm_probno(m.group(1)) for m in rex.finditer(t)]
+    # 물결(~)은 공백 있어도 범위 / 붙임표는 공백 없이 붙었을 때만 범위
+    assert _probe("43~45번 2025", _PROBNO_LINE) == ["43~45"]
+    assert _probe("43 ~ 45번 2025", _PROBNO_LINE) == ["43~45"]
+    assert _probe("40-42번 2025", _PROBNO_LINE) == ["40~42"]
+    # 'Unit 10 - 1번'의 ' - '(단원-문제 구분)은 범위가 아니라 문제번호 '1'
+    assert _probe("Ch. 04 Unit 10 - 1번: 제목", _PROBNO_COLON) == ["1"]
+    assert _probe("Ch. 04 Unit 10 - 2번: 제목", _PROBNO_COLON) == ["2"]
 
     # 장문(반복 페이지 머리글 'WORKBOOK4'가 본문 중간에 있어도) → '번' 경계로 한 덩어리.
     raw = ("41~42번 2025년 9월\nWORKBOOK4\nMay I help you are the worst.\n"
@@ -646,6 +657,14 @@ def test_problem_number_range_and_spans():
     assert spans[0][1].count("WORKBOOK4") == 2
     # 단일 문제(경계 1개)면 빈 리스트 → 호출부가 기존 단일 추출로 폴백
     assert _problem_spans("43~45번 2025년 9월\nWORKBOOK4\nonly one passage.\n") == []
+
+    # 첫 '번' 머리글 '앞'에 있는 번호 없는 지문(ANALYSIS 등)도 라벨 없는 선두 조각으로 보존
+    raw2 = ("Unit 10 ANALYSIS: " + "Many developmental theorists have recognized "
+            "the role that fear can play in development. " * 3 +
+            "\n1번: 제목\nOur complex brains might have evolved.\n"
+            "2번: 제목\nAlthough the wish to be alone is strong.\n")
+    spans2 = _problem_spans(raw2)
+    assert [lbl for lbl, _ in spans2] == ["", "1", "2"], spans2  # 선두 지문 살아남음
 
     # _merge_passages: 한 문제에서 쪼개져 나온 조각들을 한 지문으로 병합
     from src.schemas import Extraction
