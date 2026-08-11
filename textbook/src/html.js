@@ -1089,13 +1089,13 @@ function css() {
   .sc-flow { font-size:10.5px; color:${C.ink}; font-weight:700; margin:4px 0 2px; }
   .sc-ex { font-size:9.6px; color:${C.sub}; font-style:italic; }
   /* A/B 배지 칩 (논리관계) */
-  .abchips { display:flex; flex-wrap:wrap; gap:5px; margin:2px 0 4px; }
+  .abchips { display:flex; flex-wrap:wrap; gap:6px; margin:2px 0 6px; }
   .abchip { display:inline-flex; align-items:center; gap:4px; font-size:10.3px; font-weight:600;
     color:${C.ink}; background:#fff; border:1px solid ${C.line}; border-radius:7px; padding:3px 8px; }
   .ab-badge { display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
     color:#fff; font-size:9px; font-weight:800; border-radius:4px; padding:0 2px; }
   .ab-a { background:${C.teal}; } .ab-b { background:${C.plus}; }
-  .abgrp-lab { font-size:11px; font-weight:800; color:${C.tealDark}; margin:9px 0 4px; }
+  .abgrp-lab { font-size:11px; font-weight:800; color:${C.tealDark}; margin:14px 0 5px; }
   .abgrp-lab .sub { font-weight:600; color:${C.sub}; font-size:9.6px; margin-left:5px; }
   .ab-leg { font-size:10px; color:#444; margin:3px 0 2px; }
   .ab-note { font-size:9.8px; color:${C.sub}; margin:4px 0 2px; line-height:1.5; }
@@ -1104,8 +1104,8 @@ function css() {
     color:#fff; border-radius:5px; font-weight:800; font-size:12px; margin-right:5px; vertical-align:2px; }
   .rel-ic.cause { background:${C.teal}; } .rel-ic.eq { background:#3B6BB0; }
   /* 대조·비교 관계 그룹 */
-  .relgrp { margin:8px 0; break-inside:avoid; }
-  .rel-lab { display:inline-block; font-size:11px; font-weight:800; color:#fff; border-radius:6px; padding:3px 11px; margin-bottom:5px; }
+  .relgrp { margin:16px 0; break-inside:avoid; }
+  .rel-lab { display:inline-block; font-size:11px; font-weight:800; color:#fff; border-radius:6px; padding:3px 11px; margin-bottom:7px; }
   .rel-lab .rel-sub { font-weight:600; opacity:.92; margin-left:7px; font-size:9.6px; }
   .rel-gt { background:${C.plus}; } .rel-lt { background:${C.tealDark}; } .rel-diff { background:${C.key}; }
   .rel-sub2 { background:#3B6BB0; } .rel-focus { background:${C.teal}; }
