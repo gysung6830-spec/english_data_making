@@ -77,6 +77,25 @@ def test_dedup_placeholder():
            dedup_placeholder("We {{Q1}} the race", "{{Q1}}", "run") == "We {{Q1}} the race")
 
 
+def test_shuffle_choices():
+    from src.textutil import shuffle_choices
+    # 보기 집합·정답은 보존, 순서만 바뀔 수 있음
+    out = shuffle_choices("[ a / b / c ]", "seed1")
+    _check("보기 집합 보존", sorted(o.strip() for o in out[1:-1].split("/")) == ["a", "b", "c"])
+    _check("[] 형식 유지", out.startswith("[ ") and out.endswith(" ]"))
+    # 지칭 '= [ … ]' 은 prefix 유지
+    r = shuffle_choices("= [ x / y / z ]", "s")
+    _check("지칭 prefix 유지", r.startswith("= [ ") and set("xyz") == set(r) & set("xyz"))
+    # 비[]선택형은 그대로
+    _check("(원형) 그대로", shuffle_choices("(react)", "s") == "(react)")
+    _check("〈 … 〉 그대로", shuffle_choices("〈 a / b 〉", "s") == "〈 a / b 〉")
+    # 결정적: 같은 입력·시드는 같은 결과
+    _check("결정적 재현", shuffle_choices("[ p / q / r ]", "k") == shuffle_choices("[ p / q / r ]", "k"))
+    # 정답 위치 쏠림 제거: 첫 보기가 'a'인 문항이 전부는 아니어야 함(다양한 시드에서 분포)
+    firsts = [shuffle_choices("[ a / b / c ]", f"s{i}")[2:3] for i in range(30)]
+    _check("정답(첫 보기) 위치 분산", firsts.count("a") < 30 and len(set(firsts)) >= 2)
+
+
 if __name__ == "__main__":
     test_split_keeps_full_sentences()
     test_prompts_embed_verbatim_list()
@@ -84,4 +103,5 @@ if __name__ == "__main__":
     test_name_initials_not_split()
     test_file_tag_cleanup()
     test_dedup_placeholder()
+    test_shuffle_choices()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

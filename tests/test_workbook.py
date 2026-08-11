@@ -143,7 +143,9 @@ def test_render_sentence_substitution():
     wb = ws.build_workbook(llm, title="T", subtitle="S")
     out = str(render_sentence(wb.sentences[0]))
     assert "{{Q1}}" not in out and "{{Q2}}" not in out, "자리표시자 누출"
-    assert "[ a / b / c ]" in out and "(react)" in out
+    # 보기 순서는 shuffle_choices 로 섞이므로 '순서 무관'하게 확인(정답 위치 쏠림 방지).
+    assert "[ " in out and " ]" in out and all(o in out for o in ("a", "b", "c"))
+    assert "(react)" in out
     assert 'class="lbl a"' in out and 'class="lbl v"' in out
     assert "1)" in out and "2)" in out  # 위첨자 번호
     print("PASS  render_sentence 치환(누출 없음, 라벨/번호 삽입)")

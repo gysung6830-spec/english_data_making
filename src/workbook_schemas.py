@@ -241,7 +241,10 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str,
         qs: list[Question] = []
         for pid, src in p["pairs"]:
             counter += 1
-            qs.append(Question(id=pid, type=src.type, display=src.display,
+            # 선택형([ … ]·지칭 = [ … ])은 보기 순서를 섞어 정답 위치 쏠림 제거.
+            #   특수구문(order) '〈 … 〉' 은 shuffle_choices 가 그대로 둔다(순서 배열 문제라 유지).
+            disp = textutil.shuffle_choices(src.display, f"{p['no']}:{pid}:{src.display}")
+            qs.append(Question(id=pid, type=src.type, display=disp,
                                answer=src.answer, reason=src.reason, num=counter))
         sentences.append(Sentence(no=p["no"], en_template=p["en"], ko=p["ko"], questions=qs))
     return Workbook(title=title, subtitle=subtitle, sentences=sentences, total=counter)

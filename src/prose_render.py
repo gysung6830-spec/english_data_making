@@ -14,6 +14,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 from pydantic import BaseModel, Field
 
+from . import textutil
 from .blanks_schemas import placeholders_in  # {{Pn}} 재사용
 from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOOTER, _page_ready, _launch_chromium
 
@@ -243,8 +244,11 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             items_src = []
         order = placeholders_in(template)
         # 자리표시자가 하나도 없으면(출제 없음/손상) 원문만 두고 items 는 비운다.
-        pitems = [PItem(id=pid, display=src.display, answer=src.answer, write=write,
-                        gloss=getattr(src, "gloss", ""))
+        # 선택형(어법·어휘·지칭)은 보기 순서를 섞어 정답 위치 쏠림을 없앤다(어형은 제외).
+        pitems = [PItem(id=pid,
+                        display=(src.display if write
+                                 else textutil.shuffle_choices(src.display, f"{s.no}:{pid}:{src.display}")),
+                        answer=src.answer, write=write, gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
         if wtype == "ref":
             # 안전장치: 지칭 정답이 보기 안에 없거나(출제 오류) 보기에 한글이 섞이면

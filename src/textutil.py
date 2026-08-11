@@ -5,7 +5,33 @@ LLM 이 문장 앞부분(주어·도입구)을 임의로 잘라내는 문제를 
 """
 from __future__ import annotations
 
+import hashlib
+import random
 import re
+
+
+def shuffle_choices(display: str, seed_text: str) -> str:
+    """선택형 보기 '[ A / B (/ C) ]'(지칭은 '= [ … ]')의 순서를 섞는다.
+
+    LLM 이 정답을 늘 앞쪽에 배치하는 편향이 있어 정답 위치가 한쪽으로 쏠린다. 정답은
+    '텍스트'로 채점되므로(위치 무관) 보기 순서를 바꿔도 정오에 영향이 없다.
+    시드가 '내용 기반'이라 같은 문항은 항상 같은 배치(재생성·테스트 재현성)이되, 문항마다
+    위치가 고르게 분포한다. '(원형)'·'〈 … 〉' 같은 비[]선택형 display 는 그대로 둔다.
+    """
+    s = display.strip()
+    prefix = ""
+    if s.startswith("="):                       # 지칭 '= [ … ]'
+        prefix = "= "
+        s = s[1:].strip()
+    if not (s.startswith("[") and s.endswith("]")):
+        return display                          # (원형)·〈 … 〉 등 비[]선택형은 그대로
+    opts = [o.strip() for o in s[1:-1].split("/") if o.strip()]
+    if len(opts) < 2:
+        return display
+    seed = int.from_bytes(hashlib.md5(seed_text.encode("utf-8")).digest()[:8], "big")
+    order = opts[:]
+    random.Random(seed).shuffle(order)
+    return prefix + "[ " + " / ".join(order) + " ]"
 
 # 마침표가 문장 끝이 아닌 흔한 약어(뒤에 대문자가 와도 문장 분리하면 안 됨)
 _ABBR = [
