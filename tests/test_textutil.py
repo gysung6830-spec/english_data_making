@@ -104,6 +104,10 @@ def test_shuffle_choices():
     # 정답 위치 쏠림 제거: 첫 보기가 'a'인 문항이 전부는 아니어야 함(다양한 시드에서 분포)
     firsts = [shuffle_choices("[ a / b / c ]", f"s{i}")[2:3] for i in range(30)]
     _check("정답(첫 보기) 위치 분산", firsts.count("a") < 30 and len(set(firsts)) >= 2)
+    # 보기 중복 제거: [ resolved / settled / dissolved / resolved ] → 3개 유니크
+    dd = shuffle_choices("[ resolved / settled / dissolved / resolved ]", "k")
+    opts = sorted(o.strip() for o in dd[1:-1].split("/"))
+    _check("중복 보기 제거(4→3)", opts == ["dissolved", "resolved", "settled"])
 
 
 def test_format_qno():

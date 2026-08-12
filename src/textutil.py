@@ -26,6 +26,10 @@ def shuffle_choices(display: str, seed_text: str) -> str:
     if not (s.startswith("[") and s.endswith("]")):
         return display                          # (원형)·〈 … 〉 등 비[]선택형은 그대로
     opts = [o.strip() for o in s[1:-1].split("/") if o.strip()]
+    # 보기 중복 제거: LLM 이 같은 보기를 두 번 낸 경우(예: [ resolved / settled / dissolved / resolved ])
+    #   → 중복을 없애 정상 개수로 되돌린다(대소문자 무시, 등장 순서 보존).
+    seen: set = set()
+    opts = [o for o in opts if not (o.lower() in seen or seen.add(o.lower()))]
     if len(opts) < 2:
         return display
     seed = int.from_bytes(hashlib.md5(seed_text.encode("utf-8")).digest()[:8], "big")
