@@ -21272,28 +21272,28 @@
    },
    {
     "t": "( ① ) The difference in pressures on the front and back faces of the building gives rise to vortices, or spinning currents of wind, that flow downstream from the building.",
-    "role": "yellow",
-    "tags": [
-     {
-      "sig": "정관사",
-      "word": "The difference"
-     }
-    ]
+    "role": "gray",
+    "tags": []
    },
    {
     "t": "( ② ) The vortices pull and push the building in a direction perpendicular to the wind at frequencies that can become dangerously self-sustaining.",
-    "role": "gray",
+    "role": "yellow",
     "tags": [
      {
-      "sig": "지시어",
-      "word": "The vortices"
+      "sig": "위험",
+      "word": "dangerously self-sustaining"
      }
     ]
    },
    {
     "t": "( ③ ) Orienting the building so that the longer face of the structure is parallel with prevailing winds can help.",
     "role": "yellow",
-    "tags": [],
+    "tags": [
+     {
+      "sig": "해결",
+      "word": "can help"
+     }
+    ],
     "pos": "반복어",
     "posword": "building"
    },
@@ -21316,16 +21316,20 @@
   "derive": {
    "steps": [
     {
-     "ko": "삽입문장 = ‘소용돌이 흘림을 최소화하려 설계자들이 바람을 <b>교란</b>시킨다’ = <b>해결책</b> 주제문",
-     "an": "— 바람 문제에 <b>대응</b>하는 설계 원리(해결책)를 여는 문장"
+     "ko": "삽입문 = ‘소용돌이 흘림을 줄이려 바람을 <b>교란</b>시킨다’",
+     "an": "— 문제에 <b>대응</b>하는 설계(해결책)를 여는 주제문"
     },
     {
-     "ko": "①② = 압력 차로 소용돌이가 <b>생기고</b> 건물을 흔들어 <b>위험</b>해진다(문제) / ③부터 ‘~하면 <b>도움이 된다</b>’(해결책)",
-     "an": "— 문제 설명(①②)과 해결책 나열(③④⑤)의 경계 = 삽입문은 <b>③</b>"
+     "ko": "② 소용돌이가 건물을 밀고 당겨 <b>위험</b>하게 증폭된다",
+     "an": "— ①② = 소용돌이가 생기고 위험해지는 <b>문제</b>"
+    },
+    {
+     "ko": "③ 긴 면을 바람과 평행하게 두면 ‘<b>도움이 된다(can help)</b>’",
+     "an": "— ③부터 <b>해결책</b> 시작 → 문제와 해결책의 경계 = 삽입 자리 <b>③</b>"
     }
    ],
-   "concl": "→ ①② 는 소용돌이가 <b>생기고 위험해지는 문제</b>를 설명, ③부터 '~하면 도움이 된다'는 <b>해결책</b>이 시작 → '바람을 교란한다'는 해결책 주제문은 <b>③</b> 자리",
-   "gnote": "도입·예시(회색)는 논리에 영향 없음."
+   "concl": "→ ①② 는 소용돌이가 생기고 위험해지는 <b>문제</b>, ③부터 ‘~하면 도움이 된다’는 <b>해결책</b> → ‘바람을 교란한다’는 해결책 주제문은 <b>③</b>",
+   "gnote": "도입·문제 세부(회색 ① 등)는 삽입 위치 판단에 영향 없음."
   },
   "direct": [
    {
@@ -21349,54 +21353,46 @@
       "hl0"
      ],
      [
-      "고층 건물 설계자들은 그들의 힘 안에서 모든 것을 한다",
+      "고층 건물 설계자들은 온갖 수단을 동원한다",
       "hl1"
      ],
      [
-      "바람을 혼란시키기 위해.",
+      "바람을 교란시키기 위해.",
       "hl2"
      ]
     ],
-    "note": ""
+    "note": "삽입문: 바람을 교란 = 해결책 주제문"
    },
    {
     "en": [
      [
-      "( ① ) The difference in pressures",
+      "( ② ) The vortices pull and push the building",
       "hl0"
      ],
      [
-      "on the front and back faces of the building",
+      "in a direction perpendicular to the wind",
       "hl1"
      ],
      [
-      "gives rise to vortices, or spinning currents of wind,",
+      "at frequencies that can become dangerously self-sustaining.",
       "hl2"
-     ],
-     [
-      "that flow downstream from the building.",
-      "hl3"
      ]
     ],
     "ko": [
      [
-      "( ① ) 압력의 차이는",
+      "( ② ) 그 소용돌이는 건물을 밀고 당긴다",
       "hl0"
      ],
      [
-      "건물의 앞면과 뒷면에서의",
+      "바람에 수직인 방향으로",
       "hl1"
      ],
      [
-      "와류, 즉 회전하는 바람의 흐름을 일으킨다,",
+      "위험하게 스스로 증폭될 수 있는 진동수로.",
       "hl2"
-     ],
-     [
-      "건물로부터 하류로 흐르는.",
-      "hl3"
      ]
     ],
-    "note": "근거: 앞뒤 압력 차이가 와류를 발생시킴"
+    "note": "문제의 정점: 소용돌이가 위험해짐(①② = 문제)"
    },
    {
     "en": [
@@ -21435,7 +21431,7 @@
       "hl3"
      ]
     ],
-    "note": "근거: 긴 면을 바람과 평행하게 배치"
+    "note": "첫 해결책 'can help' → 여기서 해결책 시작 = 삽입 자리 ③"
    }
   ],
   "opts": [
