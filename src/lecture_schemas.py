@@ -58,11 +58,19 @@ class RestatementChain(BaseModel):
 # ---------------------------------------------------------------------------
 # 지문 전체 개관 (LLM 1차 호출) — ③ 글 예측
 # ---------------------------------------------------------------------------
+class GrammarDrill(BaseModel):
+    """핵심 문법 연습문제(해석/영작)."""
+    kind: Literal["해석", "영작"]
+    question: str         # 해석=영어 문장 / 영작=한국어 문장
+    answer: str           # 모범 답
+
+
 class KeyGrammar(BaseModel):
-    """지문 앞에 붙는 '이 지문의 핵심 문법 1개' 설명 파트."""
+    """⑤ '이 지문의 핵심 문법 1개' — 쉬운 설명 + 지문 예 + 연습문제."""
     point: str            # 문법명(예: '관계사 that', '비교급 than절 도치·생략')
-    explanation: str      # 쉬운 설명(한국어)
+    explanation: str      # 쉬운 설명(한국어). 학생용에서 채우도록 [[ ]]로 핵심어 빈칸 가능
     example: str          # 지문 속 실제 예(짧게)
+    drills: list[GrammarDrill] = Field(min_length=1, max_length=3)  # 해석/영작 연습
 
 
 class Overview(BaseModel):

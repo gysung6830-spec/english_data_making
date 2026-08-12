@@ -143,9 +143,13 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         "item_no": (p.item_no or "").strip(),
         "theme_ko": p.theme_ko,
         "source": p.source,
-        "key_grammar": {"point": ov.key_grammar.point,
-                        "explanation": ov.key_grammar.explanation,
-                        "example": ov.key_grammar.example},
+        "key_grammar": {
+            "point": ov.key_grammar.point,
+            "explanation": _mark_ko(ov.key_grammar.explanation, teacher),
+            "example": ov.key_grammar.example,
+            "drills": [{"kind": d.kind, "question": d.question, "answer": d.answer}
+                       for d in ov.key_grammar.drills],
+        },
         "sentences": p.sentences,
         "lines": lines,
         "vocab_list": _aggregate_vocab(p.analysis.sentences),

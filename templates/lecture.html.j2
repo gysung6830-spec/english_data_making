@@ -111,11 +111,22 @@
   {#- ⑤ 이 지문의 핵심 문법 (새 페이지) -#}
   <div class="section brk">
     <div class="sec-head"><span class="sec-no">5</span><span class="sec-title">이 지문의 핵심 문법</span>
-      <span class="sec-desc">이 지문에서 가장 중요한 문법 하나</span></div>
+      <span class="sec-desc">이 문법 하나만 확실히! (설명 빈칸 채우기 + 해석·영작 연습)</span></div>
     <div class="kg-box">
       <div class="kg-head">🔑 <span class="kg-point">{{ p.key_grammar.point }}</span></div>
-      <div class="kg-exp">{{ p.key_grammar.explanation }}</div>
+      <div class="kg-exp"><span class="kg-lab">설명</span>{{ p.key_grammar.explanation }}</div>
       {% if p.key_grammar.example %}<div class="kg-ex"><span class="kg-ex-lab">지문 예</span>{{ p.key_grammar.example }}</div>{% endif %}
+    </div>
+
+    <div class="kg-drills">
+      <div class="kg-drills-h">✏ 연습문제 — 배운 문법을 직접 써보자</div>
+      {% for d in p.key_grammar.drills %}
+      <div class="drill">
+        <div class="drill-q"><span class="drill-kind {{ '해석' if d.kind == '해석' else '영작' }}">{{ d.kind }}</span>{{ d.question }}</div>
+        {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>
+        {% else %}<div class="drill-write"><span class="drill-arrow">→</span><span class="writeline inline wide2"></span></div>{% endif %}
+      </div>
+      {% endfor %}
     </div>
   </div>
 
