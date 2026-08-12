@@ -344,6 +344,19 @@ def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) 
     """검증된 LLM 응답 -> 어법·어형·어휘·한글해석 4종 워크시트를 담은 ProsePack."""
     # 안전장치: 본문(en)이 빈 문장은 모든 유형에서 '번호만 있는 빈 행'으로 렌더되므로 제외한다.
     llm.sentences = [s for s in llm.sentences if (s.en or "").strip()]
+    # 안전장치: LLM 이 같은 문장을 중복 생성한 경우(예: 평문본 + 보기본) → 문항이 더 많은 쪽만 남긴다.
+    def _n(s):
+        return re.sub(r"\s+", " ", (s.en or "").strip().lower())
+
+    def _cnt(s):
+        return (len(s.grammar_items) + len(s.form_items) + len(s.vocab_items)
+                + len(s.vocab_easy_items) + len(s.ref_items))
+    best: dict = {}
+    for s in llm.sentences:
+        k = _n(s)
+        if k not in best or _cnt(s) > _cnt(best[k]):
+            best[k] = s
+    llm.sentences = [s for s in llm.sentences if best.get(_n(s)) is s]
     worksheets = [_worksheet(llm, *d) for d in _WORKSHEET_DEFS]
     # 한글 해석 연습: 표기 없이 원문 + 해석만
     translate = ProseWorksheet(

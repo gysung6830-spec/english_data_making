@@ -160,6 +160,23 @@ def test_form_dedup_and_empty_sentence():
     _check("'(change) changed' 중복 제거(changed 미노출)", "changed" not in html2)
 
 
+def test_duplicate_sentence_dropped():
+    # LLM 이 같은 문장을 '평문본 + 보기본'으로 중복 생성 → 문항 많은 쪽만 남긴다
+    en = "The reason pessimists sound smart is that they avoid being wrong."
+    llm = pr.LLMProsePack(sentences=[
+        pr.LLMProseSentence(no=1, en=en, ko="가"),                       # 평문(보기 없음)
+        pr.LLMProseSentence(no=2, en=en, ko="가",                        # 보기본
+            vocab_easy_template="The reason pessimists sound {{P1}} is that they avoid being wrong.",
+            vocab_easy_items=[pr.LLMProseItem(id="P1", display="[ smart / stupid ]",
+                                              answer="smart", gloss="똑똑한")]),
+        pr.LLMProseSentence(no=3, en="A distinct second sentence.", ko="나"),
+    ])
+    ve = next(w for w in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "vocab_easy")
+    _check("중복 문장 1개로 축소(+다른 문장 유지)", len(ve.sentences) == 2)
+    _check("보기 있는 본만 유지", ve.sentences[0].no == 2 and len(ve.sentences[0].items) == 1)
+
+
 def test_grammar_agreement_dropped():
     # 순수 수일치 쌍(is/are·does/do·has/have) 어법 문항은 렌더에서 제외, 다른 어법은 유지
     llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
@@ -301,6 +318,7 @@ if __name__ == "__main__":
     test_id_mismatch_order()
     test_ref_safeguard()
     test_form_dedup_and_empty_sentence()
+    test_duplicate_sentence_dropped()
     test_grammar_agreement_dropped()
     test_corrupt_template_falls_back_to_en()
     test_vocab_word_loss_guard()
