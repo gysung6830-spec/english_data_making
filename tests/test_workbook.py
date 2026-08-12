@@ -133,6 +133,25 @@ def test_global_numbering():
     print("PASS  전역 연속 채번 + total 집계")
 
 
+# ---- 4-b. 정크(__DUP__)·중복 문장 제거 -------------------------------------
+def test_junk_and_duplicate_sentence_dropped():
+    llm = ws.LLMWorkbook(sentences=[
+        ws.LLMSentence(no=1, en_template="Vision is our {{Q1}} sense.", ko="가",
+                       questions=[_q("Q1")]),
+        ws.LLMSentence(no=2, en_template="__DUP__", ko=""),                        # 정크 마커
+        ws.LLMSentence(no=3, en_template="Vision is our sense.", ko="나"),          # 평문 중복
+        ws.LLMSentence(no=4, en_template="Vision is our sense.", ko="다",           # 같은 en, 문항 有
+                       questions=[_q("Q2")]),
+    ])
+    wb = ws.build_workbook(llm, title="T", subtitle="S")
+    ens = [s.en_template for s in wb.sentences]
+    assert not any("__DUP__" in e for e in ens), "정크 마커 노출"
+    # 같은 en 중복은 1개로(문항 있는 쪽 우선)
+    assert ens.count("Vision is our sense.") == 1
+    assert wb.total >= 1
+    print("PASS  정크(__DUP__)·중복 문장 제거")
+
+
 # ---- 5. render_sentence 치환 (자리표시자 누출 없음) ------------------------
 def test_render_sentence_substitution():
     llm = ws.LLMWorkbook(sentences=[
@@ -266,6 +285,7 @@ def run_all():
     test_empty_questions_kept()
     test_order_display_format()
     test_global_numbering()
+    test_junk_and_duplicate_sentence_dropped()
     test_render_sentence_substitution()
     test_render_html()
     test_multi_passage_layout()

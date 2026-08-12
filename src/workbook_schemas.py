@@ -205,6 +205,26 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str,
     originals(원문 문장 목록)를 주면 의미 오배치·단어 소실을 후처리로 검증해 되돌린다.
     """
     validate_llm_workbook(llm)
+    # 0) 정크/중복 문장 제거: '소문자도 공백도 없는' 비정상 문장(예: 내부 마커 "__DUP__")과
+    #   같은 en 이 반복되는 중복 문장을 걸러 카드에 이상 문장이 노출되지 않게 한다
+    #   (중복은 문항 수가 더 많은 쪽을 남긴다). 정상 영어 문장은 소문자·공백을 반드시 가진다.
+    def _is_junk(t: str) -> bool:
+        # 소문자도·공백도·자리표시자({{)도 없는 문장은 정상 영어 문장이 아니다(예: "__DUP__").
+        t = (t or "").strip()
+        return bool(t) and not any(c.islower() for c in t) and " " not in t and "{{" not in t
+    _clean: dict = {}
+    _order: list = []
+    for s in llm.sentences:
+        if _is_junk(s.en_template):
+            continue
+        k = re.sub(r"\s+", " ", (s.en_template or "").strip().lower())
+        if k not in _clean:
+            _order.append(k)
+            _clean[k] = s
+        elif len(s.questions) > len(_clean[k].questions):
+            _clean[k] = s
+    if _clean:
+        llm.sentences = [_clean[k] for k in _order]
     # 1) 문장별 (pid, src) 쌍 수집
     parsed: list[dict] = []
     for s in llm.sentences:
