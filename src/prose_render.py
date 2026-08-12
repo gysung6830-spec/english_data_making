@@ -253,6 +253,11 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
     for s in llm.sentences:
         template = getattr(s, tkey) or s.en
         items_src = getattr(s, ikey)
+        if write:
+            # 어형: 자리표시자 옆에 정답 어형이 그대로 남아 중복되는 경우
+            #   (예: "(change) changed", "(appear) (end) end")를 제거한다(통합카드와 동일 처리).
+            for src in items_src:
+                template = textutil.dedup_placeholder(template, "{{" + src.id + "}}", src.answer)
         order = placeholders_in(template)
         # 안전장치: 문항(items)은 있는데 template 에 정상 자리표시자({{Pn}})가 하나도 없으면
         #   template 이 손상된 것(예: LLM 이 "P1}}" 같은 깨진 문자열 반환 → "P P1}}" 노출)이다.
@@ -297,6 +302,8 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
 
 def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) -> ProsePack:
     """검증된 LLM 응답 -> 어법·어형·어휘·한글해석 4종 워크시트를 담은 ProsePack."""
+    # 안전장치: 본문(en)이 빈 문장은 모든 유형에서 '번호만 있는 빈 행'으로 렌더되므로 제외한다.
+    llm.sentences = [s for s in llm.sentences if (s.en or "").strip()]
     worksheets = [_worksheet(llm, *d) for d in _WORKSHEET_DEFS]
     # 한글 해석 연습: 표기 없이 원문 + 해석만
     translate = ProseWorksheet(

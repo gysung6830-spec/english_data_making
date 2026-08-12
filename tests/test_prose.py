@@ -138,6 +138,28 @@ def test_ref_safeguard():
     _check("가주어 it 문항 제외", len(r6.sentences[0].items) == 0)
 
 
+def test_form_dedup_and_empty_sentence():
+    # 어형: 자리표시자 옆에 남은 정답 어형("(change) changed", "(end) end") 중복 제거 + 빈 문장 제외
+    llm = pr.LLMProsePack(sentences=[
+        pr.LLMProseSentence(no=1, en="Traditions may change or appear to end.", ko="가",
+            form_template="Traditions may {{P1}} or {{P2}} {{P3}} end.",
+            form_items=[pr.LLMProseItem(id="P1", display="(change)", answer="change"),
+                        pr.LLMProseItem(id="P2", display="(appear)", answer="appear"),
+                        pr.LLMProseItem(id="P3", display="(end)", answer="to end")]),
+        pr.LLMProseSentence(no=2, en="Concepts have changed.", ko="나",
+            form_template="Concepts {{P1}} changed.",
+            form_items=[pr.LLMProseItem(id="P1", display="(change)", answer="have changed")]),
+        pr.LLMProseSentence(no=3, en="", ko="다"),   # 빈 문장
+    ])
+    pack = pr.build_prose_pack(llm, header="H", title="T", subtitle="S")
+    f = next(w for w in pack.worksheets if w.wtype == "form")
+    _check("빈 문장(en 없음) 제외", len(f.sentences) == 2)
+    html = str(pr.render_prose(f.sentences[0], "form"))
+    _check("'(end) end' 중복 제거(end 미노출)", "end end" not in html and html.count("end") <= 1)
+    html2 = str(pr.render_prose(f.sentences[1], "form"))
+    _check("'(change) changed' 중복 제거(changed 미노출)", "changed" not in html2)
+
+
 def test_grammar_agreement_dropped():
     # 순수 수일치 쌍(is/are·does/do·has/have) 어법 문항은 렌더에서 제외, 다른 어법은 유지
     llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
@@ -246,6 +268,7 @@ if __name__ == "__main__":
     test_translate_no_items()
     test_id_mismatch_order()
     test_ref_safeguard()
+    test_form_dedup_and_empty_sentence()
     test_grammar_agreement_dropped()
     test_corrupt_template_falls_back_to_en()
     test_vocab_word_loss_guard()
