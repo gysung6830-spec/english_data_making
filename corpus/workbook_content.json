@@ -39604,5 +39604,6490 @@
    "echo": "대사가 적어 대본이 얇아야 하는 흐름 → ④thick는 thin여야 = 정답 ④"
   },
   "num": 30
+ },
+ {
+  "key": "2022-06|31",
+  "answer": 3,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "The growth of academic disciplines and sub-disciplines, such as art history or palaeontology, and of particular figures such as the art critic, helped produce principles and practices for selecting and organizing what was worthy of keeping, though it remained a struggle.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Moreover, as museums and universities drew further apart toward the end of the nineteenth century, and as the idea of objects as a highly valued route to knowing the world went into decline, collecting began to lose its status as a worthy intellectual pursuit, especially in the sciences.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "첨가",
+      "word": "lose its status"
+     }
+    ]
+   },
+   {
+    "t": "The really interesting and important aspects of science were increasingly those invisible to the naked eye, and the classification of things collected no longer promised to produce cutting-edge knowledge.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "no longer"
+     }
+    ]
+   },
+   {
+    "t": "The term “butterfly collecting” could come to be used with the adjective “mere” to indicate a pursuit of ______ academic status.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "mere"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "박물관과 대학이 갈라지고 사물이 지식의 경로로서 <b>쇠퇴</b>하면서, 수집은 지적 활동으로서 <b>지위를 잃기</b> 시작",
+     "an": "— 수집의 위상 하락이 핵심"
+    },
+    {
+     "ko": "과학의 핵심은 육안에 안 보이는 것으로 옮겨가고, 수집·분류는 <b>더 이상</b> 최첨단 지식을 낳지 못함",
+     "an": "— 수집은 부차적 활동으로 전락"
+    },
+    {
+     "ko": "그래서 'butterfly collecting'은 '<b>mere(단지)</b>'와 함께 ______ 학문적 지위를 가리키는 데 쓰임",
+     "an": "— '단지'가 수식 = 부차적 지위 = 정답 <b>③</b>"
+    }
+   ],
+   "concl": "→ 수집이 지적 활동으로서 지위를 잃음 = '단지' 부차적인 지위 = <b>③ secondary</b>",
+   "gnote": "회색(첫 문장, 학문 분과 성장이라는 배경)은 빼도 '지위 상실 → 부차적' 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Moreover, as museums and universities drew further apart",
+      "hl0"
+     ],
+     [
+      "and as the idea of objects as a highly valued route to knowing the world went into decline,",
+      "hl1"
+     ],
+     [
+      "collecting began to lose its status as a worthy intellectual pursuit,",
+      "hl2"
+     ],
+     [
+      "especially in the sciences.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "게다가, 박물관과 대학이 더 멀어지고",
+      "hl0"
+     ],
+     [
+      "사물을 세계를 아는 소중한 경로로 보던 생각이 쇠퇴하면서,",
+      "hl1"
+     ],
+     [
+      "수집은 가치 있는 지적 활동으로서 지위를 잃기 시작했다,",
+      "hl2"
+     ],
+     [
+      "특히 과학에서.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 수집이 지적 활동으로서 지위를 상실"
+   },
+   {
+    "en": [
+     [
+      "The really interesting and important aspects of science",
+      "hl0"
+     ],
+     [
+      "were increasingly those invisible to the naked eye,",
+      "hl1"
+     ],
+     [
+      "and the classification of things collected",
+      "hl2"
+     ],
+     [
+      "no longer promised to produce cutting-edge knowledge.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "과학의 정말 흥미롭고 중요한 측면은",
+      "hl0"
+     ],
+     [
+      "점점 육안에 보이지 않는 것들이 되었고,",
+      "hl1"
+     ],
+     [
+      "수집된 것들의 분류는",
+      "hl2"
+     ],
+     [
+      "더 이상 최첨단 지식을 낳지 못했다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 수집·분류가 더 이상 첨단 지식을 못 냄"
+   },
+   {
+    "en": [
+     [
+      "The term “butterfly collecting”",
+      "hl0"
+     ],
+     [
+      "could come to be used with the adjective “mere”",
+      "hl1"
+     ],
+     [
+      "to indicate a pursuit of ______",
+      "hl2"
+     ],
+     [
+      "academic status.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "'butterfly collecting'이라는 표현은",
+      "hl0"
+     ],
+     [
+      "'mere(단지)'라는 형용사와 함께 쓰이게 되어",
+      "hl1"
+     ],
+     [
+      "______인 추구를 가리키게 되었다",
+      "hl2"
+     ],
+     [
+      "학문적 지위의.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: '단지' + ______ 학문적 지위"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "competitive",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "novel",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "secondary",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 4,
+    "tx": "reliable",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "unconditional",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 수집이 지위를 잃어 '부차적' 위상 · <span class=\"xo\">①</span>경쟁적(없음) <span class=\"xo\">②</span>새로운(정반대) <span class=\"xo\">④</span>신뢰할 만한(없음) <span class=\"xo\">⑤</span>무조건적(없음)",
+  "paraphrase": {
+   "from": "collecting began to lose its status as a worthy intellectual pursuit · no longer promised to produce cutting-edge knowledge",
+   "to": "secondary",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "수집은 지적 활동으로서 지위를 잃어 '부차적인' 것이 되었다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "collecting began to lose its status as a worthy intellectual pursuit, especially in the sciences",
+     "ko": "수집이 가치 있는 지적 활동으로서 지위를 잃기 시작",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the classification of things collected no longer promised to produce cutting-edge knowledge",
+     "ko": "수집·분류가 더 이상 첨단 지식을 낳지 못함",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "used with the adjective “mere” to indicate a pursuit of ______ academic status",
+     "ko": "'단지'와 함께 ______ 학문적 지위를 가리킴",
+     "role": "정답근거",
+     "how": "함축"
+    }
+   ],
+   "echo": "정답은 '지위 상실·더 이상 첨단 아님'을 '부차적(secondary)'으로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2023-06|32",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "The critic who wants to write about literature from a formalist perspective must first be a close and careful reader who examines all the elements of a text individually and questions how they come together to create a work of art.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "all the elements of a text"
+     }
+    ]
+   },
+   {
+    "t": "Such a reader, who respects the autonomy of a work, achieves an understanding of it by ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "autonomy"
+     }
+    ]
+   },
+   {
+    "t": "Instead of examining historical periods, author biographies, or literary styles, for example, he or she will approach a text with the assumption that it is a self-contained entity and that he or she is looking for the governing principles that allow the text to reveal itself.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "Instead of"
+     }
+    ]
+   },
+   {
+    "t": "For example, the correspondences between the characters in James Joyce’s short story “Araby” and the people he knew personally may be interesting, but for the formalist they are less relevant to understanding how the story creates meaning than are other kinds of information that the story contains within itself.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "형식주의 비평가는 텍스트의 <b>모든 요소를 개별적으로</b> 검토하는 독자여야 함",
+     "an": "— 시선이 텍스트 '내부'에 집중"
+    },
+    {
+     "ko": "역사적 시기·작가 전기·문체를 검토하는 <b>대신</b>, 텍스트를 <b>자족적 실체</b>로 보고 내부의 지배 원리를 찾음",
+     "an": "— 외부가 아니라 내부만 봄"
+    },
+    {
+     "ko": "작품의 <b>자율성</b>을 존중하는 독자는 ______함으로써 이해에 도달",
+     "an": "— 내부만 보고 외부·너머는 안 봄 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 형식주의는 텍스트를 자족적 실체로 보고 '내부'만 봄 = <b>④ looking inside it, not outside it or beyond it</b>",
+   "gnote": "회색(Joyce 'Araby' 예시)은 '내부 정보가 더 관련 있다'는 같은 논리의 예시일 뿐, 빼도 결론 무관."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The critic who wants to write about literature from a formalist perspective",
+      "hl0"
+     ],
+     [
+      "must first be a close and careful reader",
+      "hl1"
+     ],
+     [
+      "who examines all the elements of a text individually",
+      "hl2"
+     ],
+     [
+      "and questions how they come together to create a work of art.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "형식주의 관점에서 문학에 관해 쓰려는 비평가는",
+      "hl0"
+     ],
+     [
+      "먼저 꼼꼼하고 주의 깊은 독자여야 한다",
+      "hl1"
+     ],
+     [
+      "텍스트의 모든 요소를 개별적으로 검토하고",
+      "hl2"
+     ],
+     [
+      "그것들이 어떻게 결합해 예술 작품을 이루는지 묻는.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 텍스트 내부 요소를 개별적으로 검토"
+   },
+   {
+    "en": [
+     [
+      "Such a reader,",
+      "hl0"
+     ],
+     [
+      "who respects the autonomy of a work,",
+      "hl1"
+     ],
+     [
+      "achieves an understanding of it by ______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그런 독자는,",
+      "hl0"
+     ],
+     [
+      "작품의 자율성을 존중하는,",
+      "hl1"
+     ],
+     [
+      "______함으로써 그것에 대한 이해에 도달한다.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 자율성을 존중하며 ______함으로써 이해"
+   },
+   {
+    "en": [
+     [
+      "Instead of examining historical periods, author biographies, or literary styles,",
+      "hl0"
+     ],
+     [
+      "for example, he or she will approach a text",
+      "hl1"
+     ],
+     [
+      "with the assumption that it is a self-contained entity",
+      "hl2"
+     ],
+     [
+      "and that he or she is looking for the governing principles that allow the text to reveal itself.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "역사적 시기·작가 전기·문체를 검토하는 대신,",
+      "hl0"
+     ],
+     [
+      "예컨대 그 사람은 텍스트에 접근할 것이다",
+      "hl1"
+     ],
+     [
+      "그것이 자족적 실체라는 가정을 가지고",
+      "hl2"
+     ],
+     [
+      "텍스트가 스스로를 드러내게 하는 지배 원리를 찾으면서.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 외부 대신 내부의 자족적 원리를 찾음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "putting himself or herself both inside and outside it",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 2,
+    "tx": "finding a middle ground between it and the world",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "searching for <span class=\"reuse\">historical</span> realities revealed within it",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "looking inside it, not outside it or beyond it",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "exploring its <span class=\"reuse\">characters’</span> cultural relevance",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 텍스트 내부만 보고 외부·너머는 안 봄 · <span class=\"xo\">①</span>내부·외부 모두(범위초과) <span class=\"xo\">②</span>세계와의 중간(정반대) <span class=\"xo\">③</span>역사적 실재(표면어) <span class=\"xo\">⑤</span>문화적 관련성(표면어)",
+  "paraphrase": {
+   "from": "self-contained entity · governing principles that allow the text to reveal itself · information that the story contains within itself",
+   "to": "looking inside it, not outside it or beyond it",
+   "copies": [
+    "historical",
+    "characters"
+   ]
+  },
+  "restate": {
+   "thesis": "형식주의 비평가는 텍스트를 자족적 실체로 보고 내부만 들여다봄으로써 이해에 도달한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "examines all the elements of a text individually and questions how they come together",
+     "ko": "텍스트의 모든 요소를 내부에서 개별 검토",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the assumption that it is a self-contained entity ... governing principles that allow the text to reveal itself",
+     "ko": "텍스트를 자족적 실체로 보고 내부 지배 원리를 찾음",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "they are less relevant ... than are other kinds of information that the story contains within itself",
+     "ko": "외부 정보보다 텍스트가 내부에 담은 정보가 더 관련됨",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '자족적 실체·내부 정보'를 '내부를 보고 외부·너머는 보지 않음'으로 재진술"
+  },
+  "num": 32
+ },
+ {
+  "key": "2023-수능|33",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "The entrance to a honeybee colony, often referred to as the dancefloor, is a market place for information about the state of the colony and the environment outside the hive.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Studying interactions on the dancefloor provides us with a number of illustrative examples of how individuals changing their own behavior in response to local information ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "changing their own behavior"
+     }
+    ]
+   },
+   {
+    "t": "For example, upon returning to their hive honeybees that have collected water search out a receiver bee to unload their water to within the hive.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "If this search time is short then the returning bee is more likely to perform a waggle dance to recruit others to the water source.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Conversely, if this search time is long then the bee is more likely to give up collecting water.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Since receiver bees will only accept water if they require it, either for themselves or to pass on to other bees and brood, this unloading time is correlated with the colony’s overall need of water.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "correlated"
+     }
+    ]
+   },
+   {
+    "t": "Thus the individual water forager’s response to unloading time (up or down) regulates water collection in response to the colony’s need.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "Thus"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "댄스플로어 상호작용은 개체가 국소 정보에 반응해 <b>스스로 행동을 바꾸는</b> 것이 ______하는 예를 보여줌",
+     "an": "— 빈칸엔 개체 행동이 '군집 차원'에서 하는 역할이 들어감"
+    },
+    {
+     "ko": "수용 벌은 필요할 때만 물을 받으므로 <b>하역 시간</b>이 군집의 전체 물 <b>수요와 상관</b>됨",
+     "an": "— 개체 반응이 군집 수요 정보를 반영"
+    },
+    {
+     "ko": "<b>따라서</b> 개체 조달자의 하역 시간 반응(증감)이 군집 수요에 맞춰 물 수집을 조절",
+     "an": "— 개체 행동이 군집의 (수집) 노동력을 조절 = 정답 <b>①</b>"
+    }
+   ],
+   "concl": "→ 개체의 국소 정보 반응이 군집 전체의 수집 활동을 조절 = <b>① allow the colony to regulate its workforce</b>",
+   "gnote": "회색(도입)과 예시(receiver bee·waggle dance)는 메커니즘 예시일 뿐, '개체 반응 → 군집 조절' 결론에 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Studying interactions on the dancefloor",
+      "hl0"
+     ],
+     [
+      "provides us with a number of illustrative examples",
+      "hl1"
+     ],
+     [
+      "of how individuals changing their own behavior in response to local information",
+      "hl2"
+     ],
+     [
+      "______.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "댄스플로어 위 상호작용 연구는",
+      "hl0"
+     ],
+     [
+      "여러 예시를 우리에게 제공한다",
+      "hl1"
+     ],
+     [
+      "개체가 국소 정보에 반응해 스스로 행동을 바꾸는 것이 어떻게",
+      "hl2"
+     ],
+     [
+      "______하는지(에 관한).",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 개체의 행동 변화가 무엇을 하는가"
+   },
+   {
+    "en": [
+     [
+      "Since receiver bees will only accept water if they require it,",
+      "hl0"
+     ],
+     [
+      "either for themselves or to pass on to other bees and brood,",
+      "hl1"
+     ],
+     [
+      "this unloading time is correlated with the colony’s overall need of water.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "수용 벌은 필요할 때만 물을 받으므로,",
+      "hl0"
+     ],
+     [
+      "자신을 위해서든 다른 벌과 애벌레에게 전하기 위해서든,",
+      "hl1"
+     ],
+     [
+      "이 하역 시간은 군집의 전체 물 수요와 상관된다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 하역 시간이 군집 수요와 상관"
+   },
+   {
+    "en": [
+     [
+      "Thus the individual water forager’s response to unloading time (up or down)",
+      "hl0"
+     ],
+     [
+      "regulates water collection",
+      "hl1"
+     ],
+     [
+      "in response to the colony’s need.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서 개체 물 조달자의 하역 시간 반응(증감)이",
+      "hl0"
+     ],
+     [
+      "물 수집을 조절한다",
+      "hl1"
+     ],
+     [
+      "군집의 수요에 맞춰.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 개체 반응이 군집 수요에 맞춰 수집을 조절"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "allow the colony to regulate its workforce",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "search for water sources by measuring distance",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "decrease the colony’s workload when necessary",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 4,
+    "tx": "divide tasks according to their respective talents",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "train workers to acquire basic communication patterns",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 개체 반응이 군집의 수집 노동력을 조절 · <span class=\"xo\">②</span>거리 측정 물 탐색(없음) <span class=\"xo\">③</span>부하 감소만(범위초과) <span class=\"xo\">④</span>재능별 분업(없음) <span class=\"xo\">⑤</span>의사소통 훈련(없음)",
+  "paraphrase": {
+   "from": "unloading time is correlated with the colony’s overall need · regulates water collection in response to the colony’s need",
+   "to": "allow the colony to regulate its workforce",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "개체가 국소 정보에 따라 행동을 바꾸는 것이 군집 전체의 수집 노동력을 조절한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "how individuals changing their own behavior in response to local information",
+     "ko": "개체가 국소 정보에 반응해 스스로 행동을 바꿈",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "this unloading time is correlated with the colony’s overall need of water",
+     "ko": "하역 시간이 군집 전체 수요와 상관",
+     "role": "재진술",
+     "how": "기제 제시"
+    },
+    {
+     "en": "regulates water collection in response to the colony’s need",
+     "ko": "군집 수요에 맞춰 물 수집을 조절",
+     "role": "정답근거",
+     "how": "동의어"
+    }
+   ],
+   "echo": "정답은 '개체 반응이 군집 수요에 맞춰 수집을 조절'을 '군집이 노동력을 조절하게 함'으로 재진술"
+  },
+  "num": 33
+ },
+ {
+  "key": "2024-09|34",
+  "answer": 5,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Prior to photography, ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "Prior to"
+     }
+    ]
+   },
+   {
+    "t": "While painters have always lifted particular places out of their ‘dwelling’ and transported them elsewhere, paintings were time-consuming to produce, relatively difficult to transport and one-of-a-kind.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "difficult to transport"
+     }
+    ]
+   },
+   {
+    "t": "The multiplication of photographs especially took place with the introduction of the half-tone plate in the 1880s that made possible the mechanical reproduction of photographs in newspapers, periodicals, books and advertisements.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Photography became coupled to consumer capitalism and the globe was now offered ‘in limitless quantities, figures, landscapes, events which had not previously been utilised either at all, or only as pictures for one customer’.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Light, small and mass-produced photographs became dynamic vehicles for the spatiotemporal circulation of places.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "circulation of places"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>사진 이전에는</b> ______ (빈칸: 사진이 바꾼 그 이전 상태)",
+     "an": "— 이후 사진의 효과와 대조되는 '이전' 상태가 필요"
+    },
+    {
+     "ko": "화가는 장소를 옮겨 그렸지만 그림은 제작에 시간이 들고 <b>운반이 어렵고</b> 유일무이",
+     "an": "— 장소가 널리 퍼져 이동하기 어려웠음"
+    },
+    {
+     "ko": "사진은 장소의 시공간적 <b>순환(circulation of places)</b>을 가능케 한 역동적 매개체가 됨",
+     "an": "— 대조적으로 사진 이전엔 장소가 잘 이동하지 못함 = 정답 <b>⑤</b>"
+    }
+   ],
+   "concl": "→ 사진이 장소의 순환을 가능케 하기 전엔 '장소가 잘 이동하지 못함' = <b>⑤ places did not travel well</b>",
+   "gnote": "회색(하프톤 판·소비자본주의 부연)은 사진이 장소를 어떻게 순환시켰는지의 세부일 뿐, '이전엔 이동 難' 대조에 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Prior to photography, ______.",
+      "hl0"
+     ]
+    ],
+    "ko": [
+     [
+      "사진 이전에는, ______.",
+      "hl0"
+     ]
+    ],
+    "note": "빈칸 문장: 사진 이전 상태"
+   },
+   {
+    "en": [
+     [
+      "While painters have always lifted particular places out of their ‘dwelling’ and transported them elsewhere,",
+      "hl0"
+     ],
+     [
+      "paintings were time-consuming to produce,",
+      "hl1"
+     ],
+     [
+      "relatively difficult to transport and one-of-a-kind.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "화가들은 늘 특정 장소를 그 '거처'에서 들어내 다른 곳으로 옮겨 왔지만,",
+      "hl0"
+     ],
+     [
+      "그림은 제작에 시간이 많이 들고,",
+      "hl1"
+     ],
+     [
+      "운반이 비교적 어려우며 유일무이했다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 그림은 운반이 어렵고 유일무이 → 장소 이동 難"
+   },
+   {
+    "en": [
+     [
+      "Light, small and mass-produced photographs",
+      "hl0"
+     ],
+     [
+      "became dynamic vehicles",
+      "hl1"
+     ],
+     [
+      "for the spatiotemporal circulation of places.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "가볍고 작으며 대량 생산된 사진은",
+      "hl0"
+     ],
+     [
+      "역동적 매개체가 되었다",
+      "hl1"
+     ],
+     [
+      "장소의 시공간적 순환을 위한.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 사진이 장소의 순환을 가능케 함(이전과 대조)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "<span class=\"reuse\">paintings</span> alone connected with nature",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "<span class=\"reuse\">painting</span> was the major form of art",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "art held up a mirror to the world",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "desire for travel was not strong",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "places did not travel well",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 사진 이전엔 장소가 잘 이동하지 못함 · <span class=\"xo\">①</span>그림만 자연과 연결(표면어) <span class=\"xo\">②</span>그림이 주된 예술(표면어) <span class=\"xo\">③</span>예술=세계의 거울(없음) <span class=\"xo\">④</span>여행 욕구 약함(없음)",
+  "paraphrase": {
+   "from": "paintings were ... difficult to transport and one-of-a-kind ↔ photographs became dynamic vehicles for the spatiotemporal circulation of places",
+   "to": "places did not travel well",
+   "copies": [
+    "paintings",
+    "painting"
+   ]
+  },
+  "restate": {
+   "thesis": "사진이 장소를 대량으로 순환시키기 전에는 장소가 잘 이동하지 못했다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "paintings were time-consuming to produce, relatively difficult to transport and one-of-a-kind",
+     "ko": "그림은 제작에 시간 들고 운반 어렵고 유일무이",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the mechanical reproduction of photographs ... the multiplication of photographs",
+     "ko": "사진의 기계적 복제·증식",
+     "role": "재진술",
+     "how": "대조 전개"
+    },
+    {
+     "en": "photographs became dynamic vehicles for the spatiotemporal circulation of places",
+     "ko": "사진이 장소의 시공간적 순환의 매개체가 됨",
+     "role": "정답근거",
+     "how": "대조"
+    }
+   ],
+   "echo": "정답은 '그림은 운반 難 ↔ 사진이 장소를 순환'을 뒤집어 '이전엔 장소가 잘 이동 못함'으로 재진술"
+  },
+  "num": 34
+ },
+ {
+  "key": "2025-09|31",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "There has been a lot of discussion on why moths are attracted to light.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The consensus seems to hold that moths are not so much attracted to lights as they are ______ by them.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "not so much"
+     }
+    ]
+   },
+   {
+    "t": "The light becomes a sensory overload that disorients the insects and sends them into a holding pattern.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "holding pattern"
+     }
+    ]
+   },
+   {
+    "t": "A hypothesis called the Mach band theory suggests that moths see a dark area around a light source and head for it to escape the light.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Another theory suggests that moths perceive the light coming from a source as a diffuse halo with a dark spot in the center.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "The moths, attempting to escape the light, fly toward that imagined “portal,” bringing them closer to the source.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "As they approach the light, their reference point changes and they circle the light hopelessly trying to reach the portal.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Everyone is familiar with moths circling their porch lights.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Their flight appears to have no purpose, but they are, it is believed, trying to escape the pull of the light.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "escape the pull"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "통념은 나방이 빛에 <b>이끌린다기보다</b> 빛에 의해 ______된다고 봄",
+     "an": "— 'not so much A as B' 구조 → 빈칸은 '끌림'과 대비되는 상태"
+    },
+    {
+     "ko": "빛은 감각 과부하가 되어 나방을 방향 상실시키고 <b>정지 패턴(holding pattern)</b>에 빠뜨림",
+     "an": "— 빛에서 벗어나지 못하고 붙잡힘"
+    },
+    {
+     "ko": "나방의 비행은 목적 없어 보이지만 실은 빛의 <b>끌림에서 벗어나려(escape the pull)</b> 애씀",
+     "an": "— 벗어나려 해도 못 벗어남 = 빛에 '갇힘' = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 나방은 빛에 이끌리는 게 아니라 빛에 '갇혀' 벗어나지 못함 = <b>② trapped</b>",
+   "gnote": "회색(도입)과 Mach band·halo 등 개별 가설은 '갇힘'을 설명하는 예시일 뿐, 결론에 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The consensus seems to hold that moths",
+      "hl0"
+     ],
+     [
+      "are not so much attracted to lights",
+      "hl1"
+     ],
+     [
+      "as they are ______ by them.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "통념은 나방이",
+      "hl0"
+     ],
+     [
+      "빛에 이끌린다기보다는",
+      "hl1"
+     ],
+     [
+      "빛에 의해 ______된다고 보는 듯하다.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 이끌림이 아니라 ______"
+   },
+   {
+    "en": [
+     [
+      "The light becomes a sensory overload",
+      "hl0"
+     ],
+     [
+      "that disorients the insects",
+      "hl1"
+     ],
+     [
+      "and sends them into a holding pattern.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "빛은 감각 과부하가 되어",
+      "hl0"
+     ],
+     [
+      "곤충의 방향 감각을 잃게 하고",
+      "hl1"
+     ],
+     [
+      "그것들을 정지 패턴에 빠뜨린다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 방향 상실 + 정지 패턴 = 붙잡힘"
+   },
+   {
+    "en": [
+     [
+      "Their flight appears to have no purpose,",
+      "hl0"
+     ],
+     [
+      "but they are, it is believed,",
+      "hl1"
+     ],
+     [
+      "trying to escape the pull of the light.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그들의 비행은 목적이 없어 보이지만,",
+      "hl0"
+     ],
+     [
+      "믿기로는, 그들은",
+      "hl1"
+     ],
+     [
+      "빛의 끌림에서 벗어나려 애쓰고 있다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 벗어나려 애씀 = 빛에 갇힘"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "warmed",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "trapped",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "targeted",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "protected",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "rejected",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 나방은 빛에 '갇혀' 벗어나지 못함 · <span class=\"xo\">①</span>따뜻해짐(없음) <span class=\"xo\">③</span>표적됨(없음) <span class=\"xo\">④</span>보호됨(정반대) <span class=\"xo\">⑤</span>거부됨(없음)",
+  "paraphrase": {
+   "from": "sensory overload ... sends them into a holding pattern · circle the light hopelessly · trying to escape the pull of the light",
+   "to": "trapped",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "나방은 빛에 이끌리는 것이 아니라 빛에 갇혀 벗어나지 못한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "moths are not so much attracted to lights as they are ______ by them",
+     "ko": "나방은 이끌린다기보다 빛에 의해 ______된다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "a sensory overload that disorients the insects and sends them into a holding pattern",
+     "ko": "감각 과부하로 방향 상실·정지 패턴",
+     "role": "재진술",
+     "how": "기제 제시"
+    },
+    {
+     "en": "trying to escape the pull of the light",
+     "ko": "빛의 끌림에서 벗어나려 애씀",
+     "role": "정답근거",
+     "how": "함축"
+    }
+   ],
+   "echo": "정답은 '정지 패턴·벗어나려 애씀'을 '갇힘(trapped)'으로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2026-06|34",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "One word is inextricably associated with geography: where.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "That is because geography starts from the premise that it matters where something takes place on Earth’s surface.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "Earth’s surface"
+     }
+    ]
+   },
+   {
+    "t": "The key questions are not simply “where” questions, though; they are “why there” and “so what” questions.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Getting to such questions means taking spatial arrangements, variations, and interconnections seriously.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "spatial arrangements"
+     }
+    ]
+   },
+   {
+    "t": "Engaging in even the simplest day-to-day activity requires some appreciation of spatial circumstances ― where to find food and services, how to get to work places, and the like.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Moving up in scale, without some awareness of ______, it is difficult to make reasoned business or policy judgments, make sense of events, or grasp some of the basic forces shaping life on the planet.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "without some awareness"
+     }
+    ]
+   },
+   {
+    "t": "Locating a new store or public service requires taking into consideration population distributions, the location of roads and utilities, socio-economic patterns, and more.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Understanding why and where migration happens requires consideration of the political organization of territory, the spatial consequences of discrimination, socio-economic patterns, and the layout of the physical environment.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "지리학은 무언가가 <b>지표면(Earth's surface)</b> 어디에서 일어나는지가 중요하다는 전제에서 출발",
+     "an": "— 핵심은 '어디' = 지표면상의 위치"
+    },
+    {
+     "ko": "그런 질문은 <b>공간적 배열(spatial arrangements)</b>·변이·상호연결을 진지하게 다루는 것",
+     "an": "— 현상이 공간상에서 어떻게 배열되는지"
+    },
+    {
+     "ko": "규모를 키우면, ______에 대한 인식 없이는 합리적 판단·이해가 어려움",
+     "an": "— 빈칸 = 지표면에서 현상이 배열되는 방식 = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 빈칸 = 지표면상의 공간적 배열 = <b>② how phenomena are arranged on Earth's surface</b>",
+   "gnote": "회색·skip(도입, 새 상점 입지·이주 등 예시)은 '공간적 배열 인식'의 사례일 뿐, 결론에 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "That is because geography starts from the premise",
+      "hl0"
+     ],
+     [
+      "that it matters where something takes place",
+      "hl1"
+     ],
+     [
+      "on Earth’s surface.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그것은 지리학이 전제에서 출발하기 때문이다",
+      "hl0"
+     ],
+     [
+      "무언가가 어디에서 일어나는지가 중요하다는",
+      "hl1"
+     ],
+     [
+      "지표면 위에서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 지표면 어디에서 일어나는가가 중요"
+   },
+   {
+    "en": [
+     [
+      "Getting to such questions means",
+      "hl0"
+     ],
+     [
+      "taking spatial arrangements, variations, and interconnections",
+      "hl1"
+     ],
+     [
+      "seriously.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그런 질문에 도달한다는 것은",
+      "hl0"
+     ],
+     [
+      "공간적 배열·변이·상호연결을",
+      "hl1"
+     ],
+     [
+      "진지하게 다루는 것을 뜻한다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 공간적 배열·상호연결을 진지하게 다룸"
+   },
+   {
+    "en": [
+     [
+      "Moving up in scale, without some awareness of ______,",
+      "hl0"
+     ],
+     [
+      "it is difficult to make reasoned business or policy judgments,",
+      "hl1"
+     ],
+     [
+      "make sense of events,",
+      "hl2"
+     ],
+     [
+      "or grasp some of the basic forces shaping life on the planet.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "규모를 키우면, ______에 대한 인식 없이는,",
+      "hl0"
+     ],
+     [
+      "합리적 사업·정책 판단을 내리거나,",
+      "hl1"
+     ],
+     [
+      "사건을 이해하거나,",
+      "hl2"
+     ],
+     [
+      "지구상 삶을 형성하는 근본 힘을 파악하기 어렵다.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: ______ 인식 없이는 판단·이해 難"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "why cross-cultural conflicts will increase",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "how phenomena are arranged on Earth’s surface",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "when the <span class=\"reuse\">Earth’s</span> natural resources will be exhausted",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "which places on <span class=\"reuse\">Earth</span> are damaged by climate change",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "who has the authority to make decisions about territories",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 지표면상 현상의 공간적 배열 방식 · <span class=\"xo\">①</span>문화 충돌 증가(없음) <span class=\"xo\">③</span>자원 고갈 시점(표면어) <span class=\"xo\">④</span>기후 피해 장소(표면어) <span class=\"xo\">⑤</span>영토 결정 권한(없음)",
+  "paraphrase": {
+   "from": "it matters where something takes place on Earth’s surface · taking spatial arrangements, variations, and interconnections seriously",
+   "to": "how phenomena are arranged on Earth’s surface",
+   "copies": [
+    "Earth’s",
+    "Earth"
+   ]
+  },
+  "restate": {
+   "thesis": "지리학의 핵심은 지표면에서 현상이 어떻게 공간적으로 배열되는지를 아는 것이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "it matters where something takes place on Earth’s surface",
+     "ko": "지표면 어디에서 일어나는가가 중요",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "taking spatial arrangements, variations, and interconnections seriously",
+     "ko": "공간적 배열·변이·상호연결을 진지하게 다룸",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "without some awareness of ______, it is difficult to make reasoned ... judgments",
+     "ko": "______ 인식 없이는 합리적 판단 難",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '지표면상 위치·공간적 배열'을 '현상이 지표면에 배열되는 방식'으로 재진술"
+  },
+  "num": 34
+ },
+ {
+  "key": "2022-수능|32",
+  "answer": 5,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "News, especially in its televised form, is constituted not only by its choice of topics and stories but by its ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "constituted"
+     }
+    ]
+   },
+   {
+    "t": "Presentational styles have been subject to a tension between an informational-educational purpose and the need to engage us entertainingly.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정의",
+      "word": "Presentational styles"
+     }
+    ]
+   },
+   {
+    "t": "While current affairs programmes are often ‘serious’ in tone sticking to the ‘rules’ of balance, more popular programmes adopt a friendly, lighter, idiom in which we are invited to consider the impact of particular news items from the perspective of the ‘average person in the street’.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Indeed, contemporary news construction has come to rely on an increased use of faster editing tempos and ‘flashier’ presentational styles including the use of logos, sound-bites, rapid visual cuts and the ‘star quality’ of news readers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "반복",
+      "word": "presentational styles"
+     }
+    ]
+   },
+   {
+    "t": "Popular formats can be said to enhance understanding by engaging an audience unwilling to endure the longer verbal orientation of older news formats.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "However, they arguably work to reduce understanding by failing to provide the structural contexts for news events.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "뉴스는 주제·소재뿐 아니라 그 <b>______</b>에 의해 구성된다(빈칸=구성의 또 다른 축)",
+     "an": "— 빈칸은 '무엇으로 뉴스가 구성되는가'의 두 번째 요소"
+    },
+    {
+     "ko": "그 요소는 <b>제시 방식(Presentational styles)</b> — 정보·교육 목적과 오락적 몰입 사이의 긴장",
+     "an": "— 즉 뉴스를 전달하는 '표현/화법' 양식"
+    },
+    {
+     "ko": "로고·사운드바이트·빠른 시각 컷 등 <b>언어적·시각적</b> 제시 양식이 뉴스 구성을 좌우",
+     "an": "— 빈칸 = 언어적·시각적 관용어구/전달 방식 = 정답 <b>⑤</b>"
+    }
+   ],
+   "concl": "→ 뉴스를 구성하는 두 번째 축 = 언어적·시각적 제시 양식(화법) = <b>⑤</b>",
+   "gnote": "회색(예시 프로그램·오락/이해 부연)은 빼도 '뉴스=주제+제시 양식' 논리에 지장 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "News, especially in its televised form,",
+      "hl0"
+     ],
+     [
+      "is constituted not only by its choice of topics and stories",
+      "hl1"
+     ],
+     [
+      "but by its ______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "뉴스는, 특히 텔레비전 형태에서,",
+      "hl0"
+     ],
+     [
+      "그 주제와 소재의 선택뿐 아니라",
+      "hl1"
+     ],
+     [
+      "그것의 ______에 의해 구성된다.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 뉴스 구성의 두 번째 축"
+   },
+   {
+    "en": [
+     [
+      "Presentational styles have been subject to a tension",
+      "hl0"
+     ],
+     [
+      "between an informational-educational purpose",
+      "hl1"
+     ],
+     [
+      "and the need to engage us entertainingly.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "제시 양식은 긴장 관계에 놓여 왔다",
+      "hl0"
+     ],
+     [
+      "정보·교육적 목적과",
+      "hl1"
+     ],
+     [
+      "오락적으로 몰입시켜야 할 필요 사이의.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 빈칸의 정체 = 제시 양식(화법)"
+   },
+   {
+    "en": [
+     [
+      "Indeed, contemporary news construction has come to rely on",
+      "hl0"
+     ],
+     [
+      "faster editing tempos and ‘flashier’ presentational styles",
+      "hl1"
+     ],
+     [
+      "including the use of logos, sound-bites, rapid visual cuts",
+      "hl2"
+     ],
+     [
+      "and the ‘star quality’ of news readers.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "실제로 현대 뉴스 구성은 의존하게 되었다",
+      "hl0"
+     ],
+     [
+      "더 빠른 편집 템포와 ‘더 현란한’ 제시 양식에",
+      "hl1"
+     ],
+     [
+      "로고·사운드바이트·빠른 시각 컷의 사용을 포함해",
+      "hl2"
+     ],
+     [
+      "그리고 뉴스 진행자의 ‘스타성’까지.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 언어적·시각적 전달 방식이 뉴스를 구성"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "coordination with traditional display techniques",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "prompt and full coverage of the latest issues",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "<span class=\"reuse\">educational</span> media contents favoured by producers",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "commitment to long-lasting news standards",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "verbal and visual idioms or modes of address",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 언어적·시각적 관용어구/전달 방식 · <span class=\"xo\">①</span>전통 디스플레이 기법(없음) <span class=\"xo\">②</span>최신 이슈 신속 보도(없음) <span class=\"xo\">③</span>교육적 콘텐츠(표면어) <span class=\"xo\">④</span>지속적 뉴스 기준(없음)",
+  "paraphrase": {
+   "from": "Presentational styles … logos, sound-bites, rapid visual cuts",
+   "to": "verbal and visual idioms or modes of address",
+   "copies": [
+    "educational"
+   ]
+  },
+  "restate": {
+   "thesis": "뉴스는 주제·소재만이 아니라 언어적·시각적 제시 양식(화법)에 의해 구성된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "is constituted not only by its choice of topics and stories but by its ______",
+     "ko": "뉴스는 주제·소재뿐 아니라 빈칸에 의해 구성",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Presentational styles have been subject to a tension between an informational-educational purpose and the need to engage us entertainingly.",
+     "ko": "제시 양식(화법)이 그 두 번째 축",
+     "role": "재진술",
+     "how": "정의"
+    },
+    {
+     "en": "faster editing tempos and ‘flashier’ presentational styles including the use of logos, sound-bites, rapid visual cuts",
+     "ko": "로고·시각 컷 등 언어·시각적 전달 방식",
+     "role": "정답근거",
+     "how": "예시→일반화"
+    }
+   ],
+   "echo": "정답은 '제시 양식'을 '언어적·시각적 관용어구/전달 방식'으로 재진술(⑤)"
+  },
+  "num": 32
+ },
+ {
+  "key": "2023-09|32",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Fans feel for feeling’s own sake.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "They make meanings beyond what seems to be on offer.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "They build identities and experiences, and make artistic creations of their own to share with others.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A person can be an individual fan, feeling an “idealized connection with a star, strong feelings of memory and nostalgia,” and engaging in activities like “collecting to develop a sense of self.”",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But, more often, individual experiences are embedded in social contexts where other people with shared attachments socialize around the object of their affections.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "But"
+     }
+    ]
+   },
+   {
+    "t": "Much of the pleasure of fandom ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "pleasure"
+     }
+    ]
+   },
+   {
+    "t": "In their diaries, Bostonians of the 1800s described being part of the crowds at concerts as part of the pleasure of attendance.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A compelling argument can be made that what fans love is less the object of their fandom than the attachments to (and differentiations from) one another that those affections afford.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "attachments"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>But</b> 개인적 경험은 대개 <b>사회적 맥락</b>에 놓여, 다른 팬들과 어울린다",
+     "an": "— 역접으로 '개인 팬'에서 '타인과의 관계'로 초점 이동"
+    },
+    {
+     "ko": "팬덤의 즐거움 대부분은 빈칸 <b>______</b>에서 온다",
+     "an": "— 빈칸 = 즐거움의 원천"
+    },
+    {
+     "ko": "팬이 사랑하는 것은 대상 자체보다 서로에 대한 <b>애착</b>이다",
+     "an": "— 빈칸 = 다른 팬들과의 연결에서 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 팬덤의 즐거움의 원천 = 다른 팬들과 연결됨 = <b>④</b>",
+   "gnote": "회색(개인 팬 묘사·Boston 예시)은 빼도 '개인→사회적 연결' 논리에 지장 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "But, more often, individual experiences are embedded in social contexts",
+      "hl0"
+     ],
+     [
+      "where other people with shared attachments",
+      "hl1"
+     ],
+     [
+      "socialize around the object of their affections.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "하지만 더 흔히, 개인적 경험은 사회적 맥락에 끼워 넣어진다",
+      "hl0"
+     ],
+     [
+      "공유된 애착을 가진 다른 사람들이",
+      "hl1"
+     ],
+     [
+      "그들 애정의 대상을 중심으로 어울리는.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 팬 경험은 타인과의 사회적 맥락 속에 있음"
+   },
+   {
+    "en": [
+     [
+      "Much of the pleasure of fandom",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "팬덤의 즐거움 대부분은",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 즐거움의 원천"
+   },
+   {
+    "en": [
+     [
+      "A compelling argument can be made that",
+      "hl0"
+     ],
+     [
+      "what fans love is less the object of their fandom",
+      "hl1"
+     ],
+     [
+      "than the attachments to (and differentiations from) one another",
+      "hl2"
+     ],
+     [
+      "that those affections afford.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "강력한 주장이 제기될 수 있다",
+      "hl0"
+     ],
+     [
+      "팬이 사랑하는 것은 팬덤의 대상 자체라기보다",
+      "hl1"
+     ],
+     [
+      "서로에 대한 애착(그리고 서로와의 구별)이라는",
+      "hl2"
+     ],
+     [
+      "그 애정이 제공하는.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 팬이 사랑하는 것 = 서로에 대한 애착"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "is enhanced by collaborations between global <span class=\"reuse\">stars</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "results from frequent personal contact with a <span class=\"reuse\">star</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "deepens as fans age together with their idols",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "comes from being connected to other fans",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "is heightened by <span class=\"reuse\">stars</span>’ media appearances",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 다른 팬들과 연결됨에서 옴 · <span class=\"xo\">①</span>글로벌 스타 협업(표면어) <span class=\"xo\">②</span>스타와의 개인적 접촉(정반대) <span class=\"xo\">③</span>우상과 함께 나이 듦(없음) <span class=\"xo\">⑤</span>스타의 미디어 노출(표면어)",
+  "paraphrase": {
+   "from": "individual experiences are embedded in social contexts where other people … attachments to … one another",
+   "to": "comes from being connected to other fans",
+   "copies": [
+    "star",
+    "stars"
+   ]
+  },
+  "restate": {
+   "thesis": "팬덤의 즐거움은 대상 자체가 아니라 다른 팬들과의 연결·애착에서 온다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "individual experiences are embedded in social contexts where other people with shared attachments socialize",
+     "ko": "개인 경험은 다른 팬들과 어울리는 사회적 맥락에 놓임",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Much of the pleasure of fandom ______",
+     "ko": "팬덤 즐거움의 원천",
+     "role": "재진술",
+     "how": "초점화"
+    },
+    {
+     "en": "what fans love is less the object of their fandom than the attachments to … one another",
+     "ko": "팬이 사랑하는 것 = 서로에 대한 애착",
+     "role": "정답근거",
+     "how": "동의"
+    }
+   ],
+   "echo": "정답은 '서로에 대한 애착'을 '다른 팬들과 연결됨'으로 재진술(④)"
+  },
+  "num": 32
+ },
+ {
+  "key": "2024-06|33",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Whatever their differences, scientists and artists begin with the same question: can you and I see the same thing the same way?",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "If so, how?",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "The scientific thinker looks for features of the thing that can be stripped of subjectivity ― ideally, those aspects that can be quantified and whose values will thus never change from one observer to the next.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In this way, he arrives at a reality independent of all observers.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The artist, on the other hand, relies on the strength of her artistry to effect a marriage between her own subjectivity and that of her readers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "marriage"
+     }
+    ]
+   },
+   {
+    "t": "To a scientific thinker, this must sound like magical thinking: you’re saying you will imagine something so hard it’ll pop into someone else’s head exactly the way you envision it?",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The artist has sought the opposite of the scientist’s observer-independent reality.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "opposite"
+     }
+    ]
+   },
+   {
+    "t": "She creates a reality dependent upon observers, indeed a reality in which ______ in order for it to exist at all.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "dependent"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "예술가는 자기 주관과 독자의 주관 사이의 <b>결합(marriage)</b>에 의존한다",
+     "an": "— 예술적 현실엔 독자(사람)가 개입"
+    },
+    {
+     "ko": "예술가는 과학자의 <b>관찰자-독립적</b> 현실의 <b>반대</b>를 추구",
+     "an": "— 즉 관찰자에 '의존하는' 현실"
+    },
+    {
+     "ko": "관찰자에 의존하는 현실, 그것이 존재하려면 빈칸 <b>______</b>이 필요",
+     "an": "— 빈칸 = 인간(관찰자)이 참여해야 = 정답 <b>①</b>"
+    }
+   ],
+   "concl": "→ 예술적 현실은 관찰자에 의존 → 존재하려면 인간이 참여해야 = <b>①</b>",
+   "gnote": "회색(과학자 측 설명·비유)은 대조 배경일 뿐, '예술=관찰자 의존' 논리의 부차 요소."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The artist, on the other hand,",
+      "hl0"
+     ],
+     [
+      "relies on the strength of her artistry",
+      "hl1"
+     ],
+     [
+      "to effect a marriage between her own subjectivity and that of her readers.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "반면 예술가는,",
+      "hl0"
+     ],
+     [
+      "자신의 예술성의 힘에 의존한다",
+      "hl1"
+     ],
+     [
+      "자기 주관과 독자의 주관 사이의 결합을 이뤄내기 위해.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 예술적 현실엔 독자(사람)가 결합·개입"
+   },
+   {
+    "en": [
+     [
+      "The artist has sought the opposite",
+      "hl0"
+     ],
+     [
+      "of the scientist’s observer-independent reality.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "예술가는 정반대를 추구해 왔다",
+      "hl0"
+     ],
+     [
+      "과학자의 관찰자-독립적 현실의.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 예술=관찰자에 '의존하는' 현실"
+   },
+   {
+    "en": [
+     [
+      "She creates a reality dependent upon observers,",
+      "hl0"
+     ],
+     [
+      "indeed a reality in which ______",
+      "hl1"
+     ],
+     [
+      "in order for it to exist at all.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그녀는 관찰자에 의존하는 현실을 만든다,",
+      "hl0"
+     ],
+     [
+      "실로 ______ 현실을",
+      "hl1"
+     ],
+     [
+      "그것이 조금이라도 존재하기 위해서.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 존재하려면 인간(관찰자)의 참여 필요"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "human beings must participate",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "objectivity should be maintained",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "science and art need to harmonize",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 4,
+    "tx": "<span class=\"reuse\">readers</span> remain distanced from the arts",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "she is disengaged from her own <span class=\"reuse\">subjectivity</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 인간(관찰자)이 참여해야 · <span class=\"xo\">②</span>객관성 유지(정반대) <span class=\"xo\">③</span>과학·예술의 조화(범위초과) <span class=\"xo\">④</span>독자가 거리 둠(정반대) <span class=\"xo\">⑤</span>자기 주관과 분리(정반대)",
+  "paraphrase": {
+   "from": "a reality dependent upon observers · marriage between her own subjectivity and that of her readers",
+   "to": "human beings must participate",
+   "copies": [
+    "readers",
+    "subjectivity"
+   ]
+  },
+  "restate": {
+   "thesis": "예술가는 관찰자에 의존하는 현실을 만들며, 그 현실은 인간의 참여로만 존재한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "a marriage between her own subjectivity and that of her readers",
+     "ko": "자기 주관과 독자 주관의 결합",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "The artist has sought the opposite of the scientist’s observer-independent reality.",
+     "ko": "관찰자-독립적의 반대 = 관찰자 의존",
+     "role": "재진술",
+     "how": "대조 반전"
+    },
+    {
+     "en": "a reality dependent upon observers, indeed a reality in which ______",
+     "ko": "관찰자에 의존하는 현실",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '관찰자 의존'을 '인간이 참여해야'로 재진술(①)"
+  },
+  "num": 33
+ },
+ {
+  "key": "2025-06|31",
+  "answer": 3,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "When trying to establish what is meant by digital preservation, the first question that must be addressed is: what are you actually trying to preserve?",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This is clear in the analog environment where the information content is inextricably fixed to the physical medium.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "analog"
+     }
+    ]
+   },
+   {
+    "t": "In the digital environment, the medium is not part of the ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "medium"
+     }
+    ]
+   },
+   {
+    "t": "A bit stream looks the same to a computer regardless of the media it is read from.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "As the physical media that carry digital information are quite delicate relative to most analog media, it is expected that digital information will necessarily need to be migrated from one physical carrier to another as part of the ongoing preservation process.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It is not the media itself but the information on the media that needs to be preserved.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "information"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>아날로그</b>에선 정보 내용이 물리적 매체에 <b>풀 수 없게 고정</b>",
+     "an": "— 매체=내용이 하나로 묶임(대조 배경)"
+    },
+    {
+     "ko": "<b>디지털</b>에선 매체가 빈칸 <b>______</b>의 일부가 아니다",
+     "an": "— 빈칸 = 매체와 분리되는 그 무엇 = '내용'"
+    },
+    {
+     "ko": "보존해야 할 것은 매체가 아니라 매체 위의 <b>정보</b>",
+     "an": "— 매체와 분리되는 것 = 정보/메시지 = 정답 <b>③</b>"
+    }
+   ],
+   "concl": "→ 디지털에선 매체는 메시지(정보)의 일부가 아니다 = <b>③</b>",
+   "gnote": "회색(비트 복사·이주 과정)은 '매체≠정보'를 뒷받침하는 부연일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "This is clear in the analog environment",
+      "hl0"
+     ],
+     [
+      "where the information content is inextricably fixed",
+      "hl1"
+     ],
+     [
+      "to the physical medium.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이것은 아날로그 환경에서 분명하다",
+      "hl0"
+     ],
+     [
+      "정보 내용이 풀 수 없게 고정되는",
+      "hl1"
+     ],
+     [
+      "물리적 매체에.",
+      "hl2"
+     ]
+    ],
+    "note": "근거(대조): 아날로그는 매체=내용"
+   },
+   {
+    "en": [
+     [
+      "In the digital environment,",
+      "hl0"
+     ],
+     [
+      "the medium is not part of the ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "디지털 환경에서는,",
+      "hl0"
+     ],
+     [
+      "매체는 그 ______의 일부가 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 매체와 분리되는 것"
+   },
+   {
+    "en": [
+     [
+      "It is not the media itself",
+      "hl0"
+     ],
+     [
+      "but the information on the media",
+      "hl1"
+     ],
+     [
+      "that needs to be preserved.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "매체 자체가 아니라",
+      "hl0"
+     ],
+     [
+      "매체 위의 정보가",
+      "hl1"
+     ],
+     [
+      "보존되어야 하는 것이다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 매체와 분리되는 것 = 정보(메시지)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "platform",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "storage",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "message",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 4,
+    "tx": "challenge",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "transformation",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 매체는 메시지(정보)의 일부가 아니다 · <span class=\"xo\">①</span>플랫폼(없음) <span class=\"xo\">②</span>저장소(없음) <span class=\"xo\">④</span>도전(없음) <span class=\"xo\">⑤</span>변형(없음)",
+  "paraphrase": {
+   "from": "It is not the media itself but the information on the media that needs to be preserved",
+   "to": "message",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "디지털에서 매체는 내용(메시지)과 분리되며, 보존 대상은 매체가 아니라 정보다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the information content is inextricably fixed to the physical medium",
+     "ko": "아날로그: 내용이 매체에 고정",
+     "role": "주제문",
+     "how": "— (대조축)"
+    },
+    {
+     "en": "In the digital environment, the medium is not part of the ______",
+     "ko": "디지털: 매체는 그것의 일부가 아님",
+     "role": "재진술",
+     "how": "반전"
+    },
+    {
+     "en": "It is not the media itself but the information on the media that needs to be preserved.",
+     "ko": "보존 대상은 매체가 아니라 정보",
+     "role": "정답근거",
+     "how": "명시"
+    }
+   ],
+   "echo": "정답은 '매체와 분리되는 정보 내용'을 'message'로 재진술(③)"
+  },
+  "num": 31
+ },
+ {
+  "key": "2025-수능|31",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Literature can be helpful in the language learning process because of the ______ it fosters in readers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "fosters"
+     }
+    ]
+   },
+   {
+    "t": "Core language teaching materials must concentrate on how a language operates both as a rule-based system and as a sociosemantic system.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Very often, the process of learning is essentially analytic, piecemeal, and, at the level of the personality, fairly superficial.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Engaging imaginatively with literature enables learners to shift the focus of their attention beyond the more mechanical aspects of the foreign language system.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "Engaging"
+     }
+    ]
+   },
+   {
+    "t": "When a novel, play or short story is explored over a period of time, the result is that the reader begins to ‘inhabit’ the text.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "He or she is drawn into the book.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Pinpointing what individual words or phrases may mean becomes less important than pursuing the development of the story.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The reader is eager to find out what happens as events unfold; he or she feels close to certain characters and shares their emotional responses.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The language becomes ‘transparent’ ― the fiction draws the whole person into its own world.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "whole person"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "문학이 언어 학습에 도움이 되는 이유 = 그것이 독자에게 <b>길러 주는(fosters)</b> 빈칸 <b>______</b> 때문",
+     "an": "— 빈칸 = 문학이 독자에게 길러 주는 것"
+    },
+    {
+     "ko": "문학과 <b>상상적으로 관여</b>하면 언어의 기계적 측면 너머로 주의를 옮긴다",
+     "an": "— 학습자가 기계적 처리 대신 몰입·관여"
+    },
+    {
+     "ko": "허구가 <b>전인(全人, whole person)</b>을 그 세계로 끌어들인다",
+     "an": "— 빈칸 = 개인적 몰입·관여 = 정답 <b>①</b>"
+    }
+   ],
+   "concl": "→ 문학이 길러 주는 것 = 독자의 개인적 몰입(전인적 관여) = <b>①</b>",
+   "gnote": "회색(교수자료·학습의 분석적 성격·개별 예시)은 '몰입' 논리의 배경·예시일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Literature can be helpful in the language learning process",
+      "hl0"
+     ],
+     [
+      "because of the ______",
+      "hl1"
+     ],
+     [
+      "it fosters in readers.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "문학은 언어 학습 과정에 도움이 될 수 있다",
+      "hl0"
+     ],
+     [
+      "그 ______ 때문에",
+      "hl1"
+     ],
+     [
+      "그것이 독자에게 길러 주는.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 문학이 독자에게 길러 주는 것"
+   },
+   {
+    "en": [
+     [
+      "Engaging imaginatively with literature",
+      "hl0"
+     ],
+     [
+      "enables learners to shift the focus of their attention",
+      "hl1"
+     ],
+     [
+      "beyond the more mechanical aspects of the foreign language system.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "문학과 상상적으로 관여하는 것은",
+      "hl0"
+     ],
+     [
+      "학습자가 주의의 초점을 옮기게 해 준다",
+      "hl1"
+     ],
+     [
+      "외국어 체계의 더 기계적인 측면 너머로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 기계적 처리 대신 몰입적 관여"
+   },
+   {
+    "en": [
+     [
+      "The language becomes ‘transparent’ ―",
+      "hl0"
+     ],
+     [
+      "the fiction draws the whole person",
+      "hl1"
+     ],
+     [
+      "into its own world.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "언어는 ‘투명’해진다 ―",
+      "hl0"
+     ],
+     [
+      "허구가 전인(全人)을 끌어들인다",
+      "hl1"
+     ],
+     [
+      "그 자신의 세계로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 전인적·개인적 몰입"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "personal involvement",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "alternative perspective",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "literary sensibility",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 4,
+    "tx": "artistic imagination",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 5,
+    "tx": "linguistic insight",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 개인적 몰입(전인적 관여) · <span class=\"xo\">②</span>대안적 관점(없음) <span class=\"xo\">③</span>문학적 감수성(범위초과) <span class=\"xo\">④</span>예술적 상상력(범위초과) <span class=\"xo\">⑤</span>언어적 통찰(정반대: 단어 의미는 덜 중요)",
+  "paraphrase": {
+   "from": "the fiction draws the whole person into its own world · Engaging imaginatively",
+   "to": "personal involvement",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "문학은 독자를 전인적으로 몰입시켜, 그 개인적 관여가 언어 학습을 돕는다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "because of the ______ it fosters in readers",
+     "ko": "문학이 독자에게 길러 주는 것",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Engaging imaginatively with literature enables learners to shift the focus … beyond the more mechanical aspects",
+     "ko": "기계적 처리 대신 상상적 관여",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "the fiction draws the whole person into its own world",
+     "ko": "허구가 전인을 끌어들임",
+     "role": "정답근거",
+     "how": "비유"
+    }
+   ],
+   "echo": "정답은 '전인을 끌어들임·상상적 관여'를 'personal involvement'로 재진술(①)"
+  },
+  "num": 31
+ },
+ {
+  "key": "2027-06|33",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Imagination continues to function when perception is not actively discerning objects, in cases of emotion, disease, and sleep.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Emotions dispose one to see the world in a distorted way.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A coward’s perceptual disposition is affected by his disposition to experience fear.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A lover’s expectations are affected by desire.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In such cases, a small similarity between a perceived object and the thing one expects to see can lead to the misidentification of the perceived object as that thing.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "small similarity"
+     }
+    ]
+   },
+   {
+    "t": "The coward sees the enemy, while the lover sees the object of desire everywhere.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The more affected one is, ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "비례",
+      "word": "more affected"
+     }
+    ]
+   },
+   {
+    "t": "While the central organ of sense normally functions by comparing similarities and differences, emotions dispose one to discern objects inaccurately.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The greater the emotional investment, the more biased one’s perception.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "emotional investment"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "작은 <b>유사성</b>만으로도 지각 대상을 기대한 것으로 <b>오인</b>하게 된다",
+     "an": "— 감정이 있으면 사소한 닮음이 착각을 유발"
+    },
+    {
+     "ko": "감정에 <b>더 영향받을수록(more affected)</b> 빈칸 <b>______</b>",
+     "an": "— 빈칸 = 영향↑ 일 때의 결과(비례 관계)"
+    },
+    {
+     "ko": "감정 투자가 <b>클수록</b> 지각은 더 <b>편향</b>된다",
+     "an": "— 영향↑ → 필요한 유사성↓ (더 쉽게 착각) = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 영향받을수록, 그 대상이 나타나는 데 필요한 유사성은 더 적어진다 = <b>②</b>",
+   "gnote": "회색(겁쟁이·연인 예시, 감각기관 부연)은 '감정↑→오인↑' 비례 논리의 예시일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In such cases, a small similarity",
+      "hl0"
+     ],
+     [
+      "between a perceived object and the thing one expects to see",
+      "hl1"
+     ],
+     [
+      "can lead to the misidentification of the perceived object as that thing.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그런 경우, 작은 유사성이",
+      "hl0"
+     ],
+     [
+      "지각된 대상과 기대하는 것 사이의",
+      "hl1"
+     ],
+     [
+      "지각 대상을 그것으로 오인하게 만들 수 있다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 작은 유사성 → 오인"
+   },
+   {
+    "en": [
+     [
+      "The more affected one is,",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "감정에 더 영향받을수록,",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 영향↑ 일 때의 비례 결과"
+   },
+   {
+    "en": [
+     [
+      "The greater the emotional investment,",
+      "hl0"
+     ],
+     [
+      "the more biased one’s perception.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "감정 투자가 클수록,",
+      "hl0"
+     ],
+     [
+      "지각은 더 편향된다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 감정↑ → 편향↑ (더 쉽게 오인)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "the more chances one gets to find <span class=\"reuse\">differences</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "the less similarity is required for the thing to appear",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "the sooner the perceived <span class=\"reuse\">similarity</span> fades away",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "the more easily one can sense the world the way it is",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "the less slowly different emotions are released",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 대상이 나타나는 데 필요한 유사성이 더 적어짐 · <span class=\"xo\">①</span>차이를 더 잘 찾음(정반대) <span class=\"xo\">③</span>유사성이 빨리 사라짐(표면어) <span class=\"xo\">④</span>세상을 있는 그대로 지각(정반대) <span class=\"xo\">⑤</span>감정이 덜 느리게 방출(없음)",
+  "paraphrase": {
+   "from": "a small similarity … can lead to misidentification · the greater the emotional investment, the more biased",
+   "to": "the less similarity is required for the thing to appear",
+   "copies": [
+    "differences",
+    "similarity"
+   ]
+  },
+  "restate": {
+   "thesis": "감정에 더 영향받을수록 더 작은 유사성만으로도 기대한 대상을 지각(오인)하게 된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "a small similarity … can lead to the misidentification of the perceived object as that thing",
+     "ko": "작은 유사성 → 오인",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "The more affected one is, ______",
+     "ko": "영향받을수록의 비례 결과",
+     "role": "재진술",
+     "how": "비례화"
+    },
+    {
+     "en": "The greater the emotional investment, the more biased one’s perception.",
+     "ko": "감정↑ → 편향↑",
+     "role": "정답근거",
+     "how": "동형 반복"
+    }
+   ],
+   "echo": "정답은 '감정↑→오인↑'을 '필요 유사성↓'으로 재진술(②)"
+  },
+  "num": 33
+ },
+ {
+  "key": "2022-수능|33",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Elinor Ostrom found that there are several factors critical to bringing about stable institutional solutions to the problem of the commons.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "She pointed out, for instance, that the actors affected by the rules for the use and care of resources must have the right to ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "right to"
+     }
+    ]
+   },
+   {
+    "t": "For that reason, the people who monitor and control the behavior of users should also be users and/or have been given a mandate by all users.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "This is a significant insight, as it shows that prospects are poor for a centrally directed solution to the problem of the commons coming from a state power in comparison with a local solution for which users assume personal responsibility.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Ostrom also emphasizes the importance of democratic decision processes and that all users must be given access to local forums for solving problems and conflicts among themselves.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "democratic"
+     }
+    ]
+   },
+   {
+    "t": "Political institutions at central, regional, and local levels must allow users to devise their own regulations and independently ensure observance.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "devise"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "규칙의 영향을 받는 행위자들은 빈칸 ______ 할 권리를 가져야 한다",
+     "an": "— 빈칸 = 자원 사용 규칙에 대한 어떤 권리"
+    },
+    {
+     "ko": "Ostrom은 <b>민주적 의사결정</b>과 사용자의 지역 포럼 접근을 강조",
+     "an": "— 사용자가 스스로 결정에 관여해야 함"
+    },
+    {
+     "ko": "정치 제도는 사용자가 <b>스스로 규정을 고안</b>하도록 허용해야 한다",
+     "an": "— 규칙 제정·변경에 참여할 권리 = 정답 ①"
+    }
+   ],
+   "concl": "→ 사용자들이 규칙을 만들고 바꾸는 결정에 참여할 권리 = <b>①</b>",
+   "gnote": "회색(도입·중앙 vs 지방 비교 부연)은 '사용자 자치·참여' 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "She pointed out, for instance,",
+      "hl0"
+     ],
+     [
+      "that the actors affected by the rules",
+      "hl1"
+     ],
+     [
+      "for the use and care of resources",
+      "hl2"
+     ],
+     [
+      "must have the right to ______.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그녀는, 예를 들어, 지적했다",
+      "hl0"
+     ],
+     [
+      "규칙의 영향을 받는 행위자들이",
+      "hl1"
+     ],
+     [
+      "자원의 사용과 관리에 관한",
+      "hl2"
+     ],
+     [
+      "______ 할 권리를 가져야 한다고.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 행위자가 가져야 할 권리"
+   },
+   {
+    "en": [
+     [
+      "Ostrom also emphasizes the importance of democratic decision processes",
+      "hl0"
+     ],
+     [
+      "and that all users must be given access to local forums",
+      "hl1"
+     ],
+     [
+      "for solving problems and conflicts among themselves.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "Ostrom은 또한 민주적 의사결정 과정의 중요성을 강조한다",
+      "hl0"
+     ],
+     [
+      "그리고 모든 사용자가 지역 포럼에 접근할 수 있어야 한다고",
+      "hl1"
+     ],
+     [
+      "그들 사이의 문제와 갈등을 해결하기 위해.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 민주적 의사결정·사용자 참여"
+   },
+   {
+    "en": [
+     [
+      "Political institutions at central, regional, and local levels",
+      "hl0"
+     ],
+     [
+      "must allow users to devise their own regulations",
+      "hl1"
+     ],
+     [
+      "and independently ensure observance.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "중앙·지역·지방 차원의 정치 제도는",
+      "hl0"
+     ],
+     [
+      "사용자들이 스스로 규정을 고안하도록 허용해야 한다",
+      "hl1"
+     ],
+     [
+      "그리고 독립적으로 준수를 보장하도록.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 사용자가 스스로 규칙을 고안"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "participate in decisions to change the rules",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "claim individual ownership of the <span class=\"reuse\">resources</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "use those <span class=\"reuse\">resources</span> to maximize their profits",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "demand free access to the communal <span class=\"reuse\">resources</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "request proper distribution based on their merits",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 규칙 변경 결정에 참여할 권리 · <span class=\"xo\">②</span>개인 소유 주장(정반대) <span class=\"xo\">③</span>이익 극대화(표면어) <span class=\"xo\">④</span>무료 접근 요구(표면어) <span class=\"xo\">⑤</span>공로 기반 분배(없음)",
+  "paraphrase": {
+   "from": "democratic decision processes · devise their own regulations · access to local forums",
+   "to": "participate in decisions to change the rules",
+   "copies": [
+    "resources",
+    "access"
+   ]
+  },
+  "restate": {
+   "thesis": "공유지 문제의 안정적 해법은 사용자가 규칙 제정·변경에 스스로 참여하는 자치에서 나온다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Ostrom also emphasizes the importance of democratic decision processes and that all users must be given access to local forums",
+     "ko": "민주적 의사결정과 사용자 참여를 강조",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Political institutions ... must allow users to devise their own regulations",
+     "ko": "사용자가 스스로 규정을 고안하도록 허용",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "the actors affected by the rules ... must have the right to",
+     "ko": "규칙의 영향을 받는 자가 가질 권리",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '스스로 규정 고안·민주적 의사결정'을 '규칙 변경 결정에 참여'로 재진술"
+  },
+  "num": 33
+ },
+ {
+  "key": "2023-09|33",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "There was nothing modern about the idea of men making women’s clothes ― we saw them doing it for centuries in the past.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In the old days, however, the client was always primary and her tailor was an obscure craftsman, perhaps talented but perhaps not.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "She had her own ideas like any patron, there were no fashion plates, and the tailor was simply at her service, perhaps with helpful suggestions about what others were wearing.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Beginning in the late nineteenth century, with the hugely successful rise of the artistic male couturier, it was the designer who became celebrated, and the client elevated by his inspired attention.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "celebrated"
+     }
+    ]
+   },
+   {
+    "t": "In a climate of admiration for male artists and their female creations, the dress-designer first flourished as the same sort of creator.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "creator"
+     }
+    ]
+   },
+   {
+    "t": "Instead of the old rule that dressmaking is a craft, ______ was invented that had not been there before.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "craft"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "19세기 후반, 예술적 남성 디자이너의 부상으로 <b>디자이너가 칭송</b>받게 됨",
+     "an": "— 주역이 고객→디자이너로 이동"
+    },
+    {
+     "ko": "의상 디자이너가 예술가와 <b>같은 종류의 창작자</b>로 번성",
+     "an": "— 옷 만들기가 예술의 지위로 격상"
+    },
+    {
+     "ko": "공예라는 옛 규칙 대신 빈칸 ______ 이(가) 생겨남",
+     "an": "— 빈칸 = 의상 디자인과 예술의 현대적 연결 = 정답 ④"
+    }
+   ],
+   "concl": "→ '공예'를 대신해 새로 생긴 것 = 디자인과 예술의 현대적 연결 = <b>④</b>",
+   "gnote": "회색(도입·옛 재단사 부연)은 '공예→예술 격상' 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Beginning in the late nineteenth century,",
+      "hl0"
+     ],
+     [
+      "with the hugely successful rise of the artistic male couturier,",
+      "hl1"
+     ],
+     [
+      "it was the designer who became celebrated,",
+      "hl2"
+     ],
+     [
+      "and the client elevated by his inspired attention.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "19세기 후반부터,",
+      "hl0"
+     ],
+     [
+      "예술적인 남성 고급 여성복 디자이너의 대성공적 부상과 함께,",
+      "hl1"
+     ],
+     [
+      "칭송받게 된 것은 디자이너였다,",
+      "hl2"
+     ],
+     [
+      "그리고 고객은 그의 영감 어린 관심으로 격상되었다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 디자이너가 칭송받는 주역이 됨"
+   },
+   {
+    "en": [
+     [
+      "In a climate of admiration for male artists and their female creations,",
+      "hl0"
+     ],
+     [
+      "the dress-designer first flourished",
+      "hl1"
+     ],
+     [
+      "as the same sort of creator.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "남성 예술가와 그들의 여성적 창작물에 대한 찬미의 분위기 속에서,",
+      "hl0"
+     ],
+     [
+      "의상 디자이너는 처음으로 번성했다",
+      "hl1"
+     ],
+     [
+      "같은 종류의 창작자로서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 디자이너=예술가와 같은 창작자"
+   },
+   {
+    "en": [
+     [
+      "Instead of the old rule",
+      "hl0"
+     ],
+     [
+      "that dressmaking is a craft,",
+      "hl1"
+     ],
+     [
+      "______ was invented",
+      "hl2"
+     ],
+     [
+      "that had not been there before.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "오래된 규칙 대신에",
+      "hl0"
+     ],
+     [
+      "의상 제작이 하나의 공예(기술)라는,",
+      "hl1"
+     ],
+     [
+      "______ 이(가) 생겨났다",
+      "hl2"
+     ],
+     [
+      "이전에는 존재하지 않았던.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 공예를 대신해 생긴 것"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "a profitable industry driving fast fashion",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 2,
+    "tx": "a widespread respect for marketing skills",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "a public institution preserving traditional <span class=\"reuse\">designs</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "a modern connection between dress-design and art",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "an efficient system for producing affordable clothing",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 의상 디자인과 예술의 현대적 연결 · <span class=\"xo\">①</span>패스트패션 산업(범위초과) <span class=\"xo\">②</span>마케팅 존중(없음) <span class=\"xo\">③</span>전통 보존 기관(정반대) <span class=\"xo\">⑤</span>저가 의류 생산(없음)",
+  "paraphrase": {
+   "from": "the dress-designer first flourished as the same sort of creator · admiration for male artists",
+   "to": "a modern connection between dress-design and art",
+   "copies": [
+    "designs"
+   ]
+  },
+  "restate": {
+   "thesis": "의상 제작이 공예에서 예술로 격상되어 디자이너가 예술가와 같은 창작자로 여겨지게 되었다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "it was the designer who became celebrated",
+     "ko": "칭송받게 된 것은 디자이너",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the dress-designer first flourished as the same sort of creator",
+     "ko": "디자이너가 예술가와 같은 창작자로 번성",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "Instead of the old rule that dressmaking is a craft",
+     "ko": "공예라는 옛 규칙을 대신해",
+     "role": "정답근거",
+     "how": "대조"
+    }
+   ],
+   "echo": "정답은 '디자이너=예술가와 같은 창작자'를 '의상 디자인과 예술의 연결'로 재진술"
+  },
+  "num": 33
+ },
+ {
+  "key": "2024-09|31",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "In the post-World War II years after 1945, unparalleled economic growth fueled a building boom and a massive migration from the central cities to the new suburban areas.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The suburbs were far more dependent on the automobile, signaling the shift from primary dependence on public transportation to private cars.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "private"
+     }
+    ]
+   },
+   {
+    "t": "Soon this led to the construction of better highways and freeways and the decline and even loss of public transportation.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "With all of these changes came a ______ of leisure.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "leisure"
+     }
+    ]
+   },
+   {
+    "t": "As more people owned their own homes, with more space inside and lovely yards outside, their recreation and leisure time was increasingly centered around the home or, at most, the neighborhood.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "home"
+     }
+    ]
+   },
+   {
+    "t": "One major activity of this home-based leisure was watching television.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "No longer did one have to ride the trolly to the theater to watch a movie; similar entertainment was available for free and more conveniently from television.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "교외화로 <b>대중교통에서 개인 자동차</b>로 의존이 전환됨",
+     "an": "— 공적(public)에서 사적(private)으로의 이동"
+    },
+    {
+     "ko": "이 모든 변화와 함께 빈칸 ______ 의 여가가 옴",
+     "an": "— 빈칸 = 여가의 어떤 성격 변화"
+    },
+    {
+     "ko": "여가가 점점 <b>집(home)</b>을 중심으로 이루어짐",
+     "an": "— 사적 공간 중심 = 여가의 사유화 = 정답 ④"
+    }
+   ],
+   "concl": "→ 공공에서 집 중심의 사적 활동으로 = 여가의 사유화(privatization) = <b>④</b>",
+   "gnote": "회색(도입·TV·극장 부연)은 '공공→사적' 논리의 예시일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The suburbs were far more dependent on the automobile,",
+      "hl0"
+     ],
+     [
+      "signaling the shift from primary dependence on public transportation",
+      "hl1"
+     ],
+     [
+      "to private cars.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "교외는 자동차에 훨씬 더 의존적이었고,",
+      "hl0"
+     ],
+     [
+      "대중교통에 대한 주된 의존에서의 전환을 시사했다",
+      "hl1"
+     ],
+     [
+      "개인 자동차로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 공공에서 사적 이동으로"
+   },
+   {
+    "en": [
+     [
+      "With all of these changes",
+      "hl0"
+     ],
+     [
+      "came a ______",
+      "hl1"
+     ],
+     [
+      "of leisure.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 모든 변화와 함께",
+      "hl0"
+     ],
+     [
+      "______ 이(가) 왔다",
+      "hl1"
+     ],
+     [
+      "여가의.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 여가의 성격 변화"
+   },
+   {
+    "en": [
+     [
+      "As more people owned their own homes,",
+      "hl0"
+     ],
+     [
+      "with more space inside and lovely yards outside,",
+      "hl1"
+     ],
+     [
+      "their recreation and leisure time was increasingly centered around the home",
+      "hl2"
+     ],
+     [
+      "or, at most, the neighborhood.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "더 많은 사람들이 자기 집을 소유하게 되면서,",
+      "hl0"
+     ],
+     [
+      "내부에 더 많은 공간과 외부에 멋진 마당을 갖춘,",
+      "hl1"
+     ],
+     [
+      "그들의 오락과 여가 시간은 점점 더 집을 중심으로 이루어졌다",
+      "hl2"
+     ],
+     [
+      "혹은, 기껏해야, 이웃 동네를.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 여가가 집 중심(사적)으로"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "downfall",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "uniformity",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "restoration",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "privatization",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "customization",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 여가의 사유화(privatization) · <span class=\"xo\">①</span>몰락(표면어) <span class=\"xo\">②</span>획일성(없음) <span class=\"xo\">③</span>복원(없음) <span class=\"xo\">⑤</span>맞춤화(없음)",
+  "paraphrase": {
+   "from": "shift from public transportation to private cars · leisure centered around the home",
+   "to": "privatization",
+   "copies": [
+    "downfall"
+   ]
+  },
+  "restate": {
+   "thesis": "전후 교외화로 여가가 공공 공간에서 집 중심의 사적 활동으로 옮겨갔다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the shift from primary dependence on public transportation to private cars",
+     "ko": "대중교통에서 개인 차로의 전환",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "their recreation and leisure time was increasingly centered around the home",
+     "ko": "여가가 점점 집을 중심으로",
+     "role": "재진술",
+     "how": "유추"
+    },
+    {
+     "en": "similar entertainment was available for free and more conveniently from television",
+     "ko": "오락을 집에서 TV로 해결",
+     "role": "정답근거",
+     "how": "예시"
+    }
+   ],
+   "echo": "정답은 '공공→사적·집 중심 여가'를 '여가의 사유화'로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2025-06|32",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Creativity is commonly defined as the production of ideas that are both novel (original, new) and useful (appropriate, feasible).",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "goal"
+     }
+    ]
+   },
+   {
+    "t": "Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This requires that people evaluate the products of their own or each other’s imagination, and choose those ideas that seem promising enough to develop further, and abandon those that are unlikely to be successful.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "evaluate"
+     }
+    ]
+   },
+   {
+    "t": "Thus, being creative ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "creative"
+     }
+    ]
+   },
+   {
+    "t": "In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "useless"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "창의적 아이디어를 <b>생성</b>하는 것이 최종 목표인 경우는 드물다",
+     "an": "— 생성만으로는 부족"
+    },
+    {
+     "ko": "아이디어를 <b>평가·선택·발전</b>시키고 나쁜 것은 버려야 한다",
+     "an": "— 생성 이후의 과정이 필요"
+    },
+    {
+     "ko": "따라서 창의적이라는 것은 빈칸 ______",
+     "an": "— 빈칸 = 생성 이후까지 포함하는 의미"
+    },
+    {
+     "ko": "사실 생성 능력만으론 아이디어가 사라지면 <b>쓸모없다</b>",
+     "an": "— 생성에서 멈추지 않는다 = 정답 ①"
+    }
+   ],
+   "concl": "→ 창의성은 생성에 그치지 않고 평가·선택까지 = <b>①</b>",
+   "gnote": "회색(정의·유용/참신 분류 부연)은 '생성 이후가 중요' 논리의 배경일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "While this definition is widely used in research,",
+      "hl0"
+     ],
+     [
+      "an important aspect of creativity is often ignored:",
+      "hl1"
+     ],
+     [
+      "Generating creative ideas rarely is the final goal.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 정의가 연구에서 널리 쓰이지만,",
+      "hl0"
+     ],
+     [
+      "창의성의 중요한 한 측면이 흔히 간과된다:",
+      "hl1"
+     ],
+     [
+      "창의적 아이디어를 생성하는 것이 최종 목표인 경우는 드물다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 생성은 최종 목표가 아니다"
+   },
+   {
+    "en": [
+     [
+      "This requires that people evaluate the products of their own or each other’s imagination,",
+      "hl0"
+     ],
+     [
+      "and choose those ideas that seem promising enough to develop further,",
+      "hl1"
+     ],
+     [
+      "and abandon those that are unlikely to be successful.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이는 사람들이 자신 혹은 서로의 상상의 산물을 평가할 것을 요구한다,",
+      "hl0"
+     ],
+     [
+      "그리고 더 발전시킬 만큼 유망해 보이는 아이디어를 선택하고,",
+      "hl1"
+     ],
+     [
+      "성공할 것 같지 않은 것들은 버릴 것을.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 평가·선택·발전·폐기가 필요"
+   },
+   {
+    "en": [
+     [
+      "Thus,",
+      "hl0"
+     ],
+     [
+      "being creative",
+      "hl1"
+     ],
+     [
+      "______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서,",
+      "hl0"
+     ],
+     [
+      "창의적이라는 것은",
+      "hl1"
+     ],
+     [
+      "______.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 창의적이라는 것의 의미"
+   },
+   {
+    "en": [
+     [
+      "In fact, the ability to generate creative ideas is essentially useless",
+      "hl0"
+     ],
+     [
+      "if these ideas subsequently die a silent death.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사실, 창의적 아이디어를 생성하는 능력은 본질적으로 쓸모없다",
+      "hl0"
+     ],
+     [
+      "만약 이 아이디어들이 이후 조용히 사라진다면.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 생성만으론 쓸모없다"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "does not stop with idea generation",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "rarely originates from practical ideas",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "is often regarded as a shortcut to innovation",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "frequently gives way to unanticipated success",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "brings out tension between <span class=\"reuse\">novelty</span> and relevancy",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 아이디어 생성에서 멈추지 않는다 · <span class=\"xo\">②</span>실용적 발상에서 유래(없음) <span class=\"xo\">③</span>혁신의 지름길(정반대) <span class=\"xo\">④</span>예기치 못한 성공(없음) <span class=\"xo\">⑤</span>참신성·적절성 긴장(표면어)",
+  "paraphrase": {
+   "from": "generating creative ideas rarely is the final goal · evaluate, choose, develop, abandon",
+   "to": "does not stop with idea generation",
+   "copies": [
+    "novelty",
+    "relevancy"
+   ]
+  },
+  "restate": {
+   "thesis": "창의성은 아이디어 생성에 그치지 않고 평가·선택·발전까지 포함해야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Generating creative ideas rarely is the final goal",
+     "ko": "아이디어 생성이 최종 목표는 아니다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "people evaluate ... choose ... develop further ... abandon those that are unlikely to be successful",
+     "ko": "평가·선택·발전·폐기가 필요",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "the ability to generate creative ideas is essentially useless if these ideas subsequently die",
+     "ko": "생성만으론 쓸모없다",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '생성은 최종 목표가 아니다·평가·선택 필요'를 '생성에서 멈추지 않는다'로 재진술"
+  },
+  "num": 32
+ },
+ {
+  "key": "2025-수능|32",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Education, at its best, teaches more than just knowledge.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It teaches critical thinking: the ability to stop and think before acting, to avoid succumbing to emotional pressures.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "avoid"
+     }
+    ]
+   },
+   {
+    "t": "This is not thought control.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "It is the very reverse: mental liberation.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "liberation"
+     }
+    ]
+   },
+   {
+    "t": "Even the most advanced intellectual will be imperfect at this skill.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But even imperfect possession of it ______ of being ‘stimulus-driven’, constantly reacting to the immediate environment, the brightest colours or loudest sounds.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "stimulus-driven"
+     }
+    ]
+   },
+   {
+    "t": "Being driven by heuristic responses, living by instinct and emotion all the time, is a very easy way to live, in many ways: thought is effortful, especially for the inexperienced.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But emotions are also exhausting, and short-term reactions may not, in the long term, be the most beneficial for health and survival.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Just as we reach for burgers for the sake of convenience, storing up the arterial fat which may one day kill us, so our reliance on feelings can do us great harm.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "비판적 사고는 감정적 압력에 <b>굴복하는 것을 피하는</b> 능력이다",
+     "an": "— 감정에 휘둘리지 않게 함"
+    },
+    {
+     "ko": "그것은 정반대, 즉 <b>정신적 해방</b>이다",
+     "an": "— '해방' = 무언가로부터 벗어남"
+    },
+    {
+     "ko": "불완전하게 지녔더라도 '자극에 이끌리는' 상태 ______",
+     "an": "— 빈칸 = 그 부담에서 벗어나게 함 = 정답 ②"
+    }
+   ],
+   "concl": "→ 비판적 사고 = 자극에 이끌리는 부담에서 벗어나게 함 = <b>②</b>",
+   "gnote": "회색(도입·본능적 삶·햄버거 비유)은 '해방' 논리의 대조·예시일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "It teaches critical thinking:",
+      "hl0"
+     ],
+     [
+      "the ability to stop and think before acting,",
+      "hl1"
+     ],
+     [
+      "to avoid succumbing to emotional pressures.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그것은 비판적 사고를 가르친다:",
+      "hl0"
+     ],
+     [
+      "행동하기 전에 멈추고 생각하는 능력,",
+      "hl1"
+     ],
+     [
+      "감정적 압력에 굴복하는 것을 피하는.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 감정에 굴복하지 않게 함"
+   },
+   {
+    "en": [
+     [
+      "It is the very reverse:",
+      "hl0"
+     ],
+     [
+      "mental liberation.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그것은 정반대이다:",
+      "hl0"
+     ],
+     [
+      "정신적 해방.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 비판적 사고 = 정신적 해방"
+   },
+   {
+    "en": [
+     [
+      "But even imperfect possession of it",
+      "hl0"
+     ],
+     [
+      "______",
+      "hl1"
+     ],
+     [
+      "of being ‘stimulus-driven’,",
+      "hl2"
+     ],
+     [
+      "constantly reacting to the immediate environment, the brightest colours or loudest sounds.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 그것을 불완전하게 지녔더라도",
+      "hl0"
+     ],
+     [
+      "______",
+      "hl1"
+     ],
+     [
+      "‘자극에 이끌리는’ 상태의",
+      "hl2"
+     ],
+     [
+      "즉 즉각적 환경, 가장 밝은 색이나 가장 큰 소리에 끊임없이 반응하는 것의.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 자극에 이끌림에 대한 작용"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "allows us to accept the inevitability",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "frees a person from the burden",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "intensifies people’s danger",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "enhances our understanding",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "requires one to have the <span class=\"reuse\">experience</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 자극에 이끌리는 부담에서 벗어나게 함 · <span class=\"xo\">①</span>불가피성 수용(없음) <span class=\"xo\">③</span>위험 심화(정반대) <span class=\"xo\">④</span>이해 향상(없음) <span class=\"xo\">⑤</span>경험 필요(표면어)",
+  "paraphrase": {
+   "from": "critical thinking is mental liberation · avoid succumbing to emotional pressures",
+   "to": "frees a person from the burden",
+   "copies": [
+    "experience"
+   ]
+  },
+  "restate": {
+   "thesis": "비판적 사고는 자극에 즉각 반응하는 상태에서 벗어나게 하는 정신적 해방이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the ability to stop and think before acting, to avoid succumbing to emotional pressures",
+     "ko": "감정적 압력에 굴복하지 않게 함",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "It is the very reverse: mental liberation",
+     "ko": "그것은 정신적 해방",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "even imperfect possession of it ______ of being ‘stimulus-driven’",
+     "ko": "불완전해도 자극에 이끌림에서 벗어남",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '정신적 해방·굴복 회피'를 '자극에 이끌리는 부담에서 벗어남'으로 재진술"
+  },
+  "num": 32
+ },
+ {
+  "key": "2022-수능|34",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Precision and determinacy are a necessary requirement for all meaningful scientific debate, and progress in the sciences is, to a large extent, the ongoing process of achieving ever greater precision.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But historical representation puts a premium on a proliferation of representations, hence not on the refinement of one representation but on the production of an ever more varied set of representations.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "But"
+     }
+    ]
+   },
+   {
+    "t": "Historical insight is not a matter of a continuous “narrowing down” of previous options, not of an approximation of the truth, but, on the contrary, is an “explosion” of possible points of view.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It therefore aims at the unmasking of previous illusions of determinacy and precision by the production of new and alternative representations, rather than at achieving truth by a careful analysis of what was right and wrong in those previous representations.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "therefore"
+     }
+    ]
+   },
+   {
+    "t": "And from this perspective, the development of historical insight may indeed be regarded by the outsider as a process of creating ever more confusion, a continuous questioning of ______, rather than, as in the sciences, an ever greater approximation to the truth.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "questioning"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "역사적 서술은 하나의 표상을 <b>정교화</b>하지 않고 <b>다양한 표상의 증식</b>에 방점을 둔다",
+     "an": "— 과학의 '정밀화'와 정반대"
+    },
+    {
+     "ko": "그것은 이전의 <b>확정성·정밀성이라는 환상</b>을 벗겨내는 것을 목표로 한다",
+     "an": "— 즉 이미 얻은 듯한 '확실성·정밀성'을 계속 의심"
+    },
+    {
+     "ko": "그러므로 빈칸 = 끊임없이 의문을 제기하는 대상 = ______",
+     "an": "— '이미 성취된 듯한 확실성과 정밀성' = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 역사적 통찰이 끊임없이 의문시하는 것 = '이미 이룬 듯 보이는 확실성과 정밀성' = <b>②</b>",
+   "gnote": "회색(과학 배경·'explosion of points of view' 부연)은 '환상 벗기기' 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "But historical representation puts a premium",
+      "hl0"
+     ],
+     [
+      "on a proliferation of representations,",
+      "hl1"
+     ],
+     [
+      "hence not on the refinement of one representation",
+      "hl2"
+     ],
+     [
+      "but on the production of an ever more varied set of representations.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "하지만 역사적 서술은 강조점을 둔다",
+      "hl0"
+     ],
+     [
+      "표상의 증식에,",
+      "hl1"
+     ],
+     [
+      "즉 하나의 표상을 정교화하는 것이 아니라",
+      "hl2"
+     ],
+     [
+      "더욱 다양한 표상들의 생산에.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 역사 서술은 표상의 다양화(증식)를 지향"
+   },
+   {
+    "en": [
+     [
+      "It therefore aims at the unmasking of previous illusions",
+      "hl0"
+     ],
+     [
+      "of determinacy and precision",
+      "hl1"
+     ],
+     [
+      "by the production of new and alternative representations,",
+      "hl2"
+     ],
+     [
+      "rather than at achieving truth by a careful analysis of what was right and wrong in those previous representations.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서 그것은 이전의 환상을 벗겨내는 것을 목표로 한다",
+      "hl0"
+     ],
+     [
+      "즉 확정성과 정밀성이라는 환상을,",
+      "hl1"
+     ],
+     [
+      "새롭고 대안적인 표상들을 생산함으로써,",
+      "hl2"
+     ],
+     [
+      "이전 표상들의 옳고 그름을 세심히 분석해 진리에 이르는 것이 아니라.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 목표는 '확정성·정밀성이라는 환상'을 벗기는 것"
+   },
+   {
+    "en": [
+     [
+      "And from this perspective, the development of historical insight",
+      "hl0"
+     ],
+     [
+      "may indeed be regarded by the outsider as a process of creating ever more confusion,",
+      "hl1"
+     ],
+     [
+      "a continuous questioning of ______,",
+      "hl2"
+     ],
+     [
+      "rather than, as in the sciences, an ever greater approximation to the truth.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그리고 이 관점에서, 역사적 통찰의 발전은",
+      "hl0"
+     ],
+     [
+      "외부인에게는 점점 더 많은 혼란을 만들어내는 과정으로 보일 수 있다,",
+      "hl1"
+     ],
+     [
+      "______에 대한 끊임없는 의문 제기,",
+      "hl2"
+     ],
+     [
+      "과학에서처럼 진리에 점점 더 근접해 가는 것이 아니라.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 끊임없이 의문시하는 대상이 빈칸"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "criteria for evaluating historical <span class=\"reuse\">representations</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "certainty and precision seemingly achieved already",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "possibilities of alternative interpretations of an event",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "coexistence of multiple viewpoints in historical writing",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "correctness and reliability of historical evidence collected",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 이미 이룬 듯한 확실성·정밀성을 계속 의문시 · <span class=\"xo\">①</span>서술 평가 기준(표면어) <span class=\"xo\">③</span>대안적 해석 가능성(정반대) <span class=\"xo\">④</span>다양한 관점의 공존(정반대) <span class=\"xo\">⑤</span>수집된 증거의 정확성(없음)",
+  "paraphrase": {
+   "from": "unmasking of previous illusions of determinacy and precision",
+   "to": "certainty and precision seemingly achieved already",
+   "copies": [
+    "representations"
+   ]
+  },
+  "restate": {
+   "thesis": "역사적 통찰은 이전에 이룬 듯한 확정성·정밀성이라는 환상을 계속 벗겨내고 의문시한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "But historical representation puts a premium on a proliferation of representations",
+     "ko": "역사 서술은 표상의 증식(다양화)에 방점",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "It therefore aims at the unmasking of previous illusions of determinacy and precision",
+     "ko": "이전의 확정성·정밀성이라는 환상을 벗겨냄",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "a continuous questioning of",
+     "ko": "끊임없는 의문 제기의 대상 = 빈칸",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "'확정성·정밀성이라는 환상'을 '이미 이룬 듯한 확실성·정밀성'으로 재진술 ②"
+  },
+  "num": 34
+ },
+ {
+  "key": "2023-09|34",
+  "answer": 1,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "In trying to explain how different disciplines attempt to understand autobiographical memory the literary critic Daniel Albright said, “Psychology is a garden, literature is a wilderness.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "wilderness"
+     }
+    ]
+   },
+   {
+    "t": "He meant, I believe, that psychology seeks to make patterns, find regularity, and ultimately impose order on human experience and behavior.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Writers, by contrast, dive into the unruly, untamed depths of human experiences.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "What he said about understanding memory can be extended to our questions about young children’s minds.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "If we psychologists are too bent on identifying the orderly pattern, the regularities of children’s minds, we may miss an essential and pervasive characteristic of our topic: the child’s more unruly and imaginative ways of talking and thinking.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "조건",
+      "word": "If"
+     }
+    ]
+   },
+   {
+    "t": "It is not only the developed writer or literary scholar who seems drawn toward a somewhat wild and idiosyncratic way of thinking; young children are as well.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The psychologist interested in young children may have to ______ in order to get a good picture of how children think.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주장",
+      "word": "may have to"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "심리학은 <b>정원</b>(질서·패턴), 문학은 <b>야생</b>(제멋대로·길들지 않음)",
+     "an": "— 두 학문의 대조 은유"
+    },
+    {
+     "ko": "질서만 좇으면 아이 마음의 <b>제멋대로이고 상상력 넘치는</b> 본질을 놓친다",
+     "an": "— 아이의 사고는 '야생'에 가깝다"
+    },
+    {
+     "ko": "그러므로 심리학자는 빈칸 ______해야 아이를 제대로 이해한다",
+     "an": "— '야생으로 좀 더 자주 모험을 떠나기' = 정답 <b>①</b>"
+    }
+   ],
+   "concl": "→ 아이를 이해하려면 질서(정원)를 벗어나 '야생으로 모험'해야 = <b>①</b>",
+   "gnote": "회색(기억 설명·작가 예시)은 '정원 vs 야생' 대조에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In trying to explain how different disciplines attempt to understand autobiographical memory",
+      "hl0"
+     ],
+     [
+      "the literary critic Daniel Albright said,",
+      "hl1"
+     ],
+     [
+      "“Psychology is a garden,",
+      "hl2"
+     ],
+     [
+      "literature is a wilderness.”",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "서로 다른 학문이 자서전적 기억을 이해하려는 방식을 설명하며",
+      "hl0"
+     ],
+     [
+      "문학 비평가 Daniel Albright는 말했다,",
+      "hl1"
+     ],
+     [
+      "“심리학은 정원이고,",
+      "hl2"
+     ],
+     [
+      "문학은 야생이다.”",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 심리학=정원, 문학=야생 은유"
+   },
+   {
+    "en": [
+     [
+      "If we psychologists are too bent on identifying the orderly pattern,",
+      "hl0"
+     ],
+     [
+      "the regularities of children’s minds,",
+      "hl1"
+     ],
+     [
+      "we may miss an essential and pervasive characteristic of our topic:",
+      "hl2"
+     ],
+     [
+      "the child’s more unruly and imaginative ways of talking and thinking.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "만약 우리 심리학자들이 질서정연한 패턴을 규명하는 데 너무 몰두하면,",
+      "hl0"
+     ],
+     [
+      "즉 아이들 마음의 규칙성에,",
+      "hl1"
+     ],
+     [
+      "우리는 주제의 본질적이고 널리 퍼진 특성을 놓칠 수 있다:",
+      "hl2"
+     ],
+     [
+      "아이의 더 제멋대로이고 상상력 넘치는 말하고 사고하는 방식을.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 질서만 좇으면 아이의 야생적 사고를 놓침"
+   },
+   {
+    "en": [
+     [
+      "The psychologist interested in young children",
+      "hl0"
+     ],
+     [
+      "may have to ______",
+      "hl1"
+     ],
+     [
+      "in order to get a good picture of how children think.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "어린아이에게 관심 있는 심리학자는",
+      "hl0"
+     ],
+     [
+      "______해야 할지도 모른다",
+      "hl1"
+     ],
+     [
+      "아이들이 어떻게 사고하는지 잘 파악하기 위해서.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 심리학자가 해야 할 일이 빈칸"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "venture a little more often into the wilderness",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "help them recall their most precious <span class=\"reuse\">memories</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "better understand the challenges of parental duty",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "disregard the key <span class=\"reuse\">characteristics</span> of children’s fiction",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "standardize the paths of their psychological development",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 질서를 벗어나 '야생'으로 더 자주 모험 · <span class=\"xo\">②</span>소중한 기억 회상(표면어) <span class=\"xo\">③</span>부모 역할 이해(없음) <span class=\"xo\">④</span>아동 소설 특성 무시(표면어) <span class=\"xo\">⑤</span>발달 경로 표준화(정반대)",
+  "paraphrase": {
+   "from": "unruly and imaginative ways of talking and thinking · literature is a wilderness",
+   "to": "venture a little more often into the wilderness",
+   "copies": [
+    "memories",
+    "characteristics"
+   ]
+  },
+  "restate": {
+   "thesis": "아이의 사고는 야생과 같아, 심리학자는 질서를 벗어나 야생으로 모험해야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Psychology is a garden, literature is a wilderness.",
+     "ko": "심리학=정원(질서), 문학=야생(무질서)",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "we may miss ... the child’s more unruly and imaginative ways of talking and thinking",
+     "ko": "질서만 좇으면 아이의 야생적 사고를 놓침",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "The psychologist ... may have to",
+     "ko": "심리학자가 해야 할 일 = 빈칸",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 문학의 'wilderness'를 '야생으로의 모험'으로 재진술 ①"
+  },
+  "num": 34
+ },
+ {
+  "key": "2024-09|32",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Many people create and share pictures and videos on the Internet.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The difficulty is finding what you want.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Typically, people want to search using words (rather than, say, example sketches).",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Because most pictures don’t come with words attached, it is natural to try and build tagging systems that tag images with relevant words.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The underlying machinery is straightforward ― we apply image classification and object detection methods and tag the image with the output words.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But tags aren’t ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "But"
+     }
+    ]
+   },
+   {
+    "t": "It matters who is doing what, and tags don’t capture this.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "who is doing what"
+     }
+    ]
+   },
+   {
+    "t": "For example, tagging a picture of a cat in the street with the object categories “cat”, “street”, “trash can” and “fish bones” leaves out the information that the cat is pulling the fish bones out of an open trash can on the street.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "예시",
+      "word": "leaves out"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "빈칸: <b>하지만 태그는 ______가 아니다</b>",
+     "an": "— 태그 시스템의 한계를 지적하려는 전환"
+    },
+    {
+     "ko": "중요한 건 <b>누가 무엇을 하는지</b>인데 태그는 이를 포착 못 한다",
+     "an": "— 태그는 개별 객체만 나열"
+    },
+    {
+     "ko": "예: '고양이·쓰레기통·생선 뼈' 태그는 <b>고양이가 생선 뼈를 꺼내는</b> 상황을 빠뜨림",
+     "an": "— 빈칸 = 이미지에서 벌어지는 일의 포괄적 서술 = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 태그는 '이미지에서 무슨 일이 일어나는지에 대한 포괄적 서술'이 아니다 = <b>②</b>",
+   "gnote": "회색(태깅 원리 설명)은 '관계·행위 포착 불가' 논지의 배경일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "But tags aren’t ______.",
+      "hl0"
+     ]
+    ],
+    "ko": [
+     [
+      "하지만 태그는 ______가 아니다.",
+      "hl0"
+     ]
+    ],
+    "note": "빈칸 문장: 태그가 '아닌' 것이 빈칸"
+   },
+   {
+    "en": [
+     [
+      "It matters who is doing what,",
+      "hl0"
+     ],
+     [
+      "and tags don’t capture this.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "누가 무엇을 하고 있는지가 중요한데,",
+      "hl0"
+     ],
+     [
+      "태그는 이것을 포착하지 못한다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 태그는 '누가 무엇을 하는지'를 못 담음"
+   },
+   {
+    "en": [
+     [
+      "For example, tagging a picture of a cat in the street",
+      "hl0"
+     ],
+     [
+      "with the object categories “cat”, “street”, “trash can” and “fish bones”",
+      "hl1"
+     ],
+     [
+      "leaves out the information",
+      "hl2"
+     ],
+     [
+      "that the cat is pulling the fish bones out of an open trash can on the street.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "예를 들어, 거리의 고양이 사진에 태그를 달 때",
+      "hl0"
+     ],
+     [
+      "“고양이”, “거리”, “쓰레기통”, “생선 뼈”라는 객체 범주로,",
+      "hl1"
+     ],
+     [
+      "정보를 빠뜨린다",
+      "hl2"
+     ],
+     [
+      "고양이가 거리의 열린 쓰레기통에서 생선 뼈를 꺼내고 있다는 정보를.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 개별 태그는 '벌어지는 상황' 정보를 누락"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "a set of words that allow users to identify an individual <span class=\"reuse\">object</span>",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "a comprehensive description of what is happening in an image",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "a reliable resource for <span class=\"reuse\">categorizing</span> information by pictures",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "a primary means of organizing a sequential order of <span class=\"reuse\">words</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "a useful filter for sorting similar but not identical images",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 이미지에서 벌어지는 일의 포괄적 서술 · <span class=\"xo\">①</span>개별 객체 식별(정반대) <span class=\"xo\">③</span>사진별 정보 분류(표면어) <span class=\"xo\">④</span>단어의 순차 배열(표면어) <span class=\"xo\">⑤</span>유사 이미지 정렬(없음)",
+  "paraphrase": {
+   "from": "It matters who is doing what · leaves out the information that the cat is pulling the fish bones out",
+   "to": "a comprehensive description of what is happening in an image",
+   "copies": [
+    "object",
+    "categorizing",
+    "words"
+   ]
+  },
+  "restate": {
+   "thesis": "태그는 개별 객체만 나열할 뿐 이미지 속에서 무슨 일이 일어나는지 서술하지 못한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "But tags aren’t",
+     "ko": "태그가 아닌 것 = 빈칸",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "It matters who is doing what, and tags don’t capture this.",
+     "ko": "누가 무엇을 하는지를 태그는 못 담음",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "leaves out the information that the cat is pulling the fish bones out",
+     "ko": "고양이가 생선 뼈를 꺼내는 '상황'을 빠뜨림",
+     "role": "정답근거",
+     "how": "예시"
+    }
+   ],
+   "echo": "정답은 'who is doing what'을 '무슨 일이 일어나는지의 포괄적 서술'로 재진술 ②"
+  },
+  "num": 32
+ },
+ {
+  "key": "2025-06|33",
+  "answer": 1,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and the environment act as a ‘coupled system.’",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "Because"
+     }
+    ]
+   },
+   {
+    "t": "This coupled system can be seen as a complete cognitive system of its own.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In this manner, subjective experience is extended into the external environment and vice versa; the external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "mental institutions"
+     }
+    ]
+   },
+   {
+    "t": "A subjectively held belief attains the status of objectivity when the belief is socially shared.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "That is, even if we are trained as hard-nosed health care rationalists, or no-nonsense bureaucrats, or data-driven scientists, research has shown that our decisions are influenced by various institutional practices.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "influenced"
+     }
+    ]
+   },
+   {
+    "t": "They include bureaucratic structures and procedures, the architectural design of health care institutions, the rules of evidence and the structure of allowable questions in a courtroom trial, the spatial arrangement of kindergartens and supermarkets, and a variety of conventions and practices designed to manipulate our emotions.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "주관적 경험과 환경은 하나의 <b>결합된 시스템</b>으로 작동한다",
+     "an": "— 환경이 내적 과정에 관여"
+    },
+    {
+     "ko": "제도적 법·장비 같은 외부 환경이 빈칸 ______하는 <b>정신적 제도</b>가 된다",
+     "an": "— 환경이 우리 정신에 작용"
+    },
+    {
+     "ko": "실제로 우리의 <b>결정</b>은 다양한 제도적 관행에 <b>영향받는다</b>",
+     "an": "— 빈칸 = 우리의 주관적 경험과 해결책에 영향 = 정답 <b>①</b>"
+    }
+   ],
+   "concl": "→ 제도(정신적 제도)는 우리의 주관적 경험·판단에 영향을 미친다 = <b>①</b>",
+   "gnote": "회색(신념의 객관성·제도 사례 나열)은 '환경→정신 영향' 논지의 부연."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Because the environment plays a significant role",
+      "hl0"
+     ],
+     [
+      "in aiding meaningful internal processes,",
+      "hl1"
+     ],
+     [
+      "subjective experience and the environment",
+      "hl2"
+     ],
+     [
+      "act as a ‘coupled system.’",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "환경이 중요한 역할을 하기 때문에",
+      "hl0"
+     ],
+     [
+      "의미 있는 내적 과정을 돕는 데,",
+      "hl1"
+     ],
+     [
+      "주관적 경험과 환경은",
+      "hl2"
+     ],
+     [
+      "'결합된 시스템'으로 작동한다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 주관적 경험과 환경은 결합된 시스템"
+   },
+   {
+    "en": [
+     [
+      "In this manner, subjective experience is extended into the external environment and vice versa;",
+      "hl0"
+     ],
+     [
+      "the external environment with its disciplinary objects",
+      "hl1"
+     ],
+     [
+      "such as institutional laws and equipment",
+      "hl2"
+     ],
+     [
+      "becomes mental institutions that ______.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "이런 식으로, 주관적 경험은 외부 환경으로 확장되고 역으로도 그러하다;",
+      "hl0"
+     ],
+     [
+      "규율적 대상을 지닌 외부 환경은",
+      "hl1"
+     ],
+     [
+      "제도적 법률과 장비 같은,",
+      "hl2"
+     ],
+     [
+      "______하는 정신적 제도가 된다.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 정신적 제도가 하는 일이 빈칸"
+   },
+   {
+    "en": [
+     [
+      "That is, even if we are trained as hard-nosed health care rationalists,",
+      "hl0"
+     ],
+     [
+      "or no-nonsense bureaucrats, or data-driven scientists,",
+      "hl1"
+     ],
+     [
+      "research has shown that our decisions",
+      "hl2"
+     ],
+     [
+      "are influenced by various institutional practices.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "즉, 우리가 냉철한 의료 합리주의자로 훈련받았더라도,",
+      "hl0"
+     ],
+     [
+      "혹은 실무적인 관료나 데이터 기반 과학자로,",
+      "hl1"
+     ],
+     [
+      "연구는 우리의 결정이",
+      "hl2"
+     ],
+     [
+      "다양한 제도적 관행에 영향받음을 보여주었다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 우리의 결정이 제도적 관행에 영향받음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "affect our subjective experience and solutions",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "serve as advocates for independent decision-making",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "position social experience within the <span class=\"reuse\">cognitive system</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "comprise <span class=\"reuse\">subjective</span> interpretations of the environment",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "facilitate the construction of our concept of subjectivity",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 우리의 주관적 경험·판단에 영향을 미침 · <span class=\"xo\">②</span>독립적 의사결정 옹호(정반대) <span class=\"xo\">③</span>사회적 경험을 인지체계에 배치(표면어) <span class=\"xo\">④</span>환경의 주관적 해석 구성(표면어) <span class=\"xo\">⑤</span>주관성 개념 구성 촉진(범위초과)",
+  "paraphrase": {
+   "from": "our decisions are influenced by various institutional practices",
+   "to": "affect our subjective experience and solutions",
+   "copies": [
+    "cognitive system",
+    "subjective"
+   ]
+  },
+  "restate": {
+   "thesis": "제도적 환경은 정신적 제도가 되어 우리의 주관적 경험과 판단에 영향을 준다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "subjective experience and the environment act as a ‘coupled system.’",
+     "ko": "주관적 경험과 환경은 결합된 시스템",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the external environment ... becomes mental institutions that",
+     "ko": "외부 환경이 정신적 제도가 됨 = 빈칸",
+     "role": "정답근거",
+     "how": "반복"
+    },
+    {
+     "en": "our decisions are influenced by various institutional practices",
+     "ko": "우리의 결정이 제도적 관행에 영향받음",
+     "role": "재진술",
+     "how": "동의어"
+    }
+   ],
+   "echo": "정답은 '결정이 제도에 영향받음'을 '주관적 경험·판단에 영향'으로 재진술 ①"
+  },
+  "num": 33
+ },
+ {
+  "key": "2025-수능|33",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "We are famously living in the era of the attention economy, where the largest and most profitable businesses in the world are those that consume my attention.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "consume my attention"
+     }
+    ]
+   },
+   {
+    "t": "The advertising industry is literally dedicated to capturing the conscious hours of my life and selling them to someone else.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "selling them to someone else"
+     }
+    ]
+   },
+   {
+    "t": "It might seem magical that so many exciting and useful software systems are available to use for free, but it is now conventional wisdom that if you can’t see who is paying for something that appears to be free, then ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "Our creative engagement with other people is mediated by AI-based recommendation systems that are designed to trap our attention through the process that Nick Seaver calls captology, keeping us attending to work sold by one company rather than another, replacing the freedom of personal exploration with algorithm-generated playlists or even algorithm-generated art.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "가장 수익성 높은 기업들은 <b>나의 주목을 소비</b>한다(주목 경제)",
+     "an": "— 주목이 곧 상품"
+    },
+    {
+     "ko": "광고 산업은 내 삶의 시간을 포착해 <b>다른 누군가에게 판다</b>",
+     "an": "— 팔리는 대상은 '나'의 주목·시간"
+    },
+    {
+     "ko": "그러므로 공짜의 값을 치르는 자가 안 보이면 빈칸 ______",
+     "an": "— '진짜 팔리는 상품은 바로 당신' = 정답 <b>②</b>"
+    }
+   ],
+   "concl": "→ 무료 서비스에서 실제로 팔리는 상품은 바로 '당신' = <b>②</b>",
+   "gnote": "회색(AI 추천·captology 부연)은 '당신이 상품'이라는 결론의 사례일 뿐."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "We are famously living in the era of the attention economy,",
+      "hl0"
+     ],
+     [
+      "where the largest and most profitable businesses in the world",
+      "hl1"
+     ],
+     [
+      "are those that consume my attention.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 유명하게도 주목 경제의 시대에 살고 있는데,",
+      "hl0"
+     ],
+     [
+      "거기서 세계에서 가장 크고 수익성 높은 기업들은",
+      "hl1"
+     ],
+     [
+      "나의 주목을 소비하는 기업들이다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 큰 기업들은 '나의 주목'을 소비"
+   },
+   {
+    "en": [
+     [
+      "The advertising industry is literally dedicated",
+      "hl0"
+     ],
+     [
+      "to capturing the conscious hours of my life",
+      "hl1"
+     ],
+     [
+      "and selling them to someone else.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "광고 산업은 말 그대로 전념한다",
+      "hl0"
+     ],
+     [
+      "내 삶의 의식적인 시간을 포착하는 데",
+      "hl1"
+     ],
+     [
+      "그리고 그것을 다른 누군가에게 파는 데.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 내 시간을 포착해 '남에게 판다'"
+   },
+   {
+    "en": [
+     [
+      "It might seem magical that so many exciting and useful software systems are available to use for free,",
+      "hl0"
+     ],
+     [
+      "but it is now conventional wisdom that",
+      "hl1"
+     ],
+     [
+      "if you can’t see who is paying for something that appears to be free,",
+      "hl2"
+     ],
+     [
+      "then ______.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그토록 많은 흥미롭고 유용한 소프트웨어를 공짜로 쓸 수 있다는 게 마법처럼 보일 수 있지만,",
+      "hl0"
+     ],
+     [
+      "이제는 상식이 되었다",
+      "hl1"
+     ],
+     [
+      "공짜로 보이는 것에 대해 누가 값을 치르는지 보이지 않는다면,",
+      "hl2"
+     ],
+     [
+      "그렇다면 ______.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 공짜의 대가가 안 보일 때의 결론이 빈칸"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "all of your <span class=\"reuse\">attention</span> has already been spent",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "the real product being sold is you",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "your privacy is being violated",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "the public may be sponsoring you",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "you owe the benefits to your friend <span class=\"reuse\">AI</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 실제 팔리는 상품은 바로 '당신' · <span class=\"xo\">①</span>주목이 이미 소진됨(표면어) <span class=\"xo\">③</span>사생활 침해(없음) <span class=\"xo\">④</span>대중이 후원(정반대) <span class=\"xo\">⑤</span>친구 AI에게 빚짐(표면어)",
+  "paraphrase": {
+   "from": "capturing the conscious hours of my life and selling them to someone else",
+   "to": "the real product being sold is you",
+   "copies": [
+    "attention",
+    "AI"
+   ]
+  },
+  "restate": {
+   "thesis": "주목 경제에서 무료 서비스의 진짜 상품은 팔리는 대상인 당신 자신이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "businesses ... are those that consume my attention",
+     "ko": "기업들은 나의 주목을 소비",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "capturing the conscious hours of my life and selling them to someone else",
+     "ko": "내 삶의 시간을 포착해 남에게 판매",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "if you can’t see who is paying ... then",
+     "ko": "공짜의 대가를 못 보면 → 빈칸",
+     "role": "정답근거",
+     "how": "추론"
+    }
+   ],
+   "echo": "정답은 '내 시간을 남에게 판다'를 '팔리는 상품은 당신'으로 재진술 ②"
+  },
+  "num": 33
+ },
+ {
+  "key": "2023-06|31",
+  "answer": 5,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Young contemporary artists who employ digital technologies in their practice rarely make reference to computers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "rarely make reference"
+     }
+    ]
+   },
+   {
+    "t": "For example, Wade Guyton, an abstractionist who uses a word processing program and inkjet printers, does not call himself a computer artist.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Moreover, some critics, who admire his work, are little concerned about his extensive use of computers in the art-making process.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This is a marked contrast from three decades ago when artists who utilized computers were labeled by critics ― often disapprovingly ― as computer artists.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "marked contrast"
+     }
+    ]
+   },
+   {
+    "t": "For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "With tablets and cell phones surpassing personal computers in Internet usage, and as slim digital devices resemble nothing like the room-sized mainframes and bulky desktop computers of previous decades, it now appears that the computer artist is finally ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "it now appears"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "디지털 기술을 쓰는 젊은 작가들은 <b>거의 컴퓨터를 언급하지 않는다</b>",
+     "an": "— 컴퓨터가 특별한 도구가 아니게 됨"
+    },
+    {
+     "ko": "30년 전과의 <b>뚜렷한 대조</b>: 예전엔 컴퓨터 쓰면 'computer artist'로 (못마땅하게) 분류",
+     "an": "— 이제 그 꼬리표가 사라지는 흐름"
+    },
+    {
+     "ko": "컴퓨터가 어디에나 있는 지금, 'computer artist'는 결국 빈칸 ______",
+     "an": "— 하나의 범주로서 '사라졌다' = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 컴퓨터가 보편화되어 'computer artist'라는 범주가 소멸 = <b>⑤</b>",
+   "gnote": "회색(Guyton 예시·비평가 부연)은 '컴퓨터를 특별시하지 않는다'는 예시일 뿐, 소멸 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Young contemporary artists who employ digital technologies in their practice",
+      "hl0"
+     ],
+     [
+      "rarely make reference to computers.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "실무에 디지털 기술을 사용하는 젊은 현대 작가들은",
+      "hl0"
+     ],
+     [
+      "컴퓨터를 거의 언급하지 않는다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 컴퓨터를 특별한 것으로 내세우지 않음"
+   },
+   {
+    "en": [
+     [
+      "This is a marked contrast from three decades ago",
+      "hl0"
+     ],
+     [
+      "when artists who utilized computers were labeled by critics",
+      "hl1"
+     ],
+     [
+      "― often disapprovingly ― as computer artists.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이는 30년 전과의 뚜렷한 대조인데,",
+      "hl0"
+     ],
+     [
+      "그때는 컴퓨터를 활용한 작가들이 비평가들에 의해 분류되었다",
+      "hl1"
+     ],
+     [
+      "― 흔히 못마땅하게 ― 'computer artist'로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 예전엔 'computer artist'가 별도 범주였음"
+   },
+   {
+    "en": [
+     [
+      "it now appears",
+      "hl0"
+     ],
+     [
+      "that the computer artist is finally",
+      "hl1"
+     ],
+     [
+      "______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이제 ~인 것처럼 보인다",
+      "hl0"
+     ],
+     [
+      "'computer artist'가 마침내",
+      "hl1"
+     ],
+     [
+      "______인 (것으로).",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 범주로서의 'computer artist'의 운명"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "awake",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "influential",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "distinct",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "troublesome",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "extinct",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 'computer artist'라는 범주가 소멸(extinct) · <span class=\"xo\">①</span>깨어남(없음) <span class=\"xo\">②</span>영향력(없음) <span class=\"xo\">③</span>구별됨=오히려 과거 상태(정반대) <span class=\"xo\">④</span>골칫거리(없음)",
+  "paraphrase": {
+   "from": "rarely make reference to computers · marked contrast from three decades ago when artists were labeled as computer artists",
+   "to": "the computer artist is finally extinct",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "컴퓨터가 보편화되어 'computer artist'라는 별도 범주가 사라진다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Young contemporary artists who employ digital technologies in their practice rarely make reference to computers.",
+     "ko": "디지털 작가들은 컴퓨터를 거의 언급하지 않음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "This is a marked contrast from three decades ago when artists who utilized computers were labeled by critics ― often disapprovingly ― as computer artists.",
+     "ko": "예전엔 'computer artist'로 분류되던 것과 뚜렷한 대조",
+     "role": "재진술",
+     "how": "대조"
+    },
+    {
+     "en": "it now appears that the computer artist is finally",
+     "ko": "이제 'computer artist'는 마침내 ~",
+     "role": "정답근거",
+     "how": "결론"
+    }
+   ],
+   "echo": "정답은 범주 소멸을 'extinct(멸종)'로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2023-수능|31",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "There is something deeply paradoxical about the professional status of sports journalism, especially in the medium of print.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "paradoxical"
+     }
+    ]
+   },
+   {
+    "t": "In discharging their usual responsibilities of description and commentary, reporters’ accounts of sports events are eagerly consulted by sports fans, while in their broader journalistic role of covering sport in its many forms, sports journalists are among the most visible of all contemporary writers.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The ruminations of the elite class of ‘celebrity’ sports journalists are much sought after by the major newspapers, their lucrative contracts being the envy of colleagues in other ‘disciplines’ of journalism.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Yet sports journalists do not have a standing in their profession that corresponds to the size of their readerships or of their pay packets, with the old saying (now reaching the status of cliché) that sport is the ‘toy department of the news media’ still readily to hand as a dismissal of the worth of what sports journalists do.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "Yet"
+     }
+    ]
+   },
+   {
+    "t": "This reluctance to take sports journalism seriously produces the paradoxical outcome that sports newspaper writers are much read but little ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "paradoxical outcome"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "스포츠 저널리즘의 지위에는 깊은 <b>역설</b>이 있다",
+     "an": "— 많이 읽히지만 위상은 낮음(대비 예고)"
+    },
+    {
+     "ko": "<b>그러나(Yet)</b> 그 위상은 독자 수·보수에 걸맞지 않고, '뉴스의 장난감 부서'라며 <b>가치가 무시됨</b>",
+     "an": "— 널리 읽혀도 진지하게 존중받지 못함"
+    },
+    {
+     "ko": "그 역설적 결과: 스포츠 기자는 많이 읽히지만 거의 빈칸 ______",
+     "an": "— '존중받지 못한다' = 정답 ②"
+    }
+   ],
+   "concl": "→ 많이 읽히지만 그 가치를 인정·존중받지 못한다 = <b>②</b>",
+   "gnote": "회색(팬이 참고·유명 기자의 계약 부연)은 '많이 읽힌다'는 앞쪽 사실일 뿐, 역접 뒤 '무시' 논리가 빈칸을 결정."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "There is something deeply paradoxical",
+      "hl0"
+     ],
+     [
+      "about the professional status of sports journalism,",
+      "hl1"
+     ],
+     [
+      "especially in the medium of print.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "깊이 역설적인 무언가가 있다",
+      "hl0"
+     ],
+     [
+      "스포츠 저널리즘의 직업적 지위에 관해,",
+      "hl1"
+     ],
+     [
+      "특히 인쇄 매체에서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 지위에 역설이 존재"
+   },
+   {
+    "en": [
+     [
+      "Yet sports journalists do not have a standing in their profession",
+      "hl0"
+     ],
+     [
+      "that corresponds to the size of their readerships or of their pay packets,",
+      "hl1"
+     ],
+     [
+      "with the old saying ... that sport is the ‘toy department of the news media’",
+      "hl2"
+     ],
+     [
+      "still readily to hand as a dismissal of the worth of what sports journalists do.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 스포츠 기자들은 그들의 직업에서 위상을 갖지 못한다",
+      "hl0"
+     ],
+     [
+      "독자 수나 보수의 규모에 걸맞은,",
+      "hl1"
+     ],
+     [
+      "스포츠는 '뉴스 매체의 장난감 부서'라는 옛말과 함께",
+      "hl2"
+     ],
+     [
+      "그들의 가치를 무시하는 말로 여전히 쉽게 쓰이며.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 역접 뒤 '가치 무시'가 핵심"
+   },
+   {
+    "en": [
+     [
+      "This reluctance to take sports journalism seriously",
+      "hl0"
+     ],
+     [
+      "produces the paradoxical outcome",
+      "hl1"
+     ],
+     [
+      "that sports newspaper writers are much read but little",
+      "hl2"
+     ],
+     [
+      "______.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "스포츠 저널리즘을 진지하게 여기기를 꺼리는 이 태도는",
+      "hl0"
+     ],
+     [
+      "역설적 결과를 낳는다",
+      "hl1"
+     ],
+     [
+      "스포츠 신문 기자들이 많이 읽히지만 거의",
+      "hl2"
+     ],
+     [
+      "______라는.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 많이 읽히지만 거의 ~않음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "paid",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "admired",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "censored",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "challenged",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "discussed",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 많이 읽히지만 존중(admired)받지 못함 · <span class=\"xo\">①</span>보수 받지 못함=수입은 많음(정반대) <span class=\"xo\">③</span>검열(없음) <span class=\"xo\">④</span>도전받음(없음) <span class=\"xo\">⑤</span>논의됨(없음)",
+  "paraphrase": {
+   "from": "do not have a standing ... a dismissal of the worth of what sports journalists do",
+   "to": "much read but little admired",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "스포츠 기자는 널리 읽히지만 그 직업적 가치를 존중받지 못하는 역설이 있다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "There is something deeply paradoxical about the professional status of sports journalism",
+     "ko": "스포츠 저널리즘의 지위는 역설적",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "sports journalists do not have a standing ... a dismissal of the worth of what sports journalists do",
+     "ko": "위상·가치가 무시됨",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "sports newspaper writers are much read but little",
+     "ko": "많이 읽히지만 거의 ~않음",
+     "role": "정답근거",
+     "how": "결론"
+    }
+   ],
+   "echo": "정답은 '가치의 무시(dismissal of the worth)'를 'little admired(거의 존중받지 못함)'로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2024-09|33",
+  "answer": 4,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "An invention or discovery that is too far ahead of its time is worthless; no one can follow.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Ideally, an innovation opens up only the next step from what is known and invites the culture to move forward one hop.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "only the next step"
+     }
+    ]
+   },
+   {
+    "t": "An overly futuristic, unconventional, or visionary invention can fail initially (it may lack essential not-yet-invented materials or a critical market or proper understanding) yet succeed later, when the ecology of supporting ideas catches up.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Gregor Mendel’s 1865 theories of genetic heredity were correct but ignored for 35 years.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "His sharp insights were not accepted because they did not explain the problems biologists had at the time, nor did his explanation operate by known mechanisms, so his discoveries were out of reach even for the early adopters.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Decades later science faced the urgent questions that Mendel’s discoveries could answer.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "Decades later"
+     }
+    ]
+   },
+   {
+    "t": "Now his insights ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "Now"
+     }
+    ]
+   },
+   {
+    "t": "Within a few years of one another, three different scientists each independently rediscovered Mendel’s forgotten work, which of course had been there all along.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "이상적 혁신은 알려진 것에서 <b>단 한 걸음(only the next step / one hop)</b>만 나아간다",
+     "an": "— '너무 앞선' 것은 소용없고, '바로 다음 단계'라야 수용됨"
+    },
+    {
+     "ko": "<b>수십 년 뒤</b> 과학은 Mendel의 발견이 답할 수 있는 절박한 질문에 직면",
+     "an": "— 시대가 그의 발견을 따라잡음(간극이 사라짐)"
+    },
+    {
+     "ko": "이제 그의 통찰은 빈칸 ______",
+     "an": "— 이제 현 지식에서 '단 한 걸음' 거리 = 정답 ④"
+    }
+   ],
+   "concl": "→ 시대가 따라잡아 이제 그의 통찰은 '한 걸음 거리'였다(=바로 다음 단계) = <b>④</b>",
+   "gnote": "회색(무가치/실패·Mendel 무시 경위)은 '너무 앞섬'을 설명하는 배경일 뿐, 빈칸은 '한 걸음' 논리로 결정."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Ideally, an innovation opens up",
+      "hl0"
+     ],
+     [
+      "only the next step from what is known",
+      "hl1"
+     ],
+     [
+      "and invites the culture to move forward one hop.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이상적으로, 혁신은 열어준다",
+      "hl0"
+     ],
+     [
+      "알려진 것으로부터 오직 다음 한 단계만",
+      "hl1"
+     ],
+     [
+      "그리고 문화가 한 걸음 나아가도록 이끈다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 수용되려면 '바로 다음 단계'여야 함"
+   },
+   {
+    "en": [
+     [
+      "Decades later science faced",
+      "hl0"
+     ],
+     [
+      "the urgent questions",
+      "hl1"
+     ],
+     [
+      "that Mendel’s discoveries could answer.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "수십 년 뒤 과학은 직면했다",
+      "hl0"
+     ],
+     [
+      "절박한 질문들에",
+      "hl1"
+     ],
+     [
+      "Mendel의 발견이 답할 수 있는.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 시대가 그의 발견을 따라잡음"
+   },
+   {
+    "en": [
+     [
+      "Now his insights",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이제 그의 통찰은",
+      "hl0"
+     ],
+     [
+      "______(이었다).",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 이제 그의 통찰의 위치"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "<span class=\"reuse\">caught up</span> to modern problems",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "raised even more questions",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "addressed past and current topics alike",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 4,
+    "tx": "were only one step away",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "regained <span class=\"reuse\">acceptance</span> of the public",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 이제 현 지식에서 '단 한 걸음' 거리 · <span class=\"xo\">①</span>caught up(표면어) <span class=\"xo\">②</span>더 많은 의문 야기(정반대) <span class=\"xo\">③</span>과거·현재 모두(범위초과) <span class=\"xo\">⑤</span>대중의 수용 회복(표면어)",
+  "paraphrase": {
+   "from": "opens up only the next step ... move forward one hop",
+   "to": "were only one step away",
+   "copies": [
+    "caught up",
+    "acceptance"
+   ]
+  },
+  "restate": {
+   "thesis": "혁신은 현 지식에서 '한 걸음'일 때 수용된다; 시대가 따라잡자 Mendel의 통찰도 이제 한 걸음 거리였다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "an innovation opens up only the next step from what is known and invites the culture to move forward one hop",
+     "ko": "혁신은 알려진 것에서 '한 걸음'만 나아감",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Decades later science faced the urgent questions that Mendel’s discoveries could answer.",
+     "ko": "수십 년 뒤 과학이 그의 발견을 따라잡음",
+     "role": "재진술",
+     "how": "사례적용"
+    },
+    {
+     "en": "Now his insights",
+     "ko": "이제 그의 통찰은",
+     "role": "정답근거",
+     "how": "결론"
+    }
+   ],
+   "echo": "정답은 'only the next step / one hop'을 'were only one step away'로 재진술"
+  },
+  "num": 33
+ },
+ {
+  "key": "2025-06|34",
+  "answer": 4,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Any attempt to model musical behavior or perception in a general way is filled with difficulties.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "With regard to models of perception, the question arises of whose perception we are trying to model ― even if we confine ourselves to a particular culture and historical environment.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Surely the perception of music varies greatly between listeners of different levels of training; indeed, a large part of music education is devoted to developing and enriching (and therefore likely changing) these listening processes.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "While this may be true, I am concerned here with fairly basic aspects of perception ― particularly meter and key ― which I believe are relatively consistent across listeners.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "relatively consistent across listeners"
+     }
+    ]
+   },
+   {
+    "t": "Anecdotal evidence suggests, for example, that most people are able to ‘‘find the beat’’ in a typical folk song or classical piece.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This is not to say that there is complete uniformity in this regard ― there may be occasional disagreements, even among experts, as to how we hear the tonality or meter of a piece.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "양보",
+      "word": "occasional disagreements"
+     }
+    ]
+   },
+   {
+    "t": "But I believe ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "But"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "청자에 따라 지각이 다르다는 점은 인정하지만, 저자는 박자·조성 같은 <b>기본적 측면은 청자 간에 상당히 일관적</b>이라 본다",
+     "an": "— 역접(While ... true) 뒤 초점은 '공통성'"
+    },
+    {
+     "ko": "완전한 획일성은 아니고 <b>가끔의 이견</b>은 있을 수 있음(양보)",
+     "an": "— 그래도 이견은 '가끔'일 뿐"
+    },
+    {
+     "ko": "<b>그러나(But)</b> 저자는 빈칸 ______라고 믿는다",
+     "an": "— 공통점이 차이보다 훨씬 크다 = 정답 ④"
+    }
+   ],
+   "concl": "→ 이견은 있어도 우리 사이의 공통점이 차이를 훨씬 능가한다 = <b>④</b>",
+   "gnote": "회색(도입·훈련에 따른 차이·박자 찾기 예시)은 '차이' 인정의 양보 재료일 뿐, But 뒤 '공통성 우세'가 결론."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "While this may be true, I am concerned here",
+      "hl0"
+     ],
+     [
+      "with fairly basic aspects of perception ― particularly meter and key ―",
+      "hl1"
+     ],
+     [
+      "which I believe are relatively consistent across listeners.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이것이 사실일지라도, 나는 여기서 관심을 둔다",
+      "hl0"
+     ],
+     [
+      "지각의 상당히 기본적인 측면 ― 특히 박자와 조성 ―에,",
+      "hl1"
+     ],
+     [
+      "그것들은 청자들 사이에서 비교적 일관적이라고 나는 믿는다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 기본 요소는 청자 간 일관적"
+   },
+   {
+    "en": [
+     [
+      "This is not to say that there is complete uniformity in this regard",
+      "hl0"
+     ],
+     [
+      "― there may be occasional disagreements, even among experts,",
+      "hl1"
+     ],
+     [
+      "as to how we hear the tonality or meter of a piece.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이것이 이 점에서 완전한 획일성이 있다는 말은 아니다",
+      "hl0"
+     ],
+     [
+      "― 심지어 전문가들 사이에서도 가끔의 이견이 있을 수 있다,",
+      "hl1"
+     ],
+     [
+      "곡의 조성이나 박자를 어떻게 듣는지에 관하여.",
+      "hl2"
+     ]
+    ],
+    "note": "양보: 그래도 이견은 '가끔'"
+   },
+   {
+    "en": [
+     [
+      "But I believe",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 나는 믿는다",
+      "hl0"
+     ],
+     [
+      "______라고.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: But 뒤 저자의 결론적 믿음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "our devotion to narrowing these <span class=\"reuse\">differences</span> will emerge",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "fundamental musical behaviors evolve within communities",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "these varied perceptions <span class=\"reuse\">enrich</span> shared musical experiences",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "the commonalities between us far outweigh the differences",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "diversity rather than <span class=\"reuse\">uniformity</span> in musical processes counts",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 공통점이 차이를 훨씬 능가 · <span class=\"xo\">①</span>차이 좁히려는 헌신 등장(없음) <span class=\"xo\">②</span>공동체 내 진화(없음) <span class=\"xo\">③</span>다양한 지각이 경험 풍부화(표면어) <span class=\"xo\">⑤</span>획일성보다 다양성이 중요(정반대)",
+  "paraphrase": {
+   "from": "basic aspects ... relatively consistent across listeners",
+   "to": "the commonalities between us far outweigh the differences",
+   "copies": [
+    "enrich",
+    "uniformity",
+    "differences"
+   ]
+  },
+  "restate": {
+   "thesis": "박자·조성 같은 기본 지각은 청자 간에 일관적이어서 공통점이 차이를 능가한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "I am concerned here with fairly basic aspects of perception ... which I believe are relatively consistent across listeners",
+     "ko": "기본 지각은 청자 간 일관적",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "This is not to say that there is complete uniformity ... there may be occasional disagreements",
+     "ko": "완전 획일은 아니고 가끔 이견",
+     "role": "재진술",
+     "how": "양보"
+    },
+    {
+     "en": "But I believe",
+     "ko": "그러나 나는 믿는다",
+     "role": "정답근거",
+     "how": "결론"
+    }
+   ],
+   "echo": "정답은 'consistent across listeners'를 '공통점이 차이를 능가'로 재진술"
+  },
+  "num": 34
+ },
+ {
+  "key": "2025-수능|34",
+  "answer": 5,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Centralized, formal rules can ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "Centralized, formal rules"
+     }
+    ]
+   },
+   {
+    "t": "The rules of baseball don’t just regulate the behavior of the players; they determine the behavior that constitutes playing the game.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Rules do not prevent people from playing baseball; they create the very practice that allows people to play baseball.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "create the very practice"
+     }
+    ]
+   },
+   {
+    "t": "A score of music imposes rules, but it also creates a pattern of conduct that enables people to produce music.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Legal rules that enable the formation of corporations, that enable the use of wills and trusts, that create negotiable instruments, and that establish the practice of contracting all make practices that create new opportunities for individuals.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "And we have legal rules that establish roles individuals play within the legal system, such as judges, trustees, partners, and guardians.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "True, the legal rules that establish these roles constrain the behavior of individuals who occupy them, but rules also create the roles themselves.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but rules also create the roles"
+     }
+    ]
+   },
+   {
+    "t": "Without them an individual would not have the opportunity to occupy the role.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "주제문(빈칸): 중앙집권적·공식적 규칙은 빈칸 ______할 수 있다",
+     "an": "— 이하 예시들이 빈칸의 의미를 규정"
+    },
+    {
+     "ko": "규칙은 야구를 <b>막지 않고, 오히려 경기를 가능케 하는 실천 자체를 만든다</b>",
+     "an": "— 규칙 = 규제만이 아니라 '실천을 창출'"
+    },
+    {
+     "ko": "<b>역할을 만드는(create the roles)</b> 규칙: 제약도 하지만 역할 자체를 창출",
+     "an": "— 역할·실천을 세워 생산적 활동을 가능케 함 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 규칙은 역할·실천을 확립함으로써 생산적 활동을 가능하게 한다 = <b>⑤</b>",
+   "gnote": "회색(음악 악보·법인/유언·판사 예시)은 '규칙이 실천·역할을 창출'을 예시하는 재료일 뿐, 결론은 동일."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Centralized, formal rules can",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "중앙집권적이고 공식적인 규칙은 ~할 수 있다",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 규칙이 할 수 있는 것(주제)"
+   },
+   {
+    "en": [
+     [
+      "Rules do not prevent people from playing baseball;",
+      "hl0"
+     ],
+     [
+      "they create the very practice",
+      "hl1"
+     ],
+     [
+      "that allows people to play baseball.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "규칙은 사람들이 야구하는 것을 막지 않는다;",
+      "hl0"
+     ],
+     [
+      "그것들은 바로 그 실천을 만들어낸다",
+      "hl1"
+     ],
+     [
+      "사람들이 야구를 할 수 있게 하는.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 규칙이 '실천을 창출'해 활동을 가능케 함"
+   },
+   {
+    "en": [
+     [
+      "True, the legal rules that establish these roles constrain the behavior of individuals who occupy them,",
+      "hl0"
+     ],
+     [
+      "but rules also create the roles themselves.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사실, 이 역할을 확립하는 법 규칙은 그것을 맡은 개인의 행동을 속박하지만,",
+      "hl0"
+     ],
+     [
+      "규칙은 또한 역할 자체를 만들어낸다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 규칙이 '역할 자체'를 창출"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "categorize one’s <span class=\"reuse\">patterns of conduct</span> in legal and productive ways",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "lead people to reevaluate their <span class=\"reuse\">roles and practices</span> in a society",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "encourage new ways of thinking which promote creative ideas",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "reinforce one’s <span class=\"reuse\">behavior</span> within legal and established contexts",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "facilitate productive activity by establishing roles and practices",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 역할·실천을 확립해 생산적 활동을 가능케 함 · <span class=\"xo\">①</span>행동을 분류(표면어) <span class=\"xo\">②</span>역할 재평가(표면어) <span class=\"xo\">③</span>창의적 사고(없음) <span class=\"xo\">④</span>행동 강화·규제만(표면어)",
+  "paraphrase": {
+   "from": "they create the very practice that allows people to play ... rules also create the roles themselves",
+   "to": "facilitate productive activity by establishing roles and practices",
+   "copies": [
+    "patterns of conduct",
+    "roles and practices",
+    "behavior"
+   ]
+  },
+  "restate": {
+   "thesis": "규칙은 규제만 하는 것이 아니라 실천과 역할을 창출해 생산적 활동을 가능하게 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Centralized, formal rules can",
+     "ko": "중앙집권적·공식 규칙은 ~할 수 있다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Rules do not prevent people from playing baseball; they create the very practice that allows people to play baseball.",
+     "ko": "규칙은 막지 않고 실천을 창출",
+     "role": "재진술",
+     "how": "사례"
+    },
+    {
+     "en": "but rules also create the roles themselves",
+     "ko": "규칙은 역할 자체도 창출",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 'create the practice/roles'를 '역할·실천을 확립해 생산적 활동을 가능케 함'으로 재진술"
+  },
+  "num": 34
  }
 ]
