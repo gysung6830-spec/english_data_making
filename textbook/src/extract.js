@@ -8,17 +8,29 @@
 
 // pdf-parse v2 는 { PDFParse } 클래스를 export 한다.
 //   new PDFParse({ data: buffer }).getText() → { text, ... }
+// 일부 PDF 는 폰트 인코딩 때문에 '공백'을 제어문자(U+0001 등)로 추출한다
+// (space 글리프가 glyph #1 에 매핑되고 ToUnicode 가 U+0001 을 돌려주는 경우).
+// 그대로 두면 단어가 "Many␁developmental␁theorists" 처럼 붙어 AI 입력이 깨진다.
+//  → 제어문자·이색 공백을 일반 공백으로 정규화한다(줄바꿈·탭은 보존).
+function normalizePdfText(t) {
+  return String(t == null ? '' : t)
+    // 제어문자(U+0000–U+0008, U+000B, U+000C, U+000E–U+001F) → 공백. \n(0A)·\t(09) 보존.
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, ' ')
+    // 각종 유니코드 공백(NBSP·엇은공백·전각공백·BOM 등) → 공백
+    .replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000\uFEFF]/g, ' ');
+}
+
 async function pdfToText(buffer) {
   const mod = require('pdf-parse');
   const PDFParse = mod.PDFParse || mod.default || mod;
   if (typeof PDFParse === 'function' && PDFParse.prototype && PDFParse.prototype.getText) {
     const parser = new PDFParse({ data: buffer });
     const res = await parser.getText();
-    return res.text || '';
+    return normalizePdfText(res.text || '');
   }
   // 구버전 fallback: pdf-parse 를 함수로 직접 호출
   const res = await PDFParse(buffer);
-  return res.text || '';
+  return normalizePdfText(res.text || '');
 }
 
 // 한 줄이 "영어 문장 후보" 인지 판별.
@@ -35,6 +47,8 @@ function looksEnglish(line) {
   if (words.length < 2) return false;                 // 최소 2단어("Wrong again." 같은 짧은 문장 허용)
   // URL/사이트 푸터 조각 배제(예: "flowedu. tistory. com!")
   if (/tistory|flowedu|https?:|www\./i.test(s)) return false;
+  // 저작권 푸터·답지(재진술 사슬 화살표) 잡음 배제 — 실제 지문 문장엔 없음
+  if (/all rights reserved|©|→/i.test(s)) return false;
   return /[.!?]["')\]]?\s*$/.test(s);                 // 문장부호로 끝남
 }
 
