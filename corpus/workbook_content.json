@@ -46089,5 +46089,3914 @@
    "echo": "정답은 'create the practice/roles'를 '역할·실천을 확립해 생산적 활동을 가능케 함'으로 재진술"
   },
   "num": 34
+ },
+ {
+  "key": "2022-06|32",
+  "answer": 2,
+  "answer_src": "input",
+  "hl": [
+   {
+    "t": "Some of the most insightful work on information seeking emphasizes “strategic self-ignorance,” understood as “the use of ignorance as an excuse to engage excessively in pleasurable activities that may be harmful to one’s future self.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정의",
+      "word": "self-ignorance"
+     }
+    ]
+   },
+   {
+    "t": "The idea here is that if people are present-biased, they might avoid information that would ______ ― perhaps because it would produce guilt or shame, perhaps because it would suggest an aggregate trade-off that would counsel against engaging in such activities.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "avoid"
+     }
+    ]
+   },
+   {
+    "t": "St. Augustine famously said, “God give me chastity ― tomorrow.”",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Present-biased agents think: “Please let me know the risks ― tomorrow.”",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Whenever people are thinking about engaging in an activity with short-term benefits but long-term costs, they might prefer to delay receipt of important information.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "신호",
+      "word": "delay"
+     }
+    ]
+   },
+   {
+    "t": "The same point might hold about information that could make people sad or mad: “Please tell me what I need to know ― tomorrow.”",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "‘전략적 <b>자기 무지</b>’ = 미래의 자신에게 해로운 쾌락 활동을 계속하려 무지를 핑계로 삼는 것",
+     "an": "— 핵심: 즐거움을 지키려 불편한 정보를 피함"
+    },
+    {
+     "ko": "현재 편향된 사람은 죄책감·수치심을 줄 정보를 <b>피한다</b>(빈칸 ______)",
+     "an": "— 피하는 이유 = 그 정보가 지금의 활동을 덜 매력적으로 만들기 때문"
+    },
+    {
+     "ko": "단기 이익·장기 비용의 활동을 할 때 중요한 정보 수신을 <b>미룬다</b>",
+     "an": "— '지금의 즐거움을 깎을 정보'를 회피 = 정답 ②"
+    }
+   ],
+   "concl": "→ 사람들이 피하는 정보 = 현재의 (쾌락) 활동을 덜 매력적으로 만드는 정보 = <b>②</b>",
+   "gnote": "회색(성 아우구스티누스 인용 등)은 예시일 뿐, '즐거움 보호를 위한 회피' 논리엔 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Some of the most insightful work on information seeking",
+      "hl0"
+     ],
+     [
+      "emphasizes “strategic self-ignorance,”",
+      "hl1"
+     ],
+     [
+      "understood as “the use of ignorance as an excuse",
+      "hl2"
+     ],
+     [
+      "to engage excessively in pleasurable activities that may be harmful to one’s future self.”",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "정보 탐색에 관한 가장 통찰력 있는 연구는",
+      "hl0"
+     ],
+     [
+      "‘전략적 자기 무지’를 강조한다,",
+      "hl1"
+     ],
+     [
+      "즉 ‘무지를 핑계로 삼는 것’으로 이해되는",
+      "hl2"
+     ],
+     [
+      "미래의 자신에게 해로울 수 있는 쾌락 활동에 지나치게 몰두하려고.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 즐거움을 지키려 무지를 택함"
+   },
+   {
+    "en": [
+     [
+      "The idea here is that if people are present-biased,",
+      "hl0"
+     ],
+     [
+      "they might avoid information that would ______",
+      "hl1"
+     ],
+     [
+      "― perhaps because it would produce guilt or shame,",
+      "hl2"
+     ],
+     [
+      "perhaps because it would suggest an aggregate trade-off that would counsel against engaging in such activities.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "여기서 요점은, 사람이 현재 편향적이라면,",
+      "hl0"
+     ],
+     [
+      "그들은 ______ 정보를 피할 수 있다는 것",
+      "hl1"
+     ],
+     [
+      "― 아마 그것이 죄책감이나 수치심을 낳기 때문에,",
+      "hl2"
+     ],
+     [
+      "아마 그런 활동을 그만두라고 조언할 합계의 상충을 시사하기 때문에.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 피하는 정보의 성격"
+   },
+   {
+    "en": [
+     [
+      "Whenever people are thinking about engaging in an activity",
+      "hl0"
+     ],
+     [
+      "with short-term benefits but long-term costs,",
+      "hl1"
+     ],
+     [
+      "they might prefer to delay receipt of important information.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "사람들이 어떤 활동을 하려 생각할 때마다",
+      "hl0"
+     ],
+     [
+      "단기 이익이지만 장기 비용을 지닌,",
+      "hl1"
+     ],
+     [
+      "그들은 중요한 정보의 수신을 미루려 할 수 있다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 즐거움을 깎을 정보를 미룸"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "highlight the value of preferred activities",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "make current activities less attractive",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "cut their attachment to past activities",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "enable them to enjoy more activities",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "potentially become known to others",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 지금의 활동을 덜 매력적으로 만드는 정보를 회피 · <span class=\"xo\">①</span>선호 활동의 가치 부각(정반대) <span class=\"xo\">③</span>과거 활동 애착(없음) <span class=\"xo\">④</span>더 즐기게 함(정반대) <span class=\"xo\">⑤</span>남에게 알려짐(없음)",
+  "paraphrase": {
+   "from": "avoid information ... produce guilt or shame · counsel against engaging in such activities",
+   "to": "make current activities less attractive",
+   "copies": [
+    "activities"
+   ]
+  },
+  "restate": {
+   "thesis": "현재 편향된 사람은 지금의 쾌락 활동을 덜 매력적으로 만들 정보를 일부러 피한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "strategic self-ignorance ... use of ignorance as an excuse to engage excessively in pleasurable activities",
+     "ko": "즐거움을 지키려 무지를 핑계 삼음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "they might avoid information that would ...",
+     "ko": "불편한 정보를 회피",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "they might prefer to delay receipt of important information",
+     "ko": "중요한 정보 수신을 미룸",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "‘즐거움을 깎을 정보 회피’를 ‘현재 활동을 덜 매력적으로’로 재진술 = ②"
+  },
+  "num": 32
+ },
+ {
+  "key": "2023-06|33",
+  "answer": 2,
+  "answer_src": "input",
+  "hl": [
+   {
+    "t": "Manufacturers design their innovation processes around the way they think the process works.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The vast majority of manufacturers still think that product development and service development are always done by manufacturers, and that their job is always to find a need and fill it rather than to sometimes find and commercialize an innovation that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "rather than"
+     }
+    ]
+   },
+   {
+    "t": "Accordingly, manufacturers have set up market-research departments to explore the needs of users in the target market, product-development groups to think up suitable products to address those needs, and so forth.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The needs and prototype solutions of lead users ― if encountered at all ― are typically rejected as outliers of no interest.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "신호",
+      "word": "rejected"
+     }
+    ]
+   },
+   {
+    "t": "Indeed, when lead users’ innovations do enter a firm’s product line ― and they have been shown to be the actual source of many major innovations for many firms ― they typically arrive with a lag and by an unusual and unsystematic route.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "반전",
+      "word": "actual source"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "제조사는 자기 일이 ‘필요를 찾아 채우는 것’이지, <b>~하는</b> 혁신을 상업화하는 게 아니라고 여긴다(빈칸 ______)",
+     "an": "— 대조 구조: 제조사가 무시하는 혁신의 출처가 빈칸"
+    },
+    {
+     "ko": "선도 사용자의 필요·시제품 해결책은 예외로 <b>거부된다</b>",
+     "an": "— 제조사가 외면하는 것 = 선도 사용자가 이미 만든 것"
+    },
+    {
+     "ko": "그러나 선도 사용자 혁신이야말로 많은 주요 혁신의 <b>실제 원천</b>",
+     "an": "— 빈칸 = 선도 사용자가 이미 개발한 = 정답 ②"
+    }
+   ],
+   "concl": "→ 제조사가 외면하는 혁신 = 선도 사용자가 이미 개발한 혁신 = <b>②</b>",
+   "gnote": "회색(시장조사 부서 설치 등)은 제조사 관행의 예시일 뿐, '선도 사용자 무시' 논리엔 무관."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The vast majority of manufacturers still think that product development and service development are always done by manufacturers,",
+      "hl0"
+     ],
+     [
+      "and that their job is always to find a need and fill it",
+      "hl1"
+     ],
+     [
+      "rather than to sometimes find and commercialize an innovation that ______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "대다수 제조사는 여전히 제품·서비스 개발이 늘 제조사에 의해 이뤄진다고 생각하고,",
+      "hl0"
+     ],
+     [
+      "자기 일은 늘 필요를 찾아 채우는 것이라고 생각한다",
+      "hl1"
+     ],
+     [
+      "때때로 ______ 혁신을 찾아 상업화하기보다는.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 제조사가 외면하는 혁신"
+   },
+   {
+    "en": [
+     [
+      "The needs and prototype solutions of lead users",
+      "hl0"
+     ],
+     [
+      "― if encountered at all ―",
+      "hl1"
+     ],
+     [
+      "are typically rejected as outliers of no interest.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "선도 사용자의 필요와 시제품 해결책은",
+      "hl0"
+     ],
+     [
+      "― 마주치기라도 한다면 ―",
+      "hl1"
+     ],
+     [
+      "대개 관심 없는 예외로 거부된다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 선도 사용자의 것을 거부"
+   },
+   {
+    "en": [
+     [
+      "Indeed, when lead users’ innovations do enter a firm’s product line",
+      "hl0"
+     ],
+     [
+      "― and they have been shown to be the actual source of many major innovations for many firms ―",
+      "hl1"
+     ],
+     [
+      "they typically arrive with a lag and by an unusual and unsystematic route.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "실제로 선도 사용자의 혁신이 기업 제품군에 들어올 때",
+      "hl0"
+     ],
+     [
+      "― 그리고 그것이 많은 기업의 주요 혁신의 실제 원천으로 밝혀졌는데 ―",
+      "hl1"
+     ],
+     [
+      "대개 지연과 비정상적이고 비체계적인 경로로 도착한다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 선도 사용자가 혁신의 실제 원천"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "<span class=\"reuse\">lead users</span> tended to overlook",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "lead users have already developed",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "<span class=\"reuse\">lead users</span> encountered in the market",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "other firms frequently put into use",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "both users and firms have valued",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 선도 사용자가 이미 개발한 혁신 · <span class=\"xo\">①</span>선도 사용자가 간과(표면어) <span class=\"xo\">③</span>시장서 마주친(표면어) <span class=\"xo\">④</span>타 기업이 사용(없음) <span class=\"xo\">⑤</span>모두가 가치를 둔(정반대)",
+  "paraphrase": {
+   "from": "lead users ... the actual source of many major innovations (rejected by manufacturers)",
+   "to": "lead users have already developed",
+   "copies": [
+    "lead users"
+   ]
+  },
+  "restate": {
+   "thesis": "제조사는 필요를 채우는 데 몰두해, 선도 사용자가 이미 개발한 혁신을 외면한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "their job is always to find a need and fill it rather than to ... commercialize an innovation that",
+     "ko": "필요 충족 위주, 혁신 상업화는 부차",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "The needs and prototype solutions of lead users ... are typically rejected",
+     "ko": "선도 사용자의 해결책을 거부",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "they have been shown to be the actual source of many major innovations",
+     "ko": "실은 선도 사용자가 혁신의 원천",
+     "role": "정답근거",
+     "how": "반전"
+    }
+   ],
+   "echo": "‘선도 사용자가 만든 혁신’을 ‘이미 개발한’으로 재진술 = ②"
+  },
+  "num": 33
+ },
+ {
+  "key": "2023-수능|34",
+  "answer": 5,
+  "answer_src": "input",
+  "hl": [
+   {
+    "t": "We understand that the segregation of our consciousness into present, past, and future is both a fiction and an oddly self-referential framework; your present was part of your mother’s future, and your children’s past will be in part your present.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Nothing is generally wrong with structuring our consciousness of time in this conventional manner, and it often works well enough.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In the case of climate change, however, the sharp division of time into past, present, and future has been desperately misleading and has, most importantly, hidden from view the extent of the responsibility of those of us alive now.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "however"
+     }
+    ]
+   },
+   {
+    "t": "The narrowing of our consciousness of time smooths the way to divorcing ourselves from responsibility for developments in the past and the future with which our lives are in fact deeply intertwined.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In the climate case, it is not that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "not that"
+     }
+    ]
+   },
+   {
+    "t": "It is that the realities are obscured from view by the partitioning of time, and so questions of responsibility toward the past and future do not arise naturally.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "obscured"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "기후변화에서 시간을 과거·현재·미래로 나눔은 <b>오해를 낳고</b> 지금 우리의 책임 범위를 시야에서 가렸다",
+     "an": "— 핵심: 시간 분할이 책임을 '보이지 않게' 함"
+    },
+    {
+     "ko": "‘…한 것이 아니다(it is <b>not that</b> ______)’ — 부정될 상황이 빈칸",
+     "an": "— 뒤 문장과 대조되는 '틀린 설명'이 빈칸에 들어감"
+    },
+    {
+     "ko": "‘사실은’ 시간 분할이 현실을 <b>가려서</b> 책임 물음이 자연히 안 생긴다",
+     "an": "— 즉 ‘사실을 보고도 책임을 부정’하는 게 아니다 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 부정되는 것 = ‘사실을 직시하고도 책임을 부정한다’(오히려 사실 자체가 가려짐) = <b>⑤</b>",
+   "gnote": "회색(시간 구분의 일반적 정당성)은 도입 대비일 뿐, 기후 사례의 '가려짐' 논리엔 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In the case of climate change, however,",
+      "hl0"
+     ],
+     [
+      "the sharp division of time into past, present, and future has been desperately misleading",
+      "hl1"
+     ],
+     [
+      "and has, most importantly, hidden from view the extent of the responsibility of those of us alive now.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 기후변화의 경우,",
+      "hl0"
+     ],
+     [
+      "시간을 과거·현재·미래로 날카롭게 나눔은 지독히 오해를 낳아 왔고",
+      "hl1"
+     ],
+     [
+      "무엇보다, 지금 살아 있는 우리의 책임 범위를 시야에서 가려 왔다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 시간 분할이 책임을 가림"
+   },
+   {
+    "en": [
+     [
+      "In the climate case,",
+      "hl0"
+     ],
+     [
+      "it is not that ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "기후 사례에서,",
+      "hl0"
+     ],
+     [
+      "그것은 ______ 것이 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 부정되는 설명"
+   },
+   {
+    "en": [
+     [
+      "It is that the realities are obscured from view by the partitioning of time,",
+      "hl0"
+     ],
+     [
+      "and so questions of responsibility toward the past and future do not arise naturally.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사실은 현실이 시간의 분할에 의해 시야에서 흐려진다는 것이고,",
+      "hl0"
+     ],
+     [
+      "그래서 과거와 미래에 대한 책임의 물음이 자연히 생기지 않는다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 현실 자체가 가려짐(직시가 아님)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "all our efforts prove to be effective and are thus encouraged",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "sufficient scientific evidence has been provided to us",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "future concerns are more urgent than present needs",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "our ancestors maintained a different frame of time",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "we face the facts but then deny our responsibility",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 사실을 직시하고도 책임을 부정하는 것이 아니다(사실이 가려짐) · <span class=\"xo\">①</span>노력이 효과적(없음) <span class=\"xo\">②</span>충분한 과학적 증거(없음) <span class=\"xo\">③</span>미래가 더 급함(표면어) <span class=\"xo\">④</span>조상의 다른 시간 틀(없음)",
+  "paraphrase": {
+   "from": "the realities are obscured from view ... responsibility ... do not arise naturally",
+   "to": "we face the facts but then deny our responsibility (부정되는 대상)",
+   "copies": [
+    "future",
+    "present"
+   ]
+  },
+  "restate": {
+   "thesis": "시간을 나누는 사고가 현실을 가려, 우리는 사실을 직시하고 부정하는 게 아니라 아예 책임 물음을 못 떠올린다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the sharp division of time ... hidden from view the extent of the responsibility",
+     "ko": "시간 분할이 책임을 시야에서 가림",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "it is not that ...",
+     "ko": "‘…한 것이 아니다’로 대안 설명을 부정",
+     "role": "재진술",
+     "how": "대조"
+    },
+    {
+     "en": "the realities are obscured from view ... responsibility ... do not arise naturally",
+     "ko": "현실이 가려져 책임 물음이 안 생김",
+     "role": "정답근거",
+     "how": "부연"
+    }
+   ],
+   "echo": "‘현실이 가려짐’과 대조되는 부정 대상 = ‘직시하고도 책임 부정’ = ⑤"
+  },
+  "num": 34
+ },
+ {
+  "key": "2025-09|32",
+  "answer": 2,
+  "answer_src": "input",
+  "hl": [
+   {
+    "t": "One of the factors determining the use of technologies of communication will be the kinds of investments made in equipment and personnel; who makes them, and what they expect in return.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "There is no guarantee that the investment will necessarily be in forms of communication that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부정",
+      "word": "no guarantee"
+     }
+    ]
+   },
+   {
+    "t": "Because the ownership of investment funds tends to be in the hands of commercial organisations, the modernisation of communications infrastructure only takes place on the basis of potential profitability.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "이유",
+      "word": "profitability"
+     }
+    ]
+   },
+   {
+    "t": "Take, for example, the installation of fibre-optic communications cable across the African continent.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A number of African nations are involved in the development but its operational structures will be oriented to those who can pay for access.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Many states that might wish to use it for education and information may not only find it too expensive but also simply unavailable to them.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "There can be no doubt that the development has been led by investment opportunity rather than community demand.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "community demand"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "투자가 반드시 ______ 통신 형태에 이뤄진다는 <b>보장은 없다</b>(빈칸)",
+     "an": "— 무엇이 보장되지 않는가가 빈칸의 핵심"
+    },
+    {
+     "ko": "투자 자금은 상업 조직 손에 있어, 통신 현대화는 오직 <b>수익성</b>에 근거해 일어난다",
+     "an": "— 즉 다수의 필요가 아니라 돈이 기준"
+    },
+    {
+     "ko": "개발은 <b>공동체 수요가 아니라</b> 투자 기회에 의해 주도됐다",
+     "an": "— 보장 안 되는 것 = 다수에게 가장 적합한 형태 = 정답 ②"
+    }
+   ],
+   "concl": "→ 보장되지 않는 것 = 투자가 ‘대다수에게 가장 적합한’ 통신 형태에 쓰이는 것 = <b>②</b>",
+   "gnote": "회색(아프리카 광케이블 예시)은 수익성 논리의 구체 사례일 뿐, 논지엔 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "There is no guarantee",
+      "hl0"
+     ],
+     [
+      "that the investment will necessarily be in forms of communication",
+      "hl1"
+     ],
+     [
+      "that ______.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "보장은 없다",
+      "hl0"
+     ],
+     [
+      "투자가 반드시 어떤 통신 형태에 이뤄진다는",
+      "hl1"
+     ],
+     [
+      "______인.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 보장되지 않는 통신 형태의 성격"
+   },
+   {
+    "en": [
+     [
+      "Because the ownership of investment funds tends to be in the hands of commercial organisations,",
+      "hl0"
+     ],
+     [
+      "the modernisation of communications infrastructure only takes place",
+      "hl1"
+     ],
+     [
+      "on the basis of potential profitability.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "투자 자금의 소유가 상업 조직의 손에 있는 경향이 있어서,",
+      "hl0"
+     ],
+     [
+      "통신 인프라의 현대화는 오직 일어난다",
+      "hl1"
+     ],
+     [
+      "잠재적 수익성에 근거해서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 수익성이 기준(다수 필요 아님)"
+   },
+   {
+    "en": [
+     [
+      "There can be no doubt",
+      "hl0"
+     ],
+     [
+      "that the development has been led by investment opportunity",
+      "hl1"
+     ],
+     [
+      "rather than community demand.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "의심할 여지가 없다",
+      "hl0"
+     ],
+     [
+      "그 개발이 투자 기회에 의해 주도되어 왔다는 것",
+      "hl1"
+     ],
+     [
+      "공동체 수요가 아니라.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 다수 수요가 아니라 투자 기회 주도"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "require minimal cost and effort to maintain",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "are most appropriate for the majority of people",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "are in line with current standards and global norms",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "employ some of the most advanced <span class=\"reuse\">technologies</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "promote the <span class=\"reuse\">commercial</span> interests of companies",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 대다수 사람에게 가장 적합한 통신 형태(보장 안 됨) · <span class=\"xo\">①</span>유지비 최소(없음) <span class=\"xo\">③</span>국제 규범 부합(없음) <span class=\"xo\">④</span>최첨단 기술(표면어) <span class=\"xo\">⑤</span>기업 상업 이익 촉진(정반대·오히려 보장됨)",
+  "paraphrase": {
+   "from": "led by investment opportunity rather than community demand · only ... on the basis of potential profitability",
+   "to": "are most appropriate for the majority of people",
+   "copies": [
+    "technologies",
+    "commercial"
+   ]
+  },
+  "restate": {
+   "thesis": "통신 투자는 수익성이 이끌어, 다수에게 가장 적합한 형태로 간다는 보장이 없다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "There is no guarantee that the investment will necessarily be in forms of communication that",
+     "ko": "투자가 다수에 맞는 형태로 간다는 보장 없음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the modernisation ... only takes place on the basis of potential profitability",
+     "ko": "현대화는 수익성 기준",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "the development has been led by investment opportunity rather than community demand",
+     "ko": "공동체 수요가 아닌 투자 기회 주도",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "‘공동체 수요 아님’을 뒤집어 ‘다수에게 가장 적합’이 보장 안 됨 = ②"
+  },
+  "num": 32
+ },
+ {
+  "key": "2026-09|31",
+  "answer": 2,
+  "answer_src": "input",
+  "hl": [
+   {
+    "t": "We know that animals have evolved a variety of patterns to manipulate the perceptions of their predators to afford themselves a modicum of safety.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "manipulate the perceptions"
+     }
+    ]
+   },
+   {
+    "t": "Greater Bower birds utilize ______ in the mating domain.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "빈칸",
+      "word": "utilize"
+     }
+    ]
+   },
+   {
+    "t": "Males construct a bower; its function is to provide an arena in which males display to females standing in an avenue that leads up to the bower.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The males decorate the avenue with a variety of objects, such as stones and shells.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But they do not do so in a chaotic manner.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "The larger objects are placed closer to the bower and the smaller objects farther away.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This creates a forced perspective the opposite of the Cinderella Castle; the bower appears smaller than it actually is.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "신호",
+      "word": "forced perspective"
+     }
+    ]
+   },
+   {
+    "t": "Endler and his colleagues suggested that the male courting in the bower now appears larger and thus more attractive to the female.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Data on male mating success collected in the wild supports their hypothesis.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "동물은 포식자의 <b>지각을 조작</b>해 안전을 얻는 패턴을 진화시켰다",
+     "an": "— 상위 개념: 상대의 ‘지각’을 이용"
+    },
+    {
+     "ko": "바우어새는 짝짓기 영역에서 ______을 이용한다(빈칸)",
+     "an": "— 첫 문장의 ‘지각 조작’이 짝짓기로 확장"
+    },
+    {
+     "ko": "물체 배치로 <b>강제 원근법</b>을 만들어 bower가 실제보다 작아 보인다(수컷은 커 보임)",
+     "an": "— 착시=지각 편향 이용 = 정답 ②"
+    }
+   ],
+   "concl": "→ 바우어새가 이용하는 것 = 상대의 착시, 즉 ‘지각 편향’ = <b>②</b>",
+   "gnote": "회색(bower 구조·장식 과정)은 착시를 만드는 방법의 서술일 뿐, ‘지각 조작’ 논지의 하위 세부."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "We know that animals have evolved a variety of patterns",
+      "hl0"
+     ],
+     [
+      "to manipulate the perceptions of their predators",
+      "hl1"
+     ],
+     [
+      "to afford themselves a modicum of safety.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 동물이 다양한 패턴을 진화시켜 왔음을 안다",
+      "hl0"
+     ],
+     [
+      "포식자의 지각을 조작하기 위해",
+      "hl1"
+     ],
+     [
+      "스스로에게 약간의 안전을 마련하려고.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 지각 조작이 상위 개념"
+   },
+   {
+    "en": [
+     [
+      "Greater Bower birds utilize ______",
+      "hl0"
+     ],
+     [
+      "in the mating domain.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "큰바우어새는 ______을 이용한다",
+      "hl0"
+     ],
+     [
+      "짝짓기 영역에서.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 바우어새가 이용하는 것"
+   },
+   {
+    "en": [
+     [
+      "This creates a forced perspective the opposite of the Cinderella Castle;",
+      "hl0"
+     ],
+     [
+      "the bower appears smaller than it actually is.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이것은 신데렐라 성과 반대되는 강제 원근법을 만든다;",
+      "hl0"
+     ],
+     [
+      "bower가 실제보다 더 작아 보인다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 착시(강제 원근법)로 지각을 속임"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "genetic variations",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "perceptual biases",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "vocal attractiveness",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "<span class=\"reuse\">decorating</span> skills",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "locational advantages",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 상대의 지각 편향(착시)을 이용 · <span class=\"xo\">①</span>유전적 변이(없음) <span class=\"xo\">③</span>발성 매력(없음) <span class=\"xo\">④</span>장식 기술(표면어) <span class=\"xo\">⑤</span>위치적 이점(표면어)",
+  "paraphrase": {
+   "from": "manipulate the perceptions ... forced perspective ... appears smaller than it actually is",
+   "to": "perceptual biases",
+   "copies": [
+    "decorating",
+    "placed closer/farther (location)"
+   ]
+  },
+  "restate": {
+   "thesis": "바우어새는 포식자 상대의 지각 조작 전략처럼, 짝짓기에서 착시(지각 편향)를 이용한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "animals have evolved a variety of patterns to manipulate the perceptions",
+     "ko": "동물은 지각을 조작하도록 진화",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Greater Bower birds utilize ... in the mating domain",
+     "ko": "바우어새는 짝짓기에서 그것을 이용",
+     "role": "재진술",
+     "how": "확장"
+    },
+    {
+     "en": "forced perspective ... the bower appears smaller than it actually is",
+     "ko": "강제 원근법으로 실제보다 작아 보이게 함",
+     "role": "정답근거",
+     "how": "부연"
+    }
+   ],
+   "echo": "‘지각 조작·착시’를 ‘지각 편향(perceptual biases)’으로 재진술 = ②"
+  },
+  "num": 31
+ },
+ {
+  "key": "2022-06|33",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Concepts of nature are always cultural statements.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "cultural"
+     }
+    ]
+   },
+   {
+    "t": "This may not strike Europeans as much of an insight, for Europe’s landscape is so much of a blend.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But in the new worlds ― ‘new’ at least to Europeans ― the distinction appeared much clearer not only to European settlers and visitors but also to their descendants.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "For that reason, they had the fond conceit of primeval nature uncontrolled by human associations which could later find expression in an admiration for wilderness.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Ecological relationships certainly have their own logic and in this sense ‘nature’ can be seen to have a self-regulating but not necessarily stable dynamic independent of human intervention.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But the context for ecological interactions ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "But"
+     }
+    ]
+   },
+   {
+    "t": "We may not determine how or what a lion eats but we certainly can regulate where the lion feeds.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "regulate"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "자연에 대한 개념은 항상 <b>문화적 진술</b>이다",
+     "an": "— 자연은 인간이 의미를 부여한 것"
+    },
+    {
+     "ko": "빈칸: 생태적 상호작용의 맥락은 ______",
+     "an": "— 앞뒤 논리상 빈칸 = 인간이 설정"
+    },
+    {
+     "ko": "사자가 무엇을 먹는지는 못 정해도 어디서 먹는지는 우리가 규제 가능",
+     "an": "— 맥락은 점점 인간이 설정 = 정답 ②"
+    }
+   ],
+   "concl": "→ 생태적 상호작용의 맥락은 점점 인간에 의해 설정된다 = <b>②</b>",
+   "gnote": "회색(유럽 풍경·원시자연 예찬·자연의 자기조절 부연)은 '자연=문화적·인간이 멥락 설정' 논리에 부차적."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Concepts of nature",
+      "hl0"
+     ],
+     [
+      "are always cultural statements.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "자연에 대한 개념은",
+      "hl0"
+     ],
+     [
+      "항상 문화적 진술이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 자연 개념은 문화적·인간적 구성물"
+   },
+   {
+    "en": [
+     [
+      "But the context for ecological interactions",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 생태적 상호작용의 맥락은",
+      "hl0"
+     ],
+     [
+      "______(빈칸).",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 생태적 상호작용의 맥락"
+   },
+   {
+    "en": [
+     [
+      "We may not determine how or what a lion eats",
+      "hl0"
+     ],
+     [
+      "but we certainly can regulate where the lion feeds.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사자가 어떻게 또는 무엇을 먹는지는 결정 못 해도,",
+      "hl0"
+     ],
+     [
+      "분명히 사자가 먹는 장소는 우리가 규제할 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 인간이 생태 상호작용의 맥락을 규제"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "has supported new environment-friendly policies",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "has increasingly been set by humanity",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "inspires creative <span class=\"reuse\">cultural</span> practices",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "changes too frequently to be regulated",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "has been affected by various <span class=\"reuse\">natural</span> conditions",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 생태 상호작용의 맥락은 인간이 설정 · <span class=\"xo\">①</span>환경친화 정책(없음) <span class=\"xo\">③</span>창의적 문화 관행(표면어) <span class=\"xo\">④</span>너무 자주 변해 규제 불가(정반대) <span class=\"xo\">⑤</span>자연 조건의 영향(표면어)",
+  "paraphrase": {
+   "from": "nature = cultural statements · we certainly can regulate where the lion feeds",
+   "to": "has increasingly been set by humanity",
+   "copies": [
+    "cultural",
+    "natural"
+   ]
+  },
+  "restate": {
+   "thesis": "자연 개념은 문화적(인간이 만든) 진술이며, 생태적 상호작용의 맥락은 점점 인간이 설정한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Concepts of nature are always cultural statements.",
+     "ko": "자연 개념은 늘 문화적 진술",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "We may not determine how or what a lion eats but we certainly can regulate where the lion feeds.",
+     "ko": "사자가 먹는 장소는 인간이 규제 가능",
+     "role": "재진술",
+     "how": "구체화"
+    },
+    {
+     "en": "But the context for ecological interactions",
+     "ko": "생태적 상호작용의 맥락(빈칸)",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 'cultural statements·can regulate'를 '인간에 의해 설정됨'으로 재진술 (②)"
+  },
+  "num": 33
+ },
+ {
+  "key": "2023-06|34",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Development can get very complicated and fanciful.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "complicated"
+     }
+    ]
+   },
+   {
+    "t": "A fugue by Johann Sebastian Bach illustrates how far this process could go, when a single melodic line, sometimes just a handful of notes, was all that the composer needed to create a brilliant work containing lots of intricate development within a coherent structure.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Ludwig van Beethoven’s famous Fifth Symphony provides an exceptional example of how much mileage a classical composer can get out of a few notes and a simple rhythmic tapping.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "mileage"
+     }
+    ]
+   },
+   {
+    "t": "The opening da-da-da-DUM that everyone has heard somewhere or another ______ throughout not only the opening movement, but the remaining three movements, like a kind of motto or a connective thread.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "반복",
+      "word": "throughout"
+     }
+    ]
+   },
+   {
+    "t": "Just as we don’t always see the intricate brushwork that goes into the creation of a painting, we may not always notice how Beethoven keeps finding fresh uses for his motto or how he develops his material into a large, cohesive statement.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But a lot of the enjoyment we get from that mighty symphony stems from the inventiveness behind it, the impressive development of musical ideas.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>전개(development)</b>는 매우 복잡하고 기발해질 수 있다",
+     "an": "— 적은 재료로 다채로운 변형"
+    },
+    {
+     "ko": "베토벤 5번: 몇 개의 음표에서 얼마나 많은 것을 돈어내는가",
+     "an": "— 적은 음표 → 거대한 변형"
+    },
+    {
+     "ko": "빈칸: 서두의 모티프가 전 악장에 걸쳐 ______",
+     "an": "— 앞 논리상 '엄청나게 다양한 방식으로' = 정답 ②"
+    }
+   ],
+   "concl": "→ 몇 개의 음표가 온갖 방식으로 전개된다 = <b>②</b>",
+   "gnote": "회화 비유·감상(회색)은 '적은 재료 → 다양한 전개' 논리의 부연."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Development",
+      "hl0"
+     ],
+     [
+      "can get very complicated and fanciful.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "전개(발전)는",
+      "hl0"
+     ],
+     [
+      "매우 복잡하고 기발해질 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 전개는 매우 복잡·다채로워질 수 있다"
+   },
+   {
+    "en": [
+     [
+      "Ludwig van Beethoven’s famous Fifth Symphony provides an exceptional example",
+      "hl0"
+     ],
+     [
+      "of how much mileage a classical composer can get",
+      "hl1"
+     ],
+     [
+      "out of a few notes and a simple rhythmic tapping.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "Ludwig van Beethoven의 유명한 5번 교향곡은 특출난 예를 제공한다",
+      "hl0"
+     ],
+     [
+      "고전 작곡가가 얼마나 많은 것을 얻어낼 수 있는지에 대한",
+      "hl1"
+     ],
+     [
+      "몇 개의 음표와 단순한 리듬 두드림에서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 몇 개의 음표에서 엄청난 변형을 돈어냄"
+   },
+   {
+    "en": [
+     [
+      "The opening da-da-da-DUM that everyone has heard somewhere or another",
+      "hl0"
+     ],
+     [
+      "______",
+      "hl1"
+     ],
+     [
+      "throughout not only the opening movement, but the remaining three movements,",
+      "hl2"
+     ],
+     [
+      "like a kind of motto or a connective thread.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "누구나 어딘가에서 들어본 그 서두의 다-다-다-둘은",
+      "hl0"
+     ],
+     [
+      "______(빈칸)",
+      "hl1"
+     ],
+     [
+      "첫 악장뿐 아니라 나머지 세 악장 전체에 걸쳐,",
+      "hl2"
+     ],
+     [
+      "일종의 모티프나 연결의 실처럼.",
+      "hl3"
+     ]
+    ],
+    "note": "빈칸 문장: 서두 모티프가 전 악장에 등장"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "makes the composer’s musical ideas contradictory",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "appears in an incredible variety of ways",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "provides extensive <span class=\"reuse\">musical</span> knowledge creatively",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "remains fairly calm within the <span class=\"reuse\">structure</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "becomes deeply associated with one’s own <span class=\"reuse\">enjoyment</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 모티프가 엄청나게 다양한 방식으로 나타남 · <span class=\"xo\">①</span>음악 생각을 모순되게(정반대) <span class=\"xo\">③</span>광범한 음악 지식(표면어) <span class=\"xo\">④</span>구조 속에서 잠잠함(표면어) <span class=\"xo\">⑤</span>개인의 즐거움(표면어)",
+  "paraphrase": {
+   "from": "how much mileage a composer can get out of a few notes · development can get very complicated",
+   "to": "appears in an incredible variety of ways",
+   "copies": [
+    "musical",
+    "structure",
+    "enjoyment"
+   ]
+  },
+  "restate": {
+   "thesis": "적은 음표(모티프)가 계 전체에서 온갖 다양한 방식으로 전개된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Development can get very complicated and fanciful.",
+     "ko": "전개는 매우 복잡·기발해질 수 있다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "how much mileage a classical composer can get out of a few notes and a simple rhythmic tapping",
+     "ko": "몇 개의 음표에서 엄청난 활용을 돈어냄",
+     "role": "재진술",
+     "how": "예시"
+    },
+    {
+     "en": "The opening da-da-da-DUM ... throughout ... the remaining three movements",
+     "ko": "서두 모티프가 전 악장에 걸쳐 (빈칸)",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 'mileage ... out of a few notes'를 '엄청나게 다양한 방식으로 나타남'으로 재진술 (②)"
+  },
+  "num": 34
+ },
+ {
+  "key": "2024-06|31",
+  "answer": 2,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "People have always needed to eat, and they always will.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Rising emphasis on self-expression values does not put an end to material desires.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "But prevailing economic orientations are gradually being reshaped.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "People who work in the knowledge sector continue to seek high salaries, but they place equal or greater emphasis on doing stimulating work and being able to follow their own time schedules.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Consumption is becoming progressively less determined by the need for sustenance and the practical use of the goods consumed.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "sustenance"
+     }
+    ]
+   },
+   {
+    "t": "People still eat, but a growing component of food’s value is determined by its ______ aspects.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "value"
+     }
+    ]
+   },
+   {
+    "t": "People pay a premium to eat exotic cuisines that provide an interesting experience or that symbolize a distinctive life-style.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The publics of postindustrial societies place growing emphasis on “political consumerism,” such as boycotting goods whose production violates ecological or ethical standards.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Consumption is less and less a matter of sustenance and more and more a question of life-style ― and choice.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "life-style"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "소비는 점점 <b>생존의 필요·실용성</b>에 덜 좌우된다",
+     "an": "— 소비가 물질·실용 목적에서 멀어짐"
+    },
+    {
+     "ko": "빈칸: 음식 가치의 커지는 부분이 그것의 ______ 측면으로 결정",
+     "an": "— 실용(물질)이 아닌 것으로"
+    },
+    {
+     "ko": "소비는 생존보다 생활양식·선택의 문제",
+     "an": "— 비물질적(경험·정체성) 측면 = 정답 ②"
+    }
+   ],
+   "concl": "→ 음식의 가치가 물질·실용이 아닌 '비물질적' 측면으로 결정 = <b>②</b>",
+   "gnote": "이국 요리·정치적 소비 예시(회색)는 '물질→비물질' 논리의 부연."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Consumption is becoming progressively less determined",
+      "hl0"
+     ],
+     [
+      "by the need for sustenance and the practical use of the goods consumed.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "소비는 점점 덜 결정되고 있다",
+      "hl0"
+     ],
+     [
+      "생존의 필요와 소비된 재화의 실용적 사용에 의해.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 소비가 생존·실용에서 멀어짐"
+   },
+   {
+    "en": [
+     [
+      "People still eat,",
+      "hl0"
+     ],
+     [
+      "but a growing component of food’s value",
+      "hl1"
+     ],
+     [
+      "is determined by its ______ aspects.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "사람들은 여전히 먹지만,",
+      "hl0"
+     ],
+     [
+      "음식 가치의 점점 커지는 부분이",
+      "hl1"
+     ],
+     [
+      "그것의 ______ 측면에 의해 결정된다.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 음식 가치를 결정하는 측면"
+   },
+   {
+    "en": [
+     [
+      "Consumption is less and less a matter of sustenance",
+      "hl0"
+     ],
+     [
+      "and more and more a question of life-style ― and choice.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "소비는 점점 덜 생존의 문제이고",
+      "hl0"
+     ],
+     [
+      "점점 더 생활양식 ― 그리고 선택의 문제이다.",
+      "hl1"
+     ]
+    ],
+    "note": "결론: 생존이 아닌 생활양식·선택"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "quantitative",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "nonmaterial",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "nutritional",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "invariable",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "<span class=\"reuse\">economic</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 음식 가치가 비물질적 측면으로 결정 · <span class=\"xo\">①</span>양적(없음) <span class=\"xo\">③</span>영양적=생존·물질(정반대) <span class=\"xo\">④</span>불변의=변화와 반대(정반대) <span class=\"xo\">⑤</span>경제적(표면어)",
+  "paraphrase": {
+   "from": "less determined by the need for sustenance and the practical use · more a question of life-style",
+   "to": "nonmaterial",
+   "copies": [
+    "economic"
+   ]
+  },
+  "restate": {
+   "thesis": "소비의 가치가 물질적·실용적 필요에서 비물질적(생활양식·정체성) 측면으로 이동한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Consumption is becoming progressively less determined by the need for sustenance and the practical use of the goods consumed.",
+     "ko": "소비가 점점 생존·실용에서 벗어남",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Consumption is less and less a matter of sustenance and more and more a question of life-style ― and choice.",
+     "ko": "생존 아닌 생활양식·선택의 문제",
+     "role": "재진술",
+     "how": "반복"
+    },
+    {
+     "en": "a growing component of food’s value is determined by its ______ aspects",
+     "ko": "음식 가치가 그것의 (빈칸) 측면으로 결정",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 'less ... sustenance ... more ... life-style'를 '비물질적'으로 압축 재진술 (②)"
+  },
+  "num": 31
+ },
+ {
+  "key": "2024-수능|33",
+  "answer": 5,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "There have been psychological studies in which subjects were shown photographs of people’s faces and asked to identify the expression or state of mind evinced.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The results are invariably very mixed.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "mixed"
+     }
+    ]
+   },
+   {
+    "t": "In the 17th century the French painter and theorist Charles Le Brun drew a series of faces illustrating the various emotions that painters could be called upon to represent.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "What is striking about them is that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "striking"
+     }
+    ]
+   },
+   {
+    "t": "What is missing in all this is any setting or context to make the emotion determinate.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "missing"
+     }
+    ]
+   },
+   {
+    "t": "We must know who this person is, who these other people are, what their relationship is, what is at stake in the scene, and the like.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In real life as well as in painting we do not come across just faces; we encounter people in particular situations and our understanding of people cannot somehow be precipitated and held isolated from the social and human circumstances in which they, and we, live and breathe and have our being.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "얼굴 표정 식별 실험 결과는 항상 <b>매우 제각각(mixed)</b>",
+     "an": "— 얼굴만으로는 감정 확정 불가·모호"
+    },
+    {
+     "ko": "빈칸: Le Brun이 그린 얼굴들에서 눈에 띄는 점은 ______",
+     "an": "— 앞뒤 '맥락 없으면 감정 미확정' 논리"
+    },
+    {
+     "ko": "빠진 것은 감정을 확정지을 상황·맥락",
+     "an": "— 맥락 없으면 어떤 얼굴이든 서로 바꿀 수 있다 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 맥락이 없으면 얼굴들은 감정을 확정 못해 서로 교체 가능 = <b>⑤</b>",
+   "gnote": "실제 인물·관계 열거(회색)는 '맥락이 필요' 논지의 부연."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The results are",
+      "hl0"
+     ],
+     [
+      "invariably very mixed.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 결과는",
+      "hl0"
+     ],
+     [
+      "언제나 매우 제각각이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 얼굴 표정 식별 결과가 항상 모호"
+   },
+   {
+    "en": [
+     [
+      "What is striking about them",
+      "hl0"
+     ],
+     [
+      "is that ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 얼굴들에서 눈에 띄는 점은",
+      "hl0"
+     ],
+     [
+      "______(빈칸) 라는 것이다.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 그린 얼굴들의 눈에 띄는 특징"
+   },
+   {
+    "en": [
+     [
+      "What is missing in all this",
+      "hl0"
+     ],
+     [
+      "is any setting or context",
+      "hl1"
+     ],
+     [
+      "to make the emotion determinate.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 모든 것에서 빠져 있는 것은",
+      "hl0"
+     ],
+     [
+      "어떤 상황이나 맥락이다",
+      "hl1"
+     ],
+     [
+      "그 감정을 확정 지어 줄.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 맥락이 없으면 감정 미확정"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "all of them could be matched consistently with their intended emotions",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "every one of them was illustrated with <span class=\"reuse\">photographic</span> precision",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "each of them definitively displayed its own <span class=\"reuse\">social</span> narrative",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "most of them would be seen as representing unique characteristics",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "any number of them could be substituted for one another without loss",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> 맥락 없는 얼굴들은 손실 없이 서로 교체 가능 · <span class=\"xo\">①</span>의도한 감정과 일관 일치(정반대) <span class=\"xo\">②</span>사진 같은 정밀함(표면어) <span class=\"xo\">③</span>사회적 서사 분명히 표현(표면어) <span class=\"xo\">④</span>고유한 특성(정반대)",
+  "paraphrase": {
+   "from": "The results are invariably very mixed · what is missing is any setting or context to make the emotion determinate",
+   "to": "any number of them could be substituted for one another without loss",
+   "copies": [
+    "photographic",
+    "social"
+   ]
+  },
+  "restate": {
+   "thesis": "맥락이 없으면 얼굴 표정은 특정 감정으로 확정되지 않아 서로 교체해도 무방하다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "The results are invariably very mixed.",
+     "ko": "표정 식별 결과는 항상 제각각",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "What is missing in all this is any setting or context to make the emotion determinate.",
+     "ko": "감정을 확정할 맥락이 빠져 있다",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "What is striking about them is that",
+     "ko": "그 얼굴들에서 눈에 띄는 점(빈칸)",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '결과가 뒤섮임·맥락 부재'를 '얼굴들을 손실 없이 교체 가능'으로 재진술 (⑤)"
+  },
+  "num": 33
+ },
+ {
+  "key": "2025-09|33",
+  "answer": 1,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "City quality is so crucial for optional activities that the extent of staying activities can often be used as a measuring stick for the quality of the city as well as of its space.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "quality"
+     }
+    ]
+   },
+   {
+    "t": "Many pedestrians in a city are not necessarily an indication of good city quality ― many people walking around can often be a sign of insufficient transit options or long distances between the various functions in the city.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "And it’s not due to necessity but rather that ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "rather"
+     }
+    ]
+   },
+   {
+    "t": "It is hard to keep moving in city space with so many temptations to stay.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "temptations"
+     }
+    ]
+   },
+   {
+    "t": "In contrast are many new quarters and complexes that many people walk through but rarely stop or stay in.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>도시의 질</b>은 머무는 활동의 정도로 가늘된다",
+     "an": "— 좋은 도시일수록 머무는 사람이 많다"
+    },
+    {
+     "ko": "빈칸: 그것은 필요가 아니라 오히려 ______ 때문",
+     "an": "— 필요(necessity)가 아니라 → 도시가 매력적이라서"
+    },
+    {
+     "ko": "머물고 싶은 유혹이 많아 계속 움직이기 어렵다",
+     "an": "— 도시의 질이 매우 매력적 = 정답 ①"
+    }
+   ],
+   "concl": "→ 사람들이 머무는 건 필요가 아니라 도시가 매우 매력적이기 때문 = <b>①</b>",
+   "gnote": "로마 예시·새 구역 대조(회색)는 '질 높은 도시=머문' 논지의 예시."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "City quality is so crucial for optional activities",
+      "hl0"
+     ],
+     [
+      "that the extent of staying activities",
+      "hl1"
+     ],
+     [
+      "can often be used as a measuring stick for the quality of the city",
+      "hl2"
+     ],
+     [
+      "as well as of its space.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "도시의 질은 선택적 활동에 매우 중요해서",
+      "hl0"
+     ],
+     [
+      "머무는 활동의 정도가",
+      "hl1"
+     ],
+     [
+      "종종 도시의 질을 재는 척도로 쓰일 수 있다",
+      "hl2"
+     ],
+     [
+      "그 공간의 질뿐 아니라.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 도시의 질=머무는 활동의 정도"
+   },
+   {
+    "en": [
+     [
+      "And it’s not due to necessity",
+      "hl0"
+     ],
+     [
+      "but rather that ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그리고 그것은 필요 때문이 아니라",
+      "hl0"
+     ],
+     [
+      "오히려 ______(빈칸) 때문이다.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 머무는 이유는 필요가 아니다"
+   },
+   {
+    "en": [
+     [
+      "It is hard to keep moving in city space",
+      "hl0"
+     ],
+     [
+      "with so many temptations to stay.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "도시 공간에서 계속 움직이기는 어렵다",
+      "hl0"
+     ],
+     [
+      "머무고 싶은 유혹이 너무 많아서.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 머무고 싶게 하는 매력"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "the city quality is so inviting",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "public <span class=\"reuse\">spaces</span> are already occupied",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "public transportation is not available",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "major tourist spots are within <span class=\"reuse\">walking</span> distance",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "the city’s administrative buildings are concentrated",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 도시의 질이 매우 매력적이라서 · <span class=\"xo\">②</span>공공공간 이미 점유(표면어·없음) <span class=\"xo\">③</span>대중교통 불가(필요 부정과 정반대) <span class=\"xo\">④</span>관광지 도보권(표면어) <span class=\"xo\">⑤</span>행정 건물 밀집(없음)",
+  "paraphrase": {
+   "from": "City quality ... measuring stick ... staying activities · so many temptations to stay",
+   "to": "the city quality is so inviting",
+   "copies": [
+    "spaces",
+    "walking"
+   ]
+  },
+  "restate": {
+   "thesis": "사람들이 도시에 머무는 것은 필요 때문이 아니라 도시의 질이 매우 매력적이기 때문이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "City quality is so crucial for optional activities that the extent of staying activities can often be used as a measuring stick for the quality of the city as well as of its space.",
+     "ko": "도시의 질은 머무는 활동의 정도로 가늘됨",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "It is hard to keep moving in city space with so many temptations to stay.",
+     "ko": "머물고 싶은 유혹이 많아 계속 움직이기 어렵다",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "And it’s not due to necessity but rather that",
+     "ko": "그것은 필요가 아니라 (빈칸) 때문",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '머물게 하는 도시의 질·유혹'을 '도시 질이 매우 매력적'으로 재진술 (①)"
+  },
+  "num": 33
+ },
+ {
+  "key": "2026-09|32",
+  "answer": 3,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Although empathy is widely praised by scholars and public figures, not everyone is an empathy booster.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Critics of empathy argue that empathy will not save us from interpersonal and intergroup conflict.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In fact, they argue, empathy makes such conflicts worse.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "worse"
+     }
+    ]
+   },
+   {
+    "t": "These critics maintain that empathy can be exhausting and lead to burnout, insensitivity to suffering, or worse.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "They argue that we tend to empathize strongly with our in-group and resist empathizing with out-groups, and even enjoy the suffering of out-groups in competitive or threatening contexts.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Thus, the prescription for more empathy ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "Thus"
+     }
+    ]
+   },
+   {
+    "t": "Empathy, they argue, can further entrench conflict and force us into an us vs. them mentality.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "entrench"
+     }
+    ]
+   },
+   {
+    "t": "Finally, even when we try to empathize with others who are dissimilar from us or in unfamiliar contexts, sometimes we are unable to accurately empathize with their experiences, causing further misunderstandings and frustration.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Critics of empathy argue that we should give up on empathy and employ other tools in pursuit of social harmony, e.g., rational compassion or moral emotions like fear, anger, and shame.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "비판자들은 공감이 갈등을 더 <b>악화(worse)</b>시킨다고 본다",
+     "an": "— 공감이 갈등을 악화"
+    },
+    {
+     "ko": "빈칸: 따라서 더 많은 공감이라는 처방은 ______",
+     "an": "— 앞 결론상 '갈등에는 역효과'"
+    },
+    {
+     "ko": "공감은 갈등을 더욱 확립하고 우리 대 그들 사고로 몰아넣는다",
+     "an": "— 공감은 갈등에 역효과 = 정답 ③"
+    }
+   ],
+   "concl": "→ 더 많은 공감 처방은 갈등 상황에서 종종 역효과 = <b>③</b>",
+   "gnote": "소진·내집단 편향 열거(회색)는 '공감=갈등 악화' 논지의 근거 나열."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In fact, they argue,",
+      "hl0"
+     ],
+     [
+      "empathy makes such conflicts worse.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사실, 그들은 주장한다,",
+      "hl0"
+     ],
+     [
+      "공감이 그러한 갈등을 더 악화시킨다고.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 공감이 갈등을 악화"
+   },
+   {
+    "en": [
+     [
+      "Thus, the prescription for more empathy",
+      "hl0"
+     ],
+     [
+      "______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서, 더 많은 공감이라는 처방은",
+      "hl0"
+     ],
+     [
+      "______(빈칸).",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 더 많은 공감 처방의 결과"
+   },
+   {
+    "en": [
+     [
+      "Empathy, they argue, can further entrench conflict",
+      "hl0"
+     ],
+     [
+      "and force us into an us vs. them mentality.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "공감은, 그들이 주장하길, 갈등을 더욱 확립시킬 수 있다",
+      "hl0"
+     ],
+     [
+      "그리고 우리를 우리 대 그들 사고로 몰아넣는다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 공감은 갈등을 확립=역효과"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "underestimates the invisible <span class=\"reuse\">conflicts</span> possible within a group",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 2,
+    "tx": "is triggered by the need for solutions to emotional conflicts",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "is often counterproductive in cases of conflict",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 4,
+    "tx": "functions as a facilitator in the resolution of social disharmony",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "raises questions about negative attitudes toward social disharmony",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 더 많은 공감 처방은 갈등에 역효과 · <span class=\"xo\">①</span>집단 내 보이지 않는 갈등(표면어) <span class=\"xo\">②</span>감정 갈등 해결 요구가 촉발(없음) <span class=\"xo\">④</span>불화 해소의 촉진자(정반대) <span class=\"xo\">⑤</span>부정적 태도에 의문 제기(없음)",
+  "paraphrase": {
+   "from": "empathy makes such conflicts worse · empathy can further entrench conflict",
+   "to": "is often counterproductive in cases of conflict",
+   "copies": [
+    "conflicts"
+   ]
+  },
+  "restate": {
+   "thesis": "비판자들은 더 많은 공감이 갈등을 악화시켜 역효과를 낸다고 본다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "In fact, they argue, empathy makes such conflicts worse.",
+     "ko": "공감이 갈등을 더 악화시킴",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Empathy, they argue, can further entrench conflict and force us into an us vs. them mentality.",
+     "ko": "공감은 갈등을 더욱 확립시킴",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "Thus, the prescription for more empathy",
+     "ko": "더 많은 공감의 처방은 (빈칸)",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '공감이 갈등을 악화·확립'을 '갈등 상황에서 역효과'로 재진술 (③)"
+  },
+  "num": 32
+ },
+ {
+  "key": "2022-수능|31",
+  "answer": 1,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Humour involves not just practical disengagement but cognitive disengagement.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "As long as something is funny, we are for the moment not concerned with whether it is real or fictional, true or false.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "true or false"
+     }
+    ]
+   },
+   {
+    "t": "This is why we give considerable leeway to people telling funny stories.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "If they are getting extra laughs by exaggerating the silliness of a situation or even by making up a few details, we are happy to grant them comic licence, a kind of poetic licence.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "making up a few details"
+     }
+    ]
+   },
+   {
+    "t": "Indeed, someone listening to a funny story who tries to correct the teller ― ‘No, he didn’t spill the spaghetti on the keyboard and the monitor, just on the keyboard’ ― will probably be told by the other listeners to stop interrupting.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "The creator of humour is putting ideas into people’s heads for the pleasure those ideas will bring, not to provide ______ information.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "not to provide"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "재미있는 한, 우리는 그것이 실제인지 허구인지, <b>참인지 거짓인지</b> 신경 쓰지 않는다",
+     "an": "— 핵심은 '진위·정확성 무관'"
+    },
+    {
+     "ko": "상황을 과장하거나 <b>몇 가지 세부를 지어내도</b> 우리는 기꺼이 코믹 라이선스를 준다",
+     "an": "— 정확하지 않아도 허용됨"
+    },
+    {
+     "ko": "유머 창작자의 목적은 즐거움이지 빈칸 ______ 정보 제공이 아니다",
+     "an": "— 앞의 '진위 무관' 논리로 빈칸 = 정확한 = 정답 ①"
+    }
+   ],
+   "concl": "→ 유머의 목적은 즐거움이며 진위·정확성과 무관 = ‘정확한’ 정보 제공이 아님 = <b>①</b>",
+   "gnote": "회색(유머 정의·스파게티 예시)은 빼도 '정확성과 무관' 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "As long as something is funny,",
+      "hl0"
+     ],
+     [
+      "we are for the moment not concerned",
+      "hl1"
+     ],
+     [
+      "with whether it is real or fictional, true or false.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "무언가가 재미있는 한,",
+      "hl0"
+     ],
+     [
+      "우리는 그 순간 신경 쓰지 않는다",
+      "hl1"
+     ],
+     [
+      "그것이 실제인지 허구인지, 참인지 거짓인지를.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 재미있으면 진위에 무관심"
+   },
+   {
+    "en": [
+     [
+      "If they are getting extra laughs",
+      "hl0"
+     ],
+     [
+      "by exaggerating the silliness of a situation or even by making up a few details,",
+      "hl1"
+     ],
+     [
+      "we are happy to grant them comic licence,",
+      "hl2"
+     ],
+     [
+      "a kind of poetic licence.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "만약 그들이 추가 웃음을 얻고 있다면",
+      "hl0"
+     ],
+     [
+      "상황의 어리석음을 과장하거나 심지어 몇 가지 세부를 지어내서라도,",
+      "hl1"
+     ],
+     [
+      "우리는 기꺼이 그들에게 코믹 라이선스를 부여한다,",
+      "hl2"
+     ],
+     [
+      "일종의 시적 허용을.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 과장·날조도 허용 = 정확성 불필요"
+   },
+   {
+    "en": [
+     [
+      "The creator of humour is putting ideas into people’s heads",
+      "hl0"
+     ],
+     [
+      "for the pleasure those ideas will bring,",
+      "hl1"
+     ],
+     [
+      "not to provide ______ information.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "유머의 창작자는 사람들의 머릿속에 생각을 집어넣는다",
+      "hl0"
+     ],
+     [
+      "그 생각들이 가져다줄 즐거움을 위해,",
+      "hl1"
+     ],
+     [
+      "______ 정보를 제공하기 위해서가 아니라.",
+      "hl2"
+     ]
+    ],
+    "note": "빈칸 문장: 목적은 즐거움 (빈칸)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "accurate",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "detailed",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "useful",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "additional",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "alternative",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 목적은 즐거움, ‘정확한’ 정보 제공 아님 · <span class=\"xo\">②</span>세부적(표면어 details) <span class=\"xo\">③</span>유용한(없음) <span class=\"xo\">④</span>추가적(없음) <span class=\"xo\">⑤</span>대안적(없음)",
+  "paraphrase": {
+   "from": "not concerned with whether it is real or fictional, true or false · exaggerating · making up a few details",
+   "to": "accurate (information)",
+   "copies": [
+    "details"
+   ]
+  },
+  "restate": {
+   "thesis": "유머의 목적은 즐거움이며 진위·정확성과는 무관하다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "we are for the moment not concerned with whether it is real or fictional, true or false",
+     "ko": "재미있으면 참·거짓에 신경 쓰지 않음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "exaggerating the silliness of a situation or even by making up a few details, we are happy to grant them comic licence",
+     "ko": "과장·날조도 코믹 라이선스로 허용",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "not to provide ______ information",
+     "ko": "정확한 정보 제공이 목적이 아님",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답 accurate는 'true or false·진위 무관'을 '정확한 정보가 목적 아님'으로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2023-09|31",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "More than just having territories, animals also partition them.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "And this insight turned out to be particularly useful for zoo husbandry.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "An animal’s territory has an internal arrangement that Heini Hediger compared to the inside of a person’s house.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Most of us assign separate functions to separate rooms, but even if you look at a one-room house you will find the same internal specialization.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "internal specialization"
+     }
+    ]
+   },
+   {
+    "t": "In a cabin or a mud hut, or even a Mesolithic cave from 30,000 years ago, this part is for cooking, that part is for sleeping; this part is for making tools and weaving, that part is for waste.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "We keep ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "We keep"
+     }
+    ]
+   },
+   {
+    "t": "To a varying extent, other animals do the same.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A part of an animal’s territory is for eating, a part for sleeping, a part for swimming or wallowing, a part may be set aside for waste, depending on the species of animal.",
+    "role": "skip",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "대부분 방마다 별개의 기능을 배정하고, 원룸에도 같은 <b>내부 전문화</b>가 있다",
+     "an": "— 핵심은 '기능별로 정돈된 공간'"
+    },
+    {
+     "ko": "<b>We keep</b> ______ — 앞서 말한 '기능별 내부 전문화'를 그대로 유지한다는 뜻",
+     "an": "— 빈칸 = 깔끔한 기능적 조직 = 정답 ②"
+    }
+   ],
+   "concl": "→ 우리는 공간을 기능별로 구분·정돈된 상태로 유지 = 깔끔한 기능적 조직 = <b>②</b>",
+   "gnote": "회색(동물원 관리·오두막/동굴 예시)은 빼도 '기능별 구획' 논리 유지."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Most of us assign separate functions to separate rooms,",
+      "hl0"
+     ],
+     [
+      "but even if you look at a one-room house",
+      "hl1"
+     ],
+     [
+      "you will find the same internal specialization.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "우리 대부분은 방마다 별개의 기능을 배정한다,",
+      "hl0"
+     ],
+     [
+      "하지만 원룸 주택을 보더라도",
+      "hl1"
+     ],
+     [
+      "똑같은 내부 전문화를 발견하게 된다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 공간을 기능별로 전문화"
+   },
+   {
+    "en": [
+     [
+      "We keep ______.",
+      "hl0"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 ______ 를 유지한다.",
+      "hl0"
+     ]
+    ],
+    "note": "빈칸 문장: 기능별 정돈을 유지 (빈칸)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "an interest in close neighbors",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "a neat functional organization",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "a stock of emergency supplies",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "a distance from potential rivals",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 5,
+    "tx": "a strictly observed daily routine",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 기능별로 정돈된 조직을 유지 · <span class=\"xo\">①</span>가까운 이웃 관심(없음) <span class=\"xo\">③</span>비상용품 비축(없음) <span class=\"xo\">④</span>경쟁자와 거리(없음) <span class=\"xo\">⑤</span>엄격한 일과(없음)",
+  "paraphrase": {
+   "from": "assign separate functions to separate rooms · the same internal specialization",
+   "to": "a neat functional organization",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "인간처럼 동물도 영역을 기능별로 구획하여 정돈된 조직을 유지한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Most of us assign separate functions to separate rooms ... you will find the same internal specialization",
+     "ko": "방마다 기능을 배정 = 내부 전문화",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "We keep ______",
+     "ko": "우리는 그 기능적 정돈을 유지",
+     "role": "정답근거",
+     "how": "반복"
+    },
+    {
+     "en": "To a varying extent, other animals do the same",
+     "ko": "동물도 정도 차이는 있으나 동일",
+     "role": "재진술",
+     "how": "동의어"
+    }
+   ],
+   "echo": "정답은 'separate functions·internal specialization'을 '깔끔한 기능적 조직'으로 재진술"
+  },
+  "num": 31
+ },
+ {
+  "key": "2024-06|32",
+  "answer": 3,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "In labor-sharing groups, people contribute labor to other people on a regular basis (for seasonal agricultural work such as harvesting) or on an irregular basis (in the event of a crisis such as the need to rebuild a barn damaged by fire).",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Labor sharing groups are part of what has been called a “moral economy” since no one keeps formal records on how much any family puts in or takes out.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "formal records"
+     }
+    ]
+   },
+   {
+    "t": "Instead, accounting is ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "전환",
+      "word": "Instead"
+     }
+    ]
+   },
+   {
+    "t": "The group has a sense of moral community based on years of trust and sharing.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "moral community"
+     }
+    ]
+   },
+   {
+    "t": "In a certain community of North America, labor sharing is a major economic factor of social cohesion.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "When a family needs a new barn or faces repair work that requires group labor, a barn-raising party is called.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Many families show up to help.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Adult men provide manual labor, and adult women provide food for the event.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Later, when another family needs help, they call on the same people.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "노동공유 집단은 ‘도덕 경제’로, 아무도 <b>공식 기록</b>을 남기지 않는다",
+     "an": "— 정식·문서 회계가 아님"
+    },
+    {
+     "ko": "<b>Instead</b>, 회계는 ______ — 공식 기록의 대안으로 이뤄진다",
+     "an": "— 빈칸 = 사회적으로 규율됨"
+    },
+    {
+     "ko": "집단은 수년간의 <b>신뢰·나눔</b>에 기반한 도덕 공동체 의식을 가진다",
+     "an": "— 빈칸 = 사회적으로 규율됨 = 정답 ③"
+    }
+   ],
+   "concl": "→ 문서가 아니라 신뢰·도덕 공동체로 회계가 이뤄짐 = 사회적으로 규율됨 = <b>③</b>",
+   "gnote": "회색(계절 농사·헛간 세우기 잔치 예시)은 빼도 '문서 대신 사회적 규율' 논리 유지."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Labor sharing groups are part of what has been called a “moral economy”",
+      "hl0"
+     ],
+     [
+      "since no one keeps formal records",
+      "hl1"
+     ],
+     [
+      "on how much any family puts in or takes out.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "노동 공유 집단은 소위 “도덕 경제”의 일부이다",
+      "hl0"
+     ],
+     [
+      "왜냐하면 아무도 공식 기록을 남기지 않기 때문에",
+      "hl1"
+     ],
+     [
+      "어느 가족이 얼마나 넣고 가져가는지에 대해.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 공식 문서 기록이 없음"
+   },
+   {
+    "en": [
+     [
+      "Instead,",
+      "hl0"
+     ],
+     [
+      "accounting is ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "대신에,",
+      "hl0"
+     ],
+     [
+      "회계는 ______ 이다.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 문서 대신 다른 방식 (빈칸)"
+   },
+   {
+    "en": [
+     [
+      "The group has a sense of moral community",
+      "hl0"
+     ],
+     [
+      "based on years of trust and sharing.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 집단은 도덕적 공동체 의식을 지닌다",
+      "hl0"
+     ],
+     [
+      "수년간의 신뢰와 나눔에 기반한.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 신뢰·공동체가 회계를 대신 규율"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "legally established",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "regularly reported",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 3,
+    "tx": "socially regulated",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 4,
+    "tx": "manually calculated",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "carefully documented",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 신뢰·공동체로 사회적으로 규율됨 · <span class=\"xo\">①</span>법적 확립(없음) <span class=\"xo\">②</span>정기 보고(정반대) <span class=\"xo\">④</span>수작업 계산(표면어 manual) <span class=\"xo\">⑤</span>세심한 문서화(정반대)",
+  "paraphrase": {
+   "from": "no one keeps formal records · a sense of moral community based on years of trust and sharing",
+   "to": "socially regulated",
+   "copies": [
+    "manual"
+   ]
+  },
+  "restate": {
+   "thesis": "노동공유의 회계는 공식 문서가 아니라 신뢰 기반 도덕 공동체에 의해 사회적으로 규율된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "no one keeps formal records on how much any family puts in or takes out",
+     "ko": "공식 기록을 남기지 않음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Instead, accounting is ______",
+     "ko": "대신 회계는 다른 방식으로 이뤄짐",
+     "role": "정답근거",
+     "how": "대조"
+    },
+    {
+     "en": "The group has a sense of moral community based on years of trust and sharing",
+     "ko": "신뢰·나눔의 도덕 공동체",
+     "role": "재진술",
+     "how": "동의어"
+    }
+   ],
+   "echo": "정답 socially regulated는 'moral community·신뢰'로 규율됨을 재진술"
+  },
+  "num": 32
+ },
+ {
+  "key": "2024-수능|34",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Everyone who drives, walks, or swipes a transit card in a city views herself as a transportation expert from the moment she walks out the front door.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "transportation expert"
+     }
+    ]
+   },
+   {
+    "t": "And how she views the street ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주장",
+      "word": "how she views the street"
+     }
+    ]
+   },
+   {
+    "t": "That’s why we find so many well-intentioned and civic-minded citizens arguing past one another.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "At neighborhood meetings in school auditoriums, and in back rooms at libraries and churches, local residents across the nation gather for often-contentious discussions about transportation proposals that would change a city’s streets.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "And like all politics, all transportation is local and intensely personal.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A transit project that could speed travel for tens of thousands of people can be stopped by objections to the loss of a few parking spaces or by the simple fear that the project won’t work.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "It’s not a challenge of the data or the traffic engineering or the planning.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Public debates about streets are typically rooted in emotional assumptions about how a change will affect a person’s commute, ability to park, belief about what is safe and what isn’t, or the bottom line of a local business.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "commute"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "운전·보행·교통카드를 쓰는 모든 사람이 문을 나서는 순간 자신을 <b>교통 전문가</b>로 여긴다",
+     "an": "— 관점이 '자기 이동 방식'에서 나옴"
+    },
+    {
+     "ko": "그리고 거리를 보는 <b>그녀의 관점</b>은 ______",
+     "an": "— 앞 논리로 빈칸 = 그녀가 이동하는 방식과 밀접"
+    },
+    {
+     "ko": "거리 논쟁은 변화가 <b>통근·주차</b>에 미칠 영향에 대한 감정적 가정에 뿌리를 둔다",
+     "an": "— 빈칸 = 이동 방식과 긴밀히 연동 = 정답 ④"
+    }
+   ],
+   "concl": "→ 거리에 대한 관점은 그녀가 이동하는 방식과 긴밀히 맞물림 = <b>④</b>",
+   "gnote": "회색(회의 장소·주차 반대·데이터 부연)은 빼도 '관점 = 개인 이동 방식' 논리 유지."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Everyone who drives, walks, or swipes a transit card in a city",
+      "hl0"
+     ],
+     [
+      "views herself as a transportation expert",
+      "hl1"
+     ],
+     [
+      "from the moment she walks out the front door.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "도시에서 운전하거나 걷거나 교통카드를 판독기에 통과시키는 모든 사람은",
+      "hl0"
+     ],
+     [
+      "스스로를 교통 전문가로 여긴다",
+      "hl1"
+     ],
+     [
+      "현관문을 나서는 순간부터.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 전문성은 자기 이동 경험에서 나옴"
+   },
+   {
+    "en": [
+     [
+      "And how she views the street ______.",
+      "hl0"
+     ]
+    ],
+    "ko": [
+     [
+      "그리고 그녀가 거리를 바라보는 방식은 ______.",
+      "hl0"
+     ]
+    ],
+    "note": "빈칸 문장: 관점의 근원 (빈칸)"
+   },
+   {
+    "en": [
+     [
+      "Public debates about streets are typically rooted in emotional assumptions",
+      "hl0"
+     ],
+     [
+      "about how a change will affect a person’s commute, ability to park,",
+      "hl1"
+     ],
+     [
+      "belief about what is safe and what isn’t, or the bottom line of a local business.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "거리에 관한 공적 논쟁은 대개 감정적 가정에 뿌리를 둔다",
+      "hl0"
+     ],
+     [
+      "변화가 어떻게 개인의 통근, 주차 능력에 영향을 줄지에 관한,",
+      "hl1"
+     ],
+     [
+      "무엇이 안전하고 아닌지에 대한 믿음, 혹은 지역 사업체의 수익에 관한.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 관점은 자신의 통근·주차 방식에 좌우"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "relies heavily on how others see her city’s streets",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 2,
+    "tx": "updates itself with each new public transit policy",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "arises independently of the streets she travels on",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 4,
+    "tx": "tracks pretty closely with how she gets around",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 5,
+    "tx": "ties firmly in with how her city operates",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 관점은 자신의 이동 방식과 긴밀히 연동 · <span class=\"xo\">①</span>남의 시선에 의존(정반대) <span class=\"xo\">②</span>새 정책마다 갱신(없음) <span class=\"xo\">③</span>이동 경로와 무관(정반대) <span class=\"xo\">⑤</span>도시 운영과 결부(범위초과)",
+  "paraphrase": {
+   "from": "views herself as a transportation expert (drives, walks, swipes) · how a change will affect her commute, ability to park",
+   "to": "tracks pretty closely with how she gets around",
+   "copies": [
+    "streets"
+   ]
+  },
+  "restate": {
+   "thesis": "거리를 보는 관점은 각자가 이동하는 방식과 긴밀히 맞물려, 논쟁은 개인적·감정적이 된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Everyone who drives, walks, or swipes a transit card ... views herself as a transportation expert",
+     "ko": "이동 방식이 곧 전문가 관점의 근원",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "And how she views the street ______",
+     "ko": "거리를 보는 관점의 근원은",
+     "role": "정답근거",
+     "how": "반복"
+    },
+    {
+     "en": "how a change will affect a person’s commute, ability to park",
+     "ko": "통근·주차 등 개인 이동에 좌우",
+     "role": "재진술",
+     "how": "부연"
+    }
+   ],
+   "echo": "정답은 'drives/walks/swipes·commute·park'를 'how she gets around(이동 방식)'로 재진술"
+  },
+  "num": 34
+ },
+ {
+  "key": "2025-09|34",
+  "answer": 3,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "That people need other people is hardly news, but for Rousseau this dependence extended far beyond companionship or even love, into the very process of becoming human.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Rousseau believed that people are not born but made, every individual a bundle of potentials whose realization requires the active involvement of other people.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "not born but made"
+     }
+    ]
+   },
+   {
+    "t": "Self-development is a social process.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Self-sufficiency is an impossible fantasy.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Much of the time Rousseau wished passionately that it were not: Robinson Crusoe was a favorite book, and he yearned to be free from the pains and uncertainties of social life.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "But his writings document with extraordinary clarity ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주장",
+      "word": "his writings document"
+     }
+    ]
+   },
+   {
+    "t": "“Our sweetest existence is relative and collective, and our true self is not entirely within us.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인용",
+      "word": "relative and collective"
+     }
+    ]
+   },
+   {
+    "t": "And it is kindness ― which Rousseau analyzed under the rubric of pitié, which translates as “pity” but is much closer to “sympathy” as Hume and Smith defined it ― that is the key to this collective existence.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "kindness"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "Rousseau는 사람이 태어나는 게 아니라 <b>만들어진다</b>고 믿었고, 잠재력의 실현엔 타인의 능동적 관여가 필요하다",
+     "an": "— 자아는 관계 속에서 형성"
+    },
+    {
+     "ko": "그러나 그의 글은 매우 명료하게 ______을 기록한다",
+     "an": "— 빈칸 = 관계·애착에 의한 개인의 형성"
+    },
+    {
+     "ko": "“가장 달콤한 존재는 <b>상대적·집합적</b>이며, 참된 자아는 전적으로 우리 안에 있지 않다”",
+     "an": "— 자아는 타인과의 관계로 규정"
+    },
+    {
+     "ko": "그 집합적 존재의 열쇠는 <b>kindness</b>(연민·공감)이다",
+     "an": "— 빈칸 = 감정적 애착에 의한 개인 형성 = 정답 ③"
+    }
+   ],
+   "concl": "→ 자아는 타인과의 감정적 애착·관계 속에서 형성됨 = <b>③</b>",
+   "gnote": "회색(로빈슨 크루소·자족 갈망)은 오히려 반례이며, 빼도 '관계가 자아를 형성' 논리 유지."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Rousseau believed that people are not born but made,",
+      "hl0"
+     ],
+     [
+      "every individual a bundle of potentials",
+      "hl1"
+     ],
+     [
+      "whose realization requires the active involvement of other people.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "Rousseau는 사람이 태어나는 것이 아니라 만들어진다고 믿었다,",
+      "hl0"
+     ],
+     [
+      "모든 개인은 잠재력의 묶음이며",
+      "hl1"
+     ],
+     [
+      "그 실현은 다른 사람들의 능동적 관여를 필요로 한다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 자아는 타인의 관여로 형성"
+   },
+   {
+    "en": [
+     [
+      "But his writings document",
+      "hl0"
+     ],
+     [
+      "with extraordinary clarity ______.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 그의 글은 기록한다",
+      "hl0"
+     ],
+     [
+      "대단히 명료하게 ______을.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 글이 명료하게 기록하는 것 (빈칸)"
+   },
+   {
+    "en": [
+     [
+      "“Our sweetest existence is relative and collective,",
+      "hl0"
+     ],
+     [
+      "and our true self is not entirely within us.”",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "“우리의 가장 달콤한 존재는 상대적이고 집합적이며,",
+      "hl0"
+     ],
+     [
+      "우리의 참된 자아는 전적으로 우리 안에 있지 않다.”",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 자아는 관계 속에 존재"
+   },
+   {
+    "en": [
+     [
+      "And it is kindness",
+      "hl0"
+     ],
+     [
+      "― which Rousseau analyzed under the rubric of pitié,",
+      "hl1"
+     ],
+     [
+      "which translates as “pity” but is much closer to “sympathy” as Hume and Smith defined it ―",
+      "hl2"
+     ],
+     [
+      "that is the key to this collective existence.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그리고 바로 친절함(kindness)이",
+      "hl0"
+     ],
+     [
+      "― Rousseau가 pitié라는 항목으로 분석한,",
+      "hl1"
+     ],
+     [
+      "“연민”으로 번역되지만 Hume과 Smith가 정의한 “공감”에 훨씬 가까운 ―",
+      "hl2"
+     ],
+     [
+      "이 집합적 존재의 열쇠이다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 감정(연민·공감)이 집합적 존재의 열쇠"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "the necessity of philosophical study to understand human nature",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "the development of self-sufficiency through literary works",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 3,
+    "tx": "the shaping of the individual by his emotional attachments",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 4,
+    "tx": "the making of the self-reliant man through his struggles",
+    "verdict": "x",
+    "jd": "✘ 정반대"
+   },
+   {
+    "n": 5,
+    "tx": "the difficulty of trusting other people wholeheartedly",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 감정적 애착에 의한 개인의 형성 · <span class=\"xo\">①</span>철학 연구 필요성(없음) <span class=\"xo\">②</span>문학으로 자족 발달(표면어 self-sufficiency) <span class=\"xo\">④</span>투쟁으로 자립적 인간(정반대) <span class=\"xo\">⑤</span>타인 신뢰의 어려움(없음)",
+  "paraphrase": {
+   "from": "people are not born but made ... requires the active involvement of other people · our true self is not entirely within us · kindness is the key to this collective existence",
+   "to": "the shaping of the individual by his emotional attachments",
+   "copies": [
+    "self-sufficiency"
+   ]
+  },
+  "restate": {
+   "thesis": "자아는 타인과의 관계·감정적 애착 속에서 형성되며, 자족은 불가능한 환상이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "people are not born but made ... requires the active involvement of other people",
+     "ko": "자아는 타인의 관여로 만들어짐",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "But his writings document with extraordinary clarity ______",
+     "ko": "글이 명료히 기록하는 것",
+     "role": "정답근거",
+     "how": "반복"
+    },
+    {
+     "en": "Our sweetest existence is relative and collective ... it is kindness ... that is the key",
+     "ko": "참된 자아는 관계적이며 연민이 열쇠",
+     "role": "재진술",
+     "how": "동의어"
+    }
+   ],
+   "echo": "정답은 'relative and collective·kindness'를 '감정적 애착에 의한 개인 형성'으로 재진술"
+  },
+  "num": 34
+ },
+ {
+  "key": "2027-06|32",
+  "answer": 2,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Speakers don’t always put everything that’s important to them into words.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Very often you can understand a speaker’s meaning by observing their nonverbal behaviors such as a change in a vocal tone or volume, eye contact, facial expressions and gestures.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "nonverbal behaviors"
+     }
+    ]
+   },
+   {
+    "t": "As it is easy to misinterpret nonverbal behavior, effective listeners verbally confirm their interpretations of someone’s nonverbal communication.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A question as simple as “Do your nods indicate a yes vote?” can make sure that everyone is on the same wavelength.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "If, as nonverbal research indicates, more than half of a speaker’s meaning is conveyed nonverbally, we are missing a lot of important information if we fail to “listen” to nonverbal behavior.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Even Freud suggested that “he that has eyes to see and ears to hear may convince himself that no mortal can keep a secret. If his lips are silent, he chatters with his fingertips; betrayal oozes out of him at every pore.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인용근거",
+      "word": "no mortal can keep a secret"
+     }
+    ]
+   },
+   {
+    "t": "No wonder it is difficult for most people to ______ in a face-to-face group discussion.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "difficult for most people"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "화자의 의미는 어조·시선·표정·몸짓 같은 <b>비언어 행동</b> 관찰로 알 수 있다",
+     "an": "— 비언어가 진심을 드러냄"
+    },
+    {
+     "ko": "Freud: 입이 침묵해도 손끝이 지껄이고 배신이 모공마다 새어 나온다 — <b>누구도 비밀을 못 지킨다</b>",
+     "an": "— 진심은 비언어로 누설됨"
+    },
+    {
+     "ko": "그러니 대부분의 사람이 대면 토론에서 ______하기 <b>어렵다</b>",
+     "an": "— 빈칸 = 자신의 의미·감정을 숨기기 = 정답 ②"
+    }
+   ],
+   "concl": "→ 비언어가 진심을 드러내므로 자신의 의미·감정을 숨기기 어렵다 = <b>②</b>",
+   "gnote": "회색(끄덕임 질문·연구 통계 부연)은 빼도 '비언어가 진심을 누설' 논리 유지."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Very often you can understand a speaker’s meaning",
+      "hl0"
+     ],
+     [
+      "by observing their nonverbal behaviors",
+      "hl1"
+     ],
+     [
+      "such as a change in a vocal tone or volume, eye contact, facial expressions and gestures.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "매우 자주 당신은 화자의 의미를 이해할 수 있다",
+      "hl0"
+     ],
+     [
+      "그들의 비언어적 행동을 관찰함으로써",
+      "hl1"
+     ],
+     [
+      "어조나 음량의 변화, 눈맞춤, 표정, 몸짓 같은.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 비언어가 화자의 의미를 드러냄"
+   },
+   {
+    "en": [
+     [
+      "Even Freud suggested that",
+      "hl0"
+     ],
+     [
+      "“he that has eyes to see and ears to hear may convince himself that no mortal can keep a secret.",
+      "hl1"
+     ],
+     [
+      "If his lips are silent, he chatters with his fingertips;",
+      "hl2"
+     ],
+     [
+      "betrayal oozes out of him at every pore.”",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "심지어 Freud는 이렇게 말했다",
+      "hl0"
+     ],
+     [
+      "“볼 눈과 들을 귀를 가진 자는 어떤 인간도 비밀을 지킬 수 없음을 스스로 확신하게 된다.",
+      "hl1"
+     ],
+     [
+      "입술이 침묵하면, 그는 손끝으로 지껄인다;",
+      "hl2"
+     ],
+     [
+      "배신이 그의 모든 모공에서 스며 나온다.”",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 진심은 비언어로 반드시 새어 나옴"
+   },
+   {
+    "en": [
+     [
+      "No wonder it is difficult for most people",
+      "hl0"
+     ],
+     [
+      "to ______ in a face-to-face group discussion.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "대부분의 사람들이 어려운 것도 당연하다",
+      "hl0"
+     ],
+     [
+      "대면 집단 토론에서 ______하는 것이.",
+      "hl1"
+     ]
+    ],
+    "note": "빈칸 문장: 무엇을 하기 어려운가 (빈칸)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "pretend to pay attention to others",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 2,
+    "tx": "conceal what they mean and feel",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 3,
+    "tx": "interpret one’s nonverbal behavior",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 4,
+    "tx": "maintain the nonverbal communication",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   },
+   {
+    "n": 5,
+    "tx": "encounter a chance to understand others",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> 자신의 의미·감정을 숨기기 · <span class=\"xo\">①</span>주의 기울이는 척(없음) <span class=\"xo\">③</span>비언어 행동 해석(표면어) <span class=\"xo\">④</span>비언어 소통 유지(표면어) <span class=\"xo\">⑤</span>타인 이해 기회(없음)",
+  "paraphrase": {
+   "from": "understand a speaker’s meaning by observing nonverbal behaviors · no mortal can keep a secret; betrayal oozes out of him at every pore",
+   "to": "conceal what they mean and feel",
+   "copies": [
+    "nonverbal behavior",
+    "nonverbal communication"
+   ]
+  },
+  "restate": {
+   "thesis": "비언어 행동이 진심을 드러내므로 사람들은 자신의 의미와 감정을 숨기기 어렵다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "you can understand a speaker’s meaning by observing their nonverbal behaviors",
+     "ko": "비언어가 화자의 진짜 의미를 드러냄",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "no mortal can keep a secret ... betrayal oozes out of him at every pore",
+     "ko": "누구도 비밀을 못 지킴, 진심이 새어 나옴",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "No wonder it is difficult for most people to ______",
+     "ko": "그래서 무언가를 하기 어려움",
+     "role": "정답근거",
+     "how": "반복"
+    }
+   ],
+   "echo": "정답은 '비언어가 진심을 누설'을 '의미·감정을 숨기기 어렵다'로 재진술"
+  },
+  "num": 32
  }
 ]
