@@ -220,6 +220,10 @@ def test_grammar_agreement_dropped():
     _check("was/were 가정법(as if) 유지",
            len(_one_grammar("He talks as if it were true.", "He talks as if it {{P1}} true.",
                             "[ was / were ]", "were")) == 1)
+    # 축약형 수일치(doesn't/don't 등)도 제거 + 자리표시자에 정답 복원
+    s6 = _one_grammar("Objects don't have personality.", "Objects {{P1}} have personality.",
+                      "[ doesn't / don't ]", "don't")
+    _check("축약 수일치(doesn't/don't) 제거", len(s6) == 0)
     # 수일치 문항을 버릴 때 자리표시자를 '정답'으로 복원해 문장에 구멍(gap)이 없어야 한다
     llm4 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
         no=1, en="Weeds and pests were also winners.", ko="마",

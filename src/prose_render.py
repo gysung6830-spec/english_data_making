@@ -226,7 +226,10 @@ def renderable_ref_count(llm: LLMProsePack) -> int:
 # '주어 수일치만' 묻는 be/do/have 선택 → 난도가 낮아 출제 지양(프롬프트로 막아도 LLM 이 종종 냄).
 #   is/are · does/do · has/have 는 '순수 수일치'라 렌더에서 드롭한다.
 #   was/were 도 수일치이나 '가정법(if/as if/wish …)' 문맥이면 남긴다.
-_AGREEMENT_SETS = ({"is", "are"}, {"does", "do"}, {"has", "have"})
+#   축약형(doesn't/don't·isn't/aren't·hasn't/haven't)도 순수 수일치라 함께 드롭한다.
+_AGREEMENT_SETS = ({"is", "are"}, {"does", "do"}, {"has", "have"},
+                   {"isn't", "aren't"}, {"doesn't", "don't"}, {"hasn't", "haven't"})
+_WERE_SETS = ({"was", "were"}, {"wasn't", "weren't"})   # 가정법 소지 → 문맥 판단
 _SUBJUNCTIVE = re.compile(r'\b(if|as if|as though|wish|wishe[sd]|wished|suppose|were to|rather)\b', re.I)
 
 
@@ -263,11 +266,12 @@ def _is_agreement_choice(display: str, template: str = "") -> bool:
       단, 짧은 대명사 오탐(it/its) 방지를 위해 원형 길이 3 이상일 때만.
     """
     inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
-    opts = [c.strip().lower() for c in inside.split("/") if c.strip()]
+    # 아포스트로피 정규화(’ → ')로 축약형 비교를 일관되게 한다.
+    opts = [c.strip().lower().replace("’", "'") for c in inside.split("/") if c.strip()]
     s = set(opts)
     if s in _AGREEMENT_SETS:
         return True
-    if s == {"was", "were"}:                    # 가정법 문맥이면 유지, 아니면 수일치로 제거
+    if s in _WERE_SETS:                          # was/were·wasn't/weren't: 가정법 문맥이면 유지
         return not _SUBJUNCTIVE.search(template or "")
     if len(opts) == 2:
         a, b = sorted(opts, key=len)            # a = 더 짧은 쪽(원형)
