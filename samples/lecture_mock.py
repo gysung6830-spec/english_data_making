@@ -1,14 +1,15 @@
 """API 없이 강의컨셉 교재(필생보) 렌더링/파이프라인을 검증하기 위한 목(mock) 데이터."""
 from __future__ import annotations
 
-from src.lecture_schemas import (Chunk, LecturePassage, LectureSentence,
-                                 Overview, RestatementChain, SentenceAnalysis,
-                                 SentenceItem, Vocab)
+from src.lecture_schemas import (Chunk, GrammarChip, LecturePassage,
+                                 LectureSentence, Overview, RestatementChain,
+                                 SentenceAnalysis, SentenceItem, Vocab)
 
 
-def _S(id, english, syntax, vocab, chunks, options, ans, expl=""):
+def _S(id, english, grammar, vocab, chunks, options, ans, expl=""):
     return SentenceItem(
-        id=id, english=english, syntax_tag=syntax,
+        id=id, english=english,
+        grammar=[GrammarChip(tag=t, note=n) for t, n in grammar],
         vocab=[Vocab(word=w, meaning=m) for w, m in vocab],
         chunks=[Chunk(en=e, ko=k, blank=b) for e, k, b in chunks],
         content_options=options, content_answer_index=ans, content_explanation=expl,
@@ -51,7 +52,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
     )
 
     items = [
-        _S(1, raw[0], "관계사절(play a role)·분사구",
+        _S(1, raw[0], [("관계사 that","앞의 the role 을 that절이 수식"), ("분사구 including","주어를 부연 설명")],
            [("developmental", "발달의"), ("nonhuman primate", "인간이 아닌 영장류"),
             ("recognize", "인정하다, 인식하다"), ("play a role in", "~에서 역할을 하다")],
            [("Many developmental theorists and researchers,", "많은 발달 이론가들과 연구자들은,", False),
@@ -62,7 +63,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             "두려움이 사회성 발달과 무관하다는 주장을 반박하는 문장",
             "영장류 연구 방법을 소개하는 문장"], 0,
            "play a role in(~에서 역할을 하다)이 관계사로 쪼개진 형태. 주제 제시 문장이야."),
-        _S(2, raw[1], "부사절(when/until)·수동태",
+        _S(2, raw[1], [("부사절 when/until","시간·조건을 나타내는 종속절"), ("수동태 has been p.p.","아기가 '위로받는' 것")],
            [("infant", "아기, 유아"), ("seek out", "찾아 나서다"),
             ("exploratory", "탐색의"), ("reassure", "안심시키다"),
             ("attachment object", "애착 대상")],
@@ -75,7 +76,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             "아기가 엄마를 위로해 주는 장면",
             "아기가 놀이를 통해 두려움을 극복한다는 내용"], 0,
            "until은 '~까지 (멈춘 상태가) 계속'이고 has been comforted는 수동('위로받는다')."),
-        _S(3, raw[2], "비교급 than절 도치·생략",
+        _S(3, raw[2], [("비교급 than","'~보다 더 적다' 비교"), ("than절 도치·생략","than will infants who are not = 자주 겁먹지 않는 아기들")],
            [("frequently", "자주"), ("very likely", "~할 가능성이 매우 높다"),
             ("opportunity", "기회")],
            [("Thus, frequently frightened infants", "따라서 자주 겁을 먹는 아기들은", False),
@@ -86,7 +87,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             "겁먹는 아기가 오히려 더 많이 논다는 내용",
             "아기들의 놀이 종류를 비교하는 문장"], 0,
            "than 뒤 도치·생략. who are not = 자주 겁먹지 '않는' 아기들이 비교 대상."),
-        _S(4, raw[3], "조건절·serve to+동사원형",
+        _S(4, raw[3], [("serve to+동사원형","'~하는 역할을 하다'"), ("조건절 if","성향이 유지된다면")],
            [("voluntary", "자발적인"), ("restraint", "억제, 제약"),
             ("serve to", "~하는 역할을 하다"), ("tendency", "성향, 경향"),
             ("maintain", "유지하다")],

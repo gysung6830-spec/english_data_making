@@ -8,12 +8,13 @@
 {% for p in passages %}
 <div class="passage">
 
-  {#- 지문 헤더 -#}
+  {#- 지문 헤더 (학생용은 정답이 될 수 있는 상단 제목을 감춤) -#}
   <div class="doc-head">
     <div class="kicker"><span class="pill-doc">지문 {{ p.no }}{% if p.total > 1 %} / {{ p.total }}{% endif %}</span>
       {% if teacher %}<span class="tag-teacher">강사용 · 정답 표시</span>{% else %}<span class="tag-student">학생 문제지</span>{% endif %}
+      {% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}
     </div>
-    <div class="doc-title">{% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}{{ p.theme_ko }}</div>
+    {% if teacher %}<div class="doc-title">{{ p.theme_ko }}</div>{% endif %}
     <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해 — 어휘 · 끊어읽기 · 내용 · 예측{% if p.source %} &nbsp;·&nbsp; {{ p.source }}{% endif %}</div>
   </div>
 
@@ -22,32 +23,28 @@
     <div class="sec-head"><span class="sec-no">1</span><span class="sec-title">지문 통째로 읽기</span>
       <span class="sec-desc">먼저 전체 흐름을 쭉 훑어봐</span></div>
     <div class="passage-box">
-      {% for s in p.sentences %}<span class="sent"><sup class="snum">{{ s.id }}</sup>{{ s.text }}</span> {% endfor %}
+      {% for s in p.sentences %}<span class="sent"><span class="snum">{{ s.id }}</span>{{ s.text }}</span> {% endfor %}
     </div>
   </div>
 
   {#- ② 어휘 리스트 -#}
   <div class="section">
     <div class="sec-head"><span class="sec-no">2</span><span class="sec-title">어휘 리스트</span>
-      <span class="sec-desc">핵심 어휘부터 익혀둬</span></div>
-    <div class="panel">
-      <div class="vocab-grid">
-        {% for v in p.vocab_list %}
-        <div class="vrow"><span class="vw">{{ v.word }}</span><span class="vm">{{ v.meaning }}</span></div>
-        {% endfor %}
-      </div>
+      <span class="sec-desc">핵심 어휘부터 익혀둬 (앞의 S# = 나온 문장)</span></div>
+    <div class="panel vocab-flow">
+      {% for v in p.vocab_list %}<span class="vitem"><span class="vsid">S{{ v.sid }}</span> <span class="vw">{{ v.word }}</span> <span class="vm">{{ v.meaning }}</span></span>{% if not loop.last %}<span class="vdot">·</span>{% endif %}{% endfor %}
     </div>
   </div>
 
-  {#- ③ 문장별: 끊어읽기 빈칸 + 내용 객관식 -#}
-  <div class="section">
+  {#- ③ 문장별: 끊어읽기 빈칸 + 내용 객관식 (새 페이지) -#}
+  <div class="section brk">
     <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
-      <span class="sec-desc">빈칸(오역 주의)은 직접 해석해 채우고, 문장 내용을 골라봐</span></div>
+      <span class="sec-desc"><span class="trap-legend">밑줄</span>=오역 주의 → 직접 해석해 채우고, 문장 내용을 골라봐</span></div>
     <div class="panel">
       {% for it in p.lines %}
       <div class="s-item">
-        <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}
-          {% if it.syntax_tag %}<span class="syntax">{{ it.syntax_tag }}</span>{% endif %}</div>
+        <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{% if c.blank %}<span class="en-trap">{{ c.en }}</span>{% else %}{{ c.en }}{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
+        {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gchip">{{ g.tag }}</span>{% if g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}</div>{% endif %}
         <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}{% if c.blank %}{% if teacher %}<span class="ko-fill">{{ c.ko }}</span>{% else %}<span class="ko-blank" style="min-width:{{ c.blank_w }}px"></span>{% endif %}{% else %}<span class="ko-plain">{{ c.ko }}</span>{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         <div class="s-q"><span class="q-lead">이 문장의 내용은?</span>
           {% for o in it.content_options %}<span class="q-opt {% if teacher and o.correct %}correct{% endif %}"><span class="osym">{{ o.sym }}</span>{{ o.text }}</span>{% endfor %}
@@ -58,8 +55,8 @@
     </div>
   </div>
 
-  {#- ④ 글 예측 -#}
-  <div class="section">
+  {#- ④ 글 예측 (새 페이지) -#}
+  <div class="section brk">
     <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">글 예측</span>
       <span class="sec-desc">문장을 다 봤으니 지문 전체를 정리해봐{% if not teacher %} (정답은 강사용){% endif %}</span></div>
 

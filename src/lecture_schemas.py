@@ -82,11 +82,16 @@ class Chunk(BaseModel):
     blank: bool = False   # True면 '오역 위험' → 학생용에서 ko 를 빈칸으로(주관식)
 
 
+class GrammarChip(BaseModel):
+    tag: str          # 짧은 어법명(칩 라벨). 예: '관계사 that', '분사구문', '비교급 도치'
+    note: str = ""    # 간단 설명 한 줄(필생보처럼)
+
+
 class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
-    syntax_tag: str = ""          # 구문 태그(예: '관계사절(play a role)·분사구')
-    vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ ① 어휘 리스트로 집계)
+    grammar: list[GrammarChip] = Field(default_factory=list)  # 어법 칩(1~3개)
+    vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ 어휘 리스트로 집계)
     chunks: list[Chunk]           # ② 끊어읽기(오역 위험 부분 blank=true)
     # ② '이 문장 내용' 객관식
     content_options: list[str] = Field(min_length=2, max_length=4)

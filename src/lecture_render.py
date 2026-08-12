@@ -24,7 +24,10 @@ _CIRCLED = "①②③④⑤"
 
 
 def _aggregate_vocab(sentences) -> list[dict]:
-    """문장별 어휘를 지문 전체 어휘 힌트로 합침(단어 기준 중복 제거, 등장 순서 유지)."""
+    """문장별 어휘를 지문 전체 어휘 리스트로 합침(단어 기준 중복 제거, 등장 순서 유지).
+
+    각 어휘 앞에 '처음 나온 문장 번호(sid)'를 달아 어느 문장 어휘인지 표시한다.
+    """
     seen: set[str] = set()
     out: list[dict] = []
     for s in sentences:
@@ -33,7 +36,7 @@ def _aggregate_vocab(sentences) -> list[dict]:
             if not key or key in seen:
                 continue
             seen.add(key)
-            out.append({"word": v.word.strip(), "meaning": (v.meaning or "").strip()})
+            out.append({"sid": s.id, "word": v.word.strip(), "meaning": (v.meaning or "").strip()})
     return out
 
 
@@ -79,8 +82,7 @@ def _build_view(p: LecturePassage) -> dict:
         lines.append({
             "id": s.id,
             "english": s.english,
-            "syntax_tag": s.syntax_tag,
-            "en_chunked": " / ".join(c.en for c in s.chunks),
+            "grammar": [{"tag": g.tag, "note": g.note} for g in s.grammar],
             "chunks": chunks,
             "content_options": cv["options"],
             "content_answer_sym": cv["answer_sym"],

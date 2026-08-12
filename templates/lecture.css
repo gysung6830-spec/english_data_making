@@ -44,6 +44,8 @@ body{
 
 /* ---- 섹션 헤더 ---------------------------------------------------------- */
 .section{ margin:0 0 16px; }
+.section.brk{ page-break-before:always; }
+.trap-legend{ color:var(--amber); border-bottom:1.5px solid var(--amber); font-weight:700; }
 .sec-head{ display:flex; align-items:center; gap:9px; margin:0 0 9px; }
 .sec-no{
   display:inline-flex; align-items:center; justify-content:center;
@@ -58,21 +60,29 @@ body{
 
 /* ---- 지문 통째로 읽기 --------------------------------------------------- */
 .passage-box{ background:var(--box); border:1px solid var(--line); border-radius:12px;
-  padding:11px 15px; font-size:10.3pt; line-height:1.85; color:var(--ink); }
-.passage-box .sent{ margin-right:3px; }
-.passage-box .snum{ font-weight:700; color:var(--green); font-size:8pt; margin-right:2px; vertical-align:1px; }
+  padding:11px 15px; font-size:10.3pt; line-height:1.95; color:var(--ink); }
+.passage-box .sent{ margin-right:4px; }
+.passage-box .snum{ display:inline-block; background:#dbe7e0; color:var(--green-d);
+  font-weight:700; font-size:7.2pt; border-radius:5px; padding:0 4px; margin-right:3px; vertical-align:1.5px; }
 
-/* ---- 어휘 리스트 (압축) ------------------------------------------------- */
-.vocab-grid{ display:flex; flex-wrap:wrap; }
-.vrow{ flex:0 0 33.33%; display:flex; gap:6px; align-items:baseline; padding:1.5px 8px 1.5px 0;
-  font-size:8.6pt; line-height:1.35; }
-.vrow .vw{ flex:0 0 auto; font-weight:700; color:var(--green-d); }
-.vrow .vm{ flex:1 1 auto; color:#6b7280; }
+/* ---- 어휘 리스트 (압축 인라인 플로우·S# 표시) -------------------------- */
+.vocab-flow{ font-size:8.7pt; line-height:1.85; }
+.vitem{ white-space:nowrap; }
+.vsid{ color:var(--green); font-weight:700; font-size:6.8pt; vertical-align:1px; }
+.vw{ font-weight:700; color:var(--green-d); }
+.vm{ color:#6b7280; }
+.vdot{ color:#c7cdd6; margin:0 7px; }
 
 /* ---- ② 문장별 ----------------------------------------------------------- */
 .s-item{ margin-bottom:15px; }
 .s-item:last-child{ margin-bottom:0; }
 .s-en{ font-size:10.6pt; font-weight:400; line-height:1.6; color:var(--ink); }
+.en-trap{ background:#fff2d8; border-bottom:1.5px solid var(--amber); border-radius:3px; padding:0 2px; }
+/* 어법 칩 */
+.gram{ font-size:9pt; color:#5b6472; margin:5px 0 2px; line-height:1.7; }
+.gchip{ display:inline-block; font-size:8.2pt; font-weight:700; color:var(--indigo);
+  background:var(--indigo-bg); border-radius:999px; padding:1px 9px; margin-right:3px; }
+.gnote{ color:#6b7280; font-size:8.8pt; }
 .s-no{
   display:inline-flex; align-items:center; justify-content:center;
   width:19px; height:19px; background:var(--green); color:#fff; border-radius:50%;
