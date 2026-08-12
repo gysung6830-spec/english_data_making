@@ -124,15 +124,27 @@ def render_lecture_html(passages, teacher: bool, footer_note: str = "") -> str:
     return tmpl.render(passages=views, teacher=teacher, footer_note=footer_note)
 
 
+def _inline_styles(html: str) -> str:
+    """폰트(@font-face base64)와 스타일을 문서 <head> 안에 직접 삽입한다.
+
+    WeasyPrint(현재 버전)는 write_pdf(stylesheets=…) 로 넘긴 외부 CSS의 @font-face 를
+    적용하지 않아 한글 폰트가 폴백된다. 문서 자체의 <style> 에 넣어야 나눔스퀘어라운드가
+    확실히 임베드된다.
+    """
+    fonts = (TEMPLATE_DIR / "lecture_fonts.css").read_text(encoding="utf-8")
+    css = (TEMPLATE_DIR / "lecture.css").read_text(encoding="utf-8")
+    return html.replace("</head>", f"<style>{fonts}\n{css}</style></head>", 1)
+
+
 def render_lecture_pdf(passages, out_path: str | Path, teacher: bool,
                        footer_note: str = "") -> Path:
-    from weasyprint import CSS, HTML  # 지연 임포트(무거움)
+    from weasyprint import HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    html = render_lecture_html(passages, teacher=teacher, footer_note=footer_note)
-    css = CSS(filename=str(TEMPLATE_DIR / "lecture.css"))
-    HTML(string=html, base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=[css])
+    html = _inline_styles(render_lecture_html(passages, teacher=teacher,
+                                             footer_note=footer_note))
+    HTML(string=html, base_url=str(TEMPLATE_DIR) + "/").write_pdf(str(out_path))
     return out_path
 
 

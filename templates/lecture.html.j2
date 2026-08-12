@@ -17,10 +17,19 @@
     <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해 — 어휘 · 끊어읽기 · 내용 · 예측{% if p.source %} &nbsp;·&nbsp; {{ p.source }}{% endif %}</div>
   </div>
 
-  {#- ① 어휘 리스트 -#}
+  {#- ① 지문 통째로 읽기 -#}
   <div class="section">
-    <div class="sec-head"><span class="sec-no">1</span><span class="sec-title">어휘 리스트</span>
-      <span class="sec-desc">문장을 풀기 전에 핵심 어휘부터 익혀둬</span></div>
+    <div class="sec-head"><span class="sec-no">1</span><span class="sec-title">지문 통째로 읽기</span>
+      <span class="sec-desc">먼저 전체 흐름을 쭉 훑어봐</span></div>
+    <div class="passage-box">
+      {% for s in p.sentences %}<span class="sent"><sup class="snum">{{ s.id }}</sup>{{ s.text }}</span> {% endfor %}
+    </div>
+  </div>
+
+  {#- ② 어휘 리스트 -#}
+  <div class="section">
+    <div class="sec-head"><span class="sec-no">2</span><span class="sec-title">어휘 리스트</span>
+      <span class="sec-desc">핵심 어휘부터 익혀둬</span></div>
     <div class="panel">
       <div class="vocab-grid">
         {% for v in p.vocab_list %}
@@ -30,9 +39,9 @@
     </div>
   </div>
 
-  {#- ② 문장별: 끊어읽기 빈칸 + 내용 객관식 -#}
+  {#- ③ 문장별: 끊어읽기 빈칸 + 내용 객관식 -#}
   <div class="section">
-    <div class="sec-head"><span class="sec-no">2</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
+    <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
       <span class="sec-desc">빈칸(오역 주의)은 직접 해석해 채우고, 문장 내용을 골라봐</span></div>
     <div class="panel">
       {% for it in p.lines %}
@@ -49,9 +58,9 @@
     </div>
   </div>
 
-  {#- ③ 글 예측 -#}
+  {#- ④ 글 예측 -#}
   <div class="section">
-    <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">글 예측</span>
+    <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">글 예측</span>
       <span class="sec-desc">문장을 다 봤으니 지문 전체를 정리해봐{% if not teacher %} (정답은 강사용){% endif %}</span></div>
 
     <div class="pcard">
