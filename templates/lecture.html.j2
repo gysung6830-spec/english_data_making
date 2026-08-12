@@ -43,9 +43,9 @@
     <div class="panel">
       {% for it in p.lines %}
       <div class="s-item">
-        <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{% if c.blank %}<span class="en-trap">{{ c.en }}</span>{% else %}{{ c.en }}{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
+        <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gchip">{{ g.tag }}</span>{% if g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}</div>{% endif %}
-        <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}{% if c.blank %}{% if teacher %}<span class="ko-fill">{{ c.ko }}</span>{% else %}<span class="ko-blank" style="min-width:{{ c.blank_w }}px"></span>{% endif %}{% else %}<span class="ko-plain">{{ c.ko }}</span>{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
+        <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         <div class="s-q"><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
         {% for m in it.misreads %}
         <div class="mis"><span class="mis-x">✕</span>{{ m.statement }}</div>
@@ -89,22 +89,24 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">같은 개념이 어떻게 다시 표현되는지 순서대로</span></div>
-      {% for c in p.chains %}
-      {% if teacher %}
-      <div class="chain-a"><b>{{ c.label }}</b> : {{ c.expressions | join(' → ') }}{% if c.variation %}<div class="chain-var">↳ 변주 {{ c.variation }}</div>{% endif %}</div>
-      {% else %}
-      <div class="chain-q"><span class="chain-label">{{ c.label }}</span>
-        <span class="chain-flow">{{ c.first }}{% for i in range(c.blanks) %} → <span class="chain-blank"></span>{% endfor %}</span></div>
-      {% endif %}
-      {% endfor %}
+      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}같은 개념이 형광펜으로 어떻게 이어지는지{% else %}같은 개념이 다시 나오는 표현을 형광펜으로 찾아 칠해봐{% endif %}</span></div>
+      <div class="chain-legend">
+        {% for c in p.chains %}<span class="cleg"><span class="cswatch {{ c.color }}"></span>{{ c.label }}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
+      </div>
+      {% if teacher %}<div class="hl-passage">{{ p.passage_hl }}</div>
+      {% else %}<div class="hl-passage plain">{% for s in p.sentences %}<span class="sent"><span class="snum">{{ s.id }}</span>{{ s.text }}</span> {% endfor %}</div>{% endif %}
     </div>
 
-    <div class="pcard">
-      <div class="pc-q"><span class="em">📝</span>글 내용 정리<span class="pc-hint">문장별 역할을 달아 흐름을 정리해봐</span></div>
-      <div class="flow">
-        {% for f in p.flow %}<span class="flow-item"><span class="flow-no">{{ f.id }}문장</span>{% if teacher %}<span class="flow-role">{{ f.role }}</span>{% else %}<span class="flow-blank"></span>{% endif %}</span>{% if not loop.last %}<span class="flow-arr">→</span>{% endif %}{% endfor %}
+    <div class="pcard flow-card">
+      <div class="pc-q green"><span class="em">📝</span>글 내용 정리<span class="pc-hint">글의 순서(도입→전개→…){% if not teacher %} · 빈칸을 채워봐{% endif %}</span></div>
+      {% for b in p.flow_blocks %}
+      <div class="fblock">
+        <div class="fb-head"><span class="fb-stage">{{ b.stage }}</span><span class="fb-sum">{{ b.summary }}</span>
+          <span class="fb-range">(문장 {{ b.sentence_range }})</span></div>
+        {% if b.easy_example %}<div class="fb-ex"><span class="fb-ex-lab">쉬운 예시</span>{{ b.easy_example }}</div>{% endif %}
       </div>
+      {% if not loop.last %}<div class="fb-arr">▼</div>{% endif %}
+      {% endfor %}
     </div>
   </div>
 

@@ -67,6 +67,8 @@ class Overview(BaseModel):
     structure_reason: str
     # 재진술 사슬: 억지로 만들지 말고, 필자 핵심 의견을 이루는 개념의 실제 사슬만(1~2개)
     restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=2)
+    # 📝 글 내용 정리(글 순서): 의미 단위 블록 흐름(도입→전개→사례…)
+    flow_blocks: list["FlowBlock"] = Field(min_length=2, max_length=6)
 
 
 # ---------------------------------------------------------------------------
@@ -77,10 +79,20 @@ class Vocab(BaseModel):
     meaning: str
 
 
+class FlowBlock(BaseModel):
+    """④ 글 내용 정리(글 순서)의 한 블록 — 도입/전개/사례/조건/확장 등."""
+    stage: str            # 그 블록의 역할(도입/전개/사례/조건/전환/확장/결론 등)
+    sentence_range: str   # 문장 번호 범위(예: '1~2', '6')
+    summary: str          # 한 줄 요약. 핵심 단어는 [[ ]]로 감싸면 학생용에서 빈칸이 됨
+    easy_example: str = ""  # 쉬운 일상 비유 한 줄
+
+
 class Chunk(BaseModel):
+    # 끊어읽기 조각. en/ko 안에서 '해석 어려운/오역 위험' 부분을 [[ ]]로 감싸면,
+    # en 은 그 부분이 강조 표시(오역 주의), ko 는 그 부분이 '단어 위주 빈칸'이 된다.
+    # ([[ ]]는 조각 통째가 아니라 단어/짧은 구 위주로, 조각 중간에 둬도 됨)
     en: str          # 영어 의미 단위(끊어읽기 조각)
     ko: str          # 그 조각의 직독직해 한국어
-    blank: bool = False   # True면 '오역 위험' → 학생용에서 ko 를 빈칸으로(주관식)
 
 
 class GrammarChip(BaseModel):
@@ -97,10 +109,9 @@ class Misread(BaseModel):
 class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
-    role: str = ""                # 글에서의 역할(예: 주제 제시/근거/예시/반박/부연/결론) — ④ 글 정리 흐름용
     grammar: list[GrammarChip] = Field(default_factory=list)  # 어법 칩(1~3개)
     vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ 어휘 리스트로 집계)
-    chunks: list[Chunk]           # ② 끊어읽기(오역 위험 부분 blank=true)
+    chunks: list[Chunk]           # ② 끊어읽기([[ ]]로 오역 위험 단어 빈칸)
     # 내용 확인: '이렇게 읽으면 오답(X)' 1~2개 → 왜 X인지 찾기
     misreads: list[Misread] = Field(min_length=1, max_length=2)
 
@@ -148,3 +159,7 @@ class LecturePassage(BaseModel):
     @property
     def theme_ko(self) -> str:
         return self.overview.theme_ko or self.title
+
+
+# 전방 참조(Overview -> FlowBlock) 해소
+Overview.model_rebuild()

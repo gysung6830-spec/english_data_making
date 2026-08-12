@@ -163,12 +163,30 @@ body{
 .chain-a b{ color:var(--indigo); }
 .chain-var{ font-size:8.6pt; color:#9aa0b4; margin-top:2px; }
 
-/* 글 내용 정리: 문장별 역할 흐름(가로로 이어지며 자연 줄바꿈) */
-.flow{ margin-top:6px; line-height:2.1; }
-.flow-item{ display:inline; white-space:nowrap; }
-.flow-no{ font-weight:700; color:var(--indigo); font-size:9.4pt; margin-right:4px; }
-.flow-role{ background:var(--green-bg); color:var(--green-d); font-weight:700;
-  border-radius:6px; padding:1px 9px; font-size:9.2pt; }
-.flow-blank{ display:inline-block; min-width:62px; border-bottom:1.4px solid var(--indigo);
-  height:12px; vertical-align:middle; }
-.flow-arr{ color:var(--indigo); font-weight:700; margin:0 9px; }
+/* 재진술 사슬: 형광펜 표시 */
+mark{ padding:0 1px; border-radius:2px; color:inherit; }
+mark.hl0{ background:#fff2a1; } mark.hl1{ background:#bfe8c6; }
+.chain-legend{ font-size:9pt; margin:2px 0 7px; }
+.cleg{ margin-right:16px; white-space:nowrap; }
+.cswatch{ display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+.cswatch.hl0{ background:#fff2a1; } .cswatch.hl1{ background:#bfe8c6; }
+.cleg .cvar{ color:#9aa0b4; font-size:8.3pt; }
+.hl-passage{ font-size:10pt; line-height:1.95; color:var(--ink); background:#fff;
+  border:1px solid var(--line); border-radius:9px; padding:8px 12px; }
+.hl-passage .snum{ display:inline-block; background:#dbe7e0; color:var(--green-d);
+  font-weight:700; font-size:7pt; border-radius:5px; padding:0 4px; margin-right:3px; vertical-align:1.5px; }
+
+/* 글 내용 정리: 블록 흐름(도입→전개→…) */
+.pcard.flow-card{ background:#fff; border-left-color:var(--green); }
+.pc-q.green{ color:var(--green-d); }
+.fblock{ border:1px solid #cfe0d4; border-left:5px solid var(--green); border-radius:10px;
+  padding:8px 13px; background:var(--green-soft); }
+.fb-head{ line-height:1.6; }
+.fb-stage{ display:inline-block; background:var(--green); color:#fff; font-weight:700;
+  border-radius:7px; padding:1px 11px; font-size:9pt; margin-right:8px; }
+.fb-sum{ font-weight:700; color:#17233f; font-size:10.4pt; }
+.fb-range{ color:#9aa0b4; font-size:8.6pt; margin-left:6px; }
+.fb-ex{ margin-top:6px; padding-top:5px; border-top:1px dashed #d7c9a6; font-size:9pt; color:#6b5a2a; }
+.fb-ex-lab{ display:inline-block; background:#fff0d6; color:#a5701f; font-weight:700;
+  border-radius:6px; padding:1px 8px; margin-right:7px; font-size:8pt; }
+.fb-arr{ text-align:center; color:var(--green); font-size:10pt; margin:3px 0; }

@@ -5,10 +5,11 @@
 """
 from __future__ import annotations
 
-import random
+import re
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup, escape
 
 from .lecture_schemas import STANCES, STRUCTURES, LecturePassage
 
@@ -46,31 +47,93 @@ def _aggregate_vocab(sentences) -> list[dict]:
     return out
 
 
-def _blank_width(ko: str) -> int:
-    """빈칸 폭(px): 가려질 한국어 길이에 비례(과도하게 길지 않게 상한)."""
-    return max(min(len(ko) * 9 + 12, 300), 48)
+_MARK = re.compile(r"\[\[(.+?)\]\]")
 
 
-def _build_view(p: LecturePassage) -> dict:
+def _mark_en(text: str) -> Markup:
+    """[[...]] 부분을 '오역 주의' 강조로 표시(en)."""
+    out, last = [], 0
+    for m in _MARK.finditer(text or ""):
+        out.append(str(escape(text[last:m.start()])))
+        out.append(f'<span class="en-trap">{escape(m.group(1))}</span>')
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+def _mark_ko(text: str, teacher: bool) -> Markup:
+    """[[...]] 부분을 학생용=빈칸 / 강사용=채워진 강조 로 표시(ko)."""
+    out, last = [], 0
+    for m in _MARK.finditer(text or ""):
+        out.append(str(escape(text[last:m.start()])))
+        inner = m.group(1)
+        if teacher:
+            out.append(f'<span class="ko-fill">{escape(inner)}</span>')
+        else:
+            w = max(min(len(inner) * 11 + 12, 200), 40)
+            out.append(f'<span class="ko-blank" style="min-width:{w}px"></span>')
+        last = m.end()
+    out.append(str(escape(text[last:])))
+    return Markup("".join(out))
+
+
+def _has_mark(text: str) -> bool:
+    return bool(_MARK.search(text or ""))
+
+
+def _highlight_passage(sentences, chains) -> Markup:
+    """지문 텍스트에 각 재진술 사슬의 표현을 사슬별 형광펜 색으로 표시."""
+    text = str(escape(" ".join(s.text for s in sentences)))
+    pairs = []  # (escaped_expr, color_class)
+    for ci, c in enumerate(chains):
+        for expr in c.expressions:
+            e = str(escape(expr)).strip()
+            if e:
+                pairs.append((e, f"hl{ci % 2}"))
+    tokens: dict[str, str] = {}
+    # 긴 표현 먼저(짧은 표현이 긴 표현 안에서 잘리는 것 방지), 플레이스홀더로 치환
+    for i, (e, color) in enumerate(sorted(pairs, key=lambda p: -len(p[0]))):
+        mm = re.search(re.escape(e), text, re.IGNORECASE)
+        if not mm:
+            continue
+        tok = f"\x00{i}\x00"
+        tokens[tok] = f'<mark class="{color}">{text[mm.start():mm.end()]}</mark>'
+        text = text[:mm.start()] + tok + text[mm.end():]
+    for tok, html in tokens.items():
+        text = text.replace(tok, html)
+    return Markup(text)
+
+
+def _build_view(p: LecturePassage, teacher: bool) -> dict:
     ov = p.overview
 
     chains = []
-    for c in ov.restatement_chains:
+    for ci, c in enumerate(ov.restatement_chains):
         chains.append({
             "label": c.label,
-            "expressions": c.expressions,
-            "first": c.expressions[0],
-            "blanks": max(len(c.expressions) - 1, 1),
             "variation": c.variation,
+            "color": f"hl{ci % 2}",
         })
+    passage_hl = _highlight_passage(p.sentences, ov.restatement_chains)
 
-    # ④ 글 정리: 문장별 역할 흐름(1문장 역할 → 2문장 역할 → …)
-    flow = [{"id": s.id, "role": s.role} for s in p.analysis.sentences]
+    # ④ 글 내용 정리: 의미 블록 흐름(도입→전개→…)
+    flow_blocks = []
+    for b in ov.flow_blocks:
+        flow_blocks.append({
+            "stage": b.stage,
+            "sentence_range": b.sentence_range,
+            "summary": _mark_ko(b.summary, teacher),
+            "easy_example": b.easy_example,
+        })
 
     lines = []
     for s in p.analysis.sentences:
-        chunks = [{"en": c.en, "ko": c.ko, "blank": c.blank,
-                   "blank_w": _blank_width(c.ko)} for c in s.chunks]
+        chunks = []
+        for c in s.chunks:
+            chunks.append({
+                "en": _mark_en(c.en),
+                "ko": _mark_ko(c.ko, teacher),
+            })
         lines.append({
             "id": s.id,
             "english": s.english,
@@ -88,14 +151,15 @@ def _build_view(p: LecturePassage) -> dict:
         "vocab_list": _aggregate_vocab(p.analysis.sentences),
         "stances": STANCES,
         "structures": STRUCTURES,
-        # ④ 글 정리 정답
+        # ④ 글 정리
         "topic": ov.topic,
         "stance": ov.stance,
         "stance_reason": ov.stance_reason,
         "structure": ov.structure,
         "structure_reason": ov.structure_reason,
         "chains": chains,
-        "flow": flow,
+        "passage_hl": passage_hl,
+        "flow_blocks": flow_blocks,
     }
 
 
@@ -109,7 +173,7 @@ def render_lecture_html(passages, teacher: bool, footer_note: str = "") -> str:
     reps = _as_list(passages)
     views = []
     for i, p in enumerate(reps, 1):
-        v = _build_view(p)
+        v = _build_view(p, teacher)
         v["no"] = i
         v["total"] = len(reps)
         views.append(v)

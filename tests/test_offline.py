@@ -142,10 +142,12 @@ def test_lecture_schema_and_counts():
     from src.lecture_schemas import Overview, SentenceAnalysis
     from samples.lecture_mock import mock_lecture_passage
     p = mock_lecture_passage()
-    # 문장 분석 개수가 지문 문장 수와 같고, 각 문장 내용 객관식 정답이 유효하면 통과
+    # 문장 분석 개수가 지문 문장 수와 같고, 각 문장 misread 가 있으면 통과
     p.analysis.validate_all(len(p.sentences))
-    # 오역 위험 부분(빈칸)이 하나 이상 존재
-    assert any(c.blank for s in p.analysis.sentences for c in s.chunks)
+    # 오역 위험 부분([[ ]] 빈칸 마크업)이 하나 이상 존재
+    assert any("[[" in c.ko for s in p.analysis.sentences for c in s.chunks)
+    # 글 내용 정리(글 순서) 블록이 존재
+    assert len(p.overview.flow_blocks) >= 2
     # 개수가 다르면 실패
     try:
         p.analysis.validate_all(len(p.sentences) + 1)
@@ -184,9 +186,13 @@ def test_lecture_render_html():
     # 섹션(어휘 리스트 / 끊어읽기 / 오답 찾기 / 글 정리·내용 정리)은 둘 다 있음
     for sec in ("어휘 리스트", "끊어읽기", "왜 틀렸을까", "글 정리", "재진술 사슬", "글 내용 정리"):
         assert sec in student and sec in teacher
-    # 학생용엔 빈칸(ko-blank)이 있고, 강사용엔 채워진 정답(ko-fill)이 있다
+    # [[ ]] 마크업이 학생용엔 빈칸(ko-blank), 강사용엔 채워진 정답(ko-fill)으로
     assert "ko-blank" in student and "ko-fill" not in student
     assert "ko-fill" in teacher
+    # 재진술: 강사용은 지문에 형광펜(mark) 표시
+    assert "<mark" in teacher
+    # [[ ]] 원문 마크업이 렌더 결과엔 남지 않아야 함
+    assert "[[" not in student and "[[" not in teacher
     # 오답 이유(mis-why)·예측 정답(pred-a)은 강사용에만
     assert "mis-why" not in student and "mis-why" in teacher
     assert "pred-a" not in student and "pred-a" in teacher
