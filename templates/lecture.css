@@ -1,6 +1,6 @@
 /* ============================================================
-   강의컨셉 교재 자동생성기 — 인쇄용 스타일 (WeasyPrint)
-   톤: 네이비 + 브라스(황동) — 차분하고 강의 자료다운 느낌
+   강의컨셉 교재(필생보) — 인쇄용 스타일 (WeasyPrint)
+   톤: 네이비 + 브라스(황동)
    폰트: NanumSquareRound (templates/fonts 의 woff 참조)
    ============================================================ */
 
@@ -15,18 +15,10 @@
   font-weight: 700;
 }
 
-:root {
-  --navy: #17233f;
-  --navy2: #2c3e63;
-  --brass: #b8912f;
-}
-
 @page {
   size: A4;
-  margin: 15mm 14mm 16mm 14mm;
-  @bottom-center {
-    content: element(footer);
-  }
+  margin: 14mm 13mm 15mm 13mm;
+  @bottom-center { content: element(footer); }
 }
 
 * { box-sizing: border-box; }
@@ -34,268 +26,132 @@
 body {
   font-family: "NanumSquareRound", "Malgun Gothic", "맑은 고딕", sans-serif;
   color: #1f2733;
-  font-size: 11pt;
-  line-height: 1.55;
+  font-size: 10.5pt;
+  line-height: 1.5;
   margin: 0;
 }
 
 .footer {
   position: running(footer);
-  font-size: 8pt;
-  color: #8a94a6;
-  text-align: center;
-  border-top: 1px solid #e3e7ee;
-  padding-top: 3px;
+  font-size: 8pt; color: #9aa3b2; text-align: center;
+  border-top: 1px solid #e3e7ee; padding-top: 3px;
 }
 
 /* ---- 지문 헤더 ---------------------------------------------------------- */
 .passage { page-break-after: always; }
 .passage:last-child { page-break-after: auto; }
 
-.doc-head {
-  border-bottom: 3px solid #17233f;
-  padding-bottom: 8px;
-  margin-bottom: 14px;
+.doc-head { border-bottom: 3px solid #17233f; padding-bottom: 7px; margin-bottom: 12px; }
+.kicker { font-size: 9pt; font-weight: 700; color: #17233f; }
+.tag-student, .tag-teacher {
+  font-size: 8pt; font-weight: 700; border-radius: 999px; padding: 1px 9px; margin-left: 6px;
 }
-.kicker {
-  display: inline-block;
-  background: #17233f;
-  color: #f4e5c2;
-  font-weight: 700;
-  font-size: 8.5pt;
-  letter-spacing: .04em;
-  padding: 2px 10px;
-  border-radius: 999px;
-}
-.kicker.teacher { background: #8a6d1f; color: #fff; }
-.doc-title {
-  font-size: 16pt;
-  font-weight: 700;
-  color: #17233f;
-  margin: 8px 0 2px;
-}
-.doc-meta { font-size: 9pt; color: #7a8296; }
+.tag-student { background: #eef1f7; color: #17233f; border: 1px solid #cfd6e4; }
+.tag-teacher { background: #8a6d1f; color: #fff; }
+.doc-title { font-size: 15pt; font-weight: 700; color: #17233f; margin: 6px 0 2px; }
+.doc-sub { font-size: 8.5pt; color: #8a94a6; }
 .item-badge {
-  display: inline-block;
-  background: #eef1f7;
-  color: #17233f;
-  border: 1px solid #cfd6e4;
-  border-radius: 6px;
-  padding: 0 8px;
-  font-weight: 700;
-  margin-right: 6px;
+  display: inline-block; background: #17233f; color: #fff; border-radius: 6px;
+  padding: 0 8px; font-weight: 700; margin-right: 7px; font-size: 12pt;
 }
 
 /* ---- 섹션 공통 ---------------------------------------------------------- */
-.section { margin: 0 0 14px; page-break-inside: avoid; }
-.sec-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 8px;
-}
+.section { margin: 0 0 12px; }
+.sec-head { display: flex; align-items: baseline; gap: 7px; margin: 0 0 7px; }
 .sec-no {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px; height: 22px;
-  background: #17233f;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 10pt;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; background: #17233f; color: #fff;
+  border-radius: 5px; font-weight: 700; font-size: 11pt;
 }
+.sec-no.ans { background: #8a6d1f; }
 .sec-title { font-size: 12pt; font-weight: 700; color: #17233f; }
-.sec-desc { font-size: 8.5pt; color: #8a94a6; font-weight: 400; }
+.sec-desc { font-size: 8.5pt; color: #9aa3b2; font-weight: 400; }
 
 .panel {
-  border: 1px solid #dfe4ee;
-  border-left: 4px solid #b8912f;
-  border-radius: 8px;
-  padding: 10px 12px;
-  background: #fbfaf6;
+  border: 1px solid #dfe4ee; border-left: 4px solid #b8912f;
+  border-radius: 8px; padding: 9px 12px; background: #fbfaf6;
 }
+.section.answer .panel.ans-panel { border-left-color: #8a6d1f; background: #fbf7ec; }
 
-/* ---- 지문 본문(문장 번호) ---------------------------------------------- */
+/* ---- ① 지문 ------------------------------------------------------------- */
 .passage-box {
-  border: 1px solid #dfe4ee;
-  border-radius: 8px;
-  padding: 10px 12px;
-  background: #fafbfd;
-  margin-bottom: 14px;
-  font-size: 10.5pt;
-  line-height: 1.7;
+  border: 1px solid #dfe4ee; border-radius: 8px; padding: 9px 12px;
+  background: #fafbfd; font-size: 10.5pt; line-height: 1.75;
 }
-.snum {
-  font-weight: 700;
-  color: #b8912f;
-  font-size: 8.5pt;
-  vertical-align: 2px;
-  margin-right: 2px;
-}
-.sent { margin-right: 4px; }
+.snum { font-weight: 700; color: #b8912f; font-size: 7.5pt; margin-right: 1px; }
+.sent { margin-right: 3px; }
 
-/* ---- 3-A 어휘 힌트 ------------------------------------------------------ */
-.vocab-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 10px;
+/* ---- ② 예측 ------------------------------------------------------------- */
+.pred-row { padding: 6px 0; border-bottom: 1px dashed #e6e0cf; }
+.pred-row:last-child { border-bottom: none; }
+.pred-q { font-weight: 700; color: #17233f; font-size: 10.5pt; margin-bottom: 4px; }
+.pred-hint { font-weight: 400; color: #9aa3b2; font-size: 8.5pt; margin-left: 4px; }
+.writeline { display: block; border-bottom: 1px solid #c7ccd8; height: 15px; margin-top: 2px; }
+.writeline.inline { display: inline-block; width: 55%; height: 12px; vertical-align: middle; }
+.choices { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 3px 0; }
+.choice { font-size: 10pt; color: #2c3e63; font-weight: 700; }
+.rubric {
+  margin-top: 5px; font-size: 8.3pt; color: #6b7280; line-height: 1.45;
+  background: #fff; border: 1px solid #ece7d8; border-radius: 6px; padding: 5px 8px;
 }
-.vocab-chip {
-  border: 1px solid #e0e0d5;
-  background: #fff;
-  border-radius: 7px;
-  padding: 5px 10px;
-  font-size: 10pt;
+.rubric b { color: #8a6d1f; }
+.subline { font-size: 9pt; color: #55607a; margin-top: 5px; }
+.chain-q { display: flex; gap: 8px; align-items: baseline; padding: 3px 0; font-size: 9.5pt; }
+.chain-label {
+  flex: 0 0 auto; font-weight: 700; color: #17233f; min-width: 92px;
+  background: #eef1f7; border-radius: 5px; padding: 1px 8px; font-size: 9pt;
 }
-.vocab-chip b { color: #17233f; }
-.vocab-chip .mean { color: #55607a; }
-.vocab-chip .dash { color: #b8912f; margin: 0 4px; }
-
-/* ---- 3-B 오역포인트 / 3-D 함정 (2지선다) ------------------------------- */
-.qcard { margin-bottom: 10px; }
-.qcard:last-child { margin-bottom: 0; }
-.q-src {
-  font-size: 10.5pt;
-  line-height: 1.6;
-  padding: 4px 0 6px;
-}
-.q-src .tag {
-  display: inline-block;
-  background: #17233f;
-  color: #fff;
-  font-size: 8pt;
-  font-weight: 700;
-  border-radius: 5px;
-  padding: 0 7px;
-  margin-right: 6px;
-}
-.try-line {
-  font-size: 8.5pt;
-  color: #8a94a6;
-  border-bottom: 1px dashed #c7ccd8;
-  padding: 2px 0 10px;
-  margin-bottom: 8px;
-}
-.opt {
-  display: flex;
-  gap: 7px;
-  padding: 4px 8px;
-  border: 1px solid #e3e7ee;
-  border-radius: 6px;
-  margin-bottom: 5px;
-  font-size: 10pt;
-}
-.opt .sym { font-weight: 700; color: #17233f; }
-.opt.correct {
-  background: #f3f8f1;
-  border-color: #b7d8a8;
-}
-.opt.correct .sym { color: #2f7d32; }
-.answer-tab {
-  font-size: 9pt;
-  margin-top: 6px;
-  padding: 6px 10px;
-  background: #fff8e8;
-  border: 1px solid #f0dfae;
-  border-radius: 6px;
-}
-.answer-tab b { color: #8a6d1f; }
-.trap-type {
-  display: inline-block;
-  font-size: 8pt;
-  font-weight: 700;
-  color: #8a6d1f;
-  border: 1px solid #e6d6a6;
-  border-radius: 999px;
-  padding: 0 8px;
-  margin-left: 6px;
+.chain-flow { color: #2c3e63; }
+.chain-blank {
+  display: inline-block; min-width: 74px; border-bottom: 1px solid #b8912f;
+  height: 11px; vertical-align: middle;
 }
 
-/* ---- 3-C 문장 역할 ------------------------------------------------------ */
-.label-pool {
-  font-size: 9pt;
-  color: #55607a;
-  margin-bottom: 8px;
+/* ---- ③ 문장별 직접 풀기 ------------------------------------------------- */
+.s-item { padding: 7px 0; border-bottom: 1px solid #eee7d6; }
+.s-item:last-child { border-bottom: none; }
+.s-en { font-size: 10.5pt; line-height: 1.5; }
+.s-no {
+  display: inline-block; min-width: 16px; height: 16px; text-align: center;
+  background: #17233f; color: #fff; border-radius: 4px; font-size: 8pt;
+  font-weight: 700; margin-right: 5px; line-height: 16px;
 }
-.label-pool .lab {
-  display: inline-block;
-  border: 1px solid #cfd6e4;
-  border-radius: 6px;
-  padding: 1px 9px;
-  margin-right: 5px;
-  color: #17233f;
-  font-weight: 700;
+.syntax {
+  font-size: 8pt; color: #8a6d1f; background: #fff; border: 1px solid #e6d6a6;
+  border-radius: 5px; padding: 0 7px; margin-left: 5px; white-space: nowrap;
 }
-.role-row {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 7px 0;
-  border-bottom: 1px solid #eef1f6;
+.s-vocab { font-size: 8.8pt; color: #55607a; margin: 4px 0 3px; line-height: 1.5; }
+.vword { font-weight: 700; color: #17233f; }
+.s-write { font-size: 9pt; color: #8a94a6; margin: 3px 0; }
+.s-write .writeline { display: inline-block; width: 72%; vertical-align: middle; height: 12px; }
+.s-warn {
+  font-size: 8.8pt; color: #7a5b12; background: #fff6e2; border: 1px solid #f0dfae;
+  border-radius: 6px; padding: 4px 8px; margin-top: 3px; line-height: 1.45;
 }
-.role-row:last-child { border-bottom: none; }
-.role-range {
-  flex: 0 0 auto;
-  font-weight: 700;
-  color: #b8912f;
-  font-size: 9.5pt;
-  min-width: 52px;
-}
-.role-text { flex: 1 1 auto; font-size: 10pt; line-height: 1.55; }
-.role-pick {
-  flex: 0 0 auto;
-  min-width: 92px;
-  text-align: center;
-}
-.role-blank {
-  display: inline-block;
-  min-width: 78px;
-  border: 1px dashed #b8912f;
-  border-radius: 6px;
-  padding: 2px 6px;
-  color: #b8912f;
-  font-size: 9pt;
-}
-.role-ans {
-  display: inline-block;
-  background: #17233f;
-  color: #fff;
-  border-radius: 6px;
-  padding: 2px 12px;
-  font-weight: 700;
-  font-size: 9.5pt;
-}
-.role-reason { font-size: 8.5pt; color: #7a8296; margin-top: 3px; }
 
-/* ---- 3-E 패러프레이징 줄잇기 ------------------------------------------- */
-.match {
-  display: flex;
-  gap: 14px;
+/* ---- ④ 답지 ------------------------------------------------------------- */
+.analogy {
+  font-size: 9.2pt; background: #fff; border: 1px solid #ece7d8; border-radius: 6px;
+  padding: 5px 9px; margin-bottom: 7px; line-height: 1.45;
 }
-.match .col { flex: 1 1 0; }
-.match .col-h {
-  font-size: 8.5pt;
-  color: #8a94a6;
-  font-weight: 700;
-  margin-bottom: 5px;
+.analogy b { color: #8a6d1f; }
+.a-item { padding: 6px 0; border-bottom: 1px solid #efe6d2; }
+.a-item:last-child { border-bottom: none; }
+.a-en { font-size: 10pt; line-height: 1.5; color: #1f2733; }
+.a-ko { font-size: 9.5pt; color: #2c3e63; margin: 2px 0 3px; line-height: 1.5; }
+.a-catch { font-size: 9pt; color: #14532d; background: #f1f8ef; border: 1px solid #cfe6c4;
+  border-radius: 6px; padding: 3px 8px; margin-top: 3px; line-height: 1.45; }
+.a-ex { font-size: 8.8pt; color: #6b5a2a; margin-top: 3px; line-height: 1.45; }
+
+/* ---- ⑤ 예측 정답 -------------------------------------------------------- */
+.ans-row { display: flex; gap: 9px; padding: 4px 0; border-bottom: 1px solid #efe6d2; font-size: 9.5pt; }
+.ans-k { flex: 0 0 auto; min-width: 82px; font-weight: 700; color: #8a6d1f; }
+.ans-v { flex: 1 1 auto; color: #2c3e63; line-height: 1.5; }
+.hl { color: #17233f; }
+.chain-a { margin-bottom: 4px; }
+.chain-a b { color: #17233f; }
+.chain-var { font-size: 8.5pt; color: #8a94a6; margin-top: 1px; }
+.gist {
+  margin-top: 7px; font-size: 9.5pt; font-weight: 700; color: #14532d;
+  background: #f1f8ef; border: 1px solid #cfe6c4; border-radius: 6px; padding: 6px 9px; line-height: 1.5;
 }
-.match-item {
-  border: 1px solid #e3e7ee;
-  border-radius: 7px;
-  padding: 6px 9px;
-  margin-bottom: 6px;
-  font-size: 9.5pt;
-  line-height: 1.5;
-}
-.match-item .sym { font-weight: 700; color: #17233f; margin-right: 5px; }
-.match-item .rmark { font-weight: 700; color: #b8912f; margin-right: 5px; }
-.match-answer {
-  font-size: 9pt;
-  margin-top: 8px;
-  padding: 6px 10px;
-  background: #fff8e8;
-  border: 1px solid #f0dfae;
-  border-radius: 6px;
-}
-.match-answer b { color: #8a6d1f; }

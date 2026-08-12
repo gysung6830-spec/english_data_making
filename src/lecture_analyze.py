@@ -1,4 +1,7 @@
-"""한 지문 -> '강의컨셉 교재' 5개 섹션 분석 (LecturePassage 조립)."""
+"""한 지문 -> '강의컨셉 교재(필생보 스타일)' 분석 (LecturePassage 조립).
+
+2단계 LLM 호출: (1) 지문 전체 개관 → (2) 문장별 분석(비유를 공유).
+"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -6,13 +9,14 @@ from pathlib import Path
 from . import lecture_prompts, pipeline, schemas, sentences
 from .client import ClaudeClient
 from .config import Config
-from .lecture_schemas import LectureAnalysis, LecturePassage, LectureSentence
+from .lecture_schemas import (LecturePassage, LectureSentence, Overview,
+                             SentenceAnalysis)
 
 
 def analyze_lecture_passage(
     client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
 ) -> LecturePassage:
-    """추출된 본문 -> 문장 분리(코드) -> 5개 섹션(LLM) -> LecturePassage."""
+    """추출된 본문 -> 문장 분리(코드) -> 개관+문장분석(LLM) -> LecturePassage."""
     title = extraction.title
     sents = [
         LectureSentence(id=i, text=t)
@@ -21,20 +25,34 @@ def analyze_lecture_passage(
     if not sents:
         raise ValueError("지문에서 문장을 분리하지 못했습니다.")
     n = len(sents)
+    r = cfg.processing.max_retries
 
-    analysis: LectureAnalysis = client.structured(
+    # 1차: 지문 전체 개관 (예측 정답 + 비유)
+    overview: Overview = client.structured(
         system=lecture_prompts.SYSTEM,
-        prompt=lecture_prompts.analysis_prompt(title, sents),
-        model_cls=LectureAnalysis,
-        max_tokens=16000,
-        max_retries=cfg.processing.max_retries,
-        extra_validate=lambda a: a.validate_refs(n),
+        prompt=lecture_prompts.overview_prompt(title, sents),
+        model_cls=Overview,
+        max_tokens=8000,
+        max_retries=r,
     )
+
+    # 2차: 문장별 분석 (개관에서 정한 비유를 공유해 쉬운 예시 일관성 유지)
+    analysis: SentenceAnalysis = client.structured(
+        system=lecture_prompts.SYSTEM,
+        prompt=lecture_prompts.sentence_prompt(
+            title, sents, overview.analogy_name, overview.analogy_desc),
+        model_cls=SentenceAnalysis,
+        max_tokens=24000,
+        max_retries=r,
+        extra_validate=lambda a: a.validate_count(n),
+    )
+
     return LecturePassage(
         title=title,
         source=extraction.source,
         item_no=extraction.item_no,
         sentences=sents,
+        overview=overview,
         analysis=analysis,
     )
 

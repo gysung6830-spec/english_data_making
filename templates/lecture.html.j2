@@ -1,4 +1,4 @@
-{#- 강의컨셉 교재: 학생용(teacher=False) / 강사용 정답지(teacher=True) 공용 템플릿 -#}
+{#- 강의컨셉 교재(필생보): 학생용(teacher=False, ①②③) / 강사용(teacher=True, ①~⑤) -#}
 <!doctype html>
 <html lang="ko">
 <head><meta charset="utf-8"><title>강의컨셉 교재</title></head>
@@ -8,146 +8,111 @@
 {% for p in passages %}
 <div class="passage">
 
+  {#- 지문 헤더 -#}
   <div class="doc-head">
-    {% if teacher %}<span class="kicker teacher">강사용 · 정답 · 해설</span>
-    {% else %}<span class="kicker">학생 훈련용 · 직접 풀기</span>{% endif %}
-    <div class="doc-title">
-      {% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}{{ p.title }}
+    <div class="kicker">지문 {{ p.no }}{% if p.total > 1 %} / {{ p.total }}{% endif %}
+      {% if teacher %}<span class="tag-teacher">강사용 · 답지 포함</span>{% else %}<span class="tag-student">학생 문제지</span>{% endif %}
     </div>
-    <div class="doc-meta">
-      {% if p.total > 1 %}지문 {{ p.no }} / {{ p.total }}{% endif %}
-      {% if p.source %}&nbsp;·&nbsp;{{ p.source }}{% endif %}
-    </div>
+    <div class="doc-title">{% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}{{ p.theme_ko }}</div>
+    <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해 — 소재 · 주장 · 구조 · 재진술{% if p.source %} &nbsp;·&nbsp; {{ p.source }}{% endif %}</div>
   </div>
 
-  {#- 지문 본문 (문장 번호 표시) -#}
-  <div class="passage-box">
-    {% for s in p.sentences %}<span class="sent"><span class="snum">S{{ s.id }}</span>{{ s.text }}</span> {% endfor %}
-  </div>
-
-  {#- 3-A 어휘 힌트 -#}
+  {#- ① 지문 통째로 읽기 -#}
   <div class="section">
-    <div class="sec-head">
-      <span class="sec-no">A</span>
-      <span class="sec-title">어휘 힌트</span>
-      <span class="sec-desc">뜻을 참고해 문장을 스스로 해석해 보세요</span>
+    <div class="sec-head"><span class="sec-no">①</span><span class="sec-title">지문 통째로 읽기</span>
+      <span class="sec-desc">먼저 전체 흐름을 쭉 훑어봐</span></div>
+    <div class="passage-box">
+      {% for s in p.sentences %}<span class="sent"><sup class="snum">{{ s.id }}</sup>{{ s.text }}</span> {% endfor %}
     </div>
+  </div>
+
+  {#- ② 해석 전 예측 -#}
+  <div class="section">
+    <div class="sec-head"><span class="sec-no">②</span><span class="sec-title">해석 전 예측</span>
+      <span class="sec-desc">해석 들어가기 전에 먼저 예측해봐! (정답은 ⑤)</span></div>
     <div class="panel">
-      <div class="vocab-grid">
-        {% for v in p.vocab_hints %}
-        <span class="vocab-chip"><b>{{ v.word }}</b><span class="dash">–</span><span class="mean">{{ v.meaning }}</span></span>
+      <div class="pred-row"><div class="pred-q">🔎 소재 <span class="pred-hint">이 지문, 뭐에 관한 글이야?</span></div>
+        <div class="writeline"></div></div>
+
+      <div class="pred-row"><div class="pred-q">🗗 필자 주장 <span class="pred-hint">긍정·부정·중립? (평가어·마지막 문장으로 판단)</span></div>
+        <div class="choices">
+          {% for st in p.stances %}<span class="choice">◯ {{ st }}</span>{% endfor %}
+        </div>
+        <div class="rubric">
+          <div><b>긍정</b> 좋다·이롭다·중요 / should·valuable·effective 같은 칭찬·권장</div>
+          <div><b>부정</b> 문제·해롭다 / But·However 로 뒤집기·overlook·fail·should not 같은 비판·경고</div>
+          <div><b>중립</b> 사실을 설명하거나 양쪽을 비교(on the other hand)만 하고 편들지 않음</div>
+        </div>
+      </div>
+
+      <div class="pred-row"><div class="pred-q">🧩 글의 구조 <span class="pred-hint">전체 흐름을 보고 하나에 ✓</span></div>
+        <div class="choices">
+          {% for stc in p.structures %}<span class="choice">☐ {{ stc }}</span>{% endfor %}
+        </div>
+        <div class="subline">그렇게 본 근거(전환·연결표현이나 문장 번호): <span class="writeline inline"></span></div>
+      </div>
+
+      <div class="pred-row"><div class="pred-q">🔗 재진술 사슬 찾기 <span class="pred-hint">첫 표현이 지문에서 같은 뜻으로 어떻게 다시 나오는지 순서대로 써봐</span></div>
+        {% for c in p.chains %}
+        <div class="chain-q"><span class="chain-label">{{ c.label }}</span>
+          <span class="chain-flow">{{ c.first }}{% for i in range(c.blanks) %} → <span class="chain-blank"></span>{% endfor %}</span>
+        </div>
         {% endfor %}
       </div>
     </div>
   </div>
 
-  {#- 3-B 오역포인트 교정 연습 -#}
+  {#- ③ 한 문장씩 직접 풀기 -#}
   <div class="section">
-    <div class="sec-head">
-      <span class="sec-no">B</span>
-      <span class="sec-title">오역포인트 교정 연습</span>
-      <span class="sec-desc">먼저 직접 해석한 뒤, 올바른 해석을 고르세요</span>
-    </div>
+    <div class="sec-head"><span class="sec-no">③</span><span class="sec-title">한 문장씩 직접 풀기</span>
+      <span class="sec-desc">어휘 보고 → 해석 직접 쓰고 → 오역주의로 점검 (캐치는 답지 ④에서)</span></div>
     <div class="panel">
-      {% for t in p.traps %}
-      <div class="qcard">
-        <div class="q-src"><span class="tag">S{{ t.sentence_id }}</span>{{ t.sentence_text }}
-          {% if teacher %}<span class="trap-type">{{ t.trap_type }}</span>{% endif %}
-        </div>
-        {% if not teacher %}<div class="try-line">나의 해석: ____________________________________________</div>{% endif %}
-        {% for o in t.options %}
-        <div class="opt {% if teacher and o.correct %}correct{% endif %}">
-          <span class="sym">{{ o.sym }}</span><span>{{ o.text }}</span>
-        </div>
-        {% endfor %}
-        {% if teacher %}
-        <div class="answer-tab"><b>정답 {{ t.correct_sym }}</b> &nbsp;|&nbsp; {{ t.reason }}</div>
-        {% endif %}
+      {% for it in p.lines %}
+      <div class="s-item">
+        <div class="s-en"><span class="s-no">{{ it.id }}</span>{{ it.english }}
+          {% if it.syntax_tag %}<span class="syntax">{{ it.syntax_tag }}</span>{% endif %}</div>
+        {% if it.vocab %}<div class="s-vocab">📘 {% for v in it.vocab %}<span class="vword">{{ v.word }}</span> {{ v.meaning }}{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
+        <div class="s-write">✏ 해석 <span class="writeline"></span></div>
+        {% if it.mistranslation %}<div class="s-warn">⚠ 오역주의 &nbsp;{{ it.mistranslation }}</div>{% endif %}
       </div>
       {% endfor %}
     </div>
   </div>
 
-  {#- 3-C 문장 역할 파악 -#}
-  <div class="section">
-    <div class="sec-head">
-      <span class="sec-no">C</span>
-      <span class="sec-title">문장 역할 파악</span>
-      <span class="sec-desc">각 문장 묶음의 역할을 괄호에 골라 쓰세요</span>
-    </div>
-    <div class="panel">
-      <div class="label-pool">보기:
-        {% for lab in p.role_labels %}<span class="lab">{{ lab }}</span>{% endfor %}
-      </div>
-      {% for b in p.blocks %}
-      <div class="role-row">
-        <div class="role-range">{{ b.range_label }}</div>
-        <div class="role-text">{{ b.text }}
-          {% if teacher %}<div class="role-reason">→ {{ b.reason }}</div>{% endif %}
-        </div>
-        <div class="role-pick">
-          {% if teacher %}<span class="role-ans">{{ b.correct_label }}</span>
-          {% else %}<span class="role-blank">(&nbsp;&nbsp;&nbsp;&nbsp;)</span>{% endif %}
-        </div>
+  {% if teacher %}
+  {#- ④ 답지 — 끊어읽기·캐치 -#}
+  <div class="section answer">
+    <div class="sec-head"><span class="sec-no ans">④</span><span class="sec-title">답지 — 끊어읽기 · 캐치</span>
+      <span class="sec-desc">영어 문장에 / 로 끊어읽기 + 직독직해</span></div>
+    <div class="panel ans-panel">
+      <div class="analogy">💡 <b>이 지문의 비유 — ‘{{ p.analogy_name }}’</b> {{ p.analogy_desc }}</div>
+      {% for it in p.lines %}
+      <div class="a-item">
+        <div class="a-en"><span class="s-no">{{ it.id }}</span>{{ it.en_chunked }}
+          {% if it.syntax_tag %}<span class="syntax">{{ it.syntax_tag }}</span>{% endif %}</div>
+        <div class="a-ko">{{ it.ko_chunked }}</div>
+        {% if it.catch %}<div class="a-catch">✅ 이 정도는 캐치! &nbsp;{{ it.catch }}</div>{% endif %}
+        {% if it.easy_example %}<div class="a-ex">💡 쉬운 예시 &nbsp;{{ it.easy_example }}</div>{% endif %}
       </div>
       {% endfor %}
     </div>
   </div>
 
-  {#- 3-D 함정포인트 문항 -#}
-  <div class="section">
-    <div class="sec-head">
-      <span class="sec-no">D</span>
-      <span class="sec-title">함정포인트 문항</span>
-      <span class="sec-desc">{% if teacher %}유형: {{ p.trap_question.type }}{% else %}함정에 주의해 고르세요{% endif %}</span>
-    </div>
-    <div class="panel">
-      <div class="qcard">
-        {% if p.trap_question.sentence_text %}
-        <div class="q-src"><span class="tag">S{{ p.trap_question.sentence_id }}</span>{{ p.trap_question.sentence_text }}</div>
-        {% endif %}
-        <div class="q-src" style="font-weight:700">{{ p.trap_question.question_text }}</div>
-        {% for o in p.trap_question.options %}
-        <div class="opt {% if teacher and o.correct %}correct{% endif %}">
-          <span class="sym">{{ o.sym }}</span><span>{{ o.text }}</span>
-        </div>
-        {% endfor %}
-        {% if teacher %}
-        <div class="answer-tab"><b>정답 {{ p.trap_question.correct_sym }}</b> &nbsp;|&nbsp; {{ p.trap_question.explanation }}</div>
-        {% endif %}
-      </div>
+  {#- ⑤ 해석 전 예측 · 정답 -#}
+  <div class="section answer">
+    <div class="sec-head"><span class="sec-no ans">⑤</span><span class="sec-title">해석 전 예측 · 정답</span>
+      <span class="sec-desc">앞에서 예측한 걸 여기서 맞춰봐</span></div>
+    <div class="panel ans-panel">
+      <div class="ans-row"><span class="ans-k">🔎 소재</span><span class="ans-v">{{ p.topic }}</span></div>
+      <div class="ans-row"><span class="ans-k">🗗 필자 주장</span><span class="ans-v"><b class="hl">{{ p.stance }}</b> — {{ p.stance_reason }}</span></div>
+      <div class="ans-row"><span class="ans-k">🧩 글의 구조</span><span class="ans-v"><b class="hl">{{ p.structure }}</b> — {{ p.structure_reason }}</span></div>
+      <div class="ans-row"><span class="ans-k">🔗 재진술 사슬</span><span class="ans-v">
+        {% for c in p.chains %}<div class="chain-a"><b>{{ c.label }}</b>: {{ c.expressions | join(' → ') }}<div class="chain-var">↳ 변주 {{ c.variation }}</div></div>{% endfor %}
+      </span></div>
+      <div class="gist">✅ 이 지문, 이 정도는 캐치!(전체 요지) &nbsp;{{ p.gist }}</div>
     </div>
   </div>
-
-  {#- 3-E 패러프레이징 줄잇기 -#}
-  <div class="section">
-    <div class="sec-head">
-      <span class="sec-no">E</span>
-      <span class="sec-title">패러프레이징 줄잇기</span>
-      <span class="sec-desc">선지와 대응하는 본문 문장을 선으로 이으세요</span>
-    </div>
-    <div class="panel">
-      <div class="match">
-        <div class="col">
-          <div class="col-h">선지 (변형된 표현)</div>
-          {% for l in p.paraphrase.left %}
-          <div class="match-item"><span class="sym">{{ l.sym }}</span>{{ l.choice_text }}</div>
-          {% endfor %}
-        </div>
-        <div class="col">
-          <div class="col-h">본문 문장</div>
-          {% for r in p.paraphrase.right %}
-          <div class="match-item"><span class="rmark">{{ r.kmark }}. S{{ r.sentence_id }}</span>{{ r.text }}</div>
-          {% endfor %}
-        </div>
-      </div>
-      {% if teacher %}
-      <div class="match-answer"><b>정답</b> &nbsp;
-        {% for l in p.paraphrase.left %}{{ l.sym }} → {{ l.answer_marks | join(', ') }}{% if not loop.last %} &nbsp;|&nbsp; {% endif %}{% endfor %}
-      </div>
-      {% endif %}
-    </div>
-  </div>
+  {% endif %}
 
 </div>
 {% endfor %}

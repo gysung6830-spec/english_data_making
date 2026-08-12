@@ -137,44 +137,48 @@ def test_sentence_split():
     print("PASS  문장 분리(약어·소수점 예외)")
 
 
-# ---- 7. 강의컨셉 교재: 스키마 개수·문장참조 검증 ---------------------------
-def test_lecture_schema_and_refs():
-    from src.lecture_schemas import LectureAnalysis
+# ---- 7. 강의컨셉 교재(필생보): 스키마 개수·문장수 검증 --------------------
+def test_lecture_schema_and_counts():
+    from src.lecture_schemas import Overview, SentenceAnalysis
     from samples.lecture_mock import mock_lecture_passage
     p = mock_lecture_passage()
-    # 유효 참조는 통과
-    p.analysis.validate_refs(len(p.sentences))
-    # 없는 문장 번호를 참조하면 실패해야 함
+    # 문장 분석 개수가 지문 문장 수와 같아야 통과
+    p.analysis.validate_count(len(p.sentences))
+    # 개수가 다르면 실패
     try:
-        p.analysis.validate_refs(2)
-        assert False, "범위 밖 문장 참조가 통과하면 안 됨"
+        p.analysis.validate_count(len(p.sentences) + 1)
+        assert False, "문장 수 불일치가 통과하면 안 됨"
     except ValueError:
         pass
-    # 어휘 힌트 개수 범위(4~6) 위반 시 실패
+    # 재진술 사슬 개수 범위(2~3) 위반 시 실패
     try:
-        LectureAnalysis.model_validate({
-            **p.analysis.model_dump(),
-            "vocab_hints": [{"word": "w", "meaning": "m"}],  # 1개 -> 범위 밖
-        })
-        assert False, "어휘 힌트 개수 위반이 통과하면 안 됨"
+        Overview.model_validate({**p.overview.model_dump(), "restatement_chains": []})
+        assert False, "재진술 사슬 개수 위반이 통과하면 안 됨"
     except Exception:
         pass
-    print("PASS  강의컨셉 스키마·문장참조 검증")
+    # stance/structure 는 정해진 라벨만 허용
+    try:
+        Overview.model_validate({**p.overview.model_dump(), "stance": "애매함"})
+        assert False, "허용되지 않은 주장 라벨이 통과하면 안 됨"
+    except Exception:
+        pass
+    print("PASS  강의컨셉(필생보) 스키마·개수 검증")
 
 
-# ---- 8. 강의컨셉 교재: 학생용/강사용 HTML 렌더링 ---------------------------
+# ---- 8. 강의컨셉 교재(필생보): 학생용/강사용 HTML 렌더링 ------------------
 def test_lecture_render_html():
     from samples.lecture_mock import mock_lecture_passage
     from src import lecture_render
-    p = mock_lecture_passage(item_no="31")
-    student = lecture_render.render_lecture_html([p], teacher=False, seed=1)
-    teacher = lecture_render.render_lecture_html([p], teacher=True, seed=1)
-    for sec in ("어휘 힌트", "오역포인트", "문장 역할", "함정포인트", "패러프레이징"):
+    p = mock_lecture_passage(item_no="1")
+    student = lecture_render.render_lecture_html([p], teacher=False)
+    teacher = lecture_render.render_lecture_html([p], teacher=True)
+    # ①②③ 은 둘 다 있음
+    for sec in ("지문 통째로 읽기", "해석 전 예측", "한 문장씩 직접 풀기", "재진술 사슬", "오역주의"):
         assert sec in student and sec in teacher
-    # 학생용엔 정답 라벨/해설이 없고, 강사용엔 있다
-    assert "정답" not in student
-    assert "정답" in teacher and "통념" in teacher
-    print("PASS  강의컨셉 학생용/강사용 렌더링")
+    # 답지(④⑤)는 강사용에만 (학생용엔 없음)
+    for ans in ("끊어읽기 · 캐치", "전체 요지", "이 지문의 비유", "해석 전 예측 · 정답"):
+        assert ans not in student and ans in teacher
+    print("PASS  강의컨셉(필생보) 학생용/강사용 렌더링")
 
 
 def run_all():
@@ -184,7 +188,7 @@ def run_all():
     test_retry_recovers()
     test_render_html()
     test_sentence_split()
-    test_lecture_schema_and_refs()
+    test_lecture_schema_and_counts()
     test_lecture_render_html()
     print("\n모든 오프라인 테스트 통과 ✅")
 
