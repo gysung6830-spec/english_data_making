@@ -16,6 +16,13 @@
     <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해 — 어휘 · 끊어읽기 · 내용 · 예측{% if p.source %} &nbsp;·&nbsp; {{ p.source }}{% endif %}</div>
   </div>
 
+  {#- 핵심 문법 1개 (지문 앞) -#}
+  <div class="kg-box">
+    <div class="kg-head">🔑 이 지문의 핵심 문법 &nbsp;<span class="kg-point">{{ p.key_grammar.point }}</span></div>
+    <div class="kg-exp">{{ p.key_grammar.explanation }}</div>
+    {% if p.key_grammar.example %}<div class="kg-ex"><span class="kg-ex-lab">지문 예</span>{{ p.key_grammar.example }}</div>{% endif %}
+  </div>
+
   {#- ① 지문 통째로 읽기 -#}
   <div class="section">
     <div class="sec-head"><span class="sec-no">1</span><span class="sec-title">지문 통째로 읽기</span>
@@ -67,7 +74,8 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🗣</span>필자 의견<span class="pc-hint">긍정·부정·중립? (평가어·마지막 문장으로 판단)</span></div>
+      <div class="pc-q"><span class="em">🗣</span>필자 의견 &amp; 글의 구조<span class="pc-hint">태도(긍/부/중)와 전개 방식을 함께 판단</span></div>
+      <div class="sub-lab">필자 의견</div>
       <div class="choices">
         {% for st in p.stances %}<span class="choice {% if teacher and st == p.stance %}on{% endif %}"><span class="ck"></span>{{ st }}</span>{% endfor %}
       </div>
@@ -77,10 +85,7 @@
         <div><span class="rb neg">부정</span>문제·해롭다 / But·However·overlook·fail 같은 비판·경고</div>
         <div><span class="rb neu">중립</span>사실 설명·양쪽 비교(on the other hand)만 하고 편들지 않음</div>
       </div>{% endif %}
-    </div>
-
-    <div class="pcard">
-      <div class="pc-q"><span class="em">🧩</span>글의 구조<span class="pc-hint">전체 흐름을 보고 하나에 ✓</span></div>
+      <div class="sub-lab" style="margin-top:9px">글의 구조</div>
       <div class="choices">
         {% for stc in p.structures %}<span class="choice {% if teacher and stc == p.structure %}on{% endif %}"><span class="ck"></span>{{ stc }}</span>{% endfor %}
       </div>

@@ -1,9 +1,9 @@
 """API 없이 강의컨셉 교재(필생보) 렌더링/파이프라인을 검증하기 위한 목(mock) 데이터."""
 from __future__ import annotations
 
-from src.lecture_schemas import (Chunk, FlowBlock, GrammarChip, LecturePassage,
-                                 LectureSentence, Misread, Overview,
-                                 RestatementChain, SentenceAnalysis,
+from src.lecture_schemas import (Chunk, FlowBlock, GrammarChip, KeyGrammar,
+                                 LecturePassage, LectureSentence, Misread,
+                                 Overview, RestatementChain, SentenceAnalysis,
                                  SentenceItem, Vocab)
 
 
@@ -30,6 +30,11 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
 
     overview = Overview(
         theme_ko="두려움이 영장류·아기의 사회성 발달을 늦추는 이유",
+        key_grammar=KeyGrammar(
+            point="비교급 than절의 도치·생략",
+            explanation="비교 구문 'A ... than B'에서 B 자리에 '조동사+주어'로 도치되고 앞과 겹치는 말은 생략돼. than will infants who are not 은 원래 'than infants who are not (frequently frightened) will (have)'로, '자주 겁먹지 않는 아기들보다'라는 뜻이야.",
+            example="... fewer opportunities to play than will infants who are not.",
+        ),
         topic="겁을 잘 먹는 아기는 엄마에게 붙어 있느라 탐색·놀이를 못하고, 그게 오래 지속되면 사회성 발달이 느려질 수 있다는 얘기야.",
         stance="부정적·비판적",
         stance_reason="'less time', 'fewer opportunities', 'slow down the social development' 같은 손실·지체 표현으로 두려움의 효과를 부정적으로 봐.",

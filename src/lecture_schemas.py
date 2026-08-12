@@ -58,8 +58,16 @@ class RestatementChain(BaseModel):
 # ---------------------------------------------------------------------------
 # 지문 전체 개관 (LLM 1차 호출) — ③ 글 예측
 # ---------------------------------------------------------------------------
+class KeyGrammar(BaseModel):
+    """지문 앞에 붙는 '이 지문의 핵심 문법 1개' 설명 파트."""
+    point: str            # 문법명(예: '관계사 that', '비교급 than절 도치·생략')
+    explanation: str      # 쉬운 설명(한국어)
+    example: str          # 지문 속 실제 예(짧게)
+
+
 class Overview(BaseModel):
     theme_ko: str                 # 지문 제목용 한글 명사구(자료 상단 제목)
+    key_grammar: KeyGrammar       # 🔑 지문 앞 핵심 문법 1개
     topic: str                    # 🔎 소재(한 줄)
     stance: Stance                # 🗣 필자 의견
     stance_reason: str

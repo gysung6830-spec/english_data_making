@@ -57,6 +57,19 @@ body{
 /* 기본 카드(밝은 박스) */
 .panel{ border:1px solid var(--line); border-radius:12px; padding:12px 15px; background:#fff; }
 
+/* ---- 핵심 문법 1개 (지문 앞) ------------------------------------------- */
+.kg-box{ border:1px solid #e0daf8; border-left:5px solid var(--indigo); background:var(--indigo-soft);
+  border-radius:12px; padding:10px 15px; margin-bottom:15px; }
+.kg-head{ font-weight:700; color:var(--indigo); font-size:11pt; }
+.kg-point{ background:#fff; border:1px solid #ddd5fa; color:var(--indigo); font-weight:700;
+  border-radius:999px; padding:1px 11px; font-size:9.5pt; }
+.kg-exp{ font-size:10pt; color:#3f4654; line-height:1.6; margin-top:5px; }
+.kg-ex{ font-size:9.3pt; color:#5b6472; margin-top:6px; padding-top:5px; border-top:1px dashed #ddd5fa; }
+.kg-ex-lab{ display:inline-block; background:#fff; color:var(--indigo); font-weight:700; border:1px solid #ddd5fa;
+  border-radius:6px; padding:0 8px; margin-right:7px; font-size:8pt; }
+
+.sub-lab{ font-size:9pt; font-weight:700; color:#7a8296; margin:4px 0 2px; }
+
 /* ---- 지문 통째로 읽기 --------------------------------------------------- */
 .passage-box{ background:var(--box); border:1px solid var(--line); border-radius:12px;
   padding:11px 15px; font-size:10.3pt; line-height:1.95; color:var(--ink); }
