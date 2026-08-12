@@ -1,18 +1,20 @@
 /* ============================================================
    구문해석 실전서 - 인쇄용 스타일 (WeasyPrint)
    팔레트: 네이비 #1a2740 / 골드 #b08d57 / 오역=빨강 / 정답=초록
-   폰트 정책: 전체(영어·한글·숫자·목차·제목) 나눔스퀘어라운드로 통일
+   폰트 정책: 영어 본문 = 세리프(Georgia) / 그 외 한글·숫자·목차·제목 = 나눔스퀘어라운드
    ============================================================ */
 
-/* 모든 텍스트: 나눔스퀘어라운드 단일 폰트 */
 :root {
+  /* 한글·숫자·목차·제목·라벨: 나눔스퀘어라운드로 통일 */
   --f-round: "NanumSquareRound", "NanumSquare Round", "NanumGothic", "Nanum Gothic",
              "Malgun Gothic", "WenQuanYi Zen Hei", sans-serif;
-  /* 아래 변수들은 하위 호환용 별칭 — 전부 나눔스퀘어라운드로 통일 */
-  --f-body: var(--f-round);
+  /* 영어 본문: 세리프(Georgia) — 한글 글리프는 뒤의 나눔으로 자동 폴백 */
+  --f-en: "Georgia", "Times New Roman", "NanumSquareRound", "NanumSquare Round",
+          "NanumGothic", "Nanum Gothic", "WenQuanYi Zen Hei", serif;
+  --f-eng: var(--f-en);
+  --f-body: var(--f-en);
+  /* 목차·제목 등 한글 UI는 나눔스퀘어라운드로 통일 */
   --f-myeongjo: var(--f-round);
-  --f-en: var(--f-round);
-  --f-eng: var(--f-round);
 }
 /* 정답 라벨 · 출처표기(2024 고3 …번) 등은 나눔스퀘어라운드 적용 */
 .src-chip, .dd-src, .prob-answer, .dq-correct, .ab .tag { font-family: var(--f-round); }
@@ -65,7 +67,7 @@
 .pc-tip b { color: #fff; }
 
 body {
-  font-family: var(--f-round);
+  font-family: var(--f-body);
   color: #23272e;
   font-size: 10.5px;
   line-height: 1.55;
@@ -426,7 +428,7 @@ body {
 .dd-src { color: var(--muted); font-size: 8.5px; margin-left: 7px; }
 .dd-goal { font-size: 10px; color: #1f5a4c; background: var(--tint); border-radius: 6px;
   padding: 5px 10px; margin-bottom: 7px; }
-.dd-passage { font-family: var(--f-round); font-size: 11.5px; line-height: 1.85; color: #33403a; }
+.dd-passage { font-family: var(--f-en); font-size: 11.5px; line-height: 1.85; color: #33403a; }
 .dd-passage mark.hl { background: #fff3a8; color: #3a2f00; padding: 0 2px; border-radius: 2px;
   box-shadow: 0 0 0 1px #f2e27a inset; }
 .dd-read { margin-top: 7px; font-size: 10px; color: #6a4415; background: var(--goldbg, #fbf3e5);
@@ -547,7 +549,7 @@ body {
   color: #eafaf4; margin: -14mm -15mm -15mm -15mm; padding: 0;
   height: 297mm; display: flex; align-items: center; justify-content: center; }
 .dv-inner { text-align: center; padding: 0 24mm; }
-.dv-badge { display: inline-block; font-family: var(--f-round);
+.dv-badge { display: inline-block; font-family: var(--f-en);
   font-weight: 800; letter-spacing: 6px; font-size: 15px; color: var(--gold);
   border: 1.5px solid rgba(201,138,59,.6); border-radius: 40px; padding: 7px 22px; margin-bottom: 26px; }
 .dv-title { font-family: var(--f-myeongjo); font-weight: 800; font-size: 34px;
@@ -561,7 +563,7 @@ body {
 .dv-ch { display: flex; align-items: baseline; gap: 12px; padding: 7px 0;
   border-top: 1px solid rgba(255,255,255,.14); }
 .dv-ch:last-child { border-bottom: 1px solid rgba(255,255,255,.14); }
-.dv-ch .no { color: var(--gold); font-family: var(--f-round); font-weight: 800;
+.dv-ch .no { color: var(--gold); font-family: var(--f-en); font-weight: 800;
   font-size: 12px; min-width: 34px; letter-spacing: 1px; }
 .dv-ch .t { color: #eafaf4; font-weight: 700; font-size: 13px; white-space: nowrap; }
 .dv-ch .d { color: #a9cfc3; font-size: 10.5px; margin-left: auto; }
@@ -576,7 +578,7 @@ body {
 .rm-item { display: flex; align-items: baseline; gap: 11px; padding: 5px 0 5px 6px;
   border-bottom: 1px dashed var(--line); }
 .rm-item:last-child { border-bottom: none; }
-.rm-no { color: var(--navy2); font-family: var(--f-round); font-weight: 800;
+.rm-no { color: var(--navy2); font-family: var(--f-en); font-weight: 800;
   font-size: 11px; min-width: 32px; }
 .rm-t { color: #274b40; font-weight: 700; font-size: 12px; }
 .rm-d { color: var(--muted); font-size: 10px; margin-left: auto; text-align: right; max-width: 55%; }
@@ -593,7 +595,7 @@ body {
   font-size: 10px; padding: 9px 12px; display: flex; align-items: center; line-height: 1.35; }
 .train-body { flex: 1; padding: 9px 14px; display: flex; align-items: center;
   flex-wrap: wrap; gap: 4px 8px; }
-.train-en { font-family: var(--f-round); font-weight: 700; font-size: 12.5px; color: #274b40; }
+.train-en { font-family: var(--f-en); font-weight: 700; font-size: 12.5px; color: #274b40; }
 .train-arrow { color: var(--navy2); font-weight: 800; }
 .train-ko { font-size: 10.5px; color: #33403a; }
 
@@ -613,13 +615,13 @@ body {
   padding: 15px 20px; margin: 14px 0; }
 .f-label { color: var(--gold); font-weight: 800; font-size: 10px; letter-spacing: 2px; margin-bottom: 8px; }
 .f-diagram { display: flex; align-items: center; gap: 18px; }
-.f-symbol { font-family: var(--f-round); font-weight: 800; font-size: 19px;
+.f-symbol { font-family: var(--f-en); font-weight: 800; font-size: 19px;
   color: #2b4a41; flex: 0 0 auto; white-space: nowrap; text-align: center; padding: 14px 16px;
   border: 4px solid var(--navy2); border-radius: 14px; background: #e2f1eb; line-height: 1.15; }
 .f-rows { flex: 1; min-width: 0; }
 .f-row { display: flex; align-items: center; padding: 7px 2px; border-bottom: 1px dashed var(--line); min-width: 0; }
 .f-row:last-child { border-bottom: none; }
-.f-en { font-family: var(--f-round); font-weight: 800; font-size: 12.5px; flex: 0 0 auto; min-width: 300px; white-space: nowrap; color: #274b40; }
+.f-en { font-family: var(--f-en); font-weight: 800; font-size: 12.5px; flex: 0 0 auto; min-width: 300px; white-space: nowrap; color: #274b40; }
 .f-arrow { color: var(--navy2); font-weight: 800; margin: 0 8px; flex: 0 0 auto; }
 .f-ko { color: #33403a; font-size: 11px; flex: 1 1 auto; white-space: nowrap; }
 /* 해석 공식(심볼+행)에서는 좌측 코드칸을 좁혀 뜻(f-ko)이 한 줄에 들어오게 */
@@ -633,7 +635,7 @@ body {
 .wb-strategy b { color: var(--gold); }
 
 .wb-ex { margin: 10px 0 2px; padding: 0; list-style: none; }
-.wb-ex li { font-family: var(--f-round); font-size: 12.5px; padding: 9px 2px;
+.wb-ex li { font-family: var(--f-en); font-size: 12.5px; padding: 9px 2px;
   border-bottom: 1px solid #eef4f1; line-height: 1.5; }
 .wb-ex .n { color: var(--navy2); font-weight: 800; margin-right: 8px; }
 .wb-cut { font-family: var(--f-body); font-size: 10.5px; color: #33403a; margin-top: 5px;
@@ -689,9 +691,9 @@ body {
 .drill-band small { font-weight: 500; font-size: 10px; color: #bfe6da; margin-left: 8px; }
 
 .dq { margin: 2px 0 7px; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 2px; }
-.dq-no { font-family: var(--f-round); font-size: 18px; font-weight: 800; color: var(--navy2);
+.dq-no { font-family: var(--f-en); font-size: 18px; font-weight: 800; color: var(--navy2);
   margin-right: 8px; }
-.dq-sent { flex: 1; min-width: 60%; font-family: var(--f-round);
+.dq-sent { flex: 1; min-width: 60%; font-family: var(--f-en);
   font-size: 12px; line-height: 1.75; color: #20293a; }
 .dq-correct { background: var(--right); color: #fff; font-weight: 800; font-size: 9px;
   padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
