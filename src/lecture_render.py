@@ -84,13 +84,14 @@ def _build_view(p: LecturePassage) -> dict:
         "vocab_list": _aggregate_vocab(p.analysis.sentences),
         "stances": STANCES,
         "structures": STRUCTURES,
-        # ③ 글 예측 정답
+        # ④ 글 정리 정답
         "topic": ov.topic,
         "stance": ov.stance,
         "stance_reason": ov.stance_reason,
         "structure": ov.structure,
         "structure_reason": ov.structure_reason,
         "chains": chains,
+        "summary": ov.summary,
     }
 
 

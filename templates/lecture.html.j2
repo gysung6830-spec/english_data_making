@@ -56,9 +56,9 @@
     </div>
   </div>
 
-  {#- ④ 글 예측 (새 페이지) -#}
+  {#- ④ 글 정리 (새 페이지) -#}
   <div class="section brk">
-    <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">글 예측</span>
+    <div class="sec-head"><span class="sec-no">4</span><span class="sec-title">글 정리</span>
       <span class="sec-desc">문장을 다 봤으니 지문 전체를 정리해봐{% if not teacher %} (정답은 강사용){% endif %}</span></div>
 
     <div class="pcard">
@@ -98,6 +98,12 @@
         <span class="chain-flow">{{ c.first }}{% for i in range(c.blanks) %} → <span class="chain-blank"></span>{% endfor %}</span></div>
       {% endif %}
       {% endfor %}
+    </div>
+
+    <div class="pcard">
+      <div class="pc-q"><span class="em">📝</span>글 내용 정리<span class="pc-hint">필자 핵심 의견을 중심으로 흐름을 한 번에</span></div>
+      {% if teacher %}<div class="pred-a">{{ p.summary }}</div>
+      {% else %}<div class="writeline"></div><div class="writeline"></div>{% endif %}
     </div>
   </div>
 

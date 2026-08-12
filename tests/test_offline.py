@@ -181,8 +181,8 @@ def test_lecture_render_html():
     p = mock_lecture_passage(item_no="1")
     student = lecture_render.render_lecture_html([p], teacher=False)
     teacher = lecture_render.render_lecture_html([p], teacher=True)
-    # 섹션(어휘 리스트 / 끊어읽기 / 오답 찾기 / 글 예측)은 둘 다 있음
-    for sec in ("어휘 리스트", "끊어읽기", "왜 틀렸을까", "글 예측", "재진술 사슬"):
+    # 섹션(어휘 리스트 / 끊어읽기 / 오답 찾기 / 글 정리·내용 정리)은 둘 다 있음
+    for sec in ("어휘 리스트", "끊어읽기", "왜 틀렸을까", "글 정리", "재진술 사슬", "글 내용 정리"):
         assert sec in student and sec in teacher
     # 학생용엔 빈칸(ko-blank)이 있고, 강사용엔 채워진 정답(ko-fill)이 있다
     assert "ko-blank" in student and "ko-fill" not in student

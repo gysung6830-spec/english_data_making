@@ -66,6 +66,7 @@ class Overview(BaseModel):
     structure_reason: str
     # 재진술 사슬: 억지로 만들지 말고, 필자 핵심 의견을 이루는 개념의 실제 사슬만(1~2개)
     restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=2)
+    summary: str = ""             # 📝 글 내용 정리(필자 핵심 의견 중심, 흐름 요약)
 
 
 # ---------------------------------------------------------------------------
