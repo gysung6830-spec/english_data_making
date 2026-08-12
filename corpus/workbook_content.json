@@ -49998,5 +49998,218 @@
    "echo": "정답은 '비언어가 진심을 누설'을 '의미·감정을 숨기기 어렵다'로 재진술"
   },
   "num": 32
+ },
+ {
+  "key": "2024-수능|31",
+  "answer": 1,
+  "answer_src": "solved",
+  "hl": [
+   {
+    "t": "Over the last decade the attention given to how children learn to read has foregrounded the nature of textuality, and of the different, interrelated ways in which readers of all ages make texts mean.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "‘Reading’ now applies to a greater number of representational forms than at any time in the past: pictures, maps, screens, design graphics and photographs are all regarded as text.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "In addition to the innovations made possible in picture books by new printing processes, design features also predominate in other kinds, such as books of poetry and information texts.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Thus, reading becomes a more complicated kind of interpretation than it was when children’s attention was focused on the printed text, with sketches or pictures as an adjunct.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "Thus"
+     }
+    ]
+   },
+   {
+    "t": "Children now learn from a picture book that words and illustrations complement and enhance each other.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Reading is not simply ______.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "한정",
+      "word": "not simply"
+     }
+    ]
+   },
+   {
+    "t": "Even in the easiest texts, what a sentence ‘says’ is often not what it means.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "not what it means"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "읽기는 인쇄된 텍스트에 집중하던 때보다 <b>더 복잡한 해석</b>이 된다",
+     "an": "— 핵심은 '읽기 = 복잡한 해석 과정'"
+    },
+    {
+     "ko": "따라서 읽기는 <b>단순히 ______ 이 아니다</b>",
+     "an": "— 빈칸 = 읽기가 넘어서는 '단순한 것'"
+    },
+    {
+     "ko": "가장 쉬운 텍스트조차 문장이 '말하는' 것이 <b>의미하는 바가 아니다</b>",
+     "an": "— 즉 글자만 알아보는 것으로 끝나지 않음 → 빈칸 = 단어 인식 = 정답 ①"
+    }
+   ],
+   "concl": "→ 읽기는 단순한 단어 알아보기가 아니라 의미 해석이다 = 빈칸 = word recognition = <b>①</b>",
+   "gnote": "회색(도입·형태 나열·그림책 예)은 '읽기=해석' 논리의 배경일 뿐, 빈칸 도출에 필수 아님."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Thus, reading becomes a more complicated kind of interpretation",
+      "hl0"
+     ],
+     [
+      "than it was when children’s attention was focused on the printed text,",
+      "hl1"
+     ],
+     [
+      "with sketches or pictures as an adjunct.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서, 읽기는 더 복잡한 종류의 해석이 된다",
+      "hl0"
+     ],
+     [
+      "아이들의 주의가 인쇄된 텍스트에 집중되었던 때보다,",
+      "hl1"
+     ],
+     [
+      "삽화나 그림을 부속물로 하던.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 읽기는 이제 '복잡한 해석'"
+   },
+   {
+    "en": [
+     [
+      "Reading is not simply ______.",
+      "hl0"
+     ]
+    ],
+    "ko": [
+     [
+      "읽기는 단순히 ______ 이/가 아니다.",
+      "hl0"
+     ]
+    ],
+    "note": "빈칸 문장: 읽기가 '단순히' 넘어서는 것"
+   },
+   {
+    "en": [
+     [
+      "Even in the easiest texts,",
+      "hl0"
+     ],
+     [
+      "what a sentence ‘says’ is often not what it means.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "가장 쉬운 텍스트에서조차,",
+      "hl0"
+     ],
+     [
+      "문장이 '말하는' 것은 종종 그것이 의미하는 바가 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 글자 그대로 ≠ 의미 → 단순 인식 이상"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "word recognition",
+    "verdict": "ok",
+    "jd": "✔ 근거"
+   },
+   {
+    "n": 2,
+    "tx": "imaginative play",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 3,
+    "tx": "knowledge acquisition",
+    "verdict": "x",
+    "jd": "✘ 없음"
+   },
+   {
+    "n": 4,
+    "tx": "image mapping",
+    "verdict": "x",
+    "jd": "✘ 범위초과"
+   },
+   {
+    "n": 5,
+    "tx": "subjective <span class=\"reuse\">interpretation</span>",
+    "verdict": "x",
+    "jd": "✘ 표면어휘"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> 읽기는 단순한 '단어 인식'이 아니다 · <span class=\"xo\">②</span>상상 놀이(없음) <span class=\"xo\">③</span>지식 습득(없음) <span class=\"xo\">④</span>이미지 대응(범위초과) <span class=\"xo\">⑤</span>주관적 해석(표면어)",
+  "paraphrase": {
+   "from": "reading becomes a more complicated kind of interpretation · what a sentence ‘says’ is often not what it means",
+   "to": "word recognition (읽기가 넘어서는 '단순한 단어 알아보기')",
+   "copies": [
+    "interpretation"
+   ]
+  },
+  "restate": {
+   "thesis": "읽기는 단순한 단어 인식이 아니라 의미를 해석하는 복잡한 과정이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Thus, reading becomes a more complicated kind of interpretation than it was when children’s attention was focused on the printed text, with sketches or pictures as an adjunct.",
+     "ko": "읽기는 이제 더 복잡한 해석이 되었다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Reading is not simply ______.",
+     "ko": "읽기는 단순히 ______ 이 아니다",
+     "role": "재진술",
+     "how": "부정 한정"
+    },
+    {
+     "en": "Even in the easiest texts, what a sentence ‘says’ is often not what it means.",
+     "ko": "문장이 말하는 것이 그 의미가 아니다",
+     "role": "정답근거",
+     "how": "부연"
+    }
+   ],
+   "echo": "정답은 '복잡한 해석·말하는 것≠의미'를 '단순한 단어 인식이 아님'으로 재진술"
+  },
+  "num": 31
  }
 ]
