@@ -23,20 +23,29 @@ _env = Environment(
 _CIRCLED = "①②③④⑤"
 
 
+# 어휘 리스트에서 제외할 '너무 쉬운(초등 수준)' 단어 — 숙어(여러 단어)는 걸러지지 않음
+from .render import _is_easy_word as _too_easy
+
+
 def _aggregate_vocab(sentences) -> list[dict]:
     """문장별 어휘를 지문 전체 어휘 리스트로 합침(단어 기준 중복 제거, 등장 순서 유지).
 
-    각 어휘 앞에 '처음 나온 문장 번호(sid)'를 달아 어느 문장 어휘인지 표시한다.
+    - 각 어휘 앞에 '처음 나온 문장 번호(sid)'를 달아 어느 문장 어휘인지 표시한다.
+    - 초등 수준의 너무 쉬운 '단일 단어'는 제외한다(중·고등 수준 + 숙어 위주).
     """
     seen: set[str] = set()
     out: list[dict] = []
     for s in sentences:
         for v in s.vocab:
-            key = (v.word or "").strip().lower()
+            word = (v.word or "").strip()
+            key = word.lower()
             if not key or key in seen:
                 continue
+            # 한 단어인데 너무 쉬우면 제외(숙어·구동사는 공백 포함이라 유지)
+            if " " not in word and _too_easy(word):
+                continue
             seen.add(key)
-            out.append({"sid": s.id, "word": v.word.strip(), "meaning": (v.meaning or "").strip()})
+            out.append({"sid": s.id, "word": word, "meaning": (v.meaning or "").strip()})
     return out
 
 

@@ -65,13 +65,12 @@ body{
 .passage-box .snum{ display:inline-block; background:#dbe7e0; color:var(--green-d);
   font-weight:700; font-size:7.2pt; border-radius:5px; padding:0 4px; margin-right:3px; vertical-align:1.5px; }
 
-/* ---- 어휘 리스트 (압축 인라인 플로우·S# 표시) -------------------------- */
-.vocab-flow{ font-size:8.7pt; line-height:1.85; }
-.vitem{ white-space:nowrap; }
-.vsid{ color:var(--green); font-weight:700; font-size:6.8pt; vertical-align:1px; }
-.vw{ font-weight:700; color:var(--green-d); }
-.vm{ color:#6b7280; }
-.vdot{ color:#c7cdd6; margin:0 7px; }
+/* ---- 어휘 리스트 (압축·열/행 정렬·S# 표시) ----------------------------- */
+.vocab-grid{ display:grid; grid-template-columns:max-content 1fr max-content 1fr;
+  column-gap:18px; row-gap:3px; align-items:baseline; font-size:8.7pt; }
+.vterm{ font-weight:700; color:var(--green-d); white-space:nowrap; }
+.vmean{ color:#6b7280; }
+.vsid{ color:var(--green); font-weight:700; font-size:6.8pt; margin-right:3px; vertical-align:1px; }
 
 /* ---- ② 문장별 ----------------------------------------------------------- */
 .s-item{ margin-bottom:15px; }
@@ -137,8 +136,9 @@ body{
 .writeline.inline{ display:inline-block; width:58%; height:12px; vertical-align:middle; }
 
 /* 체크박스형 선택지 */
-.choices{ display:flex; flex-wrap:wrap; gap:7px 16px; margin:8px 0 2px; }
-.choice{ font-size:9.8pt; color:#3f4654; font-weight:500; display:inline-flex; align-items:center; gap:6px; }
+.choices{ display:flex; flex-wrap:wrap; gap:8px 18px; margin:8px 0 2px; }
+.choice{ font-size:9.8pt; color:#3f4654; font-weight:500; display:inline-flex; align-items:center;
+  gap:6px; white-space:nowrap; }
 .ck{ display:inline-block; width:13px; height:13px; border:1.6px solid #b9bed0;
   border-radius:4px; background:#fff; vertical-align:middle; }
 .choice.on{ color:var(--green-d); }

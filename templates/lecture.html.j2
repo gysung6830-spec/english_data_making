@@ -31,8 +31,10 @@
   <div class="section">
     <div class="sec-head"><span class="sec-no">2</span><span class="sec-title">어휘 리스트</span>
       <span class="sec-desc">핵심 어휘부터 익혀둬 (앞의 S# = 나온 문장)</span></div>
-    <div class="panel vocab-flow">
-      {% for v in p.vocab_list %}<span class="vitem"><span class="vsid">S{{ v.sid }}</span> <span class="vw">{{ v.word }}</span> <span class="vm">{{ v.meaning }}</span></span>{% if not loop.last %}<span class="vdot">·</span>{% endif %}{% endfor %}
+    <div class="panel">
+      <div class="vocab-grid">
+        {% for v in p.vocab_list %}<span class="vterm"><span class="vsid">S{{ v.sid }}</span>{{ v.word }}</span><span class="vmean">{{ v.meaning }}</span>{% endfor %}
+      </div>
     </div>
   </div>
 
