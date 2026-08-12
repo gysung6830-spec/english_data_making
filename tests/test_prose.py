@@ -136,6 +136,16 @@ def test_ref_safeguard():
     r6 = next(w for w in pr.build_prose_pack(expl, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "ref")
     _check("가주어 it 문항 제외", len(r6.sentences[0].items) == 0)
+    # 문항 탈락 시 원문 복구: LLM 이 원문에 없던 대명사(they)를 삽입한 잔여를 제거
+    en7 = "The reason we understand is that our memories are different."
+    ins = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en=en7, ko="사",
+        ref_template="The reason we understand is that our memories they {{P1}} are different.",
+        ref_items=[pr.LLMProseItem(id="P1", display="= [ a / b / c ]", answer="zzz")])])  # 정답 보기에 없음
+    r7 = next(w for w in pr.build_prose_pack(ins, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "ref").sentences[0]
+    _check("문항 탈락 시 삽입 대명사 잔여 없이 원문 복구",
+           r7.template == en7 and len(r7.items) == 0)
 
 
 def test_form_dedup_and_empty_sentence():

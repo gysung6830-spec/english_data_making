@@ -334,8 +334,12 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             # 안전장치: 지칭은 원문에 {{Pn}} 만 삽입해야 하는데 원문 단어가 사라졌으면
             #   (대명사 소실·명사 누락) 문항을 버리고 원문(en)을 그대로 보여 준다.
             if pitems and _ref_template_lossy(s.en, template):
-                template = s.en
                 pitems = []
+            # ★ 남은 지칭 문항이 하나도 없으면 template 을 원문(en)으로 되돌린다.
+            #   LLM 이 원문에 없던 대명사(예: "our memories they are")를 삽입한 뒤 문항이 탈락하면
+            #   그 잔여가 문장에 남는데, en 으로 복구해 깨끗한 문장을 보인다.
+            if not pitems:
+                template = s.en
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
 
