@@ -5,6 +5,7 @@
 """
 from __future__ import annotations
 
+import random
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -18,6 +19,44 @@ _env = Environment(
     loader=FileSystemLoader(str(TEMPLATE_DIR)),
     autoescape=select_autoescape(["html", "xml", "j2"]),
 )
+
+_CIRCLED = "①②③④⑤"
+
+
+def _aggregate_vocab(sentences) -> list[dict]:
+    """문장별 어휘를 지문 전체 어휘 힌트로 합침(단어 기준 중복 제거, 등장 순서 유지)."""
+    seen: set[str] = set()
+    out: list[dict] = []
+    for s in sentences:
+        for v in s.vocab:
+            key = (v.word or "").strip().lower()
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            out.append({"word": v.word.strip(), "meaning": (v.meaning or "").strip()})
+    return out
+
+
+def _problem_view(pr) -> dict:
+    """오역 포인트 문제 1개 -> 렌더 뷰(객관식은 보기 순서를 결정론적으로 섞고 정답 기호 계산)."""
+    view = {
+        "no": pr.no, "sentence_id": pr.sentence_id, "focus": pr.focus,
+        "kind": pr.kind, "question": pr.question,
+        "explanation": pr.explanation, "answer_text": pr.answer_text,
+        "options": [], "answer_sym": "",
+    }
+    if pr.kind == "객관식" and pr.options:
+        idx = list(range(len(pr.options)))
+        # 학생/강사 렌더가 같은 순서를 쓰도록 문제 고유값으로 시드 고정(정답이 항상 ①이 되지 않게)
+        rng = random.Random(f"{pr.no}|{pr.sentence_id}|{pr.focus}")
+        rng.shuffle(idx)
+        for pos, oi in enumerate(idx):
+            sym = _CIRCLED[pos] if pos < len(_CIRCLED) else f"({pos + 1})"
+            view["options"].append({"sym": sym, "text": pr.options[oi],
+                                    "correct": oi == pr.answer_index})
+            if oi == pr.answer_index:
+                view["answer_sym"] = sym
+    return view
 
 
 def _build_view(p: LecturePassage) -> dict:
@@ -39,13 +78,13 @@ def _build_view(p: LecturePassage) -> dict:
             "id": s.id,
             "english": s.english,
             "syntax_tag": s.syntax_tag,
-            "vocab": [{"word": v.word, "meaning": v.meaning} for v in s.vocab],
             "en_chunked": " / ".join(c.en for c in s.chunks),
             "ko_chunked": " / ".join(c.ko for c in s.chunks),
-            "mistranslation": s.mistranslation,
             "catch": s.catch,
             "easy_example": s.easy_example,
         })
+
+    problems = [_problem_view(pr) for pr in p.analysis.problems]
 
     return {
         "item_no": (p.item_no or "").strip(),
@@ -53,6 +92,8 @@ def _build_view(p: LecturePassage) -> dict:
         "source": p.source,
         "sentences": p.sentences,
         "lines": items,
+        "vocab_hints": _aggregate_vocab(p.analysis.sentences),
+        "problems": problems,
         "stances": STANCES,
         "structures": STRUCTURES,
         # ⑤ 정답

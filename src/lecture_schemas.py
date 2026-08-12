@@ -87,9 +87,8 @@ class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
     syntax_tag: str = ""          # 구문 태그(예: '관계사절(play a role)·분사구')
-    vocab: list[Vocab] = Field(default_factory=list)   # 📘 어휘
+    vocab: list[Vocab] = Field(default_factory=list)   # 📘 어휘(힌트로 제공)
     chunks: list[Chunk]           # ④ 끊어읽기(/) + 직독직해
-    mistranslation: str = ""      # ⚠ 오역주의
     catch: str = ""               # ✅ 이 정도는 캐치(이 문장으로 하고 싶은 말)
     easy_example: str = ""        # 💡 쉬운 예시(지문 비유 활용)
 
@@ -101,16 +100,56 @@ class SentenceItem(BaseModel):
         return v
 
 
+# 오역 포인트 문제 — 학생이 '해석을 다 적는' 대신 위험 지점만 골라 푼다
+ProblemKind = Literal["객관식", "주관식"]
+
+
+class TransProblem(BaseModel):
+    no: int
+    sentence_id: int              # 대상 문장 번호
+    focus: str                    # 문제의 초점이 되는 '영어 구/표현'(밑줄 대상)
+    kind: ProblemKind             # 객관식 / 주관식
+    question: str                 # 발문
+    options: list[str] = Field(default_factory=list)  # 객관식 선지(2~4). 주관식은 빈 리스트
+    answer_index: int = -1        # 객관식 정답 인덱스(0부터). 주관식은 -1
+    answer_text: str = ""         # 정답(주관식 정답 문구, 또는 객관식 정답 표현)
+    explanation: str              # 오역 원인·해설
+
+    @field_validator("options")
+    @classmethod
+    def _strip(cls, v: list[str]) -> list[str]:
+        return [o.strip() for o in v if o and o.strip()]
+
+    def check(self) -> None:
+        if self.kind == "객관식":
+            if not (2 <= len(self.options) <= 4):
+                raise ValueError(f"객관식 선지는 2~4개여야 합니다(문제 {self.no}).")
+            if not (0 <= self.answer_index < len(self.options)):
+                raise ValueError(f"객관식 정답 인덱스가 범위를 벗어났습니다(문제 {self.no}).")
+        else:  # 주관식
+            if not self.answer_text.strip():
+                raise ValueError(f"주관식 정답(answer_text)이 비어 있습니다(문제 {self.no}).")
+
+
 class SentenceAnalysis(BaseModel):
     sentences: list[SentenceItem]
+    problems: list[TransProblem] = Field(min_length=3, max_length=6)
 
-    def validate_count(self, n: int) -> None:
+    def validate_all(self, n: int) -> None:
         got = len(self.sentences)
         if got != n:
             raise ValueError(f"문장 분석 개수({got})가 지문 문장 수({n})와 다릅니다.")
         ids = sorted(s.id for s in self.sentences)
         if ids != list(range(1, n + 1)):
             raise ValueError(f"문장 번호가 1~{n} 과 정확히 일치해야 합니다(현재 {ids}).")
+        for p in self.problems:
+            if not (1 <= p.sentence_id <= n):
+                raise ValueError(f"문제 {p.no}의 문장 번호({p.sentence_id})가 지문 범위를 벗어납니다.")
+            p.check()
+
+    # 하위호환용 별칭
+    def validate_count(self, n: int) -> None:
+        self.validate_all(n)
 
 
 # ---------------------------------------------------------------------------

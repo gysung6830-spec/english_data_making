@@ -44,7 +44,7 @@ def analyze_lecture_passage(
         model_cls=SentenceAnalysis,
         max_tokens=24000,
         max_retries=r,
-        extra_validate=lambda a: a.validate_count(n),
+        extra_validate=lambda a: a.validate_all(n),
     )
 
     return LecturePassage(

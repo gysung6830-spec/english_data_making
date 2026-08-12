@@ -142,12 +142,22 @@ def test_lecture_schema_and_counts():
     from src.lecture_schemas import Overview, SentenceAnalysis
     from samples.lecture_mock import mock_lecture_passage
     p = mock_lecture_passage()
-    # 문장 분석 개수가 지문 문장 수와 같아야 통과
-    p.analysis.validate_count(len(p.sentences))
+    # 문장 분석 개수가 지문 문장 수와 같고, 문제 문장참조·객관식 정답이 유효하면 통과
+    p.analysis.validate_all(len(p.sentences))
+    assert 3 <= len(p.analysis.problems) <= 6
     # 개수가 다르면 실패
     try:
-        p.analysis.validate_count(len(p.sentences) + 1)
+        p.analysis.validate_all(len(p.sentences) + 1)
         assert False, "문장 수 불일치가 통과하면 안 됨"
+    except ValueError:
+        pass
+    # 객관식 정답 인덱스가 범위를 벗어나면 실패
+    from src.lecture_schemas import TransProblem
+    try:
+        TransProblem(no=1, sentence_id=1, focus="x", kind="객관식",
+                     question="q", options=["a", "b"], answer_index=5,
+                     answer_text="a", explanation="e").check()
+        assert False, "잘못된 객관식 정답 인덱스가 통과하면 안 됨"
     except ValueError:
         pass
     # 재진술 사슬 개수 범위(2~3) 위반 시 실패
@@ -172,11 +182,14 @@ def test_lecture_render_html():
     p = mock_lecture_passage(item_no="1")
     student = lecture_render.render_lecture_html([p], teacher=False)
     teacher = lecture_render.render_lecture_html([p], teacher=True)
-    # ①②③ 은 둘 다 있음
-    for sec in ("지문 통째로 읽기", "해석 전 예측", "한 문장씩 직접 풀기", "재진술 사슬", "오역주의"):
+    # ①②③ 은 둘 다 있음(문제·어휘 힌트·마무리 요약)
+    for sec in ("지문 통째로 읽기", "해석 전 예측", "오역 포인트 잡기", "재진술 사슬",
+                "어휘 힌트", "마무리"):
         assert sec in student and sec in teacher
-    # 답지(④⑤)는 강사용에만 (학생용엔 없음)
-    for ans in ("끊어읽기 · 캐치", "전체 요지", "이 지문의 비유", "해석 전 예측 · 정답"):
+    # 객관식/주관식 문제가 학생지에 노출됨
+    assert "객관식" in student and "주관식" in student
+    # 정답·해설·답지(④⑤)는 강사용에만 (학생용엔 없음)
+    for ans in ("끊어읽기 · 캐치", "정답 &amp; 해설", "이 지문의 비유", "전체 요지"):
         assert ans not in student and ans in teacher
     print("PASS  강의컨셉(필생보) 학생용/강사용 렌더링")
 

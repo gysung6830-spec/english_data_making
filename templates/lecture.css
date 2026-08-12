@@ -107,10 +107,7 @@ body {
   height: 11px; vertical-align: middle;
 }
 
-/* ---- ③ 문장별 직접 풀기 ------------------------------------------------- */
-.s-item { padding: 7px 0; border-bottom: 1px solid #eee7d6; }
-.s-item:last-child { border-bottom: none; }
-.s-en { font-size: 10.5pt; line-height: 1.5; }
+/* ---- ③ 어휘 & 오역 포인트 문제 ------------------------------------------ */
 .s-no {
   display: inline-block; min-width: 16px; height: 16px; text-align: center;
   background: #17233f; color: #fff; border-radius: 4px; font-size: 8pt;
@@ -120,14 +117,56 @@ body {
   font-size: 8pt; color: #8a6d1f; background: #fff; border: 1px solid #e6d6a6;
   border-radius: 5px; padding: 0 7px; margin-left: 5px; white-space: nowrap;
 }
-.s-vocab { font-size: 8.8pt; color: #55607a; margin: 4px 0 3px; line-height: 1.5; }
 .vword { font-weight: 700; color: #17233f; }
-.s-write { font-size: 9pt; color: #8a94a6; margin: 3px 0; }
-.s-write .writeline { display: inline-block; width: 72%; vertical-align: middle; height: 12px; }
-.s-warn {
-  font-size: 8.8pt; color: #7a5b12; background: #fff6e2; border: 1px solid #f0dfae;
-  border-radius: 6px; padding: 4px 8px; margin-top: 3px; line-height: 1.45;
+
+.vocab-hints {
+  font-size: 9pt; color: #55607a; line-height: 1.9; margin-bottom: 9px;
+  padding-bottom: 8px; border-bottom: 1px dashed #e6e0cf;
 }
+.vocab-hints b { color: #8a6d1f; }
+.vchip {
+  display: inline-block; background: #fff; border: 1px solid #e6e0d2;
+  border-radius: 6px; padding: 1px 8px; margin: 0 4px 3px 0; font-size: 9pt;
+}
+.vchip b { color: #17233f; }
+
+.q-card { padding: 7px 0; border-bottom: 1px solid #eee7d6; }
+.q-card:last-of-type { border-bottom: none; }
+.q-head { font-size: 10pt; line-height: 1.5; }
+.q-no {
+  display: inline-block; background: #17233f; color: #fff; border-radius: 5px;
+  padding: 0 8px; font-weight: 700; font-size: 9pt; margin-right: 5px;
+}
+.q-kind {
+  font-size: 8pt; font-weight: 700; border-radius: 999px; padding: 0 8px; margin-right: 5px;
+}
+.q-kind.객관 { background: #eaf1fb; color: #1d4ed8; border: 1px solid #cfe0f7; }
+.q-kind.주관 { background: #fdf0e6; color: #b45309; border: 1px solid #f3d9bd; }
+.q-tag { font-size: 8pt; font-weight: 700; color: #b8912f; margin-right: 6px; }
+.q-text { font-weight: 700; color: #17233f; }
+.q-focus {
+  font-size: 9.5pt; color: #17233f; background: #fbf7ec; border: 1px solid #ece3cf;
+  border-left: 3px solid #b8912f; border-radius: 5px; padding: 3px 9px; margin: 5px 0;
+  font-style: italic;
+}
+.q-opt {
+  font-size: 9.8pt; padding: 3px 9px; border: 1px solid #e3e7ee; border-radius: 6px;
+  margin: 4px 0; line-height: 1.45;
+}
+.q-opt .osym { font-weight: 700; color: #17233f; margin-right: 5px; }
+.q-opt.correct { background: #f1f8ef; border-color: #cfe6c4; }
+.q-opt.correct .osym { color: #14532d; }
+.q-answerline { margin: 5px 0 2px; font-size: 9pt; color: #8a94a6; }
+.q-answerline .writeline.inline.wide { width: 82%; }
+.q-ans {
+  font-size: 9pt; color: #14532d; background: #f1f8ef; border: 1px solid #cfe6c4;
+  border-radius: 6px; padding: 4px 9px; margin-top: 5px; line-height: 1.45;
+}
+.q-ans b { color: #14532d; }
+.q-exp { color: #4b6b52; }
+
+.wrapup { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e6e0cf; }
+.wrapup-q { font-weight: 700; color: #8a6d1f; font-size: 10pt; }
 
 /* ---- ④ 답지 ------------------------------------------------------------- */
 .analogy {
@@ -151,6 +190,9 @@ body {
 .chain-a { margin-bottom: 4px; }
 .chain-a b { color: #17233f; }
 .chain-var { font-size: 8.5pt; color: #8a94a6; margin-top: 1px; }
+.prob-a { margin-bottom: 4px; line-height: 1.5; }
+.prob-a b { color: #17233f; }
+.prob-exp { color: #8a94a6; font-size: 8.7pt; }
 .gist {
   margin-top: 7px; font-size: 9.5pt; font-weight: 700; color: #14532d;
   background: #f1f8ef; border: 1px solid #cfe6c4; border-radius: 6px; padding: 6px 9px; line-height: 1.5;

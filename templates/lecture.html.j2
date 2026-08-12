@@ -62,20 +62,40 @@
     </div>
   </div>
 
-  {#- ③ 한 문장씩 직접 풀기 -#}
+  {#- ③ 어휘 & 오역 포인트 잡기 -#}
   <div class="section">
-    <div class="sec-head"><span class="sec-no">③</span><span class="sec-title">한 문장씩 직접 풀기</span>
-      <span class="sec-desc">어휘 보고 → 해석 직접 쓰고 → 오역주의로 점검 (캐치는 답지 ④에서)</span></div>
+    <div class="sec-head"><span class="sec-no">③</span><span class="sec-title">어휘 &amp; 오역 포인트 잡기</span>
+      <span class="sec-desc">어휘 보고 → 틀리기 쉬운 곳만 골라 풀기 (정답·해설은 ⑤)</span></div>
     <div class="panel">
-      {% for it in p.lines %}
-      <div class="s-item">
-        <div class="s-en"><span class="s-no">{{ it.id }}</span>{{ it.english }}
-          {% if it.syntax_tag %}<span class="syntax">{{ it.syntax_tag }}</span>{% endif %}</div>
-        {% if it.vocab %}<div class="s-vocab">📘 {% for v in it.vocab %}<span class="vword">{{ v.word }}</span> {{ v.meaning }}{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
-        <div class="s-write">✏ 해석 <span class="writeline"></span></div>
-        {% if it.mistranslation %}<div class="s-warn">⚠ 오역주의 &nbsp;{{ it.mistranslation }}</div>{% endif %}
+      {% if p.vocab_hints %}
+      <div class="vocab-hints">📘 <b>어휘 힌트</b>
+        {% for v in p.vocab_hints %}<span class="vchip"><b>{{ v.word }}</b> {{ v.meaning }}</span>{% endfor %}
+      </div>
+      {% endif %}
+
+      {% for q in p.problems %}
+      <div class="q-card">
+        <div class="q-head"><span class="q-no">Q{{ q.no }}</span>
+          <span class="q-kind {{ '주관' if q.kind == '주관식' else '객관' }}">{{ q.kind }}</span>
+          <span class="q-tag">S{{ q.sentence_id }}</span>
+          <span class="q-text">{{ q.question }}</span></div>
+        {% if q.focus %}<div class="q-focus">{{ q.focus }}</div>{% endif %}
+        {% if q.kind == '객관식' %}
+          {% for o in q.options %}
+          <div class="q-opt {% if teacher and o.correct %}correct{% endif %}"><span class="osym">{{ o.sym }}</span>{{ o.text }}</div>
+          {% endfor %}
+        {% else %}
+          <div class="q-answerline">✏ <span class="writeline inline wide"></span></div>
+        {% endif %}
+        {% if teacher %}
+        <div class="q-ans">정답 {% if q.kind == '객관식' %}<b>{{ q.answer_sym }}</b>{% endif %} {{ q.answer_text }}
+          <span class="q-exp">— {{ q.explanation }}</span></div>
+        {% endif %}
       </div>
       {% endfor %}
+
+      <div class="wrapup"><span class="wrapup-q">✍ 마무리 — 이 지문을 한 줄로 요약해봐</span>
+        <div class="writeline"></div></div>
     </div>
   </div>
 
@@ -98,10 +118,10 @@
     </div>
   </div>
 
-  {#- ⑤ 해석 전 예측 · 정답 -#}
+  {#- ⑤ 정답 & 해설 (예측 + 오역문제 + 요지) -#}
   <div class="section answer">
-    <div class="sec-head"><span class="sec-no ans">⑤</span><span class="sec-title">해석 전 예측 · 정답</span>
-      <span class="sec-desc">앞에서 예측한 걸 여기서 맞춰봐</span></div>
+    <div class="sec-head"><span class="sec-no ans">⑤</span><span class="sec-title">정답 &amp; 해설</span>
+      <span class="sec-desc">앞에서 예측·풀이한 걸 여기서 맞춰봐</span></div>
     <div class="panel ans-panel">
       <div class="ans-row"><span class="ans-k">🔎 소재</span><span class="ans-v">{{ p.topic }}</span></div>
       <div class="ans-row"><span class="ans-k">🗗 필자 주장</span><span class="ans-v"><b class="hl">{{ p.stance }}</b> — {{ p.stance_reason }}</span></div>
@@ -109,7 +129,10 @@
       <div class="ans-row"><span class="ans-k">🔗 재진술 사슬</span><span class="ans-v">
         {% for c in p.chains %}<div class="chain-a"><b>{{ c.label }}</b>: {{ c.expressions | join(' → ') }}<div class="chain-var">↳ 변주 {{ c.variation }}</div></div>{% endfor %}
       </span></div>
-      <div class="gist">✅ 이 지문, 이 정도는 캐치!(전체 요지) &nbsp;{{ p.gist }}</div>
+      <div class="ans-row"><span class="ans-k">📘 오역 포인트</span><span class="ans-v">
+        {% for q in p.problems %}<div class="prob-a"><b>Q{{ q.no }}</b> {% if q.kind == '객관식' %}정답 {{ q.answer_sym }} {% endif %}{{ q.answer_text }} <span class="prob-exp">— {{ q.explanation }}</span></div>{% endfor %}
+      </span></div>
+      <div class="gist">✅ 이 지문, 이 정도는 캐치!(전체 요지 · 한 줄 요약 정답) &nbsp;{{ p.gist }}</div>
     </div>
   </div>
   {% endif %}
