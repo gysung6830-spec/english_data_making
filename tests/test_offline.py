@@ -142,22 +142,22 @@ def test_lecture_schema_and_counts():
     from src.lecture_schemas import Overview, SentenceAnalysis
     from samples.lecture_mock import mock_lecture_passage
     p = mock_lecture_passage()
-    # 문장 분석 개수가 지문 문장 수와 같고, 문제 문장참조·객관식 정답이 유효하면 통과
+    # 문장 분석 개수가 지문 문장 수와 같고, 각 문장 내용 객관식 정답이 유효하면 통과
     p.analysis.validate_all(len(p.sentences))
-    assert 3 <= len(p.analysis.problems) <= 6
+    # 오역 위험 부분(빈칸)이 하나 이상 존재
+    assert any(c.blank for s in p.analysis.sentences for c in s.chunks)
     # 개수가 다르면 실패
     try:
         p.analysis.validate_all(len(p.sentences) + 1)
         assert False, "문장 수 불일치가 통과하면 안 됨"
     except ValueError:
         pass
-    # 객관식 정답 인덱스가 범위를 벗어나면 실패
-    from src.lecture_schemas import TransProblem
+    # 내용 객관식 정답 인덱스가 범위를 벗어나면 실패
+    from src.lecture_schemas import Chunk, SentenceItem
     try:
-        TransProblem(no=1, sentence_id=1, focus="x", kind="객관식",
-                     question="q", options=["a", "b"], answer_index=5,
-                     answer_text="a", explanation="e").check()
-        assert False, "잘못된 객관식 정답 인덱스가 통과하면 안 됨"
+        SentenceItem(id=1, english="x", chunks=[Chunk(en="x", ko="ㅇ")],
+                     content_options=["a", "b"], content_answer_index=5).check()
+        assert False, "잘못된 내용 객관식 정답 인덱스가 통과하면 안 됨"
     except ValueError:
         pass
     # 재진술 사슬 개수 범위(2~3) 위반 시 실패
@@ -182,15 +182,15 @@ def test_lecture_render_html():
     p = mock_lecture_passage(item_no="1")
     student = lecture_render.render_lecture_html([p], teacher=False)
     teacher = lecture_render.render_lecture_html([p], teacher=True)
-    # ①②③ 은 둘 다 있음(문제·어휘 힌트·마무리 요약)
-    for sec in ("지문 통째로 읽기", "해석 전 예측", "오역 포인트 잡기", "재진술 사슬",
-                "어휘 힌트", "마무리"):
+    # 3개 섹션(어휘 리스트 / 문장별 끊어읽기·내용 / 글 예측)은 둘 다 있음
+    for sec in ("어휘 리스트", "끊어읽기", "이 문장의 내용은?", "글 예측", "재진술 사슬"):
         assert sec in student and sec in teacher
-    # 객관식/주관식 문제가 학생지에 노출됨
-    assert "객관식" in student and "주관식" in student
-    # 정답·해설·답지(④⑤)는 강사용에만 (학생용엔 없음)
-    for ans in ("끊어읽기 · 캐치", "정답 &amp; 해설", "이 지문의 비유", "전체 요지"):
-        assert ans not in student and ans in teacher
+    # 학생용엔 빈칸(ko-blank)이 있고, 강사용엔 채워진 정답(ko-fill)이 있다
+    assert "ko-blank" in student and "ko-fill" not in student
+    assert "ko-fill" in teacher
+    # 문장 내용 객관식 정답줄(s-ans)·예측 정답(pred-a)은 강사용에만
+    assert "s-ans" not in student and "s-ans" in teacher
+    assert "pred-a" not in student and "pred-a" in teacher
     print("PASS  강의컨셉(필생보) 학생용/강사용 렌더링")
 
 

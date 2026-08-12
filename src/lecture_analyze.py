@@ -36,11 +36,10 @@ def analyze_lecture_passage(
         max_retries=r,
     )
 
-    # 2차: 문장별 분석 (개관에서 정한 비유를 공유해 쉬운 예시 일관성 유지)
+    # 2차: 어휘 + 문장별 끊어읽기(빈칸)/내용 객관식
     analysis: SentenceAnalysis = client.structured(
         system=lecture_prompts.SYSTEM,
-        prompt=lecture_prompts.sentence_prompt(
-            title, sents, overview.analogy_name, overview.analogy_desc),
+        prompt=lecture_prompts.sentence_prompt(title, sents),
         model_cls=SentenceAnalysis,
         max_tokens=24000,
         max_retries=r,

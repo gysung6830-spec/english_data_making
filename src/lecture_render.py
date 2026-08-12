@@ -37,26 +37,25 @@ def _aggregate_vocab(sentences) -> list[dict]:
     return out
 
 
-def _problem_view(pr) -> dict:
-    """오역 포인트 문제 1개 -> 렌더 뷰(객관식은 보기 순서를 결정론적으로 섞고 정답 기호 계산)."""
-    view = {
-        "no": pr.no, "sentence_id": pr.sentence_id, "focus": pr.focus,
-        "kind": pr.kind, "question": pr.question,
-        "explanation": pr.explanation, "answer_text": pr.answer_text,
-        "options": [], "answer_sym": "",
-    }
-    if pr.kind == "객관식" and pr.options:
-        idx = list(range(len(pr.options)))
-        # 학생/강사 렌더가 같은 순서를 쓰도록 문제 고유값으로 시드 고정(정답이 항상 ①이 되지 않게)
-        rng = random.Random(f"{pr.no}|{pr.sentence_id}|{pr.focus}")
-        rng.shuffle(idx)
-        for pos, oi in enumerate(idx):
-            sym = _CIRCLED[pos] if pos < len(_CIRCLED) else f"({pos + 1})"
-            view["options"].append({"sym": sym, "text": pr.options[oi],
-                                    "correct": oi == pr.answer_index})
-            if oi == pr.answer_index:
-                view["answer_sym"] = sym
-    return view
+def _content_view(s) -> dict:
+    """'이 문장 내용' 객관식 -> 보기 순서를 결정론적으로 섞고 정답 기호 계산."""
+    opts, answer_sym = [], ""
+    idx = list(range(len(s.content_options)))
+    # 학생/강사 렌더가 같은 순서를 쓰도록 문장 고유값으로 시드 고정(정답이 항상 ①이 되지 않게)
+    rng = random.Random(f"{s.id}|{s.english[:40]}")
+    rng.shuffle(idx)
+    for pos, oi in enumerate(idx):
+        sym = _CIRCLED[pos] if pos < len(_CIRCLED) else f"({pos + 1})"
+        correct = oi == s.content_answer_index
+        opts.append({"sym": sym, "text": s.content_options[oi], "correct": correct})
+        if correct:
+            answer_sym = sym
+    return {"options": opts, "answer_sym": answer_sym}
+
+
+def _blank_width(ko: str) -> int:
+    """빈칸 폭(px): 가려질 한국어 길이에 비례(과도하게 길지 않게 상한)."""
+    return max(min(len(ko) * 9 + 12, 300), 48)
 
 
 def _build_view(p: LecturePassage) -> dict:
@@ -72,40 +71,38 @@ def _build_view(p: LecturePassage) -> dict:
             "variation": c.variation,
         })
 
-    items = []
+    lines = []
     for s in p.analysis.sentences:
-        items.append({
+        chunks = [{"en": c.en, "ko": c.ko, "blank": c.blank,
+                   "blank_w": _blank_width(c.ko)} for c in s.chunks]
+        cv = _content_view(s)
+        lines.append({
             "id": s.id,
             "english": s.english,
             "syntax_tag": s.syntax_tag,
             "en_chunked": " / ".join(c.en for c in s.chunks),
-            "ko_chunked": " / ".join(c.ko for c in s.chunks),
-            "catch": s.catch,
-            "easy_example": s.easy_example,
+            "chunks": chunks,
+            "content_options": cv["options"],
+            "content_answer_sym": cv["answer_sym"],
+            "content_explanation": s.content_explanation,
         })
-
-    problems = [_problem_view(pr) for pr in p.analysis.problems]
 
     return {
         "item_no": (p.item_no or "").strip(),
         "theme_ko": p.theme_ko,
         "source": p.source,
         "sentences": p.sentences,
-        "lines": items,
-        "vocab_hints": _aggregate_vocab(p.analysis.sentences),
-        "problems": problems,
+        "lines": lines,
+        "vocab_list": _aggregate_vocab(p.analysis.sentences),
         "stances": STANCES,
         "structures": STRUCTURES,
-        # ⑤ 정답
+        # ③ 글 예측 정답
         "topic": ov.topic,
         "stance": ov.stance,
         "stance_reason": ov.stance_reason,
         "structure": ov.structure,
         "structure_reason": ov.structure_reason,
         "chains": chains,
-        "analogy_name": ov.analogy_name,
-        "analogy_desc": ov.analogy_desc,
-        "gist": ov.gist,
     }
 
 
