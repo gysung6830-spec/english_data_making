@@ -647,18 +647,28 @@ async function structurePassages(sentences, opts = {}) {
   let done = 0;
   const results = await mapLimit(groups, GEN_CONCURRENCY, async ([a, b]) => {
     const sub = sentences.slice(a - 1, b);
-    try {
-      const aiData = await callClaudePassages(sub, apiKey);
-      const norm = normalizePassages(aiData);
-      done += 1; onProgress(`지문 생성 ${done}/${groups.length} 완료`);
-      return norm;
-    } catch (e) {
-      // 키·모델·권한 문제(401/403/404)는 전체 공통 원인 → 건너뛰지 말고 바로 알림
-      const st = e.status || e.statusCode;
-      if (st === 401 || st === 403 || st === 404) throw e;
-      done += 1; onProgress(`지문 ${done}/${groups.length} 생성 실패(건너뜀): ${e.message}`);
-      return [];
+    // 1회 재시도(일시적 잘림·네트워크 대비). 실패해도 '원문은 반드시 보존'한다.
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        const aiData = await callClaudePassages(sub, apiKey);
+        const norm = normalizePassages(aiData);
+        // ★안전장치★ AI 가 문장을 통째로 빠뜨리면(출력 문장 0개) 실패로 보고 재시도/폴백.
+        //   → '지문 통째로 읽기'가 비어 나오는 사고를 막는다.
+        const got = norm.reduce((n, p) => n + (Array.isArray(p.sentences) ? p.sentences.length : 0), 0);
+        if (got === 0) throw new Error('AI 출력에 문장이 없음(잘림 의심)');
+        done += 1; onProgress(`지문 생성 ${done}/${groups.length} 완료`);
+        return norm;
+      } catch (e) {
+        // 키·모델·권한 문제(401/403/404)는 전체 공통 원인 → 건너뛰지 말고 바로 알림
+        const st = e.status || e.statusCode;
+        if (st === 401 || st === 403 || st === 404) throw e;
+        if (attempt === 0) continue;               // 첫 실패는 조용히 1회 재시도
+        // 최종 실패: 지문을 '버리지 말고' 원문 그대로라도 살린다(기본 끊어읽기만).
+        done += 1; onProgress(`지문 ${done}/${groups.length} 자동 분석 실패 → 원문 유지: ${e.message}`);
+        return mockPassages(sub).passages.map((p) => ({ ...p, source: '⚠ 자동 분석 실패 · 원문 유지(재생성 권장)' }));
+      }
     }
+    return mockPassages(sub).passages;  // 도달 불가 방어
   });
 
   const passages = sanitizePassages(results.flat());
