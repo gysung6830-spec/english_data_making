@@ -32246,5 +32246,7363 @@
    ],
    "echo": "'엉망·여전히 이해 못 함'이 ①의 Unsolved Mystery를 재진술"
   }
+ },
+ {
+  "key": "2022-06|35",
+  "answer": 4,
+  "answer_src": "input:2022-06 answer ④",
+  "hl": [
+   {
+    "t": "Kinship ties continue to be important today.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "Kinship ties"
+     }
+    ]
+   },
+   {
+    "t": "In modern societies such as the United States people frequently have family get-togethers, they telephone their relatives regularly, and they provide their kin with a wide variety of services.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "family get-togethers"
+     }
+    ]
+   },
+   {
+    "t": "Eugene Litwak has referred to this pattern of behaviour as the ‘modified extended family’.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "modified extended family"
+     }
+    ]
+   },
+   {
+    "t": "It is an extended family structure because multigenerational ties are maintained, but it is modified because it does not usually rest on co-residence between the generations and most extended families do not act as corporate groups.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "co-residence"
+     }
+    ]
+   },
+   {
+    "t": "Although modified extended family members often live close by, the modified extended family does not require geographical proximity and ties are maintained even when kin are separated by considerable distances.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "geographical proximity"
+     }
+    ]
+   },
+   {
+    "t": "The oldest member of the family makes the decisions on important issues, no matter how far away family members live from each other.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "decisions"
+     }
+    ]
+   },
+   {
+    "t": "In contrast to the traditional extended family where kin always live in close proximity, the members of modified extended families may freely move away from kin to seek opportunities for occupational advancement.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "In contrast"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "현대에도 친족 유대는 <b>중요</b>하며 사람들은 가족 모임·연락·도움을 나눈다",
+     "an": "— 글 전체 소재 = '친족 유대의 지속'"
+    },
+    {
+     "ko": "Litwak은 이 양식을 <b>'수정확대가족'</b>이라 명명했다",
+     "an": "— 핵심 개념 도입"
+    },
+    {
+     "ko": "다세대 유대는 유지하나 <b>동거</b>엔 기반하지 않는 구조다",
+     "an": "— '개념→정의' 흐름 → ④(가족 내 결정 권위)만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 '가장 나이 많은 구성원이 중요 사안을 결정한다'는 <b>권위·서열</b> 이야기 = 동거·거리와 무관한 수정확대가족 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 '수정확대가족'의 개념·정의·특징으로 이어지지만 ④만 가족 내 의사결정 권위로 소재가 벗어난다."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Kinship ties",
+      "hl0"
+     ],
+     [
+      "continue to be important today.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "친족 유대는",
+      "hl0"
+     ],
+     [
+      "오늘날 계속 중요하다.",
+      "hl1"
+     ]
+    ],
+    "note": "주제문: 친족 유대의 지속적 중요성"
+   },
+   {
+    "en": [
+     [
+      "Eugene Litwak has referred to this pattern of behaviour",
+      "hl0"
+     ],
+     [
+      "as the ‘modified extended family’.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "Eugene Litwak은 이 행동 양식을",
+      "hl0"
+     ],
+     [
+      "'수정확대가족'이라 불렀다.",
+      "hl1"
+     ]
+    ],
+    "note": "핵심 개념: 수정확대가족"
+   },
+   {
+    "en": [
+     [
+      "It is an extended family structure",
+      "hl0"
+     ],
+     [
+      "because multigenerational ties are maintained,",
+      "hl1"
+     ],
+     [
+      "but it is modified because it does not usually rest on co-residence",
+      "hl2"
+     ],
+     [
+      "between the generations and most extended families do not act as corporate groups.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그것은 확대가족 구조이다",
+      "hl0"
+     ],
+     [
+      "다세대 유대가 유지되기 때문에,",
+      "hl1"
+     ],
+     [
+      "그러나 수정되었는데 보통 동거에 기반하지 않기 때문이다",
+      "hl2"
+     ],
+     [
+      "세대 간에, 그리고 대부분의 확대가족은 결합 집단으로 행동하지 않는다.",
+      "hl3"
+     ]
+    ],
+    "note": "정의: 다세대 유대는 유지하나 동거엔 기반 안 함(수정)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "이 양식을 '수정확대가족'이라 명명",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "다세대 유대 유지하나 동거엔 기반 안 함",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "가까이 살아도 지리적 근접은 불필요",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "가장 나이 많은 구성원이 중요 사안 결정",
+    "verdict": "ok",
+    "jd": "✔ 근거(권위·서열 → 수정확대가족 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "전통확대가족과 달리 기회 찾아 떠남",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 가장 나이 많은 구성원이 중요 사안 결정 = 수정확대가족 흐름과 무관 · <span class=\"xo\">①</span>명명 <span class=\"xo\">②</span>동거 아님 <span class=\"xo\">③</span>근접 불필요 <span class=\"xo\">⑤</span>기회 찾아 이동",
+  "paraphrase": {
+   "from": "수정확대가족(동거 없이 유지되는 친족 유대)",
+   "to": "④ 가족 내 의사결정 권위",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "현대의 친족 유대는 동거 없이도 유지되는 '수정확대가족' 형태로 지속된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Kinship ties continue to be important today",
+     "ko": "친족 유대는 오늘날 계속 중요하다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the ‘modified extended family’",
+     "ko": "'수정확대가족'",
+     "role": "핵심개념",
+     "how": "명명"
+    },
+    {
+     "en": "it does not usually rest on co-residence between the generations",
+     "ko": "보통 세대 간 동거에 기반하지 않는다",
+     "role": "정의",
+     "how": "부연"
+    }
+   ],
+   "echo": "'The oldest member ~ makes the decisions' 권위·서열 문장(=④)은 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "Kinship ties continue to be important today. In modern societies such as the United States people frequently have family get-togethers, they telephone their relatives regularly, and they provide their kin with a wide variety of services.",
+   "cands": [
+    "Eugene Litwak has referred to this pattern of behaviour as the ‘modified extended family’.",
+    "It is an extended family structure because multigenerational ties are maintained, but it is modified because it does not usually rest on co-residence between the generations and most extended families do not act as corporate groups.",
+    "Although modified extended family members often live close by, the modified extended family does not require geographical proximity and ties are maintained even when kin are separated by considerable distances.",
+    "The oldest member of the family makes the decisions on important issues, no matter how far away family members live from each other.",
+    "In contrast to the traditional extended family where kin always live in close proximity, the members of modified extended families may freely move away from kin to seek opportunities for occupational advancement."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2023-06|35",
+  "answer": 3,
+  "answer_src": "input:2023-06 answer ③",
+  "hl": [
+   {
+    "t": "The animal in a conflict between attacking a rival and fleeing may initially not have sufficient information to enable it to make a decision straight away.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "sufficient information"
+     }
+    ]
+   },
+   {
+    "t": "If the rival is likely to win the fight, then the optimal decision would be to give up immediately and not risk getting injured.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "give up immediately"
+     }
+    ]
+   },
+   {
+    "t": "But if the rival is weak and easily defeatable, then there could be considerable benefit in going ahead and obtaining the territory, females, food or whatever is at stake.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "considerable benefit"
+     }
+    ]
+   },
+   {
+    "t": "Animals under normal circumstances maintain a very constant body weight and they eat and drink enough for their needs at regular intervals.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "body weight"
+     }
+    ]
+   },
+   {
+    "t": "By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "collect information"
+     }
+    ]
+   },
+   {
+    "t": "Many signals are now seen as having this information gathering or ‘assessment’ function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "assessment"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "갈등하는 동물은 처음엔 즉시 결정할 <b>충분한 정보</b>가 없다",
+     "an": "— 글 전체 소재 = '정보 부족 하 의사결정'"
+    },
+    {
+     "ko": "상대에 대한 <b>정보를 수집</b>하는 데 시간을 들이면 더 나은 결정을 한다",
+     "an": "— 정보 수집이 결정을 개선"
+    },
+    {
+     "ko": "많은 신호는 정보 수집·<b>평가</b> 기능으로 의사결정에 기여한다",
+     "an": "— '정보 부족→수집→평가' 흐름 → ③(체중·섭취)만 무관 = 정답 ③"
+    }
+   ],
+   "concl": "→ ③은 '동물이 평소 일정한 체중을 유지하고 규칙적으로 먹고 마신다'는 <b>체중·섭취</b> 이야기 = 정보 수집·의사결정 흐름과 무관 = <b>③</b>",
+   "gnote": "①②④⑤는 '정보 부족→수집→평가→더 나은 결정'으로 이어지지만 ③만 소재가 벗어난다."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The animal in a conflict between attacking a rival and fleeing",
+      "hl0"
+     ],
+     [
+      "may initially not have sufficient information",
+      "hl1"
+     ],
+     [
+      "to enable it to make a decision straight away.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "경쟁자를 공격할지 달아날지 갈등하는 동물은",
+      "hl0"
+     ],
+     [
+      "처음엔 충분한 정보가 없을 수 있다",
+      "hl1"
+     ],
+     [
+      "즉시 결정을 내리게 해 준다.",
+      "hl2"
+     ]
+    ],
+    "note": "주제문: 즉시 결정할 정보가 부족"
+   },
+   {
+    "en": [
+     [
+      "By taking a little extra time to collect information about the opponent,",
+      "hl0"
+     ],
+     [
+      "the animal is more likely to reach a decision",
+      "hl1"
+     ],
+     [
+      "that maximizes its chances of winning",
+      "hl2"
+     ],
+     [
+      "than if it takes a decision without such information.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "상대에 대한 정보를 모으는 데 약간의 시간을 더 들임으로써,",
+      "hl0"
+     ],
+     [
+      "그 동물은 결정에 도달할 가능성이 더 높다",
+      "hl1"
+     ],
+     [
+      "승리 가능성을 극대화하는",
+      "hl2"
+     ],
+     [
+      "그런 정보 없이 결정할 때보다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 정보 수집이 더 나은 결정으로"
+   },
+   {
+    "en": [
+     [
+      "Many signals are now seen as having this information gathering or ‘assessment’ function,",
+      "hl0"
+     ],
+     [
+      "directly contributing to the mechanism of the decision-making process",
+      "hl1"
+     ],
+     [
+      "by supplying vital information about the likely outcomes of the various options.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "많은 신호는 이제 이 정보 수집 혹은 '평가' 기능을 갖는 것으로 여겨진다,",
+      "hl0"
+     ],
+     [
+      "의사결정 과정의 기제에 직접 기여하면서,",
+      "hl1"
+     ],
+     [
+      "다양한 선택의 가능한 결과에 관한 핵심 정보를 제공함으로써.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 신호=정보 수집·평가 기능 → 의사결정에 기여"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "상대가 이길 것 같으면 즉시 포기",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "상대가 약하면 나아가 이득",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "동물은 평소 일정 체중 유지·규칙적 섭취",
+    "verdict": "ok",
+    "jd": "✔ 근거(체중·섭취 → 의사결정 흐름과 무관)"
+   },
+   {
+    "n": 4,
+    "tx": "정보 수집에 시간 들이면 승리 확률 극대화",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 5,
+    "tx": "신호는 정보 수집·평가 기능",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 동물은 일정 체중 유지·규칙적 섭취 = 의사결정 흐름과 무관 · <span class=\"xo\">①</span>강한 상대엔 포기 <span class=\"xo\">②</span>약한 상대엔 이득 <span class=\"xo\">④</span>정보가 결정 개선 <span class=\"xo\">⑤</span>신호=정보수집 기능",
+  "paraphrase": {
+   "from": "정보 수집을 통한 의사결정",
+   "to": "③ 체중 유지·규칙적 섭취",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "갈등 상황의 동물은 상대에 관한 정보를 수집해 더 나은 결정을 내린다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "may initially not have sufficient information to ... make a decision",
+     "ko": "처음엔 결정할 충분한 정보가 없을 수 있다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "collect information about the opponent",
+     "ko": "상대에 대한 정보를 수집",
+     "role": "전개",
+     "how": "부연"
+    },
+    {
+     "en": "having this information gathering or ‘assessment’ function",
+     "ko": "정보 수집·평가 기능을 가짐",
+     "role": "정답근거",
+     "how": "동의어"
+    }
+   ],
+   "echo": "'Animals ~ maintain a very constant body weight' 체중·섭취 문장(=③)은 흐름과 무관 = ③"
+  },
+  "mugwan": {
+   "intro": "The animal in a conflict between attacking a rival and fleeing may initially not have sufficient information to enable it to make a decision straight away.",
+   "cands": [
+    "If the rival is likely to win the fight, then the optimal decision would be to give up immediately and not risk getting injured.",
+    "But if the rival is weak and easily defeatable, then there could be considerable benefit in going ahead and obtaining the territory, females, food or whatever is at stake.",
+    "Animals under normal circumstances maintain a very constant body weight and they eat and drink enough for their needs at regular intervals.",
+    "By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.",
+    "Many signals are now seen as having this information gathering or ‘assessment’ function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options."
+   ],
+   "irrelevant": 3
+  },
+  "num": 35
+ },
+ {
+  "key": "2024-06|35",
+  "answer": 3,
+  "answer_src": "input:2024-06 answer ③",
+  "hl": [
+   {
+    "t": "Interestingly, experts do not suffer as much as beginners when performing complex tasks or combining multiple tasks.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "experts do not suffer"
+     }
+    ]
+   },
+   {
+    "t": "Because experts have extensive practice within a limited domain, the key component skills in their domain tend to be highly practiced and more automated.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "highly practiced and more automated"
+     }
+    ]
+   },
+   {
+    "t": "Each of these highly practiced skills then demands relatively few cognitive resources, effectively lowering the total cognitive load that experts experience.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "cognitive load"
+     }
+    ]
+   },
+   {
+    "t": "Thus, experts can perform complex tasks and combine multiple tasks relatively easily.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "relatively easily"
+     }
+    ]
+   },
+   {
+    "t": "Furthermore, beginners are excellent at processing the tasks when the tasks are divided and isolated.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "excellent"
+     }
+    ]
+   },
+   {
+    "t": "This is not because they necessarily have more cognitive resources than beginners; rather, because of the high level of fluency they have achieved in performing key skills, they can do more with what they have.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "fluency"
+     }
+    ]
+   },
+   {
+    "t": "Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "Beginners"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>전문가</b>는 복잡·다중 과제에서 초보자만큼 힘들어하지 않는다",
+     "an": "— 글 전체 소재 = '전문가의 우위'"
+    },
+    {
+     "ko": "잘 연습된 기술은 인지 자원을 적게 써 <b>인지 부하</b>를 낮춘다",
+     "an": "— 자동화 → 낮은 부하"
+    },
+    {
+     "ko": "그래서 전문가는 복잡·다중 과제를 비교적 <b>쉽게</b> 수행한다",
+     "an": "— '자동화→낮은 부하→쉬운 수행' 흐름 → ③(초보자 강점)만 무관 = 정답 ③"
+    }
+   ],
+   "concl": "→ ③은 '초보자가 과제가 분리·고립되면 뛰어나게 처리한다'는 <b>초보자 강점</b> 이야기 = 전문가의 자동화·낮은 인지부하 흐름과 무관 = <b>③</b>",
+   "gnote": "①②④⑤는 전문가의 자동화된 기술→낮은 인지부하→쉬운 수행으로 이어지지만 ③만 초보자를 칭찬해 소재가 벗어난다."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Interestingly, experts do not suffer as much as beginners",
+      "hl0"
+     ],
+     [
+      "when performing complex tasks or combining multiple tasks.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "흥미롭게도, 전문가는 초보자만큼 어려움을 겪지 않는다",
+      "hl0"
+     ],
+     [
+      "복잡한 과제를 수행하거나 여러 과제를 결합할 때.",
+      "hl1"
+     ]
+    ],
+    "note": "주제문: 전문가는 복잡 과제에서 덜 힘듦"
+   },
+   {
+    "en": [
+     [
+      "Each of these highly practiced skills then demands relatively few cognitive resources,",
+      "hl0"
+     ],
+     [
+      "effectively lowering the total cognitive load that experts experience.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이 잘 연습된 기술 각각은 상대적으로 적은 인지 자원을 요구하며,",
+      "hl0"
+     ],
+     [
+      "전문가가 겪는 총 인지 부하를 효과적으로 낮춘다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 자동화된 기술 → 인지 부하 낮춤"
+   },
+   {
+    "en": [
+     [
+      "Thus, experts can perform complex tasks",
+      "hl0"
+     ],
+     [
+      "and combine multiple tasks relatively easily.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서, 전문가는 복잡한 과제를 수행할 수 있다",
+      "hl0"
+     ],
+     [
+      "그리고 여러 과제를 비교적 쉽게 결합한다.",
+      "hl1"
+     ]
+    ],
+    "note": "결론: 전문가는 복잡 과제를 쉽게 수행"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "숙련 기술은 인지자원 적게 요구·부하 낮춤",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "그래서 전문가는 복잡 과제 쉽게 수행",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "초보자는 과제가 분리되면 잘 처리",
+    "verdict": "ok",
+    "jd": "✔ 근거(초보자 강점 → 전문가 흐름과 무관)"
+   },
+   {
+    "n": 4,
+    "tx": "자원이 많아서가 아니라 유창성 덕",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 5,
+    "tx": "초보자는 유창성 못 이뤄 어려움",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 초보자는 과제가 분리되면 잘 처리 = 전문가 자동화 흐름과 무관 · <span class=\"xo\">①</span>인지부하 낮춤 <span class=\"xo\">②</span>복잡 과제 쉽게 <span class=\"xo\">④</span>유창성 덕분 <span class=\"xo\">⑤</span>초보자는 어려움",
+  "paraphrase": {
+   "from": "전문가의 자동화·낮은 인지부하",
+   "to": "③ 초보자의 과제 처리 강점",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "전문가는 기술이 자동화돼 인지 부하가 낮아 복잡 과제를 쉽게 해낸다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "experts do not suffer as much as beginners",
+     "ko": "전문가는 초보자만큼 힘들어하지 않는다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "lowering the total cognitive load that experts experience",
+     "ko": "전문가의 인지 부하를 낮춤",
+     "role": "근거",
+     "how": "인과"
+    },
+    {
+     "en": "experts can perform complex tasks and combine multiple tasks relatively easily",
+     "ko": "전문가는 복잡·다중 과제를 비교적 쉽게 수행",
+     "role": "결론",
+     "how": "동의어"
+    }
+   ],
+   "echo": "'beginners are excellent at processing ~ divided and isolated' 문장(=③)은 흐름과 무관 = ③"
+  },
+  "mugwan": {
+   "intro": "Interestingly, experts do not suffer as much as beginners when performing complex tasks or combining multiple tasks. Because experts have extensive practice within a limited domain, the key component skills in their domain tend to be highly practiced and more automated.",
+   "cands": [
+    "Each of these highly practiced skills then demands relatively few cognitive resources, effectively lowering the total cognitive load that experts experience.",
+    "Thus, experts can perform complex tasks and combine multiple tasks relatively easily.",
+    "Furthermore, beginners are excellent at processing the tasks when the tasks are divided and isolated.",
+    "This is not because they necessarily have more cognitive resources than beginners; rather, because of the high level of fluency they have achieved in performing key skills, they can do more with what they have.",
+    "Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency."
+   ],
+   "irrelevant": 3
+  },
+  "num": 35
+ },
+ {
+  "key": "2025-수능|35",
+  "answer": 4,
+  "answer_src": "input:2025-수능 answer ④",
+  "hl": [
+   {
+    "t": "The expansion of sports tourism in the twentieth century has been influenced by further developments in transportation.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "transportation"
+     }
+    ]
+   },
+   {
+    "t": "Just as the railways revolutionized travel in the nineteenth century, so the automobile produced even more dramatic changes in the twentieth.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "automobile"
+     }
+    ]
+   },
+   {
+    "t": "The significance of the car in the development of sport and tourism generally has attracted considerable coverage and it has had no less an impact on sports tourism specifically.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "significance of the car"
+     }
+    ]
+   },
+   {
+    "t": "Although originally invented towards the end of the nineteenth century, it started to become a mass form of transport in the 1920s in the USA and rather later in Britain.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "mass form of transport"
+     }
+    ]
+   },
+   {
+    "t": "Apart from its convenience and flexibility, the car has the additional advantages of affording access to many areas not served by public transport, as well as allowing the easy transport of luggage and equipment.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "convenience and flexibility"
+     }
+    ]
+   },
+   {
+    "t": "The expansion of reasonably priced, good quality accommodation associated with tourism growth has also facilitated the growth of locally based restaurants.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "restaurants"
+     }
+    ]
+   },
+   {
+    "t": "As a result, it was invaluable for the development of many forms of sports tourism but especially those which require the transportation of people and equipment to relatively remote locations.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "As a result"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "20세기 스포츠 관광 확장은 <b>교통</b> 발전에 영향을 받았다",
+     "an": "— 글 전체 소재 = '교통과 스포츠 관광'"
+    },
+    {
+     "ko": "철도처럼 <b>자동차</b>가 20세기에 더 극적인 변화를 만들었다",
+     "an": "— 초점 = 자동차"
+    },
+    {
+     "ko": "자동차의 중요성은 스포츠 관광에 <b>큰 영향</b>을 미쳤다",
+     "an": "— '교통→자동차→스포츠 관광' 흐름 → ④(숙박·식당)만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 '저렴·양질의 숙박 확대가 지역 식당 성장을 촉진했다'는 <b>숙박·식당</b> 이야기 = 자동차·교통이 스포츠 관광을 이끈 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 자동차(교통)가 스포츠 관광 발전에 미친 영향으로 이어지지만 ④만 숙박·식당으로 소재가 벗어난다."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The expansion of sports tourism in the twentieth century",
+      "hl0"
+     ],
+     [
+      "has been influenced by further developments in transportation.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "20세기 스포츠 관광의 확장은",
+      "hl0"
+     ],
+     [
+      "교통의 추가적 발전에 영향을 받아 왔다.",
+      "hl1"
+     ]
+    ],
+    "note": "주제문: 스포츠 관광 확장은 교통 발전의 영향"
+   },
+   {
+    "en": [
+     [
+      "Just as the railways revolutionized travel in the nineteenth century,",
+      "hl0"
+     ],
+     [
+      "so the automobile produced even more dramatic changes in the twentieth.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "철도가 19세기 여행을 혁신했던 것처럼,",
+      "hl0"
+     ],
+     [
+      "자동차는 20세기에 훨씬 더 극적인 변화를 만들었다.",
+      "hl1"
+     ]
+    ],
+    "note": "초점: 자동차의 등장"
+   },
+   {
+    "en": [
+     [
+      "The significance of the car in the development of sport and tourism generally",
+      "hl0"
+     ],
+     [
+      "has attracted considerable coverage",
+      "hl1"
+     ],
+     [
+      "and it has had no less an impact on sports tourism specifically.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "스포츠와 관광 발전 전반에서 자동차의 중요성은",
+      "hl0"
+     ],
+     [
+      "상당한 주목을 받아 왔고",
+      "hl1"
+     ],
+     [
+      "스포츠 관광에도 그에 못지않은 영향을 미쳤다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 자동차가 스포츠 관광에 큰 영향"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "차의 중요성, 스포츠관광에 큰 영향",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "19세기말 발명, 1920년대 대중교통화",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "편의·유연성 외 접근성·짐 운반 이점",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "저렴·양질 숙박 확대가 지역 식당 성장 촉진",
+    "verdict": "ok",
+    "jd": "✔ 근거(숙박·식당 → 자동차·교통 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "결과적으로 스포츠관광 발전에 귀중",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 숙박 확대가 지역 식당 성장 촉진 = 자동차·교통 흐름과 무관 · <span class=\"xo\">①</span>차의 큰 영향 <span class=\"xo\">②</span>대중교통화 <span class=\"xo\">③</span>접근성·짐 운반 <span class=\"xo\">⑤</span>스포츠관광에 귀중",
+  "paraphrase": {
+   "from": "자동차(교통)와 스포츠 관광",
+   "to": "④ 숙박 확대·지역 식당 성장",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "20세기 스포츠 관광의 확장은 자동차라는 교통 발전에 힘입었다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "has been influenced by further developments in transportation",
+     "ko": "교통 발전에 영향을 받았다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the automobile produced even more dramatic changes",
+     "ko": "자동차가 더 극적인 변화를 만듦",
+     "role": "초점",
+     "how": "부연"
+    },
+    {
+     "en": "it has had no less an impact on sports tourism specifically",
+     "ko": "스포츠 관광에 큰 영향을 미침",
+     "role": "정답근거",
+     "how": "동의어"
+    }
+   ],
+   "echo": "'expansion of ~ accommodation ~ growth of locally based restaurants' 숙박·식당 문장(=④)은 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "The expansion of sports tourism in the twentieth century has been influenced by further developments in transportation. Just as the railways revolutionized travel in the nineteenth century, so the automobile produced even more dramatic changes in the twentieth.",
+   "cands": [
+    "The significance of the car in the development of sport and tourism generally has attracted considerable coverage and it has had no less an impact on sports tourism specifically.",
+    "Although originally invented towards the end of the nineteenth century, it started to become a mass form of transport in the 1920s in the USA and rather later in Britain.",
+    "Apart from its convenience and flexibility, the car has the additional advantages of affording access to many areas not served by public transport, as well as allowing the easy transport of luggage and equipment.",
+    "The expansion of reasonably priced, good quality accommodation associated with tourism growth has also facilitated the growth of locally based restaurants.",
+    "As a result, it was invaluable for the development of many forms of sports tourism but especially those which require the transportation of people and equipment to relatively remote locations."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2026-09|35",
+  "answer": 4,
+  "answer_src": "input:2026-09 answer ④",
+  "hl": [
+   {
+    "t": "All workers need access to mentors that can provide them with valuable information about their job, their workplace, and the resources that are available within their organization.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "valuable information"
+     }
+    ]
+   },
+   {
+    "t": "Mentors also provide much needed psychosocial support.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "psychosocial support"
+     }
+    ]
+   },
+   {
+    "t": "Having a diverse network of mentors is important for dominant and minority group members alike.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "diverse network of mentors"
+     }
+    ]
+   },
+   {
+    "t": "Minority group members need diverse mentors so that they can gain insight into what it means to be employed by a particular organization or in a particular field or profession.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "Minority group members"
+     }
+    ]
+   },
+   {
+    "t": "Majority workers benefit by having a network of diverse mentors because it increases their understanding and sensitivity to the unique realities of diverse workers and their own identity, and perhaps even their own forms of privilege.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "Majority workers"
+     }
+    ]
+   },
+   {
+    "t": "Mentoring has been typically required and praised as an essential component in the personal development of employers.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "employers"
+     }
+    ]
+   },
+   {
+    "t": "The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "ultimate goal"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "다양한 <b>멘토 네트워크</b>는 다수·소수 구성원 모두에게 중요하다",
+     "an": "— 글 전체 소재 = '다양한 멘토의 유익'"
+    },
+    {
+     "ko": "<b>소수</b> 집단은 다양한 멘토로 통찰을 얻는다",
+     "an": "— 소수 측 유익"
+    },
+    {
+     "ko": "<b>다수</b> 노동자도 이해·민감성이 높아져 이득을 본다",
+     "an": "— '모두에 중요→소수·다수 유익' 흐름 → ④(고용주)만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 '멘토링이 고용주의 개인 발전에 필수 요소로 요구·칭송돼 왔다'는 <b>고용주</b> 이야기 = 노동자를 위한 다양한 멘토의 유익 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 다양한 멘토 네트워크가 소수·다수 노동자 모두에게 주는 유익으로 이어지지만 ④만 고용주로 대상이 바뀌어 벗어난다."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Having a diverse network of mentors is important",
+      "hl0"
+     ],
+     [
+      "for dominant and minority group members alike.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "다양한 멘토 네트워크를 갖는 것은 중요하다",
+      "hl0"
+     ],
+     [
+      "지배 집단과 소수 집단 구성원 모두에게 똑같이.",
+      "hl1"
+     ]
+    ],
+    "note": "주제문: 다양한 멘토는 모두에게 중요"
+   },
+   {
+    "en": [
+     [
+      "Minority group members need diverse mentors",
+      "hl0"
+     ],
+     [
+      "so that they can gain insight",
+      "hl1"
+     ],
+     [
+      "into what it means to be employed by a particular organization or in a particular field or profession.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "소수 집단 구성원은 다양한 멘토가 필요하다",
+      "hl0"
+     ],
+     [
+      "그래서 통찰을 얻을 수 있도록",
+      "hl1"
+     ],
+     [
+      "특정 조직이나 특정 분야·직종에 고용된다는 것이 무엇인지에 대한.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 소수 집단은 다양한 멘토로 통찰 획득"
+   },
+   {
+    "en": [
+     [
+      "Majority workers benefit by having a network of diverse mentors",
+      "hl0"
+     ],
+     [
+      "because it increases their understanding and sensitivity",
+      "hl1"
+     ],
+     [
+      "to the unique realities of diverse workers and their own identity,",
+      "hl2"
+     ],
+     [
+      "and perhaps even their own forms of privilege.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "다수 집단 노동자도 다양한 멘토 네트워크로 이득을 본다",
+      "hl0"
+     ],
+     [
+      "그것이 이해와 민감성을 높이기 때문에",
+      "hl1"
+     ],
+     [
+      "다양한 노동자의 고유한 현실과 자신의 정체성에 대한,",
+      "hl2"
+     ],
+     [
+      "그리고 어쩌면 자신의 특권 형태에 대한 것까지.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 다수 집단도 다양한 멘토로 이해·민감성 향상"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "다양한 멘토 네트워크는 다수·소수 모두에 중요",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "소수 집단은 다양한 멘토로 통찰 획득",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "다수 노동자도 이해·민감성 향상",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "멘토링은 고용주 개인발전의 필수로 요구·칭송",
+    "verdict": "ok",
+    "jd": "✔ 근거(고용주 → 노동자·다양한 멘토 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "궁극 목표는 개인이 더 알고 참여",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 멘토링은 고용주 개인발전의 필수 = 노동자·다양한 멘토 흐름과 무관 · <span class=\"xo\">①</span>모두에 중요 <span class=\"xo\">②</span>소수 통찰 <span class=\"xo\">③</span>다수 이득 <span class=\"xo\">⑤</span>궁극 목표",
+  "paraphrase": {
+   "from": "노동자에게 주는 다양한 멘토의 유익",
+   "to": "④ 고용주의 개인 발전에 필수인 멘토링",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "다양한 멘토 네트워크는 소수·다수 노동자 모두에게 유익하다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Having a diverse network of mentors is important for dominant and minority group members alike",
+     "ko": "다양한 멘토 네트워크는 다수·소수 모두에게 중요",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Minority group members need diverse mentors",
+     "ko": "소수 집단은 다양한 멘토가 필요",
+     "role": "근거1",
+     "how": "부연"
+    },
+    {
+     "en": "Majority workers benefit by having a network of diverse mentors",
+     "ko": "다수 집단도 다양한 멘토로 이득",
+     "role": "근거2",
+     "how": "부연"
+    }
+   ],
+   "echo": "'Mentoring ~ essential component in the personal development of employers' 고용주 문장(=④)은 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "All workers need access to mentors that can provide them with valuable information about their job, their workplace, and the resources that are available within their organization. Mentors also provide much needed psychosocial support.",
+   "cands": [
+    "Having a diverse network of mentors is important for dominant and minority group members alike.",
+    "Minority group members need diverse mentors so that they can gain insight into what it means to be employed by a particular organization or in a particular field or profession.",
+    "Majority workers benefit by having a network of diverse mentors because it increases their understanding and sensitivity to the unique realities of diverse workers and their own identity, and perhaps even their own forms of privilege.",
+    "Mentoring has been typically required and praised as an essential component in the personal development of employers.",
+    "The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2022-수능|35",
+  "answer": 4,
+  "answer_src": "official:2022-수능|35 ⑤(무관 ④)",
+  "hl": [
+   {
+    "t": "Since their introduction, information systems have substantially changed the way business is conducted.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "information systems"
+     }
+    ]
+   },
+   {
+    "t": "This is particularly true for business in the shape and form of cooperation between firms that involves an integration of value chains across multiple units.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "cooperation between firms"
+     }
+    ]
+   },
+   {
+    "t": "The resulting networks do not only cover the business units of a single firm but typically also include multiple units from different firms.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "networks"
+     }
+    ]
+   },
+   {
+    "t": "As a consequence, firms do not only need to consider their internal organization in order to ensure sustainable business performance; they also need to take into account the entire ecosystem of units surrounding them.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "결과",
+      "word": "ecosystem"
+     }
+    ]
+   },
+   {
+    "t": "Many major companies are fundamentally changing their business models by focusing on profitable units and cutting off less profitable ones.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "profitable units"
+     }
+    ]
+   },
+   {
+    "t": "In order to allow these different units to cooperate successfully, the existence of a common platform is crucial.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "common platform"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "정보 시스템이 기업 운영 방식을 크게 바꿈",
+     "an": "— 소재: 정보 시스템과 기업 (협력)"
+    },
+    {
+     "ko": "특히 여러 단위에 걸친 기업 간 <b>협력</b>에서 그러함",
+     "an": "— 기업 간 네트워크·생태계로 확장"
+    },
+    {
+     "ko": "이 단위들이 협력하려면 <b>공동 플랫폼</b>이 필수",
+     "an": "— '정보시스템→기업협력→생태계→공동플랫폼' 흐름 → ④만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 '수익 단위에 집중하고 비수익 단위를 잘라낸다'는 <b>수익성·구조조정</b> 이야기 = 협력·플랫폼 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 '정보시스템→기업 간 협력→생태계 고려→공동 플랫폼'으로 이어지지만 ④만 소재(수익성)가 벗어남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Since their introduction,",
+      "hl0"
+     ],
+     [
+      "information systems have",
+      "hl1"
+     ],
+     [
+      "substantially changed the way business is conducted.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그것들이 도입된 이래,",
+      "hl0"
+     ],
+     [
+      "정보 시스템은",
+      "hl1"
+     ],
+     [
+      "기업이 운영되는 방식을 상당히 바꾸어 왔다.",
+      "hl2"
+     ]
+    ],
+    "note": "주제문: 정보 시스템이 기업을 바꿈"
+   },
+   {
+    "en": [
+     [
+      "This is particularly true for business",
+      "hl0"
+     ],
+     [
+      "in the shape and form of cooperation between firms",
+      "hl1"
+     ],
+     [
+      "that involves an integration of value chains across multiple units.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이것은 특히 기업에 대해 사실이다",
+      "hl0"
+     ],
+     [
+      "기업 간 협력의 형태를 띠는",
+      "hl1"
+     ],
+     [
+      "여러 단위에 걸친 가치 사슬의 통합을 수반하는.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 기업 간 협력"
+   },
+   {
+    "en": [
+     [
+      "In order to allow these different units to cooperate successfully,",
+      "hl0"
+     ],
+     [
+      "the existence of a common platform is crucial.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이 서로 다른 단위들이 성공적으로 협력하도록 하려면,",
+      "hl0"
+     ],
+     [
+      "공동 플랫폼의 존재가 필수적이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 공동 플랫폼 필수"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "기업 간 협력·가치사슬 통합",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "네트워크가 여러 기업의 단위 포함",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "전체 생태계까지 고려해야 함",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "수익 단위 집중·비수익 단위 제거",
+    "verdict": "ok",
+    "jd": "✔ 근거(수익성·구조조정 → 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "공동 플랫폼의 존재가 필수",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 수익 단위 집중·비수익 단위 제거 = 협력·플랫폼 흐름과 무관 · <span class=\"xo\">①</span>기업 간 협력 <span class=\"xo\">②</span>다기업 네트워크 <span class=\"xo\">③</span>생태계 고려 <span class=\"xo\">⑤</span>공동 플랫폼 필수",
+  "paraphrase": {
+   "from": "정보 시스템 기반 기업 간 협력·네트워크·공동 플랫폼",
+   "to": "④ 수익성 집중·비수익 단위 제거(구조조정)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "정보 시스템은 기업 간 협력·네트워크를 확장시켜 공동 플랫폼을 필수로 만든다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "cooperation between firms that involves an integration of value chains",
+     "ko": "가치 사슬 통합을 수반하는 기업 간 협력",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the existence of a common platform is crucial",
+     "ko": "공동 플랫폼의 존재가 필수적",
+     "role": "정답근거",
+     "how": "귀결"
+    }
+   ],
+   "echo": "'focusing on profitable units and cutting off less profitable ones' 수익성·구조조정 문장은 협력·플랫폼 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "Since their introduction, information systems have substantially changed the way business is conducted.",
+   "cands": [
+    "This is particularly true for business in the shape and form of cooperation between firms that involves an integration of value chains across multiple units.",
+    "The resulting networks do not only cover the business units of a single firm but typically also include multiple units from different firms.",
+    "As a consequence, firms do not only need to consider their internal organization in order to ensure sustainable business performance; they also need to take into account the entire ecosystem of units surrounding them.",
+    "Many major companies are fundamentally changing their business models by focusing on profitable units and cutting off less profitable ones.",
+    "In order to allow these different units to cooperate successfully, the existence of a common platform is crucial."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2023-수능|35",
+  "answer": 3,
+  "answer_src": "official:2023-수능|35 ⑤(무관 ③)",
+  "hl": [
+   {
+    "t": "Actors, singers, politicians and countless others recognise the power of the human voice as a means of communication beyond the simple decoding of the words that are used.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "도입",
+      "word": "human voice"
+     }
+    ]
+   },
+   {
+    "t": "Learning to control your voice and use it for different purposes is, therefore, one of the most important skills to develop as an early career teacher.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제",
+      "word": "control your voice"
+     }
+    ]
+   },
+   {
+    "t": "The more confidently you give instructions, the higher the chance of a positive class response.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "confidently"
+     }
+    ]
+   },
+   {
+    "t": "There are times when being able to project your voice loudly will be very useful when working in school, and knowing that you can cut through a noisy classroom, dinner hall or playground is a great skill to have.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "project your voice"
+     }
+    ]
+   },
+   {
+    "t": "In order to address serious noise issues in school, students, parents and teachers should search for a solution together.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "noise issues"
+     }
+    ]
+   },
+   {
+    "t": "However, I would always advise that you use your loudest voice incredibly sparingly and avoid shouting as much as possible.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "loudest voice"
+     }
+    ]
+   },
+   {
+    "t": "A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "measured tone"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "자신의 <b>목소리를 조절</b>해 다양한 목적에 쓰는 것이 교사의 핵심 기술",
+     "an": "— 소재: 교사의 목소리 조절·활용"
+    },
+    {
+     "ko": "때로 <b>목소리를 크게</b> 내는 것이 유용",
+     "an": "— 목소리 사용법의 한 측면"
+    },
+    {
+     "ko": "그러나 <b>가장 큰 목소리</b>는 아껴 쓰라(조용한 톤이 더 효과적)",
+     "an": "— 시종 '목소리 조절·사용' → ③만 무관 = 정답 ③"
+    }
+   ],
+   "concl": "→ ③은 '학교 소음 문제를 학생·학부모·교사가 함께 해결하자'는 <b>소음 대책·협력</b> 이야기 = 목소리 조절 흐름과 무관 = <b>③</b>",
+   "gnote": "①②④⑤는 '목소리 조절→자신 있게/크게→아껴 쓰기→조용한 톤'으로 이어지지만 ③만 소재(소음 문제 해결)가 벗어남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Learning to control your voice",
+      "hl0"
+     ],
+     [
+      "and use it for different purposes is, therefore,",
+      "hl1"
+     ],
+     [
+      "one of the most important skills to develop as an early career teacher.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "자신의 목소리를 조절하는 법을 배우는 것은",
+      "hl0"
+     ],
+     [
+      "그리고 그것을 다양한 목적에 사용하는 것은, 따라서,",
+      "hl1"
+     ],
+     [
+      "초임 교사로서 길러야 할 가장 중요한 기술 중 하나이다.",
+      "hl2"
+     ]
+    ],
+    "note": "주제문: 목소리 조절이 교사의 핵심 기술"
+   },
+   {
+    "en": [
+     [
+      "There are times when being able to project your voice loudly",
+      "hl0"
+     ],
+     [
+      "will be very useful when working in school,",
+      "hl1"
+     ],
+     [
+      "and knowing that you can cut through a noisy classroom, dinner hall or playground is a great skill to have.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "목소리를 크게 낼 수 있는 것이 유용한 때가 있다",
+      "hl0"
+     ],
+     [
+      "학교에서 일할 때 매우 유용할 것이며,",
+      "hl1"
+     ],
+     [
+      "시끄러운 교실, 식당, 운동장을 뚫고 낼 수 있음을 아는 것은 대단한 기술이다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 큰 목소리가 유용"
+   },
+   {
+    "en": [
+     [
+      "However, I would always advise",
+      "hl0"
+     ],
+     [
+      "that you use your loudest voice incredibly sparingly",
+      "hl1"
+     ],
+     [
+      "and avoid shouting as much as possible.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 나는 항상 조언하겠다",
+      "hl0"
+     ],
+     [
+      "가장 큰 목소리는 극도로 아껴 쓰고",
+      "hl1"
+     ],
+     [
+      "가능한 한 소리 지르는 것을 피하라고.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 큰 목소리는 아껴 쓰라"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "자신 있게 지시할수록 반응 좋음",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "목소리를 크게 내는 것이 유용",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "학교 소음 문제를 함께 해결하자",
+    "verdict": "ok",
+    "jd": "✔ 근거(소음 대책·협력 → 흐름과 무관)"
+   },
+   {
+    "n": 4,
+    "tx": "가장 큰 목소리는 아껴 쓰라",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 5,
+    "tx": "조용하고 절제된 톤이 더 효과적",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 학교 소음 문제를 함께 해결하자 = 목소리 조절 흐름과 무관 · <span class=\"xo\">①</span>자신감 있는 지시 <span class=\"xo\">②</span>큰 목소리 유용 <span class=\"xo\">④</span>큰 목소리 아껴쓰기 <span class=\"xo\">⑤</span>조용한 톤이 효과적",
+  "paraphrase": {
+   "from": "교사의 목소리 조절·사용(크게/아껴/조용한 톤)",
+   "to": "③ 학교 소음 문제 공동 해결",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "교사는 목적에 맞게 목소리를 조절해 사용해야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Learning to control your voice ... one of the most important skills",
+     "ko": "목소리 조절이 교사의 핵심 기술",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "use your loudest voice incredibly sparingly",
+     "ko": "가장 큰 목소리는 아껴 쓰라",
+     "role": "정답근거",
+     "how": "세부"
+    }
+   ],
+   "echo": "'address serious noise issues ... search for a solution together' 소음 대책 문장은 목소리 조절 흐름과 무관 = ③"
+  },
+  "mugwan": {
+   "intro": "Actors, singers, politicians and countless others recognise the power of the human voice as a means of communication beyond the simple decoding of the words that are used. Learning to control your voice and use it for different purposes is, therefore, one of the most important skills to develop as an early career teacher.",
+   "cands": [
+    "The more confidently you give instructions, the higher the chance of a positive class response.",
+    "There are times when being able to project your voice loudly will be very useful when working in school, and knowing that you can cut through a noisy classroom, dinner hall or playground is a great skill to have.",
+    "In order to address serious noise issues in school, students, parents and teachers should search for a solution together.",
+    "However, I would always advise that you use your loudest voice incredibly sparingly and avoid shouting as much as possible.",
+    "A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting."
+   ],
+   "irrelevant": 3
+  },
+  "num": 35
+ },
+ {
+  "key": "2024-수능|35",
+  "answer": 3,
+  "answer_src": "official:2024-수능|35 ⑤(무관 ③)",
+  "hl": [
+   {
+    "t": "Speaking fast is a high-risk proposition.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제",
+      "word": "high-risk"
+     }
+    ]
+   },
+   {
+    "t": "It’s nearly impossible to maintain the ideal conditions to be persuasive, well-spoken, and effective when the mouth is traveling well over the speed limit.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "speed limit"
+     }
+    ]
+   },
+   {
+    "t": "Although we’d like to think that our minds are sharp enough to always make good decisions with the greatest efficiency, they just aren’t.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "they just aren’t"
+     }
+    ]
+   },
+   {
+    "t": "In reality, the brain arrives at an intersection of four or five possible things to say and sits idling for a couple of seconds, considering the options.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "idling"
+     }
+    ]
+   },
+   {
+    "t": "Making a good decision helps you speak faster because it provides you with more time to come up with your responses.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "speak faster"
+     }
+    ]
+   },
+   {
+    "t": "When the brain stops sending navigational instructions back to the mouth and the mouth is moving too fast to pause, that’s when you get a verbal fender bender, otherwise known as filler.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "filler"
+     }
+    ]
+   },
+   {
+    "t": "Um, ah, you know, and like are what your mouth does when it has nowhere to go.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "예시",
+      "word": "nowhere to go"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "빠르게 말하는 것은 <b>위험이 큰</b> 일",
+     "an": "— 소재: 빠른 말하기의 위험"
+    },
+    {
+     "ko": "뇌는 선택지 앞에서 몇 초간 멈춰 <b>공회전</b>함",
+     "an": "— 뇌가 판단할 시간이 필요"
+    },
+    {
+     "ko": "입이 뇌보다 빨라 멈추지 못하면 <b>군말(filler)</b>이 생김",
+     "an": "— '빠른 말=위험→뇌 지연→군말' 흐름 → ③만 무관 = 정답 ③"
+    }
+   ],
+   "concl": "→ ③은 '좋은 결정을 하면 응답 시간이 생겨 더 빨리 말할 수 있다'며 <b>빠른 말하기를 이롭게</b> 그림 = 빠른 말하기의 위험 흐름과 무관(오히려 반대) = <b>③</b>",
+   "gnote": "①②④⑤는 '빠른 말=위험→뇌의 지연→군말'로 이어지지만 ③만 논리(빠른 말하기 옹호)가 벗어남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Speaking fast",
+      "hl0"
+     ],
+     [
+      "is a high-risk proposition.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "빠르게 말하는 것은",
+      "hl0"
+     ],
+     [
+      "위험이 큰 일이다.",
+      "hl1"
+     ]
+    ],
+    "note": "주제문: 빠른 말하기는 위험"
+   },
+   {
+    "en": [
+     [
+      "In reality, the brain arrives at an intersection",
+      "hl0"
+     ],
+     [
+      "of four or five possible things to say",
+      "hl1"
+     ],
+     [
+      "and sits idling for a couple of seconds, considering the options.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "실제로 뇌는 교차로에 도달해",
+      "hl0"
+     ],
+     [
+      "말할 수 있는 네다섯 가지 선택지 앞에서",
+      "hl1"
+     ],
+     [
+      "선택지를 따져 보며 몇 초간 멈춰 공회전한다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 뇌가 판단하느라 멈춤"
+   },
+   {
+    "en": [
+     [
+      "When the brain stops sending navigational instructions back to the mouth",
+      "hl0"
+     ],
+     [
+      "and the mouth is moving too fast to pause,",
+      "hl1"
+     ],
+     [
+      "that’s when you get a verbal fender bender, otherwise known as filler.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "뇌가 입으로 보내던 길 안내를 멈추고",
+      "hl0"
+     ],
+     [
+      "입이 멈추기엔 너무 빨리 움직일 때,",
+      "hl1"
+     ],
+     [
+      "그때 이른바 군말(filler)이라는 언어적 접촉사고가 난다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 뇌보다 빠른 입 → 군말"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "마음은 늘 효율적이지 않음",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "뇌가 선택지 앞에서 공회전",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "좋은 결정이 더 빨리 말하게 해줌",
+    "verdict": "ok",
+    "jd": "✔ 근거(빠른 말하기 옹호 → 흐름과 무관·반대)"
+   },
+   {
+    "n": 4,
+    "tx": "입이 뇌보다 빨라 군말 발생",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 5,
+    "tx": "음·어 같은 군말의 예",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> 좋은 결정이 더 빨리 말하게 해줌 = 빠른 말하기 위험 흐름과 무관 · <span class=\"xo\">①</span>마음은 비효율적 <span class=\"xo\">②</span>뇌의 공회전 <span class=\"xo\">④</span>군말 발생 <span class=\"xo\">⑤</span>군말의 예",
+  "paraphrase": {
+   "from": "빠른 말하기의 위험(뇌 지연·군말)",
+   "to": "③ 빠른 말하기를 이롭게 봄(반대 논리)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "빠르게 말하면 뇌가 따라잡지 못해 군말이 생기는 위험이 있다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "Speaking fast is a high-risk proposition",
+     "ko": "빠른 말하기는 위험이 큼",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "that’s when you get a verbal fender bender, otherwise known as filler",
+     "ko": "그때 군말이 생김",
+     "role": "정답근거",
+     "how": "결과"
+    }
+   ],
+   "echo": "'Making a good decision helps you speak faster' 빠른 말하기를 옹호하는 문장은 흐름과 무관(반대) = ③"
+  },
+  "mugwan": {
+   "intro": "Speaking fast is a high-risk proposition. It’s nearly impossible to maintain the ideal conditions to be persuasive, well-spoken, and effective when the mouth is traveling well over the speed limit.",
+   "cands": [
+    "Although we’d like to think that our minds are sharp enough to always make good decisions with the greatest efficiency, they just aren’t.",
+    "In reality, the brain arrives at an intersection of four or five possible things to say and sits idling for a couple of seconds, considering the options.",
+    "Making a good decision helps you speak faster because it provides you with more time to come up with your responses.",
+    "When the brain stops sending navigational instructions back to the mouth and the mouth is moving too fast to pause, that’s when you get a verbal fender bender, otherwise known as filler.",
+    "Um, ah, you know, and like are what your mouth does when it has nowhere to go."
+   ],
+   "irrelevant": 3
+  },
+  "num": 35
+ },
+ {
+  "key": "2026-06|35",
+  "answer": 4,
+  "answer_src": "official:2026-06|35 ⑤(무관 ④)",
+  "hl": [
+   {
+    "t": "A genuine glacier must be permanent.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "정의",
+      "word": "permanent"
+     }
+    ]
+   },
+   {
+    "t": "Generally, this implies that suﬃcient fresh snow must accumulate during the cold months to oﬀset melting during the summer, although on a year-to-year basis, glaciers may expand or contract, depending on local and global climatic conditions.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "accumulate"
+     }
+    ]
+   },
+   {
+    "t": "Today, most glaciers around the world are melting because of the warming climate, and it appears that the rate of melting is accelerating.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제",
+      "word": "melting"
+     }
+    ]
+   },
+   {
+    "t": "This has been documented spectacularly in places such as the Alps, where historical records have been kept and dated sketches and photographs are available to compare with the present extent of ice.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "사례",
+      "word": "the Alps"
+     }
+    ]
+   },
+   {
+    "t": "Even over periods as short as a few decades, satellite images show that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "dramatic reduction"
+     }
+    ]
+   },
+   {
+    "t": "The various rocks and minerals contained in glaciers have become a popular subject of science projects in schools.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "rocks and minerals"
+     }
+    ]
+   },
+   {
+    "t": "It is estimated that many small mountain glaciers will disappear completely within ten to twenty years unless there is a sudden and unexpected change in the present warming trend.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "disappear completely"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "오늘날 대부분 빙하가 온난화로 <b>녹고</b> 있고 속도가 빨라짐",
+     "an": "— 소재: 온난화에 따른 빙하 융해"
+    },
+    {
+     "ko": "위성 사진이 산악 빙하의 <b>극적 감소</b>를 보여 줌",
+     "an": "— 융해의 증거"
+    },
+    {
+     "ko": "많은 빙하가 10~20년 안에 <b>완전히 사라질</b> 것으로 추정",
+     "an": "— 시종 '빙하 융해·감소·소멸' → ④만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 '빙하 속 암석·광물이 학교 과학 과제의 인기 주제가 되었다'는 <b>교육·소재</b> 이야기 = 빙하 융해 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 '온난화→빙하 융해→극적 감소→소멸 추정'으로 이어지지만 ④만 소재(암석·광물·학교 과제)가 벗어남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Today, most glaciers around the world are melting",
+      "hl0"
+     ],
+     [
+      "because of the warming climate, and",
+      "hl1"
+     ],
+     [
+      "it appears that the rate of melting is accelerating.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "오늘날 전 세계 대부분의 빙하가 녹고 있다",
+      "hl0"
+     ],
+     [
+      "온난화 기후 때문에, 그리고",
+      "hl1"
+     ],
+     [
+      "그 융해 속도는 빨라지고 있는 것으로 보인다.",
+      "hl2"
+     ]
+    ],
+    "note": "주제문: 온난화로 빙하가 녹음"
+   },
+   {
+    "en": [
+     [
+      "Even over periods as short as a few decades,",
+      "hl0"
+     ],
+     [
+      "satellite images show that dramatic reduction of mountain glaciers",
+      "hl1"
+     ],
+     [
+      "has occurred in the Andes, the Himalayas, and elsewhere.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "수십 년이라는 짧은 기간에도,",
+      "hl0"
+     ],
+     [
+      "위성 사진은 산악 빙하의 극적인 감소가",
+      "hl1"
+     ],
+     [
+      "안데스, 히말라야 등지에서 일어났음을 보여 준다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 산악 빙하의 극적 감소"
+   },
+   {
+    "en": [
+     [
+      "It is estimated that many small mountain glaciers",
+      "hl0"
+     ],
+     [
+      "will disappear completely within ten to twenty years",
+      "hl1"
+     ],
+     [
+      "unless there is a sudden and unexpected change in the present warming trend.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "많은 작은 산악 빙하가",
+      "hl0"
+     ],
+     [
+      "10~20년 안에 완전히 사라질 것으로 추정된다",
+      "hl1"
+     ],
+     [
+      "현재의 온난화 추세에 갑작스럽고 예상치 못한 변화가 없다면.",
+      "hl2"
+     ]
+    ],
+    "note": "결론: 빙하가 곧 사라질 것"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "온난화로 빙하가 녹고 가속화",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "알프스에서 기록·사진으로 입증",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "위성 사진이 극적 감소 보여줌",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "빙하 속 암석·광물이 학교 과제 주제",
+    "verdict": "ok",
+    "jd": "✔ 근거(교육·소재 → 융해 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "10~20년 내 완전 소멸 추정",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> 빙하 속 암석·광물이 학교 과제 주제 = 빙하 융해 흐름과 무관 · <span class=\"xo\">①</span>온난화로 융해 가속 <span class=\"xo\">②</span>알프스 기록 입증 <span class=\"xo\">③</span>위성 사진 극적 감소 <span class=\"xo\">⑤</span>수십 년 내 소멸",
+  "paraphrase": {
+   "from": "온난화에 따른 빙하 융해·감소·소멸",
+   "to": "④ 빙하 속 암석·광물의 학교 과학 과제",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "온난화로 전 세계 빙하가 빠르게 녹아 사라지고 있다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "most glaciers around the world are melting because of the warming climate",
+     "ko": "온난화로 대부분 빙하가 녹는 중",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "many small mountain glaciers will disappear completely within ten to twenty years",
+     "ko": "많은 빙하가 곧 완전히 사라질 것",
+     "role": "정답근거",
+     "how": "귀결"
+    }
+   ],
+   "echo": "'various rocks and minerals ... a popular subject of science projects in schools' 교육·소재 문장은 빙하 융해 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "A genuine glacier must be permanent. Generally, this implies that suﬃcient fresh snow must accumulate during the cold months to oﬀset melting during the summer, although on a year-to-year basis, glaciers may expand or contract, depending on local and global climatic conditions.",
+   "cands": [
+    "Today, most glaciers around the world are melting because of the warming climate, and it appears that the rate of melting is accelerating.",
+    "This has been documented spectacularly in places such as the Alps, where historical records have been kept and dated sketches and photographs are available to compare with the present extent of ice.",
+    "Even over periods as short as a few decades, satellite images show that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere.",
+    "The various rocks and minerals contained in glaciers have become a popular subject of science projects in schools.",
+    "It is estimated that many small mountain glaciers will disappear completely within ten to twenty years unless there is a sudden and unexpected change in the present warming trend."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2027-06|35",
+  "answer": 4,
+  "answer_src": "official:2027-06|35 ⑤(무관 ④)",
+  "hl": [
+   {
+    "t": "The bigger someone is, the more damage they can do to themselves through even a relatively innocuous accident.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제",
+      "word": "the more damage"
+     }
+    ]
+   },
+   {
+    "t": "Despite toddlers falling over and bumping themselves regularly, the injuries they sustain are rarely serious.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "toddlers"
+     }
+    ]
+   },
+   {
+    "t": "Their relatively thick bones in comparison to their mass mean they rarely build up enough energy, even at top speed, to do themselves much damage.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "thick bones"
+     }
+    ]
+   },
+   {
+    "t": "Because of their increased mass (compounded by the fact that they are falling from a greater height and that their reactions may be slower), adults falling over will impact the ground with a much larger force.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "larger force"
+     }
+    ]
+   },
+   {
+    "t": "The nonlinear relationship between mass and bone strength means that although their bones are thicker than a toddler’s in absolute terms, they may not be relatively thick enough to compensate for the larger impact caused by their increased mass.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "nonlinear relationship"
+     }
+    ]
+   },
+   {
+    "t": "The body mass index (BMI) can serve as a convenient way for non-experts to examine their health conditions in daily lives.",
+    "role": "skip",
+    "tags": [
+     {
+      "sig": "무관",
+      "word": "body mass index"
+     }
+    ]
+   },
+   {
+    "t": "For the same reasons, taller people have been found to suffer more fall-related injuries ― like hip breaks ― than shorter people.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결론",
+      "word": "taller people"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "몸집이 <b>클수록</b> 사소한 사고로도 더 큰 손상을 입음",
+     "an": "— 소재: 몸집(질량)과 낙상 손상"
+    },
+    {
+     "ko": "어른은 늘어난 질량으로 <b>훨씬 큰 힘</b>으로 땅에 부딪침",
+     "an": "— 질량↑ → 충격력↑"
+    },
+    {
+     "ko": "같은 이유로 <b>키 큰 사람</b>이 낙상 부상을 더 많이 겪음",
+     "an": "— 시종 '몸집·질량→충격→부상' → ④만 무관 = 정답 ④"
+    }
+   ],
+   "concl": "→ ④는 'BMI가 비전문가의 건강 상태 점검에 편리하다'는 <b>건강 지표</b> 이야기 = 몸집·낙상 손상 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 '몸집·질량↑→충격력↑→키 큰 사람 부상↑'으로 이어지지만 ④만 소재(BMI 건강 지표)가 벗어남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The bigger someone is,",
+      "hl0"
+     ],
+     [
+      "the more damage they can do to",
+      "hl1"
+     ],
+     [
+      "themselves through even a relatively innocuous accident.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "누군가가 몸집이 클수록,",
+      "hl0"
+     ],
+     [
+      "그들이 자신에게 입힐 수 있는 손상은 더 크다",
+      "hl1"
+     ],
+     [
+      "비교적 무해한 사고를 통해서도.",
+      "hl2"
+     ]
+    ],
+    "note": "주제문: 몸집이 클수록 손상 큼"
+   },
+   {
+    "en": [
+     [
+      "Because of their increased mass",
+      "hl0"
+     ],
+     [
+      "(compounded by the fact that they are falling from a greater height and that their reactions may be slower),",
+      "hl1"
+     ],
+     [
+      "adults falling over will impact the ground with a much larger force.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그들의 늘어난 질량 때문에",
+      "hl0"
+     ],
+     [
+      "(더 높은 곳에서 떨어지고 반응이 더 느릴 수 있다는 사실이 겹쳐),",
+      "hl1"
+     ],
+     [
+      "넘어지는 어른은 훨씬 더 큰 힘으로 땅에 부딪친다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 질량↑ → 충격력↑"
+   },
+   {
+    "en": [
+     [
+      "For the same reasons,",
+      "hl0"
+     ],
+     [
+      "taller people have been found to suffer more fall-related injuries",
+      "hl1"
+     ],
+     [
+      "― like hip breaks ― than shorter people.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "같은 이유로,",
+      "hl0"
+     ],
+     [
+      "키가 큰 사람이 낙상 관련 부상을 더 많이 겪는 것으로 밝혀졌다",
+      "hl1"
+     ],
+     [
+      "― 고관절 골절 같은 ― 키 작은 사람보다.",
+      "hl2"
+     ]
+    ],
+    "note": "결론: 키 큰 사람이 부상 더 겪음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "아기는 뼈가 두꺼워 손상 적음",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 2,
+    "tx": "어른은 질량 때문에 큰 힘으로 충돌",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "질량-뼈 강도의 비선형 관계",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 4,
+    "tx": "BMI가 건강 점검에 편리한 도구",
+    "verdict": "ok",
+    "jd": "✔ 근거(건강 지표 → 낙상 손상 흐름과 무관)"
+   },
+   {
+    "n": 5,
+    "tx": "키 큰 사람이 낙상 부상 더 겪음",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> BMI가 건강 점검에 편리한 도구 = 몸집·낙상 손상 흐름과 무관 · <span class=\"xo\">①</span>아기 뼈 두꺼워 손상↓ <span class=\"xo\">②</span>어른 큰 힘 충돌 <span class=\"xo\">③</span>비선형 관계 <span class=\"xo\">⑤</span>키 큰 사람 부상↑",
+  "paraphrase": {
+   "from": "몸집(질량)↑ → 낙상 충격·부상↑",
+   "to": "④ BMI(건강 상태 점검 지표)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "몸집이 클수록 낙상 시 더 큰 힘을 받아 부상 위험이 커진다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "The bigger someone is, the more damage they can do to themselves",
+     "ko": "몸집이 클수록 손상이 큼",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "taller people have been found to suffer more fall-related injuries",
+     "ko": "키 큰 사람이 낙상 부상을 더 겪음",
+     "role": "정답근거",
+     "how": "귀결"
+    }
+   ],
+   "echo": "'The body mass index (BMI) ... examine their health conditions' BMI 건강 지표 문장은 낙상 손상 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "The bigger someone is, the more damage they can do to themselves through even a relatively innocuous accident. Despite toddlers falling over and bumping themselves regularly, the injuries they sustain are rarely serious.",
+   "cands": [
+    "Their relatively thick bones in comparison to their mass mean they rarely build up enough energy, even at top speed, to do themselves much damage.",
+    "Because of their increased mass (compounded by the fact that they are falling from a greater height and that their reactions may be slower), adults falling over will impact the ground with a much larger force.",
+    "The nonlinear relationship between mass and bone strength means that although their bones are thicker than a toddler’s in absolute terms, they may not be relatively thick enough to compensate for the larger impact caused by their increased mass.",
+    "The body mass index (BMI) can serve as a convenient way for non-experts to examine their health conditions in daily lives.",
+    "For the same reasons, taller people have been found to suffer more fall-related injuries ― like hip breaks ― than shorter people."
+   ],
+   "irrelevant": 4
+  },
+  "num": 35
+ },
+ {
+  "key": "2022-06|40",
+  "answer": 3,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "The idea that planting trees could have a social or political significance appears to have been invented by the English, though it has since spread widely.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "According to Keith Thomas’s history Man and the Natural World, seventeenth- and eighteenth-century aristocrats began planting hardwood trees, usually in lines, to declare the extent of their property and the permanence of their claim to it.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "permanence"
+     }
+    ]
+   },
+   {
+    "t": "“What can be more pleasant,” the editor of a magazine for gentlemen asked his readers, “than to have the bounds and limits of your own property preserved and continued from age to age by the testimony of such living and growing witnesses?”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "반복",
+      "word": "from age to age"
+     }
+    ]
+   },
+   {
+    "t": "Planting trees had the additional advantage of being regarded as a patriotic act, for the Crown had declared a severe shortage of the hardwood on which the Royal Navy depended.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "첨가",
+      "word": "additional"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "귀족들은 소유지의 범위와 소유권의 <b>영속성</b>을 선언하려 나무를 심었다",
+     "an": "— 소유를 표시하는 '지속적(lasting)' 진술 (A)"
+    },
+    {
+     "ko": "경계가 <b>대대로</b>(from age to age) 보존된다",
+     "an": "— 영속성 강조 = lasting (A)"
+    },
+    {
+     "ko": "나무 심기는 <b>애국적 행위</b>로 여겨졌다",
+     "an": "— 충성심의 '표출(exhibition)' (B)"
+    }
+   ],
+   "concl": "→ 소유를 표시하는 '지속적(lasting=A)' 진술이자 국가에 대한 충성심의 '표출(exhibition=B)' = <b>③</b>",
+   "gnote": "회색(도입문)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "According to Keith Thomas’s history Man and the Natural World,",
+      "hl0"
+     ],
+     [
+      "seventeenth- and eighteenth-century aristocrats began planting hardwood trees, usually in lines,",
+      "hl1"
+     ],
+     [
+      "to declare the extent of their property",
+      "hl2"
+     ],
+     [
+      "and the permanence of their claim to it.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "Keith Thomas의 역사서 Man and the Natural World에 따르면,",
+      "hl0"
+     ],
+     [
+      "17~18세기 귀족들은 흔히 줄지어 활엽수를 심기 시작했다,",
+      "hl1"
+     ],
+     [
+      "자신의 소유지 범위를 선언하기 위해",
+      "hl2"
+     ],
+     [
+      "그리고 그에 대한 소유권의 영속성을 선언하기 위해.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 귀족은 소유지 범위와 소유권의 영속성을 선언하려 나무를 심음"
+   },
+   {
+    "en": [
+     [
+      "“What can be more pleasant,” the editor of a magazine for gentlemen asked his readers,",
+      "hl0"
+     ],
+     [
+      "“than to have the bounds and limits of your own property preserved and continued from age to age",
+      "hl1"
+     ],
+     [
+      "by the testimony of such living and growing witnesses?”",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "“무엇이 더 즐거울 수 있겠는가,”라고 신사용 잡지의 편집자가 독자들에게 물었다,",
+      "hl0"
+     ],
+     [
+      "“자신의 소유지 경계가 대대로 보존되고 이어지는 것보다",
+      "hl1"
+     ],
+     [
+      "그러한 살아 자라는 증인들의 증언으로?”",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 경계가 '대대로'(from age to age) 보존됨 → 영속적 표시"
+   },
+   {
+    "en": [
+     [
+      "Planting trees had the additional advantage of being regarded as a patriotic act,",
+      "hl0"
+     ],
+     [
+      "for the Crown had declared a severe shortage of the hardwood",
+      "hl1"
+     ],
+     [
+      "on which the Royal Navy depended.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "나무 심기는 애국적 행위로 여겨지는 추가적 이점도 있었다,",
+      "hl0"
+     ],
+     [
+      "왜냐하면 왕실이 활엽수의 심각한 부족을 선언했기 때문이다",
+      "hl1"
+     ],
+     [
+      "해군이 의존하던 그 활엽수의.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 나무 심기는 애국적 행위로 여겨짐 → 충성심의 표출"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "unstable … confirmation",
+    "verdict": "x",
+    "jd": "✘ (A) 'unstable'가 지문과 어긋남"
+   },
+   {
+    "n": 2,
+    "tx": "unstable … exaggeration",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 3,
+    "tx": "lasting … exhibition",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 4,
+    "tx": "lasting … manipulation",
+    "verdict": "x",
+    "jd": "✘ (B) 'manipulation'이 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "official … justification",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> lasting … exhibition · <span class=\"xo\">①②④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "the permanence of their claim·a patriotic act",
+   "to": "lasting·exhibition",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "귀족의 나무 심기는 소유권을 표시하는 지속적 진술이자 애국심의 표출이었다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the permanence of their claim to it",
+     "ko": "소유권의 영속성",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "preserved and continued from age to age",
+     "ko": "대대로 보존되고 이어짐",
+     "role": "재진술",
+     "how": "반복"
+    },
+    {
+     "en": "being regarded as a patriotic act",
+     "ko": "애국적 행위로 여겨짐",
+     "role": "정답근거",
+     "how": "첨가"
+    }
+   ],
+   "echo": "'소유권의 영속성'→'지속적(A)', '애국적 행위'→'표출(B)'로 재진술 = 정답 <b>③</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2022-수능|40",
+  "answer": 1,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "Philip Kitcher and Wesley Salmon have suggested that there are two possible alternatives among philosophical theories of explanation.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "One is the view that scientific explanation consists in the unification of broad bodies of phenomena under a minimal number of generalizations.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "a minimal number"
+     }
+    ]
+   },
+   {
+    "t": "According to this view, the (or perhaps, a) goal of science is to construct an economical framework of laws or generalizations that are capable of subsuming all observable phenomena.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Scientific explanations organize and systematize our knowledge of the empirical world; the more economical the systematization, the deeper our understanding of what is explained.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The other view is the causal/mechanical approach.",
+    "role": "gray",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "The other view"
+     }
+    ]
+   },
+   {
+    "t": "According to it, a scientific explanation of a phenomenon consists of uncovering the mechanisms that produced the phenomenon of interest.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This view sees the explanation of individual events as primary, with the explanation of generalizations flowing from them.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "individual events"
+     }
+    ]
+   },
+   {
+    "t": "That is, the explanation of scientific generalizations comes from the causal mechanisms that produce the regularities.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "That is"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "첫 것견해: 현상을 <b>최소한의 수</b>의 일반화로 통합",
+     "an": "— 모든 관찰을 다루는 원리 수가 '최소(least)' (A)"
+    },
+    {
+     "ko": "둘째 것견해: <b>개별 사건</b> 설명이 일차적",
+     "an": "— 개별 현상에서 출발"
+    },
+    {
+     "ko": "즉, 일반화는 <b>규칙성</b>을 만드는 인과 메커니즘에서 나옴",
+     "an": "— 개별 현상에서 일반적 '패턴(patterns)' 도출 (B)"
+    }
+   ],
+   "concl": "→ 최소한(least=A)의 원리로 통합하거나, 개별 현상에서 일반적 규칙성=패턴(patterns=B)을 찾는다 = <b>①</b>",
+   "gnote": "회색(부연·예시 문장)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "One is the view that scientific explanation consists in the unification of broad bodies of phenomena",
+      "hl0"
+     ],
+     [
+      "under a minimal number of generalizations.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "하나는 과학적 설명이 광범위한 현상들의 통합에 있다는 견해이다",
+      "hl0"
+     ],
+     [
+      "최소한의 수의 일반화 아래에서.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 첫 견해 — 최소한의 일반화로 현상을 통합 (least)"
+   },
+   {
+    "en": [
+     [
+      "This view sees the explanation of individual events as primary,",
+      "hl0"
+     ],
+     [
+      "with the explanation of generalizations flowing from them.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이 견해는 개별 사건들의 설명을 일차적인 것으로 본다,",
+      "hl0"
+     ],
+     [
+      "일반화의 설명은 그것들로부터 흘러나오면서.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 둘째 견해 — 개별 사건 설명이 우선"
+   },
+   {
+    "en": [
+     [
+      "That is, the explanation of scientific generalizations comes from the causal mechanisms",
+      "hl0"
+     ],
+     [
+      "that produce the regularities.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "즉, 과학적 일반화의 설명은 인과적 메커니즘에서 나온다",
+      "hl0"
+     ],
+     [
+      "규칙성을 만들어내는.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 개별 현상의 인과에서 규칙성(=패턴)이 도출 (patterns)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "least … patterns",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 2,
+    "tx": "fixed … features",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 3,
+    "tx": "limited … functions",
+    "verdict": "x",
+    "jd": "✘ (B) 'functions'가 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "fixed … rules",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "least … assumptions",
+    "verdict": "x",
+    "jd": "✘ (A)는 맞으나 (B) 'assumptions'가 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> least … patterns · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "a minimal number of generalizations·produce the regularities",
+   "to": "least·patterns",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "과학적 설명은 최소한의 원리로 통합하거나 개별 현상에서 규칙성(패턴)을 찾는 두 방식이 있다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "under a minimal number of generalizations",
+     "ko": "최소한의 일반화 아래에서",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "the explanation of individual events as primary",
+     "ko": "개별 사건 설명이 일차적",
+     "role": "대조",
+     "how": "대조"
+    },
+    {
+     "en": "the causal mechanisms that produce the regularities",
+     "ko": "규칙성을 만드는 인과 메커니즘",
+     "role": "정답근거",
+     "how": "재진술"
+    }
+   ],
+   "echo": "'최소한의 일반화'→'least(A)', '규칙성'→'patterns(B)'로 재진술 = 정답 <b>①</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2023-09|40",
+  "answer": 1,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "A striving to demonstrate individual personality through designs should not be surprising.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Most designers are educated to work as individuals, and design literature contains countless references to ‘the designer’.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Personal flair is without doubt an absolute necessity in some product categories, particularly relatively small objects, with a low degree of technological complexity, such as furniture, lighting, small appliances, and housewares.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In larger-scale projects, however, even where a strong personality exercises powerful influence, the fact that substantial numbers of designers are employed in implementing a concept can easily be overlooked.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "however"
+     }
+    ]
+   },
+   {
+    "t": "The emphasis on individuality is therefore problematic ― rather than actually designing, many successful designer ‘personalities’ function more as creative managers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "therefore"
+     }
+    ]
+   },
+   {
+    "t": "A distinction needs to be made between designers working truly alone and those working in a group.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In the latter case, management organization and processes can be equally as relevant as designers’ creativity.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "In the latter case"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "<b>대규모</b> 프로젝트에서는 다수의 디자이너가 함께 일함",
+     "an": "— 프로젝트의 '규모(size)'가 변수 (A)"
+    },
+    {
+     "ko": "성공한 디자이너는 실제 디자인보다 <b>창의적 관리자</b>로 기능",
+     "an": "— 조율·관리 역할"
+    },
+    {
+     "ko": "팀 작업에서는 <b>관리 조직·과정</b>이 창의성만큼 중요",
+     "an": "— 팀 환경을 '조율(coordinate)'하는 능력 (B)"
+    }
+   ],
+   "concl": "→ 프로젝트의 '규모(size=A)'에 따라 팀 기반 환경을 '조율(coordinate=B)'하는 능력이 개인 자질만큼 중요 = <b>①</b>",
+   "gnote": "회색(도입·소형 제품 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In larger-scale projects, however,",
+      "hl0"
+     ],
+     [
+      "even where a strong personality exercises powerful influence,",
+      "hl1"
+     ],
+     [
+      "the fact that substantial numbers of designers are employed in implementing a concept",
+      "hl2"
+     ],
+     [
+      "can easily be overlooked.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 더 큰 규모의 프로젝트에서는,",
+      "hl0"
+     ],
+     [
+      "강한 개성이 강력한 영향력을 행사하는 경우에도,",
+      "hl1"
+     ],
+     [
+      "상당수의 디자이너가 하나의 개념을 구현하는 데 고용된다는 사실이",
+      "hl2"
+     ],
+     [
+      "쉽게 간과될 수 있다.",
+      "hl3"
+     ]
+    ],
+    "note": "근거: 대규모(규모=size) 프로젝트에서는 다수의 디자이너가 협업"
+   },
+   {
+    "en": [
+     [
+      "The emphasis on individuality is therefore problematic ―",
+      "hl0"
+     ],
+     [
+      "rather than actually designing,",
+      "hl1"
+     ],
+     [
+      "many successful designer ‘personalities’ function more as creative managers.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서 개성에 대한 강조는 문제가 있다 ―",
+      "hl0"
+     ],
+     [
+      "실제로 디자인하기보다,",
+      "hl1"
+     ],
+     [
+      "많은 성공한 디자이너 '유명인'들은 창의적 관리자로서 더 많이 기능한다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 성공한 디자이너는 실제로 관리자(조율자) 역할"
+   },
+   {
+    "en": [
+     [
+      "In the latter case,",
+      "hl0"
+     ],
+     [
+      "management organization and processes can be equally as relevant",
+      "hl1"
+     ],
+     [
+      "as designers’ creativity.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "후자의 경우,",
+      "hl0"
+     ],
+     [
+      "관리 조직과 과정이 똑같이 중요할 수 있다",
+      "hl1"
+     ],
+     [
+      "디자이너의 창의성만큼.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 팀 작업에서는 관리·조율이 창의성만큼 중요 (coordinate)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "size … coordinate",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 2,
+    "tx": "cost … systematize",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 3,
+    "tx": "size … identify",
+    "verdict": "x",
+    "jd": "✘ (B) 'identify'가 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "cost … innovate",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "goal … investigate",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> size … coordinate · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "larger-scale projects·management organization and processes",
+   "to": "size·coordinate",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "프로젝트 규모에 따라 팀 환경을 조율하는 능력이 개인 자질만큼 중요하다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "In larger-scale projects, however",
+     "ko": "그러나 더 큰 규모의 프로젝트에서는",
+     "role": "주제문",
+     "how": "역접"
+    },
+    {
+     "en": "function more as creative managers",
+     "ko": "창의적 관리자로 기능",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "management organization and processes can be equally as relevant",
+     "ko": "관리 조직·과정이 똑같이 중요",
+     "role": "정답근거",
+     "how": "비교"
+    }
+   ],
+   "echo": "'더 큰 규모'→'규모(size=A)', '관리 조직·과정'→'조율(coordinate=B)'로 재진술 = 정답 <b>①</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2024-09|40",
+  "answer": 2,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "Research for historical fiction may focus on under-documented ordinary people, events, or sites.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Fiction helps portray everyday situations, feelings, and atmosphere that recreate the historical context.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Historical fiction adds “flesh to the bare bones that historians are able to uncover and by doing so provides an account that while not necessarily true provides a clearer indication of past events, circumstances and cultures.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "a clearer indication"
+     }
+    ]
+   },
+   {
+    "t": "Fiction adds color, sound, drama to the past, as much as it invents parts of the past.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "And Robert Rosenstone argues that invention is not the weakness of films, it is their strength.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Fiction can allow users to see parts of the past that have never ― for lack of archives ― been represented.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결핍",
+      "word": "for lack of archives"
+     }
+    ]
+   },
+   {
+    "t": "In fact, Gilden Seavey explains that if producers of historical fiction had strongly held the strict academic standards, many historical subjects would remain unexplored for lack of appropriate evidence.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "연결",
+      "word": "for lack of appropriate evidence"
+     }
+    ]
+   },
+   {
+    "t": "Historical fiction should, therefore, not be seen as the opposite of professional history, but rather as a challenging representation of the past from which both public historians and popular audiences may learn.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "역사소설은 역사가가 밝힌 <b>앙상한 뼈대에 살을 붙여</b> 더 분명한 이해를 제공",
+     "an": "— 역사 이해를 '풍부하게(enrich)' (B)"
+    },
+    {
+     "ko": "<b>자료(archives) 부족</b>으로 결코 재현된 적 없는 과거를 보게 함",
+     "an": "— 증거가 '불충분(insufficient)' (A)"
+    },
+    {
+     "ko": "엄격한 학문 기준을 고수했다면 <b>적절한 증거 부족</b>으로 미탐구로 남았을 것",
+     "an": "— 증거가 '불충분(insufficient)' (A)"
+    }
+   ],
+   "concl": "→ 역사소설은 '불충분한(insufficient=A)' 증거로 과거를 재구성하지만 이해를 '풍부하게(enrich=B)' 한다 = <b>②</b>",
+   "gnote": "회색(도입·부가 설명)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Historical fiction adds “flesh to the bare bones that historians are able to uncover",
+      "hl0"
+     ],
+     [
+      "and by doing so provides an account that while not necessarily true",
+      "hl1"
+     ],
+     [
+      "provides a clearer indication of past events, circumstances and cultures.”",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "역사소설은 역사가들이 밝혀낼 수 있는 앙상한 뼈대에 '살을 붙이고'",
+      "hl0"
+     ],
+     [
+      "그렇게 함으로써 반드시 사실은 아니더라도",
+      "hl1"
+     ],
+     [
+      "과거의 사건, 상황, 문화에 대한 더 분명한 이해를 제공하는 서술을 제공한다.”",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 뼈대에 살을 붙여 더 분명한 이해 제공 → 풍부하게 함"
+   },
+   {
+    "en": [
+     [
+      "Fiction can allow users to see parts of the past",
+      "hl0"
+     ],
+     [
+      "that have never ― for lack of archives ― been represented.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "소설은 사용자가 과거의 부분들을 볼 수 있게 해준다",
+      "hl0"
+     ],
+     [
+      "자료의 부족으로 결코 재현된 적 없는.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 자료(증거) 부족 → 불충분한 증거"
+   },
+   {
+    "en": [
+     [
+      "In fact, Gilden Seavey explains that if producers of historical fiction had strongly held the strict academic standards,",
+      "hl0"
+     ],
+     [
+      "many historical subjects would remain unexplored",
+      "hl1"
+     ],
+     [
+      "for lack of appropriate evidence.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "사실, Gilden Seavey는 만약 역사소설 제작자들이 엄격한 학문적 기준을 강하게 고수했다면이라고 설명한다,",
+      "hl0"
+     ],
+     [
+      "많은 역사적 주제들이 미탐구로 남았을 것이라고",
+      "hl1"
+     ],
+     [
+      "적절한 증거의 부족으로.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 적절한 증거 부족 → 불충분한 증거"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "insignificant … delay",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   },
+   {
+    "n": 2,
+    "tx": "insufficient … enrich",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 3,
+    "tx": "concrete … enhance",
+    "verdict": "x",
+    "jd": "✘ (A) 'concrete'가 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "outdated … improve",
+    "verdict": "x",
+    "jd": "✘ (A) 'outdated'가 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "limited … disturb",
+    "verdict": "x",
+    "jd": "✘ (B) 'disturb'가 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> insufficient … enrich · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "for lack of appropriate evidence·flesh to the bare bones",
+   "to": "insufficient·enrich",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "역사소설은 불충분한 증거로 과거를 재구성하지만 역사 이해를 풍부하게 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "flesh to the bare bones that historians are able to uncover",
+     "ko": "역사가가 밝힌 뼈대에 살을 붙임",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "for lack of archives",
+     "ko": "자료의 부족",
+     "role": "정답근거",
+     "how": "결핍"
+    },
+    {
+     "en": "for lack of appropriate evidence",
+     "ko": "적절한 증거의 부족",
+     "role": "재진술",
+     "how": "반복"
+    }
+   ],
+   "echo": "'적절한 증거의 부족'→'insufficient(A)', '뼈대에 살을 붙여 이해 제공'→'enrich(B)'로 재진술 = 정답 <b>②</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2025-06|40",
+  "answer": 2,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "There is a tendency, once the dust of an emergency has settled down, to seek the reduction of famine vulnerability primarily in enhanced economic growth, or the revival of the rural economy, or the diversification of economic activities.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The potential contribution of greater economic success, if it involves vulnerable groups, cannot be denied.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인정",
+      "word": "cannot be denied"
+     }
+    ]
+   },
+   {
+    "t": "At the same time, it is important to recognize that, no matter how fast they grow, countries where a large part of the population derive their livelihood from uncertain sources cannot hope to prevent famines without specialized entitlement protection mechanisms involving direct public intervention.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "At the same time"
+     }
+    ]
+   },
+   {
+    "t": "Rapid growth of the economy in Botswana, or of the agricultural sector in Kenya, or of food production in Zimbabwe, explains at best only a small part of their success in preventing recurrent threats of famine.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The real achievements of these countries lie in having provided direct public support to their populations in times of crisis.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "강조",
+      "word": "The real achievements"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "경제적 성공의 잠재적 기여는 <b>부정될 수 없다</b>",
+     "an": "— 경제성장이 어느 정도 '유익함(fruitful)' (A)"
+    },
+    {
+     "ko": "아무리 빨리 성장해도 <b>직접적 공적 개입 없이는</b> 기아를 막을 수 없다",
+     "an": "— 직접 접근이 '결정적(critical)' (B)"
+    },
+    {
+     "ko": "이 나라들의 진짜 성취는 위기 시 <b>직접적 공적 지원</b>에 있다",
+     "an": "— 직접 접근이 '결정적(critical)' (B)"
+    }
+   ],
+   "concl": "→ 경제성장은 다소 '유익(fruitful=A)'하지만, 직접적 지원이 '결정적(critical=B)' 역할을 한다 = <b>②</b>",
+   "gnote": "회색(도입·국가별 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The potential contribution of greater economic success,",
+      "hl0"
+     ],
+     [
+      "if it involves vulnerable groups,",
+      "hl1"
+     ],
+     [
+      "cannot be denied.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "더 큰 경제적 성공의 잠재적 기여는,",
+      "hl0"
+     ],
+     [
+      "그것이 취약 집단을 포함한다면,",
+      "hl1"
+     ],
+     [
+      "부정될 수 없다.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 경제성장의 기여는 부정될 수 없음 → 다소 유익 (fruitful)"
+   },
+   {
+    "en": [
+     [
+      "At the same time, it is important to recognize that, no matter how fast they grow,",
+      "hl0"
+     ],
+     [
+      "countries where a large part of the population derive their livelihood from uncertain sources",
+      "hl1"
+     ],
+     [
+      "cannot hope to prevent famines without specialized entitlement protection mechanisms involving direct public intervention.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "동시에, 아무리 빨리 성장하더라도, 인식하는 것이 중요하다,",
+      "hl0"
+     ],
+     [
+      "인구의 상당 부분이 불확실한 원천에서 생계를 얻는 나라들은",
+      "hl1"
+     ],
+     [
+      "직접적 공적 개입을 수반하는 특화된 자격 보호 장치 없이는 기아를 막을 수 없다는 것을.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 직접적 공적 개입 없이는 기아 방지 불가 → 직접 접근이 결정적 (critical)"
+   },
+   {
+    "en": [
+     [
+      "The real achievements of these countries",
+      "hl0"
+     ],
+     [
+      "lie in having provided direct public support to their populations",
+      "hl1"
+     ],
+     [
+      "in times of crisis.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 나라들의 진정한 성취는",
+      "hl0"
+     ],
+     [
+      "국민들에게 직접적 공적 지원을 제공한 데 있다",
+      "hl1"
+     ],
+     [
+      "위기의 시기에.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 진짜 성취는 직접적 공적 지원 → 직접 접근이 결정적 (critical)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "productive … complicated",
+    "verdict": "x",
+    "jd": "✘ (B) 'complicated'가 지문과 어긋남"
+   },
+   {
+    "n": 2,
+    "tx": "fruitful … critical",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 3,
+    "tx": "dominant … comprehensive",
+    "verdict": "x",
+    "jd": "✘ (A) 'dominant'이 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "restrictive … appropriate",
+    "verdict": "x",
+    "jd": "✘ (A) 'restrictive'가 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "desirable … cost-effective",
+    "verdict": "x",
+    "jd": "✘ (B) 'cost-effective'가 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">②정답</span> fruitful … critical · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "cannot be denied·direct public support",
+   "to": "fruitful·critical",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "경제성장은 다소 유익하나, 기아 예방에는 직접적 공적 지원이 결정적이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "The potential contribution of greater economic success ... cannot be denied",
+     "ko": "경제적 성공의 기여는 부정될 수 없음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "cannot hope to prevent famines without ... direct public intervention",
+     "ko": "직접적 공적 개입 없이는 기아 방지 불가",
+     "role": "정답근거",
+     "how": "대조"
+    },
+    {
+     "en": "The real achievements ... lie in having provided direct public support",
+     "ko": "진짜 성취는 직접적 공적 지원",
+     "role": "재진술",
+     "how": "강조"
+    }
+   ],
+   "echo": "'기여를 부정할 수 없음'→'fruitful(A)', '직접적 공적 지원'→'critical(B)'로 재진술 = 정답 <b>②</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2025-09|40",
+  "answer": 1,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "Human speech differs from the cries of other species in many ways.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "One very important distinction is that all other animals use one call for one message as the general principle of communication.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "one call for one message"
+     }
+    ]
+   },
+   {
+    "t": "This means that the number of possible messages is very restricted.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "If a new message is to be included in the system, a new sound has to be introduced, too.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "After the first few tens of sounds it becomes difficult to invent new distinctive sounds, and also to remember them for the next time they are needed.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Human speech builds on the principle of combining a restricted number of sounds into an unlimited number of messages.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "중심",
+      "word": "a restricted number of sounds"
+     }
+    ]
+   },
+   {
+    "t": "In a typical human language there are something like thirty or forty distinctive speech sounds.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "예시",
+      "word": "thirty or forty"
+     }
+    ]
+   },
+   {
+    "t": "These sounds can be combined into chains to form a literally unlimited number of words.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "다른 모든 동물은 <b>하나의 신호로 하나의 메시지</b>를 전달",
+     "an": "— 각 신호가 한 메시지를 '나타냄(represents)' (A)"
+    },
+    {
+     "ko": "인간의 말은 <b>제한된 수의 소리</b>를 조합해 무한한 메시지를 만듦",
+     "an": "— 소리 집합이 '유한(finite)' (B)"
+    },
+    {
+     "ko": "전형적 언어엔 <b>30~40개의 변별음</b>이 있음",
+     "an": "— 소리 집합이 '유한(finite)' (B)"
+    }
+   ],
+   "concl": "→ 동물 신호는 각 신호가 한 메시지를 '나타내(represents=A)' 수가 제한되지만, 인간은 '유한한(finite=B)' 소리 집합으로 무한한 메시지를 만든다 = <b>①</b>",
+   "gnote": "회색(부연·어린이 예시)은 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "One very important distinction is that all other animals use one call for one message",
+      "hl0"
+     ],
+     [
+      "as the general principle of communication.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "하나의 매우 중요한 차이는 다른 모든 동물은 하나의 신호를 하나의 메시지에 사용한다는 것이다",
+      "hl0"
+     ],
+     [
+      "의사소통의 일반 원리로서.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 동물은 한 신호가 한 메시지를 나타냄 (represents)"
+   },
+   {
+    "en": [
+     [
+      "Human speech builds on the principle of combining a restricted number of sounds",
+      "hl0"
+     ],
+     [
+      "into an unlimited number of messages.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "인간의 말은 제한된 수의 소리를 조합하는 원리에 기반한다",
+      "hl0"
+     ],
+     [
+      "무한한 수의 메시지로.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 제한된(유한한) 소리로 무한한 메시지 (finite)"
+   },
+   {
+    "en": [
+     [
+      "In a typical human language",
+      "hl0"
+     ],
+     [
+      "there are something like thirty or forty distinctive speech sounds.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "전형적인 인간 언어에는",
+      "hl0"
+     ],
+     [
+      "대략 30개 또는 40개의 변별적 말소리가 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 30~40개의 변별음 → 유한한 소리 집합 (finite)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "represents … finite",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 2,
+    "tx": "symbolizes … universal",
+    "verdict": "x",
+    "jd": "✘ (B) 'universal'이 지문과 어긋남"
+   },
+   {
+    "n": 3,
+    "tx": "distorts … fixed",
+    "verdict": "x",
+    "jd": "✘ (A) 'distorts'가 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "expresses … novel",
+    "verdict": "x",
+    "jd": "✘ (B) 'novel'이 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "records … complex",
+    "verdict": "x",
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> represents … finite · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "one call for one message·a restricted number of sounds",
+   "to": "represents·finite",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "동물 신호는 신호마다 한 메시지를 나타내 제한적이지만, 인간은 유한한 소리로 무한한 메시지를 만든다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "all other animals use one call for one message",
+     "ko": "동물은 한 신호로 한 메시지",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "combining a restricted number of sounds into an unlimited number of messages",
+     "ko": "제한된 소리를 무한한 메시지로 조합",
+     "role": "대조",
+     "how": "대조"
+    },
+    {
+     "en": "thirty or forty distinctive speech sounds",
+     "ko": "30~40개의 변별음",
+     "role": "정답근거",
+     "how": "예시"
+    }
+   ],
+   "echo": "'한 신호로 한 메시지'→'represents(A)', '제한된 수의 소리'→'finite(B)'로 재진술 = 정답 <b>①</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2025-수능|40",
+  "answer": 1,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
+  "hl": [
+   {
+    "t": "People often assume that synthetic food ingredients are more harmful than natural ones, but this is not always the case.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "but"
+     }
+    ]
+   },
+   {
+    "t": "Typically, synthetic ingredients can be made in a precisely controlled fashion and have well-defined compositions and properties, allowing careful evaluation of their potential toxicity.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "precisely controlled fashion"
+     }
+    ]
+   },
+   {
+    "t": "On the other hand, natural ingredients often vary appreciably in their composition and properties depending on their origin, the time of year they were harvested, the climate they experienced throughout their lifetime, the soil quality, and how they were isolated and stored.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "On the other hand"
+     }
+    ]
+   },
+   {
+    "t": "These variations can make testing their safety extremely difficult ― one is never sure about the potential toxicity of minor components that may vary from time to time.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "In some cases, a natural food component has been consumed for hundreds or thousands of years without causing any obvious health problems and can, therefore, be assumed to be safe.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "However, one must still be very careful.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "사람들은 합성이 더 해롭다고 여기지만 <b>항상 그런 것은 아니다</b>",
+     "an": "— 통념에 '이의를 제기(challenge)' (B)"
+    },
+    {
+     "ko": "합성 성분은 <b>정밀하게 통제된</b> 방식으로 만들어져 독성 평가가 쉽다",
+     "an": "— 생산과정의 '통제 가능성(controllability)' (A)"
+    },
+    {
+     "ko": "반면 천연 성분은 원산지·수확 시기 등에 따라 <b>크게 달라짐</b>",
+     "an": "— 변이성으로 통념 반박 (challenge 뒷받침)"
+    }
+   ],
+   "concl": "→ 합성의 '통제 가능성(controllability=A)'과 천연의 변이성은 천연이 더 안전하다는 통념에 '이의를 제기(challenge=B)' = <b>①</b>",
+   "gnote": "회색(마무리 주의 문구)는 빼도 논리에 영향 없음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "People often assume that synthetic food ingredients are more harmful than natural ones,",
+      "hl0"
+     ],
+     [
+      "but this is not always the case.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "사람들은 흔히 합성 식품 성분이 천연 성분보다 더 해롭다고 가정한다,",
+      "hl0"
+     ],
+     [
+      "그러나 항상 그런 것은 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 합성이 더 해롭다는 통념은 항상 옳지 않음 → 통념에 이의 (challenge)"
+   },
+   {
+    "en": [
+     [
+      "Typically, synthetic ingredients can be made in a precisely controlled fashion",
+      "hl0"
+     ],
+     [
+      "and have well-defined compositions and properties,",
+      "hl1"
+     ],
+     [
+      "allowing careful evaluation of their potential toxicity.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "일반적으로 합성 성분은 정밀하게 통제된 방식으로 만들어질 수 있다",
+      "hl0"
+     ],
+     [
+      "그리고 잘 정의된 조성과 특성을 가진다,",
+      "hl1"
+     ],
+     [
+      "그것들의 잠재적 독성에 대한 신중한 평가를 가능하게 하면서.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 합성은 정밀 통제되어 평가 가능 → 통제 가능성 (controllability)"
+   },
+   {
+    "en": [
+     [
+      "On the other hand, natural ingredients often vary appreciably in their composition and properties",
+      "hl0"
+     ],
+     [
+      "depending on their origin, the time of year they were harvested, the climate they experienced throughout their lifetime,",
+      "hl1"
+     ],
+     [
+      "the soil quality, and how they were isolated and stored.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "반면에, 천연 성분은 흔히 조성과 특성이 상당히 달라진다",
+      "hl0"
+     ],
+     [
+      "그것들의 원산지, 수확된 시기, 평생 겪은 기후에 따라,",
+      "hl1"
+     ],
+     [
+      "토양의 질, 그리고 그것들이 분리·저장된 방식에 따라.",
+      "hl2"
+     ]
+    ],
+    "note": "근거: 천연은 크게 변동함 → 변이성(통념 반박 근거)"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "controllability … challenge",
+    "verdict": "ok",
+    "jd": "✔ 지문 핵심과 일치"
+   },
+   {
+    "n": 2,
+    "tx": "predictability … support",
+    "verdict": "x",
+    "jd": "✘ (B) 'support'가 지문과 어긋남"
+   },
+   {
+    "n": 3,
+    "tx": "manageability … intensify",
+    "verdict": "x",
+    "jd": "✘ (B) 'intensify'가 지문과 어긋남"
+   },
+   {
+    "n": 4,
+    "tx": "affordability … reverse",
+    "verdict": "x",
+    "jd": "✘ (A) 'affordability'가 지문과 어긋남"
+   },
+   {
+    "n": 5,
+    "tx": "accessibility … question",
+    "verdict": "x",
+    "jd": "✘ (A) 'accessibility'가 지문과 어긋남"
+   }
+  ],
+  "opt_line": "<span class=\"co\">①정답</span> controllability … challenge · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
+  "paraphrase": {
+   "from": "precisely controlled fashion·this is not always the case",
+   "to": "controllability·challenge",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "합성의 통제 가능성과 천연의 변이성은 천연이 더 안전하다는 통념에 이의를 제기한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "synthetic food ingredients are more harmful ... but this is not always the case",
+     "ko": "합성이 더 해롭다는 통념은 항상 옳지 않음",
+     "role": "주제문",
+     "how": "역접"
+    },
+    {
+     "en": "synthetic ingredients can be made in a precisely controlled fashion",
+     "ko": "합성은 정밀하게 통제됨",
+     "role": "정답근거",
+     "how": "부연"
+    },
+    {
+     "en": "natural ingredients often vary appreciably",
+     "ko": "천연은 상당히 달라짐",
+     "role": "재진술",
+     "how": "대조"
+    }
+   ],
+   "echo": "'정밀하게 통제됨'→'controllability(A)', '항상 그렇지는 않음'→'challenge(B)'로 재진술 = 정답 <b>①</b>"
+  },
+  "num": 40
+ },
+ {
+  "key": "2022-06|30",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Sport can trigger an emotional response in its consumers of the kind rarely brought forth by other products.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Imagine bank customers buying memorabilia to show loyalty to their bank, or consumers ①identifying so strongly with their car insurance company that they get a tattoo with its logo.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "We know that some sport followers are so ②passionate about players, teams and the sport itself that their interest borders on obsession.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This addiction provides the emotional glue that binds fans to teams, and maintains loyalty even in the face of on-field ③failure.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "While most managers can only dream of having customers that are as passionate about their products as sport fans, the emotion triggered by sport can also have a negative impact.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부정전환",
+      "word": "negative impact"
+     }
+    ]
+   },
+   {
+    "t": "Sport’s emotional intensity can mean that organisations have strong attachments to the past through nostalgia and club tradition.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "배경",
+      "word": "strong attachments to the past"
+     }
+    ]
+   },
+   {
+    "t": "As a result, they may ④increase efficiency, productivity and the need to respond quickly to changing market conditions.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과·정답",
+      "word": "increase"
+     }
+    ]
+   },
+   {
+    "t": "For example, a proposal to change club colours in order to project a more attractive image may be ⑤defeated because it breaks a link with tradition.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "제품에 팬만큼 열정적인 고객은 드물지만, 스포츠가 유발하는 감정은 <b>부정적 영향</b>도 준다",
+     "an": "— 부정 전환: negative impact"
+    },
+    {
+     "ko": "그 강렬한 감정 때문에 조직은 <b>과거(전통·향수)에 강하게 집착</b>한다",
+     "an": "— 배경: 과거 지향"
+    },
+    {
+     "ko": "그 결과 효율·생산성·신속 대응을 <b>increase(증가)</b>? → 과거 집착이면 오히려 <b>떨어져야</b>",
+     "an": "— 흐름과 반대 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 과거에 집착하면 효율·생산성·시장 대응력은 <b>낮아져야</b> 하는데 <b>④increase(증가)</b>라 반대 = 정답 <b>④</b>",
+   "gnote": "①identifying ②passionate ③failure ⑤defeated는 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "While most managers can only dream ",
+      "hl0"
+     ],
+     [
+      "of having customers that are as passionate about their products as sport fans, ",
+      "hl1"
+     ],
+     [
+      "the emotion triggered by sport ",
+      "hl2"
+     ],
+     [
+      "can also have a negative impact.",
+      "hl3"
+     ]
+    ],
+    "ko": [
+     [
+      "대부분의 관리자는 꿈만 꿀 뿐이지만",
+      "hl0"
+     ],
+     [
+      "제품에 스포츠 팬만큼 열정적인 고객을 갖는 것을",
+      "hl1"
+     ],
+     [
+      "스포츠가 유발하는 감정은",
+      "hl2"
+     ],
+     [
+      "부정적 영향도 미칠 수 있다.",
+      "hl3"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Sport’s emotional intensity can mean ",
+      "hl0"
+     ],
+     [
+      "that organisations have strong attachments to the past ",
+      "hl1"
+     ],
+     [
+      "through nostalgia and club tradition.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "스포츠의 감정적 강렬함은",
+      "hl0"
+     ],
+     [
+      "조직이 과거에 강한 애착을 갖게 함을 의미할 수 있다",
+      "hl1"
+     ],
+     [
+      "향수와 구단 전통을 통해.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "As a result, they may ",
+      "hl0"
+     ],
+     [
+      "④increase efficiency, productivity ",
+      "hl1"
+     ],
+     [
+      "and the need to respond quickly to changing market conditions.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그 결과 그들은",
+      "hl0"
+     ],
+     [
+      "효율성·생산성을 '④높일(→낮춰야)'",
+      "hl1"
+     ],
+     [
+      "그리고 변화하는 시장에 신속히 대응할 필요를 (높일 수 있다).",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "identifying",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "passionate",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "failure",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "increase",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>낮춘다(reduce)</b>여야 하는데 반대 낱말"
+   },
+   {
+    "n": 5,
+    "tx": "defeated",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> increase→reduce(낮춰야) · <span class=\"xo\">①</span>identifying <span class=\"xo\">②</span>passionate <span class=\"xo\">③</span>failure <span class=\"xo\">⑤</span>defeated",
+  "paraphrase": {
+   "from": "과거 집착 → 효율·생산성·시장 대응력 저하",
+   "to": "reduce/decrease (낮추다)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "스포츠의 강렬한 감정은 조직을 과거에 집착하게 해 시장 대응력을 떨어뜨린다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the emotion triggered by sport can also have a negative impact",
+     "ko": "스포츠의 감정은 부정적 영향도 준다",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "organisations have strong attachments to the past",
+     "ko": "조직은 과거에 강하게 집착한다",
+     "role": "부연",
+     "how": "인과"
+    },
+    {
+     "en": "they may ④increase efficiency, productivity and the need to respond quickly",
+     "ko": "효율·생산성·신속 대응 (실제론 저하)",
+     "role": "정답근거",
+     "how": "반대구조"
+    }
+   ],
+   "echo": "'과거 집착'은 시장 대응력을 낮춰야 하므로 increase는 흐름과 반대 = 정답 <b>④</b>"
+  },
+  "vocab": {
+   "wrong_word": "increase",
+   "should_be": "reduce/decrease (감소시키다)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2023-06|30",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "In recent years urban transport professionals globally have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제·대조",
+      "word": "managed rather than accommodated"
+     }
+    ]
+   },
+   {
+    "t": "Rising incomes inevitably lead to increases in motorization.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Even without the imperative of climate change, the physical constraints of densely inhabited cities and the corresponding demands of accessibility, mobility, safety, air pollution, and urban livability all ①limit the option of expanding road networks purely to accommodate this rising demand.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "As a result, as cities develop and their residents become more prosperous, ②persuading people to choose not to use cars becomes an increasingly key focus of city managers and planners.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "persuading people to choose not to use cars"
+     }
+    ]
+   },
+   {
+    "t": "Improving the quality of ③alternative options, such as walking, cycling, and public transport, is a central element of this strategy.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "However, the most direct approach to ④accommodating automobile demand is making motorized travel more expensive or restricting it with administrative rules.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접·정답",
+      "word": "accommodating"
+     }
+    ]
+   },
+   {
+    "t": "The contribution of motorized travel to climate change ⑤reinforces this imperative.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "자동차 수요는 <b>수용(accommodate)이 아니라 관리</b>되어야 한다는 게 대전제",
+     "an": "— 주제: manage > accommodate"
+    },
+    {
+     "ko": "그래서 사람들을 <b>차를 안 쓰도록 설득</b>하는 것이 핵심 과제",
+     "an": "— 인과: 수요 줄이기"
+    },
+    {
+     "ko": "가장 직접적 방법=통행료↑·규제 → 수요를 '<b>accommodating(수용)</b>'? 실은 <b>관리·억제</b>",
+     "an": "— 흐름과 반대 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 통행을 비싸게·제한하는 건 수요를 <b>억제·관리</b>하는 것인데 <b>④accommodating(수용)</b>이라 반대 = 정답 <b>④</b>",
+   "gnote": "①limit ②persuading ③alternative ⑤reinforces는 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "In recent years urban transport professionals globally ",
+      "hl0"
+     ],
+     [
+      "have largely acquiesced to the view that ",
+      "hl1"
+     ],
+     [
+      "automobile demand in cities needs to be managed rather than accommodated.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "최근 도시 교통 전문가들은 전 세계적으로",
+      "hl0"
+     ],
+     [
+      "다음 견해에 대체로 따랐다",
+      "hl1"
+     ],
+     [
+      "도시의 자동차 수요는 수용되기보다 관리되어야 한다는.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "As a result, as cities develop and their residents become more prosperous, ",
+      "hl0"
+     ],
+     [
+      "②persuading people to choose not to use cars ",
+      "hl1"
+     ],
+     [
+      "becomes an increasingly key focus of city managers and planners.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그 결과 도시가 발전하고 주민이 부유해질수록",
+      "hl0"
+     ],
+     [
+      "사람들이 차를 쓰지 않도록 설득하는 것이",
+      "hl1"
+     ],
+     [
+      "도시 관리자·계획가의 점점 더 핵심 과제가 된다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "However, the most direct approach to ",
+      "hl0"
+     ],
+     [
+      "④accommodating automobile demand ",
+      "hl1"
+     ],
+     [
+      "is making motorized travel more expensive or restricting it with administrative rules.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그러나 가장 직접적인 접근은",
+      "hl0"
+     ],
+     [
+      "자동차 수요를 '④수용(→억제)'하는",
+      "hl1"
+     ],
+     [
+      "자동차 통행을 더 비싸게 하거나 행정 규칙으로 제한하는 것이다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "limit",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "persuading",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "alternative",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "accommodating",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>관리·억제(managing)</b>여야 하는데 반대 낱말"
+   },
+   {
+    "n": 5,
+    "tx": "reinforces",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> accommodating→managing(억제) · <span class=\"xo\">①</span>limit <span class=\"xo\">②</span>persuading <span class=\"xo\">③</span>alternative <span class=\"xo\">⑤</span>reinforces",
+  "paraphrase": {
+   "from": "통행료↑·규제 → 수요 억제·관리",
+   "to": "managing/curbing (관리·억제)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "도시의 자동차 수요는 수용이 아니라 관리·억제되어야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "automobile demand ... needs to be managed rather than accommodated",
+     "ko": "수요는 수용보다 관리되어야",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "persuading people to choose not to use cars",
+     "ko": "차를 안 쓰도록 설득",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "making motorized travel more expensive or restricting it",
+     "ko": "통행을 비싸게·제한(=억제)",
+     "role": "정답근거",
+     "how": "반대구조"
+    }
+   ],
+   "echo": "'비싸게·제한'은 수요를 억제하는 것이므로 accommodating은 흐름과 반대 = 정답 <b>④</b>"
+  },
+  "vocab": {
+   "wrong_word": "accommodating",
+   "should_be": "managing/curbing (관리·억제하다)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2023-수능|30",
+  "answer": 5,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Everywhere we turn we hear about almighty “cyberspace”!",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The hype promises that we will leave our boring lives, put on goggles and body suits, and enter some metallic, three-dimensional, multimedia otherworld.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "When the Industrial Revolution arrived with its great innovation, the motor, we didn’t leave our world to go to some ①remote motorspace!",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "On the contrary, we brought the motors into our lives, as automobiles, refrigerators, drill presses, and pencil sharpeners.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "brought the motors into our lives"
+     }
+    ]
+   },
+   {
+    "t": "This ②absorption has been so complete that we refer to all these tools with names that declare their usage, not their “motorness.”",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "These innovations led to a major socioeconomic movement precisely because they entered and ③affected profoundly our everyday lives.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "People have not changed fundamentally in thousands of years.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Technology changes constantly.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It’s the one that must ④adapt to us.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주장",
+      "word": "adapt to us"
+     }
+    ]
+   },
+   {
+    "t": "That’s exactly what will happen with information technology and its devices under human-centric computing.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The longer we continue to believe that computers will take us to a magical new world, the longer we will ⑤maintain their natural fusion with our lives, the hallmark of every major movement that aspires to be called a socioeconomic revolution.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정답",
+      "word": "maintain"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "산업혁명 때 모터는 딴 세상이 아니라 <b>우리 삶 속으로 들어와 융합</b>됐다",
+     "an": "— 대조 On the contrary"
+    },
+    {
+     "ko": "변하지 않는 인간에게 <b>기술이 맞춰(adapt)</b>야 한다",
+     "an": "— 주장: 기술이 인간에 적응"
+    },
+    {
+     "ko": "컴퓨터가 마법 세계로 데려간다 믿을수록 융합을 '<b>maintain(유지)</b>'? → 융합을 <b>지연(delay)</b>",
+     "an": "— 흐름과 반대 = 정답 <b>⑤</b>"
+    }
+   ],
+   "concl": "→ 마법의 신세계를 믿을수록 삶과의 자연스러운 융합은 <b>늦춰져야(delay)</b> 하는데 <b>⑤maintain(유지)</b>이라 반대 = 정답 <b>⑤</b>",
+   "gnote": "①remote ②absorption ③affected ④adapt는 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "On the contrary, ",
+      "hl0"
+     ],
+     [
+      "we brought the motors into our lives, ",
+      "hl1"
+     ],
+     [
+      "as automobiles, refrigerators, drill presses, and pencil sharpeners.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "그와 반대로,",
+      "hl0"
+     ],
+     [
+      "우리는 모터를 우리 삶 속으로 들여왔다",
+      "hl1"
+     ],
+     [
+      "자동차·냉장고·드릴프레스·연필깎이로.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "It’s the one that must ",
+      "hl0"
+     ],
+     [
+      "④adapt to us.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "맞춰야 하는 것은 바로 그것(기술)이다",
+      "hl0"
+     ],
+     [
+      "우리에게 ④적응(adapt)해야.",
+      "hl1"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "The longer we continue to believe that computers will take us to a magical new world, ",
+      "hl0"
+     ],
+     [
+      "the longer we will ⑤maintain their natural fusion with our lives, ",
+      "hl1"
+     ],
+     [
+      "the hallmark of every major movement that aspires to be called a socioeconomic revolution.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "컴퓨터가 우리를 마법의 신세계로 데려간다고 믿을수록",
+      "hl0"
+     ],
+     [
+      "삶과의 자연스러운 융합을 '⑤유지(→지연)'하게 될 것이다",
+      "hl1"
+     ],
+     [
+      "그 융합은 사회경제적 혁명이라 불리는 모든 큰 운동의 특징인데.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "remote",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "absorption",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "affected",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "adapt",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "maintain",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>지연(delay)</b>이어야 하는데 반대 낱말"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> maintain→delay(지연) · <span class=\"xo\">①</span>remote <span class=\"xo\">②</span>absorption <span class=\"xo\">③</span>affected <span class=\"xo\">④</span>adapt",
+  "paraphrase": {
+   "from": "마법 세계 믿음 → 자연스러운 융합이 늦춰짐",
+   "to": "delay/postpone (지연시키다)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "기술은 우리 삶에 융합되어야 하며, 마법의 신세계 환상은 그 융합을 늦출 뿐이다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "we brought the motors into our lives",
+     "ko": "모터를 삶 속으로 들여와 융합",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "It’s the one that must ④adapt to us",
+     "ko": "기술이 우리에게 맞춰야",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "the longer we will ⑤maintain their natural fusion",
+     "ko": "융합을 유지(실은 지연)",
+     "role": "정답근거",
+     "how": "반대구조"
+    }
+   ],
+   "echo": "'마법 세계 믿음'은 융합을 지연시키므로 maintain은 흐름과 반대 = 정답 <b>⑤</b>"
+  },
+  "vocab": {
+   "wrong_word": "maintain",
+   "should_be": "delay/postpone (지연시키다)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2024-09|30",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Why is the value of place so important?",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "From a historical perspective, until the 1700s textile production was a hand process using the fibers available within a ①particular geographic region, for example, cotton, wool, silk, and flax.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Trade among regions ②increased the availability of these fibers and associated textiles made from the fibers.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The First Industrial Revolution and subsequent technological advancements in manufactured fibers ③added to the fact that fibers and textiles were no longer “place-bound.”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "변화",
+      "word": "no longer"
+     }
+    ]
+   },
+   {
+    "t": "Fashion companies created and consumers could acquire textiles and products made from textiles with little or no connection to where, how, or by whom the products were made.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부연",
+      "word": "little or no connection"
+     }
+    ]
+   },
+   {
+    "t": "This ④countered a disconnect between consumers and the products they use on a daily basis, a loss of understanding and appreciation in the skills and resources necessary to create these products, and an associated disregard for the human and natural resources necessary for the products’ creation.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과·정답",
+      "word": "countered"
+     }
+    ]
+   },
+   {
+    "t": "Therefore, renewing a value on place ⑤reconnects the company and the consumer with the people, geography, and culture of a particular location.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "기술 발전으로 섬유·직물이 <b>더 이상 장소에 매이지 않게</b> 됐다",
+     "an": "— 변화: place-bound 해체"
+    },
+    {
+     "ko": "소비자는 <b>누가·어디서·어떻게 만들었는지 거의 모른 채</b> 제품을 얻는다",
+     "an": "— 부연: 연결 상실"
+    },
+    {
+     "ko": "이것이 소비자-제품 간 <b>단절을 'countered(막았다)'</b>? → 실은 단절을 <b>만들어냈다(created)</b>",
+     "an": "— 흐름과 반대 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 장소성과의 연결 상실은 단절을 <b>만들어내는데(created)</b> <b>④countered(막았다)</b>라 반대 = 정답 <b>④</b>",
+   "gnote": "①particular ②increased ③added ⑤reconnects는 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "The First Industrial Revolution and subsequent technological advancements in manufactured fibers ",
+      "hl0"
+     ],
+     [
+      "③added to the fact ",
+      "hl1"
+     ],
+     [
+      "that fibers and textiles were no longer “place-bound.”",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "1차 산업혁명과 뒤이은 인조섬유 기술 발전은",
+      "hl0"
+     ],
+     [
+      "다음 사실을 더했다",
+      "hl1"
+     ],
+     [
+      "섬유와 직물이 더 이상 '장소에 매이지' 않는다는.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Fashion companies created ",
+      "hl0"
+     ],
+     [
+      "and consumers could acquire textiles and products made from textiles ",
+      "hl1"
+     ],
+     [
+      "with little or no connection to where, how, or by whom the products were made.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "패션 회사가 만들고",
+      "hl0"
+     ],
+     [
+      "소비자는 직물·제품을 얻을 수 있었다",
+      "hl1"
+     ],
+     [
+      "어디서·어떻게·누가 만들었는지와 거의 연결 없이.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "This ",
+      "hl0"
+     ],
+     [
+      "④countered a disconnect ",
+      "hl1"
+     ],
+     [
+      "between consumers and the products they use on a daily basis, a loss of understanding and appreciation in the skills and resources necessary to create these products, and an associated disregard for the human and natural resources necessary for the products’ creation.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이것은",
+      "hl0"
+     ],
+     [
+      "단절을 '④막았다(→만들어냈다)'",
+      "hl1"
+     ],
+     [
+      "소비자와 일상 제품 사이의 단절, 제작에 필요한 기술·자원에 대한 이해 상실, 인적·자연 자원 경시를.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "particular",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "increased",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "added",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "countered",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>만들어냈다(created)</b>여야 하는데 반대 낱말"
+   },
+   {
+    "n": 5,
+    "tx": "reconnects",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> countered→created(초래) · <span class=\"xo\">①</span>particular <span class=\"xo\">②</span>increased <span class=\"xo\">③</span>added <span class=\"xo\">⑤</span>reconnects",
+  "paraphrase": {
+   "from": "장소 연결 상실 → 소비자-제품 단절을 초래",
+   "to": "created/produced (만들어냈다)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "장소성과의 연결 상실이 소비자와 제품 사이의 단절을 만들어냈다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "fibers and textiles were no longer “place-bound.”",
+     "ko": "직물이 더 이상 장소에 매이지 않음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "little or no connection to where, how, or by whom",
+     "ko": "누가·어디서·어떻게 만들었는지 연결 상실",
+     "role": "부연",
+     "how": "인과"
+    },
+    {
+     "en": "This ④countered a disconnect between consumers and the products",
+     "ko": "소비자-제품 단절을 초래(실은 created)",
+     "role": "정답근거",
+     "how": "반대구조"
+    }
+   ],
+   "echo": "'연결 상실'은 단절을 만들어내므로 countered는 흐름과 반대 = 정답 <b>④</b>"
+  },
+  "vocab": {
+   "wrong_word": "countered",
+   "should_be": "created/produced (만들어냈다)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2025-06|30",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Internalization depends on supports for autonomy.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Contexts that use controlling strategies such as salient rewards and punishments or evaluative, selfesteem-hooking pressures are ①least likely to lead people to value activities as their own.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "This is not to say that controls don’t ②work to produce behavior ― decades of operant psychology prove that they can.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "It is rather that the more salient the external control over a person’s behavior, the more the person is likely to be merely externally regulated or introjected in his or her actions.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Consequently, the person does not ③develop a value or investment in the behaviors, but instead remains dependent on external controls.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "인과",
+      "word": "remains dependent on external controls"
+     }
+    ]
+   },
+   {
+    "t": "Thus, parents who reward, force, or cajole their child to do homework are more likely to have a child who does so only when rewarded, cajoled, or forced.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "예시",
+      "word": "only when rewarded, cajoled, or forced"
+     }
+    ]
+   },
+   {
+    "t": "The salience of external controls ④drives the acquisition of self-responsibility.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정답",
+      "word": "drives"
+     }
+    ]
+   },
+   {
+    "t": "Alternatively, parents who supply reasons, show an emotional understanding of difficulties overcoming problems, and use a ⑤minimum of external incentives are more likely to cultivate a sense of willingness and value for work in their child.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "외적 통제가 두드러지면 사람은 가치를 <b>내면화하지 못하고 외적 통제에 계속 의존</b>한다",
+     "an": "— 인과 Consequently"
+    },
+    {
+     "ko": "보상·강요로 시킨 아이는 <b>보상·강요될 때만</b> 한다(자기 책임 X)",
+     "an": "— 예시: 자기책임 형성 실패"
+    },
+    {
+     "ko": "외적 통제의 두드러짐이 자기 책임 획득을 '<b>drives(촉진)</b>'? → 실은 <b>저해(undermines)</b>",
+     "an": "— 흐름과 반대 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 외적 통제는 자기 책임을 <b>저해하는데(undermines)</b> <b>④drives(촉진)</b>라 반대 = 정답 <b>④</b>",
+   "gnote": "①least ②work ③develop ⑤minimum은 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Consequently, the person does not ",
+      "hl0"
+     ],
+     [
+      "③develop a value or investment in the behaviors, ",
+      "hl1"
+     ],
+     [
+      "but instead remains dependent on external controls.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "결과적으로 그 사람은",
+      "hl0"
+     ],
+     [
+      "행동에 대한 가치나 투자를 발달시키지 못하고",
+      "hl1"
+     ],
+     [
+      "대신 외적 통제에 계속 의존한다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Thus, parents who reward, force, or cajole their child to do homework ",
+      "hl0"
+     ],
+     [
+      "are more likely to have a child ",
+      "hl1"
+     ],
+     [
+      "who does so only when rewarded, cajoled, or forced.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "따라서 보상·강요·회유로 숙제를 시키는 부모는",
+      "hl0"
+     ],
+     [
+      "그런 아이를 갖기 쉽다",
+      "hl1"
+     ],
+     [
+      "보상·회유·강요될 때만 숙제를 하는.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "The salience of external controls ",
+      "hl0"
+     ],
+     [
+      "④drives the acquisition of self-responsibility.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "외적 통제의 두드러짐이",
+      "hl0"
+     ],
+     [
+      "자기 책임의 획득을 '④촉진한다(→저해한다)'.",
+      "hl1"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "least",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "work",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "develop",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "drives",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>저해한다(undermines)</b>여야 하는데 반대 낱말"
+   },
+   {
+    "n": 5,
+    "tx": "minimum",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> drives→undermines(저해) · <span class=\"xo\">①</span>least <span class=\"xo\">②</span>work <span class=\"xo\">③</span>develop <span class=\"xo\">⑤</span>minimum",
+  "paraphrase": {
+   "from": "외적 통제 두드러짐 → 자기 책임 획득이 저해됨",
+   "to": "undermines/hinders (저해한다)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "두드러진 외적 통제는 자기 책임의 내면화를 저해한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "remains dependent on external controls",
+     "ko": "외적 통제에 계속 의존",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "a child who does so only when rewarded, cajoled, or forced",
+     "ko": "보상·강요될 때만 하는 아이",
+     "role": "재진술",
+     "how": "예시"
+    },
+    {
+     "en": "The salience of external controls ④drives the acquisition of self-responsibility",
+     "ko": "외적 통제가 자기책임을 촉진(실은 저해)",
+     "role": "정답근거",
+     "how": "반대구조"
+    }
+   ],
+   "echo": "'외적 통제 의존'은 자기 책임을 저해하므로 drives는 흐름과 반대 = 정답 <b>④</b>"
+  },
+  "vocab": {
+   "wrong_word": "drives",
+   "should_be": "undermines/hinders (저해한다)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2025-수능|30",
+  "answer": 4,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "Studies in psychology have reported cases in which competitive incentives resulted in lower task effort, and their focus was on the psychological underpinnings of the reduction in motivation.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "주제",
+      "word": "lower task effort"
+     }
+    ]
+   },
+   {
+    "t": "For example, competition presents an inevitable conflict between the motivation to achieve one’s personal goal and the ①desire to maintain good relationships with others.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "When the maintenance of interpersonal relationships is important, with their counterparts in particular or with others generally, competitors experience an ②internal conflict that can harm their desire to achieve their goal and taint the good feeling brought about by winning.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Exline and Lobel found that the perception of oneself as a target for upward social comparison often makes people ③uncomfortable.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "When they believe that others are making envious comparisons with them, people feel uneasiness, distress, or sorrow.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Feelings of guilt, an emotion generally associated with high motivation for goal-achievement, lead to ④stronger motivation and performance in the pursuit of competitive goals.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정답",
+      "word": "stronger"
+     }
+    ]
+   },
+   {
+    "t": "Consequences of this emotional state include lower task motivation in a competition and preferences for more cooperative and altruistic outcomes, such as ⑤diminishing the significance of the outcome or sharing the winner’s reward.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결과",
+      "word": "lower task motivation"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "경쟁적 유인이 <b>과제 노력을 낮추고 동기를 감소</b>시키는 게 핵심 주제",
+     "an": "— 주제: 동기 '감소'"
+    },
+    {
+     "ko": "죄책감이 경쟁 목표 추구에서 '<b>stronger(더 강한)</b>' 동기·수행으로? → 흐름상 <b>약해져야</b>",
+     "an": "— 정답 문장: 반대로 튐"
+    },
+    {
+     "ko": "실제 결과는 <b>더 낮은 과제 동기</b>와 협력·이타적 선호",
+     "an": "— 결과가 '약화' 확인 = 정답 <b>④</b>"
+    }
+   ],
+   "concl": "→ 죄책감은 경쟁 동기를 <b>약화시켜야(weaker)</b> 하는데(결과도 lower) <b>④stronger(더 강한)</b>라 반대 = 정답 <b>④</b>",
+   "gnote": "①desire ②internal ③uncomfortable ⑤diminishing은 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Studies in psychology have reported cases in which ",
+      "hl0"
+     ],
+     [
+      "competitive incentives resulted in lower task effort, ",
+      "hl1"
+     ],
+     [
+      "and their focus was on the psychological underpinnings of the reduction in motivation.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "심리학 연구들은 다음과 같은 사례를 보고했다",
+      "hl0"
+     ],
+     [
+      "경쟁적 유인이 과제 노력을 낮추는",
+      "hl1"
+     ],
+     [
+      "그리고 그 초점은 동기 감소의 심리적 근거였다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Feelings of guilt, an emotion generally associated with high motivation for goal-achievement, ",
+      "hl0"
+     ],
+     [
+      "lead to ④stronger motivation and performance ",
+      "hl1"
+     ],
+     [
+      "in the pursuit of competitive goals.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "죄책감은, 목표 달성 동기와 흔히 연관된 감정이지만,",
+      "hl0"
+     ],
+     [
+      "'④더 강한(→더 약한)' 동기와 수행으로 이어진다",
+      "hl1"
+     ],
+     [
+      "경쟁 목표 추구에서.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Consequences of this emotional state ",
+      "hl0"
+     ],
+     [
+      "include lower task motivation in a competition ",
+      "hl1"
+     ],
+     [
+      "and preferences for more cooperative and altruistic outcomes, such as ⑤diminishing the significance of the outcome or sharing the winner’s reward.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "이 감정 상태의 결과는",
+      "hl0"
+     ],
+     [
+      "경쟁에서 더 낮은 과제 동기를 포함하고",
+      "hl1"
+     ],
+     [
+      "더 협력적·이타적 결과, 예컨대 결과의 중요성을 줄이거나 승자의 보상을 나누는 것을 선호하게 한다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "desire",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "internal",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "uncomfortable",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "stronger",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>더 약한(weaker)</b>이어야 하는데 반대 낱말"
+   },
+   {
+    "n": 5,
+    "tx": "diminishing",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> stronger→weaker(약화) · <span class=\"xo\">①</span>desire <span class=\"xo\">②</span>internal <span class=\"xo\">③</span>uncomfortable <span class=\"xo\">⑤</span>diminishing",
+  "paraphrase": {
+   "from": "죄책감 → 경쟁에서 더 낮은 과제 동기",
+   "to": "weaker/lower (더 약한/낮은)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "경쟁적 유인과 그에 따른 죄책감은 과제 동기를 오히려 낮춘다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "competitive incentives resulted in lower task effort",
+     "ko": "경쟁 유인이 과제 노력을 낮춤",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "lead to ④stronger motivation and performance",
+     "ko": "죄책감이 더 강한(실은 약한) 동기로",
+     "role": "정답근거",
+     "how": "반대구조"
+    },
+    {
+     "en": "Consequences ... include lower task motivation",
+     "ko": "결과는 더 낮은 과제 동기",
+     "role": "재진술",
+     "how": "확인"
+    }
+   ],
+   "echo": "결과가 'lower task motivation'이므로 stronger는 흐름과 반대 = 정답 <b>④</b>"
+  },
+  "vocab": {
+   "wrong_word": "stronger",
+   "should_be": "weaker/lower (더 약한/낮은)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2026-09|30",
+  "answer": 5,
+  "answer_src": "given",
+  "hl": [
+   {
+    "t": "What is soft-path river engineering?",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "One way to visualize its spirit is to liken it to a footpath in the forest.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Suppose a tree falls across a footpath.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A soft-path response would be simply to redirect the trail around the fallen tree.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A more interventionist response would be to ①remove the tree and restore the original route.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A still more interventionist response might be to straighten and pave the path to insert it more ②permanently in the landscape.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The true high-modernist step would, of course, be to ③create a superhighway that removes the landscape and bulldozes straight through all obstacles in the topography.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Soft-path engineering has the unique advantage of intellectual ④modesty with respect to what we actually know about river movement and its environmental effects.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "특징",
+      "word": "modesty"
+     }
+    ]
+   },
+   {
+    "t": "In contrast to hard-path engineering, soft-path engineering accepts variability in the river’s movement as ⑤insignificant until proven otherwise.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "정답",
+      "word": "insignificant"
+     }
+    ]
+   },
+   {
+    "t": "Backwaters, short-lived wetlands, braids and channels, swamps ― all undesirable to hard-path engineering ― are presumed by soft-path engineers to be ecologically important.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거·대조",
+      "word": "ecologically important"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "소프트패스 공법의 장점은 아는 것에 한계를 인정하는 <b>지적 겸손</b>",
+     "an": "— 특징: 겸손"
+    },
+    {
+     "ko": "그래서 강의 <b>변동성을 'insignificant(하찮은 것)'</b>로? → 겸손하면 <b>중요하게</b> 봐야",
+     "an": "— 정답 문장: 반대로 튐"
+    },
+    {
+     "ko": "늪·습지 등을 <b>생태적으로 중요</b>하다고 전제한다",
+     "an": "— 변동성=중요 확인 = 정답 <b>⑤</b>"
+    }
+   ],
+   "concl": "→ 변동성의 산물(늪·습지)을 <b>중요하게(significant)</b> 보는데 <b>⑤insignificant(하찮은)</b>라 반대 = 정답 <b>⑤</b>",
+   "gnote": "①remove ②permanently ③create ④modesty는 모두 문맥에 맞음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Soft-path engineering has ",
+      "hl0"
+     ],
+     [
+      "the unique advantage of intellectual ④modesty ",
+      "hl1"
+     ],
+     [
+      "with respect to what we actually know about river movement and its environmental effects.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "소프트패스 공법은",
+      "hl0"
+     ],
+     [
+      "지적 겸손이라는 독특한 장점을 지닌다",
+      "hl1"
+     ],
+     [
+      "강의 움직임과 그 환경적 영향에 대해 우리가 실제로 아는 것과 관련하여.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "In contrast to hard-path engineering, ",
+      "hl0"
+     ],
+     [
+      "soft-path engineering accepts variability in the river’s movement ",
+      "hl1"
+     ],
+     [
+      "as ⑤insignificant until proven otherwise.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "하드패스 공법과 대조적으로,",
+      "hl0"
+     ],
+     [
+      "소프트패스 공법은 강 움직임의 변동성을",
+      "hl1"
+     ],
+     [
+      "'⑤하찮은 것(→중요한 것)'으로, 달리 입증되기 전까지 받아들인다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   },
+   {
+    "en": [
+     [
+      "Backwaters, short-lived wetlands, braids and channels, swamps ",
+      "hl0"
+     ],
+     [
+      "― all undesirable to hard-path engineering ― ",
+      "hl1"
+     ],
+     [
+      "are presumed by soft-path engineers to be ecologically important.",
+      "hl2"
+     ]
+    ],
+    "ko": [
+     [
+      "역류수·단명 습지·갈래 물길·늪은",
+      "hl0"
+     ],
+     [
+      "— 하드패스 공법엔 모두 바람직하지 않지만 —",
+      "hl1"
+     ],
+     [
+      "소프트패스 공학자에겐 생태적으로 중요하다고 여겨진다.",
+      "hl2"
+     ]
+    ],
+    "note": ""
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "remove",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "permanently",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "create",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "modesty",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "insignificant",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 <b>중요한(significant)</b>이어야 하는데 반대 낱말"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> insignificant→significant(중요) · <span class=\"xo\">①</span>remove <span class=\"xo\">②</span>permanently <span class=\"xo\">③</span>create <span class=\"xo\">④</span>modesty",
+  "paraphrase": {
+   "from": "강의 변동성과 그 산물을 생태적으로 중요하게 봄",
+   "to": "significant/important (중요한)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "소프트패스 공법은 강의 변동성과 그 산물을 생태적으로 중요하게 여긴다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the unique advantage of intellectual ④modesty",
+     "ko": "지적 겸손이라는 장점",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "accepts variability in the river’s movement as ⑤insignificant",
+     "ko": "변동성을 하찮게(실은 중요하게)",
+     "role": "정답근거",
+     "how": "반대구조"
+    },
+    {
+     "en": "presumed ... to be ecologically important",
+     "ko": "생태적으로 중요하다고 전제",
+     "role": "재진술",
+     "how": "확인"
+    }
+   ],
+   "echo": "변동성의 산물을 'ecologically important'로 보므로 insignificant는 흐름과 반대 = 정답 <b>⑤</b>"
+  },
+  "vocab": {
+   "wrong_word": "insignificant",
+   "should_be": "significant/important (중요한)"
+  },
+  "num": 30
+ },
+ {
+  "key": "2022-수능|30",
+  "answer": 3,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "benefits",
+   "should_be": "limits (한계/제약)"
+  },
+  "hl": [
+   {
+    "t": "It has been suggested that “organic” methods, defined as those in which only natural products can be used as inputs, would be less damaging to the biosphere.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Large-scale adoption of “organic” farming methods, however, would ①reduce yields and increase production costs for many major crops.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "역접",
+      "word": "however"
+     }
+    ]
+   },
+   {
+    "t": "Inorganic nitrogen supplies are ②essential for maintaining moderate to high levels of productivity for many of the non-leguminous crop species, because organic supplies of nitrogenous materials often are either limited or more expensive than inorganic nitrogen fertilizers.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "이유",
+      "word": "because"
+     }
+    ]
+   },
+   {
+    "t": "In addition, there are ③benefits to the extensive use of either manure or legumes as “green manure” crops.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "benefits"
+     }
+    ]
+   },
+   {
+    "t": "In many cases, weed control can be very difficult or require much hand labor if chemicals cannot be used, and ④fewer people are willing to do this work as societies become wealthier.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Some methods used in “organic” farming, however, such as the sensible use of crop rotations and specific combinations of cropping and livestock enterprises, can make important ⑤contributions to the sustainability of rural ecosystems.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "유기농법의 대규모 도입은 <b>수확을 줄이고 비용을 늘린다</b>",
+     "an": "— 부정 신호: 유기농의 손해"
+    },
+    {
+     "ko": "무기 질소가 <b>필수적</b>이다 — 유기 공급원은 제한적·비싸므로",
+     "an": "— 유기농에 불리한 흐름 지속"
+    },
+    {
+     "ko": "이 부정 흐름에서 ③<b>benefits(이점)</b>만 긍정으로 튄다",
+     "an": "— 흐름상 limits(한계)여야 = 정답 ③"
+    }
+   ],
+   "concl": "→ 유기농의 한계를 나열하는 부정 흐름인데 ③benefits만 반대로 튐, limits여야 = 정답 <b>③</b>",
+   "gnote": "마지막 however 문장(일부 유기농법의 기여)은 양보로, 정답 판단엔 불필요."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Large-scale adoption of “organic” farming methods, however,",
+      "hl0"
+     ],
+     [
+      "would ①reduce yields and increase production costs for many major crops.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "유기농법의 대규모 도입은, 그러나,",
+      "hl0"
+     ],
+     [
+      "많은 주요 작물의 수확량을 줄이고 생산비를 늘릴 것이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 유기농 도입은 수확↓·비용↑ (부정)"
+   },
+   {
+    "en": [
+     [
+      "Inorganic nitrogen supplies are ②essential for maintaining moderate to high levels of productivity for many of the non-leguminous crop species,",
+      "hl0"
+     ],
+     [
+      "because organic supplies of nitrogenous materials often are either limited or more expensive than inorganic nitrogen fertilizers.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "무기 질소 공급은 많은 비콩과 작물의 중상 수준 생산성 유지에 필수적인데,",
+      "hl0"
+     ],
+     [
+      "유기 질소 공급원은 흔히 제한적이거나 무기 질소 비료보다 비싸기 때문이다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 유기 공급원은 제한적·비쌈 (유기농에 부정적)"
+   },
+   {
+    "en": [
+     [
+      "In addition, there are ③benefits",
+      "hl0"
+     ],
+     [
+      "to the extensive use of either manure or legumes as “green manure” crops.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "게다가, ~에는 ③이점(benefits)이 있다",
+      "hl0"
+     ],
+     [
+      "거름이나 콩과 식물을 ‘풋거름’ 작물로 광범위하게 사용하는 것에.",
+      "hl1"
+     ]
+    ],
+    "note": "부정 흐름인데 ‘benefits(이점)’만 긍정으로 튐 → limits(한계)여야 = 정답③"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "reduce",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "essential",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "benefits",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 limits(한계) 뜻이어야 하는데 반대 낱말(benefits)"
+   },
+   {
+    "n": 4,
+    "tx": "fewer",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "contributions",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">③정답</span> benefits→limits · <span class=\"xo\">①</span>reduce <span class=\"xo\">②</span>essential <span class=\"xo\">④</span>fewer <span class=\"xo\">⑤</span>contributions",
+  "paraphrase": {
+   "from": "유기농의 한계를 나열하는 부정적 흐름",
+   "to": "limits (한계/제약)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "유기농법의 대규모 채택은 수확·비용 등에서 상당한 한계를 지닌다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "would ①reduce yields and increase production costs",
+     "ko": "수확 감소·비용 증가",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "organic supplies ... are either limited or more expensive",
+     "ko": "유기 공급원은 제한적·고가",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "there are ③benefits(→limits) to the extensive use",
+     "ko": "광범위 사용엔 한계",
+     "role": "정답근거",
+     "how": "반대낱말"
+    }
+   ],
+   "echo": "‘한계 나열’ 흐름에서 ③benefits는 limits여야 = 정답 ③"
+  },
+  "num": 30
+ },
+ {
+  "key": "2023-09|30",
+  "answer": 5,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "diminished",
+   "should_be": "intensified / compounded (심화되다)"
+  },
+  "hl": [
+   {
+    "t": "Although the wonders of modern technology have provided people with opportunities beyond the wildest dreams of our ancestors, the good, as usual, is weakened by a downside.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "One of those downsides is that anyone who so chooses can pick up the virtual megaphone that is the Internet and put in their two cents on any of an infinite number of topics, regardless of their ①qualifications.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "After all, on the Internet, there are no regulations ②preventing a kindergarten teacher from offering medical advice or a physician from suggesting ways to safely make structural changes to your home.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "As a result, misinformation gets disseminated as information, and it is not always easy to ③differentiate the two.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "결과",
+      "word": "As a result"
+     }
+    ]
+   },
+   {
+    "t": "This can be particularly frustrating for scientists, who spend their lives learning how to understand the intricacies of the world around them, only to have their work summarily ④challenged by people whose experience with the topic can be measured in minutes.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부정",
+      "word": "frustrating"
+     }
+    ]
+   },
+   {
+    "t": "This frustration is then ⑤diminished by the fact that, to the general public, both the scientist and the challenger are awarded equal credibility.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "diminished"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "잘못된 정보가 정보처럼 퍼져 <b>둘을 구별하기 어렵다</b>",
+     "an": "— 부정 신호: 오정보 확산"
+    },
+    {
+     "ko": "이는 과학자에게 특히 <b>좌절감</b>을 준다 — 경험 없는 이들이 연구에 이의를 제기",
+     "an": "— 좌절이 커지는 흐름"
+    },
+    {
+     "ko": "그 좌절이 동등한 신뢰 부여로 ⑤<b>diminished(줄어든다)</b>고 함",
+     "an": "— 무자격자에 동등 신뢰면 좌절은 커져야 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 좌절이 심해지는 흐름인데 ⑤diminished만 반대로 튐, intensified/compounded여야 = 정답 <b>⑤</b>",
+   "gnote": "동등한 신뢰(equal credibility)는 좌절을 ‘증폭’시키는 요인."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "As a result, misinformation gets disseminated as information,",
+      "hl0"
+     ],
+     [
+      "and it is not always easy to ③differentiate the two.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 결과, 잘못된 정보가 정보로 퍼지고,",
+      "hl0"
+     ],
+     [
+      "둘을 구별하기가 늘 쉬운 것은 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 오정보가 정보처럼 확산 (부정)"
+   },
+   {
+    "en": [
+     [
+      "This can be particularly frustrating for scientists, who spend their lives learning how to understand the intricacies of the world around them,",
+      "hl0"
+     ],
+     [
+      "only to have their work summarily ④challenged by people whose experience with the topic can be measured in minutes.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "이는 세상의 복잡성을 이해하려 평생을 바치는 과학자에게 특히 좌절스러울 수 있는데,",
+      "hl0"
+     ],
+     [
+      "그 주제 경험이 몇 분에 불과한 이들에게 연구가 즉석에서 이의 제기당한다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 과학자의 좌절 (부정)"
+   },
+   {
+    "en": [
+     [
+      "This frustration is then ⑤diminished by the fact that,",
+      "hl0"
+     ],
+     [
+      "to the general public, both the scientist and the challenger are awarded equal credibility.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그 좌절은 이어 ~라는 사실로 ⑤줄어든다,",
+      "hl0"
+     ],
+     [
+      "일반 대중에게 과학자와 반박자 모두 동등한 신뢰가 부여된다는.",
+      "hl1"
+     ]
+    ],
+    "note": "좌절이 심해야 하는 흐름인데 ‘diminished’만 반대로 튐 → intensified여야 = 정답⑤"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "qualifications",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "preventing",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "differentiate",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "challenged",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "diminished",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 intensified(심화) 뜻이어야 하는데 반대 낱말(diminished)"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> diminished→intensified · <span class=\"xo\">①</span>qualifications <span class=\"xo\">②</span>preventing <span class=\"xo\">③</span>differentiate <span class=\"xo\">④</span>challenged",
+  "paraphrase": {
+   "from": "좌절이 오히려 심해지는 흐름",
+   "to": "intensified (심화되다)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "무자격자의 의견에 전문가와 동등한 신뢰가 주어져 과학자의 좌절이 심화된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "misinformation gets disseminated as information",
+     "ko": "오정보가 정보처럼 확산",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "particularly frustrating for scientists",
+     "ko": "과학자에게 좌절스러움",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "frustration is then ⑤diminished(→intensified) by ... equal credibility",
+     "ko": "동등 신뢰로 좌절 심화",
+     "role": "정답근거",
+     "how": "반대낱말"
+    }
+   ],
+   "echo": "좌절이 심화되는 흐름에서 ⑤diminished는 intensified여야 = 정답 ⑤"
+  },
+  "num": 30
+ },
+ {
+  "key": "2024-06|30",
+  "answer": 4,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "prepare / purposefully / protective (오답 낱말)",
+   "should_be": "compensate / randomly / independent"
+  },
+  "hl": [
+   {
+    "t": "To the extent that an agent relies on the prior knowledge of its designer rather than on its own percepts, we say that the agent lacks autonomy.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "A rational agent should be autonomous ― it should learn what it can to (A) compensate / prepare for partial or incorrect prior knowledge.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "보완",
+      "word": "compensate"
+     }
+    ]
+   },
+   {
+    "t": "For example, a vacuum-cleaning agent that learns to foresee where and when additional dirt will appear will do better than one that does not.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "As a practical matter, one seldom requires complete autonomy from the start: when the agent has had little or no experience, it would have to act (B) purposefully / randomly unless the designer gave some assistance.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "무작위",
+      "word": "randomly"
+     }
+    ]
+   },
+   {
+    "t": "So, just as evolution provides animals with enough built-in reflexes to survive long enough to learn for themselves, it would be reasonable to provide an artificial intelligent agent with some initial knowledge as well as an ability to learn.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "After sufficient experience of its environment, the behavior of a rational agent can become effectively (C) independent / protective of its prior knowledge.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "독립",
+      "word": "independent"
+     }
+    ]
+   },
+   {
+    "t": "Hence, the incorporation of learning allows one to design a single rational agent that will succeed in a vast variety of environments.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "자율 에이전트는 불완전·부정확한 사전지식을 <b>보완(compensate)</b>하도록 배워야 한다",
+     "an": "— (A) ‘보완’ 문맥"
+    },
+    {
+     "ko": "경험이 거의 없으면, 도움 없이는 <b>무작위로(randomly)</b> 행동할 수밖에 없다",
+     "an": "— (B) ‘무작위’ 문맥"
+    },
+    {
+     "ko": "충분한 경험 후엔 사전지식에서 <b>독립적(independent)</b>이 된다",
+     "an": "— (C) ‘독립’ 문맥 = 정답 ④"
+    }
+   ],
+   "concl": "→ compensate·randomly·independent 모두 문맥과 일치 = 정답 <b>④</b>",
+   "gnote": "prepare·purposefully·protective는 각 문맥과 어긋남."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "A rational agent should be autonomous ―",
+      "hl0"
+     ],
+     [
+      "it should learn what it can to (A) compensate / prepare for partial or incorrect prior knowledge.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "합리적 에이전트는 자율적이어야 한다 ―",
+      "hl0"
+     ],
+     [
+      "불완전하거나 부정확한 사전지식을 (A) 보완/대비하기 위해 할 수 있는 것을 배워야 한다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 잘못된 사전지식을 ‘보완’ → compensate"
+   },
+   {
+    "en": [
+     [
+      "when the agent has had little or no experience,",
+      "hl0"
+     ],
+     [
+      "it would have to act (B) purposefully / randomly unless the designer gave some assistance.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "에이전트가 경험이 거의 또는 전혀 없을 때,",
+      "hl0"
+     ],
+     [
+      "설계자가 도움을 주지 않는 한 (B) 목적적으로/무작위로 행동할 수밖에 없다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 경험 없으면 안내 없이는 ‘무작위’ → randomly"
+   },
+   {
+    "en": [
+     [
+      "After sufficient experience of its environment,",
+      "hl0"
+     ],
+     [
+      "the behavior of a rational agent can become effectively (C) independent / protective of its prior knowledge.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "환경에 대한 충분한 경험 후에는,",
+      "hl0"
+     ],
+     [
+      "합리적 에이전트의 행동은 사실상 사전지식에서 (C) 독립적/보호적이 될 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 경험 후 사전지식에서 ‘독립’ → independent = 정답④"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "compensate …… randomly …… protective",
+    "verdict": "x",
+    "jd": "✘ (C) protective 부적절 (→independent)"
+   },
+   {
+    "n": 2,
+    "tx": "compensate …… purposefully …… protective",
+    "verdict": "x",
+    "jd": "✘ (B)purposefully·(C)protective 부적절"
+   },
+   {
+    "n": 3,
+    "tx": "prepare …… randomly …… protective",
+    "verdict": "x",
+    "jd": "✘ (A)prepare·(C)protective 부적절"
+   },
+   {
+    "n": 4,
+    "tx": "compensate …… randomly …… independent",
+    "verdict": "ok",
+    "jd": "✔ (A)보완·(B)무작위·(C)독립 모두 문맥 일치"
+   },
+   {
+    "n": 5,
+    "tx": "prepare …… purposefully …… independent",
+    "verdict": "x",
+    "jd": "✘ (A)prepare·(B)purposefully 부적절"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> compensate·randomly·independent · <span class=\"xo\">①</span>…protective <span class=\"xo\">②</span>purposefully·protective <span class=\"xo\">③</span>prepare·protective <span class=\"xo\">⑤</span>prepare·purposefully",
+  "paraphrase": {
+   "from": "보완·무작위·독립의 문맥",
+   "to": "compensate·randomly·independent",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "합리적 에이전트는 사전지식을 보완하고, 초기엔 무작위로 행동하며, 경험 후엔 그로부터 독립적이 되도록 학습해야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "it should learn ... to (A) compensate ... for ... incorrect prior knowledge",
+     "ko": "잘못된 사전지식을 보완하도록 학습",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "with little or no experience ... act (B) randomly",
+     "ko": "경험 없으면 무작위로 행동",
+     "role": "부연",
+     "how": "부연"
+    },
+    {
+     "en": "become effectively (C) independent of its prior knowledge",
+     "ko": "경험 후 사전지식에서 독립",
+     "role": "정답근거",
+     "how": "귀결"
+    }
+   ],
+   "echo": "보완·무작위·독립 문맥이 모두 맞는 조합 = 정답 ④"
+  },
+  "num": 30
+ },
+ {
+  "key": "2024-수능|30",
+  "answer": 4,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "low",
+   "should_be": "high (높은)"
+  },
+  "hl": [
+   {
+    "t": "Bazaar economies feature an apparently flexible price-setting mechanism that sits atop more enduring ties of shared culture.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Both the buyer and seller are aware of each other’s ①restrictions.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "In Delhi’s bazaars, buyers and sellers can ②assess to a large extent the financial constraints that other actors have in their everyday life.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Each actor belonging to a specific economic class understands what the other sees as a necessity and a luxury.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "necessity and a luxury"
+     }
+    ]
+   },
+   {
+    "t": "In the case of electronic products like video games, they are not a ③necessity at the same level as other household purchases such as food items.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부정",
+      "word": "not"
+     }
+    ]
+   },
+   {
+    "t": "So, the seller in Delhi’s bazaars is careful not to directly ask for very ④low prices for video games because at no point will the buyer see possession of them as an absolute necessity.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "low"
+     }
+    ]
+   },
+   {
+    "t": "Access to this type of knowledge establishes a price consensus by relating to each other’s preferences and limitations of belonging to a ⑤similar cultural and economic universe.",
+    "role": "gray",
+    "tags": []
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "각 계층은 상대가 무엇을 <b>필수품과 사치품</b>으로 보는지 안다",
+     "an": "— 필수 vs 사치 구분"
+    },
+    {
+     "ko": "비디오 게임은 식료품 같은 <b>필수품이 아니다</b>(사치품)",
+     "an": "— 게임=비필수"
+    },
+    {
+     "ko": "그래서 판매자는 게임에 ④<b>low(낮은)</b> 가격을 요구하지 않도록 조심한다",
+     "an": "— 비필수라 못 받으므로 ‘높은’ 값을 안 부름 → high여야 = 정답 ④"
+    }
+   ],
+   "concl": "→ 게임은 필수품이 아니어서 높은 값을 못 받는 흐름인데 ④low만 반대로 튐, high여야 = 정답 <b>④</b>",
+   "gnote": "‘절대적 필수품으로 보지 않는다’가 근거 — 그래서 high 가격 회피."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Each actor belonging to a specific economic class understands",
+      "hl0"
+     ],
+     [
+      "what the other sees as a necessity and a luxury.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "특정 경제 계층에 속한 각 행위자는 이해한다",
+      "hl0"
+     ],
+     [
+      "상대가 무엇을 필수품과 사치품으로 보는지를.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 필수품 vs 사치품 구분"
+   },
+   {
+    "en": [
+     [
+      "In the case of electronic products like video games,",
+      "hl0"
+     ],
+     [
+      "they are not a ③necessity at the same level as other household purchases such as food items.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "비디오 게임 같은 전자 제품의 경우,",
+      "hl0"
+     ],
+     [
+      "식료품 같은 다른 가정용 구매만큼의 필수품이 아니다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 게임은 필수품이 아님(사치품)"
+   },
+   {
+    "en": [
+     [
+      "So, the seller in Delhi’s bazaars is careful not to directly ask for very ④low prices for video games",
+      "hl0"
+     ],
+     [
+      "because at no point will the buyer see possession of them as an absolute necessity.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그래서 델리 시장의 판매자는 게임에 매우 ④낮은 가격을 직접 요구하지 않도록 조심한다",
+      "hl0"
+     ],
+     [
+      "구매자가 그것 소유를 절대적 필수로 결코 보지 않기 때문이다.",
+      "hl1"
+     ]
+    ],
+    "note": "비필수라 높은 값을 못 받는 흐름 → ‘low’는 high여야 = 정답④"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "restrictions",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "assess",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "necessity",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "low",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 high(높은) 뜻이어야 하는데 반대 낱말(low)"
+   },
+   {
+    "n": 5,
+    "tx": "similar",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> low→high · <span class=\"xo\">①</span>restrictions <span class=\"xo\">②</span>assess <span class=\"xo\">③</span>necessity <span class=\"xo\">⑤</span>similar",
+  "paraphrase": {
+   "from": "비필수품이라 높은 값을 직접 요구하지 못함",
+   "to": "high (높은)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "게임은 필수품이 아니므로 판매자는 높은 가격을 직접 요구하지 않는다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "what the other sees as a necessity and a luxury",
+     "ko": "필수품과 사치품 구분",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "video games ... are not a ③necessity",
+     "ko": "게임은 필수품이 아님",
+     "role": "부연",
+     "how": "부연"
+    },
+    {
+     "en": "careful not to ... ask for very ④low(→high) prices",
+     "ko": "높은 값을 요구하지 않음",
+     "role": "정답근거",
+     "how": "반대낱말"
+    }
+   ],
+   "echo": "필수품이 아니어서 high 가격을 못 받는 흐름 → ④low는 high여야 = 정답 ④"
+  },
+  "num": 30
+ },
+ {
+  "key": "2025-09|30",
+  "answer": 5,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "rationality",
+   "should_be": "irrationality (비합리성)"
+  },
+  "hl": [
+   {
+    "t": "We all like to think of ourselves as rational actors, careful and considered in our thinking, capable of sound and reliable judgments.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "We might believe that we generally consider different points of view and make ①informed decisions.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "We are, in fact, “predictably irrational,” as psychologist Dan Ariely titled his book on the topic.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "반전",
+      "word": "in fact"
+     }
+    ]
+   },
+   {
+    "t": "All of us engage in automatic, reflexive thinking, typically taking the ②easier path and conserving mental effort.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "In addition, numerous biases inhibit or override reflective, deliberative thought; intuitive theories can also interfere with ③acceptance of accurate scientific explanations.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "부정",
+      "word": "biases"
+     }
+    ]
+   },
+   {
+    "t": "Understanding more about how our minds work and how biases may operate can make us each ④less subject to fallacious reasoning, more rational, and more aware of the problems in others’ thinking.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Learning to understand the built-in ⑤rationality of our mental processes can also help us improve our ability to inform others more effectively.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "rationality"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "우리는 사실 <b>‘예측 가능하게 비합리적’</b>이다",
+     "an": "— 반전: 합리적이라 믿지만 실제론 비합리"
+    },
+    {
+     "ko": "수많은 <b>편향</b>이 숙고적 사고를 방해·압도한다",
+     "an": "— 정신이 편향·비합리적임을 강조"
+    },
+    {
+     "ko": "정신 과정의 내재된 ⑤<b>rationality(합리성)</b>를 이해하면 도움이 된다고 함",
+     "an": "— 정신은 비합리적 → irrationality여야 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 정신의 비합리성을 논하는 흐름인데 ⑤rationality만 반대로 튐, irrationality여야 = 정답 <b>⑤</b>",
+   "gnote": "‘built-in’은 편향·비합리가 내재됨을 가리킴."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "We are, in fact, “predictably irrational,”",
+      "hl0"
+     ],
+     [
+      "as psychologist Dan Ariely titled his book on the topic.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "우리는 사실 ‘예측 가능하게 비합리적’이다,",
+      "hl0"
+     ],
+     [
+      "심리학자 Dan Ariely가 이 주제의 책 제목으로 붙였듯이.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 우리는 예측 가능하게 비합리적"
+   },
+   {
+    "en": [
+     [
+      "In addition, numerous biases inhibit or override reflective, deliberative thought;",
+      "hl0"
+     ],
+     [
+      "intuitive theories can also interfere with ③acceptance of accurate scientific explanations.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "게다가, 수많은 편향이 성찰적·숙고적 사고를 억제하거나 압도한다;",
+      "hl0"
+     ],
+     [
+      "직관적 이론이 정확한 과학적 설명의 수용을 방해하기도 한다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 편향이 숙고적 사고를 압도 (비합리)"
+   },
+   {
+    "en": [
+     [
+      "Learning to understand the built-in ⑤rationality of our mental processes",
+      "hl0"
+     ],
+     [
+      "can also help us improve our ability to inform others more effectively.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "우리 정신 과정에 내재된 ⑤합리성을 이해하는 법을 배우는 것",
+      "hl0"
+     ],
+     [
+      "또한 타인에게 더 효과적으로 알리는 능력을 개선하도록 도울 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "정신은 비합리적임을 논했으므로 ‘rationality’는 irrationality여야 = 정답⑤"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "informed",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "easier",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "acceptance",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "less",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "rationality",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 irrationality(비합리성) 뜻이어야 하는데 반대 낱말(rationality)"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> rationality→irrationality · <span class=\"xo\">①</span>informed <span class=\"xo\">②</span>easier <span class=\"xo\">③</span>acceptance <span class=\"xo\">④</span>less",
+  "paraphrase": {
+   "from": "정신에 내재된 비합리성",
+   "to": "irrationality (비합리성)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "우리 정신은 예측 가능하게 비합리적이며, 그 내재된 비합리성을 이해하는 것이 도움이 된다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "We are, in fact, “predictably irrational”",
+     "ko": "우리는 예측 가능하게 비합리적",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "numerous biases inhibit or override deliberative thought",
+     "ko": "편향이 숙고적 사고를 압도",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "the built-in ⑤rationality(→irrationality) of our mental processes",
+     "ko": "정신에 내재된 비합리성",
+     "role": "정답근거",
+     "how": "반대낱말"
+    }
+   ],
+   "echo": "정신의 비합리성을 논하는 흐름 → ⑤rationality는 irrationality여야 = 정답 ⑤"
+  },
+  "num": 30
+ },
+ {
+  "key": "2026-06|30",
+  "answer": 5,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "temporary",
+   "should_be": "lasting / memorable (오래 남는)"
+  },
+  "hl": [
+   {
+    "t": "Gaining an audience for your writing involves not just finding a voice but ensuring that voice resonates with your intended readers.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "Entrepreneurs understand the importance of building a brand that makes them memorable and distinct from their competitors, drawing customers to their products or services.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "memorable"
+     }
+    ]
+   },
+   {
+    "t": "They achieve this by ①pinpointing their target audience, crafting a unique value proposition, and shaping a recognizable identity.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "While scholars might initially find these entrepreneurial concepts ②alien, they actually engage in similar practices when they set themselves apart in their academic writing.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Consider the typical literature review and motivation section of a scholarly article ― the aim is to highlight ③gaps in existing research and position oneself as the one who will address these overlooked areas.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "The challenge, as Labaree suggests, is not just in developing innovative ideas but in ④cultivating a distinctive voice that makes readers think, “Ah, this sounds like [the author].”",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "핵심",
+      "word": "distinctive voice"
+     }
+    ]
+   },
+   {
+    "t": "It’s about balancing the expression of your ideas with the development of a unique voice that leaves a ⑤temporary impression on your audience.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "temporary"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "기업가는 자신을 <b>기억에 남고 차별화된</b> 브랜드로 만드는 것의 중요성을 안다",
+     "an": "— 핵심: 기억에 남는 정체성"
+    },
+    {
+     "ko": "도전은 ‘그 저자 같다’는 생각이 들게 하는 <b>독특한 목소리를 기르는</b> 것",
+     "an": "— 알아볼 수 있는 인상적 목소리"
+    },
+    {
+     "ko": "그 독특한 목소리가 청중에게 ⑤<b>temporary(일시적)</b> 인상을 남긴다고 함",
+     "an": "— 기억에 남아야 하는 흐름 → lasting여야 = 정답 ⑤"
+    }
+   ],
+   "concl": "→ 기억에 남는 독특한 목소리를 강조하는 흐름인데 ⑤temporary만 반대로 튐, lasting여야 = 정답 <b>⑤</b>",
+   "gnote": "‘memorable·distinctive’가 근거 — 인상은 오래 남아야 함."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Entrepreneurs understand the importance of building a brand",
+      "hl0"
+     ],
+     [
+      "that makes them memorable and distinct from their competitors, drawing customers to their products or services.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "기업가는 브랜드를 구축하는 것의 중요성을 이해한다",
+      "hl0"
+     ],
+     [
+      "그들을 기억에 남고 경쟁자와 구별되게 하여 고객을 제품·서비스로 끌어들이는.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 브랜드=기억에 남고 차별화됨"
+   },
+   {
+    "en": [
+     [
+      "The challenge, as Labaree suggests, is not just in developing innovative ideas but in ④cultivating a distinctive voice",
+      "hl0"
+     ],
+     [
+      "that makes readers think, “Ah, this sounds like [the author].”",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "Labaree가 말하듯 도전은 혁신적 아이디어 개발만이 아니라 독특한 목소리를 ④기르는 데 있다",
+      "hl0"
+     ],
+     [
+      "독자가 ‘아, 이건 그 저자 같다’고 생각하게 만드는.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 알아볼 수 있는 독특한 목소리"
+   },
+   {
+    "en": [
+     [
+      "It’s about balancing the expression of your ideas with the development of a unique voice",
+      "hl0"
+     ],
+     [
+      "that leaves a ⑤temporary impression on your audience.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "그것은 아이디어 표현과 독특한 목소리 개발의 균형을 맞추는 것이다",
+      "hl0"
+     ],
+     [
+      "청중에게 ⑤일시적 인상을 남기는.",
+      "hl1"
+     ]
+    ],
+    "note": "기억에 남아야 하는 흐름 → ‘temporary’는 lasting여야 = 정답⑤"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "pinpointing",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "alien",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "gaps",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "cultivating",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 5,
+    "tx": "temporary",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 lasting(오래 남는) 뜻이어야 하는데 반대 낱말(temporary)"
+   }
+  ],
+  "opt_line": "<span class=\"co\">⑤정답</span> temporary→lasting · <span class=\"xo\">①</span>pinpointing <span class=\"xo\">②</span>alien <span class=\"xo\">③</span>gaps <span class=\"xo\">④</span>cultivating",
+  "paraphrase": {
+   "from": "기억에 오래 남는 인상",
+   "to": "lasting (오래 남는)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "글쓰기는 청중에게 오래 남는 독특하고 기억에 남는 목소리를 길러야 한다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "a brand that makes them memorable and distinct",
+     "ko": "기억에 남고 차별화된 브랜드",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "cultivating a distinctive voice ... “this sounds like [the author]”",
+     "ko": "알아볼 수 있는 독특한 목소리",
+     "role": "재진술",
+     "how": "부연"
+    },
+    {
+     "en": "a unique voice that leaves a ⑤temporary(→lasting) impression",
+     "ko": "오래 남는 인상",
+     "role": "정답근거",
+     "how": "반대낱말"
+    }
+   ],
+   "echo": "기억에 남는 목소리를 강조 → ⑤temporary는 lasting여야 = 정답 ⑤"
+  },
+  "num": 30
+ },
+ {
+  "key": "2027-06|30",
+  "answer": 4,
+  "answer_src": "given",
+  "vocab": {
+   "wrong_word": "thick",
+   "should_be": "thin / short (얇은/짧은)"
+  },
+  "hl": [
+   {
+    "t": "Classical works by playwrights such as Shakespeare or Euripides or even American musical song lyrics contain unconventional and unrealistic methods of communicating characters’ thoughts and feelings, and take a bit more skill and patience to understand.",
+    "role": "gray",
+    "tags": []
+   },
+   {
+    "t": "The reader must be mindful not to let the poetic form or archaic word usage get in the way of getting meaningful information about the story, but instead see the form itself as a ①revealing stylistic technique.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Scripts with complex language or unfamiliar styles may require several additional readings in order for the nuance to become ②clear.",
+    "role": "skip",
+    "tags": []
+   },
+   {
+    "t": "Musical theater pieces are particularly difficult to visualize when reading because of the diminished emphasis on dialogue and a ③significant emphasis on song and dance.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "대조",
+      "word": "diminished emphasis on dialogue"
+     }
+    ]
+   },
+   {
+    "t": "For example, when the music and lyrics are removed from a musical theater script, what is left is the dialogue, known as the book or libretto, and it can be very ④thick.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "흐름모순",
+      "word": "thick"
+     }
+    ]
+   },
+   {
+    "t": "There is an emphasis on dance, movement, or action in musical theater that can be ⑤time-consuming when actually performed on stage, but can take very little space when typed into a play script.",
+    "role": "yellow",
+    "tags": [
+     {
+      "sig": "근거",
+      "word": "very little space"
+     }
+    ]
+   }
+  ],
+  "derive": {
+   "steps": [
+    {
+     "ko": "뮤지컬은 <b>대사 비중이 적고</b> 노래·춤에 비중이 크다",
+     "an": "— 대사가 적음"
+    },
+    {
+     "ko": "음악·가사를 빼면 남는 대사(대본/libretto)가 ④<b>thick(두껍다)</b>고 함",
+     "an": "— 대사가 적으니 ‘얇아야’ → thin여야 = 정답 ④"
+    },
+    {
+     "ko": "춤·동작 강조는 대본으로 옮기면 <b>아주 적은 공간</b>만 차지한다",
+     "an": "— 대본은 짧다는 근거, thick와 모순"
+    }
+   ],
+   "concl": "→ 대사 비중이 적어 대본이 얇아야 하는데 ④thick만 반대로 튐, thin여야 = 정답 <b>④</b>",
+   "gnote": "‘very little space’가 근거 — 대본은 얇음."
+  },
+  "direct": [
+   {
+    "en": [
+     [
+      "Musical theater pieces are particularly difficult to visualize when reading",
+      "hl0"
+     ],
+     [
+      "because of the diminished emphasis on dialogue and a ③significant emphasis on song and dance.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "뮤지컬 작품은 읽을 때 특히 시각화하기 어렵다",
+      "hl0"
+     ],
+     [
+      "대사 강조가 줄고 노래·춤에 상당한 강조가 있기 때문에.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 뮤지컬은 대사 비중이 적음"
+   },
+   {
+    "en": [
+     [
+      "For example, when the music and lyrics are removed from a musical theater script, what is left is the dialogue, known as the book or libretto,",
+      "hl0"
+     ],
+     [
+      "and it can be very ④thick.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "예컨대, 뮤지컬 대본에서 음악·가사를 빼면 남는 것은 book 또는 libretto라 불리는 대사인데,",
+      "hl0"
+     ],
+     [
+      "그것은 매우 ④두꺼울 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "대사가 적으니 대본은 얇아야 → ‘thick’는 thin여야 = 정답④"
+   },
+   {
+    "en": [
+     [
+      "There is an emphasis on dance, movement, or action in musical theater",
+      "hl0"
+     ],
+     [
+      "that can be ⑤time-consuming when actually performed on stage, but can take very little space when typed into a play script.",
+      "hl1"
+     ]
+    ],
+    "ko": [
+     [
+      "뮤지컬에는 춤·동작·행동에 대한 강조가 있는데",
+      "hl0"
+     ],
+     [
+      "무대에서 실제 공연될 때는 시간이 걸리지만, 대본에 타이핑하면 아주 적은 공간만 차지할 수 있다.",
+      "hl1"
+     ]
+    ],
+    "note": "근거: 대본에서는 아주 적은 공간만 차지 → 대본은 얇음"
+   }
+  ],
+  "opts": [
+   {
+    "n": 1,
+    "tx": "revealing",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 2,
+    "tx": "clear",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 3,
+    "tx": "significant",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   },
+   {
+    "n": 4,
+    "tx": "thick",
+    "verdict": "ok",
+    "jd": "✔ 문맥상 thin(얇은) 뜻이어야 하는데 반대 낱말(thick)"
+   },
+   {
+    "n": 5,
+    "tx": "time-consuming",
+    "verdict": "x",
+    "jd": "✘ 문맥에 맞음"
+   }
+  ],
+  "opt_line": "<span class=\"co\">④정답</span> thick→thin · <span class=\"xo\">①</span>revealing <span class=\"xo\">②</span>clear <span class=\"xo\">③</span>significant <span class=\"xo\">⑤</span>time-consuming",
+  "paraphrase": {
+   "from": "대사가 적어 대본이 얇음",
+   "to": "thin (얇은)",
+   "copies": []
+  },
+  "restate": {
+   "thesis": "뮤지컬은 대사 비중이 적어 음악·가사를 빼면 남는 대본이 매우 얇다",
+   "kind": "single",
+   "has_restate": true,
+   "chain": [
+    {
+     "en": "the diminished emphasis on dialogue",
+     "ko": "대사 강조가 적음",
+     "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "what is left is the dialogue ... it can be very ④thick(→thin)",
+     "ko": "남는 대본은 얇음",
+     "role": "정답근거",
+     "how": "반대낱말"
+    },
+    {
+     "en": "can take very little space when typed into a play script",
+     "ko": "대본에선 아주 적은 공간만 차지",
+     "role": "재진술",
+     "how": "부연"
+    }
+   ],
+   "echo": "대사가 적어 대본이 얇아야 하는 흐름 → ④thick는 thin여야 = 정답 ④"
+  },
+  "num": 30
  }
 ]
