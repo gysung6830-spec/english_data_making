@@ -512,15 +512,24 @@ def restate_problem(rt, cue=None):
     if compare:
         cols = ""
         for li, s in zip(["A", "B"], subs[:2]):
-            n = len(s.get("trail") or [])
+            trail = s.get("trail") or []
+            n = len(trail)
             if n < 1:
                 continue
-            rows = "".join(
-                f'<div class="rqrow"><span class="pr">{_prime(li, i)}</span>'
-                f'<span class="rqlab">{"소재" if i == 0 else "→ 재진술 "+"①②③④⑤⑥"[i-1]}</span>'
-                f'<span class="ln"></span></div>' for i in range(n))
+            rows = ""
+            for i in range(n):
+                lab = "소재(주어짐)" if i == 0 else "→ 재진술 " + "①②③④⑤⑥"[i - 1]
+                if i == 0:  # 첫 표현은 알려준다(출발점)
+                    t0 = trail[0]
+                    cell = (f'<span class="given">{esc(t0.get("en",""))}'
+                            f'<i>{esc(t0.get("ko",""))}</i></span>')
+                else:
+                    cell = '<span class="ln"></span>'
+                rows += (f'<div class="rqrow"><span class="pr">{_prime(li, i)}</span>'
+                         f'<span class="rqlab">{lab}</span>{cell}</div>')
+            name = esc(s.get("name", "")) or f"비교 소재 {li}"
             cols += (f'<div class="rqsub"><div class="rqname"><span class="pr big">{li}</span>'
-                     f'비교 소재 {li} <span class="rqcnt">재진술 {max(0,n-1)}개</span></div>{rows}</div>')
+                     f'{name} <span class="rqcnt">재진술 {max(0,n-1)}개 찾기</span></div>{rows}</div>')
         if cue:
             cue_html = ' · '.join(f'<b>{esc(w)}</b>' for w in cue)
             cbox = (f'<div class="rqcue">🔍 <b>소재 2개</b> 단서 — 지문의 <b>대조·비교 신호</b> {cue_html} '
@@ -529,20 +538,27 @@ def restate_problem(rt, cue=None):
             cbox = ('<div class="rqcue">🔍 이 글은 <b>두 소재(A·B)</b>를 나란히 견준다 '
                     '— 대조·비교 흐름을 잡아 각 소재의 재진술을 따로 추적</div>')
         body = cbox + f'<div class="rqsubs">{cols}</div>'
-        guide = '두 <b>핵심 소재 A·B</b>를 잡고, 각 소재가 지문에서 <b>재진술된 만큼</b> 표현을 찾아 A→A′… · B→B′…로 잇는다.'
+        guide = '각 소재의 <b>첫 표현(A·B)은 주어져</b> 있다. 그것이 <b>재진술된 표현</b>을 <b>A′…·B′…</b>로 찾아 잇는다.'
         nlab = "소재 2개"
     else:
         chain = rt.get("chain") or []
         n = len(chain)
         if n < 2:  # 재진술이 없으면 억지로 문제 만들지 않음
             return ""
-        rows = "".join(
-            f'<div class="rqrow"><span class="pr">{_prime("A", i)}</span>'
-            f'<span class="rqlab">{_RQLAB[i] if i < len(_RQLAB) else "→ 재진술"}</span>'
-            f'<span class="ln"></span></div>' for i in range(n))
+        rows = ""
+        for i in range(n):
+            lab = _RQLAB[i] if i < len(_RQLAB) else "→ 재진술"
+            if i == 0:  # 핵심 소재·주장(A)은 알려준다(출발점)
+                c0 = chain[0]
+                lab = "핵심 소재·주장(주어짐)"
+                cell = f'<span class="given">{esc(c0.get("en",""))}<i>{esc(c0.get("ko",""))}</i></span>'
+            else:
+                cell = '<span class="ln"></span>'
+            rows += (f'<div class="rqrow"><span class="pr">{_prime("A", i)}</span>'
+                     f'<span class="rqlab">{lab}</span>{cell}</div>')
         body = f'<div class="rqchain">{rows}</div>'
-        guide = '<b>핵심 소재·주장(A)</b>을 잡고, 지문에서 그것을 <b>다른 말로 바꾼 표현</b>을 나온 <b>만큼</b> A′→A″…로 잇는다.'
-        nlab = f"재진술 {n-1}개"
+        guide = '<b>핵심 소재·주장(A)은 주어져</b> 있다. 지문에서 그것을 <b>다른 말로 바꾼 표현</b>을 나온 <b>만큼</b> <b>A′→A″…</b>로 찾아 잇는다.'
+        nlab = f"재진술 {n-1}개 찾기"
     return f'''<div class="rquiz">
       <div class="rqh"><span class="ico">🔁</span>재진술 연결 문제<span class="add">추가 문제</span>
         <span class="rqno">{nlab}</span></div>
@@ -1265,6 +1281,8 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .rquiz .rqrow .pr.big{ font-size:11px; margin-right:4px; }
 .rquiz .rqrow .rqlab{ flex:none; width:74px; font-size:8.6px; font-weight:700; color:#8a6a00; }
 .rquiz .rqrow .ln{ flex:1; border-bottom:1.4px dotted #d7b968; height:15px; }
+.rquiz .rqrow .given{ flex:1; font-size:9.5px; color:#23272e; background:#fff9e6; border:1px solid #ecdcb0; border-radius:6px; padding:2px 8px; line-height:1.35; }
+.rquiz .rqrow .given i{ color:#8a6a00; font-style:normal; font-size:8.5px; margin-left:6px; }
 .rquiz .rqsubs{ display:flex; gap:12px; }
 .rquiz .rqsub{ flex:1; min-width:0; }
 .rquiz .rqsub .rqname{ display:flex; align-items:center; gap:5px; font-size:9.3px; font-weight:800; color:#8a5a1a; border-bottom:1px solid #f0e3bf; padding-bottom:4px; margin-bottom:6px; }
