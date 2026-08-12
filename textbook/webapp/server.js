@@ -31,6 +31,34 @@ const PORT = process.env.PORT || 3000;
 const OUT_DIR = path.join(__dirname, '..', 'output', 'web');
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
+// 산출물 정리 — output/web 은 생성할 때마다 book_<stamp>.{docx,pdf,html} 3개가 쌓이고
+// 지워지지 않아 디스크가 계속 찬다. 한 교재(같은 stamp)를 한 세트로 묶어,
+// 48시간이 지났거나 최신 30세트를 벗어난 오래된 산출물을 자동 삭제한다.
+const KEEP_SETS = 30;
+const MAX_AGE_MS = 48 * 60 * 60 * 1000;
+function pruneOutputs(dir = OUT_DIR) {
+  let names;
+  try { names = fs.readdirSync(dir); } catch (_) { return; }
+  const sets = new Map(); // stamp(확장자 뗀 basename) → { files:[], t:최신 mtime }
+  for (const name of names) {
+    const full = path.join(dir, name);
+    let stat;
+    try { stat = fs.statSync(full); } catch (_) { continue; }
+    if (!stat.isFile()) continue;
+    const stamp = name.replace(/\.[^.]+$/, '');
+    const cur = sets.get(stamp) || { files: [], t: 0 };
+    cur.files.push(full);
+    if (stat.mtimeMs > cur.t) cur.t = stat.mtimeMs;
+    sets.set(stamp, cur);
+  }
+  const now = Date.now();
+  const ordered = [...sets.values()].sort((a, b) => b.t - a.t); // 최신순
+  ordered.forEach((set, i) => {
+    if (i < KEEP_SETS && now - set.t <= MAX_AGE_MS) return; // 최신 30세트 & 48시간 이내는 보존
+    set.files.forEach((f) => { try { fs.unlinkSync(f); } catch (_) { /* 무시 */ } });
+  });
+}
+
 const app = express();
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -50,6 +78,7 @@ app.post('/api/generate', upload.single('pdf'), async (req, res) => {
   const log = (m) => { steps.push(m); console.log('•', m); };
   try {
     if (!req.file) return res.status(400).json({ ok: false, error: 'PDF 파일이 없어요.' });
+    pruneOutputs(); // 오래된 산출물(48시간↑ 또는 최신 30세트 초과) 정리
 
     // 한글 파일명이 latin1 로 들어오는 경우 복원
     let fileName = req.file.originalname;
@@ -165,11 +194,17 @@ function openBrowser(url) {
   } catch (_) { /* 무시 */ }
 }
 
-app.listen(PORT, () => {
-  const url = `http://localhost:${PORT}`;
-  console.log(`\n📘 필생보 교재 생성 웹앱이 켜졌어요 → ${url}`);
-  console.log('   브라우저가 자동으로 열립니다. (안 열리면 위 주소를 직접 입력)');
-  console.log('   이 창을 닫으면 웹앱도 꺼집니다. 끄려면 Ctrl + C.\n');
-  console.log('   API 키: 웹 화면의 입력칸에 붙여넣으면 실제 AI 로 생성 (비우면 MOCK).\n');
-  openBrowser(url);
-});
+// 직접 실행할 때만 서버를 켠다(테스트에서 require 하면 listen 하지 않도록).
+if (require.main === module) {
+  pruneOutputs(); // 서버 시작 시에도 1회 청소
+  app.listen(PORT, () => {
+    const url = `http://localhost:${PORT}`;
+    console.log(`\n📘 필생보 교재 생성 웹앱이 켜졌어요 → ${url}`);
+    console.log('   브라우저가 자동으로 열립니다. (안 열리면 위 주소를 직접 입력)');
+    console.log('   이 창을 닫으면 웹앱도 꺼집니다. 끄려면 Ctrl + C.\n');
+    console.log('   API 키: 웹 화면의 입력칸에 붙여넣으면 실제 AI 로 생성 (비우면 MOCK).\n');
+    openBrowser(url);
+  });
+}
+
+module.exports = { app, pruneOutputs, KEEP_SETS, MAX_AGE_MS };
