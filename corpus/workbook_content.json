@@ -12755,7 +12755,7 @@
   "restate": {
    "thesis": "숲의 다양성이 비숲을 숲으로 바꾸는 정당화가 될 순 없다.",
    "kind": "single",
-   "has_restate": true,
+   "has_restate": false,
    "chain": [
     {
      "en": "forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests",
