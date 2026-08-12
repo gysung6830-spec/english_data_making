@@ -185,4 +185,6 @@ async function extractSentences(buffer) {
   return { raw, sentences };
 }
 
-module.exports = { extractSentences, looksEnglish, stripNoise, joinAndSplit, stripHangul };
+module.exports = {
+  extractSentences, looksEnglish, stripNoise, joinAndSplit, stripHangul, normalizePdfText,
+};

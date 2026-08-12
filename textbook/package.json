@@ -5,6 +5,7 @@
   "description": "수능 구문해석 교재 자동 생성기 — 문법 챕터별 [설명 → 같이 풀어보기 → 혼자 풀어보기] docx/pdf 생성",
   "main": "build_v4.js",
   "scripts": {
+    "test": "node --test",
     "build": "node build_v4.js",
     "build:docx": "node build_v4.js --no-pdf",
     "validate": "node validate.js",
