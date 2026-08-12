@@ -3724,8 +3724,8 @@
  },
  {
   "key": "2027-06|34",
-  "answer": 5,
-  "answer_src": "given",
+  "answer": 1,
+  "answer_src": "official:2027-06 정답표 ①",
   "hl": [
    {
     "t": "The dependent and shifting nature of art values, not only on the market but inherently, is uppermost in the mind of today’s art collector, whether he buys for himself or as the representative of an institution.",
@@ -3801,10 +3801,10 @@
     },
     {
      "ko": "그것을 통해 그는 <b>용감하게</b> 미적 판단과 '확신'을 확언한다",
-     "an": "— 유동성에 맞서는 '흔들리지 않는' 확신 = ⑤"
+     "an": "— 유동성에 맞서 <b>용감히</b> 자기 선택의 미래 가치를 확신 = 미술의 향방을 내다본다 = ①"
     }
    ],
-   "concl": "→ 유동적 합의에도 그가 용기 있게 지키는 확신 = 작품의 독창성은 흔들리지 않는다 = <b>⑤</b>",
+   "concl": "→ 가치가 유동적이고 합의는 언젠가 뒤집힌다 해도, 컬렉터는 <b>용기 있게</b> 자기 선택이 미래 미술사에서 유의미해지리라 확신 = 그가 <b>미술의 향방을 내다볼 수 있다</b>는 확신 = <b>①</b>",
    "gnote": "'고양이·기념품' 비유(부연)와 도입 문장은 빼도 논리에 영향 없음."
   },
   "direct": [
@@ -3982,37 +3982,37 @@
   ],
   "opts": [
    {
-    "n": 5,
-    "tx": "the <b>originality</b> of the work is <b>unshakable</b>",
-    "verdict": "ok",
-    "jd": "✔ 근거"
-   },
-   {
     "n": 1,
     "tx": "he can predict where art is going",
-    "verdict": "x",
-    "jd": "✘ 정반대"
+    "verdict": "ok",
+    "jd": "✔ 가치가 유동적이어도 컬렉터는 자기 선택이 미래 미술사에서 유의미해지리라 확신(미술의 향방을 내다봄)"
    },
    {
     "n": 2,
     "tx": "the artist behind the work is reliable",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 작가 신뢰는 언급 없음"
    },
    {
     "n": 3,
     "tx": "the art work tells the story of his time",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 시대 서술은 언급 없음"
    },
    {
     "n": 4,
     "tx": "his choice will lead to immediate profits",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 즉각적 이익 얘기가 아님(정반대)"
+   },
+   {
+    "n": 5,
+    "tx": "the originality of the work is unshakable",
+    "verdict": "x",
+    "jd": "✘ 함정: 가치는 '유동적·불확실'하다 했으므로 '흔들리지 않는다'는 정반대"
    }
   ],
-  "opt_line": "<span class=\"co\">⑤정답</span> 작품의 독창성은 흔들리지 않는다 · <span class=\"xo\">①</span>미술의 향방 예측 가능 <span class=\"xo\">②</span>작가가 믿을 만함 <span class=\"xo\">③</span>시대의 이야기를 전함 <span class=\"xo\">④</span>즉각적 수익",
+  "opt_line": "<span class=\"co\">①정답</span> 그가 미술의 향방을 내다볼 수 있다는 확신 · <span class=\"xo\">⑤</span>가치는 유동적이라 했으니 '흔들림 없다'는 정반대 <span class=\"xo\">②③④</span>언급 없음/정반대",
   "paraphrase": {
    "from": "committing is his own act · courageously affirms despite displaced consensus",
    "to": "the originality of the work is unshakable",
@@ -4042,7 +4042,7 @@
      "how": "반복"
     }
    ],
-   "echo": "유동적 합의에도 courageously affirms하는 확신을 '독창성은 흔들리지 않는다'로 재진술"
+   "echo": "빈칸=컬렉터의 확신 → '미술의 향방을 예측할 수 있다'(①); '독창성 불변'(⑤)은 유동성과 정반대"
   }
  },
  {
@@ -21237,8 +21237,8 @@
  },
  {
   "key": "2027-06|38",
-  "answer": 1,
-  "answer_src": "given",
+  "answer": 3,
+  "answer_src": "official:2027-06 정답표 ③",
   "hl": [
    {
     "t": "To minimize vortex shedding, skyscraper designers do everything in their powers to confuse the wind.",
@@ -21316,15 +21316,15 @@
   "derive": {
    "steps": [
     {
-     "ko": "삽입문장 = ‘소용돌이 흘림(vortex shedding)을 최소화하려 설계자들이 바람을 <b>교란</b>시킨다’는 주제 문장",
-     "an": "— 바람을 다루는 설계 원리를 먼저 제시"
+     "ko": "삽입문장 = ‘소용돌이 흘림을 최소화하려 설계자들이 바람을 <b>교란</b>시킨다’ = <b>해결책</b> 주제문",
+     "an": "— 바람 문제에 <b>대응</b>하는 설계 원리(해결책)를 여는 문장"
     },
     {
-     "ko": "① 앞: 바람이 건물 면을 지나 분리된다 / ① 뒤: ‘<b>그 압력 차(The difference)</b>’가 소용돌이를 만든다",
-     "an": "— 주제(바람 교란) 문장이 먼저 들어가고, 그 뒤로 소용돌이의 발생·위험 설명이 이어짐"
+     "ko": "①② = 압력 차로 소용돌이가 <b>생기고</b> 건물을 흔들어 <b>위험</b>해진다(문제) / ③부터 ‘~하면 <b>도움이 된다</b>’(해결책)",
+     "an": "— 문제 설명(①②)과 해결책 나열(③④⑤)의 경계 = 삽입문은 <b>③</b>"
     }
    ],
-   "concl": "→ 바람을 교란시킨다는 주제 문장은 <b>①</b> 자리에 들어간다",
+   "concl": "→ ①② 는 소용돌이가 <b>생기고 위험해지는 문제</b>를 설명, ③부터 '~하면 도움이 된다'는 <b>해결책</b>이 시작 → '바람을 교란한다'는 해결책 주제문은 <b>③</b> 자리",
    "gnote": "도입·예시(회색)는 논리에 영향 없음."
   },
   "direct": [
@@ -21442,35 +21442,35 @@
    {
     "n": 1,
     "tx": "① The difference in pressures 앞",
-    "verdict": "ok",
-    "jd": "✔ 근거"
+    "verdict": "x",
+    "jd": "✘ 아직 소용돌이 '문제' 설명 중"
    },
    {
     "n": 2,
     "tx": "② The vortices pull and push 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 소용돌이의 위험(문제)이 이어짐"
    },
    {
     "n": 3,
     "tx": "③ Orienting 앞",
-    "verdict": "x",
-    "jd": "✘ 없음"
+    "verdict": "ok",
+    "jd": "✔ ①② 문제 설명 뒤, ③부터 '~하면 도움이 된다'는 해결책 시작 → 해결책을 여는 주제문 자리"
    },
    {
     "n": 4,
     "tx": "④ Chopping or rounding off 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 이미 해결책 나열 중"
    },
    {
     "n": 5,
     "tx": "⑤ Roughing up the corners 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 이미 해결책 나열 중"
    }
   ],
-  "opt_line": "<span class=\"co\">①정답</span> 바람 교란이라는 주제 문장이 압력차·소용돌이 설명 앞에 · <span class=\"xo\">②③④⑤</span>",
+  "opt_line": "<span class=\"co\">③정답</span> ①②=소용돌이(문제) 설명 → ③부터 해결책 시작, '바람을 교란한다'는 해결책 주제문이 ③에 · <span class=\"xo\">①②</span>문제 설명 중 <span class=\"xo\">④⑤</span>이미 해결책 나열 중",
   "paraphrase": {
    "from": "confuse the wind",
    "to": "① 앞 위치",
@@ -21520,7 +21520,7 @@
      "how": "—"
     }
    ],
-   "echo": "'confuse the wind' 주제문이 'The difference'(그 압력 차) 앞, 즉 ① 자리에 놓임."
+   "echo": "삽입문(바람 교란=해결책)은 문제 설명(①②)과 해결책 나열(③④⑤)의 경계인 ③에 들어감"
   }
  },
  {
