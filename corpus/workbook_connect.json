@@ -637,5 +637,1104 @@
    "③ 뒤 'If one group member departs ...'가 단독 이탈은 포식과 무관할 수 있음을 들어 신뢰성 논리를 설명 → 삽입 위치 ③"
   ],
   "answer_label": "③"
+ },
+ {
+  "key": "2022-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "researchers first collect a list of campus landmarks",
+    "kind": "대응·반복",
+    "note": "(A)가 주어진 글의 '랜드마크'를 실험 소재로 받아 거리 추정 절차를 설정 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "The remarkable finding",
+    "kind": "대응·반복",
+    "note": "(C)의 'The remarkable finding'은 (A)에서 시행한 거리 추정 실험의 결과 — (A) 뒤"
+   },
+   {
+    "marker": "This asymmetry of distance estimates",
+    "kind": "지시어",
+    "note": "(B)의 'This asymmetry'는 (C)의 '한 방향이 더 짧게 판단되는' 비대칭 결과를 받음 — (C) 뒤"
+   },
+   {
+    "marker": "Judgments of distance, then, are not necessarily coherent",
+    "kind": "연결어",
+    "note": "(B)가 'then'으로 앞 결과를 정리·결론지어 글을 마무리"
+   }
+  ],
+  "chain": [
+   "주어진 글: 랜드마크는 자기 자신이자 주변 이웃을 규정한다(성질 제시)",
+   "(A): 그 랜드마크를 소재로 학생들에게 거리 쌍을 추정시키는 실험을 설정",
+   "(C): 'The remarkable finding'으로 실험 결과(비대칭적 거리 판단)를 제시",
+   "(B): 'This asymmetry'가 그 결과를 받아 유클리드 원리 위반으로 결론 → (A)-(C)-(B)"
+  ],
+  "answer_label": "(A)-(C)-(B)"
+ },
+ {
+  "key": "2025-09|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Each fact would simply be stored separately",
+    "kind": "대응·반복",
+    "note": "(C) 첫머리가 주어진 글의 '사실 목록을 쌓는' 가정을 이어받음 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "The adjustments",
+    "kind": "지시어",
+    "note": "(B)의 'The adjustments'는 (C)의 '옛 패턴을 수정한다(modify the old patterns)'는 조정을 받음 — (C) 뒤"
+   },
+   {
+    "marker": "something totally new, however",
+    "kind": "연결어",
+    "note": "(A)의 'totally new, however'가 (B)의 '조금만 새로울 때'와 대조 — (B) 뒤"
+   },
+   {
+    "marker": "According to connectionist theory, however",
+    "kind": "연결어",
+    "note": "(C)에서 'however'로 '사실이 따로 저장' 가정을 뒤집어 패턴 개념을 세움"
+   }
+  ],
+  "chain": [
+   "주어진 글: 학습이 사실 목록 쌓기라면 조금 새롭든 완전히 새롭든 차이가 없어야 함(가정)",
+   "(C): 'Each fact would simply be stored separately'로 그 가정을 잇고 however로 '지식은 패턴' 도입",
+   "(B): 'The adjustments'가 (C)의 패턴 수정을 받아 '조금 새로울 때 조정이 가장 작다'",
+   "(A): 'totally new, however'로 (B)와 대조해 '완전히 새로우면 큰 조정' → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2024-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "our concern about what others are thinking of us",
+    "kind": "대응·반복",
+    "note": "(B)가 주어진 글의 '사회적 자의식'을 '타인 의식이 원인'으로 이어받음 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "However",
+    "kind": "연결어",
+    "note": "(C)의 'However'가 (B)까지의 부정적·당혹스러운 측면을 긍정적 기능으로 전환 — (B) 뒤"
+   },
+   {
+    "marker": "Maybe our brief loss of face benefits the long-term cohesion of the group",
+    "kind": "대응·반복",
+    "note": "(A)가 (C)의 '긍정적 사회 기능'을 '집단 결속 이득'으로 이어 발전 — (C) 뒤"
+   },
+   {
+    "marker": "a signal to others that we recognize that a social norm has been broken",
+    "kind": "대응·반복",
+    "note": "(C)의 '긍정적 기능'을 규범 인식 신호로 설명 → (A)의 결속 이득으로 연결"
+   }
+  ],
+  "chain": [
+   "주어진 글: 얼굴 붉힘은 사회적 자의식이 일으키는 비자발적 반응",
+   "(B): 'concern about what others are thinking'으로 그 사회성을 타인 의식이 원인으로 구체화",
+   "(C): 'However'로 부정적 측면을 뒤집어 '긍정적 사회 기능(규범 인식 신호)'을 제시",
+   "(A): 'Maybe our brief loss of face benefits ... cohesion'으로 긍정적 기능을 결속 이득으로 마무리 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2022-수능|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "also",
+    "kind": "연결어",
+    "note": "넣을 문장의 'also'는 앞서 나온 두려움 완화 조치에 재교육을 '추가' — 완화책이 이미 제시된 뒤여야 함"
+   },
+   {
+    "marker": "the replaced human workers should be moved to positions",
+    "kind": "대응·반복",
+    "note": "⑤ 문장이 넣을 문장의 '새 직무로의 재교육/재배치'를 구체화 — 넣을 문장 바로 뒤"
+   },
+   {
+    "marker": "to ease these fears",
+    "kind": "대응·반복",
+    "note": "글 전체가 로봇 도입의 '두려움 완화'를 다룸 — 넣을 문장의 'reduce their fear'와 대응"
+   },
+   {
+    "marker": "Since robots are particularly good at highly repetitive simple motions",
+    "kind": "연결어",
+    "note": "⑤의 'Since'가 재배치의 이유를 대며 넣을 문장의 재교육을 부연"
+   }
+  ],
+  "chain": [
+   "도입: 로봇 도입이 노동자에게 걱정과 두려움을 일으킴",
+   "①~④: 경영진이 두려움을 덜어야 하며(①) 신설 공장 도입·공동 계획 등 완화책 제시",
+   "넣을 문장: 'also'로 '새 직무 재교육도 해고 두려움을 크게 줄인다'는 조치를 추가",
+   "⑤: 'Since ... the replaced human workers should be moved to positions ...'로 그 재교육/재배치를 부연 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2025-09|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "If not",
+    "kind": "연결어",
+    "note": "넣을 문장의 'If not'은 ④의 '구별 시스템을 갖춰야 한다'는 조건을 부정으로 받음 — ④ 바로 뒤"
+   },
+   {
+    "marker": "some built-in system enabling it to discriminate between the detection of a block and the detection of its own arm",
+    "kind": "대응·반복",
+    "note": "④가 제시한 '갖춰야 할 조건'을 넣을 문장의 'If not'이 부정 — 넣을 문장 앞"
+   },
+   {
+    "marker": "Your robot would engage in circular, self-centered acts",
+    "kind": "대응·반복",
+    "note": "⑤가 넣을 문장의 '자기 자신을 끝없이 좇음'을 '자기 중심적 순환 행동'으로 부연 — 넣을 문장 뒤"
+   }
+  ],
+  "chain": [
+   "④: 성공하려면 로봇이 '블록 탐지'와 '자기 팔 탐지'를 구별하는 내장 시스템을 가져야 함",
+   "넣을 문장: 'If not'으로 그 조건이 없으면 '블록이 아니라 자기 자신을 끝없이 좇는다'",
+   "⑤: 'Your robot would engage in circular, self-centered acts'로 그 결과를 부연 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2025-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "This active involvement",
+    "kind": "지시어",
+    "note": "넣을 문장의 'This active involvement'는 ④의 '감상에 필요한 미학적 태도(능동적 관여)'를 받음 — ④ 바로 뒤"
+   },
+   {
+    "marker": "an “aesthetic attitude” is needed to appreciate the whole episode",
+    "kind": "대응·반복",
+    "note": "④가 '미학적 태도(능동적 관여)'를 도입 — 넣을 문장의 지시 대상 — 넣을 문장 앞"
+   },
+   {
+    "marker": "An ability to switch between the “pragmatic attitude” of everyday life and an “aesthetic attitude”",
+    "kind": "대응·반복",
+    "note": "⑤가 미학적 태도의 깊이를 '태도 전환 능력'으로 이어 결론 — 넣을 문장 뒤"
+   }
+  ],
+  "chain": [
+   "④: 작품이 덜 '읽힐' 때 관습적 형식의 이탈이 '미학적 태도가 필요함'을 상기시킴",
+   "넣을 문장: 'This active involvement'가 그 미학적 태도(능동적 관여)를 받아 '깊은 미학적 처리·성찰의 토대'로 이음",
+   "⑤: '실용적 태도와 미학적 태도를 오가는 능력'으로 결론 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2022-수능|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "and so increasing prices",
+    "kind": "대응·반복",
+    "note": "(B)가 주어진 글의 'increasing prices'를 그대로 받음 → 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "Many examples of such",
+    "kind": "지시어",
+    "note": "(A)의 'such (green taxes)'가 (B)의 과세 방식을 가리킴 → (B) 뒤"
+   },
+   {
+    "marker": "for example",
+    "kind": "연결어",
+    "note": "(A)가 녹색세의 구체 예(쓰레기봉투 유료화)를 제시"
+   },
+   {
+    "marker": "The results have been",
+    "kind": "지시어",
+    "note": "(C)의 'The results'가 (A) 예시 정책의 결과를 받음 → (A) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 변화를 이끄는 것은 '가격 상승'이라는 논지 제시",
+   "(B): 'and so increasing prices'로 과세→가격 상승 메커니즘을 이어받아 설명",
+   "(A): 'such green taxes'의 사례(쓰레기봉투 유료화)를 for example로 제시",
+   "(C): 'The results'로 그 사례의 결과(재활용 증가)를 서술 → (B)-(A)-(C)"
+  ],
+  "answer_label": "(B)-(A)-(C)"
+ },
+ {
+  "key": "2025-수능|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "develop reputations for honesty",
+    "kind": "대응·반복",
+    "note": "(C)의 'reputations'가 주어진 글의 'reputational capital'을 받음 → 주어진 글 뒤"
+   },
+   {
+    "marker": "reputations act as a bond",
+    "kind": "대응·반복",
+    "note": "(B)가 (C)의 평판을 'bond(담보)'로 이어받음 → (C) 뒤"
+   },
+   {
+    "marker": "a farmer can reduce effort",
+    "kind": "대응·반복",
+    "note": "(B)에서 농부의 부정 가능성을 제시 → (A) Similarly 지주 부정과 병렬 준비"
+   },
+   {
+    "marker": "Similarly",
+    "kind": "연결어",
+    "note": "(A)의 'Similarly'가 (B)의 농부 부정과 지주 부정을 병렬 → (B) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 평판 자본이 있을 때 시장 집행력이 커진다는 논지",
+   "(C): 'develop reputations'로 그 평판이 어떻게 형성·공유되는지 서술",
+   "(B): 'reputations act as a bond'로 평판을 담보로 삼고, 농부의 부정 가능성 제시",
+   "(A): 'Similarly'로 지주도 부정할 수 있음을 병렬해 마무리 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2024-09|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "But if a plant does not have a caretaker",
+    "kind": "연결어",
+    "note": "(C)의 'But'이 주어진 글의 '정원사가 비료를 주는 상황'을 뒤집음 → 주어진 글 뒤"
+   },
+   {
+    "marker": "Research in this area",
+    "kind": "지시어",
+    "note": "(B)의 'this area'가 (C)의 기억·반응 논의를 가리킴 → (C) 뒤"
+   },
+   {
+    "marker": "risk-taking behaviors",
+    "kind": "대응·반복",
+    "note": "(B)가 위험 감수 행동을 제시 → (A) In contrast 위험 회피와 대조 준비"
+   },
+   {
+    "marker": "In contrast",
+    "kind": "연결어",
+    "note": "(A)의 'In contrast'가 (B)의 위험 감수와 위험 회피를 대조 → (B) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 양분 부족 시 식물의 적응 반응, 정원사가 신호를 읽는 상황 제시",
+   "(C): 'But ... does not have a caretaker'로 관리자 없는 경우 스스로 뿌리를 뻗는다고 반전, 기억·반응 언급",
+   "(B): 'Research in this area'로 그 논의를 이어 위험 감수 행동을 소개",
+   "(A): 'In contrast'로 양분 풍부 이력의 위험 회피를 대조해 마무리 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2023-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "Also",
+    "kind": "연결어",
+    "note": "넣을 문장이 앞의 '해로운 효과' 문제에 '새 살충제 개발도 어렵다'를 추가 → 해로운 효과 문장(③) 뒤"
+   },
+   {
+    "marker": "Very high costs are involved",
+    "kind": "대응·반복",
+    "note": "넣을 문장의 '개발이 어렵다'의 이유(승인 고비용)를 뒤 문장이 설명 → 넣을 문장 뒤"
+   },
+   {
+    "marker": "gain government approval for new",
+    "kind": "대응·반복",
+    "note": "넣을 문장의 'new pesticides' 개발 난항과 직결되는 승인 절차"
+   },
+   {
+    "marker": "Consequently",
+    "kind": "연결어",
+    "note": "개발 난항의 결과로 다른 방제법을 고려한다는 결론으로 이어짐"
+   }
+  ],
+  "chain": [
+   "③ 문장: 1960년대 이후 살충제가 이로운 곤충·비표적 생물에 해롭다는 문제 제시",
+   "넣을 문장: 'Also'로 '새 살충제 개발도 어렵다'는 또 다른 문제를 추가",
+   "④ 뒤 문장: 'Very high costs'로 그 개발 난항의 이유(승인 고비용)를 설명 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2025-수능|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "however",
+    "kind": "연결어",
+    "note": "넣을 문장이 앞의 '비밀 유지의 이점' 나열을 반전해 '법적 보호 없으면 유출 위험'을 제시 → 이점 문장(③) 뒤"
+   },
+   {
+    "marker": "Once the idea is released",
+    "kind": "대응·반복",
+    "note": "넣을 문장의 '정보 유출 위험'이 실현된 상황을 뒤 문장이 설명 → 넣을 문장 뒤"
+   },
+   {
+    "marker": "Such a predicament",
+    "kind": "지시어",
+    "note": "'Such a predicament(그러한 곤경)'가 넣을 문장이 만든 유출 위험 상황을 받음 → 넣을 문장 이후"
+   },
+   {
+    "marker": "disclose the proprietary information",
+    "kind": "대응·반복",
+    "note": "넣을 문장의 '독점 정보 누설'이 이후 논의의 핵심 위험"
+   }
+  ],
+  "chain": [
+   "① ~ ③: 발명가들이 비밀 유지를 선호하는 이점(비용·기간 등)을 나열",
+   "넣을 문장: 'however'로 반전해 '법적 보호가 없으면 정보가 누설될 위험'을 제시",
+   "④ 뒤 문장: 'Once the idea is released'로 유출 시 정보가 통제 불가가 됨을 이어 'Such a predicament'로 연결 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2025-09|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "Unfortunately",
+    "kind": "연결어",
+    "note": "넣을 문장이 앞의 '예측 능력이 필요하다'는 논리를 뒤집어 '미래는 예측 불가'를 제시 → 예측 능력 요구 문장(③) 뒤"
+   },
+   {
+    "marker": "at the scales, accuracy, and precision",
+    "kind": "대응·반복",
+    "note": "앞 문장의 'appropriate spatial and temporal scales'를 받아 바로 그 규모에서 예측이 불가함을 말함"
+   },
+   {
+    "marker": "To illustrate this",
+    "kind": "지시어",
+    "note": "'this'가 넣을 문장의 '예측 불가능성'을 가리킴 → 넣을 문장 뒤"
+   },
+   {
+    "marker": "Comparable uncertainties",
+    "kind": "대응·반복",
+    "note": "넣을 문장이 연 '불확실성' 논의가 다른 스트레스 요인으로 확장되며 마무리"
+   }
+  ],
+  "chain": [
+   "③ 문장: 전통적 접근은 적절한 규모에서 높은 예측 능력을 요구한다고 제시",
+   "넣을 문장: 'Unfortunately'와 'at the scales'로 반전해 바로 그 규모에서 미래가 예측 불가함을 말함",
+   "④ 뒤 문장: 'To illustrate this'로 그 예측 불가능성을 기후 변화 불확실성으로 예시 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2023-09|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "To make up for the difference in level",
+    "kind": "대응·반복",
+    "note": "(C) 첫머리가 주어진 글의 '서로 다른 높이(수위 차)'를 받음 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "a pair of gates at each end",
+    "kind": "대응·반복",
+    "note": "(C)가 갑문·문 구조를 소개 — (B)·(A)의 'the upper gates'가 이를 받음"
+   },
+   {
+    "marker": "The rising water lifts the vessel to the level of the upper body of water",
+    "kind": "시간·순서",
+    "note": "(B) 끝 — 물이 차오르며 배를 올림, 그 뒤 (A)의 'Then 문이 열림'으로 이어짐"
+   },
+   {
+    "marker": "Then the upper gates open",
+    "kind": "시간·순서",
+    "note": "(A)의 'Then'이 (B)의 '물이 차올라 배가 상위로 오름' 직후를 가리킴 — (B) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 두 수계의 '다른 높이(수위 차)'가 공학 문제로 제시",
+   "(C): 'To make up for the difference in level'로 그 수위 차를 받아 갑문(lock)과 문 구조를 도입",
+   "(B): (C)의 문(the upper gates)을 이용한 상류 통행 절차 — 물이 차올라 배를 상위 수면으로 올림",
+   "(A): 'Then the upper gates open'으로 (B) 직후를 이어 문이 열리고 통과 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2027-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Structural defenses like thick coats of wax",
+    "kind": "대응·반복",
+    "note": "(C)가 주어진 글의 '화학적 방어'에 '구조적 방어'를 병렬로 덧붙임 — 주어진 글 뒤"
+   },
+   {
+    "marker": "Nor are individual plants entirely on their own while under attack.",
+    "kind": "대응·반복",
+    "note": "(C) 끝문장 — '혼자가 아니다'를 말해 (B)의 이웃·천적 협력을 예고함"
+   },
+   {
+    "marker": "Plants can release chemical compounds that let their same-species neighbors know",
+    "kind": "대응·반복",
+    "note": "(B) — (C)의 '혼자가 아니다'를 구체화해 이웃과 협력 — (C) 뒤"
+   },
+   {
+    "marker": "The back-and-forth",
+    "kind": "지시어",
+    "note": "(A) 첫머리 'The back-and-forth'가 앞서 서술된 식물-곤충 방어/대응을 받음 — 마지막"
+   }
+  ],
+  "chain": [
+   "주어진 글: 다양한 방어 중 '화학적 방어'를 먼저 제시",
+   "(C): 'Structural defenses'로 구조적 방어를 덧붙이고, 끝에 'Nor ... on their own'으로 협력을 예고",
+   "(B): (C)의 '혼자가 아니다'를 받아 같은 종 이웃·천적과의 화학 신호 협력 설명",
+   "(A): 'The back-and-forth'가 앞의 방어-대응 전체를 받아 진화적 주고받기로 마무리 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2025-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "For example, performance evaluation and reward systems",
+    "kind": "연결어",
+    "note": "(B)의 'For example'이 주어진 글의 '필요한 HR 관행들'을 예시 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "In addition, the human resource development function may be dramatically changed",
+    "kind": "대응·반복",
+    "note": "(B) 끝 — 'HRD 기능이 바뀜'을 예고해 (C)의 촉진자 설명을 불러옴"
+   },
+   {
+    "marker": "human resource development professionals must become learning facilitators",
+    "kind": "대응·반복",
+    "note": "(C) 끝 — 'learning facilitators' 도입, (A)의 'Their role'가 이를 받음"
+   },
+   {
+    "marker": "Their role should be to assist, consult, and advise",
+    "kind": "지시어",
+    "note": "(A)의 'Their'가 (C)의 learning facilitators(HRD 전문가)를 가리킴 — (C) 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 조직 학습을 뒷받침하는 '필요한 HR 관행들'이 있다고 화제 제시",
+   "(B): 'For example'로 성과평가·보상 체계 등 관행을 예시하고, 끝에 'HRD 기능이 바뀜' 예고",
+   "(C): '바뀌 HRD 기능'을 받아 'HRD 전문가는 학습 촉진자가 되어야'로의 전환을 제시",
+   "(A): 'Their role'가 (C)의 learning facilitators를 받아 그 역할을 구체적으로 설명 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2023-09|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "In particular, they define a group",
+    "kind": "지시어",
+    "note": "넣을 문장의 'they'는 ①② 사이 앞 문장의 'social psychologists'를 받음 — 그 뒤(②)에 들어가야 함"
+   },
+   {
+    "marker": "However, social psychologists use this term more precisely.",
+    "kind": "대응·반복",
+    "note": "사회심리학자를 처음 등장시키는 문장 — 넣을 문장의 'they'가 받을 대상을 만들어 바로 뒤에 옥"
+   },
+   {
+    "marker": "this sense of mutual interaction or inter-dependence",
+    "kind": "지시어",
+    "note": "② 뒤 문장 — 넣을 문장의 '상호작용·상호영향' 정의를 받아야 'this sense'가 성립 — 넣을 문장 뒤"
+   }
+  ],
+  "chain": [
+   "① 앞: '일상에서는 아무 무리나 집단으로 본다' → However로 '사회심리학자는 더 정밀히 쓴다' 도입",
+   "넣을 문장: 'In particular, they(=사회심리학자) define a group as ... interact with, and exert mutual influences'로 정밀한 정의를 제시",
+   "② 뒤: 'It is this sense of mutual interaction ...'이 그 상호작용 정의를 받음 → ②에 삽입"
+  ],
+  "answer_label": "②"
+ },
+ {
+  "key": "2022-06|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "suggests that sleep additionally provides some vital service(s)",
+    "kind": "대응·반복",
+    "note": "④ 문장 — '수면이 중요 기능을 준다'는 내용을 넣을 문장의 'This is particularly true'가 받음"
+   },
+   {
+    "marker": "decreased responsiveness to the environment",
+    "kind": "대응·반복",
+    "note": "넣을 문장이 도입하는 '대가' — 뒤 문장의 'this potential price'가 이를 받음"
+   },
+   {
+    "marker": "this potential price",
+    "kind": "지시어",
+    "note": "⑤ 뒤 문장 — 'this potential price'가 넣을 문장의 'decreased responsiveness'(대가)를 받아야 성립 — 넣을 문장 뒤"
+   },
+   {
+    "marker": "On the other hand",
+    "kind": "연결어",
+    "note": "④의 'On the other hand'가 ①~③의 적응 상태 가설과 대조로 '수면은 중요 기능' 도입, 그 뒤에 삽입문이 음"
+   }
+  ],
+  "chain": [
+   "④: 'On the other hand'로 수면의 보편성·고래류 사례를 들어 '수면이 중요한 기능을 준다' 제시",
+   "넣을 문장: 'This is particularly true since ... decreased responsiveness'로 그 내용을 받고 '반응성 저하'라는 대가를 도입",
+   "⑤ 뒤: 'If sleep is universal even when this potential price must be paid'의 'this potential price'가 그 대가를 받음 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2025-수능|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "provides an incomplete definition",
+    "kind": "대응·반복",
+    "note": "③ 끝 — 기존 선형 생애주기 이해가 '불완전'이라는 지적, 넣을 문장의 'In reality'가 그 이유를 이음"
+   },
+   {
+    "marker": "In reality, objects do not conform to a linear lifecycle model",
+    "kind": "대응·반복",
+    "note": "넣을 문장 — ①②의 '선형적 생애주기 모형'과 대조해 비선형 경로를 제시"
+   },
+   {
+    "marker": "Additionally, objects may enter recycling or second-hand cycles",
+    "kind": "연결어",
+    "note": "④ 뒤 문장 — 'Additionally'가 넣을 문장의 비선형 운명 목록에 재활용·중고를 덧붙임 — 넣을 문장이 바로 앞에 있어야 함"
+   },
+   {
+    "marker": "As such, the life of an object exhibits a far more complicated",
+    "kind": "대응·반복",
+    "note": "⑤ — 삽입문+④을 받아 '사물의 삶은 복잡·적응적'이라 마무리"
+   }
+  ],
+  "chain": [
+   "③: Krebs와 Weber가 관습적 선형 생애주기 이해를 '불완전한 정의'라고 지적",
+   "넣을 문장: 'In reality, objects do not conform to a linear lifecycle model'로 그 불완전성을 구체화(고장·보관·재발견)",
+   "④ 뒤: 'Additionally'가 그 비선형 운명에 재활용·중고를 덧붙이고, ⑤ 'As such'으로 마무리 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2024-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Physical things are increasingly becoming information technologies",
+    "kind": "대응·반복",
+    "note": "(C) 첫문장이 주어진 글의 '물리적 사물이 컴퓨터 코드로 바뀜다'를 받아 구체화 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "this code",
+    "kind": "지시어",
+    "note": "(A)의 'As all this code grows'의 'this code'는 앞(주어진 글·C)에서 먼저 코드를 가리킴 — (C) 뒤"
+   },
+   {
+    "marker": "This is the basis for all malware attacks",
+    "kind": "지시어",
+    "note": "(B)의 'This'는 (A)에서 늘어난 오류·버그를 받음 — (A) 뒤"
+   },
+   {
+    "marker": "these computer bugs",
+    "kind": "지시어",
+    "note": "(B)의 'these computer bugs'는 (A)의 'errors and software bugs'를 가리킴 — (A) 뒤여야 지칭 성립"
+   }
+  ],
+  "chain": [
+   "주어진 글: 물리적 사물들이 컴퓨터 코드로 변함(복잡성·보안 문제 제기)",
+   "(C): 'Physical things are increasingly becoming information technologies'로 그 코드화를 구체화",
+   "(A): 'this code'가 그 코드를 받아 '코드가 커질수록 오류·버그도 늘난다'",
+   "(B): 'This is the basis'와 'these computer bugs'가 (A)의 버그를 받아 '악성코드 공격의 토대'로 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2022-06|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "But one key input is low-cost steel",
+    "kind": "연결어",
+    "note": "(C)의 'But'이 주어진 글의 '대규모면 수익'을 보완하며 철강 조건을 도입 — 주어진 글 바로 뒤"
+   },
+   {
+    "marker": "Now consider the thinking of potential steel investors in the region",
+    "kind": "대응·반복",
+    "note": "(C) 끝의 '철강 투자자의 생각'이 (B)의 '철강 생산자 가정'으로 이어짐 — (C) 뒤 (B)"
+   },
+   {
+    "marker": "Now we have two possible outcomes ― what economists call",
+    "kind": "대응·반복",
+    "note": "(B)가 먼저 '두 가지 결과(multiple equilibria)'를 제시해야 (A)가 그 결과를 열거할 수 있음 — (B) 뒤 (A)"
+   },
+   {
+    "marker": "This second outcome also is an equilibrium",
+    "kind": "지시어",
+    "note": "(A)의 'This second outcome'은 (B)가 제시한 두 결과 중 '나쁜' 결과를 가리킴 — (B) 뒤여야 성립"
+   }
+  ],
+  "chain": [
+   "주어진 글: 한 회사가 대규모면 수익이라며 조선업 투자를 고민",
+   "(C): 'But'으로 '저가 철강이 근처에 있어야 한다'는 조건을 덩붙이고 '철강 투자자의 생각'으로 이어줌",
+   "(B): '철강 생산자는 조선소가 있어야 돈을 번다'며 '두 가지 결과(다중 균형)'를 제시",
+   "(A): 'This second outcome'처럼 (B)의 두 결과를 '좋은·나쁜 결과'로 열거 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2025-09|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "Animals have evolved many different ways of maintaining their health",
+    "kind": "대응·반복",
+    "note": "(B)가 주어진 글의 '건강을 지키는 방식'을 받아 상처 치유·면역 같은 사후 대응을 설명 — 주어진 글 뒤"
+   },
+   {
+    "marker": "Animals are equally good, however, at dealing with injury and disease before they even happen",
+    "kind": "연결어",
+    "note": "(C)의 'however'와 'equally good'이 (B)의 사후 치유와 대조되는 사전 대비를 도입 — (B) 뒤"
+   },
+   {
+    "marker": "anticipating and avoiding danger",
+    "kind": "대응·반복",
+    "note": "(C)의 '위험 예측·회피'를 (A)의 'pre-emptive action'이 구체화 — (C) 뒤 (A)"
+   },
+   {
+    "marker": "They can take pre-emptive action so that the worst never happens",
+    "kind": "대응·반복",
+    "note": "(A)의 '선제적 행동'은 (C)의 '예측·회피 메커니즘'을 이어받음 — (C) 뒤여야 성립"
+   }
+  ],
+  "chain": [
+   "주어진 글: 건강과 동물이 원하는 것의 연관 — 원함이 건강을 지키는 방식",
+   "(B): '동물은 건강 유지·회복 방식을 진화' — 상처 치유·면역 같은 사후 대응",
+   "(C): 'however ... equally good ... before they even happen' — 사건 전 예측·회피로 대조",
+   "(A): 'pre-emptive action'이 (C)의 예측·회피를 구체화 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2024-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "Instead",
+    "kind": "연결어",
+    "note": "삽입문의 'Instead'가 ④의 '공식적으로 교육받지 않는다'를 뒤집음 — ④ 뒤"
+   },
+   {
+    "marker": "they are not formally instructed in ‘how to be a good scientist’",
+    "kind": "대응·반복",
+    "note": "④ 문장의 부정 — 'Instead'가 이것을 받아 '사회화로 배운다'로 이음"
+   },
+   {
+    "marker": "these values",
+    "kind": "지시어",
+    "note": "⑤ 뒤 문장 'We think that these values'의 'these values'는 삽입문의 'the moral values'를 받음 — 삽입문이 ⑤에 와야 지칭 성립"
+   },
+   {
+    "marker": "socialization",
+    "kind": "대응·반복",
+    "note": "삽입문의 '흡수·사회화'가 ④의 '비공식 습득'을 보완하며 ⑤의 '도덕적 가치'로 연결"
+   }
+  ],
+  "chain": [
+   "④: '과학자는 내용은 훈련받지만 how to be a good scientist는 공식적으로 배우지 않는다'",
+   "삽입문: 'Instead ... by absorption ... socialization' — 대신 동료로부터의 사회화로 도덕적 가치를 습득",
+   "⑤: 'We think that these values are under threat' — 'these values'가 삽입문의 도덕적 가치를 받음 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2022-수능|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "But sound and color threatened to create just such an illusion",
+    "kind": "지시어",
+    "note": "④의 'such an illusion'은 삽입문이 말한 '환상을 현실로 착각하는 환상'을 가리킴 — 삽입문 뒤여야 성립"
+   },
+   {
+    "marker": "one could not take filmic fantasies for representations of reality",
+    "kind": "대응·반복",
+    "note": "삽입문이 제시하는 '현실 착각(환상)' — 'But'이 이를 반전하며 새 환상을 만들 위험을 말함"
+   },
+   {
+    "marker": "representations of reality",
+    "kind": "대응·반복",
+    "note": "③의 '현실의 재현'과 삽입문의 '현실의 재현'이 맞물려 삽입문이 ③ 뒤로 이어짐"
+   },
+   {
+    "marker": "As long as the irrealism of the silent black and white film predominated",
+    "kind": "시간·순서",
+    "note": "삽입문의 조건절 — 무성·흑백 시절의 비현실성이 지배하던 때를 기준으로 'But' 이후 변화와 대조"
+   }
+  ],
+  "chain": [
+   "③: 음향·색이 영화를 '현실의 재현 장치'로 바꿀 위험을 제기",
+   "삽입문: '무성 흑백 영화가 지배하는 한 환상을 현실로 착각할 수 없었다'는 설정을 깔",
+   "④: 'But ... just such an illusion'이 삽입문의 환상을 받아 '음향·색이 그 환상을 만들 위험'으로 이음 → ④에 삽입"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2026-09|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "that have survived",
+    "kind": "대응·반복",
+    "note": "①의 '살아남은 자료(that have survived)'를 삽입문의 'The problem of survival / what has survived'가 받음 — ① 뒤"
+   },
+   {
+    "marker": "The problem of survival",
+    "kind": "대응·반복",
+    "note": "삽입문이 ①의 '살아남'을 받아 '생존의 문제'를 제기 — ① 뒤, ② 앞"
+   },
+   {
+    "marker": "but historical significance is not just a question of durability",
+    "kind": "대응·반복",
+    "note": "②의 피라미드 예시가 삽입문의 '살아남이 반드시 더 중요한 것은 아니다'를 예증 — 삽입문 뒤여야 예증 성립"
+   },
+   {
+    "marker": "The Egyptian pyramids have survived thousands of years",
+    "kind": "대응·반복",
+    "note": "② 문장이 삽입문의 '생존≠중요성'을 피라미드 사례로 구체화 — 삽입문 바로 뒤"
+   }
+  ],
+  "chain": [
+   "①: 역사상은 '살아남은(that have survived) 다수의 자료'에서 나온다",
+   "삽입문: 'The problem of survival ... what has survived may not necessarily be more significant' — 살아남이 더 중요한 건 아님",
+   "②: '피라미드는 수천 년 살아남았지만 중요성은 내구성 문제가 아니다'로 예증 → ②에 삽입"
+  ],
+  "answer_label": "②"
+ },
+ {
+  "key": "2024-09|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "these tasks",
+    "kind": "지시어",
+    "note": "(B)의 'Our brain performs these tasks'는 (A)의 '사물을 무리로 분류하는 일'을 받음 — (A) 뒤"
+   },
+   {
+    "marker": "that is the basis for stereotyping",
+    "kind": "대응·반복",
+    "note": "(A)가 고정관념의 형성 토대를 설명 — (C)의 재정의 뒤에 이어짐"
+   },
+   {
+    "marker": "But, in fact",
+    "kind": "연결어",
+    "note": "(C)가 '고정관념=부정적'이라는 통념을 뒤집어 재정의 — 주어진 글의 화제 바로 뒤"
+   },
+   {
+    "marker": "Only afterwards",
+    "kind": "시간·순서",
+    "note": "(A)에서 분류가 '먼저', 증거 검토는 '그 후'임을 명시 — 분류 메커니즘 단락"
+   }
+  ],
+  "chain": [
+   "주어진 글: 직관적 분류·일반화는 유용하나 고정관념이라는 대가를 치른다 (화제 제시)",
+   "(C): 'the word stereotype ... But, in fact'로 통념을 뒤집어 '고정관념도 일반화의 일종'이라 재정의",
+   "(A): 'that is the basis for stereotyping'으로 빠른 분류가 그 토대임을 설명",
+   "(B): 'these tasks'가 (A)의 분류 작업을 받아 '진짜 위험은 경직성'으로 마무리 → (C)-(A)-(B)"
+  ],
+  "answer_label": "(C)-(A)-(B)"
+ },
+ {
+  "key": "2022-수능|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "another consciousness",
+    "kind": "지시어",
+    "note": "(B) 끝의 'another consciousness'는 (A)의 'The author'로 밝혀짐 — (A)가 (B) 뒤"
+   },
+   {
+    "marker": "The author has selected the content",
+    "kind": "지시어",
+    "note": "(A)가 (B)의 '또 다른 의식'의 정체를 '저자'로 특정 — (B) 뒤"
+   },
+   {
+    "marker": "the mind functions as a filter",
+    "kind": "대응·반복",
+    "note": "(B)가 (C)의 '인간 정신이 세계를 조직'을 '필터'로 이어받음 — (C) 뒤"
+   },
+   {
+    "marker": "However",
+    "kind": "연결어",
+    "note": "(B)의 'However'가 '마음의 필터'에서 '문학 속 이미 걸러진 세계'로 전환"
+   }
+  ],
+  "chain": [
+   "주어진 글: 허구 세계는 한 가지 점에서 실제와 다르다 (차이 예고)",
+   "(C): 실재 세계는 인간 정신이 조직하기 전엔 무한한 혼돈이라며 '정신의 처리'를 도입",
+   "(B): 'the mind functions as a filter'로 이어받고 'However ... another consciousness'로 문학의 매개 의식을 제시",
+   "(A): 'The author'가 그 'another consciousness'임을 밝혀 독자와 세계 사이에 놓임 → (C)-(B)-(A)"
+  ],
+  "answer_label": "(C)-(B)-(A)"
+ },
+ {
+  "key": "2025-수능|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "The birds in a line",
+    "kind": "지시어",
+    "note": "(C) 첫머리 'The birds in a line'은 (B)의 'birds who were feeding in a line'을 받음 — (B) 뒤"
+   },
+   {
+    "marker": "birds who were feeding in a line",
+    "kind": "대응·반복",
+    "note": "(B)에서 '줄로 먹이 먹는 새'를 처음 제시 — (C)가 이를 이어받아 상술"
+   },
+   {
+    "marker": "Marc wondered",
+    "kind": "지시어",
+    "note": "(A)에서 Marc가 (C)의 '더 불안한 줄 새'의 이유를 추론 — (C) 뒤, Marc는 (B)에서 먼저 등장"
+   },
+   {
+    "marker": "In a long-term research project that Marc did",
+    "kind": "대응·반복",
+    "note": "(B)가 Marc와 원/줄 대비를 처음 도입 — 다른 조각들의 전제이므로 주어진 글 바로 뒤"
+   }
+  ],
+  "chain": [
+   "주어진 글: 감정 전염으로 새들이 서로 따라 날아오른다 (화제 제시)",
+   "(B): 'Marc의 장기 연구'를 도입, '원 새 vs 줄 새' 조율 차이를 처음 제시",
+   "(C): 'The birds in a line'이 (B)의 줄 새를 받아 '덜 조율·더 불안'하다고 상술",
+   "(A): 'Marc wondered'로 그 이유(감정 전염이 이웃끼리만 가능)를 결론 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2024-09|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "This microlevel access",
+    "kind": "지시어",
+    "note": "⑤의 'This microlevel access'는 넣을 문장의 '밀리초 단위 정밀 편집(millisecond precision)'을 받음 — 넣을 문장이 ⑤ 자리"
+   },
+   {
+    "marker": "digitally converted sounds could be manipulated simply by programming digital messages",
+    "kind": "대응·반복",
+    "note": "③ — 넣을 문장의 '2진 정보 재프로그래밍'이 이 디지털 메시지 조작을 이어받는 근거"
+   },
+   {
+    "marker": "razor blades to physically cut and splice audiotapes",
+    "kind": "대응·반복",
+    "note": "④ 예시 — 물리적 편집→디지털 편집 전환을 보여 넣을 문장의 '밀리초 정밀'로 자연히 이어짐"
+   },
+   {
+    "marker": "For example",
+    "kind": "연결어",
+    "note": "④가 ③의 디지털 편집을 구체화하는 예시 — 그 뒤에 넣을 문장이 와서 결과(정밀도)를 제시"
+   }
+  ],
+  "chain": [
+   "③~④: 디지털 변환음은 디지털 메시지 프로그래밍으로 조작되어 편집이 단순해짐(면도날→커서 예시)",
+   "넣을 문장: 그것이 '2진 정보 재프로그래밍'이므로 편집이 밀리초 단위 정밀도로 가능",
+   "⑤: 'This microlevel access'가 그 '밀리초 정밀'을 받아 흔적 은폐·새 가능성을 설명 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2023-09|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "too many such calls",
+    "kind": "지시어",
+    "note": "⑤의 'too many such calls'는 넣을 문장의 'the phone call asking if he or she made the suspicious transactions'를 받음 — 넣을 문장이 ⑤ 자리"
+   },
+   {
+    "marker": "But they all inevitably add a burden to the use of the account",
+    "kind": "연결어",
+    "note": "④ — '부담(hurdles)'을 제시, 넣을 문장의 'On top of the hurdles'가 이를 이어받음"
+   },
+   {
+    "marker": "On top of the hurdles",
+    "kind": "연결어",
+    "note": "넣을 문장 첫머리 — 앞(④)의 '부담'에 '더해' 사기 확인 전화까지 있음을 얹음"
+   },
+   {
+    "marker": "This is all useful",
+    "kind": "지시어",
+    "note": "⑤의 'This is all useful'이 보안 수단+사기 확인 전화까지 포괄 — 넣을 문장 뒤에서 총평"
+   }
+  ],
+  "chain": [
+   "③~④: 비밀번호·생체인식 등 보안 수단은 사기꾼을 막지만 '모두 계정 사용에 부담(hurdles)을 더한다'",
+   "넣을 문장: 'On top of the hurdles' — 그 부담에 더해 사기 의심 시 확인 '전화(the phone call)'까지 처리해야 함",
+   "⑤: 'This is all useful ... but ... if too many such calls are received'의 'such calls'가 넣을 문장의 전화를 받음 → ⑤에 삽입"
+  ],
+  "answer_label": "⑤"
+ },
+ {
+  "key": "2025-06|36",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "However, the pattern of burning that stockmen introduced",
+    "kind": "연결어",
+    "note": "(A)의 However가 주어진 글의 '원주민이 수천 년 이어온 방화(previous regimes)'와 목축업자의 새 방식을 대조 — 주어진 글 뒤"
+   },
+   {
+    "marker": "The young shoots",
+    "kind": "지시어",
+    "note": "(C)의 'The young shoots'가 (A)의 'stimulated new plant growth in the following spring'(새로 돋은 싹)를 받음 — (A) 뒤"
+   },
+   {
+    "marker": "when they returned",
+    "kind": "대응·반복",
+    "note": "(C)의 'when they returned'가 (A)의 '가축을 겨울 동안 내보냄(moved their animals out)'과 짝을 이룸"
+   },
+   {
+    "marker": "Although grasses were the first kinds of plants to recolonize the burnt areas",
+    "kind": "대응·반복",
+    "note": "(B)가 (C)의 '강화된 관목 성장'을 이어받아 재성장과 재방화를 설명 — (C) 뒤"
+   },
+   {
+    "marker": "such regrowth",
+    "kind": "지시어",
+    "note": "(B)의 'such regrowth'가 (C)의 '억제하려던 관목 성장(scrubby growth)'을 지칭 — (C) 뒤여야 성립"
+   }
+  ],
+  "chain": [
+   "주어진 글: 호주에서 산불은 자연 현상이고 원주민이 수천 년간 의도적 방화를 해 옴",
+   "(A): 'However'로 목축업자의 방화가 이전과 다름을 대조, 봄에 새 식물 성장을 촉진",
+   "(C): 'The young shoots'가 (A)의 새 싹을, 'when they returned'가 내보낸 가축을 받아 이음. 관행이 관목 성장을 오히려 강화",
+   "(B): (C)의 '강화된 관목 성장'을 'such regrowth'로 받아, 재성장 방지책은 재방화뿐이라며 마무리 → (A)-(C)-(B)"
+  ],
+  "answer_label": "(A)-(C)-(B)"
+ },
+ {
+  "key": "2023-09|37",
+  "type": "순서",
+  "clues": [
+   {
+    "marker": "we consciously understand",
+    "kind": "대응·반복",
+    "note": "(B)의 'consciously'가 주어진 글의 'ways we can consciously consider'(의식적 축)를 먼저 전개 — 주어진 글 뒤"
+   },
+   {
+    "marker": "we use cultural ideas as we would use a particular tool",
+    "kind": "대응·반복",
+    "note": "(B)가 도구 비유를 도입 — 뒤이어 (C)가 이를 구체화"
+   },
+   {
+    "marker": "as we would select a screwdriver",
+    "kind": "대응·반복",
+    "note": "(C)의 스크루드라이버 비유가 (B)의 '도구처럼 사용'을 이어받음 — (B) 뒤"
+   },
+   {
+    "marker": "In some cases, however, we are far less aware",
+    "kind": "연결어",
+    "note": "(A)의 however가 (B)-(C)의 '의식적으로 접근 가능' 내용과 대조, 주어진 글의 'far less cognizant' 축 — 마지막"
+   }
+  ],
+  "chain": [
+   "주어진 글: 문화는 의식적으로 다루는 방식과 훨씬 덜 인식하는 방식으로 작동(두 축)",
+   "(B): 'consciously understand'로 의식적 축을 먼저 전개, 문화적 관념을 '도구처럼' 사용",
+   "(C): 'as we would select a screwdriver'로 (B)의 도구 비유를 구체화, 동기는 숨겨져 있지 않음",
+   "(A): 'In some cases, however, we are far less aware'로 대조되어 '덜 인식하는' 축으로 마무리 → (B)-(C)-(A)"
+  ],
+  "answer_label": "(B)-(C)-(A)"
+ },
+ {
+  "key": "2022-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "A problem, however",
+    "kind": "연결어",
+    "note": "넣을 문장의 however가 ①의 '상사가 책임이 있어 평가한다'는 긍정적 근거를 뒤집음 — ① 뒤"
+   },
+   {
+    "marker": "are not able to observe their subordinates’ performance",
+    "kind": "대응·반복",
+    "note": "넣을 문장이 '관찰할 수 없음'이라는 문제를 제기 — 뒤 문장의 반문으로 이어짐"
+   },
+   {
+    "marker": "Should supervisors rate employees on performance dimensions they cannot observe?",
+    "kind": "대응·반복",
+    "note": "'they cannot observe'가 넣을 문장의 '관찰 불가'를 받아 반문 — 넣을 문장 바로 뒤(=②)"
+   },
+   {
+    "marker": "To eliminate this dilemma",
+    "kind": "지시어",
+    "note": "③의 'this dilemma'가 넣을 문장이 제기한 '관찰 못하는데 평가' 문제를 지칭 — 그 뒤"
+   }
+  ],
+  "chain": [
+   "①: 상사가 성과에 책임·감독·업무 배정을 맡아 평가한다는 긍정적 근거",
+   "넣을 문장: 'A problem, however'로 상사가 떨어져 일해 성과를 관찰할 수 없다는 문제 제기",
+   "②(뒤 문장): 'they cannot observe'가 이를 받아 '관찰 못하는데 평가하나' 반문 → ②에 삽입",
+   "③: 'this dilemma'로 그 문제를 받아 360도 평가 도입"
+  ],
+  "answer_label": "②"
+ },
+ {
+  "key": "2025-06|38",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "this may be a major disincentive to direct taxation of emissions",
+    "kind": "대응·반복",
+    "note": "넣을 문장이 '측정 비용이 직접 과세의 걸림돌'이라는 단점을 제기"
+   },
+   {
+    "marker": "The great attraction of basing the tax directly on measured emissions",
+    "kind": "대응·반복",
+    "note": "③까지 측정 기반 과세의 장점을 논함 — 넣을 문장은 그 장점 뒤에서 단점으로 전환"
+   },
+   {
+    "marker": "Nevertheless",
+    "kind": "연결어",
+    "note": "④의 Nevertheless가 넣을 문장의 '측정 비용 걸림돌'과 '그럼에도 감시 기술은 빠르게 발전'을 대조 — 넣을 문장 바로 뒤(=④)"
+   },
+   {
+    "marker": "In the future, it may be possible to think of taxing measured emissions",
+    "kind": "대응·반복",
+    "note": "⑤가 기술 발전(④)에 이어 미래 전망으로 마무리 — 삽입 자리 이후"
+   }
+  ],
+  "chain": [
+   "③: 측정에 직접 기반한 과세의 큰 장점(세 부담 감소 행동=배출 감소 행동)",
+   "넣을 문장: 그러나 배출량 연속 측정은 비용이 커 직접 과세의 걸림돌이 됨(단점 제기)",
+   "④: 'Nevertheless'가 '그럼에도 감시 기술은 빠르게 발전해 왔다'로 대조 → ④에 삽입",
+   "⑤: 기술 발전에 이어 '미래엔 더 넓은 적용 가능'으로 마무리"
+  ],
+  "answer_label": "④"
+ },
+ {
+  "key": "2024-09|39",
+  "type": "삽입",
+  "clues": [
+   {
+    "marker": "In the case of specialists such as art critics",
+    "kind": "대응·반복",
+    "note": "넣을 문장이 '일반적 친숙함으로 충분(①②)'과 대비되는 전문가(비평가) 층위를 도입 — ④의 'Critics'로 이어짐"
+   },
+   {
+    "marker": "a deeper familiarity with materials and techniques is often useful",
+    "kind": "대응·반복",
+    "note": "넣을 문장의 '깊은 친숙함이 유용'을 ③의 'This is because'가 이유로 설명"
+   },
+   {
+    "marker": "This is because every kind of artistic material or tool comes with its own challenges and affordances",
+    "kind": "지시어",
+    "note": "'This is because'가 넣을 문장의 '깊은 친숙함이 유용한' 이유를 설명 — 넣을 문장 바로 뒤(=③)"
+   },
+   {
+    "marker": "Critics are often interested in the ways artists exploit different kinds of materials and tools",
+    "kind": "대응·반복",
+    "note": "④의 'Critics'가 넣을 문장이 도입한 '미술 비평가' 주제를 이어감"
+   }
+  ],
+  "chain": [
+   "①②: 예술 창작 인식에는 '일반적 친숙함'만 있으면 충분함",
+   "넣을 문장: 'specialists such as art critics'에게는 재료·기법의 '더 깊은 친숙함'이 판단에 유용함(전문가 층위 도입)",
+   "③: 'This is because'가 재료·도구마다 고유의 과제가 있어 깊은 친숙함이 유용한 이유를 설명 → ③에 삽입",
+   "④: 'Critics'가 넣을 문장의 비평가 주제를 이어 재료 활용에 대한 관심을 서술"
+  ],
+  "answer_label": "③"
  }
 ]
