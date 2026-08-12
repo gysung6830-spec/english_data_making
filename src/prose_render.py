@@ -285,8 +285,12 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
         if write:
             # 어형: 자리표시자 옆에 정답 어형이 그대로 남아 중복되는 경우
             #   (예: "(change) changed", "(appear) (end) end")를 제거한다(통합카드와 동일 처리).
+            #   + 정답과 무관하게 '(원형)의 활용형'이 남은 경우(복합수동 "comforted" 등)도 제거.
             for src in items_src:
-                template = textutil.dedup_placeholder(template, "{{" + src.id + "}}", src.answer)
+                marker = "{{" + src.id + "}}"
+                template = textutil.dedup_placeholder(template, marker, src.answer)
+                base = (src.display or "").strip("() ").split()[0] if src.display else ""
+                template = textutil.strip_form_leftover(template, marker, base)
         order = placeholders_in(template)
         # 안전장치: 문항(items)은 있는데 template 에 정상 자리표시자({{Pn}})가 하나도 없으면
         #   template 이 손상된 것(예: LLM 이 "P1}}" 같은 깨진 문자열 반환 → "P P1}}" 노출)이다.

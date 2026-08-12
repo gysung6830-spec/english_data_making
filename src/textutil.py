@@ -43,6 +43,46 @@ def _norm_seq(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+def _inflections(base: str) -> set:
+    """원형(base)의 흔한 활용형 집합(3인칭s·과거ed·분사ing·y→ied 등)."""
+    b = base.lower()
+    forms = {b, b + "s", b + "es", b + "ed", b + "d", b + "ing"}
+    if b.endswith("e"):
+        forms |= {b[:-1] + "ed", b[:-1] + "ing", b + "d"}
+    if b.endswith("y") and len(b) >= 2 and b[-2] not in "aeiou":
+        forms |= {b[:-1] + "ied", b[:-1] + "ies"}
+    if len(b) >= 3 and b[-1] not in "aeiouwxy" and b[-2] in "aeiou" and b[-3] not in "aeiou":
+        forms |= {b + b[-1] + "ed", b + b[-1] + "ing"}      # stop→stopped
+    return forms
+
+
+def strip_form_leftover(template: str, marker: str, base: str) -> str:
+    """어형 '(원형)' 자리표시자 뒤에 '그 원형의 활용형'이 그대로 남아 중복되는 것을 제거한다.
+
+    정답 문자열과 무관하게 '원형(base)'만으로 판단하므로, 복합수동처럼 LLM 이 정답을
+    조동사부만 담아 dedup_placeholder 가 놓치는 경우도 잡는다.
+      예) base 'comfort', "the infant {{P1}} sufficiently comforted and reassured"
+          → "the infant {{P1}} sufficiently and reassured" ('comforted' 제거)
+    부사(…ly) 하나가 끼어 있으면 건너뛴다. base 길이 3 미만이면 건드리지 않는다.
+    """
+    if not base or len(base) < 3 or marker not in template:
+        return template
+    before, after = template.split(marker, 1)
+    at = after.split()
+    if not at:
+        return template
+    idx = 1 if (len(at) >= 2 and at[0].lower().endswith("ly")) else 0
+    if idx < len(at):
+        w = _norm_word(at[idx])
+        if w in _inflections(base):
+            del at[idx]
+            after = (" " + " ".join(at)) if at else ""
+            result = (before.rstrip() + " " + marker + after)
+            result = re.sub(r"\s+([.,;:!?’”)])", r"\1", result)
+            return re.sub(r"\s{2,}", " ", result).strip()
+    return template
+
+
 def shuffle_order_display(display: str, answer: str = "") -> str:
     """순서배열 어구 '〈 a / b / c 〉' 를 '정답 어순과도 다르게' 다시 섞는다.
 

@@ -87,6 +87,23 @@ def test_dedup_placeholder():
            dedup_placeholder("He {{Q1}} quickly ran home", "{{Q1}}", "had") == "He {{Q1}} quickly ran home")
 
 
+def test_strip_form_leftover():
+    from src.textutil import strip_form_leftover as s
+    # 정답과 무관하게 '(원형)의 활용형' 중복 제거(복합수동 comforted 등)
+    _check("복합수동 comforted 제거(부사 낀)",
+           s("the infant {{P1}} sufficiently comforted and reassured.", "{{P1}}", "comfort")
+           == "the infant {{P1}} sufficiently and reassured.")
+    _check("인접 활용형 changed 제거",
+           s("Concepts {{P1}} changed.", "{{P1}}", "change") == "Concepts {{P1}}")
+    # 정상 문장(활용형 아님)은 유지
+    _check("무관 단어 유지(our use)",
+           s("We need to dramatically {{P1}} our use.", "{{P1}}", "reduce")
+           == "We need to dramatically {{P1}} our use.")
+    _check("무관 단어 유지(the picture)",
+           s("They {{P1}} the picture.", "{{P1}}", "post") == "They {{P1}} the picture.")
+    _check("짧은 원형(2자)은 미처리", s("It {{P1}} be.", "{{P1}}", "do") == "It {{P1}} be.")
+
+
 def test_shuffle_choices():
     from src.textutil import shuffle_choices
     # 보기 집합·정답은 보존, 순서만 바뀔 수 있음
@@ -150,4 +167,5 @@ if __name__ == "__main__":
     test_shuffle_choices()
     test_format_qno()
     test_shuffle_order_display()
+    test_strip_form_leftover()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

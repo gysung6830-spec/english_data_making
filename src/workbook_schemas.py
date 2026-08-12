@@ -241,7 +241,12 @@ def build_workbook(llm: LLMWorkbook, title: str, subtitle: str,
         #   "how long a resource {{Q}}")를 정리한다.
         en = s.en_template
         for pid, q in pairs:
-            en = textutil.dedup_placeholder(en, "{{" + pid + "}}", q.answer)
+            marker = "{{" + pid + "}}"
+            en = textutil.dedup_placeholder(en, marker, q.answer)
+            # 동사(원형) 문항: '(원형)의 활용형'이 자리표시자 뒤에 남은 중복(복합수동 등)도 제거
+            if q.type == "verb":
+                base = (q.display or "").strip("() ").split()[0] if q.display else ""
+                en = textutil.strip_form_leftover(en, marker, base)
         parsed.append({"no": s.no, "en": en, "ko": s.ko, "pairs": pairs})
 
     # 1-b) 의미 오배치·단어 소실 후처리(원문과 대조) — originals 가 있을 때만
