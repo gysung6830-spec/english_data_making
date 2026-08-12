@@ -172,14 +172,46 @@ def test_grammar_agreement_dropped():
     ids = [it.id for it in g.sentences[0].items]
     _check("수일치(is/are) 문항 제외", "P1" not in ids)
     _check("비수일치(관계사 which/what) 문항 유지", "P2" in ids)
-    # 일반동사 3인칭 단수 수일치(happens/happen)도 제외
+    # 일반동사 3인칭 단수 수일치(happens/happen, varies/vary(y→ies))도 제외
     llm3 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
-        no=1, en="This happens often.", ko="다",
-        grammar_template="This {{P1}} often.",
-        grammar_items=[pr.LLMProseItem(id="P1", display="[ happens / happen ]", answer="happens")])])
+        no=1, en="This happens and its intensity varies.", ko="다",
+        grammar_template="This {{P1}} and its intensity {{P2}}.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ happens / happen ]", answer="happens"),
+                       pr.LLMProseItem(id="P2", display="[ varies / vary ]", answer="varies")])])
     g3 = next(w for w in pr.build_prose_pack(llm3, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "grammar")
-    _check("일반동사 수일치(happens/happen) 제외", len(g3.sentences[0].items) == 0)
+    _check("일반동사 수일치(happens·varies) 제외", len(g3.sentences[0].items) == 0)
+    # was/were: 가정법 아니면 제거, 가정법(as if/if)이면 유지
+    def _one_grammar(en, tmpl, disp, ans):
+        llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(no=1, en=en, ko="라",
+            grammar_template=tmpl,
+            grammar_items=[pr.LLMProseItem(id="P1", display=disp, answer=ans)])])
+        return next(w for w in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
+                    if w.wtype == "grammar").sentences[0].items
+    _check("was/were 순수 수일치 제거",
+           len(_one_grammar("Pests were winners.", "Pests {{P1}} winners.", "[ was / were ]", "were")) == 0)
+    _check("was/were 가정법(as if) 유지",
+           len(_one_grammar("He talks as if it were true.", "He talks as if it {{P1}} true.",
+                            "[ was / were ]", "were")) == 1)
+    # 수일치 문항을 버릴 때 자리표시자를 '정답'으로 복원해 문장에 구멍(gap)이 없어야 한다
+    llm4 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="Weeds and pests were also winners.", ko="마",
+        grammar_template="Weeds and pests {{P1}} also winners.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ was / were ]", answer="were")])])
+    s4 = next(w for w in pr.build_prose_pack(llm4, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "grammar").sentences[0]
+    html4 = str(pr.render_prose(s4, "grammar"))
+    _check("수일치 드롭 후 정답 복원(gap 없음)", "were" in html4 and "{{" not in html4)
+    # 본동사 누락(LLM 이 'appears' 소실) → 원문 복구 + 문항 버림
+    llm5 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="But defining the group appears to be flexible.", ko="바",
+        grammar_template="But {{P1}} the group to be {{P2}} flexible.",
+        grammar_items=[pr.LLMProseItem(id="P1", display="[ defined / defining ]", answer="defining"),
+                       pr.LLMProseItem(id="P2", display="[ rather / rathest ]", answer="rather")])])
+    s5 = next(w for w in pr.build_prose_pack(llm5, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "grammar").sentences[0]
+    _check("본동사 누락 → 원문 복구+문항 버림",
+           "appears" in s5.template and len(s5.items) == 0)
     # has/have, does/do 도 제외
     llm2 = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
         no=1, en="Concepts have changed and someone does care.", ko="나",

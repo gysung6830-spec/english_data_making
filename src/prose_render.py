@@ -7,6 +7,7 @@ HTML → PDF 는 Playwright(Chromium).
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -224,25 +225,53 @@ def renderable_ref_count(llm: LLMProsePack) -> int:
 
 # '주어 수일치만' 묻는 be/do/have 선택 → 난도가 낮아 출제 지양(프롬프트로 막아도 LLM 이 종종 냄).
 #   is/are · does/do · has/have 는 '순수 수일치'라 렌더에서 드롭한다.
-#   was/were 는 가정법(if I were …) 소지가 있어 제외(프롬프트에만 맡김).
+#   was/were 도 수일치이나 '가정법(if/as if/wish …)' 문맥이면 남긴다.
 _AGREEMENT_SETS = ({"is", "are"}, {"does", "do"}, {"has", "have"})
+_SUBJUNCTIVE = re.compile(r'\b(if|as if|as though|wish|wishe[sd]|wished|suppose|were to|rather)\b', re.I)
 
 
-def _is_agreement_choice(display: str) -> bool:
+def _third_person_s(base: str, other: str) -> bool:
+    """other 가 base 의 3인칭 단수형인지(run→runs, watch→watches, vary→varies)."""
+    if other in (base + "s", base + "es"):
+        return True
+    if base.endswith("y") and len(base) >= 2 and base[-2] not in "aeiou" and other == base[:-1] + "ies":
+        return True
+    return False
+
+
+def _grammar_template_lossy(en: str, template: str, items) -> bool:
+    """어법 template 이 원문(en)의 '내용어'를 통째로 잃었는지 검사한다.
+
+    template 의 각 {{Pn}} 을 '정답'으로 되돌린 '완성 문장'이 en 의 4자 이상 내용어를 모두
+    포함해야 한다. 그렇지 않으면(예: 본동사 'appears' 가 통째로 누락) True — 렌더에서 원문으로
+    되돌리고 그 문장의 어법 문항을 버린다(깨진 문장 노출 방지).
+    """
+    solved = template
+    for it in items:
+        solved = solved.replace("{{" + it.id + "}}", (it.answer or "").split("/")[0].strip())
+    words = lambda t: [w.lower() for w in re.findall(r"[A-Za-z]+", t)]
+    have = set(words(solved))
+    return any(len(w) >= 4 and w not in have for w in words(en))
+
+
+def _is_agreement_choice(display: str, template: str = "") -> bool:
     """어법 보기 '[ A / B ]' 가 순수 주어-수일치 쌍인지.
 
     - be/do/have 불규칙: is/are · does/do · has/have
-    - 일반동사 3인칭 단수: 한쪽이 다른 쪽 + 's'/'es' (예: happen/happens, run/runs) —
+    - was/were: 수일치이나 가정법(if/as if/wish/were to …) 문맥이면 남긴다.
+    - 일반동사 3인칭 단수: 한쪽이 다른 쪽의 -s/-es/-ies 형(run/runs, vary/varies).
       단, 짧은 대명사 오탐(it/its) 방지를 위해 원형 길이 3 이상일 때만.
-    was/were 는 가정법 소지가 있어 여기서 제외(프롬프트로만 지양).
     """
     inside = display.split("[", 1)[-1].rsplit("]", 1)[0] if "[" in display else display
     opts = [c.strip().lower() for c in inside.split("/") if c.strip()]
-    if set(opts) in _AGREEMENT_SETS:
+    s = set(opts)
+    if s in _AGREEMENT_SETS:
         return True
+    if s == {"was", "were"}:                    # 가정법 문맥이면 유지, 아니면 수일치로 제거
+        return not _SUBJUNCTIVE.search(template or "")
     if len(opts) == 2:
-        a, b = sorted(opts, key=len)           # a = 더 짧은 쪽(원형)
-        if len(a) >= 3 and b in (a + "s", a + "es"):
+        a, b = sorted(opts, key=len)            # a = 더 짧은 쪽(원형)
+        if len(a) >= 3 and _third_person_s(a, b):
             return True
     return False
 
@@ -281,8 +310,19 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
                         answer=src.answer, write=write, gloss=getattr(src, "gloss", ""))
                   for pid, src in _align(order, items_src)]
         if wtype == "grammar":
-            # 수일치 지양: 순수 주어-수일치 쌍(is/are·does/do·has/have) 문항을 버린다.
-            pitems = [it for it in pitems if not _is_agreement_choice(it.display)]
+            # 수일치 지양: 순수 주어-수일치 쌍 문항을 버린다(was/were 는 가정법 문맥이면 유지).
+            #   ★ 버린 문항의 {{Pn}} 은 '정답'으로 복원해 문장에 구멍(gap)이 생기지 않게 한다.
+            kept = []
+            for it in pitems:
+                if _is_agreement_choice(it.display, template):
+                    template = template.replace("{{" + it.id + "}}", it.answer)
+                else:
+                    kept.append(it)
+            pitems = kept
+            # LLM 이 원문 단어를 통째로 누락한 경우(예: 본동사 'appears' 소실) → 원문 복구 + 문항 버림
+            if pitems and _grammar_template_lossy(s.en, template, pitems):
+                template = s.en
+                pitems = []
         if wtype == "ref":
             # 안전장치: 지칭 정답이 보기 안에 없거나(출제 오류) 보기에 한글이 섞이면
             #   (예: [ Vision / the street / 양쪽 살피기 ]) 그 문항을 버린다.
