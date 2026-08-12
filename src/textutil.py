@@ -132,6 +132,10 @@ def dedup_placeholder(template: str, marker: str, answer: str) -> str:
         if [_norm_word(x) for x in at[:j]] == ans[-j:]:
             at = at[j:]
             break
+    # 부사(…ly) 하나가 낀 '비인접' 중복도 제거: "{{Q}} usually respond"(정답 끝 'respond'),
+    #   "{{Q}} sufficiently comforted"(정답 끝 'comforted'). 부사는 남기고 중복 동사만 뺀다.
+    if len(at) >= 2 and at[0].lower().endswith("ly") and _norm_word(at[1]) == ans[-1]:
+        at = [at[0]] + at[2:]
     left = (" ".join(bt) + " ") if bt else ""
     right = (" " + " ".join(at)) if at else ""
     result = left + marker + right

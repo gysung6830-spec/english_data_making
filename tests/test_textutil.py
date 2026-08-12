@@ -75,6 +75,16 @@ def test_dedup_placeholder():
            dedup_placeholder("Forecasters {{Q1}} predict", "{{Q1}}", "who") == "Forecasters {{Q1}} predict")
     _check("어구 무관하면 유지",
            dedup_placeholder("We {{Q1}} the race", "{{Q1}}", "run") == "We {{Q1}} the race")
+    # 부사(…ly) 하나가 낀 비인접 중복도 제거(통합카드/어형 실측: "(respond) usually respond")
+    _check("부사 낀 비인접 중복 제거",
+           dedup_placeholder("A bystander {{Q1}} usually respond, just", "{{Q1}}", "will respond")
+           == "A bystander {{Q1}} usually just")
+    _check("부사 낀 중복: comforted 제거",
+           dedup_placeholder("the infant {{Q1}} sufficiently comforted and reassured", "{{Q1}}",
+                             "has been comforted") == "the infant {{Q1}} sufficiently and reassured")
+    # 정답과 무관하면 부사 뒤 단어는 건드리지 않음
+    _check("부사 뒤 무관 단어 유지",
+           dedup_placeholder("He {{Q1}} quickly ran home", "{{Q1}}", "had") == "He {{Q1}} quickly ran home")
 
 
 def test_shuffle_choices():
