@@ -61,7 +61,11 @@ def _build_view(p: LecturePassage) -> dict:
             "expressions": c.expressions,
             "first": c.expressions[0],
             "blanks": max(len(c.expressions) - 1, 1),
+            "variation": c.variation,
         })
+
+    # ④ 글 정리: 문장별 역할 흐름(1문장 역할 → 2문장 역할 → …)
+    flow = [{"id": s.id, "role": s.role} for s in p.analysis.sentences]
 
     lines = []
     for s in p.analysis.sentences:
@@ -91,7 +95,7 @@ def _build_view(p: LecturePassage) -> dict:
         "structure": ov.structure,
         "structure_reason": ov.structure_reason,
         "chains": chains,
-        "summary": ov.summary,
+        "flow": flow,
     }
 
 

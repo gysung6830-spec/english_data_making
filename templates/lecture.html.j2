@@ -92,7 +92,7 @@
       <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">같은 개념이 어떻게 다시 표현되는지 순서대로</span></div>
       {% for c in p.chains %}
       {% if teacher %}
-      <div class="chain-a"><b>{{ c.label }}</b> : {{ c.expressions | join(' → ') }}</div>
+      <div class="chain-a"><b>{{ c.label }}</b> : {{ c.expressions | join(' → ') }}{% if c.variation %}<div class="chain-var">↳ 변주 {{ c.variation }}</div>{% endif %}</div>
       {% else %}
       <div class="chain-q"><span class="chain-label">{{ c.label }}</span>
         <span class="chain-flow">{{ c.first }}{% for i in range(c.blanks) %} → <span class="chain-blank"></span>{% endfor %}</span></div>
@@ -101,9 +101,10 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">📝</span>글 내용 정리<span class="pc-hint">필자 핵심 의견을 중심으로 흐름을 한 번에</span></div>
-      {% if teacher %}<div class="pred-a">{{ p.summary }}</div>
-      {% else %}<div class="writeline"></div><div class="writeline"></div>{% endif %}
+      <div class="pc-q"><span class="em">📝</span>글 내용 정리<span class="pc-hint">문장별 역할을 달아 흐름을 정리해봐</span></div>
+      <div class="flow">
+        {% for f in p.flow %}<span class="flow-item"><span class="flow-no">{{ f.id }}문장</span>{% if teacher %}<span class="flow-role">{{ f.role }}</span>{% else %}<span class="flow-blank"></span>{% endif %}</span>{% if not loop.last %}<span class="flow-arr">→</span>{% endif %}{% endfor %}
+      </div>
     </div>
   </div>
 

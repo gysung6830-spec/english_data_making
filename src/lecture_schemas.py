@@ -42,8 +42,9 @@ class LectureSentence(BaseModel):
 # ③ 재진술 사슬
 # ---------------------------------------------------------------------------
 class RestatementChain(BaseModel):
-    label: str                 # 개념의 '짧은 영어' 이름(한글 금지)
+    label: str                 # 개념의 한글 이름(예: '두려움을 느끼는 아기')
     expressions: list[str]     # 지문에 실제로 나온 '영어' 표현들(순서대로, 2개 이상)
+    variation: str = ""        # ↳변주: 표현이 어떻게 바뀌어 가는지 한 줄(한국어)
 
     @field_validator("expressions")
     @classmethod
@@ -66,7 +67,6 @@ class Overview(BaseModel):
     structure_reason: str
     # 재진술 사슬: 억지로 만들지 말고, 필자 핵심 의견을 이루는 개념의 실제 사슬만(1~2개)
     restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=2)
-    summary: str = ""             # 📝 글 내용 정리(필자 핵심 의견 중심, 흐름 요약)
 
 
 # ---------------------------------------------------------------------------
@@ -97,6 +97,7 @@ class Misread(BaseModel):
 class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
+    role: str = ""                # 글에서의 역할(예: 주제 제시/근거/예시/반박/부연/결론) — ④ 글 정리 흐름용
     grammar: list[GrammarChip] = Field(default_factory=list)  # 어법 칩(1~3개)
     vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ 어휘 리스트로 집계)
     chunks: list[Chunk]           # ② 끊어읽기(오역 위험 부분 blank=true)

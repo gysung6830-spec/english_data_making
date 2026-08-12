@@ -64,12 +64,12 @@ body{
 .passage-box .snum{ display:inline-block; background:#dbe7e0; color:var(--green-d);
   font-weight:700; font-size:7.2pt; border-radius:5px; padding:0 4px; margin-right:3px; vertical-align:1.5px; }
 
-/* ---- 어휘 리스트 (압축·열/행 정렬·S# 표시) ----------------------------- */
+/* ---- 어휘 리스트 (열/행 정렬·S# 표시·폰트는 지문과 동일) --------------- */
 .vocab-grid{ display:grid; grid-template-columns:max-content 1fr max-content 1fr;
-  column-gap:18px; row-gap:3px; align-items:baseline; font-size:8.7pt; }
+  column-gap:18px; row-gap:4px; align-items:baseline; font-size:10.3pt; }
 .vterm{ font-weight:700; color:var(--green-d); white-space:nowrap; }
 .vmean{ color:#6b7280; }
-.vsid{ color:var(--green); font-weight:700; font-size:6.8pt; margin-right:3px; vertical-align:1px; }
+.vsid{ color:var(--green); font-weight:700; font-size:7.6pt; margin-right:4px; vertical-align:1px; }
 
 /* ---- ② 문장별 ----------------------------------------------------------- */
 .s-item{ margin-bottom:15px; }
@@ -162,3 +162,13 @@ body{
 .chain-a{ margin-bottom:6px; font-size:9.5pt; color:#3f4654; }
 .chain-a b{ color:var(--indigo); }
 .chain-var{ font-size:8.6pt; color:#9aa0b4; margin-top:2px; }
+
+/* 글 내용 정리: 문장별 역할 흐름(가로로 이어지며 자연 줄바꿈) */
+.flow{ margin-top:6px; line-height:2.1; }
+.flow-item{ display:inline; white-space:nowrap; }
+.flow-no{ font-weight:700; color:var(--indigo); font-size:9.4pt; margin-right:4px; }
+.flow-role{ background:var(--green-bg); color:var(--green-d); font-weight:700;
+  border-radius:6px; padding:1px 9px; font-size:9.2pt; }
+.flow-blank{ display:inline-block; min-width:62px; border-bottom:1.4px solid var(--indigo);
+  height:12px; vertical-align:middle; }
+.flow-arr{ color:var(--indigo); font-weight:700; margin:0 9px; }
