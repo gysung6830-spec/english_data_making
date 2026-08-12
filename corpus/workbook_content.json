@@ -6541,8 +6541,8 @@
  },
  {
   "key": "2025-06|35",
-  "answer": 3,
-  "answer_src": "solved",
+  "answer": 4,
+  "answer_src": "official:2025-06 해설 ④",
   "hl": [
    {
     "t": "Young songbirds do not inherit their songs fully formed; instead, they must learn to reproduce the song of an adult tutor.",
@@ -6617,11 +6617,11 @@
     },
     {
      "ko": "연습으로 각 음을 <b>미세 조정</b>해 저장된 본에 가깝게 맞춰 간다",
-     "an": "— '본 저장→재현→미세조정' 흐름 → ③(깃털·짝짓기)만 무관 = 정답 ③"
+     "an": "— '본 저장→재현→미세조정' 흐름 → ④(깃털·짝짓기)만 무관 = 정답 ④"
     }
    ],
-   "concl": "→ ③는 '깃털이 짝을 유혹하려 진화했다'는 <b>외형·번식</b> 이야기 = 노래 학습 흐름과 무관 = <b>③</b>",
-   "gnote": "①②③⑤는 '본 저장 → 재현 → 미세조정'으로 이어지지만 ④만 소재가 벗어남."
+   "concl": "→ ④는 '깃털이 짝을 유혹하려 진화했다'는 <b>외형·번식</b> 이야기 = 노래 학습 흐름과 무관 = <b>④</b>",
+   "gnote": "①②③⑤는 '본 저장 → 재현 → 미세조정 → 정확한 복제'로 이어지지만 ④만 소재가 벗어남."
   },
   "direct": [
    {
@@ -6737,19 +6737,19 @@
   "opts": [
    {
     "n": 1,
-    "tx": "본을 재현하려 학습(도입)",
-    "verdict": "x",
-    "jd": "✘ 주제부합"
-   },
-   {
-    "n": 2,
     "tx": "본으로 저장·비교",
     "verdict": "x",
     "jd": "✘ 주제부합"
    },
    {
-    "n": 3,
+    "n": 2,
     "tx": "처음엔 음정·박자가 고르지 않음",
+    "verdict": "x",
+    "jd": "✘ 주제부합"
+   },
+   {
+    "n": 3,
+    "tx": "미세 조정으로 본에 근접",
     "verdict": "x",
     "jd": "✘ 주제부합"
    },
@@ -6757,16 +6757,16 @@
     "n": 4,
     "tx": "깃털이 짝 유혹 위해 진화",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거(외형·번식 → 노래 학습과 무관)"
    },
    {
     "n": 5,
-    "tx": "미세 조정으로 본에 근접",
+    "tx": "결국 튜터 노래의 정확한 복제",
     "verdict": "x",
     "jd": "✘ 주제부합"
    }
   ],
-  "opt_line": "<span class=\"co\">④정답</span> 깃털이 짝 유혹 위해 진화 = 노래 학습과 무관 · <span class=\"xo\">①</span>재현 도입 <span class=\"xo\">②</span>본 저장 <span class=\"xo\">③</span>초기 불균일 <span class=\"xo\">⑤</span>미세조정",
+  "opt_line": "<span class=\"co\">④정답</span> 깃털이 짝 유혹 위해 진화 = 노래 학습과 무관 · <span class=\"xo\">①</span>본 저장 <span class=\"xo\">②</span>초기 불균일 <span class=\"xo\">③</span>미세조정 <span class=\"xo\">⑤</span>정확한 복제",
   "paraphrase": {
    "from": "노래 학습(재현·본·미세조정)",
    "to": "④ 깃털·짝짓기(외형·번식)",
@@ -6797,11 +6797,11 @@
    "cands": [
     "Early in life, a young bird memorizes this model and stores it as a kind of template against which its own attempts are later compared.",
     "At first its babbling is uneven, with the pitch and tempo of each note varying widely from one attempt to the next.",
-    "The colorful feathers of many male songbirds evolved mainly to attract mates rather than to improve their singing.",
     "Through constant practice, the bird gradually fine-tunes its vocalizations, adjusting each note until it more closely matches the stored template.",
+    "The colorful feathers of many male songbirds evolved mainly to attract mates rather than to improve their singing.",
     "Eventually the young bird’s song overlaps almost completely with the tutor’s, an accurate copy produced through this long process of listening and self-correction."
    ],
-   "irrelevant": 3
+   "irrelevant": 4
   }
  },
  {
