@@ -49,6 +49,8 @@ function looksEnglish(line) {
   if (/tistory|flowedu|https?:|www\./i.test(s)) return false;
   // 저작권 푸터·답지(재진술 사슬 화살표) 잡음 배제 — 실제 지문 문장엔 없음
   if (/all rights reserved|©|→/i.test(s)) return false;
+  // 생성물(Ortica 책) 재투입 시 새어드는 답지 러닝헤더("73 / 176 -- 3 of 13 --") 배제
+  if (/--\s*\d+\s+of\s+\d+\s*--/.test(s)) return false;
   return /[.!?]["')\]]?\s*$/.test(s);                 // 문장부호로 끝남
 }
 

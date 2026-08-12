@@ -44,6 +44,11 @@ test('looksEnglish: 답지 재진술 화살표(→) 배제', () => {
   assert.strictEqual(looksEnglish('A → B → C transformation.'), false);
 });
 
+test('looksEnglish: 생성물 답지 러닝헤더("N / 176 -- M of 13 --") 배제', () => {
+  assert.strictEqual(
+    looksEnglish('73 / 176 -- 3 of 13 -- Perhaps this change came about slowly.'), false);
+});
+
 test('looksEnglish: URL/사이트 푸터 배제', () => {
   assert.strictEqual(looksEnglish('www.flowedu.tistory.com!'), false);
 });
