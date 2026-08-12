@@ -26,13 +26,15 @@ async function pdfToText(buffer) {
 //  - 문장부호로 끝나고, 너무 짧지 않아야 함
 function looksEnglish(line) {
   const s = line.trim();
-  if (s.length < 25) return false;                    // 너무 짧은 조각 제외
+  if (s.length < 10) return false;                    // 너무 짧은 조각 제외(짧은 문장은 허용)
   const hangul = (s.match(/[가-힣]/g) || []).length;
   const latin = (s.match(/[A-Za-z]/g) || []).length;
-  if (latin < 15) return false;                       // 영어 글자가 너무 적음
+  if (latin < 8) return false;                        // 영어 글자가 너무 적음
   if (hangul > latin * 0.15) return false;            // 한글이 섞이면 지문 아님(해설/보기)
   const words = s.split(/\s+/).filter(Boolean);
-  if (words.length < 5) return false;                 // 최소 5단어
+  if (words.length < 2) return false;                 // 최소 2단어("Wrong again." 같은 짧은 문장 허용)
+  // URL/사이트 푸터 조각 배제(예: "flowedu. tistory. com!")
+  if (/tistory|flowedu|https?:|www\./i.test(s)) return false;
   return /[.!?]["')\]]?\s*$/.test(s);                 // 문장부호로 끝남
 }
 
@@ -103,7 +105,11 @@ function joinAndSplit(text) {
     //   (대문자만인 헤더 'WORKBOOK'·'SINCERELY' 등은 소문자 조건으로 계속 배제)
     const isEngLine = (latin >= 10 && latin > hangul)
       || (hangul === 0 && lower >= 2 && latin >= 5);
-    if (!isEngLine) { if (buf) { paras.push(buf); buf = ''; } continue; }
+    // ★ 버퍼가 열려 있으면(문장 진행 중) '짧은 영어 꼬리 줄'(줄바꿈으로 넘어간 마지막
+    //   한두 단어, 예: "own?" · "them." · "provide.")도 한글만 없으면 이어붙인다.
+    //   → 문장 끝(구두점)이 다음 줄로 넘어가 통째로 버려지던 문제 방지.
+    const isEngTail = buf && hangul === 0 && latin >= 1;
+    if (!isEngLine && !isEngTail) { if (buf) { paras.push(buf); buf = ''; } continue; }
     buf = buf ? `${buf} ${line}` : line;
     if (/[.!?]["')\]]?$/.test(line)) { paras.push(buf); buf = ''; }
   }
@@ -154,7 +160,9 @@ async function extractSentences(buffer) {
     // 영어 문장으로 통과했더라도 안에 섞인 한글(고유명사 옆 주석·병기 해석 등)은 지운다.
     // 영어 지문 문장은 원래 한글이 없으므로, 남은 한글은 잘못 붙은 것 → 제거 후 공백 정리.
     const clean = stripHangul(c);
-    if (clean.replace(/[^A-Za-z]/g, '').length < 15) continue; // 한글 제거 후 영어가 부족하면 버림
+    // 한글 제거 후에도 영어가 최소치 미만이면 버림. 짧은 대사 문장("Wrong again."=10자)도
+    // 살리도록 8자로 낮춤 — URL/푸터 잡음은 이미 looksEnglish 에서 배제됨.
+    if (clean.replace(/[^A-Za-z]/g, '').length < 8) continue;
     const key = clean.toLowerCase().replace(/[^a-z0-9]/g, '');
     if (seen.has(key)) continue;                      // 중복 문장 제거
     seen.add(key);
