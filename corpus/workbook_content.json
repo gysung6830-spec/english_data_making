@@ -14718,7 +14718,7 @@
  {
   "key": "2024-수능|40",
   "answer": 1,
-  "answer_src": "given",
+  "answer_src": "official paper (A)/(B)",
   "hl": [
    {
     "t": "Even those with average talent can produce notable work in the various sciences, so long as they do not try to embrace all of them at once.",
@@ -14958,43 +14958,40 @@
   "opts": [
    {
     "n": 1,
-    "tx": "produces … leaves",
+    "tx": "enables … leaves",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 2,
-    "tx": "produces … limits",
+    "tx": "challenges … spares",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 3,
-    "tx": "delays … leaves",
+    "tx": "delays … creates",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
-    "tx": "challenges … limits",
+    "tx": "requires … removes",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
-    "tx": "enables … <span class=\"reuse\">occupies</span>",
+    "tx": "invites … diminishes",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">①정답</span> 성과를 낳고(A) 새 학습 공간을 남김(B) · <span class=\"xo\">②③④</span>(B)를 제한/지연으로 뒤집음 <span class=\"xo\">⑤</span>(B) 공간을 차지함으로 반전",
+  "opt_line": "<span class=\"co\">①정답</span> enables … leaves · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "sufficient space remains·retained in simplified forms",
-   "to": "leaves room",
-   "copies": [
-    "challenges",
-    "limits"
-   ]
+   "to": "enables·leaves",
+   "copies": []
   },
   "restate": {
    "thesis": "한 주제씩 탐구하면 지식이 단순화 저장돼 새 학습 여지를 남긴다.",
@@ -15027,7 +15024,8 @@
     }
    ],
    "echo": "'한 주제씩'·'공간이 남음'이 요약문(①)으로 재진술된다."
-  }
+  },
+  "recon_opts": false
  },
  {
   "key": "2026-09|36",
@@ -23756,8 +23754,8 @@
  {
   "key": "2026-06|40",
   "answer": 2,
-  "answer_src": "given",
-  "recon_opts": true,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
   "hl": [
    {
     "t": "A serious deterioration in people’s working lives would be deeply disturbing to the social order.",
@@ -24045,44 +24043,40 @@
   "opts": [
    {
     "n": 1,
-    "tx": "distribution … burdens",
+    "tx": "distribution … emptiness",
     "verdict": "x",
-    "jd": "✘ (B) 왜곡: 정서적 '보상'이지 '부담'이 아님"
+    "jd": "✘ (B) 'emptiness' 가 지문과 어긋남"
    },
    {
     "n": 2,
     "tx": "distribution … rewards",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 3,
     "tx": "concentration … conflicts",
     "verdict": "x",
-    "jd": "✘ (A)(B) 모두 왜곡·미언급"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
     "tx": "investment … challenges",
     "verdict": "x",
-    "jd": "✘ (A) '투자' 미언급"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
-    "tx": "investment … <span class=\"reuse\">fulfilment</span>",
+    "tx": "investment … growth",
     "verdict": "x",
-    "jd": "✘ (A) '투자'로 왜곡"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">②정답</span> 부의 분배(A)·정서적 보상(B) · <span class=\"xo\">①</span>(B)를 '부담'으로 뒤집음 <span class=\"xo\">③④⑤</span>(A) 집중/투자로 왜곡·미언급",
+  "opt_line": "<span class=\"co\">②정답</span> distribution … rewards · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "share out the fruits of growth·sense of fulfilment",
    "to": "distribution·rewards",
-   "copies": [
-    "concentration",
-    "conflicts",
-    "challenges"
-   ]
+   "copies": []
   },
   "restate": {
    "thesis": "기술 실업은 부의 분배를 흔들고 정서적 보상마저 없앤다",
@@ -24114,8 +24108,8 @@
  {
   "key": "2024-06|40",
   "answer": 2,
-  "answer_src": "given",
-  "recon_opts": true,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
   "hl": [
    {
     "t": "The evolutionary process works on the genetic variation that is available.",
@@ -24368,42 +24362,38 @@
     "n": 1,
     "tx": "improvement … diet",
     "verdict": "x",
-    "jd": "✘ (A) '개선'은 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 2,
     "tx": "obstacle … surroundings",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 3,
-    "tx": "advantage … environments",
+    "tx": "advantage … genes",
     "verdict": "x",
-    "jd": "✘ (A) '이점'은 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
     "tx": "regulator … mechanisms",
     "verdict": "x",
-    "jd": "✘ (A) '조절자' 미언급"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
-    "tx": "guide … <span class=\"reuse\">environments</span>",
+    "tx": "guide … traits",
     "verdict": "x",
-    "jd": "✘ (A) '안내자'로 왜곡"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">②정답</span> 적응의 장애물(A)·환경 변화(B) · <span class=\"xo\">①③⑤</span>(A)를 개선/이점/안내로 반전 <span class=\"xo\">④</span>(A) '조절자' 미언급",
+  "opt_line": "<span class=\"co\">②정답</span> obstacle … surroundings · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "constrain future evolution·may equally be seen as constraints",
    "to": "obstacle·surroundings",
-   "copies": [
-    "improvement",
-    "advantage",
-    "regulator"
-   ]
+   "copies": []
   },
   "restate": {
    "thesis": "생물의 현재 생존 특성은 환경 변화 시 적응의 장애물이 된다",
@@ -24435,8 +24425,8 @@
  {
   "key": "2023-06|40",
   "answer": 1,
-  "answer_src": "given",
-  "recon_opts": true,
+  "answer_src": "official paper (A)/(B)",
+  "recon_opts": false,
   "hl": [
    {
     "t": "Mobilities in transit offer a broad field to be explored by different disciplines in all faculties, in addition to the humanities.",
@@ -24617,42 +24607,38 @@
     "n": 1,
     "tx": "necessary … inequality",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 2,
     "tx": "necessary … growth",
     "verdict": "x",
-    "jd": "✘ (B) '성장'은 미언급"
+    "jd": "✘ (B) 'growth' 가 지문과 어긋남"
    },
    {
     "n": 3,
-    "tx": "limited … cohesion",
+    "tx": "limited … consciousness",
     "verdict": "x",
-    "jd": "✘ (A) '제한된' 왜곡·(B) 정반대"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
     "tx": "desirable … service",
     "verdict": "x",
-    "jd": "✘ (A) '바람직한' 왜곡"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
-    "tx": "desirable … <span class=\"reuse\">divide</span>",
+    "tx": "desirable … divide",
     "verdict": "x",
-    "jd": "✘ (A) '바람직한' 왜곡"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">①정답</span> 이동이 덜 필요함(A)·사회적 불평등(B) · <span class=\"xo\">②</span>(B) '성장' 미언급 <span class=\"xo\">③</span>(A) '제한'·(B) 반전 <span class=\"xo\">④⑤</span>(A) '바람직한'으로 왜곡",
+  "opt_line": "<span class=\"co\">①정답</span> necessary … inequality · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "do not need to move at all·social exclusion",
    "to": "necessary·inequality",
-   "copies": [
-    "desirable",
-    "growth",
-    "divide"
-   ]
+   "copies": []
   },
   "restate": {
    "thesis": "신체 이동이 덜 필요해도 이동성·권력을 얻어 불평등을 낳는다",
@@ -24684,7 +24670,7 @@
  {
   "key": "2026-09|40",
   "answer": 4,
-  "answer_src": "given",
+  "answer_src": "official paper (A)/(B)",
   "hl": [
    {
     "t": "In most fiction, characters’ lives are limited to the individual work.",
@@ -24915,43 +24901,40 @@
     "n": 1,
     "tx": "resurface … simplification",
     "verdict": "x",
-    "jd": "✘ (B) 왜곡: 형질이 '단순화'가 아니라 변형됨"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 2,
     "tx": "endure … degradation",
     "verdict": "x",
-    "jd": "✘ (B) 왜곡: 단순 '악화'가 아님"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 3,
-    "tx": "fade … preservation",
+    "tx": "fade … variation",
     "verdict": "x",
-    "jd": "✘ (A)(B) 반대: 사라지지도, 보존되지도 않음"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
     "tx": "feature … transformation",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 5,
-    "tx": "<span class=\"reuse\">disappear</span> … fossilization",
+    "tx": "disappear … fossilization",
     "verdict": "x",
-    "jd": "✘ (A) 반대: 사라지는 게 아니라 재등장"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">④정답</span> 장르·만화 인물은 후속작에 계속 등장(A)하고 형질이 변형됨(B) · <span class=\"xo\">①②</span>(B)를 단순화/악화로 왜곡 <span class=\"xo\">③⑤</span>(A) 사라짐으로 반전",
+  "opt_line": "<span class=\"co\">④정답</span> feature … transformation · <span class=\"xo\">①②③⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "reappear in subsequent works·may change considerably",
-   "to": "feature … transformation",
-   "copies": [
-    "disappear",
-    "fade"
-   ]
+   "to": "feature·transformation",
+   "copies": []
   },
-  "recon_opts": true,
+  "recon_opts": false,
   "restate": {
    "thesis": "문학 소설 인물과 달리 장르물·만화 인물은 재등장하며 변형된다",
    "kind": "compare",
@@ -25020,7 +25003,7 @@
  {
   "key": "2027-06|40",
   "answer": 5,
-  "answer_src": "given",
+  "answer_src": "official paper (A)/(B)",
   "hl": [
    {
     "t": "In the pharmaceutical industry, algorithms are being employed to find treatments and drugs for rare diseases that to date haven’t received much attention.",
@@ -25241,43 +25224,40 @@
     "n": 1,
     "tx": "prevention … marginalized",
     "verdict": "x",
-    "jd": "✘ (A) 왜곡: '예방'이 아니라 방치를 뜻함"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 2,
-    "tx": "spread … privileged",
+    "tx": "spread … general",
     "verdict": "x",
-    "jd": "✘ (A)(B) 반대: 확산·특권층이 아님"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 3,
-    "tx": "overlook … affluent",
+    "tx": "overlook … native",
     "verdict": "x",
-    "jd": "✘ (B) 반대: '부유층'이 아니라 소외 집단"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
-    "tx": "ignorance … <span class=\"reuse\">wealthy</span>",
+    "tx": "ignorance … wealthy",
     "verdict": "x",
-    "jd": "✘ (B) 반대: '부유한' 집단이 아님"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
     "tx": "disregard … underserved",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    }
   ],
-  "opt_line": "<span class=\"co\">⑤정답</span> 수익성 낮은 질병의 방치(A)를 줄여 소외된(B) 집단까지 초점 확대 · <span class=\"xo\">①②</span>(A)를 예방/확산으로 왜곡 <span class=\"xo\">③④</span>(B)를 부유층으로 반전",
+  "opt_line": "<span class=\"co\">⑤정답</span> disregard … underserved · <span class=\"xo\">①②③④</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "the disease has been neglected·traditionally neglected populations",
-   "to": "disregard … underserved",
-   "copies": [
-    "prevention",
-    "wealthy"
-   ]
+   "to": "disregard·underserved",
+   "copies": []
   },
-  "recon_opts": true,
+  "recon_opts": false,
   "restate": {
    "thesis": "AI가 투자 불균형을 줄여 방치된 질병과 소외 집단으로 관심을 넓힌다",
    "kind": "single",
@@ -25308,7 +25288,7 @@
  {
   "key": "2023-수능|40",
   "answer": 2,
-  "answer_src": "given",
+  "answer_src": "official paper (A)/(B)",
   "hl": [
    {
     "t": "“Craftsmanship” may suggest a way of life that declined with the arrival of industrial society ― but this is misleading.",
@@ -25521,45 +25501,42 @@
   "opts": [
    {
     "n": 1,
-    "tx": "persisted … enhance",
+    "tx": "persisted … cultivate",
     "verdict": "x",
-    "jd": "✘ (B) 반대: 발전을 '촉진'이 아니라 제한"
+    "jd": "✘ (B) 'cultivate' 가 지문과 어긋남"
    },
    {
     "n": 2,
     "tx": "persisted … limit",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 지문 핵심과 일치"
    },
    {
     "n": 3,
     "tx": "evolved … accelerate",
     "verdict": "x",
-    "jd": "✘ (A)(B) 반대: 진화·가속이 아님"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 4,
-    "tx": "<span class=\"reuse\">diminished</span> … shape",
+    "tx": "diminished … shape",
     "verdict": "x",
-    "jd": "✘ (A) 반대: '약화'가 아니라 지속"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    },
    {
     "n": 5,
     "tx": "diminished … restrict",
     "verdict": "x",
-    "jd": "✘ (A) 반대: (B)는 맞으나 (A) '약화'가 틀림"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
    }
   ],
-  "opt_line": "<span class=\"co\">②정답</span> 장인 정신은 여러 맥락에서 지속됨(A), 발전을 제한(B)하는 요인 만남 · <span class=\"xo\">①③</span>(B)를 촉진/가속으로 반전 <span class=\"xo\">④⑤</span>(A) '약화됨'으로 반대",
+  "opt_line": "<span class=\"co\">②정답</span> persisted … limit · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
   "paraphrase": {
    "from": "an enduring, basic human impulse·stand in the way·can be weakened",
-   "to": "persisted … limit",
-   "copies": [
-    "diminished",
-    "evolved"
-   ]
+   "to": "persisted·limit",
+   "copies": []
   },
-  "recon_opts": true,
+  "recon_opts": false,
   "restate": {
    "thesis": "장인 정신은 지속되나 발전을 제한하는 요인을 자주 만난다",
    "kind": "single",
