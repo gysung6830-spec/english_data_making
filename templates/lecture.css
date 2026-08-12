@@ -130,22 +130,22 @@ body{
   border:1px solid #cbe6d5; border-left:4px solid var(--green); border-radius:8px;
   padding:5px 11px; margin:3px 0 3px 4px; line-height:1.5; }
 
-/* ---- ③ 글 예측 : 인디고 카드 -------------------------------------------- */
+/* ---- ④ 글 정리 : 인디고 카드 (한 페이지 압축) --------------------------- */
 .pcard{
   background:var(--indigo-soft); border:1px solid #e4dffb; border-left:5px solid var(--indigo);
-  border-radius:12px; padding:11px 15px; margin-bottom:11px;
+  border-radius:11px; padding:7px 13px; margin-bottom:7px;
 }
 .pcard:last-child{ margin-bottom:0; }
-.pc-q{ font-weight:700; color:var(--indigo); font-size:10.8pt; }
+.pc-q{ font-weight:700; color:var(--indigo); font-size:10.2pt; }
 .pc-q .em{ margin-right:5px; }
-.pc-hint{ font-weight:400; color:#9aa0b4; font-size:8.6pt; margin-left:5px; }
-.pred-a{ font-size:9.6pt; color:var(--green-d); background:var(--green-soft);
-  border:1px solid #cbe6d5; border-radius:8px; padding:5px 11px; margin-top:6px; line-height:1.55; }
-.writeline{ display:block; border-bottom:1px solid #cbd0da; height:16px; margin-top:6px; }
+.pc-hint{ font-weight:400; color:#9aa0b4; font-size:8.5pt; margin-left:5px; }
+.pred-a{ font-size:9.3pt; color:var(--green-d); background:var(--green-soft);
+  border:1px solid #cbe6d5; border-radius:8px; padding:4px 10px; margin-top:5px; line-height:1.45; }
+.writeline{ display:block; border-bottom:1px solid #cbd0da; height:15px; margin-top:5px; }
 .writeline.inline{ display:inline-block; width:58%; height:12px; vertical-align:middle; }
 
 /* 체크박스형 선택지 */
-.choices{ display:flex; flex-wrap:wrap; gap:8px 18px; margin:8px 0 2px; }
+.choices{ display:flex; flex-wrap:wrap; gap:5px 16px; margin:5px 0 2px; }
 .choice{ font-size:9.8pt; color:#3f4654; font-weight:500; display:inline-flex; align-items:center;
   gap:6px; white-space:nowrap; }
 .ck{ display:inline-block; width:13px; height:13px; border:1.6px solid #b9bed0;
@@ -156,8 +156,8 @@ body{
   position:absolute; left:1px; top:-3px; }
 
 /* 필자 의견 루브릭 */
-.rubric{ margin-top:9px; background:#fff; border:1px dashed #d6d1ef; border-radius:9px;
-  padding:7px 11px; font-size:8.6pt; color:#5b6472; line-height:1.7; }
+.rubric{ margin-top:5px; background:#fff; border:1px dashed #d6d1ef; border-radius:9px;
+  padding:5px 10px; font-size:8pt; color:#5b6472; line-height:1.5; }
 .rb{ display:inline-block; color:#fff; font-weight:700; font-size:7.8pt; border-radius:999px;
   padding:1px 9px; margin-right:6px; }
 .rb.pos{ background:var(--green); }
@@ -184,22 +184,21 @@ mark.hl0{ background:#fff2a1; } mark.hl1{ background:#bfe8c6; }
 .cswatch{ display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
 .cswatch.hl0{ background:#fff2a1; } .cswatch.hl1{ background:#bfe8c6; }
 .cleg .cvar{ color:#9aa0b4; font-size:8.3pt; }
-.hl-passage{ font-size:10pt; line-height:1.95; color:var(--ink); background:#fff;
-  border:1px solid var(--line); border-radius:9px; padding:8px 12px; }
-.hl-passage .snum{ display:inline-block; background:#dbe7e0; color:var(--green-d);
-  font-weight:700; font-size:7pt; border-radius:5px; padding:0 4px; margin-right:3px; vertical-align:1.5px; }
+.hl-passage{ font-size:9pt; line-height:1.5; color:var(--ink); background:#fff;
+  border:1px solid var(--line); border-radius:9px; padding:6px 10px; }
+.hl-passage .snum{ font-weight:700; color:var(--green); font-size:7pt; margin-right:1px; }
 
 /* 글 내용 정리: 블록 흐름(도입→전개→…) */
 .pcard.flow-card{ background:#fff; border-left-color:var(--green); }
 .pc-q.green{ color:var(--green-d); }
-.fblock{ border:1px solid #cfe0d4; border-left:5px solid var(--green); border-radius:10px;
-  padding:8px 13px; background:var(--green-soft); }
-.fb-head{ line-height:1.6; }
+.fblock{ border:1px solid #cfe0d4; border-left:5px solid var(--green); border-radius:9px;
+  padding:5px 11px; background:var(--green-soft); }
+.fb-head{ line-height:1.45; }
 .fb-stage{ display:inline-block; background:var(--green); color:#fff; font-weight:700;
-  border-radius:7px; padding:1px 11px; font-size:9pt; margin-right:8px; }
-.fb-sum{ font-weight:700; color:#17233f; font-size:10.4pt; }
-.fb-range{ color:#9aa0b4; font-size:8.6pt; margin-left:6px; }
-.fb-ex{ margin-top:6px; padding-top:5px; border-top:1px dashed #d7c9a6; font-size:9pt; color:#6b5a2a; }
+  border-radius:6px; padding:1px 10px; font-size:8.8pt; margin-right:7px; }
+.fb-sum{ font-weight:700; color:#17233f; font-size:9.7pt; }
+.fb-range{ color:#9aa0b4; font-size:8.4pt; margin-left:5px; }
+.fb-ex{ margin-top:3px; padding-top:3px; border-top:1px dashed #d7c9a6; font-size:8.6pt; color:#6b5a2a; }
 .fb-ex-lab{ display:inline-block; background:#fff0d6; color:#a5701f; font-weight:700;
-  border-radius:6px; padding:1px 8px; margin-right:7px; font-size:8pt; }
-.fb-arr{ text-align:center; color:var(--green); font-size:10pt; margin:3px 0; }
+  border-radius:6px; padding:0 7px; margin-right:6px; font-size:7.6pt; }
+.fb-arr{ text-align:center; color:var(--green); font-size:8.5pt; margin:0; line-height:1.1; }

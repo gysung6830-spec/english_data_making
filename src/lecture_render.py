@@ -51,14 +51,11 @@ _MARK = re.compile(r"\[\[(.+?)\]\]")
 
 
 def _mark_en(text: str) -> Markup:
-    """[[...]] 부분을 '오역 주의' 강조로 표시(en)."""
-    out, last = [], 0
-    for m in _MARK.finditer(text or ""):
-        out.append(str(escape(text[last:m.start()])))
-        out.append(f'<span class="en-trap">{escape(m.group(1))}</span>')
-        last = m.end()
-    out.append(str(escape(text[last:])))
-    return Markup("".join(out))
+    """영어는 강조하지 않는다 — [[ ]] 표시만 떼고 원문 그대로.
+
+    (어디가 빈칸인지 학생이 스스로 찾는 과정이 학습이므로 en 밑줄 없음)
+    """
+    return escape(_MARK.sub(lambda m: m.group(1), text or ""))
 
 
 def _mark_ko(text: str, teacher: bool) -> Markup:
