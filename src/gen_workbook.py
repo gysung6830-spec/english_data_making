@@ -198,7 +198,10 @@ def _mark_sentence(text, tags, mark_rel, rel_cap=2, pol_cap=2):
         i = b
     tail = "".join(out) + esc(text[i:])
     pre = "".join(f'<span class="tag hot">{esc(s)}</span> ' for s in unmatched)
-    return pre + tail
+    html_out = pre + tail
+    # 빈칸(31~40): 밑줄 구간을 빈칸 박스로
+    html_out = re.sub(r'_{3,}', '<span class="bk">&nbsp;&nbsp;&nbsp;</span>', html_out)
+    return html_out
 
 
 def step2_passage(hl):
@@ -621,6 +624,37 @@ def restate_card(rt):
     </div>'''
 
 
+def mugwan_html(mug, step2=False):
+    """무관한 문장(35) — 도입문 + ①②③④⑤ 번호 문장. step2면 무관(정답) 문장을 표시."""
+    intro = mug.get("intro", "")
+    cands = mug.get("cands", [])
+    irr = mug.get("irrelevant", 0)
+    parts = []
+    if intro:
+        parts.append(f'<span class="mg-intro">{esc(intro)}</span>')
+    for i, t in enumerate(cands, 1):
+        badge = f'<span class="mgn">{CIRCLED[i-1]}</span>'
+        if step2 and i == irr:
+            parts.append(f'{badge}<span class="mg-x">{esc(t)}<span class="mg-xt">✕ 흐름과 무관</span></span>')
+        else:
+            parts.append(f'{badge}{esc(t)}')
+    return " ".join(parts)
+
+
+def mugwan_opts(mug):
+    """무관 STEP2 선지 판정 — ①~⑤ 중 무관 문장이 정답."""
+    cands = mug.get("cands", []); irr = mug.get("irrelevant", 0)
+    out = []
+    for i, t in enumerate(cands, 1):
+        tx = (t[:38] + "…") if len(t) > 40 else t
+        ok = (i == irr)
+        cls = "opt ok" if ok else "opt x"
+        jd = "✔ 주제 이탈 → 정답" if ok else "흐름 유지"
+        out.append(f'<div class="{cls}"><span class="n">{CIRCLED[i-1]}</span>'
+                   f'<span class="tx">{esc(tx)}</span><span class="jd">{esc(jd)}</span></div>')
+    return f'<div class="opts">{"".join(out)}</div>'
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -671,6 +705,11 @@ def render_spread(rec, c, idx):
     remind_label = "🔗 연결고리 단서" if seqtype else "📢 신호 리마인더"
     uline = c.get("uline")  # 함축의미(21): 밑줄 친 부분
     step1_psg = uline_html(clean_passage(hl, band, insert_en), uline)
+    # 무관한 문장(35): 도입 + ①~⑤ 번호 문장, 선지는 번호
+    mug = c.get("mugwan") if num == 35 else None
+    if mug:
+        step1_psg = mugwan_html(mug, step2=False)
+        opt_lines = ('<span class="o">① ② ③ ④ ⑤ 중 <b>전체 흐름과 관계 없는 문장</b>의 번호를 고르시오.</span>')
     rt = c.get("restate")  # 재진술(추가 문제)
     _cue = contrast_cue(hl) if (rt and rt.get("kind") == "compare") else None
     rquiz = restate_problem(rt, _cue)
@@ -708,6 +747,8 @@ def render_spread(rec, c, idx):
     pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
     # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
     passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
+    if mug:
+        passage_html = mugwan_html(mug, step2=True)
     passage_html = uline_html(passage_html, uline)
     clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
                    '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
@@ -730,7 +771,7 @@ def render_spread(rec, c, idx):
       <div class="psg">{passage_html}</div>
       {reason_block}
       {pline}
-      {opts_block(c.get("opts", []), answer)}
+      {mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer)}
       {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
     </div>'''
@@ -1137,6 +1178,11 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .color-legend .cl.sk{ background:#eef0f2; color:#8a929b; } .color-legend .cl.sk b{ color:#7a828b; }
 .sk{ color:var(--skip); }
 .bk{ display:inline-block; min-width:60px; border-bottom:2px solid #111; }
+/* 무관한 문장(35) 번호 매기기 */
+.mgn{ display:inline-block; font-size:9.5px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:50%; width:15px; height:15px; line-height:15px; text-align:center; margin:0 3px 0 2px; vertical-align:1px; }
+.mg-intro{ font-weight:600; }
+.mg-x{ background:#fdecea; border-bottom:2px solid var(--trap); border-radius:2px; padding:0 2px; }
+.mg-xt{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border-radius:7px; padding:0 5px; margin-left:4px; vertical-align:1px; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
 .tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }

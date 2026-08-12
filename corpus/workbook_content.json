@@ -1291,7 +1291,7 @@
     ]
    },
    {
-    "t": "When, in one of his novels, Evelyn Waugh says of a new character, that ‘he had just the kind of appearance one would expect a young man of his type to have’ and nothing else, you still feel as if you",
+    "t": "When, in one of his novels, Evelyn Waugh says of a new character, that ‘he had just the kind of appearance one would expect a young man of his type to have’ and nothing else, you still feel as if you ____________.",
     "role": "yellow",
     "tags": [],
     "pos": "끝문장"
@@ -1493,7 +1493,8 @@
     }
    ],
    "echo": "'채워 넣을 윤곽만 준다'가 빈칸 '정확히 묘사받은 듯 느낀다'를 재진술"
-  }
+  },
+  "blank": true
  },
  {
   "key": "2023-09|35",
@@ -1735,6 +1736,17 @@
     }
    ],
    "echo": "무관 문장은 식물 재생 흐름을 벗어나 'Animals'의 학습 행동을 다룸"
+  },
+  "mugwan": {
+   "intro": "Plants have a remarkable ability to recover from disaster.",
+   "cands": [
+    "This is largely because they have preferential access to the tissues that rebuild their organs.",
+    "Throughout their life cycle, plants retain meristems, which are regions of undifferentiated tissue that can differentiate into new shoots and other organs.",
+    "This phenomenon occurs at very different scales, ranging from the healing of a small scar to the regrowth of an entire plant.",
+    "Animals, by contrast, invest heavily in learned behaviors that help them avoid predators and find food.",
+    "After being disturbed, a plant community can adjust its composition through regeneration, mainly resprouting and reseeding."
+   ],
+   "irrelevant": 4
   }
  },
  {
@@ -4290,6 +4302,17 @@
     }
    ],
    "echo": "'New digital devices emerge every year' 제품경쟁 문장은 수용 장벽 주제와 무관 = ③"
+  },
+  "mugwan": {
+   "intro": "Even though organizations are offering flexible workplace arrangements such as telecommuting in ever-increasing numbers, acceptance and use of these programs are still limited by a variety of factors.",
+   "cands": [
+    "These factors include manager reliance on face-to-face management practices, lack of telecommuting training within an organization, misperceptions of and discomfort with flexible workplace programs, and a limited understanding of their implications for an organization’s bottom line.",
+    "One dominant barrier is the belief that physical presence is essential to genuine productivity. Because of this, employees who telecommute are often perceived as less committed than those in the office.",
+    "New digital devices emerge every year, and firms compete fiercely to design products best suited for global consumer markets.",
+    "With regard to such misperceptions, organizations must train managers to evaluate workers by results rather than by hours seen at a desk.",
+    "Only when these barriers are removed will flexible workplace programs gain full acceptance."
+   ],
+   "irrelevant": 3
   }
  },
  {
@@ -6518,7 +6541,7 @@
  },
  {
   "key": "2025-06|35",
-  "answer": 4,
+  "answer": 3,
   "answer_src": "solved",
   "hl": [
    {
@@ -6594,10 +6617,10 @@
     },
     {
      "ko": "연습으로 각 음을 <b>미세 조정</b>해 저장된 본에 가깝게 맞춰 간다",
-     "an": "— '본 저장→재현→미세조정' 흐름 → ④(깃털·짝짓기)만 무관 = 정답 ④"
+     "an": "— '본 저장→재현→미세조정' 흐름 → ③(깃털·짝짓기)만 무관 = 정답 ③"
     }
    ],
-   "concl": "→ ④는 '깃털이 짝을 유혹하려 진화했다'는 <b>외형·번식</b> 이야기 = 노래 학습 흐름과 무관 = <b>④</b>",
+   "concl": "→ ③는 '깃털이 짝을 유혹하려 진화했다'는 <b>외형·번식</b> 이야기 = 노래 학습 흐름과 무관 = <b>③</b>",
    "gnote": "①②③⑤는 '본 저장 → 재현 → 미세조정'으로 이어지지만 ④만 소재가 벗어남."
   },
   "direct": [
@@ -6768,6 +6791,17 @@
     }
    ],
    "echo": "'colorful feathers ~ attract mates' 외형·번식 문장은 노래 학습 흐름과 무관 = ④"
+  },
+  "mugwan": {
+   "intro": "Young songbirds do not inherit their songs fully formed; instead, they must learn to reproduce the song of an adult tutor.",
+   "cands": [
+    "Early in life, a young bird memorizes this model and stores it as a kind of template against which its own attempts are later compared.",
+    "At first its babbling is uneven, with the pitch and tempo of each note varying widely from one attempt to the next.",
+    "The colorful feathers of many male songbirds evolved mainly to attract mates rather than to improve their singing.",
+    "Through constant practice, the bird gradually fine-tunes its vocalizations, adjusting each note until it more closely matches the stored template.",
+    "Eventually the young bird’s song overlaps almost completely with the tutor’s, an accurate copy produced through this long process of listening and self-correction."
+   ],
+   "irrelevant": 3
   }
  },
  {
@@ -8808,6 +8842,17 @@
     }
    ],
    "echo": "④ ‘매장 상주·베스트셀러 브라우징’은 재고 없이 카탈로그로 넓히는 주제와 무관."
+  },
+  "mugwan": {
+   "intro": "",
+   "cands": [
+    "Most antiquarian and second-hand booksellers do not keep large stocks of any specific title, since each book they handle is usually unique.",
+    "Because customers cannot simply come in and find what they want on the shelves, dealers inevitably build up their collection through other means.",
+    "As a matter of course, dealers routinely circulate catalogues and lists to their regular customers, who then enquire about the availability of particular books.",
+    "Full-time booksellers must, crucially, keep their shop premises open long hours so that passing tourists can browse the latest bestsellers.",
+    "In this way, the reach of a specialist dealer can multiply and expand far beyond the walls of any single shop."
+   ],
+   "irrelevant": 4
   }
  },
  {
@@ -10606,7 +10651,7 @@
     ]
    },
    {
-    "t": "Nevertheless, even after the perspectival correction is applied and reason concludes that perception is misleading, the figure still appears small, and the truth of the matter is revealed",
+    "t": "Nevertheless, even after the perspectival correction is applied and reason concludes that perception is misleading, the figure still appears small, and the truth of the matter is revealed ____________.",
     "role": "yellow",
     "tags": [
      {
@@ -10811,7 +10856,8 @@
    ],
    "subjects": [],
    "echo": "'Only rational discourse points towards true knowledge'를 '진리는 이성적 표상에서 드러난다'로 재진술."
-  }
+  },
+  "blank": true
  },
  {
   "key": "2023-수능|36",
@@ -12473,7 +12519,7 @@
   "answer_src": "given",
   "hl": [
    {
-    "t": "Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests.",
+    "t": "Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be ____________.",
     "role": "yellow",
     "tags": [
      {
@@ -12726,7 +12772,8 @@
    ],
    "subjects": [],
    "echo": "'converting nonforests into forests는 정당화되지 않음'을 '생태학자들의 비판'으로 재진술."
-  }
+  },
+  "blank": true
  },
  {
   "key": "2023-수능|37",
@@ -25595,7 +25642,7 @@
     ]
    },
    {
-    "t": "Not only does this result demonstrate that , but it also shows that the choice of songs used in playback experiments is highly important. [3점]",
+    "t": "Not only does this result demonstrate that ____________, but it also shows that the choice of songs used in playback experiments is highly important. [3점]",
     "role": "yellow",
     "tags": [],
     "pos": "끝문장"
@@ -25774,6 +25821,7 @@
     }
    ],
    "echo": "실험은 경계 위치에 따른 반응 차이를 보일 뿐, 핵심을 되풀이한 재진술은 없다"
-  }
+  },
+  "blank": true
  }
 ]
