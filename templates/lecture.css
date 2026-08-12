@@ -13,14 +13,13 @@
   --red:#c0442e; --gray:#8b93a1; --ink:#2a2f36; --line:#e6e8ee; --box:#f6f7f9;
 }
 
-@page{ size:A4; margin:15mm 14mm 16mm; @bottom-center{ content:element(footer);} }
+@page{ size:A4; margin:15mm 14mm 16mm; }
+/* @bottom-center 각주는 렌더 시 footer_note 문자열로 주입 */
 *{ box-sizing:border-box; }
 body{
   font-family:"NanumSquareRound","Malgun Gothic","맑은 고딕",sans-serif;
   color:var(--ink); font-size:10.5pt; line-height:1.6; margin:0;
 }
-.footer{ position:running(footer); font-size:8pt; color:#a7adb8; text-align:center;
-  border-top:1px solid var(--line); padding-top:3px; }
 
 /* ---- 헤더 --------------------------------------------------------------- */
 .passage{ page-break-after:always; }
@@ -106,20 +105,17 @@ body{
 .ko-blank{ display:inline-block; border-bottom:1.5px solid var(--amber); height:12px; vertical-align:middle; }
 .ko-fill{ color:var(--green-d); font-weight:700; background:var(--green-bg);
   border-radius:5px; padding:0 5px; }
-/* 내용 객관식 */
-.s-q{ font-size:9.7pt; margin-top:2px; }
-.q-lead{ font-weight:700; color:var(--green-d); margin-right:7px; }
-.q-opt{
-  display:inline-block; border:1.3px solid var(--line); border-radius:8px;
-  padding:2px 11px; margin:0 6px 5px 0; line-height:1.5; background:#fff;
-}
-.q-opt .osym{ font-weight:700; color:#5b6472; margin-right:4px; }
-.q-opt.correct{ background:var(--green-bg); border-color:#a9d6bb; }
-.q-opt.correct .osym{ color:var(--green); }
-.s-ans{ font-size:9pt; color:var(--green-d); background:var(--green-soft);
+/* 내용 확인: '이렇게 읽으면 오답(X) → 왜?' */
+.s-q{ font-size:9.7pt; margin-top:3px; }
+.q-lead{ font-weight:700; color:var(--red); }
+.mis{ font-size:9.8pt; color:#3f4654; padding:3px 11px; margin:4px 0 0;
+  border:1.2px solid #f0d5cf; background:#fdf3f1; border-radius:8px; line-height:1.5; }
+.mis-x{ color:var(--red); font-weight:700; margin-right:6px; }
+.mis-line{ font-size:9pt; color:#8b93a1; margin:3px 0 3px 4px; }
+.mis-line .writeline.inline.wide{ width:80%; }
+.mis-why{ font-size:9pt; color:var(--green-d); background:var(--green-soft);
   border:1px solid #cbe6d5; border-left:4px solid var(--green); border-radius:8px;
-  padding:5px 11px; margin-top:5px; line-height:1.5; }
-.s-ans b{ color:var(--green); }
+  padding:5px 11px; margin:3px 0 3px 4px; line-height:1.5; }
 
 /* ---- ③ 글 예측 : 인디고 카드 -------------------------------------------- */
 .pcard{

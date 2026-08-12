@@ -152,15 +152,14 @@ def test_lecture_schema_and_counts():
         assert False, "문장 수 불일치가 통과하면 안 됨"
     except ValueError:
         pass
-    # 내용 객관식 정답 인덱스가 범위를 벗어나면 실패
-    from src.lecture_schemas import Chunk, SentenceItem
-    try:
-        SentenceItem(id=1, english="x", chunks=[Chunk(en="x", ko="ㅇ")],
-                     content_options=["a", "b"], content_answer_index=5).check()
-        assert False, "잘못된 내용 객관식 정답 인덱스가 통과하면 안 됨"
-    except ValueError:
-        pass
-    # 재진술 사슬 개수 범위(2~3) 위반 시 실패
+    # 문장마다 오답(misread) 1개 이상 존재
+    assert all(s.misreads for s in p.analysis.sentences)
+    # 재진술 사슬은 영어 표현만(한글 없음)
+    import re as _re
+    for c in p.overview.restatement_chains:
+        for e in c.expressions:
+            assert not _re.search(r"[가-힣]", e), f"재진술 표현에 한글: {e}"
+    # 재진술 사슬 개수 범위(1~2) 위반 시 실패
     try:
         Overview.model_validate({**p.overview.model_dump(), "restatement_chains": []})
         assert False, "재진술 사슬 개수 위반이 통과하면 안 됨"
@@ -182,14 +181,14 @@ def test_lecture_render_html():
     p = mock_lecture_passage(item_no="1")
     student = lecture_render.render_lecture_html([p], teacher=False)
     teacher = lecture_render.render_lecture_html([p], teacher=True)
-    # 3개 섹션(어휘 리스트 / 문장별 끊어읽기·내용 / 글 예측)은 둘 다 있음
-    for sec in ("어휘 리스트", "끊어읽기", "이 문장의 내용은?", "글 예측", "재진술 사슬"):
+    # 섹션(어휘 리스트 / 끊어읽기 / 오답 찾기 / 글 예측)은 둘 다 있음
+    for sec in ("어휘 리스트", "끊어읽기", "왜 틀렸을까", "글 예측", "재진술 사슬"):
         assert sec in student and sec in teacher
     # 학생용엔 빈칸(ko-blank)이 있고, 강사용엔 채워진 정답(ko-fill)이 있다
     assert "ko-blank" in student and "ko-fill" not in student
     assert "ko-fill" in teacher
-    # 문장 내용 객관식 정답줄(s-ans)·예측 정답(pred-a)은 강사용에만
-    assert "s-ans" not in student and "s-ans" in teacher
+    # 오답 이유(mis-why)·예측 정답(pred-a)은 강사용에만
+    assert "mis-why" not in student and "mis-why" in teacher
     assert "pred-a" not in student and "pred-a" in teacher
     print("PASS  강의컨셉(필생보) 학생용/강사용 렌더링")
 

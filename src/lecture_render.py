@@ -20,9 +20,6 @@ _env = Environment(
     autoescape=select_autoescape(["html", "xml", "j2"]),
 )
 
-_CIRCLED = "①②③④⑤"
-
-
 # 어휘 리스트에서 제외할 '너무 쉬운(초등 수준)' 단어 — 숙어(여러 단어)는 걸러지지 않음
 from .render import _is_easy_word as _too_easy
 
@@ -49,22 +46,6 @@ def _aggregate_vocab(sentences) -> list[dict]:
     return out
 
 
-def _content_view(s) -> dict:
-    """'이 문장 내용' 객관식 -> 보기 순서를 결정론적으로 섞고 정답 기호 계산."""
-    opts, answer_sym = [], ""
-    idx = list(range(len(s.content_options)))
-    # 학생/강사 렌더가 같은 순서를 쓰도록 문장 고유값으로 시드 고정(정답이 항상 ①이 되지 않게)
-    rng = random.Random(f"{s.id}|{s.english[:40]}")
-    rng.shuffle(idx)
-    for pos, oi in enumerate(idx):
-        sym = _CIRCLED[pos] if pos < len(_CIRCLED) else f"({pos + 1})"
-        correct = oi == s.content_answer_index
-        opts.append({"sym": sym, "text": s.content_options[oi], "correct": correct})
-        if correct:
-            answer_sym = sym
-    return {"options": opts, "answer_sym": answer_sym}
-
-
 def _blank_width(ko: str) -> int:
     """빈칸 폭(px): 가려질 한국어 길이에 비례(과도하게 길지 않게 상한)."""
     return max(min(len(ko) * 9 + 12, 300), 48)
@@ -80,22 +61,18 @@ def _build_view(p: LecturePassage) -> dict:
             "expressions": c.expressions,
             "first": c.expressions[0],
             "blanks": max(len(c.expressions) - 1, 1),
-            "variation": c.variation,
         })
 
     lines = []
     for s in p.analysis.sentences:
         chunks = [{"en": c.en, "ko": c.ko, "blank": c.blank,
                    "blank_w": _blank_width(c.ko)} for c in s.chunks]
-        cv = _content_view(s)
         lines.append({
             "id": s.id,
             "english": s.english,
             "grammar": [{"tag": g.tag, "note": g.note} for g in s.grammar],
             "chunks": chunks,
-            "content_options": cv["options"],
-            "content_answer_sym": cv["answer_sym"],
-            "content_explanation": s.content_explanation,
+            "misreads": [{"statement": m.statement, "why": m.why} for m in s.misreads],
         })
 
     return {
@@ -135,16 +112,25 @@ def render_lecture_html(passages, teacher: bool, footer_note: str = "") -> str:
     return tmpl.render(passages=views, teacher=teacher, footer_note=footer_note)
 
 
-def _inline_styles(html: str) -> str:
+def _css_string(text: str) -> str:
+    """CSS content 문자열용 이스케이프(따옴표·역슬래시·개행)."""
+    return (text or "").replace("\\", "\\\\").replace('"', '\\"').replace("\n", " ")
+
+
+def _inline_styles(html: str, footer_note: str = "") -> str:
     """폰트(@font-face base64)와 스타일을 문서 <head> 안에 직접 삽입한다.
 
     WeasyPrint(현재 버전)는 write_pdf(stylesheets=…) 로 넘긴 외부 CSS의 @font-face 를
     적용하지 않아 한글 폰트가 폴백된다. 문서 자체의 <style> 에 넣어야 나눔스퀘어라운드가
-    확실히 임베드된다.
+    확실히 임베드된다. 각주는 러닝 요소 대신 @bottom-center 문자열로 넣어(상단 잔상 방지).
     """
     fonts = (TEMPLATE_DIR / "lecture_fonts.css").read_text(encoding="utf-8")
     css = (TEMPLATE_DIR / "lecture.css").read_text(encoding="utf-8")
-    return html.replace("</head>", f"<style>{fonts}\n{css}</style></head>", 1)
+    foot = ""
+    if footer_note:
+        foot = ('@page{ @bottom-center{ content:"%s"; font-size:8pt; color:#a7adb8; } }'
+                % _css_string(footer_note))
+    return html.replace("</head>", f"<style>{fonts}\n{css}\n{foot}</style></head>", 1)
 
 
 def render_lecture_pdf(passages, out_path: str | Path, teacher: bool,
@@ -154,7 +140,7 @@ def render_lecture_pdf(passages, out_path: str | Path, teacher: bool,
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     html = _inline_styles(render_lecture_html(passages, teacher=teacher,
-                                             footer_note=footer_note))
+                                             footer_note=footer_note), footer_note)
     HTML(string=html, base_url=str(TEMPLATE_DIR) + "/").write_pdf(str(out_path))
     return out_path
 

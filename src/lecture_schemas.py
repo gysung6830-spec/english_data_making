@@ -42,9 +42,8 @@ class LectureSentence(BaseModel):
 # ③ 재진술 사슬
 # ---------------------------------------------------------------------------
 class RestatementChain(BaseModel):
-    label: str
-    expressions: list[str]
-    variation: str
+    label: str                 # 개념의 '짧은 영어' 이름(한글 금지)
+    expressions: list[str]     # 지문에 실제로 나온 '영어' 표현들(순서대로, 2개 이상)
 
     @field_validator("expressions")
     @classmethod
@@ -65,7 +64,8 @@ class Overview(BaseModel):
     stance_reason: str
     structure: Structure          # 🧩 글의 구조
     structure_reason: str
-    restatement_chains: list[RestatementChain] = Field(min_length=2, max_length=3)
+    # 재진술 사슬: 억지로 만들지 말고, 필자 핵심 의견을 이루는 개념의 실제 사슬만(1~2개)
+    restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=2)
 
 
 # ---------------------------------------------------------------------------
@@ -87,16 +87,20 @@ class GrammarChip(BaseModel):
     note: str = ""    # 간단 설명 한 줄(필생보처럼)
 
 
+class Misread(BaseModel):
+    """모두 '틀린 해석(X)'. 학생은 왜 X인지 찾고, why 로 확인한다."""
+    statement: str    # 흔히 하는 오해/오역(틀린 해석 X)
+    why: str          # 왜 틀렸는지 + 바른 뜻(어려운 내용도 쉬운 말로), 글 흐름 이해에 도움
+
+
 class SentenceItem(BaseModel):
     id: int
     english: str                  # 문장 원문 전체
     grammar: list[GrammarChip] = Field(default_factory=list)  # 어법 칩(1~3개)
     vocab: list[Vocab] = Field(default_factory=list)   # 이 문장 핵심 어휘(→ 어휘 리스트로 집계)
     chunks: list[Chunk]           # ② 끊어읽기(오역 위험 부분 blank=true)
-    # ② '이 문장 내용' 객관식
-    content_options: list[str] = Field(min_length=2, max_length=4)
-    content_answer_index: int     # 정답 위치(0부터)
-    content_explanation: str = "" # (선택) 정답 근거·오답 이유
+    # 내용 확인: '이렇게 읽으면 오답(X)' 1~2개 → 왜 X인지 찾기
+    misreads: list[Misread] = Field(min_length=1, max_length=2)
 
     @field_validator("chunks")
     @classmethod
@@ -106,8 +110,8 @@ class SentenceItem(BaseModel):
         return v
 
     def check(self) -> None:
-        if not (0 <= self.content_answer_index < len(self.content_options)):
-            raise ValueError(f"문장 {self.id}: 내용 객관식 정답 인덱스가 범위를 벗어났습니다.")
+        if not self.misreads:
+            raise ValueError(f"문장 {self.id}: 오답(misread) 항목이 없습니다.")
 
 
 class SentenceAnalysis(BaseModel):

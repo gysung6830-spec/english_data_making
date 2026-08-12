@@ -3,8 +3,6 @@
 <html lang="ko">
 <head><meta charset="utf-8"><title>강의컨셉 교재</title></head>
 <body>
-{% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
-
 {% for p in passages %}
 <div class="passage">
 
@@ -48,10 +46,11 @@
         <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{% if c.blank %}<span class="en-trap">{{ c.en }}</span>{% else %}{{ c.en }}{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gchip">{{ g.tag }}</span>{% if g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}</div>{% endif %}
         <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}{% if c.blank %}{% if teacher %}<span class="ko-fill">{{ c.ko }}</span>{% else %}<span class="ko-blank" style="min-width:{{ c.blank_w }}px"></span>{% endif %}{% else %}<span class="ko-plain">{{ c.ko }}</span>{% endif %}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
-        <div class="s-q"><span class="q-lead">이 문장의 내용은?</span>
-          {% for o in it.content_options %}<span class="q-opt {% if teacher and o.correct %}correct{% endif %}"><span class="osym">{{ o.sym }}</span>{{ o.text }}</span>{% endfor %}
-        </div>
-        {% if teacher %}<div class="s-ans">정답 <b>{{ it.content_answer_sym }}</b>{% if it.content_explanation %} &nbsp;— {{ it.content_explanation }}{% endif %}</div>{% endif %}
+        <div class="s-q"><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
+        {% for m in it.misreads %}
+        <div class="mis"><span class="mis-x">✕</span>{{ m.statement }}</div>
+        {% if teacher %}<div class="mis-why">→ {{ m.why }}</div>{% else %}<div class="mis-line">왜? <span class="writeline inline wide"></span></div>{% endif %}
+        {% endfor %}
       </div>
       {% endfor %}
     </div>
@@ -93,7 +92,7 @@
       <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">같은 개념이 어떻게 다시 표현되는지 순서대로</span></div>
       {% for c in p.chains %}
       {% if teacher %}
-      <div class="chain-a"><b>{{ c.label }}</b> : {{ c.expressions | join(' → ') }}<div class="chain-var">↳ 변주 {{ c.variation }}</div></div>
+      <div class="chain-a"><b>{{ c.label }}</b> : {{ c.expressions | join(' → ') }}</div>
       {% else %}
       <div class="chain-q"><span class="chain-label">{{ c.label }}</span>
         <span class="chain-flow">{{ c.first }}{% for i in range(c.blanks) %} → <span class="chain-blank"></span>{% endfor %}</span></div>
