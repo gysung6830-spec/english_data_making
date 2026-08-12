@@ -1,0 +1,155 @@
+{#- 강의컨셉 교재: 학생용(teacher=False) / 강사용 정답지(teacher=True) 공용 템플릿 -#}
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>강의컨셉 교재</title></head>
+<body>
+{% if footer_note %}<div class="footer">{{ footer_note }}</div>{% endif %}
+
+{% for p in passages %}
+<div class="passage">
+
+  <div class="doc-head">
+    {% if teacher %}<span class="kicker teacher">강사용 · 정답 · 해설</span>
+    {% else %}<span class="kicker">학생 훈련용 · 직접 풀기</span>{% endif %}
+    <div class="doc-title">
+      {% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}{{ p.title }}
+    </div>
+    <div class="doc-meta">
+      {% if p.total > 1 %}지문 {{ p.no }} / {{ p.total }}{% endif %}
+      {% if p.source %}&nbsp;·&nbsp;{{ p.source }}{% endif %}
+    </div>
+  </div>
+
+  {#- 지문 본문 (문장 번호 표시) -#}
+  <div class="passage-box">
+    {% for s in p.sentences %}<span class="sent"><span class="snum">S{{ s.id }}</span>{{ s.text }}</span> {% endfor %}
+  </div>
+
+  {#- 3-A 어휘 힌트 -#}
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-no">A</span>
+      <span class="sec-title">어휘 힌트</span>
+      <span class="sec-desc">뜻을 참고해 문장을 스스로 해석해 보세요</span>
+    </div>
+    <div class="panel">
+      <div class="vocab-grid">
+        {% for v in p.vocab_hints %}
+        <span class="vocab-chip"><b>{{ v.word }}</b><span class="dash">–</span><span class="mean">{{ v.meaning }}</span></span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {#- 3-B 오역포인트 교정 연습 -#}
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-no">B</span>
+      <span class="sec-title">오역포인트 교정 연습</span>
+      <span class="sec-desc">먼저 직접 해석한 뒤, 올바른 해석을 고르세요</span>
+    </div>
+    <div class="panel">
+      {% for t in p.traps %}
+      <div class="qcard">
+        <div class="q-src"><span class="tag">S{{ t.sentence_id }}</span>{{ t.sentence_text }}
+          {% if teacher %}<span class="trap-type">{{ t.trap_type }}</span>{% endif %}
+        </div>
+        {% if not teacher %}<div class="try-line">나의 해석: ____________________________________________</div>{% endif %}
+        {% for o in t.options %}
+        <div class="opt {% if teacher and o.correct %}correct{% endif %}">
+          <span class="sym">{{ o.sym }}</span><span>{{ o.text }}</span>
+        </div>
+        {% endfor %}
+        {% if teacher %}
+        <div class="answer-tab"><b>정답 {{ t.correct_sym }}</b> &nbsp;|&nbsp; {{ t.reason }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {#- 3-C 문장 역할 파악 -#}
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-no">C</span>
+      <span class="sec-title">문장 역할 파악</span>
+      <span class="sec-desc">각 문장 묶음의 역할을 괄호에 골라 쓰세요</span>
+    </div>
+    <div class="panel">
+      <div class="label-pool">보기:
+        {% for lab in p.role_labels %}<span class="lab">{{ lab }}</span>{% endfor %}
+      </div>
+      {% for b in p.blocks %}
+      <div class="role-row">
+        <div class="role-range">{{ b.range_label }}</div>
+        <div class="role-text">{{ b.text }}
+          {% if teacher %}<div class="role-reason">→ {{ b.reason }}</div>{% endif %}
+        </div>
+        <div class="role-pick">
+          {% if teacher %}<span class="role-ans">{{ b.correct_label }}</span>
+          {% else %}<span class="role-blank">(&nbsp;&nbsp;&nbsp;&nbsp;)</span>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {#- 3-D 함정포인트 문항 -#}
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-no">D</span>
+      <span class="sec-title">함정포인트 문항</span>
+      <span class="sec-desc">{% if teacher %}유형: {{ p.trap_question.type }}{% else %}함정에 주의해 고르세요{% endif %}</span>
+    </div>
+    <div class="panel">
+      <div class="qcard">
+        {% if p.trap_question.sentence_text %}
+        <div class="q-src"><span class="tag">S{{ p.trap_question.sentence_id }}</span>{{ p.trap_question.sentence_text }}</div>
+        {% endif %}
+        <div class="q-src" style="font-weight:700">{{ p.trap_question.question_text }}</div>
+        {% for o in p.trap_question.options %}
+        <div class="opt {% if teacher and o.correct %}correct{% endif %}">
+          <span class="sym">{{ o.sym }}</span><span>{{ o.text }}</span>
+        </div>
+        {% endfor %}
+        {% if teacher %}
+        <div class="answer-tab"><b>정답 {{ p.trap_question.correct_sym }}</b> &nbsp;|&nbsp; {{ p.trap_question.explanation }}</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {#- 3-E 패러프레이징 줄잇기 -#}
+  <div class="section">
+    <div class="sec-head">
+      <span class="sec-no">E</span>
+      <span class="sec-title">패러프레이징 줄잇기</span>
+      <span class="sec-desc">선지와 대응하는 본문 문장을 선으로 이으세요</span>
+    </div>
+    <div class="panel">
+      <div class="match">
+        <div class="col">
+          <div class="col-h">선지 (변형된 표현)</div>
+          {% for l in p.paraphrase.left %}
+          <div class="match-item"><span class="sym">{{ l.sym }}</span>{{ l.choice_text }}</div>
+          {% endfor %}
+        </div>
+        <div class="col">
+          <div class="col-h">본문 문장</div>
+          {% for r in p.paraphrase.right %}
+          <div class="match-item"><span class="rmark">{{ r.kmark }}. S{{ r.sentence_id }}</span>{{ r.text }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% if teacher %}
+      <div class="match-answer"><b>정답</b> &nbsp;
+        {% for l in p.paraphrase.left %}{{ l.sym }} → {{ l.answer_marks | join(', ') }}{% if not loop.last %} &nbsp;|&nbsp; {% endif %}{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endfor %}
+</body>
+</html>

@@ -79,24 +79,32 @@ def _extract_pdf_passages(client: ClaudeClient, cfg: Config, src: Path,
             p.unlink(missing_ok=True)
 
 
-def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path,
-                          focus_items: str = "") -> list[Report]:
-    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로).
+def extract_passage_set(client: ClaudeClient, cfg: Config, src: Path,
+                        focus_items: str = ""):
+    """한 파일(PDF/사진/HWP) -> PassageSet(여러 지문). 입력 형식에 맞춰 추출 방식 분기.
 
-    focus_items: 모의고사 독해에서 뽑을 문항 번호 범위(예: '18-24,29-43'). 비우면 전체.
+    분석지·강의컨셉 교재 등 여러 파이프라인이 '본문 추출' 단계를 공유하기 위한 헬퍼.
     """
     if extract.is_image(src):
-        pset = analyze.extract_passages_image(client, cfg, str(src), focus_items)
-    elif hwp.is_hwp(src):
+        return analyze.extract_passages_image(client, cfg, str(src), focus_items)
+    if hwp.is_hwp(src):
         raw = extract.strip_listening(hwp.extract_hwp_text(src))
         if extract.looks_empty(raw):
             raise ValueError(
                 "HWP 에서 텍스트를 찾지 못했습니다(지문이 이미지로 들어간 HWP일 수 있음). "
                 "그 페이지를 PDF나 사진(JPG/PNG)으로 저장해 넣어 주세요."
             )
-        pset = analyze.extract_passages(client, cfg, raw, focus_items)
-    else:
-        pset = _extract_pdf_passages(client, cfg, src, focus_items)
+        return analyze.extract_passages(client, cfg, raw, focus_items)
+    return _extract_pdf_passages(client, cfg, src, focus_items)
+
+
+def build_reports_for_pdf(client: ClaudeClient, cfg: Config, src: Path,
+                          focus_items: str = "") -> list[Report]:
+    """실제 API 를 사용해 한 파일(PDF/사진) -> 여러 Report(지문 순서대로).
+
+    focus_items: 모의고사 독해에서 뽑을 문항 번호 범위(예: '18-24,29-43'). 비우면 전체.
+    """
+    pset = extract_passage_set(client, cfg, src, focus_items)
     return [analyze.analyze_passage(client, cfg, ex) for ex in pset.passages]
 
 
@@ -182,6 +190,26 @@ def _mock_report_for_pdf(cfg: Config, pdf: Path) -> Report:
     return _mock_reports_for_pdf(cfg, pdf)[0]
 
 
+def _mock_lecture_passages_for_pdf(cfg: Config, pdf: Path):
+    """목 모드: 실제 API 없이 샘플 강의컨셉 교재 데이터(들)를 반환."""
+    from samples.lecture_mock import mock_lecture_passage
+
+    return [mock_lecture_passage(title=_safe_stem(pdf), source=pdf.name)]
+
+
+def _assign_item_numbers(items, start: int | None) -> int | None:
+    """지문 목록(reports/passages)에 시작 문항번호부터 1씩 증가시켜 item_no 를 부여.
+
+    start 가 None 이면 아무것도 하지 않고 None 을 반환. 아니면 다음 시작 번호를 반환.
+    """
+    if start is None:
+        return None
+    for it in items:
+        it.item_no = str(start)
+        start += 1
+    return start
+
+
 def run_folder(cfg: Config, mock: bool = False) -> dict:
     """input 폴더의 모든 PDF 를 처리해 output 에 PDF 를 생성."""
     logger = setup_logging(cfg.logs_dir)
@@ -204,23 +232,43 @@ def run_folder(cfg: Config, mock: bool = False) -> dict:
 
     logger.info("총 %d개 지문 처리 시작 (%s 모드)", total, "MOCK" if mock else "API")
 
+    # 어떤 산출물이 필요한지(6섹션 분석 계열 / 강의컨셉 교재)
+    sel = cfg.outputs
+    need_analysis = bool(sel.analysis or sel.student or sel.vocablist or sel.vocabtest)
+    need_lecture = bool(getattr(sel, "lecture", False))
+    if not (need_analysis or need_lecture):
+        need_analysis = True   # 아무것도 안 골랐으면 분석지 기본
+
     analysis_outputs: list[Path] = []
     outputs: list[Path] = []
     success = failed = 0
     for i, pdf in enumerate(pdfs, start=1):
         try:
-            reports = (_mock_reports_for_pdf(cfg, pdf) if mock
-                       else build_reports_for_pdf(client, cfg, pdf))
-            recs = render_outputs(cfg, reports, _safe_stem(pdf))
+            recs: list[dict] = []
+            n_pass = 0
+            if need_analysis:
+                reports = (_mock_reports_for_pdf(cfg, pdf) if mock
+                           else build_reports_for_pdf(client, cfg, pdf))
+                n_pass = len(reports)
+                recs += render_outputs(cfg, reports, _safe_stem(pdf))
+            if need_lecture:
+                from . import lecture_analyze, lecture_render
+                passages = (_mock_lecture_passages_for_pdf(cfg, pdf) if mock
+                            else lecture_analyze.build_lecture_passages_for_pdf(
+                                client, cfg, pdf))
+                n_pass = n_pass or len(passages)
+                recs += lecture_render.render_lecture_outputs(
+                    cfg.output_dir, passages, _safe_stem(pdf),
+                    footer_note=cfg.design.footer_note)
             outputs.extend(r["path"] for r in recs)
             a_paths = [r["path"] for r in recs if r["kind"] == "analysis"]
             analysis_outputs.extend(a_paths)
             manifest.record_success(str(pdf), str(a_paths[0]) if a_paths else "",
-                                    {"passages": len(reports),
+                                    {"passages": n_pass,
                                      "outputs": [r["path"].name for r in recs]})
             success += 1
             logger.info("[%d/%d] 완료: %s (지문 %d개) -> %s",
-                        i, total, pdf.name, len(reports),
+                        i, total, pdf.name, n_pass,
                         ", ".join(r["path"].name for r in recs))
         except Exception as e:  # 개별 실패가 전체를 멈추지 않게
             failed += 1

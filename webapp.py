@@ -21,7 +21,7 @@ from pathlib import Path
 from flask import (Flask, abort, redirect, render_template_string, request,
                    session, send_from_directory, url_for)
 
-from src import extract, hwp, pipeline, render, schemas
+from src import extract, hwp, lecture_analyze, lecture_render, pipeline, render, schemas
 from src.client import ClaudeClient
 from src.config import ROOT, OutputsCfg, load_config
 
@@ -126,6 +126,8 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
       <label class=chk><input type=checkbox name=out_vocablist value=1 checked> 📚 핵심 어휘 리스트 (유의어·반의어)</label>
       <label class=chk><input type=checkbox name=out_vocabtest value=1 checked> 🧩 핵심 어휘 시험지 (뜻쓰기+유의어/반의어 줄긋기)</label>
+      <label class=chk style="margin-top:10px;color:#8a6d1f"><input type=checkbox name=out_lecture value=1> 🎓 강의컨셉 교재 (학생 훈련용 + 강사용 정답지 세트)</label>
+      <div class=hint>학생이 먼저 스스로 풀도록 만든 5개 훈련 섹션: 어휘 힌트·오역포인트·문장 역할·함정포인트·패러프레이징 줄잇기. (직독직해는 넣지 않음)</div>
 
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
@@ -288,6 +290,7 @@ def analyze_route():
     key = key or cfg.api_key
 
     # 만들 자료 선택 (아무것도 안 고르면 분석지만)
+    want_lecture = bool(request.form.get("out_lecture"))
     which = OutputsCfg(
         analysis=bool(request.form.get("out_analysis")),
         student=bool(request.form.get("out_student")),
@@ -295,10 +298,13 @@ def analyze_route():
         quiz=False,
         vocablist=bool(request.form.get("out_vocablist")),
         vocabtest=bool(request.form.get("out_vocabtest")),
+        lecture=want_lecture,
     )
-    if not (which.analysis or which.student or which.vocablist or which.vocabtest):
+    need_analysis = which.analysis or which.student or which.vocablist or which.vocabtest
+    if not (need_analysis or want_lecture):
         which = OutputsCfg(analysis=True, wordlist=False, quiz=False,
                            vocablist=False, vocabtest=False)
+        need_analysis = True
 
     # 브랜드 문구(직독직해 made by ~). config 값 사용(기본 비어 있음).
     brand = cfg.design.brand
@@ -337,16 +343,6 @@ def analyze_route():
         tmp = UPLOAD_DIR / f"{uuid.uuid4().hex}{ext}"
         f.save(str(tmp))
         try:
-            if mock:
-                reports = pipeline._mock_reports_for_pdf(cfg, tmp)
-            else:
-                reports = pipeline.build_reports_for_pdf(client, cfg, tmp,
-                                                         focus_items=exam_range)
-            # 시작 문항번호가 지정되면 지문마다 번호를 1씩 올려 부여(파일 간에도 연속)
-            if running_no is not None:
-                for rep in reports:
-                    rep.item_no = str(running_no)
-                    running_no += 1
             if custom_base:
                 # 지문명을 지정한 경우: 파일이 여러 개면 뒤에 번호를 붙여 충돌 방지
                 stem = custom_base if len(files) == 1 else f"{custom_base}_{idx}"
@@ -354,13 +350,46 @@ def analyze_route():
                 stem = _safe_name(Path(f.filename).stem)
             # 지문 번호 뱃지에 쓸 '파일명' — 지문명(입력) 또는 업로드 파일 이름(깔끔한 형태)
             file_label = custom_base or _safe_name(Path(f.filename).stem)
-            recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
-                                           source_label=file_label)
-            fitems = [{"label": r["label"], "out": r["path"].name} for r in recs]
-            # 제목만 바꿔 재출력할 수 있게 분석 데이터(JSON) 저장 → 다운로드 제공
-            bundle = _save_bundle(stem, reports, brand)
-            fitems.append({"label": "🔁 제목수정용 데이터(.json)", "out": bundle.name, "dl_only": True})
-            note = f" (지문 {len(reports)}개)" if len(reports) > 1 else ""
+            fitems = []
+            n_pass = 0
+            # 같은 파일의 분석지·강의교재가 '같은 시작 문항번호'를 쓰도록 시작값 고정
+            start_no = running_no
+
+            # 6개 섹션 분석 계열 (분석지/어휘리스트/어휘시험지)
+            if need_analysis:
+                if mock:
+                    reports = pipeline._mock_reports_for_pdf(cfg, tmp)
+                else:
+                    reports = pipeline.build_reports_for_pdf(client, cfg, tmp,
+                                                             focus_items=exam_range)
+                n_pass = len(reports)
+                pipeline._assign_item_numbers(reports, start_no)
+                recs = pipeline.render_outputs(cfg, reports, stem, which=which,
+                                               brand=brand, source_label=file_label)
+                fitems += [{"label": r["label"], "out": r["path"].name} for r in recs]
+                # 제목만 바꿔 재출력할 수 있게 분석 데이터(JSON) 저장 → 다운로드 제공
+                bundle = _save_bundle(stem, reports, brand)
+                fitems.append({"label": "🔁 제목수정용 데이터(.json)",
+                               "out": bundle.name, "dl_only": True})
+
+            # 강의컨셉 교재 (학생 훈련용 + 강사용 정답지)
+            if want_lecture:
+                if mock:
+                    passages = pipeline._mock_lecture_passages_for_pdf(cfg, tmp)
+                else:
+                    passages = lecture_analyze.build_lecture_passages_for_pdf(
+                        client, cfg, tmp, focus_items=exam_range)
+                n_pass = n_pass or len(passages)
+                pipeline._assign_item_numbers(passages, start_no)
+                lrecs = lecture_render.render_lecture_outputs(
+                    OUTPUT_DIR, passages, stem, footer_note=cfg.design.footer_note)
+                fitems += [{"label": r["label"], "out": r["path"].name} for r in lrecs]
+
+            # 다음 파일을 위해 시작 문항번호 진행(지문 수만큼)
+            if running_no is not None:
+                running_no = start_no + n_pass
+
+            note = f" (지문 {n_pass}개)" if n_pass > 1 else ""
             results.append({"name": f.filename + note, "ok": True, "files": fitems})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
             traceback.print_exc()

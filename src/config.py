@@ -55,6 +55,7 @@ class OutputsCfg:
     student: bool = False       # 학생용(정답 빈칸) 분석지
     vocablist: bool = True      # 핵심 어휘 리스트(유의어·반의어)
     vocabtest: bool = True      # 핵심 어휘 시험지(뜻쓰기+유의어/반의어 줄긋기)
+    lecture: bool = False       # 강의컨셉 교재(학생 훈련용 + 강사용 정답지 세트)
 
 
 @dataclass
@@ -122,6 +123,7 @@ def load_config(path: str | Path | None = None) -> Config:
             student=bool(outputs.get("student", False)),
             vocablist=bool(outputs.get("vocablist", True)),
             vocabtest=bool(outputs.get("vocabtest", True)),
+            lecture=bool(outputs.get("lecture", False)),
         ),
         api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
     )
