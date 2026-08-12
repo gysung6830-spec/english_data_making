@@ -63,12 +63,16 @@ body{
 .kg-head{ font-weight:700; color:var(--indigo); font-size:11pt; }
 .kg-point{ background:#fff; border:1px solid #ddd5fa; color:var(--indigo); font-weight:700;
   border-radius:999px; padding:1px 11px; font-size:9.5pt; }
-.kg-exp{ font-size:10.3pt; color:#3f4654; line-height:1.7; margin-top:6px; }
+.kg-exp{ font-size:10.2pt; color:#3f4654; margin-top:6px; }
 .kg-lab{ display:inline-block; background:var(--indigo); color:#fff; font-weight:700;
   border-radius:6px; padding:0 9px; margin-right:8px; font-size:8.5pt; vertical-align:1.5px; }
-.kg-ex{ font-size:9.6pt; color:#5b6472; margin-top:8px; padding-top:6px; border-top:1px dashed #ddd5fa; }
+.kg-list{ margin:6px 0 0; padding-left:0; list-style:none; }
+.kg-list li{ position:relative; padding:2px 0 2px 16px; line-height:1.6; }
+.kg-list li::before{ content:"·"; position:absolute; left:4px; color:var(--indigo); font-weight:700; }
+.kg-ex{ font-size:9.7pt; color:#5b6472; margin-top:8px; padding-top:7px; border-top:1px dashed #ddd5fa; }
 .kg-ex-lab{ display:inline-block; background:#fff; color:var(--indigo); font-weight:700; border:1px solid #ddd5fa;
   border-radius:6px; padding:0 8px; margin-right:7px; font-size:8pt; }
+.kg-ex-an{ color:#8a94a6; font-size:9pt; margin-top:3px; }
 
 /* 핵심 문법 연습문제(해석/영작) */
 .kg-drills{ margin-top:13px; border:1px solid var(--line); border-radius:12px; padding:11px 15px; }

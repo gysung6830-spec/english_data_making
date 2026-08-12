@@ -66,11 +66,12 @@ class GrammarDrill(BaseModel):
 
 
 class KeyGrammar(BaseModel):
-    """⑤ '이 지문의 핵심 문법 1개' — 쉬운 설명 + 지문 예 + 연습문제."""
+    """⑤ '이 지문의 핵심 문법 1개' — 쉬운 설명(여러 항목) + 지문 예 분석 + 연습문제."""
     point: str            # 문법명(예: '관계사 that', '비교급 than절 도치·생략')
-    explanation: str      # 쉬운 설명(한국어). 학생용에서 채우도록 [[ ]]로 핵심어 빈칸 가능
+    explanation: list[str] = Field(min_length=3, max_length=6)  # 항목별 설명(각 한 줄, [[ ]] 빈칸 가능)
     example: str          # 지문 속 실제 예(짧게)
-    drills: list[GrammarDrill] = Field(min_length=1, max_length=3)  # 해석/영작 연습
+    example_analysis: str = ""  # 지문 예를 이 문법으로 분석한 한 줄
+    drills: list[GrammarDrill] = Field(min_length=2, max_length=4)  # 해석/영작 연습
 
 
 class Overview(BaseModel):

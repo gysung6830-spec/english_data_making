@@ -145,8 +145,9 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         "source": p.source,
         "key_grammar": {
             "point": ov.key_grammar.point,
-            "explanation": _mark_ko(ov.key_grammar.explanation, teacher),
+            "explanation": [_mark_ko(e, teacher) for e in ov.key_grammar.explanation],
             "example": ov.key_grammar.example,
+            "example_analysis": ov.key_grammar.example_analysis,
             "drills": [{"kind": d.kind, "question": d.question, "answer": d.answer}
                        for d in ov.key_grammar.drills],
         },
