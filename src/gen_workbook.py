@@ -329,13 +329,24 @@ def clean_passage(hl, band, insert_en=None):
     return _fmt(body)
 
 
-def derive_block(d):
+def _anchor(text, limit=95):
+    """노란 문장의 핵심 어구를 앵커로 — 빈칸/마커는 남기고 길면 축약."""
+    t = re.sub(r"\s+", " ", text or "").strip()
+    if len(t) > limit:
+        t = t[:limit].rsplit(" ", 1)[0] + " …"
+    return esc(t)
+
+
+def derive_block(d, yellows=None):
     steps = ""
     _CIR = "①②③④⑤⑥⑦⑧⑨⑩"
+    yellows = yellows or []
     for i, s in enumerate(d.get("steps", [])):
         yb = f'노랑{_CIR[i]}' if i < len(_CIR) else '노랑'
         an = f' <span class="an">— {s.get("an","")}</span>' if s.get("an") else ""
-        steps += f'<li><span class="yb">{yb}</span>{s.get("ko","")}{an}</li>'
+        anchor = f'<span class="yanch">“{_anchor(yellows[i])}”</span>' if i < len(yellows) else ""
+        steps += (f'<li><span class="yb">{yb}</span>{anchor}'
+                  f'<span class="ystep">{s.get("ko","")}{an}</span></li>')
     concl = f'<div class="concl">{d.get("concl","")}</div>' if d.get("concl") else ""
     gnote = f'<div class="gnote">{esc(d.get("gnote",""))}</div>' if d.get("gnote") else ""
     return f'''<div class="derive">
@@ -788,7 +799,8 @@ def render_spread(rec, c, idx):
   </div>'''
 
     step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
-    reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}))
+    _yellows = [h.get("t", "") for h in hl if h.get("role") == "yellow"]
+    reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}), _yellows)
     pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
     # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
     passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
@@ -1293,6 +1305,8 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .derive li .yb{ position:absolute; left:0; top:1px; font-size:7.5px; font-weight:800; color:#7a5c00; background:var(--must); border:1px solid var(--must-line); border-radius:7px; padding:1px 5px; }
 .derive li u{ text-decoration:none; background:var(--must); padding:0 2px; border-radius:2px; font-weight:700; }
 .derive li .an{ color:var(--muted); font-size:8.7px; }
+.derive li .yanch{ display:block; font-size:8.8px; color:#8a6a00; background:#fff6d8; border-radius:3px; padding:1px 5px; margin-bottom:2px; font-style:italic; }
+.derive li .ystep{ display:block; }
 .derive .concl{ font-size:9.6px; font-weight:700; color:#23272e; background:#eaf5f0; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:6px 10px; margin-top:2px; }
 .derive .concl b{ color:var(--ink-d); }
 .derive .gnote{ font-size:8.6px; color:var(--muted); margin-top:5px; padding-left:2px; }
