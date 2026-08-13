@@ -41,7 +41,7 @@ processing:
 # 출력 PDF 디자인
 design:
   # 지문 하단에 넣을 출처/저작권 문구 (비워두면 표시 안 함)
-  footer_note: "© 김은아영어연구소  ·  무단 전재·복제·배포 금지"
+  footer_note: "© 2026. 김은아영어연구소. All rights reserved."
   # 지문별로 개별 PDF 를 만들지(true), 하나의 PDF 로 합칠지(false)
   one_pdf_per_passage: true
   # 분석지의 '직독직해 made by ~' 문구에 넣는 브랜드 이름.
