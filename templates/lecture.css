@@ -122,7 +122,9 @@ body{
   column-gap:18px; row-gap:4px; align-items:baseline; font-size:10.3pt; }
 .vterm{ font-weight:700; color:var(--green-d); white-space:nowrap; }
 .vmean{ color:#6b7280; }
-.vsid{ color:var(--green); font-weight:700; font-size:7.6pt; margin-right:4px; vertical-align:1px; }
+.vsid{ display:inline-flex; align-items:center; justify-content:center;
+  width:15px; height:15px; background:var(--green); color:#fff; border-radius:50%;
+  font-weight:700; font-size:7.6pt; line-height:1; margin-right:5px; vertical-align:1px; }
 
 /* ---- ② 문장별 (한 페이지 압축) ------------------------------------------ */
 .s-item{ margin-bottom:6px; }

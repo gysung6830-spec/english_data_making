@@ -28,10 +28,10 @@
   {#- ② 어휘 리스트 -#}
   <div class="section">
     <div class="sec-head"><span class="sec-no">2</span><span class="sec-title">어휘 리스트</span>
-      <span class="sec-desc">핵심 어휘부터 익혀둬 (앞의 S# = 나온 문장)</span></div>
+      <span class="sec-desc">핵심 어휘부터 익혀둬 (앞의 숫자 = 나온 문장 번호)</span></div>
     <div class="panel">
       <div class="vocab-grid">
-        {% for v in p.vocab_list %}<span class="vterm"><span class="vsid">S{{ v.sid }}</span>{{ v.word }}</span><span class="vmean">{{ v.meaning }}</span>{% endfor %}
+        {% for v in p.vocab_list %}<span class="vterm"><span class="vsid">{{ v.sid }}</span>{{ v.word }}</span><span class="vmean">{{ v.meaning }}</span>{% endfor %}
       </div>
     </div>
   </div>
