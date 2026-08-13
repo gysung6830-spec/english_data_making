@@ -67,8 +67,7 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🗣</span>필자 의견 &amp; 글의 구조<span class="pc-hint">태도(긍/부/중)와 전개 방식을 함께 판단</span></div>
-      <div class="sub-lab">필자 의견</div>
+      <div class="pc-q"><span class="em">🗣</span>필자 의견<span class="pc-hint">태도(긍/부/중)를 판단</span></div>
       <div class="choices">
         {% for st in p.stances %}<span class="choice {% if teacher and st == p.stance %}on{% endif %}"><span class="ck"></span>{{ st }}</span>{% endfor %}
       </div>
@@ -78,7 +77,10 @@
         <div><span class="rb neg">부정</span>문제·해롭다 / But·However·overlook·fail 같은 비판·경고</div>
         <div><span class="rb neu">중립</span>사실 설명·양쪽 비교(on the other hand)만 하고 편들지 않음</div>
       </div>{% endif %}
-      <div class="sub-lab" style="margin-top:9px">글의 구조</div>
+    </div>
+
+    <div class="pcard">
+      <div class="pc-q"><span class="em">🧩</span>글의 구조<span class="pc-hint">글이 어떻게 전개되는지 판단</span></div>
       <div class="choices">
         {% for stc in p.structures %}<span class="choice {% if teacher and stc == p.structure %}on{% endif %}"><span class="ck"></span>{{ stc }}</span>{% endfor %}
       </div>
@@ -87,12 +89,12 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}같은 개념이 형광펜으로 어떻게 이어지는지{% else %}같은 개념이 다시 나오는 표현을 형광펜으로 찾아 칠해봐{% endif %}</span></div>
+      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}같은 개념(소재)이 형광펜으로 어떻게 이어지는지{% else %}첫 번째 소재는 예시로 칠해놨어 — 나머지 소재도 형광펜으로 찾아 칠해봐{% endif %}</span></div>
       <div class="chain-legend">
-        {% for c in p.chains %}<span class="cleg"><span class="cswatch {{ c.color }}"></span>{{ c.label }}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
+        {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if not teacher and loop.first %} <span class="cvar">— 예시로 표시함</span>{% endif %}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
       </div>
       {% if teacher %}<div class="hl-passage">{{ p.passage_hl }}</div>
-      {% else %}<div class="hl-passage plain">{% for s in p.sentences %}<span class="sent"><span class="snum">{{ s.id }}</span>{{ s.text }}</span> {% endfor %}</div>{% endif %}
+      {% else %}<div class="hl-passage">{{ p.passage_hl_student }}</div>{% endif %}
     </div>
 
     <div class="pcard flow-card">
