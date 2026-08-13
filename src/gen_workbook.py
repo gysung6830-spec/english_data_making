@@ -383,9 +383,44 @@ def opts_block(opts, answer):
         ok = (o.get("verdict") == "ok") or (n == answer)
         cls = "opt ok" if ok else "opt x"
         jd = o.get("jd") or ("✔ 근거" if ok else "✘")
+        ko = o.get("ko", "")
+        ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
         lis.append(f'<div class="{cls}"><span class="n">{CIRCLED[n-1] if n else "·"}</span>'
-                    f'<span class="tx">{o.get("tx","")}</span><span class="jd">{esc(jd)}</span></div>')
+                    f'<span class="txwrap"><span class="tx">{o.get("tx","")}</span>{ko_html}</span>'
+                    f'<span class="jd">{esc(jd)}</span></div>')
     return f'<div class="opts">{"".join(lis)}</div>'
+
+
+def vocab_underline(html, opts):
+    """어휘(30): 지문 속 ①~⑤ 낱말에 밑줄."""
+    for i, o in enumerate(opts):
+        if i >= len(CIRCLED):
+            break
+        w = re.sub(r"<[^>]+>", "", o.get("tx", "")).strip()
+        if not w:
+            continue
+        mk = CIRCLED[i]
+        html = re.sub(re.escape(mk) + r"\s*" + re.escape(w),
+                      f'{mk}<u class="vund">{esc(w)}</u>', html, count=1)
+    return html
+
+
+def vocab_block(vocab):
+    """핵심 어휘·숙어 리스트 — 해석 페이지 하단 박스."""
+    if not vocab:
+        return ""
+    items = ""
+    for v in vocab:
+        if not isinstance(v, dict):
+            continue
+        w = esc(v.get("w", "")); m = esc(v.get("m", ""))
+        if not w:
+            continue
+        items += f'<div class="vitem"><span class="vw">{w}</span><span class="vm">{m}</span></div>'
+    if not items:
+        return ""
+    return (f'<div class="vocabox"><div class="vh">📚 핵심 어휘·숙어</div>'
+            f'<div class="vgrid">{items}</div></div>')
 
 
 def direct_block(num, typ, direct):
@@ -718,6 +753,8 @@ def render_spread(rec, c, idx):
     if mug:
         step1_psg = mugwan_html(mug, step2=False)
         opt_lines = ('<span class="o">① ② ③ ④ ⑤ 중 <b>전체 흐름과 관계 없는 문장</b>의 번호를 고르시오.</span>')
+    if num == 30:
+        step1_psg = vocab_underline(step1_psg, c.get("opts", []))
     rt = c.get("restate")  # 재진술(추가 문제)
     _cue = contrast_cue(hl) if (rt and rt.get("kind") == "compare") else None
     rquiz = restate_problem(rt, _cue)
@@ -758,6 +795,8 @@ def render_spread(rec, c, idx):
     if mug:
         passage_html = mugwan_html(mug, step2=True)
     passage_html = uline_html(passage_html, uline)
+    if num == 30:
+        passage_html = vocab_underline(passage_html, c.get("opts", []))
     clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
                    '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
     # 3색 범례 — 노랑/연녹/회색을 '언제 긋는지' 안내 (순서·삽입 제외)
@@ -795,6 +834,7 @@ def render_spread(rec, c, idx):
         step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
         step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
         step3_body = direct_block(num, typ, c.get("direct", []))
+    step3_body += vocab_block(c.get("vlist", []))
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
@@ -1287,9 +1327,20 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .pline .arw{ color:var(--ink); font-weight:800; }
 .opts{ margin-top:7px; border-top:1px dashed var(--line); padding-top:7px; }
 .opt{ display:flex; gap:6px; align-items:baseline; font-size:9.5px; margin-bottom:3px; }
-.opt .n{ flex:none; font-weight:800; width:14px; } .opt .tx{ flex:1; } .opt .jd{ flex:none; font-size:8.6px; font-weight:800; }
+.opt .n{ flex:none; font-weight:800; width:14px; } .opt .txwrap{ flex:1; } .opt .tx{ display:inline; } .opt .jd{ flex:none; font-size:8.6px; font-weight:800; }
+.opt .oko{ display:block; font-size:8.8px; color:#5a6169; margin-top:1px; line-height:1.4; }
+.opt.ok .oko{ color:#12543d; }
 .opt.ok{ background:var(--src); border-radius:4px; padding:2px 5px; } .opt.ok .jd{ color:var(--src-line); } .opt.x .jd{ color:var(--trap); }
 .reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; color:#a5342d; }
+/* 어휘(30) 밑줄 */
+u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; font-weight:700; }
+/* 핵심 어휘·숙어 박스 (STEP3 하단) */
+.vocabox{ margin-top:9px; border:1px solid var(--src-line); border-radius:6px; background:#f4faf7; padding:7px 9px; break-inside:avoid; }
+.vocabox .vh{ font-size:9.6px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
+.vgrid{ display:grid; grid-template-columns:1fr 1fr; gap:2px 16px; }
+.vitem{ display:flex; gap:6px; font-size:9px; line-height:1.5; align-items:baseline; }
+.vitem .vw{ font-weight:700; color:#12543d; }
+.vitem .vm{ color:#3a4148; flex:1; }
 .formula{ margin-top:8px; background:#e9f4ef; border:1.5px solid var(--ink); border-radius:6px; padding:6px 10px; font-weight:800; color:var(--ink-d); font-size:9.6px; }
 .formula .k{ background:var(--ink); color:#fff; font-size:8px; padding:1px 6px; border-radius:8px; margin-right:6px; }
 
