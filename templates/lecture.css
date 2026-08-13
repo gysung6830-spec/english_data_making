@@ -144,6 +144,8 @@ body{
 .gchip{ display:inline-block; font-size:8.2pt; font-weight:700; color:var(--indigo);
   background:var(--indigo-bg); border-radius:999px; padding:1px 9px; margin-right:3px; }
 .gnote{ color:#6b7280; font-size:8.8pt; }
+.gram-do{ display:inline-block; margin-left:6px; font-size:8.6pt; font-weight:700;
+  color:#8a6d1f; background:#fbf3df; border:1px solid #ecdfb6; border-radius:6px; padding:1px 9px; }
 .s-no{
   display:inline-flex; align-items:center; justify-content:center;
   width:19px; height:19px; background:var(--green); color:#fff; border-radius:50%;
