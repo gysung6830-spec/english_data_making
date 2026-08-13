@@ -125,6 +125,7 @@
 
     <div class="kg-drills">
       <div class="kg-drills-h">✏ 연습문제 — 객관식 · 해석 · 영작으로 확인</div>
+      <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
         <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{{ d.question }}</div>
@@ -143,6 +144,7 @@
         {% endif %}
       </div>
       {% endfor %}
+      </div>
     </div>
   </div>
 
