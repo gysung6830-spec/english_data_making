@@ -89,9 +89,9 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}같은 개념(소재)이 형광펜으로 어떻게 이어지는지{% else %}첫 번째 소재는 예시로 칠해놨어 — 나머지 소재도 형광펜으로 찾아 칠해봐{% endif %}</span></div>
+      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}소재별로 번호를 달아 형광펜 표시(흑백에서도 번호로 구분){% else %}소재마다 '첫 표현'만 번호·형광펜으로 표시해놨어 — 같은 번호로 이어지는 표현을 마저 찾아봐{% endif %}</span></div>
       <div class="chain-legend">
-        {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if not teacher and loop.first %} <span class="cvar">— 예시로 표시함</span>{% endif %}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
+        {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
       </div>
       {% if teacher %}<div class="hl-passage">{{ p.passage_hl }}</div>
       {% else %}<div class="hl-passage">{{ p.passage_hl_student }}</div>{% endif %}
@@ -135,12 +135,11 @@
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
-        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
+        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind in ['영작', '객관식'] %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
         {% if d.kind == '객관식' %}
         <div class="drill-opts">
           {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}
         </div>
-        {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>{% endif %}
         {% elif d.kind == '영작' %}
         {% if d.words %}<div class="drill-words"><span class="dw-lab">제시어</span>{% for w in d.words %}<span class="dw">{{ w }}</span>{% endfor %}</div>{% endif %}
         {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>

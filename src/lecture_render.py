@@ -78,29 +78,29 @@ def _has_mark(text: str) -> bool:
     return bool(_MARK.search(text or ""))
 
 
-def _highlight_passage(sentences, chains, only_first: bool = False) -> Markup:
-    """지문 텍스트에 각 재진술 사슬(소재)의 표현을 소재별 색으로 형광펜 표시.
+def _highlight_passage(sentences, chains, first_expr_only: bool = False) -> Markup:
+    """지문 텍스트에 각 재진술 사슬(소재)의 표현을 소재별 색 + '소재 번호'로 형광펜 표시.
 
-    - 각 표현에 '그 소재 안에서의 순서 번호'(재진술 순서)를 위첨자로 붙인다.
-    - only_first=True 면 '첫 번째 소재'만 표시한다(학생용 예시).
+    - 각 표현에 그 표현이 속한 '소재 번호'(1,2,…)를 위첨자로 붙인다
+      (흑백 인쇄 시 형광펜 색이 구분 안 돼도 번호로 어느 소재인지 알 수 있게).
+    - first_expr_only=True 면 '각 소재의 첫 표현'만 표시한다(학생용 예시 앵커).
     """
     text = str(escape(" ".join(s.text for s in sentences)))
-    pairs = []  # (escaped_expr, color_class, seq_no)
+    pairs = []  # (escaped_expr, color_class, chain_no)
     for ci, c in enumerate(chains):
-        if only_first and ci > 0:
-            continue
-        for idx, expr in enumerate(c.expressions):
+        exprs = c.expressions[:1] if first_expr_only else c.expressions
+        for expr in exprs:
             e = str(escape(expr)).strip()
             if e:
-                pairs.append((e, f"hl{ci % 2}", idx + 1))
+                pairs.append((e, f"hl{ci % 2}", ci + 1))
     tokens: dict[str, str] = {}
     # 긴 표현 먼저(짧은 표현이 긴 표현 안에서 잘리는 것 방지), 플레이스홀더로 치환
-    for i, (e, color, seq) in enumerate(sorted(pairs, key=lambda p: -len(p[0]))):
+    for i, (e, color, cno) in enumerate(sorted(pairs, key=lambda p: -len(p[0]))):
         mm = re.search(re.escape(e), text, re.IGNORECASE)
         if not mm:
             continue
         tok = f"\x00{i}\x00"
-        tokens[tok] = (f'<mark class="{color}"><sup class="hln">{seq}</sup>'
+        tokens[tok] = (f'<mark class="{color}"><sup class="hln">{cno}</sup>'
                        f'{text[mm.start():mm.end()]}</mark>')
         text = text[:mm.start()] + tok + text[mm.end():]
     for tok, html in tokens.items():
@@ -131,9 +131,9 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "color": f"hl{ci % 2}",
         })
     passage_hl = _highlight_passage(p.sentences, ov.restatement_chains)
-    # 학생용: 첫 번째 소재만 예시로 형광펜 표시(나머지는 학생이 직접)
+    # 학생용: 각 소재의 '첫 표현'만 예시로 형광펜 표시(나머지는 학생이 직접)
     passage_hl_student = _highlight_passage(p.sentences, ov.restatement_chains,
-                                            only_first=True)
+                                            first_expr_only=True)
 
     # ④ 글 내용 정리: 의미 블록 흐름(도입→전개→…)
     flow_blocks = []

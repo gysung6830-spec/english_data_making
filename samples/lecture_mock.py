@@ -52,27 +52,28 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             example="",
             example_analysis="than 뒤가 'will infants'로 조동사+주어 도치, 뒤의 have와 frequently frightened는 생략됐어.",
             drills=[
-                GrammarDrill(kind="객관식",
+                # 객관식 (a) 지문 문장 1개(from_passage=True)
+                GrammarDrill(kind="객관식", from_passage=True,
                              question="지문의 '… fewer opportunities to play than will infants who are not.' "
                                       "에서 밑줄 친 'than will infants' 에 대한 설명으로 옳은 것은?",
                              options=["than 뒤에 '조동사(will)+주어(infants)' 순으로 도치가 일어났다",
                                       "than 은 전치사이고 뒤의 infants 는 그 목적어다",
                                       "infants 가 동사, will 이 주어로 쓰였다"],
                              answer="than 뒤에 '조동사(will)+주어(infants)' 순으로 도치가 일어났다"),
-                GrammarDrill(kind="객관식",
-                             question="지문의 'than will infants who are not' 을 '생략된 말을 되살려' 풀어 쓴 것으로 "
-                                      "알맞은 것은?",
-                             options=["than infants who are not (frequently frightened) will (have)",
-                                      "than infants who will not be frightened",
-                                      "than will not the infants who are"],
-                             answer="than infants who are not (frequently frightened) will (have)"),
-                GrammarDrill(kind="객관식",
-                             question="지문 3문장에서 '자주 겁을 먹는 아기(frequently frightened infants)' 와 "
-                                      "'비교되는 대상'은?",
-                             options=["자주 겁먹지 '않는' 아기들 (infants who are not)",
-                                      "아기의 엄마들 (its mother)",
-                                      "탐색과 놀이 활동 (exploratory and play activity)"],
-                             answer="자주 겁먹지 '않는' 아기들 (infants who are not)"),
+                # 객관식 (b)(c) 지문에 없는 응용 2개(from_passage=False)
+                GrammarDrill(kind="객관식", from_passage=False,
+                             question="다음 중 than 뒤에 도치가 '어법상 옳게' 일어난 문장은?",
+                             options=["He runs faster than does his brother.",
+                                      "He runs faster than his brother does run.",
+                                      "He runs faster than runs his brother does."],
+                             answer="He runs faster than does his brother."),
+                GrammarDrill(kind="객관식", from_passage=False,
+                             question="밑줄 친 부분의 해석으로 알맞은 것은? "
+                                      "'She reads more books than do her friends.'",
+                             options=["그녀는 자기 친구들보다 더 많은 책을 읽는다",
+                                      "그녀의 친구들이 그녀보다 더 많은 책을 읽는다",
+                                      "그녀와 친구들이 같은 수의 책을 읽는다"],
+                             answer="그녀는 자기 친구들보다 더 많은 책을 읽는다"),
                 # 영작 (a): 지문에 실제로 있는 문장 복원(from_passage=True) — 핵심 문법이 쓰인 문장
                 GrammarDrill(kind="영작", from_passage=True,
                              question="(지문 3문장) 따라서 자주 겁을 먹는 아기들은 그렇지 않은 "
@@ -84,7 +85,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
                                     "infants who are not."),
                 # 영작 (b): 지문에 없는 응용 문장(from_passage=False) — 같은 문법 응용
                 GrammarDrill(kind="영작", from_passage=False,
-                             question="(응용 · 지문에 없는 문장) 그는 내가 그런 것보다 더 열심히 공부했다.",
+                             question="그는 내가 그런 것보다 더 열심히 공부했다.",
                              words=["studied", "harder", "than", "did", "I"],
                              answer="He studied harder than did I."),
             ],
