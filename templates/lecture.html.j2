@@ -124,12 +124,23 @@
     </div>
 
     <div class="kg-drills">
-      <div class="kg-drills-h">✏ 연습문제 — 배운 문법을 직접 써보자</div>
+      <div class="kg-drills-h">✏ 연습문제 — 객관식 · 해석 · 영작으로 확인</div>
       {% for d in p.key_grammar.drills %}
       <div class="drill">
-        <div class="drill-q"><span class="drill-kind {{ '해석' if d.kind == '해석' else '영작' }}">{{ d.kind }}</span>{{ d.question }}</div>
+        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{{ d.question }}</div>
+        {% if d.kind == '객관식' %}
+        <div class="drill-opts">
+          {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}
+        </div>
+        {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>{% endif %}
+        {% elif d.kind == '영작' %}
+        {% if d.words %}<div class="drill-words"><span class="dw-lab">제시어</span>{% for w in d.words %}<span class="dw">{{ w }}</span>{% endfor %}</div>{% endif %}
         {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>
         {% else %}<div class="drill-write"><span class="drill-arrow">→</span><span class="writeline inline wide2"></span></div>{% endif %}
+        {% else %}
+        {% if teacher %}<div class="drill-a">→ {{ d.answer }}</div>
+        {% else %}<div class="drill-write"><span class="drill-arrow">→</span><span class="writeline inline wide2"></span></div>{% endif %}
+        {% endif %}
       </div>
       {% endfor %}
     </div>
