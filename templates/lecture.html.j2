@@ -116,13 +116,18 @@
       <span class="sec-desc">이 문법 하나만 확실히! (설명 빈칸 채우기 + 객관식·영작 연습)</span></div>
     <div class="kg-box">
       <div class="kg-head">🔑 <span class="kg-point">{{ p.key_grammar.point }}</span></div>
+      {% if p.key_grammar.source_sentence %}
+      <div class="kg-src">
+        <div class="kg-src-lab">📌 이 문법이 나온 문장{% if p.key_grammar.source_no %} · {{ p.key_grammar.source_no }}문장{% endif %}</div>
+        <div class="kg-src-en">{{ p.key_grammar.source_sentence }}</div>
+        {% if p.key_grammar.example_analysis %}<div class="kg-src-an">↳ {{ p.key_grammar.example_analysis }}</div>{% endif %}
+      </div>
+      {% endif %}
       <div class="kg-exp"><span class="kg-lab">설명</span>
         <ul class="kg-list">
-          {% for line in p.key_grammar.explanation %}<li>{{ line }}</li>{% endfor %}
+          {% for n in p.key_grammar.explanation %}<li><span class="kg-chip">{{ n.chip }}</span>{{ n.text }}</li>{% endfor %}
         </ul>
       </div>
-      {% if p.key_grammar.example %}<div class="kg-ex"><span class="kg-ex-lab">지문 예</span>{{ p.key_grammar.example }}
-        {% if p.key_grammar.example_analysis %}<div class="kg-ex-an">↳ {{ p.key_grammar.example_analysis }}</div>{% endif %}</div>{% endif %}
     </div>
 
     <div class="kg-drills">

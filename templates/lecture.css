@@ -66,16 +66,19 @@ body{
 .kg-head{ font-weight:700; color:var(--indigo); font-size:11pt; }
 .kg-point{ background:#fff; border:1px solid #ddd5fa; color:var(--indigo); font-weight:700;
   border-radius:999px; padding:1px 11px; font-size:9.6pt; }
-.kg-exp{ font-size:9.9pt; color:#3f4654; margin-top:5px; }
+/* 이 문법이 나온 지문 문장 박스(맨 위) */
+.kg-src{ background:#fff; border:1px solid #ddd5fa; border-radius:9px; padding:6px 12px; margin-top:7px; }
+.kg-src-lab{ display:inline-block; background:var(--indigo); color:#fff; font-weight:700;
+  border-radius:6px; padding:1px 9px; font-size:8.2pt; }
+.kg-src-en{ font-size:10.2pt; color:var(--ink); line-height:1.5; margin-top:4px; }
+.kg-src-an{ color:#8a94a6; font-size:9pt; margin-top:3px; }
+.kg-exp{ font-size:9.9pt; color:#3f4654; margin-top:8px; }
 .kg-lab{ display:inline-block; background:var(--indigo); color:#fff; font-weight:700;
   border-radius:6px; padding:0 9px; margin-right:8px; font-size:8.4pt; vertical-align:1.5px; }
-.kg-list{ margin:4px 0 0; padding-left:0; list-style:none; }
-.kg-list li{ position:relative; padding:1px 0 1px 16px; line-height:1.52; }
-.kg-list li::before{ content:"·"; position:absolute; left:4px; color:var(--indigo); font-weight:700; }
-.kg-ex{ font-size:9.6pt; color:#5b6472; margin-top:6px; padding-top:6px; border-top:1px dashed #ddd5fa; }
-.kg-ex-lab{ display:inline-block; background:#fff; color:var(--indigo); font-weight:700; border:1px solid #ddd5fa;
-  border-radius:6px; padding:0 8px; margin-right:7px; font-size:8.2pt; }
-.kg-ex-an{ color:#8a94a6; font-size:9pt; margin-top:2px; }
+.kg-list{ margin:5px 0 0; padding-left:0; list-style:none; }
+.kg-list li{ padding:2px 0; line-height:1.55; }
+.kg-chip{ display:inline-block; background:#efeafd; color:var(--indigo); font-weight:700;
+  font-size:8.5pt; border-radius:999px; padding:1px 10px; margin-right:7px; vertical-align:1px; white-space:nowrap; }
 
 /* 핵심 문법 연습문제(객관식/영작) — 2단 배치 */
 .kg-drills{ margin-top:10px; border:1px solid var(--line); border-radius:12px; padding:10px 15px; }

@@ -68,12 +68,19 @@ class GrammarDrill(BaseModel):
     from_passage: bool = False  # 영작: 지문에 실제로 있는 문장 복원이면 True(응용이면 False)
 
 
+class GrammarNote(BaseModel):
+    """핵심 문법 설명의 한 줄 — 앞에 '신호어 칩' + 설명 본문."""
+    chip: str             # 짧은 신호어 라벨(예: '쉽게 말하면', '왜 그래?', '생략', '복원', '주의', '해석 요령')
+    text: str             # 설명 한 줄([[ ]] 빈칸 가능)
+
+
 class KeyGrammar(BaseModel):
-    """⑤ '이 지문의 핵심 문법 1개' — 쉬운 설명(여러 항목) + 지문 예 분석 + 연습문제."""
+    """⑤ '이 지문의 핵심 문법 1개' — 지문 문장 박스 + 신호어 칩 설명 + 연습문제."""
     point: str            # 문법명(예: '관계사 that', '비교급 than절 도치·생략')
-    explanation: list[str] = Field(min_length=3, max_length=6)  # 항목별 설명(각 한 줄, [[ ]] 빈칸 가능)
-    example: str          # 지문 속 실제 예(짧게)
-    example_analysis: str = ""  # 지문 예를 이 문법으로 분석한 한 줄
+    source_sentence: str = ""   # 이 문법이 '실제로 나온' 지문 원문 문장(맨 위 박스에 표시)
+    explanation: list[GrammarNote] = Field(min_length=3, max_length=6)  # 칩+설명(각 한 줄)
+    example: str = ""     # (선택) 지문 속 짧은 예
+    example_analysis: str = ""  # 지문 문장에서 무엇이 도치/생략/수식됐는지 한 줄
     # 연습문제: 객관식 3 + 영작 2(지문 문장 1 + 응용 1) = 5개 (해석 제외)
     drills: list[GrammarDrill] = Field(min_length=5, max_length=5)
 

@@ -108,6 +108,18 @@ def _highlight_passage(sentences, chains, only_first: bool = False) -> Markup:
     return Markup(text)
 
 
+def _match_sentence_no(src: str, sentences) -> int | None:
+    """핵심 문법이 나온 원문 문장(source_sentence)이 지문 몇 번째 문장인지 찾음."""
+    s = (src or "").strip().rstrip(".").lower()
+    if not s:
+        return None
+    for sent in sentences:
+        t = (sent.text or "").strip().rstrip(".").lower()
+        if t and (s in t or t in s):
+            return sent.id
+    return None
+
+
 def _build_view(p: LecturePassage, teacher: bool) -> dict:
     ov = p.overview
 
@@ -155,7 +167,10 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         "source": p.source,
         "key_grammar": {
             "point": ov.key_grammar.point,
-            "explanation": [_mark_ko(e, teacher) for e in ov.key_grammar.explanation],
+            "source_sentence": ov.key_grammar.source_sentence,
+            "source_no": _match_sentence_no(ov.key_grammar.source_sentence, p.sentences),
+            "explanation": [{"chip": n.chip, "text": _mark_ko(n.text, teacher)}
+                            for n in ov.key_grammar.explanation],
             "example": ov.key_grammar.example,
             "example_analysis": ov.key_grammar.example_analysis,
             "drills": [{"kind": d.kind, "question": d.question, "answer": d.answer,

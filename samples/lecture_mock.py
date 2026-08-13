@@ -2,9 +2,10 @@
 from __future__ import annotations
 
 from src.lecture_schemas import (Chunk, FlowBlock, GrammarChip, GrammarDrill,
-                                 KeyGrammar, LecturePassage, LectureSentence,
-                                 Misread, Overview, RestatementChain,
-                                 SentenceAnalysis, SentenceItem, Vocab)
+                                 GrammarNote, KeyGrammar, LecturePassage,
+                                 LectureSentence, Misread, Overview,
+                                 RestatementChain, SentenceAnalysis,
+                                 SentenceItem, Vocab)
 
 
 def _S(id, english, grammar, vocab, chunks, misreads):
@@ -32,15 +33,23 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
         theme_ko="두려움이 영장류·아기의 사회성 발달을 늦추는 이유",
         key_grammar=KeyGrammar(
             point="비교급 than절의 도치·생략",
+            source_sentence="Thus, frequently frightened infants will very likely have less time to "
+                            "explore and fewer opportunities to play than will infants who are not.",
             explanation=[
-                "쉽게 말하면, 'A는 B보다 더 ~하다'를 말할 때 than 뒤 B에서 가끔 '[[조동사(do/will/be)+주어]]' 순으로 순서가 뒤집혀. 이걸 도치라고 불러.",
-                "왜 그러냐면, 주어가 길거나 글맛을 살리고 싶을 때 같은 말 반복하기 싫어서 이렇게 자리를 바꿔 쓰는 거거든.",
-                "그리고 than 앞뒤로 겹치는 동사·표현은 굳이 두 번 안 쓰고 뒤쪽을 [[생략]]해 버려 — 그래서 문장이 짧아 보이는 거야.",
-                "한번 원래대로 풀어 보면, than will infants who are not → 'than infants who are not (frequently frightened) will (have)' 이런 뜻이야.",
-                "헷갈리는 포인트 하나! than은 [[접속사]]로도 전치사로도 쓰이는데, 뒤에 '절(주어+동사)'이 오면 접속사고, 바로 이때 도치가 보여.",
-                "해석할 땐 서두르지 말고, 먼저 '비교 대상 B가 뭔지'부터 딱 잡은 다음 'B보다 더/덜 ~하다'로 옮기면 편해.",
+                GrammarNote(chip="쉽게 말하면",
+                            text="'A는 B보다 더 ~하다'를 말할 때 than 뒤 B에서 가끔 '[[조동사(do/will/be)+주어]]' 순으로 순서가 뒤집혀. 이걸 도치라고 불러."),
+                GrammarNote(chip="왜 그래?",
+                            text="주어가 길거나 글맛을 살리고 싶을 때 같은 말 반복하기 싫어서 이렇게 자리를 바꿔 쓰는 거거든."),
+                GrammarNote(chip="생략",
+                            text="than 앞뒤로 겹치는 동사·표현은 굳이 두 번 안 쓰고 뒤쪽을 [[생략]]해 버려 — 그래서 문장이 짧아 보이는 거야."),
+                GrammarNote(chip="복원",
+                            text="원래대로 풀면 than will infants who are not → 'than infants who are not (frequently frightened) will (have)' 이런 뜻이야."),
+                GrammarNote(chip="주의",
+                            text="than은 [[접속사]]로도 전치사로도 쓰이는데, 뒤에 '절(주어+동사)'이 오면 접속사고, 바로 이때 도치가 보여."),
+                GrammarNote(chip="해석 요령",
+                            text="서두르지 말고 먼저 '비교 대상 B가 뭔지'부터 딱 잡은 다음 'B보다 더/덜 ~하다'로 옮기면 편해."),
             ],
-            example="... fewer opportunities to play than will infants who are not.",
+            example="",
             example_analysis="than 뒤가 'will infants'로 조동사+주어 도치, 뒤의 have와 frequently frightened는 생략됐어.",
             drills=[
                 GrammarDrill(kind="객관식",
