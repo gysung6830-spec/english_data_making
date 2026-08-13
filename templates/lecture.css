@@ -148,7 +148,7 @@ body{
   color:#8a6d1f; background:#fbf3df; border:1px solid #ecdfb6; border-radius:6px; padding:1px 9px; }
 /* '문제' 칩 — 각 문항이 '풀어야 하는 문제'임을 표시(연한 색) */
 .q-chip{ display:inline-block; background:#fdeaea; color:#c0564e; font-weight:700;
-  border:1px solid #f3d3cf; font-size:7.8pt; border-radius:6px; padding:1px 8px; margin-right:7px;
+  border:1px solid #f3d3cf; font-size:6.6pt; border-radius:5px; padding:0 5px; margin-right:6px;
   vertical-align:1.5px; letter-spacing:0.02em; }
 .s-no{
   display:inline-flex; align-items:center; justify-content:center;
