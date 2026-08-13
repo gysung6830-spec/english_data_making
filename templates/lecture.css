@@ -234,31 +234,31 @@ body{
 
 /* 재진술 사슬: 형광펜 표시 */
 mark{ padding:0 1px; border-radius:2px; color:inherit; }
-mark.hl0{ background:#fff2a1; } mark.hl1{ background:#bfe8c6; }
+mark.hl0{ background:#fff2a1; } mark.hl1{ background:#cfe0ff; }
 mark .hln{ font-size:6.6pt; font-weight:800; color:#8a6d1f; vertical-align:0.5em;
   margin-right:1px; line-height:1; }
-mark.hl1 .hln{ color:#2f7d43; }
+mark.hl1 .hln{ color:#1f4e8a; }
 .chain-legend{ font-size:9.3pt; margin:2px 0 5px; }
 .cleg{ margin-right:16px; white-space:nowrap; }
 .cnum{ display:inline-flex; align-items:center; justify-content:center; width:15px; height:15px;
   border-radius:50%; font-weight:800; font-size:8pt; color:#5b4a12; margin-right:5px; vertical-align:-2px; }
-.cnum.hl0{ background:#ffe873; } .cnum.hl1{ background:#a7dfae; color:#245c32; }
+.cnum.hl0{ background:#ffe873; } .cnum.hl1{ background:#aecbff; color:#1f4e8a; }
 .cleg .cvar{ color:#9aa0b4; font-size:8.6pt; }
 .hl-passage{ font-size:10.2pt; line-height:1.52; color:var(--ink); background:#fff;
   border:1px solid var(--line); border-radius:9px; padding:6px 10px; }
 .hl-passage .snum{ font-weight:700; color:var(--green); font-size:7pt; margin-right:1px; }
 
-/* 글 내용 정리: 블록 흐름(도입→전개→…) */
-.pcard.flow-card{ background:#fff; border-left-color:var(--green); }
-.pc-q.green{ color:var(--green-d); }
-.fblock{ border:1px solid #cfe0d4; border-left:5px solid var(--green); border-radius:9px;
-  padding:6px 12px; background:var(--green-soft); }
+/* 글 내용 정리: 블록 흐름(도입→전개→…) — ④ 인디고로 통일 */
+.pcard.flow-card{ background:#fff; border-left-color:var(--indigo); }
+.pc-q.green{ color:var(--indigo); }
+.fblock{ border:1px solid #e0daf8; border-left:5px solid var(--indigo); border-radius:9px;
+  padding:6px 12px; background:var(--indigo-soft); }
 .fb-head{ line-height:1.5; }
-.fb-stage{ display:inline-block; background:var(--green); color:#fff; font-weight:700;
+.fb-stage{ display:inline-block; background:var(--indigo); color:#fff; font-weight:700;
   border-radius:6px; padding:1px 10px; font-size:9pt; margin-right:7px; }
 .fb-sum{ font-weight:700; color:#17233f; font-size:10pt; }
 .fb-range{ color:#9aa0b4; font-size:8.4pt; margin-left:5px; }
-.fb-ex{ margin-top:4px; padding-top:4px; border-top:1px dashed #d7c9a6; font-size:9.1pt; color:#6b5a2a; }
-.fb-ex-lab{ display:inline-block; background:#fff0d6; color:#a5701f; font-weight:700;
+.fb-ex{ margin-top:4px; padding-top:4px; border-top:1px dashed #ddd5fa; font-size:9.1pt; color:#5b5570; }
+.fb-ex-lab{ display:inline-block; background:#efeafd; color:var(--indigo); font-weight:700;
   border-radius:6px; padding:0 7px; margin-right:6px; font-size:8pt; }
-.fb-arr{ text-align:center; color:var(--green); font-size:8.5pt; margin:0; line-height:1.1; }
+.fb-arr{ text-align:center; color:var(--indigo); font-size:8.5pt; margin:0; line-height:1.1; }
