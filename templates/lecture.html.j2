@@ -135,7 +135,7 @@
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
-        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind in ['영작', '객관식'] %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
+        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
         {% if d.kind == '객관식' %}
         <div class="drill-opts">
           {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}

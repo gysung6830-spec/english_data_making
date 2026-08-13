@@ -74,20 +74,25 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
                                       "그녀의 친구들이 그녀보다 더 많은 책을 읽는다",
                                       "그녀와 친구들이 같은 수의 책을 읽는다"],
                              answer="그녀는 자기 친구들보다 더 많은 책을 읽는다"),
-                # 영작 (a): 지문에 실제로 있는 문장 복원(from_passage=True) — 핵심 문법이 쓰인 문장
+                # 영작 (1): 지문에 없는 응용 문장 먼저(from_passage=False) — 지문 문장과 같은 난이도
+                GrammarDrill(kind="영작", from_passage=False,
+                             question="자주 칭찬받는 아이들은 그렇지 않은 아이들보다 새로운 것에 도전할 "
+                                      "자신감과 기회를 더 많이 가질 가능성이 높다.",
+                             words=["frequently", "praised", "very likely", "have", "more",
+                                    "confidence", "chances", "to try", "than", "will",
+                                    "children", "who are not"],
+                             answer="Frequently praised children will very likely have more confidence "
+                                    "and more chances to try new things than will children who are not."),
+                # 영작 (2): 지문에 실제로 있는 문장 복원(from_passage=True) — 핵심 문법이 쓰인 문장
                 GrammarDrill(kind="영작", from_passage=True,
                              question="(지문 3문장) 따라서 자주 겁을 먹는 아기들은 그렇지 않은 "
                                       "아기들보다 탐색할 시간과 놀 기회가 더 적을 가능성이 높다.",
-                             words=["frequently frightened", "less time to explore",
-                                    "fewer opportunities", "than will infants who are not"],
+                             words=["frequently", "frightened", "less time", "to explore",
+                                    "fewer", "opportunities", "to play", "than", "will",
+                                    "infants", "who are not"],
                              answer="Thus, frequently frightened infants will very likely have less "
                                     "time to explore and fewer opportunities to play than will "
                                     "infants who are not."),
-                # 영작 (b): 지문에 없는 응용 문장(from_passage=False) — 같은 문법 응용
-                GrammarDrill(kind="영작", from_passage=False,
-                             question="그는 내가 그런 것보다 더 열심히 공부했다.",
-                             words=["studied", "harder", "than", "did", "I"],
-                             answer="He studied harder than did I."),
             ],
         ),
         topic="겁을 잘 먹는 아기는 엄마에게 붙어 있느라 탐색·놀이를 못하고, 그게 오래 지속되면 사회성 발달이 느려질 수 있다는 얘기야.",
