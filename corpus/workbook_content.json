@@ -349,7 +349,49 @@
     }
    ],
    "echo": "'허구에 근거한다'는 성취감이 신뢰할 수 없음을 동의어로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "self-worth",
+    "m": "자존감, 자기 가치"
+   },
+   {
+    "w": "at the whim of",
+    "m": "~에 좌우되는"
+   },
+   {
+    "w": "external factors",
+    "m": "외부 요인"
+   },
+   {
+    "w": "misleading",
+    "m": "오해를 불러일으키는"
+   },
+   {
+    "w": "illusion",
+    "m": "착각, 환상"
+   },
+   {
+    "w": "off day",
+    "m": "컨디션이 나쁜 날"
+   },
+   {
+    "w": "at the top of one's game",
+    "m": "최고의 기량을 발휘하는"
+   },
+   {
+    "w": "favorable conditions",
+    "m": "유리한 조건"
+   },
+   {
+    "w": "take credit for",
+    "m": "~을 자신의 공으로 삼다"
+   },
+   {
+    "w": "grounded in fiction",
+    "m": "허구에 근거한"
+   }
+  ]
  },
  {
   "key": "2023-06|22",
@@ -1260,31 +1302,36 @@
     "n": 5,
     "tx": "<b>Separate and Independent</b>: Brain Cells’ Visual Perceptions",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "분리되고 독립적인: 뇌세포의 시각적 지각"
    },
    {
     "n": 1,
     "tx": "Visual Systems Never Betray Our Trust!",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "시각 체계는 결코 우리의 신뢰를 저버리지 않는다!"
    },
    {
     "n": 2,
     "tx": "Secret Missions of <span class=\"reuse\">Color</span>-Sensitive Brain Cells",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "색에 민감한 뇌세포의 비밀 임무"
    },
    {
     "n": 3,
     "tx": "Blind Spots: What Is Still Unknown About the Brain",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "맹점: 뇌에 관해 아직 밝혀지지 않은 것"
    },
    {
     "n": 4,
     "tx": "Why Brain Cells Exemplify Nature’s Recovery Process",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "왜 뇌세포가 자연의 회복 과정을 잘 보여주는가"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 분리되고 독립적인 뇌세포의 시지각 · <span class=\"xo\">①</span>시각은 신뢰를 배신 안 함(정반대) <span class=\"xo\">②</span>색 민감 세포의 비밀 임무 <span class=\"xo\">③</span>뇌의 미지 영역 <span class=\"xo\">④</span>자연의 회복 과정",
@@ -1320,7 +1367,45 @@
     }
    ],
    "echo": "'서로 다른 부분'이 정답 제목 '분리·독립'을 추상화해 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "on a need-to-know basis",
+    "m": "필요한 것만 아는 식으로"
+   },
+   {
+    "w": "reach out to",
+    "m": "~로 손을 뻗다"
+   },
+   {
+    "w": "be sensitive to",
+    "m": "~에 민감하다"
+   },
+   {
+    "w": "pay attention to",
+    "m": "~에 주의를 기울이다"
+   },
+   {
+    "w": "perceive",
+    "m": "지각하다"
+   },
+   {
+    "w": "detect",
+    "m": "감지하다"
+   },
+   {
+    "w": "localized",
+    "m": "국부적인"
+   },
+   {
+    "w": "aspect",
+    "m": "측면"
+   },
+   {
+    "w": "consequently",
+    "m": "결과적으로"
+   }
+  ]
  },
  {
   "key": "2026-06|32",
@@ -1875,7 +1960,45 @@
     "After being disturbed, a plant community can adjust its composition through regeneration, mainly resprouting and reseeding."
    ],
    "irrelevant": 4
-  }
+  },
+  "vlist": [
+   {
+    "w": "recover from",
+    "m": "~로부터 회복하다"
+   },
+   {
+    "w": "meristem",
+    "m": "분열 조직"
+   },
+   {
+    "w": "undifferentiated",
+    "m": "미분화된"
+   },
+   {
+    "w": "differentiate into",
+    "m": "~으로 분화하다"
+   },
+   {
+    "w": "regeneration",
+    "m": "재생"
+   },
+   {
+    "w": "resprouting",
+    "m": "재발아"
+   },
+   {
+    "w": "reseeding",
+    "m": "재파종"
+   },
+   {
+    "w": "disturbed",
+    "m": "교란된"
+   },
+   {
+    "w": "preferential",
+    "m": "특혜의, 우선적인"
+   }
+  ]
  },
  {
   "key": "2024-수능|37",
@@ -3624,31 +3747,36 @@
     "n": 3,
     "tx": "significance of <b>note taking</b> for active engagement in discussion",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "토론에 능동적으로 참여하기 위한 필기의 중요성"
    },
    {
     "n": 1,
     "tx": "reasons to standardize procedures for class <span class=\"reuse\">discussions</span>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "수업 토론 절차를 표준화해야 하는 이유"
    },
    {
     "n": 2,
     "tx": "improve <span class=\"reuse\">note-taking</span> skills for public speaking",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "대중 연설을 위한 필기 기술 향상"
    },
    {
     "n": 4,
     "tx": "summarizing and reviewing <span class=\"reuse\">notes</span> after class",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "수업 후 필기 요약 및 복습"
    },
    {
     "n": 5,
     "tx": "brainstorming to generate ideas for <span class=\"reuse\">writing</span> tasks",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "글쓰기 과제를 위한 아이디어를 내는 브레인스토밍"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 토론 필기가 능동적 참여에 갖는 중요성 · <span class=\"xo\">①</span>토론 절차 표준화 <span class=\"xo\">②</span>발표용 필기 기술 <span class=\"xo\">④</span>수업 후 요약·복습 효과 <span class=\"xo\">⑤</span>글쓰기용 브레인스토밍",
@@ -3687,7 +3815,49 @@
     }
    ],
    "echo": "'필기가 능동·기민하게 유지'가 능동적 참여의 중요성을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "active participant",
+    "m": "능동적 참여자"
+   },
+   {
+    "w": "passive",
+    "m": "수동적인"
+   },
+   {
+    "w": "emphasis",
+    "m": "강조"
+   },
+   {
+    "w": "invaluable",
+    "m": "매우 귀중한"
+   },
+   {
+    "w": "take notes",
+    "m": "필기하다"
+   },
+   {
+    "w": "disorganized",
+    "m": "체계가 없는"
+   },
+   {
+    "w": "difficult to follow",
+    "m": "따라가기 어려운"
+   },
+   {
+    "w": "formulate",
+    "m": "(생각을) 정리해 표현하다"
+   },
+   {
+    "w": "manageable",
+    "m": "감당할 수 있는"
+   },
+   {
+    "w": "alert",
+    "m": "기민한, 정신이 초롱초롱한"
+   }
+  ]
  },
  {
   "key": "2024-수능|24",
@@ -3952,31 +4122,36 @@
     "n": 1,
     "tx": "Overtourism: <b>Not Simply a Matter of People and Places</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "오버투어리즘: 단순히 사람과 장소의 문제가 아니다"
    },
    {
     "n": 2,
     "tx": "Severity of Overtourism: Much Worse than Imagined",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "오버투어리즘의 심각성: 상상보다 훨씬 심각하다"
    },
    {
     "n": 3,
     "tx": "Solutions to Overtourism: From <span class=\"reuse\">Complex</span> to Simple",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "오버투어리즘의 해결책: 복잡함에서 단순함으로"
    },
    {
     "n": 4,
     "tx": "Are Tourist <span class=\"reuse\">Attractions</span> Winners or Losers?",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "관광 명소는 승자인가 패자인가?"
    },
    {
     "n": 5,
     "tx": "What Makes Popular <span class=\"reuse\">Destinations</span> Attractive?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "무엇이 인기 관광지를 매력적으로 만드는가?"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 오버투어리즘은 단순히 사람·장소의 문제가 아님 · <span class=\"xo\">②</span>심각성 과소평가 <span class=\"xo\">③</span>복잡→단순 해법 <span class=\"xo\">④</span>명소는 승자/패자? <span class=\"xo\">⑤</span>인기 관광지의 매력 요인",
@@ -4008,7 +4183,45 @@
     }
    ],
    "echo": "more complex·highly relative가 '단순히 사람·장소의 문제가 아님'을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "rest on",
+    "m": "~에 근거하다"
+   },
+   {
+    "w": "assumption",
+    "m": "가정"
+   },
+   {
+    "w": "demarcated",
+    "m": "경계 지어진"
+   },
+   {
+    "w": "bounded",
+    "m": "한정된, 경계가 있는"
+   },
+   {
+    "w": "limited capacity",
+    "m": "제한된 수용력"
+   },
+   {
+    "w": "out of proportion",
+    "m": "균형이 맞지 않는, 지나친"
+   },
+   {
+    "w": "natural degradation",
+    "m": "자연 훼손"
+   },
+   {
+    "w": "economic leakage",
+    "m": "경제적 누출"
+   },
+   {
+    "w": "power dynamics",
+    "m": "권력 역학"
+   }
+  ]
  },
  {
   "key": "2027-06|34",
@@ -4273,31 +4486,36 @@
     "n": 1,
     "tx": "he can predict where art is going",
     "verdict": "ok",
-    "jd": "✔ 가치가 유동적이어도 컬렉터는 자기 선택이 미래 미술사에서 유의미해지리라 확신(미술의 향방을 내다봄)"
+    "jd": "✔ 가치가 유동적이어도 컬렉터는 자기 선택이 미래 미술사에서 유의미해지리라 확신(미술의 향방을 내다봄)",
+    "ko": "예술이 어디로 가는지 예측할 수 있다는"
    },
    {
     "n": 2,
     "tx": "the artist behind the work is reliable",
     "verdict": "x",
-    "jd": "✘ 작가 신뢰는 언급 없음"
+    "jd": "✘ 작가 신뢰는 언급 없음",
+    "ko": "작품 뒤의 예술가가 믿을 만하다는"
    },
    {
     "n": 3,
     "tx": "the art work tells the story of his time",
     "verdict": "x",
-    "jd": "✘ 시대 서술은 언급 없음"
+    "jd": "✘ 시대 서술은 언급 없음",
+    "ko": "그 예술 작품이 자기 시대의 이야기를 들려준다는"
    },
    {
     "n": 4,
     "tx": "his choice will lead to immediate profits",
     "verdict": "x",
-    "jd": "✘ 즉각적 이익 얘기가 아님(정반대)"
+    "jd": "✘ 즉각적 이익 얘기가 아님(정반대)",
+    "ko": "그의 선택이 즉각적인 이익으로 이어질 것이라는"
    },
    {
     "n": 5,
     "tx": "the originality of the work is unshakable",
     "verdict": "x",
-    "jd": "✘ 함정: 가치는 '유동적·불확실'하다 했으므로 '흔들리지 않는다'는 정반대"
+    "jd": "✘ 함정: 가치는 '유동적·불확실'하다 했으므로 '흔들리지 않는다'는 정반대",
+    "ko": "그 작품의 독창성이 흔들리지 않는다는"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 그가 미술의 향방을 내다볼 수 있다는 확신 · <span class=\"xo\">⑤</span>가치는 유동적이라 했으니 '흔들림 없다'는 정반대 <span class=\"xo\">②③④</span>언급 없음/정반대",
@@ -4331,7 +4549,53 @@
     }
    ],
    "echo": "빈칸=컬렉터의 확신 → '미술의 향방을 예측할 수 있다'(①); '독창성 불변'(⑤)은 유동성과 정반대"
-  }
+  },
+  "vlist": [
+   {
+    "w": "shifting nature",
+    "m": "변화하는 속성"
+   },
+   {
+    "w": "uppermost in one's mind",
+    "m": "마음속에 가장 중시되는"
+   },
+   {
+    "w": "acquire",
+    "m": "획득하다"
+   },
+   {
+    "w": "assert one's belief in",
+    "m": "~에 대한 믿음을 표명하다"
+   },
+   {
+    "w": "as a whole",
+    "m": "전체로서"
+   },
+   {
+    "w": "be open to",
+    "m": "~에 열려 있다"
+   },
+   {
+    "w": "validation",
+    "m": "타당성 확인, 입증"
+   },
+   {
+    "w": "consensus",
+    "m": "합의"
+   },
+   {
+    "w": "be displaced",
+    "m": "밀려나다, 대체되다"
+   },
+   {
+    "w": "commit oneself to",
+    "m": "~에 전념하다, 몰두하다"
+   },
+   {
+    "w": "aesthetic judgment",
+    "m": "미적 판단"
+   }
+  ]
  },
  {
   "key": "2024-09|35",
@@ -4601,7 +4865,49 @@
     "Only when these barriers are removed will flexible workplace programs gain full acceptance."
    ],
    "irrelevant": 3
-  }
+  },
+  "vlist": [
+   {
+    "w": "with regard to",
+    "m": "~에 관련하여"
+   },
+   {
+    "w": "be suited for",
+    "m": "~에 적합한"
+   },
+   {
+    "w": "bottom line",
+    "m": "최종 결산 결과"
+   },
+   {
+    "w": "misperception",
+    "m": "오해, 오인"
+   },
+   {
+    "w": "flexible",
+    "m": "유연한"
+   },
+   {
+    "w": "emerge",
+    "m": "등장하다"
+   },
+   {
+    "w": "barrier",
+    "m": "장벽"
+   },
+   {
+    "w": "dominant",
+    "m": "지배적인"
+   },
+   {
+    "w": "implications",
+    "m": "영향, 함의"
+   },
+   {
+    "w": "acceptance",
+    "m": "수용"
+   }
+  ]
  },
  {
   "key": "2027-06|37",
@@ -5018,7 +5324,41 @@
     }
    ],
    "echo": "지시어 In saying that·By extension이 문화적 틀 재진술로 (C)-(A)-(B) 연결 = ④"
-  }
+  },
+  "vlist": [
+   {
+    "w": "trigger",
+    "m": "촉발하다, 유발하다"
+   },
+   {
+    "w": "instinctive",
+    "m": "본능적인"
+   },
+   {
+    "w": "spectacle",
+    "m": "장관, 볼거리"
+   },
+   {
+    "w": "prevailing",
+    "m": "지배적인, 우세한"
+   },
+   {
+    "w": "mode of perception",
+    "m": "지각 방식"
+   },
+   {
+    "w": "bring to bear",
+    "m": "작용시키다, 발휘하다"
+   },
+   {
+    "w": "by extension",
+    "m": "더 나아가, 확장하면"
+   },
+   {
+    "w": "work with the grain of",
+    "m": "~의 결(성질)에 맞춰 하다"
+   }
+  ]
  },
  {
   "key": "2024-수능|39",
@@ -5380,7 +5720,45 @@
     }
    ],
    "echo": "삽입문 A favorable mutation이 앞 문장 increases the fitness를 재진술 = ④ 자리"
-  }
+  },
+  "vlist": [
+   {
+    "w": "analogy",
+    "m": "유추, 비유"
+   },
+   {
+    "w": "break down",
+    "m": "무너지다, 성립하지 않다"
+   },
+   {
+    "w": "misprint",
+    "m": "오식, 잘못 인쇄"
+   },
+   {
+    "w": "mutation",
+    "m": "돌연변이"
+   },
+   {
+    "w": "harmful consequences",
+    "m": "해로운 결과"
+   },
+   {
+    "w": "reproductive fitness",
+    "m": "번식 적합도"
+   },
+   {
+    "w": "favorable",
+    "m": "유리한"
+   },
+   {
+    "w": "offspring",
+    "m": "자손"
+   },
+   {
+    "w": "transmit",
+    "m": "전달하다"
+   }
+  ]
  },
  {
   "key": "2023-06|21",
@@ -7299,7 +7677,41 @@
     "Eventually the young bird’s song overlaps almost completely with the tutor’s, an accurate copy produced through this long process of listening and self-correction."
    ],
    "irrelevant": 4
-  }
+  },
+  "vlist": [
+   {
+    "w": "overlap",
+    "m": "겹치다"
+   },
+   {
+    "w": "reproduce",
+    "m": "재현하다"
+   },
+   {
+    "w": "uneven",
+    "m": "고르지 않은"
+   },
+   {
+    "w": "pitch",
+    "m": "음정"
+   },
+   {
+    "w": "tempo",
+    "m": "박자"
+   },
+   {
+    "w": "fine-tune",
+    "m": "미세 조정하다"
+   },
+   {
+    "w": "accurate",
+    "m": "정확한"
+   },
+   {
+    "w": "template",
+    "m": "본, 견본"
+   }
+  ]
  },
  {
   "key": "2023-06|37",
@@ -7868,7 +8280,45 @@
     }
    ],
    "echo": "동기(긍정)→단점(부정)은 새 정보 전개이며 핵심의 재진술이 아니다."
-  }
+  },
+  "vlist": [
+   {
+    "w": "downside",
+    "m": "단점"
+   },
+   {
+    "w": "visceral interest",
+    "m": "본능적 관심"
+   },
+   {
+    "w": "elicit",
+    "m": "이끌어내다"
+   },
+   {
+    "w": "nurturing motivation",
+    "m": "양육 동기"
+   },
+   {
+    "w": "hold it dear",
+    "m": "소중히 여기다"
+   },
+   {
+    "w": "self-expressive",
+    "m": "자기표현적인"
+   },
+   {
+    "w": "sophistication",
+    "m": "세련됨, 정교함"
+   },
+   {
+    "w": "desensitized",
+    "m": "둔감해진"
+   },
+   {
+    "w": "performance expectations",
+    "m": "성능 기대"
+   }
+  ]
  },
  {
   "key": "2027-06|21",
@@ -8170,7 +8620,49 @@
     }
    ],
    "echo": "‘give up the ghost’는 의식이 인간만의 것이라는 믿음을 버리라는 뜻으로 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "attribute A to B",
+    "m": "A를 B의 것으로 여기다"
+   },
+   {
+    "w": "consciousness",
+    "m": "의식"
+   },
+   {
+    "w": "zoologist",
+    "m": "동물학자"
+   },
+   {
+    "w": "cognition",
+    "m": "인지"
+   },
+   {
+    "w": "echolocation",
+    "m": "반향정위"
+   },
+   {
+    "w": "inner world",
+    "m": "내면 세계"
+   },
+   {
+    "w": "flexible behavior",
+    "m": "유연한 행동"
+   },
+   {
+    "w": "hallmark",
+    "m": "특징, 상징"
+   },
+   {
+    "w": "problem-solving",
+    "m": "문제 해결"
+   },
+   {
+    "w": "give up the ghost",
+    "m": "단념하다, 포기하다"
+   }
+  ]
  },
  {
   "key": "2026-09|22",
@@ -9978,7 +10470,45 @@
     }
    ],
    "echo": "‘같은 위치→완전히 다름’을 ‘반복→모두 혼돈은 아님’으로 정리해 (B)-(C)-(A)."
-  }
+  },
+  "vlist": [
+   {
+    "w": "back and forth",
+    "m": "앞뒤로, 왔다 갔다"
+   },
+   {
+    "w": "iteration",
+    "m": "반복, 되풀이"
+   },
+   {
+    "w": "nonlinear system",
+    "m": "비선형 계"
+   },
+   {
+    "w": "bifurcation",
+    "m": "분기(점)"
+   },
+   {
+    "w": "in an orderly fashion",
+    "m": "질서 있게"
+   },
+   {
+    "w": "no matter how",
+    "m": "아무리 ~해도"
+   },
+   {
+    "w": "lead to",
+    "m": "~로 이어지다, 초래하다"
+   },
+   {
+    "w": "pendulum",
+    "m": "진자"
+   },
+   {
+    "w": "release",
+    "m": "놓다, 풀어주다"
+   }
+  ]
  },
  {
   "key": "2027-06|39",
@@ -10920,7 +11450,45 @@
    ],
    "subjects": [],
    "echo": "'preferred last-mile vehicle·much potential'을 '효율적 배송 수단'으로 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "urban delivery vehicle",
+    "m": "도시 배송 차량"
+   },
+   {
+    "w": "last-mile",
+    "m": "최종 단계 배송의"
+   },
+   {
+    "w": "congested",
+    "m": "혼잡한"
+   },
+   {
+    "w": "acquisition and maintenance costs",
+    "m": "구입 및 유지 비용"
+   },
+   {
+    "w": "cargo bicycle",
+    "m": "화물 자전거"
+   },
+   {
+    "w": "implement",
+    "m": "시행하다"
+   },
+   {
+    "w": "adopt",
+    "m": "채택하다"
+   },
+   {
+    "w": "dedicated bike lane",
+    "m": "전용 자전거 도로"
+   },
+   {
+    "w": "restrict",
+    "m": "제한하다"
+   }
+  ]
  },
  {
   "key": "2023-수능|23",
@@ -11127,31 +11695,36 @@
     "n": 1,
     "tx": "steps to make public <span class=\"reuse\">information</span> accessible to customers",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "공적 정보를 고객이 이용할 수 있게 하는 조치"
    },
    {
     "n": 2,
     "tx": "benefits of publicizing information to ensure free choices",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "자유로운 선택을 보장하기 위해 정보를 공개하는 것의 이점"
    },
    {
     "n": 3,
     "tx": "strategies for companies to increase profits in a <span class=\"reuse\">free market</span>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "자유 시장에서 기업이 이윤을 늘리기 위한 전략"
    },
    {
     "n": 4,
     "tx": "necessities of identifying and analyzing current industry trends",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "현재 산업 동향을 파악하고 분석해야 할 필요성"
    },
    {
     "n": 5,
     "tx": "effects of <span class=\"reuse\">diversified</span> markets on reasonable customer choices",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "다양화된 시장이 합리적인 고객 선택에 미치는 영향"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 자유로운 선택을 보장하는 정보 공개의 이점 · <span class=\"xo\">①</span>접근 절차 <span class=\"xo\">③</span>이윤 전략 <span class=\"xo\">④</span>산업 동향 분석 <span class=\"xo\">⑤</span>다양화 시장 효과",
@@ -11190,7 +11763,45 @@
    ],
    "subjects": [],
    "echo": "'advantage of disclosure·respects freedom of choice'를 '선택을 보장하는 정보 공개의 이점'으로 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "disclosure",
+    "m": "공개, 정보 공개"
+   },
+   {
+    "w": "as opposed to",
+    "m": "~와 대조적으로"
+   },
+   {
+    "w": "regulatory mandate",
+    "m": "규제 명령"
+   },
+   {
+    "w": "blunt",
+    "m": "무딘"
+   },
+   {
+    "w": "unintended adverse effects",
+    "m": "의도치 않은 부작용"
+   },
+   {
+    "w": "energy efficiency",
+    "m": "에너지 효율"
+   },
+   {
+    "w": "trade A against B",
+    "m": "A를 B와 견주어 따지다"
+   },
+   {
+    "w": "interfere with",
+    "m": "~을 방해하다"
+   },
+   {
+    "w": "autonomy",
+    "m": "자율성"
+   }
+  ]
  },
  {
   "key": "2026-06|24",
@@ -11370,31 +11981,36 @@
     "n": 2,
     "tx": "Beyond Mere Necessity: The Rise of Food Culture",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "단순한 필수품을 넘어: 음식 문화의 부상"
    },
    {
     "n": 1,
     "tx": "Changing Appetites: The Return of <span class=\"reuse\">Fine Dining</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "변화하는 식욕: 고급 요리의 귀환"
    },
    {
     "n": 3,
     "tx": "Tips for Choosing <span class=\"reuse\">Restaurants</span> for Social Occasions",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "사교 모임을 위한 식당 선택 요령"
    },
    {
     "n": 4,
     "tx": "Why Table Manners Matter: Food and Class Identity",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "식탁 예절이 중요한 이유: 음식과 계층 정체성"
    },
    {
     "n": 5,
     "tx": "How Industrialization Is Taking Over Food Production",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "산업화가 어떻게 식량 생산을 장악하고 있는가"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 필수품을 넘어 음식 문화의 부상 · <span class=\"xo\">①</span>미식의 귀환 <span class=\"xo\">③</span>레스토랑 선택 팁 <span class=\"xo\">④</span>식탁 예절·계급 <span class=\"xo\">⑤</span>산업화의 지배",
@@ -11421,7 +12037,49 @@
    ],
    "subjects": [],
    "echo": "핵심 'more than a life necessity'는 이후 역사적 전개·예시로만 이어져 되풀이된 재진술 표현이 없음."
-  }
+  },
+  "vlist": [
+   {
+    "w": "essential for",
+    "m": "~에 필수적인"
+   },
+   {
+    "w": "the basis for",
+    "m": "~의 기반"
+   },
+   {
+    "w": "food processing",
+    "m": "식품 가공"
+   },
+   {
+    "w": "for millennia",
+    "m": "수천 년 동안"
+   },
+   {
+    "w": "preservation",
+    "m": "보존"
+   },
+   {
+    "w": "distinct institution",
+    "m": "독립된 제도/기관"
+   },
+   {
+    "w": "socialization",
+    "m": "사교, 사회적 교류"
+   },
+   {
+    "w": "give rise to",
+    "m": "~을 낳다, 일으키다"
+   },
+   {
+    "w": "pride oneself on",
+    "m": "~을 자랑스러워하다"
+   },
+   {
+    "w": "in today's parlance",
+    "m": "오늘날의 표현으로"
+   }
+  ]
  },
  {
   "key": "2024-06|34",
@@ -11615,31 +12273,36 @@
     "n": 5,
     "tx": "not in the perception of the figure but in its rational representation",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "그 형상의 지각이 아니라 그것의 이성적 표상 속에서"
    },
    {
     "n": 1,
     "tx": "as the outcome of blindly following sensual experience",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "감각적 경험을 맹목적으로 따른 결과로서"
    },
    {
     "n": 2,
     "tx": "by moving away from the idea of perfect representation",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "완벽한 표상이라는 개념에서 벗어남으로써"
    },
    {
     "n": 3,
     "tx": "beyond the limit of where rational knowledge can approach",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "이성적 지식이 접근할 수 있는 한계를 넘어서"
    },
    {
     "n": 4,
     "tx": "through a variety of experiences rather than logical reasoning",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "논리적 추론이 아니라 다양한 경험을 통해"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 지각이 아닌 이성적 표상에서 · <span class=\"xo\">①</span>감각 추종의 결과 <span class=\"xo\">②</span>완전한 표상에서 벗어나 <span class=\"xo\">③</span>이성이 닿는 한계 너머 <span class=\"xo\">④</span>논리가 아닌 다양한 경험으로",
@@ -11685,7 +12348,49 @@
    "subjects": [],
    "echo": "'Only rational discourse points towards true knowledge'를 '진리는 이성적 표상에서 드러난다'로 재진술."
   },
-  "blank": true
+  "blank": true,
+  "vlist": [
+   {
+    "w": "sensual perception",
+    "m": "감각적 지각"
+   },
+   {
+    "w": "rational knowledge",
+    "m": "이성적 지식"
+   },
+   {
+    "w": "supremacy",
+    "m": "우위, 우월성"
+   },
+   {
+    "w": "assertion",
+    "m": "주장"
+   },
+   {
+    "w": "extract",
+    "m": "추출하다, 끌어내다"
+   },
+   {
+    "w": "inherently",
+    "m": "본질적으로"
+   },
+   {
+    "w": "be subject to",
+    "m": "~에 영향받다, ~을 겪다"
+   },
+   {
+    "w": "illusion",
+    "m": "착각, 환상"
+   },
+   {
+    "w": "logical reasoning",
+    "m": "논리적 추론"
+   },
+   {
+    "w": "geometrical perspective",
+    "m": "기하학적 원근법"
+   }
+  ]
  },
  {
   "key": "2023-수능|36",
@@ -12327,7 +13032,45 @@
    ],
    "subjects": [],
    "echo": "삽입 문항으로, 걷기 예시·세부만 이어질 뿐 핵심을 다른 말로 되풀이한 재진술 표현이 없음."
-  }
+  },
+  "vlist": [
+   {
+    "w": "back and forth",
+    "m": "앞뒤로, 이리저리"
+   },
+   {
+    "w": "relive",
+    "m": "다시 체험하다"
+   },
+   {
+    "w": "contribute to",
+    "m": "~에 기여하다"
+   },
+   {
+    "w": "metaphor for",
+    "m": "~에 대한 은유"
+   },
+   {
+    "w": "arithmetic",
+    "m": "산수, 셈"
+   },
+   {
+    "w": "unit",
+    "m": "단위"
+   },
+   {
+    "w": "skip along",
+    "m": "깡충깡충 나아가다"
+   },
+   {
+    "w": "two steps at a time",
+    "m": "한 번에 두 걸음씩"
+   },
+   {
+    "w": "walk backwards",
+    "m": "뒤로 걷다"
+   }
+  ]
  },
  {
   "key": "2024-06|21",
@@ -12876,7 +13619,45 @@
    ],
    "subjects": [],
    "echo": "'the interpretation of the data·Interpretation is at the core'를 '정보를 해석해 의미를 만든다'로 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "refer to",
+    "m": "~을 가리키다, 지칭하다"
+   },
+   {
+    "w": "entail",
+    "m": "수반하다, 필요로 하다"
+   },
+   {
+    "w": "apply to",
+    "m": "~에 적용되다"
+   },
+   {
+    "w": "for instance",
+    "m": "예를 들어"
+   },
+   {
+    "w": "in a row",
+    "m": "연달아, 연속으로"
+   },
+   {
+    "w": "constitute",
+    "m": "~을 구성하다, ~이 되다"
+   },
+   {
+    "w": "at the core of",
+    "m": "~의 핵심에"
+   },
+   {
+    "w": "probability",
+    "m": "확률"
+   },
+   {
+    "w": "undetectable",
+    "m": "감지할 수 없는"
+   }
+  ]
  },
  {
   "key": "2026-09|23",
@@ -13408,31 +14189,36 @@
     "n": 1,
     "tx": "Better Together: Human and Machine <b>Collaboration</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "함께하면 더 낫다: 인간과 기계의 협업"
    },
    {
     "n": 2,
     "tx": "Can Robots Join Forces to <b>Outperform</b> Human Teams?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "로봇이 힘을 합쳐 인간 팀을 능가할 수 있는가?"
    },
    {
     "n": 3,
     "tx": "<b>Loss of Humanity</b> in the Human and Machine Conflict",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "인간과 기계의 갈등 속 인간성 상실"
    },
    {
     "n": 4,
     "tx": "Power Off: When to <b>Say No</b> to Robot Partners",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "전원 끄기: 언제 로봇 파트너에게 거절할 것인가"
    },
    {
     "n": 5,
     "tx": "Shifting from <span class=\"reuse\">Service Animals</span> to Robot Assistants",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "보조 동물에서 로봇 조수로의 전환"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 함께라 더 낫다: 인간-기계 협력 · <span class=\"xo\">②</span>로봇이 인간 능가?(없음) <span class=\"xo\">③</span>인간성 상실(정반대) <span class=\"xo\">④</span>로봇에 거절하기(범위초과) <span class=\"xo\">⑤</span>서비스 동물→로봇(표면어휘)",
@@ -13470,7 +14256,41 @@
    ],
    "subjects": [],
    "echo": "'human-machine team·cooperate and coordinate·good team members'를 '인간·기계 협력(Better Together)'으로 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "joint cognitive system",
+    "m": "결합 인지 시스템"
+   },
+   {
+    "w": "synergistic",
+    "m": "상승효과의"
+   },
+   {
+    "w": "self-driving car",
+    "m": "자율주행차"
+   },
+   {
+    "w": "telecommuting",
+    "m": "재택근무"
+   },
+   {
+    "w": "cooperate and coordinate",
+    "m": "협력하고 조율하다"
+   },
+   {
+    "w": "peer agent",
+    "m": "동등한 행위자"
+   },
+   {
+    "w": "agenda",
+    "m": "의제, 목표"
+   },
+   {
+    "w": "service animal",
+    "m": "보조 동물"
+   }
+  ]
  },
  {
   "key": "2026-09|33",
@@ -13675,31 +14495,36 @@
     "n": 1,
     "tx": "grounds for investigating the value of forest <span class=\"reuse\">expansion</span>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "숲 확장의 가치를 조사하는 근거"
    },
    {
     "n": 2,
     "tx": "a basis for extending institutional aid to entire ecosystems",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "제도적 지원을 전체 생태계로 확대하는 기반"
    },
    {
     "n": 3,
     "tx": "the reason for introducing <span class=\"reuse\">exotic species</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "외래종을 도입하는 이유"
    },
    {
     "n": 4,
     "tx": "evidence for increasing ecological <b>enrichment</b>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "생태적 풍요로움 증가의 증거"
    },
    {
     "n": 5,
     "tx": "a justification for <b>converting nonforests into forests</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "비산림을 산림으로 전환하는 것에 대한 정당화"
    }
   ],
   "opt_line": "<span class=\"xo\">①</span>숲 확장 가치 조사 근거 <span class=\"xo\">②</span>전 생태계 지원 근거 <span class=\"xo\">③</span>외래종 도입 이유(표면어휘) <span class=\"xo\">④</span>생태적 풍부화 증거(정반대) · <span class=\"co\">⑤정답</span> 비숲을 숲으로 전환하는 정당화",
@@ -13732,7 +14557,49 @@
    "subjects": [],
    "echo": "'converting nonforests into forests는 정당화되지 않음'을 '생태학자들의 비판'으로 재진술."
   },
-  "blank": true
+  "blank": true,
+  "vlist": [
+   {
+    "w": "compared to",
+    "m": "~와 비교하여"
+   },
+   {
+    "w": "ecosystem",
+    "m": "생태계"
+   },
+   {
+    "w": "biota",
+    "m": "생물군, 생물상"
+   },
+   {
+    "w": "drain",
+    "m": "물을 빼다, 배수하다"
+   },
+   {
+    "w": "fertilize",
+    "m": "비료를 주다, 시비하다"
+   },
+   {
+    "w": "facilitate",
+    "m": "촉진하다, 용이하게 하다"
+   },
+   {
+    "w": "be directed toward",
+    "m": "~을 향하다, ~에 맞춰지다"
+   },
+   {
+    "w": "be restricted to",
+    "m": "~에 국한되다"
+   },
+   {
+    "w": "exotic tree",
+    "m": "외래 수종"
+   },
+   {
+    "w": "uncommon species",
+    "m": "희귀종"
+   }
+  ]
  },
  {
   "key": "2023-수능|37",
@@ -14086,7 +14953,45 @@
     }
    ],
    "echo": "성공보수 정의의 반복 흐름으로 (C)-(A)-(B) 순서가 확정된다."
-  }
+  },
+  "vlist": [
+   {
+    "w": "results-based pricing",
+    "m": "성과 기반 가격 책정"
+   },
+   {
+    "w": "contingency pricing",
+    "m": "성공 보수제 가격"
+   },
+   {
+    "w": "compensate",
+    "m": "보상하다"
+   },
+   {
+    "w": "intimidated",
+    "m": "위축된, 겁먹은"
+   },
+   {
+    "w": "fee",
+    "m": "수수료, 비용"
+   },
+   {
+    "w": "settle",
+    "m": "해결되다, 합의되다"
+   },
+   {
+    "w": "settlement",
+    "m": "합의, 해결"
+   },
+   {
+    "w": "personal injury",
+    "m": "개인 상해"
+   },
+   {
+    "w": "bill",
+    "m": "청구하다"
+   }
+  ]
  },
  {
   "key": "2023-수능|38",
@@ -14393,7 +15298,45 @@
     }
    ],
    "echo": "'분리(separation)'가 'antithetical'로 재진술돼 ⑤가 답."
-  }
+  },
+  "vlist": [
+   {
+    "w": "partition",
+    "m": "분할, 칸막이"
+   },
+   {
+    "w": "take the shape of",
+    "m": "~의 형태를 띠다"
+   },
+   {
+    "w": "inert",
+    "m": "생기 없는, 불활성의"
+   },
+   {
+    "w": "telling",
+    "m": "시사하는 바가 큰"
+   },
+   {
+    "w": "actualize",
+    "m": "실현하다, 구현하다"
+   },
+   {
+    "w": "distinguish A from B",
+    "m": "A를 B와 구별하다"
+   },
+   {
+    "w": "embody",
+    "m": "구현하다"
+   },
+   {
+    "w": "aesthetically",
+    "m": "미학적으로"
+   },
+   {
+    "w": "antithetical",
+    "m": "대립되는, 정반대의"
+   }
+  ]
  },
  {
   "key": "2023-수능|21",
@@ -15032,7 +15975,53 @@
     }
    ],
    "echo": "성난 외관의 인기·지속이 '성난 차 인기'(①)로 재진술된다."
-  }
+  },
+  "vlist": [
+   {
+    "w": "form an attachment to",
+    "m": "~에 애착을 형성하다"
+   },
+   {
+    "w": "guide",
+    "m": "이끌다, 인도하다"
+   },
+   {
+    "w": "hyper-competitive",
+    "m": "초경쟁적인"
+   },
+   {
+    "w": "appeal to",
+    "m": "~의 마음에 들다, 호소하다"
+   },
+   {
+    "w": "tap",
+    "m": "활용하다, 이용하다"
+   },
+   {
+    "w": "brain wave",
+    "m": "뇌파"
+   },
+   {
+    "w": "focus group",
+    "m": "표적 집단"
+   },
+   {
+    "w": "hypothesize",
+    "m": "가설을 세우다"
+   },
+   {
+    "w": "amidst",
+    "m": "~의 한가운데에"
+   },
+   {
+    "w": "show no sign of",
+    "m": "~할 기미를 보이지 않다"
+   },
+   {
+    "w": "buoyant sales",
+    "m": "활발한 판매"
+   }
+  ]
  },
  {
   "key": "2024-06|23",
@@ -15658,31 +16647,36 @@
     "n": 3,
     "tx": "The Grace of Solitude: <b>Detached from but Attached to Society</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "고독의 은총: 사회로부터 분리되었으나 사회에 결속된"
    },
    {
     "n": 1,
     "tx": "How to Gain Religious and Social <span class=\"reuse\">Benefits</span> from Monastery Life",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "수도원 생활에서 종교적·사회적 이득을 얻는 법"
    },
    {
     "n": 2,
     "tx": "Why the Middle Ages Demanded Religious Figures Be <span class=\"reuse\">Isolated</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "중세가 종교인들에게 고립을 요구한 이유"
    },
    {
     "n": 4,
     "tx": "No <span class=\"reuse\">Sacrificial</span> Leaders, No Flowering of Civilization",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "희생하는 지도자 없이는 문명의 개화도 없다"
    },
    {
     "n": 5,
     "tx": "Mystery of Power: The Politics of Peace and <span class=\"reuse\">Solitude</span>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "힘의 신비: 평화와 고독의 정치"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 고독의 은총: 분리돼 있으나 사회에 연결됨 · <span class=\"xo\">①</span>혜택 얻는 법 <span class=\"xo\">②</span>고립 강요 이유 <span class=\"xo\">④</span>희생적 지도자론 <span class=\"xo\">⑤</span>권력·정치",
@@ -15757,7 +16751,45 @@
     }
    ],
    "echo": "isolation과 benefit의 병치가 'Detached but Attached'(③)."
-  }
+  },
+  "vlist": [
+   {
+    "w": "monastery",
+    "m": "수도원"
+   },
+   {
+    "w": "intellectual leadership",
+    "m": "지적 지도력"
+   },
+   {
+    "w": "self-imposed isolation",
+    "m": "자발적 고립"
+   },
+   {
+    "w": "set apart from",
+    "m": "~로부터 분리된"
+   },
+   {
+    "w": "devote one's life to",
+    "m": "~에 삶을 바치다"
+   },
+   {
+    "w": "religious observance",
+    "m": "종교적 의식 준수"
+   },
+   {
+    "w": "monasticism",
+    "m": "수도원 제도, 수도생활"
+   },
+   {
+    "w": "sacrifice",
+    "m": "희생"
+   },
+   {
+    "w": "deliverance",
+    "m": "구원"
+   }
+  ]
  },
  {
   "key": "2024-수능|40",
@@ -16004,31 +17036,36 @@
     "n": 1,
     "tx": "enables … leaves",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치"
+    "jd": "✔ 지문 핵심과 일치",
+    "ko": "가능하게 하다 … 남기다"
    },
    {
     "n": 2,
     "tx": "challenges … spares",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "도전하다 … 남겨 두다"
    },
    {
     "n": 3,
     "tx": "delays … creates",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "지연시키다 … 만들다"
    },
    {
     "n": 4,
     "tx": "requires … removes",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "요구하다 … 제거하다"
    },
    {
     "n": 5,
     "tx": "invites … diminishes",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "유도하다 … 감소시키다"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> enables … leaves · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
@@ -16069,7 +17106,45 @@
    ],
    "echo": "'한 주제씩'·'공간이 남음'이 요약문(①)으로 재진술된다."
   },
-  "recon_opts": false
+  "recon_opts": false,
+  "vlist": [
+   {
+    "w": "notable work",
+    "m": "주목할 만한 성과"
+   },
+   {
+    "w": "embrace",
+    "m": "받아들이다, 아우르다"
+   },
+   {
+    "w": "concentrate attention on",
+    "m": "~에 주의를 집중하다"
+   },
+   {
+    "w": "one after another",
+    "m": "차례로, 잇달아"
+   },
+   {
+    "w": "attainment",
+    "m": "성취, 달성"
+   },
+   {
+    "w": "adapt to",
+    "m": "~에 적응하다"
+   },
+   {
+    "w": "be astonished by",
+    "m": "~에 놀라다"
+   },
+   {
+    "w": "condense into",
+    "m": "~으로 압축되다"
+   },
+   {
+    "w": "abbreviated",
+    "m": "축약된"
+   }
+  ]
  },
  {
   "key": "2026-09|36",
@@ -16716,7 +17791,45 @@
     }
    ],
    "echo": "slice=fractionate 재진술; 첫 방법 뒤 Another approach라 ④."
-  }
+  },
+  "vlist": [
+   {
+    "w": "reach an agreement",
+    "m": "합의에 이르다"
+   },
+   {
+    "w": "settlement terms",
+    "m": "합의 조건"
+   },
+   {
+    "w": "implement",
+    "m": "실행하다, 이행하다"
+   },
+   {
+    "w": "slice into",
+    "m": "~로 나누다, 쪼개다"
+   },
+   {
+    "w": "quantitative",
+    "m": "양적인, 정량적인"
+   },
+   {
+    "w": "compensation",
+    "m": "보상"
+   },
+   {
+    "w": "precedent",
+    "m": "선례, 전례"
+   },
+   {
+    "w": "go into effect",
+    "m": "효력을 발휘하다, 시행되다"
+   },
+   {
+    "w": "devise",
+    "m": "고안하다"
+   }
+  ]
  },
  {
   "key": "2022-06|21",
@@ -17407,7 +18520,49 @@
     }
    ],
    "echo": "'도덕적 문제가 핵심'·'도덕적 목표 설정'이 요지(⑤) 재진술."
-  }
+  },
+  "vlist": [
+   {
+    "w": "drafter",
+    "m": "입안자, 초안 작성자"
+   },
+   {
+    "w": "attentive to",
+    "m": "~에 주의를 기울이는"
+   },
+   {
+    "w": "tax legislation",
+    "m": "세법, 조세 입법"
+   },
+   {
+    "w": "push to the side",
+    "m": "밀어내다, 제쳐두다"
+   },
+   {
+    "w": "at the very heart of",
+    "m": "~의 핵심에"
+   },
+   {
+    "w": "fundamental to",
+    "m": "~에 근본적인"
+   },
+   {
+    "w": "imposition of tax",
+    "m": "과세, 세금 부과"
+   },
+   {
+    "w": "distributive justice",
+    "m": "분배 정의"
+   },
+   {
+    "w": "go a long way towards",
+    "m": "~에 크게 기여하다"
+   },
+   {
+    "w": "in a vacuum",
+    "m": "고립된 상태에서, 진공 속에서"
+   }
+  ]
  },
  {
   "key": "2022-수능|23",
@@ -17626,31 +18781,36 @@
     "n": 5,
     "tx": "functional aspects of a paradigm in scientific research",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "과학 연구에서 패러다임의 기능적 측면"
    },
    {
     "n": 1,
     "tx": "difficulty in drawing <span class=\"reuse\">novel theories</span> from paradigms",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "패러다임에서 새로운 이론을 도출하는 것의 어려움"
    },
    {
     "n": 2,
     "tx": "significant influence of personal <span class=\"reuse\">beliefs</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "개인적 신념의 상당한 영향"
    },
    {
     "n": 3,
     "tx": "key factors that promote the rise of innovative paradigms",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "혁신적 패러다임의 등장을 촉진하는 핵심 요인"
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">roles</span> of a paradigm in grouping like-minded researchers",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "생각이 비슷한 연구자들을 묶는 데 있어 패러다임의 역할"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 과학 연구에서 패러다임의 기능적 측면 · <span class=\"xo\">①</span>새 이론 도출 어려움 <span class=\"xo\">②</span>개인 신념 영향(정반대) <span class=\"xo\">③</span>혁신 패러다임 등장 요인 <span class=\"xo\">④</span>연구자 결집 역할(범위초과)",
@@ -17688,7 +18848,41 @@
     }
    ],
    "echo": "'use·role'(사용·역할)을 '패러다임의 기능적 측면'으로 재진술한 ⑤"
-  }
+  },
+  "vlist": [
+   {
+    "w": "paradigm",
+    "m": "패러다임, 인식의 틀"
+   },
+   {
+    "w": "address (a problem)",
+    "m": "(문제를) 다루다"
+   },
+   {
+    "w": "employ",
+    "m": "사용하다, 쓰다"
+   },
+   {
+    "w": "presuppose",
+    "m": "전제하다"
+   },
+   {
+    "w": "comparable",
+    "m": "비슷한, 견줄 만한"
+   },
+   {
+    "w": "provide an account of",
+    "m": "~을 설명하다"
+   },
+   {
+    "w": "rationalization",
+    "m": "합리적 설명"
+   },
+   {
+    "w": "reduction to rules",
+    "m": "규칙으로의 환원"
+   }
+  ]
  },
  {
   "key": "2023-09|24",
@@ -19513,7 +20707,49 @@
     }
    ],
    "echo": "'equal access to speech'가 'sharing·mutual aid' 가치의 토대임을 재진술한 ④"
-  }
+  },
+  "vlist": [
+   {
+    "w": "hunter-gatherer",
+    "m": "수렵채집인"
+   },
+   {
+    "w": "diffusion",
+    "m": "확산, 전파"
+   },
+   {
+    "w": "accommodate",
+    "m": "수용하다, 감안하다"
+   },
+   {
+    "w": "egalitarianism",
+    "m": "평등주의"
+   },
+   {
+    "w": "in terms of",
+    "m": "~의 측면에서"
+   },
+   {
+    "w": "controllingly",
+    "m": "지배하듯, 통제하며"
+   },
+   {
+    "w": "at will",
+    "m": "마음대로, 임의로"
+   },
+   {
+    "w": "hold in common",
+    "m": "공동으로 소유하다"
+   },
+   {
+    "w": "mutual aid",
+    "m": "상호 부조, 서로 도움"
+   },
+   {
+    "w": "right and proper",
+    "m": "옳고 마땅한"
+   }
+  ]
  },
  {
   "key": "2022-06|23",
@@ -20013,31 +21249,36 @@
     "n": 1,
     "tx": "Still Left to the Modern Blacksmith: The <b>Art of Repair</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "여전히 현대 대장장이에게 남겨진 것: 수리의 기술"
    },
    {
     "n": 2,
     "tx": "A Historical Survey of How <span class=\"reuse\">Repairing</span> Skills <b>Evolved</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "수리 기술이 어떻게 진화했는가에 대한 역사적 고찰"
    },
    {
     "n": 3,
     "tx": "How to Be a Creative <span class=\"reuse\">Repairperson</span>: <b>Tips and Ideas</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "창의적인 수리공이 되는 법: 조언과 아이디어"
    },
    {
     "n": 4,
     "tx": "A Process of Repair: <span class=\"reuse\">Create, Modify, Transform!</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "수리의 과정: 창조하고, 수정하고, 변형하라!"
    },
    {
     "n": 5,
     "tx": "Can <span class=\"reuse\">Industrialization</span> Mend Our Broken Past?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "산업화가 우리의 망가진 과거를 고칠 수 있는가?"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 현대 대장장이에게 남겨진 것: 수리라는 예술 · <span class=\"xo\">②</span>수리 기술 진화 역사(단순 개관) <span class=\"xo\">③</span>수리 팁 안내 <span class=\"xo\">④</span>제작·변형 과정 <span class=\"xo\">⑤</span>산업화가 과거를 고칠까(무관)",
@@ -20076,7 +21317,49 @@
     }
    ],
    "echo": "'repair … creativity · by hand'를 'The Art of Repair(수리의 예술)'로 재진술한 ①"
-  }
+  },
+  "vlist": [
+   {
+    "w": "mend and restore",
+    "m": "고치고 복원하다"
+   },
+   {
+    "w": "make things to order",
+    "m": "주문 제작하다"
+   },
+   {
+    "w": "customize",
+    "m": "맞춤 제작하다"
+   },
+   {
+    "w": "an extension of",
+    "m": "~의 연장"
+   },
+   {
+    "w": "fabrication",
+    "m": "제작, 제조"
+   },
+   {
+    "w": "mass production",
+    "m": "대량 생산"
+   },
+   {
+    "w": "the province of",
+    "m": "~의 영역/소관"
+   },
+   {
+    "w": "grasp",
+    "m": "이해, 파악"
+   },
+   {
+    "w": "subdivision of labour",
+    "m": "노동의 세분화"
+   },
+   {
+    "w": "so to speak",
+    "m": "말하자면"
+   }
+  ]
  },
  {
   "key": "2026-09|34",
@@ -21425,7 +22708,45 @@
     }
    ],
    "echo": "'the right to do so'가 정체성 유지·수용의 요지로 되풀이됨."
-  }
+  },
+  "vlist": [
+   {
+    "w": "assimilate",
+    "m": "동화되다, 흡수하다"
+   },
+   {
+    "w": "conform",
+    "m": "순응하다, 따르다"
+   },
+   {
+    "w": "cultural identity",
+    "m": "문화적 정체성"
+   },
+   {
+    "w": "migrate",
+    "m": "이주하다"
+   },
+   {
+    "w": "exclusion",
+    "m": "배제, 소외"
+   },
+   {
+    "w": "diversity",
+    "m": "다양성"
+   },
+   {
+    "w": "struggle for",
+    "m": "~을 위해 분투하다"
+   },
+   {
+    "w": "retain",
+    "m": "유지하다, 보유하다"
+   },
+   {
+    "w": "acceptance",
+    "m": "수용, 받아들임"
+   }
+  ]
  },
  {
   "key": "2024-09|23",
@@ -21699,31 +23020,36 @@
     "n": 5,
     "tx": "outcome of attempts to attract <span class=\"reuse\">large audiences</span>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "많은 청중을 끌어들이려는 시도의 결과"
    },
    {
     "n": 1,
     "tx": "playlists appealing to <span class=\"reuse\">international</span> audiences",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "국제적 청중에게 호소하는 재생 목록"
    },
    {
     "n": 2,
     "tx": "influence of <span class=\"reuse\">advertisers</span> on musical preferences",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "음악 취향에 대한 광고주의 영향"
    },
    {
     "n": 3,
     "tx": "<span class=\"reuse\">difficulties</span> of increasing audience size",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "청중 규모를 늘리는 것의 어려움"
    },
    {
     "n": 4,
     "tx": "satisfying listeners’ <span class=\"reuse\">diverse needs</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "청취자의 다양한 요구를 충족하기"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 대규모 청중 확보 시도 → 안전 위주·제한된 선곡이라는 '결과' · <span class=\"xo\">①</span>국제청중 없음 <span class=\"xo\">②</span>선호 조종 아님 <span class=\"xo\">③</span>어려움 아님 <span class=\"xo\">④</span>다양성 충족은 정반대",
@@ -21762,7 +23088,45 @@
     }
    ],
    "echo": "'as large as possible'가 'maximise size'·'retention'으로 되풀이됨."
-  }
+  },
+  "vlist": [
+   {
+    "w": "commercial",
+    "m": "상업적인"
+   },
+   {
+    "w": "advertisers and sponsors",
+    "m": "광고주와 후원자"
+   },
+   {
+    "w": "demographic",
+    "m": "인구통계학적"
+   },
+   {
+    "w": "purchasing power",
+    "m": "구매력"
+   },
+   {
+    "w": "aggregate",
+    "m": "집합시키다, 모으다"
+   },
+   {
+    "w": "metric",
+    "m": "지표"
+   },
+   {
+    "w": "audience retention",
+    "m": "청중 유지"
+   },
+   {
+    "w": "risk aversion",
+    "m": "위험 회피"
+   },
+   {
+    "w": "restricted",
+    "m": "제한된"
+   }
+  ]
  },
  {
   "key": "2025-06|24",
@@ -23551,7 +24915,45 @@
     }
    ],
    "echo": "'cultural tools·learnt not given'이 '학습되는 문화적 도구'라는 요지로 재진술됨."
-  }
+  },
+  "vlist": [
+   {
+    "w": "sentient being",
+    "m": "지각 있는 존재"
+   },
+   {
+    "w": "conceive of",
+    "m": "~을 생각해내다, 상상하다"
+   },
+   {
+    "w": "moral responsibility",
+    "m": "도덕적 책임"
+   },
+   {
+    "w": "cultural tool",
+    "m": "문화적 도구"
+   },
+   {
+    "w": "sentience",
+    "m": "지각력"
+   },
+   {
+    "w": "volition",
+    "m": "의지"
+   },
+   {
+    "w": "predisposition",
+    "m": "성향, 기질"
+   },
+   {
+    "w": "cooperate",
+    "m": "협력하다"
+   },
+   {
+    "w": "immoral",
+    "m": "부도덕한"
+   }
+  ]
  },
  {
   "key": "2025-06|23",
@@ -24085,31 +25487,36 @@
     "n": 4,
     "tx": "Office Designs: What Goes Around Comes Around",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "사무실 디자인: 돌고 도는 법"
    },
    {
     "n": 1,
     "tx": "Why Are <span class=\"reuse\">Open-office Plans</span> So Cost-efficient?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "개방형 사무실 배치는 왜 그렇게 비용 효율적인가?"
    },
    {
     "n": 2,
     "tx": "How to Incorporate Retro Styles into Office Spaces",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "사무실 공간에 복고 스타일을 접목하는 법"
    },
    {
     "n": 3,
     "tx": "An Office Divided: Why <span class=\"reuse\">Partitions</span> Limit Productivity",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "분할된 사무실: 칸막이가 생산성을 제한하는 이유"
    },
    {
     "n": 5,
     "tx": "Tips for Managing <span class=\"reuse\">Contemporary Office</span> Spaces",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "현대적 사무실 공간을 관리하는 요령"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 사무실 디자인은 돌고 돈다 · <span class=\"xo\">①</span>비용효율(언급없음) <span class=\"xo\">②</span>레트로 접목법 <span class=\"xo\">③</span>칸막이=생산성저하 <span class=\"xo\">⑤</span>현대사무실 관리팁",
@@ -24147,7 +25554,45 @@
     }
    ],
    "echo": "'a cycle that repeats·circled back'가 제목 'What Goes Around Comes Around'로 재진술됨."
-  }
+  },
+  "vlist": [
+   {
+    "w": "gain currency",
+    "m": "통용되다, 널리 받아들여지다"
+   },
+   {
+    "w": "of choice",
+    "m": "선호되는, 선택된"
+   },
+   {
+    "w": "no matter how",
+    "m": "아무리 ~해도"
+   },
+   {
+    "w": "take-away",
+    "m": "요점, 시사점"
+   },
+   {
+    "w": "circle back",
+    "m": "되돌아오다"
+   },
+   {
+    "w": "right down to",
+    "m": "~에 이르기까지"
+   },
+   {
+    "w": "convention",
+    "m": "관습, 관례"
+   },
+   {
+    "w": "rigid",
+    "m": "경직된, 융통성 없는"
+   },
+   {
+    "w": "partition",
+    "m": "칸막이"
+   }
+  ]
  },
  {
   "key": "2024-수능|32",
@@ -24378,31 +25823,36 @@
     "n": 2,
     "tx": "aids in viewer access to the film",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "관객이 영화에 접근하는 것을 돕는다"
    },
    {
     "n": 1,
     "tx": "frees the plot of its <span class=\"reuse\">familiarity</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "줄거리를 그 친숙함에서 벗어나게 한다"
    },
    {
     "n": 3,
     "tx": "adds to an exotic musical experience",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "이국적인 음악 경험을 더한다"
    },
    {
     "n": 4,
     "tx": "orients audiences to the film’s theme",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "관객을 영화의 주제로 향하게 한다"
    },
    {
     "n": 5,
     "tx": "inspires viewers to think more deeply",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "관객이 더 깊이 생각하도록 자극한다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 관객의 영화 접근을 도움 · <span class=\"xo\">①</span>친숙함 제거(정반대) <span class=\"xo\">③</span>이국적 경험(정반대) <span class=\"xo\">④</span>주제 지향 <span class=\"xo\">⑤</span>깊은 사고 유도",
@@ -24438,7 +25888,45 @@
     }
    ],
    "echo": "'comfortable space·recognizable context'가 빈칸 '관객의 영화 접근을 돕는다'로 재진술됨."
-  }
+  },
+  "vlist": [
+   {
+    "w": "musical score",
+    "m": "영화 음악, 악보"
+   },
+   {
+    "w": "imitate",
+    "m": "모방하다"
+   },
+   {
+    "w": "futuristic",
+    "m": "미래의"
+   },
+   {
+    "w": "composer",
+    "m": "작곡가"
+   },
+   {
+    "w": "shy away from",
+    "m": "~을 피하다, 꺼리다"
+   },
+   {
+    "w": "cadence",
+    "m": "(음악의) 종지, 억양"
+   },
+   {
+    "w": "interfere with",
+    "m": "~을 방해하다"
+   },
+   {
+    "w": "recognizable",
+    "m": "알아볼 수 있는"
+   },
+   {
+    "w": "familiarity",
+    "m": "친숙함"
+   }
+  ]
  },
  {
   "key": "2026-06|36",
@@ -24851,7 +26339,49 @@
     }
    ],
    "echo": "'생존에 필수였던 신체활동'을 '한 세기 전에도 활동 필요'로 되풀이한 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "take an evolutionary look at",
+    "m": "~을 진화론적으로 보다"
+   },
+   {
+    "w": "physical activity",
+    "m": "신체 활동"
+   },
+   {
+    "w": "manual jobs",
+    "m": "육체 노동"
+   },
+   {
+    "w": "on foot",
+    "m": "걸어서"
+   },
+   {
+    "w": "domestic chores",
+    "m": "집안일"
+   },
+   {
+    "w": "mechanize",
+    "m": "기계화하다"
+   },
+   {
+    "w": "longevity",
+    "m": "장수, 수명"
+   },
+   {
+    "w": "be linked to",
+    "m": "~와 관련되다"
+   },
+   {
+    "w": "chronic diseases",
+    "m": "만성 질환"
+   },
+   {
+    "w": "risk factors",
+    "m": "위험 요인"
+   }
+  ]
  },
  {
   "key": "2023-06|39",
@@ -25183,7 +26713,45 @@
     }
    ],
    "echo": "'여럿이 떠나면 큰 도피 반응'을 '동시 이탈은 진짜 위협'으로 재진술한 것이 ③ 근거"
-  }
+  },
+  "vlist": [
+   {
+    "w": "information reliability",
+    "m": "정보의 신뢰성"
+   },
+   {
+    "w": "collective detection",
+    "m": "집단 탐지"
+   },
+   {
+    "w": "cue",
+    "m": "신호, 단서"
+   },
+   {
+    "w": "predator",
+    "m": "포식자"
+   },
+   {
+    "w": "seek shelter",
+    "m": "은신처를 찾다"
+   },
+   {
+    "w": "departure",
+    "m": "이탈, 떠남"
+   },
+   {
+    "w": "nonvigilant",
+    "m": "경계하지 않는"
+   },
+   {
+    "w": "false alarm",
+    "m": "거짓 경보"
+   },
+   {
+    "w": "escape response",
+    "m": "도피 반응"
+   }
+  ]
  },
  {
   "key": "2025-수능|22",
@@ -26482,31 +28050,36 @@
     "n": 1,
     "tx": "necessary … inequality",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치"
+    "jd": "✔ 지문 핵심과 일치",
+    "ko": "필요한 … 불평등"
    },
    {
     "n": 2,
     "tx": "necessary … growth",
     "verdict": "x",
-    "jd": "✘ (B) 'growth' 가 지문과 어긋남"
+    "jd": "✘ (B) 'growth' 가 지문과 어긋남",
+    "ko": "필요한 … 성장"
    },
    {
     "n": 3,
     "tx": "limited … consciousness",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "제한된 … 의식"
    },
    {
     "n": 4,
     "tx": "desirable … service",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "바람직한 … 봉사"
    },
    {
     "n": 5,
     "tx": "desirable … divide",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "바람직한 … 격차"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> necessary … inequality · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
@@ -26540,7 +28113,45 @@
     }
    ],
    "echo": "'움직일 필요 없음'→'필요(A)', '사회적 배제'→'불평등(B)'으로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "in transit",
+    "m": "이동 중인"
+   },
+   {
+    "w": "in spite of",
+    "m": "~에도 불구하고"
+   },
+   {
+    "w": "acceleration",
+    "m": "가속"
+   },
+   {
+    "w": "passive",
+    "m": "수동적인"
+   },
+   {
+    "w": "artefact",
+    "m": "인공물"
+   },
+   {
+    "w": "at rest",
+    "m": "정지 상태에 있는"
+   },
+   {
+    "w": "immobile",
+    "m": "움직이지 않는"
+   },
+   {
+    "w": "social exclusion",
+    "m": "사회적 배제"
+   },
+   {
+    "w": "locked out",
+    "m": "차단된, 배제된"
+   }
+  ]
  },
  {
   "key": "2026-09|40",
@@ -26776,31 +28387,36 @@
     "n": 1,
     "tx": "resurface … simplification",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "다시 등장하다 … 단순화"
    },
    {
     "n": 2,
     "tx": "endure … degradation",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "지속되다 … 질적 저하"
    },
    {
     "n": 3,
     "tx": "fade … variation",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "사라지다 … 변형"
    },
    {
     "n": 4,
     "tx": "feature … transformation",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치"
+    "jd": "✔ 지문 핵심과 일치",
+    "ko": "특징을 이루다 … 변모"
    },
    {
     "n": 5,
     "tx": "disappear … fossilization",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "사라지다 … 화석화"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> feature … transformation · <span class=\"xo\">①②③⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
@@ -26873,7 +28489,49 @@
     }
    ],
    "echo": "'재등장'을 '등장(A)', '상당히 변함'을 '변형(B)'으로 재진술한 것이 정답"
-  }
+  },
+  "vlist": [
+   {
+    "w": "be limited to",
+    "m": "~에 국한되다"
+   },
+   {
+    "w": "traits",
+    "m": "특성, 특징"
+   },
+   {
+    "w": "room for",
+    "m": "~의 여지"
+   },
+   {
+    "w": "reappear in",
+    "m": "~에 다시 나타나다"
+   },
+   {
+    "w": "genre fiction",
+    "m": "장르 소설"
+   },
+   {
+    "w": "pronounced",
+    "m": "뚜렷한"
+   },
+   {
+    "w": "serialize",
+    "m": "연재하다"
+   },
+   {
+    "w": "core traits",
+    "m": "핵심 특성"
+   },
+   {
+    "w": "successive",
+    "m": "연속되는, 잇따른"
+   },
+   {
+    "w": "undergo",
+    "m": "겪다"
+   }
+  ]
  },
  {
   "key": "2027-06|40",
@@ -27421,31 +29079,36 @@
     "n": 1,
     "tx": "persisted … cultivate",
     "verdict": "x",
-    "jd": "✘ (B) 'cultivate' 가 지문과 어긋남"
+    "jd": "✘ (B) 'cultivate' 가 지문과 어긋남",
+    "ko": "지속되어 왔다 … 계발하다, 기르다"
    },
    {
     "n": 2,
     "tx": "persisted … limit",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치"
+    "jd": "✔ 지문 핵심과 일치",
+    "ko": "지속되어 왔다 … 제한하다"
    },
    {
     "n": 3,
     "tx": "evolved … accelerate",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "진화했다 … 가속하다"
    },
    {
     "n": 4,
     "tx": "diminished … shape",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "쇠퇴했다 … 형성하다"
    },
    {
     "n": 5,
     "tx": "diminished … restrict",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "쇠퇴했다 … 제한하다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> persisted … limit · <span class=\"xo\">①③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
@@ -27480,7 +29143,45 @@
     }
    ],
    "echo": "'가로막음'을 '약화됨'으로 되풀이한 재진술 → 지속(A)·제한(B)이 정답"
-  }
+  },
+  "vlist": [
+   {
+    "w": "craftsmanship",
+    "m": "장인정신"
+   },
+   {
+    "w": "decline",
+    "m": "쇠퇴하다"
+   },
+   {
+    "w": "enduring",
+    "m": "지속되는"
+   },
+   {
+    "w": "for its own sake",
+    "m": "그 자체를 위해"
+   },
+   {
+    "w": "manual labor",
+    "m": "육체 노동"
+   },
+   {
+    "w": "objective standards",
+    "m": "객관적 기준"
+   },
+   {
+    "w": "stand in the way of",
+    "m": "~을 가로막다"
+   },
+   {
+    "w": "aspiration",
+    "m": "열망"
+   },
+   {
+    "w": "obsession",
+    "m": "집착"
+   }
+  ]
  },
  {
   "key": "2022-06|34",
@@ -27669,31 +29370,36 @@
     "n": 1,
     "tx": "variety and complexity characterize the robins’ songs",
     "verdict": "x",
-    "jd": "✘ 함정(large and complex repertoire) 재활용, 핵심 아님"
+    "jd": "✘ 함정(large and complex repertoire) 재활용, 핵심 아님",
+    "ko": "다양성과 복잡성이 유럽 울새의 노래를 특징짓는다"
    },
    {
     "n": 2,
     "tx": "song volume affects the robins’ aggressive behavior",
     "verdict": "x",
-    "jd": "✘ 없음(음량 언급 없음)"
+    "jd": "✘ 없음(음량 언급 없음)",
+    "ko": "노래 음량이 울새의 공격적 행동에 영향을 미친다"
    },
    {
     "n": 3,
     "tx": "the robins’ poor territorial sense is a key to survival",
     "verdict": "x",
-    "jd": "✘ 반대(영역 감각이 오히려 예리함)"
+    "jd": "✘ 반대(영역 감각이 오히려 예리함)",
+    "ko": "울새의 빈약한 영역 감각이 생존의 핵심이다"
    },
    {
     "n": 4,
     "tx": "the robins associate locality with familiar songs",
     "verdict": "ok",
-    "jd": "✔ 근거: 같은 노래도 장소 바뀌면 낯설게 반응 = 위치와 친숙한 노래 연관"
+    "jd": "✔ 근거: 같은 노래도 장소 바뀌면 낯설게 반응 = 위치와 친숙한 노래 연관",
+    "ko": "울새는 특정 장소를 친숙한 노래와 연관 짓는다"
    },
    {
     "n": 5,
     "tx": "the robins are less responsive to recorded songs",
     "verdict": "x",
-    "jd": "✘ 반대(녹음에 오히려 반응함)"
+    "jd": "✘ 반대(녹음에 오히려 반응함)",
+    "ko": "울새는 녹음된 노래에 덜 반응한다"
    }
   ],
   "opt_line": "<span class=\"xo\">①</span>노래의 다양성·복잡성이 특징 <span class=\"xo\">②</span>음량이 공격성에 영향 <span class=\"xo\">③</span>빈약한 영역 감각이 생존의 열쇠 · <span class=\"co\">④정답</span> 로빈은 위치와 친숙한 노래를 연관짓는다 <span class=\"xo\">⑤</span>녹음된 노래에 덜 반응",
@@ -27717,7 +29423,45 @@
    ],
    "echo": "실험은 경계 위치에 따른 반응 차이를 보일 뿐, 핵심을 되풀이한 재진술은 없다"
   },
-  "blank": true
+  "blank": true,
+  "vlist": [
+   {
+    "w": "investigate",
+    "m": "조사하다, 연구하다"
+   },
+   {
+    "w": "song repertoire",
+    "m": "노래 레퍼토리"
+   },
+   {
+    "w": "discriminate between",
+    "m": "~을 구별하다"
+   },
+   {
+    "w": "overlap",
+    "m": "겹치다"
+   },
+   {
+    "w": "aggressive response",
+    "m": "공격적 반응"
+   },
+   {
+    "w": "boundary",
+    "m": "경계"
+   },
+   {
+    "w": "territory",
+    "m": "영역, 세력권"
+   },
+   {
+    "w": "playback",
+    "m": "재생 음향"
+   },
+   {
+    "w": "loudspeaker",
+    "m": "확성기"
+   }
+  ]
  },
  {
   "key": "2022-수능|21",
@@ -27946,7 +29690,41 @@
     }
    ],
    "echo": "'통근 준비 판단'은 전문가를 신뢰해야 쓰는 즉시 실용 정보를 함축 = ②"
-  }
+  },
+  "vlist": [
+   {
+    "w": "have no special purchase on",
+    "m": "~에 특별한 발언권이 없다"
+   },
+   {
+    "w": "qualified to",
+    "m": "~할 자격이 있는"
+   },
+   {
+    "w": "colony collapse",
+    "m": "군집 붕괴"
+   },
+   {
+    "w": "expertise",
+    "m": "전문 지식"
+   },
+   {
+    "w": "lay people",
+    "m": "비전문가, 일반인"
+   },
+   {
+    "w": "designated experts",
+    "m": "지정된 전문가"
+   },
+   {
+    "w": "sort out",
+    "m": "해결하다, 정리하다"
+   },
+   {
+    "w": "paralyzed",
+    "m": "마비된"
+   }
+  ]
  },
  {
   "key": "2023-09|23",
@@ -28516,31 +30294,36 @@
     "n": 1,
     "tx": "Do We Judge <b>Independently</b>? The Effect of <b>Crowds</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "우리는 독립적으로 판단하는가? 군중의 영향"
    },
    {
     "n": 2,
     "tx": "Winning Strategy: How <b>Not to Be Fooled</b> by Others",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "승리 전략: 타인에게 속지 않는 법"
    },
    {
     "n": 3,
     "tx": "Do <span class=\"reuse\">Emergencies</span> Affect the Way of Our Thinking?",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "긴급 상황이 우리의 사고방식에 영향을 미치는가?"
    },
    {
     "n": 4,
     "tx": "Stepping Towards <b>Harmony with Your Neighbors</b>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "이웃과의 조화를 향해 나아가기"
    },
    {
     "n": 5,
     "tx": "Ways of <b>Helping Others</b> in <span class=\"reuse\">Emergent</span> Situations",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "긴급 상황에서 타인을 돕는 방법"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 독립적 판단? 군중의 영향 · <span class=\"xo\">②</span>안 속는 전략 <span class=\"xo\">③</span>비상이 사고 바꾸나 <span class=\"xo\">④</span>이웃과 조화 <span class=\"xo\">⑤</span>비상시 돕는 법",
@@ -28577,7 +30360,49 @@
     }
    ],
    "echo": "'군중이 무행동을 강요'가 독립적 판단 못함=군중의 영향을 재진술 = ①"
-  }
+  },
+  "vlist": [
+   {
+    "w": "tend to",
+    "m": "~하는 경향이 있다"
+   },
+   {
+    "w": "derive A from B",
+    "m": "B에서 A를 얻다"
+   },
+   {
+    "w": "sleep off a drunk",
+    "m": "자서 취기를 없애다"
+   },
+   {
+    "w": "lose one's cool",
+    "m": "침착함을 잃다, 흥분하다"
+   },
+   {
+    "w": "conformity",
+    "m": "동조, 순응"
+   },
+   {
+    "w": "nonchalance",
+    "m": "태연함, 무관심"
+   },
+   {
+    "w": "indifferent",
+    "m": "무관심한"
+   },
+   {
+    "w": "onlooker",
+    "m": "구경꾼, 방관자"
+   },
+   {
+    "w": "passivity",
+    "m": "수동성"
+   },
+   {
+    "w": "quarrel",
+    "m": "다툼, 말다툼"
+   }
+  ]
  },
  {
   "key": "2025-06|41",
@@ -29211,7 +31036,45 @@
     }
    ],
    "echo": "'서로 다른 먼 구석으로'가 각자 취향에 맞는 음악으로 이끎을 재진술 = ①"
-  }
+  },
+  "vlist": [
+   {
+    "w": "algorithm",
+    "m": "알고리즘"
+   },
+   {
+    "w": "be directed toward",
+    "m": "~로 이끌리다"
+   },
+   {
+    "w": "stuck in a rut",
+    "m": "틀에 박히다, 매너리즘에 빠지다"
+   },
+   {
+    "w": "over and over",
+    "m": "반복해서"
+   },
+   {
+    "w": "gem",
+    "m": "보석 같은 것"
+   },
+   {
+    "w": "convergence",
+    "m": "수렴"
+   },
+   {
+    "w": "divergence",
+    "m": "갈라짐, 차이"
+   },
+   {
+    "w": "nonlinear and chaotic",
+    "m": "비선형적이고 혼돈스러운"
+   },
+   {
+    "w": "suited to",
+    "m": "~에 적합한"
+   }
+  ]
  },
  {
   "key": "2025-09|23",
@@ -29420,31 +31283,36 @@
     "n": 1,
     "tx": "widespread preference for <b>mythical explanations</b> over scientific ones",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "과학적 설명보다 신화적 설명을 널리 선호함"
    },
    {
     "n": 2,
     "tx": "limitations of <b>Newtonian law</b> in explaining eclipse phenomena",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "일식 현상을 설명하는 데 있어 뉴턴 법칙의 한계"
    },
    {
     "n": 3,
     "tx": "influence of <b>scientific interpretations</b> on perceptions of reality",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "과학적 해석이 현실 인식에 미치는 영향"
    },
    {
     "n": 4,
     "tx": "need to <b>pose questions about the usual</b> to understand the <b>unusual</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "특이한 것을 이해하기 위해 일상적인 것에 대해 질문을 던질 필요성"
    },
    {
     "n": 5,
     "tx": "difficulty of drawing <b>general conclusions</b> from unusual phenomena",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "특이한 현상으로부터 일반적 결론을 이끌어내는 것의 어려움"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 평범한 질문으로 낯선 현상 이해 · <span class=\"xo\">①</span>신화 선호 <span class=\"xo\">②</span>뉴턴 한계 <span class=\"xo\">③</span>과학의 영향 <span class=\"xo\">⑤</span>일반화 곤란",
@@ -29481,7 +31349,49 @@
     }
    ],
    "echo": "'평범을 이해해야 낯선 것을 설명'이 ④ 평범한 질문으로 낯선 현상 이해를 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "be surprised by",
+    "m": "~에 놀라다"
+   },
+   {
+    "w": "eclipse",
+    "m": "일식, 월식"
+   },
+   {
+    "w": "falling bodies",
+    "m": "낙하하는 물체"
+   },
+   {
+    "w": "succession",
+    "m": "연속, 잇따름"
+   },
+   {
+    "w": "be accustomed to",
+    "m": "~에 익숙하다"
+   },
+   {
+    "w": "celestial bodies",
+    "m": "천체"
+   },
+   {
+    "w": "law of attraction",
+    "m": "인력의 법칙"
+   },
+   {
+    "w": "account for",
+    "m": "~을 설명하다"
+   },
+   {
+    "w": "a broad range of",
+    "m": "광범위한"
+   },
+   {
+    "w": "bizarre",
+    "m": "기이한"
+   }
+  ]
  },
  {
   "key": "2023-09|41",
@@ -30054,31 +31964,36 @@
     "n": 1,
     "tx": "<b>Make It New</b>: How <b>Poetry Refreshes Everyday Language</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "새롭게 하라: 시가 일상 언어를 어떻게 새롭게 하는가"
    },
    {
     "n": 2,
     "tx": "Why Do Poets No Longer Seek Inspiration from Nature?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "왜 시인들은 더 이상 자연에서 영감을 찾지 않는가?"
    },
    {
     "n": 3,
     "tx": "The Influence of Natural Sounds on Poetic Expression",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "자연의 소리가 시적 표현에 미치는 영향"
    },
    {
     "n": 4,
     "tx": "Ways to Cite Poetic Expressions in Everyday Speech",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "일상 언어에서 시적 표현을 인용하는 방법"
    },
    {
     "n": 5,
     "tx": "Beauty Rediscovered: The Return of Oral Poetry",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "재발견된 아름다움: 구전 시의 귀환"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 시가 일상 언어를 새롭게 되살림 · <span class=\"xo\">②</span>자연 영감 <span class=\"xo\">③</span>자연의 소리 <span class=\"xo\">④</span>시 표현 인용 <span class=\"xo\">⑤</span>구전시 부활",
@@ -30115,7 +32030,53 @@
     }
    ],
    "echo": "'같은 재료로 새 가능성'이 ① 일상 언어를 새롭게 함(Make It New)을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "literate society",
+    "m": "문자 사회"
+   },
+   {
+    "w": "oral poetry",
+    "m": "구전 시"
+   },
+   {
+    "w": "differ from",
+    "m": "~와 다르다"
+   },
+   {
+    "w": "rearrangement of word order",
+    "m": "어순 재배열"
+   },
+   {
+    "w": "alliteration",
+    "m": "두운"
+   },
+   {
+    "w": "compression of thought",
+    "m": "사고의 압축"
+   },
+   {
+    "w": "regard A as B",
+    "m": "A를 B로 여기다"
+   },
+   {
+    "w": "be deaf to",
+    "m": "~에 귀 기울이지 않다"
+   },
+   {
+    "w": "raw material",
+    "m": "원료, 소재"
+   },
+   {
+    "w": "become accustomed to",
+    "m": "~에 익숙해지다"
+   },
+   {
+    "w": "depart from",
+    "m": "~에서 벗어나다"
+   }
+  ]
  },
  {
   "key": "2024-09|21",
@@ -30370,7 +32331,45 @@
     }
    ],
    "echo": "'최선은 좋음의 적'이 자기증명용 품질 향상은 바람직X(②)를 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "gold plating",
+    "m": "과잉 개선, 도금(불필요한 덧붙임)"
+   },
+   {
+    "w": "needlessly",
+    "m": "불필요하게"
+   },
+   {
+    "w": "added value",
+    "m": "부가 가치"
+   },
+   {
+    "w": "with respect to",
+    "m": "~에 관하여"
+   },
+   {
+    "w": "professional autonomy",
+    "m": "직업적 자율성"
+   },
+   {
+    "w": "skill set",
+    "m": "기술 역량"
+   },
+   {
+    "w": "in good faith",
+    "m": "선의로"
+   },
+   {
+    "w": "gratify",
+    "m": "만족시키다"
+   },
+   {
+    "w": "the enemy of the good",
+    "m": "좋은 것의 적"
+   }
+  ]
  },
  {
   "key": "2025-수능|23",
@@ -30894,31 +32893,36 @@
     "n": 1,
     "tx": "The Power of <b>Simple Formulas</b> in <b>Decision Making</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "의사 결정에서 단순한 공식의 힘"
    },
    {
     "n": 2,
     "tx": "Always Prioritise: Tips for Managing <b>Big Data</b>",
     "verdict": "x",
-    "jd": "✘ 없음(빅데이터 미언급)"
+    "jd": "✘ 없음(빅데이터 미언급)",
+    "ko": "항상 우선순위를 정하라: 빅데이터 관리 요령"
    },
    {
     "n": 3,
     "tx": "Algorithms’ Mistakes: The <b>Myth of Simplicity</b>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "알고리즘의 실수: 단순함의 신화"
    },
    {
     "n": 4,
     "tx": "Be Prepared! Make a <b>Checklist</b> Just in Case",
     "verdict": "x",
-    "jd": "✘ 범위초과(부분소재)"
+    "jd": "✘ 범위초과(부분소재)",
+    "ko": "대비하라! 만일을 위해 체크리스트를 만들어라"
    },
    {
     "n": 5,
     "tx": "How <b>Human Judgement Beats Algorithms</b>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "인간의 판단이 알고리즘을 이기는 방법"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 의사결정에서 단순 공식의 힘 · <span class=\"xo\">②</span>빅데이터 관리 <span class=\"xo\">③</span>단순함의 허상 <span class=\"xo\">④</span>체크리스트만 <span class=\"xo\">⑤</span>인간이 능가",
@@ -30956,7 +32960,49 @@
     }
    ],
    "echo": "'단순 공식이 이긴다'가 의사결정 속 단순 공식의 힘(①)을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "outperform",
+    "m": "능가하다, 더 나은 성과를 내다"
+   },
+   {
+    "w": "expert judgement",
+    "m": "전문가의 판단"
+   },
+   {
+    "w": "released on parole",
+    "m": "가석방된"
+   },
+   {
+    "w": "go on to",
+    "m": "이어서 ~하다"
+   },
+   {
+    "w": "win out",
+    "m": "이기다, 승리하다"
+   },
+   {
+    "w": "salient",
+    "m": "두드러진, 현저한"
+   },
+   {
+    "w": "irrelevant",
+    "m": "무관한, 관련 없는"
+   },
+   {
+    "w": "intensive care",
+    "m": "집중 치료"
+   },
+   {
+    "w": "cost a life",
+    "m": "목숨을 앗아가다"
+   },
+   {
+    "w": "remarkably",
+    "m": "현저하게, 놀랍도록"
+   }
+  ]
  },
  {
   "key": "2025-수능|41",
@@ -31167,31 +33213,36 @@
     "n": 1,
     "tx": "<b>Anatomical Distance</b> Between Humans and Other Primates",
     "verdict": "x",
-    "jd": "✘ 범위초과(해부 차이만)"
+    "jd": "✘ 범위초과(해부 차이만)",
+    "ko": "인간과 다른 영장류 사이의 해부학적 거리"
    },
    {
     "n": 2,
     "tx": "Human Hands: A <b>Decisive Leap</b> in the <b>Evolutionary Path</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "인간의 손: 진화 경로에서의 결정적 도약"
    },
    {
     "n": 3,
     "tx": "Our Hands: An <b>Unexpected Outcome</b> of Evolution",
     "verdict": "x",
-    "jd": "✘ 정반대(우연 아님)"
+    "jd": "✘ 정반대(우연 아님)",
+    "ko": "우리의 손: 진화의 예상치 못한 결과"
    },
    {
     "n": 4,
     "tx": "Human Grip: The <b>Dilemma</b> of Human Survival",
     "verdict": "x",
-    "jd": "✘ 없음(딜레마 미언급)"
+    "jd": "✘ 없음(딜레마 미언급)",
+    "ko": "인간의 쥐기: 인간 생존의 딜레마"
    },
    {
     "n": 5,
     "tx": "Hidden Power of the <b>Daily Use of Tools</b>",
     "verdict": "x",
-    "jd": "✘ 표면어휘(도구는 부수)"
+    "jd": "✘ 표면어휘(도구는 부수)",
+    "ko": "도구의 일상적 사용에 숨겨진 힘"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 인간의 손: 진화의 결정적 도약 · <span class=\"xo\">①</span>해부 차이 <span class=\"xo\">③</span>우연한 결과 <span class=\"xo\">④</span>생존 딜레마 <span class=\"xo\">⑤</span>도구 사용의 힘",
@@ -31229,7 +33280,49 @@
     }
    ],
    "echo": "'손이 역사를 빚었다'가 진화의 결정적 도약(②)을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "precision grip",
+    "m": "정밀한 쥐기"
+   },
+   {
+    "w": "breakthrough",
+    "m": "획기적 발전, 돌파구"
+   },
+   {
+    "w": "primate",
+    "m": "영장류"
+   },
+   {
+    "w": "manipulate",
+    "m": "다루다, 조작하다"
+   },
+   {
+    "w": "anatomical",
+    "m": "해부학적인"
+   },
+   {
+    "w": "stone tool",
+    "m": "석기"
+   },
+   {
+    "w": "keystone",
+    "m": "핵심, 쐐기돌"
+   },
+   {
+    "w": "subsistence",
+    "m": "생계"
+   },
+   {
+    "w": "nervous system",
+    "m": "신경계"
+   },
+   {
+    "w": "coordinate",
+    "m": "조정하다"
+   }
+  ]
  },
  {
   "key": "2025-06|21",
@@ -31471,7 +33564,45 @@
     }
    ],
    "echo": "'덜 심각한 형태·최종 아님'이 더 심한 탈진 여지를 재진술 = ②"
-  }
+  },
+  "vlist": [
+   {
+    "w": "breadth / depth",
+    "m": "폭 / 깊이"
+   },
+   {
+    "w": "burned out",
+    "m": "탈진한"
+   },
+   {
+    "w": "spectrum",
+    "m": "스펙트럼, 연속체"
+   },
+   {
+    "w": "account for",
+    "m": "~을 설명하다"
+   },
+   {
+    "w": "black-and-white view",
+    "m": "흑백논리적 시각"
+   },
+   {
+    "w": "categorize",
+    "m": "분류하다"
+   },
+   {
+    "w": "competently",
+    "m": "유능하게"
+   },
+   {
+    "w": "debilitated",
+    "m": "쇠약해진"
+   },
+   {
+    "w": "partial",
+    "m": "부분적인"
+   }
+  ]
  },
  {
   "key": "2024-09|24",
@@ -31668,31 +33799,36 @@
     "n": 1,
     "tx": "Web-based Journalism: <b>Lasting Longer</b> and Contextually <b>Wider</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "웹 기반 저널리즘: 더 오래 지속되고 맥락적으로 더 넓어지다"
    },
    {
     "n": 2,
     "tx": "With the Latest Content, Online News Beats Daily <span class=\"reuse\">Newspapers</span>!",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "최신 콘텐츠로 온라인 뉴스가 일간 신문을 이기다!"
    },
    {
     "n": 3,
     "tx": "How Online Media Journalists Reveal Hidden Stories Behind News",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "온라인 미디어 기자들이 뉴스 이면의 숨겨진 이야기를 밝히는 방법"
    },
    {
     "n": 4,
     "tx": "Let’s Begin a Journey to the Past with Printed <span class=\"reuse\">Newspapers</span>!",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "인쇄된 신문과 함께 과거로의 여행을 시작하자!"
    },
    {
     "n": 5,
     "tx": "Present and Future of Journalism in the Web World",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "웹 세계에서 저널리즘의 현재와 미래"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 더 오래·맥락 넓게 · <span class=\"xo\">②</span>최신성 우위 <span class=\"xo\">③</span>숨은 기사 폭로 <span class=\"xo\">④</span>인쇄 과거로 <span class=\"xo\">⑤</span>웹 저널리즘 현재·미래",
@@ -31729,7 +33865,49 @@
     }
    ],
    "echo": "'수명 연장+더 큰 맥락'이 Lasting Longer·Contextually Wider로 재진술 = ①"
-  }
+  },
+  "vlist": [
+   {
+    "w": "archive",
+    "m": "기록 보관소, 자료실"
+   },
+   {
+    "w": "musty",
+    "m": "곰팡내 나는, 케케묵은"
+   },
+   {
+    "w": "by definition",
+    "m": "정의상, 당연히"
+   },
+   {
+    "w": "shelf life",
+    "m": "유효 기간, 수명"
+   },
+   {
+    "w": "cite",
+    "m": "인용하다"
+   },
+   {
+    "w": "with regard to",
+    "m": "~에 관하여"
+   },
+   {
+    "w": "departure",
+    "m": "벗어남, 일탈, 변화"
+   },
+   {
+    "w": "readiness",
+    "m": "준비된 상태, 기꺼이 함"
+   },
+   {
+    "w": "engage with",
+    "m": "~에 관여하다, 씨름하다"
+   },
+   {
+    "w": "emergent",
+    "m": "새로 생겨나는"
+   }
+  ]
  },
  {
   "key": "2024-06|41",
@@ -31945,31 +34123,36 @@
     "n": 1,
     "tx": "Fixed Pie: A Key to <b>Success</b> in a Zero-sum Game",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "고정된 파이: 제로섬 게임에서 성공의 열쇠"
    },
    {
     "n": 2,
     "tx": "Fixed Pie Tells You How to Get the Biggest <span class=\"reuse\">Salary</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "고정된 파이는 가장 많은 급여를 받는 법을 알려준다"
    },
    {
     "n": 3,
     "tx": "Negotiators, <b>Wake Up</b> from the <b>Myth</b> of the Fixed Pie!",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "협상가들이여, 고정된 파이의 신화에서 깨어나라!"
    },
    {
     "n": 4,
     "tx": "Want a Fairer <span class=\"reuse\">Jail Sentence</span>? Stick to the Fixed Pie",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "더 공정한 형량을 원하는가? 고정된 파이를 고수하라"
    },
    {
     "n": 5,
     "tx": "What Alternatives Maximize <b>Fixed-pie Effects</b>?",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "어떤 대안이 고정된 파이 효과를 극대화하는가?"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 고정 파이 신화서 깨어나라 · <span class=\"xo\">①</span>성공 열쇠 <span class=\"xo\">②</span>연봉 극대화 <span class=\"xo\">④</span>고정 파이 고수 <span class=\"xo\">⑤</span>효과 극대화",
@@ -32007,7 +34190,45 @@
     }
    ],
    "echo": "'신화적 오해서 벗어나라'가 Wake Up from the Myth로 재진술 = ③"
-  }
+  },
+  "vlist": [
+   {
+    "w": "fixed pie",
+    "m": "고정된 파이(한정된 이익)"
+   },
+   {
+    "w": "integrative negotiation",
+    "m": "통합적 협상"
+   },
+   {
+    "w": "zero-sum",
+    "m": "제로섬의"
+   },
+   {
+    "w": "mutually beneficial",
+    "m": "상호 이익이 되는"
+   },
+   {
+    "w": "trade-off",
+    "m": "절충, 상충 관계"
+   },
+   {
+    "w": "come under the influence of",
+    "m": "~의 영향을 받다"
+   },
+   {
+    "w": "time constraint",
+    "m": "시간 제약"
+   },
+   {
+    "w": "misperception",
+    "m": "오인, 잘못된 인식"
+   },
+   {
+    "w": "recidivism",
+    "m": "재범"
+   }
+  ]
  },
  {
   "key": "2026-06|41",
@@ -33352,31 +35573,36 @@
     "n": 1,
     "tx": "<b>Which Channel Is What Matters</b> in Successful Communication",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "성공적인 소통에서 중요한 것은 어떤 채널인가이다"
    },
    {
     "n": 2,
     "tx": "<b>Cutting-edge Containers</b> for Effective Social Communication",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "효과적인 사회적 소통을 위한 최첨단 그릇"
    },
    {
     "n": 3,
     "tx": "<b>Immediate Feedback</b>: A Royal Road to Successful Management",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "즉각적 피드백: 성공적인 관리로 가는 지름길"
    },
    {
     "n": 4,
     "tx": "How Has <b>Social Presence Evolved</b> with Social Channels?",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "사회적 실재감은 소셜 채널과 함께 어떻게 진화해 왔는가?"
    },
    {
     "n": 5,
     "tx": "<b>The Richer, the Better!</b> Top Priority in Container Choice",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "풍부할수록 좋다! 그릇 선택의 최우선 사항"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 어떤 채널이냐가 관건 · <span class=\"xo\">②</span>최첨단 그릇 <span class=\"xo\">③</span>즉각 피드백 <span class=\"xo\">④</span>사회적 실재 진화? <span class=\"xo\">⑤</span>풍부할수록 최고",
@@ -33413,7 +35639,45 @@
     }
    ],
    "echo": "'올바른 그릇(채널) 선택'이 성공 소통의 핵심 → ①"
-  }
+  },
+  "vlist": [
+   {
+    "w": "social presence",
+    "m": "사회적 실재감"
+   },
+   {
+    "w": "the extent to which",
+    "m": "~하는 정도"
+   },
+   {
+    "w": "cue",
+    "m": "단서, 신호"
+   },
+   {
+    "w": "convey",
+    "m": "전달하다"
+   },
+   {
+    "w": "immediate feedback",
+    "m": "즉각적인 피드백"
+   },
+   {
+    "w": "replicate",
+    "m": "복제하다, 재현하다"
+   },
+   {
+    "w": "gold standard",
+    "m": "최고 기준"
+   },
+   {
+    "w": "ambiguous",
+    "m": "모호한"
+   },
+   {
+    "w": "generic",
+    "m": "일반적인, 포괄적인"
+   }
+  ]
  },
  {
   "key": "2022-수능|22",
@@ -33677,7 +35941,45 @@
     }
    ],
    "echo": "'개인이 피할 수 없어 사회적 대응 필요'가 ①을 그대로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "along with",
+    "m": "~와 함께"
+   },
+   {
+    "w": "contaminant",
+    "m": "오염 물질"
+   },
+   {
+    "w": "involuntary",
+    "m": "비자발적인, 본의 아닌"
+   },
+   {
+    "w": "elimination",
+    "m": "제거"
+   },
+   {
+    "w": "public awareness",
+    "m": "대중의 인식"
+   },
+   {
+    "w": "egregious",
+    "m": "극악한, 매우 나쁜"
+   },
+   {
+    "w": "contaminated",
+    "m": "오염된"
+   },
+   {
+    "w": "outrage",
+    "m": "분노하게 하다"
+   },
+   {
+    "w": "exposure",
+    "m": "노출"
+   }
+  ]
  },
  {
   "key": "2022-수능|41",
@@ -34227,31 +36529,36 @@
     "n": 1,
     "tx": "The Troubling <b>Relationship</b> Between Scientists and the Media",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "과학자와 언론 사이의 골치 아픈 관계"
    },
    {
     "n": 2,
     "tx": "A Scientist’s <b>Choice</b>: To Be Exposed to the Media or <b>Not</b>?",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "과학자의 선택: 언론에 노출될 것인가 말 것인가?"
    },
    {
     "n": 3,
     "tx": "Scientists! Be <b>Cautious</b> When Talking to the Media",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "과학자들이여! 언론과 이야기할 때 신중하라"
    },
    {
     "n": 4,
     "tx": "The Dilemma over Scientific <b>Truth</b> and Media Attention",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "과학적 진실과 언론의 관심 사이의 딜레마"
    },
    {
     "n": 5,
     "tx": "Who Are Responsible for <b>Climate</b> Issues, Scientists or the Media?",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "기후 문제에 책임이 있는 것은 누구인가, 과학자인가 언론인가?"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 언론 노출 여부는 개인의 선택 · <span class=\"xo\">①</span>양자 갈등 관계 <span class=\"xo\">③</span>주의 당부 <span class=\"xo\">④</span>진실vs관심 딜레마 <span class=\"xo\">⑤</span>기후 책임 주체",
@@ -34288,7 +36595,45 @@
     }
    ],
    "echo": "'개인마다 다른 결정'이 ②의 A Scientist’s Choice를 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "contribute to",
+    "m": "~에 일조하다, 기여하다"
+   },
+   {
+    "w": "run the risk of",
+    "m": "~의 위험을 무릅쓰다"
+   },
+   {
+    "w": "speak out",
+    "m": "소신 있게 말하다"
+   },
+   {
+    "w": "get a message out",
+    "m": "메시지를 전하다"
+   },
+   {
+    "w": "misinterpretation",
+    "m": "오해, 잘못된 해석"
+   },
+   {
+    "w": "entanglement",
+    "m": "얽힘, 연루"
+   },
+   {
+    "w": "never-ending",
+    "m": "끝없는"
+   },
+   {
+    "w": "misquote",
+    "m": "잘못 인용하다"
+   },
+   {
+    "w": "controversy",
+    "m": "논란"
+   }
+  ]
  },
  {
   "key": "2027-06|41",
@@ -34870,7 +37215,45 @@
    ],
    "irrelevant": 4
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "kinship ties",
+    "m": "친족 관계, 혈연 유대"
+   },
+   {
+    "w": "get-together",
+    "m": "모임, 친목 모임"
+   },
+   {
+    "w": "kin",
+    "m": "친척, 친족"
+   },
+   {
+    "w": "extended family",
+    "m": "확대가족"
+   },
+   {
+    "w": "rest on",
+    "m": "~에 기반을 두다"
+   },
+   {
+    "w": "co-residence",
+    "m": "동거, 함께 거주"
+   },
+   {
+    "w": "geographical proximity",
+    "m": "지리적 근접성"
+   },
+   {
+    "w": "in contrast to",
+    "m": "~와 대조적으로"
+   },
+   {
+    "w": "occupational advancement",
+    "m": "직업적 발전, 승진"
+   }
+  ]
  },
  {
   "key": "2023-06|35",
@@ -35418,7 +37801,49 @@
    ],
    "irrelevant": 3
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "suffer",
+    "m": "고통받다, 어려움을 겪다"
+   },
+   {
+    "w": "domain",
+    "m": "영역, 분야"
+   },
+   {
+    "w": "component skill",
+    "m": "구성 기술, 하위 기술"
+   },
+   {
+    "w": "automated",
+    "m": "자동화된"
+   },
+   {
+    "w": "cognitive resources",
+    "m": "인지 자원"
+   },
+   {
+    "w": "cognitive load",
+    "m": "인지 부하"
+   },
+   {
+    "w": "fluency",
+    "m": "유창함, 능숙함"
+   },
+   {
+    "w": "on the other hand",
+    "m": "반면에"
+   },
+   {
+    "w": "struggle to",
+    "m": "~하려고 애쓰다, 힘겨워하다"
+   },
+   {
+    "w": "with relative ease",
+    "m": "비교적 쉽게"
+   }
+  ]
  },
  {
   "key": "2025-수능|35",
@@ -35668,7 +38093,49 @@
    ],
    "irrelevant": 4
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "sports tourism",
+    "m": "스포츠 관광"
+   },
+   {
+    "w": "revolutionize",
+    "m": "혁명을 일으키다, 대변혁하다"
+   },
+   {
+    "w": "no less an impact",
+    "m": "못지않은 영향"
+   },
+   {
+    "w": "considerable coverage",
+    "m": "상당한 보도/주목"
+   },
+   {
+    "w": "a mass form of transport",
+    "m": "대중 교통수단"
+   },
+   {
+    "w": "apart from",
+    "m": "~외에도, ~을 제외하고"
+   },
+   {
+    "w": "afford access to",
+    "m": "~에 접근을 가능하게 하다"
+   },
+   {
+    "w": "facilitate",
+    "m": "촉진하다, 용이하게 하다"
+   },
+   {
+    "w": "invaluable",
+    "m": "매우 귀중한"
+   },
+   {
+    "w": "remote location",
+    "m": "외딴 지역"
+   }
+  ]
  },
  {
   "key": "2026-09|35",
@@ -36218,7 +38685,41 @@
    ],
    "irrelevant": 4
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "information system",
+    "m": "정보 시스템"
+   },
+   {
+    "w": "integration of value chains",
+    "m": "가치사슬의 통합"
+   },
+   {
+    "w": "business unit",
+    "m": "사업 단위"
+   },
+   {
+    "w": "take into account",
+    "m": "고려하다"
+   },
+   {
+    "w": "sustainable",
+    "m": "지속 가능한"
+   },
+   {
+    "w": "ecosystem",
+    "m": "생태계"
+   },
+   {
+    "w": "crucial",
+    "m": "결정적인, 중요한"
+   },
+   {
+    "w": "cooperation",
+    "m": "협력"
+   }
+  ]
  },
  {
   "key": "2023-수능|35",
@@ -37066,7 +39567,45 @@
    ],
    "irrelevant": 4
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "glacier",
+    "m": "빙하"
+   },
+   {
+    "w": "accumulate",
+    "m": "축적되다, 쌓이다"
+   },
+   {
+    "w": "offset",
+    "m": "상쇄하다"
+   },
+   {
+    "w": "expand or contract",
+    "m": "팽창하거나 수축하다"
+   },
+   {
+    "w": "climatic conditions",
+    "m": "기후 조건"
+   },
+   {
+    "w": "accelerate",
+    "m": "가속화되다"
+   },
+   {
+    "w": "document",
+    "m": "기록하다, 입증하다"
+   },
+   {
+    "w": "satellite image",
+    "m": "위성 사진"
+   },
+   {
+    "w": "warming trend",
+    "m": "온난화 추세"
+   }
+  ]
  },
  {
   "key": "2027-06|35",
@@ -37326,7 +39865,45 @@
    ],
    "irrelevant": 4
   },
-  "num": 35
+  "num": 35,
+  "vlist": [
+   {
+    "w": "do damage to",
+    "m": "~에 손상을 입히다"
+   },
+   {
+    "w": "innocuous",
+    "m": "무해한, 별 탈 없는"
+   },
+   {
+    "w": "fall over",
+    "m": "넘어지다"
+   },
+   {
+    "w": "sustain (injuries)",
+    "m": "(부상을) 입다"
+   },
+   {
+    "w": "in comparison to",
+    "m": "~에 비해"
+   },
+   {
+    "w": "build up",
+    "m": "축적하다, 쌓다"
+   },
+   {
+    "w": "compound",
+    "m": "악화시키다, 가중시키다"
+   },
+   {
+    "w": "compensate for",
+    "m": "~을 보상하다, 상쇄하다"
+   },
+   {
+    "w": "fall-related",
+    "m": "낙상과 관련된"
+   }
+  ]
  },
  {
   "key": "2022-06|40",
@@ -38858,31 +41435,36 @@
     "n": 1,
     "tx": "represents … finite",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치"
+    "jd": "✔ 지문 핵심과 일치",
+    "ko": "나타낸다 … 유한한"
    },
    {
     "n": 2,
     "tx": "symbolizes … universal",
     "verdict": "x",
-    "jd": "✘ (B) 'universal'이 지문과 어긋남"
+    "jd": "✘ (B) 'universal'이 지문과 어긋남",
+    "ko": "상징한다 … 보편적인"
    },
    {
     "n": 3,
     "tx": "distorts … fixed",
     "verdict": "x",
-    "jd": "✘ (A) 'distorts'가 지문과 어긋남"
+    "jd": "✘ (A) 'distorts'가 지문과 어긋남",
+    "ko": "왜곡한다 … 고정된"
    },
    {
     "n": 4,
     "tx": "expresses … novel",
     "verdict": "x",
-    "jd": "✘ (B) 'novel'이 지문과 어긋남"
+    "jd": "✘ (B) 'novel'이 지문과 어긋남",
+    "ko": "표현한다 … 새로운"
    },
    {
     "n": 5,
     "tx": "records … complex",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남"
+    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "ko": "기록한다 … 복잡한"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> represents … finite · <span class=\"xo\">②③④⑤</span> (A)/(B) 중 한쪽이 지문과 어긋남",
@@ -38917,7 +41499,45 @@
    ],
    "echo": "'한 신호로 한 메시지'→'represents(A)', '제한된 수의 소리'→'finite(B)'로 재진술 = 정답 <b>①</b>"
   },
-  "num": 40
+  "num": 40,
+  "vlist": [
+   {
+    "w": "cries",
+    "m": "울음소리"
+   },
+   {
+    "w": "distinction",
+    "m": "구별, 차이"
+   },
+   {
+    "w": "general principle",
+    "m": "일반 원리"
+   },
+   {
+    "w": "restricted",
+    "m": "제한된"
+   },
+   {
+    "w": "distinctive",
+    "m": "구별되는, 독특한"
+   },
+   {
+    "w": "combine into",
+    "m": "~로 결합하다"
+   },
+   {
+    "w": "infinitely superior",
+    "m": "무한히 우수한"
+   },
+   {
+    "w": "utilize",
+    "m": "활용하다"
+   },
+   {
+    "w": "unlimited",
+    "m": "무제한의"
+   }
+  ]
  },
  {
   "key": "2025-수능|40",
@@ -39654,31 +42274,36 @@
     "n": 1,
     "tx": "limit",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "제한하다"
    },
    {
     "n": 2,
     "tx": "persuading",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "설득하는 것"
    },
    {
     "n": 3,
     "tx": "alternative",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "대안의"
    },
    {
     "n": 4,
     "tx": "accommodating",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>관리·억제(managing)</b>여야 하는데 반대 낱말"
+    "jd": "✔ 문맥상 <b>관리·억제(managing)</b>여야 하는데 반대 낱말",
+    "ko": "수용하는 것"
    },
    {
     "n": 5,
     "tx": "reinforces",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "강화하다"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> accommodating→managing(억제) · <span class=\"xo\">①</span>limit <span class=\"xo\">②</span>persuading <span class=\"xo\">③</span>alternative <span class=\"xo\">⑤</span>reinforces",
@@ -39717,7 +42342,41 @@
    "wrong_word": "accommodating",
    "should_be": "managing/curbing (관리·억제하다)"
   },
-  "num": 30
+  "num": 30,
+  "vlist": [
+   {
+    "w": "acquiesce to",
+    "m": "~을 묵인하다, 따르다"
+   },
+   {
+    "w": "accommodate",
+    "m": "수용하다"
+   },
+   {
+    "w": "motorization",
+    "m": "자동차화"
+   },
+   {
+    "w": "physical constraints",
+    "m": "물리적 제약"
+   },
+   {
+    "w": "densely inhabited",
+    "m": "인구가 밀집한"
+   },
+   {
+    "w": "livability",
+    "m": "거주 적합성"
+   },
+   {
+    "w": "alternative options",
+    "m": "대안적 선택지"
+   },
+   {
+    "w": "reinforce",
+    "m": "강화하다"
+   }
+  ]
  },
  {
   "key": "2023-수능|30",
@@ -39905,31 +42564,36 @@
     "n": 1,
     "tx": "remote",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "멀리 떨어진, 동떨어진"
    },
    {
     "n": 2,
     "tx": "absorption",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "흡수, 받아들임"
    },
    {
     "n": 3,
     "tx": "affected",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "영향을 미쳤다"
    },
    {
     "n": 4,
     "tx": "adapt",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "적응하다"
    },
    {
     "n": 5,
     "tx": "maintain",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>지연(delay)</b>이어야 하는데 반대 낱말"
+    "jd": "✔ 문맥상 <b>지연(delay)</b>이어야 하는데 반대 낱말",
+    "ko": "유지하다"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> maintain→delay(지연) · <span class=\"xo\">①</span>remote <span class=\"xo\">②</span>absorption <span class=\"xo\">③</span>affected <span class=\"xo\">④</span>adapt",
@@ -39968,7 +42632,45 @@
    "wrong_word": "maintain",
    "should_be": "delay/postpone (지연시키다)"
   },
-  "num": 30
+  "num": 30,
+  "vlist": [
+   {
+    "w": "hype",
+    "m": "과대 선전"
+   },
+   {
+    "w": "otherworld",
+    "m": "다른 세계"
+   },
+   {
+    "w": "the Industrial Revolution",
+    "m": "산업혁명"
+   },
+   {
+    "w": "on the contrary",
+    "m": "반대로"
+   },
+   {
+    "w": "absorption",
+    "m": "흡수"
+   },
+   {
+    "w": "profoundly",
+    "m": "깊이, 심오하게"
+   },
+   {
+    "w": "fusion",
+    "m": "융합"
+   },
+   {
+    "w": "hallmark",
+    "m": "특징, 상징"
+   },
+   {
+    "w": "aspire to",
+    "m": "~을 열망하다"
+   }
+  ]
  },
  {
   "key": "2024-09|30",
@@ -41006,31 +43708,36 @@
     "n": 1,
     "tx": "remove",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "제거하다"
    },
    {
     "n": 2,
     "tx": "permanently",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "영구적으로"
    },
    {
     "n": 3,
     "tx": "create",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "만들다"
    },
    {
     "n": 4,
     "tx": "modesty",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "겸손함"
    },
    {
     "n": 5,
     "tx": "insignificant",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>중요한(significant)</b>이어야 하는데 반대 낱말"
+    "jd": "✔ 문맥상 <b>중요한(significant)</b>이어야 하는데 반대 낱말",
+    "ko": "중요하지 않은"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> insignificant→significant(중요) · <span class=\"xo\">①</span>remove <span class=\"xo\">②</span>permanently <span class=\"xo\">③</span>create <span class=\"xo\">④</span>modesty",
@@ -41069,7 +43776,49 @@
    "wrong_word": "insignificant",
    "should_be": "significant/important (중요한)"
   },
-  "num": 30
+  "num": 30,
+  "vlist": [
+   {
+    "w": "soft-path engineering",
+    "m": "연성 방식 공법"
+   },
+   {
+    "w": "liken A to B",
+    "m": "A를 B에 비유하다"
+   },
+   {
+    "w": "redirect",
+    "m": "방향을 바꾸다, 우회시키다"
+   },
+   {
+    "w": "interventionist",
+    "m": "개입주의적인"
+   },
+   {
+    "w": "restore",
+    "m": "복원하다"
+   },
+   {
+    "w": "pave",
+    "m": "포장하다"
+   },
+   {
+    "w": "bulldoze through",
+    "m": "밀어붙여 관통하다"
+   },
+   {
+    "w": "topography",
+    "m": "지형"
+   },
+   {
+    "w": "with respect to",
+    "m": "~에 관하여"
+   },
+   {
+    "w": "variability",
+    "m": "가변성"
+   }
+  ]
  },
  {
   "key": "2022-수능|30",
@@ -41993,31 +44742,36 @@
     "n": 1,
     "tx": "restrictions",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "제약"
    },
    {
     "n": 2,
     "tx": "assess",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "평가하다"
    },
    {
     "n": 3,
     "tx": "necessity",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "필수품"
    },
    {
     "n": 4,
     "tx": "low",
     "verdict": "ok",
-    "jd": "✔ 문맥상 high(높은) 뜻이어야 하는데 반대 낱말(low)"
+    "jd": "✔ 문맥상 high(높은) 뜻이어야 하는데 반대 낱말(low)",
+    "ko": "낮은"
    },
    {
     "n": 5,
     "tx": "similar",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "비슷한"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> low→high · <span class=\"xo\">①</span>restrictions <span class=\"xo\">②</span>assess <span class=\"xo\">③</span>necessity <span class=\"xo\">⑤</span>similar",
@@ -42052,7 +44806,45 @@
    ],
    "echo": "필수품이 아니어서 high 가격을 못 받는 흐름 → ④low는 high여야 = 정답 ④"
   },
-  "num": 30
+  "num": 30,
+  "vlist": [
+   {
+    "w": "bazaar economy",
+    "m": "시장(바자) 경제"
+   },
+   {
+    "w": "price-setting mechanism",
+    "m": "가격 설정 기제"
+   },
+   {
+    "w": "sit atop",
+    "m": "~위에 놓이다"
+   },
+   {
+    "w": "enduring ties",
+    "m": "지속적인 유대"
+   },
+   {
+    "w": "be aware of",
+    "m": "~을 알고 있다"
+   },
+   {
+    "w": "financial constraints",
+    "m": "재정적 제약"
+   },
+   {
+    "w": "to a large extent",
+    "m": "상당 부분, 크게"
+   },
+   {
+    "w": "necessity",
+    "m": "필수품, 필요"
+   },
+   {
+    "w": "price consensus",
+    "m": "가격 합의"
+   }
+  ]
  },
  {
   "key": "2025-09|30",
@@ -42213,31 +45005,36 @@
     "n": 1,
     "tx": "informed",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "정보에 근거한"
    },
    {
     "n": 2,
     "tx": "easier",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "더 쉬운"
    },
    {
     "n": 3,
     "tx": "acceptance",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "수용, 받아들임"
    },
    {
     "n": 4,
     "tx": "less",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음"
+    "jd": "✘ 문맥에 맞음",
+    "ko": "덜 ~한"
    },
    {
     "n": 5,
     "tx": "rationality",
     "verdict": "ok",
-    "jd": "✔ 문맥상 irrationality(비합리성) 뜻이어야 하는데 반대 낱말(rationality)"
+    "jd": "✔ 문맥상 irrationality(비합리성) 뜻이어야 하는데 반대 낱말(rationality)",
+    "ko": "합리성"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> rationality→irrationality · <span class=\"xo\">①</span>informed <span class=\"xo\">②</span>easier <span class=\"xo\">③</span>acceptance <span class=\"xo\">④</span>less",
@@ -42272,7 +45069,49 @@
    ],
    "echo": "정신의 비합리성을 논하는 흐름 → ⑤rationality는 irrationality여야 = 정답 ⑤"
   },
-  "num": 30
+  "num": 30,
+  "vlist": [
+   {
+    "w": "rational actor",
+    "m": "합리적 행위자"
+   },
+   {
+    "w": "sound judgment",
+    "m": "건전한 판단"
+   },
+   {
+    "w": "informed decision",
+    "m": "정보에 근거한 결정"
+   },
+   {
+    "w": "reflexive",
+    "m": "반사적인"
+   },
+   {
+    "w": "conserve",
+    "m": "아끼다, 보존하다"
+   },
+   {
+    "w": "snap judgment",
+    "m": "성급한 판단"
+   },
+   {
+    "w": "bias",
+    "m": "편향"
+   },
+   {
+    "w": "inhibit",
+    "m": "억제하다"
+   },
+   {
+    "w": "deliberative",
+    "m": "심사숙고하는"
+   },
+   {
+    "w": "fallacious reasoning",
+    "m": "잘못된 추론"
+   }
+  ]
  },
  {
   "key": "2026-06|30",
@@ -42968,31 +45807,36 @@
     "n": 1,
     "tx": "competitive",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "경쟁적인"
    },
    {
     "n": 2,
     "tx": "novel",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "새로운, 참신한"
    },
    {
     "n": 3,
     "tx": "secondary",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "부차적인, 이차적인"
    },
    {
     "n": 4,
     "tx": "reliable",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "신뢰할 수 있는"
    },
    {
     "n": 5,
     "tx": "unconditional",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "무조건적인"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 수집이 지위를 잃어 '부차적' 위상 · <span class=\"xo\">①</span>경쟁적(없음) <span class=\"xo\">②</span>새로운(정반대) <span class=\"xo\">④</span>신뢰할 만한(없음) <span class=\"xo\">⑤</span>무조건적(없음)",
@@ -43027,7 +45871,41 @@
    ],
    "echo": "정답은 '지위 상실·더 이상 첨단 아님'을 '부차적(secondary)'으로 재진술"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "worthy of keeping",
+    "m": "보관할 가치가 있는"
+   },
+   {
+    "w": "go into decline",
+    "m": "쇠퇴하다"
+   },
+   {
+    "w": "intellectual pursuit",
+    "m": "지적 탐구"
+   },
+   {
+    "w": "cutting-edge",
+    "m": "최첨단의"
+   },
+   {
+    "w": "invisible to the naked eye",
+    "m": "육안으로 안 보이는"
+   },
+   {
+    "w": "classification",
+    "m": "분류"
+   },
+   {
+    "w": "discipline",
+    "m": "학문 분야"
+   },
+   {
+    "w": "status",
+    "m": "지위"
+   }
+  ]
  },
  {
   "key": "2023-06|32",
@@ -43204,31 +46082,36 @@
     "n": 1,
     "tx": "putting himself or herself both inside and outside it",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "자신을 그것의 안과 밖에 동시에 두면서"
    },
    {
     "n": 2,
     "tx": "finding a middle ground between it and the world",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그것과 세계 사이에서 중간 지점을 찾으면서"
    },
    {
     "n": 3,
     "tx": "searching for <span class=\"reuse\">historical</span> realities revealed within it",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "그 안에 드러난 역사적 실재를 찾으면서"
    },
    {
     "n": 4,
     "tx": "looking inside it, not outside it or beyond it",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "그것의 밖이나 너머가 아니라 안을 들여다보면서"
    },
    {
     "n": 5,
     "tx": "exploring its <span class=\"reuse\">characters’</span> cultural relevance",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "그 등장인물들의 문화적 관련성을 탐구하면서"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 텍스트 내부만 보고 외부·너머는 안 봄 · <span class=\"xo\">①</span>내부·외부 모두(범위초과) <span class=\"xo\">②</span>세계와의 중간(정반대) <span class=\"xo\">③</span>역사적 실재(표면어) <span class=\"xo\">⑤</span>문화적 관련성(표면어)",
@@ -43266,7 +46149,41 @@
    ],
    "echo": "정답은 '자족적 실체·내부 정보'를 '내부를 보고 외부·너머는 보지 않음'으로 재진술"
   },
-  "num": 32
+  "num": 32,
+  "vlist": [
+   {
+    "w": "formalist perspective",
+    "m": "형식주의적 관점"
+   },
+   {
+    "w": "close reader",
+    "m": "꼼꼼히 읽는 사람"
+   },
+   {
+    "w": "autonomy",
+    "m": "자율성"
+   },
+   {
+    "w": "self-contained entity",
+    "m": "자족적 실체"
+   },
+   {
+    "w": "governing principle",
+    "m": "지배 원리"
+   },
+   {
+    "w": "correspondence",
+    "m": "상응, 대응 관계"
+   },
+   {
+    "w": "relevant to",
+    "m": "~와 관련 있는"
+   },
+   {
+    "w": "reveal",
+    "m": "드러내다"
+   }
+  ]
  },
  {
   "key": "2023-수능|33",
@@ -44001,31 +46918,36 @@
     "n": 1,
     "tx": "warmed",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "따뜻해진"
    },
    {
     "n": 2,
     "tx": "trapped",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "갇힌"
    },
    {
     "n": 3,
     "tx": "targeted",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "표적이 된"
    },
    {
     "n": 4,
     "tx": "protected",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "보호받는"
    },
    {
     "n": 5,
     "tx": "rejected",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "거부당한"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 나방은 빛에 '갇혀' 벗어나지 못함 · <span class=\"xo\">①</span>따뜻해짐(없음) <span class=\"xo\">③</span>표적됨(없음) <span class=\"xo\">④</span>보호됨(정반대) <span class=\"xo\">⑤</span>거부됨(없음)",
@@ -44060,7 +46982,49 @@
    ],
    "echo": "정답은 '정지 패턴·벗어나려 애씀'을 '갇힘(trapped)'으로 재진술"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "be attracted to",
+    "m": "~에 이끌리다"
+   },
+   {
+    "w": "consensus",
+    "m": "합의, 일치된 의견"
+   },
+   {
+    "w": "not so much A as B",
+    "m": "A라기보다는 B"
+   },
+   {
+    "w": "sensory overload",
+    "m": "감각 과부하"
+   },
+   {
+    "w": "disorient",
+    "m": "방향 감각을 잃게 하다"
+   },
+   {
+    "w": "holding pattern",
+    "m": "선회 대기 상태"
+   },
+   {
+    "w": "hypothesis",
+    "m": "가설"
+   },
+   {
+    "w": "head for",
+    "m": "~로 향하다"
+   },
+   {
+    "w": "diffuse",
+    "m": "분산된, 흐릿한"
+   },
+   {
+    "w": "be familiar with",
+    "m": "~에 익숙하다"
+   }
+  ]
  },
  {
   "key": "2026-06|34",
@@ -45096,31 +48060,36 @@
     "n": 1,
     "tx": "human beings must participate",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "인간이 반드시 참여해야 한다"
    },
    {
     "n": 2,
     "tx": "objectivity should be maintained",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "객관성이 유지되어야 한다"
    },
    {
     "n": 3,
     "tx": "science and art need to harmonize",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "과학과 예술이 조화를 이루어야 한다"
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">readers</span> remain distanced from the arts",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "독자가 예술로부터 거리를 둔 채로 있다"
    },
    {
     "n": 5,
     "tx": "she is disengaged from her own <span class=\"reuse\">subjectivity</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그녀가 자신의 주관성에서 벗어나 있다"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 인간(관찰자)이 참여해야 · <span class=\"xo\">②</span>객관성 유지(정반대) <span class=\"xo\">③</span>과학·예술의 조화(범위초과) <span class=\"xo\">④</span>독자가 거리 둠(정반대) <span class=\"xo\">⑤</span>자기 주관과 분리(정반대)",
@@ -45158,7 +48127,45 @@
    ],
    "echo": "정답은 '관찰자 의존'을 '인간이 참여해야'로 재진술(①)"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "be stripped of",
+    "m": "~이 제거되다, 벗겨지다"
+   },
+   {
+    "w": "rely on",
+    "m": "~에 의존하다"
+   },
+   {
+    "w": "on the other hand",
+    "m": "반면에"
+   },
+   {
+    "w": "quantify",
+    "m": "수량화하다"
+   },
+   {
+    "w": "subjectivity",
+    "m": "주관성"
+   },
+   {
+    "w": "objectivity",
+    "m": "객관성"
+   },
+   {
+    "w": "independent of",
+    "m": "~와 무관한"
+   },
+   {
+    "w": "envision",
+    "m": "마음속에 그리다"
+   },
+   {
+    "w": "effect (a marriage)",
+    "m": "(결합을) 이루어 내다"
+   }
+  ]
  },
  {
   "key": "2025-06|31",
@@ -45614,31 +48621,36 @@
     "n": 1,
     "tx": "personal involvement",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "개인적 몰입"
    },
    {
     "n": 2,
     "tx": "alternative perspective",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "대안적 관점"
    },
    {
     "n": 3,
     "tx": "literary sensibility",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "문학적 감수성"
    },
    {
     "n": 4,
     "tx": "artistic imagination",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "예술적 상상력"
    },
    {
     "n": 5,
     "tx": "linguistic insight",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "언어적 통찰"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 개인적 몰입(전인적 관여) · <span class=\"xo\">②</span>대안적 관점(없음) <span class=\"xo\">③</span>문학적 감수성(범위초과) <span class=\"xo\">④</span>예술적 상상력(범위초과) <span class=\"xo\">⑤</span>언어적 통찰(정반대: 단어 의미는 덜 중요)",
@@ -45673,7 +48685,45 @@
    ],
    "echo": "정답은 '전인을 끌어들임·상상적 관여'를 'personal involvement'로 재진술(①)"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "foster",
+    "m": "기르다, 함양하다"
+   },
+   {
+    "w": "rule-based system",
+    "m": "규칙 기반 체계"
+   },
+   {
+    "w": "piecemeal",
+    "m": "단편적인"
+   },
+   {
+    "w": "superficial",
+    "m": "피상적인"
+   },
+   {
+    "w": "inhabit",
+    "m": "~에 살다, 깃들다"
+   },
+   {
+    "w": "be drawn into",
+    "m": "~에 빠져들다"
+   },
+   {
+    "w": "pinpoint",
+    "m": "정확히 짚어내다"
+   },
+   {
+    "w": "unfold",
+    "m": "전개되다"
+   },
+   {
+    "w": "transparent",
+    "m": "투명한"
+   }
+  ]
  },
  {
   "key": "2027-06|33",
@@ -45843,31 +48893,36 @@
     "n": 1,
     "tx": "the more chances one gets to find <span class=\"reuse\">differences</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "차이점을 발견할 기회가 더 많아진다"
    },
    {
     "n": 2,
     "tx": "the less similarity is required for the thing to appear",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "그 대상이 나타나는 데 필요한 유사성이 더 적어진다"
    },
    {
     "n": 3,
     "tx": "the sooner the perceived <span class=\"reuse\">similarity</span> fades away",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "인지된 유사성이 더 빨리 사라진다"
    },
    {
     "n": 4,
     "tx": "the more easily one can sense the world the way it is",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "세상을 있는 그대로 더 쉽게 감지할 수 있다"
    },
    {
     "n": 5,
     "tx": "the less slowly different emotions are released",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "서로 다른 감정이 덜 천천히 방출된다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 대상이 나타나는 데 필요한 유사성이 더 적어짐 · <span class=\"xo\">①</span>차이를 더 잘 찾음(정반대) <span class=\"xo\">③</span>유사성이 빨리 사라짐(표면어) <span class=\"xo\">④</span>세상을 있는 그대로 지각(정반대) <span class=\"xo\">⑤</span>감정이 덜 느리게 방출(없음)",
@@ -45905,7 +48960,45 @@
    ],
    "echo": "정답은 '감정↑→오인↑'을 '필요 유사성↓'으로 재진술(②)"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "perception",
+    "m": "지각"
+   },
+   {
+    "w": "discern",
+    "m": "식별하다, 분간하다"
+   },
+   {
+    "w": "dispose one to",
+    "m": "~하는 성향을 갖게 하다"
+   },
+   {
+    "w": "distorted",
+    "m": "왜곡된"
+   },
+   {
+    "w": "perceptual disposition",
+    "m": "지각 성향"
+   },
+   {
+    "w": "misidentification",
+    "m": "오인, 잘못된 식별"
+   },
+   {
+    "w": "emotional investment",
+    "m": "감정적 투자"
+   },
+   {
+    "w": "biased",
+    "m": "편향된"
+   },
+   {
+    "w": "similarity and difference",
+    "m": "유사점과 차이점"
+   }
+  ]
  },
  {
   "key": "2022-수능|33",
@@ -46376,31 +49469,36 @@
     "n": 1,
     "tx": "a profitable industry driving fast fashion",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "패스트 패션을 이끄는 수익성 있는 산업"
    },
    {
     "n": 2,
     "tx": "a widespread respect for marketing skills",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "마케팅 기술에 대한 널리 퍼진 존중"
    },
    {
     "n": 3,
     "tx": "a public institution preserving traditional <span class=\"reuse\">designs</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "전통 디자인을 보존하는 공공 기관"
    },
    {
     "n": 4,
     "tx": "a modern connection between dress-design and art",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "의상 디자인과 예술 사이의 현대적 연결"
    },
    {
     "n": 5,
     "tx": "an efficient system for producing affordable clothing",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "저렴한 옷을 생산하는 효율적인 체계"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 의상 디자인과 예술의 현대적 연결 · <span class=\"xo\">①</span>패스트패션 산업(범위초과) <span class=\"xo\">②</span>마케팅 존중(없음) <span class=\"xo\">③</span>전통 보존 기관(정반대) <span class=\"xo\">⑤</span>저가 의류 생산(없음)",
@@ -46437,7 +49535,41 @@
    ],
    "echo": "정답은 '디자이너=예술가와 같은 창작자'를 '의상 디자인과 예술의 연결'로 재진술"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "obscure craftsman",
+    "m": "무명의 장인"
+   },
+   {
+    "w": "patron",
+    "m": "후원자, 고객"
+   },
+   {
+    "w": "at one's service",
+    "m": "~를 위해 봉사하는"
+   },
+   {
+    "w": "couturier",
+    "m": "고급 의상 디자이너"
+   },
+   {
+    "w": "celebrated",
+    "m": "유명한, 저명한"
+   },
+   {
+    "w": "elevate",
+    "m": "격상시키다, 높이다"
+   },
+   {
+    "w": "flourish",
+    "m": "번창하다"
+   },
+   {
+    "w": "admiration",
+    "m": "감탄, 존경"
+   }
+  ]
  },
  {
   "key": "2024-09|31",
@@ -47232,31 +50364,36 @@
     "n": 1,
     "tx": "allows us to accept the inevitability",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "우리가 불가피성을 받아들이게 해 준다"
    },
    {
     "n": 2,
     "tx": "frees a person from the burden",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "사람을 그 부담에서 벗어나게 해 준다"
    },
    {
     "n": 3,
     "tx": "intensifies people’s danger",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "사람들의 위험을 심화시킨다"
    },
    {
     "n": 4,
     "tx": "enhances our understanding",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "우리의 이해를 향상시킨다"
    },
    {
     "n": 5,
     "tx": "requires one to have the <span class=\"reuse\">experience</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "경험을 갖출 것을 요구한다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 자극에 이끌리는 부담에서 벗어나게 함 · <span class=\"xo\">①</span>불가피성 수용(없음) <span class=\"xo\">③</span>위험 심화(정반대) <span class=\"xo\">④</span>이해 향상(없음) <span class=\"xo\">⑤</span>경험 필요(표면어)",
@@ -47293,7 +50430,49 @@
    ],
    "echo": "정답은 '정신적 해방·굴복 회피'를 '자극에 이끌리는 부담에서 벗어남'으로 재진술"
   },
-  "num": 32
+  "num": 32,
+  "vlist": [
+   {
+    "w": "critical thinking",
+    "m": "비판적 사고"
+   },
+   {
+    "w": "succumb to",
+    "m": "~에 굴복하다"
+   },
+   {
+    "w": "emotional pressures",
+    "m": "감정적 압박"
+   },
+   {
+    "w": "the very reverse",
+    "m": "정반대"
+   },
+   {
+    "w": "mental liberation",
+    "m": "정신적 해방"
+   },
+   {
+    "w": "stimulus-driven",
+    "m": "자극에 이끌리는"
+   },
+   {
+    "w": "react to",
+    "m": "~에 반응하다"
+   },
+   {
+    "w": "live by instinct",
+    "m": "본능에 따라 살다"
+   },
+   {
+    "w": "effortful",
+    "m": "노력이 드는"
+   },
+   {
+    "w": "reliance on",
+    "m": "~에 대한 의존"
+   }
+  ]
  },
  {
   "key": "2022-수능|34",
@@ -47783,31 +50962,36 @@
     "n": 1,
     "tx": "venture a little more often into the wilderness",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "황야 속으로 조금 더 자주 모험을 떠나다"
    },
    {
     "n": 2,
     "tx": "help them recall their most precious <span class=\"reuse\">memories</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "그들이 가장 소중한 기억을 떠올리도록 돕다"
    },
    {
     "n": 3,
     "tx": "better understand the challenges of parental duty",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "부모 의무의 어려움을 더 잘 이해하다"
    },
    {
     "n": 4,
     "tx": "disregard the key <span class=\"reuse\">characteristics</span> of children’s fiction",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "아동 소설의 핵심 특징을 무시하다"
    },
    {
     "n": 5,
     "tx": "standardize the paths of their psychological development",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그들의 심리 발달 경로를 표준화하다"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 질서를 벗어나 '야생'으로 더 자주 모험 · <span class=\"xo\">②</span>소중한 기억 회상(표면어) <span class=\"xo\">③</span>부모 역할 이해(없음) <span class=\"xo\">④</span>아동 소설 특성 무시(표면어) <span class=\"xo\">⑤</span>발달 경로 표준화(정반대)",
@@ -47845,7 +51029,49 @@
    ],
    "echo": "정답은 문학의 'wilderness'를 '야생으로의 모험'으로 재진술 ①"
   },
-  "num": 34
+  "num": 34,
+  "vlist": [
+   {
+    "w": "autobiographical memory",
+    "m": "자전적 기억"
+   },
+   {
+    "w": "literary critic",
+    "m": "문학 비평가"
+   },
+   {
+    "w": "wilderness",
+    "m": "황야, 미개척지"
+   },
+   {
+    "w": "impose order on",
+    "m": "~에 질서를 부여하다"
+   },
+   {
+    "w": "unruly",
+    "m": "제멋대로인, 통제하기 힘든"
+   },
+   {
+    "w": "untamed",
+    "m": "길들여지지 않은"
+   },
+   {
+    "w": "be bent on",
+    "m": "~에 열중하다, 골몰하다"
+   },
+   {
+    "w": "pervasive",
+    "m": "만연한, 널리 퍼진"
+   },
+   {
+    "w": "idiosyncratic",
+    "m": "특이한, 독특한"
+   },
+   {
+    "w": "be drawn toward",
+    "m": "~에 끌리다"
+   }
+  ]
  },
  {
   "key": "2024-09|32",
@@ -48307,31 +51533,36 @@
     "n": 1,
     "tx": "affect our subjective experience and solutions",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "우리의 주관적 경험과 해결책에 영향을 미친다"
    },
    {
     "n": 2,
     "tx": "serve as advocates for independent decision-making",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "독립적 의사결정의 옹호자 역할을 한다"
    },
    {
     "n": 3,
     "tx": "position social experience within the <span class=\"reuse\">cognitive system</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "사회적 경험을 인지 체계 안에 배치한다"
    },
    {
     "n": 4,
     "tx": "comprise <span class=\"reuse\">subjective</span> interpretations of the environment",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "환경에 대한 주관적 해석으로 구성된다"
    },
    {
     "n": 5,
     "tx": "facilitate the construction of our concept of subjectivity",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "우리의 주관성 개념 구성을 촉진한다"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 우리의 주관적 경험·판단에 영향을 미침 · <span class=\"xo\">②</span>독립적 의사결정 옹호(정반대) <span class=\"xo\">③</span>사회적 경험을 인지체계에 배치(표면어) <span class=\"xo\">④</span>환경의 주관적 해석 구성(표면어) <span class=\"xo\">⑤</span>주관성 개념 구성 촉진(범위초과)",
@@ -48369,7 +51600,45 @@
    ],
    "echo": "정답은 '결정이 제도에 영향받음'을 '주관적 경험·판단에 영향'으로 재진술 ①"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "play a role in",
+    "m": "~에서 역할을 하다"
+   },
+   {
+    "w": "coupled system",
+    "m": "결합된 시스템"
+   },
+   {
+    "w": "subjective experience",
+    "m": "주관적 경험"
+   },
+   {
+    "w": "cognitive system",
+    "m": "인지 체계"
+   },
+   {
+    "w": "socially shared",
+    "m": "사회적으로 공유된"
+   },
+   {
+    "w": "objectivity",
+    "m": "객관성"
+   },
+   {
+    "w": "institutional practices",
+    "m": "제도적 관행"
+   },
+   {
+    "w": "bureaucratic",
+    "m": "관료적인"
+   },
+   {
+    "w": "manipulate",
+    "m": "조종하다"
+   }
+  ]
  },
  {
   "key": "2025-수능|33",
@@ -48538,31 +51807,36 @@
     "n": 1,
     "tx": "all of your <span class=\"reuse\">attention</span> has already been spent",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "당신의 모든 주의가 이미 소모되었다"
    },
    {
     "n": 2,
     "tx": "the real product being sold is you",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "실제로 팔리고 있는 상품은 바로 당신이다"
    },
    {
     "n": 3,
     "tx": "your privacy is being violated",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "당신의 사생활이 침해되고 있다"
    },
    {
     "n": 4,
     "tx": "the public may be sponsoring you",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "대중이 당신을 후원하고 있을지도 모른다"
    },
    {
     "n": 5,
     "tx": "you owe the benefits to your friend <span class=\"reuse\">AI</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "당신은 그 혜택을 친구 AI에게 빚지고 있다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 실제 팔리는 상품은 바로 '당신' · <span class=\"xo\">①</span>주목이 이미 소진됨(표면어) <span class=\"xo\">③</span>사생활 침해(없음) <span class=\"xo\">④</span>대중이 후원(정반대) <span class=\"xo\">⑤</span>친구 AI에게 빚짐(표면어)",
@@ -48600,7 +51874,45 @@
    ],
    "echo": "정답은 '내 시간을 남에게 판다'를 '팔리는 상품은 당신'으로 재진술 ②"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "attention economy",
+    "m": "관심 경제"
+   },
+   {
+    "w": "dedicated to",
+    "m": "~에 전념하는"
+   },
+   {
+    "w": "conventional wisdom",
+    "m": "통념, 사회적 통설"
+   },
+   {
+    "w": "for free",
+    "m": "공짜로, 무료로"
+   },
+   {
+    "w": "be mediated by",
+    "m": "~에 의해 매개되다"
+   },
+   {
+    "w": "attend to",
+    "m": "~에 주의를 기울이다"
+   },
+   {
+    "w": "replace A with B",
+    "m": "A를 B로 대체하다"
+   },
+   {
+    "w": "profitable",
+    "m": "수익성 있는"
+   },
+   {
+    "w": "trap",
+    "m": "가두다, 붙잡다"
+   }
+  ]
  },
  {
   "key": "2023-06|31",
@@ -48763,31 +52075,36 @@
     "n": 1,
     "tx": "awake",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "깨어 있는"
    },
    {
     "n": 2,
     "tx": "influential",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "영향력 있는"
    },
    {
     "n": 3,
     "tx": "distinct",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "뚜렷이 구별되는"
    },
    {
     "n": 4,
     "tx": "troublesome",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "성가신, 골칫거리인"
    },
    {
     "n": 5,
     "tx": "extinct",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "사라진, 자취를 감춘"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 'computer artist'라는 범주가 소멸(extinct) · <span class=\"xo\">①</span>깨어남(없음) <span class=\"xo\">②</span>영향력(없음) <span class=\"xo\">③</span>구별됨=오히려 과거 상태(정반대) <span class=\"xo\">④</span>골칫거리(없음)",
@@ -48822,7 +52139,45 @@
    ],
    "echo": "정답은 범주 소멸을 'extinct(멸종)'로 재진술"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "make reference to",
+    "m": "~을 언급하다"
+   },
+   {
+    "w": "be concerned about",
+    "m": "~에 대해 신경 쓰다"
+   },
+   {
+    "w": "a marked contrast",
+    "m": "뚜렷한 대조"
+   },
+   {
+    "w": "utilize",
+    "m": "활용하다"
+   },
+   {
+    "w": "label A as B",
+    "m": "A를 B로 규정하다"
+   },
+   {
+    "w": "disapprovingly",
+    "m": "못마땅하게"
+   },
+   {
+    "w": "surpass",
+    "m": "능가하다"
+   },
+   {
+    "w": "resemble",
+    "m": "닮다"
+   },
+   {
+    "w": "bulky",
+    "m": "부피가 큰"
+   }
+  ]
  },
  {
   "key": "2023-수능|31",
@@ -49004,31 +52359,36 @@
     "n": 1,
     "tx": "paid",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "보수를 받는"
    },
    {
     "n": 2,
     "tx": "admired",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "존경받는"
    },
    {
     "n": 3,
     "tx": "censored",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "검열받는"
    },
    {
     "n": 4,
     "tx": "challenged",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "이의가 제기되는"
    },
    {
     "n": 5,
     "tx": "discussed",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "논의되는"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 많이 읽히지만 존중(admired)받지 못함 · <span class=\"xo\">①</span>보수 받지 못함=수입은 많음(정반대) <span class=\"xo\">③</span>검열(없음) <span class=\"xo\">④</span>도전받음(없음) <span class=\"xo\">⑤</span>논의됨(없음)",
@@ -49063,7 +52423,49 @@
    ],
    "echo": "정답은 '가치의 무시(dismissal of the worth)'를 'little admired(거의 존중받지 못함)'로 재진술"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "paradoxical",
+    "m": "역설적인"
+   },
+   {
+    "w": "discharge one's responsibilities",
+    "m": "책무를 수행하다"
+   },
+   {
+    "w": "consult",
+    "m": "참고하다, 찾아보다"
+   },
+   {
+    "w": "sought after",
+    "m": "인기 있는, 수요가 많은"
+   },
+   {
+    "w": "lucrative",
+    "m": "수익성이 좋은"
+   },
+   {
+    "w": "the envy of",
+    "m": "~의 선망의 대상"
+   },
+   {
+    "w": "standing",
+    "m": "지위, 평판"
+   },
+   {
+    "w": "correspond to",
+    "m": "~에 상응하다"
+   },
+   {
+    "w": "readily to hand",
+    "m": "손쉽게 쓸 수 있는"
+   },
+   {
+    "w": "dismissal",
+    "m": "무시, 일축"
+   }
+  ]
  },
  {
   "key": "2024-09|33",
@@ -49509,31 +52911,36 @@
     "n": 1,
     "tx": "our devotion to narrowing these <span class=\"reuse\">differences</span> will emerge",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "이 차이를 좁히려는 우리의 헌신이 나타날 것이다"
    },
    {
     "n": 2,
     "tx": "fundamental musical behaviors evolve within communities",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "근본적인 음악적 행동은 공동체 안에서 진화한다"
    },
    {
     "n": 3,
     "tx": "these varied perceptions <span class=\"reuse\">enrich</span> shared musical experiences",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "이렇게 다양한 지각이 공유된 음악 경험을 풍부하게 한다"
    },
    {
     "n": 4,
     "tx": "the commonalities between us far outweigh the differences",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "우리 사이의 공통점이 차이점을 훨씬 능가한다"
    },
    {
     "n": 5,
     "tx": "diversity rather than <span class=\"reuse\">uniformity</span> in musical processes counts",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "음악적 과정에서 획일성이 아니라 다양성이 중요하다"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 공통점이 차이를 훨씬 능가 · <span class=\"xo\">①</span>차이 좁히려는 헌신 등장(없음) <span class=\"xo\">②</span>공동체 내 진화(없음) <span class=\"xo\">③</span>다양한 지각이 경험 풍부화(표면어) <span class=\"xo\">⑤</span>획일성보다 다양성이 중요(정반대)",
@@ -49572,7 +52979,49 @@
    ],
    "echo": "정답은 'consistent across listeners'를 '공통점이 차이를 능가'로 재진술"
   },
-  "num": 34
+  "num": 34,
+  "vlist": [
+   {
+    "w": "musical behavior",
+    "m": "음악적 행동"
+   },
+   {
+    "w": "in a general way",
+    "m": "일반적인 방식으로"
+   },
+   {
+    "w": "be filled with",
+    "m": "~로 가득 차다"
+   },
+   {
+    "w": "confine oneself to",
+    "m": "~에 국한하다"
+   },
+   {
+    "w": "vary greatly between",
+    "m": "~사이에서 크게 다르다"
+   },
+   {
+    "w": "be devoted to",
+    "m": "~에 전념하다"
+   },
+   {
+    "w": "meter and key",
+    "m": "박자와 조성"
+   },
+   {
+    "w": "consistent",
+    "m": "일관된"
+   },
+   {
+    "w": "anecdotal evidence",
+    "m": "일화적 증거"
+   },
+   {
+    "w": "uniformity",
+    "m": "획일성"
+   }
+  ]
  },
  {
   "key": "2025-수능|34",
@@ -49737,31 +53186,36 @@
     "n": 1,
     "tx": "categorize one’s <span class=\"reuse\">patterns of conduct</span> in legal and productive ways",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "행동 양식을 합법적이고 생산적인 방식으로 분류한다"
    },
    {
     "n": 2,
     "tx": "lead people to reevaluate their <span class=\"reuse\">roles and practices</span> in a society",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "사람들이 사회 속 자신의 역할과 관행을 재평가하게 이끈다"
    },
    {
     "n": 3,
     "tx": "encourage new ways of thinking which promote creative ideas",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "창의적 발상을 촉진하는 새로운 사고 방식을 장려한다"
    },
    {
     "n": 4,
     "tx": "reinforce one’s <span class=\"reuse\">behavior</span> within legal and established contexts",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "합법적이고 확립된 맥락 속에서 개인의 행동을 강화한다"
    },
    {
     "n": 5,
     "tx": "facilitate productive activity by establishing roles and practices",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "역할과 관행을 확립함으로써 생산적 활동을 촉진한다"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 역할·실천을 확립해 생산적 활동을 가능케 함 · <span class=\"xo\">①</span>행동을 분류(표면어) <span class=\"xo\">②</span>역할 재평가(표면어) <span class=\"xo\">③</span>창의적 사고(없음) <span class=\"xo\">④</span>행동 강화·규제만(표면어)",
@@ -49800,7 +53254,41 @@
    ],
    "echo": "정답은 'create the practice/roles'를 '역할·실천을 확립해 생산적 활동을 가능케 함'으로 재진술"
   },
-  "num": 34
+  "num": 34,
+  "vlist": [
+   {
+    "w": "centralized",
+    "m": "중앙집권적인"
+   },
+   {
+    "w": "regulate",
+    "m": "규제하다"
+   },
+   {
+    "w": "constitute",
+    "m": "구성하다"
+   },
+   {
+    "w": "formation of corporations",
+    "m": "법인 설립"
+   },
+   {
+    "w": "wills and trusts",
+    "m": "유언과 신탁"
+   },
+   {
+    "w": "negotiable instruments",
+    "m": "유통 증권"
+   },
+   {
+    "w": "constrain",
+    "m": "제약하다"
+   },
+   {
+    "w": "occupy (a role)",
+    "m": "(역할을) 맡다, 차지하다"
+   }
+  ]
  },
  {
   "key": "2022-06|32",
@@ -49987,31 +53475,36 @@
     "n": 1,
     "tx": "highlight the value of preferred activities",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "선호하는 활동의 가치를 부각하다"
    },
    {
     "n": 2,
     "tx": "make current activities less attractive",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "현재의 활동을 덜 매력적으로 만들다"
    },
    {
     "n": 3,
     "tx": "cut their attachment to past activities",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "과거 활동에 대한 애착을 끊다"
    },
    {
     "n": 4,
     "tx": "enable them to enjoy more activities",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그들이 더 많은 활동을 즐길 수 있게 하다"
    },
    {
     "n": 5,
     "tx": "potentially become known to others",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "잠재적으로 남들에게 알려지게 되다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 지금의 활동을 덜 매력적으로 만드는 정보를 회피 · <span class=\"xo\">①</span>선호 활동의 가치 부각(정반대) <span class=\"xo\">③</span>과거 활동 애착(없음) <span class=\"xo\">④</span>더 즐기게 함(정반대) <span class=\"xo\">⑤</span>남에게 알려짐(없음)",
@@ -50048,7 +53541,41 @@
    ],
    "echo": "‘즐거움을 깎을 정보 회피’를 ‘현재 활동을 덜 매력적으로’로 재진술 = ②"
   },
-  "num": 32
+  "num": 32,
+  "vlist": [
+   {
+    "w": "information seeking",
+    "m": "정보 추구"
+   },
+   {
+    "w": "strategic self-ignorance",
+    "m": "전략적 자기 무지"
+   },
+   {
+    "w": "present-biased",
+    "m": "현재에 편향된"
+   },
+   {
+    "w": "trade-off",
+    "m": "절충, 상충 관계"
+   },
+   {
+    "w": "counsel against",
+    "m": "~을 하지 말라고 조언하다"
+   },
+   {
+    "w": "chastity",
+    "m": "순결, 정절"
+   },
+   {
+    "w": "short-term benefits",
+    "m": "단기적 이익"
+   },
+   {
+    "w": "delay receipt of",
+    "m": "~의 수령을 미루다"
+   }
+  ]
  },
  {
   "key": "2023-06|33",
@@ -50214,31 +53741,36 @@
     "n": 1,
     "tx": "<span class=\"reuse\">lead users</span> tended to overlook",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "선도 사용자가 간과하는 경향이 있던"
    },
    {
     "n": 2,
     "tx": "lead users have already developed",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "선도 사용자가 이미 개발한"
    },
    {
     "n": 3,
     "tx": "<span class=\"reuse\">lead users</span> encountered in the market",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "선도 사용자가 시장에서 마주친"
    },
    {
     "n": 4,
     "tx": "other firms frequently put into use",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "다른 기업들이 자주 활용하는"
    },
    {
     "n": 5,
     "tx": "both users and firms have valued",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "사용자와 기업 모두가 가치 있게 여겨온"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 선도 사용자가 이미 개발한 혁신 · <span class=\"xo\">①</span>선도 사용자가 간과(표면어) <span class=\"xo\">③</span>시장서 마주친(표면어) <span class=\"xo\">④</span>타 기업이 사용(없음) <span class=\"xo\">⑤</span>모두가 가치를 둔(정반대)",
@@ -50275,7 +53807,49 @@
    ],
    "echo": "‘선도 사용자가 만든 혁신’을 ‘이미 개발한’으로 재진술 = ②"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "innovation process",
+    "m": "혁신 과정"
+   },
+   {
+    "w": "the vast majority of",
+    "m": "대다수의"
+   },
+   {
+    "w": "find a need and fill it",
+    "m": "필요를 찾아 충족시키다"
+   },
+   {
+    "w": "commercialize",
+    "m": "상업화하다"
+   },
+   {
+    "w": "accordingly",
+    "m": "따라서, 그에 맞춰"
+   },
+   {
+    "w": "set up",
+    "m": "설립하다, 세우다"
+   },
+   {
+    "w": "market-research department",
+    "m": "시장 조사 부서"
+   },
+   {
+    "w": "think up",
+    "m": "생각해내다, 고안하다"
+   },
+   {
+    "w": "lead user",
+    "m": "선도 사용자"
+   },
+   {
+    "w": "outlier",
+    "m": "이상치, 예외적인 것"
+   }
+  ]
  },
  {
   "key": "2023-수능|34",
@@ -50990,31 +54564,36 @@
     "n": 1,
     "tx": "genetic variations",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "유전적 변이"
    },
    {
     "n": 2,
     "tx": "perceptual biases",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "지각적 편향"
    },
    {
     "n": 3,
     "tx": "vocal attractiveness",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "목소리의 매력"
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">decorating</span> skills",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "장식 기술"
    },
    {
     "n": 5,
     "tx": "locational advantages",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "위치상의 이점"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 상대의 지각 편향(착시)을 이용 · <span class=\"xo\">①</span>유전적 변이(없음) <span class=\"xo\">③</span>발성 매력(없음) <span class=\"xo\">④</span>장식 기술(표면어) <span class=\"xo\">⑤</span>위치적 이점(표면어)",
@@ -51052,7 +54631,45 @@
    ],
    "echo": "‘지각 조작·착시’를 ‘지각 편향(perceptual biases)’으로 재진술 = ②"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "a variety of",
+    "m": "다양한"
+   },
+   {
+    "w": "a modicum of",
+    "m": "약간의, 소량의"
+   },
+   {
+    "w": "manipulate",
+    "m": "조작하다"
+   },
+   {
+    "w": "afford",
+    "m": "제공하다, 주다"
+   },
+   {
+    "w": "forced perspective",
+    "m": "강제 원근법"
+   },
+   {
+    "w": "predator",
+    "m": "포식자"
+   },
+   {
+    "w": "court (v.)",
+    "m": "구애하다"
+   },
+   {
+    "w": "decorate",
+    "m": "장식하다"
+   },
+   {
+    "w": "hypothesis",
+    "m": "가설"
+   }
+  ]
  },
  {
   "key": "2022-06|33",
@@ -51204,31 +54821,36 @@
     "n": 1,
     "tx": "has supported new environment-friendly policies",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "새로운 환경친화적 정책을 뒷받침해 왔다"
    },
    {
     "n": 2,
     "tx": "has increasingly been set by humanity",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "점점 더 인류에 의해 설정되어 왔다"
    },
    {
     "n": 3,
     "tx": "inspires creative <span class=\"reuse\">cultural</span> practices",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "창의적인 문화적 관행에 영감을 준다"
    },
    {
     "n": 4,
     "tx": "changes too frequently to be regulated",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "너무 자주 변해서 규제할 수 없다"
    },
    {
     "n": 5,
     "tx": "has been affected by various <span class=\"reuse\">natural</span> conditions",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "다양한 자연 조건에 의해 영향을 받아 왔다"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 생태 상호작용의 맥락은 인간이 설정 · <span class=\"xo\">①</span>환경친화 정책(없음) <span class=\"xo\">③</span>창의적 문화 관행(표면어) <span class=\"xo\">④</span>너무 자주 변해 규제 불가(정반대) <span class=\"xo\">⑤</span>자연 조건의 영향(표면어)",
@@ -51266,7 +54888,49 @@
    ],
    "echo": "정답은 'cultural statements·can regulate'를 '인간에 의해 설정됨'으로 재진술 (②)"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "strike ~ as",
+    "m": "~라는 인상을 주다"
+   },
+   {
+    "w": "find expression in",
+    "m": "~로 표현되다"
+   },
+   {
+    "w": "independent of",
+    "m": "~와 무관한, 독립적인"
+   },
+   {
+    "w": "settler",
+    "m": "정착민"
+   },
+   {
+    "w": "descendant",
+    "m": "후손"
+   },
+   {
+    "w": "primeval",
+    "m": "원시의, 태고의"
+   },
+   {
+    "w": "wilderness",
+    "m": "야생, 황야"
+   },
+   {
+    "w": "self-regulating",
+    "m": "자기 조절하는"
+   },
+   {
+    "w": "intervention",
+    "m": "개입"
+   },
+   {
+    "w": "ecological",
+    "m": "생태의"
+   }
+  ]
  },
  {
   "key": "2023-06|34",
@@ -51717,31 +55381,36 @@
     "n": 1,
     "tx": "quantitative",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "양적인"
    },
    {
     "n": 2,
     "tx": "nonmaterial",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "비물질적인"
    },
    {
     "n": 3,
     "tx": "nutritional",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "영양의, 영양상의"
    },
    {
     "n": 4,
     "tx": "invariable",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "변함없는"
    },
    {
     "n": 5,
     "tx": "<span class=\"reuse\">economic</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "경제적인"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 음식 가치가 비물질적 측면으로 결정 · <span class=\"xo\">①</span>양적(없음) <span class=\"xo\">③</span>영양적=생존·물질(정반대) <span class=\"xo\">④</span>불변의=변화와 반대(정반대) <span class=\"xo\">⑤</span>경제적(표면어)",
@@ -51778,7 +55447,45 @@
    ],
    "echo": "정답은 'less ... sustenance ... more ... life-style'를 '비물질적'으로 압축 재진술 (②)"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "self-expression",
+    "m": "자기표현"
+   },
+   {
+    "w": "material desire",
+    "m": "물질적 욕구"
+   },
+   {
+    "w": "prevailing",
+    "m": "지배적인, 우세한"
+   },
+   {
+    "w": "sustenance",
+    "m": "자양분, 생계"
+   },
+   {
+    "w": "pay a premium",
+    "m": "웃돈을 지불하다"
+   },
+   {
+    "w": "exotic cuisine",
+    "m": "이국적인 요리"
+   },
+   {
+    "w": "distinctive",
+    "m": "독특한"
+   },
+   {
+    "w": "political consumerism",
+    "m": "정치적 소비주의"
+   },
+   {
+    "w": "boycott",
+    "m": "불매하다"
+   }
+  ]
  },
  {
   "key": "2024-수능|33",
@@ -51938,31 +55645,36 @@
     "n": 1,
     "tx": "all of them could be matched consistently with their intended emotions",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그것들 모두가 의도된 감정과 일관되게 짝지어질 수 있다는 것"
    },
    {
     "n": 2,
     "tx": "every one of them was illustrated with <span class=\"reuse\">photographic</span> precision",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "그것들 하나하나가 사진처럼 정밀하게 묘사되었다는 것"
    },
    {
     "n": 3,
     "tx": "each of them definitively displayed its own <span class=\"reuse\">social</span> narrative",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "그것들 각각이 자신만의 사회적 이야기를 확정적으로 보여주었다는 것"
    },
    {
     "n": 4,
     "tx": "most of them would be seen as representing unique characteristics",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "그것들 대부분이 고유한 특징을 나타내는 것으로 보일 것이라는 것"
    },
    {
     "n": 5,
     "tx": "any number of them could be substituted for one another without loss",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "그것들 중 얼마든지 손실 없이 서로 대체될 수 있다는 것"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 맥락 없는 얼굴들은 손실 없이 서로 교체 가능 · <span class=\"xo\">①</span>의도한 감정과 일관 일치(정반대) <span class=\"xo\">②</span>사진 같은 정밀함(표면어) <span class=\"xo\">③</span>사회적 서사 분명히 표현(표면어) <span class=\"xo\">④</span>고유한 특성(정반대)",
@@ -52000,7 +55712,49 @@
    ],
    "echo": "정답은 '결과가 뒤섮임·맥락 부재'를 '얼굴들을 손실 없이 교체 가능'으로 재진술 (⑤)"
   },
-  "num": 33
+  "num": 33,
+  "vlist": [
+   {
+    "w": "subject",
+    "m": "(실험) 대상, 피험자"
+   },
+   {
+    "w": "state of mind",
+    "m": "심리 상태, 마음 상태"
+   },
+   {
+    "w": "evince",
+    "m": "드러내다, 나타내다"
+   },
+   {
+    "w": "invariably",
+    "m": "변함없이, 언제나"
+   },
+   {
+    "w": "be called upon to",
+    "m": "~하도록 요구받다"
+   },
+   {
+    "w": "striking",
+    "m": "인상적인, 두드러진"
+   },
+   {
+    "w": "determinate",
+    "m": "확정적인, 명확한"
+   },
+   {
+    "w": "at stake",
+    "m": "위태로운, 걸려 있는"
+   },
+   {
+    "w": "come across",
+    "m": "우연히 마주치다"
+   },
+   {
+    "w": "hold isolated from",
+    "m": "~로부터 분리해 두다"
+   }
+  ]
  },
  {
   "key": "2025-09|33",
@@ -52439,31 +56193,36 @@
     "n": 1,
     "tx": "underestimates the invisible <span class=\"reuse\">conflicts</span> possible within a group",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "집단 내부에서 가능한 보이지 않는 갈등을 과소평가한다"
    },
    {
     "n": 2,
     "tx": "is triggered by the need for solutions to emotional conflicts",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "감정적 갈등에 대한 해결책의 필요에 의해 촉발된다"
    },
    {
     "n": 3,
     "tx": "is often counterproductive in cases of conflict",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "갈등 상황에서 흔히 역효과를 낳는다"
    },
    {
     "n": 4,
     "tx": "functions as a facilitator in the resolution of social disharmony",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "사회적 부조화의 해소에서 촉진자 역할을 한다"
    },
    {
     "n": 5,
     "tx": "raises questions about negative attitudes toward social disharmony",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "사회적 부조화에 대한 부정적 태도에 의문을 제기한다"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 더 많은 공감 처방은 갈등에 역효과 · <span class=\"xo\">①</span>집단 내 보이지 않는 갈등(표면어) <span class=\"xo\">②</span>감정 갈등 해결 요구가 촉발(없음) <span class=\"xo\">④</span>불화 해소의 촉진자(정반대) <span class=\"xo\">⑤</span>부정적 태도에 의문 제기(없음)",
@@ -52500,7 +56259,45 @@
    ],
    "echo": "정답은 '공감이 갈등을 악화·확립'을 '갈등 상황에서 역효과'로 재진술 (③)"
   },
-  "num": 32
+  "num": 32,
+  "vlist": [
+   {
+    "w": "empathy",
+    "m": "공감"
+   },
+   {
+    "w": "interpersonal",
+    "m": "대인 관계의"
+   },
+   {
+    "w": "intergroup conflict",
+    "m": "집단 간 갈등"
+   },
+   {
+    "w": "exhausting",
+    "m": "진을 빼는"
+   },
+   {
+    "w": "burnout",
+    "m": "탈진, 번아웃"
+   },
+   {
+    "w": "insensitivity",
+    "m": "무감각"
+   },
+   {
+    "w": "in-group / out-group",
+    "m": "내집단 / 외집단"
+   },
+   {
+    "w": "entrench",
+    "m": "고착시키다"
+   },
+   {
+    "w": "rational compassion",
+    "m": "이성적 연민"
+   }
+  ]
  },
  {
   "key": "2022-수능|31",
@@ -53172,31 +56969,36 @@
     "n": 1,
     "tx": "legally established",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "법적으로 확립된"
    },
    {
     "n": 2,
     "tx": "regularly reported",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "정기적으로 보고되는"
    },
    {
     "n": 3,
     "tx": "socially regulated",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "사회적으로 규제되는"
    },
    {
     "n": 4,
     "tx": "manually calculated",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "수작업으로 계산되는"
    },
    {
     "n": 5,
     "tx": "carefully documented",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "세심하게 문서화된"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 신뢰·공동체로 사회적으로 규율됨 · <span class=\"xo\">①</span>법적 확립(없음) <span class=\"xo\">②</span>정기 보고(정반대) <span class=\"xo\">④</span>수작업 계산(표면어 manual) <span class=\"xo\">⑤</span>세심한 문서화(정반대)",
@@ -53233,7 +57035,45 @@
    ],
    "echo": "정답 socially regulated는 'moral community·신뢰'로 규율됨을 재진술"
   },
-  "num": 32
+  "num": 32,
+  "vlist": [
+   {
+    "w": "labor-sharing",
+    "m": "노동 공유"
+   },
+   {
+    "w": "contribute A to B",
+    "m": "A를 B에게 제공하다"
+   },
+   {
+    "w": "on a regular basis",
+    "m": "정기적으로"
+   },
+   {
+    "w": "in the event of",
+    "m": "~이 발생할 경우"
+   },
+   {
+    "w": "moral economy",
+    "m": "도덕 경제"
+   },
+   {
+    "w": "keep records",
+    "m": "기록을 남기다"
+   },
+   {
+    "w": "social cohesion",
+    "m": "사회적 결속"
+   },
+   {
+    "w": "show up",
+    "m": "나타나다, 오다"
+   },
+   {
+    "w": "call on",
+    "m": "~에게 부탁하다, 요청하다"
+   }
+  ]
  },
  {
   "key": "2024-수능|34",
@@ -54256,31 +58096,36 @@
     "n": 1,
     "tx": "word recognition",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "단어 인식"
    },
    {
     "n": 2,
     "tx": "imaginative play",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "상상 놀이"
    },
    {
     "n": 3,
     "tx": "knowledge acquisition",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "지식 습득"
    },
    {
     "n": 4,
     "tx": "image mapping",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위초과",
+    "ko": "이미지 연결(매핑)"
    },
    {
     "n": 5,
     "tx": "subjective <span class=\"reuse\">interpretation</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "주관적 해석"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 읽기는 단순한 '단어 인식'이 아니다 · <span class=\"xo\">②</span>상상 놀이(없음) <span class=\"xo\">③</span>지식 습득(없음) <span class=\"xo\">④</span>이미지 대응(범위초과) <span class=\"xo\">⑤</span>주관적 해석(표면어)",
@@ -54317,7 +58162,45 @@
    ],
    "echo": "정답은 '복잡한 해석·말하는 것≠의미'를 '단순한 단어 인식이 아님'으로 재진술"
   },
-  "num": 31
+  "num": 31,
+  "vlist": [
+   {
+    "w": "apply to",
+    "m": "~에 적용되다"
+   },
+   {
+    "w": "in addition to",
+    "m": "~에 더하여"
+   },
+   {
+    "w": "foreground (v.)",
+    "m": "부각시키다, 전면에 내세우다"
+   },
+   {
+    "w": "predominate",
+    "m": "두드러지다, 우세하다"
+   },
+   {
+    "w": "complement",
+    "m": "보완하다"
+   },
+   {
+    "w": "enhance",
+    "m": "향상시키다"
+   },
+   {
+    "w": "interrelated",
+    "m": "서로 관련된"
+   },
+   {
+    "w": "adjunct",
+    "m": "부속물, 부가물"
+   },
+   {
+    "w": "innovation",
+    "m": "혁신"
+   }
+  ]
  },
  {
   "key": "2022-06|36",
@@ -54929,7 +58812,45 @@
     }
    ],
    "echo": "'두려움 완화 조치'에 '재교육'을 also로 추가"
-  }
+  },
+  "vlist": [
+   {
+    "w": "retrain",
+    "m": "재교육하다"
+   },
+   {
+    "w": "lay off",
+    "m": "해고하다"
+   },
+   {
+    "w": "assembly line",
+    "m": "조립 라인"
+   },
+   {
+    "w": "management",
+    "m": "경영진"
+   },
+   {
+    "w": "ease (fears)",
+    "m": "(두려움을) 덜다"
+   },
+   {
+    "w": "competitive",
+    "m": "경쟁력 있는"
+   },
+   {
+    "w": "jointly",
+    "m": "공동으로"
+   },
+   {
+    "w": "repetitive",
+    "m": "반복적인"
+   },
+   {
+    "w": "manufacturing costs",
+    "m": "제조 비용"
+   }
+  ]
  },
  {
   "key": "2025-09|38",
@@ -55056,7 +58977,49 @@
     }
    ],
    "echo": "'구별 시스템 필요'를 그 부재 시의 결과로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "chase",
+    "m": "쫓다"
+   },
+   {
+    "w": "conception",
+    "m": "구상, 개념 정립"
+   },
+   {
+    "w": "perceive and act",
+    "m": "지각하고 행동하다"
+   },
+   {
+    "w": "discriminate A from B",
+    "m": "A를 B와 구별하다"
+   },
+   {
+    "w": "goal-oriented",
+    "m": "목표 지향적인"
+   },
+   {
+    "w": "scattered",
+    "m": "흩어진"
+   },
+   {
+    "w": "pile",
+    "m": "쌓다"
+   },
+   {
+    "w": "originate from",
+    "m": "~에서 비롯되다"
+   },
+   {
+    "w": "equip A with B",
+    "m": "A에 B를 갖추게 하다"
+   },
+   {
+    "w": "built-in",
+    "m": "내장된"
+   }
+  ]
  },
  {
   "key": "2025-06|39",
@@ -55346,7 +59309,41 @@
     }
    ],
    "echo": "'과세→가격 상승→절약·혁신'이 주어진 글의 논지를 사례로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "market response model",
+    "m": "시장 반응 모델"
+   },
+   {
+    "w": "substitute",
+    "m": "대체하다"
+   },
+   {
+    "w": "conserve",
+    "m": "아끼다, 보존하다"
+   },
+   {
+    "w": "green taxes",
+    "m": "환경세"
+   },
+   {
+    "w": "landfill costs",
+    "m": "매립 비용"
+   },
+   {
+    "w": "dispose of",
+    "m": "~을 처리하다, 버리다"
+   },
+   {
+    "w": "internalize",
+    "m": "내재화하다"
+   },
+   {
+    "w": "result in",
+    "m": "~을 초래하다"
+   }
+  ]
  },
  {
   "key": "2025-수능|36",
@@ -55630,7 +59627,45 @@
     }
    ],
    "echo": "'양분 이력에 따른 위험 감수/회피'가 적응 반응 논지를 구체화해 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "finely tuned",
+    "m": "정교하게 조율된"
+   },
+   {
+    "w": "adaptive response",
+    "m": "적응 반응"
+   },
+   {
+    "w": "in contrast",
+    "m": "대조적으로"
+   },
+   {
+    "w": "risk averse",
+    "m": "위험을 회피하는"
+   },
+   {
+    "w": "in terms of",
+    "m": "~의 면에서, ~의 관점에서"
+   },
+   {
+    "w": "proliferate",
+    "m": "증식하다, 번식하다"
+   },
+   {
+    "w": "foraging",
+    "m": "먹이 찾기"
+   },
+   {
+    "w": "supplemental",
+    "m": "보충의"
+   },
+   {
+    "w": "availability",
+    "m": "이용 가능성"
+   }
+  ]
  },
  {
   "key": "2023-06|38",
@@ -56091,7 +60126,45 @@
     }
    ],
    "echo": "'예측 능력 필요'를 'Unfortunately 예측 불가'로 반전해 문제를 드러냄"
-  }
+  },
+  "vlist": [
+   {
+    "w": "unprecedented",
+    "m": "전례 없는"
+   },
+   {
+    "w": "unpredictable",
+    "m": "예측할 수 없는"
+   },
+   {
+    "w": "intervene in",
+    "m": "~에 개입하다"
+   },
+   {
+    "w": "implement",
+    "m": "실행하다, 이행하다"
+   },
+   {
+    "w": "predictive ability",
+    "m": "예측 능력"
+   },
+   {
+    "w": "spatial and temporal",
+    "m": "공간적·시간적"
+   },
+   {
+    "w": "efficacy",
+    "m": "효능, 효험"
+   },
+   {
+    "w": "adverse effect",
+    "m": "악영향, 부작용"
+   },
+   {
+    "w": "magnitude",
+    "m": "규모, 크기"
+   }
+  ]
  },
  {
   "key": "2023-09|36",
@@ -56212,7 +60285,49 @@
     }
    ],
    "echo": "갑문·문 도입(C)→상류 작동(B)→Then 문 열림(A) 순서"
-  }
+  },
+  "vlist": [
+   {
+    "w": "canal",
+    "m": "운하"
+   },
+   {
+    "w": "engineering problem",
+    "m": "공학적 문제"
+   },
+   {
+    "w": "lock",
+    "m": "갑문"
+   },
+   {
+    "w": "downstream / upstream",
+    "m": "하류의 / 상류의"
+   },
+   {
+    "w": "vessel",
+    "m": "배, 선박"
+   },
+   {
+    "w": "pump",
+    "m": "퍼내다, 퍼넣다"
+   },
+   {
+    "w": "make up for",
+    "m": "~을 보충하다, 보완하다"
+   },
+   {
+    "w": "basin",
+    "m": "수조, 유역"
+   },
+   {
+    "w": "in line with",
+    "m": "~와 나란한, 일치하는"
+   },
+   {
+    "w": "rectangular",
+    "m": "직사각형의"
+   }
+  ]
  },
  {
   "key": "2027-06|36",
@@ -56333,7 +60448,49 @@
     }
    ],
    "echo": "구조적 방어(C)→이웃·천적 협력(B)→진화적 주고받기(A)"
-  }
+  },
+  "vlist": [
+   {
+    "w": "evolve defenses",
+    "m": "방어 수단을 진화시키다"
+   },
+   {
+    "w": "genera",
+    "m": "속(genus의 복수)"
+   },
+   {
+    "w": "intoxicate",
+    "m": "중독시키다"
+   },
+   {
+    "w": "back-and-forth",
+    "m": "주고받기, 오고 감"
+   },
+   {
+    "w": "drawn-out",
+    "m": "오래 끄는"
+   },
+   {
+    "w": "select for",
+    "m": "~을 선택하다(진화상)"
+   },
+   {
+    "w": "get around",
+    "m": "~을 우회하다, 피하다"
+   },
+   {
+    "w": "resilient and resistant",
+    "m": "회복력 있고 저항력 있는"
+   },
+   {
+    "w": "stalemate",
+    "m": "교착 상태"
+   },
+   {
+    "w": "structural defenses",
+    "m": "구조적 방어"
+   }
+  ]
  },
  {
   "key": "2025-06|37",
@@ -56454,7 +60611,53 @@
     }
    ],
    "echo": "관행 예시(B)→촉진자로의 변화(C)→그들의 역할(A)"
-  }
+  },
+  "vlist": [
+   {
+    "w": "human resource management",
+    "m": "인적 자원 관리"
+   },
+   {
+    "w": "organizational learning",
+    "m": "조직 학습"
+   },
+   {
+    "w": "consult",
+    "m": "상담하다, 자문하다"
+   },
+   {
+    "w": "cross-training",
+    "m": "교차 훈련"
+   },
+   {
+    "w": "capture and share",
+    "m": "포착하고 공유하다"
+   },
+   {
+    "w": "think systematically",
+    "m": "체계적으로 사고하다"
+   },
+   {
+    "w": "performance evaluation",
+    "m": "성과 평가"
+   },
+   {
+    "w": "reinforce",
+    "m": "강화하다"
+   },
+   {
+    "w": "take responsibility for",
+    "m": "~에 대한 책임을 지다"
+   },
+   {
+    "w": "in advance",
+    "m": "미리, 사전에"
+   },
+   {
+    "w": "learning facilitator",
+    "m": "학습 촉진자"
+   }
+  ]
  },
  {
   "key": "2023-09|38",
@@ -57396,7 +61599,45 @@
     }
    ],
    "echo": "(B) 사후 치유 → (C)however 사전 대비 → (A) 선제적 행동으로 이어지는 흐름"
-  }
+  },
+  "vlist": [
+   {
+    "w": "close connection",
+    "m": "밀접한 연관"
+   },
+   {
+    "w": "pre-emptive action",
+    "m": "선제적 조치"
+   },
+   {
+    "w": "evolve",
+    "m": "진화하다"
+   },
+   {
+    "w": "heal wounds",
+    "m": "상처를 치유하다"
+   },
+   {
+    "w": "immune system",
+    "m": "면역 체계"
+   },
+   {
+    "w": "ward off",
+    "m": "물리치다, 막다"
+   },
+   {
+    "w": "anticipate",
+    "m": "예상하다"
+   },
+   {
+    "w": "injury and disease",
+    "m": "부상과 질병"
+   },
+   {
+    "w": "mechanism",
+    "m": "기제, 메커니즘"
+   }
+  ]
  },
  {
   "key": "2024-06|38",
@@ -57688,7 +61929,49 @@
     }
    ],
    "echo": "삽입문이 '현실 착각 불가' 설정을 깔고 ④ 'such an illusion'이 이를 받는 자리 = ④"
-  }
+  },
+  "vlist": [
+   {
+    "w": "irrealism",
+    "m": "비현실주의"
+   },
+   {
+    "w": "predominate",
+    "m": "지배하다, 우세하다"
+   },
+   {
+    "w": "take A for B",
+    "m": "A를 B로 여기다/오인하다"
+   },
+   {
+    "w": "veil",
+    "m": "가리다, 감추다"
+   },
+   {
+    "w": "decry",
+    "m": "비난하다, 헐뜯다"
+   },
+   {
+    "w": "technical innovation",
+    "m": "기술 혁신"
+   },
+   {
+    "w": "in the direction of",
+    "m": "~의 방향으로"
+   },
+   {
+    "w": "turn away from",
+    "m": "~에서 멀어지게 하다"
+   },
+   {
+    "w": "come into play",
+    "m": "작용하다, 활동하다"
+   },
+   {
+    "w": "coincide",
+    "m": "일치하다"
+   }
+  ]
  },
  {
   "key": "2026-09|39",
@@ -57815,7 +62098,49 @@
     }
    ],
    "echo": "삽입문이 '생존≠중요성' 명제를 제시하고 ② 피라미드 예시가 이를 받는 자리 = ②"
-  }
+  },
+  "vlist": [
+   {
+    "w": "lie at the root of",
+    "m": "~의 근원에 있다"
+   },
+   {
+    "w": "evidence",
+    "m": "증거"
+   },
+   {
+    "w": "architectural history",
+    "m": "건축사"
+   },
+   {
+    "w": "remains",
+    "m": "잔해, 유적"
+   },
+   {
+    "w": "a multitude of",
+    "m": "다수의"
+   },
+   {
+    "w": "artefact",
+    "m": "인공물, 유물"
+   },
+   {
+    "w": "durability",
+    "m": "내구성"
+   },
+   {
+    "w": "place in context",
+    "m": "맥락 속에 두다"
+   },
+   {
+    "w": "interpret",
+    "m": "해석하다"
+   },
+   {
+    "w": "modify",
+    "m": "수정하다"
+   }
+  ]
  },
  {
   "key": "2024-09|36",
@@ -57936,7 +62261,45 @@
     }
    ],
    "echo": "고정관념=빠른 분류의 일반화, 위험은 경직성으로 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "classify and generalize",
+    "m": "분류하고 일반화하다"
+   },
+   {
+    "w": "carry a high cost",
+    "m": "큰 대가를 수반하다"
+   },
+   {
+    "w": "tendency to",
+    "m": "~하는 경향"
+   },
+   {
+    "w": "stereotype",
+    "m": "고정관념(을 갖다)"
+   },
+   {
+    "w": "sort into groups",
+    "m": "여러 집단으로 분류하다"
+   },
+   {
+    "w": "afterwards",
+    "m": "나중에"
+   },
+   {
+    "w": "inaccuracy",
+    "m": "부정확함"
+   },
+   {
+    "w": "connotation",
+    "m": "함축, 내포된 의미"
+   },
+   {
+    "w": "differ in principle from",
+    "m": "원칙적으로 ~와 다르다"
+   }
+  ]
  },
  {
   "key": "2022-수능|37",
@@ -58057,7 +62420,45 @@
     }
    ],
    "echo": "'another consciousness=저자'로 문학 세계의 매개성을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "in spite of",
+    "m": "~에도 불구하고"
+   },
+   {
+    "w": "deviate from",
+    "m": "~에서 벗어나다"
+   },
+   {
+    "w": "in one respect",
+    "m": "한 가지 점에서"
+   },
+   {
+    "w": "likeness",
+    "m": "유사함, 닮음"
+   },
+   {
+    "w": "be endowed with",
+    "m": "~을 부여받다, 타고나다"
+   },
+   {
+    "w": "convey",
+    "m": "전달하다"
+   },
+   {
+    "w": "heritage",
+    "m": "유산"
+   },
+   {
+    "w": "in principle",
+    "m": "원칙적으로"
+   },
+   {
+    "w": "perceive",
+    "m": "지각하다, 인식하다"
+   }
+  ]
  },
  {
   "key": "2025-수능|37",
@@ -58352,7 +62753,49 @@
     }
    ],
    "echo": "넣을 문장의 millisecond precision을 ⑤의 This microlevel access가 받음 = ⑤"
-  }
+  },
+  "vlist": [
+   {
+    "w": "manipulation",
+    "m": "조작"
+   },
+   {
+    "w": "convert",
+    "m": "변환하다"
+   },
+   {
+    "w": "editing operations",
+    "m": "편집 작업"
+   },
+   {
+    "w": "precision",
+    "m": "정밀함"
+   },
+   {
+    "w": "digitization",
+    "m": "디지털화"
+   },
+   {
+    "w": "undo",
+    "m": "되돌리다"
+   },
+   {
+    "w": "twist and bend",
+    "m": "비틀고 구부리다"
+   },
+   {
+    "w": "sacrifice",
+    "m": "희생하다"
+   },
+   {
+    "w": "splice",
+    "m": "이어 붙이다"
+   },
+   {
+    "w": "conceal",
+    "m": "감추다"
+   }
+  ]
  },
  {
   "key": "2023-09|39",
@@ -58647,7 +63090,49 @@
     }
    ],
    "echo": "방화가 억제하려던 관목 재성장을 오히려 부추김"
-  }
+  },
+  "vlist": [
+   {
+    "w": "wildfire",
+    "m": "산불"
+   },
+   {
+    "w": "intentional",
+    "m": "의도적인"
+   },
+   {
+    "w": "millennia",
+    "m": "수천 년"
+   },
+   {
+    "w": "stockmen",
+    "m": "목축업자"
+   },
+   {
+    "w": "woody vegetation",
+    "m": "목본 식물"
+   },
+   {
+    "w": "stimulate",
+    "m": "자극하다, 촉진하다"
+   },
+   {
+    "w": "recolonize",
+    "m": "다시 자리 잡다"
+   },
+   {
+    "w": "be succeeded by",
+    "m": "~로 뒤이어지다"
+   },
+   {
+    "w": "regrowth",
+    "m": "재성장"
+   },
+   {
+    "w": "scrubby growth",
+    "m": "관목 성장"
+   }
+  ]
  },
  {
   "key": "2023-09|37",
@@ -58768,7 +63253,45 @@
     }
    ],
    "echo": "의식적 사용(도구 비유)에서 덜 인식하는 축으로 대조하며 이어짐"
-  }
+  },
+  "vlist": [
+   {
+    "w": "operate",
+    "m": "작동하다, 기능하다"
+   },
+   {
+    "w": "cognizant",
+    "m": "인식하는, 알고 있는"
+   },
+   {
+    "w": "worldview",
+    "m": "세계관"
+   },
+   {
+    "w": "offer an account of",
+    "m": "~을 설명하다"
+   },
+   {
+    "w": "given",
+    "m": "~을 고려하면"
+   },
+   {
+    "w": "find oneself in",
+    "m": "(어떤 상황에) 처하다"
+   },
+   {
+    "w": "call for",
+    "m": "요구하다, 필요로 하다"
+   },
+   {
+    "w": "justify",
+    "m": "정당화하다"
+   },
+   {
+    "w": "discursively available",
+    "m": "말로 설명 가능한"
+   }
+  ]
  },
  {
   "key": "2022-06|38",
@@ -59225,7 +63748,49 @@
     }
    ],
    "echo": "'깊은 친숙함이 유용'을 바로 뒤 'This is because'가 그 이유로 뒷받침"
-  }
+  },
+  "vlist": [
+   {
+    "w": "familiarity with",
+    "m": "~에 대한 익숙함/친숙함"
+   },
+   {
+    "w": "reach a judgement",
+    "m": "판단을 내리다"
+   },
+   {
+    "w": "informed judgement",
+    "m": "정보에 근거한 판단"
+   },
+   {
+    "w": "acknowledge",
+    "m": "인정하다"
+   },
+   {
+    "w": "a sense of",
+    "m": "~에 대한 감각/인식"
+   },
+   {
+    "w": "come with",
+    "m": "~을 수반하다, 딸려 오다"
+   },
+   {
+    "w": "affordance",
+    "m": "행동유도성, 제공하는 가능성"
+   },
+   {
+    "w": "exploit",
+    "m": "활용하다, 이용하다"
+   },
+   {
+    "w": "embodied in",
+    "m": "~에 구현된"
+   },
+   {
+    "w": "push the limits",
+    "m": "한계를 밀어붙이다"
+   }
+  ]
  },
  {
   "key": "2022-06|22",
@@ -60088,31 +64653,36 @@
     "n": 1,
     "tx": "<b>Side Effects</b> of Privacy Protection Technologies",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "사생활 보호 기술의 부작용"
    },
    {
     "n": 2,
     "tx": "The <b>Legal Domain</b> of Privacy Claims and Conflicts",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면어휘",
+    "ko": "사생활 권리 주장과 갈등의 법적 영역"
    },
    {
     "n": 3,
     "tx": "The Right to Privacy: <b>Evolving Concepts and Practices</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 근거",
+    "ko": "사생활권: 진화하는 개념과 관행"
    },
    {
     "n": 4,
     "tx": "Who Really Benefits from <b>Looser Privacy Regulations</b>?",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 없음",
+    "ko": "느슨한 사생활 규제로 진짜 이득을 보는 자는 누구인가?"
    },
    {
     "n": 5,
     "tx": "Less Is More: <b>Reduce State Intervention</b> in Privacy!",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대",
+    "ko": "적을수록 좋다: 사생활에 대한 국가 개입을 줄여라!"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 프라이버시=진화하는 개념·관행 · <span class=\"xo\">①</span>보호기술 부작용 <span class=\"xo\">②</span>법적 영역·갈등 <span class=\"xo\">④</span>규제 완화 수혜자 <span class=\"xo\">⑤</span>국가 개입 축소",
@@ -60149,6 +64719,44 @@
     }
    ],
    "echo": "'adapt·reinterpreted'가 정답 ③의 'Evolving'을 재진술"
-  }
+  },
+  "vlist": [
+   {
+    "w": "extend to",
+    "m": "~까지 미치다, 확장되다"
+   },
+   {
+    "w": "freedom of expression",
+    "m": "표현의 자유"
+   },
+   {
+    "w": "general interest",
+    "m": "공익"
+   },
+   {
+    "w": "take offence at",
+    "m": "~에 불쾌해하다"
+   },
+   {
+    "w": "pose a threat",
+    "m": "위협을 가하다"
+   },
+   {
+    "w": "arbitrary interference",
+    "m": "자의적 간섭"
+   },
+   {
+    "w": "circulate",
+    "m": "유포되다"
+   },
+   {
+    "w": "reinterpret",
+    "m": "재해석하다"
+   },
+   {
+    "w": "scope",
+    "m": "범위"
+   }
+  ]
  }
 ]
