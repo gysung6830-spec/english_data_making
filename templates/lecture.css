@@ -146,7 +146,7 @@ body{
 .q-lead{ font-weight:700; color:var(--red); }
 .mis{ font-size:9.8pt; color:#3f4654; padding:3px 11px; margin:4px 0 0;
   border:1.2px solid #f0d5cf; background:#fdf3f1; border-radius:8px; line-height:1.5; }
-.mis-x{ color:var(--red); font-weight:700; margin-right:6px; }
+.mis-x{ color:var(--red); font-weight:700; margin-left:4px; white-space:nowrap; }
 .mis-line{ font-size:9pt; color:#8b93a1; margin:3px 0 3px 4px; }
 .mis-line .writeline.inline.wide{ width:80%; }
 .mis-why{ font-size:9pt; color:var(--green-d); background:var(--green-soft);
@@ -169,7 +169,7 @@ body{
 
 /* 체크박스형 선택지 */
 .choices{ display:flex; flex-wrap:wrap; gap:5px 16px; margin:5px 0 2px; }
-.choice{ font-size:9.8pt; color:#3f4654; font-weight:500; display:inline-flex; align-items:center;
+.choice{ font-size:9pt; color:#3f4654; font-weight:500; display:inline-flex; align-items:center;
   gap:6px; white-space:nowrap; }
 .ck{ display:inline-block; width:13px; height:13px; border:1.6px solid #b9bed0;
   border-radius:4px; background:#fff; vertical-align:middle; }
@@ -207,7 +207,7 @@ mark.hl0{ background:#fff2a1; } mark.hl1{ background:#bfe8c6; }
 .cswatch{ display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
 .cswatch.hl0{ background:#fff2a1; } .cswatch.hl1{ background:#bfe8c6; }
 .cleg .cvar{ color:#9aa0b4; font-size:8.6pt; }
-.hl-passage{ font-size:9.4pt; line-height:1.48; color:var(--ink); background:#fff;
+.hl-passage{ font-size:10.2pt; line-height:1.52; color:var(--ink); background:#fff;
   border:1px solid var(--line); border-radius:9px; padding:6px 10px; }
 .hl-passage .snum{ font-weight:700; color:var(--green); font-size:7pt; margin-right:1px; }
 

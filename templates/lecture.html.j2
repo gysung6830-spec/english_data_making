@@ -48,7 +48,7 @@
         <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         <div class="s-q"><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
         {% for m in it.misreads %}
-        <div class="mis"><span class="mis-x">✕</span>{{ m.statement }}</div>
+        <div class="mis">{{ m.statement }} <span class="mis-x">(X)</span></div>
         {% if teacher %}<div class="mis-why">→ {{ m.why }}</div>{% else %}<div class="mis-line">왜? <span class="writeline inline wide"></span></div>{% endif %}
         {% endfor %}
       </div>
