@@ -8269,17 +8269,29 @@
   },
   "restate": {
    "thesis": "귀엽고 아름다운 디자인은 서로 다른 두 동기를 유발한다.",
-   "kind": "single",
-   "has_restate": false,
+   "kind": "compare",
+   "has_restate": true,
    "chain": [
     {
      "en": "cute and beautiful designs elicit two very different motivations",
-     "ko": "귀엽고 아름다운 디자인은 두 다른 동기를 유발",
+     "ko": "귀엽고 아름다운 디자인은 아주 다른 두 동기를 유발한다",
      "role": "주제문",
      "how": "—"
+    },
+    {
+     "en": "A cute product or package design elicits a nurturing motivation",
+     "ko": "귀여운 디자인은 돌봄 동기를 유발한다",
+     "role": "재진술",
+     "how": "—"
+    },
+    {
+     "en": "The beautiful product or package design elicits a self-expressive, or signaling, motivation",
+     "ko": "아름다운 디자인은 자기표현·신호 동기를 유발한다",
+     "role": "정답근거",
+     "how": "반대구조"
     }
    ],
-   "echo": "동기(긍정)→단점(부정)은 새 정보 전개이며 핵심의 재진술이 아니다."
+   "echo": "귀여움=돌봄 동기, 아름다움=자기표현 동기로 두 동기가 대비된다"
   },
   "vlist": [
    {
@@ -12026,17 +12038,28 @@
   "restate": {
    "thesis": "음식은 단순한 필수품을 넘어 하나의 문화로 부상했다.",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
-     "en": "Food became more than just a life necessity",
-     "ko": "음식은 단순한 생계 필수품 그 이상이 되었다",
+     "en": "the focus of those involved with food as a human and economic phenomenon was on its production, preservation, distribution, pricing and other practical concerns",
+     "ko": "음식은 오랫동안 생산·보존·유통 등 실용적 관심의 대상이었다",
      "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "Food became more than just a life necessity",
+     "ko": "음식은 단순한 생활 필수품 이상이 되었다",
+     "role": "재진술",
+     "how": "반대구조"
+    },
+    {
+     "en": "The rise of restaurants eventually led to a class of diners who prided themselves on being critics of taste, food and cooking",
+     "ko": "식당의 부상이 미식 비평가 계층을 낳았다",
+     "role": "정답근거",
      "how": "—"
     }
    ],
-   "subjects": [],
-   "echo": "핵심 'more than a life necessity'는 이후 역사적 전개·예시로만 이어져 되풀이된 재진술 표현이 없음."
+   "echo": "'실용적 필수품→필수품 이상→미식 비평 문화'로 재진술"
   },
   "vlist": [
    {
@@ -13024,14 +13047,13 @@
    "has_restate": false,
    "chain": [
     {
-     "en": "our everyday physical experiences in the world contribute to our understanding of mathematical concepts",
-     "ko": "일상의 신체 경험이 수학 개념 이해에 기여한다",
+     "en": "how our everyday physical experiences in the world contribute to our understanding of mathematical concepts",
+     "ko": "일상의 신체 경험이 수학 개념 이해에 기여하는 방식",
      "role": "주제문",
      "how": "—"
     }
    ],
-   "subjects": [],
-   "echo": "삽입 문항으로, 걷기 예시·세부만 이어질 뿐 핵심을 다른 말로 되풀이한 재진술 표현이 없음."
+   "echo": "주제 제시 후 걷기 한 예시만 확장될 뿐 재진술 없음"
   },
   "vlist": [
    {
@@ -14539,23 +14561,28 @@
   "restate": {
    "thesis": "숲의 다양성이 비숲을 숲으로 바꾸는 정당화가 될 순 없다.",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
-     "en": "forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests",
-     "ko": "숲은 비교적 다양하나 비숲을 숲으로 바꾸는 근거는 아니다",
+     "en": "forests are relatively diverse, but this should not necessarily be",
+     "ko": "숲은 다양하나 이것이 반드시 ~일 필요는 없다",
      "role": "주제문",
      "how": "—"
     },
     {
-     "en": "ecologists frequently complain about the Commission’s work",
-     "ko": "생태학자들은 습지를 숲으로 바꾸는 일을 비판한다",
+     "en": "Wetlands, meadows, and grasslands have a unique biota too, even if it is often not as rich as a forest biota",
+     "ko": "습지·초원도 고유한 생물상을 지닌다",
+     "role": "재진술",
+     "how": "반대구조"
+    },
+    {
+     "en": "the wildlife threatened by this activity includes many uncommon species",
+     "ko": "이 활동이 위협하는 야생동물엔 희귀종이 많다",
      "role": "정답근거",
-     "how": "반복"
+     "how": "—"
     }
    ],
-   "subjects": [],
-   "echo": "'converting nonforests into forests는 정당화되지 않음'을 '생태학자들의 비판'으로 재진술."
+   "echo": "'비숲도 고유 생물상'·'희귀종 위협'이 숲 우월성 부정을 재진술"
   },
   "blank": true,
   "vlist": [
@@ -17465,16 +17492,28 @@
   "restate": {
    "thesis": "쓰기 지도의 강조점을 결과 평가에서 과정 중심 수정으로 옮긴다.",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
-     "en": "Process writing shifts the emphasis in teaching writing from evaluation to revision",
-     "ko": "과정 중심 쓰기는 강조점을 평가에서 수정으로 옮김",
+     "en": "Such instruction is very ‘product-oriented;’ there is no involvement of the teacher in the act or ‘process’ of writing",
+     "ko": "전통 지도는 결과 중심이며 교사가 과정에 관여하지 않는다",
      "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "they receive feedback on their writing up to that point, make revisions",
+     "ko": "학생들은 피드백을 받아 수정한다",
+     "role": "재진술",
+     "how": "반대구조"
+    },
+    {
+     "en": "Process writing shifts the emphasis in teaching writing from evaluation to revision",
+     "ko": "과정 쓰기는 평가에서 수정으로 강조점을 옮긴다",
+     "role": "정답근거",
      "how": "—"
     }
    ],
-   "echo": "연결어(Subsequently·on the other hand)로 순서 확정, 재진술 없음."
+   "echo": "'결과 중심'↔'피드백·수정'으로 평가→수정 전환을 재진술"
   },
   "vlist": [
    {
@@ -19847,16 +19886,28 @@
   "restate": {
    "thesis": "무엇이 '수학적 글'인지 알아보는 기준을 묻는 글",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
-     "en": "how do you recognise some writing is mathematical in the first place?",
-     "ko": "애초에 그게 수학적 글인 줄은 어떻게 아는가",
+     "en": "how do you recognise some writing is mathematical in the first place",
+     "ko": "어떤 글이 수학적인지 애초에 어떻게 알아보는가",
      "role": "주제문",
+     "how": "—"
+    },
+    {
+     "en": "are obvious signs, but a lot of those are really quite modern",
+     "ko": "기호는 명백한 표식이나 상당수는 사실 근대적이다",
+     "role": "재진술",
+     "how": "반대구조"
+    },
+    {
+     "en": "there has to be something mathematical going on for us to say that it is mathematics",
+     "ko": "수학이라 하려면 수학적인 무언가가 있어야 한다",
+     "role": "정답근거",
      "how": "—"
     }
    ],
-   "echo": "재진술 없음: '이해못함→인지 질문→기호' 흐름 연결인 순서 (B)-(A)-(C) ②"
+   "echo": "'기호는 근대적 표식'↔'수학적 내용이 있어야 수학'으로 기준 재진술"
   },
   "vlist": [
    {
@@ -22071,16 +22122,34 @@
   "restate": {
    "thesis": "화석 기록은 진화 이론의 예측을 검증하는 증거다.",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
-     "en": "The fossil record provides evidence of evolution.",
+     "en": "The fossil record provides evidence of evolution",
      "ko": "화석 기록은 진화의 증거를 제공한다",
      "role": "주제문",
      "how": "—"
+    },
+    {
+     "en": "the fossil record also provides tests of the predictions made from evolutionary theory",
+     "ko": "화석 기록은 진화 이론 예측의 검증도 제공한다",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "The fossil record supports this prediction",
+     "ko": "화석 기록은 이 예측을 뒷받침한다",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "countless examinations of the fossil record strengthens the case for evolutionary theory",
+     "ko": "무수한 화석 검토가 진화 이론을 강화한다",
+     "role": "정답근거",
+     "how": "—"
     }
    ],
-   "echo": "재진술 없음: '증거→예측검증→뒷받침→반대가정'은 논증 전개인 순서 (C)-(B)-(A)"
+   "echo": "'증거→예측 검증→예측 지지→이론 강화'로 화석 기록 반복 재진술"
   },
   "vlist": [
    {
@@ -24505,16 +24574,28 @@
   "restate": {
    "thesis": "초고층 설계자는 소용돌이 흘림을 줄이려 바람을 교란시킨다.",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
      "en": "skyscraper designers do everything in their powers to confuse the wind",
-     "ko": "설계자가 바람을 교란시킴",
+     "ko": "설계자는 바람을 교란시키려 온갖 노력을 한다",
      "role": "주제문",
      "how": "—"
+    },
+    {
+     "en": "Chopping or rounding off corners of a building can likewise make it more aerodynamic",
+     "ko": "모서리를 자르거나 둥글게 하면 더 공기역학적이 된다",
+     "role": "재진술",
+     "how": "동의어"
+    },
+    {
+     "en": "can help by disturbing or delaying the formation of strong vortices",
+     "ko": "강한 소용돌이 형성을 교란·지연시켜 도움이 된다",
+     "role": "정답근거",
+     "how": "동의어"
     }
    ],
-   "echo": "삽입문(바람 교란=해결책)은 문제 설명(①②)과 해결책 나열(③④⑤)의 경계인 ③에 들어감"
+   "echo": "'바람 교란'이 '공기역학적 형태'·'소용돌이 형성 교란'으로 재진술"
   },
   "vlist": [
    {
@@ -29412,16 +29493,28 @@
   "restate": {
    "thesis": "로빈은 위치와 친숙한 노래를 연관지어 이웃과 낯선 새를 구별한다",
    "kind": "single",
-   "has_restate": false,
+   "has_restate": true,
    "chain": [
     {
      "en": "they were able to discriminate between the songs of neighbors and strangers",
-     "ko": "이웃과 낯선 새의 노래를 구별했다",
+     "ko": "이웃과 낯선 새의 노래를 구별할 수 있었다",
      "role": "주제문",
      "how": "—"
+    },
+    {
+     "en": "this difference in responding to neighbor versus stranger occurred only when the neighbor’s song was played by a loudspeaker placed at the boundary",
+     "ko": "이 구별은 노래가 경계 지점에서 재생될 때만 나타났다",
+     "role": "재진술",
+     "how": "—"
+    },
+    {
+     "en": "it was treated as the call of a stranger",
+     "ko": "다른 경계에서면 낯선 새의 소리로 취급되었다",
+     "role": "정답근거",
+     "how": "반대구조"
     }
    ],
-   "echo": "실험은 경계 위치에 따른 반응 차이를 보일 뿐, 핵심을 되풀이한 재진술은 없다"
+   "echo": "'이웃/낯선 구별'이 '경계 위치에서만 성립'으로 위치 연관 재진술"
   },
   "blank": true,
   "vlist": [
