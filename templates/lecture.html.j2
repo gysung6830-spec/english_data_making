@@ -45,8 +45,8 @@
       <div class="s-item">
         <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}{% if not teacher %}<span class="gram-do">✏ 위 어법이 문장의 어디에 쓰였는지 찾아 ○표 해보자</span>{% endif %}</div>{% endif %}
-        <div class="ko-box"><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
-        <div class="s-q"><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
+        <div class="ko-box"><span class="q-chip">문제</span><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
+        <div class="s-q"><span class="q-chip">문제</span><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
         {% for m in it.misreads %}
         <div class="mis">{{ m.statement }} <span class="mis-x">(X)</span></div>
         {% if teacher %}<div class="mis-why">→ {{ m.why }}</div>{% else %}<div class="mis-line">왜? <span class="writeline inline wide"></span></div>{% endif %}
@@ -62,12 +62,12 @@
       <span class="sec-desc">문장을 다 봤으니 지문 전체를 정리해봐{% if not teacher %} (정답은 강사용){% endif %}</span></div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🔎</span>소재<span class="pc-hint">이 지문, 뭐에 관한 글이야?</span></div>
+      <div class="pc-q"><span class="q-chip">문제</span><span class="em">🔎</span>소재<span class="pc-hint">이 지문, 뭐에 관한 글이야?</span></div>
       {% if teacher %}<div class="pred-a">{{ p.topic }}</div>{% else %}<div class="writeline"></div>{% endif %}
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🗣</span>필자 의견<span class="pc-hint">태도(긍/부/중)를 판단</span></div>
+      <div class="pc-q"><span class="q-chip">문제</span><span class="em">🗣</span>필자 의견<span class="pc-hint">태도(긍/부/중)를 판단</span></div>
       <div class="choices">
         {% for st in p.stances %}<span class="choice {% if teacher and st == p.stance %}on{% endif %}"><span class="ck"></span>{{ st }}</span>{% endfor %}
       </div>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🧩</span>글의 구조<span class="pc-hint">글이 어떻게 전개되는지 판단</span></div>
+      <div class="pc-q"><span class="q-chip">문제</span><span class="em">🧩</span>글의 구조<span class="pc-hint">글이 어떻게 전개되는지 판단</span></div>
       <div class="choices">
         {% for stc in p.structures %}<span class="choice {% if teacher and stc == p.structure %}on{% endif %}"><span class="ck"></span>{{ stc }}</span>{% endfor %}
       </div>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}소재별로 번호를 달아 형광펜 표시(흑백에서도 번호로 구분){% else %}소재마다 '첫 표현'만 번호·형광펜으로 표시해놨어 — 같은 번호로 이어지는 표현을 마저 찾아봐{% endif %}</span></div>
+      <div class="pc-q"><span class="q-chip">문제</span><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}소재별로 번호를 달아 형광펜 표시(흑백에서도 번호로 구분){% else %}소재마다 '첫 표현'만 번호·형광펜으로 표시해놨어 — 같은 번호로 이어지는 표현을 마저 찾아봐{% endif %}</span></div>
       <div class="chain-legend">
         {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
       </div>
@@ -98,7 +98,7 @@
     </div>
 
     <div class="pcard flow-card">
-      <div class="pc-q green"><span class="em">📝</span>글 내용 정리<span class="pc-hint">글의 순서(도입→전개→…){% if not teacher %} · 빈칸을 채워봐{% endif %}</span></div>
+      <div class="pc-q green"><span class="q-chip">문제</span><span class="em">📝</span>글 내용 정리<span class="pc-hint">글의 순서(도입→전개→…){% if not teacher %} · 빈칸을 채워봐{% endif %}</span></div>
       {% for b in p.flow_blocks %}
       <div class="fblock">
         <div class="fb-head"><span class="fb-stage">{{ b.stage }}</span><span class="fb-sum">{{ b.summary }}</span>
@@ -135,7 +135,7 @@
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
-        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
+        <div class="drill-q"><span class="q-chip">문제</span><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
         {% if d.kind == '객관식' %}
         <div class="drill-opts">
           {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}
