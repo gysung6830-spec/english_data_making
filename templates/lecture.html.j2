@@ -111,7 +111,7 @@
   {#- ⑤ 이 지문의 핵심 문법 (새 페이지) -#}
   <div class="section brk">
     <div class="sec-head"><span class="sec-no">5</span><span class="sec-title">이 지문의 핵심 문법</span>
-      <span class="sec-desc">이 문법 하나만 확실히! (설명 빈칸 채우기 + 해석·영작 연습)</span></div>
+      <span class="sec-desc">이 문법 하나만 확실히! (설명 빈칸 채우기 + 객관식·영작 연습)</span></div>
     <div class="kg-box">
       <div class="kg-head">🔑 <span class="kg-point">{{ p.key_grammar.point }}</span></div>
       <div class="kg-exp"><span class="kg-lab">설명</span>
@@ -124,11 +124,11 @@
     </div>
 
     <div class="kg-drills">
-      <div class="kg-drills-h">✏ 연습문제 — 객관식 · 해석 · 영작으로 확인</div>
+      <div class="kg-drills-h">✏ 연습문제 — 객관식 · 영작(지문 문장 + 응용)으로 확인</div>
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
-        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{{ d.question }}</div>
+        <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
         {% if d.kind == '객관식' %}
         <div class="drill-opts">
           {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}

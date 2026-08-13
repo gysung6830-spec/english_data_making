@@ -59,12 +59,13 @@ class RestatementChain(BaseModel):
 # 지문 전체 개관 (LLM 1차 호출) — ③ 글 예측
 # ---------------------------------------------------------------------------
 class GrammarDrill(BaseModel):
-    """핵심 문법 연습문제(객관식 / 해석 / 영작)."""
-    kind: Literal["객관식", "해석", "영작"]
-    question: str         # 객관식=문제(밑줄·빈칸 포함) / 해석=영어 문장 / 영작=한국어 문장
+    """핵심 문법 연습문제(객관식 / 영작). '해석' 유형은 사용하지 않는다."""
+    kind: Literal["객관식", "영작"]
+    question: str         # 객관식=문제(밑줄·빈칸 포함) / 영작=한국어 문장
     answer: str           # 모범 답(객관식=정답 선택지 원문)
     options: list[str] = Field(default_factory=list)  # 객관식 선택지(3~5개)
     words: list[str] = Field(default_factory=list)    # 영작 제시 단어(반드시 제공)
+    from_passage: bool = False  # 영작: 지문에 실제로 있는 문장 복원이면 True(응용이면 False)
 
 
 class KeyGrammar(BaseModel):
@@ -73,8 +74,8 @@ class KeyGrammar(BaseModel):
     explanation: list[str] = Field(min_length=3, max_length=6)  # 항목별 설명(각 한 줄, [[ ]] 빈칸 가능)
     example: str          # 지문 속 실제 예(짧게)
     example_analysis: str = ""  # 지문 예를 이 문법으로 분석한 한 줄
-    # 연습문제: 객관식 3 + 해석 3 + 영작 3 = 9개
-    drills: list[GrammarDrill] = Field(min_length=9, max_length=9)
+    # 연습문제: 객관식 3 + 영작 2(지문 문장 1 + 응용 1) = 5개 (해석 제외)
+    drills: list[GrammarDrill] = Field(min_length=5, max_length=5)
 
 
 class Overview(BaseModel):

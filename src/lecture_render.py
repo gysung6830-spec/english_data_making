@@ -149,7 +149,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "example": ov.key_grammar.example,
             "example_analysis": ov.key_grammar.example_analysis,
             "drills": [{"kind": d.kind, "question": d.question, "answer": d.answer,
-                        "options": list(d.options), "words": list(d.words)}
+                        "options": list(d.options), "words": list(d.words),
+                        "from_passage": d.from_passage}
                        for d in ov.key_grammar.drills],
         },
         "sentences": p.sentences,

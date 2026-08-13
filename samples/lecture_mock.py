@@ -64,37 +64,20 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
                                       "아기의 엄마들 (its mother)",
                                       "탐색과 놀이 활동 (exploratory and play activity)"],
                              answer="자주 겁먹지 '않는' 아기들 (infants who are not)"),
-                GrammarDrill(kind="해석",
-                             question="She spent more time reading than did her classmates.",
-                             answer="그녀는 자기 반 친구들보다 독서에 더 많은 시간을 썼다."),
-                GrammarDrill(kind="해석",
-                             question="City dwellers often walk less than do people in the countryside.",
-                             answer="도시 거주자들은 시골 사람들보다 흔히 덜 걷는다."),
-                GrammarDrill(kind="해석",
-                             question="The new model sells better than did the old one.",
-                             answer="그 새 모델은 예전 모델보다 더 잘 팔린다."),
-                # 영작은 '지문에 실제로 나온 문장/절'을 복원하도록 출제
-                GrammarDrill(kind="영작",
-                             question="(지문 2문장) 아기가 겁을 먹으면 그 아기는 항상 보호와 안전을 위해 "
-                                      "엄마를 찾아 나선다.",
-                             words=["When", "frightened", "seeks out", "protection", "safety"],
-                             answer="When an infant is frightened it always seeks out its mother "
-                                    "for protection and safety."),
-                GrammarDrill(kind="영작",
-                             question="(지문 3문장 · 핵심 문법) 따라서 자주 겁을 먹는 아기들은 그렇지 않은 "
+                # 영작 (a): 지문에 실제로 있는 문장 복원(from_passage=True) — 핵심 문법이 쓰인 문장
+                GrammarDrill(kind="영작", from_passage=True,
+                             question="(지문 3문장) 따라서 자주 겁을 먹는 아기들은 그렇지 않은 "
                                       "아기들보다 탐색할 시간과 놀 기회가 더 적을 가능성이 높다.",
                              words=["frequently frightened", "less time to explore",
                                     "fewer opportunities", "than will infants who are not"],
                              answer="Thus, frequently frightened infants will very likely have less "
                                     "time to explore and fewer opportunities to play than will "
                                     "infants who are not."),
-                GrammarDrill(kind="영작",
-                             question="(지문 4문장) 그러한 자발적인 억제는 소심하거나 불안한 아기들의 "
-                                      "사회성 발달을 늦추는 역할을 할 수 있다.",
-                             words=["voluntary restraints", "serve to", "slow down",
-                                    "social development"],
-                             answer="Such voluntary restraints may serve to slow down the social "
-                                    "development of shy or anxious infants."),
+                # 영작 (b): 지문에 없는 응용 문장(from_passage=False) — 같은 문법 응용
+                GrammarDrill(kind="영작", from_passage=False,
+                             question="(응용 · 지문에 없는 문장) 그는 내가 그런 것보다 더 열심히 공부했다.",
+                             words=["studied", "harder", "than", "did", "I"],
+                             answer="He studied harder than did I."),
             ],
         ),
         topic="겁을 잘 먹는 아기는 엄마에게 붙어 있느라 탐색·놀이를 못하고, 그게 오래 지속되면 사회성 발달이 느려질 수 있다는 얘기야.",
