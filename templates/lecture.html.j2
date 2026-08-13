@@ -8,12 +8,11 @@
 
   {#- 지문 헤더 (학생용은 정답이 될 수 있는 상단 제목을 감춤) -#}
   <div class="doc-head">
-    <div class="kicker"><span class="pill-doc">지문 {{ p.no }}{% if p.total > 1 %} / {{ p.total }}{% endif %}</span>
+    <div class="kicker"><span class="pill-doc">지문 {% if p.item_no %}{{ p.item_no }}{% else %}{{ p.no }}{% endif %}</span>
       {% if teacher %}<span class="tag-teacher">강사용 · 정답 표시</span>{% else %}<span class="tag-student">학생 문제지</span>{% endif %}
-      {% if p.item_no %}<span class="item-badge">{{ p.item_no }}</span>{% endif %}
     </div>
     {% if teacher %}<div class="doc-title">{{ p.theme_ko }}</div>{% endif %}
-    <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해 — 어휘 · 끊어읽기 · 내용 · 예측{% if p.source %} &nbsp;·&nbsp; {{ p.source }}{% endif %}</div>
+    <div class="doc-sub">필생보 · 필자의 생각이 보이는 영어독해{% if p.source %} &nbsp;·&nbsp; 출처: {{ p.source }}{% endif %}</div>
   </div>
 
   {#- ① 지문 통째로 읽기 -#}
