@@ -73,18 +73,28 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
                 GrammarDrill(kind="해석",
                              question="The new model sells better than did the old one.",
                              answer="그 새 모델은 예전 모델보다 더 잘 팔린다."),
+                # 영작은 '지문에 실제로 나온 문장/절'을 복원하도록 출제
                 GrammarDrill(kind="영작",
-                             question="그는 내가 그런 것보다 더 열심히 공부했다. (than 도치 사용)",
-                             words=["harder", "than", "did", "I"],
-                             answer="He studied harder than did I."),
+                             question="(지문 2문장) 아기가 겁을 먹으면 그 아기는 항상 보호와 안전을 위해 "
+                                      "엄마를 찾아 나선다.",
+                             words=["When", "frightened", "seeks out", "protection", "safety"],
+                             answer="When an infant is frightened it always seeks out its mother "
+                                    "for protection and safety."),
                 GrammarDrill(kind="영작",
-                             question="그 팀은 우리가 그런 것보다 더 빨리 과제를 끝냈다.",
-                             words=["finished", "faster", "than", "did", "we"],
-                             answer="The team finished the task faster than did we."),
+                             question="(지문 3문장 · 핵심 문법) 따라서 자주 겁을 먹는 아기들은 그렇지 않은 "
+                                      "아기들보다 탐색할 시간과 놀 기회가 더 적을 가능성이 높다.",
+                             words=["frequently frightened", "less time to explore",
+                                    "fewer opportunities", "than will infants who are not"],
+                             answer="Thus, frequently frightened infants will very likely have less "
+                                    "time to explore and fewer opportunities to play than will "
+                                    "infants who are not."),
                 GrammarDrill(kind="영작",
-                             question="아이들은 어른들이 그런 것보다 더 빨리 배운다.",
-                             words=["learn", "more quickly", "than", "do", "adults"],
-                             answer="Children learn more quickly than do adults."),
+                             question="(지문 4문장) 그러한 자발적인 억제는 소심하거나 불안한 아기들의 "
+                                      "사회성 발달을 늦추는 역할을 할 수 있다.",
+                             words=["voluntary restraints", "serve to", "slow down",
+                                    "social development"],
+                             answer="Such voluntary restraints may serve to slow down the social "
+                                    "development of shy or anxious infants."),
             ],
         ),
         topic="겁을 잘 먹는 아기는 엄마에게 붙어 있느라 탐색·놀이를 못하고, 그게 오래 지속되면 사회성 발달이 느려질 수 있다는 얘기야.",
