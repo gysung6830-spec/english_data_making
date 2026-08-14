@@ -65,10 +65,12 @@ Second passage goes here."></textarea>
 
   <div class="row">
     <label class="field">
-      <span class="label">시작 문항번호 (선택)</span>
-      <input type="number" name="start_no" min="1" step="1" placeholder="예: 31 (비우면 자동)">
-      <span class="hint">입력하면 지문 라벨이 이 번호부터 <b>지문마다 1씩 증가</b>합니다
-        (예: 31 → <b>[31번] · [32번] …</b>). 비우면 원본 PDF 문항번호나 <b>지문 1·2</b>로 자동 표기.</span>
+      <span class="label">시작 문항번호 (선택 · <b>보통 비워두세요</b>)</span>
+      <input type="number" name="start_no" min="1" step="1"
+             autocomplete="off" inputmode="numeric" placeholder="비워두면 원본 PDF 번호 자동">
+      <span class="hint"><b>비워두면 원본 PDF의 문항번호(예: 18·19·20)를 그대로 씁니다.</b>
+        번호를 <b>직접 지정</b>하고 싶을 때만 입력하세요 — 입력하면 그 번호부터 지문마다 1씩
+        증가하며(예: 13 → [13번]·[14번]…) <b>PDF 원본 번호를 덮어씁니다.</b></span>
     </label>
     <div class="field"></div>
   </div>
