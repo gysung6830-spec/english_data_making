@@ -37,9 +37,11 @@ def analyze_lecture_passage(
     )
 
     # 2차: 어휘 + 문장별 끊어읽기(빈칸)/내용 객관식
+    #   ⑤ 핵심 문법을 넘겨 ③ 어법 칩과 역할 분담(중복 배제)하도록 함
+    kg_point = getattr(getattr(overview, "key_grammar", None), "point", "") or ""
     analysis: SentenceAnalysis = client.structured(
         system=lecture_prompts.SYSTEM,
-        prompt=lecture_prompts.sentence_prompt(title, sents),
+        prompt=lecture_prompts.sentence_prompt(title, sents, key_grammar_point=kg_point),
         model_cls=SentenceAnalysis,
         max_tokens=24000,
         max_retries=r,

@@ -100,8 +100,15 @@ def overview_prompt(title: str, sentences: list[LectureSentence]) -> str:
 
 
 # 2차: 어휘 + 문장별 끊어읽기/내용 ------------------------------------------
-def sentence_prompt(title: str, sentences: list[LectureSentence]) -> str:
+def sentence_prompt(title: str, sentences: list[LectureSentence],
+                    key_grammar_point: str = "") -> str:
     n = len(sentences)
+    kg = (key_grammar_point or "").strip()
+    kg_rule = (
+        f"   (⑤와 중복 조율) 이 지문의 '핵심 문법'은 '{kg}' 로 정해졌습니다. 이 문법은 ⑤에서 깊게 "
+        "다루므로 ③ 어법 칩에서는 '다시 뽑지 마세요'(역할 분담). 그 문법이 쓰인 문장이라도 ③에선 "
+        "'다른' 어법을 짚고, 짚을 게 없으면 빈 배열로 두세요.\n"
+    ) if kg else ""
     return (
         f"[지문 제목] {title}\n\n"
         f"[지문 — 문장 번호가 매겨져 있음 (총 {n}문장)]\n{_numbered(sentences)}\n\n"
@@ -109,10 +116,17 @@ def sentence_prompt(title: str, sentences: list[LectureSentence]) -> str:
         "각 문장 항목:\n"
         "- id: 위 문장 번호 그대로.\n"
         "- english: 그 문장의 원문 전체를 첫 단어부터 마침표까지 그대로.\n"
-        "- grammar: 그 문장에서 '중요한 어법 포인트' 1~3개를 {tag, note}로. tag 는 짧은 어법명"
-        "(예: '관계사 that', '분사구문', '비교급 than절 도치·생략', 'serve to+동사원형'), "
-        "note 는 학생이 바로 이해할 간단한 설명 한 줄(예: '앞의 the role 을 that절이 수식'). "
-        "짚을 어법이 없으면 빈 배열.\n"
+        "- grammar: 학생이 그 문장에서 '찾아 ○표' 할 '핵심 어법 포인트'를 {tag, note}로. ★선정 기준:\n"
+        "   (기준a) 그 문장의 '구조·해석을 좌우하는' 어법만 — 못 잡으면 해석이 흔들리는 것(수식 범위·"
+        "연결·생략·도치·비교 대상·수일치 등).\n"
+        "   (기준b) '시험 빈출' 어법을 우선하세요 — 관계사·분사(구문)·도치·비교·수일치·부정사/동명사·"
+        "접속사(명사절/부사절)·수동태·가정법 등.\n"
+        "   (기준c/난이도 하한) '단순 전치사구·부사(구)·기초 어형(단순 시제·복수·관사 등)'과 '누구나 아는 "
+        "기초'는 칩으로 뽑지 마세요.\n"
+        "   (개수) 문장 길이·복잡도에 맞추세요 — 짧고 단순한 문장은 0~1개(없으면 빈 배열), 긴 복문은 2~3개.\n"
+        + kg_rule +
+        "   tag=짧은 어법명(예: '관계사 that', '분사구문', '비교급 than절 도치', '가주어 it'), "
+        "note=학생이 바로 이해할 한 줄 설명(예: '앞의 the role 을 that절이 수식').\n"
         "- vocab: 그 문장에서 뽑을 핵심 어휘 2~5개를 {word, meaning}로. '중·고등 수준' 어휘만 담고 "
         "누구나 아는 아주 쉬운 기초 단어(초등 수준)는 제외하세요. 다의어·수준 높은 단어와 함께 "
         "'숙어·구동사(예: seek out, play a role in, serve to, keep up with)'도 적극 포함하세요"
