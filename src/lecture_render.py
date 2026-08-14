@@ -141,7 +141,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         flow_blocks.append({
             "stage": b.stage,
             "sentence_range": b.sentence_range,
-            "summary": _mark_ko(b.summary, teacher),
+            # ④ 글 내용 정리는 빈칸 없이 '전체 문장'을 보여준다([[ ]] 표시는 떼기만)
+            "summary": _mark_en(b.summary),
             "easy_example": b.easy_example,
         })
 
