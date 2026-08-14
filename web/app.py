@@ -105,12 +105,19 @@ def generate():
         pasted = split_passages(request.form.get("passages", ""))
         if not uploads and not pasted:
             return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '무료 미리보기'를 선택하세요.")
-        if not _api_available(cfg):
-            return fail("실제 생성에는 API 키가 필요합니다. (미리보기 전용 모드이거나 키가 "
-                        "없습니다.) 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
+        # API 키: 브라우저에서 붙여넣은 키(우선) → 없으면 .env 키. (미리보기 전용 모드는 키 무시)
+        preview_only = bool(app.config.get("PREVIEW_ONLY")
+                            or os.environ.get("EXAM_PREVIEW_ONLY"))
+        form_key = (request.form.get("api_key") or "").strip()
+        eff_key = None if preview_only else (form_key or cfg.api_key)
+        if not eff_key:
+            if preview_only:
+                return fail("미리보기 전용 모드입니다. '무료 미리보기'를 사용하세요.")
+            return fail("실제 생성에는 API 키가 필요합니다. 위 '🔑 API 키' 칸에 키를 붙여넣거나 "
+                        "(.env 에 설정해도 됩니다). 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
         from exam import ingest
         from exam.llm import ClaudeClient
-        client = ClaudeClient(cfg.api_key, cfg.model,
+        client = ClaudeClient(eff_key, cfg.model,
                               thinking=cfg.processing.thinking,
                               effort=cfg.processing.effort)
         try:

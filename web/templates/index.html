@@ -4,14 +4,28 @@
 {% if error %}<div class="alert">{{ error }}</div>{% endif %}
 
 {% if has_api_key %}
-  <div class="note ok">✅ API 키 감지됨 — <b>‘시험지 생성’</b>을 누를 때만 키가 사용됩니다(호출 비용 발생).
+  <div class="note ok">✅ API 키 감지됨(.env) — <b>‘시험지 생성’</b>을 누를 때만 키가 사용됩니다(호출 비용 발생).
     비용 없이 연습·미리보기만 하려면 <b>‘무료 미리보기’</b> 버튼을 누르세요.</div>
 {% else %}
-  <div class="note warn">⚠️ 미리보기 전용(또는 API 키 없음) — <b>‘무료 미리보기’</b>로 디자인을 공짜로 볼 수 있어요.
-    내 지문으로 실제 생성하려면 <code>.env</code>에 <code>ANTHROPIC_API_KEY</code>가 필요합니다.</div>
+  <div class="note warn">⚠️ <code>.env</code> 키가 없어요 — 아래 <b>‘API 키’</b> 칸에 키를 <b>붙여넣으면</b> 바로 생성할 수 있습니다.
+    (또는 비용 없이 <b>‘무료 미리보기’</b>) </div>
 {% endif %}
 
 <form method="post" action="{{ url_for('generate') }}" class="card" enctype="multipart/form-data">
+  <div class="field keybox">
+    <span class="label">🔑 API 키 (붙여넣기) — <b>.env 편집 없이 여기에 키를 넣어도 됩니다</b></span>
+    <div class="keyrow">
+      <input type="password" name="api_key" id="apiKey" placeholder="sk-ant-... (여기에 붙여넣기)"
+             autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button type="button" class="btn ghost keytoggle" id="keyToggle">표시</button>
+    </div>
+    <label class="check"><input type="checkbox" id="rememberKey" value="1">
+      <span>이 브라우저에 기억 <span class="hint2">(이 컴퓨터에만 저장 · 서버에는 저장 안 됨)</span></span></label>
+    <span class="hint">키는 <b>생성할 때만</b> 쓰이고 서버에 저장되지 않습니다.
+      {% if has_api_key %}<code>.env</code>에 키가 있으니 비워둬도 됩니다(비우면 .env 키 사용).{% else %}
+      키 발급: <code>console.anthropic.com</code>{% endif %}</span>
+  </div>
+
   <label class="field">
     <span class="label">① 지문 붙여넣기 (여러 개면 <code>---</code> 한 줄로 구분)</span>
     <textarea name="passages" rows="9" placeholder="Paste your English passage here.
@@ -268,6 +282,47 @@ Second passage goes here."></textarea>
       return;
     }
     setFile(pick);
+  });
+})();
+
+// API 키: 표시/숨김 토글 + '이 브라우저에 기억'(localStorage)
+(function () {
+  var key = document.getElementById('apiKey');
+  var toggle = document.getElementById('keyToggle');
+  var remember = document.getElementById('rememberKey');
+  if (!key) return;
+  var STORE = 'ortica_api_key';
+
+  // 저장해 둔 키가 있으면 자동 채움
+  try {
+    var saved = localStorage.getItem(STORE);
+    if (saved) { key.value = saved; if (remember) remember.checked = true; }
+  } catch (e) {}
+
+  if (toggle) toggle.addEventListener('click', function () {
+    var show = key.type === 'password';
+    key.type = show ? 'text' : 'password';
+    toggle.textContent = show ? '숨김' : '표시';
+  });
+
+  // '기억' 체크 상태 즉시 반영(끄면 저장분 삭제)
+  if (remember) remember.addEventListener('change', function () {
+    try {
+      if (!remember.checked) localStorage.removeItem(STORE);
+      else if (key.value.trim()) localStorage.setItem(STORE, key.value.trim());
+    } catch (e) {}
+  });
+
+  // 제출 시 기억 옵션이면 저장, 아니면 삭제
+  var forms = document.querySelectorAll('form');
+  forms.forEach(function (f) {
+    if (!f.contains(key)) return;
+    f.addEventListener('submit', function () {
+      try {
+        if (remember && remember.checked && key.value.trim()) localStorage.setItem(STORE, key.value.trim());
+        else localStorage.removeItem(STORE);
+      } catch (e) {}
+    });
   });
 })();
 </script>
