@@ -274,7 +274,26 @@ def test_workbook_noise() -> None:
     assert [n for n, _ in numbered2] == ["31", "32"]
     plain = ingest._passages_from_raw_numbered("Just a single plain English passage. " * 12)
     assert [n for n, _ in plain] == [None]
-    print("✓ WORKBOOK 노이즈 제거·문제번호별 분리(문항번호 보존 포함) 통과")
+
+    # 모의고사/EBS형([고1] … N번:) — 공백이 NUL(\x00)로 추출돼도 지문이 분리돼야 한다.
+    # (실제 업로드 파일에서 3지문이 1개로 합쳐지던 버그.) '10:00.' 시간도 보존.
+    body18 = "Dear Principal Jones, I hope this message finds you well. " * 4
+    body19 = "I glanced at the clock on the wall. 10:00. That meant the casting director would call. " * 3
+    body20 = "Inefficient teachers overlook the potential power of the opening minutes of class. " * 3
+    raw3 = (
+        "[고1] 2025\x009월\x00모의고사\x00한줄해석\n"      # 러닝 헤더(NUL 포함)
+        "[고1] 2025 09월 – 18번: 학교 도서관 연장\n"
+        + body18 + "\n- 1 - [Flow\x00Edu]\x00flowedu.tistory.com\n"
+        "[고1] 2025 09월 – 19번: 뮤지컬 오디션\n"
+        + body19 + "\n- 2 - [Flow\x00Edu]\x00flowedu.tistory.com\n"
+        "[고1] 2025 09월 – 20번: 수업 시작 루틴\n"
+        + body20 + "\n- 3 - [Flow\x00Edu]\x00flowedu.tistory.com\n"
+    )
+    n3 = ingest._passages_from_raw_numbered(raw3)
+    assert [n for n, _ in n3] == ["18", "19", "20"], n3     # 3지문으로 분리 + 번호 보존
+    assert "\x00" not in " ".join(b for _, b in n3)         # NUL 제거
+    assert "10:00. That" in n3[1][1]                        # 시간 '10:00.' 보존(10:That 아님)
+    print("✓ WORKBOOK·모의고사([고1] N번:) 분리·NUL 정리·시간 보존 통과")
 
 
 def test_arrangement_answer_snap() -> None:

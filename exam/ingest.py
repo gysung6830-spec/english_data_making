@@ -67,13 +67,28 @@ _WB_HEADER = re.compile(
 # 문제(지문) 경계가 되는 워크북 머리글 — 두 형태 모두 인식하고 '문제번호'를 캡처한다.
 #  ① 실제 원본:  "31번 2026년 6월 한국교육과정평가원 모의평가┃고3 단계별 WORKBOOK4 …"
 #  ② 도구 출력형: "31 2026 6 ┃3 WORKBOOK4 WORKBOOK. 1."
+#  ③ 모의고사/EBS형: "[고1] 2025 09월 – 18번: 학교 도서관 …"  (편지·심경 등 일반 지문)
 _WB_PROBLEM = re.compile(
     r"(\d+)\s*번[^\n]*?(?:모의평가|평가원|WORKBOOK)"
-    r"|(\d+)\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?",
+    r"|(\d+)\s+20\d{2}\s+\d+\s*[┃│|]\s*\d*\s*WORKBOOK\w*\s+WORKBOOK\.?"
+    r"|\[\s*고\s*\d\s*\][^\n]*?(\d+)\s*번\s*[:：]",
     re.IGNORECASE)
 _FOOTNOTE = re.compile(r"(?<!\()\b\d{1,3}\)")            # 각주 번호(괄호쌍 (2)은 보호)
-_SENT_NO = re.compile(r"(?<![\w.])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")  # 문장 앞 일련번호
+# 문장 앞 일련번호 — 단, '10:00.'처럼 콜론 뒤 숫자(시간)는 제외(: 를 룩비하인드에 포함)
+_SENT_NO = re.compile(r"(?<![\w.:])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")
 _PAGE_NO = re.compile(r"[-–]\s*\d{1,4}\s*[-–]")          # 페이지 번호 (- 14 -)
+
+
+def _normalize_raw(raw: str) -> str:
+    """PDF 추출 원문의 제어문자를 정리한다.
+
+    일부 PDF는 공백을 NUL(\\x00)로 뽑아내(예: '[Flow\\x00Edu]'), 지문 분리·노이즈
+    정규식이 안 먹는다. NUL·소프트하이픈·기타 제어문자를 공백/줄바꿈으로 바꾼다.
+    """
+    raw = raw.replace("\x00", " ").replace("\xad", "")   # NUL·soft hyphen
+    raw = raw.replace("\x0c", "\n")                        # 폼피드(페이지 경계) → 줄바꿈
+    raw = re.sub(r"[\x01-\x08\x0b\x0e-\x1f]", " ", raw)    # 기타 제어문자(\n·\t 제외)
+    return raw
 
 
 def _clean_pdf_text(segment: str) -> str:
@@ -119,7 +134,7 @@ def _split_by_workbook(raw: str) -> list[tuple[str, str]] | None:
         return None
     result: list[list[str]] = []      # [[문제번호, 본문], …] 순서 유지
     for i, m in enumerate(matches):
-        num = m.group(1) or m.group(2)
+        num = m.group(1) or m.group(2) or m.group(3)
         seg = raw[m.end():matches[i + 1].start() if i + 1 < len(matches) else len(raw)]
         if result and result[-1][0] == num:
             result[-1][1] += " " + seg
@@ -143,6 +158,7 @@ def _numbered_segments(raw: str) -> list[tuple[str | None, str]]:
 
 def _passages_from_raw_numbered(raw: str) -> list[tuple[str | None, str]]:
     """정제까지 마친 [(문항번호|None, 영어 본문)] 목록(최소 분량 이상만 채택)."""
+    raw = _normalize_raw(raw)         # NUL(\x00) 등 제어문자 정리 → 지문 분리가 제대로 되게
     out: list[tuple[str | None, str]] = []
     for num, seg in _numbered_segments(raw):
         body = _clean_pdf_text(seg)
