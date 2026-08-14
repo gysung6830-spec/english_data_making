@@ -41,7 +41,7 @@ class ExtractionCfg:
 
 @dataclass
 class DesignCfg:
-    footer_note: str = "© 2026. 김은아영어연구소. All rights reserved."
+    footer_note: str = "© 2026. ortica영어. All rights reserved."
     one_pdf_per_passage: bool = True
     brand: str = ""   # 직독직해 'made by ~' 에 넣는 브랜드 이름(footer 와 무관, 비우면 미표시)
 

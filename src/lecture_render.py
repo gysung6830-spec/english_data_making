@@ -229,10 +229,13 @@ def _inline_styles(html: str, footer_note: str = "") -> str:
     """
     fonts = (TEMPLATE_DIR / "lecture_fonts.css").read_text(encoding="utf-8")
     css = (TEMPLATE_DIR / "lecture.css").read_text(encoding="utf-8")
-    foot = ""
+    # 하단 중앙: 저작권 문구 / 하단 우측: 페이지 번호(현재 / 전체)
+    center = ""
     if footer_note:
-        foot = ('@page{ @bottom-center{ content:"%s"; font-size:8pt; color:#a7adb8; } }'
-                % _css_string(footer_note))
+        center = ('@bottom-center{ content:"%s"; font-size:8pt; color:#a7adb8; }'
+                  % _css_string(footer_note))
+    foot = ('@page{ %s @bottom-right{ content: counter(page) " / " counter(pages);'
+            ' font-size:8pt; color:#a7adb8; } }' % center)
     return html.replace("</head>", f"<style>{fonts}\n{css}\n{foot}</style></head>", 1)
 
 
