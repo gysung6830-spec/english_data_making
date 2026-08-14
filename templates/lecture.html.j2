@@ -66,19 +66,6 @@
     </div>
 
     <div class="pcard">
-      <div class="pc-q"><span class="em">🗣</span>필자 의견<span class="pc-hint">태도(긍/부/중)를 판단</span></div>
-      <div class="choices">
-        {% for st in p.stances %}<span class="choice {% if teacher and st == p.stance %}on{% endif %}"><span class="ck"></span>{{ st }}</span>{% endfor %}
-      </div>
-      {% if teacher %}<div class="pred-a">{{ p.stance_reason }}</div>
-      {% else %}<div class="rubric">
-        <div><span class="rb pos">긍정</span>좋다·이롭다·중요 / should·valuable·effective 같은 칭찬·권장</div>
-        <div><span class="rb neg">부정</span>문제·해롭다 / But·However·overlook·fail 같은 비판·경고</div>
-        <div><span class="rb neu">중립</span>사실 설명·양쪽 비교(on the other hand)만 하고 편들지 않음</div>
-      </div>{% endif %}
-    </div>
-
-    <div class="pcard">
       <div class="pc-q"><span class="em">🧩</span>글의 구조<span class="pc-hint">글이 어떻게 전개되는지 판단</span></div>
       <div class="choices">
         {% for stc in p.structures %}<span class="choice {% if teacher and stc == p.structure %}on{% endif %}"><span class="ck"></span>{{ stc }}</span>{% endfor %}
