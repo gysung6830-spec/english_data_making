@@ -790,6 +790,29 @@ def test_d_cue_marking() -> None:
     print("✓ D유형 제시어 자동 표시(원형 동사·구두점 무시) 통과")
 
 
+def test_d_token_completeness() -> None:
+    """D(어순배열): 토큰이 정답 문장을 온전히 복원해야 하고, 단어가 빠지면(동사 누락 등)
+    깨진 문항 대신 실패시켜 재생성하게 한다(실제 결과물에서 나온 버그)."""
+    from exam import build2
+    sents = ["I felt shaky all over, chewing my thumbnail and jiggling my feet."]
+    ans = sents[0]
+
+    # 완전한 토큰(12개, 동사는 원형) → 정상 생성
+    full = ["I", "feel", "shaky", "all", "over,", "chew", "my", "thumbnail",
+            "and", "jiggle", "my", "feet."]
+    q, _ = build2.make_D(sents, full, cues=["feel", "chew", "jiggle"], answer_sentence=ans)
+    assert "boki" in q
+
+    # 동사(feel/chew/jiggle)가 빠진 9개 토큰 → ValueError(재생성 유도)
+    broken = ["thumbnail", "shaky", "my", "all", "and", "over,", "I", "feet.", "my"]
+    try:
+        build2.make_D(sents, broken, cues=[], answer_sentence=ans)
+        assert False, "불완전 토큰이 통과됨"
+    except ValueError:
+        pass
+    print("✓ D유형 토큰 완전성 검증(단어 누락 시 실패·재생성) 통과")
+
+
 def test_answer_spread() -> None:
     """정답 위치 분산: 선지 재배열로 정답을 목표 위치로 옮기되 정오·오답근거는 보존."""
     from exam import answer_spread as A
@@ -984,6 +1007,7 @@ if __name__ == "__main__":
     test_serialize_roundtrip()
     test_underline_reading_order()
     test_d_cue_marking()
+    test_d_token_completeness()
     test_answer_spread()
     test_passage_source_label()
     test_review_flags_and_page()

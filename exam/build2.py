@@ -89,6 +89,13 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     for t in tokens:
         if " " in t.strip():
             raise ValueError(f"낱개 단어여야 합니다(구 묶음 금지): '{t}'")
+    # 토큰이 정답 문장을 '온전히' 복원할 수 있어야 한다. 개수가 다르면(예: 동사 누락)
+    # 배열이 불가능한 깨진 문항이므로 실패시켜 재생성하게 한다.
+    n_words = len(answer_sentence.split())
+    if len(tokens) != n_words:
+        raise ValueError(
+            f"어순 배열 토큰 개수가 정답 문장과 다릅니다(토큰 {len(tokens)} ≠ 문장 {n_words}). "
+            "일부 단어가 빠졌을 수 있어 다시 생성합니다.")
     snapped = B1.resolve_passage_sentence(answer_sentence, tokens, sentences)
     if snapped is None:
         raise ValueError("어순 배열 정답이 지문 문장과 맞지 않습니다(원래 배열을 찾지 못함).")
