@@ -56,9 +56,22 @@ def _resolve(base: Path, value: str) -> Path:
     return p if p.is_absolute() else (base / p)
 
 
+def _find_env_file() -> Path:
+    """API 키가 든 .env 파일을 찾는다.
+
+    Windows 메모장은 '.env' 로 저장해도 '.env.txt' 로 붙이는 일이 많고, 예시 파일을
+    그대로 쓰는 경우도 있어, 흔한 변형 이름까지 순서대로 찾아 준다(정식 이름은 '.env').
+    """
+    for name in (".env", ".env.txt", ".env.local"):
+        p = ROOT / name
+        if p.exists():
+            return p
+    return ROOT / ".env"
+
+
 def load_config(path: str | Path | None = None) -> Config:
     """config.yaml 과 .env 를 읽어 Config 객체로 반환한다."""
-    load_dotenv(ROOT / ".env")
+    load_dotenv(_find_env_file())
     cfg_path = Path(path) if path else (ROOT / "config.yaml")
     data: dict[str, Any] = {}
     if cfg_path.exists():
