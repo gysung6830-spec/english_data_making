@@ -790,6 +790,29 @@ def test_d_cue_marking() -> None:
     print("✓ D유형 제시어 자동 표시(원형 동사·구두점 무시) 통과")
 
 
+def test_hanjul_translation_residue() -> None:
+    """EBS 좌지문·우해석(한줄해석) 정제: 영어 원문 아래 '한글 번역' 줄이 남긴 영어
+    잔재(고유명사·행사명)와 '번역 안 된 제목' 중복을 걷어낸다(실제 결과물 버그).
+    또한 '5-12.'처럼 하이픈 뒤 숫자(나이·범위)를 문장번호로 오인해 삭제하지 않는다."""
+    from exam.ingest import _clean_pdf_text
+    seg = (
+        "① <2025 Library Bookmark Design Contest>\n"
+        "① <2025 Library Bookmark Design Contest>\n"          # 번역 안 된 제목 중복
+        "② The 6th annual Library Bookmark Design Contest is now open!\n"
+        "② 제6회 연례 Library Bookmark Design Contest가 지금 열립니다!\n"  # 영어 잔재 유발
+        "③ * Participants need to be between the ages of 5-12.\n"
+        "③ * 참가자는 5세에서 12세 사이여야 합니다.\n"
+        "④ Guidelines\n"
+        "④ 지침\n"
+    )
+    out = _clean_pdf_text(seg)
+    assert out.count("<2025") == 1, f"제목 중복: {out}"
+    assert "6 Library Bookmark Design Contest" not in out, f"한글 벗긴 영어 잔재: {out}"
+    assert "가 " not in out and "니다" not in out, f"한글 잔재: {out}"
+    assert "5-12. Guidelines" in out, f"'5-12.' 나이가 소실됨: {out}"
+    print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
+
+
 def test_d_token_completeness() -> None:
     """D(어순배열): 토큰이 정답 문장을 온전히 복원해야 하고, 단어가 빠지면(동사 누락 등)
     깨진 문항 대신 실패시켜 재생성하게 한다(실제 결과물에서 나온 버그)."""
@@ -1007,6 +1030,7 @@ if __name__ == "__main__":
     test_serialize_roundtrip()
     test_underline_reading_order()
     test_d_cue_marking()
+    test_hanjul_translation_residue()
     test_d_token_completeness()
     test_answer_spread()
     test_passage_source_label()

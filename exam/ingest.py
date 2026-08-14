@@ -74,8 +74,9 @@ _WB_PROBLEM = re.compile(
     r"|\[\s*고\s*\d\s*\][^\n]*?(\d+)\s*번\s*[:：]",
     re.IGNORECASE)
 _FOOTNOTE = re.compile(r"(?<!\()\b\d{1,3}\)")            # 각주 번호(괄호쌍 (2)은 보호)
-# 문장 앞 일련번호 — 단, '10:00.'처럼 콜론 뒤 숫자(시간)는 제외(: 를 룩비하인드에 포함)
-_SENT_NO = re.compile(r"(?<![\w.:])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")
+# 문장 앞 일련번호 — 단, '10:00.'처럼 콜론 뒤 숫자(시간)와 '5-12.'처럼 하이픈 뒤
+# 숫자(나이·범위)는 제외한다(: 와 - 를 룩비하인드에 포함).
+_SENT_NO = re.compile(r"(?<![\w.:\-–])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")
 _PAGE_NO = re.compile(r"[-–]\s*\d{1,4}\s*[-–]")          # 페이지 번호 (- 14 -)
 
 
@@ -91,9 +92,15 @@ def _normalize_raw(raw: str) -> str:
     return raw
 
 
+def _dedup_key(s: str) -> str:
+    """중복 줄 판별용 정규화 키(영숫자만, 소문자, 공백 단일화)."""
+    return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+
+
 def _clean_pdf_text(segment: str) -> str:
     """한 지문 조각에서 한글·머리글·원번호·워크시트 노이즈를 걷어내고 영어 본문만 남긴다."""
     lines: list[str] = []
+    prev_en = ""      # 직전에 채택한 '영어 원문' 줄(한줄해석·제목 중복 판별용)
     for ln in segment.splitlines():
         if _NOISE_LINE.search(ln):
             continue
@@ -104,9 +111,20 @@ def _clean_pdf_text(segment: str) -> str:
         latin = len(re.findall(r"[A-Za-z]", ln))
         if hangul and latin <= hangul:
             continue
-        ln = _HANGUL.sub("", ln)                        # 영어 위주 줄에 낀 한글만 제거
-        ln = ln.replace("­", "")                        # soft hyphen 등
-        lines.append(ln)
+        stripped = _HANGUL.sub("", ln).replace("­", "")   # 영어 위주 줄에 낀 한글 제거
+        # 한줄해석(번역) 줄 판별: EBS 좌지문·우해석은 '영어 원문' 바로 아래에 '한글 번역'
+        # 줄이 온다. 안내문 제목·행사명·지명 등 고유명사가 든 번역 줄은 한글을 벗겨도
+        # 영어 조각(예: 'Library Bookmark Design Contest')이 살아남아 지문에 끼어든다.
+        # 그 조각은 항상 '윗줄(원문) 단어들의 부분집합'이므로, 그럴 때는 줄째로 버린다.
+        #  - 한글이 섞였던 줄(번역 잔재)  또는  윗줄과 사실상 똑같은 줄(번역 안 된 제목)
+        words = [w for w in re.findall(r"[A-Za-z]+", stripped.lower()) if len(w) >= 3]
+        prev_words = set(re.findall(r"[A-Za-z]+", prev_en.lower()))
+        is_subset = bool(words) and all(w in prev_words for w in words)
+        if is_subset and (hangul or _dedup_key(stripped) == _dedup_key(prev_en)):
+            continue
+        lines.append(stripped)
+        if re.search(r"[A-Za-z]", stripped):
+            prev_en = stripped
     text = " ".join(lines)
     # 워크시트 노이즈 제거(줄 경계를 넘나들므로 합친 뒤 한 번에)
     text = _WB_HEADER.sub(" ", text)                    # WORKBOOK 러닝 헤더
