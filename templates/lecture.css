@@ -134,7 +134,8 @@ body{
   font-weight:700; font-size:7.6pt; line-height:1; margin-right:5px; vertical-align:1px; }
 
 /* ---- ③ 문장별 (여백 넉넉히 — 필요시 2페이지) --------------------------- */
-.s-item{ margin-bottom:16px; padding-bottom:4px; }
+/* 한 문장(영어+한글+오답)이 페이지 경계에서 갈라지지 않게 통째로 유지 */
+.s-item{ margin-bottom:16px; padding-bottom:4px; break-inside:avoid; page-break-inside:avoid; }
 .s-item:not(:last-child){ border-bottom:1px solid #eef0f4; }
 .s-item:last-child{ margin-bottom:0; }
 .s-en{ font-size:10.2pt; font-weight:400; line-height:1.62; color:var(--ink); }
