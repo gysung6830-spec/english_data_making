@@ -6,8 +6,10 @@
 set -e
 DIR="$(cd "$(dirname "$0")" && pwd)"
 CHROME="${CHROME:-/opt/pw-browsers/chromium-1194/chrome-linux/chrome}"
-render(){ "$CHROME" --headless --no-sandbox --disable-gpu \
-  --print-to-pdf="$DIR/$2.pdf" --no-pdf-header-footer "file://$DIR/$1.html" 2>/dev/null; }
+render(){ local prof; prof="$(mktemp -d)"; rm -f "$DIR/$2.pdf"; \
+  "$CHROME" --headless --no-sandbox --disable-gpu --user-data-dir="$prof" --disk-cache-dir=/dev/null \
+  --print-to-pdf="$DIR/$2.pdf" --no-pdf-header-footer "file://$DIR/$1.html" 2>/dev/null; \
+  rm -rf "$prof"; }
 
 # 문제은행 재생성(지문 은행/데이터 기반) — 레포 루트에서 실행 (범위 전 문항 224)
 ( cd "$DIR/.." && python3 -m src.gen_workbook 999 ) >/dev/null 2>&1 || true
