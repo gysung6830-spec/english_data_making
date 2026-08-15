@@ -54,7 +54,7 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             drills=[
                 # 객관식 (a) 지문 문장 1개(from_passage=True)
                 GrammarDrill(kind="객관식", from_passage=True,
-                             question="지문의 '… fewer opportunities to play than will infants who are not.' "
+                             question="지문의 'fewer opportunities to play than will infants who are not.' "
                                       "에서 밑줄 친 'than will infants' 에 대한 설명으로 옳은 것은?",
                              options=["than 뒤에 '조동사(will)+주어(infants)' 순으로 도치가 일어났다",
                                       "than 은 전치사이고 뒤의 infants 는 그 목적어다",
@@ -159,7 +159,8 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
              "극복 과정이 아니야. 겁먹으면 엄마에게 가서 안심할 때까지 탐색·놀이가 '멈춘다'는, 앞 주제를 뒷받침하는 근거야."),
             ("(지칭) 마지막의 'its attachment object(애착 대상)'는 아기가 가지고 노는 장난감을 가리킨다.",
              "지칭 오인이야. 여기서 attachment object는 앞의 'its mother'와 같은 대상 — 아기가 정서적으로 매달리는 '엄마(보호자)'를 가리켜. 장난감이 아니야.")]),
-        _S(3, raw[2], [],  # ⑤ 핵심문법(비교급 than 도치)과 중복 → ③ 칩에서는 제외(역할 분담)
+        _S(3, raw[2], [("비교급 than절 도치", "than will infants ~ : than 뒤 '조동사(will)+주어' 도치·have 생략"),
+                        ("비교급 less/fewer", "less time · fewer opportunities than ~ : 우열 비교")],
            [("frequently", "자주"), ("very likely", "~할 가능성이 매우 높다"),
             ("opportunity", "기회")],
            [("Thus, [[frequently]] frightened infants", "따라서 [[자주]] 겁을 먹는 아기들은"),
