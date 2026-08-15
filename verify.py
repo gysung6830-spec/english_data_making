@@ -97,9 +97,32 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
                 err(f"{tag} S{sid}", "③ 조각(en)을 이으면 ①원문과 불일치(누락/오타/…)")
             if not s.misreads:
                 err(f"{tag} S{sid}", "오답(misread)이 없음")
-            for c in s.chunks:
+            if not s.chunks:
+                err(f"{tag} S{sid}", "③ 끊어읽기 조각이 없음")
+            # ③ 끊어읽기 영↔한 정합 · 한글 해석 누락
+            for ci, c in enumerate(s.chunks, 1):
+                en_t = _strip(c.en).strip()
+                ko_t = _strip(c.ko).strip()
                 if any(e in c.en for e in _ELLIPSIS):
-                    err(f"{tag} S{sid}", f"③ 영어 조각에 말줄임표: {_strip(c.en)[:40]!r}")
+                    err(f"{tag} S{sid}", f"③ 영어 조각에 말줄임표: {en_t[:40]!r}")
+                if not en_t:
+                    err(f"{tag} S{sid}", f"{ci}번째 조각의 영어가 비어 있음")
+                if not ko_t:
+                    err(f"{tag} S{sid}", f"{ci}번째 조각의 '한글 해석이 누락'됨 (en={en_t[:30]!r})")
+                # 영어 칸에 알파벳이 없거나 / 한글 칸에 한글이 없으면 영↔한 뒤바뀜·미번역 의심
+                elif en_t and not re.search(r"[A-Za-z]", en_t):
+                    warn(f"{tag} S{sid}", f"{ci}번째 영어 조각에 알파벳이 없음(영↔한 뒤바뀜 의심): {en_t[:30]!r}")
+                elif ko_t and not re.search(r"[가-힣]", ko_t):
+                    warn(f"{tag} S{sid}", f"{ci}번째 한글 조각에 한글이 없음(미번역·뒤바뀜 의심): {ko_t[:30]!r}")
+                # 공백으로 둘러싸인 '/'(끊어읽기 구분자 모양)가 조각 안에 있으면 영·한 조각 수가 어긋나 보임
+                # ('and/or', 'either/or' 처럼 문자 사이 '/'는 정상이므로 제외)
+                if re.search(r"(^|\s)/(\s|$)", c.en) or re.search(r"(^|\s)/(\s|$)", c.ko):
+                    warn(f"{tag} S{sid}", f"{ci}번째 조각에 구분자 모양의 ' / '가 있어 끊어읽기와 겹칠 수 있음")
+            # 영어 조각 수 == 한글 조각 수 (Chunk 쌍이므로 항상 같아야 함)
+            n_en = sum(1 for c in s.chunks if _strip(c.en).strip())
+            n_ko = sum(1 for c in s.chunks if _strip(c.ko).strip())
+            if n_en != n_ko:
+                err(f"{tag} S{sid}", f"③ 영어 조각 수({n_en})와 한글 조각 수({n_ko})가 불일치")
 
         # 3) ④ 재진술 표현이 지문에 실제로 있는지(형광펜 매칭)
         for c in ov.restatement_chains:
