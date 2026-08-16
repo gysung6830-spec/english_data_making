@@ -796,6 +796,7 @@ def render_spread(rec, c, idx):
       </div>
     </div>
     {rquiz}
+    {vocab_block(c.get("vlist", []))}
   </div>'''
 
     step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
@@ -846,7 +847,6 @@ def render_spread(rec, c, idx):
         step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
         step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
         step3_body = direct_block(num, typ, c.get("direct", []))
-    step3_body += vocab_block(c.get("vlist", []))
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
