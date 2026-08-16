@@ -727,13 +727,13 @@ body {
   border-radius: 8px; padding: 10px 13px; margin: 6px 0 2px; }
 .cloze-a { font-size: 11px; line-height: 2.3; color: #274b40; background: #f4fbf7;
   border-radius: 8px; padding: 9px 12px; margin: 4px 0; }
-.cloze-a .sol-tag { margin-right: 8px; }
-.vb { display: inline-block; width: 46px; border-bottom: 1.5px solid #9bb; margin: 0 3px; height: 12px; vertical-align: middle; }
+.cloze-a .sol-tag { margin-right: 8px; background: var(--navy2); }
+.vb { display: inline-block; min-width: 40px; border-bottom: 1.5px solid #9bb; margin: 0 3px; height: 12px; vertical-align: middle; }
 .vf { color: var(--navy2); font-weight: 800; text-decoration-color: #bcd; }
 .tb { display: inline-block; white-space: nowrap; }
 .tb .tm { display: inline-block; background: var(--navy); color: #fff; font-weight: 800; border-radius: 50%;
   width: 15px; height: 15px; line-height: 15px; text-align: center; font-size: 9px; margin-right: 4px; }
-.tb .tl { display: inline-block; width: 180px; max-width: 60%; border-bottom: 2px solid var(--gold); height: 14px; vertical-align: middle; }
+.tb .tl { display: inline-block; min-width: 80px; max-width: 100%; border-bottom: 2px solid var(--gold); height: 14px; vertical-align: middle; }
 .tf { background: #eafaf2; border: 1.2px solid var(--navy2); border-radius: 6px; padding: 0 8px; font-weight: 800; color: var(--navy); }
 .tf .tm { display: inline-block; background: var(--navy); color: #fff; border-radius: 50%;
   width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 8.5px; margin-right: 5px; }

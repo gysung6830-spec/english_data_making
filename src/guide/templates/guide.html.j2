@@ -103,7 +103,7 @@
       {{ intent_widget(s.intent, false) }}
       <div class="iw-line">✍ 필자의 의도 한 줄: <span class="iw-bl"></span></div>
     {% elif s and s.cloze and s.cloze.ko %}
-      <div class="cloze-q">{% set tc = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set tc.n = tc.n + 1 %}<span class="tb"><span class="tm">{{ tnums[tc.n-1] }}</span><span class="tl"></span></span>{% elif c.v %}{{ c.t | replace(c.v, '<span class="vb"></span>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
+      <div class="cloze-q">{% set tc = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set tc.n = tc.n + 1 %}<span class="tb"><span class="tm">{{ tnums[tc.n-1] }}</span><span class="tl" style="width:{{ [c.t|length + 1, 36]|min }}em"></span></span>{% elif c.v %}{% set vw = [c.v|length + 1, 3]|max %}{{ c.t | replace(c.v, '<span class="vb" style="width:' + (vw|string) + 'em"></span>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% else %}
       <div class="dq-prompt">Q. {{ pr.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
       {% if pr.kind == 'mc' %}{% for opt in pr.options %}<div class="dq-opt">{{ dnums[loop.index0] }} {{ opt }}</div>{% endfor %}{% else %}<div class="dq-ans-line">▶ 해석: <span class="dq-blank"></span></div>{% endif %}
