@@ -128,11 +128,9 @@
       <div class="cloze-a"><span class="sol-tag">채운 직독직해</span>{% set ta = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set ta.n = ta.n + 1 %}<span class="tf"><span class="tm">{{ tnums[ta.n-1] }}</span>{{ c.t }}</span>{% elif c.v %}{{ c.t | replace(c.v, '<u class="vf">' + c.v + '</u>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% elif s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
-    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역 진단</span>{{ s.wrong }}
-      {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}
-      {% if s.key_points %}<div class="sol-kp">{% for k in s.key_points %}<div class="kp">▪ {{ k }}</div>{% endfor %}</div>{% endif %}</div>
-    {% elif s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span>
-      <div class="sol-kp">{% for k in s.key_points %}<div class="kp">▪ {{ k }}</div>{% endfor %}</div></div>{% endif %}
+    {% if s.wrong %}<div class="sol wrong"><span class="sol-tag x">✗ 오역</span>{{ s.wrong }}
+      {% if s.wrong_why %}<div class="sol-why"><b class="okmark">✓</b> {{ s.wrong_why | oneline }}</div>{% endif %}</div>
+    {% elif s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span> {{ s.key_points[0] | oneline }}</div>{% endif %}
     {% endif %}
   </div>
   {% endfor %}

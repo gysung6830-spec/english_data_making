@@ -99,6 +99,23 @@ def _bracket_modifiers(sentence: str, modifiers) -> Markup:
 _env.filters["bracket_mods"] = _bracket_modifiers
 
 
+def _oneline(text: str) -> str:
+    """긴 설명을 첫 문장까지로 줄인다(‘…다.’ 우선, 없으면 첫 마침표) — 오역 진단 간소화용."""
+    if not text:
+        return ""
+    t = str(text).strip()
+    idx = t.find("다.")
+    if idx >= 6:
+        return t[:idx + 2]
+    for i, ch in enumerate(t):
+        if ch in ".!?" and i >= 6:
+            return t[:i + 1]
+    return t
+
+
+_env.filters["oneline"] = _oneline
+
+
 def render_html(guide, sample: bool = False, footer_note: str = "") -> str:
     tmpl = _env.get_template("guide.html.j2")
     # 챕터 번호 매기기
