@@ -24,19 +24,28 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .cover .foot{ margin-top:18px; font-size:11px; opacity:.75; }
 
 /* 목차 */
-.toc{ padding:28mm 26mm; }
-.toc h1{ font-size:30px; font-weight:800; color:var(--deep-d); margin:0 0 4px; }
-.toc .h1sub{ font-size:12px; color:var(--muted); margin-bottom:22px; }
-.part{ margin-bottom:16px; }
-.part .pt-hd{ display:flex; align-items:baseline; border-bottom:2px solid var(--deep); padding-bottom:5px; }
-.part .pt-no{ font-size:12px; font-weight:800; color:#fff; background:var(--deep); border-radius:5px; padding:2px 9px; margin-right:9px; }
-.part .pt-title{ font-size:17px; font-weight:800; color:var(--deep-d); }
-.part .pt-page{ margin-left:auto; font-size:13px; font-weight:800; color:var(--deep); }
-.part .desc{ font-size:11px; color:var(--muted); margin:4px 0 6px 46px; }
-.sub-row{ display:flex; align-items:baseline; font-size:12.5px; margin:3px 0 3px 46px; color:#2b3a34; }
-.sub-row .dots{ flex:1; border-bottom:1px dotted #b9cfc6; margin:0 8px; transform:translateY(-3px); }
-.sub-row .pg{ font-weight:700; color:var(--deep-d); }
-.toc .note{ margin-top:24px; font-size:10.5px; color:var(--muted); background:#eaf5f0; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:9px 12px; line-height:1.6; }
+.toc{ padding:24mm 24mm; }
+.toc h1{ font-size:30px; font-weight:800; color:var(--deep-d); margin:0 0 3px; }
+.toc .h1sub{ font-size:11.5px; color:var(--muted); margin-bottom:20px; }
+/* 파트 헤더 */
+.pt-hd{ display:flex; align-items:baseline; border-bottom:2.5px solid var(--deep); padding-bottom:6px; margin:0 0 4px; }
+.pt-hd .pt-no{ font-size:11px; font-weight:800; color:#fff; background:var(--deep); border-radius:5px; padding:2px 9px; margin-right:10px; letter-spacing:.5px; }
+.pt-hd .pt-title{ font-size:17px; font-weight:800; color:var(--deep-d); }
+.pt-hd .pt-sub{ font-size:11px; font-weight:700; color:var(--muted); margin-left:8px; }
+.pt-hd .pt-page{ margin-left:auto; font-size:13px; font-weight:800; color:var(--deep); }
+.pt-desc{ font-size:10.5px; color:var(--muted); margin:5px 0 9px 2px; line-height:1.55; }
+.pt-desc b{ color:#2b3a34; }
+/* 유형 행 */
+.trow{ display:flex; align-items:baseline; font-size:13px; padding:4.5px 0; }
+.trow .tno{ flex:none; width:64px; font-size:10.5px; font-weight:800; color:#fff; background:var(--deep); border-radius:4px; padding:2px 0; text-align:center; }
+.trow .tnm{ flex:none; margin-left:11px; font-weight:800; color:#23272e; }
+.trow .tct{ font-size:10px; color:var(--muted); margin-left:7px; }
+.trow .dots{ flex:1; border-bottom:1px dotted #c2d6cd; margin:0 9px; transform:translateY(-3px); }
+.trow .pg{ flex:none; font-weight:800; color:var(--deep-d); min-width:26px; text-align:right; }
+.trow.sub{ padding:3px 0 3px 6px; font-size:12px; }
+.trow.sub .tnm{ font-weight:700; margin-left:0; }
+.grp{ margin:10px 0 2px; font-size:10.5px; font-weight:800; color:var(--deep); letter-spacing:.3px; }
+.toc .note{ margin-top:18px; font-size:10px; color:var(--muted); background:#eaf5f0; border-left:3px solid var(--deep); border-radius:0 5px 5px 0; padding:9px 12px; line-height:1.65; }
 .toc .note b{ color:var(--deep-d); }
 </style>
 </head>
@@ -58,24 +67,35 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
   <!-- 목차 -->
   <div class="toc">
     <h1>목차 <span style="font-size:16px;color:var(--muted)">Contents</span></h1>
-    <div class="h1sub">독해의 원리·신호 사전 → 유형별 훈련(⭐대표 + 실전 기출 81문항)이 하나로 이어지고, <b>패러프레이징(재진술)은 문항마다 내장</b>되어 지문을 풀며 바로 훈련합니다.</div>
+    <div class="h1sub">독해의 원리·사전 → 유형별 훈련(실전 기출 <b>224문항</b>). 문항마다 <b>재진술 훈련</b> 내장.</div>
 
-    <div class="part">
-      <div class="pt-hd"><span class="pt-no">PART 0</span><span class="pt-title">독해의 원리</span><span class="pt-page">p.3</span></div>
-      <div class="desc">읽는 <b>태도</b>부터 바꾼다 — 완급조절·추론·연결사 지도·<b>재진술 원리(5변환·함정)</b>·글의 구조·<b>긍정/부정(±) 어휘</b>·<b>논리 관계 구문(인과·등호·대조·비교)</b>, 그리고 <b>신호 사전</b>.</div>
-      <div class="sub-row"><span>독해의 원리 — 태도·완급·추론·연결사·재진술·글의 구조·<b>긍정/부정 어휘</b>·<b>논리 관계 구문</b></span><span class="dots"></span><span class="pg">3</span></div>
-      <div class="sub-row"><span>신호 사전 한 장 — 어떤 문장에 형광펜을 칠할지 한눈에</span><span class="dots"></span><span class="pg">14</span></div>
-    </div>
+    <div class="pt-hd"><span class="pt-no">PART 0</span><span class="pt-title">독해의 원리 · 사전</span><span class="pt-page">p.3</span></div>
+    <div class="pt-desc">읽는 <b>태도</b>부터 — 완급조절·추론·연결사·<b>재진술 원리</b>·글의 구조, 그리고 <b>긍정/부정(±) 어휘 사전 · 논리 관계 구문 사전 · 신호 사전</b>.</div>
+    <div class="trow sub"><span class="tnm">독해의 원리 — 태도·완급·추론·연결사·재진술·글의 구조</span><span class="dots"></span><span class="pg">3</span></div>
+    <div class="trow sub"><span class="tnm">긍정/부정(±) 어휘 사전 · 논리 관계 구문 사전(인과·등호·대조·비교)</span><span class="dots"></span><span class="pg">8</span></div>
+    <div class="trow sub"><span class="tnm">신호 사전 — 어떤 문장에 형광펜을 칠할지 한눈에</span><span class="dots"></span><span class="pg">14</span></div>
 
-    <div class="part">
-      <div class="pt-hd"><span class="pt-no">PART 1</span><span class="pt-title">유형별 훈련 <span style="font-size:11px;font-weight:700;color:var(--muted)">— 🔁 재진술 훈련 내장</span></span><span class="pt-page">p.15</span></div>
-      <div class="desc">문항마다 <b>펼침면 한 세트</b> — 왼쪽 ①직접 풀기(+🔁재진술 미션) / 오른쪽 ②훈련(정답 칠) + ③직독직해 + <b>🔁재진술 지도</b>. <b>각 유형 맨 앞 ⭐대표</b>로 방법을 보인 뒤 <b>실제 기출</b>로 이어집니다.</div>
-      <div class="sub-row"><span>함축·요지·주제·제목 (21~24) — 각 유형 ⭐대표 → 실전 기출</span><span class="dots"></span><span class="pg">16</span></div>
-      <div class="sub-row"><span>빈칸·무관·순서·삽입·요약 (31~40) — 순서·삽입 앞 <b>1-PASS 특강</b> 포함</span><span class="dots"></span><span class="pg">137</span></div>
-      <div class="sub-row"><span>총 <b>81문항</b> — STEP1 직접 풀기 → STEP2 훈련·정답 칠 → STEP3 직독직해 + <b>🔁재진술 지도</b></span><span class="dots"></span><span class="pg"></span></div>
-    </div>
+    <div class="pt-hd" style="margin-top:16px;"><span class="pt-no">PART 1</span><span class="pt-title">유형별 훈련</span><span class="pt-sub">— 224문항 · 문항마다 3단계 + 재진술</span><span class="pt-page">p.16</span></div>
+    <div class="pt-desc">문항마다 <b>3쪽 한 세트</b> — ①직접 풀기 → ②훈련(정답 칠) → ③직독직해 + <b>재진술 지도</b>. 지문·선지·정답 모두 <b>실제 평가원 기출(2022~2027)</b>.</div>
 
-    <div class="note">📖 <b>이렇게 쓰세요</b> — PART 0에서 <b>독해의 원리</b>(태도·완급조절·연결사·<b>재진술</b>)와 <b>신호 사전</b>을 먼저 익히고 → PART 1에서 각 유형 ⭐대표로 칠하는 법을 배운 뒤, <b>문항마다</b> 지문을 풀며 <b>🔁재진술</b>(필자 주장·핵심 소재가 어떻게 되풀이되는지)까지 함께 훈련합니다. &nbsp;🟡=읽을 문장, 🔴=칠한 근거(신호), 🔁=재진술.</div>
+    <div class="grp">대의 파악</div>
+    <div class="trow"><span class="tno">21</span><span class="tnm">함축의미</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">16</span></div>
+    <div class="trow"><span class="tno">22</span><span class="tnm">요지</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">59</span></div>
+    <div class="trow"><span class="tno">23</span><span class="tnm">주제</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">102</span></div>
+    <div class="trow"><span class="tno">24</span><span class="tnm">제목</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">145</span></div>
+
+    <div class="grp">어휘 · 빈칸</div>
+    <div class="trow"><span class="tno">30</span><span class="tnm">어휘</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">188</span></div>
+    <div class="trow"><span class="tno">31~34</span><span class="tnm">빈칸추론</span><span class="tct">56문항</span><span class="dots"></span><span class="pg">231</span></div>
+
+    <div class="grp">논리 · 구조</div>
+    <div class="trow"><span class="tno">35</span><span class="tnm">무관한 문장</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">400</span></div>
+    <div class="trow"><span class="tno">36~37</span><span class="tnm">글의 순서</span><span class="tct">28문항</span><span class="dots"></span><span class="pg">444</span></div>
+    <div class="trow"><span class="tno">38~39</span><span class="tnm">문장 삽입</span><span class="tct">28문항</span><span class="dots"></span><span class="pg">530</span></div>
+    <div class="trow"><span class="tno">40</span><span class="tnm">요약문</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">615</span></div>
+    <div class="trow"><span class="tno">41</span><span class="tnm">제목 · 장문</span><span class="tct">14문항</span><span class="dots"></span><span class="pg">658</span></div>
+
+    <div class="note">📖 <b>이렇게 쓰세요</b> — PART 0에서 <b>독해의 원리</b>와 <b>세 가지 사전</b>을 익힌 뒤, PART 1에서 유형마다 <b>①직접 풀기 → ②정답 칠 → ③직독직해·재진술</b>로 훈련합니다. &nbsp;🟡 읽을 문장 · 🔴 칠한 근거(신호) · 🔁 재진술.</div>
   </div>
 
 </body>
