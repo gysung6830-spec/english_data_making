@@ -1,115 +1,78 @@
-# ============================================================
-#  0부 — 읽기 엔진 (모든 문장에 쓰는 3단계 공통 도구)
-#  원칙: 간결하게. 학생이 한 번 읽고 이해할 분량만.
-#  (어휘 유추는 별도 목차 '어휘 유추'로 분리)
-# ============================================================
-
-title: "읽기 엔진 — 뼈대 → 관계 → 완성"
-spine: "수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있다."
-intro: >-
-  수식어(살)가 뼈대를 덮어서 어려울 뿐이다.
-  뼈대부터 잡고 → 관계로 읽고 → 살을 붙여 '앞으로만' 읽는다.
-mindset: >-
-  구문독해는 <b>문법 시험이 아니다.</b> '문장구조를 완벽히 분석하기'가 목표가 아니라
-  '<b>내용이 이어지게, 부드럽게</b>' 읽는 게 목표다. 쓰인 대로 믿고 읽어라 —
-  '여기 that이 들어가는 게 맞나?' 같은 의심은 접어둔다.
-
+title: 읽기 엔진 — 뼈대 → 관계 → 완성
+spine: 수능 문장 안에는, 네가 이미 아는 중3 문장이 숨어 있다.
+intro: 수식어(살)가 뼈대를 덮어서 어려울 뿐이다. 뼈대부터 잡고 → 관계로 읽고 → 살을 붙여 '앞으로만' 읽는다.
+mindset: 구문독해는 <b>문법 시험이 아니다.</b> '문장구조를 완벽히 분석하기'가 목표가 아니라 '<b>내용이 이어지게, 부드럽게</b>' 읽는 게 목표다. 쓰인 대로 믿고 읽어라 — '여기 that이 들어가는 게 맞나?' 같은 의심은 접어둔다.
 methods:
-  - step: "STEP 1"
-    title: "괄호치기 — 수식어는 잠깐 미뤄둔다"
-    idea: "명사 뒤에서 꾸미는 덩어리는 ( )로 묶어 미뤄두고, 주어+동사(뼈대)부터 본다. '버리는' 게 아니라 순서를 뒤로."
-    rule: "괄호 대상 = 관계사절 · 분사(V-ing/V-ed) · 전치사구 · to부정사 · 콤마·대시 삽입."
-    ms_point: "긴 문장이 짧아진다. 단, 살 속에 답 근거가 있으니 STEP 3에서 다시 읽는다."
-    demo:
-      sentence: "The students who joined the science club last year won the national award."
-      bracketed: "The students (who joined the science club last year) won the national award."
-      skeleton_en: "The students won the award."
-      skeleton_ko: "그 학생들이 상을 받았다."
-      full_ko: "작년에 과학 동아리에 가입한 그 학생들이 전국 대회 상을 받았다."
-
-  - step: "STEP 2"
-    title: "관계로 읽기 — '누가 ↔ 무엇'"
-    idea: "단어 순서대로가 아니라 '누가(주어) → 무엇을 한다(진짜 동사)'라는 관계부터 잡는다."
-    rule: "진짜 동사는 문장에 하나(to-V·V-ing·p.p.는 가짜). 접속사·비교·인과 신호 = 'A와 B의 관계' 이정표."
-    ms_point: "다 해석했는데 뜻이 안 잡히면, '관계'를 안 본 것이다."
-    demo:
-      sentence: "The scientists whose research the government funded published results that surprised everyone."
-      bracketed: "The scientists (whose research the government funded) published results (that surprised everyone)."
-      skeleton_en: "The scientists published results."
-      skeleton_ko: "그 과학자들이 결과를 발표했다. (누가 → 무엇을)"
-      full_ko: "관계로 보면 간단하다 — [정부가 그 연구에 자금을 댄] 과학자들이, [모두를 놀라게 한] 결과를 발표했다."
-
-  - step: "STEP 3"
-    title: "살 붙이기 — 앞으로만(직독직해)"
-    idea: "미뤄둔 수식어를 '~하는 / ~해서'로 다시 붙여 완성. 끝에서 앞으로 되돌아가지 말고 앞으로만."
-    rule: "한 덩어리씩 앞에서부터. 되돌아가 재해석하지 않는 것이 속도의 핵심."
-    ms_point: "아무리 길어도 '뼈대 + 살 몇 개'. 순서대로 조립하면 끝."
-    demo:
-      sentence: "Feeling nervous about the result, she slowly walked onto the stage."
-      bracketed: "(Feeling nervous about the result), she slowly walked onto the stage."
-      skeleton_en: "She walked onto the stage."
-      skeleton_ko: "그녀는 무대 위로 걸어 나갔다."
-      full_ko: "결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다."
-
-# ============================================================
-#  끊고 잇기 — 실전 엔진 (긴 문장을 '자르고 → 다시 잇는' 손기술)
-#  원칙: "끊어 읽어왔는데 해석이 안 된다" = 끊어만 놓고 이어 붙이지 않아서다.
-# ============================================================
-engine_title: "끊고 잇기 — 긴 문장 손기술"
-engine_intro: >-
-  긴 문장은 무섭지 않다. <b>신호 앞에서 짧게 끊고</b>, 끊은 조각을
-  <b>다시 매끄럽게 이으면</b> 끝이다. 끊기만 하고 잇지 않으면 해석이 안 된다.
-
-# ── 어디서 자르나 (신호 앞에서 끊는다) ──
-cut_points:
-  - { at: "접속사 앞",        ex: "…, <b>and</b> / <b>but</b> / <b>because</b> / <b>that</b>" }
-  - { at: "관계사 앞",        ex: "the man <b>who</b> … / results <b>that</b> …" }
-  - { at: "전치사 앞",        ex: "obstacles <b>to</b> chimps <b>in</b> assigning …" }
-  - { at: "to부정사 앞",      ex: "difficult <b>to</b> maintain …" }
-  - { at: "분사(V-ing·V-ed) 앞", ex: "a society <b>showing</b> … / talents <b>inherited</b> …" }
-  - { at: "명사 뒤 바로 S+V", ex: "the talents [they have] …  (관계사 생략)" }
-  - { at: "콤마·대시 앞뒤",   ex: "…, <b>Feeling nervous</b>, she …" }
-
-# ── 한 문장으로 확인: 신호마다 끊어 보기 (시연) ──
+- step: STEP 1
+  title: 괄호치기 — 수식어는 잠깐 미뤄둔다
+  idea: 명사 뒤에서 꾸미는 덩어리는 ( )로 묶어 미뤄두고, 주어+동사(뼈대)부터 본다. '버리는' 게 아니라 순서를 뒤로.
+  rule: 괄호 대상 = 관계사절 · 분사(V-ing/V-ed) · 전치사구 · to부정사 · 콤마·대시 삽입.
+  ms_point: 긴 문장이 짧아진다. 단, 살 속에 답 근거가 있으니 STEP 3에서 다시 읽는다.
+  demo:
+    sentence: The students who joined the science club last year won the national award.
+    bracketed: The students (who joined the science club last year) won the national award.
+    skeleton_en: The students won the award.
+    skeleton_ko: 그 학생들이 상을 받았다.
+    full_ko: 작년에 과학 동아리에 가입한 그 학생들이 전국 대회 상을 받았다.
+- step: STEP 2
+  title: 관계로 읽기 — '누가 ↔ 무엇'
+  idea: 단어 순서대로가 아니라 '누가(주어) → 무엇을 한다(진짜 동사)'라는 관계부터 잡는다.
+  rule: 진짜 동사는 문장에 하나(to-V·V-ing·p.p.는 가짜). 접속사·비교·인과 신호 = 'A와 B의 관계' 이정표.
+  ms_point: 다 해석했는데 뜻이 안 잡히면, '관계'를 안 본 것이다.
+  demo:
+    sentence: The scientists whose research the government funded published results that surprised everyone.
+    bracketed: The scientists (whose research the government funded) published results (that surprised everyone).
+    skeleton_en: The scientists published results.
+    skeleton_ko: 그 과학자들이 결과를 발표했다. (누가 → 무엇을)
+    full_ko: 관계로 보면 간단하다 — [정부가 그 연구에 자금을 댄] 과학자들이, [모두를 놀라게 한] 결과를 발표했다.
+- step: STEP 3
+  title: 살 붙이기 — 앞으로만(직독직해)
+  idea: 미뤄둔 수식어를 '~하는 / ~해서'로 다시 붙여 완성. 끝에서 앞으로 되돌아가지 말고 앞으로만.
+  rule: 한 덩어리씩 앞에서부터. 되돌아가 재해석하지 않는 것이 속도의 핵심.
+  ms_point: 아무리 길어도 '뼈대 + 살 몇 개'. 순서대로 조립하면 끝.
+  demo:
+    sentence: Feeling nervous about the result, she slowly walked onto the stage.
+    bracketed: (Feeling nervous about the result), she slowly walked onto the stage.
+    skeleton_en: She walked onto the stage.
+    skeleton_ko: 그녀는 무대 위로 걸어 나갔다.
+    full_ko: 결과가 걱정되어(~해서), 그녀는 천천히 무대 위로 걸어 나갔다.
 cut_demo:
-  marked: >-
-    We can create a society <sig>/</sig> <b>where</b> our children can grow up happily
-    <sig>/</sig> <b>showing off</b> the talents <sig>/</sig> <b>they have</b> inherited from
-    their parents <sig>/</sig> <b>if</b> we do not act selfishly for our own good
-    <sig>/</sig> <b>and</b> observe public order well.
-  read: >-
-    우리는 사회를 만들 수 있다 / 아이들이 행복하게 자라나는 / 재능을 뽐내면서 / 그들이 부모에게서 물려받은 (재능을) /
-    우리가 사욕으로 이기적으로 굴지 않고 / 공공질서를 잘 지킨다면.
+  marked: We can create a society <sig>/</sig> <b>where</b> our children can grow up happily <sig>/</sig> <b>showing off</b> the talents <sig>/</sig> <b>they have</b> inherited from their parents <sig>/</sig> <b>if</b> we do not act selfishly for our own good <sig>/</sig> <b>and</b> observe public order well.
+  read: 우리는 사회를 만들 수 있다 / 아이들이 행복하게 자라나는 / 재능을 뽐내면서 / 그들이 부모에게서 물려받은 (재능을) / 우리가 사욕으로 이기적으로 굴지 않고 / 공공질서를 잘 지킨다면.
   note: 신호(<b>where·showing·they have·if·and</b>) 앞에서 툭툭 끊고, 조각을 <b>앞으로만</b> 이으면 이 긴 문장도 무너지지 않는다.
-
-# ── 끊었으면 매끄럽게 잇는다 (손기술) ──
 link_tricks:
-  - { k: "주어 조사",     v: "일반 S는 <b>은/는</b>, 접속사·관계사절 속 S는 <b>이/가</b>", ex: "" }
-  - { k: ", ~ing",        v: "<b>~하면서</b> (부대상황)",            ex: "…, showing off the talents → 재능을 뽐<b>내면서</b>" }
-  - { k: "with + 목적어 + 분사", v: "<b>~한 채로 / ~하면서</b> (동시성 강조)", ex: "with time sliced → 시간이 쪼개<b>지면서</b>" }
-  - { k: "as + 명사",     v: "<b>~로서 / ~처럼</b>",                  ex: "she works <b>as</b> a scientist → 과학자<b>로서</b>" }
-  - { k: "as + S V",      v: "<b>~할 때 / ~때문에</b> (차이 거의 없음)", ex: "<b>as</b> she got ready → 그녀가 준비<b>할 때</b>" }
-  - { k: "as A as B",     v: "뒤 as에만 '만큼' → <b>B만큼 A한</b>",   ex: "services <b>as varied as</b> catering → 케이터링<b>만큼</b> 다양한" }
-  - { k: "how + 형/부",   v: "<b>얼마나</b> (how+명·대명사면 '어떻게')", ex: "<b>how hard</b> a task is → <b>얼마나</b> 어려운지" }
-  - { k: "for us to V",   v: "us는 to V의 <b>의미상 주어</b> → '<b>우리가</b> V하는'", ex: "difficult <b>for us to</b> maintain → <b>우리가</b> 유지하기" }
-  - { k: "맨 앞 To V",    v: "To V ~ 동사 = <b>~하는 것은</b> / To V~, S V = <b>~하기 위해</b>", ex: "" }
-  - { k: "in ~ing / by ~ing", v: "<b>~에 있어서 / ~함으로써</b>",   ex: "" }
-
-# ── 전치사 = 조사 붙이기 (of A of B는 B의 A) ──
+- k: 주어 조사
+  v: 일반 S는 <b>은/는</b>, 접속사·관계사절 속 S는 <b>이/가</b>
+  ex: ''
+- k: ', ~ing'
+  v: <b>~하면서</b> (부대상황)
+  ex: …, showing off the talents → 재능을 뽐<b>내면서</b>
+- k: with + 목적어 + 분사
+  v: <b>~한 채로 / ~하면서</b> (동시성 강조)
+  ex: with time sliced → 시간이 쪼개<b>지면서</b>
+- k: for us to V
+  v: us는 to V의 <b>의미상 주어</b> → '<b>우리가</b> V하는'
+  ex: difficult <b>for us to</b> maintain → <b>우리가</b> 유지하기
+- k: 맨 앞 To V
+  v: To V ~ 동사 = <b>~하는 것은</b> / To V~, S V = <b>~하기 위해</b>
+  ex: ''
+- k: in ~ing / by ~ing
+  v: <b>~에 있어서 / ~함으로써</b>
+  ex: ''
 prep_gloss:
-  - { p: "of",   m: "A of B = B의 A" }
-  - { p: "to",   m: "~에, ~에게, ~으로" }
-  - { p: "for",  m: "~를 위해, ~에 대해, ~동안" }
-  - { p: "in",   m: "~에, ~안에" }
-  - { p: "on",   m: "~위에, ~에 관하여" }
-  - { p: "with", m: "~와 함께, ~를 가지고" }
-  - { p: "as",   m: "~로서, ~처럼" }
-  - { p: "by",   m: "~에 의해, ~까지" }
-  - { p: "from", m: "~로부터" }
-  - { p: "at",   m: "~에" }
-
-# 위 3단계에 더해, 문장을 볼 때 함께 쓰는 도구(3단계와 겹치지 않는 것만).
+- p: of
+  m: A of B = B의 A
+- p: to
+  m: ~에, ~에게, ~으로
+- p: for
+  m: ~를 위해, ~에 대해, ~동안
+- p: in
+  m: ~에, ~안에
+- p: with
+  m: ~와 함께, ~를 가지고
+- p: as
+  m: ~로서, ~처럼
 tools:
-  - "ⓐ 자리가 품사 — 아는 단어라도 S·V·O·C 자리에 맞춰 품사·해석을 바꿔라. (The increase increases increase.)"
-  - "ⓑ 목적어 유무 — 동사 뒤 목적어 있으면 '~시키다'(타동사), 없으면 '~하다'(자동사). (develop = 발달시키다 vs 성장하다)"
-  - "ⓒ 5형식은 equal — 목적어 뒤에 명사·형용사·준동사가 오면 '목적어 = 그것'. (expected [her to help] → her가 help)"
+- ⓐ 자리가 품사 — 아는 단어라도 S·V·O·C 자리에 맞춰 품사·해석을 바꿔라. (The increase increases increase.)
+- ⓑ 목적어 유무 — 동사 뒤 목적어 있으면 '~시키다'(타동사), 없으면 '~하다'(자동사). (develop = 발달시키다 vs 성장하다)
+- ⓒ 5형식은 equal — 목적어 뒤에 명사·형용사·준동사가 오면 '목적어 = 그것'. (expected [her to help] → her가 help)
