@@ -168,6 +168,36 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
                 if n_whole > 2:
                     warn(f"{tag} S{sid}", f"③ 통째 빈칸이 {n_whole}개(문장당 최대 2개 권장)")
 
+            # ④ '오답만 읽어도 이해' — 각 오답 해설(why)이 실질적이어야(뜻을 설명)
+            for mi, m in enumerate(s.misreads, 1):
+                st = _strip(m.statement).strip()
+                wy = _strip(m.why).strip()
+                if not st:
+                    err(f"{tag} S{sid}", f"{mi}번째 오답의 '틀린 진술(statement)'이 비어 있음")
+                if not wy:
+                    err(f"{tag} S{sid}", f"{mi}번째 오답의 '해설(why)'이 비어 있음")
+                elif len(wy) < 15:
+                    warn(f"{tag} S{sid}",
+                         f"{mi}번째 오답 해설이 너무 짧아 뜻 전달 부족(<15자): {wy!r}")
+
+        # 2-b) ④ '오답만 읽어도 이해되도록' 설계 점검(지문 단위)
+        #   - 문장 커버리지: 모든 문장이 오답을 하나씩 가져야(위 S{sid} 루프에서 ERROR) '오답만 읽어도
+        #     전 문장을 훑는다'가 성립. 여기서는 '지칭·함축' 층위가 오답 스트림에 담겼는지 본다.
+        sents = p.analysis.sentences
+        if len(sents) >= 5:
+            allm = [m for s in sents for m in s.misreads]
+            blob = " ".join(_strip(m.statement) + " " + _strip(m.why) for m in allm)
+            has_ref = bool(re.search(r"지칭|가리키|가리켜", blob))
+            has_imp = bool(re.search(r"함축|반어|가정법|속뜻|진짜 뜻|실제로는", blob))
+            # 지시어(this/that/they/these/those/it 계열)가 여러 번 쓰였는데 '지칭' 오답이 없으면 누락 의심
+            en_all = " ".join(si.english for si in sents)
+            n_dem = len(re.findall(r"\b(this|that|these|those|they|them|their|it|its)\b",
+                                   en_all, re.IGNORECASE))
+            if n_dem >= 3 and not has_ref:
+                warn(tag, "④ 지시어가 여러 번 나오는데 '지칭' 오답이 없음(오답만 읽어도 지칭 이해 목표 미달)")
+            if len(sents) >= 6 and not has_imp:
+                warn(tag, "④ '함축·속뜻(반어/가정법 등)'을 다루는 오답이 없음(오답만 읽어도 함축 이해 목표 미달)")
+
         # 3) ④ 재진술 표현이 지문에 실제로 있는지(형광펜 매칭)
         for c in ov.restatement_chains:
             for e in c.expressions:
