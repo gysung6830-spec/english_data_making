@@ -269,6 +269,15 @@ practice:
       key_points:
       - '(Being) Worried that ~ : 의미상 주어는 주절 주어 she인데, 앞의 crowds of people에 끌려 ''사람들이 서둘러 갔다''로 주체를 바꾸기 쉽다.'
       cut_en: (Worried that she could not get to the boarding gate in time), / she / rushed / through the crowds of people.
+      cloze:
+        en: (Worried that she could not get to the boarding gate in time) / she rushed / through the crowds of people
+        ko:
+        - t: 제시간에 탑승구에 못 갈까 걱정되어
+          v: 탑승구
+        - t: 그녀는 서둘러 갔다
+          trap: true
+        - t: 사람들의 인파를 헤치고
+          v: 인파
   - kind: mc
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said a few encouraging words.
     source: 2023 고3 11월 19번

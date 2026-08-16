@@ -67,6 +67,7 @@ class PracticeSolution(BaseModel):
     wrong_why: str = ""           # 왜 틀렸나
     author_msg: str = ""          # 필자가 하고싶은 말
     key_points: list[str] = []    # 주요구문(각 'X : 설명')
+    cloze: dict = {}              # 빈칸 직독직해 스펙 {en, ko:[{t, v?/trap?}]}
 
 
 class PracticeItem(BaseModel):

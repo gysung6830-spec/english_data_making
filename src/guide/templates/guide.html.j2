@@ -53,19 +53,20 @@
 {# 실전적용: 문제(여러 개, 페이지 채움) → 해설(같은 수) 배치 #}
 {% macro drill_pages(title, practice) %}
 {% set dnums = ['①','②','③','④','⑤'] %}
-{# ── 문제 묶음 ── #}
+{% set tnums = ['①','②','③','④','⑤','⑥'] %}
+{# ── 문제 묶음(빈칸 직독직해) ── #}
 <section class="chapter drill-q">
-  <div class="drill-band">실전적용 <small>{{ title }} · 문제 {{ practice|length }}題</small></div>
-  {% for pr in practice %}
+  <div class="drill-band">실전적용 <small>{{ title }} · 빈칸 직독직해 {{ practice|length }}題</small></div>
+  {% for pr in practice %}{% set s = pr.solution %}
   <div class="dq-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{{ pr.sentence }}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
+      <span class="dq-sent">{% if s and s.cloze and s.cloze.en %}{{ s.cloze.en | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{% else %}{{ pr.sentence }}{% endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
     </div>
-    <div class="dq-prompt">Q. {{ pr.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
-    {% if pr.kind == 'mc' %}
-      {% for opt in pr.options %}<div class="dq-opt">{{ dnums[loop.index0] }} {{ opt }}</div>{% endfor %}
+    {% if s and s.cloze and s.cloze.ko %}
+      <div class="cloze-q">{% set tc = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set tc.n = tc.n + 1 %}<span class="tb"><span class="tm">{{ tnums[tc.n-1] }}</span><span class="tl"></span></span>{% elif c.v %}{{ c.t | replace(c.v, '<span class="vb"></span>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% else %}
-      <div class="dq-ans-line">▶ 해석: <span class="dq-blank"></span></div>
+      <div class="dq-prompt">Q. {{ pr.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
+      {% if pr.kind == 'mc' %}{% for opt in pr.options %}<div class="dq-opt">{{ dnums[loop.index0] }} {{ opt }}</div>{% endfor %}{% else %}<div class="dq-ans-line">▶ 해석: <span class="dq-blank"></span></div>{% endif %}
     {% endif %}
     {% if pr.vocab %}<div class="dq-voca">📦 {% for v in pr.vocab %}<span><b>{{ v.word }}</b> {{ v.meaning }}</span>{% if not loop.last %} · {% endif %}{% endfor %}</div>{% endif %}
   </div>
@@ -73,15 +74,16 @@
 </section>
 {# ── 해설 묶음(문제와 동일 수) ── #}
 <section class="chapter drill-a">
-  <div class="drill-band dk">실전적용 해설 <small>{{ title }} · 문제 {{ practice|length }}題</small></div>
+  <div class="drill-band dk">실전적용 해설 <small>{{ title }} · {{ practice|length }}題</small></div>
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="sol-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
-        {% if pr.kind == 'mc' %}<span class="dq-correct">정답 {{ dnums[pr.answer_index] }}</span>{% endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
+      <span class="dq-sent">{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
     </div>
     {% if s %}
-    {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
+    {% if s.cloze and s.cloze.ko %}
+      <div class="cloze-a"><span class="sol-tag">채운 직독직해</span>{% set ta = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set ta.n = ta.n + 1 %}<span class="tf"><span class="tm">{{ tnums[ta.n-1] }}</span>{{ c.t }}</span>{% elif c.v %}{{ c.t | replace(c.v, '<u class="vf">' + c.v + '</u>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
+    {% elif s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
     {% if s.wrong %}<div class="sol wrong"><span class="sol-tag">오역 진단</span>{{ s.wrong }}
       {% if s.wrong_why %}<div class="sol-why">↳ 왜 틀렸나 · {{ s.wrong_why }}</div>{% endif %}

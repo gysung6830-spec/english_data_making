@@ -24,6 +24,14 @@ practice:
       key_points:
       - '''they cause us unnecessary suffering'' : they(원인=our worries)와 suffering(결과)을 뒤바꿔 ''고통이 걱정을 밀어낸다''로 읽기 쉽다 → cause A B는 A(they)가 B(고통)를 일으킴.'
       cut_en: When our worries / exceed our control, / however, / they cause us / unnecessary suffering.
+      cloze:
+        en: When our worries exceed our control / however / they cause us unnecessary suffering
+        ko:
+        - t: 우리의 걱정이 우리의 통제를 넘어설 때
+          v: 통제
+        - t: 그러나
+        - t: 그것들(걱정)이 우리에게 불필요한 고통을 일으킨다
+          trap: true
   - kind: mc
     sentence: In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth.
     source: 2024 고3 9월 29번
