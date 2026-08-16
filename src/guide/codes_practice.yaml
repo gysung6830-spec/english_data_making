@@ -352,6 +352,156 @@ practice:
         b: 관객층의 약화
         a_label: 원인
         b_label: 결과
+  - kind: mc
+    sentence: However, due to its popularity, thirty more students are coming to the camp than we expected, so we need one more swimming pool for them.
+    source: 2022 고3 6월 18번
+    vocab:
+    - word: due to
+      meaning: ~때문에, ~로 인해
+    - word: popularity
+      meaning: 인기
+    - word: expect
+      meaning: 예상하다, 기대하다
+    solution:
+      cut: 하지만 / 그 인기 때문에 / 예상보다 서른 명 더 많은 학생이 캠프에 온다 / 그래서 그들을 위해 수영장이 하나 더 필요하다
+      cut_en: However / due to its popularity / thirty more students are coming to the camp than we expected / so we need one more swimming pool for them
+      wrong: 수영장이 하나 더 필요해서, 예상보다 많은 학생이 오게 되었다.
+      wrong_why: due to X는 X가 원인이라는 표시다. 인기가 원인이고 학생 증가가 결과인데, 결과를 원인처럼 뒤집어 놓았다.
+      author_msg: 캠프의 인기가 원인이 되어 학생이 늘었고, 그 결과 수영장이 하나 더 필요해진 것이다.
+      key_points:
+      - 'due to : 바로 뒤가 원인, 앞이 결과'
+      intent:
+        kind: arrow
+        signal: due to
+        a: 캠프의 인기
+        b: 예상보다 많은 학생 참가
+        a_label: 원인
+        b_label: 결과
+  - kind: mc
+    sentence: But a lot of the enjoyment we get from that mighty symphony stems from the inventiveness behind it, the impressive development of musical ideas.
+    source: 2022 고3 6월 34번
+    vocab:
+    - word: stem from
+      meaning: ~에서 비롯되다, 기인하다
+    - word: inventiveness
+      meaning: 창의성, 독창성
+    - word: development
+      meaning: 전개, 발전
+    solution:
+      cut: 하지만 / 그 웅장한 교향곡에서 우리가 얻는 즐거움의 상당 부분은 / 그 뒤에 있는 창의성에서 비롯된다 / 즉 음악적 발상의 인상적인 전개에서
+      cut_en: But a lot of the enjoyment we get from that mighty symphony / stems from the inventiveness behind it / the impressive development of musical ideas
+      wrong: 그 배경의 창의성은 우리가 느끼는 즐거움에서 생겨난다.
+      wrong_why: A stems from B는 B가 원인이라는 뜻이다. 창의성이 원인, 즐거움이 결과인데 방향을 반대로 서술했다.
+      author_msg: 곡 뒤에 있는 창의성이 원인이 되어 우리가 즐거움을 느낀다.
+      key_points:
+      - 'stems from : 바로 뒤가 원인(비롯된 근원)'
+      intent:
+        kind: arrow
+        signal: stems from
+        a: 곡 배경의 창의성과 발상 전개
+        b: 우리가 얻는 즐거움
+        a_label: 원인
+        b_label: 결과
+  - kind: mc
+    sentence: Darwin saw blushing as uniquely human, representing an involuntary physical reaction caused by embarrassment and self-consciousness in a social environment.
+    source: 2023 고3 6월 37번
+    vocab:
+    - word: caused by
+      meaning: ~에 의해 야기된
+    - word: involuntary
+      meaning: 무의식적인, 의지와 무관한
+    - word: self-consciousness
+      meaning: 자의식
+    solution:
+      cut: 다윈은 / 얼굴 붉힘을 인간 고유의 것으로 보았다 / 즉 무의식적인 신체 반응을 나타낸다고 / 사회적 환경에서 당혹감과 자의식으로 인해 생기는
+      cut_en: Darwin saw blushing as uniquely human / representing an involuntary physical reaction / caused by embarrassment and self-consciousness in a social environment
+      wrong: 얼굴 붉힘이 당혹감과 자의식을 불러일으킨다.
+      wrong_why: X caused by Y는 Y가 원인이다. 당혹감·자의식이 원인, 얼굴 붉힘이 결과인데 반대로 뒤집었다.
+      author_msg: 사회적 상황의 당혹감과 자의식이 원인이 되어 무의식적으로 얼굴이 붉어진다.
+      key_points:
+      - 'caused by : 바로 뒤가 원인, 앞이 결과'
+      intent:
+        kind: arrow
+        signal: caused by
+        a: 당혹감과 자의식
+        b: 무의식적 얼굴 붉힘
+        a_label: 원인
+        b_label: 결과
+  - kind: mc
+    sentence: Perhaps you mastered your day's objective due to especially favorable conditions, such as low humidity, when in fact, you really didn't climb particularly well.
+    source: 2025 고3 6월 21번
+    vocab:
+    - word: due to
+      meaning: ~덕분에, ~때문에
+    - word: favorable
+      meaning: 유리한, 우호적인
+    - word: humidity
+      meaning: 습도
+    solution:
+      cut: 아마도 / 당신은 그날의 목표를 달성했을 것이다 / 특히 유리한 조건 덕분에 / 예컨대 낮은 습도 같은 / 사실은 / 당신이 그다지 잘 오른 게 아닌데도
+      cut_en: Perhaps you mastered your day's objective / due to especially favorable conditions / such as low humidity / when in fact / you really didn't climb particularly well
+      wrong: 당신이 목표를 달성한 덕분에 습도가 낮아지는 등 조건이 유리해졌다.
+      wrong_why: due to X는 X가 원인이다. 유리한 조건이 원인, 목표 달성이 결과인데 원인과 결과를 뒤바꿨다.
+      author_msg: 실력이 아니라 유리한 조건 덕분에 목표를 달성한 것일 수 있다는 말이다.
+      key_points:
+      - 'due to : 바로 뒤가 원인, 앞이 결과'
+      intent:
+        kind: arrow
+        signal: due to
+        a: 특히 유리한 조건
+        b: 그날의 목표 달성
+        a_label: 원인
+        b_label: 결과
+  - kind: mc
+    sentence: Often sport managers will try to be more competitive due to performance reasons and less collaborative.
+    source: 2026 고3 11월 22번
+    vocab:
+    - word: due to
+      meaning: ~때문에, ~로 인해
+    - word: competitive
+      meaning: 경쟁적인
+    - word: collaborative
+      meaning: 협력적인
+    solution:
+      cut: 흔히 / 스포츠 관리자들은 / 더 경쟁적이 되려고 한다 / 성과상의 이유 때문에 / 그리고 덜 협력적이 되려 한다
+      cut_en: Often sport managers will try to be more competitive / due to performance reasons / and less collaborative
+      wrong: 경쟁적으로 행동한 탓에 성과 문제가 생긴다.
+      wrong_why: due to X는 X가 원인이다. 성과상의 이유가 원인인데, 결과처럼 뒤집어 서술했다.
+      author_msg: 성과상의 이유가 원인이 되어 관리자들이 더 경쟁적이고 덜 협력적으로 행동하게 된다.
+      key_points:
+      - 'due to : 바로 뒤가 원인, 앞이 결과'
+      intent:
+        kind: arrow
+        signal: due to
+        a: 성과상의 이유
+        b: 더 경쟁적·덜 협력적 태도
+        a_label: 원인
+        b_label: 결과
+  - kind: mc
+    sentence: Caring about one's friends and maybe getting to keep playing with the group leads to these actions.
+    source: 2026 고3 11월 30번
+    vocab:
+    - word: lead to
+      meaning: ~로 이어지다, 초래하다
+    - word: care about
+      meaning: ~을 아끼다, 신경 쓰다
+    - word: action
+      meaning: 행동
+    solution:
+      cut: 자기 친구들을 아끼는 것 / 그리고 아마도 그 무리와 계속 어울리게 되는 것이 / 이러한 행동들로 이어진다
+      cut_en: Caring about one's friends / and maybe getting to keep playing with the group / leads to these actions
+      wrong: 이러한 행동들이 친구를 아끼는 마음으로 이어진다.
+      wrong_why: A leads to B는 A가 원인, B가 결과다. 아끼는 마음이 원인, 행동이 결과인데 방향을 뒤집었다.
+      author_msg: 친구를 아끼고 계속 함께 놀고 싶은 마음이 원인이 되어 이러한 행동이 나온다.
+      key_points:
+      - 'leads to : 앞이 원인, 바로 뒤가 결과'
+      intent:
+        kind: arrow
+        signal: leads to
+        a: 친구를 아끼는 마음
+        b: 이러한 행동들
+        a_label: 원인
+        b_label: 결과
   contrast:
   - kind: mc
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -958,6 +1108,78 @@ practice:
         signal: Unlike
         a: 철학함은 비경험적 접근
         b: 과학적(경험적) 방법
+  - kind: mc
+    sentence: Economics can go a long way towards helping a legislature determine whether or not a particular tax law will help achieve a particular goal, but economics cannot, in a vacuum, identify the goal.
+    source: 2022 고3 9월 22번
+    vocab:
+    - word: legislature
+      meaning: 입법부
+    - word: in a vacuum
+      meaning: 진공 상태에서, 독자적으로
+    - word: identify
+      meaning: 규정하다, 밝혀내다
+    solution:
+      cut: 경제학은 크게 도움이 된다 / 입법부가 판단하도록 돕는 데 / 특정 세법이 특정 목표 달성에 도움이 될지를 / 그러나 경제학은 / 독자적으로는 / 그 목표를 규정할 수 없다
+      cut_en: Economics can go a long way / towards helping a legislature determine / whether or not a particular tax law will help achieve a particular goal, / but economics cannot, / in a vacuum, / identify the goal.
+      wrong: 경제학은 목표 자체를 규정하는 데에도 결정적인 역할을 한다.
+      wrong_why: but 뒤의 cannot을 놓쳐 앞뒤 대조를 역전시킨 오역
+      author_msg: but 이후가 진짜 강조점 — 경제학은 목표를 정할 수 없다는 한계
+      key_points:
+      - 'but : 앞뒤 대조, 뒤가 강조'
+      - 'cannot : 능력의 부정'
+      intent:
+        kind: contrast
+        signal: but
+        a: 목표 설정은 못 함
+        b: 수단 평가엔 유용
+  - kind: mc
+    sentence: 'We select the cultural notion as we would select a screwdriver: certain jobs call for a Phillips head while others require an Allen wrench.'
+    source: 2022 고3 9월 37번
+    vocab:
+    - word: cultural notion
+      meaning: 문화적 개념
+    - word: call for
+      meaning: 요구하다
+    - word: Phillips head
+      meaning: 십자 드라이버 머리
+    solution:
+      cut: 우리는 문화적 개념을 고른다 / 드라이버를 고르듯이 / 어떤 일은 십자머리를 요하고 / 반면 다른 일은 육각 렌치를 요한다
+      cut_en: 'We select the cultural notion / as we would select a screwdriver: / certain jobs call for a Phillips head / while others require an Allen wrench.'
+      wrong: 모든 일이 똑같은 종류의 드라이버 하나를 요구한다.
+      wrong_why: while이 두 경우를 대조하는데 이를 동일시로 오역
+      author_msg: while 앞뒤가 서로 다른 상황을 대조
+      key_points:
+      - 'while : 대조(반면에)'
+      - 'certain...others : 두 경우 대비'
+      intent:
+        kind: contrast
+        signal: while
+        a: 어떤 일엔 십자머리
+        b: 다른 일엔 육각 렌치
+  - kind: mc
+    sentence: An important advantage of disclosure, as opposed to more aggressive forms of regulation, is its flexibility and respect for the operation of free markets.
+    source: 2023 고3 11월 23번
+    vocab:
+    - word: disclosure
+      meaning: 정보 공개
+    - word: regulation
+      meaning: 규제
+    - word: flexibility
+      meaning: 유연성
+    solution:
+      cut: 정보 공개의 중요한 이점은 / 더 공격적인 형태의 규제와 대비되어 / 그 유연성과 / 자유 시장 작동에 대한 존중이다
+      cut_en: An important advantage of disclosure, / as opposed to more aggressive forms of regulation, / is its flexibility / and respect for the operation of free markets.
+      wrong: 정보 공개는 규제보다 더 경직되어 있고 시장 작동을 제약한다.
+      wrong_why: as opposed to로 공개와 규제를 대조하는데 공개의 이점을 반대로 뒤집음
+      author_msg: as opposed to = 둘을 대비, 앞쪽(공개)이 강조 대상
+      key_points:
+      - 'as opposed to : 대조(~와 달리)'
+      - 'advantage : 강조 대상'
+      intent:
+        kind: contrast
+        signal: as opposed to
+        a: 정보 공개는 유연함
+        b: 강경한 규제
   equivalence:
   - kind: mc
     sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
@@ -1778,6 +2000,156 @@ practice:
         b: 실제로 디자인함
         a_label: 우위
         b_label: 열위
+  - kind: mc
+    sentence: Because plants tend to recover from disasters more quickly than animals, they are essential to the revitalization of damaged environments.
+    source: 2022 고3 9월 35번
+    vocab:
+    - word: more quickly than
+      meaning: ~보다 더 빨리
+    - word: recover
+      meaning: 회복하다
+    - word: revitalization
+      meaning: 회복, 재생
+    solution:
+      cut: 식물은 / 동물보다 더 빨리 / 재해로부터 회복하는 경향이 있기 때문에 / 그것들은 / 훼손된 환경의 재생에 필수적이다
+      cut_en: Because plants tend to recover from disasters more quickly than animals / they are essential / to the revitalization of damaged environments
+      wrong: 동물이 식물보다 더 빨리 재해로부터 회복한다.
+      wrong_why: A ~ more quickly than B는 A가 더 빠른 우위다. 식물이 더 빨리 회복하는데 동물이 우위인 것처럼 뒤집었다.
+      author_msg: 식물이 동물보다 더 빨리 회복하기에 훼손 환경 재생에 필수적이다.
+      key_points:
+      - 'more quickly than : 앞(식물)이 우위, than 뒤가 열위'
+      intent:
+        kind: arrow
+        signal: more quickly than
+        a: 더 빨리 회복하는 식물
+        b: 회복이 느린 동물
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: For example, a vacuum-cleaning agent that learns to foresee where and when additional dirt will appear will do better than one that does not.
+    source: 2023 고3 6월 30번
+    vocab:
+    - word: do better than
+      meaning: ~보다 더 잘하다
+    - word: foresee
+      meaning: 예견하다, 예측하다
+    - word: agent
+      meaning: 행위자, 에이전트
+    solution:
+      cut: 예를 들어 / 어디에 언제 추가 먼지가 나타날지 예측하는 법을 배우는 청소 에이전트는 / 더 잘 해낼 것이다 / 그렇지 않은 에이전트보다
+      cut_en: For example, a vacuum-cleaning agent that learns to foresee where and when additional dirt will appear / will do better than / one that does not
+      wrong: 먼지를 예측하지 못하는 에이전트가 예측하는 에이전트보다 더 잘한다.
+      wrong_why: A do better than B는 A가 우위다. 예측을 학습하는 쪽이 더 나은데 못하는 쪽을 우위로 뒤집었다.
+      author_msg: 먼지 출현을 예측하는 에이전트가 그렇지 못한 에이전트보다 성능이 낫다.
+      key_points:
+      - 'do better than : 앞이 우위, than 뒤가 열위'
+      intent:
+        kind: arrow
+        signal: do better than
+        a: 먼지 출현을 예측하는 에이전트
+        b: 예측하지 못하는 에이전트
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches.
+    source: 2024 고3 6월 32번
+    vocab:
+    - word: work better than
+      meaning: ~보다 더 잘 작동하다
+    - word: innovate
+      meaning: 혁신하다
+    - word: approach
+      meaning: 접근법
+    solution:
+      cut: 오히려 / 문제를 성공적으로 해결하거나 혁신하려면 / 정말로 효과가 있는 한두 개의 좋은 아이디어가 필요하다 / 그리고 이전의 접근법보다 더 잘 작동하는
+      cut_en: Rather, to successfully solve problems or innovate / requires one or a few good ideas that really work / and work better than previous approaches
+      wrong: 이전의 접근법이 새로운 좋은 아이디어보다 더 잘 작동한다.
+      wrong_why: A work better than B는 A가 우위다. 새 아이디어가 더 나은데 이전 접근법을 우위로 뒤집었다.
+      author_msg: 이전 접근법보다 더 잘 작동하는 소수의 좋은 아이디어가 핵심이다.
+      key_points:
+      - 'work better than : 앞(새 아이디어)이 우위, than 뒤가 열위'
+      intent:
+        kind: arrow
+        signal: work better than
+        a: 정말 효과 있는 좋은 아이디어
+        b: 이전의 접근법
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: Technological unemployment would weaken that longstanding arrangement, encouraging an even more extreme version of inequality in which some people receive more income than others and many receive nothing at all.
+    source: 2025 고3 6월 40번
+    vocab:
+    - word: more income than
+      meaning: ~보다 더 많은 소득
+    - word: unemployment
+      meaning: 실업
+    - word: inequality
+      meaning: 불평등
+    solution:
+      cut: 기술적 실업은 / 그 오래된 체제를 약화시킬 것이다 / 훨씬 더 극단적인 형태의 불평등을 조장하면서 / 그 안에서 일부 사람들은 다른 이들보다 더 많은 소득을 받고 / 많은 이들은 아무것도 받지 못한다
+      cut_en: Technological unemployment would weaken that longstanding arrangement / encouraging an even more extreme version of inequality / in which some people receive more income than others / and many receive nothing at all
+      wrong: 다른 이들이 일부 사람들보다 더 많은 소득을 받는다.
+      wrong_why: A receive more income than B는 A가 더 많이 받는 우위다. 소득을 더 받는 쪽을 반대로 뒤집었다.
+      author_msg: 일부는 더 많은 소득을, 다수는 아무것도 못 받는 극단적 불평등이 심화된다.
+      key_points:
+      - 'more income than : 앞(일부 사람들)이 우위, than 뒤가 열위'
+      intent:
+        kind: arrow
+        signal: more income than
+        a: 더 많은 소득을 받는 일부
+        b: 더 적게 받는 다른 이들
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: In a potentially acute situation, then, everyone present will appear more unconcerned than he is in fact.
+    source: 2022 고3 6월 42번
+    vocab:
+    - word: more unconcerned than
+      meaning: ~보다 더 태연한
+    - word: acute
+      meaning: 급박한, 심각한
+    - word: in fact
+      meaning: 실제로는
+    solution:
+      cut: 그러면 / 잠재적으로 급박한 상황에서 / 그 자리에 있는 모두는 / 실제보다 더 태연해 보일 것이다
+      cut_en: In a potentially acute situation, then / everyone present will appear more unconcerned / than he is in fact
+      wrong: 사람들은 실제보다 오히려 덜 태연해(더 걱정스러워) 보인다.
+      wrong_why: appear more unconcerned than he is in fact는 겉으로 보이는 태연함이 실제보다 크다는 뜻이다. 그 방향을 반대로 뒤집었다.
+      author_msg: 사람들은 급박한 상황에서 실제 속마음보다 더 태연한 척 보이려 한다.
+      key_points:
+      - 'more unconcerned than : 앞(겉모습)이 우위, than 뒤(실제)가 열위'
+      intent:
+        kind: arrow
+        signal: more unconcerned than
+        a: 겉으로 보이는 태연함
+        b: 실제 내면의 태연함
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting.
+    source: 2023 고3 11월 35번
+    vocab:
+    - word: more impact than
+      meaning: ~보다 더 큰 영향력
+    - word: measured
+      meaning: 신중한, 차분한
+    - word: panicked
+      meaning: 당황한, 겁에 질린
+    solution:
+      cut: 차분하고 권위 있으며 신중한 어조는 / 훨씬 더 큰 영향력을 가진다 / 약간 당황한 고함보다
+      cut_en: A quiet, authoritative and measured tone / has so much more impact / than slightly panicked shouting
+      wrong: 약간 당황한 고함이 차분한 어조보다 더 큰 영향력을 가진다.
+      wrong_why: A more impact than B는 A가 더 큰 영향력을 지닌 우위다. 차분한 어조가 우위인데 고함을 우위로 뒤집었다.
+      author_msg: 당황한 고함보다 차분하고 권위 있는 어조가 훨씬 더 큰 영향력을 지닌다.
+      key_points:
+      - 'more impact than : 앞(차분한 어조)이 우위, than 뒤가 열위'
+      intent:
+        kind: arrow
+        signal: more impact than
+        a: 차분하고 권위 있는 어조
+        b: 약간 당황한 고함
+        a_label: 우위
+        b_label: 열위
   connective:
   - kind: mc
     sentence: A crowd can thus force inaction on its members by implying, through its passivity, that an event is not an emergency.
@@ -2269,6 +2641,78 @@ practice:
         signal: such as
         clause: 인도네시아의 becak(삼륜 자전거)
         logic: 예시
+  - kind: mc
+    sentence: However, the most direct approach to managing automobile demand is making motorized travel more expensive or restricting it with administrative rules.
+    source: 2022 고3 6월 30번
+    vocab:
+    - word: automobile demand
+      meaning: 자동차 수요
+    - word: motorized travel
+      meaning: 동력 이동, 자동차 이동
+    - word: administrative rules
+      meaning: 행정 규칙
+    solution:
+      cut: 그러나 / 자동차 수요를 관리하는 가장 직접적인 방법은 / 동력 이동을 더 비싸게 만들거나 / 행정 규칙으로 그것을 제한하는 것이다
+      cut_en: However, / the most direct approach to managing automobile demand / is making motorized travel more expensive / or restricting it with administrative rules.
+      wrong: 게다가 자동차 수요 관리에는 간접적인 방법이 가장 좋다.
+      wrong_why: however를 첨가로, most direct를 indirect로 뒤집어 논리 역전
+      author_msg: However = 앞과 반대 방향으로의 전환
+      key_points:
+      - 'However : 역접(앞과 대조)'
+      - 'most direct : 강조'
+      intent:
+        kind: logic
+        signal: However
+        clause: 가장 직접적 방법은 비용·제한
+        logic: 대조
+  - kind: mc
+    sentence: Consequently, more consideration is being given to other ways to manage pests, such as incorporating greater resistance to pests into cultivars by breeding and using other biological control methods.
+    source: 2022 고3 6월 38번
+    vocab:
+    - word: pests
+      meaning: 해충
+    - word: cultivars
+      meaning: 품종, 재배종
+    - word: biological control
+      meaning: 생물학적 방제
+    solution:
+      cut: 그 결과 / 해충을 관리하는 다른 방법에 / 더 많은 고려가 이루어지고 있다 / 예컨대 육종으로 품종에 저항성을 높이거나 / 다른 생물학적 방제법을 쓰는 것
+      cut_en: Consequently, / more consideration is being given to other ways to manage pests, / such as incorporating greater resistance to pests into cultivars by breeding / and using other biological control methods.
+      wrong: 그럼에도 불구하고 다른 해충 관리 방법은 계속 외면받고 있다.
+      wrong_why: Consequently는 앞의 결과인데 역접(양보)으로 뒤집어 오역
+      author_msg: Consequently = 앞이 원인, 뒤가 그 결과
+      key_points:
+      - 'Consequently : 인과(그 결과)'
+      - 'such as : 예시'
+      intent:
+        kind: logic
+        signal: Consequently
+        clause: 다른 방제법이 더 고려됨
+        logic: 인과
+  - kind: mc
+    sentence: In the old days, however, the client was always primary and her tailor was an obscure craftsman, perhaps talented but perhaps not.
+    source: 2022 고3 9월 33번
+    vocab:
+    - word: primary
+      meaning: 우선하는, 가장 중요한
+    - word: obscure
+      meaning: 무명의, 잘 알려지지 않은
+    - word: craftsman
+      meaning: 장인
+    solution:
+      cut: 옛날에는 / 그러나 / 고객이 항상 우선이었고 / 그녀의 재단사는 무명의 장인이었다 / 어쩌면 재능이 있었을 수도 / 어쩌면 아닐 수도
+      cut_en: In the old days, / however, / the client was always primary / and her tailor was an obscure craftsman, / perhaps talented but perhaps not.
+      wrong: 옛날에도 마찬가지로 재단사가 늘 우선이고 고객은 부차적이었다.
+      wrong_why: however로 현재와 대조되는 과거인데 우선순위를 반대로 뒤집음
+      author_msg: however = 앞(현재)과 반대인 과거 상황 제시
+      key_points:
+      - 'however : 역접(앞과 대조)'
+      - 'always primary : 고객이 우선'
+      intent:
+        kind: logic
+        signal: however
+        clause: 옛날엔 고객이 우선이었다
+        logic: 대조
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
@@ -2492,6 +2936,150 @@ practice:
         kind: polarity
         signal: essential
         stmt: 아이들의 방식은 본질적 특성이다
+        polarity: positive
+  - kind: mc
+    sentence: Mobility flows have become a key dynamic of urbanization, with the associated infrastructure invariably constituting the backbone of urban form.
+    source: 2023 고3 6월 24번
+    vocab:
+    - word: mobility flows
+      meaning: 이동 흐름
+    - word: urbanization
+      meaning: 도시화
+    - word: backbone
+      meaning: 근간, 척추
+    solution:
+      cut: 이동 흐름은 / 도시화의 핵심 동력이 되었고 / 관련 기반시설은 / 언제나 / 도시 형태의 근간을 이룬다
+      cut_en: Mobility flows have become a key dynamic of urbanization, / with the associated infrastructure / invariably constituting / the backbone of urban form.
+      wrong: 이동 흐름은 도시화에서 부차적 요소에 불과하다.
+      wrong_why: key/backbone의 강조 극성을 사소함으로 뒤집음
+      author_msg: key = 핵심임을 강조하는 긍정 극성
+      key_points:
+      - 'key : 핵심 강조(긍정극성)'
+      - 'invariably : 예외 없음'
+      intent:
+        kind: polarity
+        signal: key
+        stmt: 이동 흐름이 도시화의 핵심
+        polarity: positive
+  - kind: mc
+    sentence: Because experts have extensive practice within a limited domain, the key component skills in their domain tend to be highly practiced and more automated.
+    source: 2023 고3 6월 35번
+    vocab:
+    - word: extensive practice
+      meaning: 폭넓은 연습
+    - word: domain
+      meaning: 영역, 분야
+    - word: automated
+      meaning: 자동화된
+    solution:
+      cut: 전문가는 제한된 영역 안에서 / 폭넓은 연습을 하기 때문에 / 그 영역의 핵심 구성 기술은 / 고도로 숙달되고 / 더 자동화되는 경향이 있다
+      cut_en: Because experts have extensive practice within a limited domain, / the key component skills in their domain / tend to be highly practiced / and more automated.
+      wrong: 전문가의 핵심 기술은 거의 숙달되지 않은 채로 남는다.
+      wrong_why: key/highly practiced의 강조를 미숙으로 뒤집음
+      author_msg: key = 핵심임을 강조하는 긍정 극성
+      key_points:
+      - 'key : 핵심 강조'
+      - 'highly practiced : 고도 숙달 강조'
+      intent:
+        kind: polarity
+        signal: key
+        stmt: 핵심 기술이 고도로 숙달됨
+        polarity: positive
+  - kind: mc
+    sentence: Ever since, the practice of portraying shadows has evolved along with critical analysis of them, as artists and theoreticians have engaged in an ongoing debate about the significance of shadow representation.
+    source: 2024 고3 6월 24번
+    vocab:
+    - word: portray
+      meaning: 묘사하다
+    - word: theoretician
+      meaning: 이론가
+    - word: significance
+      meaning: 중요성, 의의
+    solution:
+      cut: 그 이후로 / 그림자를 묘사하는 관행은 / 그에 대한 비평적 분석과 함께 발전해 왔다 / 예술가와 이론가들이 / 그림자 표현의 중요성에 관한 / 지속적 논쟁을 벌이면서
+      cut_en: Ever since, / the practice of portraying shadows has evolved / along with critical analysis of them, / as artists and theoreticians have engaged in an ongoing debate / about the significance of shadow representation.
+      wrong: 그림자 표현은 사소하게 여겨져 논의 대상조차 되지 못했다.
+      wrong_why: significance(중요성)를 사소함으로 극성을 뒤집음
+      author_msg: significance = 중요성을 강조하는 긍정 극성
+      key_points:
+      - 'significance : 중요성 강조'
+      - 'ongoing debate : 지속적 관심'
+      intent:
+        kind: polarity
+        signal: significance
+        stmt: 그림자 표현의 중요성 논쟁
+        polarity: positive
+  - kind: mc
+    sentence: For example, performance evaluation and reward systems that reinforce long-term performance and the development and sharing of new skills and knowledge are particularly important.
+    source: 2024 고3 6월 37번
+    vocab:
+    - word: performance evaluation
+      meaning: 성과 평가
+    - word: reward system
+      meaning: 보상 체계
+    - word: reinforce
+      meaning: 강화하다
+    solution:
+      cut: 예를 들어 / 성과 평가와 보상 체계는 / 장기 성과를 강화하고 / 새로운 기술과 지식의 개발·공유를 강화하는 / 그러한 체계는 / 특히 중요하다
+      cut_en: For example, / performance evaluation and reward systems / that reinforce long-term performance / and the development and sharing of new skills and knowledge / are particularly important.
+      wrong: 그러한 평가·보상 체계는 사실 그다지 중요하지 않다.
+      wrong_why: particularly important를 사소함으로 극성을 뒤집음
+      author_msg: particularly important = 강한 중요성 강조
+      key_points:
+      - 'particularly important : 중요성 강조'
+      - 'reinforce : 강화(긍정)'
+      intent:
+        kind: polarity
+        signal: particularly important
+        stmt: 평가·보상 체계가 특히 중요
+        polarity: positive
+  - kind: mc
+    sentence: In highly representational paintings, plays, or stories, the focus is on subject matter that resembles everyday life and the role of background style is to facilitate the construction of mental models.
+    source: 2024 고3 6월 39번
+    vocab:
+    - word: representational
+      meaning: 재현적, 사실적
+    - word: subject matter
+      meaning: 소재, 주제
+    - word: facilitate
+      meaning: 촉진하다, 돕다
+    solution:
+      cut: 매우 사실적인 그림, 연극, 이야기에서는 / 초점이 / 일상생활을 닮은 소재에 있고 / 배경 양식의 역할은 / 심적 모형의 구성을 돕는 것이다
+      cut_en: In highly representational paintings, plays, or stories, / the focus is on subject matter that resembles everyday life / and the role of background style / is to facilitate the construction of mental models.
+      wrong: 사실적 작품에서는 소재보다 배경 양식이 초점의 대상이 된다.
+      wrong_why: focus가 소재에 있는데 배경으로 강조 대상을 옮겨 오역
+      author_msg: focus is on = 강조 대상을 소재로 지목
+      key_points:
+      - 'focus is on : 초점(강조 대상)'
+      - 'facilitate : 돕다(긍정)'
+      intent:
+        kind: polarity
+        signal: focus
+        stmt: 초점은 일상 닮은 소재
+        polarity: positive
+  - kind: mc
+    sentence: In highly expressionist works, novel stylistic devices work in an inharmonious manner against the subject matter thereby creating a disquieting atmosphere.
+    source: 2024 고3 6월 39번
+    vocab:
+    - word: expressionist
+      meaning: 표현주의의
+    - word: stylistic devices
+      meaning: 양식적 장치
+    - word: disquieting
+      meaning: 불안하게 하는
+    solution:
+      cut: 매우 표현주의적인 작품에서는 / 새로운 양식 장치들이 / 소재와 부조화하게 작동하여 / 그로써 / 불안한 분위기를 자아낸다
+      cut_en: In highly expressionist works, / novel stylistic devices work in an inharmonious manner / against the subject matter / thereby creating a disquieting atmosphere.
+      wrong: 표현주의 작품에서 양식은 소재와 조화롭게 어우러진다.
+      wrong_why: highly + inharmonious로 강조된 부조화를 조화로 뒤집음
+      author_msg: highly = 정도 강조; against = 소재와의 대립
+      key_points:
+      - 'highly : 정도 강조'
+      - 'inharmonious against : 대립 강조'
+      intent:
+        kind: polarity
+        signal: highly
+        stmt: 새 양식이 소재와 부조화
         polarity: positive
   polarity_negative:
   - kind: mc
@@ -2788,4 +3376,124 @@ practice:
         kind: polarity
         signal: no longer than
         stmt: 세 시간 넘게 회사를 떠나 있을 수 있다
+        polarity: negative
+  - kind: mc
+    sentence: Ideas about the social world become part of our worldview without our necessarily being aware of the source of the particular idea or that we even hold the idea at all.
+    source: 2022 고3 9월 37번
+    vocab:
+    - word: worldview
+      meaning: 세계관
+    - word: be aware of
+      meaning: 의식하다, 알아차리다
+    - word: source
+      meaning: 출처, 근원
+    solution:
+      cut: 사회 세계에 관한 생각들은 / 우리 세계관의 일부가 된다 / 우리가 반드시 의식하지는 않은 채 / 그 특정 생각의 출처를 / 혹은 우리가 그 생각을 갖고 있다는 사실조차
+      cut_en: Ideas about the social world become part of our worldview / without our necessarily being aware of the source of the particular idea / or that we even hold the idea at all.
+      wrong: 우리는 언제나 그 생각의 출처를 분명히 인식하고 있다.
+      wrong_why: without...necessarily(부분부정)를 완전 긍정으로 뒤집음
+      author_msg: without necessarily = 반드시 ~인 것은 아님(부분부정)
+      key_points:
+      - 'without : 부정(~없이)'
+      - 'necessarily : 부분부정 신호'
+      intent:
+        kind: polarity
+        signal: without
+        stmt: 출처를 꼭 의식하진 않음
+        polarity: partial
+  - kind: mc
+    sentence: Even today, you might find it surprising to learn about people who see an object without seeing where it is, or see it without seeing whether it is moving.
+    source: 2023 고3 11월 24번
+    vocab:
+    - word: object
+      meaning: 물체, 대상
+    - word: whether
+      meaning: ~인지 아닌지
+    - word: surprising
+      meaning: 놀라운
+    solution:
+      cut: 오늘날에도 / 당신은 놀랍게 여길지 모른다 / 어떤 사람들에 대해 알게 되면 / 물체를 보되 / 그것이 어디 있는지는 보지 못하는 / 혹은 물체를 보되 / 그것이 움직이는지는 보지 못하는
+      cut_en: Even today, / you might find it surprising to learn about people / who see an object without seeing where it is, / or see it without seeing whether it is moving.
+      wrong: 그들은 물체와 그 위치·움직임을 모두 정확히 본다.
+      wrong_why: without seeing(보지 못함)을 다 본다로 극성을 뒤집음
+      author_msg: without seeing = ~는 보지 못함
+      key_points:
+      - 'without : 부정(~없이)'
+      - 'see A without B : A만 보고 B는 못 봄'
+      intent:
+        kind: polarity
+        signal: without
+        stmt: 위치는 못 보고 물체만 봄
+        polarity: negative
+  - kind: mc
+    sentence: Each of these highly practiced skills then demands relatively few cognitive resources, effectively lowering the total cognitive load that experts experience.
+    source: 2023 고3 6월 35번
+    vocab:
+    - word: cognitive resources
+      meaning: 인지 자원
+    - word: cognitive load
+      meaning: 인지 부하
+    - word: demand
+      meaning: 요구하다
+    solution:
+      cut: 이 고도로 숙달된 기술 각각은 / 그때 / 상대적으로 적은 인지 자원을 요구하여 / 효과적으로 낮춘다 / 전문가가 겪는 총 인지 부하를
+      cut_en: Each of these highly practiced skills then demands / relatively few cognitive resources, / effectively lowering the total cognitive load / that experts experience.
+      wrong: 이 기술들은 상당히 많은 인지 자원을 요구한다.
+      wrong_why: few(거의 없음)를 많음으로 극성을 뒤집음
+      author_msg: few = 거의 없는(준부정)
+      key_points:
+      - 'few : 준부정(거의 없음)'
+      - 'lowering : 감소(부정 방향)'
+      intent:
+        kind: polarity
+        signal: few
+        stmt: 인지 자원을 거의 안 씀
+        polarity: negative
+  - kind: mc
+    sentence: For example, owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
+    source: 2024 고3 11월 23번
+    vocab:
+    - word: incentive
+      meaning: 유인, 동기
+    - word: carbon capture
+      meaning: 탄소 포집
+    - word: ecosystem services
+      meaning: 생태계 서비스
+    solution:
+      cut: 예를 들어 / 산림 소유주들은 / 나무를 베어낼 시장 유인을 갖는다 / 숲을 관리하기보다는 / 탄소 포집, 야생동물 서식지, 홍수 방지, / 그리고 다른 생태계 서비스를 위해
+      cut_en: For example, / owners of forest lands have a market incentive / to cut down trees / rather than manage the forest / for carbon capture, wildlife habitat, flood protection, / and other ecosystem services.
+      wrong: 산림 소유주들은 숲을 관리하려는 강한 시장 유인을 가진다.
+      wrong_why: rather than으로 숲 관리가 배제되는데 이를 선택으로 뒤집음
+      author_msg: rather than = 뒤쪽(숲 관리)은 배제됨
+      key_points:
+      - 'rather than : 배제(~보다는)'
+      - 'market incentive : 벌목 쪽으로'
+      intent:
+        kind: polarity
+        signal: rather than
+        stmt: 숲 보전 유인은 없음
+        polarity: negative
+  - kind: mc
+    sentence: In the 1970s, the few scientists who spoke frequently with the media were often criticized by their fellow scientists for having done so.
+    source: 2024 고3 11월 42번
+    vocab:
+    - word: media
+      meaning: 언론, 매체
+    - word: criticize
+      meaning: 비판하다
+    - word: fellow
+      meaning: 동료의
+    solution:
+      cut: 1970년대에 / 언론과 자주 대화한 소수의 과학자들은 / 종종 비판받았다 / 동료 과학자들에게 / 그렇게 했다는 이유로
+      cut_en: In the 1970s, / the few scientists who spoke frequently with the media / were often criticized by their fellow scientists / for having done so.
+      wrong: 1970년대에는 많은 과학자들이 언론과 자유롭게 소통했다.
+      wrong_why: the few(소수)를 다수로 극성을 뒤집음
+      author_msg: few = 극소수(준부정)
+      key_points:
+      - 'few : 준부정(소수)'
+      - 'criticized : 부정적 반응'
+      intent:
+        kind: polarity
+        signal: few
+        stmt: 언론과 소통한 과학자는 소수
         polarity: negative

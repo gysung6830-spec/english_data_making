@@ -529,6 +529,110 @@ practice:
           v: 연결
         - t: 이전에는 존재하지 않았던
           v: 존재
+  - kind: mc
+    sentence: Yes, some contests are seen as world class, such as identification of the Higgs particle or the development of high temperature superconductors.
+    source: 2024 고3 11월 38번
+    vocab:
+    - word: contest
+      meaning: 대회, 경쟁
+    - word: superconductor
+      meaning: 초전도체
+    - word: world class
+      meaning: 세계적 수준의
+    solution:
+      cut: 그렇다, / 일부 대회는 / 세계적 수준으로 여겨진다, / 예를 들어 / 힉스 입자를 규명해 내는 것이나 / 고온 초전도체를 개발해 내는 것 같은
+      cut_en: Yes, / some contests / are seen as world class, / such as / identification of the Higgs particle / or the development of high temperature superconductors
+      wrong: 힉스 입자의 정체 또는 고온 초전도체의 발전 같은
+      wrong_why: identification/development는 '규명함/개발함'을 뜻하는 동작명사인데 정적 명사(정체/진보)로 읽고 뒤의 of를 단순 소유격으로 처리해 'N을 …하다'라는 동사-목적 관계를 풀지 못함.
+      author_msg: 동작명사+of N은 'N을 …하는 것'으로 풀어라(규명해 냄/개발해 냄).
+      key_points:
+      - '명사화 명사구 : identification/development of N = N을 규명하다/개발하다 (동사로 환원)'
+      cloze:
+        en: Yes, some contests / are seen as world class, / such as / identification of the Higgs particle or the development of high temperature superconductors
+        ko:
+        - t: 그렇다, 일부 대회는
+        - t: 세계적 수준으로 여겨진다,
+        - t: 예를 들어 ~같은
+        - t: 힉스 입자를 규명해 내는 것이나 고온 초전도체를 개발해 내는 것
+          trap: true
+  - kind: mc
+    sentence: Often overlooked, but just as important a stakeholder, is the consumer who plays a large role in the notion of the privacy paradox.
+    source: 2022 고3 6월 22번
+    vocab:
+    - word: stakeholder
+      meaning: 이해관계자
+    - word: overlook
+      meaning: 간과하다
+    - word: notion
+      meaning: 개념, 관념
+    solution:
+      cut: 종종 간과되지만, / 그에 못지않게 중요한 이해관계자가 / 바로 소비자인데, / 그는 큰 역할을 한다 / 사생활 역설이라는 개념에서
+      cut_en: Often overlooked, / but just as important a stakeholder, / is the consumer / who plays a large role / in the notion of the privacy paradox
+      wrong: 사생활 역설의 관념에서 큰 역할을 하는 소비자
+      wrong_why: the notion of X는 'X라는 개념'이라는 동격 of인데 'X의 개념(역설이 소유한 개념)'이라는 소유격으로 읽어 관계 방향을 뒤집음.
+      author_msg: the notion/idea of X는 'X라는 개념'으로 풀어라(동격 of).
+      key_points:
+      - '명사화 명사구 : the notion of N = N이라는 개념 (동격 of)'
+      cloze:
+        en: Often overlooked, but just as important a stakeholder, / is the consumer / who plays a large role / in the notion of the privacy paradox
+        ko:
+        - t: 종종 간과되지만, 그에 못지않게 중요한 이해관계자가
+        - t: 바로 소비자이다
+        - t: 그는 큰 역할을 한다
+        - t: 사생활 역설이라는 개념에서
+          trap: true
+  - kind: mc
+    sentence: The tendency to see negotiation in fixed-pie terms varies depending on how people view the nature of a given conflict situation.
+    source: 2023 고3 6월 42번
+    vocab:
+    - word: negotiation
+      meaning: 협상
+    - word: tendency
+      meaning: 경향
+    - word: conflict
+      meaning: 갈등
+    solution:
+      cut: 협상을 고정된 파이의 관점에서 보려는 경향은 / 달라진다 / 사람들이 어떻게 보느냐에 따라 / 주어진 갈등 상황의 본질을
+      cut_en: The tendency to see negotiation in fixed-pie terms / varies / depending on how people view / the nature of a given conflict situation
+      wrong: 협상을 고정된 파이 관점에서 보기 위한 경향
+      wrong_why: tendency to V의 to는 '~하려는/~하는'을 뜻하는 동격 부정사인데 '~하기 위해(목적)'로 오독함.
+      author_msg: tendency/ability/necessity to V의 to는 목적이 아니다 → 'V하려는 경향/V할 능력'.
+      key_points:
+      - '명사화 명사구 : tendency to V = V하려는 경향 (to는 목적 아닌 동격)'
+      cloze:
+        en: The tendency to see negotiation in fixed-pie terms / varies / depending on how people view / the nature of a given conflict situation
+        ko:
+        - t: 협상을 고정된 파이의 관점에서 보려는 경향은
+          trap: true
+        - t: 달라진다
+        - t: 사람들이 어떻게 보느냐에 따라
+        - t: 주어진 갈등 상황의 본질을
+  - kind: mc
+    sentence: In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.
+    source: 2024 고3 6월 32번
+    vocab:
+    - word: generate
+      meaning: 만들어 내다, 생성하다
+    - word: essentially
+      meaning: 본질적으로
+    - word: useless
+      meaning: 쓸모없는
+    solution:
+      cut: 사실, / 창의적인 아이디어를 만들어 내는 능력은 / 본질적으로 쓸모없다 / 만약 이 아이디어들이 이후 조용한 죽음을 맞는다면
+      cut_en: In fact, / the ability to generate creative ideas / is essentially useless / if these ideas subsequently die a silent death
+      wrong: 창의적인 아이디어를 만들어 내기 위한 능력
+      wrong_why: the ability to V의 to는 'V할(할 수 있는)'을 뜻하는데 '~하기 위한' 목적으로 오독함.
+      author_msg: the ability to V = 'V할 능력'(to를 목적으로 풀지 말 것).
+      key_points:
+      - '명사화 명사구 : the ability to V = V할 능력 (to는 목적 아님)'
+      cloze:
+        en: In fact, / the ability to generate creative ideas / is essentially useless / if these ideas subsequently die a silent death
+        ko:
+        - t: 사실,
+        - t: 창의적인 아이디어를 만들어 내는 능력은
+          trap: true
+        - t: 본질적으로 쓸모없다
+        - t: 만약 이 아이디어들이 이후 조용한 죽음을 맞는다면
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
     source: 2025 수능 21번
@@ -799,3 +903,104 @@ practice:
           trap: true
         - t: 매우 시각적인 주제이다
           v: 시각적
+  - kind: mc
+    sentence: The metaphor is useful because it helps us see ownership as a grouping of interpersonal rights that can be separated and put back together.
+    source: 2023 고3 6월 21번
+    vocab:
+    - word: ownership
+      meaning: 소유권
+    - word: interpersonal
+      meaning: 사람 간의, 대인의
+    - word: grouping
+      meaning: 묶음, 무리
+    solution:
+      cut: 그 비유는 유용하다 / 왜냐하면 그것은 우리가 소유권을 보도록 돕기 때문이다 / 분리되었다가 다시 합쳐질 수 있는 / 대인 권리들의 묶음으로
+      cut_en: The metaphor is useful / because it helps us / see ownership / as a grouping of interpersonal rights that can be separated and put back together
+      wrong: 소유권을 실제로 떼었다 붙였다 할 수 있는 물건 덩어리로 읽음
+      wrong_why: '''a grouping ... separated and put back together''는 권리들이 나뉘고 다시 결합될 수 있음을 나타내는 비유인데, 물리적 물건을 분해·조립하듯 문자 그대로 해석함.'
+      author_msg: see A as B(비유)는 'A를 B에 빗대어 이해하다' — 물리적 사실로 읽지 말 것.
+      key_points:
+      - '비유 어구 : see ownership as a grouping ... = 소유권을 …묶음에 빗댄 은유 (문자 아님)'
+      cloze:
+        en: The metaphor is useful / because it helps us / see ownership / as a grouping of interpersonal rights that can be separated and put back together
+        ko:
+        - t: 그 비유는 유용하다
+        - t: 왜냐하면 그것은 우리를 돕기 때문이다
+        - t: 소유권을 보도록
+        - t: 분리되었다가 다시 합쳐질 수 있는 대인 권리들의 묶음으로
+          trap: true
+  - kind: mc
+    sentence: We feel as though others can see through our skin and into our mind.
+    source: 2023 고3 6월 37번
+    vocab:
+    - word: see through
+      meaning: 꿰뚫어 보다, 투시하다
+    - word: skin
+      meaning: 피부
+    - word: mind
+      meaning: 마음
+    solution:
+      cut: 우리는 느낀다 / 마치 다른 사람들이 / 우리의 피부를 꿰뚫고 / 우리의 마음속까지 볼 수 있는 것처럼
+      cut_en: We feel / as though others / can see through our skin / and into our mind
+      wrong: 다른 사람들이 실제로 우리 속마음을 꿰뚫어 본다고 여긴다
+      wrong_why: as though(마치 ~인 것처럼)는 실제가 아닌 비유적 가정인데, 남이 실제로 피부를 투시해 마음을 본다고 사실처럼 읽음.
+      author_msg: as though/as if + 비유는 '마치 ~처럼'이라는 가정 — 사실로 읽지 말 것.
+      key_points:
+      - '비유 어구 : as though S can see through ... = 마치 …하는 것처럼 (비유·가정)'
+      cloze:
+        en: We feel / as though others / can see through our skin and into our mind
+        ko:
+        - t: 우리는 느낀다
+        - t: 마치 다른 사람들이
+        - t: 우리의 피부를 꿰뚫고 우리의 마음속까지 볼 수 있는 것처럼
+          trap: true
+  - kind: mc
+    sentence: Even so, we don't feel as if his face is a dentate blankness.
+    source: 2025 고3 6월 32번
+    vocab:
+    - word: dentate
+      meaning: 톱니 모양의
+    - word: blankness
+      meaning: 공백, 텅 빔
+    - word: even so
+      meaning: 그렇더라도
+    solution:
+      cut: 그렇더라도, / 우리는 느끼지 않는다 / 마치 그의 얼굴이 / 톱니 모양의 공백인 것처럼
+      cut_en: Even so, / we don't feel / as if his face / is a dentate blankness
+      wrong: 그의 얼굴을 실제 톱니가 달린 텅 빈 표면으로 문자 그대로 읽음
+      wrong_why: as if his face is a dentate blankness는 얼굴을 '톱니 모양의 공백'에 빗댄 은유인데, 물리적 사실로 문자 해석함.
+      author_msg: as if + 명사 은유는 '마치 ~인 듯'이라는 비유 — 문자로 읽지 말 것.
+      key_points:
+      - '비유 어구 : as if his face is a dentate blankness = 마치 …인 것처럼 (은유)'
+      cloze:
+        en: Even so, / we don't feel / as if his face is a dentate blankness
+        ko:
+        - t: 그렇더라도,
+        - t: 우리는 느끼지 않는다
+        - t: 마치 그의 얼굴이 톱니 모양의 공백인 것처럼
+          trap: true
+  - kind: mc
+    sentence: The experience of walking along a path, for example, can be a metaphor for thinking about arithmetic.
+    source: 2025 고3 6월 39번
+    vocab:
+    - word: arithmetic
+      meaning: 산수, 셈
+    - word: path
+      meaning: 길, 경로
+    - word: metaphor
+      meaning: 비유, 은유
+    solution:
+      cut: 예를 들어, / 길을 따라 걷는 경험은 / 산수에 대해 생각하는 것에 대한 / 하나의 비유가 될 수 있다
+      cut_en: The experience of walking along a path, / for example, / can be a metaphor / for thinking about arithmetic
+      wrong: 길을 걷는 경험이 곧 산수 계산이라고 문자 그대로 동일시함
+      wrong_why: can be a metaphor for는 '~에 대한 비유가 될 수 있다'는 빗댐인데, 걷기와 산수를 실제로 같은 것으로 동일시함.
+      author_msg: A can be a metaphor for B = 'A는 B에 대한 비유' — 실제 동일시가 아님.
+      key_points:
+      - '비유 어구 : can be a metaphor for = ~에 대한 비유가 될 수 있다 (빗댐)'
+      cloze:
+        en: The experience of walking along a path, / for example, / can be a metaphor for thinking about arithmetic
+        ko:
+        - t: 길을 따라 걷는 경험은
+        - t: 예를 들어,
+        - t: 산수에 대해 생각하는 것에 대한 비유가 될 수 있다
+          trap: true

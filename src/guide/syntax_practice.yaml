@@ -333,6 +333,89 @@ practice:
         - t: 하지만 또한
         - t: 우리가 훨씬 덜 인식하는 방식으로도
           trap: true
+  - kind: mc
+    sentence: Without a better understanding of the what, when, and why of data collection and use, the consumer is often left feeling vulnerable and conflicted.
+    source: 2022 고3 6월 22번
+    vocab:
+    - word: data collection
+      meaning: 데이터 수집
+    - word: vulnerable
+      meaning: 취약한
+    - word: conflicted
+      meaning: 갈등을 느끼는
+    solution:
+      cut: 데이터 수집과 이용의 무엇·언제·왜를 더 잘 이해하지 못하면 / 소비자는 흔히 남겨진다 / 취약하고 갈등을 느끼는 채로
+      cut_en: Without a better understanding of the what, when, and why of data collection and use / the consumer is often left / feeling vulnerable and conflicted
+      wrong: 데이터 수집과 이용을 더 잘 이해하지 못하면, 소비자는 무엇을 언제 왜 취약하고 갈등을 느끼는가?
+      wrong_why: the what, when, and why는 앞에 the가 붙어 명사화된 표현으로 understanding of의 목적어다. 즉 '수집·이용의 무엇(내용)·언제(시점)·왜(이유)'를 이해한다는 뜻이지, 뒤 주절에 걸리는 의문사가 아니다.
+      author_msg: the+의문사는 '~라는 것/문제'라는 명사 덩어리. of의 목적어일 뿐 의문문이 아니다.
+      key_points:
+      - 'the+의문사(the what/when/why) : 의문사 앞에 the가 붙으면 ''무엇/언제/왜라는 문제''로 명사화되어 전치사의 목적어로 쓰인다'
+      cloze:
+        en: Without a better understanding of the what, when, and why of data collection and use / the consumer is often left / feeling vulnerable and conflicted
+        ko:
+        - t: 데이터 수집과 이용의 무엇·언제·왜를 더 잘 이해하지 못하면
+          trap: true
+        - t: 소비자는 흔히 남겨진다
+          v: 소비자
+        - t: 취약하고 갈등을 느끼는 채로
+          v: 취약하고
+  - kind: mc
+    sentence: Ludwig van Beethoven's famous Fifth Symphony provides an exceptional example of how much mileage a classical composer can get out of a few notes and a simple rhythmic tapping.
+    source: 2022 고3 6월 34번
+    vocab:
+    - word: exceptional
+      meaning: 뛰어난, 이례적인
+    - word: mileage
+      meaning: (얻어내는) 효용, 성과
+    - word: rhythmic tapping
+      meaning: 리듬감 있는 두드림
+    solution:
+      cut: 베토벤의 유명한 5번 교향곡은 뛰어난 예를 제공한다 / 고전 작곡가가 얼마나 많은 것을 얻어낼 수 있는지에 대한 / 몇 개의 음과 단순한 리듬의 두드림으로부터
+      cut_en: Ludwig van Beethoven's famous Fifth Symphony provides an exceptional example / of how much mileage a classical composer can get / out of a few notes and a simple rhythmic tapping
+      wrong: 고전 작곡가가 몇 개의 음과 단순한 리듬으로 어떻게 효용을 얻는지에 대한 뛰어난 예를 제공한다.
+      wrong_why: of의 목적어는 how much mileage ... can get이라는 간접의문문이다. 여기서 how는 명사구 much mileage를 수식해 '얼마나 많은 성과를'이라는 정도를 나타내며, get의 목적어 how much mileage가 앞으로 나간 구조다. '어떻게(방법)'로 읽으면 안 된다.
+      author_msg: how much + 명사 = '얼마나 많은 ~'(정도). '어떻게'가 아니다.
+      key_points:
+      - 'how much + 명사 (간접의문문) : how가 명사구를 수식하면 ''얼마나 많은 ~''라는 정도를 뜻하며, 그 명사구가 동사의 목적어로 앞에 나온 것'
+      cloze:
+        en: Ludwig van Beethoven's famous Fifth Symphony provides an exceptional example / of how much mileage a classical composer can get / out of a few notes and a simple rhythmic tapping
+        ko:
+        - t: 베토벤의 유명한 5번 교향곡은 뛰어난 예를 제공한다
+          v: 뛰어난
+        - t: 고전 작곡가가 얼마나 많은 것을 얻어낼 수 있는지에 대한
+          trap: true
+        - t: 몇 개의 음과 단순한 리듬의 두드림으로부터
+          v: 두드림
+  - kind: mc
+    sentence: The psychologist interested in young children may have to venture a little more often into the wilderness in order to get a good picture of how children think.
+    source: 2022 고3 9월 34번
+    vocab:
+    - word: venture
+      meaning: (위험을 무릅쓰고) 나아가다
+    - word: wilderness
+      meaning: 미지의 영역, 황야
+    - word: get a good picture of
+      meaning: ~을 제대로 파악하다
+    solution:
+      cut: 어린아이에게 관심 있는 심리학자는 / 조금 더 자주 미지의 영역으로 나아가야 할지도 모른다 / 제대로 파악하기 위해 / 아이들이 어떻게 사고하는지를
+      cut_en: The psychologist interested in young children / may have to venture a little more often into the wilderness / in order to get a good picture / of how children think
+      wrong: 아이들이 생각하는 좋은 그림을 얻기 위해 심리학자는 미지의 영역으로 나아가야 한다.
+      wrong_why: of how children think는 의문사 how가 이끄는 간접의문문으로 '아이들이 어떻게 사고하는지'라는 명사절이며, get a good picture of(~을 제대로 파악하다)의 대상이다. how를 관계사처럼 '아이들이 생각하는'으로 picture를 꾸미게 읽으면 안 된다.
+      author_msg: of how ...는 '어떻게 ~하는지'라는 간접의문문. picture를 꾸미는 관계절이 아니다.
+      key_points:
+      - 'how + 주어 + 동사 (간접의문문) : 전치사 of의 목적어로 ''어떻게 ~하는지''라는 명사절이며, 앞 명사를 꾸미는 관계절이 아니다'
+      cloze:
+        en: The psychologist interested in young children / may have to venture a little more often into the wilderness / in order to get a good picture / of how children think
+        ko:
+        - t: 어린아이에게 관심 있는 심리학자는
+          v: 심리학자
+        - t: 조금 더 자주 미지의 영역으로 나아가야 할지도 모른다
+          v: 미지의 영역
+        - t: 제대로 파악하기 위해
+          v: 파악
+        - t: 아이들이 어떻게 사고하는지를
+          trap: true
   participle:
   - kind: mc
     sentence: Worried that she could not get to the boarding gate in time, she rushed through the crowds of people.
@@ -695,6 +778,147 @@ practice:
           v: 화학적 자취
         - t: 아마도 신참에게 경로 학습을 돕기 위해
           v: 신참
+  - kind: mc
+    sentence: Looking around his shared dorm room, Noah thought that it looked exactly like every other dorm room at the university, and he became disappointed.
+    source: 2022 고3 6월 45번
+    vocab:
+    - word: shared dorm room
+      meaning: 함께 쓰는 기숙사 방
+    - word: exactly
+      meaning: 정확히, 꼭
+    - word: disappointed
+      meaning: 실망한
+    solution:
+      cut: 함께 쓰는 기숙사 방을 둘러보며 / Noah는 생각했다 / 그것이 대학의 다른 모든 기숙사 방과 똑같아 보인다고 / 그리고 그는 실망하게 되었다
+      cut_en: Looking around his shared dorm room / Noah thought / that it looked exactly like every other dorm room at the university / and he became disappointed
+      wrong: 기숙사 방이 주위를 둘러보니 다른 모든 방과 똑같아 보였다.
+      wrong_why: 분사구문 Looking around ...의 의미상 주어는 주절의 주어 Noah다. 방을 둘러본 주체는 방(it)이 아니라 Noah다.
+      author_msg: 둘러본 사람은 Noah. 분사구문의 주어는 주절 주어.
+      key_points:
+      - '분사구문 : 문두 -ing 분사구문의 의미상 주어는 주절의 주어와 일치한다'
+      cloze:
+        en: Looking around his shared dorm room / Noah thought / that it looked exactly like every other dorm room at the university / and he became disappointed
+        ko:
+        - t: 함께 쓰는 기숙사 방을 둘러보며
+          trap: true
+        - t: Noah는 생각했다
+          v: 생각
+        - t: 그것이 대학의 다른 모든 기숙사 방과 똑같아 보인다고
+          v: 똑같아
+        - t: 그리고 그는 실망하게 되었다
+          v: 실망
+  - kind: mc
+    sentence: Delighted, Noah added, "Well, yesterday our room was just like any other place at this school."
+    source: 2022 고3 6월 45번
+    vocab:
+    - word: delighted
+      meaning: 기뻐하는
+    - word: add
+      meaning: 덧붙여 말하다
+    - word: any other
+      meaning: 다른 어떤 ~도
+    solution:
+      cut: 기뻐하며 / Noah는 덧붙여 말했다 / 음, 어제 우리 방은 이 학교의 다른 어떤 곳과도 똑같았어요
+      cut_en: Delighted / Noah added / "Well, yesterday our room was just like any other place at this school"
+      wrong: Noah는 (다른 사람을) 기쁘게 하면서 이렇게 덧붙였다.
+      wrong_why: Delighted는 (Being) delighted가 생략된 분사구문으로 과거분사이며 수동·상태를 나타낸다. 의미상 주어 Noah가 '기뻐하는' 상태이지, Noah가 남을 '기쁘게 하는' 능동이 아니다.
+      author_msg: Delighted = '기뻐하며'(수동·상태). '기쁘게 하며'(능동)가 아니다.
+      key_points:
+      - '과거분사 분사구문 : (Being) p.p. 형태는 주어가 그 동작을 당하는/그런 상태인 수동의 의미'
+      cloze:
+        en: Delighted / Noah added / "Well, yesterday our room was just like any other place at this school"
+        ko:
+        - t: 기뻐하며
+          trap: true
+        - t: Noah는 덧붙여 말했다
+          v: 덧붙여
+        - t: 어제 우리 방은 이 학교의 다른 어떤 곳과도 똑같았어요
+          v: 똑같았
+  - kind: mc
+    sentence: My original worry about such algorithms was that they might drive everyone into certain parts of the library, leaving others lacking listeners.
+    source: 2022 고3 9월 21번
+    vocab:
+    - word: drive ... into
+      meaning: ~을 …로 몰아가다
+    - word: certain parts
+      meaning: 특정 부분들
+    - word: lacking
+      meaning: ~이 부족한, 없는
+    solution:
+      cut: 그런 알고리즘에 대한 나의 원래 걱정은 / 그것들이 모두를 도서관의 특정 부분으로 몰아갈 수 있다는 것이었다 / 다른 부분들은 청취자가 없는 채로 남겨두면서
+      cut_en: My original worry about such algorithms was / that they might drive everyone into certain parts of the library / leaving others lacking listeners
+      wrong: 청취자가 부족한 다른 사람들을 떠나면서, 알고리즘이 모두를 특정 부분으로 몰아간다.
+      wrong_why: leaving ...은 앞 절 전체를 받는 결과의 분사구문으로 '그 결과 ~하게 만든다'는 뜻이며 의미상 주어는 they(알고리즘)다. leave A B(A를 B한 상태로 두다) 구조라 others가 lacking listeners(청취자가 없는) 상태로 남겨진다는 의미이지, '~을 떠난다'가 아니다.
+      author_msg: leaving = '그 결과 ~하게 만들며'(결과 분사구문). leave+목적어+분사 = '~을 …한 상태로 두다'.
+      key_points:
+      - '결과의 분사구문 : 문미 콤마+-ing는 앞 절의 결과 ''그리하여 ~하다''를 나타내고 의미상 주어는 주절 주어'
+      cloze:
+        en: My original worry about such algorithms was / that they might drive everyone into certain parts of the library / leaving others lacking listeners
+        ko:
+        - t: 그런 알고리즘에 대한 나의 원래 걱정은
+          v: 걱정
+        - t: 그것들이 모두를 도서관의 특정 부분으로 몰아갈 수 있다는 것이었다
+          v: 몰아갈
+        - t: 다른 부분들은 청취자가 없는 채로 남겨두면서
+          trap: true
+  - kind: mc
+    sentence: A part of an animal's territory is for eating, a part for sleeping, a part for swimming or wallowing, a part may be set aside for waste, depending on the species of animal.
+    source: 2022 고3 9월 31번
+    vocab:
+    - word: territory
+      meaning: 영역, 영토
+    - word: wallow
+      meaning: 뒹굴다
+    - word: set aside for
+      meaning: ~을 위해 따로 떼어두다
+    solution:
+      cut: 동물 영역의 한 부분은 먹기 위한 것이고 / 한 부분은 잠자기 위한 것 / 한 부분은 헤엄치거나 뒹굴기 위한 것 / 한 부분은 배설물을 위해 따로 떼어질 수도 있다 / 동물의 종에 따라
+      cut_en: A part of an animal's territory is for eating / a part for sleeping / a part for swimming or wallowing / a part may be set aside for waste / depending on the species of animal
+      wrong: 배설물을 위해 떼어진 한 부분이 동물의 종에 의존한다.
+      wrong_why: depending on ~은 '~에 따라'라는 뜻의 관용적(비인칭 독립) 분사구문으로 문장 전체를 수식한다. 특정 명사가 '~에 의존한다'는 서술이 아니다.
+      author_msg: depending on = '~에 따라'(문장 전체 수식). '~에 의존하는'으로 특정 명사에 걸지 말 것.
+      key_points:
+      - '관용적 분사구문 depending on : ''~에 따라''로 문장 전체를 수식하며 별도의 의미상 주어를 두지 않는다'
+      cloze:
+        en: A part of an animal's territory is for eating / a part for sleeping / a part for swimming or wallowing / a part may be set aside for waste / depending on the species of animal
+        ko:
+        - t: 동물 영역의 한 부분은 먹기 위한 것이고
+          v: 영역
+        - t: 한 부분은 잠자기 위한 것
+          v: 잠자기
+        - t: 한 부분은 헤엄치거나 뒹굴기 위한 것
+          v: 뒹굴기
+        - t: 한 부분은 배설물을 위해 따로 떼어질 수도 있다
+          v: 배설물
+        - t: 동물의 종에 따라
+          trap: true
+  - kind: mc
+    sentence: Walking out of Charing Cross Station in London, Emilia and her traveling companion, Layla, already felt their hearts pounding.
+    source: 2022 고3 9월 45번
+    vocab:
+    - word: traveling companion
+      meaning: 여행 동반자
+    - word: already
+      meaning: 벌써, 이미
+    - word: pound
+      meaning: (심장이) 쿵쾅거리다
+    solution:
+      cut: 런던의 채링 크로스 역을 걸어 나오며 / Emilia와 그녀의 여행 동반자 Layla는 / 벌써 그들의 심장이 쿵쾅거리는 것을 느꼈다
+      cut_en: Walking out of Charing Cross Station in London / Emilia and her traveling companion, Layla / already felt their hearts pounding
+      wrong: 누군가가 채링 크로스 역을 걸어 나올 때, Emilia와 Layla는 심장이 뛰는 것을 느꼈다.
+      wrong_why: 분사구문 Walking out of ...의 의미상 주어는 주절의 주어 Emilia and Layla다. 역을 걸어 나온 주체는 다른 사람이 아니라 바로 그 두 사람이다.
+      author_msg: 역을 걸어 나온 건 Emilia와 Layla. 분사구문 주어 = 주절 주어.
+      key_points:
+      - '분사구문 : 문두 분사구문의 의미상 주어는 주절 주어와 일치(주절 주어가 복수면 분사의 주어도 그 복수)'
+      cloze:
+        en: Walking out of Charing Cross Station in London / Emilia and her traveling companion, Layla / already felt their hearts pounding
+        ko:
+        - t: 런던의 채링 크로스 역을 걸어 나오며
+          trap: true
+        - t: Emilia와 그녀의 여행 동반자 Layla는
+          v: 여행 동반자
+        - t: 벌써 그들의 심장이 쿵쾅거리는 것을 느꼈다
+          v: 쿵쾅거리는
   insertion:
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through geographical or virtual space, our body becomes more and more a passive non-moving container, which is transported by artefacts or loaded up with inner feelings of being mobile in the so-called information society.
@@ -999,6 +1223,149 @@ practice:
           v: 과정
         - t: 비록 처음에는 가려져 있었지만
           v: 가려져
+  - kind: mc
+    sentence: Urban delivery vehicles can be adapted to better suit the density of urban distribution, which often involves smaller vehicles such as vans, including bicycles.
+    source: 2023 고3 11월 22번
+    vocab:
+    - word: adapt
+      meaning: 조정하다, 맞추다
+    - word: density
+      meaning: 밀도
+    - word: distribution
+      meaning: 유통, 배송
+    solution:
+      cut: 도시의 배송 차량은 조정될 수 있다 / 도시 유통의 밀도에 더 잘 맞도록 / 그런데 그것은 흔히 밴 같은 더 작은 차량을 포함한다 / 자전거를 포함해서
+      cut_en: Urban delivery vehicles can be adapted / to better suit the density of urban distribution / which often involves smaller vehicles such as vans / including bicycles
+      wrong: 밴 같은 더 작은 차량을 흔히 포함하는 밀도에 맞도록 도시 배송 차량이 조정될 수 있다.
+      wrong_why: the density of urban distribution 뒤의 콤마 which는 계속적 용법으로, 앞의 urban distribution(도시 유통)을 받아 '그런데 그것은 ~하다'라고 부가 설명한다. 밀도를 좁혀 꾸미는 제한적 관계절이 아니다.
+      author_msg: 콤마 which = '그런데 그것은~'(부가 설명). 앞 명사를 한정하지 않는다.
+      key_points:
+      - '콤마+which(계속적 용법) : 앞의 명사(구)나 절을 받아 ''그런데 그것은~''으로 정보를 덧붙인다'
+      cloze:
+        en: Urban delivery vehicles can be adapted / to better suit the density of urban distribution / which often involves smaller vehicles such as vans / including bicycles
+        ko:
+        - t: 도시의 배송 차량은 조정될 수 있다
+          v: 배송 차량
+        - t: 도시 유통의 밀도에 더 잘 맞도록
+          v: 밀도
+        - t: 그런데 그것은 흔히 밴 같은 더 작은 차량을 포함한다
+          trap: true
+        - t: 자전거를 포함해서
+          v: 자전거
+  - kind: mc
+    sentence: The main institutions of state—parliament, courts, police and so on—along with certain of the professions, exhibit this formal character.
+    source: 2023 고3 6월 38번
+    vocab:
+    - word: institution
+      meaning: 기관, 제도
+    - word: parliament
+      meaning: 의회
+    - word: profession
+      meaning: 전문직
+    solution:
+      cut: 국가의 주요 기관들은 / —의회, 법원, 경찰 등— / 특정 전문직들과 더불어 / 이 공식적인 성격을 보인다
+      cut_en: The main institutions of state / —parliament, courts, police and so on— / along with certain of the professions / exhibit this formal character
+      wrong: 의회, 법원, 경찰 등이 특정 전문직들과 함께 이 공식적인 성격을 보인다.
+      wrong_why: 대시(—…—) 사이는 The main institutions of state를 부연 설명하는 삽입 어구다. 문장의 진짜 주어는 The main institutions of state이고 exhibit의 주어도 그것이다. 삽입된 parliament, courts, police가 주어가 아니다.
+      author_msg: 대시 사이는 삽입(동격 예시). 주어는 앞의 The main institutions of state.
+      key_points:
+      - '대시(—…—) 삽입 : 주어와 동사 사이를 끊는 부연/동격 어구이므로 걷어내고 주어-동사를 연결한다'
+      cloze:
+        en: The main institutions of state / —parliament, courts, police and so on— / along with certain of the professions / exhibit this formal character
+        ko:
+        - t: 국가의 주요 기관들은
+          v: 기관
+        - t: —의회, 법원, 경찰 등—
+          trap: true
+        - t: 특정 전문직들과 더불어
+          v: 전문직
+        - t: 이 공식적인 성격을 보인다
+          v: 공식적인
+  - kind: mc
+    sentence: Only when the two parties discuss the possibilities further do they discover that moving expenses and starting date can also be negotiated, which may facilitate resolution of the salary issue.
+    source: 2023 고3 6월 42번
+    vocab:
+    - word: negotiate
+      meaning: 협상하다
+    - word: facilitate
+      meaning: 촉진하다, 쉽게 하다
+    - word: resolution
+      meaning: 해결
+    solution:
+      cut: 두 당사자가 그 가능성들을 더 논의할 때에야 비로소 / 그들은 발견한다 / 이사 비용과 시작 날짜도 협상될 수 있다는 것을 / 그런데 이는 급여 문제의 해결을 쉽게 할 수 있다
+      cut_en: Only when the two parties discuss the possibilities further / do they discover / that moving expenses and starting date can also be negotiated / which may facilitate resolution of the salary issue
+      wrong: 이사 비용과 시작 날짜도 협상될 수 있는데, 그 시작 날짜가 급여 문제의 해결을 쉽게 한다.
+      wrong_why: 콤마 which는 앞 절 전체(이사 비용과 시작 날짜도 협상 가능하다는 사실)를 선행사로 받는 계속적 용법이다. 바로 앞의 명사 하나(starting date)만 가리키는 것이 아니라, '그런데 이 사실이 ~'라고 앞 내용 전체를 부가 설명한다.
+      author_msg: 콤마 which의 선행사는 앞 절 전체. '그런데 이(사실)는~'으로 받는다.
+      key_points:
+      - '콤마+which(앞 절 전체 지칭) : 계속적 관계사 which는 명사 하나가 아니라 앞 절 내용 전체를 받을 수 있다'
+      cloze:
+        en: Only when the two parties discuss the possibilities further / do they discover / that moving expenses and starting date can also be negotiated / which may facilitate resolution of the salary issue
+        ko:
+        - t: 두 당사자가 그 가능성들을 더 논의할 때에야 비로소
+          v: 논의
+        - t: 그들은 발견한다
+          v: 발견
+        - t: 이사 비용과 시작 날짜도 협상될 수 있다는 것을
+          v: 협상
+        - t: 그런데 이는 급여 문제의 해결을 쉽게 할 수 있다
+          trap: true
+  - kind: mc
+    sentence: Whatever the nature of the outcome, which may actually favour one party more than another, the purpose of negotiation is the identification of areas of common interest and conflict.
+    source: 2024 고3 11월 36번
+    vocab:
+    - word: outcome
+      meaning: 결과
+    - word: favour
+      meaning: 유리하게 하다
+    - word: identification
+      meaning: 확인, 파악
+    solution:
+      cut: 결과의 본질이 무엇이든 간에 / 그런데 그것이 실제로 한쪽을 다른 쪽보다 더 유리하게 할 수도 있지만 / 협상의 목적은 / 공통의 이해관계와 갈등 영역을 확인하는 것이다
+      cut_en: Whatever the nature of the outcome / which may actually favour one party more than another / the purpose of negotiation is / the identification of areas of common interest and conflict
+      wrong: 결과의 본질이 무엇이든, 그것이 한쪽을 다른 쪽보다 유리하게 하는 것이 바로 협상의 목적이다.
+      wrong_why: 콤마 사이의 which may actually favour ...는 the outcome를 부연하는 삽입(계속적 관계절)이다. 문장의 실제 주어·동사는 the purpose of negotiation is ~이며, 삽입절을 주절로 착각하면 안 된다.
+      author_msg: 콤마 …콤마 which절은 삽입. 진짜 주절은 the purpose of negotiation is~.
+      key_points:
+      - '콤마로 둘러싼 which 삽입절 : 걷어내도 문장이 성립하는 부연 설명이며, 그 뒤의 주절(주어+동사)이 문장의 뼈대'
+      cloze:
+        en: Whatever the nature of the outcome / which may actually favour one party more than another / the purpose of negotiation is / the identification of areas of common interest and conflict
+        ko:
+        - t: 결과의 본질이 무엇이든 간에
+          v: 본질
+        - t: 그런데 그것이 실제로 한쪽을 다른 쪽보다 더 유리하게 할 수도 있지만
+          trap: true
+        - t: 협상의 목적은
+          v: 협상
+        - t: 공통의 이해관계와 갈등 영역을 확인하는 것이다
+          v: 이해관계
+  - kind: mc
+    sentence: Watching Clara riding beside her, Emma thought about Clara's past tragedy, which she now seemed to have overcome.
+    source: 2024 고3 11월 45번
+    vocab:
+    - word: ride
+      meaning: (말 등을) 타다
+    - word: tragedy
+      meaning: 비극
+    - word: overcome
+      meaning: 극복하다
+    solution:
+      cut: Clara가 자기 옆에서 타는 것을 지켜보며 / Emma는 Clara의 과거 비극에 대해 생각했다 / 그런데 그 비극을 그녀는 이제 극복한 것처럼 보였다
+      cut_en: Watching Clara riding beside her / Emma thought about Clara's past tragedy / which she now seemed to have overcome
+      wrong: Emma는 자기가 이제 막 극복한 듯 보이는 Clara의 과거 비극을 생각했다.
+      wrong_why: 콤마 which는 계속적 용법으로 Clara's past tragedy를 받아 '그런데 그 비극을~'이라고 부가 설명한다. 한정적으로 '~한 비극'으로 좁혀 읽으면 안 되며, 문맥상 극복한 주체 she는 Emma가 아니라 Clara다.
+      author_msg: 콤마 which = '그런데 그것을~'(부가). 극복한 주체는 Clara.
+      key_points:
+      - '콤마+which(계속적 용법) : 선행사를 ''그런데 그것을~''로 부가 설명하며 한정 수식이 아니다'
+      cloze:
+        en: Watching Clara riding beside her / Emma thought about Clara's past tragedy / which she now seemed to have overcome
+        ko:
+        - t: Clara가 자기 옆에서 타는 것을 지켜보며
+          v: 지켜보며
+        - t: Emma는 Clara의 과거 비극에 대해 생각했다
+          v: 비극
+        - t: 그런데 그 비극을 그녀는 이제 극복한 것처럼 보였다
+          trap: true
   apposition:
   - kind: mc
     sentence: 'When you say "It''s mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.'
@@ -1208,6 +1575,108 @@ practice:
         - t: 그 견해를 대체로 받아들여 왔다
           v: 받아들여
         - t: 즉 도시의 자동차 수요가 수용되기보다는 관리되어야 한다는
+          trap: true
+  - kind: mc
+    sentence: When the Industrial Revolution arrived with its great innovation, the motor, we didn't leave our world to go to some remote motorspace.
+    source: 2023 고3 11월 30번
+    vocab:
+    - word: innovation
+      meaning: 혁신
+    - word: arrive
+      meaning: 도래하다, 도착하다
+    - word: remote
+      meaning: 멀리 떨어진, 외딴
+    solution:
+      cut: 산업혁명이 도래했을 때 / 그것의 위대한 혁신, 즉 모터와 함께 / 우리는 우리 세계를 떠나지 않았다 / 어떤 먼 모터 공간으로 가려고
+      cut_en: When the Industrial Revolution arrived / with its great innovation, the motor, / we didn't leave our world / to go to some remote motorspace
+      wrong: 산업혁명이 위대한 혁신과 함께 도래했고, 그 모터가 우리 세계를 떠나지 않았다.
+      wrong_why: the motor는 its great innovation과 동격(즉, 다시 말해)인 명사구이지 새로운 주어가 아니다. 콤마로 삽입된 동격을 주절의 주어로 끌어오면, 진짜 주어 we와 동사 didn't leave의 연결을 놓친다.
+      author_msg: 콤마 뒤 the motor가 앞 명사를 바꿔 말한 동격임을 잡으면 끝.
+      key_points:
+      - '동격(A, B) : 콤마로 이어진 두 명사구가 같은 대상을 가리킨다(its great innovation = the motor). 뒤 명사 B를 새 주어로 읽지 말 것.'
+      cloze:
+        en: When the Industrial Revolution arrived / with its great innovation, the motor, / we didn't leave our world / to go to some remote motorspace
+        ko:
+        - t: 산업혁명이 도래했을 때
+        - t: 그것의 위대한 혁신, 즉 모터와 함께
+          trap: true
+        - t: 우리는 우리 세계를 떠나지 않았다
+        - t: 어떤 먼 모터 공간으로 가려고
+  - kind: mc
+    sentence: Whether the reason for their decline is their location and lack of nutrients, a passing sickness, or genetic makeup, they now fall prey to insects and fungi.
+    source: 2023 고3 6월 39번
+    vocab:
+    - word: decline
+      meaning: 쇠퇴, 감소
+    - word: nutrient
+      meaning: 영양분
+    - word: fall prey to
+      meaning: ~의 먹이가 되다
+    solution:
+      cut: 그들의 쇠퇴 원인이 ~이든 간에 / 그들의 위치와 영양분 부족, 일시적 질병, 혹은 유전적 구성이든 / 그들은 이제 곤충과 균류의 먹이가 된다
+      cut_en: Whether the reason for their decline is / their location and lack of nutrients, a passing sickness, or genetic makeup, / they now fall prey to insects and fungi
+      wrong: 그들의 위치와 영양분 부족, 일시적 질병, 유전적 구성이 이제 곤충과 균류의 먹이가 된다.
+      wrong_why: their location..., a passing sickness, or genetic makeup는 whether절 안 is의 보어로 나란히 나열된 '원인 후보'일 뿐, 주절의 주어가 아니다. whether 양보절이 끝난 뒤 주절 주어 they가 새로 나온다.
+      author_msg: whether 양보절이 어디서 끝나고 주절 they가 어디서 시작되는지만 잡으면 끝.
+      key_points:
+      - '동격/나열 보어 : Whether S is A, B, or C에서 A·B·C는 be동사의 보어로 나란히 나열된 원인 후보다. 콤마 나열을 주절 주어로 끌어오지 말 것(주절 주어는 they).'
+      cloze:
+        en: Whether the reason for their decline is / their location and lack of nutrients, a passing sickness, or genetic makeup, / they now fall prey to insects and fungi
+        ko:
+        - t: 그들의 쇠퇴 원인이 ~이든 간에
+        - t: 그들의 위치와 영양분 부족, 일시적 질병, 혹은 유전적 구성이든
+          trap: true
+        - t: 그들은 이제 곤충과 균류의 먹이가 된다
+  - kind: mc
+    sentence: For the physicist, understanding the ordinary, the habitual, and the frequent thus allows us to account for the frightening and the singular.
+    source: 2024 고3 9월 23번
+    vocab:
+    - word: habitual
+      meaning: 습관적인, 늘 하는
+    - word: frequent
+      meaning: 빈번한, 잦은
+    - word: account for
+      meaning: 설명하다
+    solution:
+      cut: 물리학자에게 / 평범한 것, 습관적인 것, 그리고 빈번한 것을 이해하는 것은 / 따라서 우리가 ~할 수 있게 해 준다 / 무섭고 독특한 것을 설명하도록
+      cut_en: For the physicist, / understanding the ordinary, the habitual, and the frequent / thus allows us / to account for the frightening and the singular
+      wrong: 물리학자에게, 이해하는 것은 평범하고 습관적이며 빈번하다.
+      wrong_why: the ordinary, the habitual, the frequent는 「the+형용사=추상명사(~한 것)」로 동명사 understanding의 목적어로 나열된 명사구다. 형용사(보어)나 부사로 읽으면 주어 동명사구의 목적어를 통째로 놓친다.
+      author_msg: the+형용사를 명사(~한 것)로 읽고 understanding의 목적어임을 잡으면 끝.
+      key_points:
+      - 'the+형용사 = 추상명사(~한 것) : the ordinary, the habitual, the frequent는 동명사 understanding의 목적어로 나열된 명사구. account for의 목적어 the frightening and the singular도 동일.'
+      cloze:
+        en: For the physicist, / understanding the ordinary, the habitual, and the frequent / thus allows us / to account for the frightening and the singular
+        ko:
+        - t: 물리학자에게
+        - t: 평범한 것, 습관적인 것, 그리고 빈번한 것을 이해하는 것은
+          trap: true
+        - t: 따라서 우리가 ~할 수 있게 해 준다
+        - t: 무섭고 독특한 것을 설명하도록
+  - kind: mc
+    sentence: Even over periods as short as a few decades, satellite images show that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere.
+    source: 2025 고3 6월 35번
+    vocab:
+    - word: reduction
+      meaning: 감소
+    - word: glacier
+      meaning: 빙하
+    - word: decade
+      meaning: 십 년
+    solution:
+      cut: 수십 년 정도의 짧은 기간에 걸쳐서도 / 위성 사진들은 보여 준다 / 산악 빙하의 극적인 감소가 안데스, 히말라야, 그리고 다른 곳에서 발생했음을
+      cut_en: Even over periods as short as a few decades, / satellite images show / that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere
+      wrong: 안데스, 히말라야 등지에서 산악 빙하의 극적인 감소가 발생시킨 위성 사진들 (이 있다).
+      wrong_why: show 뒤 that은 목적어를 이끄는 명사절 접속사(~라는 것을)이지 satellite images를 꾸미는 관계사가 아니다. that절 전체가 show의 목적어이며, 절 안의 주어는 dramatic reduction of mountain glaciers다.
+      author_msg: show 다음 that을 관계사가 아니라 목적어 명사절(~라는 것을)로 잡으면 끝.
+      key_points:
+      - '동사+that절 : show that S V는 「~라는 것을 보여 주다」의 명사절 목적어. that을 앞 명사(satellite images)를 수식하는 관계사로 읽지 말 것.'
+      cloze:
+        en: Even over periods as short as a few decades, / satellite images show / that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere
+        ko:
+        - t: 수십 년 정도의 짧은 기간에 걸쳐서도
+        - t: 위성 사진들은 보여 준다
+        - t: 산악 빙하의 극적인 감소가 안데스, 히말라야, 그리고 다른 곳에서 발생했음을
           trap: true
   prep_stack:
   - kind: mc
@@ -1527,6 +1996,106 @@ practice:
           v: 폭발적으로
         - t: 그리고 그것들은 보인다 거의 혹은 전혀 기미를 둔화될
           v: 기미
+  - kind: mc
+    sentence: Accordingly, manufacturers have set up market-research departments to explore the needs of users in the target market, product-development groups to think up suitable products to address those needs, and so forth.
+    source: 2022 고3 6월 33번
+    vocab:
+    - word: manufacturer
+      meaning: 제조업체
+    - word: explore
+      meaning: 탐색하다, 탐구하다
+    - word: address
+      meaning: (문제를) 해결하다, 다루다
+    solution:
+      cut: 따라서 제조업체들은 설립했다 / 목표 시장의 사용자들의 요구를 탐색하기 위한 시장 조사 부서를 / 그 요구를 해결할 적절한 제품을 고안하기 위한 제품 개발 그룹을 / 등등을
+      cut_en: Accordingly, manufacturers have set up / market-research departments to explore the needs of users in the target market, / product-development groups to think up suitable products to address those needs, / and so forth
+      wrong: 제품 개발 그룹은 그 요구를 해결할 적절한 제품을 고안한다.
+      wrong_why: product-development groups는 set up의 두 번째 목적어로 market-research departments와 병렬을 이룬다. 새로운 주어·절이 아니라 「A 부서와 B 그룹을 설립했다」의 목적어 나열이므로, 독립된 절로 읽으면 안 된다.
+      author_msg: set up의 목적어가 A와 B로 병렬됨을 잡으면 끝(B는 새 문장이 아니다).
+      key_points:
+      - '목적어 병렬 나열 : set up A (to do...), B (to do...), and so forth. 뒤에 이어지는 명사구도 동사 set up의 목적어이므로 새 절로 읽지 말 것.'
+      cloze:
+        en: Accordingly, manufacturers have set up / market-research departments to explore the needs of users in the target market, / product-development groups to think up suitable products to address those needs, / and so forth
+        ko:
+        - t: 따라서 제조업체들은 설립했다
+        - t: 목표 시장의 사용자들의 요구를 탐색하기 위한 시장 조사 부서를
+        - t: 그 요구를 해결할 적절한 제품을 고안하기 위한 제품 개발 그룹을
+          trap: true
+        - t: 등등을
+  - kind: mc
+    sentence: The animal in a conflict between attacking a rival and fleeing may initially not have sufficient information to enable it to make a decision straight away.
+    source: 2022 고3 6월 35번
+    vocab:
+    - word: conflict
+      meaning: 갈등
+    - word: flee
+      meaning: 도망치다
+    - word: sufficient
+      meaning: 충분한
+    solution:
+      cut: 라이벌을 공격하는 것과 도망치는 것 사이의 갈등에 처한 그 동물은 / 처음에는 충분한 정보를 갖고 있지 않을 수 있다 / 그것이 즉시 결정을 내릴 수 있게 해 줄 (정보를)
+      cut_en: The animal in a conflict between attacking a rival and fleeing / may initially not have sufficient information / to enable it to make a decision straight away
+      wrong: 라이벌을 공격하는 것과 도망치는 것 사이의 갈등은 처음에 충분한 정보를 갖지 못할 수 있다.
+      wrong_why: 핵 명사(주어)는 The animal이고, in a conflict between attacking a rival and fleeing는 이를 꾸미는 전치사구다. 전치사구 끝의 명사(conflict/fleeing)를 주어로 잡으면 동사 may not have의 진짜 주어를 놓친다.
+      author_msg: 긴 전치사구를 걷어내고 진짜 주어 The animal에 동사 may not have를 붙이면 끝.
+      key_points:
+      - '긴 주어의 핵 명사 잡기 : 주어는 The animal, 뒤 in a conflict between attacking...and fleeing은 전부 수식어. 전치사구 끝 명사를 주어로 오독하지 말 것.'
+      cloze:
+        en: The animal in a conflict between attacking a rival and fleeing / may initially not have sufficient information / to enable it to make a decision straight away
+        ko:
+        - t: 라이벌을 공격하는 것과 도망치는 것 사이의 갈등에 처한 그 동물은
+          trap: true
+        - t: 처음에는 충분한 정보를 갖고 있지 않을 수 있다
+        - t: 그것이 즉시 결정을 내릴 수 있게 해 줄
+  - kind: mc
+    sentence: The fossil record supports this prediction—multicelled organisms are found in layers of earth millions of years after the first appearance of single-celled organisms.
+    source: 2022 고3 6월 36번
+    vocab:
+    - word: fossil
+      meaning: 화석
+    - word: prediction
+      meaning: 예측
+    - word: appearance
+      meaning: 출현, 등장
+    solution:
+      cut: 화석 기록은 이 예측을 뒷받침한다 / 즉, 다세포 유기체는 지구의 지층에서 발견된다 / 단세포 유기체가 처음 출현한 지 수백만 년 후에
+      cut_en: The fossil record supports this prediction / multicelled organisms are found in layers of earth / millions of years after the first appearance of single-celled organisms
+      wrong: 다세포 유기체는 지구의 지층에서 발견되는데, 그 지층은 단세포 유기체가 처음 나타난 뒤 수백만 년 동안 쌓인 것이다.
+      wrong_why: millions of years after the first appearance of single-celled organisms는 다세포 유기체가 '발견되는 시점'을 나타내는 시간 부사구(단세포 출현 이후 수백만 년 뒤)로 are found를 수식한다. 바로 앞 명사 layers of earth를 꾸미는 것으로 붙이면 안 된다.
+      author_msg: millions of years after ~를 layers 수식이 아니라 are found의 시간 부사구로 잡으면 끝.
+      key_points:
+      - '부사구 수식 관계 : millions of years after the first appearance of single-celled organisms는 are found를 수식하는 시간 부사구. 앞 명사 layers of earth에 붙이지 말 것(핵 명사·수식 관계 오독).'
+      cloze:
+        en: The fossil record supports this prediction / multicelled organisms are found in layers of earth / millions of years after the first appearance of single-celled organisms
+        ko:
+        - t: 화석 기록은 이 예측을 뒷받침한다
+        - t: 즉, 다세포 유기체는 지구의 지층에서 발견된다
+        - t: 단세포 유기체가 처음 출현한 지 수백만 년 후에
+          trap: true
+  - kind: mc
+    sentence: Also, it has become difficult for companies to develop new pesticides, even those that can have major beneficial effects and few negative effects.
+    source: 2022 고3 6월 38번
+    vocab:
+    - word: pesticide
+      meaning: 살충제
+    - word: beneficial
+      meaning: 유익한, 이로운
+    - word: negative
+      meaning: 부정적인
+    solution:
+      cut: 또한, 기업들이 새로운 살충제를 개발하는 것이 어려워졌다 / 심지어 큰 유익한 효과와 거의 없는 부정적 효과를 가질 수 있는 것들조차도
+      cut_en: Also, it has become difficult for companies to develop new pesticides, / even those that can have major beneficial effects and few negative effects
+      wrong: 또한, 심지어 큰 유익한 효과와 적은 부정적 효과를 가질 수 있는 기업들조차 (살충제를 개발하는 것이) 어려워졌다.
+      wrong_why: those는 앞의 new pesticides를 가리키는 대명사이고 that절은 이를 꾸미는 관계절이다. even those that...는 new pesticides를 부연하는 긴 명사구이지 companies를 가리키지 않는다. those를 companies로 잡으면 지시 대상이 틀린다.
+      author_msg: those가 companies가 아니라 new pesticides를 가리킴을 잡으면 끝.
+      key_points:
+      - '대명사 those + 관계절 : those = new pesticides(앞 복수명사 대용). even those that...는 살충제를 부연하는 긴 명사구이지 companies를 가리키지 않는다.'
+      cloze:
+        en: Also, it has become difficult for companies to develop new pesticides, / even those that can have major beneficial effects and few negative effects
+        ko:
+        - t: 또한, 기업들이 새로운 살충제를 개발하는 것이 어려워졌다
+        - t: 심지어 큰 유익한 효과와 거의 없는 부정적 효과를 가질 수 있는 것들조차도
+          trap: true
   inversion:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be pushed beyond a certain point, called a bifurcation.'
@@ -1617,6 +2186,56 @@ practice:
           trap: true
         - t: 현대 AI의 무오류성을 시사하거나 미래에 그것을 예측하는
           v: 무오류성
+  - kind: mc
+    sentence: Not only musicians and psychologists, but also committed music enthusiasts and experts often voice the opinion that the beauty of music lies in an expressive deviation from the exactly defined score.
+    source: 2022 고3 9월 24번
+    vocab:
+    - word: enthusiast
+      meaning: 애호가, 열성 팬
+    - word: deviation
+      meaning: 일탈, 벗어남
+    - word: score
+      meaning: 악보
+    solution:
+      cut: 음악가와 심리학자뿐만 아니라 헌신적인 음악 애호가와 전문가들도 / 흔히 ~라는 의견을 표한다 / 음악의 아름다움은 정확히 규정된 악보로부터의 표현적 일탈에 있다는
+      cut_en: Not only musicians and psychologists, but also committed music enthusiasts and experts / often voice the opinion / that the beauty of music lies in an expressive deviation from the exactly defined score
+      wrong: 음악가와 심리학자들은 ~라는 의견을 표하지 않을 뿐만 아니라, 헌신적인 애호가와 전문가들도 그렇다.
+      wrong_why: Not only A but also B가 두 개의 '주어'(A, B)를 연결하는 상관접속사로 쓰여 도치가 일어나지 않는다. 문두 Not only가 절을 전치·부정해 조동사 도치를 일으키는 경우와 달리, 여기서는 명사 주어만 연결하므로 동사 voice는 평서 어순 그대로다.
+      author_msg: Not only가 명사 주어를 연결(도치 없음)임을 잡으면 끝 — do 도치로 착각 금지.
+      key_points:
+      - 'Not only A but also B(주어 연결) : 문두 Not only라도 뒤가 ''주어''를 연결하면 도치 없음. 「A뿐 아니라 B도 …한다」로 읽고 조동사 도치로 오독하지 말 것.'
+      cloze:
+        en: Not only musicians and psychologists, but also committed music enthusiasts and experts / often voice the opinion / that the beauty of music lies in an expressive deviation from the exactly defined score
+        ko:
+        - t: 음악가와 심리학자뿐만 아니라 헌신적인 음악 애호가와 전문가들도
+          trap: true
+        - t: 흔히 ~라는 의견을 표한다
+        - t: 음악의 아름다움은 정확히 규정된 악보로부터의 표현적 일탈에 있다는
+  - kind: mc
+    sentence: Only the rational discourse has the tools to overcome illusions and to point towards true knowledge.
+    source: 2023 고3 6월 34번
+    vocab:
+    - word: rational
+      meaning: 이성적인, 합리적인
+    - word: discourse
+      meaning: 담론
+    - word: illusion
+      meaning: 환상, 착각
+    solution:
+      cut: 오직 이성적 담론만이 / 그 도구를 가지고 있다 / 환상을 극복하고 진정한 지식을 가리킬
+      cut_en: Only the rational discourse / has the tools / to overcome illusions and to point towards true knowledge
+      wrong: 오직 이성적 담론에 대해서만 환상을 극복할 도구가 (따로) 존재한다.
+      wrong_why: Only가 주어 the rational discourse를 직접 한정하므로 도치가 일어나지 않고 「오직 이성적 담론만이 …을 가지고 있다」의 평서 어순(주어+동사)이다. Only 뒤가 부사(구/절)일 때만 조동사 도치(Only then did…)가 일어난다.
+      author_msg: Only가 주어를 한정(도치 없음)임을 잡고 주어=the rational discourse로 읽으면 끝.
+      key_points:
+      - 'Only + 주어 → 도치 없음 : Only가 ''주어''를 한정하면 평서 어순(주어+동사). Only 뒤가 부사(구/절)일 때만 도치. 주어를 부사어로 오독하지 말 것.'
+      cloze:
+        en: Only the rational discourse / has the tools / to overcome illusions and to point towards true knowledge
+        ko:
+        - t: 오직 이성적 담론만이
+          trap: true
+        - t: 그 도구를 가지고 있다
+        - t: 환상을 극복하고 진정한 지식을 가리킬
   emphasis:
   - kind: short
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -1674,6 +2293,32 @@ practice:
           v: 일식
         - t: 그 운동 자체는 뉴턴의 인력 법칙과 그것이 우리가 물체를 놓을 때 왜 떨어지는지를 설명하는 방식에 기반을 둔다
           trap: true
+  - kind: mc
+    sentence: Beginning in the late nineteenth century, with the hugely successful rise of the artistic male couturier, it was the designer who became celebrated, and the client elevated by his inspired attention.
+    source: 2022 고3 9월 33번
+    vocab:
+    - word: couturier
+      meaning: (고급) 의상 디자이너
+    - word: celebrated
+      meaning: 유명한, 칭송받는
+    - word: elevate
+      meaning: 격상시키다, 높이다
+    solution:
+      cut: 19세기 후반에 시작되어, / 예술가적 남성 의상 디자이너의 대성공적 부상과 함께, / 유명해진 것은 바로 그 디자이너였다, / 그리고 고객은 그의 영감 어린 관심에 의해 격상되었다.
+      cut_en: Beginning in the late nineteenth century, / with the hugely successful rise of the artistic male couturier, / it was the designer who became celebrated, / and the client elevated by his inspired attention.
+      wrong: 그것은 유명해진 디자이너였다
+      wrong_why: It ~ who 강조구문(강조 대상=the designer)으로 '유명해진 것은 바로 디자이너였다'인데, it을 지시대명사로 보고 '그것은 ~한 디자이너였다'로 오독함.
+      author_msg: It was + 명사 + who/that ... 형태는 강조구문. 강조 대상은 the designer이며 '…한 것은 바로 그 디자이너였다'로 푼다.
+      key_points:
+      - 'It ~ who 강조구문 : It was [강조어구] who ... → ''…한 것은 바로 [강조어구]였다'''
+      cloze:
+        en: Beginning in the late nineteenth century, / with the hugely successful rise of the artistic male couturier, / it was the designer who became celebrated, / and the client elevated by his inspired attention.
+        ko:
+        - t: 19세기 후반에 시작되어,
+        - t: 예술가적 남성 의상 디자이너의 대성공적 부상과 함께,
+        - t: 유명해진 것은 바로 그 디자이너였다,
+          trap: true
+        - t: 그리고 고객은 그의 영감 어린 관심에 의해 격상되었다.
   parallel:
   - kind: mc
     sentence: Unfortunately, at the scales, accuracy, and precision most useful to protected area management, the future not only promises to be unprecedented, but it also promises to be unpredictable.
@@ -2043,6 +2688,55 @@ practice:
         - t: 그렇다면 아무런 차이가 없어야 할 것이다
           v: 차이
         - t: 우리가 이미 알고 있는 것보다 조금 넘어선 정보를 제시받든 완전히 새로운 정보를 제시받든
+          trap: true
+  - kind: mc
+    sentence: In both the ancient hunter-gatherer band and our intimate speech communities today, the diffusion of speech shaped values.
+    source: 2024 고3 6월 22번
+    vocab:
+    - word: hunter-gatherer
+      meaning: 수렵채집인
+    - word: diffusion
+      meaning: 확산, 전파
+    - word: intimate
+      meaning: 친밀한
+    solution:
+      cut: 고대 수렵채집 무리와 오늘날 우리의 친밀한 언어 공동체 둘 다에서, / 말의 확산이 가치관을 형성했다.
+      cut_en: In both the ancient hunter-gatherer band and our intimate speech communities today, / the diffusion of speech shaped values.
+      wrong: 고대 수렵채집 무리 둘 다와 오늘날의 언어 공동체에서
+      wrong_why: both A and B는 A와 B 두 대상을 대등하게 묶는 상관접속사인데, both를 A(band) 하나에만 걸어 '무리 둘 다'로 짝을 잘못 묶음. 실제로는 '고대 무리와 오늘날 공동체 둘 다에서'.
+      author_msg: both A and B는 A와 B 두 개를 대등하게 묶는다. 여기서 A=고대 수렵채집 무리, B=오늘날 우리의 친밀한 언어 공동체.
+      key_points:
+      - 'both A and B : A와 B를 대등하게 묶는 상관접속사 (둘 다 ~에서)'
+      cloze:
+        en: In both the ancient hunter-gatherer band and our intimate speech communities today, / the diffusion of speech shaped values.
+        ko:
+        - t: 고대 수렵채집 무리와 오늘날 우리의 친밀한 언어 공동체 둘 다에서,
+          trap: true
+        - t: 말의 확산이 가치관을 형성했다.
+  - kind: mc
+    sentence: For many people, their work is both a source of income and of meaning.
+    source: 2025 고3 6월 40번
+    vocab:
+    - word: source
+      meaning: 원천, 근원
+    - word: income
+      meaning: 수입, 소득
+    - word: meaning
+      meaning: 의미
+    solution:
+      cut: 많은 사람들에게, / 그들의 일은 / 수입의 원천이자 의미의 원천 둘 다이다.
+      cut_en: For many people, / their work is / both a source of income and of meaning.
+      wrong: 그들의 일은 둘 다 수입의 원천이다
+      wrong_why: both A and B는 A와 B를 대등하게 묶어 '수입의 원천이자 의미의 원천 둘 다'인데, both의 범위를 놓쳐 B(of meaning)를 빠뜨리고 A(income)에만 걸어 오독함.
+      author_msg: 'both A and B : A = (a source) of income, B = (a source) of meaning. 일이 ''수입의 원천''이면서 동시에 ''의미의 원천''임.'
+      key_points:
+      - 'both A and B : A와 B를 대등하게 묶음 (여기서 of income과 of meaning)'
+      cloze:
+        en: For many people, / their work is / both a source of income and of meaning.
+        ko:
+        - t: 많은 사람들에게,
+        - t: 그들의 일은 ~이다
+        - t: 수입의 원천이자 의미의 원천 둘 다
           trap: true
   what_clause:
   - kind: mc
@@ -2438,6 +3132,125 @@ practice:
           trap: true
         - t: 그리고 사회 과학자들이 문화 집단을 어떻게 연구해 나가야 하는지를
           v: 연구
+  - kind: mc
+    sentence: She had her own ideas like any patron, there were no fashion plates, and the tailor was simply at her service, perhaps with helpful suggestions about what others were wearing.
+    source: 2022 고3 9월 33번
+    vocab:
+    - word: patron
+      meaning: 단골손님, 후원자
+    - word: tailor
+      meaning: 재단사
+    - word: at one's service
+      meaning: ~을 위해 시중드는, 봉사하는
+    solution:
+      cut: 그녀는 여느 단골손님처럼 자기만의 생각이 있었고 / 유행 견본집도 없었으며 / 재단사는 그저 그녀의 시중을 들 뿐이었다 / 아마도 ~에 관한 유용한 제안과 함께 / 다른 사람들이 무엇을 입고 있는지
+      cut_en: She had her own ideas like any patron / there were no fashion plates / and the tailor was simply at her service / perhaps with helpful suggestions about / what others were wearing
+      wrong: what을 의문사 '무엇'으로만 보아 '다른 사람들은 무엇을 입고 있는가'라는 직접의문문으로 끊어 읽어 명사절 기능을 놓침
+      wrong_why: what others were wearing는 전치사 about의 목적어인 명사절(= the things which others were wearing)로 '다른 사람들이 입고 있는 것'을 뜻한다. 독립된 직접의문문이 아니다.
+      author_msg: about 뒤 what절이 전치사의 목적어인 명사절임을 캐치.
+      key_points:
+      - 'what절 : 선행사를 포함한 관계대명사 what = the thing(s) which, 명사절로 주어·목적어·보어 자리에 온다'
+      cloze:
+        en: She had her own ideas like any patron / there were no fashion plates / and the tailor was simply at her service / perhaps with helpful suggestions about / what others were wearing
+        ko:
+        - t: She had her own ideas like any patron
+          v: patron
+        - t: there were no fashion plates
+          v: fashion plates
+        - t: and the tailor was simply at her service
+          v: tailor
+        - t: perhaps with helpful suggestions about
+          v: suggestions
+        - t: what others were wearing
+          trap: true
+  - kind: mc
+    sentence: Indeed, what distinguishes a park from the broader category of public space is the representation of nature that parks are meant to embody.
+    source: 2023 고3 11월 38번
+    vocab:
+    - word: distinguish A from B
+      meaning: A를 B와 구별하다
+    - word: representation
+      meaning: 재현, 표현
+    - word: embody
+      meaning: 구현하다, 체현하다
+    solution:
+      cut: 실로 / 공원을 더 넓은 공공 공간 범주와 구별해 주는 것은 / 자연의 재현이다 / 공원이 구현하기로 되어 있는
+      cut_en: Indeed / what distinguishes a park from the broader category of public space / is the representation of nature / that parks are meant to embody
+      wrong: what을 the thing which로 보지 못하고 의문사 '무엇이 공원을 구별하는가'로 읽어 이 절이 문장의 주어임을 놓침
+      wrong_why: what distinguishes...는 선행사를 포함한 관계대명사 what이 이끄는 명사절로 문장의 주어(단수 취급)이며, 그에 호응하는 동사가 is이다. what을 단순 의문사로 보면 주어를 놓친다.
+      author_msg: 문두 what절이 동사 is의 주어(명사절, 단수)임을 캐치.
+      key_points:
+      - 'what절 : what = the thing which, 명사절이 주어면 단수 취급하여 동사 is와 호응'
+      cloze:
+        en: Indeed / what distinguishes a park from the broader category of public space / is the representation of nature / that parks are meant to embody
+        ko:
+        - t: Indeed
+        - t: what distinguishes a park from the broader category of public space
+          trap: true
+        - t: is the representation of nature
+          v: representation
+        - t: that parks are meant to embody
+          v: embody
+  - kind: mc
+    sentence: Labor sharing groups are part of what has been called a "moral economy" since no one keeps formal records on how much any family puts in or takes out.
+    source: 2023 고3 6월 32번
+    vocab:
+    - word: labor sharing
+      meaning: 노동 공유, 품앗이
+    - word: moral economy
+      meaning: 도덕 경제
+    - word: formal records
+      meaning: 공식 기록
+    solution:
+      cut: 노동 공유 집단은 ~의 일부이다 / 이른바 '도덕 경제'라고 불려온 것 / 아무도 공식 기록을 남기지 않기 때문에 / 어느 가정이 얼마나 넣거나 빼가는지에 대해
+      cut_en: Labor sharing groups are part of / what has been called a "moral economy" / since no one keeps formal records / on how much any family puts in or takes out
+      wrong: what has been called을 '무엇이 도덕 경제라 불려왔는가'라는 의문사절로 오독하거나, of의 목적어 명사절임을 놓침
+      wrong_why: what has been called a moral economy는 전치사 of의 목적어인 명사절(= the thing that has been called...)로 '이른바 도덕 경제라 불리는 것'을 의미하며, 수동태 has been called의 주어 역할도 what이 겸한다.
+      author_msg: of 뒤 what절이 명사절 목적어이고 what이 수동태 절 안의 주어임을 캐치.
+      key_points:
+      - 'what절 : what = the thing which/that, 관계대명사절 안에서 주어 역할도 겸한다(what has been called)'
+      cloze:
+        en: Labor sharing groups are part of / what has been called a "moral economy" / since no one keeps formal records / on how much any family puts in or takes out
+        ko:
+        - t: Labor sharing groups are part of
+          v: Labor sharing
+        - t: what has been called a "moral economy"
+          trap: true
+        - t: since no one keeps formal records
+          v: formal records
+        - t: on how much any family puts in or takes out
+          v: puts in
+  - kind: mc
+    sentence: If we feel awkward, embarrassed or ashamed when we are alone, we don't blush; it seems to be caused by our concern about what others are thinking of us.
+    source: 2023 고3 6월 37번
+    vocab:
+    - word: awkward
+      meaning: 어색한, 거북한
+    - word: blush
+      meaning: 얼굴을 붉히다
+    - word: concern
+      meaning: 걱정, 염려
+    solution:
+      cut: 우리가 어색하거나 당황하거나 부끄러움을 느낄 때 / 혼자 있을 때 / 우리는 얼굴을 붉히지 않는다 / 그것은 ~에 대한 우리의 걱정에서 비롯되는 것 같다 / 다른 사람들이 우리를 어떻게 생각하는지
+      cut_en: If we feel awkward, embarrassed or ashamed / when we are alone / we don't blush / it seems to be caused by our concern about / what others are thinking of us
+      wrong: what을 의문사로만 보아 '다른 사람들이 우리를 무엇으로 생각하는가'라는 의문문으로 끊고 concern about의 목적어절임을 놓침
+      wrong_why: what others are thinking of us는 전치사 about의 목적어 명사절로, what은 think of의 목적어 역할을 하며 '다른 사람들이 우리에 대해 생각하는 바'를 뜻한다.
+      author_msg: about 뒤 what절이 전치사의 목적어 명사절이며 what이 절 내부에서 목적어임을 캐치.
+      key_points:
+      - 'what절 : 명사절로 전치사의 목적어가 되고, what은 절 내부에서 목적어/주어 역할을 겸한다'
+      cloze:
+        en: If we feel awkward, embarrassed or ashamed / when we are alone / we don't blush / it seems to be caused by our concern about / what others are thinking of us
+        ko:
+        - t: If we feel awkward, embarrassed or ashamed
+          v: awkward
+        - t: when we are alone
+          v: alone
+        - t: we don't blush
+          v: blush
+        - t: it seems to be caused by our concern about
+          v: concern
+        - t: what others are thinking of us
+          trap: true
   that_clause:
   - kind: mc
     sentence: However, sound graphs of songs recorded over several weeks or months reveal that during this practice period the bird fine-tunes his efforts until he produces an accurate copy of the memorized template.
@@ -2860,6 +3673,121 @@ practice:
           v: 댓글난
         - t: 어린 시청자들에게 부적절한
           trap: true
+  - kind: mc
+    sentence: 'The rental section on your website says that there are two other swimming pools during the summer season: the Splash Pool and the Rainbow Pool.'
+    source: 2022 고3 6월 18번
+    vocab:
+    - word: rental
+      meaning: 대여, 임대
+    - word: summer season
+      meaning: 여름철, 성수기
+    solution:
+      cut: 귀사 웹사이트의 대여 섹션은 ~라고 말한다 / 다른 수영장이 두 개 있다고 / 여름철 동안 / 스플래시 풀과 레인보우 풀
+      cut_en: The rental section on your website says / that there are two other swimming pools / during the summer season / the Splash Pool and the Rainbow Pool
+      wrong: that를 관계대명사나 지시사로 보아 '~하는 그 두 수영장'처럼 앞말을 수식하는 것으로 오독
+      wrong_why: says that there are...의 that은 완전한 절(there are two other swimming pools)을 이끄는 접속사로 동사 says의 목적어절이다. 뒤 절이 완전하므로 관계대명사가 아니다.
+      author_msg: 동사(say) 뒤 that + 완전한 절 = 목적어절 접속사임을 캐치.
+      key_points:
+      - 'that절 : 접속사 that은 완전한 절을 이끌어 동사의 목적어절이 된다(관계대명사 that은 불완전한 절)'
+      cloze:
+        en: The rental section on your website says / that there are two other swimming pools / during the summer season / the Splash Pool and the Rainbow Pool
+        ko:
+        - t: The rental section on your website says
+          v: rental
+        - t: that there are two other swimming pools
+          trap: true
+        - t: during the summer season
+          v: summer season
+        - t: the Splash Pool and the Rainbow Pool
+          v: Splash Pool
+  - kind: mc
+    sentence: To the extent that an agent relies on the prior knowledge of its designer rather than on its own percepts, we say that the agent lacks autonomy.
+    source: 2023 고3 6월 30번
+    vocab:
+    - word: prior knowledge
+      meaning: 사전 지식
+    - word: percept
+      meaning: 지각(내용), 감각 정보
+    - word: autonomy
+      meaning: 자율성
+    solution:
+      cut: 행위자가 설계자의 사전 지식에 의존하는 정도만큼 / 자신의 지각보다는 / 우리는 말한다 / 그 행위자가 자율성이 없다고
+      cut_en: To the extent that an agent relies on the prior knowledge of its designer / rather than on its own percepts / we say / that the agent lacks autonomy
+      wrong: that the agent lacks autonomy의 that을 앞의 the agent를 꾸미는 관계대명사로 보거나 'To the extent that'의 that과 혼동
+      wrong_why: we say that ...의 that은 완전한 절(the agent lacks autonomy)을 이끄는 목적어절 접속사이다. 앞의 'to the extent that'(~하는 정도만큼)의 that과는 별개의 that이다.
+      author_msg: 한 문장의 서로 다른 that(정도 부사절 that vs 목적어절 접속사 that)을 구분해 캐치.
+      key_points:
+      - 'that절 : say/think 등 동사 뒤 that + 완전한 절 = 목적어절, 접속사 that은 생략도 가능'
+      cloze:
+        en: To the extent that an agent relies on the prior knowledge of its designer / rather than on its own percepts / we say / that the agent lacks autonomy
+        ko:
+        - t: To the extent that an agent relies on the prior knowledge of its designer
+          v: prior knowledge
+        - t: rather than on its own percepts
+          v: percepts
+        - t: we say
+          v: say
+        - t: that the agent lacks autonomy
+          trap: true
+  - kind: mc
+    sentence: In a hiring negotiation, a job applicant who assumes that salary is the only issue may insist on $75,000 when the employer is offering $70,000.
+    source: 2023 고3 6월 42번
+    vocab:
+    - word: hiring negotiation
+      meaning: 채용 협상
+    - word: applicant
+      meaning: 지원자, 구직자
+    - word: insist on
+      meaning: ~을 고집하다, 주장하다
+    solution:
+      cut: 채용 협상에서 / ~라고 가정하는 구직자는 / 급여가 유일한 쟁점이라고 / 75,000달러를 고집할 수 있다 / 고용주가 70,000달러를 제안하고 있을 때
+      cut_en: In a hiring negotiation / a job applicant who assumes / that salary is the only issue / may insist on $75,000 / when the employer is offering $70,000
+      wrong: that salary is the only issue의 that을 관계대명사로 보아 앞 명사를 수식하는 것으로 오독
+      wrong_why: assumes that ...의 that은 완전한 절(salary is the only issue)을 이끄는 접속사로 동사 assumes의 목적어절이다. 뒤 절이 완전하므로 관계대명사가 아니다.
+      author_msg: assume/think류 인지동사 뒤 that절이 목적어절임을 캐치.
+      key_points:
+      - 'that절 : assume·think·believe 등 뒤의 that은 목적어절을 이끄는 접속사(뒤에 완전한 절)'
+      cloze:
+        en: In a hiring negotiation / a job applicant who assumes / that salary is the only issue / may insist on $75,000 / when the employer is offering $70,000
+        ko:
+        - t: In a hiring negotiation
+          v: hiring negotiation
+        - t: a job applicant who assumes
+          v: applicant
+        - t: that salary is the only issue
+          trap: true
+        - t: may insist on $75,000
+          v: insist
+        - t: when the employer is offering $70,000
+          v: employer
+  - kind: mc
+    sentence: Although we'd like to think that our minds are sharp enough to always make good decisions with the greatest efficiency, they just aren't.
+    source: 2024 고3 11월 35번
+    vocab:
+    - word: sharp
+      meaning: 예리한, 날카로운
+    - word: efficiency
+      meaning: 효율(성)
+    - word: decision
+      meaning: 결정
+    solution:
+      cut: 우리는 ~라고 생각하고 싶지만 / 우리의 정신이 항상 좋은 결정을 내릴 만큼 충분히 예리하다고 / 최고의 효율로 / 실제로는 그렇지 않다
+      cut_en: Although we'd like to think / that our minds are sharp enough to always make good decisions / with the greatest efficiency / they just aren't
+      wrong: that our minds are...의 that을 관계대명사나 동격·지시로 혼동하여 think의 목적어절임을 놓침
+      wrong_why: think that ...의 that은 완전한 절(our minds are sharp enough...)을 이끄는 목적어절 접속사이다. 문장 끝 they just aren't는 이 목적어절의 내용을 받아 부정한다(they just aren't [sharp enough]).
+      author_msg: think 뒤 that 목적어절과, 이를 받아 부정하는 they just aren't의 대응을 캐치.
+      key_points:
+      - 'that절 : think/believe 뒤 that 목적어절, 접속사 that은 완전한 절을 이끈다'
+      cloze:
+        en: Although we'd like to think / that our minds are sharp enough to always make good decisions / with the greatest efficiency / they just aren't
+        ko:
+        - t: Although we'd like to think
+          v: think
+        - t: that our minds are sharp enough to always make good decisions
+          trap: true
+        - t: with the greatest efficiency
+          v: efficiency
+        - t: they just aren't
   as_compare:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they '' need to be pushed beyond a certain point, called a bifurcation.'
@@ -3090,3 +4018,65 @@ practice:
         - t: 비록
         - t: 모든 반복이 혼돈으로 이어지는 것은 아니지만
           trap: true
+  - kind: mc
+    sentence: Services using electrically assisted delivery tricycles have been successfully implemented in France and are gradually being adopted across Europe for services as varied as parcel and catering deliveries.
+    source: 2023 고3 11월 22번
+    vocab:
+    - word: tricycle
+      meaning: 삼륜차, 세발자전거
+    - word: implement
+      meaning: 시행하다, 도입하다
+    - word: varied
+      meaning: 다양한, 여러 가지의
+    solution:
+      cut: 전기 보조 배달 삼륜차를 이용하는 서비스가 / 프랑스에서 성공적으로 도입되었고 / 유럽 전역에서 점차 채택되고 있다 / 여러 서비스에 / 택배와 음식 배달만큼이나 다양한
+      cut_en: Services using electrically assisted delivery tricycles / have been successfully implemented in France / and are gradually being adopted across Europe / for services / as varied as parcel and catering deliveries
+      wrong: as varied as를 '~보다 더 다양한'이라는 비교급 우위로 오역
+      wrong_why: as varied as parcel and catering deliveries는 as+원급(varied)+as 구조로 '택배와 음식 배달만큼(그만큼) 다양한'이라는 동등비교이다. more varied than처럼 우열을 나타내는 것이 아니다.
+      author_msg: as+형용사원급+as가 우열비교가 아닌 동등비교임을 캐치.
+      key_points:
+      - '비교(as~as) : as+원급+as = ''~만큼 …한'' 동등비교, 비교급(more~than)과 구별'
+      cloze:
+        en: Services using electrically assisted delivery tricycles / have been successfully implemented in France / and are gradually being adopted across Europe / for services / as varied as parcel and catering deliveries
+        ko:
+        - t: Services using electrically assisted delivery tricycles
+          v: tricycles
+        - t: have been successfully implemented in France
+          v: implemented
+        - t: and are gradually being adopted across Europe
+          v: adopted
+        - t: for services
+          v: services
+        - t: as varied as parcel and catering deliveries
+          trap: true
+  - kind: mc
+    sentence: Part of the lack of fit arises because the present properties of an organism have not all originated in an environment similar in every respect to the one in which it now lives.
+    source: 2023 고3 6월 40번
+    vocab:
+    - word: lack of fit
+      meaning: 부적합, 들어맞지 않음
+    - word: properties
+      meaning: 속성, 특성
+    - word: originate
+      meaning: 생겨나다, 유래하다
+    solution:
+      cut: 부적합의 일부는 발생한다 / 유기체의 현재 속성들이 / 모두 다 생겨난 것은 아니기 때문에 / 모든 면에서 비슷한 환경에서 / 그것이 지금 살고 있는 환경과
+      cut_en: Part of the lack of fit arises / because the present properties of an organism / have not all originated / in an environment similar in every respect / to the one in which it now lives
+      wrong: not all을 전체부정 '(속성들 중) 어느 것도 생겨나지 않았다'로 오역
+      wrong_why: have not all originated의 not+all은 부분부정으로 '(속성들이) 모두 다 그 환경에서 생겨난 것은 아니다(=일부만 유래)'라는 뜻이다. 전체부정(none originated)이 아니다.
+      author_msg: not all = 부분부정('모두 ~인 것은 아니다')임을 전체부정과 구별해 캐치.
+      key_points:
+      - '비교/부분부정 : not + all/every/always = 부분부정 ''모두/항상 ~인 것은 아니다''(전체부정 아님)'
+      cloze:
+        en: Part of the lack of fit arises / because the present properties of an organism / have not all originated / in an environment similar in every respect / to the one in which it now lives
+        ko:
+        - t: Part of the lack of fit arises
+          v: lack of fit
+        - t: because the present properties of an organism
+          v: properties
+        - t: have not all originated
+          trap: true
+        - t: in an environment similar in every respect
+          v: environment
+        - t: to the one in which it now lives
+          v: lives
