@@ -1180,6 +1180,100 @@ practice:
         signal: as opposed to
         a: 정보 공개는 유연함
         b: 강경한 규제
+  - kind: mc
+    sentence: Although the wonders of modern technology have provided people with opportunities beyond the wildest dreams of our ancestors, the good, as usual, is weakened by a downside.
+    source: 2022 고3 9월 30번
+    vocab:
+    - word: wonder
+      meaning: 경이(로운 것)
+    - word: downside
+      meaning: 단점, 부정적 측면
+    - word: weaken
+      meaning: 약화시키다
+    solution:
+      cut: 비록 현대 기술의 경이로움이 / 사람들에게 기회를 제공해 왔지만 / 조상들의 가장 터무니없는 꿈을 넘어서는 (기회를) / 그 좋은 점은, 늘 그렇듯, / 단점에 의해 약화된다
+      cut_en: Although the wonders of modern technology / have provided people with opportunities / beyond the wildest dreams of our ancestors, / the good, as usual, / is weakened by a downside
+      wrong: 현대 기술의 경이로움이 조상들의 꿈을 넘어선 기회를 주었기에, 그 좋은 점은 단점을 완전히 없앤다.
+      wrong_why: Although(양보)와 is weakened(약화)를 무시하고 좋은 점이 단점을 없앤다고 극성을 뒤집음. 실제는 이점이 단점에 의해 약화됨.
+      author_msg: Although이 이끄는 양보절 뒤 주절이 방점 — 이점보다 '약화된다'가 핵심.
+      key_points:
+      - 'Although : 양보(뒤 주절이 강조점)'
+      - 'is weakened by : 약화의 방향 표시'
+      intent:
+        kind: contrast
+        signal: Although
+        a: 이점도 단점에 약화됨
+        b: 기술의 놀라운 이점
+  - kind: mc
+    sentence: On the contrary, we brought the motors into our lives, as automobiles, refrigerators, drill presses, and pencil sharpeners.
+    source: 2023 고3 11월 30번
+    vocab:
+    - word: on the contrary
+      meaning: 그와는 반대로
+    - word: drill press
+      meaning: 천공기, 드릴 프레스
+    - word: pencil sharpener
+      meaning: 연필깎이
+    solution:
+      cut: 그와는 반대로, / 우리는 모터를 우리 삶 속으로 들여왔다 / 자동차, 냉장고, 천공기, 연필깎이의 형태로
+      cut_en: On the contrary, / we brought the motors into our lives, / as automobiles, refrigerators, drill presses, and pencil sharpeners
+      wrong: 그와 반대로, 우리는 모터를 우리 삶에서 몰아냈다, 자동차·냉장고 같은 형태로.
+      wrong_why: On the contrary가 앞 통념을 뒤집는데, brought into(들여옴)를 몰아냄으로 방향을 반대로 옮김.
+      author_msg: On the contrary 뒤에 필자의 진짜 주장 — 모터를 '들여왔다'가 방점.
+      key_points:
+      - 'On the contrary : 앞 내용 반박·역전'
+      - 'brought ... into : 도입의 방향'
+      intent:
+        kind: contrast
+        signal: On the contrary
+        a: 모터를 삶에 들여옴
+        b: 모터를 멀리한다는 통념
+  - kind: mc
+    sentence: Yet, despite the increasing level of urban mobility worldwide, access to places, activities and services has become increasingly difficult.
+    source: 2023 고3 6월 24번
+    vocab:
+    - word: mobility
+      meaning: 이동성
+    - word: access
+      meaning: 접근(성)
+    - word: increasingly
+      meaning: 점점 더
+    solution:
+      cut: 그러나, / 전 세계적으로 도시 이동성 수준이 증가함에도 불구하고, / 장소, 활동, 서비스에 대한 접근은 / 점점 더 어려워졌다
+      cut_en: Yet, / despite the increasing level of urban mobility worldwide, / access to places, activities and services / has become increasingly difficult
+      wrong: 이동성이 증가한 덕분에, 장소와 서비스에 대한 접근이 점점 더 쉬워졌다.
+      wrong_why: despite(양보)를 인과로, difficult(어려움)를 쉬움으로 뒤집음. 이동성이 늘어도 접근은 어려워졌다는 게 핵심.
+      author_msg: despite는 앞뒤를 대립시키는 신호 — 이동성 증가 ≠ 접근성 증가.
+      key_points:
+      - 'despite : 양보(기대와 반대 결과)'
+      - 'increasingly difficult : 극성(악화)'
+      intent:
+        kind: contrast
+        signal: despite
+        a: 접근은 점점 어려워짐
+        b: 도시 이동성 증가
+  - kind: mc
+    sentence: However, after a while, a group of students came in, and there weren't any large tables left.
+    source: 2023 고3 6월 45번
+    vocab:
+    - word: after a while
+      meaning: 잠시 후
+    - word: left
+      meaning: 남은
+    solution:
+      cut: 그러나, / 잠시 후, / 한 무리의 학생들이 들어왔고, / 남아 있는 큰 테이블이 하나도 없었다
+      cut_en: However, / after a while, / a group of students came in, / and there weren't any large tables left
+      wrong: 그러나 잠시 후 학생들이 들어왔지만, 큰 테이블은 여전히 많이 남아 있었다.
+      wrong_why: However 뒤 상황 반전을 무시하고 there weren't any(전혀 없음)를 많이 남음으로 극성을 뒤집음.
+      author_msg: However는 앞 상황과의 반전 신호 — '큰 테이블이 없었다'가 새 국면.
+      key_points:
+      - 'However : 상황 반전'
+      - 'there weren''t any : 전무(완전 부정)'
+      intent:
+        kind: contrast
+        signal: However
+        a: 남은 큰 테이블 없음
+        b: 여유 있던 이전 상황
   equivalence:
   - kind: mc
     sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
@@ -2150,6 +2244,58 @@ practice:
         b: 약간 당황한 고함
         a_label: 우위
         b_label: 열위
+  - kind: mc
+    sentence: A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance.
+    source: 2024 고3 6월 31번
+    vocab:
+    - word: carrier
+      meaning: (저장) 매체
+    - word: bit-perfect
+      meaning: 비트 단위까지 완벽히 동일한
+    - word: diminishing
+      meaning: 점점 줄어드는
+    solution:
+      cut: 물리적 매체는 필요하지만, / 원본 매체를 읽을 수 있는 한, / 비트까지 완벽한 복제본을 다른 기기에서 값싸고 쉽게 만들 수 있고, / 그래서 원본 매체 보존의 중요성은 점점 줄어든다
+      cut_en: A physical carrier is necessary, / but as long as the source media can be read, / bit-perfect copies can be made cheaply and easily on other devices, / making the preservation of the original carrier of diminishing importance
+      wrong: 복제본을 쉽게 만들 수 있어서, 원본 매체 보존의 중요성은 점점 더 커진다.
+      wrong_why: diminishing importance(중요성 감소)를 증가로 뒤집음. 쉬운 복제가 원본 보존의 가치를 낮춤.
+      author_msg: diminishing은 감소 방향 — 복제가 쉬울수록 원본 보존의 무게는 가벼워진다.
+      key_points:
+      - 'cheaply and easily : 복제본의 우위'
+      - 'diminishing importance : 원본 가치 하락'
+      intent:
+        kind: arrow
+        signal: diminishing importance
+        a: 값싼 완벽 복제본
+        b: 원본 매체 보존
+        a_label: 우위
+        b_label: 열위
+  - kind: mc
+    sentence: Understanding how each type of user experiences the current medical environment as well as how each reacts to your prospective designs inevitably produces a better building.
+    source: 2026 고3 11월 33번
+    vocab:
+    - word: prospective
+      meaning: 장래의, 제안된
+    - word: inevitably
+      meaning: 필연적으로
+    - word: react
+      meaning: 반응하다
+    solution:
+      cut: 각 유형의 사용자가 현재 의료 환경을 어떻게 경험하는지 / 그리고 당신의 설계안에 어떻게 반응하는지를 이해하는 것은 / 필연적으로 / 더 나은 건물을 만들어낸다
+      cut_en: Understanding how each type of user experiences the current medical environment / as well as how each reacts to your prospective designs / inevitably / produces a better building
+      wrong: 사용자를 이해하는 것은 오히려 더 못한 건물을 만들어낸다.
+      wrong_why: produces a better building(더 나은 결과)을 더 못한으로 뒤집음. 사용자 이해가 더 나은 건물로 이어짐.
+      author_msg: a better building은 우위 결과 — 사용자 이해가 결과의 질을 높인다.
+      key_points:
+      - 'a better building : 우위 결과'
+      - 'inevitably : 필연적 귀결'
+      intent:
+        kind: arrow
+        signal: a better building
+        a: 사용자 이해한 설계
+        b: 이해 없는 설계
+        a_label: 우위
+        b_label: 열위
   connective:
   - kind: mc
     sentence: A crowd can thus force inaction on its members by implying, through its passivity, that an event is not an emergency.
@@ -2713,6 +2859,102 @@ practice:
         signal: however
         clause: 옛날엔 고객이 우선이었다
         logic: 대조
+  - kind: mc
+    sentence: However, those data do not actually show that different cultures have different emotions, if we think of emotions as central, neurally implemented states.
+    source: 2022 고3 6월 23번
+    vocab:
+    - word: neurally
+      meaning: 신경적으로
+    - word: implemented
+      meaning: 구현된
+    - word: central
+      meaning: 핵심적인
+    solution:
+      cut: 그러나, / 그 데이터는 실제로 보여주지 않는다 / 서로 다른 문화가 서로 다른 감정을 가진다는 것을 / 만약 우리가 감정을 핵심적이고 신경적으로 구현된 상태로 본다면
+      cut_en: However, / those data do not actually show / that different cultures have different emotions, / if we think of emotions as central, neurally implemented states
+      wrong: 그 데이터는 서로 다른 문화가 서로 다른 감정을 가진다는 것을 분명히 보여준다.
+      wrong_why: However + do not show(부정)를 긍정으로 뒤집음. 자료가 그 점을 입증하지 못한다는 게 요지.
+      author_msg: However는 앞 논지 반박 신호 — 뒤에 not이 붙어 '입증 못함'으로 방향이 꺾인다.
+      key_points:
+      - 'However : 앞 내용 반박(대조)'
+      - 'do not actually show : 부정 극성'
+      intent:
+        kind: logic
+        signal: However
+        clause: 그 자료는 사실 입증 못함
+        logic: 대조
+  - kind: mc
+    sentence: For example, Wade Guyton, an abstractionist who uses a word processing program and inkjet printers, does not call himself a computer artist.
+    source: 2022 고3 6월 31번
+    vocab:
+    - word: abstractionist
+      meaning: 추상주의 화가
+    - word: inkjet printer
+      meaning: 잉크젯 프린터
+    - word: call oneself
+      meaning: 자칭하다
+    solution:
+      cut: 예를 들어, / 워드 프로세싱 프로그램과 잉크젯 프린터를 쓰는 추상화가인 웨이드 가이턴은 / 자신을 컴퓨터 예술가라고 부르지 않는다
+      cut_en: For example, / Wade Guyton, an abstractionist who uses a word processing program and inkjet printers, / does not call himself a computer artist
+      wrong: 웨이드 가이턴은 스스로를 컴퓨터 예술가라고 부른다.
+      wrong_why: does not call(부정)을 긍정으로 뒤집음. 컴퓨터를 쓰지만 자칭 컴퓨터 예술가가 아님.
+      author_msg: For example은 앞 주장의 사례 — 여기선 not이 핵심, 자칭하지 '않음'.
+      key_points:
+      - 'For example : 앞 진술의 예시'
+      - 'does not call : 부정 극성'
+      intent:
+        kind: logic
+        signal: For example
+        clause: 가이턴은 컴퓨터 예술가라 안 함
+        logic: 예시
+  - kind: mc
+    sentence: For example, energy efficiency requirements for appliances may produce goods that work less well or that have characteristics that consumers do not want.
+    source: 2023 고3 11월 23번
+    vocab:
+    - word: efficiency requirements
+      meaning: 효율 요건
+    - word: appliances
+      meaning: 가전제품
+    - word: work less well
+      meaning: 성능이 더 떨어지다
+    solution:
+      cut: 예를 들어, / 가전제품에 대한 에너지 효율 요건은 / 성능이 더 떨어지는 제품을 만들어낼 수 있다 / 혹은 소비자가 원하지 않는 특성을 가진 (제품을)
+      cut_en: For example, / energy efficiency requirements for appliances / may produce goods that work less well / or that have characteristics that consumers do not want
+      wrong: 효율 요건은 성능이 더 뛰어나고 소비자가 원하는 특성을 가진 제품을 만든다.
+      wrong_why: work less well(성능 저하)과 do not want(원치 않음)를 긍정으로 뒤집음. 규제의 부작용을 드는 예시.
+      author_msg: For example은 앞 주장의 예 — less well·do not want의 부정 방향이 요지.
+      key_points:
+      - 'For example : 주장 뒷받침 예시'
+      - 'work less well / do not want : 부정 극성'
+      intent:
+        kind: logic
+        signal: For example
+        clause: 효율 규제가 성능 낮은 제품 낳음
+        logic: 예시
+  - kind: mc
+    sentence: However, one part of your brain sees its shape, another sees color, another detects location, and another perceives movement.
+    source: 2023 고3 11월 24번
+    vocab:
+    - word: detect
+      meaning: 감지하다
+    - word: perceive
+      meaning: 지각하다
+    - word: shape
+      meaning: 형태
+    solution:
+      cut: 그러나, / 당신 뇌의 한 부분은 그것의 형태를 보고, / 다른 부분은 색을 보며, / 또 다른 부분은 위치를 감지하고, / 또 다른 부분은 움직임을 지각한다
+      cut_en: However, / one part of your brain sees its shape, / another sees color, / another detects location, / and another perceives movement
+      wrong: 그러나 당신 뇌의 한 부분이 형태·색·위치·움직임을 한꺼번에 모두 처리한다.
+      wrong_why: However 뒤 요지는 뇌가 부위별로 나눠 처리한다는 것 — 한 부분이 전부 한다고 뒤집으면 오역.
+      author_msg: However는 앞(통합적 인상)과 대조 — 실제론 뇌가 기능별로 '분업'한다.
+      key_points:
+      - 'However : 앞 통념과 대조'
+      - 'one ... another ... another : 부위별 분업 나열'
+      intent:
+        kind: logic
+        signal: However
+        clause: 뇌 부위마다 따로 처리함
+        logic: 대조
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
@@ -3080,6 +3322,75 @@ practice:
         kind: polarity
         signal: highly
         stmt: 새 양식이 소재와 부조화
+        polarity: positive
+  - kind: mc
+    sentence: As a matter of course they can enquire about the availability of pieces from dealers in other cities and, most crucially in some categories, from overseas.
+    source: 2024 고3 9월 35번
+    vocab:
+    - word: enquire
+      meaning: 문의하다, 알아보다
+    - word: availability
+      meaning: 입수 가능성, 구할 수 있음
+    - word: as a matter of course
+      meaning: 당연히, 으레
+    solution:
+      cut: 당연하게도 / 그들은 문의할 수 있다 / 작품의 입수 가능성을 / 다른 도시의 딜러들에게 / 그리고 가장 결정적으로 / 일부 범주에서는 / 해외로부터
+      cut_en: As a matter of course / they can enquire / about the availability of pieces / from dealers in other cities / and, most crucially / in some categories / from overseas
+      wrong: 일부 범주에서 해외 딜러에게 문의하는 것은 전혀 중요하지 않다.
+      wrong_why: '''most crucially''는 그 지점이 가장 결정적으로 중요하다는 강조인데, 이를 ''중요하지 않다''로 읽으면 극성이 정반대가 된다.'
+      author_msg: crucially는 '결정적으로'—필자가 힘주는 강조 신호, 놓치지 마세요.
+      key_points:
+      - 'most crucially : 필자가 가장 중요하다고 강조하는 지점'
+      intent:
+        kind: polarity
+        signal: crucially
+        stmt: 해외 문의가 결정적
+        polarity: positive
+  - kind: mc
+    sentence: Because this information was the key to their profitability, these firms worked in relative secrecy, frequently built on family ties, trust, and loyalty.
+    source: 2026 고3 11월 31번
+    vocab:
+    - word: profitability
+      meaning: 수익성
+    - word: secrecy
+      meaning: 비밀 유지, 은밀함
+    - word: loyalty
+      meaning: 충성심, 의리
+    solution:
+      cut: 이 정보가 / 그들의 수익성의 핵심이었기 때문에 / 이 회사들은 / 상대적 비밀 속에서 일했다 / 흔히 / 가족 관계, 신뢰, 충성심에 기반하여
+      cut_en: Because this information / was the key to their profitability / these firms / worked in relative secrecy / frequently built on / family ties, trust, and loyalty
+      wrong: 이 정보는 그들의 수익성과는 별 상관이 없었다.
+      wrong_why: '''the key to their profitability''는 정보가 수익성의 ''핵심(결정적 요인)''임을 뜻하는데, ''상관없다''로 읽으면 극성이 반대가 된다.'
+      author_msg: key to ~는 '~의 핵심'—중요성을 강조하는 신호어.
+      key_points:
+      - 'the key to : ~의 핵심(결정적 요인)임을 강조'
+      intent:
+        kind: polarity
+        signal: key
+        stmt: 정보가 수익성의 핵심
+        polarity: positive
+  - kind: mc
+    sentence: Diaries were central media through which enlightened and free subjects could be constructed.
+    source: 2023 고3 11월 21번
+    vocab:
+    - word: diary
+      meaning: 일기
+    - word: enlightened
+      meaning: 계몽된
+    - word: subject
+      meaning: 주체, 개인
+    solution:
+      cut: 일기는 / 중심적 매체였다 / 그것을 통해 / 계몽되고 자유로운 주체가 / 구성될 수 있었던
+      cut_en: Diaries were / central media / through which / enlightened and free subjects / could be constructed
+      wrong: 일기는 자유로운 주체 형성에 별 역할을 못 한 부수적 매체였다.
+      wrong_why: '''central media''는 일기가 주체 형성의 ''중심'' 매체임을 뜻하는데, ''부수적''으로 읽으면 극성이 반대가 된다.'
+      author_msg: central은 '중심적'—핵심성 강조, 부수적으로 낮춰 읽지 말 것.
+      key_points:
+      - 'central : 핵심/중심임을 강조하는 신호어'
+      intent:
+        kind: polarity
+        signal: central
+        stmt: 일기가 중심적 매체
         polarity: positive
   polarity_negative:
   - kind: mc
@@ -3497,3 +3808,26 @@ practice:
         signal: few
         stmt: 언론과 소통한 과학자는 소수
         polarity: negative
+  - kind: mc
+    sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
+    source: 2024 고3 6월 32번
+    vocab:
+    - word: definition
+      meaning: 정의
+    - word: creativity
+      meaning: 창의성
+    - word: generate
+      meaning: 만들어내다, 생성하다
+    solution:
+      cut: 이 정의가 / 연구에서 널리 쓰이지만 / 창의성의 중요한 한 측면이 / 종종 간과된다 / 즉 / 창의적 아이디어를 만들어내는 것이 / 최종 목표인 경우는 드물다
+      cut_en: While this definition / is widely used in research / an important aspect of creativity / is often ignored / Generating creative ideas / rarely is the final goal
+      wrong: 창의적 아이디어를 만들어내는 것이 대개 최종 목표이다.
+      wrong_why: '''rarely is the final goal''은 ''최종 목표인 경우가 드물다''인데, ''대개 최종 목표''로 읽으면 극성이 반대가 된다.'
+      author_msg: rarely=거의 ~않다, '대개'로 읽으면 정반대.
+      key_points:
+      - 'rarely : 거의 ~하지 않다(부분 부정)'
+      intent:
+        kind: polarity
+        signal: rarely
+        stmt: 아이디어가 최종 목표 아님
+        polarity: partial
