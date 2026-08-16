@@ -32,6 +32,13 @@ practice:
         - t: 그러나
         - t: 그것들(걱정)이 우리에게 불필요한 고통을 일으킨다
           trap: true
+      intent:
+        kind: arrow
+        signal: cause
+        a: 걱정이 통제를 넘어섬
+        b: 불필요한 고통
+        a_label: 원인
+        b_label: 결과
   - kind: mc
     sentence: In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth.
     source: 2024 고3 9월 29번
@@ -301,6 +308,11 @@ practice:
       key_points:
       - '''rather than walking'' : ''걷는 사람''을 눈에 띄는 대상으로 착각하기 쉽다 → 강조 대상은 ''광장에 서 있거나 앉아 있는 사람들'', walking은 배제됨.'
       cut_en: In a city like Rome, / it is [the large number of people standing or sitting in squares] / rather than walking / that is conspicuous.
+      intent:
+        kind: contrast
+        signal: rather than
+        a: 광장에 서 있거나 앉아 있는 사람들
+        b: 걷는 사람들
   - kind: short
     sentence: However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static.
     source: 2026 고3 11월 42번
@@ -2037,6 +2049,11 @@ practice:
       key_points:
       - '''not always clearly labeled'' : not always를 전체부정(''결코 아니다'')으로 읽기 쉽다 → not always는 부분부정(''항상 ~인 것은 아니다'').'
       cut_en: Emergencies / are not always clearly labeled as such; / "smoke" pouring into a waiting room / may be caused by fire, / or it may merely indicate a leak in a steam pipe.
+      intent:
+        kind: polarity
+        signal: not always
+        stmt: 응급 상황이 명확히 표시된다
+        polarity: partial
   - kind: mc
     sentence: Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.
     source: 2024 고3 9월 30번

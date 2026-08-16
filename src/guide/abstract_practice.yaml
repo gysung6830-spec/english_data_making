@@ -24,6 +24,17 @@ practice:
       - 'the emergence of self-driving cars : ''출현(명사)''로 굳혀 앞 growing presence of AI와 억지로 원인·결과로 엮기 쉽다 → ''A가 생겨나는 것''으로 동사화.'
       - 'the necessity of the role of humans : ''필요성(명사)''로 두면 무엇이 in decline인지 안 잡힌다 → ''인간 역할이 필요하다는 것''으로 동사화.'
       cut_en: Whether it be due to the growing presence of AI assistants / or the emergence of self-driving cars, / the necessity of the role of humans as the decision makers / would appear to be in decline.
+      cloze:
+        en: Whether it be due to the growing presence of AI assistants / or the emergence of self-driving cars, / the necessity of the role of humans as the decision makers / would appear to be in decline.
+        ko:
+        - t: AI 비서의 증가하는 존재 때문이든
+          v: 존재
+        - t: 자율주행차가 생겨나는 것 때문이든
+          v: 자율주행차
+        - t: 의사 결정자로서 인간 역할이 필요하다는 것은
+          trap: true
+        - t: 쇠퇴하고 있는 것으로 보인다
+          v: 쇠퇴
     kind: mc
   - sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
@@ -49,6 +60,15 @@ practice:
       - 'the emergence of new cultures : emergence를 ''출현물(사물)''로 굳혀 새 문화를 결과물로 오독하기 쉽다 → ''A가 생겨나는 것''으로 동사화.'
       - 'lead to A : 사물 목적어로 받아 ''A를 이끌다''로 오독하기 쉽다 → ''A가 생겨나게 된다''로 통째 동사화.'
       cut_en: Changing political, social and religious landscapes / will lead to / the emergence of new cultures, / and with them / new culturtainment experiences.
+      cloze:
+        en: Changing political, social and religious landscapes will lead to / the emergence of new cultures, / and with them new culturtainment experiences.
+        ko:
+        - t: 변화하는 정치·사회·종교적 지형은 이어질 것이다
+          v: 지형
+        - t: 새로운 문화가 생겨나는 것으로
+          trap: true
+        - t: 그리고 그와 함께 새로운 컬처테인먼트 경험으로
+          v: 경험
     kind: mc
   - sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -70,6 +90,14 @@ practice:
       - 'capacity for matching A with B : matching을 ''맞춤(명사)''으로 굳히면 무엇을 무엇과 맞추는지 A·B 관계가 흐려진다 → ''~할 수 있다는 것''으로 동사화.'
       - 'those of others that are visually perceived : those가 앞 movements를 받는 것을 놓쳐 엉뚱한 대상과 맞추기 쉽다 → ''타인의 (움직임)''으로 복원.'
       cut_en: In other words, / they not only have an innate capacity / for matching their own kinaesthetically experienced bodily movements / with those of others that are visually perceived; / they have an innate drive to do so.
+      cloze:
+        en: In other words, they / not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; / they have an innate drive to do so.
+        ko:
+        - t: 다시 말해 그들은
+        - t: 자신의 운동감각으로 경험한 신체 움직임을 시각적으로 지각된 타인의 움직임과 맞추는 타고난 능력을 가질 뿐 아니라
+          trap: true
+        - t: 그렇게 하려는 타고난 욕구도 가진다
+          v: 욕구
     kind: short
   - kind: mc
     sentence: Scattered attention harms your ability to let go of stress, because even though your attention is scattered, it is narrowly focused, for you are able to fixate only on the stressful parts of your experience.
@@ -97,6 +125,19 @@ practice:
       key_points:
       - 'ability to V : to를 목적(~하기 위해)으로 오독 → 추상명사 ability를 뒤에서 구체화하는 ''~할 능력''으로 붙여 읽기'
       cut_en: Scattered attention / harms your ability to let go of stress, / because even though your attention is scattered, / it is narrowly focused, / for you are able to fixate only on the stressful parts of your experience.
+      cloze:
+        en: Scattered attention harms / your ability to let go of stress, / because even though your attention is scattered, / it is narrowly focused, / for you are able to fixate only on the stressful parts of your experience.
+        ko:
+        - t: 흩어진 주의력은 해친다
+          v: 주의력
+        - t: 스트레스를 떨쳐 버리는 당신의 능력을
+          trap: true
+        - t: 비록 당신의 주의력이 흩어져 있어도
+          v: 흩어져
+        - t: 그것은 좁게 집중되어 있는데
+          v: 집중
+        - t: 당신이 경험의 스트레스를 주는 부분에만 집착할 수 있기 때문이다
+          v: 집착
   - kind: mc
     sentence: Our view of the world is not given to us from the outside in a pure, objective form; it is shaped by our mental abilities, our shared cultural perspectives and our unique values and beliefs.
     source: 2022 고3 6월 21번
@@ -123,6 +164,15 @@ practice:
       key_points:
       - 'view of N : view를 ''경치'', of를 소유격으로 오독 → 추상명사 view를 구체화하는 ''N에 대한 관점''으로 처리'
       cut_en: Our view of the world / is not given to us from the outside in a pure, objective form; / it is shaped by our mental abilities, our shared cultural perspectives and our unique values and beliefs.
+      cloze:
+        en: Our view of the world / is not given to us from the outside in a pure, objective form; / it is shaped by our mental abilities, our shared cultural perspectives and our unique values and beliefs.
+        ko:
+        - t: 세계에 대한 우리의 관점은
+          trap: true
+        - t: 순수하고 객관적인 형태로 외부에서 우리에게 주어지는 것이 아니다
+          v: 객관적
+        - t: 그것은 우리의 정신적 능력, 공유된 문화적 관점, 그리고 고유한 가치관과 신념에 의해 형성된다
+          v: 형성
   - kind: mc
     sentence: People involved in the conception and engineering of robots designed to perceive and act know how fundamental is the ability to discriminate oneself from other entities in the environment.
     source: 2024 고3 9월 38번
@@ -149,6 +199,15 @@ practice:
       key_points:
       - 'ability to V : to를 목적으로 오독 → 추상명사 ability를 구체화하는 ''~하는 능력''으로 붙여 읽기'
       cut_en: People involved in the conception and engineering of robots designed to perceive and act / know how fundamental is the ability to discriminate oneself from other entities in the environment.
+      cloze:
+        en: People involved in the conception and engineering of robots designed to perceive and act / know how fundamental / is the ability to discriminate oneself from other entities in the environment.
+        ko:
+        - t: 지각하고 행동하도록 설계된 로봇의 구상과 공학에 관여하는 사람들은
+          v: 구상
+        - t: 얼마나 근본적인지 안다
+          v: 근본적
+        - t: 자기 자신을 환경 속의 다른 개체들과 구별하는 능력이
+          trap: true
   - kind: mc
     sentence: To decide whether and how to intervene in ecosystems, protected area managers normally need a reasonably clear idea of what future ecosystems would be like if they did not intervene.
     source: 2024 고3 9월 39번
@@ -175,6 +234,15 @@ practice:
       key_points:
       - 'idea of what ~ would be like : like를 동사 ''좋아하다''로 오독 → 추상명사 idea를 구체화하는 ''무엇과 같을지(어떤 모습일지)에 대한 개념'''
       cut_en: To decide whether and how to intervene in ecosystems, / protected area managers normally need a reasonably clear idea / of what future ecosystems would be like if they did not intervene.
+      cloze:
+        en: To decide whether and how to intervene in ecosystems, / protected area managers normally need / a reasonably clear idea of what future ecosystems would be like if they did not intervene.
+        ko:
+        - t: 생태계에 개입할지 여부와 어떻게 개입할지를 결정하기 위해
+          v: 개입
+        - t: 보호구역 관리자들은 보통 필요로 한다
+          v: 보호구역
+        - t: 만약 그들이 개입하지 않는다면 미래의 생태계가 어떤 모습일지에 대한 상당히 명확한 개념을
+          trap: true
   - kind: short
     sentence: In some cases, however, we are far less aware of why we believe a certain claim to be true, or how we are to explain why certain social realities exist.
     source: 2022 고3 9월 37번
@@ -198,6 +266,17 @@ practice:
       - 'aware of + why/how절 : of의 목적어를 놓치고 절을 따로 읽음 → of가 이끄는 why·how 명사절이 인식 대상을 구체화'
       - 'be to부정사 : 단순 현재로 오독 → ''~해야 한다(당위·방법)'''
       cut_en: In some cases, however, / we are far less aware / of why we believe a certain claim to be true, / or how we are to explain why certain social realities exist.
+      cloze:
+        en: In some cases, however, / we are far less aware / of why we believe a certain claim to be true, / or how we are to explain why certain social realities exist.
+        ko:
+        - t: 그러나 어떤 경우에는
+          v: 경우
+        - t: 우리는 훨씬 덜 인식한다
+          v: 인식
+        - t: 우리가 어떤 주장을 참이라고 믿는 이유를
+          trap: true
+        - t: 또는 특정한 사회적 현실이 왜 존재하는지를 우리가 어떻게 설명해야 하는지를
+          v: 사회적 현실
   - kind: short
     sentence: Learning to understand the built‑in limitations of our mental processes can also help us improve our ability to inform others more effectively.
     source: 2024 고3 9월 30번
@@ -220,6 +299,15 @@ practice:
       key_points:
       - 'ability to V : to를 목적으로 오독 → 추상명사 ability를 구체화하는 ''~하는 능력'''
       cut_en: Learning to understand the built-in limitations of our mental processes / can also help us / improve our ability to inform others more effectively.
+      cloze:
+        en: Learning to understand the built-in limitations of our mental processes / can also help us improve / our ability to inform others more effectively.
+        ko:
+        - t: 우리 정신 과정의 내재된 한계를 이해하는 법을 배우는 것은
+          v: 한계
+        - t: 또한 우리가 향상시키도록 도와줄 수 있다
+          v: 향상
+        - t: 다른 사람에게 더 효과적으로 정보를 전달하는 능력을
+          trap: true
   - kind: short
     sentence: Concert performances become interesting and gain in attraction from the fact that they go far beyond the information printed in the score.
     source: 2022 고3 9월 24번
@@ -242,6 +330,15 @@ practice:
       key_points:
       - 'the fact that절 : that을 관계사로 오독 → 동격 that으로 보아 ''~라는 사실''로 추상명사 내용을 구체화'
       cut_en: Concert performances / become interesting and gain in attraction / from the fact that they go far beyond the information printed in the score.
+      cloze:
+        en: Concert performances / become interesting and gain in attraction / from the fact that they go far beyond the information printed in the score.
+        ko:
+        - t: 콘서트 연주는
+          v: 연주
+        - t: 흥미로워지고 매력을 더한다
+          v: 매력
+        - t: 그것이 악보에 인쇄된 정보를 훨씬 넘어선다는 사실로부터
+          trap: true
   - kind: short
     sentence: An ability to switch between the "pragmatic attitude" of ' everyday life and an "aesthetic attitude" is fundamental to ' a balanced life.
     source: 2024 고3 6월 39번
@@ -264,6 +361,13 @@ practice:
       key_points:
       - 'ability to V between A and B : to를 목적으로, A·B 짝을 어긋나게 오독 → to부정사가 ability를 구체화하고 A와 B가 오가는 두 대상'
       cut_en: An ability to switch between the "pragmatic attitude" of everyday life and an "aesthetic attitude" / is fundamental to a balanced life.
+      cloze:
+        en: An ability to switch between the "pragmatic attitude" of everyday life and an "aesthetic attitude" / is fundamental to a balanced life.
+        ko:
+        - t: 일상생활의 '실용적 태도'와 '심미적 태도' 사이를 오갈 수 있는 능력은
+          trap: true
+        - t: 균형 잡힌 삶에 근본적이다
+          v: 근본적
   - kind: short
     sentence: The fact that everyone was going to be able to speak and listen had to be accommodated ethically, and it was via a rough egalitarianism.
     source: 2024 고3 6월 22번
@@ -286,6 +390,15 @@ practice:
       key_points:
       - 'the fact that절 : that을 관계사로 보고 주어를 짧게 끊음 → 동격 that절 전체가 주어(추상명사 fact의 내용 구체화)'
       cut_en: The fact that everyone was going to be able to speak and listen / had to be accommodated ethically, / and it was via a rough egalitarianism.
+      cloze:
+        en: The fact that everyone was going to be able to speak and listen / had to be accommodated ethically, / and it was via a rough egalitarianism.
+        ko:
+        - t: 모든 사람이 말하고 들을 수 있게 되리라는 사실은
+          trap: true
+        - t: 윤리적으로 수용되어야 했다
+          v: 수용
+        - t: 그리고 그것은 대략적인 평등주의를 통해서였다
+          v: 평등주의
   - kind: mc
     sentence: However, that is not a realistic option for scientists who feel a strong sense of responsibility to inform the public / and policymakers and/or to offer suggestions.
     source: 2024 고3 11월 42번
@@ -313,6 +426,15 @@ practice:
       - 'sense of responsibility to V : to를 목적으로 오독 → 추상명사 responsibility를 구체화하는 ''~할 책임감'''
       - 'and/or : 두 to부정사(to inform·to offer)를 대등 연결'
       cut_en: However, that is not a realistic option / for scientists who feel a strong sense of responsibility / to inform the public and policymakers / and/or to offer suggestions.
+      cloze:
+        en: However, that is not a realistic option / for scientists who feel / a strong sense of responsibility to inform the public and policymakers and/or to offer suggestions.
+        ko:
+        - t: 그러나 그것은 현실적인 선택지가 아니다
+          v: 현실적
+        - t: 느끼는 과학자들에게는
+          v: 과학자
+        - t: 대중과 정책 입안자에게 정보를 알리고 그리고/또는 제안을 하려는 강한 책임감을
+          trap: true
   - kind: short
     sentence: In films that tell of futuristic worlds, composers, much like sound designers, have added freedom to create a world that is unknown and new to the viewer.
     source: 2024 고3 11월 32번
@@ -336,6 +458,15 @@ practice:
       - 'a world that is ~ : 관계절을 놓쳐 world를 막연히 둠 → that is 관계절이 world를 ''낯설고 새로운'' 것으로 구체화'
       - 'freedom to V : 목적으로 오독 → ''~할 자유'''
       cut_en: In films that tell of futuristic worlds, / composers, much like sound designers, / have added freedom / to create a world that is unknown and new to the viewer.
+      cloze:
+        en: In films that tell of futuristic worlds, / composers, much like sound designers, have / added freedom to create a world that is unknown and new to the viewer.
+        ko:
+        - t: 미래 세계를 다루는 영화에서
+          v: 미래
+        - t: 작곡가들은, 음향 디자이너들과 매우 흡사하게, 지녀 왔다
+          v: 작곡가
+        - t: 관객에게 미지의, 새로운 세계를 창조할 추가적인 자유를
+          trap: true
   - kind: short
     sentence: ''' That is because geography starts from the premise that it matters where something takes place on Earth''s surface.'
     source: 2025 고3 6월 34번
@@ -359,6 +490,14 @@ practice:
       - 'the premise that절 : that을 관계사로 오독 → 동격 that으로 premise의 내용 구체화'
       - '가주어 it ~ where절 : it을 대명사로 오독 → it은 가주어, where절이 진주어'
       cut_en: That is because / geography starts from the premise / that it matters where something takes place on Earth's surface.
+      cloze:
+        en: That is because / geography starts from / the premise that it matters where something takes place on Earth's surface.
+        ko:
+        - t: 그것은 ~ 때문이다
+        - t: 지리학이 출발한다
+          v: 지리학
+        - t: 어떤 것이 지구 표면의 어디에서 일어나는지가 중요하다는 전제에서
+          trap: true
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress‑design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
@@ -381,6 +520,15 @@ practice:
       key_points:
       - 'dressmaking is a craft : that을 관계사로/is a를 문자적으로 오독 → 동격 that절 안의 ''A는 B다'' 정의 비유로 처리'
       cut_en: Instead of the old rule that dressmaking is a craft, / a modern connection between dress-design and art / was invented / that had not been there before.
+      cloze:
+        en: Instead of the old rule that dressmaking is a craft, / a modern connection between dress-design and art was invented / that had not been there before.
+        ko:
+        - t: 옷 만들기는 공예라는 오래된 규칙 대신
+          trap: true
+        - t: 의상 디자인과 예술 사이의 현대적 연결이 만들어졌다
+          v: 연결
+        - t: 이전에는 존재하지 않았던
+          v: 존재
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
     source: 2025 수능 21번
@@ -405,6 +553,14 @@ practice:
       key_points:
       - 'hunting the shadow, not the substance : shadow·substance를 사냥 장면의 실제 그림자·물체로 읽기 쉽다 → 문맥이 지정한 비유(겉핥기 허상 대 본질)로 치환.'
       cut_en: Those who rely only upon theories / were obviously / hunting the shadow, / not the substance.
+      cloze:
+        en: Those who rely only upon theories / were obviously / hunting the shadow, not the substance.
+        ko:
+        - t: 이론에만 의존하는 사람들은
+          v: 이론
+        - t: 분명히
+        - t: 그림자를 쫓고 있었다 실체가 아니라
+          trap: true
     kind: mc
   - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing them flat and making sure they are hidden on the inside so that we wear clothing rather than pieces of fabric.
     source: 2025 고3 6월 42번
@@ -425,6 +581,15 @@ practice:
       key_points:
       - 'the seams (hidden ... rather than pieces of fabric) : 솔기 감추기를 실제 옷 봉제로만 읽기 쉽다 → 기술의 이음매(구성 요소 경계)를 감춰 조각이 아닌 완결된 전체로 경험하게 하는 설계 비유.'
       cut_en: We aspire to seamless aesthetics / by stitching the seams closely, / pressing them flat / and making sure they are hidden on the inside / so that we wear clothing / rather than pieces of fabric.
+      cloze:
+        en: We aspire to seamless aesthetics / by stitching the seams closely, pressing them flat and making sure they are hidden on the inside / so that we wear clothing rather than pieces of fabric.
+        ko:
+        - t: 우리는 이음매 없는 미학을 추구한다
+          v: 미학
+        - t: 솔기를 촘촘히 꿰매고 평평하게 눌러 안쪽에 숨김으로써
+          trap: true
+        - t: 그래서 우리가 천 조각이 아니라 옷을 입도록
+          v: 옷
     kind: short
   - kind: mc
     sentence: Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and ' the environment act as a coupled system.' This coupled system can be seen as a complete cognitive system of its own.
@@ -452,6 +617,17 @@ practice:
       key_points:
       - 'act as ~ : ''~을 향해 행동하다''로 문자적 오독 → ''~로서 기능하다(하나의 ~에 비유)''로 처리'
       cut_en: Because the environment plays a significant role / in aiding meaningful internal processes, / subjective experience and the environment / act as a coupled system. / This coupled system / can be seen as a complete cognitive system of its own.
+      cloze:
+        en: Because the environment plays a significant role in aiding meaningful internal processes, / subjective experience and the environment / act as a coupled system. / This coupled system can be seen as a complete cognitive system of its own.
+        ko:
+        - t: 환경이 의미 있는 내적 과정을 돕는 데 중요한 역할을 하기 때문에
+          v: 환경
+        - t: 주관적 경험과 환경은
+          v: 경험
+        - t: 하나의 결합된 시스템으로서 작동한다
+          trap: true
+        - t: 이 결합된 시스템은 그 자체로 완전한 인지 체계로 볼 수 있다
+          v: 인지
   - kind: mc
     sentence: If there is a clear line between burned out and not, as there is with a lightbulb, then we have no good way to categorize people who say they are burned out but still manage to do their work competently.
     source: 2024 고3 6월 21번
@@ -478,6 +654,17 @@ practice:
       key_points:
       - 'as there is with N : ''N와 함께 있듯이''로 오독 → ''N의 경우에 (그것이) 있듯이''로 앞 명사를 되받는 비유로 처리'
       cut_en: If there is a clear line / between burned out and not, / as there is with a lightbulb, / then we have no good way to categorize / people who say they are burned out but still manage to do their work competently.
+      cloze:
+        en: If there is a clear line between burned out and not, / as there is with a lightbulb, / then we have no good way to categorize / people who say they are burned out but still manage to do their work competently.
+        ko:
+        - t: 소진과 아님 사이에 뚜렷한 경계가 있다면
+          v: 경계
+        - t: 전구의 경우에 (그런 경계가) 있는 것처럼
+          trap: true
+        - t: 그렇다면 우리는 분류할 좋은 방법이 없다
+          v: 분류
+        - t: 번아웃이라 말하면서도 여전히 유능하게 일을 해내는 사람들을
+          v: 유능
   - kind: mc
     sentence: Even those who describe scientific contests in such a way note that it is a somewhat inaccurate description, given that replication and verification have social value and are common in science.
     source: 2024 고3 11월 38번
@@ -504,6 +691,17 @@ practice:
       key_points:
       - 'scientific contests : ''과학 경연대회(실물)''로 오독 → ''과학을 경쟁·시합에 빗댄 비유''로 처리'
       cut_en: Even those who describe scientific contests in such a way / note / that it is a somewhat inaccurate description, / given that / replication and verification have social value / and are common in science.
+      cloze:
+        en: Even those who describe scientific contests in such a way / note / that it is a somewhat inaccurate description, / given that replication and verification have social value and are common in science.
+        ko:
+        - t: 과학을 그런 식의 경쟁(시합)으로 묘사하는 사람들조차
+          trap: true
+        - t: 지적한다
+          v: 지적
+        - t: 그것이 다소 부정확한 묘사임을
+          v: 부정확
+        - t: 재현과 검증은 사회적 가치가 있고 과학에서 흔하다는 점을 고려하면
+          v: 재현
   - kind: mc
     sentence: The entrance to a honeybee colony, often referred to as the dancefloor, is a market place for information about the state of the colony and the environment outside the hive.
     source: 2023 고3 11월 33번
@@ -530,6 +728,15 @@ practice:
       key_points:
       - 'is a market place for information : ''정보를 매매하는 실제 시장''으로 오독 → ''정보가 오가는 장(場)''이라는 비유로 처리'
       cut_en: The entrance to a honeybee colony, / often referred to as the dancefloor, / is a market place for information / about the state of the colony / and the environment outside the hive.
+      cloze:
+        en: The entrance to a honeybee colony, / often referred to as the dancefloor, / is a market place for information about the state of the colony and the environment outside the hive.
+        ko:
+        - t: 벌집 입구는
+          v: 벌집
+        - t: 흔히 무도장이라 불리는
+          v: 무도장
+        - t: 군집의 상태와 벌통 바깥 환경에 관한 정보가 오가는 장이다
+          trap: true
   - kind: short
     sentence: 'Adrianne Hardman has summarized this serious situation for public health: "Physical inactivity is a waste of human potential for health and well‑being."'
     source: 2025 고3 6월 36번
@@ -552,6 +759,15 @@ practice:
       key_points:
       - 'A is a waste of B : ''A가 B를 낭비한다''로 오독 → ''A는 곧 B의 낭비다''라는 등치 비유로 처리'
       cut_en: 'Adrianne Hardman has summarized / this serious situation for public health: / "Physical inactivity is / a waste of human potential / for health and well-being."'
+      cloze:
+        en: 'Adrianne Hardman has summarized this serious situation for public health: / Physical inactivity is / a waste of human potential for health and well-being.'
+        ko:
+        - t: Adrianne Hardman은 공중 보건에 관한 이 심각한 상황을 요약했다
+          v: 심각
+        - t: 신체 활동 부족은
+          v: 신체 활동 부족
+        - t: 건강과 행복을 위한 인간 잠재력의 낭비이다
+          trap: true
   - kind: short
     sentence: The history of surviving dress really only starts in the century, and like all artefacts described as fine or decorative art, is a highly visual subject.
     source: 2026 고3 11월 42번
@@ -574,3 +790,12 @@ practice:
       key_points:
       - 'like all artefacts ~ : like를 동사로/삽입구를 주어로 오독 → ''~와 마찬가지로''라는 비유 전치사구로 처리하고 본동사 is의 주어는 The history'
       cut_en: The history of surviving dress / really only starts in the century, / and like all artefacts / described as fine or decorative art, / is a highly visual subject.
+      cloze:
+        en: The history of surviving dress really only starts in the century, and / like all artefacts described as fine or decorative art, / is a highly visual subject.
+        ko:
+        - t: 현존하는 의복의 역사는 사실상 그 세기에 와서야 비로소 시작되고
+          v: 의복
+        - t: 순수미술이나 장식미술로 분류되는 모든 인공물과 마찬가지로
+          trap: true
+        - t: 매우 시각적인 주제이다
+          v: 시각적

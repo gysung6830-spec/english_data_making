@@ -737,3 +737,23 @@ body {
 .tf { background: #eafaf2; border: 1.2px solid var(--navy2); border-radius: 6px; padding: 0 8px; font-weight: 800; color: var(--navy); }
 .tf .tm { display: inline-block; background: var(--navy); color: #fff; border-radius: 50%;
   width: 14px; height: 14px; line-height: 14px; text-align: center; font-size: 8.5px; margin-right: 5px; }
+
+/* ── 2부 필자의도(방향·극성) 위젯 ── */
+.iw { display: flex; align-items: center; gap: 10px; margin: 6px 0; }
+.iw-bx { flex: 1; border: 1.4px solid var(--tint2); border-radius: 9px; padding: 8px 11px; font-size: 10.3px; background: #fbfdfc; }
+.iw-bx.ok { border-color: var(--navy2); background: #eefaf2; }
+.iw-bx.no { border-color: var(--wrong); background: var(--wrong-bg); color: #7a2b22; }
+.iw-tag { display: inline-block; font-size: 8px; font-weight: 800; border-radius: 4px; padding: 1px 6px; margin-right: 6px; color: #fff; }
+.iw-tag.a { background: var(--navy2); } .iw-tag.b { background: var(--gold); } .iw-tag.x { background: var(--wrong); }
+.iw-mid { flex: 0 0 auto; color: var(--muted); font-weight: 800; font-size: 10px; text-align: center; min-width: 84px; }
+.iw-mid.arr { color: var(--navy2); font-size: 20px; } .iw-mid.iw-eq { color: var(--navy2); font-size: 18px; }
+.iw-ask { color: var(--muted); font-size: 9.3px; margin-top: 3px; }
+.iw-pol { font-size: 10.3px; margin: 4px 0; line-height: 2.0; }
+.iw-chip { display: inline-block; border: 1.3px solid var(--tint2); border-radius: 14px; padding: 2px 10px; margin: 2px 4px 0 0; font-size: 9.6px; color: #3a444c; }
+.iw-chip.pick { border-color: var(--navy2); background: #eefaf2; color: var(--navy); font-weight: 800; }
+.iw-chip.xed { border-color: var(--wrong); background: var(--wrong-bg); color: #7a2b22; text-decoration: line-through; }
+.iw-chip.faded { opacity: .4; }
+.iw-line { margin-top: 8px; font-size: 9.8px; color: var(--navy2); font-weight: 700; }
+.iw-bl { display: inline-block; width: 58%; border-bottom: 1.4px dashed #b9cfc7; height: 13px; vertical-align: middle; }
+.iw-wrap { margin: 4px 0 6px; }
+mark.sig { background: #fdeecf; color: #8a5a2b; font-weight: 800; padding: 0 3px; border-radius: 3px; }

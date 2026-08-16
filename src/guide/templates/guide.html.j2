@@ -51,6 +51,43 @@
 {% endmacro %}
 
 {# 실전적용: 문제(여러 개, 페이지 채움) → 해설(같은 수) 배치 #}
+{# ── 2부 필자의도(방향·극성) 위젯 ── #}
+{% macro intent_widget(iw, ans) %}
+{% if iw.kind == 'arrow' %}
+  <div class="iw">
+    <div class="iw-bx{{ ' ok' if ans }}">{% if ans %}<span class="iw-tag a">{{ iw.a_label or '원인' }}</span>{% endif %}{{ iw.a }}</div>
+    <div class="iw-mid{{ ' arr' if ans }}">{% if ans %}⟶{% else %}?&nbsp;⟶ ?&nbsp;⟵ ?{% endif %}</div>
+    <div class="iw-bx{{ ' ok' if ans }}">{% if ans %}<span class="iw-tag b">{{ iw.b_label or '결과' }}</span>{% endif %}{{ iw.b }}</div>
+  </div>
+  {% if not ans %}<div class="iw-ask">▸ 어느 쪽이 <b>{{ iw.a_label or '원인' }}</b>이고 어느 쪽이 <b>{{ iw.b_label or '결과' }}</b>인가? 방향(→)을 표시하라.</div>{% endif %}
+{% elif iw.kind == 'contrast' %}
+  <div class="iw">
+    <div class="iw-bx{{ ' ok' if ans }}">{% if ans %}<span class="iw-tag a">○ 강조</span>{% endif %}{{ iw.a }}</div>
+    <div class="iw-mid">{% if ans %}vs{% else %}○강조? ✕배제?{% endif %}</div>
+    <div class="iw-bx{{ ' no' if ans }}">{% if ans %}<span class="iw-tag x">✕ 배제</span>{% endif %}{{ iw.b }}</div>
+  </div>
+  {% if not ans %}<div class="iw-ask">▸ 필자가 <b>강조</b>하는 쪽에 ○, <b>버리는(배제)</b> 쪽에 ✕.</div>{% endif %}
+{% elif iw.kind == 'equal' %}
+  <div class="iw">
+    <div class="iw-bx{{ ' ok' if ans }}">{{ iw.a }}</div>
+    <div class="iw-mid iw-eq">=</div>
+    <div class="iw-bx{{ ' ok' if ans }}">{{ iw.b }}</div>
+  </div>
+  {% if not ans %}<div class="iw-ask">▸ 두 부분이 <b>같은 말(A = B · 재진술)</b>인지 확인하라.</div>{% endif %}
+{% elif iw.kind == 'polarity' %}
+  <div class="iw-pol">「{{ iw.stmt }}」{% if ans %} →{% endif %}
+    {% set opts = [('⊕','항상/강하게 그렇다','positive'),('◐','항상 ~인 것은 아니다','partial'),('⊖','결코/전혀 아니다','negative')] %}
+    {% for sym,txt,key in opts %}{% if ans %}{% if key == iw.polarity %}<span class="iw-chip pick">{{ sym }} {{ txt }} ✓</span>{% elif (iw.polarity=='partial' and key=='negative') or (iw.polarity=='negative' and key=='positive') or (iw.polarity=='positive' and key=='negative') %}<span class="iw-chip xed">{{ sym }} {{ txt }} ✕</span>{% else %}<span class="iw-chip faded">{{ sym }} {{ txt }}</span>{% endif %}{% else %}<span class="iw-chip">{{ sym }} {{ txt }}</span>{% endif %}{% endfor %}
+  </div>
+  {% if not ans %}<div class="iw-ask">▸ 이 서술이 미는 극성에 ○표.</div>{% endif %}
+{% elif iw.kind == 'logic' %}
+  <div class="iw-pol">「{{ iw.clause }}」의 논리 =
+    {% for lg in ['대조','부연','예시','인과','양보'] %}{% if ans %}{% if lg == iw.logic %}<span class="iw-chip pick">{{ lg }} ✓</span>{% else %}<span class="iw-chip faded">{{ lg }}</span>{% endif %}{% else %}<span class="iw-chip">{{ lg }}</span>{% endif %}{% endfor %}
+  </div>
+  {% if not ans %}<div class="iw-ask">▸ 이 연결어가 이끄는 논리 종류에 ○표.</div>{% endif %}
+{% endif %}
+{% endmacro %}
+
 {% macro drill_pages(title, practice) %}
 {% set dnums = ['①','②','③','④','⑤'] %}
 {% set tnums = ['①','②','③','④','⑤','⑥'] %}
@@ -60,9 +97,12 @@
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="dq-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{% if s and s.cloze and s.cloze.en %}{{ s.cloze.en | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{% else %}{{ pr.sentence }}{% endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
+      <span class="dq-sent">{%- if s and s.intent and s.intent.kind -%}{%- if s.intent.signal -%}{{ pr.sentence | replace(s.intent.signal, '<mark class="sig">' + s.intent.signal + '</mark>') | safe }}{%- else -%}{{ pr.sentence }}{%- endif -%}{%- elif s and s.cloze and s.cloze.en -%}{{ s.cloze.en | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{%- else -%}{{ pr.sentence }}{%- endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
     </div>
-    {% if s and s.cloze and s.cloze.ko %}
+    {% if s and s.intent and s.intent.kind %}
+      {{ intent_widget(s.intent, false) }}
+      <div class="iw-line">✍ 필자의 의도 한 줄: <span class="iw-bl"></span></div>
+    {% elif s and s.cloze and s.cloze.ko %}
       <div class="cloze-q">{% set tc = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set tc.n = tc.n + 1 %}<span class="tb"><span class="tm">{{ tnums[tc.n-1] }}</span><span class="tl"></span></span>{% elif c.v %}{{ c.t | replace(c.v, '<span class="vb"></span>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% else %}
       <div class="dq-prompt">Q. {{ pr.prompt | replace('▷ 오역:', '<br>▷ 오역:') | safe }}</div>
@@ -78,10 +118,12 @@
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="sol-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
+      <span class="dq-sent">{%- if s and s.intent and s.intent.kind -%}{%- if s.intent.signal -%}{{ pr.sentence | replace(s.intent.signal, '<mark class="sig">' + s.intent.signal + '</mark>') | safe }}{%- else -%}{{ pr.sentence }}{%- endif -%}{%- else -%}{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{%- endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
     </div>
     {% if s %}
-    {% if s.cloze and s.cloze.ko %}
+    {% if s.intent and s.intent.kind %}
+      <div class="iw-wrap">{{ intent_widget(s.intent, true) }}</div>
+    {% elif s.cloze and s.cloze.ko %}
       <div class="cloze-a"><span class="sol-tag">채운 직독직해</span>{% set ta = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set ta.n = ta.n + 1 %}<span class="tf"><span class="tm">{{ tnums[ta.n-1] }}</span>{{ c.t }}</span>{% elif c.v %}{{ c.t | replace(c.v, '<u class="vf">' + c.v + '</u>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% elif s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
