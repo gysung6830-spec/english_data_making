@@ -281,31 +281,31 @@
     "n": 3,
     "tx": "the pride you take in your achievement is <b>unreliable</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 외부 요인 탓 성취에 대한 자부심이 신뢰할 수 없음"
    },
    {
     "n": 1,
     "tx": "perceptions of self-growth vary from person to person",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 자기 성장 인식이 사람마다 다르다는 얘기가 아님"
    },
    {
     "n": 2,
     "tx": "self-confidence is an outcome of constant effort",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 자신감이 노력의 결과라는 건 지문과 반대"
    },
    {
     "n": 4,
     "tx": "performance <span class=\"reuse\">comparison</span> to partners is demotivating",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 일부만 — 비교는 착각의 한 원천이지 의욕 저하가 요지 아님"
    },
    {
     "n": 5,
     "tx": "ambitious goals help you improve performance",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 야심찬 목표 얘기는 지문에 언급 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 성취에 대한 자부심은 믿을 수 없음 · <span class=\"xo\">①</span>자기성장 인식 차이 <span class=\"xo\">②</span>꾸준한 노력의 결과 <span class=\"xo\">④</span>비교가 의욕 저하 <span class=\"xo\">⑤</span>야심찬 목표",
@@ -3093,31 +3093,31 @@
     "n": 1,
     "tx": "일상에서 스트레스 경험을 아예 마주치지 않음",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위 초과 — 달걀은 여전히 부치므로 스트레스를 안 겪는 게 아님"
    },
    {
     "n": 2,
     "tx": "관점을 넓혀 스트레스의 <span class=\"reuse\">원인</span>을 규명",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 스트레스 원인 규명은 지문에 언급 없음"
    },
    {
     "n": 3,
     "tx": "경험의 긍정적 측면에만 주의를 한정하지 않음",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 긍정적 측면에만 한정한다는 얘기는 지문에 없음"
    },
    {
     "n": 4,
     "tx": "스트레스적 측면을 넘어 경험을 더 큰 관점으로 봄",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 시야를 넓혀 스트레스가 달라붙지 않게 함(달걀이 안 붙듯)"
    },
    {
     "n": 5,
     "tx": "넓은 시야 형성의 원천으로 스트레스를 고려",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 스트레스가 시야의 원천이 아니라 넓힌 시야가 스트레스를 줄임"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 스트레스 넘어 경험 전체를 큰 관점으로 · <span class=\"xo\">①</span>회피 <span class=\"xo\">②</span>원인규명 <span class=\"xo\">③</span>긍정만 <span class=\"xo\">⑤</span>스트레스가 원천",
@@ -6026,31 +6026,31 @@
     "n": 1,
     "tx": "주관적 관점에 영향받은 현실 인식",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 무관점의 객관적 시각을 뜻하지 주관적 인식이 아님."
    },
    {
     "n": 2,
     "tx": "대다수가 지닌 소중한 관점",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 다수가 지닌 소중한 관점이란 서술은 없음."
    },
    {
     "n": 3,
     "tx": "극소수가 채택한 특정 관점",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 특정 관점이 아니라 관점 자체가 없는 시각을 뜻함."
    },
    {
     "n": 4,
     "tx": "편견을 물리치는 비판적 통찰",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 편견을 물리치는 통찰이라는 내용은 없음."
    },
    {
     "n": 5,
     "tx": "세계에 대한 편향 없고 객관적인 시각",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 관점 없이 보는, 존재하지 않는 편향 없는 객관적 시각."
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 편향 없고 객관적인 시각(=관점 없는 시선) · <span class=\"xo\">①</span>주관적 인식(정반대) · <span class=\"xo\">③</span>특정 관점(정반대) · <span class=\"xo\">②④</span>지문 근거 없음",
@@ -8567,31 +8567,31 @@
     "n": 1,
     "tx": "the claim that animal consciousness should be studied",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 그가 옹호한 주장이라 버릴 대상이 아님"
    },
    {
     "n": 2,
     "tx": "the belief that consciousness is a quality exclusive to humans",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 의식이 인간만의 것이란 믿음을 버릴 때가 됨"
    },
    {
     "n": 3,
     "tx": "the illusion that animals possess truly conscious inner worlds",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 그는 동물의 내면세계를 믿었으므로 반대"
    },
    {
     "n": 4,
     "tx": "the idea that human cognition is superior to that of animals",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 근거 없음 — 인간 인지 우월성 자체를 버리자는 게 아님"
    },
    {
     "n": 5,
     "tx": "the concept that humans and animals are essentially alike",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 근거 없음 — 인간·동물이 본질적으로 같다는 개념이 아님"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> '의식은 인간만의 것'이란 믿음을 버림 · <span class=\"xo\">①</span>동물 의식 연구(그리핀 주장=포기 아님) <span class=\"xo\">③</span>동물 내면=착각(정반대) <span class=\"xo\">④</span>인지 우월성(초점 벗어남) <span class=\"xo\">⑤</span>인간=동물 동일(과장)",
@@ -11059,31 +11059,31 @@
     "n": 1,
     "tx": "identified tonal differences within the <span class=\"reuse\">same octave</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 같은 옥타브 내 음차 식별은 요지가 아님"
    },
    {
     "n": 2,
     "tx": "returned to the original note with an identical <span class=\"reuse\">frequency</span>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 주파수는 2배로 달라져 동일 주파수가 아님"
    },
    {
     "n": 3,
     "tx": "reached a note named the same but with a different pitch",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주파수 2배로 이름은 같되 음높이는 다른 음에 도달"
    },
    {
     "n": 4,
     "tx": "restored musical sensitivity by adapting to various octaves",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 음악적 감수성 회복은 지문에 언급 없음"
    },
    {
     "n": 5,
     "tx": "constructed <span class=\"reuse\">frequency</span> patterns from notes with the same name",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 표면 — 같은 이름 음으로 패턴 구성은 밑줄 뜻과 무관"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 이름은 같으나 음높이가 다른 음에 도달 · <span class=\"xo\">①</span>같은 옥타브 내 <span class=\"xo\">②</span>동일 주파수(정반대) <span class=\"xo\">④</span>감수성 회복 <span class=\"xo\">⑤</span>패턴 구성",
@@ -13285,31 +13285,31 @@
     "n": 3,
     "tx": "a right to use one aspect of the property",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 소유권 다발 중 하나, 자원의 한 측면에 대한 권리."
    },
    {
     "n": 1,
     "tx": "a legal obligation to develop the resource",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — stick은 권리이지 자원 개발 의무가 아님."
    },
    {
     "n": 2,
     "tx": "a priority to legally claim the real estate",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 부동산 주장 우선권이란 서술은 없음."
    },
    {
     "n": 4,
     "tx": "a building to be shared equally by <span class=\"reuse\">tenants</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 세입자가 균등 공유하는 건물이란 내용은 없음."
    },
    {
     "n": 5,
     "tx": "a piece of <span class=\"reuse\">land</span> nobody can claim as their own",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 각 당사자가 stick을 소유하지 무소유의 땅이 아님."
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 재산의 한 측면을 쓸 권리 하나 · <span class=\"xo\">①</span>개발 의무 <span class=\"xo\">②</span>청구 우선권 <span class=\"xo\">④</span>공유 건물 <span class=\"xo\">⑤</span>누구도 못 갖는 땅",
@@ -15600,31 +15600,31 @@
     "n": 1,
     "tx": "use <b>writing</b> as a means of reflecting on oneself",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 일기 쓰기로 자신을 대상화해 성찰·자기비판하는 것."
    },
    {
     "n": 2,
     "tx": "build identity by reading <span class=\"reuse\">others’ diaries</span>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 정반대 — 자신을 위해 쓰는 것이지 남의 일기를 읽는 게 아님."
    },
    {
     "n": 3,
     "tx": "exchange <b>feedback</b> in the process of writing",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 사적·개인적 글쓰기라 피드백 교환과 무관."
    },
    {
     "n": 4,
     "tx": "create an alternate ego to present to <b>others</b>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 남에게 보일 자아가 아니라 사적 영역서 자신에게 공개."
    },
    {
     "n": 5,
     "tx": "develop <b>topics</b> for writing about selfhood",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 표면 — 글감 개발이 아니라 자기 성찰·탐구가 핵심."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 글쓰기로 자기를 성찰 · <span class=\"xo\">②</span>타인의 일기 <span class=\"xo\">③</span>피드백 교환 <span class=\"xo\">④</span>타인용 또 다른 자아 <span class=\"xo\">⑤</span>글감 개발",
@@ -18165,31 +18165,31 @@
     "n": 1,
     "tx": "혁신적 행동 노선을 따르기",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 근거 없음 — 지문은 창의적 일 우선일 뿐, 혁신 노선과 무관."
    },
    {
     "n": 2,
     "tx": "남의 요구를 만족시키려 애쓰기",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 빈 편지함은 반응 업무·남의 요구에 매달려 꿈을 버리는 것."
    },
    {
     "n": 3,
     "tx": "어려운 일을 실수 없이 완수하기",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 이메일 응답 강박 얘기지 일의 난이도·실수와 무관."
    },
    {
     "n": 4,
     "tx": "정신적 균형 위해 사회적 관계 끊기",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 정반대 — 관계를 끊는 게 아니라 반응 업무 압박을 끊자는 취지."
    },
    {
     "n": 5,
     "tx": "사회적 관계망 기회 확보하기",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 인맥 기회 확보는 지문에 언급 없음."
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> '빈 편지함' 채우기 = 남의 요구에 부응 · <span class=\"xo\">①</span>창의적 일(정반대) <span class=\"xo\">③</span>실수 없는 완수 <span class=\"xo\">④</span>관계 단절 <span class=\"xo\">⑤</span>인맥 기회",
@@ -20396,31 +20396,31 @@
     "n": 3,
     "tx": "engaging in <b>little direct contact</b> with the people being studied",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 현지인과 시간을 거의 안 보내 직접 접촉이 적었음"
    },
    {
     "n": 1,
     "tx": "seeking to build <b>long-lasting relationships</b> with the natives",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 현지인과 오래 지내지 않아 관계 형성과 반대"
    },
    {
     "n": 2,
     "tx": "participating in collaborative research with <span class=\"reuse\">natural scientists</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 자연과학자와의 공동 연구는 지문에 없음"
    },
    {
     "n": 4,
     "tx": "cooperating actively with <span class=\"reuse\">Western hosts</span> in the local community",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 일부만 — 서구인 host 언급은 있으나 밑줄 뜻은 접촉 부족"
    },
    {
     "n": 5,
     "tx": "struggling to take a <b>wider view</b> of the native culture examined",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 더 넓은 시각 확보 노력은 언급 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 연구 대상과 직접 접촉이 거의 없음 · <span class=\"xo\">①</span>지속적 관계 형성(반대) <span class=\"xo\">②</span>자연과학자와 공동연구 <span class=\"xo\">④</span>서구 호스트와 적극 협력 <span class=\"xo\">⑤</span>더 넓은 시각",
@@ -29722,31 +29722,31 @@
     "n": 1,
     "tx": "비전문가가 대중화한 의심스러운 사실",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 지문은 전문가 신뢰 필요이지 비전문가 정보가 아님."
    },
    {
     "n": 2,
     "tx": "전문가가 제공하는 즉시 활용 가능한 정보",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 통근 준비 결정은 전문가가 준 정보를 활용해 내리는 것."
    },
    {
     "n": 3,
     "tx": "중요한 결정에 거의 영향을 주지 않는 상식",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 전문가 정보는 결정에 필수, 영향 없는 상식이 아님."
    },
    {
     "n": 4,
     "tx": "전문가와 <span class=\"reuse\">일반인</span>이 함께 만든 실용 정보",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 일부만 — 지역민 기여 언급은 있으나 밑줄 핵심은 전문가 신뢰."
    },
    {
     "n": 5,
     "tx": "<span class=\"reuse\">지역</span> 사회에 널리 퍼진 편향된 지식",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 지역의 편향된 지식이라는 부정적 서술은 없음."
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 전문가의 즉시 활용 가능한 정보 · <span class=\"xo\">①</span>비전문가 의심 사실 <span class=\"xo\">③</span>결정 무관 상식 <span class=\"xo\">④</span>전문가+일반인 정보 <span class=\"xo\">⑤</span>편향된 지역 지식",
@@ -31068,31 +31068,31 @@
     "n": 1,
     "tx": "우리 각자의 취향에 맞는 음악으로 이끈다",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 취향 차이가 각자를 서로 다른 음악으로 이끎을 뜻함."
    },
    {
     "n": 2,
     "tx": "다른 청취자들과 관계를 형성하게 한다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 다른 청취자와의 관계 형성은 언급 없음."
    },
    {
     "n": 3,
     "tx": "알고리즘의 잦은 업데이트를 요청하게 한다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 알고리즘 업데이트 요청은 지문에 없음."
    },
    {
     "n": 4,
     "tx": "재능 있지만 알려지지 않은 음악가를 찾게 한다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 일부만 — gems 언급은 있으나 핵심은 취향 수렴 방지·다양화."
    },
    {
     "n": 5,
     "tx": "특정 음악 장르에 대한 선호를 무시하게 한다",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 개인 취향을 무시가 아니라 오히려 반영해 이끎."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 각자 취향에 맞는 음악으로 이끔 · <span class=\"xo\">②</span>청취자 관계 <span class=\"xo\">③</span>업데이트 요청 <span class=\"xo\">④</span>무명 음악가 <span class=\"xo\">⑤</span>선호 무시",
@@ -32366,31 +32366,31 @@
     "n": 1,
     "tx": "완벽 추구가 팀원 간 갈등을 일으킨다",
     "verdict": "x",
-    "jd": "✘ 없음(갈등 미언급)"
+    "jd": "✘ 근거 없음 — 팀원 간 갈등을 일으킨다는 언급은 없음."
    },
    {
     "n": 2,
     "tx": "자신을 증명하려고 업무 품질을 높이는 것은 바람직하지 않다",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 자기 과시로 품질을 높이면 가치 없이 자원만 낭비함."
    },
    {
     "n": 3,
     "tx": "과잉 자격의 전문가를 초빙하면 나쁜 결과로 이어진다",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위 초과 — 전문가 초빙이 아니라 도금 행위 자체가 문제."
    },
    {
     "n": 4,
     "tx": "고객의 변화하는 요구에 대응하는 것은 불필요하다",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 근거 없음 — 고객의 변화하는 요구 대응 얘기는 없음."
    },
    {
     "n": 5,
     "tx": "프로젝트용 다양한 기술 습득이 성공을 보장하진 않는다",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 일부만 — 기술 습득 언급은 있으나 핵심은 과잉 작업 경계."
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 자기증명용 품질 향상은 바람직X · <span class=\"xo\">①</span>팀 갈등 <span class=\"xo\">③</span>과잉자격 전문가 <span class=\"xo\">④</span>고객요구 대응 불필요 <span class=\"xo\">⑤</span>기술습득≠성공",
@@ -33596,31 +33596,31 @@
     "n": 1,
     "tx": "번아웃에 대한 공개 <span class=\"reuse\">논의</span>는 아직 끝나지 않았다",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 — 'last word'를 공개 논의로 곧이곧대로 해석"
    },
    {
     "n": 2,
     "tx": "더 심한 탈진에 이를 여지가 아직 남아 있다",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 부분적 탈진이라 더 심한 탈진에 이를 여지가 남음"
    },
    {
     "n": 3,
     "tx": "전부 아니면 전무라는 기준이 번아웃 증상에 적용된다",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 지문은 흑백 기준을 거부하고 스펙트럼을 주장"
    },
    {
     "n": 4,
     "tx": "탈진은 심각도에 따라 서로 다른 방식으로 극복된다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 극복 방식 차이는 지문에 언급 없음"
    },
    {
     "n": 5,
     "tx": "탈진의 정도는 개인의 인식에 의해 형성된다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 인식이 탈진 정도를 형성한다는 언급 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 더 심한 탈진 여지 남음 · <span class=\"xo\">①</span>논의 안 끝남 <span class=\"xo\">③</span>흑백 기준 적용 <span class=\"xo\">④</span>심각도별 극복 <span class=\"xo\">⑤</span>인식이 좌우",
@@ -34806,31 +34806,31 @@
     "n": 1,
     "tx": "현행 기준을 무시한 채 <b>역사적 선례</b>를 따르는 것",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 역사적 선례 추종은 지문에 언급 없음"
    },
    {
     "n": 2,
     "tx": "건축의 예술적 측면보다 <b>물질적 측면</b>을 우선하는 것",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 표면 — 'substance'를 물질적 측면으로 곧이곧대로 해석"
    },
    {
     "n": 3,
     "tx": "<b>실무 기술 없이</b> 건축의 <b>이상만</b> 추구하는 것",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 실무 기술 없이 이론·이상만 좇는 것을 가리킴"
    },
    {
     "n": 4,
     "tx": "건축 목표 달성에 필요한 <b>과목들을 무시</b>하는 것",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 일부만 — 이들은 이론은 갖췄고 문제는 실무 부재"
    },
    {
     "n": 5,
     "tx": "건축 전통이 강조한 <b>추상적 지식</b>을 추구하는 것",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 전통이 추상적 지식을 강조했다는 언급 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 실무 없이 이상만 추구 · <span class=\"xo\">①</span>옛 선례 <span class=\"xo\">②</span>예술보다 물질 <span class=\"xo\">④</span>필요 과목 무시 <span class=\"xo\">⑤</span>전통의 추상 지식",
@@ -42089,35 +42089,35 @@
     "n": 1,
     "tx": "identifying",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 로고 문신까지 새길 만큼 '동일시'하는 소비자 예시로 자연스러움",
     "ko": "(자기 회사와) 동일시하는"
    },
    {
     "n": 2,
     "tx": "passionate",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 팬의 관심이 집착에 이를 만큼 '열정적'이라는 흐름에 맞음",
     "ko": "열정적인"
    },
    {
     "n": 3,
     "tx": "failure",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 경기장에서의 '실패'에도 충성이 유지된다는 맥락에 맞음",
     "ko": "실패"
    },
    {
     "n": 4,
     "tx": "increase",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>낮춘다(reduce)</b>여야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 과거 집착이 효율성을 '감소시켜야' 하는데 increase(증가)로 어긋남",
     "ko": "증가시키다"
    },
    {
     "n": 5,
     "tx": "defeated",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 전통과의 단절 탓에 제안이 '무산된다'는 흐름에 맞음",
     "ko": "무산되다(부결되다)"
    }
   ],
@@ -42367,35 +42367,35 @@
     "n": 1,
     "tx": "limit",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 여러 제약이 도로망 확장 선택지를 '제한한다'에 맞음",
     "ko": "제한하다"
    },
    {
     "n": 2,
     "tx": "persuading",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 차를 안 쓰도록 '설득하는 것'이 핵심 과제라는 흐름에 맞음",
     "ko": "설득하는 것"
    },
    {
     "n": 3,
     "tx": "alternative",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 보행·자전거 등 '대안' 수단의 질 개선이라는 맥락에 맞음",
     "ko": "대안의"
    },
    {
     "n": 4,
     "tx": "accommodating",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>관리·억제(managing)</b>여야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 비싸게·제한 = 수요 '억제'여야 하는데 accommodating(수용)으로 어긋남",
     "ko": "수용하는 것"
    },
    {
     "n": 5,
     "tx": "reinforces",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 기후변화 기여가 이 당위성을 '강화한다'는 흐름에 맞음",
     "ko": "강화하다"
    }
   ],
@@ -42657,35 +42657,35 @@
     "n": 1,
     "tx": "remote",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 산업혁명 때 별개의 '동떨어진' motorspace로 안 갔다에 맞음",
     "ko": "멀리 떨어진, 동떨어진"
    },
    {
     "n": 2,
     "tx": "absorption",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 모터를 삶 속으로 들여온 '흡수'였다는 흐름에 맞음",
     "ko": "흡수, 받아들임"
    },
    {
     "n": 3,
     "tx": "affected",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 이 혁신이 일상에 깊이 '영향을 미쳤다'는 맥락에 맞음",
     "ko": "영향을 미쳤다"
    },
    {
     "n": 4,
     "tx": "adapt",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 기술이 사람에게 '적응해야' 한다는 주장에 맞음",
     "ko": "적응하다"
    },
    {
     "n": 5,
     "tx": "maintain",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>지연(delay)</b>이어야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 잘못 믿을수록 융합을 '지연시켜야' 하는데 maintain(유지)로 어긋남",
     "ko": "유지하다"
    }
   ],
@@ -42939,35 +42939,35 @@
     "n": 1,
     "tx": "particular",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — '특정' 지리적 지역의 섬유를 쓰던 방식이라는 맥락에 맞음",
     "ko": "특정한"
    },
    {
     "n": 2,
     "tx": "increased",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 지역 간 교역이 섬유 가용성을 '증가시켰다'에 맞음",
     "ko": "증가시켰다"
    },
    {
     "n": 3,
     "tx": "added",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 산업혁명이 'place-bound' 탈피에 '더했다'는 흐름에 맞음",
     "ko": "더했다, 기여했다"
    },
    {
     "n": 4,
     "tx": "countered",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>만들어냈다(created)</b>여야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 소비자·제품의 단절을 '초래해야' 하는데 countered(상쇄)로 어긋남",
     "ko": "반박했다, 상쇄했다"
    },
    {
     "n": 5,
     "tx": "reconnects",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 장소 가치 회복이 사람·지역을 '다시 연결한다'에 맞음",
     "ko": "다시 연결한다"
    }
   ],
@@ -43222,35 +43222,35 @@
     "n": 1,
     "tx": "least",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 통제 전략이 자율적 가치 부여를 '가장 적게' 이끈다는 흐름",
     "ko": "가장 적게"
    },
    {
     "n": 2,
     "tx": "work",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 통제가 행동을 만드는 데 '효과 있다'는 반박 문장에 맞음",
     "ko": "작동하다, 효과가 있다"
    },
    {
     "n": 3,
     "tx": "develop",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 스스로 가치를 '형성하지' 못한다는 뒤 내용과 이어짐",
     "ko": "발달시키다, 형성하다"
    },
    {
     "n": 4,
     "tx": "drives",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>저해한다(undermines)</b>여야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 외적 통제는 자기책임감을 '저해'해야 하는데 'drives(촉진)'로 반대",
     "ko": "촉진하다, 몰아가다"
    },
    {
     "n": 5,
     "tx": "minimum",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 외적 유인을 '최소한'만 쓰는 부모가 자발성 기른다는 흐름",
     "ko": "최소한"
    }
   ],
@@ -43500,35 +43500,35 @@
     "n": 1,
     "tx": "desire",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 목표 달성 동기와 관계 유지 '욕구' 간 갈등 서술에 맞음",
     "ko": "욕구"
    },
    {
     "n": 2,
     "tx": "internal",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 경쟁자가 겪는 '내적' 갈등이라는 흐름에 자연스러움",
     "ko": "내적인"
    },
    {
     "n": 3,
     "tx": "uncomfortable",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 상향 비교 대상이 되면 '불편'해진다는 뒤 감정 서술에 맞음",
     "ko": "불편한"
    },
    {
     "n": 4,
     "tx": "stronger",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>더 약한(weaker)</b>이어야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 동기 저하 맥락이라 '더 약한'이어야 하는데 'stronger'로 반대",
     "ko": "더 강한"
    },
    {
     "n": 5,
     "tx": "diminishing",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 결과 중요성을 '축소'하는 협력적 태도 예시에 자연스러움",
     "ko": "축소하는(줄이는)"
    }
   ],
@@ -43801,35 +43801,35 @@
     "n": 1,
     "tx": "remove",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 개입적 대응이 쓰러진 나무를 '제거'한다는 예시에 맞음",
     "ko": "제거하다"
    },
    {
     "n": 2,
     "tx": "permanently",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 길을 포장해 '영구적'으로 고정한다는 흐름에 자연스러움",
     "ko": "영구적으로"
    },
    {
     "n": 3,
     "tx": "create",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 고도근대적 조치로 초고속도로를 '만든다'는 예시에 맞음",
     "ko": "만들다"
    },
    {
     "n": 4,
     "tx": "modesty",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 앎에 대한 지적 '겸손'이라는 소프트패스 장점 서술에 맞음",
     "ko": "겸손함"
    },
    {
     "n": 5,
     "tx": "insignificant",
     "verdict": "ok",
-    "jd": "✔ 문맥상 <b>중요한(significant)</b>이어야 하는데 반대 낱말",
+    "jd": "✔ 정답 — 강의 변동을 '중요'하게 본다여야 하는데 'insignificant'로 반대",
     "ko": "중요하지 않은"
    }
   ],
@@ -44062,35 +44062,35 @@
     "n": 1,
     "tx": "reduce",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 유기농이 수확량을 '줄이고' 비용을 늘린다는 흐름에 맞음",
     "ko": "줄이다, 감소시키다"
    },
    {
     "n": 2,
     "tx": "essential",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 무기 질소 공급이 생산성 유지에 '필수적'이라는 근거에 맞음",
     "ko": "필수적인"
    },
    {
     "n": 3,
     "tx": "benefits",
     "verdict": "ok",
-    "jd": "✔ 문맥상 limits(한계) 뜻이어야 하는데 반대 낱말(benefits)",
+    "jd": "✔ 정답 — 잡초 방제 어려움 등 '결점'이어야 하는데 benefits(이점)로 어긋남",
     "ko": "이점, 이득"
    },
    {
     "n": 4,
     "tx": "fewer",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 사회가 부유해지면 이 일 할 사람이 '더 적어진다'에 맞음",
     "ko": "더 적은"
    },
    {
     "n": 5,
     "tx": "contributions",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 윤작 등이 지속가능성에 '기여한다'는 흐름에 맞음",
     "ko": "기여, 이바지"
    }
   ],
@@ -44319,35 +44319,35 @@
     "n": 1,
     "tx": "qualifications",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — '자격'과 무관하게 누구나 의견을 낸다는 흐름에 맞음",
     "ko": "자격"
    },
    {
     "n": 2,
     "tx": "preventing",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 교사의 의학 조언을 '막는' 규제가 없다는 맥락에 맞음",
     "ko": "막는, 방지하는"
    },
    {
     "n": 3,
     "tx": "differentiate",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 잘못된 정보와 정보를 '구별하기' 어렵다는 흐름에 맞음",
     "ko": "구별하다"
    },
    {
     "n": 4,
     "tx": "challenged",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 과학자의 연구가 문외한에게 '이의 제기된다'에 맞음",
     "ko": "이의가 제기된, 도전받은"
    },
    {
     "n": 5,
     "tx": "diminished",
     "verdict": "ok",
-    "jd": "✔ 문맥상 intensified(심화) 뜻이어야 하는데 반대 낱말(diminished)",
+    "jd": "✔ 정답 — 동등한 신뢰 부여로 좌절이 '심화돼야' 하는데 diminished(약화)로 어긋남",
     "ko": "줄어든, 약화된"
    }
   ],
@@ -44577,35 +44577,35 @@
     "n": 1,
     "tx": "compensate …… randomly …… protective",
     "verdict": "x",
-    "jd": "✘ (C) protective 부적절 (→independent)",
+    "jd": "✘ (C) '보호하는'이 어긋남 — 사전 지식에서 '독립적'이어야 자연스러움",
     "ko": "보완하다 …… 무작위로 …… 보호하는"
    },
    {
     "n": 2,
     "tx": "compensate …… purposefully …… protective",
     "verdict": "x",
-    "jd": "✘ (B)purposefully·(C)protective 부적절",
+    "jd": "✘ (B)'목적을 갖고'·(C)'보호하는' 둘 다 문맥에 어긋남",
     "ko": "보완하다 …… 목적을 갖고 …… 보호하는"
    },
    {
     "n": 3,
     "tx": "prepare …… randomly …… protective",
     "verdict": "x",
-    "jd": "✘ (A)prepare·(C)protective 부적절",
+    "jd": "✘ (A)'대비하다'·(C)'보호하는'이 문맥에 어긋남",
     "ko": "대비하다 …… 무작위로 …… 보호하는"
    },
    {
     "n": 4,
     "tx": "compensate …… randomly …… independent",
     "verdict": "ok",
-    "jd": "✔ (A)보완·(B)무작위·(C)독립 모두 문맥 일치",
+    "jd": "✔ 정답 — 보완(A)·무작위(B)·독립(C) 세 낱말 모두 문맥에 맞음",
     "ko": "보완하다 …… 무작위로 …… 독립적인"
    },
    {
     "n": 5,
     "tx": "prepare …… purposefully …… independent",
     "verdict": "x",
-    "jd": "✘ (A)prepare·(B)purposefully 부적절",
+    "jd": "✘ (A)'대비하다'·(B)'목적을 갖고'가 문맥에 어긋남",
     "ko": "대비하다 …… 목적을 갖고 …… 독립적인"
    }
   ],
@@ -44835,35 +44835,35 @@
     "n": 1,
     "tx": "restrictions",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 서로의 재정적 제약을 안다는 뒤 내용과 이어져 자연스러움",
     "ko": "제약"
    },
    {
     "n": 2,
     "tx": "assess",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 상대의 재정적 제약을 '평가한다'는 흐름에 자연스러움",
     "ko": "평가하다"
    },
    {
     "n": 3,
     "tx": "necessity",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 비디오게임이 음식 같은 필수품이 아니라는 설명에 맞음",
     "ko": "필수품"
    },
    {
     "n": 4,
     "tx": "low",
     "verdict": "ok",
-    "jd": "✔ 문맥상 high(높은) 뜻이어야 하는데 반대 낱말(low)",
+    "jd": "✔ 정답 — 필수품 아니라 '높은' 값 못 부른다는 맥락인데 'low(낮은)'로 반대",
     "ko": "낮은"
    },
    {
     "n": 5,
     "tx": "similar",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 공유된 문화·경제권에 속한다는 뒤 내용과 이어짐",
     "ko": "비슷한"
    }
   ],
@@ -45098,35 +45098,35 @@
     "n": 1,
     "tx": "informed",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 정보에 근거해 결정한다 믿는다는 착각 서술에 맞음",
     "ko": "정보에 근거한"
    },
    {
     "n": 2,
     "tx": "easier",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 정신적 노력 아껴 '더 쉬운' 길 택한다는 흐름에 자연스러움",
     "ko": "더 쉬운"
    },
    {
     "n": 3,
     "tx": "acceptance",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 직관적 이론이 정확한 과학 설명 '수용'을 방해한다에 맞음",
     "ko": "수용, 받아들임"
    },
    {
     "n": 4,
     "tx": "less",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 편향 이해가 오류 추론에 '덜' 빠지게 한다는 흐름에 맞음",
     "ko": "덜 ~한"
    },
    {
     "n": 5,
     "tx": "rationality",
     "verdict": "ok",
-    "jd": "✔ 문맥상 irrationality(비합리성) 뜻이어야 하는데 반대 낱말(rationality)",
+    "jd": "✔ 정답 — 우리는 비합리적이라 '비합리성'이어야 하는데 'rationality'로 반대",
     "ko": "합리성"
    }
   ],
@@ -45360,35 +45360,35 @@
     "n": 1,
     "tx": "pinpointing",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 대상 독자를 '정확히 찾아낸다'는 브랜딩 방법 서술에 맞음",
     "ko": "정확히 찾아내는 것"
    },
    {
     "n": 2,
     "tx": "alien",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 학자가 처음엔 이 개념을 '생소'하게 여긴다는 대조에 맞음",
     "ko": "생소한, 낯선"
    },
    {
     "n": 3,
     "tx": "gaps",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 기존 연구의 '공백'을 부각한다는 논문 서술과 이어짐",
     "ko": "공백, 빈틈"
    },
    {
     "n": 4,
     "tx": "cultivating",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 독특한 목소리를 '기른다'는 도전 과제 서술에 자연스러움",
     "ko": "기르는 것, 함양하는 것"
    },
    {
     "n": 5,
     "tx": "temporary",
     "verdict": "ok",
-    "jd": "✔ 문맥상 lasting(오래 남는) 뜻이어야 하는데 반대 낱말(temporary)",
+    "jd": "✔ 정답 — 기억에 남으려면 '지속적'이어야 하는데 'temporary(일시적)'로 반대",
     "ko": "일시적인"
    }
   ],
@@ -45617,35 +45617,35 @@
     "n": 1,
     "tx": "revealing",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 형식 자체를 '잘 드러내는' 기법으로 보라는 흐름에 맞음",
     "ko": "잘 드러내는, 시사적인"
    },
    {
     "n": 2,
     "tx": "clear",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 여러 번 읽어야 뉘앙스가 '분명'해진다는 흐름에 자연스러움",
     "ko": "분명한, 명확한"
    },
    {
     "n": 3,
     "tx": "significant",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 노래·춤에 '상당한' 강조를 둔다는 뮤지컬 특징 서술에 맞음",
     "ko": "상당한, 중요한"
    },
    {
     "n": 4,
     "tx": "thick",
     "verdict": "ok",
-    "jd": "✔ 문맥상 thin(얇은) 뜻이어야 하는데 반대 낱말(thick)",
+    "jd": "✔ 정답 — 대사 비중 적어 대본이 '얇다'여야 하는데 'thick(두꺼운)'로 반대",
     "ko": "두꺼운"
    },
    {
     "n": 5,
     "tx": "time-consuming",
     "verdict": "x",
-    "jd": "✘ 문맥에 맞음",
+    "jd": "✘ 문맥에 맞음 — 춤·동작이 공연 땐 '시간 많이 드는' 것이라는 대조에 맞음",
     "ko": "시간이 많이 드는"
    }
   ],
