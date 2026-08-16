@@ -480,6 +480,72 @@ practice:
       - '콜론(:) : 대비·단절로 오독 → 앞 추상어(magical thinking)를 구체적으로 풀어 주는 환언 신호로 처리'
       - 'so hard it''ll pop ~ : ''so + 형용사/부사 + (that) 절'' 결과 구문 → ''너무 ~해서 …하다'''
       cut_en: 'To a scientific thinker, this must sound like magical thinking: / you''re saying you will imagine something so hard / it''ll pop into someone else''s head / exactly the way you envision it? / The artist has sought the opposite of the scientist''s observer-independent reality.'
+  - kind: mc
+    sentence: Certain hindrances to multifaceted creative activity may lie in premature specialization, i.e., having to choose the direction of education or to focus on developing one ability too early in life.
+    source: 2023 고3 6월 20번
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: "다면적 창의 활동에 대한 특정 방해 요소는 조기 전문화, 예를 들어 교육의 방향을 선택하거나 인생에서 너무 이른 시기에 한 가지 능력을 개발하는 데 집중해야 하는 것에 있을 수 있다."'
+    options:
+    - i.e.를 '예를 들어'로 옮긴 부분.
+    - hindrances to multifaceted creative activity를 '다면적 창의 활동에 대한 방해 요소'로 옮긴 부분.
+    - premature specialization을 '조기 전문화'로 옮긴 부분.
+    answer_index: 0
+    vocab:
+    - word: hindrance
+      meaning: 방해 요소
+    - word: premature
+      meaning: 너무 이른/조기의
+    solution:
+      cut: 다면적 창의 활동에 대한 특정 방해 요소는 / 조기 전문화에 있을 수 있다 / 즉 / 교육의 방향을 선택하거나 / 인생에서 너무 이른 시기에 한 가지 능력을 개발하는 데 집중해야 하는 것.
+      cut_en: Certain hindrances to multifaceted creative activity / may lie in premature specialization, / i.e., / having to choose the direction of education / or to focus on developing one ability too early in life.
+      wrong: 재진술 표지 i.e.(즉)를 예시 표지 '예를 들어'로 옮긴 해석.
+      wrong_why: i.e.(=id est, that is)는 앞의 말을 '즉'으로 바꿔 같은 내용을 재진술하는 표지이지, e.g.(예를 들어)처럼 여러 사례 중 하나를 드는 예시 표지가 아니다.
+      author_msg: 다면적 창의 활동을 가로막는 요소는 조기 전문화, 즉 교육의 방향을 정하거나 너무 일찍 한 가지 능력에만 집중해야 하는 상황에 있을 수 있다.
+      key_points:
+      - '재진술 : i.e.는 ''즉''(앞말을 같은 뜻으로 다시 말함)이고, 예시의 e.g.(예를 들어)와 구별해야 함'
+  - kind: mc
+    sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
+    source: 2024 고3 11월 29번
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: "그와는 달리, 그들은 시각적으로 인지되는 타인의 신체 움직임과 자신의 운동감각적으로 경험된 신체 움직임을 연결하는 타고난 능력을 지닐 뿐만 아니라, 그렇게 하려는 타고난 욕구도 지닌다."'
+    options:
+    - an innate capacity를 '타고난 능력'으로 옮긴 부분.
+    - an innate drive to do so를 '그렇게 하려는 타고난 욕구'로 옮긴 부분.
+    - In other words를 '그와는 달리'로 옮긴 부분.
+    answer_index: 2
+    vocab:
+    - word: innate
+      meaning: 타고난
+    - word: drive
+      meaning: 욕구/충동
+    solution:
+      cut: 다시 말해 / 그들은 연결하는 타고난 능력을 지닐 뿐만 아니라 / 자신의 운동감각적으로 경험된 신체 움직임을 / 시각적으로 인지되는 타인의 것과 / 그렇게 하려는 타고난 욕구도 지닌다.
+      cut_en: In other words, / they not only have an innate capacity for matching / their own kinaesthetically experienced bodily movements / with those of others that are visually perceived; / they have an innate drive to do so.
+      wrong: 재진술 표지 In other words(다시 말해)를 대조 표지 '그와는 달리'로 옮긴 해석.
+      wrong_why: In other words는 앞 문장을 '다시 말해' 같은 뜻으로 바꿔 말하는 재진술 표지이므로, '그와는 달리' 같은 대조로 옮기면 앞뒤 관계가 뒤집혀 틀리다.
+      author_msg: 다시 말해, 그들은 시각으로 인지한 타인의 움직임과 자신의 운동감각적 움직임을 연결하는 타고난 능력뿐 아니라 그렇게 하려는 타고난 욕구까지 지닌다.
+      key_points:
+      - '재진술 : In other words는 ''다시 말해''로 앞 내용을 같은 뜻으로 되풀이하는 표지이지 대조/전환이 아님'
+  - kind: mc
+    sentence: 'So it may well be that this plasticity is an adaptation: a trait that came to exist in a species because it contributed to reproductive fitness.'
+    source: 2023 고3 11월 36번
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: "따라서 이 가소성이 하나의 적응일 가능성이 충분히 있으며, 그래서 그것은 번식 적합도에 기여했기 때문에 한 종 안에 존재하게 되었다."'
+    options:
+    - it may well be that ~를 '~일 가능성이 충분히 있다'로 옮긴 부분.
+    - 콜론(:)을 '그래서'라는 결과 연결로 옮긴 부분.
+    - contributed to reproductive fitness를 '번식 적합도에 기여했다'로 옮긴 부분.
+    answer_index: 1
+    vocab:
+    - word: plasticity
+      meaning: 가소성
+    - word: adaptation
+      meaning: 적응
+    solution:
+      cut: 따라서 이 가소성이 하나의 적응일 가능성이 충분히 있다 / 즉 한 종 안에 존재하게 된 특성 (말이다) / 그것이 번식 적합도에 기여했기 때문에.
+      cut_en: 'So it may well be that this plasticity is an adaptation: / a trait that came to exist in a species / because it contributed to reproductive fitness.'
+      wrong: 동격·정의를 나타내는 콜론(:)을 '그래서'라는 결과 접속으로 옮긴 해석.
+      wrong_why: 여기서 콜론(:)은 앞의 an adaptation을 '즉 ~한 특성'으로 다시 정의(동격)하는 표지이므로, '그래서'라는 인과·결과로 옮기면 재진술 관계가 사라져 틀리다.
+      author_msg: 따라서 이 가소성은 하나의 적응, 즉 번식 적합도에 기여했기에 한 종 안에 존재하게 된 특성일 가능성이 충분히 있다.
+      key_points:
+      - '재진술 : 콜론(:)은 앞의 추상어를 뒤에서 ''즉''으로 정의·재진술(동격)하는 표지이지 결과/인과 연결이 아님'
   example:
   - sentence: Passwords, double-key identification, and biometrics such as fingerprint, iris, and voice recognition are all ways of keeping the account details hidden from potential fraudsters.
     source: 2022 고3 9월 39번
