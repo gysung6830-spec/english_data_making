@@ -394,8 +394,8 @@ def opts_block(opts, answer):
         ok = (o.get("verdict") == "ok") or (n == answer)
         cls = "opt ok" if ok else "opt x"
         jd = o.get("jd") or ("✔ 정답" if ok else "✘")
-        if ok and jd.startswith("✔"):
-            jd = "✔ 정답 " + jd[1:].strip()
+        if ok and jd.startswith("✔") and "정답" not in jd:
+            jd = "✔ 정답 · " + jd[1:].strip()
         ko = o.get("ko", "")
         ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
         badge = '<span class="okflag">정답</span>' if ok else ""
