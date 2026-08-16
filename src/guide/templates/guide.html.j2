@@ -127,11 +127,6 @@
   {% endfor %}
   {% endif %}
 
-  {% if guide.inference %}
-  <div class="toc-part"><a href="#partInf"><span class="toc-pno special">특강</span> 어휘 유추 — 모르는 단어는 유추로 뚫는다</a></div>
-  <div class="toc-item"><a href="#partInf"><span class="toc-no">특강</span>유추의 다섯 단서 · 유추 문제(객관식·주관식)</a></div>
-  {% endif %}
-
   {% if guide.part2 %}
   <div class="toc-part"><a href="#part2"><span class="toc-pno">1부</span> 구문해석 — {{ guide.part2.title }}</a></div>
   {% set tns = namespace(cn=0) %}
@@ -156,6 +151,11 @@
   {% for c in guide.abstract.chapters %}
   <div class="toc-item"><a href="#abs-{{ c.id }}"><span class="toc-no">3-{{ loop.index }}</span>{{ c.title }}</a></div>
   {% endfor %}
+  {% endif %}
+
+  {% if guide.inference %}
+  <div class="toc-part"><a href="#partInf"><span class="toc-pno special">부록</span> 어휘 유추 — 모르는 단어는 유추로 뚫는다</a></div>
+  <div class="toc-item"><a href="#partInf"><span class="toc-no">부록</span>유추의 다섯 단서 · 유추 문제(객관식·주관식)</a></div>
   {% endif %}
 </section>
 
@@ -272,67 +272,6 @@
   </div>
   {% endif %}
 </section>
-{% endif %}
-
-{# ===================== 어휘 유추 (별도 목차) ===================== #}
-{% if guide.inference %}
-{% set inf = guide.inference %}
-<section class="chapter" id="partInf">
-  <div class="ch-kicker">특강 · 어휘 유추</div>
-  <div class="ch-title">{{ inf.title }}</div>
-  <div class="ch-signal">{{ inf.intro }}</div>
-  {% if inf.chapters and inf.chapters[0].exprs %}
-  <div class="roadmap">
-    <div class="rm-title">🔮 모르는 단어를 뚫는 5가지 단서</div>
-    {% for e in inf.chapters[0].exprs %}
-    <div class="rm-item"><span class="rm-no">{{ loop.index }}</span><span class="rm-t">{{ e.en }}</span></div>
-    {% endfor %}
-  </div>
-  <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 모든 단어를 외울 필요는 없다. 모르는 단어를 만나면 <b>주변 단서</b>(대조·재진술·예시·병렬·형태)로 '대략의 뜻·좋은 말/나쁜 말'만 잡아도 문제는 풀린다. 아래 원리와 유추 문제(객관식·주관식)로 '단서 잡는 눈'을 훈련한다.</div>
-  {% endif %}
-</section>
-{% for chapter in inf.chapters %}
-<section class="chapter wb" id="inf-{{ chapter.id }}">
-  <div class="ch-kicker">어휘 유추 · 원리</div>
-  <div class="ch-title chap">{{ chapter.title }}</div>
-  {% if chapter.point %}
-  <div class="wb-step">
-    <div class="wb-step-h"><span class="wb-step-no">1</span><span class="wb-step-t">원리</span><span class="wb-step-hint">— 이게 무엇인가</span></div>
-    <div class="wb-box point">{{ chapter.point }}</div>
-  </div>
-  {% endif %}
-  {% if chapter.exprs or chapter.strategy %}
-  <div class="wb-step">
-    <div class="wb-step-h"><span class="wb-step-no">2</span><span class="wb-step-t">이렇게 읽어라</span><span class="wb-step-hint">— 단서 + 전략</span></div>
-    {% if chapter.strategy %}<div class="method-lead">🎯 <b>유추 전략</b> · {{ chapter.strategy }}</div>{% endif %}
-    {% if chapter.exprs %}
-    <div class="formula joined">
-      <div class="f-rows">
-        {% for r in chapter.exprs %}
-        <div class="f-row"><span class="f-en">{{ r.en }}</span>
-          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-  </div>
-  {% endif %}
-  {% if chapter.examples %}
-  <div class="ex-label">유추 시연 <span>· 단서로 뜻 뚫기</span></div>
-  <ol class="wb-ex">
-    {% for e in chapter.examples %}
-    <li><span class="n">{{ loop.index }}</span>{{ (e.cut_en or e.en) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
-      {% if e.src %}<span class="src-chip">{{ e.src }}</span>{% endif %}
-      {% if e.how %}<div class="wb-how"><span class="how-tag infer">유추</span>{{ e.how }}</div>{% endif %}
-      {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
-      {% if e.catch %}<div class="wb-catch"><span class="catch-tag">이 정도는 캐치</span>{{ e.catch }}</div>{% endif %}
-    </li>
-    {% endfor %}
-  </ol>
-  {% endif %}
-</section>
-{% if chapter.practice %}{{ drill_pages(chapter.title, chapter.practice) }}{% endif %}
-{% endfor %}
 {% endif %}
 
 {# ===================== 1부 — 구문해석 · 해석공식 시각화 ===================== #}
@@ -589,3 +528,63 @@
 {% endfor %}
 {% endif %}
 
+{# ===================== 부록 — 어휘 유추 ===================== #}
+{% if guide.inference %}
+{% set inf = guide.inference %}
+<section class="chapter" id="partInf">
+  <div class="ch-kicker">부록 · 어휘 유추</div>
+  <div class="ch-title">{{ inf.title }}</div>
+  <div class="ch-signal">{{ inf.intro }}</div>
+  {% if inf.chapters and inf.chapters[0].exprs %}
+  <div class="roadmap">
+    <div class="rm-title">🔮 모르는 단어를 뚫는 5가지 단서</div>
+    {% for e in inf.chapters[0].exprs %}
+    <div class="rm-item"><span class="rm-no">{{ loop.index }}</span><span class="rm-t">{{ e.en }}</span></div>
+    {% endfor %}
+  </div>
+  <div class="study-tip">🎯 <b>이렇게 공부하세요</b> · 모든 단어를 외울 필요는 없다. 모르는 단어를 만나면 <b>주변 단서</b>(대조·재진술·예시·병렬·형태)로 '대략의 뜻·좋은 말/나쁜 말'만 잡아도 문제는 풀린다. 아래 원리와 유추 문제(객관식·주관식)로 '단서 잡는 눈'을 훈련한다.</div>
+  {% endif %}
+</section>
+{% for chapter in inf.chapters %}
+<section class="chapter wb" id="inf-{{ chapter.id }}">
+  <div class="ch-kicker">어휘 유추 · 원리</div>
+  <div class="ch-title chap">{{ chapter.title }}</div>
+  {% if chapter.point %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">1</span><span class="wb-step-t">원리</span><span class="wb-step-hint">— 이게 무엇인가</span></div>
+    <div class="wb-box point">{{ chapter.point }}</div>
+  </div>
+  {% endif %}
+  {% if chapter.exprs or chapter.strategy %}
+  <div class="wb-step">
+    <div class="wb-step-h"><span class="wb-step-no">2</span><span class="wb-step-t">이렇게 읽어라</span><span class="wb-step-hint">— 단서 + 전략</span></div>
+    {% if chapter.strategy %}<div class="method-lead">🎯 <b>유추 전략</b> · {{ chapter.strategy }}</div>{% endif %}
+    {% if chapter.exprs %}
+    <div class="formula joined">
+      <div class="f-rows">
+        {% for r in chapter.exprs %}
+        <div class="f-row"><span class="f-en">{{ r.en }}</span>
+          <span class="f-arrow">→</span><span class="f-ko">{{ r.ko }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if chapter.examples %}
+  <div class="ex-label">유추 시연 <span>· 단서로 뜻 뚫기</span></div>
+  <ol class="wb-ex">
+    {% for e in chapter.examples %}
+    <li><span class="n">{{ loop.index }}</span>{{ (e.cut_en or e.en) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}
+      {% if e.src %}<span class="src-chip">{{ e.src }}</span>{% endif %}
+      {% if e.how %}<div class="wb-how"><span class="how-tag infer">유추</span>{{ e.how }}</div>{% endif %}
+      {% if e.cut %}<div class="wb-cut"><span class="cut-tag">끊어읽기</span>{{ e.cut }}</div>{% endif %}
+      {% if e.catch %}<div class="wb-catch"><span class="catch-tag">이 정도는 캐치</span>{{ e.catch }}</div>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+</section>
+{% if chapter.practice %}{{ drill_pages(chapter.title, chapter.practice) }}{% endif %}
+{% endfor %}
+{% endif %}

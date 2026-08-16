@@ -340,7 +340,7 @@ def mock_guide() -> Guide:
             )],
         ),
         Chapter(
-            id="equivalence", title="등호·구별",
+            id="equivalence", title="등호·구별·재진술",
             signal="A와 B가 같은지(=) 다른지(≠)를 정하는 표현.",
             misread="A=B(재진술)를 놓쳐 새 정보로 읽는다",
             tip="등호(A=B)면 뒤는 앞의 재진술이다 — 새 내용이 아니라 같은 말임을 알아채라.",
@@ -378,7 +378,7 @@ def mock_guide() -> Guide:
             )],
         ),
         Chapter(
-            id="connective", title="연결어",
+            id="connective", title="연결어·예시",
             signal="글의 논리 흐름(부연·대조·인과)을 알리는 신호.",
             misread="연결어의 논리 종류를 오해해 흐름을 반대로 잡는다",
             tip="연결어의 ‘논리 종류’부터 판정하라 — 부연인지, 대조인지, 인과인지.",
