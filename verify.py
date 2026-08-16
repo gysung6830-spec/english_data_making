@@ -27,7 +27,28 @@ from markupsafe import escape
 from src.lecture_schemas import STANCES, STRUCTURES, LecturePassage
 
 _MARK = re.compile(r"\[\[|\]\]")
+_BLANK = re.compile(r"\[\[.*?\]\]", re.S)  # 빈칸 한 개(통째/단어)
 _ELLIPSIS = ("...", "…")   # ASCII 세 점 · 유니코드 말줄임표
+
+# 빈칸을 안 뚫어도 되는 '순전한 기능어'(관사·전치사·접속사·대명사·be동사 등).
+# 이 집합에 없는 4글자+ 단어가 조각에 있으면 '내용어가 있는데 빈칸이 없다'고 본다.
+_FUNC = {
+    "the", "a", "an", "and", "or", "but", "so", "for", "nor", "yet",
+    "of", "to", "in", "on", "at", "by", "with", "from", "into", "onto",
+    "as", "is", "am", "are", "was", "were", "be", "been", "being",
+    "it", "its", "he", "she", "they", "them", "his", "her", "their",
+    "we", "our", "us", "you", "your", "i", "my", "me", "this", "that",
+    "these", "those", "there", "here", "then", "not", "no", "do", "does",
+    "did", "has", "have", "had", "will", "would", "can", "could", "may",
+    "might", "must", "shall", "should", "up", "out", "off", "over", "than",
+    "too", "very", "also", "just", "only", "about", "if", "when", "while",
+}
+
+
+def _content_words(en: str) -> int:
+    """조각에서 '내용어(4글자+, 기능어 아님)' 개수. 0이면 빈칸을 안 뚫어도 되는 조각."""
+    words = re.findall(r"[A-Za-z][A-Za-z'-]*", _strip(en).lower())
+    return sum(1 for w in words if len(w) >= 4 and w not in _FUNC)
 
 
 def _strip(s: str) -> str:
@@ -123,6 +144,29 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
             n_ko = sum(1 for c in s.chunks if _strip(c.ko).strip())
             if n_en != n_ko:
                 err(f"{tag} S{sid}", f"③ 영어 조각 수({n_en})와 한글 조각 수({n_ko})가 불일치")
+
+            # ③ 빈칸 규칙: (1) 문장 전체 빈칸 0개 = 학생이 채울 게 없음
+            #             (2) '내용어가 있는 조각'은 빈칸을 하나 뚫어야 함(순전한 기능어 조각만 예외)
+            #             (3) 통째 빈칸(조각 전체 [[ ]])은 문장당 최대 2개
+            if s.chunks:
+                n_blank_total = sum(len(_BLANK.findall(c.ko)) for c in s.chunks)
+                if n_blank_total == 0:
+                    warn(f"{tag} S{sid}", "③ 이 문장에 빈칸이 하나도 없음(학생용에서 채울 게 없음)")
+                n_whole = 0
+                for ci, c in enumerate(s.chunks, 1):
+                    ko_raw = c.ko or ""
+                    en_raw = c.en or ""
+                    if re.fullmatch(r"\s*\[\[.*\]\][\.,\?\!;:”'\)]*\s*", ko_raw, re.S):
+                        n_whole += 1
+                    if "[[" not in ko_raw and _content_words(en_raw) >= 1:
+                        warn(f"{tag} S{sid}",
+                             f"{ci}번째 조각에 내용어가 있는데 빈칸이 없음: {_strip(en_raw).strip()[:34]!r}")
+                    # en 과 ko 의 빈칸 유무는 짝이 맞아야 함
+                    if ("[[" in ko_raw) != ("[[" in en_raw):
+                        warn(f"{tag} S{sid}",
+                             f"{ci}번째 조각의 영어/한글 빈칸 유무가 어긋남: en={_strip(en_raw).strip()[:24]!r}")
+                if n_whole > 2:
+                    warn(f"{tag} S{sid}", f"③ 통째 빈칸이 {n_whole}개(문장당 최대 2개 권장)")
 
         # 3) ④ 재진술 표현이 지문에 실제로 있는지(형광펜 매칭)
         for c in ov.restatement_chains:
