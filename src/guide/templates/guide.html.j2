@@ -118,7 +118,7 @@
   {% for pr in practice %}{% set s = pr.solution %}
   <div class="sol-item">
     <div class="dq"><span class="dq-no">{{ '%02d' % pr.no }}</span>
-      <span class="dq-sent">{%- if s and s.intent and s.intent.kind -%}{%- if s.intent.signal -%}{{ pr.sentence | replace(s.intent.signal, '<mark class="sig">' + s.intent.signal + '</mark>') | safe }}{%- else -%}{{ pr.sentence }}{%- endif -%}{%- else -%}{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{%- endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
+      <span class="dq-sent">{%- if s and s.intent and s.intent.kind -%}{%- if s.intent.signal -%}{{ pr.sentence | replace(s.intent.signal, '<mark class="sig">' + s.intent.signal + '</mark>') | safe }}{%- else -%}{{ pr.sentence }}{%- endif -%}{%- elif s and s.cloze and s.cloze.en -%}{{ s.cloze.en | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{%- else -%}{{ (s.cut_en if (s and s.cut_en) else pr.sentence) | replace(' / ', ' <b class="cslash">/</b> ') | safe }}{%- endif %}{% if pr.source %}<span class="src-chip">{{ pr.source }}</span>{% endif %}</span>
     </div>
     {% if s %}
     {% if s.intent and s.intent.kind %}
