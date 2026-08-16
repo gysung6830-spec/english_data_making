@@ -393,13 +393,18 @@ def opts_block(opts, answer):
         n = o.get("n")
         ok = (o.get("verdict") == "ok") or (n == answer)
         cls = "opt ok" if ok else "opt x"
-        jd = o.get("jd") or ("✔ 근거" if ok else "✘")
+        jd = o.get("jd") or ("✔ 정답" if ok else "✘")
+        if ok and jd.startswith("✔"):
+            jd = "✔ 정답 " + jd[1:].strip()
         ko = o.get("ko", "")
         ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
+        badge = '<span class="okflag">정답</span>' if ok else ""
         lis.append(f'<div class="{cls}"><span class="n">{CIRCLED[n-1] if n else "·"}</span>'
                     f'<span class="txwrap"><span class="tx">{o.get("tx","")}</span>{ko_html}</span>'
-                    f'<span class="jd">{esc(jd)}</span></div>')
-    return f'<div class="opts">{"".join(lis)}</div>'
+                    f'{badge}<span class="jd">{esc(jd)}</span></div>')
+    circ = CIRCLED[answer-1] if answer and 1 <= answer <= 5 else "·"
+    head = f'<div class="ans-head">✅ 정답 <span class="ansno">{circ}</span></div>'
+    return f'<div class="opts">{head}{"".join(lis)}</div>'
 
 
 def vocab_underline(html, opts):
@@ -1341,7 +1346,15 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .opt .n{ flex:none; font-weight:800; width:14px; } .opt .txwrap{ flex:1; } .opt .tx{ display:inline; } .opt .jd{ flex:none; font-size:8.6px; font-weight:800; }
 .opt .oko{ display:block; font-size:8.8px; color:#5a6169; margin-top:1px; line-height:1.4; }
 .opt.ok .oko{ color:#12543d; }
-.opt.ok{ background:var(--src); border-radius:4px; padding:2px 5px; } .opt.ok .jd{ color:var(--src-line); } .opt.x .jd{ color:var(--trap); }
+.opt.ok{ background:#dff0e8; border:1.5px solid var(--ink); border-radius:5px; padding:3px 6px; } .opt.ok .jd{ color:var(--ink-d); } .opt.x .jd{ color:var(--trap); }
+/* 정답 선지: 동그라미 번호를 초록 채움 + '정답' 배지 */
+.opt.ok .n{ color:#fff; background:var(--ink); border-radius:50%; width:15px; height:15px; line-height:15px; text-align:center; font-size:10px; }
+.opt.ok .tx{ font-weight:800; }
+.opt .okflag{ flex:none; font-size:8px; font-weight:800; color:#fff; background:var(--ink); border-radius:3px; padding:1px 5px; margin:0 5px; }
+.opt.x{ opacity:.92; }
+/* 정답 배너 */
+.ans-head{ display:flex; align-items:center; gap:7px; font-size:11px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
+.ans-head .ansno{ display:inline-block; min-width:20px; height:20px; line-height:20px; text-align:center; color:#fff; background:var(--ink); border-radius:50%; font-size:13px; font-weight:800; }
 .reuse{ background:#ffe0dd; border-radius:2px; padding:0 2px; font-weight:700; color:#a5342d; }
 /* 어휘(30) 밑줄 */
 u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; font-weight:700; }
