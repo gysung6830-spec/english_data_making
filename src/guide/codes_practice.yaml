@@ -1,8 +1,7 @@
 practice:
   causation:
   - kind: mc
-    sentence: When our worries exceed our control, however, they cause us unnecessary
-      suffering.
+    sentence: When our worries exceed our control, however, they cause us unnecessary suffering.
     source: 2025 고3 6월 20번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “불필요한 고통이 우리의 걱정을 통제 밖으로 밀어낸다.”'
     options:
@@ -23,14 +22,10 @@ practice:
       wrong_why: cause의 주어(they = worries)와 목적어(suffering)를 뒤바꿔, 원인과 결과가 정반대가 되었다.
       author_msg: 걱정이 감당할 수준을 넘으면, 그 걱정 자체가 쓸데없는 괴로움을 만들어 낸다.
       key_points:
-      - '''they cause us unnecessary suffering'' : they(원인=our worries)와 suffering(결과)을
-        뒤바꿔 ''고통이 걱정을 밀어낸다''로 읽기 쉽다 → cause A B는 A(they)가 B(고통)를 일으킴.'
-      cut_en: When our worries / exceed our control, / however, / they cause us /
-        unnecessary suffering.
+      - '''they cause us unnecessary suffering'' : they(원인=our worries)와 suffering(결과)을 뒤바꿔 ''고통이 걱정을 밀어낸다''로 읽기 쉽다 → cause A B는 A(they)가 B(고통)를 일으킴.'
+      cut_en: When our worries / exceed our control, / however, / they cause us / unnecessary suffering.
   - kind: mc
-    sentence: In the south there was London, already the largest city in the world,
-      showing all the crime, evil, and misery that result from overpopulation and
-      unplanned growth.
+    sentence: In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth.
     source: 2024 고3 9월 29번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인구 과잉과 무계획적 성장을 초래하는 모든 범죄·악·비참함”'
     options:
@@ -46,20 +41,15 @@ practice:
     - word: overpopulation
       meaning: 인구 과잉
     solution:
-      cut: 남쪽에는 / 런던이 있었다 / (이미 세계 최대 도시인) / [모든 범죄·악·비참함을] 보여주며 / [인구 과잉과 무계획적 성장에서
-        비롯되는]
+      cut: 남쪽에는 / 런던이 있었다 / (이미 세계 최대 도시인) / [모든 범죄·악·비참함을] 보여주며 / [인구 과잉과 무계획적 성장에서 비롯되는]
       wrong: 인구 과잉과 무계획적 성장을 '초래하는' 범죄·악·비참함.
       wrong_why: result from은 'A from B = A가 B에서 비롯되다'(B가 원인). 방향을 뒤집어 결과를 원인으로 읽었다.
       author_msg: 런던의 온갖 범죄·악·비참함은 '인구 과잉과 무계획적 성장'이라는 원인에서 나온 결과다.
       key_points:
-      - '''that result from ~'' : ''초래하는''으로 방향을 뒤집어 범죄·악·비참을 원인으로 읽기 쉽다 → A result
-        from B는 A(범죄·악·비참)가 B(인구 과잉·성장)에서 비롯됨, B가 원인.'
-      cut_en: In the south / there was London, / already the largest city in the world,
-        / showing [all the crime, evil, and misery] / [that result from overpopulation
-        and unplanned growth].
+      - '''that result from ~'' : ''초래하는''으로 방향을 뒤집어 범죄·악·비참을 원인으로 읽기 쉽다 → A result from B는 A(범죄·악·비참)가 B(인구 과잉·성장)에서 비롯됨, B가 원인.'
+      cut_en: In the south / there was London, / already the largest city in the world, / showing [all the crime, evil, and misery] / [that result from overpopulation and unplanned growth].
   - kind: mc
-    sentence: The strategy is to analyze all the possible scenarios that the future
-      holds and then to see what proportion of them lead to success or failure.
+    sentence: The strategy is to analyze all the possible scenarios that the future holds and then to see what proportion of them lead to success or failure.
     source: 2023 고3 11월 20번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “얼마나 많은 성공·실패가 그 시나리오들로 이어지는지”'
     options:
@@ -75,21 +65,15 @@ practice:
     - word: lead to
       meaning: ~로 이어지다
     solution:
-      cut: 그 전략은 / 분석하는 것이다 / [미래가 품은 모든 가능한 시나리오를] / 그런 다음 / 보는 것이다 / [그중 얼마만큼이 /
-        성공 또는 실패로 이어지는지]
+      cut: 그 전략은 / 분석하는 것이다 / [미래가 품은 모든 가능한 시나리오를] / 그런 다음 / 보는 것이다 / [그중 얼마만큼이 / 성공 또는 실패로 이어지는지]
       wrong: 얼마나 많은 성공·실패가 그 시나리오들로 이어지는지.
-      wrong_why: lead to는 'A lead to B = A가 B로 이어지다'(A가 원인). 주어(proportion=시나리오)와
-        결과(success/failure)를 뒤바꿨다.
+      wrong_why: lead to는 'A lead to B = A가 B로 이어지다'(A가 원인). 주어(proportion=시나리오)와 결과(success/failure)를 뒤바꿨다.
       author_msg: 미래 시나리오들을 다 따진 뒤, 그중 몇 %가 성공으로/실패로 귀결되는지 확인하는 게 전략이다.
       key_points:
-      - '''what proportion of them lead to ~'' : 주어(시나리오 비율)와 결과(성공·실패)를 뒤바꿔 ''성공·실패가
-        시나리오로 이어진다''로 읽기 쉽다 → lead to의 주어는 proportion(시나리오), 그것이 성공/실패로 이어짐.'
-      cut_en: The strategy is / to analyze / [all the possible scenarios that the
-        future holds] / and then / to see / [what proportion of them / lead to success
-        or failure].
+      - '''what proportion of them lead to ~'' : 주어(시나리오 비율)와 결과(성공·실패)를 뒤바꿔 ''성공·실패가 시나리오로 이어진다''로 읽기 쉽다 → lead to의 주어는 proportion(시나리오), 그것이 성공/실패로 이어짐.'
+      cut_en: The strategy is / to analyze / [all the possible scenarios that the future holds] / and then / to see / [what proportion of them / lead to success or failure].
   - kind: mc
-    sentence: Agricultural markets are naturally unstable, due to changes in harvest
-      size that result from variable weather patterns and other factors.
+    sentence: Agricultural markets are naturally unstable, due to changes in harvest size that result from variable weather patterns and other factors.
     source: 2026 고3 11월 31번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “농산물 시장이 불안정하기 때문에 수확량이 변하고 날씨가 변덕스러워진다.”'
     options:
@@ -107,21 +91,15 @@ practice:
     solution:
       cut: 농산물 시장은 / 본래 불안정하다 / ~때문에 / [수확량의 변화] / [변덕스러운 날씨와 기타 요인에서 비롯되는]
       wrong: 시장이 불안정해서 수확량과 날씨가 변한다.
-      wrong_why: due to와 result from 둘 다 역방향(결과 ← 원인). 원인(날씨 → 수확량 변화)과 결과(시장 불안정)를
-        통째로 뒤집었다.
+      wrong_why: due to와 result from 둘 다 역방향(결과 ← 원인). 원인(날씨 → 수확량 변화)과 결과(시장 불안정)를 통째로 뒤집었다.
       author_msg: 시장 불안정 ← 수확량 변화 ← 날씨 변동. 원인이 뒤에서 앞으로 거슬러 올라가는 이중 인과다.
       key_points:
-      - '''due to changes ... that result from ...'' : due to와 result from이 겹쳐 원인·결과를
-        통째로 뒤집기 쉽다 → 날씨(원인) → 수확량 변화 → 시장 불안정(결과), 화살표는 결과←원인이지만 읽기는 앞으로만.'
-      cut_en: Agricultural markets are / naturally unstable, / due to / [changes in
-        harvest size] / [that result from variable weather patterns and other factors].
+      - '''due to changes ... that result from ...'' : due to와 result from이 겹쳐 원인·결과를 통째로 뒤집기 쉽다 → 날씨(원인) → 수확량 변화 → 시장 불안정(결과), 화살표는 결과←원인이지만 읽기는 앞으로만.'
+      cut_en: Agricultural markets are / naturally unstable, / due to / [changes in harvest size] / [that result from variable weather patterns and other factors].
   - kind: mc
-    sentence: Social media users may unknowingly participate in creating and circulating
-      misinformation, which can influence elections, cause violence, and create widespread
-      panic.
+    sentence: Social media users may unknowingly participate in creating and circulating misinformation, which can influence elections, cause violence, and create widespread panic.
     source: 2024 고3 9월 20번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게
-      한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “선거·폭력·공황이 소셜미디어 이용자들에게 잘못된 정보를 만들게 한다.”'
     options:
     - ‘which can ... cause violence ...’를 ‘선거·폭력·공황이 정보를 만들게 한다’로 읽은 부분
     - ‘unknowingly participate’를 ‘자신도 모르게 가담하다’로 옮긴 부분
@@ -135,22 +113,15 @@ practice:
     - word: widespread
       meaning: 광범위한
     solution:
-      cut: 소셜미디어 이용자들은 / 자신도 모르게 / [잘못된 정보를 만들고 퍼뜨리는 데] 가담할 수 있다 / 그리고 그것은 / 선거에 영향을
-        주고 / 폭력을 일으키며 / 광범위한 공황을 만든다
+      cut: 소셜미디어 이용자들은 / 자신도 모르게 / [잘못된 정보를 만들고 퍼뜨리는 데] 가담할 수 있다 / 그리고 그것은 / 선거에 영향을 주고 / 폭력을 일으키며 / 광범위한 공황을 만든다
       wrong: 선거·폭력·공황이 이용자들에게 정보를 만들게 한다.
-      wrong_why: cause/influence/create의 주어는 which(= misinformation)다. 원인(잘못된 정보)과
-        결과(선거·폭력·공황)를 뒤바꿨다.
+      wrong_why: cause/influence/create의 주어는 which(= misinformation)다. 원인(잘못된 정보)과 결과(선거·폭력·공황)를 뒤바꿨다.
       author_msg: 이용자가 무심코 퍼뜨린 잘못된 정보가 선거·폭력·공황이라는 실제 피해로 이어진다.
       key_points:
-      - '''which can ... cause violence ...'' : 뒤의 선거·폭력·공황을 주어로 착각해 인과를 뒤집기 쉽다 →
-        주어는 which(=misinformation), 그것이 선거·폭력·공황을 일으킴.'
-      cut_en: Social media users / may unknowingly / participate in [creating and
-        circulating misinformation], / which can / influence elections, / cause violence,
-        / and create widespread panic.
+      - '''which can ... cause violence ...'' : 뒤의 선거·폭력·공황을 주어로 착각해 인과를 뒤집기 쉽다 → 주어는 which(=misinformation), 그것이 선거·폭력·공황을 일으킴.'
+      cut_en: Social media users / may unknowingly / participate in [creating and circulating misinformation], / which can / influence elections, / cause violence, / and create widespread panic.
   - kind: short
-    sentence: Whether it be due to the growing presence of AI assistants or the emergence
-      of self-driving cars, the necessity of the role of humans as the decision makers
-      would appear to be in decline.
+    sentence: Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the necessity of the role of humans as the decision makers would appear to be in decline.
     source: 2024 고3 6월 20번
     prompt: be due to에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 그것이 AI 비서의 증가 때문이든 자율주행차의 등장 때문이든, 의사결정자로서 인간 역할의 필요성은 줄어드는 것처럼 보인다.
@@ -167,16 +138,11 @@ practice:
       wrong_why: be due to는 역방향('~때문이다'). 원인(AI·자율주행차)과 결과(인간 역할 감소)를 뒤집으면 안 된다.
       author_msg: 원인이 무엇이든(AI든 자율주행차든), 결과적으로 인간이 결정을 내릴 필요는 줄고 있다.
       key_points:
-      - '''be due to A'' : ''A 때문이다''를 뒤집어 A를 결과로 읽기 쉽다 → 원인은 A(AI·자율주행차), 결과는 인간
-        역할의 감소.'
-      - '''the necessity of the role of humans'' : 전치사구가 겹쳐 in decline의 주어를 humans로
-        잘못 잡기 쉽다 → 줄어드는 것은 ''필요성(necessity)''.'
-      cut_en: Whether it be due to / [the growing presence of AI assistants] or [the
-        emergence of self-driving cars], / the necessity of the role of humans as
-        the decision makers / would appear to be in decline.
+      - '''be due to A'' : ''A 때문이다''를 뒤집어 A를 결과로 읽기 쉽다 → 원인은 A(AI·자율주행차), 결과는 인간 역할의 감소.'
+      - '''the necessity of the role of humans'' : 전치사구가 겹쳐 in decline의 주어를 humans로 잘못 잡기 쉽다 → 줄어드는 것은 ''필요성(necessity)''.'
+      cut_en: Whether it be due to / [the growing presence of AI assistants] or [the emergence of self-driving cars], / the necessity of the role of humans as the decision makers / would appear to be in decline.
   - kind: short
-    sentence: Living your values only some of the time does not contribute to the
-      creation and maintenance of culture.
+    sentence: Living your values only some of the time does not contribute to the creation and maintenance of culture.
     source: 2024 고3 11월 20번
     prompt: contribute to와 부정어에 유의하여 해석하시오.
     answer: 가치를 오직 일부 시간에만 실천하는 것은 문화의 창조와 유지에 기여하지 않는다.
@@ -193,18 +159,13 @@ practice:
       wrong_why: does not을 놓치면 극성이 뒤집힌다. contribute to(기여하다)는 정방향이지만 앞의 부정이 핵심.
       author_msg: 가치를 어쩌다 한 번씩 실천하는 정도로는 문화가 만들어지지도 유지되지도 않는다.
       key_points:
-      - '''does not contribute to ~'' : does not을 놓쳐 ''기여한다''는 긍정으로 극성을 뒤집기 쉽다 → 핵심은
-        부정, ''기여하지 않는다''.'
-      cut_en: '[Living your values / only some of the time] / does not contribute
-        to / [the creation and maintenance of culture].'
+      - '''does not contribute to ~'' : does not을 놓쳐 ''기여한다''는 긍정으로 극성을 뒤집기 쉽다 → 핵심은 부정, ''기여하지 않는다''.'
+      cut_en: '[Living your values / only some of the time] / does not contribute to / [the creation and maintenance of culture].'
   - kind: short
-    sentence: Excessive specificity may result in information from outside the domain
-      being underestimated and unavailable, which leads to fixedness of thinking,
-      whereas excessive generality causes chaos, vagueness, and shallowness.
+    sentence: Excessive specificity may result in information from outside the domain being underestimated and unavailable, which leads to fixedness of thinking, whereas excessive generality causes chaos, vagueness, and shallowness.
     source: 2023 고3 6월 20번
     prompt: result in / lead to / cause의 방향에 유의하여 해석하시오.
-    answer: 지나친 구체성은 영역 밖 정보가 과소평가되고 이용 불가능해지는 결과를 낳을 수 있고, 이것은 사고의 경직으로 이어지는 반면,
-      지나친 일반성은 혼란·모호함·피상성을 초래한다.
+    answer: 지나친 구체성은 영역 밖 정보가 과소평가되고 이용 불가능해지는 결과를 낳을 수 있고, 이것은 사고의 경직으로 이어지는 반면, 지나친 일반성은 혼란·모호함·피상성을 초래한다.
     vocab:
     - word: excessive
       meaning: 지나친
@@ -213,22 +174,15 @@ practice:
     - word: fixedness
       meaning: 경직, 고착
     solution:
-      cut: 지나친 구체성은 / 초래할 수 있다 / [영역 밖 정보가 / 과소평가되고 이용 불가능해지는 것을] / 이것은 이어진다 / 사고의
-        경직으로 / 반면 / 지나친 일반성은 / 초래한다 / 혼란·모호·피상을
+      cut: 지나친 구체성은 / 초래할 수 있다 / [영역 밖 정보가 / 과소평가되고 이용 불가능해지는 것을] / 이것은 이어진다 / 사고의 경직으로 / 반면 / 지나친 일반성은 / 초래한다 / 혼란·모호·피상을
       wrong: 과소평가된 정보가 지나친 구체성을 초래한다.
-      wrong_why: 'result in은 정방향(A result in B: A가 B를 낳다). 원인(구체성)과 결과(정보 과소평가)를 뒤집으면
-        안 된다.'
+      wrong_why: 'result in은 정방향(A result in B: A가 B를 낳다). 원인(구체성)과 결과(정보 과소평가)를 뒤집으면 안 된다.'
       author_msg: 너무 구체적이면 바깥 정보를 놓쳐 사고가 굳고, 너무 두루뭉술하면 혼란해진다 — 양극단 모두 문제.
       key_points:
-      - '''result in ~ being underestimated'' : result in을 result from처럼 방향을 뒤집어 정보를
-        원인으로 읽기 쉽다 → A result in B는 A(구체성)가 B(정보 과소평가)를 낳음.'
-      cut_en: Excessive specificity / may result in / [information from outside the
-        domain / being underestimated and unavailable], / which leads to / fixedness
-        of thinking, / whereas / excessive generality / causes / chaos, vagueness,
-        and shallowness.
+      - '''result in ~ being underestimated'' : result in을 result from처럼 방향을 뒤집어 정보를 원인으로 읽기 쉽다 → A result in B는 A(구체성)가 B(정보 과소평가)를 낳음.'
+      cut_en: Excessive specificity / may result in / [information from outside the domain / being underestimated and unavailable], / which leads to / fixedness of thinking, / whereas / excessive generality / causes / chaos, vagueness, and shallowness.
   - kind: short
-    sentence: Changing political, social and religious landscapes will lead to the
-      emergence of new cultures, and with them new culturtainment experiences.
+    sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
     prompt: lead to에 유의하여 해석하시오.
     answer: 변화하는 정치·사회·종교 지형은 새로운 문화의 등장으로, 그와 함께 새로운 문화체험의 등장으로 이어질 것이다.
@@ -242,21 +196,16 @@ practice:
     solution:
       cut: 변화하는 / 정치·사회·종교 지형은 / 이어질 것이다 / [새로운 문화의 등장으로] / 그리고 그것들과 함께 / [새로운 문화체험으로]
       wrong: 새로운 문화가 정치·사회·종교 지형의 변화를 이끈다.
-      wrong_why: lead to는 정방향(A lead to B). 주어(landscapes)와 결과(new cultures)를 뒤바꾸면
-        인과가 뒤집힌다.
+      wrong_why: lead to는 정방향(A lead to B). 주어(landscapes)와 결과(new cultures)를 뒤바꾸면 인과가 뒤집힌다.
       author_msg: 정치·사회·종교의 변화가 원인이 되어 새 문화, 나아가 새 문화체험이 생겨난다.
       key_points:
-      - '''landscapes will lead to the emergence ...'' : 주어(지형 변화)와 결과(새 문화)를 뒤바꿔
-        ''문화가 지형을 이끈다''로 읽기 쉽다 → lead to의 주어는 landscapes(원인).'
-      cut_en: Changing / political, social and religious landscapes / will lead to
-        / [the emergence of new cultures], / and with them / [new culturtainment experiences].
+      - '''landscapes will lead to the emergence ...'' : 주어(지형 변화)와 결과(새 문화)를 뒤바꿔 ''문화가 지형을 이끈다''로 읽기 쉽다 → lead to의 주어는 landscapes(원인).'
+      cut_en: Changing / political, social and religious landscapes / will lead to / [the emergence of new cultures], / and with them / [new culturtainment experiences].
   - kind: short
-    sentence: Departure from the group may signal danger to nonvigilant animals and
-      cause what appears to be a coordinated flushing of prey from the area.
+    sentence: Departure from the group may signal danger to nonvigilant animals and cause what appears to be a coordinated flushing of prey from the area.
     source: 2022 고3 6월 39번
     prompt: cause에 유의하여 해석하시오.
-    answer: 무리에서 벗어나는 것은 경계하지 않는 동물들에게 위험 신호를 보내고, 그 지역에서 먹잇감이 조직적으로 몰려 달아나는 것처럼 보이는
-      사태를 일으킬 수 있다.
+    answer: 무리에서 벗어나는 것은 경계하지 않는 동물들에게 위험 신호를 보내고, 그 지역에서 먹잇감이 조직적으로 몰려 달아나는 것처럼 보이는 사태를 일으킬 수 있다.
     vocab:
     - word: departure
       meaning: 벗어남, 출발
@@ -265,20 +214,15 @@ practice:
     - word: prey
       meaning: 먹잇감
     solution:
-      cut: '[무리에서 벗어나는 것은] / 위험을 알릴 수 있다 / 경계 안 하는 동물들에게 / 그리고 일으킬 수 있다 / [겉보기에 조직적인
-        / 그 지역 먹잇감의 몰이 달아남처럼 보이는 것을]'
+      cut: '[무리에서 벗어나는 것은] / 위험을 알릴 수 있다 / 경계 안 하는 동물들에게 / 그리고 일으킬 수 있다 / [겉보기에 조직적인 / 그 지역 먹잇감의 몰이 달아남처럼 보이는 것을]'
       wrong: 먹잇감의 달아남이 무리에서의 이탈을 초래한다.
       wrong_why: cause의 주어는 'Departure from the group'(이탈). 원인(이탈)과 결과(먹잇감 몰이)를 뒤바꿨다.
       author_msg: 한 마리가 무리를 벗어나면, 그게 신호가 되어 먹잇감 전체가 우르르 달아나는 사태를 부를 수 있다.
       key_points:
-      - '''cause what appears to be ... flushing of prey'' : 뒤의 먹잇감 몰이를 주어로 착각해 인과를
-        뒤집기 쉽다 → cause의 주어는 Departure(이탈), 그것이 먹잇감 몰이를 일으킴.'
-      cut_en: '[Departure from the group] / may signal danger / to nonvigilant animals
-        / and cause / [what appears to be a coordinated / flushing of prey from the
-        area].'
+      - '''cause what appears to be ... flushing of prey'' : 뒤의 먹잇감 몰이를 주어로 착각해 인과를 뒤집기 쉽다 → cause의 주어는 Departure(이탈), 그것이 먹잇감 몰이를 일으킴.'
+      cut_en: '[Departure from the group] / may signal danger / to nonvigilant animals / and cause / [what appears to be a coordinated / flushing of prey from the area].'
   - kind: short
-    sentence: And it's not due to necessity but rather that the city quality is so
-      inviting.
+    sentence: And it's not due to necessity but rather that the city quality is so inviting.
     source: 2024 고3 9월 33번
     prompt: not due to A but rather B에 유의하여 해석하시오.
     answer: 그리고 그것은 필요(필연) 때문이 아니라, 오히려 도시의 질이 매우 매력적이기 때문이다.
@@ -292,23 +236,17 @@ practice:
     solution:
       cut: 그리고 그것은 / ~때문이 아니라 / 필요(필연) / 오히려 / 도시의 질이 / 매우 매력적이기 때문이다
       wrong: 그것은 필요 때문이지, 도시의 질 때문이 아니다.
-      wrong_why: not A but rather B는 'A가 아니라 오히려 B' — A(necessity)를 원인으로 잡고 B(도시 질)를
-        부정하면 정반대다.
+      wrong_why: not A but rather B는 'A가 아니라 오히려 B' — A(necessity)를 원인으로 잡고 B(도시 질)를 부정하면 정반대다.
       author_msg: 사람들이 그렇게 하는 건 어쩔 수 없어서가 아니라, 도시가 그만큼 매력적이라서다.
       key_points:
-      - '''not due to A but rather B'' : not/but의 위치를 놓쳐 원인을 A(necessity)로 잡기 쉽다 →
-        부정되는 원인은 A, 진짜 원인은 B(도시의 매력).'
-      cut_en: And it's / not due to / necessity / but rather / that the city quality
-        / is so inviting.
+      - '''not due to A but rather B'' : not/but의 위치를 놓쳐 원인을 A(necessity)로 잡기 쉽다 → 부정되는 원인은 A, 진짜 원인은 B(도시의 매력).'
+      cut_en: And it's / not due to / necessity / but rather / that the city quality / is so inviting.
   - kind: mc
-    sentence: However, such commercialization risks culturtainment ' becoming homogeneous
-      and losing its original message' that could lead to a dilution of audiences.
+    sentence: However, such commercialization risks culturtainment ' becoming homogeneous and losing its original message' that could lead to a dilution of audiences.
     source: 2026 고3 11월 24번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “관객층의 약화가 그러한 상업화로 하여금 컬처테인먼트를 획일화하고
-      원래의 메시지를 잃게 만드는 위험으로 이어진다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “관객층의 약화가 그러한 상업화로 하여금 컬처테인먼트를 획일화하고 원래의 메시지를 잃게 만드는 위험으로 이어진다”'
     options:
-    - ‘such commercialization risks ... becoming homogeneous’를 ‘획일화될 위험을 초래한다’로 옮긴
-      부분
+    - ‘such commercialization risks ... becoming homogeneous’를 ‘획일화될 위험을 초래한다’로 옮긴 부분
     - ‘that could lead to a dilution of audiences’를 ‘관객 약화가 상업화 위험을 낳는다’로 읽은 부분
     - ‘losing its original message’를 ‘원래의 메시지를 잃는 것’으로 옮긴 부분
     answer_index: 1
@@ -322,26 +260,19 @@ practice:
     - word: dilution
       meaning: 희석, 약화
     solution:
-      cut: 그러한 상업화는 ~할 위험이 있다 / 컬처테인먼트가 획일화되고 원래의 메시지를 잃게 되는 것 / 그리고 그것이 관객층의 약화로
-        이어질 수 있다
+      cut: 그러한 상업화는 ~할 위험이 있다 / 컬처테인먼트가 획일화되고 원래의 메시지를 잃게 되는 것 / 그리고 그것이 관객층의 약화로 이어질 수 있다
       wrong: 관객층의 약화를 원인으로, 상업화의 위험을 결과로 뒤집어 읽음
-      wrong_why: '''A lead to B''는 A(앞 내용=획일화·메시지 상실의 위험)가 원인, B(a dilution of audiences)가
-        결과다. 관계대명사 that의 선행사는 앞 절 전체(상업화가 초래하는 위험)이므로, 관객 약화가 원인이 될 수 없다. lead to를
-        ''이끌다/안내하다''가 아니라 ''야기하다''로 처리해야 하며 방향을 뒤집으면 안 된다.'
+      wrong_why: '''A lead to B''는 A(앞 내용=획일화·메시지 상실의 위험)가 원인, B(a dilution of audiences)가 결과다. 관계대명사 that의 선행사는 앞 절 전체(상업화가 초래하는 위험)이므로, 관객 약화가 원인이 될 수 없다. lead to를 ''이끌다/안내하다''가 아니라 ''야기하다''로 처리해야 하며 방향을 뒤집으면 안 된다.'
       author_msg: 상업화는 컬처테인먼트의 획일화와 메시지 상실을 부르고, 그 결과 관객층이 약화될 수 있다.
       key_points:
       - 'lead to (인과 표지) : ''이끌다/앞의 것이 결과'' 로 오독 → ''A(앞)가 원인, B(뒤)가 결과''로 방향 고정'
-      - 'risks + -ing : ''위험을 무릅쓰다''로만 보고 넘김 → ''risk A -ing = A가 ~하게 될 위험을 초래하다''로
-        처리'
-      cut_en: However, such commercialization risks / culturtainment ' becoming homogeneous
-        and losing its original message' / that could lead to a dilution of audiences.
+      - 'risks + -ing : ''위험을 무릅쓰다''로만 보고 넘김 → ''risk A -ing = A가 ~하게 될 위험을 초래하다''로 처리'
+      cut_en: However, such commercialization risks / culturtainment ' becoming homogeneous and losing its original message' / that could lead to a dilution of audiences.
   contrast:
   - kind: mc
-    sentence: In a city like Rome, it is the large number of people standing or sitting
-      in squares rather than walking that is conspicuous.
+    sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
     source: 2024 고3 9월 33번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에
-      띈다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “로마 같은 도시에서는 광장에서 걷고 있는 많은 사람들이 눈에 띈다.”'
     options:
     - ‘rather than walking’을 ‘걷고 있는 사람들이 눈에 띈다’로 읽은 부분
     - ‘standing or sitting in squares’를 ‘광장에 서 있거나 앉아 있는’으로 옮긴 부분
@@ -360,13 +291,10 @@ practice:
       wrong_why: rather than walking(걷는 것이 아니라)을 놓치면 대조가 사라져 정반대 대상을 강조하게 된다.
       author_msg: 로마에서 인상적인 건 '걷는' 사람이 아니라 광장에 '머무는' 사람이 많다는 점이다.
       key_points:
-      - '''rather than walking'' : ''걷는 사람''을 눈에 띄는 대상으로 착각하기 쉽다 → 강조 대상은 ''광장에 서
-        있거나 앉아 있는 사람들'', walking은 배제됨.'
-      cut_en: In a city like Rome, / it is [the large number of people standing or
-        sitting in squares] / rather than walking / that is conspicuous.
+      - '''rather than walking'' : ''걷는 사람''을 눈에 띄는 대상으로 착각하기 쉽다 → 강조 대상은 ''광장에 서 있거나 앉아 있는 사람들'', walking은 배제됨.'
+      cut_en: In a city like Rome, / it is [the large number of people standing or sitting in squares] / rather than walking / that is conspicuous.
   - kind: short
-    sentence: However, unlike most of the categories of collection and study that
-      make up those areas, it is fluid rather than static.
+    sentence: However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static.
     source: 2026 고3 11월 42번
     prompt: unlike와 rather than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 그러나, 그 영역들을 구성하는 대부분의 수집 및 연구 범주들과 달리, 그것은 정적이지 않고 유동적이다.
@@ -380,20 +308,15 @@ practice:
     solution:
       cut: 그러나 / 그 영역들을 구성하는 대부분의 수집 및 연구 범주들과 달리 / 그것은 정적이지 않고 유동적이다
       wrong: 대부분의 수집 및 연구 범주들처럼 그것은 고정적이다.
-      wrong_why: unlike(~와 달리)를 like(~처럼)로, static rather than fluid로 뒤집어 읽으면 대조가
-        정반대로 무너진다.
+      wrong_why: unlike(~와 달리)를 like(~처럼)로, static rather than fluid로 뒤집어 읽으면 대조가 정반대로 무너진다.
       author_msg: 다른 범주들은 고정적이지만, 이것만은 예외적으로 계속 변한다.
       key_points:
-      - '''unlike ... fluid rather than static'' : unlike를 ''~처럼''으로, fluid rather
-        than static을 ''정적''으로 뒤집어 읽기 쉽다 → 다른 범주와 ''달리'' 그것은 ''정적이 아니라 유동적''.'
-      cut_en: However, / unlike most of the categories of collection and study that
-        make up those areas, / it is fluid rather than static.
+      - '''unlike ... fluid rather than static'' : unlike를 ''~처럼''으로, fluid rather than static을 ''정적''으로 뒤집어 읽기 쉽다 → 다른 범주와 ''달리'' 그것은 ''정적이 아니라 유동적''.'
+      cut_en: However, / unlike most of the categories of collection and study that make up those areas, / it is fluid rather than static.
   - kind: mc
-    sentence: The truth of the matter is revealed not in the perception of the figure
-      but in its rational representation.
+    sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그 문제의 진실은 형상의 지각과 그것의 이성적 표상 속에서
-      드러난다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그 문제의 진실은 형상의 지각과 그것의 이성적 표상 속에서 드러난다.”'
     options:
     - ‘the truth of the matter’를 ‘그 문제의 진실’로 옮긴 부분
     - ‘rational representation’을 ‘이성적 표상’으로 옮긴 부분
@@ -412,18 +335,13 @@ practice:
       wrong_why: not A but B를 'A와 B 둘 다'로 읽으면 앞의 A를 부정하는 대조가 사라진다.
       author_msg: 진실은 눈에 보이는 형상 지각이 아니라 이성적 표상에서 드러난다.
       key_points:
-      - '''not in A but in B'' : ''A와 B 둘 다''로 읽어 A를 살려두기 쉽다 → A(형상 지각)는 부정, 진실이 드러나는
-        곳은 B(이성적 표상)뿐.'
-      cut_en: The truth of the matter / is revealed / not in the perception of the
-        figure / but in its rational representation.
+      - '''not in A but in B'' : ''A와 B 둘 다''로 읽어 A를 살려두기 쉽다 → A(형상 지각)는 부정, 진실이 드러나는 곳은 B(이성적 표상)뿐.'
+      cut_en: The truth of the matter / is revealed / not in the perception of the figure / but in its rational representation.
   - kind: short
-    sentence: While many city shoppers were clearly drawn to the notion of buying
-      and eating foods associated with nature, the nature claimed by the ads was no
-      longer the nature that created the foods.
+    sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
     prompt: While(양보)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 많은 도시 소비자들은 자연과 관련된 음식을 사고 먹는다는 생각에 분명히 이끌렸지만, 광고가 내세운 자연은 더 이상 그 음식을
-      만들어낸 자연이 아니었다.
+    answer: 많은 도시 소비자들은 자연과 관련된 음식을 사고 먹는다는 생각에 분명히 이끌렸지만, 광고가 내세운 자연은 더 이상 그 음식을 만들어낸 자연이 아니었다.
     vocab:
     - word: be drawn to
       meaning: ~에 이끌리다
@@ -432,25 +350,17 @@ practice:
     - word: no longer
       meaning: 더 이상 ~아닌
     solution:
-      cut: 많은 도시 소비자들이 ~에 분명히 이끌렸지만 / 자연과 관련된 음식을 사고 먹는다는 생각에 / 광고가 내세운 자연은 / 더 이상
-        그 음식을 만들어낸 자연이 아니었다
+      cut: 많은 도시 소비자들이 ~에 분명히 이끌렸지만 / 자연과 관련된 음식을 사고 먹는다는 생각에 / 광고가 내세운 자연은 / 더 이상 그 음식을 만들어낸 자연이 아니었다
       wrong: 많은 도시 소비자들이 자연 음식에 이끌리는 동안, 광고 속 자연은 음식을 만든 자연이었다.
       wrong_why: While을 '~하는 동안'의 시간으로 읽고 no longer를 놓치면 앞뒤의 양보 대조가 통째로 사라진다.
       author_msg: 소비자들은 '자연' 이미지에 이끌렸지만 광고 속 자연은 실제 음식을 만든 자연이 아니었다는 괴리를 지적한다.
       key_points:
-      - '''While ... no longer ...'' : While을 ''~하는 동안''(시간)으로 읽고 no longer를 놓치면 양보
-        대조가 사라진다 → ''비록 이끌렸지만'' 광고 속 자연은 ''더 이상'' 그 자연이 아님.'
-      cut_en: While many city shoppers were clearly drawn to / the notion of buying
-        and eating foods associated with nature, / the nature claimed by the ads /
-        was no longer the nature that created the foods.
+      - '''While ... no longer ...'' : While을 ''~하는 동안''(시간)으로 읽고 no longer를 놓치면 양보 대조가 사라진다 → ''비록 이끌렸지만'' 광고 속 자연은 ''더 이상'' 그 자연이 아님.'
+      cut_en: While many city shoppers were clearly drawn to / the notion of buying and eating foods associated with nature, / the nature claimed by the ads / was no longer the nature that created the foods.
   - kind: mc
-    sentence: While the hospital administration may serve as your client, no doubt
-      the perspectives of administration personnel will differ significantly from
-      those of doctors, interns, residents, nurses, and other medical staff who use
-      the building regularly.
+    sentence: While the hospital administration may serve as your client, no doubt the perspectives of administration personnel will differ significantly from those of doctors, interns, residents, nurses, and other medical staff who use the building regularly.
     source: 2026 고3 11월 33번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “병원 행정부가 당신의 고객 역할을 하는 동안, 분명 행정
-      직원들의 관점은 그 건물을 정기적으로 사용하는 의료진의 관점과 크게 다르지 않을 것이다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “병원 행정부가 당신의 고객 역할을 하는 동안, 분명 행정 직원들의 관점은 그 건물을 정기적으로 사용하는 의료진의 관점과 크게 다르지 않을 것이다.”'
     options:
     - ‘may serve as your client’를 ‘고객 역할을 할 수도 있다’로 옮긴 부분
     - While을 ‘~하는 동안’으로, differ from을 ‘다르지 않다’로 읽은 부분
@@ -464,26 +374,18 @@ practice:
     - word: differ from
       meaning: ~와 다르다
     solution:
-      cut: 병원 행정부가 당신의 고객 역할을 할 수도 있지만 / 분명 행정 직원들의 관점은 / 크게 다를 것이다 / 의사, 인턴, 레지던트,
-        간호사 및 기타 의료진의 관점과
+      cut: 병원 행정부가 당신의 고객 역할을 할 수도 있지만 / 분명 행정 직원들의 관점은 / 크게 다를 것이다 / 의사, 인턴, 레지던트, 간호사 및 기타 의료진의 관점과
       wrong: 행정부가 고객 역할을 하는 동안, 행정 직원의 관점은 의료진의 관점과 다르지 않을 것이다.
       wrong_why: While을 '~하는 동안'으로, differ from을 '다르지 않다'로 뒤집으면 대조 구조가 정반대로 무너진다.
       author_msg: 돈을 내는 고객(행정부)과 실제로 건물을 쓰는 사람(의료진)은 보는 눈이 크게 다르다.
       key_points:
-      - '''While ... differ significantly from ~'' : While을 ''~하는 동안''으로, differ from을
-        ''다르지 않다''로 뒤집으면 대조가 무너진다 → ''비록 ~이지만'' 두 관점은 ''크게 다르다''.'
-      cut_en: While the hospital administration may serve as your client, / no doubt
-        the perspectives of administration personnel / will differ significantly /
-        from those of doctors, interns, residents, nurses, and other medical staff
-        who use the building regularly.
+      - '''While ... differ significantly from ~'' : While을 ''~하는 동안''으로, differ from을 ''다르지 않다''로 뒤집으면 대조가 무너진다 → ''비록 ~이지만'' 두 관점은 ''크게 다르다''.'
+      cut_en: While the hospital administration may serve as your client, / no doubt the perspectives of administration personnel / will differ significantly / from those of doctors, interns, residents, nurses, and other medical staff who use the building regularly.
   - kind: short
-    sentence: Philosophers tend to ask questions rather than provide definitive answers,
-      and their contributions often consist of challenging established assumptions
-      and proposing new research approaches.
+    sentence: Philosophers tend to ask questions rather than provide definitive answers, and their contributions often consist of challenging established assumptions and proposing new research approaches.
     source: 2026 고3 11월 37번
     prompt: rather than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 철학자들은 확정적인 답을 제공하기보다는 질문을 던지는 경향이 있으며, 그들의 기여는 흔히 확립된 가정에 이의를 제기하고 새로운
-      연구 접근법을 제안하는 것으로 이루어진다.
+    answer: 철학자들은 확정적인 답을 제공하기보다는 질문을 던지는 경향이 있으며, 그들의 기여는 흔히 확립된 가정에 이의를 제기하고 새로운 연구 접근법을 제안하는 것으로 이루어진다.
     vocab:
     - word: definitive
       meaning: 확정적인, 결정적인
@@ -492,24 +394,17 @@ practice:
     - word: consist of
       meaning: ~로 이루어지다
     solution:
-      cut: 철학자들은 ~하는 경향이 있다 / 질문을 던지는 / 확정적인 답을 제공하기보다는 / 그리고 그들의 기여는 흔히 ~로 이루어진다
-        / 확립된 가정에 이의를 제기하고 새로운 연구 접근법을 제안하는 것
+      cut: 철학자들은 ~하는 경향이 있다 / 질문을 던지는 / 확정적인 답을 제공하기보다는 / 그리고 그들의 기여는 흔히 ~로 이루어진다 / 확립된 가정에 이의를 제기하고 새로운 연구 접근법을 제안하는 것
       wrong: 철학자들은 질문을 하고 확정적인 답도 제공하는 경향이 있다.
       wrong_why: rather than provide(제공하기보다는)를 'and 제공한다'로 읽으면 부정·대조가 사라져 의미가 뒤집힌다.
       author_msg: 철학자가 하는 일은 정답을 내놓기보다 질문을 던지고 기존 가정에 이의를 제기하는 데 있다.
       key_points:
-      - '''ask questions rather than provide answers'' : rather than provide를 ''and
-        제공한다''로 읽어 대조를 지우기 쉽다 → 택하는 쪽은 질문, provide answers는 배제됨.'
-      cut_en: Philosophers tend to / ask questions / rather than provide definitive
-        answers, / and their contributions often consist of / challenging established
-        assumptions and proposing new research approaches.
+      - '''ask questions rather than provide answers'' : rather than provide를 ''and 제공한다''로 읽어 대조를 지우기 쉽다 → 택하는 쪽은 질문, provide answers는 배제됨.'
+      cut_en: Philosophers tend to / ask questions / rather than provide definitive answers, / and their contributions often consist of / challenging established assumptions and proposing new research approaches.
   - kind: mc
-    sentence: Have we come closer to Aristotle's image of God as the immobile mover,
-      when elites exercise their power to move money, things and people, while they
-      themselves do not need to move at all?
+    sentence: Have we come closer to Aristotle's image of God as the immobile mover, when elites exercise their power to move money, things and people, while they themselves do not need to move at all?
     source: 2022 고3 6월 40번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하는 동안,
-      그들 자신도 함께 움직여야 한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하는 동안, 그들 자신도 함께 움직여야 한다.”'
     options:
     - ‘while they themselves do not need to move at all’을 ‘함께 움직여야 한다’로 읽은 부분
     - ‘move money, things and people’을 ‘돈, 물건, 사람을 움직이다’로 옮긴 부분
@@ -523,22 +418,15 @@ practice:
     - word: at all
       meaning: 전혀
     solution:
-      cut: 우리는 ~에 더 가까워졌는가 / 부동의 운동자로서의 아리스토텔레스의 신 이미지에 / 엘리트들이 돈, 물건, 사람을 움직이는 힘을
-        행사하지만 / 정작 그들 자신은 전혀 움직일 필요가 없을 때
+      cut: 우리는 ~에 더 가까워졌는가 / 부동의 운동자로서의 아리스토텔레스의 신 이미지에 / 엘리트들이 돈, 물건, 사람을 움직이는 힘을 행사하지만 / 정작 그들 자신은 전혀 움직일 필요가 없을 때
       wrong: 엘리트들이 힘을 행사하는 동안, 그들 자신도 함께 움직여야 한다.
-      wrong_why: while을 '~하는 동안'으로 읽고 do not need to move를 놓치면 '남은 움직이나 자신은 안 움직인다'는
-        대조가 사라진다.
+      wrong_why: while을 '~하는 동안'으로 읽고 do not need to move를 놓치면 '남은 움직이나 자신은 안 움직인다'는 대조가 사라진다.
       author_msg: 엘리트는 세상을 움직이면서도 정작 자신은 꿈쩍하지 않는 '부동의 운동자'를 닮았다.
       key_points:
-      - '''while they themselves do not need to move at all'' : while을 ''~하는 동안''으로
-        읽고 do not ... at all을 놓치면 ''남은 움직이나 자신은 안 움직인다''는 대조가 사라진다 → while은 ''~인 반면'',
-        엘리트 자신은 전혀 안 움직임.'
-      cut_en: Have we come closer / to Aristotle's image of God as the immobile mover,
-        / when elites exercise their power to move money, things and people, / while
-        they themselves do not need to move at all?
+      - '''while they themselves do not need to move at all'' : while을 ''~하는 동안''으로 읽고 do not ... at all을 놓치면 ''남은 움직이나 자신은 안 움직인다''는 대조가 사라진다 → while은 ''~인 반면'', 엘리트 자신은 전혀 안 움직임.'
+      cut_en: Have we come closer / to Aristotle's image of God as the immobile mover, / when elites exercise their power to move money, things and people, / while they themselves do not need to move at all?
   - kind: short
-    sentence: Urban transport professionals have largely acquiesced to the view that
-      automobile demand in cities needs to be managed rather than accommodated.
+    sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
     prompt: rather than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 도시 교통 전문가들은 도시의 자동차 수요가 수용되기보다는 관리되어야 한다는 견해를 대체로 묵인해 왔다.
@@ -552,22 +440,15 @@ practice:
     solution:
       cut: 도시 교통 전문가들은 / 대체로 ~라는 견해를 묵인해 왔다 / 도시의 자동차 수요가 / 수용되기보다는 / 관리되어야 한다는
       wrong: 자동차 수요가 관리되기보다는 수용되어야 한다는 견해를 묵인해 왔다.
-      wrong_why: managed rather than accommodated의 A와 B 순서를 뒤집어 읽으면 '관리 ↔ 수용'의 방향이
-        정반대가 된다.
+      wrong_why: managed rather than accommodated의 A와 B 순서를 뒤집어 읽으면 '관리 ↔ 수용'의 방향이 정반대가 된다.
       author_msg: 자동차 수요는 무조건 받아주는(수용) 대상이 아니라 관리해야 할 대상이라는 견해가 지배적임을 말한다.
       key_points:
-      - '''managed rather than accommodated'' : A와 B 순서를 뒤집어 ''관리보다 수용''으로 읽기 쉽다 →
-        택하는 쪽은 managed(관리), accommodated(수용)는 배제됨.'
-      cut_en: Urban transport professionals / have largely acquiesced to the view
-        / that automobile demand in cities / needs to be managed / rather than accommodated.
+      - '''managed rather than accommodated'' : A와 B 순서를 뒤집어 ''관리보다 수용''으로 읽기 쉽다 → 택하는 쪽은 managed(관리), accommodated(수용)는 배제됨.'
+      cut_en: Urban transport professionals / have largely acquiesced to the view / that automobile demand in cities / needs to be managed / rather than accommodated.
   - kind: mc
-    sentence: Generally, this implies that sufficient fresh snow must accumulate during
-      the cold months to offset melting during the summer, although on a year‑to‑year
-      basis, glaciers may expand or contract, depending on local and global climatic
-      conditions.
+    sentence: Generally, this implies that sufficient fresh snow must accumulate during the cold months to offset melting during the summer, although on a year‑to‑year basis, glaciers may expand or contract, depending on local and global climatic conditions.
     source: 2025 고3 6월 35번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓이기
-      때문에 여름철의 녹음이 상쇄되고, 그래서 해마다 빙하가 기후 조건에 따라 팽창하거나 수축한다는 것을 의미한다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓이기 때문에 여름철의 녹음이 상쇄되고, 그래서 해마다 빙하가 기후 조건에 따라 팽창하거나 수축한다는 것을 의미한다”'
     options:
     - ‘sufficient fresh snow must accumulate’를 ‘충분한 새 눈이 쌓여야 한다’로 옮긴 부분
     - ‘glaciers may expand or contract’를 ‘빙하가 팽창하거나 수축한다’로 옮긴 부분
@@ -583,29 +464,19 @@ practice:
     - word: climatic
       meaning: 기후의
     solution:
-      cut: 일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓여야 한다는 것을 의미한다 / 여름철의 녹음을 상쇄하기 위해 / 비록 빙하가
-        팽창하거나 수축할 수 있지만
+      cut: 일반적으로 이것은, 추운 달 동안 충분한 새 눈이 쌓여야 한다는 것을 의미한다 / 여름철의 녹음을 상쇄하기 위해 / 비록 빙하가 팽창하거나 수축할 수 있지만
       wrong: although를 이유(because)·결과(so)로 바꿔 앞뒤를 인과로 이어 읽음
-      wrong_why: 'although는 ''비록 ~이지만''의 양보 접속사로, 주절(장기적 균형: 눈이 쌓여 녹음을 상쇄)과 종속절(해마다는
-        변동)을 대조시킨다. 이를 because/so의 인과로 바꾸면 필자가 세운 ''큰 흐름 vs 단기 변동''의 대조가 사라진다. offset은
-        ''상쇄하다''이지 ''녹음이 상쇄된다(수동 결과)''가 아니다.'
+      wrong_why: 'although는 ''비록 ~이지만''의 양보 접속사로, 주절(장기적 균형: 눈이 쌓여 녹음을 상쇄)과 종속절(해마다는 변동)을 대조시킨다. 이를 because/so의 인과로 바꾸면 필자가 세운 ''큰 흐름 vs 단기 변동''의 대조가 사라진다. offset은 ''상쇄하다''이지 ''녹음이 상쇄된다(수동 결과)''가 아니다.'
       author_msg: 장기적으로는 여름의 녹음을 상쇄할 만큼 눈이 쌓여야 하지만, 해마다는 기후에 따라 빙하가 늘거나 줄 수 있다.
       key_points:
       - 'although (양보·대조 표지) : because/so의 인과로 오독 → ''비록 ~이지만''으로 앞뒤를 대조'
-      - 'to offset : ''상쇄되다''라는 결과로 오독 → ''must accumulate ~ to offset(상쇄하기 위해 쌓여야)''의
-        목적으로 처리'
-      cut_en: Generally, this implies that sufficient fresh snow must accumulate during
-        the cold months / to offset melting during the summer, / although on a year‑to‑year
-        basis, glaciers may expand or contract, depending on local and global climatic
-        conditions.
+      - 'to offset : ''상쇄되다''라는 결과로 오독 → ''must accumulate ~ to offset(상쇄하기 위해 쌓여야)''의 목적으로 처리'
+      cut_en: Generally, this implies that sufficient fresh snow must accumulate during the cold months / to offset melting during the summer, / although on a year‑to‑year basis, glaciers may expand or contract, depending on local and global climatic conditions.
   - kind: short
-    sentence: Recognizing how she felt about her failure, Ken, her teammate, approached
-      her and said, "Jamie, even though you didn't set a personal best time today,
-      your performances have improved dramatically."
+    sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said, "Jamie, even though you didn't set a personal best time today, your performances have improved dramatically."
     source: 2023 고3 11월 19번
     prompt: 대조(even though)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 그녀가 자신의 실패에 대해 어떻게 느끼는지 알아차리고, 그녀의 팀 동료인 Ken이 그녀에게 다가가 말했다. "Jamie, 비록
-      오늘 개인 최고 기록을 세우지는 못했지만, 네 경기력은 극적으로 향상되었어."
+    answer: 그녀가 자신의 실패에 대해 어떻게 느끼는지 알아차리고, 그녀의 팀 동료인 Ken이 그녀에게 다가가 말했다. "Jamie, 비록 오늘 개인 최고 기록을 세우지는 못했지만, 네 경기력은 극적으로 향상되었어."
     vocab:
     - word: recognize
       meaning: 알아차리다, 인식하다
@@ -616,22 +487,36 @@ practice:
     - word: dramatically
       meaning: 극적으로
     solution:
-      cut: 그녀가 자신의 실패를 어떻게 느끼는지 알아차리고 / Ken이 다가가 말했다 / 비록 오늘 개인 최고 기록을 세우지 못했지만 /
-        네 경기력은 극적으로 향상되었어
+      cut: 그녀가 자신의 실패를 어떻게 느끼는지 알아차리고 / Ken이 다가가 말했다 / 비록 오늘 개인 최고 기록을 세우지 못했지만 / 네 경기력은 극적으로 향상되었어
       wrong: even though를 무시하고 앞뒤를 모두 부정적으로(기록도 못 세우고 실력도 그대로) 읽음
-      wrong_why: even though는 '비록 ~일지라도'의 양보로, 앞의 부정적 사실(기록 미달성)과 뒤의 긍정적 사실(경기력 향상)을
-        대조시켜 뒤쪽에 무게를 싣는다. 양보절을 놓치면 격려의 요지가 사라진다.
+      wrong_why: even though는 '비록 ~일지라도'의 양보로, 앞의 부정적 사실(기록 미달성)과 뒤의 긍정적 사실(경기력 향상)을 대조시켜 뒤쪽에 무게를 싣는다. 양보절을 놓치면 격려의 요지가 사라진다.
       author_msg: 기록은 못 세웠지만 경기력은 크게 나아졌다며 Ken이 그녀를 격려한다.
       key_points:
       - 'even though (양보·대조 표지) : 앞뒤를 같은 방향(둘 다 부정)으로 오독 → ''비록 A(부정)지만 B(긍정)''로 대조'
-      cut_en: Recognizing how she felt about her failure, / Ken, her teammate, approached
-        her and said, / "Jamie, even though you didn't set a personal best time today,
-        / your performances have improved dramatically."
+      cut_en: Recognizing how she felt about her failure, / Ken, her teammate, approached her and said, / "Jamie, even though you didn't set a personal best time today, / your performances have improved dramatically."
+  - kind: short
+    sentence: Overly rigid habits and conventions, no matter how well-considered or well-intentioned, threaten innovation.
+    source: 2024 고3 9월 24번
+    prompt: no matter how에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 지나치게 경직된 습관과 관습은, 아무리 잘 숙고되거나 선의로 이루어졌더라도, 혁신을 위협한다.
+    vocab:
+    - word: rigid
+      meaning: 경직된
+    - word: convention
+      meaning: 관습
+    - word: well-intentioned
+      meaning: 선의의
+    solution:
+      cut: 지나치게 경직된 습관과 관습은 / 아무리 잘 숙고되거나 선의로 이루어졌더라도 / 혁신을 위협한다
+      wrong: 잘 숙고되고 선의로 이루어진 습관과 관습은 혁신을 돕는다.
+      wrong_why: no matter how well ~(아무리 잘 ~해도)의 양보를 빼먹고 '좋으니 돕는다'로 옮기면 필자의 주장(경직성은 위협)이 정반대가 된다.
+      author_msg: 의도가 아무리 좋아도, 지나치게 굳어버린 습관·관습은 혁신을 가로막는다.
+      key_points:
+      - '''no matter how well-considered ... threaten innovation'' : no matter how well ~를 빼먹고 ''좋으니 돕는다''로 뒤집기 쉽다 → ''아무리 좋아도'' 경직된 습관은 혁신을 ''위협''.'
+      cut_en: Overly rigid habits and conventions, / no matter how well-considered or well-intentioned, / threaten innovation.
   equivalence:
   - kind: mc
-    sentence: 'In other words, as museums struggle to survive in a competitive economy,
-      their budgets often prioritise those parts of themselves that are consumable:
-      infotainment in the galleries, goods and services in the cafes and the shops.'
+    sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
     source: 2023 고3 6월 23번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 앞과는 다른 새로운 예산 원칙을 세운다.”'
     options:
@@ -647,25 +532,17 @@ practice:
     - word: infotainment
       meaning: 인포테인먼트(정보+오락)
     solution:
-      cut: 다시 말해 / 박물관이 경쟁 경제에서 살아남으려 애쓰며 / 예산을 우선 배정한다 / [소비 가능한 자기 부분들에] / 즉, 전시관
-        인포테인먼트, 카페·상점 상품·서비스
+      cut: 다시 말해 / 박물관이 경쟁 경제에서 살아남으려 애쓰며 / 예산을 우선 배정한다 / [소비 가능한 자기 부분들에] / 즉, 전시관 인포테인먼트, 카페·상점 상품·서비스
       wrong: 다시 말해, 박물관은 새로운 예산 원칙을 세운다.
-      wrong_why: In other words는 앞 내용의 재진술(=)이지 새 정보가 아니다. 콜론(:) 뒤는 'consumable parts'의
-        구체 예시다.
+      wrong_why: In other words는 앞 내용의 재진술(=)이지 새 정보가 아니다. 콜론(:) 뒤는 'consumable parts'의 구체 예시다.
       author_msg: 돈이 걸리니 박물관도 관람객 눈에 보이는 소비형 콘텐츠 위주로 예산을 쓴다.
       key_points:
-      - '''In other words ... consumable: ...'' : In other words를 새 정보로, 콜론(:)을 새
-        항목으로 오해하기 쉽다 → In other words는 앞 내용 재진술, 콜론 뒤는 ''소비 가능한 부분''의 구체 예시.'
-      cut_en: 'In other words, / as museums struggle to survive in a competitive economy,
-        / their budgets often prioritise / [those parts of themselves that are consumable]:
-        / infotainment in the galleries, goods and services in the cafes and the shops.'
+      - '''In other words ... consumable: ...'' : In other words를 새 정보로, 콜론(:)을 새 항목으로 오해하기 쉽다 → In other words는 앞 내용 재진술, 콜론 뒤는 ''소비 가능한 부분''의 구체 예시.'
+      cut_en: 'In other words, / as museums struggle to survive in a competitive economy, / their budgets often prioritise / [those parts of themselves that are consumable]: / infotainment in the galleries, goods and services in the cafes and the shops.'
   - kind: mc
-    sentence: For the present generation of artists, the computer, or more appropriately,
-      the laptop, is one in a collection of integrated, portable digital technologies
-      that link their social and working life.
+    sentence: For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.
     source: 2022 고3 6월 31번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “현세대 예술가에게 컴퓨터냐 노트북이냐를 놓고 더 적절한 것을
-      선택해야 한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “현세대 예술가에게 컴퓨터냐 노트북이냐를 놓고 더 적절한 것을 선택해야 한다.”'
     options:
     - ‘integrated, portable digital technologies’를 ‘통합적·휴대용 디지털 기술’로 옮긴 부분
     - ‘the computer, or more appropriately, the laptop’의 or를 ‘선택(또는)’으로 읽은 부분
@@ -679,24 +556,17 @@ practice:
     - word: portable
       meaning: 휴대 가능한
     solution:
-      cut: 현세대 예술가에게 / 컴퓨터, 즉 더 적절히는 노트북은 / ~중 하나이다 / [통합적·휴대용 디지털 기술 모음] / 그들의 사회·직장
-        생활을 연결하는
+      cut: 현세대 예술가에게 / 컴퓨터, 즉 더 적절히는 노트북은 / ~중 하나이다 / [통합적·휴대용 디지털 기술 모음] / 그들의 사회·직장 생활을 연결하는
       wrong: 컴퓨터냐 노트북이냐 더 적절한 것을 골라야 한다.
-      wrong_why: 여기서 or는 선택의 '또는'이 아니라 앞말을 바꿔 말하는 동격(=즉)이다. computer를 laptop으로 더 정확히
-        재진술한 것.
+      wrong_why: 여기서 or는 선택의 '또는'이 아니라 앞말을 바꿔 말하는 동격(=즉)이다. computer를 laptop으로 더 정확히 재진술한 것.
       author_msg: 요즘 예술가에게 그 컴퓨터란 곧 노트북이며, 삶을 잇는 여러 휴대 기술 중 하나다.
       key_points:
-      - '''the computer, or (more appropriately), the laptop'' : or를 ''선택(또는)''으로
-        읽어 ''둘 중 고르라''로 오해하기 쉽다 → 여기 or는 동격(=즉), computer를 laptop으로 바꿔 부른 것.'
-      cut_en: For the present generation of artists, / the computer, or more appropriately,
-        the laptop, / is one in / [a collection of integrated, portable digital technologies]
-        / that link their social and working life.
+      - '''the computer, or (more appropriately), the laptop'' : or를 ''선택(또는)''으로 읽어 ''둘 중 고르라''로 오해하기 쉽다 → 여기 or는 동격(=즉), computer를 laptop으로 바꿔 부른 것.'
+      cut_en: For the present generation of artists, / the computer, or more appropriately, the laptop, / is one in / [a collection of integrated, portable digital technologies] / that link their social and working life.
   - kind: mc
-    sentence: Roads are there all the time, so their speed is the most important fact
-      that distinguishes them.
+    sentence: Roads are there all the time, so their speed is the most important fact that distinguishes them.
     source: 2026 고3 11월 23번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도로는 항상 그 자리에 있으므로, 도로의 속도를 다른 것과
-      구별하기 어렵다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도로는 항상 그 자리에 있으므로, 도로의 속도를 다른 것과 구별하기 어렵다.”'
     options:
     - ‘Roads are there all the time’을 ‘도로는 항상 그 자리에 있다’로 옮긴 부분
     - ‘the most important fact’를 ‘가장 중요한 사실’로 옮긴 부분
@@ -712,17 +582,13 @@ practice:
     solution:
       cut: 도로는 항상 거기 있다 / 그래서 / 도로의 속도가 ~이다 / [가장 중요한 사실] / 그것들(도로)을 구별해 주는
       wrong: 도로의 속도를 다른 것과 구별하기 어렵다.
-      wrong_why: that distinguishes them은 fact를 꾸미는 관계사절로 '(도로들을) 구별해 주는' 사실이라는 뜻.
-        '구별하기 어렵다'는 부정 의미가 문장에 없다.
+      wrong_why: that distinguishes them은 fact를 꾸미는 관계사절로 '(도로들을) 구별해 주는' 사실이라는 뜻. '구별하기 어렵다'는 부정 의미가 문장에 없다.
       author_msg: 도로는 늘 있으니 차별화 포인트는 결국 '속도'다.
       key_points:
-      - '''the fact that distinguishes them'' : distinguish를 ''구별하기 어렵다''는 부정 의미로
-        넘겨짚기 쉽다 → that절은 fact를 꾸며 ''도로를 구별해 주는'' 사실, 부정 의미 없음.'
-      cut_en: Roads are there all the time, / so / their speed is / [the most important
-        fact] / that distinguishes them.
+      - '''the fact that distinguishes them'' : distinguish를 ''구별하기 어렵다''는 부정 의미로 넘겨짚기 쉽다 → that절은 fact를 꾸며 ''도로를 구별해 주는'' 사실, 부정 의미 없음.'
+      cut_en: Roads are there all the time, / so / their speed is / [the most important fact] / that distinguishes them.
   - kind: mc
-    sentence: In particular, they define a group as two or more people who interact
-      with, and exert mutual influences on, each other.
+    sentence: In particular, they define a group as two or more people who interact with, and exert mutual influences on, each other.
     source: 2022 고3 9월 40번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “특히 그들은 집단에게 두 명 이상의 사람이 되라고 요구한다.”'
     options:
@@ -740,20 +606,15 @@ practice:
     solution:
       cut: 특히 / 그들은 정의한다 / 집단을 / [둘 이상의 사람]으로 / 서로 상호작용하고 상호 영향을 주고받는
       wrong: 그들은 집단에게 두 명 이상이 되라고 요구한다.
-      wrong_why: define A as B는 'A를 B로 정의하다'라는 등호 구문이다. as를 '~로서/되도록'으로 오해하면 안 된다.
-        A(a group)=B(two or more people ...).
+      wrong_why: define A as B는 'A를 B로 정의하다'라는 등호 구문이다. as를 '~로서/되도록'으로 오해하면 안 된다. A(a group)=B(two or more people ...).
       author_msg: '''집단''의 정의는 곧 ''상호작용·상호영향을 주고받는 둘 이상''이다.'
       key_points:
-      - '''define A as B'' : as를 ''~로서/되도록''으로 읽어 ''되라고 요구''로 오해하기 쉽다 → define A as
-        B는 A=B 등호(집단=상호작용하는 둘 이상).'
-      cut_en: In particular, / they define / a group / as [two or more people] / who
-        interact with, and exert mutual influences on, each other.
+      - '''define A as B'' : as를 ''~로서/되도록''으로 읽어 ''되라고 요구''로 오해하기 쉽다 → define A as B는 A=B 등호(집단=상호작용하는 둘 이상).'
+      cut_en: In particular, / they define / a group / as [two or more people] / who interact with, and exert mutual influences on, each other.
   - kind: mc
-    sentence: The fact that we have not found such a case in countless examinations
-      of the fossil record strengthens the case for evolutionary theory.
+    sentence: The fact that we have not found such a case in countless examinations of the fossil record strengthens the case for evolutionary theory.
     source: 2022 고3 6월 36번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리가 찾아낸 그 사실이 무수한 화석 기록 조사에서 진화론의
-      근거를 강화한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리가 찾아낸 그 사실이 무수한 화석 기록 조사에서 진화론의 근거를 강화한다.”'
     options:
     - ‘countless examinations of the fossil record’를 ‘무수한 화석 기록 조사’로 옮긴 부분
     - ‘The fact that we have not found ...’을 ‘우리가 찾아낸 사실’로 읽은 부분
@@ -769,22 +630,16 @@ practice:
     solution:
       cut: 그 사실이 / [즉, 우리가 그런 사례를 찾지 못했다는] / 무수한 화석 기록 조사에서 / 강화한다 / 진화론에 대한 근거를
       wrong: 우리가 찾아낸 그 사실이 ~ 강화한다.
-      wrong_why: The fact that의 that은 동격 접속사로 'the fact = 우리가 그런 사례를 못 찾았다'를 뜻한다.
-        관계사('찾아낸 사실')로 오해하면 뜻이 뒤집힌다. 게다가 not found(부정)를 놓쳤다.
+      wrong_why: The fact that의 that은 동격 접속사로 'the fact = 우리가 그런 사례를 못 찾았다'를 뜻한다. 관계사('찾아낸 사실')로 오해하면 뜻이 뒤집힌다. 게다가 not found(부정)를 놓쳤다.
       author_msg: '''반례를 못 찾았다''는 사실 자체가 진화론을 뒷받침한다.'
       key_points:
-      - '''The fact that we have not found ...'' : that을 관계사로 읽어 ''찾아낸 사실''로, not
-        found를 긍정으로 뒤집기 쉽다 → that은 동격(fact=반례를 못 찾았다는 것), 부정이 핵심.'
-      cut_en: The fact / [that we have not found such a case] / in countless examinations
-        of the fossil record / strengthens / the case for evolutionary theory.
+      - '''The fact that we have not found ...'' : that을 관계사로 읽어 ''찾아낸 사실''로, not found를 긍정으로 뒤집기 쉽다 → that은 동격(fact=반례를 못 찾았다는 것), 부정이 핵심.'
+      cut_en: The fact / [that we have not found such a case] / in countless examinations of the fossil record / strengthens / the case for evolutionary theory.
   - kind: short
-    sentence: In other words, they not only have an innate capacity for matching their
-      own kinaesthetically experienced bodily movements with those of others that
-      are visually perceived; they have an innate drive to do so.
+    sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
     prompt: In other words(재진술)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 다시 말해, 그들은 자신의 운동 감각적으로 경험된 신체 움직임을 시각적으로 지각되는 타인의 움직임과 일치시키는 타고난 능력을
-      지닐 뿐만 아니라, 그렇게 하려는 타고난 욕구도 지닌다.
+    answer: 다시 말해, 그들은 자신의 운동 감각적으로 경험된 신체 움직임을 시각적으로 지각되는 타인의 움직임과 일치시키는 타고난 능력을 지닐 뿐만 아니라, 그렇게 하려는 타고난 욕구도 지닌다.
     vocab:
     - word: innate
       meaning: 타고난
@@ -793,21 +648,15 @@ practice:
     - word: perceive
       meaning: 지각하다
     solution:
-      cut: 다시 말해 / 그들은 ~할 뿐 아니라 / [타고난 능력을 지닌다] / 자기 신체 움직임을 타인의 움직임과 일치시키는 / 그렇게
-        하려는 타고난 욕구도 지닌다
+      cut: 다시 말해 / 그들은 ~할 뿐 아니라 / [타고난 능력을 지닌다] / 자기 신체 움직임을 타인의 움직임과 일치시키는 / 그렇게 하려는 타고난 욕구도 지닌다
       wrong: 다시 말해, 그들은 새로운 능력을 학습으로 얻는다.
-      wrong_why: In other words는 앞 내용을 다시 말하는 재진술 신호이며 innate(타고난)는 '학습'과 반대다. not
-        only A; (also) B 구조로 '능력'에 더해 '욕구'까지 강조한다.
+      wrong_why: In other words는 앞 내용을 다시 말하는 재진술 신호이며 innate(타고난)는 '학습'과 반대다. not only A; (also) B 구조로 '능력'에 더해 '욕구'까지 강조한다.
       author_msg: 일치시키는 능력만 타고난 게 아니라, 그러려는 욕구까지 타고났다.
       key_points:
-      - '''innate capacity ... innate drive'' : innate(타고난)를 ''학습으로 얻는''으로 오해하기 쉽다
-        → 능력도 욕구도 ''타고난'' 것, not only A; (also) B로 둘 다 강조.'
-      cut_en: In other words, / they not only / have [an innate capacity] / for matching
-        their own kinaesthetically experienced bodily movements with those of others
-        that are visually perceived; / they have an innate drive to do so.
+      - '''innate capacity ... innate drive'' : innate(타고난)를 ''학습으로 얻는''으로 오해하기 쉽다 → 능력도 욕구도 ''타고난'' 것, not only A; (also) B로 둘 다 강조.'
+      cut_en: In other words, / they not only / have [an innate capacity] / for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; / they have an innate drive to do so.
   - kind: short
-    sentence: Instead, they should concentrate attention on one subject after another,
-      that is, in different periods of time.
+    sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
     source: 2024 고3 11월 40번
     prompt: that is(재진술)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 대신에, 그들은 한 주제에 이어 또 다른 주제로, 즉 서로 다른 시간대에 나누어 주의를 집중해야 한다.
@@ -821,21 +670,16 @@ practice:
     solution:
       cut: 대신에 / 그들은 주의를 집중해야 한다 / [한 주제에 이어 또 다른 주제로] / 즉 / 서로 다른 시간대에
       wrong: 대신에, 그들은 한 주제와 또 다른 주제를, 그리고 다른 시간대를 각각 다뤄야 한다.
-      wrong_why: that is는 '즉'으로 앞말을 바꿔 말하는 재진술 신호다. 'in different periods of time'은
-        새 항목이 아니라 'one after another'를 시간 관점에서 다시 설명한 것.
+      wrong_why: that is는 '즉'으로 앞말을 바꿔 말하는 재진술 신호다. 'in different periods of time'은 새 항목이 아니라 'one after another'를 시간 관점에서 다시 설명한 것.
       author_msg: 한 번에 하나씩, 곧 시간을 나눠 주제에 집중하라는 말.
       key_points:
-      - '''one after another, that is, in different periods'' : that is를 놓쳐 in different
-        periods를 새 항목으로 나열하기 쉽다 → that is는 ''즉'', 앞말을 시간 관점으로 바꿔 말한 재진술.'
-      cut_en: Instead, / they should concentrate attention / on [one subject after
-        another], / that is, / in different periods of time.
+      - '''one after another, that is, in different periods'' : that is를 놓쳐 in different periods를 새 항목으로 나열하기 쉽다 → that is는 ''즉'', 앞말을 시간 관점으로 바꿔 말한 재진술.'
+      cut_en: Instead, / they should concentrate attention / on [one subject after another], / that is, / in different periods of time.
   - kind: short
-    sentence: When you say "It's mine" in reference to a resource, often that means
-      you own a lot of the sticks that make up the full bundle.
+    sentence: When you say "It's mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle.
     source: 2023 고3 6월 21번
     prompt: that means(재진술)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 어떤 자원에 대해 여러분이 '그건 내 것이다'라고 말할 때, 흔히 그것은 여러분이 그 완전한 묶음을 이루는 많은 막대기(권리)를
-      소유하고 있음을 의미한다.
+    answer: 어떤 자원에 대해 여러분이 '그건 내 것이다'라고 말할 때, 흔히 그것은 여러분이 그 완전한 묶음을 이루는 많은 막대기(권리)를 소유하고 있음을 의미한다.
     vocab:
     - word: in reference to
       meaning: ~에 관하여
@@ -844,25 +688,18 @@ practice:
     - word: make up
       meaning: 구성하다, 이루다
     solution:
-      cut: 여러분이 '그건 내 것'이라 말할 때 / 어떤 자원에 관해 / 흔히 그것은 의미한다 / 여러분이 많은 막대기를 소유함을 / 그
-        완전한 묶음을 이루는
+      cut: 여러분이 '그건 내 것'이라 말할 때 / 어떤 자원에 관해 / 흔히 그것은 의미한다 / 여러분이 많은 막대기를 소유함을 / 그 완전한 묶음을 이루는
       wrong: 그것은 여러분이 많은 막대기를 만들었음을 의미한다.
-      wrong_why: that means는 앞말('It's mine')을 풀어 다시 말하는 재진술이다. make up은 '만들다'가 아니라
-        '구성하다(이루다)'이고, that make up the full bundle은 sticks를 꾸미는 관계사절.
+      wrong_why: that means는 앞말('It's mine')을 풀어 다시 말하는 재진술이다. make up은 '만들다'가 아니라 '구성하다(이루다)'이고, that make up the full bundle은 sticks를 꾸미는 관계사절.
       author_msg: '''내 것''이란 곧 권리 묶음의 많은 막대기를 가졌다는 뜻이다.'
       key_points:
-      - '''the sticks that make up the full bundle'' : make up을 ''만들다''로 오해하기 쉽다 →
-        make up은 ''구성하다·이루다'', that절은 sticks를 꾸미는 관계사절.'
-      cut_en: When you say "It's mine" / in reference to a resource, / often that
-        means / you own a lot of the sticks / that make up the full bundle.
+      - '''the sticks that make up the full bundle'' : make up을 ''만들다''로 오해하기 쉽다 → make up은 ''구성하다·이루다'', that절은 sticks를 꾸미는 관계사절.'
+      cut_en: When you say "It's mine" / in reference to a resource, / often that means / you own a lot of the sticks / that make up the full bundle.
   - kind: short
-    sentence: Moreover, equal access to speech and hearing promoted the notion that
-      property should be held in common, that goods and food in particular should
-      be shared, and that everyone had a duty to take care of everyone else.
+    sentence: Moreover, equal access to speech and hearing promoted the notion that property should be held in common, that goods and food in particular should be shared, and that everyone had a duty to take care of everyone else.
     source: 2024 고3 6월 22번
     prompt: the notion that(동격)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 게다가, 말하고 듣는 것에 대한 동등한 접근은 재산이 공동으로 소유되어야 하고, 특히 물자와 식량이 공유되어야 하며, 모두가
-      서로를 돌볼 의무가 있다는 관념을 촉진했다.
+    answer: 게다가, 말하고 듣는 것에 대한 동등한 접근은 재산이 공동으로 소유되어야 하고, 특히 물자와 식량이 공유되어야 하며, 모두가 서로를 돌볼 의무가 있다는 관념을 촉진했다.
     vocab:
     - word: in common
       meaning: 공동으로
@@ -871,27 +708,18 @@ practice:
     - word: duty
       meaning: 의무
     solution:
-      cut: 게다가 / 말·듣기에 대한 동등한 접근이 / 촉진했다 / 그 관념을 / [즉, 재산이 공동 소유되어야 하고, 특히 물자·식량이
-        공유되어야 하며, 모두가 서로를 돌볼 의무가 있다는 관념]
+      cut: 게다가 / 말·듣기에 대한 동등한 접근이 / 촉진했다 / 그 관념을 / [즉, 재산이 공동 소유되어야 하고, 특히 물자·식량이 공유되어야 하며, 모두가 서로를 돌볼 의무가 있다는 관념]
       wrong: ~접근이, 공동 소유되어야 할 그 관념을 (관념이 소유되는) 촉진했다.
-      wrong_why: 세 개의 that절은 모두 the notion과 동격으로 '~라는 관념'의 내용을 나열한다. 관계사로 오해해 '관념이
-        소유된다'로 읽으면 안 된다. that① that② that③은 병렬 동격절.
+      wrong_why: 세 개의 that절은 모두 the notion과 동격으로 '~라는 관념'의 내용을 나열한다. 관계사로 오해해 '관념이 소유된다'로 읽으면 안 된다. that① that② that③은 병렬 동격절.
       author_msg: 동등한 소통이 공유·공동소유·상호부조라는 세 관념을 함께 키웠다.
       key_points:
-      - '''the notion that ..., that ..., and that ...'' : 세 that을 관계사로 읽어 ''관념이 소유·공유된다''로
-        오해하기 쉽다 → 세 that절은 모두 notion과 동격(관념의 내용) 병렬.'
-      cut_en: Moreover, / equal access to speech and hearing / promoted / the notion
-        / [that property should be held in common, that goods and food in particular
-        should be shared, and that everyone had a duty to take care of everyone else].
+      - '''the notion that ..., that ..., and that ...'' : 세 that을 관계사로 읽어 ''관념이 소유·공유된다''로 오해하기 쉽다 → 세 that절은 모두 notion과 동격(관념의 내용) 병렬.'
+      cut_en: Moreover, / equal access to speech and hearing / promoted / the notion / [that property should be held in common, that goods and food in particular should be shared, and that everyone had a duty to take care of everyone else].
   - kind: short
-    sentence: After all, didn't they demonstrate those qualities on the journey to
-      Oz, a journey motivated by little more than an expectation, an idea about the
-      future likelihood of getting something they wanted?
+    sentence: After all, didn't they demonstrate those qualities on the journey to Oz, a journey motivated by little more than an expectation, an idea about the future likelihood of getting something they wanted?
     source: 2023 고3 6월 29번
-    prompt: 콤마 동격(a journey ... / an expectation, an idea ...)에 유의하여 밑줄 친 문장을 우리말로
-      해석하시오.
-    answer: 결국, 그들은 오즈로 가는 여정, 즉 기대, 다시 말해 자신들이 원하는 것을 얻을 미래의 가능성에 대한 생각에 지나지 않는 것에
-      의해 동기가 부여된 여정에서 그러한 자질들을 보여 주지 않았던가?
+    prompt: 콤마 동격(a journey ... / an expectation, an idea ...)에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 결국, 그들은 오즈로 가는 여정, 즉 기대, 다시 말해 자신들이 원하는 것을 얻을 미래의 가능성에 대한 생각에 지나지 않는 것에 의해 동기가 부여된 여정에서 그러한 자질들을 보여 주지 않았던가?
     vocab:
     - word: demonstrate
       meaning: 보여 주다, 입증하다
@@ -900,26 +728,18 @@ practice:
     - word: likelihood
       meaning: 가능성
     solution:
-      cut: 결국 / 그들은 그 자질들을 보여 주지 않았던가 / 오즈로 가는 여정에서 / [즉 어떤 기대에 지나지 않는 것에 동기부여된 여정]
-        / [즉 원하는 것을 얻을 미래 가능성에 대한 생각인 기대]
+      cut: 결국 / 그들은 그 자질들을 보여 주지 않았던가 / 오즈로 가는 여정에서 / [즉 어떤 기대에 지나지 않는 것에 동기부여된 여정] / [즉 원하는 것을 얻을 미래 가능성에 대한 생각인 기대]
       wrong: 그들은 오즈로 가는 여정과, 하나의 기대와, 하나의 생각에서 자질을 보여 주었다.
-      wrong_why: 콤마 뒤의 a journey, an expectation, an idea는 각각 앞말을 바꿔 부르는 동격이지 별개의
-        나열 항목이 아니다. journey=기대에 동기부여된 여정, expectation=미래 가능성에 대한 생각.
+      wrong_why: 콤마 뒤의 a journey, an expectation, an idea는 각각 앞말을 바꿔 부르는 동격이지 별개의 나열 항목이 아니다. journey=기대에 동기부여된 여정, expectation=미래 가능성에 대한 생각.
       author_msg: 그 여정은 '원하는 걸 얻으리라는 기대' 하나로 움직인 여정이었다.
       key_points:
-      - '''a journey ...; an expectation, an idea ...'' : 콤마 뒤 명사들을 별개 나열 항목으로 읽기
-        쉽다 → 각각 앞말을 다시 부르는 동격(여정=기대에 동기부여된 여정, 기대=미래 가능성에 대한 생각).'
-      cut_en: After all, / didn't they demonstrate those qualities / on the journey
-        to Oz, / [a journey motivated by little more than an expectation], / [an idea
-        about the future likelihood of getting something they wanted]?
+      - '''a journey ...; an expectation, an idea ...'' : 콤마 뒤 명사들을 별개 나열 항목으로 읽기 쉽다 → 각각 앞말을 다시 부르는 동격(여정=기대에 동기부여된 여정, 기대=미래 가능성에 대한 생각).'
+      cut_en: After all, / didn't they demonstrate those qualities / on the journey to Oz, / [a journey motivated by little more than an expectation], / [an idea about the future likelihood of getting something they wanted]?
   - kind: short
-    sentence: By design, we set up challenges in which the individual must validate
-      how they know us by presenting scenarios, ( ) names or acquaintances, or evidence
-      by which to validate (that is, photographs).
+    sentence: By design, we set up challenges in which the individual must validate how they know us by presenting scenarios, ( ) names or acquaintances, or evidence by which to validate (that is, photographs).
     source: 2023 고3 6월 22번
     prompt: 환언(that is)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 의도적으로, 우리는 개인이 시나리오, 이름이나 지인, 또는 검증할 수 있는 증거(즉, 사진)를 제시함으로써 자신이 우리를 어떻게
-      아는지를 입증해야 하는 과제를 설정한다.
+    answer: 의도적으로, 우리는 개인이 시나리오, 이름이나 지인, 또는 검증할 수 있는 증거(즉, 사진)를 제시함으로써 자신이 우리를 어떻게 아는지를 입증해야 하는 과제를 설정한다.
     vocab:
     - word: by design
       meaning: 의도적으로, 계획적으로
@@ -930,27 +750,18 @@ practice:
     - word: that is
       meaning: 즉, 다시 말해
     solution:
-      cut: 의도적으로 / 개인이 자신이 우리를 어떻게 아는지 입증해야 하는 과제를 설정한다 / 시나리오, 이름이나 지인, 또는 그것으로 검증할
-        증거를 제시함으로써 / 즉, 사진
+      cut: 의도적으로 / 개인이 자신이 우리를 어떻게 아는지 입증해야 하는 과제를 설정한다 / 시나리오, 이름이나 지인, 또는 그것으로 검증할 증거를 제시함으로써 / 즉, 사진
       wrong: (that is, photographs)의 that is를 지시어 '그것은/저것은'으로 읽어 별개의 문장처럼 처리함
-      wrong_why: 괄호 안의 that is는 접속부사 '즉/다시 말해'로, 바로 앞의 evidence를 photographs로 구체화·환언한다.
-        that is를 주어 '그것은'으로 읽으면 evidence=photographs라는 동치 관계가 끊긴다. by which to validate는
-        'evidence로 검증할'이라는 수식이다.
+      wrong_why: 괄호 안의 that is는 접속부사 '즉/다시 말해'로, 바로 앞의 evidence를 photographs로 구체화·환언한다. that is를 주어 '그것은'으로 읽으면 evidence=photographs라는 동치 관계가 끊긴다. by which to validate는 'evidence로 검증할'이라는 수식이다.
       author_msg: 상대가 우리를 아는지 검증하도록, 시나리오·이름·증거(즉 사진 같은 것)를 제시하게 하는 과제를 설계한다.
       key_points:
-      - 'that is (환언·동치 표지) : 지시대명사 ''그것은''으로 오독 → ''즉''으로 보고 앞 명사(evidence)를 뒤(photographs)로
-        구체화'
-      cut_en: By design, / we set up challenges in which the individual must validate
-        how they know us / by presenting scenarios, ( ) names or acquaintances, or
-        evidence by which to validate / (that is, photographs).
+      - 'that is (환언·동치 표지) : 지시대명사 ''그것은''으로 오독 → ''즉''으로 보고 앞 명사(evidence)를 뒤(photographs)로 구체화'
+      cut_en: By design, / we set up challenges in which the individual must validate how they know us / by presenting scenarios, ( ) names or acquaintances, or evidence by which to validate / (that is, photographs).
   - kind: short
-    sentence: Instead, they should concentrate attention on one subject after another
-      (that is, in different periods of time), ( ) although later work will weaken
-      earlier attainments in the other spheres.
+    sentence: Instead, they should concentrate attention on one subject after another (that is, in different periods of time), ( ) although later work will weaken earlier attainments in the other spheres.
     source: 2024 고3 11월 40번
     prompt: 환언(that is)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 대신, 그들은 한 주제에 이어 또 다른 주제로 차례차례(즉, 서로 다른 시기에) 주의를 집중해야 한다. 비록 나중의 학습이 다른
-      영역에서 이전에 이룬 성취를 약화시킬지라도.
+    answer: 대신, 그들은 한 주제에 이어 또 다른 주제로 차례차례(즉, 서로 다른 시기에) 주의를 집중해야 한다. 비록 나중의 학습이 다른 영역에서 이전에 이룬 성취를 약화시킬지라도.
     vocab:
     - word: concentrate
       meaning: 집중하다
@@ -961,28 +772,18 @@ practice:
     - word: sphere
       meaning: 영역, 분야
     solution:
-      cut: 그들은 한 주제에 이어 또 다른 주제로 차례차례 주의를 집중해야 한다 / 즉, 서로 다른 시기에 / 비록 나중의 학습이 다른 영역의
-        이전 성취를 약화시킬지라도
-      wrong: (that is, in different periods of time)를 별도의 지시문으로 보아 'one subject after
-        another'와의 환언 관계를 놓침
-      wrong_why: that is는 '즉'으로, 'one subject after another(한 번에 하나씩 차례로)'를 'in different
-        periods of time(서로 다른 시기에)'로 바꿔 말한 동치 표현이다. 두 어구가 같은 뜻임을 잡아야 하며, that is를
-        '그것은'으로 읽으면 안 된다.
+      cut: 그들은 한 주제에 이어 또 다른 주제로 차례차례 주의를 집중해야 한다 / 즉, 서로 다른 시기에 / 비록 나중의 학습이 다른 영역의 이전 성취를 약화시킬지라도
+      wrong: (that is, in different periods of time)를 별도의 지시문으로 보아 'one subject after another'와의 환언 관계를 놓침
+      wrong_why: that is는 '즉'으로, 'one subject after another(한 번에 하나씩 차례로)'를 'in different periods of time(서로 다른 시기에)'로 바꿔 말한 동치 표현이다. 두 어구가 같은 뜻임을 잡아야 하며, that is를 '그것은'으로 읽으면 안 된다.
       author_msg: 한 주제씩 시기를 나눠 집중하라 — 다른 영역의 이전 성취가 다소 약화되더라도.
       key_points:
-      - 'that is (환언·동치 표지) : ''그것은''으로 오독 → ''즉''으로 보고 앞 어구(one subject after another)를
-        뒤(in different periods of time)로 환언'
-      cut_en: Instead, they should concentrate attention on one subject after another
-        / (that is, in different periods of time), / ( ) although later work will
-        weaken earlier attainments in the other spheres.
+      - 'that is (환언·동치 표지) : ''그것은''으로 오독 → ''즉''으로 보고 앞 어구(one subject after another)를 뒤(in different periods of time)로 환언'
+      cut_en: Instead, they should concentrate attention on one subject after another / (that is, in different periods of time), / ( ) although later work will weaken earlier attainments in the other spheres.
   comparison:
   - kind: mc
-    sentence: Free recall tests, in which students need to recall as much as they
-      can remember without prompting, tend to result in better retention than cued
-      recall tests, in which students are given hints about what they need to remember.
+    sentence: Free recall tests, in which students need to recall as much as they can remember without prompting, tend to result in better retention than cued recall tests, in which students are given hints about what they need to remember.
     source: 2024 고3 6월 29번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “단서 회상 시험이 자유 회상 시험보다 더 나은 기억 보유를
-      가져오는 경향이 있다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “단서 회상 시험이 자유 회상 시험보다 더 나은 기억 보유를 가져오는 경향이 있다”'
     options:
     - ‘recall as much as they can remember’를 ‘기억나는 만큼 회상한다’로 옮긴 부분
     - ‘given hints about what they need to remember’를 ‘기억할 것에 대한 단서를 받는다’로 옮긴 부분
@@ -996,30 +797,21 @@ practice:
     - word: cued recall
       meaning: 단서 회상(힌트를 받아 떠올림)
     solution:
-      cut: 자유 회상 시험은 / [학생이 단서 없이 기억나는 만큼 떠올려야 하는] / 더 나은 기억 보유를 가져오는 경향이 있다 / 단서
-        회상 시험보다 / [학생이 힌트를 받는]
+      cut: 자유 회상 시험은 / [학생이 단서 없이 기억나는 만큼 떠올려야 하는] / 더 나은 기억 보유를 가져오는 경향이 있다 / 단서 회상 시험보다 / [학생이 힌트를 받는]
       wrong: 단서 회상 시험이 자유 회상 시험보다 더 나은 기억 보유를 가져온다.
       wrong_why: better X than Y의 우열 방향을 뒤바꾼 오역. 더 나은 쪽은 주어인 free recall tests다.
       author_msg: 스스로 떠올리는 자유 회상이 힌트를 받는 단서 회상보다 기억에 더 유리하다.
       key_points:
-      - '''better retention than cued recall tests'' : 삽입절(in which ...)이 길어 비교 주어를
-        놓치고 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어 Free recall tests, than 뒤 cued recall이 열위.'
-      cut_en: Free recall tests, / [in which students need to recall as much as they
-        can remember without prompting], / tend to result in better retention / than
-        cued recall tests, / [in which students are given hints about what they need
-        to remember].
+      - '''better retention than cued recall tests'' : 삽입절(in which ...)이 길어 비교 주어를 놓치고 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어 Free recall tests, than 뒤 cued recall이 열위.'
+      cut_en: Free recall tests, / [in which students need to recall as much as they can remember without prompting], / tend to result in better retention / than cued recall tests, / [in which students are given hints about what they need to remember].
   - kind: mc
-    sentence: But, once an organized game is played with officials, most athletes
-      will not admit to the same fouls or violations as the end goal of winning is
-      more important than expressing concern for competitors.
+    sentence: But, once an organized game is played with officials, most athletes will not admit to the same fouls or violations as the end goal of winning is more important than expressing concern for competitors.
     source: 2026 고3 11월 30번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “경쟁자에 대한 염려를 표현하는 것이 승리라는 최종 목표보다
-      더 중요하기 때문에”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “경쟁자에 대한 염려를 표현하는 것이 승리라는 최종 목표보다 더 중요하기 때문에”'
     options:
     - ‘will not admit to the same fouls or violations’를 ‘같은 반칙을 인정하지 않는다’로 옮긴 부분
     - ‘winning is more important than expressing ...’을 ‘염려 표현이 더 중요하다’로 읽은 부분
-    - ‘once an organized game is played with officials’를 ‘심판이 있는 조직화된 경기가 열리면’으로 옮긴
-      부분
+    - ‘once an organized game is played with officials’를 ‘심판이 있는 조직화된 경기가 열리면’으로 옮긴 부분
     answer_index: 1
     vocab:
     - word: admit to
@@ -1034,22 +826,15 @@ practice:
       wrong_why: more important than의 우열을 반대로 읽음. 더 중요한 쪽은 the end goal of winning이다.
       author_msg: 심판이 있는 경기에서는 승리가 우선이라 선수들이 반칙을 인정하지 않는다.
       key_points:
-      - '''winning is more important than expressing ...'' : more important than의
-        우열을 뒤집기 쉽다 → 더 중요한 쪽은 주어 winning, than 뒤 염려 표현이 열위.'
-      cut_en: But, / once an organized game is played with officials, / most athletes
-        will not admit to the same fouls or violations / as the end goal of winning
-        / is more important / than expressing concern for competitors.
+      - '''winning is more important than expressing ...'' : more important than의 우열을 뒤집기 쉽다 → 더 중요한 쪽은 주어 winning, than 뒤 염려 표현이 열위.'
+      cut_en: But, / once an organized game is played with officials, / most athletes will not admit to the same fouls or violations / as the end goal of winning / is more important / than expressing concern for competitors.
   - kind: mc
-    sentence: By taking a little extra time to collect information about the opponent,
-      the animal is more likely to reach a decision that maximizes its chances of
-      winning than if it takes a decision without such information.
+    sentence: By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.
     source: 2022 고3 6월 35번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러한 정보 없이 결정을 내릴 때 승리 가능성을 극대화하는
-      결정에 도달할 가능성이 더 높다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러한 정보 없이 결정을 내릴 때 승리 가능성을 극대화하는 결정에 도달할 가능성이 더 높다”'
     options:
     - ‘than if it takes a decision without such information’을 ‘정보 없이가 더 유리하다’로 읽은 부분
-    - ‘taking a little extra time to collect information’을 ‘정보 수집에 약간의 시간을 더 들여’로
-      옮긴 부분
+    - ‘taking a little extra time to collect information’을 ‘정보 수집에 약간의 시간을 더 들여’로 옮긴 부분
     - ‘maximizes its chances of winning’을 ‘승리 가능성을 극대화한다’로 옮긴 부분
     answer_index: 0
     vocab:
@@ -1062,25 +847,17 @@ practice:
     solution:
       cut: 그 동물은 / 결정에 도달할 가능성이 더 높다 / [승리 가능성을 극대화하는] / 결정을 내리는 경우보다 / 그러한 정보 없이
       wrong: 그러한 정보 없이 결정을 내릴 때 승리 가능성이 더 높다.
-      wrong_why: than if ~(정보 없이 결정하는 경우)는 비교의 열위 상황. '정보 없이'가 유리한 쪽인 것처럼 뒤바꿔 읽으면
-        정반대.
+      wrong_why: than if ~(정보 없이 결정하는 경우)는 비교의 열위 상황. '정보 없이'가 유리한 쪽인 것처럼 뒤바꿔 읽으면 정반대.
       author_msg: 상대 정보를 더 모으는 편이 승리 극대화 결정에 도달할 가능성을 높인다.
       key_points:
-      - '''more likely ... than if it takes a decision without ...'' : than 뒤 가정(정보
-        없이)을 유리한 쪽으로 뒤집기 쉽다 → 우위는 앞쪽(정보 수집), ''정보 없이''가 비교의 열위.'
-      cut_en: By taking a little extra time to collect information about the opponent,
-        / the animal / is more likely to reach a decision / [that maximizes its chances
-        of winning] / than if it takes a decision / without such information.
+      - '''more likely ... than if it takes a decision without ...'' : than 뒤 가정(정보 없이)을 유리한 쪽으로 뒤집기 쉽다 → 우위는 앞쪽(정보 수집), ''정보 없이''가 비교의 열위.'
+      cut_en: By taking a little extra time to collect information about the opponent, / the animal / is more likely to reach a decision / [that maximizes its chances of winning] / than if it takes a decision / without such information.
   - kind: mc
-    sentence: Even a small child, who can communicate by only one word at a time,
-      uses a system for communication that is infinitely superior to any system utilized
-      by any other animal.
+    sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
     source: 2024 고3 9월 40번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다른 어떤 동물이 사용하는 체계가 그 아이의 의사소통 체계보다
-      무한히 우월하다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다른 어떤 동물이 사용하는 체계가 그 아이의 의사소통 체계보다 무한히 우월하다”'
     options:
-    - ‘who can communicate by only one word at a time’을 ‘한 번에 한 단어로만 의사소통하는’으로 옮긴
-      부분
+    - ‘who can communicate by only one word at a time’을 ‘한 번에 한 단어로만 의사소통하는’으로 옮긴 부분
     - ‘superior to any system utilized by any other animal’을 ‘동물 체계가 더 우월하다’로 읽은 부분
     - ‘uses a system for communication’을 ‘의사소통 체계를 사용한다’로 옮긴 부분
     answer_index: 1
@@ -1092,28 +869,20 @@ practice:
     - word: infinitely
       meaning: 무한히
     solution:
-      cut: 어린아이조차 / [한 번에 한 단어로만 의사소통할 수 있는] / 의사소통 체계를 사용한다 / [무한히 우월한 / 다른 어떤 동물이
-        사용하는 어떤 체계보다도]
+      cut: 어린아이조차 / [한 번에 한 단어로만 의사소통할 수 있는] / 의사소통 체계를 사용한다 / [무한히 우월한 / 다른 어떤 동물이 사용하는 어떤 체계보다도]
       wrong: 다른 동물이 사용하는 체계가 그 아이의 체계보다 우월하다.
       wrong_why: superior to의 우열을 반대로 읽음. 우월한 쪽은 아이가 쓰는 체계(that절의 주어)다.
       author_msg: 말 한마디밖에 못 하는 아이의 언어조차 어떤 동물의 체계보다 압도적으로 뛰어나다.
       key_points:
-      - '''superior to any system utilized by any other animal'' : than 없이 to를 써 방향을
-        혼동해 우열을 뒤집기 쉽다 → 우월한 쪽은 아이가 쓰는 체계, to 뒤 동물 체계가 열위.'
-      cut_en: Even a small child, / [who can communicate by only one word at a time],
-        / uses a system for communication / [that is infinitely superior / to any
-        system utilized by any other animal].
+      - '''superior to any system utilized by any other animal'' : than 없이 to를 써 방향을 혼동해 우열을 뒤집기 쉽다 → 우월한 쪽은 아이가 쓰는 체계, to 뒤 동물 체계가 열위.'
+      cut_en: Even a small child, / [who can communicate by only one word at a time], / uses a system for communication / [that is infinitely superior / to any system utilized by any other animal].
   - kind: mc
-    sentence: Owners of forest lands have a market incentive to cut down trees rather
-      than manage the forest for carbon capture, wildlife habitat, flood protection,
-      and other ecosystem services.
+    sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “나무를 베어내기보다는 탄소 포집, 야생 동물 서식지 등을
-      위해 숲을 관리할 시장 유인이 있다”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “나무를 베어내기보다는 탄소 포집, 야생 동물 서식지 등을 위해 숲을 관리할 시장 유인이 있다”'
     options:
     - ‘have a market incentive’을 ‘시장 유인이 있다’로 옮긴 부분
-    - ‘carbon capture, wildlife habitat, flood protection’을 ‘탄소 포집·야생 동물 서식지·홍수 방지’로
-      옮긴 부분
+    - ‘carbon capture, wildlife habitat, flood protection’을 ‘탄소 포집·야생 동물 서식지·홍수 방지’로 옮긴 부분
     - ‘cut down trees rather than manage the forest’를 ‘베어내기보다 숲을 관리할’로 읽은 부분
     answer_index: 2
     vocab:
@@ -1124,26 +893,18 @@ practice:
     - word: rather than
       meaning: ~하기보다는
     solution:
-      cut: 산림 소유주는 / 시장 유인이 있다 / 나무를 베어낼 / 숲을 관리하기보다는 / 탄소 포집, 야생 동물 서식지, 홍수 방지 등을
-        위해
+      cut: 산림 소유주는 / 시장 유인이 있다 / 나무를 베어낼 / 숲을 관리하기보다는 / 탄소 포집, 야생 동물 서식지, 홍수 방지 등을 위해
       wrong: 나무를 베어내기보다는 숲을 관리할 시장 유인이 있다.
-      wrong_why: rather than은 뒤쪽(manage the forest)을 배제하는 선택. 무엇을 하고(cut down) 무엇을
-        안 하는지(manage) 방향을 뒤바꾼 오역.
+      wrong_why: rather than은 뒤쪽(manage the forest)을 배제하는 선택. 무엇을 하고(cut down) 무엇을 안 하는지(manage) 방향을 뒤바꾼 오역.
       author_msg: 시장은 생태계 보전보다 벌목을 택하게 만드는 유인을 준다.
       key_points:
-      - '''cut down trees rather than manage the forest'' : rather than으로 택하는 것과 배제하는
-        것을 뒤바꾸기 쉽다 → 택하는 쪽은 cut down(벌목), manage(관리)는 배제됨.'
-      cut_en: Owners of forest lands / have a market incentive / to cut down trees
-        / rather than manage the forest / for carbon capture, wildlife habitat, flood
-        protection, and other ecosystem services.
+      - '''cut down trees rather than manage the forest'' : rather than으로 택하는 것과 배제하는 것을 뒤바꾸기 쉽다 → 택하는 쪽은 cut down(벌목), manage(관리)는 배제됨.'
+      cut_en: Owners of forest lands / have a market incentive / to cut down trees / rather than manage the forest / for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
   - kind: short
-    sentence: Cued recall tests, in turn, are better than recognition tests, such
-      as multiple-choice answers, where the correct answer needs to be recognized
-      but not generated.
+    sentence: Cued recall tests, in turn, are better than recognition tests, such as multiple-choice answers, where the correct answer needs to be recognized but not generated.
     source: 2024 고3 6월 29번
     prompt: better than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 단서 회상 시험은, 결과적으로, 정답이 (스스로) 생성되는 것이 아니라 인식되기만 하면 되는, 객관식 답과 같은 재인 시험보다
-      더 낫다.
+    answer: 단서 회상 시험은, 결과적으로, 정답이 (스스로) 생성되는 것이 아니라 인식되기만 하면 되는, 객관식 답과 같은 재인 시험보다 더 낫다.
     vocab:
     - word: in turn
       meaning: 결과적으로, 차례로
@@ -1152,21 +913,15 @@ practice:
     - word: generate
       meaning: 생성해 내다
     solution:
-      cut: 단서 회상 시험은 / 결과적으로 / 더 낫다 / 재인 시험보다 / [객관식 답과 같은] / [정답이 인식되기만 하고 생성되지는
-        않아도 되는]
+      cut: 단서 회상 시험은 / 결과적으로 / 더 낫다 / 재인 시험보다 / [객관식 답과 같은] / [정답이 인식되기만 하고 생성되지는 않아도 되는]
       wrong: 재인 시험이 단서 회상 시험보다 더 낫다.
-      wrong_why: better than의 우위는 주어인 cued recall tests. than 뒤 recognition tests가
-        열위 대상이다.
+      wrong_why: better than의 우위는 주어인 cued recall tests. than 뒤 recognition tests가 열위 대상이다.
       author_msg: 떠올려 쓰는 단서 회상이, 알아보기만 하는 재인(객관식)보다 낫다.
       key_points:
-      - '''better than recognition tests'' : better than의 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어
-        Cued recall tests, than 뒤 recognition tests가 열위.'
-      cut_en: Cued recall tests, / in turn, / are better / than recognition tests,
-        / [such as multiple-choice answers], / [where the correct answer needs to
-        be recognized but not generated].
+      - '''better than recognition tests'' : better than의 우열을 뒤집기 쉽다 → 더 나은 쪽은 주어 Cued recall tests, than 뒤 recognition tests가 열위.'
+      cut_en: Cued recall tests, / in turn, / are better / than recognition tests, / [such as multiple-choice answers], / [where the correct answer needs to be recognized but not generated].
   - kind: short
-    sentence: You found it only slightly difficult and conclude that you were climbing
-      quite well, when in fact you were climbing no better than usual.
+    sentence: You found it only slightly difficult and conclude that you were climbing quite well, when in fact you were climbing no better than usual.
     source: 2025 고3 6월 21번
     prompt: no better than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 당신은 그것이 약간만 어렵다고 느껴 자신이 꽤 잘 오르고 있다고 결론짓지만, 실제로는 평소보다 조금도 더 잘 오르고 있지 않았다.
@@ -1178,24 +933,18 @@ practice:
     - word: in fact
       meaning: 실제로는
     solution:
-      cut: 당신은 / 그것이 약간만 어렵다고 느껴 / 결론짓는다 / [자신이 꽤 잘 오르고 있다고] / 그러나 실제로는 / 평소보다 조금도
-        더 잘 오르고 있지 않았다
+      cut: 당신은 / 그것이 약간만 어렵다고 느껴 / 결론짓는다 / [자신이 꽤 잘 오르고 있다고] / 그러나 실제로는 / 평소보다 조금도 더 잘 오르고 있지 않았다
       wrong: 실제로 당신은 평소보다 더 잘 오르고 있었다.
       wrong_why: no better than(~보다 조금도 낫지 않다)은 사실상 부정. '더 잘'로 읽으면 정반대.
       author_msg: 쉽게 느껴졌을 뿐, 실력이 평소보다 나아진 건 아니었다는 착각을 지적한다.
       key_points:
-      - '''no better than usual'' : no를 놓쳐 ''평소보다 더 잘''로 읽기 쉽다 → no better than은 ''조금도
-        낫지 않은''(사실상 부정), 평소와 같음.'
-      cut_en: You / found it only slightly difficult / and conclude / [that you were
-        climbing quite well], / when in fact / you were climbing no better than usual.
+      - '''no better than usual'' : no를 놓쳐 ''평소보다 더 잘''로 읽기 쉽다 → no better than은 ''조금도 낫지 않은''(사실상 부정), 평소와 같음.'
+      cut_en: You / found it only slightly difficult / and conclude / [that you were climbing quite well], / when in fact / you were climbing no better than usual.
   - kind: short
-    sentence: Rather than treating robots as peer agents with their own completely
-      independent agenda, joint cognitive systems approaches treat robots as helpers
-      such as service animals or sheep dogs.
+    sentence: Rather than treating robots as peer agents with their own completely independent agenda, joint cognitive systems approaches treat robots as helpers such as service animals or sheep dogs.
     source: 2022 고3 6월 24번
     prompt: Rather than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 로봇을 자신만의 완전히 독립적인 의제를 가진 동등한 행위자로 취급하기보다는, 결합 인지 시스템 접근법은 로봇을 보조 동물이나
-      양치기 개와 같은 조력자로 취급한다.
+    answer: 로봇을 자신만의 완전히 독립적인 의제를 가진 동등한 행위자로 취급하기보다는, 결합 인지 시스템 접근법은 로봇을 보조 동물이나 양치기 개와 같은 조력자로 취급한다.
     vocab:
     - word: peer agent
       meaning: 동등한 행위자
@@ -1204,86 +953,15 @@ practice:
     - word: joint cognitive systems
       meaning: 결합 인지 시스템
     solution:
-      cut: 로봇을 취급하기보다는 / [자신만의 완전히 독립적인 의제를 가진 동등한 행위자로] / 결합 인지 시스템 접근법은 / 로봇을 취급한다
-        / 조력자로 / [보조 동물이나 양치기 개와 같은]
+      cut: 로봇을 취급하기보다는 / [자신만의 완전히 독립적인 의제를 가진 동등한 행위자로] / 결합 인지 시스템 접근법은 / 로봇을 취급한다 / 조력자로 / [보조 동물이나 양치기 개와 같은]
       wrong: 동등한 행위자로 취급하기 위해 로봇을 조력자로 취급한다.
-      wrong_why: Rather than은 앞의 것(동등한 행위자로 취급)을 배제하는 대체. '~하기 위해'가 아니라 '~하기보다는'이며
-        앞쪽은 부정된다.
+      wrong_why: Rather than은 앞의 것(동등한 행위자로 취급)을 배제하는 대체. '~하기 위해'가 아니라 '~하기보다는'이며 앞쪽은 부정된다.
       author_msg: 로봇을 독립적 동료가 아니라, 보조 동물 같은 조력자로 본다는 관점 전환.
       key_points:
-      - '''Rather than treating ... as peer agents'' : 문두 Rather than을 ''~하기 위해''로
-        오해하기 쉽다 → ''~하기보다는''의 배제, peer agents로 취급하는 것은 부정됨.'
-      cut_en: Rather than treating robots / [as peer agents with their own completely
-        independent agenda], / joint cognitive systems approaches / treat robots /
-        as helpers / [such as service animals or sheep dogs].
+      - '''Rather than treating ... as peer agents'' : 문두 Rather than을 ''~하기 위해''로 오해하기 쉽다 → ''~하기보다는''의 배제, peer agents로 취급하는 것은 부정됨.'
+      cut_en: Rather than treating robots / [as peer agents with their own completely independent agenda], / joint cognitive systems approaches / treat robots / as helpers / [such as service animals or sheep dogs].
   - kind: short
-    sentence: A company may devise a family emergency leave plan that allows employees
-      the opportunity to be away from the company for a period of no longer than three
-      hours, and no more than once a month, for illness in the employee's immediate
-      family.
-    source: 2023 고3 11월 39번
-    prompt: no longer than / no more than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 회사는 직원의 직계 가족의 질병에 대비하여, 직원에게 세 시간을 넘지 않는 기간 동안, 그리고 한 달에 한 번을 넘지 않게 회사를
-      떠나 있을 기회를 허용하는 가족 비상 휴가 제도를 마련할 수 있다.
-    vocab:
-    - word: devise
-      meaning: 고안하다, 마련하다
-    - word: leave plan
-      meaning: 휴가 제도
-    - word: immediate family
-      meaning: 직계 가족
-    solution:
-      cut: 회사는 / 가족 비상 휴가 제도를 마련할 수 있다 / [직원에게 기회를 허용하는] / [회사를 떠나 있을 / 세 시간을 넘지 않는
-        기간 동안 / 그리고 한 달에 한 번을 넘지 않게] / 직계 가족의 질병에 대비하여
-      wrong: 세 시간 이상, 한 달에 한 번 이상 회사를 떠나 있을 기회를 허용한다.
-      wrong_why: no longer than / no more than은 상한선(~을 넘지 않는). '이상'으로 읽으면 상한과 하한이
-        뒤바뀐다.
-      author_msg: 휴가는 최대 세 시간, 월 최대 한 번으로 상한이 정해진 제한적 제도다.
-      key_points:
-      - '''no longer than three hours ... no more than once a month'' : ''이상''으로 읽어
-        상한을 하한으로 뒤집기 쉽다 → 둘 다 ''~을 넘지 않는'' 상한(최대 3시간, 월 최대 1회).'
-      cut_en: A company / may devise a family emergency leave plan / [that allows
-        employees the opportunity] / [to be away from the company / for a period of
-        no longer than three hours, / and no more than once a month], / for illness
-        in the employee's immediate family.
-  - kind: mc
-    sentence: For example, owners of forest lands have a market incentive to cut down
-      trees rather than manage the forest for carbon capture, wildlife habitat, flood
-      protection, and other ecosystem services.
-    source: 2024 고3 11월 23번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “탄소 포집, 야생동물 서식지, 홍수 방지 등 생태계 서비스를
-      위해 나무를 베어내기보다는 숲을 관리할”'
-    options:
-    - ‘cut down trees rather than manage the forest’를 ‘베어내기보다 숲을 관리할’로 읽은 부분
-    - ‘a market incentive’을 ‘시장 유인’으로 옮긴 부분
-    - ‘other ecosystem services’를 ‘기타 생태계 서비스’로 옮긴 부분
-    answer_index: 0
-    vocab:
-    - word: incentive
-      meaning: 유인, 동기
-    - word: carbon capture
-      meaning: 탄소 포집
-    - word: habitat
-      meaning: 서식지
-    - word: ecosystem service
-      meaning: 생태계 서비스
-    solution:
-      cut: 삼림지 소유주들은 시장 유인을 가진다 / 나무를 베어낼 / 생태계 서비스를 위해 숲을 관리하기보다는
-      wrong: '''A rather than B''의 A와 B를 뒤집어 ''베어내기보다 관리할''로 읽음'
-      wrong_why: '''A rather than B''는 ''B하기보다는 (오히려) A한다''는 뜻으로, A(cut down trees)에
-        무게가 실린다. 여기서 to cut down trees가 incentive의 실제 내용이고, manage the forest는 배제되는
-        쪽이다. 앞뒤를 뒤집으면 소유주가 숲 관리를 택한다는 정반대 의미가 된다.'
-      author_msg: 삼림지 소유주는 생태계 서비스용으로 숲을 관리하기보다 나무를 베어낼 시장 유인을 갖는다.
-      key_points:
-      - 'A rather than B : A와 B의 선후를 뒤집어 ''B rather than A''로 오독 → ''B하기보다 A한다''로
-        A쪽에 무게'
-      cut_en: For example, owners of forest lands have a market incentive / to cut
-        down trees / rather than manage the forest for carbon capture, wildlife habitat,
-        flood protection, and other ecosystem services.
-  - kind: short
-    sentence: But it's important to recognize the cumulative impact of not prioritizing
-      self‑care and to make sure that in the long term, this is the exception rather
-      than the norm.
+    sentence: But it's important to recognize the cumulative impact of not prioritizing self‑care and to make sure that in the long term, this is the exception rather than the norm.
     source: 2026 고3 11월 35번
     prompt: 비교(A rather than B)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
     answer: 그러나 자기 돌봄을 우선시하지 않는 것의 누적된 영향을 인식하고, 장기적으로 이것이 표준이 아니라 예외가 되도록 하는 것이 중요하다.
@@ -1297,27 +975,18 @@ practice:
     - word: the norm
       meaning: 표준, 일반적인 것
     solution:
-      cut: 자기 돌봄을 우선시하지 않는 것의 누적된 영향을 인식하는 것이 중요하다 / 그리고 장기적으로 ~하도록 하는 것 / 이것이 표준이
-        아니라 예외가 되도록
+      cut: 자기 돌봄을 우선시하지 않는 것의 누적된 영향을 인식하는 것이 중요하다 / 그리고 장기적으로 ~하도록 하는 것 / 이것이 표준이 아니라 예외가 되도록
       wrong: '''the exception rather than the norm''을 ''예외가 아니라 표준''으로 뒤집어 읽음'
-      wrong_why: '''A rather than B''는 ''B가 아니라 A''이므로 the exception(예외)에 무게가 실린다.
-        즉 자기 돌봄을 소홀히 하는 일이 ''일상(표준)''이 아니라 ''드문 예외''로 남게 하라는 뜻이다. A와 B를 뒤집으면 ''예외가
-        아니라 표준''이 되어 필자의 권고와 정반대가 된다.'
+      wrong_why: '''A rather than B''는 ''B가 아니라 A''이므로 the exception(예외)에 무게가 실린다. 즉 자기 돌봄을 소홀히 하는 일이 ''일상(표준)''이 아니라 ''드문 예외''로 남게 하라는 뜻이다. A와 B를 뒤집으면 ''예외가 아니라 표준''이 되어 필자의 권고와 정반대가 된다.'
       author_msg: 자기 돌봄을 미루는 일이 장기적으로 표준이 아닌 예외에 그치도록 하는 것이 중요하다.
       key_points:
-      - 'A rather than B : A와 B를 뒤집어 ''예외가 아니라 표준''으로 오독 → ''B(the norm)가 아니라 A(the
-        exception)''로 A에 무게'
-      cut_en: But it's important to recognize the cumulative impact of not prioritizing
-        self‑care / and to make sure that in the long term, / this is the exception
-        rather than the norm.
+      - 'A rather than B : A와 B를 뒤집어 ''예외가 아니라 표준''으로 오독 → ''B(the norm)가 아니라 A(the exception)''로 A에 무게'
+      cut_en: But it's important to recognize the cumulative impact of not prioritizing self‑care / and to make sure that in the long term, / this is the exception rather than the norm.
   - kind: short
-    sentence: The emphasis on individuality is therefore problematic― rather than
-      actually designing, many successful designer ' personalities' function more
-      as creative managers.
+    sentence: The emphasis on individuality is therefore problematic― rather than actually designing, many successful designer ' personalities' function more as creative managers.
     source: 2022 고3 9월 40번
     prompt: 비교(rather than, more as)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 따라서 개성에 대한 강조는 문제가 있다. 즉, 실제로 디자인을 하기보다는 많은 성공한 디자이너 '유명 인사'들은 오히려 창의적
-      관리자로서 기능하는 경우가 더 많다.
+    answer: 따라서 개성에 대한 강조는 문제가 있다. 즉, 실제로 디자인을 하기보다는 많은 성공한 디자이너 '유명 인사'들은 오히려 창의적 관리자로서 기능하는 경우가 더 많다.
     vocab:
     - word: individuality
       meaning: 개성
@@ -1328,28 +997,19 @@ practice:
     - word: rather than
       meaning: ~라기보다는
     solution:
-      cut: 따라서 개성에 대한 강조는 문제가 있다 / 실제로 디자인을 하기보다는 / 많은 성공한 디자이너 '유명 인사'들은 창의적 관리자로서
-        기능하는 경우가 더 많다
+      cut: 따라서 개성에 대한 강조는 문제가 있다 / 실제로 디자인을 하기보다는 / 많은 성공한 디자이너 '유명 인사'들은 창의적 관리자로서 기능하는 경우가 더 많다
       wrong: rather than의 앞뒤를 뒤집어 '창의적 관리자이기보다 실제로 디자인한다'로 읽음
-      wrong_why: '''rather than actually designing''은 ''실제로 디자인하기보다는''이고, 뒤에 ''function
-        more as creative managers''가 실제 모습이다. rather than 뒤(designing)가 배제되는 쪽, 주절(managers로
-        기능)이 강조되는 쪽이다. more as의 more는 ''~로서 (기능하는 편이) 더''라는 비교 강조로, 관리자 역할에 무게를 싣는다.'
+      wrong_why: '''rather than actually designing''은 ''실제로 디자인하기보다는''이고, 뒤에 ''function more as creative managers''가 실제 모습이다. rather than 뒤(designing)가 배제되는 쪽, 주절(managers로 기능)이 강조되는 쪽이다. more as의 more는 ''~로서 (기능하는 편이) 더''라는 비교 강조로, 관리자 역할에 무게를 싣는다.'
       author_msg: 성공한 디자이너는 실제 디자인보다 창의적 관리자 역할을 하는 경우가 더 많다.
       key_points:
-      - 'rather than A : A(designing)와 주절을 뒤집어 오독 → ''A하기보다 주절(managers로 기능)''로 주절에
-        무게'
-      - 'function more as : more를 빠뜨리고 단순 ''~로 기능'' → ''~로서 기능하는 편이 더 많다''는 비교 강조로
-        처리'
-      cut_en: The emphasis on individuality is therefore problematic― / rather than
-        actually designing, / many successful designer ' personalities' function more
-        as creative managers.
+      - 'rather than A : A(designing)와 주절을 뒤집어 오독 → ''A하기보다 주절(managers로 기능)''로 주절에 무게'
+      - 'function more as : more를 빠뜨리고 단순 ''~로 기능'' → ''~로서 기능하는 편이 더 많다''는 비교 강조로 처리'
+      cut_en: The emphasis on individuality is therefore problematic― / rather than actually designing, / many successful designer ' personalities' function more as creative managers.
   connective:
   - kind: mc
-    sentence: A crowd can thus force inaction on its members by implying, through
-      its passivity, that an event is not an emergency.
+    sentence: A crowd can thus force inaction on its members by implying, through its passivity, that an event is not an emergency.
     source: 2022 고3 6월 42번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 군중은 그 수동성을 통해 사건이 응급 상황임을 암시함으로써,
-      구성원들에게 행동에 나서라고 강요할 수 있다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 군중은 그 수동성을 통해 사건이 응급 상황임을 암시함으로써, 구성원들에게 행동에 나서라고 강요할 수 있다.”'
     options:
     - '''through its passivity''를 ''그 수동성을 통해''로 옮긴 부분인가?'
     - '''by implying''을 ''암시함으로써''로 처리한 부분인가?'
@@ -1363,25 +1023,17 @@ practice:
     - word: imply
       meaning: 암시하다
     solution:
-      cut: 군중은 / 따라서 / 강요할 수 있다 / 구성원들에게 방관을 / 암시함으로써 / [그 수동성을 통해] / [사건이 응급 상황이
-        아니라는 것을]
+      cut: 군중은 / 따라서 / 강요할 수 있다 / 구성원들에게 방관을 / 암시함으로써 / [그 수동성을 통해] / [사건이 응급 상황이 아니라는 것을]
       wrong: 그러나 군중은 사건이 응급 상황임을 암시하며 구성원에게 행동을 강요한다.
-      wrong_why: thus는 역접('그러나')이 아니라 '인과(따라서)'. 또 force inaction은 '방관을 강요', not an
-        emergency는 '응급 상황이 아님'이라 흐름이 통째로 반대다.
+      wrong_why: thus는 역접('그러나')이 아니라 '인과(따라서)'. 또 force inaction은 '방관을 강요', not an emergency는 '응급 상황이 아님'이라 흐름이 통째로 반대다.
       author_msg: 다들 가만히 있으니 '별일 아니구나' 하고 나도 안 움직이게 된다 — 수동성이 방관을 낳는 인과 흐름.
       key_points:
-      - '''thus ... force inaction ... not an emergency'' : thus를 역접(그러나)으로, force
-        inaction·not an emergency를 반대로 읽기 쉽다 → thus는 인과(따라서), ''응급 아님''을 암시해 ''방관''을
-        강요.'
-      cut_en: A crowd / can thus force / inaction on its members / by implying, /
-        [through its passivity], / [that an event is not an emergency].
+      - '''thus ... force inaction ... not an emergency'' : thus를 역접(그러나)으로, force inaction·not an emergency를 반대로 읽기 쉽다 → thus는 인과(따라서), ''응급 아님''을 암시해 ''방관''을 강요.'
+      cut_en: A crowd / can thus force / inaction on its members / by implying, / [through its passivity], / [that an event is not an emergency].
   - kind: mc
-    sentence: Thus, parents who reward, force, or cajole their child to do homework
-      are more likely to have a child who does so only when rewarded, cajoled, or
-      forced.
+    sentence: Thus, parents who reward, force, or cajole their child to do homework are more likely to have a child who does so only when rewarded, cajoled, or forced.
     source: 2024 고3 6월 30번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그럼에도 불구하고 아이에게 숙제를 시키는 부모는, 스스로
-      알아서 숙제하는 아이를 갖게 된다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그럼에도 불구하고 아이에게 숙제를 시키는 부모는, 스스로 알아서 숙제하는 아이를 갖게 된다.”'
     options:
     - '''Thus''를 ''그럼에도 불구하고''로 옮긴 부분인가?'
     - '''parents ... to do homework''를 ''숙제를 시키는 부모''로 옮긴 부분인가?'
@@ -1400,18 +1052,12 @@ practice:
       wrong_why: Thus는 역접이 아니라 '인과(따라서)'. 앞 논리의 결론을 그대로 이어야 하는데 반대(스스로 잘함)로 잡았다.
       author_msg: 외적 보상·강요로 시키면, 아이는 그 보상·강요가 있을 때만 움직이는 사람이 된다.
       key_points:
-      - '''Thus ... a child who does so only when rewarded ...'' : Thus를 역접으로 읽어 결론을
-        뒤집기 쉽다 → Thus는 인과(따라서), 강요하면 ''보상받을 때만'' 하는 아이가 됨.'
-      cut_en: Thus, / parents [who reward, force, or cajole their child to do homework]
-        / are more likely to have / a child [who does so only when rewarded, cajoled,
-        or forced].
+      - '''Thus ... a child who does so only when rewarded ...'' : Thus를 역접으로 읽어 결론을 뒤집기 쉽다 → Thus는 인과(따라서), 강요하면 ''보상받을 때만'' 하는 아이가 됨.'
+      cut_en: Thus, / parents [who reward, force, or cajole their child to do homework] / are more likely to have / a child [who does so only when rewarded, cajoled, or forced].
   - kind: mc
-    sentence: Decades ago, it was unusual for Earth scientists to have results that
-      were of interest to the media, and consequently few media contacts were expected
-      or encouraged.
+    sentence: Decades ago, it was unusual for Earth scientists to have results that were of interest to the media, and consequently few media contacts were expected or encouraged.
     source: 2024 고3 11월 42번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “수십 년 전에는 지구과학자가 언론이 관심 가질 결과를 내는
-      일이 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “수십 년 전에는 지구과학자가 언론이 관심 가질 결과를 내는 일이 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.”'
     options:
     - '''results that were of interest to the media''를 ''언론이 관심 가질 결과''로 옮긴 부분인가?'
     - '''consequently''를 ''반대로''로 옮긴 부분인가?'
@@ -1425,24 +1071,17 @@ practice:
     - word: encourage
       meaning: 장려하다
     solution:
-      cut: 수십 년 전에는 / 드물었다 / [지구과학자가 언론이 관심 가질 결과를 내는 것이] / 그리고 그 결과 / 거의 없었다 / [언론
-        접촉이 기대되거나 장려되는 일이]
+      cut: 수십 년 전에는 / 드물었다 / [지구과학자가 언론이 관심 가질 결과를 내는 것이] / 그리고 그 결과 / 거의 없었다 / [언론 접촉이 기대되거나 장려되는 일이]
       wrong: 결과를 내는 일은 드물었지만, 반대로 언론 접촉은 활발히 장려되었다.
-      wrong_why: consequently는 대조·역접이 아니라 '결과(그 결과)'. 앞의 '드물다'가 원인이 되어 뒤의 '접촉도 거의
-        없다'로 이어지는데, 반대로(장려됨) 잡았다.
+      wrong_why: consequently는 대조·역접이 아니라 '결과(그 결과)'. 앞의 '드물다'가 원인이 되어 뒤의 '접촉도 거의 없다'로 이어지는데, 반대로(장려됨) 잡았다.
       author_msg: 관심 끌 결과가 드무니, 언론과의 접촉도 애초에 기대·장려되지 않았다 — 원인이 결과로 자연스럽게 이어진다.
       key_points:
-      - '''consequently few media contacts were ...'' : consequently를 역접으로, few를 긍정으로
-        읽기 쉽다 → consequently는 결과(그 결과), few는 ''거의 없는''(같은 방향의 부정 귀결).'
-      cut_en: Decades ago, / it was unusual / [for Earth scientists to have results
-        that were of interest to the media], / and consequently / few media contacts
-        were expected or encouraged.
+      - '''consequently few media contacts were ...'' : consequently를 역접으로, few를 긍정으로 읽기 쉽다 → consequently는 결과(그 결과), few는 ''거의 없는''(같은 방향의 부정 귀결).'
+      cut_en: Decades ago, / it was unusual / [for Earth scientists to have results that were of interest to the media], / and consequently / few media contacts were expected or encouraged.
   - kind: mc
-    sentence: Moreover, some critics, who admire his work, are little concerned about
-      his extensive use of computers in the art-making process.
+    sentence: Moreover, some critics, who admire his work, are little concerned about his extensive use of computers in the art-making process.
     source: 2022 고3 6월 31번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 그의 작품을 높이 평가하는 일부 비평가들조차, 그가
-      컴퓨터를 광범위하게 사용하는 것을 크게 우려한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “그러나 그의 작품을 높이 평가하는 일부 비평가들조차, 그가 컴퓨터를 광범위하게 사용하는 것을 크게 우려한다.”'
     options:
     - '''some critics, who admire his work''를 ''작품을 높이 평가하는 비평가들''로 옮긴 부분인가?'
     - '''his extensive use of computers''를 ''컴퓨터를 광범위하게 사용하는 것''으로 옮긴 부분인가?'
@@ -1456,24 +1095,17 @@ practice:
     - word: extensive
       meaning: 광범위한
     solution:
-      cut: 게다가 / [그의 작품을 높이 평가하는] 일부 비평가들은 / 거의 개의치 않는다 / [창작 과정에서 컴퓨터를 광범위하게 사용하는
-        것에]
+      cut: 게다가 / [그의 작품을 높이 평가하는] 일부 비평가들은 / 거의 개의치 않는다 / [창작 과정에서 컴퓨터를 광범위하게 사용하는 것에]
       wrong: 그러나 그런 비평가들조차 컴퓨터 사용을 크게 우려한다.
-      wrong_why: Moreover는 역접('그러나')이 아니라 '첨가(게다가)'로 앞 주장을 보강한다. 또 little concerned는
-        '거의 개의치 않는다'는 부정인데 '크게 우려한다'로 뒤집었다.
+      wrong_why: Moreover는 역접('그러나')이 아니라 '첨가(게다가)'로 앞 주장을 보강한다. 또 little concerned는 '거의 개의치 않는다'는 부정인데 '크게 우려한다'로 뒤집었다.
       author_msg: 그의 작품을 좋아하는 비평가들마저 컴퓨터 사용을 문제 삼지 않는다 — 앞 논지에 근거를 하나 더 얹는 첨가.
       key_points:
-      - '''Moreover ... are little concerned ...'' : Moreover를 역접으로, little concerned를
-        ''크게 우려''로 뒤집기 쉽다 → Moreover는 첨가(게다가), little concerned는 ''거의 개의치 않는''(부정).'
-      cut_en: Moreover, / some critics, [who admire his work], / are little concerned
-        / about [his extensive use of computers in the art-making process].
+      - '''Moreover ... are little concerned ...'' : Moreover를 역접으로, little concerned를 ''크게 우려''로 뒤집기 쉽다 → Moreover는 첨가(게다가), little concerned는 ''거의 개의치 않는''(부정).'
+      cut_en: Moreover, / some critics, [who admire his work], / are little concerned / about [his extensive use of computers in the art-making process].
   - kind: mc
-    sentence: Beginners, on the other hand, have not achieved the same degree of fluency
-      and automaticity in each of the component skills, and thus they struggle to
-      combine skills that experts combine with relative ease and efficiency.
+    sentence: Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency.
     source: 2023 고3 6월 35번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “반면 초보자도 각 구성 기술에서 똑같은 유창함과 자동성을
-      갖추어, 전문가만큼 쉽게 기술을 결합한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “반면 초보자도 각 구성 기술에서 똑같은 유창함과 자동성을 갖추어, 전문가만큼 쉽게 기술을 결합한다.”'
     options:
     - '''have not achieved the same degree''를 ''똑같은 정도를 갖추어''로 옮긴 부분인가?'
     - '''on the other hand''를 ''반면''으로 옮긴 부분인가?'
@@ -1487,27 +1119,18 @@ practice:
     - word: struggle to
       meaning: ~하는 데 어려움을 겪다
     solution:
-      cut: 반면 / 초보자는 / 갖추지 못했다 / [각 구성 기술에서 같은 정도의 유창함과 자동성을] / 그래서 / 어려움을 겪는다 / 결합하는
-        데 / [전문가가 비교적 쉽고 효율적으로 결합하는] 기술을
+      cut: 반면 / 초보자는 / 갖추지 못했다 / [각 구성 기술에서 같은 정도의 유창함과 자동성을] / 그래서 / 어려움을 겪는다 / 결합하는 데 / [전문가가 비교적 쉽고 효율적으로 결합하는] 기술을
       wrong: 반면 초보자도 전문가만큼 유창함을 갖추어 기술을 쉽게 결합한다.
-      wrong_why: on the other hand는 앞의 전문가와 초보자를 '대조'하는 신호. have not achieved(갖추지
-        못함)의 부정을 무시하고 전문가와 같다고 잡으면 대조가 무너진다.
+      wrong_why: on the other hand는 앞의 전문가와 초보자를 '대조'하는 신호. have not achieved(갖추지 못함)의 부정을 무시하고 전문가와 같다고 잡으면 대조가 무너진다.
       author_msg: 전문가와 달리 초보자는 개별 기술이 아직 자동화되지 않아, 그것들을 합치는 데서 막힌다.
       key_points:
-      - '''on the other hand ... have not achieved ...'' : have not achieved의 부정을
-        무시해 전문가와 같다고 읽으면 대조가 무너진다 → on the other hand는 대조, 초보자는 ''갖추지 못함''.'
-      cut_en: Beginners, / on the other hand, / have not achieved / [the same degree
-        of fluency and automaticity in each of the component skills], / and thus /
-        they struggle / to combine skills / [that experts combine with relative ease
-        and efficiency].
+      - '''on the other hand ... have not achieved ...'' : have not achieved의 부정을 무시해 전문가와 같다고 읽으면 대조가 무너진다 → on the other hand는 대조, 초보자는 ''갖추지 못함''.'
+      cut_en: Beginners, / on the other hand, / have not achieved / [the same degree of fluency and automaticity in each of the component skills], / and thus / they struggle / to combine skills / [that experts combine with relative ease and efficiency].
   - kind: short
-    sentence: According to connectionist theory, however, our knowledge is organized
-      into patterns of activity, and each time we learn something new we have to modify
-      the old patterns so as to keep the old material while adding the new information.
+    sentence: According to connectionist theory, however, our knowledge is organized into patterns of activity, and each time we learn something new we have to modify the old patterns so as to keep the old material while adding the new information.
     source: 2024 고3 9월 36번
     prompt: however의 논리에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 그러나 연결주의 이론에 따르면, 우리의 지식은 활동 패턴으로 조직되어 있으며, 우리가 새로운 것을 배울 때마다 새로운 정보를
-      더하면서도 기존의 것을 유지하기 위해 기존 패턴을 수정해야 한다.
+    answer: 그러나 연결주의 이론에 따르면, 우리의 지식은 활동 패턴으로 조직되어 있으며, 우리가 새로운 것을 배울 때마다 새로운 정보를 더하면서도 기존의 것을 유지하기 위해 기존 패턴을 수정해야 한다.
     vocab:
     - word: connectionist
       meaning: 연결주의의
@@ -1516,27 +1139,18 @@ practice:
     - word: so as to
       meaning: ~하기 위해
     solution:
-      cut: 그러나 / 연결주의 이론에 따르면 / 우리의 지식은 / 조직되어 있다 / 활동 패턴으로 / 그리고 / [새로운 것을 배울 때마다]
-        / 수정해야 한다 / 기존 패턴을 / [새로운 정보를 더하면서도 기존의 것을 유지하기 위해]
+      cut: 그러나 / 연결주의 이론에 따르면 / 우리의 지식은 / 조직되어 있다 / 활동 패턴으로 / 그리고 / [새로운 것을 배울 때마다] / 수정해야 한다 / 기존 패턴을 / [새로운 정보를 더하면서도 기존의 것을 유지하기 위해]
       wrong: 그래서 연결주의 이론에 따르면 우리의 지식은 새 정보를 더할 때 기존 패턴을 그대로 둔다.
-      wrong_why: however는 인과('그래서')가 아니라 '역접(그러나)'으로 앞의 통념을 뒤집는다. modify(수정해야)를 '그대로
-        둔다'로 반대로 잡으면 안 된다.
+      wrong_why: however는 인과('그래서')가 아니라 '역접(그러나)'으로 앞의 통념을 뒤집는다. modify(수정해야)를 '그대로 둔다'로 반대로 잡으면 안 된다.
       author_msg: 새 지식을 넣으려면 옛 패턴을 유지'하면서도' 손봐야 한다 — 앞 통념을 뒤엎는 역접.
       key_points:
-      - '''however ... have to modify the old patterns'' : however를 인과(그래서)로, modify를
-        ''그대로 둔다''로 뒤집기 쉽다 → however는 역접(그러나), 기존 패턴을 ''수정해야'' 함.'
-      cut_en: According to connectionist theory, / however, / our knowledge / is organized
-        / into patterns of activity, / and / [each time we learn something new] /
-        we have to modify / the old patterns / [so as to keep the old material while
-        adding the new information].
+      - '''however ... have to modify the old patterns'' : however를 인과(그래서)로, modify를 ''그대로 둔다''로 뒤집기 쉽다 → however는 역접(그러나), 기존 패턴을 ''수정해야'' 함.'
+      cut_en: According to connectionist theory, / however, / our knowledge / is organized / into patterns of activity, / and / [each time we learn something new] / we have to modify / the old patterns / [so as to keep the old material while adding the new information].
   - kind: short
-    sentence: However, they retain their power of fascination for large, if not massive
-      audiences, who prize the experiential, risk-loaded and one-time event quality
-      they afford.
+    sentence: However, they retain their power of fascination for large, if not massive audiences, who prize the experiential, risk-loaded and one-time event quality they afford.
     source: 2026 고3 11월 40번
     prompt: However의 논리에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 그러나 그것들은 거대하지는 않더라도 많은 관객에게 여전히 매혹의 힘을 지니는데, 그 관객들은 그것들이 제공하는 체험적이고 위험을
-      안은 일회성 이벤트로서의 특성을 소중히 여긴다.
+    answer: 그러나 그것들은 거대하지는 않더라도 많은 관객에게 여전히 매혹의 힘을 지니는데, 그 관객들은 그것들이 제공하는 체험적이고 위험을 안은 일회성 이벤트로서의 특성을 소중히 여긴다.
     vocab:
     - word: retain
       meaning: 유지하다, 지니다
@@ -1545,27 +1159,18 @@ practice:
     - word: afford
       meaning: 제공하다, 주다
     solution:
-      cut: 그러나 / 그것들은 / 여전히 지닌다 / 매혹의 힘을 / [거대하지는 않더라도 많은] 관객에게 / [그 관객들은 소중히 여긴다
-        / 체험적·위험적·일회성 이벤트로서의 특성을 / (그것들이 제공하는)]
+      cut: 그러나 / 그것들은 / 여전히 지닌다 / 매혹의 힘을 / [거대하지는 않더라도 많은] 관객에게 / [그 관객들은 소중히 여긴다 / 체험적·위험적·일회성 이벤트로서의 특성을 / (그것들이 제공하는)]
       wrong: 따라서 그것들은 매혹의 힘을 잃고, 관객은 그 일회성 특성을 대수롭지 않게 여긴다.
-      wrong_why: However는 인과('따라서')가 아니라 '역접(그러나)'. retain(여전히 지닌다)·prize(소중히 여긴다)를
-        반대로(잃고, 대수롭지 않게) 뒤집으면 논리가 어긋난다.
+      wrong_why: However는 인과('따라서')가 아니라 '역접(그러나)'. retain(여전히 지닌다)·prize(소중히 여긴다)를 반대로(잃고, 대수롭지 않게) 뒤집으면 논리가 어긋난다.
       author_msg: 규모가 크진 않아도 여전히 관객을 사로잡는다 — 앞의 부정적 흐름을 뒤집는 역접.
       key_points:
-      - '''However ... retain ... prize ...'' : However를 인과(따라서)로, retain·prize를 ''잃고·대수롭지
-        않게''로 뒤집기 쉽다 → However는 역접(그러나), 여전히 ''지니고'' 관객은 ''소중히 여김''.'
-      cut_en: However, / they / retain / their power of fascination / for [large,
-        if not massive] audiences, / [who prize / the experiential, risk-loaded and
-        one-time event quality / they afford].
+      - '''However ... retain ... prize ...'' : However를 인과(따라서)로, retain·prize를 ''잃고·대수롭지 않게''로 뒤집기 쉽다 → However는 역접(그러나), 여전히 ''지니고'' 관객은 ''소중히 여김''.'
+      cut_en: However, / they / retain / their power of fascination / for [large, if not massive] audiences, / [who prize / the experiential, risk-loaded and one-time event quality / they afford].
   - kind: short
-    sentence: If we are trying to understand something totally new, however, we need
-      to make larger adjustments to the units of the patterns we already have, which
-      requires changing the strengths of large numbers of connections in our brain,
-      and this is a difficult, tiring process.
+    sentence: If we are trying to understand something totally new, however, we need to make larger adjustments to the units of the patterns we already have, which requires changing the strengths of large numbers of connections in our brain, and this is a difficult, tiring process.
     source: 2024 고3 9월 36번
     prompt: however의 논리에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 그러나 우리가 완전히 새로운 것을 이해하려 한다면, 우리는 이미 가진 패턴의 단위에 더 큰 조정을 가해야 하는데, 이는 뇌 속
-      수많은 연결의 강도를 바꾸는 것을 요구하며, 이것은 어렵고 피곤한 과정이다.
+    answer: 그러나 우리가 완전히 새로운 것을 이해하려 한다면, 우리는 이미 가진 패턴의 단위에 더 큰 조정을 가해야 하는데, 이는 뇌 속 수많은 연결의 강도를 바꾸는 것을 요구하며, 이것은 어렵고 피곤한 과정이다.
     vocab:
     - word: adjustment
       meaning: 조정
@@ -1574,22 +1179,15 @@ practice:
     - word: tiring
       meaning: 피곤하게 하는
     solution:
-      cut: 그러나 / [완전히 새로운 것을 이해하려 한다면] / 우리는 / 더 큰 조정을 가해야 한다 / [이미 가진 패턴의 단위에] /
-        그런데 이는 / 요구한다 / [뇌 속 수많은 연결의 강도를 바꾸는 것을] / 그리고 이것은 / 어렵고 피곤한 과정이다
+      cut: 그러나 / [완전히 새로운 것을 이해하려 한다면] / 우리는 / 더 큰 조정을 가해야 한다 / [이미 가진 패턴의 단위에] / 그런데 이는 / 요구한다 / [뇌 속 수많은 연결의 강도를 바꾸는 것을] / 그리고 이것은 / 어렵고 피곤한 과정이다
       wrong: 그래서 새로운 것을 이해할 때는 조정이 거의 필요 없고, 이것은 쉬운 과정이다.
-      wrong_why: however는 인과('그래서')가 아니라 '역접(그러나)'으로, 익숙한 것과 대비해 새로운 것은 '더 큰 조정'이
-        필요함을 부각한다. larger adjustments·difficult를 '거의 필요 없고 쉬운'으로 뒤집으면 안 된다.
+      wrong_why: however는 인과('그래서')가 아니라 '역접(그러나)'으로, 익숙한 것과 대비해 새로운 것은 '더 큰 조정'이 필요함을 부각한다. larger adjustments·difficult를 '거의 필요 없고 쉬운'으로 뒤집으면 안 된다.
       author_msg: 완전히 새로운 것일수록 손봐야 할 연결이 많아 더 힘들다 — 앞의 익숙한 경우와 대비되는 역접.
       key_points:
-      - '''however ... larger adjustments ... difficult'' : however를 인과(그래서)로 읽고 larger·difficult를
-        반대로 뒤집기 쉽다 → however는 역접(익숙한 경우와 대비), ''더 큰 조정''이 필요한 ''어려운'' 과정.'
-      cut_en: '[If we are trying to understand something totally new], / however,
-        / we / need to make larger adjustments / [to the units of the patterns we
-        already have], / which / requires / [changing the strengths of large numbers
-        of connections in our brain], / and this / is a difficult, tiring process.'
+      - '''however ... larger adjustments ... difficult'' : however를 인과(그래서)로 읽고 larger·difficult를 반대로 뒤집기 쉽다 → however는 역접(익숙한 경우와 대비), ''더 큰 조정''이 필요한 ''어려운'' 과정.'
+      cut_en: '[If we are trying to understand something totally new], / however, / we / need to make larger adjustments / [to the units of the patterns we already have], / which / requires / [changing the strengths of large numbers of connections in our brain], / and this / is a difficult, tiring process.'
   - kind: short
-    sentence: Instead of the old rule that dressmaking is a craft, a modern connection
-      between dress-design and art was invented that had not been there before.
+    sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress-design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
     prompt: Instead of의 논리에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 드레스 제작이 하나의 공예라는 옛 규칙 대신에, 이전에는 존재하지 않았던 드레스 디자인과 예술 사이의 현대적 연결이 만들어졌다.
@@ -1601,27 +1199,18 @@ practice:
     - word: invent
       meaning: 만들어 내다, 창안하다
     solution:
-      cut: 옛 규칙 대신에 / [드레스 제작이 공예라는] / 현대적 연결이 / 만들어졌다 / [드레스 디자인과 예술 사이의] / [이전에는
-        거기 없었던]
+      cut: 옛 규칙 대신에 / [드레스 제작이 공예라는] / 현대적 연결이 / 만들어졌다 / [드레스 디자인과 예술 사이의] / [이전에는 거기 없었던]
       wrong: 드레스 제작이 공예라는 옛 규칙에 더해, 예술과의 연결도 예전부터 늘 존재해 왔다.
-      wrong_why: Instead of는 첨가('~에 더해')가 아니라 '대체(~대신에)'로, 옛 규칙을 새 관념이 대신함을 뜻한다. had
-        not been there before(이전엔 없었다)를 '예전부터 존재'로 뒤집으면 안 된다.
+      wrong_why: Instead of는 첨가('~에 더해')가 아니라 '대체(~대신에)'로, 옛 규칙을 새 관념이 대신함을 뜻한다. had not been there before(이전엔 없었다)를 '예전부터 존재'로 뒤집으면 안 된다.
       author_msg: '''재봉=공예''라는 옛 통념을 밀어내고, ''드레스 디자인=예술''이라는 새 연결이 자리 잡았다 — 대체의 흐름.'
       key_points:
-      - '''Instead of the old rule ... had not been there before'' : Instead of를 첨가(~에
-        더해)로, had not been을 긍정으로 뒤집기 쉽다 → Instead of는 대체(~대신에), 새 연결은 ''이전엔 없던'' 것.'
-      cut_en: Instead of the old rule / [that dressmaking is a craft], / a modern
-        connection / [between dress-design and art] / was invented / [that had not
-        been there before].
+      - '''Instead of the old rule ... had not been there before'' : Instead of를 첨가(~에 더해)로, had not been을 긍정으로 뒤집기 쉽다 → Instead of는 대체(~대신에), 새 연결은 ''이전엔 없던'' 것.'
+      cut_en: Instead of the old rule / [that dressmaking is a craft], / a modern connection / [between dress-design and art] / was invented / [that had not been there before].
   - kind: short
-    sentence: '"It''ll be amazing to see how he communicated the feelings " of isolation
-      and loneliness in his work," she said eagerly." However, after searching all
-      the exhibition rooms, Emilia and Layla couldn''t find van Gogh''s masterpiece
-      anywhere.'
+    sentence: '"It''ll be amazing to see how he communicated the feelings " of isolation and loneliness in his work," she said eagerly." However, after searching all the exhibition rooms, Emilia and Layla couldn''t find van Gogh''s masterpiece anywhere.'
     source: 2022 고3 9월 45번
     prompt: 담화표지(However)의 방향에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: '"그가 자신의 작품에서 고립과 외로움의 감정을 어떻게 표현했는지 보는 것은 놀라울 거야."라고 그녀는 들뜬 목소리로 말했다.
-      그러나 모든 전시실을 뒤진 후에도, Emilia와 Layla는 반 고흐의 걸작을 어디에서도 찾을 수 없었다.'
+    answer: '"그가 자신의 작품에서 고립과 외로움의 감정을 어떻게 표현했는지 보는 것은 놀라울 거야."라고 그녀는 들뜬 목소리로 말했다. 그러나 모든 전시실을 뒤진 후에도, Emilia와 Layla는 반 고흐의 걸작을 어디에서도 찾을 수 없었다.'
     vocab:
     - word: isolation
       meaning: 고립
@@ -1632,28 +1221,20 @@ practice:
     - word: masterpiece
       meaning: 걸작
     solution:
-      cut: 그가 고립과 외로움의 감정을 어떻게 표현했는지 보는 것은 놀라울 거야 / 그녀가 들떠서 말했다 / 그러나 모든 전시실을 뒤진 후에도
-        / 반 고흐의 걸작을 어디에서도 찾을 수 없었다
+      cut: 그가 고립과 외로움의 감정을 어떻게 표현했는지 보는 것은 놀라울 거야 / 그녀가 들떠서 말했다 / 그러나 모든 전시실을 뒤진 후에도 / 반 고흐의 걸작을 어디에서도 찾을 수 없었다
       wrong: However를 순접(그래서/게다가)으로 읽어, 기대대로 걸작을 감상했다는 흐름으로 오독
-      wrong_why: However는 앞의 기대·설렘(작품을 볼 생각에 들뜸)과 뒤의 결과(작품을 못 찾음)를 뒤집는 역접 표지다. 방향을
-        순접으로 처리하면 'couldn't find ~ anywhere(어디에서도 못 찾음)'의 부정과 충돌해 이야기가 어긋난다. 담화표지
-        하나가 앞뒤 감정의 반전을 지시한다.
+      wrong_why: However는 앞의 기대·설렘(작품을 볼 생각에 들뜸)과 뒤의 결과(작품을 못 찾음)를 뒤집는 역접 표지다. 방향을 순접으로 처리하면 'couldn't find ~ anywhere(어디에서도 못 찾음)'의 부정과 충돌해 이야기가 어긋난다. 담화표지 하나가 앞뒤 감정의 반전을 지시한다.
       author_msg: 작품을 볼 기대에 들떴지만, 정작 전시실 어디에서도 반 고흐의 걸작을 찾지 못했다.
       key_points:
       - 'However (역접 담화표지) : ''그래서/게다가''의 순접으로 오독 → ''그러나''로 앞의 기대와 뒤의 좌절을 반전'
-      cut_en: '"It''ll be amazing to see how he communicated the feelings " of isolation
-        and loneliness in his work," / she said eagerly." / However, / after searching
-        all the exhibition rooms, / Emilia and Layla couldn''t find van Gogh''s masterpiece
-        anywhere.'
+      cut_en: '"It''ll be amazing to see how he communicated the feelings " of isolation and loneliness in his work," / she said eagerly." / However, / after searching all the exhibition rooms, / Emilia and Layla couldn''t find van Gogh''s masterpiece anywhere.'
   polarity_positive:
   - kind: mc
-    sentence: Improving the quality of alternative options, such as walking, cycling,
-      and public transport, is a central element of this strategy.
+    sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
     source: 2022 고3 6월 30번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “대안 수단의 질을 높이는 것은 이 전략의 여러 요소 중 하나이다.”'
     options:
-    - '''Improving the quality of alternative options''를 ''대안 수단의 질을 높이는 것''으로 옮긴
-      부분인가?'
+    - '''Improving the quality of alternative options''를 ''대안 수단의 질을 높이는 것''으로 옮긴 부분인가?'
     - '''of this strategy''를 ''이 전략의''로 옮긴 부분인가?'
     - '''a central element''를 ''여러 요소 중 하나''로 옮긴 부분인가?'
     answer_index: 2
@@ -1670,16 +1251,12 @@ practice:
       wrong_why: central(핵심)을 곁다리로 흘리면 필자가 '가장 중시하는' 것을 놓친다 — 여기가 주장의 중심이다.
       author_msg: 차 이용을 줄이는 전략의 성패는 '대안 교통을 얼마나 좋게 만드느냐'에 달렸다.
       key_points:
-      - '''a central element'' : central을 ''여러 요소 중 하나''로 흘려 강조를 지우기 쉽다 → central은
-        ''핵심'' 요소, 필자 주장의 중심.'
-      cut_en: '[Improving the quality of alternative options, such as walking, cycling,
-        and public transport], / is / a central element of this strategy.'
+      - '''a central element'' : central을 ''여러 요소 중 하나''로 흘려 강조를 지우기 쉽다 → central은 ''핵심'' 요소, 필자 주장의 중심.'
+      cut_en: '[Improving the quality of alternative options, such as walking, cycling, and public transport], / is / a central element of this strategy.'
   - kind: mc
-    sentence: Rather than irrelevant, moral questions are fundamental to the imposition
-      of tax.
+    sentence: Rather than irrelevant, moral questions are fundamental to the imposition of tax.
     source: 2022 고3 9월 22번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이
-      있다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이 있다.”'
     options:
     - '''are fundamental to''를 ''무관하지 않다·어느 정도 관련''으로 옮긴 부분인가?'
     - '''moral questions''를 ''도덕적 질문''으로 옮긴 부분인가?'
@@ -1695,21 +1272,15 @@ practice:
     solution:
       cut: 무관하기는커녕 / 도덕적 질문은 ~이다 / 세금 부과에 '근본적'인
       wrong: 도덕적 질문은 세금 부과와 무관하지 않으며 어느 정도 관련이 있다.
-      wrong_why: '''무관하지 않다''로 약하게 옮기면 fundamental(근본적)이 사라진다 — 필자는 ''단순 관련''이 아니라
-        ''핵심 토대''라고 강조한다.'
+      wrong_why: '''무관하지 않다''로 약하게 옮기면 fundamental(근본적)이 사라진다 — 필자는 ''단순 관련''이 아니라 ''핵심 토대''라고 강조한다.'
       author_msg: 세금은 도덕 문제와 떼어놓을 수 없다 — 도덕이 세금 부과의 근본이다.
       key_points:
-      - '''are fundamental to ~'' : fundamental을 ''무관하지 않다''로 약화하기 쉽다 → fundamental은
-        ''근본적''(단순 관련이 아니라 핵심 토대).'
-      cut_en: Rather than irrelevant, / moral questions are / fundamental to the imposition
-        of tax.
+      - '''are fundamental to ~'' : fundamental을 ''무관하지 않다''로 약화하기 쉽다 → fundamental은 ''근본적''(단순 관련이 아니라 핵심 토대).'
+      cut_en: Rather than irrelevant, / moral questions are / fundamental to the imposition of tax.
   - kind: mc
-    sentence: Many signals are now seen as having this information gathering or assessment
-      function, directly contributing to the mechanism of the decision-making process
-      by supplying vital information about the likely outcomes of the various options.
+    sentence: Many signals are now seen as having this information gathering or assessment function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options.
     source: 2022 고3 6월 35번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “많은 신호는 여러 선택지의 결과에 관한 정보를 대략 제공하며
-      의사결정 과정에 간접적으로 관여한다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “많은 신호는 여러 선택지의 결과에 관한 정보를 대략 제공하며 의사결정 과정에 간접적으로 관여한다.”'
     options:
     - '''the various options''를 ''여러 선택지''로 옮긴 부분인가?'
     - '''directly contributing ... vital information''을 ''간접적으로 ... 대략''으로 옮긴 부분인가?'
@@ -1723,27 +1294,19 @@ practice:
     - word: likely outcome
       meaning: 있음직한 결과
     solution:
-      cut: 많은 신호는 ~로 여겨진다 / 이 정보 수집·평가 기능을 가진 것으로 / '직접' 기여하며 / 의사결정 과정의 메커니즘에 / '필수적인'
-        정보를 제공함으로써 / 여러 선택지의 있음직한 결과에 관한
+      cut: 많은 신호는 ~로 여겨진다 / 이 정보 수집·평가 기능을 가진 것으로 / '직접' 기여하며 / 의사결정 과정의 메커니즘에 / '필수적인' 정보를 제공함으로써 / 여러 선택지의 있음직한 결과에 관한
       wrong: 많은 신호는 결과 정보를 대략 제공하며 의사결정에 간접적으로 관여한다.
       wrong_why: directly(직접)와 vital(필수적인)을 '대략·간접'으로 흘리면 필자가 강조하는 '신호의 결정적 역할'을 놓친다.
       author_msg: 신호는 곁다리가 아니라 의사결정에 필수 정보를 '직접' 대주는 결정적 장치다.
       key_points:
-      - '''directly contributing ... vital information'' : directly·vital을 ''대략·간접''으로
-        약화하기 쉽다 → 신호는 ''직접'' 기여하고 ''필수'' 정보를 제공(결정적 역할 강조).'
-      cut_en: Many signals are now seen as / having this information gathering or
-        assessment function, / directly contributing / to the mechanism of the decision-making
-        process / by supplying vital information / about the likely outcomes of the
-        various options.
+      - '''directly contributing ... vital information'' : directly·vital을 ''대략·간접''으로 약화하기 쉽다 → 신호는 ''직접'' 기여하고 ''필수'' 정보를 제공(결정적 역할 강조).'
+      cut_en: Many signals are now seen as / having this information gathering or assessment function, / directly contributing / to the mechanism of the decision-making process / by supplying vital information / about the likely outcomes of the various options.
   - kind: mc
-    sentence: The adjustments are clearly smallest when the new information is only
-      slightly new—when it is compatible with what we already know, so that the old
-      patterns need only a little bit of adjustment to accommodate the new knowledge.
+    sentence: The adjustments are clearly smallest when the new information is only slightly new—when it is compatible with what we already know, so that the old patterns need only a little bit of adjustment to accommodate the new knowledge.
     source: 2024 고3 9월 36번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “새 정보가 조금만 새로울 때 조정이 작아지는지는 다소 불분명하다.”'
     options:
-    - '''when the new information is only slightly new''를 ''새 정보가 조금만 새로울 때''로 옮긴
-      부분인가?'
+    - '''when the new information is only slightly new''를 ''새 정보가 조금만 새로울 때''로 옮긴 부분인가?'
     - '''The adjustments''를 ''조정''으로 옮긴 부분인가?'
     - '''are clearly smallest''의 ''clearly''를 ''다소 불분명''으로 옮긴 부분인가?'
     answer_index: 2
@@ -1755,27 +1318,18 @@ practice:
     - word: accommodate
       meaning: 수용하다
     solution:
-      cut: 조정은 '분명히' 가장 작다 / 새 정보가 조금만 새로울 때 / 그것이 우리가 이미 아는 것과 부합할 때 / 그래서 기존 패턴은
-        약간의 조정만 필요하다 / 새 지식을 수용하기 위해
+      cut: 조정은 '분명히' 가장 작다 / 새 정보가 조금만 새로울 때 / 그것이 우리가 이미 아는 것과 부합할 때 / 그래서 기존 패턴은 약간의 조정만 필요하다 / 새 지식을 수용하기 위해
       wrong: 조정이 작아지는지는 다소 불분명하다.
       wrong_why: clearly(분명히)를 '불분명'으로 뒤집으면 필자가 '확실하다'고 강조한 논지가 정반대가 된다.
       author_msg: 새 정보가 기존 지식과 잘 맞을수록 우리의 인지 조정은 확실히 최소가 된다.
       key_points:
-      - '''are clearly smallest'' : clearly를 ''불분명''으로 뒤집기 쉽다 → clearly는 ''분명히''(필자가
-        확신하는 논지), 조정이 가장 작음이 확실.'
-      cut_en: The adjustments are clearly smallest / when the new information is only
-        slightly new— / when it is compatible with what we already know, / so that
-        the old patterns need only a little bit of adjustment / to accommodate the
-        new knowledge.
+      - '''are clearly smallest'' : clearly를 ''불분명''으로 뒤집기 쉽다 → clearly는 ''분명히''(필자가 확신하는 논지), 조정이 가장 작음이 확실.'
+      cut_en: The adjustments are clearly smallest / when the new information is only slightly new— / when it is compatible with what we already know, / so that the old patterns need only a little bit of adjustment / to accommodate the new knowledge.
   - kind: short
-    sentence: At the same time, it is important to recognize that, no matter how fast
-      they grow, countries where a large part of the population derive their livelihood
-      from uncertain sources cannot hope to prevent famines without specialized entitlement
-      protection mechanisms involving direct public intervention.
+    sentence: At the same time, it is important to recognize that, no matter how fast they grow, countries where a large part of the population derive their livelihood from uncertain sources cannot hope to prevent famines without specialized entitlement protection mechanisms involving direct public intervention.
     source: 2024 고3 6월 40번
     prompt: important, no matter how에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 동시에, 아무리 빠르게 성장하더라도, 인구의 상당 부분이 불안정한 원천에서 생계를 얻는 국가들은 직접적인 공적 개입을 수반하는
-      전문화된 자격 보호 장치 없이는 기근을 막을 수 있으리라 기대할 수 없다는 것을 인식하는 것이 '중요하다'.
+    answer: 동시에, 아무리 빠르게 성장하더라도, 인구의 상당 부분이 불안정한 원천에서 생계를 얻는 국가들은 직접적인 공적 개입을 수반하는 전문화된 자격 보호 장치 없이는 기근을 막을 수 있으리라 기대할 수 없다는 것을 인식하는 것이 '중요하다'.
     vocab:
     - word: livelihood
       meaning: 생계
@@ -1784,28 +1338,18 @@ practice:
     - word: entitlement
       meaning: 자격, 권리
     solution:
-      cut: 동시에 / ~을 인식하는 것이 '중요하다' / 아무리 빠르게 성장하더라도 / 인구의 상당 부분이 불안정한 원천에서 생계를 얻는
-        국가들은 / 기근을 막으리라 기대할 수 없다 / 직접적 공적 개입을 수반하는 전문화된 자격 보호 장치 없이는
+      cut: 동시에 / ~을 인식하는 것이 '중요하다' / 아무리 빠르게 성장하더라도 / 인구의 상당 부분이 불안정한 원천에서 생계를 얻는 국가들은 / 기근을 막으리라 기대할 수 없다 / 직접적 공적 개입을 수반하는 전문화된 자격 보호 장치 없이는
       wrong: 국가들이 빠르게 성장하면 기근을 막을 수 있다는 점이 중요하다.
-      wrong_why: no matter how fast they grow(아무리 빨리 성장해도)를 조건으로 오해하면 필자의 강조점이 뒤집힌다
-        — 성장만으로는 안 되고 '직접 개입'이 있어야 한다는 말이다.
+      wrong_why: no matter how fast they grow(아무리 빨리 성장해도)를 조건으로 오해하면 필자의 강조점이 뒤집힌다 — 성장만으로는 안 되고 '직접 개입'이 있어야 한다는 말이다.
       author_msg: 경제 성장 속도와 무관하게, 기근 방지에는 직접적 공적 개입 장치가 반드시 필요하다.
       key_points:
-      - '''no matter how fast they grow ... cannot hope to prevent ... without ~''
-        : no matter how ~를 조건으로 오해해 ''성장하면 막는다''로 뒤집기 쉽다 → 아무리 성장해도 ''직접 개입 없이는''
-        못 막음이 핵심.'
-      cut_en: At the same time, / it is important to recognize that, / no matter how
-        fast they grow, / countries where a large part of the population derive their
-        livelihood from uncertain sources / cannot hope to prevent famines / without
-        specialized entitlement protection mechanisms involving direct public intervention.
+      - '''no matter how fast they grow ... cannot hope to prevent ... without ~'' : no matter how ~를 조건으로 오해해 ''성장하면 막는다''로 뒤집기 쉽다 → 아무리 성장해도 ''직접 개입 없이는'' 못 막음이 핵심.'
+      cut_en: At the same time, / it is important to recognize that, / no matter how fast they grow, / countries where a large part of the population derive their livelihood from uncertain sources / cannot hope to prevent famines / without specialized entitlement protection mechanisms involving direct public intervention.
   - kind: short
-    sentence: In fact, this attention to audience and appropriateness may be even
-      more important in writing than in conversation because writing does not permit
-      the nonverbal communication and immediate feedback that are part of conversation.
+    sentence: In fact, this attention to audience and appropriateness may be even more important in writing than in conversation because writing does not permit the nonverbal communication and immediate feedback that are part of conversation.
     source: 2026 고3 11월 32번
     prompt: even more important에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 사실, 청중과 적절성에 대한 이러한 주의는 글쓰기가 대화의 일부인 비언어적 의사소통과 즉각적인 피드백을 허용하지 않기 때문에
-      대화에서보다 글쓰기에서 '훨씬 더 중요할' 수 있다.
+    answer: 사실, 청중과 적절성에 대한 이러한 주의는 글쓰기가 대화의 일부인 비언어적 의사소통과 즉각적인 피드백을 허용하지 않기 때문에 대화에서보다 글쓰기에서 '훨씬 더 중요할' 수 있다.
     vocab:
     - word: appropriateness
       meaning: 적절성
@@ -1814,28 +1358,18 @@ practice:
     - word: immediate
       meaning: 즉각적인
     solution:
-      cut: 사실 / 청중과 적절성에 대한 이러한 주의는 / '훨씬 더 중요할' 수 있다 / 대화에서보다 글쓰기에서 / 왜냐하면 글쓰기는 허용하지
-        않기 때문이다 / 비언어적 의사소통과 즉각적 피드백을 / 대화의 일부인
+      cut: 사실 / 청중과 적절성에 대한 이러한 주의는 / '훨씬 더 중요할' 수 있다 / 대화에서보다 글쓰기에서 / 왜냐하면 글쓰기는 허용하지 않기 때문이다 / 비언어적 의사소통과 즉각적 피드백을 / 대화의 일부인
       wrong: 이러한 주의는 글쓰기에서나 대화에서나 비슷하게 중요하다.
-      wrong_why: even more important(훨씬 더 중요한)를 '비슷하게'로 흘리면 필자가 강조한 비교 우위('글쓰기에서 더')가
-        사라진다.
+      wrong_why: even more important(훨씬 더 중요한)를 '비슷하게'로 흘리면 필자가 강조한 비교 우위('글쓰기에서 더')가 사라진다.
       author_msg: 글쓰기는 비언어·즉각 피드백이 없으니, 청중·적절성 고려가 대화보다 훨씬 더 중요하다.
       key_points:
-      - '''even more important in writing than in conversation'' : even more important를
-        ''비슷하게''로 흘려 비교 우위를 지우기 쉽다 → ''대화보다 글쓰기에서 훨씬 더'' 중요.'
-      cut_en: In fact, / this attention to audience and appropriateness / may be even
-        more important / in writing than in conversation / because writing does not
-        permit / the nonverbal communication and immediate feedback / that are part
-        of conversation.
+      - '''even more important in writing than in conversation'' : even more important를 ''비슷하게''로 흘려 비교 우위를 지우기 쉽다 → ''대화보다 글쓰기에서 훨씬 더'' 중요.'
+      cut_en: In fact, / this attention to audience and appropriateness / may be even more important / in writing than in conversation / because writing does not permit / the nonverbal communication and immediate feedback / that are part of conversation.
   - kind: short
-    sentence: Since that time, it has become apparent that broadly effective pesticides
-      can have harmful effects on beneficial insects, which can negate their effects
-      in controlling pests, and that persistent pesticides can damage non-target organisms
-      in the ecosystem, such as birds and people.
+    sentence: Since that time, it has become apparent that broadly effective pesticides can have harmful effects on beneficial insects, which can negate their effects in controlling pests, and that persistent pesticides can damage non-target organisms in the ecosystem, such as birds and people.
     source: 2022 고3 6월 38번
     prompt: apparent에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 그때 이후로, 광범위하게 효과적인 살충제가 이로운 곤충에게 해로운 영향을 미칠 수 있고 (이것이 해충을 방제하는 그 효과를 무효로
-      만들 수 있으며), 잔류성 살충제가 새와 사람 같은 생태계의 비표적 생물에게 피해를 줄 수 있다는 것이 '분명해졌다'.
+    answer: 그때 이후로, 광범위하게 효과적인 살충제가 이로운 곤충에게 해로운 영향을 미칠 수 있고 (이것이 해충을 방제하는 그 효과를 무효로 만들 수 있으며), 잔류성 살충제가 새와 사람 같은 생태계의 비표적 생물에게 피해를 줄 수 있다는 것이 '분명해졌다'.
     vocab:
     - word: apparent
       meaning: 분명한, 명백한
@@ -1844,50 +1378,17 @@ practice:
     - word: negate
       meaning: 무효로 하다
     solution:
-      cut: 그때 이후로 / ~이 '분명해졌다' / 광범위하게 효과적인 살충제가 이로운 곤충에게 해로운 영향을 줄 수 있다는 것 (이것이 해충
-        방제 효과를 무효로 만들 수 있으며) / 그리고 잔류성 살충제가 생태계의 비표적 생물에게 피해를 줄 수 있다는 것 / 새와 사람 같은
+      cut: 그때 이후로 / ~이 '분명해졌다' / 광범위하게 효과적인 살충제가 이로운 곤충에게 해로운 영향을 줄 수 있다는 것 (이것이 해충 방제 효과를 무효로 만들 수 있으며) / 그리고 잔류성 살충제가 생태계의 비표적 생물에게 피해를 줄 수 있다는 것 / 새와 사람 같은
       wrong: 그때 이후로 살충제가 해로울 수도 있다는 막연한 추측이 나왔다.
       wrong_why: apparent(분명한)를 '막연한 추측'으로 약화하면 필자가 강조한 '명백해진 사실'이라는 확정성이 사라진다.
       author_msg: 살충제의 부작용(익충 피해·비표적 생물 손상)은 추측이 아니라 명백히 드러난 사실이다.
       key_points:
-      - '''it has become apparent that ~'' : apparent를 ''막연한 추측''으로 약화하기 쉽다 → apparent는
-        ''분명해진 사실''(확정성 강조).'
-      cut_en: Since that time, / it has become apparent / that broadly effective pesticides
-        can have harmful effects on beneficial insects, / which can negate their effects
-        in controlling pests, / and that persistent pesticides can damage non-target
-        organisms in the ecosystem, / such as birds and people.
-  - kind: short
-    sentence: Overly rigid habits and conventions, no matter how well-considered or
-      well-intentioned, threaten innovation.
-    source: 2024 고3 9월 24번
-    prompt: no matter how에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 지나치게 경직된 습관과 관습은, 아무리 잘 숙고되거나 선의로 이루어졌더라도, 혁신을 위협한다.
-    vocab:
-    - word: rigid
-      meaning: 경직된
-    - word: convention
-      meaning: 관습
-    - word: well-intentioned
-      meaning: 선의의
-    solution:
-      cut: 지나치게 경직된 습관과 관습은 / 아무리 잘 숙고되거나 선의로 이루어졌더라도 / 혁신을 위협한다
-      wrong: 잘 숙고되고 선의로 이루어진 습관과 관습은 혁신을 돕는다.
-      wrong_why: no matter how well ~(아무리 잘 ~해도)의 양보를 빼먹고 '좋으니 돕는다'로 옮기면 필자의 주장(경직성은
-        위협)이 정반대가 된다.
-      author_msg: 의도가 아무리 좋아도, 지나치게 굳어버린 습관·관습은 혁신을 가로막는다.
-      key_points:
-      - '''no matter how well-considered ... threaten innovation'' : no matter how
-        well ~를 빼먹고 ''좋으니 돕는다''로 뒤집기 쉽다 → ''아무리 좋아도'' 경직된 습관은 혁신을 ''위협''.'
-      cut_en: Overly rigid habits and conventions, / no matter how well-considered
-        or well-intentioned, / threaten innovation.
+      - '''it has become apparent that ~'' : apparent를 ''막연한 추측''으로 약화하기 쉽다 → apparent는 ''분명해진 사실''(확정성 강조).'
+      cut_en: Since that time, / it has become apparent / that broadly effective pesticides can have harmful effects on beneficial insects, / which can negate their effects in controlling pests, / and that persistent pesticides can damage non-target organisms in the ecosystem, / such as birds and people.
   - kind: mc
-    sentence: 'If we psychologists are too bent on identifying the orderly pattern,
-      the regularities of children''s minds, we may miss an essential and pervasive
-      characteristic of our topic: the child''s more unruly and imaginative ways of
-      talking and thinking.'
+    sentence: 'If we psychologists are too bent on identifying the orderly pattern, the regularities of children''s minds, we may miss an essential and pervasive characteristic of our topic: the child''s more unruly and imaginative ways of talking and thinking.'
     source: 2022 고3 9월 34번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의
-      더 제멋대로이고 상상력 넘치는 말하기·사고방식을 발견하게 될 수 있다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이들의 더 제멋대로이고 상상력 넘치는 말하기·사고방식을 발견하게 될 수 있다.”'
     options:
     - '''we may miss''의 ''miss''를 ''발견하게 될 수 있다''로 옮긴 부분인가?'
     - '''an essential and pervasive characteristic''를 ''본질적이고 널리 퍼진 특성''으로 옮긴 부분인가?'
@@ -1903,58 +1404,17 @@ practice:
     - word: unruly
       meaning: 제멋대로인, 다루기 힘든
     solution:
-      cut: 만약 우리 심리학자들이 질서정연한 패턴을 밝히는 데 너무 열중하면 / 우리는 주제의 본질적이고 널리 퍼진 특성을 놓칠 수 있다
-        / 아이들의 더 제멋대로이고 상상력 넘치는 방식을
+      cut: 만약 우리 심리학자들이 질서정연한 패턴을 밝히는 데 너무 열중하면 / 우리는 주제의 본질적이고 널리 퍼진 특성을 놓칠 수 있다 / 아이들의 더 제멋대로이고 상상력 넘치는 방식을
       wrong: miss를 '발견하다/알아차리다'로 뒤집어, 강조된 특성을 얻게 된다고 읽음
-      wrong_why: may miss는 '놓칠 수 있다'는 부정 방향의 서술이다. essential and pervasive는 필자가 이
-        특성을 핵심으로 강조하는 긍정 신호이지만, 문장의 요지는 '질서에만 몰두하면 그 핵심을 놓친다'는 경고다. miss를 '발견하다'로
-        오독하면 강조 신호와 경고의 논리가 뒤집힌다. 콜론 뒤는 그 특성을 구체화한 동격이다.
+      wrong_why: may miss는 '놓칠 수 있다'는 부정 방향의 서술이다. essential and pervasive는 필자가 이 특성을 핵심으로 강조하는 긍정 신호이지만, 문장의 요지는 '질서에만 몰두하면 그 핵심을 놓친다'는 경고다. miss를 '발견하다'로 오독하면 강조 신호와 경고의 논리가 뒤집힌다. 콜론 뒤는 그 특성을 구체화한 동격이다.
       author_msg: 질서정연한 패턴에만 몰두하면, 아이 마음의 본질적이고 핵심적인 특성(제멋대로이고 상상력 넘치는 면)을 놓칠 수 있다.
       key_points:
-      - 'essential and pervasive (강조 신호) : 강조어에 이끌려 긍정 결과로 오독 → 강조된 핵심을 ''miss(놓칠)''
-        수 있다는 경고로 처리'
+      - 'essential and pervasive (강조 신호) : 강조어에 이끌려 긍정 결과로 오독 → 강조된 핵심을 ''miss(놓칠)'' 수 있다는 경고로 처리'
       - 'may miss : miss를 ''발견/포착''으로 뒤집음 → ''놓치다''의 부정 방향 유지'
-      cut_en: 'If we psychologists are too bent on identifying the orderly pattern,
-        / the regularities of children''s minds, / we may miss an essential and pervasive
-        characteristic of our topic: / the child''s more unruly and imaginative ways
-        of talking and thinking.'
-  - kind: short
-    sentence: Many signals are now seen as having this information gathering or assessment'
-      function, directly contributing to ' the mechanism of the decision‑making process
-      by supplying vital information about the likely outcomes of the various options.
-    source: 2022 고3 6월 35번
-    prompt: 강조 신호(vital, directly contributing)에 유의하여, 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 많은 신호들은 이제 이러한 정보 수집 또는 평가 기능을 지닌 것으로 여겨지며, 다양한 선택지의 가능한 결과에 대한 필수적인 정보를
-      제공함으로써 의사결정 과정의 메커니즘에 직접적으로 기여한다.
-    vocab:
-    - word: assessment
-      meaning: 평가
-    - word: contribute to
-      meaning: ~에 기여하다
-    - word: vital
-      meaning: 필수적인, 매우 중요한
-    - word: outcome
-      meaning: 결과
-    solution:
-      cut: 많은 신호들은 이제 이러한 정보 수집 또는 평가 기능을 지닌 것으로 여겨진다 / 의사결정 과정의 메커니즘에 직접적으로 기여하면서
-        / 다양한 선택지의 가능한 결과에 대한 필수적인 정보를 제공함으로써
-      wrong: vital을 '생명의/활기찬' 정도로, directly contributing을 '간접적으로 관련된'으로 약하게 읽음
-      wrong_why: vital은 여기서 '필수적인·매우 중요한'이라는 강조어로, 신호가 제공하는 정보의 핵심성을 부각한다. directly
-        contributing 역시 '직접적으로 기여한다'는 강한 긍정 신호다. 이 강조 어휘들을 약하게 처리하면, 신호가 의사결정에서 '핵심적
-        역할'을 한다는 필자의 주장이 흐려진다.
-      author_msg: 많은 신호는 필수 정보를 제공해 의사결정 메커니즘에 직접적으로 기여하는 핵심 기능을 한다.
-      key_points:
-      - 'vital (강조 신호) : ''생명의/활기찬''으로 약하게 오독 → ''필수적인, 매우 중요한''으로 핵심성 강조'
-      - 'directly contributing : ''간접적으로 관련''으로 약화 → ''직접적으로 기여한다''는 강한 긍정으로 처리'
-      cut_en: Many signals are now seen as having this information gathering or assessment'
-        function, / directly contributing to ' the mechanism of the decision‑making
-        process / by supplying vital information about the likely outcomes of the
-        various options.
+      cut_en: 'If we psychologists are too bent on identifying the orderly pattern, / the regularities of children''s minds, / we may miss an essential and pervasive characteristic of our topic: / the child''s more unruly and imaginative ways of talking and thinking.'
   polarity_negative:
   - kind: mc
-    sentence: Emergencies are not always clearly labeled as such; "smoke" pouring
-      into a waiting room may be caused by fire, or it may merely indicate a leak
-      in a steam pipe.
+    sentence: Emergencies are not always clearly labeled as such; "smoke" pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
     source: 2022 고3 6월 42번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “응급 상황은 결코 그렇게 명확히 표시되지 않는다.”'
     options:
@@ -1970,21 +1430,15 @@ practice:
     - word: merely
       meaning: 단지
     solution:
-      cut: 응급 상황은 / 항상 그렇게 명확히 표시되는 것은 아니다 / 대기실로 쏟아지는 '연기'는 / 화재 때문일 수도 / 혹은 그저 증기관
-        누출을 나타낼 수도
+      cut: 응급 상황은 / 항상 그렇게 명확히 표시되는 것은 아니다 / 대기실로 쏟아지는 '연기'는 / 화재 때문일 수도 / 혹은 그저 증기관 누출을 나타낼 수도
       wrong: 응급 상황은 결코 그렇게 명확히 표시되지 않는다.
-      wrong_why: not always는 '항상 ~인 것은 아니다'(부분부정)이지 '결코 ~아니다'(전체부정)가 아니다. 부정어를 전체부정으로
-        잘못 읽어 극성을 정반대로 뒤집었다.
+      wrong_why: not always는 '항상 ~인 것은 아니다'(부분부정)이지 '결코 ~아니다'(전체부정)가 아니다. 부정어를 전체부정으로 잘못 읽어 극성을 정반대로 뒤집었다.
       author_msg: 응급 상황이 늘 뚜렷이 드러나는 건 아니어서, 연기 하나도 화재일 수도 아닐 수도 있다.
       key_points:
-      - '''not always clearly labeled'' : not always를 전체부정(''결코 아니다'')으로 읽기 쉽다 → not
-        always는 부분부정(''항상 ~인 것은 아니다'').'
-      cut_en: Emergencies / are not always clearly labeled as such; / "smoke" pouring
-        into a waiting room / may be caused by fire, / or it may merely indicate a
-        leak in a steam pipe.
+      - '''not always clearly labeled'' : not always를 전체부정(''결코 아니다'')으로 읽기 쉽다 → not always는 부분부정(''항상 ~인 것은 아니다'').'
+      cut_en: Emergencies / are not always clearly labeled as such; / "smoke" pouring into a waiting room / may be caused by fire, / or it may merely indicate a leak in a steam pipe.
   - kind: mc
-    sentence: Although we each may have the subjective impression that we are careful
-      thinkers, we often make snap judgments or no real judgments at all.
+    sentence: Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.
     source: 2024 고3 9월 30번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “우리는 흔히 성급한 판단을 하거나 진정한 판단을 조금은 한다.”'
     options:
@@ -2000,28 +1454,20 @@ practice:
     - word: at all
       meaning: (부정과 함께) 전혀
     solution:
-      cut: 우리 각자가 / 우리는 신중한 사색가라는 주관적 인상을 가질 수는 있지만 / 우리는 흔히 / 성급한 판단을 하거나 / 진정한 판단을
-        전혀 하지 않는다
+      cut: 우리 각자가 / 우리는 신중한 사색가라는 주관적 인상을 가질 수는 있지만 / 우리는 흔히 / 성급한 판단을 하거나 / 진정한 판단을 전혀 하지 않는다
       wrong: 우리는 흔히 성급한 판단을 하거나 진정한 판단을 조금은 한다.
-      wrong_why: no real judgments at all은 '진정한 판단을 전혀 하지 않는다'는 완전부정이다. no와 at all을
-        놓쳐 '조금은 한다'는 긍정으로 극성을 뒤집었다.
+      wrong_why: no real judgments at all은 '진정한 판단을 전혀 하지 않는다'는 완전부정이다. no와 at all을 놓쳐 '조금은 한다'는 긍정으로 극성을 뒤집었다.
       author_msg: 우리는 스스로 신중하다고 여기지만, 실제로는 성급하거나 아예 판단이 없는 경우가 많다.
       key_points:
-      - '''no real judgments at all'' : no·at all을 놓쳐 ''조금은 한다''는 긍정으로 뒤집기 쉽다 → ''진정한
-        판단을 전혀 하지 않는다''(완전부정).'
-      cut_en: Although we each / may have the subjective impression that we are careful
-        thinkers, / we often / make snap judgments / or no real judgments at all.
+      - '''no real judgments at all'' : no·at all을 놓쳐 ''조금은 한다''는 긍정으로 뒤집기 쉽다 → ''진정한 판단을 전혀 하지 않는다''(완전부정).'
+      cut_en: Although we each / may have the subjective impression that we are careful thinkers, / we often / make snap judgments / or no real judgments at all.
   - kind: mc
-    sentence: On the Internet, there are no regulations preventing a kindergarten
-      teacher from offering medical advice or a physician from suggesting ways to
-      safely make structural changes to your home.
+    sentence: On the Internet, there are no regulations preventing a kindergarten teacher from offering medical advice or a physician from suggesting ways to safely make structural changes to your home.
     source: 2022 고3 9월 30번
-    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는
-      규제가 있다.”'
+    prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는 규제가 있다.”'
     options:
     - '''there are no regulations''를 ''규제가 있다''로 옮긴 부분인가?'
-    - '''a kindergarten teacher ... offering medical advice''를 ''유치원 교사가 의학적 조언을 제공하는
-      것''으로 옮긴 부분인가?'
+    - '''a kindergarten teacher ... offering medical advice''를 ''유치원 교사가 의학적 조언을 제공하는 것''으로 옮긴 부분인가?'
     - '''preventing''을 ''막는''으로 옮긴 부분인가?'
     answer_index: 0
     vocab:
@@ -2032,22 +1478,15 @@ practice:
     - word: physician
       meaning: 의사
     solution:
-      cut: 인터넷에는 / ~을 막는 규제가 없다 / 유치원 교사가 의학적 조언을 제공하는 것을 / 혹은 의사가 방법을 제안하는 것을 / 여러분의
-        집을 안전하게 구조 변경하는
+      cut: 인터넷에는 / ~을 막는 규제가 없다 / 유치원 교사가 의학적 조언을 제공하는 것을 / 혹은 의사가 방법을 제안하는 것을 / 여러분의 집을 안전하게 구조 변경하는
       wrong: 인터넷에는 유치원 교사가 의학적 조언을 제공하는 것을 막는 규제가 있다.
-      wrong_why: there are no regulations는 '규제가 없다'는 부정이다. no를 놓쳐 '규제가 있다'는 긍정으로 극성을
-        뒤집었다.
+      wrong_why: there are no regulations는 '규제가 없다'는 부정이다. no를 놓쳐 '규제가 있다'는 긍정으로 극성을 뒤집었다.
       author_msg: 인터넷에는 자격 없는 사람의 조언을 걸러 낼 규제가 아예 없다.
       key_points:
-      - '''there are no regulations preventing ~'' : no를 놓쳐 ''규제가 있다''로 뒤집기 쉽다 → ''막는
-        규제가 없다''(존재 자체의 부정).'
-      cut_en: On the Internet, / there are no regulations preventing / a kindergarten
-        teacher from offering medical advice / or a physician from suggesting ways
-        / to safely make structural changes to your home.
+      - '''there are no regulations preventing ~'' : no를 놓쳐 ''규제가 있다''로 뒤집기 쉽다 → ''막는 규제가 없다''(존재 자체의 부정).'
+      cut_en: On the Internet, / there are no regulations preventing / a kindergarten teacher from offering medical advice / or a physician from suggesting ways / to safely make structural changes to your home.
   - kind: mc
-    sentence: While many city shoppers were clearly drawn to the notion of buying
-      and eating foods associated with nature, the nature claimed by the ads was no
-      longer the nature that created the foods.
+    sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “광고가 내세우는 자연은 여전히 그 식품을 만들어 낸 자연이었다.”'
     options:
@@ -2063,21 +1502,15 @@ practice:
     - word: claim
       meaning: 주장하다, 내세우다
     solution:
-      cut: 많은 도시 소비자들이 / 자연과 연관된 식품을 사고 먹는다는 생각에 분명히 끌렸지만 / 광고가 내세우는 자연은 / 더 이상 ~이
-        아니었다 / 그 식품을 만들어 낸 자연이
+      cut: 많은 도시 소비자들이 / 자연과 연관된 식품을 사고 먹는다는 생각에 분명히 끌렸지만 / 광고가 내세우는 자연은 / 더 이상 ~이 아니었다 / 그 식품을 만들어 낸 자연이
       wrong: 광고가 내세우는 자연은 여전히 그 식품을 만들어 낸 자연이었다.
-      wrong_why: no longer는 '더 이상 ~아니다'로 이전의 상태가 끊긴 부정이다. no longer를 놓쳐 '여전히 ~이었다'는
-        긍정으로 극성을 뒤집었다.
+      wrong_why: no longer는 '더 이상 ~아니다'로 이전의 상태가 끊긴 부정이다. no longer를 놓쳐 '여전히 ~이었다'는 긍정으로 극성을 뒤집었다.
       author_msg: 광고 속 '자연'은 이미 실제로 식품을 만든 자연과는 다른, 이미지일 뿐이라는 대조다.
       key_points:
-      - '''no longer the nature that created the foods'' : no longer를 놓쳐 ''여전히 ~이었다''로
-        뒤집기 쉽다 → no longer는 ''더 이상 ~아니다''(이전 상태의 종료).'
-      cut_en: While many city shoppers / were clearly drawn to the notion of buying
-        and eating foods associated with nature, / the nature claimed by the ads /
-        was no longer / the nature that created the foods.
+      - '''no longer the nature that created the foods'' : no longer를 놓쳐 ''여전히 ~이었다''로 뒤집기 쉽다 → no longer는 ''더 이상 ~아니다''(이전 상태의 종료).'
+      cut_en: While many city shoppers / were clearly drawn to the notion of buying and eating foods associated with nature, / the nature claimed by the ads / was no longer / the nature that created the foods.
   - kind: mc
-    sentence: Science is sometimes described as a winner-take-all contest, meaning
-      that there are no rewards for being second or third.
+    sentence: Science is sometimes described as a winner-take-all contest, meaning that there are no rewards for being second or third.
     source: 2024 고3 11월 38번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “2등이나 3등을 하는 것에도 보상이 있다는 것을 의미한다.”'
     options:
@@ -2098,13 +1531,10 @@ practice:
       wrong_why: there are no rewards는 '보상이 없다'는 부정이다. no를 놓쳐 '보상이 있다'는 긍정으로 극성을 뒤집었다.
       author_msg: 승자 독식이라는 말 그대로, 1등 외에는 아무 보상도 없다는 뜻이다.
       key_points:
-      - '''there are no rewards for being second or third'' : no를 놓쳐 ''보상이 있다''로 뒤집기
-        쉽다 → ''2·3등에는 보상이 없다''(승자 독식).'
-      cut_en: Science / is sometimes described as a winner-take-all contest, / meaning
-        that / there are no rewards for being second or third.
+      - '''there are no rewards for being second or third'' : no를 놓쳐 ''보상이 있다''로 뒤집기 쉽다 → ''2·3등에는 보상이 없다''(승자 독식).'
+      cut_en: Science / is sometimes described as a winner-take-all contest, / meaning that / there are no rewards for being second or third.
   - kind: short
-    sentence: By using contingency pricing, clients are ensured that they pay no fees
-      until they receive a settlement.
+    sentence: By using contingency pricing, clients are ensured that they pay no fees until they receive a settlement.
     source: 2023 고3 11월 37번
     prompt: no fees에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 성공 보수제(조건부 가격 책정)를 이용함으로써, 의뢰인은 합의금을 받을 때까지 어떠한 수수료도 내지 않는다는 것을 보장받는다.
@@ -2118,21 +1548,16 @@ practice:
     solution:
       cut: 조건부 가격 책정을 이용함으로써 / 의뢰인은 보장받는다 / 그들이 어떠한 수수료도 내지 않는다는 것을 / 합의금을 받을 때까지
       wrong: 의뢰인은 합의금을 받을 때까지 수수료를 낸다는 것을 보장받는다.
-      wrong_why: pay no fees는 '어떠한 수수료도 내지 않는다'는 부정이다. no를 놓치면 '수수료를 낸다'는 긍정이 되어 극성이
-        정반대로 뒤집힌다 (−).
+      wrong_why: pay no fees는 '어떠한 수수료도 내지 않는다'는 부정이다. no를 놓치면 '수수료를 낸다'는 긍정이 되어 극성이 정반대로 뒤집힌다 (−).
       author_msg: 성공 보수제에서는 결과(합의)가 나오기 전까지 의뢰인이 돈을 낼 필요가 없다.
       key_points:
-      - '''pay no fees until ~'' : no를 놓쳐 ''수수료를 낸다''는 긍정으로 뒤집기 쉽다 → ''어떠한 수수료도 내지
-        않는다''(합의 전까지).'
-      cut_en: By using contingency pricing, / clients are ensured / that they pay
-        no fees / until they receive a settlement.
+      - '''pay no fees until ~'' : no를 놓쳐 ''수수료를 낸다''는 긍정으로 뒤집기 쉽다 → ''어떠한 수수료도 내지 않는다''(합의 전까지).'
+      cut_en: By using contingency pricing, / clients are ensured / that they pay no fees / until they receive a settlement.
   - kind: short
-    sentence: In his early studies on musical performance, Carl Seashore discovered
-      that musicians only rarely play two equal notes in exactly the same way.
+    sentence: In his early studies on musical performance, Carl Seashore discovered that musicians only rarely play two equal notes in exactly the same way.
     source: 2022 고3 9월 24번
     prompt: only rarely에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 음악 연주에 관한 초기 연구에서, Carl Seashore는 음악가들이 두 개의 같은 음을 정확히 같은 방식으로 연주하는 경우가
-      극히 드물다는 것을 발견했다.
+    answer: 음악 연주에 관한 초기 연구에서, Carl Seashore는 음악가들이 두 개의 같은 음을 정확히 같은 방식으로 연주하는 경우가 극히 드물다는 것을 발견했다.
     vocab:
     - word: performance
       meaning: 연주, 공연
@@ -2141,25 +1566,18 @@ practice:
     - word: note
       meaning: 음(音)
     solution:
-      cut: 음악 연주에 관한 그의 초기 연구에서 / Carl Seashore는 발견했다 / 음악가들이 극히 드물게만 연주한다는 것을 / 두
-        개의 같은 음을 / 정확히 같은 방식으로
+      cut: 음악 연주에 관한 그의 초기 연구에서 / Carl Seashore는 발견했다 / 음악가들이 극히 드물게만 연주한다는 것을 / 두 개의 같은 음을 / 정확히 같은 방식으로
       wrong: 음악가들이 두 개의 같은 음을 정확히 같은 방식으로 자주 연주한다는 것을 발견했다.
-      wrong_why: only rarely는 '극히 드물게만'이라는 준부정 표현이다. rarely를 놓쳐 '자주'로 읽으면 빈도의 극성이
-        정반대로 뒤집힌다 (−).
+      wrong_why: only rarely는 '극히 드물게만'이라는 준부정 표현이다. rarely를 놓쳐 '자주'로 읽으면 빈도의 극성이 정반대로 뒤집힌다 (−).
       author_msg: 같은 음이라도 음악가는 매번 미묘하게 다르게 연주한다 — 똑같이 치는 일은 좀처럼 없다.
       key_points:
-      - '''only rarely play ...'' : rarely를 놓쳐 ''자주''로 빈도를 뒤집기 쉽다 → only rarely는 ''극히
-        드물게만''(준부정).'
-      cut_en: In his early studies on musical performance, / Carl Seashore discovered
-        / that musicians only rarely play / two equal notes / in exactly the same
-        way.
+      - '''only rarely play ...'' : rarely를 놓쳐 ''자주''로 빈도를 뒤집기 쉽다 → only rarely는 ''극히 드물게만''(준부정).'
+      cut_en: In his early studies on musical performance, / Carl Seashore discovered / that musicians only rarely play / two equal notes / in exactly the same way.
   - kind: short
-    sentence: We can see the world only as it appears to us, not as it truly is, because
-      there is no as it truly is without a perspective to give it form.
+    sentence: We can see the world only as it appears to us, not as it truly is, because there is no as it truly is without a perspective to give it form.
     source: 2022 고3 6월 21번
     prompt: no에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
-    answer: 우리는 세계를 그것이 진정으로 존재하는 대로가 아니라 오직 우리에게 보이는 대로만 볼 수 있는데, 왜냐하면 그것에 형태를 부여하는
-      관점 없이는 '진정으로 존재하는 대로'라는 것이 없기 때문이다.
+    answer: 우리는 세계를 그것이 진정으로 존재하는 대로가 아니라 오직 우리에게 보이는 대로만 볼 수 있는데, 왜냐하면 그것에 형태를 부여하는 관점 없이는 '진정으로 존재하는 대로'라는 것이 없기 때문이다.
     vocab:
     - word: appear to
       meaning: ~에게 보이다, 나타나다
@@ -2168,20 +1586,15 @@ practice:
     - word: give A form
       meaning: A에 형태를 부여하다
     solution:
-      cut: 우리는 세계를 볼 수 있다 / 오직 그것이 우리에게 보이는 대로만 / 그것이 진정으로 존재하는 대로가 아니라 / 왜냐하면 ~라는
-        것이 없기 때문이다 / '진정으로 존재하는 대로'가 / 그것에 형태를 부여하는 관점 없이는
+      cut: 우리는 세계를 볼 수 있다 / 오직 그것이 우리에게 보이는 대로만 / 그것이 진정으로 존재하는 대로가 아니라 / 왜냐하면 ~라는 것이 없기 때문이다 / '진정으로 존재하는 대로'가 / 그것에 형태를 부여하는 관점 없이는
       wrong: 그것에 형태를 부여하는 관점 없이도 '진정으로 존재하는 대로'가 있기 때문이다.
-      wrong_why: there is no ... without ~은 '~ 없이는 ...가 없다'는 이중의 부정 구조다. no를 놓쳐 '~가
-        있다'로 읽으면 극성이 정반대로 뒤집힌다 (−).
+      wrong_why: there is no ... without ~은 '~ 없이는 ...가 없다'는 이중의 부정 구조다. no를 놓쳐 '~가 있다'로 읽으면 극성이 정반대로 뒤집힌다 (−).
       author_msg: 관점이 있어야 비로소 세계가 형태를 얻으므로, 관점 없는 '있는 그대로'는 존재하지 않는다는 뜻이다.
       key_points:
-      - '''there is no ... without a perspective'' : no ... without의 이중 부정을 놓쳐 ''관점
-        없이도 있다''로 뒤집기 쉽다 → ''형태를 주는 관점 없이는 있는 그대로가 없다''.'
-      cut_en: We can see the world / only as it appears to us, / not as it truly is,
-        / because there is no as it truly is / without a perspective to give it form.
+      - '''there is no ... without a perspective'' : no ... without의 이중 부정을 놓쳐 ''관점 없이도 있다''로 뒤집기 쉽다 → ''형태를 주는 관점 없이는 있는 그대로가 없다''.'
+      cut_en: We can see the world / only as it appears to us, / not as it truly is, / because there is no as it truly is / without a perspective to give it form.
   - kind: short
-    sentence: However, in the virtual world, we have a tendency to be less defensive,
-      as there appears to be no physical threat to our well-being.
+    sentence: However, in the virtual world, we have a tendency to be less defensive, as there appears to be no physical threat to our well-being.
     source: 2023 고3 6월 22번
     prompt: less에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 그러나 가상 세계에서 우리는 덜 방어적인 경향이 있는데, 왜냐하면 우리의 안녕에 대한 물리적 위협이 없어 보이기 때문이다.
@@ -2195,17 +1608,13 @@ practice:
     solution:
       cut: 그러나 가상 세계에서 / 우리는 경향이 있다 / 덜 방어적인 / 왜냐하면 없어 보이기 때문이다 / 우리의 안녕에 대한 물리적 위협이
       wrong: 가상 세계에서 우리는 더 방어적인 경향이 있는데, 안녕에 대한 물리적 위협이 있어 보이기 때문이다.
-      wrong_why: less defensive는 '덜 방어적'이고 no physical threat은 '물리적 위협이 없다'는 부정이다.
-        less와 no를 놓치면 '더 방어적', '위협이 있다'로 두 곳의 극성이 모두 뒤집힌다 (−).
+      wrong_why: less defensive는 '덜 방어적'이고 no physical threat은 '물리적 위협이 없다'는 부정이다. less와 no를 놓치면 '더 방어적', '위협이 있다'로 두 곳의 극성이 모두 뒤집힌다 (−).
       author_msg: 가상 세계에는 실제 위협이 없어 보이므로 사람들이 경계를 덜 하게 된다는 흐름이다.
       key_points:
-      - '''less defensive ... no physical threat'' : less와 no를 놓쳐 ''더 방어적'', ''위협이
-        있다''로 두 곳의 극성을 뒤집기 쉽다 → ''덜 방어적'', ''물리적 위협이 없어 보임''.'
-      cut_en: However, in the virtual world, / we have a tendency / to be less defensive,
-        / as there appears to be no / physical threat to our well-being.
+      - '''less defensive ... no physical threat'' : less와 no를 놓쳐 ''더 방어적'', ''위협이 있다''로 두 곳의 극성을 뒤집기 쉽다 → ''덜 방어적'', ''물리적 위협이 없어 보임''.'
+      cut_en: However, in the virtual world, / we have a tendency / to be less defensive, / as there appears to be no / physical threat to our well-being.
   - kind: short
-    sentence: Moreover farmers can rarely acquire payoff information on more than
-      a few of the production methods they might use.
+    sentence: Moreover farmers can rarely acquire payoff information on more than a few of the production methods they might use.
     source: 2022 고3 9월 23번
     prompt: rarely에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
     answer: 게다가 농부들은 자신이 사용할 수도 있는 생산 방법 중 몇 가지가 넘는 것에 대한 이득 정보를 좀처럼 얻을 수 없다.
@@ -2217,14 +1626,30 @@ practice:
     - word: production method
       meaning: 생산 방법
     solution:
-      cut: 게다가 농부들은 / 좀처럼 얻을 수 없다 / 이득 정보를 / 몇 가지가 넘는 것에 대한 / 생산 방법 중 / 그들이 사용할 수도
-        있는
+      cut: 게다가 농부들은 / 좀처럼 얻을 수 없다 / 이득 정보를 / 몇 가지가 넘는 것에 대한 / 생산 방법 중 / 그들이 사용할 수도 있는
       wrong: 농부들은 자신이 사용할 수도 있는 생산 방법에 대한 이득 정보를 자주 얻을 수 있다.
-      wrong_why: rarely는 '좀처럼 ~않다'는 준부정 부사다. rarely를 놓쳐 '자주 얻을 수 있다'로 읽으면 극성이 정반대로
-        뒤집힌다 (−).
+      wrong_why: rarely는 '좀처럼 ~않다'는 준부정 부사다. rarely를 놓쳐 '자주 얻을 수 있다'로 읽으면 극성이 정반대로 뒤집힌다 (−).
       author_msg: 농부는 자신이 쓸 수 있는 여러 방법의 성과를 대부분 알 수 없다는 정보의 한계를 말한다.
       key_points:
-      - '''can rarely acquire ...'' : rarely를 놓쳐 ''자주 얻을 수 있다''로 뒤집기 쉽다 → rarely는
-        ''좀처럼 ~않다''(준부정).'
-      cut_en: Moreover farmers / can rarely acquire / payoff information / on more
-        than a few / of the production methods / they might use.
+      - '''can rarely acquire ...'' : rarely를 놓쳐 ''자주 얻을 수 있다''로 뒤집기 쉽다 → rarely는 ''좀처럼 ~않다''(준부정).'
+      cut_en: Moreover farmers / can rarely acquire / payoff information / on more than a few / of the production methods / they might use.
+  - kind: short
+    sentence: A company may devise a family emergency leave plan that allows employees the opportunity to be away from the company for a period of no longer than three hours, and no more than once a month, for illness in the employee's immediate family.
+    source: 2023 고3 11월 39번
+    prompt: no longer than / no more than에 유의하여 밑줄 친 문장을 우리말로 해석하시오.
+    answer: 회사는 직원의 직계 가족의 질병에 대비하여, 직원에게 세 시간을 넘지 않는 기간 동안, 그리고 한 달에 한 번을 넘지 않게 회사를 떠나 있을 기회를 허용하는 가족 비상 휴가 제도를 마련할 수 있다.
+    vocab:
+    - word: devise
+      meaning: 고안하다, 마련하다
+    - word: leave plan
+      meaning: 휴가 제도
+    - word: immediate family
+      meaning: 직계 가족
+    solution:
+      cut: 회사는 / 가족 비상 휴가 제도를 마련할 수 있다 / [직원에게 기회를 허용하는] / [회사를 떠나 있을 / 세 시간을 넘지 않는 기간 동안 / 그리고 한 달에 한 번을 넘지 않게] / 직계 가족의 질병에 대비하여
+      wrong: 세 시간 이상, 한 달에 한 번 이상 회사를 떠나 있을 기회를 허용한다.
+      wrong_why: no longer than / no more than은 상한선(~을 넘지 않는). '이상'으로 읽으면 상한과 하한이 뒤바뀐다.
+      author_msg: 휴가는 최대 세 시간, 월 최대 한 번으로 상한이 정해진 제한적 제도다.
+      key_points:
+      - '''no longer than three hours ... no more than once a month'' : ''이상''으로 읽어 상한을 하한으로 뒤집기 쉽다 → 둘 다 ''~을 넘지 않는'' 상한(최대 3시간, 월 최대 1회).'
+      cut_en: A company / may devise a family emergency leave plan / [that allows employees the opportunity] / [to be away from the company / for a period of no longer than three hours, / and no more than once a month], / for illness in the employee's immediate family.
