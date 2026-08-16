@@ -123,6 +123,7 @@
     {% if s %}
     {% if s.intent and s.intent.kind %}
       <div class="iw-wrap">{{ intent_widget(s.intent, true) }}</div>
+      {% if s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기</span>{{ s.cut }}</div>{% endif %}
     {% elif s.cloze and s.cloze.ko %}
       <div class="cloze-a"><span class="sol-tag">채운 직독직해</span>{% set ta = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set ta.n = ta.n + 1 %}<span class="tf"><span class="tm">{{ tnums[ta.n-1] }}</span>{{ c.t }}</span>{% elif c.v %}{{ c.t | replace(c.v, '<u class="vf">' + c.v + '</u>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% elif s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
