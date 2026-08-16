@@ -778,9 +778,6 @@ def render_spread(rec, c, idx):
         <div class="how">{how}</div>
         <div class="psg work">{step1_psg}</div>
         <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{opt_lines}</div>
-        <div class="pguide"><div class="h">🖍 이렇게 풀어요</div>
-          <div class="g3">{g3}</div>
-        </div>
       </div>
       <div class="pside">
         <div class="mini"><div class="h">{remind_label}</div>{chips}</div>
