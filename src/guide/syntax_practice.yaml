@@ -331,6 +331,7 @@ practice:
         - t: 문화는 작동한다 우리가 의식적으로 고려하고 논의할 수 있는 방식으로
           v: 의식적으로
         - t: 하지만 또한
+          v: 하지만
         - t: 우리가 훨씬 덜 인식하는 방식으로도
           trap: true
   - kind: mc
@@ -676,6 +677,7 @@ practice:
         en: In this sense / depending on the intentions of the parties / the areas of common interest may be clarified, refined and given negotiated form and substance
         ko:
         - t: 이런 의미에서
+          v: 이런
         - t: 당사자들의 의도에 따라
           trap: true
         - t: 공동의 관심 영역은 명확해지고 다듬어지며 협상된 형태와 실체를 부여받을 수 있다
@@ -1598,10 +1600,13 @@ practice:
         en: When the Industrial Revolution arrived / with its great innovation, the motor, / we didn't leave our world / to go to some remote motorspace
         ko:
         - t: 산업혁명이 도래했을 때
+          v: 산업혁명
         - t: 그것의 위대한 혁신, 즉 모터와 함께
           trap: true
         - t: 우리는 우리 세계를 떠나지 않았다
+          v: 떠나지
         - t: 어떤 먼 모터 공간으로 가려고
+          v: 어떤
   - kind: mc
     sentence: Whether the reason for their decline is their location and lack of nutrients, a passing sickness, or genetic makeup, they now fall prey to insects and fungi.
     source: 2023 고3 6월 39번
@@ -1624,9 +1629,11 @@ practice:
         en: Whether the reason for their decline is / their location and lack of nutrients, a passing sickness, or genetic makeup, / they now fall prey to insects and fungi
         ko:
         - t: 그들의 쇠퇴 원인이 ~이든 간에
+          v: 쇠퇴
         - t: 그들의 위치와 영양분 부족, 일시적 질병, 혹은 유전적 구성이든
           trap: true
         - t: 그들은 이제 곤충과 균류의 먹이가 된다
+          v: 먹이가
   - kind: mc
     sentence: For the physicist, understanding the ordinary, the habitual, and the frequent thus allows us to account for the frightening and the singular.
     source: 2024 고3 9월 23번
@@ -1649,10 +1656,13 @@ practice:
         en: For the physicist, / understanding the ordinary, the habitual, and the frequent / thus allows us / to account for the frightening and the singular
         ko:
         - t: 물리학자에게
+          v: 물리학자
         - t: 평범한 것, 습관적인 것, 그리고 빈번한 것을 이해하는 것은
           trap: true
         - t: 따라서 우리가 ~할 수 있게 해 준다
+          v: 우리
         - t: 무섭고 독특한 것을 설명하도록
+          v: 설명하도록
   - kind: mc
     sentence: Even over periods as short as a few decades, satellite images show that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere.
     source: 2025 고3 6월 35번
@@ -1675,7 +1685,9 @@ practice:
         en: Even over periods as short as a few decades, / satellite images show / that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere
         ko:
         - t: 수십 년 정도의 짧은 기간에 걸쳐서도
+          v: 걸쳐서
         - t: 위성 사진들은 보여 준다
+          v: 사진들
         - t: 산악 빙하의 극적인 감소가 안데스, 히말라야, 그리고 다른 곳에서 발생했음을
           trap: true
   prep_stack:
@@ -2018,10 +2030,13 @@ practice:
         en: Accordingly, manufacturers have set up / market-research departments to explore the needs of users in the target market, / product-development groups to think up suitable products to address those needs, / and so forth
         ko:
         - t: 따라서 제조업체들은 설립했다
+          v: 제조업체
         - t: 목표 시장의 사용자들의 요구를 탐색하기 위한 시장 조사 부서를
+          v: 사용자들
         - t: 그 요구를 해결할 적절한 제품을 고안하기 위한 제품 개발 그룹을
           trap: true
         - t: 등등을
+          v: 등등
   - kind: mc
     sentence: The animal in a conflict between attacking a rival and fleeing may initially not have sufficient information to enable it to make a decision straight away.
     source: 2022 고3 6월 35번
@@ -2046,7 +2061,9 @@ practice:
         - t: 라이벌을 공격하는 것과 도망치는 것 사이의 갈등에 처한 그 동물은
           trap: true
         - t: 처음에는 충분한 정보를 갖고 있지 않을 수 있다
+          v: 충분한
         - t: 그것이 즉시 결정을 내릴 수 있게 해 줄
+          v: 그것
   - kind: mc
     sentence: The fossil record supports this prediction—multicelled organisms are found in layers of earth millions of years after the first appearance of single-celled organisms.
     source: 2022 고3 6월 36번
@@ -2069,7 +2086,9 @@ practice:
         en: The fossil record supports this prediction / multicelled organisms are found in layers of earth / millions of years after the first appearance of single-celled organisms
         ko:
         - t: 화석 기록은 이 예측을 뒷받침한다
+          v: 화석
         - t: 즉, 다세포 유기체는 지구의 지층에서 발견된다
+          v: 발견된다
         - t: 단세포 유기체가 처음 출현한 지 수백만 년 후에
           trap: true
   - kind: mc
@@ -2094,6 +2113,7 @@ practice:
         en: Also, it has become difficult for companies to develop new pesticides, / even those that can have major beneficial effects and few negative effects
         ko:
         - t: 또한, 기업들이 새로운 살충제를 개발하는 것이 어려워졌다
+          v: 살충제
         - t: 심지어 큰 유익한 효과와 거의 없는 부정적 효과를 가질 수 있는 것들조차도
           trap: true
   inversion:
@@ -2210,7 +2230,9 @@ practice:
         - t: 음악가와 심리학자뿐만 아니라 헌신적인 음악 애호가와 전문가들도
           trap: true
         - t: 흔히 ~라는 의견을 표한다
+          v: 표한다
         - t: 음악의 아름다움은 정확히 규정된 악보로부터의 표현적 일탈에 있다는
+          v: 일탈
   - kind: mc
     sentence: Only the rational discourse has the tools to overcome illusions and to point towards true knowledge.
     source: 2023 고3 6월 34번
@@ -2235,7 +2257,9 @@ practice:
         - t: 오직 이성적 담론만이
           trap: true
         - t: 그 도구를 가지고 있다
+          v: 도구
         - t: 환상을 극복하고 진정한 지식을 가리킬
+          v: 환상
   emphasis:
   - kind: short
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -2315,10 +2339,13 @@ practice:
         en: Beginning in the late nineteenth century, / with the hugely successful rise of the artistic male couturier, / it was the designer who became celebrated, / and the client elevated by his inspired attention.
         ko:
         - t: 19세기 후반에 시작되어,
+          v: 19세기
         - t: 예술가적 남성 의상 디자이너의 대성공적 부상과 함께,
+          v: 의상
         - t: 유명해진 것은 바로 그 디자이너였다,
           trap: true
         - t: 그리고 고객은 그의 영감 어린 관심에 의해 격상되었다.
+          v: 격상되었다
   parallel:
   - kind: mc
     sentence: Unfortunately, at the scales, accuracy, and precision most useful to protected area management, the future not only promises to be unprecedented, but it also promises to be unpredictable.
@@ -2713,6 +2740,7 @@ practice:
         - t: 고대 수렵채집 무리와 오늘날 우리의 친밀한 언어 공동체 둘 다에서,
           trap: true
         - t: 말의 확산이 가치관을 형성했다.
+          v: 확산
   - kind: mc
     sentence: For many people, their work is both a source of income and of meaning.
     source: 2025 고3 6월 40번
@@ -2735,7 +2763,9 @@ practice:
         en: For many people, / their work is / both a source of income and of meaning.
         ko:
         - t: 많은 사람들에게,
+          v: 사람들
         - t: 그들의 일은 ~이다
+          v: ~이다
         - t: 수입의 원천이자 의미의 원천 둘 다
           trap: true
   what_clause:
@@ -2924,6 +2954,7 @@ practice:
         en: We must know / who this person is / who these other people are / what their relationship is / what is at stake in the scene / and the like
         ko:
         - t: 우리는 알아야 한다
+          v: 우리
         - t: 이 사람이 누구인지
           v: 사람
         - t: 이 다른 사람들이 누구인지
@@ -2933,6 +2964,7 @@ practice:
         - t: 그 장면에서 무엇이 위태로운지
           trap: true
         - t: 등등을
+          v: 등등
   - kind: mc
     sentence: 'Moreover, much of what we now see as precise matches between an organism and its environment may equally be seen as constraints: koala bears live successfully on Eucalyptus foliage, but, from another perspective, koala bears cannot live without Eucalyptus foliage.'
     source: 2023 고3 6월 40번
@@ -2963,6 +2995,7 @@ practice:
         en: Moreover / much of what we now see as precise matches / between an organism and its environment / may equally be seen as constraints
         ko:
         - t: 게다가
+          v: 게다
         - t: 우리가 지금 정밀한 일치라고 여기는 것의 상당 부분은
           trap: true
         - t: 유기체와 그 환경 사이의
@@ -3185,6 +3218,7 @@ practice:
         en: Indeed / what distinguishes a park from the broader category of public space / is the representation of nature / that parks are meant to embody
         ko:
         - t: Indeed
+          v: Indeed
         - t: what distinguishes a park from the broader category of public space
           trap: true
         - t: is the representation of nature
@@ -3349,6 +3383,7 @@ practice:
         - t: 따라서 서로 다른 과학 분야에 걸쳐 출판물을 낸 누군가에게 우리가 놀랄 때
           v: 출판물
         - t: 깨달아라
+          v: 깨달아라
         - t: 각 주제가 특정한 기간 동안 탐구되었다는 것을
           trap: true
   - kind: short
@@ -3471,6 +3506,7 @@ practice:
         - t: 동일한 내부 처리 구조에도 불구하고 우리가 감정을 해석·범주화·명명하는 방식이 문화에 따라 다르다고
           v: 범주화
         - t: 그리고
+          v: 그리고
         - t: 우리가 특정 문화 안에서 감정을 표현하는 것이 적절한 사회적 맥락을 배운다는 것을
           trap: true
   - kind: mc
@@ -3642,6 +3678,7 @@ practice:
         - t: 길의 모양, 나무의 냄새
           v: 냄새
         - t: 그리고
+          v: 그리고
         - t: 마른 잎을 밟을 때 나는 소리를
           trap: true
   - kind: short
@@ -3788,6 +3825,7 @@ practice:
         - t: with the greatest efficiency
           v: efficiency
         - t: they just aren't
+          v: aren't
   as_compare:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they '' need to be pushed beyond a certain point, called a bifurcation.'
@@ -3821,6 +3859,7 @@ practice:
         - t: 그리고 모든 비선형 시스템이 혼돈적인 것도 아니다
           trap: true
         - t: 그렇게 되려면
+          v: 그렇게
         - t: 그것들은 어떤 지점을 넘어서도록 밀려야 한다
           v: 지점
         - t: 분기점이라 불리는
@@ -4016,6 +4055,7 @@ practice:
         - t: 혼돈 시스템은 반복에 의해 생성된다
           v: 반복
         - t: 비록
+          v: 비록
         - t: 모든 반복이 혼돈으로 이어지는 것은 아니지만
           trap: true
   - kind: mc

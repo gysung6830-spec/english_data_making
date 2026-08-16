@@ -94,6 +94,7 @@ practice:
         en: In other words, they / not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; / they have an innate drive to do so.
         ko:
         - t: 다시 말해 그들은
+          v: 다시
         - t: 자신의 운동감각으로 경험한 신체 움직임을 시각적으로 지각된 타인의 움직임과 맞추는 타고난 능력을 가질 뿐 아니라
           trap: true
         - t: 그렇게 하려는 타고난 욕구도 가진다
@@ -494,6 +495,7 @@ practice:
         en: That is because / geography starts from / the premise that it matters where something takes place on Earth's surface.
         ko:
         - t: 그것은 ~ 때문이다
+          v: 때문이다
         - t: 지리학이 출발한다
           v: 지리학
         - t: 어떤 것이 지구 표면의 어디에서 일어나는지가 중요하다는 전제에서
@@ -551,8 +553,11 @@ practice:
         en: Yes, some contests / are seen as world class, / such as / identification of the Higgs particle or the development of high temperature superconductors
         ko:
         - t: 그렇다, 일부 대회는
+          v: 대회
         - t: 세계적 수준으로 여겨진다,
+          v: 세계적
         - t: 예를 들어 ~같은
+          v: 예를
         - t: 힉스 입자를 규명해 내는 것이나 고온 초전도체를 개발해 내는 것
           trap: true
   - kind: mc
@@ -577,8 +582,11 @@ practice:
         en: Often overlooked, but just as important a stakeholder, / is the consumer / who plays a large role / in the notion of the privacy paradox
         ko:
         - t: 종종 간과되지만, 그에 못지않게 중요한 이해관계자가
+          v: 이해관계자
         - t: 바로 소비자이다
+          v: 소비자이다
         - t: 그는 큰 역할을 한다
+          v: 그는
         - t: 사생활 역설이라는 개념에서
           trap: true
   - kind: mc
@@ -605,8 +613,11 @@ practice:
         - t: 협상을 고정된 파이의 관점에서 보려는 경향은
           trap: true
         - t: 달라진다
+          v: 달라진다
         - t: 사람들이 어떻게 보느냐에 따라
+          v: 사람들
         - t: 주어진 갈등 상황의 본질을
+          v: 갈등
   - kind: mc
     sentence: In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.
     source: 2024 고3 6월 32번
@@ -629,10 +640,13 @@ practice:
         en: In fact, / the ability to generate creative ideas / is essentially useless / if these ideas subsequently die a silent death
         ko:
         - t: 사실,
+          v: 사실
         - t: 창의적인 아이디어를 만들어 내는 능력은
           trap: true
         - t: 본질적으로 쓸모없다
+          v: 본질적으로
         - t: 만약 이 아이디어들이 이후 조용한 죽음을 맞는다면
+          v: 아이디어들
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
     source: 2025 수능 21번
@@ -663,6 +677,7 @@ practice:
         - t: 이론에만 의존하는 사람들은
           v: 이론
         - t: 분명히
+          v: 분명히
         - t: 그림자를 쫓고 있었다 실체가 아니라
           trap: true
     kind: mc
@@ -925,8 +940,11 @@ practice:
         en: The metaphor is useful / because it helps us / see ownership / as a grouping of interpersonal rights that can be separated and put back together
         ko:
         - t: 그 비유는 유용하다
+          v: 유용하다
         - t: 왜냐하면 그것은 우리를 돕기 때문이다
+          v: 왜냐하면
         - t: 소유권을 보도록
+          v: 소유권
         - t: 분리되었다가 다시 합쳐질 수 있는 대인 권리들의 묶음으로
           trap: true
   - kind: mc
@@ -951,7 +969,9 @@ practice:
         en: We feel / as though others / can see through our skin and into our mind
         ko:
         - t: 우리는 느낀다
+          v: 느낀다
         - t: 마치 다른 사람들이
+          v: 사람들
         - t: 우리의 피부를 꿰뚫고 우리의 마음속까지 볼 수 있는 것처럼
           trap: true
   - kind: mc
@@ -976,7 +996,9 @@ practice:
         en: Even so, / we don't feel / as if his face is a dentate blankness
         ko:
         - t: 그렇더라도,
+          v: 그렇더라도
         - t: 우리는 느끼지 않는다
+          v: 느끼지
         - t: 마치 그의 얼굴이 톱니 모양의 공백인 것처럼
           trap: true
   - kind: mc
@@ -1001,6 +1023,8 @@ practice:
         en: The experience of walking along a path, / for example, / can be a metaphor for thinking about arithmetic
         ko:
         - t: 길을 따라 걷는 경험은
+          v: 길을
         - t: 예를 들어,
+          v: 예를
         - t: 산수에 대해 생각하는 것에 대한 비유가 될 수 있다
           trap: true
