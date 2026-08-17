@@ -1,0 +1,27 @@
+[
+ {
+  "var": "P9",
+  "item_no": "본문 외 · 1 (기아석이란)",
+  "title": "Hunger Stones ①",
+  "key_grammar_hint": "과거분사 삽입구 (found ~, 명사 뒤에서 수식)",
+  "sentences": [
+   "In the summer of 2022, during the worst drought in 500 years in Europe, a stone known as a “hunger stone” was found in a Czech town along the Elbe River.",
+   "The stone had a sentence written on it that read: “If you see me, then cry.”",
+   "The hunger stones, found in rivers across central Europe, typically remain underwater.",
+   "However, when droughts occur and water levels retreat, these stones become visible.",
+   "The stones are significant because they bear records of the past severe droughts."
+  ]
+ },
+ {
+  "var": "P10",
+  "item_no": "본문 외 · 2 (경고와 미래 예측)",
+  "title": "Hunger Stones ②",
+  "key_grammar_hint": "상관접속사 not just A but B (A가 아니라 B)",
+  "sentences": [
+   "Droughts cause reduced harvests, food shortages, and hunger, especially for the poor.",
+   "The words on the hunger stones are believed to warn of these hardships and to urge people to be prepared.",
+   "Considering the continuation of climate change, experts warn that the situation we face is not just a simple, occasional drought but a severe drought that could persist for decades.",
+   "The United Nations has predicted that by 2050, 75 percent of the global population could suffer from the effects of drought unless significant action is taken to address climate change."
+  ]
+ }
+]

@@ -1,0 +1,30 @@
+[
+ {
+  "var": "P1",
+  "item_no": "장면 · 1 (수도가 끊기다)",
+  "title": "Dry ① 수도 단수",
+  "key_grammar_hint": "관계부사 where (앞 명사를 보충설명하는 계속적 용법)",
+  "sentences": [
+   "The kitchen tap makes strange sounds. It coughs. It spits once, and then goes silent.",
+   "“Mom,” I shout out into the living room, “water is not coming out.”",
+   "“Alyssa, shush!” Mom says.",
+   "She is watching the TV, where a news anchor is talking about the “flow crisis.”",
+   "This is what the media has been calling the drought ever since people got tired of hearing the word “drought.”",
+   "Now the crisis is entering a new stage. We have no running water out of the tap."
+  ]
+ },
+ {
+  "var": "P2",
+  "item_no": "장면 · 2 (몰의 군중)",
+  "title": "Dry ② 사재기 인파",
+  "key_grammar_hint": "관계대명사 what (선행사를 포함한 '~하는 것')",
+  "sentences": [
+   "“To the mall!” says Uncle Basil. My little brother Garrett and I jump in our uncle’s truck.",
+   "As we pull into the parking lot, we can see the crowd.",
+   "“You two go in. I’ll meet you inside,” Uncle Basil says.",
+   "Inside it’s like Black Friday at its worst — but today it’s not televisions and video games people are after.",
+   "What I see in the carts in the checkout line are mostly water bottles. The essentials of life.",
+   "There is a look of impatience on the faces of the people in line. There is even hostility, hidden by a thin layer of politeness. Even that politeness is stretched thin."
+  ]
+ }
+]

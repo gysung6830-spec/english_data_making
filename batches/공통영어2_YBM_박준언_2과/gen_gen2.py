@@ -1,0 +1,222 @@
+# -*- coding: utf-8 -*-
+import sys; sys.path.insert(0, "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/batches/공통영어2_YBM_박준언_2과")
+from _helpers import *
+
+# =====================================================================
+# P3 — Dry ③ 마지막 생수 (빈 진열대와 뺏긴 생수)
+# =====================================================================
+r3 = [
+ "As I approach the back of the store for water bottles, I realize I am too late. The shelves are already empty.",
+ "I manage my way to the side aisle, trying my luck. Sometimes people place unwanted items in the wrong shelves.",
+ "Lucky! I find a single case of water that someone abandoned there maybe yesterday, when it wasn’t such a precious commodity.",
+ "I reach for it, only to find it pulled away at the last second by a woman.",
+ "She stacks it on top of her cart like a crown on top of her canned goods.",
+]
+
+ov3 = Overview(
+ theme_ko="빈 진열대에서 찾은 마지막 생수, 그러나 눈앞에서 빼앗기다",
+ key_grammar=KeyGrammar(
+  point="only to+동사원형 (결과: 결국 ~하고 말다)",
+  source_sentence="I reach for it, only to find it pulled away at the last second by a woman.",
+  explanation=[
+   GN("쉽게 말하면","'only to+동사원형'은 '(했으나) 결국 ~하고 [[말다]]'라는 뜻밖의 결과를 나타내."),
+   GN("주의","여기서 to부정사는 '목적(~하려고)'이 아니라 [[결과]]야 — 앞의 행동 뒤에 벌어진 일."),
+   GN("해석 요령","'reach for it, only to find ~' = '손을 뻗지만, 결국 ~임을 [[알게 되다]]'."),
+   GN("문맥","화자는 물을 잡으려 했지만 결국 [[빼앗기고]] 만다 — 반전의 순간."),
+  ],
+  example_analysis="I reach for it, only to find it pulled away = '뻗었으나 결국 빼앗김'이라는 결과의 only to.",
+  drills=[
+   GrammarDrill(kind="객관식",from_passage=True,
+    question="지문 'I reach for it, only to find it pulled away ~'에서 only to find의 의미는?",
+    options=["(뻗었지만) 결국 빼앗기고 만다는 '결과'","물을 잡으려는 '목적'","물을 잡는 '조건'"],
+    answer="(뻗었지만) 결국 빼앗기고 만다는 '결과'"),
+   GrammarDrill(kind="객관식",from_passage=False,
+    question="밑줄 친 부분이 '뜻밖의 결과(only to)'로 쓰인 것은?",
+    options=["He ran to the station, only to miss the train.","He saved money only to buy a car.","She stayed home only to rest."],
+    answer="He ran to the station, only to miss the train."),
+   GrammarDrill(kind="객관식",from_passage=False,
+    question="'~했으나 결국 그렇게 되고 말았다'라는 뜻밖의 결과를 나타내는 표현은?",
+    options=["only to+동사원형","in order to+동사원형","so as to+동사원형"],
+    answer="only to+동사원형"),
+   GrammarDrill(kind="영작",from_passage=True,
+    question="(지문) 나는 그것에 손을 뻗지만, 결국 마지막 순간에 한 여자에게 빼앗기고 만다.",
+    answer="I reach for it, only to find it pulled away at the last second by a woman."),
+   GrammarDrill(kind="영작",from_passage=False,
+    question="그녀는 문을 열었지만, 결국 방이 비어 있는 것을 발견하고 말았다.",
+    answer="She opened the door, only to find the room empty."),
+  ]),
+ topic="빈 진열대를 뒤져 마지막 생수 한 상자를 발견하지만 눈앞에서 빼앗기는 장면.",
+ stance="중립적",stance_reason="화자가 겪는 상황을 순서대로 보여 주는 서사 묘사.",
+ structure="시간·순서(나열)",structure_reason="진열대 도착→옆 통로 탐색→발견→빼앗김의 시간 순서.",
+ restatement_chains=[
+  RestatementChain(label="빼앗긴 마지막 생수",
+   expressions=["only to find it pulled away","stacks it on top of her cart like a crown"],
+   variation="'손에서 빼앗김' → '여자가 전리품처럼 챙김'으로 이어진다."),
+ ],
+ flow_blocks=[
+  FlowBlock(stage="도입",sentence_range="1",summary="생수 진열대에 도착했지만 이미 [[비어]] 있다."),
+  FlowBlock(stage="전개",sentence_range="2~3",summary="옆 통로를 뒤져 버려진 생수 [[한 상자]]를 발견한다."),
+  FlowBlock(stage="반전",sentence_range="4",summary="손을 뻗지만 한 [[여자]]에게 빼앗기고 만다."),
+  FlowBlock(stage="결말",sentence_range="5",summary="여자는 그것을 [[왕관]]처럼 카트에 얹는다."),
+ ])
+
+i3 = [
+ S(r3,1,
+  [("(that) 생략","I realize (that) I am ~ — 명사절 that 생략"),("As","때·이유의 접속사 '~하면서/때문에'")],
+  [("approach","다가가다"),("shelves","진열대")],
+  [("As I [[approach]] the back of the store","매장 뒤쪽으로 [[다가가면서]]"),
+   ("for [[water bottles]],","[[생수]]를 찾아,"),
+   ("I [[realize]] I am too late.","나는 너무 늦었음을 [[깨닫는다]]."),
+   ("The shelves are already [[empty]].","진열대는 이미 [[비어 있다]].")],
+  [("화자가 매장 뒤쪽에서 생수를 넉넉히 구했다는 뜻이다.","틀림 — 'too late', 'shelves are already empty'로 이미 다 팔려 못 구한 상황이야.")]),
+ S(r3,2,
+  [("분사구문","trying my luck — 동시동작 '~하면서'")],
+  [("manage one's way","힘겹게 나아가다"),("unwanted","원치 않는")],
+  [("I [[manage]] my way to the side aisle,","나는 옆 통로로 [[겨우 나아가며]],"),
+   ("[[trying my luck]].","[[운을 시험한다]]."),
+   ("Sometimes people [[place]] unwanted items","때때로 사람들은 원치 않는 물건을 [[놓는다]]"),
+   ("in the wrong [[shelves]].","엉뚱한 [[진열대]]에.")],
+  [("사람들은 항상 물건을 제자리에 둔다는 뜻이다.","틀림 — 'sometimes ~ place unwanted items in the wrong shelves'라 잘못 놓인 물건을 노려 통로를 뒤지는 거야.")]),
+ S(r3,3,
+  [("관계대명사 that","water that someone abandoned — 목적격 that"),("관계부사 when","when it wasn’t ~ '~하던 때'")],
+  [("abandon","버리다, 놔두다"),("commodity","상품, 물자")],
+  [("[[Lucky]]!","[[운이 좋다]]!"),
+   ("I find a single [[case of water]]","나는 생수 [[한 상자]]를 발견한다"),
+   ("that someone [[abandoned]] there maybe yesterday,","누군가 어제쯤 거기 [[놔두고 간]],"),
+   ("when it wasn’t such a precious [[commodity]].","그것이 그리 귀한 [[물자]]가 아니었을 때.")],
+  [("'when it wasn’t such a precious commodity'의 it은 someone(누군가)을 가리킨다.","(지칭) 틀림 — it은 water(생수)를 가리켜. 어제만 해도 생수가 귀하지 않았다는 뜻이야."),
+   ("이 물은 화자가 미리 챙겨 둔 것이다.","틀림 — 'someone abandoned there'로 남이 놔두고 간 것을 우연히 발견한 거야.")]),
+ S(r3,4,
+  [("only to+동사원형","결과 '결국 ~하고 말다'"),("과거분사 pulled","find it pulled away — 수동 의미의 분사")],
+  [("reach for","~을 향해 손을 뻗다"),("pull away","홱 잡아채 가다")],
+  [("I [[reach for]] it,","나는 그것에 [[손을 뻗지만]],"),
+   ("only to find it [[pulled away]]","결국 그것이 [[홱 채여]]"),
+   ("at the last second by a [[woman]].","마지막 순간에 한 [[여자]]에게.")],
+  [("화자가 마침내 생수를 손에 넣었다는 뜻이다.","(함축) 틀림 — 'only to find it pulled away'는 '뻗었으나 결국 빼앗김'이라는 반전이야."),
+   ("'I reach for it'의 it은 여자를 가리킨다.","(지칭) 틀림 — it은 발견한 생수 한 상자를 가리켜.")]),
+ S(r3,5,
+  [("직유 like","like a crown — '~처럼' 비유")],
+  [("stack","쌓아 올리다"),("canned goods","통조림 식료품")],
+  [("She [[stacks]] it on top of her cart","그녀는 그것을 카트 위에 [[쌓는다]]"),
+   ("like a [[crown]]","[[왕관]]처럼"),
+   ("on top of her canned [[goods]].","그녀의 통조림 [[식료품]] 위에.")],
+  [("'She stacks it'의 it은 카트를 가리킨다.","(지칭) 틀림 — it은 여자가 빼앗은 생수 상자를 가리켜."),
+   ("물이 하찮아서 아무렇게나 던져 놓았다는 뜻이다.","(함축) 틀림 — 'like a crown(왕관처럼)'은 그 물을 값진 전리품으로 떠받든다는 속뜻이야.")]),
+]
+P3 = build("Dry ③ 마지막 생수","장면 · 3 (빈 진열대와 뺏긴 생수)",r3,ov3,i3)
+
+
+# =====================================================================
+# P4 — Dry ④ 거절당한 호의 (Hali의 거절)
+# =====================================================================
+r4 = [
+ "“I’m sorry, but we were here first,” she says.",
+ "And then her daughter steps forward — a girl I recognize from soccer — Hali Hartling.",
+ "As her mother pulls their cart away, Hali leans closer to me. “I’m sorry about that, Alyssa.”",
+ "“Didn’t I share my water with you at the practice last week?” I point out to her. “Maybe you could return the favor and share a few bottles with me.”",
+ "She looks back to her mother, who’s already moving down the aisle, then turns back to me shaking her head.",
+ "And then she gets a little bit red in the face, and turns to leave before it becomes a deep flush.",
+]
+
+ov4 = Overview(
+ theme_ko="지난주 베푼 호의를 상기시켜도 끝내 거절당하는 아이러니",
+ key_grammar=KeyGrammar(
+  point="계속적 용법 관계대명사 who (선행사 보충설명)",
+  source_sentence="She looks back to her mother, who’s already moving down the aisle, then turns back to me shaking her head.",
+  explanation=[
+   GN("쉽게 말하면","콤마 뒤 'who'는 앞의 명사(선행사)를 [[보충 설명]]하는 계속적 용법이야."),
+   GN("복원","her mother, who’s already moving = her mother, [[and she]]’s already moving."),
+   GN("주의","계속적 용법의 who는 [[that]]으로 바꿔 쓸 수 없어."),
+   GN("한정 용법과 차이","콤마가 없으면 '어떤 엄마인지'를 [[한정]]하지만, 콤마가 있으면 '그런데 그 엄마는~'처럼 덧붙여."),
+  ],
+  example_analysis="her mother, who’s already moving down the aisle = 콤마+who로 her mother를 보충 설명.",
+  drills=[
+   GrammarDrill(kind="객관식",from_passage=True,
+    question="지문 'her mother, who’s already moving down the aisle'에서 who의 쓰임은?",
+    options=["선행사(her mother)를 보충 설명하는 계속적 용법","앞 명사를 한정하는 제한적 용법","의문사 who(누구)"],
+    answer="선행사(her mother)를 보충 설명하는 계속적 용법"),
+   GrammarDrill(kind="객관식",from_passage=False,
+    question="계속적 용법(콤마+who)으로 알맞은 문장은?",
+    options=["I met Tom, who is my old friend.","I met the man who lives here.","Who is that man over there?"],
+    answer="I met Tom, who is my old friend."),
+   GrammarDrill(kind="객관식",from_passage=False,
+    question="관계대명사 계속적 용법의 특징으로 옳은 것은?",
+    options=["콤마 뒤에서 선행사를 보충 설명한다","that으로 바꿔 쓸 수 있다","선행사를 한정해 범위를 좁힌다"],
+    answer="콤마 뒤에서 선행사를 보충 설명한다"),
+   GrammarDrill(kind="영작",from_passage=True,
+    question="(지문) 그녀는 엄마를 돌아보는데, 엄마는 이미 통로를 따라 내려가고 있다.",
+    answer="She looks back to her mother, who’s already moving down the aisle."),
+   GrammarDrill(kind="영작",from_passage=False,
+    question="나는 앨리스를 만났는데, 그녀는 의사이다.",
+    answer="I met Alice, who is a doctor."),
+  ]),
+ topic="딸 Hali가 다가와 사과하지만, 지난주 호의를 상기시켜도 끝내 물을 나눠 주지 않는 장면.",
+ stance="중립적",stance_reason="인물들의 말과 행동을 순서대로 보여 주는 서사 묘사.",
+ structure="시간·순서(나열)",structure_reason="엄마의 정당화→딸의 사과→호소→거절→퇴장의 시간 순서.",
+ restatement_chains=[
+  RestatementChain(label="말없는 거절",
+   expressions=["shaking her head","turns to leave"],
+   variation="'고개를 저음' → '자리를 뜸'으로 거절이 굳어진다."),
+ ],
+ flow_blocks=[
+  FlowBlock(stage="도입",sentence_range="1~2",summary="여자가 '먼저 왔다'며 정당화하고 딸 [[할리]]가 나선다."),
+  FlowBlock(stage="전개",sentence_range="3",summary="할리가 다가와 앨리사에게 [[사과]]한다."),
+  FlowBlock(stage="호소",sentence_range="4",summary="앨리사가 지난주 물을 나눠 준 [[호의]]를 상기시킨다."),
+  FlowBlock(stage="거절",sentence_range="5",summary="할리는 엄마를 보고 [[고개를 저으며]] 거절한다."),
+  FlowBlock(stage="결말",sentence_range="6",summary="할리는 얼굴이 [[붉어지며]] 자리를 뜬다."),
+ ])
+
+i4 = [
+ S(r4,1,
+  [("직접화법","“~,” she says — 인용부호 속 실제 발화")],
+  [("first","먼저, 처음으로")],
+  [("“I’m sorry, but we were here [[first]],”","“미안하지만, 우리가 [[먼저]] 왔어요,”"),
+   ("she [[says]].","그녀가 [[말한다]].")],
+  [("이 말은 화자(Alyssa)가 사과하는 대사이다.","(지칭) 틀림 — 'she says'의 she는 물을 가로챈 여자(엄마)야. 자기 행동을 정당화하는 말이지.")]),
+ S(r4,2,
+  [("삽입 동격","— a girl I recognize from soccer — 로 daughter를 부연"),("관계사 생략","a girl (whom) I recognize — 목적격 관계대명사 생략")],
+  [("step forward","앞으로 나서다"),("recognize","알아보다")],
+  [("And then her daughter [[steps forward]]","그러고 나서 그녀의 딸이 [[앞으로 나선다]]"),
+   ("— a girl I [[recognize]] from soccer —","— 내가 축구에서 [[알아보는]] 소녀 —"),
+   ("[[Hali Hartling]].","[[할리 하틀링]].")],
+  [("'her daughter'의 her는 화자(Alyssa)를 가리킨다.","(지칭) 틀림 — her는 방금 물을 가로챈 여자를 가리켜. 그 여자의 딸이 바로 할리야."),
+   ("화자는 이 소녀를 전혀 모르는 낯선 사람으로 여긴다.","틀림 — 'a girl I recognize from soccer'라 축구에서 아는 사이야.")]),
+ S(r4,3,
+  [("시간 부사절 As","As her mother pulls ~ '~하는 동안'")],
+  [("pull away","끌고 가 버리다"),("lean closer","더 가까이 몸을 기울이다")],
+  [("As her mother [[pulls]] their cart away,","그녀의 엄마가 카트를 [[끌고]] 가는 동안,"),
+   ("Hali [[leans closer]] to me.","할리가 나에게 [[더 가까이 기댄다]]."),
+   ("“I’m [[sorry]] about that, Alyssa.”","“그 일은 [[미안해]], 앨리사.”")],
+  [("'sorry about that'의 that은 할리 자신의 실수를 가리킨다.","(지칭) 틀림 — that은 엄마가 물을 가로챈 일을 가리켜. 할리는 그 일을 대신 사과하는 거야."),
+   ("할리는 사과하며 물을 곧바로 돌려주려 한다.","(함축) 틀림 — 말로만 사과할 뿐, 물은 그대로 챙겨 간다는 게 뒤에 드러나.")]),
+ S(r4,4,
+  [("부정 의문문","Didn’t I share ~? '내가 ~해 주지 않았니?'"),("조동사 could","could return — 완곡한 제안 '~할 수도 있잖아'")],
+  [("point out","(지적하듯) 짚어 말하다"),("return the favor","호의에 보답하다")],
+  [("“Didn’t I [[share]] my water with you","“내가 물을 [[나눠 줬잖아]]"),
+   ("at the practice last [[week]]?”","지난 [[주]] 연습 때?”"),
+   ("I [[point out]] to her.","나는 그녀에게 [[짚어 말한다]]."),
+   ("“Maybe you could [[return the favor]]","“어쩌면 네가 [[답례로]]"),
+   ("and share a few [[bottles]] with me.”","물 몇 [[병]]을 나눠 줄 수도 있잖아.”")],
+  [("화자가 할리에게 물을 처음으로 부탁하는 상황이다.","(함축) 틀림 — 지난주 자신이 먼저 물을 나눠 준 호의를 상기시키며 답례를 요청하는 거야. 여기에 아이러니가 있어."),
+   ("'Didn’t I share ~?'는 물을 안 줬다고 따지는 말이다.","틀림 — 부정 의문문으로 '내가 나눠 줬잖아'라며 사실을 확인·강조하는 말이야.")]),
+ S(r4,5,
+  [("계속적 용법 who","her mother, who’s already moving — 선행사 보충설명"),("분사구문","shaking her head — 동시동작 '고개를 저으며'")],
+  [("move down","~을 따라 내려가다"),("shake one's head","고개를 젓다(거절)")],
+  [("She [[looks back]] to her mother,","그녀는 엄마를 [[돌아본다]],"),
+   ("who’s already [[moving down]] the aisle,","엄마는 이미 통로를 [[따라 내려가고 있고]],"),
+   ("then turns back to me [[shaking her head]].","그러고는 나에게 [[고개를 저으며]] 돌아선다.")],
+  [("'who’s already moving down the aisle'의 who는 화자(me)를 가리킨다.","(지칭) 틀림 — 계속적 용법의 who는 바로 앞 her mother를 가리켜. 엄마가 이미 통로를 내려가고 있다는 뜻이야."),
+   ("고개를 젓는 것은 할리가 엄마를 부르는 신호이다.","(함축) 틀림 — 'shaking her head'는 앨리사의 부탁을 거절한다는 몸짓이야.")]),
+ S(r4,6,
+  [("시간 부사절 before","before it becomes ~ '~가 되기 전에'")],
+  [("red in the face","얼굴이 붉어진"),("flush","(부끄러움의) 홍조")],
+  [("And then she gets a little bit [[red in the face]],","그러고 나서 그녀는 얼굴이 조금 [[붉어지고]],"),
+   ("and turns to [[leave]]","[[떠나려고]] 돌아선다"),
+   ("before it becomes a deep [[flush]].","그것이 짙은 [[홍조]]가 되기 전에.")],
+  [("할리는 화가 나서 얼굴이 붉어진 것이다.","(함축) 틀림 — 부탁을 거절한 데 대한 부끄러움·죄책감의 홍조야. 'deep flush'로 짙어지기 전에 자리를 뜨지."),
+   ("'before it becomes a deep flush'의 it은 앨리사를 가리킨다.","(지칭) 틀림 — it은 할리 얼굴에 번지는 붉어짐(홍조)을 가리켜.")]),
+]
+P4 = build("Dry ④ 거절당한 호의","장면 · 4 (Hali의 거절)",r4,ov4,i4)
+
+
+PARTS = [P3, P4]

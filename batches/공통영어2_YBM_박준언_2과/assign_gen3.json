@@ -1,0 +1,31 @@
+[
+ {
+  "var": "P5",
+  "item_no": "장면 · 5 (Garrett과 얼음)",
+  "title": "Dry ⑤ 얼음이라는 기지",
+  "key_grammar_hint": "관계대명사 whom (목적격)",
+  "sentences": [
+   "I look for Garrett, whom I find in the frozen aisle. Then I see something.",
+   "Just past the frozen vegetables and ice cream, there is a case packed with ice. I open the door and reach for a bag.",
+   "“What are you doing? We need water, not ice,” he reminds me.",
+   "“Ice is water. Just help me,” I tell him.",
+   "Garrett and I put one bag of ice after another into our cart, until it is piled as high as it can get.",
+   "By now other people have taken notice and begin to empty the ice case."
+  ]
+ },
+ {
+  "var": "P6",
+  "item_no": "장면 · 6 (수상한 '도움')",
+  "title": "Dry ⑥ 낯선 남자의 호의",
+  "key_grammar_hint": "가주어 It - 진주어 to부정사 (It is ~ to-V)",
+  "sentences": [
+   "The cart is ridiculously heavy now, and almost impossible to push. Then, a man in a business suit comes up behind us. He smiles.",
+   "“Looks like you could use some help.” He doesn’t wait for us to answer before grabbing the cart’s handle.",
+   "“Thank you for helping us,” I tell him.",
+   "“Not a problem. We all need to help one another.” He smiles again, and I return the smile.",
+   "It is good to know that difficult times can bring out the best in people. I decide that one favor deserves another.",
+   "“Why don’t you take a bag of ice for yourself,” I suggest.",
+   "His smile does not fade. “I have a better idea,” he says. “Why don’t you take a bag of ice for yourselves, and I’ll keep the rest.”"
+  ]
+ }
+]

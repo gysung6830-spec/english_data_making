@@ -1,0 +1,29 @@
+[
+ {
+  "var": "P3",
+  "item_no": "장면 · 3 (빈 진열대와 뺏긴 생수)",
+  "title": "Dry ③ 마지막 생수",
+  "key_grammar_hint": "only to+동사원형 (결과: 결국 ~하고 말다)",
+  "sentences": [
+   "As I approach the back of the store for water bottles, I realize I am too late. The shelves are already empty.",
+   "I manage my way to the side aisle, trying my luck. Sometimes people place unwanted items in the wrong shelves.",
+   "Lucky! I find a single case of water that someone abandoned there maybe yesterday, when it wasn’t such a precious commodity.",
+   "I reach for it, only to find it pulled away at the last second by a woman.",
+   "She stacks it on top of her cart like a crown on top of her canned goods."
+  ]
+ },
+ {
+  "var": "P4",
+  "item_no": "장면 · 4 (Hali의 거절)",
+  "title": "Dry ④ 거절당한 호의",
+  "key_grammar_hint": "계속적 용법 관계대명사 who (선행사 보충설명)",
+  "sentences": [
+   "“I’m sorry, but we were here first,” she says.",
+   "And then her daughter steps forward — a girl I recognize from soccer — Hali Hartling.",
+   "As her mother pulls their cart away, Hali leans closer to me. “I’m sorry about that, Alyssa.”",
+   "“Didn’t I share my water with you at the practice last week?” I point out to her. “Maybe you could return the favor and share a few bottles with me.”",
+   "She looks back to her mother, who’s already moving down the aisle, then turns back to me shaking her head.",
+   "And then she gets a little bit red in the face, and turns to leave before it becomes a deep flush."
+  ]
+ }
+]
