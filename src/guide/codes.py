@@ -213,7 +213,7 @@ def load_part2_workbook(path: str | Path | None = None):
         return SyntaxChapter(id=st.id, title=st.title, signal=st.signal, how=st.formula,
                              point=f.get("point", ""), strategy=f.get("strategy", ""),
                              diagram=diagram, examples=examples, training=training,
-                             coach=f.get("coach", ""),
+                             coach=f.get("coach", ""), why=f.get("why", ""),
                              practice=practice, combat_tip=st.combat)
 
     groups = []

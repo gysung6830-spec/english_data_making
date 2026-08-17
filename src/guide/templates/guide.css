@@ -658,6 +658,15 @@ body {
   margin-right: 8px; }
 .coach b { color: var(--navy); font-weight: 800; }
 
+/* 왜 이렇게 읽나 — 전략의 근거(판별 원리) */
+.coach-why { margin: 10px 0 6px; font-size: 11px; line-height: 1.7; color: #123c33;
+  background: var(--tint); border-left: 4px solid var(--navy); border-radius: 8px;
+  padding: 9px 13px; }
+.coach-why .why-lead { display: inline-block; background: var(--navy); color: #fff;
+  font-weight: 800; font-size: 9.5px; padding: 1px 9px; border-radius: 4px; margin-right: 8px; }
+.coach-why b { color: var(--navy); font-weight: 800; }
+.coach-why u { text-decoration-color: var(--gold); text-underline-offset: 2px; }
+
 /* 이 정도는 캐치 — 문장 읽고 잡아야 할 핵심 정보(교재 컨셉) */
 .wb-catch { font-family: var(--f-body); font-size: 10.5px; color: #123c33; margin-top: 5px;
   background: var(--tint2); border-left: 4px solid var(--navy2); border-radius: 6px;

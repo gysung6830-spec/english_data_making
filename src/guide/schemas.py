@@ -216,6 +216,7 @@ class SyntaxChapter(BaseModel):
     training: list[TrainStep] = []    # 단계별 트레이닝(쉬움→하드)
     practice: list[PracticeItem] = [] # 실전적용(문제↔해설)
     coach: str = ""                   # 저자 한 마디(현장 코치 코멘트)
+    why: str = ""                     # 왜 이렇게 읽나 — 판별 원리(전략의 근거)
     combat_tip: str = ""
     cards: list[SyntaxCard] = []
     problems: list[Problem] = []

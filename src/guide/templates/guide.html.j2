@@ -372,10 +372,11 @@
   </div>
   {% endif %}
 
-  {% if chapter.coach %}
+  {% if chapter.coach or chapter.why %}
   <div class="wb-step">
-    <div class="wb-step-h"><span class="wb-step-no">3</span><span class="wb-step-t">코치 한 마디</span><span class="wb-step-hint">— 함정·요령</span></div>
-    <div class="coach">{{ chapter.coach | safe }}</div>
+    <div class="wb-step-h"><span class="wb-step-no">3</span><span class="wb-step-t">코치 한 마디</span><span class="wb-step-hint">— 원리·함정·요령</span></div>
+    {% if chapter.why %}<div class="coach-why"><span class="why-lead">왜 이렇게 읽나?</span> {{ chapter.why | safe }}</div>{% endif %}
+    {% if chapter.coach %}<div class="coach">{{ chapter.coach | safe }}</div>{% endif %}
   </div>
   {% endif %}
 
