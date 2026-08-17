@@ -659,13 +659,36 @@ body {
 .coach b { color: var(--navy); font-weight: 800; }
 
 /* 왜 이렇게 읽나 — 전략의 근거(판별 원리) */
-.coach-why { margin: 10px 0 6px; font-size: 11px; line-height: 1.7; color: #123c33;
-  background: var(--tint); border-left: 4px solid var(--navy); border-radius: 8px;
-  padding: 9px 13px; }
-.coach-why .why-lead { display: inline-block; background: var(--navy); color: #fff;
-  font-weight: 800; font-size: 9.5px; padding: 1px 9px; border-radius: 4px; margin-right: 8px; }
+.coach-why { margin: 10px 0 6px; background: #f2f9f5; border: 1px solid #cfe6da;
+  border-radius: 9px; padding: 10px 13px; }
 .coach-why b { color: var(--navy); font-weight: 800; }
-.coach-why u { text-decoration-color: var(--gold); text-underline-offset: 2px; }
+.why-lead { display: inline-block; background: var(--navy); color: #fff;
+  font-weight: 800; font-size: 9px; padding: 1px 9px; border-radius: 4px; margin-right: 8px; }
+.why-core { font-size: 11px; color: var(--navy); font-weight: 700; line-height: 1.55;
+  margin-bottom: 8px; }
+
+/* 판별형 — 대조표 */
+.why-tab { width: 100%; border-collapse: collapse; font-size: 10.2px; }
+.why-tab th { background: var(--navy); color: #fff; font-weight: 700; text-align: left;
+  padding: 4px 7px; font-size: 9.3px; }
+.why-tab td { border-bottom: 1px solid #dcebe3; padding: 5px 7px; vertical-align: top;
+  line-height: 1.4; color: #33463e; }
+.why-tab tbody tr:last-child td { border-bottom: none; }
+.why-tab .wc-name { font-weight: 800; color: var(--navy); }
+.why-tab .wc-read { font-weight: 800; }
+.why-tab .wc-sig { font-weight: 700; }
+.why-tab .pol-ok { color: #1f6b4a; } .why-tab .pol-no { color: #b1543f; }
+.why-clue { margin-top: 7px; font-size: 9.6px; color: #6a5220; background: #fbf3e5;
+  border-radius: 6px; padding: 5px 9px; }
+.why-clue b { color: var(--gold); }
+
+/* 단일원리형 — 핵심 / 왜? / 그래서 3단 */
+.why-row { display: flex; gap: 9px; align-items: flex-start; margin: 4px 0;
+  font-size: 10.5px; line-height: 1.5; }
+.why-rl { flex: none; width: 42px; text-align: center; background: var(--navy); color: #fff;
+  font-weight: 800; font-size: 9px; padding: 2px 0; border-radius: 4px; margin-top: 1px; }
+.why-rl.g { background: var(--gold); }
+.why-rt { color: #33463e; }
 
 /* 이 정도는 캐치 — 문장 읽고 잡아야 할 핵심 정보(교재 컨셉) */
 .wb-catch { font-family: var(--f-body); font-size: 10.5px; color: #123c33; margin-top: 5px;

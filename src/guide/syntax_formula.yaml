@@ -66,7 +66,29 @@ formulas:
       how: 콤마 뒤 who는 앞을 죽 이어 설명하는 계속적 용법. and who로 묶인 두 절을 '~하고, 또 ~하는'으로 매끄럽게 이으세요.
       catch: 기술적 이동수단이 인간을 어떤 존재로 바꾸나. 쉬기만 하다 균형 맞추려 스포츠가 필요해진 존재로.
       cut_en: Technical mobilities / turn human beings into some kind of terminal creatures, / [who spend most of their time at rest ( ) / and who need to participate in sports in order to balance their daily disproportion of motion and rest].
-    why: "관계사절은 앞 명사를 꾸미는 <b>형용사</b>라 그 명사가 이미 문장 성분이고, 의문사절은 <b>그 자체가 명사</b>라 주어·목적어 자리를 채워요. 그래서 wh- 앞에 <b>꾸밀 명사(선행사)가 있으면 관계사</b>('~하는'), wh-절이 자리 자체를 메우면 의문사('~인지'). 결정적 증거는 뒤 문장 — <b>관계사 뒤는 한 자리가 비고(불완전)</b>, 의문사 뒤는 대개 완전해요."
+    why:
+      mode: table
+      core: 관계사=앞 명사를 꾸미는 <b>형용사</b> / 의문사=<b>그 자체가 명사</b>. 정체가 다르니 읽는 법도 다르다.
+      cols:
+      - 구분
+      - 정체(역할)
+      - 판별 신호
+      - 이렇게 읽기
+      sig: 2
+      rows:
+      - c:
+        - 관계사
+        - 앞 명사를 꾸미는 형용사
+        - 앞에 꾸밀 명사 있음·뒤 불완전
+        - ~하는
+        pol: ok
+      - c:
+        - 의문사
+        - 그 자체가 명사(자리 채움)
+        - 앞에 꾸밀 명사 없음·뒤 완전
+        - ~인지
+        pol: 'no'
+      clue: 뒤 문장에 빈자리(주어·목적어)가 있으면 → 관계사, 다 차 있으면 → 의문사.
     coach: ▸ <b>앞에 명사 있나 없나</b> — 그것만 봐요. 있으면 → <b>‘~하는’(수식)</b>, 없으면 → <b>명사절(‘~하는지’)</b>.<br>▸ 명사절이면 <b>동사까지 밀고 가</b> ‘~하는지’로 받기.<br>▸ 관계사절 — <b>콤마 없으면 반드시 해석</b>, <b>콤마 있으면 부연</b>(가볍게).<br>▸ 선행사가 뻔하면 → <b>those (people) who~</b>처럼 생략.<br>▸ <b>관계사 줄줄이 병렬</b> — who~, who~, or who~처럼 이어지면 <b>모두 같은 선행사</b>를 꾸미는 짝. → 하나씩 그 명사로 되받아 읽어라.<br>▸ <b>how가 반복되면</b> 각 how절은 '어떻게 ~하는지'로 <b>따로따로 명사</b> 취급(consider how~, how~, and~).
   participle:
     point: 문두·콤마 뒤 V-ing / V-ed 덩어리는 '부대상황'. 주절의 동작에 곁들여지는 살이다.
@@ -105,7 +127,16 @@ formulas:
       how: 콤마 사이 attempting~에 낚이지 마세요. 주어 moths를 감싼 분사구일 뿐. 주절은 moths fly, 이 부분은 '~하며'로.
       catch: 빛에서 벗어나려던 나방이 되레 광원 코앞까지 간다. 이 역설을 놓치면 안 됩니다.
       cut_en: The moths, (attempting to escape the light), / fly toward that imagined "portal," / (bringing them closer to the source).
-    why: "분사구문은 <b>접속사+주어를 지운 부사절</b>이에요. 주어를 지운 건 <b>주절 주어와 같기 때문</b> — 그래서 분사의 주인(행위자)은 언제나 주절 주어예요. 콤마 앞 명사가 아무리 가까워도 그게 행위자가 아닌 이유가 이거예요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>분사의 주인 = 언제나 주절 주어.</b> 콤마 앞 명사에 낚이지 마세요.
+        key: true
+      - label: 왜?
+        text: 분사구문은 <b>'접속사+주어'를 지운 부사절</b>. 주어를 지운 건 <b>주절 주어와 똑같아서</b> — 굳이 안 써도 아니까요.
+      - label: 그래서
+        text: 그 동작을 한 사람은 <b>뒤 주절 주어</b>로 되찾아 읽으면 끝.
     coach: ▸ <b>이게 분사구문 맞나?</b> — 문두·콤마 뒤 V-ing/V-ed가 주어가 아니고, 뒤에 진짜 주어·동사(주절)가 따로 있으면 → 분사구문. (주어 자리면 → <b>동명사</b>!)<br>▸ <b>의미상 주어 = 언제나 주절 주어.</b> 앞 명사에 낚이지 마요.<br>▸ <b>도치와 구별</b> — 형용사·분사로 시작 → 뒤에 진짜 동사 없으면 분사구문, 있으면 도치(<i>Enclosed is a copy…</i>).<br>▸ 분사구문은 <b>배경·부연(가벼운 살)</b> — 생략된 접속사 굳이 유추 X.<br>▸ <b>끝·콤마 뒤 V-ing = 결과</b> — leading·bringing·meaning처럼 뒤에 덧붙는 분사는 <b>'그래서 ~하다'</b>로 이어읽어라(부대→결과).<br>▸ <b>주어 뒤 콤마+분사는 삽입 수식</b> — programs, developed…, are / benefits provided by…, may exceed. → 분사덩어리 걷어내고 <b>진짜 동사</b>부터 찾아라.
   insertion:
     point: — … — / , which / 콤마 사이에 부가 설명이 끼어든다. 뼈대가 아니라 곁다리.
@@ -144,7 +175,16 @@ formulas:
       how: in most cases는 대시 두 개로 끼운 삽입. 지우면 no local taxes are paid만 깔끔히 남습니다.
       catch: 사무실도 안 짓고, 규제도 안 지키고, 지역세도 안 낸다. 세 개의 부정이 줄지어 서 있는 문장.
       cut_en: No offices or factories need to be built, / no local regulations are observed, / and (in most cases) / no local taxes are paid.
-    why: "콤마 둘·대시 둘 사이는 <b>뼈대가 아니라 곁가지</b> — 빼도 문장이 성립하도록 끼워 넣은 부가 정보예요. 그래서 손으로 가리면 진짜 <b>주어·동사</b>가 바로 드러나요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>콤마 둘·대시 둘 사이는 곁가지.</b> 빼도 문장이 된다.
+        key: true
+      - label: 왜?
+        text: 뼈대(주어·동사)가 아니라 <b>부가 정보</b>라, 문장 성립에 없어도 되게 끼워 넣은 거예요.
+      - label: 그래서
+        text: 그 사이를 <b>손으로 가리면</b> 진짜 주어·동사가 바로 드러나요.
     coach: ▸ <b>콤마 둘 · 대시 둘</b>이 보이면 → 손으로 가려 봐요.<br>▸ 가리고도 말이 되면 → <b>그게 뼈대</b>. 삽입은 맨 나중에 껴 넣기.<br>▸ <b>, which 뒤엔 주절 재개</b> — 콤마+which 삽입이 끝나면 뒤에 <b>본동사가 다시</b> 나온다. → which절 끝을 찾아 <b>원래 주어·동사</b>를 이어라.<br>▸ <b>대시 사이는 정의·나열</b> — —parliament, courts, police…—처럼 대시 안은 앞 명사의 <b>구체 풀이</b>. 뜻만 확인하고 뼈대로 복귀.
   apposition:
     point: the fact/idea/belief + that … 또는 'N, N' 콤마 동격 — 앞 명사와 뒤 내용이 '='.
@@ -169,7 +209,16 @@ formulas:
       how: 콤마로 낀 the motor는 앞 its great innovation과 같은 대상. '그 혁신, 곧 모터'로 등호처럼 겹치세요.
       catch: 거대한 혁신이 바로 모터라는 동격. 모터가 왔어도 우리는 세상을 떠나 딴 공간으로 가지 않았다.
       cut_en: When the Industrial Revolution arrived with its great innovation, the motor, / we / didn't leave our world / to go to! some remote motorspace!
-    why: "'명사, 명사'·'명사+that'·콜론 뒤는 <b>앞 명사를 다른 말로 다시 정의</b>한 것이라 둘은 <b>등가(=)</b> 관계예요. 그래서 새 정보가 아니라 '즉 ~'로 풀리고, that 뒤가 <b>완전한 문장</b>이면 관계사가 아니라 동격이에요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>뒤는 새 정보가 아니라 '앞 명사 = 다시 풀이'.</b>
+        key: true
+      - label: 왜?
+        text: '''명사, 명사''·''명사+that''·콜론 뒤는 앞 명사를 <b>다른 말로 다시 정의</b>한 등가(=) 관계니까요.'
+      - label: 그래서
+        text: '''즉 ~''로 이어 읽고, that 뒤가 <b>완전한 문장</b>이면 관계사가 아니라 동격.'
     coach: '▸ ‘<b>명사, 명사</b>’ 또는 ‘<b>명사 + that절</b>’ → <b>‘=’</b>를 떠올려요(뒤가 앞을 다시 풂). 새 정보 아님.<br>▸ <b>콤마+관계사(, which)</b>도 같은 식구 — 앞 명사를 이미 알면 <b>건너뛰어도</b> OK, 때론 <b>앞 문장 전체</b>를 받아요.<br>▸ <b>콜론(:)·대시 뒤 나열도 동격</b> — 명사 뒤 : 이나 —로 목록이 이어지면 앞 명사를 <b>''즉''으로 다시 푼 것</b>(the full bundle: the sell stick, the rent stick…). 새 정보 X.<br>▸ <b>the fact/view/notion + that</b> → that뒤가 <b>완전한 문장</b>이면 그 명사의 내용. 긴 that절이 주어면 <b>진짜 동사</b>(can be overlooked 등)를 뒤에서 찾아라.'
   prep_stack:
     point: 수능 문장이 '길고 어려운' 결정적 이유 — 명사 뒤에 전치사구가 '계속' 이어붙기 때문이다. 하나씩 뒤에서 앞으로 붙이면 아무리 길어도 안 무너진다.
@@ -225,7 +274,16 @@ formulas:
       how: of 전치사구가 nonchalance에 겹겹이 매달려요. 수식을 앞 명사에 차곡차곡 쌓아 주어 덩어리를 끝까지 밀고 가세요.
       catch: 짐짓 태연한 척, 그게 오히려 환자 속 불안을 드러내는 서툰 지표라는 말.
       cut_en: The studied nonchalance / of patients / in a dentist's waiting room / is a poor indication / of their inner anxiety.
-    why: "전치사구(of·in·for+명사)는 <b>절대 문장의 동사가 못 돼요</b> — 앞 명사를 꾸미는 살일 뿐이죠. 그래서 줄줄이 나와도 <b>진짜 동사는 하나</b>뿐이고, 주어 수일치도 맨 앞 <b>핵 명사</b>와 맞춰요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>전치사구는 문장의 동사가 못 된다.</b> 전부 앞 명사를 꾸미는 살.
+        key: true
+      - label: 왜?
+        text: of·in·for+명사는 <b>수식어</b> 역할만 해요. 그래서 줄줄이 나와도 <b>진짜 동사는 하나</b>뿐.
+      - label: 그래서
+        text: 전치사구는 다 괄호로 걷어내고 <b>핵 명사 + 동사</b>만 남기면 문장이 짧아져요.
     coach: ▸ of·in·for가 줄줄이? → 전부 <b>앞 명사 꾸미기</b>일 뿐.<br>▸ <b>진짜 동사 하나</b>만 찾으면 → 문장이 순식간에 짧아져요.<br>▸ <b>주어 핵은 맨 앞 명사 하나</b> — of·in이 줄줄이여도 동사 수일치는 <b>첫 명사</b>와(The amount…<u>has</u> / demands…<u>limit</u>). → 뒤 전치사구는 다 버리고 핵만 동사에 걸어라.<br>▸ <b>전치사구 속 and는 명사 병렬</b> — of A, B, and C의 and는 대개 <b>같은 전치사에 걸린 명사 나열</b>. 새 절 시작으로 착각 X.
   inversion:
     point: 문두 부정어(Never/Not only/Only…)나 보어·장소부사가 앞으로 나오면 어순이 도치된다.
@@ -246,7 +304,16 @@ formulas:
       how: Not only이 앞에 나오면 뒤는 무조건 도치. 되돌리지 말고 'A뿐 아니라'로 신호부터 받고, is it은 그냥 주어(it)로 이어 'B도 ~'로 앞으로 읽으세요.
       catch: 덜 편한 것도 문제지만, 그 이동 과정 자체가 부정적 효과까지 낳는다.
       cut_en: Not only is it less convenient to access locations in cities, / but the very process / generates negative effects.
-    why: "부정어(Not·Never·Only)나 보어·장소부사를 <b>강조하려고 앞으로 빼면</b> 그 대가로 뒤가 '조동사+주어'로 뒤집혀요. 도치는 <b>강조의 부산물</b>이라, 문두 부정어가 곧 '뒤집힌다'는 예고 신호예요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>도치는 강조의 부산물.</b> 놀랄 일이 아니라 예고된 신호.
+        key: true
+      - label: 왜?
+        text: 부정어(Not·Never·Only)나 보어·장소부사를 <b>앞으로 빼서 강조</b>하면, 대가로 뒤가 '조동사+주어'로 뒤집혀요.
+      - label: 그래서
+        text: 문두 부정어가 보이면 <b>'뒤집히겠구나'</b> 하고 조동사+주어를 제자리로 돌려 읽어요.
     coach: ▸ <b>Not·Never·Only</b>가 맨 앞 → ‘뒤집히겠구나’ 각오. 도치는 <b>예고된 신호</b>(놀랄 일 X).<br>▸ 부정어 말고도 <b>보어(형용사)·장소부사</b>가 앞으로 나가면 도치(<i>In the darkness was heard a kiss</i>).<br>▸ <b>Nor·Neither도 도치 신호</b> — 문두 Nor면 뒤가 <b>조동사+주어</b>로 뒤집힌다(Nor <u>are</u> all…). '~도 아니다'로 앞과 이어라.<br>▸ <b>Only 뒤를 봐라</b> — Only+<b>부사구</b>면 도치, Only+<b>주어</b>면 도치 없음(Only the rational discourse <u>has</u>). 이게 함정.
   emphasis:
     point: It is/was X that … 는 X를 부각하는 강조구문. do/does/did + 동사원형은 동사 강조.
@@ -277,7 +344,16 @@ formulas:
       how: It was ~ who 사이에 낀 말이 진짜 주인공. 여기선 the designer를 '바로 그가'로 부각해 읽습니다.
       catch: 주역이 뒤집혔다. 유명해진 쪽은 디자이너, 고객은 그 관심에 격상됐을 뿐.
       cut_en: Beginning in the late nineteenth century, / with the hugely successful rise of the artistic male couturier, / it was the designer who became celebrated, / and the client elevated by his inspired attention.
-    why: "It is와 that을 지워도 <b>완전한 문장</b>이 남으면 강조구문이에요 — 원래 문장에서 한 성분만 It~that 사이로 빼낸 것이니까요. 지웠을 때 문장이 <b>불완전</b>해지면 그건 강조가 아니라 가주어 it이에요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>It is와 that을 지워 봐라.</b> 완전한 문장이 남으면 강조구문.
+        key: true
+      - label: 왜?
+        text: 강조구문은 <b>원래 문장에서 한 성분만</b> It~that 사이로 빼낸 것이라, 지워도 문장이 온전해요.
+      - label: 그래서
+        text: 지웠을 때 문장이 <b>불완전</b>하면 그건 강조가 아니라 가주어 it.
     coach: ▸ <b>It ~ that</b> 사이에 낀 게 진짜 강조하려는 말 — 가주어 it과 혼동 X.<br>▸ <b>do/does/did + 동사원형</b>도 강조 — <i>I do like you</i> = ‘정말 좋아한다’.<br>▸ <b>What/All you have to do is ~</b>도 ‘is + 강조 대상’으로 콕 집어 줘요.<br>▸ <b>지우기 테스트</b> — It is/was와 that을 지워도 <b>완전한 문장</b>이 남으면 강조구문(가주어 아님). → 강조어를 제자리로 돌려 뜻부터.<br>▸ <b>강조어가 주어면 that절 동사가 수일치</b> — it is the large number…that <u>is</u>, it was the designer who <u>became</u>. 동사 짝으로 강조 대상 확인.
   parallel:
     point: and / but / or, not only A but also B, both A and B — 같은 급끼리 대칭으로 묶인다.
@@ -316,7 +392,16 @@ formulas:
       how: 여기 both A and B는 of income과 of meaning을 나란히 묶어요. 둘 다 source에 걸리니 'A이자 B'로.
       catch: 일이란 수입의 원천인 동시에 의미의 원천 — 어느 한쪽 아닌 둘 다다.
       cut_en: For many people, / their work / is both a source of income / and of meaning.
-    why: "and·or·but은 <b>문법적으로 같은 급</b>(구는 구끼리, 절은 절끼리)만 이어요. 그래서 <b>앞(A)의 형태를 거울삼아</b> 뒤(B)의 시작·끝을 찍으면 되고, 짝이 안 맞으면 끊는 자리를 잘못 잡은 거예요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>and·or·but은 같은 급끼리만 잇는다</b>(구=구, 절=절).
+        key: true
+      - label: 왜?
+        text: 접속사는 문법적으로 <b>동등한 것</b>만 연결하니까요. 짝이 안 맞으면 끊는 자리가 틀린 거예요.
+      - label: 그래서
+        text: <b>앞(A)의 형태를 거울삼아</b> 뒤(B)의 시작·끝을 찍으면 돼요.
     coach: ▸ <b>and·or·but</b>이 보이면 → <b>앞뒤 짝(같은 급)</b>을 맞춰요.<br>▸ 짝이 안 맞으면 → <b>끊는 지점</b>을 잘못 잡은 것.<br>▸ <b>A자리를 거울삼아 B를 잘라라</b> — not only A but (also) B는 <b>A의 형태(구·절·전치사)</b>를 확인해 같은 급으로 B의 시작·끝을 찍어라(B가 주어+동사인 경우도 잦다).<br>▸ <b>반복 전치사가 짝 경계</b> — a source of income and <u>of</u> meaning처럼 of·to가 다시 나오면 <b>그 지점이 병렬의 짝</b> 표시.
   what_clause:
     point: what 은 선행사를 포함(the thing which). what절 전체가 하나의 명사(주어·목적어·보어)다.
@@ -353,7 +438,16 @@ formulas:
       how: what we might now call~은 '~라 부를 만한 것' 주어절. 대시 사이 동격을 걷어내면 곧장 has가 나옵니다.
       catch: '''그림자 연구''라 할 만한 것의 뿌리가 실은 고대 아테네에 닿아 있다.'
       cut_en: In fact, / (what we might now call "shadow studies") / —the exploration of shadows in their various artistic representations— / has its roots in ancient Athens.
-    why: "what은 <b>선행사를 이미 품은</b> 관계대명사('~하는 것')예요. 그래서 뒤 문장은 <b>한 자리가 비고(불완전)</b>, 그 절 전체가 주어·목적어 자리를 채우는 <b>하나의 명사 덩어리</b>가 돼요. What S V is~에서 is 앞까지가 통째 주어인 이유예요."
+    why:
+      mode: steps
+      steps:
+      - label: 핵심
+        text: <b>what절은 통째로 하나의 명사 덩어리.</b>
+        key: true
+      - label: 왜?
+        text: what은 <b>선행사를 이미 품은</b> 관계대명사('~하는 것')라, 뒤 문장은 <b>한 자리가 비어요</b>(불완전).
+      - label: 그래서
+        text: 그 절 전체를 주어·목적어 자리에 넣고, What S V is~는 <b>is 앞까지가 통째 주어</b>.
     coach: ▸ 뒤 문장에서 <b>한 자리(주어·목적어)가 비면</b> → 거기가 what이 채운 자리.<br>▸ <b>‘~하는 것’(관계대명사)</b>이든 <b>‘무엇을 ~하는지’(의문사)</b>든 <b>뜻은 거의 같아요</b> — 자연스러운 쪽으로.<br>▸ <b>What S V is X (요지틀)</b> — 문두 What~은 대개 <b>is 앞까지가 한 덩어리 주어</b>('~하는 것'). → is를 경계로 앞을 통째 명사로 묶고 뒤가 핵심.<br>▸ <b>전치사+what</b>(by·about·part of what)이면 what절 <b>통째가 그 전치사의 목적어</b>. 절 끝까지 밀어 하나의 명사로.
   that_clause:
     point: 인식·전달 동사 + that S+V 는 '~라는 것을'. 접속사 that 뒤엔 완전한 문장이 온다(관계사 that과 구분).
@@ -390,7 +484,35 @@ formulas:
       how: that절은 suggests의 목적어절. 그 안 see와 head가 and로 병렬, called 분사는 앞 주어를 꾸밉니다.
       catch: '마흐 밴드 가설: 나방은 광원 둘레의 어둠을 보고 빛을 피해 그리로 간다고.'
       cut_en: A hypothesis called the Mach band theory / suggests / (that moths see a dark area around a light source / and head for it) / to escape the light.
-    why: "that은 딱 셋이에요 — 뒤 문장이 <b>완전하면</b> 접속사('~라는 것')나 동격(앞 명사 설명), <b>한 자리가 비면(불완전)</b> 관계사(앞 명사 수식). 그래서 <b>뒤 문장이 완전한지</b>만 보면 세 개가 갈려요."
+    why:
+      mode: table
+      core: that은 딱 셋 — <b>뒤 문장이 완전한지</b>만 보면 갈린다.
+      cols:
+      - that
+      - 뒤 문장
+      - 역할
+      - 이렇게 읽기
+      sig: 1
+      rows:
+      - c:
+        - 접속사
+        - 완전
+        - 명사절(내용)
+        - ~라는 것
+        pol: ok
+      - c:
+        - 동격
+        - 완전
+        - 앞 명사를 다시 설명
+        - 즉, ~
+        pol: ok
+      - c:
+        - 관계사
+        - 불완전
+        - 앞 명사 수식
+        - ~하는
+        pol: 'no'
+      clue: 접속사·동격은 뒤가 완전, 관계사만 한 자리가 빈다.
     coach: ▸ that은 <b>딱 셋 중 하나</b> — 접속사 / 관계사 / 동격.<br>▸ <b>뒤 문장이 완전한지</b>만 봐요 → 완전=접속사(‘~라는 것’), 불완전=관계사, 앞 명사 설명=동격.<br>▸ <b>that 뒤 부사구에 속지 마</b> — reveal that <u>during this period</u> the bird…처럼 that 바로 뒤 부사구가 끼면 <b>진짜 주어는 그 뒤</b>.<br>▸ <b>and that 짝</b> — 한 동사에 that절이 둘 걸리는 경우 잦다(say that…and that… / reveal that…and that…). 두 번째 that도 <b>같은 동사</b>로 되받아라.
   as_compare:
     point: as는 전치사·부사·접속사로 두루 쓰이고, as A as B·비교급은 'A와 B가 동등/우열'임을 강조하는 신호다.
@@ -431,5 +553,27 @@ formulas:
       how: not all은 '모두 ~인 건 아니다'(부분부정)이지 '모두 ~아니다'(전체부정)가 아니에요. '반복이 다 혼돈이 되진 않는다'로.
       catch: 반복이 혼돈을 만들지만, 반복이라고 다 혼돈이 되는 건 아니다 — 일부만.
       cut_en: Chaotic systems / are generated by iteration, / though not all iteration / leads to chaos.
-    why: "as는 <b>뒤 구조가 품사를 정해요</b> — 뒤에 명사만 오면 전치사('~로서'), 주어+동사가 오면 접속사('~하듯이·~때문에'). 비교표현(as~as·비교급)은 필자가 무엇을 <b>동등·우열</b>로 보는지 콕 집는 강조 신호예요."
+    why:
+      mode: table
+      core: as는 <b>뒤에 뭐가 오는지</b>로 품사가 정해진다. (비교 표현은 필자의 동등·우열 강조 신호)
+      cols:
+      - as
+      - 뒤에 오는 것
+      - 형태
+      - 이렇게 읽기
+      sig: 1
+      rows:
+      - c:
+        - 전치사
+        - 명사만
+        - as+명사
+        - ~로서
+        pol: ok
+      - c:
+        - 접속사
+        - 주어+동사
+        - as+S+V
+        - ~하듯이·~때문에
+        pol: 'no'
+      clue: as~as·비교급이 보이면 필자가 무엇을 동등·우열로 보는지에 밑줄.
     coach: ▸ as를 만나면 <b>일단 뒤부터</b> — 명사면 전치사, 주어+동사면 접속사.<br>▸ 비교표현(as A as B·비교급)은 <b>일종의 강조</b> → 필자가 무엇을 <b>동등·우열</b>로 보는지가 요지 단서.<br>▸ 함정 — <b>not all·not always</b>는 부분부정. 전체부정(‘결코’)으로 뒤집지 마요.<br>▸ <b>The 비교급~, the 비교급~</b> — 'The more…, the higher…'는 <b>'~할수록 더 ~'</b>로 두 절을 <b>비례</b>로 묶어라.<br>▸ <b>as varied/much as</b> — as~as가 나오면 뒤 as는 <b>비교·예시 기준</b>. 원급이라도 필자의 <b>동등 강조</b> 신호로 읽어라.

@@ -375,7 +375,18 @@
   {% if chapter.coach or chapter.why %}
   <div class="wb-step">
     <div class="wb-step-h"><span class="wb-step-no">3</span><span class="wb-step-t">코치 한 마디</span><span class="wb-step-hint">— 원리·함정·요령</span></div>
-    {% if chapter.why %}<div class="coach-why"><span class="why-lead">왜 이렇게 읽나?</span> {{ chapter.why | safe }}</div>{% endif %}
+    {% if chapter.why %}{% set w = chapter.why %}<div class="coach-why">
+      {% if w.mode == 'table' %}
+      <div class="why-core"><span class="why-lead">왜 이렇게 읽나</span> {{ w.core | safe }}</div>
+      <table class="why-tab"><thead><tr>{% for c in w.cols %}<th>{{ c }}</th>{% endfor %}</tr></thead><tbody>
+        {% for r in w.rows %}<tr>{% for cell in r.c %}<td class="{% if loop.index0 == 0 %}wc-name{% elif loop.index0 == w.rows[0].c|length - 1 %}wc-read pol-{{ r.pol }}{% elif loop.index0 == w.sig %}wc-sig pol-{{ r.pol }}{% endif %}">{{ cell | safe }}</td>{% endfor %}</tr>{% endfor %}
+      </tbody></table>
+      {% if w.clue %}<div class="why-clue"><b>결정적 한 방</b> · {{ w.clue }}</div>{% endif %}
+      {% elif w.mode == 'steps' %}
+      <div class="why-core"><span class="why-lead">왜 이렇게 읽나</span></div>
+      {% for s in w.steps %}<div class="why-row"><span class="why-rl{% if not s.key %} g{% endif %}">{{ s.label }}</span><span class="why-rt">{{ s.text | safe }}</span></div>{% endfor %}
+      {% endif %}
+    </div>{% endif %}
     {% if chapter.coach %}<div class="coach">{{ chapter.coach | safe }}</div>{% endif %}
   </div>
   {% endif %}
