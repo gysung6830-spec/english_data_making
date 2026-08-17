@@ -587,31 +587,31 @@
     "n": 1,
     "tx": "개인정보 제공의 속성을 심층적으로 이해하면 주체적 소비자가 된다",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 데이터 수집의 무엇·언제·왜를 이해하고 도구를 갖추면 능동적 소비자가 됨과 일치"
    },
    {
     "n": 2,
     "tx": "소비자는 유용한 앱을 적극 활용하는 자세가 필요하다",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 앱을 적극 활용하는 자세는 예시 일부일 뿐 전체 요지가 아님"
    },
    {
     "n": 3,
     "tx": "현명한 소비자가 되려면 다양한 디지털 <span class=\"reuse\">데이터</span>를 활용해야 한다",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '데이터' 어휘만 재사용, 데이터 활용 강조는 요지와 다름"
    },
    {
     "n": 4,
     "tx": "디지털 서비스를 이용하면 상응하는 <span class=\"reuse\">대가</span>가 뒤따른다",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '대가'라는 말만 따온 지엽적 진술로 글의 핵심이 아님"
    },
    {
     "n": 5,
     "tx": "타인과의 정보 공유로 개인정보가 유출되기도 한다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 개인정보 유출은 지문에 언급되지 않음"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 깊이 이해하면 주체적 소비자 · <span class=\"xo\">②</span>앱 적극 활용 <span class=\"xo\">③</span>데이터 활용 <span class=\"xo\">④</span>이용엔 대가 <span class=\"xo\">⑤</span>정보 유출",
@@ -948,35 +948,35 @@
     "n": 2,
     "tx": "significance of animal <b>size</b> in <b>life spans and survival skills</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 동물 크기가 반사·수명·학습 등 생존 기술을 좌우한다는 핵심과 일치.",
     "ko": "수명과 생존 기술에서 동물 크기가 지니는 중요성"
    },
    {
     "n": 1,
     "tx": "chances of survival for animals with different time perceptions",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 시간 인식은 크기의 결과일 뿐 크기가 핵심 변수다.",
     "ko": "서로 다른 시간 인식을 지닌 동물들의 생존 가능성"
    },
    {
     "n": 3,
     "tx": "benefits of <span class=\"reuse\">energy reserves</span> in environmental adaptation",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 에너지 비축은 소형 동물의 일부 근거일 뿐 전체 아님.",
     "ko": "환경 적응에서 에너지 비축분이 주는 이점"
    },
    {
     "n": 4,
     "tx": "limits of animals’ <span class=\"reuse\">decision making</span> according to body size",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 의사결정은 한 예시일 뿐 크기의 전반적 영향이 주제.",
     "ko": "체구에 따른 동물 의사결정의 한계"
    },
    {
     "n": 5,
     "tx": "influences of <span class=\"reuse\">predetermined behavior patterns</span> on survival",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 미리 정해진 행동은 소형 동물 특성일 뿐 전체가 아님.",
     "ko": "미리 정해진 행동 양식이 생존에 미치는 영향"
    }
   ],
@@ -1302,35 +1302,35 @@
     "n": 5,
     "tx": "<b>Separate and Independent</b>: Brain Cells’ Visual Perceptions",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 뇌의 각 부분이 형태·색·위치·움직임을 분리·독립적으로 처리한다는 핵심과 일치.",
     "ko": "분리되고 독립적인: 뇌세포의 시각적 지각"
    },
    {
     "n": 1,
     "tx": "Visual Systems Never Betray Our Trust!",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 국소 손상 시 일부만 보이므로 '신뢰 저버리지 않음'과 반대.",
     "ko": "시각 체계는 결코 우리의 신뢰를 저버리지 않는다!"
    },
    {
     "n": 2,
     "tx": "Secret Missions of <span class=\"reuse\">Color</span>-Sensitive Brain Cells",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'color'만 따온 지엽적 소재, 비밀 임무는 근거 없음.",
     "ko": "색에 민감한 뇌세포의 비밀 임무"
    },
    {
     "n": 3,
     "tx": "Blind Spots: What Is Still Unknown About the Brain",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 범위 초과 — 뇌의 미지 영역이라는 넓은 화제는 글 주제가 아니다.",
     "ko": "맹점: 뇌에 관해 아직 밝혀지지 않은 것"
    },
    {
     "n": 4,
     "tx": "Why Brain Cells Exemplify Nature’s Recovery Process",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 뇌세포가 자연의 회복 과정을 보여준다는 내용 없음.",
     "ko": "왜 뇌세포가 자연의 회복 과정을 잘 보여주는가"
    }
   ],
@@ -3747,35 +3747,35 @@
     "n": 3,
     "tx": "significance of <b>note taking</b> for active engagement in discussion",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 토론에 능동적으로 참여하기 위한 필기의 중요성과 일치.",
     "ko": "토론에 능동적으로 참여하기 위한 필기의 중요성"
    },
    {
     "n": 1,
     "tx": "reasons to standardize procedures for class <span class=\"reuse\">discussions</span>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 토론 절차 표준화는 언급 없음.",
     "ko": "수업 토론 절차를 표준화해야 하는 이유"
    },
    {
     "n": 2,
     "tx": "improve <span class=\"reuse\">note-taking</span> skills for public speaking",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 발표 준비는 필기의 한 효과일 뿐 대중 연설이 초점 아님.",
     "ko": "대중 연설을 위한 필기 기술 향상"
    },
    {
     "n": 4,
     "tx": "summarizing and reviewing <span class=\"reuse\">notes</span> after class",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 수업 후 필기 요약·복습은 언급 없음.",
     "ko": "수업 후 필기 요약 및 복습"
    },
    {
     "n": 5,
     "tx": "brainstorming to generate ideas for <span class=\"reuse\">writing</span> tasks",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — writing 차용, 브레인스토밍이 주제가 아님.",
     "ko": "글쓰기 과제를 위한 아이디어를 내는 브레인스토밍"
    }
   ],
@@ -4122,35 +4122,35 @@
     "n": 1,
     "tx": "Overtourism: <b>Not Simply a Matter of People and Places</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 오버투어리즘이 단순 사람·장소 문제가 아니라 복합적이라는 요지와 일치.",
     "ko": "오버투어리즘: 단순히 사람과 장소의 문제가 아니다"
    },
    {
     "n": 2,
     "tx": "Severity of Overtourism: Much Worse than Imagined",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 심각성이 상상보다 심하다는 강조는 지문에 없음.",
     "ko": "오버투어리즘의 심각성: 상상보다 훨씬 심각하다"
    },
    {
     "n": 3,
     "tx": "Solutions to Overtourism: From <span class=\"reuse\">Complex</span> to Simple",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 표면 어휘 — complex를 차용했으나 해결책 제시 없이 복잡성만 강조.",
     "ko": "오버투어리즘의 해결책: 복잡함에서 단순함으로"
    },
    {
     "n": 4,
     "tx": "Are Tourist <span class=\"reuse\">Attractions</span> Winners or Losers?",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 에펠탑 같은 명소는 예시 일부, 전체 제목이 못 됨.",
     "ko": "관광 명소는 승자인가 패자인가?"
    },
    {
     "n": 5,
     "tx": "What Makes Popular <span class=\"reuse\">Destinations</span> Attractive?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 관광지가 매력적인 이유는 다루지 않음.",
     "ko": "무엇이 인기 관광지를 매력적으로 만드는가?"
    }
   ],
@@ -6322,31 +6322,31 @@
     "n": 1,
     "tx": "피드백 분석으로 성공 가능성을 높임",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위 초과 — 피드백 분석으로 성공을 높인다는 막연한 일반론."
    },
    {
     "n": 2,
     "tx": "관계 증진을 위해 브랜드 칭찬에 응답하는 것이 중요",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 관계 증진을 위해 브랜드 칭찬에 응답해야 한다는 핵심과 일치."
    },
    {
     "n": 3,
     "tx": "신속한 응대로 긍정 반응을 이끌어 냄",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 근거 없음 — 신속한 응대로 긍정 반응을 유도한다는 내용은 없다."
    },
    {
     "n": 4,
     "tx": "부정적 의견 수용 태도가 요구됨",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 지엽적 — 부정 의견 수용은 일부일 뿐, 요지는 긍정 칭찬 응답."
    },
    {
     "n": 5,
     "tx": "경청이 새 이미지 창출에 도움",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 경청이 새 이미지를 창출한다는 내용은 지문에 없다."
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 관계 증진 위해 고객 칭찬에 응답 중요 · <span class=\"xo\">①③</span>신속 응대·성공 가능성(범위초과) · <span class=\"xo\">④</span>부정적 의견 · <span class=\"xo\">⑤</span>새 이미지 창출(근거 없음)",
@@ -6666,35 +6666,35 @@
     "n": 1,
     "tx": "emotions and <span class=\"reuse\">behaviors</span> 사이의 본질적 연결",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — behaviors만 차용, 연결은 가변적이라 본질적 연결이 아님.",
     "ko": "감정과 행동 사이의 본질적 연결"
    },
    {
     "n": 2,
     "tx": "감정의 문화적으로 구성된 표상",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 감정 상태는 보편이나 명명·범주화는 문화가 구성한다는 요지와 일치.",
     "ko": "감정의 문화적으로 구성된 표상"
    },
    {
     "n": 3,
     "tx": "세계 언어로 잘못 기술된 감정",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 문화가 감정을 '잘못' 기술한다는 언급은 지문에 없음.",
     "ko": "세계 언어로 잘못 기술된 감정"
    },
    {
     "n": 4,
     "tx": "학문 분야를 넘어 보편 정의된 감정",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 지엽적 — 보편성만 담고 핵심인 문화적 가변성을 빠뜨림.",
     "ko": "학문 분야를 넘어 보편적으로 정의된 감정"
    },
    {
     "n": 5,
     "tx": "인지가 문화 맥락 학습에 미치는 넓은 영향",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 인지가 문화 학습에 미친다는 반대·확대된 진술.",
     "ko": "인지가 문화 맥락 학습에 미치는 넓은 영향"
    }
   ],
@@ -6996,35 +6996,35 @@
     "n": 1,
     "tx": "초이동성은 도시에 늘 좋은가?",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 초이동성 증가에도 접근성 위기가 온다며 그 이로움에 의문을 던짐과 일치",
     "ko": "초이동성은 도시에 항상 좋은가?"
    },
    {
     "n": 2,
     "tx": "접근성: 도시 지역망 안내",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 도시 지역망 안내가 아니라 접근성 위기를 논함",
     "ko": "접근성: 도시 지역 네트워크 안내"
    },
    {
     "n": 3,
     "tx": "경제적 성공으로 가는 멀고 험한 길",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — '경제적 성공'만 따옴, 글은 그 통념을 오히려 비판함",
     "ko": "경제적 성공으로 가는 멀고 험한 길"
    },
    {
     "n": 4,
     "tx": "초이동성이 낳는 불가피한 지역 갈등",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 지역 갈등은 지문에 언급되지 않음",
     "ko": "초이동성이 낳는 불가피한 지역 갈등"
    },
    {
     "n": 5,
     "tx": "기반시설: 초이동성의 필수 요소",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 기반시설은 부수적 언급일 뿐 제목의 핵심이 아님",
     "ko": "기반시설: 초이동성의 필수 요소"
    }
   ],
@@ -8868,31 +8868,31 @@
     "n": 1,
     "tx": "관계망 확장 = 중요한 <b>사회적 자본</b>",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 소셜 미디어로 관계망을 넓혀 사회적 자본을 늘린다는 지문 핵심과 일치."
    },
    {
     "n": 2,
     "tx": "<span class=\"reuse\">규범과 가치</span> 공유가 인간관계의 기반",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 지엽적 — 규범·가치 공유는 사회적 자본 정의의 일부일 뿐 요지가 아님."
    },
    {
     "n": 3,
     "tx": "뉴 미디어가 사회적 자본 형성 <b>방식을 변화</b>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 뉴 미디어가 형성 방식을 바꾼다가 아니라 관계 범위를 넓힌다는 취지."
    },
    {
     "n": 4,
     "tx": "<b>인적 자본</b> 구축이 소셜 미디어에 필수",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 표면 어휘 — 지문 주제는 인적 자본이 아니라 사회적 자본임."
    },
    {
     "n": 5,
     "tx": "사회적 경험 → 인격 함양·세계관 확장",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 인격 함양·세계관 확장은 지문에 없는 내용."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 소셜 미디어의 관계망 확장 = 사회적 자본 · <span class=\"xo\">②</span>규범·가치 공유 <span class=\"xo\">③</span>형성 방식 변화 <span class=\"xo\">④</span>인적 자본 <span class=\"xo\">⑤</span>인격 함양",
@@ -9128,35 +9128,35 @@
     "n": 1,
     "tx": "생태계 서비스의 <span class=\"reuse\">market values</span> 계산의 필요성",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 표면 어휘 — 'market values'만 따옴, 글은 비시장 가치를 강조함",
     "ko": "생태계 서비스의 시장 가치 계산의 필요성"
    },
    {
     "n": 2,
     "tx": "재정 이익 극대화를 위한 산림 자원 이용의 영향",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 정반대 — 필자는 이익 위한 벌목을 비효율로 비판하는 방향임",
     "ko": "재정 이익 극대화를 위한 산림 자원 이용의 영향"
    },
    {
     "n": 3,
     "tx": "천연자원 관리 <b>효율</b>을 높이는 방법",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 관리 효율을 높이는 방법은 글에서 다루지 않음",
     "ko": "천연자원 관리 효율을 높이는 방법"
    },
    {
     "n": 4,
     "tx": "산림 자원의 <b>비시장 가치</b>를 따지는 것의 중요성",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 생태계 서비스의 비시장 가치가 목재의 시장가치를 넘을 수 있음을 강조함과 일치",
     "ko": "산림 자원의 비시장 가치를 따지는 것의 중요성"
    },
    {
     "n": 5,
     "tx": "산림의 시장·비시장 가치의 <b>균형</b> 이점",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 시장·비시장 가치의 균형이 아니라 비시장 가치 우선을 말함",
     "ko": "산림의 시장·비시장 가치의 균형이 주는 이점"
    }
   ],
@@ -9416,35 +9416,35 @@
     "n": 1,
     "tx": "무너지는 관광 자원의 <b>밝고 어두운 면</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 관광 자원의 붕괴나 명암은 지문에 없음.",
     "ko": "무너지는 관광 자원의 밝고 어두운 면"
    },
    {
     "n": 2,
     "tx": "분리에서 결합으로: 관광업의 변화",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 관광업이 개별 사업에서 통합 활동으로 바뀐 변화를 담음.",
     "ko": "분리에서 결합으로: 관광업의 변화"
    },
    {
     "n": 3,
     "tx": "관광 산업에서 <b>여행사 역할의 축소</b>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 근거 없음 — 여행사 역할 축소는 언급되지 않음.",
     "ko": "관광 산업에서 여행사 역할의 축소"
    },
    {
     "n": 4,
     "tx": "통합의 <b>실패</b>: 고객의 다양한 요구 미충족",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 통합이 성공적으로 진행됐다고 서술하므로 반대.",
     "ko": "통합의 실패: 고객의 다양한 요구 미충족"
    },
    {
     "n": 5,
     "tx": "현대 관광에서 서비스 제공자의 <b>새로운 도전</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 범위 초과 — 현대 관광의 새 도전으로 지나치게 확대함.",
     "ko": "현대 관광에서 서비스 제공자의 새로운 도전"
    }
   ],
@@ -11400,31 +11400,31 @@
     "n": 1,
     "tx": "도시에서 자전거는 효율적인 배송 수단으로 사용될 수 있다.",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 도시 배송에 자전거가 효율적 last-mile 수단이라는 요지와 일치."
    },
    {
     "n": 2,
     "tx": "자전거는 출퇴근 시간을 줄이기 위한 대안으로 선호되고 있다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 출퇴근·통근 시간 절감은 지문에 언급되지 않음."
    },
    {
     "n": 3,
     "tx": "자전거는 배송 수단으로의 경제적 장단점을 모두 가질 수 있다.",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 근거 없음 — 저비용 장점만 있고 단점 언급이 없어 장단점 진술은 왜곡."
    },
    {
     "n": 4,
     "tx": "수요자의 요구에 부합하는 다양한 용도의 자전거가 개발되고 있다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 범위 초과 — 자전거 개발이 아니라 배송 활용을 말하는 지문과 어긋남."
    },
    {
     "n": 5,
     "tx": "세계 각국에서는 전기 자전거 사용을 장려하는 정책을 추진하고 있다.",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 전기 삼륜차·정책은 사례 일부일 뿐 전체 요지가 아님."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 도시에서 자전거는 효율적 배송 수단 · <span class=\"xo\">②</span>출퇴근 <span class=\"xo\">③</span>장'단점' 모두(단점 없음) <span class=\"xo\">④</span>다용도 개발 <span class=\"xo\">⑤</span>전기 자전거 정책(지엽)",
@@ -11707,35 +11707,35 @@
     "n": 1,
     "tx": "steps to make public <span class=\"reuse\">information</span> accessible to customers",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 표면 어휘 — information만 차용, 공개의 이점이 아닌 접근 조치로 왜곡.",
     "ko": "공적 정보를 고객이 이용할 수 있게 하는 조치"
    },
    {
     "n": 2,
     "tx": "benefits of publicizing information to ensure free choices",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 정보 공개가 자유로운 선택을 보장한다는 이점과 일치.",
     "ko": "자유로운 선택을 보장하기 위해 정보를 공개하는 것의 이점"
    },
    {
     "n": 3,
     "tx": "strategies for companies to increase profits in a <span class=\"reuse\">free market</span>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 표면 어휘 — free market 차용, 기업 이윤 전략은 언급 없음.",
     "ko": "자유 시장에서 기업이 이윤을 늘리기 위한 전략"
    },
    {
     "n": 4,
     "tx": "necessities of identifying and analyzing current industry trends",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 산업 동향 파악·분석은 지문에 없음.",
     "ko": "현재 산업 동향을 파악하고 분석해야 할 필요성"
    },
    {
     "n": 5,
     "tx": "effects of <span class=\"reuse\">diversified</span> markets on reasonable customer choices",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — diversity 단어 차용, 시장 다양화 효과가 주제 아님.",
     "ko": "다양화된 시장이 합리적인 고객 선택에 미치는 영향"
    }
   ],
@@ -11993,35 +11993,35 @@
     "n": 2,
     "tx": "Beyond Mere Necessity: The Rise of Food Culture",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 음식이 필수품을 넘어 식당·미식가로 문화가 부상했다는 핵심과 일치.",
     "ko": "단순한 필수품을 넘어: 음식 문화의 부상"
    },
    {
     "n": 1,
     "tx": "Changing Appetites: The Return of <span class=\"reuse\">Fine Dining</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'fine dining'을 따왔으나 '귀환'이 아닌 새로운 부상.",
     "ko": "변화하는 식욕: 고급 요리의 귀환"
    },
    {
     "n": 3,
     "tx": "Tips for Choosing <span class=\"reuse\">Restaurants</span> for Social Occasions",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 식당 선택 요령은 글에 없는 실용 팁일 뿐이다.",
     "ko": "사교 모임을 위한 식당 선택 요령"
    },
    {
     "n": 4,
     "tx": "Why Table Manners Matter: Food and Class Identity",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 식탁 예절·계층은 지엽, 음식 문화 부상이 주제다.",
     "ko": "식탁 예절이 중요한 이유: 음식과 계층 정체성"
    },
    {
     "n": 5,
     "tx": "How Industrialization Is Taking Over Food Production",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 정반대 — 산업화의 생산 장악은 18세기 이전 관심사로 글과 반대.",
     "ko": "산업화가 어떻게 식량 생산을 장악하고 있는가"
    }
   ],
@@ -13579,31 +13579,31 @@
     "n": 1,
     "tx": "정보를 <b>해석</b>함으로써 의미를 만들어 낸다",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 정보를 해석함으로써 의미가 생긴다는 필자 결론과 일치."
    },
    {
     "n": 2,
     "tx": "경험적 확률에 근거해 미래를 예측",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 표면 어휘 — probability를 차용했을 뿐 미래 예측은 지문에 없음."
    },
    {
     "n": 3,
     "tx": "정보의 양이 많으면 분석이 어렵다",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 정보량이 많아 분석이 어렵다는 언급이 없음."
    },
    {
     "n": 4,
     "tx": "진위 판단 시 <span class=\"reuse\">출처</span> 확인 필수",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 진위 판단 시 출처 확인 필수라는 내용이 없음."
    },
    {
     "n": 5,
     "tx": "감정이 개입되면 의미가 <b>왜곡</b>",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 근거 없음 — 감정 개입으로 의미가 왜곡된다는 언급이 없음."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 해석함으로써 의미 생성 · <span class=\"xo\">②</span>확률로 미래 예측 <span class=\"xo\">③</span>정보량 과다 <span class=\"xo\">④</span>출처 확인 <span class=\"xo\">⑤</span>감정이 의미 왜곡(정반대)",
@@ -13860,35 +13860,35 @@
     "n": 1,
     "tx": "role of <b>personal memories</b> in different types of life storytelling",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 전기와 자기서술에서 개인적 기억의 역할 차이를 다룬 핵심과 일치.",
     "ko": "다양한 유형의 삶 서술에서 개인적 기억의 역할"
    },
    {
     "n": 2,
     "tx": "advantages of documenting <span class=\"reuse\">evidence</span>-based family histories",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'evidence'만 따와 가족사 기록의 이점이라 하나 초점 아님.",
     "ko": "증거에 기반한 가족사를 기록하는 것의 이점"
    },
    {
     "n": 3,
     "tx": "influence of <span class=\"reuse\">source</span> types on the quality of narratives",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 자료 유형이 서술의 질에 미치는 영향으로 막연히 넓힘.",
     "ko": "자료 유형이 서술의 질에 미치는 영향"
    },
    {
     "n": 4,
     "tx": "<b>similarity</b> of data sources",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 지문은 두 서술자의 자료 사용 차이를 강조, 유사성 아님.",
     "ko": "자료 출처의 유사성"
    },
    {
     "n": 5,
     "tx": "conditions for the <b>success</b> of life narrators",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 삶 서술자의 성공 조건은 지문에 언급 없다.",
     "ko": "삶 서술자의 성공을 위한 조건"
    }
   ],
@@ -14211,35 +14211,35 @@
     "n": 1,
     "tx": "Better Together: Human and Machine <b>Collaboration</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 로봇을 인간과 협력하는 팀원으로 보는 결합 인지 시스템과 일치.",
     "ko": "함께하면 더 낫다: 인간과 기계의 협업"
    },
    {
     "n": 2,
     "tx": "Can Robots Join Forces to <b>Outperform</b> Human Teams?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 정반대 — 인간 팀을 능가가 아니라 함께 협력함을 강조.",
     "ko": "로봇이 힘을 합쳐 인간 팀을 능가할 수 있는가?"
    },
    {
     "n": 3,
     "tx": "<b>Loss of Humanity</b> in the Human and Machine Conflict",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 갈등·인간성 상실이 아니라 시너지·협력이 핵심.",
     "ko": "인간과 기계의 갈등 속 인간성 상실"
    },
    {
     "n": 4,
     "tx": "Power Off: When to <b>Say No</b> to Robot Partners",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 로봇 파트너를 거절할 시점은 언급 없음.",
     "ko": "전원 끄기: 언제 로봇 파트너에게 거절할 것인가"
    },
    {
     "n": 5,
     "tx": "Shifting from <span class=\"reuse\">Service Animals</span> to Robot Assistants",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 보조 동물은 비유일 뿐 전환이 주제가 아님.",
     "ko": "보조 동물에서 로봇 조수로의 전환"
    }
   ],
@@ -15941,31 +15941,31 @@
     "n": 1,
     "tx": "소비자 심리를 반영한 성난 외관의 자동차가 인기",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 소비자 심리를 반영한 성난 외관 차가 인기라는 결론과 일치."
    },
    {
     "n": 2,
     "tx": "판매 증가 위해 다양한 <span class=\"reuse\">학문적 접근</span>이 시도",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 지엽적 — 심리학자 등 활용은 뒷받침하는 일부 예시."
    },
    {
     "n": 3,
     "tx": "구매자는 이성보다 감정적 판단으로 차 선택",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위 초과 — 감정적 판단으로 일반화, 성난 외관 인기가 요지."
    },
    {
     "n": 4,
     "tx": "전면 디자인 개조를 위한 다양한 서비스",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 전면 디자인 개조 서비스는 언급 없음."
    },
    {
     "n": 5,
     "tx": "안전 원하는 운전자는 거친 <span class=\"reuse\">SUV</span>를 선호 안 함",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 성난 얼굴이 안전감을 준다고 하여 반대됨."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 성난 외관 차가 인기 · <span class=\"xo\">②</span>학문적 접근(부분) <span class=\"xo\">③</span>감정 판단(부분) <span class=\"xo\">④</span>개조 서비스 <span class=\"xo\">⑤</span>거친 SUV 비선호(정반대)",
@@ -16315,35 +16315,35 @@
     "n": 4,
     "tx": "consequences of <b>profit-oriented</b> management of museums",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 이윤 지향 운영이 수장고 소홀 등을 초래한다는 지문 결론과 일치.",
     "ko": "박물관의 이윤 지향적 운영이 초래하는 결과"
    },
    {
     "n": 1,
     "tx": "importance of prioritising <span class=\"reuse\">exhibition spaces</span>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 전시 공간 우선이 문제로 지적되는데 그 중요성을 긍정.",
     "ko": "전시 공간을 우선시하는 것의 중요성"
    },
    {
     "n": 2,
     "tx": "benefits of diverse <span class=\"reuse\">activities</span> for audiences",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 관람객 위한 다양한 활동의 이점은 지문에 없다.",
     "ko": "관람객을 위한 다양한 활동의 이점"
    },
    {
     "n": 3,
     "tx": "necessity of expanding <span class=\"reuse\">storerooms</span> for displaying",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 정반대 — 수장고는 오히려 축소되는데 확장 필요성이라 함.",
     "ko": "전시를 위한 수장고 확장의 필요성"
    },
    {
     "n": 5,
     "tx": "ways to increase commitment to the <span class=\"reuse\">public good</span>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 공익 헌신을 높이는 방법은 지문에 언급 없다.",
     "ko": "공익에 대한 헌신을 높이는 방법"
    }
   ],
@@ -16674,35 +16674,35 @@
     "n": 3,
     "tx": "The Grace of Solitude: <b>Detached from but Attached to Society</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 수도원이 세상과 격리되면서도 사회 전체에 기여했다는 역설과 일치",
     "ko": "고독의 은총: 사회로부터 분리되었으나 사회에 결속된"
    },
    {
     "n": 1,
     "tx": "How to Gain Religious and Social <span class=\"reuse\">Benefits</span> from Monastery Life",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — 'Benefits'만 따온 방법 제목, 글은 역설적 기여를 말함",
     "ko": "수도원 생활에서 종교적·사회적 이득을 얻는 법"
    },
    {
     "n": 2,
     "tx": "Why the Middle Ages Demanded Religious Figures Be <span class=\"reuse\">Isolated</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 정반대 — 격리는 자발적인 것으로 중세가 요구했다는 서술과 반대",
     "ko": "중세가 종교인들에게 고립을 요구한 이유"
    },
    {
     "n": 4,
     "tx": "No <span class=\"reuse\">Sacrificial</span> Leaders, No Flowering of Civilization",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 희생 없이는 문명 없다는 과장된 인과로 지문 범위를 넘음",
     "ko": "희생하는 지도자 없이는 문명의 개화도 없다"
    },
    {
     "n": 5,
     "tx": "Mystery of Power: The Politics of Peace and <span class=\"reuse\">Solitude</span>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 권력의 정치는 지문에 언급되지 않음",
     "ko": "힘의 신비: 평화와 고독의 정치"
    }
   ],
@@ -18498,31 +18498,31 @@
     "n": 1,
     "tx": "분배 정의 실현엔 <span class=\"reuse\">시민 단체</span>의 역할",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 시민 단체의 역할은 지문에 언급되지 않음."
    },
    {
     "n": 2,
     "tx": "사회적 합의는 민주적 정책의 선행 조건",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 근거 없음 — 사회적 합의나 민주적 선행 조건은 다루지 않음."
    },
    {
     "n": 3,
     "tx": "성실한 납세 = 정부 예산 확보 기반",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 성실 납세나 예산 확보 기반은 지문에 없음."
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">경제학</span>은 세법 개정의 이론적 근거 제공",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 정반대 — 경제학만으론 목표를 못 정한다고 하여 방향이 반대."
    },
    {
     "n": 5,
     "tx": "세법 제정 시 도덕적 목표 설정이 중요",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 세법 제정의 핵심은 도덕적 목표 설정이라는 결론과 일치."
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 세법 제정 시 도덕적 목표 설정이 중요 · <span class=\"xo\">①</span>시민 단체 <span class=\"xo\">②</span>사회적 합의 <span class=\"xo\">③</span>성실 납세 <span class=\"xo\">④</span>경제학 근거(지문어 복사)",
@@ -18820,35 +18820,35 @@
     "n": 5,
     "tx": "functional aspects of a paradigm in scientific research",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 신념 통일 없이도 연구를 가능케 하는 패러다임의 기능적 역할을 정리함.",
     "ko": "과학 연구에서 패러다임의 기능적 측면"
    },
    {
     "n": 1,
     "tx": "difficulty in drawing <span class=\"reuse\">novel theories</span> from paradigms",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 패러다임에서 새 이론을 도출하는 어려움은 지문에 없음.",
     "ko": "패러다임에서 새로운 이론을 도출하는 것의 어려움"
    },
    {
     "n": 2,
     "tx": "significant influence of personal <span class=\"reuse\">beliefs</span>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 지문은 신념 통일이 불필요하다고 하여 신념 영향과 반대.",
     "ko": "개인적 신념의 상당한 영향"
    },
    {
     "n": 3,
     "tx": "key factors that promote the rise of innovative paradigms",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 혁신적 패러다임의 등장 촉진 요인은 다루지 않음.",
     "ko": "혁신적 패러다임의 등장을 촉진하는 핵심 요인"
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">roles</span> of a paradigm in grouping like-minded researchers",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — 'roles' 단어만 차용, 비슷한 연구자를 묶는 내용은 없음.",
     "ko": "생각이 비슷한 연구자들을 묶는 데 있어 패러다임의 역할"
    }
   ],
@@ -19122,35 +19122,35 @@
     "n": 2,
     "tx": "Never the Same: The Value of Variation in Music Performance",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 연주마다 다른 변주가 음악의 가치라는 핵심과 일치.",
     "ko": "결코 같지 않다: 음악 연주에서 변주의 가치"
    },
    {
     "n": 1,
     "tx": "How to Build a Successful Career in Music Criticism",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 음악 비평 경력 쌓는 법은 지문에 언급 없다.",
     "ko": "음악 비평에서 성공적인 경력을 쌓는 법"
    },
    {
     "n": 3,
     "tx": "The Importance of Personal <span class=\"reuse\">Expression</span> in Music Therapy",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — 'expression'만 겹칠 뿐 음악 치료는 지문에 없다.",
     "ko": "음악 치료에서 개인적 표현의 중요성"
    },
    {
     "n": 4,
     "tx": "Overcoming Stage Fright When Playing Music",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 무대 공포증 극복은 지문에 언급 없다.",
     "ko": "연주할 때 무대 공포증 극복하기"
    },
    {
     "n": 5,
     "tx": "What’s New in the Classical Music Industry?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 클래식 산업의 새 소식은 지문 초점이 아니다.",
     "ko": "클래식 음악 산업의 새로운 소식은?"
    }
   ],
@@ -20692,31 +20692,31 @@
     "n": 4,
     "tx": "의사소통의 <b>평등성</b>이 <b>공유와 공조</b> 가치 기반을 형성",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 말의 평등한 접근이 공유·상호부조 가치를 낳았다는 핵심과 일치."
    },
    {
     "n": 1,
     "tx": "수렵인과 현대인은 언어에 대한 <span class=\"reuse\">유사한 가치</span>를 가짐",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 유사한 가치 언급은 있으나 평등이 공유를 낳음이 요지."
    },
    {
     "n": 2,
     "tx": "언어로 <b>자원을 효율적으로 배분</b>해 옴",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 언어로 자원을 효율 배분한다는 내용은 지문에 없다."
    },
    {
     "n": 3,
     "tx": "현대 사회가 고대보다 <b>더 평등</b>하게 운영됨",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 오히려 고대 수렵인이 현대보다 더 평등·공유적이었다."
    },
    {
     "n": 5,
     "tx": "의사소통을 통해 <b>평등한 사회를 건설</b>했다",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 범위 초과 — 평등한 '사회 건설'이 아니라 가치·규범 형성이 요지."
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 소통의 평등성이 공유·공조 가치의 기반 · <span class=\"xo\">①</span>유사한 언어 가치 <span class=\"xo\">②</span>자원 효율 배분 <span class=\"xo\">③</span>현대가 더 평등(반대) <span class=\"xo\">⑤</span>평등 사회 건설",
@@ -20996,35 +20996,35 @@
     "n": 4,
     "tx": "<b>continued engagement</b> in <b>altered forms of play</b> after childhood",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 놀이는 사라지지 않고 스포츠·소설·게임 등 형태만 바뀌어 지속된다는 핵심과 일치",
     "ko": "어린 시절 이후 형태가 바뀐 놀이에의 지속적인 참여"
    },
    {
     "n": 1,
     "tx": "relationship between <span class=\"reuse\">play</span> types and <b>emotional stability</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 놀이 유형과 정서적 안정성의 관계는 지문에 언급이 없음",
     "ko": "놀이 유형과 정서적 안정성 사이의 관계"
    },
    {
     "n": 2,
     "tx": "reasons for <span class=\"reuse\">identifying with</span> imaginary characters in <b>childhood</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — 'identifying with'만 따오고 성인까지의 확장을 놓쳐 어린 시절에 국한",
     "ko": "어린 시절 가상의 인물과 동일시하는 이유"
    },
    {
     "n": 3,
     "tx": "helping adolescents develop good <b>reading habits</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 독서 습관을 기르는 방법은 지문에 나오지 않음",
     "ko": "청소년이 좋은 독서 습관을 기르도록 돕기"
    },
    {
     "n": 5,
     "tx": "effects of <span class=\"reuse\">narrative structures</span> on readers' imaginations",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'narrative' 어휘만 재사용, 상상력에의 영향은 글의 초점이 아님",
     "ko": "서사 구조가 독자의 상상력에 미치는 영향"
    }
   ],
@@ -21300,35 +21300,35 @@
     "n": 1,
     "tx": "Still Left to the Modern Blacksmith: The <b>Art of Repair</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 기계화 후에도 수리는 손과 창의성이 필요해 대장장이의 몫으로 남았다는 핵심과 일치.",
     "ko": "여전히 현대 대장장이에게 남겨진 것: 수리의 기술"
    },
    {
     "n": 2,
     "tx": "A Historical Survey of How <span class=\"reuse\">Repairing</span> Skills <b>Evolved</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 수리 기술의 시대별 진화를 개관하는 글이 아니라 수리가 손작업임을 강조.",
     "ko": "수리 기술이 어떻게 진화했는가에 대한 역사적 고찰"
    },
    {
     "n": 3,
     "tx": "How to Be a Creative <span class=\"reuse\">Repairperson</span>: <b>Tips and Ideas</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 수리공 되는 조언·아이디어를 주는 실용 안내가 아님.",
     "ko": "창의적인 수리공이 되는 법: 조언과 아이디어"
    },
    {
     "n": 4,
     "tx": "A Process of Repair: <span class=\"reuse\">Create, Modify, Transform!</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 수정·변형은 대장장이의 원래 제작을 가리켜 수리 요지가 아님.",
     "ko": "수리의 과정: 창조하고, 수정하고, 변형하라!"
    },
    {
     "n": 5,
     "tx": "Can <span class=\"reuse\">Industrialization</span> Mend Our Broken Past?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 산업화가 과거를 고친다는 비유적 내용은 지문에 없음.",
     "ko": "산업화가 우리의 망가진 과거를 고칠 수 있는가?"
    }
   ],
@@ -22717,31 +22717,31 @@
     "n": 1,
     "tx": "이민자 정체성 유지 권리에 대한 공동체의 인식 필요",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 다른 문화의 정체성 유지 권리를 인정해야 한다는 결론과 일치."
    },
    {
     "n": 2,
     "tx": "이민자 요구 반영 정책 수립 중요",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 이민자 요구 반영 정책 수립은 언급 없음."
    },
    {
     "n": 3,
     "tx": "이민자가 미래 사회 긍정적 변화의 핵심 역할",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 과거 유럽 이민자의 변화 사례만 담은 일부."
    },
    {
     "n": 4,
     "tx": "다문화 사회 안정 위한 국제적 협력",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 다문화 사회 위한 국제적 협력은 언급 없음."
    },
    {
     "n": 5,
     "tx": "문화적 <span class=\"reuse\">동화</span>는 점진적 과정",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — 동화 단어만 차용, 점진성이 요지가 아님."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 공동체가 이민자의 정체성 유지 권리를 인정해야 함 · <span class=\"xo\">②</span>정책 없음 <span class=\"xo\">③</span>부연 과장 <span class=\"xo\">④</span>국제협력 없음 <span class=\"xo\">⑤</span>동화 단어만 차용",
@@ -23089,35 +23089,35 @@
     "n": 5,
     "tx": "outcome of attempts to attract <span class=\"reuse\">large audiences</span>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 청중 최대화 시도가 위험 회피와 제한된 재생목록으로 이어진다는 결과와 일치.",
     "ko": "많은 청중을 끌어들이려는 시도의 결과"
    },
    {
     "n": 1,
     "tx": "playlists appealing to <span class=\"reuse\">international</span> audiences",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 국제적 청중을 겨냥한다는 언급은 지문에 없다.",
     "ko": "국제적 청중에게 호소하는 재생 목록"
    },
    {
     "n": 2,
     "tx": "influence of <span class=\"reuse\">advertisers</span> on musical preferences",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 광고주는 언급되나 음악 취향에 미치는 영향이 주제가 아님.",
     "ko": "음악 취향에 대한 광고주의 영향"
    },
    {
     "n": 3,
     "tx": "<span class=\"reuse\">difficulties</span> of increasing audience size",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 청중 늘리는 '어려움'이 아니라 그 결과가 논점이다.",
     "ko": "청중 규모를 늘리는 것의 어려움"
    },
    {
     "n": 4,
     "tx": "satisfying listeners’ <span class=\"reuse\">diverse needs</span>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 다양한 요구 충족이 아니라 획일적 인기곡 위주로 흐름.",
     "ko": "청취자의 다양한 요구를 충족하기"
    }
   ],
@@ -23443,35 +23443,35 @@
     "n": 1,
     "tx": "The Journey of Shadows in Art from Prehistoric Caves Onward",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 선사 동굴부터 이후로 그림자 표현이 발전해 온 여정을 다룬 지문 흐름과 일치.",
     "ko": "선사시대 동굴 이후 미술 속 그림자의 여정"
    },
    {
     "n": 2,
     "tx": "Portrayals of <span class=\"reuse\">Human Shadows</span> from the Artistic Perspective",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 인간 그림자 묘사는 일부일 뿐 그림자 표현 전체의 역사가 핵심.",
     "ko": "예술적 관점에서 본 인간 그림자의 묘사"
    },
    {
     "n": 3,
     "tx": "Shadows as a Key Part of <span class=\"reuse\">Contemporary</span> Art",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 근거 없음 — 지문은 역사적 전개이지 현대 미술을 다루지 않음.",
     "ko": "현대 미술의 핵심 요소로서의 그림자"
    },
    {
     "n": 4,
     "tx": "Primary <span class=\"reuse\">Challenges</span> for Shadow Painters?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 그림자 화가의 과제·어려움은 지문에 없음.",
     "ko": "그림자 화가들의 주된 과제는?"
    },
    {
     "n": 5,
     "tx": "From <span class=\"reuse\">Cave Artists to Romans</span> (거기서 끊김)",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 로마인까지만 담아 그 이후 지속된 논의를 놓침.",
     "ko": "동굴 화가에서 로마인까지"
    }
   ],
@@ -24930,31 +24930,31 @@
     "n": 1,
     "tx": "도덕성은 자신의 선택에 책임을 진다는 개념",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 선택에 대한 책임은 도입 예시일 뿐 전체 요지가 아님"
    },
    {
     "n": 2,
     "tx": "동물·인간을 구별하는 특징은 분별력과 언어",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 표면 어휘 — 분별력·언어는 비유·부수 언급, 도덕의 본질이 아님"
    },
    {
     "n": 3,
     "tx": "도덕성은 학습되는 문화적 도구로서 인간 사회에만 나타남",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 도덕은 학습된 문화적 도구로 인간 사회 안에서만 성립한다는 요지와 일치"
    },
    {
     "n": 4,
     "tx": "동물·인간은 다른 개체와 협력하는 경향",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 협력 성향은 부수적 언급일 뿐 핵심 요지가 아님"
    },
    {
     "n": 5,
     "tx": "<span class=\"reuse\">문화적 도구</span>로서의 도덕성이 의사 결정에 영향",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '문화적 도구'만 따옴, 의사결정 영향은 글의 논지가 아님"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 도덕성=학습된 문화적 도구, 인간 사회 한정 · <span class=\"xo\">①</span>책임 개념 <span class=\"xo\">②</span>분별력·언어 <span class=\"xo\">④</span>협력 경향 <span class=\"xo\">⑤</span>의사결정 영향",
@@ -25239,35 +25239,35 @@
     "n": 1,
     "tx": "<span class=\"reuse\">decline</span> of reliability in ads of natural foods",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'decline'은 지시체 쇠퇴 뜻일 뿐 신뢰성 쇠퇴가 아님.",
     "ko": "천연식품 광고에서 신뢰성의 쇠퇴"
    },
    {
     "n": 2,
     "tx": "changes in the senses of words linked to food ads",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 광고로 'fresh·natural' 등 단어 의미가 변한다는 핵심과 일치.",
     "ko": "식품 광고와 연관된 단어들의 의미 변화"
    },
    {
     "n": 3,
     "tx": "influence of <span class=\"reuse\">capitalism</span> on the <span class=\"reuse\">industrial food system</span>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 표면 어휘 — 자본주의·산업체계 단어만 차용, 핵심은 단어 의미 변화.",
     "ko": "산업적 식품 체계에 대한 자본주의의 영향"
    },
    {
     "n": 4,
     "tx": "various ways to attract customers in the food industry",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 범위 초과 — 고객 유치 방법 일반으로 너무 넓게 확대함.",
     "ko": "식품 산업에서 고객을 끌어들이는 다양한 방법"
    },
    {
     "n": 5,
     "tx": "necessity of meaningful word associations in commercials",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 지문은 연상 분리 현상을 서술, 필요성 주장이 아님.",
     "ko": "광고에서 의미 있는 단어 연상의 필요성"
    }
   ],
@@ -25568,35 +25568,35 @@
     "n": 4,
     "tx": "Office Designs: What Goes Around Comes Around",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 사무실 디자인이 순환해 옛 양식으로 되돌아옴과 일치.",
     "ko": "사무실 디자인: 돌고 도는 법"
    },
    {
     "n": 1,
     "tx": "Why Are <span class=\"reuse\">Open-office Plans</span> So Cost-efficient?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 표면 어휘 — open-office 차용, 비용 효율성은 언급 없음.",
     "ko": "개방형 사무실 배치는 왜 그렇게 비용 효율적인가?"
    },
    {
     "n": 2,
     "tx": "How to Incorporate Retro Styles into Office Spaces",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 복고 스타일 접목법이 아니라 순환의 관찰.",
     "ko": "사무실 공간에 복고 스타일을 접목하는 법"
    },
    {
     "n": 3,
     "tx": "An Office Divided: Why <span class=\"reuse\">Partitions</span> Limit Productivity",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — 칸막이가 생산성 제한한다는 내용은 없음.",
     "ko": "분할된 사무실: 칸막이가 생산성을 제한하는 이유"
    },
    {
     "n": 5,
     "tx": "Tips for Managing <span class=\"reuse\">Contemporary Office</span> Spaces",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 현대 사무실 관리 요령은 주제가 아님.",
     "ko": "현대적 사무실 공간을 관리하는 요령"
    }
   ],
@@ -27076,31 +27076,31 @@
     "n": 1,
     "tx": "감정 이해 능력은 집단 내 원활한 소통과 협력을 촉진한다.",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 감정 이해 능력이 집단 내 소통과 협력을 돕는다는 결론과 일치."
    },
    {
     "n": 2,
     "tx": "타인에 대한 공감 능력은 자신의 감정 표현 능력을 향상한다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 공감이 자기 표현 능력을 높인다는 인과는 지문에 없음."
    },
    {
     "n": 3,
     "tx": "자신의 감정 상태에 대한 이해는 사회성 함양에 필수적 요소이다.",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ 지엽적 — 개인 감정 이해 일부만 담고 집단 초점을 놓침."
    },
    {
     "n": 4,
     "tx": "감정 관련 어휘에 대한 지식은 공감 능력 발달의 기반이 된다.",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '감정 어휘' 단어만 차용, 공감 발달 기반 주장은 없음."
    },
    {
     "n": 5,
     "tx": "집단 구성원 간 갈등 해소를 위해 감정 조절이 중요하다.",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 근거 없음 — 감정 조절이 아니라 감정 이해·표현이 핵심임."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 감정 이해가 집단 소통·협력 촉진 · <span class=\"xo\">②</span>표현력 향상 <span class=\"xo\">③</span>사회성 함양 <span class=\"xo\">④</span>어휘→공감 <span class=\"xo\">⑤</span>감정 조절",
@@ -30034,35 +30034,35 @@
     "n": 1,
     "tx": "<b>limitations</b> of using <b>empirical observations</b> in farming",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 농장은 통제 실험이 어려워 경험적 관찰에 한계가 있다는 지문 결론과 일치.",
     "ko": "농업에서 경험적 관찰을 이용하는 것의 한계"
    },
    {
     "n": 2,
     "tx": "challenges in modernizing traditional <b>farming equipment</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 농기구 현대화는 지문에서 다루지 않음.",
     "ko": "전통적 농기구를 현대화하는 데 있어서의 어려움"
    },
    {
     "n": 3,
     "tx": "necessity of prioritizing <span class=\"reuse\">trialability</span> in agricultural innovation",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 정반대 — 시험 가능성은 우선시할 대상이 아니라 오히려 문제로 지적됨.",
     "ko": "농업 혁신에서 시험 가능성을 우선시할 필요성"
    },
    {
     "n": 4,
     "tx": "importance of making <b>instinctive decisions</b> in agriculture",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 농부는 본능이 아니라 경험적 관찰에 근거해 판단함.",
     "ko": "농업에서 본능적 결정을 내리는 것의 중요성"
    },
    {
     "n": 5,
     "tx": "ways to <b>control</b> unpredictable agricultural <span class=\"reuse\">phenomena</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 정반대 — 농부는 현상을 통제하기 어렵다고 했지 통제법을 논하지 않음.",
     "ko": "예측 불가능한 농업 현상을 통제하는 방법"
    }
   ],
@@ -30387,35 +30387,35 @@
     "n": 1,
     "tx": "Do We Judge <b>Independently</b>? The Effect of <b>Crowds</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 사람들이 주위 반응을 보고 판단해 군중이 개인 판단을 좌우한다는 핵심과 일치.",
     "ko": "우리는 독립적으로 판단하는가? 군중의 영향"
    },
    {
     "n": 2,
     "tx": "Winning Strategy: How <b>Not to Be Fooled</b> by Others",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 범위 초과 — 속지 않는 '승리 전략'은 글의 관찰 취지와 무관하다.",
     "ko": "승리 전략: 타인에게 속지 않는 법"
    },
    {
     "n": 3,
     "tx": "Do <span class=\"reuse\">Emergencies</span> Affect the Way of Our Thinking?",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 'emergencies' 단어만 반복, 사고방식 변화가 주제가 아님.",
     "ko": "긴급 상황이 우리의 사고방식에 영향을 미치는가?"
    },
    {
     "n": 4,
     "tx": "Stepping Towards <b>Harmony with Your Neighbors</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 이웃과의 조화를 향한 내용은 지문에 없다.",
     "ko": "이웃과의 조화를 향해 나아가기"
    },
    {
     "n": 5,
     "tx": "Ways of <b>Helping Others</b> in <span class=\"reuse\">Emergent</span> Situations",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 지엽적 — 돕는 방법이 아니라 군중이 행동을 억제함이 주제다.",
     "ko": "긴급 상황에서 타인을 돕는 방법"
    }
   ],
@@ -30730,35 +30730,35 @@
     "n": 1,
     "tx": "<span class=\"reuse\">Critical</span> Reasoning: A Road to <span class=\"reuse\">Ethical Decision-making</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — critical/ethical 단어만 따와 비판적 추론을 주제로 삼음.",
     "ko": "비판적 추론: 윤리적 의사결정으로 가는 길"
    },
    {
     "n": 2,
     "tx": "Far-reaching <b>Impacts of Ethics</b> on Behavioural Codes",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 윤리의 광범위한 영향으로 확대, 초점은 개인적 사고.",
     "ko": "윤리가 행동 규범에 미치는 광범위한 영향"
    },
    {
     "n": 3,
     "tx": "Ethical Thinking: A Walk Through <b>Individual Minds</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 윤리적 사고가 개인의 가치·맥락을 거친다는 핵심과 일치.",
     "ko": "윤리적 사고: 개인의 마음을 통과하는 여정"
    },
    {
     "n": 4,
     "tx": "Exploring Ethical <b>Theory</b> in the Eyes of the Others",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 지문은 이론적 윤리와 구별된다는데 이론 탐구라 함.",
     "ko": "타인의 눈으로 윤리 이론 탐구하기"
    },
    {
     "n": 5,
     "tx": "Do Ethical Choices Always <b>Take Priority</b>?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 윤리적 선택이 항상 우선하는지는 지문 논점이 아님.",
     "ko": "윤리적 선택은 항상 우선하는가?"
    }
   ],
@@ -31376,35 +31376,35 @@
     "n": 1,
     "tx": "widespread preference for <b>mythical explanations</b> over scientific ones",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 신화적 설명은 도입 예시일 뿐 전체 주제가 아님.",
     "ko": "과학적 설명보다 신화적 설명을 널리 선호함"
    },
    {
     "n": 2,
     "tx": "limitations of <b>Newtonian law</b> in explaining eclipse phenomena",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 뉴턴 법칙이 일식도 설명한다 했으므로 한계가 아님.",
     "ko": "일식 현상을 설명하는 데 있어 뉴턴 법칙의 한계"
    },
    {
     "n": 3,
     "tx": "influence of <b>scientific interpretations</b> on perceptions of reality",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 과학이 현실 인식에 미치는 영향으로 너무 넓게 확대.",
     "ko": "과학적 해석이 현실 인식에 미치는 영향"
    },
    {
     "n": 4,
     "tx": "need to <b>pose questions about the usual</b> to understand the <b>unusual</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 특이한 것을 이해하려 일상적인 것을 물어야 한다는 주제와 일치.",
     "ko": "특이한 것을 이해하기 위해 일상적인 것에 대해 질문을 던질 필요성"
    },
    {
     "n": 5,
     "tx": "difficulty of drawing <b>general conclusions</b> from unusual phenomena",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 오히려 일상 이해로 특이 현상을 설명할 수 있다고 함.",
     "ko": "특이한 현상으로부터 일반적 결론을 이끌어내는 것의 어려움"
    }
   ],
@@ -31714,35 +31714,35 @@
     "n": 1,
     "tx": "Differing Attitudes Towards Current Climate Issues",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 전문가들은 오히려 동의하며 태도 차이는 다루지 않음",
     "ko": "현재의 기후 문제에 대한 서로 다른 태도"
    },
    {
     "n": 2,
     "tx": "Slow but Significant: The History of Ecological Movements",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 생태 운동의 역사가 아니라 기후변화 표현의 어려움이 핵심",
     "ko": "느리지만 중요한: 생태 운동의 역사"
    },
    {
     "n": 3,
     "tx": "The <b>Silence of Imagination</b> in <b>Representing Climate Change</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 기후 위기는 상상력의 위기이고 소설이 이를 표현하지 못한다는 핵심과 일치",
     "ko": "기후 변화를 표현함에 있어 상상력의 침묵"
    },
    {
     "n": 4,
     "tx": "Vivid Threats: Climate Disasters Spreading in Local Areas",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 기후변화는 감지 힘든 점진적 변화로 '생생한 확산'과 반대",
     "ko": "생생한 위협: 지역으로 퍼지는 기후 재앙"
    },
    {
     "n": 5,
     "tx": "The Rise and Fall of Environmentalism and Ecocriticism",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 표면 어휘 — 환경주의자·생태비평가 이름만 따옴, 흥망은 논지가 아님",
     "ko": "환경주의와 생태비평의 흥망"
    }
   ],
@@ -32057,35 +32057,35 @@
     "n": 1,
     "tx": "<b>Make It New</b>: How <b>Poetry Refreshes Everyday Language</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 시가 일상 언어의 재료로 새 가능성을 찾아 신선하게 한다는 핵심과 일치.",
     "ko": "새롭게 하라: 시가 일상 언어를 어떻게 새롭게 하는가"
    },
    {
     "n": 2,
     "tx": "Why Do Poets No Longer Seek Inspiration from Nature?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 시인이 자연에서 영감을 안 찾는다는 내용은 없다.",
     "ko": "왜 시인들은 더 이상 자연에서 영감을 찾지 않는가?"
    },
    {
     "n": 3,
     "tx": "The Influence of Natural Sounds on Poetic Expression",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 파도 소리는 비유일 뿐 자연음의 영향이 주제가 아님.",
     "ko": "자연의 소리가 시적 표현에 미치는 영향"
    },
    {
     "n": 4,
     "tx": "Ways to Cite Poetic Expressions in Everyday Speech",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 근거 없음 — 일상어에 시적 표현을 인용하는 법은 글 주제가 아님.",
     "ko": "일상 언어에서 시적 표현을 인용하는 방법"
    },
    {
     "n": 5,
     "tx": "Beauty Rediscovered: The Return of Oral Poetry",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 구전 시의 귀환은 지문에 언급되지 않는다.",
     "ko": "재발견된 아름다움: 구전 시의 귀환"
    }
   ],
@@ -32986,35 +32986,35 @@
     "n": 1,
     "tx": "The Power of <b>Simple Formulas</b> in <b>Decision Making</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 단순 공식이 전문가 판단을 능가한다는 지문 요지와 일치.",
     "ko": "의사 결정에서 단순한 공식의 힘"
    },
    {
     "n": 2,
     "tx": "Always Prioritise: Tips for Managing <b>Big Data</b>",
     "verdict": "x",
-    "jd": "✘ 없음(빅데이터 미언급)",
+    "jd": "✘ 근거 없음 — 빅데이터 관리나 우선순위 요령은 지문 내용이 아님.",
     "ko": "항상 우선순위를 정하라: 빅데이터 관리 요령"
    },
    {
     "n": 3,
     "tx": "Algorithms’ Mistakes: The <b>Myth of Simplicity</b>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 단순 공식의 우수성을 말하므로 '단순함의 신화'와 반대.",
     "ko": "알고리즘의 실수: 단순함의 신화"
    },
    {
     "n": 4,
     "tx": "Be Prepared! Make a <b>Checklist</b> Just in Case",
     "verdict": "x",
-    "jd": "✘ 범위초과(부분소재)",
+    "jd": "✘ 지엽적 — 체크리스트는 뒷부분 보조 예시일 뿐 전체 제목이 아님.",
     "ko": "대비하라! 만일을 위해 체크리스트를 만들어라"
    },
    {
     "n": 5,
     "tx": "How <b>Human Judgement Beats Algorithms</b>",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 지문은 공식이 인간 판단을 능가한다고 하여 반대.",
     "ko": "인간의 판단이 알고리즘을 이기는 방법"
    }
   ],
@@ -33306,35 +33306,35 @@
     "n": 1,
     "tx": "<b>Anatomical Distance</b> Between Humans and Other Primates",
     "verdict": "x",
-    "jd": "✘ 범위초과(해부 차이만)",
+    "jd": "✘ 지엽적 — 영장류와의 차이는 일부 근거일 뿐 진화적 도약이 핵심",
     "ko": "인간과 다른 영장류 사이의 해부학적 거리"
    },
    {
     "n": 2,
     "tx": "Human Hands: A <b>Decisive Leap</b> in the <b>Evolutionary Path</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 정밀 쥐기가 인간 진화의 돌파구이며 손이 역사를 형성했다는 핵심과 일치",
     "ko": "인간의 손: 진화 경로에서의 결정적 도약"
    },
    {
     "n": 3,
     "tx": "Our Hands: An <b>Unexpected Outcome</b> of Evolution",
     "verdict": "x",
-    "jd": "✘ 정반대(우연 아님)",
+    "jd": "✘ 근거 없음 — 글은 손을 돌파구로 강조, '예상치 못한 결과'는 근거 없음",
     "ko": "우리의 손: 진화의 예상치 못한 결과"
    },
    {
     "n": 4,
     "tx": "Human Grip: The <b>Dilemma</b> of Human Survival",
     "verdict": "x",
-    "jd": "✘ 없음(딜레마 미언급)",
+    "jd": "✘ 근거 없음 — 생존의 딜레마는 지문에 나타나지 않음",
     "ko": "인간의 쥐기: 인간 생존의 딜레마"
    },
    {
     "n": 5,
     "tx": "Hidden Power of the <b>Daily Use of Tools</b>",
     "verdict": "x",
-    "jd": "✘ 표면어휘(도구는 부수)",
+    "jd": "✘ 표면 어휘 — '도구' 어휘만 따옴, 초점은 손의 해부학적 이점임",
     "ko": "도구의 일상적 사용에 숨겨진 힘"
    }
   ],
@@ -33892,35 +33892,35 @@
     "n": 1,
     "tx": "Web-based Journalism: <b>Lasting Longer</b> and Contextually <b>Wider</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 아카이브로 기사 수명이 길어지고 맥락이 넓어진다는 요지와 일치.",
     "ko": "웹 기반 저널리즘: 더 오래 지속되고 맥락적으로 더 넓어지다"
    },
    {
     "n": 2,
     "tx": "With the Latest Content, Online News Beats Daily <span class=\"reuse\">Newspapers</span>!",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 정반대 — 최신성이 아니라 옛 기사 접근성이 핵심이므로 반대.",
     "ko": "최신 콘텐츠로 온라인 뉴스가 일간 신문을 이기다!"
    },
    {
     "n": 3,
     "tx": "How Online Media Journalists Reveal Hidden Stories Behind News",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 기자가 숨은 이야기를 밝힌다는 내용은 지문에 없음.",
     "ko": "온라인 미디어 기자들이 뉴스 이면의 숨겨진 이야기를 밝히는 방법"
    },
    {
     "n": 4,
     "tx": "Let’s Begin a Journey to the Past with Printed <span class=\"reuse\">Newspapers</span>!",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 인쇄 신문이 아닌 웹 저널리즘의 이점을 다룸.",
     "ko": "인쇄된 신문과 함께 과거로의 여행을 시작하자!"
    },
    {
     "n": 5,
     "tx": "Present and Future of Journalism in the Web World",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 아카이브라는 구체 논점보다 지나치게 포괄적임.",
     "ko": "웹 세계에서 저널리즘의 현재와 미래"
    }
   ],
@@ -34216,35 +34216,35 @@
     "n": 1,
     "tx": "Fixed Pie: A Key to <b>Success</b> in a Zero-sum Game",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 고정 파이는 성공 열쇠가 아니라 벗어나야 할 잘못된 믿음.",
     "ko": "고정된 파이: 제로섬 게임에서 성공의 열쇠"
    },
    {
     "n": 2,
     "tx": "Fixed Pie Tells You How to Get the Biggest <span class=\"reuse\">Salary</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — salary 예시를 차용했을 뿐 지문 요지와 무관.",
     "ko": "고정된 파이는 가장 많은 급여를 받는 법을 알려준다"
    },
    {
     "n": 3,
     "tx": "Negotiators, <b>Wake Up</b> from the <b>Myth</b> of the Fixed Pie!",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 고정 파이는 신화이니 깨어나라는 필자 결론과 일치.",
     "ko": "협상가들이여, 고정된 파이의 신화에서 깨어나라!"
    },
    {
     "n": 4,
     "tx": "Want a Fairer <span class=\"reuse\">Jail Sentence</span>? Stick to the Fixed Pie",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — jail sentence 예시 차용, 고정 파이 고수는 취지와 반대.",
     "ko": "더 공정한 형량을 원하는가? 고정된 파이를 고수하라"
    },
    {
     "n": 5,
     "tx": "What Alternatives Maximize <b>Fixed-pie Effects</b>?",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 고정 파이 효과 극대화는 이를 버리라는 요지와 반대.",
     "ko": "어떤 대안이 고정된 파이 효과를 극대화하는가?"
    }
   ],
@@ -34532,35 +34532,35 @@
     "n": 1,
     "tx": "Blending In: When Tech <b>Stops Feeling Like Tech</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 기술이 의식되지 않게 스며드는 무이음 지향을 요약함.",
     "ko": "스며들다: 기술이 기술처럼 느껴지지 않을 때"
    },
    {
     "n": 2,
     "tx": "Digital <span class=\"reuse\">Interfaces</span> Are Becoming Too Complicated!",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 지엽적 — 나쁜 인터페이스는 예시일 뿐, 요지는 매끄러움 추구.",
     "ko": "디지털 인터페이스가 너무 복잡해지고 있다!"
    },
    {
     "n": 3,
     "tx": "Out-of-body Experience: A History of <span class=\"reuse\">Virtual Reality</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — VR 역사가 아니라 seamlessness 개념이 핵심임.",
     "ko": "유체이탈 경험: 가상현실의 역사"
    },
    {
     "n": 4,
     "tx": "How Software Designs Affect Work Productivity",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 업무 생산성 예시 일부만, 전체 주제가 아님.",
     "ko": "소프트웨어 디자인이 업무 생산성에 미치는 영향"
    },
    {
     "n": 5,
     "tx": "Wearable Technology in Contemporary <span class=\"reuse\">Fashion</span>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 표면 어휘 — 옷·솔기는 비유일 뿐 패션이 주제가 아님.",
     "ko": "현대 패션 속 웨어러블 기술"
    }
   ],
@@ -35040,35 +35040,35 @@
     "n": 1,
     "tx": "Are Selfies Just a <b>Temporary Trend</b> in Art History?",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 셀피는 일시적 유행이 아니라 오랜 역사의 연장이라 함.",
     "ko": "셀피는 미술사에서 그저 일시적 유행일 뿐인가?"
    },
    {
     "n": 2,
     "tx": "Fantasy or Reality: Your Selfie Is <b>Not the Real You</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 지엽적 — 내적 감정과의 긴장 한 부분만 담아 '진짜 아니다'로 좁힘.",
     "ko": "환상인가 현실인가: 당신의 셀피는 진짜 당신이 아니다"
    },
    {
     "n": 3,
     "tx": "The Selfie: A Symbol of <b>Self-oriented Global Culture</b>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — 자기중심적 문화라는 부정적 규정은 지문에 없다.",
     "ko": "셀피: 자기중심적 글로벌 문화의 상징"
    },
    {
     "n": 4,
     "tx": "The <b>End of Self-portraits</b>: How Selfies Are Taking Over",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 자화상의 종말이 아니라 그 역사의 확장·강화라 함.",
     "ko": "자화상의 종말: 셀피가 어떻게 장악하는가"
    },
    {
     "n": 5,
     "tx": "Selfies, the <b>Latest Innovation in Representing Ourselves</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 셀피가 자화상 역사를 확장한 최신 표현이라는 핵심과 일치.",
     "ko": "셀피, 우리 자신을 표현하는 최신 혁신"
    }
   ],
@@ -35351,35 +35351,35 @@
     "n": 1,
     "tx": "<b>Learned Nothing in School?</b>: How <b>Memory Tricks You</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 기억이 우리를 속여 학교에서 아무것도 못 배웠다고 착각하게 한다는 전체 논지와 일치.",
     "ko": "학교에서 아무것도 못 배웠다고?: 기억이 당신을 속이는 방식"
    },
    {
     "n": 2,
     "tx": "Why We <b>Forget Selectively</b>: Credibility of Content",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 내용의 신뢰성·출처는 예시일 뿐 선택적 망각이 전체 요지가 아님.",
     "ko": "우리가 선택적으로 잊는 이유: 내용의 신뢰성"
    },
    {
     "n": 3,
     "tx": "The Constant <b>Battle</b> Between Content and Context",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — 내용과 맥락을 대립·싸움으로 그리지 않음.",
     "ko": "내용과 맥락 사이의 끊임없는 싸움"
    },
    {
     "n": 4,
     "tx": "How Students Can <b>Learn More and Better</b> in School",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 더 잘 배우는 학습법을 알려주는 글이 아님.",
     "ko": "학생들이 학교에서 더 많이 더 잘 배우는 법"
    },
    {
     "n": 5,
     "tx": "<b>Shift Your Focus from Who to What</b> for Memory Building",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 출처보다 내용에 집중하란 조언은 일부 예시일 뿐 제목이 아님.",
     "ko": "기억 강화를 위해 누구에서 무엇으로 초점을 옮겨라"
    }
   ],
@@ -35666,35 +35666,35 @@
     "n": 1,
     "tx": "<b>Which Channel Is What Matters</b> in Successful Communication",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 메시지에 맞는 채널(그릇) 선택이 성공적 소통의 핵심이라는 요지와 일치.",
     "ko": "성공적인 소통에서 중요한 것은 어떤 채널인가이다"
    },
    {
     "n": 2,
     "tx": "<b>Cutting-edge Containers</b> for Effective Social Communication",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — 최첨단 그릇이 아니라 상황에 맞는 선택을 강조함.",
     "ko": "효과적인 사회적 소통을 위한 최첨단 그릇"
    },
    {
     "n": 3,
     "tx": "<b>Immediate Feedback</b>: A Royal Road to Successful Management",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 즉각적 피드백은 매체 풍부성의 한 요소일 뿐.",
     "ko": "즉각적 피드백: 성공적인 관리로 가는 지름길"
    },
    {
     "n": 4,
     "tx": "How Has <b>Social Presence Evolved</b> with Social Channels?",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 사회적 실재감의 진화는 도입부 일부에 불과함.",
     "ko": "사회적 실재감은 소셜 채널과 함께 어떻게 진화해 왔는가?"
    },
    {
     "n": 5,
     "tx": "<b>The Richer, the Better!</b> Top Priority in Container Choice",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 항상 풍부할수록 좋은 게 아니라 메시지에 맞게 골라야 함.",
     "ko": "풍부할수록 좋다! 그릇 선택의 최우선 사항"
    }
   ],
@@ -35973,31 +35973,31 @@
     "n": 1,
     "tx": "개인이 피하기 어려운 유해 환경 요인에 대해서는 사회적 대응이 필요하다.",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 피하기 어려운 유해 환경 요인엔 사회적·공중보건 대응이 필요하다는 핵심과 일치."
    },
    {
     "n": 2,
     "tx": "환경오염으로 인한 피해자들에게 적절한 보상을 하는 것이 바람직하다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 환경오염 피해자 보상은 지문에 언급이 없다."
    },
    {
     "n": 3,
     "tx": "다수의 건강을 해치는 행위에 대해 <span class=\"reuse\">도덕적</span> 비난 이상의 조치가 요구된다.",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '도덕적' 단어만 따왔을 뿐 비난 이상의 조치는 근거 없음."
    },
    {
     "n": 4,
     "tx": "환경오염 문제를 해결하기 위해서는 사후 대응보다 예방이 중요하다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 사후 대응 대 예방의 비교는 지문에 나오지 않는다."
    },
    {
     "n": 5,
     "tx": "<span class=\"reuse\">대기오염</span> 문제는 인접 국가들과의 긴밀한 협력을 통해 해결할 수 있다.",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 지엽적 — 대기오염은 한 예시일 뿐 인접국 협력은 언급 없음."
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> 피하기 어려운 요인엔 사회적 대응 · <span class=\"xo\">②</span>피해 보상 <span class=\"xo\">③</span>도덕적 비난 이상 조치 <span class=\"xo\">④</span>예방 중시 <span class=\"xo\">⑤</span>인접국 협력",
@@ -36288,35 +36288,35 @@
     "n": 1,
     "tx": "Similarities of Strategies in <b>Sales</b> and Language Learning",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 표면 어휘 — 슈퍼마켓(판매) 예시만 잡아 판매 전략 유사성이라 함, 요지 아님.",
     "ko": "판매와 언어 학습에서 전략의 유사성"
    },
    {
     "n": 2,
     "tx": "<b>Classification</b>: An Inherent Characteristic of <b>Language</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 분류가 언어에 내재된 특성이라는 지문 핵심과 일치.",
     "ko": "분류: 언어의 내재적 특성"
    },
    {
     "n": 3,
     "tx": "Exploring Linguistic <b>Issues</b> Through Categorization",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 언어적 문제 전반으로 막연히 넓힘, 초점은 분류.",
     "ko": "범주화를 통한 언어적 문제 탐구"
    },
    {
     "n": 4,
     "tx": "Is a <b>Ready-Made</b> Classification System Truly <b>Better</b>?",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 기성 분류가 더 나은지 묻는 것은 지문 논지가 아님.",
     "ko": "기성 분류 체계가 정말 더 나은가?"
    },
    {
     "n": 5,
     "tx": "<b>Dilemmas</b> of Using Classification in Language <b>Education</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 정반대 — 지문은 분류의 유용함을 긍정하며 딜레마를 말하지 않음.",
     "ko": "언어 교육에서 분류 사용의 딜레마"
    }
   ],
@@ -36622,35 +36622,35 @@
     "n": 1,
     "tx": "The Troubling <b>Relationship</b> Between Scientists and the Media",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 범위 초과 — 관계 전반이 아니라 개인의 선택 여부가 핵심.",
     "ko": "과학자와 언론 사이의 골치 아픈 관계"
    },
    {
     "n": 2,
     "tx": "A Scientist’s <b>Choice</b>: To Be Exposed to the Media or <b>Not</b>?",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 언론에 응할지 말지가 개인마다 다른 선택임과 일치.",
     "ko": "과학자의 선택: 언론에 노출될 것인가 말 것인가?"
    },
    {
     "n": 3,
     "tx": "Scientists! Be <b>Cautious</b> When Talking to the Media",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 지엽적 — 신중하라는 조언은 일부, 선택 자체가 주제.",
     "ko": "과학자들이여! 언론과 이야기할 때 신중하라"
    },
    {
     "n": 4,
     "tx": "The Dilemma over Scientific <b>Truth</b> and Media Attention",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 진실 대 언론 관심의 딜레마는 초점 아님.",
     "ko": "과학적 진실과 언론의 관심 사이의 딜레마"
    },
    {
     "n": 5,
     "tx": "Who Are Responsible for <b>Climate</b> Issues, Scientists or the Media?",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 근거 없음 — 기후 문제 책임 소재 논쟁은 언급 없음.",
     "ko": "기후 문제에 책임이 있는 것은 누구인가, 과학자인가 언론인가?"
    }
   ],
@@ -36946,35 +36946,35 @@
     "n": 1,
     "tx": "<b>Unsolved Mystery</b> Behind the <b>Nature of Glass</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 가장 오래된 물질이면서도 유리의 거동을 과학자가 설명 못 한다는 미스터리와 일치.",
     "ko": "유리의 본질 뒤에 숨은 풀리지 않은 미스터리"
    },
    {
     "n": 2,
     "tx": "Solid and Liquid Glass: Their Respective <b>Uses</b>",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 고체·액체 유리의 각각의 용도는 지문에서 다루지 않음.",
     "ko": "고체 유리와 액체 유리: 각각의 용도"
    },
    {
     "n": 3,
     "tx": "A Scientific Perspective on Problems with <b>Stained Glass</b>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 스테인드글라스는 하나의 예시일 뿐 전체 주제가 아님.",
     "ko": "스테인드글라스 문제에 대한 과학적 관점"
    },
    {
     "n": 4,
     "tx": "Puzzling Glass: Why Solid but Easily <b>Breakable</b>?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 왜 쉽게 깨지는가는 지문에 언급되지 않음.",
     "ko": "수수께끼 같은 유리: 왜 고체인데 쉽게 깨지는가?"
    },
    {
     "n": 5,
     "tx": "Techniques for Producing Truly <b>Flat Glass</b>",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 평평한 유리 제조 기법은 짧게 언급된 일부에 불과함.",
     "ko": "진정으로 평평한 유리를 만드는 기법"
    }
   ],
@@ -64094,31 +64094,31 @@
     "n": 1,
     "tx": "계획 수립 절차를 간소화하면 일의 진행 속도가 빨라진다.",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ 정반대 — 지문은 간소화가 아니라 면밀한 계획 수립을 강조한다."
    },
    {
     "n": 2,
     "tx": "안정적인 <span class=\"reuse\">예산</span> 확보는 일의 원활한 진행을 위해 필수적이다.",
     "verdict": "x",
-    "jd": "✘ 표면어휘"
+    "jd": "✘ 표면 어휘 — '예산' 단어만 따왔을 뿐 안정적 예산 확보가 요지는 아니다."
    },
    {
     "n": 3,
     "tx": "사업 계획은 급변하는 상황에 따라 유연하게 변경될 수 있다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 상황에 따른 유연한 계획 변경은 지문에 언급 없다."
    },
    {
     "n": 4,
     "tx": "면밀한 계획 수립은 일의 효율성을 증대시키고 성공 가능성을 높인다.",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 면밀한 계획이 자원을 효율적으로 쓰고 성공 가능성을 높인다는 결론과 일치."
    },
    {
     "n": 5,
     "tx": "대규모 사업에서는 지속적인 성장을 목표로 하는 세부 계획이 중요하다.",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 근거 없음 — 대규모 사업의 지속적 성장 목표는 지문에 없는 내용."
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 면밀한 계획=효율↑·성공 가능성↑ · <span class=\"xo\">①</span>간소화로 속도↑ <span class=\"xo\">②</span>예산 확보 필수 <span class=\"xo\">③</span>유연 변경 <span class=\"xo\">⑤</span>지속 성장 세부계획",
@@ -64397,35 +64397,35 @@
     "n": 1,
     "tx": "Social Perception in Old Age: It’s <b>Not All Bad News</b>!",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 노화가 사회지각에 손실만이 아니라 이득·긍정 변화도 준다는 요지와 일치.",
     "ko": "노년의 사회적 지각: 모두 나쁜 소식만은 아니다!"
    },
    {
     "n": 2,
     "tx": "<b>Blocking Out the Negative</b> Sharpens Social Skills",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 긍정 편향은 세부 하나일 뿐, 전체를 대표하는 제목이 못 됨.",
     "ko": "부정적인 것을 차단하면 사회적 기술이 예리해진다"
    },
    {
     "n": 3,
     "tx": "Lessons on <b>Life-long Goals</b> from Senior Achievers",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 성공한 노인이나 평생 목표 교훈은 지문에 나오지 않음.",
     "ko": "성공한 노인들에게서 배우는 평생 목표에 관한 교훈"
    },
    {
     "n": 4,
     "tx": "Getting Old: A Road to <b>Maturity and Objectivity</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 정반대 — 긍정 편향으로 오히려 객관성이 떨어지므로 방향이 반대.",
     "ko": "나이 듦: 성숙과 객관성으로 가는 길"
    },
    {
     "n": 5,
     "tx": "Positive Mind and Behavior: Tips for <b>Reversing Aging</b>",
     "verdict": "x",
-    "jd": "✘ 범위초과",
+    "jd": "✘ 근거 없음 — 노화를 되돌린다는 내용은 지문 어디에도 없음.",
     "ko": "긍정적인 마음과 행동: 노화를 되돌리는 비결"
    }
   ],
@@ -64746,35 +64746,35 @@
     "n": 1,
     "tx": "<b>Side Effects</b> of Privacy Protection Technologies",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 보호 기술의 부작용은 지문에 언급되지 않음.",
     "ko": "사생활 보호 기술의 부작용"
    },
    {
     "n": 2,
     "tx": "The <b>Legal Domain</b> of Privacy Claims and Conflicts",
     "verdict": "x",
-    "jd": "✘ 표면어휘",
+    "jd": "✘ 지엽적 — 법적 영역·갈등만 좁게, 개념 진화 전체가 아님.",
     "ko": "사생활 권리 주장과 갈등의 법적 영역"
    },
    {
     "n": 3,
     "tx": "The Right to Privacy: <b>Evolving Concepts and Practices</b>",
     "verdict": "ok",
-    "jd": "✔ 근거",
+    "jd": "✔ 정답 — 사생활권 개념이 변화·기술에 맞춰 재해석·진화함을 포괄.",
     "ko": "사생활권: 진화하는 개념과 관행"
    },
    {
     "n": 4,
     "tx": "Who Really Benefits from <b>Looser Privacy Regulations</b>?",
     "verdict": "x",
-    "jd": "✘ 없음",
+    "jd": "✘ 근거 없음 — 느슨한 규제로 이득 보는 자에 대한 언급 없음.",
     "ko": "느슨한 사생활 규제로 진짜 이득을 보는 자는 누구인가?"
    },
    {
     "n": 5,
     "tx": "Less Is More: <b>Reduce State Intervention</b> in Privacy!",
     "verdict": "x",
-    "jd": "✘ 정반대",
+    "jd": "✘ 정반대 — 국가 개입을 줄이자는 주장은 지문에 없음.",
     "ko": "적을수록 좋다: 사생활에 대한 국가 개입을 줄여라!"
    }
   ],
