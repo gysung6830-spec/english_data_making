@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-"""부록: 어휘 미니 테스트 — 「어휘 색인」과 동일한 알파벳 순서·번호로 50개씩 끊은 테스트지.
-TEST 01 = 색인 1~50, TEST 02 = 색인 51~100 … (번호가 색인 번호와 일치)."""
-import json, html, os, re
+"""부록: 어휘 미니 테스트 — 「어휘 색인」 번호 기준 50개씩(TEST 01=색인 1~50 …),
+각 50개 '안에서' 순서만 무작위로 섞은 테스트지. 번호는 색인 번호 그대로라 채점은 색인에서 같은 번호 확인."""
+import json, html, os, re, random
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "corpus", "workbook_content.json")
 OUT = os.path.join(ROOT, "samples", "어휘테스트.html")
 
 CHUNK = 50
+SEED = 20260817  # 고정 시드 — 빌드마다 같은 배열
 
 
 def esc(s):
@@ -50,15 +51,18 @@ def build():
     for t in range(ntests):
         lo = t * CHUNK
         chunk = words[lo:lo + CHUNK]
+        # (색인번호, 단어) 쌍 — 색인 번호는 그대로 두고, 이 50개 '안에서' 순서만 셔플
+        pairs = [(lo + i + 1, w) for i, w in enumerate(chunk)]
+        random.Random(SEED + t).shuffle(pairs)
         items = "".join(
-            f'<div class="ti"><span class="tn">{lo + i + 1}</span>'
+            f'<div class="ti"><span class="tn">{n}</span>'
             f'<span class="tw">{esc(w)}</span><span class="tb"></span></div>'
-            for i, w in enumerate(chunk)
+            for n, w in pairs
         )
         sections += (
             f'<section class="tst"><div class="tsth">'
             f'<span class="tstno">TEST {t + 1:02d}</span>'
-            f'<span class="tstrg">No. {lo + 1}–{lo + len(chunk)}</span>'
+            f'<span class="tstrg">색인 No. {lo + 1}–{lo + len(chunk)} · 무작위 순서</span>'
             f'<span class="tsts">맞은 개수 <b>____</b> / {len(chunk)}</span></div>'
             f'<div class="tgrid">{items}</div></section>'
         )
@@ -91,10 +95,10 @@ body{{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; c
 <div class="vt-cover">
   <div class="kick">APPENDIX · 부록</div>
   <div class="t">어휘 미니 테스트</div>
-  <div class="sub">「어휘 색인」과 같은 순서·번호 · 50개씩</div>
-  <div class="meta">총 <b>{total}</b>단어 · <b>{ntests}</b>회분(각 {CHUNK}개) · <b>TEST 01 = 색인 1~50</b>, TEST 02 = 색인 51~100 …</div>
+  <div class="sub">색인 번호 기준 50개씩 · 각 회차 안에서 무작위 배열</div>
+  <div class="meta">총 <b>{total}</b>단어 · <b>{ntests}</b>회분 · <b>TEST 01 = 색인 1~50</b>, TEST 02 = 색인 51~100 … (각 50개 안에서 순서만 섞음)</div>
 </div>
-<div class="guide">✍️ <b>사용법</b> — 각 TEST(50단어)의 영어 단어·숙어를 보고 <b>빈칸에 뜻</b>을 쓰세요. <b>번호가 「어휘 색인」의 번호와 그대로 일치</b>하므로, 채점은 색인에서 <b>같은 번호</b>를 찾아 뜻·교재 페이지를 확인하면 됩니다. 틀린 단어는 해당 <b>교재 페이지</b>로 돌아가 문맥과 함께 복습하세요.</div>
+<div class="guide">✍️ <b>사용법</b> — 각 TEST는 <b>「어휘 색인」의 50개 구간</b>(01=1~50, 02=51~100 …)이며, 그 안에서 <b>순서만 무작위</b>로 섞여 있습니다. 단어 <b>번호는 색인 번호 그대로</b>이므로, 뜻을 쓴 뒤 색인에서 <b>같은 번호</b>를 찾아 채점하고, 틀린 단어는 <b>교재 페이지</b>로 돌아가 복습하세요.</div>
 {sections}
 </body></html>'''
     open(OUT, "w", encoding="utf-8").write(doc)
