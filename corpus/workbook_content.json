@@ -1888,31 +1888,31 @@
     "n": 1,
     "tx": "preferential access — 분열조직으로 기관 재생",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 식물 재생력의 원인(기관 재생 조직 우선 접근)을 설명함"
    },
    {
     "n": 2,
     "tx": "meristem이 새 shoot·organ으로 분화",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 재생의 기제인 분열조직을 제시해 도입문을 뒷받침함"
    },
    {
     "n": 3,
     "tx": "흉터 치유~식물 전체 재생, 다양한 scale",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 재생 현상이 상처 치유~전체 재생까지 다양함을 이음"
    },
    {
     "n": 4,
     "tx": "<span class=\"reuse\">Animals</span> 학습 행동으로 포식자 회피",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 식물 재생이 화제인데 동물의 학습된 행동을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "교란 후 resprouting·reseeding으로 군집 재구성",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 교란 후 식물 군집의 재생 방식으로 화제를 이어감"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 동물의 학습 행동(=소재 이탈) · <span class=\"xo\">①②③⑤</span> 모두 식물 재생 흐름 유지",
@@ -4810,31 +4810,31 @@
     "n": 3,
     "tx": "신제품이 매년 등장·세계 소비시장용 제품 경쟁",
     "verdict": "ok",
-    "jd": "✔ 무관(주제이탈)"
+    "jd": "✔ 정답 — 유연 근무 장벽이 화제인데 디지털 기기·시장 경쟁을 다뤄 벗어남"
    },
    {
     "n": 1,
     "tx": "물리적 재실이 생산성에 필수라는 지배적 통념(장벽)",
     "verdict": "x",
-    "jd": "✘ 흐름연결"
+    "jd": "✘ 흐름 유지 — 유연 근무 수용을 제한하는 요인들을 구체적으로 나열함"
    },
    {
     "n": 2,
     "tx": "그래서 재택근무자는 덜 헌신적으로 오인됨",
     "verdict": "x",
-    "jd": "✘ 흐름연결"
+    "jd": "✘ 흐름 유지 — 물리적 존재 필수라는 지배적 장벽을 제시함"
    },
    {
     "n": 4,
     "tx": "그런 오해와 관련해 성과 중심 평가 교육 필요",
     "verdict": "x",
-    "jd": "✘ 흐름연결"
+    "jd": "✘ 흐름 유지 — 오해라는 장벽의 해결책(성과 평가 교육)을 제시함"
    },
    {
     "n": 5,
     "tx": "장벽이 제거돼야 유연근무가 온전히 수용됨",
     "verdict": "x",
-    "jd": "✘ 흐름연결"
+    "jd": "✘ 흐름 유지 — 장벽 제거 시 수용된다며 논의를 마무리함"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 신제품·세계 소비시장 경쟁(주제 이탈) · <span class=\"xo\">①②④⑤</span>재택근무 수용을 막는 요인·오해·해법으로 자연스럽게 연결",
@@ -7630,31 +7630,31 @@
     "n": 1,
     "tx": "본으로 저장·비교",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 어린 새가 본보기를 원형으로 저장하는 학습 단계를 이음"
    },
    {
     "n": 2,
     "tx": "처음엔 음정·박자가 고르지 않음",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 초기 지저귐이 고르지 못한 첫 단계를 설명함"
    },
    {
     "n": 3,
     "tx": "미세 조정으로 본에 근접",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 연습으로 발성을 원형에 맞춰 다듬는 과정을 이음"
    },
    {
     "n": 4,
     "tx": "깃털이 짝 유혹 위해 진화",
     "verdict": "ok",
-    "jd": "✔ 근거(외형·번식 → 노래 학습과 무관)"
+    "jd": "✔ 정답 — 노래 학습이 화제인데 수컷 깃털의 짝 유혹 진화를 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "결국 튜터 노래의 정확한 복제",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 결국 스승 노래와 겹치는 학습 결과로 마무리함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 깃털이 짝 유혹 위해 진화 = 노래 학습과 무관 · <span class=\"xo\">①</span>본 저장 <span class=\"xo\">②</span>초기 불균일 <span class=\"xo\">③</span>미세조정 <span class=\"xo\">⑤</span>정확한 복제",
@@ -10022,31 +10022,31 @@
     "n": 1,
     "tx": "특정 제목의 <b>재고를 두지 않음</b>(주제)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 서적상이 특정 책 재고를 두지 않는 화제를 제시함"
    },
    {
     "n": 2,
     "tx": "진열대 브라우징에 의존 못해 다른 방법으로 수집",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 서가로 못 파니 다른 수단으로 소장을 구축함을 이음"
    },
    {
     "n": 3,
     "tx": "정례적으로 <b>카탈로그 배포</b>·구매 가능 여부 문의",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 그 수단인 목록 배포·문의 방식을 구체화함"
    },
    {
     "n": 4,
     "tx": "매장을 오래 열어 <b>관광객이 베스트셀러</b>를 봄",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 재고 없이 파는 방식이 화제인데 장시간 개점·관광객 진열을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "도달 범위가 <b>배가·확장</b>",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 흐름 유지 — 이런 식으로 판매상 도달 범위가 확장됨을 정리함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 매장 상주·관광객 베스트셀러 브라우징(주제 이탈) · <span class=\"xo\">①</span>재고 없음 <span class=\"xo\">②</span>다른 수집법 <span class=\"xo\">③</span>카탈로그 배포 <span class=\"xo\">⑤</span>도달 확장",
@@ -10779,30 +10779,27 @@
    "pieces": [
     {
      "label": "넣을 문장",
-     "cue": "Here",
-     "cue_kind": "지시어",
-     "refers": "앞 문장의 '레드로 한 최초의 색 실험·색채 세계 구축'이라는 맥락(회화 실천·채색 기법)",
-     "en": "Here the lexicon seems in keeping with pictorial practices and coloring techniques.",
-     "ko": "여기서 어휘는 회화적 실천 및 채색 기법과 일치하는 것처럼 보인다.",
-     "link": "→ 앞 문장(레드 색 실험) 뒤. 'Here'가 그 맥락을 받아 화제를 '어휘(lexicon)'로 전환"
+     "cue": "also / color terms",
+     "refers": "앞 문장의 '빨강으로 한 최초의 색 실험·색채 세계 구축' — 'also'로 병렬하며 '색채 용어(color terms)' 화제를 처음 도입",
+     "link": "→ 앞 문장(빨강으로 첫 색 실험) 뒤. 'also'로 이어 '색채 용어'를 처음 꺼냄",
+     "en": "It was also within the range of reds that they learned early on to diversify the palette and to produce varied tones and shades, as the oldest known color terms demonstrate.",
+     "ko": "가장 오래된 색채 용어들이 보여주듯, 그들이 팔레트를 다양화하고 다양한 색조와 명암을 만드는 법을 일찍이 배운 것도 바로 빨강의 범위 안에서였다."
     },
     {
      "label": "앞 문장",
      "cue": "",
-     "cue_kind": "",
      "refers": "",
+     "link": "→ 넣을 문장 앞. 'It was with red…'와 넣을 문장 'It was also…reds'가 병렬을 이룸",
      "en": "It was with red that humans did their first color experiments, achieved their first successes, and then constructed a chromatic universe.",
-     "ko": "인간이 최초의 색 실험을 하고, 최초의 성공을 거두었으며, 그런 다음 하나의 색채 세계를 구축한 것은 바로 레드를 가지고서였다.",
-     "link": "→ 넣을 문장 앞. 레드로 색 실험·색채 세계 구축까지의 이야기를 여기서 마무리"
+     "ko": "인간이 최초의 색 실험을 하고 최초의 성공을 거둔 뒤 색채의 우주를 구축한 것은 바로 빨강으로였다."
     },
     {
      "label": "뒤 문장",
-     "cue": "In certain languages",
-     "cue_kind": "대응",
-     "refers": "넣을 문장이 연 '어휘' 화제의 첫 구체 사례",
-     "en": "In certain languages, the same word can mean “red” or simply “colored,” depending on the context, such as coloratus in classical Latin or colorado in modern Castilian.",
-     "ko": "어떤 언어들에서는, 맥락에 따라 같은 단어가 “빨간”을 뜻할 수도 “그저 색이 있는”을 뜻할 수도 있는데, 고전 라틴어의 coloratus나 현대 카스티야어의 colorado가 그러하다.",
-     "link": "→ 넣을 문장 뒤. 어휘 화제가 열린 뒤 'In certain languages' 언어 사례로 뒷받침"
+     "cue": "Here / the lexicon",
+     "refers": "넣을 문장이 처음 도입한 '색채 용어' — 그것을 'the lexicon'으로 받음",
+     "link": "→ 넣을 문장 뒤. 'the lexicon'이 앞서 나온 '색채 용어'를 받아 성립",
+     "en": "Here the lexicon seems in keeping with pictorial practices and coloring techniques.",
+     "ko": "여기서 그 어휘는 회화적 관행 및 채색 기법과 부합하는 것으로 보인다."
     }
    ]
   },
@@ -12877,19 +12874,19 @@
   "derive": {
    "steps": [
     {
-     "ko": "①~⑤: 걷기(더하기·빼기·반걸음), 그리고 ⑤ 눈을 감고 길의 <b>모양·냄새·소리까지 상상</b>하기까지 걷기 상상이 누적된다",
-     "an": "— 상상 속 걷기가 계속 쌓임"
+     "ko": "①~④: 길을 걸으며 덧셈(5+9)·뺄셈(14−3, 거꾸로 걷기)을 상상 — '걷기로 산술 상상'이 쌓인다",
+     "an": "— 걷기 상상이 ④까지 누적"
     },
     {
-     "ko": "삽입문: ‘<b>이 모든 걷기(all of this walking)</b>를 상상하며 가만히 앉아 있다’ = 앞의 걷기 상상 전체를 받는 지시어",
-     "an": "— 'all of this'는 ①~⑤를 총괄 → ⑤ 뒤라야 함"
+     "ko": "삽입문: '<b>이 모든 걷기(all of this walking)</b>를 상상하며 가만히 앉아 발의 움직임을 되살린다' = 앞 ①~④의 걷기 상상 전체를 받는 지시어",
+     "an": "— 'all of this'가 ①~④를 총괄 → ④ 뒤·⑤ 앞"
     },
     {
-     "ko": "‘가만히 앉아 있지만 상상 속에서 발의 움직임을 <b>되살린다</b>’ = ⑤의 감각적 상상과 이어지는 마무리",
-     "an": "— but: 정지 vs 상상 속 움직임의 대비로 글을 닫음"
+     "ko": "뒤 ⑤: '눈을 감으면 길의 <b>모양·냄새·소리</b>까지 상상' = 삽입문 다음에 이어지는 더 깊은 감각적 상상",
+     "an": "— 삽입문이 연 '상상 속 재생'을 감각으로 확장"
     }
    ],
-   "concl": "→ ⑤ 뒤에서 ‘all of this walking’이 앞 내용 전체를 받아 마무리 = <b>⑤</b>",
+   "concl": "→ 삽입문이 ①~④의 걷기 상상을 총괄하고 ⑤의 감각 상상 <b>앞</b>에 놓임 = <b>⑤</b>",
    "gnote": "삽입문이 ⑤ 앞에 오면 ‘all of this walking’이 받을 걷기 상상이 충분히 누적되지 않는다."
   },
   "direct": [
@@ -20194,30 +20191,27 @@
    "pieces": [
     {
      "label": "넣을 문장",
-     "cue": "But",
-     "cue_kind": "연결어",
-     "refers": "앞 문장의 '소수의 경쟁만 존재한다'는 주장 (이를 역접으로 뒤집음)",
-     "en": "But many other contests have multiple parts, and the number of such contests may be increasing.",
-     "ko": "그러나 다른 많은 경쟁들은 여러 부분으로 이루어져 있으며, 그런 경쟁의 수는 늘어나고 있을지도 모른다.",
-     "link": "→ 앞 문장('소수만 존재') 뒤. 'But'이 그 주장을 뒤집어 '여러 부분을 가진 경쟁이 많다'로 전환"
+     "cue": "Yes (… world class)",
+     "refers": "앞 문장의 '승자독식 경쟁이 소수(only a handful)만 존재한다'는 지적 — 그런 세계적 경쟁이 실제로 있음을 인정",
+     "link": "→ 앞 문장(소수만 존재 시사) 뒤. 'Yes'로 그 소수의 세계적 경쟁을 예(힉스·초전도)로 인정",
+     "en": "Yes, some contests are seen as world class, such as identification of the Higgs particle or the development of high temperature superconductors.",
+     "ko": "그렇다, 힉스 입자의 발견이나 고온 초전도체의 개발처럼 일부 경쟁은 세계적 수준으로 여겨진다."
     },
     {
      "label": "앞 문장",
      "cue": "",
-     "cue_kind": "",
      "refers": "",
+     "link": "→ 넣을 문장 앞. '소수(only a handful)만 존재'를 언급해 넣을 문장의 'Yes(그 소수 인정)'가 받을 대상을 만듦",
      "en": "It is also inaccurate to the extent that it suggests that only a handful of contests exist.",
-     "ko": "그것은 또한 소수의 경쟁만이 존재한다고 시사하는 한에서도 부정확하다.",
-     "link": "→ 넣을 문장 앞. '소수(a handful)의 경쟁만 존재'라는 관점을 제시해 넣을 문장의 역접 대상을 만듦"
+     "ko": "그것은 또한 소수의 경쟁만 존재한다고 시사하는 점에서도 부정확하다."
     },
     {
      "label": "뒤 문장",
-     "cue": "By way of example",
-     "cue_kind": "연결어",
-     "refers": "넣을 문장의 '여러 부분을 가진 경쟁이 많다'는 진술 (그 구체 예시)",
-     "en": "By way of example, for many years it was thought that there would be “one” cure for cancer, but it is now realized that cancer takes multiple forms and that multiple approaches are needed to provide a cure.",
-     "ko": "예를 들어, 여러 해 동안 암에 대한 “하나의” 치료법이 있으리라 여겨졌지만, 이제는 암이 여러 형태를 띠며 치료를 위해 여러 접근이 필요하다는 것이 깨달아지고 있다.",
-     "link": "→ 넣을 문장 뒤. 'By way of example'가 '여러 부분의 경쟁'을 암 치료 사례로 예시하며 이음"
+     "cue": "But",
+     "refers": "넣을 문장이 인정한 '소수의 세계적(승자독식) 경쟁' — 이를 'But'으로 뒤집어 '많은 다른 경쟁'과 대조",
+     "link": "→ 넣을 문장 뒤. 'But'이 앞의 소수 경쟁을 받아 '여러 부분으로 된 많은 경쟁'과 대조",
+     "en": "But many other contests have multiple parts, and the number of such contests may be increasing.",
+     "ko": "그러나 다른 많은 경쟁은 여러 부분으로 이루어져 있고, 그런 경쟁의 수는 늘고 있을지 모른다."
     }
    ]
   },
@@ -34063,7 +34057,7 @@
     ]
    },
    {
-    "t": "In a hiring negotiation, a job applicant who assumes that salary is the only issue may insist on $75,000 when the employer is offering $70,Only when the two parties discuss the possibilities further do they discover that moving expenses and starting date can also be negotiated, which may (b) block resolution of the salary issue.",
+    "t": "In a hiring negotiation, a job applicant who assumes that salary is the only issue may insist on $75,000 when the employer is offering $70,000. Only when the two parties discuss the possibilities further do they discover that moving expenses and starting date can also be negotiated, which may (b) block resolution of the salary issue.",
     "role": "skip",
     "tags": []
    },
@@ -37267,31 +37261,31 @@
     "n": 1,
     "tx": "이 양식을 '수정확대가족'이라 명명",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 이 양식을 '수정된 확대 가족'이라 명명하며 이음"
    },
    {
     "n": 2,
     "tx": "다세대 유대 유지하나 동거엔 기반 안 함",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — '확대'이자 '수정된' 이유를 개념적으로 풀이함"
    },
    {
     "n": 3,
     "tx": "가까이 살아도 지리적 근접은 불필요",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 지리적 근접성을 요구하지 않는 특성을 설명함"
    },
    {
     "n": 4,
     "tx": "가장 나이 많은 구성원이 중요 사안 결정",
     "verdict": "ok",
-    "jd": "✔ 근거(권위·서열 → 수정확대가족 흐름과 무관)"
+    "jd": "✔ 정답 — 수정된 확대 가족 특성이 화제인데 연장자의 결정권을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "전통확대가족과 달리 기회 찾아 떠남",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 전통 확대 가족과 대조해 자유로운 이주를 이음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 가장 나이 많은 구성원이 중요 사안 결정 = 수정확대가족 흐름과 무관 · <span class=\"xo\">①</span>명명 <span class=\"xo\">②</span>동거 아님 <span class=\"xo\">③</span>근접 불필요 <span class=\"xo\">⑤</span>기회 찾아 이동",
@@ -37577,31 +37571,31 @@
     "n": 1,
     "tx": "상대가 이길 것 같으면 즉시 포기",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 경쟁자가 강할 때의 최적 결정(포기)을 제시함"
    },
    {
     "n": 2,
     "tx": "상대가 약하면 나아가 이득",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 경쟁자가 약할 때의 결정(공격)을 대조로 이음"
    },
    {
     "n": 3,
     "tx": "동물은 평소 일정 체중 유지·규칙적 섭취",
     "verdict": "ok",
-    "jd": "✔ 근거(체중·섭취 → 의사결정 흐름과 무관)"
+    "jd": "✔ 정답 — 싸움 결정이 화제인데 동물의 체중 유지·섭식을 다뤄 벗어남"
    },
    {
     "n": 4,
     "tx": "정보 수집에 시간 들이면 승리 확률 극대화",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 정보 수집 시간이 결정을 최적화함을 설명함"
    },
    {
     "n": 5,
     "tx": "신호는 정보 수집·평가 기능",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 신호의 정보 수집·평가 기능으로 논의를 이음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 동물은 일정 체중 유지·규칙적 섭취 = 의사결정 흐름과 무관 · <span class=\"xo\">①</span>강한 상대엔 포기 <span class=\"xo\">②</span>약한 상대엔 이득 <span class=\"xo\">④</span>정보가 결정 개선 <span class=\"xo\">⑤</span>신호=정보수집 기능",
@@ -37869,31 +37863,31 @@
     "n": 1,
     "tx": "숙련 기술은 인지자원 적게 요구·부하 낮춤",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 숙련 기술이 인지 부하를 낮춤을 설명함"
    },
    {
     "n": 2,
     "tx": "그래서 전문가는 복잡 과제 쉽게 수행",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 그래서 전문가가 복잡 과제를 수월히 함을 이음"
    },
    {
     "n": 3,
     "tx": "초보자는 과제가 분리되면 잘 처리",
     "verdict": "ok",
-    "jd": "✔ 근거(초보자 강점 → 전문가 흐름과 무관)"
+    "jd": "✔ 정답 — 전문가의 이점이 화제인데 초보자가 분리 과제에 뛰어남을 다뤄 벗어남"
    },
    {
     "n": 4,
     "tx": "자원이 많아서가 아니라 유창성 덕",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 자원이 많아서가 아니라 능숙함 덕임을 부연함"
    },
    {
     "n": 5,
     "tx": "초보자는 유창성 못 이뤄 어려움",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 반면 초보자는 능숙함이 부족해 어려움을 대조함"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 초보자는 과제가 분리되면 잘 처리 = 전문가 자동화 흐름과 무관 · <span class=\"xo\">①</span>인지부하 낮춤 <span class=\"xo\">②</span>복잡 과제 쉽게 <span class=\"xo\">④</span>유창성 덕분 <span class=\"xo\">⑤</span>초보자는 어려움",
@@ -38169,31 +38163,31 @@
     "n": 1,
     "tx": "차의 중요성, 스포츠관광에 큰 영향",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 자동차가 스포츠 관광에 미친 영향을 제시함"
    },
    {
     "n": 2,
     "tx": "19세기말 발명, 1920년대 대중교통화",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 자동차가 대중 교통수단이 된 시기를 이음"
    },
    {
     "n": 3,
     "tx": "편의·유연성 외 접근성·짐 운반 이점",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 자동차의 접근성·운반 이점을 구체화함"
    },
    {
     "n": 4,
     "tx": "저렴·양질 숙박 확대가 지역 식당 성장 촉진",
     "verdict": "ok",
-    "jd": "✔ 근거(숙박·식당 → 자동차·교통 흐름과 무관)"
+    "jd": "✔ 정답 — 자동차 영향이 화제인데 숙박 확장과 식당 성장을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "결과적으로 스포츠관광 발전에 귀중",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 그 결과 자동차가 스포츠 관광 발전에 귀중했음을 정리함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 숙박 확대가 지역 식당 성장 촉진 = 자동차·교통 흐름과 무관 · <span class=\"xo\">①</span>차의 큰 영향 <span class=\"xo\">②</span>대중교통화 <span class=\"xo\">③</span>접근성·짐 운반 <span class=\"xo\">⑤</span>스포츠관광에 귀중",
@@ -38485,31 +38479,31 @@
     "n": 1,
     "tx": "다양한 멘토 네트워크는 다수·소수 모두에 중요",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 다양한 멘토 네트워크가 모두에게 중요함을 이음"
    },
    {
     "n": 2,
     "tx": "소수 집단은 다양한 멘토로 통찰 획득",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 소수 집단이 다양한 멘토를 필요로 하는 이유를 설명함"
    },
    {
     "n": 3,
     "tx": "다수 노동자도 이해·민감성 향상",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 다수 근로자가 얻는 이해·민감성 이득을 이음"
    },
    {
     "n": 4,
     "tx": "멘토링은 고용주 개인발전의 필수로 요구·칭송",
     "verdict": "ok",
-    "jd": "✔ 근거(고용주 → 노동자·다양한 멘토 흐름과 무관)"
+    "jd": "✔ 정답 — 근로자의 멘토 필요가 화제인데 고용주 발전의 필수 요소로 옮겨 벗어남"
    },
    {
     "n": 5,
     "tx": "궁극 목표는 개인이 더 알고 참여",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 멘토링의 궁극 목표로 논의를 마무리함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 멘토링은 고용주 개인발전의 필수 = 노동자·다양한 멘토 흐름과 무관 · <span class=\"xo\">①</span>모두에 중요 <span class=\"xo\">②</span>소수 통찰 <span class=\"xo\">③</span>다수 이득 <span class=\"xo\">⑤</span>궁극 목표",
@@ -38783,31 +38777,31 @@
     "n": 1,
     "tx": "기업 간 협력·가치사슬 통합",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 정보 시스템 변화가 기업 간 협력에서 두드러짐을 이음"
    },
    {
     "n": 2,
     "tx": "네트워크가 여러 기업의 단위 포함",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 그 결과 네트워크가 여러 기업 단위를 포함함을 설명함"
    },
    {
     "n": 3,
     "tx": "전체 생태계까지 고려해야 함",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 기업이 내부만 아닌 생태계 전체를 고려해야 함을 이음"
    },
    {
     "n": 4,
     "tx": "수익 단위 집중·비수익 단위 제거",
     "verdict": "ok",
-    "jd": "✔ 근거(수익성·구조조정 → 흐름과 무관)"
+    "jd": "✔ 정답 — 단위 간 네트워크가 화제인데 수익성 기준 사업 모델 개편을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "공동 플랫폼의 존재가 필수",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 단위 협력을 위한 공통 플랫폼의 중요성을 결론함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 수익 단위 집중·비수익 단위 제거 = 협력·플랫폼 흐름과 무관 · <span class=\"xo\">①</span>기업 간 협력 <span class=\"xo\">②</span>다기업 네트워크 <span class=\"xo\">③</span>생태계 고려 <span class=\"xo\">⑤</span>공동 플랫폼 필수",
@@ -39085,31 +39079,31 @@
     "n": 1,
     "tx": "자신 있게 지시할수록 반응 좋음",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 자신 있는 지시가 긍정 반응을 부름을 이음"
    },
    {
     "n": 2,
     "tx": "목소리를 크게 내는 것이 유용",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 목소리를 크게 내는 능력의 유용함을 설명함"
    },
    {
     "n": 3,
     "tx": "학교 소음 문제를 함께 해결하자",
     "verdict": "ok",
-    "jd": "✔ 근거(소음 대책·협력 → 흐름과 무관)"
+    "jd": "✔ 정답 — 교사의 목소리 활용이 화제인데 학교 소음 공동 해결을 다뤄 벗어남"
    },
    {
     "n": 4,
     "tx": "가장 큰 목소리는 아껴 쓰라",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 큰 목소리를 아껴 쓰라는 조언으로 이음"
    },
    {
     "n": 5,
     "tx": "조용하고 절제된 톤이 더 효과적",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 절제된 어조가 더 큰 영향력을 지님을 부연함"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 학교 소음 문제를 함께 해결하자 = 목소리 조절 흐름과 무관 · <span class=\"xo\">①</span>자신감 있는 지시 <span class=\"xo\">②</span>큰 목소리 유용 <span class=\"xo\">④</span>큰 목소리 아껴쓰기 <span class=\"xo\">⑤</span>조용한 톤이 효과적",
@@ -39379,31 +39373,31 @@
     "n": 1,
     "tx": "마음은 늘 효율적이지 않음",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 정신이 늘 좋은 결정을 내리진 못함을 이음"
    },
    {
     "n": 2,
     "tx": "뇌가 선택지 앞에서 공회전",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 뇌가 선택지 앞에서 공회전함을 설명함"
    },
    {
     "n": 3,
     "tx": "좋은 결정이 더 빨리 말하게 해줌",
     "verdict": "ok",
-    "jd": "✔ 근거(빠른 말하기 옹호 → 흐름과 무관·반대)"
+    "jd": "✔ 정답 — 빠른 말의 위험이 화제인데 좋은 결정이 더 빨리 말하게 돕는다며 논지를 뒤집어 벗어남"
    },
    {
     "n": 4,
     "tx": "입이 뇌보다 빨라 군말 발생",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 뇌 안내가 끊길 때 군말이 생김을 이음"
    },
    {
     "n": 5,
     "tx": "음·어 같은 군말의 예",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 군말의 구체 예('음','아')를 들어 마무리함"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 좋은 결정이 더 빨리 말하게 해줌 = 빠른 말하기 위험 흐름과 무관 · <span class=\"xo\">①</span>마음은 비효율적 <span class=\"xo\">②</span>뇌의 공회전 <span class=\"xo\">④</span>군말 발생 <span class=\"xo\">⑤</span>군말의 예",
@@ -39689,31 +39683,31 @@
     "n": 1,
     "tx": "온난화로 빙하가 녹고 가속화",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 오늘날 빙하가 녹고 융해가 가속됨을 제시함"
    },
    {
     "n": 2,
     "tx": "알프스에서 기록·사진으로 입증",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 알프스의 기록으로 융해를 입증하며 이음"
    },
    {
     "n": 3,
     "tx": "위성 사진이 극적 감소 보여줌",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 위성 이미지로 산악 빙하 감소를 뒷받침함"
    },
    {
     "n": 4,
     "tx": "빙하 속 암석·광물이 학교 과제 주제",
     "verdict": "ok",
-    "jd": "✔ 근거(교육·소재 → 융해 흐름과 무관)"
+    "jd": "✔ 정답 — 빙하 융해가 화제인데 빙하 속 암석의 과학 과제화를 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "10~20년 내 완전 소멸 추정",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 소규모 빙하의 소멸 전망으로 논의를 이음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 빙하 속 암석·광물이 학교 과제 주제 = 빙하 융해 흐름과 무관 · <span class=\"xo\">①</span>온난화로 융해 가속 <span class=\"xo\">②</span>알프스 기록 입증 <span class=\"xo\">③</span>위성 사진 극적 감소 <span class=\"xo\">⑤</span>수십 년 내 소멸",
@@ -39995,31 +39989,31 @@
     "n": 1,
     "tx": "아기는 뼈가 두꺼워 손상 적음",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 유아의 두꺼운 뼈가 손상을 막음을 설명함"
    },
    {
     "n": 2,
     "tx": "어른은 질량 때문에 큰 힘으로 충돌",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 성인은 큰 질량으로 더 큰 힘에 충돌함을 이음"
    },
    {
     "n": 3,
     "tx": "질량-뼈 강도의 비선형 관계",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 질량-뼈 강도의 비선형 관계로 부상을 풀이함"
    },
    {
     "n": 4,
     "tx": "BMI가 건강 점검에 편리한 도구",
     "verdict": "ok",
-    "jd": "✔ 근거(건강 지표 → 낙상 손상 흐름과 무관)"
+    "jd": "✔ 정답 — 체격과 낙상 부상이 화제인데 BMI 건강 점검 방법을 다뤄 벗어남"
    },
    {
     "n": 5,
     "tx": "키 큰 사람이 낙상 부상 더 겪음",
     "verdict": "x",
-    "jd": "✘ 주제부합"
+    "jd": "✘ 흐름 유지 — 같은 이유로 키 큰 사람의 낙상 부상이 많음을 이음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> BMI가 건강 점검에 편리한 도구 = 몸집·낙상 손상 흐름과 무관 · <span class=\"xo\">①</span>아기 뼈 두꺼워 손상↓ <span class=\"xo\">②</span>어른 큰 힘 충돌 <span class=\"xo\">③</span>비선형 관계 <span class=\"xo\">⑤</span>키 큰 사람 부상↑",
@@ -52561,7 +52555,7 @@
     "n": 1,
     "tx": "paid",
     "verdict": "x",
-    "jd": "✘ 근거 없음 — 지문은 '보수'가 아니라 명성·주목도를 말함",
+    "jd": "✘ 근거 없음 — 빈칸은 '존경'을 묻는 자리, ①은 보수 얘기이며 오히려 기자는 보수가 후함(lucrative)",
     "ko": "보수를 받는"
    },
    {
