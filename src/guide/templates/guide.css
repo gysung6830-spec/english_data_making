@@ -764,17 +764,15 @@ mark.sig { background: #fdeecf; color: #8a5a2b; font-weight: 800; padding: 0 3px
 .sol.caution .warn-lead { color: #b5771f; font-weight: 800; margin-right: 6px; }
 .sol.caution b { color: #8a5a2b; }
 
-/* 오역 카드 (함정 콕 + 한 줄 + 전략) */
-.sol.caution .cau-h { color: #b5771f; font-weight: 800; font-size: 9px; margin-bottom: 4px; }
-.cau-trap { font-size: 9.8px; color: #4a3b25; margin-bottom: 3px; }
+/* 오역 카드 (2줄 압축: ⚠+함정칩+✗→○ / 전략) */
+.sol.caution { padding: 6px 11px; }
+.cau-warn { color: #b5771f; font-weight: 800; font-size: 9px; margin-right: 4px; }
 .trap-chip { display: inline-block; background: var(--wrong); color: #fff; font-weight: 800;
-  border-radius: 5px; padding: 0 7px; font-size: 9.8px; margin: 0 3px; }
-.trap-ask { color: #8a5a2b; }
-.cau-cmp { font-size: 10px; line-height: 1.55; }
+  border-radius: 5px; padding: 0 7px; font-size: 9.6px; margin-right: 5px; }
+.cau-cmp { font-size: 10px; line-height: 1.5; }
 .cau-cmp .mk { font-weight: 800; }
 .cau-cmp .mx { color: var(--wrong); } .cau-cmp .mo { color: var(--right); }
 .cau-cmp .kx { color: #9a5b5b; } .cau-cmp .ko { color: #1f6b4a; font-weight: 700; }
-.cau-cmp .arr { color: #b08a52; margin: 0 3px; font-weight: 700; }
-.cau-tip { margin-top: 5px; padding-top: 4px; border-top: 1px dashed #ecd9b6;
-  color: #6a5220; font-size: 9.4px; line-height: 1.55; }
+.cau-cmp .arr { color: #b08a52; margin: 0 2px; font-weight: 700; }
+.cau-tip { margin-top: 3px; color: #6a5220; font-size: 9.3px; line-height: 1.5; }
 .cau-tip .tip-lead { color: #b5771f; font-weight: 800; margin-right: 4px; }
