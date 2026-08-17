@@ -1,0 +1,83 @@
+[
+ {
+  "var": "P1",
+  "item_no": "Unit10-2",
+  "title": "자신의 존재·정체성 확인을 위해 타인과의 교제·유대를 갈망하는 인간의 본성",
+  "key_grammar_hint": "need + 목적어 + to부정사 (5형식: …가 ~하도록 필요로 하다)",
+  "sentences": [
+   {
+    "n": 1,
+    "en": "Although the wish to be alone is often strong, its intensity varies from person to person.",
+    "ko_gloss": "혼자 있고 싶은 소망은 종종 강하지만, 그 강도는 사람마다 다르다."
+   },
+   {
+    "n": 2,
+    "en": "An equally impelling impulse, though, is to seek the company of others and to spend extended periods of time sharing activities.",
+    "ko_gloss": "하지만 똑같이 뿌리칠 수 없는 충동은 다른 사람과 함께 있는 것을 추구하고 활동을 공유하면서 긴 시간을 보내는 것이다."
+   },
+   {
+    "n": 3,
+    "en": "In these periods we exchange information and feelings in both conversational and non-verbal forms (facial expressions, eye contact, gestures, touching, and so on).",
+    "ko_gloss": "이 시간 동안 우리는 대화의 형태와 비언어적 형태(표정, 눈 맞춤, 몸짓, 접촉 등) 둘 다로 정보와 감정을 교환한다."
+   },
+   {
+    "n": 4,
+    "en": "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+    "ko_gloss": "우리는 우리에게 사랑, 지지, 인정, 신체적 접촉, 안심, 신체적 도움, 그리고 무수히 많은 다른 실질적, 신체적, 정서적 필요사항들을 제공해 줄 다른 사람들을 필요로 한다."
+   },
+   {
+    "n": 5,
+    "en": "In a very basic sense we need others to confirm that we are there, that we exist and that we have an identity that is unique and separate from anyone else.",
+    "ko_gloss": "아주 기본적인 의미에서 우리는 우리가 거기에 있고, 우리가 존재하며, 고유하면서 다른 누구와도 구별되는 정체성을 가지고 있다는 것을 확인하기 위해 다른 사람들을 필요로 한다."
+   },
+   {
+    "n": 6,
+    "en": "Thus, we generally cannot exist for too long without seeking companionship.",
+    "ko_gloss": "따라서 우리는 일반적으로 교제를 추구하지 않고는 그렇게 오랫동안 살아갈 수 없다."
+   }
+  ]
+ },
+ {
+  "var": "P2",
+  "item_no": "Unit14-1",
+  "title": "성공을 위해 자리에 없을 때 회자될 평판을 관리하는 퍼스널 브랜딩의 중요성",
+  "key_grammar_hint": "가주어 it - 진주어 to부정사 (It ~ to-V: …하는 것이 …하다)",
+  "sentences": [
+   {
+    "n": 1,
+    "en": "Personal branding is not something that you have to do behind the scenes.",
+    "ko_gloss": "퍼스널 브랜딩은 여러분이 남몰래 해야 하는 것이 아니다."
+   },
+   {
+    "n": 2,
+    "en": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+    "ko_gloss": "의도적으로 우리 자신과 우리의 업적을 다른 사람들에게 어떻게 홍보할지 계획하는 것이 많은 사람에게 항상 편안하게 느껴지는 것은 아니다."
+   },
+   {
+    "n": 3,
+    "en": "Personal branding, however, is essential to achieving success.",
+    "ko_gloss": "하지만 퍼스널 브랜딩은 성공을 이루는 데 필수적이다."
+   },
+   {
+    "n": 4,
+    "en": "The key takeaway from this concept is awareness and anticipation.",
+    "ko_gloss": "이 개념의 주요한 핵심은 인식과 예상이다."
+   },
+   {
+    "n": 5,
+    "en": "If you are not aware of the opportunities to brand yourself, you may not be directed to leave a favorable impression.",
+    "ko_gloss": "만약 자신을 눈에 띄게 할 기회를 인식하지 못한다면, 여러분은 호의적인 인상을 남기게 되지 못할 수도 있다."
+   },
+   {
+    "n": 6,
+    "en": "If you cannot anticipate the opportunities that will present themselves to favorably demonstrate your brand through capability, you may not be prepared when they occur.",
+    "ko_gloss": "역량을 통해 여러분의 브랜드를 호의적으로 보여 주기 위해 자신을 나타낼 기회를 예상할 수 없다면, 여러분은 기회가 생길 때 준비가 되어 있지 않은 것일지도 모른다."
+   },
+   {
+    "n": 7,
+    "en": "So as you begin to think about what you want to be known for, begin to be more aware of what you want people to say about you when you are not in the room as an effective way to guide your personal brand.",
+    "ko_gloss": "그래서 자신이 무엇으로 알려지고 싶은지에 대해 생각을 시작할 때, 여러분의 퍼스널 브랜드를 이끌 효과적인 방법으로서 사람들이 여러분이 방에 없을 때 여러분에 대해 무엇을 말하기를 원하는지를 더 많이 인식하기 시작하라."
+   }
+  ]
+ }
+]
