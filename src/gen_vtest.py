@@ -68,15 +68,15 @@ body{{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; c
 .guide b{{ color:var(--ink-d); }}
 .tst{{ margin-bottom:0; break-before:page; break-inside:avoid; }}
 .tsth{{ display:flex; align-items:baseline; gap:9px; border-bottom:2px solid var(--ink); margin:2px 0 6px; padding-bottom:3px; break-after:avoid; }}
-.tsth .tstno{{ font-size:14px; font-weight:800; color:var(--ink-d); letter-spacing:.5px; }}
-.tsth .tstrg{{ font-size:8.6px; color:var(--muted); }}
-.tsth .tsts{{ margin-left:auto; font-size:8.8px; color:#4a5560; }}
+.tsth .tstno{{ font-size:16px; font-weight:800; color:var(--ink-d); letter-spacing:.5px; }}
+.tsth .tstrg{{ font-size:9.5px; color:var(--muted); }}
+.tsth .tsts{{ margin-left:auto; font-size:10px; color:#4a5560; }}
 .tsth .tsts b{{ color:var(--ink-d); }}
-.tgrid{{ column-count:2; column-gap:16px; }}
-.ti{{ break-inside:avoid; display:flex; align-items:baseline; gap:6px; padding:8.5px 0 2px; border-bottom:1px dotted #e9ecee; margin-bottom:1px; }}
-.ti .tn{{ flex:none; min-width:20px; font-size:8px; font-weight:800; color:#9aa7b0; text-align:right; }}
-.ti .tw{{ font-size:9.6px; font-weight:700; color:#1a1f26; flex:none; max-width:48%; }}
-.ti .tb{{ flex:1; border-bottom:1px solid #c7d3cd; height:13px; }}
+.tgrid{{ column-count:2; column-gap:18px; }}
+.ti{{ break-inside:avoid; display:flex; align-items:baseline; gap:7px; padding:10px 0 3px; border-bottom:1px dotted #e9ecee; margin-bottom:1px; }}
+.ti .tn{{ flex:none; min-width:22px; font-size:10px; font-weight:800; color:#9aa7b0; text-align:right; }}
+.ti .tw{{ font-size:12.5px; font-weight:700; color:#1a1f26; flex:none; max-width:52%; }}
+.ti .tb{{ flex:1; border-bottom:1px solid #c7d3cd; height:15px; }}
 </style></head><body>
 <div class="vt-cover">
   <div class="kick">APPENDIX · 부록</div>
