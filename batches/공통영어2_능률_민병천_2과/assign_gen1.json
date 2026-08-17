@@ -1,0 +1,31 @@
+[
+ {
+  "var": "P1",
+  "item_no": "1 · 과학 수사와 Lee 소개",
+  "title": "Lee ① 과학수사 도입",
+  "key_grammar_hint": "이중부정 never ~ without -ing (…없이는 결코 …않는다)",
+  "sentences": [
+   "Criminals never leave a crime scene without leaving behind traces of their presence.",
+   "The traces might be tiny, like hairs, or more obvious, such as soil from their shoes.",
+   "So detectives carefully collect all the possible evidence.",
+   "Scientists then analyze everything and find some clues.",
+   "The clues are used to find the person who committed the crime.",
+   "This process is called forensic science.",
+   "It has evolved thanks to the contributions of many researchers.",
+   "One of the most important people in the development of modern forensic science was Frances Glessner Lee."
+  ]
+ },
+ {
+  "var": "P2",
+  "item_no": "2 · 좌절된 꿈과 뒤늦은 시작",
+  "title": "Lee ② 좌절과 시작",
+  "key_grammar_hint": "It was not until ~ that ... 강조구문 (…에야 비로소)",
+  "sentences": [
+   "Frances Glessner Lee was born into a rich family in Chicago in 1878.",
+   "She became interested in medicine at a young age.",
+   "Her dream was to attend Harvard Medical School, but, at that time, the school did not accept women.",
+   "She had no choice but to get married.",
+   "It was not until she was in her fifties that Lee was able to start a career in medicine."
+  ]
+ }
+]

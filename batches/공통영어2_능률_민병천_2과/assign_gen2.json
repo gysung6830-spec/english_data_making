@@ -1,0 +1,29 @@
+[
+ {
+  "var": "P3",
+  "item_no": "3 · Magrath와 법의학의 불씨",
+  "title": "Lee ③ 법의학의 불씨",
+  "key_grammar_hint": "주격 관계대명사 who (사람 선행사 수식)",
+  "sentences": [
+   "Lee heard many interesting stories of real-life crime from her friend, George Burgess Magrath.",
+   "He was a medical examiner who wanted to change the investigation system.",
+   "This was because, at that time, people with no medical knowledge investigated and closed many death cases without examining the bodies.",
+   "He also had a passion for educating medical students in legal medicine.",
+   "Magrath's passion sparked Lee's interest in legal medicine."
+  ]
+ },
+ {
+  "var": "P4",
+  "item_no": "4 · 법의학에 헌신하고 하버드를 설득하다",
+  "title": "Lee ④ 헌신과 설득",
+  "key_grammar_hint": "persuade + 목적어 + to부정사 (…를 설득해 …하게 하다)",
+  "sentences": [
+   "Lee started studying legal medicine by reading books and speaking with experts.",
+   "She believed that medical examiner systems would be adopted more widely across the country.",
+   "Furthermore, she wanted to see more young medical students trained in legal medicine.",
+   "She decided to devote the rest of her life to developing this field.",
+   "In 1931, she persuaded Harvard University to use her fortune to make a new branch of study: legal medicine.",
+   "She also helped set up a library with rare books and documents."
+  ]
+ }
+]
