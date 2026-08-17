@@ -2356,31 +2356,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ '(A)'가 맨 앞이면 'Thus'가 정리할 앞이 없고 'them'이 받을 (C)의 others도 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ '(B)'의 'But'이 맨 앞이라 반전할 (A)의 '규정해야 따른다'가 아직 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ '(B)'의 'But'이 첫머리라 뒤집을 앞 내용이 전혀 없어 성립 안 됨"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 뒤 (C)의 'this behavior'가 최초 행동을 받고, (A)의 'them'이 others를, (B)의 'But'이 이를 반전"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 정반대"
+    "jd": "✘ (C) 뒤 '(B)'의 'But'이 (A)의 '규정' 내용을 반전해야 하나 (A)가 아직 안 나옴"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)others→(A)them 규정→(B)But 자발 · <span class=\"xo\">①②③⑤</span> 지시어 연결 어긋남",
@@ -2680,31 +2680,31 @@
     "n": 1,
     "tx": "① 광합성 개체 등장 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 'they'가 가리킬 'Some individuals'가 뒤에 나와 앞에 없음"
    },
    {
     "n": 2,
     "tx": "② they(강자)→오래 못 삶, This로 이유 연결",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 'Some individuals'를 'they'가 받고, 뒤 'This'가 '오래 못 산다'의 이유를 이어 공백을 메움"
    },
    {
     "n": 3,
     "tx": "③ a lot of losers 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 이미 ②에서 'This'로 이유가 연결돼 ③엔 채울 공백이 없음"
    },
    {
     "n": 4,
     "tx": "④ Weaker members fall behind 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④는 'Weaker members' 흐름이 자연스러워 'they'가 낄 공백이 없음"
    },
    {
     "n": 5,
     "tx": "⑤ 쇠락 원인 열거 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤는 쇠락 원인 열거로 넘어가 'they'가 받을 개체가 이미 멀어짐"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> As a result의 they=①강자, ②This가 결과를 받음 · <span class=\"xo\">①③④⑤</span> 지시 연결 공백 없음",
@@ -5247,31 +5247,31 @@
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (C)의 'In saying that'이 주어진 글을 받고, (A)의 'By extension'이 확장, (B)의 'also'가 보탬"
    },
    {
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결오류"
+    "jd": "✘ '(A)'의 'By extension'이 맨 앞이라 확장할 (C)의 논지가 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결오류"
+    "jd": "✘ '(B)'의 'also'(must also)가 첫머리라 더할 앞 내용이 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결오류"
+    "jd": "✘ '(B)'의 'also'가 맨 앞이라 앞에 보탤 내용이 전혀 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결오류"
+    "jd": "✘ (C) 뒤 '(B)'의 'also'는 (A)의 'imitation is not enough'를 받아야 하나 (A)가 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)-(A)-(B) · <span class=\"xo\">①</span>(A)-(C)-(B) <span class=\"xo\">②</span>(B)-(A)-(C) <span class=\"xo\">③</span>(B)-(C)-(A) <span class=\"xo\">⑤</span>(C)-(B)-(A)",
@@ -5652,31 +5652,31 @@
     "n": 1,
     "tx": "① Misprints ~ / The displacement of a comma",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 'A favorable mutation'이 받을 '유리한 돌연변이' 도입이 아직 없음"
    },
    {
     "n": 2,
     "tx": "② for instance / Similarly most mutations",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ②엔 '해로운 돌연변이'만 나와 'A favorable mutation'이 받을 대상이 없음"
    },
    {
     "n": 3,
     "tx": "③ Similarly / Occasionally however",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ③은 'Occasionally however' 유리한 돌연변이를 막 도입하는 앞이라 받을 대상 미완"
    },
    {
     "n": 4,
     "tx": "④ 유리한 돌연변이 등장(③) → 다음 세대 확산(삽입) → By contrast(⑤)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞의 '유리한 돌연변이 도입'을 받아 '다음 세대 확산'으로 잇고, 뒤 'By contrast'가 책 사례와 대조"
    },
    {
     "n": 5,
     "tx": "⑤ By contrast / (책 비교로 이미 넘어감)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤는 'By contrast'로 이미 책 비교로 넘어가 확산 기제 설명이 빠져 뒤늦음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> '적응도 높이는 돌연변이'(③) 뒤에서 'A favorable mutation'이 이어지고 ⑤ By contrast가 대조를 이룸 · <span class=\"xo\">①②③</span>엔 '유리한 돌연변이'가 아직 없음 · <span class=\"xo\">⑤</span>는 이미 책 대조로 넘어간 자리",
@@ -7945,31 +7945,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(A)'가 맨 앞이면 '그만둠이 현명'이 받을 (B)의 '버려야 할 것을 계속함'이 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (B)의 'This'가 '과대평가 성향'을 받고, (A)가 '나쁘지만은 않다'로 전환, (C) 'Actually'가 활용으로 발전"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B) 뒤 (C)의 'Actually'가 전환할 (A)의 '나쁘지만은 않다'가 아직 안 나옴"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'의 'Actually'·'this human tendency'가 맨 앞이라 받을 앞 내용이 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'가 첫머리라 'Actually'가 이어받을 앞 내용이 전혀 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> (B)-(A)-(C): This(과대평가)→반전(Sunk cost가 늘 나쁘진 않다)→Actually 활용 · 나머지는 지시어 연결이 어긋남",
@@ -8226,31 +8226,31 @@
     "n": 1,
     "tx": "① However 앞 — 동기 서술 전",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 두 동기 긍정 서술 전이라 'also downsides'가 뒤집을 긍정 내용이 없음"
    },
    {
     "n": 2,
     "tx": "② 양육 동기 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ②는 양육 동기만 앞서 두 동기 긍정 서술이 미완이라 전환이 이름"
    },
    {
     "n": 3,
     "tx": "③ 자기표현 동기 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ③은 자기표현 동기 서술 직전이라 긍정 서술이 아직 안 끝남"
    },
    {
     "n": 4,
     "tx": "④ 단점 서술 앞(공백)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 ①~③의 긍정 서술 뒤 'But ... also downsides'로 단점 논의로 전환"
    },
    {
     "n": 5,
     "tx": "⑤ 아름다움 단점 앞",
     "verdict": "x",
-    "jd": "✘ 범위초과"
+    "jd": "✘ ⑤는 이미 ④에서 단점(세련미 결여) 서술로 넘어가 전환이 중복·뒤늦음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> '단점도 있다'(also+복수) → ④⑤ 두 단점을 묶음 · <span class=\"xo\">①</span>However는 동기 유도 <span class=\"xo\">②③</span>긍정 동기 서술 <span class=\"xo\">⑤</span>이미 단점 진행 중",
@@ -10415,31 +10415,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(A)'의 'the iteration'이 맨 앞이라 가리킬 '반복' 언급이 앞에 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B) 뒤 '(A)'의 'the iteration'은 (C)의 'generated by iteration'을 받아야 하나 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (B) 'Release the pendulum'이 주어진 글의 진자를 받고, (C)가 '다시 놓아도 달라짐'을, (A) 'the iteration'이 이음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'의 'No matter how much care ... same position'이 맨 앞이라 (B)의 '같은 위치서 놓음'이 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'가 첫머리라 '같은 위치서 다시 놓음'이 받을 (B)의 진자 놓기 서술이 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)-(C)-(A): 진자 작동→같은 위치라도 다른 결과→iteration으로 일반화 · <span class=\"xo\">①②④⑤</span>는 iteration 연결·지시 흐름이 끊김",
@@ -10741,31 +10741,31 @@
     "n": 1,
     "tx": "① Not that they did not exist 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 레드 색 실험·색채 세계 이야기 전이라 'Here'가 받을 맥락이 없음"
    },
    {
     "n": 2,
     "tx": "② It was with red 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ②는 'It was with red' 색 실험 도입 직전이라 'Here'가 받을 맥락이 미완"
    },
    {
     "n": 3,
     "tx": "③ Here the lexicon 앞",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 '레드 색 실험' 맥락을 'Here'가 받아 화제를 '어휘'로 열고, 뒤 'In certain languages' 사례가 뒷받침"
    },
    {
     "n": 4,
     "tx": "④ In certain languages 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④는 이미 어휘 화제가 열린 뒤라 'In certain languages' 사례 앞에 공백이 없음"
    },
    {
     "n": 5,
     "tx": "⑤ In other languages 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤는 이미 'In certain languages' 어휘 사례가 나온 뒤라 화제 열기가 뒤늦음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 삽입문이 'color terms(어휘)'를 처음 도입 → 뒤 문장 'the lexicon' 성립 · <span class=\"xo\">①②④⑤</span>는 지시어를 받쳐줄 대상 공백이 없음",
@@ -12666,31 +12666,31 @@
     "n": 2,
     "tx": "(B) － (A) － (C)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (B)가 방어 행동 예를 들고, (A)의 'That'이 이를 받아 '에너지 소모'로 평가, (C)의 'So'가 '적응'으로 정리"
    },
    {
     "n": 1,
     "tx": "(A) － (C) － (B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(A)'의 'That'이 맨 앞이라 받을 (B)의 '투구·가시 방어 행동'이 없음"
    },
    {
     "n": 3,
     "tx": "(B) － (C) － (A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B) 뒤 (C)의 'So'가 (A)의 평가 없이 결론부터 내려 정리 대상이 미완"
    },
    {
     "n": 4,
     "tx": "(C) － (A) － (B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'의 결론격 'So'가 맨 앞이라 정리할 앞 내용이 없음"
    },
    {
     "n": 5,
     "tx": "(C) － (B) － (A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(C)'의 'So'가 첫머리라 정리할 앞 설명이 전혀 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> (B)－(A)－(C) · That’s→B, So→결론(C) · <span class=\"xo\">①③④⑤</span> 지시어·연결 흐름 어긋남",
@@ -13008,31 +13008,31 @@
     "n": 5,
     "tx": "⑤ 뒤 (If they close their eyes … 다음)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 ①~④의 걷기 상상을 'all of this walking'이 총괄하고, 뒤 '눈 감고 감각 상상'으로 이어짐"
    },
    {
     "n": 1,
     "tx": "① The experience of walking 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 걷기 산술 상상이 하나도 안 나와 'all of this walking'이 총괄할 대상이 없음"
    },
    {
     "n": 2,
     "tx": "② The path starts at 0 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ②는 'path starts at 0'뿐이라 걷기 상상이 미완이라 총괄이 이름"
    },
    {
     "n": 3,
     "tx": "③ If they want to imagine 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ③은 덧셈(5+9) 상상 앞이라 아직 걷기 상상들이 다 안 나옴"
    },
    {
     "n": 4,
     "tx": "④ But that also helps 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④는 뺄셈(14-3) 상상 앞이라 'all of this walking'이 받을 상상이 미완"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> ‘all of this walking’이 앞 걷기 상상 전체를 총괄 · <span class=\"xo\">①②③④</span> 지시어가 받을 내용 미완성",
@@ -14907,31 +14907,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(A)'의 'Therefore'가 맨 앞이라 결론지을 (C)의 성공보수 방식이 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(B)'의 '합의까지 무보수'가 받을 (A)의 '수임료 두려움'이 앞에 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ '(B)'가 첫머리라 받을 앞 내용(의뢰인 두려움)이 전혀 없음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (C)가 성공보수 방식을 설명, (A)의 'Therefore'가 이를 잇고, (B)가 (A)의 '수임료 두려움'을 받아 마무리"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (C) 뒤 '(B)'의 '합의까지 무보수'가 (A)의 '높은 수임료 두려움'을 받아야 하나 아직 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)-(A)-(B): 개념 설명→Therefore 결과→두려움 해소 · <span class=\"xo\">①②③⑤</span> 지시어(In this approach·Therefore) 연결 어긋남",
@@ -15273,31 +15273,31 @@
     "n": 5,
     "tx": "④(분리 상상) → 주어진 문장(분리를 만든 방식) → ⑤(this idea)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 ④의 '급격한 단절감'을 'such a feeling'이 받아 원인(경계 나무·돌담)을 설명, 뒤 'this idea'가 그 발상을 받음"
    },
    {
     "n": 1,
     "tx": "① Indeed 문장은 앞뒤가 매끄러움",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ①은 'such a feeling'이 받을 '급격한 단절감'이 아직 안 나와 성립 안 됨"
    },
    {
     "n": 2,
     "tx": "② public space 예시 나열, 공백 없음",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ②는 public space 예시 나열이라 'such a feeling'이 받을 단절감이 없음"
    },
    {
     "n": 3,
     "tx": "③ 공원의 특징(나무·풀) 흐름 자연",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ③은 공원 특징(나무·풀) 흐름이 자연스러워 낄 공백이 없음"
    },
    {
     "n": 4,
     "tx": "④ 뒤가 아니라 앞에 근거가 필요 — 여기 넣으면 ‘such a feeling’이 앞을 잃음",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④ 앞에 넣으면 'such a feeling'이 받을 '단절감'이 ④ 문장에서야 나와 지칭 대상을 잃음"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> ④분리감 뒤 그 느낌을 만든 방식(주어진 문장)이 와야 ‘this idea’로 연결 · <span class=\"xo\">①②③④</span> 지시어 공백 없음",
@@ -17095,35 +17095,35 @@
     "n": 1,
     "tx": "enables … leaves",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 한 주제씩 탐구가 성과를 'enables(가능케)', (B) 공간이 남아 새 학습 자리를 'leaves(남김)'",
     "ko": "가능하게 하다 … 남기다"
    },
    {
     "n": 2,
     "tx": "challenges … spares",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'challenges(방해)'가 정반대—탐구는 성과를 가능케 함",
     "ko": "도전하다 … 남겨 두다"
    },
    {
     "n": 3,
     "tx": "delays … creates",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'delays(지연)'가 정반대—성과를 지연이 아니라 가능케 함",
     "ko": "지연시키다 … 만들다"
    },
    {
     "n": 4,
     "tx": "requires … removes",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'removes(제거)'가 정반대—공간은 남는다(space remains)",
     "ko": "요구하다 … 제거하다"
    },
    {
     "n": 5,
     "tx": "invites … diminishes",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'diminishes(줄임)'가 정반대—새 학습 공간이 남음",
     "ko": "유도하다 … 감소시키다"
    }
   ],
@@ -17447,31 +17447,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (A)의 'on the other hand'가 대조할 결과 중심 방식이 앞에 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (B)의 'In this way'가 정리할 협의·피드백 과정이 앞에 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)의 'In this way'가 받을 앞 과정 없이 맨 앞에 옴"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글→(C)'Such instruction' 결과 중심 규정→(A)'on the other hand' 과정 중심 대조→(B)'In this way' 정리"
    },
    {
     "n": 5,
     "tx": "(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (A) 하나만으론 'on the other hand'가 대조할 대상도 결론도 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)-(A)-(B): 전통 마무리(C)→반면 과정중심(A)→이런 식으로(B) · <span class=\"xo\">①②③⑤</span>지시어 연결이 끊김",
@@ -17778,31 +17778,31 @@
     "n": 1,
     "tx": "① Issues 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ① 자리엔 첫 방법(time horizon)이 없어 'Another'가 더할 대상이 없음"
    },
    {
     "n": 2,
     "tx": "② For example 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ② 자리도 첫 방법 전이라 'Another'가 성립 못 하고 'For example' 예시 연결도 끊음"
    },
    {
     "n": 3,
     "tx": "③ When working to 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ③ 자리는 time horizon 방법이 나오기 직전이라 'Another'의 전제가 없음"
    },
    {
     "n": 4,
     "tx": "④ Another 앞",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 time horizon(첫 방법)→'Another approach' 둘째 방법→'For example' 그 예시"
    },
    {
     "n": 5,
     "tx": "⑤ For example 앞",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤ 자리면 'For example' 예시만 남고 그 앞 'Another approach' 방법이 사라짐"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> ③(방법1: 시간지평) 뒤·⑤(그 예시) 앞에 'Another approach(방법2)' 삽입 · <span class=\"xo\">①②③⑤</span>논리 공백 없음",
@@ -19841,31 +19841,31 @@
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글→(B)'You would not be the first' 받고 질문→(A)'notations' 답→(C)'Put simply' 정리"
    },
    {
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (A)'The complicated notations'가 전제할 '무엇이 수학인가' 질문이 아직 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (C)'Put simply'가 정리할 기호 논의((A))가 앞에 없이 옴"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (C)'Put simply'가 맨 앞이라 압축할 앞 논의가 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (C)'Put simply'가 맨 앞이라 정리할 선행 논의가 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> (B)-(A)-(C) · <span class=\"xo\">①</span>(A)-(C)-(B) <span class=\"xo\">③</span>(B)-(C)-(A) <span class=\"xo\">④</span>(C)-(A)-(B) <span class=\"xo\">⑤</span>(C)-(B)-(A)",
@@ -20156,31 +20156,31 @@
     "n": 3,
     "tx": "③ (‘only a handful’ ↔ ‘But many other’ 사이)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 'only a handful'(소수만)→'But' 여러 부분 경쟁 많다로 역접→'By way of example' 암 사례"
    },
    {
     "n": 1,
     "tx": "① (부정확하다는 부연 앞)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ① 자리엔 'But'이 뒤집을 'only a handful'(소수만) 주장이 아직 없음"
    },
    {
     "n": 2,
     "tx": "② (‘only a handful’ 문장 앞)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ② 자리도 'only a handful' 문장 앞이라 'But'의 역접 대상이 없음"
    },
    {
     "n": 4,
     "tx": "④ (암 치료 예시 앞)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④ 자리면 'By way of example'가 예시할 '여러 부분 경쟁' 진술이 없음"
    },
    {
     "n": 5,
     "tx": "⑤ (마지막 결론 앞)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤ 자리는 예시까지 끝난 뒤라 'But'의 역접이 뒤늦고 대상과 멂"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> ‘소수만 존재’와 ‘But 많은 다른 경쟁’ 사이 · <span class=\"xo\">①</span> <span class=\"xo\">②</span> <span class=\"xo\">④</span> <span class=\"xo\">⑤</span> 모두 논리 공백 없음",
@@ -22077,31 +22077,31 @@
     "n": 5,
     "tx": "(C) ― (B) ― (A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글→(C)'also' 예측 검증 추가→(B)'this prediction' 받음→(A) 반대 경우 반증"
    },
    {
     "n": 1,
     "tx": "(A) ― (C) ― (B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (A)'If multicelled…before single-celled'가 받을 (B)의 '반대 경우'가 없음"
    },
    {
     "n": 2,
     "tx": "(B) ― (A) ― (C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (B)'this prediction'이 가리킬 예측((C))이 아직 없음"
    },
    {
     "n": 3,
     "tx": "(B) ― (C) ― (A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)'this prediction'이 맨 앞이라 받을 예측이 선행 안 함"
    },
    {
     "n": 4,
     "tx": "(C) ― (A) ― (B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (A)가 (C) 뒤로 오면 (A)의 '반대 경우'가 (B)의 언급보다 앞서 (B)를 건너뜀"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)예측 제시 → (B)뒷받침·'반대'복선 → (A)'만약 반대라면'으로 마무리 · <span class=\"xo\">①②③④</span> 지시어(this prediction·the opposite) 연결이 깨짐",
@@ -22429,31 +22429,31 @@
     "n": 3,
     "tx": "② die of thirst 〔③〕 First, however … → '신호' 문장 삽입",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 '잎 유지=갈증사'(위험)→'It signals to them' 낙엽 신호→'First, however' 양분 회수"
    },
    {
     "n": 1,
     "tx": "canopy 유지 위험 〔①〕 It would risk damage",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ① 자리는 낙엽 위험 설명(①②) 앞이라 'It signals to them' 신호 도입이 이름"
    },
    {
     "n": 2,
     "tx": "① winds·water 〔②〕 If it didn’t blow over",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ② 자리는 winds·물손실과 'die of thirst' 위험을 갈라 끊김 없는 곳에 끼임"
    },
    {
     "n": 4,
     "tx": "③ 신호 〔④〕 First, however (이미 연결됨)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④ 자리는 'First, however'가 이미 ③ 신호 문장과 이어져 공백이 없음"
    },
    {
     "n": 5,
     "tx": "④ 통로 차단 〔⑤〕 That blocked pathway",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤ 자리는 'That blocked pathway'가 ④ 통로 차단을 곧장 받아 공백 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> ②(위험)→〔신호: 잎 떨굴 때〕→④(First 과정 시작)로 논리 공백 메움 · <span class=\"xo\">①②④⑤</span> 대명사·순서가 이미 자연스러워 공백 없음",
@@ -24201,31 +24201,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (A)'Areas of difference'가 받을 (C)의 '차이 영역'이 아직 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (B)'In these…forms'의 '이 형태들'이 가리킬 선행이 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)'In these forms'가 맨 앞이라 지시할 협상 형태가 선행 안 함"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글(협상 정의)→(C)'purpose of negotiation' 받음→(A)'Areas of difference' 갈등 영역→(B)'In these forms' 정리"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)'In these forms'가 (A)의 적대적 협상 형태보다 앞서 'these'가 붕 뜸"
    }
   ],
   "opt_line": "<span class=\"co\">④(C)-(A)-(B)</span> outcome→conflict→In these로 연결 · <span class=\"xo\">①②③⑤</span> 지시어·흐름 불일치",
@@ -24538,31 +24538,31 @@
     "n": 1,
     "tx": "① The difference in pressures 앞",
     "verdict": "x",
-    "jd": "✘ 아직 소용돌이 '문제' 설명 중"
+    "jd": "✘ ① 'The difference in pressures'가 앞 vortex shedding을 이어받아 공백 없고 대응 도입이 이름"
    },
    {
     "n": 2,
     "tx": "② The vortices pull and push 앞",
     "verdict": "x",
-    "jd": "✘ 소용돌이의 위험(문제)이 이어짐"
+    "jd": "✘ ② 'The vortices'가 ① vortices를 직접 받아 끊김 없는 곳이라 삽입 불가"
    },
    {
     "n": 3,
     "tx": "③ Orienting 앞",
     "verdict": "ok",
-    "jd": "✔ ①② 문제 설명 뒤, ③부터 '~하면 도움이 된다'는 해결책 시작 → 해결책을 여는 주제문 자리"
+    "jd": "✔ 정답 — 앞 ①② vortex shedding 위험→'designers confuse the wind' 대응 도입→③④⑤ 'can help·likewise' 방법들"
    },
    {
     "n": 4,
     "tx": "④ Chopping or rounding off 앞",
     "verdict": "x",
-    "jd": "✘ 이미 해결책 나열 중"
+    "jd": "✘ ④ 자리는 ③ Orienting이 이미 방법 제시 중이고 'likewise'로 이어져 도입이 뒤늦음"
    },
    {
     "n": 5,
     "tx": "⑤ Roughing up the corners 앞",
     "verdict": "x",
-    "jd": "✘ 이미 해결책 나열 중"
+    "jd": "✘ ⑤ 자리는 'can help' 방법 나열이 이어져 공백 없고 대응 도입이 방법들 뒤라 뒤늦음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> ①②=소용돌이(문제) 설명 → ③부터 해결책 시작, '바람을 교란한다'는 해결책 주제문이 ③에 · <span class=\"xo\">①②</span>문제 설명 중 <span class=\"xo\">④⑤</span>이미 해결책 나열 중",
@@ -24572,34 +24572,31 @@
    "copies": []
   },
   "seq_direct": {
-   "answer": "①",
+   "answer": "③",
    "pieces": [
     {
      "label": "넣을 문장",
-     "cue": "To minimize vortex shedding / the wind",
-     "cue_kind": "대응",
-     "refers": "바로 앞에서 명명된 현상 'vortex shedding'과, 직전 문장의 'the wind'(건물 면을 때리고 갈라져 나가는 바람)",
+     "cue": "To minimize vortex shedding",
+     "refers": "앞에서 설명한 '위험할 만큼 self-sustaining해지는 vortices'(소용돌이 흘림의 위험)",
+     "link": "→ 앞 문장(위험한 vortices 서술) 뒤. 그 위험을 'minimize'하려는 설계자의 대응(해결책)을 도입",
      "en": "To minimize vortex shedding, skyscraper designers do everything in their powers to confuse the wind.",
-     "ko": "소용돌이 흘림(vortex shedding)을 최소화하기 위해, 초고층 건물 설계자들은 바람을 교란하려 온갖 힘을 다한다.",
-     "link": "→ 앞 문장(바람이 갈라져 나가며 'vortex shedding' 명명) 뒤. 그 현상과 'the wind'를 되받아 설계자의 대응을 도입"
+     "ko": "소용돌이 흘림(vortex shedding)을 최소화하기 위해, 초고층 건물 설계자들은 바람을 교란하려 온갖 힘을 다한다."
     },
     {
      "label": "앞 문장",
      "cue": "",
-     "cue_kind": "",
      "refers": "",
-     "en": "As wind meets a rectangular skyscraper it pushes on the flat face of the building before flowing around its sides, where eventually it separates from the face of the structure.",
-     "ko": "바람이 직사각형 초고층 건물과 만나면, 건물의 평평한 면을 밀친 뒤 양옆으로 흘러가고, 결국 구조물의 면에서 떨어져 나간다.",
-     "link": "→ 넣을 문장 앞. 건물 면을 때리고 갈라져 나가는 'the wind'를 서술해 넣을 문장이 받을 대상을 만듦"
+     "link": "→ 넣을 문장 앞. vortices가 건물을 위험하게 흔든다는 '문제'를 마무리해, 넣을 문장이 받을 '최소화 대상'을 만듦",
+     "en": "The vortices pull and push the building in a direction perpendicular to the wind at frequencies that can become dangerously self-sustaining.",
+     "ko": "그 소용돌이는 바람에 수직인 방향으로 건물을 밀고 당기며, 그 진동수가 위험할 만큼 스스로 지속될 수 있다."
     },
     {
      "label": "뒤 문장",
-     "cue": "The difference in pressures",
-     "cue_kind": "대응",
-     "refers": "넣을 문장이 도입한 '교란되는 그 바람'의 앞뒤 면 압력 차 메커니즘",
-     "en": "The difference in pressures on the front and back faces of the building gives rise to vortices, or spinning currents of wind, that flow downstream from the building.",
-     "ko": "건물의 앞면과 뒷면에 작용하는 압력 차이가 소용돌이, 즉 건물 하류로 흘러가는 회전하는 바람 흐름을 만들어낸다.",
-     "link": "→ 넣을 문장 뒤. 교란 대상인 바람의 압력 차 메커니즘을 이어 설명해 공백을 메움"
+     "cue": "Orienting … can help",
+     "refers": "넣을 문장이 예고한 '바람을 교란하는(confuse the wind)' 구체적 방법",
+     "link": "→ 넣을 문장 뒤. 'confuse the wind'의 첫 번째 방법(건물 방향 조정)을 'can help'로 제시",
+     "en": "Orienting the building so that the longer face of the structure is parallel with prevailing winds can help.",
+     "ko": "구조물의 더 긴 면이 탁월풍과 평행하도록 건물의 방향을 잡는 것이 도움이 될 수 있다."
     }
    ]
   },
@@ -26359,31 +26356,31 @@
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글(진화적 과거)→(C)'Even one century ago' 활동 제거→(A) 목록화 'many problems'→(B) 17개 질환"
    },
    {
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (A)의 구체 목록은 (C)의 '현대가 활동 제거'를 이어받아야 해 (C)가 앞서야 함"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ 맨 앞 (B)'17개 질환'이 구체화할 (A)의 'many problems'가 없고 시간 흐름도 깨짐"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)'17개 질환'이 맨 앞이라 받을 '문제'가 선행 안 함"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ (B)'17개 질환'이 (A)의 'many problems'보다 앞서 구체화 대상을 건너뜀"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 주어진글-(C)-(A)-(B) · these changes=(C)의 현대화 · many problems→(B) 활동부족·질병",
@@ -26742,31 +26739,31 @@
     "n": 3,
     "tx": "③ 위치",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 앞 ② junco 연구 결과→'This makes sense' 신뢰성 평가→뒤 '단독 이탈은 포식과 무관' 근거"
    },
    {
     "n": 1,
     "tx": "① 위치",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ① 자리는 'This'가 받을 junco 연구 결과(②)가 아직 없음"
    },
    {
     "n": 2,
     "tx": "② 위치",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ② 자리면 'This'가 가리킬 연구 결과가 바로 뒤라 지시어가 선행 없이 앞섬"
    },
    {
     "n": 4,
     "tx": "④ 위치",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ④ 자리는 ③'단독 이탈 무관'과 'false alarm'이 이어져 공백 없고 'This' 대상서 멂"
    },
    {
     "n": 5,
     "tx": "⑤ 위치",
     "verdict": "x",
-    "jd": "✘ 없음"
+    "jd": "✘ ⑤ 자리는 'On the other hand'가 ④를 직접 받아 공백 없고 'This' 대상서 크게 뒤늦음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> 삽입문 This=②의 연구 결과 · 이후 ③④가 '정보 신뢰성'을 구체적으로 설명",
@@ -27507,35 +27504,35 @@
     "n": 1,
     "tx": "distribution … emptiness",
     "verdict": "x",
-    "jd": "✘ (B) 'emptiness' 가 지문과 어긋남",
+    "jd": "✘ (B) 'emptiness(공허)'가 부적절—일이 주는 정서적 보상(성취감)임",
     "ko": "분배 … 공허함"
    },
    {
     "n": 2,
     "tx": "distribution … rewards",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 성장의 결실을 나눔→'distribution(분배)', (B) 일의 성취감→'rewards(보상)'",
     "ko": "분배 … 보상"
    },
    {
     "n": 3,
     "tx": "concentration … conflicts",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'concentration(집중)'이 정반대—결실을 나누는 분배를 다룸",
     "ko": "집중 … 갈등"
    },
    {
     "n": 4,
     "tx": "investment … challenges",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'investment(투자)'가 근거 없음—부의 분배가 핵심",
     "ko": "투자 … 어려움"
    },
    {
     "n": 5,
     "tx": "investment … growth",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'investment(투자)'가 근거 없음—부의 분배가 핵심",
     "ko": "투자 … 성장"
    }
   ],
@@ -27871,35 +27868,35 @@
     "n": 1,
     "tx": "improvement … diet",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'improvement(개선)'이 정반대—형질은 적응을 막는 장애물",
     "ko": "개선 … 먹이(식단)"
    },
    {
     "n": 2,
     "tx": "obstacle … surroundings",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 미래 진화를 제약→'obstacle(장애물)', (B) 변화가 이는 환경→'surroundings(환경)'",
     "ko": "장애물 … 환경"
    },
    {
     "n": 3,
     "tx": "advantage … genes",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'advantage(이점)'가 정반대—형질은 제약(constraint)으로 작용",
     "ko": "이점 … 유전자"
    },
    {
     "n": 4,
     "tx": "regulator … mechanisms",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'regulator(조절자)'가 근거 없음—적응을 막는 장애물임",
     "ko": "조절자 … 기제"
    },
    {
     "n": 5,
     "tx": "guide … traits",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'guide(안내자)'가 근거 없음—형질은 적응을 제약함",
     "ko": "안내자(지침) … 형질"
    }
   ],
@@ -28163,35 +28160,35 @@
     "n": 1,
     "tx": "necessary … inequality",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 움직일 필요 없음→'necessary(필요한)', (B) 사회적 배제→'inequality(불평등)'",
     "ko": "필요한 … 불평등"
    },
    {
     "n": 2,
     "tx": "necessary … growth",
     "verdict": "x",
-    "jd": "✘ (B) 'growth' 가 지문과 어긋남",
+    "jd": "✘ (B) 'growth(성장)'가 부적절—지문은 사회적 배제·불평등을 제기",
     "ko": "필요한 … 성장"
    },
    {
     "n": 3,
     "tx": "limited … consciousness",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'limited(제한된)'이 정반대—몸은 수동적 용기로 덜 움직임",
     "ko": "제한된 … 의식"
    },
    {
     "n": 4,
     "tx": "desirable … service",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'desirable(바람직한)' 근거없고 (B) 'service(봉사)'도 배제와 무관",
     "ko": "바람직한 … 봉사"
    },
    {
     "n": 5,
     "tx": "desirable … divide",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'desirable(바람직한)'이 근거 없음—움직임이 덜 '필요'해짐",
     "ko": "바람직한 … 격차"
    }
   ],
@@ -28500,35 +28497,35 @@
     "n": 1,
     "tx": "resurface … simplification",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'simplification(단순화)'가 근거 없음—인물은 상당히 '변함'",
     "ko": "다시 등장하다 … 단순화"
    },
    {
     "n": 2,
     "tx": "endure … degradation",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'degradation(질 저하)'가 근거 없음—단지 상당히 변할 뿐",
     "ko": "지속되다 … 질적 저하"
    },
    {
     "n": 3,
     "tx": "fade … variation",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'fade(사라지다)'가 정반대—순수문학 인물은 다시 등장하지 않을 뿐",
     "ko": "사라지다 … 변형"
    },
    {
     "n": 4,
     "tx": "feature … transformation",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 후속작에 다시 등장→'feature(등장)', (B) 상당히 변함→'transformation(변형)'",
     "ko": "특징을 이루다 … 변모"
    },
    {
     "n": 5,
     "tx": "disappear … fossilization",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'disappear(사라지다)'가 정반대—재등장 여부를 말함, (B) 'fossilization'도 반대",
     "ko": "사라지다 … 화석화"
    }
   ],
@@ -28870,35 +28867,35 @@
     "n": 1,
     "tx": "prevention … marginalized",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'prevention(예방)'이 부적절—질병은 예방이 아니라 방치됨",
     "ko": "예방 … 소외된"
    },
    {
     "n": 2,
     "tx": "spread … general",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'spread(확산)' 근거없고 (B) 'general(일반)'은 소외 계층과 정반대",
     "ko": "확산 … 일반적인"
    },
    {
     "n": 3,
     "tx": "overlook … native",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'native(원주민)'가 근거 없음—전통적으로 방치된 소외 계층임",
     "ko": "간과 … 토착의"
    },
    {
     "n": 4,
     "tx": "ignorance … wealthy",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'wealthy(부유한)'가 정반대—방치된 이들은 지불 못하는 빈곤층",
     "ko": "무시 … 부유한"
    },
    {
     "n": 5,
     "tx": "disregard … underserved",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 질병이 방치됨→'disregard(무시)', (B) 방치된 인구→'underserved(소외된)'",
     "ko": "도외시 … 소외된, 서비스를 충분히 받지 못하는"
    }
   ],
@@ -29192,35 +29189,35 @@
     "n": 1,
     "tx": "persisted … cultivate",
     "verdict": "x",
-    "jd": "✘ (B) 'cultivate' 가 지문과 어긋남",
+    "jd": "✘ (B) 'cultivate(기르다)'가 정반대—조건이 장인정신을 가로막음",
     "ko": "지속되어 왔다 … 계발하다, 기르다"
    },
    {
     "n": 2,
     "tx": "persisted … limit",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ (A) 지속적 인간 충동→'persisted(지속)', (B) 발전을 가로막음→'limit(제약)'",
     "ko": "지속되어 왔다 … 제한하다"
    },
    {
     "n": 3,
     "tx": "evolved … accelerate",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'evolved(진화)' 근거없고 (B) 'accelerate(촉진)'는 제약과 정반대",
     "ko": "진화했다 … 가속하다"
    },
    {
     "n": 4,
     "tx": "diminished … shape",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'diminished(쇠퇴)'가 정반대—쇠퇴했다는 건 오해, 지속됨",
     "ko": "쇠퇴했다 … 형성하다"
    },
    {
     "n": 5,
     "tx": "diminished … restrict",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'diminished(쇠퇴)'가 정반대—장인정신은 사라지지 않고 지속됨",
     "ko": "쇠퇴했다 … 제한하다"
    }
   ],
@@ -40278,35 +40275,35 @@
     "n": 1,
     "tx": "unstable … confirmation",
     "verdict": "x",
-    "jd": "✘ (A) 'unstable'가 지문과 어긋남",
+    "jd": "✘ (A) 'unstable(불안정한)'가 소유권의 '영속성(the permanence of their claim)'과 정반대",
     "ko": "불안정한 … 확인"
    },
    {
     "n": 2,
     "tx": "unstable … exaggeration",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'unstable(불안정한)'가 '영속성(permanence)'과 정반대",
     "ko": "불안정한 … 과장"
    },
    {
     "n": 3,
     "tx": "lasting … exhibition",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) 소유권의 '영속성(the permanence of their claim)'을 lasting으로, (B) '애국적 행위(a patriotic act)'로 여겨진 나무 심기를 exhibition으로",
     "ko": "지속되는 … 표현(과시)"
    },
    {
     "n": 4,
     "tx": "lasting … manipulation",
     "verdict": "x",
-    "jd": "✘ (B) 'manipulation'이 지문과 어긋남",
+    "jd": "✘ (A) lasting은 맞으나 (B) 'manipulation(조작)'이 '애국적 행위'와 무관·근거 없음",
     "ko": "지속되는 … 조작"
    },
    {
     "n": 5,
     "tx": "official … justification",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'official(공식적)'이 '영속성'과 안 맞고 (B) 'justification'도 근거 없음",
     "ko": "공식적인 … 정당화"
    }
   ],
@@ -40543,35 +40540,35 @@
     "n": 1,
     "tx": "least … patterns",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) '최소한의 수의 일반화(a minimal number of generalizations)'를 least로, (B) 메커니즘이 '만들어내는 규칙성(produce the regularities)'을 patterns로",
     "ko": "가장 적은(수의) … 패턴, 양상"
    },
    {
     "n": 2,
     "tx": "fixed … features",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'fixed(고정된)'가 '최소한의 수'와 안 맞고 (B) 'features'도 '규칙성'과 다름",
     "ko": "고정된 … 특징"
    },
    {
     "n": 3,
     "tx": "limited … functions",
     "verdict": "x",
-    "jd": "✘ (B) 'functions'가 지문과 어긋남",
+    "jd": "✘ (A) 'limited(제한된)'가 '최소한(minimal)'과 어긋나고 (B) 'functions'도 '규칙성'과 다름",
     "ko": "제한된 … 기능"
    },
    {
     "n": 4,
     "tx": "fixed … rules",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'fixed(고정된)'가 '최소한의 수'와 안 맞고 (B) 'rules'도 '규칙성'과 다름",
     "ko": "고정된 … 규칙"
    },
    {
     "n": 5,
     "tx": "least … assumptions",
     "verdict": "x",
-    "jd": "✘ (A)는 맞으나 (B) 'assumptions'가 지문과 어긋남",
+    "jd": "✘ (A) least는 맞으나 (B) 'assumptions(가정)'이 '규칙성(regularities)'과 무관",
     "ko": "가장 적은(수의) … 가정, 전제"
    }
   ],
@@ -40830,35 +40827,35 @@
     "n": 1,
     "tx": "size … coordinate",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) '더 큰 규모의 프로젝트(larger-scale projects)'를 size로, (B) '관리 조직과 과정(management organization and processes)'을 coordinate로",
     "ko": "규모 … 조정하다"
    },
    {
     "n": 2,
     "tx": "cost … systematize",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'cost(비용)'가 지문의 '규모(scale)'와 무관하고 (B) 'systematize'도 근거 없음",
     "ko": "비용 … 체계화하다"
    },
    {
     "n": 3,
     "tx": "size … identify",
     "verdict": "x",
-    "jd": "✘ (B) 'identify'가 지문과 어긋남",
+    "jd": "✘ (A) size는 맞으나 (B) 'identify(식별)'가 '관리·조정' 역할과 다름",
     "ko": "규모 … 확인하다"
    },
    {
     "n": 4,
     "tx": "cost … innovate",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'cost(비용)'가 '규모'와 무관하고 (B) 'innovate'도 관리자 역할과 다름",
     "ko": "비용 … 혁신하다"
    },
    {
     "n": 5,
     "tx": "goal … investigate",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (A) 'goal(목표)'이 '규모'와 무관하고 (B) 'investigate'도 근거 없음",
     "ko": "목표 … 조사하다"
    }
   ],
@@ -41106,35 +41103,35 @@
     "n": 1,
     "tx": "insignificant … delay",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'delay(지연)'가 '살을 붙여 풍부하게 함(enrich)'과 정반대 (A insignificant도 '증거 부족'과 다름)",
     "ko": "미미한, 하찮은 … 지연시키다"
    },
    {
     "n": 2,
     "tx": "insufficient … enrich",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) '적절한 증거의 부족(for lack of appropriate evidence)'을 insufficient로, (B) '앙상한 뼈대에 살을 붙임(flesh to the bare bones)'을 enrich로",
     "ko": "불충분한 … 풍부하게 하다"
    },
    {
     "n": 3,
     "tx": "concrete … enhance",
     "verdict": "x",
-    "jd": "✘ (A) 'concrete'가 지문과 어긋남",
+    "jd": "✘ (A) 'concrete(구체적)'가 '증거 부족(lack of evidence)'과 정반대",
     "ko": "구체적인 … 향상시키다"
    },
    {
     "n": 4,
     "tx": "outdated … improve",
     "verdict": "x",
-    "jd": "✘ (A) 'outdated'가 지문과 어긋남",
+    "jd": "✘ (A) 'outdated(구식의)'가 '증거 부족(lack of evidence)'과 무관",
     "ko": "시대에 뒤진 … 개선하다"
    },
    {
     "n": 5,
     "tx": "limited … disturb",
     "verdict": "x",
-    "jd": "✘ (B) 'disturb'가 지문과 어긋남",
+    "jd": "✘ (B) 'disturb(방해)'가 '풍부하게 함(enrich)'과 정반대",
     "ko": "제한된 … 방해하다"
    }
   ],
@@ -41379,35 +41376,35 @@
     "n": 1,
     "tx": "productive … complicated",
     "verdict": "x",
-    "jd": "✘ (B) 'complicated'가 지문과 어긋남",
+    "jd": "✘ (B) 'complicated(복잡한)'가 '직접적 공적 지원이 필수'라는 요지와 어긋남",
     "ko": "생산적인 … 복잡한"
    },
    {
     "n": 2,
     "tx": "fruitful … critical",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) 기여가 '부정될 수 없다(cannot be denied)'를 fruitful로, (B) '직접적 공적 지원(direct public support)'의 필수성을 critical로",
     "ko": "결실 있는 … 매우 중요한"
    },
    {
     "n": 3,
     "tx": "dominant … comprehensive",
     "verdict": "x",
-    "jd": "✘ (A) 'dominant'이 지문과 어긋남",
+    "jd": "✘ (A) 'dominant(지배적)'가 성장은 '기껏해야 작은 부분만 설명'한다는 지문과 정반대",
     "ko": "지배적인 … 포괄적인"
    },
    {
     "n": 4,
     "tx": "restrictive … appropriate",
     "verdict": "x",
-    "jd": "✘ (A) 'restrictive'가 지문과 어긋남",
+    "jd": "✘ (A) 'restrictive(제한적)'가 기여를 '부정할 수 없다'는 긍정과 어긋남",
     "ko": "제한적인 … 적절한"
    },
    {
     "n": 5,
     "tx": "desirable … cost-effective",
     "verdict": "x",
-    "jd": "✘ (B) 'cost-effective'가 지문과 어긋남",
+    "jd": "✘ (B) 'cost-effective(비용 효율적)'가 근거 없음 (A desirable는 근접)",
     "ko": "바람직한 … 비용 효율적인"
    }
   ],
@@ -41640,35 +41637,35 @@
     "n": 1,
     "tx": "represents … finite",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) 동물의 '하나의 신호로 하나의 메시지(one call for one message)'를 represents로, (B) '제한된 수의 소리(a restricted number of sounds)'를 finite로",
     "ko": "나타낸다 … 유한한"
    },
    {
     "n": 2,
     "tx": "symbolizes … universal",
     "verdict": "x",
-    "jd": "✘ (B) 'universal'이 지문과 어긋남",
+    "jd": "✘ (B) 'universal(보편적)'이 '제한된 수(restricted·finite)'와 다름",
     "ko": "상징한다 … 보편적인"
    },
    {
     "n": 3,
     "tx": "distorts … fixed",
     "verdict": "x",
-    "jd": "✘ (A) 'distorts'가 지문과 어긋남",
+    "jd": "✘ (A) 'distorts(왜곡)'가 '하나의 신호가 하나의 메시지를 나타냄'과 어긋남",
     "ko": "왜곡한다 … 고정된"
    },
    {
     "n": 4,
     "tx": "expresses … novel",
     "verdict": "x",
-    "jd": "✘ (B) 'novel'이 지문과 어긋남",
+    "jd": "✘ (B) 'novel(새로운)'이 '제한된 수(finite)'와 무관",
     "ko": "표현한다 … 새로운"
    },
    {
     "n": 5,
     "tx": "records … complex",
     "verdict": "x",
-    "jd": "✘ (A)·(B) 모두 지문과 어긋남",
+    "jd": "✘ (B) 'complex(복잡한)'가 '제한된 수(finite)'와 다름",
     "ko": "기록한다 … 복잡한"
    }
   ],
@@ -41906,35 +41903,35 @@
     "n": 1,
     "tx": "controllability … challenge",
     "verdict": "ok",
-    "jd": "✔ 지문 핵심과 일치",
+    "jd": "✔ 정답 — (A) '정밀하게 통제된 방식(precisely controlled fashion)'을 controllability로, (B) '항상 그런 것은 아니다(this is not always the case)'를 challenge로",
     "ko": "통제 가능성 … 어렵게 하다(난제)"
    },
    {
     "n": 2,
     "tx": "predictability … support",
     "verdict": "x",
-    "jd": "✘ (B) 'support'가 지문과 어긋남",
+    "jd": "✘ (B) 'support(뒷받침)'가 가정에 '도전(challenge)'하는 요지와 정반대",
     "ko": "예측 가능성 … 뒷받침하다"
    },
    {
     "n": 3,
     "tx": "manageability … intensify",
     "verdict": "x",
-    "jd": "✘ (B) 'intensify'가 지문과 어긋남",
+    "jd": "✘ (B) 'intensify(강화)'가 가정을 강화하는 뜻이라 '도전(challenge)'과 어긋남",
     "ko": "관리 용이성 … 심화시키다"
    },
    {
     "n": 4,
     "tx": "affordability … reverse",
     "verdict": "x",
-    "jd": "✘ (A) 'affordability'가 지문과 어긋남",
+    "jd": "✘ (A) 'affordability(가격 적정성)'가 '통제 가능성(controlled)'과 무관",
     "ko": "저렴함 … 뒤집다"
    },
    {
     "n": 5,
     "tx": "accessibility … question",
     "verdict": "x",
-    "jd": "✘ (A) 'accessibility'가 지문과 어긋남",
+    "jd": "✘ (A) 'accessibility(접근성)'가 '통제 가능성(controllability)'과 다름",
     "ko": "접근성 … 의문시하다"
    }
   ],
@@ -58438,31 +58435,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글(랜드마크)→(A) 실험 설정→(C)'The remarkable finding' 결과→(B)'This asymmetry' 결론"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 맨 앞 (B)'This asymmetry'가 가리킬 비대칭 결과가 아직 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)'This asymmetry'가 맨 앞이라 받을 결과가 선행 안 함"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'The remarkable finding'이 (A) 실험 설정보다 앞서 결과의 근거 실험이 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 결과가 맨 앞이고 (B)'This asymmetry'도 실험 전이라 순서가 뒤엉킴"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> (A)실험 설정→(C)The remarkable finding 결과→(B)This asymmetry 참조 · <span class=\"xo\">②③④⑤</span> 지시어 연결 어긋남",
@@ -58597,31 +58594,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 맨 앞 (A)'something totally new, however'가 대조할 (B)의 '조금 새로움'이 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 맨 앞 (B)'The adjustments'가 받을 (C)의 '패턴 수정'이 아직 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)'The adjustments'가 맨 앞이라 가리킬 '패턴 수정'이 선행 안 함"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)'totally new, however'가 (B)의 '조금 새로움' 앞서 와 대조 대상을 건너뜀"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글(사실 목록 가정)→(C)'Each fact'…'however' 패턴 도입→(B)'The adjustments' 받음→(A)'however' 완전 새로움 대조"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)Each fact 가정 이음+however 패턴→(B)The adjustments smallest→(A)totally new however · <span class=\"xo\">①②③④</span> 지시어 연결 어긋남",
@@ -58760,31 +58757,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)는 긍정 기능 결론이라 'However'로 전환한 (C)가 앞서야 하는데 맨 앞에 옴"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)의 긍정적 '이득'이 'However'로 부정→긍정 전환한 (C)보다 먼저 나와 근거 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 자의식 → (B)가 '타인 의식'으로 구체화 → (C) 'However' 긍정 전환 → (A) 집단 결속으로 마무리"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)가 'However'로 시작하는데 뒤집을 부정적 내용((B))이 앞에 없어 맨 앞 불가"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'However'가 맨 앞이라 반전할 앞 내용이 없음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)타인 의식이 원인→(C)However 긍정적 기능→(A)Maybe 집단 결속 이득 · <span class=\"xo\">①②④⑤</span> 지시어 연결 어긋남",
@@ -58938,31 +58935,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'also'가 더할 '두려움 완화 조치'가 도입부(두려움 유발)엔 없어 너무 이름"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ①'ease fears'→②'For example' 예시 흐름이 끊기지 않아 삽입 공백 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②③ 완화책 나열이 이어져 'also' 추가가 낄 논리 공백 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 뒤 'Since'(⑤)의 '새 직무 이동'이 넣을 문장 '재교육'을 받아야 하는데 ④ 앞이면 ⑤와 떨어짐"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ④ 완화 조치 뒤 'also'가 재교육을 더하고, '새 직무 재교육'이 ⑤ 'Since' 재배치로 이어짐"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> also=또 다른 두려움 완화책, retraining for new positions가 ⑤의 '재배치'로 이어짐 · <span class=\"xo\">①②③④</span> 재배치 설명이 아직 없어 지시 대상 부재",
@@ -59103,31 +59100,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'If not'이 부정할 조건(④ 구별 시스템)이 ① 앞엔 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②는 구별 필요성만 말할 뿐 ④의 '구별 시스템' 조건이 아니라 'If not'이 이름"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③ 눈·팔 장착 단계엔 'If not'이 부정할 조건이 아직 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④가 바로 'built-in system' 조건이라 'If not'은 ④ 뒤여야 하며 ④ 앞은 조건 없음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ④ '구별 시스템 필요' 조건 → 'If not'이 부정 → ⑤가 '자기 좇는 순환 행동'으로 부연"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> If not=④의 '자기/블록 구별 시스템'이 없을 경우, ⑤의 '자기 중심적 순환 행동'이 그 결과를 부연 · <span class=\"xo\">①②③④</span> '없을 경우'가 가리킬 조건이 아직 없음",
@@ -59272,31 +59269,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'This active involvement'가 받을 '미학적 태도'가 ① 앞엔 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②엔 'This active involvement'가 가리킬 능동적 관여 선행어가 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③ 표현주의 작품 설명엔 'This active involvement'의 지시 대상이 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④가 '미학적 태도 필요'를 도입하므로 'This ~'는 ④ 뒤여야 하고 ④ 앞은 지시 대상 없음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ④ '미학적 태도 필요' → 'This active involvement'가 그것을 받음 → ⑤ 삶의 균형으로 마무리"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> This active involvement=④의 '작품 감상에 필요한 미학적 태도(능동적 관여)'를 받아 깊이 있는 미학적 처리로 이음 · <span class=\"xo\">①②③④</span> 능동적 관여를 가리킬 앞 내용이 아직 없음",
@@ -59426,31 +59423,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'such green taxes'가 받을 과세 방식((B))이 앞에 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 'increasing prices' → (B) 과세로 가격 상승 → (A) 'such'로 예시 → (C) 'The results' 결과"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'The results'가 받을 (A) 예시 없이 (B) 뒤 바로 와 결과의 원인 없음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'The results'가 맨 앞이라 정리할 앞 예시·원인이 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'The results'가 맨 앞이라 결과를 낳은 앞 내용이 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> (B)increasing prices 되받음→(A)such green taxes 예시→(C)The results 결과 · <span class=\"xo\">①③④⑤</span> 지시어 연결 어긋남",
@@ -59581,31 +59578,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'Similarly'가 병렬할 앞 사례((B) 농부 부정)가 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'reputations act as a bond'의 평판이 (C)에서 정의되기 전이라 근거 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)가 맨 앞이라 'reputations'를 세울 (C)가 뒤로 밀려 지시 대상 없음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'Similarly'가 병렬할 (B)의 농부 부정이 아직 안 나와 대상 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 '평판 자본' → (C) 평판 형성 → (B) 평판이 담보·농부 부정 → (A) 'Similarly' 지주 부정 병렬"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)reputations 등장→(B)reputations act as a bond·농부 부정→(A)Similarly 지주 부정 · <span class=\"xo\">①②③④</span> 지시어 연결 어긋남",
@@ -59744,31 +59741,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'In contrast'가 대조할 앞((B) 위험 감수)이 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'this area'가 가리킬 (C)의 기억·반응 논의가 앞에 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)가 맨 앞이라 'this area'가 받을 (C) 내용이 뒤에 있어 지시 어긋남"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'In contrast'가 대조할 (B)의 위험 감수가 아직 안 나옴"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 정원사 상황 → (C) 'But' 정원사 없는 경우 → (B) 'this area' 위험 감수 → (A) 'In contrast' 위험 회피"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)But 관리자 없을 때→(B)Research in this area 위험 감수→(A)In contrast 위험 회피 · <span class=\"xo\">①②③④</span> 지시어 연결 어긋남",
@@ -59918,31 +59915,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'Also'가 더할 살충제 문제가 ① 앞(유익하다는 시각)엔 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②도 살충제를 최선책으로 보는 긍정 흐름이라 'Also' 문제 추가 대상 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③ 'Since that time' 부정 전환 앞이라 'Also'가 더할 문제가 아직 없고 ②③ 흐름 끊김"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ③ 살충제 해로운 효과 → 'Also'가 개발 난항 추가 → ④ 고비용 승인이 그 이유로 이어짐"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④ 고비용이 넣을 문장 '개발 난항'의 이유라 그 앞이어야 하고, ⑤ 'Consequently' 결론 뒤면 늦음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> '해로운 효과'(③) 뒤에 'Also 새 살충제 개발도 어렵다'가 이어지고 'Very high costs'가 그 이유로 뒤따름 · <span class=\"xo\">①②③⑤</span> 'Also'가 받을 앞 문제나 뒤 이유가 맞지 않음",
@@ -60087,31 +60084,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'however'가 뒤집을 비밀 유지의 이점이 ① 앞엔 아직 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②는 비밀 유지 이점의 시작이라 'however' 반전이 이르고 ②③ 'also' 흐름 끊김"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③ 'They might also believe'가 이점을 마저 드는 중이라 'however' 반전 이름"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ③까지 비밀 유지 이점 → 'however'가 유출 위험으로 반전 → ④ 'Once released'가 위험 실현"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④ 'Once the idea is released'가 이미 유출 위험을 전제해 넣을 문장이 ④ 뒤면 근거가 늦음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 비밀 유지 이점 나열(③) 뒤 'however 법적 보호 없으면 유출 위험'이 오고 'Once released·Such a predicament'가 그 결과를 받음 · <span class=\"xo\">①②③⑤</span> 반전의 'however'가 들어갈 자리와 안 맞음",
@@ -60252,31 +60249,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'Unfortunately'가 뒤집을 예측 요구가 ① 앞엔 없고 'at the scales'가 받을 대상도 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②는 확신 필요만 말해 넣을 문장 'at the scales'가 받을 예측 요구가 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③가 예측 능력을 요구하므로 'Unfortunately' 반전은 ③ 뒤여야 하고 ③ 앞은 대상 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ③ 예측 능력 요구 → 'Unfortunately'가 예측 불가로 반전 → ④ 'To illustrate this'가 예시"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④ 'To illustrate this'의 'this'가 넣을 문장 예측 불가를 받아야 하는데 ④ 뒤면 지시 대상 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> '예측 능력 필요'(③) 뒤 'Unfortunately ... 미래는 예측 불가'가 반전으로 오고 'To illustrate this'가 그 불확실성을 예시 · <span class=\"xo\">①②③⑤</span> 'this'가 받을 예측 불가 진술이 없음",
@@ -60402,31 +60399,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'Then the upper gates'가 이어받을 앞 절차가 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'the upper gates'가 (C)에서 갑문·문이 소개되기 전이라 지시 대상 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)가 맨 앞이라 'upper gates'를 정의할 (C)가 뒤로 밀려 어긋남"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'Then'이 받을 (B)의 물 차오름 단계가 앞에 없이 (C) 뒤 바로 옴"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 수위 차 → (C) 갑문·문 도입 → (B) 'upper gates' 상류 통행 → (A) 'Then' 문 열림"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)록설비도입→(B)상류로 물 채움→(A)Then 문 열림 · <span class=\"xo\">①②③④</span> 지시어·순서 연결 어긋남",
@@ -60565,31 +60562,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'The back-and-forth'가 받을 방어-대응 주고받기가 앞에 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'same-species neighbors'가 (C)의 '혼자가 아니다'를 받기 전이라 근거 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)가 맨 앞이라 협력을 예고할 (C)의 '혼자가 아니다'가 뒤로 밀려 어긋남"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'The back-and-forth'가 요약할 (B) 이웃·천적 응수가 아직 안 나옴"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 화학 방어 → (C) 구조 방어+'혼자 아니다' → (B) 이웃 협력 → (A) 'The back-and-forth' 마무리"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)구조적 방어+'혼자가 아니다'→(B)이웃·천적과 협력→(A)The back-and-forth 마무리 · <span class=\"xo\">①②③④</span> 지시어 연결 어긋남",
@@ -60728,31 +60725,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)의 'Their'가 받을 (C)의 learning facilitators가 앞에 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)의 'Their'가 가리킬 (C)의 learning facilitators가 아직 안 나와 지칭 실패"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 → 'For example'(B)로 관행 예시 → (C) HRD가 촉진자로 → 'Their'(A)가 그 촉진자 받음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 관행을 예시하는 'For example'(B)를 건너뛰고 (C)부터 시작해 흐름 단절"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 먼저면 'For example'(B) 예시 대상이 밀리고 'Their'(A)도 촉진자 직후가 아님"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)For example 관행 예시→(C)HRD가 촉진자로 변화→(A)Their role 역할 설명 · <span class=\"xo\">①②④⑤</span> 지시어·예시 연결 어긋남",
@@ -60910,31 +60907,31 @@
     "n": 1,
     "tx": "① we tend to see any collection ... / However, social psychologists",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 삽입문 'they'가 받을 'social psychologists'가 ① 앞엔 아직 없어 지칭 실패"
    },
    {
     "n": 2,
     "tx": "② However, social psychologists use this term more precisely. / It is this sense of mutual interaction",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 'they'가 앞 'social psychologists'를 받고, 뒤 'this sense of mutual interaction'이 삽입문의 상호작용 정의를 받음"
    },
    {
     "n": 3,
     "tx": "③ It is this sense of mutual interaction ... / For example, Kenneth Hodge",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'this sense of mutual interaction'(②)이 삽입문보다 먼저 나와 받을 대상이 없어짐"
    },
    {
     "n": 4,
     "tx": "④ For example ... swimmers / By contrast, a squad",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'For example' 예시(swimmers) 뒤라 집단 정의가 뒤늦고 'they'도 멀어짐"
    },
    {
     "n": 5,
     "tx": "⑤ By contrast, a squad ... / It is this sense ... defines a “team”",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'By contrast' 예시까지 끝난 뒤라 정의가 뒤늦고 'this sense' 문장도 이미 지남"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> 'social psychologists' 뒤에서 'they define a group'가 그들을 받고, 뒤 문장 'this sense of mutual interaction'이 삽입문의 정의를 받음 · <span class=\"xo\">①③④⑤</span> 지시 대상 없음",
@@ -61079,31 +61076,31 @@
     "n": 1,
     "tx": "① sleep ... still under study / One possibility ... decreased metabolism",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 삽입문 'This'가 받을 '수면=중요기능' 내용이 ① 앞에 없어 성립 안 함"
    },
    {
     "n": 2,
     "tx": "② One possibility ... / This seems true for ... hibernation",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'This'가 받을 '중요기능 제공'이 아직 안 나옴(②는 대사저하 가설의 예)"
    },
    {
     "n": 3,
     "tx": "③ This seems true ... / It may be true in daily situations",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'This'가 받을 대상이 여전히 없음(③도 대사저하 가설 범위)"
    },
    {
     "n": 4,
     "tx": "④ It may be true ... / On the other hand, the apparent universality",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'This'가 받을 '중요기능'(④)이 아직 뒤에 있어 대상보다 먼저 놓임"
    },
    {
     "n": 5,
     "tx": "⑤ On the other hand ... vital service(s) / If sleep is universal even when this potential price",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 'This'가 ④의 '수면=중요기능'을 받고, 뒤 'this potential price'가 삽입문의 반응성 저하를 받음"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> ④ '수면이 중요 기능을 준다' 뒤에서 삽입문이 '대가(반응성 저하)'를 도입, 뒤 문장 'this potential price'가 이를 받음 · <span class=\"xo\">①②③④</span> 'price'의 지시 대상 아직 없음",
@@ -61244,31 +61241,31 @@
     "n": 1,
     "tx": "① process-oriented perspective / The focus ... lifespan or lifecycle",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'In reality'가 반박할 선형모형·불완전 지적이 ① 앞엔 아직 없음"
    },
    {
     "n": 2,
     "tx": "② The focus ... lifecycle / In this context ... prolong the existence",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 선형모형 제시 중이고 '불완전' 평가(③) 전이라 'In reality' 반박이 이름"
    },
    {
     "n": 3,
     "tx": "③ In this context ... / Krebs and Weber ... incomplete definition",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'incomplete definition' 지적(③) 전이라 'In reality'가 반박할 대상 없음"
    },
    {
     "n": 4,
     "tx": "④ Krebs and Weber ... incomplete definition / Additionally, objects may enter recycling",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ③의 '불완전한 정의'를 'In reality'가 반박, 뒤 'Additionally'가 삽입문의 비선형 목록에 항목 추가"
    },
    {
     "n": 5,
     "tx": "⑤ Additionally ... second-hand cycles / As such, the life of an object",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'Additionally'(④)가 이미 지난 뒤라 삽입문이 뒤늦고 추가할 목록이 없어짐"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> ③ '기존 생애주기 이해는 불완전' 뒤에서 삽입문 'In reality ... not conform to a linear lifecycle'이 이어지고, 뒤 문장 'Additionally'가 비선형 사례를 덧붙임 · <span class=\"xo\">①②③⑤</span> 연결 어긋남",
@@ -61394,31 +61391,31 @@
     "n": 1,
     "tx": "(A) －(C) －(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'this code'가 받을 코드 설명이 앞에 없어 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B) －(A) －(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)의 'This is the basis'·'these computer bugs'가 받을 버그(A)가 아직 안 나옴"
    },
    {
     "n": 3,
     "tx": "(B) －(C) －(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 시작 시 'these computer bugs'의 선행 대상이 없어 성립 안 함"
    },
    {
     "n": 4,
     "tx": "(C) －(A) －(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (C) 'Physical things'가 주어진 글 코드화 구체화 → (A) 'this code' 오류 증가 → (B) 'these computer bugs' 마무리"
    },
    {
     "n": 5,
     "tx": "(C) －(B) －(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'these computer bugs'가 (A)의 버그 설명보다 먼저 와 지칭 실패"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)물질이 코드화→(A)this code 오류 증가→(B)This is the basis 멀웨어 · <span class=\"xo\">①②③⑤</span> 지시어 연결 어긋남",
@@ -61557,31 +61554,31 @@
     "n": 1,
     "tx": "(A) －(C) －(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'This second outcome'가 받을 '두 결과' 제시(B)가 앞에 없음"
    },
    {
     "n": 2,
     "tx": "(B) －(A) －(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)가 주어진 글 뒤 바로 오면 'But'(C)의 저가철강 도입 없이 'shipyards' 전제가 붙어 비약"
    },
    {
     "n": 3,
     "tx": "(B) －(C) －(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 시작 시 주어진 글에 없는 steel을 전제 → 'But'(C)의 철강 도입이 뒤로 밀림"
    },
    {
     "n": 4,
     "tx": "(C) －(A) －(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'This second outcome'가 받을 '두 결과'(B)가 아직 뒤에 있어 지칭 실패"
    },
    {
     "n": 5,
     "tx": "(C) －(B) －(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 'But'(C)이 저가철강 조건 추가 → (B) 두 결과(multiple equilibria) → 'This second outcome'(A) 열거"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)But 철강 조건→(B)두 균형 제시→(A)좋은·나쁜 결과 · <span class=\"xo\">①②③④</span> 지시어·연결어 어긋남",
@@ -61716,31 +61713,31 @@
     "n": 1,
     "tx": "(A) －(C) －(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'pre-emptive action'이 받을 (C)의 예측·회피 메커니즘 없이 맨 앞 불가"
    },
    {
     "n": 2,
     "tx": "(B) －(A) －(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'pre-emptive action'이 (C)의 '예측·회피' 도입 전이라 근거 없음"
    },
    {
     "n": 3,
     "tx": "(B) －(C) －(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (B) 사후 치유·면역 → 'however'(C)로 사전 대비 대조 → 'pre-emptive action'(A) 구체화"
    },
    {
     "n": 4,
     "tx": "(C) －(A) －(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'however'가 대조할 (B)의 사후 치유가 앞에 없어 대조 성립 안 함"
    },
    {
     "n": 5,
     "tx": "(C) －(B) －(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 'however'가 대조할 사후 대응(B)이 아직 안 나와 맨 앞 대조 불가"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)사후 치유→(C)however 사전 대비→(A)pre-emptive 미래 대비 · <span class=\"xo\">①②④⑤</span> however·pre-emptive 연결 어긋남",
@@ -61890,31 +61887,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 삽입문 'Instead'가 뒤집을 부정문('공식교육 안 받음')이 ① 앞엔 아직 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ②는 formal character 얘기라 'Instead'가 뒤집을 부정문이 아직 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ③도 ④의 '공식교육 안 받음' 앞이라 'Instead'가 받을 부정문 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ④ 앞이라 'Instead'가 뒤집을 '공식교육 안 받음'이 아직 안 나옴"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 'Instead'가 ④의 부정('공식교육 안 받음')을 뒤집고, 'these values'(⑤)가 삽입문의 도덕적 가치를 받음"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> ④ '공식 교육 안 받는다' 뒤에 'Instead ... socialization'이 오고 ⑤ 'these values'가 그 도덕적 가치를 받음 · <span class=\"xo\">①②③④</span> 'these values'가 받을 대상 없음",
@@ -62055,31 +62052,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ① 뒤는 ②로 이어져 'such an illusion'(④)이 삽입문의 환상을 바로 못 받음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ②에 넣어도 ③ 문장이 껴 'such an illusion'(④)이 삽입문을 직접 못 받음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ③에 넣으면 ③ 문장이 삽입문과 ④ 사이를 갈라 'such an illusion' 지칭이 흐려짐"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 삽입문의 '환상을 현실로 착각 못 함' 뒤에 'But ... such an illusion'(④)이 그 환상을 받음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 맨 뒤라 'such an illusion'(④)이 삽입문보다 먼저 나와 지칭 실패, 인용문 앞엔 공백도 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> 삽입문 '환상을 현실로 착각할 수 없었다' 뒤에 ④ 'But ... just such an illusion'이 이어짐 · <span class=\"xo\">①②③⑤</span> 'such an illusion'이 받을 환상 설정 없음",
@@ -62224,31 +62221,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 삽입문 'The problem of survival'가 받을 'that have survived'(①)가 아직 안 나옴"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ①의 'that have survived'를 받아 '생존≠중요' 제기 → 피라미드 예시(②)가 예증"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 피라미드 예시(②)가 문제 제기 없이 먼저 나오고 'These buildings'(③)와 어긋남"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 삽입문이 뒤늦어 'They are historical facts'(④) 흐름을 끊고 피라미드 예시도 이미 지남"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 맨 뒤라 '생존의 문제' 제기가 결론(⑤) 뒤로 밀려 논리 공백이 없음"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> ① '살아남은 자료' 뒤에 '살아남음≠중요성' 삽입문이 오고 ② 피라미드 예시가 이를 예증 · <span class=\"xo\">①③④⑤</span> 생존 문제 도입 자리 아님",
@@ -62378,31 +62375,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)-(C)-(B)면 (B) 'these tasks'가 (A)의 분류작업과 (C)에 갈려 인접 지칭 실패"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'these tasks'가 받을 (A)의 분류작업이 아직 안 나와 맨 앞 지칭 실패"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'these tasks'가 받을 분류작업(A)이 앞에 없어 성립 안 함"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (C)가 'stereotype'을 일반화로 재정의 → (A) 빠른 분류가 그 토대 → (B) 'these tasks'가 그 분류 받음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'these tasks'가 (A)의 분류작업보다 먼저 와 지칭 대상 없음"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> (C)고정관념 재정의→(A)분류 메커니즘→(B)these tasks가 (A)를 받음 · <span class=\"xo\">①②③⑤</span> 지시어 연결 어긋남",
@@ -62537,31 +62534,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'The author'가 받을 (B)의 'another consciousness'가 아직 뒤라 지칭 실패"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 'mind as filter'가 (C)의 '정신의 조직' 도입 없이 앞서고 (A) 'author'도 근거 부족"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B) 시작 시 (C)의 '실제 세계=혼돈' 전제 없이 '필터'가 먼저 나옴"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A) 'The author'가 받을 (B)의 'another consciousness'가 아직 안 나와 지칭 실패"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — (C) 실제 세계=혼돈, 정신이 조직 → (B) 정신은 필터, 'another consciousness' → (A) 그 의식=author"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> (C)세계는 정신이 조직→(B)마음=필터·another consciousness→(A)그 의식=저자 · <span class=\"xo\">①②③④</span> 지시어 연결 어긋남",
@@ -62696,31 +62693,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)'the birds in line'이 받을 (B)의 원/줄 새 도입이 앞에 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)'Marc wondered'는 (C)의 '더 불안한 줄 새' 결과를 받아 추론하는데 (C)가 뒤"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 → (B)가 원vs줄 연구 도입 → (C)'The birds in a line'이 받아 상술 → (A)'Marc wondered'로 결론"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'The birds in a line'이 받을 (B)의 줄 새 도입이 앞에 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'The birds in a line'이 첫머리라 (B)의 원/줄 새 도입을 못 받음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)Marc 연구·원/줄 비교→(C)The birds in a line 상술→(A)Marc가 그 이유를 추론 · <span class=\"xo\">①②④⑤</span> 지시어 연결 어긋남",
@@ -62879,31 +62876,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ③의 디지털 프로그래밍 편집 전이라 '밀리초 정밀' 도입이 근거 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 아직 ③·④의 디지털 편집 예시 전이라 '밀리초 정밀' 넣을 자리 아님"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ③'In addition'의 디지털 편집 언급 전이라 '밀리초 정밀'이 받을 게 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ④의 커서·마우스 예시 앞이라 ⑤'This microlevel access'가 '밀리초 정밀'을 못 받음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ④ 예시(커서·마우스) 뒤 '밀리초 정밀' 도입 → ⑤'This microlevel access'가 그것을 받음"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 넣을 문장의 'millisecond precision'을 ⑤의 'This microlevel access'가 받음 · <span class=\"xo\">①②③④</span>엔 받을 지시 대상 없음",
@@ -63053,31 +63050,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ 'On top of the hurdles'가 받을 부담(hurdles)이 ①엔 아직 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ②'This obstacle'까지도 보안 수단·부담 미제시라 'the hurdles' 근거 없음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ③의 비밀번호 등 보안 수단 나열 전이라 'the hurdles'가 받을 게 없음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 없음"
+    "jd": "✘ ④'But they all add a burden'이 hurdles를 만들기 전이라 'On top of the hurdles' 못 받음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ④(부담을 더함) 뒤 전화 도입 → ⑤'too many such calls'가 그 전화를 받음"
    }
   ],
   "opt_line": "<span class=\"co\">⑤정답</span> 넣을 문장의 'the phone call'을 ⑤의 'too many such calls'가 받음 · <span class=\"xo\">①②③④</span>엔 받을 지시 대상 없음",
@@ -63207,31 +63204,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 → (A)'However'로 목축업자 방화 대조 → (C)'The young shoots'가 받음 → (B)'such regrowth'로 마무리"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)'the burnt areas'·'such regrowth'가 받을 (C)의 관목 재성장이 앞에 없음"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (B)'the burnt areas'가 첫머리라 받을 불탄 지역·재성장 내용 없음"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'The young shoots'·'when they returned'이 받을 (A)의 새싹·가축이 앞에 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'The young shoots'가 첫머리라 (A)의 새 성장·내보낸 가축을 못 받음"
    }
   ],
   "opt_line": "<span class=\"co\">①정답</span> (A)목축업자 방화→(C)새 싹·동물 복귀→(B)관목 재성장·재방화 · <span class=\"xo\">②③④⑤</span> 지시어 연결 어긋남",
@@ -63370,31 +63367,31 @@
     "n": 1,
     "tx": "(A)-(C)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)'however, far less aware'가 대조할 (B)(C)의 의식적 축이 앞에 없음"
    },
    {
     "n": 2,
     "tx": "(B)-(A)-(C)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (A)를 (B)(C) 사이에 끼워 (C)'screwdriver'가 잇는 (B)의 도구 비유가 끊김"
    },
    {
     "n": 3,
     "tx": "(B)-(C)-(A)",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — 주어진 글 두 축 → (B)'consciously'로 의식적 축 → (C) 스크루드라이버로 비유 심화 → (A)'however'로 덜 인식 축 마무리"
    },
    {
     "n": 4,
     "tx": "(C)-(A)-(B)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C)'as we would select a screwdriver'가 받을 (B)의 도구 비유가 앞에 없음"
    },
    {
     "n": 5,
     "tx": "(C)-(B)-(A)",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ (C) 도구 비유가 첫머리라 (B)의 'particular tool' 언급을 못 받음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> (B)의식적 사용·도구 비유→(C)스크루드라이버 선택→(A)however 덜 인식하는 축 · <span class=\"xo\">①②④⑤</span> 지시어 연결 어긋남",
@@ -63544,31 +63541,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 'however'가 뒤집을 ①'This is because'의 긍정 근거 앞이라 대조 대상 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ①(상사 평가 이유) 뒤 'however'로 '관찰 불가' 문제 제기 → ②'they cannot observe'가 받음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②'cannot observe' 질문이 이미 지나 '관찰 불가' 도입이 뒤늦고 중복됨"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③'this dilemma' 해결(360도)까지 지난 자리라 '관찰 불가' 도입이 너무 늦음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 360도 평가 설명까지 끝난 자리라 '관찰 불가' 문제 제기가 무의미"
    }
   ],
   "opt_line": "<span class=\"co\">②정답</span> ①상사 평가 이유(긍정) 뒤에 however로 '관찰 못함' 문제 제기→'cannot observe' 반문으로 이음 · <span class=\"xo\">①③④⑤</span> 지시어 연결 어긋남",
@@ -63705,31 +63702,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③'The great attraction' 장점 논의 전이라 '측정 비용' 단점이 받을 게 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 아직 ③의 장점 전개 전이라 '측정 비용 걸림돌' 넣을 자리 아님"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③의 '큰 장점' 제시 전이라 그 뒤에 올 '측정 비용' 단점이 자리 못 잡음"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ③ 장점 뒤 '측정 비용 걸림돌' 제기 → ④'Nevertheless'가 그 걸림돌을 받아 대조"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ④'Nevertheless'가 받을 '비용 걸림돌'을 뒤로 미뤄 ④의 대조가 성립 못 함"
    }
   ],
   "opt_line": "<span class=\"co\">④정답</span> ③측정 과세의 큰 장점 뒤에 '측정 비용이 걸림돌'을 제기→④ Nevertheless가 '그럼에도 기술은 빠르게 발전'으로 대조 · <span class=\"xo\">①②③⑤</span> 지시어 연결 어긋남",
@@ -63874,31 +63871,31 @@
     "n": 1,
     "tx": "①",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ①②의 '일반적 친숙함' 논의 전이라 대비할 전문가 층위가 근거 없음"
    },
    {
     "n": 2,
     "tx": "②",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ②'This sense'가 받을 ①의 '일반적 감각'과의 연결을 사이에서 끊음"
    },
    {
     "n": 3,
     "tx": "③",
     "verdict": "ok",
-    "jd": "✔ 근거"
+    "jd": "✔ 정답 — ②(일반적 친숙함) 뒤 전문가의 깊은 친숙함 도입 → ③'This is because'가 그 유용성 이유 설명"
    },
    {
     "n": 4,
     "tx": "④",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ ③'This is because'가 설명할 '깊은 친숙함' 주장이 앞에 없고 도입이 늦음"
    },
    {
     "n": 5,
     "tx": "⑤",
     "verdict": "x",
-    "jd": "✘ 연결 어긋남"
+    "jd": "✘ 비평가 논의(④)까지 지난 자리라 전문가 도입이 너무 늦음"
    }
   ],
   "opt_line": "<span class=\"co\">③정답</span> ②일반적 친숙함으로 충분 뒤에 '전문가는 깊은 친숙함이 유용'을 도입→③ 'This is because'가 그 이유를 설명하고 ④ Critics로 이어짐 · <span class=\"xo\">①②④⑤</span> 지시어 연결 어긋남",
