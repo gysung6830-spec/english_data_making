@@ -31,6 +31,7 @@ practice:
         b: 불필요한 고통
         a_label: 원인
         b_label: 결과
+      caution: '''they cause us unnecessary suffering''을 ''고통이 걱정을 밀어낸다''로 원인·결과를 뒤바꿔 읽기 쉬운데, cause A B는 A(they=걱정)가 B(고통)를 일으키는 거야. 걱정이 원인이야.'
   - kind: mc
     sentence: In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth.
     source: 2024 고3 9월 29번
@@ -62,6 +63,7 @@ practice:
         b: 범죄·악·비참함
         a_label: 원인
         b_label: 결과
+      caution: '''that result from ~''를 ''초래하는''으로 방향을 뒤집어 범죄·악·비참을 원인으로 보기 쉬운데, A result from B는 A가 B에서 비롯되는 거야. 범죄·악·비참이 인구 과잉·성장에서 생겨나는 거라 B가 원인이야.'
   - kind: mc
     sentence: The strategy is to analyze all the possible scenarios that the future holds and then to see what proportion of them lead to success or failure.
     source: 2023 고3 11월 20번
@@ -93,6 +95,7 @@ practice:
         b: 성공 또는 실패
         a_label: 원인
         b_label: 결과
+      caution: '''what proportion of them lead to ~''를 ''성공·실패가 시나리오로 이어진다''로 뒤바꿔 읽기 쉬운데, lead to의 주어는 proportion(시나리오 비율)이야. 그게 성공·실패로 이어지는 거야.'
   - kind: mc
     sentence: Agricultural markets are naturally unstable, due to changes in harvest size that result from variable weather patterns and other factors.
     source: 2026 고3 11월 31번
@@ -124,6 +127,7 @@ practice:
         b: 농산물 시장 불안정
         a_label: 원인
         b_label: 결과
+      caution: '''due to changes ~ that result from ~''는 due to랑 result from이 겹쳐서 원인·결과를 통째로 뒤집기 쉬운데, 둘 다 역방향이야. 날씨(원인)가 수확량 변화를 낳고 그게 시장 불안정(결과)으로 가는 거야.'
   - kind: mc
     sentence: Social media users may unknowingly participate in creating and circulating misinformation, which can influence elections, cause violence, and create widespread panic.
     source: 2024 고3 9월 20번
@@ -155,6 +159,7 @@ practice:
         b: 선거 영향·폭력·공황
         a_label: 원인
         b_label: 결과
+      caution: '''which can ~ cause violence ~''에서 뒤의 선거·폭력·공황을 주어로 착각해 인과를 뒤집기 쉬운데, 주어는 which(=misinformation)야. 잘못된 정보가 그것들을 일으키는 거야.'
   - kind: short
     sentence: Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the necessity of the role of humans as the decision makers would appear to be in decline.
     source: 2024 고3 6월 20번
@@ -183,6 +188,7 @@ practice:
         b: 인간 역할 필요성 감소
         a_label: 원인
         b_label: 결과
+      caution: '''be due to A''를 뒤집어 A(AI·자율주행차)를 결과로 보기 쉬운데, ''A 때문이다''라 A가 원인이고 인간 역할 감소가 결과야. 또 전치사구가 겹쳐서 in decline의 주어를 humans로 잡기 쉬운데, 줄어드는 건 ''필요성(necessity)''이야.'
   - kind: short
     sentence: Living your values only some of the time does not contribute to the creation and maintenance of culture.
     source: 2024 고3 11월 20번
@@ -210,6 +216,7 @@ practice:
         b: 문화 창조·유지에 기여 안 함
         a_label: 원인
         b_label: 결과
+      caution: '''does not contribute to ~''에서 does not을 놓쳐 ''기여한다''는 긍정으로 극성을 뒤집기 쉬운데, 핵심은 부정이야. ''기여하지 않는다''는 뜻이야.'
   - kind: short
     sentence: Excessive specificity may result in information from outside the domain being underestimated and unavailable, which leads to fixedness of thinking, whereas excessive generality causes chaos, vagueness, and shallowness.
     source: 2023 고3 6월 20번
@@ -237,6 +244,7 @@ practice:
         b: 정보 과소평가·이용 불가
         a_label: 원인
         b_label: 결과
+      caution: '''result in ~ being underestimated''를 result from처럼 방향을 뒤집어 정보를 원인으로 보기 쉬운데, A result in B는 A(구체성)가 B(정보 과소평가)를 낳는 정방향이야.'
   - kind: short
     sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
@@ -264,6 +272,7 @@ practice:
         b: 새로운 문화의 등장
         a_label: 원인
         b_label: 결과
+      caution: '''landscapes will lead to the emergence ~''를 ''문화가 지형을 이끈다''로 뒤바꿔 읽기 쉬운데, lead to의 주어는 landscapes(지형 변화)라 그게 원인이야. 새 문화가 결과야.'
   - kind: short
     sentence: Departure from the group may signal danger to nonvigilant animals and cause what appears to be a coordinated flushing of prey from the area.
     source: 2022 고3 6월 39번
@@ -291,6 +300,7 @@ practice:
         b: 먹잇감의 몰이 달아남
         a_label: 원인
         b_label: 결과
+      caution: '''cause what appears to be ~ flushing of prey''에서 뒤의 먹잇감 몰이를 주어로 착각해 인과를 뒤집기 쉬운데, cause의 주어는 Departure(이탈)야. 이탈이 먹잇감 몰이를 일으키는 거야.'
   - kind: short
     sentence: And it's not due to necessity but rather that the city quality is so inviting.
     source: 2024 고3 9월 33번
@@ -318,6 +328,7 @@ practice:
         b: 도시로 옴(그 현상)
         a_label: 원인
         b_label: 결과
+      caution: '''not due to A but rather B''에서 not/but 위치를 놓쳐 A(necessity)를 원인으로 잡기 쉬운데, 부정되는 원인이 A고 진짜 원인은 B(도시의 매력)야. 뒤집으면 정반대야.'
   - kind: mc
     sentence: However, such commercialization risks culturtainment ' becoming homogeneous and losing its original message' that could lead to a dilution of audiences.
     source: 2026 고3 11월 24번
@@ -352,6 +363,7 @@ practice:
         b: 관객층의 약화
         a_label: 원인
         b_label: 결과
+      caution: '''A lead to B''를 ''이끌다/앞이 결과''로 오독해 관객 약화를 원인으로 보기 쉬운데, A(획일화·메시지 상실의 위험)가 원인이고 B(관객 약화)가 결과야. 또 ''risks + -ing''를 ''위험을 무릅쓰다''로만 보기 쉬운데, ''A가 ~하게 될 위험을 초래하다''로 처리해야 해.'
   - kind: mc
     sentence: However, due to its popularity, thirty more students are coming to the camp than we expected, so we need one more swimming pool for them.
     source: 2022 고3 6월 18번
@@ -377,6 +389,7 @@ practice:
         b: 예상보다 많은 학생 참가
         a_label: 원인
         b_label: 결과
+      caution: '''due to its popularity''에서 결과를 원인으로 뒤집어 ''수영장이 필요해서 학생이 왔다''로 읽기 쉬운데, due to 바로 뒤가 원인이야. 인기가 원인이고 학생 증가가 결과야.'
   - kind: mc
     sentence: But a lot of the enjoyment we get from that mighty symphony stems from the inventiveness behind it, the impressive development of musical ideas.
     source: 2022 고3 6월 34번
@@ -402,6 +415,7 @@ practice:
         b: 우리가 얻는 즐거움
         a_label: 원인
         b_label: 결과
+      caution: '''A stems from B''를 뒤집어 창의성이 즐거움에서 생긴다고 읽기 쉬운데, stems from 바로 뒤가 원인이야. 창의성이 원인이고 즐거움이 거기서 비롯되는 거야.'
   - kind: mc
     sentence: Darwin saw blushing as uniquely human, representing an involuntary physical reaction caused by embarrassment and self-consciousness in a social environment.
     source: 2023 고3 6월 37번
@@ -427,6 +441,7 @@ practice:
         b: 무의식적 얼굴 붉힘
         a_label: 원인
         b_label: 결과
+      caution: '''caused by embarrassment ~''를 뒤집어 얼굴 붉힘이 당혹감을 불러일으킨다고 읽기 쉬운데, caused by 바로 뒤가 원인이야. 당혹감·자의식이 원인이고 얼굴 붉힘이 결과야.'
   - kind: mc
     sentence: Perhaps you mastered your day's objective due to especially favorable conditions, such as low humidity, when in fact, you really didn't climb particularly well.
     source: 2025 고3 6월 21번
@@ -452,6 +467,7 @@ practice:
         b: 그날의 목표 달성
         a_label: 원인
         b_label: 결과
+      caution: '''due to especially favorable conditions''를 뒤집어 목표 달성 덕에 조건이 좋아졌다고 읽기 쉬운데, due to 바로 뒤가 원인이야. 유리한 조건이 원인이고 목표 달성이 결과야.'
   - kind: mc
     sentence: Often sport managers will try to be more competitive due to performance reasons and less collaborative.
     source: 2026 고3 11월 22번
@@ -477,6 +493,7 @@ practice:
         b: 더 경쟁적·덜 협력적 태도
         a_label: 원인
         b_label: 결과
+      caution: '''due to performance reasons''를 뒤집어 경쟁적으로 행동한 탓에 성과 문제가 생긴다고 읽기 쉬운데, due to 바로 뒤가 원인이야. 성과상의 이유가 원인이야.'
   - kind: mc
     sentence: Caring about one's friends and maybe getting to keep playing with the group leads to these actions.
     source: 2026 고3 11월 30번
@@ -502,6 +519,7 @@ practice:
         b: 이러한 행동들
         a_label: 원인
         b_label: 결과
+      caution: '''A leads to B''를 뒤집어 ''행동이 아끼는 마음으로 이어진다''로 읽기 쉬운데, leads to 바로 뒤가 결과야. 아끼는 마음이 원인이고 행동이 결과야.'
   contrast:
   - kind: mc
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -532,6 +550,7 @@ practice:
         signal: rather than
         a: 광장에 머무는 사람들
         b: 걷는 사람들
+      caution: '''rather than walking''을 놓쳐 걷는 사람이 눈에 띈다고 읽기 쉬운데, 강조 대상은 ''광장에 서 있거나 앉아 있는 사람들''이고 walking은 배제되는 거야. 대조를 놓치면 정반대를 강조하게 돼.'
   - kind: short
     sentence: However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static.
     source: 2026 고3 11월 42번
@@ -557,6 +576,7 @@ practice:
         signal: rather than
         a: 유동적임
         b: 정적임
+      caution: '''unlike ~ fluid rather than static''을 ''~처럼 정적이다''로 뒤집어 읽기 쉬운데, unlike는 ''~와 달리''고 fluid rather than static은 ''정적이 아니라 유동적''이야. 다른 범주와 달리 그건 유동적이라는 뜻이야.'
   - kind: mc
     sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
@@ -586,6 +606,7 @@ practice:
         signal: not
         a: 이성적 표상
         b: 형상의 지각
+      caution: '''not in A but in B''를 ''A와 B 둘 다''로 읽어 A를 살려두기 쉬운데, A(형상 지각)는 부정이야. 진실이 드러나는 곳은 B(이성적 표상)뿐이야.'
   - kind: short
     sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
@@ -611,6 +632,7 @@ practice:
         signal: While
         a: 광고 속 자연은 진짜가 아님
         b: 자연 음식에 이끌림
+      caution: '''While ~ no longer ~''에서 While을 ''~하는 동안''으로 읽고 no longer를 놓치면 양보 대조가 사라지기 쉬운데, ''비록 이끌렸지만'' 광고 속 자연은 ''더 이상'' 음식을 만든 그 자연이 아니라는 뜻이야.'
   - kind: mc
     sentence: While the hospital administration may serve as your client, no doubt the perspectives of administration personnel will differ significantly from those of doctors, interns, residents, nurses, and other medical staff who use the building regularly.
     source: 2026 고3 11월 33번
@@ -640,6 +662,7 @@ practice:
         signal: While
         a: 두 관점은 크게 다름
         b: 행정부가 고객이라는 점
+      caution: '''While ~ differ significantly from ~''에서 While을 ''~하는 동안''으로, differ from을 ''다르지 않다''로 뒤집기 쉬운데, ''비록 ~이지만'' 두 관점은 ''크게 다르다''는 대조야.'
   - kind: short
     sentence: Philosophers tend to ask questions rather than provide definitive answers, and their contributions often consist of challenging established assumptions and proposing new research approaches.
     source: 2026 고3 11월 37번
@@ -665,6 +688,7 @@ practice:
         signal: rather than
         a: 질문을 던짐
         b: 확정적 답 제공
+      caution: '''ask questions rather than provide answers''를 ''and 답도 제공한다''로 읽어 대조를 지우기 쉬운데, 택하는 쪽은 질문이고 provide answers는 배제돼. 부정·대조를 살려야 해.'
   - kind: mc
     sentence: Have we come closer to Aristotle's image of God as the immobile mover, when elites exercise their power to move money, things and people, while they themselves do not need to move at all?
     source: 2022 고3 6월 40번
@@ -694,6 +718,7 @@ practice:
         signal: while
         a: 엘리트 자신은 안 움직임
         b: 돈·물건·사람은 움직임
+      caution: '''while they themselves do not need to move at all''에서 while을 ''~하는 동안''으로 읽고 do not ~ at all을 놓치기 쉬운데, while은 ''~인 반면''이고 엘리트 자신은 전혀 안 움직인다는 대조야.'
   - kind: short
     sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
@@ -719,6 +744,7 @@ practice:
         signal: rather than
         a: 수요 관리
         b: 수요 수용
+      caution: '''managed rather than accommodated''에서 A와 B 순서를 뒤집어 ''관리보다 수용''으로 읽기 쉬운데, 택하는 쪽은 managed(관리)고 accommodated(수용)는 배제되는 거야.'
   - kind: mc
     sentence: Generally, this implies that sufficient fresh snow must accumulate during the cold months to offset melting during the summer, although on a year‑to‑year basis, glaciers may expand or contract, depending on local and global climatic conditions.
     source: 2025 고3 6월 35번
@@ -751,6 +777,7 @@ practice:
         signal: although
         a: 눈이 쌓여 녹음 상쇄(장기 균형)
         b: 해마다 빙하 팽창·수축
+      caution: '''although''를 because나 so 같은 인과로 바꿔 읽기 쉬운데, ''비록 ~이지만''의 양보라서 큰 흐름(눈이 쌓여 녹음을 상쇄)과 단기 변동을 대조시키는 거야. 또 ''to offset''을 ''상쇄되다''라는 결과로 보면 안 돼 — ''상쇄하기 위해 쌓여야 한다''는 목적이야.'
   - kind: short
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said, "Jamie, even though you didn't set a personal best time today, your performances have improved dramatically."
     source: 2023 고3 11월 19번
@@ -778,6 +805,7 @@ practice:
         signal: even though
         a: 경기력 극적 향상
         b: 개인 최고 기록 미달성
+      caution: '''even though''를 놓치고 앞뒤를 둘 다 부정적으로 읽기 쉬운데, ''비록 기록은 못 세웠지만 실력은 확 늘었다''로 뒤쪽 긍정에 무게를 싣는 대조야.'
   - kind: short
     sentence: Overly rigid habits and conventions, no matter how well-considered or well-intentioned, threaten innovation.
     source: 2024 고3 9월 24번
@@ -803,6 +831,7 @@ practice:
         signal: no matter how
         a: 경직된 습관은 혁신 위협
         b: 아무리 잘 숙고·선의여도
+      caution: '''no matter how well ~''를 빼먹고 ''좋으니까 돕는다''로 뒤집기 쉬운데, ''아무리 잘 숙고하고 선의로 했어도'' 경직된 습관은 혁신을 위협한다는 뜻이야.'
   - sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “사물의 진리는 형상에 대한 지각에서 드러나며, 그것의 이성적 표상에서는 드러나지 않는다.”'
@@ -831,6 +860,7 @@ practice:
         signal: not
         a: 이성적 표상
         b: 형상의 지각
+      caution: '''not A but B''에서 not이 걸리는 A(지각)를 놓쳐 자리를 뒤바꿔 ''지각에서 드러난다''로 읽기 쉬운데, 부정되는 건 지각이고 긍정되는 건 이성적 표상이야.'
     kind: mc
   - sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
@@ -856,6 +886,7 @@ practice:
         signal: rather than
         a: 수요 관리
         b: 수요 수용
+      caution: '''rather than''을 ''그리고''처럼 병렬로 보고 ''관리도 수용도 되어야''로 읽기 쉬운데, managed(관리)를 택하고 accommodated(수용)는 물리치는 대비야.'
     kind: short
   - kind: mc
     sentence: However, unlike sound designers, composers often shy away from creating unique pieces that reflect these new worlds and often present musical scores that possess familiar structures and cadences.
@@ -887,6 +918,7 @@ practice:
         signal: unlike
         a: 작곡가는 익숙한 구조 선호
         b: 음향 디자이너
+      caution: '''unlike''를 like(''~처럼'')로 보고 작곡가를 음향 디자이너와 같은 부류로 읽기 쉬운데, ''~와 달리''라서 뒤 내용이 반대 방향이라는 뜻이야. 또 ''shy away from ~ing''는 ''수줍게 ~하다''가 아니라 ''~하기를 꺼리다/피하다''야.'
   - kind: mc
     sentence: 'On the contrary, it comes close to Hobbes''s outlook: man''s violent and conflict‑prone nature makes it necessary to establish and maintain an effective legal framework in order to secure peace.'
     source: 2026 고3 11월 34번
@@ -917,6 +949,7 @@ practice:
         signal: On the contrary
         a: '홉스 관점: 법적 틀 필요'
         b: 앞서 부정된 관점
+      caution: Hobbes's outlook 뒤의 콜론(:)을 대비로 보기 쉬운데, 앞의 홉스의 관점을 구체적으로 풀어 주는 환언이야. 또 'makes it necessary to establish'에서 it은 가목적어라 '확립하는 것을 필요하게 만든다'는 뜻이지 '없게 만든다'가 아니야.
   - kind: mc
     sentence: I can't wait to ride while watching those "! beautiful waves!"!" Emma and Clara jumped on their bikes and started to Emma Clara pedal toward the white cliff where the beach road ended.
     source: 2024 고3 11월 45번
@@ -947,6 +980,7 @@ practice:
         signal: while
         a: 파도 보며 자전거 타기(동시)
         b: 대비되는 행동 아님
+      caution: '''while + ~ing''를 무조건 대조(''~와 달리'')로 보기 쉬운데, 여기선 ''~하면서''라는 동시 동작이라 ''파도를 보면서 자전거를 타다''가 맞아. 또 ''can''t wait to ~''는 ''기다릴 수 없다''가 아니라 ''몹시 ~하고 싶다''는 뜻이야.'
   - kind: mc
     sentence: 'While sentience and volition are aspects of mind and agency, morals are cultural tools developed to influence social behaviour: to cultivate the desirable and discourage the harmful.'
     source: 2024 고3 9월 22번
@@ -977,6 +1011,7 @@ practice:
         signal: While
         a: 도덕은 사회 행동 조절 문화 도구
         b: 지각력·의지는 마음의 측면
+      caution: 문두 'While'을 '~하는 동안'이라는 시간으로만 보기 쉬운데, 서로 다른 두 주어를 맞세우는 '반면에'라는 대조야. 또 콜론 뒤 'to cultivate ~'는 앞의 목적을 다시 풀어 주는 환언이야.
   - kind: short
     sentence: Admittedly, it is considerably more difficult to take notes from discussions than from lectures, for, unlike lectures, discussions tend to be disorganized and difficult to follow.
     source: 2025 고3 6월 23번
@@ -1003,6 +1038,7 @@ practice:
         signal: unlike
         a: 토론은 무질서·따라가기 어려움
         b: 강의
+      caution: '''unlike lectures''를 ''강의처럼''으로 읽기 쉬운데 ''강의와 달리''라는 대비야. 또 콤마 뒤 ''for''는 ''~을 위해''가 아니라 ''왜냐하면''이라는 이유 접속사고, 그 사이 unlike lectures는 삽입된 대비구야.'
   - kind: short
     sentence: While scholars might initially find these entrepreneurial concepts alien, they actually engage in similar practices when they set themselves apart in their academic writing.
     source: 2025 고3 6월 30번
@@ -1029,6 +1065,7 @@ practice:
         signal: While
         a: 학자도 실제로 비슷한 관행 함
         b: 처음엔 낯설게 느낌
+      caution: 문두 'While'을 '~하는 동안'으로 보기 쉬운데, 낯설게 느낀다는 앞절과 실제로는 비슷하게 한다는 뒷절을 맞세우는 '~지만'이야. 또 'find these concepts alien'은 5형식이라 '이 개념을 낯설게 여기다'는 뜻이야.
   - kind: short
     sentence: Nevertheless, the technologies available for monitoring the concentrations and flows of particular substances in waste discharges have been developing rapidly.
     source: 2024 고3 6월 38번
@@ -1055,6 +1092,7 @@ practice:
         signal: Nevertheless
         a: 감시 기술은 빠르게 발전
         b: 앞서 언급된 한계
+      caution: '''Nevertheless''는 앞 내용을 뒤집는 대비 표지라 ''그럼에도 불구하고 기술은 발전해 왔다''는 반전을 예고해. 또 ''available ~ discharges''라는 긴 수식어에 속아 substances나 discharges를 주어로 보기 쉬운데, 진짜 주어는 the technologies야.'
   - kind: short
     sentence: While the other passengers were gathering their bags, Jessica quickly got off the bus and she ran up the cliff Jessica that was famous for its ocean views.
     source: 2022 고3 6월 19번
@@ -1081,6 +1119,7 @@ practice:
         signal: While
         a: Jessica는 재빨리 내려 절벽 오름
         b: 대비되는 행동 아님(동시)
+      caution: '''While''을 ''~와 달리/반면에''라는 대조로 보기 쉬운데, 진행형(were gathering)과 함께 쓰여 ''~하는 동안''이라는 동시 상황이야. 또 ''that was famous ~''는 the cliff를 꾸미는 관계절이라 ''~로 유명한 절벽''이야.'
   - kind: short
     sentence: Unlike scientific methods, philosophizing is a non‑empirical approach that attempts to validate concepts through logical thinking and argumentation.
     source: 2026 고3 11월 37번
@@ -1108,6 +1147,7 @@ practice:
         signal: Unlike
         a: 철학함은 비경험적 접근
         b: 과학적(경험적) 방법
+      caution: '''Unlike''를 ''좋아하지 않는다''로, ''approach''를 동사 ''접근하다''로 보기 쉬운데, Unlike는 ''과학적 방법과 달리''라는 대비구고 approach는 명사 ''접근법''이라 ''A는 비경험적 접근법이다''라는 정의야.'
   - kind: mc
     sentence: Economics can go a long way towards helping a legislature determine whether or not a particular tax law will help achieve a particular goal, but economics cannot, in a vacuum, identify the goal.
     source: 2022 고3 9월 22번
@@ -1132,6 +1172,7 @@ practice:
         signal: but
         a: 목표 설정은 못 함
         b: 수단 평가엔 유용
+      caution: '''but'' 뒤의 ''cannot''을 놓쳐 앞뒤 대조를 뒤집기 쉬운데, but은 뒤쪽을 강조하는 대조고 cannot은 능력의 부정이라 경제학은 목표 자체는 정하지 못한다는 뜻이야.'
   - kind: mc
     sentence: 'We select the cultural notion as we would select a screwdriver: certain jobs call for a Phillips head while others require an Allen wrench.'
     source: 2022 고3 9월 37번
@@ -1156,6 +1197,7 @@ practice:
         signal: while
         a: 어떤 일엔 십자머리
         b: 다른 일엔 육각 렌치
+      caution: '''while''을 놓쳐 모든 일이 같은 드라이버를 요구하는 걸로 읽기 쉬운데, ''반면에''라는 대조라서 certain jobs와 others가 서로 다른 두 경우를 대비하는 거야.'
   - kind: mc
     sentence: An important advantage of disclosure, as opposed to more aggressive forms of regulation, is its flexibility and respect for the operation of free markets.
     source: 2023 고3 11월 23번
@@ -1180,6 +1222,7 @@ practice:
         signal: as opposed to
         a: 정보 공개는 유연함
         b: 강경한 규제
+      caution: '''as opposed to''를 놓쳐 공개의 이점을 반대로 뒤집기 쉬운데, ''~와 달리''라는 대조라서 공개가 규제보다 유연하고 시장을 존중한다는 강조야.'
   - kind: mc
     sentence: Although the wonders of modern technology have provided people with opportunities beyond the wildest dreams of our ancestors, the good, as usual, is weakened by a downside.
     source: 2022 고3 9월 30번
@@ -1204,6 +1247,7 @@ practice:
         signal: Although
         a: 이점도 단점에 약화됨
         b: 기술의 놀라운 이점
+      caution: '''Although''와 ''is weakened''를 무시하고 좋은 점이 단점을 없앤다고 뒤집기 쉬운데, Although는 뒤 주절을 강조하는 양보고 is weakened by는 이점이 오히려 단점에 의해 약화된다는 방향이야.'
   - kind: mc
     sentence: On the contrary, we brought the motors into our lives, as automobiles, refrigerators, drill presses, and pencil sharpeners.
     source: 2023 고3 11월 30번
@@ -1228,6 +1272,7 @@ practice:
         signal: On the contrary
         a: 모터를 삶에 들여옴
         b: 모터를 멀리한다는 통념
+      caution: '''On the contrary''는 앞 통념을 뒤집는 표지야. 그런데 ''brought ... into''를 ''몰아냈다''로 방향을 반대로 읽기 쉬운데, 모터를 우리 삶으로 ''들여왔다''는 도입의 뜻이야.'
   - kind: mc
     sentence: Yet, despite the increasing level of urban mobility worldwide, access to places, activities and services has become increasingly difficult.
     source: 2023 고3 6월 24번
@@ -1252,6 +1297,7 @@ practice:
         signal: despite
         a: 접근은 점점 어려워짐
         b: 도시 이동성 증가
+      caution: '''despite''를 인과(''덕분에'')로, ''increasingly difficult''를 ''쉬워졌다''로 뒤집기 쉬운데, despite는 기대와 반대 결과를 이끄는 양보라서 이동성이 늘어도 접근은 오히려 어려워졌다는 뜻이야.'
   - kind: mc
     sentence: However, after a while, a group of students came in, and there weren't any large tables left.
     source: 2023 고3 6월 45번
@@ -1274,6 +1320,7 @@ practice:
         signal: However
         a: 남은 큰 테이블 없음
         b: 여유 있던 이전 상황
+      caution: '''However'' 뒤의 상황 반전을 무시하고 ''there weren''t any''를 ''많이 남았다''로 뒤집기 쉬운데, there weren''t any는 완전 부정이라 큰 테이블이 하나도 안 남았다는 뜻이야.'
   equivalence:
   - kind: mc
     sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
@@ -1304,6 +1351,7 @@ practice:
         signal: In other words
         a: 소비 가능한 자기 부분들
         b: 인포테인먼트·상점 상품·서비스
+      caution: '''In other words''를 새 정보로, 콜론(:)을 새 항목으로 보기 쉬운데, In other words는 앞 내용을 다시 말하는 거고 콜론 뒤는 ''소비 가능한 부분''의 구체적 예시야.'
   - kind: mc
     sentence: For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.
     source: 2022 고3 6월 31번
@@ -1333,6 +1381,7 @@ practice:
         signal: or more appropriately
         a: 컴퓨터
         b: 노트북
+      caution: '''the computer, or (more appropriately), the laptop''에서 or를 ''선택(또는)''으로 읽어 ''둘 중 골라라''로 오해하기 쉬운데, 여기 or는 동격(즉)이라 computer를 laptop으로 더 정확히 바꿔 부른 거야.'
   - kind: mc
     sentence: Roads are there all the time, so their speed is the most important fact that distinguishes them.
     source: 2026 고3 11월 23번
@@ -1362,6 +1411,7 @@ practice:
         signal: distinguishes
         a: 속도가 빠른 도로
         b: 속도가 느린 도로
+      caution: '''the fact that distinguishes them''의 distinguish를 ''구별하기 어렵다''는 부정으로 넘겨짚기 쉬운데, that절은 fact를 꾸며 ''도로를 구별해 주는'' 사실이라는 뜻이라 부정 의미가 없어.'
   - kind: mc
     sentence: In particular, they define a group as two or more people who interact with, and exert mutual influences on, each other.
     source: 2022 고3 9월 40번
@@ -1391,6 +1441,7 @@ practice:
         signal: define a group as
         a: 집단
         b: 상호작용하는 둘 이상의 사람
+      caution: '''define A as B''의 as를 ''~로서/되도록''으로 읽어 ''되라고 요구한다''로 오해하기 쉬운데, define A as B는 ''A를 B로 정의한다''는 등호라서 집단=상호작용하는 둘 이상이야.'
   - kind: mc
     sentence: The fact that we have not found such a case in countless examinations of the fossil record strengthens the case for evolutionary theory.
     source: 2022 고3 6월 36번
@@ -1420,6 +1471,7 @@ practice:
         signal: The fact that
         a: 그 사실
         b: 반례를 찾지 못했다는 것
+      caution: '''The fact that we have not found ~''의 that을 관계사로 읽어 ''찾아낸 사실''로 보기 쉬운데, 이 that은 동격이라 ''the fact=그런 사례를 못 찾았다''는 뜻이야. 게다가 not found라는 부정이 핵심이야.'
   - kind: short
     sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -1445,6 +1497,7 @@ practice:
         signal: In other words
         a: 일치시키는 타고난 능력
         b: 그렇게 하려는 타고난 욕구
+      caution: '''innate capacity ... innate drive''의 innate(타고난)를 ''학습으로 얻는''으로 오해하기 쉬운데, 능력도 욕구도 타고난 거고 not only A; (also) B 구조로 둘 다 강조하는 거야.'
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
     source: 2024 고3 11월 40번
@@ -1470,6 +1523,7 @@ practice:
         signal: that is
         a: 한 주제에 차례로 집중
         b: 서로 다른 시간대에 집중
+      caution: '''one after another, that is, in different periods''에서 that is를 놓쳐 in different periods를 새 항목으로 나열하기 쉬운데, that is는 ''즉''이라 앞말을 시간 관점으로 다시 말한 재진술이야.'
   - kind: short
     sentence: When you say "It's mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle.
     source: 2023 고3 6월 21번
@@ -1495,6 +1549,7 @@ practice:
         signal: that means
         a: '''그건 내 것''이라 말함'
         b: 묶음의 많은 막대기를 소유함
+      caution: '''the sticks that make up the full bundle''의 make up을 ''만들다''로 오해하기 쉬운데, make up은 ''구성하다·이루다''고 that절은 sticks를 꾸미는 관계사절이야. that means도 앞말을 풀어 다시 말하는 재진술이지 ''막대기를 만들었다''가 아니야.'
   - kind: short
     sentence: Moreover, equal access to speech and hearing promoted the notion that property should be held in common, that goods and food in particular should be shared, and that everyone had a duty to take care of everyone else.
     source: 2024 고3 6월 22번
@@ -1520,6 +1575,7 @@ practice:
         signal: the notion that
         a: 그 관념
         b: 재산은 공동 소유되어야 함
+      caution: '''the notion that ..., that ..., and that ...''의 세 that을 관계사로 읽어 ''관념이 소유·공유된다''로 오해하기 쉬운데, 세 that절은 모두 notion과 동격이라 그 관념의 내용을 나열하는 병렬이야.'
   - kind: short
     sentence: After all, didn't they demonstrate those qualities on the journey to Oz, a journey motivated by little more than an expectation, an idea about the future likelihood of getting something they wanted?
     source: 2023 고3 6월 29번
@@ -1545,6 +1601,7 @@ practice:
         signal: an expectation, an idea
         a: 어떤 기대
         b: 미래 가능성에 대한 생각
+      caution: 콤마 뒤의 'a journey', 'an expectation', 'an idea'를 별개 나열 항목으로 읽기 쉬운데, 각각 앞말을 다시 부르는 동격이라 여정=기대에 동기부여된 여정, 기대=미래 가능성에 대한 생각이야.
   - kind: short
     sentence: By design, we set up challenges in which the individual must validate how they know us by presenting scenarios, ( ) names or acquaintances, or evidence by which to validate (that is, photographs).
     source: 2023 고3 6월 22번
@@ -1572,6 +1629,7 @@ practice:
         signal: that is
         a: 검증할 증거
         b: 사진
+      caution: 괄호 안 'that is'를 지시어 '그것은/저것은'으로 읽기 쉬운데, '즉/다시 말해'라는 환언 표지라 앞의 evidence를 photographs로 구체화하는 거야.
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another (that is, in different periods of time), ( ) although later work will weaken earlier attainments in the other spheres.
     source: 2024 고3 11월 40번
@@ -1599,6 +1657,7 @@ practice:
         signal: that is
         a: 한 주제에 차례로 집중
         b: 서로 다른 시기에 집중
+      caution: '''(that is, in different periods of time)''를 별개 지시문으로 보기 쉬운데, that is는 ''즉''이라 ''one subject after another''를 ''서로 다른 시기에''로 바꿔 말한 동치 표현이야.'
   - sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
     source: 2023 고3 6월 23번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 경쟁적 경제 속에서 살아남으려 애쓰면서, 소비될 수 있는 자기 부분들 즉 전시실의 인포테인먼트, 카페와 상점의 상품 및 서비스가 예산에서 우선시되지 않도록 막는다.”'
@@ -1628,6 +1687,7 @@ practice:
         signal: In other words
         a: 소비 가능한 자기 부분들
         b: 인포테인먼트·상점 상품·서비스
+      caution: 콜론(:) 뒤 infotainment나 goods and services를 새 정보로 착각하기 쉬운데, 앞의 '소비 가능한 부분'을 구체적으로 다시 말한 거야. 또 부정어가 없는데도 'prioritise'를 '우선시 안 함'으로 방향을 뒤집으면 안 돼 — '우선시한다' 그대로야.
     kind: mc
   - sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
     source: 2024 고3 11월 40번
@@ -1654,6 +1714,7 @@ practice:
         signal: that is
         a: 한 주제에 차례로 집중
         b: 서로 다른 시간대에 집중
+      caution: '''that is''를 ''그것은 ~이다''라는 주어+동사로 잡아 술어로 읽으면 구조가 무너져 — ''즉''이라는 재진술 연결어야. 또 ''in different periods of time''을 새 정보로 보기 쉬운데, 앞 one subject after another를 시간 관점으로 되풀이한 재진술이야.'
     kind: short
   - kind: mc
     sentence: One of those downsides is that anyone who so chooses can pick up the virtual megaphone that is the Internet and put in their two cents on any of an infinite number of topics, regardless of their qualifications.
@@ -1687,6 +1748,7 @@ practice:
         signal: that is
         a: 가상의 확성기
         b: 인터넷
+      caution: '''the virtual megaphone that is the Internet''의 that is를 별개 절로 보고 ''확성기를 든다, 그런데 그게 인터넷이다''처럼 벌려 읽기 쉬운데, 앞 은유를 쉬운 말로 재진술하는 관계절이라 확성기=인터넷이야. 또 ''put in one''s two cents''는 ''2센트를 넣다''가 아니라 ''한마디 거들다''는 관용구야.'
   - kind: mc
     sentence: 'To a scientific thinker, this must sound like magical thinking: you''re saying you will imagine something so hard it''ll pop into someone else''s head exactly the way you envision it?'' The artist has sought the opposite of the scientist''s observer‑independent reality.'
     source: 2023 고3 6월 33번
@@ -1717,6 +1779,7 @@ practice:
         signal: ':'
         a: 마법적 사고
         b: 강렬히 상상해 남에게 전달함
+      caution: 콜론(:)을 앞말과 무관한 별개 진술로 보고 '~지만 별개로'라는 대비로 끊기 쉬운데, 앞의 magical thinking이 무엇인지 구체적으로 풀어 주는 환언 신호야. 또 'so hard it'll pop ~'은 'so ~ that' 결과 구문이라 '너무 ~해서 …하다'는 뜻이야.
   - kind: mc
     sentence: Certain hindrances to multifaceted creative activity may lie in premature specialization, i.e., having to choose the direction of education or to focus on developing one ability too early in life.
     source: 2023 고3 6월 20번
@@ -1744,6 +1807,7 @@ practice:
         signal: i.e.
         a: 조기 전문화
         b: 너무 이른 교육 방향 선택
+      caution: 재진술 표지 'i.e.(즉)'를 예시 표지 '예를 들어(e.g.)'로 옮기기 쉬운데, i.e.는 앞말을 같은 뜻으로 다시 말하는 거지 여러 사례 중 하나를 드는 게 아니야.
   - kind: mc
     sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -1771,6 +1835,7 @@ practice:
         signal: In other words
         a: 일치시키는 타고난 능력
         b: 그렇게 하려는 타고난 욕구
+      caution: '''In other words''를 ''그와는 달리'' 같은 대조로 보기 쉬운데, 앞 문장을 같은 뜻으로 바꿔 말하는 ''다시 말해''라는 재진술 표지야.'
   - kind: mc
     sentence: 'So it may well be that this plasticity is an adaptation: a trait that came to exist in a species because it contributed to reproductive fitness.'
     source: 2023 고3 11월 36번
@@ -1798,6 +1863,7 @@ practice:
         signal: ':'
         a: 하나의 적응
         b: 번식 적합도에 기여한 특성
+      caution: 동격 콜론(:)을 '그래서' 같은 결과로 보기 쉬운데, 앞의 'an adaptation'을 '즉 ~한 특성'으로 다시 정의하는 재진술 표지야.
   comparison:
   - kind: mc
     sentence: Free recall tests, in which students need to recall as much as they can remember without prompting, tend to result in better retention than cued recall tests, in which students are given hints about what they need to remember.
@@ -1830,6 +1896,7 @@ practice:
         b: 단서 회상 시험
         a_label: 우위
         b_label: 열위
+      caution: '''better retention than cued recall tests''를 단서 회상이 더 낫다고 뒤집기 쉬운데, 삽입절이 길어서 그렇지 더 나은 쪽은 주어인 ''free recall tests''야.'
   - kind: mc
     sentence: But, once an organized game is played with officials, most athletes will not admit to the same fouls or violations as the end goal of winning is more important than expressing concern for competitors.
     source: 2026 고3 11월 30번
@@ -1861,6 +1928,7 @@ practice:
         b: 경쟁자 염려 표현
         a_label: 우위
         b_label: 열위
+      caution: '''winning is more important than expressing ...''를 염려 표현이 더 중요하다고 뒤집기 쉬운데, 더 중요한 쪽은 주어 ''winning''이야.'
   - kind: mc
     sentence: By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.
     source: 2022 고3 6월 35번
@@ -1892,6 +1960,7 @@ practice:
         b: 정보 없이 결정
         a_label: 우위
         b_label: 열위
+      caution: '''more likely ... than if it takes a decision without ...''에서 ''정보 없이''를 유리한 쪽으로 보기 쉬운데, 유리한 건 앞쪽 정보 수집이고 ''without ~''가 비교의 열위야.'
   - kind: mc
     sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
     source: 2024 고3 9월 40번
@@ -1923,6 +1992,7 @@ practice:
         b: 동물의 의사소통 체계
         a_label: 우위
         b_label: 열위
+      caution: '''superior to any system ...''를 다른 동물 체계가 우월하다고 뒤집기 쉬운데, than 없이 to를 써서 헷갈릴 뿐 우월한 쪽은 아이가 쓰는 체계야.'
   - kind: mc
     sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -1954,6 +2024,7 @@ practice:
         b: 숲을 관리함
         a_label: 우위
         b_label: 열위
+      caution: '''cut down trees rather than manage the forest''에서 택하는 걸 관리로 뒤집기 쉬운데, ''rather than''은 뒤쪽을 배제하니까 택하는 건 벌목이고 관리는 안 하는 쪽이야.'
   - kind: short
     sentence: Cued recall tests, in turn, are better than recognition tests, such as multiple-choice answers, where the correct answer needs to be recognized but not generated.
     source: 2024 고3 6월 29번
@@ -1981,6 +2052,7 @@ practice:
         b: 재인 시험
         a_label: 우위
         b_label: 열위
+      caution: '''better than recognition tests''를 재인 시험이 더 낫다고 뒤집기 쉬운데, 더 나은 쪽은 주어 ''cued recall tests''야.'
   - kind: short
     sentence: You found it only slightly difficult and conclude that you were climbing quite well, when in fact you were climbing no better than usual.
     source: 2025 고3 6월 21번
@@ -2008,6 +2080,7 @@ practice:
         b: 이번 등반 실력
         a_label: 우위
         b_label: 열위
+      caution: '''no better than usual''을 ''평소보다 더 잘''로 읽기 쉬운데, no를 놓치면 안 돼. ''조금도 낫지 않은'', 사실상 평소와 같다는 뜻이야.'
   - kind: short
     sentence: Rather than treating robots as peer agents with their own completely independent agenda, joint cognitive systems approaches treat robots as helpers such as service animals or sheep dogs.
     source: 2022 고3 6월 24번
@@ -2035,6 +2108,7 @@ practice:
         b: 동등한 행위자로 취급
         a_label: 우위
         b_label: 열위
+      caution: 문두 'Rather than treating ... as peer agents'를 '~하기 위해'로 보기 쉬운데, '~하기보다는'이라 동등한 행위자로 취급하는 건 부정되는 쪽이야.
   - kind: short
     sentence: But it's important to recognize the cumulative impact of not prioritizing self‑care and to make sure that in the long term, this is the exception rather than the norm.
     source: 2026 고3 11월 35번
@@ -2064,6 +2138,7 @@ practice:
         b: 일상적 표준
         a_label: 우위
         b_label: 열위
+      caution: '''the exception rather than the norm''을 ''예외가 아니라 표준''으로 뒤집기 쉬운데, ''A rather than B''는 ''B가 아니라 A''라 무게는 예외(the exception)에 실려.'
   - kind: short
     sentence: The emphasis on individuality is therefore problematic― rather than actually designing, many successful designer ' personalities' function more as creative managers.
     source: 2022 고3 9월 40번
@@ -2094,6 +2169,7 @@ practice:
         b: 실제로 디자인함
         a_label: 우위
         b_label: 열위
+      caution: '''rather than actually designing''을 뒤집어 ''디자인한다''로 읽기 쉬운데, rather than 뒤가 배제되니까 실제 모습은 ''creative managers로 기능''이야. 또 ''function more as''의 more는 ''~로서 기능하는 편이 더''라는 비교 강조라 관리자 역할에 무게가 실려.'
   - kind: mc
     sentence: Because plants tend to recover from disasters more quickly than animals, they are essential to the revitalization of damaged environments.
     source: 2022 고3 9월 35번
@@ -2119,6 +2195,7 @@ practice:
         b: 회복이 느린 동물
         a_label: 우위
         b_label: 열위
+      caution: '''more quickly than''을 동물이 더 빨리 회복한다고 뒤집기 쉬운데, 앞쪽 식물이 우위고 than 뒤 동물이 열위야.'
   - kind: mc
     sentence: For example, a vacuum-cleaning agent that learns to foresee where and when additional dirt will appear will do better than one that does not.
     source: 2023 고3 6월 30번
@@ -2144,6 +2221,7 @@ practice:
         b: 예측하지 못하는 에이전트
         a_label: 우위
         b_label: 열위
+      caution: '''do better than''을 예측 못하는 에이전트가 더 낫다고 뒤집기 쉬운데, 앞쪽 예측을 학습하는 에이전트가 우위고 than 뒤가 열위야.'
   - kind: mc
     sentence: Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches.
     source: 2024 고3 6월 32번
@@ -2169,6 +2247,7 @@ practice:
         b: 이전의 접근법
         a_label: 우위
         b_label: 열위
+      caution: '''work better than''을 이전 접근법이 더 낫다고 뒤집기 쉬운데, 앞쪽 새 아이디어가 우위고 than 뒤가 열위야.'
   - kind: mc
     sentence: Technological unemployment would weaken that longstanding arrangement, encouraging an even more extreme version of inequality in which some people receive more income than others and many receive nothing at all.
     source: 2025 고3 6월 40번
@@ -2194,6 +2273,7 @@ practice:
         b: 더 적게 받는 다른 이들
         a_label: 우위
         b_label: 열위
+      caution: '''more income than''을 다른 이들이 더 받는다고 뒤집기 쉬운데, 앞쪽 일부 사람들이 더 받는 우위고 than 뒤가 열위야.'
   - kind: mc
     sentence: In a potentially acute situation, then, everyone present will appear more unconcerned than he is in fact.
     source: 2022 고3 6월 42번
@@ -2219,6 +2299,7 @@ practice:
         b: 실제 내면의 태연함
         a_label: 우위
         b_label: 열위
+      caution: '''more unconcerned than he is in fact''를 실제보다 덜 태연해 보인다고 뒤집기 쉬운데, 겉으로 보이는 태연함이 실제보다 크다는 뜻이야.'
   - kind: mc
     sentence: A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting.
     source: 2023 고3 11월 35번
@@ -2244,6 +2325,7 @@ practice:
         b: 약간 당황한 고함
         a_label: 우위
         b_label: 열위
+      caution: '''more impact than''을 고함이 더 영향력 있다고 뒤집기 쉬운데, 앞쪽 차분한 어조가 우위고 than 뒤가 열위야.'
   - kind: mc
     sentence: A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance.
     source: 2024 고3 6월 31번
@@ -2270,6 +2352,7 @@ practice:
         b: 원본 매체 보존
         a_label: 우위
         b_label: 열위
+      caution: '''diminishing importance''를 중요성이 커진다고 뒤집기 쉬운데, 복제가 싸고 쉬워지니까 원본 보존의 가치는 오히려 줄어드는 거야.'
   - kind: mc
     sentence: Understanding how each type of user experiences the current medical environment as well as how each reacts to your prospective designs inevitably produces a better building.
     source: 2026 고3 11월 33번
@@ -2296,6 +2379,7 @@ practice:
         b: 이해 없는 설계
         a_label: 우위
         b_label: 열위
+      caution: '''produces a better building''을 더 못한 건물로 뒤집기 쉬운데, 사용자를 이해하면 필연적으로 더 나은 건물로 이어진다는 뜻이야.'
   connective:
   - kind: mc
     sentence: A crowd can thus force inaction on its members by implying, through its passivity, that an event is not an emergency.
@@ -2326,6 +2410,7 @@ practice:
         signal: thus
         clause: 구성원에게 방관을 강요할 수 있다
         logic: 인과
+      caution: '''thus''를 ''그러나'' 역접으로 보기 쉬운데, 인과(따라서)야. 또 ''force inaction''과 ''not an emergency''는 ''응급 아님''을 암시해 방관을 강요한다는 거라 반대로 읽으면 안 돼.'
   - kind: mc
     sentence: Thus, parents who reward, force, or cajole their child to do homework are more likely to have a child who does so only when rewarded, cajoled, or forced.
     source: 2024 고3 6월 30번
@@ -2355,6 +2440,7 @@ practice:
         signal: Thus
         clause: 보상받을 때만 하는 아이를 갖기 쉽다
         logic: 인과
+      caution: '''Thus''를 ''그럼에도''로 뒤집기 쉬운데, 인과(따라서)라 앞 결론을 그대로 이어야 해. 강요하면 ''보상받을 때만'' 하는 아이가 된다는 뜻이야.'
   - kind: mc
     sentence: Decades ago, it was unusual for Earth scientists to have results that were of interest to the media, and consequently few media contacts were expected or encouraged.
     source: 2024 고3 11월 42번
@@ -2384,6 +2470,7 @@ practice:
         signal: consequently
         clause: 언론 접촉이 거의 기대·장려되지 않았다
         logic: 인과
+      caution: '''consequently''를 역접으로, ''few''를 긍정으로 읽기 쉬운데, consequently는 ''그 결과''고 few는 ''거의 없는''이라 언론 접촉도 장려되지 않았다는 같은 방향이야.'
   - kind: mc
     sentence: Moreover, some critics, who admire his work, are little concerned about his extensive use of computers in the art-making process.
     source: 2022 고3 6월 31번
@@ -2413,6 +2500,7 @@ practice:
         signal: Moreover
         clause: 비평가들은 컴퓨터 사용에 거의 개의치 않는다
         logic: 부연
+      caution: '''Moreover''를 ''그러나'' 역접으로, ''little concerned''를 ''크게 우려''로 뒤집기 쉬운데, Moreover는 첨가(게다가)고 little concerned는 ''거의 개의치 않는''이야.'
   - kind: mc
     sentence: Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency.
     source: 2023 고3 6월 35번
@@ -2442,6 +2530,7 @@ practice:
         signal: on the other hand
         clause: 초보자는 같은 유창함을 이루지 못했다
         logic: 대조
+      caution: '''on the other hand''에서 ''have not achieved''의 부정을 무시하고 전문가와 같다고 읽기 쉬운데, 이건 대조 신호라 초보자는 유창함을 ''갖추지 못한'' 쪽이야.'
   - kind: short
     sentence: According to connectionist theory, however, our knowledge is organized into patterns of activity, and each time we learn something new we have to modify the old patterns so as to keep the old material while adding the new information.
     source: 2024 고3 9월 36번
@@ -2467,6 +2556,7 @@ practice:
         signal: however
         clause: 지식은 활동 패턴으로 조직된다
         logic: 대조
+      caution: '''however''를 ''그래서'' 인과로, ''modify''를 ''그대로 둔다''로 뒤집기 쉬운데, however는 역접(그러나)이고 기존 패턴을 ''수정해야'' 한다는 뜻이야.'
   - kind: short
     sentence: However, they retain their power of fascination for large, if not massive audiences, who prize the experiential, risk-loaded and one-time event quality they afford.
     source: 2026 고3 11월 40번
@@ -2492,6 +2582,7 @@ practice:
         signal: However
         clause: 여전히 매혹의 힘을 지닌다
         logic: 대조
+      caution: '''However''를 ''따라서'' 인과로, ''retain''과 ''prize''를 반대로 읽기 쉬운데, However는 역접(그러나)이라 여전히 매혹의 힘을 ''지니고'' 관객은 ''소중히 여긴다''는 뜻이야.'
   - kind: short
     sentence: If we are trying to understand something totally new, however, we need to make larger adjustments to the units of the patterns we already have, which requires changing the strengths of large numbers of connections in our brain, and this is a difficult, tiring process.
     source: 2024 고3 9월 36번
@@ -2517,6 +2608,7 @@ practice:
         signal: however
         clause: 더 큰 조정을 해야 한다
         logic: 대조
+      caution: '''however''를 ''그래서'' 인과로, ''larger adjustments''와 ''difficult''를 반대로 뒤집기 쉬운데, however는 역접이라 새로운 건 ''더 큰 조정''이 필요한 ''어려운'' 과정이야.'
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress-design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
@@ -2542,6 +2634,7 @@ practice:
         signal: Instead of
         clause: 현대적 연결이 새로 만들어졌다
         logic: 대조
+      caution: '''Instead of''를 ''~에 더해'' 첨가로, ''had not been there before''를 긍정으로 뒤집기 쉬운데, Instead of는 대체(~대신에)고 새 연결은 ''이전엔 없던'' 거야.'
   - kind: short
     sentence: '"It''ll be amazing to see how he communicated the feelings " of isolation and loneliness in his work," she said eagerly." However, after searching all the exhibition rooms, Emilia and Layla couldn''t find van Gogh''s masterpiece anywhere.'
     source: 2022 고3 9월 45번
@@ -2569,6 +2662,7 @@ practice:
         signal: However
         clause: 걸작을 어디서도 찾지 못했다
         logic: 대조
+      caution: '''However''를 ''그래서/게다가'' 순접으로 읽기 쉬운데, 역접(그러나)이라 앞의 설렘과 뒤의 ''어디에서도 못 찾음''을 반전시키는 표지야.'
   - sentence: Passwords, double-key identification, and biometrics such as fingerprint, iris, and voice recognition are all ways of keeping the account details hidden from potential fraudsters.
     source: 2022 고3 9월 39번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술.”'
@@ -2597,6 +2691,7 @@ practice:
         signal: such as
         clause: 지문·홍채·음성 인식
         logic: 예시
+      caution: '''biometrics such as A, B, C''의 such as를 ''~와는 구별되는''으로 반대로 읽기 쉬운데, 상위 개념 biometrics를 좁혀 주는 구체 예시야.'
     kind: mc
   - sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -2622,6 +2717,7 @@ practice:
         signal: and other
         clause: 탄소 포집·서식지·홍수 방지 등
         logic: 예시
+      caution: '''A, B, C, and other X''에서 ''and other''를 놓치면 나열을 서로 무관한 별개로 읽기 쉬운데, A·B·C가 상위 ''ecosystem services''의 사례임을 알려주는 표지야.'
     kind: short
   - kind: mc
     sentence: In this manner, subjective experience is extended into the external environment and vice versa; the external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that affect our subjective experience and solutions.
@@ -2653,6 +2749,7 @@ practice:
         signal: such as
         clause: 제도적 법률과 장비
         logic: 예시
+      caution: '''such as institutional laws and equipment''를 뒤의 mental institutions 예시로 붙이기 쉬운데, 바로 앞 ''disciplinary objects''를 구체화하는 예시야. 또 ''with its disciplinary objects''는 주어 environment를 수식하는 부대 상황이라 becomes의 주어는 여전히 environment야.'
   - kind: mc
     sentence: Personal flair is without doubt an absolute necessity in some product categories, particularly relatively small objects, with a low degree of technological complexity, such as furniture, lighting, small appliances, and housewares.
     source: 2022 고3 9월 40번
@@ -2683,6 +2780,7 @@ practice:
         signal: such as
         clause: 가구·조명·소형 가전·생활용품
         logic: 예시
+      caution: '''such as furniture ...''를 앞부분들과 별개 병렬로 나열해 읽기 쉬운데, 바로 앞 ''small objects''를 구체화하는 예시야. 또 ''particularly ~, with ~''는 some product categories를 좁혀 설명하는 삽입이라 ''범주→대상→예시''로 점점 구체화되는 한 덩어리야.'
   - kind: short
     sentence: Passwords, double‑key identification, and biometrics such as fingerprint‑, iris‑, and voice recognition are all ways of keeping the account details hidden from potential fraudsters, of keeping your data dark.
     source: 2022 고3 9월 39번
@@ -2709,6 +2807,7 @@ practice:
         signal: such as
         clause: 지문·홍채·음성 인식
         logic: 예시
+      caution: '''such as fingerprint, iris, voice recognition''을 네 번째 주어로 읽기 쉬운데, 바로 앞 biometrics의 예시라 주어는 셋이야. 또 뒤의 ''of keeping your data dark''는 앞 ''of keeping ~ hidden''을 같은 말로 다시 풀어 준 환언이야.'
   - kind: short
     sentence: If automobile manufacturers are required to measure and publicize the safety characteristics of cars, potential car purchasers can trade safety concerns against other attributes, such as price and styling.
     source: 2023 고3 11월 23번
@@ -2735,6 +2834,7 @@ practice:
         signal: such as
         clause: 가격과 스타일
         logic: 예시
+      caution: '''such as price and styling''을 safety concerns의 예시로 붙이기 쉬운데, 바로 앞 ''other attributes''를 구체화하는 예시야. ''trade A against B''는 A(안전 우려)와 B(다른 속성)를 견주는 구조라 가격·스타일은 안전과 맞바꾸는 쪽이야.'
   - kind: short
     sentence: Increasingly, food ads helped shoppers become accustomed ', to new definitions of words such as "fresh" and "natural," ' definitions that could well be considered opposite of their traditional meanings.
     source: 2024 고3 6월 23번
@@ -2761,6 +2861,7 @@ practice:
         signal: such as
         clause: '''fresh''와 ''natural'''
         logic: 예시
+      caution: '''such as "fresh" and "natural"''을 definitions의 예시로 보기 쉬운데, 바로 앞 words의 예시야. 또 콤마 뒤 ''definitions that ~''은 앞 new definitions를 다시 받은 동격 반복이라 새 주어로 끊으면 안 돼.'
   - kind: short
     sentence: Due to their low acquisition and maintenance costs, cargo bicycles convey much potential in developed and becak( ) developing countries alike, such as the becak (a three‑wheeled bicycle) in Indonesia.
     source: 2023 고3 11월 22번
@@ -2787,6 +2888,7 @@ practice:
         signal: such as
         clause: 인도네시아의 becak(삼륜 자전거)
         logic: 예시
+      caution: '''such as the becak''을 countries의 예시로 보기 쉬운데, 괄호 ''(a three-wheeled bicycle)''가 자전거임을 못박으니까 cargo bicycles의 사례야. 또 ''A and B alike''는 ''선진국과 개도국 모두''라는 뜻이지 ''비슷한''이 아니야.'
   - kind: mc
     sentence: However, the most direct approach to managing automobile demand is making motorized travel more expensive or restricting it with administrative rules.
     source: 2022 고3 6월 30번
@@ -2811,6 +2913,7 @@ practice:
         signal: However
         clause: 가장 직접적 방법은 비용·제한
         logic: 대조
+      caution: '''However''를 ''게다가'' 첨가로, ''most direct''를 간접으로 뒤집기 쉬운데, However는 역접(앞과 대조)이고 가장 ''직접적인'' 방법이라는 뜻이야.'
   - kind: mc
     sentence: Consequently, more consideration is being given to other ways to manage pests, such as incorporating greater resistance to pests into cultivars by breeding and using other biological control methods.
     source: 2022 고3 6월 38번
@@ -2835,6 +2938,7 @@ practice:
         signal: Consequently
         clause: 다른 방제법이 더 고려됨
         logic: 인과
+      caution: '''Consequently''를 ''그럼에도 불구하고''처럼 역접으로 보기 쉬운데, 이건 앞의 결과를 잇는 ''그 결과''라는 뜻이야. 또 ''such as''는 반전이 아니라 그냥 예시야.'
   - kind: mc
     sentence: In the old days, however, the client was always primary and her tailor was an obscure craftsman, perhaps talented but perhaps not.
     source: 2022 고3 9월 33번
@@ -2859,6 +2963,7 @@ practice:
         signal: however
         clause: 옛날엔 고객이 우선이었다
         logic: 대조
+      caution: '''however''를 무시하고 과거·현재를 같게 보기 쉬운데, 여긴 앞과 대조되는 과거야. ''always primary''는 고객이 늘 우선이었다는 뜻이지 재단사가 우선인 게 아니야.'
   - kind: mc
     sentence: However, those data do not actually show that different cultures have different emotions, if we think of emotions as central, neurally implemented states.
     source: 2022 고3 6월 23번
@@ -2883,6 +2988,7 @@ practice:
         signal: However
         clause: 그 자료는 사실 입증 못함
         logic: 대조
+      caution: '''However'' 뒤의 ''do not actually show''를 긍정으로 보기 쉬운데, 여긴 앞 내용을 반박하는 부정이라 ''그 점을 입증하지 못한다''가 요지야.'
   - kind: mc
     sentence: For example, Wade Guyton, an abstractionist who uses a word processing program and inkjet printers, does not call himself a computer artist.
     source: 2022 고3 6월 31번
@@ -2907,6 +3013,7 @@ practice:
         signal: For example
         clause: 가이턴은 컴퓨터 예술가라 안 함
         logic: 예시
+      caution: '''does not call''을 긍정으로 보기 쉬운데, 이건 부정이라 ''스스로를 컴퓨터 예술가라고 부르지 않는다''는 뜻이야. 컴퓨터를 쓰지만 자칭은 아니라는 예시야.'
   - kind: mc
     sentence: For example, energy efficiency requirements for appliances may produce goods that work less well or that have characteristics that consumers do not want.
     source: 2023 고3 11월 23번
@@ -2931,6 +3038,7 @@ practice:
         signal: For example
         clause: 효율 규제가 성능 낮은 제품 낳음
         logic: 예시
+      caution: '''work less well''과 ''do not want''를 긍정으로 보기 쉬운데, 둘 다 부정이라 성능이 더 나빠지고 소비자가 원치 않는 제품이 나온다는 규제의 부작용 예시야.'
   - kind: mc
     sentence: However, one part of your brain sees its shape, another sees color, another detects location, and another perceives movement.
     source: 2023 고3 11월 24번
@@ -2955,6 +3063,7 @@ practice:
         signal: However
         clause: 뇌 부위마다 따로 처리함
         logic: 대조
+      caution: '''one ... another ... another''를 한 부분이 다 처리한다고 보기 쉬운데, 이건 부위별로 나눠 맡는 분업 나열이야. ''However''가 앞 통념과 대조된다는 신호야.'
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
@@ -2985,6 +3094,7 @@ practice:
         signal: central
         stmt: 대안 수단 질 개선은 핵심 요소다
         polarity: positive
+      caution: '''a central element''를 ''여러 요소 중 하나''로 흘려 보기 쉬운데, central은 ''핵심''이라 여기가 필자 주장의 중심이야.'
   - kind: mc
     sentence: Rather than irrelevant, moral questions are fundamental to the imposition of tax.
     source: 2022 고3 9월 22번
@@ -3014,6 +3124,7 @@ practice:
         signal: fundamental
         stmt: 도덕적 질문은 세금 부과에 근본적이다
         polarity: positive
+      caution: '''are fundamental to''를 ''무관하지 않다''처럼 약하게 보기 쉬운데, fundamental은 ''근본적''이라 단순 관련이 아니라 핵심 토대라는 뜻이야.'
   - kind: mc
     sentence: Many signals are now seen as having this information gathering or assessment function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options.
     source: 2022 고3 6월 35번
@@ -3043,6 +3154,7 @@ practice:
         signal: vital
         stmt: 신호는 필수 정보를 직접 제공한다
         polarity: positive
+      caution: '''directly''와 ''vital''을 ''대략·간접''으로 흘려 보기 쉬운데, 신호가 ''직접'' 기여하고 ''필수'' 정보를 준다는 결정적 역할 강조야.'
   - kind: mc
     sentence: The adjustments are clearly smallest when the new information is only slightly new—when it is compatible with what we already know, so that the old patterns need only a little bit of adjustment to accommodate the new knowledge.
     source: 2024 고3 9월 36번
@@ -3072,6 +3184,7 @@ practice:
         signal: clearly
         stmt: 조정은 분명히 가장 작다
         polarity: positive
+      caution: '''are clearly smallest''의 clearly를 ''불분명''으로 뒤집기 쉬운데, clearly는 ''분명히''라 조정이 가장 작다는 게 확실하다는 필자의 확신이야.'
   - kind: short
     sentence: At the same time, it is important to recognize that, no matter how fast they grow, countries where a large part of the population derive their livelihood from uncertain sources cannot hope to prevent famines without specialized entitlement protection mechanisms involving direct public intervention.
     source: 2024 고3 6월 40번
@@ -3097,6 +3210,7 @@ practice:
         signal: important
         stmt: 직접 개입 없이는 기근을 못 막음이 중요하다
         polarity: positive
+      caution: '''no matter how fast they grow''를 ''성장하면 막는다''는 조건으로 보기 쉬운데, 이건 ''아무리 빨리 성장해도''라 직접 개입 없이는 못 막는다는 게 핵심이야.'
   - kind: short
     sentence: In fact, this attention to audience and appropriateness may be even more important in writing than in conversation because writing does not permit the nonverbal communication and immediate feedback that are part of conversation.
     source: 2026 고3 11월 32번
@@ -3122,6 +3236,7 @@ practice:
         signal: more important
         stmt: 청중 고려는 글쓰기에서 훨씬 더 중요하다
         polarity: positive
+      caution: '''even more important in writing than in conversation''을 ''비슷하게''로 흘려 보기 쉬운데, even more important라 ''대화보다 글쓰기에서 훨씬 더'' 중요하다는 뜻이야.'
   - kind: short
     sentence: Since that time, it has become apparent that broadly effective pesticides can have harmful effects on beneficial insects, which can negate their effects in controlling pests, and that persistent pesticides can damage non-target organisms in the ecosystem, such as birds and people.
     source: 2022 고3 6월 38번
@@ -3147,6 +3262,7 @@ practice:
         signal: apparent
         stmt: 살충제의 해로움이 분명해졌다
         polarity: positive
+      caution: '''it has become apparent''의 apparent를 ''막연한 추측''으로 약하게 보기 쉬운데, 이건 ''분명해진 사실''이라 확정성을 강조하는 거야.'
   - kind: mc
     sentence: 'If we psychologists are too bent on identifying the orderly pattern, the regularities of children''s minds, we may miss an essential and pervasive characteristic of our topic: the child''s more unruly and imaginative ways of talking and thinking.'
     source: 2022 고3 9월 34번
@@ -3179,6 +3295,7 @@ practice:
         signal: essential
         stmt: 아이들의 방식은 본질적 특성이다
         polarity: positive
+      caution: '''may miss''를 ''발견하다·알아차리다''로 뒤집기 쉬운데, miss는 ''놓치다''라 질서에만 몰두하면 그 핵심을 놓친다는 경고야. ''essential and pervasive''라는 강조어에 이끌려 긍정 결과로 오독하면 안 돼.'
   - kind: mc
     sentence: Mobility flows have become a key dynamic of urbanization, with the associated infrastructure invariably constituting the backbone of urban form.
     source: 2023 고3 6월 24번
@@ -3203,6 +3320,7 @@ practice:
         signal: key
         stmt: 이동 흐름이 도시화의 핵심
         polarity: positive
+      caution: '''key''와 ''backbone''을 사소한 걸로 보기 쉬운데, 이건 핵심이라 이동 흐름이 도시화의 중심 축이라는 강조야. 또 ''invariably''는 ''예외 없이''라는 뜻이야.'
   - kind: mc
     sentence: Because experts have extensive practice within a limited domain, the key component skills in their domain tend to be highly practiced and more automated.
     source: 2023 고3 6월 35번
@@ -3227,6 +3345,7 @@ practice:
         signal: key
         stmt: 핵심 기술이 고도로 숙달됨
         polarity: positive
+      caution: '''key''와 ''highly practiced''를 미숙으로 보기 쉬운데, 둘 다 강조라 핵심 기술이 고도로 숙달돼 있다는 뜻이야.'
   - kind: mc
     sentence: Ever since, the practice of portraying shadows has evolved along with critical analysis of them, as artists and theoreticians have engaged in an ongoing debate about the significance of shadow representation.
     source: 2024 고3 6월 24번
@@ -3251,6 +3370,7 @@ practice:
         signal: significance
         stmt: 그림자 표현의 중요성 논쟁
         polarity: positive
+      caution: '''significance''를 사소함으로 뒤집기 쉬운데, 이건 ''중요성''이라 그림자 표현이 지속적 논의 대상이 됐다는 뜻이야.'
   - kind: mc
     sentence: For example, performance evaluation and reward systems that reinforce long-term performance and the development and sharing of new skills and knowledge are particularly important.
     source: 2024 고3 6월 37번
@@ -3275,6 +3395,7 @@ practice:
         signal: particularly important
         stmt: 평가·보상 체계가 특히 중요
         polarity: positive
+      caution: '''particularly important''를 ''그다지 중요하지 않다''로 뒤집기 쉬운데, 이건 중요성 강조라 그 체계가 특히 중요하다는 뜻이야. 또 ''reinforce''는 강화한다는 긍정 방향이야.'
   - kind: mc
     sentence: In highly representational paintings, plays, or stories, the focus is on subject matter that resembles everyday life and the role of background style is to facilitate the construction of mental models.
     source: 2024 고3 6월 39번
@@ -3299,6 +3420,7 @@ practice:
         signal: focus
         stmt: 초점은 일상 닮은 소재
         polarity: positive
+      caution: '''focus is on''을 배경 양식 쪽으로 옮겨 보기 쉬운데, 초점은 소재에 있어. ''facilitate''는 방해가 아니라 돕는다는 뜻이야.'
   - kind: mc
     sentence: In highly expressionist works, novel stylistic devices work in an inharmonious manner against the subject matter thereby creating a disquieting atmosphere.
     source: 2024 고3 6월 39번
@@ -3323,6 +3445,7 @@ practice:
         signal: highly
         stmt: 새 양식이 소재와 부조화
         polarity: positive
+      caution: '''highly''와 ''inharmonious against''를 조화로 보기 쉬운데, 이건 정도 강조 + 대립이라 양식이 소재와 부조화하게 부딪친다는 뜻이야.'
   - kind: mc
     sentence: As a matter of course they can enquire about the availability of pieces from dealers in other cities and, most crucially in some categories, from overseas.
     source: 2024 고3 9월 35번
@@ -3346,6 +3469,7 @@ practice:
         signal: crucially
         stmt: 해외 문의가 결정적
         polarity: positive
+      caution: '''most crucially''를 ''전혀 중요하지 않다''로 보기 쉬운데, 이건 그 지점이 가장 결정적으로 중요하다는 강조야.'
   - kind: mc
     sentence: Because this information was the key to their profitability, these firms worked in relative secrecy, frequently built on family ties, trust, and loyalty.
     source: 2026 고3 11월 31번
@@ -3369,6 +3493,7 @@ practice:
         signal: key
         stmt: 정보가 수익성의 핵심
         polarity: positive
+      caution: '''the key to their profitability''를 ''상관없다''로 보기 쉬운데, key라 정보가 수익성의 결정적 핵심이라는 뜻이야.'
   - kind: mc
     sentence: Diaries were central media through which enlightened and free subjects could be constructed.
     source: 2023 고3 11월 21번
@@ -3392,6 +3517,7 @@ practice:
         signal: central
         stmt: 일기가 중심적 매체
         polarity: positive
+      caution: '''central media''를 ''부수적 매체''로 보기 쉬운데, central은 ''중심''이라 일기가 주체 형성의 핵심 매체라는 뜻이야.'
   polarity_negative:
   - kind: mc
     sentence: Emergencies are not always clearly labeled as such; "smoke" pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
@@ -3422,6 +3548,7 @@ practice:
         signal: not always
         stmt: 응급 상황이 명확히 표시된다
         polarity: partial
+      caution: '''not always''를 ''결코 아니다''는 전체부정으로 보기 쉬운데, 이건 ''항상 ~인 것은 아니다''는 부분부정이야.'
   - kind: mc
     sentence: Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.
     source: 2024 고3 9월 30번
@@ -3451,6 +3578,7 @@ practice:
         signal: no real judgments at all
         stmt: 우리는 진정한 판단을 한다
         polarity: negative
+      caution: '''no real judgments at all''을 ''조금은 한다''는 긍정으로 보기 쉬운데, no와 at all이 붙어서 ''진정한 판단을 전혀 하지 않는다''는 완전부정이야.'
   - kind: mc
     sentence: On the Internet, there are no regulations preventing a kindergarten teacher from offering medical advice or a physician from suggesting ways to safely make structural changes to your home.
     source: 2022 고3 9월 30번
@@ -3480,6 +3608,7 @@ practice:
         signal: no regulations
         stmt: 조언을 막는 규제가 있다
         polarity: negative
+      caution: '''there are no regulations''를 ''규제가 있다''로 보기 쉬운데, no라 ''막는 규제가 없다''는 존재 자체의 부정이야.'
   - kind: mc
     sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
@@ -3509,6 +3638,7 @@ practice:
         signal: no longer
         stmt: 광고의 자연은 식품을 만든 자연이다
         polarity: negative
+      caution: '''no longer the nature''를 ''여전히 ~이었다''로 보기 쉬운데, no longer는 ''더 이상 ~아니다''라 이전 상태가 끊겼다는 뜻이야.'
   - kind: mc
     sentence: Science is sometimes described as a winner-take-all contest, meaning that there are no rewards for being second or third.
     source: 2024 고3 11월 38번
@@ -3538,6 +3668,7 @@ practice:
         signal: no rewards
         stmt: 2·3등에도 보상이 있다
         polarity: negative
+      caution: '''there are no rewards for being second or third''를 ''보상이 있다''로 보기 쉬운데, no라 2·3등에는 보상이 없다는 승자 독식이야.'
   - kind: short
     sentence: By using contingency pricing, clients are ensured that they pay no fees until they receive a settlement.
     source: 2023 고3 11월 37번
@@ -3563,6 +3694,7 @@ practice:
         signal: no fees
         stmt: 의뢰인은 수수료를 낸다
         polarity: negative
+      caution: '''pay no fees until''을 ''수수료를 낸다''로 보기 쉬운데, no라 합의 전까지는 어떠한 수수료도 내지 않는다는 뜻이야.'
   - kind: short
     sentence: In his early studies on musical performance, Carl Seashore discovered that musicians only rarely play two equal notes in exactly the same way.
     source: 2022 고3 9월 24번
@@ -3588,6 +3720,7 @@ practice:
         signal: rarely
         stmt: 음악가는 같은 음을 똑같이 연주한다
         polarity: negative
+      caution: '''only rarely play''를 ''자주 연주한다''로 보기 쉬운데, only rarely는 ''극히 드물게만''이라는 준부정이야.'
   - kind: short
     sentence: We can see the world only as it appears to us, not as it truly is, because there is no as it truly is without a perspective to give it form.
     source: 2022 고3 6월 21번
@@ -3613,6 +3746,7 @@ practice:
         signal: 'no'
         stmt: 관점 없이도 있는 그대로가 존재한다
         polarity: negative
+      caution: '''there is no ... without a perspective''를 ''관점 없이도 있다''로 보기 쉬운데, no ... without은 이중 부정이라 ''형태를 주는 관점 없이는 있는 그대로가 없다''는 뜻이야.'
   - kind: short
     sentence: However, in the virtual world, we have a tendency to be less defensive, as there appears to be no physical threat to our well-being.
     source: 2023 고3 6월 22번
@@ -3638,6 +3772,7 @@ practice:
         signal: no physical threat
         stmt: 안녕에 대한 물리적 위협이 있다
         polarity: negative
+      caution: '''less defensive''와 ''no physical threat''를 ''더 방어적'', ''위협이 있다''로 보기 쉬운데, less와 no라 ''덜 방어적'', ''물리적 위협이 없어 보인다''는 뜻이야.'
   - kind: short
     sentence: Moreover farmers can rarely acquire payoff information on more than a few of the production methods they might use.
     source: 2022 고3 9월 23번
@@ -3663,6 +3798,7 @@ practice:
         signal: rarely
         stmt: 농부는 이득 정보를 얻는다
         polarity: negative
+      caution: '''can rarely acquire''를 ''자주 얻을 수 있다''로 보기 쉬운데, rarely는 ''좀처럼 ~않다''는 준부정이야.'
   - kind: short
     sentence: A company may devise a family emergency leave plan that allows employees the opportunity to be away from the company for a period of no longer than three hours, and no more than once a month, for illness in the employee's immediate family.
     source: 2023 고3 11월 39번
@@ -3688,6 +3824,7 @@ practice:
         signal: no longer than
         stmt: 세 시간 넘게 회사를 떠나 있을 수 있다
         polarity: negative
+      caution: '''no longer than three hours''와 ''no more than once a month''를 ''이상''으로 보기 쉬운데, 둘 다 ''~을 넘지 않는'' 상한이라 최대 3시간, 월 최대 1회라는 뜻이야.'
   - kind: mc
     sentence: Ideas about the social world become part of our worldview without our necessarily being aware of the source of the particular idea or that we even hold the idea at all.
     source: 2022 고3 9월 37번
@@ -3712,6 +3849,7 @@ practice:
         signal: without
         stmt: 출처를 꼭 의식하진 않음
         polarity: partial
+      caution: '''without ... necessarily''를 ''언제나 분명히 인식한다''는 완전 긍정으로 보기 쉬운데, without은 ''~없이''고 necessarily가 붙어 ''꼭 인식하는 건 아니다''는 부분부정이야.'
   - kind: mc
     sentence: Even today, you might find it surprising to learn about people who see an object without seeing where it is, or see it without seeing whether it is moving.
     source: 2023 고3 11월 24번
@@ -3736,6 +3874,7 @@ practice:
         signal: without
         stmt: 위치는 못 보고 물체만 봄
         polarity: negative
+      caution: '''without seeing''을 ''다 본다''로 보기 쉬운데, without은 ''~없이''라 ''see A without B''는 A만 보고 B는 못 본다는 뜻이야.'
   - kind: mc
     sentence: Each of these highly practiced skills then demands relatively few cognitive resources, effectively lowering the total cognitive load that experts experience.
     source: 2023 고3 6월 35번
@@ -3760,6 +3899,7 @@ practice:
         signal: few
         stmt: 인지 자원을 거의 안 씀
         polarity: negative
+      caution: '''few''를 많음으로 보기 쉬운데, few는 ''거의 없음''이라는 준부정이야. ''lowering''도 인지 부하를 낮춘다는 감소 방향이야.'
   - kind: mc
     sentence: For example, owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -3784,6 +3924,7 @@ practice:
         signal: rather than
         stmt: 숲 보전 유인은 없음
         polarity: negative
+      caution: '''rather than manage the forest''를 숲 관리를 선택하는 걸로 보기 쉬운데, rather than은 ''~보다는''이라 숲 관리는 배제되고 벌목 쪽으로 유인이 간다는 뜻이야.'
   - kind: mc
     sentence: In the 1970s, the few scientists who spoke frequently with the media were often criticized by their fellow scientists for having done so.
     source: 2024 고3 11월 42번
@@ -3808,6 +3949,7 @@ practice:
         signal: few
         stmt: 언론과 소통한 과학자는 소수
         polarity: negative
+      caution: '''the few scientists''를 다수로 보기 쉬운데, few는 ''소수''라는 준부정이야. 그 소수가 오히려 동료들에게 비판받았다는 부정적 반응이 이어져.'
   - kind: mc
     sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
     source: 2024 고3 6월 32번
@@ -3831,3 +3973,4 @@ practice:
         signal: rarely
         stmt: 아이디어가 최종 목표 아님
         polarity: partial
+      caution: '''rarely is the final goal''을 ''대개 최종 목표''로 읽기 쉬운데, rarely는 ''거의 ~하지 않다''라서 ''최종 목표인 경우가 드물다''야. 극성이 반대로 뒤집히니 조심해.'

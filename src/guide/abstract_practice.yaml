@@ -35,6 +35,7 @@ practice:
           trap: true
         - t: 쇠퇴하고 있는 것으로 보인다
           v: 쇠퇴
+      caution: '''the emergence of A''를 ''A의 출현(명사)''으로 굳혀 앞의 growing presence of AI와 억지로 인과로 엮기 쉬운데, ''A가 생겨나는 것''으로 동사로 풀어야 해. 또 ''the necessity of B''도 ''B가 필요하다는 것''이야.'
     kind: mc
   - sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
@@ -69,6 +70,7 @@ practice:
           trap: true
         - t: 그리고 그와 함께 새로운 컬처테인먼트 경험으로
           v: 경험
+      caution: '''lead to the emergence of A''를 ''A의 출현물(사물)을 이끈다''로 보기 쉬운데, emergence는 사물이 아니라 ''A가 생겨나게 된다''로 통째 동사로 풀어야 해.'
     kind: mc
   - sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -99,6 +101,7 @@ practice:
           trap: true
         - t: 그렇게 하려는 타고난 욕구도 가진다
           v: 욕구
+      caution: '''capacity for matching A with B''를 ''맞춤이라는 능력''으로 명사 덩어리로 굳히기 쉬운데, capacity for -ing는 ''~할 수 있는 능력''이야. 또 those는 앞의 movements를 받는 ''타인의 움직임''이니 대상을 헷갈리면 안 돼.'
     kind: short
   - kind: mc
     sentence: Scattered attention harms your ability to let go of stress, because even though your attention is scattered, it is narrowly focused, for you are able to fixate only on the stressful parts of your experience.
@@ -139,6 +142,7 @@ practice:
           v: 집중
         - t: 당신이 경험의 스트레스를 주는 부분에만 집착할 수 있기 때문이다
           v: 집착
+      caution: '''to let go of stress''를 ''스트레스를 떨쳐 버리기 위해''라는 목적으로 보기 쉬운데, ability to V는 ''~할 능력''이라 앞의 ability를 꾸며. 그러니 harms의 목적어는 ''스트레스를 떨쳐 버릴 능력'' 전체야.'
   - kind: mc
     sentence: Our view of the world is not given to us from the outside in a pure, objective form; it is shaped by our mental abilities, our shared cultural perspectives and our unique values and beliefs.
     source: 2022 고3 6월 21번
@@ -174,6 +178,7 @@ practice:
           v: 객관적
         - t: 그것은 우리의 정신적 능력, 공유된 문화적 관점, 그리고 고유한 가치관과 신념에 의해 형성된다
           v: 형성
+      caution: '''view of the world''의 view를 ''경치'', of를 ''세계의'' 소유격으로 보기 쉬운데, 여기 view는 ''관점·견해''라서 view of ~는 ''~에 대한 관점''이야.'
   - kind: mc
     sentence: People involved in the conception and engineering of robots designed to perceive and act know how fundamental is the ability to discriminate oneself from other entities in the environment.
     source: 2024 고3 9월 38번
@@ -209,6 +214,7 @@ practice:
           v: 근본적
         - t: 자기 자신을 환경 속의 다른 개체들과 구별하는 능력이
           trap: true
+      caution: '''to discriminate'' 이하를 ''~을 구별하기 위해''라는 목적으로 떼어 읽기 쉬운데, ability to V는 앞의 ability를 구체화하는 ''~하는 능력''이야.'
   - kind: mc
     sentence: To decide whether and how to intervene in ecosystems, protected area managers normally need a reasonably clear idea of what future ecosystems would be like if they did not intervene.
     source: 2024 고3 9월 39번
@@ -244,6 +250,7 @@ practice:
           v: 보호구역
         - t: 만약 그들이 개입하지 않는다면 미래의 생태계가 어떤 모습일지에 대한 상당히 명확한 개념을
           trap: true
+      caution: '''what future ecosystems would be like''의 like를 동사 ''좋아하다''로 보기 쉬운데, be like의 like는 전치사라서 ''어떤 모습일지''라는 뜻이야.'
   - kind: short
     sentence: In some cases, however, we are far less aware of why we believe a certain claim to be true, or how we are to explain why certain social realities exist.
     source: 2022 고3 9월 37번
@@ -278,6 +285,7 @@ practice:
           trap: true
         - t: 또는 특정한 사회적 현실이 왜 존재하는지를 우리가 어떻게 설명해야 하는지를
           v: 사회적 현실
+      caution: '''aware of'' 뒤의 why절과 how절을 본동사와 떼어 읽기 쉬운데, of가 이끄는 why·how 명사절이 ''무엇을 인식하는지'' 그 내용이야. 또 ''how we are to explain''의 be to는 ''어떻게 설명해야 하는가''라는 당위·방법이니 단순 현재로 읽으면 안 돼.'
   - kind: short
     sentence: Learning to understand the built‑in limitations of our mental processes can also help us improve our ability to inform others more effectively.
     source: 2024 고3 9월 30번
@@ -309,6 +317,7 @@ practice:
           v: 향상
         - t: 다른 사람에게 더 효과적으로 정보를 전달하는 능력을
           trap: true
+      caution: '''to inform''을 ''더 효과적으로 알리기 위해''라는 목적으로 보기 쉬운데, ability to V는 앞의 ability를 꾸미는 ''~하는 능력''이야.'
   - kind: short
     sentence: Concert performances become interesting and gain in attraction from the fact that they go far beyond the information printed in the score.
     source: 2022 고3 9월 24번
@@ -340,6 +349,7 @@ practice:
           v: 매력
         - t: 그것이 악보에 인쇄된 정보를 훨씬 넘어선다는 사실로부터
           trap: true
+      caution: '''the fact that''의 that을 관계대명사로 보기 쉬운데, 동격 that이라서 that절 전체가 ''~라는 사실''로 fact의 내용을 풀어 줘.'
   - kind: short
     sentence: An ability to switch between the "pragmatic attitude" of ' everyday life and an "aesthetic attitude" is fundamental to ' a balanced life.
     source: 2024 고3 6월 39번
@@ -369,6 +379,7 @@ practice:
           trap: true
         - t: 균형 잡힌 삶에 근본적이다
           v: 근본적
+      caution: '''ability to switch''의 to를 ''~하기 위한''이라는 목적으로 보기 쉬운데, ability를 구체화하는 ''~할 능력''이야. 또 between A and B는 A ''실용적 태도'', B ''심미적 태도''로 오가는 대등한 두 짝이니 어긋나게 읽으면 안 돼.'
   - kind: short
     sentence: The fact that everyone was going to be able to speak and listen had to be accommodated ethically, and it was via a rough egalitarianism.
     source: 2024 고3 6월 22번
@@ -400,6 +411,7 @@ practice:
           v: 수용
         - t: 그리고 그것은 대략적인 평등주의를 통해서였다
           v: 평등주의
+      caution: '''The fact that''의 that을 관계사로 보고 주어를 ''the fact''만으로 끊기 쉬운데, 동격 that절이라 ''The fact that ... listen'' 전체가 주어야.'
   - kind: mc
     sentence: However, that is not a realistic option for scientists who feel a strong sense of responsibility to inform the public / and policymakers and/or to offer suggestions.
     source: 2024 고3 11월 42번
@@ -436,6 +448,7 @@ practice:
           v: 과학자
         - t: 대중과 정책 입안자에게 정보를 알리고 그리고/또는 제안을 하려는 강한 책임감을
           trap: true
+      caution: '''to inform·to offer''를 ''~하기 위해''라는 목적으로 보기 쉬운데, sense of responsibility to V는 responsibility를 구체화하는 ''~할 책임감''이야. 또 and/or로 to inform과 to offer 두 부정사가 대등하게 묶여.'
   - kind: short
     sentence: In films that tell of futuristic worlds, composers, much like sound designers, have added freedom to create a world that is unknown and new to the viewer.
     source: 2024 고3 11월 32번
@@ -468,6 +481,7 @@ practice:
           v: 작곡가
         - t: 관객에게 미지의, 새로운 세계를 창조할 추가적인 자유를
           trap: true
+      caution: '''a world that is unknown and new''의 that is를 ''즉''으로 끊어 관계절을 놓치기 쉬운데, 이 관계절이 world를 ''관객에게 낯설고 새로운'' 세계로 구체화해. 또 freedom to create는 목적이 아니라 ''창조할 자유''야.'
   - kind: short
     sentence: ''' That is because geography starts from the premise that it matters where something takes place on Earth''s surface.'
     source: 2025 고3 6월 34번
@@ -500,6 +514,7 @@ practice:
           v: 지리학
         - t: 어떤 것이 지구 표면의 어디에서 일어나는지가 중요하다는 전제에서
           trap: true
+      caution: '''the premise that''의 that을 관계사로 보기 쉬운데, 동격 that이라 ''~라는 전제''야. 또 ''it matters where''의 it은 가주어라서 where절이 진주어로 ''where절이 중요하다''는 뜻이야.'
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress‑design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
@@ -531,6 +546,7 @@ practice:
           v: 연결
         - t: 이전에는 존재하지 않았던
           v: 존재
+      caution: '''that dressmaking is a craft''의 that을 관계대명사로 보거나 was invented를 ''발명했다''로 읽기 쉬운데, 동격 that절 ''옷 만들기는 공예다라는 규칙''이고 was invented는 수동태 ''만들어졌다''야.'
   - kind: mc
     sentence: Yes, some contests are seen as world class, such as identification of the Higgs particle or the development of high temperature superconductors.
     source: 2024 고3 11월 38번
@@ -560,6 +576,7 @@ practice:
           v: 예를
         - t: 힉스 입자를 규명해 내는 것이나 고온 초전도체를 개발해 내는 것
           trap: true
+      caution: '''identification/development of N''을 ''정체/진보''라는 정적 명사에 of를 소유격으로 보기 쉬운데, ''규명함/개발함''이라는 동작명사라서 ''N을 규명하다/개발하다''로 동사로 풀어야 해.'
   - kind: mc
     sentence: Often overlooked, but just as important a stakeholder, is the consumer who plays a large role in the notion of the privacy paradox.
     source: 2022 고3 6월 22번
@@ -589,6 +606,7 @@ practice:
           v: 그는
         - t: 사생활 역설이라는 개념에서
           trap: true
+      caution: '''the notion of X''를 ''X의 개념''이라는 소유격으로 보기 쉬운데, 동격 of라서 ''X라는 개념''이야. 관계 방향을 뒤집으면 안 돼.'
   - kind: mc
     sentence: The tendency to see negotiation in fixed-pie terms varies depending on how people view the nature of a given conflict situation.
     source: 2023 고3 6월 42번
@@ -618,6 +636,7 @@ practice:
           v: 사람들
         - t: 주어진 갈등 상황의 본질을
           v: 갈등
+      caution: '''tendency to V''의 to를 ''~하기 위해''라는 목적으로 보기 쉬운데, 동격 부정사라서 ''V하려는 경향''이야.'
   - kind: mc
     sentence: In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.
     source: 2024 고3 6월 32번
@@ -647,6 +666,7 @@ practice:
           v: 본질적으로
         - t: 만약 이 아이디어들이 이후 조용한 죽음을 맞는다면
           v: 아이디어들
+      caution: '''the ability to V''의 to를 ''~하기 위한''이라는 목적으로 보기 쉬운데, ''V할 수 있는 능력''이야.'
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
     source: 2025 수능 21번
@@ -680,6 +700,7 @@ practice:
           v: 분명히
         - t: 그림자를 쫓고 있었다 실체가 아니라
           trap: true
+      caution: '''hunting the shadow, not the substance''의 shadow·substance를 사냥 장면의 실제 그림자·물체로 읽기 쉬운데, 이론 의존이라는 문맥이 준 비유라서 ''겉핥기 허상 대 본질''이야.'
     kind: mc
   - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing them flat and making sure they are hidden on the inside so that we wear clothing rather than pieces of fabric.
     source: 2025 고3 6월 42번
@@ -709,6 +730,7 @@ practice:
           trap: true
         - t: 그래서 우리가 천 조각이 아니라 옷을 입도록
           v: 옷
+      caution: '''the seams''를 실제 옷감 봉제 솔기로만 읽기 쉬운데, 기술의 이음매(구성 요소 경계)를 감춰 조각이 아닌 완결된 전체로 경험하게 하는 설계 비유야.'
     kind: short
   - kind: mc
     sentence: Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and ' the environment act as a coupled system.' This coupled system can be seen as a complete cognitive system of its own.
@@ -747,6 +769,7 @@ practice:
           trap: true
         - t: 이 결합된 시스템은 그 자체로 완전한 인지 체계로 볼 수 있다
           v: 인지
+      caution: '''act as''를 ''~을 향해 행동하다/연기하다''로 보기 쉬운데, ''~로서 기능하다''라는 뜻이라 주관적 경험과 환경을 하나의 결합 시스템에 빗댄 거야. 뒤에서 This coupled system을 단수로 되받는 것도 근거야.'
   - kind: mc
     sentence: If there is a clear line between burned out and not, as there is with a lightbulb, then we have no good way to categorize people who say they are burned out but still manage to do their work competently.
     source: 2024 고3 6월 21번
@@ -784,6 +807,7 @@ practice:
           v: 분류
         - t: 번아웃이라 말하면서도 여전히 유능하게 일을 해내는 사람들을
           v: 유능
+      caution: '''as there is with a lightbulb''의 with를 ''전구와 함께''라는 동반으로 보기 쉬운데, ''전구의 경우에는 그런 뚜렷한 선이 있듯이''로 앞 명사를 되받는 비유야.'
   - kind: mc
     sentence: Even those who describe scientific contests in such a way note that it is a somewhat inaccurate description, given that replication and verification have social value and are common in science.
     source: 2024 고3 11월 38번
@@ -821,6 +845,7 @@ practice:
           v: 부정확
         - t: 재현과 검증은 사회적 가치가 있고 과학에서 흔하다는 점을 고려하면
           v: 재현
+      caution: '''scientific contests''를 실제로 열리는 ''과학 경연대회''로 읽기 쉬운데, 과학을 경쟁·시합에 빗댄 비유야. 뒤에서 화자들 스스로 ''다소 부정확한 묘사''라고 인정하잖아.'
   - kind: mc
     sentence: The entrance to a honeybee colony, often referred to as the dancefloor, is a market place for information about the state of the colony and the environment outside the hive.
     source: 2023 고3 11월 33번
@@ -856,6 +881,7 @@ practice:
           v: 무도장
         - t: 군집의 상태와 벌통 바깥 환경에 관한 정보가 오가는 장이다
           trap: true
+      caution: '''a market place for information''을 정보를 돈 주고 매매하는 실제 시장으로 읽기 쉬운데, 정보가 오가는 장(場)을 이미지화한 비유야.'
   - kind: short
     sentence: 'Adrianne Hardman has summarized this serious situation for public health: "Physical inactivity is a waste of human potential for health and well‑being."'
     source: 2025 고3 6월 36번
@@ -887,6 +913,7 @@ practice:
           v: 신체 활동 부족
         - t: 건강과 행복을 위한 인간 잠재력의 낭비이다
           trap: true
+      caution: '''is a waste of''를 ''A가 B를 낭비한다''는 동사로 읽기 쉬운데, ''A는 곧 B의 낭비다''라는 A=B 등치 비유야. inactivity가 능동으로 뭘 버리는 게 아니야.'
   - kind: short
     sentence: The history of surviving dress really only starts in the century, and like all artefacts described as fine or decorative art, is a highly visual subject.
     source: 2026 고3 11월 42번
@@ -918,6 +945,7 @@ practice:
           trap: true
         - t: 매우 시각적인 주제이다
           v: 시각적
+      caution: '''like all artefacts''의 like를 동사 ''좋아하다''로 보거나 이 삽입구를 뒤 is의 주어로 읽기 쉬운데, ''~와 마찬가지로''라는 비유 전치사구고 is의 주어는 앞의 The history야.'
   - kind: mc
     sentence: The metaphor is useful because it helps us see ownership as a grouping of interpersonal rights that can be separated and put back together.
     source: 2023 고3 6월 21번
@@ -947,6 +975,7 @@ practice:
           v: 소유권
         - t: 분리되었다가 다시 합쳐질 수 있는 대인 권리들의 묶음으로
           trap: true
+      caution: '''see ownership as a grouping ... separated and put back together''를 실제로 떼었다 붙였다 하는 물건 덩어리로 읽기 쉬운데, 권리들이 나뉘고 다시 결합될 수 있음을 묶음에 빗댄 은유야.'
   - kind: mc
     sentence: We feel as though others can see through our skin and into our mind.
     source: 2023 고3 6월 37번
@@ -974,6 +1003,7 @@ practice:
           v: 사람들
         - t: 우리의 피부를 꿰뚫고 우리의 마음속까지 볼 수 있는 것처럼
           trap: true
+      caution: '''as though others can see through our skin''을 남이 실제로 속마음을 꿰뚫어 본다고 읽기 쉬운데, as though는 ''마치 ~인 것처럼''이라는 비유·가정이야.'
   - kind: mc
     sentence: Even so, we don't feel as if his face is a dentate blankness.
     source: 2025 고3 6월 32번
@@ -1001,6 +1031,7 @@ practice:
           v: 느끼지
         - t: 마치 그의 얼굴이 톱니 모양의 공백인 것처럼
           trap: true
+      caution: '''as if his face is a dentate blankness''를 실제 톱니 달린 텅 빈 표면으로 읽기 쉬운데, as if는 ''마치 ~인 것처럼''이라 얼굴을 ''톱니 모양 공백''에 빗댄 은유야.'
   - kind: mc
     sentence: The experience of walking along a path, for example, can be a metaphor for thinking about arithmetic.
     source: 2025 고3 6월 39번
@@ -1028,3 +1059,4 @@ practice:
           v: 예를
         - t: 산수에 대해 생각하는 것에 대한 비유가 될 수 있다
           trap: true
+      caution: '''can be a metaphor for''를 걷기와 산수를 실제로 같은 것으로 동일시하기 쉬운데, ''~에 대한 비유가 될 수 있다''는 빗댐이야.'
