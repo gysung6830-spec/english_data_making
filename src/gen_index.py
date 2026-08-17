@@ -4,6 +4,7 @@ import json, re, html, os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "corpus", "workbook_content.json")
+PAGES = os.path.join(ROOT, "corpus", "item_pages.json")
 OUT = os.path.join(ROOT, "samples", "어휘index.html")
 
 
@@ -35,6 +36,9 @@ def first_letter(w):
 
 def build():
     data = json.load(open(SRC, encoding="utf-8"))
+    pages = {}
+    if os.path.exists(PAGES):
+        pages = json.load(open(PAGES, encoding="utf-8"))
     # dedupe by lowercased word; merge distinct meanings + collect sources
     agg = {}
     for c in data:
@@ -47,12 +51,13 @@ def build():
             if not w:
                 continue
             key = w.lower()
-            e = agg.setdefault(key, {"w": w, "means": [], "src": []})
+            e = agg.setdefault(key, {"w": w, "means": [], "src": {}})
             if m and m not in e["means"]:
                 e["means"].append(m)
             lbl = exam_label(eid)
+            pg = pages.get(eid)
             if lbl and lbl not in e["src"]:
-                e["src"].append(lbl)
+                e["src"][lbl] = pg  # 회차 라벨 → 페이지
     entries = sorted(agg.values(), key=lambda e: (sort_key(e["w"]), e["w"].lower()))
     total = len(entries)
 
@@ -71,13 +76,21 @@ def build():
         rows = ""
         for e in groups[L]:
             mean = " / ".join(e["means"])
-            src = e["src"]
-            srctxt = ""
-            if src:
-                shown = src[:3]
-                more = f' 외 {len(src)-3}' if len(src) > 3 else ""
+            # 회차·페이지 — 페이지 오름차순 정렬
+            src_items = sorted(e["src"].items(), key=lambda kv: (kv[1] is None, kv[1] or 0))
+            pgtxt = srctxt = ""
+            if src_items:
+                # 페이지 배지(중복 제거, 오름차순)
+                pnums = sorted({p for _, p in src_items if p})
+                if pnums:
+                    pgtxt = "".join(f'<span class="pg">p.{p}</span>' for p in pnums[:4])
+                    if len(pnums) > 4:
+                        pgtxt += f'<span class="pgmore">외 {len(pnums)-4}</span>'
+                shown = [lbl for lbl, _ in src_items[:3]]
+                more = f' 외 {len(src_items)-3}' if len(src_items) > 3 else ""
                 srctxt = f'<span class="src">{esc("·".join(shown))}{esc(more)}</span>'
             rows += (f'<div class="ent"><span class="w">{esc(e["w"])}</span>'
+                     f'<span class="pgs">{pgtxt}</span>'
                      f'<span class="m">{esc(mean)}</span>{srctxt}</div>')
         sections += (f'<section class="lg"><div class="lh"><span class="lc">{esc(L)}</span>'
                      f'<span class="cnt">{len(groups[L])}개</span></div>'
@@ -105,7 +118,10 @@ body{{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; c
 .cols{{ column-count:2; column-gap:16px; }}
 .ent{{ break-inside:avoid; padding:2px 0 3px; border-bottom:1px dotted #e9ecee; margin-bottom:1px; }}
 .ent .w{{ font-weight:800; color:#1a1f26; }}
-.ent .m{{ display:block; font-size:9.2px; color:#33414d; margin-top:1px; }}
+.ent .pgs{{ float:right; }}
+.ent .pgs .pg{{ display:inline-block; font-size:7.8px; font-weight:800; color:var(--ink-d); background:#e9f4ef; border:1px solid #cfe5da; border-radius:4px; padding:0 4px; margin-left:3px; }}
+.ent .pgs .pgmore{{ font-size:7.2px; color:#93a0aa; margin-left:3px; }}
+.ent .m{{ display:block; font-size:9.2px; color:#33414d; margin-top:1px; clear:both; }}
 .ent .src{{ display:block; font-size:7.4px; color:#93a0aa; margin-top:1px; }}
 h1,h2{{ margin:0; }}
 </style></head><body>
@@ -115,7 +131,7 @@ h1,h2{{ margin:0; }}
   <div class="sub">전 지문 핵심 단어·숙어 알파벳 사전</div>
   <div class="meta">총 <b>{total}</b>개 표제어 · 알파벳순 · 출처 회차 병기</div>
 </div>
-<div class="guide">📖 <b>보는 법</b> — 표제어(영어) 아래 뜻, 그 아래 회색으로 <b>출처 회차·문항</b>(예: 2026·6월 21)을 적었습니다. 같은 단어가 여러 번 나오면 뜻을 합치고 회차를 모았습니다.</div>
+<div class="guide">📖 <b>보는 법</b> — 표제어(영어) 오른쪽 <b><span style="color:#12543d">p.숫자</span> = 교재 페이지</b>(그 단어가 나온 문항 위치)로 바로 찾아가세요. 아래엔 뜻과 <b>출처 회차·문항</b>(예: 2026·6월 21). 같은 단어가 여러 번 나오면 뜻·페이지를 모았습니다.</div>
 <div class="nav">{nav}</div>
 {sections}
 </body></html>'''
