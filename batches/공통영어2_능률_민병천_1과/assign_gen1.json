@@ -1,0 +1,28 @@
+[
+ {
+  "var": "P1",
+  "item_no": "속보 · 1 (앵커의 뉴스 속보)",
+  "title": "Rescue ① 속보",
+  "key_grammar_hint": "It turns out that ~ (~로 밝혀지다; that 명사절)",
+  "sentences": [
+   "A missing hiker named Rene Compean was found safe on Tuesday by a rescue team in Angeles National Forest.",
+   "It turns out that a photo played a key role in saving his life.",
+   "Let's go over to Marissa Reynolds for more details on this story."
+  ]
+ },
+ {
+  "var": "P2",
+  "item_no": "조난 · 1 (길을 잃은 숙련 등산객)",
+  "title": "Rescue ② 조난",
+  "key_grammar_hint": "계속적 용법 관계대명사 which (앞 문장 전체를 받음)",
+  "sentences": [
+   "Thank you, Thomas. I'm standing here at the entrance of Angeles National Forest.",
+   "As you just heard, Rene Compean was recently rescued from this forest.",
+   "Compean, an experienced hiker who knew the area well, went on a hike alone on April 12.",
+   "However, a recent forest fire had destroyed some signs, which caused him to take a wrong turn and get lost.",
+   "He tried shouting for help and even wrote SOS on the ground in case a plane or helicopter passed by.",
+   "He had planned to hike for only about two hours, but night was coming.",
+   "It started getting very windy and the temperature was dropping quickly."
+  ]
+ }
+]

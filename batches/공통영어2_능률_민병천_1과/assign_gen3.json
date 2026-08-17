@@ -1,0 +1,30 @@
+[
+ {
+  "var": "P5",
+  "item_no": "제보 · 1 (SNS와 Ben Kuo의 등장)",
+  "title": "Rescue ⑤ 제보자",
+  "key_grammar_hint": "동명사의 의미상 주어 (소유격 + 동명사: his spending)",
+  "sentences": [
+   "As Compean had already spent one night in difficult conditions, the police worried about his spending a second night.",
+   "So they decided to use social media to find out if anyone could find clues in the picture.",
+   "They posted the picture and asked if anyone recognized the scenery.",
+   "The picture shared by the police was seen by a Californian named Ben Kuo.",
+   "One of his hobbies is examining satellite images to track forest fires and informing people of potential dangers.",
+   "He also enjoys determining where pictures were taken and where movies were filmed.",
+   "When he saw the picture of Compean, he was immediately interested."
+  ]
+ },
+ {
+  "var": "P6",
+  "item_no": "추론 · 1 (Kuo의 위치 추론)",
+  "title": "Rescue ⑥ 추론",
+  "key_grammar_hint": "조동사 must (강한 추측: ~임에 틀림없다)",
+  "sentences": [
+   "When Kuo saw the black ash on Compean's legs, it reminded him of a recent forest fire.",
+   "This helped him to infer Compean's approximate location.",
+   "Kuo was very familiar with the area because he had tracked the fire before and had checked the features of the area in satellite images.",
+   "From the plants and trees in Compean's picture, Kuo guessed that it must be the south side of the mountain.",
+   "The north side does not have any green valleys like those in the picture."
+  ]
+ }
+]

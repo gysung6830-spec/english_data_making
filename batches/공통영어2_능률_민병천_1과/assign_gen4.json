@@ -1,0 +1,25 @@
+[
+ {
+  "var": "P7",
+  "item_no": "구조 · 1 (위성사진 일치와 구조)",
+  "title": "Rescue ⑦ 구조",
+  "key_grammar_hint": "과거분사구 후치수식 (the area indicated by Kuo)",
+  "sentences": [
+   "As a final step, Kuo compared the view in Compean's picture with more satellite images.",
+   "Finally, he found a match and provided the police with Compean's probable location.",
+   "The police sent a rescue helicopter to the location and found Compean less than a mile away from the area indicated by Kuo."
+  ]
+ },
+ {
+  "var": "P8",
+  "item_no": "마무리 · 1 (결말과 안전 당부)",
+  "title": "Rescue ⑧ 결말·당부",
+  "key_grammar_hint": "remind A to-V (A에게 ~하라고 상기시키다; to부정사 병렬)",
+  "sentences": [
+   "Thanks to Kuo's unusual skills, Compean was rescued unharmed.",
+   "He later thanked Kuo on a video call.",
+   "The local police are now reminding hikers who hike alone to inform others of their planned route and to always bring a paper map.",
+   "This is Marissa Reynolds from LA. Now back to the studio."
+  ]
+ }
+]

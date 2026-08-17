@@ -1,0 +1,211 @@
+# -*- coding: utf-8 -*-
+import sys; sys.path.insert(0, "/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/batches/공통영어2_능률_민병천_1과")
+from _helpers import *
+
+# =====================================================================
+# P1 — Rescue ① 속보 (앵커의 뉴스 속보)
+# =====================================================================
+r1 = [
+ "A missing hiker named Rene Compean was found safe on Tuesday by a rescue team in Angeles National Forest.",
+ "It turns out that a photo played a key role in saving his life.",
+ "Let's go over to Marissa Reynolds for more details on this story.",
+]
+
+ov1 = Overview(
+ theme_ko="실종 등산객이 무사히 발견된 뉴스 속보",
+ key_grammar=KeyGrammar(
+  point="It turns out that ~ (~로 밝혀지다; that 명사절)",
+  source_sentence="It turns out that a photo played a key role in saving his life.",
+  explanation=[
+   GN("쉽게 말하면","'It turns out that ~'는 '(알고 보니) ~인 것으로 [[밝혀지다]]'라는 뜻으로, 맨 앞 It은 뜻 없는 [[가주어]]."),
+   GN("that절","turns out 뒤의 that은 '~라는 것'을 이끄는 [[명사절]] 접속사로, 문장의 진짜 주어 역할을 한다."),
+   GN("시제","보통 현재형 [[turns out]]으로 써서 '지금 그렇게 밝혀졌다'는 사실을 담담히 전한다."),
+   GN("복원","It turns out that a photo ~ = 알고 보니 사진 한 장이 ~한 것으로 [[밝혀졌다]]."),
+  ],
+  example_analysis="It은 가주어, that a photo ~ life 전체가 turns out의 진주어(명사절)이다.",
+  drills=[
+   GrammarDrill(kind="객관식", from_passage=True,
+    question="지문 'It turns out that a photo played a key role'에서 맨 앞 It의 성격은?",
+    options=["뜻 없는 가주어","앞 문장을 받는 대명사","날씨를 나타내는 비인칭 주어"],
+    answer="뜻 없는 가주어"),
+   GrammarDrill(kind="객관식", from_passage=False,
+    question="밑줄 친 that이 '명사절 접속사'로 쓰인 것은?",
+    options=["It turns out that he lied.","the book that I read","the house that stood there"],
+    answer="It turns out that he lied."),
+   GrammarDrill(kind="객관식", from_passage=False,
+    question="'알고 보니 그가 옳았던 것으로 밝혀졌다'에 알맞은 문장은?",
+    options=["It turns out that he was right.","It turns him out right.","That turns out it he was right."],
+    answer="It turns out that he was right."),
+   GrammarDrill(kind="영작", from_passage=True,
+    question="(지문) 알고 보니 사진 한 장이 그의 생명을 구하는 데 핵심적인 역할을 한 것으로 밝혀졌다.",
+    answer="It turns out that a photo played a key role in saving his life."),
+   GrammarDrill(kind="영작", from_passage=False,
+    question="알고 보니 그 소문이 사실인 것으로 밝혀졌다.",
+    answer="It turns out that the rumor is true."),
+  ]),
+ topic="실종됐던 등산객 Rene Compean이 무사히 구조됐다는 뉴스 속보.",
+ stance="중립적",
+ stance_reason="사건 사실(구조·발견)을 담담히 전하는 보도 도입부이다.",
+ structure="시간·순서(나열)",
+ structure_reason="발견 사실 → 사진의 역할 → 현장 연결로 이어지는 보도 순서.",
+ restatement_chains=[
+  RestatementChain(label="무사 구조",
+   expressions=["found safe","saving his life"],
+   variation="'무사히 발견됨'이 '생명을 구함'으로 이어진다."),
+ ],
+ flow_blocks=[
+  FlowBlock(stage="속보", sentence_range="1",
+   summary="실종 등산객 Rene Compean이 [[무사히]] 발견됐다는 속보."),
+  FlowBlock(stage="전환", sentence_range="2~3",
+   summary="구조에 [[사진]]이 핵심이었고, 자세한 내용은 현장 기자에게 넘긴다."),
+ ],
+)
+
+i1 = [
+ S(r1, 1,
+  [("수동태","was found: '발견되었다'(구조대에 의해)"),("과거분사 수식","named Rene Compean: '~라는 이름의'")],
+  [("missing","실종된"),("rescue team","구조대")],
+  [("A [[missing hiker]]","[[실종된 등산객]] 한 명이"),
+   ("[[named]] Rene Compean","Rene Compean이라는 [[이름의]]"),
+   ("was [[found safe]] on Tuesday","화요일에 [[무사히 발견되었다]]"),
+   ("by a [[rescue team]] in Angeles National Forest.","Angeles National Forest에서 [[구조대]]에 의해.")],
+  [("Rene Compean은 부상을 입고 병원으로 옮겨졌다.","'found safe(무사히 발견됨)'라고 했으므로 다치지 않았다 — 부상·입원은 사실과 다르다."),
+   ("Compean은 스스로 걸어 나와 집으로 돌아왔다.","'by a rescue team(구조대에 의해)' 발견됐으므로 스스로 나온 것이 아니라 구조된 것이다.")]),
+ S(r1, 2,
+  [("It turns out that","명사절 that: 알고 보니 ~로 밝혀지다"),("동명사","in saving: '구하는 데'(전치사+동명사)")],
+  [("turn out","~로 밝혀지다"),("play a role","역할을 하다")],
+  [("It [[turns out]] that","알고 보니 ~인 것으로 [[밝혀졌다]]"),
+   ("a photo [[played a key role]]","사진 한 장이 [[핵심적인 역할을 했다]]"),
+   ("in [[saving his life]].","[[그의 생명을 구하는]] 데.")],
+  [("한 장의 사진이 그를 조난에 빠뜨린 원인이었다.","사진은 'played a key role in saving his life(생명 구조에 핵심 역할)'를 했다 — 조난의 원인이 아니라 구조의 열쇠였다."),
+   ("사진은 처음부터 구조용으로 준비된 도구였다.","'It turns out that ~(~로 밝혀지다)'는 사후에 드러난 사실을 뜻하므로, 미리 계획된 것이 아니라 결과적으로 밝혀진 것임을 함축한다.")]),
+ S(r1, 3,
+  [("청유문","Let's ~: '~합시다'(let us)"),("지시어","this story: 방금 전한 그 사건")],
+  [("go over to","~에게로 넘기다"),("details","세부 내용")],
+  [("Let's [[go over to]] Marissa Reynolds","Marissa Reynolds에게 [[넘어가 봅시다]]"),
+   ("for [[more details]] on this story.","이 이야기에 대한 [[더 자세한 내용을]].")],
+  [("this story는 기자 Marissa Reynolds의 개인 사연을 가리킨다.","'this story(이 이야기)'는 앞서 전한 Rene Compean 구조 사건을 가리킨다 — 기자 개인사가 아니다.")]),
+]
+P1 = build("Rescue ① 속보", "속보 · 1 (앵커의 뉴스 속보)", r1, ov1, i1)
+
+# =====================================================================
+# P2 — Rescue ② 조난 (길을 잃은 숙련 등산객)
+# =====================================================================
+r2 = [
+ "Thank you, Thomas. I'm standing here at the entrance of Angeles National Forest.",
+ "As you just heard, Rene Compean was recently rescued from this forest.",
+ "Compean, an experienced hiker who knew the area well, went on a hike alone on April 12.",
+ "However, a recent forest fire had destroyed some signs, which caused him to take a wrong turn and get lost.",
+ "He tried shouting for help and even wrote SOS on the ground in case a plane or helicopter passed by.",
+ "He had planned to hike for only about two hours, but night was coming.",
+ "It started getting very windy and the temperature was dropping quickly.",
+]
+
+ov2 = Overview(
+ theme_ko="숙련 등산객이 산불로 망가진 표지판 탓에 조난된 경위",
+ key_grammar=KeyGrammar(
+  point="계속적 용법 관계대명사 which (앞 문장 전체를 받음)",
+  source_sentence="However, a recent forest fire had destroyed some signs, which caused him to take a wrong turn and get lost.",
+  explanation=[
+   GN("쉽게 말하면","콤마 뒤 which는 앞의 한 단어가 아니라 '앞 [[문장 전체]]'를 받아 '그리고 그것이'로 [[이어 준다]]."),
+   GN("계속적 용법","', which ~'는 앞 내용을 보충 설명하는 [[계속적]] 용법으로, 앞의 [[콤마]]가 반드시 필요하다."),
+   GN("복원","~ destroyed some signs, which caused ~ = 표지판을 없앴고, [[그 일이]] 그를 길 잃게 했다."),
+   GN("주의","계속적 용법의 which는 관계사 [[that]]으로 바꿀 수 없다."),
+  ],
+  example_analysis="which는 'a recent forest fire had destroyed some signs' 절 전체를 받는 계속적 관계대명사이다.",
+  drills=[
+   GrammarDrill(kind="객관식", from_passage=True,
+    question="지문 ', which caused him to take a wrong turn'에서 which가 가리키는 것은?",
+    options=["산불이 표지판을 파괴한 사실 전체","some signs","a wrong turn"],
+    answer="산불이 표지판을 파괴한 사실 전체"),
+   GrammarDrill(kind="객관식", from_passage=False,
+    question="콤마 뒤 '계속적 용법'으로 쓸 수 없는 관계사는?",
+    options=["that","which","who"],
+    answer="that"),
+   GrammarDrill(kind="객관식", from_passage=False,
+    question="'그는 시험에 합격했고, 그것이 모두를 놀라게 했다'에 알맞은 문장은?",
+    options=["He passed the exam, which surprised everyone.","He passed the exam which surprised everyone.","He passed the exam that surprised everyone."],
+    answer="He passed the exam, which surprised everyone."),
+   GrammarDrill(kind="영작", from_passage=True,
+    question="(지문) 그러나 최근의 산불이 표지판 일부를 파괴했고, 그것이 그를 길을 잘못 들어 길을 잃게 만들었다.",
+    answer="However, a recent forest fire had destroyed some signs, which caused him to take a wrong turn and get lost."),
+   GrammarDrill(kind="영작", from_passage=False,
+    question="그녀는 회의에 늦었고, 그것이 상사를 화나게 했다.",
+    answer="She was late for the meeting, which made her boss angry."),
+  ]),
+ topic="현장 기자가 전하는, 숙련 등산객 Compean이 조난에 이른 경위.",
+ stance="중립적",
+ stance_reason="구조 사건의 경위를 시간 순으로 사실 위주로 전하는 현장 보도이다.",
+ structure="시간·순서(나열)",
+ structure_reason="등산 시작 → 표지판 훼손·조난 → 밤·추위로 이어지는 시간 순서.",
+ restatement_chains=[
+  RestatementChain(label="혼자 나선 등산의 조난",
+   expressions=["went on a hike alone","get lost"],
+   variation="'혼자 등산에 나섬'이 '길을 잃음'으로 이어진다."),
+ ],
+ flow_blocks=[
+  FlowBlock(stage="도입", sentence_range="1~2",
+   summary="기자가 숲 [[입구]]에서 최근의 구조 사건을 전한다."),
+  FlowBlock(stage="전개", sentence_range="3~4",
+   summary="숙련자 Compean이 [[산불]]로 망가진 표지판 탓에 길을 잃었다."),
+  FlowBlock(stage="위기", sentence_range="5~7",
+   summary="구조 요청을 하며 버텼지만 [[밤]]과 추위가 닥쳤다."),
+ ],
+)
+
+i2 = [
+ S(r2, 1,
+  [("현재진행","I'm standing: '서 있다'(지금 진행)"),("장소 부사","here: 바로 이곳(숲 입구)")],
+  [("entrance","입구"),("standing","서 있는")],
+  [("[[Thank you]], Thomas.","[[고맙습니다]], Thomas."),
+   ("I'm [[standing]] here","저는 여기 [[서 있습니다]]"),
+   ("at the [[entrance]] of Angeles National Forest.","Angeles National Forest [[입구]]에.")],
+  [("기자는 숲 한가운데 조난 현장에서 보도하고 있다.","'at the entrance(입구에서)' 서 있다고 했으므로 숲 한가운데가 아니라 숲 초입에서 전하고 있다.")]),
+ S(r2, 2,
+  [("수동태","was rescued: '구조되었다'"),("지시어","this forest: 기자가 서 있는 그 숲")],
+  [("recently","최근에"),("rescue","구조하다")],
+  [("As you just [[heard]],","방금 [[들으신]] 대로,"),
+   ("Rene Compean was [[recently rescued]]","Rene Compean이 [[최근 구조되었다]]"),
+   ("from [[this forest]].","[[이 숲]]에서.")],
+  [("this forest는 다른 지역의 낯선 숲을 가리킨다.","'this forest(이 숲)'는 기자가 지금 서 있는 Angeles National Forest를 가리킨다 — 다른 숲이 아니다.")]),
+ S(r2, 3,
+  [("동격","an experienced hiker: Compean을 부연 설명"),("관계사절","who knew the area well: '~를 잘 아는'")],
+  [("experienced","숙련된"),("hike","등산; 등산하다")],
+  [("Compean, an [[experienced hiker]]","[[숙련된 등산객]]인 Compean은"),
+   ("who [[knew the area well]],","[[그 지역을 잘 아는]],"),
+   ("went on a [[hike alone]]","[[혼자 등산을 갔다]]"),
+   ("on [[April 12]].","[[4월 12일]]에.")],
+  [("Compean은 지리를 잘 모르는 초보 등산객이었다.","'an experienced hiker who knew the area well(그 지역을 잘 아는 숙련 등산객)'이라고 했다 — 초보가 아니라 숙련자였음을 강조해, 그런데도 조난됐다는 뜻을 함축한다.")]),
+ S(r2, 4,
+  [("계속적 용법 which","앞 절 전체를 받는 관계대명사"),("과거완료","had destroyed: 조난보다 앞선 일")],
+  [("destroy","파괴하다"),("take a wrong turn","길을 잘못 들다")],
+  [("However, a [[recent forest fire]]","그러나 [[최근의 산불이]]"),
+   ("had [[destroyed some signs]],","[[표지판 일부를 파괴했고]],"),
+   ("which [[caused him to take a wrong turn]]","그리고 이것이 [[그를 길을 잘못 들게 했고]]"),
+   ("and [[get lost]].","[[길을 잃게 만들었다]].")],
+  [("which는 바로 앞의 some signs만을 가리킨다.","계속적 용법의 which는 '산불이 표지판을 파괴한 사실 전체'를 받는다 — 표지판이라는 단어 하나만 가리키는 것이 아니다."),
+   ("Compean은 부주의해서 스스로 엉뚱한 길로 들어섰다.","'a forest fire had destroyed some signs(산불이 표지판을 없앴다)'가 원인 — 표지판이 사라져 길을 잘못 든 것이지 부주의 탓이 아니다.")]),
+ S(r2, 5,
+  [("try -ing","tried shouting: '소리쳐 봤다'(시도)"),("in case","'~할 경우에 대비해'(접속사절)")],
+  [("shout","소리치다"),("in case","~할 경우에 대비해")],
+  [("He [[tried shouting for help]]","그는 [[도와 달라고 소리쳐 봤고]]"),
+   ("and even [[wrote SOS on the ground]]","그리고 심지어 [[땅에 SOS를 썼다]]"),
+   ("in case a plane or [[helicopter passed by]].","비행기나 [[헬기가 지나갈 경우를 대비해]].")],
+  [("땅에 SOS를 쓴 것은 그저 심심풀이 낙서였다.","'in case a plane or helicopter passed by(비행기·헬기가 지날 때를 대비해)'라고 했으므로 구조를 요청하려는 절박한 행동이지 낙서가 아니다.")]),
+ S(r2, 6,
+  [("과거완료","had planned: 등산 전 세운 계획"),("대조 but","계획과 실제 상황의 대비")],
+  [("plan to","~할 계획이다"),("hike","등산하다")],
+  [("He had [[planned to hike]]","그는 [[등산할 계획이었다]]"),
+   ("for only about [[two hours]],","겨우 [[두 시간]] 정도만,"),
+   ("but [[night was coming]].","하지만 [[밤이 오고 있었다]].")],
+  [("그는 원래부터 밤샘 산행을 계획하고 있었다.","'only about two hours(겨우 두 시간쯤)'만 계획했다 — but night was coming으로 상황이 예상 밖으로 악화됨을 함축하므로, 밤샘 계획이 아니었다.")]),
+ S(r2, 7,
+  [("비인칭 It","날씨의 It: 뜻 없는 주어"),("병렬","started getting ~ and ~ was dropping")],
+  [("windy","바람이 센"),("temperature","기온")],
+  [("It [[started getting very windy]]","[[바람이 매우 세게 불기 시작했고]]"),
+   ("and the [[temperature was dropping quickly]].","그리고 [[기온이 빠르게 떨어지고 있었다]].")],
+  [("날씨가 점점 포근하고 잔잔해지고 있었다.","'windy(바람이 세고)'와 'temperature was dropping(기온 하강)'이라 했으므로 추워지고 있었다 — 상황이 위험해짐을 나타낸다.")]),
+]
+P2 = build("Rescue ② 조난", "조난 · 1 (길을 잃은 숙련 등산객)", r2, ov2, i2)
+
+PARTS = [P1, P2]

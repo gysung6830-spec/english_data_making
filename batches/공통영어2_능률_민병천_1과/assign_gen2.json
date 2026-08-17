@@ -1,0 +1,30 @@
+[
+ {
+  "var": "P3",
+  "item_no": "조난 · 2 (약한 신호로 보낸 구조 요청)",
+  "title": "Rescue ③ 구조 요청",
+  "key_grammar_hint": "독립부정사 관용표현 (To make matters worse: 설상가상으로)",
+  "sentences": [
+   "Compean was deep in the forest, so his cell phone couldn't get a signal.",
+   "To make matters worse, its battery was nearly dead.",
+   "He climbed up to a higher spot and found a weak signal.",
+   "He used the last of his battery to send a text message to his friend.",
+   "In the message, he said that he was lost and needed help.",
+   "He also sent a picture to show his surroundings.",
+   "Compean's friend shared the message and the picture with the local police."
+  ]
+ },
+ {
+  "var": "P4",
+  "item_no": "수색 · 1 (경찰 수색의 난관)",
+  "title": "Rescue ④ 수색 난관",
+  "key_grammar_hint": "전치사 despite + 동명사 (~에도 불구하고)",
+  "sentences": [
+   "When the local police were informed of the missing hiker, they immediately sent a rescue team.",
+   "Despite searching through the night, they still didn't have any idea where Compean was.",
+   "In the picture, his legs were hanging over the edge of a canyon with rocks and green trees.",
+   "His legs were covered in black ash from the recent forest fires.",
+   "However, the picture didn't help the police much because the quality was poor due to the weak signal, and his location settings were turned off."
+  ]
+ }
+]
