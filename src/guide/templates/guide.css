@@ -757,3 +757,9 @@ body {
 .iw-bl { display: inline-block; width: 58%; border-bottom: 1.4px dashed #b9cfc7; height: 13px; vertical-align: middle; }
 .iw-wrap { margin: 4px 0 6px; }
 mark.sig { background: #fdeecf; color: #8a5a2b; font-weight: 800; padding: 0 3px; border-radius: 3px; }
+
+/* ── 이거 조심!(오역 주의) 카드 ── */
+.sol.caution { background: #fdf6ea; border-left: 4px solid var(--gold); border-radius: 8px;
+  padding: 8px 12px; color: #4a3b25; font-size: 10px; line-height: 1.65; }
+.sol.caution .warn-lead { color: #b5771f; font-weight: 800; margin-right: 6px; }
+.sol.caution b { color: #8a5a2b; }

@@ -66,6 +66,7 @@ class PracticeSolution(BaseModel):
     wrong: str = ""               # 오역(흔한 실수)
     wrong_why: str = ""           # 왜 틀렸나
     author_msg: str = ""          # 필자가 하고싶은 말
+    caution: str = ""             # '이거 조심!(오역 주의)' 회화체 함정 문구
     key_points: list[str] = []    # 주요구문(각 'X : 설명')
     cloze: dict = {}              # 빈칸 직독직해 스펙 {en, ko:[{t, v?/trap?}]}
     intent: dict = {}            # 2부 필자의도(방향·극성) 스펙 {kind, signal, a/b/stmt/clause, ...}
