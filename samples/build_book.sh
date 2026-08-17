@@ -13,22 +13,24 @@ render(){ local prof; prof="$(mktemp -d)"; rm -f "$DIR/$2.pdf"; \
 
 # 문제은행 재생성(지문 은행/데이터 기반) — 레포 루트에서 실행 (범위 전 문항 224)
 ( cd "$DIR/.." && python3 -m src.gen_workbook 999 ) >/dev/null 2>&1 || true
-# 맨 뒤 어휘 색인 재생성
-( cd "$DIR/.." && python3 -m src.gen_index ) >/dev/null 2>&1 || true
+# 맨 뒤 부록 재생성 — 정답 일람표 · 어휘 색인 · 어휘 미니 테스트
+( cd "$DIR/.." && python3 -m src.gen_answerkey && python3 -m src.gen_index && python3 -m src.gen_vtest ) >/dev/null 2>&1 || true
 
 render cover_toc _cover
 render reading_principles _principles
 render strategy_compact_sample 형광펜독해_샘플
 render 유형별훈련_워크북 _workbook
+render 정답일람 _answerkey
 render 어휘index _vindex
+render 어휘테스트 _vtest
 
 python3 - "$DIR" <<'PY'
 import sys, fitz
 d=sys.argv[1]; out=fitz.open()
 # 표지·목차 → PART0 원리+신호사전 → PART1 대표카드(형광펜독해_샘플)
 #          → PART1 유형별 훈련(문항마다 재진술 훈련 내장)
-#          → 부록: 어휘 색인(_vindex)
-for f in ["_cover","_principles","형광펜독해_샘플","_workbook","_vindex"]:
+#          → 부록: 정답 일람표(_answerkey) · 어휘 색인(_vindex) · 어휘 미니 테스트(_vtest)
+for f in ["_cover","_principles","형광펜독해_샘플","_workbook","_answerkey","_vindex","_vtest"]:
     out.insert_pdf(fitz.open(f"{d}/{f}.pdf"))
 out.save(f"{d}/_book_raw.pdf")
 print("병합 완료:", out.page_count, "pages")
