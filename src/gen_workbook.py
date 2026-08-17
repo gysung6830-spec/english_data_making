@@ -1297,7 +1297,7 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .pbanner .psrc{ font-size:9px; font-weight:700; color:#12543d; background:#ffe9a8; padding:2px 9px; border-radius:9px; }
 .pbanner .daepyo{ font-size:9px; font-weight:800; color:#fff; background:#cd5049; padding:2px 9px; border-radius:9px; }
 .pbanner .step{ margin-left:auto; font-size:9px; font-weight:800; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:11px; }
-.pbody{ border:2px solid var(--ink-d); border-top:none; border-radius:0 0 9px 9px; padding:15px 17px; display:flex; gap:15px; min-height:600px; }
+.pbody{ border:2px solid var(--ink-d); border-top:none; border-radius:0 0 9px 9px; padding:15px 17px 13px; display:flex; gap:15px; min-height:360px; }
 .pmain{ flex:2; display:flex; flex-direction:column; }
 .pside{ flex:1; border-left:1.5px dashed var(--line); padding-left:13px; }
 .how{ font-size:9px; color:#8a6a00; background:var(--must); border-radius:5px; padding:7px 10px; margin-bottom:10px; font-weight:700; }
