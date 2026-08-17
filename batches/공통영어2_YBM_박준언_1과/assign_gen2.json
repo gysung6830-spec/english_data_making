@@ -1,0 +1,25 @@
+[
+ {
+  "var": "P3",
+  "item_no": "영향 · 1 (가짜뉴스의 정의와 해악)",
+  "title": "The Impact of Fake News ①",
+  "sentences": [
+   "Unfortunately, becoming an accidental distributor of fake news like Gina is not unusual.",
+   "Fake news is a deliberate attempt to manipulate people by spreading inaccurate information.",
+   "It is made by certain groups with the intention of attracting people's attention, making profits, or gaining political benefits.",
+   "It can confuse people, disturb society, and even seriously harm the public as well as all individuals involved."
+  ]
+ },
+ {
+  "var": "P4",
+  "item_no": "영향 · 2 (비상사태 확산·암본 지진)",
+  "title": "The Impact of Fake News ②",
+  "sentences": [
+   "It is very common for fake news to spread during states of emergency.",
+   "For example, after an earthquake measuring 6.5 struck Ambon, Indonesia, in September 2019, thousands of residents did not return to their homes and were still in shelters for two weeks.",
+   "This was because of fake news stories on social media that another earthquake followed by a tsunami was about to strike.",
+   "One of those messages said, \"It's up to you if you want to believe me or not, but apparently Ambon is going to sink in the next few days.\"",
+   "Many displaced people were so anxious about aftershocks that the government had to announce that the information was fake."
+  ]
+ }
+]

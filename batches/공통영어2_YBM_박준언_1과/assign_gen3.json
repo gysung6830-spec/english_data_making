@@ -1,0 +1,27 @@
+[
+ {
+  "var": "P5",
+  "item_no": "확산이유 · 1 (빠른 전파와 새로움 선호)",
+  "title": "Reasons for the Viral Spread ①",
+  "sentences": [
+   "Fake news on social media spreads significantly farther and faster than true stories.",
+   "A study by the Massachusetts Institute of Technology in the US has shown that fake news spreads online 6 times faster than real news on average.",
+   "One explanation for this phenomenon is that people like new and provocative things.",
+   "When information is astonishing, people not only feel that it is surprising, but they also want to share the stimulating news with others.",
+   "By passing it to others on social media, they can gain attention because they are the first to post previously unknown, but possibly false, information."
+  ]
+ },
+ {
+  "var": "P6",
+  "item_no": "확산이유 · 2 (단순 사고·확증 편향)",
+  "title": "Reasons for the Viral Spread ②",
+  "sentences": [
+   "Also, fake news goes viral because people in their daily lives tend to think simply and effortlessly.",
+   "It is more likely for them to believe new information without any proof, instead of critically examining it.",
+   "Moreover, people are inclined to believe information that fits their prejudices or experiences even when not true.",
+   "In this process, people easily fall into the trap of \"confirmation bias.\"",
+   "That is, they selectively accept news in a way that only confirms their beliefs and ignore news that doesn't support them.",
+   "During election season, for example, people tend to blindly believe any news describing their favored candidates in a positive way, while unconsciously believing news that reports something negative about other candidates."
+  ]
+ }
+]
