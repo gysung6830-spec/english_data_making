@@ -33,9 +33,11 @@ practice:
         - t: 수용 능력이 제한되어 있고 더 많은 방문객을 위한 공간이 실제로 없는 특정 명소들의
           trap: true
       caution:
-        x: '''where there is no room''을 ''어디에 공간 없는지'' 의문사로'
-        o: where=in which 관계부사 → '공간 없는 명소' 수식
+        x: 어디에 공간이 없는지(의문)
+        o: 공간이 없는 명소(앞 명사 수식)
         tip: where를 '어디에?'로 묻지 마. 앞 attractions를 꾸미는 in which니까 '더 들어갈 공간이 없는 명소'로 이어 읽어.
+        trap: where
+        ask: '''어디에?''라고 묻나?'
   - kind: mc
     sentence: The scientific thinker looks for features of the thing that can be stripped of subjectivity, ideally, those aspects that can be quantified and whose values will thus never change from one observer to the next.
     source: 2023 고3 6월 33번
@@ -71,9 +73,11 @@ practice:
         - t: 이상적으로는 정량화될 수 있고 그래서 그 값이 관찰자마다 결코 변하지 않는 그런 측면들을
           trap: true
       caution:
-        x: '''whose values ~''를 ''누구의 값이 ~인지'' 의문사로'
-        o: whose=소유격 관계대명사 → '그 측면들의 값이 ~한'
+        x: 누구의 값인지 묻는 말
+        o: 그 측면들의 값이 안 변하는
         tip: whose는 '누구의?'가 아니야. 바로 앞 aspects의 것이니까 '그 측면들의 값이 결코 안 변하는'으로 이어서 읽어.
+        trap: whose
+        ask: '''누구의?''라고 묻나?'
   - kind: mc
     sentence: If you listen to someone who is not clear, who cannot stay on the topic, or who offers too much or too little information, you will quickly lose interest in the conversation.
     source: 2026 고3 11월 32번
@@ -108,9 +112,11 @@ practice:
         - t: 당신은 곧 흥미를 잃을 것이다 대화에
           v: 흥미를 잃을
       caution:
-        x: 세 'who'를 '누가 ~인지' 의문사절로
-        o: who=주격 관계대명사 → someone을 병렬 수식 '~한 사람'
+        x: 누가 명확하지 않은지(의문)
+        o: 명확하지 않은 사람(앞 someone 수식)
         tip: who가 세 번 나와도 전부 앞의 someone 한 명을 꾸며 → '명확하지 않고, 주제를 못 지키고, 정보를 너무 많거나 적게 주는 사람'.
+        trap: who
+        ask: '''누가 ~인지'' 묻나?'
   - kind: short
     sentence: Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality.
     source: 2024 고3 9월 33번
@@ -141,9 +147,11 @@ practice:
         - t: 흔히 나타낸다고 좋은 도시의 질을
           v: 질
       caution:
-        x: '''in which ~ walking''을 ''어디에 ~인지''로'
-        o: in which=a city 수식 관계사절, indicates 주어는 a city
+        x: 어디에 안 걷는지(의문)
+        o: 사람들이 걷지 않는 도시(수식)
         tip: in which를 '어디에?'로 읽지 말고 앞 a city를 꾸미게 봐 → '많은 사람이 걷지 않는 도시', 그리고 indicates의 주어는 그 도시야.
+        trap: in which
+        ask: '''어디에?''라고 묻나?'
   - kind: mc
     sentence: If we understand critical thinking as the identification and evaluation of evidence to guide decision-making, then ethical thinking is about identifying ethical issues and evaluating these issues from different perspectives to guide how to respond.
     source: 2024 고3 6월 42번
@@ -184,9 +192,11 @@ practice:
         - t: 어떻게 반응할지를 이끌기 위해
           trap: true
       caution:
-        x: '''how to respond''를 ''얼마나 대응하는지'' 정도로'
-        o: how+to부정사 → '어떻게 대응할지'(방법), guide의 목적어
+        x: 얼마나 대응하는지
+        o: 어떻게 대응할지(방법)
         tip: how to respond의 how는 '얼마나'가 아니야. 뒤에 to가 붙어 '어떻게 대응할지' → guide의 목적어로 '어떻게 대응할지 안내한다'.
+        trap: how to respond
+        ask: how가 '얼마나'일까?
   - kind: short
     sentence: To illustrate this, consider the uncertainties involved in predicting climatic changes, how ecosystems are likely to respond to climatic changes, and the likely efficacy of actions that might be taken to counter adverse effects of climatic changes.
     source: 2024 고3 9월 39번
@@ -221,9 +231,11 @@ practice:
         - t: 그리고 기후 변화의 부정적 영향에 대응하려 취해질 수 있는 조치들의 있음직한 효능을
           v: 효능
       caution:
-        x: '''how ecosystems ~ respond''를 앞 명사 수식/부사로'
-        o: consider의 목적어 3개 중 하나인 의문사 명사절
+        x: 앞 명사 꾸미는 '어떻게 반응하는지'
+        o: '''반응할지''를 고려하라(consider 목적어)'
         tip: how ecosystems ~ respond는 consider의 목적어 셋 중 하나 → '생태계가 어떻게 반응할지'라는 명사 덩어리로 '~을 고려하라'.
+        trap: how
+        ask: 앞말 꾸미는 말일까?
   - kind: short
     sentence: Just as we don't always see the intricate brushwork that goes into the creation of a painting, we may not always Beethoven notice how Beethoven keeps finding fresh uses for his motto or how he develops his material into a large, cohesive statement.
     source: 2022 고3 6월 34번
@@ -261,9 +273,11 @@ practice:
         - t: 또는 자신의 소재를 어떻게 크고 응집력 있는 작품으로 발전시키는지를
           v: 응집력
       caution:
-        x: 두 'how'절을 '~하는 방식' 관계부사로
-        o: the way 없음 → notice의 목적어 의문사절, or로 병렬
+        x: 새 쓰임을 찾는 방식을
+        o: 어떻게 찾는지를 알아차리다
         tip: 두 how절은 the way 없이 notice의 목적어 → '어떻게 새 쓰임을 찾는지, 어떻게 재료를 큰 진술로 발전시키는지'를 알아차린다.
+        trap: how
+        ask: '''~하는 방식''일까?'
   - kind: short
     sentence: Killer whales also repeat the same seal hunting technique in front of their offspring, sometimes without even killing the seal, leading researchers to ask why they would repeatedly catch and release a seal if they were not planning to eat it.
     source: 2025 고3 6월 31번
@@ -301,9 +315,11 @@ practice:
         - t: 만약 먹을 계획이 아니었다면
           v: 계획
       caution:
-        x: '''why they would ~''를 ''왜냐하면'' 이유 부사절로'
-        o: ask의 목적어 의문사절 → '왜 ~하는지'
+        x: 왜냐하면 ~하니까(이유)
+        o: 왜 잡았다 놓는지 묻는 것
         tip: why를 '왜냐하면'으로 읽지 마. ask의 목적어라 '왜 그들이 물범을 잡았다가 놓아주는지'를 묻는다는 뜻이야.
+        trap: why
+        ask: '''왜냐하면''일까?'
   - kind: mc
     sentence: The design process concentrates on how the agents will cooperate and coordinate with each other to accomplish the team goals.
     source: 2022 고3 6월 24번
@@ -340,9 +356,11 @@ practice:
         - t: 팀 목표를 달성하기 위해
           v: 달성하기
       caution:
-        x: '''how''를 ''얼마나 협력하는지'' 정도로'
-        o: 수량어 없음 → on의 목적어 '어떻게(방법)' 명사절
+        x: 얼마나 협력하는지(정도)
+        o: 어떻게 협력·조율할지(방법)
         tip: how를 '얼마나'로 읽지 마. how many/much가 없으니 '어떻게 협력하고 조율할지'(방법)로 on에 이어 읽어.
+        trap: how
+        ask: '''얼마나''라는 뜻일까?'
   - kind: short
     sentence: Culture operates in ways we can consciously consider and discuss but also in ways of which we are far less cognizant.
     source: 2022 고3 9월 37번
@@ -375,9 +393,11 @@ practice:
         - t: 우리가 훨씬 덜 인식하는 방식으로도
           trap: true
       caution:
-        x: '''of which ~ cognizant''를 끊어 ways와 분리'
-        o: cognizant of의 of+which → ways 수식 '덜 인식하는 방식'
+        x: ways와 끊어 별개 내용
+        o: 우리가 덜 인식하는 방식
         tip: of which를 끊지 마. be cognizant of의 of가 앞으로 온 거라 앞 ways에 걸어 '우리가 훨씬 덜 인식하는 방식'으로 읽어.
+        trap: of which
+        ask: of which를 끊나?
   - kind: mc
     sentence: Without a better understanding of the what, when, and why of data collection and use, the consumer is often left feeling vulnerable and conflicted.
     source: 2022 고3 6월 22번
@@ -406,9 +426,11 @@ practice:
         - t: 취약하고 갈등을 느끼는 채로
           v: 취약하고
       caution:
-        x: '''the what, when, and why''를 주절에 걸리는 의문사로'
-        o: the+의문사 명사화 → understanding of의 목적어
+        x: 무엇·언제·왜인지 묻는 절
+        o: 수집·이용의 무엇·언제·왜(of 목적어)
         tip: the what, when, and why는 the가 붙어 명사가 된 것 → understanding of의 목적어로 '수집·이용의 무엇·언제·왜를 이해'.
+        trap: the what
+        ask: 주절에 걸리는 의문사?
   - kind: mc
     sentence: Ludwig van Beethoven's famous Fifth Symphony provides an exceptional example of how much mileage a classical composer can get out of a few notes and a simple rhythmic tapping.
     source: 2022 고3 6월 34번
@@ -437,9 +459,11 @@ practice:
         - t: 몇 개의 음과 단순한 리듬의 두드림으로부터
           v: 두드림
       caution:
-        x: '''how much mileage ~''의 how를 ''어떻게(방법)''로'
-        o: how가 much mileage 수식 → '얼마나 많은 성과를'(정도)
+        x: 어떻게 성과를 얻는지(방법)
+        o: 얼마나 많은 성과를 뽑는지(정도)
         tip: how much mileage의 how는 '어떻게'가 아니라 much mileage를 꾸며 '얼마나 많은 성과를' → '몇 음만으로 얼마나 많은 걸 뽑아내는지'.
+        trap: how much
+        ask: '''어떻게''라는 뜻일까?'
   - kind: mc
     sentence: The psychologist interested in young children may have to venture a little more often into the wilderness in order to get a good picture of how children think.
     source: 2022 고3 9월 34번
@@ -470,9 +494,11 @@ practice:
         - t: 아이들이 어떻게 사고하는지를
           trap: true
       caution:
-        x: '''how children think''를 ''아이들이 생각하는'' 관계절로'
-        o: of의 목적어 간접의문문 → '아이들이 어떻게 사고하는지'
+        x: 아이들이 생각하는 그림
+        o: 아이들이 어떻게 사고하는지
         tip: of how children think는 picture를 꾸미는 게 아니야. '아이들이 어떻게 사고하는지'를 제대로 파악한다는 뜻으로 of에 이어 읽어.
+        trap: how children think
+        ask: picture 꾸미는 말?
   participle:
   - kind: mc
     sentence: Worried that she could not get to the boarding gate in time, she rushed through the crowds of people.
@@ -508,9 +534,11 @@ practice:
         - t: 사람들의 인파를 헤치고
           v: 인파
       caution:
-        x: '''(Being) Worried ~''를 앞 crowds of people 주어로'
-        o: 분사 주어=주절 주어 she → 서두른 건 그녀
+        x: 사람들(people)이 걱정
+        o: 그녀(she)가 걱정
         tip: Worried의 주인은 뒤 주절 주어 she야. 걱정하며 서두른 건 people이 아니라 그녀 → '그녀는 걱정되어 인파를 헤치고 서둘렀다'.
+        trap: Worried
+        ask: 걱정한 게 누구?
   - kind: mc
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said a few encouraging words.
     source: 2023 고3 11월 19번
@@ -543,9 +571,11 @@ practice:
         - t: 켄이 그녀에게 다가가 몇 마디 격려의 말을 했다
           v: 격려
       caution:
-        x: '''Recognizing ~''를 앞 목적어 her(그녀) 주어로'
-        o: 분사 주어=콤마 뒤 주절 주어 Ken
+        x: 그녀(her)가 알아차림
+        o: Ken이 알아차리고 다가감
         tip: Recognizing의 주인은 콤마 뒤 Ken이야. 알아차리고 다가간 건 she가 아니라 Ken → 'Ken이 그녀 마음을 알아차리고 다가갔다'.
+        trap: Recognizing
+        ask: 알아차린 게 누구?
   - kind: short
     sentence: Considering the metaphor of seams in clothing, we can say that we aspire to seamless aesthetics by stitching the seams closely, pressing them flat and making sure they are hidden on the inside so that we wear clothing rather than pieces of fabric.
     source: 2025 고3 6월 42번
@@ -580,9 +610,11 @@ practice:
         - t: 그리하여 우리가 천 조각이 아니라 옷을 입도록
           v: 천 조각
       caution:
-        x: 문두 'Considering'을 주절 동사로 보고 끊음
-        o: Considering=분사구문 '~하면'; by+동명사 3개 병렬
+        x: 우리가 ~을 고려한다(주절)
+        o: ~을 고려하면(앞 단서)
         tip: Considering은 동사가 아니라 '~을 고려하면'이야. 뒤 by의 stitching·pressing·making sure는 '꿰매고, 눌러 펴고, 감춤으로써' 셋을 묶어 읽어.
+        trap: Considering
+        ask: 동사로 끊을까?
   - kind: short
     sentence: Moving up in scale, without some awareness of how phenomena are arranged on Earth's surface, it is difficult to make reasoned business or policy judgments, make sense of events, or grasp some of the basic forces shaping life on the planet.
     source: 2025 고3 6월 34번
@@ -617,9 +649,11 @@ practice:
         - t: 지구상의 생명을 형성하는
           v: 형성하는
       caution:
-        x: '''shaping ~''을 병렬 동사로, ''Moving up'' 주어를 phenomena로'
-        o: shaping=forces 수식; Moving up=분사구문, 주어는 it
+        x: 그 힘이 생명을 형성한다(동사)
+        o: 생명을 형성하는 힘(앞 명사 수식)
         tip: shaping은 별도 동사가 아니라 앞 the basic forces를 꾸며 '생명을 형성하는 힘'. Moving up은 '규모를 키워 나가면'이고 주어는 형식주어 it이야.
+        trap: shaping
+        ask: 따로 된 동사일까?
   - kind: mc
     sentence: Questions of morality are often pushed to the side in legislative debate, labeled too controversial, too difficult to answer, or, worst of all, irrelevant to the project.
     source: 2022 고3 9월 22번
@@ -654,9 +688,11 @@ practice:
         - t: 너무 논쟁적이라고 분류되어, 답하기 너무 어렵다고, 또는 가장 나쁘게는 그 사안과 무관하다고
           trap: true
       caution:
-        x: '''labeled''를 ''~라고 규정짓는다'' 능동으로'
-        o: (being) labeled 수동 → Questions가 분류되는 대상
+        x: 질문이 남을 규정한다
+        o: 질문이 논쟁적이라 분류됨
         tip: labeled를 '규정짓는다'로 읽지 마. (being) labeled 수동이라 주어 Questions가 '너무 논쟁적이라고 분류되는' 대상이야.
+        trap: labeled
+        ask: 규정하는 쪽일까?
   - kind: mc
     sentence: But the economic benefits provided by these services, based on their non‑market values, may exceed the economic value of the timber.
     source: 2024 고3 11월 23번
@@ -693,9 +729,11 @@ practice:
         - t: 초과할 수 있다 목재의 경제적 가치를
           v: 초과할
       caution:
-        x: 삽입 'based on their ~'의 their를 timber로
-        o: their=these services → 서비스의 비시장 가치
+        x: 목재의 비시장 가치
+        o: 그 서비스의 비시장 가치
         tip: 삽입된 based on their ~의 their는 목재가 아니라 앞 these services야 → '그 서비스들의 비시장 가치에 근거해' 산정된 이익.
+        trap: their
+        ask: their는 무엇?
   - kind: mc
     sentence: Formal training programs, developed in advance and delivered according to a preset schedule, are insufficient to address shifting training needs and encourage timely information sharing.
     source: 2024 고3 6월 37번
@@ -732,9 +770,11 @@ practice:
         - t: 불충분하다 변화하는 훈련 요구를 다루기에 그리고 적시의 정보 공유를 촉진하기에
           v: 불충분하다
       caution:
-        x: '''developed/delivered''를 능동 본동사 ''개발·전달한다''로'
-        o: 수동 과거분사 삽입구 → 본동사는 are insufficient
+        x: 프로그램을 개발·전달한다
+        o: 개발·전달된 그 프로그램은 불충분
         tip: developed·delivered는 '개발·전달한다'는 동사가 아니라 programs를 꾸미는 수동 삽입구. 진짜 동사는 are insufficient → '그 프로그램은 불충분하다'.
+        trap: developed
+        ask: 이게 진짜 동사일까?
   - kind: short
     sentence: In this sense, depending on the intentions of the parties, the areas of common interest may be clarified, refined and given negotiated form and substance.
     source: 2024 고3 11월 36번
@@ -767,9 +807,11 @@ practice:
         - t: 공동의 관심 영역은 명확해지고 다듬어지며 협상된 형태와 실체를 부여받을 수 있다
           v: 실체
       caution:
-        x: '''depending on ~''을 명사 수식/주어로'
-        o: 문두 분사구문 → '~에 따라'(조건·부사)
+        x: 의도에 달린 것들이
+        o: 의도에 따라(부사)
         tip: depending on the intentions는 명사가 아니라 '당사자들의 의도에 따라'라는 부사야. 주어·동사는 the areas ~ may be clarified.
+        trap: depending on
+        ask: 명사(주어)일까?
   - kind: short
     sentence: Individual perspectives may also be context dependent, meaning that under different circumstances, at a different time, when they are feeling a different way, the same individual may make different choices.
     source: 2024 고3 6월 42번
@@ -800,9 +842,11 @@ practice:
         - t: 이는 다른 상황에서, 다른 시간에, 그들이 다르게 느끼고 있을 때 같은 사람이 다른 선택을 할 수도 있음을 의미한다
           trap: true
       caution:
-        x: '''meaning that ~''을 형용사/be동사 목적어로'
-        o: 앞 절 받는 분사구문(=which means) '즉 ~을 의미'
+        x: be동사 뒤 '~을 의미하는'
+        o: 앞 절 받아 '즉 ~을 의미한다'
         tip: meaning that을 be동사 뒤 목적어로 보지 마. 앞 절 전체를 받아 '즉 ~을 의미한다'로 이어 읽어(= which means).
+        trap: meaning that
+        ask: be동사 목적어일까?
   - kind: short
     sentence: For example, a United Nations initiative has estimated that the economic benefits of ecosystem services provided by tropical forests, including climate regulation, water purification, and erosion prevention, are over three times greater per hectare than the market benefits.
     source: 2024 고3 11월 23번
@@ -835,9 +879,11 @@ practice:
         - t: 헥타르당 세 배 넘게 크다고 시장 이익보다
           v: 헥타르당
       caution:
-        x: '''including ~''을 본동사 ''포함시킨다''로'
-        o: 콤마 분사구(=which include) 예시; that절 본동사 are
+        x: 숲이 기후조절을 포함시킨다
+        o: 기후조절 등을 포함한 서비스(부연)
         tip: including을 '포함시킨다'는 동사로 읽지 마. ecosystem services를 부연하는 예시 삽입(= which include)이고, that절 진짜 동사는 are greater야.
+        trap: including
+        ask: '''포함시킨다'' 동사일까?'
   - kind: mc
     sentence: For example, skilled ants engage in a behavior called ' tandem running, in which they touch their bodies to the body of a novice ant as they lay down chemical trails, presumably to assist the newcomer with route learning.
     source: 2025 고3 6월 31번
@@ -877,9 +923,11 @@ practice:
         - t: 아마도 신참에게 경로 학습을 돕기 위해
           v: 신참
       caution:
-        x: '''called ~''를 ''부르면서''로, ''as''를 ''때문에''로'
-        o: called=a behavior 수식 '~라 불리는'; as='~하면서'
+        x: ~라 부르면서(동작)
+        o: ~라 불리는 행동(앞 명사 수식)
         tip: called tandem running은 '부르면서'가 아니라 a behavior를 꾸며 '~라 불리는 행동'. as they lay down은 '때문에'가 아니라 '~하면서'(동시)야.
+        trap: called
+        ask: '''부르면서''일까?'
   - kind: mc
     sentence: Looking around his shared dorm room, Noah thought that it looked exactly like every other dorm room at the university, and he became disappointed.
     source: 2022 고3 6월 45번
@@ -910,9 +958,11 @@ practice:
         - t: 그리고 그는 실망하게 되었다
           v: 실망
       caution:
-        x: '''Looking around ~''를 ''방이 둘러보니''로'
-        o: 분사 주어=주절 주어 Noah
+        x: 방(it)이 둘러보니
+        o: 노아가 방을 둘러보니
         tip: Looking around의 주인은 방(it)이 아니라 주절 주어 Noah야 → '노아가 방을 둘러보니 다른 방들과 똑같아 보였다'.
+        trap: Looking around
+        ask: 둘러본 게 누구?
   - kind: mc
     sentence: Delighted, Noah added, "Well, yesterday our room was just like any other place at this school."
     source: 2022 고3 6월 45번
@@ -941,9 +991,11 @@ practice:
         - t: 어제 우리 방은 이 학교의 다른 어떤 곳과도 똑같았어요
           v: 똑같았
       caution:
-        x: '''Delighted''를 ''남을 기쁘게 하며'' 능동으로'
-        o: (Being) delighted 과거분사 → Noah가 기뻐하는 상태
+        x: 남을 기쁘게 하며
+        o: 노아가 기뻐서 덧붙임
         tip: Delighted는 '남을 기쁘게 하며'가 아니야. (Being) delighted라 Noah가 '기뻐하는' 상태 → '기뻐서 노아가 덧붙였다'.
+        trap: Delighted
+        ask: 누구를 기쁘게?
   - kind: mc
     sentence: My original worry about such algorithms was that they might drive everyone into certain parts of the library, leaving others lacking listeners.
     source: 2022 고3 9월 21번
@@ -972,9 +1024,11 @@ practice:
         - t: 다른 부분들은 청취자가 없는 채로 남겨두면서
           trap: true
       caution:
-        x: '''leaving others lacking ~''을 ''사람들을 떠난다''로'
-        o: 결과 분사구문 leave A B → others가 '청취자 없는' 채로 남음
+        x: 나머지 사람들을 떠난다
+        o: 그 결과 나머지가 청취자 없이 남음
         tip: leaving others를 '사람들을 떠난다'로 읽지 마. leave A B(A를 B한 채 두다)라 '그 결과 나머지는 청취자가 없는 채로 남는다'.
+        trap: leaving
+        ask: '''떠난다''는 뜻일까?'
   - kind: mc
     sentence: A part of an animal's territory is for eating, a part for sleeping, a part for swimming or wallowing, a part may be set aside for waste, depending on the species of animal.
     source: 2022 고3 9월 31번
@@ -1007,9 +1061,11 @@ practice:
         - t: 동물의 종에 따라
           trap: true
       caution:
-        x: '''depending on ~''을 ''(그 부분이) 종에 의존한다''로'
-        o: 관용 분사구문 '~에 따라' → 문장 전체 수식
+        x: 그 부분이 종에 의존한다
+        o: 동물 종에 따라(문장 전체)
         tip: depending on ~은 특정 부분이 '종에 의존한다'가 아니라 문장 전체를 꾸미는 '동물 종에 따라'라는 관용 표현이야.
+        trap: depending on
+        ask: '''~에 의존한다''일까?'
   - kind: mc
     sentence: Walking out of Charing Cross Station in London, Emilia and her traveling companion, Layla, already felt their hearts pounding.
     source: 2022 고3 9월 45번
@@ -1038,9 +1094,11 @@ practice:
         - t: 벌써 그들의 심장이 쿵쾅거리는 것을 느꼈다
           v: 쿵쾅거리는
       caution:
-        x: '''Walking out ~''을 ''누군가 걸어 나올 때''로'
-        o: 분사 주어=주절 주어 Emilia and Layla
+        x: 누군가 걸어 나올 때
+        o: 두 사람이 걸어 나오며
         tip: Walking out의 주인은 다른 누군가가 아니라 주절 주어 Emilia와 Layla야 → '두 사람이 역을 걸어 나오며 심장이 뛰는 걸 느꼈다'.
+        trap: Walking out
+        ask: 걸어 나온 게 누구?
   insertion:
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through geographical or virtual space, our body becomes more and more a passive non-moving container, which is transported by artefacts or loaded up with inner feelings of being mobile in the so-called information society.
@@ -1076,9 +1134,11 @@ practice:
         - t: 그런데 그것은 인공물에 의해 이동되거나 이른바 정보 사회에서 이동한다는 내적 느낌으로 채워진다
           trap: true
       caution:
-        x: '''artefacts''를 주어로 ''인공물이 몸을 이동시킨다''로'
-        o: which 선행사=container, ', which' 빼면 뼈대 남아
+        x: 인공물이 몸을 이동시킨다
+        o: 우리 몸=수동적 용기(앞 명사 보충)
         tip: which의 주인은 artefacts가 아니라 앞 a passive non-moving container(우리 몸)야. ', which ~'를 빼면 '우리 몸은 수동적 용기가 된다'가 뼈대.
+        trap: which
+        ask: 주인이 인공물?
   - kind: mc
     sentence: For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.
     source: 2022 고3 6월 31번
@@ -1115,9 +1175,11 @@ practice:
         - t: 그것들은 그들의 사회·직장 생활을 연결한다
           v: 연결한다
       caution:
-        x: '''or more appropriately, the laptop''을 동사구로'
-        o: the computer 재진술 동격 삽입, 본동사는 is
+        x: 컴퓨터가 노트북에 뭔가 함
+        o: 컴퓨터, 더 정확히는 노트북은 ~이다
         tip: '''or more appropriately, the laptop''은 동사구가 아니라 앞 the computer를 바꿔 말한 것. 진짜 동사는 is → ''컴퓨터, 더 정확히는 노트북은 ~이다''.'
+        trap: or more appropriately
+        ask: 노트북이 뭘 하는 동사?
   - kind: short
     sentence: Fortunately, in the period after 1660, when more items of dress survive to enrich our understanding of the history of the subject, there are also many painted, printed, photographed and filmed sources of evidence of people in clothing, caught in movement.
     source: 2026 고3 11월 42번
@@ -1148,9 +1210,11 @@ practice:
         - t: 또한 많은 그림·판화·사진·영상 증거 자료가 있다 옷 입은 사람들에 대한 움직임 속에 포착된
           v: 증거
       caution:
-        x: ''', when~'' / '', caught~'' 삽입을 주절로'
-        o: 삽입 빼면 there are many sources of evidence
+        x: 옷 자료가 남아있다(뼈대로)
+        o: 삽입 빼면 '증거가 많다'
         tip: ''', when ~ subject,''와 ''caught in movement''는 콤마 삽입이라 걷어내면 뼈대 ''there are also many sources of evidence''가 보여.'
+        trap: when
+        ask: 이게 주절일까?
   - kind: mc
     sentence: In spite of increasing acceleration, for example in travelling through geographical or virtual space, our body becomes more and more a passive non‑moving container, which is transported by artefacts or loaded up with inner feelings of being mobile in the so‑called information society.
     source: 2022 고3 6월 40번
@@ -1189,9 +1253,11 @@ practice:
         - t: 그런데 그것은 인공물에 의해 이동되거나 이른바 정보 사회에서 이동한다는 내적 느낌으로 채워진다
           v: 인공물
       caution:
-        x: '''for example in travelling ~''을 주어로'
-        o: acceleration 부연 예시, 주어는 our body becomes
+        x: 이동하는 예시가 ~하다
+        o: 진짜 주어는 우리 몸(예시일 뿐)
         tip: '''for example in travelling ~''은 주어가 아니라 앞 acceleration을 부연하는 예시. 진짜 주어·동사는 our body becomes야.'
+        trap: for example
+        ask: 이게 주어일까?
   - kind: mc
     sentence: Since that time, it has become apparent that broadly effective pesticides can have harmful effects on beneficial insects, which can negate their effects in controlling pests, and that persistent pesticides can damage non‑target organisms in the ecosystem, such as birds and people.
     source: 2022 고3 6월 38번
@@ -1230,9 +1296,11 @@ practice:
         - t: 그리고 잔류성 살충제가 생태계의 비표적 생물에 해를 끼칠 수 있다는 것이 새와 사람 같은
           v: 잔류성
       caution:
-        x: '''which can negate ~''를 핵심 주어로'
-        o: 삽입절 → 뼈대는 it ~ apparent that A and that B
+        x: 무효화가 문장 핵심
+        o: 앞 악영향을 덧붙인 삽입
         tip: which can negate ~는 앞 harmful effects를 부연하는 삽입이야. 뼈대는 'it has become apparent that A and that B'라는 두 that절이야.
+        trap: which can negate
+        ask: 이게 핵심 주어?
   - kind: mc
     sentence: Even though there is good reason to consider a dog a sentient being capable of making choices and plans—so ' that we might suppose it could have conceived of acting ' otherwise'—we're unlikely to think it is wicked and immoral for attacking a child.
     source: 2024 고3 9월 22번
@@ -1269,9 +1337,11 @@ practice:
         - t: 우리는 개가 아이를 공격한 것이 사악하고 부도덕하다고 생각하지는 않을 것이다
           v: 사악하고
       caution:
-        x: 대시 사이 'so that we might suppose ~'를 주절로
-        o: 대시 삽입 부연 → 주절은 we're unlikely to think ~
+        x: 달리 행동했다 여길 만하다(결론)
+        o: 개가 사악하다 여기지 않는다(진짜 결론)
         tip: 두 대시 사이 'so that we might suppose ~'는 부연 삽입. 양보절 뒤 진짜 주절은 'we're unlikely to think ~' → '사악하다고 여기지 않을 것'.
+        trap: so that
+        ask: 이게 진짜 주절?
   - kind: short
     sentence: Over the course of its evolutionary history, an organism's remote ancestors may have evolved a set of characteristics ' —evolutionary baggage'—that subsequently constrain future evolution.
     source: 2023 고3 6월 40번
@@ -1306,9 +1376,11 @@ practice:
         - t: 이후 미래의 진화를 제약하는
           v: 제약하는
       caution:
-        x: 대시 사이 'evolutionary baggage'를 새 목적어로
-        o: characteristics의 동격, that절이 그걸 수식
+        x: 진화적 짐을 새로 얻었다
+        o: 그 특성=진화적 짐(바꿔 부름)
         tip: 대시 사이 'evolutionary baggage'는 새 목적어가 아니라 앞 characteristics를 바꿔 부른 것. that절도 그걸 꾸며 '미래 진화를 제약하는 특성'.
+        trap: evolutionary baggage
+        ask: 새 목적어일까?
   - kind: short
     sentence: One function of poetry is to depict the world with a fresh perception—to make it strange—so that we will listen to language once again.
     source: 2024 고3 9월 42번
@@ -1341,9 +1413,11 @@ practice:
         - t: 그리하여 우리가 언어에 다시 한번 귀 기울이도록
           v: 언어
       caution:
-        x: '''—to make it strange—''를 to depict와 병렬 목적으로'
-        o: 대시 쌍 삽입 부연 → 앞 'fresh perception 묘사' 재진술
+        x: 묘사와 낯설게 하기 둘
+        o: '''낯설게''는 앞말 재진술'
         tip: —to make it strange—는 대시로 삽입된 부연이라 앞 'fresh perception으로 묘사하기'를 다시 푼 말. 뼈대는 'One function is to depict ~ so that ~'.
+        trap: to make it strange
+        ask: 또 다른 목적일까?
   - kind: short
     sentence: But here too there is iteration—the repeated burning of molecules of wax—so this too is an iterative process, although at first masked.
     source: 2026 고3 11월 36번
@@ -1378,9 +1452,11 @@ practice:
         - t: 비록 처음에는 가려져 있었지만
           v: 가려져
       caution:
-        x: '''—the repeated burning ~—''를 별개 절로'
-        o: iteration의 동격 부연 → 골격 there is iteration so ~
+        x: 밀랍 연소가 별개 문장
+        o: iteration을 다시 푼 삽입 설명
         tip: —the repeated burning of ~—는 대시로 삽입된 iteration의 동격 설명. 걷어내면 'there is iteration so this too is an iterative process'가 뼈대.
+        trap: —the repeated burning—
+        ask: 따로 도는 절일까?
   - kind: mc
     sentence: Urban delivery vehicles can be adapted to better suit the density of urban distribution, which often involves smaller vehicles such as vans, including bicycles.
     source: 2023 고3 11월 22번
@@ -1411,9 +1487,11 @@ practice:
         - t: 자전거를 포함해서
           v: 자전거
       caution:
-        x: '''which often involves ~''를 density 꾸미는 제한적으로'
-        o: 콤마+which 계속적 → urban distribution 받아 정보 추가
+        x: 작은 차 쓰는 그 밀도
+        o: 그런데 도시유통은 작은 차를 씀(부연)
         tip: 콤마+which는 앞 urban distribution을 받아 정보 더하는 계속적 용법 → '그런데 그건 밴 같은 작은 차를 쓴다'. density를 좁혀 꾸미는 게 아니야.
+        trap: which
+        ask: 밀도를 꾸미는 말일까?
   - kind: mc
     sentence: The main institutions of state—parliament, courts, police and so on—along with certain of the professions, exhibit this formal character.
     source: 2023 고3 6월 38번
@@ -1444,9 +1522,11 @@ practice:
         - t: 이 공식적인 성격을 보인다
           v: 공식적인
       caution:
-        x: 대시 사이 'parliament, courts'를 주어로
-        o: 걷어내면 진짜 주어는 'institutions'
+        x: 의회·법원이 보인다
+        o: 주요 기관들이 보인다(진짜 주어)
         tip: 대시 사이 'parliament, courts, police'는 예시일 뿐, 진짜 주어는 앞의 institutions → '국가의 주요 기관들이 이런 형식적 성격을 보인다'.
+        trap: parliament
+        ask: 이게 주어일까?
   - kind: mc
     sentence: Only when the two parties discuss the possibilities further do they discover that moving expenses and starting date can also be negotiated, which may facilitate resolution of the salary issue.
     source: 2023 고3 6월 42번
@@ -1477,9 +1557,11 @@ practice:
         - t: 그런데 이는 급여 문제의 해결을 쉽게 할 수 있다
           trap: true
       caution:
-        x: 콤마 which를 앞 'starting date'만 가리킴
-        o: which는 앞 절 전체(협상 가능 사실)를 받음
+        x: 시작일 하나만 가리킴
+        o: 협상된다는 사실 전체를 받음
         tip: 콤마 which는 starting date 하나가 아니라 앞 절 전체를 받아 → '이사비와 시작일도 협상된다, 그런데 그 사실이 급여 문제 해결을 돕는다'.
+        trap: which
+        ask: 앞 단어만 받나?
   - kind: mc
     sentence: Whatever the nature of the outcome, which may actually favour one party more than another, the purpose of negotiation is the identification of areas of common interest and conflict.
     source: 2024 고3 11월 36번
@@ -1510,9 +1592,11 @@ practice:
         - t: 공통의 이해관계와 갈등 영역을 확인하는 것이다
           v: 이해관계
       caution:
-        x: '''which may favour...''를 주절로 착각'
-        o: which절은 삽입, 뼈대는 'the purpose is~'
+        x: 한쪽에 유리한 게 핵심
+        o: 협상 목적은 공통점 찾기
         tip: 콤마 사이 'which may favour...'는 outcome를 덧붙인 삽입일 뿐, 뼈대는 the purpose is → '협상의 목적은 공통 관심사와 갈등을 찾는 것이다'.
+        trap: which may favour
+        ask: 이게 주절일까?
   - kind: mc
     sentence: Watching Clara riding beside her, Emma thought about Clara's past tragedy, which she now seemed to have overcome.
     source: 2024 고3 11월 45번
@@ -1541,9 +1625,11 @@ practice:
         - t: 그런데 그 비극을 그녀는 이제 극복한 것처럼 보였다
           trap: true
       caution:
-        x: 콤마 which를 '~한 비극'으로 좁혀 읽음
-        o: 계속적 용법 '그런데 그 비극을~', she는 Clara
+        x: 엠마가 극복한 그런 비극
+        o: 그런데 그 비극을 클라라가 극복
         tip: 콤마 which는 '~한 비극'으로 좁히지 말고 앞의 비극을 받아 '그런데 그 비극을~'로 이어 읽어. 극복한 she는 Emma가 아니라 Clara야.
+        trap: which
+        ask: '''~한 비극''으로 좁히나?'
   apposition:
   - kind: mc
     sentence: 'When you say "It''s mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.'
@@ -1580,9 +1666,11 @@ practice:
         - t: 즉, 판매 막대기·임대 막대기·저당·양도·증여, 심지어 그것을 파괴할 권리까지
           trap: true
       caution:
-        x: 콜론 뒤 목록을 별개 항목·소유 의지로
-        o: 콜론은 the sticks를 푸는 동격, 현재 소유 상태
+        x: 팔고 빌려줄 새 항목 목록
+        o: 그 막대들을 지금 소유(풀어 씀)
         tip: 콜론(:) 뒤 목록은 새 항목이 아니라 the sticks를 풀어 준 것 → '판다·빌려준다·저당 잡힌다 같은 막대들을 지금 소유하고 있다'는 뜻.
+        trap: ':'
+        ask: 콜론 뒤가 새 항목?
   - kind: mc
     sentence: Studies on dark‑eyed juncos (a type of bird) support the ( ) view that nonvigilant animals attend to departures of individual group mates but that the departure of multiple individuals causes a greater escape response in the nonvigilant individuals.
     source: 2022 고3 6월 39번
@@ -1619,9 +1707,11 @@ practice:
         - t: 그러나 다수 개체의 이탈은 비경계 개체들에게 더 큰 도피 반응을 일으킨다는 관점을
           v: 도피 반응
       caution:
-        x: '''the view'' 뒤 that을 관계절로'
-        o: view 내용 푸는 동격 that, '~라는 관점'
+        x: 동물이 주목하는 그 관점
+        o: ~라는 관점(내용 풀이)
         tip: the view 뒤 that은 관계절이 아니라 view의 내용을 푸는 동격 → '연구가 ~라는 관점을 뒷받침한다'로 that절 전체를 view와 같게 읽어.
+        trap: that
+        ask: view 꾸미는 관계절?
   - kind: mc
     sentence: Hyper‑mobility—the notion that more travel at faster speeds covering longer distances generates greater economic success—seems to be a distinguishing feature of urban areas, where more than half of the world's population currently reside.
     source: 2023 고3 6월 24번
@@ -1660,9 +1750,11 @@ practice:
         - t: 그곳에는 현재 세계 인구의 절반 이상이 거주한다
           v: 거주한다
       caution:
-        x: 대시 사이 'the notion that'을 본동사로
-        o: 주어 Hyper-mobility 동격 삽입, 본동사 seems
+        x: '''~라는 생각이다''가 본동사'
+        o: 주어 다시 푼 삽입, 본동사는 seems
         tip: 대시 사이 'the notion that...'은 본동사가 아니라 주어 Hyper-mobility를 다시 설명한 것 → 걷어내면 뼈대는 'Hyper-mobility seems to be~'.
+        trap: the notion that
+        ask: 이게 본동사일까?
   - kind: mc
     sentence: 'When you say It''s mine in reference to a resource, often.'' that means you own a lot of the sticks that make up the full bundle: the sell stick, the rent stick, the right to mortgage, license, give away, even destroy the thing.'
     source: 2023 고3 6월 21번
@@ -1699,9 +1791,11 @@ practice:
         - t: 즉 팔 막대, 빌려줄 막대, 저당·허가·양도, 심지어 그것을 파괴할 권리까지
           trap: true
       caution:
-        x: 콜론 뒤 목록을 own의 또 다른 목적어로
-        o: 콜론은 the sticks를 나열한 동격, 목록=the sticks
+        x: 그 막대들과 sell/rent stick을 소유
+        o: 그 막대들이 곧 sell/rent stick(나열)
         tip: 콜론 뒤 명사들은 own의 새 목적어가 아니라 the sticks가 무엇인지 나열한 동격 → 'sell stick, rent stick...'이 곧 그 막대들이야.
+        trap: ': (콜론)'
+        ask: 소유의 새 목적어일까?
   - kind: mc
     sentence: In larger‑scale projects, however, even where a strong personality exercises powerful influence, the fact that substantial numbers of designers are employed in implementing a concept can easily be overlooked.
     source: 2022 고3 9월 40번
@@ -1740,9 +1834,11 @@ practice:
         - t: 쉽게 간과될 수 있다
           v: 간과될
       caution:
-        x: '''the fact'' 뒤 that절을 별도 목적어로 끊음'
-        o: 동격 that, 'the fact that~' 전체가 주어
+        x: 사실을 별도 목적어로
+        o: '''~라는 사실'' 전체가 주어'
         tip: the fact 뒤 that은 fact의 내용을 밝히는 동격 → 'the fact that 많은 디자이너가 쓰인다는 사실' 전체가 주어, 동사는 can be overlooked.
+        trap: the fact that
+        ask: that을 끊을까?
   - kind: short
     sentence: In recent years urban transport professionals globally have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
@@ -1775,9 +1871,11 @@ practice:
         - t: 즉 도시의 자동차 수요가 수용되기보다는 관리되어야 한다는
           trap: true
       caution:
-        x: '''the view'' 뒤 that을 ''바라보는 견해''로'
-        o: 견해 내용 푸는 동격 that, '~라는 견해'
+        x: 그 견해를 바라본다
+        o: ~라는 내용의 견해(동격)
         tip: the view 뒤 that은 '바라본다'가 아니라 견해 내용을 푸는 동격 → '자동차 수요는 수용이 아니라 관리돼야 한다는 견해'로 통째로 읽어.
+        trap: that
+        ask: '''바라본다''는 뜻?'
   - kind: mc
     sentence: When the Industrial Revolution arrived with its great innovation, the motor, we didn't leave our world to go to some remote motorspace.
     source: 2023 고3 11월 30번
@@ -1808,9 +1906,11 @@ practice:
         - t: 어떤 먼 모터 공간으로 가려고
           v: 어떤
       caution:
-        x: 콤마 뒤 'the motor'를 새 주어로
-        o: the motor는 innovation 동격, 주어는 we
+        x: 모터가 새 주어
+        o: 모터=혁신, 주어는 우리
         tip: 콤마 뒤 the motor는 새 주어가 아니라 앞 innovation과 같은 것(즉, 다시 말해) → 진짜 주어는 we, 동사는 didn't leave.
+        trap: the motor
+        ask: 새 주어일까?
   - kind: mc
     sentence: Whether the reason for their decline is their location and lack of nutrients, a passing sickness, or genetic makeup, they now fall prey to insects and fungi.
     source: 2023 고3 6월 39번
@@ -1839,9 +1939,11 @@ practice:
         - t: 그들은 이제 곤충과 균류의 먹이가 된다
           v: 먹이가
       caution:
-        x: '''location, sickness''를 주절 주어로'
-        o: whether절 안 보어(원인 후보), 주어는 they
+        x: 위치·병이 먹잇감이 된다
+        o: 원인 후보(보어)일 뿐, 주어는 they
         tip: location, sickness, genetic makeup는 whether절 안 is의 보어(원인 후보)일 뿐 → whether절이 끝난 뒤 주절 주어 they가 새로 나와.
+        trap: location
+        ask: 이게 주절 주어?
   - kind: mc
     sentence: For the physicist, understanding the ordinary, the habitual, and the frequent thus allows us to account for the frightening and the singular.
     source: 2024 고3 9월 23번
@@ -1872,9 +1974,11 @@ practice:
         - t: 무섭고 독특한 것을 설명하도록
           v: 설명하도록
       caution:
-        x: '''the ordinary, the habitual''을 형용사로'
-        o: the+형용사=~한 것, understanding의 목적어
+        x: 평범한(꾸미는 말)
+        o: 평범한 것(이해의 대상)
         tip: the ordinary, the habitual은 형용사가 아니라 'the+형용사=~한 것' → understanding의 목적어 '평범한 것, 익숙한 것, 잦은 것을 이해하는 것'.
+        trap: the ordinary
+        ask: 형용사일까?
   - kind: mc
     sentence: Even over periods as short as a few decades, satellite images show that dramatic reduction of mountain glaciers has occurred in the Andes, the Himalayas, and elsewhere.
     source: 2025 고3 6월 35번
@@ -1903,9 +2007,11 @@ practice:
         - t: 산악 빙하의 극적인 감소가 안데스, 히말라야, 그리고 다른 곳에서 발생했음을
           trap: true
       caution:
-        x: show 뒤 that을 'satellite images' 관계사로
-        o: '''~라는 것을'' 명사절 접속사, that절이 목적어'
+        x: 감소를 보여준 위성사진
+        o: 감소가 일어났다는 것을 보여줌
         tip: show 뒤 that은 images를 꾸미는 게 아니라 '~라는 것을' 이끄는 명사절 → that절 전체가 목적어, 절 안 주어는 dramatic reduction.
+        trap: that
+        ask: images 꾸미나?
   prep_stack:
   - kind: mc
     sentence: Even without the imperative of climate change, the physical constraints of densely inhabited cities and the corresponding demands of accessibility, mobility, safety, air pollution, and urban livability all limit the option of expanding road networks purely to accommodate this rising demand.
@@ -1941,9 +2047,11 @@ practice:
         - t: 모두 제한한다 도로망을 확장하는 선택지를 오직 이 늘어나는 수요를 수용하기 위해
           v: 수요
       caution:
-        x: of 뒤 'cities/accessibility'를 주어로
-        o: 핵 주어 constraints and demands, 동사 limit
+        x: 도시·접근성이 주어
+        o: 제약·요구가 주어, 동사는 limit
         tip: of 뒤 cities, accessibility는 주어가 아니라 수식어 → 핵 주어는 constraints and demands 두 개, 동사는 limit '~이 모두 제한한다'.
+        trap: of ... cities
+        ask: cities가 주어일까?
   - kind: mc
     sentence: 'Often, though, we split the sticks up, as for a piece of land: there may be a landowner, a bank with a mortgage, a tenant with a lease, a plumber with a license to enter the land, an oil company with mineral rights.'
     source: 2023 고3 6월 21번
@@ -1976,9 +2084,11 @@ practice:
         - t: 토지 소유자, 저당권을 가진 은행, 임차권을 가진 세입자, 그 땅에 들어갈 허가를 가진 배관공, 광물권을 가진 석유 회사가 있을 수 있다
           trap: true
       caution:
-        x: '''with'' 뒤 mortgage를 주어로 뒤집음'
-        o: with+명사는 앞 명사 수식, there be 나열
+        x: 저당이 은행을 가짐
+        o: 저당을 가진 은행(앞 명사 수식)
         tip: with 뒤 mortgage, lease는 주어가 아니라 앞 명사를 꾸며 → 'a bank(저당을 가진), a tenant(임대차를 가진)'처럼 there is로 나열돼.
+        trap: with
+        ask: mortgage가 주어일까?
   - kind: short
     sentence: A transit project that could speed travel for tens of thousands of people can be stopped by objections to the loss of a few parking spaces or by the simple fear that the project won't work.
     source: 2024 고3 11월 34번
@@ -2009,9 +2119,11 @@ practice:
         - t: 또는 그 사업이 실패할 거라는 단순한 두려움 때문에
           v: 두려움
       caution:
-        x: '''for tens of thousands''에 끌려 ''사람들이 반대'''
-        o: 핵 주어 transit project, 동사 can be stopped
+        x: 수만 명이 반대해 막는다
+        o: 교통 사업이 중단될 수 있다
         tip: '''for tens of thousands''에 끌려 사람들을 주어로 삼지 마 → 핵 주어는 A transit project, 동사는 can be stopped ''교통 사업이 중단될 수 있다''.'
+        trap: for tens of thousands
+        ask: 사람들이 주어?
   - kind: mc
     sentence: In discharging their usual responsibilities of description and commentary, reporters' accounts of sports events are eagerly consulted by sports fans, while in their broader journalistic role of covering sport in its many forms, sports journalists are among the most visible of all contemporary writers.
     source: 2023 고3 11월 31번
@@ -2052,9 +2164,11 @@ practice:
         - t: 스포츠 기자들은 모든 동시대 작가들 중 가장 눈에 띄는 축에 속한다
           v: 동시대
       caution:
-        x: '''in its many forms''를 앞 role에 붙임'
-        o: in구는 covering sport 수식(여러 형태로 다룸)
+        x: 여러 형태의 역할
+        o: 스포츠를 여러 형태로 다룸
         tip: in its many forms는 앞 role이 아니라 covering sport에 걸려 → 'role of covering sport in its many forms'='스포츠를 여러 형태로 다루는 역할'.
+        trap: in its many forms
+        ask: 앞 role에 붙나?
   - kind: mc
     sentence: 'The feedback loop of perception and action that enables you to navigate the world around you is now one step removed: instead of perceiving primarily through interaction of your own body with the external world, you''re perceiving the game world through interaction of the avatar.'
     source: 2026 고3 11월 39번
@@ -2097,9 +2211,11 @@ practice:
         - t: 너는 아바타의 상호작용을 통해 게임 세계를 지각하고 있다
           v: 아바타
       caution:
-        x: '''with the external world''를 perceiving에 붙임'
-        o: interaction of A with B=한 덩어리(A가 B와 상호작용)
+        x: 세계와 함께 지각한다
+        o: 몸이 세계와 하는 상호작용
         tip: with the external world는 perceiving이 아니라 interaction에 붙어 → 'interaction of your body with the world'='몸이 세계와 하는 상호작용' 한 덩어리.
+        trap: with the external world
+        ask: 무엇에 붙나?
   - kind: mc
     sentence: For example, a company may devise a family emergency leave plan that allows employees the opportunity to be away from the company for a period of no longer than three hours, and no more than once a month, for illness in the employee's immediate family.
     source: 2023 고3 11월 39번
@@ -2141,9 +2257,11 @@ practice:
         - t: 직원의 직계 가족의 질병으로 인해
           v: 직계 가족
       caution:
-        x: 두 for를 같은 뜻, 'in family'를 딴 데 붙임
-        o: 앞 for=기간, 뒤 for=이유; in구는 illness 수식
+        x: 두 for 다 '~ 때문에'로
+        o: 앞은 '~ 동안', 뒤는 '~ 때문에'
         tip: 두 for는 뜻이 달라 → 앞 for는 '~ 동안(기간)', 뒤 for는 '~ 때문에(이유)'. in구는 illness에 붙어 '직계 가족의 질병'.
+        trap: for
+        ask: 두 for가 같은 뜻?
   - kind: short
     sentence: In these and other instances of contingency pricing, the economic value of the service is hard to determine before the service, and providers develop a price that allows them to share the risks and rewards of delivering value to the buyer.
     source: 2023 고3 11월 37번
@@ -2181,9 +2299,11 @@ practice:
         - t: 자신들이 구매자에게 가치를 전달하는 위험과 보상을 공유하게 해 주는
           v: 위험과 보상
       caution:
-        x: '''to the buyer''를 share에 붙여 ''구매자에게 공유'''
-        o: to구는 delivering value 수식(가치 전달)
+        x: 구매자에게 위험을 공유한다
+        o: 구매자에게 가치를 전달(하는 보상)
         tip: to the buyer는 share가 아니라 delivering value에 붙어 → 'rewards of delivering value to the buyer'='구매자에게 가치를 전달하는 위험과 보상'.
+        trap: to the buyer
+        ask: share에 붙나?
   - kind: short
     sentence: In the case of climate change, however, the sharp division of time into past, present, and future has been desperately misleading and has, most importantly, hidden from view the extent of the responsibility of those of us alive now.
     source: 2023 고3 11월 34번
@@ -2221,9 +2341,11 @@ practice:
         - t: 지금 살아 있는 우리들의 책임의 정도를
           trap: true
       caution:
-        x: '''from view''를 목적어로, of 연쇄 뒤섞음'
-        o: hidden from view X='X를 가리다', 목적어 후치
+        x: 시야를 숨겼다
+        o: 책임의 정도를 시야에서 가림
         tip: hidden from view X는 'X를 시야에서 가리다' → 긴 목적어 'the extent of the responsibility of those of us alive now(지금 사는 우리 책임의 정도)'가 뒤로 밀린 것.
+        trap: from view
+        ask: from view가 목적어?
   - kind: short
     sentence: Sequential changes are found in many fossils showing the change of certain features over time from a common ancestor, as in the case of the horse.
     source: 2022 고3 6월 36번
@@ -2256,9 +2378,11 @@ practice:
         - t: 말의 경우에서처럼
           v: 말
       caution:
-        x: '''from a common ancestor''를 are found에 걸음'
-        o: of·over·from 세 구가 모두 the change 수식
+        x: '''공통 조상에서 발견된다'''
+        o: '''공통 조상에서의 변화''(change 수식)'
         tip: from a common ancestor는 are found가 아니라 the change에 붙어 → 'change of features over time from a common ancestor'='공통 조상에서 시간에 따른 변화'.
+        trap: from a common ancestor
+        ask: are found에 붙나?
   - kind: short
     sentence: Consumer engagement levels in all manner of digital experiences and communities have simply exploded—and they show little or no signs of slowing.
     source: 2022 고3 6월 22번
@@ -2291,9 +2415,11 @@ practice:
         - t: 그리고 그것들은 보인다 거의 혹은 전혀 기미를 둔화될
           v: 기미
       caution:
-        x: '''in all manner''에서 끊어 주어를 짧게'
-        o: 핵 주어 levels, in구가 수식, 술어 have exploded
+        x: 모든 방식 안에서(주어 짧음)
+        o: 참여 수준이 폭발했다(levels가 주어)
         tip: '''in all manner...''에서 끊지 마 → 핵 주어는 levels, 그 뒤 in구가 길게 꾸며 → 술어는 have exploded ''참여 수준이 폭발했다''.'
+        trap: in all manner
+        ask: 여기서 끊어 읽을까?
   - kind: mc
     sentence: Accordingly, manufacturers have set up market-research departments to explore the needs of users in the target market, product-development groups to think up suitable products to address those needs, and so forth.
     source: 2022 고3 6월 33번
@@ -2324,9 +2450,11 @@ practice:
         - t: 등등을
           v: 등등
       caution:
-        x: '''product-development groups''를 새 주어로'
-        o: set up의 둘째 목적어, departments와 병렬
+        x: 개발팀이 새로 나선다
+        o: 세운 둘째 대상(부서와 병렬)
         tip: product-development groups는 새 주어가 아니라 set up의 둘째 목적어 → 'A 부서와 B 그룹을 세웠다'로 departments와 나란히 읽어.
+        trap: product-development groups
+        ask: 새 주어일까?
   - kind: mc
     sentence: The animal in a conflict between attacking a rival and fleeing may initially not have sufficient information to enable it to make a decision straight away.
     source: 2022 고3 6월 35번
@@ -2355,9 +2483,11 @@ practice:
         - t: 그것이 즉시 결정을 내릴 수 있게 해 줄
           v: 그것
       caution:
-        x: 전치사구 끝 'conflict/fleeing'을 주어로
-        o: 핵 주어 The animal, in구는 수식, 동사 may not have
+        x: 도망침·갈등이 정보가 없다
+        o: 진짜 주어는 그 동물
         tip: 전치사구 끝 conflict나 fleeing을 주어로 잡지 마 → 핵 주어는 The animal, 동사는 may not have '그 동물은 충분한 정보가 없을 수 있다'.
+        trap: fleeing
+        ask: 이게 주어일까?
   - kind: mc
     sentence: The fossil record supports this prediction—multicelled organisms are found in layers of earth millions of years after the first appearance of single-celled organisms.
     source: 2022 고3 6월 36번
@@ -2386,9 +2516,11 @@ practice:
         - t: 단세포 유기체가 처음 출현한 지 수백만 년 후에
           trap: true
       caution:
-        x: '''millions of years after''를 앞 layers에 붙임'
-        o: are found 수식 시간부사구(발견 시점)
+        x: 그 지층의 수백만 년 뒤
+        o: 단세포 뒤 발견되는 시점
         tip: '''millions of years after...''는 앞 layers가 아니라 are found에 붙는 시간부사구 → ''단세포 출현 수백만 년 뒤에 발견된다''.'
+        trap: millions of years after
+        ask: 앞 명사에 붙나?
   - kind: mc
     sentence: Also, it has become difficult for companies to develop new pesticides, even those that can have major beneficial effects and few negative effects.
     source: 2022 고3 6월 38번
@@ -2415,9 +2547,11 @@ practice:
         - t: 심지어 큰 유익한 효과와 거의 없는 부정적 효과를 가질 수 있는 것들조차도
           trap: true
       caution:
-        x: those를 companies로 잡음
-        o: those=앞 복수 new pesticides, that절이 수식
+        x: 그런 회사들조차(those=회사)
+        o: 그런 새 살충제조차(those=살충제)
         tip: those를 companies로 보지 마 → those는 앞 복수 new pesticides를 가리켜 → 'even those that...'='큰 효과를 내는 그런 새 살충제들조차'.
+        trap: those
+        ask: those가 회사들?
   inversion:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be pushed beyond a certain point, called a bifurcation.'
@@ -2451,9 +2585,11 @@ practice:
         - t: 그렇게 되려면 그것들은 분기점이라 불리는 특정 지점 너머로 밀려나야 한다
           v: 분기점
       caution:
-        x: Nor 도치 되돌려 '모두 혼돈적'으로 긍정
-        o: Nor='~도 아니다' 부정 첨가, not all 부분부정
+        x: 비선형계 모두가 혼돈적
+        o: 모두가 혼돈적인 건 아니다
         tip: Nor + 도치는 되돌릴 필요 없이 '~도 아니다'로 받아 → 'not all이니 모든 게 아니라, 비선형계 모두가 혼돈적인 것도 아니다'.
+        trap: Nor
+        ask: 긍정으로 되돌릴까?
   - kind: mc
     sentence: Not only is it less convenient—in terms of time, cost and comfort—to access locations in cities, but the very process of moving around in cities generates a number of negative externalities.
     source: 2023 고3 6월 24번
@@ -2486,9 +2622,11 @@ practice:
         - t: 도시에서 이동하는 과정 자체가 여러 부정적 외부효과를 낳는다
           v: 외부효과
       caution:
-        x: '''less convenient'' 놓쳐 ''편리해서 이롭다'''
-        o: less convenient='덜 편한', 'A뿐 아니라 B도'
+        x: 편리해서 이롭다
+        o: 덜 편할 뿐 아니라
         tip: Not only + 도치는 'A뿐 아니라 B도' → less convenient는 '덜 편한'이니 '도시 접근이 덜 편할 뿐 아니라 이동이 부정적 문제도 낳는다'.
+        trap: less convenient
+        ask: '''편리해 이롭다''?'
   - kind: short
     sentence: Little evidence exists that suggests modern AI's infallibility or predicts it in the future.
     source: 2024 고3 6월 20번
@@ -2517,9 +2655,11 @@ practice:
         - t: 현대 AI의 무오류성을 시사하거나 미래에 그것을 예측하는
           v: 무오류성
       caution:
-        x: 문두 Little을 '조금 있는'으로 긍정
-        o: Little='거의 없는' 부정어, that절은 evidence 수식
+        x: 증거가 조금 있다
+        o: 증거가 거의 없다(부정)
         tip: 문두 Little은 '조금 있는'이 아니라 '거의 없는' 부정어 → 'AI가 틀리지 않음을 시사하는 증거는 거의 없다'. that절은 evidence에 걸어 이어 읽어.
+        trap: Little
+        ask: '''조금 있는''일까?'
   - kind: mc
     sentence: Not only musicians and psychologists, but also committed music enthusiasts and experts often voice the opinion that the beauty of music lies in an expressive deviation from the exactly defined score.
     source: 2022 고3 9월 24번
@@ -2548,9 +2688,11 @@ practice:
         - t: 음악의 아름다움은 정확히 규정된 악보로부터의 표현적 일탈에 있다는
           v: 일탈
       caution:
-        x: 문두 Not only 보고 조동사 도치로
-        o: Not only A but also B가 두 주어 연결, 도치 없음
+        x: 도치되어 어순이 뒤집힘
+        o: A도 B도 의견을 낸다(주어 연결)
         tip: 여기 Not only A but also B는 두 주어를 연결하니 도치가 안 일어나 → '음악가와 심리학자뿐 아니라 애호가와 전문가도 의견을 낸다', 동사 voice 그대로.
+        trap: Not only
+        ask: 조동사 도치 신호일까?
   - kind: mc
     sentence: Only the rational discourse has the tools to overcome illusions and to point towards true knowledge.
     source: 2023 고3 6월 34번
@@ -2579,9 +2721,11 @@ practice:
         - t: 환상을 극복하고 진정한 지식을 가리킬
           v: 환상
       caution:
-        x: Only 보고 도치 기대, 주어를 부사어로
-        o: Only가 주어 한정→도치 없음, 평서 어순
+        x: 주어를 부사로 밀어냄
+        o: 오직 이성적 담론만이 가진다
         tip: Only가 주어를 바로 한정하면 도치가 없어 → '오직 이성적 담론만이 도구를 가진다'로 주어+동사 평서 어순 그대로 읽어.
+        trap: Only
+        ask: 도치될까?
   emphasis:
   - kind: short
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -2611,9 +2755,11 @@ practice:
         - t: 눈에 띄는 것은 바로 광장에 서 있거나 앉아 있는 많은 사람들이다 걷기보다는
           trap: true
       caution:
-        x: '''it is~that''을 가주어-진주어로'
-        o: It is X that 강조, 초점은 사이의 X
+        x: ~하는 것이 눈에 띈다
+        o: 많은 사람들을 부각(강조구문)
         tip: it is ~ that은 가주어-진주어가 아니라 강조구문 → it과 that을 빼도 말이 되고, 사이의 'the large number of people(많은 사람들)'을 부각해.
+        trap: it is ~ that
+        ask: 가주어-진주어일까?
   - kind: short
     sentence: 'But the reason for eclipses is ultimately the same as that of the succession of night and day: the movement of celestial bodies, which itself is based on the Newtonian law of attraction and how it explains why things fall when we let them go.'
     source: 2024 고3 9월 23번
@@ -2644,9 +2790,11 @@ practice:
         - t: 그 운동 자체는 뉴턴의 인력 법칙과 그것이 우리가 물체를 놓을 때 왜 떨어지는지를 설명하는 방식에 기반을 둔다
           trap: true
       caution:
-        x: which itself를 별개 주어로 끊음
-        o: 선행사=the movement, itself는 강조 재귀사
+        x: itself가 별개 주어
+        o: 그 운동 자체가 뉴턴 법칙에 기반
         tip: which itself를 새 주어로 끊지 마 → which의 선행사는 the movement, itself는 그걸 강조 → '그 운동 자체가 뉴턴 법칙에 기반한다'.
+        trap: which itself
+        ask: 새 주어로 끊나?
   - kind: mc
     sentence: Beginning in the late nineteenth century, with the hugely successful rise of the artistic male couturier, it was the designer who became celebrated, and the client elevated by his inspired attention.
     source: 2022 고3 9월 33번
@@ -2677,9 +2825,11 @@ practice:
         - t: 그리고 고객은 그의 영감 어린 관심에 의해 격상되었다.
           v: 격상되었다
       caution:
-        x: It을 '그것' 지시대명사로
-        o: It~who 강조, '유명해진 건 바로 디자이너'
+        x: 그것은 유명한 디자이너였다
+        o: 유명해진 건 바로 디자이너였다
         tip: It ~ who는 '그것'이 아니라 강조구문 → '유명해진 것은 바로 디자이너였다'로 사이의 the designer를 부각해 읽어.
+        trap: It
+        ask: '''그것''이란 뜻일까?'
   parallel:
   - kind: mc
     sentence: Unfortunately, at the scales, accuracy, and precision most useful to protected area management, the future not only promises to be unprecedented, but it also promises to be unpredictable.
@@ -2714,9 +2864,11 @@ practice:
         - t: 전례 없을 것으로 예상될 뿐 아니라 예측 불가능할 것으로도 예상된다
           trap: true
       caution:
-        x: not only A를 부정으로 'A가 아니라 B'
-        o: '''A뿐 아니라 B도''(둘 다 긍정)'
+        x: 전례 없는 게 아니라 예측불가
+        o: 전례 없을 뿐 아니라 예측불가도
         tip: not only A but also B는 'A뿐 아니라 B도'(둘 다 긍정) → 'A가 아니라 B'로 부정하지 마 → '전례 없을 뿐 아니라 예측 불가하기도 하다'.
+        trap: not only
+        ask: '''A가 아니라''일까?'
   - kind: mc
     sentence: Learning how to choose from alternatives and make a decision requires not only good personal values, but also knowledge competence in the business area of concern.
     source: 2022 고3 9월 29번
@@ -2748,9 +2900,11 @@ practice:
         - t: 좋은 개인적 가치관뿐 아니라 해당 사업 분야의 지식 역량도
           trap: true
       caution:
-        x: B를 '요구하지 않는다'로 부정
-        o: A·B 모두 requires의 목적어(둘 다 필요)
+        x: 지식 역량은 필요 없다
+        o: 가치관·지식 둘 다 필요
         tip: not only A but also B는 A·B 모두 requires의 목적어 → B를 '요구 안 한다'로 부정하지 마 → '좋은 가치관뿐 아니라 지식 역량도 필요하다'.
+        trap: but also
+        ask: B는 부정일까?
   - kind: mc
     sentence: The opening da-da-da-DUM that everyone has heard somewhere or another appears in an incredible variety of ways throughout not only the opening movement, but the remaining three movements, like a kind of motto or a connective thread.
     source: 2022 고3 6월 34번
@@ -2786,9 +2940,11 @@ practice:
         - t: 일종의 모토나 연결하는 실처럼
           v: 모토
       caution:
-        x: throughout 목적어 A만, B 빠뜨림
-        o: not only A but B, 목적어 둘(1악장+세 악장)
+        x: 1악장에만 나타난다
+        o: 1악장과 나머지 세 악장 모두
         tip: throughout의 목적어는 not only A but B 둘 다 → A만 옮기지 마 → '1악장뿐 아니라 나머지 세 악장 전체에 걸쳐 나타난다'.
+        trap: not only ... but
+        ask: 목적어가 하나뿐?
   - kind: short
     sentence: Sometimes these internal narratives we form not only shape our beliefs and opinions but also become deeply rooted in our identity.
     source: 2026 고3 11월 38번
@@ -2816,9 +2972,11 @@ practice:
         - t: 형성할 뿐 아니라 우리의 믿음과 의견을 뿌리내리기도 한다 우리의 정체성에 깊이
           trap: true
       caution:
-        x: '''but also B''를 ''B는 아니다''로 부정'
-        o: shape·become 둘 다 긍정, 'A뿐 아니라 B도'
+        x: 정체성에 뿌리내리진 않는다
+        o: 믿음을 만들고 정체성에도 뿌리내린다
         tip: not only shape ~ but also become ~는 'B는 아니다'가 아니야 → '믿음을 만들 뿐 아니라 정체성에도 깊이 뿌리내린다'로 둘 다 긍정.
+        trap: but also
+        ask: '''B는 아니다''일까?'
   - kind: short
     sentence: What's behind this idea is not only landscape architects' desire to design aesthetically suggestive park spaces, but a much longer history of Western thought that envisions cities and nature as antithetical spaces and oppositional forces.
     source: 2023 고3 11월 38번
@@ -2846,9 +3004,11 @@ practice:
         - t: 조경가들의 욕망뿐 아니라 미학적으로 시사하는 바가 있는 공원 공간을 설계하려는 훨씬 더 긴 서구 사상의 역사이기도 하다 도시와 자연을 대립하는 공간이자 대립하는 힘으로 여기는
           trap: true
       caution:
-        x: '''not only A but B''를 ''A이지 B는 아니다''로'
-        o: A·B 둘 다 is의 보어, 둘 다 긍정
+        x: 욕구지 역사는 아니다
+        o: 욕구만이 아니라 긴 역사도
         tip: '''not only 설계자의 욕구 but 서양 사상의 긴 역사''는 둘 다 is의 보어 → ''~욕구만이 아니라 ~긴 역사도''로 둘 다 살려 읽어.'
+        trap: not only
+        ask: B는 빼도 되나?
   - kind: mc
     sentence: If a certain player ends up consistently with the desired outcome, defeating all who challenge that player, then we tend to interpret the outcome either as the work of ' Fortune, or else as clever and undetectable cheating on the part of the winning player.
     source: 2025 고3 6월 22번
@@ -2887,9 +3047,11 @@ practice:
         - t: 행운의 작품으로 아니면 영리하고 발각되지 않는 부정행위로 이긴 선수 쪽의
           trap: true
       caution:
-        x: '''clever''만 떼어 앞 A에 붙임'
-        o: as구 짝은 'clever ... cheating' 통째
+        x: 교묘함이 '운의 산물' 쪽에
+        o: 교묘하고 안 들키는 속임수(통째)
         tip: either 'as the work of Fortune' or else 'as clever and undetectable cheating' 두 as덩어리가 짝. clever만 앞에 떼지 말고 통째로 '교묘한 속임수'로.
+        trap: clever
+        ask: clever만 앞에 붙나?
   - kind: mc
     sentence: We understand that the segregation of our consciousness into present, past, and future is both a fiction and an oddly self-referential framework; your present was part of your mother's future, and your children's past will be in part your present.
     source: 2023 고3 11월 34번
@@ -2928,9 +3090,11 @@ practice:
         - t: 그리고 네 자녀의 과거는 부분적으로 네 현재가 될 것이다
           v: 과거
       caution:
-        x: '''oddly''를 독립 요소로 떼어 셋으로'
-        o: '''oddly''는 부사 → B는 형용사구 한 덩어리'
+        x: oddly가 셋째 항목
+        o: 묘하게 자기지시적인 틀
         tip: both 'a fiction' and 'an oddly self-referential framework' 두 덩어리. oddly는 self-referential 꾸미는 부사 → '허구이자, 묘하게 자기지시적인 틀'.
+        trap: oddly
+        ask: 독립 요소일까?
   - kind: mc
     sentence: The opening da‑da‑da‑DUM that everyone has heard somewhere or another appears in an incredible variety of ‑ ‑ ‑ ways throughout not only the opening movement, but the remaining three movements, like a kind of motto or a connective thread.
     source: 2022 고3 6월 34번
@@ -2967,9 +3131,11 @@ practice:
         - t: 일종의 모토나 연결하는 실처럼
           v: 연결하는 실
       caution:
-        x: '''not only''를 ''오직 ~이 아니라''로 배제'
-        o: 첫 악장·나머지 세 악장 둘 다 포함
+        x: 첫 악장은 빼고 나머지에만
+        o: 첫 악장뿐 아니라 나머지 셋에도
         tip: not only the opening movement but the remaining three movements → 첫 악장을 빼는 게 아니라 '첫 악장뿐 아니라 나머지 세 악장에도' 다 나온다는 뜻.
+        trap: not only
+        ask: '''오직 ~아니라'' 배제?'
   - kind: short
     sentence: But after today, I really feel like it'll be our place. Now, they both knew that the place would provide them with energy and refreshment.
     source: 2022 고3 6월 45번
@@ -3000,9 +3166,11 @@ practice:
         - t: 그 장소가 그들에게 에너지와 생기를 제공해 줄 것이라는 것을
           trap: true
       caution:
-        x: '''refreshment''를 별개 성분으로 떼냄'
-        o: '''energy and refreshment''는 with의 목적어'
+        x: 에너지만 주고 활력은 별개
+        o: 에너지와 활력 둘 다 준다
         tip: provide them with 'energy and refreshment'에서 with 뒤 둘은 한 덩어리 → '그곳이 에너지와 활력을 준다'로 둘 다 제공 대상.
+        trap: and
+        ask: refreshment는 따로일까?
   - kind: short
     sentence: Many states that might wish to use it for education and information may not only find it too expensive but also simply unavailable to them.
     source: 2024 고3 9월 32번
@@ -3029,9 +3197,11 @@ practice:
         - t: 그것이 너무 비싸다는 것을 알게 될 뿐만 아니라 또한 자신들에게 그저 이용할 수 없다는 것도 알게 될 수 있다
           trap: true
       caution:
-        x: '''unavailable''을 독립된 절로 봄'
-        o: 둘 다 find의 목적격보어(형용사)
+        x: 구할 수 없다(별개 절)
+        o: 비싸고 구할 수 없다고 여김
         tip: find it 'too expensive' ... but also 'unavailable' 둘 다 it을 설명하는 짝 → '그것이 너무 비싸고 게다가 구할 수도 없다고 여긴다'.
+        trap: unavailable
+        ask: 따로 끊는 절?
   - kind: short
     sentence: Creativity is commonly defined as the production of ideas ( ) that are both novel (original, new) and useful (appropriate, ( ) feasible).
     source: 2024 고3 6월 32번
@@ -3062,9 +3232,11 @@ practice:
         - t: 새로우면서(독창적이고, 새롭고) 동시에 유용한(적절하고, 실현 가능한)
           trap: true
       caution:
-        x: '''새 아이디어''·''유용한 아이디어'' 두 종류로'
-        o: 같은 아이디어가 novel이면서 동시에 useful
+        x: 새 것과 유용한 것 두 종류
+        o: 새로우면서 동시에 유용한 하나
         tip: both novel and useful은 같은 아이디어의 두 성질 → '새로우면서 동시에 유용한 아이디어'. '새 것'과 '유용한 것' 두 종류가 아니야.
+        trap: both ... and
+        ask: 두 종류 아이디어일까?
   - kind: mc
     sentence: If learning were simply a matter of accumulating lists of facts, then it shouldn't make any difference if we are presented with information that is just a little bit beyond what we already know or totally new information.
     source: 2024 고3 9월 36번
@@ -3101,9 +3273,11 @@ practice:
         - t: 우리가 이미 알고 있는 것보다 조금 넘어선 정보를 제시받든 완전히 새로운 정보를 제시받든
           trap: true
       caution:
-        x: '''or totally new''를 beyond의 목적어로 붙임'
-        o: 두 명사구 대등 연결(두 종류 대비)
+        x: 이미 아는 것과 새것을 넘어선
+        o: 조금 넘어선 정보 또는 완전 새 정보
         tip: or이 '조금 넘어선 정보'와 'totally new information'을 대등하게 이어 → 두 종류 정보를 대비. beyond의 목적어로 붙이지 마.
+        trap: or
+        ask: beyond의 목적어일까?
   - kind: mc
     sentence: In both the ancient hunter-gatherer band and our intimate speech communities today, the diffusion of speech shaped values.
     source: 2024 고3 6월 22번
@@ -3130,9 +3304,11 @@ practice:
         - t: 말의 확산이 가치관을 형성했다.
           v: 확산
       caution:
-        x: '''both''를 band에만 걸어 ''무리 둘 다'''
-        o: '''고대 무리와 오늘날 공동체 둘 다에서'''
+        x: 고대 무리 둘 다에서
+        o: 고대 무리와 오늘날 공동체 둘 다
         tip: both 'the ancient band' and 'our communities today' → '고대 무리와 오늘날 공동체 둘 다에서'. both를 band에만 걸어 '무리 둘 다'로 읽지 마.
+        trap: both
+        ask: '''무리 둘 다''일까?'
   - kind: mc
     sentence: For many people, their work is both a source of income and of meaning.
     source: 2025 고3 6월 40번
@@ -3161,9 +3337,11 @@ practice:
         - t: 수입의 원천이자 의미의 원천 둘 다
           trap: true
       caution:
-        x: '''of meaning'' 빼고 ''둘 다 수입의 원천'''
-        o: '''수입의 원천이자 의미의 원천 둘 다'''
+        x: 둘 다 수입의 원천
+        o: 수입이자 의미의 원천 둘 다
         tip: both a source of income and of meaning → '수입의 원천이자 의미의 원천 둘 다'. of meaning 빼먹지 말고 both가 두 개를 묶는 걸 봐.
+        trap: of meaning
+        ask: both가 뭘 묶나?
   what_clause:
   - kind: mc
     sentence: In the absence of a universal standard or law, what matters is the outcome or consequences; so, the end justifies the means.
@@ -3201,9 +3379,11 @@ practice:
         - t: 그래서 목적이 수단을 정당화한다
           v: 정당화
       caution:
-        x: '''what matters''를 ''무엇이 문제인가''로'
-        o: '''중요한 것''이라는 명사절이 문장 주어'
+        x: 무엇이 중요한가(의문)
+        o: 중요한 것은 결과다
         tip: what matters는 '무엇이 중요한가?'가 아니라 '중요한 것' 한 덩어리 → '중요한 것은 결과다'로 문장 주어로 읽어.
+        trap: what matters
+        ask: '''무엇이?''라고 묻나?'
   - kind: mc
     sentence: Suddenly, you judge everyone from the university by what you've experienced on just a few unfortunate occasions.
     source: 2026 고3 11월 38번
@@ -3236,9 +3416,11 @@ practice:
         - t: 네가 단지 몇 번의 불운한 경우에 경험한 것에 의해
           trap: true
       caution:
-        x: '''by what''을 ''무엇을 경험했는지에 의해''로'
-        o: '''경험한 것''이라는 by의 목적어 명사절'
+        x: 무엇을 경험했는지에 따라
+        o: 경험한 것에 근거해
         tip: by what you've experienced는 '무엇을 경험했는지에 의해'가 아니라 '경험한 것에 근거해' → by 뒤 '경험한 것' 한 덩어리.
+        trap: what
+        ask: '''무엇을 ~했는지''?'
   - kind: mc
     sentence: Labor sharing groups are part of what has been called a moral economy since no one keeps formal records on how much any family puts in or takes out.
     source: 2023 고3 6월 32번
@@ -3275,9 +3457,11 @@ practice:
         - t: 어느 가정이 얼마나 넣거나 빼는지에 대해
           v: 가정
       caution:
-        x: '''무엇이 ~불렸는가의 일부''로'
-        o: of의 목적어 명사절 '~라고 불려 온 것'
+        x: 무엇이 도덕경제라 불렸나
+        o: 도덕경제라 불려 온 것(의 일부)
         tip: part of 'what has been called a moral economy' → '도덕 경제라 불려 온 것의 일부'. '무엇이 불렸는가'가 아니라 of 뒤 명사덩어리.
+        trap: what
+        ask: '''무엇이?''라고 묻나?'
   - kind: short
     sentence: We tend not to notice those cultural norms until they violate what we consider to be common sense, good judgment, or the nature of things.
     source: 2022 고3 9월 20번
@@ -3308,9 +3492,11 @@ practice:
         - t: 우리가 상식, 올바른 판단, 또는 사물의 본질이라고 여기는 것을
           trap: true
       caution:
-        x: '''우리가 무엇을 상식이라 여기는지를'''
-        o: violate의 목적어 '우리가 ~라고 여기는 것'
+        x: 무엇을 상식이라 여기는지를
+        o: 우리가 상식이라 여기는 것을
         tip: violate 'what we consider to be common sense' → '우리가 상식이라 여기는 것을 어긴다'. '무엇을 여기는지'가 아니라 violate의 목적어.
+        trap: what
+        ask: '''무엇을 여기는지''?'
   - kind: short
     sentence: Becoming competent in another culture means looking beyond behavior to see if we can understand the attitudes, beliefs, and values that motivate what we observe.
     source: 2022 고3 9월 20번
@@ -3343,9 +3529,11 @@ practice:
         - t: 우리가 관찰하는 것을 유발하는
           trap: true
       caution:
-        x: '''우리가 무엇을 관찰하는지를'''
-        o: motivate의 목적어 '우리가 관찰하는 것'
+        x: 우리가 무엇을 관찰하는지
+        o: 우리가 관찰하는 것(motivate 목적어)
         tip: motivate 'what we observe' → '우리가 관찰하는 것을 유발하는' 태도·믿음. '무엇을 관찰하는지'가 아니라 motivate의 목적어.
+        trap: what
+        ask: '''무엇을?''이라 묻나?'
   - kind: short
     sentence: We must know who this person is, who these other people are, what their relationship is, what is at stake in the scene, and the like.
     source: 2024 고3 11월 33번
@@ -3382,9 +3570,11 @@ practice:
         - t: 등등을
           v: 등등
       caution:
-        x: '''위태로운 것을''로 관계대명사로 좁힘'
-        o: who is/what is와 병렬된 '무엇이 위태로운지'
+        x: 위태로운 것을(그 대상)
+        o: 무엇이 위태로운지(의문)
         tip: 여기 what is at stake는 앞의 who is/what is와 나란한 의문 → '무엇이 위태로운지'. 이 문장에선 '~하는 것'으로 좁히지 마.
+        trap: what is at stake
+        ask: '''위태로운 것을''일까?'
   - kind: mc
     sentence: 'Moreover, much of what we now see as precise matches between an organism and its environment may equally be seen as constraints: koala bears live successfully on Eucalyptus foliage, but, from another perspective, koala bears cannot live without Eucalyptus foliage.'
     source: 2023 고3 6월 40번
@@ -3423,9 +3613,11 @@ practice:
         - t: 하지만 다른 관점에서 보면 코알라는 유칼립투스 잎 없이는 살 수 없다
           v: 관점
       caution:
-        x: what을 의문사, much를 정도부사로
-        o: what=관계대명사, 'much of+what절'이 주어
+        x: 무엇을 일치로 보나(의문)
+        o: 일치로 여기는 것의 상당 부분(주어)
         tip: '''much of what we now see as precise matches''는 ''우리가 정밀한 일치로 여기는 것의 상당 부분'' → 이 덩어리가 주어. what은 의문사 아님.'
+        trap: what
+        ask: '''무엇을''이라 묻나?'
   - kind: mc
     sentence: Just like swimming, riding makes me feel truly alive, Clara said. She added, It shows me what it means to live while facing life's tough challenges. Emma nodded in agreement and suggested, Your first beach bike ride was a great success.
     source: 2024 고3 11월 45번
@@ -3462,9 +3654,11 @@ practice:
         - t: Emma는 동의하며 고개를 끄덕였고 제안했다, 너의 첫 해변 자전거 타기는 대성공이었다고
           v: 동의
       caution:
-        x: '''means''를 명사 ''수단''으로 오독'
-        o: it=가주어, to live=진주어, means=동사
+        x: 사는 수단이 무엇인지
+        o: 산다는 게 뭘 의미하는지(동사)
         tip: what it means to live에서 means는 명사 '수단'이 아니라 동사 → '산다는 게 무엇을 의미하는지'. it은 가주어, to live가 진주어.
+        trap: means
+        ask: '''수단''이란 명사?'
   - kind: short
     sentence: What is excessive or out of proportion is highly relative and might be more related to other aspects than physical capacity, such as natural degradation and economic leakages (not to mention politics and local power dynamics).
     source: 2024 고3 11월 24번
@@ -3499,9 +3693,11 @@ practice:
         - t: 정치와 지역 권력 역학은 말할 것도 없고
           v: 말할 것도 없
       caution:
-        x: 문두 'What'을 별개 의문으로 떼냄
-        o: what절 전체가 주어, 'is'가 본동사
+        x: 무엇이 과도한가(의문)
+        o: 과도한 것이 문장 주어
         tip: 문두 'What is excessive or out of proportion'은 '과도하거나 균형에 안 맞는 것'이라는 주어 → 그 뒤 is highly relative가 본동사.
+        trap: What
+        ask: 별개 의문일까?
   - kind: short
     sentence: If you've ever posted a favorable comment—or any comment, for that matter—about a brand, product or service, think about what it would feel like if you were personally acknowledged by the brand manager, for example, as a result.
     source: 2024 고3 11월 22번
@@ -3534,9 +3730,11 @@ practice:
         - t: 예를 들어 그 결과로 브랜드 매니저에게 개인적으로 인정받는다면 어떤 기분일지를
           trap: true
       caution:
-        x: if절과 끊어 감정 표현으로 뭉뚱그림
-        o: about의 목적어 what절 '어떤 느낌일지'
+        x: 그냥 기분 이야기로 뭉갬
+        o: 어떤 느낌일지(about의 목적어)
         tip: think about 'what it would feel like'는 '어떤 느낌일지를 생각해 봐라' → about 뒤 한 덩어리. 뒤 if절은 그 느낌의 조건.
+        trap: what
+        ask: 그냥 감정 표현?
   - kind: short
     sentence: Public debates about streets are typically rooted in emotional assumptions about how a change will affect a person's commute, ability to park, belief about what is safe and what isn't, or the bottom line of a local business.
     source: 2024 고3 11월 34번
@@ -3571,9 +3769,11 @@ practice:
         - t: 또는 지역 사업체의 최종 수익에
           v: 최종 수익
       caution:
-        x: belief와 떼서 독립 질문처럼 읽음
-        o: belief about의 목적어인 두 what 명사절
+        x: 무엇이 안전한지 따로 물음
+        o: 무엇이 안전한지에 대한 믿음
         tip: belief about 'what is safe and what isn't' → '무엇이 안전하고 무엇이 아닌지에 대한 믿음'. belief에서 떼지 말고 두 what절을 목적어로.
+        trap: what
+        ask: belief와 별개 질문?
   - kind: short
     sentence: Around the turn of the twentieth century, anthropologists trained in the natural sciences began to reimagine what a science of humanity should look like and how social scientists ought to go about studying cultural groups.
     source: 2024 고3 9월 21번
@@ -3606,9 +3806,11 @@ practice:
         - t: 그리고 사회 과학자들이 문화 집단을 어떻게 연구해 나가야 하는지를
           v: 연구
       caution:
-        x: '''look like''를 별개 서술로 끊음'
-        o: reimagine의 목적어 what 명사절(how절과 병렬)
+        x: ~처럼 보인다(별개)
+        o: 어떤 모습이어야 하는지를
         tip: reimagine 'what a science... should look like' → '인간 과학이 어떤 모습이어야 하는지를 다시 그린다'. 뒤 how절과 and로 나란한 목적어.
+        trap: look like
+        ask: 따로 끊는 서술?
   - kind: mc
     sentence: She had her own ideas like any patron, there were no fashion plates, and the tailor was simply at her service, perhaps with helpful suggestions about what others were wearing.
     source: 2022 고3 9월 33번
@@ -3641,9 +3843,11 @@ practice:
         - t: what others were wearing
           trap: true
       caution:
-        x: '''무엇을 입고 있는가''로 직접의문문'
-        o: about의 목적어 명사절 '입고 있는 것'
+        x: 무엇을 입고 있는가
+        o: 남들이 입고 있는 것(about 목적어)
         tip: about 'what others were wearing' → '다른 사람들이 입고 있는 것에 대해'. 독립 질문 '무엇을 입는가'가 아니라 about 뒤 덩어리.
+        trap: what others were wearing
+        ask: 독립 질문일까?
   - kind: mc
     sentence: Indeed, what distinguishes a park from the broader category of public space is the representation of nature that parks are meant to embody.
     source: 2023 고3 11월 38번
@@ -3674,9 +3878,11 @@ practice:
         - t: that parks are meant to embody
           v: embody
       caution:
-        x: '''무엇이 공원을 구별하는가''로'
-        o: 선행사 포함 관계대명사, 문장 주어(단수)
+        x: 무엇이 공원을 구별하는가(의문)
+        o: 공원을 구별해 주는 것(단수 주어)
         tip: '''what distinguishes a park...''는 ''공원을 구별해 주는 것'' → 이 덩어리가 단수 주어라 동사 is와 호응. ''무엇이 구별하는가''로 끊지 마.'
+        trap: what distinguishes
+        ask: '''무엇이 구별하나?''일까?'
   - kind: mc
     sentence: Labor sharing groups are part of what has been called a "moral economy" since no one keeps formal records on how much any family puts in or takes out.
     source: 2023 고3 6월 32번
@@ -3707,9 +3913,11 @@ practice:
         - t: on how much any family puts in or takes out
           v: puts in
       caution:
-        x: '''무엇이 도덕 경제라 불려왔는가''로'
-        o: of의 목적어 명사절 '~라 불리는 것'
+        x: 무엇이 도덕경제라 불렸나
+        o: 도덕경제라 불리는 것(of 목적어)
         tip: part of 'what has been called a moral economy' → '이른바 도덕 경제라 불리는 것의 일부'. '무엇이 불렸는가'가 아니라 of 뒤 명사절.
+        trap: what
+        ask: '''무엇이''라 묻나?'
   - kind: mc
     sentence: If we feel awkward, embarrassed or ashamed when we are alone, we don't blush; it seems to be caused by our concern about what others are thinking of us.
     source: 2023 고3 6월 37번
@@ -3742,9 +3950,11 @@ practice:
         - t: what others are thinking of us
           trap: true
       caution:
-        x: '''우리를 무엇으로 생각하는가''로 의문문'
-        o: about의 목적어 명사절 '생각하는 바'
+        x: 우리를 무엇으로 여기나
+        o: 남들이 우릴 생각하는 바
         tip: concern about 'what others are thinking of us' → '남들이 우리를 어떻게 생각하는지에 대한 걱정'. about 뒤 명사절로 묶어.
+        trap: what
+        ask: '''무엇으로''란 의문?'
   that_clause:
   - kind: mc
     sentence: However, sound graphs of songs recorded over several weeks or months reveal that during this practice period the bird fine-tunes his efforts until he produces an accurate copy of the memorized template.
@@ -3778,9 +3988,11 @@ practice:
         - t: 이 연습 기간 동안 그 새가 기억된 원형의 정확한 복제본을 만들어낼 때까지 자신의 노력을 미세하게 조정한다는 것을
           trap: true
       caution:
-        x: '''reveal''을 ''드러나다'' 자동사로'
-        o: reveal은 타동사, that절 전체가 목적어
+        x: 결과가 저절로 드러난다
+        o: 그래프가 ~라는 걸 드러낸다
         tip: reveal은 '드러나다'가 아니라 '드러낸다(타동사)' → 'sound graphs가 ~라는 것을 드러낸다'로 that절 전체를 목적어로.
+        trap: reveal
+        ask: '''드러나다''일까?'
   - kind: mc
     sentence: When we blush, it's a signal to others that we recognize that a social norm has been broken; it is an apology for a faux pas.
     source: 2023 고3 6월 37번
@@ -3818,9 +4030,11 @@ practice:
         - t: 그것은 실수에 대한 사과이다
           v: 실수
       caution:
-        x: 첫 that을 signal 받는 관계사로
-        o: '''~라는 신호'' 동격 that + recognize 목적어'
+        x: 우리가 인식하는 신호
+        o: '''~라는'' 신호(내용 설명, 동격)'
         tip: 첫 that은 'a signal'의 내용을 푸는 동격 → '~라는 신호'. 관계사로 signal을 목적어 삼지 마. 둘째 that은 recognize의 목적어.
+        trap: that
+        ask: signal 받는 관계사?
   - kind: mc
     sentence: Thus, when we are astonished by someone with publications in different scientific fields, realize that each topic was explored during a specific period of time.
     source: 2024 고3 11월 40번
@@ -3855,9 +4069,11 @@ practice:
         - t: 각 주제가 특정한 기간 동안 탐구되었다는 것을
           trap: true
       caution:
-        x: that을 관계사로 '그 기간을 깨달아라'
-        o: 목적어 명사절 이끄는 접속사 that
+        x: 그 기간을 깨달아라
+        o: 각 주제가 탐구됐음을 깨달아라
         tip: realize that ~에서 that은 '~라는 것을' 이끄는 접속사 → '각 주제가 특정 시기에 탐구됐음을 깨달아라'. period 꾸미는 관계사 아님.
+        trap: that
+        ask: period를 꾸미나?
   - kind: short
     sentence: However, while we sometimes want to disappear when we involuntarily go bright red, psychologists argue that blushing actually serves a positive social purpose.
     source: 2023 고3 6월 37번
@@ -3888,9 +4104,11 @@ practice:
         - t: 얼굴 붉힘이 실제로 긍정적 사회적 기능을 한다는 것을
           trap: true
       caution:
-        x: '''argue''를 ''반대·논쟁''으로 읽음'
-        o: '''~라고 주장하다'', that이 목적어 명사절'
+        x: 붉힘이 순기능 한다고 반박
+        o: 붉힘이 순기능 한다고 주장
         tip: argue that ~는 '반대·논쟁'이 아니라 '~라고 주장하다' → '심리학자들은 얼굴 붉힘이 긍정적 기능을 한다고 주장한다'.
+        trap: argue
+        ask: '''반대·논쟁''일까?'
   - kind: short
     sentence: Yet, the application of logical reasoning will reveal that the figure only appears small because it obeys the laws of geometrical perspective.
     source: 2023 고3 6월 34번
@@ -3919,9 +4137,11 @@ practice:
         - t: 그 형상이 기하학적 원근법의 법칙을 따르기 때문에 단지 작게 보일 뿐이라는 것을
           trap: true
       caution:
-        x: '''reveal''을 자동사로, that절 끊음'
-        o: reveal 타동사, 뒤 절 전체가 목적어
+        x: figure가 작게 드러난다
+        o: 추론이 ~임을 드러낸다(that절 목적어)
         tip: reveal은 '드러나다'가 아니라 '드러낸다' → '논리적 추론이 ~라는 것을 드러낸다'로 뒤 that절 전체가 목적어.
+        trap: reveal
+        ask: '''드러나다''일까?'
   - kind: short
     sentence: From birth, infants will orient preferentially towards the human face and voice, seeming to know that such stimuli are particularly meaningful for them.
     source: 2024 고3 11월 29번
@@ -3952,9 +4172,11 @@ practice:
         - t: 그러한 자극이 자신들에게 특히 의미가 있다는 것을
           trap: true
       caution:
-        x: that을 관계사로 stimuli만 목적어로
-        o: know의 목적어는 that절 전체 '~라는 것'
+        x: 그 의미 있는 자극을 안다
+        o: 자극이 의미 있다는 것을 아는 듯
         tip: know 뒤 that절 전체가 목적어 → '그런 자극이 자기에게 특히 의미 있다는 것을 아는 듯'. that을 관계사로 stimuli만 목적어 삼지 마.
+        trap: that
+        ask: stimuli만 꾸미는 말일까?
   - kind: mc
     sentence: As for, say, color vision, they just say that, despite the same internal processing architecture, how we interpret, categorize, and name emotions varies according to culture and that we learn in a particular culture the social context in which it is appropriate to express emotions.
     source: 2022 고3 6월 23번
@@ -3994,9 +4216,11 @@ practice:
         - t: 감정을 표현하는 것이 적절한
           v: 적절
       caution:
-        x: 둘째 that을 culture 꾸미는 관계사로
-        o: say A and B의 둘째 목적어절 that
+        x: 문화를 꾸미는 말(관계사)
+        o: ~라고도 말한다(둘째 목적어)
         tip: 둘째 that은 say의 두 번째 목적어절을 여는 접속사(say A and B) → '~하고, 또 우리가 ~을 배운다고 말한다'. culture 꾸미는 관계사 아님.
+        trap: that
+        ask: culture 꾸밀까?
   - kind: mc
     sentence: Nevertheless, even after the perspectival correction is applied and reason concludes that perception is misleading, the figure still appears small, and the truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
@@ -4035,9 +4259,11 @@ practice:
         - t: 그리고 그 문제의 진실은 형상의 지각이 아니라 그것의 이성적 표상에서 드러난다
           v: 이성적 표상
       caution:
-        x: that을 perception 꾸미는 관계대명사로
-        o: 뒤가 완전한 절 → conclude의 목적어절 접속사
+        x: 지각을 꾸미는 that
+        o: 지각이 오해를 준다고(목적어절)
         tip: that 뒤 'perception is misleading'은 빠진 성분 없는 완전한 절 → conclude의 목적어절 접속사 → '지각이 오해를 준다고 결론짓는다'.
+        trap: that
+        ask: 명사를 꾸미나?
   - kind: short
     sentence: The longer we continue to believe that computers will take us to a magical new world, the longer we will delay their natural fusion with our lives, the hallmark of every major movement that aspires to be called a socioeconomic revolution.
     source: 2023 고3 11월 30번
@@ -4078,9 +4304,11 @@ practice:
         - t: 사회경제적 혁명이라 불리기를 열망하는
           v: 열망
       caution:
-        x: movement 뒤 that도 명사절 '~라는 것'으로
-        o: believe 뒤=접속사, movement 뒤=주격 관계사
+        x: movement가 ~라는 것
+        o: 혁명이라 불리려는 운동
         tip: believe 뒤 that은 완전한 절 여는 접속사('~라고 믿다'). movement 뒤 that은 바로 aspires가 와 주어가 빔 → movement 꾸미는 관계사.
+        trap: that
+        ask: '''~라는 것''일까?'
   - kind: short
     sentence: However, sound graphs of songs recorded over several weeks or months reveal that during this practice period the bird fine‑tunes his efforts until he produces an accurate copy of the memorized template.
     source: 2024 고3 6월 35번
@@ -4113,9 +4341,11 @@ practice:
         - t: 기억된 원형의 정확한 복제본을 만들어낼 때까지
           v: 정확한 복제본
       caution:
-        x: 앞머리 부사구를 that절 주어로 오인
-        o: 부사구 뒤 진짜 주어 the bird·fine-tunes
+        x: 이 연습기가 다듬는다
+        o: 이 시기에 새가 다듬는다(진짜 주어)
         tip: that 뒤 'during this practice period'는 부사구, 진짜 주어는 the bird → '이 시기에 새가 자기 노력을 다듬는다'는 것을 reveal한다.
+        trap: during this period
+        ask: 이게 that절 주어?
   - kind: short
     sentence: Before you attend the world championships next month, on behalf of everyone in Millstown, I wish to let you know that we are supporting you all the way.
     source: 2022 고3 9월 18번
@@ -4150,9 +4380,11 @@ practice:
         - t: 우리가 끝까지 너를 응원하고 있다는 것을
           trap: true
       caution:
-        x: that을 you 꾸미는 관계사로 읽음
-        o: 뒤 완전한 절 → know의 목적어절 접속사
+        x: 응원하는 너를 알린다
+        o: 우리가 응원한다는 걸 알린다
         tip: let you know 뒤 that절은 완전한 절 → '우리가 끝까지 응원한다는 것을 알리고 싶다'. you 꾸미는 관계사 아님.
+        trap: that
+        ask: you를 꾸미나?
   - kind: short
     sentence: If they close their eyes, they might even imagine the shape of the path, the smell of the trees, and the sound that is made when they step on the dried leaves.
     source: 2025 고3 6월 39번
@@ -4190,9 +4422,11 @@ practice:
         - t: 마른 잎을 밟을 때 나는 소리를
           trap: true
       caution:
-        x: '''that is made''를 smell과 병렬/''즉''으로'
-        o: imagine 목적어 shape·smell·sound 병렬
+        x: 냄새=만들어지는 것(즉)
+        o: 밟을 때 나는 소리
         tip: imagine의 목적어는 the shape·the smell·the sound 셋 → 'the sound that is made when~'은 '밟을 때 나는 소리'. smell과 병렬 아님.
+        trap: that is made
+        ask: smell과 병렬일까?
   - kind: short
     sentence: Recently, in the comments section, there have been some examples of language that is inappropriate for younger viewers.
     source: 2024 고3 6월 18번
@@ -4223,9 +4457,11 @@ practice:
         - t: 어린 시청자들에게 부적절한
           trap: true
       caution:
-        x: '''language that is inappropriate''의 선행사를 examples로'
-        o: 단수 is와 호응 → 선행사는 language, 관계절이 구체화
+        x: 부적절한 '예시들'
+        o: 부적절한 '언어'(단수 is 호응)
         tip: that is의 짝은 단수 is → 꾸미는 건 examples가 아니라 language야. '어린 시청자에게 부적절한 언어'로 이어 읽어.
+        trap: that is
+        ask: 꾸미는 게 examples?
   - kind: mc
     sentence: 'The rental section on your website says that there are two other swimming pools during the summer season: the Splash Pool and the Rainbow Pool.'
     source: 2022 고3 6월 18번
@@ -4254,9 +4490,11 @@ practice:
         - t: the Splash Pool and the Rainbow Pool
           v: Splash Pool
       caution:
-        x: '''says that''의 that을 ''그 두 수영장'' 꾸미는 관계사로'
-        o: 뒤가 완전한 절 → says의 목적어절 접속사
+        x: 그 두 수영장이 있다고 하는
+        o: 두 수영장이 있다고 말한다(목적어절)
         tip: says that 뒤(there are two pools)가 이미 완전한 문장 → that은 '~라고 말한다'의 that. 두 수영장을 꾸미는 게 아니야.
+        trap: says that
+        ask: 두 수영장 꾸미는 말?
   - kind: mc
     sentence: To the extent that an agent relies on the prior knowledge of its designer rather than on its own percepts, we say that the agent lacks autonomy.
     source: 2023 고3 6월 30번
@@ -4287,9 +4525,11 @@ practice:
         - t: that the agent lacks autonomy
           trap: true
       caution:
-        x: '''that the agent''를 관계사·앞 ''to the extent that''과 혼동'
-        o: 완전한 절 → say의 목적어절 접속사, 앞 that과 별개
+        x: '''~하는 정도''로 묶음'
+        o: ~라고 말한다(별개 목적어절)
         tip: we say that의 that은 '우리는 ~라고 말한다'의 that이야. 앞 to the extent that과는 다른 that이니 따로 떼어 읽어.
+        trap: say that
+        ask: 앞 that과 같나?
   - kind: mc
     sentence: In a hiring negotiation, a job applicant who assumes that salary is the only issue may insist on $75,000 when the employer is offering $70,000.
     source: 2023 고3 6월 42번
@@ -4322,9 +4562,11 @@ practice:
         - t: when the employer is offering $70,000
           v: employer
       caution:
-        x: '''that salary''를 앞 명사 꾸미는 관계사로'
-        o: 뒤가 완전한 절 → assumes의 목적어절 접속사
+        x: 급여를 꾸미는 that
+        o: 급여가 유일 문제라 여김(목적어절)
         tip: assumes that 뒤가 완전한 절 → that은 '~라고 여기다'의 that. '급여가 유일한 문제라고 여기는'으로 읽어, 명사 꾸미기 아니야.
+        trap: that
+        ask: 앞 명사를 꾸미나?
   - kind: mc
     sentence: Although we'd like to think that our minds are sharp enough to always make good decisions with the greatest efficiency, they just aren't.
     source: 2024 고3 11월 35번
@@ -4355,9 +4597,11 @@ practice:
         - t: they just aren't
           v: aren't
       caution:
-        x: '''that our minds''를 관계사·동격으로'
-        o: think의 목적어절 접속사, 끝 they aren't가 그 내용 부정
+        x: 마음을 꾸미는 말
+        o: 마음이 날카롭다고 생각
         tip: think that은 '~라고 생각하다'의 that. 끝의 they just aren't는 '사실 그렇지 않다'로 이 생각을 뒤집는 말이야.
+        trap: that
+        ask: 꾸미는 말일까?
   as_compare:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they '' need to be pushed beyond a certain point, called a bifurcation.'
@@ -4397,9 +4641,11 @@ practice:
         - t: 분기점이라 불리는
           v: 분기점
       caution:
-        x: '''not all ~ chaotic''을 ''어떤 것도 아니다'' 전체부정으로'
-        o: 부분부정 '모두가 혼돈적인 건 아니다'(일부는 그럼)
+        x: 어떤 것도 혼돈적이지 않다
+        o: 모두가 혼돈적인 건 아니다(일부는)
         tip: not all은 '모두가 ~인 건 아니다'(일부는 그럼). '어떤 것도 혼돈적이지 않다'는 전체부정으로 읽지 마.
+        trap: not all
+        ask: '''어떤 것도 아니다''?'
   - kind: mc
     sentence: The polluter thus has an incentive to reduce emissions in any manner that is less costly per unit of abatement than the tax on each unit of residual emissions.
     source: 2024 고3 6월 38번
@@ -4436,9 +4682,11 @@ practice:
         - t: 저감 단위당 비용이 덜 드는 어떤 방식으로든 잔여 배출량 각 단위에 부과되는 세금보다
           trap: true
       caution:
-        x: '''less costly than the tax''를 세금이 덜 든다로 뒤바꿈'
-        o: 주체는 any manner(방식) → 세금보다 비용 덜 듦
+        x: 세금이 비용이 덜 든다
+        o: 그 방식이 세금보다 덜 든다
         tip: less costly의 주인공은 세금이 아니라 any manner(그 방식). '그 방식이 세금보다 비용이 덜 든다'로 읽어.
+        trap: less costly
+        ask: 덜 드는 게 세금?
   - kind: mc
     sentence: In the latter case, management organization and processes can be equally as relevant as designers' creativity.
     source: 2022 고3 9월 40번
@@ -4471,9 +4719,11 @@ practice:
         - t: 디자이너의 창의성만큼이나 똑같이 유의미할 수 있다
           trap: true
       caution:
-        x: '''equally as relevant as''를 ''~보다 더''로'
-        o: 동등비교 → 두 대상이 '같은 정도로' 유의미
+        x: 한쪽이 더 중요
+        o: 둘 다 똑같이 중요
         tip: equally as relevant as는 '~만큼 똑같이 중요한'이야. 한쪽이 '더' 중요하다고 우열을 매기지 마.
+        trap: equally as relevant as
+        ask: '''~보다 더''일까?'
   - kind: mc
     sentence: Interestingly, experts do not suffer as much as beginners when performing complex tasks or combining multiple tasks.
     source: 2023 고3 6월 35번
@@ -4508,9 +4758,11 @@ practice:
         - t: 여러 과제를 결합할 때
           v: 결합
       caution:
-        x: '''not ~ as much as beginners''의 부정 놓쳐 ''만큼 겪는다''로'
-        o: '''초보만큼은 아니다''(초보보다 덜 겪음)'
+        x: 초보만큼 겪는다
+        o: 초보만큼은 아니다(덜 겪음)
         tip: not as much as beginners는 '초보만큼은 아니다'(=초보보다 덜 겪음). not을 빼고 '초보만큼 겪는다'로 읽으면 정반대야.
+        trap: not as much as
+        ask: 초보만큼 겪나?
   - kind: mc
     sentence: Emergencies are not always clearly labeled as such; smoke pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
     source: 2022 고3 6월 42번
@@ -4547,9 +4799,11 @@ practice:
         - t: 아니면 그저 증기 파이프의 누출을 나타내는 것일 수도 있다
           v: 누출
       caution:
-        x: '''not always''를 ''결코 아니다'' 전체부정으로'
-        o: '''항상 ~인 건 아니다''(가끔은 그럼)'
+        x: 결코 표시되지 않는다
+        o: 항상 표시되는 건 아니다(가끔은 됨)
         tip: not always는 '항상 ~인 건 아니다'(가끔은 그럼). '결코 표시되지 않는다'는 전체부정으로 읽지 마.
+        trap: not always
+        ask: '''결코 아니다''일까?'
   - kind: mc
     sentence: The more confidently you give instructions, the higher the chance of a positive class response.
     source: 2023 고3 11월 35번
@@ -4580,9 +4834,11 @@ practice:
         - t: 긍정적인 학급 반응의 가능성은 더 높아진다
           v: 가능성
       caution:
-        x: '''The more ~, the higher ~''를 ''아무리 ~해도'' 양보로'
-        o: '''~할수록 더 …하다'' 비례 상관구문'
+        x: 아무리 자신있어도(양보)
+        o: 자신있을수록 반응이 좋다(비례)
         tip: The more ~, the higher ~는 '~할수록 더 …하다'야. '아무리 ~해도'(양보)가 아니라 자신있게 지시할수록 반응이 좋아진다는 비례.
+        trap: The more, the higher
+        ask: '''아무리 ~해도''?'
   - kind: mc
     sentence: Chaotic systems are generated by iteration, though not all iteration leads to chaos.
     source: 2025 고3 6월 37번
@@ -4615,9 +4871,11 @@ practice:
         - t: 모든 반복이 혼돈으로 이어지는 것은 아니지만
           trap: true
       caution:
-        x: '''not all iteration''을 ''어떤 반복도 ~않는다'' 전체부정으로'
-        o: '''모두가 ~인 건 아니다''(일부만 그럼)'
+        x: 어떤 반복도 카오스 안 됨
+        o: 모든 반복이 그런 건 아님(일부만)
         tip: not all iteration은 '모든 반복이 ~인 건 아니다'(일부만 그럼). '어떤 반복도 안 된다'는 전체부정으로 읽지 마.
+        trap: not all
+        ask: '''어떤 ~도 아니다''?'
   - kind: mc
     sentence: Services using electrically assisted delivery tricycles have been successfully implemented in France and are gradually being adopted across Europe for services as varied as parcel and catering deliveries.
     source: 2023 고3 11월 22번
@@ -4650,9 +4908,11 @@ practice:
         - t: as varied as parcel and catering deliveries
           trap: true
       caution:
-        x: '''as varied as''를 ''~보다 더 다양한''으로'
-        o: 동등비교 '택배·음식 배달만큼 다양한'
+        x: 택배보다 더 다양한
+        o: 택배·음식 배달만큼 다양한
         tip: as varied as는 '~만큼 다양한'이야. '택배·음식 배달만큼 다양한'으로, '~보다 더 다양한'이 아니야.
+        trap: as varied as
+        ask: '''~보다 더''일까?'
   - kind: mc
     sentence: Part of the lack of fit arises because the present properties of an organism have not all originated in an environment similar in every respect to the one in which it now lives.
     source: 2023 고3 6월 40번
@@ -4685,6 +4945,8 @@ practice:
         - t: to the one in which it now lives
           v: lives
       caution:
-        x: '''have not all originated''를 ''어느 것도 안 생겼다''로'
-        o: 부분부정 '모두 그 환경서 생긴 건 아니다'(일부만)
+        x: 어느 것도 그 환경서 안 생김
+        o: 모두 그 환경서 생긴 건 아님(일부만)
         tip: not all originated는 '모두가 그 환경서 생긴 건 아니다'(일부만). '어느 것도 안 생겼다'는 전체부정으로 읽지 마.
+        trap: not all
+        ask: '''어느 것도 안 생김''?'
