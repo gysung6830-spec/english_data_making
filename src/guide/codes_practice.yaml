@@ -3609,6 +3609,192 @@ practice:
         tip: '''one ... another ... another''는 한 부분이 다 하는 게 아니라 부위별 분업 → ''한 부위는 모양, 다른 부위는 색, 또 다른 부위는 위치·움직임을 맡는다''.'
         trap: one ... another
         ask: 한 부분이 다 하나?
+  - kind: short
+    sentence: Moreover, these courses are designed to suit any level, from beginner to advanced.
+    source: 2024 고3 11월 18번
+    prompt: 문두의 Moreover가 앞 내용에 대해 어떤 방향(추가·부연/역접)으로 이어지는지 밝히고 해석하시오.
+    answer: 'Moreover는 ''게다가''로, 앞의 장점에 정보를 ''더하는'' 부연 신호이다. 반전이 아니다. 해석: 게다가, 이 강좌들은 초급부터 고급까지 어떤 수준에도 맞도록 설계되어 있다.'
+    vocab:
+    - word: Moreover
+      meaning: 게다가, 더욱이
+    - word: be designed to
+      meaning: ~하도록 설계되다
+    - word: suit any level
+      meaning: 어떤 수준에도 맞다
+    solution:
+      cut: 게다가, / 이 강좌들은 / 설계되어 있다 / 어떤 수준에도 맞도록, / [초급부터 고급까지]
+      cut_en: Moreover, / these courses are designed / to suit any level, / [from beginner to advanced]
+      wrong: 그러나, 이 강좌들은 어떤 수준에도 맞도록 설계되어 있다.
+      wrong_why: Moreover를 however처럼 역접으로 읽으면 안 된다. 앞 장점에 이유·근거를 '추가'하는 부연 연결어이므로 방향은 그대로 강화된다.
+      author_msg: 앞의 장점에 더해, 수준 무관 설계라는 강점을 하나 더 얹는다.
+      key_points:
+      - 'Moreover : 역접으로 오해 → 앞 내용에 정보를 더하는 ''부연'''
+      intent:
+        kind: logic
+        signal: Moreover
+        clause: 이 강좌들은 초급부터 고급까지 어떤 수준에도 맞도록 설계되어 있다
+        logic: 부연
+      caution:
+        trap: Moreover
+        ask: 더하기? 뒤집기?
+        x: 그러나(역접으로 뒤집음)
+        o: 게다가, 앞에 정보를 더함
+        tip: Moreover가 보이면 방향은 유지·강화. 앞 문장 장점에 근거를 하나 더 얹는 신호로 읽자.
+  - kind: short
+    sentence: In addition to regeneration or resprouting of plants, disturbed areas can also recover through reseeding.
+    source: 2022 고3 9월 35번
+    prompt: In addition to와 also가 나타내는 논리 방향을 밝히고 문장을 해석하시오.
+    answer: 'In addition to와 also는 ''~에 더하여, 또한''으로 앞의 회복 방식에 또 다른 방식을 ''추가''하는 부연 신호이다. 해석: 식물의 재생이나 재발아에 더하여, 교란된 지역은 재파종을 통해서도 회복될 수 있다.'
+    vocab:
+    - word: In addition to
+      meaning: ~에 더하여
+    - word: disturbed areas
+      meaning: 교란된 지역
+    - word: reseeding
+      meaning: 재파종, 씨앗 다시 뿌리기
+    solution:
+      cut: '[식물의 재생이나 재발아에 더하여], / 교란된 지역은 / 또한 회복될 수 있다 / 재파종을 통해서도'
+      cut_en: In addition to regeneration or resprouting of plants, / disturbed areas / can also recover / through reseeding
+      wrong: 식물의 재생이나 재발아와 달리, 교란된 지역은 재파종을 통해서만 회복될 수 있다.
+      wrong_why: In addition to를 instead of(대신)처럼 대조·배제로 읽으면 안 된다. 앞 방식을 부정하지 않고 재파종이라는 방식을 '하나 더' 얹는 부연이다.
+      author_msg: 회복 경로가 재생·재발아만이 아니라 재파종까지 여러 갈래임을 덧붙인다.
+      key_points:
+      - 'In addition to : 대조로 오해 → 앞에 방식을 더하는 ''부연'''
+      intent:
+        kind: logic
+        signal: In addition to
+        clause: 교란된 지역은 재파종을 통해서도 회복될 수 있다
+        logic: 부연
+      caution:
+        trap: In addition to
+        ask: 더함? 대신함?
+        x: ~와 달리(대조로 배제)
+        o: ~에 더하여, 또한
+        tip: In addition to + also가 함께 오면 앞 것을 지우지 말고 '또 하나 추가'로 읽자.
+  - kind: short
+    sentence: Hence, the decision of whether to speak with the media tends to be highly individualized.
+    source: 2024 고3 11월 42번
+    prompt: 문두 Hence가 앞 내용과 맺는 논리 관계를 밝히고 해석하시오.
+    answer: 'Hence는 ''따라서, 그러므로''로 앞 내용을 원인으로 삼아 결론을 이끄는 인과 신호이다. 해석: 따라서, 언론과 이야기할지 여부에 대한 결정은 매우 개인에 따라 달라지는 경향이 있다.'
+    vocab:
+    - word: Hence
+      meaning: 따라서, 그러므로
+    - word: whether to speak
+      meaning: 말할지 (여부)
+    - word: highly individualized
+      meaning: 매우 개인차가 큰, 개인화된
+    solution:
+      cut: 따라서, / [언론과 이야기할지 여부에 대한] 결정은 / 경향이 있다 / 매우 개인에 따라 달라지는
+      cut_en: Hence, / the decision [of whether to speak with the media] / tends to be / highly individualized
+      wrong: 그러나, 언론과 이야기할지에 대한 결정은 매우 개인화되는 경향이 있다.
+      wrong_why: Hence를 however 같은 역접으로 읽으면 안 된다. 앞의 근거로부터 나오는 '결론'을 여는 인과 연결어이므로 방향은 앞과 순접이다.
+      author_msg: 앞의 이유들 때문에 언론 응대 결정은 사람마다 제각각이라는 결론.
+      key_points:
+      - 'Hence : 역접으로 오해 → 앞을 원인으로 삼는 ''인과·결론'''
+      intent:
+        kind: logic
+        signal: Hence
+        clause: 언론과 이야기할지 여부에 대한 결정은 매우 개인에 따라 달라지는 경향이 있다
+        logic: 인과
+      caution:
+        trap: Hence
+        ask: 결론? 반전?
+        x: 그러나(역접으로 읽음)
+        o: 따라서, 앞이 원인인 결론
+        tip: Hence = therefore. 앞 문장을 이유로 받아 결론을 여는 신호로 읽자.
+  - kind: short
+    sentence: Thus, sufficient space remains for the perception and learning of new images on the cerebral blackboard.
+    source: 2024 고3 11월 40번
+    prompt: 문두 Thus가 앞 내용과 맺는 논리(인과/역접)를 밝히고 해석하시오.
+    answer: 'Thus는 ''그리하여, 따라서''로 앞을 원인으로 삼아 결과를 이끄는 인과 신호이다. 해석: 그리하여, 대뇌라는 칠판 위에는 새로운 이미지를 지각하고 학습할 충분한 공간이 남는다.'
+    vocab:
+    - word: Thus
+      meaning: 그리하여, 따라서
+    - word: sufficient space remains
+      meaning: 충분한 공간이 남다
+    - word: cerebral blackboard
+      meaning: 대뇌(라는) 칠판
+    solution:
+      cut: 그리하여, / 충분한 공간이 남는다 / [새로운 이미지를 지각하고 학습할] / 대뇌라는 칠판 위에
+      cut_en: Thus, / sufficient space remains / for the perception and learning of new images / on the cerebral blackboard
+      wrong: 그러나, 새로운 이미지를 지각하고 학습할 충분한 공간이 남는다.
+      wrong_why: Thus를 but/however 역접으로 읽으면 안 된다. 앞 과정의 '결과'를 여는 인과 연결어이므로 앞 내용과 순접으로 이어진다.
+      author_msg: 앞의 메커니즘 덕분에 새 이미지를 받아들일 여유 공간이 확보된다는 결과.
+      key_points:
+      - 'Thus : 역접으로 오해 → 앞이 원인인 ''인과·결과'''
+      intent:
+        kind: logic
+        signal: Thus
+        clause: 대뇌라는 칠판 위에 새 이미지를 지각·학습할 충분한 공간이 남는다
+        logic: 인과
+      caution:
+        trap: Thus
+        ask: 결과? 반전?
+        x: 그러나(역접으로 읽음)
+        o: 그리하여, 앞의 결과
+        tip: Thus가 문두면 앞을 원인으로 받는 결과. 방향을 뒤집지 말고 순접으로 읽자.
+  - kind: short
+    sentence: In addition, she may threaten to sanction them for not behaving as she wishes.
+    source: 2024 고3 11월 37번
+    prompt: 문두 연결어가 앞 내용에 무엇을 하는지(방향)를 밝히고 해석하시오.
+    answer: In addition은 앞 내용에 '덧붙이는' 부연·추가의 신호다. 앞의 조치에 하나를 더 얹는 흐름으로, '게다가 그녀는 자기가 바라는 대로 행동하지 않는 것에 대해 그들을 제재하겠다고 위협할 수도 있다.'
+    vocab:
+    - word: sanction
+      meaning: 제재하다, 처벌하다
+    - word: threaten to
+      meaning: ~하겠다고 위협하다
+    - word: as she wishes
+      meaning: 그녀가 바라는 대로
+    solution:
+      cut: 게다가 / 그녀는 위협할 수도 있다 / 그들을 제재하겠다고 / [그녀가 바라는 대로 행동하지 않는 것에 대해]
+      cut_en: In addition, / she may threaten / to sanction them / [for not behaving as she wishes]
+      wrong: '''뿐만 아니라''를 역접으로 읽어 앞 내용과 반대되는 내용이 온다고 오역.'
+      wrong_why: In addition은 역접이 아니라 앞에 내용을 더하는 부연·추가 신호다. 앞 조치에 '또 하나'를 얹는 같은 방향으로 읽어야 한다.
+      author_msg: 그녀가 상대를 통제하려고 쓰는 수단이 하나 더 있다는 점을 추가한다.
+      key_points:
+      - 'In addition : 역접으로 착각 → 앞 내용에 더하는 부연(추가)'
+      intent:
+        kind: logic
+        signal: In addition
+        clause: 그녀는 자기 뜻대로 행동하지 않는 것에 대해 그들을 제재하겠다고 위협할 수도 있다
+        logic: 부연
+      caution:
+        trap: In addition
+        ask: 더하기? 뒤집기?
+        x: 그러나(앞과 반대)
+        o: 게다가(앞에 하나 더 추가)
+        tip: In addition이 보이면 앞 문장과 같은 방향으로 내용을 더한다고 읽어라.
+  - kind: short
+    sentence: Animals are equally good, however, at dealing with injury and disease before they even happen.
+    source: 2024 고3 9월 37번
+    prompt: 삽입된 연결어 however가 이끄는 방향(역접)을 밝히고 해석하시오.
+    answer: however는 앞의 예상·통념을 뒤집는 역접 신호다. '하지만 동물들은 부상과 질병이 생기기도 전에 그것에 대처하는 데에도 똑같이 능숙하다.'
+    vocab:
+    - word: equally good at
+      meaning: ~에도 똑같이 능숙한
+    - word: deal with
+      meaning: 대처하다, 다루다
+    - word: before they even happen
+      meaning: 그것이 생기기도 전에
+    solution:
+      cut: 하지만 동물들은 똑같이 능숙하다 / [부상과 질병에 대처하는 데] / [그것이 생기기도 전에]
+      cut_en: Animals are equally good, however, / [at dealing with injury and disease] / [before they even happen]
+      wrong: however를 '그래서/게다가'처럼 순접으로 읽어 앞 내용을 그대로 잇는다고 오역.
+      wrong_why: 문장 중간에 삽입된 however도 역접이다. 앞에서 말한 것과 대비되는(예상 밖의) 능력을 제시하는 반전으로 읽어야 한다.
+      author_msg: 동물은 병이 난 뒤뿐 아니라 나기 전에 막는 데에도 능하다.
+      key_points:
+      - 'however : 순접으로 착각 → 앞 내용을 뒤집는 역접'
+      intent:
+        kind: logic
+        signal: however
+        clause: 동물들은 부상과 질병이 생기기도 전에 대처하는 데에도 똑같이 능숙하다
+        logic: 역접
+      caution:
+        trap: however
+        ask: 이어짐? 뒤집힘?
+        x: 그래서(앞과 같은 방향)
+        o: 하지만(앞 예상을 뒤집음)
+        tip: however는 문장 중간에 껴 있어도 역접, 앞과 대비되는 내용을 잡아라.
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
@@ -4148,6 +4334,130 @@ practice:
         tip: '''central media''는 ''중심 매체'' → ''일기는 계몽된 자유로운 주체를 형성하는 중심 매체였다''. 부수적 매체로 읽지 마.'
         trap: central
         ask: 부수적 매체일까?
+  - kind: short
+    sentence: In the 1960s, many people considered pesticides to be mainly beneficial to mankind.
+    source: 2022 고3 6월 38번
+    prompt: mainly beneficial의 극성(긍정/부정)을 밝히고 해석하시오.
+    answer: 'mainly beneficial은 ''주로 이로운''이라는 긍정 극성 진술이다. 부정어가 없다. 해석: 1960년대에 많은 사람들은 살충제가 인류에게 주로 이롭다고 여겼다.'
+    vocab:
+    - word: considered A to be B
+      meaning: A를 B라고 여겼다
+    - word: pesticides
+      meaning: 살충제, 농약
+    - word: mainly beneficial
+      meaning: 주로 이로운
+    solution:
+      cut: 1960년대에, / 많은 사람들은 / 살충제를 여겼다 / 인류에게 주로 이롭다고
+      cut_en: In the 1960s, / many people / considered pesticides / to be mainly beneficial to mankind
+      wrong: 1960년대에 많은 사람들은 살충제가 인류에게 대체로 해롭다고 여겼다.
+      wrong_why: beneficial(이로운)을 harmful(해로운)로 뒤집어 읽으면 안 된다. 여기엔 부정 신호가 없고 mainly가 긍정을 '주로'로 강조할 뿐 방향은 긍정이다.
+      author_msg: 당시엔 살충제를 인류에 유익한 것으로 긍정적으로 봤다는 통념 제시.
+      key_points:
+      - 'mainly beneficial : 해롭다로 오해 → ''주로 이롭다''는 긍정'
+      intent:
+        kind: polarity
+        signal: mainly beneficial
+        stmt: 살충제가 인류에게 주로 이롭다
+        polarity: positive
+      caution:
+        trap: mainly beneficial
+        ask: 이롭다? 해롭다?
+        x: 대체로 해롭다(극성 뒤집음)
+        o: 주로 이롭다(긍정 강조)
+        tip: beneficial은 유익한. mainly는 부정어가 아니라 긍정을 '주로'로 강조하는 말로 읽자.
+  - kind: short
+    sentence: The crucial take‑away from analyzing office plans over time is that the answers keep changing.
+    source: 2024 고3 9월 24번
+    prompt: crucial take-away가 필자가 강조하는 긍정 신호임을 밝히고 해석하시오.
+    answer: 'crucial은 ''결정적인·핵심적인''으로 필자가 요점을 강조하는 긍정 신호이다. 요점은 ''답이 계속 변한다''는 것. 해석: 시간에 따라 사무실 배치도를 분석해 얻는 핵심 교훈은 그 답이 계속 바뀐다는 점이다.'
+    vocab:
+    - word: crucial take-away
+      meaning: 핵심 교훈, 결정적 요점
+    - word: over time
+      meaning: 시간이 흐르면서
+    - word: keep changing
+      meaning: 계속 바뀌다
+    solution:
+      cut: 핵심 교훈은 / [시간에 따라 사무실 배치도를 분석해 얻는] / ~라는 점이다 / [답이 계속 바뀐다]
+      cut_en: The crucial take-away / [from analyzing office plans over time] / is that / [the answers keep changing]
+      wrong: 사무실 배치도를 분석해 얻는 사소한 교훈은 답이 거의 변하지 않는다는 점이다.
+      wrong_why: crucial(핵심적인)을 trivial(사소한)로 약하게 읽으면 안 된다. crucial은 필자가 이 요점을 가장 중요하게 강조하는 긍정·강조 신호다.
+      author_msg: 이 대목의 진짜 핵심은 '정답이 고정이 아니라 계속 바뀐다'는 것.
+      key_points:
+      - 'crucial : 사소하다로 오해 → ''가장 핵심''이라는 강조'
+      intent:
+        kind: polarity
+        signal: crucial
+        stmt: 사무실 배치도 분석에서 얻는 핵심 교훈은 답이 계속 바뀐다는 것이다
+        polarity: positive
+      caution:
+        trap: crucial
+        ask: 핵심? 사소?
+        x: 사소한 교훈(강조 약화)
+        o: 가장 중요한 핵심 교훈
+        tip: crucial/key가 붙은 문장은 필자의 요점. 뒤에 오는 that절을 주제문으로 잡자.
+  - kind: short
+    sentence: No matter how much we plan, we all occasionally have days when that happens.
+    source: 2026 고3 11월 35번
+    prompt: No matter how가 걸린 진술의 극성(강조 방향)을 밝히고 해석하시오.
+    answer: No matter how much는 '아무리 ~해도 소용없다'는 양보 신호로, 뒤 진술을 오히려 강하게 긍정한다. '우리가 아무리 계획을 세워도, 우리 모두는 가끔 그런 일이 일어나는 날을 겪는다.'—누구에게나 일어난다는 강조.
+    vocab:
+    - word: no matter how much
+      meaning: 아무리 ~해도
+    - word: occasionally
+      meaning: 가끔, 이따금
+    - word: days when that happens
+      meaning: 그런 일이 일어나는 날
+    solution:
+      cut: '[우리가 아무리 계획을 세워도] / 우리 모두는 가끔 겪는다 / [그런 일이 일어나는 날을]'
+      cut_en: '[No matter how much we plan], / we all occasionally have days / [when that happens]'
+      wrong: No matter를 '계획하면 안 그렇다'는 조건으로 읽어, 계획하면 피할 수 있다고 오역.
+      wrong_why: No matter how much는 계획의 효과를 부정하는 양보다. 아무리 해도 소용없이 누구에게나 일어난다는 뒤 진술을 강조하는 방향으로 읽어야 한다.
+      author_msg: 아무리 대비해도 그런 날은 누구에게나 온다.
+      key_points:
+      - 'No matter how much : 조건으로 착각 → ''아무리 해도 소용없다''는 양보·강조'
+      intent:
+        kind: polarity
+        signal: No matter how much
+        stmt: 우리 모두는 가끔 그런 일이 일어나는 날을 겪는다
+        polarity: positive
+      caution:
+        trap: No matter how much
+        ask: 막을 수 있음?
+        x: 계획하면 피할 수 있다
+        o: 아무리 해도 누구나 겪는다
+        tip: No matter how ~는 '아무리 해도 소용없이' 뒤 내용이 그대로 일어난다고 읽어라.
+  - kind: short
+    sentence: Consumption is less and less a matter of sustenance and more and more a question of life‑style—and choice.
+    source: 2023 고3 6월 31번
+    prompt: '''less and less ~ more and more'' 대비가 가리키는 강조 방향을 밝히고 해석하시오.'
+    answer: '''more and more''는 점점 커지는 긍정·강조 신호로, 소비의 무게중심이 어디로 이동하는지를 강조한다. ''소비는 점점 덜 생계의 문제가 되고, 점점 더 생활 방식과 선택의 문제가 된다.'''
+    vocab:
+    - word: sustenance
+      meaning: 생계, 생존(에 필요한 양식)
+    - word: less and less
+      meaning: 점점 덜
+    - word: more and more
+      meaning: 점점 더
+    solution:
+      cut: 소비는 점점 덜 / [생계의 문제가] 되고 / 점점 더 / [생활 방식과 선택의 문제가] 된다
+      cut_en: Consumption is less and less / [a matter of sustenance] / and more and more / [a question of life-style—and choice]
+      wrong: '''more and more''를 무시하고 소비가 여전히 생계 중심이라고 오역.'
+      wrong_why: less and less와 more and more가 대비되며 방향 이동을 강조한다. 무게중심이 생계에서 생활 방식·선택으로 옮겨간다는 긍정 강조를 잡아야 한다.
+      author_msg: 소비는 이제 먹고사는 문제가 아니라 취향과 선택의 문제다.
+      key_points:
+      - 'more and more : 방향 무시 착각 → 생활 방식 쪽으로 점점 강해지는 강조'
+      intent:
+        kind: polarity
+        signal: more and more
+        stmt: 소비는 점점 더 생활 방식과 선택의 문제가 된다
+        polarity: positive
+      caution:
+        trap: less and less ~ more and more
+        ask: 어디로 이동?
+        x: 여전히 생계 중심이다
+        o: 점점 더 생활 방식·선택으로
+        tip: less는 줄어드는 쪽, more는 커지는 쪽 — 무게중심이 more 쪽으로 간다고 읽어라.
   polarity_negative:
   - kind: mc
     sentence: Emergencies are not always clearly labeled as such; "smoke" pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
@@ -4689,3 +4999,127 @@ practice:
         tip: rarely는 '거의 ~않다'라는 부정이야. 'rarely is the final goal'은 '대개 최종 목표'가 아니라 '최종 목표인 경우가 드물다'로 읽어.
         trap: rarely
         ask: '''대개''일까?'
+  - kind: short
+    sentence: Young contemporary artists who employ digital technologies in their practice rarely make reference to computers.
+    source: 2022 고3 6월 31번
+    prompt: rarely의 극성(부정 정도)을 밝히고 해석하시오.
+    answer: 'rarely는 ''좀처럼 ~하지 않는''이라는 준부정 신호로 극성은 부정이다. 해석: 자신의 작업에 디지털 기술을 사용하는 젊은 현대 미술가들은 좀처럼 컴퓨터를 언급하지 않는다.'
+    vocab:
+    - word: contemporary artists
+      meaning: 현대 미술가들
+    - word: employ
+      meaning: 사용하다, 활용하다
+    - word: rarely make reference to
+      meaning: 좀처럼 ~을 언급하지 않다
+    solution:
+      cut: 젊은 현대 미술가들은 / [자신의 작업에 디지털 기술을 사용하는] / 좀처럼 언급하지 않는다 / 컴퓨터를
+      cut_en: Young contemporary artists / [who employ digital technologies in their practice] / rarely make reference to / computers
+      wrong: 디지털 기술을 사용하는 젊은 현대 미술가들은 자주 컴퓨터를 언급한다.
+      wrong_why: rarely(좀처럼 ~않다)를 frequently(자주)처럼 긍정 빈도로 읽으면 안 된다. rarely는 빈도를 거의 0으로 낮추는 준부정 신호로 극성이 부정이다.
+      author_msg: 디지털을 쓰면서도 정작 컴퓨터를 언급하는 일은 드물다는 지적.
+      key_points:
+      - 'rarely : ''자주''로 오해 → ''좀처럼 ~않다''는 준부정'
+      intent:
+        kind: polarity
+        signal: rarely
+        stmt: 젊은 현대 미술가들은 컴퓨터를 좀처럼 언급하지 않는다
+        polarity: negative
+      caution:
+        trap: rarely
+        ask: 자주? 드물게?
+        x: 자주 언급한다(긍정 빈도)
+        o: 좀처럼 언급하지 않는다
+        tip: rarely/seldom은 not이 없어도 부정. '거의 ~하지 않는다'로 극성을 부정으로 잡자.
+  - kind: short
+    sentence: A few thousand years ago ancient Egyptian and then ancient Greek art presented human forms in shadow‑style silhouette.
+    source: 2024 고3 6월 24번
+    prompt: A few의 극성을 few(거의 없는)와 혼동하지 않도록 뜻을 밝히고 해석하시오.
+    answer: 'A few는 ''약간의·몇'' 있다는 긍정 극성으로, 관사 없는 few(거의 없는)와 반대다. 여기선 ''A few thousand years ago = 몇천 년 전''. 해석: 몇천 년 전 고대 이집트, 이어서 고대 그리스 미술은 인간의 형상을 그림자 같은 실루엣으로 표현했다.'
+    vocab:
+    - word: A few thousand years ago
+      meaning: 몇천 년 전
+    - word: presented human forms
+      meaning: 인간의 형상을 표현했다
+    - word: shadow-style silhouette
+      meaning: 그림자 같은 실루엣
+    solution:
+      cut: 몇천 년 전 / 고대 이집트 미술은, / 이어서 고대 그리스 미술은 / 표현했다 / 인간의 형상을 / 그림자 같은 실루엣으로
+      cut_en: A few thousand years ago / ancient Egyptian / and then ancient Greek art / presented / human forms / in shadow-style silhouette
+      wrong: 몇천 년도 채 안 되어, 고대 이집트와 그리스 미술은 인간을 실루엣으로 표현했다.
+      wrong_why: A few(약간의·몇)를 few(거의 없는)로 읽어 '거의 ~없다'는 부정으로 오해하면 안 된다. 관사 a가 붙은 A few는 '몇 개(가 있다)'라는 긍정 수량이다.
+      author_msg: 인간을 실루엣으로 그리던 표현이 몇천 년 전 고대 미술에 이미 있었다는 배경 제시.
+      key_points:
+      - 'A few : few(거의 없는)로 오해 → ''몇, 약간의''라는 긍정 수량'
+      intent:
+        kind: polarity
+        signal: A few
+        stmt: 몇천 년 전 고대 미술이 인간을 실루엣으로 표현했다
+        polarity: positive
+      caution:
+        trap: A few
+        ask: 몇 있다? 거의 없다?
+        x: 거의 없는(few로 읽음)
+        o: 몇, 약간의(긍정 수량)
+        tip: a가 붙은 A few는 '있다' 쪽. a 없는 few만 '거의 없다'이니 관사부터 확인하자.
+  - kind: short
+    sentence: Over the last few semesters, there have been requests for more diverse school clubs.
+    source: 2026 고3 11월 18번
+    prompt: '''more diverse''가 담은 요구의 방향(극성)을 밝히고 해석하시오.'
+    answer: '''more diverse''는 현재보다 ''더'' 다양해지길 바란다는 긍정·증대 방향의 신호다. ''지난 몇 학기 동안, 더 다양한 학교 동아리를 요구하는 목소리가 있어 왔다.'''
+    vocab:
+    - word: semester
+      meaning: 학기
+    - word: request
+      meaning: 요구, 요청
+    - word: more diverse
+      meaning: 더 다양한
+    solution:
+      cut: '[지난 몇 학기 동안] / 요구가 있어 왔다 / [더 다양한 학교 동아리에 대한]'
+      cut_en: '[Over the last few semesters], / there have been requests / [for more diverse school clubs]'
+      wrong: '''more diverse''를 ''다양성을 줄이자''로 읽어 현재 동아리가 너무 많다는 뜻으로 오역.'
+      wrong_why: more diverse는 다양성을 '더' 늘리자는 증대 방향이다. 현재보다 종류를 더 늘려 달라는 긍정 요구로 읽어야 한다.
+      author_msg: 학생들이 지금보다 더 다양한 동아리를 원해 왔다.
+      key_points:
+      - 'more diverse : 축소로 착각 → 다양성을 더 늘리라는 증대 요구'
+      intent:
+        kind: polarity
+        signal: more diverse
+        stmt: 더 다양한 학교 동아리를 요구하는 목소리가 있어 왔다
+        polarity: positive
+      caution:
+        trap: more diverse
+        ask: 늘림? 줄임?
+        x: 다양성을 줄이자
+        o: 다양성을 더 늘려 달라
+        tip: more가 붙으면 '더 늘려라'는 증대 요구, 축소로 뒤집지 마라.
+  - kind: short
+    sentence: Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable.
+    source: 2024 고3 6월 32번
+    prompt: '''but not''이 만드는 부분 부정의 조건과 극성을 밝히고 해석하시오.'
+    answer: '''but not''은 한 속성은 인정하되 다른 하나는 부정하는 부분 부정 신호다. ''독창적이지만 유용하지 않은 아이디어는 무의미하고, 유용하지만 독창적이지 않은 아이디어는 특별할 게 없다.''—둘 다 갖춰야 함을 함의.'
+    vocab:
+    - word: original
+      meaning: 독창적인
+    - word: irrelevant
+      meaning: 무의미한, 무관한
+    - word: unremarkable
+      meaning: 특별할 게 없는, 평범한
+    solution:
+      cut: '[독창적이지만 유용하지 않은 아이디어는] / 무의미하고 / [유용하지만 독창적이지 않은 아이디어는] / 특별할 게 없다'
+      cut_en: '[Ideas that are original but not useful] / are irrelevant, / and [ideas that are useful but not original] / are unremarkable'
+      wrong: '''but not''을 전체 부정으로 읽어 ''독창적이지도 유용하지도 않다''고 두 속성을 모두 부정하는 오역.'
+      wrong_why: but not은 앞 속성은 인정하고 뒤 속성만 부정하는 부분 부정이다. 한쪽만 갖춘 아이디어라는 조건으로 읽어야 하며, 둘 다 부정하면 안 된다.
+      author_msg: 독창성과 유용성은 둘 다 있어야 의미가 있다.
+      key_points:
+      - 'but not : 전체 부정으로 착각 → 앞은 인정, 뒤만 부정하는 부분 부정'
+      intent:
+        kind: polarity
+        signal: but not
+        stmt: 독창적이지만 유용하지 않은 아이디어는 무의미하고, 유용하지만 독창적이지 않은 아이디어는 특별할 게 없다
+        polarity: partial
+      caution:
+        trap: but not
+        ask: 둘 다 부정?
+        x: 독창적이지도 유용하지도 않다
+        o: 한쪽만 갖추고 다른 쪽은 없다
+        tip: but not은 앞 속성은 살리고 뒤만 부정 — 한쪽만 있는 상태로 읽어라.

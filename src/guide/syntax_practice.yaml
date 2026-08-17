@@ -499,6 +499,113 @@ practice:
         tip: of how children think는 picture를 꾸미는 게 아니야. '아이들이 어떻게 사고하는지'를 제대로 파악한다는 뜻으로 of에 이어 읽어.
         trap: how children think
         ask: picture 꾸미는 말?
+  - kind: short
+    sentence: Overly rigid habits and conventions, no matter how well‑considered or well‑intentioned, threaten innovation.
+    source: 2024 고3 9월 24번
+    prompt: '''no matter how well‑considered or well‑intentioned''의 양보 의미를 살려 해석하라.'
+    answer: '''no matter how ~(아무리 ~하더라도)''의 양보 구문. ''지나치게 경직된 습관과 관습은, 아무리 잘 고려되고 좋은 의도를 지녔더라도, 혁신을 위협한다.'''
+    vocab:
+    - word: rigid
+      meaning: 경직된, 완고한
+    - word: well‑intentioned
+      meaning: 좋은 의도를 지닌
+    - word: threaten
+      meaning: 위협하다
+    solution:
+      cut: 지나치게 경직된 습관과 관습은 / 아무리 잘 고려되고 좋은 의도를 지녔더라도 / 혁신을 위협한다
+      cut_en: Overly rigid habits and conventions, / no matter how well‑considered or well‑intentioned, / threaten innovation
+      wrong: 습관과 관습이 잘 고려되어 좋은 의도를 지니면 혁신을 위협하지 않는다.
+      wrong_why: '''no matter how ~''는 ''아무리 ~라도(그래도)''의 양보다. 조건으로 읽어 결과를 뒤집으면 안 되고, 좋은 의도라도 여전히 위협한다.'
+      author_msg: 아무리 좋은 의도의 습관도 지나치게 굳으면 혁신을 위협한다.
+      key_points:
+      - 'no matter how 양보 : 조건으로 오해 → ''아무리 ~라도 그래도'''
+      cloze:
+        en: Overly rigid habits and conventions, / no matter how well‑considered or well‑intentioned, / threaten innovation
+        ko:
+        - t: 지나치게 경직된 습관과 관습은
+          v: 관습
+        - t: 아무리 잘 고려되고 좋은 의도를 지녔더라도
+          trap: true
+        - t: 혁신을 위협한다
+          v: 혁신
+      caution:
+        trap: no matter how
+        ask: 조건인가?
+        x: 좋은 의도면 안 위협한다
+        o: 아무리 좋아도 여전히 위협한다
+        tip: '''no matter how well‑intentioned''는 ''아무리 좋은 의도라도''.'
+  - kind: short
+    sentence: The young shoots were a ready food source for their animals when they returned.
+    source: 2024 고3 6월 36번
+    prompt: '''when they returned''가 수식하는 시점 관계를 살려 해석하라.'
+    answer: '''when they returned(그들이 돌아왔을 때)''의 시간 부사절. ''어린 새싹은 그들의 동물이 돌아왔을 때 즉시 이용할 수 있는 먹이 공급원이었다.'''
+    vocab:
+    - word: shoot
+      meaning: 새싹, 순
+    - word: ready food source
+      meaning: 즉시 이용 가능한 먹이 공급원
+    - word: return
+      meaning: 돌아오다
+    solution:
+      cut: 어린 새싹은 ~였다 / 즉시 이용 가능한 먹이 공급원 / 그들의 동물에게 / 그들이 돌아왔을 때
+      cut_en: The young shoots were / a ready food source / for their animals / when they returned
+      wrong: 어린 새싹은 동물을 돌려보냈을 때 먹이가 되었다.
+      wrong_why: '''when they returned''는 ''(동물들이) 돌아왔을 때''라는 시간 부사절이다. ''return''을 타동사(돌려보내다)로 오해하면 안 된다.'
+      author_msg: 동물들이 돌아왔을 때 어린 새싹이 바로 먹이가 되어 주었다.
+      key_points:
+      - 'when절+return : 돌려보내다로 오해 → ''돌아왔을 때'''
+      cloze:
+        en: The young shoots were / a ready food source / for their animals / when they returned
+        ko:
+        - t: 어린 새싹은 ~였다
+          v: 새싹
+        - t: 즉시 이용 가능한 먹이 공급원
+          v: 공급원
+        - t: 그들의 동물에게
+          v: 동물
+        - t: 그들이 돌아왔을 때
+          trap: true
+      caution:
+        trap: when they returned
+        ask: 돌려보냈나?
+        x: 동물을 돌려보냈을 때
+        o: 그들이 돌아왔을 때
+        tip: '''when they returned''는 ''그들이 돌아왔을 때''.'
+  - kind: short
+    sentence: Unfortunately, too many times, when class discussion begins, pens and pencils go down.
+    source: 2025 고3 6월 23번
+    prompt: when절이 의문사절인지 부사절인지 밝히고 해석하시오.
+    answer: 'when은 ''~할 때''를 뜻하는 시간 부사절이다. 해석: 안타깝게도, 너무 많은 경우, 수업 토론이 시작될 때 펜과 연필이 내려간다(학생들이 필기를 멈춘다).'
+    vocab:
+    - word: class discussion
+      meaning: 수업 토론
+    - word: begin
+      meaning: 시작되다
+    - word: go down
+      meaning: 내려가다, 놓이다
+    solution:
+      cut: 안타깝게도 / (너무 많은 경우) / [수업 토론이 시작될 때] / 펜과 연필이 내려간다.
+      cut_en: Unfortunately, / (too many times,) / [when class discussion begins,] / pens and pencils go down.
+      wrong: 안타깝게도, 언제 수업 토론이 시작되는지, 펜과 연필이 내려간다.
+      wrong_why: when을 의문사 '언제'로 봤다. 여기 when은 '~할 때'라는 시간 접속사다.
+      author_msg: 토론이 시작되는 '그 순간' 필기구를 놓아버린다는 시간 관계다.
+      key_points:
+      - 'when 시간부사절 : ''언제 ~인가''로 오해 → ''~할 때'''
+      cloze:
+        en: Unfortunately, too many times, / when class discussion begins, / pens and pencils go down.
+        ko:
+        - t: 안타깝게도 너무 많은 경우
+          v: 경우
+        - t: 수업 토론이 시작될 때
+          trap: true
+        - t: 펜과 연필이 내려간다
+          v: 연필
+      caution:
+        trap: when
+        ask: when 뜻은?
+        x: 언제 토론 시작?
+        o: 토론이 시작될 때
+        tip: 문장 앞 when절은 '언제'가 아니라 '~할 때'로 읽는다
   participle:
   - kind: mc
     sentence: Worried that she could not get to the boarding gate in time, she rushed through the crowds of people.
@@ -2552,6 +2659,115 @@ practice:
         tip: those를 companies로 보지 마 → those는 앞 복수 new pesticides를 가리켜 → 'even those that...'='큰 효과를 내는 그런 새 살충제들조차'.
         trap: those
         ask: those가 회사들?
+  - kind: short
+    sentence: Comparable uncertainties surround the nature and magnitude of future changes in other ecosystem stressors.
+    source: 2024 고3 9월 39번
+    prompt: of ~ in ~ 로 이어지는 전치사구가 무엇을 수식하는지 밝혀 해석하시오.
+    answer: of future changes in other ecosystem stressors는 앞의 the nature and magnitude를 수식하는 전치사구 나열이다. '비슷한 불확실성이 다른 생태계 스트레스 요인의 미래 변화가 지닌 성격과 규모를 둘러싸고 있다.'
+    vocab:
+    - word: comparable
+      meaning: 비슷한, 필적하는
+    - word: magnitude
+      meaning: 규모, 크기
+    - word: ecosystem stressors
+      meaning: 생태계 스트레스 요인
+    solution:
+      cut: '[비슷한 불확실성이] / 둘러싸고 있다 / (성격과 규모를) / (미래 변화의) / (다른 생태계 스트레스 요인에서의)'
+      cut_en: Comparable uncertainties / surround / (the nature and magnitude) / (of future changes) / (in other ecosystem stressors)
+      wrong: 비슷한 불확실성이 성격을 둘러싸고, 규모는 미래에 다른 요인으로 변한다.
+      wrong_why: of ~ in ~ 전치사구를 각각 다른 동사에 걸리는 것으로 끊어 읽었다. 이들은 모두 the nature and magnitude를 한 덩어리로 수식한다.
+      author_msg: 핵심 뼈대는 'uncertainties surround the nature and magnitude', 나머지는 수식구.
+      key_points:
+      - '전치사구 나열 : of·in을 별도 동사로 오해 → 모두 the nature and magnitude를 수식'
+      cloze:
+        en: Comparable uncertainties surround / the nature and magnitude / of future changes in other ecosystem stressors
+        ko:
+        - t: 비슷한 불확실성이 둘러싸고 있다
+          v: 불확실성
+        - t: 성격과 규모를
+          v: 규모
+        - t: 다른 생태계 스트레스 요인에서의 미래 변화가 지닌
+          trap: true
+      caution:
+        trap: of ... in ...
+        ask: 무엇을 꾸미나?
+        x: 규모가 미래로 변한다
+        o: 성격과 규모를 꾸미는 수식구
+        tip: of future changes in ~는 앞의 the nature and magnitude를 꾸미는 전치사구.
+  - kind: short
+    sentence: Your hometown supporters will cheer for you whenever you perform on the ice.
+    source: 2022 고3 9월 18번
+    prompt: '''for you'', ''on the ice'' 등 전치사구를 알맞은 골격에 붙여 해석하라.'
+    answer: 핵심 골격은 'supporters will cheer for you'. '당신의 고향 팬들은 당신이 빙판 위에서 경기할 때마다 당신을 응원할 것이다.'
+    vocab:
+    - word: hometown supporters
+      meaning: 고향 팬들
+    - word: cheer for
+      meaning: ~을 응원하다
+    - word: perform on the ice
+      meaning: 빙판 위에서 경기하다
+    solution:
+      cut: 당신의 고향 팬들은 / 당신을 응원할 것이다 / 당신이 경기할 때마다 / 빙판 위에서
+      cut_en: Your hometown supporters / will cheer for you / whenever you perform / on the ice
+      wrong: 당신의 고향 팬들은 빙판 위에서 당신을 응원할 것이다.
+      wrong_why: '''on the ice''는 응원 장소가 아니라 ''you perform''에 붙는 곳(당신이 경기하는 빙판)이다. 전치사구가 어디에 걸리는지 확인해야 한다.'
+      author_msg: 팬들은 네가 빙판에서 뛸 때마다 응원해 준다 — 응원 장소가 빙판이 아니다.
+      key_points:
+      - 'on the ice 수식 위치 : 응원 장소로 오해 → ''perform''에 붙어 ''경기하는 빙판'''
+      cloze:
+        en: Your hometown supporters / will cheer for you / whenever you perform / on the ice
+        ko:
+        - t: 당신의 고향 팬들은
+          v: 팬
+        - t: 당신을 응원할 것이다
+          trap: true
+        - t: 당신이 경기할 때마다
+          v: 경기
+        - t: 빙판 위에서
+          v: 빙판
+      caution:
+        trap: on the ice
+        ask: 응원 장소?
+        x: 빙판 위에서 응원한다
+        o: 당신이 경기하는 빙판을 뜻함
+        tip: '''perform on the ice''는 ''빙판에서 경기하다''로 붙여 읽기.'
+  - kind: short
+    sentence: Farmers cannot set up the controlled conditions of professional test plots in research facilities.
+    source: 2022 고3 9월 23번
+    prompt: '''of professional test plots'', ''in research facilities'' 전치사구가 무엇을 수식하는지 밝혀 해석하라.'
+    answer: 골격은 'Farmers cannot set up the controlled conditions'. '농부들은 연구 시설에 있는 전문 시험 재배지의 통제된 조건을 만들어 낼 수 없다.'
+    vocab:
+    - word: controlled conditions
+      meaning: 통제된 조건
+    - word: test plots
+      meaning: 시험 재배지
+    - word: research facilities
+      meaning: 연구 시설
+    solution:
+      cut: 농부들은 만들어 낼 수 없다 / 통제된 조건을 / 전문 시험 재배지의 / 연구 시설에 있는
+      cut_en: Farmers cannot set up / the controlled conditions / of professional test plots / in research facilities
+      wrong: 농부들은 연구 시설에서 전문 재배지를 통제할 수 없다.
+      wrong_why: '''of professional test plots''와 ''in research facilities''는 앞의 ''conditions''를 꾸미는 전치사구 나열이다. ''연구 시설의 전문 시험 재배지가 갖는 통제된 조건''을 설정할 수 없다는 뜻이다.'
+      author_msg: 농부의 밭은 연구실 시험 재배지처럼 조건을 통제할 수 없다.
+      key_points:
+      - '전치사구 나열 : 동사에 잘못 붙임 → conditions를 꾸미는 수식어로 묶기'
+      cloze:
+        en: Farmers cannot set up / the controlled conditions / of professional test plots / in research facilities
+        ko:
+        - t: 농부들은 만들어 낼 수 없다
+          trap: true
+        - t: 통제된 조건을
+          v: 조건
+        - t: 전문 시험 재배지의
+          v: 재배지
+        - t: 연구 시설에 있는
+          v: 시설
+      caution:
+        trap: in research facilities
+        ask: 어디 걸리나?
+        x: 연구 시설에서 통제한다
+        o: 재배지가 있는 곳을 꾸미는 수식
+        tip: '''of test plots in research facilities''는 앞 ''conditions''를 꾸밈.'
   inversion:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they need to be pushed beyond a certain point, called a bifurcation.'
@@ -2830,6 +3046,290 @@ practice:
         tip: It ~ who는 '그것'이 아니라 강조구문 → '유명해진 것은 바로 디자이너였다'로 사이의 the designer를 부각해 읽어.
         trap: It
         ask: '''그것''이란 뜻일까?'
+  - kind: short
+    sentence: However, the emotional states themselves are likely to be quite invariant across cultures.
+    source: 2022 고3 6월 23번
+    prompt: 재귀대명사 themselves가 무엇을 강조하는지 밝히고 문장을 해석하시오.
+    answer: themselves는 주어 the emotional states를 강조하는 재귀대명사(강조용법)이다. '하지만 감정 상태 그 자체는 문화 전반에 걸쳐 상당히 변하지 않을(불변일) 가능성이 높다.'
+    vocab:
+    - word: emotional states
+      meaning: 감정 상태
+    - word: invariant
+      meaning: 변하지 않는, 불변의
+    - word: across cultures
+      meaning: 문화 전반에 걸쳐
+    solution:
+      cut: 하지만 / [감정 상태 (그 자체는)] / ~일 가능성이 높다 / 상당히 변하지 않을 / (문화 전반에 걸쳐)
+      cut_en: However, / the emotional states (themselves) / are likely to be / quite invariant / (across cultures)
+      wrong: 하지만 감정 상태는 그들 스스로를 상당히 불변하게 만든다.
+      wrong_why: themselves를 '스스로를'이라는 목적어로 오해했다. 여기서 themselves는 목적어가 아니라 앞의 주어 the emotional states를 '그 자체'로 강조하는 강조용법이다.
+      author_msg: themselves = '바로 그 감정 상태 자체' — 강조일 뿐 목적어가 아님.
+      key_points:
+      - '재귀대명사 강조용법 : themselves를 목적어 ''자신을''로 오해 → 주어 the emotional states를 ''그 자체''로 강조'
+      cloze:
+        en: However, / the emotional states themselves / are likely to be quite invariant / across cultures
+        ko:
+        - t: 하지만
+          v: 하지만
+        - t: 감정 상태 그 자체는
+          trap: true
+        - t: 상당히 변하지 않을 가능성이 높다
+          v: 변하지 않을
+        - t: 문화 전반에 걸쳐
+          v: 문화
+      caution:
+        trap: themselves
+        ask: 무엇을 강조?
+        x: 그들 스스로를 불변하게
+        o: 감정 상태 그 자체가 불변
+        tip: themselves는 '스스로를'이 아니라 앞의 the emotional states를 '그 자체'로 강조하는 말.
+  - kind: short
+    sentence: But climate change does not only reveal itself as a series of extraordinary events.
+    source: 2022 고3 9월 42번
+    prompt: does not only ~ 구조와 reveal itself의 의미를 살려 해석하시오.
+    answer: does not only reveal itself는 '단지 스스로 모습을 드러내는 것만은 아니다(뒤에 but also 함축)'라는 부분부정 구조이다. '하지만 기후 변화는 단지 일련의 극단적 사건들로서만 그 모습을 드러내는 것은 아니다.'
+    vocab:
+    - word: reveal itself
+      meaning: 스스로 모습을 드러내다
+    - word: a series of
+      meaning: 일련의
+    - word: extraordinary events
+      meaning: 극단적인, 이례적인 사건들
+    solution:
+      cut: 하지만 / [기후 변화는] / 단지 ~로서만 모습을 드러내는 것은 아니다 / (일련의 극단적 사건들)
+      cut_en: But / climate change / does not only reveal itself / (as a series of extraordinary events)
+      wrong: 하지만 기후 변화는 일련의 극단적 사건들을 드러내지 않는다.
+      wrong_why: not only(부분부정)를 완전부정 '드러내지 않는다'로 오해했다. 'not only ~'는 '~만은 아니다(그 외에도 있다)'라는 뜻이고, reveal itself는 '스스로 모습을 드러내다'이다.
+      author_msg: not only = '~만이 아니다' — 뒤에 '그 외에도'가 숨어 있음.
+      key_points:
+      - '부분부정 does not only : ''전혀 안 드러낸다''로 오해 → ''단지 ~로서만 드러나는 건 아니다(그 외에도)'''
+      cloze:
+        en: But climate change / does not only reveal itself / as a series of extraordinary events
+        ko:
+        - t: 하지만 기후 변화는
+          v: 기후 변화
+        - t: 단지 스스로 모습을 드러내는 것만은 아니다
+          trap: true
+        - t: 일련의 극단적 사건들로서
+          v: 극단적 사건들
+      caution:
+        trap: not only
+        ask: 완전부정일까?
+        x: 전혀 드러내지 않는다
+        o: ~로서만은 아니다(다른 것도)
+        tip: does not only는 '전혀 안 한다'가 아니라 '단지 ~만은 아니다'라는 부분부정.
+  - kind: short
+    sentence: Personally, I really enjoy being directed toward new music that I might not have found by myself.
+    source: 2022 고3 9월 21번
+    prompt: by myself의 강조 의미와 being directed(수동)를 살려 해석하시오.
+    answer: by myself는 '나 혼자서(내 힘만으로)'를 강조하는 표현이고, being directed는 '이끌려지는' 수동 동명사이다. '개인적으로, 나는 나 혼자서는 찾지 못했을 새로운 음악으로 이끌려지는 것을 정말 즐긴다.'
+    vocab:
+    - word: be directed toward
+      meaning: ~로 이끌리다, 안내받다
+    - word: by myself
+      meaning: 나 혼자 힘으로
+    - word: might not have found
+      meaning: 찾지 못했을 것이다
+    solution:
+      cut: 개인적으로 / [나는] / 정말 즐긴다 / 이끌려지는 것을 / (새로운 음악으로) / [내가 혼자서는 찾지 못했을]
+      cut_en: Personally, / I / really enjoy / being directed / (toward new music) / [that I might not have found by myself]
+      wrong: 개인적으로 나는 새로운 음악을 내 곁에서 정말 즐긴다.
+      wrong_why: by myself를 주절 enjoy에 붙여 '스스로 즐긴다'로 읽었다. by myself는 관계절 안의 found를 꾸며 '나 혼자 힘으로는 찾지 못했을'이라는 뜻이다.
+      author_msg: by myself = '나 혼자 힘으로' — enjoy가 아니라 found를 꾸밈.
+      key_points:
+      - 'by myself 강조 : 주절 enjoy에 붙는 것으로 오해 → 관계절 found를 꾸며 ''나 혼자서는 못 찾았을'''
+      cloze:
+        en: Personally, I really enjoy / being directed toward new music / that I might not have found by myself
+        ko:
+        - t: 개인적으로 나는 정말 즐긴다
+          v: 즐긴다
+        - t: 새로운 음악으로 이끌려지는 것을
+          v: 음악
+        - t: 내가 혼자 힘으로는 찾지 못했을
+          trap: true
+      caution:
+        trap: by myself
+        ask: 어디에 붙나?
+        x: 내가 스스로 즐긴다
+        o: 나 혼자서는 찾지 못했을
+        tip: by myself는 enjoy가 아니라 found에 붙어 '나 혼자 힘으로는 못 찾았을'.
+  - kind: short
+    sentence: A clock can be almost any process that repeats itself over and over again for an indefinite period.
+    source: 2026 고3 11월 36번
+    prompt: repeats itself의 재귀 의미와 반복 강조를 살려 해석하시오.
+    answer: repeats itself는 '스스로(저절로) 반복되다'라는 재귀 표현이고 over and over again이 반복을 강조한다. '시계는 무한한 기간 동안 스스로를 몇 번이고 반복하는 거의 모든 과정일 수 있다.'
+    vocab:
+    - word: repeat itself
+      meaning: 스스로 반복되다
+    - word: over and over again
+      meaning: 몇 번이고 되풀이하여
+    - word: indefinite period
+      meaning: 무한정한, 무기한의 기간
+    solution:
+      cut: '[시계는] / 거의 모든 과정일 수 있다 / [스스로를 몇 번이고 반복하는] / (무한한 기간 동안)'
+      cut_en: A clock / can be almost any process / [that repeats itself over and over again] / (for an indefinite period)
+      wrong: 시계는 그 자체를 반복하는 거의 유일한 과정이다.
+      wrong_why: almost any를 '거의 유일한'으로 오해했다. almost any는 '거의 모든, 어떤 ~라도'라는 뜻이고, repeats itself는 '스스로 반복되다'이다.
+      author_msg: repeats itself = '저절로 되풀이된다', almost any = '어떤 ~라도'.
+      key_points:
+      - 'repeats itself 재귀 : ''자신을 반복시킨다''로 어색하게 오해 → ''스스로(저절로) 되풀이된다'''
+      cloze:
+        en: A clock can be almost any process / that repeats itself over and over again / for an indefinite period
+        ko:
+        - t: 시계는 거의 모든 과정일 수 있다
+          v: 과정
+        - t: 스스로를 몇 번이고 반복하는
+          trap: true
+        - t: 무한한 기간 동안
+          v: 기간
+      caution:
+        trap: repeats itself
+        ask: 무슨 뜻?
+        x: 자신을 반복시킨다
+        o: 저절로 몇 번이고 되풀이된다
+        tip: repeats itself는 '자기를 반복시킨다'가 아니라 '스스로 되풀이된다'.
+  - kind: short
+    sentence: Rising emphasis on self‑expression values does not put an end to material desires.
+    source: 2023 고3 6월 31번
+    prompt: 이 문장에서 'does not put an end to'가 걸린 대상과 부정의 의미를 살려 해석하라.
+    answer: 핵심은 부정 표현 'does not put an end to(~을 끝내지 않는다)'. '자기표현 가치에 대한 커지는 강조가 물질적 욕구를 끝내지는 않는다.'
+    vocab:
+    - word: emphasis
+      meaning: 강조
+    - word: put an end to
+      meaning: ~을 끝내다, 종식시키다
+    - word: material desires
+      meaning: 물질적 욕구
+    solution:
+      cut: 자기표현 가치에 대한 커지는 강조가 / ~을 끝내지는 않는다 / 물질적 욕구를
+      cut_en: Rising emphasis on self‑expression values / does not put an end to / material desires
+      wrong: 자기표현 가치에 대한 강조가 커지면 물질적 욕구는 사라진다.
+      wrong_why: '''does not put an end to''는 부정이므로 ''끝내지 않는다''이다. 욕구가 사라진다고 읽으면 정반대다. 바르게는 ''물질적 욕구를 끝내지는 않는다''.'
+      author_msg: 자기표현을 강조해도 물질적 욕구가 없어지는 건 아니다.
+      key_points:
+      - 'put an end to 부정 : 끝난다로 오해 → ''끝내지는 않는다''로 읽기'
+      cloze:
+        en: Rising emphasis on self‑expression values / does not put an end to / material desires
+        ko:
+        - t: 자기표현 가치에 대한 커지는 강조가
+          v: 강조
+        - t: ~을 끝내지는 않는다
+          trap: true
+        - t: 물질적 욕구를
+          v: 욕구
+      caution:
+        trap: does not put an end to
+        ask: 끝난다는 뜻?
+        x: 물질적 욕구가 사라진다
+        o: 물질적 욕구를 끝내지는 않는다
+        tip: '''does not put an end to material desires''는 ''물질적 욕구를 끝내지는 않는다''.'
+  - kind: short
+    sentence: In all these domains, craftsmanship focuses on objective standards, on the thing in itself.
+    source: 2023 고3 11월 40번
+    prompt: '''on objective standards, on the thing in itself''처럼 반복된 전치사구가 무엇을 강조하는지 밝혀 해석하라.'
+    answer: '''on ~, on ~''의 반복(동격적 강조)으로 초점 대상을 다시 짚음. ''이 모든 영역에서, 장인정신은 객관적 기준에, 즉 사물 그 자체에 초점을 맞춘다.'''
+    vocab:
+    - word: domain
+      meaning: 영역, 분야
+    - word: craftsmanship
+      meaning: 장인정신, 솜씨
+    - word: objective standards
+      meaning: 객관적 기준
+    solution:
+      cut: 이 모든 영역에서 / 장인정신은 초점을 맞춘다 / 객관적 기준에 / 즉 사물 그 자체에
+      cut_en: In all these domains, / craftsmanship focuses / on objective standards, / on the thing in itself
+      wrong: 장인정신은 객관적 기준과 사물 그 자체라는 두 가지에 초점을 맞춘다.
+      wrong_why: 두 번째 'on the thing in itself'는 새 대상이 아니라 앞의 기준을 바꿔 말한 강조(동격)다. '즉 사물 그 자체에'로 이어 읽어야 한다.
+      author_msg: 장인정신의 초점은 결국 '사물 그 자체'라는 객관적 기준이다.
+      key_points:
+      - 'on~, on~ 반복 강조 : 별개 두 대상으로 오해 → 같은 대상 다시 짚기(즉)'
+      cloze:
+        en: In all these domains, / craftsmanship focuses / on objective standards, / on the thing in itself
+        ko:
+        - t: 이 모든 영역에서
+          v: 영역
+        - t: 장인정신은 초점을 맞춘다
+          v: 장인정신
+        - t: 객관적 기준에
+          v: 기준
+        - t: 즉 사물 그 자체에
+          trap: true
+      caution:
+        trap: on the thing in itself
+        ask: 새 대상인가?
+        x: 별개의 둘째 대상이다
+        o: 앞 기준을 다시 짚은 강조다
+        tip: '''on the thing in itself''는 앞말을 바꿔 말한 ''즉 사물 그 자체에''.'
+  - kind: short
+    sentence: In the climate case, it is not that we face the facts but then deny our responsibility.
+    source: 2023 고3 11월 34번
+    prompt: '''it is not that ~ but ~'' 구조가 무엇을 부정·강조하는지 살려 해석하라.'
+    answer: '''it is not that A but B''의 강조 부정 구문. ''기후 문제의 경우, 우리가 사실을 직면하고는 그러고서 책임을 부정한다는 것은 아니다.'''
+    vocab:
+    - word: face the facts
+      meaning: 사실을 직면하다
+    - word: deny
+      meaning: 부정하다, 부인하다
+    - word: responsibility
+      meaning: 책임
+    solution:
+      cut: 기후 문제의 경우 / ~라는 것은 아니다 / 우리가 사실을 직면하고는 / 그러고는 책임을 부정한다는
+      cut_en: In the climate case, / it is not that / we face the facts / but then deny our responsibility
+      wrong: 기후 문제에서 우리는 사실을 직면하지 않고 책임을 부정한다.
+      wrong_why: '''it is not that ~''는 뒤 내용 전체가 사실이 아님을 강조하는 것. ''사실을 직면하지 않는다''가 아니라 ''사실을 직면하고는 책임을 부정하는, 그런 식은 아니다''로 읽는다.'
+      author_msg: 기후 문제에서 우리는 사실을 직면하고도 책임을 회피하는, 그런 식이 아니다.
+      key_points:
+      - 'it is not that절 : 앞부분만 부정으로 오해 → that 이하 전체를 부정·강조'
+      cloze:
+        en: In the climate case, / it is not that / we face the facts / but then deny our responsibility
+        ko:
+        - t: 기후 문제의 경우
+          v: 기후
+        - t: ~라는 것은 아니다
+          trap: true
+        - t: 우리가 사실을 직면하고는
+          v: 사실
+        - t: 그러고는 책임을 부정한다는
+          v: 책임
+      caution:
+        trap: it is not that
+        ask: 뭘 부정하나?
+        x: 사실을 직면하지 않는다
+        o: that 이하 전체가 아니라는 뜻
+        tip: '''it is not that we face...''는 ''~라는 것은 아니다''로 that절 전체를 부정.'
+  - kind: short
+    sentence: For example, people often remain in terrible relationships simply because they've invested a great deal of themselves into them.
+    source: 2022 고3 6월 37번
+    prompt: '''simply because''가 무엇을 강조하는지 밝히고 해석하시오.'
+    answer: 'simply because 강조로 ''오직 ~라는 이유 하나 때문에''라는 뜻이다. 해석: 예를 들어, 사람들은 단지 자신을 많이 쏟아부었다는 이유만으로 흔히 끔찍한 관계에 머문다.'
+    vocab:
+    - word: remain in
+      meaning: ~에 머무르다
+    - word: a great deal of
+      meaning: 많은, 상당한
+    - word: invest
+      meaning: 투자하다, 쏟다
+    solution:
+      cut: 예를 들어 / 사람들은 흔히 끔찍한 관계에 머문다 / [단지 그들이 자신을 많이 쏟아부었다는 이유만으로]
+      cut_en: For example, / people often remain (in terrible relationships) / [simply because they've invested a great deal (of themselves) into them]
+      wrong: 사람들이 끔찍한 관계에 머무는데, 간단히 말해 자신을 많이 투자했다.
+      wrong_why: simply를 '간단히 말해'로 봤다. simply because는 이유를 강조해 '단지/오로지 ~ 때문에'로 읽는다.
+      author_msg: 그만두지 못하는 이유가 '이미 쏟아부은 것' 하나뿐임을 강조한다.
+      key_points:
+      - 'simply because 강조 : ''간단히 말해''로 오해 → ''단지 ~라는 이유만으로'''
+      cloze:
+        en: For example, people often remain in terrible relationships / simply because they've invested a great deal of themselves into them.
+        ko:
+        - t: 예를 들어 사람들은 흔히 끔찍한 관계에 머문다
+          v: 관계
+        - t: 단지 자신을 많이 쏟아부었다는 이유만으로
+          trap: true
+      caution:
+        trap: simply because
+        ask: simply의 뜻?
+        x: 간단히 말해서
+        o: 단지 ~라는 이유만으로
+        tip: because 앞 simply는 '간단히'가 아니라 '단지/오로지 ~ 때문에'
   parallel:
   - kind: mc
     sentence: Unfortunately, at the scales, accuracy, and precision most useful to protected area management, the future not only promises to be unprecedented, but it also promises to be unpredictable.
@@ -3955,6 +4455,113 @@ practice:
         tip: concern about 'what others are thinking of us' → '남들이 우리를 어떻게 생각하는지에 대한 걱정'. about 뒤 명사절로 묶어.
         trap: what
         ask: '''무엇으로''란 의문?'
+  - kind: short
+    sentence: But what does it mean for a place to be full of people?
+    source: 2024 고3 11월 24번
+    prompt: 의문사 what과 for a place to be의 구조를 밝혀 해석하시오.
+    answer: what은 의문대명사이고, for a place to be full of people은 'for+의미상 주어+to부정사' 구조이다. '그런데 어떤 장소가 사람들로 가득 차 있다는 것은 무슨 의미인가?'
+    vocab:
+    - word: what does it mean
+      meaning: 무슨 의미인가
+    - word: for a place to be
+      meaning: 어떤 장소가 ~하다는 것(의미상 주어)
+    - word: full of people
+      meaning: 사람들로 가득 찬
+    solution:
+      cut: 그런데 / [무슨 의미인가] / (어떤 장소가 ~라는 것은) / 사람들로 가득 차 있다는
+      cut_en: But / [what does it mean] / (for a place to be full of people)?
+      wrong: 그런데 그것은 사람들로 가득 찬 장소를 위해 무엇을 의미하는가?
+      wrong_why: for a place를 '장소를 위해'라는 목적으로 오해했다. 여기 for a place는 to be의 의미상 주어로 '어떤 장소가 ~하다는 것'을 뜻한다.
+      author_msg: for a place to be ~ = '어떤 장소가 ~인 것' — for는 '위해'가 아님.
+      key_points:
+      - 'what+가주어 it : for a place를 ''장소를 위해''로 오해 → to be의 의미상 주어 ''어떤 장소가 ~인 것'''
+      cloze:
+        en: But what does it mean / for a place to be full of people
+        ko:
+        - t: 그런데 무슨 의미인가
+          trap: true
+        - t: 어떤 장소가 사람들로 가득 차 있다는 것은
+          v: 장소
+      caution:
+        trap: for a place
+        ask: for는 무슨 뜻?
+        x: 장소를 위해 의미한다
+        o: 어떤 장소가 ~하다는 것
+        tip: for a place to be는 '장소를 위해'가 아니라 '어떤 장소가 ~라는 것'.
+  - kind: short
+    sentence: Release the pendulum and note the magnets that it visits, and in what order.
+    source: 2025 고3 6월 37번
+    prompt: '''in what order''의 의문사절 의미를 살려 해석하라.'
+    answer: '''in what order(어떤 순서로)''의 간접의문. ''진자를 놓고, 그것이 방문하는 자석들을, 그리고 어떤 순서로 방문하는지 주목하라.'''
+    vocab:
+    - word: pendulum
+      meaning: 진자
+    - word: magnet
+      meaning: 자석
+    - word: in what order
+      meaning: 어떤 순서로
+    solution:
+      cut: 진자를 놓아라 / 그리고 자석들을 주목하라 / 그것이 방문하는 / 그리고 어떤 순서로 방문하는지
+      cut_en: Release the pendulum / and note the magnets / that it visits, / and in what order
+      wrong: 진자를 놓고 자석들을 어떤 순서로 놓을지 주목하라.
+      wrong_why: '''and in what order''는 앞 ''note ~ that it visits''에 이어져 ''어떤 순서로 방문하는지''를 뜻한다. 사람이 순서를 정하는 것이 아니라 진자의 방문 순서를 관찰하는 것이다.'
+      author_msg: 진자가 어떤 자석들을, 또 어떤 순서로 지나는지 관찰하라.
+      key_points:
+      - 'in what order 의문사절 : 배치 순서로 오해 → ''방문하는 순서''를 관찰'
+      cloze:
+        en: Release the pendulum / and note the magnets / that it visits, / and in what order
+        ko:
+        - t: 진자를 놓아라
+          v: 진자
+        - t: 그리고 자석들을 주목하라
+          v: 자석
+        - t: 그것이 방문하는
+          v: 방문
+        - t: 그리고 어떤 순서로 방문하는지
+          trap: true
+      caution:
+        trap: in what order
+        ask: 놓는 순서?
+        x: 자석을 놓을 순서
+        o: 진자가 방문하는 순서
+        tip: '''in what order''는 ''어떤 순서로 방문하는지''.'
+  - kind: short
+    sentence: You may feel there is something scary about an algorithm deciding what you might like.
+    source: 2022 고3 9월 21번
+    prompt: '''what you might like''의 what절이 무슨 역할을 하는지 밝혀 해석하라.'
+    answer: '''what you might like(당신이 무엇을 좋아할지)''는 deciding의 목적어인 명사절. ''당신은 알고리즘이 당신이 무엇을 좋아할지 결정하는 것에 무언가 무서운 점이 있다고 느낄 수 있다.'''
+    vocab:
+    - word: scary
+      meaning: 무서운
+    - word: algorithm
+      meaning: 알고리즘
+    - word: what you might like
+      meaning: 당신이 무엇을 좋아할지
+    solution:
+      cut: 당신은 느낄 수 있다 / 무언가 무서운 점이 있다고 / 알고리즘이 결정하는 것에 / 당신이 무엇을 좋아할지
+      cut_en: You may feel / there is something scary / about an algorithm deciding / what you might like
+      wrong: 당신은 알고리즘을 좋아하는 무언가 무서운 점을 느낄 수 있다.
+      wrong_why: '''what you might like''는 관계사 what이 이끄는 명사절로 ''deciding''의 목적어다. ''알고리즘이 당신의 취향을 결정하는 것''이지 ''알고리즘을 좋아하는''이 아니다.'
+      author_msg: 내 취향을 알고리즘이 대신 정한다는 점이 무섭게 느껴질 수 있다.
+      key_points:
+      - 'what절 목적어 : 관계사 what을 놓침 → ''deciding''의 목적어 ''무엇을 좋아할지'''
+      cloze:
+        en: You may feel / there is something scary / about an algorithm deciding / what you might like
+        ko:
+        - t: 당신은 느낄 수 있다
+          v: 느낄
+        - t: 무언가 무서운 점이 있다고
+          v: 무서운
+        - t: 알고리즘이 결정하는 것에
+          v: 알고리즘
+        - t: 당신이 무엇을 좋아할지
+          trap: true
+      caution:
+        trap: what you might like
+        ask: 뭘 결정?
+        x: 알고리즘을 좋아한다
+        o: 내가 무엇을 좋아할지
+        tip: '''deciding what you might like''는 ''무엇을 좋아할지 결정하는''.'
   that_clause:
   - kind: mc
     sentence: However, sound graphs of songs recorded over several weeks or months reveal that during this practice period the bird fine-tunes his efforts until he produces an accurate copy of the memorized template.
@@ -4602,6 +5209,78 @@ practice:
         tip: think that은 '~라고 생각하다'의 that. 끝의 they just aren't는 '사실 그렇지 않다'로 이 생각을 뒤집는 말이야.
         trap: that
         ask: 꾸미는 말일까?
+  - kind: short
+    sentence: We might believe that we generally consider different points of view and make informed decisions.
+    source: 2024 고3 9월 30번
+    prompt: believe 뒤 that절이 무엇을 이끄는지 밝혀 해석하시오.
+    answer: that은 believe의 목적어인 명사절을 이끄는 접속사이며, 그 안에서 consider와 make가 병렬로 이어진다. '우리는 우리가 대체로 다양한 관점을 고려하고 정보에 근거한 결정을 내린다고 믿을지도 모른다.'
+    vocab:
+    - word: consider different points of view
+      meaning: 다양한 관점을 고려하다
+    - word: informed decisions
+      meaning: 정보에 근거한 결정
+    - word: might believe
+      meaning: 믿을지도 모른다
+    solution:
+      cut: '[우리는 믿을지도 모른다] / [우리가 대체로 다양한 관점을 고려하고] / [정보에 근거한 결정을 내린다고]'
+      cut_en: We might believe / [that we generally consider different points of view] / [and make informed decisions]
+      wrong: 우리는 다양한 관점을 고려한다고 믿는 결정을 내릴지도 모른다.
+      wrong_why: make informed decisions를 주절에 붙여 읽었다. and는 that절 안의 consider와 make를 병렬로 이어 둘 다 '우리가 ~한다고' 믿는 내용이다.
+      author_msg: believe that ~ = '우리가 관점을 고려하고 결정을 내린다고 믿는다' — 둘 다 that절 안.
+      key_points:
+      - 'that 명사절 : make를 주절 동사로 오해 → that절 안에서 consider와 make가 병렬'
+      cloze:
+        en: We might believe / that we generally consider different points of view / and make informed decisions
+        ko:
+        - t: 우리는 믿을지도 모른다
+          v: 믿을지도
+        - t: 우리가 대체로 다양한 관점을 고려하고
+          trap: true
+        - t: 정보에 근거한 결정을 내린다고
+          v: 결정
+      caution:
+        trap: that
+        ask: 어디까지 that절?
+        x: 고려한다고 믿고 결정한다
+        o: 고려하고 결정한다고 믿는다
+        tip: that we consider ~ and make ~ 전체가 believe의 목적어절.
+  - kind: short
+    sentence: For instance, perception suggests that a figure in the distance is smaller than it really is.
+    source: 2023 고3 6월 34번
+    prompt: '''that a figure ... is smaller ...'' that절이 무엇의 목적어인지 밝혀 해석하라.'
+    answer: that은 suggests의 목적어인 명사절을 이끎. '예를 들어, 지각은 멀리 있는 형체가 실제보다 더 작다고 시사한다.'
+    vocab:
+    - word: perception
+      meaning: 지각, 인식
+    - word: figure
+      meaning: 형체, 모습
+    - word: in the distance
+      meaning: 멀리, 저 멀리
+    solution:
+      cut: 예를 들어 / 지각은 시사한다 / 멀리 있는 형체가 / 실제보다 더 작다고
+      cut_en: For instance, / perception suggests / that a figure in the distance / is smaller than it really is
+      wrong: 예를 들어, 멀리 있는 형체를 시사하는 지각은 실제보다 작다.
+      wrong_why: '''that ~''은 suggests의 목적어절이다. ''지각이 (that 이하)를 시사한다''로 읽어야지, that을 관계사로 보아 figure를 꾸미면 안 된다.'
+      author_msg: 지각은 멀리 있는 것을 실제보다 작게 느끼게 만든다.
+      key_points:
+      - 'suggests that절 : that을 관계사로 오해 → suggests의 목적어 명사절'
+      cloze:
+        en: For instance, / perception suggests / that a figure in the distance / is smaller than it really is
+        ko:
+        - t: 예를 들어
+          v: 예
+        - t: 지각은 시사한다
+          v: 지각
+        - t: 멀리 있는 형체가
+          trap: true
+        - t: 실제보다 더 작다고
+          v: 작다
+      caution:
+        trap: that a figure
+        ask: that 역할?
+        x: 형체를 꾸미는 관계사
+        o: suggests의 목적어 that절
+        tip: '''suggests that ~''은 ''~라고 시사한다''로 목적어절.'
   as_compare:
   - kind: mc
     sentence: 'Nor are all nonlinear systems chaotic: to become so they '' need to be pushed beyond a certain point, called a bifurcation.'
