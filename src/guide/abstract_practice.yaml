@@ -38,7 +38,7 @@ practice:
       caution:
         x: '''the emergence of A''를 ''A의 출현''으로 굳힘'
         o: '''A가 생겨나는 것'' 동사화, 억지 인과 금지'
-        tip: '''the 추상명사 of''는 동사로 풀어 — of는 소유 아닌 대상이야.'
+        tip: '''the emergence of A''는 ''A가 생겨남''으로 풀고 없는 인과 만들지 마.'
     kind: mc
   - sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
@@ -76,7 +76,7 @@ practice:
       caution:
         x: '''emergence''를 ''출현물(사물)''로 굳힘'
         o: '''lead to A'' → ''A가 생겨나게 된다'''
-        tip: lead to+명사화면 그 명사를 동사로 풀어 결과를 서술해.
+        tip: '''emergence of A''는 ''A가 생겨나게 됨'' — 사물로 굳히지 마.'
     kind: mc
   - sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -110,7 +110,7 @@ practice:
       caution:
         x: '''capacity for matching''을 ''맞춤이라는 능력''으로'
         o: '''A를 B와 맞출 수 있는 능력''으로 동사화'
-        tip: capacity/ability for -ing는 '~할 능력' — A·B 짝 찾아.
+        tip: '''capacity for matching A with B''는 ''A를 B와 맞출 능력''.'
     kind: short
   - kind: mc
     sentence: Scattered attention harms your ability to let go of stress, because even though your attention is scattered, it is narrowly focused, for you are able to fixate only on the stressful parts of your experience.
@@ -154,7 +154,7 @@ practice:
       caution:
         x: '''to let go of stress''를 ''떨쳐 버리려고''로'
         o: ability to V='~할 능력' → '스트레스 떨칠 능력'
-        tip: 추상명사 뒤 to면 목적 아닌 '~할' — 앞 명사 꾸미는지 봐.
+        tip: '''to let go''는 ability 꾸밈 — 목적 부사 아님.'
   - kind: mc
     sentence: Our view of the world is not given to us from the outside in a pure, objective form; it is shaped by our mental abilities, our shared cultural perspectives and our unique values and beliefs.
     source: 2022 고3 6월 21번
@@ -193,7 +193,7 @@ practice:
       caution:
         x: '''view of the world''를 ''세계의 풍경''으로'
         o: view='관점' → '세계에 대한 관점'
-        tip: view/idea 뒤 of는 내용 — 소유격 '~의'로 굳히지 마.
+        tip: '''view of the world''는 ''세계에 대한 관점'' — 풍경 아님.'
   - kind: mc
     sentence: People involved in the conception and engineering of robots designed to perceive and act know how fundamental is the ability to discriminate oneself from other entities in the environment.
     source: 2024 고3 9월 38번
@@ -232,7 +232,7 @@ practice:
       caution:
         x: '''to discriminate''를 ''구별하려고''로 떼어'
         o: ability to V → '~을 구별하는 능력'
-        tip: ability to V는 앞 ability 구체화 — 목적 부사로 떼지 마.
+        tip: '''ability to discriminate''는 ''~을 구별하는 능력'', to 떼지 마.'
   - kind: mc
     sentence: To decide whether and how to intervene in ecosystems, protected area managers normally need a reasonably clear idea of what future ecosystems would be like if they did not intervene.
     source: 2024 고3 9월 39번
@@ -271,7 +271,7 @@ practice:
       caution:
         x: '''would be like''의 like를 ''좋아하다''로'
         o: be like의 like는 전치사 → '어떤 모습일지'
-        tip: be 뒤 like는 전치사('~같다') — 동사 '좋아하다' 아냐.
+        tip: '''would be like''의 like는 전치사 ''어떤 모습일지'' — 좋아하다 아님.'
   - kind: short
     sentence: In some cases, however, we are far less aware of why we believe a certain claim to be true, or how we are to explain why certain social realities exist.
     source: 2022 고3 9월 37번
@@ -309,7 +309,7 @@ practice:
       caution:
         x: '''how we are to explain''을 ''어떻게 설명하나''로'
         o: be to='~해야 하나' → aware of의 why/how절
-        tip: be to부정사는 당위·방법 — 단순 현재로 뭉개지 마.
+        tip: '''we are to explain''의 be to는 ''설명해야 하나''.'
   - kind: short
     sentence: Learning to understand the built‑in limitations of our mental processes can also help us improve our ability to inform others more effectively.
     source: 2024 고3 9월 30번
@@ -344,7 +344,7 @@ practice:
       caution:
         x: '''to inform''을 ''알리기 위해''라는 목적으로'
         o: ability to V='~하는 능력'
-        tip: ability to V는 앞 명사 꾸밈 — 목적 '위해'로 읽지 마.
+        tip: '''ability to inform''은 ''알리는 능력'' — ''알리기 위해'' 목적 아님.'
   - kind: short
     sentence: Concert performances become interesting and gain in attraction from the fact that they go far beyond the information printed in the score.
     source: 2022 고3 9월 24번
@@ -379,7 +379,7 @@ practice:
       caution:
         x: '''the fact that''의 that을 관계사로'
         o: 동격 that → '~라는 사실'로 fact 내용
-        tip: the fact/idea that는 동격 — that절 전체가 그 내용이야.
+        tip: '''the fact that''의 that은 동격 — 뒤 절 통째가 fact의 내용.'
   - kind: short
     sentence: An ability to switch between the "pragmatic attitude" of ' everyday life and an "aesthetic attitude" is fundamental to ' a balanced life.
     source: 2024 고3 6월 39번
@@ -412,7 +412,7 @@ practice:
       caution:
         x: '''ability to switch''의 to를 ''~하려고''로'
         o: '''~할 능력'' + between A and B 두 짝'
-        tip: ability to V는 '~할 능력' — between A and B 짝 맞춰.
+        tip: '''switch between A and B''는 ''~할 능력'' — 두 태도 짝 봐.'
   - kind: short
     sentence: The fact that everyone was going to be able to speak and listen had to be accommodated ethically, and it was via a rough egalitarianism.
     source: 2024 고3 6월 22번
@@ -447,7 +447,7 @@ practice:
       caution:
         x: '''The fact that''을 관계사로, 주어를 짧게 끊음'
         o: 동격 that절 전체가 주어
-        tip: the fact that절이 주어면 that~끝까지가 통째 주어야.
+        tip: 주어는 'The fact that ... listen' 통째 — had to be의 주어.
   - kind: mc
     sentence: However, that is not a realistic option for scientists who feel a strong sense of responsibility to inform the public / and policymakers and/or to offer suggestions.
     source: 2024 고3 11월 42번
@@ -487,7 +487,7 @@ practice:
       caution:
         x: '''to inform·to offer''를 ''~하기 위해''로'
         o: responsibility to V='~할 책임감', and/or 대등
-        tip: sense of~ 뒤 to V는 내용 — 목적 아냐, 짝도 맞춰.
+        tip: '''responsibility to V''는 ''~할 책임'' — and/or로 두 부정사 대등.'
   - kind: short
     sentence: In films that tell of futuristic worlds, composers, much like sound designers, have added freedom to create a world that is unknown and new to the viewer.
     source: 2024 고3 11월 32번
@@ -523,7 +523,7 @@ practice:
       caution:
         x: '''that is unknown''의 that is를 ''즉''으로 끊음'
         o: that is 관계절 → world를 '낯설고 새로운'으로
-        tip: 명사 뒤 that is는 관계절 — '즉'으로 끊지 말고 꾸며 읽어.
+        tip: '''that is unknown''은 world 꾸미는 관계절 — ''즉''으로 끊지 마.'
   - kind: short
     sentence: ''' That is because geography starts from the premise that it matters where something takes place on Earth''s surface.'
     source: 2025 고3 6월 34번
@@ -559,7 +559,7 @@ practice:
       caution:
         x: '''it matters where''의 it을 ''그것''으로'
         o: it은 가주어, where절이 진주어
-        tip: it+matters/is 뒤 that/where절이면 it은 가주어야.
+        tip: '''it matters where''의 it은 가주어 — ''where절이 중요하다''.'
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress‑design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
@@ -594,7 +594,7 @@ practice:
       caution:
         x: '''dressmaking is a craft''의 that을 관계사로'
         o: 동격 that '~는 공예다라는 규칙', was invented 수동
-        tip: the rule that는 동격 — was p.p.는 '~되었다' 수동.
+        tip: '''rule that dressmaking is a craft''는 동격 ''~라는 규칙''.'
   - kind: mc
     sentence: Yes, some contests are seen as world class, such as identification of the Higgs particle or the development of high temperature superconductors.
     source: 2024 고3 11월 38번
@@ -627,7 +627,7 @@ practice:
       caution:
         x: '''identification of N''을 ''정체''로'
         o: 동작명사 → 'N을 규명하다/개발하다'
-        tip: -tion/-ment of N은 동사로 풀어 — of는 목적어야.
+        tip: '''identification of N''은 ''N을 규명함'' — ''정체'' 소유격 아님.'
   - kind: mc
     sentence: Often overlooked, but just as important a stakeholder, is the consumer who plays a large role in the notion of the privacy paradox.
     source: 2022 고3 6월 22번
@@ -660,7 +660,7 @@ practice:
       caution:
         x: '''the notion of X''를 ''X의 개념''으로'
         o: 동격 of → 'X라는 개념'
-        tip: the notion/idea of X는 동격 — 'X라는' 방향 뒤집지 마.
+        tip: '''the notion of X''는 ''X라는 개념'' — ''X의 개념'' 소유격 아님.'
   - kind: mc
     sentence: The tendency to see negotiation in fixed-pie terms varies depending on how people view the nature of a given conflict situation.
     source: 2023 고3 6월 42번
@@ -693,7 +693,7 @@ practice:
       caution:
         x: '''tendency to V''의 to를 ''~하기 위해''로'
         o: 동격 부정사 → 'V하려는 경향'
-        tip: tendency to V는 'V하려는 경향' — 목적 '위해' 아냐.
+        tip: '''tendency to see''의 to는 ''~하려는 경향'' — 목적 아님.'
   - kind: mc
     sentence: In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.
     source: 2024 고3 6월 32번
@@ -726,7 +726,7 @@ practice:
       caution:
         x: '''the ability to V''의 to를 ''~하기 위한''으로'
         o: '''V할 수 있는 능력'''
-        tip: ability to V='V할 능력' — 목적 아닌 내용 구체화.
+        tip: '''ability to generate''의 to는 ''생성할 수 있는'' — 목적 아님.'
   metaphor:
   - sentence: Those who rely only upon theories were obviously hunting the shadow, not the substance.
     source: 2025 수능 21번
@@ -763,7 +763,7 @@ practice:
       caution:
         x: '''hunting the shadow''를 실제 그림자 사냥으로'
         o: 문맥 비유 → '허상(겉핥기) 대 본질'
-        tip: 문맥이 준 비유면 문자 장면 버리고 대비 뜻으로 치환해.
+        tip: '''shadow ... substance''는 ''허상 대 본질'' — 그림자 사냥 아님.'
     kind: mc
   - sentence: We aspire to seamless aesthetics by stitching the seams closely, pressing them flat and making sure they are hidden on the inside so that we wear clothing rather than pieces of fabric.
     source: 2025 고3 6월 42번
@@ -796,7 +796,7 @@ practice:
       caution:
         x: '''the seams''를 실제 옷감 봉제 솔기로만'
         o: 기술의 이음매 감춤 → 완결된 전체 비유
-        tip: 구체 소재어가 추상 문맥에 오면 빗댄 대상부터 확인해.
+        tip: '''the seams''는 감춘 이음매 비유 — 매끄러운 설계 빗댐.'
     kind: short
   - kind: mc
     sentence: Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and ' the environment act as a coupled system.' This coupled system can be seen as a complete cognitive system of its own.
@@ -838,7 +838,7 @@ practice:
       caution:
         x: '''act as''를 ''~향해 행동/연기하다''로'
         o: '''~로서 기능하다'' → 하나의 결합 시스템'
-        tip: act as X는 'X로서 작용' — 뒤 단수 지시어로 확인해.
+        tip: '''act as X''는 ''X로서 기능하다'' — 단수 This system이 근거.'
   - kind: mc
     sentence: If there is a clear line between burned out and not, as there is with a lightbulb, then we have no good way to categorize people who say they are burned out but still manage to do their work competently.
     source: 2024 고3 6월 21번
@@ -879,7 +879,7 @@ practice:
       caution:
         x: '''with a lightbulb''를 ''전구와 함께''로'
         o: '''전구의 경우엔 (그 선이) 있듯이'''
-        tip: there is~with N은 'N의 경우엔 있다' — 동반 아냐.
+        tip: '''with a lightbulb''는 ''전구의 경우엔'' — 동반 아님.'
   - kind: mc
     sentence: Even those who describe scientific contests in such a way note that it is a somewhat inaccurate description, given that replication and verification have social value and are common in science.
     source: 2024 고3 11월 38번
@@ -920,7 +920,7 @@ practice:
       caution:
         x: '''scientific contests''를 실제 경연대회로'
         o: 과학을 경쟁에 빗댄 비유
-        tip: 화자 스스로 '부정확한 묘사'라 하면 실물 아닌 비유야.
+        tip: '''contests''는 과학=경쟁 비유 — 실제 대회 아님.'
   - kind: mc
     sentence: The entrance to a honeybee colony, often referred to as the dancefloor, is a market place for information about the state of the colony and the environment outside the hive.
     source: 2023 고3 11월 33번
@@ -959,7 +959,7 @@ practice:
       caution:
         x: '''a market place''를 실제 매매 시장으로'
         o: 정보가 오가는 장(場) 비유
-        tip: market/place가 정보와 붙으면 실물 시장 아닌 '장' 비유.
+        tip: '''a market place''는 정보 오가는 장(場) 비유 — 실제 시장 아님.'
   - kind: short
     sentence: 'Adrianne Hardman has summarized this serious situation for public health: "Physical inactivity is a waste of human potential for health and well‑being."'
     source: 2025 고3 6월 36번
@@ -994,7 +994,7 @@ practice:
       caution:
         x: '''is a waste of''를 ''A가 B를 낭비한다''로'
         o: '''A는 곧 B의 낭비다'' A=B 등치'
-        tip: A is a waste of B는 A=B 등치 — 능동 동사로 읽지 마.
+        tip: '''is a waste of''는 ''A는 B의 낭비다'' — inactivity 주체 아님.'
   - kind: short
     sentence: The history of surviving dress really only starts in the century, and like all artefacts described as fine or decorative art, is a highly visual subject.
     source: 2026 고3 11월 42번
@@ -1029,7 +1029,7 @@ practice:
       caution:
         x: '''like all artefacts''의 like를 ''좋아하다''로'
         o: '''~와 마찬가지로'' 삽입구, is 주어는 The history'
-        tip: 콤마 like구는 삽입 비유 — 본동사 주어는 앞에서 찾아.
+        tip: '''like all artefacts''는 삽입구 — is 주어는 The history.'
   - kind: mc
     sentence: The metaphor is useful because it helps us see ownership as a grouping of interpersonal rights that can be separated and put back together.
     source: 2023 고3 6월 21번
@@ -1062,7 +1062,7 @@ practice:
       caution:
         x: 소유권을 떼었다 붙이는 물건 덩어리로
         o: 권리가 나뉘고 결합되는 묶음 은유
-        tip: 앞에 metaphor 신호 있으면 as a grouping은 문자 금지.
+        tip: '''separated and put back together''는 권리 나뉘고 결합 비유.'
   - kind: mc
     sentence: We feel as though others can see through our skin and into our mind.
     source: 2023 고3 6월 37번
@@ -1093,7 +1093,7 @@ practice:
       caution:
         x: '''as though ~ see through''를 사실로'
         o: as though='마치 ~인 것처럼' 가정
-        tip: as though/as if는 비유·가정 — 실제 사실로 옮기지 마.
+        tip: '''as though''는 ''마치 ~인 것처럼'' 가정 — 실제 투시 아님.'
   - kind: mc
     sentence: Even so, we don't feel as if his face is a dentate blankness.
     source: 2025 고3 6월 32번
@@ -1124,7 +1124,7 @@ practice:
       caution:
         x: '''a dentate blankness''를 실제 톱니 표면으로'
         o: as if → 얼굴을 '톱니 공백'에 빗댄 은유
-        tip: as if 뒤 이상한 묘사는 은유 — 물리 사실로 읽지 마.
+        tip: '''a dentate blankness''는 ''톱니 공백'' 은유 — 물리적 사실 아님.'
   - kind: mc
     sentence: The experience of walking along a path, for example, can be a metaphor for thinking about arithmetic.
     source: 2025 고3 6월 39번
@@ -1155,4 +1155,4 @@ practice:
       caution:
         x: 걷기를 곧 산수라고 동일시
         o: can be a metaphor for → '~에 대한 비유'
-        tip: be a metaphor for는 '빗댐' — 실제 동일시 아냐.
+        tip: '''can be a metaphor for''는 ''~에 대한 비유'' — 동일시 아님.'

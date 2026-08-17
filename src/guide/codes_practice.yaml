@@ -34,7 +34,7 @@ practice:
       caution:
         x: '''they cause ~ suffering''을 ''고통이 걱정을 밀어낸다''로'
         o: cause A B → they(걱정)가 고통을 일으킴
-        tip: cause는 주어=원인, 목적어=결과 — 동사 기준 방향 고정.
+        tip: cause 주어 they(=worries) — 걱정이 고통을 일으킴, 방향 뒤집지 마.
   - kind: mc
     sentence: In the south there was London, already the largest city in the world, showing all the crime, evil, and misery that result from overpopulation and unplanned growth.
     source: 2024 고3 9월 29번
@@ -69,7 +69,7 @@ practice:
       caution:
         x: '''result from''을 ''초래하는''으로 방향 뒤집음'
         o: A result from B → 범죄가 인구과잉서 비롯(B가 원인)
-        tip: result from은 '주어=결과, from 뒤=원인' — 방향 뒤집지 마.
+        tip: '''result from'' — 범죄가 인구과잉에서 비롯, ''초래한다''로 뒤집지 마.'
   - kind: mc
     sentence: The strategy is to analyze all the possible scenarios that the future holds and then to see what proportion of them lead to success or failure.
     source: 2023 고3 11월 20번
@@ -104,7 +104,7 @@ practice:
       caution:
         x: '''proportion ~ lead to''를 ''성공·실패가 시나리오로''로'
         o: 주어는 proportion(시나리오) → 성공/실패로 이어짐
-        tip: lead to는 주어=원인, 뒤=결과 — 주어부터 잡아.
+        tip: lead to 주어는 proportion — 그 비율(시나리오)이 성공/실패로 이어짐.
   - kind: mc
     sentence: Agricultural markets are naturally unstable, due to changes in harvest size that result from variable weather patterns and other factors.
     source: 2026 고3 11월 31번
@@ -139,7 +139,7 @@ practice:
       caution:
         x: '''due to ~ result from''을 시장→수확·날씨로 통째 뒤집음'
         o: 날씨(원인)→수확량 변화→시장 불안정(결과)
-        tip: due to·result from 둘 다 뒤가 원인 — 읽기는 원인부터.
+        tip: due to+result from 둘 다 역방향 — 날씨→수확→시장, 통째로 뒤집지 마.
   - kind: mc
     sentence: Social media users may unknowingly participate in creating and circulating misinformation, which can influence elections, cause violence, and create widespread panic.
     source: 2024 고3 9월 20번
@@ -174,7 +174,7 @@ practice:
       caution:
         x: '''which can cause violence''를 선거·폭력이 정보 만든다로'
         o: 주어 which(=misinformation)가 그것들을 일으킴
-        tip: cause 앞 주어부터 찾아 — 뒤 목적어를 주어로 착각 말기.
+        tip: cause 주어는 which(=misinformation) — 잘못된 정보가 원인.
   - kind: short
     sentence: Whether it be due to the growing presence of AI assistants or the emergence of self-driving cars, the necessity of the role of humans as the decision makers would appear to be in decline.
     source: 2024 고3 6월 20번
@@ -206,7 +206,7 @@ practice:
       caution:
         x: '''be due to A''를 AI·자율차가 인간 역할 때문에 는다로'
         o: A 때문이다 → A가 원인, 인간 역할 감소가 결과
-        tip: be due to A는 'A가 원인' — 줄어드는 건 necessity(필요성).
+        tip: '''be due to A'' — A(AI·자율차)가 원인, 인간 역할 감소가 결과.'
   - kind: short
     sentence: Living your values only some of the time does not contribute to the creation and maintenance of culture.
     source: 2024 고3 11월 20번
@@ -237,7 +237,7 @@ practice:
       caution:
         x: '''does not contribute''의 부정 놓쳐 ''도움 된다''로'
         o: does not → '기여하지 않는다'
-        tip: not을 먼저 잡아 극성 고정 — contribute 앞 부정이 핵심.
+        tip: '''does not contribute'' — 부정 놓치지 마, ''기여하지 않는다''.'
   - kind: short
     sentence: Excessive specificity may result in information from outside the domain being underestimated and unavailable, which leads to fixedness of thinking, whereas excessive generality causes chaos, vagueness, and shallowness.
     source: 2023 고3 6월 20번
@@ -268,7 +268,7 @@ practice:
       caution:
         x: '''result in ~ underestimated''를 정보가 구체성 초래로'
         o: A result in B → 구체성이 정보 과소평가를 낳음
-        tip: result in은 result from과 반대 — 주어=원인, in 뒤=결과.
+        tip: '''result in''은 정방향 — 구체성이 정보 과소평가를 낳음.'
   - kind: short
     sentence: Changing political, social and religious landscapes will lead to the emergence of new cultures, and with them new culturtainment experiences.
     source: 2026 고3 11월 24번
@@ -299,7 +299,7 @@ practice:
       caution:
         x: '''landscapes ~ lead to''를 새 문화가 지형을 이끈다로'
         o: 주어 landscapes(지형 변화)가 원인, 새 문화가 결과
-        tip: lead to 주어부터 — 주어=원인, 뒤=결과.
+        tip: lead to 주어는 landscapes — 지형 변화가 원인, 새 문화가 결과.
   - kind: short
     sentence: Departure from the group may signal danger to nonvigilant animals and cause what appears to be a coordinated flushing of prey from the area.
     source: 2022 고3 6월 39번
@@ -330,7 +330,7 @@ practice:
       caution:
         x: '''cause ~ flushing of prey''를 먹잇감이 이탈 초래로'
         o: cause 주어는 Departure(이탈) → 먹잇감 몰이 일으킴
-        tip: cause 앞 주어 확인 — 뒤 긴 목적어를 주어로 착각 말기.
+        tip: cause 주어는 Departure — 이탈이 먹잇감 몰이를 일으킴.
   - kind: short
     sentence: And it's not due to necessity but rather that the city quality is so inviting.
     source: 2024 고3 9월 33번
@@ -361,7 +361,7 @@ practice:
       caution:
         x: '''not A but rather B''를 필요가 원인, 도시 질 부정으로'
         o: not A but B → A(필요) 부정, B(도시 매력)가 원인
-        tip: not/but 위치 확인 — but 뒤가 진짜 원인.
+        tip: '''not A but rather B'' — 필요(A) 부정, 도시 매력(B)이 원인.'
   - kind: mc
     sentence: However, such commercialization risks culturtainment ' becoming homogeneous and losing its original message' that could lead to a dilution of audiences.
     source: 2026 고3 11월 24번
@@ -399,7 +399,7 @@ practice:
       caution:
         x: '''A lead to B''를 관객 약화가 상업화 위험 초래로'
         o: A(획일화 위험)가 원인, B(관객 약화)가 결과
-        tip: lead to는 '야기하다', 앞=원인 뒤=결과 — '이끌다'로 오독 말기.
+        tip: that 선행사는 앞 절 전체 — 획일화 위험이 원인, 관객 약화가 결과.
   - kind: mc
     sentence: However, due to its popularity, thirty more students are coming to the camp than we expected, so we need one more swimming pool for them.
     source: 2022 고3 6월 18번
@@ -428,7 +428,7 @@ practice:
       caution:
         x: '''due to its popularity''를 수영장 필요해서 학생 왔다로'
         o: 인기가 원인, 학생 증가가 결과
-        tip: due to 바로 뒤가 원인, 앞이 결과.
+        tip: '''due to its popularity'' — 인기가 원인, 학생 증가가 결과.'
   - kind: mc
     sentence: But a lot of the enjoyment we get from that mighty symphony stems from the inventiveness behind it, the impressive development of musical ideas.
     source: 2022 고3 6월 34번
@@ -457,7 +457,7 @@ practice:
       caution:
         x: '''A stems from B''를 창의성이 즐거움에서 생긴다로'
         o: stems from 뒤가 원인 → 창의성이 원인
-        tip: stem from은 뒤가 근원(원인), 앞이 비롯된 결과.
+        tip: '''stems from'' 뒤가 원인 — 창의성이 원인, 즐거움이 결과.'
   - kind: mc
     sentence: Darwin saw blushing as uniquely human, representing an involuntary physical reaction caused by embarrassment and self-consciousness in a social environment.
     source: 2023 고3 6월 37번
@@ -486,7 +486,7 @@ practice:
       caution:
         x: '''caused by embarrassment''를 붉힘이 당혹감 불러온다로'
         o: caused by 뒤가 원인 → 당혹감·자의식이 원인
-        tip: caused by 바로 뒤가 원인, 앞이 결과.
+        tip: '''caused by'' 뒤가 원인 — 당혹감·자의식이 원인, 붉힘이 결과.'
   - kind: mc
     sentence: Perhaps you mastered your day's objective due to especially favorable conditions, such as low humidity, when in fact, you really didn't climb particularly well.
     source: 2025 고3 6월 21번
@@ -515,7 +515,7 @@ practice:
       caution:
         x: '''due to ~ conditions''를 달성 덕에 조건 좋아졌다로'
         o: 유리한 조건이 원인, 목표 달성이 결과
-        tip: due to 바로 뒤가 원인, 앞이 결과.
+        tip: '''due to ~ conditions'' — 유리한 조건이 원인, 목표 달성이 결과.'
   - kind: mc
     sentence: Often sport managers will try to be more competitive due to performance reasons and less collaborative.
     source: 2026 고3 11월 22번
@@ -544,7 +544,7 @@ practice:
       caution:
         x: '''due to performance reasons''를 경쟁 탓 성과 문제로'
         o: 성과상의 이유가 원인, 경쟁적 태도가 결과
-        tip: due to 바로 뒤가 원인, 앞이 결과.
+        tip: '''due to performance reasons'' — 성과 이유가 원인, 경쟁이 결과.'
   - kind: mc
     sentence: Caring about one's friends and maybe getting to keep playing with the group leads to these actions.
     source: 2026 고3 11월 30번
@@ -573,7 +573,7 @@ practice:
       caution:
         x: '''A leads to B''를 행동이 아끼는 마음으로 이어진다로'
         o: leads to 뒤가 결과 → 아끼는 마음이 원인, 행동이 결과
-        tip: leads to는 앞=원인, 바로 뒤=결과.
+        tip: '''leads to'' 뒤가 결과 — 아끼는 마음이 원인, 행동이 결과.'
   contrast:
   - kind: mc
     sentence: In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.
@@ -607,7 +607,7 @@ practice:
       caution:
         x: '''rather than walking'' 놓쳐 걷는 사람이 눈에 띈다로'
         o: 강조는 서있거나 앉은 사람, walking은 배제
-        tip: rather than 뒤는 버리는 쪽 — 강조는 앞쪽.
+        tip: '''rather than walking'' 살려라 — 강조 대상은 서있거나 앉은 사람.'
   - kind: short
     sentence: However, unlike most of the categories of collection and study that make up those areas, it is fluid rather than static.
     source: 2026 고3 11월 42번
@@ -636,7 +636,7 @@ practice:
       caution:
         x: '''unlike ~ fluid rather than static''을 ''~처럼 정적''으로'
         o: unlike=~와 달리, 정적 아니라 유동적
-        tip: unlike는 '~와 달리', rather than 뒤(static)는 버림.
+        tip: unlike=~와 달리 — 'fluid rather than static', 유동적.
   - kind: mc
     sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
@@ -669,7 +669,7 @@ practice:
       caution:
         x: '''not in A but in B''를 ''A와 B 둘 다서 드러난다''로'
         o: A(형상 지각) 부정, B(이성적 표상)뿐
-        tip: not A but B는 A 버리고 B 택함 — 둘 다 아님.
+        tip: '''not in A but in B'' — 형상 지각 부정, 이성적 표상뿐, 둘 다 아님.'
   - kind: short
     sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
@@ -698,7 +698,7 @@ practice:
       caution:
         x: '''While ~ no longer''를 ''이끌리는 동안 그 자연이었다''로'
         o: 비록 이끌렸지만 더 이상 그 자연 아님
-        tip: While은 '비록 ~지만' 대조, no longer 놓치지 마.
+        tip: While은 양보, 'no longer' 살려 — 이끌렸지만 그 자연은 아님.
   - kind: mc
     sentence: While the hospital administration may serve as your client, no doubt the perspectives of administration personnel will differ significantly from those of doctors, interns, residents, nurses, and other medical staff who use the building regularly.
     source: 2026 고3 11월 33번
@@ -731,7 +731,7 @@ practice:
       caution:
         x: '''While ~ differ from''을 ''~하는 동안 다르지 않다''로'
         o: 비록 ~이지만 두 관점은 크게 다름
-        tip: While은 '비록 ~지만', differ from은 '다르다' — 부정 넣지 마.
+        tip: While은 양보, 'differ from' — 두 관점은 크게 다름, 부정 아님.
   - kind: short
     sentence: Philosophers tend to ask questions rather than provide definitive answers, and their contributions often consist of challenging established assumptions and proposing new research approaches.
     source: 2026 고3 11월 37번
@@ -760,7 +760,7 @@ practice:
       caution:
         x: '''rather than provide answers''를 ''질문하고 답도 준다''로'
         o: 질문을 택하고 provide answers는 배제
-        tip: rather than 뒤는 버리는 쪽 — 'and'로 살리지 마.
+        tip: '''rather than provide answers'' — 질문 택하고 답 제공은 배제.'
   - kind: mc
     sentence: Have we come closer to Aristotle's image of God as the immobile mover, when elites exercise their power to move money, things and people, while they themselves do not need to move at all?
     source: 2022 고3 6월 40번
@@ -793,7 +793,7 @@ practice:
       caution:
         x: '''while ~ do not need to move''를 ''자신도 움직여야''로'
         o: while=~인 반면, 엘리트 자신은 전혀 안 움직임
-        tip: while은 '~인 반면' 대조, do not ~ at all 놓치지 마.
+        tip: '''do not need to move'' — while 반면, 엘리트 자신은 안 움직임.'
   - kind: short
     sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
@@ -822,7 +822,7 @@ practice:
       caution:
         x: '''rather than''을 ''관리보다 수용''으로 뒤집어'
         o: 앞의 managed(관리)를 택하고 수용은 배제
-        tip: rather than은 앞이 채택·뒤가 버림 — 미는 쪽을 잡아.
+        tip: '''managed rather than accommodated''는 앞 managed 채택, 뒤 배제.'
   - kind: mc
     sentence: Generally, this implies that sufficient fresh snow must accumulate during the cold months to offset melting during the summer, although on a year‑to‑year basis, glaciers may expand or contract, depending on local and global climatic conditions.
     source: 2025 고3 6월 35번
@@ -858,7 +858,7 @@ practice:
       caution:
         x: '''although''를 because/so 인과로 이어 읽어'
         o: '''비록 ~이지만'' 양보 → 큰 흐름 vs 단기 변동 대조'
-        tip: although는 인과 아닌 양보 — 앞뒤 대조, 뒤 주절에 무게.
+        tip: although로 '장기 상쇄' vs '해마다 변동' 대조, offset은 능동 '상쇄'.
   - kind: short
     sentence: Recognizing how she felt about her failure, Ken, her teammate, approached her and said, "Jamie, even though you didn't set a personal best time today, your performances have improved dramatically."
     source: 2023 고3 11월 19번
@@ -889,7 +889,7 @@ practice:
       caution:
         x: '''even though'' 무시하고 앞뒤를 다 부정으로'
         o: '''비록 A(부정)지만 B(긍정)'' — 뒤 긍정에 무게'
-        tip: even though 뒤가 필자의 핵심 — 긍정 쪽에 방점.
+        tip: even though 뒤 didn't set best는 양보, 무게는 have improved에.
   - kind: short
     sentence: Overly rigid habits and conventions, no matter how well-considered or well-intentioned, threaten innovation.
     source: 2024 고3 9월 24번
@@ -918,7 +918,7 @@ practice:
       caution:
         x: '''no matter how well ~'' 빼고 ''좋으니 돕는다''로'
         o: '''아무리 잘 해도'' 경직된 습관은 혁신을 위협'
-        tip: no matter how ~는 양보 — 아무리 좋아도 결론 안 바뀌어.
+        tip: no matter how는 삽입 양보 — habits threaten을 이어 '위협한다'.
   - sentence: The truth of the matter is revealed not in the perception of the figure but in its rational representation.
     source: 2023 고3 6월 34번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “사물의 진리는 형상에 대한 지각에서 드러나며, 그것의 이성적 표상에서는 드러나지 않는다.”'
@@ -950,7 +950,7 @@ practice:
       caution:
         x: '''not A but B''에서 A·B 자리를 뒤바꿔'
         o: 부정은 지각(A), 긍정은 이성적 표상(B)
-        tip: not이 걸리는 게 버릴 쪽, but 뒤가 미는 쪽.
+        tip: not in the perception / but in rational representation, 자리 고정.
     kind: mc
   - sentence: Urban transport professionals have largely acquiesced to the view that automobile demand in cities needs to be managed rather than accommodated.
     source: 2022 고3 6월 30번
@@ -979,7 +979,7 @@ practice:
       caution:
         x: '''rather than''을 ''그리고''처럼 병렬로'
         o: managed(관리) 택하고 accommodated(수용) 배제
-        tip: rather than은 병렬 아닌 대비 — 뒤엣것은 버리는 쪽.
+        tip: rather than은 병렬 아님 — managed 채택, accommodated 배제.
     kind: short
   - kind: mc
     sentence: However, unlike sound designers, composers often shy away from creating unique pieces that reflect these new worlds and often present musical scores that possess familiar structures and cadences.
@@ -1014,7 +1014,7 @@ practice:
       caution:
         x: '''unlike''를 like로, ''shy away from''을 ''수줍게''로'
         o: '''~와 달리''(반대 방향)+''~하기를 꺼리다'''
-        tip: unlike는 뒤가 반대 방향 예고 — like로 착각 말고 대비로.
+        tip: unlike은 반대 예고, shy away from creating은 '만들기를 꺼리다'.
   - kind: mc
     sentence: 'On the contrary, it comes close to Hobbes''s outlook: man''s violent and conflict‑prone nature makes it necessary to establish and maintain an effective legal framework in order to secure peace.'
     source: 2026 고3 11월 34번
@@ -1048,7 +1048,7 @@ practice:
       caution:
         x: 콜론(:)을 대비로, 'makes it necessary'를 부정으로
         o: 콜론은 홉스 관점 환언, it은 가목적어 → '필요하게 만든다'
-        tip: 콜론 뒤는 앞 추상어 풀이 — 대비 아닌 같은 말 다시.
+        tip: 콜론은 Hobbes 관점 풀이, makes it necessary의 it은 가목적어.
   - kind: mc
     sentence: I can't wait to ride while watching those "! beautiful waves!"!" Emma and Clara jumped on their bikes and started to Emma Clara pedal toward the white cliff where the beach road ended.
     source: 2024 고3 11월 45번
@@ -1082,7 +1082,7 @@ practice:
       caution:
         x: '''while + ~ing''를 대조로 두 행동 대비로'
         o: '''~하면서''(동시 동작) — 파도 보며 자전거를 타다'
-        tip: while+~ing는 대조 아닌 동시 동작 많아 — 문맥으로 판별.
+        tip: watching과 짝인 while+‑ing는 동시 동작 '파도 보며 타다'.
   - kind: mc
     sentence: 'While sentience and volition are aspects of mind and agency, morals are cultural tools developed to influence social behaviour: to cultivate the desirable and discourage the harmful.'
     source: 2024 고3 9월 22번
@@ -1116,7 +1116,7 @@ practice:
       caution:
         x: 문두 'While'을 '~하는 동안'(시간)으로만
         o: 서로 다른 두 주어 맞세움 → '반면에'(대조)
-        tip: 문두 While이 두 주어를 맞세우면 시간 아닌 '반면에'.
+        tip: 문두 While은 volition vs morals를 맞세운 '반면에'.
   - kind: short
     sentence: Admittedly, it is considerably more difficult to take notes from discussions than from lectures, for, unlike lectures, discussions tend to be disorganized and difficult to follow.
     source: 2025 고3 6월 23번
@@ -1146,7 +1146,7 @@ practice:
       caution:
         x: '''unlike lectures''를 ''강의처럼'', ''for''를 ''~위해''로'
         o: '''강의와 달리''(대비) + for는 ''왜냐하면''(이유)'
-        tip: 삽입된 unlike구는 걷어내고, 콤마 뒤 for는 이유 접속사.
+        tip: unlike lectures는 for(왜냐하면) 이유절 속 삽입 대비구.
   - kind: short
     sentence: While scholars might initially find these entrepreneurial concepts alien, they actually engage in similar practices when they set themselves apart in their academic writing.
     source: 2025 고3 6월 30번
@@ -1176,7 +1176,7 @@ practice:
       caution:
         x: 문두 'While'을 시간으로, 'find ~ alien'을 끊어
         o: 양보의 '~지만' + 5형식 '개념을 낯설게 여기다'
-        tip: 문두 While은 앞뒤 대비의 '~지만' — 뒷절이 진짜 주장.
+        tip: 문두 While은 양보, find concepts alien은 5형식 '낯설게 여기다'.
   - kind: short
     sentence: Nevertheless, the technologies available for monitoring the concentrations and flows of particular substances in waste discharges have been developing rapidly.
     source: 2024 고3 6월 38번
@@ -1206,7 +1206,7 @@ practice:
       caution:
         x: 긴 수식어 속 substances/discharges를 주어로
         o: 진짜 주어는 the technologies (available~는 수식)
-        tip: 동사 앞 긴 수식어는 걷어내고 핵심 명사를 주어로.
+        tip: available~discharges는 수식구, developing의 주어는 the technologies.
   - kind: short
     sentence: While the other passengers were gathering their bags, Jessica quickly got off the bus and she ran up the cliff Jessica that was famous for its ocean views.
     source: 2022 고3 6월 19번
@@ -1236,7 +1236,7 @@ practice:
       caution:
         x: '''While''을 ''반면에''(대조)로 보아 행동 맞세워'
         o: 진행형과 함께 '~하는 동안'(동시 상황)
-        tip: While+진행형이면 대조 아닌 '~하는 동안' 많아.
+        tip: were gathering과 짝인 While은 '~하는 동안'(동시), 대조 아님.
   - kind: short
     sentence: Unlike scientific methods, philosophizing is a non‑empirical approach that attempts to validate concepts through logical thinking and argumentation.
     source: 2026 고3 11월 37번
@@ -1267,7 +1267,7 @@ practice:
       caution:
         x: '''Unlike''를 ''싫어하다'', ''approach''를 동사로'
         o: '''과학적 방법과 달리''(대비)+approach는 명사 ''접근법'''
-        tip: Unlike는 대비 전치사, 뒤 be동사 있으면 approach는 명사.
+        tip: Unlike은 대비구, is a non-empirical approach는 A=B 정의(명사).
   - kind: mc
     sentence: Economics can go a long way towards helping a legislature determine whether or not a particular tax law will help achieve a particular goal, but economics cannot, in a vacuum, identify the goal.
     source: 2022 고3 9월 22번
@@ -1295,7 +1295,7 @@ practice:
       caution:
         x: but 뒤 'cannot'을 놓쳐 앞뒤 대조 뒤집어
         o: but은 뒤 강조, cannot은 능력 부정 → 목표는 못 정함
-        tip: but 뒤 부정어부터 확인 — 대조는 뒤쪽이 필자 핵심.
+        tip: but 뒤 economics cannot의 cannot 살려 — goal은 못 정함.
   - kind: mc
     sentence: 'We select the cultural notion as we would select a screwdriver: certain jobs call for a Phillips head while others require an Allen wrench.'
     source: 2022 고3 9월 37번
@@ -1323,7 +1323,7 @@ practice:
       caution:
         x: '''while'' 놓쳐 모든 일이 같은 드라이버 요구로'
         o: '''반면에''(대조) — certain jobs와 others 두 경우 대비'
-        tip: certain...others 사이 while은 '반면에' — 두 경우로 갈라.
+        tip: while로 certain jobs vs others 대조 — 같은 드라이버 아님.
   - kind: mc
     sentence: An important advantage of disclosure, as opposed to more aggressive forms of regulation, is its flexibility and respect for the operation of free markets.
     source: 2023 고3 11월 23번
@@ -1351,7 +1351,7 @@ practice:
       caution:
         x: '''as opposed to'' 놓쳐 공개 이점을 반대로'
         o: '''~와 달리''(대조) — 공개가 규제보다 유연·시장 존중'
-        tip: as opposed to는 '~와 달리' — 뒤엣것과 반대로 대비.
+        tip: as opposed to는 '규제와 달리' — 공개가 더 유연·시장 존중.
   - kind: mc
     sentence: Although the wonders of modern technology have provided people with opportunities beyond the wildest dreams of our ancestors, the good, as usual, is weakened by a downside.
     source: 2022 고3 9월 30번
@@ -1379,7 +1379,7 @@ practice:
       caution:
         x: '''Although''·''is weakened'' 무시, 좋은 점이 단점 없앤다로'
         o: 양보 → 이점이 오히려 단점에 의해 약화됨
-        tip: Although는 뒤 주절이 핵심, weakened by는 약화 방향.
+        tip: Although 양보 뒤 is weakened — 이점이 단점에 '약화됨'.
   - kind: mc
     sentence: On the contrary, we brought the motors into our lives, as automobiles, refrigerators, drill presses, and pencil sharpeners.
     source: 2023 고3 11월 30번
@@ -1407,7 +1407,7 @@ practice:
       caution:
         x: '''brought ... into''를 ''몰아냈다''로 방향 반대로'
         o: '''삶으로 들여왔다''(도입) — 앞 통념을 뒤집음'
-        tip: On the contrary 뒤는 통념 반박 — into는 안으로 '도입'.
+        tip: brought motors into our lives는 '들여옴' — 몰아냄 아님.
   - kind: mc
     sentence: Yet, despite the increasing level of urban mobility worldwide, access to places, activities and services has become increasingly difficult.
     source: 2023 고3 6월 24번
@@ -1435,7 +1435,7 @@ practice:
       caution:
         x: '''despite''를 ''덕분에'', ''difficult''를 ''쉬워졌다''로'
         o: 양보(기대와 반대) — 이동성 늘어도 접근은 어려워짐
-        tip: despite는 기대와 반대 결과 예고 — 인과로 읽지 마.
+        tip: despite 양보 — mobility 늘어도 access는 difficult(어려워짐).
   - kind: mc
     sentence: However, after a while, a group of students came in, and there weren't any large tables left.
     source: 2023 고3 6월 45번
@@ -1461,7 +1461,7 @@ practice:
       caution:
         x: '''there weren''t any''를 ''많이 남았다''로 뒤집어'
         o: 완전 부정 → 큰 테이블이 하나도 안 남음
-        tip: However 뒤는 상황 반전 — weren't any는 '전무'.
+        tip: there weren't any large tables는 완전 부정 — 하나도 안 남음.
   equivalence:
   - kind: mc
     sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
@@ -1495,7 +1495,7 @@ practice:
       caution:
         x: '''In other words''를 새 정보로, 콜론을 새 항목으로'
         o: 앞 내용 재진술 + 콜론 뒤는 '소비 가능한 부분' 예시
-        tip: In other words/콜론은 새 정보 아닌 앞말 다시 말하기.
+        tip: In other words는 재진술, 콜론 뒤는 consumable parts 예시.
   - kind: mc
     sentence: For the present generation of artists, the computer, or more appropriately, the laptop, is one in a collection of integrated, portable digital technologies that link their social and working life.
     source: 2022 고3 6월 31번
@@ -1528,7 +1528,7 @@ practice:
       caution:
         x: '''the computer, or ~, the laptop''의 or를 ''선택''으로'
         o: or는 동격(즉) — computer를 laptop으로 다시 부름
-        tip: 콤마로 감싼 or는 선택 아닌 동격 — 앞말 바꿔 부르기.
+        tip: computer, or the laptop의 or는 동격 '즉' — 다시 부른 것.
   - kind: mc
     sentence: Roads are there all the time, so their speed is the most important fact that distinguishes them.
     source: 2026 고3 11월 23번
@@ -1561,7 +1561,7 @@ practice:
       caution:
         x: '''that distinguishes them''을 ''구별하기 어렵다''로'
         o: fact를 꾸미는 관계절 → '도로를 구별해 주는' 사실
-        tip: distinguish는 부정 아냐 — that절은 앞 명사 꾸미는 긍정.
+        tip: that distinguishes them은 fact 꾸미는 관계절 — 부정 아님.
   - kind: mc
     sentence: In particular, they define a group as two or more people who interact with, and exert mutual influences on, each other.
     source: 2022 고3 9월 40번
@@ -1594,7 +1594,7 @@ practice:
       caution:
         x: '''define A as B''의 as를 ''되도록''으로 읽어'
         o: '''A를 B로 정의'' 등호 → 집단=상호작용하는 둘 이상'
-        tip: define A as B는 A=B 등호 — as를 '~로서/되라'로 읽지 마.
+        tip: define A as B의 as는 '~로 정의' 등호 — group = people.
   - kind: mc
     sentence: The fact that we have not found such a case in countless examinations of the fossil record strengthens the case for evolutionary theory.
     source: 2022 고3 6월 36번
@@ -1627,7 +1627,7 @@ practice:
       caution:
         x: that을 관계사 '찾아낸 사실'로, not found를 놓쳐
         o: 동격 that → 'fact=반례를 못 찾았다', 부정이 핵심
-        tip: the fact that은 동격 — 뒤 절이 fact의 내용, 부정 살려.
+        tip: The fact that은 동격 — not found 부정을 살려라.
   - kind: short
     sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -1656,7 +1656,7 @@ practice:
       caution:
         x: '''innate capacity/drive''를 ''학습으로 얻는''으로'
         o: 능력도 욕구도 타고남 — not only A; also B로 둘 다 강조
-        tip: innate는 '타고난' — 학습과 반대, 재진술이라 뜻 유지.
+        tip: not only capacity; drive 구조, innate는 '타고난' — 둘 다 강조.
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
     source: 2024 고3 11월 40번
@@ -1685,7 +1685,7 @@ practice:
       caution:
         x: '''that is'' 놓쳐 ''in different periods''를 새 항목으로'
         o: that is는 '즉' — 앞말을 시간 관점으로 다시 말함
-        tip: that is/즉은 새 항목 아닌 앞말 재진술 — 나열로 세지 마.
+        tip: that is는 '즉' — in different periods는 앞말 재진술.
   - kind: short
     sentence: When you say "It's mine" in reference to a resource, often that means you own a lot of the sticks that make up the full bundle.
     source: 2023 고3 6월 21번
@@ -1714,7 +1714,7 @@ practice:
       caution:
         x: '''make up the full bundle''을 ''막대기를 만들다''로'
         o: make up은 '구성하다', that절은 sticks 꾸미는 관계절
-        tip: make up은 '만들다' 아닌 '이루다·구성하다'로 판별.
+        tip: make up은 '구성하다', that make up~은 sticks 꾸미는 관계절.
   - kind: short
     sentence: Moreover, equal access to speech and hearing promoted the notion that property should be held in common, that goods and food in particular should be shared, and that everyone had a duty to take care of everyone else.
     source: 2024 고3 6월 22번
@@ -1743,7 +1743,7 @@ practice:
       caution:
         x: '''the notion that ...'' 세 that을 관계사로'
         o: 세 that절 모두 notion과 동격 — 관념의 내용 병렬
-        tip: the notion that은 동격 — 그 관념의 내용 나열, 소유 아냐.
+        tip: the notion 뒤 세 that절은 모두 동격 — 관념 내용 병렬.
   - kind: short
     sentence: After all, didn't they demonstrate those qualities on the journey to Oz, a journey motivated by little more than an expectation, an idea about the future likelihood of getting something they wanted?
     source: 2023 고3 6월 29번
@@ -1772,7 +1772,7 @@ practice:
       caution:
         x: 콤마 뒤 journey/expectation/idea를 별개 나열로
         o: 각각 앞말 다시 부르는 동격 — 여정=기대, 기대=생각
-        tip: 콤마 뒤 명사가 앞말과 같은 것이면 나열 아닌 동격.
+        tip: 콤마 뒤 journey·expectation·idea는 앞말 다시 부르는 동격.
   - kind: short
     sentence: By design, we set up challenges in which the individual must validate how they know us by presenting scenarios, ( ) names or acquaintances, or evidence by which to validate (that is, photographs).
     source: 2023 고3 6월 22번
@@ -1803,7 +1803,7 @@ practice:
       caution:
         x: 괄호 안 'that is'를 지시어 '그것은'으로
         o: '''즉'' 환언 표지 → evidence를 photographs로 구체화'
-        tip: that is는 '그것은' 아닌 '즉' — 앞 명사를 뒤로 구체화.
+        tip: 괄호 속 that is는 '즉' — evidence를 photographs로 환언.
   - kind: short
     sentence: Instead, they should concentrate attention on one subject after another (that is, in different periods of time), ( ) although later work will weaken earlier attainments in the other spheres.
     source: 2024 고3 11월 40번
@@ -1834,7 +1834,7 @@ practice:
       caution:
         x: '''(that is, in different periods)''를 별개 지시문으로'
         o: that is는 '즉' — one subject after another를 환언
-        tip: that is는 앞 어구를 같은 뜻으로 다시 — 새 정보 아냐.
+        tip: (that is,~)의 that is는 '즉' — one after another 환언.
   - sentence: 'In other words, as museums struggle to survive in a competitive economy, their budgets often prioritise those parts of themselves that are consumable: infotainment in the galleries, goods and services in the cafes and the shops.'
     source: 2023 고3 6월 23번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “다시 말해, 박물관은 경쟁적 경제 속에서 살아남으려 애쓰면서, 소비될 수 있는 자기 부분들 즉 전시실의 인포테인먼트, 카페와 상점의 상품 및 서비스가 예산에서 우선시되지 않도록 막는다.”'
@@ -1867,7 +1867,7 @@ practice:
       caution:
         x: 콜론 뒤를 새 정보로, 'prioritise'를 '우선시 안 함'으로
         o: '''소비 가능한 부분''의 구체 재진술 + 부정어 없음'
-        tip: 부정어 없으면 방향 뒤집지 마 — 콜론 뒤는 앞말 구체화.
+        tip: prioritise는 '우선시한다' — 부정어 없음, 뒤집지 마라.
     kind: mc
   - sentence: Instead, they should concentrate attention on one subject after another, that is, in different periods of time.
     source: 2024 고3 11월 40번
@@ -1897,7 +1897,7 @@ practice:
       caution:
         x: '''that is''를 ''그것은 ~이다'' 주어+동사로'
         o: '''즉'' 재진술 연결어 — 술어 아님, 구조 안 무너짐'
-        tip: that is가 콤마로 끼면 술어 아닌 '즉' — 앞말 재진술.
+        tip: that is는 술어 아니라 '즉' 재진술어 — 술어로 보면 무너짐.
     kind: short
   - kind: mc
     sentence: One of those downsides is that anyone who so chooses can pick up the virtual megaphone that is the Internet and put in their two cents on any of an infinite number of topics, regardless of their qualifications.
@@ -1934,7 +1934,7 @@ practice:
       caution:
         x: '''that is the Internet''을 벌려 읽고 ''two cents''를 직역'
         o: 확성기=인터넷 재진술 관계절 + '한마디 거들다'
-        tip: N that is N'은 은유를 쉬운 말로 다시 — 같은 대상.
+        tip: megaphone that is the Internet은 '확성기=인터넷' 재진술.
   - kind: mc
     sentence: 'To a scientific thinker, this must sound like magical thinking: you''re saying you will imagine something so hard it''ll pop into someone else''s head exactly the way you envision it?'' The artist has sought the opposite of the scientist''s observer‑independent reality.'
     source: 2023 고3 6월 33번
@@ -1968,7 +1968,7 @@ practice:
       caution:
         x: 콜론을 대비로 끊고 'so hard it'll pop'을 따로
         o: 콜론은 magical thinking 풀이 + 'so~that' 결과 구문
-        tip: 콜론 뒤는 앞 추상어 구체화 — 대비로 끊지 마.
+        tip: 콜론은 magical thinking 풀이, so hard (that) it'll pop 결과구문.
   - kind: mc
     sentence: Certain hindrances to multifaceted creative activity may lie in premature specialization, i.e., having to choose the direction of education or to focus on developing one ability too early in life.
     source: 2023 고3 6월 20번
@@ -1999,7 +1999,7 @@ practice:
       caution:
         x: 재진술 'i.e.(즉)'를 예시 '예를 들어'로
         o: i.e.는 앞말을 같은 뜻으로 다시 — e.g.와 구별
-        tip: i.e.=즉(같은 말 다시), e.g.=예를 들어 — 헷갈리지 마.
+        tip: i.e.는 '즉' 재진술 — e.g.(예시) 아님, 같은 뜻 풀이.
   - kind: mc
     sentence: In other words, they not only have an innate capacity for matching their own kinaesthetically experienced bodily movements with those of others that are visually perceived; they have an innate drive to do so.
     source: 2024 고3 11월 29번
@@ -2030,7 +2030,7 @@ practice:
       caution:
         x: '''In other words''를 ''그와는 달리'' 대조로'
         o: 앞 문장을 같은 뜻으로 바꿔 말하는 '다시 말해'
-        tip: in other words/that is/콜론은 앞=뒤, 새 정보 아니라 같은 말 다시.
+        tip: In other words 뒤 'innate drive'는 앞 'innate capacity'를 다시 말한 재진술 — 대조 아님.
   - kind: mc
     sentence: 'So it may well be that this plasticity is an adaptation: a trait that came to exist in a species because it contributed to reproductive fitness.'
     source: 2023 고3 11월 36번
@@ -2061,7 +2061,7 @@ practice:
       caution:
         x: 동격 콜론(:)을 '그래서' 결과로
         o: 앞 'an adaptation'을 '즉 ~한 특성'으로 재정의
-        tip: 콜론은 앞=뒤 동격, 결과 아냐 — 앞 추상어를 '즉'으로 풀어봐.
+        tip: adaptation 뒤 콜론은 'a trait that came to exist ~'로 그 말을 풀어 정의, '그래서'가 아님.
   comparison:
   - kind: mc
     sentence: Free recall tests, in which students need to recall as much as they can remember without prompting, tend to result in better retention than cued recall tests, in which students are given hints about what they need to remember.
@@ -2097,7 +2097,7 @@ practice:
       caution:
         x: 단서 회상이 자유 회상보다 낫다고
         o: 더 나은 쪽은 주어 free recall, than 뒤가 열위
-        tip: 삽입절 길어도 better than 우위는 주어 — 주어부터 짚고 than 뒤를 열위로.
+        tip: better retention than cued recall — 더 나은 건 주어 free recall, than 뒤 cued가 열위.
   - kind: mc
     sentence: But, once an organized game is played with officials, most athletes will not admit to the same fouls or violations as the end goal of winning is more important than expressing concern for competitors.
     source: 2026 고3 11월 30번
@@ -2132,7 +2132,7 @@ practice:
       caution:
         x: 염려 표현이 승리보다 중요하다고
         o: 더 중요한 쪽은 주어 winning
-        tip: more important than 우위는 주어 — than 앞을 우위로 고정해.
+        tip: more important than 앞 'winning'에 무게 — 뒤 expressing concern이 덜 중요.
   - kind: mc
     sentence: By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.
     source: 2022 고3 6월 35번
@@ -2167,7 +2167,7 @@ practice:
       caution:
         x: '''without ~''(정보 없이)가 유리한 쪽이라고'
         o: 유리한 건 앞쪽 정보 수집, than 뒤가 열위
-        tip: than if ~는 열위 가정 — than 뒤 조건이 불리한 쪽이야.
+        tip: than if it takes ~ without such information이 열위 상황 — 정보 수집한 앞쪽이 유리.
   - kind: mc
     sentence: Even a small child, who can communicate by only one word at a time, uses a system for communication that is infinitely superior to any system utilized by any other animal.
     source: 2024 고3 9월 40번
@@ -2202,7 +2202,7 @@ practice:
       caution:
         x: 다른 동물 체계가 더 우월하다고
         o: 우월한 쪽은 아이 체계, to 뒤가 열위
-        tip: superior to는 than 없어도 to 앞이 우위 — 방향은 주어부터.
+        tip: superior to 뒤 'any other animal' 체계가 열위 — 아이의 체계(that절 주어)가 우월.
   - kind: mc
     sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -2237,7 +2237,7 @@ practice:
       caution:
         x: 벌목보다 숲 관리를 택한다고
         o: 택하는 건 벌목, rather than 뒤 관리는 배제
-        tip: rather than 뒤가 버리는 쪽 — 앞을 택하고 뒤를 배제로 고정.
+        tip: rather than manage — 하는 건 cut down, 뒤 manage the forest는 안 하는 쪽.
   - kind: short
     sentence: Cued recall tests, in turn, are better than recognition tests, such as multiple-choice answers, where the correct answer needs to be recognized but not generated.
     source: 2024 고3 6월 29번
@@ -2268,7 +2268,7 @@ practice:
       caution:
         x: 재인 시험이 단서 회상보다 낫다고
         o: 더 나은 쪽은 주어 cued recall, than 뒤가 열위
-        tip: better than 우위는 주어 — than 앞을 우위로.
+        tip: better than 뒤 recognition tests가 열위 — 주어 cued recall이 나은 쪽.
   - kind: short
     sentence: You found it only slightly difficult and conclude that you were climbing quite well, when in fact you were climbing no better than usual.
     source: 2025 고3 6월 21번
@@ -2299,7 +2299,7 @@ practice:
       caution:
         x: '''no better than usual''을 ''평소보다 더 잘''로'
         o: '''조금도 낫지 않은'' — 사실상 평소와 같음'
-        tip: no better than은 '~보다 나을 것 없는' 부정 — no 놓치지 마.
+        tip: no better than usual은 '평소와 다름없음'이란 부정 — '더 잘'로 읽지 마라.
   - kind: short
     sentence: Rather than treating robots as peer agents with their own completely independent agenda, joint cognitive systems approaches treat robots as helpers such as service animals or sheep dogs.
     source: 2022 고3 6월 24번
@@ -2330,7 +2330,7 @@ practice:
       caution:
         x: 문두 'Rather than treating ~'를 '~하기 위해'로
         o: '''~하기보다는''의 배제 — peer agents 취급은 부정'
-        tip: 문두 Rather than은 '~하기보다는' — 그 뒤 내용은 버리는 쪽이야.
+        tip: 문두 Rather than treating은 '~하기보다는'의 배제 — peer agents 취급은 부정, helpers로 봄.
   - kind: short
     sentence: But it's important to recognize the cumulative impact of not prioritizing self‑care and to make sure that in the long term, this is the exception rather than the norm.
     source: 2026 고3 11월 35번
@@ -2363,7 +2363,7 @@ practice:
       caution:
         x: '''예외가 아니라 표준''으로 뒤집어'
         o: '''A rather than B''는 ''B 아니라 A'' — 무게는 예외'
-        tip: A rather than B는 A에 무게 — 앞을 남기고 뒤를 버려.
+        tip: the exception rather than the norm — 'B가 아니라 A', 무게는 앞 exception.
   - kind: short
     sentence: The emphasis on individuality is therefore problematic― rather than actually designing, many successful designer ' personalities' function more as creative managers.
     source: 2022 고3 9월 40번
@@ -2397,7 +2397,7 @@ practice:
       caution:
         x: '''창의적 관리자보다 실제로 디자인한다''로'
         o: rather than 뒤 designing 배제 — 실제는 managers로 기능
-        tip: rather than 뒤가 배제 + function more as의 more는 '~쪽이 더' 강조.
+        tip: rather than actually designing 뒤 designing이 배제 — 실제는 function ~ as managers.
   - kind: mc
     sentence: Because plants tend to recover from disasters more quickly than animals, they are essential to the revitalization of damaged environments.
     source: 2022 고3 9월 35번
@@ -2426,7 +2426,7 @@ practice:
       caution:
         x: 동물이 식물보다 빨리 회복한다고
         o: 앞쪽 식물이 우위, than 뒤 동물이 열위
-        tip: more quickly than 앞이 우위 — than 앞을 빠른 쪽으로.
+        tip: recover more quickly than animals — 빠른 쪽은 주어 plants, than 뒤 animals가 열위.
   - kind: mc
     sentence: For example, a vacuum-cleaning agent that learns to foresee where and when additional dirt will appear will do better than one that does not.
     source: 2023 고3 6월 30번
@@ -2455,7 +2455,7 @@ practice:
       caution:
         x: 예측 못하는 에이전트가 더 낫다고
         o: 앞쪽 예측 학습 쪽이 우위, than 뒤가 열위
-        tip: do better than 앞이 우위 — than 앞을 나은 쪽으로 고정.
+        tip: do better than one that does not — 나은 쪽은 앞 예측 학습 agent, than 뒤가 열위.
   - kind: mc
     sentence: Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches.
     source: 2024 고3 6월 32번
@@ -2484,7 +2484,7 @@ practice:
       caution:
         x: 이전 접근법이 새 아이디어보다 낫다고
         o: 앞쪽 새 아이디어가 우위, than 뒤가 열위
-        tip: work better than 앞이 우위 — than 앞을 나은 쪽으로.
+        tip: work better than previous approaches — 나은 쪽은 앞 good ideas, than 뒤가 열위.
   - kind: mc
     sentence: Technological unemployment would weaken that longstanding arrangement, encouraging an even more extreme version of inequality in which some people receive more income than others and many receive nothing at all.
     source: 2025 고3 6월 40번
@@ -2513,7 +2513,7 @@ practice:
       caution:
         x: 다른 이들이 일부보다 더 받는다고
         o: 앞쪽 일부 사람들이 더 받는 우위, than 뒤가 열위
-        tip: more income than 앞이 많은 쪽 — than 앞을 우위로.
+        tip: receive more income than others — 더 받는 쪽은 앞 some people, than 뒤 others가 열위.
   - kind: mc
     sentence: In a potentially acute situation, then, everyone present will appear more unconcerned than he is in fact.
     source: 2022 고3 6월 42번
@@ -2542,7 +2542,7 @@ practice:
       caution:
         x: 실제보다 덜 태연해 보인다고
         o: 겉으로 보이는 태연함이 실제보다 크다
-        tip: more unconcerned than 앞이 큰 쪽 — 겉모습이 실제를 웃돈다.
+        tip: appear more unconcerned than he is in fact — 겉 태연함이 실제보다 큼, 덜이 아님.
   - kind: mc
     sentence: A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting.
     source: 2023 고3 11월 35번
@@ -2571,7 +2571,7 @@ practice:
       caution:
         x: 고함이 차분한 어조보다 영향력 크다고
         o: 앞쪽 차분한 어조가 우위, than 뒤가 열위
-        tip: more impact than 앞이 우위 — than 앞을 센 쪽으로.
+        tip: more impact than 뒤 shouting이 열위 — 앞 measured tone이 영향력 큰 쪽.
   - kind: mc
     sentence: A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance.
     source: 2024 고3 6월 31번
@@ -2601,7 +2601,7 @@ practice:
       caution:
         x: 원본 보존 중요성이 커진다고
         o: 복제가 싸고 쉬워 원본 보존 가치는 감소
-        tip: diminishing importance는 '줄어드는' — dimin-을 감소 방향으로 못박아.
+        tip: of diminishing importance는 '중요성이 줄어드는' — 쉬운 복제 탓에 원본 가치 감소.
   - kind: mc
     sentence: Understanding how each type of user experiences the current medical environment as well as how each reacts to your prospective designs inevitably produces a better building.
     source: 2026 고3 11월 33번
@@ -2631,7 +2631,7 @@ practice:
       caution:
         x: 사용자 이해가 더 못한 건물을 낳는다고
         o: 사용자 이해가 필연적으로 더 나은 건물로
-        tip: better는 우위 결과 — 'a better X'를 '더 나은'으로 곧이곧대로.
+        tip: produces a better building은 '더 나은' — 사용자 이해가 낫게 만든다, 못하게 아님.
   connective:
   - kind: mc
     sentence: A crowd can thus force inaction on its members by implying, through its passivity, that an event is not an emergency.
@@ -2665,7 +2665,7 @@ practice:
       caution:
         x: '''thus''를 ''그러나'' 역접으로'
         o: thus는 인과(따라서), '응급 아님' 암시로 방관 강요
-        tip: thus는 인과(따라서) — 앞을 원인, 뒤를 결과로 이어.
+        tip: thus는 '따라서' 인과 — passivity가 not an emergency를 암시해 inaction을 강요.
   - kind: mc
     sentence: Thus, parents who reward, force, or cajole their child to do homework are more likely to have a child who does so only when rewarded, cajoled, or forced.
     source: 2024 고3 6월 30번
@@ -2698,7 +2698,7 @@ practice:
       caution:
         x: '''Thus''를 ''그럼에도''로 뒤집어'
         o: Thus는 인과(따라서) — 앞 결론 그대로 이어
-        tip: Thus는 결과 신호 — 역접 아냐, 앞 논리를 그대로 잇는다.
+        tip: 문두 Thus는 '따라서' — 보상·강요하면 '보상받을 때만 하는 아이'라는 앞 논리의 귀결.
   - kind: mc
     sentence: Decades ago, it was unusual for Earth scientists to have results that were of interest to the media, and consequently few media contacts were expected or encouraged.
     source: 2024 고3 11월 42번
@@ -2731,7 +2731,7 @@ practice:
       caution:
         x: '''consequently''를 역접, ''few''를 긍정으로'
         o: consequently는 '그 결과', few는 '거의 없는'
-        tip: consequently는 결과 — few는 '거의 없는' 부정, 같은 방향이야.
+        tip: consequently는 '그 결과' — 앞 unusual이 원인, few media contacts로 이어짐, few는 '거의 없는'.
   - kind: mc
     sentence: Moreover, some critics, who admire his work, are little concerned about his extensive use of computers in the art-making process.
     source: 2022 고3 6월 31번
@@ -2764,7 +2764,7 @@ practice:
       caution:
         x: '''Moreover''를 ''그러나'', ''little concerned''를 ''크게 우려''로'
         o: Moreover는 첨가(게다가), little concerned는 '거의 개의치 않는'
-        tip: Moreover는 첨가 — 앞 주장 보강, little+명사는 '거의 안 ~'.
+        tip: Moreover는 '게다가' 첨가 — little concerned는 '거의 개의치 않는' 부정, 우려 아님.
   - kind: mc
     sentence: Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency.
     source: 2023 고3 6월 35번
@@ -2797,7 +2797,7 @@ practice:
       caution:
         x: 초보자도 전문가만큼 유창하다고
         o: on the other hand는 대조 — 초보자는 '갖추지 못함'
-        tip: on the other hand는 대조 — have not의 부정 놓치지 마.
+        tip: on the other hand는 전문가와 대조 — have not achieved, 초보자는 유창함을 못 갖춤.
   - kind: short
     sentence: According to connectionist theory, however, our knowledge is organized into patterns of activity, and each time we learn something new we have to modify the old patterns so as to keep the old material while adding the new information.
     source: 2024 고3 9월 36번
@@ -2826,7 +2826,7 @@ practice:
       caution:
         x: '''however''를 ''그래서'', ''modify''를 ''그대로 둔다''로'
         o: however는 역접(그러나) — 기존 패턴을 '수정해야'
-        tip: however는 역접 — 통념을 뒤집어, 인과로 읽지 마.
+        tip: however는 '그러나' 역접 — modify the old patterns, 기존 패턴을 수정해야 함.
   - kind: short
     sentence: However, they retain their power of fascination for large, if not massive audiences, who prize the experiential, risk-loaded and one-time event quality they afford.
     source: 2026 고3 11월 40번
@@ -2855,7 +2855,7 @@ practice:
       caution:
         x: '''However''를 ''따라서'', retain·prize를 반대로'
         o: However는 역접 — 여전히 '지니고' 관객은 '소중히 여김'
-        tip: However는 역접(그러나) — 앞과 반대 방향, 인과 아냐.
+        tip: However는 역접 — retain(여전히 지님), prize(소중히 여김)를 반대로 뒤집지 마라.
   - kind: short
     sentence: If we are trying to understand something totally new, however, we need to make larger adjustments to the units of the patterns we already have, which requires changing the strengths of large numbers of connections in our brain, and this is a difficult, tiring process.
     source: 2024 고3 9월 36번
@@ -2884,7 +2884,7 @@ practice:
       caution:
         x: '''however''로 ''조정 거의 없고 쉽다''고'
         o: however는 역접 — 새것은 '더 큰 조정' 필요한 '어려운' 과정
-        tip: however는 역접 — 익숙한 경우와 대비, larger·difficult 살려.
+        tip: however는 역접 — totally new엔 larger adjustments 필요한 difficult 과정.
   - kind: short
     sentence: Instead of the old rule that dressmaking is a craft, a modern connection between dress-design and art was invented that had not been there before.
     source: 2022 고3 9월 33번
@@ -2913,7 +2913,7 @@ practice:
       caution:
         x: '''Instead of''를 ''~에 더해'' 첨가로'
         o: Instead of는 대체(~대신에) — 새 연결은 '이전엔 없던'
-        tip: Instead of는 대체 — 옛것 대신 새것, 첨가로 읽지 마.
+        tip: Instead of the old rule은 '옛 규칙 대신' 대체 — had not been there before, 이전엔 없던 연결.
   - kind: short
     sentence: '"It''ll be amazing to see how he communicated the feelings " of isolation and loneliness in his work," she said eagerly." However, after searching all the exhibition rooms, Emilia and Layla couldn''t find van Gogh''s masterpiece anywhere.'
     source: 2022 고3 9월 45번
@@ -2944,7 +2944,7 @@ practice:
       caution:
         x: '''However''를 ''그래서/게다가'' 순접으로'
         o: However는 역접 — 설렘과 '어디서도 못 찾음'을 반전
-        tip: However는 역접 — 뒤 부정(couldn't ~)과 충돌하면 방향 틀린 거야.
+        tip: However가 설렘과 couldn't find ~ anywhere를 반전 — 순접으로 이으면 부정과 충돌.
   - sentence: Passwords, double-key identification, and biometrics such as fingerprint, iris, and voice recognition are all ways of keeping the account details hidden from potential fraudsters.
     source: 2022 고3 9월 39번
     prompt: '아래 오역은 딱 한 군데를 잘못 읽었다. 어디인가?  ▷ 오역: “지문, 홍채, 음성 인식과는 구별되는 별도의 생체 인식 기술.”'
@@ -2976,7 +2976,7 @@ practice:
       caution:
         x: '''such as A,B,C''를 ''~와는 구별되는''으로'
         o: 상위 biometrics를 좁혀 주는 구체 예시
-        tip: such as는 앞 명사의 예시 — '구별되는 별개' 아니라 그 사례야.
+        tip: such as fingerprint, iris, voice는 앞 biometrics의 예시 — 별개로 구별되는 게 아님.
     kind: mc
   - sentence: Owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -3005,7 +3005,7 @@ practice:
       caution:
         x: 나열을 서로 무관한 별개 항목으로
         o: A·B·C가 상위 'ecosystem services'의 사례
-        tip: '''and other X''는 앞 나열이 X의 예임을 알리는 표지 — 묶어 읽어.'
+        tip: and other ecosystem services — 앞 carbon capture 등이 이 상위 개념의 사례.
     kind: short
   - kind: mc
     sentence: In this manner, subjective experience is extended into the external environment and vice versa; the external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that affect our subjective experience and solutions.
@@ -3040,7 +3040,7 @@ practice:
       caution:
         x: '''such as ~''를 뒤 mental institutions 예시로'
         o: 바로 앞 'disciplinary objects'를 구체화하는 예시
-        tip: such as는 바로 앞 명사에 붙어 — 멀리 있는 보어 말고 직전 명사.
+        tip: such as institutional laws는 바로 앞 disciplinary objects의 예 — becomes 보어 mental institutions 예가 아님.
   - kind: mc
     sentence: Personal flair is without doubt an absolute necessity in some product categories, particularly relatively small objects, with a low degree of technological complexity, such as furniture, lighting, small appliances, and housewares.
     source: 2022 고3 9월 40번
@@ -3074,7 +3074,7 @@ practice:
       caution:
         x: '''such as ~''를 앞부분과 별개 병렬로'
         o: 바로 앞 'small objects'를 구체화하는 예시
-        tip: particularly→such as는 범주→대상→예시로 좁힘 — 병렬 아닌 한 덩어리.
+        tip: such as furniture는 앞 small objects의 예 — 범주→작은 물건→예시로 좁혀지는 한 덩어리.
   - kind: short
     sentence: Passwords, double‑key identification, and biometrics such as fingerprint‑, iris‑, and voice recognition are all ways of keeping the account details hidden from potential fraudsters, of keeping your data dark.
     source: 2022 고3 9월 39번
@@ -3104,7 +3104,7 @@ practice:
       caution:
         x: '''such as ~'' 예시를 네 번째 주어로'
         o: biometrics의 예시라 주어는 셋
-        tip: such as는 앞 명사의 예시 — 주어 목록에 더하지 마.
+        tip: such as fingerprint~는 앞 biometrics의 예 — 주어는 셋, 뒤 of keeping your data dark는 환언.
   - kind: short
     sentence: If automobile manufacturers are required to measure and publicize the safety characteristics of cars, potential car purchasers can trade safety concerns against other attributes, such as price and styling.
     source: 2023 고3 11월 23번
@@ -3134,7 +3134,7 @@ practice:
       caution:
         x: '''such as price·styling''을 safety concerns 예시로'
         o: 바로 앞 'other attributes'를 구체화하는 예시
-        tip: such as는 직전 명사의 예시 — trade A against B의 B쪽 속성이야.
+        tip: such as price and styling은 앞 other attributes의 예 — safety concerns의 예 아님.
   - kind: short
     sentence: Increasingly, food ads helped shoppers become accustomed ', to new definitions of words such as "fresh" and "natural," ' definitions that could well be considered opposite of their traditional meanings.
     source: 2024 고3 6월 23번
@@ -3164,7 +3164,7 @@ practice:
       caution:
         x: '''such as''를 definitions 예시로, 뒤 definitions를 새 주어로'
         o: such as는 앞 words의 예시, 뒤 definitions는 동격 반복
-        tip: such as는 직전 명사(words)의 예시 — 콤마 뒤 명사는 앞을 받은 동격.
+        tip: such as "fresh", "natural"은 앞 words의 예 — 뒤 definitions는 new definitions의 동격 반복.
   - kind: short
     sentence: Due to their low acquisition and maintenance costs, cargo bicycles convey much potential in developed and becak( ) developing countries alike, such as the becak (a three‑wheeled bicycle) in Indonesia.
     source: 2023 고3 11월 22번
@@ -3194,7 +3194,7 @@ practice:
       caution:
         x: '''such as the becak''을 나라의 예시로'
         o: 괄호가 '자전거'로 못박아 cargo bicycles의 사례
-        tip: such as는 직전 명사의 예시 — 괄호 동격 단서로 무엇의 예인지 확인.
+        tip: 괄호 (a three-wheeled bicycle)가 becak을 자전거로 못박음 — cargo bicycles의 예, 나라 예 아님.
   - kind: mc
     sentence: However, the most direct approach to managing automobile demand is making motorized travel more expensive or restricting it with administrative rules.
     source: 2022 고3 6월 30번
@@ -3222,7 +3222,7 @@ practice:
       caution:
         x: '''However''를 ''게다가'', ''most direct''를 간접으로'
         o: However는 역접, 가장 '직접적인' 방법
-        tip: However는 역접(앞과 대조) — 첨가로 읽지 말고 most direct 살려.
+        tip: However는 역접, most direct는 '가장 직접적인' — 게다가·간접으로 뒤집지 마라.
   - kind: mc
     sentence: Consequently, more consideration is being given to other ways to manage pests, such as incorporating greater resistance to pests into cultivars by breeding and using other biological control methods.
     source: 2022 고3 6월 38번
@@ -3250,7 +3250,7 @@ practice:
       caution:
         x: '''Consequently''를 ''그럼에도 불구하고''로'
         o: 앞 결과를 잇는 '그 결과' — such as는 예시
-        tip: Consequently는 인과어 — 앞 결과로 고정, 역접 금지.
+        tip: '''Consequently''는 앞 문제의 귀결 ''그 결과''—역접 아님, such as는 예시.'
   - kind: mc
     sentence: In the old days, however, the client was always primary and her tailor was an obscure craftsman, perhaps talented but perhaps not.
     source: 2022 고3 9월 33번
@@ -3278,7 +3278,7 @@ practice:
       caution:
         x: '''however'' 무시하고 과거·현재를 같게'
         o: 대조되는 과거, 'always primary'는 고객 우선
-        tip: however는 대조 신호 — 앞뒤 반대인지 보고 순위 뒤집지 마.
+        tip: however로 과거 vs 현재 대조—'always primary'는 과거엔 고객이 우선이란 뜻.
   - kind: mc
     sentence: However, those data do not actually show that different cultures have different emotions, if we think of emotions as central, neurally implemented states.
     source: 2022 고3 6월 23번
@@ -3306,7 +3306,7 @@ practice:
       caution:
         x: '''do not actually show''를 ''분명히 보여준다''로'
         o: 부정이라 '그 점을 입증하지 못한다'가 요지
-        tip: However 뒤엔 부정어가 흔해 — 극성부터 확인해.
+        tip: '''do not actually show''는 부정—자료가 그 점을 입증 못함, actually에 속지 마라.'
   - kind: mc
     sentence: For example, Wade Guyton, an abstractionist who uses a word processing program and inkjet printers, does not call himself a computer artist.
     source: 2022 고3 6월 31번
@@ -3334,7 +3334,7 @@ practice:
       caution:
         x: '''does not call''을 ''예술가라 부른다''로'
         o: 부정이라 '예술가라 부르지 않는다'
-        tip: does not는 동사 부정 — 예시 속이라도 not 놓치지 마.
+        tip: '''does not call himself''—컴퓨터 써도 자칭 컴퓨터 예술가 아님, not 위치 확인.'
   - kind: mc
     sentence: For example, energy efficiency requirements for appliances may produce goods that work less well or that have characteristics that consumers do not want.
     source: 2023 고3 11월 23번
@@ -3362,7 +3362,7 @@ practice:
       caution:
         x: '''work less well/do not want''를 긍정으로'
         o: 둘 다 부정 → 성능 저하·원치 않는 제품
-        tip: less well/do not want는 부정 극성 — 뒷받침인지 부작용인지 봐.
+        tip: '''less well''과 ''do not want'' 둘 다 부정—규제가 낳는 부작용 예시.'
   - kind: mc
     sentence: However, one part of your brain sees its shape, another sees color, another detects location, and another perceives movement.
     source: 2023 고3 11월 24번
@@ -3390,7 +3390,7 @@ practice:
       caution:
         x: '''one ... another''를 한 부분이 다 처리로'
         o: 부위별로 나눠 맡는 분업 나열
-        tip: one...another는 분담 나열 — 한 주체가 전부 하는 게 아냐.
+        tip: '''one...another'' 나열은 부위별 분업—모양·색·위치·움직임을 나눠 맡음.'
   polarity_positive:
   - kind: mc
     sentence: Improving the quality of alternative options, such as walking, cycling, and public transport, is a central element of this strategy.
@@ -3424,7 +3424,7 @@ practice:
       caution:
         x: '''a central element''를 ''여러 요소 중 하나''로'
         o: central은 '핵심' → 필자 주장의 중심
-        tip: central/key는 강조어 — '여럿 중 하나'로 흘리지 마.
+        tip: '''central element''는 ''핵심 요소''—전략의 중심이지 곁가지 하나가 아님.'
   - kind: mc
     sentence: Rather than irrelevant, moral questions are fundamental to the imposition of tax.
     source: 2022 고3 9월 22번
@@ -3457,7 +3457,7 @@ practice:
       caution:
         x: '''are fundamental to''를 ''무관하지 않다''로'
         o: fundamental은 '근본적' → 핵심 토대
-        tip: fundamental은 강한 긍정어 — 약화 말고 '핵심 토대'로.
+        tip: '''fundamental to''는 ''근본 토대''—''무관하지 않다''로 약화 말고 ''핵심''으로.'
   - kind: mc
     sentence: Many signals are now seen as having this information gathering or assessment function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options.
     source: 2022 고3 6월 35번
@@ -3490,7 +3490,7 @@ practice:
       caution:
         x: '''directly/vital''을 ''대략·간접''으로 흘림'
         o: '''직접'' 기여, ''필수'' 정보 → 결정적 역할'
-        tip: directly/vital 같은 강조어 — 흐리게 옮기지 마.
+        tip: '''directly''와 ''vital'' 둘 다 강조—직접 기여, 필수 정보란 결정적 역할.'
   - kind: mc
     sentence: The adjustments are clearly smallest when the new information is only slightly new—when it is compatible with what we already know, so that the old patterns need only a little bit of adjustment to accommodate the new knowledge.
     source: 2024 고3 9월 36번
@@ -3523,7 +3523,7 @@ practice:
       caution:
         x: '''clearly''를 ''다소 불분명''으로 뒤집음'
         o: clearly는 '분명히' → 확실하다는 확신
-        tip: clearly는 확신 표지 — '불분명'으로 뒤집지 마.
+        tip: '''clearly smallest''—조정이 분명히 가장 작다는 확신, ''불분명''으로 뒤집지 마.'
   - kind: short
     sentence: At the same time, it is important to recognize that, no matter how fast they grow, countries where a large part of the population derive their livelihood from uncertain sources cannot hope to prevent famines without specialized entitlement protection mechanisms involving direct public intervention.
     source: 2024 고3 6월 40번
@@ -3552,7 +3552,7 @@ practice:
       caution:
         x: '''no matter how fast''를 ''성장하면 막는다''로'
         o: '''아무리 성장해도'' → 직접 개입 없인 못 막음'
-        tip: no matter how ~는 양보('아무리 ~해도') — 조건으로 읽지 마.
+        tip: '''no matter how fast they grow''는 ''아무리 성장해도''—직접 개입이 필요하다는 강조.'
   - kind: short
     sentence: In fact, this attention to audience and appropriateness may be even more important in writing than in conversation because writing does not permit the nonverbal communication and immediate feedback that are part of conversation.
     source: 2026 고3 11월 32번
@@ -3581,7 +3581,7 @@ practice:
       caution:
         x: '''even more important''를 ''비슷하게''로 흘림'
         o: '''대화보다 글쓰기에서 훨씬 더'' 중요'
-        tip: even more는 비교 우위 강조 — '비슷하게'로 뭉개지 마.
+        tip: '''even more important ... than''—대화보다 글쓰기에서 훨씬 더 중요, 비교 우위 살려.'
   - kind: short
     sentence: Since that time, it has become apparent that broadly effective pesticides can have harmful effects on beneficial insects, which can negate their effects in controlling pests, and that persistent pesticides can damage non-target organisms in the ecosystem, such as birds and people.
     source: 2022 고3 6월 38번
@@ -3610,7 +3610,7 @@ practice:
       caution:
         x: '''apparent''를 ''막연한 추측''으로 약화'
         o: apparent는 '분명해진 사실' → 확정성
-        tip: apparent는 확정 표지 — '추측'으로 약화 말고 '사실'로.
+        tip: '''has become apparent''는 ''분명해진 사실''—막연한 추측이 아님.'
   - kind: mc
     sentence: 'If we psychologists are too bent on identifying the orderly pattern, the regularities of children''s minds, we may miss an essential and pervasive characteristic of our topic: the child''s more unruly and imaginative ways of talking and thinking.'
     source: 2022 고3 9월 34번
@@ -3646,7 +3646,7 @@ practice:
       caution:
         x: '''may miss''를 ''발견·알아차리다''로 뒤집음'
         o: miss는 '놓치다' → 핵심을 놓친다는 경고
-        tip: 강조어에 이끌려 긍정 결과로 오독 마 — miss는 '놓치다'.
+        tip: '''may miss''는 핵심을 ''놓칠 수 있다''는 경고—essential 강조와 함께, 콜론 뒤는 그 특성.'
   - kind: mc
     sentence: Mobility flows have become a key dynamic of urbanization, with the associated infrastructure invariably constituting the backbone of urban form.
     source: 2023 고3 6월 24번
@@ -3674,7 +3674,7 @@ practice:
       caution:
         x: '''key/backbone''을 부차적인 걸로 봄'
         o: 핵심 → 이동 흐름이 도시화의 중심 축
-        tip: key/backbone은 중심 강조 — 사소함으로 뒤집지 마.
+        tip: '''key dynamic''과 ''backbone''—이동 흐름이 도시화의 중심 축·근간, 사소함 아님.'
   - kind: mc
     sentence: Because experts have extensive practice within a limited domain, the key component skills in their domain tend to be highly practiced and more automated.
     source: 2023 고3 6월 35번
@@ -3702,7 +3702,7 @@ practice:
       caution:
         x: '''key/highly practiced''를 미숙으로 봄'
         o: 둘 다 강조 → 핵심 기술이 고도로 숙달
-        tip: highly practiced는 숙달 강조 — 미숙으로 뒤집지 마.
+        tip: '''key''와 ''highly practiced''—핵심 기술이 고도로 숙달·자동화, 미숙 아님.'
   - kind: mc
     sentence: Ever since, the practice of portraying shadows has evolved along with critical analysis of them, as artists and theoreticians have engaged in an ongoing debate about the significance of shadow representation.
     source: 2024 고3 6월 24번
@@ -3730,7 +3730,7 @@ practice:
       caution:
         x: '''significance''를 사소함으로 뒤집음'
         o: '''중요성'' → 지속적 논의 대상'
-        tip: significance는 중요성 강조어 — 사소함으로 뒤집지 마.
+        tip: '''significance''—그림자 표현의 ''중요성''이 지속 논쟁 대상, 사소함 아님.'
   - kind: mc
     sentence: For example, performance evaluation and reward systems that reinforce long-term performance and the development and sharing of new skills and knowledge are particularly important.
     source: 2024 고3 6월 37번
@@ -3758,7 +3758,7 @@ practice:
       caution:
         x: '''particularly important''를 ''안 중요''로'
         o: 중요성 강조 → 특히 중요, reinforce는 강화
-        tip: particularly important는 강조 — 반대로 뒤집지 마.
+        tip: '''particularly important''—특히 중요하다는 강조, reinforce도 ''강화''.'
   - kind: mc
     sentence: In highly representational paintings, plays, or stories, the focus is on subject matter that resembles everyday life and the role of background style is to facilitate the construction of mental models.
     source: 2024 고3 6월 39번
@@ -3786,7 +3786,7 @@ practice:
       caution:
         x: '''focus is on''을 배경 양식 쪽으로 옮김'
         o: 초점은 소재에, facilitate는 '돕다'
-        tip: focus is on 뒤 명사가 초점 — 딴 명사로 옮기지 마.
+        tip: '''focus is on subject matter''—초점은 소재에, 배경 양식은 facilitate 보조역.'
   - kind: mc
     sentence: In highly expressionist works, novel stylistic devices work in an inharmonious manner against the subject matter thereby creating a disquieting atmosphere.
     source: 2024 고3 6월 39번
@@ -3814,7 +3814,7 @@ practice:
       caution:
         x: '''highly/inharmonious''를 조화로 읽음'
         o: 정도 강조 + 대립 → 부조화하게 부딪침
-        tip: inharmonious/against는 대립어 — 조화로 뒤집지 마.
+        tip: '''highly''+''inharmonious''—양식이 소재와 심하게 부조화로 부딪침, 조화 아님.'
   - kind: mc
     sentence: As a matter of course they can enquire about the availability of pieces from dealers in other cities and, most crucially in some categories, from overseas.
     source: 2024 고3 9월 35번
@@ -3841,7 +3841,7 @@ practice:
       caution:
         x: '''most crucially''를 ''전혀 중요치 않다''로'
         o: 가장 결정적으로 중요하다는 강조
-        tip: most crucially는 최상급 강조 — '안 중요'로 뒤집지 마.
+        tip: '''most crucially''는 ''가장 결정적으로 중요''—해외 조달이 특히 중요하다는 강조.'
   - kind: mc
     sentence: Because this information was the key to their profitability, these firms worked in relative secrecy, frequently built on family ties, trust, and loyalty.
     source: 2026 고3 11월 31번
@@ -3868,7 +3868,7 @@ practice:
       caution:
         x: '''the key to profitability''를 ''상관없다''로'
         o: key → 수익성의 결정적 핵심
-        tip: the key to ~는 '~의 핵심' — '상관없다'로 뒤집지 마.
+        tip: '''the key to their profitability''—정보가 수익성의 결정적 핵심, ''상관없다'' 아님.'
   - kind: mc
     sentence: Diaries were central media through which enlightened and free subjects could be constructed.
     source: 2023 고3 11월 21번
@@ -3895,7 +3895,7 @@ practice:
       caution:
         x: '''central media''를 ''부수적 매체''로'
         o: central은 '중심' → 주체 형성의 핵심 매체
-        tip: central은 중심 강조어 — '부수적'으로 뒤집지 마.
+        tip: '''central media''는 ''중심 매체''—주체 형성의 핵심 통로, 부수적 아님.'
   polarity_negative:
   - kind: mc
     sentence: Emergencies are not always clearly labeled as such; "smoke" pouring into a waiting room may be caused by fire, or it may merely indicate a leak in a steam pipe.
@@ -3929,7 +3929,7 @@ practice:
       caution:
         x: '''not always''를 ''결코 아니다''로'
         o: '''항상 ~인 것은 아니다''는 부분부정'
-        tip: not+always는 부분부정('모두 ~은 아니다') — '결코'로 과장 마.
+        tip: '''not always''는 부분부정 ''항상 ~는 아니다''—''결코 아니다''(전체부정) 아님.'
   - kind: mc
     sentence: Although we each may have the subjective impression that we are careful thinkers, we often make snap judgments or no real judgments at all.
     source: 2024 고3 9월 30번
@@ -3962,7 +3962,7 @@ practice:
       caution:
         x: '''no ... at all''을 ''조금은 한다''로'
         o: no+at all → '진정한 판단을 전혀 안 함'
-        tip: no ~ at all은 완전부정 — at all을 강조로 오독 마.
+        tip: '''no real judgments at all''—진정한 판단을 ''전혀'' 안 함, at all이 완전부정 강조.'
   - kind: mc
     sentence: On the Internet, there are no regulations preventing a kindergarten teacher from offering medical advice or a physician from suggesting ways to safely make structural changes to your home.
     source: 2022 고3 9월 30번
@@ -3995,7 +3995,7 @@ practice:
       caution:
         x: '''no regulations''를 ''규제가 있다''로'
         o: no → '막는 규제가 없다'는 존재 부정
-        tip: there are no ~는 존재 부정 — '있다'로 뒤집지 마.
+        tip: '''no regulations preventing''—막는 규제가 ''없다'', no 놓치면 정반대.'
   - kind: mc
     sentence: While many city shoppers were clearly drawn to the notion of buying and eating foods associated with nature, the nature claimed by the ads was no longer the nature that created the foods.
     source: 2024 고3 6월 23번
@@ -4028,7 +4028,7 @@ practice:
       caution:
         x: '''no longer the nature''를 ''여전히 ~이었다''로'
         o: no longer는 '더 이상 ~아니다' → 이전 상태 종료
-        tip: no longer는 '더 이상 아니다' — '여전히'로 뒤집지 마.
+        tip: '''no longer''는 ''더 이상 ~아니다''—광고 속 자연은 이제 그 음식 만든 자연 아님.'
   - kind: mc
     sentence: Science is sometimes described as a winner-take-all contest, meaning that there are no rewards for being second or third.
     source: 2024 고3 11월 38번
@@ -4061,7 +4061,7 @@ practice:
       caution:
         x: '''no rewards''를 ''보상이 있다''로'
         o: no → 2·3등엔 보상 없음(승자 독식)
-        tip: no rewards는 부재 — no 놓쳐 '있다'로 뒤집지 마.
+        tip: '''no rewards for being second or third''—2·3등엔 보상 ''없음''(승자독식).'
   - kind: short
     sentence: By using contingency pricing, clients are ensured that they pay no fees until they receive a settlement.
     source: 2023 고3 11월 37번
@@ -4090,7 +4090,7 @@ practice:
       caution:
         x: '''pay no fees until''을 ''수수료를 낸다''로'
         o: no → 합의 전까진 어떤 수수료도 안 냄
-        tip: pay no fees의 no는 완전부정 — '낸다'로 뒤집지 마.
+        tip: '''pay no fees until''—합의 전까진 어떤 수수료도 안 냄, no 놓치지 마.'
   - kind: short
     sentence: In his early studies on musical performance, Carl Seashore discovered that musicians only rarely play two equal notes in exactly the same way.
     source: 2022 고3 9월 24번
@@ -4119,7 +4119,7 @@ practice:
       caution:
         x: '''only rarely play''를 ''자주 연주한다''로'
         o: only rarely는 '극히 드물게만'(준부정)
-        tip: rarely는 준부정('거의 안') — '자주'로 빈도 뒤집지 마.
+        tip: '''only rarely play''—두 음 똑같이 치는 일 극히 드묾, ''자주''로 뒤집지 마.'
   - kind: short
     sentence: We can see the world only as it appears to us, not as it truly is, because there is no as it truly is without a perspective to give it form.
     source: 2022 고3 6월 21번
@@ -4148,7 +4148,7 @@ practice:
       caution:
         x: '''no ... without''을 ''관점 없이도 있다''로'
         o: 이중 부정 → 관점 없인 있는 그대로가 없다
-        tip: no ... without은 이중부정 — 'A 없인 B 없다'로 풀어.
+        tip: '''no ... without a perspective''—관점 없인 있는 그대로가 ''없다'', 이중부정.'
   - kind: short
     sentence: However, in the virtual world, we have a tendency to be less defensive, as there appears to be no physical threat to our well-being.
     source: 2023 고3 6월 22번
@@ -4177,7 +4177,7 @@ practice:
       caution:
         x: '''less/no''를 ''더 방어적·위협 있음''으로'
         o: less·no → '덜 방어적', '위협 없어 보임'
-        tip: less/no 두 곳 다 확인 — 하나만 놓쳐도 극성 뒤집혀.
+        tip: '''less defensive''와 ''no physical threat'' 둘 다 부정—덜 방어적, 위협 없어 보임.'
   - kind: short
     sentence: Moreover farmers can rarely acquire payoff information on more than a few of the production methods they might use.
     source: 2022 고3 9월 23번
@@ -4206,7 +4206,7 @@ practice:
       caution:
         x: '''can rarely acquire''를 ''자주 얻는다''로'
         o: rarely는 '좀처럼 ~않다'(준부정)
-        tip: rarely는 준부정 — can과 붙어도 '자주'로 뒤집지 마.
+        tip: '''rarely acquire''—좀처럼 정보를 못 얻음, rarely 준부정을 ''자주''로 읽지 마.'
   - kind: short
     sentence: A company may devise a family emergency leave plan that allows employees the opportunity to be away from the company for a period of no longer than three hours, and no more than once a month, for illness in the employee's immediate family.
     source: 2023 고3 11월 39번
@@ -4235,7 +4235,7 @@ practice:
       caution:
         x: '''no longer/more than''을 ''이상''으로'
         o: 둘 다 상한 → 최대 3시간, 월 최대 1회
-        tip: no more/longer than은 상한('~이하') — '이상'으로 뒤집지 마.
+        tip: '''no longer than three hours'' ''no more than once''는 상한—최대치, ''이상'' 아님.'
   - kind: mc
     sentence: Ideas about the social world become part of our worldview without our necessarily being aware of the source of the particular idea or that we even hold the idea at all.
     source: 2022 고3 9월 37번
@@ -4263,7 +4263,7 @@ practice:
       caution:
         x: '''without ... necessarily''를 ''언제나 인식''으로'
         o: without+necessarily → '꼭 인식하는 건 아니다'
-        tip: without+necessarily는 부분부정 — 완전 긍정으로 읽지 마.
+        tip: '''without ... necessarily''는 부분부정—출처를 꼭 인식하는 건 아님, ''언제나 인식'' 아님.'
   - kind: mc
     sentence: Even today, you might find it surprising to learn about people who see an object without seeing where it is, or see it without seeing whether it is moving.
     source: 2023 고3 11월 24번
@@ -4291,7 +4291,7 @@ practice:
       caution:
         x: '''without seeing''을 ''다 본다''로'
         o: without은 '~없이' → A만 보고 B는 못 봄
-        tip: see A without B는 'B 없이 A' — B는 못 본다로.
+        tip: '''see ... without seeing where/whether''—대상은 봐도 위치·움직임은 못 봄.'
   - kind: mc
     sentence: Each of these highly practiced skills then demands relatively few cognitive resources, effectively lowering the total cognitive load that experts experience.
     source: 2023 고3 6월 35번
@@ -4319,7 +4319,7 @@ practice:
       caution:
         x: '''few''를 ''상당히 많은''으로'
         o: few는 '거의 없음'(준부정), lowering은 감소
-        tip: a 없는 few는 준부정('거의 없는') — 많음으로 뒤집지 마.
+        tip: '''relatively few resources''—자원이 거의 안 듦, lowering도 감소, 많음 아님.'
   - kind: mc
     sentence: For example, owners of forest lands have a market incentive to cut down trees rather than manage the forest for carbon capture, wildlife habitat, flood protection, and other ecosystem services.
     source: 2024 고3 11월 23번
@@ -4347,7 +4347,7 @@ practice:
       caution:
         x: '''rather than manage''를 숲 관리 선택으로'
         o: rather than은 '~보다는' → 관리 배제, 벌목 유인
-        tip: rather than 뒤는 버리는 쪽 — 선택 아닌 배제로 잡아.
+        tip: '''cut down ... rather than manage''—숲 관리보다 벌목 선택, rather than은 뒤를 배제.'
   - kind: mc
     sentence: In the 1970s, the few scientists who spoke frequently with the media were often criticized by their fellow scientists for having done so.
     source: 2024 고3 11월 42번
@@ -4375,7 +4375,7 @@ practice:
       caution:
         x: '''the few scientists''를 다수로'
         o: few는 '소수'(준부정), 그 소수가 비판받음
-        tip: a 없는 few는 '소수' — 다수로 뒤집지 마.
+        tip: '''the few scientists who spoke''—언론과 얘기한 건 소수, 그 소수가 비판받음.'
   - kind: mc
     sentence: 'While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.'
     source: 2024 고3 6월 32번
@@ -4402,4 +4402,4 @@ practice:
       caution:
         x: '''rarely is the final goal''을 ''대개 최종 목표''로'
         o: rarely='거의 ~않다' → '최종 목표인 경우 드물다'
-        tip: rarely/seldom/hardly는 부정어 — 긍정으로 옮기면 극성 뒤집혀.
+        tip: '''rarely is''의 rarely는 부정어 — ''최종 목표인 경우 드물다''로 뒤집어.'
