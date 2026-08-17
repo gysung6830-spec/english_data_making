@@ -128,7 +128,12 @@
       <div class="cloze-a"><span class="sol-tag">채운 직독직해</span>{% set ta = namespace(n=0) %}{% for c in s.cloze.ko %}{%- if c.trap %}{% set ta.n = ta.n + 1 %}<span class="tf"><span class="tm">{{ tnums[ta.n-1] }}</span>{{ c.t }}</span>{% elif c.v %}{{ c.t | replace(c.v, '<u class="vf">' + c.v + '</u>') | safe }}{% else %}{{ c.t }}{% endif -%}{% if not loop.last %} <b class="cs">/</b> {% endif %}{% endfor %}</div>
     {% elif s.cut %}<div class="sol cut"><span class="sol-tag">끊어읽기{% if pr.kind == 'short' %} · 해석{% endif %}</span>{{ s.cut }}</div>{% endif %}
     {% if s.author_msg %}<div class="sol msg"><span class="sol-tag">이 정도는 캐치</span>{{ s.author_msg }}</div>{% endif %}
-    {% if s.caution or s.wrong_why %}<div class="sol caution"><b class="warn-lead">⚠ 이거 조심! (오역 주의)</b>{{ s.caution if s.caution else s.wrong_why }}</div>
+    {% if s.caution and s.caution.x %}<div class="sol caution">
+      <div class="cau-h">⚠ 이거 조심! · 오역 주의</div>
+      <div class="cau-x">{{ s.caution.x }} <span class="mk mx">(✗)</span></div>
+      <div class="cau-o">{{ s.caution.o }} <span class="mk mo">(○)</span></div>
+      {% if s.caution.tip %}<div class="cau-tip"><b class="tip-lead">💡 전략</b> {{ s.caution.tip }}</div>{% endif %}</div>
+    {% elif s.wrong_why %}<div class="sol caution"><b class="warn-lead">⚠ 이거 조심! (오역 주의)</b>{{ s.wrong_why }}</div>
     {% elif s.key_points %}<div class="sol key"><span class="sol-tag">주요 구문</span> {{ s.key_points[0] | oneline }}</div>{% endif %}
     {% endif %}
   </div>
