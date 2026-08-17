@@ -714,6 +714,29 @@ def mugwan_opts(mug):
     return f'<div class="opts">{"".join(out)}</div>'
 
 
+def mugwan_direct(mug):
+    """무관(35) 해석 카드 — 도입 + ①~⑤ 다섯 문장 전부 영↔한, 무관(정답) 문장 표시."""
+    intro = mug.get("intro", ""); intro_ko = mug.get("intro_ko", "")
+    cands = mug.get("cands", []); cands_ko = mug.get("cands_ko", [])
+    irr = mug.get("irrelevant", 0)
+    rows = ""
+    if intro:
+        rows += (f'<div class="row"><span class="bn bn-i">도입</span>'
+                 f'<div class="en">{esc(intro)}</div>'
+                 f'<div class="ko">{esc(intro_ko)}</div></div>')
+    for i, en in enumerate(cands, 1):
+        ko = cands_ko[i-1] if i-1 < len(cands_ko) else ""
+        if i == irr:
+            rows += (f'<div class="row mgirr"><span class="bn irr">{CIRCLED[i-1]}</span>'
+                     f'<div class="en">{esc(en)}</div>'
+                     f'<div class="ko">{esc(ko)}<span class="mgtag">✕ 흐름과 무관 = 정답</span></div></div>')
+        else:
+            rows += (f'<div class="row"><span class="bn">{CIRCLED[i-1]}</span>'
+                     f'<div class="en">{esc(en)}</div>'
+                     f'<div class="ko">{esc(ko)}</div></div>')
+    return rows
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -845,6 +868,10 @@ def render_spread(rec, c, idx):
                       if seqtype == "순서" else
                       "🔗 조각별 해석 — <b>넣을 문장의 지시어</b>가 앞을 받아 <b>끊긴 흐름</b>을 메우는지 확인")
         step3_body = seam_block(seqd)
+    elif mug:
+        step3_kind = "STEP 3 · 해석 (다섯 문장 전체)"; step3_tm = "①~⑤ 전문장"
+        step3_head = "🔍 다섯 문장 전체 해석 — ①~⑤ 중 <b>흐름과 무관한 정답 문장</b>까지 모두 확인"
+        step3_body = mugwan_direct(mug)
     else:
         step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
         step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
@@ -1380,6 +1407,12 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .hl0{ background:#c9e0ec; } .hl1{ background:#c7e0da; } .hl2{ background:#e8dfb2; } .hl3{ background:#e2dac8; } .hl4{ background:#d5ddb9; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
 .dchl .opt-line .co{ color:var(--src-line); font-weight:800; } .dchl .opt-line .xo{ color:var(--trap); font-weight:700; }
+/* 무관(35) 다섯 문장 해석카드 */
+.dchl .bn.bn-i{ width:auto; padding:0 5px; border-radius:7px; font-size:7.6px; }
+.dchl .row.mgirr{ background:#fdecea; border-radius:5px; padding:4px 6px 4px 21px; margin-left:-2px; }
+.dchl .row.mgirr .bn.irr{ left:2px; top:5px; background:var(--trap); }
+.dchl .row.mgirr .en{ font-weight:600; }
+.mgtag{ display:inline-block; font-size:7.6px; font-weight:800; color:#fff; background:var(--trap); border-radius:7px; padding:0 6px; margin-left:5px; vertical-align:1px; }
 /* 순서·삽입 이음매형 해석카드 */
 .seamwrap{ margin-top:2px; }
 .seamrow{ display:flex; gap:7px; padding:5px 0; border-bottom:1px dashed #dbe6f0; }

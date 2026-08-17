@@ -1959,7 +1959,15 @@
     "Animals, by contrast, invest heavily in learned behaviors that help them avoid predators and find food.",
     "After being disturbed, a plant community can adjust its composition through regeneration, mainly resprouting and reseeding."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "식물은 재난으로부터 회복하는 놀라운 능력을 지니고 있다.",
+   "cands_ko": [
+    "이는 주로 식물이 자신의 기관을 다시 만들어 내는 조직에 우선적으로 접근할 수 있기 때문이다.",
+    "식물은 생애 주기 내내 분열조직(meristem)을 지니고 있는데, 이는 새로운 싹과 다른 기관으로 분화할 수 있는 미분화 조직 영역이다.",
+    "이 현상은 작은 상처의 치유에서부터 식물 전체의 재생에 이르기까지 매우 다양한 규모로 일어난다.",
+    "이와 대조적으로 동물은 포식자를 피하고 먹이를 찾는 데 도움이 되는 학습된 행동에 많은 투자를 한다.",
+    "교란을 받은 후에 식물 군집은 재생, 주로 다시 싹을 틔우고 다시 씨를 뿌리는 것을 통해 그 구성을 조정할 수 있다."
+   ]
   },
   "vlist": [
    {
@@ -4864,7 +4872,15 @@
     "With regard to such misperceptions, organizations must train managers to evaluate workers by results rather than by hours seen at a desk.",
     "Only when these barriers are removed will flexible workplace programs gain full acceptance."
    ],
-   "irrelevant": 3
+   "irrelevant": 3,
+   "intro_ko": "조직들이 재택근무와 같은 유연한 근무 방식을 점점 더 많이 제공하고 있음에도 불구하고, 이러한 제도의 수용과 활용은 여전히 다양한 요인들에 의해 제한되고 있다.",
+   "cands_ko": [
+    "이러한 요인에는 관리자의 대면 관리 관행에 대한 의존, 조직 내 재택근무 교육의 부재, 유연 근무 제도에 대한 오해와 불편함, 그리고 그것이 조직의 최종 수익에 미치는 영향에 대한 제한된 이해가 포함된다.",
+    "한 가지 지배적인 장벽은 진정한 생산성에 물리적 존재가 필수적이라는 믿음이다. 이 때문에 재택근무를 하는 직원들은 흔히 사무실에 있는 직원들보다 덜 헌신적인 것으로 여겨진다.",
+    "새로운 디지털 기기는 매년 등장하며, 기업들은 글로벌 소비자 시장에 가장 적합한 제품을 설계하기 위해 치열하게 경쟁한다.",
+    "그러한 오해와 관련하여, 조직은 관리자가 책상에 앉아 있는 것이 목격된 시간이 아니라 성과로 직원을 평가하도록 교육해야 한다.",
+    "이러한 장벽들이 제거될 때에야 비로소 유연 근무 제도가 온전한 수용을 얻게 될 것이다."
+   ]
   },
   "vlist": [
    {
@@ -7676,7 +7692,15 @@
     "The colorful feathers of many male songbirds evolved mainly to attract mates rather than to improve their singing.",
     "Eventually the young bird’s song overlaps almost completely with the tutor’s, an accurate copy produced through this long process of listening and self-correction."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "어린 명금(鳴禽)은 자신의 노래를 완전히 갖춘 형태로 물려받는 것이 아니라, 대신 어른 스승 새의 노래를 재현하는 법을 배워야 한다.",
+   "cands_ko": [
+    "생애 초기에 어린 새는 이 본보기를 기억하여 일종의 원형(template)으로 저장하는데, 자신의 이후 시도들이 이것과 비교된다.",
+    "처음에는 그 새의 지저귐이 고르지 못하며, 각 음의 높이와 빠르기가 한 번의 시도에서 다음 시도로 넘어갈 때마다 크게 달라진다.",
+    "끊임없는 연습을 통해 그 새는 각 음을 저장된 원형에 더 가깝게 맞춰질 때까지 조정하면서 자신의 발성을 점차 정교하게 다듬는다.",
+    "많은 수컷 명금의 화려한 깃털은 주로 노래 실력을 향상시키기 위해서가 아니라 짝을 유혹하기 위해 진화했다.",
+    "결국 어린 새의 노래는 스승의 노래와 거의 완전히 겹치게 되는데, 이는 듣기와 자기 교정이라는 이 긴 과정을 통해 만들어진 정확한 복제물이다."
+   ]
   },
   "vlist": [
    {
@@ -10066,7 +10090,15 @@
     "Full-time booksellers must, crucially, keep their shop premises open long hours so that passing tourists can browse the latest bestsellers.",
     "In this way, the reach of a specialist dealer can multiply and expand far beyond the walls of any single shop."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "",
+   "cands_ko": [
+    "대부분의 고서적 및 중고 서적 판매상은 특정 책을 대량으로 재고로 보유하지 않는데, 그들이 다루는 각 책이 대개 유일무이하기 때문이다.",
+    "고객이 그저 들어와서 서가에서 원하는 것을 찾을 수 없기 때문에, 판매상은 필연적으로 다른 수단을 통해 자신의 소장 목록을 구축한다.",
+    "당연한 일로서, 판매상은 단골 고객에게 목록과 명단을 정기적으로 돌리고, 그러면 고객은 특정 책의 구입 가능 여부를 문의한다.",
+    "전업 서적 판매상은 결정적으로 매장을 오랜 시간 열어 두어 지나가는 관광객이 최신 베스트셀러를 둘러볼 수 있도록 해야 한다.",
+    "이런 식으로 전문 판매상의 도달 범위는 어떤 단일 매장의 벽을 훨씬 넘어 배가되고 확장될 수 있다."
+   ]
   },
   "vlist": [
    {
@@ -37306,7 +37338,15 @@
     "The oldest member of the family makes the decisions on important issues, no matter how far away family members live from each other.",
     "In contrast to the traditional extended family where kin always live in close proximity, the members of modified extended families may freely move away from kin to seek opportunities for occupational advancement."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "친족 관계는 오늘날에도 여전히 중요하다. 미국과 같은 현대 사회에서 사람들은 자주 가족 모임을 갖고, 친척들에게 정기적으로 전화를 걸며, 친족에게 다양한 도움을 제공한다.",
+   "cands_ko": [
+    "유진 리트왁(Eugene Litwak)은 이러한 행동 양식을 '수정된 확대 가족(modified extended family)'이라고 불렀다.",
+    "여러 세대에 걸친 유대가 유지되기 때문에 그것은 확대 가족 구조이지만, 대개 세대 간 동거에 기반하지 않고 대부분의 확대 가족이 하나의 결합된 집단으로 행동하지는 않기 때문에 '수정된' 것이다.",
+    "수정된 확대 가족의 구성원들은 흔히 가까이 살지만, 수정된 확대 가족이 지리적 근접성을 요구하는 것은 아니며 친족이 상당한 거리로 떨어져 있을 때에도 유대는 유지된다.",
+    "가족 구성원들이 서로 얼마나 멀리 떨어져 살든 상관없이, 가족 중 가장 나이 많은 구성원이 중요한 문제에 관한 결정을 내린다.",
+    "친족이 항상 가까운 거리에 사는 전통적 확대 가족과는 대조적으로, 수정된 확대 가족의 구성원들은 직업적 발전의 기회를 찾아 친족에게서 자유롭게 멀리 떠나갈 수 있다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -37608,7 +37648,15 @@
     "By taking a little extra time to collect information about the opponent, the animal is more likely to reach a decision that maximizes its chances of winning than if it takes a decision without such information.",
     "Many signals are now seen as having this information gathering or ‘assessment’ function, directly contributing to the mechanism of the decision-making process by supplying vital information about the likely outcomes of the various options."
    ],
-   "irrelevant": 3
+   "irrelevant": 3,
+   "intro_ko": "경쟁자를 공격하는 것과 도망치는 것 사이의 갈등에 처한 동물은 처음에는 즉각적으로 결정을 내릴 수 있을 만큼 충분한 정보를 갖고 있지 않을 수 있다.",
+   "cands_ko": [
+    "만약 경쟁자가 싸움에서 이길 가능성이 높다면, 최적의 결정은 즉시 포기하고 부상당할 위험을 무릅쓰지 않는 것이다.",
+    "그러나 만약 경쟁자가 약하고 쉽게 이길 수 있다면, 밀고 나아가 영역이나 암컷, 먹이 혹은 그 무엇이 걸려 있든 그것을 획득하는 데 상당한 이득이 있을 수 있다.",
+    "동물들은 정상적인 상황에서 매우 일정한 체중을 유지하며, 규칙적인 간격으로 자신의 필요에 맞게 충분히 먹고 마신다.",
+    "상대에 관한 정보를 수집하는 데 약간의 추가 시간을 들임으로써, 동물은 그러한 정보 없이 결정을 내릴 때보다 자신의 승리 가능성을 극대화하는 결정에 도달할 가능성이 더 높아진다.",
+    "이제 많은 신호들이 이러한 정보 수집 혹은 '평가' 기능을 지닌 것으로 여겨지는데, 이는 여러 선택지의 있음직한 결과에 관한 중대한 정보를 제공함으로써 의사 결정 과정의 메커니즘에 직접적으로 기여한다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -37892,7 +37940,15 @@
     "This is not because they necessarily have more cognitive resources than beginners; rather, because of the high level of fluency they have achieved in performing key skills, they can do more with what they have.",
     "Beginners, on the other hand, have not achieved the same degree of fluency and automaticity in each of the component skills, and thus they struggle to combine skills that experts combine with relative ease and efficiency."
    ],
-   "irrelevant": 3
+   "irrelevant": 3,
+   "intro_ko": "흥미롭게도, 전문가는 복잡한 과제를 수행하거나 여러 과제를 결합할 때 초보자만큼 어려움을 겪지 않는다. 전문가는 한정된 영역 내에서 폭넓은 연습을 하기 때문에, 그들 영역의 핵심 구성 기술은 고도로 숙련되고 더 자동화되는 경향이 있다.",
+   "cands_ko": [
+    "그러면 이처럼 고도로 숙련된 각각의 기술은 상대적으로 적은 인지 자원만을 요구하며, 이는 전문가가 겪는 총 인지 부하를 효과적으로 낮춰 준다.",
+    "따라서 전문가는 복잡한 과제를 수행하고 여러 과제를 결합하는 것을 비교적 수월하게 해낼 수 있다.",
+    "게다가 초보자는 과제가 나뉘어 개별적으로 분리되어 있을 때 그 과제를 처리하는 데 뛰어나다.",
+    "이는 그들이 반드시 초보자보다 더 많은 인지 자원을 가지고 있기 때문이 아니라, 핵심 기술을 수행하는 데 있어 그들이 달성한 높은 수준의 능숙함 덕분에 가진 것으로 더 많은 것을 해낼 수 있기 때문이다.",
+    "반면에 초보자는 각각의 구성 기술에서 동일한 정도의 능숙함과 자동성을 달성하지 못했으며, 그래서 전문가가 비교적 수월하고 효율적으로 결합하는 기술들을 결합하는 데 어려움을 겪는다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -38184,7 +38240,15 @@
     "The expansion of reasonably priced, good quality accommodation associated with tourism growth has also facilitated the growth of locally based restaurants.",
     "As a result, it was invaluable for the development of many forms of sports tourism but especially those which require the transportation of people and equipment to relatively remote locations."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "20세기에 스포츠 관광의 확장은 교통수단의 추가적인 발전에 영향을 받았다. 철도가 19세기에 여행에 혁명을 일으켰듯이, 자동차는 20세기에 훨씬 더 극적인 변화를 만들어냈다.",
+   "cands_ko": [
+    "스포츠와 관광 전반의 발전에서 자동차가 지니는 중요성은 상당한 주목을 받아 왔으며, 그것은 특히 스포츠 관광에도 그에 못지않은 영향을 미쳤다.",
+    "원래는 19세기 말엽에 발명되었지만, 그것은 1920년대에 미국에서, 그리고 영국에서는 다소 더 늦게 대중적인 교통수단이 되기 시작했다.",
+    "편리함과 유연성 외에도, 자동차는 대중교통이 닿지 않는 많은 지역에 접근할 수 있게 해 주고 짐과 장비를 손쉽게 운반할 수 있게 해 주는 추가적인 이점을 지닌다.",
+    "관광 성장과 함께 이루어진 적정 가격의 양질의 숙박 시설의 확장은 또한 지역에 기반한 식당들의 성장을 촉진했다.",
+    "그 결과, 그것은 여러 형태의 스포츠 관광, 특히 사람과 장비를 비교적 외딴 장소로 운반해야 하는 스포츠 관광의 발전에 매우 귀중한 것이었다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -38492,7 +38556,15 @@
     "Mentoring has been typically required and praised as an essential component in the personal development of employers.",
     "The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "모든 근로자는 자신의 직무, 직장, 그리고 조직 내에서 이용할 수 있는 자원에 관한 귀중한 정보를 제공해 줄 수 있는 멘토에게 접근할 수 있어야 한다. 멘토는 또한 꼭 필요한 심리사회적 지원을 제공한다.",
+   "cands_ko": [
+    "다양한 멘토 네트워크를 갖는 것은 주류 집단 구성원과 소수 집단 구성원 모두에게 중요하다.",
+    "소수 집단 구성원은 특정 조직에, 또는 특정 분야나 직업에 고용되어 있다는 것이 무엇을 의미하는지에 대한 통찰을 얻을 수 있도록 다양한 멘토를 필요로 한다.",
+    "다수 집단 근로자는 다양한 멘토 네트워크를 가짐으로써 이득을 얻는데, 이는 다양한 근로자의 고유한 현실, 그리고 자기 자신의 정체성, 나아가 어쩌면 자기 자신이 지닌 형태의 특권에 대한 이해와 민감성을 높여 주기 때문이다.",
+    "멘토링은 일반적으로 고용주의 개인적 발전에 필수적인 요소로 요구되고 칭송되어 왔다.",
+    "이러한 멘토링 기회의 궁극적인 목표는 개인이 자신의 일과 조직에 대해 더 많이 알고, 더 소속감을 느끼며, 더 몰입하도록 하는 것이다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -38776,7 +38848,15 @@
     "Many major companies are fundamentally changing their business models by focusing on profitable units and cutting off less profitable ones.",
     "In order to allow these different units to cooperate successfully, the existence of a common platform is crucial."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "정보 시스템은 도입된 이래로 사업이 수행되는 방식을 상당히 변화시켜 왔다.",
+   "cands_ko": [
+    "이는 여러 단위에 걸친 가치 사슬의 통합을 수반하는 기업 간 협력의 형태와 양상을 띤 사업에서 특히 그러하다.",
+    "그 결과로 생긴 네트워크는 단일 기업의 사업 단위들만 포괄하는 것이 아니라, 대개 서로 다른 기업들의 여러 단위들까지 포함한다.",
+    "그 결과 기업은 지속 가능한 사업 성과를 보장하기 위해 자사의 내부 조직만 고려해야 하는 것이 아니라, 자사를 둘러싼 단위들의 생태계 전체를 함께 고려해야 한다.",
+    "많은 주요 기업들은 수익성이 높은 단위에 집중하고 수익성이 낮은 단위를 잘라냄으로써 자사의 사업 모델을 근본적으로 바꾸고 있다.",
+    "이처럼 서로 다른 단위들이 성공적으로 협력할 수 있게 하려면, 공통 플랫폼의 존재가 매우 중요하다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -39070,7 +39150,15 @@
     "However, I would always advise that you use your loudest voice incredibly sparingly and avoid shouting as much as possible.",
     "A quiet, authoritative and measured tone has so much more impact than slightly panicked shouting."
    ],
-   "irrelevant": 3
+   "irrelevant": 3,
+   "intro_ko": "배우, 가수, 정치인, 그리고 수많은 다른 사람들은 사용되는 단어의 단순한 해독을 넘어서는 의사소통 수단으로서의 인간 목소리가 지닌 힘을 인식하고 있다. 따라서 자신의 목소리를 조절하고 여러 목적에 맞게 사용하는 법을 배우는 것은 초임 교사로서 길러야 할 가장 중요한 기술 중 하나이다.",
+   "cands_ko": [
+    "더 자신 있게 지시할수록 학급의 긍정적인 반응을 얻을 가능성이 더 높아진다.",
+    "학교에서 일할 때 목소리를 크게 낼 수 있는 것이 매우 유용한 때가 있으며, 시끄러운 교실이나 식당, 운동장을 뚫고 목소리를 전달할 수 있다는 것을 아는 것은 지니면 좋은 훌륭한 기술이다.",
+    "학교의 심각한 소음 문제를 해결하기 위해서는 학생, 학부모, 교사가 함께 해결책을 찾아야 한다.",
+    "그러나 나는 가장 큰 목소리는 정말 아껴서 사용하고 소리 지르는 것은 가능한 한 피할 것을 항상 조언하고 싶다.",
+    "조용하고 권위 있으며 절제된 어조는 약간 당황한 채 소리 지르는 것보다 훨씬 더 큰 영향력을 지닌다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -39356,7 +39444,15 @@
     "When the brain stops sending navigational instructions back to the mouth and the mouth is moving too fast to pause, that’s when you get a verbal fender bender, otherwise known as filler.",
     "Um, ah, you know, and like are what your mouth does when it has nowhere to go."
    ],
-   "irrelevant": 3
+   "irrelevant": 3,
+   "intro_ko": "빠르게 말하는 것은 위험 부담이 큰 시도이다. 입이 제한 속도를 훌쩍 넘어 달리고 있을 때 설득력 있고, 말을 잘하며, 효과적인 상태를 위한 이상적인 조건을 유지하기란 거의 불가능하다.",
+   "cands_ko": [
+    "우리는 우리의 정신이 언제나 가장 큰 효율로 좋은 결정을 내릴 만큼 예리하다고 생각하고 싶어 하지만, 실제로는 그렇지 않다.",
+    "실제로 뇌는 말할 수 있는 네다섯 가지 가능한 것들의 교차로에 이르러, 그 선택지들을 고려하며 몇 초 동안 공회전하며 멈춰 있다.",
+    "좋은 결정을 내리는 것은 당신에게 대답을 떠올릴 시간을 더 많이 제공하므로 당신이 더 빠르게 말하도록 돕는다.",
+    "뇌가 입으로 길 안내 지시를 다시 보내는 것을 멈추고 입은 멈추기에는 너무 빠르게 움직일 때, 바로 그때 당신은 말의 접촉 사고, 다른 말로 군말(filler)이라 불리는 것을 겪게 된다.",
+    "'음', '아', '있잖아', '그러니까'는 당신의 입이 갈 곳이 없을 때 하는 것들이다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -39658,7 +39754,15 @@
     "The various rocks and minerals contained in glaciers have become a popular subject of science projects in schools.",
     "It is estimated that many small mountain glaciers will disappear completely within ten to twenty years unless there is a sudden and unexpected change in the present warming trend."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "진정한 빙하는 영구적이어야 한다. 일반적으로 이는 추운 달 동안 여름의 융해를 상쇄할 만큼 충분한 새 눈이 쌓여야 함을 의미하지만, 해마다 빙하는 국지적·전 지구적 기후 조건에 따라 확장되거나 축소될 수 있다.",
+   "cands_ko": [
+    "오늘날 전 세계 대부분의 빙하는 온난화하는 기후 때문에 녹고 있으며, 그 융해 속도가 가속화되고 있는 것으로 보인다.",
+    "이는 알프스 같은 곳에서 극적으로 기록되어 왔는데, 그곳에는 역사적 기록이 보존되어 있고 현재의 얼음 범위와 비교할 수 있는, 날짜가 적힌 스케치와 사진이 남아 있다.",
+    "심지어 수십 년처럼 짧은 기간에 걸쳐서도, 위성 이미지는 안데스산맥, 히말라야산맥, 그리고 그 밖의 지역에서 산악 빙하의 극적인 감소가 일어났음을 보여준다.",
+    "빙하에 들어 있는 다양한 암석과 광물은 학교에서 인기 있는 과학 과제의 주제가 되었다.",
+    "현재의 온난화 추세에 갑작스럽고 예기치 못한 변화가 없다면, 많은 소규모 산악 빙하가 10년에서 20년 안에 완전히 사라질 것으로 추정된다."
+   ]
   },
   "num": 35,
   "vlist": [
@@ -39956,7 +40060,15 @@
     "The body mass index (BMI) can serve as a convenient way for non-experts to examine their health conditions in daily lives.",
     "For the same reasons, taller people have been found to suffer more fall-related injuries ― like hip breaks ― than shorter people."
    ],
-   "irrelevant": 4
+   "irrelevant": 4,
+   "intro_ko": "누군가의 몸집이 클수록, 비교적 대수롭지 않은 사고를 통해서도 그들이 스스로에게 입힐 수 있는 손상은 더 크다. 유아들이 자주 넘어지고 부딪히는데도 불구하고, 그들이 입는 부상은 좀처럼 심각하지 않다.",
+   "cands_ko": [
+    "질량에 비해 상대적으로 두꺼운 그들의 뼈는, 최고 속도에서조차 그들이 스스로에게 큰 손상을 입힐 만큼 충분한 에너지를 좀처럼 축적하지 않는다는 것을 의미한다.",
+    "증가한 질량 때문에(더 높은 곳에서 떨어지고 있으며 반응이 더 느릴 수 있다는 사실로 인해 가중되어), 넘어지는 성인은 훨씬 더 큰 힘으로 지면에 충돌하게 된다.",
+    "질량과 뼈의 강도 사이의 비선형적 관계는, 성인의 뼈가 절대적인 수치로는 유아의 뼈보다 두껍더라도, 증가한 질량으로 인해 발생하는 더 큰 충격을 보상할 만큼 상대적으로 충분히 두껍지는 않을 수 있음을 의미한다.",
+    "체질량지수(BMI)는 비전문가가 일상생활에서 자신의 건강 상태를 살펴볼 수 있는 편리한 방법으로 쓰일 수 있다.",
+    "같은 이유로, 키가 큰 사람들이 키가 작은 사람들보다 고관절 골절과 같은 낙상 관련 부상을 더 많이 겪는 것으로 밝혀졌다."
+   ]
   },
   "num": 35,
   "vlist": [
