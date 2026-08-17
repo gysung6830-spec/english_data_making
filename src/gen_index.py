@@ -72,9 +72,11 @@ def build():
     nav = "".join(f'<span class="nl">{esc(L)}</span>' for L in letters)
 
     sections = ""
+    ncount = 0
     for L in letters:
         rows = ""
         for e in groups[L]:
+            ncount += 1
             mean = " / ".join(e["means"])
             # 회차·페이지 — 페이지 오름차순 정렬
             src_items = sorted(e["src"].items(), key=lambda kv: (kv[1] is None, kv[1] or 0))
@@ -89,7 +91,8 @@ def build():
                 shown = [lbl for lbl, _ in src_items[:3]]
                 more = f' 외 {len(src_items)-3}' if len(src_items) > 3 else ""
                 srctxt = f'<span class="src">{esc("·".join(shown))}{esc(more)}</span>'
-            rows += (f'<div class="ent"><span class="w">{esc(e["w"])}</span>'
+            rows += (f'<div class="ent"><span class="idxn">{ncount}</span>'
+                     f'<span class="w">{esc(e["w"])}</span>'
                      f'<span class="pgs">{pgtxt}</span>'
                      f'<span class="m">{esc(mean)}</span>{srctxt}</div>')
         sections += (f'<section class="lg"><div class="lh"><span class="lc">{esc(L)}</span>'
@@ -116,7 +119,8 @@ body{{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; c
 .lh .lc{{ font-size:16px; font-weight:800; color:var(--ink-d); }}
 .lh .cnt{{ font-size:8.5px; color:var(--muted); }}
 .cols{{ column-count:2; column-gap:16px; }}
-.ent{{ break-inside:avoid; padding:2px 0 3px; border-bottom:1px dotted #e9ecee; margin-bottom:1px; }}
+.ent{{ break-inside:avoid; padding:2px 0 3px 22px; border-bottom:1px dotted #e9ecee; margin-bottom:1px; position:relative; }}
+.ent .idxn{{ position:absolute; left:0; top:2px; font-size:7.4px; font-weight:800; color:#9aa7b0; min-width:19px; }}
 .ent .w{{ font-weight:800; color:#1a1f26; }}
 .ent .pgs{{ float:right; }}
 .ent .pgs .pg{{ display:inline-block; font-size:7.8px; font-weight:800; color:var(--ink-d); background:#e9f4ef; border:1px solid #cfe5da; border-radius:4px; padding:0 4px; margin-left:3px; }}

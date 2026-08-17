@@ -87,7 +87,7 @@ thead th.ga{{ background:#2a7d5f; }} thead th.gb{{ background:#c58a2a; }} thead 
 .note2{{ margin-top:10px; font-size:8.4px; color:var(--muted); }}
 </style></head><body>
 <div class="ak-cover">
-  <div class="kick">APPENDIX · 부록</div>
+  <div class="kick">ANSWER KEY · 본책 맨 끝</div>
   <div class="t">정답 일람표</div>
   <div class="sub">14회차 × 16문항 · 빠른 자가 채점용</div>
 </div>
