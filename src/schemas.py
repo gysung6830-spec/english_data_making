@@ -322,10 +322,21 @@ class WSArrangeType(BaseModel):
 class WSComposeItem(BaseModel):
     korean: str                            # 영작할 우리말
     conditions: list[str] = Field(default_factory=list)    # 어법 조건
-    given_words: list[str] = Field(default_factory=list)   # 필수 단어(보기)
+    given_words: list[str] = Field(default_factory=list)   # (구버전) 필수 단어(보기)
+    # 난이도 3단계: 주어지는 단어 개수로 구분(하=많이 → 상=적게). 같은 정답 문장.
+    given_low: list[str] = Field(default_factory=list)     # 하: 가장 많은 단어 제공
+    given_mid: list[str] = Field(default_factory=list)     # 중: 절반 정도 제공
+    given_high: list[str] = Field(default_factory=list)    # 상: 최소한만(없을 수도)
     word_count: str = ""                   # 단어 수
     answer: str                            # 정답 영작(원문 문장)
     explanation: str = ""
+
+    @model_validator(mode="after")
+    def _fill_levels(self) -> "WSComposeItem":
+        # 3단계가 비어 있으면(구버전 데이터) given_words 로 하 난이도를 채워 하위호환.
+        if not (self.given_low or self.given_mid or self.given_high):
+            self.given_low = list(self.given_words)
+        return self
 
 
 class WSComposeType(BaseModel):

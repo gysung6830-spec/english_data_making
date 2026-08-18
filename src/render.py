@@ -517,10 +517,15 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
         idea_items = arrange(ws.arrange.ideas if ws.arrange else [])
         title_items = arrange(ws.arrange.titles if ws.arrange else [])
 
-        # 조건 영작
+        # 조건 영작 (난이도 하/중/상: 주어지는 단어 개수로 구분)
         comp_items = [{
             "src": src, "korean": it.korean,
-            "conditions": list(it.conditions), "given_words": list(it.given_words),
+            "conditions": list(it.conditions),
+            "levels": [
+                {"tag": "하", "cls": "lv-low", "words": list(it.given_low)},
+                {"tag": "중", "cls": "lv-mid", "words": list(it.given_mid)},
+                {"tag": "상", "cls": "lv-high", "words": list(it.given_high)},
+            ],
             "word_count": it.word_count, "answer": it.answer,
             "explanation": it.explanation,
         } for it in (ws.compose.items if ws.compose else [])]

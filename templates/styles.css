@@ -450,6 +450,19 @@ table.lit2 td {
   margin-top: 5px; padding: 4px 9px; color: #9aa0a6; font-size: 12px;
 }
 .ans-box .ans-hint { font-size: 8.4px; }
+.ans-box.sm { min-height: 20px; margin-top: 3px; }
+
+/* 유형4 난이도(하·중·상) — 주어지는 단어 개수로 구분 */
+.lv-block { margin: 5px 0; }
+.lv-row { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.lv-badge {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 17px; height: 17px; border-radius: 50%; font-size: 9px; font-weight: 800; color: #fff;
+}
+.lv-low { background: #15803d; }   /* 하 - 쉬움(초록) */
+.lv-mid { background: #b45309; }   /* 중 - 보통(주황) */
+.lv-high { background: #b91c1c; }  /* 상 - 어려움(빨강) */
+.lv-none { font-size: 8.5px; color: var(--muted); font-style: italic; }
 .ans-line {
   margin-top: 5px; padding: 4px 10px; background: var(--ws-soft);
   border-left: 3px solid var(--ws); border-radius: 0 4px 4px 0; font-weight: 700; line-height: 1.5;

@@ -141,7 +141,7 @@
   {# ===== 유형4 : 조건 영작 연습 ===== #}
   {% if has.compose %}
   <div class="type-block tb4">
-  {{ thead(4, '조건 영작 연습', '조건에 맞게 영어 문장을 완성하시오.') }}
+  {{ thead(4, '조건 영작 연습', '난이도(하·중·상)별로 주어진 단어를 활용해 같은 문장을 영작하시오. (하=많이·상=적게 제시)') }}
   {% for pg in passages %}
     {% if pg.total > 1 %}{{ psub(pg) }}{% endif %}
     <div class="grid2">
@@ -150,9 +150,13 @@
       {{ qhead(q) }}
       <div class="ko-target">{{ q.korean }}{% if q.word_count %} <span class="wc">{{ q.word_count }}</span>{% endif %}</div>
       {% if q.conditions %}<div class="cond"><span class="cond-lb">조건</span>{{ q.conditions | join(' · ') }}</div>{% endif %}
-      {% if q.given_words %}{{ chips(q.given_words, 'g4') }}{% endif %}
-      {% if reveal %}<div class="ans-line">➜ {{ q.answer }}</div>{% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
-      {% else %}<div class="ans-box">➜</div>{% endif %}
+      {% for lv in q.levels %}
+      <div class="lv-block">
+        <div class="lv-row"><span class="lv-badge {{ lv.cls }}">{{ lv.tag }}</span>{% if lv.words %}{{ chips(lv.words, 'g4') }}{% else %}<span class="lv-none">단어 제시 없음</span>{% endif %}</div>
+        {% if not reveal %}<div class="ans-box sm">➜</div>{% endif %}
+      </div>
+      {% endfor %}
+      {% if reveal %}<div class="ans-line">➜ {{ q.answer }}</div>{% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}{% endif %}
     </div>
     {% endfor %}
     </div>
