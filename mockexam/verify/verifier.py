@@ -70,6 +70,11 @@ def structural_issue(q: Question) -> str | None:
     elif t == "irrelevant_sentence":
         if circled < 5:
             return "문장 번호(①~⑤) 부족"
+    elif t == "insert":
+        if circled < 5:
+            return "삽입 위치(①~⑤) 부족"
+        if "[주어진 문장]" not in p:
+            return "주어진 문장 박스 없음"
     elif t == "implied_meaning":
         if not has_u:
             return "밑줄(<u>) 없음"

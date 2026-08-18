@@ -4,9 +4,38 @@ from __future__ import annotations
 
 from ..core.models import Item, Passage
 from .base import (
-    DISTRACTOR_RULE, FACT_TWIST, GenContext, PassageAnalysis, build_choice,
-    make_choices, register,
+    DISTRACTOR_RULE, FACT_TWIST, LABELS, STEM_FALLBACK, GenContext,
+    PassageAnalysis, build_choice, make_choices, register,
 )
+
+
+@register("insert")
+def gen_insert(item, passage, an, ctx):
+    """문장 삽입 — 내부 문장 하나를 빼내 '주어진 문장'으로, 나머지에 ①~⑤ 위치."""
+    stem = ctx.stem("insert", STEM_FALLBACK["insert"])
+    instr = (
+        "지문의 '중간' 문장 하나(첫 문장·끝 문장 제외)를 빼내 '주어진 문장'으로 삼고, 남은 "
+        "지문의 문장 사이 다섯 곳에 ①~⑤ 위치를 표시한다. 정답은 그 문장이 원래 있던 자리. "
+        "그 자리에만 자연스럽게 들어가도록 연결사(however·therefore·for example 등)·지시어"
+        "(this·that·such·these)·정관사·대명사 같은 위치 단서를 '2개 이상' 두어 정답 위치가 "
+        "유일하게 확정되게 하고, 다른 자리에 넣으면 지시 대상이나 논리 연결이 어긋나게 하라. "
+        "출력 지문은 맨 앞에 '[주어진 문장] ...'을 두고, 본문에는 위치마다 ①~⑤ 를 넣어라. "
+        "선지는 ①~⑤ 번호만."
+    )
+    sents = an.sentences or [passage.text]
+    gi = 2 if len(sents) > 3 else (len(sents) // 2 if sents else 0)
+    given = sents[gi] if sents else "(주어진 문장)"
+    rest = [s for j, s in enumerate(sents) if j != gi] or [passage.text]
+    kept = rest[:4]                       # 문장 4개 → 사이·양끝 위치 5개(①~⑤)
+    parts: list[str] = []
+    for i, s in enumerate(kept):
+        parts.append(LABELS[i])           # 문장 앞 위치
+        parts.append(s)
+    parts.append(LABELS[min(len(kept), 4)])   # 마지막 문장 뒤 위치
+    body = " ".join(parts)
+    mock_p = f"[주어진 문장] {given}\n{body}"
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="③",
+                        number_only=True, mock_passage=mock_p)
 
 
 @register("main_point")

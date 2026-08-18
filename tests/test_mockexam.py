@@ -191,6 +191,26 @@ def test_generate_offline_passes_verifier():
     assert by["정답유일성"].ok, by["정답유일성"].detail
 
 
+def test_insert_type_has_given_box_and_five_positions():
+    """문장삽입(insert): 표준 골격에 포함되고, [주어진 문장] 박스 + ①~⑤ 위치가 있어야."""
+    from mockexam.core.models import Passage
+    from mockexam.verify.verifier import structural_issue
+    ps = [Passage(id=f"p{i}", text=("However, people adapt. This shift brings gains. "
+          "Such change also has costs. Therefore, balance matters. Society decides it."),
+          format_type="narrative") for i in range(1, 14)]
+    res = generate_mock("newschool_hs", [], difficulty="중", client=None, passages=ps)
+    q = next(q for q in res.exam.questions if q.type == "insert")
+    assert "[주어진 문장]" in q.passage_text
+    assert structural_issue(q) is None, structural_issue(q)
+
+
+def test_vocab_odd_difficulty_methods_no_negation_injection():
+    """어휘 유형 난이도 방식은 4단계이며 '상'은 부정어 삽입이 아니라 반의어/연어."""
+    from mockexam.generators.vocab import _VOCAB_METHOD
+    assert set(_VOCAB_METHOD) == {"low", "mid", "mid_high", "high"}
+    assert "부정" not in _VOCAB_METHOD["high"] and "연어" in _VOCAB_METHOD["high"]
+
+
 def test_strict_schema_has_no_unsupported_keywords():
     """Anthropic strict 출력이 거부하는 키워드가 어떤 스키마에도 없어야 한다."""
     import json

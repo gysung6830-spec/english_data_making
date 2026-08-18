@@ -190,6 +190,17 @@ def _render_passage(q: Question) -> str:
             return ('<div class="passage dialogue">'
                     + "".join(f'<div class="turn">{_safe(t)}</div>' for t in turns)
                     + '</div>')
+    # 문장삽입: [주어진 문장] 박스 + ①~⑤ 위치 본문
+    if q.type == "insert" or "[주어진 문장]" in text:
+        after = text.split("[주어진 문장]", 1)[1].strip() if "[주어진 문장]" in text else text
+        if "\n" in after:
+            given, body = after.split("\n", 1)
+        else:
+            m = re.search(r"[①②③④⑤]", after)
+            given, body = (after[:m.start()], after[m.start():]) if m else (after, "")
+        box = (f'<div class="bogi"><div class="label">&lt; 주어진 문장 &gt;</div>'
+               f'{_safe(given.strip())}</div>')
+        return box + f'<div class="passage">{_safe(body.strip())}</div>'
     # 요약문([요약문] 마커) 분리 박스
     if "[요약문]" in text:
         body, _, summ = text.partition("[요약문]")

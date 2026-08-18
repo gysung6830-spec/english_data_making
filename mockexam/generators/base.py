@@ -72,7 +72,8 @@ DISTRACTOR_RULE = (
 _PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning", "blank_single"}
 
 # 선지를 번호(①~⑤)만 주는 유형(길이·역할 균형 검증 대상에서 제외)
-NUMBER_ONLY_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd", "irrelevant_sentence"}
+NUMBER_ONLY_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd",
+                     "irrelevant_sentence", "insert"}
 
 # 선지 길이·형태 균형 — 정답이 길이만으로 드러나지 않게.
 CHOICE_BALANCE_RULE = (
@@ -406,6 +407,7 @@ STEM_FALLBACK = {
     "blank_single": "다음 빈칸에 들어갈 말로 가장 적절한 것은?",
     "order": "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
     "irrelevant_sentence": "다음 글에서 전체 흐름과 관계 없는 문장은?",
+    "insert": "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은?",
     "implied_meaning": "밑줄 친 부분이 다음 글에서 의미하는 바로 가장 적절한 것은?",
     "inference_mismatch": "다음 글의 내용과 일치하지 않는 것은?",
     "dialogue_mismatch": "다음 대화의 내용과 일치하지 않는 것은?",
