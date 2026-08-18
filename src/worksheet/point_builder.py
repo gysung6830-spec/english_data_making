@@ -48,6 +48,23 @@ def _circled(n: int) -> str:
     return chr(0x2460 + n - 1) if 1 <= n <= 20 else f"({n})"
 
 
+import re as _re
+
+_TOV_RE = _re.compile(r"\bto\s*-?\s*v\b", _re.I)
+_USAGE_RE = _re.compile(r"\(\s*(명사|형용사|부사)\s*적?\s*(?:용법)?\s*\)")
+
+
+def _normalize_gram_name(name: str) -> str:
+    """어법명 표기 통일: 'to-v'→'to부정사', 용법 괄호를 '(…적 용법)'으로 표준화.
+
+    예) 'to-v(부사)' · 'to부정사(부사적)' → 'to부정사(부사적 용법)'.
+    이미 'to부정사의 의미상 주어'처럼 용법이 다른 경우는 그대로 둔다.
+    """
+    s = _TOV_RE.sub("to부정사", name)
+    s = _USAGE_RE.sub(lambda m: f"({m.group(1)}적 용법)", s)
+    return s
+
+
 # 회색 주석이라도 '문법 설명'이면 어법 Point 박스로 흡수(본문엔 번호만 남김).
 _GRAMMAR_KW = (
     "부정사", "관계", "분사", "접속사", "수일치", "수 일치", "일치", "비교", "동명사",
@@ -101,7 +118,7 @@ def build_grammar_point(sentence: Sentence) -> Point | None:
         return None
     rows = []
     for num, name, wrong in items:
-        row = f'<span class="gn">{_circled(num)}</span> {escape(name)}'
+        row = f'<span class="gn">{_circled(num)}</span> {escape(_normalize_gram_name(name))}'
         if wrong:
             row += f" · <b>{escape(wrong)}</b>"
         rows.append(row)
