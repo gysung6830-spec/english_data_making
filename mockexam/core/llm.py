@@ -92,33 +92,58 @@ _HARD_VOCAB = (
 )
 
 # 난이도 4단계 구체 정의 — 각 단계가 '무엇을' 조절하는지 프롬프트에 명시(난이도 일관성↑).
+# 유형군 — 사실·암기형(세부 정보 필요) vs 이해·추론형(글 전체 이해). 난이도 '중'을 분기.
+_FACT_TYPES = {
+    "inference_mismatch", "dialogue_mismatch", "notice_match",
+    "vocab_odd", "grammar", "grammar_vocab_mix", "vocab_3blank_abc",
+    "prep_find_and_translate", "grammar_fix_and_answer", "condition_write_inflect",
+    "summary_fill_from_text", "blank_choose_no_change",
+}
+
 _DIFFICULTY_SPEC = {
-    # 하 — '문제를 풀면서 학습이 되도록'
+    # 하 — '문제를 풀면서 학습이 되도록'(모든 유형 공통)
     "하": "학생이 지문을 미리 공부하지 않아도, 지금 지문을 읽으며 풀 수 있게 하라. 정답 단서를 "
           "지문 안에 뚜렷이 두고(추론 1단계), 문제를 푸는 과정에서 글의 핵심 내용이 자연스럽게 "
           "학습되도록 구성한다. 오답은 명백히 무관·모순이라 정답의 근거가 저절로 이해된다. "
           "쉬운 기본 어휘.",
-    # 중 — '지문을 미리 공부해 놔야 풀 수 있음'(내신 암기 대비형)
-    "중": "시험 범위 지문을 미리 정독·학습한 학생이라야 풀 수 있게 하라. 지문의 세부 정보·정확한 "
-          "표현·구체적 사실을 알아야 정답이 갈리게 하고, 처음 보는 사람은 시간 안에 확신하기 "
-          "어렵게 한다. 오답은 지문을 대충 읽으면 고를 만한 유의어·유사 정보 함정. 표준 수능 어휘.",
-    # 상 — '지문에 대한 깊은 이해 필요'
+    # 중(사실·암기형) — '지문을 미리 공부해 놔야 풀 수 있음'(내신 암기 대비형)
+    "중_fact": "시험 범위 지문을 미리 정독·학습한 학생이라야 풀 수 있게 하라. 지문의 세부 정보·"
+               "정확한 표현·구체적 사실을 알아야 정답이 갈리게 하고, 처음 보는 사람은 시간 안에 "
+               "확신하기 어렵게 한다. 오답은 대충 읽으면 고를 만한 유의어·유사 정보 함정. "
+               "표준 수능 어휘.",
+    # 중(이해·추론형) — 지엽 암기가 아니라 '정밀 독해'로 난이도를 준다.
+    "중_comp": "글 전체를 정확히 이해해야 풀리게 하라. 단, 요지·제목·빈칸 같은 이해형은 "
+               "'지엽·부분 정보를 정답으로 삼지 말고' 글 전체 논지를 반영해야 한다. 난이도는 "
+               "세부 암기가 아니라 오답 유의어를 촘촘히 배치해(정밀 독해가 필요하도록) 준다. "
+               "표준 수능 어휘.",
+    # 상 — '지문에 대한 깊은 이해 필요'(모든 유형 공통)
     "상": "단순 암기로는 부족하고, 글의 논지·함의·인과·필자 의도를 깊이 이해하고 종합·적용해야 "
           "풀 수 있게 하라(추론 2~3단계). 오답 유의어는 정답과 매우 근접해 정밀 독해가 필요하고, "
           "빈칸은 추상적 핵심 명제 자리, 함의·밑줄형은 축자적 오독을 유도하는 함정을 강화한다. "
           + _HARD_VOCAB,
-    # 중상 — '중·상 문항을 반반 배치'(문항별로 중/상을 나눠 생성하므로 이 문자열은 폴백용)
-    "중상": "이 시험은 '중' 난이도 문항과 '상' 난이도 문항을 절반씩 섞는다. 각 문항은 중 또는 "
-            "상 기준 중 하나를 따른다.",
+    # 중상 — 문항별로 중/상을 나눠 생성하므로 이 문자열은 폴백용.
+    "중상": "이 시험은 '중' 난이도 문항과 '상' 난이도 문항을 절반씩 섞는다.",
 }
 
 
-def system_prompt(profile: dict[str, Any], difficulty_ko: str) -> str:
-    """학교 스타일을 주입한 시스템 프롬프트(§8.5.5)."""
+def _difficulty_text(difficulty_ko: str, question_type: str | None) -> str:
+    """난이도 지시문 — '중'은 유형군(사실형/이해형)에 따라 갈라 준다."""
+    if difficulty_ko == "중":
+        key = "중_fact" if (question_type in _FACT_TYPES) else "중_comp"
+        return _DIFFICULTY_SPEC[key]
+    return _DIFFICULTY_SPEC.get(difficulty_ko, "")
+
+
+def system_prompt(profile: dict[str, Any], difficulty_ko: str,
+                  question_type: str | None = None) -> str:
+    """학교 스타일을 주입한 시스템 프롬프트(§8.5.5).
+
+    question_type 을 주면 난이도 '중'을 유형군(사실형/이해형)에 맞춰 다르게 지시한다.
+    """
     name = profile.get("name", "해당 학교")
     focus = ", ".join(profile.get("grammar_focus", []) or [])
     notes = " / ".join(profile.get("notes", []) or [])
-    dspec = _DIFFICULTY_SPEC.get(difficulty_ko, "")
+    dspec = _difficulty_text(difficulty_ko, question_type)
     return (
         f"당신은 {name}의 영어 내신 출제 교사다. 이 학교의 동형모의고사 문항을 만든다.\n"
         f"- 난이도: {difficulty_ko} — {dspec}\n"

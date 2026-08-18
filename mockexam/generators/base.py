@@ -293,7 +293,7 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
                   "있으면 오답 선지를 확실히 틀리도록 고쳐서 유일 정답이 되게 하라.\n"
                   "explanation 에는 정답 근거뿐 아니라 오답 ①~⑤ 각각이 왜 틀렸는지와 "
                   "핵심 문법·어휘·논지 포인트까지 자세히 써라.")
-        sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
+        sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"), item.type)
         out = ctx.client.structured(sysp, prompt, ChoiceQuestionOut, max_retries=2,
                                     extra_validate=lambda o: _validate_choice_out(item, o))
         # 번호 선지 유형이 아니면 지문에 새어든 ①②③ 문장 번호를 제거(안전망).
@@ -348,7 +348,7 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                   "5) explanation 에 각 소문항의 정답 근거·어형변형/어순/문법 포인트·본문 "
                   "근거를 핵심 위주로 '간결히' 써라(600자 이내, 장황하게 늘어놓지 말 것).")
         from ..core.client import ESSAY_MAX_TOKENS
-        sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"))
+        sysp = system_prompt(ctx.profile, DIFFICULTY_KO_REV.get(ctx.difficulty, "중"), item.type)
         out = ctx.client.structured(sysp, prompt, EssayQuestionOut, max_retries=2,
                                     max_tokens=ESSAY_MAX_TOKENS,
                                     extra_validate=lambda o: _validate_essay_out(item, o))
