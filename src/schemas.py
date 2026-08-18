@@ -13,6 +13,19 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 _LBL_RE = re.compile(r"\[\[([A-Za-z])\]\]")
 _ULM_RE = re.compile(r"\{\{(\d+)\|([^}]*)\}\}")
 
+# 영작 보기 단어와 '정답 문장의 단어'를 대조하기 위한 토큰/매칭 헬퍼.
+_WORD_RE = re.compile(r"[A-Za-z]+")
+
+
+def _word_match(a: str, b: str) -> bool:
+    """두 단어가 같은 낱말인지(어형 변화 흡수). 짧은 쪽이 앞부분(3자↑) 일치하면 같다고 본다.
+    예: ask↔asking, drive↔drives, child↔children. 2자 이하는 완전 일치만."""
+    a, b = (a or "").lower(), (b or "").lower()
+    if a == b:
+        return True
+    k = min(len(a), len(b), 4)
+    return k >= 3 and a[:k] == b[:k]
+
 
 # ---------------------------------------------------------------------------
 # 0단계: 지문 본문 추출 (전처리)
@@ -305,6 +318,32 @@ class WSArrangeItem(BaseModel):
             raise ValueError("보기 단어가 비어 있습니다.")
         return v
 
+    @model_validator(mode="after")
+    def _cover_answer(self) -> "WSArrangeItem":
+        """배열영작 보기는 정답 문장의 단어를 '정확히' 담아야 한다(모두 사용 원칙).
+
+        - 정답에 없는 보기 단어(잘못된 조각)는 제거.
+        - 정답에 있는데 빠진 단어는 정답 단어로 채워 넣음(학생이 만들 수 있게).
+        정답 토큰과 1:1 로 매칭(중복 단어 개수까지 맞춤). 정답이 비면 원본 유지.
+        """
+        tokens = _WORD_RE.findall(self.answer or "")
+        if not tokens:
+            return self
+        remaining: list = list(tokens)               # 아직 커버되지 않은 정답 토큰
+        kept: list[str] = []
+        for g in self.given_words:                   # 정답 토큰과 매칭되는 보기만, 개수만큼 유지
+            for i, t in enumerate(remaining):
+                if t is not None and _word_match(g, t):
+                    kept.append(g)
+                    remaining[i] = None
+                    break
+        for t in remaining:                          # 남은(빠진) 정답 토큰은 정답 단어로 보완
+            if t is not None:
+                kept.append(t)
+        if kept:
+            self.given_words = kept
+        return self
+
 
 class WSArrangeType(BaseModel):
     ideas: list[WSArrangeItem]             # 글의 요지
@@ -336,6 +375,14 @@ class WSComposeItem(BaseModel):
         # 3단계가 비어 있으면(구버전 데이터) given_words 로 하 난이도를 채워 하위호환.
         if not (self.given_low or self.given_mid or self.given_high):
             self.given_low = list(self.given_words)
+        # 보기 단어는 '정답 문장에 실제로 있는 단어'만 남긴다(잘못된 힌트 제거).
+        tokens = _WORD_RE.findall(self.answer or "")
+        if tokens:
+            def _in_answer(w: str) -> bool:
+                return any(_word_match(w, t) for t in tokens)
+            self.given_low = [w for w in self.given_low if _in_answer(w)]
+            self.given_mid = [w for w in self.given_mid if _in_answer(w)]
+            self.given_high = [w for w in self.given_high if _in_answer(w)]
         return self
 
 

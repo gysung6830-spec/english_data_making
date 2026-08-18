@@ -284,6 +284,23 @@ def test_worksheet_json_roundtrip():
     print("PASS  서술형 교재 JSON 저장/복원(무API 재편집)")
 
 
+# ---- 11. 영작 보기 단어 ↔ 정답 문장 정합성(누락/잉여/어형) -----------------
+def test_compose_arrange_word_guard():
+    from src import schemas
+    # 배열영작: 정답에 없는 보기 제거 + 빠진 단어 보완(어형 흡수: child↔Children)
+    a = "Children who are encouraged to ask questions retain their curiosity longer."
+    it = schemas.WSArrangeItem(korean="k", answer=a,
+                               given_words=["child", "encourage", "BOGUS", "retain"])
+    toks = schemas._WORD_RE.findall(a)
+    assert "BOGUS" not in it.given_words                       # 잉여 제거
+    assert all(any(schemas._word_match(g, t) for g in it.given_words) for t in toks)  # 전부 커버
+    # 조건영작: 정답에 없는 힌트 제거, 어형(ask↔Asking)은 유지
+    c = schemas.WSComposeItem(korean="k", answer="Asking questions matters in learning.",
+                              given_low=["ask", "matter", "FAKE"], given_mid=["ask", "FAKE"])
+    assert "ask" in c.given_low and "FAKE" not in c.given_low and "FAKE" not in c.given_mid
+    print("PASS  영작 보기 단어↔정답 정합성(누락/잉여/어형)")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
@@ -295,6 +312,7 @@ def run_all():
     test_worksheet_consistency()
     test_hwp_extract()
     test_worksheet_json_roundtrip()
+    test_compose_arrange_word_guard()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 
