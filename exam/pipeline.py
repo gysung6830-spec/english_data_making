@@ -8,6 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from . import analyzer, answer_spread, difficulty, renderer, validator
+from . import verify as _verify
 from ._concurrent import run_parallel
 from .generators import content, grammar, insert, order, short_answer, topic, vocab
 from .llm import ClaudeClient
@@ -36,15 +37,27 @@ GENERATORS = {
 
 
 def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
-    """한 유형을 생성(검증 실패 시 한 번 더 재시도). (q, a) 반환."""
+    """한 유형을 생성. 구조 검증 실패 시 재시도, 고위험 유형은 LLM 자기검증까지.
+
+    반환 (q, a, flags). 자기검증에 두 번 실패하면 문항은 유지하되 '확인 권장' 사유를 단다.
+    """
     last_err: Exception | None = None
     for attempt in range(2):
         try:
-            return gen.generate(client, analysis, body, max_retries=max_retries, **kwargs)
+            q, a, fl = gen.generate(client, analysis, body, max_retries=max_retries, **kwargs)
         except Exception as e:  # noqa: BLE001 — 유형 단위 격리
             last_err = e
             if logger:
                 logger.warning("[%s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
+            continue
+        ok, reason = _verify.verify(client, t, q, a, max_retries=max_retries)
+        if not ok:
+            if attempt == 0:      # 한 번은 재생성으로 결함을 털어낸다
+                if logger:
+                    logger.info("[%s] 자기검증 실패 → 재생성: %s", t, reason)
+                continue
+            fl = list(fl) + [f"자동검증: {reason or '정답 유일성·정오답 재확인'}"]
+        return q, a, fl
     raise RuntimeError(f"'{t}' 유형 생성 실패: {last_err}")
 
 

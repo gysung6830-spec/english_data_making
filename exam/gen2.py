@@ -251,15 +251,26 @@ _GENERATORS2 = {A: _gen_A, B: _gen_B, C: _gen_C, D: _gen_D, E: _gen_E, F: _gen_F
 # 오케스트레이션
 # ---------------------------------------------------------------------------
 def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, answer_pos=None):
-    """2회 한 유형 생성(실패 시 한 번 더). (q, a, flags) 반환."""
+    """2회 한 유형 생성. 구조 검증 실패 시 재시도 + 고위험 유형은 LLM 자기검증.
+    (q, a, flags) 반환 — 자기검증 2회 실패면 문항은 유지하고 '확인 권장' 사유를 단다."""
+    from . import verify as _verify
     last_err = None
     for attempt in range(2):
         try:
-            return gen(client, analysis, body, max_retries=max_retries, answer_pos=answer_pos)
+            q, a, fl = gen(client, analysis, body, max_retries=max_retries, answer_pos=answer_pos)
         except Exception as e:  # noqa: BLE001
             last_err = e
             if logger:
                 logger.warning("[2회 %s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
+            continue
+        ok, reason = _verify.verify(client, t, q, a, max_retries=max_retries)
+        if not ok:
+            if attempt == 0:
+                if logger:
+                    logger.info("[2회 %s] 자기검증 실패 → 재생성: %s", t, reason)
+                continue
+            fl = list(fl) + [f"자동검증: {reason or '정답 유일성·정오답 재확인'}"]
+        return q, a, fl
     raise RuntimeError(f"2회 '{t}' 유형 생성 실패: {last_err}")
 
 

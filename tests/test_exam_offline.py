@@ -444,6 +444,7 @@ def _fake_analysis() -> Analysis:
 
 _FAKE = {
     "Analysis": _fake_analysis,
+    "VerifyOut": lambda: __import__("exam.verify", fromlist=["VerifyOut"]).VerifyOut(ok=True),
     "OrderOut": lambda: OrderOut(given_n=1, block_sizes=[1, 1, 1], display=[2, 1, 3],
                                  reason="이유."),
     "InsertOut": lambda: InsertOut(remove_no=2, reason="이유."),
@@ -813,6 +814,41 @@ def test_hanjul_translation_residue() -> None:
     print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
 
 
+def test_llm_self_verify() -> None:
+    """고위험 유형 LLM 자기검증: ok=false면 재생성, 그래도 실패면 '확인 권장' 플래그.
+    비고위험 유형·검증 비활성은 통과 처리."""
+    from exam import pipeline, verify
+    from exam.verify import VerifyOut
+
+    # 비고위험 유형(vocab)·검증 대상 아님 → 항상 통과
+    assert verify.verify(None, "vocab", "<q>", "<a>") == (True, "")
+
+    # 항상 결함(ok=false)을 내는 클라이언트 → 재생성 1회 후에도 실패 → 플래그
+    class _AlwaysBad:
+        def __init__(self): self.calls = 0
+        def structured(self, system, prompt, model_cls, **kw):
+            if model_cls.__name__ == "VerifyOut":
+                self.calls += 1
+                return VerifyOut(ok=False, reason="복수 정답 가능")
+            return _FAKE[model_cls.__name__]()
+
+    bad = _AlwaysBad()
+    gen = __import__("exam.generators.order", fromlist=["generate"])
+    q, a, fl = pipeline._gen_one_type(gen, bad, _fake_analysis(), "body",
+                                      "order", 1, None, {})
+    assert any("자동검증" in f for f in fl), f"검증 실패가 플래그되지 않음: {fl}"
+    assert bad.calls >= 2, f"재생성(2회 검증)이 일어나지 않음: {bad.calls}"
+
+    # 검증 비활성(EXAM_NO_VERIFY)면 호출 없이 통과
+    import os
+    os.environ["EXAM_NO_VERIFY"] = "1"
+    try:
+        assert verify.verify(_AlwaysBad(), "order", "<q>", "<a>") == (True, "")
+    finally:
+        del os.environ["EXAM_NO_VERIFY"]
+    print("✓ LLM 자기검증(고위험 유형 재생성·플래그·비활성) 통과")
+
+
 def test_passage_type_fit_flags() -> None:
     """지문 종류에 부적합한 문항 유형을 '확인 권장'으로 표시한다.
     (안내문·도표의 순서/삽입, 도표의 주제/요약/빈칸, 서사문의 주제 등)."""
@@ -1077,6 +1113,7 @@ if __name__ == "__main__":
     test_d_cue_marking()
     test_hanjul_translation_residue()
     test_passage_type_fit_flags()
+    test_llm_self_verify()
     test_notice_bullet_markers()
     test_d_token_completeness()
     test_answer_spread()
