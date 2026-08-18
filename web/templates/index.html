@@ -95,6 +95,14 @@ Second passage goes here."></textarea>
   </div>
 
   <div class="field setbox">
+    <span class="label">문항 배치</span>
+    <label class="check"><input type="radio" name="group_by" value="passage" checked>
+      <b>지문별</b> <span class="hint2">[지문1: 7문항][지문2: 7문항]… 지문마다 모든 유형</span></label>
+    <label class="check"><input type="radio" name="group_by" value="type">
+      <b>문제유형별</b> <span class="hint2">[순서배열: 지문1·2·3][문장삽입: …]… 같은 유형끼리 모음</span></label>
+  </div>
+
+  <div class="field setbox">
     <span class="label">출력할 구성 <b>(기본: 전체 합본)</b> — 4개 모두 체크 시 한 PDF에 순서대로 합쳐집니다. 일부만 원하면 체크 해제하세요.</span>
     <label class="check"><input type="checkbox" name="sections" value="student" checked>
       <b>학생용</b> <span class="hint2">문제만</span></label>

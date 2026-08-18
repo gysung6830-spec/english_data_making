@@ -41,34 +41,48 @@ _env = Environment(
 
 
 def _blocks(passages: list[Passage], start: int,
-            type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS):
-    """지문별 통합 블록 + 빠른 정답 목록을 만들며 문항 번호를 연속 부여한다.
+            type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
+            group_by: str = "passage"):
+    """통합 블록 + 빠른 정답 목록을 만들며 문항 번호를 연속 부여한다.
 
     각 행(row)에 문제(q_body)·해설(a_body)·정답키(key)를 모두 담아,
     한 데이터로 학생용·교사용·빠른정답·해설지 4개 섹션을 조판한다.
-    type_order/prompts/labels 를 바꾸면 다른 문제 세트(예: 2회)도 같은 조판을 쓴다.
+    group_by="passage"(기본): [지문1: 유형들][지문2: 유형들]… (지문별)
+    group_by="type": [순서배열: 지문1·2·3][문장삽입: …]… (문제유형별)
+    번호는 어느 쪽이든 '조판에 나오는 순서 그대로' 1(또는 start)부터 연속 부여한다.
     """
     blocks: list[dict] = []
     quick: list[dict] = []
     n = start
-    for i, p in enumerate(passages, start=1):
-        rows: list[dict] = []
+
+    def _row(no: int, t: str, p: Passage) -> tuple[dict, str]:
+        a_html = p.a[t]
+        key = _answer_key(a_html, t in SHORT_TYPES)
+        return ({
+            "no": no, "type": t, "prompt": prompts[t],
+            "q_body": Markup(p.q[t]), "label": labels[t],
+            "a_body": Markup(a_html), "key": key,
+        }, key)
+
+    if group_by == "type":
         for t in type_order:
-            a_html = p.a[t]
-            key = _answer_key(a_html, t in SHORT_TYPES)
-            rows.append({
-                "no": n,
-                "type": t,
-                "prompt": prompts[t],
-                "q_body": Markup(p.q[t]),
-                "label": labels[t],
-                "a_body": Markup(a_html),
-                "key": key,
-            })
-            quick.append({"no": n, "key": key})
-            n += 1
-        disp = getattr(p, "source_label", "") or f"지문 {i}"
-        blocks.append({"label": f"[{disp}]", "title": p.title, "rows": rows})
+            rows: list[dict] = []
+            for p in passages:
+                row, key = _row(n, t, p)
+                rows.append(row)
+                quick.append({"no": n, "key": key})
+                n += 1
+            blocks.append({"label": f"[{labels[t]}]", "title": "", "rows": rows})
+    else:
+        for i, p in enumerate(passages, start=1):
+            rows = []
+            for t in type_order:
+                row, key = _row(n, t, p)
+                rows.append(row)
+                quick.append({"no": n, "key": key})
+                n += 1
+            disp = getattr(p, "source_label", "") or f"지문 {i}"
+            blocks.append({"label": f"[{disp}]", "title": p.title, "rows": rows})
     return blocks, quick
 
 
@@ -94,21 +108,31 @@ def _resolve_sections(sections) -> tuple[set, str | None]:
 
 def collect_review(passages: list[Passage], start: int = 1,
                    type_order=TYPE_ORDER, labels=TYPE_LABELS,
-                   part_label: str = "") -> list[dict]:
+                   part_label: str = "", group_by: str = "passage") -> list[dict]:
     """'확인 권장'으로 표시된 문항을 문서 연속 번호와 함께 모은다.
 
-    _blocks 와 '같은 순회 순서·같은 번호 부여 규칙'을 쓰므로 문항 번호가 정확히 일치한다.
-    part_label 은 합본에서 어느 파트(1회/2회·난이도)인지 구분용.
+    _blocks 와 '같은 순회 순서·같은 번호 부여 규칙'(group_by 포함)을 쓰므로 문항 번호가
+    정확히 일치한다. part_label 은 합본에서 어느 파트(1회/2회·난이도)인지 구분용.
     """
     items: list[dict] = []
     n = start
-    for p in passages:
+
+    def _emit(t: str, p: Passage) -> None:
+        nonlocal n
+        reasons = getattr(p, "flags", {}).get(t)
+        if reasons:
+            items.append({"no": n, "label": labels[t], "title": p.title,
+                          "part": part_label, "reasons": list(reasons)})
+        n += 1
+
+    if group_by == "type":
         for t in type_order:
-            reasons = getattr(p, "flags", {}).get(t)
-            if reasons:
-                items.append({"no": n, "label": labels[t], "title": p.title,
-                              "part": part_label, "reasons": list(reasons)})
-            n += 1
+            for p in passages:
+                _emit(t, p)
+    else:
+        for p in passages:
+            for t in type_order:
+                _emit(t, p)
     return items
 
 
@@ -119,9 +143,9 @@ def render_html(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
-    sections=None,
+    sections=None, group_by: str = "passage",
 ) -> str:
-    blocks, quick = _blocks(passages, start, type_order, prompts, labels)
+    blocks, quick = _blocks(passages, start, type_order, prompts, labels, group_by)
     active, first_section = _resolve_sections(sections)
     tmpl = _env.get_template("exam.html.j2")
     return tmpl.render(
@@ -168,7 +192,7 @@ def render_pdf(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
-    sections=None,
+    sections=None, group_by: str = "passage",
 ) -> Path:
     from weasyprint import HTML  # 지연 임포트(무거움)
 
@@ -178,13 +202,13 @@ def render_pdf(
     html = render_html(passages, header_note=header_note, doc_title=doc_title,
                        start=start, footer_note=footer_note,
                        type_order=type_order, prompts=prompts, labels=labels,
-                       sections=sections)
+                       sections=sections, group_by=group_by)
     css = _stylesheets()
     docs = [HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css)]
 
     # 교사용 산출물이면, '확인 권장 문항'을 맨 끝 별도 페이지로 덧붙인다.
     if active & _TEACHER_SECTIONS:
-        items = collect_review(passages, start, type_order, labels)
+        items = collect_review(passages, start, type_order, labels, group_by=group_by)
         if items:
             rhtml = render_review_html(items, footer_note)
             docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
@@ -212,6 +236,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
         type_order = part.get("type_order", TYPE_ORDER)
         labels = part.get("labels", TYPE_LABELS)
         sections = part.get("sections")
+        group_by = part.get("group_by", "passage")
         html = render_html(
             part["passages"],
             header_note=part.get("header_note", ""),
@@ -220,6 +245,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
             prompts=part.get("prompts", TYPE_PROMPTS),
             labels=labels,
             sections=sections,
+            group_by=group_by,
         )
         docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
         # 각 파트의 확인 권장 문항을 파트 라벨과 함께 모은다(교사용 산출물일 때만).
@@ -227,7 +253,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
         if active & _TEACHER_SECTIONS:
             review_items += collect_review(
                 part["passages"], 1, type_order, labels,
-                part_label=part.get("header_note", ""))
+                part_label=part.get("header_note", ""), group_by=group_by)
 
     if review_items:
         rhtml = render_review_html(review_items, footer_note)

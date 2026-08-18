@@ -91,6 +91,9 @@ def generate():
     # 출력할 섹션(없으면 4개 모두)
     valid_sec = ("student", "teacher", "quick", "answers")
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
+    # 문항 배치: 지문별(기본) 또는 문제유형별
+    group_by = request.form.get("group_by")
+    group_by = group_by if group_by in ("passage", "type") else "passage"
     uploads = [f for f in request.files.getlist("files") if f and f.filename]
     doc_name = safe_name(request.form.get("doc_name", ""))
 
@@ -209,7 +212,7 @@ def generate():
                                             analyses=analyses, level=lv,
                                             labels=src_labels)
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
-                                  "sections": sections})
+                                  "sections": sections, "group_by": group_by})
                 else:
                     if demo:
                         ps = demo_passages_2()
@@ -223,9 +226,11 @@ def generate():
                                              labels=src_labels)
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER2,
-                                  "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2})
+                                  "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2,
+                                  "group_by": group_by})
                 part_meta.append({"set": sid, "tag": part_tag(sid, lv),
-                                  "sections": sections, "passages": ps})
+                                  "sections": sections, "passages": ps,
+                                  "group_by": group_by})
                 labels.append(part_header(sid, lv))
 
         fid = uuid.uuid4().hex[:12]

@@ -57,6 +57,7 @@ def dump_parts(part_meta: list[dict], header: str = "", doc_name: str = "") -> d
                 "set": str(pm["set"]),
                 "tag": pm["tag"],
                 "sections": list(pm.get("sections") or []),
+                "group_by": pm.get("group_by", "passage"),
                 "passages": [passage_to_dict(p) for p in pm["passages"]],
             }
             for pm in part_meta
@@ -89,10 +90,12 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
             missing = [t for t in order if t not in p.q or t not in p.a]
             if missing:
                 raise ValueError(f"'{p.title}' 파트에 빠진 유형이 있습니다: {missing}")
+        gb = pm.get("group_by", "passage")
         part = {
             "passages": passages,
             "header_note": _header_note(str(pm.get("tag", "") or ""), header),
             "sections": pm.get("sections") or None,
+            "group_by": gb if gb in ("passage", "type") else "passage",
         }
         if setk == "2":
             part.update(type_order=order, prompts=prompts, labels=labels)
