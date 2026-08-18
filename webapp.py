@@ -153,6 +153,19 @@ INDEX_HTML = """
         </div>
       </div>
 
+      <div class=grid>
+        <div>
+          <label>⑤-2 생성 회차 수 <span class=hint>(지문 하나로 여러 회분)</span></label>
+          <select name=n_forms>
+            <option value="1" selected>1회분 (25문항)</option>
+            <option value="2">2회분</option>
+            <option value="3">3회분</option>
+            <option value="4">4회분</option>
+          </select>
+        </div>
+        <div></div>
+      </div>
+
       <label>⑥ 시험지 머리글 <span class=hint>(선택)</span></label>
       <div class=grid>
         <input type=text name=exam_title placeholder="2026학년도 1학기 2차 시험">
@@ -200,12 +213,15 @@ RESULT_HTML = """
     <h1>✅ 동형모의고사 생성 완료</h1>
     <div class=sub>{{ school }} {{ grade }}학년 · 난이도 {{ difficulty }}
       · 선택형 {{ n_choice }} / 서술형 {{ n_essay }} · {{ total }}점
+      {% if (n_forms or 1) > 1 %}· <b>{{ n_forms }}회분</b>{% endif %}
       {{ '· 미리보기(mock)' if mock else '· LLM 생성' }}
 
     <table>
-      <tr><th>산출물</th><th>열기</th></tr>
+      <tr>{% if (n_forms or 1) > 1 %}<th style="width:60px">회차</th>{% endif %}
+        <th>산출물</th><th>열기</th></tr>
       {% for f in downloads %}
-      <tr><td>💾 {{ f.name }}</td>
+      <tr>{% if (n_forms or 1) > 1 %}<td><b>{{ f.form }}회</b></td>{% endif %}
+        <td>💾 {{ f.name }}</td>
         <td><a class=dl href="{{ url_for('view', fname=f.name) }}" target=_blank>미리보기</a>
             <a class=dl href="{{ url_for('download', fname=f.name) }}">다운로드</a></td></tr>
       {% endfor %}
@@ -535,49 +551,71 @@ def generate():
         from mockexam.core.llm import get_client
         client = get_client(key, MODEL)
 
+    n_forms = max(1, min(int(request.form.get("n_forms") or 1), 4))
     warnings: list[str] = []
+    all_downloads: list[dict] = []
+    fail_set: set[str] = set()
+    shortage = ""
+    pdf_ready = False
     try:
-        # 문항 생성 단계에서 구조·정답 유일성을 자가검증한다(별도 검수 패스 없음).
-        res = generate_mock(school, [str(p) for p in saved], difficulty=difficulty,
-                            grade=grade, client=client)
-
-        # ── 아래 조건은 '오류'지만 PDF 는 항상 내보낸다. 경고로만 표시. ──
-        # 지문을 하나도 못 읽은 경우(스캔/HWP 등) → 자리표시자로 생성됨
-        if res.num_passages == 0:
-            warnings.append(
-                "업로드 파일에서 지문 텍스트를 읽지 못해 '지문 부족' 자리표시자로 "
-                "생성했습니다. 텍스트가 선택되는 PDF로 저장하거나(스캔본은 API 키를 "
-                "넣으면 비전으로 읽힘), HWP는 'PDF로 저장' 후 다시 올려주세요.")
-
-        # 일부 문항 생성 실패 → 실패 문항은 마지막 '검토 문항' 페이지에 정리됨
-        gen_errs = [l for l in res.logs if l.get("note") == "generation_failed"]
-        n_q = len(res.exam.questions) or 1
-        if not mock and gen_errs:
-            uniq = []
-            for l in gen_errs:
-                msg = l.get("error", "")
-                if msg and msg not in uniq:
-                    uniq.append(msg)
-            detail = " | ".join(uniq[:2]) or "원인 메시지 없음"
-            warnings.append(
-                f"일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
-                f"마지막 '검토 문항' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
-
         raw = (request.form.get("outname") or "").strip()
         if raw.lower().endswith(".pdf"):
             raw = raw[:-4]
-        stem = _unique_stem(_safe_name(raw) if raw else
-                            f"{school}_{grade}학년_동형모의고사")
+        base = _safe_name(raw) if raw else f"{school}_{grade}학년_동형모의고사"
+        base_title = (request.form.get("exam_title") or "").strip()
+        subject = (request.form.get("subject") or "").strip()
 
-        info = {}
-        if request.form.get("exam_title"):
-            info["exam_title"] = request.form["exam_title"].strip()
-        if request.form.get("subject"):
-            info["subject"] = request.form["subject"].strip()
+        # N회분: 지문은 한 번만 로드(비전 비용 절감), 회차별로 지문 풀 분할.
+        from mockexam.pipeline import generate_mock_forms
+        results = generate_mock_forms(school, [str(p) for p in saved], n_forms=n_forms,
+                                      difficulty=difficulty, grade=grade, client=client)
 
-        out = render_exam(res.exam, OUTPUT_DIR, header_info=info,
-                          footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
-                          answer_key="end", basename=stem)
+        first = results[0]
+        for i, res in enumerate(results, 1):
+            tag = f"{i}회 " if n_forms > 1 else ""
+            # ── 오류여도 PDF 는 항상 내보낸다. 경고로만 표시. ──
+            if res.num_passages == 0:
+                warnings.append(
+                    f"{tag}업로드 파일에서 지문 텍스트를 읽지 못해 '지문 부족' 자리표시자로 "
+                    "생성했습니다. 텍스트가 선택되는 PDF로 저장하거나(스캔본은 API 키를 "
+                    "넣으면 비전으로 읽힘), HWP는 'PDF로 저장' 후 다시 올려주세요.")
+            gen_errs = [l for l in res.logs if l.get("note") == "generation_failed"]
+            n_q = len(res.exam.questions) or 1
+            if not mock and gen_errs:
+                uniq = []
+                for l in gen_errs:
+                    msg = l.get("error", "")
+                    if msg and msg not in uniq:
+                        uniq.append(msg)
+                detail = " | ".join(uniq[:2]) or "원인 메시지 없음"
+                warnings.append(
+                    f"{tag}일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
+                    f"마지막 '검토 문항' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
+
+            stem = _unique_stem(f"{base}_{i}회" if n_forms > 1 else base)
+            info = {}
+            if base_title:
+                info["exam_title"] = f"{base_title} ({i}회)" if n_forms > 1 else base_title
+            elif n_forms > 1:
+                info["exam_title"] = f"{first.blueprint.meta.name} 동형모의고사 ({i}회)"
+            if subject:
+                info["subject"] = subject
+
+            out = render_exam(res.exam, OUTPUT_DIR, header_info=info,
+                              footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                              answer_key="end", basename=stem)
+            pdf_ready = pdf_ready or ("problem_pdf" in out)
+            for k, p in out.items():
+                if k in ("problem_pdf", "problem_html", "exam_json"):
+                    all_downloads.append({"name": p.name, "form": i})
+            if not shortage:
+                shortage = next((l.get("msg") for l in res.logs
+                                 if l.get("note") == "passage_reuse"), "")
+            for l in res.logs:
+                if l.get("note") in ("generation_failed", "no_passage",
+                                     "skipped_no_passage"):
+                    pre = "서술형 " if l.get("section") == "essay" else ""
+                    fail_set.add(f"{tag}{pre}{l.get('no')}번")
     except Exception as e:
         traceback.print_exc()
         html = INDEX_HTML.replace("<form id=f",
@@ -587,31 +625,28 @@ def generate():
         for p in saved:
             p.unlink(missing_ok=True)
 
-    downloads = [{"name": p.name} for k, p in out.items()
-                 if k in ("problem_pdf", "problem_html", "exam_json")]
-    # PDF → HTML → JSON 순으로 노출
-    def _ord(n):
-        return 0 if n.endswith(".pdf") else (1 if n.endswith(".html") else 2)
-    downloads.sort(key=lambda d: _ord(d["name"]))
+    # 회차 → PDF → HTML → JSON 순으로 노출
+    def _ord(d):
+        n = d["name"]
+        t = 0 if n.endswith(".pdf") else (1 if n.endswith(".html") else 2)
+        return (d.get("form", 1), t)
+    all_downloads.sort(key=_ord)
     import json
-    logs = json.dumps(res.logs, ensure_ascii=False, indent=2) if res.logs else ""
-    shortage = next((l.get("msg") for l in res.logs
-                     if l.get("note") == "passage_reuse"), "")
-    # 생성 실패·지문부족으로 자리표시자가 된 문항 번호(해설지 ⚠와 연동)
-    fail_nos = sorted({f"{'서술형 ' if l.get('section')=='essay' else ''}{l.get('no')}번"
-                       for l in res.logs
-                       if l.get("note") in ("generation_failed", "no_passage",
-                                            "skipped_no_passage")})
-    failed = ", ".join(fail_nos) if (fail_nos and not mock) else ""
+    logs = json.dumps(first.logs, ensure_ascii=False, indent=2) if first.logs else ""
+    failed = ", ".join(sorted(fail_set)) if (fail_set and not mock) else ""
     school_name = next((s["name"] for s in load_schools_index()
                         if s["school_id"] == school), school)
+    if n_forms > 1:
+        warnings.insert(0, f"{n_forms}회분을 생성했습니다. 회차마다 지문 풀을 나눠 배정했으며, "
+                        "지문이 적으면 회차 간 지문이 겹칠 수 있습니다(지문을 많이 올릴수록 회차별 "
+                        "다양성이 커집니다).")
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
-        n_choice=len(res.exam.choice_questions), n_essay=len(res.exam.essay_questions),
-        total=res.blueprint.total_score, mock=mock, shortage=shortage,
-        failed=failed, warnings=warnings, downloads=downloads,
-        verify=res.verify_report.summary(), logs=logs,
-        pdf_ready="problem_pdf" in out)
+        n_choice=len(first.exam.choice_questions), n_essay=len(first.exam.essay_questions),
+        total=first.blueprint.total_score, mock=mock, shortage=shortage,
+        failed=failed, warnings=warnings, downloads=all_downloads,
+        verify=first.verify_report.summary(), logs=logs, n_forms=n_forms,
+        pdf_ready=pdf_ready)
 
 
 @app.route("/learn", methods=["GET"])
@@ -747,7 +782,7 @@ def retitle_run():
         shortage="", failed="",
         warnings=["제목만 바꿔 다시 출력했습니다(API 재분석 없음). 문항 내용은 그대로입니다."],
         downloads=downloads, verify="제목 수정 재출력 — 문항은 검증 없이 그대로 유지",
-        logs="", pdf_ready="problem_pdf" in out)
+        logs="", n_forms=1, pdf_ready="problem_pdf" in out)
 
 
 def _fmt(s: float) -> str:

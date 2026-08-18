@@ -62,8 +62,28 @@ q1 = Question(
     ),
 )
 
+q1b = Question(
+    no=0, section="choice", type="title", score=3,
+    stem="다음 글의 제목으로 가장 적절한 것은?",
+    passage_text=P1,
+    choices=C(
+        "The Strength of Wanting to Be Alone",
+        "How Non-verbal Signals Replace Conversation",
+        "Managing Your Time Between Work and Rest",
+        "We Need Others to Know That We Exist",
+        "Why Independence Defines a Mature Person",
+    ),
+    answer="④",
+    explanation=(
+        "[핵심 포인트] 글의 핵심은 '아주 기본적으로 타인이 있어야 우리가 존재하고 정체성을 "
+        "가진다는 것을 확인받는다'이다. 이를 함축한 ④가 제목으로 알맞다.\n"
+        "[오답 함정] ①⑤ '혼자'와 '독립'을 강조해 글의 결론과 반대다(주제 모순). ②③ 비언어적 "
+        "신호·시간 관리는 글의 중심 소재가 아니다(주제 무관)."
+    ),
+)
+
 q2 = Question(
-    no=2, section="choice", type="blank_single", score=3,
+    no=0, section="choice", type="blank_single", score=3,
     stem="다음 빈칸에 들어갈 말로 가장 적절한 것은?",
     passage_text=P1_BLANK,
     choices=C(
@@ -116,8 +136,43 @@ q3 = Question(
     ),
 )
 
+# 방관자 효과 원문(무관 문장 없이) — 요지 문항용
+P2_ORIG = (
+    "Social psychology tells us that bystanders in emergency situations are acting "
+    "normally when they fail to respond. The problem with bystanders does not stem "
+    "from defects in their character that prevent them from helping. Rather, the "
+    "situation that bystanders find themselves in constrains their behavior more than "
+    "we realize. For example, the more bystanders there are, the less likely any one "
+    "of them will intervene. A single bystander at the scene of an emergency would "
+    "usually respond. But when a number of bystanders witness an emergency, "
+    "responsibility apparently diffuses among them, and no one feels enough personal "
+    "responsibility to respond."
+)
+
+q3b = Question(
+    no=0, section="choice", type="main_point", score=3,
+    stem="다음 글의 요지로 가장 적절한 것은?",
+    passage_text=P2_ORIG,
+    choices=C(
+        "위급 상황에서 방관자가 돕지 못하는 것은 성격 결함이 아니라, 사람이 많을수록 책임감이 "
+        "분산되는 상황 때문이다.",
+        "비언어적 의사소통에 능숙하면 위기 상황에서 오해를 줄일 수 있다.",
+        "위급 상황에 대비해 평소에 응급 대처 훈련을 받아 두는 것이 중요하다.",
+        "사람들은 대개 자신의 성격적 결함 때문에 위기 상황에서 남을 돕지 못한다.",
+        "목격자의 수가 많을수록 그중 한 사람이 나서서 도울 가능성이 커진다.",
+    ),
+    answer="①",
+    explanation=(
+        "[핵심 포인트] 글은 방관자가 돕지 않는 원인을 '성격 결함'이 아니라 '상황'에서 찾으며, "
+        "특히 사람이 많을수록 책임감이 분산되어 아무도 나서지 않는다고 설명한다.\n"
+        "[오답 함정] ②③ 비언어적 소통·응급 훈련은 글에서 다루지 않는다(주제 무관). ④ 지문은 "
+        "성격 결함이 원인이 아니라고 명시한다(주제 모순). ⑤ '사람이 많을수록 개입 가능성이 "
+        "낮아진다'는 글과 정반대다(주제 모순)."
+    ),
+)
+
 # ─────────────────────────────────────────────────────────────────────
-# 지문 3 · 퍼스널 브랜딩 (Ch.05 Unit 14-1) → 제목 + 내용 불일치
+# 지문 3 · 퍼스널 브랜딩 (Ch.05 Unit 14-1) → 제목 + 내용 불일치 + 빈칸
 # ─────────────────────────────────────────────────────────────────────
 P3 = ("Personal branding is not something that you have to do behind the scenes. "
       "For many it does not always feel comfortable to deliberately plan how we are "
@@ -170,6 +225,29 @@ q5 = Question(
     ),
 )
 
+P3_BLANK = P3.replace("is essential to achieving success",
+                      "is ____________ to achieving success")
+
+q5b = Question(
+    no=0, section="choice", type="blank_single", score=3,
+    stem="다음 빈칸에 들어갈 말로 가장 적절한 것은?",
+    passage_text=P3_BLANK,
+    choices=C(
+        "essential",
+        "irrelevant",
+        "harmful",
+        "optional",
+        "secondary",
+    ),
+    answer="①",
+    explanation=(
+        "[핵심 포인트] 뒤 문장들이 '퍼스널 브랜딩의 기회를 인식·예상하라'고 강조하며 그 중요성을 "
+        "설명하므로, 빈칸에는 '필수적인(essential)'이 와야 흐름이 맞는다.\n"
+        "[오답 함정] ② irrelevant ③ harmful ④ optional은 '중요하다'는 글의 논지와 반대다"
+        "(주제 모순). ⑤ secondary(부차적) 역시 중요성을 낮춰 글과 어긋난다."
+    ),
+)
+
 # ─────────────────────────────────────────────────────────────────────
 # 지문 4 · 명왕성 발견 (Ch.05 Unit 14-2) → 어법 + 빈칸
 # ─────────────────────────────────────────────────────────────────────
@@ -213,24 +291,31 @@ q7 = Question(
     stem="다음 빈칸에 들어갈 말로 가장 적절한 것은?",
     passage_text=P4_BLANK,
     choices=C(
-        "movement",
         "brightness",
         "color",
         "distance",
         "temperature",
+        "movement",
     ),
-    answer="①",
+    answer="⑤",
     explanation=(
         "[핵심 포인트] 앞에서 '점 하나가 위치를 바꾸었다(changed position)', '행성은 한 사진에서 "
         "다음 사진으로 이동한다(shifts)'고 했으므로, 빈칸에는 그 '움직임'을 뜻하는 movement가 와야 "
         "앞 내용과 같은 뜻으로 이어진다(유의어 재진술).\n"
-        "[오답 함정] ② brightness ③ color ⑤ temperature는 글에서 판단 근거로 삼지 않은 요소다"
-        "(주제 무관). ④ distance는 '거리'로, 사진 사이의 '위치 변화(움직임)'를 포착했다는 논지와 "
+        "[오답 함정] ① brightness ② color ④ temperature는 글에서 판단 근거로 삼지 않은 요소다"
+        "(주제 무관). ③ distance는 '거리'로, 사진 사이의 '위치 변화(움직임)'를 포착했다는 논지와 "
         "어긋난다(주제 모순)."
     ),
 )
 
-QUESTIONS = [q1, q2, q3, q4, q5, q6, q7]
+# 읽기 순서(지문 1→4)대로 배열하고 문항 번호를 자동 부여.
+ORDER = [q1, q1b, q2,          # 지문1: 요지·제목·빈칸
+         q3, q3b,              # 지문2: 무관문장·요지
+         q4, q5, q5b,          # 지문3: 제목·불일치·빈칸
+         q6, q7]               # 지문4: 어법·빈칸
+QUESTIONS = ORDER
+for i, q in enumerate(QUESTIONS, 1):
+    q.no = i
 total = sum(q.score for q in QUESTIONS)
 
 meta = BlueprintMeta(

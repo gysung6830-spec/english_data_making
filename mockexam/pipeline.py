@@ -62,10 +62,13 @@ def generate_mock(
     client: Any = None,
     max_regen: int = 2,
     workers: int = 8,
+    passages: list[Passage] | None = None,
+    form: str = "A",
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
     문항 생성 단계에서 구조·정답 유일성을 자가검증하므로 별도 검수 패스는 두지 않는다.
+    passages 를 직접 주면 파일 재로드(비전 재호출)를 건너뛴다 — N회분 생성 시 비용 절감.
     """
     diff: Difficulty = DIFFICULTY_KO.get(difficulty, difficulty)  # type: ignore
     if diff not in ("low", "mid", "high"):
@@ -77,7 +80,9 @@ def generate_mock(
     blueprint = blueprint_from_profile(profile, grade)
 
     # [3] 지문 파싱 + 프로파일링 (API 키 있으면 PDF는 비전 추출로 오류 원천 차단)
-    passages = _load_passages(passage_paths, client)
+    #     passages 가 주어지면(N회분) 재로드하지 않는다.
+    if passages is None:
+        passages = _load_passages(passage_paths, client)
     pmap: dict[str, Passage] = {p.id: p for p in passages}
     profiles = {p.id: profile_passage(p) for p in passages}
 
@@ -161,8 +166,39 @@ def generate_mock(
     # [8] 정답 번호 분산 — 한 번호에 쏠리거나 3연속되지 않게 고르게 재배치
     _rebalance_answers(exam)
 
+    exam.form = form
     return GenResult(exam, blueprint, assignments, report, logs,
                      num_passages=len(passages))
+
+
+def generate_mock_forms(
+    school_id: str,
+    passage_paths: list[str | Path],
+    n_forms: int = 1,
+    difficulty: str = "중",
+    grade: int = 1,
+    client: Any = None,
+    max_regen: int = 2,
+    workers: int = 8,
+) -> list[GenResult]:
+    """지문 파일을 한 번만 로드해 N회분(A·B·C…) 완결형 세트를 만든다.
+
+    - 지문 풀을 회차별로 라운드로빈 분할(passages[i::n]) → 회차마다 다른 지문 사용.
+    - 지문이 회차 수보다 적으면 전체 풀을 공유(각 회차는 유형별 최적 지문으로 재사용).
+    각 회차는 학교 blueprint 전체(완결형)를 그대로 생성한다.
+    """
+    n = max(1, min(int(n_forms), 8))
+    passages = _load_passages(passage_paths, client)   # 비전 추출은 한 번만
+    results: list[GenResult] = []
+    for i in range(n):
+        subset = passages[i::n] if passages else []
+        if not subset:                                 # 지문이 회차보다 적으면 공유
+            subset = passages
+        res = generate_mock(school_id, [], difficulty=difficulty, grade=grade,
+                            client=client, max_regen=max_regen, workers=workers,
+                            passages=subset, form=chr(ord("A") + i))
+        results.append(res)
+    return results
 
 
 def _rebalance_answers(exam) -> None:
