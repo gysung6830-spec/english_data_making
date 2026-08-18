@@ -328,7 +328,7 @@ info = {"exam_title": "동형모의고사 — EBS 올림포스 기본1 (4지문)
         "subject": "영어독해"}
 
 out = render_exam(exam, OUT, header_info=info,
-                  footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                  footer="© 2026 Ortica영어. All rights reserved.",
                   answer_key="end", basename="EBS_올림포스_기본1_동형모의고사")
 
 print("문항 수:", len(QUESTIONS), "총점:", total)

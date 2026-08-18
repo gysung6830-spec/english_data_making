@@ -352,7 +352,7 @@ def _guidelines_block(exam: MockExam, info: dict) -> str:
 def _footer_note(exam: MockExam, footer: str) -> str:
     """매 페이지 하단에 넣을 저작권 문구(쪽번호는 @page 카운터가 채움)."""
     m = exam.blueprint.meta
-    note = footer or "이 시험문제는 은아T영어연구소의 저작물입니다."
+    note = footer or "© 2026 Ortica영어. All rights reserved."
     return f"{note}  ·  {m.grade}학년 {m.subject or '공통영어1'}"
 
 

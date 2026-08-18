@@ -602,7 +602,7 @@ def generate():
                 info["subject"] = subject
 
             out = render_exam(res.exam, OUTPUT_DIR, header_info=info,
-                              footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                              footer="© 2026 Ortica영어. All rights reserved.",
                               answer_key="end", basename=stem)
             pdf_ready = pdf_ready or ("problem_pdf" in out)
             for k, p in out.items():
@@ -762,7 +762,7 @@ def retitle_run():
 
     try:
         out = render_exam(exam, OUTPUT_DIR, header_info=info,
-                          footer="이 시험문제는 은아T영어연구소의 저작물입니다.",
+                          footer="© 2026 Ortica영어. All rights reserved.",
                           answer_key="end", basename=stem)
     except Exception as e:
         traceback.print_exc()
