@@ -16,10 +16,10 @@ from typing import Any, Literal
 
 Section = Literal["choice", "essay"]
 FormatType = Literal["narrative", "dialogue", "notice", "chart"]
-Difficulty = Literal["low", "mid", "high"]
+Difficulty = Literal["low", "mid", "mid_high", "high"]
 
 # 사용자 입력(한글) → 내부 난이도 코드
-DIFFICULTY_KO = {"하": "low", "중": "mid", "상": "high"}
+DIFFICULTY_KO = {"하": "low", "중": "mid", "중상": "mid_high", "상": "high"}
 DIFFICULTY_KO_REV = {v: k for k, v in DIFFICULTY_KO.items()}
 
 

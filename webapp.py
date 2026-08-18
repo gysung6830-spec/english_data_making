@@ -156,7 +156,7 @@ INDEX_HTML = """
       <div class=grid>
         <div>
           <label>⑤-2 생성 회차 수
-            <span class=hint>(같은 지문 · 다른 문항 · 난이도 상향)</span></label>
+            <span class=hint>(같은 지문 · 겹치지 않는 문항 · 난이도 하→중→상→중상)</span></label>
           <select name=n_forms>
             <option value="1" selected>1회분</option>
             <option value="2">2회분</option>
@@ -646,9 +646,10 @@ def generate():
                         if s["school_id"] == school), school)
     if n_forms > 1:
         grad = " → ".join(f"{i}회 {d}" for i, d in enumerate(form_diffs, 1))
-        warnings.insert(0, f"{n_forms}회분을 생성했습니다. 모든 회차가 '같은 지문'을 쓰되 문항을 "
-                        f"다르게 출제하고 난이도를 회차별로 올렸습니다(난이도: {grad}). 같은 지문을 "
-                        "반복 학습하며 난이도를 높여 가는 용도입니다.")
+        warnings.insert(0, f"{n_forms}회분을 생성했습니다. 모든 회차가 '같은 지문'을 쓰되 회차 간 "
+                        f"'(지문×유형) 조합이 겹치지 않도록' 문항을 다르게 출제했고, 난이도는 {grad} "
+                        "로 고정했습니다. (지문이 매우 적으면 조합이 부족해 일부 겹칠 수 있으며, 이때도 "
+                        "문항 내용은 회차마다 다르게 만듭니다.)")
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(first.exam.choice_questions), n_essay=len(first.exam.essay_questions),

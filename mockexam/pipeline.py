@@ -65,6 +65,7 @@ def generate_mock(
     passages: list[Passage] | None = None,
     form: str = "A",
     variant: int = 0,
+    avoid_pairs: set[tuple[str, str]] | None = None,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
@@ -72,7 +73,7 @@ def generate_mock(
     passages 를 직접 주면 파일 재로드(비전 재호출)를 건너뛴다 — N회분 생성 시 비용 절감.
     """
     diff: Difficulty = DIFFICULTY_KO.get(difficulty, difficulty)  # type: ignore
-    if diff not in ("low", "mid", "high"):
+    if diff not in ("low", "mid", "mid_high", "high"):
         diff = "mid"
 
     # [1] 프로파일 로드 (미학습이면 학교급 표준 골격)
@@ -87,8 +88,9 @@ def generate_mock(
     pmap: dict[str, Passage] = {p.id: p for p in passages}
     profiles = {p.id: profile_passage(p) for p in passages}
 
-    # [4] 지문 자동배정
-    assignments = assign_passages(blueprint, passages, profiles, difficulty=diff)
+    # [4] 지문 자동배정 (avoid_pairs: 회차 간 (지문,유형) 겹침 방지)
+    assignments = assign_passages(blueprint, passages, profiles, difficulty=diff,
+                                  avoid_pairs=avoid_pairs)
 
     # [5] 문항 생성
     ctx = GenContext(profile=profile, difficulty=diff, client=client,
@@ -172,24 +174,23 @@ def generate_mock(
                      num_passages=len(passages))
 
 
-_DIFF_LEVELS = ["low", "mid", "high"]
-_DIFF_KO = {"low": "하", "mid": "중", "high": "상"}
+_DIFF_KO = {"low": "하", "mid": "중", "mid_high": "중상", "high": "상"}
+# N회분 고정 난이도 사다리(사용자 지정): 하 → 중 → 상 → 중상
+_DIFF_LADDER = ["low", "mid", "high", "mid_high"]
 
 
 def difficulty_gradient(base: str, n: int) -> list[str]:
-    """선택한 기준 난이도에서 '상(high)'까지 회차별로 고르게 상향한 난이도 목록.
+    """N회분 난이도 목록. n>1 이면 고정 사다리(하→중→상→중상)의 앞 n개를 쓴다.
 
-    예) base=하, n=4 → [하, 중, 중, 상]   base=중, n=4 → [중, 중, 상, 상]
-    n=1 이면 기준 난이도 그대로.
+    n=1 이면 사용자가 고른 기준 난이도를 그대로 사용한다.
     """
-    b = DIFFICULTY_KO.get(base, base)
-    if b not in _DIFF_LEVELS:
-        b = "mid"
-    bi = _DIFF_LEVELS.index(b)
     if n <= 1:
-        return [b]
-    top = len(_DIFF_LEVELS) - 1          # high
-    return [_DIFF_LEVELS[round(bi + (top - bi) * i / (n - 1))] for i in range(n)]
+        b = DIFFICULTY_KO.get(base, base)
+        return [b if b in _DIFF_KO else "mid"]
+    if n <= len(_DIFF_LADDER):
+        return _DIFF_LADDER[:n]
+    # 5회 이상이면 사다리를 반복(마지막은 중상 유지)
+    return [_DIFF_LADDER[min(i, len(_DIFF_LADDER) - 1)] for i in range(n)]
 
 
 def generate_mock_forms(
@@ -213,11 +214,17 @@ def generate_mock_forms(
     passages = _load_passages(passage_paths, client)   # 비전 추출은 한 번만
     diffs = difficulty_gradient(difficulty, n)
     results: list[GenResult] = []
+    used_pairs: set[tuple[str, str]] = set()   # 회차 간 (지문id, 유형) 겹침 방지 누적
     for i in range(n):
         res = generate_mock(school_id, [], difficulty=diffs[i], grade=grade,
                             client=client, max_regen=max_regen, workers=workers,
                             passages=passages, form=chr(ord("A") + i),
-                            variant=(i + 1 if n > 1 else 0))
+                            variant=(i + 1 if n > 1 else 0),
+                            avoid_pairs=set(used_pairs) if n > 1 else None)
+        # 이 회차가 실제로 쓴 (지문,유형) 조합을 누적 → 다음 회차는 이를 피한다.
+        for a in res.assignments:
+            if a.passage_id:
+                used_pairs.add((a.passage_id, a.type))
         # 이 회차의 난이도(한글)를 결과에 기록 → 웹앱 표시용
         res.logs.insert(0, {"note": "form_difficulty", "form": i + 1,
                             "difficulty": _DIFF_KO.get(diffs[i], diffs[i])})

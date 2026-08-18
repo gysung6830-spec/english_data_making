@@ -183,11 +183,15 @@ def assign_passages(
     profiles: dict[str, PassageProfile] | None = None,
     difficulty: Difficulty = "mid",
     llm_refine: Callable[[str, Passage], float] | None = None,
+    avoid_pairs: set[tuple[str, str]] | None = None,
 ) -> list[Assignment]:
     """blueprint 슬롯에 지문을 중복 최소화하며 그리디 배정.
 
     llm_refine: 규칙 점수가 애매할 때 (유형, 지문)→0~1 을 반환하는 선택 훅.
+    avoid_pairs: (지문id, 유형) 조합을 되도록 피한다 — N회분에서 회차 간 문항 겹침 방지.
+                 대안이 없으면(지문 부족) 최후에 허용해 완성은 보장한다.
     """
+    avoid_pairs = avoid_pairs or set()
     if not passages:
         # 지문이 하나도 없으면 채울 수 없다(유일한 스킵 경우).
         return [Assignment(it.no, it.section, it.type, None, 0.0, "rule",
@@ -219,16 +223,16 @@ def assign_passages(
         if req_fmt:
             fmt_pool = by_format.get(req_fmt, [])
             pick = _pick(item, fmt_pool, profiles, use_count, type_on, difficulty,
-                         llm_refine, cap)
+                         llm_refine, cap, avoid_pairs=avoid_pairs)
             if pick is None:
                 # 형식 지문이 없거나 소진 → 서술문(없으면 전체)으로 대체(완성 보장)
                 pool = by_format.get("narrative") or passages
                 pick = _guaranteed_pick(item, pool, profiles, use_count, type_on,
-                                        difficulty, llm_refine, cap)
+                                        difficulty, llm_refine, cap, avoid_pairs)
                 note = "substituted"
         else:
             pick = _guaranteed_pick(item, passages, profiles, use_count, type_on,
-                                    difficulty, llm_refine, cap)
+                                    difficulty, llm_refine, cap, avoid_pairs)
 
         if pick is None:  # 지문 pool 이 비어있는 극단(위 not passages 로 사실상 방지)
             assignments.append(Assignment(item.no, item.section, item.type, None,
@@ -245,24 +249,29 @@ def assign_passages(
 
 
 def _guaranteed_pick(item, pool, profiles, use_count, type_on, difficulty,
-                     llm_refine, cap):
+                     llm_refine, cap, avoid_pairs=None):
     """pool 이 비어있지 않으면 반드시 지문을 하나 반환(모든 문항 완성 보장).
 
-    제약을 단계적으로 완화한다: 상한+유형겹침회피 → 유형겹침허용 → 상한무시.
+    제약을 단계적으로 완화한다: 겹침회피+회차회피 → 유형겹침허용 → 상한무시 →
+    (최후) 회차회피(avoid_pairs)까지 무시. 지문이 부족해도 완성은 보장.
     """
     if not pool:
         return None
     r = _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
-              cap, allow_type_overlap=False)
+              cap, allow_type_overlap=False, avoid_pairs=avoid_pairs)
     if r:
         return r
     r = _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
-              cap, allow_type_overlap=True)
+              cap, allow_type_overlap=True, avoid_pairs=avoid_pairs)
     if r:
         return r
-    # 마지막 수단: 상한도 무시(가장 적게 쓴 지문이 뽑히도록 페널티가 유도)
+    r = _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
+              None, allow_type_overlap=True, avoid_pairs=avoid_pairs)
+    if r:
+        return r
+    # 최후: 회차 간 회피(avoid_pairs)도 포기(대안이 전혀 없을 때만) — 완성 우선
     return _pick(item, pool, profiles, use_count, type_on, difficulty, llm_refine,
-                 None, allow_type_overlap=True)
+                 None, allow_type_overlap=True, avoid_pairs=None)
 
 
 def _pick(item: Item, candidates: list[Passage],
@@ -271,7 +280,8 @@ def _pick(item: Item, candidates: list[Passage],
           difficulty: Difficulty,
           llm_refine: Callable[[str, Passage], float] | None,
           cap: int | None,
-          allow_type_overlap: bool = False):
+          allow_type_overlap: bool = False,
+          avoid_pairs: set[tuple[str, str]] | None = None):
     """적합도(fit) 최고 지문을 고른다. 없으면 None.
 
     지문이 충분할 때(cap 有=지문수≥문항수)만 유형군 겹침·스포일러를 회피한다.
@@ -282,6 +292,9 @@ def _pick(item: Item, candidates: list[Passage],
     scored: list[tuple[float, str, str]] = []
     for p in candidates:
         if cap is not None and use_count.get(p.id, 0) >= cap:
+            continue
+        # 회차 간 겹침 방지: 이미 다른 회차에서 쓴 (지문,유형)이면 건너뛴다(대안 있을 때만).
+        if avoid_pairs and (p.id, item.type) in avoid_pairs:
             continue
         # (지문 충분할 때만) 같은 유형군이 한 지문에 겹치면 중복 위험 → 회피
         if plentiful and not allow_type_overlap and \
