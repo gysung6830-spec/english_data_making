@@ -27,7 +27,7 @@ SHORT_ANSWER = "short_answer"
 
 # 내용 일치는 서술형 바로 앞에 배치한다.
 TYPE_ORDER: tuple[str, ...] = (
-    ORDER, INSERT, TOPIC, VOCAB, GRAMMAR, CONTENT, SHORT_ANSWER,
+    GRAMMAR, VOCAB, TOPIC, CONTENT, ORDER, INSERT, SHORT_ANSWER,
 )
 
 # 발문(문제 지시문). 조판 시 문제 상단에 얇게 표기한다.

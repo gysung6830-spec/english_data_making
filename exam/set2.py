@@ -13,7 +13,7 @@ E = "E"  # 요약문 빈칸
 F = "F"  # 빈칸추론
 G = "G"  # 내용일치 개수
 
-TYPE_ORDER2: tuple[str, ...] = (A, B, C, D, E, F, G)
+TYPE_ORDER2: tuple[str, ...] = (F, B, E, G, A, C, D)
 
 TYPE_PROMPTS2: dict[str, str] = {
     A: "밑줄 친 ⓐ~ⓔ 중, 어법상 또는 문맥상 낱말의 쓰임이 적절하지 않은 것끼리 짝지어진 것은?",
