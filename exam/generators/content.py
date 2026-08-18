@@ -63,11 +63,12 @@ _PROMPT_HARD = """아래 '정본 지문'으로 '내용 일치' 문제를 만드�
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, difficulty: str = HARD,
-             answer_pos: int | None = None) -> tuple[str, str, list[str]]:
+             answer_pos: int | None = None,
+             variant_hint: str = "") -> tuple[str, str, list[str]]:
     prompt = _PROMPT_PLAIN if difficulty == PLAIN else _PROMPT_HARD
     out: ContentOut = client.structured(
         system=SYSTEM,
-        prompt=prompt.format(ctx=context(analysis)),
+        prompt=(variant_hint + "\n" if variant_hint else "") + prompt.format(ctx=context(analysis)),
         cache_prefix=context(analysis),
         model_cls=ContentOut,
         max_tokens=2800,

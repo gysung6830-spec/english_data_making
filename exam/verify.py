@@ -41,7 +41,15 @@ HIGH_RISK: dict[str, str] = {
     "E": "요약문 빈칸 (A)(B) 정답 조합만 성립하고 나머지 선지는 안 되는가.",
     "F": "빈칸 정답이 '유일'하고 나머지 선지는 성립하지 않는가.",
     "G": "일치하는 선지 '개수'(정답)가 정확한가. 각 선지의 참/거짓을 지문으로 하나씩 확인.",
+    # ---- 변형문제 3회 (base 키; 슬롯키 topic_1 등은 아래에서 base 로 정규화) ----
+    "content": "정답 선지가 지문과 '확실히 일치'하고, 나머지 4개 오답이 '확실히 불일치'인가.",
+    "imply": "밑줄 어구의 함의(정답)가 지문 논지상 '유일하게' 맞는가. 다른 선지도 가능하면 결함이다.",
 }
+
+
+def _base_key(type_key: str) -> str:
+    """3회 슬롯키(topic_1·content_3 …)를 base(topic·content …)로 정규화."""
+    return re.sub(r"_\d+$", "", type_key or "")
 
 _SYS = ("너는 한국 수능식 영어 시험 문항 검수자다. 주어진 문항과 정답이 결함 없이 "
         "'유일 정답'으로 성립하는지 엄격하게 판정한다. 확신이 없으면 결함(ok=false)으로 본다.")
@@ -59,7 +67,7 @@ def _text(html: str) -> str:
 def verify(client, type_key: str, q_html: str, a_html: str,
            max_retries: int = 1) -> tuple[bool, str]:
     """(ok, reason). 고위험 유형이 아니거나 검증 비활성/실패면 (True, '')로 통과 처리."""
-    focus = HIGH_RISK.get(type_key)
+    focus = HIGH_RISK.get(type_key) or HIGH_RISK.get(_base_key(type_key))
     if not focus or not enabled():
         return True, ""
     prompt = (

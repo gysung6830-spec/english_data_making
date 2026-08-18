@@ -849,6 +849,29 @@ def test_llm_self_verify() -> None:
     print("✓ LLM 자기검증(고위험 유형 재생성·플래그·비활성) 통과")
 
 
+def test_set3_demo() -> None:
+    """변형문제 3회: 지문당 주제3·제목3·내용일치3·함축의미3(=12문항) 검증·번호·조판·JSON."""
+    from exam import serialize
+    from exam.demo3 import demo_passages_3
+    from exam.set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
+    ps = demo_passages_3()
+    validator.validate_passages(ps, TYPE_ORDER3)
+    nums = validator.validate_numbering(ps, 1, TYPE_ORDER3)
+    assert nums == [list(range(1, 13))], nums          # 지문당 12문항
+    # 유형별 배치: [주제] 1·2·3 [제목] 1·2·3 …
+    html = renderer.render_html(ps, type_order=TYPE_ORDER3, prompts=TYPE_PROMPTS3,
+                                labels=TYPE_LABELS3, group_by="type")
+    assert "제목으로 가장 적절" in html and "함축의미" in html
+    assert "vanishingly small space" in html           # 정본 공유
+    # JSON 저장→복원(set "3") 라운드트립
+    pm = [{"set": "3", "tag": "변형문제 3회 · 난이도 중", "sections": ["student"],
+           "passages": ps, "group_by": "type"}]
+    data = serialize.dump_parts(pm, header="H")
+    loaded, _ = serialize.load_parts(data)
+    assert loaded[0]["type_order"] == TYPE_ORDER3
+    print("✓ 3회(주제·제목·내용일치·함축의미 ×3) 데모 검증·조판·JSON 통과")
+
+
 def test_passage_type_fit_flags() -> None:
     """지문 종류에 부적합한 문항 유형을 '확인 권장'으로 표시한다.
     (안내문·도표의 순서/삽입, 도표의 주제/요약/빈칸, 서사문의 주제 등)."""
@@ -1112,6 +1135,7 @@ if __name__ == "__main__":
     test_underline_reading_order()
     test_d_cue_marking()
     test_hanjul_translation_residue()
+    test_set3_demo()
     test_passage_type_fit_flags()
     test_llm_self_verify()
     test_notice_bullet_markers()

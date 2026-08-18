@@ -28,11 +28,11 @@ _PROMPT = """아래 '정본 지문'으로 '주제' 문제를 만드세요. 지�
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1, answer_pos: int | None = None
-             ) -> tuple[str, str, list[str]]:
+             max_retries: int = 1, answer_pos: int | None = None,
+             variant_hint: str = "") -> tuple[str, str, list[str]]:
     out: TopicOut = client.structured(
         system=SYSTEM,
-        prompt=_PROMPT.format(ctx=context(analysis)),
+        prompt=(variant_hint + "\n" if variant_hint else "") + _PROMPT.format(ctx=context(analysis)),
         cache_prefix=context(analysis),
         model_cls=TopicOut,
         max_tokens=2500,

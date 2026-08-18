@@ -19,7 +19,9 @@ from flask import Flask, abort, render_template, request, send_file
 from exam import renderer, validator
 from exam.demo_data import demo_passages
 from exam.demo2 import demo_passages_2
+from exam.demo3 import demo_passages_3
 from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+from exam.set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
 from src.config import load_config
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -87,7 +89,7 @@ def generate():
     levels = [l for l in LEVEL_ORDER if l in chosen] or ["중"]
 
     # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
-    sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
+    sets = [s for s in request.form.getlist("sets") if s in ("1", "2", "3")] or ["1"]
     # 출력할 섹션(없으면 4개 모두)
     valid_sec = ("student", "teacher", "quick", "answers")
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
@@ -213,7 +215,7 @@ def generate():
                                             labels=src_labels)
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "group_by": group_by})
-                else:
+                elif sid == "2":
                     if demo:
                         ps = demo_passages_2()
                         validator.validate_passages(ps, TYPE_ORDER2)
@@ -227,6 +229,21 @@ def generate():
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER2,
                                   "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2,
+                                  "group_by": group_by})
+                else:   # 변형문제 3회 — 주제3·제목3·내용일치3·함축의미3
+                    if demo:
+                        ps = demo_passages_3()
+                        validator.validate_passages(ps, TYPE_ORDER3)
+                        validator.validate_numbering(ps, 1, TYPE_ORDER3)
+                    else:
+                        from exam.gen3 import build_passages3
+                        ps = build_passages3(client, bodies,
+                                             max_retries=cfg.processing.max_retries,
+                                             analyses=analyses, level=lv,
+                                             labels=src_labels)
+                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
+                                  "sections": sections, "type_order": TYPE_ORDER3,
+                                  "prompts": TYPE_PROMPTS3, "labels": TYPE_LABELS3,
                                   "group_by": group_by})
                 part_meta.append({"set": sid, "tag": part_tag(sid, lv),
                                   "sections": sections, "passages": ps,

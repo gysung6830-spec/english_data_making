@@ -8,6 +8,7 @@ JSON 은 사람이 읽고 고칠 수 있는 형태라, 지문 제목 등은 파�
 from __future__ import annotations
 
 from .set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+from .set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
 from .types import TYPE_LABELS, TYPE_ORDER, TYPE_PROMPTS, Passage
 
 SCHEMA_VERSION = 1
@@ -38,6 +39,7 @@ def passage_from_dict(d: dict) -> Passage:
 _SET_META = {
     "1": (TYPE_ORDER, TYPE_PROMPTS, TYPE_LABELS),
     "2": (TYPE_ORDER2, TYPE_PROMPTS2, TYPE_LABELS2),
+    "3": (TYPE_ORDER3, TYPE_PROMPTS3, TYPE_LABELS3),
 }
 
 
@@ -97,7 +99,7 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
             "sections": pm.get("sections") or None,
             "group_by": gb if gb in ("passage", "type") else "passage",
         }
-        if setk == "2":
+        if setk in ("2", "3"):
             part.update(type_order=order, prompts=prompts, labels=labels)
         parts.append(part)
 

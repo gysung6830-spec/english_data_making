@@ -150,10 +150,12 @@ def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
     return q, a, []
 
 
-def _gen_B(client, analysis, body, max_retries=1, answer_pos=None):
+def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=""):
     p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르고(지문에 "
          "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 '영어'. 정답=글 전체 논지를 "
          "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 는 한국어.\n\n{ctx}")
+    if variant_hint:
+        p = variant_hint + "\n" + p
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     wrong = {w.no: w.text for w in out.wrong_reasons}

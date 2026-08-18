@@ -24,6 +24,7 @@ _UNFIT: dict[str, dict[str, str]] = {
         "order": "안내문(항목 나열): 순서 정답 근거 재확인",
         "insert": "안내문(항목 나열): 삽입 위치 근거 재확인",
         "B": "안내문: 함의추론 성립 여부 재확인",
+        "imply": "안내문: 함축의미 성립 여부 재확인",
         "E": "안내문: 요약문 성립 여부 재확인",
     },
     "chart": {
@@ -40,8 +41,12 @@ _UNFIT: dict[str, dict[str, str]] = {
 
 
 def type_fit_flags(passage_type: str | None, type_key: str) -> list[str]:
-    """지문 종류에 부적합한 문항 유형이면 '확인 권장' 사유를 돌려준다(아니면 빈 목록)."""
-    reason = _UNFIT.get((passage_type or "prose"), {}).get(type_key)
+    """지문 종류에 부적합한 문항 유형이면 '확인 권장' 사유를 돌려준다(아니면 빈 목록).
+    3회 슬롯키(topic_1·content_3 …)는 base(topic·content …)로 정규화해 판정한다."""
+    import re
+    base = re.sub(r"_\d+$", "", type_key or "")
+    fit = _UNFIT.get((passage_type or "prose"), {})
+    reason = fit.get(type_key) or fit.get(base)
     return [reason] if reason else []
 
 # 오답 근거가 '빈약'하다고 볼 최소 글자수(이하이면 근거가 사실상 비어 있음)
