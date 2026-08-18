@@ -151,9 +151,13 @@ def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
 
 
 def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=""):
-    p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르고(지문에 "
-         "그대로 있는 표현), 그 함축 의미를 묻습니다. choices 5개는 '영어'. 정답=글 전체 논지를 "
-         "반영한 재진술, 오답 4=축자적 오독 또는 논지 위배. reason·wrong_reasons 는 한국어.\n\n{ctx}")
+    p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르되(지문에 "
+         "그대로 있는, 어휘 난도 있는 표현으로 '축자 함정'을 깐다), 그 '문맥적' 의미를 묻습니다.\n"
+         "- 정답: 밑줄 표현을 '지문 맥락에서 풀어 쓴 재진술'(사전적·축자 뜻 아님). 밑줄의 긍/부정(±) "
+         "방향과 글의 주제를 '동시에' 만족해야 정답.\n"
+         "- 오답 4(각기 다른 축): ⓐ 축자 해석(곧이곧대로) ⓑ 방향 반전(±반대) ⓒ 과대 일반화 "
+         "ⓓ 부분만 ⓔ 무관. 하나는 정답과 비슷하나 한 끗 어긋난 '매력적 오답'.\n"
+         "choices 5개는 '영어'. reason·wrong_reasons(오답별 어느 축인지) 는 한국어.\n\n{ctx}")
     if variant_hint:
         p = variant_hint + "\n" + p
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
