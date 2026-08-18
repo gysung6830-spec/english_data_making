@@ -745,6 +745,10 @@ def render_spread(rec, c, idx):
     choices = rec.get("choices") or {}
     prompt = PROMPT.get(band, "다음 글을 읽고 물음에 답하시오.")
     # STEP1 선지
+    # STEP1 선지: 원본 choices가 완전하면 그대로, 불완전(누락·손상)하면 검증된 content opts로 대체
+    _opts = c.get("opts", [])
+    if _opts and len(choices) < len(_opts):
+        choices = {str(o["n"]): (o.get("tx") or "") for o in _opts}
     opt_lines = ""
     for k in sorted(int(x) for x in choices):
         opt_lines += f'<span class="o">{CIRCLED[k-1]} {esc(choices[str(k)])}</span>'
