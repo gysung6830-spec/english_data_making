@@ -85,10 +85,13 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
                                      max_retries, logger, kwargs)
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER])
+    from . import review as _rv
     for t in TYPE_ORDER:  # 고정 순서로 채워 넣기(수거는 완료순이라도 조립은 순서대로)
         q, a, fl = results[t]
         passage.set_qa(t, q, a)
         passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
+        # 지문 종류에 부적합한 유형(안내문·도표의 순서/삽입, 서사문의 주제 등)도 검수 표시
+        passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
 
     # 생성 단계 검증(7종 완비 · 유형 집합 일치)
     rep = validator.check_passage(passage)

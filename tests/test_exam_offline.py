@@ -813,6 +813,27 @@ def test_hanjul_translation_residue() -> None:
     print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
 
 
+def test_passage_type_fit_flags() -> None:
+    """지문 종류에 부적합한 문항 유형을 '확인 권장'으로 표시한다.
+    (안내문·도표의 순서/삽입, 도표의 주제/요약/빈칸, 서사문의 주제 등)."""
+    from exam import review
+    # 안내문: 순서·삽입은 검수, 내용일치·어휘는 적합(무플래그)
+    assert review.type_fit_flags("notice", "order")
+    assert review.type_fit_flags("notice", "insert")
+    assert not review.type_fit_flags("notice", "content")   # 내용일치는 안내문에 적합
+    assert not review.type_fit_flags("notice", "vocab")
+    # 도표: 순서·삽입·주제·요약(E)·빈칸(F)
+    assert review.type_fit_flags("chart", "topic")
+    assert review.type_fit_flags("chart", "F")
+    # 서사·심경문: 주제만
+    assert review.type_fit_flags("narrative", "topic")
+    assert not review.type_fit_flags("narrative", "order")
+    # 산문(기본)·미지정: 무플래그
+    assert not review.type_fit_flags("prose", "order")
+    assert not review.type_fit_flags(None, "topic")
+    print("✓ 지문 종류별 부적합 유형 검수 플래그 통과")
+
+
 def test_notice_bullet_markers() -> None:
     """안내문(행사·대회 안내)의 불릿 기호(* ※ •)는 목록 표시일 뿐 본문이 아니다.
     산문으로 펼칠 때 'When & Where * September … * Maple Creek …' 처럼 지문에 끼면
@@ -1055,6 +1076,7 @@ if __name__ == "__main__":
     test_underline_reading_order()
     test_d_cue_marking()
     test_hanjul_translation_residue()
+    test_passage_type_fit_flags()
     test_notice_bullet_markers()
     test_d_token_completeness()
     test_answer_spread()

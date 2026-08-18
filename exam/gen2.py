@@ -284,10 +284,12 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
                                       logger, apos)
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
+    from . import review as _rv
     for t in TYPE_ORDER2:
         q, a, fl = results[t]
         passage.set_qa(t, q, a)
         passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
+        passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
     validator.check_passage(passage, TYPE_ORDER2)
     return passage
 

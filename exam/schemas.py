@@ -42,6 +42,9 @@ class Analysis(BaseModel):
     title: str
     sentences: list[str]           # 정본 지문(문장 단위, 원문 그대로·순서 유지)
     main_idea: str
+    # 지문 종류(유형 적합성 검수용): prose(설명·논설)·narrative(서사·심경)·
+    # notice(안내문)·chart(도표)·letter(편지)·dialogue(대화). 기본 prose.
+    passage_type: str = "prose"
     key_terms: list[KeyTerm] = Field(default_factory=list)
     hardest_sentence: str = ""
     # 상/중/하 난이도 지침(생성 전에 주입, 모든 유형 프롬프트에 공통 전달). LLM 이 채우지 않음.
