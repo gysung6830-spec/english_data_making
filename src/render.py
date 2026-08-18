@@ -590,6 +590,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
 
         passages.append({
             "no": i, "total": len(reps), "title": ws.title,
+            "srclabel": src,   # 지문 소제목/배지에 쓰는 '출처-번호'(예: 올림포스4강-1)
             "passage": ws.passage,
             "summary": sum_items,
             "paraphrase": para_items,

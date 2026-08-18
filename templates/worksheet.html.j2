@@ -37,7 +37,7 @@
   <div class="chips">{% for w in words %}<span class="chip {{ cls }}">{{ w }}</span>{% endfor %}</div>
 {% endmacro %}
 
-{% macro psub(pg) %}<div class="p-sub">지문 {{ pg.no }}. {{ pg.title }}</div>{% endmacro %}
+{% macro psub(pg) %}<div class="p-sub">{{ pg.srclabel }}</div>{% endmacro %}
 
 {% macro blank_boxes(blanks, reveal) %}
   <div class="sum-boxes">
