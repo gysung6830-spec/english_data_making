@@ -61,15 +61,31 @@ def gen_count_match(item, passage, an, ctx):
 @register("main_point")
 def gen_main_point(item, passage, an, ctx):
     stem = ctx.stem("main_point", "다음 글의 요지로 가장 적절한 것은?")
-    instr = DISTRACTOR_RULE + " 요지 선지는 **한국어**로 작성하라."
+    # 요지 = 필자의 '주장(so what)'을 한국어 완결문으로(당위·평가가 드러남). 주제·제목보다 덜 추상.
+    instr = (DISTRACTOR_RULE + " 요지 선지는 **한국어 완결문**으로, 필자의 주장(so what)과 "
+             "당위·평가가 드러나게 쓰라(단순 소재 나열 금지). 주제·제목보다 추상도가 낮다.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"요지 후보 {i+1}" for i in range(5)])
+
+
+@register("topic")
+def gen_topic(item, passage, an, ctx):
+    stem = ctx.stem("topic", "다음 글의 주제로 가장 적절한 것은?")
+    # 주제 = '무엇에 관한 글인가'를 영어 명사구로, 범위가 넓지도 좁지도 않게.
+    instr = (DISTRACTOR_RULE + " 주제 선지는 **영어 명사구**로, 중심 소재 + 필자의 초점을 담되 "
+             "범위가 넓지도 좁지도 않게 하라(요지처럼 완결문·당위로 쓰지 말 것). 오답은 특히 "
+             "①범위(표면어만·지엽 / 대주제 확대)와 ⑤초점 이동으로 흔들어라.")
+    return build_choice(item, passage, ctx, stem, instr,
+                        mock_choices=[f"topic phrase {i+1}" for i in range(5)])
 
 
 @register("title")
 def gen_title(item, passage, an, ctx):
     stem = ctx.stem("title", "다음 글의 제목으로 가장 적절한 것은?")
-    instr = DISTRACTOR_RULE + " 제목 선지는 **영어**로 작성하라."
+    # 제목 = 주제의 '비유적 재진술' — 수사(은유·의문형·콜론 부제) + 필자 태도(±). 가장 추상.
+    instr = (DISTRACTOR_RULE + " 제목 선지는 **영어**로, 주제를 한 겹 더 추상·비유한 재진술로 "
+             "쓰라(은유·의문형·콜론 부제 등 수사를 얹고 필자의 태도 ±를 반영). 오답은 범위 어긋남·"
+             "방향 반전(글과 정반대 제목)·비유 오독으로 매력 오답을 배치하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"Title Candidate {i+1}" for i in range(5)])
 
@@ -126,9 +142,10 @@ def gen_implied(item, passage, an, ctx):
     stem = ctx.stem("implied_meaning",
                     "밑줄 친 부분이 다음 글에서 의미하는 바로 가장 적절한 것은?")
     instr = (DISTRACTOR_RULE + " 단, 지문에서 재해석할 표현(구/절) '한 곳'을 반드시 "
-             "<u>...</u>로 감싸고, 그 밑줄 표현은 문맥 전체로 재해석해야 답이 나오게 하라"
-             "(직역으로는 못 풀게). '무관·모순' 오답은 그 표현을 표면적/축자적으로 읽은 "
-             "오독으로 구성하라. 선지는 **영어**로 작성하라.")
+             "<u>...</u>로 감싸고(어휘 난도 높은 표현으로 '축자 함정'을 깔아라), 그 밑줄 표현은 "
+             "문맥 전체로 재해석해야 답이 나오게 하라(직역으로는 못 풀게). 정답은 밑줄의 긍/부정 "
+             "방향과 글의 주제를 '동시에' 만족해야 한다. 오답은 ⓐ축자(곧이곧대로) 해석 ⓑ방향 반전"
+             "(밑줄의 ± 반대) ⓒ과대 일반화 ⓓ부분만 ⓔ무관 으로 구성하라. 선지는 **영어**로 작성하라.")
     return build_choice(item, passage, ctx, stem, instr,
                         mock_choices=[f"implied reading {i+1}" for i in range(5)])
 

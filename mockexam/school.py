@@ -110,7 +110,7 @@ _HIGH_CHOICE_TYPES = [
     "grammar_vocab_mix", "grammar", "vocab_odd", "main_point", "title",
     "blank_single", "order", "irrelevant_sentence", "implied_meaning",
     "vocab_3blank_abc", "grammar_multi", "inference_mismatch", "dialogue_mismatch",
-    "notice_match", "summary_ab", "count_match", "insert", "pair_odd",
+    "topic", "summary_ab", "count_match", "insert", "pair_odd",
 ]
 _HIGH_ESSAY_TYPES = [
     "prep_find_and_translate", "word_arrange", "condition_write_inflect",
