@@ -36,9 +36,11 @@
 
 * { box-sizing: border-box; }
 
-/* 기본은 얇게(400). 굵게는 지정된 5곳에서만. */
+/* 기본은 얇게(400). 굵게는 지정된 5곳에서만.
+   영어(라틴)는 세리프(Liberation Serif), 한글은 NanumSquareRound 로 자동 분리된다:
+   Liberation Serif 에 한글 글리프가 없어 한글 문자만 다음 폰트로 폴백된다. */
 body {
-  font-family: 'NanumSquareRound', 'Noto Sans CJK KR', sans-serif;
+  font-family: 'Liberation Serif', 'NanumSquareRound', 'Noto Sans CJK KR', serif;
   color: #111;
   font-size: 10.2px;      /* 살짝 키움 */
   line-height: 1.62;      /* 문장 간 여백 */
