@@ -126,6 +126,10 @@ def _clean_pdf_text(segment: str) -> str:
         if re.search(r"[A-Za-z]", stripped):
             prev_en = stripped
     text = " ".join(lines)
+    # 안내문(행사·대회 안내)의 불릿 기호(* ※ • ‣ ▪)는 목록 표시일 뿐 본문이 아니다.
+    # 산문으로 펼치면 'When & Where * September … * Maple Creek …' 처럼 잡음이 되므로
+    # 문장 경계(마침표)로 바꿔, 각 항목이 자연스럽게 끊긴 문장으로 읽히게 한다.
+    text = re.sub(r"\s*[*※•‣▪]+\s*", ". ", text)
     # 워크시트 노이즈 제거(줄 경계를 넘나들므로 합친 뒤 한 번에)
     text = _WB_HEADER.sub(" ", text)                    # WORKBOOK 러닝 헤더
     text = _PAGE_NO.sub(" ", text)                      # 페이지 번호 - 14 -
@@ -138,6 +142,7 @@ def _clean_pdf_text(segment: str) -> str:
     text = re.sub(r"([,;:])\1+", r"\1", text)         # 중복 구두점 정리
     text = re.sub(r",\s*\.", ".", text)               # ' , .' → '.'
     text = re.sub(r"\.\s*\.+", ".", text)             # 연속 마침표(.. 포함) 정리
+    text = re.sub(r"^\s*[.\s]+", "", text)            # 맨 앞 불릿→마침표 잔재 제거
     return text
 
 

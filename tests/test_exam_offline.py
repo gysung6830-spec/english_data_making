@@ -813,6 +813,29 @@ def test_hanjul_translation_residue() -> None:
     print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
 
 
+def test_notice_bullet_markers() -> None:
+    """안내문(행사·대회 안내)의 불릿 기호(* ※ •)는 목록 표시일 뿐 본문이 아니다.
+    산문으로 펼칠 때 'When & Where * September … * Maple Creek …' 처럼 지문에 끼면
+    안 되므로 문장 경계(마침표)로 바꿔 없앤다(실제 결과물 버그)."""
+    from exam.ingest import _clean_pdf_text
+    seg = (
+        "③ When & Where\n"
+        "③ 언제 & 어디서\n"
+        "④ * September 12th(Friday), from 6 p.m. to 9 p.m.\n"
+        "④ * 9월 12일(금요일), 저녁 6시에서 9시까지\n"
+        "⑤ * Maple Creek Community Center\n"
+        "⑤ * Maple Creek 커뮤니티 센터\n"
+        "⑯ ※ Register online at www.maplecreekcity.org\n"
+        "⑯ ※ www.maplecreekcity.org에서 온라인으로 등록하세요.\n"
+    )
+    out = _clean_pdf_text(seg)
+    assert "*" not in out, f"불릿 * 남음: {out}"
+    assert "※" not in out, f"불릿 ※ 남음: {out}"
+    assert ".." not in out, f"이중 마침표: {out}"
+    assert "September 12th(Friday)" in out and "Maple Creek Community Center" in out, out
+    print("✓ 안내문 불릿(* ※) 제거 → 문장 경계로 정리 통과")
+
+
 def test_d_token_completeness() -> None:
     """D(어순배열): 토큰이 정답 문장을 온전히 복원해야 하고, 단어가 빠지면(동사 누락 등)
     깨진 문항 대신 실패시켜 재생성하게 한다(실제 결과물에서 나온 버그)."""
@@ -1031,6 +1054,7 @@ if __name__ == "__main__":
     test_underline_reading_order()
     test_d_cue_marking()
     test_hanjul_translation_residue()
+    test_notice_bullet_markers()
     test_d_token_completeness()
     test_answer_spread()
     test_passage_source_label()
