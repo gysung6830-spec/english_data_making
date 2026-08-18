@@ -132,11 +132,12 @@ def _summary_answers_grounded(sec: schemas.WSSummaryType, body: str) -> None:
                 raise ValueError(f"요약 정답 '{b.answer}'가 지문에 없습니다(원문 단어 사용).")
 
 
-def analyze_worksheet(
-    client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
-) -> schemas.Worksheet:
-    """추출된 본문으로 서술형 대비 교재(7개 유형)를 각각 개별 호출로 생성."""
-    title, body = extraction.title, extraction.body
+# 서술형 교재 유형 필드 순서(재생성·번호 매김 기준)
+WS_TASK_NAMES = ["summary", "paraphrase", "arrange", "compose", "choice", "error", "qa"]
+
+
+def _ws_tasks(client: ClaudeClient, cfg: Config, title: str, body: str) -> dict:
+    """유형별 생성기(name -> 호출 가능한 함수) 딕셔너리. analyze/재생성에서 공용."""
     r = cfg.processing.max_retries
     S = prompts.WS_SYSTEM
     nb = " ".join(body.split())
@@ -175,7 +176,7 @@ def analyze_worksheet(
             raise ValueError("문장변형 유효 문항이 없습니다.")
         return schemas.WSParaphraseType(questions=good)
 
-    tasks = {
+    return {
         "summary": lambda: client.structured(
             S, prompts.ws_summary_prompt(title, body),
             schemas.WSSummaryType, max_retries=r,
@@ -196,7 +197,9 @@ def analyze_worksheet(
         "qa": _gen_qa,
     }
 
-    # 유형 단위 부분 성공: 한 유형이 (재시도까지) 실패해도 None 으로 두고 계속.
+
+def _run_ws_tasks(cfg: Config, tasks: dict, names) -> dict:
+    """지정한 유형만 생성. 유형 단위 부분 성공(실패 시 None)."""
     def _safe(name, fn):
         try:
             return fn()
@@ -204,50 +207,78 @@ def analyze_worksheet(
             print(f"[경고] 서술형 '{name}' 유형 생성 실패 → 건너뜀: {e}", file=sys.stderr)
             return None
 
+    sel = [(n, tasks[n]) for n in names if n in tasks]
     results: dict[str, object] = {}
-    if cfg.processing.parallel_sections:
-        with ThreadPoolExecutor(max_workers=7) as ex:
-            futs = {name: ex.submit(_safe, name, fn) for name, fn in tasks.items()}
-            for name, fut in futs.items():
-                results[name] = fut.result()
+    if cfg.processing.parallel_sections and len(sel) > 1:
+        with ThreadPoolExecutor(max_workers=len(sel)) as ex:
+            futs = {n: ex.submit(_safe, n, fn) for n, fn in sel}
+            for n, fut in futs.items():
+                results[n] = fut.result()
     else:
-        for name, fn in tasks.items():
-            results[name] = _safe(name, fn)
+        for n, fn in sel:
+            results[n] = _safe(n, fn)
+    return results
 
-    if all(v is None for v in results.values()):
-        raise RuntimeError("서술형 교재의 모든 유형 생성에 실패했습니다.")
 
-    # (옵트인) 어법 유형 2차 검증: 모델에게 오류 판정을 재채점시켜 교정본을 채택.
-    #   비용이 늘어나므로 config 의 processing.verify_content=true 일 때만 동작.
-    if cfg.processing.verify_content and results.get("error") is not None:
+def _verify_ws_types(client: ClaudeClient, cfg: Config, title: str, body: str,
+                     results: dict) -> None:
+    """(옵트인) 어법·문장변형 2차 검증. verify_content=true 일 때만, results 를 제자리 교정."""
+    r = cfg.processing.max_retries
+    S = prompts.WS_SYSTEM
+    if not cfg.processing.verify_content:
+        return
+    if results.get("error") is not None:
         try:
-            fixed = client.structured(
+            results["error"] = client.structured(
                 S, prompts.ws_error_verify_prompt(title, body, results["error"]),
                 schemas.WSErrorType, max_retries=r)
-            results["error"] = fixed
-        except Exception as e:  # 검증 실패 시 원본 유지
+        except Exception as e:
             print(f"[경고] 어법 2차 검증 실패 → 원본 사용: {e}", file=sys.stderr)
-
-    # (옵트인) 문장 변형 2차 검증: 정답을 넣은 완성문이 문법적·무중복인지 재검수.
-    #   'was observed noticed' 같은 빈칸-원어 중복 비문을 잡아낸다. verify_content=true 일 때만.
-    if cfg.processing.verify_content and results.get("paraphrase") is not None:
+    if results.get("paraphrase") is not None:
         try:
-            fixed = client.structured(
+            results["paraphrase"] = client.structured(
                 S, prompts.ws_paraphrase_verify_prompt(title, body, results["paraphrase"]),
                 schemas.WSParaphraseType, max_tokens=10000, max_retries=r)
-            results["paraphrase"] = fixed
-        except Exception as e:  # 검증 실패 시 원본 유지
+        except Exception as e:
             print(f"[경고] 문장변형 2차 검증 실패 → 원본 사용: {e}", file=sys.stderr)
 
+
+def analyze_worksheet(
+    client: ClaudeClient, cfg: Config, extraction: schemas.Extraction
+) -> schemas.Worksheet:
+    """추출된 본문으로 서술형 대비 교재(7개 유형)를 각각 개별 호출로 생성."""
+    title, body = extraction.title, extraction.body
+    tasks = _ws_tasks(client, cfg, title, body)
+    results = _run_ws_tasks(cfg, tasks, WS_TASK_NAMES)
+    if all(v is None for v in results.values()):
+        raise RuntimeError("서술형 교재의 모든 유형 생성에 실패했습니다.")
+    _verify_ws_types(client, cfg, title, body, results)
     return schemas.Worksheet(
-        title=title,
-        source=extraction.source,
-        passage=body,
-        summary=results["summary"],
-        paraphrase=results["paraphrase"],
-        arrange=results["arrange"],
-        compose=results["compose"],
-        choice=results["choice"],
-        error=results["error"],
-        qa=results["qa"],
+        title=title, source=extraction.source, passage=body,
+        **{n: results.get(n) for n in WS_TASK_NAMES},
     )
+
+
+def regenerate_worksheet(
+    client: ClaudeClient, cfg: Config, ws: schemas.Worksheet,
+    targets=None,
+) -> schemas.Worksheet:
+    """기존 Worksheet 에서 '지정한(또는 누락된) 유형만' 지문(ws.passage)으로 다시 생성.
+
+    targets 가 None 이면 '현재 None(누락)인 유형'만 재생성한다. 성공한 것만 교체하고
+    나머지 유형과 실패분은 그대로 둔다(비용은 재생성 유형 수만큼만 발생).
+    """
+    if not (ws.passage or "").strip():
+        raise ValueError("재생성하려면 지문(passage)이 필요합니다. 지문이 저장된 JSON 인지 확인하세요.")
+    if targets is None:
+        targets = [n for n in WS_TASK_NAMES if getattr(ws, n, None) is None]
+    else:
+        targets = [n for n in WS_TASK_NAMES if n in set(targets)]
+    if not targets:
+        return ws
+    tasks = _ws_tasks(client, cfg, ws.title, ws.passage)
+    results = _run_ws_tasks(cfg, tasks, targets)
+    _verify_ws_types(client, cfg, ws.title, ws.passage, results)
+    # 성공한 유형만 교체(실패=None 은 기존 값 유지)
+    update = {n: v for n, v in results.items() if v is not None}
+    return ws.model_copy(update=update) if update else ws

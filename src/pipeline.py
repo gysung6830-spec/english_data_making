@@ -37,6 +37,22 @@ def save_worksheets_json(worksheets: list[Worksheet], path: Path, *, title: str 
     return path
 
 
+def regenerate_missing_types(client: ClaudeClient, cfg: Config,
+                             worksheets: list[Worksheet]) -> tuple[list[Worksheet], int]:
+    """각 지문에서 '누락(None)된 유형'만 지문 원문으로 다시 생성. (worksheets, 재생성 유형 수)."""
+    out: list[Worksheet] = []
+    filled = 0
+    for ws in worksheets:
+        missing = [n for n in analyze.WS_TASK_NAMES if getattr(ws, n, None) is None]
+        if not missing:
+            out.append(ws)
+            continue
+        new_ws = analyze.regenerate_worksheet(client, cfg, ws)  # 누락분만
+        filled += sum(1 for n in missing if getattr(new_ws, n, None) is not None)
+        out.append(new_ws)
+    return out, filled
+
+
 def load_worksheets_json(path: Path) -> tuple[list[Worksheet], dict]:
     """저장해 둔 서술형 교재 JSON 을 읽어 (Worksheet 목록, 메타) 로 복원한다."""
     data = json.loads(Path(path).read_text(encoding="utf-8"))

@@ -301,6 +301,36 @@ def test_compose_arrange_word_guard():
     print("PASS  영작 보기 단어↔정답 정합성(누락/잉여/어형)")
 
 
+# ---- 12. 부분 재생성(누락 유형만 다시 생성) ------------------------------
+def test_regenerate_missing_only():
+    from samples.sample_mock import mock_worksheet
+    from src import analyze, schemas
+    from src.config import load_config
+
+    cfg = load_config()
+    cfg.processing.parallel_sections = False
+    cfg.processing.verify_content = False
+
+    ws = mock_worksheet()
+    orig_error = ws.error
+    ws = ws.model_copy(update={"paraphrase": None})   # 문장변형 누락 상황
+
+    class _Fake:
+        model = "test"
+        def structured(self, S, prompt, cls, **kw):
+            if cls is schemas.WSParaphraseType:
+                return schemas.WSParaphraseType(questions=[schemas.WSParaphraseQ.model_validate(
+                    {"original": "o", "sentence": "a [[A]] b [[B]]",
+                     "blanks": [{"label": "A", "answer": "x"}, {"label": "B", "answer": "y"}],
+                     "distractors": ["p", "q"]})])
+            raise AssertionError("누락 아닌 유형까지 호출됨: " + cls.__name__)
+
+    new = analyze.regenerate_worksheet(_Fake(), cfg, ws)
+    assert new.paraphrase is not None      # 누락 유형 채워짐
+    assert new.error is orig_error         # 나머지 유형 그대로(재호출 없음)
+    print("PASS  부분 재생성(누락 유형만·나머지 보존)")
+
+
 def run_all():
     test_clean_removes_noise()
     test_grammar_non_empty()
@@ -313,6 +343,7 @@ def run_all():
     test_hwp_extract()
     test_worksheet_json_roundtrip()
     test_compose_arrange_word_guard()
+    test_regenerate_missing_only()
     print("\n모든 오프라인 테스트 통과 ✅")
 
 

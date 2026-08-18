@@ -135,6 +135,9 @@ INDEX_HTML = """
 
       <div class=hint style="margin-top:14px">📄 결과물: <b>내신 서술형 대비 교재</b> (7개 유형 · 학생용 / 교사용 / 빠른 정답 / 정답 및 해설)</div>
 
+      <label class=chk style="margin-top:12px"><input type=checkbox name=regen value=1> ⟳ <b>누락 유형만 다시 생성</b> (재편집 JSON 전용 · 빠진 유형만 API 사용)</label>
+      <div class=hint>‘확인 필요’로 유형이 빠진 결과의 <b>JSON을 올린 뒤</b> 이 항목을 켜면, <b>빠진 유형만</b> 지문으로 다시 채웁니다(전체 재분석 X, 비용 최소).</div>
+
       <label class=chk style="margin-top:12px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
 
       <div class=row>
@@ -262,6 +265,7 @@ def index():
 def analyze_route():
     files = [f for f in request.files.getlist("files") if f and f.filename]
     mock = bool(request.form.get("mock"))
+    regen = bool(request.form.get("regen"))   # 재편집 JSON 의 누락 유형만 다시 생성
     form_key = (request.form.get("api_key") or "").strip()
     key = None if "설정됨" in form_key else (form_key or None)
     key = key or cfg.api_key
@@ -309,9 +313,17 @@ def analyze_route():
         f.save(str(tmp))
         try:
             reports = []
+            regen_note = ""
             if ext == ".json":
                 # 재편집용 데이터: API 없이 제목·번호만 바꿔 재렌더
                 worksheets, meta = pipeline.load_worksheets_json(tmp)
+                # (옵션) 누락 유형만 다시 생성 — 지문으로 빠진 유형만 API 호출
+                if regen and client is not None:
+                    worksheets, filled = pipeline.regenerate_missing_types(
+                        client, cfg, worksheets)
+                    regen_note = f" · ⟳ {filled}개 유형 재생성" if filled else " · ⟳ 재생성할 누락 없음"
+                elif regen and client is None:
+                    regen_note = " · ⚠ 재생성하려면 API 키 필요(제목만 변경됨)"
             elif mock:
                 reports = (pipeline._mock_reports_for_pdf(cfg, tmp)
                            if which.needs_report else [])
@@ -339,7 +351,7 @@ def analyze_route():
             n_passages = max(len(reports), len(worksheets))
             note = f" (지문 {n_passages}개)" if n_passages > 1 else ""
             if ext == ".json":
-                note += " · 🔁 재편집(API 미사용)"
+                note += " · 🔁 재편집" + (regen_note or " (API 미사용)")
             results.append({"name": f.filename + note, "ok": True, "files": fitems,
                             "warn": _ws_warnings(worksheets)})
         except Exception as e:  # 개별 실패가 전체를 멈추지 않음
