@@ -79,11 +79,14 @@
 <section class="quick{% if first_section == 'quick' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">빠른 정답</h2>
   <div class="quick-grid">
-    {% for a in quick %}
-    <div class="quick-cell">
-      <span class="quick-no">{{ a.no }}</span>
-      <span class="quick-key">{{ a.key }}</span>
-    </div>
+    {% for g in quick %}
+      {% if g.label %}<div class="quick-group">{{ g.label }}</div>{% endif %}
+      {% for a in g.cells %}
+      <div class="quick-cell">
+        <span class="quick-no">{{ a.no }}</span>
+        <span class="quick-key">{{ a.key }}</span>
+      </div>
+      {% endfor %}
     {% endfor %}
   </div>
 </section>

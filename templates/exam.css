@@ -264,6 +264,14 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 }
 .quick-no { font-weight: 800; color: #2f7d61; font-size: 1.05em; }
 .quick-key { font-weight: 700; }
+/* 유형별 배치일 때 빠른정답 소제목([순서 배열] 등) — flex 한 줄 전체 차지 */
+.quick-group {
+  flex-basis: 100%;
+  font-weight: 800;
+  color: #2f7d61;
+  margin-top: 1.5mm;
+  font-size: 0.98em;
+}
 
 /* ---------- 확인 권장 문항(맨 끝 별도 페이지) ---------- */
 .review { break-before: page; }

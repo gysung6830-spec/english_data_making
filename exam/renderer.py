@@ -52,8 +52,7 @@ def _blocks(passages: list[Passage], start: int,
     번호는 어느 쪽이든 '조판에 나오는 순서 그대로' 1(또는 start)부터 연속 부여한다.
     """
     blocks: list[dict] = []
-    quick: list[dict] = []
-    n = start
+    quick: list[dict] = []       # 빠른정답: [{label, cells:[{no,key}]}] (label 빈값이면 머리 없이 평평)
 
     def _row(no: int, t: str, p: Passage) -> tuple[dict, str]:
         a_html = p.a[t]
@@ -65,24 +64,32 @@ def _blocks(passages: list[Passage], start: int,
         }, key)
 
     if group_by == "type":
+        # 유형별: 각 유형마다 번호를 1(start)부터 다시 매긴다. ([순서배열] 1·2 [문장삽입] 1·2 …)
         for t in type_order:
             rows: list[dict] = []
+            items: list[dict] = []
+            n = start
             for p in passages:
                 row, key = _row(n, t, p)
                 rows.append(row)
-                quick.append({"no": n, "key": key})
+                items.append({"no": n, "key": key})
                 n += 1
             blocks.append({"label": f"[{labels[t]}]", "title": "", "rows": rows})
+            quick.append({"label": f"[{labels[t]}]", "cells": items})
     else:
+        # 지문별: 문서 전체 연속 번호(1..N). 빠른정답은 머리 없는 한 묶음(평평).
+        n = start
+        flat: list[dict] = []
         for i, p in enumerate(passages, start=1):
             rows = []
             for t in type_order:
                 row, key = _row(n, t, p)
                 rows.append(row)
-                quick.append({"no": n, "key": key})
+                flat.append({"no": n, "key": key})
                 n += 1
             disp = getattr(p, "source_label", "") or f"지문 {i}"
             blocks.append({"label": f"[{disp}]", "title": p.title, "rows": rows})
+        quick.append({"label": "", "cells": flat})
     return blocks, quick
 
 
@@ -126,7 +133,9 @@ def collect_review(passages: list[Passage], start: int = 1,
         n += 1
 
     if group_by == "type":
+        # 유형별: 각 유형마다 1(start)부터 — _blocks 와 동일한 번호 규칙(유형 라벨로 구분)
         for t in type_order:
+            n = start
             for p in passages:
                 _emit(t, p)
     else:

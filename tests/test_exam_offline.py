@@ -892,7 +892,8 @@ def test_answer_spread() -> None:
     keys = []
     for i, p in enumerate(ps):
         _, quick = renderer._blocks([p], start=1)
-        for t, cell in zip(TYPE_ORDER, quick):
+        cells = quick[0]["cells"]        # 지문별: 머리 없는 한 묶음
+        for t, cell in zip(TYPE_ORDER, cells):
             if t in ("topic", "content"):
                 keys.append(cell["key"])
     assert len(set(keys)) >= 2, keys               # 한 번호로 몰리지 않음
