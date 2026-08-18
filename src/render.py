@@ -461,6 +461,26 @@ def _hint(answer: str) -> str:
     return a[0] if a else ""
 
 
+def _shuffle_words(words, seed_key: str = "") -> list:
+    """보기 단어를 '정답 어순이 드러나지 않게' 랜덤으로 섞는다.
+
+    seed_key(정답 문장 등)로 시드를 고정해, 같은 데이터는 항상 같은 순서로 섞이도록
+    한다(교사용/학생용 일치 · JSON 재렌더 재현성 확보). 원래 순서와 같아지면 한 번 더 섞는다.
+    """
+    ws = [w for w in (words or []) if w is not None]
+    if len(ws) < 2:
+        return list(ws)
+    import zlib
+    seed = zlib.crc32(("|".join(ws) + "|" + (seed_key or "")).encode("utf-8"))
+    rng = random.Random(seed)
+    out = list(ws)
+    for _ in range(5):
+        rng.shuffle(out)
+        if out != ws:
+            break
+    return out
+
+
 def _ws_context(worksheets, start_no: int = 1, title: str = "",
                 passage_start_no: int = 1) -> list[dict]:
     """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료).
@@ -507,24 +527,25 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
                 "explanation": q.explanation,
             })
 
-        # 요지/제목 배열 영작
+        # 요지/제목 배열 영작 (보기 단어는 정답 어순이 드러나지 않게 랜덤 섞기)
         def arrange(items):
             return [{
                 "src": src, "korean": it.korean,
-                "given_words": list(it.given_words), "word_count": it.word_count,
+                "given_words": _shuffle_words(it.given_words, it.answer),
+                "word_count": it.word_count,
                 "answer": it.answer, "explanation": it.explanation,
             } for it in items]
         idea_items = arrange(ws.arrange.ideas if ws.arrange else [])
         title_items = arrange(ws.arrange.titles if ws.arrange else [])
 
-        # 조건 영작 (난이도 하/중/상: 주어지는 단어 개수로 구분)
+        # 조건 영작 (난이도 하/중/상: 주어지는 단어 개수로 구분 · 보기 단어 랜덤 섞기)
         comp_items = [{
             "src": src, "korean": it.korean,
             "conditions": list(it.conditions),
             "levels": [
-                {"tag": "하", "cls": "lv-low", "words": list(it.given_low)},
-                {"tag": "중", "cls": "lv-mid", "words": list(it.given_mid)},
-                {"tag": "상", "cls": "lv-high", "words": list(it.given_high)},
+                {"tag": "하", "cls": "lv-low", "words": _shuffle_words(it.given_low, it.answer + "L")},
+                {"tag": "중", "cls": "lv-mid", "words": _shuffle_words(it.given_mid, it.answer + "M")},
+                {"tag": "상", "cls": "lv-high", "words": _shuffle_words(it.given_high, it.answer + "H")},
             ],
             "word_count": it.word_count, "answer": it.answer,
             "explanation": it.explanation,
