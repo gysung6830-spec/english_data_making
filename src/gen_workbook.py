@@ -737,6 +737,23 @@ def mugwan_direct(mug):
     return rows
 
 
+def summary_box(summary, fill=None):
+    """요약문(40) 요약 문장 — (A)/(B) 빈칸. fill=(a_word,b_word)면 정답으로 채워 강조."""
+    if not summary:
+        return ""
+    s = esc(summary)
+    if fill:
+        a, b = fill
+        s = s.replace("___(A)___", f'<span class="sfa">(A) {esc(a)}</span>')
+        s = s.replace("___(B)___", f'<span class="sfb">(B) {esc(b)}</span>')
+        head = "🧩 요약문 완성"
+    else:
+        s = s.replace("___(A)___", '<span class="sbk">(A)</span>')
+        s = s.replace("___(B)___", '<span class="sbk">(B)</span>')
+        head = "🧩 한 문장 요약"
+    return f'<div class="sumbox"><div class="sh">{head}</div><div class="sent">{s}</div></div>'
+
+
 def render_spread(rec, c, idx):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
@@ -809,7 +826,7 @@ def render_spread(rec, c, idx):
       <div class="pmain">
         <div class="how">{how}</div>
         <div class="psg work">{step1_psg}</div>
-        <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{opt_lines}</div>
+        <div class="pracopts"><div class="ttl">{esc(prompt)}</div>{summary_box(c.get("summary")) if num == 40 else ""}{opt_lines}</div>
       </div>
       <div class="pside">
         <div class="mini"><div class="h">{remind_label}</div>{chips}</div>
@@ -880,6 +897,11 @@ def render_spread(rec, c, idx):
         step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
         step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
         step3_body = direct_block(num, typ, c.get("direct", []))
+        if num == 40 and c.get("summary"):
+            _atx = next((o.get("tx", "") for o in c.get("opts", []) if o["n"] == answer), "")
+            _parts = re.split(r"\s*(?:…|\.\.\.|·)\s*", _atx, maxsplit=1)
+            _a, _b = (_parts + ["", ""])[:2]
+            step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
@@ -1309,6 +1331,13 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .pracopts{ font-size:9.6px; line-height:1.85; margin-top:9px; padding:8px 11px; background:#fff; border:1px dashed var(--must-line); border-radius:5px; }
 .pracopts .o{ display:block; }
 .pracopts .ttl{ font-size:8.7px; font-weight:800; color:#a86b00; margin-bottom:3px; }
+/* 요약문(40) 요약 문장 박스 */
+.sumbox{ margin:5px 0 7px; padding:7px 10px; background:#f4faf7; border:1.5px solid var(--ink); border-radius:6px; }
+.sumbox .sh{ font-size:8px; font-weight:800; color:var(--ink-d); margin-bottom:3px; }
+.sumbox .sent{ font-size:10px; line-height:1.75; color:#23272e; }
+.sbk{ display:inline-block; min-width:34px; text-align:center; font-weight:800; color:#a86b00; border-bottom:1.4px solid var(--must-line); background:#fff7e6; border-radius:3px; padding:0 6px; margin:0 2px; }
+.sfa,.sfb{ display:inline-block; font-weight:800; color:#12543d; background:var(--must); border-radius:3px; padding:0 5px; margin:0 2px; }
+.dchl .sumbox{ margin:0 0 8px; }
 .pguide{ margin-top:auto; background:#e9f4ef; border:1px solid var(--ink); border-radius:7px; padding:9px 12px; }
 .pguide .h{ font-size:9.5px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
 .pguide .g3{ display:flex; gap:8px; }
