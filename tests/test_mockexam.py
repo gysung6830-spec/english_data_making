@@ -211,6 +211,30 @@ def test_vocab_odd_difficulty_methods_no_negation_injection():
     assert "부정" not in _VOCAB_METHOD["high"] and "연어" in _VOCAB_METHOD["high"]
 
 
+def test_variant_types_grammar_multi_pair_count():
+    """어법복수정답·짝짓기·개수형이 골격에 포함되고 구조·정답이 유효해야 한다."""
+    from mockexam.core.models import Passage
+    from mockexam.verify.verifier import structural_issue
+    ps = [Passage(id=f"p{i}", text=("Research shows people who sleep well perform better. "
+          "This is because rest restores focus. However many ignore it. Such neglect harms "
+          "health. Experts recommend routines. Society benefits when workers rest."),
+          format_type="narrative") for i in range(1, 14)]
+    res = generate_mock("newschool_hs", [], difficulty="중", client=None, passages=ps)
+    types = {q.type for q in res.exam.choice_questions}
+    assert {"grammar_multi", "pair_odd", "count_match"} <= types
+
+    gm = next(q for q in res.exam.questions if q.type == "grammar_multi")
+    assert len(gm.answer.split()) >= 2, gm.answer          # 복수정답
+    assert structural_issue(gm) is None
+
+    cm = next(q for q in res.exam.questions if q.type == "count_match")
+    assert [c.text for c in cm.choices] == ["1개", "2개", "3개", "4개", "5개"]  # 순서 보존
+
+    # 복수정답이 있어도 정답유일성 검사는 통과해야 한다
+    by = {c.name: c for c in res.verify_report.checks}
+    assert by["정답유일성"].ok, by["정답유일성"].detail
+
+
 def test_strict_schema_has_no_unsupported_keywords():
     """Anthropic strict 출력이 거부하는 키워드가 어떤 스키마에도 없어야 한다."""
     import json

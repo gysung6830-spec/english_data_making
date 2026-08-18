@@ -64,9 +64,12 @@ def structural_issue(q: Question) -> str | None:
     has_blank = bool(_BLANK_RE.search(p)) or "____" in p
     has_abc = all(m in p for m in ("(A)", "(B)", "(C)"))
 
-    if t in ("grammar", "grammar_vocab_mix", "vocab_odd"):
+    if t in ("grammar", "grammar_vocab_mix", "vocab_odd", "grammar_multi", "pair_odd"):
         if circled < 5 and (not has_u):
             return "밑줄 표시(①~⑤) 부족"
+    elif t == "count_match":
+        if circled < 5:
+            return "보기 진술(①~⑤) 부족"
     elif t == "irrelevant_sentence":
         if circled < 5:
             return "문장 번호(①~⑤) 부족"
@@ -138,17 +141,25 @@ def verify(exam: MockExam, blueprint: Blueprint,
         "일치" if got_seq == exp_seq else f"불일치({len(bad_type)}건)",
         bad_items=[n for n in bad_type if n < 100]))
 
-    # 4) 정답 유일성 (§5-4) — 객관식은 정답 라벨 정확히 1개
+    # 4) 정답 유일성 (§5-4) — 객관식은 정답 라벨 정확히 1개.
+    #    복수정답 유형(모두 고르기)은 2개 이상의 서로 다른 유효 라벨 집합.
+    _multi = {"grammar_multi"}
     bad_ans: list[int] = []
     for q in choice:
         if not q.choices:
             continue
         labels = [c.label for c in q.choices]
         ans = q.answer.strip()
-        # 정답이 라벨 목록 중 정확히 하나를 가리키는가
-        hits = [lb for lb in labels if lb and lb == ans]
-        if len(hits) != 1:
-            bad_ans.append(q.no)
+        if q.type in _multi:
+            toks = [t for t in re.split(r"[\s,]+", ans) if t]
+            ok = (len(toks) >= 2 and len(set(toks)) == len(toks)
+                  and all(t in labels for t in toks))
+            if not ok:
+                bad_ans.append(q.no)
+        else:
+            hits = [lb for lb in labels if lb and lb == ans]
+            if len(hits) != 1:
+                bad_ans.append(q.no)
     rep.checks.append(CheckResult(
         "정답유일성", not bad_ans,
         "모두 단일정답" if not bad_ans else f"위반 {bad_ans}", bad_items=bad_ans))

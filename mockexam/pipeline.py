@@ -265,8 +265,10 @@ def _rebalance_answers(exam) -> None:
         q.choices = [Choice(LABELS[i], t) for i, t in enumerate(texts)]
         q.answer = target
 
+    # 선지 순서 자체가 의미인 유형(개수형 '1개~5개')은 재배치 제외 — 카운트만 반영.
+    _fixed_order = {"count_match"}
     for q in choice_qs:
-        if _is_number_only(q):
+        if _is_number_only(q) or q.type in _fixed_order:
             if q.answer in counts:
                 counts[q.answer] += 1
                 last2 = (last2 + [q.answer])[-2:]

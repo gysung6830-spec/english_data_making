@@ -73,7 +73,10 @@ _PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning", "blank_single"}
 
 # 선지를 번호(①~⑤)만 주는 유형(길이·역할 균형 검증 대상에서 제외)
 NUMBER_ONLY_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd",
-                     "irrelevant_sentence", "insert"}
+                     "irrelevant_sentence", "insert", "grammar_multi"}
+
+# 정답이 '집합'인 복수정답 유형(어법상 틀린 것을 모두 고르기)
+MULTI_ANSWER_TYPES = {"grammar_multi"}
 
 # 선지 길이·형태 균형 — 정답이 길이만으로 드러나지 않게.
 CHOICE_BALANCE_RULE = (
@@ -217,6 +220,12 @@ def _validate_choice_out(item: Item, out: Any) -> None:
     if issue:
         raise ValueError(f"지문 구조 오류: {issue}")
 
+    # 복수정답 유형: 틀린 밑줄이 2개 이상 지정돼야 한다.
+    if item.type in MULTI_ANSWER_TYPES:
+        idxs = {i for i in (getattr(out, "answer_indices", None) or []) if 1 <= i <= 5}
+        if len(idxs) < 2:
+            raise ValueError("복수정답 유형은 answer_indices 에 틀린 밑줄 2개 이상 필요.")
+
     # 선지 길이 균형(번호선지 제외) — 정답이 유독 길거나 짧으면 재작성.
     if item.type not in NUMBER_ONLY_TYPES and len(out.choices) == 5:
         lens = [len(re.sub(r"\s+", " ", c or "").strip()) for c in out.choices]
@@ -300,7 +309,13 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         # 번호 선지 유형이 아니면 지문에 새어든 ①②③ 문장 번호를 제거(안전망).
         q.passage_text = out.passage if number_only else strip_passage_numbering(out.passage)
         q.choices = make_choices(out.choices)
-        q.answer = LABELS[out.answer_index - 1]
+        if item.type in MULTI_ANSWER_TYPES:
+            idxs = sorted({i for i in (out.answer_indices or []) if 1 <= i <= 5})
+            if len(idxs) < 2:                       # 복수정답은 2개 이상이어야
+                idxs = sorted({out.answer_index, (out.answer_index % 5) + 1})
+            q.answer = " ".join(LABELS[i - 1] for i in idxs)
+        else:
+            q.answer = LABELS[out.answer_index - 1]
         q.explanation = out.explanation
         flag = _flag_reason(item, out)
         # 상 난이도는 근접 오답 위험이 커 '항상' 2차 재검수 대상으로 삼는다
@@ -400,6 +415,10 @@ STEM_FALLBACK = {
     "grammar": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
     "grammar_vocab_mix": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
     "vocab_odd": "다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
+    "grammar_multi": "다음 글의 밑줄 친 부분 중, 어법상 틀린 것을 모두 고르시오.",
+    "pair_odd": "다음 글의 밑줄 친 부분 중, 어법상 또는 문맥상 쓰임이 적절하지 "
+                "않은 것끼리 짝지어진 것은?",
+    "count_match": "다음 글의 내용과 일치하는 것의 개수는?",
     "vocab_3blank_abc": "(A), (B), (C)의 각 네모 안에서 문맥에 맞는 낱말로 "
                         "가장 적절한 것끼리 짝지은 것은?",
     "main_point": "다음 글의 요지로 가장 적절한 것은?",

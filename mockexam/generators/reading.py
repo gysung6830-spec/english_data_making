@@ -38,6 +38,26 @@ def gen_insert(item, passage, an, ctx):
                         number_only=True, mock_passage=mock_p)
 
 
+@register("count_match")
+def gen_count_match(item, passage, an, ctx):
+    """내용일치 개수형 — 한국어 진술 5개(①~⑤) 중 일치 개수를 고른다."""
+    stem = ctx.stem("count_match", STEM_FALLBACK["count_match"])
+    instr = (
+        "지문을 패러프레이즈한 '한국어 진술 5개'를 만들어 지문 뒤에 '[보기]'로 제시하고 각 진술 "
+        "앞에 ①~⑤ 를 붙여라. 각 진술은 지문과 '일치/불일치'가 명확히 갈리게 하라(애매 금지). "
+        "불일치는 주체 바꿔치기·정도(수치/범위) 왜곡·인과 뒤집기·미언급 중 하나로 만든다. 정답은 "
+        "'일치하는 진술의 개수'(1~5)이며, 5개 선지는 '1개','2개','3개','4개','5개' 이고 "
+        "answer_index 는 그 개수에 해당하는 번호(예: 일치 3개면 3)로 하라. explanation 에 각 진술의 "
+        "일치/불일치 근거를 밝혀라."
+    )
+    sents = an.sentences or [passage.text]
+    bogi = " ".join(f"{LABELS[i]} {sents[i % len(sents)]}" for i in range(5)) if sents else ""
+    mock_p = f"{passage.text}\n[보기] {bogi}"
+    return build_choice(item, passage, ctx, stem, instr, mock_answer="③",
+                        mock_choices=["1개", "2개", "3개", "4개", "5개"],
+                        mock_passage=mock_p)
+
+
 @register("main_point")
 def gen_main_point(item, passage, an, ctx):
     stem = ctx.stem("main_point", "다음 글의 요지로 가장 적절한 것은?")

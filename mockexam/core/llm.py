@@ -27,6 +27,9 @@ class ChoiceQuestionOut(BaseModel):
     # minimum·maximum 등을 지원하지 않음). 대신 아래 validator 로 검증한다.
     choices: list[str] = Field(..., description="정확히 5개 선지 텍스트(라벨 제외)")
     answer_index: int = Field(..., description="정답 선지 번호(1~5)")
+    answer_indices: list[int] = Field(default_factory=list, description=(
+        "복수 정답 유형(어법상 틀린 것을 '모두' 고르기)에서만 채운다. 틀린 밑줄 번호를 "
+        "2~4개 넣는다(예: [2,4]). 단일 정답 유형은 빈 리스트."))
     explanation: str = Field(..., description=(
         "자세한 해설. 반드시 (1) 정답이 왜 맞는지 근거, (2) 오답 각각(①~⑤ 중 정답 제외)이 "
         "왜 틀렸는지 한 줄씩, (3) 관련 핵심 포인트(문법 규칙·어휘 뜻·글의 논지 등)를 포함. "

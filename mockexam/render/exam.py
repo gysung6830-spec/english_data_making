@@ -190,6 +190,16 @@ def _render_passage(q: Question) -> str:
             return ('<div class="passage dialogue">'
                     + "".join(f'<div class="turn">{_safe(t)}</div>' for t in turns)
                     + '</div>')
+    # 내용일치 개수형: 본문 + [보기] 진술 5개 박스(①~⑤ 줄바꿈)
+    if q.type == "count_match" or "[보기]" in text:
+        body, _, bogi = text.partition("[보기]")
+        bogi_html = re.sub(r"^<br>", "",
+                           re.sub(r"\s*([①②③④⑤])", r"<br>\1", _safe(bogi.strip())))
+        out = []
+        if body.strip():
+            out.append(f'<div class="passage">{_safe(body.strip())}</div>')
+        out.append(f'<div class="bogi"><div class="label">&lt; 보기 &gt;</div>{bogi_html}</div>')
+        return "".join(out)
     # 문장삽입: [주어진 문장] 박스 + ①~⑤ 위치 본문
     if q.type == "insert" or "[주어진 문장]" in text:
         after = text.split("[주어진 문장]", 1)[1].strip() if "[주어진 문장]" in text else text
@@ -279,9 +289,11 @@ def _q_html(q: Question, teacher: bool = False) -> str:
         parts.append(_render_bogi(q))
     if q.choices:
         if q.meta.get("number_only"):
-            # 어법·무관문장 등: 선지는 번호(①~⑤)만 한 줄로(교사용은 정답 번호 볼드)
+            # 어법·무관문장 등: 선지는 번호(①~⑤)만 한 줄로(교사용은 정답 번호 볼드).
+            # 복수정답(어법 모두 고르기)은 정답이 '② ④'처럼 여러 개 → 집합으로 처리.
+            correct_set = set(correct.split())
             labels = " ".join(
-                (f'<b>{c.label}</b>' if teacher and c.label == correct else c.label)
+                (f'<b>{c.label}</b>' if teacher and c.label in correct_set else c.label)
                 for c in q.choices)
             parts.append(f'<div class="choices numonly">{labels}</div>')
         else:

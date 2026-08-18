@@ -109,8 +109,8 @@ _MIDDLE_ESSAY_TYPES = [
 _HIGH_CHOICE_TYPES = [
     "grammar_vocab_mix", "grammar", "vocab_odd", "main_point", "title",
     "blank_single", "order", "irrelevant_sentence", "implied_meaning",
-    "vocab_3blank_abc", "grammar", "inference_mismatch", "dialogue_mismatch",
-    "notice_match", "summary_ab", "main_point", "insert", "vocab_odd",
+    "vocab_3blank_abc", "grammar_multi", "inference_mismatch", "dialogue_mismatch",
+    "notice_match", "summary_ab", "count_match", "insert", "pair_odd",
 ]
 _HIGH_ESSAY_TYPES = [
     "prep_find_and_translate", "word_arrange", "condition_write_inflect",
@@ -118,7 +118,8 @@ _HIGH_ESSAY_TYPES = [
     "grammar_fix_and_answer",
 ]
 
-_UNDERLINE_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd"}
+_UNDERLINE_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd",
+                    "grammar_multi", "pair_odd"}
 
 
 def _build_items(choice_types: list[str], essay_types: list[str],
