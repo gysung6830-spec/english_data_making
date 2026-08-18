@@ -64,6 +64,7 @@ def generate_mock(
     workers: int = 8,
     passages: list[Passage] | None = None,
     form: str = "A",
+    variant: int = 0,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
@@ -92,7 +93,7 @@ def generate_mock(
     # [5] 문항 생성
     ctx = GenContext(profile=profile, difficulty=diff, client=client,
                      grammar_focus=profile.get("grammar_focus", []),
-                     max_workers=max(1, int(workers)))
+                     max_workers=max(1, int(workers)), variant=variant)
     exam, logs = generate_all(blueprint, assignments, pmap, ctx)
 
     # 지문 안내(오류 아님): 지문이 문항보다 적으면 각 유형에 가장 적합한 지문으로 재사용 배정한다.
@@ -171,6 +172,26 @@ def generate_mock(
                      num_passages=len(passages))
 
 
+_DIFF_LEVELS = ["low", "mid", "high"]
+_DIFF_KO = {"low": "하", "mid": "중", "high": "상"}
+
+
+def difficulty_gradient(base: str, n: int) -> list[str]:
+    """선택한 기준 난이도에서 '상(high)'까지 회차별로 고르게 상향한 난이도 목록.
+
+    예) base=하, n=4 → [하, 중, 중, 상]   base=중, n=4 → [중, 중, 상, 상]
+    n=1 이면 기준 난이도 그대로.
+    """
+    b = DIFFICULTY_KO.get(base, base)
+    if b not in _DIFF_LEVELS:
+        b = "mid"
+    bi = _DIFF_LEVELS.index(b)
+    if n <= 1:
+        return [b]
+    top = len(_DIFF_LEVELS) - 1          # high
+    return [_DIFF_LEVELS[round(bi + (top - bi) * i / (n - 1))] for i in range(n)]
+
+
 def generate_mock_forms(
     school_id: str,
     passage_paths: list[str | Path],
@@ -183,20 +204,23 @@ def generate_mock_forms(
 ) -> list[GenResult]:
     """지문 파일을 한 번만 로드해 N회분(A·B·C…) 완결형 세트를 만든다.
 
-    - 지문 풀을 회차별로 라운드로빈 분할(passages[i::n]) → 회차마다 다른 지문 사용.
-    - 지문이 회차 수보다 적으면 전체 풀을 공유(각 회차는 유형별 최적 지문으로 재사용).
+    - '같은 지문 풀'을 모든 회차에 그대로 사용한다(배정 지문 동일).
+    - 회차마다 '문항은 다르게'(회차 변형 지시로 묻는 지점·선지 재구성) 만들고,
+      난이도를 기준값에서 상까지 회차별로 상향 조정한다.
     각 회차는 학교 blueprint 전체(완결형)를 그대로 생성한다.
     """
     n = max(1, min(int(n_forms), 8))
     passages = _load_passages(passage_paths, client)   # 비전 추출은 한 번만
+    diffs = difficulty_gradient(difficulty, n)
     results: list[GenResult] = []
     for i in range(n):
-        subset = passages[i::n] if passages else []
-        if not subset:                                 # 지문이 회차보다 적으면 공유
-            subset = passages
-        res = generate_mock(school_id, [], difficulty=difficulty, grade=grade,
+        res = generate_mock(school_id, [], difficulty=diffs[i], grade=grade,
                             client=client, max_regen=max_regen, workers=workers,
-                            passages=subset, form=chr(ord("A") + i))
+                            passages=passages, form=chr(ord("A") + i),
+                            variant=(i + 1 if n > 1 else 0))
+        # 이 회차의 난이도(한글)를 결과에 기록 → 웹앱 표시용
+        res.logs.insert(0, {"note": "form_difficulty", "form": i + 1,
+                            "difficulty": _DIFF_KO.get(diffs[i], diffs[i])})
         results.append(res)
     return results
 

@@ -155,9 +155,10 @@ INDEX_HTML = """
 
       <div class=grid>
         <div>
-          <label>⑤-2 생성 회차 수 <span class=hint>(지문 하나로 여러 회분)</span></label>
+          <label>⑤-2 생성 회차 수
+            <span class=hint>(같은 지문 · 다른 문항 · 난이도 상향)</span></label>
           <select name=n_forms>
-            <option value="1" selected>1회분 (25문항)</option>
+            <option value="1" selected>1회분</option>
             <option value="2">2회분</option>
             <option value="3">3회분</option>
             <option value="4">4회분</option>
@@ -220,7 +221,8 @@ RESULT_HTML = """
       <tr>{% if (n_forms or 1) > 1 %}<th style="width:60px">회차</th>{% endif %}
         <th>산출물</th><th>열기</th></tr>
       {% for f in downloads %}
-      <tr>{% if (n_forms or 1) > 1 %}<td><b>{{ f.form }}회</b></td>{% endif %}
+      <tr>{% if (n_forms or 1) > 1 %}<td><b>{{ f.form }}회</b>{% if f.diff %}
+          <span class=hint>· {{ f.diff }}</span>{% endif %}</td>{% endif %}
         <td>💾 {{ f.name }}</td>
         <td><a class=dl href="{{ url_for('view', fname=f.name) }}" target=_blank>미리보기</a>
             <a class=dl href="{{ url_for('download', fname=f.name) }}">다운로드</a></td></tr>
@@ -565,14 +567,19 @@ def generate():
         base_title = (request.form.get("exam_title") or "").strip()
         subject = (request.form.get("subject") or "").strip()
 
-        # N회분: 지문은 한 번만 로드(비전 비용 절감), 회차별로 지문 풀 분할.
+        # N회분: 지문은 한 번만 로드(비전 비용 절감). 모든 회차가 '같은 지문'을 쓰되
+        # 문항은 다르게, 난이도는 회차별로 상향한다.
         from mockexam.pipeline import generate_mock_forms
         results = generate_mock_forms(school, [str(p) for p in saved], n_forms=n_forms,
                                       difficulty=difficulty, grade=grade, client=client)
 
         first = results[0]
+        form_diffs: list[str] = []
         for i, res in enumerate(results, 1):
             tag = f"{i}회 " if n_forms > 1 else ""
+            fdiff = next((l.get("difficulty") for l in res.logs
+                          if l.get("note") == "form_difficulty"), difficulty)
+            form_diffs.append(fdiff)
             # ── 오류여도 PDF 는 항상 내보낸다. 경고로만 표시. ──
             if res.num_passages == 0:
                 warnings.append(
@@ -592,12 +599,13 @@ def generate():
                     f"{tag}일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
                     f"마지막 '검토 문항' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
 
-            stem = _unique_stem(f"{base}_{i}회" if n_forms > 1 else base)
+            stem = _unique_stem(f"{base}_{i}회_{fdiff}" if n_forms > 1 else base)
             info = {}
+            suffix = f" ({i}회 · 난이도 {fdiff})"
             if base_title:
-                info["exam_title"] = f"{base_title} ({i}회)" if n_forms > 1 else base_title
+                info["exam_title"] = f"{base_title}{suffix}" if n_forms > 1 else base_title
             elif n_forms > 1:
-                info["exam_title"] = f"{first.blueprint.meta.name} 동형모의고사 ({i}회)"
+                info["exam_title"] = f"{first.blueprint.meta.name} 동형모의고사{suffix}"
             if subject:
                 info["subject"] = subject
 
@@ -607,7 +615,7 @@ def generate():
             pdf_ready = pdf_ready or ("problem_pdf" in out)
             for k, p in out.items():
                 if k in ("problem_pdf", "problem_html", "exam_json"):
-                    all_downloads.append({"name": p.name, "form": i})
+                    all_downloads.append({"name": p.name, "form": i, "diff": fdiff})
             if not shortage:
                 shortage = next((l.get("msg") for l in res.logs
                                  if l.get("note") == "passage_reuse"), "")
@@ -637,9 +645,10 @@ def generate():
     school_name = next((s["name"] for s in load_schools_index()
                         if s["school_id"] == school), school)
     if n_forms > 1:
-        warnings.insert(0, f"{n_forms}회분을 생성했습니다. 회차마다 지문 풀을 나눠 배정했으며, "
-                        "지문이 적으면 회차 간 지문이 겹칠 수 있습니다(지문을 많이 올릴수록 회차별 "
-                        "다양성이 커집니다).")
+        grad = " → ".join(f"{i}회 {d}" for i, d in enumerate(form_diffs, 1))
+        warnings.insert(0, f"{n_forms}회분을 생성했습니다. 모든 회차가 '같은 지문'을 쓰되 문항을 "
+                        f"다르게 출제하고 난이도를 회차별로 올렸습니다(난이도: {grad}). 같은 지문을 "
+                        "반복 학습하며 난이도를 높여 가는 용도입니다.")
     return render_template_string(
         RESULT_HTML, school=school_name, grade=grade, difficulty=difficulty,
         n_choice=len(first.exam.choice_questions), n_essay=len(first.exam.essay_questions),

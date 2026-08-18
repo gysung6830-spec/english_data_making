@@ -47,6 +47,7 @@ class GenContext:
     client: Any = None          # ClaudeClient 또는 None(오프라인)
     grammar_focus: list[str] = field(default_factory=list)
     max_workers: int = 8        # LLM 병렬 호출 수(속도↑, 과도하면 rate limit)
+    variant: int = 0            # N회분: 같은 지문으로 회차별 다른 문항 (0=단일)
 
     def stem(self, item_type: str, fallback: str) -> str:
         style = self.profile.get("stem_style", {}) or {}
@@ -88,6 +89,15 @@ ESSAY_ARRANGE_UNIQUE = (
     "보기 단어로 문법적으로 성립하는 배열이 '정확히 1개'가 되도록 구조(관계사절·부정사·"
     "전치사구 등)로 어순을 고정하고, 출력 전에 다른 배열도 가능한지 스스로 검증하라."
 )
+
+
+def _variant_hint(ctx: GenContext) -> str:
+    """N회분에서 '같은 지문·다른 문항'을 만들기 위한 회차 변형 지시(회차>0일 때만)."""
+    if not ctx.variant:
+        return ""
+    return (f"\n[회차 변형 — {ctx.variant}회차] 같은 지문으로 만드는 여러 회차 중 이 회차용이다. "
+            "다른 회차와 겹치지 않도록 '묻는 지점'을 달리하라: 빈칸·밑줄 위치, 초점(핵심) 문장, "
+            "선지 구성과 오답 함정을 새로 짜고 표현도 바꿔라. (지문·유형·출제원리는 그대로 유지)")
 
 
 def _flag_reason(item: Item, out: Any) -> str:
@@ -218,7 +228,8 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         # 무관문장·어법·어휘가 아니면 지문 문장에 ①②③ 번호를 붙이지 않는다(표준 형식).
         nonum = ("" if number_only else
                  "\n지문 문장 앞에 ①②③ 같은 번호를 붙이지 마라(이 유형은 지문에 번호가 없다).")
-        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}{nonum}\n\n"
+        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}{nonum}"
+                  f"{_variant_hint(ctx)}\n\n"
                   f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.\n"
                   "[정답 유일성 자가검증] 출력 전에 스스로 다섯 선지를 하나씩 대입해 "
                   "정답이 '오직 1개'만 성립하는지 확인하라. 두 개 이상 정답이 될 여지가 "
@@ -263,7 +274,8 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
         from ..core.llm import EssayQuestionOut, system_prompt
         from ..core.models import DIFFICULTY_KO_REV
         subs = "\n".join(f"- {s}" for s in item.subparts) or "- 단일 서술형"
-        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}\n\n"
+        prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}"
+                  f"{_variant_hint(ctx)}\n\n"
                   f"[소문항]\n{subs}\n\n[발문]\n{stem}\n\n"
                   "위 지문으로 이 서술형 1문항을 만들어라. 반드시:\n"
                   "1) 이 유형이 요구하는 빈칸은 지문(또는 요약문)에 '____'로, 밑줄은 "
