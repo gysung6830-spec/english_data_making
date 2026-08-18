@@ -171,7 +171,9 @@ def verify(exam: MockExam, blueprint: Blueprint,
         "정상" if not bad_ul else f"불일치 {bad_ul}", bad_items=bad_ul))
 
     # 7) 난이도 일관성 (§5-7)
-    bad_diff = [q.no for q in choice if q.difficulty != requested]
+    #    중상(mid_high)은 '중·상 문항을 반반' 배치하는 조합 난이도이므로 mid/high 둘 다 허용.
+    allowed = {"mid", "high"} if requested == "mid_high" else {requested}
+    bad_diff = [q.no for q in choice if q.difficulty not in allowed]
     # 요청과 다른 난이도가 절반 넘으면 실패로 본다(경미한 편차는 허용).
     ok7 = len(bad_diff) <= len(choice) * 0.5
     rep.checks.append(CheckResult(

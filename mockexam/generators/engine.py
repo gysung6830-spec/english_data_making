@@ -55,11 +55,21 @@ def generate_all(blueprint: Blueprint, assignments: list[Assignment],
             analyses[passage.id] = PassageAnalysis.of(passage)
         tasks.append((idx, item, passage))
 
+    # 중상(mid_high) = '중·상 문항 반반' 조합 → 문항마다 난이도를 중/상으로 분배.
+    import dataclasses as _dc
+
+    def _ctx_for(idx: int) -> GenContext:
+        if getattr(ctx, "difficulty", None) != "mid_high":
+            return ctx
+        lvl = "mid" if idx % 2 == 0 else "high"   # 인덱스 교차로 약 반반
+        return _dc.replace(ctx, difficulty=lvl)
+
     # 2) 문항 생성 — LLM 이면 병렬(문항끼리 독립), mock 이면 순차.
     def _one(t: tuple[int, Item, Passage]):
         idx, item, passage = t
         try:
-            return idx, generate_question(item, passage, ctx, analyses[passage.id]), None
+            return idx, generate_question(item, passage, _ctx_for(idx),
+                                          analyses[passage.id]), None
         except Exception as e:  # noqa: BLE001 - 문항 단위 오류 격리
             return idx, None, (item, passage, str(e)[:200])
 
