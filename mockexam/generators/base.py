@@ -71,6 +71,27 @@ DISTRACTOR_RULE = (
 # 위 원리(정답=유의어 패러프레이즈)를 적용하는 유형(모두 '가장 적절한 것' 고르기형)
 _PARAPHRASE_TYPES = {"main_point", "title", "implied_meaning", "blank_single"}
 
+# 선지를 번호(①~⑤)만 주는 유형(길이·역할 균형 검증 대상에서 제외)
+NUMBER_ONLY_TYPES = {"grammar", "grammar_vocab_mix", "vocab_odd", "irrelevant_sentence"}
+
+# 선지 길이·형태 균형 — 정답이 길이만으로 드러나지 않게.
+CHOICE_BALANCE_RULE = (
+    "[선지 균형] 5개 선지의 길이와 형태(품사·문장 구조·구체성)를 서로 비슷하게 맞춰라. "
+    "정답만 유독 길거나 짧거나 유일하게 상세하지 않게 하여, 길이·형태만으로 정답을 "
+    "유추할 수 없게 하라."
+)
+# 의미형 오답 태깅 — 정답1·무관2·모순2 구조를 구조적으로 검증 가능하게.
+ROLE_TAG_RULE = (
+    "[오답 태깅] choice_roles 에 5개 선지의 역할을 순서대로 '정답/무관/모순'으로 채워라"
+    "(정답 1개 + 무관 2개 + 모순 2개). answer_index 자리는 반드시 '정답'이어야 한다."
+)
+# 서술형 <조건> 표준 양식 — 채점 가능하게.
+ESSAY_CONDITION_FORMAT = (
+    "conditions(<조건>)는 채점 가능하도록 다음을 명시하라: (1) 사용할 단어/보기 범위, "
+    "(2) 어형 변화 허용 여부, (3) 답의 분량(총 단어 수 또는 '한 문장으로' 등), "
+    "(4) 필요하면 감점·부분점수 기준."
+)
+
 # 사실확인형(일치/불일치)에서 '비튼(틀린)' 진술을 만드는 기법 — 복수정답 방지.
 #   한 진술에 '한 가지만' 비틀어 명확히 오답이 되게 한다.
 FACT_TWIST = (
@@ -188,6 +209,31 @@ def _validate_choice_out(item: Item, out: Any) -> None:
     if issue:
         raise ValueError(f"지문 구조 오류: {issue}")
 
+    # 선지 길이 균형(번호선지 제외) — 정답이 유독 길거나 짧으면 재작성.
+    if item.type not in NUMBER_ONLY_TYPES and len(out.choices) == 5:
+        lens = [len(re.sub(r"\s+", " ", c or "").strip()) for c in out.choices]
+        med = sorted(lens)[2]
+        srt = sorted(lens)
+        ai = out.answer_index - 1
+        if med > 0:
+            if (lens[ai] == max(lens) and lens[ai] > med * 1.7
+                    and srt[-1] > srt[-2] * 1.35):
+                raise ValueError("정답 선지가 유독 깁니다 — 선지 길이를 비슷하게 맞추세요.")
+            if lens[ai] == min(lens) and lens[ai] < med * 0.5 and srt[0] < srt[1] * 0.7:
+                raise ValueError("정답 선지가 유독 짧습니다 — 선지 길이를 비슷하게 맞추세요.")
+
+    # 의미형 오답 구조(정답1·무관2·모순2) — choice_roles 가 채워졌을 때만 검증.
+    if item.type in _PARAPHRASE_TYPES:
+        roles = [str(r).strip() for r in (getattr(out, "choice_roles", None) or [])]
+        if len(roles) == 5:
+            n_ans = sum("정답" in r for r in roles)
+            n_un = sum("무관" in r for r in roles)
+            n_co = sum("모순" in r for r in roles)
+            ai = out.answer_index - 1
+            if not (n_ans == 1 and n_un == 2 and n_co == 2 and "정답" in roles[ai]):
+                raise ValueError(
+                    f"오답 구성이 원리(정답1·무관2·모순2)와 다릅니다: {roles}")
+
 
 def _validate_essay_out(item: Item, out: Any) -> None:
     """서술형 생성 직후 자가검증(<보기>·우리말·정답·구조 누락)."""
@@ -229,8 +275,10 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         # 무관문장·어법·어휘가 아니면 지문 문장에 ①②③ 번호를 붙이지 않는다(표준 형식).
         nonum = ("" if number_only else
                  "\n지문 문장 앞에 ①②③ 같은 번호를 붙이지 마라(이 유형은 지문에 번호가 없다).")
+        balance = "" if number_only else "\n" + CHOICE_BALANCE_RULE
+        roles = "\n" + ROLE_TAG_RULE if item.type in _PARAPHRASE_TYPES else ""
         prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}{nonum}"
-                  f"{_variant_hint(ctx)}\n\n"
+                  f"{balance}{roles}{_variant_hint(ctx)}\n\n"
                   f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.\n"
                   "[정답 유일성 자가검증] 출력 전에 스스로 다섯 선지를 하나씩 대입해 "
                   "정답이 '오직 1개'만 성립하는지 확인하라. 두 개 이상 정답이 될 여지가 "
@@ -282,7 +330,7 @@ def build_essay(item: Item, passage: Passage, ctx: GenContext,
                   "1) 이 유형이 요구하는 빈칸은 지문(또는 요약문)에 '____'로, 밑줄은 "
                   "<u>...</u>로 실제로 넣어라(빈칸/밑줄 없는 발문은 오류다).\n"
                   "2) <보기> 단어상자를 쓰는 유형이면 bogi 에 단어들을, <조건>을 쓰는 "
-                  "유형이면 conditions 에 조건 문구를 채워라. 아니면 빈 리스트.\n"
+                  f"유형이면 conditions 에 조건 문구를 채워라. 아니면 빈 리스트.\n   {ESSAY_CONDITION_FORMAT}\n"
                   "3) 영작 유형이면 학생이 영작할 한국어를 blank_ko 에 넣어라.\n"
                   "4) 각 소문항 정답을 answers 에 '지시 :: 정답' 형식으로.\n"
                   "5) explanation 에 각 소문항의 정답 근거·어형변형/어순/문법 포인트·본문 "
