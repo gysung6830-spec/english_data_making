@@ -85,6 +85,13 @@ ROLE_TAG_RULE = (
     "[오답 태깅] choice_roles 에 5개 선지의 역할을 순서대로 '정답/무관/모순'으로 채워라"
     "(정답 1개 + 무관 2개 + 모순 2개). answer_index 자리는 반드시 '정답'이어야 한다."
 )
+# 상·중상 전용 — 근접 오답에 의한 복수정답을 막는다.
+STRICT_UNIQUE_RULE = (
+    "[상 난이도 정답 유일성] 오답 중 정답과 조금이라도 근접해 정답이 될 여지가 있는 것이 "
+    "하나라도 있으면, 그 오답을 '확실히 틀리도록' 고쳐라. 그래도 애매하면 answer_confidence 를 "
+    "반드시 '주의'로 표시하라(억지로 '확실'로 표시하지 말 것)."
+)
+
 # 서술형 <조건> 표준 양식 — 채점 가능하게.
 ESSAY_CONDITION_FORMAT = (
     "conditions(<조건>)는 채점 가능하도록 다음을 명시하라: (1) 사용할 단어/보기 범위, "
@@ -277,8 +284,9 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
                  "\n지문 문장 앞에 ①②③ 같은 번호를 붙이지 마라(이 유형은 지문에 번호가 없다).")
         balance = "" if number_only else "\n" + CHOICE_BALANCE_RULE
         roles = "\n" + ROLE_TAG_RULE if item.type in _PARAPHRASE_TYPES else ""
+        strict = "\n" + STRICT_UNIQUE_RULE if ctx.difficulty in ("high", "mid_high") else ""
         prompt = (f"[지문]\n{passage.text}\n\n[유형 출제원리]\n{instruction}{ul}{nonum}"
-                  f"{balance}{roles}{_variant_hint(ctx)}\n\n"
+                  f"{balance}{roles}{strict}{_variant_hint(ctx)}\n\n"
                   f"[발문]\n{stem}\n\n위 지문으로 이 유형의 5지선다 1문항을 만들어라.\n"
                   "[정답 유일성 자가검증] 출력 전에 스스로 다섯 선지를 하나씩 대입해 "
                   "정답이 '오직 1개'만 성립하는지 확인하라. 두 개 이상 정답이 될 여지가 "
@@ -294,6 +302,10 @@ def build_choice(item: Item, passage: Passage, ctx: GenContext,
         q.answer = LABELS[out.answer_index - 1]
         q.explanation = out.explanation
         flag = _flag_reason(item, out)
+        # 상 난이도는 근접 오답 위험이 커 '항상' 2차 재검수 대상으로 삼는다
+        # (재검수 통과 시 플래그는 해제되어 ⚠ 는 남지 않는다).
+        if not flag and ctx.difficulty == "high":
+            flag = "상 난이도 — 정답 유일성 재확인"
         if flag:
             q.meta["review_flag"] = flag
     else:
