@@ -66,6 +66,7 @@ def generate_mock(
     form: str = "A",
     variant: int = 0,
     avoid_pairs: set[tuple[str, str]] | None = None,
+    strict_certify: bool = False,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
@@ -162,9 +163,10 @@ def generate_mock(
                 _regen(q_i)
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
-    # [7] 의심문항(⚠)만 2차 검수 — 무인 운영 오류 저감(비용 최소: 플래그 붙은 문항만)
+    # [7] 의심문항(⚠) 2차 검수 — 무인 운영 오류 저감(플래그 붙은 문항만).
+    #     strict_certify(판매용)면 반복 인증 후 남은 ⚠ 를 출력물에서 제거한다.
     if client is not None:
-        _review_flagged(exam, client, ctx, _regen, logs)
+        _review_flagged(exam, client, ctx, _regen, logs, strict=strict_certify)
 
     # [8] 정답 번호 분산 — 한 번호에 쏠리거나 3연속되지 않게 고르게 재배치
     _rebalance_answers(exam)
@@ -202,6 +204,7 @@ def generate_mock_forms(
     client: Any = None,
     max_regen: int = 2,
     workers: int = 8,
+    strict_certify: bool = False,
 ) -> list[GenResult]:
     """지문 파일을 한 번만 로드해 N회분(A·B·C…) 완결형 세트를 만든다.
 
@@ -220,7 +223,8 @@ def generate_mock_forms(
                             client=client, max_regen=max_regen, workers=workers,
                             passages=passages, form=chr(ord("A") + i),
                             variant=(i + 1 if n > 1 else 0),
-                            avoid_pairs=set(used_pairs) if n > 1 else None)
+                            avoid_pairs=set(used_pairs) if n > 1 else None,
+                            strict_certify=strict_certify)
         # 이 회차가 실제로 쓴 (지문,유형) 조합을 누적 → 다음 회차는 이를 피한다.
         for a in res.assignments:
             if a.passage_id:
@@ -280,11 +284,14 @@ def _rebalance_answers(exam) -> None:
         last2 = (last2 + [target])[-2:]
 
 
-def _review_flagged(exam, client, ctx, regen, logs) -> None:
-    """review_flag 가 붙은 의심문항만 2차 LLM 으로 재검수.
+def _review_flagged(exam, client, ctx, regen, logs, strict=False) -> None:
+    """review_flag 가 붙은 의심문항을 2차 LLM 으로 재검수(엄격 모드는 반복).
 
     - 검수 통과 → 플래그 해제(오답경보 해소, 해설지 ⚠ 줄어듦)
-    - 검수 실패 → 1회 재생성 후 그래도 의심이면 이유를 플래그에 남김
+    - 검수 실패 → 재생성 후 재검수(엄격 모드는 여러 라운드 반복)
+    - strict=True(판매용): 반복 후에도 확실하지 않은 문항은 출력물에서 ⚠ 를 '제거'하고
+      (검토페이지·주의표시가 아예 안 나오게) 그 사실은 logs 에 'uncertified' 로만 남겨
+      판매자에게 별도 보고한다. → 배부물에는 주의표시가 하나도 없다.
     (이미 재시도로 못 채운 '생성 실패' 문항은 대상에서 제외.)
     """
     from concurrent.futures import ThreadPoolExecutor
@@ -295,29 +302,39 @@ def _review_flagged(exam, client, ctx, regen, logs) -> None:
                 if isinstance(q.meta, dict) and q.meta.get("review_flag")
                 and not q.meta.get("gen_failed")]
 
-    idxs = _flagged()
-    if not idxs:
-        return
-
     def _one(i):
         ok, issue = review_question(client, exam.questions[i])
         return i, ok, issue
 
-    with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
-        results = list(ex.map(_one, idxs))
-
-    to_regen = [i for i, ok, _ in results if not ok]
-    passed = [i for i, ok, _ in results if ok]
-    for i in passed:                      # 검수 통과 → 신뢰, 경보 해제
-        exam.questions[i].meta.pop("review_flag", None)
-    for i, ok, issue in results:
-        if not ok:
-            q = exam.questions[i]
-            logs.append({"no": q.no, "section": q.section, "type": q.type,
-                         "note": "review_failed", "issue": issue[:200]})
-    if to_regen:
+    rounds = 3 if strict else 1
+    for _r in range(rounds):
+        idxs = _flagged()
+        if not idxs:
+            return
+        with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
+            results = list(ex.map(_one, idxs))
+        to_regen = [i for i, ok, _ in results if not ok]
+        for i, ok, _ in results:
+            if ok:                                    # 검수 통과 → 신뢰, 경보 해제
+                exam.questions[i].meta.pop("review_flag", None)
+        for i, ok, issue in results:
+            if not ok:
+                q = exam.questions[i]
+                logs.append({"no": q.no, "section": q.section, "type": q.type,
+                             "note": "review_failed", "issue": issue[:200]})
+        if not to_regen:
+            break
         with ThreadPoolExecutor(max_workers=ctx.max_workers) as ex:
             list(ex.map(regen, to_regen))
+
+    # 엄격(판매) 모드: 그래도 남은 ⚠ 는 출력물에서 제거하고 판매자에게만 보고.
+    if strict:
+        for i in _flagged():
+            q = exam.questions[i]
+            logs.append({"no": q.no, "section": q.section, "type": q.type,
+                         "note": "uncertified",
+                         "issue": str(q.meta.get("review_flag", ""))[:200]})
+            q.meta.pop("review_flag", None)           # 배부물에서 ⚠·검토페이지 제거
 
 
 # ---------------------------------------------------------------------------

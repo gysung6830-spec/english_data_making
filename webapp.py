@@ -180,6 +180,9 @@ INDEX_HTML = """
              value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
              {{ 'readonly' if has_key else '' }}>
 
+      <label class=chk><input type=checkbox name=strict value=1 checked>
+        판매용: 확실한 문항만 출력 <span class=hint>(주의표시·검토페이지 없음 · 반복 인증)</span></label>
+
       <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
@@ -569,9 +572,11 @@ def generate():
 
         # N회분: 지문은 한 번만 로드(비전 비용 절감). 모든 회차가 '같은 지문'을 쓰되
         # 문항은 다르게, 난이도는 회차별로 상향한다.
+        strict = bool(request.form.get("strict"))
         from mockexam.pipeline import generate_mock_forms
         results = generate_mock_forms(school, [str(p) for p in saved], n_forms=n_forms,
-                                      difficulty=difficulty, grade=grade, client=client)
+                                      difficulty=difficulty, grade=grade, client=client,
+                                      strict_certify=strict)
 
         first = results[0]
         form_diffs: list[str] = []
@@ -598,6 +603,16 @@ def generate():
                 warnings.append(
                     f"{tag}일부 문항({len(gen_errs)}/{n_q}) 생성 실패 → 자리표시자로 넣었습니다. "
                     f"마지막 '검토 문항' 페이지에서 확인 후 다시 생성하세요. 원인: {detail}")
+
+            # 판매용(엄격) 모드: 인증 미통과 문항은 출력물엔 ⚠ 가 없지만 판매자에겐 보고.
+            unc = [l for l in res.logs if l.get("note") == "uncertified"]
+            if unc:
+                nos = ", ".join(f"{'서술형 ' if l.get('section')=='essay' else ''}{l.get('no')}번"
+                                for l in unc)
+                warnings.append(
+                    f"{tag}확실성 인증을 통과하지 못한 문항 {len(unc)}개({nos})가 있었습니다. "
+                    "배부물(문제지·해설지)에는 주의표시가 없지만, 판매 전 이 문항들은 다시 "
+                    "생성하거나 검토하시길 권장합니다.")
 
             stem = _unique_stem(f"{base}_{i}회_{fdiff}" if n_forms > 1 else base)
             info = {}
