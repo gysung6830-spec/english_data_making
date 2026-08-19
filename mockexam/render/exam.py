@@ -30,12 +30,32 @@ TYPE_LABEL_KO = {
 _BOGI_TYPES = {"dialogue_arrange_inflect", "condition_write_inflect", "word_arrange",
                "arrange_and_translate", "chart_fix_and_arrange", "blank_choose_no_change"}
 
-# 한글 본문 글꼴: 학교 시험지(HWP) 기본 명조인 함초롬바탕을 1순위로,
-# 미설치 환경을 위해 바탕/Batang → Noto Serif KR 순으로 대체.
-_SERIF = ("'함초롬바탕','HCR Batang','Batang','바탕','Noto Serif CJK KR',"
-          "'Noto Serif KR','NanumMyeongjo','Nanum Myeongjo','Times New Roman',serif")
+# 한글 본문 글꼴: 어떤 환경에서도 '나눔명조'로 출력한다.
+# 리포지토리에 동봉한 NanumMyeongjo.ttf 를 @font-face 로 직접 로드하므로,
+# 시스템 폰트 설치 여부와 무관하게(누락돼도) 항상 나눔명조가 PDF 에 임베드된다.
+_FONT_DIR = Path(__file__).resolve().parent / "fonts"
+_NANUM_REG = _FONT_DIR / "NanumMyeongjo.ttf"
+_NANUM_BOLD = _FONT_DIR / "NanumMyeongjoBold.ttf"
+# 1순위 나눔명조(동봉). 혹시 파일 접근 실패 시를 대비해 뒤에 시스템 폰트도 남긴다.
+_SERIF = ("'NanumMyeongjo','함초롬바탕','Batang','바탕','Noto Serif CJK KR',"
+          "'Times New Roman',serif")
 
-_CSS = f"""
+
+def _font_face_css() -> str:
+    """동봉한 나눔명조를 절대경로(file://)로 로드하는 @font-face(런타임 경로 계산)."""
+    if not _NANUM_REG.exists():
+        return ""
+    reg, bold = _NANUM_REG.as_uri(), _NANUM_BOLD.as_uri()
+    bold_src = bold if _NANUM_BOLD.exists() else reg
+    return (
+        f"@font-face {{ font-family:'NanumMyeongjo'; font-style:normal; "
+        f"font-weight:400; src:url('{reg}'); }}\n"
+        f"@font-face {{ font-family:'NanumMyeongjo'; font-style:normal; "
+        f"font-weight:700; src:url('{bold_src}'); }}\n"
+    )
+
+
+_CSS = _font_face_css() + f"""
 * {{ box-sizing: border-box; }}
 @page {{ size: A4; margin: 11mm 12mm 10mm 12mm; }}
 body {{ font-family: {_SERIF}; font-size: 8.2pt; line-height: 1.42; color:#000; margin:0; }}
