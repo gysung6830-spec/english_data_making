@@ -39,7 +39,8 @@ GENERATORS = {
 def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
     """한 유형을 생성. 구조 검증 실패 시 재시도, 고위험 유형은 LLM 자기검증까지.
 
-    반환 (q, a, flags). 자기검증에 두 번 실패하면 문항은 유지하되 '확인 권장' 사유를 단다.
+    반환 (q, a, flags), 또는 최종 실패 시 None(그 문항만 건너뛰고 나머지는 살린다).
+    자기검증에 두 번 실패하면 문항은 유지하되 '확인 권장' 사유를 단다.
     """
     last_err: Exception | None = None
     for attempt in range(2):
@@ -58,6 +59,10 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
                 continue
             fl = list(fl) + [f"자동검증: {reason or '정답 유일성·정오답 재확인'}"]
         return q, a, fl
+    # 재시도 소진 — 지문 전체를 버리지 않고 이 유형만 건너뛴다.
+    if logger:
+        logger.error("[%s] 최종 생성 실패 — 이 문항은 제외합니다: %s", t, last_err)
+    return None
     raise RuntimeError(f"'{t}' 유형 생성 실패: {last_err}")
 
 
@@ -100,18 +105,17 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER])
     from . import review as _rv
     for t in TYPE_ORDER:  # 고정 순서로 채워 넣기(수거는 완료순이라도 조립은 순서대로)
-        q, a, fl = results[t]
+        res = results.get(t)
+        if res is None:      # 이 유형은 최종 생성 실패 → 건너뛰고 나머지는 살린다
+            continue
+        q, a, fl = res
         passage.set_qa(t, q, a)
         passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
         # 지문 종류에 부적합한 유형(안내문·도표의 순서/삽입, 서사문의 주제 등)도 검수 표시
         passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
 
-    # 생성 단계 검증(7종 완비 · 유형 집합 일치)
-    rep = validator.check_passage(passage)
-    if not rep.ok:
-        raise RuntimeError(
-            f"[{passage.title}] 검증 실패 — 문제누락:{rep.missing_q} 해설누락:{rep.missing_a}"
-        )
+    if not passage.q:     # 한 유형도 못 만들었을 때만 실패로 본다
+        raise RuntimeError(f"[{passage.title}] 모든 유형 생성 실패")
     return passage
 
 

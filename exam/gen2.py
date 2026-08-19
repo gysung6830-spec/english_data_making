@@ -277,7 +277,9 @@ def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, answer_p
                 continue
             fl = list(fl) + [f"자동검증: {reason or '정답 유일성·정오답 재확인'}"]
         return q, a, fl
-    raise RuntimeError(f"2회 '{t}' 유형 생성 실패: {last_err}")
+    if logger:
+        logger.error("[2회 %s] 최종 생성 실패 — 이 문항은 제외합니다: %s", t, last_err)
+    return None    # 지문 전체를 버리지 않고 이 유형만 건너뛴다
 
 
 def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
@@ -303,11 +305,15 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
     from . import review as _rv
     for t in TYPE_ORDER2:
-        q, a, fl = results[t]
+        res = results.get(t)
+        if res is None:      # 이 유형은 최종 생성 실패 → 건너뛰고 나머지는 살린다
+            continue
+        q, a, fl = res
         passage.set_qa(t, q, a)
         passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
         passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
-    validator.check_passage(passage, TYPE_ORDER2)
+    if not passage.q:
+        raise RuntimeError(f"[{passage.title}] 2회 모든 유형 생성 실패")
     return passage
 
 

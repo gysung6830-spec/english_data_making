@@ -51,35 +51,48 @@ def check_passage(passage: Passage, type_order=TYPE_ORDER) -> MissingReport:
     return MissingReport(passage.title, missing_q, missing_a)
 
 
+def present_types(passage: Passage, type_order=TYPE_ORDER) -> list[str]:
+    """이 지문에 '실제로 생성된' 유형(문제+해설 둘 다 있는)만 type_order 순서로."""
+    return [t for t in type_order
+            if (passage.q.get(t) or "").strip() and (passage.a.get(t) or "").strip()]
+
+
 def validate_passages(passages: list[Passage], type_order=TYPE_ORDER) -> None:
-    """모든 지문이 유형+해설을 완비했는지 확인. 실패 시 ValidationError."""
+    """지문들의 정합성을 확인한다. 일부 유형은 생성 실패로 빠져 있을 수 있으나(부분 허용),
+    ① 규격 외 유형이 없어야 하고 ② 문제/해설 유형 집합이 일치해야 하며
+    ③ 최소 1문항은 있어야 한다. 실패 시 ValidationError."""
     if not passages:
         raise ValidationError("지문이 하나도 없습니다.")
+    expected = set(type_order)
     problems: list[str] = []
     for p in passages:
-        rep = check_passage(p, type_order)
-        if not rep.ok:
-            problems.append(
-                f"[{rep.passage_title}] 누락 — 문제:{rep.missing_q or '없음'} / 해설:{rep.missing_a or '없음'}"
-            )
+        extra = (set(p.q) | set(p.a)) - expected
+        if extra:
+            problems.append(f"[{p.title}] 규격 외 유형: {sorted(extra)}")
+        qk = {t for t in type_order if (p.q.get(t) or "").strip()}
+        ak = {t for t in type_order if (p.a.get(t) or "").strip()}
+        if qk != ak:
+            problems.append(f"[{p.title}] 문제/해설 유형 불일치: {sorted(qk ^ ak)}")
+        if not qk:
+            problems.append(f"[{p.title}] 생성된 문항이 하나도 없습니다.")
     if problems:
-        raise ValidationError("6종 완비 검증 실패:\n" + "\n".join(problems))
+        raise ValidationError("검증 실패:\n" + "\n".join(problems))
 
 
 def validate_numbering(passages: list[Passage], start: int = 1,
                        type_order=TYPE_ORDER) -> list[list[int]]:
     """조판 결과의 문항 번호가 1..N 연속인지 확인하고, 지문별 번호 목록을 돌려준다.
 
-    각 지문은 정확히 len(type_order) 문항을 가지므로, 문서 전체 번호는
-    start..(start + len*지문수 - 1) 로 연속이어야 한다.
-    문제와 해설은 같은 번호를 공유한다.
+    각 지문은 '실제로 생성된 문항 수'만큼 번호를 가지며(부분 생성 허용), 문서 전체
+    번호는 start..(start + 총문항수 - 1) 로 연속이어야 한다. 문제·해설은 같은 번호를 공유.
     """
     numbers: list[list[int]] = []
     n = start
     for p in passages:
-        block = list(range(n, n + len(type_order)))
+        cnt = len(present_types(p, type_order))
+        block = list(range(n, n + cnt))
         numbers.append(block)
-        n += len(type_order)
+        n += cnt
 
     flat = [num for block in numbers for num in block]
     expected = list(range(start, start + len(flat)))

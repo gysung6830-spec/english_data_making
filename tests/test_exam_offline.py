@@ -814,6 +814,24 @@ def test_hanjul_translation_residue() -> None:
     print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
 
 
+def test_partial_generation_survives() -> None:
+    """한 유형이 끝내 생성 실패해도(예: imply BOut 선지 개수 오류) 지문 전체를 버리지 않고
+    나머지 문항으로 출력한다(graceful degradation). 번호는 남은 문항 기준 연속."""
+    from exam.demo3 import demo_passages_3
+    from exam.set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
+    ps = demo_passages_3()
+    del ps[0].q["imply_1"]           # 한 슬롯이 생성 실패한 상황
+    del ps[0].a["imply_1"]
+    assert len(validator.present_types(ps[0], TYPE_ORDER3)) == 9
+    validator.validate_passages(ps, TYPE_ORDER3)             # 부분 허용 통과
+    nums = validator.validate_numbering(ps, 1, TYPE_ORDER3)
+    assert nums == [list(range(1, 10))], nums                # 10 → 9, 연속
+    html = renderer.render_html(ps, type_order=TYPE_ORDER3, prompts=TYPE_PROMPTS3,
+                                labels=TYPE_LABELS3, group_by="type")
+    assert "quick-grid" in html and "imply" not in html.split("quick-grid")[0][-50:]
+    print("✓ 부분 생성(한 유형 실패) — 나머지 살려 출력·번호 연속 통과")
+
+
 def test_llm_self_verify() -> None:
     """고위험 유형 LLM 자기검증: ok=false면 재생성, 그래도 실패면 '확인 권장' 플래그.
     비고위험 유형·검증 비활성은 통과 처리."""
@@ -1137,6 +1155,7 @@ if __name__ == "__main__":
     test_hanjul_translation_residue()
     test_set3_demo()
     test_passage_type_fit_flags()
+    test_partial_generation_survives()
     test_llm_self_verify()
     test_notice_bullet_markers()
     test_d_token_completeness()

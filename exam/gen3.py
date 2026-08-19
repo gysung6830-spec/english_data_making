@@ -109,11 +109,15 @@ def build_passage3(client, body, max_retries=1, logger=None, analysis=None,
 
     results = run_parallel([(slot, _task(slot)) for slot in TYPE_ORDER3])
     for slot in TYPE_ORDER3:
-        q, a, fl = results[slot]
+        res = results.get(slot)
+        if res is None:      # 이 슬롯은 최종 생성 실패 → 건너뛰고 나머지는 살린다
+            continue
+        q, a, fl = res
         passage.set_qa(slot, q, a)
         passage.flag(slot, fl)
         passage.flag(slot, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), slot))
-    validator.check_passage(passage, TYPE_ORDER3)
+    if not passage.q:
+        raise RuntimeError(f"[{passage.title}] 3회 모든 유형 생성 실패")
     return passage
 
 

@@ -63,6 +63,9 @@ def _blocks(passages: list[Passage], start: int,
             "a_body": Markup(a_html), "key": key,
         }, key)
 
+    def _has(p, t):     # 생성 실패로 빠진 슬롯은 건너뛴다(부분 생성 허용)
+        return bool((p.q.get(t) or "").strip() and (p.a.get(t) or "").strip())
+
     if group_by == "type":
         # 유형별: 각 유형마다 번호를 1(start)부터 다시 매긴다. ([순서배열] 1·2 [문장삽입] 1·2 …)
         for t in type_order:
@@ -70,10 +73,14 @@ def _blocks(passages: list[Passage], start: int,
             items: list[dict] = []
             n = start
             for p in passages:
+                if not _has(p, t):
+                    continue
                 row, key = _row(n, t, p)
                 rows.append(row)
                 items.append({"no": n, "key": key})
                 n += 1
+            if not rows:       # 이 유형이 전 지문에서 다 빠졌으면 블록 생략
+                continue
             blocks.append({"label": f"[{labels[t]}]", "title": "", "rows": rows})
             quick.append({"label": f"[{labels[t]}]", "cells": items})
     else:
@@ -83,6 +90,8 @@ def _blocks(passages: list[Passage], start: int,
         for i, p in enumerate(passages, start=1):
             rows = []
             for t in type_order:
+                if not _has(p, t):
+                    continue
                 row, key = _row(n, t, p)
                 rows.append(row)
                 flat.append({"no": n, "key": key})
@@ -126,6 +135,9 @@ def collect_review(passages: list[Passage], start: int = 1,
 
     def _emit(t: str, p: Passage) -> None:
         nonlocal n
+        # _blocks 와 동일하게, 생성 실패로 빠진 슬롯은 번호를 매기지 않는다(번호 일치).
+        if not ((p.q.get(t) or "").strip() and (p.a.get(t) or "").strip()):
+            return
         reasons = getattr(p, "flags", {}).get(t)
         if reasons:
             items.append({"no": n, "label": labels[t], "title": p.title,
