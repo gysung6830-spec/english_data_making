@@ -370,20 +370,11 @@ def build_favicon(size: int) -> str:
     return page(f'<div class="stage">{logomark_svg(size, "dark")}</div>', CSS, size, size)
 
 
-# ── 라인업 (실제 자료 예시 포함) ──────────────────────────────────────────
-def build_lineup(width: int, items, *, heading: str, caption: str,
-                 dark: bool = True, thumb_w: int = 320,
-                 kicker: str = "", edge: list[tuple[str, str]] | None = None
-                 ) -> tuple[str, int]:
-    """자료 목록. 각 줄에 실제 산출물 썸네일을 함께 보여 준다.
-
-    kicker : 제목 위 한 줄 (예: '01 - 03  ·  읽고 · 분석하고 · 훈련한다')
-    edge   : 맨 아래 차별화 포인트 (소제목, 설명) 목록
-    """
-    u = width / 100
-    t = theme(dark)
+# ── 라인업 (한 장) ────────────────────────────────────────────────────────
+def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
+                points_n: int = 2) -> str:
+    """자료 목록 줄. 왼쪽에 실물 썸네일, 오른쪽에 이름과 한 줄."""
     rows = []
-
     for it in items:
         thumb = ""
         if it.sample:
@@ -393,11 +384,17 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
                          f'style="width:100%;display:block;border-radius:8px;'
                          f'box-shadow:0 4px 16px rgba(14,31,26,.22)">')
         if not thumb:
-            thumb = (f'<div style="width:100%;height:{u * 21:.0f}px;border-radius:8px;'
-                     f'border:1px dashed {t["rule"]};display:flex;align-items:center;'
+            thumb = (f'<div style="width:100%;aspect-ratio:4/3;border-radius:8px;'
+                     f'border:1px dashed {t["line"]};display:flex;align-items:center;'
                      f'justify-content:center"><span class="sans" '
-                     f'style="font-size:{u * 1.7:.0f}px;color:{t["muted"]}">'
+                     f'style="font-size:{u * 1.6:.0f}px;color:{t["muted"]}">'
                      f'예시 준비 중</span></div>')
+
+        badge = ""
+        if it.signature:
+            badge = (f'<span class="chip" style="background:{P["gold"]};'
+                     f'color:{P["green_900"]};padding:{u * .55:.0f}px {u * 1.3:.0f}px;'
+                     f'font-size:{u * 1.45:.0f}px;letter-spacing:.10em">SIGNATURE</span>')
 
         pts = "".join(
             f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
@@ -405,7 +402,7 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
             f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
             f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
             f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-            for head, desc in it.points[:4])
+            for head, desc in it.points[:points_n])
 
         rows.append(f"""<div style="display:flex;gap:{u * 3.2:.0f}px;
           padding:{u * 3.4:.0f}px 0;border-top:1px solid {t['line']}">
@@ -414,6 +411,7 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
             <div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
               <div class="wm" style="font-size:{u * 2.0:.0f}px;color:{t['accent']}">{it.no}</div>
               <div class="ko" style="font-size:{u * 3.5:.0f}px;color:{t['fg']}">{it.name}</div>
+              {badge}
             </div>
             <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 2.0:.0f}px;
                  color:{t['fg']};line-height:1.65;word-break:keep-all;opacity:.9">
@@ -421,124 +419,117 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
             <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>
           </div>
         </div>""")
-
-    kicker_el = ""
-    if kicker:
-        kicker_el = (f'<div class="ko" style="font-size:{u * 2.0:.0f}px;'
-                     f'color:{t["accent"]};letter-spacing:.10em;'
-                     f'margin-bottom:{u * 1.4:.0f}px">{kicker}</div>')
-
-    edge_el = ""
-    if edge:
-        # 카드 세 장이 나란히 서므로 가장 긴 것에 높이를 맞춘다. 흘러넘쳐 잘리지
-        # 않도록 줄 수를 세어 카드 높이를 직접 박는다.
-        card_w = (width - u * 13 - u * 3.6) / 3
-        head_px, desc_px = u * 2.1, u * 1.75
-        head_lines = max(-(-len(h) * head_px // (card_w - u * 4.4)) for h, _ in edge)
-        desc_lines = max(-(-len(d) * desc_px // (card_w - u * 4.4)) for _, d in edge)
-        card_h = (u * 4.8 + head_lines * head_px * 1.42
-                  + u * 1.0 + desc_lines * desc_px * 1.68)
-        cards = "".join(f"""<div style="flex:1 1 0;background:{t['chip_bg']};
-          border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px;
-          height:{card_h:.0f}px">
-          <div class="ko" style="font-size:{head_px:.0f}px;color:{t['accent']};
-               line-height:1.42;word-break:keep-all">{head}</div>
-          <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{desc_px:.0f}px;
-               color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>
-        </div>""" for head, desc in edge)
-        edge_el = f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
-          border-top:1px solid {t['line']}">
-          <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
-               margin-bottom:{u * 2.0:.0f}px">{"이 셋이" if len(edge) == 3 else "이 자료가"} 다른 점</div>
-          <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
-        </div>"""
-
-    def make(h: int, tail: str = "") -> str:
-        inner = f"""<div style="display:flex;flex-direction:column;
-          padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
-          <div>
-            {kicker_el}
-            <div class="ko" style="font-size:{u * 5.4:.0f}px;color:{t['fg']}">{heading}</div>
-            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
-                 color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
-          </div>
-          <div>{''.join(rows)}</div>
-          {edge_el}
-          <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
-            {signature(u * 3.2, dark)}</div>
-          {tail}
-        </div>"""
-        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
-
-    return autosize(make, width, int(u * 4.5))
+    return "".join(rows)
 
 
-def build_lineup_all(width: int = DOC_W, dark: bool = True) -> tuple[str, int]:
-    """자료 아홉 종을 한 장에 세운 전체 라인업.
+def edge_block(edge, t: dict[str, str], u: float, width: int) -> str:
+    """묶음 아래 붙는 차별화 포인트 세 칸.
 
-    묶음별 라인업 석 장은 그 묶음을 파는 글에 붙이는 것이고, 이 한 장은
-    '무슨 자료를 파는 곳인가'를 처음 온 사람에게 보여 주는 목차다. 그래서
-    실물 사진 없이 번호·이름·한 줄만 세운다. 목록이 길면 목차 구실을 못 한다.
+    카드 세 장이 나란히 서므로 가장 긴 것에 높이를 맞춘다. 흘러넘쳐 잘리지
+    않도록 줄 수를 세어 카드 높이를 직접 박는다.
     """
-    u = width / 100
-    t = theme(dark)
+    if not edge:
+        return ""
+    card_w = (width - u * 13 - u * 3.6) / 3
+    head_px, desc_px = u * 2.1, u * 1.75
+    head_lines = max(-(-len(h) * head_px // (card_w - u * 4.4)) for h, _ in edge)
+    desc_lines = max(-(-len(d) * desc_px // (card_w - u * 4.4)) for _, d in edge)
+    card_h = (u * 4.8 + head_lines * head_px * 1.42
+              + u * 1.0 + desc_lines * desc_px * 1.68)
+    cards = "".join(f"""<div style="flex:1 1 0;background:{t['chip_bg']};
+      border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px;
+      height:{card_h:.0f}px">
+      <div class="ko" style="font-size:{head_px:.0f}px;color:{t['accent']};
+           line-height:1.42;word-break:keep-all">{head}</div>
+      <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{desc_px:.0f}px;
+           color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>
+    </div>""" for head, desc in edge)
+    return f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
+      border-top:1px solid {t['line']}">
+      <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
+           margin-bottom:{u * 2.0:.0f}px">{"이 셋이" if len(edge) == 3 else "이 자료가"} 다른 점</div>
+      <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
+    </div>"""
 
-    groups = [
-        ("읽는 자료", "01 — 03", MATERIALS[:3]),
-        ("시그니처 자료", "04 — 05", MATERIALS[3:5]),
-        ("쓰는 자료", "06 — 09", MATERIALS[5:]),
-        ("제작 교재", "B1", BOOKS),
+
+# 라인업 한 장을 이루는 묶음들. (머리말, 제목, 설명, 자료들, 차별화, 어두운 판)
+def lineup_sections():
+    return [
+        ("01 — 03  ·  읽는 자료", "같은 지문을 세 번 읽힙니다",
+         "원문으로 한 번, 해석으로 한 번, 끊어읽기와 함축까지 뜯어서 또 한 번. "
+         "세 자료가 같은 문장 번호를 씁니다.",
+         MATERIALS[:3], EDGE_READ, False),
+        ("04 — 05  ·  시그니처 자료", "필생보 — 필자의 생각이 보이는 영어독해",
+         "해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
+         "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
+         MATERIALS[3:5], EDGE_SIGN, True),
+        ("06 — 09  ·  쓰는 자료", "그 다음은 손으로 씁니다",
+         "읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. 겹쳐서 묻고, 서술형으로 "
+         "쓰게 하고, 변형해서 확인하고, 우리 학교 시험지로 한 회차를 돌립니다.",
+         MATERIALS[5:], EDGE_EXAM, False),
+        ("교재", "제작 교재 · 고3",
+         "아직 실물을 못 본 자료입니다. PDF 를 받으면 위 목록으로 옮깁니다.",
+         BOOKS, None, True),
     ]
 
-    blocks = []
-    for label, span, items in groups:
-        rows = "".join(f"""<div style="display:flex;gap:{u * 2.2:.0f}px;
-          padding:{u * 1.9:.0f}px 0;border-top:1px solid {t['line']}">
-          <div class="wm" style="flex:0 0 {u * 4.4:.0f}px;font-size:{u * 2.0:.0f}px;
-               color:{t['accent']};padding-top:{u * .5:.0f}px">{it.no}</div>
-          <div style="flex:1 1 auto">
-            <div style="display:flex;align-items:baseline;gap:{u * 1.2:.0f}px">
-              <div class="ko" style="font-size:{u * 2.9:.0f}px;color:{t['fg']}">{it.name}</div>
-              {'<span class="chip" style="background:' + P['gold'] + ';color:'
-               + P['green_900'] + f';padding:{u * .5:.0f}px {u * 1.2:.0f}px;'
-               + f'font-size:{u * 1.4:.0f}px;letter-spacing:.10em">SIGNATURE</span>'
-               if it.signature else ''}
-            </div>
-            <div class="sans" style="margin-top:{u * .7:.0f}px;font-size:{u * 1.85:.0f}px;
-                 color:{t['muted']};line-height:1.65;word-break:keep-all">{it.one_line}</div>
-          </div>
-        </div>""" for it in items)
-        blocks.append(f"""<div style="margin-top:{u * 4:.0f}px">
-          <div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
-            <div class="ko" style="font-size:{u * 2.6:.0f}px;color:{t['fg']}">{label}</div>
-            <div class="sans" style="font-size:{u * 1.7:.0f}px;color:{t['accent']};
-                 letter-spacing:.10em">{span}</div>
-          </div>
-          <div style="margin-top:{u * 1.2:.0f}px">{rows}</div>
+
+def build_lineup(width: int = DOC_W) -> tuple[str, int]:
+    """자료 전체 라인업 — 한 장.
+
+    묶음마다 이미지를 나눠 두면 블로그에 올릴 때 순서가 흐트러지고, 읽는 사람은
+    어디까지가 한 목록인지 모른 채 끊긴다. 한 장에 다 세우고 묶음은 바탕색으로
+    가른다. 밝은 판과 어두운 판이 번갈아 나오면 어디서 묶음이 바뀌는지 보인다.
+    """
+    u = width / 100
+
+    head_t = theme(True)
+    header = f"""<div style="position:relative;background:{head_t['bg']};
+      padding:{u * 7:.0f}px {u * 6.5:.0f}px {u * 6:.0f}px;overflow:hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {u * 46:.0f}"
+           width="{width}" height="{u * 46:.0f}"
+           style="position:absolute;inset:0;pointer-events:none">
+        <path d="{leaf_path(width * 0.86, u * 40, u * 62, u * 38, teeth=13, depth=0.055, tilt=18)}"
+              fill="{head_t['wm']}" fill-opacity="{head_t['wm_op']}"/></svg>
+      <div style="position:relative">
+        <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{head_t['accent']};
+             letter-spacing:.12em">자료 라인업</div>
+        <div class="ko" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 5.6:.0f}px;
+             color:{head_t['fg']};line-height:1.32;word-break:keep-all">
+          읽고 · 뜯어보고 · 손으로 씁니다</div>
+        <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
+             color:{head_t['muted']};line-height:1.75;word-break:keep-all">
+          한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
+          어떤 것을 붙여 써도 수업이 끊기지 않습니다.
+          <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
+      </div>
+    </div>"""
+
+    bands = [header]
+    for kicker, heading, caption, items, edge, dark in lineup_sections():
+        t = theme(dark)
+        bands.append(f"""<div style="background:{t['bg']};
+          padding:{u * 6:.0f}px {u * 6.5:.0f}px {u * 6:.0f}px">
+          <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{t['accent']};
+               letter-spacing:.10em">{kicker}</div>
+          <div class="ko" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 4.2:.0f}px;
+               color:{t['fg']};line-height:1.36;word-break:keep-all">{heading}</div>
+          <div class="sans" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 2.0:.0f}px;
+               color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
+          <div style="margin-top:{u * 1.6:.0f}px">{lineup_rows(items, t, u)}</div>
+          {edge_block(edge, t, u, width)}
         </div>""")
 
-    def make(h: int, tail: str = "") -> str:
-        inner = f"""<div style="display:flex;flex-direction:column;
-          padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
-          <div>
-            <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{t['accent']};
-                 letter-spacing:.10em">자료 라인업</div>
-            <div class="ko" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 5.2:.0f}px;
-                 color:{t['fg']};line-height:1.34;word-break:keep-all">
-              읽고 · 뜯어보고 · 손으로 씁니다</div>
-            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.0:.0f}px;
-                 color:{t['muted']};line-height:1.7;word-break:keep-all">
-              한 지문을 아홉 가지 방식으로 굴립니다. 같은 문장 번호를 쓰기 때문에
-              어떤 자료끼리 붙여 써도 수업이 끊기지 않습니다.</div>
-          </div>
-          {''.join(blocks)}
-          <div style="display:flex;justify-content:center;padding-top:{u * 4.5:.0f}px">
-            {signature(u * 3.2, dark)}</div>
-          {tail}
-        </div>"""
-        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+    foot_t = theme(True)
+    bands.append(f"""<div style="background:{foot_t['bg']};
+      padding:{u * 4.5:.0f}px 0;display:flex;justify-content:center">
+      {signature(u * 3.2, True)}</div>""")
 
-    return autosize(make, width, int(u * 4.5))
+    def make(h: int, tail: str = "") -> str:
+        body = (f'<div style="display:flex;flex-direction:column;'
+                f'background:{foot_t["bg"]}">{"".join(bands)}{tail}</div>')
+        return page(body, CSS, width, h)
+
+    return autosize(make, width, 0)
 
 
 def spec_table(title: str, rows, t: dict[str, str], u: float,
@@ -774,14 +765,13 @@ def write_posts() -> list[Path]:
 
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
-{img('lineup-0-all.png')}
+{img('lineup.png')}
 
-한 지문을 아홉 가지 방식으로 굴립니다. 아래는 묶음별로 나눠 본 것이고,
-자료 한 종씩 자세히 보려면 각 상세페이지 글로 가시면 됩니다.
+한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
+어떤 것을 붙여 써도 수업이 끊기지 않습니다. 자료 한 종씩 자세히 보려면
+각 상세페이지 글로 가시면 됩니다.
 
 ## 읽는 자료 (01 — 03)
-
-{img('lineup-1-read.png')}
 
 {rows_of(MATERIALS[:3])}
 
@@ -791,8 +781,6 @@ def write_posts() -> list[Path]:
 
 ## 시그니처 자료 — 필생보 (04 — 05)
 
-{img('lineup-2-pilsaengbo.png')}
-
 {rows_of(MATERIALS[3:5])}
 
 ### 이 셋이 다른 점
@@ -801,13 +789,15 @@ def write_posts() -> list[Path]:
 
 ## 쓰는 자료 (06 — 09)
 
-{img('lineup-3-write.png')}
-
 {rows_of(MATERIALS[5:])}
 
 ### 이 셋이 다른 점
 
 {edge_of(EDGE_EXAM)}
+
+## 제작 교재
+
+{rows_of(BOOKS)}
 
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")
@@ -922,43 +912,8 @@ def build_all() -> list[Path]:
         emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
 
     print("라인업")
-    html, h = build_lineup_all()
-    emit(made, "lineup-0-all.png", html, DOC_W, h)
-
-    html, h = build_lineup(
-        DOC_W, MATERIALS[:3],
-        kicker="01 — 03  ·  읽는 자료",
-        heading="같은 지문을 세 번 읽힙니다",
-        caption="원문으로 한 번, 해석으로 한 번, 끊어읽기와 함축까지 뜯어서 또 한 번. "
-                "세 자료가 같은 문장 번호를 씁니다.",
-        edge=EDGE_READ, dark=False)
-    emit(made, "lineup-1-read.png", html, DOC_W, h)
-
-    html, h = build_lineup(
-        DOC_W, MATERIALS[3:5],
-        kicker="04 — 05  ·  시그니처 자료",
-        heading="필생보 — 필자의 생각이 보이는 영어독해",
-        caption="해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
-                "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
-        edge=EDGE_SIGN)
-    emit(made, "lineup-2-pilsaengbo.png", html, DOC_W, h)
-
-    html, h = build_lineup(
-        DOC_W, MATERIALS[5:],
-        kicker="06 — 09  ·  쓰는 자료",
-        heading="그 다음은 손으로 씁니다",
-        caption="읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. "
-                "겹쳐서 묻고, 서술형으로 쓰게 하고, 변형해서 확인하고, "
-                "우리 학교 시험지로 한 회차를 돌립니다.",
-        edge=EDGE_EXAM, dark=False)
-    emit(made, "lineup-3-write.png", html, DOC_W, h)
-
-    html, h = build_lineup(
-        DOC_W, BOOKS,
-        kicker="교재",
-        heading="제작 교재 · 고3",
-        caption="아직 실물을 못 본 자료입니다. PDF 를 받으면 위 목록으로 옮깁니다.")
-    emit(made, "lineup-books.png", html, DOC_W, h)
+    html, h = build_lineup()
+    emit(made, "lineup.png", html, DOC_W, h)
 
     print("포스트 썸네일 샘플")
     emit(made, "thumb-800-sample.png",
@@ -1014,8 +969,8 @@ def main() -> None:
 
     if args.cmd == "lineup":
         made: list[Path] = []
-        html, h = build_lineup_all()
-        emit(made, "lineup-0-all.png", html, DOC_W, h)
+        html, h = build_lineup()
+        emit(made, "lineup.png", html, DOC_W, h)
         return
 
     if args.cmd == "item":

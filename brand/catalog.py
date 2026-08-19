@@ -341,6 +341,7 @@ MATERIALS: list[Item] = [
         name="동형모의고사",
         en="Mock Exam",
         one_line="시중 문제집의 남의 시험이 아니라, 우리 학교 시험지 그대로.",
+        signature=True,
         edge="4회분을 하 → 중 → 상 → 중상으로. 회차마다 문항이 겹치지 않습니다.",
         lead=(
             "한 지문을 끝까지, 우리 학교식으로, 오류 없이. "
