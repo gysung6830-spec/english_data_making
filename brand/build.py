@@ -475,44 +475,57 @@ def lineup_sections():
     ]
 
 
-def build_lineup(width: int = DOC_W) -> tuple[str, int]:
-    """자료 전체 라인업 — 한 장.
+def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]:
+    """자료 라인업.
 
-    묶음마다 이미지를 나눠 두면 블로그에 올릴 때 순서가 흐트러지고, 읽는 사람은
-    어디까지가 한 목록인지 모른 채 끊긴다. 한 장에 다 세우고 묶음은 바탕색으로
-    가른다. 밝은 판과 어두운 판이 번갈아 나오면 어디서 묶음이 바뀌는지 보인다.
+    묶음마다 디자인을 새로 시작하면 어디까지가 한 목록인지 안 보인다. 그래서
+    한 흐름으로 짜 놓고 **묶음 경계에서만** 자른다. 바탕색이 밝은 판과 어두운
+    판으로 번갈아 가므로, 순서대로 올리면 이어진 한 장처럼 읽힌다.
+
+    part=None : 전부 이어 붙인 한 장
+    part=0..3 : 그 묶음만. 0 에는 머리말이, 마지막에는 꼬리말이 함께 붙는다.
     """
     u = width / 100
+    secs = lineup_sections()
+    chosen = list(enumerate(secs)) if part is None else [(part, secs[part])]
+    with_head = part is None or part == 0
+    with_foot = part is None or part == len(secs) - 1
 
     head_t = theme(True)
-    header = f"""<div style="position:relative;background:{head_t['bg']};
-      padding:{u * 7:.0f}px {u * 6.5:.0f}px {u * 6:.0f}px;overflow:hidden">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {u * 46:.0f}"
-           width="{width}" height="{u * 46:.0f}"
-           style="position:absolute;inset:0;pointer-events:none">
-        <path d="{leaf_path(width * 0.86, u * 40, u * 62, u * 38, teeth=13, depth=0.055, tilt=18)}"
-              fill="{head_t['wm']}" fill-opacity="{head_t['wm_op']}"/></svg>
-      <div style="position:relative">
-        <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{head_t['accent']};
-             letter-spacing:.12em">자료 라인업</div>
-        <div class="ko" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 5.6:.0f}px;
-             color:{head_t['fg']};line-height:1.32;word-break:keep-all">
-          읽고 · 뜯어보고 · 손으로 씁니다</div>
-        <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
-             color:{head_t['muted']};line-height:1.75;word-break:keep-all">
-          한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
-          어떤 것을 붙여 써도 수업이 끊기지 않습니다.
-          <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
-      </div>
-    </div>"""
+    bands = []
+    if with_head:
+        bands.append(f"""<div style="position:relative;background:{head_t['bg']};
+          padding:{u * 7:.0f}px {u * 6.5:.0f}px {u * 6:.0f}px;overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {u * 46:.0f}"
+               width="{width}" height="{u * 46:.0f}"
+               style="position:absolute;inset:0;pointer-events:none">
+            <path d="{leaf_path(width * 0.86, u * 40, u * 62, u * 38, teeth=13, depth=0.055, tilt=18)}"
+                  fill="{head_t['wm']}" fill-opacity="{head_t['wm_op']}"/></svg>
+          <div style="position:relative">
+            <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{head_t['accent']};
+                 letter-spacing:.12em">자료 라인업</div>
+            <div class="ko" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 5.6:.0f}px;
+                 color:{head_t['fg']};line-height:1.32;word-break:keep-all">
+              읽고 · 뜯어보고 · 손으로 씁니다</div>
+            <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
+                 color:{head_t['muted']};line-height:1.75;word-break:keep-all">
+              한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
+              어떤 것을 붙여 써도 수업이 끊기지 않습니다.
+              <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
+          </div>
+        </div>""")
 
-    bands = [header]
-    for kicker, heading, caption, items, edge, dark in lineup_sections():
+    for i, (kicker, heading, caption, items, edge, dark) in chosen:
         t = theme(dark)
+        # 나눠 올린 조각도 몇 번째인지 보여야 순서가 안 흐트러진다.
+        step = ("" if part is None else
+                f'<span class="sans" style="float:right;font-size:{u * 1.7:.0f}px;'
+                f'color:{t["muted"]};letter-spacing:.10em">'
+                f'{i + 1} / {len(secs)}</span>')
         bands.append(f"""<div style="background:{t['bg']};
           padding:{u * 6:.0f}px {u * 6.5:.0f}px {u * 6:.0f}px">
           <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{t['accent']};
-               letter-spacing:.10em">{kicker}</div>
+               letter-spacing:.10em">{kicker}{step}</div>
           <div class="ko" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 4.2:.0f}px;
                color:{t['fg']};line-height:1.36;word-break:keep-all">{heading}</div>
           <div class="sans" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 2.0:.0f}px;
@@ -522,9 +535,10 @@ def build_lineup(width: int = DOC_W) -> tuple[str, int]:
         </div>""")
 
     foot_t = theme(True)
-    bands.append(f"""<div style="background:{foot_t['bg']};
-      padding:{u * 4.5:.0f}px 0;display:flex;justify-content:center">
-      {signature(u * 3.2, True)}</div>""")
+    if with_foot:
+        bands.append(f"""<div style="background:{foot_t['bg']};
+          padding:{u * 4.5:.0f}px 0;display:flex;justify-content:center">
+          {signature(u * 3.2, True)}</div>""")
 
     def make(h: int, tail: str = "") -> str:
         body = (f'<div style="display:flex;flex-direction:column;'
@@ -532,6 +546,11 @@ def build_lineup(width: int = DOC_W) -> tuple[str, int]:
         return page(body, CSS, width, h)
 
     return autosize(make, width, 0)
+
+
+# 나눠 올릴 때 쓰는 파일 이름
+LINEUP_PARTS = ["lineup-1-read.png", "lineup-2-pilsaengbo.png",
+                "lineup-3-write.png", "lineup-4-books.png"]
 
 
 def spec_table(title: str, rows, t: dict[str, str], u: float,
@@ -767,7 +786,10 @@ def write_posts() -> list[Path]:
 
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
-{img('lineup.png')}
+<!-- 이미지는 아래 순서대로 넣으면 이어진 한 장처럼 보입니다.
+     한 장으로 올리려면 lineup.png 하나만 쓰세요. -->
+
+{img('lineup-1-read.png')}
 
 한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
 어떤 것을 붙여 써도 수업이 끊기지 않습니다. 자료 한 종씩 자세히 보려면
@@ -783,6 +805,8 @@ def write_posts() -> list[Path]:
 
 ## 시그니처 자료 — 필생보 (04 — 05)
 
+{img('lineup-2-pilsaengbo.png')}
+
 {rows_of(MATERIALS[3:5])}
 
 ### 이 셋이 다른 점
@@ -791,6 +815,8 @@ def write_posts() -> list[Path]:
 
 ## 쓰는 자료 (06 — 09)
 
+{img('lineup-3-write.png')}
+
 {rows_of(MATERIALS[5:])}
 
 ### 이 셋이 다른 점
@@ -798,6 +824,8 @@ def write_posts() -> list[Path]:
 {edge_of(EDGE_EXAM)}
 
 ## 제작 교재
+
+{img('lineup-4-books.png')}
 
 {rows_of(BOOKS)}
 
@@ -916,6 +944,9 @@ def build_all() -> list[Path]:
     print("라인업")
     html, h = build_lineup()
     emit(made, "lineup.png", html, DOC_W, h)
+    for i, name in enumerate(LINEUP_PARTS):
+        html, h = build_lineup(part=i)
+        emit(made, name, html, DOC_W, h)
 
     print("포스트 썸네일 샘플")
     emit(made, "thumb-800-sample.png",
@@ -935,7 +966,7 @@ def main() -> None:
     sub.add_parser("all", help="전체 세트 생성")
     sub.add_parser("posts", help="블로그 원고 초안만 다시 생성")
     sub.add_parser("index", help="전체 결과물 목록표 한 장 생성")
-    sub.add_parser("lineup", help="전체 라인업 한 장만 다시 생성")
+    sub.add_parser("lineup", help="라인업(한 장 + 나눈 조각)만 다시 생성")
 
     one = sub.add_parser("item", help="자료 하나의 상세페이지만 다시 생성")
     one.add_argument("key", help=f"자료 키 ({', '.join(BY_KEY)})")
@@ -973,6 +1004,9 @@ def main() -> None:
         made: list[Path] = []
         html, h = build_lineup()
         emit(made, "lineup.png", html, DOC_W, h)
+        for i, name in enumerate(LINEUP_PARTS):
+            html, h = build_lineup(part=i)
+            emit(made, name, html, DOC_W, h)
         return
 
     if args.cmd == "item":
