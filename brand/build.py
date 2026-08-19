@@ -40,6 +40,13 @@ KEYWORDS = ["고등 모의고사", "내신", "수능자료 제작"]
 # 네이버 본문 폭에 맞춘 기본 가로.
 DOC_W = 900
 
+# 한 장에 넣을 실물 사진 수. 더 넣으면 스크롤만 길어지고 끝까지 안 읽힌다.
+# 나머지 지면은 catalog 의 extra 에 남아 있으니 필요할 때 순서만 바꿔 쓰면 된다.
+MAX_FIGURES = 2
+
+# 특징 줄 수. 카드마다 분량이 들쭉날쭉하면 목록으로 늘어놨을 때 눈에 걸린다.
+MAX_POINTS = 4
+
 # 라인업 아래에 붙는 차별화 포인트. 자료 자체의 설명이 아니라
 # "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적는다.
 EDGE_READ = [
@@ -507,7 +514,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
         f'word-break:keep-all;margin-top:{u * 1.4:.0f}px">'
         f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
         f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-        for head, desc in item.points)
+        for head, desc in item.points[:MAX_POINTS])
 
     edge_el = ""
     if item.edge:
@@ -528,7 +535,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
         </div>"""
 
     sample_el = figure(item.sample, item.sample_note)
-    sample_el += "".join(figure(n, note) for n, note in item.extra)
+    sample_el += "".join(figure(n, note) for n, note in item.extra[:MAX_FIGURES - 1])
 
     # 짧고 센 한 줄은 크게, 설명형 긴 한 줄은 작게. 같은 크기로 두면 센 문장이 죽는다.
     punchy = len(item.one_line) <= 30
@@ -619,7 +626,8 @@ def build_points(item, width: int, dark: bool = False) -> tuple[str, int]:
         </div>"""
 
     sample_block = figure(item.sample, item.sample_note, first=True)
-    sample_block += "".join(figure(n, note) for n, note in item.extra)
+    sample_block += "".join(figure(n, note)
+                            for n, note in item.extra[:MAX_FIGURES - 1])
 
     def make(h: int, tail: str = "") -> str:
         inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
