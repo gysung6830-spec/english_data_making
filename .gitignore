@@ -12,9 +12,3 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
-
-# 브랜드 글꼴 (brand/fonts/fetch_fonts.py 로 내려받음 — 용량이 커서 제외)
-brand/fonts/*.ttf
-brand/fonts/*.otf
-brand/fonts/*.woff2
-brand/fonts/.fc-cache/
