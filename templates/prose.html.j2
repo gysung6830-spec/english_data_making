@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>{{ pack.title }} - 워크북</title>
-  <style>{{ font_css }}</style>
+  <style>{{ font_css | safe }}</style>
   <style>{% include "prose.css" %}</style>
   <style>{% include "_common.css" %}</style>
 </head>

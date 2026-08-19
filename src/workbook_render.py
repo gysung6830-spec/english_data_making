@@ -232,7 +232,10 @@ def _footer_template(text: str) -> str:
     페이지 번호는 병합 후 문서 전체 기준으로 stamp_page_numbers() 가 하단 '오른쪽'에 따로 찍는다
     (부분 PDF 를 합치므로 Chromium 의 pageNumber 는 구간마다 재시작하기 때문).
     """
+    # Chromium 의 header/footer 는 본문과 격리된 컨텍스트라 페이지의 @font-face 를 못 쓴다.
+    # 브랜드 문구의 한글('영어')까지 나눔스퀘어라운드로 나오도록 폰트 CSS 를 여기에도 인라인 주입.
     return (
+        f'<style>{branding.font_face_css()}</style>'
         '<div style="width:100%; font-size:11px; color:#9aa3af; text-align:left; '
         "font-family:'NanumSquareRound','Malgun Gothic','Nanum Gothic',sans-serif; "
         'padding:0 14mm;">'

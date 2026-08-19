@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>{{ books[0].title }}{% if books|length > 1 %} 외 {{ books|length - 1 }}편{% endif %} - 통합 워크북</title>
-  <style>{{ font_css }}</style>
+  <style>{{ font_css | safe }}</style>
   <style>{% include "workbook.css" %}</style>
   <style>{% include "_common.css" %}</style>
 </head>

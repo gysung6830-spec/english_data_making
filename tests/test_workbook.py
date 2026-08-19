@@ -185,7 +185,11 @@ def test_render_html():
     assert "동사·준동사" in html and "특수구문" in html  # 범례
     assert "※ 문제" in html and "(4)" in html    # 지시문(번호 형식 + 지칭 안내)
     assert "지칭" in html                        # 대명사 지칭(ref) 유형 라벨
-    print("PASS  HTML 렌더(제목+뱃지·정답 페이지·범례·지시문·지칭)")
+    # 폰트 @font-face 는 이스케이프되면 안 됨(=Chromium 이 data-URI 를 못 읽어 CJK 로 폴백).
+    # '{{ font_css | safe }}' 회귀 방지: 따옴표가 &#39; 로 새지 않고 실제 data URI 여야 한다.
+    assert "@font-face" in html and "url('data:font/ttf;base64," in html
+    assert "url(&#39;data:font" not in html      # 이스케이프 누출 없음
+    print("PASS  HTML 렌더(제목+뱃지·정답 페이지·범례·지시문·지칭·폰트 미이스케이프)")
 
 
 # ---- 7. 복수 지문 배치 (지문1→답1→지문2→답2) ----------------------------
