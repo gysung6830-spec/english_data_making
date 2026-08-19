@@ -466,6 +466,23 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
     return autosize(make, width, int(u * 4.5))
 
 
+def spec_table(title: str, rows, t: dict[str, str], u: float,
+               label_w: float = 13) -> str:
+    """제목 + (왼쪽 칸 / 오른쪽 설명) 표. 회차 구성·난이도 기준처럼
+    줄글로 풀면 안 읽히는 것을 표로 보여 준다."""
+    body = "".join(f"""<div style="display:flex;gap:{u * 2:.0f}px;
+      padding:{u * 1.5:.0f}px 0;border-top:1px solid {t['line']}">
+      <div class="ko" style="flex:0 0 {u * label_w:.0f}px;font-size:{u * 2.0:.0f}px;
+           color:{t['accent']}">{k}</div>
+      <div class="sans" style="flex:1 1 auto;font-size:{u * 1.9:.0f}px;color:{t['muted']};
+           line-height:1.65;word-break:keep-all">{v}</div>
+    </div>""" for k, v in rows)
+    return f"""<div style="margin-top:{u * 3.4:.0f}px">
+      <div class="ko" style="font-size:{u * 2.3:.0f}px;color:{t['fg']};
+           margin-bottom:{u * 1.0:.0f}px">{title}</div>{body}
+    </div>"""
+
+
 # ── 자료별 단독 소개 카드 ─────────────────────────────────────────────────
 def build_card(item, width: int = DOC_W) -> tuple[str, int]:
     """자료 한 종을 한 장으로 소개한다.
@@ -510,6 +527,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
             {item.sample_note}</div>
         </div>"""
 
+    tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     name_px = u * (7.0 if item.signature else 5.4)
 
     def make(h: int, tail: str = "") -> str:
@@ -528,6 +546,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
             {item.one_line}</div>
           {edge_el}
           {sample_el}
+          {tables_el}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
           <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
             {signature(u * 3.0, dark)}</div>
@@ -638,6 +657,7 @@ def build_spec(item, width: int, dark: bool = True) -> tuple[str, int]:
         inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
           <div class="ko" style="font-size:{u * 4.2:.0f}px;color:{t['fg']}">자료 안내</div>
           <div style="margin-top:{u * 3.2:.0f}px">{specs}</div>
+          {"".join(spec_table(title, rows, t, u) for title, rows in item.tables)}
           <div style="margin-top:{u * 4.2:.0f}px">
             <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['accent']}">이런 분께</div>
             <div style="margin-top:{u * 1.5:.0f}px">{who}</div>
@@ -699,6 +719,9 @@ def write_posts() -> list[Path]:
         pts = "\n\n".join(f"**{h}**\n\n{d}" for h, d in it.points)
         who = "\n".join(f"- {w}" for w in it.who)
         spec = "\n".join(f"- {k} — {v}" for k, v in it.spec)
+        tables = "".join(
+            f"\n### {title}\n\n" + "\n".join(f"- **{k}** — {v}" for k, v in rows) + "\n"
+            for title, rows in it.tables)
         sample = (f"\n{img('samples/' + it.sample)}\n\n{it.sample_note}\n" if it.sample
                   else "\n<!-- 실제 자료 화면 캡처를 여기에 넣으세요 -->\n")
         md = f"""# {it.name}
@@ -722,7 +745,7 @@ def write_posts() -> list[Path]:
 ## 구성
 
 {spec}
-
+{tables}
 ## 이런 분께
 
 {who}
