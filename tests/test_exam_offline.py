@@ -857,7 +857,7 @@ def test_set3_demo() -> None:
     ps = demo_passages_3()
     validator.validate_passages(ps, TYPE_ORDER3)
     nums = validator.validate_numbering(ps, 1, TYPE_ORDER3)
-    assert nums == [list(range(1, 13))], nums          # 지문당 12문항
+    assert nums == [list(range(1, 11))], nums          # 지문당 10문항(주제1+제목3+내용3+함축3)
     # 유형별 배치: [주제] 1·2·3 [제목] 1·2·3 …
     html = renderer.render_html(ps, type_order=TYPE_ORDER3, prompts=TYPE_PROMPTS3,
                                 labels=TYPE_LABELS3, group_by="type")

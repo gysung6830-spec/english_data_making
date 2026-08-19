@@ -17,7 +17,7 @@ from .generators import content as _content
 from .generators import title as _title
 from .generators import topic as _topic
 from .llm import ClaudeClient
-from .set3 import (BASE_OF, PER, TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3,
+from .set3 import (BASE_OF, COUNT_OF, TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3,
                    VARIANT_OF)
 from .types import Passage
 
@@ -49,8 +49,11 @@ _ANGLE: dict[str, list[str]] = {
 
 
 def _variant_hint(base: str, label: str, i: int) -> str:
-    angle = _ANGLE.get(base, ["", "", ""])[(i - 1) % PER]
-    return (f"[변형 {i}/{PER} · 겹침 방지] 같은 지문의 '{label}' {i}번째 문제. {angle} "
+    count = COUNT_OF.get(base, 1)
+    if count <= 1:
+        return ""    # 단일 문항(주제)은 겹침 방지 지시 불필요
+    angle = _ANGLE.get(base, ["", "", ""])[(i - 1) % len(_ANGLE.get(base, [""]))]
+    return (f"[변형 {i}/{count} · 겹침 방지] 같은 지문의 '{label}' {i}번째 문제. {angle} "
             f"같은 지문의 다른 번호 문제와 정답·오답 선지·밑줄이 겹치지 않게 하라.")
 
 

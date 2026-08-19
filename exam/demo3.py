@@ -141,8 +141,8 @@ _IMPLY = [
 
 def _passage_dna3() -> Passage:
     p = Passage(title=DNA.title)
-    for i, (ch, ans, r, w) in enumerate(_TOPIC, 1):
-        p.set_qa(f"topic_{i}", *_topic(ch, ans, r, w))
+    ch, ans, r, w = _TOPIC[0]                    # 주제는 1문항만
+    p.set_qa("topic_1", *_topic(ch, ans, r, w))
     for i, (ch, ans, r, w) in enumerate(_TITLE, 1):
         p.set_qa(f"title_{i}", *_topic(ch, ans, r, w))     # 제목도 topic 렌더 구조 공유
     for i, (ch, ans, r, w) in enumerate(_CONTENT, 1):
