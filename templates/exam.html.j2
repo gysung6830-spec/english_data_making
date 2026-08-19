@@ -27,8 +27,8 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
+      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
       <div class="q-item type-{{ item.type }}">
         <div class="q-head">
           <span class="qnum">{{ item.no }}.</span>
@@ -36,6 +36,7 @@
         </div>
         <div class="q-body">{{ item.q_body }}</div>
       </div>
+      {% if loop.first %}</div>{% endif %}
       {% endfor %}
     </div>
     {% endfor %}
@@ -52,8 +53,8 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
+      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
       <div class="q-item type-{{ item.type }}">
         <div class="q-head">
           <span class="qnum">{{ item.no }}.</span>
@@ -65,6 +66,7 @@
           <div class="a-body">{{ item.a_body }}</div>
         </div>
       </div>
+      {% if loop.first %}</div>{% endif %}
       {% endfor %}
     </div>
     {% endfor %}
@@ -101,8 +103,8 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
+      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
       <div class="a-item type-{{ item.type }}">
         <div class="a-head">
           <span class="qnum">{{ item.no }}.</span>
@@ -110,6 +112,7 @@
         </div>
         <div class="a-body">{{ item.a_body }}</div>
       </div>
+      {% if loop.first %}</div>{% endif %}
       {% endfor %}
     </div>
     {% endfor %}
