@@ -193,7 +193,7 @@ def sample_height(name: str, width: int) -> int:
 
 # ── 브랜드 기본 ───────────────────────────────────────────────────────────
 def build_profile(size: int, dark: bool = True, box_h: int = 0,
-                  with_name: bool = True) -> str:
+                  with_name: bool = True, name_text: str = "") -> str:
     """프로필.
 
     with_name=True  : 심볼 + 'Ortica 영어' + '오르티카 영어'
@@ -202,9 +202,11 @@ def build_profile(size: int, dark: bool = True, box_h: int = 0,
                       글자를 빼고 잎을 키우면 작아져도 형태가 남는다.
 
     box_h 를 주면 세로가 긴 판(사이드바 스킨용)으로 만든다.
+    name_text 로 윗줄 글자를 갈아 끼운다(기본 'Ortica 영어').
     """
     s, t = size, theme(dark)
     h = box_h or size
+    title = name_text or PROFILE_EN
     if not with_name:
         inner = f"""<div style="height:100%;display:flex;align-items:center;
           justify-content:center">
@@ -215,8 +217,8 @@ def build_profile(size: int, dark: bool = True, box_h: int = 0,
     inner = f"""<div style="height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center">
       <div style="width:{s * 0.42:.0f}px;line-height:0">{mark(dark, int(s * 0.42))}</div>
-      <div class="wm" style="margin-top:{s * 0.048:.0f}px;font-size:{s * 0.125:.0f}px;
-           color:{t['fg']}">{PROFILE_EN}</div>
+      <div class="wm" style="margin-top:{s * 0.048:.0f}px;font-size:{s * 0.135:.0f}px;
+           color:{t['fg']}">{title}</div>
       <div class="ko" style="margin-top:{s * 0.028:.0f}px;font-size:{s * 0.072:.0f}px;
            color:{t['accent']};letter-spacing:.08em">{BRAND_KO}</div>
     </div>"""
@@ -746,6 +748,13 @@ def build_all() -> list[Path]:
     # 크게 보이는 자리용 (이름이 함께 들어간 판)
     emit(made, "profile-name-800.png", build_profile(800), 800, 800)
     emit(made, "profile-name-400.png", build_profile(400), 400, 400)
+    # 크림 바탕 판 — 가로형 로고와 같은 색·글자 구성
+    emit(made, "profile-light-1200.png",
+         build_profile(1200, dark=False, name_text=BRAND_EN), 1200, 1200)
+    emit(made, "profile-light-800.png",
+         build_profile(800, dark=False, name_text=BRAND_EN), 800, 800)
+    emit(made, "profile-light-400.png",
+         build_profile(400, dark=False, name_text=BRAND_EN), 400, 400)
     emit(made, "profile-portrait-400x480.png", build_profile(400, box_h=480), 400, 480)
     emit(made, "title-966x300-dark.png", build_title(966, 300), 966, 300)
     emit(made, "title-966x300-light.png", build_title(966, 300, dark=False), 966, 300)

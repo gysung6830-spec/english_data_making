@@ -51,7 +51,10 @@ brand/
 | --- | --- | --- |
 | `profile-mark-800.png` | 800×800 | **네이버 권장.** 심볼만 |
 | `profile-mark-400.png` | 400×400 | 같은 판, 작은 용량 |
-| `profile-mark-light-800.png` | 800×800 | 밝은 배경 버전 |
+| `profile-mark-light-800.png` | 800×800 | 밝은 배경, 심볼만 |
+| `profile-light-1200.png` | 1200×1200 | 크림 바탕 + Ortica + 오르티카 영어 |
+| `profile-light-800.png` | 800×800 | 위와 같음 |
+| `profile-light-400.png` | 400×400 | 위와 같음 |
 | `profile-name-800.png` | 800×800 | 크게 보이는 자리용(이름 포함) |
 | `profile-name-400.png` | 400×400 | 위와 같음 |
 | `profile-portrait-400x480.png` | 400×480 | 사이드바가 세로로 긴 스킨 |
