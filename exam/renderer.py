@@ -238,12 +238,16 @@ def render_pdf(
 
 
 def render_pdf_multi(parts: list[dict], out_path: str | Path,
-                     footer_note: str = DEFAULT_FOOTER) -> Path:
+                     footer_note: str = DEFAULT_FOOTER,
+                     review_out: str | Path | None = None) -> Path | None:
     """여러 '파트'를 한 PDF로 합본한다(WeasyPrint 페이지 병합, 외부 라이브러리 불필요).
 
     part = {passages, header_note, type_order, prompts, labels, sections}.
     각 파트는 자체 머리글로 시작하고, 파트 사이는 새 쪽에서 이어진다.
-    모든 파트의 '확인 권장 문항'은 마지막에 단 한 장의 별도 페이지로 모아 붙인다.
+    '확인 권장(검토 메모)' 문항은 모아서:
+      · review_out 이 None 이면 본문 PDF 맨 끝에 별도 페이지로 붙이고,
+      · review_out 이 주어지면 그 경로에 '별도 파일'로 저장한다(본문에는 안 붙임).
+    반환: 검토 메모를 별도 파일로 저장했으면 그 경로, 아니면 None.
     """
     from weasyprint import HTML  # 지연 임포트(무거움)
 
@@ -276,8 +280,16 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
                 part["passages"], 1, type_order, labels,
                 part_label=part.get("header_note", ""), group_by=group_by)
 
+    review_path: Path | None = None
     if review_items:
         rhtml = render_review_html(review_items, footer_note)
-        docs.append(HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
+        rdoc = HTML(string=rhtml, base_url=str(TEMPLATE_DIR)).render(stylesheets=css)
+        if review_out is not None:          # 검토 메모를 '별도 파일'로 저장(본문엔 안 붙임)
+            review_path = Path(review_out)
+            review_path.parent.mkdir(parents=True, exist_ok=True)
+            rdoc.write_pdf(str(review_path))
+        else:                                # 기존 동작: 본문 맨 끝에 덧붙임
+            docs.append(rdoc)
 
-    return _write_docs(docs, out_path)
+    _write_docs(docs, out_path)
+    return review_path

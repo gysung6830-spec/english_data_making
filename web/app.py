@@ -58,10 +58,11 @@ def split_passages(text: str) -> list[str]:
     return [b.strip() for b in blocks if b.strip()]
 
 
-def _pdf_path(fid: str) -> Path:
+def _pdf_path(fid: str, kind: str = "") -> Path:
     if not _FID_RE.match(fid):
         abort(404)
-    return OUT / f"exam_{fid}.pdf"
+    suffix = "_검토메모" if kind == "review" else ""
+    return OUT / f"exam_{fid}{suffix}.pdf"
 
 
 def _json_path(fid: str) -> Path:
@@ -252,7 +253,8 @@ def generate():
 
         fid = uuid.uuid4().hex[:12]
         out = _pdf_path(fid)
-        renderer.render_pdf_multi(parts, out)
+        # 검토 메모(확인 권장 문항)는 '별도 파일'로 저장한다.
+        review_path = renderer.render_pdf_multi(parts, out, review_out=_pdf_path(fid, "review"))
         # 실제 생성 결과는 JSON 으로도 저장 → 다음에 제목만 바꿔 재출력(무료).
         has_json = False
         if not demo:
@@ -261,9 +263,14 @@ def generate():
             _json_path(fid).write_text(
                 json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
             has_json = True
-        outputs = [{"fid": fid, "label": "합본 (" + " · ".join(labels) + ")",
-                    "count": len(parts), "name": f"{doc_name}_변형문제_합본",
+        outputs = [{"fid": fid, "kind": "", "label": "변형문제 (" + " · ".join(labels) + ")",
+                    "count": len(parts), "name": f"{doc_name}_변형문제",
                     "has_json": has_json}]
+        if review_path:      # 검토 메모가 있으면 별도 결과물로 추가
+            outputs.append({"fid": fid, "kind": "review",
+                            "label": "📋 검토 메모 (확인 권장 문항)",
+                            "count": len(parts), "name": f"{doc_name}_검토메모",
+                            "has_json": False})
     except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
         return fail(f"생성 실패: {e}", 500)
 
@@ -272,7 +279,7 @@ def generate():
 
 @app.get("/pdf/<fid>")
 def pdf(fid: str):
-    p = _pdf_path(fid)
+    p = _pdf_path(fid, request.args.get("kind", ""))
     if not p.exists():
         abort(404)
     return send_file(p, mimetype="application/pdf")   # 브라우저 인라인 미리보기
@@ -280,7 +287,7 @@ def pdf(fid: str):
 
 @app.get("/download/<fid>")
 def download(fid: str):
-    p = _pdf_path(fid)
+    p = _pdf_path(fid, request.args.get("kind", ""))
     if not p.exists():
         abort(404)
     base = safe_name(request.args.get("name", "")) or "영어지문_변형문제"

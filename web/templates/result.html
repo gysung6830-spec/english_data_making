@@ -17,7 +17,7 @@
   <div class="dl-row">
     <span class="dl-label"><b>{{ o.label }}</b> · 지문 {{ o.count }}개</span>
     <span class="dl-btns">
-      <a class="btn" href="{{ url_for('download', fid=o.fid, name=o.name) }}">{{ o.name }}.pdf 다운로드</a>
+      <a class="btn" href="{{ url_for('download', fid=o.fid, name=o.name, kind=o.get('kind', '')) }}">{{ o.name }}.pdf 다운로드</a>
       {% if o.has_json %}
       <a class="btn ghost" href="{{ url_for('result_json', fid=o.fid, name=o.name) }}">분석 결과(.json) 저장</a>
       {% endif %}

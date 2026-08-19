@@ -707,7 +707,8 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     # 4) 실제로 재렌더되는지(무API)
     tmp_out.mkdir(parents=True, exist_ok=True)
-    out = renderer.render_pdf_multi(parts, tmp_out / "rerender.pdf")
+    out = tmp_out / "rerender.pdf"
+    renderer.render_pdf_multi(parts, out)
     assert out.exists() and out.stat().st_size > 2000
 
     # 5) 손상 검증: 유형 누락이면 친절한 오류
@@ -1114,11 +1115,25 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
         {"passages": p1, "header_note": "변형문제 1회", "sections": ["teacher", "answers"]},
         {"passages": p2, "header_note": "변형문제 1회 · 난이도 상", "sections": ["teacher", "answers"]},
     ]
-    outm = renderer.render_pdf_multi(parts, tmp_out / "rv_multi.pdf")
+    outm = tmp_out / "rv_multi.pdf"
+    ret = renderer.render_pdf_multi(parts, outm)
+    assert ret is None                                  # 별도 파일 아님 → None
     rm = PdfReader(str(outm))
     titled = [i for i, pg in enumerate(rm.pages) if "검토 메모" in (pg.extract_text() or "")]
     assert titled == [len(rm.pages) - 1]                # 오직 마지막 한 장
-    print("✓ 검토 메모(점검 문항) 수집·맨 끝 페이지·합본 통과")
+
+    # 7) review_out 지정 → 검토 메모를 '별도 PDF'로 분리(본문엔 안 붙는다)
+    body = tmp_out / "rv_body.pdf"
+    memo = tmp_out / "rv_memo.pdf"
+    rp = renderer.render_pdf_multi(parts, body, review_out=memo)
+    assert rp == memo and memo.exists()                 # 별도 파일 경로 반환
+    rb = PdfReader(str(body))
+    body_txt = " ".join((pg.extract_text() or "") for pg in rb.pages)
+    assert "검토 메모" not in body_txt                    # 본문엔 검토 메모 없음
+    rmemo = PdfReader(str(memo))
+    memo_txt = " ".join((pg.extract_text() or "") for pg in rmemo.pages)
+    assert "검토 메모" in memo_txt                        # 검토 메모는 별도 파일에
+    print("✓ 검토 메모(점검 문항) 수집·맨 끝 페이지·합본·별도파일 분리 통과")
 
 
 def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -> None:
