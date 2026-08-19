@@ -33,12 +33,49 @@ SAMPLES = OUT / "samples"
 BRAND_EN = "Ortica"
 BRAND_KO = "오르티카 영어"
 PROFILE_EN = "Ortica 영어"   # 프로필에는 영문 이름 뒤에 '영어'를 붙인다
+CTA = "이웃추가와 공감 눌러 주세요"   # 세로형 타이틀 아래 한 줄. 비우면 안 나온다.
 CONCEPT = "필자의 생각이 보이는 영어"
 # 소개 문구는 글줄로 반복하지 않고 칩으로만 보여 준다.
 KEYWORDS = ["고등 모의고사", "내신", "수능자료 제작"]
 
 # 네이버 본문 폭에 맞춘 기본 가로.
 DOC_W = 900
+
+# 라인업 아래에 붙는 차별화 포인트. 자료 자체의 설명이 아니라
+# "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적는다.
+EDGE_READ = [
+    ("문장 번호가 원본 그대로",
+     "세 자료가 같은 번호를 씁니다. 수업 중에 '3번 문장'이라고만 하면 학생이 "
+     "어느 자료를 펴고 있든 같은 자리를 봅니다."),
+    ("한 지문을 세 번, 다르게",
+     "읽기 → 분석 → 쓰기로 각도를 바꿔 만납니다. 같은 내용을 다시 읽히는 게 "
+     "아니라 매번 다른 일을 시킵니다."),
+    ("지문 길이에 맞춘 분량",
+     "어휘는 지문 길이에 비례해 12~20개. 짧은 지문에 억지로 스무 개를 "
+     "채우지 않습니다."),
+]
+
+EDGE_EXAM = [
+    ("한 지문에서 여섯 각도",
+     "주제·빈칸·순서·삽입·어법·요약. 한 유형만 반복해서 익숙해지는 함정을 "
+     "만들지 않습니다."),
+    ("문항 번호가 밀리지 않게",
+     "모의고사 원본에서 문항 경계를 코드로 잘라 번호를 맞춥니다. 번호가 한 칸 "
+     "밀린 자료는 수업에서 못 씁니다."),
+    ("강의용과 독학용을 나눠서",
+     "앞에서 설명하며 채우는 자료와 혼자 앉아 읽는 자료는 여백부터 달라야 "
+     "합니다."),
+]
+
+EDGE_BOOK = [
+    ("감이 아니라 규칙으로",
+     "그을 자리, 끊을 자리를 먼저 정하고 반복시킵니다. '잘 읽어라'로 끝내지 "
+     "않습니다."),
+    ("기출 문장으로만",
+     "설명을 위해 만든 예문이 아니라 실제 시험에 나온 문장으로 확인합니다."),
+    ("수업에서 고친 판본",
+     "학생이 막힌 자리를 보고 고쳤습니다. 책상에서 설계만 한 교재가 아닙니다."),
+]
 
 CSS = f"""
 {font_css()}
@@ -156,12 +193,14 @@ def sample_height(name: str, width: int) -> int:
 
 
 # ── 브랜드 기본 ───────────────────────────────────────────────────────────
-def build_profile(size: int, dark: bool = True) -> str:
+def build_profile(size: int, dark: bool = True, box_h: int = 0) -> str:
     """프로필 — 심볼 + 'Ortica 영어' + '오르티카 영어'.
 
     네이버는 프로필을 원형으로 자르기도 해서, 글자는 전부 가운데에 모은다.
+    box_h 를 주면 세로가 긴 판(네이버 사이드바에서 쓰는 비율)으로 만든다.
     """
     s, t = size, theme(dark)
+    h = box_h or size
     inner = f"""<div style="height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center">
       <div style="width:{s * 0.42:.0f}px;line-height:0">{mark(dark, int(s * 0.42))}</div>
@@ -170,7 +209,7 @@ def build_profile(size: int, dark: bool = True) -> str:
       <div class="ko" style="margin-top:{s * 0.028:.0f}px;font-size:{s * 0.072:.0f}px;
            color:{t['accent']};letter-spacing:.08em">{BRAND_KO}</div>
     </div>"""
-    return page(stage(inner, dark=dark, w=s, h=s, wm=False), CSS, s, s)
+    return page(stage(inner, dark=dark, w=s, h=h, wm=False), CSS, s, h)
 
 
 def build_title(width: int, height: int, dark: bool = True) -> str:
@@ -192,6 +231,35 @@ def build_title(width: int, height: int, dark: bool = True) -> str:
         <div class="ko" style="font-size:{h * 0.082:.0f}px;color:{t['fg']}">{CONCEPT}</div>
         <div style="margin-top:{h * 0.060:.0f}px">{chips}</div>
       </div>
+    </div>"""
+    return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
+
+
+def build_title_tall(width: int, height: int, dark: bool = True) -> str:
+    """세로가 넉넉한 블로그 타이틀 (가로 966px, 세로 400~600px).
+
+    네이버 타이틀 영역은 세로를 600px까지 늘릴 수 있다. 크게 쓰면 배너처럼
+    보여서 브랜드가 먼저 읽힌다.
+    """
+    h, t = height, theme(dark)
+    chips = "".join(chip(k, t, h * 0.030) for k in KEYWORDS)
+    cta = ""
+    if CTA:
+        cta = (f'<div class="sans" style="margin-top:{h * 0.055:.0f}px;'
+               f'font-size:{h * 0.030:.0f}px;color:{t["muted"]};letter-spacing:.04em">'
+               f'{CTA}</div>')
+    inner = f"""<div style="height:100%;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;text-align:center">
+      <div style="margin-bottom:{h * 0.045:.0f}px">{chips}</div>
+      <div style="width:{h * 0.20:.0f}px;line-height:0">{mark(dark, int(h * 0.20))}</div>
+      <div class="wm" style="margin-top:{h * 0.035:.0f}px;font-size:{h * 0.125:.0f}px;
+           color:{t['fg']}">{PROFILE_EN}</div>
+      <div class="ko" style="margin-top:{h * 0.022:.0f}px;font-size:{h * 0.042:.0f}px;
+           color:{t['accent']};letter-spacing:.16em">{BRAND_KO}</div>
+      <div style="width:{h * 0.10:.0f}px;height:2px;background:{P['gold']};
+           margin:{h * 0.045:.0f}px auto"></div>
+      <div class="ko" style="font-size:{h * 0.055:.0f}px;color:{t['fg']}">{CONCEPT}</div>
+      {cta}
     </div>"""
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
 
@@ -237,11 +305,19 @@ def build_favicon(size: int) -> str:
 
 # ── 라인업 (실제 자료 예시 포함) ──────────────────────────────────────────
 def build_lineup(width: int, items, *, heading: str, caption: str,
-                 dark: bool = True, thumb_w: int = 320) -> tuple[str, int]:
-    """자료 목록. 각 줄에 실제 산출물 썸네일을 함께 보여 준다."""
+                 dark: bool = True, thumb_w: int = 320,
+                 kicker: str = "", edge: list[tuple[str, str]] | None = None
+                 ) -> tuple[str, int]:
+    """자료 목록. 각 줄에 실제 산출물 썸네일을 함께 보여 준다.
+
+    kicker : 제목 위 한 줄 (예: '01 - 03  ·  읽고 · 분석하고 · 훈련한다')
+    edge   : 맨 아래 차별화 포인트 (소제목, 설명) 목록
+    """
     u = width / 100
     t = theme(dark)
     rows, height = [], int(u * 30)
+    if kicker:
+        height += int(u * 5)
 
     for it in items:
         thumb = ""
@@ -282,14 +358,42 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
         </div>""")
         height += int(u * (16 + 4.6 * len(it.points[:4])))
 
+    kicker_el = ""
+    if kicker:
+        kicker_el = (f'<div class="ko" style="font-size:{u * 2.0:.0f}px;'
+                     f'color:{t["accent"]};letter-spacing:.10em;'
+                     f'margin-bottom:{u * 1.4:.0f}px">{kicker}</div>')
+
+    edge_el = ""
+    if edge:
+        cards = "".join(f"""<div style="flex:1 1 0;background:{t['chip_bg']};
+          border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px">
+          <div class="ko" style="font-size:{u * 2.1:.0f}px;color:{t['accent']};
+               line-height:1.4;word-break:keep-all">{head}</div>
+          <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 1.75:.0f}px;
+               color:{t['muted']};line-height:1.65;word-break:keep-all">{desc}</div>
+        </div>""" for head, desc in edge)
+        edge_el = f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
+          border-top:1px solid {t['line']}">
+          <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
+               margin-bottom:{u * 2.0:.0f}px">이 세 가지가 다른 점</div>
+          <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
+        </div>"""
+        # 카드 세 장이 나란히 서므로 가장 긴 설명이 몇 줄로 흐르는지로 잡는다.
+        longest = max(len(desc) for _, desc in edge)
+        lines = max(3, -(-longest // 16))          # 카드 한 줄에 대략 16자
+        height += int(u * (22 + 3.2 * lines))
+
     inner = f"""<div style="display:flex;flex-direction:column;
       padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
       <div>
+        {kicker_el}
         <div class="ko" style="font-size:{u * 5.4:.0f}px;color:{t['fg']}">{heading}</div>
         <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
              color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
       </div>
       <div>{''.join(rows)}</div>
+      {edge_el}
       <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
         {signature(u * 3.2, dark)}</div>
     </div>"""
@@ -484,19 +588,43 @@ def write_posts() -> list[Path]:
         (POSTS / f"{it.no.lower()}-{it.key}.md").write_text(md, encoding="utf-8")
         made.append(POSTS / f"{it.no.lower()}-{it.key}.md")
 
-    rows = "\n".join(f"**{it.no}. {it.name}** — {it.one_line}\n" for it in MATERIALS)
-    brows = "\n".join(f"**{it.name}** — {it.one_line}\n" for it in BOOKS)
+    def rows_of(items):
+        return "\n".join(f"**{it.no}. {it.name}** — {it.one_line}\n" for it in items)
+
+    def edge_of(edge):
+        return "\n".join(f"**{h}**\n\n{d}\n" for h, d in edge)
+
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
-{img('lineup-materials.png')}
+## 지문 한 장을 세 번 만납니다 (01 — 03)
 
-{rows}
+{img('lineup-materials-1.png')}
+
+{rows_of(MATERIALS[:3])}
+
+### 이 세 가지가 다른 점
+
+{edge_of(EDGE_READ)}
+
+## 그 다음은 시험장입니다 (04 — 06)
+
+{img('lineup-materials-2.png')}
+
+{rows_of(MATERIALS[3:])}
+
+### 이 세 가지가 다른 점
+
+{edge_of(EDGE_EXAM)}
 
 # 제작 교재 · 고3
 
 {img('lineup-books.png')}
 
-{brows}
+{rows_of(BOOKS)}
+
+### 이 세 가지가 다른 점
+
+{edge_of(EDGE_BOOK)}
 
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")
@@ -518,9 +646,14 @@ def build_all() -> list[Path]:
     emit(made, "profile-400.png", build_profile(400), 400, 400)
     emit(made, "profile-800.png", build_profile(800), 800, 800)
     emit(made, "profile-light-400.png", build_profile(400, dark=False), 400, 400)
+    emit(made, "profile-portrait-400x480.png", build_profile(400, box_h=480), 400, 480)
     emit(made, "title-966x300-dark.png", build_title(966, 300), 966, 300)
     emit(made, "title-966x300-light.png", build_title(966, 300, dark=False), 966, 300)
     emit(made, "title-966x200-dark.png", build_title(966, 200), 966, 200)
+    emit(made, "title-966x550-dark.png", build_title_tall(966, 550), 966, 550)
+    emit(made, "title-966x550-light.png",
+         build_title_tall(966, 550, dark=False), 966, 550)
+    emit(made, "title-966x420-dark.png", build_title_tall(966, 420), 966, 420)
     emit(made, "cover-mobile-1200x900.png", build_cover(1200, 900), 1200, 900)
     emit(made, "cover-mobile-1080x1080.png", build_cover(1080, 1080), 1080, 1080)
     emit(made, "cover-mobile-light-1200x900.png",
@@ -532,13 +665,30 @@ def build_all() -> list[Path]:
         emit(made, f"favicon-{n}.png", build_favicon(n), n, n)
 
     print("라인업")
-    html, h = build_lineup(DOC_W, MATERIALS, heading="자료 라인업",
-                           caption="지문 한 장을 어디까지 쓸 수 있는지에 맞춰 여섯 갈래로 "
-                                   "나눴습니다. 옆에 붙인 이미지는 모두 실제 출력물입니다.")
-    emit(made, "lineup-materials.png", html, DOC_W, h)
-    html, h = build_lineup(DOC_W, BOOKS, heading="제작 교재 · 고3",
-                           caption="수업에서 직접 쓰면서 다듬은 교재입니다. "
-                                   "고3과 N수생을 기준으로 만들었습니다.", dark=False)
+    html, h = build_lineup(
+        DOC_W, MATERIALS[:3],
+        kicker="01 — 03",
+        heading="지문 한 장을 세 번 만납니다",
+        caption="읽고, 뜯어보고, 손으로 다시 씁니다. 셋은 따로 노는 자료가 아니라 "
+                "같은 지문 위에 순서대로 얹히는 한 세트입니다.",
+        edge=EDGE_READ)
+    emit(made, "lineup-materials-1.png", html, DOC_W, h)
+
+    html, h = build_lineup(
+        DOC_W, MATERIALS[3:],
+        kicker="04 — 06",
+        heading="그 다음은 시험장입니다",
+        caption="이해한 지문을 문제로 바꾸고, 실전 배열로 돌려 보고, "
+                "수업과 자습 각각에 맞는 형태로 냅니다.",
+        edge=EDGE_EXAM, dark=False)
+    emit(made, "lineup-materials-2.png", html, DOC_W, h)
+
+    html, h = build_lineup(
+        DOC_W, BOOKS,
+        kicker="교재",
+        heading="제작 교재 · 고3",
+        caption="수업에서 직접 쓰면서 다듬은 교재입니다. 고3과 N수생을 기준으로 만들었습니다.",
+        edge=EDGE_BOOK)
     emit(made, "lineup-books.png", html, DOC_W, h)
 
     print("상세페이지")
