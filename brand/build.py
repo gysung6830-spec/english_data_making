@@ -376,19 +376,21 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
     """자료 목록 줄. 왼쪽에 실물 썸네일, 오른쪽에 이름과 한 줄."""
     rows = []
     for it in items:
-        thumb = ""
+        thumb, caption = "", "예시 준비 중"
         if it.sample:
             name = shot_crop(it.sample, OUT / "thumbs" / f"t-{it.key}.png", thumb_w)
             if name:
                 thumb = (f'<img src="{(OUT / "thumbs" / name).as_uri()}" '
                          f'style="width:100%;display:block;border-radius:8px;'
                          f'box-shadow:0 4px 16px rgba(14,31,26,.22)">')
+                caption = "실제 자료 지면"
         if not thumb:
             thumb = (f'<div style="width:100%;aspect-ratio:4/3;border-radius:8px;'
-                     f'border:1px dashed {t["line"]};display:flex;align-items:center;'
-                     f'justify-content:center"><span class="sans" '
-                     f'style="font-size:{u * 1.6:.0f}px;color:{t["muted"]}">'
-                     f'예시 준비 중</span></div>')
+                     f'border:1px dashed {t["line"]}"></div>')
+        # 작은 사진은 글자가 안 읽히니 무슨 그림인지 한 줄로 알려 준다.
+        thumb += (f'<div class="sans" style="margin-top:{u * .9:.0f}px;'
+                  f'font-size:{u * 1.5:.0f}px;color:{t["muted"]};'
+                  f'letter-spacing:.04em">{caption}</div>')
 
         badge = ""
         if it.signature:
