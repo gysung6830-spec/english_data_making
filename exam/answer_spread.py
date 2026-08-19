@@ -9,6 +9,7 @@ LLM 은 객관식 정답을 특정 번호(주로 가운데)에 몰아 배치하�
 """
 from __future__ import annotations
 
+import re
 import zlib
 
 # 1~5의 고정 스크램블(단조 증가 회피). 인덱스를 대면 목표 정답 위치가 나온다.
@@ -64,3 +65,21 @@ def place_answer(choices: list, answer_no: int, target_no: int,
             if old_pos in extra_by_pos:
                 new_extra[new_pos] = extra_by_pos[old_pos]
     return new_choices, new_answer, new_extra
+
+
+def relabel_answer_ref(reason: str, old_no: int, new_no: int) -> str:
+    """해설 본문이 정답 선지를 'N번'으로 지칭한 것을, 정답 위치 분산(재배열) 뒤의
+    '실제 표시 번호'로 바꾼다.
+
+    LLM 은 정답 근거(reason)에서 정답 선지를 자신이 정한 번호(재배열 전 answer_no)로
+    지칭한다. place_answer 로 선지를 옮기면 표시 정답 번호가 달라지는데, 자유 서술인
+    reason 은 자동으로 바뀌지 않아 '5번인데 본문은 1번이 정답'이라고 어긋난다.
+    이 함수가 그 잔재를 표시 번호로 교정한다.
+
+    '(N)번'·'N번 문장'·'N번째' 같은 '문장 번호/순서' 지칭은 정답 지칭이 아니므로
+    건드리지 않는다(앞에 '('·숫자가 없고, 뒤에 '문장'·'째'가 없는 'N번'만 교체).
+    """
+    if not reason or old_no == new_no:
+        return reason
+    pat = re.compile(rf'(?<![(\d]){old_no}번(?!\s*문장|\s*째)')
+    return pat.sub(f'{new_no}번', reason)

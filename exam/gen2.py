@@ -144,9 +144,11 @@ def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
                                   max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     choices, answer_no = out.choices, out.answer_no
+    old_no = answer_no
     if answer_pos:   # 정답 위치 분산(짝 선지 재배열 — 정오 불변)
         choices, answer_no, _ = answer_spread.place_answer(choices, answer_no, answer_pos)
-    q, a = build2.make_A(analysis.sentences, marks, answer_no, out.reason, choices)
+    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
+    q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices)
     return q, a, []
 
 
@@ -167,11 +169,13 @@ def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=
     _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
     phrase = exact or out.phrase
     choices, answer_no = out.choices, out.answer_no
+    old_no = answer_no
     if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
         choices, answer_no, wrong = answer_spread.place_answer(
             choices, answer_no, answer_pos, wrong)
+    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
     q, a = build2.make_B(analysis.sentences, phrase, choices, answer_no,
-                         out.reason, wrong)
+                         reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
 
 
@@ -206,10 +210,12 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
                                   max_tokens=2000, max_retries=max_retries, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
     answer_no = out.answer_no
+    old_no = answer_no
     if answer_pos:   # 정답 위치 분산(단어쌍 선지 재배열 — 정오 불변)
         pairs, answer_no, _ = answer_spread.place_answer(pairs, answer_no, answer_pos)
+    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
     q, a = build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
-                         answer_no, out.reason)
+                         answer_no, reason)
     return q, a, []
 
 
@@ -228,11 +234,13 @@ def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
         raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{out.blank_phrase.strip()}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
     choices, answer_no = out.choices, out.answer_no
+    old_no = answer_no
     if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
         choices, answer_no, wrong = answer_spread.place_answer(
             choices, answer_no, answer_pos, wrong)
+    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
     q, a = build2.make_F(analysis.sentences, idx, phrase, choices,
-                         answer_no, out.reason, wrong)
+                         answer_no, reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
 
 

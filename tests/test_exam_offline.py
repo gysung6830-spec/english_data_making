@@ -1010,6 +1010,23 @@ def test_answer_spread() -> None:
     nc, na, _ = A.place_answer(choices, 3, 3, None)
     assert na == 3 and nc == choices
 
+    # relabel_answer_ref: 해설 본문의 정답 '번호' 지칭을 '표시 정답 번호'로 교정.
+    # (선지 재배열로 표시 번호가 달라져도 본문이 정답과 어긋나지 않게)
+    assert A.relabel_answer_ref("1번은 지문 전체를 포괄하므로 정답이다.", 1, 5) \
+        == "5번은 지문 전체를 포괄하므로 정답이다."
+    assert A.relabel_answer_ref("정답은 '…'는 1번이다.", 1, 3) == "정답은 '…'는 3번이다."
+    assert A.relabel_answer_ref("따라서 3번이 문맥적 재진술로 정답이다.", 3, 4) \
+        == "따라서 4번이 문맥적 재진술로 정답이다."
+    # 문장 번호 지칭('(N)번', 'N번 문장')은 절대 건드리지 않는다
+    assert A.relabel_answer_ref("정답 1번은 (1)번 문장과 일치한다.", 1, 5) \
+        == "정답 5번은 (1)번 문장과 일치한다."
+    assert A.relabel_answer_ref("6번 문장 'Crops…'와 일치한다.", 4, 4) \
+        == "6번 문장 'Crops…'와 일치한다."          # old==new → 무변경
+    assert A.relabel_answer_ref("삭제 행위(2번 문장)만 언급한 오답이다.", 2, 3) \
+        == "삭제 행위(2번 문장)만 언급한 오답이다."   # '(2)번 문장'류·'N번 문장' 보존
+    assert A.relabel_answer_ref("성공시켰지만(4번 문장) …", 2, 2) \
+        == "성공시켰지만(4번 문장) …"                # old==new
+
     # pick: 지문마다 같은 유형이라도 위치가 달라져(몰림 방지) 여러 값이 나온다
     p0 = [A.pick(0, s, len(A.SLOTS1)) for s in A.SLOTS1.values()]
     p1 = [A.pick(1, s, len(A.SLOTS1)) for s in A.SLOTS1.values()]
