@@ -33,7 +33,6 @@ SAMPLES = OUT / "samples"
 BRAND_EN = "Ortica"
 BRAND_KO = "오르티카 영어"
 PROFILE_EN = "Ortica 영어"   # 프로필에는 영문 이름 뒤에 '영어'를 붙인다
-CTA = "이웃추가와 공감 눌러 주세요"   # 세로형 타이틀 아래 한 줄. 비우면 안 나온다.
 CONCEPT = "필자의 생각이 보이는 영어"
 # 소개 문구는 글줄로 반복하지 않고 칩으로만 보여 준다.
 KEYWORDS = ["고등 모의고사", "내신", "수능자료 제작"]
@@ -242,24 +241,18 @@ def build_title_tall(width: int, height: int, dark: bool = True) -> str:
     보여서 브랜드가 먼저 읽힌다.
     """
     h, t = height, theme(dark)
-    chips = "".join(chip(k, t, h * 0.030) for k in KEYWORDS)
-    cta = ""
-    if CTA:
-        cta = (f'<div class="sans" style="margin-top:{h * 0.055:.0f}px;'
-               f'font-size:{h * 0.030:.0f}px;color:{t["muted"]};letter-spacing:.04em">'
-               f'{CTA}</div>')
+    chips = "".join(chip(k, t, h * 0.032) for k in KEYWORDS)
     inner = f"""<div style="height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center;text-align:center">
-      <div style="margin-bottom:{h * 0.045:.0f}px">{chips}</div>
-      <div style="width:{h * 0.20:.0f}px;line-height:0">{mark(dark, int(h * 0.20))}</div>
+      <div style="width:{h * 0.21:.0f}px;line-height:0">{mark(dark, int(h * 0.21))}</div>
       <div class="wm" style="margin-top:{h * 0.035:.0f}px;font-size:{h * 0.125:.0f}px;
            color:{t['fg']}">{PROFILE_EN}</div>
       <div class="ko" style="margin-top:{h * 0.022:.0f}px;font-size:{h * 0.042:.0f}px;
            color:{t['accent']};letter-spacing:.16em">{BRAND_KO}</div>
       <div style="width:{h * 0.10:.0f}px;height:2px;background:{P['gold']};
            margin:{h * 0.045:.0f}px auto"></div>
-      <div class="ko" style="font-size:{h * 0.055:.0f}px;color:{t['fg']}">{CONCEPT}</div>
-      {cta}
+      <div class="ko" style="font-size:{h * 0.058:.0f}px;color:{t['fg']}">{CONCEPT}</div>
+      <div style="margin-top:{h * 0.058:.0f}px">{chips}</div>
     </div>"""
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
 
