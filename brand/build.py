@@ -24,7 +24,7 @@ from ortica_brand import (  # noqa: E402
     leaf_path,
     logomark_svg,
 )
-from render import html_to_png, page  # noqa: E402
+from render import html_to_png, measure_height, page  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "assets"
@@ -43,27 +43,27 @@ DOC_W = 900
 # 라인업 아래에 붙는 차별화 포인트. 자료 자체의 설명이 아니라
 # "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적는다.
 EDGE_READ = [
-    ("문장 번호가 원본 그대로",
-     "세 자료가 같은 번호를 씁니다. 수업 중에 '3번 문장'이라고만 하면 학생이 "
-     "어느 자료를 펴고 있든 같은 자리를 봅니다."),
-    ("한 지문을 세 번, 다르게",
-     "읽기 → 분석 → 쓰기로 각도를 바꿔 만납니다. 같은 내용을 다시 읽히는 게 "
-     "아니라 매번 다른 일을 시킵니다."),
-    ("지문 길이에 맞춘 분량",
-     "어휘는 지문 길이에 비례해 12~20개. 짧은 지문에 억지로 스무 개를 "
-     "채우지 않습니다."),
+    ("틀리는 길을 먼저 보여 준다",
+     "필생보는 문장마다 '이렇게 읽으면 오답'을 답니다. 정답 해석만 주는 자료와 "
+     "가장 크게 갈리는 자리입니다."),
+    ("문장 번호가 자료를 관통한다",
+     "세 자료가 같은 번호를 씁니다. '7번 문장'이라고만 하면 학생이 어느 자료를 "
+     "펴고 있든 같은 자리를 봅니다."),
+    ("재진술 사슬을 번호로",
+     "같은 소재가 지문에서 어떻게 말을 바꿔 다시 나오는지 잇습니다. 흑백으로 "
+     "뽑아도 번호로 구분됩니다."),
 ]
 
 EDGE_EXAM = [
-    ("한 지문에서 여섯 각도",
-     "주제·빈칸·순서·삽입·어법·요약. 한 유형만 반복해서 익숙해지는 함정을 "
-     "만들지 않습니다."),
-    ("문항 번호가 밀리지 않게",
-     "모의고사 원본에서 문항 경계를 코드로 잘라 번호를 맞춥니다. 번호가 한 칸 "
-     "밀린 자료는 수업에서 못 씁니다."),
-    ("강의용과 독학용을 나눠서",
-     "앞에서 설명하며 채우는 자료와 혼자 앉아 읽는 자료는 여백부터 달라야 "
-     "합니다."),
+    ("오답에 이름을 붙인다",
+     "무관 · 부분 · 모순 · 지엽. 틀렸다고만 하지 않고 어떻게 틀렸는지를 "
+     "알려 줍니다. 학생이 오답 패턴 자체를 배웁니다."),
+    ("같은 문장을 하·중·상으로",
+     "조건 영작의 제시어 개수를 세 단계로 냅니다. 한 반에 실력 차가 있어도 "
+     "같은 문장을 같이 시킬 수 있습니다."),
+    ("학생용·교사용이 한 파일에",
+     "교사용을 띄워 수업하고 빠른 정답으로 즉시 채점합니다. 파일을 여러 개 "
+     "받아 관리할 필요가 없습니다."),
 ]
 
 EDGE_BOOK = [
@@ -183,12 +183,13 @@ def shot_crop(name: str, out: Path, width: int, ratio: float = 0.72) -> str:
     return out.name
 
 
-def sample_height(name: str, width: int) -> int:
-    """예시 이미지를 width 로 놓았을 때의 세로 픽셀."""
-    from PIL import Image
+def autosize(make, width: int, pad: int, max_height: int = 6000) -> tuple[str, int]:
+    """내용 높이를 브라우저에 재게 하고 그 높이로 다시 그린다.
 
-    with Image.open(SAMPLES / name) as im:
-        return round(width * im.height / im.width)
+    make(height, tail) 은 본문 맨 끝에 tail 을 붙인 HTML 을 돌려준다.
+    """
+    h = measure_height(lambda mark: make(max_height, mark), width, max_height) + pad
+    return make(h, ""), h
 
 
 # ── 브랜드 기본 ───────────────────────────────────────────────────────────
@@ -373,9 +374,7 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
     """
     u = width / 100
     t = theme(dark)
-    rows, height = [], int(u * 30)
-    if kicker:
-        height += int(u * 5)
+    rows = []
 
     for it in items:
         thumb = ""
@@ -414,7 +413,6 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
             <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>
           </div>
         </div>""")
-        height += int(u * (16 + 4.6 * len(it.points[:4])))
 
     kicker_el = ""
     if kicker:
@@ -424,12 +422,21 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
 
     edge_el = ""
     if edge:
+        # 카드 세 장이 나란히 서므로 가장 긴 것에 높이를 맞춘다. 흘러넘쳐 잘리지
+        # 않도록 줄 수를 세어 카드 높이를 직접 박는다.
+        card_w = (width - u * 13 - u * 3.6) / 3
+        head_px, desc_px = u * 2.1, u * 1.75
+        head_lines = max(-(-len(h) * head_px // (card_w - u * 4.4)) for h, _ in edge)
+        desc_lines = max(-(-len(d) * desc_px // (card_w - u * 4.4)) for _, d in edge)
+        card_h = (u * 4.8 + head_lines * head_px * 1.42
+                  + u * 1.0 + desc_lines * desc_px * 1.68)
         cards = "".join(f"""<div style="flex:1 1 0;background:{t['chip_bg']};
-          border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px">
-          <div class="ko" style="font-size:{u * 2.1:.0f}px;color:{t['accent']};
-               line-height:1.4;word-break:keep-all">{head}</div>
-          <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 1.75:.0f}px;
-               color:{t['muted']};line-height:1.65;word-break:keep-all">{desc}</div>
+          border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px;
+          height:{card_h:.0f}px">
+          <div class="ko" style="font-size:{head_px:.0f}px;color:{t['accent']};
+               line-height:1.42;word-break:keep-all">{head}</div>
+          <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{desc_px:.0f}px;
+               color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>
         </div>""" for head, desc in edge)
         edge_el = f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
           border-top:1px solid {t['line']}">
@@ -437,25 +444,25 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
                margin-bottom:{u * 2.0:.0f}px">이 세 가지가 다른 점</div>
           <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
         </div>"""
-        # 카드 세 장이 나란히 서므로 가장 긴 설명이 몇 줄로 흐르는지로 잡는다.
-        longest = max(len(desc) for _, desc in edge)
-        lines = max(3, -(-longest // 16))          # 카드 한 줄에 대략 16자
-        height += int(u * (22 + 3.2 * lines))
 
-    inner = f"""<div style="display:flex;flex-direction:column;
-      padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
-      <div>
-        {kicker_el}
-        <div class="ko" style="font-size:{u * 5.4:.0f}px;color:{t['fg']}">{heading}</div>
-        <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
-             color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
-      </div>
-      <div>{''.join(rows)}</div>
-      {edge_el}
-      <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
-        {signature(u * 3.2, dark)}</div>
-    </div>"""
-    return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height), height
+    def make(h: int, tail: str = "") -> str:
+        inner = f"""<div style="display:flex;flex-direction:column;
+          padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
+          <div>
+            {kicker_el}
+            <div class="ko" style="font-size:{u * 5.4:.0f}px;color:{t['fg']}">{heading}</div>
+            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
+                 color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
+          </div>
+          <div>{''.join(rows)}</div>
+          {edge_el}
+          <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
+            {signature(u * 3.2, dark)}</div>
+          {tail}
+        </div>"""
+        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+
+    return autosize(make, width, int(u * 4.5))
 
 
 # ── 상세페이지 ────────────────────────────────────────────────────────────
@@ -499,11 +506,9 @@ def build_points(item, width: int, dark: bool = False) -> tuple[str, int]:
       </div>
     </div>""" for i, (head, desc) in enumerate(item.points, 1))
 
-    sample_block, sample_px = "", 0
+    sample_block = ""
     img = shot(item.sample)
     if img:
-        inner_w = width - int(u * 15)
-        sample_px = sample_height(item.sample, inner_w) + int(u * 11)
         sample_block = f"""<div style="margin-top:{u * 4:.0f}px">
           <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['fg']};
                margin-bottom:{u * 1.5:.0f}px">실제 자료 예시</div>
@@ -513,19 +518,22 @@ def build_points(item, width: int, dark: bool = False) -> tuple[str, int]:
             {item.sample_note}</div>
         </div>"""
 
-    inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
-      <div>
-        <div class="ko" style="font-size:{u * 4.4:.0f}px;color:{t['fg']}">{item.name} 구성</div>
-        <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
-             color:{t['muted']};line-height:1.75;word-break:keep-all">{item.lead}</div>
-      </div>
-      <div style="margin-top:{u * 3:.0f}px">{rows}</div>
-      {sample_block}
-      <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
-        {signature(u * 3.0, dark)}</div>
-    </div>"""
-    h = int(u * (44 + 12.0 * len(item.points))) + sample_px
-    return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h), h
+    def make(h: int, tail: str = "") -> str:
+        inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
+          <div>
+            <div class="ko" style="font-size:{u * 4.4:.0f}px;color:{t['fg']}">{item.name} 구성</div>
+            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
+                 color:{t['muted']};line-height:1.75;word-break:keep-all">{item.lead}</div>
+          </div>
+          <div style="margin-top:{u * 3:.0f}px">{rows}</div>
+          {sample_block}
+          <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
+            {signature(u * 3.0, dark)}</div>
+          {tail}
+        </div>"""
+        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+
+    return autosize(make, width, int(u * 7.5))
 
 
 def build_spec(item, width: int, dark: bool = True) -> tuple[str, int]:
@@ -551,19 +559,22 @@ def build_spec(item, width: int, dark: bool = True) -> tuple[str, int]:
           <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.8:.0f}px;
                color:{t['muted']}">{item.price_note}</div>
         </div>"""
-    inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
-      <div class="ko" style="font-size:{u * 4.2:.0f}px;color:{t['fg']}">자료 안내</div>
-      <div style="margin-top:{u * 3.2:.0f}px">{specs}</div>
-      <div style="margin-top:{u * 4.2:.0f}px">
-        <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['accent']}">이런 분께</div>
-        <div style="margin-top:{u * 1.5:.0f}px">{who}</div>
-      </div>
-      {price}
-      <div style="display:flex;justify-content:center;padding-top:{u * 4.5:.0f}px">
-        {signature(u * 3.0, dark)}</div>
-    </div>"""
-    h = int(u * (40 + 6.2 * len(item.spec) + 5.4 * len(item.who) + (16 if item.price else 0)))
-    return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h), h
+    def make(h: int, tail: str = "") -> str:
+        inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
+          <div class="ko" style="font-size:{u * 4.2:.0f}px;color:{t['fg']}">자료 안내</div>
+          <div style="margin-top:{u * 3.2:.0f}px">{specs}</div>
+          <div style="margin-top:{u * 4.2:.0f}px">
+            <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['accent']}">이런 분께</div>
+            <div style="margin-top:{u * 1.5:.0f}px">{who}</div>
+          </div>
+          {price}
+          <div style="display:flex;justify-content:center;padding-top:{u * 4.5:.0f}px">
+            {signature(u * 3.0, dark)}</div>
+          {tail}
+        </div>"""
+        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+
+    return autosize(make, width, int(u * 7.5))
 
 
 # ── 포스트 썸네일 ─────────────────────────────────────────────────────────
@@ -787,19 +798,19 @@ def build_all() -> list[Path]:
     print("라인업")
     html, h = build_lineup(
         DOC_W, MATERIALS[:3],
-        kicker="01 — 03",
-        heading="지문 한 장을 세 번 만납니다",
-        caption="읽고, 뜯어보고, 손으로 다시 씁니다. 셋은 따로 노는 자료가 아니라 "
-                "같은 지문 위에 순서대로 얹히는 한 세트입니다.",
+        kicker="01 — 03  ·  읽는 자료",
+        heading="같은 지문을 세 번 읽힙니다",
+        caption="원문으로 한 번, 해석으로 한 번, 문장마다 뜯어서 또 한 번. "
+                "세 자료가 같은 문장 번호를 써서 자료를 바꿔 펴도 같은 자리를 봅니다.",
         edge=EDGE_READ)
     emit(made, "lineup-materials-1.png", html, DOC_W, h)
 
     html, h = build_lineup(
         DOC_W, MATERIALS[3:],
-        kicker="04 — 06",
-        heading="그 다음은 시험장입니다",
-        caption="이해한 지문을 문제로 바꾸고, 실전 배열로 돌려 보고, "
-                "수업과 자습 각각에 맞는 형태로 냅니다.",
+        kicker="04 — 06  ·  쓰는 자료",
+        heading="그 다음은 손으로 씁니다",
+        caption="읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. "
+                "서술형으로 쓰게 하고, 변형해서 묻고, 실전 배열로 한 회차를 돌립니다.",
         edge=EDGE_EXAM, dark=False)
     emit(made, "lineup-materials-2.png", html, DOC_W, h)
 

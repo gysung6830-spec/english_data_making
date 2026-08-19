@@ -9,7 +9,9 @@ brand/
 ├─ catalog.py       자료·교재 문구, 가격, 예시 이미지 연결 ← 고칠 곳은 대부분 여기
 ├─ ortica_brand.py  팔레트 · 잎 마크
 ├─ build.py         레이아웃 정의 + CLI
-├─ sample_shots.py  저장소 생성기로 실제 자료 예시 이미지 뽑기
+├─ sample_shots.py  저장소 생성기로 예시 이미지 뽑기 (구 버전 자료용)
+├─ pdf_samples.py   실제 판매 PDF 에서 예시 이미지 뽑기 ← 지금 쓰는 쪽
+├─ ANALYSIS.md      자료 5종 분석과 판매 차별화 포인트
 ├─ render.py        HTML → PNG (헤드리스 크로미움)
 ├─ assets/          결과 이미지 (samples/ 는 실제 산출물, thumbs/ 는 목록용 썸네일)
 ├─ posts/           블로그 원고 초안 10편
@@ -135,33 +137,53 @@ posts/02-analysis.md           본문 원고 초안
 
 ### 실제 자료 예시
 
-`python brand/sample_shots.py` 가 `src/render.py` 의 렌더 함수를 그대로 불러
-실제 산출물 화면을 찍습니다. WeasyPrint 자리에 HTML 을 가로채는 껍데기를 끼워
-넣는 방식이라, 실제 PDF 와 내용이 같습니다.
+라인업과 상세페이지에 들어가는 그림은 **실제 판매 PDF 를 찍은 것**입니다.
+
+```bash
+pip install pymupdf
+python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
+```
+
+`pdf_samples.py` 의 `SHOTS` 에 (파일명 조각, 페이지, 저장 이름, 남길 비율)을
+적어 두면 그 페이지를 PNG 로 뽑습니다. 파일명이 바뀌어도 조각으로 찾습니다.
 
 | 자료 | 예시 파일 |
 | --- | --- |
+| 지문자료 | `samples/passage.png` |
 | 한줄해석 | `samples/one-line.png` |
-| 워크북 | `samples/vocabtest.png` |
-| 평가원 VOCA | `samples/vocablist.png` |
+| 필생보 | `samples/pilsaengbo.png`, `pilsaengbo-summary.png` |
+| 워크북 | `samples/workbook.png` |
+| 변형문제 | `samples/variation.png`, `variation-answer.png` |
 
-**지문분석지**는 포인트박스 버전으로 최종 결정되어, 이 저장소의 6섹션
-템플릿으로 뽑은 예시는 쓰지 않습니다. **변형문제 6종 · 동형모의고사 · 필생보 ·
-형광펜 독해 · 구문독해**는 생성기가 없습니다. 모두 예시 자리를 비워 뒀습니다
-(목록에 '예시 준비 중'으로 표시).
-실물 화면 캡처를 `brand/assets/samples/` 에 넣고 `catalog.py` 의 해당 항목에
-`sample="파일명"` 을 적으면 라인업과 상세페이지에 자동으로 들어갑니다.
+**동형모의고사 · 교재 3종**은 아직 실물을 못 봐서 자리를 비워 뒀습니다
+(목록에 '예시 준비 중'으로 표시). PDF 를 주시면 `SHOTS` 에 한 줄 넣고 다시
+돌리면 들어갑니다.
+
+**지문 저작권.** 예시 이미지에 EBS·평가원 지문이 들어갑니다. 한 지문 전문이
+그대로 다 보이지 않도록 잘라 쓰는 편이 안전합니다. 자세한 건
+[ANALYSIS.md](ANALYSIS.md) §6.
+
+### 자료 분석
+
+[ANALYSIS.md](ANALYSIS.md) 에 자료 5종의 구성과 **판매 차별화 포인트**를
+정리했습니다. 라인업 소개글과 상세 판매 포스팅은 이 문서를 재료로 씁니다.
 
 ### 라인업을 셋씩 나눈 이유
 
 여섯 개를 한 장에 늘어놓으면 목록으로만 읽힙니다. 셋씩 끊으면 흐름이 생깁니다.
 
-- **01–03 지문 한 장을 세 번 만납니다** — 읽고 · 분석하고 · 훈련한다
-- **04–06 그 다음은 시험장입니다** — 문제로 · 실전으로 · 수업과 자습으로
+- **01–03 읽는 자료** — 지문자료 · 한줄해석 · 필생보
+- **04–06 쓰는 자료** — 워크북 · 변형문제 · 동형모의고사
 
 각 묶음 아래에는 **'이 세 가지가 다른 점'** 카드 세 장이 붙습니다. 자료 설명이
 아니라 "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적습니다. 문구는
 `build.py` 위쪽의 `EDGE_READ`, `EDGE_EXAM`, `EDGE_BOOK` 에서 고칩니다.
+
+### 세로 길이는 브라우저가 잽니다
+
+라인업·상세페이지는 내용에 따라 길이가 달라집니다. 글자 수로 어림하면 한글
+줄바꿈과 이미지 비율 때문에 늘 어긋나서, 본문 끝에 표식 줄을 넣고 한 번 그려
+그 위치를 읽은 뒤 그 높이로 다시 그립니다(`render.measure_height`).
 
 ### 전부 한눈에 보기
 

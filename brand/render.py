@@ -85,6 +85,39 @@ def html_to_png(html: str, out_path: Path, width: int, height: int,
     return out_path
 
 
+# 내용 끝을 표시하는 한 줄. 이 색을 찾아 실제 높이를 잰다.
+SENTINEL = "#FF00FF"
+_SENTINEL_RGB = (255, 0, 255)
+
+
+def measure_height(make_page, width: int, max_height: int = 6000,
+                   pad: int = 0) -> int:
+    """내용이 실제로 끝나는 높이를 브라우저에 물어본다.
+
+    make_page(sentinel_html) 는 본문 맨 끝에 sentinel_html 을 붙인 완성 HTML 을
+    돌려주는 함수다. 넉넉한 캔버스에 한 번 그린 뒤 그 표식 줄을 찾는다.
+
+    글자 수로 높이를 어림하면 한글 줄바꿈·이미지 비율 때문에 늘 어긋난다.
+    한 번 더 그리는 값이 아깝지만, 잘리거나 빈 여백이 남는 것보다 낫다.
+    """
+    from PIL import Image
+
+    mark = (f'<div style="width:100%;height:2px;background:{SENTINEL};'
+            f'flex:0 0 auto"></div>')
+    with tempfile.TemporaryDirectory() as tmp:
+        probe = Path(tmp) / "probe.png"
+        html_to_png(make_page(mark), probe, width, max_height, supersample=1)
+        with Image.open(probe) as im:
+            rgb = im.convert("RGB")
+            px = rgb.load()
+            xs = range(0, width, max(1, width // 40))
+            for y in range(rgb.height - 1, -1, -1):
+                if sum(px[x, y] == _SENTINEL_RGB for x in xs) > len(list(xs)) * 0.6:
+                    return min(max_height, y + pad)
+    raise RuntimeError(
+        f"내용 끝을 못 찾았습니다. max_height({max_height})를 늘려 보세요.")
+
+
 def page(body: str, css: str, width: int, height: int, extra_head: str = "") -> str:
     """스크린샷 크기에 정확히 맞춘 HTML 문서 껍데기."""
     return f"""<!doctype html>
