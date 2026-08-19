@@ -118,13 +118,13 @@ body {
 .passage-block { margin-bottom: 2mm; }
 .passage-label {
   font-weight: 700;            /* 볼드 3 */
-  font-size: 10.5px;
+  font-size: 10px;
   background: #2f7d61;         /* 자료의 초록 헤더/알약 */
   color: #fff;
-  padding: 0.9mm 3mm;          /* 문제 번호가 들어갈 만한 크기 */
+  padding: 0.7mm 2.2mm;        /* 문제 번호가 들어갈 만한 크기 */
   border-radius: 999px;
   display: inline-block;
-  min-width: 11mm;             /* [10-1]·[서술형]·[11-A] 폭이 고르게 */
+  min-width: 9mm;              /* [10-1]·[서술형]·[11-A] 폭이 고르게 */
   text-align: center;
   margin: 1mm 0 1.5mm 0;
   break-after: avoid;
