@@ -32,6 +32,7 @@ SAMPLES = OUT / "samples"
 
 BRAND_EN = "Ortica"
 BRAND_KO = "오르티카 영어"
+PROFILE_EN = "Ortica 영어"   # 프로필에는 영문 이름 뒤에 '영어'를 붙인다
 CONCEPT = "필자의 생각이 보이는 영어"
 # 소개 문구는 글줄로 반복하지 않고 칩으로만 보여 준다.
 KEYWORDS = ["고등 모의고사", "내신", "수능자료 제작"]
@@ -156,13 +157,18 @@ def sample_height(name: str, width: int) -> int:
 
 # ── 브랜드 기본 ───────────────────────────────────────────────────────────
 def build_profile(size: int, dark: bool = True) -> str:
-    """프로필 — 심볼과 Ortica 만. 원형으로 잘려도 안전하게 가운데로 모은다."""
+    """프로필 — 심볼 + 'Ortica 영어' + '오르티카 영어'.
+
+    네이버는 프로필을 원형으로 자르기도 해서, 글자는 전부 가운데에 모은다.
+    """
     s, t = size, theme(dark)
     inner = f"""<div style="height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center">
-      <div style="width:{s * 0.50:.0f}px;line-height:0">{mark(dark, int(s * 0.50))}</div>
-      <div class="wm" style="margin-top:{s * 0.045:.0f}px;font-size:{s * 0.150:.0f}px;
-           color:{t['fg']}">{BRAND_EN}</div>
+      <div style="width:{s * 0.42:.0f}px;line-height:0">{mark(dark, int(s * 0.42))}</div>
+      <div class="wm" style="margin-top:{s * 0.048:.0f}px;font-size:{s * 0.125:.0f}px;
+           color:{t['fg']}">{PROFILE_EN}</div>
+      <div class="ko" style="margin-top:{s * 0.028:.0f}px;font-size:{s * 0.072:.0f}px;
+           color:{t['accent']};letter-spacing:.08em">{BRAND_KO}</div>
     </div>"""
     return page(stage(inner, dark=dark, w=s, h=s, wm=False), CSS, s, s)
 
@@ -510,11 +516,15 @@ def build_all() -> list[Path]:
     print("브랜드 기본")
     emit(made, "profile-naver-161.png", build_profile(161), 161, 161)
     emit(made, "profile-400.png", build_profile(400), 400, 400)
+    emit(made, "profile-800.png", build_profile(800), 800, 800)
     emit(made, "profile-light-400.png", build_profile(400, dark=False), 400, 400)
     emit(made, "title-966x300-dark.png", build_title(966, 300), 966, 300)
     emit(made, "title-966x300-light.png", build_title(966, 300, dark=False), 966, 300)
     emit(made, "title-966x200-dark.png", build_title(966, 200), 966, 200)
     emit(made, "cover-mobile-1200x900.png", build_cover(1200, 900), 1200, 900)
+    emit(made, "cover-mobile-1080x1080.png", build_cover(1080, 1080), 1080, 1080)
+    emit(made, "cover-mobile-light-1200x900.png",
+         build_cover(1200, 900, dark=False), 1200, 900)
     emit(made, "logo-horizontal-light-bg.png", build_logo_horizontal(1200, 300), 1200, 300)
     emit(made, "logo-horizontal-dark-bg.png",
          build_logo_horizontal(1200, 300, dark=True), 1200, 300)
