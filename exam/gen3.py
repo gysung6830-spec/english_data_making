@@ -22,10 +22,36 @@ from .set3 import (BASE_OF, PER, TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3,
 from .types import Passage
 
 
-def _variant_hint(label: str, i: int) -> str:
-    return (f"[변형 {i}/{PER}] 이것은 같은 지문에 대한 '{label}' 유형의 {i}번째 문제입니다. "
-            f"같은 지문의 다른 번호 문제와 정답 표현·오답 선지가 겹치지 않도록 "
-            f"서로 다른 각도·세부·어휘로 구성하세요.")
+# 유형별 '변형 각도' — 같은 지문에서 3문항이 겹치지 않도록 변형마다 다른 제약을 준다.
+# (병렬 생성이라 서로를 못 보므로, 애초에 갈라지도록 '구조적 각도'를 배정한다.)
+_ANGLE: dict[str, list[str]] = {
+    "topic": [
+        "핵심을 '가장 압축된 명사구'로 — 글의 중심 소재+필자 초점만 담아라.",
+        "같은 주제라도 '다른 핵심 측면(결과·의의·대비 등)'을 전면에 내세워, 1번과 초점·어휘를 다르게.",
+        "가장 추상적으로 재진술하되, 앞 두 문제에서 쓴 표현을 피하고 다른 유의어로.",
+    ],
+    "title": [
+        "은유·비유를 담은 '명사구형' 제목으로.",
+        "'의문형' 제목(Is/Are/Why/How …?)으로 — 1번과 형식을 달리하라.",
+        "'콜론 부제형' 제목(A: B)으로 — 앞 두 문제와 형식·어휘를 달리하라.",
+    ],
+    "content": [
+        "정답(일치 선지)을 지문 '앞부분' 사실에서 잡아라.",
+        "정답을 지문 '중간부분' 사실에서 잡아라 — 1번과 다른 문장이어야 한다.",
+        "정답을 지문 '뒷부분' 사실에서 잡아라 — 앞 두 문제와 다른 문장이어야 한다.",
+    ],
+    "imply": [
+        "지문 '전반부'의 비유·맥락의존 어구를 밑줄(phrase)로 골라라.",
+        "지문 '중반부'의 어구를 밑줄로 골라라 — 1번과 다른 어구여야 한다.",
+        "지문 '후반부'의 어구를 밑줄로 골라라 — 앞 두 어구와 겹치면 안 된다.",
+    ],
+}
+
+
+def _variant_hint(base: str, label: str, i: int) -> str:
+    angle = _ANGLE.get(base, ["", "", ""])[(i - 1) % PER]
+    return (f"[변형 {i}/{PER} · 겹침 방지] 같은 지문의 '{label}' {i}번째 문제. {angle} "
+            f"같은 지문의 다른 번호 문제와 정답·오답 선지·밑줄이 겹치지 않게 하라.")
 
 
 def _answer_pos(title: str, passage_index: int, slot: str) -> int:
@@ -70,7 +96,7 @@ def build_passage3(client, body, max_retries=1, logger=None, analysis=None,
         base = BASE_OF[slot]
         gen = _base_generator(base, cdiff)
         apos = _answer_pos(analysis.title, passage_index, slot)
-        vh = _variant_hint(TYPE_LABELS3[slot], VARIANT_OF[slot])
+        vh = _variant_hint(base, TYPE_LABELS3[slot], VARIANT_OF[slot])
         # _gen_one_type2(gen, ...) 는 gen(client, analysis, body, max_retries, answer_pos) 를 호출.
         # variant_hint 를 앞서 바인딩해 시그니처를 맞춘다.
         bound = lambda c, a, b, max_retries, answer_pos: gen(  # noqa: E731
