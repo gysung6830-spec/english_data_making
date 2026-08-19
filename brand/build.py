@@ -465,6 +465,78 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
     return autosize(make, width, int(u * 4.5))
 
 
+# ── 자료별 단독 소개 카드 ─────────────────────────────────────────────────
+def build_card(item, width: int = DOC_W) -> tuple[str, int]:
+    """자료 한 종을 한 장으로 소개한다.
+
+    라인업을 한 장에 다 넣으면 목록으로만 읽힌다. 자료마다 한 장씩 두면
+    글마다 그 자료 카드만 붙일 수 있다. 간판 자료(signature)는 어두운 판에
+    배지를 달아 눈에 먼저 들어오게 한다.
+    """
+    u = width / 100
+    dark = item.signature
+    t = theme(dark)
+
+    badge = ""
+    if item.signature:
+        badge = (f'<span class="chip" style="background:{P["gold"]};color:{P["green_900"]};'
+                 f'padding:{u * 1.0:.0f}px {u * 2.0:.0f}px;font-size:{u * 1.8:.0f}px;'
+                 f'letter-spacing:.14em">SIGNATURE · 간판 자료</span>')
+
+    pts = "".join(
+        f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
+        f'line-height:1.7;padding-left:{u * 1.8:.0f}px;position:relative;'
+        f'word-break:keep-all;margin-top:{u * 1.2:.0f}px">'
+        f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
+        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
+        for head, desc in item.points[: (6 if item.signature else 4)])
+
+    edge_el = ""
+    if item.edge:
+        edge_el = f"""<div style="margin-top:{u * 3:.0f}px;background:{t['chip_bg']};
+          border-left:3px solid {t['accent']};border-radius:0 8px 8px 0;
+          padding:{u * 2.2:.0f}px {u * 2.6:.0f}px">
+          <div class="ko" style="font-size:{u * 2.3:.0f}px;color:{t['fg']};
+               line-height:1.5;word-break:keep-all">{item.edge}</div>
+        </div>"""
+
+    img = shot(item.sample)
+    sample_el = ""
+    if img:
+        sample_el = f"""<div style="margin-top:{u * 3.4:.0f}px">{img}
+          <div class="sans" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 1.7:.0f}px;
+               color:{t['muted']};line-height:1.6;word-break:keep-all">
+            {item.sample_note}</div>
+        </div>"""
+
+    name_px = u * (7.0 if item.signature else 5.4)
+
+    def make(h: int, tail: str = "") -> str:
+        inner = f"""<div style="display:flex;flex-direction:column;
+          padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 5:.0f}px">
+          <div>{badge}</div>
+          <div style="display:flex;align-items:baseline;gap:{u * 1.6:.0f}px;
+               margin-top:{u * (2.6 if item.signature else 0):.0f}px">
+            <div class="wm" style="font-size:{u * 2.2:.0f}px;color:{t['accent']}">{item.no}</div>
+            <div class="ko" style="font-size:{name_px:.0f}px;color:{t['fg']}">{item.name}</div>
+            <div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t['muted']};
+                 letter-spacing:.10em">{item.en}</div>
+          </div>
+          <div class="sans" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 2.3:.0f}px;
+               color:{t['fg']};line-height:1.6;word-break:keep-all;opacity:.92">
+            {item.one_line}</div>
+          {edge_el}
+          {sample_el}
+          <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
+          <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
+            {signature(u * 3.0, dark)}</div>
+          {tail}
+        </div>"""
+        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+
+    return autosize(make, width, int(u * 5))
+
+
 # ── 상세페이지 ────────────────────────────────────────────────────────────
 def build_hero(item, width: int, height: int, dark: bool = True) -> str:
     u = width / 100
@@ -506,17 +578,19 @@ def build_points(item, width: int, dark: bool = False) -> tuple[str, int]:
       </div>
     </div>""" for i, (head, desc) in enumerate(item.points, 1))
 
-    sample_block = ""
-    img = shot(item.sample)
-    if img:
-        sample_block = f"""<div style="margin-top:{u * 4:.0f}px">
-          <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['fg']};
-               margin-bottom:{u * 1.5:.0f}px">실제 자료 예시</div>
-          {img}
+    def figure(name: str, note: str, first: bool = False) -> str:
+        img_el = shot(name)
+        if not img_el:
+            return ""
+        head = (f'<div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t["fg"]};'
+                f'margin-bottom:{u * 1.5:.0f}px">실제 자료 예시</div>') if first else ""
+        return f"""<div style="margin-top:{u * 4:.0f}px">{head}{img_el}
           <div class="sans" style="margin-top:{u * 1.3:.0f}px;font-size:{u * 1.75:.0f}px;
-               color:{t['muted']};line-height:1.6;word-break:keep-all">
-            {item.sample_note}</div>
+               color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
         </div>"""
+
+    sample_block = figure(item.sample, item.sample_note, first=True)
+    sample_block += "".join(figure(n, note) for n, note in item.extra)
 
     def make(h: int, tail: str = "") -> str:
         inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
@@ -795,22 +869,27 @@ def build_all() -> list[Path]:
     for n in (32, 180, 512):
         emit(made, f"favicon-{n}.png", build_favicon(n), n, n)
 
+    print("자료별 소개 카드")
+    for it in MATERIALS + BOOKS:
+        html, h = build_card(it)
+        emit(made, f"card-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
+
     print("라인업")
     html, h = build_lineup(
-        DOC_W, MATERIALS[:3],
-        kicker="01 — 03  ·  읽는 자료",
-        heading="같은 지문을 세 번 읽힙니다",
-        caption="원문으로 한 번, 해석으로 한 번, 문장마다 뜯어서 또 한 번. "
-                "세 자료가 같은 문장 번호를 써서 자료를 바꿔 펴도 같은 자리를 봅니다.",
+        DOC_W, MATERIALS[:4],
+        kicker="01 — 04  ·  읽는 자료",
+        heading="같은 지문을 네 번 읽힙니다",
+        caption="원문으로 한 번, 해석으로 한 번, 문장마다 뜯어서 또 한 번, "
+                "색으로 그으며 다시 한 번. 네 자료가 같은 문장 번호를 씁니다.",
         edge=EDGE_READ)
     emit(made, "lineup-materials-1.png", html, DOC_W, h)
 
     html, h = build_lineup(
-        DOC_W, MATERIALS[3:],
-        kicker="04 — 06  ·  쓰는 자료",
+        DOC_W, MATERIALS[4:],
+        kicker="05 — 08  ·  쓰는 자료",
         heading="그 다음은 손으로 씁니다",
         caption="읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. "
-                "서술형으로 쓰게 하고, 변형해서 묻고, 실전 배열로 한 회차를 돌립니다.",
+                "겹쳐서 묻고, 서술형으로 쓰게 하고, 변형해서 확인하고, 시간을 재며 한 회차를 돌립니다.",
         edge=EDGE_EXAM, dark=False)
     emit(made, "lineup-materials-2.png", html, DOC_W, h)
 

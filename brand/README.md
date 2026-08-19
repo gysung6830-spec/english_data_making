@@ -126,14 +126,22 @@ brand/
 ## 3. 라인업과 상세페이지
 
 ```
-lineup-materials-1.png         자료 01-03 — 실제 출력물 썸네일 + 특징 + 차별화 포인트
-lineup-materials-2.png         자료 04-06
-lineup-books.png               고3 교재 3종
-detail-analysis-1-hero.png     표지 — 자료명과 한 줄 정의
-detail-analysis-2-points.png   구성 + 실제 자료 예시 전체 이미지
-detail-analysis-3-spec.png     안내 — 형태·대상 (가격을 넣으면 함께 표시)
-posts/02-analysis.md           본문 원고 초안
+card-03-pilsaengbo.png            자료 한 종 = 이미지 한 장 (글마다 그 카드만 붙이면 된다)
+lineup-materials-1.png            자료 01-04 읽는 자료 — 목록 + 차별화 포인트
+lineup-materials-2.png            자료 05-08 쓰는 자료
+lineup-books.png                  교재
+detail-pilsaengbo-1-hero.png      표지 — 자료명과 한 줄 정의
+detail-pilsaengbo-2-points.png    구성 + 실제 자료 예시 (여러 장)
+detail-pilsaengbo-3-spec.png      안내 — 형태·판본·대상 (가격을 넣으면 함께 표시)
+posts/03-pilsaengbo.md            본문 원고 초안
 ```
+
+**자료별 카드**가 기본입니다. 라인업 한 장에 다 넣으면 목록으로만 읽혀서,
+자료마다 한 장씩 따로 뽑습니다. 글 하나에 그 자료 카드만 붙이면 됩니다.
+
+**필생보는 간판 자료**라 카드가 다릅니다. 혼자만 어두운 판에
+`SIGNATURE · 간판 자료` 배지를 달고, 이름을 더 크게, 특징을 여섯 줄까지
+보여 줍니다. `catalog.py` 의 `signature=True` 가 그 스위치입니다.
 
 ### 실제 자료 예시
 
@@ -147,15 +155,21 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 `pdf_samples.py` 의 `SHOTS` 에 (파일명 조각, 페이지, 저장 이름, 남길 비율)을
 적어 두면 그 페이지를 PNG 로 뽑습니다. 파일명이 바뀌어도 조각으로 찾습니다.
 
+`SHOTS` 는 **파일 이름이 아니라 첫 쪽 머리말의 문구**로 자료를 가려냅니다.
+내려받을 때마다 파일명이 바뀌고 한글이 깨져 들어오기 때문입니다.
+
 | 자료 | 예시 파일 |
 | --- | --- |
-| 지문자료 | `samples/passage.png` |
-| 한줄해석 | `samples/one-line.png` |
-| 필생보 | `samples/pilsaengbo.png`, `pilsaengbo-summary.png` |
-| 워크북 | `samples/workbook.png` |
-| 변형문제 | `samples/variation.png`, `variation-answer.png` |
+| 지문자료 | `passage.png` |
+| 한줄해석 | `one-line.png` |
+| 필생보 | `pilsaengbo.png` · `-summary` · `-student` · `-book-cover` · `-book-toc` · `-book-principle` |
+| 형광펜 독해 | `highlighter.png` · `highlighter-guide.png` |
+| 통합 워크북 | `workbook-integrated.png` · `-en.png` |
+| 내신 서술형 워크북 | `workbook.png` |
+| 변형문제 | `variation.png` · `variation-answer.png` |
+| 동형모의고사 | `mock.png` · `mock-answer.png` |
 
-**동형모의고사 · 교재 3종**은 아직 실물을 못 봐서 자리를 비워 뒀습니다
+**구문독해 · 평가원 VOCA** 는 아직 실물을 못 봐서 자리를 비워 뒀습니다
 (목록에 '예시 준비 중'으로 표시). PDF 를 주시면 `SHOTS` 에 한 줄 넣고 다시
 돌리면 들어갑니다.
 

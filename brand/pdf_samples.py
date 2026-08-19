@@ -3,12 +3,12 @@
     pip install pymupdf
     python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 
-`SHOTS` 에 (파일 이름 조각, 페이지 번호, 저장할 이름) 을 적어 두면 그 페이지를
-PNG 로 저장한다. 파일명은 바뀌기 쉬우므로 '조각'으로 찾는다.
+파일 이름은 내려받을 때마다 바뀌고 한글이 깨져 들어오기도 한다. 그래서
+**첫 쪽 본문에 있는 표시 문구**로 자료를 가려낸다.
 
 주의 — 여기서 뽑은 이미지는 홍보용 미리보기다. EBS·평가원 지문이 들어간
 페이지가 있으므로, 블로그에 올릴 때는 한 지문 전체가 그대로 다 보이지 않게
-자르거나 일부만 쓰는 편이 안전하다.
+자르거나 일부만 쓰는 편이 안전하다. (brand/ANALYSIS.md §6)
 """
 
 from __future__ import annotations
@@ -20,56 +20,84 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "assets" / "samples"
 
-# (파일명 조각, 0부터 세는 페이지, 저장 이름, 아래에서 잘라낼 비율)
-SHOTS: list[tuple[str, int, str, float]] = [
-    # 지문자료 — 원문만. 문장마다 번호가 붙는다.
-    ("2026", 0, "passage.png", 0.62),
-    # 한줄해석 — 원문 아래 문장별 해석
-    ("2026", 0, "one-line.png", 0.62),
-    # 필생보 — 문장별 끊어읽기 & '이렇게 읽으면 오답'
-    ("ortica", 1, "pilsaengbo.png", 0.80),
-    # 필생보 — 글 정리 · 재진술 사슬
-    ("ortica", 3, "pilsaengbo-summary.png", 0.80),
-    # 워크북 — 조건 영작(난이도 3단 제시어)
-    ("worksheet", 12, "workbook.png", 0.86),
-    # 변형문제 — 문제지 첫 장
-    ("123", 0, "variation.png", 0.80),
-    # 변형문제 — 해설(오답 유형 표시)
-    ("123", 10, "variation-answer.png", 0.80),
+
+HEAD_CHARS = 200      # 첫 쪽 머리말로 볼 글자 수
+SCAN_PAGES = 8        # 본문 전체 검색에 쓸 앞쪽 쪽수
+
+
+class Shot:
+    """뽑아낼 한 장.
+
+    head : 첫 쪽 **머리말**에 모두 있어야 하는 문구. 자료 이름표가 본문
+           설명글에도 나오는 경우가 있어(예: '한글 포함/제외' 안내) 위치까지 본다.
+    marks: 앞쪽 여러 쪽 어디에든 모두 있어야 하는 문구
+    not_marks: 하나라도 있으면 그 파일은 아니다
+    page : 0부터 세는 쪽 번호
+    keep : 아래에서 잘라내고 남길 세로 비율
+    """
+
+    def __init__(self, name: str, page: int, *, head: list[str] | None = None,
+                 marks: list[str] | None = None, keep: float = 0.8,
+                 not_marks: list[str] | None = None):
+        self.name = name
+        self.head = head or []
+        self.marks = marks or []
+        self.not_marks = not_marks or []
+        self.page = page
+        self.keep = keep
+
+
+SHOTS = [
+    # 지문자료 — 원문만. 한줄해석과 머리말이 같아 '해석 없음'으로 가른다.
+    Shot("passage.png", 0, head=["지문 자료"], not_marks=["미국 시인인"], keep=0.62),
+    # 한줄해석 — 문장 아래에 해석이 붙는다.
+    Shot("one-line.png", 0, head=["지문 자료"], marks=["미국 시인인"], keep=0.62),
+    # 필생보 — 강사용(정답 표시)
+    Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
+    Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
+    # 필생보 — 학생 문제지(빈칸 상태)
+    Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
+    # 필생보 독학용 교재
+    Shot("pilsaengbo-book-cover.png", 0, head=["독해 훈련", "재진술"], keep=1.0),
+    Shot("pilsaengbo-book-toc.png", 1, marks=["이 책 사용법"], keep=0.86),
+    Shot("pilsaengbo-book-principle.png", 3, marks=["완급조절"], keep=0.86),
+    # 형광펜 독해 학습지
+    Shot("highlighter-guide.png", 0, head=["이 학습지 100% 활용법"], keep=0.86),
+    Shot("highlighter.png", 1, head=["이 학습지 100% 활용법"], keep=0.82),
+    # 통합 영어 워크북 — 한글 포함 / 제외
+    Shot("workbook-integrated.png", 1, head=["한글 포함"], keep=0.82),
+    Shot("workbook-integrated-en.png", 1, head=["한글 제외"], keep=0.82),
+    # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
+    Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
+    # 변형문제
+    Shot("variation.png", 0, head=["변형문제 1회"]),
+    Shot("variation-answer.png", 10, head=["변형문제 1회"]),
+    # 동형모의고사 — 학교 시험지 형식
+    Shot("mock.png", 0, head=["동형모의고사"], keep=0.86),
+    Shot("mock-answer.png", 4, head=["동형모의고사"], keep=0.82),
 ]
 
-# 한줄해석은 지문자료와 파일 이름이 겹친다. 제목 줄에도 한글이 있어서 특정
-# 낱말로는 못 가른다. 한 쪽 전체의 한글 비율로 나눈다(해석이 붙으면 확 올라간다).
-_HANGUL_MIX = 0.25
 
-
-def _hangul_ratio(text: str) -> float:
-    letters = [c for c in text if not c.isspace()]
-    if not letters:
-        return 0.0
-    return sum("가" <= c <= "힣" for c in letters) / len(letters)
-
-
-def find(src: Path, fragment: str) -> list[Path]:
-    return sorted(p for p in src.glob("*.pdf") if fragment.lower() in p.name.lower())
-
-
-def pick(src: Path, fragment: str, name: str) -> Path | None:
-    """조각으로 파일을 찾는다. 후보가 둘이면 한줄해석/원문을 내용으로 가른다."""
+def scan_text(path: Path) -> tuple[str, str]:
+    """(첫 쪽 머리말, 앞쪽 여러 쪽 본문)."""
     import pymupdf
 
-    hits = find(src, fragment)
-    if not hits:
-        return None
-    if len(hits) == 1:
-        return hits[0]
-    wants_korean = name.startswith("one-line")
-    scored = []
-    for p in hits:
-        with pymupdf.open(p) as d:
-            scored.append((_hangul_ratio(d[0].get_text() or ""), p))
-    scored.sort()
-    return scored[-1][1] if wants_korean else scored[0][1]
+    with pymupdf.open(path) as d:
+        head = (d[0].get_text() or "")[:HEAD_CHARS]
+        body = "".join(d[i].get_text() or "" for i in range(min(SCAN_PAGES, d.page_count)))
+    return head, body
+
+
+def pick(index: dict[Path, tuple[str, str]], shot: Shot) -> Path | None:
+    for path, (head, body) in index.items():
+        if not all(m in head for m in shot.head):
+            continue
+        if not all(m in body for m in shot.marks):
+            continue
+        if any(m in body for m in shot.not_marks):
+            continue
+        return path
+    return None
 
 
 def shoot(src: Path, dpi: int = 130) -> list[Path]:
@@ -77,26 +105,29 @@ def shoot(src: Path, dpi: int = 130) -> list[Path]:
     from PIL import Image
 
     OUT.mkdir(parents=True, exist_ok=True)
+    index = {p: scan_text(p) for p in sorted(src.glob("*.pdf"))}
     made: list[Path] = []
-    for fragment, pno, name, keep in SHOTS:
-        path = pick(src, fragment, name)
+
+    for shot in SHOTS:
+        path = pick(index, shot)
         if path is None:
-            print(f"  · {name} — '{fragment}' 가 든 PDF 를 못 찾음, 건너뜀")
+            print(f"  · {shot.name} — {shot.head + shot.marks} 가 든 PDF 없음, 건너뜀")
             continue
         with pymupdf.open(path) as doc:
-            if pno >= doc.page_count:
-                print(f"  · {name} — {path.name} 은 {doc.page_count}쪽뿐, 건너뜀")
+            if shot.page >= doc.page_count:
+                print(f"  · {shot.name} — {path.name} 은 {doc.page_count}쪽뿐, 건너뜀")
                 continue
-            pix = doc[pno].get_pixmap(dpi=dpi)
-            raw = OUT / f"_raw_{name}"
+            pix = doc[shot.page].get_pixmap(dpi=dpi)
+            raw = OUT / f"_raw_{shot.name}"
             pix.save(str(raw))
         with Image.open(raw) as im:
             rgb = im.convert("RGB")
-            # 아래 여백(쪽번호·저작권 줄)을 잘라 목록에서 빈칸이 안 생기게 한다
-            rgb.crop((0, 0, rgb.width, int(rgb.height * keep))).save(OUT / name)
+            if shot.keep < 1.0:
+                rgb = rgb.crop((0, 0, rgb.width, int(rgb.height * shot.keep)))
+            rgb.save(OUT / shot.name)
         raw.unlink(missing_ok=True)
-        made.append(OUT / name)
-        print(f"  ✔ samples/{name}  ← {path.name} p{pno + 1}")
+        made.append(OUT / shot.name)
+        print(f"  ✔ samples/{shot.name}  ← {path.name[:26]} p{shot.page + 1}")
     return made
 
 
