@@ -47,43 +47,6 @@ MAX_FIGURES = 2
 # 특징 줄 수. 카드마다 분량이 들쭉날쭉하면 목록으로 늘어놨을 때 눈에 걸린다.
 MAX_POINTS = 4
 
-# 라인업 아래에 붙는 차별화 포인트. 자료 자체의 설명이 아니라
-# "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적는다.
-EDGE_READ = [
-    ("무슨 글인지 알고 시작한다",
-     "지문 위에 요지 한 줄이 먼저 옵니다. 영어만 덩그러니 있는 원문과 다릅니다."),
-    ("끊어읽기와 해석이 1:1",
-     "영어 끊어읽기와 한글 해석의 위치를 정확히 맞췄습니다. 대충 끊은 자료와 "
-     "차원이 다릅니다."),
-    ("시중에 없는 함축의미 카드",
-     "직역하면 놓치는 맥락을 콕 집어 줍니다. 빈칸추론·함축추론을 정면으로 "
-     "대비합니다."),
-]
-
-EDGE_SIGN = [
-    ("손으로 푸는 훈련서",
-     "끊어읽기 빈칸을 직접 채우고 '이렇게 읽으면 오답'으로 자기 오독을 잡습니다. "
-     "눈으로 읽고 넘기는 자료가 아닙니다."),
-    ("재진술을 눈으로 확인",
-     "같은 개념이 어떻게 바뀌어 반복되는지 형광펜으로 시각화합니다. "
-     "빈칸·함의·요지의 뿌리입니다."),
-    ("강의용과 독학용을 따로",
-     "앞에서 설명하며 쓰는 판과 혼자 앉아 보는 판은 지면부터 달라야 합니다. "
-     "독학용에는 독해 원리 12쪽이 앞에 붙습니다."),
-]
-
-EDGE_EXAM = [
-    ("남들이 안 다루는 대명사 지칭",
-     "it·they·this 가 무엇을 가리키는지 짚는 문항을 넣었습니다. 독해력의 실제 "
-     "승부처를 그냥 넘어가지 않습니다."),
-    ("오답을 평가원식 5축으로 설계",
-     "범위·방향·표면 어휘·근거 없음·초점 이동. 한 끗 차이 매력적 오답을 넣어 "
-     "소거법이 통하지 않습니다."),
-    ("우리 학교 동형",
-     "시중 문제집의 남의 시험이 아닙니다. 실제 시험지의 유형·배점·난이도·"
-     "레이아웃을 그대로 재현합니다."),
-]
-
 CSS = f"""
 {font_css()}
 body {{ font-family:'OrticaSans','Malgun Gothic',sans-serif; color:{P['ink']}; }}
@@ -377,8 +340,9 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
     rows = []
     for it in items:
         thumb, caption = "", "예시 준비 중"
-        if it.sample:
-            name = shot_crop(it.sample, OUT / "thumbs" / f"t-{it.key}.png", thumb_w)
+        src = it.thumb or it.sample
+        if src:
+            name = shot_crop(src, OUT / "thumbs" / f"t-{it.key}.png", thumb_w)
             if name:
                 thumb = (f'<img src="{(OUT / "thumbs" / name).as_uri()}" '
                          f'style="width:100%;display:block;border-radius:8px;'
@@ -424,54 +388,23 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
     return "".join(rows)
 
 
-def edge_block(edge, t: dict[str, str], u: float, width: int) -> str:
-    """묶음 아래 붙는 차별화 포인트 세 칸.
-
-    카드 세 장이 나란히 서므로 가장 긴 것에 높이를 맞춘다. 흘러넘쳐 잘리지
-    않도록 줄 수를 세어 카드 높이를 직접 박는다.
-    """
-    if not edge:
-        return ""
-    card_w = (width - u * 13 - u * 3.6) / 3
-    head_px, desc_px = u * 2.1, u * 1.75
-    head_lines = max(-(-len(h) * head_px // (card_w - u * 4.4)) for h, _ in edge)
-    desc_lines = max(-(-len(d) * desc_px // (card_w - u * 4.4)) for _, d in edge)
-    card_h = (u * 4.8 + head_lines * head_px * 1.42
-              + u * 1.0 + desc_lines * desc_px * 1.68)
-    cards = "".join(f"""<div style="flex:1 1 0;background:{t['chip_bg']};
-      border-radius:10px;padding:{u * 2.4:.0f}px {u * 2.2:.0f}px;
-      height:{card_h:.0f}px">
-      <div class="ko" style="font-size:{head_px:.0f}px;color:{t['accent']};
-           line-height:1.42;word-break:keep-all">{head}</div>
-      <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{desc_px:.0f}px;
-           color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>
-    </div>""" for head, desc in edge)
-    return f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
-      border-top:1px solid {t['line']}">
-      <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
-           margin-bottom:{u * 2.0:.0f}px">{"이 셋이" if len(edge) == 3 else "이 자료가"} 다른 점</div>
-      <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
-    </div>"""
-
-
-# 라인업 한 장을 이루는 묶음들. (머리말, 제목, 설명, 자료들, 차별화, 어두운 판)
+# 라인업 한 장을 이루는 묶음들. (머리말, 제목, 설명, 자료들, 어두운 판)
+# 제작 교재는 아직 실물이 없어 목록에서 뺐다. catalog.BOOKS 는 그대로 두었으니
+# PDF 를 받으면 여기 한 줄만 다시 넣으면 된다.
 def lineup_sections():
     return [
         ("01 — 03  ·  읽는 자료", "같은 지문을 세 번 읽힙니다",
          "원문으로 한 번, 해석으로 한 번, 끊어읽기와 함축까지 뜯어서 또 한 번. "
          "세 자료가 같은 문장 번호를 씁니다.",
-         MATERIALS[:3], EDGE_READ, False),
+         MATERIALS[:3], False),
         ("04 — 05  ·  시그니처 자료", "필생보 — 필자의 생각이 보이는 영어독해",
          "해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
          "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
-         MATERIALS[3:5], EDGE_SIGN, True),
+         MATERIALS[3:5], True),
         ("06 — 09  ·  쓰는 자료", "그 다음은 손으로 씁니다",
          "읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. 겹쳐서 묻고, 서술형으로 "
          "쓰게 하고, 변형해서 확인하고, 우리 학교 시험지로 한 회차를 돌립니다.",
-         MATERIALS[5:], EDGE_EXAM, False),
-        ("교재", "제작 교재 · 고3",
-         "아직 실물을 못 본 자료입니다. PDF 를 받으면 위 목록으로 옮깁니다.",
-         BOOKS, None, True),
+         MATERIALS[5:], False),
     ]
 
 
@@ -515,7 +448,7 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
           </div>
         </div>""")
 
-    for i, (kicker, heading, caption, items, edge, dark) in chosen:
+    for i, (kicker, heading, caption, items, dark) in chosen:
         t = theme(dark)
         # 나눠 올린 조각도 몇 번째인지 보여야 순서가 안 흐트러진다.
         step = ("" if part is None else
@@ -531,7 +464,6 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
           <div class="sans" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 2.0:.0f}px;
                color:{t['muted']};line-height:1.7;word-break:keep-all">{caption}</div>
           <div style="margin-top:{u * 1.6:.0f}px">{lineup_rows(items, t, u)}</div>
-          {edge_block(edge, t, u, width)}
         </div>""")
 
     foot_t = theme(True)
@@ -550,7 +482,7 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
 
 # 나눠 올릴 때 쓰는 파일 이름
 LINEUP_PARTS = ["lineup-1-read.png", "lineup-2-pilsaengbo.png",
-                "lineup-3-write.png", "lineup-4-books.png"]
+                "lineup-3-write.png"]
 
 
 def spec_table(title: str, rows, t: dict[str, str], u: float,
@@ -781,9 +713,6 @@ def write_posts() -> list[Path]:
     def rows_of(items):
         return "\n".join(f"**{it.no}. {it.name}** — {it.one_line}\n" for it in items)
 
-    def edge_of(edge):
-        return "\n".join(f"**{h}**\n\n{d}\n" for h, d in edge)
-
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
 <!-- 이미지는 아래 순서대로 넣으면 이어진 한 장처럼 보입니다.
@@ -799,35 +728,17 @@ def write_posts() -> list[Path]:
 
 {rows_of(MATERIALS[:3])}
 
-### 이 셋이 다른 점
-
-{edge_of(EDGE_READ)}
-
 ## 시그니처 자료 — 필생보 (04 — 05)
 
 {img('lineup-2-pilsaengbo.png')}
 
 {rows_of(MATERIALS[3:5])}
 
-### 이 셋이 다른 점
-
-{edge_of(EDGE_SIGN)}
-
 ## 쓰는 자료 (06 — 09)
 
 {img('lineup-3-write.png')}
 
 {rows_of(MATERIALS[5:])}
-
-### 이 셋이 다른 점
-
-{edge_of(EDGE_EXAM)}
-
-## 제작 교재
-
-{img('lineup-4-books.png')}
-
-{rows_of(BOOKS)}
 
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")

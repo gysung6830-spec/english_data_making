@@ -25,6 +25,8 @@ class Item:
     price_note: str = ""         # 가격 아래 단서
     sample: str = ""             # brand/assets/samples/ 안의 실제 산출물 예시 파일명
     sample_note: str = ""        # 예시 이미지 아래 설명
+    thumb: str = ""              # 라인업 썸네일만 다른 사진을 쓸 때. 비면 sample
+    # ↑ 나란히 붙인 비교 사진처럼, 작게 줄이면 뭉개지는 장이 있다
     extra: list[tuple[str, str]] = field(default_factory=list)  # (예시 파일명, 설명) 추가 장
     signature: bool = False      # 시그니처 자료. 소개 이미지를 따로 크게 만든다
     tables: list[tuple[str, list[tuple[str, str]]]] = field(default_factory=list)
@@ -161,6 +163,9 @@ MATERIALS: list[Item] = [
         sample="pilsaengbo-compare.png",
         sample_note="같은 쪽, 두 판본. 강사용은 채워져 있고 학생용은 비어 있습니다. "
                     "학생이 채울 자리에는 '왜?' 줄까지 뚫어 뒀습니다.",
+        # 나란히 붙인 비교 사진은 라인업 썸네일 크기로 줄이면 두 쪽이 다 뭉갠다.
+        # 목록에서는 강사용 한 판만 보여 준다.
+        thumb="pilsaengbo.png",
         extra=[
             ("pilsaengbo-summary.png", "글 정리 — 재진술 사슬을 형광펜과 번호로 시각화합니다."),
             ("pilsaengbo.png", "강사용 전체 — 문장마다 끊어읽기 · 문법 태그 · '이렇게 읽으면 오답'."),
