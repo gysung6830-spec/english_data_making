@@ -35,6 +35,23 @@ def chrome_binary() -> str:
     )
 
 
+FONT_DIR = Path(__file__).resolve().parent / "fonts"
+_FONTCONFIG = FONT_DIR / "fonts.conf"
+
+
+def _font_env() -> dict[str, str]:
+    """brand/fonts 안의 글꼴을 크로미움이 보도록 fontconfig 를 끼워 넣는다.
+
+    시스템에 글꼴을 설치하지 않아도 되고, 저장소 안에서만 완결된다.
+    fonts.conf 가 없으면(글꼴 미설치) 시스템 설정을 그대로 쓴다.
+    """
+    env = dict(os.environ)
+    if _FONTCONFIG.exists():
+        env["FONTCONFIG_FILE"] = str(_FONTCONFIG)
+        (FONT_DIR / ".fc-cache").mkdir(exist_ok=True)
+    return env
+
+
 # 헤드리스 크로미움은 --window-size 중 일부(대략 80px)를 뷰포트에서 떼어 간다.
 # 넉넉히 더 크게 잡아 두고 정확한 크기로 잘라내는 편이 버전에 안 휘둘린다.
 _VIEWPORT_PAD = 260
@@ -67,7 +84,8 @@ def html_to_png(html: str, out_path: Path, width: int, height: int,
             f"--user-data-dir={tmp}/profile",
             src.as_uri(),
         ]
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180,
+                              env=_font_env())
         if not raw.exists():
             raise RuntimeError(f"렌더 실패: {proc.stderr[-2000:]}")
 
