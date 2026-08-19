@@ -501,22 +501,13 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
                  f'padding:{u * 1.0:.0f}px {u * 2.0:.0f}px;font-size:{u * 1.8:.0f}px;'
                  f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
 
-    def lead_sentence(text: str) -> str:
-        """첫 문장만. 카드는 훑는 물건이라 두 번째 문장부터는 안 읽힌다.
-
-        마침표로만 끊는다. '다' 뒤에서 끊으면 '지문마다 가장…' 같은 자리에서
-        문장이 잘린다.
-        """
-        return re.split(r"(?<=[.!?])\s+", text.strip(), maxsplit=1)[0]
-
     pts = "".join(
         f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
         f'line-height:1.7;padding-left:{u * 1.8:.0f}px;position:relative;'
-        f'word-break:keep-all;margin-top:{u * 1.2:.0f}px">'
+        f'word-break:keep-all;margin-top:{u * 1.4:.0f}px">'
         f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
-        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — '
-        f'{lead_sentence(desc)}</div>'
-        for head, desc in item.points[: (4 if item.signature else 3)])
+        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
+        for head, desc in item.points)
 
     edge_el = ""
     if item.edge:
@@ -527,14 +518,17 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
                line-height:1.5;word-break:keep-all">{item.edge}</div>
         </div>"""
 
-    img = shot(item.sample)
-    sample_el = ""
-    if img:
-        sample_el = f"""<div style="margin-top:{u * 3.4:.0f}px">{img}
+    def figure(name: str, note: str) -> str:
+        img_el = shot(name)
+        if not img_el:
+            return ""
+        return f"""<div style="margin-top:{u * 3.4:.0f}px">{img_el}
           <div class="sans" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 1.7:.0f}px;
-               color:{t['muted']};line-height:1.6;word-break:keep-all">
-            {item.sample_note}</div>
+               color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
         </div>"""
+
+    sample_el = figure(item.sample, item.sample_note)
+    sample_el += "".join(figure(n, note) for n, note in item.extra)
 
     # 짧고 센 한 줄은 크게, 설명형 긴 한 줄은 작게. 같은 크기로 두면 센 문장이 죽는다.
     punchy = len(item.one_line) <= 30
