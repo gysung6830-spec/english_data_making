@@ -1,7 +1,7 @@
 # 변형문제 6종
 
-![](detail-variation-1-hero.png)
-<!-- 이미지: brand/assets/detail-variation-1-hero.png -->
+![](detail-08-variation.png)
+<!-- 이미지: brand/assets/detail-08-variation.png -->
 
 변형문제를 다 맞힌 학생이 학교 시험에서 틀립니다. 오답이 티 나면 지문을 안 읽고도 답이 골라지니까요. 양치기 자료가 그렇습니다. 그래서 지문은 그대로 두고, 오답을 설계했습니다.
 

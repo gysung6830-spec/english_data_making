@@ -1,7 +1,7 @@
 # 평가원 VOCA
 
-![](detail-voca-1-hero.png)
-<!-- 이미지: brand/assets/detail-voca-1-hero.png -->
+![](detail-b1-voca.png)
+<!-- 이미지: brand/assets/detail-b1-voca.png -->
 
 단어장은 많지만 시험에 나온 문맥까지 함께 주는 단어장은 드뭅니다. 평가원 기출에서 실제로 쓰인 단어를, 그 문장과 함께 정리했습니다.
 

@@ -1,7 +1,7 @@
 # 지문자료
 
-![](detail-passage-1-hero.png)
-<!-- 이미지: brand/assets/detail-passage-1-hero.png -->
+![](detail-01-passage.png)
+<!-- 이미지: brand/assets/detail-01-passage.png -->
 
 영어만 덩그러니 있는 원문은 첫 문장에서 방향을 잃게 합니다. 지문 위에 그 글이 무슨 이야기인지 한 줄을 먼저 얹었습니다. 문장마다 번호를 매겨 두어 이 번호가 나머지 자료 전부와 그대로 이어집니다.
 

@@ -1,7 +1,7 @@
 # 필생보 · 강의용
 
-![](detail-pilsaengbo-class-1-hero.png)
-<!-- 이미지: brand/assets/detail-pilsaengbo-class-1-hero.png -->
+![](detail-04-pilsaengbo-class.png)
+<!-- 이미지: brand/assets/detail-04-pilsaengbo-class.png -->
 
 지문 한 편으로 어휘·직독직해·독해·핵심문법·글 정리까지. 흩어진 자료 대신 한 권으로 끝내는 통합 워크북입니다. 번역만 있는 해석지, 문항만 있는 문제집과 다릅니다.
 

@@ -1,7 +1,7 @@
 # 통합 영어 워크북
 
-![](detail-workbook-integrated-1-hero.png)
-<!-- 이미지: brand/assets/detail-workbook-integrated-1-hero.png -->
+![](detail-06-workbook-integrated.png)
+<!-- 이미지: brand/assets/detail-06-workbook-integrated.png -->
 
 한 지문을 통째로 학습하는 올인원 워크북입니다. 통합카드(동사·준동사)·어형 변형·어법·어휘·대명사 지칭·영작·한글 해석·빈칸까지 한 번에 담아, 지문 하나를 여러 각도로 반복 공략합니다. 유형별 자료를 따로 살 필요가 없습니다.
 

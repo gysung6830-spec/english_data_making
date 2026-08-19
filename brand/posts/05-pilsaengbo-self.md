@@ -1,7 +1,7 @@
 # 필생보 · 독학용
 
-![](detail-pilsaengbo-self-1-hero.png)
-<!-- 이미지: brand/assets/detail-pilsaengbo-self-1-hero.png -->
+![](detail-05-pilsaengbo-self.png)
+<!-- 이미지: brand/assets/detail-05-pilsaengbo-self.png -->
 
 필생보(必生譜). 수능 독해는 문장 번역 시험이 아니라 필자의 생각을 읽는 시험입니다. 혼자 해석하다 보면 틀리게 읽고도 틀린 줄을 모릅니다. 그 자리를 스스로 알아채도록 만든 독학용 교재입니다.
 

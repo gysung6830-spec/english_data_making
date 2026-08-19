@@ -473,6 +473,74 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
     return autosize(make, width, int(u * 4.5))
 
 
+def build_lineup_all(width: int = DOC_W, dark: bool = True) -> tuple[str, int]:
+    """자료 아홉 종을 한 장에 세운 전체 라인업.
+
+    묶음별 라인업 석 장은 그 묶음을 파는 글에 붙이는 것이고, 이 한 장은
+    '무슨 자료를 파는 곳인가'를 처음 온 사람에게 보여 주는 목차다. 그래서
+    실물 사진 없이 번호·이름·한 줄만 세운다. 목록이 길면 목차 구실을 못 한다.
+    """
+    u = width / 100
+    t = theme(dark)
+
+    groups = [
+        ("읽는 자료", "01 — 03", MATERIALS[:3]),
+        ("시그니처 자료", "04 — 05", MATERIALS[3:5]),
+        ("쓰는 자료", "06 — 09", MATERIALS[5:]),
+        ("제작 교재", "B1", BOOKS),
+    ]
+
+    blocks = []
+    for label, span, items in groups:
+        rows = "".join(f"""<div style="display:flex;gap:{u * 2.2:.0f}px;
+          padding:{u * 1.9:.0f}px 0;border-top:1px solid {t['line']}">
+          <div class="wm" style="flex:0 0 {u * 4.4:.0f}px;font-size:{u * 2.0:.0f}px;
+               color:{t['accent']};padding-top:{u * .5:.0f}px">{it.no}</div>
+          <div style="flex:1 1 auto">
+            <div style="display:flex;align-items:baseline;gap:{u * 1.2:.0f}px">
+              <div class="ko" style="font-size:{u * 2.9:.0f}px;color:{t['fg']}">{it.name}</div>
+              {'<span class="chip" style="background:' + P['gold'] + ';color:'
+               + P['green_900'] + f';padding:{u * .5:.0f}px {u * 1.2:.0f}px;'
+               + f'font-size:{u * 1.4:.0f}px;letter-spacing:.10em">SIGNATURE</span>'
+               if it.signature else ''}
+            </div>
+            <div class="sans" style="margin-top:{u * .7:.0f}px;font-size:{u * 1.85:.0f}px;
+                 color:{t['muted']};line-height:1.65;word-break:keep-all">{it.one_line}</div>
+          </div>
+        </div>""" for it in items)
+        blocks.append(f"""<div style="margin-top:{u * 4:.0f}px">
+          <div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
+            <div class="ko" style="font-size:{u * 2.6:.0f}px;color:{t['fg']}">{label}</div>
+            <div class="sans" style="font-size:{u * 1.7:.0f}px;color:{t['accent']};
+                 letter-spacing:.10em">{span}</div>
+          </div>
+          <div style="margin-top:{u * 1.2:.0f}px">{rows}</div>
+        </div>""")
+
+    def make(h: int, tail: str = "") -> str:
+        inner = f"""<div style="display:flex;flex-direction:column;
+          padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 4.5:.0f}px">
+          <div>
+            <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{t['accent']};
+                 letter-spacing:.10em">자료 라인업</div>
+            <div class="ko" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 5.2:.0f}px;
+                 color:{t['fg']};line-height:1.34;word-break:keep-all">
+              읽고 · 뜯어보고 · 손으로 씁니다</div>
+            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.0:.0f}px;
+                 color:{t['muted']};line-height:1.7;word-break:keep-all">
+              한 지문을 아홉 가지 방식으로 굴립니다. 같은 문장 번호를 쓰기 때문에
+              어떤 자료끼리 붙여 써도 수업이 끊기지 않습니다.</div>
+          </div>
+          {''.join(blocks)}
+          <div style="display:flex;justify-content:center;padding-top:{u * 4.5:.0f}px">
+            {signature(u * 3.2, dark)}</div>
+          {tail}
+        </div>"""
+        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
+
+    return autosize(make, width, int(u * 4.5))
+
+
 def spec_table(title: str, rows, t: dict[str, str], u: float,
                label_w: float = 13) -> str:
     """제목 + (왼쪽 칸 / 오른쪽 설명) 표. 회차 구성·난이도 기준처럼
@@ -490,13 +558,14 @@ def spec_table(title: str, rows, t: dict[str, str], u: float,
     </div>"""
 
 
-# ── 자료별 단독 소개 카드 ─────────────────────────────────────────────────
-def build_card(item, width: int = DOC_W) -> tuple[str, int]:
-    """자료 한 종을 한 장으로 소개한다.
+# ── 자료별 상세페이지 ─────────────────────────────────────────────────────
+def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
+    """자료 한 종의 상세페이지 한 장.
 
-    라인업을 한 장에 다 넣으면 목록으로만 읽힌다. 자료마다 한 장씩 두면
-    글마다 그 자료 카드만 붙일 수 있다. 시그니처 자료(signature)는 어두운 판에
-    배지를 달아 눈에 먼저 들어오게 한다.
+    한 자료를 표지·구성·안내 세 장으로 쪼개면 올릴 때마다 순서를 맞춰야 하고
+    독자는 같은 이야기를 세 번 스크롤한다. 한 장에 이름 → 한 줄 → 차별점 →
+    실물 → 구성 → 안내까지 세로로 세운다. 시그니처 자료(signature)는 어두운
+    판에 배지를 달아 눈에 먼저 들어오게 한다.
     """
     u = width / 100
     dark = item.signature
@@ -546,6 +615,44 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     name_px = u * (7.0 if item.signature else 5.4)
 
+    # 형태·구성·배포. 살까 말까 재는 사람이 마지막에 확인하는 것들이라 맨 아래.
+    spec_el = ""
+    if item.spec:
+        spec_el = "".join(f"""<div style="display:flex;padding:{u * 1.6:.0f}px 0;
+          border-top:1px solid {t['line']}">
+          <div class="sans" style="flex:0 0 {u * 18:.0f}px;font-size:{u * 1.8:.0f}px;
+               color:{t['accent']};letter-spacing:.04em">{k}</div>
+          <div class="sans" style="flex:1 1 auto;font-size:{u * 1.95:.0f}px;color:{t['fg']};
+               line-height:1.6;word-break:keep-all">{v}</div>
+        </div>""" for k, v in item.spec)
+        spec_el = f"""<div style="margin-top:{u * 4:.0f}px">
+          <div class="ko" style="font-size:{u * 2.3:.0f}px;color:{t['fg']};
+               margin-bottom:{u * .8:.0f}px">자료 안내</div>{spec_el}
+        </div>"""
+
+    who_el = ""
+    if item.who:
+        who_el = "".join(f"""<div class="sans" style="font-size:{u * 1.95:.0f}px;
+          color:{t['muted']};line-height:1.8;padding-left:{u * 2.2:.0f}px;
+          position:relative;word-break:keep-all">
+          <span style="position:absolute;left:0;color:{t['accent']}">·</span>{w}</div>"""
+          for w in item.who)
+        who_el = f"""<div style="margin-top:{u * 3.4:.0f}px">
+          <div class="ko" style="font-size:{u * 2.3:.0f}px;color:{t['accent']};
+               margin-bottom:{u * 1.0:.0f}px">이런 분께</div>{who_el}
+        </div>"""
+
+    price_el = ""
+    if item.price:
+        price_el = f"""<div style="margin-top:{u * 3.4:.0f}px;padding-top:{u * 2.6:.0f}px;
+          border-top:1px solid {t['line']}">
+          <div class="ko" style="font-size:{u * 1.9:.0f}px;color:{t['accent']}">가격</div>
+          <div class="wm" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 4.2:.0f}px;
+               color:{t['fg']}">{item.price}</div>
+          <div class="sans" style="margin-top:{u * .8:.0f}px;font-size:{u * 1.75:.0f}px;
+               color:{t['muted']}">{item.price_note}</div>
+        </div>"""
+
     def make(h: int, tail: str = "") -> str:
         inner = f"""<div style="display:flex;flex-direction:column;
           padding:{u * 6.5:.0f}px {u * 6.5:.0f}px {u * 5:.0f}px">
@@ -564,6 +671,9 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
           {sample_el}
           {tables_el}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
+          {spec_el}
+          {who_el}
+          {price_el}
           <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
             {signature(u * 3.0, dark)}</div>
           {tail}
@@ -571,122 +681,6 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
         return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
 
     return autosize(make, width, int(u * 5))
-
-
-# ── 상세페이지 ────────────────────────────────────────────────────────────
-def build_hero(item, width: int, height: int, dark: bool = True) -> str:
-    u = width / 100
-    t = theme(dark)
-    inner = f"""<div style="height:100%;display:flex;flex-direction:column;
-      justify-content:space-between;padding:{u * 8:.0f}px">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div>{chip(item.no, t, u * 1.9)}</div>
-        <div class="sans" style="font-size:{u * 1.7:.0f}px;color:{t['muted']};
-             letter-spacing:.08em">{CONCEPT}</div>
-      </div>
-      <div>
-        <div style="width:{u * 10:.0f}px;line-height:0;margin-bottom:{u * 3:.0f}px">
-          {mark(dark, int(u * 10))}</div>
-        <div class="ko" style="font-size:{u * 8.4:.0f}px;color:{t['fg']};line-height:1.26;
-             word-break:keep-all">{item.name}</div>
-        <div style="margin:{u * 3:.0f}px 0">{rule(t, f"{u * 12:.0f}px", 2)}</div>
-        <div class="sans" style="font-size:{u * 2.5:.0f}px;color:{t['muted']};
-             line-height:1.75;word-break:keep-all;max-width:{u * 74:.0f}px">
-          {item.one_line}</div>
-      </div>
-      <div>{signature(u * 3.4, dark)}</div>
-    </div>"""
-    return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
-
-
-def build_points(item, width: int, dark: bool = False) -> tuple[str, int]:
-    """구성 설명 + 실제 산출물 예시."""
-    u = width / 100
-    t = theme(dark)
-    rows = "".join(f"""<div style="display:flex;gap:{u * 2.6:.0f}px;
-      padding:{u * 2.3:.0f}px 0;border-top:1px solid {t['line']}">
-      <div class="wm" style="flex:0 0 {u * 4.5:.0f}px;font-size:{u * 2.2:.0f}px;
-           color:{t['accent']};padding-top:{u * .4:.0f}px">{i:02d}</div>
-      <div style="flex:1 1 auto">
-        <div class="ko" style="font-size:{u * 2.7:.0f}px;color:{t['fg']}">{head}</div>
-        <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 2.0:.0f}px;
-             color:{t['muted']};line-height:1.75;word-break:keep-all">{desc}</div>
-      </div>
-    </div>""" for i, (head, desc) in enumerate(item.points, 1))
-
-    def figure(name: str, note: str, first: bool = False) -> str:
-        img_el = shot(name)
-        if not img_el:
-            return ""
-        head = (f'<div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t["fg"]};'
-                f'margin-bottom:{u * 1.5:.0f}px">실제 자료 예시</div>') if first else ""
-        return f"""<div style="margin-top:{u * 4:.0f}px">{head}{img_el}
-          <div class="sans" style="margin-top:{u * 1.3:.0f}px;font-size:{u * 1.75:.0f}px;
-               color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
-        </div>"""
-
-    sample_block = figure(item.sample, item.sample_note, first=True)
-    sample_block += "".join(figure(n, note)
-                            for n, note in item.extra[:MAX_FIGURES - 1])
-
-    def make(h: int, tail: str = "") -> str:
-        inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
-          <div>
-            <div class="ko" style="font-size:{u * 4.4:.0f}px;color:{t['fg']}">{item.name} 구성</div>
-            <div class="sans" style="margin-top:{u * 1.6:.0f}px;font-size:{u * 2.05:.0f}px;
-                 color:{t['muted']};line-height:1.75;word-break:keep-all">{item.lead}</div>
-          </div>
-          <div style="margin-top:{u * 3:.0f}px">{rows}</div>
-          {sample_block}
-          <div style="display:flex;justify-content:center;padding-top:{u * 4:.0f}px">
-            {signature(u * 3.0, dark)}</div>
-          {tail}
-        </div>"""
-        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
-
-    return autosize(make, width, int(u * 7.5))
-
-
-def build_spec(item, width: int, dark: bool = True) -> tuple[str, int]:
-    u = width / 100
-    t = theme(dark)
-    specs = "".join(f"""<div style="display:flex;padding:{u * 2.0:.0f}px 0;
-      border-top:1px solid {t['line']}">
-      <div class="sans" style="flex:0 0 {u * 20:.0f}px;font-size:{u * 1.95:.0f}px;
-           color:{t['accent']};letter-spacing:.04em">{k}</div>
-      <div class="sans" style="flex:1 1 auto;font-size:{u * 2.2:.0f}px;color:{t['fg']}">{v}</div>
-    </div>""" for k, v in item.spec)
-    who = "".join(f"""<div class="sans" style="font-size:{u * 2.05:.0f}px;color:{t['muted']};
-      line-height:1.85;padding-left:{u * 2.4:.0f}px;position:relative;word-break:keep-all">
-      <span style="position:absolute;left:0;color:{t['accent']}">·</span>{w}</div>"""
-      for w in item.who)
-    price = ""
-    if item.price:
-        price = f"""<div style="margin-top:{u * 3.6:.0f}px;padding-top:{u * 3:.0f}px;
-          border-top:1px solid {t['line']}">
-          <div class="ko" style="font-size:{u * 2.0:.0f}px;color:{t['accent']}">가격</div>
-          <div class="wm" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 4.4:.0f}px;
-               color:{t['fg']}">{item.price}</div>
-          <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.8:.0f}px;
-               color:{t['muted']}">{item.price_note}</div>
-        </div>"""
-    def make(h: int, tail: str = "") -> str:
-        inner = f"""<div style="display:flex;flex-direction:column;padding:{u * 7.5:.0f}px">
-          <div class="ko" style="font-size:{u * 4.2:.0f}px;color:{t['fg']}">자료 안내</div>
-          <div style="margin-top:{u * 3.2:.0f}px">{specs}</div>
-          {"".join(spec_table(title, rows, t, u) for title, rows in item.tables)}
-          <div style="margin-top:{u * 4.2:.0f}px">
-            <div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['accent']}">이런 분께</div>
-            <div style="margin-top:{u * 1.5:.0f}px">{who}</div>
-          </div>
-          {price}
-          <div style="display:flex;justify-content:center;padding-top:{u * 4.5:.0f}px">
-            {signature(u * 3.0, dark)}</div>
-          {tail}
-        </div>"""
-        return page(stage(inner, dark=dark, w=width, h=h), CSS, width, h)
-
-    return autosize(make, width, int(u * 7.5))
 
 
 # ── 포스트 썸네일 ─────────────────────────────────────────────────────────
@@ -743,7 +737,7 @@ def write_posts() -> list[Path]:
                   else "\n<!-- 실제 자료 화면 캡처를 여기에 넣으세요 -->\n")
         md = f"""# {it.name}
 
-{img(f'detail-{it.key}-1-hero.png')}
+{img(f'detail-{it.no.lower()}-{it.key}.png')}
 
 {it.lead}
 
@@ -780,6 +774,11 @@ def write_posts() -> list[Path]:
 
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
+{img('lineup-0-all.png')}
+
+한 지문을 아홉 가지 방식으로 굴립니다. 아래는 묶음별로 나눠 본 것이고,
+자료 한 종씩 자세히 보려면 각 상세페이지 글로 가시면 됩니다.
+
 ## 읽는 자료 (01 — 03)
 
 {img('lineup-1-read.png')}
@@ -813,6 +812,13 @@ def write_posts() -> list[Path]:
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")
     made.append(POSTS / "00-lineup.md")
+
+    # 자료 번호나 키가 바뀌면 예전 이름의 초안이 남는다. 목록에 없는 것은 지운다.
+    keep = {p.name for p in made}
+    for old in POSTS.glob("*.md"):
+        if old.name not in keep:
+            old.unlink()
+            print(f"  − {old.name} (지금 목록에 없는 초안)")
     return made
 
 
@@ -910,12 +916,15 @@ def build_all() -> list[Path]:
     for n in (32, 180, 512):
         emit(made, f"favicon-{n}.png", build_favicon(n), n, n)
 
-    print("자료별 소개 카드")
+    print("자료별 상세페이지")
     for it in MATERIALS + BOOKS:
-        html, h = build_card(it)
-        emit(made, f"card-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
+        html, h = build_detail(it)
+        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
 
     print("라인업")
+    html, h = build_lineup_all()
+    emit(made, "lineup-0-all.png", html, DOC_W, h)
+
     html, h = build_lineup(
         DOC_W, MATERIALS[:3],
         kicker="01 — 03  ·  읽는 자료",
@@ -951,16 +960,6 @@ def build_all() -> list[Path]:
         caption="아직 실물을 못 본 자료입니다. PDF 를 받으면 위 목록으로 옮깁니다.")
     emit(made, "lineup-books.png", html, DOC_W, h)
 
-    print("상세페이지")
-    for it in MATERIALS + BOOKS:
-        dark = it.key not in {"workbook", "voca", "syntax"}
-        emit(made, f"detail-{it.key}-1-hero.png",
-             build_hero(it, DOC_W, 1100, dark=dark), DOC_W, 1100)
-        html, h = build_points(it, DOC_W, dark=not dark)
-        emit(made, f"detail-{it.key}-2-points.png", html, DOC_W, h)
-        html, h = build_spec(it, DOC_W, dark=dark)
-        emit(made, f"detail-{it.key}-3-spec.png", html, DOC_W, h)
-
     print("포스트 썸네일 샘플")
     emit(made, "thumb-800-sample.png",
          build_thumb(800, 800, "빈칸추론이 안 풀리는<br>진짜 이유 세 가지",
@@ -979,6 +978,7 @@ def main() -> None:
     sub.add_parser("all", help="전체 세트 생성")
     sub.add_parser("posts", help="블로그 원고 초안만 다시 생성")
     sub.add_parser("index", help="전체 결과물 목록표 한 장 생성")
+    sub.add_parser("lineup", help="전체 라인업 한 장만 다시 생성")
 
     one = sub.add_parser("item", help="자료 하나의 상세페이지만 다시 생성")
     one.add_argument("key", help=f"자료 키 ({', '.join(BY_KEY)})")
@@ -1012,14 +1012,17 @@ def main() -> None:
             print(f"  ✔ {f.name}")
         return
 
+    if args.cmd == "lineup":
+        made: list[Path] = []
+        html, h = build_lineup_all()
+        emit(made, "lineup-0-all.png", html, DOC_W, h)
+        return
+
     if args.cmd == "item":
         it = BY_KEY[args.key]
         made: list[Path] = []
-        emit(made, f"detail-{it.key}-1-hero.png", build_hero(it, DOC_W, 1100), DOC_W, 1100)
-        html, h = build_points(it, DOC_W, dark=False)
-        emit(made, f"detail-{it.key}-2-points.png", html, DOC_W, h)
-        html, h = build_spec(it, DOC_W)
-        emit(made, f"detail-{it.key}-3-spec.png", html, DOC_W, h)
+        html, h = build_detail(it)
+        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
         return
 
     made = build_all()

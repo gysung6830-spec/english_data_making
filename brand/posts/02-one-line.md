@@ -1,7 +1,7 @@
 # 한줄해석
 
-![](detail-one-line-1-hero.png)
-<!-- 이미지: brand/assets/detail-one-line-1-hero.png -->
+![](detail-02-one-line.png)
+<!-- 이미지: brand/assets/detail-02-one-line.png -->
 
 영어 블록 따로, 해석 블록 따로인 자료는 눈이 위아래를 오가느라 대조가 끊깁니다. 한줄해석은 문장 하나 바로 아래에 그 문장의 해석을 붙였습니다. 번호가 지문자료와 같아서 '4번 문장 다시' 한마디로 지시가 끝납니다.
 

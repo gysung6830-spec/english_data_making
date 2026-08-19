@@ -1,7 +1,7 @@
 # 지문분석지
 
-![](detail-analysis-1-hero.png)
-<!-- 이미지: brand/assets/detail-analysis-1-hero.png -->
+![](detail-03-analysis.png)
+<!-- 이미지: brand/assets/detail-03-analysis.png -->
 
 지문 하나로 끝나는 원스톱 분석지입니다. 끊어읽기와 해석의 위치를 1:1로 맞추고, 어법은 정답과 함정 오답형을 함께 보여 주며, 직역하면 놓치는 맥락은 함축의미 카드로 따로 뽑았습니다.
 

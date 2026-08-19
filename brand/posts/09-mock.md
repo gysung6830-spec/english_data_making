@@ -1,7 +1,7 @@
 # 동형모의고사
 
-![](detail-mock-1-hero.png)
-<!-- 이미지: brand/assets/detail-mock-1-hero.png -->
+![](detail-09-mock.png)
+<!-- 이미지: brand/assets/detail-09-mock.png -->
 
 한 지문을 끝까지, 우리 학교식으로, 오류 없이. 유형과 배점, 난이도, 지면 배치까지 실제 시험지에 맞췄습니다. 시간 운용은 그 위에서 저절로 따라옵니다.
 

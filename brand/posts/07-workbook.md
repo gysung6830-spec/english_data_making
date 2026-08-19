@@ -1,7 +1,7 @@
 # 서술형 대비 교재
 
-![](detail-workbook-1-hero.png)
-<!-- 이미지: brand/assets/detail-workbook-1-hero.png -->
+![](detail-07-workbook.png)
+<!-- 이미지: brand/assets/detail-07-workbook.png -->
 
 수능·모의고사·교과서 지문을 7가지 출제 유형으로 완전 분해한 내신 서술형 대비 자료입니다. 한두 유형만 다루는 일반 문제집과 달리, 한 지문을 다각도로 파고들어 실제 학교 시험에서 어떤 형태로 나와도 흔들리지 않는 실전력을 만듭니다.
 
