@@ -1194,6 +1194,27 @@ def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -
     print("✓ 조건부 Vision OCR 폴백(글자 PDF 건너뜀·스캔만 OCR) 통과")
 
 
+def test_short_answer_q2_prompt_clean() -> None:
+    """서술형 (2) 어순배열 발문에 내부 용어('[문장] 목록')가 새어 나오면 정리한다."""
+    from exam.generators.short_answer import _clean_q2_prompt, _Q2_FALLBACK
+
+    # 내부 용어 누출 → 자연스러운 발문으로 정리(지시 유지)
+    leaked = ("다음 단어들을 어법과 문맥에 맞게 배열하여 [문장] 목록의 원래 문장을 "
+              "완성하시오. (동사는 원형으로 제시되어 있으므로 알맞은 형태로 바꿀 것)")
+    cleaned = _clean_q2_prompt(leaked)
+    assert "[문장]" not in cleaned and "목록" not in cleaned
+    assert "배열하여 원래 문장을 완성" in cleaned
+
+    # 이미 깨끗하면 그대로 둔다
+    ok = "다음 단어들을 어법과 문맥에 맞게 배열하여 완전한 문장을 만드시오."
+    assert _clean_q2_prompt(ok) == ok
+
+    # 지시가 뭉개지거나 비면 표준 발문으로 대체
+    assert _clean_q2_prompt("위 [문장] 목록에서 고른 문장을 쓰시오.") == _Q2_FALLBACK
+    assert _clean_q2_prompt("") == _Q2_FALLBACK
+    print("✓ 서술형 (2) 발문 내부용어 누출 정리 통과")
+
+
 def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     """재출력 시 '지문 번호 다시 넣기' — 입력한 라벨이 순서대로 [10-A]처럼 반영된다."""
     import json as _json
@@ -1277,5 +1298,6 @@ if __name__ == "__main__":
     test_passage_source_label()
     test_review_flags_and_page()
     test_conditional_vision_fallback()
+    test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
     print("\n모든 오프라인 테스트 통과 ✅")
