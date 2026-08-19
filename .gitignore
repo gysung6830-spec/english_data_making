@@ -12,3 +12,6 @@ output/*.png
 output/*.jpg
 output/*.json
 web_uploads/
+
+# fontconfig 캐시 (렌더링 중 생김)
+.fc-cache/
