@@ -70,6 +70,8 @@ def structural_issue(q: Question) -> str | None:
     elif t == "count_match":
         if circled < 5:
             return "보기 진술(①~⑤) 부족"
+        if "[보기]" not in p:
+            return "보기 박스([보기]) 없음"
     elif t == "irrelevant_sentence":
         if circled < 5:
             return "문장 번호(①~⑤) 부족"
@@ -188,7 +190,7 @@ def verify(exam: MockExam, blueprint: Blueprint,
 
     # 7) 난이도 일관성 (§5-7)
     #    중상(mid_high)은 '중·상 문항을 반반' 배치하는 조합 난이도이므로 mid/high 둘 다 허용.
-    allowed = {"mid", "high"} if requested == "mid_high" else {requested}
+    allowed = {"mid", "high", "mid_high"} if requested == "mid_high" else {requested}
     bad_diff = [q.no for q in choice if q.difficulty not in allowed]
     # 요청과 다른 난이도가 절반 넘으면 실패로 본다(경미한 편차는 허용).
     ok7 = len(bad_diff) <= len(choice) * 0.5
