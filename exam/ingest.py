@@ -142,8 +142,31 @@ def _clean_pdf_text(segment: str) -> str:
     text = re.sub(r"([,;:])\1+", r"\1", text)         # 중복 구두점 정리
     text = re.sub(r",\s*\.", ".", text)               # ' , .' → '.'
     text = re.sub(r"\.\s*\.+", ".", text)             # 연속 마침표(.. 포함) 정리
-    text = re.sub(r"^\s*[.\s]+", "", text)            # 맨 앞 불릿→마침표 잔재 제거
+    text = re.sub(r"^[\s.:;,·)]+", "", text)          # 맨 앞 불릿·헤더 콜론(3번:) 잔재 제거
     return text
+
+
+# EBS 올림포스 등 'Ch.NN Unit U - M번 / Unit U - (수능 대비) ANALYSIS' 형식 지문 경계.
+#   "Unit 10 - 3번"  → 라벨 '10-3'
+#   "Unit 11 - 수능 대비 ANALYSIS" → 라벨 '11-A'
+_UNIT_PROBLEM = re.compile(
+    r"Unit\s*(\d+)\s*[-–~]\s*(?:수능\s*대비\s*)?(?:(\d+)\s*번|(ANALYSIS|Analysis|분석|해설))",
+    re.IGNORECASE)
+
+
+def _split_by_unit(raw: str) -> list[tuple[str, str]] | None:
+    """'Unit U - M번 / ANALYSIS' 헤더를 지문 경계로 삼고, 라벨을 'U-M' / 'U-A' 로 만든다.
+    헤더가 하나도 없으면 None. (헤더 앞 파일 머리말은 버린다.)"""
+    matches = list(_UNIT_PROBLEM.finditer(raw))
+    if not matches:
+        return None
+    out: list[tuple[str, str]] = []
+    for i, m in enumerate(matches):
+        unit = m.group(1)
+        label = f"{unit}-{m.group(2)}" if m.group(2) else f"{unit}-A"
+        seg = raw[m.end():matches[i + 1].start() if i + 1 < len(matches) else len(raw)]
+        out.append((label, seg))
+    return out
 
 
 def _split_by_workbook(raw: str) -> list[tuple[str, str]] | None:
@@ -174,6 +197,9 @@ def _numbered_segments(raw: str) -> list[tuple[str | None, str]]:
     wb = _split_by_workbook(raw)
     if wb is not None:
         return wb
+    unit = _split_by_unit(raw)          # EBS 올림포스 'Unit U - M번/ANALYSIS' → 라벨 U-M/U-A
+    if unit is not None:
+        return unit
     if _PASSAGE_SPLIT.search(raw):
         return [(None, s) for s in _PASSAGE_SPLIT.split(raw)]
     return [(None, raw)]
@@ -345,10 +371,16 @@ def load_bodies(paths, client=None, vision_fallback: bool = True,
                     f"'{p.name}': HWP에서 영어 지문을 찾지 못했습니다. 지문을 복사해 "
                     "붙여넣거나 PDF/사진으로 저장해 올려 주세요."
                 )
-            # 라벨: 원본에 '영어지문 문항번호'가 있으면 'NN번', 없으면 빈 문자열
-            # (조판기가 위치 기준 "지문 1/2/…" 로 대체). 파일명은 라벨로 쓰지 않는다.
+            # 라벨: 원본 문항 식별자. 순수 숫자면 'NN번'(모의고사), 이미 형식화된 값
+            # (예: '10-3'·'11-A' — EBS Unit)이면 그대로. 없으면 빈 문자열(위치 기준 대체).
             for num, body in numbered:
-                out.append((f"{num}번" if num else "", body))
+                if not num:
+                    lbl = ""
+                elif str(num).isdigit():
+                    lbl = f"{num}번"
+                else:
+                    lbl = str(num)
+                out.append((lbl, body))
         else:
             body = load_body(p, client=client)
             if body and body.strip():

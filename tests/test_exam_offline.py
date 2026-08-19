@@ -911,6 +911,31 @@ def test_passage_type_fit_flags() -> None:
     print("✓ 지문 종류별 부적합 유형 검수 플래그 통과")
 
 
+def test_ebs_unit_label() -> None:
+    """EBS 올림포스 'Unit U - M번 / ANALYSIS' 헤더 → 지문 라벨 'U-M' / 'U-A'."""
+    from exam import ingest
+    raw = (
+        "[EBS] 올림포스 - 한줄해석\n"
+        "Ch. 04 Unit 10 - 3번: 단일 재배 결과 At one end of the spectrum was the forest garden "
+        "and the wild edge, a rich mix of species living together in one place indeed.\n"
+        "[Flow Edu] flowedu.tistory.com\n"
+        "Ch. 04 Unit 11 - 수능 대비 ANALYSIS: 소셜 미디어 Observation studies of teenagers using "
+        "social media have discovered a strong desire to enhance and manage their own image online.\n"
+    )
+    segs = ingest._numbered_segments(ingest._normalize_raw(raw))
+    labels = [lbl for lbl, _ in segs]
+    assert labels == ["10-3", "11-A"], labels
+    # load_bodies 형식: 이미 형식화된 라벨은 그대로(‘번’ 안 붙임), 순수 숫자는 ‘N번’
+    for num in ("10-3", "11-A"):
+        lbl = num if not str(num).isdigit() else f"{num}번"
+        assert lbl == num
+    assert (lambda n: f"{n}번")("18") == "18번"
+    # 본문 앞 헤더 콜론(3번:) 잔재 제거
+    body0 = ingest._clean_pdf_text(segs[0][1])
+    assert body0.startswith("At one end"), body0[:30]
+    print("✓ EBS Unit 라벨(10-3·11-A) 파싱·콜론 잔재 제거 통과")
+
+
 def test_notice_bullet_markers() -> None:
     """안내문(행사·대회 안내)의 불릿 기호(* ※ •)는 목록 표시일 뿐 본문이 아니다.
     산문으로 펼칠 때 'When & Where * September … * Maple Creek …' 처럼 지문에 끼면
@@ -1155,6 +1180,7 @@ if __name__ == "__main__":
     test_hanjul_translation_residue()
     test_set3_demo()
     test_passage_type_fit_flags()
+    test_ebs_unit_label()
     test_partial_generation_survives()
     test_llm_self_verify()
     test_notice_bullet_markers()
