@@ -1194,6 +1194,36 @@ def test_conditional_vision_fallback(tmp_out: Path = ROOT / "output" / "test") -
     print("✓ 조건부 Vision OCR 폴백(글자 PDF 건너뜀·스캔만 OCR) 통과")
 
 
+def test_summary_blank_label_dedup() -> None:
+    """요약문 빈칸(E): LLM 이 조각에 '(A)/(B)' 라벨을 넣어도 '(A),(A)_____' 중복 없이
+    라벨은 한 번만, 빈칸 앞뒤 공백·구두점이 정돈된다."""
+    import re as _re
+
+    from exam import build2
+
+    def _plain(html: str) -> str:
+        s = _re.sub(r'<span class="blank">_+</span>', "_____", html)
+        return _re.sub(r"<[^>]+>", "", s)
+
+    # LLM 이 라벨과 구두점을 조각에 인라인한 나쁜 케이스
+    q, _ = build2.make_E(["s"], "treat music much like (A),",
+                         "discerning a level of structural (B)",
+                         "that ordinary listeners cannot perceive.",
+                         [("speech", "intricacy")] * 5, 2, "r")
+    t = _plain(q)
+    assert "(A),(A)" not in t and "(B)(B)" not in t          # 라벨 중복 없음
+    assert t.count("(A)_____") == 1 and t.count("(B)_____") == 1
+    assert "like (A)_____, discerning" in t                  # 구두점은 빈칸 뒤로
+    assert "structural (B)_____ that" in t
+
+    # 이미 깨끗한 조각: 빈칸 앞뒤 공백만 확보(붙어 나오지 않게)
+    q2, _ = build2.make_E(["s"], "treat music like", "and perceive structural",
+                          "beyond grasp.", [("a", "b")] * 5, 1, "r")
+    t2 = _plain(q2)
+    assert "like (A)_____ and" in t2 and "structural (B)_____ beyond" in t2
+    print("✓ 요약문 빈칸 라벨 중복 제거·공백 정리 통과")
+
+
 def test_short_answer_q2_prompt_clean() -> None:
     """서술형 (2) 어순배열 발문에 내부 용어('[문장] 목록')가 새어 나오면 정리한다."""
     from exam.generators.short_answer import _clean_q2_prompt, _Q2_FALLBACK
@@ -1298,6 +1328,7 @@ if __name__ == "__main__":
     test_passage_source_label()
     test_review_flags_and_page()
     test_conditional_vision_fallback()
+    test_summary_blank_label_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
     print("\n모든 오프라인 테스트 통과 ✅")

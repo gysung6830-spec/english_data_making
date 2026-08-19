@@ -110,10 +110,33 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
 
 
 # E · 요약문 빈칸(객관식) ---------------------------------------------------
+def _strip_ab_label(seg: str) -> str:
+    """요약문 조각에서 '(A)'·'(B)' 빈칸 라벨을 제거하고 공백을 정리한다.
+
+    LLM 이 before/mid/after 조각에 라벨 '(A)'·'(B)'를 직접 넣으면, 조판기가 붙이는
+    라벨과 겹쳐 '(A),(A)_____'처럼 중복된다. 조각에서는 라벨을 빼고 조판기가 한 번만
+    붙이도록 정리한다."""
+    s = re.sub(r"\(\s*[ABab]\s*\)", "", seg or "")
+    s = re.sub(r"\s+([,.;:!?])", r"\1", s)      # 라벨 제거로 생긴 '낱말 ,' → '낱말,'
+    return re.sub(r"\s{2,}", " ", s).strip()
+
+
+def _take_trailing_punct(seg: str) -> tuple[str, str]:
+    """조각 끝의 구두점을 떼어 돌려준다. LLM 이 '(A),'처럼 라벨 뒤에 붙인 구두점은
+    라벨을 지우면 조각 끝에 남는데, 이는 '빈칸 뒤'에 와야 하므로 빈칸 뒤로 옮긴다."""
+    m = re.search(r"([,.;:!?]+)$", seg)
+    return (seg[:m.start()].rstrip(), m.group(1)) if m else (seg, "")
+
+
 def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason):
     """choice_pairs: [(a_word, b_word)] 5개. 요약문 위에 지문도 함께 제시한다."""
-    summary = (F.esc(before) + F2.blank_ab("A") + F.esc(mid)
-               + F2.blank_ab("B") + F.esc(after))
+    before, mid, after = _strip_ab_label(before), _strip_ab_label(mid), _strip_ab_label(after)
+    before, pa = _take_trailing_punct(before)   # '(A),' 잔재 → (A) 빈칸 뒤로
+    mid, pb = _take_trailing_punct(mid)          # '(B),' 잔재 → (B) 빈칸 뒤로
+    # 빈칸 라벨 앞뒤로 공백을 두어 'like(A)_____and' 처럼 붙지 않게 한다.
+    summary = (F.esc(before) + " " + F2.blank_ab("A") + F.esc(pa) + " " + F.esc(mid)
+               + " " + F2.blank_ab("B") + F.esc(pb) + " " + F.esc(after))
+    summary = re.sub(r"\s+([,.;:!?])", r"\1", re.sub(r"\s{2,}", " ", summary)).strip()
     choices = [F2.E_pair(a, b) for a, b in choice_pairs]
     return F2.E_q(" ".join(sentences), summary, choices), F2.E_a(answer_no, reason)
 

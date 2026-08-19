@@ -199,7 +199,9 @@ def _gen_D(client, analysis, body, max_retries=1, answer_pos=None):
 
 def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '요약문 빈칸(E)'을 만드세요. 지문을 한 문장 요약하되 핵심어 2곳을 (A)(B)로 "
-         "비우고 before/mid/after 로 나눕니다. pairs 5개는 (a,b) 단어쌍 선지입니다.\n"
+         "비우고 before/mid/after 로 나눕니다. (A)는 before와 mid 사이, (B)는 mid와 after 사이에 "
+         "자동으로 들어갑니다. before/mid/after 조각 '안에는' '(A)'·'(B)' 라벨을 절대 쓰지 마세요"
+         "(라벨은 조판기가 붙입니다). pairs 5개는 (a,b) 단어쌍 선지입니다.\n"
          "- 정답 쌍: (A)(B) 둘 다 논지에 맞되, 지문 단어를 '그대로 쓰지 말고 유의어(패러프레이즈)'로.\n"
          "- 오답 4: (A)만 맞음 / (B)만 맞음 / 둘 다 어긋남 을 고루 섞고, 그중 일부에는 '지문에 실제 "
          "나온 단어'를 넣어 맞아 보이게(함정) 만듭니다.\n"
