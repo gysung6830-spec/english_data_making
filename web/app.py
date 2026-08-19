@@ -72,16 +72,6 @@ def parse_labels(raw: str) -> list[str]:
     return [t.strip().strip("[]").strip() for t in toks if t.strip().strip("[]").strip()]
 
 
-def parse_titles(raw: str) -> list[str]:
-    """지문 제목 목록을 파싱한다. 제목에는 쉼표가 들어갈 수 있으므로, 줄바꿈이 있으면
-    '줄 단위'로, 없으면 쉼표로 나눈다. 바깥 대괄호·공백을 정리하고 빈 항목은 버린다."""
-    s = (raw or "").strip()
-    if s.startswith("[") and s.endswith("]"):
-        s = s[1:-1]
-    toks = s.split("\n") if "\n" in s else s.split(",")
-    return [t.strip().strip("[]").strip() for t in toks if t.strip().strip("[]").strip()]
-
-
 def _apply_passage_field(data: dict, values: list[str], field: str, kr: str) -> str | None:
     """지문별 필드(source_label·title 등)를 입력값으로 '지문 순서대로' 덮어쓴다
     (JSON dict 직접 수정). 모든 파트는 같은 지문 집합을 공유하므로, 각 파트의 i번째
@@ -101,11 +91,6 @@ def _apply_passage_field(data: dict, values: list[str], field: str, kr: str) -> 
 def apply_labels(data: dict, labels: list[str]) -> str | None:
     """지문 번호(source_label)를 지문 순서대로 덮어쓴다."""
     return _apply_passage_field(data, labels, "source_label", "지문 번호")
-
-
-def apply_titles(data: dict, titles: list[str]) -> str | None:
-    """지문 제목(title)을 지문 순서대로 덮어쓴다."""
-    return _apply_passage_field(data, titles, "title", "지문 제목")
 
 
 def _pdf_path(fid: str, kind: str = "") -> Path:
@@ -379,15 +364,10 @@ def rerender():
     header_override = new_header_raw.strip() if new_header_raw.strip() else None
     new_doc = safe_name(request.form.get("doc_name", ""))
 
-    # 지문 번호/제목 다시 넣기: 입력하면 '지문 순서대로' 덮어쓴다(비우면 기존 유지).
+    # 지문 번호 다시 넣기: 입력하면 '지문 순서대로' 라벨을 덮어쓴다(비우면 기존 유지).
     labels = parse_labels(request.form.get("labels", ""))
     if labels:
         err = apply_labels(data, labels)   # data(JSON) 직접 수정 → PDF·재저장 JSON 모두 반영
-        if err:
-            return fail(err)
-    titles = parse_titles(request.form.get("titles", ""))
-    if titles:
-        err = apply_titles(data, titles)
         if err:
             return fail(err)
 

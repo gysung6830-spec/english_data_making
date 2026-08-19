@@ -27,7 +27,7 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title|e }}</span>{% endif %}</div>
+      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
       <div class="q-item type-{{ item.type }}">
         <div class="q-head">
@@ -52,7 +52,7 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title|e }}</span>{% endif %}</div>
+      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
       <div class="q-item type-{{ item.type }}">
         <div class="q-head">
@@ -101,7 +101,7 @@
   <div class="columns">
     {% for block in blocks %}
     <div class="passage-block">
-      <div class="passage-label">{{ block.label }}{% if block.title %} <span class="passage-title">{{ block.title|e }}</span>{% endif %}</div>
+      <div class="passage-label">{{ block.label }}</div>
       {% for item in block.rows %}
       <div class="a-item type-{{ item.type }}">
         <div class="a-head">
