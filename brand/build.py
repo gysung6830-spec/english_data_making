@@ -471,7 +471,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
     """자료 한 종을 한 장으로 소개한다.
 
     라인업을 한 장에 다 넣으면 목록으로만 읽힌다. 자료마다 한 장씩 두면
-    글마다 그 자료 카드만 붙일 수 있다. 간판 자료(signature)는 어두운 판에
+    글마다 그 자료 카드만 붙일 수 있다. 시그니처 자료(signature)는 어두운 판에
     배지를 달아 눈에 먼저 들어오게 한다.
     """
     u = width / 100
@@ -482,7 +482,7 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
     if item.signature:
         badge = (f'<span class="chip" style="background:{P["gold"]};color:{P["green_900"]};'
                  f'padding:{u * 1.0:.0f}px {u * 2.0:.0f}px;font-size:{u * 1.8:.0f}px;'
-                 f'letter-spacing:.14em">SIGNATURE · 간판 자료</span>')
+                 f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
 
     pts = "".join(
         f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
@@ -750,7 +750,7 @@ def write_posts() -> list[Path]:
 
 {edge_of(EDGE_READ)}
 
-## 간판 자료 — 필생보 (04 — 05)
+## 시그니처 자료 — 필생보 (04 — 05)
 
 {img('lineup-2-pilsaengbo.png')}
 
@@ -887,7 +887,7 @@ def build_all() -> list[Path]:
 
     html, h = build_lineup(
         DOC_W, MATERIALS[3:5],
-        kicker="04 — 05  ·  간판 자료",
+        kicker="04 — 05  ·  시그니처 자료",
         heading="필생보 — 필자의 생각이 보이는 영어독해",
         caption="해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
                 "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
