@@ -501,13 +501,19 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
                  f'padding:{u * 1.0:.0f}px {u * 2.0:.0f}px;font-size:{u * 1.8:.0f}px;'
                  f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
 
+    def lead_sentence(text: str) -> str:
+        """첫 문장만. 카드는 훑는 물건이라 두 번째 문장부터는 안 읽힌다."""
+        cut = re.split(r"(?<=[.다])\s", text.strip(), maxsplit=1)
+        return cut[0]
+
     pts = "".join(
         f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
         f'line-height:1.7;padding-left:{u * 1.8:.0f}px;position:relative;'
         f'word-break:keep-all;margin-top:{u * 1.2:.0f}px">'
         f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
-        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-        for head, desc in item.points[: (6 if item.signature else 4)])
+        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — '
+        f'{lead_sentence(desc)}</div>'
+        for head, desc in item.points[: (4 if item.signature else 3)])
 
     edge_el = ""
     if item.edge:
