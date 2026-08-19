@@ -922,9 +922,16 @@ def test_ebs_unit_label() -> None:
         "Ch. 04 Unit 11 - 수능 대비 ANALYSIS: 소셜 미디어 Observation studies of teenagers using "
         "social media have discovered a strong desire to enhance and manage their own image online.\n"
     )
+    raw += (
+        "Ch. 05 Unit 12 - 서술형 Practice: The narrator slowly realized that the quiet "
+        "village had changed beyond recognition over the past ten long years for sure.\n"
+        "논술형-Practice: Some scholars argue that technology reshapes how communities "
+        "remember their shared past across many different generations everywhere today.\n"
+    )
     segs = ingest._numbered_segments(ingest._normalize_raw(raw))
     labels = [lbl for lbl, _ in segs]
-    assert labels == ["10-3", "11-A"], labels
+    # Unit U-M / U-A, 서술형·논술형 Practice → '서술형'·'논술형'
+    assert labels == ["10-3", "11-A", "서술형", "논술형"], labels
     # load_bodies 형식: 이미 형식화된 라벨은 그대로(‘번’ 안 붙임), 순수 숫자는 ‘N번’
     for num in ("10-3", "11-A"):
         lbl = num if not str(num).isdigit() else f"{num}번"

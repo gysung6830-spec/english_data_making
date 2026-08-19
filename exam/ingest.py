@@ -146,26 +146,55 @@ def _clean_pdf_text(segment: str) -> str:
     return text
 
 
-# EBS 올림포스 등 'Ch.NN Unit U - M번 / Unit U - (수능 대비) ANALYSIS' 형식 지문 경계.
-#   "Unit 10 - 3번"  → 라벨 '10-3'
-#   "Unit 11 - 수능 대비 ANALYSIS" → 라벨 '11-A'
+# EBS 올림포스 등 'Ch.NN Unit U - …' 형식 지문 경계와 라벨 규칙.
+#   "Unit 10 - 3번"                → '10-3'
+#   "Unit 11 - 수능 대비 ANALYSIS"  → '11-A'
+#   "Unit 12 - 서술형 Practice"     → '서술형'   (논술형 Practice → '논술형')
 _UNIT_PROBLEM = re.compile(
-    r"Unit\s*(\d+)\s*[-–~]\s*(?:수능\s*대비\s*)?(?:(\d+)\s*번|(ANALYSIS|Analysis|분석|해설))",
+    r"Unit\s*(\d+)\s*[-–~]\s*(?:수능\s*대비\s*)?"
+    r"(?:(\d+)\s*번"
+    r"|(ANALYSIS|Analysis|분석|해설)"
+    r"|(서술형|논술형)\s*(?:[-–]?\s*(?:Practice|practice|연습|프랙티스))?)",
     re.IGNORECASE)
+# Unit 접두어 없이 '서술형-Practice' / '논술형 Practice' 구획 머리만 있는 경우도 인식.
+_PRACTICE_HEAD = re.compile(
+    r"(서술형|논술형)\s*[-–]?\s*(?:Practice|practice|연습|프랙티스)", re.IGNORECASE)
+
+
+def _unit_label(m: "re.Match") -> str | None:
+    """_UNIT_PROBLEM 매치 → 라벨. M번→'U-M', ANALYSIS→'U-A', 서술형/논술형→'서술형'/'논술형'."""
+    unit = m.group(1)
+    if m.group(2):
+        return f"{unit}-{m.group(2)}"
+    if m.group(3):
+        return f"{unit}-A"
+    if m.group(4):
+        return m.group(4)          # '서술형' / '논술형' (사용자 지정: 유닛 번호 없이)
+    return None
 
 
 def _split_by_unit(raw: str) -> list[tuple[str, str]] | None:
-    """'Unit U - M번 / ANALYSIS' 헤더를 지문 경계로 삼고, 라벨을 'U-M' / 'U-A' 로 만든다.
-    헤더가 하나도 없으면 None. (헤더 앞 파일 머리말은 버린다.)"""
-    matches = list(_UNIT_PROBLEM.finditer(raw))
-    if not matches:
+    """'Unit U - M번/ANALYSIS/서술형·논술형 Practice' 및 '서술형-Practice' 머리를 지문
+    경계로 삼고 라벨을 만든다. 헤더가 하나도 없으면 None. (헤더 앞 파일 머리말은 버린다.)"""
+    marks: list[tuple[int, int, str]] = []
+    for m in _UNIT_PROBLEM.finditer(raw):
+        lbl = _unit_label(m)
+        if lbl:
+            marks.append((m.start(), m.end(), lbl))
+    for m in _PRACTICE_HEAD.finditer(raw):
+        marks.append((m.start(), m.end(), m.group(1)))
+    if not marks:
         return None
+    marks.sort()
+    dedup: list[tuple[int, int, str]] = []
+    for s, e, lbl in marks:                 # 겹치는 매치(Unit 헤더 속 서술형 등)는 앞것만
+        if dedup and s < dedup[-1][1]:
+            continue
+        dedup.append((s, e, lbl))
     out: list[tuple[str, str]] = []
-    for i, m in enumerate(matches):
-        unit = m.group(1)
-        label = f"{unit}-{m.group(2)}" if m.group(2) else f"{unit}-A"
-        seg = raw[m.end():matches[i + 1].start() if i + 1 < len(matches) else len(raw)]
-        out.append((label, seg))
+    for i, (_s, e, lbl) in enumerate(dedup):
+        seg = raw[e:dedup[i + 1][0] if i + 1 < len(dedup) else len(raw)]
+        out.append((lbl, seg))
     return out
 
 
