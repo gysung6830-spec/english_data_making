@@ -162,14 +162,19 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 | --- | --- |
 | 지문자료 | `passage.png` |
 | 한줄해석 | `one-line.png` |
-| 필생보 | `pilsaengbo.png` · `-summary` · `-student` · `-book-cover` · `-book-toc` · `-book-principle` |
+| 필생보 강의용 | `pilsaengbo-compare.png` (강사용·학생용 나란히) · `pilsaengbo.png` · `-summary` |
+| 필생보 독학용 | `pilsaengbo-book-principle.png` · `-book-toc` · `-book-cover` |
 | 형광펜 독해 | `highlighter.png` · `highlighter-guide.png` |
 | 통합 워크북 | `workbook-integrated.png` · `-en.png` |
 | 내신 서술형 워크북 | `workbook.png` |
 | 변형문제 | `variation.png` · `variation-answer.png` |
 | 동형모의고사 | `mock.png` · `mock-answer.png` |
 
-**구문독해 · 평가원 VOCA** 는 아직 실물을 못 봐서 자리를 비워 뒀습니다
+`PAIRS` 에 적어 두면 같은 쪽의 두 판본을 나란히 붙인 그림도 만듭니다.
+'강사용은 채워져 있고 학생용은 비어 있다' 는 글로 설명하기보다 나란히 놓는 편이
+빠릅니다.
+
+**평가원 VOCA** 는 아직 실물을 못 봐서 자리를 비워 뒀습니다
 (목록에 '예시 준비 중'으로 표시). PDF 를 주시면 `SHOTS` 에 한 줄 넣고 다시
 돌리면 들어갑니다.
 

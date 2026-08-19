@@ -502,9 +502,12 @@ def build_card(item, width: int = DOC_W) -> tuple[str, int]:
                  f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
 
     def lead_sentence(text: str) -> str:
-        """첫 문장만. 카드는 훑는 물건이라 두 번째 문장부터는 안 읽힌다."""
-        cut = re.split(r"(?<=[.다])\s", text.strip(), maxsplit=1)
-        return cut[0]
+        """첫 문장만. 카드는 훑는 물건이라 두 번째 문장부터는 안 읽힌다.
+
+        마침표로만 끊는다. '다' 뒤에서 끊으면 '지문마다 가장…' 같은 자리에서
+        문장이 잘린다.
+        """
+        return re.split(r"(?<=[.!?])\s+", text.strip(), maxsplit=1)[0]
 
     pts = "".join(
         f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'

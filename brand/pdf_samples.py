@@ -131,6 +131,65 @@ def shoot(src: Path, dpi: int = 130) -> list[Path]:
     return made
 
 
+# ── 두 판본을 나란히 ──────────────────────────────────────────────────────
+PAIRS = [
+    # (왼쪽 파일, 왼쪽 라벨, 오른쪽 파일, 오른쪽 라벨, 저장 이름, 위에서 남길 비율)
+    ("pilsaengbo.png", "강사용 · 정답 표시",
+     "pilsaengbo-student.png", "학생용 · 빈칸",
+     "pilsaengbo-compare.png", 0.66),
+]
+
+
+def compose_pairs(width: int = 1600) -> list[Path]:
+    """같은 쪽의 두 판본을 나란히 붙인다.
+
+    '강사용은 채워져 있고 학생용은 비어 있다'는 한눈에 보여야 팔린다. 글자를
+    읽히려는 그림이 아니라 대비를 보여 주는 그림이라, 폭을 넉넉히 잡는다.
+    """
+    from PIL import Image
+
+    from render import html_to_png, page  # noqa: PLC0415
+
+    made: list[Path] = []
+    for left, l_label, right, r_label, name, keep in PAIRS:
+        lp, rp = OUT / left, OUT / right
+        if not (lp.exists() and rp.exists()):
+            print(f"  · {name} — 원본이 없어 건너뜀")
+            continue
+
+        crops = []
+        for src in (lp, rp):
+            with Image.open(src) as im:
+                rgb = im.convert("RGB")
+                crop = rgb.crop((0, 0, rgb.width, int(rgb.height * keep)))
+                out = OUT / f"_pair_{src.name}"
+                crop.save(out)
+                crops.append((out, crop.width, crop.height))
+
+        gap, pad, label_h = 26, 30, 46
+        col = (width - pad * 2 - gap) // 2
+        body_h = max(round(h * col / w) for _, w, h in crops)
+        total_h = pad * 2 + label_h + body_h
+
+        cells = "".join(f"""<div style="width:{col}px">
+          <div style="font-weight:700;font-size:19px;color:#1B5A46;
+               margin-bottom:10px">{label}</div>
+          <img src="{path.as_uri()}" style="width:100%;display:block;
+               border:1px solid #DED9CC;border-radius:6px">
+        </div>""" for (path, _, _), label in zip(crops, (l_label, r_label)))
+
+        html = page(
+            f'<div style="background:#F6F3EC;padding:{pad}px;display:flex;'
+            f'gap:{gap}px;align-items:flex-start">{cells}</div>',
+            "body{font-family:'Malgun Gothic',sans-serif}", width, total_h)
+        html_to_png(html, OUT / name, width, total_h)
+        for path, _, _ in crops:
+            path.unlink(missing_ok=True)
+        made.append(OUT / name)
+        print(f"  ✔ samples/{name}  ({width}×{total_h})")
+    return made
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="판매 자료 PDF → 예시 이미지")
     ap.add_argument("--src", required=True, help="PDF 들이 있는 폴더")
@@ -141,6 +200,7 @@ def main() -> None:
     if not src.is_dir():
         sys.exit(f"폴더가 없습니다: {src}")
     made = shoot(src, args.dpi)
+    made += compose_pairs()
     print(f"\n{len(made)}개 → {OUT}")
 
 
