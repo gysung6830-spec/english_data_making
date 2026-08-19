@@ -120,21 +120,20 @@ def shoot_all(width: int = 860) -> list[Path]:
         with Image.open(path) as im:
             print(f"  ✔ samples/{name}  ({im.width}×{im.height})")
 
-    # 1) 지문분석지 — 여섯 섹션이 한 화면에 들어오도록 넉넉히
-    shoot("analysis.png",
-          R.render_html(reps, footer_note=FOOTER, brand=BRAND), 1500)
+    # 지문분석지는 포인트박스 버전으로 최종 결정되어 여기서 뽑지 않는다.
+    # (이 저장소의 템플릿은 6섹션 구성이라 실제로 팔 자료와 다르다)
 
-    # 2) 한줄해석 — 문장 번호대로 원문과 해석이 나란히 붙는 앞부분
+    # 1) 한줄해석 — 문장 번호대로 원문과 해석이 나란히 붙는 앞부분
     shoot("one-line.png",
           R.render_html(reps, footer_note=FOOTER, brand=BRAND,
                         with_source=True), 330)
 
-    # 3) 핵심 어휘 리스트
+    # 2) 핵심 어휘 리스트
     shoot("vocablist.png",
           _capture(R.render_vocablist_pdf, reps, OUT / "_tmp.pdf",
                    footer_note=FOOTER), 1400)
 
-    # 4) 핵심 어휘 시험지
+    # 3) 핵심 어휘 시험지
     shoot("vocabtest.png",
           _capture(R.render_vocabtest_pdf, reps, OUT / "_tmp.pdf",
                    footer_note=FOOTER), 1800)
