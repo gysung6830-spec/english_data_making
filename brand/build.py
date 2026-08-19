@@ -276,11 +276,18 @@ def build_cover(width: int, height: int, dark: bool = True) -> str:
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
 
 
-def build_logo_horizontal(width: int, height: int, dark: bool = False) -> str:
-    """배경 투명 가로형 로고."""
+def build_logo_horizontal(width: int, height: int, dark: bool = False,
+                          transparent: bool = True) -> str:
+    """가로형 로고.
+
+    transparent=True 는 배경이 없는 판이라 다른 이미지 위에 얹을 때 쓴다.
+    투명 PNG 는 보는 쪽 배경색에 따라 글자가 안 보이기도 해서, 그냥 올릴
+    자리에는 transparent=False 로 배경이 깔린 판을 쓴다.
+    """
     h, t = height, theme(dark)
+    bg = "transparent" if transparent else t["bg"]
     inner = f"""<div style="width:100%;height:100%;display:flex;align-items:center;
-      justify-content:center;gap:{h * 0.16:.0f}px;background:transparent">
+      justify-content:center;gap:{h * 0.16:.0f}px;background:{bg}">
       <div style="width:{h * 0.78:.0f}px;line-height:0">{mark(dark, int(h * 0.78))}</div>
       <div>
         <div class="wm" style="font-size:{h * 0.44:.0f}px;color:{t['fg']}">{BRAND_EN}</div>
@@ -288,7 +295,7 @@ def build_logo_horizontal(width: int, height: int, dark: bool = False) -> str:
              color:{t['accent']}">{BRAND_KO}</div>
       </div>
     </div>"""
-    return page(f'<div class="stage" style="background:transparent">{inner}</div>',
+    return page(f'<div class="stage" style="background:{bg}">{inner}</div>',
                 CSS, width, height)
 
 
@@ -625,6 +632,46 @@ def write_posts() -> list[Path]:
     return made
 
 
+# ── 전체 목록표 ───────────────────────────────────────────────────────────
+def build_index_sheet(width: int = 1200, cols: int = 4,
+                      tile_h: int = 185) -> tuple[str, int]:
+    """assets 안의 결과물을 파일명과 함께 한 장에 늘어놓는다.
+
+    투명 PNG 는 흰 바탕 위에 얹어 보여 준다. 어느 파일이 안 보이는지
+    바로 짚을 수 있게 하려는 목적이다.
+    """
+    from PIL import Image
+
+    files = sorted(f for f in OUT.glob("*.png") if not f.name.startswith("_"))
+    pad, gap = 24, 16
+    cell = (width - pad * 2 - gap * (cols - 1)) // cols
+    cards = []
+    for f in files:
+        with Image.open(f) as im:
+            size = f"{im.width}×{im.height}"
+        # 세로로 긴 장은 윗부분만 보여 준다. 목록에서는 어느 파일인지만 알면 된다.
+        cards.append(f"""<div style="width:{cell}px">
+          <div style="background:#fff;border:1px solid #DED9CC;border-radius:6px;
+               overflow:hidden;height:{tile_h}px">
+            <img src="{f.as_uri()}" style="display:block;width:100%;height:100%;
+                 object-fit:cover;object-position:top">
+          </div>
+          <div style="margin-top:6px;font-size:12px;color:#5B6560;
+               word-break:break-all;line-height:1.4">{f.name}<br>
+            <span style="color:#8E958F">{size}</span></div>
+        </div>""")
+    rows = -(-len(files) // cols)
+    height = pad * 2 + 44 + rows * (tile_h + 48 + gap)
+
+    body = f"""<div style="background:#F2F0E9;padding:{pad}px;min-height:100%">
+      <div style="font-weight:700;font-size:20px;color:{P['green_900']};
+           margin-bottom:16px">Ortica 에셋 목록 — {len(files)}개</div>
+      <div style="display:flex;flex-wrap:wrap;gap:{gap}px;align-items:flex-start">
+        {''.join(cards)}</div>
+    </div>"""
+    return page(body, CSS, width, height), height
+
+
 # ── 실행 ──────────────────────────────────────────────────────────────────
 def emit(made: list[Path], name: str, html: str, w: int, h: int) -> None:
     made.append(html_to_png(html, OUT / name, w, h))
@@ -651,8 +698,14 @@ def build_all() -> list[Path]:
     emit(made, "cover-mobile-1080x1080.png", build_cover(1080, 1080), 1080, 1080)
     emit(made, "cover-mobile-light-1200x900.png",
          build_cover(1200, 900, dark=False), 1200, 900)
-    emit(made, "logo-horizontal-light-bg.png", build_logo_horizontal(1200, 300), 1200, 300)
-    emit(made, "logo-horizontal-dark-bg.png",
+    # 배경이 깔린 판 — 그냥 올려도 어디서나 보인다
+    emit(made, "logo-horizontal-solid-light.png",
+         build_logo_horizontal(1200, 300, transparent=False), 1200, 300)
+    emit(made, "logo-horizontal-solid-dark.png",
+         build_logo_horizontal(1200, 300, dark=True, transparent=False), 1200, 300)
+    # 투명 판 — 다른 이미지 위에 얹을 때만
+    emit(made, "logo-horizontal-on-light.png", build_logo_horizontal(1200, 300), 1200, 300)
+    emit(made, "logo-horizontal-on-dark.png",
          build_logo_horizontal(1200, 300, dark=True), 1200, 300)
     for n in (32, 180, 512):
         emit(made, f"favicon-{n}.png", build_favicon(n), n, n)
@@ -711,6 +764,7 @@ def main() -> None:
     sub = ap.add_subparsers(dest="cmd")
     sub.add_parser("all", help="전체 세트 생성")
     sub.add_parser("posts", help="블로그 원고 초안만 다시 생성")
+    sub.add_parser("index", help="전체 결과물 목록표 한 장 생성")
 
     one = sub.add_parser("item", help="자료 하나의 상세페이지만 다시 생성")
     one.add_argument("key", help=f"자료 키 ({', '.join(BY_KEY)})")
@@ -731,6 +785,12 @@ def main() -> None:
         html_to_png(build_thumb(w, h, args.title, args.sub, args.tag,
                                 dark=not args.light, number=args.number), out, w, h)
         print(f"✔ {out}  ({w}×{h})")
+        return
+
+    if args.cmd == "index":
+        html, h = build_index_sheet()
+        html_to_png(html, OUT / "_index.png", 1200, h)
+        print(f"✔ _index.png  (1200×{h})")
         return
 
     if args.cmd == "posts":

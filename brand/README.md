@@ -92,7 +92,13 @@ brand/
 | --- | --- |
 | 공유 미리보기(OG) | `thumb-og-1200x630-sample.png` |
 | 파비콘 · 앱 아이콘 | `favicon-32/180/512.png` |
-| 배경 투명 가로 로고 | `logo-horizontal-light-bg.png` / `-dark-bg.png` |
+| 가로 로고(배경 있음) | `logo-horizontal-solid-light.png` / `-solid-dark.png` |
+| 가로 로고(배경 투명) | `logo-horizontal-on-light.png` / `-on-dark.png` |
+
+**투명 PNG 주의.** `-on-light` / `-on-dark` 는 배경이 없는 판이라 다른 이미지
+위에 얹을 때만 씁니다. 그냥 올리면 보는 쪽 배경색에 따라 글자가 안 보입니다
+(`-on-dark` 는 밝은 글자라 흰 배경에서 안 보이고, `-on-light` 는 그 반대).
+어디에 올릴지 모르겠으면 **`-solid-` 쪽을 쓰세요.**
 
 ## 3. 라인업과 상세페이지
 
@@ -135,6 +141,15 @@ posts/02-analysis.md           본문 원고 초안
 각 묶음 아래에는 **'이 세 가지가 다른 점'** 카드 세 장이 붙습니다. 자료 설명이
 아니라 "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적습니다. 문구는
 `build.py` 위쪽의 `EDGE_READ`, `EDGE_EXAM`, `EDGE_BOOK` 에서 고칩니다.
+
+### 전부 한눈에 보기
+
+```bash
+python brand/build.py index      # brand/assets/_index.png
+```
+
+결과물을 파일명·크기와 함께 한 장에 늘어놓습니다. 투명 PNG 는 흰 바탕 위에
+얹혀 보이므로, 여기서 비어 보이는 파일이 곧 "배경이 투명한 파일"입니다.
 
 ## 4. 고치고 다시 뽑기
 
