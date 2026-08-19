@@ -41,15 +41,29 @@ def _font_data_uri(name: str) -> str:
     return f"data:font/ttf;base64,{b64}"
 
 
+def fonts_available() -> bool:
+    """번들 나눔스퀘어라운드(R·B) 파일이 모두 존재하는지."""
+    return (FONT_DIR / "NanumSquareRoundR.ttf").exists() and \
+           (FONT_DIR / "NanumSquareRoundB.ttf").exists()
+
+
 def font_face_css() -> str:
     """번들된 나눔스퀘어라운드를 @font-face 로 등록하는 CSS(렌더 시 <head>에 주입).
 
     폰트 파일을 'base64 data URI' 로 직접 임베드한다. file:// 절대경로 방식은 실행 환경(웹/원격)에
     따라 경로를 못 찾거나 로딩 타이밍 문제로 시스템 폰트로 폴백될 수 있어, 어디서든 동일하게
-    나눔스퀘어라운드로 렌더되도록 인라인 임베드로 바꿨다. 파일이 없으면 빈 문자열(시스템 폴백)."""
+    나눔스퀘어라운드로 렌더되도록 인라인 임베드로 바꿨다.
+
+    파일이 없으면 빈 문자열을 돌려주되(시스템 폴백), '조용히' 잘못된 폰트로 배포되는 사고를
+    막기 위해 경고를 크게 남긴다 — 어떤 환경에서 출력해도 한글이 나눔스퀘어라운드가 되도록
+    보장하려면 assets/fonts 번들이 반드시 함께 배포되어야 한다."""
     reg = _font_data_uri("NanumSquareRoundR.ttf")
     bold = _font_data_uri("NanumSquareRoundB.ttf")
     if not (reg and bold):
+        import logging
+        logging.getLogger("branding").error(
+            "번들 폰트(assets/fonts/NanumSquareRound*.ttf)가 없어 한글이 시스템 폰트로 "
+            "폴백됩니다. 코드를 다시 받으세요(폰트 파일 포함). 산출물 폰트가 깨질 수 있습니다.")
         return ""
     return (
         "@font-face{font-family:'NanumSquareRound';font-style:normal;font-weight:400;"

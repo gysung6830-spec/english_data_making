@@ -45,6 +45,9 @@ def main() -> int:
     mode = "MOCK(미리보기)" if args.mock else ("BATCH" if args.batch else "일반")
     print(f"  산출물    : {kind}")
     print(f"  실행 모드 : {mode}")
+    from src import branding
+    print(f"  폰트      : 나눔스퀘어라운드 "
+          f"{'번들 임베드(OK)' if branding.fonts_available() else '⚠ 번들 없음 — 시스템 폴백'}")
     print("=" * 56)
 
     if args.blanks:
