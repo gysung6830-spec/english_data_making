@@ -315,6 +315,24 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
 # ---------------------------------------------------------------------------
 # ⑥ 서술형 (원본 + 파생 과제)
 # ---------------------------------------------------------------------------
+def strip_ab_label(seg: str) -> str:
+    """요약문 조각에서 '(A)'·'(B)' 빈칸 라벨을 제거하고 공백을 정리한다.
+
+    LLM 이 before/mid/after 조각에 라벨 '(A)'·'(B)'를 직접 넣으면, 조판기가 붙이는
+    라벨과 겹쳐 '(A),(A)_____'·'(B)(B)_____'처럼 중복된다. 조각에서는 라벨을 빼고
+    조판기가 한 번만 붙이도록 정리한다."""
+    s = re.sub(r"\(\s*[ABab]\s*\)", "", seg or "")
+    s = re.sub(r"\s+([,.;:!?])", r"\1", s)      # 라벨 제거로 생긴 '낱말 ,' → '낱말,'
+    return re.sub(r"\s{2,}", " ", s).strip()
+
+
+def take_trailing_punct(seg: str) -> tuple[str, str]:
+    """조각 끝의 구두점을 떼어 돌려준다. LLM 이 '(A),'처럼 라벨 뒤에 붙인 구두점은
+    라벨을 지우면 조각 끝에 남는데, 이는 '빈칸 뒤'에 와야 하므로 빈칸 뒤로 옮긴다."""
+    m = re.search(r"([,.;:!?]+)$", seg)
+    return (seg[:m.start()].rstrip(), m.group(1)) if m else (seg, "")
+
+
 def make_short(
     sentences: list[str],
     q1_prompt: str, q1_answer: str,
@@ -334,11 +352,20 @@ def make_short(
     if _norm(snapped) != _norm(q2_answer) and flags is not None:
         flags.append(_rv.FIX_SNAP)
     q2_answer = snapped
+    # LLM 이 조각에 '(A)/(B)' 라벨을 넣어도 '(A)(A)_____'처럼 겹치지 않게 정리하고,
+    # 빈칸 앞뒤 공백을 확보한다(요약문 빈칸 E 유형과 동일 처리).
+    q3_before = strip_ab_label(q3_before)
+    q3_mid = strip_ab_label(q3_mid)
+    q3_after = strip_ab_label(q3_after)
+    q3_before, _pa = take_trailing_punct(q3_before)
+    q3_mid, _pb = take_trailing_punct(q3_mid)
     summary_html = (
-        F.esc(q3_before) + F.blank("A", q3_cue_a)
-        + F.esc(q3_mid) + F.blank("B", q3_cue_b)
-        + F.esc(q3_after)
+        F.esc(q3_before) + " " + F.blank("A", q3_cue_a) + F.esc(_pa)
+        + " " + F.esc(q3_mid) + " " + F.blank("B", q3_cue_b) + F.esc(_pb)
+        + " " + F.esc(q3_after)
     )
+    summary_html = re.sub(r"\s+([,.;:!?])", r"\1",
+                          re.sub(r"\s{2,}", " ", summary_html)).strip()
     q = F.short_answer_q(
         passage=" ".join(sentences),
         q1_prompt=q1_prompt,

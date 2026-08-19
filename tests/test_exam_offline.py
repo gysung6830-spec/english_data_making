@@ -1224,6 +1224,31 @@ def test_summary_blank_label_dedup() -> None:
     print("✓ 요약문 빈칸 라벨 중복 제거·공백 정리 통과")
 
 
+def test_short_answer_q3_summary_dedup() -> None:
+    """서술형 (3) 요약문 빈칸: LLM 이 조각에 '(A)/(B)' 라벨을 넣어도
+    '(A)(A)_____'·'(B)(B)_____'로 겹치지 않고, 빈칸 앞뒤 공백이 정돈된다."""
+    import re as _re
+
+    from exam import build as B
+
+    q, _ = B.make_short(
+        ["Bystanders frequently fail to help."],
+        q1_prompt="p1", q1_answer="a1",
+        q2_prompt="p2", q2_tokens=["a", "b"], q2_cues=[],
+        q2_answer="Bystanders frequently fail to help.",
+        q3_prompt="요약",
+        q3_before="Bystanders fail not due to personal flaws but because the",
+        q3_mid="of many others (A) their sense of responsibility, leaving no one personally (B)",
+        q3_after="enough to act.",
+        q3_cue_a="presence", q3_cue_b="responsible",
+        q3_ans_a="presence", q3_ans_b="responsible", q3_reason="r")
+    t = _re.sub(r"<[^>]+>", "", _re.sub(r'<span class="blank">_+</span>', "_____", q))
+    assert "(A)(A)" not in t and "(B)(B)" not in t and "(A) their" not in t
+    assert "the (A)_____ (presence) of many others" in t     # 라벨 1회·공백 정상
+    assert "personally (B)_____ (responsible) enough" in t
+    print("✓ 서술형 (3) 요약문 빈칸 라벨 중복 제거·공백 정리 통과")
+
+
 def test_short_answer_q2_prompt_clean() -> None:
     """서술형 (2) 어순배열 발문에 내부 용어('[문장] 목록')가 새어 나오면 정리한다."""
     from exam.generators.short_answer import _clean_q2_prompt, _Q2_FALLBACK
@@ -1320,6 +1345,7 @@ if __name__ == "__main__":
     test_review_flags_and_page()
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
+    test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
     print("\n모든 오프라인 테스트 통과 ✅")
