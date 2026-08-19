@@ -1208,6 +1208,12 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert webmod.parse_labels("10-A,10-1,\n서술형 , ") == ["10-A", "10-1", "서술형"]
     assert webmod.parse_labels("") == []
 
+    # parse_titles: 줄바꿈이 있으면 줄 단위(제목 안 쉼표 보존), 없으면 쉼표 분리
+    assert webmod.parse_titles("단일경작, 그리고 승자들\n십대의 게시 행동") \
+        == ["단일경작, 그리고 승자들", "십대의 게시 행동"]
+    assert webmod.parse_titles("제목1, 제목2") == ["제목1", "제목2"]
+    assert webmod.parse_titles("") == []
+
     p1 = demo_passages()          # 지문 2개
     data = serialize.dump_parts([{"set": "1", "tag": "변형문제 1회",
                                   "sections": ["teacher", "answers"], "passages": p1}],
@@ -1219,19 +1225,22 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert err and "2개" in err
     assert [pd["source_label"] for pd in d_bad["parts"][0]["passages"]] == ["", ""]
 
-    # 정상 적용 → JSON dict 에 라벨이 순서대로 반영
+    # 정상 적용 → JSON dict 에 라벨·제목이 순서대로 반영
     d_ok = _json.loads(_json.dumps(data))
     assert webmod.apply_labels(d_ok, ["10-A", "11-A"]) is None
+    assert webmod.apply_titles(d_ok, ["단일경작 승자들", "십대 게시 행동"]) is None
     assert [pd["source_label"] for pd in d_ok["parts"][0]["passages"]] == ["10-A", "11-A"]
+    assert [pd["title"] for pd in d_ok["parts"][0]["passages"]] == ["단일경작 승자들", "십대 게시 행동"]
 
-    # 렌더 PDF 에 실제로 [10-A]/[11-A] 가 찍히고 기본 [지문 1] 은 사라진다
+    # 렌더 PDF 에 실제로 [10-A] 번호와 바꿔 넣은 제목이 함께 찍힌다(기본 [지문 1]은 사라짐)
     parts, _ = serialize.load_parts(d_ok, header_override="h")
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "relabel.pdf"
     renderer.render_pdf_multi(parts, out)
     txt = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out)).pages)
     assert "[10-A]" in txt and "[11-A]" in txt and "[지문 1]" not in txt
-    print("✓ 재출력 지문 번호 다시 넣기(순서대로 라벨 교체·개수검증) 통과")
+    assert "단일경작 승자들" in txt and "십대 게시 행동" in txt   # 번호+제목 함께 출력
+    print("✓ 재출력 지문 번호·제목 다시 넣기(순서대로 교체·개수검증) 통과")
 
 
 if __name__ == "__main__":
