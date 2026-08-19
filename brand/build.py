@@ -192,14 +192,26 @@ def sample_height(name: str, width: int) -> int:
 
 
 # ── 브랜드 기본 ───────────────────────────────────────────────────────────
-def build_profile(size: int, dark: bool = True, box_h: int = 0) -> str:
-    """프로필 — 심볼 + 'Ortica 영어' + '오르티카 영어'.
+def build_profile(size: int, dark: bool = True, box_h: int = 0,
+                  with_name: bool = True) -> str:
+    """프로필.
 
-    네이버는 프로필을 원형으로 자르기도 해서, 글자는 전부 가운데에 모은다.
-    box_h 를 주면 세로가 긴 판(네이버 사이드바에서 쓰는 비율)으로 만든다.
+    with_name=True  : 심볼 + 'Ortica 영어' + '오르티카 영어'
+    with_name=False : 심볼만. 네이버 앱에서는 프로필이 지름 60px 남짓한 원으로
+                      줄어드는데, 그 크기에서 두 줄짜리 글자는 뭉개진다.
+                      글자를 빼고 잎을 키우면 작아져도 형태가 남는다.
+
+    box_h 를 주면 세로가 긴 판(사이드바 스킨용)으로 만든다.
     """
     s, t = size, theme(dark)
     h = box_h or size
+    if not with_name:
+        inner = f"""<div style="height:100%;display:flex;align-items:center;
+          justify-content:center">
+          <div style="width:{s * 0.66:.0f}px;line-height:0">{mark(dark, int(s * 0.66))}</div>
+        </div>"""
+        return page(stage(inner, dark=dark, w=s, h=h, wm=False), CSS, s, h)
+
     inner = f"""<div style="height:100%;display:flex;flex-direction:column;
       align-items:center;justify-content:center">
       <div style="width:{s * 0.42:.0f}px;line-height:0">{mark(dark, int(s * 0.42))}</div>
@@ -255,6 +267,50 @@ def build_title_tall(width: int, height: int, dark: bool = True) -> str:
       <div style="margin-top:{h * 0.058:.0f}px">{chips}</div>
     </div>"""
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
+
+
+def build_cover_backdrop(width: int, height: int, dark: bool = True) -> str:
+    """네이버 모바일 홈 커버 — **글자 없는 배경**.
+
+    네이버가 이 이미지 위에 블로그 제목·프로필·이웃수·홈편집 버튼을 직접
+    그린다. 이미지에 글자를 넣으면 그 위에 또 글자가 얹혀 겹친다. 그래서
+    여기서는 결만 깔고 글자는 네이버에 맡긴다.
+
+    기기마다 잘리는 위치가 달라(아이패드는 가운데 가로 띠만 보인다) 특정
+    자리에 그림을 몰지 않고 잎을 흩어 놓는다. 아래쪽은 흰 글자가 얹히므로
+    한 겹 어둡게 눌러 둔다.
+    """
+    import random
+
+    t = theme(dark)
+    unit = min(width, height)
+    rng = random.Random(7)          # 고정 시드 — 다시 돌려도 같은 그림이 나온다
+
+    # 흔들린 격자 위에 작은 잎을 흩는다. 기기마다 잘리는 자리가 달라서
+    # (아이패드는 가운데 가로 띠만 보인다) 한 곳에 그림을 몰지 않는다.
+    cols, rows = 5, 4
+    parts = []
+    for r in range(rows):
+        for c in range(cols):
+            cx = (c + 0.5) / cols + rng.uniform(-0.07, 0.07)
+            cy = (r + 0.5) / rows + rng.uniform(-0.09, 0.09)
+            sc = rng.uniform(0.085, 0.165)
+            tilt = rng.uniform(-40, 40)
+            op = rng.uniform(0.045, 0.095)
+            parts.append((cx, cy, sc, tilt, op))
+    leaves = "".join(
+        f'<path d="{leaf_path(width * cx, height * cy + unit * sc * 0.5, unit * sc, unit * sc * 0.62, teeth=11, depth=0.07, tilt=tilt)}" '
+        f'fill="{t["wm"]}" fill-opacity="{op:.3f}"/>'
+        for cx, cy, sc, tilt, op in parts
+    )
+    shade = ("linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.30) 100%)"
+             if dark else
+             "linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.10) 100%)")
+    inner = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}"
+      width="{width}" height="{height}" style="position:absolute;inset:0">{leaves}</svg>
+      <div style="position:absolute;inset:0;background:{shade}"></div>"""
+    return page(f'<div class="stage" style="background:{t["bg"]}">{inner}</div>',
+                CSS, width, height)
 
 
 def build_cover(width: int, height: int, dark: bool = True) -> str:
@@ -682,10 +738,14 @@ def build_all() -> list[Path]:
     made: list[Path] = []
 
     print("브랜드 기본")
-    emit(made, "profile-naver-161.png", build_profile(161), 161, 161)
-    emit(made, "profile-400.png", build_profile(400), 400, 400)
-    emit(made, "profile-800.png", build_profile(800), 800, 800)
-    emit(made, "profile-light-400.png", build_profile(400, dark=False), 400, 400)
+    # 네이버 앱은 프로필을 작은 원으로 줄인다. 글자 없는 판을 기본으로 쓴다.
+    emit(made, "profile-mark-800.png", build_profile(800, with_name=False), 800, 800)
+    emit(made, "profile-mark-400.png", build_profile(400, with_name=False), 400, 400)
+    emit(made, "profile-mark-light-800.png",
+         build_profile(800, dark=False, with_name=False), 800, 800)
+    # 크게 보이는 자리용 (이름이 함께 들어간 판)
+    emit(made, "profile-name-800.png", build_profile(800), 800, 800)
+    emit(made, "profile-name-400.png", build_profile(400), 400, 400)
     emit(made, "profile-portrait-400x480.png", build_profile(400, box_h=480), 400, 480)
     emit(made, "title-966x300-dark.png", build_title(966, 300), 966, 300)
     emit(made, "title-966x300-light.png", build_title(966, 300, dark=False), 966, 300)
@@ -694,10 +754,15 @@ def build_all() -> list[Path]:
     emit(made, "title-966x550-light.png",
          build_title_tall(966, 550, dark=False), 966, 550)
     emit(made, "title-966x420-dark.png", build_title_tall(966, 420), 966, 420)
-    emit(made, "cover-mobile-1200x900.png", build_cover(1200, 900), 1200, 900)
-    emit(made, "cover-mobile-1080x1080.png", build_cover(1080, 1080), 1080, 1080)
-    emit(made, "cover-mobile-light-1200x900.png",
-         build_cover(1200, 900, dark=False), 1200, 900)
+    # 네이버 모바일 커버 — 글자 없는 배경 (네이버가 제목·프로필을 위에 그린다)
+    emit(made, "cover-backdrop-1600x1200.png",
+         build_cover_backdrop(1600, 1200), 1600, 1200)
+    emit(made, "cover-backdrop-1080x1080.png",
+         build_cover_backdrop(1080, 1080), 1080, 1080)
+    emit(made, "cover-backdrop-2400x1350.png",
+         build_cover_backdrop(2400, 1350), 2400, 1350)
+    # 글자가 들어간 판 — 배너·썸네일처럼 위에 아무것도 안 얹히는 자리용
+    emit(made, "cover-branded-1200x900.png", build_cover(1200, 900), 1200, 900)
     # 배경이 깔린 판 — 그냥 올려도 어디서나 보인다
     emit(made, "logo-horizontal-solid-light.png",
          build_logo_horizontal(1200, 300, transparent=False), 1200, 300)
