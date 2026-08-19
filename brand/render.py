@@ -40,12 +40,20 @@ def chrome_binary() -> str:
 _VIEWPORT_PAD = 260
 
 
+# 이보다 긴 장은 2배로 그리면 캔버스가 수억 픽셀이 된다. 그런 장은 대부분
+# 실물 사진이 차지하므로 1배로 그려도 눈에 띄지 않는다.
+_SUPERSAMPLE_LIMIT = 7000
+
+
 def html_to_png(html: str, out_path: Path, width: int, height: int,
                 supersample: int = 2) -> Path:
     """HTML 문자열을 정확히 width×height PNG 로 저장.
 
     supersample 배로 크게 렌더한 뒤 축소해서 글자·곡선 가장자리를 매끈하게 만든다.
+    아주 긴 장에서는 메모리를 아끼려고 1배로 떨어뜨린다.
     """
+    if height > _SUPERSAMPLE_LIMIT:
+        supersample = 1
     from PIL import Image
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -90,7 +98,7 @@ SENTINEL = "#FF00FF"
 _SENTINEL_RGB = (255, 0, 255)
 
 
-def measure_height(make_page, width: int, max_height: int = 6000,
+def measure_height(make_page, width: int, max_height: int = 20000,
                    pad: int = 0) -> int:
     """내용이 실제로 끝나는 높이를 브라우저에 물어본다.
 

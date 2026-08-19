@@ -25,10 +25,10 @@
 
 ## 실제 자료 예시
 
-![](samples/pilsaengbo-book-principle.png)
-<!-- 이미지: brand/assets/samples/pilsaengbo-book-principle.png -->
+![](samples/psb-solve.png)
+<!-- 이미지: brand/assets/samples/psb-solve.png -->
 
-PART 0 '완급조절' — OLD / NEW·MAIN / SUPPORT 로 강약을 조절해 읽습니다.
+PART 1 — 어휘 보고, 해석 직접 쓰고, 오역 주의로 점검. 손으로 채우는 지면입니다.
 
 <!-- ▼ 직접 채울 곳 (VOICE.md §4) ─────────────────────────────
    · 이 자료를 만들게 된 계기가 된 구체적인 순간 한 문단

@@ -25,10 +25,10 @@ who(X), studied(X) 처럼 시험에 나오는 함정 형태를 함께 표기합�
 
 ## 실제 자료 예시
 
-![](samples/highlighter.png)
-<!-- 이미지: brand/assets/samples/highlighter.png -->
+![](samples/analysis.png)
+<!-- 이미지: brand/assets/samples/analysis.png -->
 
-실제 출력물 — 끊어읽기와 해석이 1:1, 어법 박스에 정답과 (X) 함정을 함께.
+본문 — 끊어읽기와 해석이 1:1. 오른쪽 어법 박스에 정답과 (X) 함정을 함께 답니다.
 
 <!-- ▼ 직접 채울 곳 (VOICE.md §4) ─────────────────────────────
    · 이 자료를 만들게 된 계기가 된 구체적인 순간 한 문단

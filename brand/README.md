@@ -163,17 +163,20 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 `SHOTS` 는 **파일 이름이 아니라 첫 쪽 머리말의 문구**로 자료를 가려냅니다.
 내려받을 때마다 파일명이 바뀌고 한글이 깨져 들어오기 때문입니다.
 
-| 자료 | 예시 파일 |
-| --- | --- |
-| 지문자료 | `passage.png` |
-| 한줄해석 | `one-line.png` |
-| 필생보 강의용 | `pilsaengbo-compare.png` (강사용·학생용 나란히) · `pilsaengbo.png` · `-summary` |
-| 필생보 독학용 | `pilsaengbo-book-principle.png` · `-book-toc` · `-book-cover` |
-| 형광펜 독해 | `highlighter.png` · `highlighter-guide.png` |
-| 통합 워크북 | `workbook-integrated.png` · `-en.png` |
-| 내신 서술형 워크북 | `workbook.png` |
-| 변형문제 | `variation.png` · `variation-answer.png` |
-| 동형모의고사 | `mock.png` · `mock-answer.png` |
+| 자료 | 예시 장수 | 파일 |
+| --- | --- | --- |
+| 지문자료 | 1 | `passage.png` |
+| 한줄해석 | 1 | `one-line.png` |
+| 지문분석지 | 6 | `analysis.png` · `-point` · `-flow` · `-blank` · `-vocatest` · `-guide` |
+| 필생보 강의용 | 3 | `pilsaengbo-compare.png` (강사용·학생용 나란히) · `pilsaengbo` · `-summary` |
+| 필생보 독학용 | 6 | `psb-solve.png` · `-answer` · `-predict` · `-paraphrase` · `-signal` · `-pace` |
+| 통합 워크북 | 2 | `workbook-integrated.png` · `-en` |
+| 서술형 대비 교재 | 1 | `workbook.png` |
+| 변형문제 6종 | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
+| 동형모의고사 | 5 | `mock.png` · `-paper` · `-teacher` · `-answer` · `-quick` |
+
+**표지와 목차는 넣지 않습니다.** 사는 사람이 궁금한 건 겉이 아니라 안입니다.
+실제로 푸는 지면, 해설 지면, 학생용 빈칸본처럼 **내용이 든 쪽**만 고릅니다.
 
 `PAIRS` 에 적어 두면 같은 쪽의 두 판본을 나란히 붙인 그림도 만듭니다.
 '강사용은 채워져 있고 학생용은 비어 있다' 는 글로 설명하기보다 나란히 놓는 편이

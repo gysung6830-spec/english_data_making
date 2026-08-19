@@ -184,7 +184,7 @@ def shot_crop(name: str, out: Path, width: int, ratio: float = 0.72) -> str:
     return out.name
 
 
-def autosize(make, width: int, pad: int, max_height: int = 6000) -> tuple[str, int]:
+def autosize(make, width: int, pad: int, max_height: int = 20000) -> tuple[str, int]:
     """내용 높이를 브라우저에 재게 하고 그 높이로 다시 그린다.
 
     make(height, tail) 은 본문 맨 끝에 tail 을 붙인 HTML 을 돌려준다.

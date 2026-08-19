@@ -22,7 +22,7 @@ OUT = HERE / "assets" / "samples"
 
 
 HEAD_CHARS = 200      # 첫 쪽 머리말로 볼 글자 수
-SCAN_PAGES = 8        # 본문 전체 검색에 쓸 앞쪽 쪽수
+SCAN_PAGES = 60       # marks 를 찾을 때 훑는 쪽수. 뒷장의 표시도 잡아야 한다
 
 
 class Shot:
@@ -52,29 +52,49 @@ SHOTS = [
     Shot("passage.png", 0, head=["지문 자료"], not_marks=["미국 시인인"], keep=0.62),
     # 한줄해석 — 문장 아래에 해석이 붙는다.
     Shot("one-line.png", 0, head=["지문 자료"], marks=["미국 시인인"], keep=0.62),
-    # 필생보 — 강사용(정답 표시)
+
+    # 지문분석지 — 본문 · 정리 · 학생용 빈칸 · 단어 TEST · 원문해석 · 활용 가이드
+    Shot("analysis.png", 1, head=["이 학습지 100% 활용법"], keep=0.9),
+    Shot("analysis-point.png", 2, head=["이 학습지 100% 활용법"], keep=0.86),
+    Shot("analysis-flow.png", 3, head=["이 학습지 100% 활용법"], keep=0.9),
+    Shot("analysis-blank.png", 6, head=["이 학습지 100% 활용법"], keep=0.9),
+    Shot("analysis-vocatest.png", 4, head=["이 학습지 100% 활용법"], keep=0.86),
+    Shot("analysis-guide.png", 0, head=["이 학습지 100% 활용법"], keep=0.86),
+
+    # 필생보 강의용 — 강사용 / 학생 문제지 / 글 정리
     Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
-    # 필생보 — 학생 문제지(빈칸 상태)
     Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
-    # 필생보 독학용 교재
-    Shot("pilsaengbo-book-cover.png", 0, head=["독해 훈련", "재진술"], keep=1.0),
-    Shot("pilsaengbo-book-toc.png", 1, marks=["이 책 사용법"], keep=0.86),
-    Shot("pilsaengbo-book-principle.png", 3, marks=["완급조절"], keep=0.86),
-    # 형광펜 독해 학습지
-    Shot("highlighter-guide.png", 0, head=["이 학습지 100% 활용법"], keep=0.86),
-    Shot("highlighter.png", 1, head=["이 학습지 100% 활용법"], keep=0.82),
+
+    # 필생보 독학용 — 표지·목차 말고 실제로 푸는 지면 위주
+    Shot("psb-solve.png", 15, marks=["한 문장씩 직접 풀기"], keep=0.9),
+    Shot("psb-answer.png", 17, marks=["끊어읽기 · 캐치"], keep=0.9),
+    Shot("psb-paraphrase.png", 7, marks=["재진술로 정답을 만든다"], keep=0.9),
+    Shot("psb-signal.png", 13, marks=["신호 사전"], keep=0.9),
+    Shot("psb-pace.png", 3, marks=["완급조절"], keep=0.9),
+    Shot("psb-predict.png", 19, marks=["해석 전 예측"], keep=0.9),
+
     # 통합 영어 워크북 — 한글 포함 / 제외
     Shot("workbook-integrated.png", 1, head=["한글 포함"], keep=0.82),
     Shot("workbook-integrated-en.png", 1, head=["한글 제외"], keep=0.82),
+
     # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
     Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
-    # 변형문제
-    Shot("variation.png", 0, head=["변형문제 1회"]),
-    Shot("variation-answer.png", 10, head=["변형문제 1회"]),
-    # 동형모의고사 — 학교 시험지 형식
-    Shot("mock.png", 0, head=["동형모의고사"], keep=0.86),
-    Shot("mock-answer.png", 4, head=["동형모의고사"], keep=0.82),
+
+    # 변형문제 — 1회 문제 · 교사용 · 해설 · 2회 · 3회 · 빠른정답
+    Shot("variation.png", 0, head=["변형문제 1회"], keep=0.86),
+    Shot("variation-teacher.png", 4, head=["변형문제 1회"], keep=0.86),
+    Shot("variation-answer.png", 10, head=["변형문제 1회"], keep=0.86),
+    Shot("variation-r2.png", 12, head=["변형문제 1회"], keep=0.86),
+    Shot("variation-r3.png", 19, head=["변형문제 1회"], keep=0.86),
+    Shot("variation-quick.png", 9, head=["변형문제 1회"], keep=0.7),
+
+    # 동형모의고사 — 시험지 · 문제 · 교사용 · 해설 · 빠른정답
+    Shot("mock.png", 0, head=["동형모의고사"], keep=0.9),
+    Shot("mock-paper.png", 1, head=["동형모의고사"], keep=0.9),
+    Shot("mock-teacher.png", 2, head=["동형모의고사"], keep=0.9),
+    Shot("mock-answer.png", 6, head=["동형모의고사"], keep=0.9),
+    Shot("mock-quick.png", 5, head=["동형모의고사"], keep=0.6),
 ]
 
 
