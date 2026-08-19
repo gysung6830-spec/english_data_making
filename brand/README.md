@@ -25,7 +25,7 @@ brand/
 | --- | --- |
 | 이름 | Ortica · 오르티카 영어 |
 | 콘셉트 | 필자의 생각이 보이는 영어 |
-| 소개 | 고등 모의고사 · 내신 · 수능자료 제작 |
+| 소개 | 고등 모의고사 · 내신 · 수능자료 제작 (글줄 없이 칩으로만) |
 
 *Ortica* 는 이탈리아어로 쐐기풀입니다. 로고는 톱니가 살아 있는 잎 한 장.
 
@@ -108,7 +108,7 @@ python brand/build.py all                   # 이미지 + 원고 전부
 | 고칠 것 | 고칠 파일 |
 | --- | --- |
 | 자료 이름·설명·구성·대상·가격·예시 연결 | `catalog.py` |
-| 브랜드명·콘셉트·소개 문구 | `build.py` 위쪽 `BRAND_KO`, `CONCEPT`, `TAGLINE`, `KEYWORDS` |
+| 브랜드명·콘셉트·소개 칩 | `build.py` 위쪽 `BRAND_KO`, `CONCEPT`, `KEYWORDS` |
 | 색 | `ortica_brand.py` 의 `PALETTE` |
 | 잎 모양(톱니 개수·깊이·비율) | `ortica_brand.py` 의 `leaf_path`, `logomark_svg` |
 

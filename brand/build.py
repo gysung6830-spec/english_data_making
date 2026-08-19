@@ -32,8 +32,8 @@ SAMPLES = OUT / "samples"
 
 BRAND_EN = "Ortica"
 BRAND_KO = "오르티카 영어"
-TAGLINE = "고등 모의고사 · 내신 · 수능자료 제작"
 CONCEPT = "필자의 생각이 보이는 영어"
+# 소개 문구는 글줄로 반복하지 않고 칩으로만 보여 준다.
 KEYWORDS = ["고등 모의고사", "내신", "수능자료 제작"]
 
 # 네이버 본문 폭에 맞춘 기본 가로.
@@ -183,10 +183,8 @@ def build_title(width: int, height: int, dark: bool = True) -> str:
       <div style="flex:1 1 auto;margin-left:{h * 0.085:.0f}px;
            padding-left:{h * 0.085:.0f}px;border-left:1px solid {t['rule']};
            display:flex;flex-direction:column;justify-content:center">
-        <div class="ko" style="font-size:{h * 0.075:.0f}px;color:{t['fg']}">{CONCEPT}</div>
-        <div class="sans" style="margin-top:{h * 0.028:.0f}px;font-size:{h * 0.050:.0f}px;
-             color:{t['muted']}">{TAGLINE}</div>
-        <div style="margin-top:{h * 0.045:.0f}px">{chips}</div>
+        <div class="ko" style="font-size:{h * 0.082:.0f}px;color:{t['fg']}">{CONCEPT}</div>
+        <div style="margin-top:{h * 0.060:.0f}px">{chips}</div>
       </div>
     </div>"""
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
@@ -205,10 +203,8 @@ def build_cover(width: int, height: int, dark: bool = True) -> str:
            color:{t['accent']};letter-spacing:.14em">{BRAND_KO}</div>
       <div style="width:{h * 0.11:.0f}px;height:2px;background:{P['gold']};
            margin:{h * 0.038:.0f}px auto"></div>
-      <div class="ko" style="font-size:{h * 0.048:.0f}px;color:{t['fg']}">{CONCEPT}</div>
-      <div class="sans" style="margin-top:{h * 0.022:.0f}px;font-size:{h * 0.032:.0f}px;
-           color:{t['muted']}">{TAGLINE}</div>
-      <div style="margin-top:{h * 0.045:.0f}px">{chips}</div>
+      <div class="ko" style="font-size:{h * 0.050:.0f}px;color:{t['fg']}">{CONCEPT}</div>
+      <div style="margin-top:{h * 0.050:.0f}px">{chips}</div>
     </div>"""
     return page(stage(inner, dark=dark, w=width, h=height), CSS, width, height)
 
@@ -303,7 +299,7 @@ def build_hero(item, width: int, height: int, dark: bool = True) -> str:
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div>{chip(item.no, t, u * 1.9)}</div>
         <div class="sans" style="font-size:{u * 1.7:.0f}px;color:{t['muted']};
-             letter-spacing:.08em">{TAGLINE}</div>
+             letter-spacing:.08em">{CONCEPT}</div>
       </div>
       <div>
         <div style="width:{u * 10:.0f}px;line-height:0;margin-bottom:{u * 3:.0f}px">
