@@ -43,37 +43,38 @@ DOC_W = 900
 # 라인업 아래에 붙는 차별화 포인트. 자료 자체의 설명이 아니라
 # "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적는다.
 EDGE_READ = [
-    ("틀리는 길을 먼저 보여 준다",
-     "필생보는 문장마다 '이렇게 읽으면 오답'을 답니다. 정답 해석만 주는 자료와 "
-     "가장 크게 갈리는 자리입니다."),
-    ("문장 번호가 자료를 관통한다",
-     "세 자료가 같은 번호를 씁니다. '7번 문장'이라고만 하면 학생이 어느 자료를 "
-     "펴고 있든 같은 자리를 봅니다."),
-    ("재진술 사슬을 번호로",
-     "같은 소재가 지문에서 어떻게 말을 바꿔 다시 나오는지 잇습니다. 흑백으로 "
-     "뽑아도 번호로 구분됩니다."),
+    ("무슨 글인지 알고 시작한다",
+     "지문 위에 요지 한 줄이 먼저 옵니다. 영어만 덩그러니 있는 원문과 다릅니다."),
+    ("끊어읽기와 해석이 1:1",
+     "영어 끊어읽기와 한글 해석의 위치를 정확히 맞췄습니다. 대충 끊은 자료와 "
+     "차원이 다릅니다."),
+    ("시중에 없는 함축의미 카드",
+     "직역하면 놓치는 맥락을 콕 집어 줍니다. 빈칸추론·함축추론을 정면으로 "
+     "대비합니다."),
+]
+
+EDGE_SIGN = [
+    ("손으로 푸는 훈련서",
+     "끊어읽기 빈칸을 직접 채우고 '이렇게 읽으면 오답'으로 자기 오독을 잡습니다. "
+     "눈으로 읽고 넘기는 자료가 아닙니다."),
+    ("재진술을 눈으로 확인",
+     "같은 개념이 어떻게 바뀌어 반복되는지 형광펜으로 시각화합니다. "
+     "빈칸·함의·요지의 뿌리입니다."),
+    ("강의용과 독학용을 따로",
+     "앞에서 설명하며 쓰는 판과 혼자 앉아 보는 판은 지면부터 달라야 합니다. "
+     "독학용에는 독해 원리 12쪽이 앞에 붙습니다."),
 ]
 
 EDGE_EXAM = [
-    ("오답에 이름을 붙인다",
-     "무관 · 부분 · 모순 · 지엽. 틀렸다고만 하지 않고 어떻게 틀렸는지를 "
-     "알려 줍니다. 학생이 오답 패턴 자체를 배웁니다."),
-    ("같은 문장을 하·중·상으로",
-     "조건 영작의 제시어 개수를 세 단계로 냅니다. 한 반에 실력 차가 있어도 "
-     "같은 문장을 같이 시킬 수 있습니다."),
-    ("학생용·교사용이 한 파일에",
-     "교사용을 띄워 수업하고 빠른 정답으로 즉시 채점합니다. 파일을 여러 개 "
-     "받아 관리할 필요가 없습니다."),
-]
-
-EDGE_BOOK = [
-    ("감이 아니라 규칙으로",
-     "그을 자리, 끊을 자리를 먼저 정하고 반복시킵니다. '잘 읽어라'로 끝내지 "
-     "않습니다."),
-    ("기출 문장으로만",
-     "설명을 위해 만든 예문이 아니라 실제 시험에 나온 문장으로 확인합니다."),
-    ("수업에서 고친 판본",
-     "학생이 막힌 자리를 보고 고쳤습니다. 책상에서 설계만 한 교재가 아닙니다."),
+    ("남들이 안 다루는 대명사 지칭",
+     "it·they·this 가 무엇을 가리키는지 짚는 문항을 넣었습니다. 독해력의 실제 "
+     "승부처를 그냥 넘어가지 않습니다."),
+    ("오답을 평가원식 5축으로 설계",
+     "범위·방향·표면 어휘·근거 없음·초점 이동. 한 끗 차이 매력적 오답을 넣어 "
+     "소거법이 통하지 않습니다."),
+    ("우리 학교 동형",
+     "시중 문제집의 남의 시험이 아닙니다. 실제 시험지의 유형·배점·난이도·"
+     "레이아웃을 그대로 재현합니다."),
 ]
 
 CSS = f"""
@@ -441,7 +442,7 @@ def build_lineup(width: int, items, *, heading: str, caption: str,
         edge_el = f"""<div style="margin-top:{u * 4:.0f}px;padding-top:{u * 3.4:.0f}px;
           border-top:1px solid {t['line']}">
           <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
-               margin-bottom:{u * 2.0:.0f}px">이 세 가지가 다른 점</div>
+               margin-bottom:{u * 2.0:.0f}px">{"이 셋이" if len(edge) == 3 else "이 자료가"} 다른 점</div>
           <div style="display:flex;gap:{u * 1.8:.0f}px">{cards}</div>
         </div>"""
 
@@ -739,35 +740,35 @@ def write_posts() -> list[Path]:
 
     (POSTS / "00-lineup.md").write_text(f"""# 자료 라인업
 
-## 지문 한 장을 세 번 만납니다 (01 — 03)
+## 읽는 자료 (01 — 03)
 
-{img('lineup-materials-1.png')}
+{img('lineup-1-read.png')}
 
 {rows_of(MATERIALS[:3])}
 
-### 이 세 가지가 다른 점
+### 이 셋이 다른 점
 
 {edge_of(EDGE_READ)}
 
-## 그 다음은 시험장입니다 (04 — 06)
+## 간판 자료 — 필생보 (04 — 05)
 
-{img('lineup-materials-2.png')}
+{img('lineup-2-pilsaengbo.png')}
 
-{rows_of(MATERIALS[3:])}
+{rows_of(MATERIALS[3:5])}
 
-### 이 세 가지가 다른 점
+### 이 셋이 다른 점
+
+{edge_of(EDGE_SIGN)}
+
+## 쓰는 자료 (06 — 09)
+
+{img('lineup-3-write.png')}
+
+{rows_of(MATERIALS[5:])}
+
+### 이 셋이 다른 점
 
 {edge_of(EDGE_EXAM)}
-
-# 제작 교재 · 고3
-
-{img('lineup-books.png')}
-
-{rows_of(BOOKS)}
-
-### 이 세 가지가 다른 점
-
-{edge_of(EDGE_BOOK)}
 
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")
@@ -876,29 +877,38 @@ def build_all() -> list[Path]:
 
     print("라인업")
     html, h = build_lineup(
-        DOC_W, MATERIALS[:4],
-        kicker="01 — 04  ·  읽는 자료",
-        heading="같은 지문을 네 번 읽힙니다",
-        caption="원문으로 한 번, 해석으로 한 번, 문장마다 뜯어서 또 한 번, "
-                "색으로 그으며 다시 한 번. 네 자료가 같은 문장 번호를 씁니다.",
-        edge=EDGE_READ)
-    emit(made, "lineup-materials-1.png", html, DOC_W, h)
+        DOC_W, MATERIALS[:3],
+        kicker="01 — 03  ·  읽는 자료",
+        heading="같은 지문을 세 번 읽힙니다",
+        caption="원문으로 한 번, 해석으로 한 번, 끊어읽기와 함축까지 뜯어서 또 한 번. "
+                "세 자료가 같은 문장 번호를 씁니다.",
+        edge=EDGE_READ, dark=False)
+    emit(made, "lineup-1-read.png", html, DOC_W, h)
 
     html, h = build_lineup(
-        DOC_W, MATERIALS[4:],
-        kicker="05 — 08  ·  쓰는 자료",
+        DOC_W, MATERIALS[3:5],
+        kicker="04 — 05  ·  간판 자료",
+        heading="필생보 — 필자의 생각이 보이는 영어독해",
+        caption="해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
+                "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
+        edge=EDGE_SIGN)
+    emit(made, "lineup-2-pilsaengbo.png", html, DOC_W, h)
+
+    html, h = build_lineup(
+        DOC_W, MATERIALS[5:],
+        kicker="06 — 09  ·  쓰는 자료",
         heading="그 다음은 손으로 씁니다",
         caption="읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. "
-                "겹쳐서 묻고, 서술형으로 쓰게 하고, 변형해서 확인하고, 시간을 재며 한 회차를 돌립니다.",
+                "겹쳐서 묻고, 서술형으로 쓰게 하고, 변형해서 확인하고, "
+                "우리 학교 시험지로 한 회차를 돌립니다.",
         edge=EDGE_EXAM, dark=False)
-    emit(made, "lineup-materials-2.png", html, DOC_W, h)
+    emit(made, "lineup-3-write.png", html, DOC_W, h)
 
     html, h = build_lineup(
         DOC_W, BOOKS,
         kicker="교재",
         heading="제작 교재 · 고3",
-        caption="수업에서 직접 쓰면서 다듬은 교재입니다. 고3과 N수생을 기준으로 만들었습니다.",
-        edge=EDGE_BOOK)
+        caption="아직 실물을 못 본 자료입니다. PDF 를 받으면 위 목록으로 옮깁니다.")
     emit(made, "lineup-books.png", html, DOC_W, h)
 
     print("상세페이지")
