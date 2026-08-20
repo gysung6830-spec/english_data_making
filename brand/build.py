@@ -582,16 +582,17 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         """
         head, desc, *rest = pt
         # 왼쪽에 지면, 오른쪽에 말. 눈이 사진에서 설명으로 바로 건너간다.
-        col_w = int((width - u * 13 - u * 3) * 0.46)
+        col_w = int((width - u * 13 - u * 3) * 0.62)
         names = [c for c in (rest[0].split("|") if rest and rest[0] else [])]
         crops = "".join(
             f'<div style="margin-top:{u * 1.2 if i else 0:.0f}px">'
             f'{crop_img(c, col_w, fill=True)}</div>'
             for i, c in enumerate(names) if crop_img(c, col_w))
-        text = f"""<div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['fg']};
-               line-height:1.45;word-break:keep-all">{head}</div>
-          <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.9:.0f}px;
-               color:{t['muted']};line-height:1.72;word-break:keep-all">{desc}</div>"""
+        # 사진을 키우려고 글자를 줄였다. 포인트는 짚어 주는 말이라 작아도 읽힌다.
+        text = f"""<div class="ko" style="font-size:{u * 2.05:.0f}px;color:{t['fg']};
+               line-height:1.42;word-break:keep-all">{head}</div>
+          <div class="sans" style="margin-top:{u * .8:.0f}px;font-size:{u * 1.6:.0f}px;
+               color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>"""
         if not crops:
             return f'<div style="margin-top:{u * 3.4:.0f}px">{text}</div>'
         return f"""<div style="margin-top:{u * 3.4:.0f}px;display:flex;
