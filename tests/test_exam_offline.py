@@ -1136,16 +1136,20 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     def _fresh():
         return build_passages_merged(_FakeClient(), ["b1", "b2"])
 
+    _i = {t: i + 1 for i, t in enumerate(MERGED_ORDER)}   # 유형 → 지문 내 문항 번호
     ps = _fresh()
-    ps[0].flag(MERGED_ORDER[0], [review.FIX_ORDER])      # 1번(주제)
-    ps[0].flag(MERGED_ORDER[5], ["오답 근거 약함: …"])      # 6번(어법)
-    ps[1].flag(MERGED_ORDER[10], [review.FIX_SNAP])      # 22번(서술형)
+    ps[0].flag("topic", [review.FIX_ORDER])
+    ps[0].flag("grammar", ["오답 근거 약함: …"])
+    ps[1].flag("short_answer", [review.FIX_SNAP])         # 둘째 지문 → +11번
     items = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
                                     labels=MERGED_LABELS)
     by_no = {it["no"]: it for it in items}
-    assert review.FIX_ORDER in by_no[1]["reasons"] and by_no[1]["label"] == "주제"
-    assert "오답 근거 약함: …" in by_no[6]["reasons"] and by_no[6]["label"] == "어법"
-    assert review.FIX_SNAP in by_no[22]["reasons"] and by_no[22]["label"] == "서술형"
+    assert review.FIX_ORDER in by_no[_i["topic"]]["reasons"]
+    assert "오답 근거 약함: …" in by_no[_i["grammar"]]["reasons"]
+    assert by_no[_i["grammar"]]["label"] == "어법"
+    n_short = _i["short_answer"] + len(MERGED_ORDER)      # 둘째 지문의 서술형
+    assert review.FIX_SNAP in by_no[n_short]["reasons"]
+    assert by_no[n_short]["label"] == "서술형"
     assert max(by_no) == 22, sorted(by_no)          # 지문 2개 × 11문항
 
     # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
@@ -1165,8 +1169,8 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
                                    labels=MERGED_LABELS) == []
 
     # 6) 합본(render_pdf_multi): 여러 파트의 권장 문항을 '단 한 장'으로 모은다
-    p1 = _fresh(); p1[0].flag(MERGED_ORDER[0], [review.FIX_ORDER])
-    p2 = _fresh(); p2[0].flag(MERGED_ORDER[5], ["오답 근거 약함"])
+    p1 = _fresh(); p1[0].flag("topic", [review.FIX_ORDER])
+    p2 = _fresh(); p2[0].flag("grammar", ["오답 근거 약함"])
     parts = [
         {"passages": p1, "header_note": "변형문제 · 난이도 중",
          "sections": ["teacher", "answers"], **_M},
@@ -1619,6 +1623,10 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert set(TYPE_ORDER) | set(TYPE_ORDER2) == set(MERGED_ORDER) | set(EXCLUDED)
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
+    # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
+    assert MERGED_ORDER == ("topic", "B", "content", "grammar", "vocab", "F",
+                            "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
+    assert MERGED_ORDER[-2:] == ("D", "short_answer")       # 서술형 계열은 맨 뒤
     # 뺀 유형은 '대신할 유형'이 통합본 안에 실제로 있어야 한다(능력 공백 없음)
     for gone, kept in EXCLUDED.items():
         assert kept in MERGED_ORDER, (gone, kept)
