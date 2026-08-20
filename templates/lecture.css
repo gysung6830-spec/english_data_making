@@ -263,3 +263,10 @@ mark.hl1 .hln{ color:#1f4e8a; }
 .fb-ex-lab{ display:inline-block; background:#efeafd; color:var(--indigo); font-weight:700;
   border-radius:6px; padding:0 7px; margin-right:6px; font-size:8pt; }
 .fb-arr{ text-align:center; color:var(--indigo); font-size:8.5pt; margin:0; line-height:1.1; }
+
+/* 오역 팁 — '이렇게 읽으면 안 돼' (③ 끊어읽기 보조) */
+.mistip{ font-size:9pt; color:#6b5636; background:#fff7ec; border:1px solid #f0d9b5;
+  border-left:4px solid #e0912f; border-radius:0 8px 8px 0; padding:5px 11px; margin:5px 0 0; line-height:1.52; }
+.mt-chip{ display:inline-block; background:#e0912f; color:#fff; font-weight:700; font-size:8pt;
+  border-radius:9px; padding:1px 9px; margin-right:6px; white-space:nowrap; }
+.mistip b{ color:#a85b12; }

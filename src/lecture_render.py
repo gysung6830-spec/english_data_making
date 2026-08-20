@@ -58,6 +58,13 @@ def _mark_en(text: str) -> Markup:
     return escape(_MARK.sub(lambda m: m.group(1), text or ""))
 
 
+def _mark_tip(text: str) -> Markup:
+    """오역 팁: 텍스트는 escape 하고 [[ ]] 부분만 <b>로 강조(en/ko 혼용 안전)."""
+    esc = str(escape(text or ""))
+    esc = _MARK.sub(lambda m: f"<b>{m.group(1)}</b>", esc)
+    return Markup(esc)
+
+
 def _mark_ko(text: str, teacher: bool) -> Markup:
     """[[...]] 부분을 학생용=빈칸 / 강사용=채워진 강조 로 표시(ko)."""
     out, last = [], 0
@@ -160,6 +167,7 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "grammar": [{"tag": g.tag, "note": g.note} for g in s.grammar],
             "chunks": chunks,
             "misreads": [{"statement": m.statement, "why": m.why} for m in s.misreads],
+            "mistips": [_mark_tip(t) for t in getattr(s, "mistips", [])],
         })
 
     return {

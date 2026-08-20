@@ -142,6 +142,8 @@ class SentenceItem(BaseModel):
     chunks: list[Chunk]           # ② 끊어읽기([[ ]]로 오역 위험 단어 빈칸)
     # 내용 확인: '이렇게 읽으면 오답(X)' 1~2개 → 왜 X인지 찾기
     misreads: list[Misread] = Field(min_length=1, max_length=2)
+    # 오역 팁: '💡 이렇게 읽으면 안 돼' 한 줄(구문 오독만, 0~2개). 핵심어는 [[ ]]로 굵게.
+    mistips: list[str] = Field(default_factory=list, max_length=2)
 
     @field_validator("chunks")
     @classmethod
