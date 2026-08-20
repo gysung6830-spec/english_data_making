@@ -495,8 +495,8 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
               읽고 · 뜯어보고<br>시험에 나올 문제만 풉니다</div>
             <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
                  color:{head_t['muted']};line-height:1.75;word-break:keep-all">
-              지문 한 편에 자료 여덟 종이 붙습니다. 무슨 글인지 알게 하는 것부터
-              시험지 한 회차까지, 자료끼리 문장 번호가 같아 이어 붙여도 수업이
+              자료를 찾아 헤매던 것은 여기서 끝내셔도 됩니다. 한 지문에 여덟 종이
+              다 붙어 있고, 자료끼리 문장 번호가 같아 무엇을 이어 붙여도 수업이
               끊기지 않습니다.
               <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
           </div>
@@ -801,8 +801,8 @@ def write_posts() -> list[Path]:
 
 {img('lineup-1-read.png')}
 
-지문 한 편에 자료 여덟 종이 붙습니다. 무슨 글인지 알게 하는 것부터 시험지 한
-회차까지, 자료끼리 문장 번호가 같아 이어 붙여도 수업이 끊기지 않습니다.
+자료를 찾아 헤매던 것은 여기서 끝내셔도 됩니다. 한 지문에 여덟 종이 다 붙어
+있고, 자료끼리 문장 번호가 같아 무엇을 이어 붙여도 수업이 끊기지 않습니다.
 자료 한 종씩 자세히 보시려면 각 상세페이지 글로 가시면 됩니다.
 
 ## 지문 이해 (01 — 02)
