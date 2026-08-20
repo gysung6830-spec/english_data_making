@@ -445,7 +445,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
 # PDF 를 받으면 여기 한 줄만 다시 넣으면 된다.
 def lineup_sections():
     return [
-        ("01 — 02  ·  읽는 자료", "지문을 읽고, 뜯어봅니다",
+        ("01 — 02  ·  지문 이해", "무슨 글인지부터 알게 합니다",
          "지문자료는 판형만 고르시면 되는 기본 자료입니다. 해석까지 붙여도 "
          "무슨 말인지 모르겠다는 학생에게는 지문분석지를 쓰시면 됩니다.",
          MATERIALS[:2], False),
@@ -454,9 +454,9 @@ def lineup_sections():
          "손으로 채우면서 보게 만든 자료입니다. 수업에서 쓰실 것은 강의용, "
          "혼자 볼 것은 독학용입니다.",
          MATERIALS[2:4], True),
-        ("05 — 08  ·  쓰는 자료", "그 다음은 손으로 씁니다",
-         "읽어서 아는 것과 시험장에서 쓰는 것은 다릅니다. 한 지문을 겹쳐서 묻고, "
-         "서술형으로 쓰게 하고, 변형문제로 확인한 뒤, 시험지 한 회차를 돌립니다.",
+        ("05 — 08  ·  시험 대비", "시험에 나오는 형태로 풀립니다",
+         "아는 것과 시험장에서 맞히는 것은 다릅니다. 한 지문을 여러 각도로 묻고, "
+         "서술형으로 대비하고, 변형문제로 확인한 뒤, 시험지 한 회차를 돌립니다.",
          MATERIALS[4:], False),
     ]
 
@@ -492,11 +492,12 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
                  letter-spacing:.12em">자료 라인업</div>
             <div class="ko" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 5.6:.0f}px;
                  color:{head_t['fg']};line-height:1.32;word-break:keep-all">
-              읽고 · 뜯어보고 · 손으로 씁니다</div>
+              지문 하나로 시험까지 갑니다</div>
             <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
                  color:{head_t['muted']};line-height:1.75;word-break:keep-all">
-              지문 한 편을 여덟 가지로 씁니다. 자료끼리 문장 번호가 같아서 무엇을 붙여
-              써도 수업이 끊기지 않고, 학생도 자료를 바꿀 때마다 헤매지 않습니다.
+              지문 한 편에 자료 여덟 종이 붙습니다. 자료끼리 문장 번호가 같아서
+              무엇을 이어 붙여도 수업이 끊기지 않고, 학생도 자료를 바꿀 때마다
+              헤매지 않습니다.
               <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
           </div>
         </div>""")
@@ -800,11 +801,11 @@ def write_posts() -> list[Path]:
 
 {img('lineup-1-read.png')}
 
-지문 한 편을 여덟 가지로 씁니다. 자료끼리 문장 번호가 같아서 무엇을 붙여 써도
-수업이 끊기지 않습니다. 자료 한 종씩 자세히 보시려면 각 상세페이지 글로 가시면
-됩니다.
+지문 한 편에 자료 여덟 종이 붙습니다. 자료끼리 문장 번호가 같아서 무엇을 이어
+붙여도 수업이 끊기지 않습니다. 자료 한 종씩 자세히 보시려면 각 상세페이지 글로
+가시면 됩니다.
 
-## 읽는 자료 (01 — 02)
+## 지문 이해 (01 — 02)
 
 {rows_of(MATERIALS[:2])}
 
@@ -814,7 +815,7 @@ def write_posts() -> list[Path]:
 
 {rows_of(MATERIALS[2:4])}
 
-## 쓰는 자료 (05 — 08)
+## 시험 대비 (05 — 08)
 
 {img('lineup-3-write.png')}
 
