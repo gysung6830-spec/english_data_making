@@ -164,6 +164,11 @@ def shoot(src: Path, dpi: int = 130, only: str = "") -> list[Path]:
 CROPS = [
     # (원본 samples 파일, 저장 이름, (x0, y0, x1, y1))
 
+    # 01 지문자료 — 판형 셋. 지면 위쪽만 봐도 배치 차이가 드러난다
+    ("passage.png", "c-pass-plain.png", (0.03, 0.055, 0.97, 0.44)),
+    ("one-line.png", "c-pass-stack.png", (0.03, 0.055, 0.97, 0.44)),
+    ("one-line-2col.png", "c-pass-2col.png", (0.03, 0.055, 0.97, 0.44)),
+
     # 02 지문분석지
     ("analysis.png", "c-analysis-easy.png", (0.05, 0.100, 0.95, 0.170)),
     ("analysis.png", "c-analysis-point.png", (0.66, 0.664, 0.96, 0.730)),
