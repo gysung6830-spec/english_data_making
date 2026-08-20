@@ -639,20 +639,10 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     name_px = u * (7.0 if item.signature else 5.4)
 
-    # 형태·구성·배포. 살까 말까 재는 사람이 마지막에 확인하는 것들이라 맨 아래.
+    # 형태·구성·배포는 이미지에 넣지 않는다. PDF·즉시 다운로드처럼 자료마다
+    # 똑같은 줄이 장마다 반복되면 아래쪽이 안 읽힌다. catalog 의 spec 은 그대로
+    # 두어 원고 초안(posts/*.md)에는 계속 들어간다.
     spec_el = ""
-    if item.spec:
-        spec_el = "".join(f"""<div style="display:flex;padding:{u * 1.6:.0f}px 0;
-          border-top:1px solid {t['line']}">
-          <div class="sans" style="flex:0 0 {u * 18:.0f}px;font-size:{u * 1.8:.0f}px;
-               color:{t['accent']};letter-spacing:.04em">{k}</div>
-          <div class="sans" style="flex:1 1 auto;font-size:{u * 1.95:.0f}px;color:{t['fg']};
-               line-height:1.6;word-break:keep-all">{v}</div>
-        </div>""" for k, v in item.spec)
-        spec_el = f"""<div style="margin-top:{u * 4:.0f}px">
-          <div class="ko" style="font-size:{u * 2.3:.0f}px;color:{t['fg']};
-               margin-bottom:{u * .8:.0f}px">자료 안내</div>{spec_el}
-        </div>"""
 
     who_el = ""
     if item.who:
