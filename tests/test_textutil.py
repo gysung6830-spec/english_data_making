@@ -144,6 +144,23 @@ def test_format_qno():
     _check("힌트의 서술형 감지", format_qno("", "Unit 10 - 서술형") == "서술형")
 
 
+def test_source_prefix():
+    from src.textutil import source_prefix
+    # 교재명만 남기고 문항번호와 겹치는 단원/문항 토큰은 제거(뱃지 '교재명 10-1' 중복 방지)
+    _check("Unit 토큰 제거", source_prefix("올림포스 독해 Unit 10") == "올림포스 독해")
+    _check("Ch.·Unit 동시 제거", source_prefix("Ch. 04 Unit 10 올림포스") == "올림포스")
+    _check("'출처:' 접두 제거", source_prefix("출처: EBS 수능특강") == "EBS 수능특강")
+    _check("10-1 토큰 제거", source_prefix("자이스토리 10-1") == "자이스토리")
+    _check("N과·N번 제거", source_prefix("리딩튜터 3과 30번") == "리딩튜터")
+    _check("빈 출처 → 빈 문자열", source_prefix("") == "")
+    _check("순수 교재명 유지", source_prefix("EBS 수능특강 영어독해") == "EBS 수능특강 영어독해")
+    # 실제 조합: 교재명 + 문항번호 (교재명이 앞)
+    from src.textutil import format_qno
+    pref = source_prefix("올림포스 독해 Unit 10")
+    qno = format_qno("1번", "Ch. 04 Unit 10")
+    _check("교재명 + 문항번호 조합", f"{pref} {qno}".strip() == "올림포스 독해 10-1")
+
+
 def test_shuffle_order_display():
     from src.textutil import shuffle_order_display
     # 정답 어순 그대로 들어와도 '정답과 다르게' 섞임(여러 번 반복해 확률적 실패 방지)
@@ -167,5 +184,6 @@ if __name__ == "__main__":
     test_shuffle_choices()
     test_format_qno()
     test_shuffle_order_display()
+    test_source_prefix()
     test_strip_form_leftover()
     print("\n문장 분리/프롬프트 삽입 오프라인 테스트 통과 ✅")

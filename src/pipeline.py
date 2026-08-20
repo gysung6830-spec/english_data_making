@@ -100,7 +100,7 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
 
     지문 추출을 1회만 수행해 통합 워크북 · 단일 유형 산문 워크시트 · 빈칸형 · 영작을 함께 생성한다.
     """
-    from .textutil import qno_label, format_qno
+    from .textutil import qno_label, format_qno, source_prefix
 
     wbs: list[Workbook] = []
     packs: list[prose_render.ProsePack] = []
@@ -111,9 +111,11 @@ def build_workbook_bundle_for_pdf(client: ClaudeClient, cfg: Config, src: Path):
         #  · 번호는 LLM 추출(q_no) 1순위, 없으면 파일명 파싱, 그래도 없으면 지문 순서(i+1)
         #  · 파일명 접두는 호출부(webapp/CLI)가 apply_q_numbers 로 붙인다
         topic = (ex.topic_ko or "").strip() or ex.title
-        #  · 라벨은 '단원-문항' 형식(예: 10-A, 10-1). LLM q_no + 제목/출처의 단원번호로 조합.
+        #  · 라벨은 '교재명 + 단원-문항' 형식(예: '올림포스 독해 10-1'). 교재명(출처)을 문항번호 앞에.
         qno = (format_qno(ex.q_no, ex.title, ex.source, ex.topic_ko)
                or qno_label(ex.source) or qno_label(src.name) or f"{i + 1}번")
+        pref = source_prefix(ex.source)
+        qno = f"{pref} {qno}".strip() if pref else qno
         wb = workbook_generate.generate_workbook(client, cfg, ex)
         wb.title = topic; wb.label = qno
         pk = prose_generate.generate_prose_pack(client, cfg, ex, header=ex.title)

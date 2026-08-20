@@ -330,3 +330,30 @@ def file_tag(name: str, maxlen: int = 16) -> str:
     if len(base) > maxlen:
         base = base[:maxlen].rstrip(" _-") + "…"
     return base
+
+
+def source_prefix(source: str, maxlen: int = 24) -> str:
+    """출처(교재명)를 뱃지의 문항번호 '앞'에 붙일 짧은 이름으로 정리한다.
+
+    문항번호와 겹치는 단원/문항 토큰(Ch. 04, Unit 10, 10과, 10-1, 30번, 문항 30)은 제거해
+    '올림포스 Unit 10' + '10-1' → '올림포스 10-1' 처럼 중복 없이 나오게 한다.
+    예) '올림포스 독해 Unit 10' → '올림포스 독해',  '출처: EBS 수능특강' → 'EBS 수능특강'.
+    교재명을 못 찾으면 빈 문자열(→ 뱃지는 문항번호만)."""
+    s = (source or "").strip()
+    if not s:
+        return ""
+    base = _UUID_PREFIX.sub("", s)
+    base = re.sub(r'\.[A-Za-z0-9]{1,5}$', "", base)          # 확장자
+    base = re.sub(r'^\s*출처\s*[:：]?\s*', "", base)          # '출처:' 접두
+    base = re.sub(r'[Cc]h\.?\s*0*\d+', " ", base)            # Ch. 04
+    base = re.sub(r'[Uu]nit\s*0*\d+', " ", base)             # Unit 10
+    base = re.sub(r'\d+\s*과', " ", base)                    # 10과
+    base = re.sub(r'\b\d+\s*-\s*[0-9A-Za-z]+\b', " ", base)  # 10-1, 10-A
+    base = re.sub(r'문항\s*\d+', " ", base)                  # 문항 30
+    base = re.sub(r'(?<![A-Za-z])\d+\s*번', " ", base)       # 30번
+    base = re.sub(r'[\[\]()<>]', " ", base)                  # 괄호류
+    base = re.sub(r'\s*[,·]\s*', " ", base)                  # 쉼표·가운뎃점
+    base = re.sub(r'\s+', " ", base).strip(" _-,·")
+    if len(base) > maxlen:
+        base = base[:maxlen].rstrip(" _-") + "…"
+    return base
