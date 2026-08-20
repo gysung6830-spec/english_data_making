@@ -204,8 +204,7 @@ CROPS = [
     ("pilsaengbo-student.png", "c-psbc-blank.png", (0.07, 0.172, 0.93, 0.232)),
     ("pilsaengbo-student.png", "c-psbc-wrong.png", (0.07, 0.232, 0.93, 0.328)),
     ("pilsaengbo-student.png", "c-psbc-circle.png", (0.08, 0.138, 0.70, 0.182)),
-    ("pilsaengbo-grammar.png", "h-psbc-gram.png", (0.04, 0.042, 0.96, 0.318)),
-    ("pilsaengbo-grammar.png", "h-psbc-gram2.png", (0.04, 0.322, 0.96, 0.762)),
+    ("pilsaengbo-grammar.png", "c-psbc-gram-write.png", (0.04, 0.612, 0.96, 0.765)),
     ("pilsaengbo.png", "c-psbc-filled.png", (0.07, 0.168, 0.93, 0.228)),
 
     # 04 필생보 독학용
