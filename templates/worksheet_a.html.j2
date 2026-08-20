@@ -13,7 +13,7 @@
     --yellow-hl:#fbed9c; --green-hl:#dcecc4; --purple-hl:#e0daf1;
     --page-bg:#edf1ec; --line:#d3dcd3; --box-red:#e2b6b1; --tmi-line:#d7ddd6;
   }
-  @page{ size:A4 portrait; margin:10mm 9mm; }
+  @page{ size:A4 portrait; margin:6mm 6mm; }   /* 학원 인쇄용: 상하좌우 여백 최소화 */
   *{ box-sizing:border-box; }
   html,body{ margin:0; padding:0; }
   /* 한글·영문 '동일 글꼴' 보장: 임베드한 나눔스퀘어라운드만 쓰고, 없을 때만 generic sans.
@@ -23,7 +23,7 @@
     font-family:'NanumSquareRound',sans-serif;
     color:var(--ink); font-size:13px; line-height:1.5; font-weight:400;
   }
-  .page{ background:var(--page-bg); border-radius:22px; padding:20px 22px 30px; position:relative;
+  .page{ background:var(--page-bg); border-radius:18px; padding:15px 18px 16px; position:relative;
          page-break-after:always; }
   .page:last-child{ page-break-after:auto; }
 
@@ -173,6 +173,17 @@
   .page.compact .pbox{ font-size:10px; padding:0 9px 6px; }
   .page.compact .pbox .cap{ font-size:9.5px; padding:2px 8px; margin:6px 0 4px; }
   .page.compact .pbox .gn{ font-size:11.5px; }
+  /* roomy(13px): 짧은 지문을 크게 키워 페이지 하단 여백을 채운다(학원 인쇄용 밀도). */
+  .page.roomy .en .line{ margin-bottom:8px; }
+  .page.roomy .tok .w{ font-size:13px; line-height:1.62; }
+  .page.roomy .kotr{ margin-top:12px; font-size:13px; line-height:1.65; }
+  .page.roomy .rdko{ margin-top:10px; font-size:13px; line-height:2.05; }
+  .page.roomy .num{ font-size:13px; }
+  .page.roomy .gloss{ font-size:12px; }
+  .page.roomy .summary .stx{ font-size:13px; line-height:1.55; }
+  .page.roomy .pbox{ font-size:12px; }
+  .page.roomy .pbox .cap{ font-size:10.5px; }
+  .page.roomy .pbox .gn{ font-size:13px; }
   /* 뒷면(정리): 원문·전체해석 + 어휘 + 논리흐름 — '읽기 좋은' 고정 크기(작다는 피드백 반영해 확대).
      내용이 많으면 자연 분할로 2쪽이 되며, 섹션 분할을 허용해 첫 쪽부터 꽉 채운다. */
   .page.compact .bhead{ margin-bottom:12px; }
@@ -464,7 +475,7 @@
 {% for a in analyses %}
   {% if only_front or not _only %}
   {%- set fd = a.front_density -%}
-  <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
+  <div class="page{% if fd == 'compact' %} compact{% elif fd == 'ultra' %} compact ultra{% elif fd == 'roomy' %} roomy{% elif not fd and compact %} compact{% endif %}{% if boxmode %} bx-{{ boxmode }}{% endif %}">
     <div class="head">
       <div class="ribbon">
         <div class="no">{{ a.lecture_label or '★' }}</div>

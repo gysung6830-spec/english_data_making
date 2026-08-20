@@ -528,15 +528,18 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
         out_path.parent.mkdir(parents=True, exist_ok=True)
         with open(out_path, "wb") as f:
             w.write(f)
-    _stamp_footer(out_path, footer_note)   # 합본 완성 후 저작권(좌)·페이지번호(우) 스탬프
+    # 교재명·단원(모의고사면 시행연월·학년) — 여러 자료 병행 수업 현장에서 페이지마다 출처 표기.
+    meta = next((a.source_name for a in analyses if getattr(a, "source_name", "")), "")
+    _stamp_footer(out_path, footer_note, meta)   # 저작권(좌)·교재명(중앙)·페이지번호(우)
     return out_path
 
 
-def _stamp_footer(path: Path, footer_note: str = "") -> None:
-    """완성된 PDF 하단 여백에 저작권(왼쪽)·'현재/전체' 페이지 번호(오른쪽)를 찍는다.
+def _stamp_footer(path: Path, footer_note: str = "", meta: str = "") -> None:
+    """완성된 PDF 하단 여백에 저작권(왼쪽)·교재명·단원(가운데)·페이지 번호(오른쪽)를 찍는다.
 
-    모든 페이지 같은 위치(하단 여백)라 페이지별 내용 높이와 무관하게 정렬된다.
-    reportlab 이 없으면 조용히 건너뛴다.
+    meta 는 '교재명·단원'(모의고사면 시행연월·학년)으로, 여러 자료를 함께 쓰는 수업 현장에서
+    페이지마다 출처를 알 수 있게 가운데에 표기한다. 모든 페이지 같은 위치(하단 여백)라
+    페이지별 내용 높이와 무관하게 정렬된다. reportlab 이 없으면 조용히 건너뛴다.
     """
     path = Path(path)
     try:
@@ -577,6 +580,9 @@ def _stamp_footer(path: Path, footer_note: str = "") -> None:
             if footer_note:
                 c.setFont(kfont, 11)
                 c.drawString(26, 16, footer_note)          # 왼쪽 하단: 저작권(11pt)
+            if meta:
+                c.setFont(kfont, 10)
+                c.drawCentredString(w / 2, 16, meta)       # 가운데 하단: 교재명·단원(10pt)
             c.setFont(pfont, 11)
             c.drawRightString(w - 26, 16, f"{i} / {total}")  # 오른쪽 하단: 현재/전체(11pt)
             c.save()

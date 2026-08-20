@@ -313,9 +313,9 @@ def _page_counts(htmls: list[str]) -> list[int]:
     return [len(HTML(string=h).render().pages) for h in htmls]
 
 
-# 앞면 밀도 티어: normal=12px(여유 있으면 크게), compact=11px(기본/빠듯할 때).
-# 11px 미만(ultra)은 쓰지 않는다 — 기본 하한이 11px 이므로.
-_FRONT_TIERS = ["normal", "compact"]
+# 앞면 밀도 티어(큰→작): roomy=13px(짧은 지문은 크게 키워 페이지 채움) → normal=12px
+# → compact=11px(빠듯할 때). 1페이지에 들어가는 '가장 큰' 티어를 골라 여백을 최소화한다.
+_FRONT_TIERS = ["roomy", "normal", "compact"]
 
 
 def _fit_pages(analyses, fit_front: bool = True,
