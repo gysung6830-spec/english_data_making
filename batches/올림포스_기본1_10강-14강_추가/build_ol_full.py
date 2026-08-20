@@ -62,6 +62,18 @@ for p in [U102,U141,U142,U143]:
 
 # 목차 순서: Unit10-2 → (기존 15) → Unit14-1 → Unit14-2 → Unit14-3
 FINAL=[U102]+OL+[U141,U142,U143]
+
+# 오역 팁(mistips) 오버레이 적용 — 학생용 전용
+MT={}
+for f in sorted(glob.glob(SCRATCH+"/mt_g*.py")):
+    m=load(f,"mt_"+os.path.basename(f)[:-3]); MT.update(m.MT)
+n_mt=0
+for p in FINAL:
+    for s in p.analysis.sentences:
+        k=(p.item_no.strip(), s.id)
+        if k in MT: s.mistips=list(MT[k]); n_mt+=len(s.mistips)
+print("오역 팁 적용:",n_mt,"개 (",len(MT),"문장)")
+
 for p in FINAL: finalize(p)
 print("확장 합본 소단원 수:",len(FINAL))
 ok=print_report(verify_passages(FINAL))   # cross_check=True → 핵심문법 중복 검사 포함
