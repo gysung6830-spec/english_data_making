@@ -5,9 +5,25 @@
 """
 from __future__ import annotations
 
-from src.client import ClaudeClient  # 구조화 JSON + 검증 + 재시도 래퍼 재사용
+from src.client import ClaudeClient as _BaseClient  # 구조화 JSON + 검증 + 재시도 래퍼 재사용
+
+from ._concurrent import api_slot
 
 __all__ = ["ClaudeClient"]
+
+
+class ClaudeClient(_BaseClient):
+    """API 호출에 '전체 동시 실행 상한'을 씌운 클라이언트.
+
+    지문·유형·회차를 여러 겹으로 병렬 처리해도 실제로 동시에 나가는 호출 수는
+    _concurrent.API_CONCURRENCY 로 묶인다. 덕분에 바깥 루프를 마음껏 병렬화해
+    유휴 시간(한 지문의 마지막 호출을 기다리며 노는 시간)을 없애면서도
+    레이트리밋을 넘지 않는다.
+    """
+
+    def structured(self, *args, **kwargs):
+        with api_slot():
+            return super().structured(*args, **kwargs)
 
 # 시험지 생성 전반에 공통으로 붙이는 시스템 지시
 SYSTEM = (

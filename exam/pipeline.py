@@ -174,16 +174,21 @@ def build_passages(
     """
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
+    if logger:
+        logger.info("지문 %d개 생성 중 …", len(bodies))
+    # 지문끼리도 동시에 처리한다. 실제 동시 API 호출 수는 클라이언트의 전체 상한으로
+    # 묶이므로, 한 지문의 마지막 호출을 기다리며 노는 시간이 사라진다.
+    tasks = [(i, (lambda b=body, a=analysis, i=i: build_passage(
+        client, b, max_retries=max_retries, logger=logger,
+        vocab_method=vocab_method, content_difficulty=content_difficulty,
+        analysis=a, level=level, passage_index=i)))
+        for i, (body, analysis) in enumerate(zip(bodies, analyses))]
+    res = run_parallel(tasks)
     passages: list[Passage] = []
-    for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
-        if logger:
-            logger.info("[%d/%d] 지문 생성 중 …", i, len(bodies))
-        passage = build_passage(client, body, max_retries=max_retries,
-                                logger=logger, vocab_method=vocab_method,
-                                content_difficulty=content_difficulty,
-                                analysis=analysis, level=level, passage_index=i - 1)
-        if labels and i - 1 < len(labels):
-            passage.source_label = labels[i - 1]
+    for i in range(len(bodies)):
+        passage = res[i]
+        if labels and i < len(labels):
+            passage.source_label = labels[i]
         passages.append(passage)
     validator.validate_passages(passages)
     validator.validate_numbering(passages, start=1)

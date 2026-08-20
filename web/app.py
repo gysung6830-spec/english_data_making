@@ -185,8 +185,10 @@ def generate():
                 return fail("미리보기 전용 모드입니다. '무료 미리보기'를 사용하세요.")
             return fail("실제 생성에는 API 키가 필요합니다. 위 '🔑 API 키' 칸에 키를 붙여넣거나 "
                         "(.env 에 설정해도 됩니다). 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
-        from exam import ingest
+        from exam import _concurrent, ingest
         from exam.llm import ClaudeClient
+        # 동시 호출 상한을 설정값으로 맞춘다(환경변수가 있으면 그쪽이 우선).
+        _concurrent.set_concurrency(cfg.processing.concurrency)
         client = ClaudeClient(eff_key, cfg.model,
                               thinking=cfg.processing.thinking,
                               effort=cfg.processing.effort)

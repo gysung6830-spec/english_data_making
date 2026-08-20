@@ -1325,6 +1325,56 @@ def test_grammar_mark_word_duplication() -> None:
     print("✓ 어법 밑줄 표시어 낱말 중복(to to confirm) 방지 통과")
 
 
+def test_parallel_passages_and_gate() -> None:
+    """속도: 지문끼리도 동시에 생성하되(순서·라벨은 보존), 실제 동시 API 호출 수는
+    전체 상한으로 묶여 레이트리밋을 넘지 않는다."""
+    import threading
+    import time
+    from concurrent.futures import ThreadPoolExecutor
+
+    from exam import _concurrent
+
+    # ① 지문 병렬 처리 — 순서·라벨이 입력 순서대로 유지된다
+    bodies = [f"body {i}" for i in range(6)]
+    labels = [f"L{i}" for i in range(6)]
+    ps = pipeline.build_passages(_FakeClient(), bodies, labels=labels)
+    assert [p.source_label for p in ps] == labels, [p.source_label for p in ps]
+    assert len(ps) == len(bodies)
+
+    # ② 전체 동시 호출 상한 — 스레드를 아무리 많이 띄워도 상한을 넘지 않는다
+    import src.client as _sc
+    orig_structured, orig_init = _sc.ClaudeClient.structured, _sc.ClaudeClient.__init__
+    stat = {"cur": 0, "peak": 0}
+    lock = threading.Lock()
+
+    def _fake(self, *a, **kw):
+        with lock:
+            stat["cur"] += 1
+            stat["peak"] = max(stat["peak"], stat["cur"])
+        time.sleep(0.02)
+        with lock:
+            stat["cur"] -= 1
+        return "ok"
+
+    _sc.ClaudeClient.structured = _fake
+    _sc.ClaudeClient.__init__ = lambda self, *a, **kw: None
+    saved = _concurrent.API_CONCURRENCY
+    try:
+        from exam.llm import ClaudeClient
+        for want in (3, 9):
+            applied = _concurrent.set_concurrency(want)
+            stat["peak"] = 0
+            c = ClaudeClient()
+            with ThreadPoolExecutor(max_workers=40) as ex:
+                list(ex.map(lambda _i: c.structured("s", "p", None), range(30)))
+            assert applied == want, (applied, want)
+            assert 0 < stat["peak"] <= want, (stat["peak"], want)
+    finally:
+        _sc.ClaudeClient.structured, _sc.ClaudeClient.__init__ = orig_structured, orig_init
+        _concurrent.set_concurrency(saved)
+    print("✓ 지문 병렬 생성(순서 보존)·동시 호출 상한 통과")
+
+
 def test_output_modes(tmp_out: Path = ROOT / "output" / "test") -> None:
     """출력 방식(합본/개별/합본+개별): 개별 파일은 그 구성만 담고, 검토 메모는
     합본을 안 만들어도 남는다. (조판만 다시 하므로 API 추가 호출은 없다)"""
@@ -1558,6 +1608,7 @@ if __name__ == "__main__":
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
     test_grammar_mark_word_duplication()
+    test_parallel_passages_and_gate()
     test_output_modes()
     test_edge_guards()
     test_precheck_harness()

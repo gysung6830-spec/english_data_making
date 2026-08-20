@@ -34,6 +34,11 @@ processing:
   effort: "high"
   # 텍스트가 없는 '스캔 PDF(문제 파일)'만 조건부로 Vision OCR 처리 (글자 PDF 는 오프라인)
   pdf_vision_fallback: true
+  # 동시에 보낼 API 호출 수 (클수록 빠름 / 요금제 한도를 넘으면 429 가 늘어 오히려 느려짐)
+  #   지문·유형·회차를 겹쳐 돌려도 실제 동시 호출은 이 수를 넘지 않습니다.
+  #   기본 8. 한도가 넉넉하면 12~16 까지 올려 보세요.
+  #   ※ 환경변수 EXAM_CONCURRENCY 로도 조정할 수 있습니다(환경변수가 우선).
+  concurrency: 8
 
 # 출력 PDF 디자인
 design:

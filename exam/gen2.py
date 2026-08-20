@@ -337,15 +337,19 @@ def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
     from .pipeline import analyze_bodies
     if analyses is None:
         analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
+    if logger:
+        logger.info("[2회] 지문 %d개 생성 중 …", len(bodies))
+    # 지문끼리도 동시에 처리(실제 동시 API 호출 수는 클라이언트 전체 상한으로 묶임)
+    tasks = [(i, (lambda b=body, a=analysis, i=i: build_passage2(
+        client, b, max_retries=max_retries, logger=logger,
+        analysis=a, level=level, passage_index=i)))
+        for i, (body, analysis) in enumerate(zip(bodies, analyses))]
+    res = run_parallel(tasks)
     passages = []
-    for i, (body, analysis) in enumerate(zip(bodies, analyses), 1):
-        if logger:
-            logger.info("[2회 %d/%d] 지문 생성 중 …", i, len(bodies))
-        passage = build_passage2(client, body, max_retries=max_retries,
-                                 logger=logger, analysis=analysis, level=level,
-                                 passage_index=i - 1)
-        if labels and i - 1 < len(labels):
-            passage.source_label = labels[i - 1]
+    for i in range(len(bodies)):
+        passage = res[i]
+        if labels and i < len(labels):
+            passage.source_label = labels[i]
         passages.append(passage)
     validator.validate_passages(passages, TYPE_ORDER2)
     validator.validate_numbering(passages, 1, TYPE_ORDER2)

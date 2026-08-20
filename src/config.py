@@ -27,6 +27,7 @@ class ProcessingCfg:
     thinking: bool = True                # 적응형 사고(추론) 켜기 → 정답 설계 오류↓
     effort: str = "high"                 # low/medium/high/xhigh — 높을수록 신중(비용↑)
     pdf_vision_fallback: bool = True      # 텍스트 없는 스캔 PDF만 Vision OCR로 조건부 처리
+    concurrency: int = 8                  # 동시 API 호출 상한(클수록 빠름·한도 초과 시 429↑)
 
 
 @dataclass
@@ -95,6 +96,7 @@ def load_config(path: str | Path | None = None) -> Config:
             thinking=bool(proc.get("thinking", True)),
             effort=str(proc.get("effort", "high")),
             pdf_vision_fallback=bool(proc.get("pdf_vision_fallback", True)),
+            concurrency=int(proc.get("concurrency", 8)),
         ),
         design=DesignCfg(
             footer_note=str(design.get("footer_note", "")),
