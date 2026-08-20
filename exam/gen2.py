@@ -148,8 +148,9 @@ def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
     if answer_pos:   # 정답 위치 분산(짝 선지 재배열 — 정오 불변)
         choices, answer_no, _ = answer_spread.place_answer(choices, answer_no, answer_pos)
     reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
-    q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices)
-    return q, a, []
+    flags: list[str] = []
+    q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices, flags=flags)
+    return q, a, flags
 
 
 def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=""):
@@ -307,7 +308,7 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
         gen = _GENERATORS2[t]
         apos = (answer_spread.pick(passage_index, answer_spread.SLOTS2[t],
                                    len(answer_spread.SLOTS2),
-                                   seed=answer_spread.seed_of(analysis.title))
+                                   seed=answer_spread.seed_of(analysis.title, level))
                 if t in answer_spread.SLOTS2 else None)
         return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries,
                                       logger, apos)

@@ -78,6 +78,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     overrides = None
     if out.override_no and out.override_text.strip():
         overrides = {out.override_no - 1: out.override_text}
+    flags: list[str] = []
     q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
-                        overrides=overrides)
-    return q, a, []
+                        overrides=overrides, flags=flags)
+    return q, a, flags

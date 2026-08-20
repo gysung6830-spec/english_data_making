@@ -27,7 +27,7 @@
       {% for it in items %}
       <tr>
         <td class="rv-part">{{ it.part|e if it.part else "—" }}</td>
-        <td class="rv-no">{{ it.no }}번{% if it.title %}<span class="rv-title"> · {{ it.title|e }}</span>{% endif %}</td>
+        <td class="rv-no">{% if it.no != '-' %}{{ it.no }}번{% else %}지문 전체{% endif %}{% if it.title %}<span class="rv-title"> · {{ it.title|e }}</span>{% endif %}</td>
         <td class="rv-type">{{ it.label }}</td>
         <td class="rv-why">
           {% for r in it.reasons %}<span class="rv-reason">{{ r|e }}</span>{% endfor %}

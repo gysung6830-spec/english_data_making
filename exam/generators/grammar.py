@@ -37,5 +37,6 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     )
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     reasons = {r.no: r.text for r in out.reasons}
-    q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons)
-    return q, a, []
+    flags: list[str] = []
+    q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons, flags=flags)
+    return q, a, flags

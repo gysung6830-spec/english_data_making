@@ -98,7 +98,7 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
         if t in answer_spread.SLOTS1:
             kwargs["answer_pos"] = answer_spread.pick(
                 passage_index, answer_spread.SLOTS1[t], len(answer_spread.SLOTS1),
-                seed=answer_spread.seed_of(analysis.title))
+                seed=answer_spread.seed_of(analysis.title, level))
         return lambda: _gen_one_type(gen, client, analysis, body, t,
                                      max_retries, logger, kwargs)
 

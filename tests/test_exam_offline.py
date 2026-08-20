@@ -1325,6 +1325,46 @@ def test_grammar_mark_word_duplication() -> None:
     print("✓ 어법 밑줄 표시어 낱말 중복(to to confirm) 방지 통과")
 
 
+def test_edge_guards() -> None:
+    """사각지대 보강 3종:
+    ① 같은 낱말이 여러 번인 밑줄 → '확인 권장' 플래그(밑줄↔해설 어긋남 예방)
+    ② 난이도별 정답 패턴 분리(상·중·하 함께 배포해도 답 패턴이 겹치지 않게)
+    ③ 생성 실패로 빠진 유형을 검토메모에 명시(번호가 연속이라 안 보임)"""
+    from exam import answer_spread as A
+    from exam import review as R
+    from exam.types import TYPE_ORDER
+
+    # ① 모호한 밑줄만 플래그가 붙는다
+    s = ["In a very basic sense we need others to confirm that we are there, "
+         "that we exist and that we have an identity that is unique."]
+    f: list[str] = []
+    B.make_grammar(s, [(0, "that", "what"), (0, "confirm", "confirms")], [1], {1: "r"}, flags=f)
+    assert R.FIX_AMBIG in f, f                      # 'that' 이 4번 → 확인 권장
+    f2: list[str] = []
+    B.make_grammar(s, [(0, "confirm", "confirms"), (0, "unique", "uniquely")],
+                   [1], {1: "r"}, flags=f2)
+    assert R.FIX_AMBIG not in f2, f2                # 유일한 낱말 → 플래그 없음
+
+    # ② 같은 지문이라도 난이도가 다르면 시드·정답 위치 패턴이 다르다
+    for title in ("단일경작과 승자들", "함께하려는 인간의 욕구"):
+        seeds = [A.seed_of(title, lv) for lv in ("하", "중", "상")]
+        assert len(set(seeds)) == 3, seeds
+        pats = [tuple(A.pick(p, sl, 2, seed=A.seed_of(title, lv))
+                      for sl in (0, 1) for p in (0, 1)) for lv in ("하", "중", "상")]
+        assert len(set(pats)) == 3, pats
+    assert A.seed_of("x") == A.seed_of("x", None)   # 난이도 미지정은 기존과 동일
+
+    # ③ 유형이 빠지면 검토메모에 '생성 누락'으로 남는다
+    ps = demo_passages()
+    del ps[0].q[TYPE_ORDER[2]]
+    del ps[0].a[TYPE_ORDER[2]]
+    items = renderer.collect_review(ps, 1)
+    miss = [i for i in items if i["label"] == "생성 누락"]
+    assert len(miss) == 1 and "1개 유형이 빠졌습니다" in miss[0]["reasons"][0], items
+    assert renderer.collect_review(demo_passages(), 1) == []   # 정상이면 아무것도 없음
+    print("✓ 사각지대 보강(모호 밑줄·난이도별 정답분산·생성누락 표기) 통과")
+
+
 def test_precheck_harness() -> None:
     """사전 점검(API 미사용): 정본 오염을 생성 전에 잡고, 정상 지문은 통과시킨다.
     웹앱은 문제가 있으면 경고 후 '그래도 생성'을 고를 수 있어야 한다."""
@@ -1470,6 +1510,7 @@ if __name__ == "__main__":
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
     test_grammar_mark_word_duplication()
+    test_edge_guards()
     test_precheck_harness()
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()

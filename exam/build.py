@@ -94,6 +94,33 @@ def expand_marks(sentences: list[str],
     return out
 
 
+def flag_ambiguous_marks(sentences: list[str], marks: list[tuple[int, str, str]],
+                         flags: list[str] | None) -> None:
+    """밑줄 대상 낱말이 그 문장에 여러 번 나오면 '확인 권장' 사유를 남긴다.
+
+    조판기는 '첫 번째 출현'을 밑줄로 잡는데, LLM 은 다른 위치를 염두에 두고 해설을
+    쓸 수 있다(예: that 이 한 문장에 4번 나오는데 해설은 뒤쪽 that 을 설명). 그러면
+    밑줄과 해설이 어긋나 문항이 성립하지 않으므로, 사람이 한 번 보게 표시한다.
+    (자동으로 고칠 수는 없다 — 어느 위치가 맞는지는 해설을 읽어야 알 수 있다.)
+    """
+    if flags is None:
+        return
+    from . import review as _rv
+
+    for idx, word, _shown in marks:
+        if not (0 <= idx < len(sentences)):
+            continue
+        w = str(word).strip()
+        if not w or len(w.split()) > 2:      # 긴 어구는 애초에 모호하지 않다
+            continue
+        n = len(re.findall(r"(?<!\w)" + re.escape(w) + r"(?!\w)",
+                           sentences[idx], re.IGNORECASE))
+        if n > 1:
+            if _rv.FIX_AMBIG not in flags:
+                flags.append(_rv.FIX_AMBIG)
+            return
+
+
 def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
     """(문장idx, 원본단어, 표시단어) -> (문장idx, 원본단어, 밑줄HTML) 로 변환."""
     return [
@@ -335,7 +362,8 @@ def make_content(sentences: list[str], choices: list[str], answer_no: int,
 # ---------------------------------------------------------------------------
 def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
                answer_no: int, reason: str,
-               overrides: dict[int, str] | None = None) -> tuple[str, str]:
+               overrides: dict[int, str] | None = None,
+               flags: list[str] | None = None) -> tuple[str, str]:
     """marks: [(문장idx, 원본단어, 표시단어)] 5개.
     - 방식1(반의어): 정답 표시단어=반의어, 나머지=유의어.
     - 방식2(부정어): 표시단어=원본단어 그대로 + overrides 로 정답 문장에 부정어 삽입.
@@ -346,6 +374,7 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     marks, remap = order_marks(sentences, marks)
     answer_no = remap.get(answer_no, answer_no)
     marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
+    flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks), overrides)
     return F.vocab_q(marked), F.vocab_a(answer_no, reason)
 
@@ -354,7 +383,8 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
 # ⑤ 어법 (지정 단어만 원본과 다름, 복수정답)
 # ---------------------------------------------------------------------------
 def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
-                 answer_nos: list[int], reasons: dict[int, str]) -> tuple[str, str]:
+                 answer_nos: list[int], reasons: dict[int, str],
+                 flags: list[str] | None = None) -> tuple[str, str]:
     """marks: [(문장idx, 원본단어, 표시단어)] 2~8개. 틀린 것은 표시단어가 오답형."""
     if not (2 <= len(marks) <= 8):
         raise ValueError("어법 밑줄은 2~8개여야 합니다.")
@@ -363,6 +393,7 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
     answer_nos = sorted(remap.get(n, n) for n in answer_nos)
     reasons = {remap.get(n, n): t for n, t in reasons.items()}
     marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
+    flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks))
     return F.grammar_q(marked), F.grammar_a(answer_nos, reasons)
 

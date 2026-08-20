@@ -154,6 +154,17 @@ def collect_review(passages: list[Passage], start: int = 1,
         for p in passages:
             for t in type_order:
                 _emit(t, p)
+
+    # 생성 실패로 '빠진 유형'도 알린다. 번호는 남은 문항으로 연속이라 PDF 만 봐서는
+    # 어떤 유형이 누락됐는지 알 수 없으므로, 지문별로 모아 한 줄로 표시한다.
+    for p in passages:
+        missing = [labels[t] for t in type_order
+                   if not ((p.q.get(t) or "").strip() and (p.a.get(t) or "").strip())]
+        if missing:
+            items.append({"no": "-", "label": "생성 누락", "title": p.title,
+                          "part": part_label,
+                          "reasons": [f"이 지문은 {len(missing)}개 유형이 빠졌습니다: "
+                                      + ", ".join(missing)]})
     return items
 
 

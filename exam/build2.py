@@ -18,7 +18,7 @@ from . import format2 as F2
 
 
 # A · 어법·어휘 짝짓기 -------------------------------------------------------
-def make_A(sentences, marks, answer_no, reason, choices):
+def make_A(sentences, marks, answer_no, reason, choices, flags=None):
     """marks: [(문장idx, 원본단어, 표시단어)] 5개(ⓐ~ⓔ). choices: 5개 짝 문자열."""
     if len(marks) != 5:
         raise ValueError("A 유형 밑줄은 5개여야 합니다.")
@@ -30,6 +30,7 @@ def make_A(sentences, marks, answer_no, reason, choices):
                  for o, n in remap.items() if o - 1 < len(F2.CIRC_LETTER)}
         choices = [c.translate(trans) for c in choices]
     marks = B1.expand_marks(sentences, marks)   # 'to confirm' 류 낱말 중복 방지
+    B1.flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     lettered = [(idx, word, F2.uletter(i, shown)) for i, (idx, word, shown) in enumerate(marks, 1)]
     marked = B1._passage_html(sentences, lettered)
     return F2.A_q(marked, choices), F2.A_a(answer_no, reason)
@@ -42,8 +43,8 @@ def make_B(sentences, phrase, choices, answer_no, reason, wrong):
 
 
 # C · 어법(복수정답) — 1회 빌더 재사용 --------------------------------------
-def make_C(sentences, marks, answer_nos, reasons):
-    return B1.make_grammar(sentences, marks, answer_nos, reasons)
+def make_C(sentences, marks, answer_nos, reasons, flags=None):
+    return B1.make_grammar(sentences, marks, answer_nos, reasons, flags=flags)
 
 
 # D · 어순 배열 -------------------------------------------------------------

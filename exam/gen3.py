@@ -61,9 +61,10 @@ def _variant_hint(base: str, label: str, i: int) -> str:
             f"같은 지문의 다른 번호 문제와 정답·오답 선지·밑줄이 겹치지 않게 하라.")
 
 
-def _answer_pos(title: str, passage_index: int, slot: str) -> int:
-    """3개 변형이 서로 다른 정답 위치를 받도록 흩는다(1~5)."""
-    seed = answer_spread.seed_of(title)
+def _answer_pos(title: str, passage_index: int, slot: str, level: str | None = None) -> int:
+    """3개 변형이 서로 다른 정답 위치를 받도록 흩는다(1~5). 난이도도 시드에 섞어
+    상·중·하를 함께 배포해도 정답 패턴이 겹치지 않게 한다."""
+    seed = answer_spread.seed_of(title, level)
     i = VARIANT_OF[slot]
     base_off = sum(ord(c) for c in BASE_OF[slot])
     return (seed + passage_index + base_off + (i - 1) * 2) % 5 + 1
@@ -102,7 +103,7 @@ def build_passage3(client, body, max_retries=1, logger=None, analysis=None,
     def _task(slot):
         base = BASE_OF[slot]
         gen = _base_generator(base, cdiff)
-        apos = _answer_pos(analysis.title, passage_index, slot)
+        apos = _answer_pos(analysis.title, passage_index, slot, level)
         vh = _variant_hint(base, TYPE_LABELS3[slot], VARIANT_OF[slot])
         # _gen_one_type2(gen, ...) 는 gen(client, analysis, body, max_retries, answer_pos) 를 호출.
         # variant_hint 를 앞서 바인딩해 시그니처를 맞춘다.
