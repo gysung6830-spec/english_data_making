@@ -48,10 +48,14 @@ class Shot:
 
 
 SHOTS = [
-    # 지문자료 — 원문만. 한줄해석과 머리말이 같아 '해석 없음'으로 가른다.
+    # '지문 자료' 머리말을 셋이 나눠 쓴다. 본문 생김새로 가른다.
+    #   원문만        → 해석 문장이 아예 없다
+    #   한줄해석 세로형 → 해석에도 같은 번호가 붙는다 ('①미국 시인인')
+    #   한줄해석 2단형  → 오른쪽 칸이라 번호 없이 해석만 온다
     Shot("passage.png", 0, head=["지문 자료"], not_marks=["미국 시인인"], keep=0.62),
-    # 한줄해석 — 문장 아래에 해석이 붙는다.
-    Shot("one-line.png", 0, head=["지문 자료"], marks=["미국 시인인"], keep=0.62),
+    Shot("one-line.png", 0, head=["지문 자료"], marks=["①미국 시인인"], keep=0.62),
+    Shot("one-line-2col.png", 0, head=["지문 자료"], marks=["미국 시인인"],
+         not_marks=["①미국 시인인"], keep=0.78),
 
     # 지문분석지 — 본문 · 정리 · 학생용 빈칸 · 단어 TEST · 원문해석 · 활용 가이드
     Shot("analysis.png", 1, head=["이 학습지 100% 활용법"], keep=0.9),
@@ -120,7 +124,7 @@ def pick(index: dict[Path, tuple[str, str]], shot: Shot) -> Path | None:
     return None
 
 
-def shoot(src: Path, dpi: int = 130) -> list[Path]:
+def shoot(src: Path, dpi: int = 130, only: str = "") -> list[Path]:
     import pymupdf
     from PIL import Image
 
@@ -129,6 +133,8 @@ def shoot(src: Path, dpi: int = 130) -> list[Path]:
     made: list[Path] = []
 
     for shot in SHOTS:
+        if only and shot.name != only:
+            continue
         path = pick(index, shot)
         if path is None:
             print(f"  · {shot.name} — {shot.head + shot.marks} 가 든 PDF 없음, 건너뜀")
@@ -214,13 +220,15 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="판매 자료 PDF → 예시 이미지")
     ap.add_argument("--src", required=True, help="PDF 들이 있는 폴더")
     ap.add_argument("--dpi", type=int, default=130)
+    ap.add_argument("--only", default="", help="이 이름 한 장만 다시 뽑는다")
     args = ap.parse_args()
 
     src = Path(args.src).expanduser()
     if not src.is_dir():
         sys.exit(f"폴더가 없습니다: {src}")
-    made = shoot(src, args.dpi)
-    made += compose_pairs()
+    made = shoot(src, args.dpi, args.only)
+    if not args.only:
+        made += compose_pairs()
     print(f"\n{len(made)}개 → {OUT}")
 
 
