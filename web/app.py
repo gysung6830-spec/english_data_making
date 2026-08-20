@@ -145,8 +145,9 @@ def generate():
     chosen = set(l for l in request.form.getlist("levels") if l in ("상", "중", "하"))
     levels = [l for l in LEVEL_ORDER if l in chosen] or ["중"]
 
-    # 출력할 세트: 1회/2회 체크박스(없으면 1회 기본)
-    sets = [s for s in request.form.getlist("sets") if s in ("1", "2")] or ["1"]
+    # 출력할 세트: 통합(M, 기본)/1회/2회 체크박스
+    #   통합 = 1회+2회에서 겹치는 3유형(A·C·G)을 뺀 11유형 — 문항이 겹치지 않고 비용도 낮다.
+    sets = [s for s in request.form.getlist("sets") if s in ("M", "1", "2")] or ["M"]
     # 출력할 섹션(없으면 4개 모두)
     valid_sec = ("student", "teacher", "quick", "answers")
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
@@ -274,7 +275,7 @@ def generate():
 
     def part_tag(sid: str, lv: str | None) -> str:
         """머리글(header)을 뺀 파트 제목 — JSON 저장·복원 시 새 머리글과 다시 합쳐진다."""
-        tag = f"변형문제 {sid}회"
+        tag = "변형문제" if sid == "M" else f"변형문제 {sid}회"
         if lv:
             tag += f" · 난이도 {lv}"
         if demo:
@@ -310,7 +311,27 @@ def generate():
         labels = []
         for sid in sets:
             for lv in combo_levels:
-                if sid == "1":
+                if sid == "M":      # 통합본 — 중복 유형을 뺀 11유형
+                    from exam.merged import (
+                        MERGED_LABELS, MERGED_ORDER, MERGED_PROMPTS,
+                    )
+                    if demo:
+                        from exam.merged import demo_passages_merged
+                        ps = demo_passages_merged()
+                        validator.validate_passages(ps, MERGED_ORDER)
+                        validator.validate_numbering(ps, 1, MERGED_ORDER)
+                    else:
+                        from exam.merged import build_passages_merged
+                        ps = build_passages_merged(client, bodies,
+                                                   max_retries=cfg.processing.max_retries,
+                                                   analyses=analyses, level=lv,
+                                                   labels=src_labels, progress=prog,
+                                                   part_label=part_tag(sid, lv))
+                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
+                                  "sections": sections, "type_order": MERGED_ORDER,
+                                  "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,
+                                  "group_by": group_by})
+                elif sid == "1":
                     if demo:
                         ps = demo_passages()
                         validator.validate_passages(ps)

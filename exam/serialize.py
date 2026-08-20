@@ -35,6 +35,12 @@ def passage_from_dict(d: dict) -> Passage:
 
 
 # 세트 마커 → (유형 순서, 발문, 라벨)
+#   "M" = 통합본(1회+2회에서 중복 유형을 뺀 11유형) · "1"/"2" = 기존 회차별
+def _merged_meta():
+    from .merged import MERGED_LABELS, MERGED_ORDER, MERGED_PROMPTS
+    return (MERGED_ORDER, MERGED_PROMPTS, MERGED_LABELS)
+
+
 _SET_META = {
     "1": (TYPE_ORDER, TYPE_PROMPTS, TYPE_LABELS),
     "2": (TYPE_ORDER2, TYPE_PROMPTS2, TYPE_LABELS2),
@@ -81,7 +87,8 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
     parts: list[dict] = []
     for pm in data["parts"]:
         setk = str(pm.get("set", "1"))
-        order, prompts, labels = _SET_META.get(setk, _SET_META["1"])
+        order, prompts, labels = (_merged_meta() if setk == "M"
+                                  else _SET_META.get(setk, _SET_META["1"]))
         passages = [passage_from_dict(pd) for pd in (pm.get("passages") or [])]
         if not passages:
             raise ValueError("빈 파트가 있습니다(지문 없음).")
@@ -97,7 +104,7 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
             "sections": pm.get("sections") or None,
             "group_by": gb if gb in ("passage", "type") else "passage",
         }
-        if setk == "2":
+        if setk != "1":     # 1회는 조판기 기본값이라 생략, 그 외(통합·2회)는 명시
             part.update(type_order=order, prompts=prompts, labels=labels)
         parts.append(part)
 

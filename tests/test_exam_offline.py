@@ -1586,6 +1586,93 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     print("✓ 재출력 지문 번호 다시 넣기(순서대로 라벨 교체·개수검증) 통과")
 
 
+def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """통합본: 1회+2회에서 겹치는 3유형(A·C·G)을 빼고 11유형만 낸다.
+    빠진 유형은 생성 호출조차 하지 않으므로 비용이 실제로 준다."""
+    import threading as _th
+
+    from pypdf import PdfReader
+
+    from exam import serialize, verify as _v
+    from exam.merged import (
+        EXCLUDED,
+        MERGED_LABELS,
+        MERGED_ORDER,
+        MERGED_PROMPTS,
+        build_passages_merged,
+        demo_passages_merged,
+    )
+    from exam.set2 import TYPE_ORDER2
+    from exam.types import TYPE_ORDER
+
+    # ① 구성 — 11유형, 중복 3유형 제외, 두 세트의 나머지는 하나도 안 빠졌다
+    assert len(MERGED_ORDER) == 11, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 11                    # 같은 유형이 두 번 나오지 않는다
+    assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
+    assert set(TYPE_ORDER) | set(TYPE_ORDER2) == set(MERGED_ORDER) | set(EXCLUDED)
+    for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
+        assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
+    # 뺀 유형은 '대신할 유형'이 통합본 안에 실제로 있어야 한다(능력 공백 없음)
+    for gone, kept in EXCLUDED.items():
+        assert kept in MERGED_ORDER, (gone, kept)
+
+    # ② 빠진 유형은 API 호출조차 하지 않는다 — 비용 절감이 실제로 일어나는 지점
+    seen, lock = {}, _th.Lock()
+
+    class _Counting(_FakeClient):
+        def structured(self, system, prompt, model_cls, **kw):
+            with lock:
+                seen[model_cls.__name__] = seen.get(model_cls.__name__, 0) + 1
+            return super().structured(system, prompt, model_cls, **kw)
+
+    ps = build_passages_merged(_Counting(), ["b1", "b2"], labels=["10-1", "10-2"])
+    assert "AOut" not in seen and "GOut" not in seen, seen      # A·G 생성 안 함
+    assert seen.get("GrammarOut") == 2, seen                    # 어법은 지문당 1번(C 중복 제거)
+    assert seen.get("VerifyOut") == 14, seen                    # 자기검증 지문당 7회(9회→7회)
+
+    # ③ 지문마다 11문항이 순서대로, 라벨도 보존된다
+    assert [p.source_label for p in ps] == ["10-1", "10-2"]
+    for p in ps:
+        assert list(p.q) == list(MERGED_ORDER), list(p.q)
+
+    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 11 = 22번까지)
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    out = tmp_out / "merged.pdf"
+    renderer.render_pdf(ps, out, header_note="통합",
+                        type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
+    txt = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out)).pages)
+    assert "[10-1]" in txt and "[10-2]" in txt, txt[:400]
+    assert "22." in txt, "마지막 문항 번호(22)가 없다"
+
+    # ⑤ JSON 저장→복원 재출력(무API)에서도 통합 유형표가 그대로 살아난다
+    data = serialize.dump_parts([{"set": "M", "tag": "변형문제 · 난이도 중",
+                                  "sections": ["student"], "passages": ps}], header="h")
+    parts, _ = serialize.load_parts(data, header_override="h")
+    assert tuple(parts[0]["type_order"]) == MERGED_ORDER
+
+    # ⑥ 데모(무료 미리보기)도 통합본으로 나온다
+    dps = demo_passages_merged()
+    assert dps and all(list(p.q) == list(MERGED_ORDER) for p in dps)
+    validator.validate_passages(dps, MERGED_ORDER)
+    validator.validate_numbering(dps, 1, MERGED_ORDER)
+
+    # ⑦ 웹앱 — 통합이 기본 선택이고, 데모 생성이 통합본으로 끝까지 돈다
+    from web import app as webmod
+    webmod.app.config["PREVIEW_ONLY"] = True
+    cli = webmod.app.test_client()
+    home = cli.get("/").get_data(as_text=True)
+    assert 'value="M" checked' in home, "통합이 기본 체크가 아니다"
+    r = cli.post("/generate", data={"action": "demo", "sets": "M",
+                                    "sections": ["student", "answers"]})
+    assert r.status_code == 200, r.status_code
+    import re as _re
+    assert _re.search(r"/pdf/[0-9a-f]+", r.get_data(as_text=True))
+
+    # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
+    assert len([t for t in MERGED_ORDER if t in _v.HIGH_RISK]) == 7
+    print("✓ 통합본(1회+2회 중복 제거 11유형)·비용 절감·조판·재출력 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -1735,5 +1822,6 @@ if __name__ == "__main__":
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
+    test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

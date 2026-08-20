@@ -66,6 +66,30 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
     raise RuntimeError(f"'{t}' 유형 생성 실패: {last_err}")
 
 
+def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
+              vocab_method: str = "synonym", content_difficulty: str = "hard",
+              passage_index: int = 0, level: str | None = None, slots=None):
+    """1회 계열 유형 t 하나를 만드는 '무인자 함수'를 돌려준다.
+
+    통합본(merged)도 같은 생성기를 그대로 쓰므로 여기서 한 번만 정의한다.
+    slots 는 정답 위치 분산용 슬롯표(세트마다 다르다). 생략하면 1회용.
+    """
+    gen = GENERATORS[t]
+    kwargs: dict = {}
+    if t == VOCAB:
+        kwargs["method"] = vocab_method
+    elif t == CONTENT:
+        kwargs["difficulty"] = content_difficulty
+    slots = answer_spread.SLOTS1 if slots is None else slots
+    # 선지 순서가 자유로운 유형은 정답 위치를 고르게 분산(몰림 방지)
+    if t in slots:
+        kwargs["answer_pos"] = answer_spread.pick(
+            passage_index, slots[t], len(slots),
+            seed=answer_spread.seed_of(analysis.title, level))
+    return lambda: _gen_one_type(gen, client, analysis, body, t,
+                                 max_retries, logger, kwargs)
+
+
 def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
                   logger=None, vocab_method: str = "synonym",
                   content_difficulty: str = "hard", analysis=None,
@@ -88,19 +112,9 @@ def build_passage(client: ClaudeClient, body: str, max_retries: int = 1,
     passage = Passage(title=analysis.title)
 
     def _task(t):
-        gen = GENERATORS[t]
-        kwargs: dict = {}
-        if t == VOCAB:
-            kwargs["method"] = vm
-        elif t == CONTENT:
-            kwargs["difficulty"] = content_difficulty
-        # 선지 순서가 자유로운 유형은 정답 위치를 고르게 분산(몰림 방지)
-        if t in answer_spread.SLOTS1:
-            kwargs["answer_pos"] = answer_spread.pick(
-                passage_index, answer_spread.SLOTS1[t], len(answer_spread.SLOTS1),
-                seed=answer_spread.seed_of(analysis.title, level))
-        return lambda: _gen_one_type(gen, client, analysis, body, t,
-                                     max_retries, logger, kwargs)
+        return make_task(t, client, analysis, body, max_retries=max_retries, logger=logger,
+                         vocab_method=vm, content_difficulty=content_difficulty,
+                         passage_index=passage_index, level=level)
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER])
     from . import review as _rv

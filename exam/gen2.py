@@ -278,19 +278,34 @@ def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, answer_p
         except Exception as e:  # noqa: BLE001
             last_err = e
             if logger:
-                logger.warning("[2회 %s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
+                logger.warning("[%s] 생성 실패(시도 %d): %s", t, attempt + 1, e)
             continue
         ok, reason = _verify.verify(client, t, q, a, max_retries=max_retries)
         if not ok:
             if attempt == 0:
                 if logger:
-                    logger.info("[2회 %s] 자기검증 실패 → 재생성: %s", t, reason)
+                    logger.info("[%s] 자기검증 실패 → 재생성: %s", t, reason)
                 continue
             fl = list(fl) + [f"자동검증: {reason or '정답 유일성·정오답 재확인'}"]
         return q, a, fl
     if logger:
-        logger.error("[2회 %s] 최종 생성 실패 — 이 문항은 제외합니다: %s", t, last_err)
+        logger.error("[%s] 최종 생성 실패 — 이 문항은 제외합니다: %s", t, last_err)
     return None    # 지문 전체를 버리지 않고 이 유형만 건너뛴다
+
+
+def make_task2(t, client, analysis, body, max_retries=1, logger=None,
+               passage_index=0, level=None, slots=None):
+    """2회 계열(A~G) 유형 t 하나를 만드는 '무인자 함수'.
+
+    통합본(merged)도 같은 생성기를 그대로 쓰므로 여기서 한 번만 정의한다.
+    slots 는 정답 위치 분산용 슬롯표(세트마다 다르다). 생략하면 2회용.
+    """
+    gen = _GENERATORS2[t]
+    slots = answer_spread.SLOTS2 if slots is None else slots
+    apos = (answer_spread.pick(passage_index, slots[t], len(slots),
+                               seed=answer_spread.seed_of(analysis.title, level))
+            if t in slots else None)
+    return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, apos)
 
 
 def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
@@ -305,13 +320,8 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
     passage = Passage(title=analysis.title)
 
     def _task(t):
-        gen = _GENERATORS2[t]
-        apos = (answer_spread.pick(passage_index, answer_spread.SLOTS2[t],
-                                   len(answer_spread.SLOTS2),
-                                   seed=answer_spread.seed_of(analysis.title, level))
-                if t in answer_spread.SLOTS2 else None)
-        return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries,
-                                      logger, apos)
+        return make_task2(t, client, analysis, body, max_retries=max_retries,
+                          logger=logger, passage_index=passage_index, level=level)
 
     results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
     from . import review as _rv

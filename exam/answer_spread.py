@@ -21,6 +21,8 @@ _LEVEL_OFFSET = {"하": 0, "중": 1, "상": 2}
 # 선지 순서가 자유로워 재배치 가능한 유형 → '지문 내 지역 슬롯'(분산 키)
 SLOTS1 = {"topic": 0, "content": 1}                 # 변형문제 1회
 SLOTS2 = {"A": 0, "B": 1, "E": 2, "F": 3}            # 변형문제 2회
+# 통합본 — 1회·2회를 합친 뒤 남은 재배치 가능 유형(A 는 통합본에서 빠짐)
+SLOTS_MERGED = {"topic": 0, "content": 1, "B": 2, "E": 3, "F": 4}
 
 
 def seed_of(text: str, level: str | None = None) -> int:
