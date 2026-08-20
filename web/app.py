@@ -185,11 +185,23 @@ def generate():
                         "(.env 에 설정해도 됩니다). 비용 없이 보려면 '무료 미리보기' 버튼을 누르세요.")
         from exam import _concurrent, ingest
         from exam.llm import ClaudeClient
-        # 동시 호출 상한을 설정값으로 맞춘다(환경변수가 있으면 그쪽이 우선).
-        _concurrent.set_concurrency(cfg.processing.concurrency)
-        client = ClaudeClient(eff_key, cfg.model,
-                              thinking=cfg.processing.thinking,
-                              effort=cfg.processing.effort)
+        # 처리 방식: 폼 선택 > 설정파일. batch 면 요청을 모아 보내 비용이 절반이 된다.
+        run_mode = request.form.get("run_mode")
+        if run_mode not in ("fast", "batch"):
+            run_mode = cfg.processing.mode if cfg.processing.mode in ("fast", "batch") else "fast"
+        if run_mode == "batch":
+            # 배치는 '많이 모을수록' 이득이라 동시 대기 수를 넉넉히 둔다(실제 호출은 배치 1건).
+            _concurrent.set_concurrency(max(cfg.processing.concurrency, 64))
+            from exam.batch_client import BatchingClaudeClient
+            client = BatchingClaudeClient(eff_key, cfg.model,
+                                          thinking=cfg.processing.thinking,
+                                          effort=cfg.processing.effort)
+        else:
+            # 동시 호출 상한을 설정값으로 맞춘다(환경변수가 있으면 그쪽이 우선).
+            _concurrent.set_concurrency(cfg.processing.concurrency)
+            client = ClaudeClient(eff_key, cfg.model,
+                                  thinking=cfg.processing.thinking,
+                                  effort=cfg.processing.effort)
         try:
             if ack_stash is not None and ack_stash.exists():
                 data = json.loads(ack_stash.read_text(encoding="utf-8"))
@@ -279,6 +291,8 @@ def generate():
         n_parts = len(sets) * (1 if demo else len(levels))
         prog = (NullProgress() if demo
                 else Progress(n_parts * len(bodies)))
+        if client is not None and hasattr(client, "_progress"):
+            client._progress = prog          # 배치 제출·완료도 터미널에 표시
         # 실제 모드: 분석을 '한 번만' 돌려 모든 세트·난이도 조합이 공유한다(속도·비용).
         analyses = None
         if not demo:

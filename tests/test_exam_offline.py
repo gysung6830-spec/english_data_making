@@ -1586,6 +1586,112 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     print("✓ 재출력 지문 번호 다시 넣기(순서대로 라벨 교체·개수검증) 통과")
 
 
+def test_batch_client() -> None:
+    """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
+    같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
+    import io as _io
+    import threading as _th
+    from concurrent.futures import ThreadPoolExecutor
+
+    from exam.batch_client import BatchingClaudeClient
+    from exam.progress import Progress
+
+    class _Msg:                                   # 응답 메시지(텍스트 블록 1개)
+        def __init__(self, text): self.content = [type("B", (), {"type": "text", "text": text})()]
+
+    class _Res:
+        def __init__(self, cid, kind, text=""):
+            self.custom_id = cid
+            self.result = type("R", (), {"type": kind, "message": _Msg(text)})()
+
+    class _FakeBatches:
+        """가짜 Batch API — 제출된 요청 크기를 기록하고 즉시 '완료'로 응답한다."""
+
+        def __init__(self, answer):
+            self.answer = answer                  # (req, seq) -> (kind, text)
+            self.sizes: list[int] = []
+            self._store: dict[str, list] = {}
+            self._n = 0
+            self._lock = _th.Lock()
+
+        def create(self, requests):
+            with self._lock:
+                self.sizes.append(len(requests))
+                self._n += 1
+                bid = f"batch_{self._n}"
+                seq = self._n
+            self._store[bid] = [_Res(r["custom_id"], *self.answer(r["params"], seq))
+                                for r in requests]
+            return type("B", (), {"id": bid})()
+
+        def retrieve(self, bid):
+            return type("B", (), {"id": bid, "processing_status": "ended"})()
+
+        def results(self, bid):
+            return self._store[bid]
+
+    class _Client(BatchingClaudeClient):
+        def __init__(self, answer, **kw):        # 상위 __init__ 우회(네트워크 없이 생성)
+            self.model, self.thinking, self.effort = "m", False, None
+            self._window = kw.pop("window", 0.5)
+            self._poll, self._progress, self._logger = 1.0, kw.pop("progress", None), None
+            self._lock = _th.Lock()
+            self._pending, self._flusher, self._batch_no = [], None, 0
+            self._fake = _FakeBatches(answer)
+
+        @property
+        def raw(self):
+            return type("R", (), {"messages": type("M", (), {"batches": self._fake})()})()
+
+    def _title(params) -> str:
+        return params["output_config"]["format"]["schema"]["title"]
+
+    def _demo(params, _seq):                       # 스키마 이름으로 가짜 응답을 고른다
+        return "succeeded", _FAKE[_title(params)]().model_dump_json()
+
+    # ① 흩어진 동시 호출이 '한 배치'로 모인다
+    c = _Client(_demo)
+    with ThreadPoolExecutor(max_workers=30) as ex:
+        outs = list(ex.map(lambda _i: c.structured("s", "p", TopicOut), range(30)))
+    assert len(outs) == 30 and all(o.answer_no == 2 for o in outs)
+    assert c._fake.sizes == [30], c._fake.sizes      # 30건 → 배치 1회
+
+    # ② 검증 실패는 지시문을 덧붙여 다음 배치에서 재시도한다
+    def _retry(params, seq):
+        return ("succeeded", "{oops" if seq == 1 else _FAKE[_title(params)]().model_dump_json())
+
+    c2 = _Client(_retry)
+    assert c2.structured("s", "p", TopicOut).answer_no == 2
+    assert c2._fake.sizes == [1, 1], c2._fake.sizes  # 첫 배치 실패 → 두 번째 배치 성공
+
+    # ③ 재시도를 다 써도 실패하면 사람이 읽을 오류로 끝난다
+    c3 = _Client(lambda p, s: ("succeeded", "{oops"))
+    try:
+        c3.structured("s", "p", TopicOut)
+        raise AssertionError("검증 실패가 통과했다")
+    except RuntimeError as e:
+        assert "재시도 소진" in str(e), e
+
+    # ④ 배치 자체가 실패하면 그대로 전달된다(조용히 성공한 척하지 않는다)
+    c4 = _Client(lambda p, s: ("errored", ""))
+    try:
+        c4.structured("s", "p", TopicOut, max_retries=0)
+        raise AssertionError("배치 오류가 통과했다")
+    except RuntimeError as e:
+        assert "배치 요청 실패" in str(e), e
+
+    # ⑤ 실제 파이프라인이 그대로 돈다 — 생성기 수정 없이 배치로만 바뀐다
+    buf = _io.StringIO()
+    prog = Progress(total=2, stream=buf)
+    c5 = _Client(_demo, progress=prog)
+    ps = pipeline.build_passages(c5, ["b1", "b2"], labels=["10-1", "10-2"], progress=prog)
+    assert [p.source_label for p in ps] == ["10-1", "10-2"]
+    assert len(ps[0].q) >= 7, len(ps[0].q)
+    assert sum(c5._fake.sizes) > 10 and len(c5._fake.sizes) < 10, c5._fake.sizes
+    assert "배치 #1 제출" in buf.getvalue() and "정가의 50%" in buf.getvalue()
+    print("✓ Batch API 클라이언트(요청 모으기·재시도·오류 전달·파이프라인) 통과")
+
+
 if __name__ == "__main__":
     test_demo_validation_and_numbering()
     test_render_html_bold_rules()
@@ -1629,4 +1735,5 @@ if __name__ == "__main__":
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
+    test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

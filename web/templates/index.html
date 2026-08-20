@@ -147,6 +147,17 @@ Second passage goes here."></textarea>
       만들어진 문항을 <b>다시 조판만</b> 하는 것이라 추가 호출이 없습니다.</span>
   </div>
 
+  <div class="field setbox">
+    <span class="label">처리 방식 — <b>품질은 완전히 같습니다.</b> 속도와 비용만 다릅니다.</span>
+    <label class="check"><input type="radio" name="run_mode" value="fast" checked>
+      <b>⚡ 실시간</b> <span class="hint2">지금 바로 처리 · <b>정가</b> — 급할 때</span></label>
+    <label class="check"><input type="radio" name="run_mode" value="batch">
+      <b>💰 모아서 처리 (배치)</b> <span class="hint2">최대 24시간 내 완료(보통 훨씬 빠름) ·
+        <b>비용 절반</b> — 급하지 않을 때 권장</span></label>
+    <span class="hint">같은 모델·같은 문항 설계라 <b>결과물 품질은 동일</b>합니다. 배치는 "여유 있을 때
+      처리해도 된다"고 양보하는 대신 <b>정가의 50%</b>로 계산됩니다. 창을 닫지 말고 기다려 주세요.</span>
+  </div>
+
   <div class="btns">
     <button type="submit" name="action" value="generate" class="btn">시험지 생성 → (API 사용·비용)</button>
     <button type="submit" name="action" value="demo" class="btn ghost">무료 미리보기 (데모 지문·API 미사용)</button>
