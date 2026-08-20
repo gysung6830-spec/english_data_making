@@ -70,6 +70,8 @@ SHOTS = [
     Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary2.png", 15, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary3.png", 9, head=["필생보", "강사용"]),
+    # 재진술 사슬이 둘이고 형광펜이 다섯 곳인 지문. 합본 강사용에서 따로 받았다.
+    Shot("hapbon-summary.png", 0, head=["글 정리"], marks=["nonlinear"], keep=1.0),
     Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
 
     # 필생보 독학용 — 표지·목차 말고 실제로 푸는 지면 위주
@@ -182,6 +184,7 @@ CROPS = [
     ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.03, 0.628, 0.97, 0.880)),
     ("pilsaengbo-summary2.png", "h-psbc-restate2.png", (0.03, 0.305, 0.97, 0.640)),
     ("pilsaengbo-summary3.png", "h-psbc-restate3.png", (0.03, 0.300, 0.97, 0.600)),
+    ("hapbon-summary.png", "h-psbc-restate4.png", (0.055, 0.352, 0.960, 0.660)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     ("workbook-integrated-pronoun.png", "h-wbi-pron.png", (0.02, 0.020, 0.98, 0.500)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
