@@ -146,7 +146,7 @@ SAMPLE_PAGE_W = 1075
 CROP_ZOOM = 1.5
 
 
-def crop_img(name: str, doc_w: int) -> str:
+def crop_img(name: str, doc_w: int, fill: bool = False) -> str:
     """부분 확대 조각. 원래 지면에서 차지하던 만큼만 키워서 보여 준다.
 
     좁은 조각을 본문 폭에 맞춰 늘리면 세 배로 확대되어 흐려지고, 지면에서
@@ -159,7 +159,7 @@ def crop_img(name: str, doc_w: int) -> str:
 
     with Image.open(path) as im:
         w = im.width
-    px = min(doc_w, round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM))
+    px = doc_w if fill else min(doc_w, round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM))
     return (f'<img src="{path.as_uri()}" style="display:block;width:{px}px;'
             f'max-width:100%;border-radius:8px;'
             f'box-shadow:0 5px 18px rgba(14,31,26,.16)">')
@@ -581,17 +581,23 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         잘라 바로 아래에 붙이면, 읽는 사람이 문장과 실물을 짝지어 본다.
         """
         head, desc, *rest = pt
-        inner_w = int(width - u * 13)
+        # 왼쪽에 지면, 오른쪽에 말. 눈이 사진에서 설명으로 바로 건너간다.
+        col_w = int((width - u * 13 - u * 3) * 0.46)
+        names = [c for c in (rest[0].split("|") if rest and rest[0] else [])]
         crops = "".join(
-            f'<div style="margin-top:{u * 1.4:.0f}px">{crop_img(c, inner_w)}</div>'
-            for c in (rest[0].split("|") if rest and rest[0] else [])
-            if crop_img(c, inner_w))
-        return f"""<div style="margin-top:{u * 3.0:.0f}px">
-          <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
+            f'<div style="margin-top:{u * 1.2 if i else 0:.0f}px">'
+            f'{crop_img(c, col_w, fill=True)}</div>'
+            for i, c in enumerate(names) if crop_img(c, col_w))
+        text = f"""<div class="ko" style="font-size:{u * 2.4:.0f}px;color:{t['fg']};
                line-height:1.45;word-break:keep-all">{head}</div>
-          <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.95:.0f}px;
-               color:{t['muted']};line-height:1.72;word-break:keep-all">{desc}</div>
-          {crops}
+          <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.9:.0f}px;
+               color:{t['muted']};line-height:1.72;word-break:keep-all">{desc}</div>"""
+        if not crops:
+            return f'<div style="margin-top:{u * 3.4:.0f}px">{text}</div>'
+        return f"""<div style="margin-top:{u * 3.4:.0f}px;display:flex;
+          gap:{u * 3:.0f}px;align-items:flex-start">
+          <div style="flex:0 0 {col_w}px">{crops}</div>
+          <div style="flex:1 1 auto">{text}</div>
         </div>"""
 
     n_pts = item.max_points or MAX_POINTS
