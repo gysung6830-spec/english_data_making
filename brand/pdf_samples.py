@@ -69,6 +69,7 @@ SHOTS = [
     Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary2.png", 15, head=["필생보", "강사용"]),
+    Shot("pilsaengbo-summary3.png", 9, head=["필생보", "강사용"]),
     Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
 
     # 필생보 독학용 — 표지·목차 말고 실제로 푸는 지면 위주
@@ -180,6 +181,7 @@ CROPS = [
     ("pilsaengbo-summary.png", "h-psbc-restate.png", (0.03, 0.310, 0.97, 0.625)),
     ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.03, 0.628, 0.97, 0.880)),
     ("pilsaengbo-summary2.png", "h-psbc-restate2.png", (0.03, 0.305, 0.97, 0.640)),
+    ("pilsaengbo-summary3.png", "h-psbc-restate3.png", (0.03, 0.300, 0.97, 0.600)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     ("workbook-integrated-pronoun.png", "h-wbi-pron.png", (0.02, 0.020, 0.98, 0.500)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
@@ -311,6 +313,43 @@ def compose_pairs(width: int = 1600) -> list[Path]:
     return made
 
 
+# ── 여러 조각을 한 장으로 세로로 잇기 ────────────────────────────────────
+# 지문 하나만 보여 주면 "이 지문만 그런가" 싶다. 같은 자리를 지문마다 잇대어
+# 놓으면 자료 전체가 그렇게 만들어졌다는 것이 한 장으로 보인다.
+STACKS = [
+    # (저장 이름, [조각들], 사이 여백)
+    ("h-psbc-restate-set.png",
+     ["h-psbc-restate2.png", "h-psbc-restate3.png", "h-psbc-restate.png"], 18),
+]
+
+
+def make_stacks(bg: str = "#F6F3EC") -> list[Path]:
+    from PIL import Image
+
+    made: list[Path] = []
+    for name, parts, gap in STACKS:
+        imgs = []
+        for f in parts:
+            path = OUT / f
+            if path.exists():
+                with Image.open(path) as im:
+                    imgs.append(im.convert("RGB").copy())
+        if not imgs:
+            print(f"  · {name} — 조각이 없어 건너뜀")
+            continue
+        w = max(i.width for i in imgs)
+        h = sum(i.height for i in imgs) + gap * (len(imgs) - 1)
+        sheet = Image.new("RGB", (w, h), bg)
+        y = 0
+        for im in imgs:
+            sheet.paste(im, ((w - im.width) // 2, y))
+            y += im.height + gap
+        sheet.save(OUT / name)
+        made.append(OUT / name)
+        print(f"  ✔ samples/{name}  ({w}×{h})  ← {len(imgs)}장")
+    return made
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="판매 자료 PDF → 예시 이미지")
     ap.add_argument("--src", default="", help="PDF 들이 있는 폴더")
@@ -321,7 +360,7 @@ def main() -> None:
     args = ap.parse_args()
 
     if args.crops_only:
-        made = make_crops()
+        made = make_crops() + make_stacks()
         print(f"\n{len(made)}개 → {OUT}")
         return
 
@@ -332,6 +371,7 @@ def main() -> None:
     if not args.only:
         made += compose_pairs()
         made += make_crops()
+        made += make_stacks()
     print(f"\n{len(made)}개 → {OUT}")
 
 
