@@ -864,20 +864,22 @@ def test_hanjul_translation_residue() -> None:
 
 
 def test_partial_generation_survives() -> None:
-    """한 유형이 끝내 생성 실패해도(예: imply BOut 선지 개수 오류) 지문 전체를 버리지 않고
+    """한 유형이 끝내 생성 실패해도(예: 선지 개수 오류) 지문 전체를 버리지 않고
     나머지 문항으로 출력한다(graceful degradation). 번호는 남은 문항 기준 연속."""
-    from exam.demo3 import demo_passages_3
-    from exam.set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
-    ps = demo_passages_3()
-    del ps[0].q["imply_1"]           # 한 슬롯이 생성 실패한 상황
-    del ps[0].a["imply_1"]
-    assert len(validator.present_types(ps[0], TYPE_ORDER3)) == 9
-    validator.validate_passages(ps, TYPE_ORDER3)             # 부분 허용 통과
-    nums = validator.validate_numbering(ps, 1, TYPE_ORDER3)
-    assert nums == [list(range(1, 10))], nums                # 10 → 9, 연속
-    html = renderer.render_html(ps, type_order=TYPE_ORDER3, prompts=TYPE_PROMPTS3,
-                                labels=TYPE_LABELS3, group_by="type")
-    assert "quick-grid" in html and "imply" not in html.split("quick-grid")[0][-50:]
+    from exam.demo2 import demo_passages_2
+    from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+    ps = demo_passages_2()
+    dropped = TYPE_ORDER2[1]         # 한 슬롯이 생성 실패한 상황
+    del ps[0].q[dropped]
+    del ps[0].a[dropped]
+    n_full = len(TYPE_ORDER2)
+    assert len(validator.present_types(ps[0], TYPE_ORDER2)) == n_full - 1
+    validator.validate_passages(ps, TYPE_ORDER2)             # 부분 허용 통과
+    nums = validator.validate_numbering(ps, 1, TYPE_ORDER2)
+    assert nums[0] == list(range(1, n_full)), nums           # 7 → 6, 연속
+    html = renderer.render_html(ps, type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2,
+                                labels=TYPE_LABELS2, group_by="type")
+    assert "quick-grid" in html
     print("✓ 부분 생성(한 유형 실패) — 나머지 살려 출력·번호 연속 통과")
 
 
@@ -914,29 +916,6 @@ def test_llm_self_verify() -> None:
     finally:
         del os.environ["EXAM_NO_VERIFY"]
     print("✓ LLM 자기검증(고위험 유형 재생성·플래그·비활성) 통과")
-
-
-def test_set3_demo() -> None:
-    """변형문제 3회: 지문당 주제3·제목3·내용일치3·함축의미3(=12문항) 검증·번호·조판·JSON."""
-    from exam import serialize
-    from exam.demo3 import demo_passages_3
-    from exam.set3 import TYPE_LABELS3, TYPE_ORDER3, TYPE_PROMPTS3
-    ps = demo_passages_3()
-    validator.validate_passages(ps, TYPE_ORDER3)
-    nums = validator.validate_numbering(ps, 1, TYPE_ORDER3)
-    assert nums == [list(range(1, 11))], nums          # 지문당 10문항(주제1+제목3+내용3+함축3)
-    # 유형별 배치: [주제] 1·2·3 [제목] 1·2·3 …
-    html = renderer.render_html(ps, type_order=TYPE_ORDER3, prompts=TYPE_PROMPTS3,
-                                labels=TYPE_LABELS3, group_by="type")
-    assert "제목으로 가장 적절" in html and "함축의미" in html
-    assert "vanishingly small space" in html           # 정본 공유
-    # JSON 저장→복원(set "3") 라운드트립
-    pm = [{"set": "3", "tag": "변형문제 3회 · 난이도 중", "sections": ["student"],
-           "passages": ps, "group_by": "type"}]
-    data = serialize.dump_parts(pm, header="H")
-    loaded, _ = serialize.load_parts(data)
-    assert loaded[0]["type_order"] == TYPE_ORDER3
-    print("✓ 3회(주제·제목·내용일치·함축의미 ×3) 데모 검증·조판·JSON 통과")
 
 
 def test_passage_type_fit_flags() -> None:
@@ -1630,7 +1609,6 @@ if __name__ == "__main__":
     test_underline_reading_order()
     test_d_cue_marking()
     test_hanjul_translation_residue()
-    test_set3_demo()
     test_passage_type_fit_flags()
     test_ebs_unit_label()
     test_partial_generation_survives()

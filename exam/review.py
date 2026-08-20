@@ -43,7 +43,7 @@ _UNFIT: dict[str, dict[str, str]] = {
 
 def type_fit_flags(passage_type: str | None, type_key: str) -> list[str]:
     """지문 종류에 부적합한 문항 유형이면 '확인 권장' 사유를 돌려준다(아니면 빈 목록).
-    3회 슬롯키(topic_1·content_3 …)는 base(topic·content …)로 정규화해 판정한다."""
+    슬롯키(예: content_2)는 base(content)로 정규화해 판정한다."""
     import re
     base = re.sub(r"_\d+$", "", type_key or "")
     fit = _UNFIT.get((passage_type or "prose"), {})
