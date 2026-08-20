@@ -202,6 +202,36 @@ def _ensure_vocab_match(a: Analysis) -> None:
     a.match_ant = build("ant")
 
 
+def _mark_reference_pronouns(a) -> None:
+    """독해 Point '지칭'(예: 'it → an infant')의 대상 대명사를 본문에서 찾아 표시(ref_mark).
+
+    학생이 '어느 it 설명인지' 바로 찾도록, 지칭 대상 대명사에 보라 점선을 긋는다.
+    refs 에 토큰 위치 정보가 없으므로 텍스트로 매칭(같은 대명사가 여럿이면 모두 표시).
+    """
+    import re
+    for s in getattr(a, "sentences", None) or []:
+        # 중요 문장(주제문·서술형 등) 표시용 플래그: 뱃지가 있거나 노란 형광(주제문 어구) 포함.
+        has_topic = any(getattr(t, "hl", None) == "y"
+                        for line in (getattr(s, "lines", None) or []) for t in line)
+        s.important = bool(getattr(s, "badge", None) or has_topic)
+        refs = getattr(s, "refs", None) or []
+        if not refs:
+            continue
+        prons: set[str] = set()
+        for r in refs:
+            head = re.split(r"→|-+>", str(r))[0]        # 'it → ...' 의 앞부분
+            head = head.strip().strip("'\"·` ").lower()
+            if head and len(head) <= 24:
+                prons.add(head)
+        if not prons:
+            continue
+        for line in getattr(s, "lines", None) or []:
+            for t in line:
+                w = (t.text or "").strip().strip(".,;:!?'\"()").lower()
+                if w in prons:
+                    t.ref_mark = True                    # 동적 속성(템플릿에서 점선 표시)
+
+
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   compact: bool = False, include_back: bool = True,
                   include_guide: bool = True, only_back: bool = False,
@@ -226,6 +256,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
     for a in alist:
         _ensure_vocab_test(a)               # 단어 TEST 순서 결정(테스트/정답 동일 순서)
         _ensure_vocab_match(a)              # 유의어·반의어 줄잇기 매칭 데이터
+        _mark_reference_pronouns(a)         # 독해 Point '지칭'을 본문 대명사와 시각 연결
     tmpl = _env.get_template("worksheet_a.html.j2")
     html = tmpl.render(analyses=alist, footer_note=footer_note,
                        footer_meta=footer_meta, compact=compact,

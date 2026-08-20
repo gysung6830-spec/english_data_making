@@ -151,6 +151,15 @@
   .pbox .fr{ margin:2px 0; }
   .pbox .fl{ font-weight:800; color:#37827b; }
   .pbox .fl.im{ color:#37827b; }             /* 함축 라벨은 틸 */
+  .pbox .fl.ref{ color:var(--purple); }      /* 지칭 라벨=보라(본문 대명사 점선과 짝) */
+  /* 지칭 대명사: 독해 Point '지칭' 설명이 가리키는 본문 단어에 보라 점선 → 위치 연결 */
+  .tok .w.refu{ border-bottom:1.6px dotted var(--purple); }
+  /* 중요 문장(주제문·서술형 등): 번호를 채운 네모로 강조 → 한눈에 식별 */
+  .row.imp .num{ color:#fff; background:var(--navy); border-radius:6px;
+                 padding:2px 4px; text-align:center; align-self:start; }
+  .row.imp.lbl .num, .row.imp .analysis.lbl .num{ margin-top:11px; }
+  .analysis .num .sbadge{ display:block; font-size:8px; font-weight:800;
+                          line-height:1.1; margin-top:1px; }
   .pbox .gko{ color:#4a5064; font-size:9.5px; }  /* 함축 한글 병기(작게) */
   .pbox b, .pbox strong{ font-weight:800; }
 
@@ -495,9 +504,9 @@
 
     {% for s in a.sentences %}
     {%- set first_has_role = s_roles and s.lines and (s.lines[0] | selectattr('role') | list) -%}
-    <div class="row">
+    <div class="row{% if s.important %} imp{% endif %}">
       <div class="analysis{% if first_has_role %} lbl{% endif %}">
-        <div class="num">{{ "%02d"|format(s.index) }}</div>
+        <div class="num">{{ "%02d"|format(s.index) }}{% if s.badge %}<span class="sbadge">{{ s.badge }}</span>{% endif %}</div>
         <div>
           <div class="en">
             {% for line in s.lines %}
@@ -510,7 +519,7 @@
                   {%- set _a = t.above or '' -%}{%- set _n = t.note or '' -%}
                   {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
                   {# 빨강 어법 글자색(t.color)은 학생용에도 항상 표시. 형광·밑줄·유의어는 s_gram 때만. #}
-                  <span class="w{% if t.color %} {{ t.color }}{% endif %}{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if is_vocab %} vu{% endif %}{% endif %}">{{ t.text | ansclean }}</span>
+                  <span class="w{% if t.color %} {{ t.color }}{% endif %}{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if is_vocab %} vu{% endif %}{% if t.ref_mark %} refu{% endif %}{% endif %}">{{ t.text | ansclean }}</span>
                   {# 아래: 어법 원문자 번호(빨강)는 학생용에도 표시 / 유의어·반의어·해석힌트는 s_gram 때만.
                      (X) 오답형은 어법 Point 박스에 있으므로 본문에선 생략. #}
                   {%- set _redmark = t.note and t.note_kind == 'red' -%}
@@ -551,7 +560,7 @@
           <span class="cap fcap">{{ s.index }}문장 - 독해 Point</span>
           <div class="body">
             {%- if s_gram -%}
-            {%- for r in s.refs %}<div class="fr"><span class="fl">지칭</span> {{ r }}</div>{% endfor -%}
+            {%- for r in s.refs %}<div class="fr"><span class="fl ref">지칭</span> {{ r }}</div>{% endfor -%}
             {% if s.gloss_en %}<div class="fr"><span class="fl im">함축</span> {{ s.gloss_en }}{% if s.gloss_ko %}<br><span class="gko">{{ s.gloss_ko }}</span>{% endif %}</div>{% endif %}
             {%- endif -%}
           </div>
