@@ -594,9 +594,10 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           {crops}
         </div>"""
 
+    n_pts = item.max_points or MAX_POINTS
     has_crops = any(len(pt) > 2 and pt[2] for pt in item.points)
     if has_crops:
-        pts = "".join(point_block(pt) for pt in item.points[:MAX_POINTS])
+        pts = "".join(point_block(pt) for pt in item.points[:n_pts])
     else:
         pts = "".join(
             f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
@@ -604,7 +605,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
             f'word-break:keep-all;margin-top:{u * 1.4:.0f}px">'
             f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
             f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-            for head, desc, *_ in item.points[:MAX_POINTS])
+            for head, desc, *_ in item.points[:n_pts])
 
     edge_el = ""
     if item.edge:
@@ -638,11 +639,6 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
 
     # 반 페이지 — 차별점 바로 아래. 무엇을 파는지 지면으로 한 번 보여 주고
     # 특징을 하나씩 뜯는 순서가 읽힌다.
-    half_el = "".join(f"""<div style="margin-top:{u * 3.2:.0f}px">{shot(f)}
-          <div class="sans" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 1.7:.0f}px;
-               color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
-        </div>""" for f, note in item.halves if shot(f))
-
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     name_px = u * (7.0 if item.signature else 5.4)
 
@@ -689,7 +685,6 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                font-size:{one_px:.0f}px;color:{t['fg']};line-height:1.5;
                word-break:keep-all;opacity:{one_op}">{item.one_line}</div>
           {edge_el}
-          {half_el}
           {sample_el}
           {tables_el}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
