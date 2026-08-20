@@ -156,12 +156,10 @@ INDEX_HTML = """
       <div class=grid>
         <div>
           <label>⑤-2 생성 회차 수
-            <span class=hint>(같은 지문 · 겹치지 않는 문항 · 난이도 하→중→상→중상)</span></label>
+            <span class=hint>(같은 지문 · 겹치지 않는 문항 · 난이도 하→중)</span></label>
           <select name=n_forms>
-            <option value="1" selected>1회분</option>
-            <option value="2">2회분</option>
-            <option value="3">3회분</option>
-            <option value="4">4회분</option>
+            <option value="1">1회분</option>
+            <option value="2" selected>2회분</option>
           </select>
         </div>
         <div></div>
@@ -556,7 +554,7 @@ def generate():
         from mockexam.core.llm import get_client
         client = get_client(key, MODEL)
 
-    n_forms = max(1, min(int(request.form.get("n_forms") or 1), 4))
+    n_forms = max(1, min(int(request.form.get("n_forms") or 2), 2))
     warnings: list[str] = []
     all_downloads: list[dict] = []
     fail_set: set[str] = set()
