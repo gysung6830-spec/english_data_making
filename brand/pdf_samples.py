@@ -180,7 +180,6 @@ CROPS = [
     ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.03, 0.628, 0.97, 0.880)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     ("workbook-integrated-pronoun.png", "h-wbi-pron.png", (0.02, 0.020, 0.98, 0.500)),
-    ("workbook-integrated-order.png", "h-wbi-order.png", (0.02, 0.020, 0.98, 0.520)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
     ("workbook-integrated.png", "h-wbi.png", (0.02, 0.020, 0.98, 0.560)),
     ("workbook.png", "h-wb.png", (0.02, 0.015, 0.98, 0.450)),
@@ -208,7 +207,8 @@ CROPS = [
 
     # 05 통합 워크북
     ("workbook-integrated.png", "c-wbi-ref.png", (0.06, 0.388, 0.95, 0.538)),
-    ("workbook-integrated.png", "c-wbi-order.png", (0.06, 0.566, 0.95, 0.690)),
+    ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.166, 0.97, 0.264)),
+    ("workbook-integrated-order.png", "c-wbi-order2.png", (0.03, 0.292, 0.97, 0.410)),
     ("workbook-integrated.png", "c-wbi-ko.png", (0.04, 0.236, 0.96, 0.372)),
     ("workbook-integrated-en.png", "c-wbi-en.png", (0.04, 0.236, 0.96, 0.348)),
 
