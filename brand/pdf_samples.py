@@ -68,6 +68,7 @@ SHOTS = [
     # 필생보 강의용 — 강사용 / 학생 문제지 / 글 정리
     Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
+    Shot("pilsaengbo-summary2.png", 15, head=["필생보", "강사용"]),
     Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
 
     # 필생보 독학용 — 표지·목차 말고 실제로 푸는 지면 위주
@@ -178,6 +179,7 @@ CROPS = [
     ("pilsaengbo-student.png", "h-psbc.png", (0.03, 0.055, 0.97, 0.470)),
     ("pilsaengbo-summary.png", "h-psbc-restate.png", (0.03, 0.310, 0.97, 0.625)),
     ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.03, 0.628, 0.97, 0.880)),
+    ("pilsaengbo-summary2.png", "h-psbc-restate2.png", (0.03, 0.305, 0.97, 0.640)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     ("workbook-integrated-pronoun.png", "h-wbi-pron.png", (0.02, 0.020, 0.98, 0.500)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
