@@ -28,6 +28,9 @@ class Item:
     price_note: str = ""         # 가격 아래 단서
     sample: str = ""             # brand/assets/samples/ 안의 실제 산출물 예시 파일명
     sample_note: str = ""        # 예시 이미지 아래 설명
+    half: str = ""               # 상세페이지 위쪽에 크게 놓는 '반 페이지' 지면
+    half_note: str = ""          # ↑ 그 아래 한 줄. 조각만 늘어놓으면 부품은 알아도
+    #   지면이 어떻게 생겼는지가 안 그려진다
     thumb: str = ""              # 라인업 썸네일만 다른 사진을 쓸 때. 비면 sample
     # ↑ 나란히 붙인 비교 사진처럼, 작게 줄이면 뭉개지는 장이 있다
     thumbs: list[tuple[str, str]] = field(default_factory=list)  # (파일명, 라벨)
@@ -95,6 +98,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="analysis",
+        half="h-analysis.png",
+        half_note="실제 지면 — 위에 주제와 '쉽게 말하면', 문장마다 끊어읽기와 해석, 오른쪽에 문장별 어법 Point.",
         no="02",
         name="지문분석지",
         en="Passage Analysis",
@@ -143,6 +148,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="pilsaengbo-class",
+        half="h-psbc.png",
+        half_note="학생용 지면 — 해석은 빈칸, '이렇게 읽으면 오답'과 '왜?' 줄까지. 강사용에는 이 자리가 채워져 있습니다.",
         no="03",
         name="필생보 · 강의용",
         en="Pilsaengbo for Class",
@@ -192,6 +199,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="pilsaengbo-self",
+        half="h-psbs.png",
+        half_note="직접 푸는 지면 — 어휘를 보고 해석을 쓴 뒤 '오역 주의'로 스스로 점검합니다.",
         no="04",
         name="필생보 · 독학용",
         en="Pilsaengbo for Self-Study",
@@ -241,6 +250,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="workbook-integrated",
+        half="h-wbi.png",
+        half_note="한글 포함본 지면 — 한 문장에 어형·선택·지칭이 함께 걸립니다.",
         no="05",
         name="통합 영어 워크북",
         en="Integrated Workbook",
@@ -280,6 +291,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="workbook",
+        half="h-wb.png",
+        half_note="조건 영작 지면 — 같은 문장을 하·중·상 제시어로 나눠 냅니다.",
         no="06",
         name="서술형 대비 교재",
         en="Writing Workbook",
@@ -317,6 +330,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="variation",
+        half="h-var.png",
+        half_note="1회 학생용 지면 — 한 지문에 어법·어휘·주제·내용 일치가 이어집니다.",
         no="07",
         name="변형문제 7종",
         en="Variations",
@@ -380,6 +395,8 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="mock",
+        half="h-mock.png",
+        half_note="1쪽 — 코드·학년·과목명·제한 시간·마킹 안내까지 학교 시험지 형식.",
         no="08",
         name="동형모의고사 4회",
         en="Mock Exam",

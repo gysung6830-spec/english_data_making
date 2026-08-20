@@ -636,6 +636,15 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
     one_cls = "ko" if punchy else "sans"
     one_op = ".95" if punchy else ".92"
 
+    # 반 페이지 — 차별점 바로 아래. 무엇을 파는지 지면으로 한 번 보여 주고
+    # 특징을 하나씩 뜯는 순서가 읽힌다.
+    half_el = ""
+    if item.half and shot(item.half):
+        half_el = f"""<div style="margin-top:{u * 3.2:.0f}px">{shot(item.half)}
+          <div class="sans" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 1.7:.0f}px;
+               color:{t['muted']};line-height:1.6;word-break:keep-all">{item.half_note}</div>
+        </div>"""
+
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     name_px = u * (7.0 if item.signature else 5.4)
 
@@ -682,6 +691,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                font-size:{one_px:.0f}px;color:{t['fg']};line-height:1.5;
                word-break:keep-all;opacity:{one_op}">{item.one_line}</div>
           {edge_el}
+          {half_el}
           {sample_el}
           {tables_el}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>

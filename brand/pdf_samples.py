@@ -169,6 +169,16 @@ CROPS = [
     ("one-line.png", "c-pass-stack.png", (0.03, 0.055, 0.97, 0.44)),
     ("one-line-2col.png", "c-pass-2col.png", (0.03, 0.055, 0.97, 0.44)),
 
+    # 각 자료의 '반 페이지' — 지면이 어떻게 생겼는지 보이는 핵심 절반.
+    # 조각만 늘어놓으면 부품은 알아도 지면이 안 그려진다.
+    ("analysis.png", "h-analysis.png", (0.02, 0.030, 0.98, 0.520)),
+    ("pilsaengbo-student.png", "h-psbc.png", (0.03, 0.055, 0.97, 0.470)),
+    ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
+    ("workbook-integrated.png", "h-wbi.png", (0.02, 0.020, 0.98, 0.560)),
+    ("workbook.png", "h-wb.png", (0.02, 0.015, 0.98, 0.450)),
+    ("variation.png", "h-var.png", (0.02, 0.040, 0.98, 0.600)),
+    ("mock.png", "h-mock.png", (0.02, 0.030, 0.98, 0.560)),
+
     # 02 지문분석지
     ("analysis.png", "c-analysis-easy.png", (0.05, 0.100, 0.95, 0.170)),
     ("analysis.png", "c-analysis-point.png", (0.66, 0.664, 0.96, 0.730)),
