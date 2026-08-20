@@ -492,7 +492,7 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
                  letter-spacing:.12em">자료 라인업</div>
             <div class="ko" style="margin-top:{u * 1.4:.0f}px;font-size:{u * 5.6:.0f}px;
                  color:{head_t['fg']};line-height:1.32;word-break:keep-all">
-              내신 영어, 지문 하나로 끝냅니다</div>
+              읽고 · 뜯어보고<br>시험에 나올 문제만 풉니다</div>
             <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
                  color:{head_t['muted']};line-height:1.75;word-break:keep-all">
               지문 한 편에 자료 여덟 종이 붙습니다. 무슨 글인지 알게 하는 것부터
