@@ -157,6 +157,75 @@ def shoot(src: Path, dpi: int = 130, only: str = "") -> list[Path]:
     return made
 
 
+# ── 포인트별 부분 확대 ────────────────────────────────────────────────────
+# 상세페이지에 지면 전체를 넣으면 글자가 작아 아무것도 안 읽힌다. 특징 하나에
+# 그 특징이 보이는 자리만 잘라 붙이는 편이 낫다. 좌표는 0~1 비율이라
+# dpi 를 바꿔도 그대로 쓴다.
+CROPS = [
+    # (원본 samples 파일, 저장 이름, (x0, y0, x1, y1))
+
+    # 02 지문분석지
+    ("analysis.png", "c-analysis-easy.png", (0.05, 0.100, 0.95, 0.170)),
+    ("analysis.png", "c-analysis-point.png", (0.66, 0.664, 0.96, 0.730)),
+    ("analysis.png", "c-analysis-parse.png", (0.04, 0.170, 0.665, 0.322)),
+    ("analysis.png", "c-analysis-gram.png", (0.66, 0.170, 0.96, 0.272)),
+
+    # 03 필생보 강의용 — 학생용 지면이 특징을 더 잘 보여 준다
+    ("pilsaengbo-student.png", "c-psbc-blank.png", (0.07, 0.172, 0.93, 0.232)),
+    ("pilsaengbo-student.png", "c-psbc-wrong.png", (0.07, 0.232, 0.93, 0.328)),
+    ("pilsaengbo-student.png", "c-psbc-circle.png", (0.08, 0.138, 0.70, 0.182)),
+    ("pilsaengbo.png", "c-psbc-filled.png", (0.07, 0.168, 0.93, 0.228)),
+
+    # 04 필생보 독학용
+    ("psb-solve.png", "c-psbs-write.png", (0.05, 0.120, 0.95, 0.202)),
+    ("psb-solve.png", "c-psbs-warn.png", (0.05, 0.208, 0.95, 0.252)),
+    ("psb-predict.png", "c-psbs-predict.png", (0.04, 0.090, 0.96, 0.330)),
+    ("psb-signal.png", "c-psbs-signal.png", (0.04, 0.090, 0.96, 0.330)),
+
+    # 05 통합 워크북
+    ("workbook-integrated.png", "c-wbi-ref.png", (0.06, 0.388, 0.95, 0.538)),
+    ("workbook-integrated.png", "c-wbi-order.png", (0.06, 0.566, 0.95, 0.690)),
+    ("workbook-integrated.png", "c-wbi-ko.png", (0.04, 0.236, 0.96, 0.372)),
+    ("workbook-integrated-en.png", "c-wbi-en.png", (0.04, 0.236, 0.96, 0.348)),
+
+    # 06 서술형 대비 교재
+    ("workbook.png", "c-wb-types.png", (0.03, 0.030, 0.97, 0.069)),
+    ("workbook.png", "c-wb-level.png", (0.04, 0.110, 0.51, 0.408)),
+    ("workbook.png", "c-wb-answer.png", (0.51, 0.110, 0.97, 0.352)),
+
+    # 07 변형문제
+    ("variation.png", "c-var-choices.png", (0.49, 0.428, 0.96, 0.588)),
+    ("variation.png", "c-var-passage.png", (0.04, 0.234, 0.50, 0.462)),
+    ("variation.png", "c-var-round.png", (0.26, 0.083, 0.74, 0.113)),
+    ("variation-answer.png", "c-var-why.png", (0.04, 0.352, 0.50, 0.530)),
+
+    # 08 동형모의고사
+    ("mock.png", "c-mock-head.png", (0.04, 0.045, 0.96, 0.200)),
+    ("mock-paper.png", "c-mock-score.png", (0.04, 0.028, 0.51, 0.250)),
+    ("mock-answer.png", "c-mock-why.png", (0.04, 0.080, 0.51, 0.300)),
+]
+
+
+def make_crops() -> list[Path]:
+    """samples 안의 지면에서 특징이 보이는 자리만 잘라 낸다."""
+    from PIL import Image
+
+    made: list[Path] = []
+    for src, name, (x0, y0, x1, y1) in CROPS:
+        path = OUT / src
+        if not path.exists():
+            print(f"  · {name} — 원본 {src} 없음, 건너뜀")
+            continue
+        with Image.open(path) as im:
+            rgb = im.convert("RGB")
+            w, h = rgb.size
+            box = (round(w * x0), round(h * y0), round(w * x1), round(h * y1))
+            rgb.crop(box).save(OUT / name)
+        made.append(OUT / name)
+        print(f"  ✔ samples/{name}  ({box[2] - box[0]}×{box[3] - box[1]})  ← {src}")
+    return made
+
+
 # ── 두 판본을 나란히 ──────────────────────────────────────────────────────
 PAIRS = [
     # (왼쪽 파일, 왼쪽 라벨, 오른쪽 파일, 오른쪽 라벨, 저장 이름, 위에서 남길 비율)
@@ -218,10 +287,17 @@ def compose_pairs(width: int = 1600) -> list[Path]:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="판매 자료 PDF → 예시 이미지")
-    ap.add_argument("--src", required=True, help="PDF 들이 있는 폴더")
+    ap.add_argument("--src", default="", help="PDF 들이 있는 폴더")
     ap.add_argument("--dpi", type=int, default=130)
     ap.add_argument("--only", default="", help="이 이름 한 장만 다시 뽑는다")
+    ap.add_argument("--crops-only", action="store_true",
+                    help="PDF 는 건드리지 않고 부분 확대만 다시 자른다")
     args = ap.parse_args()
+
+    if args.crops_only:
+        made = make_crops()
+        print(f"\n{len(made)}개 → {OUT}")
+        return
 
     src = Path(args.src).expanduser()
     if not src.is_dir():
@@ -229,6 +305,7 @@ def main() -> None:
     made = shoot(src, args.dpi, args.only)
     if not args.only:
         made += compose_pairs()
+        made += make_crops()
     print(f"\n{len(made)}개 → {OUT}")
 
 

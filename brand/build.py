@@ -138,6 +138,33 @@ def shot(name: str) -> str:
             f'border-radius:10px;box-shadow:0 6px 22px rgba(14,31,26,.16)">')
 
 
+# 예시 지면을 뽑아낸 해상도(pdf_samples 의 기본 130dpi 에서 A4 가로).
+# 잘라 낸 조각을 원래 지면에서 차지하던 비율대로 보여 주려고 기준으로 쓴다.
+SAMPLE_PAGE_W = 1075
+
+# 조각은 작아서 그대로 놓으면 안 읽힌다. 이만큼만 키운다. 더 키우면 흐려진다.
+CROP_ZOOM = 1.5
+
+
+def crop_img(name: str, doc_w: int) -> str:
+    """부분 확대 조각. 원래 지면에서 차지하던 만큼만 키워서 보여 준다.
+
+    좁은 조각을 본문 폭에 맞춰 늘리면 세 배로 확대되어 흐려지고, 지면에서
+    작은 상자였다는 사실도 사라진다.
+    """
+    path = SAMPLES / name
+    if not name or not path.exists():
+        return ""
+    from PIL import Image
+
+    with Image.open(path) as im:
+        w = im.width
+    px = min(doc_w, round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM))
+    return (f'<img src="{path.as_uri()}" style="display:block;width:{px}px;'
+            f'max-width:100%;border-radius:8px;'
+            f'box-shadow:0 5px 18px rgba(14,31,26,.16)">')
+
+
 def shot_crop(name: str, out: Path, width: int, ratio: float = 0.72) -> str:
     """예시 이미지의 윗부분만 잘라 목록용 썸네일로 만든다."""
     src = SAMPLES / name
@@ -371,7 +398,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
             f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
             f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-            for head, desc in src_pts[:points_n])
+            for head, desc, *_ in src_pts[:points_n])
 
         head_el = f"""<div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
               <div class="wm" style="font-size:{u * 2.0:.0f}px;color:{t['accent']}">{it.no}</div>
@@ -546,13 +573,37 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                  f'padding:{u * 1.0:.0f}px {u * 2.0:.0f}px;font-size:{u * 1.8:.0f}px;'
                  f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
 
-    pts = "".join(
-        f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
-        f'line-height:1.7;padding-left:{u * 1.8:.0f}px;position:relative;'
-        f'word-break:keep-all;margin-top:{u * 1.4:.0f}px">'
-        f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
-        f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-        for head, desc in item.points[:MAX_POINTS])
+    def point_block(pt) -> str:
+        """특징 한 줄 + 그 특징이 보이는 지면 조각.
+
+        지면 전체를 넣으면 글자가 작아 아무것도 안 읽힌다. 말로 설명한 그 자리만
+        잘라 바로 아래에 붙이면, 읽는 사람이 문장과 실물을 짝지어 본다.
+        """
+        head, desc, *rest = pt
+        inner_w = int(width - u * 13)
+        crops = "".join(
+            f'<div style="margin-top:{u * 1.4:.0f}px">{crop_img(c, inner_w)}</div>'
+            for c in (rest[0].split("|") if rest and rest[0] else [])
+            if crop_img(c, inner_w))
+        return f"""<div style="margin-top:{u * 3.0:.0f}px">
+          <div class="ko" style="font-size:{u * 2.5:.0f}px;color:{t['fg']};
+               line-height:1.45;word-break:keep-all">{head}</div>
+          <div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.95:.0f}px;
+               color:{t['muted']};line-height:1.72;word-break:keep-all">{desc}</div>
+          {crops}
+        </div>"""
+
+    has_crops = any(len(pt) > 2 and pt[2] for pt in item.points)
+    if has_crops:
+        pts = "".join(point_block(pt) for pt in item.points[:MAX_POINTS])
+    else:
+        pts = "".join(
+            f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
+            f'line-height:1.7;padding-left:{u * 1.8:.0f}px;position:relative;'
+            f'word-break:keep-all;margin-top:{u * 1.4:.0f}px">'
+            f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
+            f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
+            for head, desc, *_ in item.points[:MAX_POINTS])
 
     edge_el = ""
     if item.edge:
@@ -572,9 +623,11 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
         </div>"""
 
-    n_fig = item.figures or MAX_FIGURES
-    sample_el = figure(item.sample, item.sample_note)
-    sample_el += "".join(figure(n, note) for n, note in item.extra[:n_fig - 1])
+    n_fig = item.figures or (0 if has_crops else MAX_FIGURES)
+    sample_el = ""
+    if n_fig:
+        sample_el = figure(item.sample, item.sample_note)
+        sample_el += "".join(figure(n, note) for n, note in item.extra[:n_fig - 1])
 
     # 짧고 센 한 줄은 크게, 설명형 긴 한 줄은 작게. 같은 크기로 두면 센 문장이 죽는다.
     punchy = len(item.one_line) <= 30
@@ -697,7 +750,7 @@ def write_posts() -> list[Path]:
         return f"![]({name})\n<!-- 이미지: brand/assets/{name} -->"
 
     for it in MATERIALS + BOOKS:
-        pts = "\n\n".join(f"**{h}**\n\n{d}" for h, d in it.points)
+        pts = "\n\n".join(f"**{h}**\n\n{d}" for h, d, *_ in it.points)
         who = "\n".join(f"- {w}" for w in it.who)
         spec = "\n".join(f"- {k} — {v}" for k, v in it.spec)
         tables = "".join(
