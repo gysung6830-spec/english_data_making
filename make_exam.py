@@ -14,7 +14,7 @@
     --header  상단 머리글 문구(기본값 비움)
     --out     출력 PDF 경로
     --input   지문 .txt 폴더(기본 input/)
-    --demo    API 없이 데모 2지문으로 미리보기(= 시험지생성_데모코드.py 와 동일)
+    --demo    API 없이 내장 데모 지문으로 미리보기
 """
 from __future__ import annotations
 
@@ -42,14 +42,10 @@ def main() -> int:
     parser.add_argument("--input", default=None,
                         help="지문 파일 폴더(기본 input/). .txt/.pdf/.jpg/.png 지원")
     parser.add_argument("--config", default=None, help="설정 파일 경로")
-    parser.add_argument("--vocab-method", choices=["synonym", "negation"],
-                        default="synonym",
-                        help="어휘 문제 방식: synonym(반의어 정답) 또는 negation(부정어 삽입)")
-    parser.add_argument("--content-difficulty", choices=["plain", "hard"],
-                        default="hard",
-                        help="내용 일치 난이도: hard(헷갈리는 함정 오답) 또는 plain(명확한 오답)")
+    parser.add_argument("--level", choices=["상", "중", "하"], default="중",
+                        help="난이도(어휘 방식·내용일치 난이도까지 함께 결정됩니다)")
     parser.add_argument("--demo", action="store_true",
-                        help="API 없이 데모 2지문으로 미리보기")
+                        help="API 없이 내장 데모 지문으로 미리보기")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -59,11 +55,15 @@ def main() -> int:
     # 데모 모드: API 불필요 --------------------------------------------------
     if args.demo:
         from exam import renderer, validator
-        from exam.demo_data import demo_passages
-        passages = demo_passages()
-        validator.validate_passages(passages)
-        validator.validate_numbering(passages, start=1)
-        renderer.render_pdf(passages, out_path, header_note=args.header)
+        from exam.merged import (
+            MERGED_LABELS, MERGED_ORDER, MERGED_PROMPTS, demo_passages_merged,
+        )
+        passages = demo_passages_merged()
+        validator.validate_passages(passages, MERGED_ORDER)
+        validator.validate_numbering(passages, 1, MERGED_ORDER)
+        renderer.render_pdf(passages, out_path, header_note=args.header,
+                            type_order=MERGED_ORDER, prompts=MERGED_PROMPTS,
+                            labels=MERGED_LABELS)
         logger.info("데모 시험지 생성 완료: %s", out_path)
         return 0
 
@@ -80,7 +80,7 @@ def main() -> int:
         return 1
 
     from exam import ingest
-    from exam.pipeline import build_exam
+    from exam.merged import build_exam_merged
     from exam.llm import ClaudeClient
 
     client = ClaudeClient(cfg.api_key, cfg.model,
@@ -97,15 +97,14 @@ def main() -> int:
         return 1
     logger.info("총 %d개 지문으로 시험지 생성 시작", len(bodies))
 
-    result = build_exam(
+    result = build_exam_merged(
         client,
         [b for _, b in bodies],
         out_path,
         header_note=args.header,
         max_retries=cfg.processing.max_retries,
         logger=logger,
-        vocab_method=args.vocab_method,
-        content_difficulty=args.content_difficulty,
+        level=args.level,
         labels=[lbl for lbl, _ in bodies],   # 원본 PDF 문항번호(있으면) → 지문 라벨
     )
     logger.info("시험지 생성 완료: %s", result)

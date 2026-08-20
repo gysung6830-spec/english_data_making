@@ -1,43 +1,22 @@
-"""변형문제 2회(A~G) LLM 생성 + 오케스트레이션.
+"""추론형 유형 LLM 생성 — 빈칸추론(F) · 함의추론(B) · 요약문 빈칸(E) · 어순 배열(D).
 
-1회와 같은 원칙: 분석 1회(analyzer, 정본 문장은 원문 그대로) → 유형별 생성 → build2 조립.
-C(어법)는 1회 생성기를 그대로 재사용한다.
+pipeline 의 산문형 유형과 원칙이 같다: 분석 1회(analyzer, 정본 문장은 원문 그대로)
+→ 유형별 생성 → build2 조립. 어떤 유형을 어떤 순서로 낼지는 merged.py 가 정한다.
 """
 from __future__ import annotations
 
-from pathlib import Path
+from pydantic import BaseModel, field_validator, model_validator
 
-from pydantic import BaseModel, Field, field_validator, model_validator
-
-from . import analyzer, answer_spread, build2, difficulty, renderer, review, validator
-from ._concurrent import run_parallel
-from .generators import grammar as _grammar_gen
+from . import answer_spread, build2, review
 from .generators.base import context
-from .llm import SYSTEM, ClaudeClient
-from .schemas import Analysis, WordMark, WrongReason, _require_all_distractors
-from .set2 import (
-    A, B, C, D, E, F, G, TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2,
-)
-from .types import Passage
+from .llm import SYSTEM
+from .schemas import WrongReason, _require_all_distractors
+from .set2 import B, D, E, F
 
 
 # ---------------------------------------------------------------------------
 # 구조화 출력 스키마
 # ---------------------------------------------------------------------------
-class AOut(BaseModel):
-    marks: list[WordMark]                 # 5개(ⓐ~ⓔ)
-    answer_no: int
-    reason: str
-    choices: list[str]                    # 5개 짝 문자열(예 "ⓐ, ⓒ")
-
-    @field_validator("marks", "choices")
-    @classmethod
-    def _five(cls, v):
-        if len(v) != 5:
-            raise ValueError("A유형은 밑줄·선지가 각각 5개여야 합니다.")
-        return v
-
-
 class BOut(BaseModel):
     phrase: str
     choices: list[str]
@@ -117,42 +96,9 @@ class FOut(BaseModel):
         return self
 
 
-class GOut(BaseModel):
-    statements: list[str]
-    matches: list[bool]
-    reason: str
-    per_stmt: list[str] = Field(default_factory=list)
-
-    def check(self):
-        if len(self.statements) != len(self.matches):
-            raise ValueError("statements 와 matches 개수가 다릅니다.")
-        if len(self.statements) != 5:
-            raise ValueError("G유형 진술은 정확히 5개여야 합니다.")
-        if not (1 <= sum(self.matches) <= 5):
-            raise ValueError("일치 개수는 1~5개여야 합니다(0개 불가).")
-
-
 # ---------------------------------------------------------------------------
 # 유형별 생성기
 # ---------------------------------------------------------------------------
-def _gen_A(client, analysis, body, max_retries=1, answer_pos=None):
-    p = ("아래 정본으로 '어법·어휘 짝짓기(A)'를 만드세요. 밑줄 5개(ⓐ~ⓔ, marks: sent_no·word·shown).\n"
-         "그중 정확히 2개만 오답: 1개는 어법 오류(shown 을 틀린 형태로), 1개는 반의어(shown 을 문맥상 "
-         "어색한 반대말로). 나머지 3개는 shown=원본. choices 5개는 두 밑줄의 짝(예 'ⓐ, ⓒ'), "
-         "answer_no 는 실제 오답 두 개의 짝. reason 은 한국어.\n\n{ctx}")
-    out: AOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), AOut,
-                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
-    marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
-    choices, answer_no = out.choices, out.answer_no
-    old_no = answer_no
-    if answer_pos:   # 정답 위치 분산(짝 선지 재배열 — 정오 불변)
-        choices, answer_no, _ = answer_spread.place_answer(choices, answer_no, answer_pos)
-    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
-    flags: list[str] = []
-    q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices, flags=flags)
-    return q, a, flags
-
-
 def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=""):
     p = ("아래 정본으로 '함의추론(B)'을 만드세요. 비유·맥락의존 어구 하나를 phrase 로 고르되(지문에 "
          "그대로 있는, 어휘 난도 있는 표현으로 '축자 함정'을 깐다), 그 '문맥적' 의미를 묻습니다.\n"
@@ -178,11 +124,6 @@ def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=
     q, a = build2.make_B(analysis.sentences, phrase, choices, answer_no,
                          reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
-
-
-def _gen_C(client, analysis, body, max_retries=1, answer_pos=None):
-    # 어법(복수정답)은 1회 생성기를 그대로 재사용(정답 위치가 읽는 순서로 정해져 분산 대상 아님)
-    return _grammar_gen.generate(client, analysis, body, max_retries=max_retries)
 
 
 def _gen_D(client, analysis, body, max_retries=1, answer_pos=None):
@@ -247,21 +188,7 @@ def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
     return q, a, review.weak_distractors(out.wrong_reasons)
 
 
-def _gen_G(client, analysis, body, max_retries=1, answer_pos=None):
-    def _extra(o: GOut):
-        o.check()
-    p = ("아래 정본으로 '내용일치 개수(G)'를 만드세요. 지문 문장을 패러프레이즈한 한국어 진술 5개를 "
-         "statements 로, 각 진술의 일치 여부를 matches(bool 5개)로 줍니다. 불일치는 주체·정도·인과를 "
-         "뒤집거나 없는 내용. per_stmt 는 각 진술이 왜 일치/불일치인지(한국어). reason 한국어.\n\n{ctx}")
-    out: GOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), GOut,
-                                  max_tokens=2500, max_retries=max_retries, extra_validate=_extra,
-                                  cache_prefix=context(analysis))
-    per = {i + 1: t for i, t in enumerate(out.per_stmt)} if out.per_stmt else {}
-    q, a = build2.make_G(analysis.sentences, out.statements, sum(out.matches), out.reason, per)
-    return q, a, []
-
-
-_GENERATORS2 = {A: _gen_A, B: _gen_B, C: _gen_C, D: _gen_D, E: _gen_E, F: _gen_F, G: _gen_G}
+_GENERATORS2 = {B: _gen_B, D: _gen_D, E: _gen_E, F: _gen_F}
 
 
 # ---------------------------------------------------------------------------
@@ -306,76 +233,3 @@ def make_task2(t, client, analysis, body, max_retries=1, logger=None,
                                seed=answer_spread.seed_of(analysis.title, level))
             if t in slots else None)
     return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, apos)
-
-
-def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
-                   level=None, passage_index=0) -> Passage:
-    """2회 지문 1개 -> A~G. 유형은 병렬 생성, analysis 를 주면 분석을 건너뛴다.
-    level(상/중/하)로 전체 난이도를 조절한다.
-    passage_index 로 정답 위치를 지문마다 다르게 분산한다(정답 번호 몰림 방지)."""
-    if analysis is None:
-        analysis = analyzer.analyze(client, body, max_retries=max_retries)
-    if level:
-        analysis.difficulty_note = difficulty.clause(level)
-    passage = Passage(title=analysis.title)
-
-    def _task(t):
-        return make_task2(t, client, analysis, body, max_retries=max_retries,
-                          logger=logger, passage_index=passage_index, level=level)
-
-    results = run_parallel([(t, _task(t)) for t in TYPE_ORDER2])
-    from . import review as _rv
-    for t in TYPE_ORDER2:
-        res = results.get(t)
-        if res is None:      # 이 유형은 최종 생성 실패 → 건너뛰고 나머지는 살린다
-            continue
-        q, a, fl = res
-        passage.set_qa(t, q, a)
-        passage.flag(t, fl)   # '확인 권장'(자동 보정·오답 근거 약함) 사유가 있으면 기록
-        passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
-    if not passage.q:
-        raise RuntimeError(f"[{passage.title}] 2회 모든 유형 생성 실패")
-    return passage
-
-
-def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
-                    level=None, labels=None, progress=None,
-                    part_label="변형문제 2회") -> list:
-    """2회 여러 지문 -> 검증된 Passage 리스트(조판 없음). 합본용.
-
-    labels 를 주면 각 지문 라벨(원본 PDF 문항번호 등)을 조판 라벨로 쓴다.
-    """
-    from .pipeline import analyze_bodies
-    if analyses is None:
-        analyses = analyze_bodies(client, bodies, max_retries=max_retries, logger=logger)
-    if logger:
-        logger.info("[2회] 지문 %d개 생성 중 …", len(bodies))
-    # 지문끼리도 동시에 처리(실제 동시 API 호출 수는 클라이언트 전체 상한으로 묶임)
-    def _one(b, a, i):
-        r = build_passage2(client, b, max_retries=max_retries, logger=logger,
-                           analysis=a, level=level, passage_index=i)
-        if progress:
-            progress.step(f"{part_label} · 지문 {i + 1}")
-        return r
-
-    tasks = [(i, (lambda b=body, a=analysis, i=i: _one(b, a, i)))
-             for i, (body, analysis) in enumerate(zip(bodies, analyses))]
-    res = run_parallel(tasks)
-    passages = []
-    for i in range(len(bodies)):
-        passage = res[i]
-        if labels and i < len(labels):
-            passage.source_label = labels[i]
-        passages.append(passage)
-    validator.validate_passages(passages, TYPE_ORDER2)
-    validator.validate_numbering(passages, 1, TYPE_ORDER2)
-    return passages
-
-
-def build_exam2(client, bodies, out_path, header_note="", max_retries=1, logger=None,
-                analyses=None, level=None, sections=None, labels=None) -> Path:
-    passages = build_passages2(client, bodies, max_retries=max_retries, logger=logger,
-                               analyses=analyses, level=level, labels=labels)
-    return renderer.render_pdf(passages, out_path, header_note=header_note,
-                               type_order=TYPE_ORDER2, prompts=TYPE_PROMPTS2, labels=TYPE_LABELS2,
-                               sections=sections)

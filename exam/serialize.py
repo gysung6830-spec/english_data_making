@@ -104,8 +104,8 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
             "sections": pm.get("sections") or None,
             "group_by": gb if gb in ("passage", "type") else "passage",
         }
-        if setk != "1":     # 1회는 조판기 기본값이라 생략, 그 외(통합·2회)는 명시
-            part.update(type_order=order, prompts=prompts, labels=labels)
+        # 조판 메타는 세트와 상관없이 항상 명시한다(기본값에 기대지 않는다).
+        part.update(type_order=order, prompts=prompts, labels=labels)
         parts.append(part)
 
     meta = {"header": header,

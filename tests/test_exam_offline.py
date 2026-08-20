@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from exam import build as B  # noqa: E402
-from exam import pipeline, renderer, validator  # noqa: E402
+from exam import renderer, validator  # noqa: E402
 from exam.demo_data import DNA, demo_passages  # noqa: E402
 from exam.schemas import (  # noqa: E402
     Analysis,
@@ -31,16 +31,20 @@ from exam.schemas import (  # noqa: E402
     WrongReason,
 )
 from exam.gen2 import (  # noqa: E402
-    AOut,
     BOut,
     DOut,
     EOut,
     FOut,
-    GOut,
     Pair,
 )
-from exam.set2 import TYPE_ORDER2  # noqa: E402
-from exam.types import TYPE_ORDER  # noqa: E402
+from exam.merged import (  # noqa: E402
+    MERGED_LABELS,
+    MERGED_ORDER,
+    MERGED_PROMPTS,
+    build_passage_merged,
+    build_passages_merged,
+    demo_passages_merged,
+)
 
 
 def test_demo_validation_and_numbering() -> None:
@@ -494,15 +498,7 @@ _FAKE = {
         q3_prompt="p3", q3_before="Info ", q3_mid=" is ", q3_after=" now.",
         q3_cue_a="accumulate", q3_cue_b="govern", q3_ans_a="accumulated", q3_ans_b="governs",
         q3_reason="근거."),
-    # --- 2회(A~G) 가짜 출력 -------------------------------------------------
-    "AOut": lambda: AOut(
-        marks=[WordMark(sent_no=1, word="first", shown="first"),
-               WordMark(sent_no=2, word="important", shown="important"),
-               WordMark(sent_no=3, word="concrete", shown="abstract"),   # 반의어(오답)
-               WordMark(sent_no=4, word="draws", shown="draw"),          # 어법(오답)
-               WordMark(sent_no=1, word="clearly", shown="clearly")],
-        answer_no=3, reason="이유.",
-        choices=["ⓐ, ⓑ", "ⓐ, ⓒ", "ⓒ, ⓓ", "ⓑ, ⓔ", "ⓓ, ⓔ"]),
+    # --- 추론형(B·D·E·F) 가짜 출력 -----------------------------------------
     "BOut": lambda: BOut(
         phrase="concrete example", choices=["b1", "b2", "b3", "b4", "b5"],
         answer_no=2, reason="이유.",
@@ -526,30 +522,27 @@ _FAKE = {
         answer_no=2, reason="이유.",
         wrong_reasons=[WrongReason(no=1, text="모순"), WrongReason(no=3, text="무관"),
                        WrongReason(no=4, text="모순"), WrongReason(no=5, text="무관")]),
-    "GOut": lambda: GOut(
-        statements=["진술1", "진술2", "진술3", "진술4", "진술5"],
-        matches=[True, False, True, False, True], reason="이유.",
-        per_stmt=["일치", "불일치", "일치", "불일치", "일치"]),
 }
 
 
 def test_llm_path_wiring() -> None:
-    passage = pipeline.build_passage(_FakeClient(), "dummy body")
-    assert passage.types == set(TYPE_ORDER)
-    validator.check_passage(passage)
+    passage = build_passage_merged(_FakeClient(), "dummy body")
+    assert passage.types == set(MERGED_ORDER)
+    validator.check_passage(passage, MERGED_ORDER)
     # 부정어·원문단어 방식도 배선되는지
     for m in ("negation", "original"):
-        p = pipeline.build_passage(_FakeClient(), "dummy body", vocab_method=m)
-        validator.check_passage(p)
+        p = build_passage_merged(_FakeClient(), "dummy body", vocab_method=m)
+        validator.check_passage(p, MERGED_ORDER)
     # 어휘 방식은 난이도에 연동: 상=부정어 · 중=유의어 · 하=원문단어
     from exam import difficulty
     assert difficulty.vocab_method("상") == "negation"
     assert difficulty.vocab_method("중") == "synonym"
     assert difficulty.vocab_method("하") == "original"
     for lv in ("상", "중", "하"):
-        p = pipeline.build_passage(_FakeClient(), "dummy body", level=lv)
-        validator.check_passage(p)
-    html = renderer.render_html([passage])
+        p = build_passage_merged(_FakeClient(), "dummy body", level=lv)
+        validator.check_passage(p, MERGED_ORDER)
+    html = renderer.render_html([passage], type_order=MERGED_ORDER,
+                                prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
     assert "정답 및 해설" in html
     print("✓ LLM 경로(생성기→build→검증→조판) 배선 통과")
 
@@ -595,8 +588,9 @@ def test_prompt_cache_request() -> None:
 
 
 def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") -> None:
-    """유형 병렬 생성 + 지문 병렬 분석 + 1회·2회 분석 공유가 정상 배선되는지."""
-    from exam import gen2, pipeline
+    """유형 병렬 생성 + 지문 병렬 분석 + 난이도별 분석 공유가 정상 배선되는지."""
+    from exam import pipeline
+    from exam.merged import build_exam_merged
     tmp_out.mkdir(parents=True, exist_ok=True)
 
     client = _FakeClient()
@@ -606,27 +600,25 @@ def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") 
     analyses = pipeline.analyze_bodies(client, bodies)
     assert len(analyses) == len(bodies)
 
-    # 2) 1회: 미리 만든 분석을 공유하며 병렬 유형 생성 → 번호 연속(1..14)
+    # 2) 미리 만든 분석을 공유하며 병렬 유형 생성 → 번호 연속(1..22)
     out1 = tmp_out / "p1.pdf"
-    pipeline.build_exam(client, bodies, out1, analyses=analyses)
+    build_exam_merged(client, bodies, out1, analyses=analyses)
     assert out1.exists()
 
-    # 3) 2회: 같은 분석 공유 → A~G 병렬 생성
+    # 3) 같은 분석을 난이도만 바꿔 재사용(분석 API 를 다시 부르지 않는다)
     out2 = tmp_out / "p2.pdf"
-    gen2.build_exam2(client, bodies, out2, analyses=analyses)
+    build_exam_merged(client, bodies, out2, analyses=analyses, level="상")
     assert out2.exists()
 
-    # 4) 병렬 build_passage 결과가 순서대로 온전히 채워졌는지(7종)
-    p = pipeline.build_passage(client, "dummy", analysis=analyses[0])
-    assert p.types == set(TYPE_ORDER)
-    p2 = gen2.build_passage2(client, "dummy", analysis=analyses[0])
-    assert p2.types == set(TYPE_ORDER2)
-    print("✓ 병렬 생성·병렬 분석·1회2회 분석 공유 통과")
+    # 4) 병렬 생성 결과가 순서대로 온전히 채워졌는지(11종)
+    p = build_passage_merged(client, "dummy", analysis=analyses[0])
+    assert p.types == set(MERGED_ORDER)
+    print("✓ 병렬 생성·병렬 분석·난이도별 분석 공유 통과")
 
 
 def test_difficulty_lever() -> None:
     """상/중/하 레버가 분석에 지침을 심고, 모든 생성기 context 에 실려 가는지."""
-    from exam import difficulty, gen2, pipeline
+    from exam import difficulty
     from exam.generators.base import context
 
     assert difficulty.normalize(None) == "중"
@@ -635,17 +627,16 @@ def test_difficulty_lever() -> None:
     assert difficulty.content_difficulty("상") == "hard"
 
     client = _FakeClient()
-    # level 을 주면 build_passage 가 분석에 지침을 심고 → context 에 노출된다
+    # level 을 주면 생성 직전에 분석에 지침을 심고 → context 에 노출된다
     a = _fake_analysis()
     a.difficulty_note = difficulty.clause("상")
     assert "[난이도: 상]" in context(a)
 
-    # 1회·2회 모두 level 경로가 정상 배선되는지
-    p1 = pipeline.build_passage(client, "dummy", level="하")
-    assert p1.types == set(TYPE_ORDER)
-    p2 = gen2.build_passage2(client, "dummy", level="상")
-    assert p2.types == set(TYPE_ORDER2)
-    print("✓ 상/중/하 난이도 레버(지침 주입·1회2회 배선) 통과")
+    # 산문형·추론형 유형 모두 level 경로가 정상 배선되는지
+    for lv in ("하", "상"):
+        p = build_passage_merged(client, "dummy", level=lv)
+        assert p.types == set(MERGED_ORDER)
+    print("✓ 상/중/하 난이도 레버(지침 주입·전 유형 배선) 통과")
 
 
 def test_error_reduction_settings() -> None:
@@ -683,18 +674,17 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
     """분석 결과 JSON 저장→복원→재렌더(무API): 제목만 바꿔 재출력이 되는지."""
     import json as _json
 
-    from exam import gen2, pipeline, serialize
-    from exam.set2 import TYPE_ORDER2
+    from exam import serialize
 
     client = _FakeClient()
-    ps1 = pipeline.build_passages(client, ["b1", "b2"], labels=["31번", "32번"])
-    ps2 = gen2.build_passages2(client, ["b1", "b2"], labels=["31번", "32번"])
+    ps1 = build_passages_merged(client, ["b1", "b2"], labels=["31번", "32번"])
+    ps2 = build_passages_merged(client, ["b1", "b2"], labels=["31번", "32번"], level="상")
     ps1[0].flag("topic", ["오답 선지 근거 보강 검토 (…)"])   # 플래그도 보존되는지
 
     part_meta = [
-        {"set": "1", "tag": "변형문제 1회 · 난이도 중",
+        {"set": "M", "tag": "변형문제 · 난이도 중",
          "sections": ["student", "answers"], "passages": ps1},
-        {"set": "2", "tag": "변형문제 2회 · 난이도 상",
+        {"set": "M", "tag": "변형문제 · 난이도 상",
          "sections": ["student", "answers"], "passages": ps2},
     ]
     payload = serialize.dump_parts(part_meta, header="원래학원", doc_name="Unit1")
@@ -703,23 +693,35 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     # 1) 문항 HTML·제목·라벨·플래그가 그대로 보존
     p0 = data["parts"][0]["passages"][0]
-    assert set(p0["q"]) == set(TYPE_ORDER) and set(p0["a"]) == set(TYPE_ORDER)
+    assert set(p0["q"]) == set(MERGED_ORDER) and set(p0["a"]) == set(MERGED_ORDER)
     assert p0["source_label"] == "31번"
     assert p0["flags"]["topic"]                     # 플래그 보존
-    assert data["parts"][1]["set"] == "2"
+    assert data["parts"][1]["set"] == "M"
 
     # 2) 머리글 교체 복원 → header_note 에 새 제목이 실린다(재분석 없음)
     parts, meta = serialize.load_parts(data, header_override="새학원 4월")
     assert len(parts) == 2 and meta["n_parts"] == 2
-    assert parts[0]["header_note"] == "변형문제 1회 · 난이도 중 — 새학원 4월"
-    assert parts[1]["type_order"] == TYPE_ORDER2    # 2회 조판 메타 복원
-    # 지문 제목·라벨 보존
+    assert parts[0]["header_note"] == "변형문제 · 난이도 중 — 새학원 4월"
+    assert tuple(parts[1]["type_order"]) == MERGED_ORDER    # 통합 조판 메타 복원
     assert parts[0]["passages"][0].source_label == "31번"
-    assert parts[0]["passages"][0].q.keys() == set(TYPE_ORDER) if False else True
 
     # 3) 머리글 미지정이면 저장된 값 유지
     parts_keep, _ = serialize.load_parts(data)
     assert parts_keep[0]["header_note"].endswith("원래학원")
+
+    # 3-b) 옛 '1회/2회'로 저장해 둔 결과 JSON도 그대로 재출력된다(생성은 못 해도 조판은 가능)
+    from exam.demo2 import demo_passages_2
+    from exam.set2 import TYPE_ORDER2
+    from exam.types import TYPE_ORDER
+    legacy = serialize.dump_parts(
+        [{"set": "1", "tag": "변형문제 1회", "sections": ["student"],
+          "passages": demo_passages()},
+         {"set": "2", "tag": "변형문제 2회", "sections": ["student"],
+          "passages": demo_passages_2()}], header="옛자료")
+    lparts, _ = serialize.load_parts(_json.loads(_json.dumps(legacy, ensure_ascii=False)))
+    assert len(lparts) == 2
+    assert tuple(lparts[0]["type_order"]) == tuple(TYPE_ORDER)
+    assert tuple(lparts[1]["type_order"]) == tuple(TYPE_ORDER2)
 
     # 4) 실제로 재렌더되는지(무API)
     tmp_out.mkdir(parents=True, exist_ok=True)
@@ -729,7 +731,7 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     # 5) 손상 검증: 유형 누락이면 친절한 오류
     broken = _json.loads(_json.dumps(payload, ensure_ascii=False))
-    broken["parts"][0]["passages"][0]["q"].pop(TYPE_ORDER[0])
+    broken["parts"][0]["passages"][0]["q"].pop(MERGED_ORDER[0])
     try:
         serialize.load_parts(broken)
         assert False, "누락 유형은 오류여야 함"
@@ -1063,12 +1065,12 @@ def test_answer_spread() -> None:
     # 통합: 정답 위치가 실제로 여러 값으로 흩어지는지(FakeClient 4지문×주제·내용일치)
     from exam import renderer
     client = _FakeClient()
-    ps = pipeline.build_passages(client, ["b1", "b2", "b3", "b4"])
+    ps = build_passages_merged(client, ["b1", "b2", "b3", "b4"])
     keys = []
     for i, p in enumerate(ps):
         _, quick = renderer._blocks([p], start=1)
         cells = quick[0]["cells"]        # 지문별: 머리 없는 한 묶음
-        for t, cell in zip(TYPE_ORDER, cells):
+        for t, cell in zip(MERGED_ORDER, cells):
             if t in ("topic", "content"):
                 keys.append(cell["key"])
     assert len(set(keys)) >= 2, keys               # 한 번호로 몰리지 않음
@@ -1097,7 +1099,7 @@ def test_passage_source_label() -> None:
 
     # 라벨 스레딩: build_passages(labels=…) 가 Passage.source_label 에 실린다
     client = _FakeClient()
-    ps3 = pipeline.build_passages(client, ["b1", "b2"], labels=["45번", "46번"])
+    ps3 = build_passages_merged(client, ["b1", "b2"], labels=["45번", "46번"])
     assert [p.source_label for p in ps3] == ["45번", "46번"]
     print("✓ 지문 라벨(원본 문항번호·위치 폴백·labels 스레딩) 통과")
 
@@ -1107,7 +1109,6 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     from pypdf import PdfReader
 
     from exam import review
-    from exam.types import Passage
 
     # 1) 자동 보정 감지 — flags 싱크에 사유가 담긴다
     s = DNA.sentences
@@ -1130,34 +1131,47 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     assert weak and "2개" in weak[0]                    # 4개 중 2개가 짧음
     assert review.weak_distractors([WrongReason(no=1, text="충분히 길고 구체적인 오답 근거입니다")]) == []
 
-    # 3) collect_review — 문서 연속 번호로 정확히 매긴다(순서=1, 주제=3, 2지문 서술형=14)
-    ps = demo_passages()
-    ps[0].flag(TYPE_ORDER[0], [review.FIX_ORDER])       # 1번(순서)
-    ps[0].flag(TYPE_ORDER[2], ["오답 근거 약함: …"])       # 3번(주제)
-    ps[1].flag(TYPE_ORDER[6], [review.FIX_SNAP])        # 14번(서술형)
-    items = renderer.collect_review(ps, start=1)
-    assert [it["no"] for it in items] == [1, 3, 14]
+    # 3) collect_review — 문서 연속 번호로 정확히 매긴다
+    #    통합본은 지문당 11문항이므로 1번(주제)·6번(어법)·22번(2지문 서술형)
+    def _fresh():
+        return build_passages_merged(_FakeClient(), ["b1", "b2"])
+
+    ps = _fresh()
+    ps[0].flag(MERGED_ORDER[0], [review.FIX_ORDER])      # 1번(주제)
+    ps[0].flag(MERGED_ORDER[5], ["오답 근거 약함: …"])      # 6번(어법)
+    ps[1].flag(MERGED_ORDER[10], [review.FIX_SNAP])      # 22번(서술형)
+    items = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
+                                    labels=MERGED_LABELS)
+    by_no = {it["no"]: it for it in items}
+    assert review.FIX_ORDER in by_no[1]["reasons"] and by_no[1]["label"] == "주제"
+    assert "오답 근거 약함: …" in by_no[6]["reasons"] and by_no[6]["label"] == "어법"
+    assert review.FIX_SNAP in by_no[22]["reasons"] and by_no[22]["label"] == "서술형"
+    assert max(by_no) == 22, sorted(by_no)          # 지문 2개 × 11문항
 
     # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
     tmp_out.mkdir(parents=True, exist_ok=True)
-    out = renderer.render_pdf(ps, tmp_out / "rv_teacher.pdf")
+    _M = dict(type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
+    out = renderer.render_pdf(ps, tmp_out / "rv_teacher.pdf", **_M)
     r = PdfReader(str(out))
     assert "검토 메모" in (r.pages[-1].extract_text() or "")
-    out_s = renderer.render_pdf(ps, tmp_out / "rv_student.pdf", sections=["student"])
+    out_s = renderer.render_pdf(ps, tmp_out / "rv_student.pdf", sections=["student"], **_M)
     rs = PdfReader(str(out_s))
     joined = " ".join((pg.extract_text() or "") for pg in rs.pages)
     assert "검토 메모" not in joined                     # 학생용에는 노출 안 함
 
     # 5) 플래그가 하나도 없으면 페이지 자체가 없다(정상 문항만 있는 경우)
-    clean = demo_passages()
-    assert renderer.collect_review(clean, start=1) == []
+    clean = demo_passages_merged()      # 데모는 오답 근거가 충분해 플래그가 없다
+    assert renderer.collect_review(clean, start=1, type_order=MERGED_ORDER,
+                                   labels=MERGED_LABELS) == []
 
     # 6) 합본(render_pdf_multi): 여러 파트의 권장 문항을 '단 한 장'으로 모은다
-    p1 = demo_passages(); p1[0].flag(TYPE_ORDER[0], [review.FIX_ORDER])
-    p2 = demo_passages(); p2[0].flag(TYPE_ORDER[2], ["오답 근거 약함"])
+    p1 = _fresh(); p1[0].flag(MERGED_ORDER[0], [review.FIX_ORDER])
+    p2 = _fresh(); p2[0].flag(MERGED_ORDER[5], ["오답 근거 약함"])
     parts = [
-        {"passages": p1, "header_note": "변형문제 1회", "sections": ["teacher", "answers"]},
-        {"passages": p2, "header_note": "변형문제 1회 · 난이도 상", "sections": ["teacher", "answers"]},
+        {"passages": p1, "header_note": "변형문제 · 난이도 중",
+         "sections": ["teacher", "answers"], **_M},
+        {"passages": p2, "header_note": "변형문제 · 난이도 상",
+         "sections": ["teacher", "answers"], **_M},
     ]
     outm = tmp_out / "rv_multi.pdf"
     ret = renderer.render_pdf_multi(parts, outm)
@@ -1315,9 +1329,9 @@ def test_progress_output() -> None:
     buf = _io.StringIO()
     prog = Progress(total=4, stream=buf)
     prog.note("지문 2개 분석 중 …")
-    pipeline.build_passages(_FakeClient(), ["b1", "b2"],
+    build_passages_merged(_FakeClient(), ["b1", "b2"],
                             progress=prog, part_label="변형문제 1회 · 난이도 중")
-    pipeline.build_passages(_FakeClient(), ["b1", "b2"],
+    build_passages_merged(_FakeClient(), ["b1", "b2"],
                             progress=prog, part_label="변형문제 1회 · 난이도 상")
     prog.finish()
     out = buf.getvalue()
@@ -1351,7 +1365,7 @@ def test_parallel_passages_and_gate() -> None:
     # ① 지문 병렬 처리 — 순서·라벨이 입력 순서대로 유지된다
     bodies = [f"body {i}" for i in range(6)]
     labels = [f"L{i}" for i in range(6)]
-    ps = pipeline.build_passages(_FakeClient(), bodies, labels=labels)
+    ps = build_passages_merged(_FakeClient(), bodies, labels=labels)
     assert [p.source_label for p in ps] == labels, [p.source_label for p in ps]
     assert len(ps) == len(bodies)
 
@@ -1587,21 +1601,14 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
 
 
 def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
-    """통합본: 1회+2회에서 겹치는 3유형(A·C·G)을 빼고 11유형만 낸다.
+    """변형문제(통합본): 옛 1회+2회에서 겹치는 3유형(A·C·G)을 빼고 11유형만 낸다.
     빠진 유형은 생성 호출조차 하지 않으므로 비용이 실제로 준다."""
     import threading as _th
 
     from pypdf import PdfReader
 
-    from exam import serialize, verify as _v
-    from exam.merged import (
-        EXCLUDED,
-        MERGED_LABELS,
-        MERGED_ORDER,
-        MERGED_PROMPTS,
-        build_passages_merged,
-        demo_passages_merged,
-    )
+    from exam import gen2, pipeline, serialize, verify as _v
+    from exam.merged import EXCLUDED
     from exam.set2 import TYPE_ORDER2
     from exam.types import TYPE_ORDER
 
@@ -1656,21 +1663,30 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     validator.validate_passages(dps, MERGED_ORDER)
     validator.validate_numbering(dps, 1, MERGED_ORDER)
 
-    # ⑦ 웹앱 — 통합이 기본 선택이고, 데모 생성이 통합본으로 끝까지 돈다
+    # ⑦ 뺀 유형은 생성기 자체가 없다 — '실수로 다시 켜지는' 경로가 남지 않았다
+    assert set(gen2._GENERATORS2) == {"B", "D", "E", "F"}, sorted(gen2._GENERATORS2)
+    assert not hasattr(gen2, "build_passages2") and not hasattr(gen2, "_gen_A")
+    assert not hasattr(pipeline, "build_passages")      # 1회 전용 경로도 없다
+    assert set(pipeline.GENERATORS) | set(gen2._GENERATORS2) == set(MERGED_ORDER)
+
+    # ⑧ 웹앱 — 세트 선택 없이 통합본 하나로만 나온다
     from web import app as webmod
     webmod.app.config["PREVIEW_ONLY"] = True
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
-    assert 'value="M" checked' in home, "통합이 기본 체크가 아니다"
-    r = cli.post("/generate", data={"action": "demo", "sets": "M",
+    assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
+    assert "지문당 11문항" in home
+    r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
+    page = r.get_data(as_text=True)
     import re as _re
-    assert _re.search(r"/pdf/[0-9a-f]+", r.get_data(as_text=True))
+    assert _re.search(r"/pdf/[0-9a-f]+", page)
+    assert "변형문제 1회" not in page and "변형문제 2회" not in page
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
     assert len([t for t in MERGED_ORDER if t in _v.HIGH_RISK]) == 7
-    print("✓ 통합본(1회+2회 중복 제거 11유형)·비용 절감·조판·재출력 통과")
+    print("✓ 변형문제 통합본(중복 3유형 제거 11유형)·비용 절감·조판·재출력 통과")
 
 
 def test_batch_client() -> None:
@@ -1771,7 +1787,7 @@ def test_batch_client() -> None:
     buf = _io.StringIO()
     prog = Progress(total=2, stream=buf)
     c5 = _Client(_demo, progress=prog)
-    ps = pipeline.build_passages(c5, ["b1", "b2"], labels=["10-1", "10-2"], progress=prog)
+    ps = build_passages_merged(c5, ["b1", "b2"], labels=["10-1", "10-2"], progress=prog)
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     assert len(ps[0].q) >= 7, len(ps[0].q)
     assert sum(c5._fake.sizes) > 10 and len(c5._fake.sizes) < 10, c5._fake.sizes

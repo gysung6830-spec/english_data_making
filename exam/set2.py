@@ -1,7 +1,9 @@
-"""변형문제 2회 — 명세서 v1.0 의 7유형(A~G) 정의.
+"""추론형 유형 키·발문·라벨 (A~G).
 
-1회(기존 types.TYPE_ORDER)와 별개의 세트다. 조판·검증은 renderer/validator 를
-type_order 인자로 공용 사용한다.
+현재 출제하는 것은 이 중 B·D·E·F 네 가지다(merged.MERGED_ORDER 참조).
+A·C·G 는 '변형문제 2회'를 따로 뽑던 시절의 유형으로, 지금은 출제하지 않는다.
+정의만 남겨 둔 이유는 **그때 만들어 둔 결과 JSON 을 지금도 다시 조판(재출력)할 수
+있게** 하기 위해서다(생성기는 없으므로 새로 만들 수는 없다).
 """
 from __future__ import annotations
 
@@ -13,6 +15,7 @@ E = "E"  # 요약문 빈칸
 F = "F"  # 빈칸추론
 G = "G"  # 내용일치 개수
 
+# 옛 '변형문제 2회' 순서 — 그 시절 결과 JSON 재출력에만 쓴다.
 TYPE_ORDER2: tuple[str, ...] = (F, B, E, G, A, C, D)
 
 TYPE_PROMPTS2: dict[str, str] = {

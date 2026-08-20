@@ -2,7 +2,7 @@
 
 지문을 붙여넣고 옵션을 고르면 브라우저에서 바로 시험지 PDF를 미리보기/다운로드한다.
 - API 키가 없으면 '데모' 모드로 내장 지문(DNA·star manager)을 사용해 미리볼 수 있다.
-- API 키가 있으면 입력한 지문으로 Claude가 7종 문항을 생성한다.
+- API 키가 있으면 입력한 지문으로 Claude가 통합 11유형 문항을 생성한다.
 
 실행: python webapp.py  (기본 http://127.0.0.1:5000)
 """
@@ -17,9 +17,13 @@ from pathlib import Path
 from flask import Flask, abort, render_template, request, send_file
 
 from exam import renderer, validator
-from exam.demo_data import demo_passages
-from exam.demo2 import demo_passages_2
-from exam.set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
+from exam.merged import (
+    MERGED_LABELS,
+    MERGED_ORDER,
+    MERGED_PROMPTS,
+    build_passages_merged,
+    demo_passages_merged,
+)
 from src.config import load_config
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -145,9 +149,6 @@ def generate():
     chosen = set(l for l in request.form.getlist("levels") if l in ("상", "중", "하"))
     levels = [l for l in LEVEL_ORDER if l in chosen] or ["중"]
 
-    # 출력할 세트: 통합(M, 기본)/1회/2회 체크박스
-    #   통합 = 1회+2회에서 겹치는 3유형(A·C·G)을 뺀 11유형 — 문항이 겹치지 않고 비용도 낮다.
-    sets = [s for s in request.form.getlist("sets") if s in ("M", "1", "2")] or ["M"]
     # 출력할 섹션(없으면 4개 모두)
     valid_sec = ("student", "teacher", "quick", "answers")
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
@@ -273,23 +274,23 @@ def generate():
             doc_name = "영어지문"
     doc_name = doc_name or "영어지문"
 
-    def part_tag(sid: str, lv: str | None) -> str:
+    def part_tag(lv: str | None) -> str:
         """머리글(header)을 뺀 파트 제목 — JSON 저장·복원 시 새 머리글과 다시 합쳐진다."""
-        tag = "변형문제" if sid == "M" else f"변형문제 {sid}회"
+        tag = "변형문제"
         if lv:
             tag += f" · 난이도 {lv}"
         if demo:
             tag += " (데모)"
         return tag
 
-    def part_header(sid: str, lv: str | None) -> str:
-        tag = part_tag(sid, lv)
+    def part_header(lv: str | None) -> str:
+        tag = part_tag(lv)
         return f"{tag} — {header}" if header else tag
 
     try:
         # 진행 상황을 웹앱을 띄운 터미널에 한 줄씩 표시(브라우저는 기다리기만 하므로).
         from exam.progress import NullProgress, Progress
-        n_parts = len(sets) * (1 if demo else len(levels))
+        n_parts = 1 if demo else len(levels)
         prog = (NullProgress() if demo
                 else Progress(n_parts * len(bodies)))
         if client is not None and hasattr(client, "_progress"):
@@ -297,74 +298,36 @@ def generate():
         # 실제 모드: 분석을 '한 번만' 돌려 모든 세트·난이도 조합이 공유한다(속도·비용).
         analyses = None
         if not demo:
-            prog.note(f"지문 {len(bodies)}개 분석 중 … (회차·난이도 {n_parts}종 공유)")
+            prog.note(f"지문 {len(bodies)}개 분석 중 … (난이도 {n_parts}종 공유)")
             from exam.pipeline import analyze_bodies
             analyses = analyze_bodies(client, bodies,
                                       max_retries=cfg.processing.max_retries)
             prog.note(f"분석 완료 · 이제 문항 생성 {n_parts * len(bodies)}건을 시작합니다")
 
-        # 선택한 (세트 × 난이도) 조합을 모두 만들어 한 PDF로 합본한다.
-        # 데모는 난이도 변형이 없으므로 세트당 1개만.
+        # 선택한 난이도만큼 만들어 한 PDF로 합본한다(데모는 난이도 변형이 없으므로 1벌).
         combo_levels = [None] if demo else levels
         parts = []
         part_meta = []      # JSON 저장용(재분석·재생성 없이 제목만 바꿔 재출력)
         labels = []
-        for sid in sets:
-            for lv in combo_levels:
-                if sid == "M":      # 통합본 — 중복 유형을 뺀 11유형
-                    from exam.merged import (
-                        MERGED_LABELS, MERGED_ORDER, MERGED_PROMPTS,
-                    )
-                    if demo:
-                        from exam.merged import demo_passages_merged
-                        ps = demo_passages_merged()
-                        validator.validate_passages(ps, MERGED_ORDER)
-                        validator.validate_numbering(ps, 1, MERGED_ORDER)
-                    else:
-                        from exam.merged import build_passages_merged
-                        ps = build_passages_merged(client, bodies,
-                                                   max_retries=cfg.processing.max_retries,
-                                                   analyses=analyses, level=lv,
-                                                   labels=src_labels, progress=prog,
-                                                   part_label=part_tag(sid, lv))
-                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
-                                  "sections": sections, "type_order": MERGED_ORDER,
-                                  "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,
-                                  "group_by": group_by})
-                elif sid == "1":
-                    if demo:
-                        ps = demo_passages()
-                        validator.validate_passages(ps)
-                        validator.validate_numbering(ps, start=1)
-                    else:
-                        from exam.pipeline import build_passages
-                        ps = build_passages(client, bodies,
-                                            max_retries=cfg.processing.max_retries,
-                                            analyses=analyses, level=lv,
-                                            labels=src_labels, progress=prog,
-                                            part_label=part_tag(sid, lv))
-                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
-                                  "sections": sections, "group_by": group_by})
-                else:   # 변형문제 2회
-                    if demo:
-                        ps = demo_passages_2()
-                        validator.validate_passages(ps, TYPE_ORDER2)
-                        validator.validate_numbering(ps, 1, TYPE_ORDER2)
-                    else:
-                        from exam.gen2 import build_passages2
-                        ps = build_passages2(client, bodies,
-                                             max_retries=cfg.processing.max_retries,
-                                             analyses=analyses, level=lv,
-                                             labels=src_labels, progress=prog,
-                                             part_label=part_tag(sid, lv))
-                    parts.append({"passages": ps, "header_note": part_header(sid, lv),
-                                  "sections": sections, "type_order": TYPE_ORDER2,
-                                  "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2,
-                                  "group_by": group_by})
-                part_meta.append({"set": sid, "tag": part_tag(sid, lv),
-                                  "sections": sections, "passages": ps,
-                                  "group_by": group_by})
-                labels.append(part_header(sid, lv))
+        for lv in combo_levels:
+            if demo:
+                ps = demo_passages_merged()
+                validator.validate_passages(ps, MERGED_ORDER)
+                validator.validate_numbering(ps, 1, MERGED_ORDER)
+            else:
+                ps = build_passages_merged(client, bodies,
+                                           max_retries=cfg.processing.max_retries,
+                                           analyses=analyses, level=lv,
+                                           labels=src_labels, progress=prog,
+                                           part_label=part_tag(lv))
+            parts.append({"passages": ps, "header_note": part_header(lv),
+                          "sections": sections, "type_order": MERGED_ORDER,
+                          "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,
+                          "group_by": group_by})
+            part_meta.append({"set": "M", "tag": part_tag(lv),
+                              "sections": sections, "passages": ps,
+                              "group_by": group_by})
+            labels.append(part_header(lv))
 
         prog.note("문항 생성 완료 · PDF 조판 중 …")
         fid = uuid.uuid4().hex[:12]
