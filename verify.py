@@ -180,6 +180,19 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
                     warn(f"{tag} S{sid}",
                          f"{mi}번째 오답 해설이 너무 짧아 뜻 전달 부족(<15자): {wy!r}")
 
+            # 오역 팁(mistips, 학생용 전용) 형식 검사
+            for ti, t in enumerate(getattr(s, "mistips", []) or [], 1):
+                tt = _strip(t).strip()
+                if not tt:
+                    err(f"{tag} S{sid}", f"{ti}번째 오역 팁이 비어 있음")
+                    continue
+                if t.count("[[") != t.count("]]"):
+                    err(f"{tag} S{sid}", f"{ti}번째 오역 팁의 [[ ]] 짝이 안 맞음: {tt[:30]!r}")
+                if any(e in t for e in _ELLIPSIS):
+                    warn(f"{tag} S{sid}", f"{ti}번째 오역 팁에 말줄임표: {tt[:30]!r}")
+                if len(tt) < 12:
+                    warn(f"{tag} S{sid}", f"{ti}번째 오역 팁이 너무 짧음(<12자): {tt!r}")
+
         # 2-b) ④ '오답만 읽어도 이해되도록' 설계 점검(지문 단위)
         #   - 문장 커버리지: 모든 문장이 오답을 하나씩 가져야(위 S{sid} 루프에서 ERROR) '오답만 읽어도
         #     전 문장을 훑는다'가 성립. 여기서는 '지칭·함축' 층위가 오답 스트림에 담겼는지 본다.
