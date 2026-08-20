@@ -97,6 +97,27 @@ def _dedup_key(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+def _strip_paired_translation(line: str) -> str:
+    """EBS 한줄해석 '③ EN ③ KR' 짝 구조에서 번역(반복된 원번호 이후)을 통째로 버린다.
+
+    영어 원문과 한글 번역이 '같은 줄'에서 같은 원번호로 이어질 때, 번역 안에 든 영어
+    고유명사·책이름·연도(예: 'Paul R. Ehrlich', 'The Population Bomb', '1968')는 한글만
+    지우면 살아남아 원문 뒤에 붙는다. 원번호가 '연속으로 같은 값'이면 그 두 번째 구간
+    (번역)을 통째로 제거해 이를 막는다. 원번호가 없거나 짝 구조가 아니면 그대로 둔다."""
+    segs = re.split(r"([①-⑳])", line)          # ['pre','③',' EN ','③',' KR', …]
+    if len(segs) < 4:
+        return line
+    out, prev = [segs[0]], None
+    for i in range(1, len(segs), 2):
+        marker = segs[i]
+        seg = segs[i + 1] if i + 1 < len(segs) else ""
+        if marker != prev:                      # 같은 번호 반복(번역)이면 버림
+            out.append(marker)
+            out.append(seg)
+        prev = marker
+    return "".join(out)
+
+
 def _clean_pdf_text(segment: str) -> str:
     """한 지문 조각에서 한글·머리글·원번호·워크시트 노이즈를 걷어내고 영어 본문만 남긴다."""
     lines: list[str] = []
@@ -104,6 +125,7 @@ def _clean_pdf_text(segment: str) -> str:
     for ln in segment.splitlines():
         if _NOISE_LINE.search(ln):
             continue
+        ln = _strip_paired_translation(ln)   # '③ EN ③ KR' 한 줄 번역 구간 제거
         ln = _CIRCLED.sub(" ", ln)
         # '한줄해석'처럼 한글이 우세한 줄은 통째로 버린다. (한글만 지우면 그 줄의 마침표·
         #  괄호가 남아 영어 문장에 붙어 'communication..' · '(), ().' 같은 잔재가 생긴다.)

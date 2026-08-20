@@ -828,7 +828,21 @@ def test_hanjul_translation_residue() -> None:
     assert "6 Library Bookmark Design Contest" not in out, f"한글 벗긴 영어 잔재: {out}"
     assert "가 " not in out and "니다" not in out, f"한글 잔재: {out}"
     assert "5-12. Guidelines" in out, f"'5-12.' 나이가 소실됨: {out}"
-    print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위(5-12) 보존 통과")
+
+    # 영어 원문과 한글 번역이 '같은 줄'에서 같은 원번호로 이어지고, 번역 안에 영어
+    # 고유명사·책이름·연도가 든 경우: 번역(반복 원번호 이후)을 통째로 제거해야 한다.
+    # (실제 결과물 버그: 'Paul R. Ehrlich', 'The Population Bomb', '1968'이 원문에 붙었음)
+    same_line = (
+        "③ The American biologist Paul R. Ehrlich ─ author of the 1968 book "
+        "The Population Bomb ─ has been doing this for decades. "
+        "③ 1968년 저서 The Population Bomb의 저자인 미국의 생물학자 Paul R. Ehrlich는 "
+        "수십 년 동안 이렇게 해 오고 있다."
+    )
+    out2 = _clean_pdf_text(same_line)
+    assert out2 == ("The American biologist Paul R. Ehrlich ─ author of the 1968 book "
+                    "The Population Bomb ─ has been doing this for decades."), out2
+    assert "Bomb Paul" not in out2 and "decades. 1968" not in out2, f"번역 잔재: {out2}"
+    print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위 보존 + 같은줄 번역 제거 통과")
 
 
 def test_partial_generation_survives() -> None:
