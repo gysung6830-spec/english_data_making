@@ -129,9 +129,12 @@ def _clean_pdf_text(segment: str) -> str:
         ln = _CIRCLED.sub(" ", ln)
         # '한줄해석'처럼 한글이 우세한 줄은 통째로 버린다. (한글만 지우면 그 줄의 마침표·
         #  괄호가 남아 영어 문장에 붙어 'communication..' · '(), ().' 같은 잔재가 생긴다.)
+        # 글자 수를 1:1로 비교하면, 번역문에 든 영어 고유명사·책이름(예: 'The Population
+        # Bomb Paul R. Ehrlich')이 라틴 문자 수를 밀어 올려 번역 줄이 살아남는다. 한글 1자는
+        # 영어 2자 이상의 정보를 담으므로 가중치를 줘서 '한글이 우세한 줄'을 제대로 잡는다.
         hangul = len(_HANGUL.findall(ln))
         latin = len(re.findall(r"[A-Za-z]", ln))
-        if hangul and latin <= hangul:
+        if hangul and latin <= hangul * 2:
             continue
         stripped = _HANGUL.sub("", ln).replace("­", "")   # 영어 위주 줄에 낀 한글 제거
         # 한줄해석(번역) 줄 판별: EBS 좌지문·우해석은 '영어 원문' 바로 아래에 '한글 번역'

@@ -842,7 +842,25 @@ def test_hanjul_translation_residue() -> None:
     assert out2 == ("The American biologist Paul R. Ehrlich ─ author of the 1968 book "
                     "The Population Bomb ─ has been doing this for decades."), out2
     assert "Bomb Paul" not in out2 and "decades. 1968" not in out2, f"번역 잔재: {out2}"
-    print("✓ 한줄해석 번역 잔재·제목 중복 제거 + 나이범위 보존 + 같은줄 번역 제거 통과")
+
+    # 실제 추출기(pdfplumber) 형태: 영어 원문이 '두 줄로 접히고' 번역이 '다음 줄'에 오며,
+    # 번역 안의 영어 고유명사가 라틴 문자 수를 밀어 올리는 경우(hangul 28 vs latin 29).
+    # 글자수 1:1 비교로는 번역 줄이 살아남아 원문에 붙었다(실제 결과물 버그).
+    wrapped = (
+        "③ The American biologist Paul R. Ehrlich ─ author of the 1968 book "
+        "The Population Bomb ─ has been doing\n"
+        "this for decades.\n"
+        "③ 1968년 저서 The Population Bomb의 저자인 미국의 생물학자 Paul R. Ehrlich는 "
+        "수십 년 동안 이렇게 해 오고 있다.\n"
+        "④ In 1970 he said that the end will come.\n"
+        "④ 1970년에 그는 종말이 올 것이라고 말했다.\n"
+    )
+    out3 = _clean_pdf_text(wrapped)
+    assert "decades. 1968" not in out3 and "Bomb Paul" not in out3, f"번역 잔재: {out3}"
+    assert "has been doing this for decades." in out3, out3      # 접힌 원문은 보존
+    assert "In 1970 he said that the end will come." in out3, out3
+    assert not any("가" <= c <= "힣" for c in out3), out3
+    print("✓ 한줄해석 번역 잔재(같은 줄·접힌 줄) 제거 + 제목 중복·나이범위 보존 통과")
 
 
 def test_partial_generation_survives() -> None:
@@ -1279,6 +1297,54 @@ def test_short_answer_q3_summary_dedup() -> None:
     print("✓ 서술형 (3) 요약문 빈칸 라벨 중복 제거·공백 정리 통과")
 
 
+def test_precheck_harness() -> None:
+    """사전 점검(API 미사용): 정본 오염을 생성 전에 잡고, 정상 지문은 통과시킨다.
+    웹앱은 문제가 있으면 경고 후 '그래도 생성'을 고를 수 있어야 한다."""
+    import re as _re
+
+    from exam import precheck
+
+    # 실제 버그였던 형태: 번역문 영어 잔재가 문장으로 섞임(동사 없는 고유명사·연도 나열)
+    dirty = ("The reason pessimists often sound smart is that they can avoid being 'wrong'. "
+             "The American biologist Paul R. Ehrlich has been doing this for decades. "
+             "1968 The Population Bomb Paul R. Ehrlich. "
+             "In 1970 he said the end will come. A pessimistic stance is a safe one.")
+    rep = precheck.precheck([dirty], ["11-1"])
+    assert not rep.ok and any("한줄해석 잔재" in i.kind for i in rep.issues), rep.issues
+
+    # 잔재를 걷어내면 통과
+    clean = dirty.replace(" 1968 The Population Bomb Paul R. Ehrlich.", "")
+    assert precheck.precheck([clean], ["11-1"]).ok
+
+    # 고유명사로 '끝나는' 정상 문장은 오탐하지 않는다(Red Admiral)
+    edge = ("Of all the colours of the rainbow the one that makes the greatest impact is red. "
+            "There is something instantly arresting about the colour of fire and danger. "
+            "In Britain only one species has a pattern of bright red: the Red Admiral.")
+    assert precheck.precheck([edge], ["11-3"]).ok, precheck.precheck([edge]).issues
+
+    # 한글 잔재·짧은 지문도 잡는다
+    assert not precheck.precheck([clean + " 비관적 자세는 안전하다."]).ok
+    assert not precheck.precheck(["Too short."]).ok
+
+    # 웹앱: 오염 지문 → 경고 화면(생성 안 함) + ack 토큰, 정상 지문 → 경고 없음
+    from web import app as webmod
+    c = webmod.app.test_client()
+    r = c.post("/generate", data={"passages": dirty, "api_key": "sk-ant-test",
+                                  "sets": "1", "levels": "중"},
+               content_type="multipart/form-data")
+    html = r.get_data(as_text=True)
+    assert r.status_code == 200 and "생성 전 확인" in html, r.status_code
+    m = _re.search(r'name="precheck_ack" value="([0-9a-f]+)"', html)
+    assert m, "ack 토큰 없음"
+    assert 'name="sets" value="1"' in html                  # 선택 옵션 보존
+    assert webmod._stash_path(m.group(1)).exists()          # 재업로드 없이 재사용할 지문 저장
+    r2 = c.post("/generate", data={"passages": clean, "api_key": "sk-ant-test",
+                                   "sets": "1", "levels": "중"},
+                content_type="multipart/form-data")
+    assert "생성 전 확인" not in r2.get_data(as_text=True)   # 깨끗하면 바로 진행
+    print("✓ 사전 점검 하니스(정본 오염 사전 차단·오탐 없음·웹앱 경고) 통과")
+
+
 def test_short_answer_q2_prompt_clean() -> None:
     """서술형 (2) 어순배열 발문에 내부 용어('[문장] 목록')가 새어 나오면 정리한다."""
     from exam.generators.short_answer import _clean_q2_prompt, _Q2_FALLBACK
@@ -1375,6 +1441,7 @@ if __name__ == "__main__":
     test_review_flags_and_page()
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
+    test_precheck_harness()
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()

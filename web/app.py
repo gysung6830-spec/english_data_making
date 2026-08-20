@@ -100,6 +100,15 @@ def _pdf_path(fid: str, kind: str = "") -> Path:
     return OUT / f"exam_{fid}{suffix}.pdf"
 
 
+def _stash_path(token: str) -> Path:
+    """사전 점검 경고 후 '그래도 생성'할 때 쓸, 추출해 둔 지문 임시 저장 경로."""
+    if not _FID_RE.match(token):
+        abort(404)
+    p = OUT / "precheck"
+    p.mkdir(parents=True, exist_ok=True)
+    return p / f"{token}.json"
+
+
 def _json_path(fid: str) -> Path:
     if not _FID_RE.match(fid):
         abort(404)
@@ -144,7 +153,10 @@ def generate():
     client = None
     if not demo:
         pasted = split_passages(request.form.get("passages", ""))
-        if not uploads and not pasted:
+        # 사전 점검 경고 후 '그래도 생성': 앞서 추출해 둔 지문을 재사용(재업로드 불필요)
+        ack_token = request.form.get("precheck_ack", "")
+        ack_stash = _stash_path(ack_token) if ack_token else None
+        if not uploads and not pasted and not (ack_stash and ack_stash.exists()):
             return fail("지문을 붙여넣거나 파일(PDF·사진)을 올리거나 '무료 미리보기'를 선택하세요.")
         # API 키: 브라우저에서 붙여넣은 키(우선) → 없으면 .env 키. (미리보기 전용 모드는 키 무시)
         preview_only = bool(app.config.get("PREVIEW_ONLY")
@@ -162,7 +174,11 @@ def generate():
                               thinking=cfg.processing.thinking,
                               effort=cfg.processing.effort)
         try:
-            if uploads:
+            if ack_stash is not None and ack_stash.exists():
+                data = json.loads(ack_stash.read_text(encoding="utf-8"))
+                bodies = data["bodies"]
+                src_labels = data.get("labels") or None
+            elif uploads:
                 updir = OUT / "uploads" / uuid.uuid4().hex[:12]
                 updir.mkdir(parents=True, exist_ok=True)
                 paths = []
@@ -186,6 +202,24 @@ def generate():
             return fail(f"지문 처리 실패: {e}", 500)
         if not bodies:
             return fail("지문을 추출하지 못했습니다. 파일 내용을 확인해 주세요.")
+
+        # 사전 점검(API 미사용): 추출·정제가 깨끗한지 먼저 보고, 문제가 있으면 생성 전에
+        # 알려 준다. '그래도 생성'을 누르면(precheck_ack) 저장해 둔 지문으로 그대로 진행한다.
+        if not ack_token:
+            from exam import precheck as _pc
+            rep = _pc.precheck(bodies, src_labels)
+            if not rep.ok:      # 생성(=API 비용) 전에 알리고, 진행 여부는 사용자가 고른다
+                token = uuid.uuid4().hex[:12]
+                _stash_path(token).write_text(
+                    json.dumps({"bodies": bodies, "labels": src_labels}, ensure_ascii=False),
+                    encoding="utf-8")
+                keep = [(k, v) for k, v in request.form.items(multi=True)
+                        if k != "precheck_ack"]
+                return render_template(
+                    "index.html", has_api_key=_api_available(cfg),
+                    precheck_issues=[str(i) for i in rep.issues],
+                    precheck_summary=rep.summary(),
+                    precheck_token=token, precheck_form=keep), 200
 
         # 시작 문항번호(수동): 입력하면 지문 라벨을 이 번호부터 지문마다 1씩 증가시킨다
         # (원본 PDF 문항번호/자동 표기를 덮어씀). 비우면 기존 방식 유지.
