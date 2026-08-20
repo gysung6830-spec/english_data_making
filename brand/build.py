@@ -362,19 +362,18 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
                      f'color:{P["green_900"]};padding:{u * .55:.0f}px {u * 1.3:.0f}px;'
                      f'font-size:{u * 1.45:.0f}px;letter-spacing:.10em">SIGNATURE</span>')
 
+        # 판형을 사진 라벨로 이미 보여 주는 자료는 그 판형 설명을 건너뛴다.
+        # 사진 밑에 '원문만'이라 써 놓고 아래에 또 '원문만 —' 을 쓰면 같은 말이 두 번이다.
+        src_pts = it.points[len(it.thumbs):] if it.thumbs else it.points
         pts = "".join(
             f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
             f'line-height:1.68;padding-left:{u * 1.6:.0f}px;position:relative;'
             f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
             f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
             f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-            for head, desc in it.points[:points_n])
+            for head, desc in src_pts[:points_n])
 
-        rows.append(f"""<div style="display:flex;gap:{u * 3.2:.0f}px;
-          padding:{u * 3.4:.0f}px 0;border-top:1px solid {t['line']}">
-          <div style="flex:0 0 {u * 31:.0f}px">{thumb}</div>
-          <div style="flex:1 1 auto">
-            <div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
+        head_el = f"""<div style="display:flex;align-items:baseline;gap:{u * 1.4:.0f}px">
               <div class="wm" style="font-size:{u * 2.0:.0f}px;color:{t['accent']}">{it.no}</div>
               <div class="ko" style="font-size:{u * 3.5:.0f}px;color:{t['fg']}">{it.name}</div>
               {badge}
@@ -382,8 +381,34 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 2.0:.0f}px;
                  color:{t['fg']};line-height:1.65;word-break:keep-all;opacity:.9">
               {it.one_line}</div>
-            <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>
-          </div>
+            <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>"""
+
+        if it.thumbs:
+            # 판형이 여럿인 자료. 왼쪽에 한 장만 놓으면 '골라 쓰세요'라고 써 놓고
+            # 한 가지만 보여 주는 꼴이라, 글 아래에 판형을 나란히 늘어놓는다.
+            cells = []
+            for name, label in it.thumbs:
+                f = shot_crop(name, OUT / "thumbs" / f"t-{it.key}-{Path(name).stem}.png",
+                              thumb_w, ratio=0.92)
+                img = (f'<img src="{(OUT / "thumbs" / f).as_uri()}" '
+                       f'style="width:100%;display:block;border-radius:6px;'
+                       f'box-shadow:0 3px 12px rgba(14,31,26,.20)">') if f else ""
+                cells.append(f"""<div style="flex:1 1 0">{img}
+                  <div class="sans" style="margin-top:{u * .8:.0f}px;
+                       font-size:{u * 1.6:.0f}px;color:{t['accent']};
+                       font-weight:700">{label}</div></div>""")
+            rows.append(f"""<div style="padding:{u * 3.4:.0f}px 0;
+              border-top:1px solid {t['line']}">
+              {head_el}
+              <div style="display:flex;gap:{u * 1.8:.0f}px;margin-top:{u * 2.4:.0f}px">
+                {''.join(cells)}</div>
+            </div>""")
+            continue
+
+        rows.append(f"""<div style="display:flex;gap:{u * 3.2:.0f}px;
+          padding:{u * 3.4:.0f}px 0;border-top:1px solid {t['line']}">
+          <div style="flex:0 0 {u * 31:.0f}px">{thumb}</div>
+          <div style="flex:1 1 auto">{head_el}</div>
         </div>""")
     return "".join(rows)
 

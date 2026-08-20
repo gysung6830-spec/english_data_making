@@ -27,6 +27,9 @@ class Item:
     sample_note: str = ""        # 예시 이미지 아래 설명
     thumb: str = ""              # 라인업 썸네일만 다른 사진을 쓸 때. 비면 sample
     # ↑ 나란히 붙인 비교 사진처럼, 작게 줄이면 뭉개지는 장이 있다
+    thumbs: list[tuple[str, str]] = field(default_factory=list)  # (파일명, 라벨)
+    # ↑ 판형이 여럿인 자료는 라인업에서도 그 판형을 나란히 놓는다. 하나만 놓으면
+    #   '세 가지 중에 고르세요'라고 써 놓고 한 가지만 보여 주는 꼴이 된다
     extra: list[tuple[str, str]] = field(default_factory=list)  # (예시 파일명, 설명) 추가 장
     figures: int = 0             # 상세페이지에 넣을 사진 수. 0이면 build.MAX_FIGURES
     # ↑ 판형이 여럿인 자료는 그 판형을 다 보여 줘야 무슨 말인지 통한다
@@ -70,6 +73,11 @@ MATERIALS: list[Item] = [
              "답지부터 보는 습관을 고치고 싶은 학생"],
         sample="passage.png",
         sample_note="원문만 — 지문 위에 요지 한 줄, 문장마다 번호.",
+        thumbs=[
+            ("passage.png", "원문만"),
+            ("one-line.png", "위아래 해석"),
+            ("one-line-2col.png", "좌우 해석"),
+        ],
         extra=[
             ("one-line.png", "위아래 해석 — 영어 문장 아래에 같은 번호의 해석."),
             ("one-line-2col.png", "좌우 해석 — 왼쪽 영어, 오른쪽 해석. 한 쪽에 한 지문."),
