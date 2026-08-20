@@ -45,7 +45,7 @@
         <div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}{% if not teacher %}<span class="gram-do">✏ 위 어법이 문장의 어디에 쓰였는지 찾아 ○표 해보자</span>{% endif %}</div>{% endif %}
         <div class="ko-box"><span class="q-chip">문제</span><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
-        {% if not teacher %}{% for t in it.mistips %}<div class="mistip"><span class="mt-chip">💡 이렇게 읽으면 안&nbsp;돼</span>{{ t }}</div>{% endfor %}{% endif %}
+        {% if not teacher %}{% for t in it.mistips %}<div class="mistip"><span class="mt-chip">이렇게 읽으면 안&nbsp;돼</span>{{ t }}</div>{% endfor %}{% endif %}
         <div class="s-q"><span class="q-chip">문제</span><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
         {% for m in it.misreads %}
         <div class="mis">{{ m.statement }} <span class="mis-x">(X)</span></div>
