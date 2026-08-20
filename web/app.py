@@ -93,11 +93,25 @@ def apply_labels(data: dict, labels: list[str]) -> str | None:
     return _apply_passage_field(data, labels, "source_label", "지문 번호")
 
 
+# 결과물 종류 → 파일명 접미사 (""=합본). 개별 산출물은 섹션 이름을 그대로 쓴다.
+_KIND_SUFFIX = {
+    "": "", "review": "_검토메모",
+    "student": "_학생용", "teacher": "_교사용",
+    "quick": "_빠른정답", "answers": "_해설지",
+}
+# 개별 파일 표시용: 섹션 → (파일명 조각, 화면 라벨)
+SECTION_NAMES = {
+    "student": ("학생용", "학생용 (문제)"),
+    "teacher": ("교사용", "교사용 (문제+해설)"),
+    "quick": ("빠른정답", "빠른 정답"),
+    "answers": ("해설지", "해설지 (정답 및 해설)"),
+}
+
+
 def _pdf_path(fid: str, kind: str = "") -> Path:
-    if not _FID_RE.match(fid):
+    if not _FID_RE.match(fid) or kind not in _KIND_SUFFIX:
         abort(404)
-    suffix = "_검토메모" if kind == "review" else ""
-    return OUT / f"exam_{fid}{suffix}.pdf"
+    return OUT / f"exam_{fid}{_KIND_SUFFIX[kind]}.pdf"
 
 
 def _stash_path(token: str) -> Path:
@@ -141,6 +155,9 @@ def generate():
     # 문항 배치: 지문별(기본) 또는 문제유형별
     group_by = request.form.get("group_by")
     group_by = group_by if group_by in ("passage", "type") else "passage"
+    # 출력 방식: 합본(기본) / 개별(구성별 파일) / 합본 및 개별
+    out_mode = request.form.get("out_mode")
+    out_mode = out_mode if out_mode in ("merged", "each", "both") else "merged"
     uploads = [f for f in request.files.getlist("files") if f and f.filename]
     doc_name = safe_name(request.form.get("doc_name", ""))
 
@@ -322,8 +339,23 @@ def generate():
 
         fid = uuid.uuid4().hex[:12]
         out = _pdf_path(fid)
-        # 검토 메모(확인 권장 문항)는 '별도 파일'로 저장한다.
-        review_path = renderer.render_pdf_multi(parts, out, review_out=_pdf_path(fid, "review"))
+        # 출력 방식: 합본(기본) / 개별 / 합본 및 개별.
+        # ※ 어느 쪽이든 '이미 생성된 문항'을 다시 조판할 뿐이라 API 비용은 같다(추가 호출 없음).
+        want_merged = out_mode in ("merged", "both")
+        want_each = out_mode in ("each", "both")
+        review_path = None
+        if want_merged:
+            # 검토 메모(확인 권장 문항)는 '별도 파일'로 저장한다.
+            review_path = renderer.render_pdf_multi(parts, out, review_out=_pdf_path(fid, "review"))
+        each_made: list[str] = []
+        if want_each:
+            for sec in sections:                    # 선택한 구성만, 각각 한 파일로
+                one = [{**p, "sections": [sec]} for p in parts]
+                renderer.render_pdf_multi(one, _pdf_path(fid, sec),
+                                          review_out=_pdf_path(fid, "review"))
+                each_made.append(sec)
+        if review_path is None:                     # 개별만 뽑은 경우에도 검토 메모는 남긴다
+            review_path = renderer.render_review_pdf(parts, _pdf_path(fid, "review"))
         # 실제 생성 결과는 JSON 으로도 저장 → 다음에 제목만 바꿔 재출력(무료).
         has_json = False
         if not demo:
@@ -332,9 +364,17 @@ def generate():
             _json_path(fid).write_text(
                 json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
             has_json = True
-        outputs = [{"fid": fid, "kind": "", "label": "변형문제 (" + " · ".join(labels) + ")",
-                    "count": len(parts), "name": f"{doc_name}_변형문제",
-                    "has_json": has_json}]
+        outputs = []
+        if want_merged:
+            outputs.append({"fid": fid, "kind": "",
+                            "label": "📚 합본 — " + " · ".join(labels),
+                            "count": len(parts), "name": f"{doc_name}_변형문제",
+                            "has_json": has_json})
+        for sec in each_made:                # 개별 파일(선택한 구성 순서대로)
+            fname, disp = SECTION_NAMES[sec]
+            outputs.append({"fid": fid, "kind": sec, "label": f"📄 {disp}",
+                            "count": len(parts), "name": f"{doc_name}_{fname}",
+                            "has_json": has_json and not want_merged and sec == each_made[0]})
         if review_path:      # 검토 메모가 있으면 별도 결과물로 추가
             outputs.append({"fid": fid, "kind": "review",
                             "label": "📋 검토 메모 (확인 권장 문항)",

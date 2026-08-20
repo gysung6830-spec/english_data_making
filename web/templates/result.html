@@ -33,7 +33,7 @@
 
 {% if outputs %}
 <h3 class="preview-title">미리보기 — {{ outputs[0].label }}</h3>
-<object class="preview" data="{{ url_for('pdf', fid=outputs[0].fid) }}" type="application/pdf">
+<object class="preview" data="{{ url_for('pdf', fid=outputs[0].fid, kind=outputs[0].get('kind', '')) }}" type="application/pdf">
   <p>미리보기를 표시할 수 없습니다. 위 다운로드 버튼으로 PDF를 내려받으세요.</p>
 </object>
 {% endif %}

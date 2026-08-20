@@ -248,6 +248,40 @@ def render_pdf(
     return _write_docs(docs, out_path)
 
 
+def _collect_review_items(parts: list[dict]) -> list[dict]:
+    """파트들에서 '확인 권장' 문항을 모은다(교사용 산출물이 있는 파트만)."""
+    items: list[dict] = []
+    for part in parts:
+        active, _ = _resolve_sections(part.get("sections"))
+        if active & _TEACHER_SECTIONS:
+            items += collect_review(
+                part["passages"], 1,
+                part.get("type_order", TYPE_ORDER),
+                part.get("labels", TYPE_LABELS),
+                part_label=part.get("header_note", ""),
+                group_by=part.get("group_by", "passage"))
+    return items
+
+
+def render_review_pdf(parts: list[dict], out_path: str | Path,
+                      footer_note: str = DEFAULT_FOOTER) -> Path | None:
+    """'검토 메모'만 별도 PDF 로 쓴다(본문 조판 없이).
+
+    개별 파일만 뽑을 때처럼 합본을 만들지 않는 경우에도 검토 메모를 남기기 위해 쓴다.
+    확인 권장 문항이 하나도 없으면 파일을 만들지 않고 None 을 돌려준다.
+    """
+    from weasyprint import HTML  # 지연 임포트(무거움)
+
+    items = _collect_review_items(parts)
+    if not items:
+        return None
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    HTML(string=render_review_html(items, footer_note),
+         base_url=str(TEMPLATE_DIR)).write_pdf(str(out_path), stylesheets=_stylesheets())
+    return out_path
+
+
 def render_pdf_multi(parts: list[dict], out_path: str | Path,
                      footer_note: str = DEFAULT_FOOTER,
                      review_out: str | Path | None = None) -> Path | None:

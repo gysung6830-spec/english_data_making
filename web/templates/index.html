@@ -126,7 +126,7 @@ Second passage goes here."></textarea>
   </div>
 
   <div class="field setbox">
-    <span class="label">출력할 구성 <b>(기본: 전체 합본)</b> — 4개 모두 체크 시 한 PDF에 순서대로 합쳐집니다. 일부만 원하면 체크 해제하세요.</span>
+    <span class="label">출력할 구성 — 체크한 것만 만듭니다.</span>
     <label class="check"><input type="checkbox" name="sections" value="student" checked>
       <b>학생용</b> <span class="hint2">문제만</span></label>
     <label class="check"><input type="checkbox" name="sections" value="teacher" checked>
@@ -135,6 +135,18 @@ Second passage goes here."></textarea>
       <b>빠른 정답</b> <span class="hint2">번호·정답 한눈에</span></label>
     <label class="check"><input type="checkbox" name="sections" value="answers" checked>
       <b>해설지</b> <span class="hint2">정답 및 상세 해설</span></label>
+  </div>
+
+  <div class="field setbox">
+    <span class="label">출력 방식 <b>(기본: 합본)</b> — 위에서 체크한 구성을 어떻게 내려받을지 고르세요.</span>
+    <label class="check"><input type="radio" name="out_mode" value="merged" checked>
+      <b>합본</b> <span class="hint2">한 PDF에 순서대로 (학생용 → 교사용 → 빠른정답 → 해설지)</span></label>
+    <label class="check"><input type="radio" name="out_mode" value="each">
+      <b>개별</b> <span class="hint2">구성마다 파일 하나씩 (학생용.pdf · 교사용.pdf · 빠른정답.pdf · 해설지.pdf)</span></label>
+    <label class="check"><input type="radio" name="out_mode" value="both">
+      <b>합본 및 개별</b> <span class="hint2">합본 1개 + 개별 파일까지 모두</span></label>
+    <span class="hint">💡 <b>API 비용은 셋 다 같습니다.</b> 문항 생성은 한 번만 하고, 합본·개별은
+      만들어진 문항을 <b>다시 조판만</b> 하는 것이라 추가 호출이 없습니다.</span>
   </div>
 
   <div class="btns">

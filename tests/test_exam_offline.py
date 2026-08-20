@@ -1325,6 +1325,54 @@ def test_grammar_mark_word_duplication() -> None:
     print("✓ 어법 밑줄 표시어 낱말 중복(to to confirm) 방지 통과")
 
 
+def test_output_modes(tmp_out: Path = ROOT / "output" / "test") -> None:
+    """출력 방식(합본/개별/합본+개별): 개별 파일은 그 구성만 담고, 검토 메모는
+    합본을 안 만들어도 남는다. (조판만 다시 하므로 API 추가 호출은 없다)"""
+    import io as _io
+    import re as _re
+
+    from pypdf import PdfReader
+
+    from web import app as webmod
+
+    c = webmod.app.test_client()
+    secs = ["student", "teacher", "quick", "answers"]
+    counts = {}
+    for mode, n_expect in (("merged", 1), ("each", 4), ("both", 5)):
+        r = c.post("/generate", data={"action": "demo", "sets": "1",
+                                      "out_mode": mode, "sections": secs},
+                   content_type="multipart/form-data")
+        assert r.status_code == 200, r.status_code
+        html = r.get_data(as_text=True)
+        counts[mode] = len(_re.findall(r"·\s*지문\s*\d+개", html))
+        assert counts[mode] == n_expect, (mode, counts[mode], n_expect)
+        if mode == "each":      # 개별 파일이 '자기 구성만' 담는지 확인
+            fid = _re.search(r"/download/([0-9a-f]+)", html).group(1)
+            want = {"student": "학생용 · 문제", "teacher": "교사용 · 문제 + 해설",
+                    "quick": "빠른 정답", "answers": "정답 및 해설 · 해설지"}
+            for kind, mark in want.items():
+                resp = c.get(f"/download/{fid}?kind={kind}&name=x")
+                assert resp.status_code == 200, kind
+                txt = " ".join((p.extract_text() or "")
+                               for p in PdfReader(_io.BytesIO(resp.data)).pages)
+                others = [m for k, m in want.items() if k != kind and m in txt]
+                assert mark in txt and not others, (kind, others)
+
+    # 검토 메모: 합본을 만들지 않아도 별도로 남는다 / 플래그 없으면 만들지 않는다
+    from exam import review as R
+    from exam.types import TYPE_ORDER
+    ps = demo_passages()
+    ps[0].flag(TYPE_ORDER[0], [R.FIX_ORDER])
+    parts = [{"passages": ps, "header_note": "변형문제 1회", "sections": secs}]
+    tmp_out.mkdir(parents=True, exist_ok=True)
+    rp = renderer.render_review_pdf(parts, tmp_out / "om_review.pdf")
+    assert rp is not None and rp.exists()
+    assert "검토 메모" in (PdfReader(str(rp)).pages[0].extract_text() or "")
+    clean = [{**parts[0], "passages": demo_passages()}]
+    assert renderer.render_review_pdf(clean, tmp_out / "om_none.pdf") is None
+    print("✓ 출력 방식(합본·개별·합본+개별) 파일 분리·검토메모 유지 통과")
+
+
 def test_edge_guards() -> None:
     """사각지대 보강 3종:
     ① 같은 낱말이 여러 번인 밑줄 → '확인 권장' 플래그(밑줄↔해설 어긋남 예방)
@@ -1510,6 +1558,7 @@ if __name__ == "__main__":
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
     test_grammar_mark_word_duplication()
+    test_output_modes()
     test_edge_guards()
     test_precheck_harness()
     test_short_answer_q3_summary_dedup()
