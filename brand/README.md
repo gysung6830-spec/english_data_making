@@ -11,7 +11,7 @@ brand/
 ├─ build.py         레이아웃 정의 + CLI
 ├─ sample_shots.py  저장소 생성기로 예시 이미지 뽑기 (구 버전 자료용)
 ├─ pdf_samples.py   실제 판매 PDF 에서 예시 이미지 뽑기 ← 지금 쓰는 쪽
-├─ ANALYSIS.md      자료 5종 분석과 판매 차별화 포인트
+├─ ANALYSIS.md      자료 분석과 판매 차별화 포인트
 ├─ render.py        HTML → PNG (헤드리스 크로미움)
 ├─ assets/          결과 이미지 (samples/ 는 실제 산출물, thumbs/ 는 목록용 썸네일)
 ├─ posts/           블로그 원고 초안 10편
@@ -126,12 +126,12 @@ brand/
 ## 3. 라인업과 상세페이지
 
 ```
-detail-04-pilsaengbo-class.png    자료 한 종 = 상세페이지 한 장
-lineup.png                        라인업 전체 한 장 (900×3860)
-lineup-1-read.png                 └ 나눈 조각 — 머리말 + 01-03   (900×1411)
-lineup-2-pilsaengbo.png             04-05                      (900×883)
-lineup-3-write.png                  06-09 + 꼬리말             (900×1567)
-posts/04-pilsaengbo-class.md      본문 원고 초안
+detail-03-pilsaengbo-class.png    자료 한 종 = 상세페이지 한 장
+lineup.png                        라인업 전체 한 장
+lineup-1-read.png                 └ 나눈 조각 — 머리말 + 01-02
+lineup-2-pilsaengbo.png             03-04
+lineup-3-write.png                  05-08 + 꼬리말
+posts/03-pilsaengbo-class.md      본문 원고 초안
 ```
 
 **자료 하나에 이미지 하나.** 예전에는 한 자료를 표지·구성·안내 세 장으로
@@ -157,9 +157,9 @@ posts/04-pilsaengbo-class.md      본문 원고 초안
 
 ```
 머리말 (어두움)          읽고 · 뜯어보고 · 손으로 씁니다  ┐ lineup-1
-01 — 03 읽는 자료 (밝음)   썸네일 + 한 줄 + 특징 2줄      ┘
-04 — 05 시그니처 (어두움)  필생보                          → lineup-2
-06 — 09 쓰는 자료 (밝음) + 꼬리말                          → lineup-3
+01 — 02 읽는 자료 (밝음)   썸네일 + 한 줄 + 특징 2줄      ┘
+03 — 04 시그니처 (어두움)  필생보                          → lineup-2
+05 — 08 쓰는 자료 (밝음) + 꼬리말                          → lineup-3
 ```
 
 바탕색이 밝은 판과 어두운 판으로 번갈아 가므로 어디서 묶음이 바뀌는지 눈에
@@ -178,6 +178,9 @@ posts/04-pilsaengbo-class.md      본문 원고 초안
 (`catalog.py` 의 `edge`)이 상세페이지에 이미 굵게 들어가 있어서, 라인업에서
 같은 이야기를 한 번 더 하면 목록이 늘어지기만 합니다.
 
+**01 지문자료에는 차별점 한 줄이 없습니다.** 기본 자료라 팔 것이 판형 선택뿐입니다.
+`edge` 를 비워 두면 상세페이지에서 그 강조 상자가 통째로 빠집니다.
+
 **시그니처 자료**는 `catalog.py` 의 `signature=True` 로 정합니다. 지금은
 필생보 강의용·독학용과 동형모의고사 셋입니다. 라인업에서는 이름 옆에
 금색 `SIGNATURE` 칩이 붙고, 상세페이지는 혼자 어두운 판이 되며 배지와 함께
@@ -187,7 +190,9 @@ posts/04-pilsaengbo-class.md      본문 원고 초안
 
 - `MAX_FIGURES = 2` — 실물 사진은 두 장까지. 더 넣으면 스크롤만 길어지고
   끝까지 안 읽힙니다. 나머지 지면은 `catalog.py` 의 `extra` 에 남아 있으니
-  순서만 바꾸면 다른 장을 앞세울 수 있습니다.
+  순서만 바꾸면 다른 장을 앞세울 수 있습니다. 자료마다 다르게 하려면
+  `catalog.py` 의 `figures` 로 덮어씁니다(01 지문자료는 판형 셋을 다 보여야
+  해서 `figures=3`).
 - `MAX_POINTS = 4` — 특징은 네 줄까지.
 
 특징 설명도 카드마다 250~330자 안에 들어오게 씁니다. 한 카드만 길면 목록으로
@@ -212,14 +217,13 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 
 | 자료 | 뽑아 둔 장수 | 파일 |
 | --- | --- | --- |
-| 지문자료 | 1 | `passage.png` |
-| 한줄해석 | 1 | `one-line.png` |
+| 지문자료 | 3 | `passage.png` · `one-line.png` · `one-line-2col.png` (판형 3옵션) |
 | 지문분석지 | 6 | `analysis.png` · `-point` · `-flow` · `-blank` · `-vocatest` · `-guide` |
 | 필생보 강의용 | 3 | `pilsaengbo-compare.png` (강사용·학생용 나란히) · `pilsaengbo` · `-summary` |
 | 필생보 독학용 | 6 | `psb-solve.png` · `-answer` · `-predict` · `-paraphrase` · `-signal` · `-pace` |
 | 통합 워크북 | 2 | `workbook-integrated.png` · `-en` |
 | 서술형 대비 교재 | 1 | `workbook.png` |
-| 변형문제 6종 | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
+| 변형문제 7종 | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
 | 동형모의고사 | 5 | `mock.png` · `-paper` · `-teacher` · `-answer` · `-quick` |
 
 **표지와 목차는 넣지 않습니다.** 사는 사람이 궁금한 건 겉이 아니라 안입니다.
@@ -239,19 +243,19 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 
 ### 자료 분석
 
-[ANALYSIS.md](ANALYSIS.md) 에 자료 5종의 구성과 **판매 차별화 포인트**를
+[ANALYSIS.md](ANALYSIS.md) 에 자료별 구성과 **판매 차별화 포인트**를
 정리했습니다. 라인업 소개글과 상세 판매 포스팅은 이 문서를 재료로 씁니다.
 
-### 라인업을 셋씩 나눈 이유
+### 라인업을 세 묶음으로 나눈 이유
 
-여섯 개를 한 장에 늘어놓으면 목록으로만 읽힙니다. 셋씩 끊으면 흐름이 생깁니다.
+여덟 개를 한 줄로 늘어놓으면 목록으로만 읽힙니다. 묶어 두면 흐름이 생깁니다.
 
-- **01–03 읽는 자료** — 지문자료 · 한줄해석 · 필생보
-- **04–06 쓰는 자료** — 워크북 · 변형문제 · 동형모의고사
+- **01–02 읽는 자료** — 지문자료 · 지문분석지
+- **03–04 시그니처 자료** — 필생보 강의용 · 독학용
+- **05–08 쓰는 자료** — 통합 워크북 · 서술형 · 변형문제 · 동형모의고사
 
-각 묶음 아래에는 **'이 세 가지가 다른 점'** 카드 세 장이 붙습니다. 자료 설명이
-아니라 "왜 다른 곳 자료가 아니라 이걸 쓰는가"에 대한 답만 적습니다. 문구는
-`build.py` 위쪽의 `EDGE_READ`, `EDGE_EXAM`, `EDGE_BOOK` 에서 고칩니다.
+읽고 → 뜯어보고 → 손으로 쓰는 순서입니다. 문구는 `build.py` 의
+`lineup_sections()` 에서 고칩니다.
 
 ### 세로 길이는 브라우저가 잽니다
 

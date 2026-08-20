@@ -393,18 +393,18 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
 # PDF 를 받으면 여기 한 줄만 다시 넣으면 된다.
 def lineup_sections():
     return [
-        ("01 — 03  ·  읽는 자료", "같은 지문을 세 번 읽힙니다",
-         "원문으로 한 번, 해석으로 한 번, 끊어읽기와 함축까지 뜯어서 또 한 번. "
-         "세 자료가 같은 문장 번호를 씁니다.",
-         MATERIALS[:3], False),
-        ("04 — 05  ·  시그니처 자료", "필생보 — 필자의 생각이 보이는 영어독해",
+        ("01 — 02  ·  읽는 자료", "지문을 읽고, 뜯어봅니다",
+         "지문자료는 판형만 고르면 되는 기본 자료입니다. 지문분석지는 그 위에 "
+         "끊어읽기와 함축의미까지 얹습니다. 둘 다 같은 문장 번호를 씁니다.",
+         MATERIALS[:2], False),
+        ("03 — 04  ·  시그니처 자료", "필생보 — 필자의 생각이 보이는 영어독해",
          "해석은 되는데 왜 틀릴까. 수능 독해는 문장 번역 시험이 아니라 "
          "필자의 생각을 읽는 시험입니다. 그 눈을 훈련하는 자료입니다.",
-         MATERIALS[3:5], True),
-        ("06 — 09  ·  쓰는 자료", "그 다음은 손으로 씁니다",
+         MATERIALS[2:4], True),
+        ("05 — 08  ·  쓰는 자료", "그 다음은 손으로 씁니다",
          "읽어서 안 것과 시험장에서 쓰는 것은 다릅니다. 겹쳐서 묻고, 서술형으로 "
          "쓰게 하고, 변형해서 확인하고, 우리 학교 시험지로 한 회차를 돌립니다.",
-         MATERIALS[5:], False),
+         MATERIALS[4:], False),
     ]
 
 
@@ -442,7 +442,7 @@ def build_lineup(width: int = DOC_W, part: int | None = None) -> tuple[str, int]
               읽고 · 뜯어보고 · 손으로 씁니다</div>
             <div class="sans" style="margin-top:{u * 2.0:.0f}px;font-size:{u * 2.05:.0f}px;
                  color:{head_t['muted']};line-height:1.75;word-break:keep-all">
-              한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
+              한 지문을 여덟 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
               어떤 것을 붙여 써도 수업이 끊기지 않습니다.
               <span style="color:{P['gold']}">SIGNATURE</span> 표시는 시그니처 자료입니다.</div>
           </div>
@@ -547,8 +547,9 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                color:{t['muted']};line-height:1.6;word-break:keep-all">{note}</div>
         </div>"""
 
+    n_fig = item.figures or MAX_FIGURES
     sample_el = figure(item.sample, item.sample_note)
-    sample_el += "".join(figure(n, note) for n, note in item.extra[:MAX_FIGURES - 1])
+    sample_el += "".join(figure(n, note) for n, note in item.extra[:n_fig - 1])
 
     # 짧고 센 한 줄은 크게, 설명형 긴 한 줄은 작게. 같은 크기로 두면 센 문장이 죽는다.
     punchy = len(item.one_line) <= 30
@@ -720,25 +721,25 @@ def write_posts() -> list[Path]:
 
 {img('lineup-1-read.png')}
 
-한 지문을 아홉 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
+한 지문을 여덟 가지 방식으로 굴립니다. 자료끼리 같은 문장 번호를 쓰기 때문에
 어떤 것을 붙여 써도 수업이 끊기지 않습니다. 자료 한 종씩 자세히 보려면
 각 상세페이지 글로 가시면 됩니다.
 
-## 읽는 자료 (01 — 03)
+## 읽는 자료 (01 — 02)
 
-{rows_of(MATERIALS[:3])}
+{rows_of(MATERIALS[:2])}
 
-## 시그니처 자료 — 필생보 (04 — 05)
+## 시그니처 자료 — 필생보 (03 — 04)
 
 {img('lineup-2-pilsaengbo.png')}
 
-{rows_of(MATERIALS[3:5])}
+{rows_of(MATERIALS[2:4])}
 
-## 쓰는 자료 (06 — 09)
+## 쓰는 자료 (05 — 08)
 
 {img('lineup-3-write.png')}
 
-{rows_of(MATERIALS[5:])}
+{rows_of(MATERIALS[4:])}
 
 <!-- 가격은 brand/catalog.py 의 price 에 넣으면 상세페이지에 함께 나옵니다. -->
 """, encoding="utf-8")
