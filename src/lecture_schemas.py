@@ -43,6 +43,7 @@ class LectureSentence(BaseModel):
 # ---------------------------------------------------------------------------
 class RestatementChain(BaseModel):
     label: str                 # 개념의 한글 이름(예: '두려움을 느끼는 아기')
+    kind: str = ""             # 재진술 유형(예: '추상→구체','점층·강조','대조','원인→결과','동의반복','상위어→하위어')
     expressions: list[str]     # 지문에 실제로 나온 '영어' 표현들(순서대로, 2개 이상)
     variation: str = ""        # ↳변주: 표현이 어떻게 바뀌어 가는지 한 줄(한국어)
 
@@ -94,7 +95,7 @@ class Overview(BaseModel):
     structure: Structure          # 🧩 글의 구조
     structure_reason: str
     # 재진술 사슬: 억지로 만들지 말고, 필자 핵심 의견을 이루는 개념의 실제 사슬만(1~2개)
-    restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=2)
+    restatement_chains: list[RestatementChain] = Field(min_length=1, max_length=3)
     # 📝 글 내용 정리(글 순서): 의미 단위 블록 흐름(도입→전개→사례…)
     flow_blocks: list["FlowBlock"] = Field(min_length=2, max_length=6)
 
