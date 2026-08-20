@@ -78,7 +78,7 @@
     <div class="pcard">
       <div class="pc-q"><span class="em">🔗</span>재진술 사슬<span class="pc-hint">{% if teacher %}소재별로 번호를 달아 형광펜 표시(흑백에서도 번호로 구분){% else %}소재마다 '첫 표현'만 번호·형광펜으로 표시해놨어 — 같은 번호로 이어지는 표현을 마저 찾아봐{% endif %}</span></div>
       <div class="chain-legend">
-        {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if c.kind %} <span class="ckind">{{ c.kind }}</span>{% endif %}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
+        {% for c in p.chains %}<span class="cleg"><span class="cnum {{ c.color }}">{{ loop.index }}</span>{{ c.label }}{% if teacher and c.variation %} <span class="cvar">— {{ c.variation }}</span>{% endif %}</span>{% endfor %}
       </div>
       {% if teacher %}<div class="hl-passage">{{ p.passage_hl }}</div>
       {% else %}<div class="hl-passage">{{ p.passage_hl_student }}</div>{% endif %}

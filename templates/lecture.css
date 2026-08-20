@@ -243,10 +243,8 @@ mark.hl1 .hln{ color:#1f4e8a; }
 .cleg{ margin-right:16px; white-space:nowrap; }
 .cnum{ display:inline-flex; align-items:center; justify-content:center; width:15px; height:15px;
   border-radius:50%; font-weight:800; font-size:8pt; color:#5b4a12; margin-right:5px; vertical-align:-2px; }
-.cnum.hl0{ background:#ffe873; } .cnum.hl1{ background:#aecbff; color:#1f4e8a; } .cnum.hl2{ background:#ffc9dd; color:#9a2a55; }
+.cnum.hl0{ background:#ffe873; } .cnum.hl1{ background:#aecbff; color:#1f4e8a; }
 .cleg .cvar{ color:#9aa0b4; font-size:8.6pt; }
-.cleg .ckind{ display:inline-block; font-size:7.6pt; font-weight:700; color:#5a5f6e;
-  background:#eef0f4; border:1px solid #dfe2ea; border-radius:6px; padding:0 6px; margin-left:3px; vertical-align:1px; }
 .hl-passage{ font-size:10.2pt; line-height:1.52; color:var(--ink); background:#fff;
   border:1px solid var(--line); border-radius:9px; padding:6px 10px; }
 .hl-passage .snum{ font-weight:700; color:var(--green); font-size:7pt; margin-right:1px; }

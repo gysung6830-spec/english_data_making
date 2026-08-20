@@ -99,7 +99,7 @@ def _highlight_passage(sentences, chains, first_expr_only: bool = False) -> Mark
         for expr in exprs:
             e = str(escape(expr)).strip()
             if e:
-                pairs.append((e, f"hl{ci % 3}", ci + 1))
+                pairs.append((e, f"hl{ci % 2}", ci + 1))
     tokens: dict[str, str] = {}
     # 긴 표현 먼저(짧은 표현이 긴 표현 안에서 잘리는 것 방지), 플레이스홀더로 치환
     for i, (e, color, cno) in enumerate(sorted(pairs, key=lambda p: -len(p[0]))):
@@ -134,9 +134,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
     for ci, c in enumerate(ov.restatement_chains):
         chains.append({
             "label": c.label,
-            "kind": c.kind,
             "variation": c.variation,
-            "color": f"hl{ci % 3}",
+            "color": f"hl{ci % 2}",
         })
     passage_hl = _highlight_passage(p.sentences, ov.restatement_chains)
     # 학생용: 각 소재의 '첫 표현'만 예시로 형광펜 표시(나머지는 학생이 직접)
