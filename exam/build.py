@@ -112,9 +112,9 @@ def resolve_passage_sentence(answer: str, tokens: list[str] | None,
         if _norm(s) == na:
             return s
     # ② 토큰(학생이 배열하는 낱개 단어) + 답의 단어 집합과 가장 잘 겹치는 문장으로 스냅
-    words = set(na.split())
-    if tokens:
-        words |= set(_norm(" ".join(tokens)).split())
+    tok_set = set(_norm(" ".join(tokens)).split()) if tokens else set()
+    ntok = len(_norm(" ".join(tokens)).split()) if tokens else len(na.split())
+    words = set(na.split()) | tok_set
     best, score = None, 0.0
     for s in sentences:
         sw = set(_norm(s).split())
@@ -123,7 +123,31 @@ def resolve_passage_sentence(answer: str, tokens: list[str] | None,
         j = len(words & sw) / len(words | sw)
         if j > score:
             best, score = s, j
-    return best if (best is not None and score >= min_score) else None
+    if best is None or score < min_score:
+        return None
+    # ③ 후보 문장이 토큰보다 크게 길면(토큰이 문장의 '일부'만 담은 경우) 전체 문장으로
+    #    늘리지 않고, 토큰과 맞는 '연속 구간'만 원문 그대로 잘라 반환한다. 학생이 배열할 수
+    #    없는 단어가 정답에 섞이지 않게 한다.
+    if ntok and len(_norm(best).split()) > ntok + 2:
+        return _token_span(best, tok_set, ntok)
+    return best
+
+
+def _token_span(sentence: str, tok_set: set, n: int) -> str | None:
+    """지문 문장에서 토큰(tok_set, n개)과 가장 잘 맞는 연속 n-단어 구간을 원문 그대로 돌려준다."""
+    orig = sentence.split()
+    norm = [_norm(w) for w in orig]
+    if len(norm) < n or not tok_set:
+        return None
+    best_i, best_ov = None, 0.0
+    for i in range(len(norm) - n + 1):
+        sset = set(norm[i:i + n])
+        ov = len(sset & tok_set) / len(sset | tok_set)
+        if ov > best_ov:
+            best_ov, best_i = ov, i
+    if best_i is None or best_ov < 0.8:
+        return None
+    return " ".join(orig[best_i:best_i + n]).strip().strip(",;:")   # 연결 구두점 정리
 
 
 def _even_split(total: int, parts: int) -> list[int]:

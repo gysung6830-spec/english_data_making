@@ -311,6 +311,22 @@ def test_arrangement_answer_snap() -> None:
     assert snapped == sents[1]
     # 전혀 무관한 답 → None(진짜 오류는 여전히 걸러냄)
     assert B.resolve_passage_sentence("Totally unrelated text.", ["totally"], sents) is None
+
+    # 토큰이 지문 문장의 '일부'만 담은 경우: 전체 문장으로 늘리지 말고 토큰과 맞는
+    # 연속 구간만 돌려줘, 정답에 학생이 배열할 수 없는 단어가 섞이지 않게 한다.
+    long_sents = [
+        "One explanation is that they have learned to hear music more like "
+        "language, discerning a level of structural complexity beyond the grasp "
+        "of ordinary listeners.",
+    ]
+    part_toks = ["that", "explanation", "language", "learned", "hear", "music",
+                 "one", "is", "more", "like", "they", "have", "to"]
+    snapped_part = B.resolve_passage_sentence(
+        "One explanation is that they have learned to hear music more like language",
+        part_toks, long_sents)
+    assert snapped_part == "One explanation is that they have learned to hear music more like language"
+    # 정답이 토큰만으로 재구성 가능해야 한다(초과 단어 없음)
+    assert set(B._norm(snapped_part).split()) <= set(B._norm(" ".join(part_toks)).split())
     # make_short 이 하드 실패 대신 스냅해 정답에 원래 문장이 들어간다
     _, a = B.make_short(
         sents, q1_prompt="p", q1_answer="한글",
