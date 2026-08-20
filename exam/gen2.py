@@ -329,7 +329,8 @@ def build_passage2(client, body, max_retries=1, logger=None, analysis=None,
 
 
 def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
-                    level=None, labels=None) -> list:
+                    level=None, labels=None, progress=None,
+                    part_label="변형문제 2회") -> list:
     """2회 여러 지문 -> 검증된 Passage 리스트(조판 없음). 합본용.
 
     labels 를 주면 각 지문 라벨(원본 PDF 문항번호 등)을 조판 라벨로 쓴다.
@@ -340,10 +341,15 @@ def build_passages2(client, bodies, max_retries=1, logger=None, analyses=None,
     if logger:
         logger.info("[2회] 지문 %d개 생성 중 …", len(bodies))
     # 지문끼리도 동시에 처리(실제 동시 API 호출 수는 클라이언트 전체 상한으로 묶임)
-    tasks = [(i, (lambda b=body, a=analysis, i=i: build_passage2(
-        client, b, max_retries=max_retries, logger=logger,
-        analysis=a, level=level, passage_index=i)))
-        for i, (body, analysis) in enumerate(zip(bodies, analyses))]
+    def _one(b, a, i):
+        r = build_passage2(client, b, max_retries=max_retries, logger=logger,
+                           analysis=a, level=level, passage_index=i)
+        if progress:
+            progress.step(f"{part_label} · 지문 {i + 1}")
+        return r
+
+    tasks = [(i, (lambda b=body, a=analysis, i=i: _one(b, a, i)))
+             for i, (body, analysis) in enumerate(zip(bodies, analyses))]
     res = run_parallel(tasks)
     passages = []
     for i in range(len(bodies)):

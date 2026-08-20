@@ -167,6 +167,8 @@ def build_passages(
     analyses: list | None = None,
     level: str | None = None,
     labels: list[str] | None = None,
+    progress=None,
+    part_label: str = "변형문제 1회",
 ) -> list[Passage]:
     """여러 지문 -> 검증된 Passage 리스트(조판은 하지 않음). 합본용.
 
@@ -178,11 +180,16 @@ def build_passages(
         logger.info("지문 %d개 생성 중 …", len(bodies))
     # 지문끼리도 동시에 처리한다. 실제 동시 API 호출 수는 클라이언트의 전체 상한으로
     # 묶이므로, 한 지문의 마지막 호출을 기다리며 노는 시간이 사라진다.
-    tasks = [(i, (lambda b=body, a=analysis, i=i: build_passage(
-        client, b, max_retries=max_retries, logger=logger,
-        vocab_method=vocab_method, content_difficulty=content_difficulty,
-        analysis=a, level=level, passage_index=i)))
-        for i, (body, analysis) in enumerate(zip(bodies, analyses))]
+    def _one(b, a, i):
+        r = build_passage(client, b, max_retries=max_retries, logger=logger,
+                          vocab_method=vocab_method, content_difficulty=content_difficulty,
+                          analysis=a, level=level, passage_index=i)
+        if progress:
+            progress.step(f"{part_label} · 지문 {i + 1}")
+        return r
+
+    tasks = [(i, (lambda b=body, a=analysis, i=i: _one(b, a, i)))
+             for i, (body, analysis) in enumerate(zip(bodies, analyses))]
     res = run_parallel(tasks)
     passages: list[Passage] = []
     for i in range(len(bodies)):

@@ -1325,6 +1325,41 @@ def test_grammar_mark_word_duplication() -> None:
     print("✓ 어법 밑줄 표시어 낱말 중복(to to confirm) 방지 통과")
 
 
+def test_progress_output() -> None:
+    """진행 상황: 지문이 하나 끝날 때마다 '완료 개수·경과·남은 예상'을 한 줄씩 찍는다."""
+    import io as _io
+
+    from exam.progress import NullProgress, Progress, human
+
+    assert human(0) == "0초" and human(75) == "1분 15초" and human(7920) == "2시간 12분"
+
+    buf = _io.StringIO()
+    prog = Progress(total=4, stream=buf)
+    prog.note("지문 2개 분석 중 …")
+    pipeline.build_passages(_FakeClient(), ["b1", "b2"],
+                            progress=prog, part_label="변형문제 1회 · 난이도 중")
+    pipeline.build_passages(_FakeClient(), ["b1", "b2"],
+                            progress=prog, part_label="변형문제 1회 · 난이도 상")
+    prog.finish()
+    out = buf.getvalue()
+    lines = [x for x in out.splitlines() if x.strip()]
+    assert lines[0].startswith("  ▶") and "분석" in lines[0], lines[0]
+    assert len([x for x in lines if x.startswith("  ✓")]) == 4, out
+    assert "[1/4]" in out and "[4/4]" in out, out          # 진행률
+    assert "난이도 중" in out and "난이도 상" in out, out    # 파트 구분
+    assert "경과" in out and "남은 예상" in out, out          # 경과·ETA
+    assert lines[-1].startswith("  ★") and "총 소요" in lines[-1], lines[-1]
+
+    # 데모·테스트용 NullProgress 는 아무것도 찍지 않는다
+    quiet = _io.StringIO()
+    np = NullProgress()
+    np._stream = quiet
+    np.note("x")
+    np.step("y")
+    assert quiet.getvalue() == ""
+    print("✓ 진행 상황 표시(완료 개수·경과·남은 예상) 통과")
+
+
 def test_parallel_passages_and_gate() -> None:
     """속도: 지문끼리도 동시에 생성하되(순서·라벨은 보존), 실제 동시 API 호출 수는
     전체 상한으로 묶여 레이트리밋을 넘지 않는다."""
@@ -1608,6 +1643,7 @@ if __name__ == "__main__":
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
     test_grammar_mark_word_duplication()
+    test_progress_output()
     test_parallel_passages_and_gate()
     test_output_modes()
     test_edge_guards()

@@ -276,12 +276,19 @@ def generate():
         return f"{tag} — {header}" if header else tag
 
     try:
+        # 진행 상황을 웹앱을 띄운 터미널에 한 줄씩 표시(브라우저는 기다리기만 하므로).
+        from exam.progress import NullProgress, Progress
+        n_parts = len(sets) * (1 if demo else len(levels))
+        prog = (NullProgress() if demo
+                else Progress(n_parts * len(bodies)))
         # 실제 모드: 분석을 '한 번만' 돌려 모든 세트·난이도 조합이 공유한다(속도·비용).
         analyses = None
         if not demo:
+            prog.note(f"지문 {len(bodies)}개 분석 중 … (회차·난이도 {n_parts}종 공유)")
             from exam.pipeline import analyze_bodies
             analyses = analyze_bodies(client, bodies,
                                       max_retries=cfg.processing.max_retries)
+            prog.note(f"분석 완료 · 이제 문항 생성 {n_parts * len(bodies)}건을 시작합니다")
 
         # 선택한 (세트 × 난이도) 조합을 모두 만들어 한 PDF로 합본한다.
         # 데모는 난이도 변형이 없으므로 세트당 1개만.
@@ -301,7 +308,8 @@ def generate():
                         ps = build_passages(client, bodies,
                                             max_retries=cfg.processing.max_retries,
                                             analyses=analyses, level=lv,
-                                            labels=src_labels)
+                                            labels=src_labels, progress=prog,
+                                            part_label=part_tag(sid, lv))
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "group_by": group_by})
                 elif sid == "2":
@@ -314,7 +322,8 @@ def generate():
                         ps = build_passages2(client, bodies,
                                              max_retries=cfg.processing.max_retries,
                                              analyses=analyses, level=lv,
-                                             labels=src_labels)
+                                             labels=src_labels, progress=prog,
+                                             part_label=part_tag(sid, lv))
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER2,
                                   "prompts": TYPE_PROMPTS2, "labels": TYPE_LABELS2,
@@ -329,7 +338,8 @@ def generate():
                         ps = build_passages3(client, bodies,
                                              max_retries=cfg.processing.max_retries,
                                              analyses=analyses, level=lv,
-                                             labels=src_labels)
+                                             labels=src_labels, progress=prog,
+                                             part_label=part_tag(sid, lv))
                     parts.append({"passages": ps, "header_note": part_header(sid, lv),
                                   "sections": sections, "type_order": TYPE_ORDER3,
                                   "prompts": TYPE_PROMPTS3, "labels": TYPE_LABELS3,
@@ -339,6 +349,7 @@ def generate():
                                   "group_by": group_by})
                 labels.append(part_header(sid, lv))
 
+        prog.note("문항 생성 완료 · PDF 조판 중 …")
         fid = uuid.uuid4().hex[:12]
         out = _pdf_path(fid)
         # 출력 방식: 합본(기본) / 개별 / 합본 및 개별.
