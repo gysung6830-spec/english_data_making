@@ -179,6 +179,7 @@ CROPS = [
     # 04 필생보 독학용
     ("psb-solve.png", "c-psbs-write.png", (0.05, 0.120, 0.95, 0.202)),
     ("psb-solve.png", "c-psbs-warn.png", (0.05, 0.208, 0.95, 0.252)),
+    ("psb-answer.png", "c-psbs-catch.png", (0.05, 0.232, 0.95, 0.316)),
     ("psb-predict.png", "c-psbs-predict.png", (0.04, 0.090, 0.96, 0.330)),
     ("psb-signal.png", "c-psbs-signal.png", (0.04, 0.090, 0.96, 0.330)),
 
