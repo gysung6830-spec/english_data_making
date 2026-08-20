@@ -29,6 +29,10 @@ def _passage_html(
     - overrides: {문장idx: 교체문장} — 그 문장만 통째로 바꿈(어법 구조 변경·부정어 삽입용).
     - marks: [(문장idx, 원본단어, 마커HTML)] — 그 문장에서 단어 첫 등장을 마커로 치환.
     연결 텍스트는 원본 그대로 유지되고, 마커/override 로 지정한 부분만 달라진다.
+
+    표시어(마커 안 문구)가 원본단어 앞의 낱말까지 포함하는 경우(예: 원본단어 'confirm',
+    표시어 'to confirm')에는, 바로 앞에 이미 있는 그 낱말('to ')까지 함께 치환한다.
+    그러지 않으면 'to to confirm' 처럼 낱말이 중복돼 문항이 성립하지 않는다.
     """
     sents = list(sentences)
     if overrides:
@@ -63,6 +67,31 @@ def _passage_html(
             text = text.replace(token, marker)
         return text
     return " ".join(esc)
+
+
+def expand_marks(sentences: list[str],
+                 marks: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
+    """표시어가 원본단어 '앞 낱말'까지 포함할 때, 그 앞 낱말도 치환 대상에 넣는다.
+
+    LLM 이 밑줄 대상을 word='confirm', shown='to confirm' 처럼 돌려주면, 원본의 'to' 는
+    그대로 남고 표시어에도 'to' 가 있어 'to to confirm' 으로 중복된다(실제 결과물 버그).
+    표시어의 낱말열이 원본단어의 낱말열로 '끝나고' 앞에 여분 낱말이 있으면, 문장에서
+    '여분 낱말 + 원본단어'가 실제로 이어져 있을 때만 원본단어를 그 구간으로 넓힌다.
+    (조건이 안 맞으면 원래대로 두어 기존 동작을 바꾸지 않는다.)
+    """
+    out: list[tuple[int, str, str]] = []
+    for idx, word, shown in marks:
+        w_toks, s_toks = word.split(), shown.split()
+        extra = len(s_toks) - len(w_toks)
+        if (0 <= idx < len(sentences) and extra > 0
+                and s_toks[extra:] == w_toks):
+            lead = " ".join(s_toks[:extra])
+            span = f"{lead} {word}"
+            if re.search(r"(?<!\w)" + re.escape(span) + r"(?!\w)", sentences[idx], re.IGNORECASE):
+                out.append((idx, span, shown))    # 'to confirm' 통째로 치환 → 중복 방지
+                continue
+        out.append((idx, word, shown))
+    return out
 
 
 def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
@@ -316,6 +345,7 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호도 그에 맞춰 재매핑
     marks, remap = order_marks(sentences, marks)
     answer_no = remap.get(answer_no, answer_no)
+    marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
     marked = _passage_html(sentences, _underline_marks(marks), overrides)
     return F.vocab_q(marked), F.vocab_a(answer_no, reason)
 
@@ -332,6 +362,7 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
     marks, remap = order_marks(sentences, marks)
     answer_nos = sorted(remap.get(n, n) for n in answer_nos)
     reasons = {remap.get(n, n): t for n, t in reasons.items()}
+    marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
     marked = _passage_html(sentences, _underline_marks(marks))
     return F.grammar_q(marked), F.grammar_a(answer_nos, reasons)
 

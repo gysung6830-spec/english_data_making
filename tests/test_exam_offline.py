@@ -1297,6 +1297,34 @@ def test_short_answer_q3_summary_dedup() -> None:
     print("✓ 서술형 (3) 요약문 빈칸 라벨 중복 제거·공백 정리 통과")
 
 
+def test_grammar_mark_word_duplication() -> None:
+    """어법 밑줄: 표시어가 원본단어 앞 낱말까지 포함해도('confirm'→'to confirm')
+    'to to confirm' 처럼 낱말이 중복되지 않는다(실제 결과물 버그·검토메모 지적)."""
+    import re as _re
+
+    sents = ["In a very basic sense we need others to confirm that we are there, "
+             "that we exist and that we have an identity that is unique."]
+
+    q, _ = B.make_grammar(sents, [(0, "confirm", "to confirm"), (0, "that", "what")],
+                          [2], {2: "근거"})
+    txt = _re.sub(r"<[^>]+>", "", q)
+    assert "to to confirm" not in txt, txt
+    assert "to confirm" in txt and "what we are there" in txt, txt
+
+    # 앞 낱말이 실제로 이어져 있지 않으면 넓히지 않는다(기존 동작 유지)
+    kept = B.expand_marks(sents, [(0, "identity", "an identity")])
+    assert kept == [(0, "an identity", "an identity")], kept
+    nochange = B.expand_marks(sents, [(0, "confirm", "confirms")])
+    assert nochange == [(0, "confirm", "confirms")], nochange
+
+    # 일반 단어 치환은 그대로(회귀 없음)
+    q2, _ = B.make_grammar(sents, [(0, "confirm", "confirms"), (0, "unique", "uniquely")],
+                           [1], {1: "r"})
+    t2 = _re.sub(r"<[^>]+>", "", q2)
+    assert "confirms" in t2 and "uniquely" in t2 and "to to" not in t2, t2
+    print("✓ 어법 밑줄 표시어 낱말 중복(to to confirm) 방지 통과")
+
+
 def test_precheck_harness() -> None:
     """사전 점검(API 미사용): 정본 오염을 생성 전에 잡고, 정상 지문은 통과시킨다.
     웹앱은 문제가 있으면 경고 후 '그래도 생성'을 고를 수 있어야 한다."""
@@ -1441,6 +1469,7 @@ if __name__ == "__main__":
     test_review_flags_and_page()
     test_conditional_vision_fallback()
     test_summary_blank_label_dedup()
+    test_grammar_mark_word_duplication()
     test_precheck_harness()
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
