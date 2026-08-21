@@ -158,7 +158,7 @@ INDEX_HTML = """
       <div class=grid>
         <div>
           <label>⑤-2 생성 회차 수
-            <span class=hint>(같은 지문 · 겹치지 않는 문항 · 난이도 하→중)</span></label>
+            <span class=hint>(같은 지문 · 겹치지 않는 문항 · 난이도 중→중상)</span></label>
           <select name=n_forms>
             <option value="1">1회분</option>
             <option value="2" selected>2회분</option>

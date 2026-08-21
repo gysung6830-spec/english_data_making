@@ -180,8 +180,8 @@ def generate_mock(
 
 
 _DIFF_KO = {"low": "하", "mid": "중", "mid_high": "중상", "high": "상"}
-# N회분 고정 난이도 사다리(사용자 지정): 하 → 중 → 상 → 중상
-_DIFF_LADDER = ["low", "mid", "high", "mid_high"]
+# N회분 고정 난이도 사다리(사용자 지정): 중 → 중상 → 상
+_DIFF_LADDER = ["mid", "mid_high", "high"]
 
 
 def difficulty_gradient(base: str, n: int) -> list[str]:
