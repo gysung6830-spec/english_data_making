@@ -737,6 +737,91 @@ def mugwan_direct(mug):
     return rows
 
 
+def solution_block(rec, c, idx):
+    """형광펜 해설(오른쪽) 조립 — STEP2 정답 칠 + STEP3 직독직해 + 재진술. 답지(해설지)에서도 재사용."""
+    num = rec["num"]; typ = BAND_TITLE.get(rec["band"], rec.get("type", ""))
+    answer = c.get("answer") or rec.get("answer")
+    hl = c.get("hl") or []
+    formula = FORMULA.get(typ, "")
+    src_ans = c.get("answer_src", "given")
+    ans_note = "" if src_ans == "given" else " <span style=\"font-size:8px;color:#a86b00\">(정답 미공개 → 풀이로 확정)</span>"
+    seqtype = "순서" if num in (36, 37) else ("삽입" if num in (38, 39) else "")
+    cn = _CONNECT.get(f'{rec.get("exam_id","")}|{num}') if seqtype else None
+    insert_en = None
+    if seqtype == "삽입":
+        _sd = c.get("seq_direct") or {}
+        _p = next((p for p in _sd.get("pieces", []) if p.get("label") == "넣을 문장"), None)
+        if _p:
+            insert_en = _p.get("en")
+    mug = c.get("mugwan") if num == 35 else None
+    uline = c.get("uline")
+    rt = c.get("restate")
+
+    step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
+    _yellows = [h.get("t", "") for h in hl if h.get("role") == "yellow"]
+    reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}), _yellows)
+    pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
+    passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
+    if mug:
+        passage_html = mugwan_html(mug, step2=True)
+    passage_html = uline_html(passage_html, uline)
+    if num == 30:
+        passage_html = vocab_underline(passage_html, c.get("opts", []))
+    clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
+                   '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
+    color_legend = "" if seqtype else (
+        '<div class="color-legend"><span class="clh">형광펜 3색</span>'
+        '<span class="cl m">🟡 정답 핵심<b>무조건 읽기</b></span>'
+        '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
+        '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
+        '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">반복어</span> '
+        '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span>'
+        '<span class="cl" style="background:#fff"><span class="tag rel eq" style="font-size:7px">관계어</span> '
+        '= <b>인과·등호·대조·비교</b> 논리 신호 <span style="color:#8a929b">(PART 0 구문 사전)</span></span>'
+        '<span class="cl" style="background:#fff"><u class="pu pl">긍정</u><sup class="pm pl">＋</sup> '
+        '<u class="pu mn">부정</u><sup class="pm mn">−</sup> = <b>±어휘</b> <span style="color:#8a929b">(PART 0 ± 사전)</span></span></div>')
+    right = f'''<div class="qsolution">
+    <div class="card">
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
+      {clue_legend}{color_legend}
+      <div class="psg">{passage_html}</div>
+      {reason_block}
+      {pline}
+      {mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer)}
+      {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
+      <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
+    </div>'''
+    seqd = c.get("seq_direct") if seqtype else None
+    if seqd:
+        step3_kind = "STEP 3 · 해석 (조각 잇기)"; step3_tm = "🔗 지시어·이음매"
+        step3_head = ("🔗 조각별 해석 — <b>지시어가 가리키는 것</b>과 <b>어디에 붙는지</b>로 순서를 확인"
+                      if seqtype == "순서" else
+                      "🔗 조각별 해석 — <b>넣을 문장의 지시어</b>가 앞을 받아 <b>끊긴 흐름</b>을 메우는지 확인")
+        step3_body = seam_block(seqd)
+    elif mug:
+        step3_kind = "STEP 3 · 해석 (다섯 문장 전체)"; step3_tm = "①~⑤ 전문장"
+        step3_head = "🔍 다섯 문장 전체 해석 — ①~⑤ 중 <b>흐름과 무관한 정답 문장</b>까지 모두 확인"
+        step3_body = mugwan_direct(mug)
+    else:
+        step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
+        step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
+        step3_body = direct_block(num, typ, c.get("direct", []))
+        if num == 40 and c.get("summary"):
+            _atx = next((o.get("tx", "") for o in c.get("opts", []) if o["n"] == answer), "")
+            _parts = re.split(r"\s*(?:…|\.\.\.|·)\s*", _atx, maxsplit=1)
+            _a, _b = (_parts + ["", ""])[:2]
+            step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
+    right2 = f'''<div class="card trans">
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
+      <div class="dchl">
+        <span class="kt">{step3_head}</span>
+        {step3_body}
+        <div class="opt-line">{opt_line(c)}</div>
+      </div>
+    </div>'''
+    return right + right2 + restate_card(rt) + '\n  </div>'
+
+
 def summary_box(summary, fill=None):
     """요약문(40) 요약 문장 — (A)/(B) 빈칸. fill=(a_word,b_word)면 정답으로 채워 강조."""
     if not summary:
@@ -845,73 +930,7 @@ def render_spread(rec, c, idx):
     {vocab_block(c.get("vlist", []))}
   </div>'''
 
-    step2_kind = "STEP 2 · 훈련 (연결고리 잇기)" if seqtype else "STEP 2 · 훈련 (정답 칠)"
-    _yellows = [h.get("t", "") for h in hl if h.get("role") == "yellow"]
-    reason_block = connect_block(cn, seqtype) if (seqtype and cn) else derive_block(c.get("derive", {}), _yellows)
-    pline = "" if seqtype else paraphrase_line(c.get("paraphrase"))
-    # 순서·삽입은 노랑 형광펜 대신 연결고리 단서만 색칠
-    passage_html = connective_passage(hl, cn.get("clues") if cn else [], insert_en) if (seqtype and cn) else step2_passage(hl)
-    if mug:
-        passage_html = mugwan_html(mug, step2=True)
-    passage_html = uline_html(passage_html, uline)
-    if num == 30:
-        passage_html = vocab_underline(passage_html, c.get("opts", []))
-    clue_legend = ('<div class="clue-legend"><span class="pclue ck-ref">지시어</span><span class="pclue ck-conj">연결어</span>'
-                   '<span class="pclue ck-time">시간·순서</span> 만 표시 — 노랑 형광펜은 쓰지 않아요</div>') if seqtype else ""
-    # 3색 범례 — 노랑/연녹/회색을 '언제 긋는지' 안내 (순서·삽입 제외)
-    color_legend = "" if seqtype else (
-        '<div class="color-legend"><span class="clh">형광펜 3색</span>'
-        '<span class="cl m">🟡 정답 핵심<b>무조건 읽기</b></span>'
-        '<span class="cl g">🟩 주제·배경<b>화제만 파악 · 근거 아님</b></span>'
-        '<span class="cl sk">⬜ 예시·부연<b>넘겨도 됨</b></span>'
-        '<span class="cl" style="background:#fff"><span class="tag pos" style="font-size:7px">반복어</span> '
-        '= 신호어 없이 <b>자리·반복어·정의</b>로 잡는 노랑</span>'
-        '<span class="cl" style="background:#fff"><span class="tag rel eq" style="font-size:7px">관계어</span> '
-        '= <b>인과·등호·대조·비교</b> 논리 신호 <span style="color:#8a929b">(PART 0 구문 사전)</span></span>'
-        '<span class="cl" style="background:#fff"><u class="pu pl">긍정</u><sup class="pm pl">＋</sup> '
-        '<u class="pu mn">부정</u><sup class="pm mn">−</sup> = <b>±어휘</b> <span style="color:#8a929b">(PART 0 ± 사전)</span></span></div>')
-    right = f'''<div class="qsolution">
-    <div class="card">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
-      {clue_legend}{color_legend}
-      <div class="psg">{passage_html}</div>
-      {reason_block}
-      {pline}
-      {mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer)}
-      {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
-      <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
-    </div>'''
-    # STEP3 — 순서·삽입은 '이음매형'(조각별 지시어 정체 + 이음), 그 외는 직독직해
-    seqd = c.get("seq_direct") if seqtype else None
-    if seqd:
-        step3_kind = "STEP 3 · 해석 (조각 잇기)"; step3_tm = "🔗 지시어·이음매"
-        step3_head = ("🔗 조각별 해석 — <b>지시어가 가리키는 것</b>과 <b>어디에 붙는지</b>로 순서를 확인"
-                      if seqtype == "순서" else
-                      "🔗 조각별 해석 — <b>넣을 문장의 지시어</b>가 앞을 받아 <b>끊긴 흐름</b>을 메우는지 확인")
-        step3_body = seam_block(seqd)
-    elif mug:
-        step3_kind = "STEP 3 · 해석 (다섯 문장 전체)"; step3_tm = "①~⑤ 전문장"
-        step3_head = "🔍 다섯 문장 전체 해석 — ①~⑤ 중 <b>흐름과 무관한 정답 문장</b>까지 모두 확인"
-        step3_body = mugwan_direct(mug)
-    else:
-        step3_kind = "STEP 3 · 해석 (직독직해)"; step3_tm = "🟡문장·선지만"
-        step3_head = "🟡 무조건 읽는 문장 — 슬래시(/)로 끊어 읽기 · 영↔한 대응"
-        step3_body = direct_block(num, typ, c.get("direct", []))
-        if num == 40 and c.get("summary"):
-            _atx = next((o.get("tx", "") for o in c.get("opts", []) if o["n"] == answer), "")
-            _parts = re.split(r"\s*(?:…|\.\.\.|·)\s*", _atx, maxsplit=1)
-            _a, _b = (_parts + ["", ""])[:2]
-            step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
-    right2 = f'''<div class="card trans">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
-      <div class="dchl">
-        <span class="kt">{step3_head}</span>
-        {step3_body}
-        <div class="opt-line">{opt_line(c)}</div>
-      </div>
-    </div>'''
-    right = right + right2 + restate_card(rt) + '''
-  </div>'''
+    right = solution_block(rec, c, idx)
     return f'<div class="spread">{left}{right}</div>'
 
 
