@@ -27,6 +27,7 @@ from exam.schemas import (  # noqa: E402
     IrrelevantOut,
     KeyTerm,
     OrderOut,
+    PairOddOut,
     ShortOut,
     TitleOut,
     TopicOut,
@@ -569,6 +570,16 @@ _FAKE = {
                Pair(a="wrongword", b="badword", a_ok=False, b_ok=False),
                Pair(a="badword", b="wrongword", a_ok=False, b_ok=False)],
         answer_no=1, reason="이유."),
+    "PairOddOut": lambda: PairOddOut(
+        # 짝짓기는 '정본 지문' 위에 낸다(어법 유형과 달리 다시 쓰지 않는다)
+        marks=[WordMark(sent_no=1, word="introduces", shown="introduces"),
+               WordMark(sent_no=2, word="adds", shown="add"),          # ⓑ 어법 오류
+               WordMark(sent_no=3, word="gives", shown="gives"),
+               WordMark(sent_no=4, word="draws", shown="scatters"),    # ⓓ 어휘 오류
+               WordMark(sent_no=5, word="answers", shown="answers")],
+        grammar_no=2, vocab_no=4,
+        reasons=[GrammarReason(no=i, text="근거") for i in range(1, 6)],
+        reason="부적절한 것은 2개."),
     "TitleOut": lambda: TitleOut(
         choices=["The First Title", "A Second Title", "Third Title Here",
                  "Fourth Title Here", "A Fifth Title"], answer_no=2, reason="이유.",
@@ -1687,17 +1698,19 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam.types import TYPE_ORDER
 
     # ① 구성 — 15문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
-    assert len(MERGED_ORDER) == 16, MERGED_ORDER
-    assert len(set(MERGED_ORDER)) == 16                    # 같은 슬롯이 두 번 나오지 않는다
+    assert len(MERGED_ORDER) == 17, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 17                    # 같은 슬롯이 두 번 나오지 않는다
     assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
-    _added = {"title", "irrelevant", "vocab_2", "vocab_3", "grammar_count"}
+    # 옛 A(짝짓기)는 pair_odd 로 되살렸다 — 뺐던 3유형 중 유일하게 되돌아온 것
+    assert "pair_odd" in MERGED_ORDER
+    _added = {"title", "irrelevant", "vocab_2", "vocab_3", "grammar_count", "pair_odd"}
     assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
             == (set(MERGED_ORDER) - _added) | set(EXCLUDED))
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
     assert MERGED_ORDER == ("topic", "title", "B", "content",
-                            "grammar", "grammar_count",
+                            "grammar", "grammar_count", "pair_odd",
                             "vocab", "vocab_2", "vocab_3", "F", "irrelevant",
                             "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
     # 어법 두 문항은 발문이 서로 달라야 한다(같은 문제를 두 번 내는 것이 아니다)
@@ -1727,14 +1740,14 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert seen.get("GrammarCountOut") == 2, seen               # 어법(개수) 지문당 1번
     assert seen.get("VocabOut") == 6, seen                      # 어휘는 지문당 3번(3종)
     assert seen.get("TitleOut") == 2 and seen.get("IrrelevantOut") == 2, seen
-    assert seen.get("VerifyOut") == 18, seen                    # 자기검증 지문당 9회
+    assert seen.get("VerifyOut") == 20, seen                    # 자기검증 지문당 10회
 
-    # ③ 지문마다 16문항이 순서대로, 라벨도 보존된다
+    # ③ 지문마다 17문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
 
-    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 16 = 32번까지)
+    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 17 = 34번까지)
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "merged.pdf"
     renderer.render_pdf(ps, out, header_note="통합",
@@ -1769,7 +1782,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
     assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
-    assert "지문당 16문항" in home
+    assert "지문당 17문항" in home
     r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
@@ -1779,8 +1792,8 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert "변형문제 1회" not in page and "변형문제 2회" not in page
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
-    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 9
-    print("✓ 변형문제 통합본(16문항·제목·무관한 문장·어휘 3종·어법 2종)·조판·재출력 통과")
+    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 10
+    print("✓ 변형문제 통합본(17문항·제목·무관한문장·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
 
 
 def test_new_type_guards() -> None:
@@ -1860,7 +1873,21 @@ def test_new_type_guards() -> None:
                _pair("likely", "retain")]
     assert any("부정 의미" in b for b in chk_sum(bad_sum, 1)), chk_sum(bad_sum, 1)
 
-    # ④ 무관한 문장 ----------------------------------------------------------
+    # ④ 어법·어휘 짝짓기 — 짝 선지는 코드가 만든다 ------------------------
+    from exam.generators.pair_odd import build_pairs
+    from exam.format2 import cletter
+    for a, b in ((2, 4), (1, 5), (3, 4)):
+        for seed in range(6):
+            ch, no = build_pairs(a, b, seed=seed)
+            assert len(ch) == 5 and len(set(ch)) == 5, ch     # 짝 5개가 서로 다르다
+            want = {cletter(a), cletter(b)}
+            hit = [c for c in ch if want <= set(c)]
+            assert hit == [ch[no - 1]], (ch, no)              # 정답 짝은 정확히 하나
+            # 오답 중 3개는 '정답 둘 중 하나만' 포함 — 하나만 찾아서는 못 고른다
+            half = [c for c in ch if len(want & set(c)) == 1]
+            assert len(half) == 3, ch
+
+    # ⑤ 무관한 문장 ----------------------------------------------------------
     sents = DNA.sentences
     assert chk_irr("Most large firms now run their interviews online.", sents)   # 소재 동떨어짐
     assert chk_irr(sents[2], sents)                                              # 원문 되풀이

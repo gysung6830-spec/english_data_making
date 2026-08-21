@@ -11,8 +11,10 @@ from __future__ import annotations
 
 from . import build as B
 from .demo_data import DNA, STAR
+from . import build2 as B2
+from .generators.pair_odd import build_pairs
 from .types import (
-    GRAMMAR, GRAMMAR_COUNT, IRRELEVANT, TITLE, VOCAB_2, VOCAB_3, Passage,
+    GRAMMAR, GRAMMAR_COUNT, IRRELEVANT, PAIR_ODD, TITLE, VOCAB_2, VOCAB_3, Passage,
 )
 
 # 데모 지문 제목 -> 이 파일이 채워 줄 문항들
@@ -147,6 +149,27 @@ def _dna() -> Passage:
         },
         note="틀린 것은 ①(태)과 ⑤(수 일치) 두 개입니다.",
     ))
+    # 어법·어휘 짝짓기 — ⓐ~ⓔ 중 정확히 2개(어법 1 + 어휘 1)만 부적절
+    _ch, _no = build_pairs(2, 4, seed=0)          # ⓑ(어법) · ⓓ(어휘)
+    p.set_qa(PAIR_ODD, *B2.make_A(
+        s,
+        marks=[
+            (0, "works", "works"),          # ⓐ 관계절 수 일치(적절)
+            (1, "packs", "pack"),           # ⓑ 어법 오류 — 주어 it 은 단수
+            (2, "combined", "combined"),    # ⓒ 과거분사(적절)
+            (3, "durable", "fragile"),      # ⓓ 어휘 오류 — 반의어 함정
+            (5, "preserved", "preserved"),  # ⓔ 수동(적절)
+        ],
+        answer_no=_no,
+        choices=_ch,
+        reason=("부적절한 것은 ⓑ(어법)와 ⓓ(어휘) 둘입니다. / "
+                "ⓐ 선행사 DNA(단수)를 받는 관계절 동사이므로 works 가 맞습니다(적절). / "
+                "ⓑ pack → packs: 주어 it 이 단수이므로 단수동사여야 합니다 (어법). / "
+                "ⓒ hard drives 가 '합쳐진' 것이므로 과거분사 combined 가 맞습니다(적절). / "
+                "ⓓ fragile → durable: 뼈와 얼음 속에서 수만 년을 '견딘다'는 흐름이므로 "
+                "'부서지기 쉬운'은 정반대입니다 (어휘·반의어 함정). / "
+                "ⓔ 정보가 '보존되는' 것이므로 수동 preserved 가 맞습니다(적절)."),
+    ))
     return p
 
 
@@ -272,6 +295,27 @@ def _star() -> Passage:
             6: "주어 the firm 은 단수이므로 loses 가 맞습니다(수 일치).",
         },
         note="틀린 것은 ①(태)과 ③(분사·태) 두 개입니다.",
+    ))
+
+    _ch, _no = build_pairs(3, 5, seed=1)          # ⓒ(어법) · ⓔ(어휘)
+    p.set_qa(PAIR_ODD, *B2.make_A(
+        s,
+        marks=[
+            (0, "promote", "promote"),      # ⓐ 현재시제(적절)
+            (1, "assume", "assume"),        # ⓑ 수 일치(적절)
+            (2, "demand", "demands"),       # ⓒ 어법 오류 — The two jobs 는 복수
+            (3, "rewards", "rewards"),      # ⓓ 수 일치(적절)
+            (4, "neglects", "embraces"),    # ⓔ 어휘 오류 — 반의어 함정
+        ],
+        answer_no=_no,
+        choices=_ch,
+        reason=("부적절한 것은 ⓒ(어법)와 ⓔ(어휘) 둘입니다. / "
+                "ⓐ 일반적 사실을 말하므로 현재시제 promote 가 맞습니다(적절). / "
+                "ⓑ 주어 They 가 복수이므로 assume 이 맞습니다(적절). / "
+                "ⓒ demands → demand: 주어 The two jobs 가 복수이므로 복수동사여야 합니다 (어법). / "
+                "ⓓ 주어 One 이 단수이므로 rewards 가 맞습니다(적절). / "
+                "ⓔ embraces → neglects: 스타가 코칭을 '소홀히 한다'는 흐름인데 '기꺼이 받아들인다'는 "
+                "정반대입니다 (어휘·반의어 함정)."),
     ))
     return p
 

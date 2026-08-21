@@ -203,6 +203,41 @@ class GrammarCountOut(BaseModel):
             raise ValueError(f"밑줄 {n}개 각각의 근거(reasons)가 필요합니다.")
 
 
+class PairOddOut(BaseModel):
+    """어법·어휘 짝짓기 — '적절하지 않은 것끼리 짝지어진 것은?'
+
+    밑줄 ⓐ~ⓔ 5개 중 **정확히 2개**만 부적절하고, 학생은 그 둘을 짝으로 고른다.
+    한쪽은 어법 오류(수 일치·태·준동사 등), 다른 한쪽은 문맥상 어휘 오류(반의어 함정)로
+    둘 다 넣어 두 능력을 한 문항에서 함께 확인한다. 하나만 찾아서는 답이 안 나오므로
+    찍기가 통하지 않는다.
+
+    선지(짝 5개)는 코드가 만든다 — 정답 짝이 반드시 하나만 들어가도록 보장하기 위해서다.
+    """
+
+    marks: list[WordMark]          # 밑줄 5개(ⓐ~ⓔ). 부적절한 것은 shown 이 오답형.
+    grammar_no: int                # 어법상 틀린 밑줄 번호(1~5)
+    vocab_no: int                  # 문맥상 낱말이 부적절한 밑줄 번호(1~5)
+    reasons: list[GrammarReason]   # 밑줄 5개 각각이 왜 적절/부적절한지
+    reason: str = ""               # 총평(한국어)
+
+    @field_validator("marks")
+    @classmethod
+    def _five(cls, v: list[WordMark]) -> list[WordMark]:
+        if len(v) != 5:
+            raise ValueError("어법·어휘 짝짓기의 밑줄은 정확히 5개여야 합니다.")
+        return v
+
+    def check(self) -> None:
+        for name, no in (("grammar_no", self.grammar_no), ("vocab_no", self.vocab_no)):
+            if not 1 <= no <= 5:
+                raise ValueError(f"{name} 는 1~5 여야 합니다(현재 {no}).")
+        if self.grammar_no == self.vocab_no:
+            raise ValueError("어법 오류와 어휘 오류는 서로 '다른' 밑줄이어야 합니다"
+                             "(부적절한 것이 정확히 2개여야 짝이 성립합니다).")
+        if len(self.reasons) != 5:
+            raise ValueError("밑줄 5개 각각의 근거(reasons)가 필요합니다.")
+
+
 class ContentOut(BaseModel):
     choices: list[str]             # 한글 선지 5개
     answer_no: int                 # 글과 일치하는 정답 번호(1~5)

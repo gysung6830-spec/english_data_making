@@ -21,7 +21,8 @@ SLOTS2 = {"A": 0, "B": 1, "E": 2, "F": 3}            # 변형문제 2회
 # 통합본 — 선지 순서를 자유롭게 바꿔도 정오가 변하지 않는 유형만.
 #   어휘·어법은 밑줄 읽는 순서가 번호를 정하고, 무관한 문장·순서·삽입은 본문 위치가
 #   번호를 정하므로 재배치 대상이 아니다.
-SLOTS_MERGED = {"topic": 0, "title": 1, "content": 2, "B": 3, "E": 4, "F": 5}
+SLOTS_MERGED = {"topic": 0, "title": 1, "content": 2, "B": 3, "E": 4, "F": 5,
+                "pair_odd": 6}
 
 
 def seed_of(text: str) -> int:
