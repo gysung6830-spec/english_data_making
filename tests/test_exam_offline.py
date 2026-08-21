@@ -506,7 +506,7 @@ def _fake_analysis() -> Analysis:
 _FAKE = {
     "Analysis": _fake_analysis,
     "VerifyOut": lambda: __import__("exam.verify", fromlist=["VerifyOut"]).VerifyOut(ok=True),
-    "OrderOut": lambda: OrderOut(given_n=1, block_sizes=[2, 2, 1], display=[2, 1, 3],
+    "OrderOut": lambda: OrderOut(given_n=1, block_sizes=[2, 1, 1, 1], display=[3, 1, 4, 2],
                                  reason="이유."),
     "InsertOut": lambda: InsertOut(remove_no=2, reason="이유."),
     "TopicOut": lambda: TopicOut(
@@ -1964,6 +1964,65 @@ def test_tiering_and_escalation() -> None:
     print("✓ 유형별 추론 강도·검수 승격(걸린 문항만 상위 모델) 통과")
 
 
+def test_order_four_blocks() -> None:
+    """순서 배열을 (A)(B)(C)(D) 네 덩어리로 낸다.
+
+    가능한 배열이 6가지 → 24가지로 늘어 찍기가 어려워진다. 문장이 모자란 짧은 지문에서는
+    세 덩어리로 줄이되, 어느 쪽이든 정답이 '모양'으로 드러나지 않아야 한다.
+    """
+    import collections
+    import re as _re
+
+    from exam.build import _order_options, make_order
+    from exam.schemas import OrderOut
+    from exam.shape import check_order_shuffle
+
+    labels_of = lambda q: _re.findall(r'seg-label">\((.)\)', q)
+    opts_of = lambda q: _re.findall(r'<li>.*?</li>', q)
+
+    # ① 문장이 넉넉하면 네 덩어리 -----------------------------------------
+    s8 = [f"Sentence number {i} says something here." for i in range(1, 9)]
+    q, a = make_order(s8, 1, [2, 2, 2, 1], [3, 1, 4, 2], "이유.")
+    assert labels_of(q) == ["A", "B", "C", "D"], labels_of(q)
+    assert len(opts_of(q)) == 5
+    # 정답은 display 를 뒤집어 복원한 배열이다
+    assert "(B)-(D)-(A)-(C)" in q
+    no = int(_re.search(r'answer-key">(.)<', a).group(1)
+             .translate({ord(c): str(i + 1) for i, c in enumerate("①②③④⑤")}))
+    assert opts_of(q)[no - 1].endswith("(B)-(D)-(A)-(C)</li>"), (no, opts_of(q))
+
+    # ② 문장이 모자라면 세 덩어리로 줄인다(문항을 버리지 않는다) ----------
+    s4 = ["First one here.", "Second one here.", "Third one here.", "Fourth one here."]
+    fl: list[str] = []
+    q3, _ = make_order(s4, 1, [1, 1, 1, 1], [2, 1, 3, 4], "이유.", flags=fl)
+    assert labels_of(q3) == ["A", "B", "C"], labels_of(q3)
+    assert fl, "덩어리 수를 줄였으면 확인 권장 사유가 남아야 한다"
+
+    # ③ 선지가 '모양'으로 답을 흘리지 않는다 -------------------------------
+    for corr in ("BDAC", "CADB", "DBCA"):
+        for seed in range(8):
+            opts, ansno = _order_options("ABCD", list(corr), seed)
+            assert len(opts) == 5 and len(set(opts)) == 5, opts
+            assert opts[ansno - 1] == "-".join(f"({c})" for c in corr)
+            firsts = collections.Counter(o[1] for o in opts)   # '(X)-...' 의 X
+            assert max(firsts.values()) <= 2, (opts, firsts)   # 첫 라벨 몰림 금지
+
+    # ④ 라벨이 안 섞였거나 (A)가 곧 시작이면 거절 --------------------------
+    assert check_order_shuffle([1, 2, 3, 4])          # 원문 순서 그대로
+    assert check_order_shuffle([1, 3, 2, 4])          # (A)가 첫 덩어리
+    assert check_order_shuffle([3, 1, 4, 2]) == []    # 정상
+    # 스키마도 덩어리 수에 맞는 순열만 받는다
+    OrderOut(given_n=1, block_sizes=[2, 1, 1, 1], display=[3, 1, 4, 2], reason="r")
+    for bad in ([1, 2, 3], [1, 2, 3, 5], [2, 2, 1, 3]):
+        try:
+            OrderOut(given_n=1, block_sizes=[2, 1, 1, 1], display=bad, reason="r")
+        except Exception:
+            pass
+        else:
+            raise AssertionError(f"display={bad} 가 통과되면 안 된다")
+    print("✓ 순서 배열 4덩어리(A~D)·짧은 지문 3덩어리 축소·선지 모양 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2115,6 +2174,7 @@ if __name__ == "__main__":
     test_rerender_relabel()
     test_new_type_guards()
     test_tiering_and_escalation()
+    test_order_four_blocks()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

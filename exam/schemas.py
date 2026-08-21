@@ -63,24 +63,33 @@ class Analysis(BaseModel):
 # ① 순서 배열 — 정본을 덩어리로 쪼개 라벨만 섞음
 # ---------------------------------------------------------------------------
 class OrderOut(BaseModel):
+    """순서 배열 — 나머지 문장을 (A)(B)(C)(D) 네 덩어리로 쪼개 라벨만 섞는다.
+
+    네 덩어리면 가능한 배열이 6가지에서 24가지로 늘어 찍기가 훨씬 어려워진다.
+    문장이 모자란 짧은 지문에서는 세 덩어리도 허용한다(빌더가 알아서 줄인다).
+    """
+
     given_n: int                   # 앞에서 몇 문장을 '주어진 글'로 (>=1)
-    block_sizes: list[int]         # 나머지를 3덩어리로 (len==3)
-    display: list[int]             # (A)(B)(C) 가 각각 원래 몇 번째 덩어리(1~3)인지
+    block_sizes: list[int]         # 나머지를 3~4덩어리로 (len==3 또는 4)
+    display: list[int]             # (A)(B)(C)(D) 가 각각 원래 몇 번째 덩어리인지
     reason: str
 
-    @field_validator("block_sizes", "display")
+    @field_validator("block_sizes")
     @classmethod
-    def _three(cls, v: list[int]) -> list[int]:
-        if len(v) != 3:
-            raise ValueError("block_sizes·display 는 3개여야 합니다.")
+    def _three_or_four(cls, v: list[int]) -> list[int]:
+        if len(v) not in (3, 4):
+            raise ValueError("block_sizes 는 3개 또는 4개여야 합니다(기본 4).")
+        if any(x < 1 for x in v):
+            raise ValueError("각 덩어리에는 문장이 1개 이상 있어야 합니다.")
         return v
 
-    @field_validator("display")
-    @classmethod
-    def _perm(cls, v: list[int]) -> list[int]:
-        if sorted(v) != [1, 2, 3]:
-            raise ValueError("display 는 1,2,3 의 순열이어야 합니다.")
-        return v
+    @model_validator(mode="after")
+    def _perm(self):
+        k = len(self.block_sizes)
+        if sorted(self.display) != list(range(1, k + 1)):
+            raise ValueError(f"display 는 1~{k} 의 순열이어야 합니다"
+                             f"(block_sizes 가 {k}개이므로).")
+        return self
 
 
 # ---------------------------------------------------------------------------

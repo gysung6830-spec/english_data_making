@@ -40,12 +40,14 @@ def _passage_dna() -> Passage:
     p = Passage(title=DNA.title)
     s = DNA.sentences
 
-    # ① 순서 — S0=주어진 글, 나머지 6문장을 3덩어리로 쪼개 라벨을 섞음
+    # ① 순서 — S0=주어진 글, 나머지 6문장을 4덩어리로 쪼개 라벨을 섞음
     p.set_qa(ORDER, *B.make_order(
-        s, given_n=1, block_sizes=[2, 2, 2], display=[2, 1, 3],
-        reason=("(B)=밀도(remarkable~small space)로 특징을 잇고, (A)의 It is also와 "
-                "such efficiency가 (B)의 내용을 받아 durable·응용으로 확장하며, (C)의 "
-                "The technique가 (A)의 encode를 이어받아 마무리한다. 따라서 (B)-(A)-(C)."),
+        s, given_n=1, block_sizes=[2, 2, 1, 1], display=[3, 1, 4, 2],
+        reason=("(B)=밀도(What makes it remarkable ~ small space)가 도입의 '정보를 저장한다'를 "
+                "받아 특징을 잇고, (D)=It is also astonishingly durable 의 also 가 그 특징에 "
+                "내구성을 더한다. (A)=Inspired by such efficiency 의 such efficiency 가 앞의 "
+                "밀도·내구성을 통째로 받아 연구로 넘어가고, (C)=One day 가 전망으로 맺는다. "
+                "따라서 (B)-(D)-(A)-(C)."),
     ))
 
     # ② 삽입 — 같은 글에서 S4 한 문장만 빼냄
@@ -193,12 +195,13 @@ def _passage_star() -> Passage:
     p = Passage(title=STAR.title)
     s = STAR.sentences
 
-    # ① 순서 — S0,S1=주어진 글, 나머지 5문장을 3덩어리로
+    # ① 순서 — S0=주어진 글, 나머지 6문장을 4덩어리로
     p.set_qa(ORDER, *B.make_order(
-        s, given_n=2, block_sizes=[2, 2, 1], display=[2, 1, 3],
-        reason=("(B)=however로 '두 역할이 정반대 능력을 요구한다'며 통념을 반박하고, (A)=Placed "
-                "in charge로 그 결과(코칭 소홀·팀 정체)를 보이며, (C)=In the end로 '이중의 손해'를 "
-                "맺는다. 따라서 (B)-(A)-(C)."),
+        s, given_n=1, block_sizes=[2, 2, 1, 1], display=[3, 1, 4, 2],
+        reason=("(B)=They assume ~ however 가 도입의 승진 관행을 받아 통념을 세우고 곧바로 "
+                "반박하며, (D)=One rewards ~ while the other 가 그 '정반대 능력'이 무엇인지 "
+                "풀어 준다. (A)=Placed in charge 가 그 어긋남의 결과(코칭 소홀·팀 정체)를 "
+                "보이고, (C)=In the end 가 '이중의 손해'로 맺는다. 따라서 (B)-(D)-(A)-(C)."),
     ))
 
     # ② 삽입 — S2(however 문장)만 빼냄

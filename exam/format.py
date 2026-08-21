@@ -48,10 +48,11 @@ def weave(chunks: list[str], markers_html: list[str]) -> str:
 # ---------------------------------------------------------------------------
 # ① 순서 배열
 # ---------------------------------------------------------------------------
-def order_q(given: str, seg_a: str, seg_b: str, seg_c: str, orders: list[str]) -> str:
-    """given: 주어진 글 / seg_*: (A)(B)(C) 덩어리 / orders: 5개 순서 조합 문자열."""
+def order_q(given: str, segs: list[str], orders: list[str]) -> str:
+    """given: 주어진 글 / segs: (A)(B)(C)… 덩어리들 / orders: 5개 순서 조합 문자열."""
     parts = [f'<div class="passage given">{esc(given)}</div>']
-    for label, seg in (("A", seg_a), ("B", seg_b), ("C", seg_c)):
+    for i, seg in enumerate(segs):
+        label = "ABCDEFG"[i]
         parts.append(f'<div class="seg"><span class="seg-label">({label})</span> {esc(seg)}</div>')
     lis = "".join(
         f'<li><span class="cnum">{circ(i)}</span> {esc(o)}</li>'

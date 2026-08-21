@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import itertools
+import zlib
 import re
 
 from . import format as F
@@ -212,43 +213,105 @@ def _even_split(total: int, parts: int) -> list[int]:
     return [base + (1 if i < rem else 0) for i in range(parts)]
 
 
+# 순서 배열을 몇 덩어리로 쪼갤지. 4덩어리면 경우의 수가 6 → 24 로 늘어 찍기가 어려워진다.
+DEFAULT_ORDER_BLOCKS = 4
+MIN_ORDER_BLOCKS = 3
+
+
+def _order_options(labels: str, correct: list[str], seed: int) -> tuple[list[str], int]:
+    """정답 순서를 포함한 선지 5개를 만든다. (선지, 정답 번호) 반환.
+
+    두 가지를 지킨다.
+      ① 오답은 '두 덩어리만 자리를 맞바꾼' 순열에서 먼저 고른다 — 정답과 한 끗 차이라야
+         학생이 연결 근거를 따져 보게 된다(아무렇게나 뒤섞으면 눈으로 걸러진다).
+      ② 첫 라벨이 한쪽으로 몰리지 않게 한다. 다섯 중 넷이 (D)로 시작하고 정답만 (B)로
+         시작하면, 글을 읽지 않고 '혼자 다른 것'을 골라 맞힌다.
+    덩어리가 4개면 맞바꾼 순열이 6가지라, 지문마다 다른 조합이 나오도록 seed 로 돌려 고른다.
+    """
+    correct_t = tuple(correct)
+    k = len(labels)
+    swaps = []
+    for i in range(k):
+        for j in range(i + 1, k):
+            q = list(correct_t)
+            q[i], q[j] = q[j], q[i]
+            swaps.append(tuple(q))
+    others = [q for q in itertools.permutations(labels)
+              if q != correct_t and q not in swaps]
+    pool = swaps + others
+    pool = [pool[(seed + i) % len(pool)] for i in range(len(pool))]   # 시작 위치만 이동
+
+    first = {correct_t[0]: 1}
+    picked: list[tuple] = []
+    for cap in (2, 3, k + 1):        # 몰림 한도를 조금씩 풀며 4개를 채운다
+        for q in pool:
+            if len(picked) == 4:
+                break
+            if q in picked or q == correct_t:
+                continue
+            if first.get(q[0], 0) >= cap:
+                continue
+            picked.append(q)
+            first[q[0]] = first.get(q[0], 0) + 1
+        if len(picked) == 4:
+            break
+
+    def fmt(q):
+        return "-".join(f"({c})" for c in q)
+
+    options = sorted([fmt(correct_t)] + [fmt(q) for q in picked])
+    return options, options.index(fmt(correct_t)) + 1
+
+
 def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
                display: list[int], reason: str,
                flags: list[str] | None = None) -> tuple[str, str]:
-    """given_n: 앞 몇 문장이 '주어진 글' / block_sizes: 나머지를 3덩어리로 /
-    display: (A)(B)(C) 가 각각 원래 몇 번째 덩어리(1~3)인지.
+    """given_n: 앞 몇 문장이 '주어진 글' / block_sizes: 나머지를 몇 덩어리로 /
+    display: (A)(B)(C)… 가 각각 원래 몇 번째 덩어리인지.
 
+    덩어리 수는 block_sizes 길이로 정해진다(3 또는 4). 문장이 모자라면 3덩어리로 줄인다.
     LLM 이 문장 수를 잘못 세어 값이 어긋나도 실패하지 않도록 스스로 보정한다.
     flags(리스트)를 주면, 실제로 보정이 일어났을 때 '확인 권장' 사유를 담아 준다.
     """
     from . import review as _rv
 
     n = len(sentences)
-    if n < 4:
-        raise ValueError("순서 문제를 만들기에 문장이 너무 적습니다(4문장 이상 필요).")
+    if n < MIN_ORDER_BLOCKS + 1:
+        raise ValueError(
+            f"순서 문제를 만들기에 문장이 너무 적습니다({MIN_ORDER_BLOCKS + 1}문장 이상 필요).")
 
     corrected = False
-    # given_n: 최소 1, 나머지로 3덩어리를 만들 수 있도록 최대 n-3 으로 보정
+    # 덩어리 수: 요청값을 따르되, 주어진 글 1문장 + 덩어리당 1문장은 있어야 한다
+    want = len(block_sizes) if isinstance(block_sizes, list) else DEFAULT_ORDER_BLOCKS
+    if want not in (3, 4):
+        want, corrected = DEFAULT_ORDER_BLOCKS, True
+    k = min(want, n - 1)
+    if k < MIN_ORDER_BLOCKS:
+        k = MIN_ORDER_BLOCKS
+    if k != want:
+        corrected = True          # 문장이 모자라 덩어리 수를 줄였다
+
+    # given_n: 최소 1, 나머지로 k덩어리를 만들 수 있도록 최대 n-k 로 보정
     try:
         given_val = int(given_n)
     except (TypeError, ValueError):
         given_val, corrected = 1, True
-    given_n = max(1, min(given_val, n - 3))
+    given_n = max(1, min(given_val, n - k))
     if given_n != given_val:
         corrected = True
     remaining = n - given_n
 
-    # block_sizes: 3개·양수·합==remaining 이 아니면 고르게 재분배
-    valid = (isinstance(block_sizes, list) and len(block_sizes) == 3
-             and all(isinstance(b, int) and b >= 1 for b in block_sizes)
+    # block_sizes: k개·양수·합==remaining 이 아니면 고르게 재분배
+    valid = (isinstance(block_sizes, list) and len(block_sizes) == k
+             and all(isinstance(x, int) and x >= 1 for x in block_sizes)
              and sum(block_sizes) == remaining)
     if not valid:
-        block_sizes = _even_split(remaining, 3)
+        block_sizes = _even_split(remaining, k)
         corrected = True
 
-    # display: 1,2,3 의 순열이 아니면 기본값으로 보정
-    if sorted(display or []) != [1, 2, 3]:
-        display = [2, 1, 3]
+    # display: 1..k 의 순열이 아니면 기본값으로 보정(앞 두 덩어리를 맞바꾼 배열)
+    if sorted(display or []) != list(range(1, k + 1)):
+        display = [2, 1] + list(range(3, k + 1))
         corrected = True
 
     if corrected and flags is not None:
@@ -258,29 +321,25 @@ def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
     given = " ".join(sentences[:given_n])
 
     blocks: list[str] = []
-    k = 0
+    idx = 0
     for sz in block_sizes:
-        blocks.append(" ".join(rest[k:k + sz]))
-        k += sz
+        blocks.append(" ".join(rest[idx:idx + sz]))
+        idx += sz
 
-    # (A)(B)(C) 각 라벨이 보여줄 덩어리(0-based)
-    label_block = [d - 1 for d in display]              # label L(0=A) -> block idx
-    seg_a, seg_b, seg_c = (blocks[label_block[L]] for L in range(3))
+    labels = "ABCD"[:k]
+    label_block = [d - 1 for d in display]          # 라벨 L(0=A) -> 원래 덩어리 idx
+    segs = [blocks[label_block[L]] for L in range(k)]
 
-    # 정답: 원래 순서(덩어리 0,1,2)를 복원하는 라벨 배열
+    # 정답: 원래 순서(덩어리 0,1,2,…)를 복원하는 라벨 배열
     correct = []
-    for b in range(3):
-        for L in range(3):
-            if label_block[L] == b:
-                correct.append("ABC"[L])
-    correct_str = "-".join(f"({c})" for c in correct)
+    for blk in range(k):
+        for L in range(k):
+            if label_block[L] == blk:
+                correct.append(labels[L])
+    seed = zlib.crc32(" ".join(sentences).encode("utf-8"))
+    options, answer_no = _order_options(labels, correct, seed)
 
-    perms = ["-".join(f"({c})" for c in p) for p in itertools.permutations("ABC")]
-    options = [correct_str] + [p for p in perms if p != correct_str]
-    options = sorted(options[:5])
-    answer_no = options.index(correct_str) + 1
-
-    q = F.order_q(given, seg_a, seg_b, seg_c, options)
+    q = F.order_q(given, segs, options)
     a = F.order_a(answer_no, reason)
     return q, a
 

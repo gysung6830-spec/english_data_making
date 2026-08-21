@@ -163,12 +163,18 @@ def check_summary_pairs(pairs, answer_no: int) -> list[str]:
 
 
 def check_order_shuffle(display: list[int]) -> list[str]:
-    """순서 배열의 (A)(B)(C)가 실제로 섞였는가.
+    """순서 배열의 (A)(B)(C)(D)가 실제로 섞였는가.
 
-    display 가 [1,2,3]이면 (A)(B)(C)가 원문 순서 그대로라 정답이 항상 'A-B-C'가 된다.
+    display 가 [1,2,3,…] 이면 라벨이 원문 순서 그대로라 정답이 늘 'A-B-C-D'가 된다.
+    첫 라벨이 첫 덩어리인 것도 피한다 — (A)가 곧 시작이면 절반은 그냥 보인다.
     """
-    if list(display) == [1, 2, 3]:
-        return ["(A)(B)(C)가 원문 순서 그대로입니다 — 섞이지 않으면 문제가 되지 않습니다."]
+    d = list(display or [])
+    if not d:
+        return ["(A)(B)(C)… 배치(display)가 비어 있습니다."]
+    if d == list(range(1, len(d) + 1)):
+        return ["라벨이 원문 순서 그대로입니다 — 섞이지 않으면 문제가 되지 않습니다."]
+    if d[0] == 1:
+        return ["(A)가 첫 덩어리입니다 — 시작이 드러나 순서를 절반은 그냥 알게 됩니다."]
     return []
 
 
