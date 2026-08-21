@@ -128,20 +128,23 @@ Second passage goes here."></textarea>
     <span class="label">출력할 구성 — 체크한 것만 만듭니다.</span>
     <label class="check"><input type="checkbox" name="sections" value="student" checked>
       <b>학생용</b> <span class="hint2">문제만</span></label>
-    <label class="check"><input type="checkbox" name="sections" value="teacher" checked>
-      <b>교사용</b> <span class="hint2">문제 밑에 해설(정답 볼드)</span></label>
     <label class="check"><input type="checkbox" name="sections" value="quick" checked>
       <b>빠른 정답</b> <span class="hint2">번호·정답 한눈에</span></label>
     <label class="check"><input type="checkbox" name="sections" value="answers" checked>
       <b>해설지</b> <span class="hint2">정답 및 상세 해설</span></label>
+    <label class="check"><input type="checkbox" name="sections" value="teacher">
+      <b>교사용</b> <span class="hint2">문제 바로 밑에 해설(정답 볼드) — 필요할 때만</span></label>
+    <span class="hint">교사용은 <b>해설지와 내용이 겹칩니다</b>(같은 해설을 문제 밑에 붙여 다시
+      싣습니다). 수업 중에 문제와 해설을 함께 보셔야 할 때만 체크하세요.
+      체크하지 않아도 <b>검토 메모</b>는 그대로 나옵니다.</span>
   </div>
 
   <div class="field setbox">
     <span class="label">출력 방식 <b>(기본: 합본)</b> — 위에서 체크한 구성을 어떻게 내려받을지 고르세요.</span>
     <label class="check"><input type="radio" name="out_mode" value="merged" checked>
-      <b>합본</b> <span class="hint2">한 PDF에 순서대로 (학생용 → 교사용 → 빠른정답 → 해설지)</span></label>
+      <b>합본</b> <span class="hint2">한 PDF에 순서대로 — 학생용 → 교사용 → 빠른정답 → 해설지 중 <b>체크한 것만</b></span></label>
     <label class="check"><input type="radio" name="out_mode" value="each">
-      <b>개별</b> <span class="hint2">구성마다 파일 하나씩 (학생용.pdf · 교사용.pdf · 빠른정답.pdf · 해설지.pdf)</span></label>
+      <b>개별</b> <span class="hint2">체크한 구성마다 파일 하나씩 (학생용.pdf · 빠른정답.pdf · 해설지.pdf …)</span></label>
     <label class="check"><input type="radio" name="out_mode" value="both">
       <b>합본 및 개별</b> <span class="hint2">합본 1개 + 개별 파일까지 모두</span></label>
     <span class="hint">💡 <b>API 비용은 셋 다 같습니다.</b> 문항 생성은 한 번만 하고, 합본·개별은
