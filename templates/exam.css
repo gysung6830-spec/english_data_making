@@ -224,13 +224,36 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 }
 
 /* ---------- 해설 ---------- */
-.a-head { margin-bottom: 0.6mm; break-after: avoid; }
+/* 해설은 한글 산문이라 문제보다 행간·문단 여백을 넉넉히 둔다(가독성). */
+.a-head {
+  margin-bottom: 1mm;
+  padding-bottom: 0.7mm;
+  border-bottom: 0.5px solid #dbeae2;   /* 문항 머리와 해설 본문을 갈라 준다 */
+  break-after: avoid;
+}
 .a-type { font-weight: 400; font-size: 8.6px; color: #555; }
-.a-body { font-weight: 400; }
-.answer-key { font-weight: 700; color: #2f7d61; }   /* 볼드 4 — 정답 글자(브랜드 초록) */
-.a-body p { margin: 0.6mm 0; }
-.reason { color: #222; }
-.wrong { color: #333; }
+.a-body { font-weight: 400; line-height: 1.74; }
+/* 볼드 4 — 정답 글자(브랜드 초록). 알약으로 감싸 훑을 때 바로 잡히게 한다. */
+.answer-key {
+  font-weight: 700;
+  color: #2f7d61;
+  background: #eef6f2;
+  border: 0.6px solid #bcd8cc;
+  border-radius: 999px;
+  padding: 0.2mm 1.8mm;
+}
+.a-body p { margin: 1mm 0; }
+.reason { color: #111; }
+.wrong { color: #3a3a3a; }
+/* 선지별 풀이(①②③…)는 번호를 왼쪽으로 내어 목록처럼 읽히게 한다.
+   .reason.num 은 번호로 시작하는 근거(어법처럼 항목별로 적는 유형)에 붙는다. */
+.wrong, .reason.num { padding-left: 1.15em; text-indent: -1.15em; }
+/* 정답 근거 → 오답 풀이로 넘어가는 자리에 옅은 경계 */
+.reason + .wrong {
+  margin-top: 1.6mm;
+  padding-top: 1.4mm;
+  border-top: 0.5px dashed #cfe1d8;
+}
 
 /* ---------- 교사용: 문제 밑 해설 박스 ---------- */
 .teach-exp {

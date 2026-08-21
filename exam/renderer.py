@@ -20,6 +20,18 @@ from .types import TYPE_LABELS, TYPE_ORDER, TYPE_PROMPTS, Passage
 SHORT_TYPES = {"short_answer", "D"}
 _KEY_RE = re.compile(r'<span class="answer-key">(.*?)</span>', re.S)
 
+# 번호(①·ⓑ)로 시작하는 근거 문단 — 오답 풀이처럼 번호를 내어쓰기 한다(CSS .reason.num).
+_NUM_REASON = re.compile(r'<p class="reason">([①-⑧ⓐ-ⓔ])')
+
+
+def hang_numbers(a_html: str) -> str:
+    """해설 HTML 에서 '번호로 시작하는 근거 문단'에 내어쓰기 클래스를 붙인다.
+
+    어법처럼 항목마다 한 줄씩 적는 유형은 번호가 왼쪽으로 나와야 목록으로 읽힌다.
+    산문 근거(주제·요약 등)는 번호로 시작하지 않으므로 그대로 둔다.
+    """
+    return _NUM_REASON.sub(r'<p class="reason num">\1', a_html or "")
+
 
 def _answer_key(a_html: str, is_short: bool) -> str:
     """해설 HTML 에서 정답 키(①, '③, ④, ⑤' 등)만 뽑아 빠른 정답용으로 돌려준다."""
@@ -55,7 +67,7 @@ def _blocks(passages: list[Passage], start: int,
     quick: list[dict] = []       # 빠른정답: [{label, cells:[{no,key}]}] (label 빈값이면 머리 없이 평평)
 
     def _row(no: int, t: str, p: Passage) -> tuple[dict, str]:
-        a_html = p.a[t]
+        a_html = hang_numbers(p.a[t])
         key = _answer_key(a_html, t in SHORT_TYPES)
         return ({
             "no": no, "type": t, "prompt": prompts[t],

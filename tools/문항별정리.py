@@ -31,7 +31,7 @@ from exam.merged import (  # noqa: E402
     MERGED_PROMPTS,
     demo_passages_merged,
 )
-from exam.renderer import DEFAULT_FOOTER, TEMPLATE_DIR  # noqa: E402
+from exam.renderer import DEFAULT_FOOTER, TEMPLATE_DIR, hang_numbers  # noqa: E402
 
 _E = html.escape
 _CIRCLED = "①②③④⑤⑥⑦⑧ⓐⓑⓒⓓⓔ"
@@ -62,6 +62,13 @@ def _answer_of(a_html: str) -> dict:
     return {"answer": tail or key, "answer_text": ""}   # 어순 배열 — 답 문장이 곧 정답
 
 
+# 해설 첫 줄이 정답 표기뿐인 문단이면 머리(.a-head)로 올리고 본문에선 지운다
+# ('④ (4개)'처럼 짧은 꼬리는 정답과 함께 올린다). 어순 배열처럼 정답 문장이
+# 뒤따르는 문단은 그대로 둔다 — 문장이 곧 답이라 본문에 있어야 한다.
+_KEY_P = re.compile(r'^\s*<p>\s*<span class="answer-key">[^<]*</span>([^<]*)</p>')
+_TAIL_MAX = 12
+
+
 def collect(passage) -> list[dict]:
     """Passage → 문항 번호 순 항목 목록(문제·해설 HTML 은 손대지 않고 그대로)."""
     rows = []
@@ -70,10 +77,17 @@ def collect(passage) -> list[dict]:
         if not (q and a):
             continue
         ans = _answer_of(a)
+        a = hang_numbers(a)
+        head_key = ans["answer"]
+        m = _KEY_P.match(a)
+        if m and any(c in ans["answer"] for c in _CIRCLED) \
+                and len(m.group(1).strip()) <= _TAIL_MAX:
+            head_key = f'{ans["answer"]} {m.group(1).strip()}'.strip()
+            a = a[m.end():]
         rows.append({
             "no": no, "key": t,
             "label": MERGED_LABELS[t], "prompt": MERGED_PROMPTS[t],
-            "q_html": q, "a_html": a,
+            "q_html": q, "a_html": a, "head_key": head_key,
             "flags": list(passage.flags.get(t, [])),
             **ans,
             # 빠른 정답 칸: 원 번호가 아니면(어순 배열 등) '서술형'으로 줄여 적는다.
@@ -126,9 +140,22 @@ body {
 .review-intro { font-size: 12.2px; }
 
 .q-item { margin-bottom: 5.4mm; }
-.a-item { margin-bottom: 4.4mm; }
-.q-head, .a-head { margin-bottom: 1.4mm; }
+.a-item { margin-bottom: 5mm; }
+.q-head, .a-head { margin-bottom: 1.8mm; }
 .qnum { margin-right: 1.2mm; }
+
+/* 해설 — 한글 산문이라 문제보다 크게·넓게 잡아야 읽힌다 */
+.a-body { font-size: 13.8px; line-height: 1.85; }
+.a-body p { margin: 1.6mm 0; }
+.answer-key { padding: 1px 8px; }
+.a-head { display: flex; align-items: baseline; gap: 5px; }
+.a-key {                                   /* 정답을 문항 머리 오른쪽에 */
+  margin-left: auto; font-size: 11.6px; color: #2f7d61;
+  background: #eef6f2; border: 0.6px solid #bcd8cc; border-radius: 999px;
+  padding: 1px 9px; white-space: nowrap;
+}
+.a-key b { font-weight: 700; }
+.reason + .wrong { margin-top: 3mm; padding-top: 2.4mm; }
 
 /* '확인 권장' 메모를 해설 문항 안에 붙일 때 */
 .a-item .review-intro { margin: 1.6mm 0 0; }
@@ -179,11 +206,14 @@ def _q_item(row: dict) -> str:
 
 def _a_item(row: dict) -> str:
     """해설편 한 문항 — 해설지 섹션과 같은 마크업(정답 + 해설)."""
+    key = (f'<span class="a-key">정답 <b>{_E(row["head_key"])}</b></span>'
+           if row["quick"] != "서술형" else '<span class="a-key">서술형</span>')
     parts = [
         f'<div class="a-item type-{_E(row["key"])}">',
         '<div class="a-head">',
         f'<span class="qnum">{row["no"]}.</span> ',
         f'<span class="a-type">{_E(row["label"])}</span>',
+        key,
         '</div>',
         f'<div class="a-body">{row["a_html"]}</div>',
     ]
