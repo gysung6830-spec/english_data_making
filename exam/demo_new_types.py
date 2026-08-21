@@ -68,25 +68,26 @@ def _dna() -> Passage:
     p.set_qa(VOCAB_2, *B.make_vocab(
         s,
         marks=[(1, "remarkable", "remarkable"), (1, "enormous", "tiny"),
-               (2, "combined", "combined"), (3, "durable", "durable"),
+               (2, "ordinary", "ordinary"), (4, "efficiency", "efficiency"),
                (5, "preserved", "preserved")],
         answer_no=2,
-        reason=("②가 있는 문장은 '1그램의 DNA가 하드드라이브 수백만 개만큼의 데이터를 담는다'는 "
-                "뜻이므로 tiny(적은)가 아니라 enormous(엄청난)여야 문맥에 맞는다."),
+        reason=("② 그 문장은 DNA가 '아주 작은 공간에 엄청난 양을 밀어 넣는다'는 뜻이므로 "
+                "tiny(적은)가 아니라 enormous(엄청난)여야 한다. 나머지 넷은 원문 그대로라 "
+                "당연히 자연스럽다."),
     ))
 
     # 어휘 — 부정어형(밑줄은 원문 그대로, 정답 문장에 부정어를 넣어 흐름과 모순)
     p.set_qa(VOCAB_3, *B.make_vocab(
         s,
-        marks=[(1, "stores", "stores"), (2, "hold", "hold"),
-               (3, "durable", "durable"), (4, "encode", "encode"),
-               (5, "preserved", "preserved")],
+        marks=[(0, "carries", "carries"), (2, "hold", "hold"),
+               (3, "astonishingly", "astonishingly"), (4, "researchers", "researchers"),
+               (6, "stored", "stored")],
         answer_no=3,
-        overrides={3: ("It is not durable at all, disappearing from bone and ice "
-                       "within a few short years.")},
-        reason=("글은 DNA의 장점으로 '밀도'에 이어 '내구성'을 들고, 그 효율에 영감을 받아 연구가 "
-                "시작됐다고 이어 간다. ③ 문장이 '전혀 오래가지 못한다'로 바뀌면 뒤의 '그런 효율에 "
-                "영감을 받아'와 정면으로 모순된다."),
+        overrides={3: ("It is not astonishingly durable at all; it disappears from "
+                       "bone and ice within a few short years.")},
+        reason=("밑줄 다섯은 모두 원문 그대로라 낱말만 보면 흠이 없다. 그런데 ③ 이 든 문장이 "
+                "'전혀 오래가지 못한다'로 바뀌어, 바로 뒤의 '그런 효율에 영감을 받아 연구가 "
+                "시작됐다'와 정면으로 모순된다. 낱말이 아니라 문장이 흐름에서 어긋난 경우다."),
     ))
     # 어법 — 다시 쓴 지문 위에 낸다(원문 그대로면 외운 학생이 달라진 낱말만 찾는다)
     r1 = [
@@ -158,7 +159,7 @@ def _dna() -> Passage:
             (1, "packs", "pack"),           # ⓑ 어법 오류 — 주어 it 은 단수
             (2, "combined", "combined"),    # ⓒ 과거분사(적절)
             (3, "durable", "fragile"),      # ⓓ 어휘 오류 — 반의어 함정
-            (5, "preserved", "preserved"),  # ⓔ 수동(적절)
+            (5, "allows", "allows"),        # ⓔ 수 일치(적절)
         ],
         answer_no=_no,
         choices=_ch,
@@ -168,7 +169,7 @@ def _dna() -> Passage:
                 "ⓒ hard drives 가 '합쳐진' 것이므로 과거분사 combined 가 맞습니다(적절). / "
                 "ⓓ fragile → durable: 뼈와 얼음 속에서 수만 년을 '견딘다'는 흐름이므로 "
                 "'부서지기 쉬운'은 정반대입니다 (어휘·반의어 함정). / "
-                "ⓔ 정보가 '보존되는' 것이므로 수동 preserved 가 맞습니다(적절)."),
+                "ⓔ 주어 it(the technique)이 단수이므로 allows 가 맞습니다(적절)."),
     ))
     return p
 

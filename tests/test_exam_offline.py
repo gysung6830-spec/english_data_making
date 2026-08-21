@@ -2128,6 +2128,54 @@ def test_grammar_count_fixed_four() -> None:
     print("✓ 어법 개수(밑줄 6개·틀린 것 4개 고정·선지 ①~⑥) 통과")
 
 
+def test_demo_matches_real_rules() -> None:
+    """데모(무료 미리보기)도 실제 생성이 지키는 규칙을 지켜야 한다.
+
+    데모는 손으로 쓴 데이터라 파이프라인 검사를 거치지 않는다. 그래서 실제 생성이라면
+    거절당했을 문항이 데모에는 남을 수 있는데, 그러면 미리보기가 제품을 잘못 보여 준다.
+    (실제로 정본을 함께 쓰는 네 문항의 밑줄이 preserved·combined 등에서 겹쳐 있었다.)
+    """
+    import collections
+    import re as _re
+
+    from exam.generators.title import check_title_form
+    from exam.merged import MERGED_ORDER, demo_passages_merged
+    from exam.shape import check_order_shuffle
+
+    for p in demo_passages_merged():
+        # ① 정본을 함께 쓰는 문항끼리 밑줄이 겹치지 않는다
+        marks: dict[str, list[str]] = {}
+        for t in ("pair_odd", "vocab_2", "vocab", "vocab_3"):
+            if t in p.q:
+                marks[t] = [w.lower() for w in _re.findall(r"<u>(.*?)</u>", p.q[t])]
+        flat = [w for ws in marks.values() for w in ws]
+        dup = [w for w, c in collections.Counter(flat).items() if c > 1]
+        assert not dup, (p.title, dup, marks)
+
+        # ② 제목 선지는 한 갈래로 통일돼 있다
+        if "title" in p.q:
+            ch = [_re.sub(r"<.*?>", "", x).strip()
+                  for x in _re.findall(r"<li>(.*?)</li>", p.q["title"], _re.S)]
+            ch = [_re.sub(r"^[①-⑤]\s*", "", c) for c in ch]
+            assert check_title_form(ch) == [], (p.title, check_title_form(ch))
+
+        # ③ 어법 개수는 밑줄 6개·틀린 것 4개(정답 ④)
+        if "grammar_count" in p.q:
+            assert len(_re.findall(r"<u>.*?</u>", p.q["grammar_count"])) == 6
+            assert _re.search(r'answer-key">(.)<', p.a["grammar_count"]).group(1) == "④"
+
+        # ④ 순서 배열은 네 덩어리이고 (A)가 첫 덩어리가 아니다
+        if "order" in p.q:
+            labels = _re.findall(r'seg-label">\((.)\)', p.q["order"])
+            assert labels == ["A", "B", "C", "D"], (p.title, labels)
+            first = _re.findall(r"<li>.*?</li>", p.q["order"])
+            assert len(first) == 5
+
+        # ⑤ 모든 문항이 갖춰져 있다
+        assert list(p.q) == list(MERGED_ORDER), [t for t in MERGED_ORDER if t not in p.q]
+    print("✓ 데모가 실제 생성 규칙(밑줄 겹침·제목 갈래·어법 개수·순서 4덩어리)을 지킴")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2281,6 +2329,7 @@ if __name__ == "__main__":
     test_order_four_blocks()
     test_overlap_and_paraphrase_guards()
     test_grammar_count_fixed_four()
+    test_demo_matches_real_rules()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

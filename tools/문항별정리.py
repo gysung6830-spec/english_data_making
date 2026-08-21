@@ -54,6 +54,24 @@ def _txt(h: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
+_CIRCLED = "①②③④⑤⑥⑦⑧ⓐⓑⓒⓓⓔ"
+
+
+def _answer_of(a_html: str) -> dict:
+    """해설 HTML 에서 정답을 뽑는다.
+
+    대부분은 원 번호(①·ⓑ)지만, 어순 배열처럼 '정답'이라는 라벨 뒤에 답 문장이 오는
+    유형도 있다. 그때는 라벨이 아니라 문장을 정답으로 보여 줘야 한다.
+    """
+    m = re.search(r'<p>\s*<span class="answer-key">(.*?)</span>(.*?)</p>', a_html, re.S)
+    if not m:
+        return {"answer": "", "answer_text": ""}
+    key, tail = _txt(m.group(1)), _txt(m.group(2))
+    if any(c in key for c in _CIRCLED):
+        return {"answer": key, "answer_text": tail}     # ①, ⓑ-ⓓ, ④ (4개) …
+    return {"answer": tail or key, "answer_text": ""}   # 어순 배열 — 답 문장이 곧 정답
+
+
 def collect(passage) -> list[dict]:
     """Passage → 문항 번호 순 항목 목록."""
     rows = []
@@ -72,7 +90,7 @@ def collect(passage) -> list[dict]:
                      in re.findall(r'seg-label">\((.)\)</span>(.*?)</div>', q, re.S)],
             "given": _txt(given.group(1)) if given else "",
             "body": _txt(body.group(1)) if body else "",
-            "answer": _txt(re.search(r'answer-key">(.*?)</span>', a).group(1)),
+            **_answer_of(a),
             "reasons": [_txt(x) for x
                         in re.findall(r'<p class="(?:reason|wrong)">(.*?)</p>', a, re.S)],
             "flags": list(passage.flags.get(t, [])),
@@ -135,6 +153,8 @@ def _detail_body(row: dict) -> str:
 
 def _row_html(row: dict) -> str:
     parts = [f'<p class="prompt">{_E(row["prompt"])}</p>']
+    if row.get("answer_text"):
+        parts.append(f'<p class="anstext">{_en(row["answer_text"])}</p>')
     if row["given"]:
         parts.append(f'<p class="given"><span class="glabel">주어진 문장</span>'
                      f'{_en(row["given"])}</p>')
@@ -153,7 +173,8 @@ def _row_html(row: dict) -> str:
         f'<div class="gutter"><span class="qno">{row["no"]}</span></div>'
         f'<div class="detail">'
         f'<h3><span class="type">{_E(row["label"])}</span>'
-        f'<span class="ans">{_E(row["answer"])}</span></h3>'
+        f'<span class="ans{" long" if len(row["answer"]) > 12 else ""}">'
+        f'{_E(row["answer"])}</span></h3>'
         f'{"".join(x for x in parts if x)}'
         f"</div></article>"
     )
@@ -212,7 +233,8 @@ th{font-size:12px; letter-spacing:.08em; color:var(--muted); font-weight:500;
 td.n{font-variant-numeric:tabular-nums; color:var(--muted); width:3.2em;
      text-align:right; padding-right:14px}
 td.t{font-weight:700; white-space:nowrap}
-td.a{color:var(--mark); font-weight:700; white-space:nowrap; width:5em}
+td.a{color:var(--mark); font-weight:700; width:6em}
+td.a.long{white-space:normal; width:auto; font-weight:600; font-size:13.5px}
 td.d{color:var(--muted)}
 tbody tr:hover{background:var(--tint)}
 a.q{color:inherit; text-decoration:none}
@@ -230,6 +252,9 @@ a.q:hover{text-decoration:underline}
 .ans{margin-left:auto; color:var(--mark); background:var(--markbg);
      border-radius:4px; padding:1px 9px; font-size:14px; font-weight:700;
      white-space:nowrap}
+.ans.long{white-space:normal; font-size:13px; font-weight:600; max-width:60%;
+          text-align:right; line-height:1.5}
+.anstext{margin:0 0 12px; color:var(--mark); font-size:14.5px}
 .prompt{margin:0 0 12px; color:var(--muted); font-size:14px}
 .given{margin:0 0 12px; padding:10px 14px; background:var(--tint);
        border-radius:5px; font-size:14.5px}
@@ -281,7 +306,8 @@ def render(title: str, rows: list[dict], source: str, note: str = "") -> str:
     trs = "".join(
         f'<tr><td class="n">{r["no"]}</td>'
         f'<td class="t"><a class="q" href="#q{r["no"]}">{_E(r["label"])}</a></td>'
-        f'<td class="a">{_E(r["answer"])}</td>'
+        f'<td class="a{" long" if len(r["answer"]) > 12 else ""}">'
+        f'{_E(r["answer"])}</td>'
         f'<td class="d">{_E(r["prompt"])}</td></tr>' for r in rows)
     items = "".join(_row_html(r) for r in rows)
     flagged = sum(1 for r in rows if r["flags"])

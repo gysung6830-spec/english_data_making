@@ -84,17 +84,17 @@ def _passage_dna() -> Passage:
     p.set_qa(VOCAB, *B.make_vocab(
         s,
         marks=[
-            (1, "remarkable", "notable"),        # 유의어
-            (1, "small", "tiny"),                # 유의어
-            (3, "durable", "fragile"),           # 반의어 → 정답
-            (4, "efficiency", "effectiveness"),  # 유의어
-            (5, "expensive", "costly"),          # 유의어
+            (1, "stores", "keeps"),          # 유의어
+            (1, "small", "compact"),         # 유의어
+            (3, "surviving", "vanishing"),   # 반의어 → 정답
+            (4, "encode", "record"),         # 유의어
+            (5, "expensive", "costly"),      # 유의어
         ],
         answer_no=3,
-        reason=("[반의어형] ③ 문장은 DNA가 뼈·얼음 속에서 수만 년을 '견딘다'는 내용이므로 "
-                "문맥상 durable(안정적인) 계열이라야 한다. 그런데 fragile(부서지기 쉬운)은 "
-                "정반대라 부적절하다. 나머지 notable·tiny·effectiveness·costly는 원문 단어의 "
-                "유의어로 문맥에 맞게 쓰였다."),
+        reason=("[유의어형] 밑줄 다섯이 모두 원문과 다른 낱말이라 하나하나 문맥을 따져야 한다. "
+                "③ 문장은 '놀랍도록 안정적이어서 뼈·얼음 속에서 수만 년을 견딘다'는 내용인데 "
+                "vanishing(사라지는)은 정반대다. 나머지 keeps·compact·record·costly는 원문 "
+                "단어(stores·small·encode·expensive)의 유의어로 문맥에 맞게 쓰였다."),
     ))
 
     # ⑤ 어법(복수정답) — 같은 글에서 밑줄 8개, 그중 3개만 오답형
