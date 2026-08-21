@@ -19,6 +19,8 @@ TYPE_LABEL_KO = {
     "blank_single": "빈칸추론", "order": "순서", "irrelevant_sentence": "무관문장",
     "implied_meaning": "함축의미", "inference_mismatch": "내용일치",
     "dialogue_mismatch": "대화내용", "notice_match": "안내문", "summary_ab": "요약(A,B)",
+    "topic": "주제", "grammar_multi": "어법(복수정답)", "count_match": "내용일치(개수)",
+    "insert": "문장삽입", "pair_odd": "어법·어휘(짝짓기)",
     "prep_find_and_translate": "서술형·전치사/해석",
     "dialogue_arrange_inflect": "서술형·영작", "condition_write_inflect": "서술형·어형변형",
     "summary_fill_from_text": "서술형·요약빈칸", "word_arrange": "서술형·배열",
