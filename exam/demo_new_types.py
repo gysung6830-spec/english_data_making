@@ -80,14 +80,14 @@ def _dna() -> Passage:
     p.set_qa(VOCAB_3, *B.make_vocab(
         s,
         marks=[(0, "carries", "carries"), (2, "hold", "hold"),
-               (3, "astonishingly", "astonishingly"), (4, "researchers", "researchers"),
+               (3, "never lasts", "never lasts"), (4, "researchers", "researchers"),
                (6, "stored", "stored")],
         answer_no=3,
-        overrides={3: ("It is not astonishingly durable at all; it disappears from "
-                       "bone and ice within a few short years.")},
-        reason=("밑줄 다섯은 모두 원문 그대로라 낱말만 보면 흠이 없다. 그런데 ③ 이 든 문장이 "
-                "'전혀 오래가지 못한다'로 바뀌어, 바로 뒤의 '그런 효율에 영감을 받아 연구가 "
-                "시작됐다'와 정면으로 모순된다. 낱말이 아니라 문장이 흐름에서 어긋난 경우다."),
+        overrides={3: ("It never lasts in bone or ice, disappearing within a few "
+                       "short years.")},
+        reason=("나머지 넷은 원문 그대로라 흠이 없다. ③ 은 '전혀 오래가지 못한다'는 뜻이어서 "
+                "바로 뒤의 '그런 효율에 영감을 받아 연구가 시작됐다'와 정면으로 모순된다. "
+                "'오래 견딘다'는 뜻이어야 앞뒤가 이어진다."),
     ))
     # 어법 — 다시 쓴 지문 위에 낸다(원문 그대로면 외운 학생이 달라진 낱말만 찾는다)
     r1 = [
@@ -228,14 +228,14 @@ def _star() -> Passage:
     p.set_qa(VOCAB_3, *B.make_vocab(
         s,
         marks=[(1, "assume", "assume"), (2, "demand", "demand"),
-               (4, "neglects", "neglects"), (5, "stalls", "stalls"),
+               (4, "never neglects", "never neglects"), (5, "stalls", "stalls"),
                (6, "loses", "loses")],
         answer_no=3,
-        overrides={4: ("Placed in charge, the former star no longer chases personal wins "
+        overrides={4: ("Placed in charge, the former star keeps pursuing personal wins "
                        "and never neglects the slow work of coaching the team.")},
         reason=("글은 스타를 관리자로 앉히면 팀이 정체되고 결국 회사가 둘 다 잃는다는 쪽으로 간다. "
-                "③ 문장이 '더는 개인 성과를 좇지 않고 코칭도 소홀히 하지 않는다'로 바뀌면 바로 뒤의 "
-                "'팀이 정체된다'와 모순된다."),
+                "③ 이 '코칭을 결코 소홀히 하지 않는다'는 뜻이면 바로 뒤의 '팀이 정체된다'와 "
+                "모순된다. '소홀히 한다'여야 앞뒤가 이어진다."),
     ))
 
     r1 = [

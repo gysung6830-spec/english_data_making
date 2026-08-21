@@ -475,6 +475,21 @@ _VOCAB_SETS = [
 _VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
 
 
+def _fake_vocab_negation():
+    """부정어형 어휘의 가짜 출력 — 정답 밑줄이 삽입한 부정어를 품는다."""
+    # 낱말은 다른 어휘 문항(_VOCAB_SETS)·짝짓기와 겹치지 않는 것으로 고른다.
+    return VocabOut(
+        marks=[WordMark(sent_no=2, word="However", shown="However"),
+               WordMark(sent_no=4, word="fourth", shown="fourth"),
+               WordMark(sent_no=5, word="fifth", shown="fifth"),
+               WordMark(sent_no=6, word="suggestion", shown="suggestion"),
+               WordMark(sent_no=6, word="never closes", shown="never closes")],
+        answer_no=5,
+        override_no=6,
+        override_text="The sixth sentence never closes with a practical suggestion.",
+        reason="이유.")
+
+
 class _FakeClient:
     def __init__(self, *a, **kw):
         self.efforts: list[tuple[str, str | None]] = []   # (스키마, 추론 강도)
@@ -483,7 +498,11 @@ class _FakeClient:
                    max_retries=1, extra_validate=None, image_path=None,
                    cache_prefix=None, effort=None):
         self.efforts.append((model_cls.__name__, effort))
-        obj = _FAKE[model_cls.__name__]()
+        # 부정어형 어휘는 '정답 밑줄이 부정어를 품어야' 통과한다(shape.check_negation_underline).
+        if model_cls.__name__ == "VocabOut" and "부정어 삽입" in prompt:
+            obj = _fake_vocab_negation()
+        else:
+            obj = _FAKE[model_cls.__name__]()
         if extra_validate:
             extra_validate(obj)
         return obj
@@ -573,7 +592,12 @@ _FAKE = {
                Pair(a="wrongword", b="example", a_ok=False, b_ok=True),
                Pair(a="wrongword", b="badword", a_ok=False, b_ok=False),
                Pair(a="badword", b="wrongword", a_ok=False, b_ok=False)],
-        answer_no=1, reason="이유."),
+        answer_no=1, reason="이유.",
+        # 오답 설명은 번호별로 받는다 — 산문에 몰아 쓰면 선지 재배열 때 번호가 밀린다
+        wrong_reasons=[WrongReason(no=2, text="(B)가 어긋남"),
+                       WrongReason(no=3, text="(A)가 어긋남"),
+                       WrongReason(no=4, text="둘 다 어긋남"),
+                       WrongReason(no=5, text="둘 다 어긋남")]),
     "PairOddOut": lambda: PairOddOut(
         # 짝짓기는 '정본 지문' 위에 낸다(어법 유형과 달리 다시 쓰지 않는다)
         # 짝짓기는 밑줄 묶음의 '첫' 문항이라, 어휘 3종과 겹치지 않는 낱말을 쓴다
@@ -2179,6 +2203,67 @@ def test_demo_matches_real_rules() -> None:
     print("✓ 데모가 실제 생성 규칙(밑줄 겹침·제목 갈래·어법 개수·순서 4덩어리)을 지킴")
 
 
+def test_output_defect_regressions() -> None:
+    """실제 출력물(올림포스 Unit 11, 32문항)에서 나온 결함을 하나씩 못 박는다."""
+    from exam import answer_spread, shape
+    from exam.analyzer import split_sentences
+
+    # 1) 이름 가운데 이니셜에서 문장이 갈라졌다 -> 'Paul R. (1) Ehrlich'
+    body = ("The reason pessimists often sound smart is that they can avoid being "
+            "'wrong' by moving the goalposts. The American biologist Paul R. Ehrlich "
+            "\u2500 author of the 1968 book The Population Bomb \u2500 has been doing this "
+            "for decades. A pessimistic stance is a safe one.")
+    sents = split_sentences(body)
+    assert len(sents) == 3, sents
+    assert "Paul R. Ehrlich" in sents[1], sents
+
+    # 2) 인용문 한가운데서 갈라져 따옴표 짝이 깨졌다
+    quoted = ("In 1970 he said that 'sometime in the next 15 years, the end will come. "
+              "And by \"the end\" I mean an utter breakdown of the capacity of the "
+              "planet to support humanity.' Wrong again.")
+    qs = split_sentences(quoted)
+    assert len(qs) == 2, qs
+    assert qs[0].count("'") == 2, qs[0]
+
+    # 3) 부정어형 어휘: 정답 근거(부정어)가 밑줄 '밖'이면 정답이 없는 문항이 된다
+    outside = shape.check_negation_underline(
+        [(4, "perceived", "perceived")], 1,
+        "they would never delete the content despite suffering perceived judgement")
+    assert outside and "부정어가 없습니다" in " ".join(outside)
+    inside = shape.check_negation_underline(
+        [(4, "never delete", "never delete")], 1,
+        "they would never delete the content despite suffering perceived judgement")
+    assert inside == [], inside
+
+    # 4) 선지 재배열 뒤 해설의 오답 번호가 통째로 밀렸다(정답을 오답이라 설명)
+    mapping = answer_spread.perm_map(5, 1, 4)
+    moved = answer_spread.relabel_choice_refs(
+        "정답은 1번이다. 2번은 (B)가 어긋나고, 5번은 둘 다 어긋난다.", mapping)
+    assert "정답은 4번이다" in moved, moved
+    assert "1번은 (B)가 어긋나고" in moved, moved
+    assert "4번은 둘 다" not in moved, moved
+    ch, ans, _ = answer_spread.place_answer(["a", "b", "c", "d", "e"], 1, 4)
+    assert ans == 4 and ch[mapping[2] - 1] == "b", (ch, mapping)
+
+    # 5) 해설에 내부 용어·출제 메모·문장 번호 지칭이 새어 나왔다
+    assert shape.check_explanation("override 문장은 '결코 삭제하지 않는다'고 하여")
+    assert shape.check_explanation("정답은 5번(sent_no=6)입니다.")
+    assert shape.check_explanation("A가 첫 덩어리로 오지 않도록 배열을 조정하였다.")
+    assert shape.check_explanation("지문 (3)에서 10분 이내에 삭제한다고 명시한다.")
+    assert shape.check_explanation("정답 ②는 핵심어를 유의어로 바꿔 표현했다.") == []
+
+    class _Out:
+        def __init__(self):
+            self.reason = "cues 에 별도 표시가 없습니다."
+            self.choices = ["consumers face many choices", "a prompt reply"]
+    assert shape.internal_terms_in(_Out()) == ["cues"]
+
+    # 6) 요약문 해설도 오답을 번호별로 받는다(산문에 몰아 쓰면 번호가 밀린다)
+    from exam.gen2 import EOut
+    assert "wrong_reasons" in EOut.model_fields
+    print("✓ 실제 출력물 결함 재발 방지(이니셜·인용문·부정어 밑줄·선지 번호·해설 위생) 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2333,6 +2418,7 @@ if __name__ == "__main__":
     test_overlap_and_paraphrase_guards()
     test_grammar_count_fixed_four()
     test_demo_matches_real_rules()
+    test_output_defect_regressions()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

@@ -112,7 +112,7 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
 
 
 # E · 요약문 빈칸(객관식) ---------------------------------------------------
-def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason):
+def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason, wrong=None):
     """choice_pairs: [(a_word, b_word)] 5개. 요약문 위에 지문도 함께 제시한다."""
     before = B1.strip_ab_label(before)
     mid = B1.strip_ab_label(mid)
@@ -124,7 +124,7 @@ def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason):
                + " " + F2.blank_ab("B") + F.esc(pb) + " " + F.esc(after))
     summary = re.sub(r"\s+([,.;:!?])", r"\1", re.sub(r"\s{2,}", " ", summary)).strip()
     choices = [F2.E_pair(a, b) for a, b in choice_pairs]
-    return F2.E_q(" ".join(sentences), summary, choices), F2.E_a(answer_no, reason)
+    return F2.E_q(" ".join(sentences), summary, choices), F2.E_a(answer_no, reason, wrong)
 
 
 # F · 빈칸추론 (지문 전체 + 핵심 어구 빈칸) ---------------------------------

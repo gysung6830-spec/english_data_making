@@ -272,3 +272,164 @@ def check_blank_answer_paraphrase(answer: str, blank_phrase: str,
         bad.append("정답의 낱말이 모두 지문에 있는 것뿐입니다 — 유의어로 바꾼 낱말이 "
                    "적어도 하나는 있어야 합니다.")
     return bad
+
+
+# ---------------------------------------------------------------------------
+# 부정어형 어휘 — 정답 근거가 '밑줄 안에' 있는지
+# ---------------------------------------------------------------------------
+# 부정어. 이 중 하나가 정답 밑줄 안에 들어 있어야 '밑줄 친 것 중 부적절한 것'이 성립한다.
+NEGATORS = {
+    "not", "no", "never", "neither", "nor", "none", "nothing", "nobody",
+    "hardly", "scarcely", "barely", "rarely", "seldom", "cannot", "without",
+    "n't", "fail", "fails", "failed", "failing",
+}
+
+
+def _has_negator(text: str) -> bool:
+    low = (text or "").lower()
+    if "n't" in low:
+        return True
+    return bool(NEGATORS & set(re.findall(r"[a-z']+", low)))
+
+
+def check_negation_underline(marks, answer_no: int, override_text: str) -> list[str]:
+    """부정어형 어휘: 삽입한 부정어가 '정답 밑줄 안'에 있는지 확인한다.
+
+    이 방식은 정답 문장에 not·never 를 넣어 흐름과 모순되게 만든다. 그런데 밑줄을
+    원문 낱말에만 그으면, 밑줄 다섯 개는 모두 문맥상 적절하고 부적절한 것은 밑줄
+    '바깥'의 부정어가 된다 → '밑줄 친 부분 중 적절하지 않은 것'에 정답이 없다.
+    (실제 출력물에서 두 지문 모두 이 방식으로 무너졌다.)
+
+    그래서 정답 밑줄은 삽입한 부정어를 품은 어구여야 한다(예: 'delete' → 'never delete').
+    marks: [(sent_no, word, shown)] 또는 word/shown 속성을 가진 객체들.
+    """
+    bad: list[str] = []
+    if not _has_negator(override_text):
+        bad.append("부정어형인데 교체 문장에 부정어(not·no·never·hardly …)가 없습니다.")
+    items = []
+    for m in marks:
+        if isinstance(m, (tuple, list)):
+            items.append((str(m[1]), str(m[2] if len(m) > 2 else m[1])))
+        else:
+            items.append((str(getattr(m, "word", "")), str(getattr(m, "shown", ""))))
+    if not (1 <= answer_no <= len(items)):
+        return bad + [f"정답 밑줄 번호가 범위를 벗어났습니다: {answer_no}"]
+    word, shown = items[answer_no - 1]
+    if not (_has_negator(word) or _has_negator(shown)):
+        bad.append(f"정답 밑줄('{shown or word}')에 부정어가 없습니다 — 삽입한 부정어를 "
+                   "포함하는 어구를 정답 밑줄로 잡으세요(예: word='delete' → "
+                   "word/shown='never delete'). 그러지 않으면 밑줄 다섯 개가 모두 "
+                   "적절해져 정답이 없는 문항이 됩니다.")
+    if word.strip() and override_text and word.strip().lower() not in override_text.lower():
+        bad.append(f"정답 밑줄 어구('{word.strip()}')가 교체 문장에 그대로 있지 않습니다.")
+    return bad
+
+
+# ---------------------------------------------------------------------------
+# 해설 문구 위생 — 내부 용어·출제 메모가 인쇄물로 새는 것을 막는다
+# ---------------------------------------------------------------------------
+# 스키마 필드명·코드 용어. 해설에 나오면 학생이 읽을 수 없는 말이 인쇄된다.
+INTERNAL_TERMS = (
+    "override", "sent_no", "answer_no", "start_no", "remove_no", "wrong_reasons",
+    "blank_phrase", "choices", "cues", "tokens", "a_ok", "b_ok", "prompt",
+    "json", "schema", "placeholder", "토큰", "플레이스홀더", "스키마", "프롬프트",
+)
+# 출제 과정을 학생에게 설명하는 말 — 해설이 아니라 개발 메모다.
+_AUTHOR_NOTES = (
+    "배열을 조정", "조정하였다", "조정했다", "무작위로 섞", "섞어 제시",
+    "문제에서는", "좋은 문제", "좋은 삽입", "좋은 빈칸", "출제 의도", "정답으로 적절",
+    "이 문항은 ~로 설계", "설계하였다", "설계했다",
+)
+# 학생용 지문에는 문장 번호가 없다. '(3)에서'·'(9)문장' 식 지칭은 대조할 수 없다.
+_SENT_REF = re.compile(r"[(（]\d+[)）]\s*(문장|에서|은|는|이|가|의|과|와|에)")
+
+
+_HANGUL = re.compile(r"[가-힣]")
+
+
+def internal_terms_in(obj) -> list[str]:
+    """구조화 출력의 '한국어 설명 필드'에서만 내부 용어를 찾는다.
+
+    한글이 없는 문자열은 영어 지문·선지·낱말 목록이므로 건너뛴다. 그러지 않으면
+    'consumers face many choices' 같은 정상 영어 선지가 걸려 생성이 헛돌게 된다.
+    """
+    found: set[str] = set()
+
+    def _walk(v) -> None:
+        if isinstance(v, str):
+            if not _HANGUL.search(v):
+                return
+            low = v.lower()
+            for t in INTERNAL_TERMS:
+                if t.lower() in low:
+                    found.add(t)
+        elif isinstance(v, dict):
+            for x in v.values():
+                _walk(x)
+        elif isinstance(v, (list, tuple, set)):
+            for x in v:
+                _walk(x)
+        elif hasattr(v, "__dict__"):
+            for x in vars(v).values():
+                _walk(x)
+
+    _walk(obj)
+    return sorted(found)
+
+
+def check_explanation(text: str) -> list[str]:
+    """해설 한 덩어리를 검사한다(내부 용어·출제 메모·문장 번호 지칭·문체 혼재)."""
+    bad: list[str] = []
+    low = (text or "").lower()
+    hit = [t for t in INTERNAL_TERMS if t.lower() in low]
+    if hit:
+        bad.append("해설에 내부 용어가 그대로 있습니다: " + ", ".join(hit))
+    notes = [n for n in _AUTHOR_NOTES if n in (text or "")]
+    if notes:
+        bad.append("해설에 출제 과정 메모가 있습니다: " + ", ".join(notes))
+    if _SENT_REF.search(text or ""):
+        bad.append("해설이 '(3)에서'처럼 문장 번호로 지칭합니다 — 학생용 지문에는 "
+                   "번호가 없어 대조할 수 없습니다.")
+    if re.search(r"(습니다|입니다)\.", text or "") and re.search(r"(이다|한다|된다|아니다)\.", text or ""):
+        bad.append("해설에 '-습니다'체와 '-다'체가 섞여 있습니다.")
+    return bad
+
+
+def check_blank_answer_restated(answer: str, blank_sentence: str,
+                                sentences: list[str], blank_phrase: str,
+                                max_overlap: float = 0.6) -> list[str]:
+    """빈칸의 답이 지문 '다른 자리'에 그대로 남아 있지 않은지 본다.
+
+    빈칸으로 지운 어구와 같은 말이 지문 뒤에 또 나오면, 학생은 글을 이해하지 않고
+    그 자리를 베껴 고른다(실제 출력물: 'they'll delete the content' 를 빈칸으로 냈는데
+    같은 지문 뒤에 'they'd rather delete the content' 가 그대로 남아 있었다).
+    """
+    key = _content_words(blank_phrase)
+    if not key:
+        return []
+    rest = [s for s in sentences if s.strip() and s.strip() != (blank_sentence or "").strip()]
+    for s in rest:
+        here = _content_words(s)
+        if here and len(key & here) / len(key) >= max_overlap:
+            return [f"빈칸 어구('{blank_phrase.strip()}')와 거의 같은 말이 지문 다른 문장에 "
+                    f"그대로 남아 있습니다: '{s.strip()}' — 학생이 그 자리를 베껴 답을 "
+                    "고를 수 있으니 다른 어구를 빈칸으로 잡으세요."]
+    return []
+
+
+def check_key_overlap(a_answer: str, b_answer: str, label_a: str, label_b: str,
+                      max_overlap: float = 0.5) -> list[str]:
+    """서로 다른 두 문항의 정답 핵심어가 겹치는지 본다.
+
+    빈칸추론(F)과 요약문(E)은 둘 다 '글의 핵심을 한마디로'를 묻는다. 정답 낱말까지
+    같으면 한 문항을 풀면 다른 문항이 저절로 풀린다(실제 출력물: 11번 정답
+    'remove their posts' 와 15번 (A) 정답 'remove').
+    """
+    a, b = _content_words(a_answer), _content_words(b_answer)
+    if not a or not b:
+        return []
+    shared = a & b
+    if len(shared) / min(len(a), len(b)) >= max_overlap:
+        return [f"{label_a}과 {label_b}의 정답 핵심어가 겹칩니다({', '.join(sorted(shared))}) — "
+                "한 문항을 풀면 다른 문항이 저절로 풀립니다."]
+    return []

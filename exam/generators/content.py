@@ -82,10 +82,14 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     )
     wrong = {w.no: w.text for w in out.wrong_reasons}
     choices, answer_no = out.choices, out.answer_no
-    old_no = answer_no
+    reason = out.reason
     if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        mapping = answer_spread.perm_map(len(choices), answer_no, answer_pos)
         choices, answer_no, wrong = answer_spread.place_answer(
             choices, answer_no, answer_pos, wrong)
-    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
+        # 해설이 지칭한 선지 번호를 '전부' 새 번호로 옮긴다(정답만 고치면 나머지가 밀린다).
+        reason = answer_spread.relabel_choice_refs(reason, mapping)
+        wrong = {n: answer_spread.relabel_choice_refs(t, mapping)
+                 for n, t in (wrong or {}).items()}
     q, a = B.make_content(analysis.sentences, choices, answer_no, reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)

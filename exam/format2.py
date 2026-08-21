@@ -77,8 +77,8 @@ def E_pair(a_word: str, b_word: str) -> str:
     return f'(A) <b class="cue">{F.esc(a_word)}</b> &nbsp;····&nbsp; (B) <b class="cue">{F.esc(b_word)}</b>'
 
 
-def E_a(answer_no: int, reason: str) -> str:
-    return _answer(answer_no, reason)
+def E_a(answer_no: int, reason: str, wrong: dict[int, str] | None = None) -> str:
+    return _answer(answer_no, reason, wrong)
 
 
 # F · 빈칸추론 --------------------------------------------------------------

@@ -464,12 +464,18 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     """
     if len(marks) != 5:
         raise ValueError("어휘 밑줄은 5개여야 합니다.")
+    # 밑줄을 찾을 대상은 '교체가 끝난 문장'이다. 원본 문장으로 순서를 매기면
+    # 부정어형처럼 문장을 갈아 끼우는 방식에서 밑줄 위치·번호가 실제 지문과 어긋난다.
+    eff = list(sentences)
+    for i, txt in (overrides or {}).items():
+        if 0 <= i < len(eff):
+            eff[i] = txt
     # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호도 그에 맞춰 재매핑
-    marks, remap = order_marks(sentences, marks)
+    marks, remap = order_marks(eff, marks)
     answer_no = remap.get(answer_no, answer_no)
-    marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
-    flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
-    marked = _passage_html(sentences, _underline_marks(marks), overrides)
+    marks = expand_marks(eff, marks)          # 'to confirm' 류 낱말 중복 방지
+    flag_ambiguous_marks(eff, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
+    marked = _passage_html(eff, _underline_marks(marks))
     return F.vocab_q(marked), F.vocab_a(answer_no, reason)
 
 

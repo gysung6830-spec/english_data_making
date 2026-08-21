@@ -10,6 +10,7 @@
 from __future__ import annotations
 
 from .. import build as B
+from .. import shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, VocabOut
 from .base import context
@@ -50,12 +51,25 @@ _PROMPT_ORIGINAL = """아래 '정본 지문'으로 '어휘(문맥상 부적절)'
 _PROMPT_NEGATION = """아래 '정본 지문'으로 '어휘(문맥상 부적절)' 문제를 만드세요. [방식: 부정어 삽입]
 지문을 새로 쓰지 말고, 밑줄과 '정답 문장의 부정어 삽입'만 정하세요.
 
-- marks: 밑줄 5개. sent_no·word·shown. 형용사·부사·동사 위주. 이 방식에서는
-  shown 을 word 와 '똑같이'(원문 그대로) 둡니다.
-- answer_no: 정답 밑줄 번호. override_no: 그 밑줄이 있는 문장 번호(1-based).
-  override_text: 그 문장에 부정어(no/not/never/neither 등)를 자연스럽게 넣어 글 전체 흐름과
-  '모순'되게 만든 문장. 단, 그 안에 정답 밑줄 단어(word)는 반드시 그대로 남겨 두세요.
-- reason: 삽입된 부정어로 인해 그 문장이 글의 흐름과 어떻게 모순되는지 한국어로 설명.
+- override_no: 부정어를 넣을 문장 번호(1-based).
+  override_text: 그 문장에 부정어(not/no/never/neither/hardly 등)를 자연스럽게 넣어 글 전체
+  흐름과 '모순'되게 만든 문장.
+- marks: 밑줄 5개. sent_no·word·shown. 형용사·부사·동사 위주. shown 은 word 와 '똑같이'.
+- answer_no: 정답 밑줄 번호. 그 밑줄은 override_no 문장에 있어야 합니다.
+
+[가장 중요 — 정답 밑줄은 '부정어를 품은 어구'여야 합니다]
+  밑줄을 원문 낱말에만 그으면 다섯 개가 모두 문맥상 적절해지고, 부적절한 것은 밑줄
+  '바깥'의 부정어가 됩니다. 그러면 '밑줄 친 부분 중 적절하지 않은 것'에 정답이 없습니다.
+  · 정답 밑줄의 word 와 shown 을 둘 다 '부정어 + 원문 낱말'로 잡으세요.
+      나쁨: 문장 'they would never delete the content' + 정답 밑줄 word='perceived'
+      좋음: 문장 'they would never delete the content' + 정답 밑줄 word='never delete',
+            shown='never delete'
+  · 그 어구는 override_text 안에 '그대로' 있어야 합니다(철자·띄어쓰기 포함).
+  · 나머지 밑줄 4개는 다른 문장에서 원문 낱말 그대로 고르세요.
+
+- reason: 그 부정 표현이 글의 흐름과 어떻게 모순되는지 한국어로 설명. 'override'·'교체
+  문장' 같은 작업 용어는 쓰지 말고, 학생이 읽을 말('이 자리에 never 가 들어가면 …')로
+  쓰세요.
 
 {ctx}
 """
@@ -86,6 +100,11 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         if dup:
             raise ValueError(
                 f"다른 어휘 문제와 밑줄이 겹칩니다: {', '.join(dup)}. 겹치지 않는 낱말로 다시 고르세요.")
+        if method == NEGATION:
+            # 정답 근거(부정어)가 밑줄 '안'에 있어야 문항이 성립한다.
+            bad = shape.check_negation_underline(o.marks, o.answer_no, o.override_text)
+            if bad:
+                raise ValueError("부정어형 설계 결함 — " + " ".join(bad))
 
     out: VocabOut = client.structured(
         system=SYSTEM,
@@ -94,7 +113,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=VocabOut,
         max_tokens=2500,
         max_retries=max_retries,
-        extra_validate=_extra if taken else None,
+        extra_validate=_extra,
     )
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     overrides = None

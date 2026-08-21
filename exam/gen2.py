@@ -58,6 +58,9 @@ class EOut(BaseModel):
     pairs: list[Pair]
     answer_no: int
     reason: str
+    # 오답 설명은 산문(reason)에 몰아 쓰지 말고 번호별로 나눠 받는다.
+    # 산문에 쓰면 정답 위치 분산으로 선지를 옮길 때 번호가 통째로 밀린다.
+    wrong_reasons: list[WrongReason]
 
     @field_validator("pairs")
     @classmethod
@@ -73,6 +76,7 @@ class EOut(BaseModel):
         if both != [self.answer_no]:
             raise ValueError(f"(A)(B) 둘 다 맞는 선지는 정답 1개뿐이어야 합니다: "
                              f"둘다맞음 {both}, answer_no {self.answer_no}")
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
         return self
 
 
@@ -123,11 +127,15 @@ def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=
     _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
     phrase = exact or out.phrase
     choices, answer_no = out.choices, out.answer_no
-    old_no = answer_no
+    reason = out.reason
     if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        mapping = answer_spread.perm_map(len(choices), answer_no, answer_pos)
         choices, answer_no, wrong = answer_spread.place_answer(
             choices, answer_no, answer_pos, wrong)
-    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
+        # 해설이 지칭한 선지 번호를 '전부' 새 번호로 옮긴다(정답만 고치면 나머지가 밀린다).
+        reason = answer_spread.relabel_choice_refs(reason, mapping)
+        wrong = {n: answer_spread.relabel_choice_refs(t, mapping)
+                 for n, t in (wrong or {}).items()}
     q, a = build2.make_B(analysis.sentences, phrase, choices, answer_no,
                          reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)
@@ -164,7 +172,9 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
          "    나쁨: 'DNA storage is ___(A)___ to replace hard drives.'   + (A)=unlikely\n"
          "    좋음: 'DNA storage is not ___(A)___ to replace hard drives.' + (A)=likely\n"
          "  이러면 학생은 문장의 부정을 읽고 '무엇이 부정되는지'를 지문에서 확인해야 합니다.\n"
-         "answer_no·reason 은 한국어.\n\n{ctx}")
+         "- reason 에는 '정답이 왜 맞는지'만 쓰고, 오답 설명은 wrong_reasons 에 번호별로 "
+         "나눠 쓰세요. reason 안에서 오답을 'N번은 …' 식으로 열거하지 마세요.\n"
+         "answer_no·reason·wrong_reasons 는 한국어.\n\n{ctx}")
     def _chk(o: EOut) -> None:
         bad = shape.check_summary_pairs(o.pairs, o.answer_no)
         if bad:
@@ -175,13 +185,20 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
                                   extra_validate=_chk, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
     answer_no = out.answer_no
-    old_no = answer_no
+    reason = out.reason
+    wrong = {w.no: w.text for w in out.wrong_reasons}
     if answer_pos:   # 정답 위치 분산(단어쌍 선지 재배열 — 정오 불변)
-        pairs, answer_no, _ = answer_spread.place_answer(pairs, answer_no, answer_pos)
-    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
+        mapping = answer_spread.perm_map(len(pairs), answer_no, answer_pos)
+        pairs, answer_no, wrong = answer_spread.place_answer(
+            pairs, answer_no, answer_pos, wrong)
+        # 해설이 산문으로 지칭한 선지 번호를 '전부' 새 번호로 옮긴다.
+        # (정답 번호만 고치면 오답 번호가 밀려 정답을 오답이라 설명하게 된다.)
+        reason = answer_spread.relabel_choice_refs(reason, mapping)
+        wrong = {n: answer_spread.relabel_choice_refs(t, mapping)
+                 for n, t in (wrong or {}).items()}
     q, a = build2.make_E(analysis.sentences, out.before, out.mid, out.after, pairs,
-                         answer_no, reason)
-    return q, a, []
+                         answer_no, reason, wrong)
+    return q, a, review.weak_distractors(out.wrong_reasons)
 
 
 def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
@@ -203,6 +220,12 @@ def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
         if 1 <= o.answer_no <= len(o.choices):
             bad += shape.check_blank_answer_paraphrase(
                 o.choices[o.answer_no - 1], o.blank_phrase, analysis.sentences)
+        # 빈칸으로 지운 말이 지문 다른 자리에 그대로 남아 있으면 베껴 풀 수 있다.
+        host = next((s for s in analysis.sentences
+                     if o.blank_phrase.lower() in s.lower()), "")
+        bad += shape.check_blank_answer_restated(
+            o.choices[o.answer_no - 1] if 1 <= o.answer_no <= len(o.choices) else "",
+            host, analysis.sentences, o.blank_phrase)
         if bad:
             raise ValueError("빈칸추론 문항 설계 결함 — " + " ".join(bad))
 
@@ -215,11 +238,15 @@ def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
         raise ValueError(f"빈칸 어구를 지문에서 찾지 못했습니다: '{out.blank_phrase.strip()}'")
     wrong = {w.no: w.text for w in out.wrong_reasons}
     choices, answer_no = out.choices, out.answer_no
-    old_no = answer_no
+    reason = out.reason
     if answer_pos:   # 정답 위치 분산(선지 재배열 — 정오 불변)
+        mapping = answer_spread.perm_map(len(choices), answer_no, answer_pos)
         choices, answer_no, wrong = answer_spread.place_answer(
             choices, answer_no, answer_pos, wrong)
-    reason = answer_spread.relabel_answer_ref(out.reason, old_no, answer_no)
+        # 해설이 지칭한 선지 번호를 '전부' 새 번호로 옮긴다(정답만 고치면 나머지가 밀린다).
+        reason = answer_spread.relabel_choice_refs(reason, mapping)
+        wrong = {n: answer_spread.relabel_choice_refs(t, mapping)
+                 for n, t in (wrong or {}).items()}
     q, a = build2.make_F(analysis.sentences, idx, phrase, choices,
                          answer_no, reason, wrong)
     return q, a, review.weak_distractors(out.wrong_reasons)

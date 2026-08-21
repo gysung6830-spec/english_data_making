@@ -31,22 +31,66 @@ _PROMPT = """다음 영어 지문을 1회 분석하여 JSON 으로 반환하세�
 {body}
 """
 
-# 문장 경계: 마침표/물음표/느낌표 뒤 공백 + (대문자/따옴표/괄호) 시작
-_SENT_BOUNDARY = re.compile(r'(?<=[.!?])\s+(?=[A-Z"\'(\[])')
+# 문장 경계: 마침표/물음표/느낌표(뒤에 닫는 따옴표가 와도 됨) + 공백 + 대문자/따옴표/괄호.
+# 닫는 따옴표를 허용하지 않으면 "… humanity.' Wrong again." 이 한 문장으로 붙어,
+# 순서·삽입의 덩어리가 필요 이상으로 커진다.
+_SENT_BOUNDARY = re.compile(
+    r'''(?:(?<=[.!?])|(?<=[.!?]['"”’]))\s+(?=[A-Z"'(\[])''')
 
 # 마침표가 문장 끝이 아닌 흔한 약어(뒤에 대문자가 와도 문장을 나누지 않도록 보호)
 _ABBR = ["Mr", "Mrs", "Ms", "Dr", "Prof", "Sr", "Jr", "St", "Mt", "vs", "No",
          "Fig", "Inc", "Ltd", "Co", "Corp", "Gen", "Sen", "Rev", "Gov"]
+# 이름 가운데 이니셜(Paul R. Ehrlich) — 대문자 한 글자 + 마침표 뒤에 또 대문자가 오면
+# 문장 끝처럼 보이지만 사람 이름이다. 보호하지 않으면 이름 한가운데서 문장이 갈라져
+# 밑줄 번호가 'Paul R. ① Ehrlich' 처럼 이름 사이에 박힌다(실제 결과물 버그).
+_INITIAL = re.compile(r'(?<![A-Za-z])([A-Z])\.(?=\s+[A-Z])')
 _DOT = "\x00"   # 임시 치환용 (본문에 없을 제어문자)
+
+# 따옴표 짝 세기 — 조각이 인용문 한가운데서 끊겼는지 본다.
+#   여는 작은따옴표: 낱말 시작 앞      ( he said 'sometime … )
+#   닫는 작은따옴표: 낱말·문장부호 뒤  ( … humanity.' )
+#   낱말 사이의 ' 는 아포스트로피(don't·planet's)이므로 어느 쪽에도 걸리지 않는다.
+_OPEN_Q = re.compile(r"(?<![A-Za-z0-9])['‘](?=[A-Za-z0-9])")
+_CLOSE_Q = re.compile(r"(?<=[\w.,;:!?])['’](?![A-Za-z0-9])")
+
+
+def _quote_open(s: str) -> bool:
+    """이 조각이 '따옴표를 연 채로' 끝나는가."""
+    if (s.count('"') + s.count("“") + s.count("”")) % 2:
+        return True
+    return len(_OPEN_Q.findall(s)) > len(_CLOSE_Q.findall(s))
+
+
+def _join_quoted(parts: list[str]) -> list[str]:
+    """인용문 한가운데서 갈라진 조각을 다시 붙인다.
+
+    'sometime in the next 15 years, the end will come. And by "the end" I mean …'
+    처럼 인용문 안에 마침표가 있으면 문장 경계 규칙이 그 자리에서 자른다. 그러면 여는
+    따옴표만 있는 조각과 닫는 따옴표만 있는 조각이 생겨, 무관한문장·삽입·어순배열이
+    '따옴표 짝이 안 맞는 반쪽 문장'을 그대로 내보낸다(실제 결과물 버그).
+
+    전체 지문의 따옴표 짝이 애초에 안 맞으면(세는 규칙이 못 미치는 글) 손대지 않는다.
+    """
+    if not _quote_open(" ".join(parts)):        # 전체가 균형 → 조각별 판정을 믿을 수 있다
+        out: list[str] = []
+        for p in parts:
+            if out and _quote_open(out[-1]):
+                out[-1] = f"{out[-1]} {p}"
+            else:
+                out.append(p)
+        return out
+    return parts
 
 
 def split_sentences(text: str) -> list[str]:
-    """지문 원문을 문장 단위로 나눈다(공백 정규화 + 흔한 약어 보호)."""
+    """지문 원문을 문장 단위로 나눈다(공백 정규화 + 약어·이니셜·인용문 보호)."""
     norm = " ".join((text or "").split())
     for ab in _ABBR:
         norm = re.sub(r'\b' + re.escape(ab) + r'\.', ab + _DOT, norm)
-    parts = _SENT_BOUNDARY.split(norm)
-    return [p.replace(_DOT, ".").strip() for p in parts if p.strip()]
+    norm = _INITIAL.sub(r'\1' + _DOT, norm)
+    parts = [p.strip() for p in _SENT_BOUNDARY.split(norm) if p.strip()]
+    parts = _join_quoted(parts)
+    return [p.replace(_DOT, ".").strip() for p in parts]
 
 
 def analyze(client: ClaudeClient, body: str, max_retries: int = 1) -> Analysis:

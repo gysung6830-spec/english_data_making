@@ -105,6 +105,8 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     좋은 모델은 몇 문항에만 쓰인다.
     """
     from . import analyzer, answer_spread, difficulty, gen2, pipeline, tiering
+    from . import shape as _shape
+    from . import verify as _verify
     from . import review as _rv
     from ._concurrent import run_parallel
     from .generators import vocab as _vocab
@@ -159,6 +161,11 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         passage.set_qa(t, q, a)
         passage.flag(t, fl)
         passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
+        # 해설 문구 위생(출제 메모·문장 번호 지칭·문체 혼재)은 다시 만들 만큼 심각하지는
+        # 않지만 그대로 인쇄되면 안 된다. 검토 메모로 남겨 사람이 한 번 보게 한다.
+        passage.flag(t, _shape.check_explanation(_verify._text(a)))
+
+    _flag_key_overlap(passage)      # 빈칸추론과 요약문의 정답 핵심어가 겹치는지
 
     if strong_client is not None:
         _escalate(passage, strong_client, _task, analysis, body, vslots,
@@ -167,6 +174,45 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     if not passage.q:
         raise RuntimeError(f"[{passage.title}] 통합본 모든 유형 생성 실패")
     return passage
+
+
+_CIRCLED_KEY = "①②③④⑤⑥⑦⑧"
+
+
+def _answer_choice_text(q_html: str, a_html: str) -> str:
+    """문항 HTML에서 '정답 선지의 글'을 뽑는다(번호가 아니라 내용)."""
+    import re
+
+    m = re.search(r'<span class="answer-key">\s*([①-⑧])', a_html or "")
+    if not m:
+        return ""
+    no = _CIRCLED_KEY.index(m.group(1)) + 1
+    items = re.findall(r"<li>(.*?)</li>", q_html or "", re.S)
+    if not (1 <= no <= len(items)):
+        return ""
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", items[no - 1])).strip()
+
+
+def _flag_key_overlap(passage) -> None:
+    """빈칸추론(F)과 요약문(E)의 정답 핵심어가 겹치면 검토 메모를 남긴다.
+
+    둘 다 '글의 핵심을 한마디로'를 묻기 때문에 정답 낱말까지 같아지기 쉽다. 그러면
+    한 문항을 풀면 다른 문항이 저절로 풀린다(실제 출력물: 빈칸 정답 'remove their
+    posts' 와 요약문 (A) 정답 'remove'). 둘은 따로 만들어지므로 생성 중에는 서로를
+    볼 수 없어, 다 만든 뒤 여기서 맞대어 본다.
+    """
+    from . import shape as _shape
+
+    if not (F in passage.q and E in passage.q):
+        return
+    fa = _answer_choice_text(passage.q[F], passage.a[F])
+    ea = _answer_choice_text(passage.q[E], passage.a[E])
+    if not (fa and ea):
+        return
+    why = _shape.check_key_overlap(fa, ea, "빈칸추론", "요약문")
+    if why:
+        passage.flag(F, why)
+        passage.flag(E, why)
 
 
 def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retries: int,

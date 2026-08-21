@@ -74,6 +74,17 @@ def place_answer(choices: list, answer_no: int, target_no: int,
     return new_choices, new_answer, new_extra
 
 
+def perm_map(n: int, answer_no: int, target_no: int) -> dict[int, int]:
+    """place_answer 와 '똑같은' 재배열의 옛 번호 → 새 번호 대응표(1-based)."""
+    if n <= 0:
+        return {}
+    a = (answer_no - 1) % n
+    t = (target_no - 1) % n
+    perm = [i for i in range(n) if i != a]
+    perm.insert(t, a)
+    return {old_i + 1: new_pos for new_pos, old_i in enumerate(perm, 1)}
+
+
 def relabel_answer_ref(reason: str, old_no: int, new_no: int) -> str:
     """해설 본문이 정답 선지를 'N번'으로 지칭한 것을, 정답 위치 분산(재배열) 뒤의
     '실제 표시 번호'로 바꾼다.
@@ -90,3 +101,28 @@ def relabel_answer_ref(reason: str, old_no: int, new_no: int) -> str:
         return reason
     pat = re.compile(rf'(?<![(\d]){old_no}번(?!\s*문장|\s*째)')
     return pat.sub(f'{new_no}번', reason)
+
+
+# 해설 본문이 선지를 지칭하는 두 가지 표기 — 'N번' 과 '선지 N'.
+_REF = re.compile(r'(?<![(\d])(?:(\d)번(?!\s*문장|\s*째)|선지\s*(\d))')
+
+
+def relabel_choice_refs(text: str, mapping: dict[int, int]) -> str:
+    """해설이 지칭한 '모든' 선지 번호를 재배열 뒤의 표시 번호로 한꺼번에 바꾼다.
+
+    relabel_answer_ref 는 정답 번호 하나만 고쳤다. 그런데 해설이 오답까지 산문으로
+    설명하는 유형(요약문 E)에서는 place_answer 가 선지를 옮기면 오답 번호도 전부
+    어긋난다. 실제 결과물에서 '4번(정답)을 오답이라고 설명'하는 해설이 나왔고,
+    두 지문 모두에서 같은 방식으로 밀렸다.
+
+    치환은 '동시에' 이뤄져야 한다(1→2, 2→3 을 차례로 적용하면 1이 3이 된다).
+    """
+    if not text or not mapping:
+        return text
+
+    def _sub(m: re.Match) -> str:
+        old = int(m.group(1) or m.group(2))
+        new = mapping.get(old, old)
+        return f"{new}번" if m.group(1) else f"선지 {new}"
+
+    return _REF.sub(_sub, text)
