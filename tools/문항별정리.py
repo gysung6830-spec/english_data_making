@@ -104,7 +104,7 @@ body {
   padding: 9mm 9mm 11mm; border-radius: 3px;
   box-shadow: 0 1px 3px rgba(20,40,30,.14), 0 8px 28px rgba(20,40,30,.10);
 }
-.teacher, .quick { break-before: auto; }   /* 쪽 나눔은 .sheet 가 대신한다 */
+.quick, .answers { break-before: auto; }   /* 쪽 나눔은 .sheet 가 대신한다 */
 /* 인쇄는 쪽 높이가 정해져 있어 column-fill: auto 가 왼쪽 단부터 채우지만,
    화면은 높이가 무한이라 그대로 두면 전부 왼쪽 단에 몰린다. 화면에서만 균등 분배. */
 .columns { column-fill: balance; }
@@ -126,13 +126,13 @@ body {
 .review-intro { font-size: 12.2px; }
 
 .q-item { margin-bottom: 5.4mm; }
-.q-head { margin-bottom: 1.4mm; }
+.a-item { margin-bottom: 4.4mm; }
+.q-head, .a-head { margin-bottom: 1.4mm; }
 .qnum { margin-right: 1.2mm; }
-.teach-exp { margin-top: 2.4mm; padding: 2.2mm 2.6mm; }
 
-/* '확인 권장' 메모를 문항 안에 붙일 때 */
-.q-item .review-intro { margin: 2.2mm 0 0; }
-.q-item .review-intro b { color: #8a6d1f; }
+/* '확인 권장' 메모를 해설 문항 안에 붙일 때 */
+.a-item .review-intro { margin: 1.6mm 0 0; }
+.a-item .review-intro b { color: #8a6d1f; }
 
 /* 좁은 화면에서는 2단이 되레 읽기 나쁘다 — 한 단으로 편다 */
 @media (max-width: 720px) {
@@ -145,13 +145,15 @@ body {
   html, body { background: #fff; padding: 0; }
   .sheet { max-width: none; padding: 0; box-shadow: none; margin: 0; }
   .columns { column-fill: auto; }          /* 인쇄는 왼쪽 단부터 채운다(원래대로) */
-  .quick-sheet { break-before: page; }
+  .quick-sheet, .ans-sheet { break-before: page; }
 }
 """
 
 # 한 '단 묶음'에 넣을 문항 수. 2단이 한없이 길어지면 왼쪽 단을 끝까지 내려간 뒤
 # 다시 맨 위로 올라와야 해서 읽기 나쁘다. 묶음으로 끊어 쪽처럼 읽히게 한다.
+# 해설은 지문이 없어 훨씬 짧으므로 더 크게 묶는다.
 _PER_BLOCK = 4
+_PER_BLOCK_A = 8
 
 
 def _quick_grid(rows: list[dict]) -> str:
@@ -161,23 +163,29 @@ def _quick_grid(rows: list[dict]) -> str:
     return f'<div class="quick-grid">{cells}</div>'
 
 
-def _item(row: dict) -> str:
-    """교사용 섹션과 같은 마크업 — 문제 밑에 해설(정답 포함)."""
+def _q_item(row: dict) -> str:
+    """문제편 한 문항 — 학생용 섹션과 같은 마크업(정답·해설 없음)."""
+    return (
+        f'<div class="q-item type-{_E(row["key"])}">'
+        f'<div class="q-head">'
+        f'<span class="qnum">{row["no"]}.</span> '
+        f'<span class="q-prompt">{row["prompt"]}</span>'
+        f' <span class="a-type">· {_E(row["label"])}</span>'
+        f'</div>'
+        f'<div class="q-body">{row["q_html"]}</div>'
+        f'</div>'
+    )
+
+
+def _a_item(row: dict) -> str:
+    """해설편 한 문항 — 해설지 섹션과 같은 마크업(정답 + 해설)."""
     parts = [
-        f'<div class="q-item type-{_E(row["key"])}">',
-        '<div class="q-head">',
+        f'<div class="a-item type-{_E(row["key"])}">',
+        '<div class="a-head">',
         f'<span class="qnum">{row["no"]}.</span> ',
-        f'<span class="q-prompt">{row["prompt"]}</span>',
-        f' <span class="a-type">· {_E(row["label"])}</span>',
+        f'<span class="a-type">{_E(row["label"])}</span>',
         '</div>',
-        f'<div class="q-body">{row["q_html"]}</div>',
-        '<div class="teach-exp">',
-        # 원 번호면 태그에 정답을 적고, 어순 배열처럼 문장이 답이면 태그는 '해설'만
-        # (답 문장은 바로 밑 해설 첫 줄에 그대로 나온다).
-        f'<span class="teach-tag">해설'
-        f'{" · 정답 " + _E(row["answer"]) if row["quick"] != "서술형" else ""}</span>',
         f'<div class="a-body">{row["a_html"]}</div>',
-        '</div>',
     ]
     if row["flags"]:
         why = " / ".join(_E(f) for f in row["flags"])
@@ -186,11 +194,11 @@ def _item(row: dict) -> str:
     return "".join(parts)
 
 
-def _blocks(rows: list[dict]) -> str:
-    """문항을 _PER_BLOCK 개씩 묶어 2단으로 흘린다."""
+def _blocks(rows: list[dict], item, per: int) -> str:
+    """문항을 per 개씩 묶어 2단으로 흘린다."""
     out = []
-    for i in range(0, len(rows), _PER_BLOCK):
-        items = "".join(_item(r) for r in rows[i:i + _PER_BLOCK])
+    for i in range(0, len(rows), per):
+        items = "".join(item(r) for r in rows[i:i + per])
         out.append(f'<div class="columns"><div class="passage-block">{items}</div></div>')
     return "".join(out)
 
@@ -215,9 +223,9 @@ def render(title: str, rows: list[dict], note: str = "",
   <div class="head-note">{_E(head_note)}</div>
 </header>
 
-<section class="teacher first-sec">
-  <h2 class="answer-title section-title">문항별 · 문제 + 해설</h2>
-  {_blocks(rows)}
+<section class="questions first-sec">
+  <h2 class="answer-title section-title">문제편</h2>
+  {_blocks(rows, _q_item, _PER_BLOCK)}
 </section>
 </div>
 
@@ -225,7 +233,14 @@ def render(title: str, rows: list[dict], note: str = "",
 <section class="quick">
   <h2 class="answer-title section-title">빠른 정답</h2>
   {_quick_grid(rows)}
-  {f'<div class="review-intro"><b>확인 권장 {flagged}문항</b> — 앞의 해당 문항에 사유를 적어 두었습니다.</div>' if flagged else ''}
+  {f'<div class="review-intro"><b>확인 권장 {flagged}문항</b> — 해설편의 해당 문항에 사유를 적어 두었습니다.</div>' if flagged else ''}
+</section>
+</div>
+
+<div class="sheet ans-sheet">
+<section class="answers">
+  <h2 class="answer-title section-title">해설편 · 정답 및 해설</h2>
+  {_blocks(rows, _a_item, _PER_BLOCK_A)}
 </section>
 <div class="page-footer">{_E(footer_note)} · 어법 두 문항은 지문을 다시 써서 내므로
 다른 문항의 지문과 문장이 다릅니다.</div>
