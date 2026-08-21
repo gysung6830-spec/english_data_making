@@ -348,6 +348,41 @@ def make_topic(sentences: list[str], choices: list[str], answer_no: int,
 
 
 # ---------------------------------------------------------------------------
+# 제목 (영어 선지) — 지문은 원본 그대로. 조판은 주제와 같은 모양.
+# ---------------------------------------------------------------------------
+def make_title(sentences: list[str], choices: list[str], answer_no: int,
+               reason: str, wrong: dict[int, str]) -> tuple[str, str]:
+    q = F.topic_q(" ".join(sentences), choices)
+    a = F.topic_a(answer_no, reason, wrong)
+    return q, a
+
+
+# ---------------------------------------------------------------------------
+# 무관한 문장 — 도입문 뒤 연속 5문장에 ①~⑤, 그중 한 자리를 새 문장으로 교체
+# ---------------------------------------------------------------------------
+def make_irrelevant(sentences: list[str], start_no: int, answer_no: int,
+                    sentence: str, reason: str,
+                    wrong: dict[int, str]) -> tuple[str, str]:
+    """start_no(1-based)부터 5문장에 ①~⑤를 달고, answer_no 자리를 sentence 로 교체.
+
+    도입문(start_no 앞 문장들)은 번호 없이 그대로 두어 글의 주제를 먼저 제시한다.
+    """
+    n = len(sentences)
+    if start_no < 2 or start_no + 4 > n:
+        raise ValueError(
+            f"무관한 문장 문제는 도입문 1개 + 연속 5문장이 필요합니다"
+            f"(지문 문장 {n}개, 시작 {start_no}번).")
+    if not (sentence or "").strip():
+        raise ValueError("무관한 문장 본문이 비어 있습니다.")
+    intro = " ".join(s.strip() for s in sentences[:start_no - 1])
+    marked = [s.strip() for s in sentences[start_no - 1:start_no + 4]]
+    marked[answer_no - 1] = sentence.strip()
+    q = F.irrelevant_q(intro, marked)
+    a = F.irrelevant_a(answer_no, reason, wrong)
+    return q, a
+
+
+# ---------------------------------------------------------------------------
 # 내용 일치 (원본 그대로 + 한글 선지) — 서술형 앞
 # ---------------------------------------------------------------------------
 def make_content(sentences: list[str], choices: list[str], answer_no: int,

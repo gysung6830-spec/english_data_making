@@ -25,6 +25,15 @@ VOCAB = "vocab"
 GRAMMAR = "grammar"
 CONTENT = "content"
 SHORT_ANSWER = "short_answer"
+TITLE = "title"                 # 제목 (수능 24번)
+IRRELEVANT = "irrelevant"       # 무관한 문장 (수능 35번)
+# 어휘는 한 지문에서 세 방식을 모두 출제한다(같은 발문·다른 문제).
+#   vocab   = 유의어형   — 정답만 반의어, 나머지 4개는 유의어로 패러프레이즈
+#   vocab_2 = 원문단어형 — 정답만 반의어, 나머지 4개는 원문 단어 그대로
+#   vocab_3 = 부정어형   — 밑줄은 원문 그대로, 정답 문장에 부정어를 넣어 흐름과 모순
+# 슬롯키의 '_숫자' 꼬리표는 review·verify 가 base(vocab)로 정규화해 알아본다.
+VOCAB_2 = "vocab_2"
+VOCAB_3 = "vocab_3"
 
 # 내용 일치는 서술형 바로 앞에 배치한다.
 TYPE_ORDER: tuple[str, ...] = (
@@ -40,6 +49,10 @@ TYPE_PROMPTS: dict[str, str] = {
     GRAMMAR: "밑줄 친 부분 중, 어법상 틀린 것을 모두 고르시오.",
     CONTENT: "위 글의 내용과 일치하는 것은?",
     SHORT_ANSWER: "다음 글을 읽고 물음에 답하시오.",
+    TITLE: "다음 글의 제목으로 가장 적절한 것은?",
+    IRRELEVANT: "다음 글에서 전체 흐름과 관계 없는 문장은?",
+    VOCAB_2: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
+    VOCAB_3: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
 }
 
 # 유형 한글 라벨 (해설 등에서 참고용)
@@ -51,6 +64,10 @@ TYPE_LABELS: dict[str, str] = {
     GRAMMAR: "어법",
     CONTENT: "내용 일치",
     SHORT_ANSWER: "서술형",
+    TITLE: "제목",
+    IRRELEVANT: "무관한 문장",
+    VOCAB_2: "어휘",
+    VOCAB_3: "어휘",
 }
 
 

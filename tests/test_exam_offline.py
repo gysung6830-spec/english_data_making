@@ -22,9 +22,11 @@ from exam.schemas import (  # noqa: E402
     GrammarOut,
     GrammarReason,
     InsertOut,
+    IrrelevantOut,
     KeyTerm,
     OrderOut,
     ShortOut,
+    TitleOut,
     TopicOut,
     VocabOut,
     WordMark,
@@ -455,6 +457,8 @@ def _fake_analysis() -> Analysis:
             "The second sentence adds an important detail.",
             "The third sentence gives a concrete example.",
             "The fourth sentence draws the whole thing together.",
+            "The fifth sentence answers an obvious objection.",
+            "The sixth sentence closes with a practical suggestion.",
         ],
         main_idea="A test main idea.",
         key_terms=[KeyTerm(word="topic", synonym="subject", antonym="")],
@@ -465,7 +469,7 @@ def _fake_analysis() -> Analysis:
 _FAKE = {
     "Analysis": _fake_analysis,
     "VerifyOut": lambda: __import__("exam.verify", fromlist=["VerifyOut"]).VerifyOut(ok=True),
-    "OrderOut": lambda: OrderOut(given_n=1, block_sizes=[1, 1, 1], display=[2, 1, 3],
+    "OrderOut": lambda: OrderOut(given_n=1, block_sizes=[2, 2, 1], display=[2, 1, 3],
                                  reason="이유."),
     "InsertOut": lambda: InsertOut(remove_no=2, reason="이유."),
     "TopicOut": lambda: TopicOut(
@@ -517,6 +521,16 @@ _FAKE = {
                Pair(a="wrongword", b="badword", a_ok=False, b_ok=False),
                Pair(a="badword", b="wrongword", a_ok=False, b_ok=False)],
         answer_no=1, reason="이유."),
+    "TitleOut": lambda: TitleOut(
+        choices=["The First Title", "A Second Title", "Third Title Here",
+                 "Fourth Title Here", "A Fifth Title"], answer_no=2, reason="이유.",
+        wrong_reasons=[WrongReason(no=1, text="범위 비틀기"), WrongReason(no=3, text="초점 이동"),
+                       WrongReason(no=4, text="근거 없음"), WrongReason(no=5, text="방향 반전")]),
+    "IrrelevantOut": lambda: IrrelevantOut(
+        start_no=2, answer_no=3, sentence="An unrelated remark wanders off the point.",
+        reason="논지에 기여하지 않음.",
+        wrong_reasons=[WrongReason(no=1, text="앞을 받음"), WrongReason(no=2, text="예시로 뒷받침"),
+                       WrongReason(no=4, text="연결사로 이어짐"), WrongReason(no=5, text="결론으로 맺음")]),
     "FOut": lambda: FOut(
         blank_phrase="concrete example", choices=["f1", "f2", "f3", "f4", "f5"],
         answer_no=2, reason="이유.",
@@ -529,15 +543,11 @@ def test_llm_path_wiring() -> None:
     passage = build_passage_merged(_FakeClient(), "dummy body")
     assert passage.types == set(MERGED_ORDER)
     validator.check_passage(passage, MERGED_ORDER)
-    # 부정어·원문단어 방식도 배선되는지
-    for m in ("negation", "original"):
-        p = build_passage_merged(_FakeClient(), "dummy body", vocab_method=m)
-        validator.check_passage(p, MERGED_ORDER)
-    # 어휘 방식은 난이도에 연동: 상=부정어 · 중=유의어 · 하=원문단어
-    from exam import difficulty
-    assert difficulty.vocab_method("상") == "negation"
-    assert difficulty.vocab_method("중") == "synonym"
-    assert difficulty.vocab_method("하") == "original"
+    # 어휘 3종(유의어·원문단어·부정어)이 한 지문에 모두 배선된다 — 난이도와 무관하게 고정
+    from exam import difficulty, pipeline as _pl
+    assert _pl.VOCAB_METHODS == {"vocab": "synonym", "vocab_2": "original",
+                                 "vocab_3": "negation"}, _pl.VOCAB_METHODS
+    assert not hasattr(difficulty, "vocab_method")   # 난이도 레버에서 빠졌다
     for lv in ("상", "중", "하"):
         p = build_passage_merged(_FakeClient(), "dummy body", level=lv)
         validator.check_passage(p, MERGED_ORDER)
@@ -1132,7 +1142,7 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     assert review.weak_distractors([WrongReason(no=1, text="충분히 길고 구체적인 오답 근거입니다")]) == []
 
     # 3) collect_review — 문서 연속 번호로 정확히 매긴다
-    #    통합본은 지문당 11문항이므로 1번(주제)·6번(어법)·22번(2지문 서술형)
+    #    문항 번호는 지문 경계를 넘어 문서 전체로 이어진다(둘째 지문 = +유형 수).
     def _fresh():
         return build_passages_merged(_FakeClient(), ["b1", "b2"])
 
@@ -1140,7 +1150,7 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     ps = _fresh()
     ps[0].flag("topic", [review.FIX_ORDER])
     ps[0].flag("grammar", ["오답 근거 약함: …"])
-    ps[1].flag("short_answer", [review.FIX_SNAP])         # 둘째 지문 → +11번
+    ps[1].flag("short_answer", [review.FIX_SNAP])         # 둘째 지문 → +유형 수
     items = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
                                     labels=MERGED_LABELS)
     by_no = {it["no"]: it for it in items}
@@ -1150,7 +1160,7 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     n_short = _i["short_answer"] + len(MERGED_ORDER)      # 둘째 지문의 서술형
     assert review.FIX_SNAP in by_no[n_short]["reasons"]
     assert by_no[n_short]["label"] == "서술형"
-    assert max(by_no) == 22, sorted(by_no)          # 지문 2개 × 11문항
+    assert max(by_no) == 2 * len(MERGED_ORDER), sorted(by_no)   # 지문 2개 × 유형 수
 
     # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
     tmp_out.mkdir(parents=True, exist_ok=True)
@@ -1603,7 +1613,10 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
 
 
 def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
-    """변형문제(통합본): 옛 1회+2회에서 겹치는 3유형(A·C·G)을 빼고 11유형만 낸다.
+    """변형문제(통합본): 수능 출제 유형을 한 벌로 덮는 15문항.
+
+    옛 1회+2회에서 겹치던 3유형(A·C·G)은 빼고, 비어 있던 제목·무관한 문장을 더했다.
+    어휘는 세 방식(유의어형·원문단어형·부정어형)을 난이도와 무관하게 모두 낸다.
     빠진 유형은 생성 호출조차 하지 않으므로 비용이 실제로 준다."""
     import threading as _th
 
@@ -1614,17 +1627,24 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam.set2 import TYPE_ORDER2
     from exam.types import TYPE_ORDER
 
-    # ① 구성 — 11유형, 중복 3유형 제외, 두 세트의 나머지는 하나도 안 빠졌다
-    assert len(MERGED_ORDER) == 11, MERGED_ORDER
-    assert len(set(MERGED_ORDER)) == 11                    # 같은 유형이 두 번 나오지 않는다
+    # ① 구성 — 15문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
+    assert len(MERGED_ORDER) == 15, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 15                    # 같은 슬롯이 두 번 나오지 않는다
     assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
-    assert set(TYPE_ORDER) | set(TYPE_ORDER2) == set(MERGED_ORDER) | set(EXCLUDED)
+    _added = {"title", "irrelevant", "vocab_2", "vocab_3"}     # 새로 더한 유형·슬롯
+    assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
+            == (set(MERGED_ORDER) - _added) | set(EXCLUDED))
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
-    assert MERGED_ORDER == ("topic", "B", "content", "grammar", "vocab", "F",
+    assert MERGED_ORDER == ("topic", "title", "B", "content", "grammar",
+                            "vocab", "vocab_2", "vocab_3", "F", "irrelevant",
                             "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
     assert MERGED_ORDER[-2:] == ("D", "short_answer")       # 서술형 계열은 맨 뒤
+    # 어휘 3종은 발문이 같고 라벨도 '어휘'로 같다(문제 만드는 방식만 다르다)
+    _v3 = ("vocab", "vocab_2", "vocab_3")
+    assert len({MERGED_PROMPTS[t] for t in _v3}) == 1
+    assert {MERGED_LABELS[t] for t in _v3} == {"어휘"}
     # 뺀 유형은 '대신할 유형'이 통합본 안에 실제로 있어야 한다(능력 공백 없음)
     for gone, kept in EXCLUDED.items():
         assert kept in MERGED_ORDER, (gone, kept)
@@ -1641,21 +1661,24 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     ps = build_passages_merged(_Counting(), ["b1", "b2"], labels=["10-1", "10-2"])
     assert "AOut" not in seen and "GOut" not in seen, seen      # A·G 생성 안 함
     assert seen.get("GrammarOut") == 2, seen                    # 어법은 지문당 1번(C 중복 제거)
-    assert seen.get("VerifyOut") == 14, seen                    # 자기검증 지문당 7회(9회→7회)
+    assert seen.get("VocabOut") == 6, seen                      # 어휘는 지문당 3번(3종)
+    assert seen.get("TitleOut") == 2 and seen.get("IrrelevantOut") == 2, seen
+    assert seen.get("VerifyOut") == 16, seen                    # 자기검증 지문당 8회
 
-    # ③ 지문마다 11문항이 순서대로, 라벨도 보존된다
+    # ③ 지문마다 15문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
 
-    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 11 = 22번까지)
+    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 15 = 30번까지)
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "merged.pdf"
     renderer.render_pdf(ps, out, header_note="통합",
                         type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
     txt = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out)).pages)
     assert "[10-1]" in txt and "[10-2]" in txt, txt[:400]
-    assert "22." in txt, "마지막 문항 번호(22)가 없다"
+    _last = 2 * len(MERGED_ORDER)
+    assert f"{_last}." in txt, f"마지막 문항 번호({_last})가 없다"
 
     # ⑤ JSON 저장→복원 재출력(무API)에서도 통합 유형표가 그대로 살아난다
     data = serialize.dump_parts([{"set": "M", "tag": "변형문제 · 난이도 중",
@@ -1673,7 +1696,8 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert set(gen2._GENERATORS2) == {"B", "D", "E", "F"}, sorted(gen2._GENERATORS2)
     assert not hasattr(gen2, "build_passages2") and not hasattr(gen2, "_gen_A")
     assert not hasattr(pipeline, "build_passages")      # 1회 전용 경로도 없다
-    assert set(pipeline.GENERATORS) | set(gen2._GENERATORS2) == set(MERGED_ORDER)
+    _bases = {pipeline._base(t) for t in MERGED_ORDER}
+    assert set(pipeline.GENERATORS) | set(gen2._GENERATORS2) == _bases
 
     # ⑧ 웹앱 — 세트 선택 없이 통합본 하나로만 나온다
     from web import app as webmod
@@ -1681,7 +1705,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
     assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
-    assert "지문당 11문항" in home
+    assert "지문당 15문항" in home
     r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
@@ -1691,8 +1715,8 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert "변형문제 1회" not in page and "변형문제 2회" not in page
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
-    assert len([t for t in MERGED_ORDER if t in _v.HIGH_RISK]) == 7
-    print("✓ 변형문제 통합본(중복 3유형 제거 11유형)·비용 절감·조판·재출력 통과")
+    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 8
+    print("✓ 변형문제 통합본(15문항·제목·무관한 문장·어휘 3종)·조판·재출력 통과")
 
 
 def test_batch_client() -> None:

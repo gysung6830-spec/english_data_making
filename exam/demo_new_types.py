@@ -1,0 +1,156 @@
+"""데모(무료 미리보기)용 — 통합본에 새로 들어온 유형의 예시 문항.
+
+제목·무관한 문장·어휘(원문단어형·부정어형)는 기존 1회·2회 데모에 없던 유형이라
+여기서 따로 만든다. 실제 생성과 똑같은 빌더(build.py)를 거치므로 조판 결과도 같다.
+데모 지문은 demo_data 의 DNA·STAR 두 개를 그대로 쓴다.
+"""
+from __future__ import annotations
+
+from . import build as B
+from .demo_data import DNA, STAR
+from .types import IRRELEVANT, TITLE, VOCAB_2, VOCAB_3, Passage
+
+# 데모 지문 제목 -> 이 파일이 채워 줄 문항들
+_BY_TITLE: dict[str, "Passage"] = {}
+
+
+def _dna() -> Passage:
+    p = Passage(title=DNA.title)
+    s = DNA.sentences
+
+    # 제목 — 명사구·대구·콜론형으로 통일
+    p.set_qa(TITLE, *B.make_title(
+        s,
+        choices=[
+            "Why Cold Storage Beats Every Other Archive",
+            "The Molecule That Outlasts Our Machines",
+            "Reading the Genes of Ancient Animals",
+            "Hard Drives: Cheaper, Faster, Smaller Every Year",
+            "A Warning Against Trusting Digital Records",
+        ],
+        answer_no=2,
+        reason=("글은 DNA가 ①엄청난 밀도로 정보를 담고 ②수만 년을 견디며 ③그래서 디지털 파일을 "
+                "DNA에 새기는 연구가 시작됐다고 전개한다. '우리 기계보다 오래 남는 분자'가 밀도와 "
+                "내구성, 그리고 저장 매체라는 논점을 한 줄로 압축한다."),
+        wrong={
+            1: "범위 비틀기 — 저온 보관은 지문에 없고, 글의 논점은 보관 환경이 아니라 DNA 자체다.",
+            3: "초점 이동 — 고대 생물의 유전자 해독은 내구성의 예시일 뿐 글의 논점이 아니다.",
+            4: "방향 반전 — 지문은 하드드라이브를 DNA와 대비하는 쪽이지 그 발전을 다루지 않는다.",
+            5: "근거 없음 — 디지털 기록을 믿지 말라는 경고는 글에 없다(오히려 보존을 낙관한다).",
+        },
+    ))
+
+    # 무관한 문장 — 도입 1문장 뒤 ①~⑤, ③자리에 '소재는 같고 논지는 벗어난' 문장을 끼움
+    p.set_qa(IRRELEVANT, *B.make_irrelevant(
+        s, start_no=2, answer_no=3,
+        sentence=("The double helix structure of DNA was first described by scientists "
+                  "in the middle of the twentieth century."),
+        reason=("글은 '저장 매체로서 DNA의 밀도·내구성, 그리고 그것을 본뜬 연구'로 나아간다. "
+                "이중나선 구조가 언제 밝혀졌는가는 DNA를 소재로 삼았을 뿐 저장 매체라는 논지에 "
+                "전혀 기여하지 않는 배경 지식이라 흐름에서 벗어난다."),
+        wrong={
+            1: "①은 도입의 '정보를 저장한다'를 받아 '아주 작은 공간에 담는다'는 밀도로 나아간다.",
+            2: "②는 ①의 밀도를 1그램이라는 구체적 수치로 뒷받침한다.",
+            4: "④는 Inspired by such efficiency 로 앞의 효율을 받아 실제 연구로 이어 준다.",
+            5: "⑤는 The technique 으로 ④의 연구를 받아 그 한계와 이점을 덧붙인다.",
+        },
+    ))
+
+    # 어휘 — 원문단어형(정답만 반의어, 나머지 4개는 원문 그대로)
+    p.set_qa(VOCAB_2, *B.make_vocab(
+        s,
+        marks=[(1, "remarkable", "remarkable"), (1, "enormous", "tiny"),
+               (2, "combined", "combined"), (3, "durable", "durable"),
+               (5, "preserved", "preserved")],
+        answer_no=2,
+        reason=("②가 있는 문장은 '1그램의 DNA가 하드드라이브 수백만 개만큼의 데이터를 담는다'는 "
+                "뜻이므로 tiny(적은)가 아니라 enormous(엄청난)여야 문맥에 맞는다."),
+    ))
+
+    # 어휘 — 부정어형(밑줄은 원문 그대로, 정답 문장에 부정어를 넣어 흐름과 모순)
+    p.set_qa(VOCAB_3, *B.make_vocab(
+        s,
+        marks=[(1, "stores", "stores"), (2, "hold", "hold"),
+               (3, "durable", "durable"), (4, "encode", "encode"),
+               (5, "preserved", "preserved")],
+        answer_no=3,
+        overrides={3: ("It is not durable at all, disappearing from bone and ice "
+                       "within a few short years.")},
+        reason=("글은 DNA의 장점으로 '밀도'에 이어 '내구성'을 들고, 그 효율에 영감을 받아 연구가 "
+                "시작됐다고 이어 간다. ③ 문장이 '전혀 오래가지 못한다'로 바뀌면 뒤의 '그런 효율에 "
+                "영감을 받아'와 정면으로 모순된다."),
+    ))
+    return p
+
+
+def _star() -> Passage:
+    p = Passage(title=STAR.title)
+    s = STAR.sentences
+
+    p.set_qa(TITLE, *B.make_title(
+        s,
+        choices=[
+            "How to Spot a Star Performer Early",
+            "Promotion: Rewarding Talent the Right Way",
+            "The Best Player Rarely Makes the Best Coach",
+            "Why Teams Stall When Budgets Shrink",
+            "Personal Brilliance Is All a Company Needs",
+        ],
+        answer_no=3,
+        reason=("글은 최고 실무자를 관리자로 올리는 관행이 왜 실패하는지를 다룬다. 두 자리가 정반대 "
+                "능력을 요구한다는 것이 논점이므로, '최고의 선수가 최고의 코치가 되는 일은 드물다'가 "
+                "글 전체를 대구로 압축한다."),
+        wrong={
+            1: "초점 이동 — 인재를 어떻게 알아보느냐는 글이 다루지 않는다.",
+            2: "방향 반전 — 글은 승진이 '올바른 보상'이라는 통념을 반박하는 쪽이다.",
+            4: "근거 없음 — 예산 축소는 지문에 전혀 나오지 않는다.",
+            5: "방향 반전 — 개인의 탁월함만으로는 부족하다는 것이 글의 요지다.",
+        },
+    ))
+
+    p.set_qa(IRRELEVANT, *B.make_irrelevant(
+        s, start_no=2, answer_no=4,
+        sentence=("Most large firms now run their hiring interviews online to save "
+                  "travel costs."),
+        reason=("글은 '최고 실무자 ≠ 최고 관리자'라는 논지를 통념 제시 → 반박 → 결과 순으로 편다. "
+                "온라인 면접과 출장비 절감은 채용이라는 소재만 스칠 뿐, 두 역할의 능력 차이라는 "
+                "논지에 아무 기여를 하지 않는다."),
+        wrong={
+            1: "①은 도입의 승진 관행을 받아 그 밑에 깔린 가정(스타가 스타 상사가 된다)을 드러낸다.",
+            2: "②는 however 로 그 가정을 반박하며 '정반대 능력'이라는 논점을 세운다.",
+            3: "③은 One ~ while the other ~ 로 그 정반대 능력이 무엇인지 풀어 준다.",
+            5: "⑤는 The team stalls 로 두 능력이 어긋난 결과를 보여 준다.",
+        },
+    ))
+
+    p.set_qa(VOCAB_2, *B.make_vocab(
+        s,
+        marks=[(0, "promote", "promote"), (2, "opposite", "identical"),
+               (3, "patience", "patience"), (4, "neglects", "neglects"),
+               (6, "loses", "loses")],
+        answer_no=2,
+        reason=("뒤 문장이 '하나는 개인의 탁월함을, 다른 하나는 남을 키우는 인내를 보상한다'며 두 "
+                "역할을 대비하므로, identical(동일한)이 아니라 opposite(정반대의)이어야 한다."),
+    ))
+
+    p.set_qa(VOCAB_3, *B.make_vocab(
+        s,
+        marks=[(1, "assume", "assume"), (2, "demand", "demand"),
+               (4, "neglects", "neglects"), (5, "stalls", "stalls"),
+               (6, "loses", "loses")],
+        answer_no=3,
+        overrides={4: ("Placed in charge, the former star no longer chases personal wins "
+                       "and never neglects the slow work of coaching the team.")},
+        reason=("글은 스타를 관리자로 앉히면 팀이 정체되고 결국 회사가 둘 다 잃는다는 쪽으로 간다. "
+                "③ 문장이 '더는 개인 성과를 좇지 않고 코칭도 소홀히 하지 않는다'로 바뀌면 바로 뒤의 "
+                "'팀이 정체된다'와 모순된다."),
+    ))
+    return p
+
+
+def supplement() -> dict[str, Passage]:
+    """데모 지문 제목 -> 새 유형 문항이 담긴 Passage."""
+    if not _BY_TITLE:
+        for p in (_dna(), _star()):
+            _BY_TITLE[p.title] = p
+    return _BY_TITLE

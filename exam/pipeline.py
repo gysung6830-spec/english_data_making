@@ -6,13 +6,21 @@
 """
 from __future__ import annotations
 
+import re
+
 from . import analyzer, answer_spread
 from . import verify as _verify
 from ._concurrent import run_parallel
-from .generators import content, grammar, insert, order, short_answer, topic, vocab
+from .generators import (
+    content, grammar, insert, irrelevant, order, short_answer, title, topic, vocab,
+)
 from .llm import ClaudeClient
 from .types import (
     CONTENT,
+    IRRELEVANT,
+    TITLE,
+    VOCAB_2,
+    VOCAB_3,
     GRAMMAR,
     INSERT,
     ORDER,
@@ -30,7 +38,12 @@ GENERATORS = {
     GRAMMAR: grammar,
     CONTENT: content,
     SHORT_ANSWER: short_answer,
+    TITLE: title,
+    IRRELEVANT: irrelevant,
 }
+
+# 어휘 슬롯키 -> 출제 방식. 한 지문에서 세 방식을 모두 낸다(난이도와 무관하게 고정).
+VOCAB_METHODS = {VOCAB: "synonym", VOCAB_2: "original", VOCAB_3: "negation"}
 
 
 def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
@@ -63,17 +76,22 @@ def _gen_one_type(gen, client, analysis, body, t, max_retries, logger, kwargs):
     raise RuntimeError(f"'{t}' 유형 생성 실패: {last_err}")
 
 
+def _base(t: str) -> str:
+    """슬롯키(vocab_2)를 생성기 표의 기본 유형키(vocab)로 되돌린다."""
+    return re.sub(r"_\d+$", "", t or "")
+
+
 def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
-              vocab_method: str = "synonym", content_difficulty: str = "hard",
+              content_difficulty: str = "hard",
               passage_index: int = 0, level: str | None = None, slots=None):
     """산문형 유형(주제·내용일치·어법·어휘·순서·삽입·서술형) 하나를 만드는 '무인자 함수'.
 
     slots 는 정답 위치 분산용 슬롯표. 생략하면 이 계열만 쓰던 옛 슬롯표를 쓴다.
     """
-    gen = GENERATORS[t]
+    gen = GENERATORS[_base(t)]
     kwargs: dict = {}
-    if t == VOCAB:
-        kwargs["method"] = vocab_method
+    if t in VOCAB_METHODS:
+        kwargs["method"] = VOCAB_METHODS[t]
     elif t == CONTENT:
         kwargs["difficulty"] = content_difficulty
     slots = answer_spread.SLOTS1 if slots is None else slots

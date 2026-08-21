@@ -1,4 +1,4 @@
-"""변형문제 통합본 — 1회·2회를 합치고 겹치는 유형을 걷어낸 한 세트(11유형).
+"""변형문제 통합본 — 수능 출제 유형을 한 벌로 덮는 15문항 세트.
 
 1회(7유형)와 2회(A~G)를 따로 뽑으면 사실상 같은 문제가 두 번 나온다.
 아래 3유형은 다른 유형이 이미 같은 능력을 묻고 있어 통합본에서 뺐다:
@@ -7,8 +7,14 @@
   · G(내용일치 개수)   → '내용 일치'와 같은 능력(수능 표준 형식인 5지선다를 남김).
   · A(어법·어휘 짝짓기) → '어법' + '어휘'가 각각 단독으로 이미 있다.
 
-결과: 지문당 14문항 → 11문항(-21%). 자기검증 호출도 9회 → 7회로 준다.
-빼고 싶은/되살리고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
+여기에 내신 출제 빈도가 높은데 비어 있던 두 유형을 더했다:
+
+  · 제목(24번)        → 주제와 짝을 이루는 유형. 함축·비유가 섞여 답이 겹치지 않는다.
+  · 무관한 문장(35번)  → 원문에 없던 문장을 새로 써서 끼우므로 '암기로는 못 푸는' 유형.
+
+어휘는 세 방식(유의어형·원문단어형·부정어형)을 모두 낸다. 발문은 같지만 밑줄을 만드는
+방식이 달라 서로 다른 문제가 되고, 내신에서 어휘 비중이 큰 점을 감안했다.
+결과: 지문당 15문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
 
 생성기는 새로 만들지 않는다 — 1회 계열은 pipeline, 2회 계열은 gen2 의 것을
 그대로 호출하고, 이 파일은 '어떤 유형을 어떤 순서로 낼지'만 정한다.
@@ -25,9 +31,13 @@ from .types import (
     ORDER,
     SHORT_ANSWER,
     TOPIC,
+    IRRELEVANT,
+    TITLE,
     TYPE_LABELS,
     TYPE_PROMPTS,
     VOCAB,
+    VOCAB_2,
+    VOCAB_3,
     Passage,
 )
 
@@ -37,17 +47,21 @@ from .types import (
 # 목적·심경·주장(18~20번)이 있어 함의추론이 워밍업 뒤에 나오지만, 이 세트에는 그 셋이
 # 없어 함의추론이 곧바로 1번이 되어 버리기 때문이다.
 MERGED_ORDER: tuple[str, ...] = (
-    TOPIC,         # 주제        (23번)
-    B,             # 함의추론     (21번)
-    CONTENT,       # 내용 일치    (26번)
-    GRAMMAR,       # 어법        (29번)
-    VOCAB,         # 어휘        (30번)
-    F,             # 빈칸추론     (31~34번)
-    ORDER,         # 순서 배열    (36~37번)
-    INSERT,        # 문장 삽입    (38~39번)
-    E,             # 요약문 빈칸   (40번)
-    D,             # 어순 배열    (내신 서술형)
-    SHORT_ANSWER,  # 서술형       (내신 서술형)
+    TOPIC,         # 주제         (23번)
+    TITLE,         # 제목         (24번) — 주제와 붙여 대의파악을 한 묶음으로
+    B,             # 함의추론      (21번)
+    CONTENT,       # 내용 일치     (26번)
+    GRAMMAR,       # 어법         (29번)
+    VOCAB,         # 어휘 — 유의어형   (30번)
+    VOCAB_2,       # 어휘 — 원문단어형 (30번)
+    VOCAB_3,       # 어휘 — 부정어형   (30번)
+    F,             # 빈칸추론      (31~34번)
+    IRRELEVANT,    # 무관한 문장    (35번)
+    ORDER,         # 순서 배열     (36~37번)
+    INSERT,        # 문장 삽입     (38~39번)
+    E,             # 요약문 빈칸    (40번)
+    D,             # 어순 배열     (내신 서술형)
+    SHORT_ANSWER,  # 서술형        (내신 서술형)
 )
 
 # 통합하며 뺀 유형 → 그 자리를 대신하는 유형(검토·설명용).
@@ -63,8 +77,7 @@ MERGED_LABELS: dict[str, str] = {**TYPE_LABELS, **TYPE_LABELS2}
 
 
 def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
-                         vocab_method: str = "synonym", content_difficulty: str = "hard",
-                         analysis=None, level: str | None = None,
+                         content_difficulty: str = "hard", analysis=None, level: str | None = None,
                          passage_index: int = 0) -> Passage:
     """지문 원문 1개 → 통합 11유형이 채워진 Passage.
 
@@ -77,19 +90,20 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
-    vm = vocab_method
     if level:   # 난이도 지침을 분석 결과에 심어 모든 생성기에 공통 전달
         analysis.difficulty_note = difficulty.clause(level)
         content_difficulty = difficulty.content_difficulty(level)
-        vm = difficulty.vocab_method(level)
+        # 어휘는 난이도를 따르지 않는다 — 세 방식(유의어·원문단어·부정어)을 항상 모두
+        # 내므로, 난이도를 낮춰도 어려운 방식이 빠지지 않는다.
     passage = Passage(title=analysis.title)
 
     slots = answer_spread.SLOTS_MERGED
 
     def _task(t):
-        if t in pipeline.GENERATORS:        # 1회 계열(주제·내용일치·어법·어휘·순서·삽입·서술형)
+        # 슬롯키(vocab_2)는 기본 유형키(vocab)로 되돌려 어느 계열인지 가른다.
+        if pipeline._base(t) in pipeline.GENERATORS:     # 산문형 계열
             return pipeline.make_task(t, client, analysis, body, max_retries=max_retries,
-                                      logger=logger, vocab_method=vm,
+                                      logger=logger,
                                       content_difficulty=content_difficulty,
                                       passage_index=passage_index, level=level, slots=slots)
         return gen2.make_task2(t, client, analysis, body, max_retries=max_retries,   # 2회 계열
@@ -113,7 +127,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
 def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logger=None,
                           analyses=None, level: str | None = None,
-                          vocab_method: str = "synonym", content_difficulty: str = "hard",
+                          content_difficulty: str = "hard",
                           labels: list[str] | None = None, progress=None,
                           part_label: str = "변형문제") -> list[Passage]:
     """여러 지문 → 검증된 Passage 리스트(조판 없음). 합본용."""
@@ -128,7 +142,6 @@ def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logge
 
     def _one(b, a, i):
         r = build_passage_merged(client, b, max_retries=max_retries, logger=logger,
-                                 vocab_method=vocab_method,
                                  content_difficulty=content_difficulty,
                                  analysis=a, level=level, passage_index=i)
         if progress:
@@ -162,20 +175,25 @@ def build_exam_merged(client, bodies: list[str], out_path: str | Path, header_no
 
 
 def demo_passages_merged() -> list[Passage]:
-    """데모(무료 미리보기)용 통합본 — 1회·2회 데모 문항에서 통합 11유형만 골라 합친다.
+    """데모(무료 미리보기)용 통합본 — 세 곳의 데모 문항을 출제 순서대로 합친다.
 
-    두 데모의 지문 수가 다르면 겹치는 만큼만 만든다(11유형이 다 갖춰진 지문만 나간다).
+    산문형(주제·어법·어휘·순서·삽입·내용일치·서술형)은 demo_data,
+    B·D·E·F 는 demo2, 새로 들어온 유형(제목·무관한 문장·어휘 2종)은 demo_new_types.
+    지문 수가 다르면 겹치는 만큼만 만든다(유형이 다 갖춰진 지문만 나간다).
     """
     from .demo2 import demo_passages_2
     from .demo_data import demo_passages
+    from .demo_new_types import supplement
 
+    extra = supplement()
     out: list[Passage] = []
     for p1, p2 in zip(demo_passages(), demo_passages_2()):
         p = Passage(title=p1.title)
         p.source_label = getattr(p1, "source_label", "") or ""
-        for t in MERGED_ORDER:          # 출제 순서대로 채운다(어느 회차에서 왔든)
-            for src in (p1, p2):
-                if t in src.q and t in src.a:
+        p3 = extra.get(p1.title)
+        for t in MERGED_ORDER:          # 출제 순서대로 채운다(어느 데모에서 왔든)
+            for src in (p1, p2, p3):
+                if src is not None and t in src.q and t in src.a:
                     p.set_qa(t, src.q[t], src.a[t])
                     break
         out.append(p)

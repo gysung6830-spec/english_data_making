@@ -99,6 +99,50 @@ class WrongReason(BaseModel):
     text: str
 
 
+class TitleOut(BaseModel):
+    """제목(수능 24번) — 영어 명사구 선지 5개. 구조는 주제와 같다."""
+
+    choices: list[str]
+    answer_no: int
+    reason: str
+    wrong_reasons: list[WrongReason]
+
+    @field_validator("choices")
+    @classmethod
+    def _five(cls, v: list[str]) -> list[str]:
+        if len(v) != 5:
+            raise ValueError("제목 선지는 정확히 5개여야 합니다.")
+        return v
+
+
+class IrrelevantOut(BaseModel):
+    """무관한 문장(수능 35번).
+
+    도입 문장 뒤 연속 5문장에 ①~⑤를 붙이고, 그중 한 자리(answer_no)의 원문 문장을
+    새로 쓴 '흐름과 무관한 문장'(sentence)으로 갈아 끼운다. 나머지 4자리는 원문 그대로.
+    """
+
+    start_no: int          # ①이 붙을 원문 문장 번호(1-based). 도입문이 있어야 하므로 2 이상.
+    answer_no: int         # 1~5 — 무관한 문장을 끼워 넣을 자리
+    sentence: str          # 그 자리에 넣을, 흐름과 무관한 새 영어 문장
+    reason: str
+    wrong_reasons: list[WrongReason]
+
+    @field_validator("answer_no")
+    @classmethod
+    def _in_range(cls, v: int) -> int:
+        if not 1 <= v <= 5:
+            raise ValueError("무관한 문장 번호는 1~5 여야 합니다.")
+        return v
+
+    @field_validator("start_no")
+    @classmethod
+    def _has_intro(cls, v: int) -> int:
+        if v < 2:
+            raise ValueError("①은 도입 문장 다음부터 시작해야 합니다(start_no 는 2 이상).")
+        return v
+
+
 class TopicOut(BaseModel):
     choices: list[str]
     answer_no: int

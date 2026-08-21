@@ -4,6 +4,8 @@
 동작 방식: 선택한 난이도의 '지침 문장'을 분석 결과(Analysis.difficulty_note)에 심어 두면,
 모든 생성기가 공통으로 쓰는 context() 가 그 지침을 프롬프트에 함께 실어 보낸다.
 (내용일치 유형은 별도 2단계 프롬프트가 있어 plain/hard 로도 매핑한다.)
+어휘는 난이도를 따르지 않는다 — 세 방식(유의어형·원문단어형·부정어형)을 난이도와
+무관하게 항상 모두 출제하므로, 난이도로 고를 대상이 아니다.
 
 핵심 원칙: 난이도를 올려도 '정답은 하나로 확정되고 오답은 반박 가능'해야 한다(출제 오류 금지).
 """
@@ -33,10 +35,6 @@ _CLAUSES = {
 # 내용일치(content) 유형의 기존 2단계 프롬프트와 매핑
 _CONTENT = {LOW: "plain", MID: "hard", HIGH: "hard"}
 
-# 어휘(vocab) 방식도 난이도에 연동: 상=부정어삽입, 중=유의어, 하=원문단어
-_VOCAB = {LOW: "original", MID: "synonym", HIGH: "negation"}
-
-
 def normalize(level: str | None) -> str:
     """알 수 없는 값은 '중'으로."""
     return level if level in _CLAUSES else MID
@@ -51,7 +49,3 @@ def content_difficulty(level: str | None) -> str:
     """내용일치 유형용 plain/hard 매핑."""
     return _CONTENT[normalize(level)]
 
-
-def vocab_method(level: str | None) -> str:
-    """어휘 방식 매핑: 상=부정어삽입(negation), 중=유의어(synonym), 하=원문단어(original)."""
-    return _VOCAB[normalize(level)]

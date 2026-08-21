@@ -86,6 +86,24 @@ def insert_a(answer_no: int, reason: str) -> str:
     )
 
 
+def irrelevant_q(intro: str, marked: list[str]) -> str:
+    """무관한 문장 문제 본문 — 도입문 뒤에 ①~⑤ 를 단 문장 5개를 이어 붙인다."""
+    body = esc(intro)
+    for i, sent in enumerate(marked, 1):
+        body += f' <span class="cnum">{circ(i)}</span> {esc(sent)}'
+    return f'<div class="passage">{body}</div>'
+
+
+def irrelevant_a(answer_no: int, reason: str, wrong_reasons: dict[int, str]) -> str:
+    parts = [
+        f'<p><span class="answer-key">{circ(answer_no)}</span></p>',
+        f'<p class="reason">{esc(reason)}</p>',
+    ]
+    for i in sorted(wrong_reasons):
+        parts.append(f'<p class="wrong">{circ(i)} {esc(wrong_reasons[i])}</p>')
+    return "".join(parts)
+
+
 def pos(i: int) -> str:
     """삽입 문제 본문에 넣는 위치 마커."""
     return f'<span class="cnum">{circ(i)}</span>'
