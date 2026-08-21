@@ -68,7 +68,9 @@ SHOTS = [
     # 필생보 강의용 — 강사용 / 학생 문제지 / 글 정리
     Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
-    Shot("pilsaengbo-grammar.png", 4, head=["필생보", "강사용"], keep=1.0),
+    # 핵심 문법 — 설명 빈칸이 살아 있는 판. 학생이 채우는 자료라는 것이 보인다.
+    Shot("pilsaengbo-grammar.png", 1, head=["문장별 끊어읽기"],
+         marks=["would rather A than B"], keep=1.0),
     Shot("pilsaengbo-summary2.png", 15, head=["필생보", "강사용"]),
     Shot("pilsaengbo-summary3.png", 9, head=["필생보", "강사용"]),
     # 재진술 사슬이 둘이고 형광펜이 다섯 곳인 지문. 합본 강사용에서 따로 받았다.
@@ -204,8 +206,8 @@ CROPS = [
     ("pilsaengbo-student.png", "c-psbc-blank.png", (0.07, 0.172, 0.93, 0.232)),
     ("pilsaengbo-student.png", "c-psbc-wrong.png", (0.07, 0.232, 0.93, 0.328)),
     ("pilsaengbo-student.png", "c-psbc-circle.png", (0.08, 0.138, 0.70, 0.182)),
-    ("pilsaengbo-grammar.png", "h-psbc-gram.png", (0.04, 0.042, 0.96, 0.318)),
-    ("pilsaengbo-grammar.png", "c-psbc-gram-write.png", (0.04, 0.612, 0.96, 0.765)),
+    ("pilsaengbo-grammar.png", "h-psbc-gram.png", (0.04, 0.044, 0.96, 0.320)),
+    ("pilsaengbo-grammar.png", "c-psbc-gram-write.png", (0.04, 0.610, 0.96, 0.760)),
     ("pilsaengbo.png", "c-psbc-filled.png", (0.07, 0.168, 0.93, 0.228)),
 
     # 04 필생보 독학용
