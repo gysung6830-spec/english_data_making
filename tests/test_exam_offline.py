@@ -1846,6 +1846,15 @@ def test_new_type_guards() -> None:
     for bad_word in ("not", "never", "without", "neither"):
         p_bad = [_Pair(a=bad_word, b="retain", a_ok=True, b_ok=True)]
         assert chk_neg(p_bad), bad_word                 # 부정어 자체는 선지에 못 온다
+    # 긍정 쪽도 같다 — 정도·범위를 정하는 낱말 하나가 문장의 방향을 통째로 정한다
+    from exam.shape import check_summary_scalar as chk_sc
+    for bad_word in ("always", "all", "only", "must", "more", "some"):
+        p_bad = [_Pair(a=bad_word, b="retain", a_ok=True, b_ok=True)]
+        assert chk_sc(p_bad), bad_word
+    assert chk_sc(ok_pairs) == [], chk_sc(ok_pairs)
+    # 뜻을 지닌 부사·구 선지는 통과(오탐 없음)
+    assert chk_sc([_Pair(a="remarkably", b="supplement", a_ok=True, b_ok=True)]) == []
+    assert chk_sc([_Pair(a="more flexible", b="retain", a_ok=True, b_ok=True)]) == []
     # 전체 검사에도 물려 있다
     from exam.shape import check_summary_pairs as chk_sum
     mixed = [_Pair(a="not", b="retain", a_ok=True, b_ok=True),
@@ -1854,6 +1863,12 @@ def test_new_type_guards() -> None:
              _Pair(a="fully", b="lose", a_ok=False, b_ok=False),
              _Pair(a="fully", b="retain", a_ok=False, b_ok=True)]
     assert any("부정어" in b for b in chk_sum(mixed, 1)), chk_sum(mixed, 1)
+    scal = [_Pair(a="always", b="retain", a_ok=True, b_ok=True),
+            _Pair(a="always", b="lose", a_ok=True, b_ok=False),
+            _Pair(a="rarely", b="retain", a_ok=False, b_ok=True),
+            _Pair(a="rarely", b="lose", a_ok=False, b_ok=False),
+            _Pair(a="rarely", b="retain", a_ok=False, b_ok=True)]
+    assert any("정도·범위" in b for b in chk_sum(scal, 1)), chk_sum(scal, 1)
 
     # ④ 무관한 문장 ----------------------------------------------------------
     sents = DNA.sentences
@@ -1862,7 +1877,7 @@ def test_new_type_guards() -> None:
     ok = ("Because living cells needed to store information, they gradually shrank "
           "until they could survive in bone and ice.")
     assert chk_irr(ok, sents) == [], chk_irr(ok, sents)     # 지문 낱말 + 인과 뒤집기
-    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 부정어·무관한 문장) 통과")
+    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 부정어/정도어·무관한 문장) 통과")
 
 
 def test_tiering_and_escalation() -> None:

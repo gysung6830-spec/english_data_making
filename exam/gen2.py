@@ -163,6 +163,13 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
          "(A)=affordable. 부정어가 정답이 되면 학생이 어휘를 몰라도 긍정·부정만 판단해 풀어 버리고, "
          "선지에 따라 문장의 논리 방향까지 뒤집혀 오답이 '지문과 정반대 진술'이 됩니다.\n"
          "  (unlikely·impossible 처럼 뜻이 부정적인 '내용어'는 괜찮습니다 — 금지는 부정어 자체입니다.)\n"
+         "- [정도어 금지] 같은 이유로 always·all·only·must·more·some 처럼 '정도·범위·확신을 "
+         "정하는 낱말'도 선지에 단독으로 넣지 마세요. 낱말 하나가 문장의 방향을 통째로 정해 버려 "
+         "학생이 '지문이 단정했나 유보했나'만 판단해 풀게 됩니다. 이런 낱말도 요약문 문장 쪽에 "
+         "박아 두세요. 예) 나쁨: 'DNA will ___(A)___ replace hard drives' + (A)=always / "
+         "좋음: 'DNA will only ___(A)___ the archives we already keep' + (A)=supplement.\n"
+         "  빈칸에 넣을 것은 형용사·명사·동사 같은 '내용어'입니다(remarkably 처럼 뜻을 지닌 부사는 "
+         "괜찮습니다).\n"
          "answer_no·reason 은 한국어.\n\n{ctx}")
     def _chk(o: EOut) -> None:
         bad = shape.check_summary_pairs(o.pairs, o.answer_no)

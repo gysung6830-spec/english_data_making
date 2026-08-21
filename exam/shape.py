@@ -117,6 +117,45 @@ def check_summary_negation(pairs) -> list[str]:
     return []
 
 
+# 정도·범위·확신을 결정하는 기능어 — 부정어와 같은 이유로 빈칸의 정답이 되면 안 된다.
+# 낱말 하나가 문장 전체의 방향을 정해 버려서, 학생이 어휘를 몰라도 '지문이 단정했나
+# 유보했나'만 판단하면 답이 나온다.
+#   (remarkably·extremely 같은 '정도를 나타내되 뜻을 지닌' 부사는 넣지 않는다 — 정상 선지다.)
+SCALARS = {
+    # 빈도·절대성
+    "always", "all", "every", "everything", "everyone", "entirely", "completely",
+    "totally", "absolutely", "wholly", "fully", "any", "both", "each",
+    "some", "sometimes", "often", "usually", "occasionally", "partly",
+    "partially", "mostly", "generally", "frequently",
+    # 조동사
+    "must", "should", "can", "could", "may", "might", "will", "would", "shall",
+    # 한정·초점
+    "only", "just", "merely", "simply", "even", "also", "still", "already",
+    # 정도·비교
+    "more", "less", "most", "least", "very", "quite", "rather", "too", "much",
+}
+
+
+def check_summary_scalar(pairs) -> list[str]:
+    """요약문 빈칸의 선지에 '정도·범위를 정하는 기능어'가 들어 있지 않은가.
+
+    check_summary_negation 과 같은 이유다. 부정어든 always·only·must 든, 낱말 하나가
+    문장의 논리 방향을 통째로 정해 버리면 요약문 유형이 '방향 고르기'로 무너진다.
+    그런 낱말은 요약문 문장 쪽에 박아 두고, 빈칸에는 내용어를 둬야 한다.
+    """
+    hit = set()
+    for p in pairs or []:
+        for label in ("a", "b"):
+            ws = _words(str(getattr(p, label, "")))
+            if len(ws) == 1 and ws[0] in SCALARS:   # 선지가 그 낱말 '하나'일 때만
+                hit.add(ws[0])
+    if hit:
+        return [f"선지에 정도·범위를 정하는 낱말({', '.join(sorted(hit))})이 그대로 들어 있습니다 "
+                "— 이런 낱말은 요약문 문장 쪽에 두고 빈칸에는 내용어를 넣어야 합니다"
+                "(그러지 않으면 어휘를 몰라도 '단정이냐 유보냐'만 판단해 풀립니다)."]
+    return []
+
+
 def check_summary_pairs(pairs, answer_no: int) -> list[str]:
     """요약문 (A)(B) 낱말쌍이 '읽지 않고도' 풀리지 않는가.
 
@@ -141,7 +180,7 @@ def check_summary_pairs(pairs, answer_no: int) -> list[str]:
                        "요약문을 읽지 않고도 답이 드러납니다.")
     if len({(a, b) for a, b in zip(col_a, col_b)}) != len(pairs):
         bad.append("같은 (A)(B) 조합이 두 번 나옵니다.")
-    return bad + check_summary_negation(pairs)
+    return bad + check_summary_negation(pairs) + check_summary_scalar(pairs)
 
 
 def check_order_shuffle(display: list[int]) -> list[str]:
