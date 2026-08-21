@@ -386,14 +386,14 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
         badge = ""
         if it.signature:
             badge = (f'<span class="chip" style="background:{P["gold"]};'
-                     f'color:{P["green_900"]};padding:{u * .55:.0f}px {u * 1.3:.0f}px;'
-                     f'font-size:{u * 1.45:.0f}px;letter-spacing:.10em">SIGNATURE</span>')
+                     f'color:{P["green_900"]};padding:{u * .40:.0f}px {u * .95:.0f}px;'
+                     f'font-size:{u * 1.22:.0f}px;letter-spacing:.08em">SIGNATURE</span>')
         # 주문 제작은 배포 방식이 다르다. 눌러서 받는 자료와 섞이면 안 된다.
         if it.made_to_order:
             badge += (f'<span class="chip" style="border:1px solid {t["accent"]};'
-                      f'color:{t["accent"]};padding:{u * .5:.0f}px {u * 1.2:.0f}px;'
-                      f'font-size:{u * 1.45:.0f}px;margin-left:{u * .6:.0f}px">'
-                      f'자료 제작 주문</span>')
+                      f'color:{t["accent"]};padding:{u * .34:.0f}px {u * .9:.0f}px;'
+                      f'font-size:{u * 1.22:.0f}px;margin-left:{u * .5:.0f}px">'
+                      f'주문제작자료</span>')
 
         # 판형을 사진 라벨로 이미 보여 주는 자료는 그 판형 설명을 건너뛴다.
         # 사진 밑에 '원문만'이라 써 놓고 아래에 또 '원문만 —' 을 쓰면 같은 말이 두 번이다.
@@ -407,7 +407,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             for head, desc, *_ in src_pts[:points_n])
 
         head_el = f"""<div style="display:flex;align-items:baseline;flex-wrap:wrap;
-                 gap:{u * 1.0:.0f}px {u * 1.4:.0f}px">
+                 gap:{u * .8:.0f}px {u * 1.1:.0f}px">
               <div class="wm" style="font-size:{u * 2.0:.0f}px;color:{t['accent']}">{it.no}</div>
               <div class="ko" style="font-size:{u * 3.5:.0f}px;color:{t['fg']};
                    white-space:nowrap">{it.name}</div>
@@ -583,9 +583,9 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                  f'letter-spacing:.14em">SIGNATURE · 시그니처 자료</span>')
     if item.made_to_order:
         badge += (f'<span class="chip" style="border:1px solid {t["accent"]};'
-                  f'color:{t["accent"]};padding:{u * .95:.0f}px {u * 1.9:.0f}px;'
-                  f'font-size:{u * 1.8:.0f}px;margin-left:{u * 1.0:.0f}px">'
-                  f'자료 제작 주문</span>')
+                  f'color:{t["accent"]};padding:{u * .9:.0f}px {u * 1.8:.0f}px;'
+                  f'font-size:{u * 1.7:.0f}px;margin-left:{u * 1.0:.0f}px">'
+                  f'주문제작자료</span>')
 
     def point_block(pt) -> str:
         """특징 한 줄 + 그 특징이 보이는 지면 조각.
