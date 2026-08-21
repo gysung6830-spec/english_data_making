@@ -13,7 +13,7 @@ from . import verify as _verify
 from ._concurrent import run_parallel
 from .generators import (
     content, grammar, grammar_count, insert, irrelevant, order, pair_odd,
-    short_answer, title, topic, vocab,
+    title, topic, vocab,
 )
 from .llm import ClaudeClient
 from .types import (
@@ -27,7 +27,6 @@ from .types import (
     GRAMMAR,
     INSERT,
     ORDER,
-    SHORT_ANSWER,
     TOPIC,
     VOCAB,
 )
@@ -40,7 +39,6 @@ GENERATORS = {
     VOCAB: vocab,
     GRAMMAR: grammar,
     CONTENT: content,
-    SHORT_ANSWER: short_answer,
     TITLE: title,
     IRRELEVANT: irrelevant,
     GRAMMAR_COUNT: grammar_count,
@@ -89,7 +87,7 @@ def _base(t: str) -> str:
 def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
               content_difficulty: str = "hard",
               passage_index: int = 0, slots=None):
-    """산문형 유형(주제·내용일치·어법·어휘·순서·삽입·서술형) 하나를 만드는 '무인자 함수'.
+    """산문형 유형(주제·제목·내용일치·어법·어휘·순서·삽입 등) 하나를 만드는 '무인자 함수'.
 
     slots 는 정답 위치 분산용 슬롯표. 생략하면 이 계열만 쓰던 옛 슬롯표를 쓴다.
     """

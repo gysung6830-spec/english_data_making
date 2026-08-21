@@ -108,14 +108,31 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
 
 def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
                    methods: dict[str, str], max_retries: int = 1,
-                   logger=None) -> dict[str, tuple[str, str, list[str]]]:
-    """어휘 여러 문제를 '차례로' 만들어 밑줄이 겹치지 않게 한다.
+                   logger=None, first=None,
+                   ) -> dict[str, tuple[str, str, list[str]]]:
+    """정본에 밑줄을 치는 문항들을 '차례로' 만들어 밑줄이 겹치지 않게 한다.
 
-    methods: {슬롯키: 방식}. 앞 문제가 쓴 낱말을 다음 문제에 '피할 낱말'로 넘긴다.
+    한 지문에 밑줄 문항이 여럿이면 저마다 '눈에 띄는 낱말'을 고르기 때문에 같은 자리에
+    몰린다. 앞 문항이 쓴 낱말을 다음 문항에 '피할 낱말'로 넘겨 그것을 막는다.
+
+    methods: {어휘 슬롯키: 방식}
+    first:   [(슬롯키, 만드는 함수)] — 어휘보다 먼저 만들 밑줄 문항(짝짓기 등).
+             함수는 avoid(피할 낱말 집합)를 받아 (q, a, flags, 쓴 낱말들)을 돌려준다.
     한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
     """
     used: set[str] = set()
     out: dict[str, tuple[str, str, list[str]]] = {}
+
+    for slot, make in (first or []):
+        try:
+            q, a, flags, words = make(used)
+        except Exception as e:      # noqa: BLE001 — 슬롯 단위 격리
+            if logger:
+                logger.warning("[%s] 생성 실패: %s", slot, e)
+            continue
+        used |= words
+        out[slot] = (q, a, flags)
+
     for slot, method in methods.items():
         try:
             q, a, flags, words = generate(client, analysis, body,

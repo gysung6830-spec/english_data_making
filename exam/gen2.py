@@ -187,13 +187,22 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
 def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '빈칸추론(F)'을 만드세요. 지문 전체를 보여주되, 글의 '가장 핵심(주제)'을 담은 "
          "어구 하나를 blank_phrase 로 지정합니다(지문에 그대로 있는 표현). 그 어구가 빈칸이 됩니다.\n"
-         "choices 5개는 영어. 정답은 blank_phrase 와 '의미가 동일한 정확한 유의어 패러프레이즈'여야 "
-         "한다(원문 어구를 그대로 쓰지 말 것, 뜻이 어긋나도 안 됨). 오답 4개는 소재는 쓰되 각각 "
+         "choices 5개는 영어.\n"
+         "[정답은 반드시 패러프레이즈] 정답은 blank_phrase 와 뜻이 같되 **지문에 없던 표현**이어야 "
+         "합니다. 지문에 그대로 나오는 어구를 정답으로 쓰면, 학생이 글을 이해하지 않고 '지문에서 본 "
+         "표현'만 찾아 고르게 되어 문항이 무너집니다.\n"
+         "  · 빈칸 어구의 낱말을 그대로 두고 어순만 바꾼 것은 패러프레이즈가 아닙니다.\n"
+         "  · 핵심 낱말은 유의어로 갈아 끼우세요(예: hold a huge quantity → accommodate a vast volume).\n"
+         "  · 다만 뜻이 어긋나서는 안 됩니다 — 빈칸에 넣으면 원문과 같은 의미가 되어야 합니다.\n"
+         "오답 4개는 소재는 쓰되 각각 "
          "'확실히' 모순·무관이어서 정답으로 읽힐 여지가 없어야 한다. answer_no·reason·wrong_reasons 는 "
          "한국어.\n\n{ctx}")
     def _chk(o: FOut) -> None:
         bad = (shape.check_phrase_in_passage(o.blank_phrase, analysis.sentences, "빈칸 어구")
                + shape.check_choice_shape(o.choices, o.answer_no, "선지"))
+        if 1 <= o.answer_no <= len(o.choices):
+            bad += shape.check_blank_answer_paraphrase(
+                o.choices[o.answer_no - 1], o.blank_phrase, analysis.sentences)
         if bad:
             raise ValueError("빈칸추론 문항 설계 결함 — " + " ".join(bad))
 

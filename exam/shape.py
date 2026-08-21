@@ -194,6 +194,20 @@ def _content(text: str) -> set[str]:
     return {w for w in _words(text) if len(w) > 3}
 
 
+# 비교용 내용어 — 어미(s·es·ed·ing)를 떼어 어형 차이를 흡수한다.
+def _content_words(text: str) -> set[str]:
+    out = set()
+    for w in _words(text):
+        if len(w) < 4:
+            continue
+        for suf in ("ing", "es", "ed", "s"):
+            if len(w) > len(suf) + 2 and w.endswith(suf):
+                w = w[: -len(suf)]
+                break
+        out.add(w)
+    return out
+
+
 def check_rewrite(rewritten: list[str], original: list[str],
                   min_changed: float = 0.6, min_topic: float = 0.25) -> list[str]:
     """어법 문항용으로 '다시 쓴 지문'이 제구실을 하는가.
@@ -222,4 +236,39 @@ def check_rewrite(rewritten: list[str], original: list[str],
     if a and b and len(a & b) / len(a | b) < min_topic:
         bad.append("다시 쓴 지문이 원문과 너무 동떨어졌습니다 — 표현만 바꾸고 내용은 "
                    "그대로 유지해야 합니다.")
+    return bad
+
+
+def check_blank_answer_paraphrase(answer: str, blank_phrase: str,
+                                  sentences: list[str], min_new: float = 0.5) -> list[str]:
+    """빈칸추론의 정답이 '지문에 있던 어구 그대로'가 아닌가.
+
+    빈칸은 지문의 핵심 어구를 지운 자리다. 그 자리에 원문 어구를 그대로 돌려놓는 것이
+    정답이면, 학생은 글을 이해하지 않고 '지문에서 본 표현'만 찾아 고른다. 정답은 그 어구를
+    '다른 말로 바꿔 쓴 것'이어야 글의 논지를 파악했는지가 드러난다.
+
+    ① 정답 문구가 지문에 그대로 나오면 실격.
+    ② 정답의 내용어가 대부분 빈칸 어구에서 온 것이면(새 낱말이 적으면) 실격 —
+       어순만 바꾼 것은 패러프레이즈가 아니다.
+    """
+    a = _content_words(answer)
+    if not a:
+        return ["정답 선지에 내용어가 없습니다."]
+    body = " ".join(_words(" ".join(sentences)))
+    if " ".join(_words(answer)) in body:
+        return [f"정답('{answer.strip()}')이 지문에 그대로 나옵니다 — 빈칸 어구를 다른 말로 "
+                "바꿔 쓴 표현이어야 합니다."]
+    bad: list[str] = []
+    blank = _content_words(blank_phrase)
+    if blank:
+        new = a - blank
+        if len(new) / len(a) < min_new:
+            bad.append(f"정답이 빈칸 어구('{blank_phrase.strip()}')의 낱말을 거의 그대로 "
+                       f"씁니다(새 낱말 {len(new)}/{len(a)}) — 어순만 바꾼 것은 "
+                       "패러프레이즈가 아닙니다.")
+    # 지문에 있는 내용어만으로 이루어졌으면 '본 표현 찾기'가 되어 버린다
+    passage = _content_words(" ".join(sentences))
+    if a and a <= passage:
+        bad.append("정답의 낱말이 모두 지문에 있는 것뿐입니다 — 유의어로 바꾼 낱말이 "
+                   "적어도 하나는 있어야 합니다.")
     return bad

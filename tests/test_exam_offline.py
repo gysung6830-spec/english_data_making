@@ -96,7 +96,7 @@ def test_single_source_shared() -> None:
     """
     p = demo_passages()[0]  # DNA
     marker = "vanishingly small space"      # 정본에만 있는 특징 어구
-    for t in ("order", "insert", "topic", "content", "short_answer"):
+    for t in ("order", "insert", "topic", "content"):
         assert marker in p.q[t], f"{t} 본문이 정본을 공유하지 않음"
     # 정본 문장이 실제로 각 유형에 그대로 들어갔는지(어휘는 밑줄 단어만 달라짐)
     assert "millions of ordinary hard drives combined" in p.q["order"]
@@ -572,11 +572,12 @@ _FAKE = {
         answer_no=1, reason="이유."),
     "PairOddOut": lambda: PairOddOut(
         # 짝짓기는 '정본 지문' 위에 낸다(어법 유형과 달리 다시 쓰지 않는다)
-        marks=[WordMark(sent_no=1, word="introduces", shown="introduces"),
-               WordMark(sent_no=2, word="adds", shown="add"),          # ⓑ 어법 오류
-               WordMark(sent_no=3, word="gives", shown="gives"),
-               WordMark(sent_no=4, word="draws", shown="scatters"),    # ⓓ 어휘 오류
-               WordMark(sent_no=5, word="answers", shown="answers")],
+        # 짝짓기는 밑줄 묶음의 '첫' 문항이라, 어휘 3종과 겹치지 않는 낱말을 쓴다
+        marks=[WordMark(sent_no=1, word="clearly", shown="clearly"),
+               WordMark(sent_no=2, word="second", shown="seconds"),    # ⓑ 어법 오류
+               WordMark(sent_no=3, word="third", shown="third"),
+               WordMark(sent_no=4, word="thing", shown="nothing"),     # ⓓ 어휘 오류
+               WordMark(sent_no=5, word="objection", shown="objection")],
         grammar_no=2, vocab_no=4,
         reasons=[GrammarReason(no=i, text="근거") for i in range(1, 6)],
         reason="부적절한 것은 2개."),
@@ -593,8 +594,14 @@ _FAKE = {
         reason="논지에 기여하지 않음.",
         wrong_reasons=[WrongReason(no=1, text="앞을 받음"), WrongReason(no=2, text="예시로 뒷받침"),
                        WrongReason(no=4, text="연결사로 이어짐"), WrongReason(no=5, text="결론으로 맺음")]),
+    # 빈칸추론 정답은 '지문에 없던 표현'이어야 한다 — 가짜 출력도 그 조건을 지킨다
     "FOut": lambda: FOut(
-        blank_phrase="concrete example", choices=["f1", "f2", "f3", "f4", "f5"],
+        blank_phrase="concrete example",
+        choices=["a broad summary of the argument",
+                 "a vivid illustration of the claim",     # 정답 — 유의어로 바꿔 쓴 표현
+                 "a formal objection to the thesis",
+                 "a passing remark about the details",
+                 "a numeric estimate of the total cost"],
         answer_no=2, reason="이유.",
         wrong_reasons=[WrongReason(no=1, text="모순"), WrongReason(no=3, text="무관"),
                        WrongReason(no=4, text="모순"), WrongReason(no=5, text="무관")]),
@@ -1220,16 +1227,16 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     ps = _fresh()
     ps[0].flag("topic", [review.FIX_ORDER])
     ps[0].flag("grammar", ["오답 근거 약함: …"])
-    ps[1].flag("short_answer", [review.FIX_SNAP])         # 둘째 지문 → +유형 수
+    ps[1].flag("D", [review.FIX_SNAP])                    # 둘째 지문 → +유형 수
     items = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
                                     labels=MERGED_LABELS)
     by_no = {it["no"]: it for it in items}
     assert review.FIX_ORDER in by_no[_i["topic"]]["reasons"]
     assert "오답 근거 약함: …" in by_no[_i["grammar"]]["reasons"]
     assert by_no[_i["grammar"]]["label"] == "어법"
-    n_short = _i["short_answer"] + len(MERGED_ORDER)      # 둘째 지문의 서술형
-    assert review.FIX_SNAP in by_no[n_short]["reasons"]
-    assert by_no[n_short]["label"] == "서술형"
+    n_last = _i["D"] + len(MERGED_ORDER)                  # 둘째 지문의 어순 배열
+    assert review.FIX_SNAP in by_no[n_last]["reasons"]
+    assert by_no[n_last]["label"] == "어순 배열"
     assert max(by_no) == 2 * len(MERGED_ORDER), sorted(by_no)   # 지문 2개 × 유형 수
 
     # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
@@ -1620,28 +1627,6 @@ def test_precheck_harness() -> None:
     assert "생성 전 확인" not in r2.get_data(as_text=True)   # 깨끗하면 바로 진행
     print("✓ 사전 점검 하니스(정본 오염 사전 차단·오탐 없음·웹앱 경고) 통과")
 
-
-def test_short_answer_q2_prompt_clean() -> None:
-    """서술형 (2) 어순배열 발문에 내부 용어('[문장] 목록')가 새어 나오면 정리한다."""
-    from exam.generators.short_answer import _clean_q2_prompt, _Q2_FALLBACK
-
-    # 내부 용어 누출 → 자연스러운 발문으로 정리(지시 유지)
-    leaked = ("다음 단어들을 어법과 문맥에 맞게 배열하여 [문장] 목록의 원래 문장을 "
-              "완성하시오. (동사는 원형으로 제시되어 있으므로 알맞은 형태로 바꿀 것)")
-    cleaned = _clean_q2_prompt(leaked)
-    assert "[문장]" not in cleaned and "목록" not in cleaned
-    assert "배열하여 원래 문장을 완성" in cleaned
-
-    # 이미 깨끗하면 그대로 둔다
-    ok = "다음 단어들을 어법과 문맥에 맞게 배열하여 완전한 문장을 만드시오."
-    assert _clean_q2_prompt(ok) == ok
-
-    # 지시가 뭉개지거나 비면 표준 발문으로 대체
-    assert _clean_q2_prompt("위 [문장] 목록에서 고른 문장을 쓰시오.") == _Q2_FALLBACK
-    assert _clean_q2_prompt("") == _Q2_FALLBACK
-    print("✓ 서술형 (2) 발문 내부용어 누출 정리 통과")
-
-
 def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     """재출력 시 '지문 번호 다시 넣기' — 입력한 라벨이 순서대로 [10-A]처럼 반영된다."""
     import json as _json
@@ -1698,25 +1683,31 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam.types import TYPE_ORDER
 
     # ① 구성 — 15문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
-    assert len(MERGED_ORDER) == 17, MERGED_ORDER
-    assert len(set(MERGED_ORDER)) == 17                    # 같은 슬롯이 두 번 나오지 않는다
+    assert len(MERGED_ORDER) == 16, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 16                    # 같은 슬롯이 두 번 나오지 않는다
     assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
     # 옛 A(짝짓기)는 pair_odd 로 되살렸다 — 뺐던 3유형 중 유일하게 되돌아온 것
     assert "pair_odd" in MERGED_ORDER
+    # 새로 만든 슬롯키(옛 A 는 pair_odd 라는 새 키로 다시 들였다)
     _added = {"title", "irrelevant", "vocab_2", "vocab_3", "grammar_count", "pair_odd"}
+    _dropped = {"short_answer"}          # 어순 배열·요약문과 겹쳐 뺐다
     assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
-            == (set(MERGED_ORDER) - _added) | set(EXCLUDED))
+            == (set(MERGED_ORDER) - _added) | set(EXCLUDED) | _dropped)
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
     assert MERGED_ORDER == ("topic", "title", "B", "content",
                             "grammar", "grammar_count", "pair_odd",
                             "vocab_2", "vocab", "vocab_3", "F", "irrelevant",
-                            "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
+                            "order", "insert", "E", "D"), MERGED_ORDER
     # 어법 두 문항은 발문이 서로 달라야 한다(같은 문제를 두 번 내는 것이 아니다)
     assert MERGED_PROMPTS["grammar"] != MERGED_PROMPTS["grammar_count"]
     assert "개수" in MERGED_PROMPTS["grammar_count"]
-    assert MERGED_ORDER[-2:] == ("D", "short_answer")       # 서술형 계열은 맨 뒤
+    assert MERGED_ORDER[-1] == "D"                          # 서술형 계열은 맨 뒤
+    # 서술형은 뺐다 — (2)는 어순 배열과, (3)은 요약문과 과제가 똑같았다
+    assert "short_answer" not in MERGED_ORDER
+    from exam import pipeline as _pl
+    assert "short_answer" not in _pl.GENERATORS            # 생성 경로도 없다
     # 어휘 3종은 발문이 같고 라벨도 '어휘'로 같다(문제 만드는 방식만 다르다)
     _v3 = ("vocab_2", "vocab", "vocab_3")
     assert len({MERGED_PROMPTS[t] for t in _v3}) == 1
@@ -1742,12 +1733,12 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert seen.get("TitleOut") == 2 and seen.get("IrrelevantOut") == 2, seen
     assert seen.get("VerifyOut") == 20, seen                    # 자기검증 지문당 10회
 
-    # ③ 지문마다 17문항이 순서대로, 라벨도 보존된다
+    # ③ 지문마다 16문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
 
-    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 17 = 34번까지)
+    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 16 = 32번까지)
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "merged.pdf"
     renderer.render_pdf(ps, out, header_note="통합",
@@ -1782,7 +1773,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
     assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
-    assert "지문당 17문항" in home
+    assert "지문당 16문항" in home
     r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
@@ -1793,7 +1784,9 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
     assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 10
-    print("✓ 변형문제 통합본(17문항·제목·무관한문장·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
+    # 짝짓기는 '밑줄 묶음' 안에서 만들어지지만 자기검증은 빠뜨리지 않는다
+    assert "pair_odd" in _v.HIGH_RISK
+    print("✓ 변형문제 통합본(16문항·제목·무관한문장·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
 
 
 def test_new_type_guards() -> None:
@@ -1810,7 +1803,7 @@ def test_new_type_guards() -> None:
     good = ["The Molecule That Outlasts Our Machines",
             "Why Cold Storage Beats Every Other Archive",
             "Reading the Genes of Ancient Animals",
-            "Hard Drives: Cheaper, Faster, Smaller",
+            "Cheaper Chips, Shorter Memories",
             "A Warning Against Trusting Digital Records"]
     assert chk_title(good) == [], chk_title(good)
     # 하나만 서술문(마침표로 끝남) → 잡힌다
@@ -1821,6 +1814,9 @@ def test_new_type_guards() -> None:
                chk_title(good[:4] + ["a warning against trusting digital records"]))
     assert chk_title(good[:4] + ["DNA"])          # 한 낱말짜리
     assert chk_title(good[:4] + [good[0]])        # 같은 선지 두 번
+    # 갈래 표지(물음표·콜론)를 섞으면 그 하나가 곧 답으로 보인다
+    assert any("물음표" in b for b in chk_title(good[:4] + ["Is Silicon Really the Future?"]))
+    assert any("콜론" in b for b in chk_title(good[:4] + ["Monoculture: The Hidden Cost"]))
     # 의문형으로 통일한 경우는 통과해야 한다(오탐 없음)
     q5 = ["Why Do Cells Keep Their Secrets?", "Can a Molecule Outlast a Machine?",
           "What Makes DNA So Durable?", "Where Should We Store Our Memories?",
@@ -2023,6 +2019,57 @@ def test_order_four_blocks() -> None:
     print("✓ 순서 배열 4덩어리(A~D)·짧은 지문 3덩어리 축소·선지 모양 통과")
 
 
+def test_overlap_and_paraphrase_guards() -> None:
+    """같은 지문 안에서 문항끼리 겹치는 것을 막는다.
+
+    ① 정본에 밑줄 치는 문항(짝짓기 + 어휘 3종)이 같은 낱말을 쓰지 않는다
+    ② 빈칸추론 정답이 '지문에 있던 어구 그대로'가 아니다
+    ③ 서술형이 빠져 어순 배열·요약문과의 과제 중복이 사라졌다
+    """
+    import collections
+    import re as _re
+
+    from exam.merged import MERGED_ORDER, build_passage_merged
+    from exam.shape import check_blank_answer_paraphrase as chk_para
+
+    # ① 밑줄이 겹치지 않는다 ------------------------------------------------
+    p = build_passage_merged(_FakeClient(), "dummy body")
+    marks = {}
+    for t in ("pair_odd", "vocab_2", "vocab", "vocab_3"):
+        assert t in p.q, t
+        marks[t] = [w.lower() for w in _re.findall(r"<u>(.*?)</u>", p.q[t])]
+    flat = [w for ws in marks.values() for w in ws]
+    dup = [w for w, c in collections.Counter(flat).items() if c > 1]
+    assert not dup, (dup, marks)
+    # 둘째 문항부터는 '피할 낱말'이 실제로 프롬프트에 실려 간다
+    seen_prompts = []
+
+    class _Peek(_FakeClient):
+        def structured(self, system, prompt, model_cls, **kw):
+            if model_cls.__name__ in ("VocabOut", "PairOddOut"):
+                seen_prompts.append((model_cls.__name__, prompt))
+            return super().structured(system, prompt, model_cls, **kw)
+
+    build_passage_merged(_Peek(), "dummy body")
+    later = [pr for _, pr in seen_prompts[1:]]
+    assert later and all("겹침 금지" in pr for pr in later), len(later)
+
+    # ② 빈칸추론 정답은 패러프레이즈여야 한다 -------------------------------
+    sents = ["What makes it remarkable is that it packs an enormous amount into a tiny space.",
+             "Researchers have begun to encode digital files into synthetic DNA."]
+    blank = "packs an enormous amount into a tiny space"
+    assert chk_para(blank, blank, sents)                       # 원문 그대로 → 실격
+    assert chk_para("into a tiny space packs an enormous amount", blank, sents)  # 어순만 바꿈
+    assert chk_para("encode digital files into synthetic DNA", blank, sents)     # 지문 다른 곳
+    ok = "accommodates a vast volume of data within a minuscule area"
+    assert chk_para(ok, blank, sents) == [], chk_para(ok, blank, sents)
+
+    # ③ 서술형이 빠졌다 — 어순 배열·요약문과의 중복이 사라졌다 --------------
+    assert "short_answer" not in MERGED_ORDER
+    assert "D" in MERGED_ORDER and "E" in MERGED_ORDER
+    print("✓ 밑줄 겹침 금지(짝짓기+어휘 3종)·빈칸 정답 패러프레이즈 강제 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2170,11 +2217,11 @@ if __name__ == "__main__":
     test_edge_guards()
     test_precheck_harness()
     test_short_answer_q3_summary_dedup()
-    test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
     test_new_type_guards()
     test_tiering_and_escalation()
     test_order_four_blocks()
+    test_overlap_and_paraphrase_guards()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

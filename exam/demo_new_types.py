@@ -32,7 +32,7 @@ def _dna() -> Passage:
             "Why Cold Storage Beats Every Other Archive",
             "The Molecule That Outlasts Our Machines",
             "Reading the Genes of Ancient Animals",
-            "Hard Drives: Cheaper, Faster, Smaller Every Year",
+            "Cheaper Chips, Shorter Memories",
             "A Warning Against Trusting Digital Records",
         ],
         answer_no=2,
@@ -181,7 +181,7 @@ def _star() -> Passage:
         s,
         choices=[
             "How to Spot a Star Performer Early",
-            "Promotion: Rewarding Talent the Right Way",
+            "Rewarding Talent the Only Way We Know",
             "The Best Player Rarely Makes the Best Coach",
             "Why Teams Stall When Budgets Shrink",
             "Personal Brilliance Is All a Company Needs",

@@ -1,4 +1,4 @@
-"""변형문제 통합본 — 수능 출제 유형을 한 벌로 덮는 17문항 세트.
+"""변형문제 통합본 — 수능 출제 유형을 한 벌로 덮는 16문항 세트.
 
 1회(7유형)와 2회(A~G)를 따로 뽑으면 사실상 같은 문제가 두 번 나온다.
 아래 3유형은 다른 유형이 이미 같은 능력을 묻고 있어 통합본에서 뺐다:
@@ -20,11 +20,15 @@
 따져야 해서 찍기가 통하지 않는다. 두 어법 문항은 각각 '다시 쓴 지문' 위에 서므로
 같은 밑줄을 두 번 묻지 않는다.
 
+서술형(short_answer)은 뺐다 — 세 소문항 중 (2)는 어순 배열(D)과, (3)은 요약문 빈칸(E)과
+과제가 똑같았다. 특히 (3)은 E 의 선지에 나온 낱말이 그대로 (3)의 제시어가 되어 답이
+새어 나갔다. 남은 (1) 한 문항을 위해 세 소문항을 다 만들 값어치가 없다.
+
 어법·어휘 짝짓기(pair_odd)는 옛 A 유형을 다시 들인 것이다. 처음에는 '어법과 어휘가
 각각 단독으로 있으니 중복'이라고 보고 뺐지만, 이 유형이 묻는 것은 어법도 어휘도 아닌
 **둘을 동시에, 짝으로** 짚는 능력이다. 하나만 찾아서는 답이 나오지 않아 찍기가 통하지
 않는다. 선지(짝 5개)는 코드가 만들어 정답 짝이 반드시 하나만 들어가게 한다.
-결과: 지문당 17문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
+결과: 지문당 16문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
 
 생성기는 새로 만들지 않는다 — 1회 계열은 pipeline, 2회 계열은 gen2 의 것을
 그대로 호출하고, 이 파일은 '어떤 유형을 어떤 순서로 낼지'만 정한다.
@@ -39,7 +43,6 @@ from .types import (
     GRAMMAR,
     INSERT,
     ORDER,
-    SHORT_ANSWER,
     TOPIC,
     GRAMMAR_COUNT,
     IRRELEVANT,
@@ -76,7 +79,6 @@ MERGED_ORDER: tuple[str, ...] = (
     INSERT,        # 문장 삽입     (38~39번)
     E,             # 요약문 빈칸    (40번)
     D,             # 어순 배열     (내신 서술형)
-    SHORT_ANSWER,  # 서술형        (내신 서술형)
 )
 
 # 통합하며 뺀 유형 → 그 자리를 대신하는 유형(검토·설명용).
@@ -94,7 +96,7 @@ MERGED_LABELS: dict[str, str] = {**TYPE_LABELS, **TYPE_LABELS2}
 def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
                          analysis=None, passage_index: int = 0,
                          strong_client=None) -> Passage:
-    """지문 원문 1개 → 통합 17문항이 채워진 Passage.
+    """지문 원문 1개 → 통합 16문항이 채워진 Passage.
 
     유형끼리는 서로 독립이므로 스레드로 동시에 생성한다.
     analysis 를 주면 분석 호출을 건너뛴다.
@@ -128,15 +130,24 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
                                logger=logger, passage_index=passage_index,
                                slots=slots)
 
-    # 어휘 3종은 밑줄이 겹치면 안 되므로 한 덩어리로 '차례로' 만든다(앞 문제가 쓴 낱말을
-    # 다음 문제에 피할 낱말로 넘긴다). 나머지 유형과는 여전히 동시에 돈다.
+    # 정본에 밑줄을 치는 문항들(짝짓기 + 어휘 3종)은 한 덩어리로 '차례로' 만든다.
+    # 저마다 '눈에 띄는 낱말'을 고르기 때문에 따로 만들면 같은 자리에 밑줄이 몰린다.
+    # 앞 문항이 쓴 낱말을 다음 문항에 '피할 낱말'로 넘겨 그것을 막는다.
+    # (어법 2종은 '다시 쓴 지문' 위에 서므로 이 묶음에 넣지 않는다 — 지문이 다르다.)
     vslots = {t: pipeline.VOCAB_METHODS[t]
               for t in MERGED_ORDER if t in pipeline.VOCAB_METHODS}
-    tasks = [(t, _task(t)) for t in MERGED_ORDER if t not in vslots]
-    if vslots:
+    underline = set(vslots)
+    first = []
+    if PAIR_ODD in MERGED_ORDER:
+        underline.add(PAIR_ODD)
+        first.append((PAIR_ODD, _pair_odd_maker(client, analysis, body, slots,
+                                                passage_index, max_retries, logger)))
+    tasks = [(t, _task(t)) for t in MERGED_ORDER if t not in underline]
+    if vslots or first:
         vc = tiering.EffortClient(client, tiering.effort_for(VOCAB))
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
-            vc, analysis, body, vslots, max_retries=max_retries, logger=logger)))
+            vc, analysis, body, vslots, max_retries=max_retries, logger=logger,
+            first=first)))
 
     results = run_parallel(tasks)
     results.update(results.pop("__vocab__", None) or {})
@@ -156,6 +167,47 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     if not passage.q:
         raise RuntimeError(f"[{passage.title}] 통합본 모든 유형 생성 실패")
     return passage
+
+
+def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retries: int,
+                    logger=None):
+    """짝짓기를 '밑줄 묶음'의 첫 문항으로 만드는 함수를 돌려준다(avoid 를 받는다).
+
+    이 유형은 묶음 안에서 만들어지므로 pipeline._gen_one_type 을 거치지 않는다.
+    그래서 자기검증(고위험 유형 재확인)을 여기서 직접 돌린다 — 빠뜨리면 짝짓기만
+    검수 없이 나가고, 검수에 걸려야 도는 상위 모델 승격도 일어나지 않는다.
+    """
+    from . import answer_spread, tiering
+    from . import verify as _verify
+    from .generators import pair_odd as _po
+
+    c = tiering.EffortClient(client, tiering.effort_for(PAIR_ODD))
+    apos = (answer_spread.pick(passage_index, slots[PAIR_ODD], len(slots),
+                               seed=answer_spread.seed_of(analysis.title))
+            if PAIR_ODD in slots else None)
+
+    def _make(avoid):
+        last: Exception | None = None
+        for attempt in range(2):
+            try:
+                q, a, fl, words = _po.generate(c, analysis, body, max_retries=max_retries,
+                                               answer_pos=apos, avoid=avoid, with_words=True)
+            except Exception as e:      # noqa: BLE001 — 유형 단위 격리
+                last = e
+                if logger:
+                    logger.warning("[%s] 생성 실패(시도 %d): %s", PAIR_ODD, attempt + 1, e)
+                continue
+            ok, why = _verify.verify(c, PAIR_ODD, q, a, max_retries=max_retries)
+            if not ok:
+                if attempt == 0:        # 한 번은 재생성으로 결함을 털어낸다
+                    if logger:
+                        logger.info("[%s] 자기검증 실패 → 재생성: %s", PAIR_ODD, why)
+                    continue
+                fl = list(fl) + [f"자동검증: {why or '정답 유일성·정오답 재확인'}"]
+            return q, a, fl, words
+        raise last or RuntimeError(f"'{PAIR_ODD}' 생성 실패")
+
+    return _make
 
 
 def _escalate(passage, strong_client, task_of, analysis, body, vslots,

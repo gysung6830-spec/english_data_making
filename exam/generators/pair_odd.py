@@ -73,13 +73,29 @@ def build_pairs(a: int, b: int, seed: int = 0) -> tuple[list[str], int]:
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
-             variant_hint: str = "") -> tuple[str, str, list[str]]:
+             variant_hint: str = "", avoid: set[str] | None = None,
+             with_words: bool = False):
+    """avoid: 같은 지문의 다른 밑줄 문항이 이미 쓴 낱말(겹치면 재요청).
+    with_words=True 면 (q, a, flags, 이 문항이 쓴 낱말들)을 돌려준다(밑줄 묶음용)."""
+    taken = {w.lower() for w in (avoid or set())}
+
     def _chk(out: PairOddOut) -> None:
         out.check()
+        dup = sorted({m.word.lower() for m in out.marks} & taken)
+        if dup:
+            raise ValueError(f"다른 밑줄 문항과 낱말이 겹칩니다: {', '.join(dup)}. "
+                             "겹치지 않는 낱말로 다시 고르세요.")
+
+    avoid_note = ""
+    if taken:
+        avoid_note = ("\n[겹침 금지] 같은 지문에 밑줄 문항이 여럿입니다. 아래 낱말은 다른 문항이 "
+                      "이미 밑줄로 썼으니 이번에는 하나도 쓰지 마세요.\n"
+                      f"피할 낱말: {', '.join(sorted(taken))}\n")
 
     out: PairOddOut = client.structured(
         system=SYSTEM,
-        prompt=(variant_hint + "\n" if variant_hint else "") + _PROMPT.format(ctx=context(analysis)),
+        prompt=((variant_hint + "\n" if variant_hint else "")
+                + _PROMPT.format(ctx=context(analysis)) + avoid_note),
         cache_prefix=context(analysis),
         model_cls=PairOddOut,
         max_tokens=3000,
@@ -98,5 +114,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     flags: list[str] = []
     q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices, flags=flags)
-    return q, a, flags + review.type_fit_flags(
-        getattr(analysis, "passage_type", "prose"), "A")
+    flags = flags + review.type_fit_flags(getattr(analysis, "passage_type", "prose"), "A")
+    if with_words:
+        return q, a, flags, {m.word.lower() for m in out.marks}
+    return q, a, flags
