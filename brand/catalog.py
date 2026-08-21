@@ -38,6 +38,7 @@ class Item:
     figures: int = 0             # 상세페이지에 넣을 사진 수. 0이면 build.MAX_FIGURES
     # ↑ 판형이 여럿인 자료는 그 판형을 다 보여 줘야 무슨 말인지 통한다
     signature: bool = False      # 시그니처 자료. 소개 이미지를 따로 크게 만든다
+    made_to_order: bool = False  # 받아 놓고 파는 게 아니라 주문받아 만드는 자료
     tables: list[tuple[str, list[tuple[str, str]]]] = field(default_factory=list)
     # ↑ (표 제목, [(왼쪽 칸, 오른쪽 설명)]) — 회차 구성·난이도 기준처럼 줄글로 풀면
     #   안 읽히는 것을 표로 보여 준다
@@ -205,6 +206,7 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="pilsaengbo-self",
+        made_to_order=True,
         no="04",
         name="필생보 · 독학용",
         en="Pilsaengbo for Self-Study",
@@ -398,6 +400,7 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="mock",
+        made_to_order=True,
         no="08",
         name="동형모의고사 4회",
         en="Mock Exam",
