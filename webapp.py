@@ -39,8 +39,10 @@ UPLOAD_DIR = ROOT / "web_uploads"
 OUTPUT_DIR = ROOT / "output"
 UPLOAD_DIR.mkdir(exist_ok=True)
 OUTPUT_DIR.mkdir(exist_ok=True)
-# 생성 모델은 Sonnet 고정(빠르고 우수·합리적 비용). 바꾸려면 MOCK_MODEL 환경변수만.
+# 생성 모델은 Sonnet(빠르고 합리적 비용). 2차 검수만 Opus로(하이브리드) — 판매 정확도↑.
+# 둘 다 환경변수로 교체 가능. REVIEW_MODEL 을 MODEL 과 같게 두면 단일 모델로 동작.
 MODEL = os.environ.get("MOCK_MODEL", "claude-sonnet-5")
+REVIEW_MODEL = os.environ.get("MOCK_REVIEW_MODEL", "claude-opus-4-8")
 
 ALLOWED = {".pdf", ".txt", ".md", ".hwp", ".hwpx"} | IMAGE_EXTS
 
@@ -550,9 +552,13 @@ def generate():
         return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
 
     client = None
+    review_client = None
     if not mock:
         from mockexam.core.llm import get_client
         client = get_client(key, MODEL)
+        # 검수 전용 클라이언트(Opus). 생성 모델과 같으면 별도로 만들지 않는다.
+        if REVIEW_MODEL and REVIEW_MODEL != MODEL:
+            review_client = get_client(key, REVIEW_MODEL)
 
     n_forms = max(1, min(int(request.form.get("n_forms") or 2), 2))
     warnings: list[str] = []
@@ -574,7 +580,7 @@ def generate():
         from mockexam.pipeline import generate_mock_forms
         results = generate_mock_forms(school, [str(p) for p in saved], n_forms=n_forms,
                                       difficulty=difficulty, grade=grade, client=client,
-                                      strict_certify=strict)
+                                      strict_certify=strict, review_client=review_client)
 
         first = results[0]
         form_diffs: list[str] = []

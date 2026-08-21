@@ -67,6 +67,7 @@ def generate_mock(
     variant: int = 0,
     avoid_pairs: set[tuple[str, str]] | None = None,
     strict_certify: bool = False,
+    review_client: Any = None,
 ) -> GenResult:
     """§8.5.5 생성 흐름. difficulty 는 '상/중/하' 또는 low/mid/high.
 
@@ -164,9 +165,11 @@ def generate_mock(
         report = verify(exam, blueprint, requested=diff, structural=structural)
 
     # [7] 의심문항(⚠) 2차 검수 — 무인 운영 오류 저감(플래그 붙은 문항만).
+    #     검수는 review_client(하이브리드: Opus)로, 재생성은 생성 client(Sonnet)로.
     #     strict_certify(판매용)면 반복 인증 후 남은 ⚠ 를 출력물에서 제거한다.
     if client is not None:
-        _review_flagged(exam, client, ctx, _regen, logs, strict=strict_certify)
+        _review_flagged(exam, review_client or client, ctx, _regen, logs,
+                        strict=strict_certify)
 
     # [8] 정답 번호 분산 — 한 번호에 쏠리거나 3연속되지 않게 고르게 재배치
     _rebalance_answers(exam)
@@ -205,6 +208,7 @@ def generate_mock_forms(
     max_regen: int = 2,
     workers: int = 8,
     strict_certify: bool = False,
+    review_client: Any = None,
 ) -> list[GenResult]:
     """지문 파일을 한 번만 로드해 N회분(A·B·C…) 완결형 세트를 만든다.
 
@@ -224,7 +228,7 @@ def generate_mock_forms(
                             passages=passages, form=chr(ord("A") + i),
                             variant=(i + 1 if n > 1 else 0),
                             avoid_pairs=set(used_pairs) if n > 1 else None,
-                            strict_certify=strict_certify)
+                            strict_certify=strict_certify, review_client=review_client)
         # 이 회차가 실제로 쓴 (지문,유형) 조합을 누적 → 다음 회차는 이를 피한다.
         for a in res.assignments:
             if a.passage_id:
