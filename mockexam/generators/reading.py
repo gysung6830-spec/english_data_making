@@ -93,11 +93,9 @@ def gen_title(item, passage, an, ctx):
 @register("blank_single")
 def gen_blank(item, passage, an, ctx):
     stem = ctx.stem("blank_single", "다음 빈칸에 들어갈 말로 가장 적절한 것은?")
-    instr = (DISTRACTOR_RULE + " 이 유형은 지문의 핵심 결론부를 '____'로 비우고 그 자리에 "
-             "들어갈 말을 5지선다로 고르게 한다. 따라서 '정답'은 빈칸에 들어갈 올바른 말"
-             "(지문 논지를 유의어로 표현), '오답 4개'는 위 원리대로 2개는 주제와 무관·"
-             "2개는 주제와 모순되게(지문 단어 활용) 구성하라. 지문의 핵심 결론부는 반드시 "
-             "'____'로 표시하라. 선지는 지문 언어(영어)로 작성하라.")
+    from .base import BLANK_RULE
+    instr = (BLANK_RULE + " 지문의 핵심 결론부는 반드시 '____'로 표시하라. "
+             "선지는 지문 언어(영어)로 작성하라.")
     mock_p = passage.text
     if an.sentences:
         mock_p = passage.text.replace(an.sentences[-1], "____________ (빈칸)")
