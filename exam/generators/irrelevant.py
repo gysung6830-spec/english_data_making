@@ -9,6 +9,8 @@
 """
 from __future__ import annotations
 
+import re
+
 from .. import build as B
 from .. import review
 from ..llm import SYSTEM, ClaudeClient
@@ -26,17 +28,27 @@ _PROMPT = """아래 '정본 지문'으로 '무관한 문장' 문제를 만드세
 - answer_no: 1~5 중 '무관한 문장'을 끼워 넣을 자리. 그 자리의 원문 문장은 버려집니다.
 - sentence: 그 자리에 넣을, 새로 쓴 영어 문장 1개(정답).
 
-[무관한 문장을 쓰는 법] — 이 유형의 핵심입니다.
-- '소재는 같게, 논지는 벗어나게' 만듭니다. 지문의 핵심어를 1~2개 그대로 써서 언뜻 어울려
-  보이게 하되, 필자가 밀고 가는 논지에는 기여하지 않아야 합니다.
-- 좋은 이탈 방식:
-  · 같은 소재의 '일반 상식·배경 설명'으로 빠지기(글의 주장과 무관한 사실 진술)
-  · 필자가 다루지 않는 '다른 측면'으로 화제 전환(예: 논지는 원인인데 비용·역사로 새기)
-  · 논지와 반대 방향의 조언·권고를 슬쩍 끼우기
-- 피할 것: 전혀 다른 소재(고양이·날씨 등)로 튀면 너무 쉬워집니다. 반대로 논지를 그대로
-  다시 말하면(패러프레이즈) 정답이 성립하지 않습니다.
-- 앞뒤 문장과 지시어·연결사가 어색하게 이어지지 않도록, 문장 자체는 자연스럽게 쓰세요.
-  (연결이 부자연스러워 티가 나면 문제가 아니라 오류가 됩니다.)
+[무관한 문장을 쓰는 법] — 이 유형의 핵심입니다. 두 가지를 '동시에' 지켜야 합니다.
+
+(가) 낱말은 지문에서 가져올 것 — 필수
+  · 지문에 실제로 나온 핵심 낱말을 '최소 두 개' 그대로 넣으세요(어형 변화는 허용).
+  · 전혀 다른 소재(고양이·날씨·출장비 등)로 튀면 학생이 읽지도 않고 찾아냅니다. 낱말만
+    보면 이 글의 문장처럼 보여야 합니다.
+
+(나) 논리는 어긋나게 할 것 — 필수
+  낱말이 같아도 '글이 밀고 가는 논지'에는 기여하지 않아야 합니다. 아래 방식으로 논리를
+  틀어 주세요(하나만 골라 쓰면 됩니다):
+  · 인과 뒤집기 — 지문이 A 때문에 B라고 했다면, B 때문에 A라고 쓰기
+  · 없던 인과 만들기 — 지문에 함께 나온 두 사실을 원인·결과로 엮어 버리기
+  · 조건·범위 바꾸기 — 지문이 '어떤 경우에'라고 한 것을 '항상·모든 경우에'로
+  · 평가 뒤집기 — 지문이 장점으로 든 것을 단점(또는 그 반대)으로 다루기
+  · 곁가지로 새기 — 같은 낱말을 쓰되 필자가 다루지 않는 측면(비용·역사·통계)으로
+
+[반드시 피할 것]
+  · 논지를 그대로 다시 말하기(패러프레이즈) — 그러면 정답이 성립하지 않습니다.
+  · 앞뒤와 지시어·연결사가 어긋나 문장 자체가 덜컹거리는 것 — 티가 나면 문제가 아니라
+    오류가 됩니다. 문장 하나만 떼어 읽으면 자연스러워야 하고, 논리를 따져야만 어긋난 것이
+    드러나야 합니다.
 
 [나머지 4문장] 원문 그대로 쓰이므로 당연히 흐름에 맞습니다.
 
@@ -52,6 +64,55 @@ _PROMPT = """아래 '정본 지문'으로 '무관한 문장' 문제를 만드세
 """
 
 
+# 낱말 겹침을 셀 때 무시할 기능어(이것만 겹치면 '지문 낱말을 썼다'고 볼 수 없다).
+_STOP = {
+    "the", "a", "an", "and", "or", "but", "if", "of", "in", "on", "at", "to", "for",
+    "with", "by", "from", "as", "is", "are", "was", "were", "be", "been", "being",
+    "it", "its", "this", "that", "these", "those", "they", "them", "their", "we",
+    "our", "you", "your", "he", "she", "his", "her", "not", "no", "can", "may",
+    "will", "would", "could", "should", "must", "have", "has", "had", "do", "does",
+    "did", "than", "then", "so", "such", "more", "most", "some", "many", "much",
+    "one", "also", "now", "when", "while", "into", "over", "out", "up", "there",
+}
+
+
+def _content_words(text: str) -> set[str]:
+    """비교용 내용어 집합 — 소문자화하고 흔한 어미(s·es·ed·ing)를 떼어 어형 차이를 흡수."""
+    out = set()
+    for w in re.findall(r"[A-Za-z][A-Za-z'-]*", text.lower()):
+        if len(w) < 3 or w in _STOP:
+            continue
+        for suf in ("ing", "es", "ed", "s"):
+            if len(w) > len(suf) + 2 and w.endswith(suf):
+                w = w[: -len(suf)]
+                break
+        out.add(w)
+    return out
+
+
+def check_irrelevant_sentence(sentence: str, sentences: list[str]) -> list[str]:
+    """끼워 넣을 문장이 '지문 낱말을 쓰되 논지에서 벗어나는가'를 본다.
+
+    낱말이 겹치지 않으면 학생이 읽지도 않고 찾아내고(너무 쉬움), 어느 한 문장과 거의
+    같으면 그건 무관한 문장이 아니라 원문 되풀이다(정답이 성립하지 않음).
+    """
+    bad: list[str] = []
+    new = _content_words(sentence)
+    if not new:
+        return ["끼워 넣을 문장에 내용어가 없습니다."]
+    passage = _content_words(" ".join(sentences))
+    shared = new & passage
+    if len(shared) < 2:
+        bad.append(f"지문에 나온 낱말을 {len(shared)}개만 썼습니다(2개 이상 필요) — "
+                   "소재가 동떨어져 읽지 않고도 답이 보입니다.")
+    for i, s in enumerate(sentences, 1):
+        own = _content_words(s)
+        if own and len(new & own) / len(new | own) >= 0.7:
+            bad.append(f"{i}번 문장과 거의 같습니다 — 원문 되풀이는 무관한 문장이 아닙니다.")
+            break
+    return bad
+
+
 def _extra(out: IrrelevantOut) -> None:
     if not (out.sentence or "").strip():
         raise ValueError("무관한 문장(sentence)이 비어 있습니다.")
@@ -65,6 +126,13 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     n = len(analysis.sentences)
     if n < 6:      # 도입문 1개 + ①~⑤ 5개 = 최소 6문장
         raise ValueError(f"무관한 문장 문제에는 문장이 6개 이상 필요합니다(현재 {n}개).")
+
+    def _check(out: IrrelevantOut) -> None:
+        _extra(out)
+        bad = check_irrelevant_sentence(out.sentence, analysis.sentences)
+        if bad:
+            raise ValueError("끼워 넣을 문장이 조건에 맞지 않습니다 — " + " ".join(bad))
+
     ctx = context(analysis)
     out: IrrelevantOut = client.structured(
         system=SYSTEM,
@@ -76,7 +144,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=IrrelevantOut,
         max_tokens=2500,
         max_retries=max_retries,
-        extra_validate=_extra,
+        extra_validate=_check,
     )
     # 범위를 벗어나면 조판 가능한 자리로 당겨 붙인다(문항을 버리지 않는다).
     start_no = min(max(out.start_no, 2), n - 4)

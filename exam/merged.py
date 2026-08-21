@@ -86,6 +86,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     from . import analyzer, answer_spread, difficulty, gen2, pipeline
     from . import review as _rv
     from ._concurrent import run_parallel
+    from .generators import vocab as _vocab
 
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
@@ -106,7 +107,17 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
                                logger=logger, passage_index=passage_index,
                                slots=slots)
 
-    results = run_parallel([(t, _task(t)) for t in MERGED_ORDER])
+    # 어휘 3종은 밑줄이 겹치면 안 되므로 한 덩어리로 '차례로' 만든다(앞 문제가 쓴 낱말을
+    # 다음 문제에 피할 낱말로 넘긴다). 나머지 유형과는 여전히 동시에 돈다.
+    vslots = {t: pipeline.VOCAB_METHODS[t]
+              for t in MERGED_ORDER if t in pipeline.VOCAB_METHODS}
+    tasks = [(t, _task(t)) for t in MERGED_ORDER if t not in vslots]
+    if vslots:
+        tasks.append(("__vocab__", lambda: _vocab.generate_group(
+            client, analysis, body, vslots, max_retries=max_retries, logger=logger)))
+
+    results = run_parallel(tasks)
+    results.update(results.pop("__vocab__", None) or {})
     for t in MERGED_ORDER:      # 수거는 완료순이라도 조립은 고정 순서대로
         res = results.get(t)
         if res is None:         # 이 유형만 최종 실패 → 건너뛰고 나머지는 살린다

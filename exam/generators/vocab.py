@@ -64,16 +64,37 @@ _PROMPT_NEGATION = """아래 '정본 지문'으로 '어휘(문맥상 부적절)'
 _PROMPTS = {SYNONYM: _PROMPT_SYNONYM, NEGATION: _PROMPT_NEGATION, ORIGINAL: _PROMPT_ORIGINAL}
 
 
+def _avoid_clause(taken: set[str]) -> str:
+    """이미 다른 어휘 문제가 밑줄로 쓴 낱말을 피하라는 지시문."""
+    if not taken:
+        return ""
+    words = ", ".join(sorted(taken))
+    return ("\n[겹침 금지] 같은 지문으로 어휘 문제를 여러 개 만드는 중입니다. 아래 낱말은 "
+            "다른 문제에서 이미 밑줄로 썼으니 이번 문제에서는 '하나도 쓰지 마세요'. 다른 "
+            f"낱말을 고르세요(품사가 달라도 됩니다).\n피할 낱말: {words}\n")
+
+
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
-             max_retries: int = 1, method: str = SYNONYM) -> tuple[str, str, list[str]]:
+             max_retries: int = 1, method: str = SYNONYM,
+             avoid: set[str] | None = None) -> tuple[str, str, list[str]]:
+    """avoid: 다른 어휘 문제가 이미 밑줄로 쓴 낱말(소문자). 겹치면 재요청한다."""
     prompt = _PROMPTS.get(method, _PROMPT_SYNONYM)
+    taken = {w.lower() for w in (avoid or set())}
+
+    def _extra(o: VocabOut) -> None:
+        dup = sorted({m.word.lower() for m in o.marks} & taken)
+        if dup:
+            raise ValueError(
+                f"다른 어휘 문제와 밑줄이 겹칩니다: {', '.join(dup)}. 겹치지 않는 낱말로 다시 고르세요.")
+
     out: VocabOut = client.structured(
         system=SYSTEM,
-        prompt=prompt.format(ctx=context(analysis)),
+        prompt=prompt.format(ctx=context(analysis)) + _avoid_clause(taken),
         cache_prefix=context(analysis),
         model_cls=VocabOut,
         max_tokens=2500,
         max_retries=max_retries,
+        extra_validate=_extra if taken else None,
     )
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     overrides = None
@@ -82,4 +103,28 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     flags: list[str] = []
     q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
                         overrides=overrides, flags=flags)
-    return q, a, flags
+    return q, a, flags, {m.word.lower() for m in out.marks}
+
+
+def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
+                   methods: dict[str, str], max_retries: int = 1,
+                   logger=None) -> dict[str, tuple[str, str, list[str]]]:
+    """어휘 여러 문제를 '차례로' 만들어 밑줄이 겹치지 않게 한다.
+
+    methods: {슬롯키: 방식}. 앞 문제가 쓴 낱말을 다음 문제에 '피할 낱말'로 넘긴다.
+    한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
+    """
+    used: set[str] = set()
+    out: dict[str, tuple[str, str, list[str]]] = {}
+    for slot, method in methods.items():
+        try:
+            q, a, flags, words = generate(client, analysis, body,
+                                          max_retries=max_retries, method=method,
+                                          avoid=used)
+        except Exception as e:      # noqa: BLE001 — 슬롯 단위 격리
+            if logger:
+                logger.warning("[%s] 어휘 생성 실패: %s", slot, e)
+            continue
+        used |= words
+        out[slot] = (q, a, flags)
+    return out

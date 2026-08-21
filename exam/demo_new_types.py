@@ -43,11 +43,12 @@ def _dna() -> Passage:
     # 무관한 문장 — 도입 1문장 뒤 ①~⑤, ③자리에 '소재는 같고 논지는 벗어난' 문장을 끼움
     p.set_qa(IRRELEVANT, *B.make_irrelevant(
         s, start_no=2, answer_no=3,
-        sentence=("The double helix structure of DNA was first described by scientists "
-                  "in the middle of the twentieth century."),
-        reason=("글은 '저장 매체로서 DNA의 밀도·내구성, 그리고 그것을 본뜬 연구'로 나아간다. "
-                "이중나선 구조가 언제 밝혀졌는가는 DNA를 소재로 삼았을 뿐 저장 매체라는 논지에 "
-                "전혀 기여하지 않는 배경 지식이라 흐름에서 벗어난다."),
+        sentence=("Because living cells needed to store information, they gradually "
+                  "shrank until they could survive in bone and ice."),
+        reason=("글은 'DNA가 정보를 엄청난 밀도로 담고 오래 견디므로 저장 매체로 쓸 만하다'는 "
+                "쪽으로 나아간다. 이 문장은 지문의 낱말(store information·bone and ice)을 그대로 "
+                "쓰지만 인과를 뒤집었다 — 지문은 '작아서 많이 담는다'고 했지 '담아야 해서 작아졌다'고 "
+                "한 적이 없다. 세포의 진화 원인은 필자의 논지가 아니다."),
         wrong={
             1: "①은 도입의 '정보를 저장한다'를 받아 '아주 작은 공간에 담는다'는 밀도로 나아간다.",
             2: "②는 ①의 밀도를 1그램이라는 구체적 수치로 뒷받침한다.",
@@ -110,11 +111,12 @@ def _star() -> Passage:
 
     p.set_qa(IRRELEVANT, *B.make_irrelevant(
         s, start_no=2, answer_no=4,
-        sentence=("Most large firms now run their hiring interviews online to save "
-                  "travel costs."),
-        reason=("글은 '최고 실무자 ≠ 최고 관리자'라는 논지를 통념 제시 → 반박 → 결과 순으로 편다. "
-                "온라인 면접과 출장비 절감은 채용이라는 소재만 스칠 뿐, 두 역할의 능력 차이라는 "
-                "논지에 아무 기여를 하지 않는다."),
+        sentence=("Companies promote their best performers precisely because coaching "
+                  "a team always rewards personal brilliance."),
+        reason=("글은 '두 자리가 정반대 능력을 요구한다'는 논지를 편다. 이 문장은 지문의 낱말"
+                "(promote·performers·coaching·personal brilliance)을 그대로 쓰지만 인과를 날조했다 — "
+                "지문은 코칭이 개인의 탁월함을 보상한다고 한 적이 없고, 오히려 그 둘을 정반대로 "
+                "대비한다. 논지를 뒷받침하기는커녕 뒤집는다."),
         wrong={
             1: "①은 도입의 승진 관행을 받아 그 밑에 깔린 가정(스타가 스타 상사가 된다)을 드러낸다.",
             2: "②는 however 로 그 가정을 반박하며 '정반대 능력'이라는 논점을 세운다.",

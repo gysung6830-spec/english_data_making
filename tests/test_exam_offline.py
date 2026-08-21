@@ -7,6 +7,7 @@
 """
 from __future__ import annotations
 
+import itertools
 import sys
 from pathlib import Path
 
@@ -439,6 +440,18 @@ def test_analyzer_uses_real_passage() -> None:
     print("✓ 분석기: 넣은 지문만 사용(환각 무시) 통과")
 
 
+# 어휘 3종이 서로 다른 낱말에 밑줄을 치는 상황을 흉내 낸다(겹침 금지 검증용).
+_VOCAB_SETS = [
+    [(1, "first", "initial"), (2, "important", "crucial"), (3, "concrete", "abstract"),
+     (4, "together", "jointly"), (5, "obvious", "evident")],
+    [(1, "introduces", "presents"), (2, "adds", "appends"), (3, "gives", "offers"),
+     (4, "draws", "pulls"), (6, "practical", "useful")],
+    [(1, "topic", "subject"), (2, "detail", "particular"), (3, "example", "instance"),
+     (4, "whole", "entire"), (5, "answers", "addresses")],
+]
+_VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
+
+
 class _FakeClient:
     def structured(self, system, prompt, model_cls, max_tokens=8000,
                    max_retries=1, extra_validate=None, image_path=None,
@@ -480,12 +493,11 @@ _FAKE = {
         choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
         wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
                        WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
+    # 어휘는 3종을 잇달아 만들므로, 호출마다 '겹치지 않는' 밑줄 묶음을 돌려준다
+    # (실제 LLM 이 [겹침 금지] 지시를 따랐을 때의 모습).
     "VocabOut": lambda: VocabOut(
-        marks=[WordMark(sent_no=1, word="first", shown="initial"),
-               WordMark(sent_no=2, word="important", shown="crucial"),
-               WordMark(sent_no=3, word="concrete", shown="abstract"),
-               WordMark(sent_no=4, word="together", shown="jointly"),
-               WordMark(sent_no=1, word="clearly", shown="plainly")],
+        marks=[WordMark(sent_no=n, word=w, shown=sh)
+               for n, w, sh in next(_VOCAB_CYCLE)],
         answer_no=3, reason="이유."),
     "GrammarOut": lambda: GrammarOut(
         marks=[WordMark(sent_no=1, word="introduces", shown="introduce"),
@@ -527,7 +539,10 @@ _FAKE = {
         wrong_reasons=[WrongReason(no=1, text="범위 비틀기"), WrongReason(no=3, text="초점 이동"),
                        WrongReason(no=4, text="근거 없음"), WrongReason(no=5, text="방향 반전")]),
     "IrrelevantOut": lambda: IrrelevantOut(
-        start_no=2, answer_no=3, sentence="An unrelated remark wanders off the point.",
+        start_no=2, answer_no=3,
+        # 지문 낱말(sentence·topic·detail)을 쓰되 인과를 날조한 문장
+        sentence=("The third sentence gives a detail only because the topic was "
+                  "introduced by a concrete example."),
         reason="논지에 기여하지 않음.",
         wrong_reasons=[WrongReason(no=1, text="앞을 받음"), WrongReason(no=2, text="예시로 뒷받침"),
                        WrongReason(no=4, text="연결사로 이어짐"), WrongReason(no=5, text="결론으로 맺음")]),
@@ -1727,6 +1742,70 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     print("✓ 변형문제 통합본(15문항·제목·무관한 문장·어휘 3종)·조판·재출력 통과")
 
 
+def test_new_type_guards() -> None:
+    """새 유형의 '무너지는 지점'을 코드가 직접 막는지.
+
+    ① 제목 — 선지 5개가 제목 형식으로 통일됐는가(하나만 서술문이면 답이 티 난다)
+    ② 어휘 3종 — 세 문제의 밑줄이 겹치지 않는가
+    ③ 무관한 문장 — 지문 낱말을 쓰되 원문 되풀이가 아닌가
+    """
+    from exam.generators.irrelevant import check_irrelevant_sentence as chk_irr
+    from exam.generators.title import check_title_form as chk_title
+
+    # ① 제목 형식 통일 -------------------------------------------------------
+    good = ["The Molecule That Outlasts Our Machines",
+            "Why Cold Storage Beats Every Other Archive",
+            "Reading the Genes of Ancient Animals",
+            "Hard Drives: Cheaper, Faster, Smaller",
+            "A Warning Against Trusting Digital Records"]
+    assert chk_title(good) == [], chk_title(good)
+    # 하나만 서술문(마침표로 끝남) → 잡힌다
+    assert any("마침표" in b for b in
+               chk_title(good[:4] + ["DNA can store a great amount of data in a tiny space."]))
+    # 하나만 소문자 → 잡힌다
+    assert any("Title Case" in b for b in
+               chk_title(good[:4] + ["a warning against trusting digital records"]))
+    assert chk_title(good[:4] + ["DNA"])          # 한 낱말짜리
+    assert chk_title(good[:4] + [good[0]])        # 같은 선지 두 번
+    # 의문형으로 통일한 경우는 통과해야 한다(오탐 없음)
+    q5 = ["Why Do Cells Keep Their Secrets?", "Can a Molecule Outlast a Machine?",
+          "What Makes DNA So Durable?", "Where Should We Store Our Memories?",
+          "Is Silicon Really the Future?"]
+    assert chk_title(q5) == [], chk_title(q5)
+
+    # ② 어휘 3종 밑줄 겹침 금지 ----------------------------------------------
+    marks = {}
+
+    class _Watch(_FakeClient):
+        def structured(self, system, prompt, model_cls, **kw):
+            obj = super().structured(system, prompt, model_cls, **kw)
+            if model_cls.__name__ == "VocabOut":
+                marks[len(marks)] = ({m.word.lower() for m in obj.marks}, prompt)
+            return obj
+
+    p = build_passage_merged(_Watch(), "dummy body")
+    assert {"vocab", "vocab_2", "vocab_3"} <= p.types, sorted(p.types)
+    sets = [w for w, _ in marks.values()]
+    assert len(sets) == 3, len(sets)
+    for i in range(len(sets)):                     # 어느 두 문제도 낱말을 공유하지 않는다
+        for j in range(i + 1, len(sets)):
+            assert not (sets[i] & sets[j]), (sets[i] & sets[j])
+    # 둘째·셋째 요청에는 '피할 낱말'이 실제로 실려 갔다
+    later = [pr for _, pr in list(marks.values())[1:]]
+    assert all("[겹침 금지]" in pr for pr in later), later
+    # 세 문제의 밑줄 표시가 실제로 다르다(같은 문제가 세 번 나오지 않는다)
+    assert len({p.q["vocab"], p.q["vocab_2"], p.q["vocab_3"]}) == 3
+
+    # ③ 무관한 문장 ----------------------------------------------------------
+    sents = DNA.sentences
+    assert chk_irr("Most large firms now run their interviews online.", sents)   # 소재 동떨어짐
+    assert chk_irr(sents[2], sents)                                              # 원문 되풀이
+    ok = ("Because living cells needed to store information, they gradually shrank "
+          "until they could survive in bone and ice.")
+    assert chk_irr(ok, sents) == [], chk_irr(ok, sents)     # 지문 낱말 + 인과 뒤집기
+    print("✓ 새 유형 안전장치(제목 형식 통일·어휘 밑줄 겹침 금지·무관한 문장 조건) 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -1876,6 +1955,7 @@ if __name__ == "__main__":
     test_short_answer_q3_summary_dedup()
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
+    test_new_type_guards()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")
