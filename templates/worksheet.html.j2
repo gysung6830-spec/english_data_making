@@ -57,7 +57,7 @@
     <div class="box-label">&lt;보기&gt;</div>
     {{ chips(q.given_words, 'g3') }}
     {% if reveal %}<div class="ans-line">➜ {{ q.answer }}</div>{% if q.explanation %}<div class="exp">{{ q.explanation }}</div>{% endif %}
-    {% else %}<div class="ans-box">➜</div>{% endif %}
+    {% else %}<div class="ans-write">➜</div>{% endif %}
   </div>
 {% endmacro %}
 
@@ -222,7 +222,7 @@
         {% if reveal %}
           <div class="ans-line">➜ {{ q.answer }}</div>
           <div class="exp">{% if q.answer_ko %}{{ q.answer_ko }}{% endif %}{% if q.evidence %}{% if q.answer_ko %}<br>{% endif %}<b>근거</b> {{ q.evidence }}{% endif %}</div>
-        {% else %}<div class="ans-box">➜</div>{% endif %}
+        {% else %}<div class="ans-write">➜</div>{% endif %}
       </div>
       {% endfor %}
       </div>

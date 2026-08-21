@@ -446,11 +446,20 @@ table.lit2 td {
 .cond-lb { display: inline-block; font-size: 8px; color: #fff; background: #7c6bb0;
   padding: 0 6px; border-radius: 7px; margin-right: 5px; font-weight: 800; }
 .ans-box {
-  border: 1px solid #cfd8dc; border-radius: 6px; min-height: 26px;
+  border: 1px solid #cfd8dc; border-radius: 6px; min-height: 30px;
   margin-top: 5px; padding: 4px 9px; color: #9aa0a6; font-size: 12px;
 }
 .ans-box .ans-hint { font-size: 8.4px; }
-.ans-box.sm { min-height: 20px; margin-top: 3px; }
+.ans-box.sm { min-height: 34px; margin-top: 3px; }   /* 조건영작 단계별: 한 문장 쓸 공간 */
+
+/* 문장을 직접 쓰는 답란(배열영작·문답): 2줄 확보 + 옅은 밑줄 */
+.ans-write {
+  border: 1px solid #cfd8dc; border-radius: 6px; min-height: 50px;
+  margin-top: 5px; padding: 5px 10px; color: #9aa0a6; font-size: 12px;
+  background-image: repeating-linear-gradient(
+    to bottom, transparent 0, transparent 23px, #eef2f4 23px, #eef2f4 24px);
+  background-position: 0 6px;
+}
 
 /* 유형4 난이도(하·중·상) — 주어지는 단어 개수로 구분 */
 .lv-block { margin: 5px 0; }
