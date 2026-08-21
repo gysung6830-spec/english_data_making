@@ -184,27 +184,29 @@ class TopicOut(BaseModel):
 class GrammarCountOut(BaseModel):
     """어법상 틀린 것의 '개수'를 묻는 유형(수능 29번 계열의 내신 변형).
 
-    어느 것이 틀렸는지 고르는 대신 몇 개가 틀렸는지 세게 한다. 찍어서 맞히기 어렵고,
-    밑줄 하나하나를 다 따져야 하므로 어법 지식을 훨씬 촘촘히 확인한다.
+    밑줄 6개(①~⑥) 중 **정확히 4개**가 틀렸고, 선지는 ①1개~⑥6개다.
+    어느 것이 틀렸는지 고르는 대신 몇 개가 틀렸는지 세게 한다 — 밑줄 여섯을 하나도
+    빠짐없이 판정해야 하고, 하나만 잘못 봐도 개수가 어긋난다.
     """
 
     rewritten: list[str]           # 다시 쓴 지문(원문과 문장 수 동일)
-    marks: list[WordMark]          # 밑줄 5~7개
-    wrong_nos: list[int]           # 그중 어법상 틀린 밑줄 번호들(1~5개)
-    reasons: list[GrammarReason]   # 밑줄마다 왜 옳은지/틀린지
+    marks: list[WordMark]          # 밑줄 정확히 6개(①~⑥)
+    wrong_nos: list[int]           # 그중 어법상 틀린 밑줄 번호 — 정확히 4개
+    reasons: list[GrammarReason]   # 밑줄 6개 각각이 왜 옳은지/틀린지
     reason: str = ""               # 전체 총평(한국어)
 
     @field_validator("marks")
     @classmethod
     def _count(cls, v: list[WordMark]) -> list[WordMark]:
-        if not (5 <= len(v) <= 7):
-            raise ValueError("어법 개수 문항의 밑줄은 5~7개여야 합니다.")
+        if len(v) != 6:
+            raise ValueError("어법 개수 문항의 밑줄은 정확히 6개여야 합니다.")
         return v
 
     def check(self) -> None:
         n = len(self.marks)
-        if not 1 <= len(set(self.wrong_nos)) <= 5:
-            raise ValueError("틀린 밑줄은 1~5개여야 합니다(선지가 1개~5개이므로).")
+        if len(set(self.wrong_nos)) != 4:
+            raise ValueError(f"틀린 밑줄은 정확히 4개여야 합니다"
+                             f"(현재 {len(set(self.wrong_nos))}개).")
         for a in self.wrong_nos:
             if not 1 <= a <= n:
                 raise ValueError(f"틀린 밑줄 번호 {a} 가 범위를 벗어났습니다(1~{n}).")

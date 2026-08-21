@@ -495,22 +495,25 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
 # ---------------------------------------------------------------------------
 # 어법 개수 — 밑줄 5~7개 중 '틀린 것이 몇 개인지' 세게 한다
 # ---------------------------------------------------------------------------
-MAX_WRONG_COUNT = 5      # 선지는 1개~5개
+N_COUNT_MARKS = 6        # 밑줄 ①~⑥
+MAX_WRONG_COUNT = 6      # 선지는 1개~6개
+FIXED_WRONG_COUNT = 4    # 틀린 것은 늘 4개(정답 ④)
 
 
 def make_grammar_count(sentences: list[str], marks: list[tuple[int, str, str]],
                        wrong_nos: list[int], reasons: dict[int, str],
                        note: str = "",
                        flags: list[str] | None = None) -> tuple[str, str]:
-    """marks: [(문장idx, 원본단어, 표시단어)] 5~7개. 정답은 '틀린 밑줄의 개수'."""
-    if not (5 <= len(marks) <= 7):
-        raise ValueError("어법 개수 문항의 밑줄은 5~7개여야 합니다.")
+    """marks: [(문장idx, 원본단어, 표시단어)] 6개. 정답은 '틀린 밑줄의 개수'(=4개)."""
+    if len(marks) != N_COUNT_MARKS:
+        raise ValueError(f"어법 개수 문항의 밑줄은 정확히 {N_COUNT_MARKS}개여야 합니다.")
     marks, remap = order_marks(sentences, marks)      # 읽는 순서로 번호 재매핑
     wrong = sorted({remap.get(n, n) for n in wrong_nos})
     reasons = {remap.get(n, n): t for n, t in reasons.items()}
     n_wrong = len(wrong)
-    if not 1 <= n_wrong <= MAX_WRONG_COUNT:
-        raise ValueError(f"틀린 밑줄은 1~{MAX_WRONG_COUNT}개여야 합니다(현재 {n_wrong}개).")
+    if n_wrong != FIXED_WRONG_COUNT:
+        raise ValueError(f"틀린 밑줄은 정확히 {FIXED_WRONG_COUNT}개여야 합니다"
+                         f"(현재 {n_wrong}개).")
     marks = expand_marks(sentences, marks)            # 'to confirm' 류 낱말 중복 방지
     flag_ambiguous_marks(sentences, marks, flags)     # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks))

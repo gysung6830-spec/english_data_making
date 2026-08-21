@@ -531,17 +531,18 @@ _FAKE = {
                WordMark(sent_no=3, word="offers", shown="offer")],
         answer_nos=[1, 3],
         reasons=[GrammarReason(no=1, text="수 일치"), GrammarReason(no=3, text="수 일치")]),
+    # 밑줄 6개 중 정확히 4개가 틀린다(정답은 늘 ④)
     "GrammarCountOut": lambda: GrammarCountOut(
         rewritten=_REWRITE_B,
-        marks=[WordMark(sent_no=1, word="starts", shown="start"),
-               WordMark(sent_no=2, word="attaches", shown="attaches"),
-               WordMark(sent_no=3, word="presents", shown="present"),
-               WordMark(sent_no=4, word="ties", shown="ties"),
-               WordMark(sent_no=5, word="meets", shown="meets"),
-               WordMark(sent_no=6, word="ends", shown="ends")],
-        wrong_nos=[1, 3],
+        marks=[WordMark(sent_no=1, word="starts", shown="start"),      # ① 오류
+               WordMark(sent_no=2, word="attaches", shown="attaches"),  # ② 적절
+               WordMark(sent_no=3, word="presents", shown="present"),   # ③ 오류
+               WordMark(sent_no=4, word="ties", shown="tie"),           # ④ 오류
+               WordMark(sent_no=5, word="meets", shown="meet"),         # ⑤ 오류
+               WordMark(sent_no=6, word="ends", shown="ends")],         # ⑥ 적절
+        wrong_nos=[1, 3, 4, 5],
         reasons=[GrammarReason(no=i, text="근거") for i in range(1, 7)],
-        reason="틀린 것은 2개."),
+        reason="틀린 것은 4개."),
     "ShortOut": lambda: ShortOut(
         q1_prompt="p1", q1_answer="한글답",
         q2_prompt="p2",
@@ -2070,6 +2071,63 @@ def test_overlap_and_paraphrase_guards() -> None:
     print("✓ 밑줄 겹침 금지(짝짓기+어휘 3종)·빈칸 정답 패러프레이즈 강제 통과")
 
 
+def test_grammar_count_fixed_four() -> None:
+    """어법 개수 — 밑줄 6개(①~⑥) 중 정확히 4개가 틀린다(정답은 늘 ④).
+
+    개수를 고정하는 대신 '어느 4개가 틀렸는지'를 지문마다 달리해, 학생이 밑줄 여섯을
+    하나도 빠짐없이 판정하게 만든다.
+    """
+    import re as _re
+
+    from exam.build import FIXED_WRONG_COUNT, MAX_WRONG_COUNT, N_COUNT_MARKS, make_grammar_count
+    from exam.schemas import GrammarCountOut
+
+    assert (N_COUNT_MARKS, FIXED_WRONG_COUNT, MAX_WRONG_COUNT) == (6, 4, 6)
+
+    s6 = [f"The {w} line does its own job here."
+          for w in ("first", "second", "third", "fourth", "fifth", "sixth")]
+    marks = [(i, w, w if i in (1, 5) else w + "s")     # ②⑥만 옳게
+             for i, w in enumerate(
+                 ["first", "second", "third", "fourth", "fifth", "sixth"])]
+    reasons = {i: "근거" for i in range(1, 7)}
+    q, a = make_grammar_count(s6, marks, [1, 3, 4, 5], reasons, note="총평")
+    assert len(_re.findall(r'<li>.*?</li>', q)) == 6                  # 선지 ①~⑥
+    assert "6개" in q and "5개" in q
+    assert _re.search(r'answer-key">(.)<', a).group(1) == "④"          # 정답은 늘 ④
+    assert "(4개)" in a
+
+    # 4개가 아니면 만들지 않는다(스키마·빌더 양쪽에서 막는다)
+    for bad in ([1], [1, 3], [1, 2, 3, 4, 5]):
+        try:
+            make_grammar_count(s6, marks, bad, reasons)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"wrong_nos={bad} 가 통과되면 안 된다")
+    ok = GrammarCountOut(
+        rewritten=s6,
+        marks=[WordMark(sent_no=i + 1, word=w, shown=w)
+               for i, w in enumerate(["first", "second", "third",
+                                      "fourth", "fifth", "sixth"])],
+        wrong_nos=[1, 3, 4, 5],
+        reasons=[GrammarReason(no=i, text="근거") for i in range(1, 7)])
+    ok.check()
+    ok.wrong_nos = [1, 3]
+    try:
+        ok.check()
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("틀린 것이 2개인데 통과되면 안 된다")
+
+    # 데모도 같은 규칙을 따른다
+    from exam.merged import demo_passages_merged
+    dq = demo_passages_merged()[0]
+    assert len(_re.findall(r'<u>.*?</u>', dq.q["grammar_count"])) == 6
+    assert _re.search(r'answer-key">(.)<', dq.a["grammar_count"]).group(1) == "④"
+    print("✓ 어법 개수(밑줄 6개·틀린 것 4개 고정·선지 ①~⑥) 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2222,6 +2280,7 @@ if __name__ == "__main__":
     test_tiering_and_escalation()
     test_order_four_blocks()
     test_overlap_and_paraphrase_guards()
+    test_grammar_count_fixed_four()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

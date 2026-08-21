@@ -195,8 +195,8 @@ def grammar_a(answer_nos: list[int], reasons: dict[int, str]) -> str:
     return "".join(parts)
 
 
-def grammar_count_q(marked_passage_html: str, max_count: int = 5) -> str:
-    """어법 개수형 — 밑줄이 박힌 본문 + '1개~5개' 선지."""
+def grammar_count_q(marked_passage_html: str, max_count: int = 6) -> str:
+    """어법 개수형 — 밑줄이 박힌 본문 + '1개~6개' 선지."""
     lis = "".join(f'<li><span class="cnum">{circ(i)}</span> {i}개</li>'
                   for i in range(1, max_count + 1))
     return (f'<div class="passage">{marked_passage_html}</div>'

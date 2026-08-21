@@ -133,21 +133,21 @@ def _dna() -> Passage:
         marks=[
             (0, "known", "knowing"),          # ① 수동 관계 → 오류
             (1, "storing", "storing"),        # ② not only in ~ but also in ~ 병렬(적절)
-            (2, "combined", "combined"),      # ③ 과거분사(적절)
+            (2, "combined", "combining"),     # ③ 태 오류 → 오류
             (3, "survive", "survive"),        # ④ 조동사 뒤 원형(적절)
             (4, "have", "has"),               # ⑤ 수 일치 오류 → 오류
-            (5, "preserved", "preserved"),    # ⑥ to be preserved 수동(적절)
+            (5, "preserved", "preserve"),     # ⑥ 태 오류 → 오류
         ],
-        wrong_nos=[1, 5],
+        wrong_nos=[1, 3, 5, 6],
         reasons={
             1: "분자가 DNA라고 '불리는' 것이므로 능동 knowing 이 아니라 과거분사 known (태).",
-            2: "not only in storing ~ but also in squeezing ~ 으로 동명사끼리 짝이 맞습니다(병렬).",
-            3: "hard drives 가 '합쳐진' 것이므로 과거분사 combined 가 맞습니다(태).",
-            4: "조동사 can 뒤이므로 동사원형 survive 가 맞습니다.",
+            2: "not only in storing ~ but also in squeezing ~ 으로 동명사끼리 짝이 맞습니다(병렬·적절).",
+            3: "hard drives 가 '합쳐진' 것이므로 combining → combined (태).",
+            4: "조동사 can 뒤이므로 동사원형 survive 가 맞습니다(적절).",
             5: "주어 Researchers 는 복수이므로 has → have (수 일치).",
-            6: "정보가 '보존되는' 것이므로 to be preserved 수동이 맞습니다(태).",
+            6: "정보가 '보존되는' 것이므로 to be preserve → to be preserved (태).",
         },
-        note="틀린 것은 ①(태)과 ⑤(수 일치) 두 개입니다.",
+        note="틀린 것은 ①③⑤⑥ 네 개, 옳은 것은 ②④ 두 개입니다.",
     ))
     # 어법·어휘 짝짓기 — ⓐ~ⓔ 중 정확히 2개(어법 1 + 어휘 1)만 부적절
     _ch, _no = build_pairs(2, 4, seed=0)          # ⓑ(어법) · ⓓ(어휘)
@@ -281,20 +281,20 @@ def _star() -> Passage:
             (1, "assumed", "assuming"),   # ① 수동이어야 → 오류
             (2, "demand", "demand"),      # ② 수 일치(적절)
             (4, "placed", "placing"),     # ③ 수동 분사여야 → 오류
-            (4, "ignores", "ignores"),    # ④ 병렬(적절)
-            (5, "turns", "turns"),        # ⑤ 수 일치(적절)
+            (4, "ignores", "ignore"),     # ④ 병렬·수 일치 오류 → 오류
+            (5, "turns", "turn"),         # ⑤ 수 일치 오류 → 오류
             (6, "loses", "loses"),        # ⑥ 수 일치(적절)
         ],
-        wrong_nos=[1, 3],
+        wrong_nos=[1, 3, 4, 5],
         reasons={
             1: "'~라고 여겨진다'는 수동이므로 assuming → assumed (태).",
-            2: "주어 the two positions 는 복수이므로 demand 가 맞습니다(수 일치).",
+            2: "주어 the two positions 는 복수이므로 demand 가 맞습니다(수 일치·적절).",
             3: "별은 '앉혀지는' 대상이므로 능동 placing 이 아니라 과거분사 placed (분사·태).",
-            4: "앞의 keeps 와 병렬이고 주어가 3인칭 단수이므로 ignores 가 맞습니다(병렬).",
-            5: "주어 the celebrated hire 는 단수이므로 turns 가 맞습니다(수 일치).",
-            6: "주어 the firm 은 단수이므로 loses 가 맞습니다(수 일치).",
+            4: "앞의 keeps 와 병렬이고 주어가 3인칭 단수이므로 ignore → ignores (병렬·수 일치).",
+            5: "주어 the celebrated hire 는 단수이므로 turn → turns (수 일치).",
+            6: "주어 the firm 은 단수이므로 loses 가 맞습니다(수 일치·적절).",
         },
-        note="틀린 것은 ①(태)과 ③(분사·태) 두 개입니다.",
+        note="틀린 것은 ①③④⑤ 네 개, 옳은 것은 ②⑥ 두 개입니다.",
     ))
 
     _ch, _no = build_pairs(3, 5, seed=1)          # ⓒ(어법) · ⓔ(어휘)
