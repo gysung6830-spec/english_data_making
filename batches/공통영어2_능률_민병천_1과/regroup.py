@@ -2,7 +2,7 @@
 """능률 1과: 8소단원 → 5소단원 통합. 문장별 내용(chunks/문법칩/어휘/오답)은 그대로
 재사용하고, 묶음 단위(개관·핵심문법·흐름)만 다시 구성한다."""
 import sys, importlib.util, os, re
-BD="/tmp/claude-0/-home-user-english-data-making/3e2ff8b7-89bb-5341-95ca-4062ce95757b/scratchpad/batches/공통영어2_능률_민병천_1과"
+BD=os.path.dirname(os.path.abspath(__file__))  # regroup.py 가 있는 폴더(gen·_helpers·mt·산출물 모두 여기)
 sys.path.insert(0,"/home/user/english_data_making"); sys.path.insert(0,BD)
 from _helpers import (build, finalize, Overview, KeyGrammar, GrammarNote, GrammarDrill,
     FlowBlock, RestatementChain)
@@ -90,6 +90,18 @@ G4=merge([O[5],O[6]],"4 · Kuo의 추론과 구조","Rescue ④ 추론·구조",
 G5=merge([O[7]],"5 · 결말과 안전 당부",O[7].title,O[7].overview)
 
 ALL=[G1,G2,G3,G4,G5]
+# 오역 팁(mistips) 오버레이 — 학생용 전용 (병합·재번호된 최종 item_no+sid 기준)
+import glob
+MT={}
+for f in sorted(glob.glob(os.path.join(BD,"mt_*.py"))):
+    s=importlib.util.spec_from_file_location(os.path.basename(f)[:-3],f); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); MT.update(m.MT)
+if MT:
+    n_mt=0
+    for p in ALL:
+        for s in p.analysis.sentences:
+            k=(p.item_no.strip(), s.id)
+            if k in MT: s.mistips=list(MT[k]); n_mt+=len(s.mistips)
+    print("오역 팁 적용:",n_mt,"개")
 for p in ALL: finalize(p)
 print("통합 후 소단원:",len(ALL))
 ok=print_report(verify_passages(ALL))

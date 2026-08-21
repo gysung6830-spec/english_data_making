@@ -15,6 +15,18 @@ ALL=[]
 for n in ["gen_gen1.py","gen_gen2.py","gen_gen3.py","gen_gen4.py","gen_gen5.py"]:
     ALL += list(load(n).PARTS)
 print("소단원 수:",len(ALL))
+# 오역 팁(mistips) 오버레이 — 학생용 전용
+import glob
+MT={}
+for f in sorted(glob.glob(os.path.join(BD,"mt_*.py"))):
+    MT.update(load(os.path.basename(f)).MT)
+if MT:
+    n_mt=0
+    for p in ALL:
+        for s in p.analysis.sentences:
+            k=(p.item_no.strip(), s.id)
+            if k in MT: s.mistips=list(MT[k]); n_mt+=len(s.mistips)
+    print("오역 팁 적용:",n_mt,"개")
 for p in ALL: finalize(p)
 ok=print_report(verify_passages(ALL))
 print("목차:")
