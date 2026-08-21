@@ -198,9 +198,9 @@ def test_multi_passage_layout():
     b1 = mock_workbook(title="Passage One"); b1.label = "[고1] 9월 30번"
     b2 = mock_workbook(title="Passage Two"); b2.label = "[고1] 9월 31번"
     html = render_workbooks_html([b1, b2], footer_note="테스트")
-    # 두 지문 모두 제목·출처 뱃지가 있어야 함
-    assert "Passage One" in html and "Passage Two" in html
+    # 헤더에는 문항번호 뱃지만(주제 제목은 제거됨) — 두 지문 뱃지가 모두 있어야 함
     assert "[고1] 9월 30번" in html and "[고1] 9월 31번" in html
+    assert 'class="sh-title"' not in html          # 문항번호 옆 주제 제거 확인
     # 정답 페이지가 지문마다 하나씩(총 2개) 존재 (CSS 정의와 구분하려 class 속성으로 카운트)
     assert html.count('class="ans-page"') == 2
     # 둘째 지문 문제 페이지는 새 페이지에서 시작(unit-break)
