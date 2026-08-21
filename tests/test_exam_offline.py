@@ -1711,14 +1711,14 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
     assert MERGED_ORDER == ("topic", "title", "B", "content",
                             "grammar", "grammar_count", "pair_odd",
-                            "vocab", "vocab_2", "vocab_3", "F", "irrelevant",
+                            "vocab_2", "vocab", "vocab_3", "F", "irrelevant",
                             "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
     # 어법 두 문항은 발문이 서로 달라야 한다(같은 문제를 두 번 내는 것이 아니다)
     assert MERGED_PROMPTS["grammar"] != MERGED_PROMPTS["grammar_count"]
     assert "개수" in MERGED_PROMPTS["grammar_count"]
     assert MERGED_ORDER[-2:] == ("D", "short_answer")       # 서술형 계열은 맨 뒤
     # 어휘 3종은 발문이 같고 라벨도 '어휘'로 같다(문제 만드는 방식만 다르다)
-    _v3 = ("vocab", "vocab_2", "vocab_3")
+    _v3 = ("vocab_2", "vocab", "vocab_3")
     assert len({MERGED_PROMPTS[t] for t in _v3}) == 1
     assert {MERGED_LABELS[t] for t in _v3} == {"어휘"}
     # 뺀 유형은 '대신할 유형'이 통합본 안에 실제로 있어야 한다(능력 공백 없음)
