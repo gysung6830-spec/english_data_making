@@ -13,18 +13,18 @@ def _check(name, cond):
 
 
 def test_sections_order_and_filter():
-    # 있는 유형만, 카탈로그 순서대로 번호 재부여
+    # 있는 유형만, 카탈로그(_ORDER) 순서대로 번호 재부여
     secs = cr.build_cover_sections(["blanks", "workbook", "writing"])
-    _check("수록 유형만 노출", [s.key for s in secs] == ["workbook", "writing", "blanks"])
+    _check("수록 유형만 노출", [s.key for s in secs] == ["writing", "blanks", "workbook"])
     _check("번호 1..n 재부여", [s.no for s in secs] == [1, 2, 3])
 
 
 def test_full_catalog_order():
     secs = cr.build_cover_sections(cr._ORDER)
-    _check("전체 순서(통합→어형→어법→어휘하→어휘상→지칭→영작→해석→빈칸)",
+    _check("전체 순서(어형→어법→어휘하→어휘상→영작→빈칸→지칭→통합→해석)",
            [s.key for s in secs] ==
-           ["workbook", "form", "grammar", "vocab_easy", "vocab", "ref",
-            "writing", "translate", "blanks"])
+           ["form", "grammar", "vocab_easy", "vocab", "writing",
+            "blanks", "ref", "workbook", "translate"])
 
 
 def test_render_html():

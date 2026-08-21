@@ -177,9 +177,6 @@ def _build_blank_workbook(blank_sets: list, title: str = "빈칸 워크북",
         blanks_schemas.LLMBlankWorkbook(sets=blank_sets), title=base_title, subtitle=base_sub)
 
 
-# 유형(파트) 배치 순서: 통합카드 → 어형 → 어법 → 어휘 → 영작 → 해석 → 빈칸
-_PROSE_ORDER = ["form", "grammar", "vocab_easy", "vocab", "ref"]  # 어휘 하→상, 이어서 지칭(해석은 영작 뒤로)
-
 
 def _prose_subpack(pk, wtype: str):
     """ProsePack 에서 한 유형(wtype)만 담은 서브 팩을 만든다(없으면 None)."""
@@ -224,31 +221,41 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
         page_map=page_map, answers_page=answers_page, source_name=source_name)
 
 
-def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact") -> list:
-    """단일 유형(어형·어법·어휘·영작·해석·빈칸) 정답을 '연속 배치용' 그룹 목록으로 만든다.
+# 단일 유형 정답의 유형명·css (통합카드는 별도 렌더러라 여기서 제외)
+_ANSWER_META = {
+    "form": ("어형 변형", "f"), "grammar": ("어법 양자택일", "g"),
+    "vocab_easy": ("어휘 양자택일 (하)", "v"), "vocab": ("어휘 (상)", "v"),
+    "ref": ("대명사 (지칭 선택)", "b"), "translate": ("한글 해석 연습", "t"),
+}
 
-    style: "gloss"(정답+문장 해석) / "compact"(정답만) / "passage"(정답+지문 전체 해석).
-    """
+
+def _answer_groups_for(key, packs, writing_packs, blank_wb, style: str = "compact") -> list:
+    """한 유형(key)의 정답 그룹 목록. 통합카드(workbook)는 별도 렌더러라 빈 목록."""
     from . import answers_render as ar
-    groups = []
-    for wtype, name, css in (("form", "어형 변형", "f"), ("grammar", "어법 양자택일", "g"),
-                             ("vocab_easy", "어휘 양자택일 (하)", "v"),
-                             ("vocab", "어휘 (상)", "v"),
-                             ("ref", "대명사 (지칭 선택)", "b")):
+    out = []
+    if key in _ANSWER_META:
+        name, css = _ANSWER_META[key]
         for pk in packs or []:
-            g = ar.group_from_prose(pk, wtype, name, css, style=style)
+            g = ar.group_from_prose(pk, key, name, css, style=style)
             if g:
-                groups.append(g)
-    for wpk in writing_packs or []:
-        g = ar.group_from_writing(wpk, style=style)
-        if g:
-            groups.append(g)
-    for pk in packs or []:
-        g = ar.group_from_prose(pk, "translate", "한글 해석 연습", "t", style=style)
-        if g:
-            groups.append(g)
-    if blank_wb is not None:
-        groups += ar.groups_from_blanks(blank_wb, style=style)
+                out.append(g)
+    elif key == "writing":
+        for wpk in writing_packs or []:
+            g = ar.group_from_writing(wpk, style=style)
+            if g:
+                out.append(g)
+    elif key == "blanks":
+        if blank_wb is not None:
+            out += ar.groups_from_blanks(blank_wb, style=style)
+    return out
+
+
+def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact") -> list:
+    """단일 유형(통합카드 제외) 정답을 문제와 동일 순서(cover_render._ORDER)로 연속 배치."""
+    from . import cover_render
+    groups = []
+    for key in cover_render._ORDER:
+        groups += _answer_groups_for(key, packs, writing_packs, blank_wb, style=style)
     return groups
 
 
@@ -290,39 +297,54 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
             toc[key] = cursor[0]; seen.add(key)
         cursor[0] += _count(p)
 
-    # ── 문제 ──
-    if books:
-        _emit("wb_q", lambda p: workbook_render.render_workbooks_pdf(
-            books, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="workbook")
-    for wtype in _PROSE_ORDER:                       # 어형 → 어법 → 어휘
-        for i, pk in enumerate(packs, start=1):
-            sub = _prose_subpack(pk, wtype)
-            if sub is not None:
-                _emit(f"{wtype}{i}_q", lambda p, s=sub: prose_render.render_prose_pdf(
-                    s, p, footer_note=footer_note, show_ko=show_ko, section="q"), key=wtype)
-    for i, wpk in enumerate(writing_packs or [], start=1):    # 영작
-        _emit(f"writing{i}_q", lambda p, w=wpk: writing_render.render_writing_pdf(
-            w, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="writing")
-    for i, pk in enumerate(packs, start=1):          # 한글 해석 연습
-        sub = _prose_subpack(pk, "translate")
-        if sub is not None:
-            _emit(f"translate{i}_q", lambda p, s=sub: prose_render.render_prose_pdf(
-                s, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="translate")
-    if blank_wb is not None:                          # 빈칸
-        _emit("blanks_q", lambda p: blanks_render.render_blanks_pdf(
-            blank_wb, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="blanks")
+    # ── 문제 (표지 목차와 동일한 사용자 지정 순서: cover_render._ORDER) ──
+    #   어형→어법→어휘(하·상)→영작→빈칸→지칭→통합카드→해석
+    def _emit_section_q(key: str) -> None:
+        if key == "workbook":
+            if books:
+                _emit("wb_q", lambda p: workbook_render.render_workbooks_pdf(
+                    books, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="workbook")
+        elif key == "writing":
+            for i, wpk in enumerate(writing_packs or [], start=1):
+                _emit(f"writing{i}_q", lambda p, w=wpk: writing_render.render_writing_pdf(
+                    w, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="writing")
+        elif key == "blanks":
+            if blank_wb is not None:
+                _emit("blanks_q", lambda p: blanks_render.render_blanks_pdf(
+                    blank_wb, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="blanks")
+        else:                                         # prose 하위유형: form/grammar/vocab_easy/vocab/ref/translate
+            for i, pk in enumerate(packs, start=1):
+                sub = _prose_subpack(pk, key)
+                if sub is not None:
+                    _emit(f"{key}{i}_q", lambda p, s=sub: prose_render.render_prose_pdf(
+                        s, p, footer_note=footer_note, show_ko=show_ko, section="q"), key=key)
 
-    # ── 정답·해설 ──
+    for _key in cover_render._ORDER:
+        _emit_section_q(_key)
+
+    # ── 정답·해설 (문제와 동일 순서로 배치, 통합카드 정답은 제 위치에 끼워 넣음) ──
     _emit("ansdiv", lambda p: cover_render.render_answer_divider_pdf(
         p, header=branding.BRAND, footer_note=footer_note), key="answers")
-    if books:                                         # 통합카드 정답(유형/지문별 페이지 분할 유지)
-        _emit("wb_a", lambda p: workbook_render.render_workbooks_pdf(
-            books, p, footer_note=footer_note, show_ko=show_ko, section="a"))
-    groups = _build_answer_groups(packs, writing_packs, blank_wb, style=answer_style)
-    if groups:
-        from . import answers_render
-        _emit("answers", lambda p: answers_render.render_answers_pdf(
-            groups, p, footer_note=footer_note))
+    from . import answers_render
+    _acc: list = []                                   # 통합카드 사이 구간의 연속 정답 그룹
+    _part = [0]
+
+    def _flush_answers():
+        if _acc:
+            gs = list(_acc); _acc.clear()
+            _emit(f"answers{_part[0]}", lambda p, g=gs: answers_render.render_answers_pdf(
+                g, p, footer_note=footer_note))
+            _part[0] += 1
+
+    for _key in cover_render._ORDER:
+        if _key == "workbook":
+            _flush_answers()                          # 앞 구간 정답을 먼저 배치
+            if books:                                 # 통합카드 정답(유형/지문별 페이지 분할 유지)
+                _emit("wb_a", lambda p: workbook_render.render_workbooks_pdf(
+                    books, p, footer_note=footer_note, show_ko=show_ko, section="a"))
+        else:
+            _acc.extend(_answer_groups_for(_key, packs, writing_packs, blank_wb, style=answer_style))
+    _flush_answers()
 
     # ── 표지·목차 (본문 페이지 수 집계 후 렌더, 표지 페이지 수 보정) ──
     cover_path = scratch / f"{stem}__cover.pdf"

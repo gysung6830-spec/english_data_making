@@ -193,22 +193,26 @@ def _launch_chromium(p, launch_kw: dict):
             raise
 
 
-# 상단 한글 제목(.sh-title)을 '한 줄·한 페이지 안'에 담기 위한 자동 축소 스크립트.
+# 상단 한글 제목(.sh-title)을 '항상 한 줄'로 담기 위한 자동 맞춤 스크립트.
 #   폰트 로딩을 기다린 뒤, 제목이 칸을 넘치면 글씨를 조금씩 줄여 한 줄에 맞춘다(생략 금지).
-#   최소 크기에서도 넘치면 그때만 줄바꿈을 허용해 '잘림 없이' 모두 보이게 한다.
+#   하한(10.5px)에서도 넘치면 줄바꿈 대신 가로 압축(scaleX)으로 한 줄을 유지한다.
 _PAGE_READY_JS = """async () => {
   await document.fonts.ready;
-  const MIN_PX = 12;                         /* 더는 줄이지 않는 하한(px) */
+  const MIN_PX = 10.5;                        /* 폰트로 줄이는 하한(px) — 그 아래는 가로압축 */
   document.querySelectorAll('.sh-title').forEach(el => {
-    el.style.whiteSpace = 'nowrap';
+    el.style.whiteSpace = 'nowrap';           /* 절대 줄바꿈 금지 — 항상 한 줄 */
+    el.style.overflow = 'visible';
     let px = parseFloat(getComputedStyle(el).fontSize);
     let guard = 0;
-    while (el.scrollWidth > el.clientWidth && px > MIN_PX && guard < 60) {
+    while (el.scrollWidth > el.clientWidth && px > MIN_PX && guard < 80) {
       px -= 0.5; el.style.fontSize = px + 'px'; guard++;
     }
-    if (el.scrollWidth > el.clientWidth) {     /* 하한에서도 넘치면 줄바꿈 허용(생략 금지) */
-      el.style.whiteSpace = 'normal';
-      el.style.lineHeight = '1.15';
+    /* 하한에서도 넘치면 줄바꿈 대신 '가로 압축'으로 한 줄을 지킨다(잘림·줄바꿈 없음). */
+    if (el.scrollWidth > el.clientWidth && el.scrollWidth > 0) {
+      const ratio = Math.max(0.6, el.clientWidth / el.scrollWidth);
+      el.style.display = 'inline-block';
+      el.style.transformOrigin = 'left center';
+      el.style.transform = 'scaleX(' + ratio + ')';
     }
   });
 }"""

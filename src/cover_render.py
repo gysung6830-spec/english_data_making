@@ -79,8 +79,10 @@ _CATALOG: dict[str, dict] = {
         mark="s____ · Word Bank"),
 }
 
-_ORDER = ["workbook", "form", "grammar", "vocab_easy", "vocab", "ref",
-          "writing", "translate", "blanks"]
+# 유형 배치 순서(진실원본) — 문제 조립·표지 목차·정답이 모두 이 순서를 따른다.
+# 사용자 지정: 어형→어법→어휘(하·상)→영작→빈칸→지칭→통합카드→해석.
+_ORDER = ["form", "grammar", "vocab_easy", "vocab", "writing",
+          "blanks", "ref", "workbook", "translate"]
 
 
 def build_cover_sections(present_keys) -> list[CoverSection]:
