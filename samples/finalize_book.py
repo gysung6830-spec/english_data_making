@@ -11,7 +11,8 @@
 import sys, fitz
 
 KFONT = "/usr/share/fonts/truetype/nanumsquareround/NanumSquareRoundR.ttf"
-FOOT = "(c) 2026. 김은아영어연구소. all rights reserved"
+# 푸터 문구 — 환경변수 BOOK_FOOT 로 교체 가능 (예: 답지=ortica영어)
+FOOT = __import__("os").environ.get("BOOK_FOOT", "(c) 2026. 김은아영어연구소. all rights reserved")
 
 def is_problem(page):
     t = page.get_text()
