@@ -14,7 +14,10 @@
 
 어휘는 세 방식(유의어형·원문단어형·부정어형)을 모두 낸다. 발문은 같지만 밑줄을 만드는
 방식이 달라 서로 다른 문제가 되고, 내신에서 어휘 비중이 큰 점을 감안했다.
-결과: 지문당 15문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
+어법도 두 개 낸다 — '틀린 것 모두 고르기'와 '틀린 것의 개수'. 뒤쪽은 밑줄을 하나하나
+따져야 해서 찍기가 통하지 않는다. 두 어법 문항은 각각 '다시 쓴 지문' 위에 서므로
+같은 밑줄을 두 번 묻지 않는다.
+결과: 지문당 16문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
 
 생성기는 새로 만들지 않는다 — 1회 계열은 pipeline, 2회 계열은 gen2 의 것을
 그대로 호출하고, 이 파일은 '어떤 유형을 어떤 순서로 낼지'만 정한다.
@@ -31,6 +34,7 @@ from .types import (
     ORDER,
     SHORT_ANSWER,
     TOPIC,
+    GRAMMAR_COUNT,
     IRRELEVANT,
     TITLE,
     TYPE_LABELS,
@@ -51,7 +55,8 @@ MERGED_ORDER: tuple[str, ...] = (
     TITLE,         # 제목         (24번) — 주제와 붙여 대의파악을 한 묶음으로
     B,             # 함의추론      (21번)
     CONTENT,       # 내용 일치     (26번)
-    GRAMMAR,       # 어법         (29번)
+    GRAMMAR,       # 어법 — 틀린 것 모두 고르기 (29번)
+    GRAMMAR_COUNT, # 어법 — 틀린 것의 개수      (29번 계열·내신)
     VOCAB,         # 어휘 — 유의어형   (30번)
     VOCAB_2,       # 어휘 — 원문단어형 (30번)
     VOCAB_3,       # 어휘 — 부정어형   (30번)
@@ -254,7 +259,7 @@ def demo_passages_merged() -> list[Passage]:
         p.source_label = getattr(p1, "source_label", "") or ""
         p3 = extra.get(p1.title)
         for t in MERGED_ORDER:          # 출제 순서대로 채운다(어느 데모에서 왔든)
-            for src in (p1, p2, p3):
+            for src in (p3, p2, p1):   # 다시 쓴 어법이 옛 데모를 대신한다
                 if src is not None and t in src.q and t in src.a:
                     p.set_qa(t, src.q[t], src.a[t])
                     break

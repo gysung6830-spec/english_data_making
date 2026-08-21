@@ -12,11 +12,13 @@ from . import analyzer, answer_spread
 from . import verify as _verify
 from ._concurrent import run_parallel
 from .generators import (
-    content, grammar, insert, irrelevant, order, short_answer, title, topic, vocab,
+    content, grammar, grammar_count, insert, irrelevant, order, short_answer,
+    title, topic, vocab,
 )
 from .llm import ClaudeClient
 from .types import (
     CONTENT,
+    GRAMMAR_COUNT,
     IRRELEVANT,
     TITLE,
     VOCAB_2,
@@ -40,6 +42,7 @@ GENERATORS = {
     SHORT_ANSWER: short_answer,
     TITLE: title,
     IRRELEVANT: irrelevant,
+    GRAMMAR_COUNT: grammar_count,
 }
 
 # 어휘 슬롯키 -> 출제 방식. 한 지문에서 세 방식을 모두 낸다.

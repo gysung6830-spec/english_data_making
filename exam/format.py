@@ -194,6 +194,25 @@ def grammar_a(answer_nos: list[int], reasons: dict[int, str]) -> str:
     return "".join(parts)
 
 
+def grammar_count_q(marked_passage_html: str, max_count: int = 5) -> str:
+    """어법 개수형 — 밑줄이 박힌 본문 + '1개~5개' 선지."""
+    lis = "".join(f'<li><span class="cnum">{circ(i)}</span> {i}개</li>'
+                  for i in range(1, max_count + 1))
+    return (f'<div class="passage">{marked_passage_html}</div>'
+            f'<ol class="choices count">{lis}</ol>')
+
+
+def grammar_count_a(answer_no: int, reasons: dict[int, str], note: str = "") -> str:
+    """정답(=틀린 개수) + 밑줄마다 옳은지 틀린지."""
+    parts = [f'<p><span class="answer-key">{circ(answer_no)}</span> '
+             f'({answer_no}개)</p>']
+    if note:
+        parts.append(f'<p class="reason">{esc(note)}</p>')
+    for i in sorted(reasons):
+        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}</p>')
+    return "".join(parts)
+
+
 # ---------------------------------------------------------------------------
 # ⑥ 서술형 (세 소문항)
 # ---------------------------------------------------------------------------

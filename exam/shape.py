@@ -131,3 +131,39 @@ def check_phrase_in_passage(phrase: str, sentences: list[str], kind: str) -> lis
     if p not in body:
         return [f"{kind}('{phrase.strip()}')가 지문에 그대로 나오지 않습니다."]
     return []
+
+
+def _content(text: str) -> set[str]:
+    """비교용 내용어 집합(짧은 기능어 제외)."""
+    return {w for w in _words(text) if len(w) > 3}
+
+
+def check_rewrite(rewritten: list[str], original: list[str],
+                  min_changed: float = 0.6, min_topic: float = 0.25) -> list[str]:
+    """어법 문항용으로 '다시 쓴 지문'이 제구실을 하는가.
+
+    지문을 통째로 외운 학생이 '달라진 낱말 찾기'로 풀지 못하게 하려면 표현이 실제로
+    달라야 하고(min_changed), 그러면서도 같은 글이어야 한다(min_topic).
+    문장 수가 어긋나면 밑줄 번호가 원문과 안 맞으므로 그대로 거절한다.
+    """
+    bad: list[str] = []
+    if not rewritten or any(not (s or "").strip() for s in rewritten):
+        return ["다시 쓴 지문이 비어 있거나 빈 문장이 섞여 있습니다."]
+    if len(rewritten) != len(original):
+        return [f"다시 쓴 지문의 문장 수가 원문과 다릅니다"
+                f"(원문 {len(original)}개 / 다시 쓴 것 {len(rewritten)}개). "
+                "문장을 합치거나 나누지 말고 1:1로 다시 쓰세요."]
+
+    def _norm(t: str) -> str:
+        return " ".join(_words(t))
+
+    same = sum(1 for r, o in zip(rewritten, original) if _norm(r) == _norm(o))
+    changed = 1 - same / len(original)
+    if changed < min_changed:
+        bad.append(f"문장 {len(original)}개 중 {same}개가 원문과 글자 그대로 같습니다 — "
+                   f"최소 {int(min_changed * 100)}%는 표현을 바꿔야 '외워서 풀기'가 막힙니다.")
+    a, b = _content(" ".join(rewritten)), _content(" ".join(original))
+    if a and b and len(a & b) / len(a | b) < min_topic:
+        bad.append("다시 쓴 지문이 원문과 너무 동떨어졌습니다 — 표현만 바꾸고 내용은 "
+                   "그대로 유지해야 합니다.")
+    return bad

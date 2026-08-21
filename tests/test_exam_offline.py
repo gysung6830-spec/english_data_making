@@ -20,6 +20,7 @@ from exam.demo_data import DNA, demo_passages  # noqa: E402
 from exam.schemas import (  # noqa: E402
     Analysis,
     ContentOut,
+    GrammarCountOut,
     GrammarOut,
     GrammarReason,
     InsertOut,
@@ -440,6 +441,24 @@ def test_analyzer_uses_real_passage() -> None:
     print("✓ 분석기: 넣은 지문만 사용(환각 무시) 통과")
 
 
+# 어법 유형이 돌려주는 '다시 쓴 지문' 두 벌 — 원문과 문장 수는 같고 표현만 다르다.
+_REWRITE_A = [
+    "The first sentence opens the topic in a plain way.",
+    "However, the second sentence supplies an important detail.",
+    "The third sentence offers a concrete example.",
+    "The fourth sentence pulls the whole thing together.",
+    "The fifth sentence meets an obvious objection.",
+    "The sixth sentence closes with a practical suggestion of its own.",
+]
+_REWRITE_B = [
+    "The opening sentence starts the topic without any fuss.",
+    "Even so, the next sentence attaches an important detail.",
+    "A third sentence presents one concrete example.",
+    "The fourth sentence ties the whole thing together.",
+    "A fifth sentence meets the obvious objection readers feel.",
+    "The last sentence ends on a practical suggestion.",
+]
+
 # 어휘 3종이 서로 다른 낱말에 밑줄을 치는 상황을 흉내 낸다(겹침 금지 검증용).
 _VOCAB_SETS = [
     [(1, "first", "initial"), (2, "important", "crucial"), (3, "concrete", "abstract"),
@@ -503,12 +522,25 @@ _FAKE = {
         marks=[WordMark(sent_no=n, word=w, shown=sh)
                for n, w, sh in next(_VOCAB_CYCLE)],
         answer_no=3, reason="이유."),
+    # 어법은 '다시 쓴 지문' 위에 낸다 — 원문과 문장 수는 같고 표현만 다르다.
     "GrammarOut": lambda: GrammarOut(
-        marks=[WordMark(sent_no=1, word="introduces", shown="introduce"),
-               WordMark(sent_no=2, word="adds", shown="adds"),
-               WordMark(sent_no=3, word="gives", shown="give")],
+        rewritten=_REWRITE_A,
+        marks=[WordMark(sent_no=1, word="opens", shown="open"),
+               WordMark(sent_no=2, word="supplies", shown="supplies"),
+               WordMark(sent_no=3, word="offers", shown="offer")],
         answer_nos=[1, 3],
         reasons=[GrammarReason(no=1, text="수 일치"), GrammarReason(no=3, text="수 일치")]),
+    "GrammarCountOut": lambda: GrammarCountOut(
+        rewritten=_REWRITE_B,
+        marks=[WordMark(sent_no=1, word="starts", shown="start"),
+               WordMark(sent_no=2, word="attaches", shown="attaches"),
+               WordMark(sent_no=3, word="presents", shown="present"),
+               WordMark(sent_no=4, word="ties", shown="ties"),
+               WordMark(sent_no=5, word="meets", shown="meets"),
+               WordMark(sent_no=6, word="ends", shown="ends")],
+        wrong_nos=[1, 3],
+        reasons=[GrammarReason(no=i, text="근거") for i in range(1, 7)],
+        reason="틀린 것은 2개."),
     "ShortOut": lambda: ShortOut(
         q1_prompt="p1", q1_answer="한글답",
         q2_prompt="p2",
@@ -1655,18 +1687,22 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam.types import TYPE_ORDER
 
     # ① 구성 — 15문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
-    assert len(MERGED_ORDER) == 15, MERGED_ORDER
-    assert len(set(MERGED_ORDER)) == 15                    # 같은 슬롯이 두 번 나오지 않는다
+    assert len(MERGED_ORDER) == 16, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 16                    # 같은 슬롯이 두 번 나오지 않는다
     assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
-    _added = {"title", "irrelevant", "vocab_2", "vocab_3"}     # 새로 더한 유형·슬롯
+    _added = {"title", "irrelevant", "vocab_2", "vocab_3", "grammar_count"}
     assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
             == (set(MERGED_ORDER) - _added) | set(EXCLUDED))
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
-    assert MERGED_ORDER == ("topic", "title", "B", "content", "grammar",
+    assert MERGED_ORDER == ("topic", "title", "B", "content",
+                            "grammar", "grammar_count",
                             "vocab", "vocab_2", "vocab_3", "F", "irrelevant",
                             "order", "insert", "E", "D", "short_answer"), MERGED_ORDER
+    # 어법 두 문항은 발문이 서로 달라야 한다(같은 문제를 두 번 내는 것이 아니다)
+    assert MERGED_PROMPTS["grammar"] != MERGED_PROMPTS["grammar_count"]
+    assert "개수" in MERGED_PROMPTS["grammar_count"]
     assert MERGED_ORDER[-2:] == ("D", "short_answer")       # 서술형 계열은 맨 뒤
     # 어휘 3종은 발문이 같고 라벨도 '어휘'로 같다(문제 만드는 방식만 다르다)
     _v3 = ("vocab", "vocab_2", "vocab_3")
@@ -1687,17 +1723,18 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     ps = build_passages_merged(_Counting(), ["b1", "b2"], labels=["10-1", "10-2"])
     assert "AOut" not in seen and "GOut" not in seen, seen      # A·G 생성 안 함
-    assert seen.get("GrammarOut") == 2, seen                    # 어법은 지문당 1번(C 중복 제거)
+    assert seen.get("GrammarOut") == 2, seen                    # 어법(모두 고르기) 지문당 1번
+    assert seen.get("GrammarCountOut") == 2, seen               # 어법(개수) 지문당 1번
     assert seen.get("VocabOut") == 6, seen                      # 어휘는 지문당 3번(3종)
     assert seen.get("TitleOut") == 2 and seen.get("IrrelevantOut") == 2, seen
-    assert seen.get("VerifyOut") == 16, seen                    # 자기검증 지문당 8회
+    assert seen.get("VerifyOut") == 18, seen                    # 자기검증 지문당 9회
 
-    # ③ 지문마다 15문항이 순서대로, 라벨도 보존된다
+    # ③ 지문마다 16문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
 
-    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 15 = 30번까지)
+    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 16 = 32번까지)
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "merged.pdf"
     renderer.render_pdf(ps, out, header_note="통합",
@@ -1732,7 +1769,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
     assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
-    assert "지문당 15문항" in home
+    assert "지문당 16문항" in home
     r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
@@ -1742,8 +1779,8 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert "변형문제 1회" not in page and "변형문제 2회" not in page
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
-    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 8
-    print("✓ 변형문제 통합본(15문항·제목·무관한 문장·어휘 3종)·조판·재출력 통과")
+    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 9
+    print("✓ 변형문제 통합본(16문항·제목·무관한 문장·어휘 3종·어법 2종)·조판·재출력 통과")
 
 
 def test_new_type_guards() -> None:
@@ -1823,6 +1860,8 @@ def test_tiering_and_escalation() -> None:
     assert tiering.effort_for("irrelevant") == "high"     # 논지 판단
     assert tiering.effort_for("F") == "high"              # 빈칸 유일성
     assert tiering.effort_for("insert") == "high"
+    assert tiering.effort_for("grammar") == "high"        # 다시 쓴 지문 위에 내므로 부담이 크다
+    assert tiering.effort_for("grammar_count") == "high"  # 밑줄 하나만 어긋나도 개수가 틀린다
     assert tiering.effort_for("vocab") == "medium"        # 형식은 코드가 본다
     assert tiering.effort_for("vocab_3") == "medium"      # 슬롯키도 base 로 판정
     assert tiering.effort_for("title") == "medium"

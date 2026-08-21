@@ -20,8 +20,11 @@ from __future__ import annotations
 # 추론 강도 — 판단이 걸린 유형만 high, 나머지는 medium.
 #   high  : 정답 유일성을 따져야 하고, 틀리면 복수정답·정답 없음이 되는 유형
 #   medium: 코드가 형식을 검사해 주거나(어휘·제목), 구조가 단순한 유형
-_HIGH = {"irrelevant", "F", "insert", "order", "content", "B", "E"}
-_MEDIUM = {"topic", "title", "grammar", "vocab", "D", "short_answer"}
+_HIGH = {"irrelevant", "F", "insert", "order", "content", "B", "E",
+         # 어법 두 유형은 지문을 다시 써서 내므로(암기 방지) 판단 부담이 크다.
+         # 다시 쓴 문장에 뜻하지 않은 오류가 남으면 정답이 여러 개가 된다.
+         "grammar", "grammar_count"}
+_MEDIUM = {"topic", "title", "vocab", "D", "short_answer"}
 
 DEFAULT_EFFORT = "medium"
 VERIFY_EFFORT = "high"      # 검수는 언제나 깊게 — 여기가 마지막 문지기다

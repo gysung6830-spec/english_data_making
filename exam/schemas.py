@@ -172,6 +172,37 @@ class TopicOut(BaseModel):
 # ---------------------------------------------------------------------------
 # 내용 일치 (한글 선지, 지문은 원본 그대로) — 서술형 앞
 # ---------------------------------------------------------------------------
+class GrammarCountOut(BaseModel):
+    """어법상 틀린 것의 '개수'를 묻는 유형(수능 29번 계열의 내신 변형).
+
+    어느 것이 틀렸는지 고르는 대신 몇 개가 틀렸는지 세게 한다. 찍어서 맞히기 어렵고,
+    밑줄 하나하나를 다 따져야 하므로 어법 지식을 훨씬 촘촘히 확인한다.
+    """
+
+    rewritten: list[str]           # 다시 쓴 지문(원문과 문장 수 동일)
+    marks: list[WordMark]          # 밑줄 5~7개
+    wrong_nos: list[int]           # 그중 어법상 틀린 밑줄 번호들(1~5개)
+    reasons: list[GrammarReason]   # 밑줄마다 왜 옳은지/틀린지
+    reason: str = ""               # 전체 총평(한국어)
+
+    @field_validator("marks")
+    @classmethod
+    def _count(cls, v: list[WordMark]) -> list[WordMark]:
+        if not (5 <= len(v) <= 7):
+            raise ValueError("어법 개수 문항의 밑줄은 5~7개여야 합니다.")
+        return v
+
+    def check(self) -> None:
+        n = len(self.marks)
+        if not 1 <= len(set(self.wrong_nos)) <= 5:
+            raise ValueError("틀린 밑줄은 1~5개여야 합니다(선지가 1개~5개이므로).")
+        for a in self.wrong_nos:
+            if not 1 <= a <= n:
+                raise ValueError(f"틀린 밑줄 번호 {a} 가 범위를 벗어났습니다(1~{n}).")
+        if len(self.reasons) != n:
+            raise ValueError(f"밑줄 {n}개 각각의 근거(reasons)가 필요합니다.")
+
+
 class ContentOut(BaseModel):
     choices: list[str]             # 한글 선지 5개
     answer_no: int                 # 글과 일치하는 정답 번호(1~5)
@@ -238,6 +269,9 @@ class GrammarReason(BaseModel):
 
 
 class GrammarOut(BaseModel):
+    # 어법 문항은 '정본 그대로'가 아니라 다시 쓴 지문 위에 낸다 — 지문을 통째로 외운
+    # 학생이 '달라진 낱말 찾기'로 풀어 버리는 것을 막는다.
+    rewritten: list[str]           # 내용은 같고 표현만 바꾼 지문(원문과 문장 수 동일)
     marks: list[WordMark]          # 밑줄 2~8개(틀린 것은 shown 이 오답형)
     answer_nos: list[int]          # 틀린 밑줄 번호들(복수)
     reasons: list[GrammarReason]
