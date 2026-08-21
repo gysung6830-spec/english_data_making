@@ -169,7 +169,8 @@ def _as_list(reports) -> list:
 
 # 서술형 교재 유형의 '표시 순서'(type-major 번호 매김에도 사용).
 #   보기어휘 → 요약문 → 어법오류 → 조건영작 → 배열영작 → 문장변형 → 문답
-WS_TYPE_ORDER = ["cloze", "summary", "error", "compose", "arrange", "paraphrase", "qa"]
+WS_TYPE_ORDER = ["cloze", "summary", "error", "compose_low", "compose_mid",
+                 "arrange", "paraphrase", "qa"]
 
 
 # ---- 서술형 교재용 헬퍼 ---------------------------------------------------
@@ -538,18 +539,18 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
         idea_items = arrange(ws.arrange.ideas if ws.arrange else [])
         title_items = arrange(ws.arrange.titles if ws.arrange else [])
 
-        # 조건 영작 (난이도 하/중/상: 주어지는 단어 개수로 구분 · 보기 단어 랜덤 섞기)
-        comp_items = [{
-            "src": src, "korean": it.korean,
-            "conditions": list(it.conditions),
-            "levels": [
-                {"tag": "하", "cls": "lv-low", "words": _shuffle_words(it.given_low, it.answer + "L")},
-                {"tag": "중", "cls": "lv-mid", "words": _shuffle_words(it.given_mid, it.answer + "M")},
-                {"tag": "상", "cls": "lv-high", "words": _shuffle_words(it.given_high, it.answer + "H")},
-            ],
-            "word_count": it.word_count, "answer": it.answer,
-            "explanation": it.explanation,
-        } for it in (ws.compose.items if ws.compose else [])]
+        # 조건 영작 — 하/중 두 난이도를 '별도 블록'으로 분리(같은 문장, 단어 개수만 차등).
+        #   보기 단어는 정답 어순이 드러나지 않게 랜덤 섞기.
+        def _compose_at(level_words, suffix):
+            return [{
+                "src": src, "korean": it.korean,
+                "conditions": list(it.conditions),
+                "given_words": _shuffle_words(level_words(it), it.answer + suffix),
+                "word_count": it.word_count, "answer": it.answer,
+                "explanation": it.explanation,
+            } for it in (ws.compose.items if ws.compose else [])]
+        compose_low = _compose_at(lambda it: it.given_low, "L")
+        compose_mid = _compose_at(lambda it: it.given_mid, "M")
 
         # 사용되지 않는 낱말 고르기
         cloze_sets = []
@@ -595,7 +596,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
             "summary": sum_items,
             "paraphrase": para_items,
             "ideas": idea_items, "titles": title_items,
-            "compose": comp_items,
+            "compose_low": compose_low, "compose_mid": compose_mid,
             "cloze": cloze_sets,
             "error": err_items,
             "qa": qa_items,
@@ -603,6 +604,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
 
     # 일련번호: 표시 유형 순서(type-major)로 매긴다.
     #   유형5(배열영작)은 ideas + titles 를 한 유형으로 이어서 센다.
+    #   조건영작(하)/조건영작(중)은 각각 별도 블록으로 번호를 잇는다.
     n = int(start_no) - 1
     for key in WS_TYPE_ORDER:
         for pg in passages:
@@ -635,7 +637,8 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
         "cloze": any(p["cloze"] for p in passages),
         "summary": any(p["summary"] for p in passages),
         "error": any(p["error"] for p in passages),
-        "compose": any(p["compose"] for p in passages),
+        "compose_low": any(p["compose_low"] for p in passages),
+        "compose_mid": any(p["compose_mid"] for p in passages),
         "arrange": any(p["ideas"] or p["titles"] for p in passages),
         "paraphrase": any(p["paraphrase"] for p in passages),
         "qa": any(p["qa"] for p in passages),
