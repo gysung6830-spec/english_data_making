@@ -77,12 +77,11 @@ MERGED_LABELS: dict[str, str] = {**TYPE_LABELS, **TYPE_LABELS2}
 
 
 def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
-                         content_difficulty: str = "hard", analysis=None, level: str | None = None,
-                         passage_index: int = 0) -> Passage:
-    """지문 원문 1개 → 통합 11유형이 채워진 Passage.
+                         analysis=None, passage_index: int = 0) -> Passage:
+    """지문 원문 1개 → 통합 15문항이 채워진 Passage.
 
-    유형끼리는 서로 독립이므로 스레드로 동시에 생성한다(1회·2회와 동일).
-    analysis 를 주면 분석 호출을 건너뛴다(회차·난이도 조합이 공유).
+    유형끼리는 서로 독립이므로 스레드로 동시에 생성한다.
+    analysis 를 주면 분석 호출을 건너뛴다.
     """
     from . import analyzer, answer_spread, difficulty, gen2, pipeline
     from . import review as _rv
@@ -90,11 +89,8 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
     if analysis is None:
         analysis = analyzer.analyze(client, body, max_retries=max_retries)
-    if level:   # 난이도 지침을 분석 결과에 심어 모든 생성기에 공통 전달
-        analysis.difficulty_note = difficulty.clause(level)
-        content_difficulty = difficulty.content_difficulty(level)
-        # 어휘는 난이도를 따르지 않는다 — 세 방식(유의어·원문단어·부정어)을 항상 모두
-        # 내므로, 난이도를 낮춰도 어려운 방식이 빠지지 않는다.
+    # 공통 출제 지침을 분석 결과에 심어 두면 모든 생성기의 프롬프트에 함께 실려 간다.
+    analysis.difficulty_note = difficulty.CLAUSE
     passage = Passage(title=analysis.title)
 
     slots = answer_spread.SLOTS_MERGED
@@ -104,11 +100,11 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         if pipeline._base(t) in pipeline.GENERATORS:     # 산문형 계열
             return pipeline.make_task(t, client, analysis, body, max_retries=max_retries,
                                       logger=logger,
-                                      content_difficulty=content_difficulty,
-                                      passage_index=passage_index, level=level, slots=slots)
+                                      content_difficulty=difficulty.CONTENT_DIFFICULTY,
+                                      passage_index=passage_index, slots=slots)
         return gen2.make_task2(t, client, analysis, body, max_retries=max_retries,   # 2회 계열
                                logger=logger, passage_index=passage_index,
-                               level=level, slots=slots)
+                               slots=slots)
 
     results = run_parallel([(t, _task(t)) for t in MERGED_ORDER])
     for t in MERGED_ORDER:      # 수거는 완료순이라도 조립은 고정 순서대로
@@ -126,9 +122,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
 
 def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logger=None,
-                          analyses=None, level: str | None = None,
-                          content_difficulty: str = "hard",
-                          labels: list[str] | None = None, progress=None,
+                          analyses=None, labels: list[str] | None = None, progress=None,
                           part_label: str = "변형문제") -> list[Passage]:
     """여러 지문 → 검증된 Passage 리스트(조판 없음). 합본용."""
     from . import validator
@@ -142,8 +136,7 @@ def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logge
 
     def _one(b, a, i):
         r = build_passage_merged(client, b, max_retries=max_retries, logger=logger,
-                                 content_difficulty=content_difficulty,
-                                 analysis=a, level=level, passage_index=i)
+                                 analysis=a, passage_index=i)
         if progress:
             progress.step(f"{part_label} · 지문 {i + 1}")
         return r
@@ -163,12 +156,11 @@ def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logge
 
 
 def build_exam_merged(client, bodies: list[str], out_path: str | Path, header_note: str = "",
-                      max_retries: int = 1, logger=None, analyses=None,
-                      level: str | None = None, sections=None,
+                      max_retries: int = 1, logger=None, analyses=None, sections=None,
                       labels: list[str] | None = None) -> Path:
     from . import renderer
     passages = build_passages_merged(client, bodies, max_retries=max_retries, logger=logger,
-                                     analyses=analyses, level=level, labels=labels)
+                                     analyses=analyses, labels=labels)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
                                type_order=MERGED_ORDER, prompts=MERGED_PROMPTS,
                                labels=MERGED_LABELS, sections=sections)

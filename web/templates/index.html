@@ -97,35 +97,23 @@ Second passage goes here."></textarea>
   </div>
 
   <div class="field setbox">
-    <span class="label">난이도 — 기본은 <b>중</b> 하나입니다. 더 체크하면 그만큼 시간과 비용이 늘어납니다.</span>
-    <label class="check"><input type="checkbox" name="levels" value="상">
-      <b>상</b> <span class="hint2">함정 오답·강한 패러프레이즈 · 어휘=부정어 삽입형</span></label>
-    <label class="check"><input type="checkbox" name="levels" value="중" checked>
-      <b>중</b> <span class="hint2">수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형 — <b>권장</b></span></label>
-    <label class="check"><input type="checkbox" name="levels" value="하">
-      <b>하</b> <span class="hint2">오답이 분명히 어긋남·단서 뚜렷(평이) · 어휘=원문 단어형</span></label>
-    <span class="hint">내신 시험이 실제로 놓인 자리가 <b>중</b>이라 기본값으로 두었습니다.
-      난이도를 하나 더 체크할 때마다 <b>같은 지문을 한 벌 더 생성</b>하므로
-      소요 시간과 API 비용이 그만큼 배로 늘어납니다(지문 분석은 한 번만 하고 공유).</span>
-  </div>
-
-  <div class="field setbox">
     <span class="label">출제 유형 — 지문당 15문항</span>
-    <span class="hint2">주제 · <b>제목</b> · 함의추론 · 내용 일치 · 어법 · <b>어휘 3종</b> ·
-      빈칸추론 · <b>무관한 문장</b> · 순서 배열 · 문장 삽입 · 요약문 빈칸 · 어순 배열 · 서술형</span>
+    <span class="hint2">주제 · 제목 · 함의추론 · 내용 일치 · 어법 · <b>어휘 3종</b> ·
+      빈칸추론 · 무관한 문장 · 순서 배열 · 문장 삽입 · 요약문 빈칸 · 어순 배열 · 서술형</span>
     <span class="hint2">어휘 3종 = 유의어형 · 원문단어형 · 부정어형 (발문은 같고 문제 만드는
       방식이 달라 서로 다른 문제가 됩니다)</span>
     <span class="hint">수능 출제 유형을 한 벌로 덮고, <b>문항 배열도 수능 순서</b>를 따릅니다
-      (뒤로 갈수록 어려워집니다). 난이도를 여러 개 체크하면
-      <b>같은 지문으로 난이도별 시험지</b>가 한 PDF에 모두 합쳐집니다.</span>
+      (뒤로 갈수록 어려워집니다). 출제 수준은 <b>수능 표준</b> 하나로 고정입니다 —
+      학교 내신 문제가 실제로 놓인 자리이고, 더 어렵게 낼수록 복수정답 같은 출제 오류가
+      늘어 검수 없이 바로 쓰기 어려워지기 때문입니다.</span>
   </div>
 
   <div class="field setbox">
     <span class="label">문항 배치</span>
     <label class="check"><input type="radio" name="group_by" value="passage" checked>
-      <b>지문별</b> <span class="hint2">[지문1: 7문항][지문2: 7문항]… 지문마다 모든 유형</span></label>
+      <b>지문별</b> <span class="hint2">[지문1: 15문항][지문2: 15문항]… 지문마다 모든 유형</span></label>
     <label class="check"><input type="radio" name="group_by" value="type">
-      <b>문제유형별</b> <span class="hint2">[순서배열: 지문1·2·3][문장삽입: …]… 같은 유형끼리 모음</span></label>
+      <b>문제유형별</b> <span class="hint2">[주제: 지문1·2·3][제목: …]… 같은 유형끼리 모음</span></label>
   </div>
 
   <div class="field setbox">

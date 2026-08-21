@@ -1,10 +1,11 @@
 """④ 어휘 생성기 (문맥상 부적절) — 정본에서 지정 단어만 변형. 세 방식 지원.
 
-난이도 연동(상/중/하)으로 자동 선택된다:
-  method="negation" (상): 밑줄은 원문 그대로, 정답 문장에만 부정어(no/not/neither)를 넣어
-      글의 흐름과 모순되게 만든다(override_no/override_text). — 가장 어려움
-  method="synonym"  (중): 밑줄 5개 중 1개=반의어(정답), 나머지=유의어로 패러프레이즈.
-  method="original" (하): 정답 1개만 반의어, 나머지 4개는 '원문 단어 그대로' 노출. — 가장 쉬움
+세 방식을 한 지문에서 모두 출제한다(pipeline.VOCAB_METHODS). 발문은 같지만 밑줄을
+만드는 방식이 달라 서로 다른 문제가 된다:
+  method="synonym"  : 밑줄 5개 중 1개=반의어(정답), 나머지=유의어로 패러프레이즈.
+  method="original" : 정답 1개만 반의어, 나머지 4개는 '원문 단어 그대로' 노출.
+  method="negation" : 밑줄은 원문 그대로, 정답 문장에만 부정어(no/not/neither)를 넣어
+      글의 흐름과 모순되게 만든다(override_no/override_text).
 """
 from __future__ import annotations
 

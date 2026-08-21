@@ -128,7 +128,7 @@ def collect_review(passages: list[Passage], start: int = 1,
     """'확인 권장'으로 표시된 문항을 문서 연속 번호와 함께 모은다.
 
     _blocks 와 '같은 순회 순서·같은 번호 부여 규칙'(group_by 포함)을 쓰므로 문항 번호가
-    정확히 일치한다. part_label 은 합본에서 어느 파트(1회/2회·난이도)인지 구분용.
+    정확히 일치한다. part_label 은 합본에서 어느 파트인지 구분용.
     """
     items: list[dict] = []
     n = start

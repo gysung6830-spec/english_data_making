@@ -50,7 +50,7 @@ _SET_META = {
 def dump_parts(part_meta: list[dict], header: str = "", doc_name: str = "") -> dict:
     """part_meta: [{"set":"1"/"2","tag":str,"sections":list,"passages":[Passage,…]}] → JSON dict.
 
-    tag 는 머리글(header)을 뺀 파트 제목("변형문제 1회 · 난이도 중")이라,
+    tag 는 머리글(header)을 뺀 파트 제목("변형문제")이라,
     복원 시 새 머리글과 다시 합칠 수 있다.
     """
     return {

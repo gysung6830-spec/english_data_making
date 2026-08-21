@@ -2,7 +2,7 @@
 
 지문을 붙여넣고 옵션을 고르면 브라우저에서 바로 시험지 PDF를 미리보기/다운로드한다.
 - API 키가 없으면 '데모' 모드로 내장 지문(DNA·star manager)을 사용해 미리볼 수 있다.
-- API 키가 있으면 입력한 지문으로 Claude가 통합 11유형 문항을 생성한다.
+- API 키가 있으면 입력한 지문으로 Claude가 통합 15문항을 생성한다.
 
 실행: python webapp.py  (기본 http://127.0.0.1:5000)
 """
@@ -144,11 +144,6 @@ def generate():
     demo = request.form.get("action") == "demo"
     header = (request.form.get("header") or "").strip()
 
-    # 난이도: 체크박스(상/중/하 다중). 없으면 중 하나. 표시 순서는 하<중<상.
-    LEVEL_ORDER = ["하", "중", "상"]
-    chosen = set(l for l in request.form.getlist("levels") if l in ("상", "중", "하"))
-    levels = [l for l in LEVEL_ORDER if l in chosen] or ["중"]
-
     # 출력할 섹션(없으면 4개 모두)
     valid_sec = ("student", "teacher", "quick", "answers")
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
@@ -164,7 +159,7 @@ def generate():
     def fail(msg: str, code: int = 400):
         return render_template("index.html", has_api_key=_api_available(cfg), error=msg), code
 
-    # 실제 모드: 지문을 한 번만 확보(두 세트가 같은 지문 공유)
+    # 실제 모드: 지문을 한 번만 확보한다
     bodies = None
     src_labels: list[str] | None = None   # 원본 PDF의 영어지문 문항번호(있으면)
     client = None
@@ -274,60 +269,43 @@ def generate():
             doc_name = "영어지문"
     doc_name = doc_name or "영어지문"
 
-    def part_tag(lv: str | None) -> str:
-        """머리글(header)을 뺀 파트 제목 — JSON 저장·복원 시 새 머리글과 다시 합쳐진다."""
-        tag = "변형문제"
-        if lv:
-            tag += f" · 난이도 {lv}"
-        if demo:
-            tag += " (데모)"
-        return tag
-
-    def part_header(lv: str | None) -> str:
-        tag = part_tag(lv)
-        return f"{tag} — {header}" if header else tag
+    # 머리글(header)을 뺀 파트 제목 — JSON 저장·복원 시 새 머리글과 다시 합쳐진다.
+    part_tag = "변형문제 (데모)" if demo else "변형문제"
+    part_header = f"{part_tag} — {header}" if header else part_tag
 
     try:
         # 진행 상황을 웹앱을 띄운 터미널에 한 줄씩 표시(브라우저는 기다리기만 하므로).
         from exam.progress import NullProgress, Progress
-        n_parts = 1 if demo else len(levels)
-        prog = (NullProgress() if demo
-                else Progress(n_parts * len(bodies)))
+        prog = NullProgress() if demo else Progress(len(bodies))
         if client is not None and hasattr(client, "_progress"):
             client._progress = prog          # 배치 제출·완료도 터미널에 표시
-        # 실제 모드: 분석을 '한 번만' 돌려 모든 세트·난이도 조합이 공유한다(속도·비용).
+        # 지문 분석은 한 번만 돌린다(모든 유형이 같은 분석을 공유한다).
         analyses = None
         if not demo:
-            prog.note(f"지문 {len(bodies)}개 분석 중 … (난이도 {n_parts}종 공유)")
+            prog.note(f"지문 {len(bodies)}개 분석 중 …")
             from exam.pipeline import analyze_bodies
             analyses = analyze_bodies(client, bodies,
                                       max_retries=cfg.processing.max_retries)
-            prog.note(f"분석 완료 · 이제 문항 생성 {n_parts * len(bodies)}건을 시작합니다")
+            prog.note(f"분석 완료 · 이제 지문 {len(bodies)}개의 문항 생성을 시작합니다")
 
-        # 선택한 난이도만큼 만들어 한 PDF로 합본한다(데모는 난이도 변형이 없으므로 1벌).
-        combo_levels = [None] if demo else levels
-        parts = []
-        part_meta = []      # JSON 저장용(재분석·재생성 없이 제목만 바꿔 재출력)
-        labels = []
-        for lv in combo_levels:
-            if demo:
-                ps = demo_passages_merged()
-                validator.validate_passages(ps, MERGED_ORDER)
-                validator.validate_numbering(ps, 1, MERGED_ORDER)
-            else:
-                ps = build_passages_merged(client, bodies,
-                                           max_retries=cfg.processing.max_retries,
-                                           analyses=analyses, level=lv,
-                                           labels=src_labels, progress=prog,
-                                           part_label=part_tag(lv))
-            parts.append({"passages": ps, "header_note": part_header(lv),
-                          "sections": sections, "type_order": MERGED_ORDER,
-                          "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,
-                          "group_by": group_by})
-            part_meta.append({"set": "M", "tag": part_tag(lv),
-                              "sections": sections, "passages": ps,
-                              "group_by": group_by})
-            labels.append(part_header(lv))
+        if demo:
+            ps = demo_passages_merged()
+            validator.validate_passages(ps, MERGED_ORDER)
+            validator.validate_numbering(ps, 1, MERGED_ORDER)
+        else:
+            ps = build_passages_merged(client, bodies,
+                                       max_retries=cfg.processing.max_retries,
+                                       analyses=analyses,
+                                       labels=src_labels, progress=prog,
+                                       part_label=part_tag)
+        parts = [{"passages": ps, "header_note": part_header,
+                  "sections": sections, "type_order": MERGED_ORDER,
+                  "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,
+                  "group_by": group_by}]
+        # JSON 저장용(재분석·재생성 없이 제목만 바꿔 재출력)
+        part_meta = [{"set": "M", "tag": part_tag, "sections": sections,
+                      "passages": ps, "group_by": group_by}]
+        labels = [part_header]
 
         prog.note("문항 생성 완료 · PDF 조판 중 …")
         fid = uuid.uuid4().hex[:12]

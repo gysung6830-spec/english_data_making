@@ -547,10 +547,7 @@ def test_llm_path_wiring() -> None:
     from exam import difficulty, pipeline as _pl
     assert _pl.VOCAB_METHODS == {"vocab": "synonym", "vocab_2": "original",
                                  "vocab_3": "negation"}, _pl.VOCAB_METHODS
-    assert not hasattr(difficulty, "vocab_method")   # 난이도 레버에서 빠졌다
-    for lv in ("상", "중", "하"):
-        p = build_passage_merged(_FakeClient(), "dummy body", level=lv)
-        validator.check_passage(p, MERGED_ORDER)
+    assert not hasattr(difficulty, "vocab_method")   # 난이도 레버 자체가 사라졌다
     html = renderer.render_html([passage], type_order=MERGED_ORDER,
                                 prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
     assert "정답 및 해설" in html
@@ -615,12 +612,12 @@ def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") 
     build_exam_merged(client, bodies, out1, analyses=analyses)
     assert out1.exists()
 
-    # 3) 같은 분석을 난이도만 바꿔 재사용(분석 API 를 다시 부르지 않는다)
+    # 3) 같은 분석을 그대로 재사용해도 분석 API 를 다시 부르지 않는다
     out2 = tmp_out / "p2.pdf"
-    build_exam_merged(client, bodies, out2, analyses=analyses, level="상")
+    build_exam_merged(client, bodies, out2, analyses=analyses)
     assert out2.exists()
 
-    # 4) 병렬 생성 결과가 순서대로 온전히 채워졌는지(11종)
+    # 4) 병렬 생성 결과가 순서대로 온전히 채워졌는지
     p = build_passage_merged(client, "dummy", analysis=analyses[0])
     assert p.types == set(MERGED_ORDER)
     print("✓ 병렬 생성·병렬 분석·난이도별 분석 공유 통과")
@@ -631,22 +628,32 @@ def test_difficulty_lever() -> None:
     from exam import difficulty
     from exam.generators.base import context
 
-    assert difficulty.normalize(None) == "중"
-    assert difficulty.normalize("이상한값") == "중"
-    assert difficulty.content_difficulty("하") == "plain"
-    assert difficulty.content_difficulty("상") == "hard"
+    # 상·하는 삭제됐다 — 고를 수 있는 난이도가 없고, 남은 건 고정된 공통 지침 하나뿐
+    for gone in ("normalize", "clause", "content_difficulty", "vocab_method",
+                 "LEVELS", "HIGH", "LOW", "MID"):
+        assert not hasattr(difficulty, gone), gone
+    assert difficulty.CONTENT_DIFFICULTY == "hard"
+    assert "수능 표준" in difficulty.CLAUSE
+    assert "난이도" not in difficulty.CLAUSE          # 등급 표기가 남아 있지 않다
 
     client = _FakeClient()
-    # level 을 주면 생성 직전에 분석에 지침을 심고 → context 에 노출된다
+    # 공통 지침은 생성 직전에 분석에 심겨 모든 유형의 프롬프트(context)에 노출된다
     a = _fake_analysis()
-    a.difficulty_note = difficulty.clause("상")
-    assert "[난이도: 상]" in context(a)
+    a.difficulty_note = difficulty.CLAUSE
+    assert "[출제 수준]" in context(a)
 
-    # 산문형·추론형 유형 모두 level 경로가 정상 배선되는지
-    for lv in ("하", "상"):
-        p = build_passage_merged(client, "dummy", level=lv)
-        assert p.types == set(MERGED_ORDER)
-    print("✓ 상/중/하 난이도 레버(지침 주입·전 유형 배선) 통과")
+    seen = []
+
+    class _Peek(_FakeClient):
+        def structured(self, system, prompt, model_cls, **kw):
+            seen.append(prompt)
+            return super().structured(system, prompt, model_cls, **kw)
+
+    p = build_passage_merged(_Peek(), "dummy")
+    assert p.types == set(MERGED_ORDER)
+    gen_prompts = [x for x in seen if "[문장]" in x]   # 분석·검증 호출은 제외
+    assert gen_prompts and all("[출제 수준]" in x for x in gen_prompts), len(gen_prompts)
+    print("✓ 출제 수준 고정(수능 표준 하나·전 유형 주입) 통과")
 
 
 def test_error_reduction_settings() -> None:
@@ -688,13 +695,14 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
 
     client = _FakeClient()
     ps1 = build_passages_merged(client, ["b1", "b2"], labels=["31번", "32번"])
-    ps2 = build_passages_merged(client, ["b1", "b2"], labels=["31번", "32번"], level="상")
+    ps2 = build_passages_merged(client, ["b3", "b4"], labels=["33번", "34번"])
     ps1[0].flag("topic", ["오답 선지 근거 보강 검토 (…)"])   # 플래그도 보존되는지
 
+    # 파트가 여러 개인 저장본(옛 난이도별 합본 등)도 그대로 왕복되는지 함께 본다
     part_meta = [
-        {"set": "M", "tag": "변형문제 · 난이도 중",
+        {"set": "M", "tag": "변형문제",
          "sections": ["student", "answers"], "passages": ps1},
-        {"set": "M", "tag": "변형문제 · 난이도 상",
+        {"set": "M", "tag": "변형문제 (2교시)",
          "sections": ["student", "answers"], "passages": ps2},
     ]
     payload = serialize.dump_parts(part_meta, header="원래학원", doc_name="Unit1")
@@ -711,7 +719,7 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
     # 2) 머리글 교체 복원 → header_note 에 새 제목이 실린다(재분석 없음)
     parts, meta = serialize.load_parts(data, header_override="새학원 4월")
     assert len(parts) == 2 and meta["n_parts"] == 2
-    assert parts[0]["header_note"] == "변형문제 · 난이도 중 — 새학원 4월"
+    assert parts[0]["header_note"] == "변형문제 — 새학원 4월"
     assert tuple(parts[1]["type_order"]) == MERGED_ORDER    # 통합 조판 메타 복원
     assert parts[0]["passages"][0].source_label == "31번"
 
@@ -1536,16 +1544,16 @@ def test_precheck_harness() -> None:
     from web import app as webmod
     c = webmod.app.test_client()
     r = c.post("/generate", data={"passages": dirty, "api_key": "sk-ant-test",
-                                  "sets": "1", "levels": "중"},
+                                  "out_mode": "each", "group_by": "type"},
                content_type="multipart/form-data")
     html = r.get_data(as_text=True)
     assert r.status_code == 200 and "생성 전 확인" in html, r.status_code
     m = _re.search(r'name="precheck_ack" value="([0-9a-f]+)"', html)
     assert m, "ack 토큰 없음"
-    assert 'name="sets" value="1"' in html                  # 선택 옵션 보존
+    assert 'name="out_mode" value="each"' in html           # 고른 옵션 보존
+    assert 'name="group_by" value="type"' in html
     assert webmod._stash_path(m.group(1)).exists()          # 재업로드 없이 재사용할 지문 저장
-    r2 = c.post("/generate", data={"passages": clean, "api_key": "sk-ant-test",
-                                   "sets": "1", "levels": "중"},
+    r2 = c.post("/generate", data={"passages": clean, "api_key": "sk-ant-test"},
                 content_type="multipart/form-data")
     assert "생성 전 확인" not in r2.get_data(as_text=True)   # 깨끗하면 바로 진행
     print("✓ 사전 점검 하니스(정본 오염 사전 차단·오탐 없음·웹앱 경고) 통과")

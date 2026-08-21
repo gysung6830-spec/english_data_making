@@ -42,7 +42,7 @@ GENERATORS = {
     IRRELEVANT: irrelevant,
 }
 
-# 어휘 슬롯키 -> 출제 방식. 한 지문에서 세 방식을 모두 낸다(난이도와 무관하게 고정).
+# 어휘 슬롯키 -> 출제 방식. 한 지문에서 세 방식을 모두 낸다.
 VOCAB_METHODS = {VOCAB: "synonym", VOCAB_2: "original", VOCAB_3: "negation"}
 
 
@@ -83,7 +83,7 @@ def _base(t: str) -> str:
 
 def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
               content_difficulty: str = "hard",
-              passage_index: int = 0, level: str | None = None, slots=None):
+              passage_index: int = 0, slots=None):
     """산문형 유형(주제·내용일치·어법·어휘·순서·삽입·서술형) 하나를 만드는 '무인자 함수'.
 
     slots 는 정답 위치 분산용 슬롯표. 생략하면 이 계열만 쓰던 옛 슬롯표를 쓴다.
@@ -106,7 +106,7 @@ def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
 
 def analyze_bodies(client: ClaudeClient, bodies: list[str], max_retries: int = 1,
                    logger=None) -> list:
-    """여러 지문을 동시에 분석한다(난이도별 시험지가 같은 분석을 공유한다)."""
+    """여러 지문을 동시에 분석한다(모든 유형이 이 분석 하나를 공유한다)."""
     if logger:
         logger.info("지문 %d개 분석 중 …", len(bodies))
     tasks = [(i, (lambda b=b: analyzer.analyze(client, b, max_retries=max_retries)))

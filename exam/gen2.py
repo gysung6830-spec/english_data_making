@@ -221,7 +221,7 @@ def _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, answer_p
 
 
 def make_task2(t, client, analysis, body, max_retries=1, logger=None,
-               passage_index=0, level=None, slots=None):
+               passage_index=0, slots=None):
     """2회 계열(A~G) 유형 t 하나를 만드는 '무인자 함수'.
 
     통합본(merged)도 같은 생성기를 그대로 쓰므로 여기서 한 번만 정의한다.
