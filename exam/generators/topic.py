@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from .. import answer_spread, build as B
-from .. import review
+from .. import review, shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, TopicOut
 from .base import context
@@ -35,6 +35,11 @@ _PROMPT = """아래 '정본 지문'으로 '주제' 문제를 만드세요. 지�
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "") -> tuple[str, str, list[str]]:
+    def _chk(o: TopicOut) -> None:
+        bad = shape.check_choice_shape(o.choices, o.answer_no, "선지")
+        if bad:
+            raise ValueError("주제 문항 설계 결함 — " + " ".join(bad))
+
     out: TopicOut = client.structured(
         system=SYSTEM,
         prompt=(variant_hint + "\n" if variant_hint else "") + _PROMPT.format(ctx=context(analysis)),
@@ -42,6 +47,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=TopicOut,
         max_tokens=2500,
         max_retries=max_retries,
+        extra_validate=_chk,
     )
     wrong = {w.no: w.text for w in out.wrong_reasons}
     choices, answer_no = out.choices, out.answer_no

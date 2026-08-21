@@ -186,19 +186,24 @@ def generate():
         run_mode = request.form.get("run_mode")
         if run_mode not in ("fast", "batch"):
             run_mode = cfg.processing.mode if cfg.processing.mode in ("fast", "batch") else "fast"
+
+        def _make_client(model_id: str):
+            kw = dict(thinking=cfg.processing.thinking, effort=cfg.processing.effort)
+            if run_mode == "batch":
+                from exam.batch_client import BatchingClaudeClient
+                return BatchingClaudeClient(eff_key, model_id, **kw)
+            return ClaudeClient(eff_key, model_id, **kw)
+
         if run_mode == "batch":
             # 배치는 '많이 모을수록' 이득이라 동시 대기 수를 넉넉히 둔다(실제 호출은 배치 1건).
             _concurrent.set_concurrency(max(cfg.processing.concurrency, 64))
-            from exam.batch_client import BatchingClaudeClient
-            client = BatchingClaudeClient(eff_key, cfg.model,
-                                          thinking=cfg.processing.thinking,
-                                          effort=cfg.processing.effort)
         else:
             # 동시 호출 상한을 설정값으로 맞춘다(환경변수가 있으면 그쪽이 우선).
             _concurrent.set_concurrency(cfg.processing.concurrency)
-            client = ClaudeClient(eff_key, cfg.model,
-                                  thinking=cfg.processing.thinking,
-                                  effort=cfg.processing.effort)
+        client = _make_client(cfg.model)
+        # 검수에 걸린 문항만 다시 만들 상위 모델(설정에서 비우면 승격하지 않음).
+        strong = (_make_client(cfg.model_review)
+                  if cfg.model_review and cfg.model_review != cfg.model else None)
         try:
             if ack_stash is not None and ack_stash.exists():
                 data = json.loads(ack_stash.read_text(encoding="utf-8"))
@@ -297,7 +302,7 @@ def generate():
                                        max_retries=cfg.processing.max_retries,
                                        analyses=analyses,
                                        labels=src_labels, progress=prog,
-                                       part_label=part_tag)
+                                       part_label=part_tag, strong_client=strong)
         parts = [{"passages": ps, "header_note": part_header,
                   "sections": sections, "type_order": MERGED_ORDER,
                   "prompts": MERGED_PROMPTS, "labels": MERGED_LABELS,

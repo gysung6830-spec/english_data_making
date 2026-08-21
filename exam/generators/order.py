@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from .. import build as B
+from .. import shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, OrderOut
 from .base import context
@@ -21,6 +22,11 @@ _PROMPT = """아래 '정본 지문'으로 '순서 배열' 문제를 만드세요
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1) -> tuple[str, str, list[str]]:
+    def _chk(o: OrderOut) -> None:
+        bad = shape.check_order_shuffle(o.display)
+        if bad:
+            raise ValueError("순서 배열 문항 설계 결함 — " + " ".join(bad))
+
     out: OrderOut = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(ctx=context(analysis)),
@@ -28,6 +34,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=OrderOut,
         max_tokens=2500,
         max_retries=max_retries,
+        extra_validate=_chk,
     )
     flags: list[str] = []
     q, a = B.make_order(analysis.sentences, out.given_n, out.block_sizes,

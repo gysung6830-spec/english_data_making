@@ -83,14 +83,14 @@ class BatchingClaudeClient(_BaseClient):
     def structured(self, system: str, prompt: str, model_cls,
                    max_tokens: int = DEFAULT_MAX_TOKENS, max_retries: int = 1,
                    extra_validate=None, image_path: str | Path | None = None,
-                   cache_prefix: str | None = None):
+                   cache_prefix: str | None = None, effort: str | None = None):
         """동기 클라이언트와 같은 계약. 내부적으로만 배치로 처리한다."""
         cur_prompt = prompt
         last_err: Exception | None = None
         for _attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
                                 image_path=image_path, cache_prefix=cache_prefix,
-                                thinking=self.thinking, effort=self.effort)
+                                thinking=self.thinking, effort=effort or self.effort)
             text = self._submit(req)
             try:
                 obj = parse_response_text(text, model_cls)

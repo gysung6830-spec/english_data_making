@@ -13,7 +13,7 @@
 from __future__ import annotations
 
 from .. import answer_spread, build as B
-from .. import review
+from .. import review, shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, ContentOut
 from .base import context
@@ -66,6 +66,11 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
              answer_pos: int | None = None,
              variant_hint: str = "") -> tuple[str, str, list[str]]:
     prompt = _PROMPT_PLAIN if difficulty == PLAIN else _PROMPT_HARD
+    def _chk(o: ContentOut) -> None:
+        bad = shape.check_choice_shape(o.choices, o.answer_no, "선지")
+        if bad:
+            raise ValueError("내용 일치 문항 설계 결함 — " + " ".join(bad))
+
     out: ContentOut = client.structured(
         system=SYSTEM,
         prompt=(variant_hint + "\n" if variant_hint else "") + prompt.format(ctx=context(analysis)),
@@ -73,6 +78,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=ContentOut,
         max_tokens=2800,
         max_retries=max_retries,
+        extra_validate=_chk,
     )
     wrong = {w.no: w.text for w in out.wrong_reasons}
     choices, answer_no = out.choices, out.answer_no

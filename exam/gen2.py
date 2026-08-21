@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel, field_validator, model_validator
 
-from . import answer_spread, build2, review
+from . import answer_spread, build2, review, shape
 from .generators.base import context
 from .llm import SYSTEM
 from .schemas import WrongReason, _require_all_distractors
@@ -109,8 +109,15 @@ def _gen_B(client, analysis, body, max_retries=1, answer_pos=None, variant_hint=
          "choices 5개는 '영어'. reason·wrong_reasons(오답별 어느 축인지) 는 한국어.\n\n{ctx}")
     if variant_hint:
         p = variant_hint + "\n" + p
+    def _chk(o: BOut) -> None:
+        bad = (shape.check_phrase_in_passage(o.phrase, analysis.sentences, "밑줄 어구")
+               + shape.check_choice_shape(o.choices, o.answer_no, "선지"))
+        if bad:
+            raise ValueError("함의추론 문항 설계 결함 — " + " ".join(bad))
+
     out: BOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), BOut,
-                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
+                                  max_tokens=2500, max_retries=max_retries,
+                                  extra_validate=_chk, cache_prefix=context(analysis))
     wrong = {w.no: w.text for w in out.wrong_reasons}
     # 따옴표·대시 차이로 밑줄이 안 그어지지 않게, 지문 실제 표기로 교정(못 찾으면 원문 유지)
     _, exact = build2.locate_phrase(out.phrase, analysis.sentences)
@@ -150,8 +157,14 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
          "- 각 쌍에 a_ok/b_ok(그 자리가 논지에 맞는지 true/false)를 표시하세요. (A)(B) 둘 다 true인 "
          "쌍은 '정답 하나뿐'이어야 하고, 그 번호가 answer_no 입니다(우연히 둘 다 맞는 오답이 없게).\n"
          "answer_no·reason 은 한국어.\n\n{ctx}")
+    def _chk(o: EOut) -> None:
+        bad = shape.check_summary_pairs(o.pairs, o.answer_no)
+        if bad:
+            raise ValueError("요약문 낱말쌍 설계 결함 — " + " ".join(bad))
+
     out: EOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), EOut,
-                                  max_tokens=2000, max_retries=max_retries, cache_prefix=context(analysis))
+                                  max_tokens=2000, max_retries=max_retries,
+                                  extra_validate=_chk, cache_prefix=context(analysis))
     pairs = [(x.a, x.b) for x in out.pairs]
     answer_no = out.answer_no
     old_no = answer_no
@@ -170,8 +183,15 @@ def _gen_F(client, analysis, body, max_retries=1, answer_pos=None):
          "한다(원문 어구를 그대로 쓰지 말 것, 뜻이 어긋나도 안 됨). 오답 4개는 소재는 쓰되 각각 "
          "'확실히' 모순·무관이어서 정답으로 읽힐 여지가 없어야 한다. answer_no·reason·wrong_reasons 는 "
          "한국어.\n\n{ctx}")
+    def _chk(o: FOut) -> None:
+        bad = (shape.check_phrase_in_passage(o.blank_phrase, analysis.sentences, "빈칸 어구")
+               + shape.check_choice_shape(o.choices, o.answer_no, "선지"))
+        if bad:
+            raise ValueError("빈칸추론 문항 설계 결함 — " + " ".join(bad))
+
     out: FOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), FOut,
-                                  max_tokens=2500, max_retries=max_retries, cache_prefix=context(analysis))
+                                  max_tokens=2500, max_retries=max_retries,
+                                  extra_validate=_chk, cache_prefix=context(analysis))
     # blank_phrase 가 있는 문장을 찾는다(따옴표·대시 차이 무시, 지문 실제 표기로 교정)
     idx, phrase = build2.locate_phrase(out.blank_phrase, analysis.sentences)
     if idx is None:

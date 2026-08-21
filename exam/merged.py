@@ -77,13 +77,17 @@ MERGED_LABELS: dict[str, str] = {**TYPE_LABELS, **TYPE_LABELS2}
 
 
 def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
-                         analysis=None, passage_index: int = 0) -> Passage:
+                         analysis=None, passage_index: int = 0,
+                         strong_client=None) -> Passage:
     """지문 원문 1개 → 통합 15문항이 채워진 Passage.
 
     유형끼리는 서로 독립이므로 스레드로 동시에 생성한다.
     analysis 를 주면 분석 호출을 건너뛴다.
+    strong_client 를 주면, 값싼 모델로 다 만든 뒤 **검수에 걸린 문항만** 그 모델로
+    다시 만든다(tiering.escalation_targets). 대부분의 문항은 한 번에 통과하므로
+    좋은 모델은 몇 문항에만 쓰인다.
     """
-    from . import analyzer, answer_spread, difficulty, gen2, pipeline
+    from . import analyzer, answer_spread, difficulty, gen2, pipeline, tiering
     from . import review as _rv
     from ._concurrent import run_parallel
     from .generators import vocab as _vocab
@@ -96,14 +100,16 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
     slots = answer_spread.SLOTS_MERGED
 
-    def _task(t):
+    def _task(t, cl=None):
+        # 유형마다 추론 강도를 달리한다(판단이 걸린 유형만 high) — 사고 토큰 절감.
+        c = tiering.EffortClient(cl or client, tiering.effort_for(t))
         # 슬롯키(vocab_2)는 기본 유형키(vocab)로 되돌려 어느 계열인지 가른다.
         if pipeline._base(t) in pipeline.GENERATORS:     # 산문형 계열
-            return pipeline.make_task(t, client, analysis, body, max_retries=max_retries,
+            return pipeline.make_task(t, c, analysis, body, max_retries=max_retries,
                                       logger=logger,
                                       content_difficulty=difficulty.CONTENT_DIFFICULTY,
                                       passage_index=passage_index, slots=slots)
-        return gen2.make_task2(t, client, analysis, body, max_retries=max_retries,   # 2회 계열
+        return gen2.make_task2(t, c, analysis, body, max_retries=max_retries,   # 추론형 계열
                                logger=logger, passage_index=passage_index,
                                slots=slots)
 
@@ -113,8 +119,9 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
               for t in MERGED_ORDER if t in pipeline.VOCAB_METHODS}
     tasks = [(t, _task(t)) for t in MERGED_ORDER if t not in vslots]
     if vslots:
+        vc = tiering.EffortClient(client, tiering.effort_for(VOCAB))
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
-            client, analysis, body, vslots, max_retries=max_retries, logger=logger)))
+            vc, analysis, body, vslots, max_retries=max_retries, logger=logger)))
 
     results = run_parallel(tasks)
     results.update(results.pop("__vocab__", None) or {})
@@ -127,14 +134,64 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         passage.flag(t, fl)
         passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
 
+    if strong_client is not None:
+        _escalate(passage, strong_client, _task, analysis, body, vslots,
+                  max_retries=max_retries, logger=logger)
+
     if not passage.q:
         raise RuntimeError(f"[{passage.title}] 통합본 모든 유형 생성 실패")
     return passage
 
 
+def _escalate(passage, strong_client, task_of, analysis, body, vslots,
+              max_retries: int = 1, logger=None) -> list[str]:
+    """검수에 걸린 문항만 좋은 모델로 다시 만든다. 다시 만든 유형 목록을 돌려준다.
+
+    다시 만든 결과가 검수를 통과하면 문항과 사유를 교체하고, 그래도 걸리면 새 사유로
+    바꿔 둔다(어느 쪽이든 교사가 보는 검토메모는 최신 상태가 된다).
+    """
+    from . import tiering
+    from ._concurrent import run_parallel
+    from .generators import vocab as _vocab
+
+    targets = tiering.escalation_targets(passage, MERGED_ORDER)
+    if not targets:
+        return []
+    if logger:
+        logger.info("[승격] 검수에 걸린 %d문항을 상위 모델로 다시 만듭니다: %s",
+                    len(targets), ", ".join(targets))
+
+    vt = {t: vslots[t] for t in targets if t in vslots}
+    # task_of() 는 '무인자 함수'를 돌려주므로 여기서 곧바로 실행한다.
+    tasks = [(t, (lambda t=t: task_of(t, strong_client)()))
+             for t in targets if t not in vt]
+    if vt:      # 어휘는 밑줄이 겹치면 안 되므로 묶음으로 다시 만든다
+        vc = tiering.EffortClient(strong_client, tiering.effort_for(VOCAB))
+        tasks.append(("__vocab__", lambda: _vocab.generate_group(
+            vc, analysis, body, vt, max_retries=max_retries, logger=logger)))
+
+    res = run_parallel(tasks)
+    res.update(res.pop("__vocab__", None) or {})
+    fixed = []
+    for t in targets:
+        got = res.get(t)
+        if got is None:            # 상위 모델도 실패 → 원래 상태를 그대로 둔다
+            continue
+        q, a, fl = got
+        passage.set_qa(t, q, a)
+        passage.flags.pop(t, None)          # 낡은 사유를 지우고 새 결과의 사유만 남긴다
+        passage.flag(t, fl)
+        fixed.append(t)
+    if logger:
+        still = [t for t in targets if tiering.needs_escalation(passage.flags.get(t))]
+        logger.info("[승격] 다시 만든 %d문항 · 여전히 검수에 걸리는 문항 %d개",
+                    len(fixed), len(still))
+    return fixed
+
+
 def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logger=None,
                           analyses=None, labels: list[str] | None = None, progress=None,
-                          part_label: str = "변형문제") -> list[Passage]:
+                          part_label: str = "변형문제", strong_client=None) -> list[Passage]:
     """여러 지문 → 검증된 Passage 리스트(조판 없음). 합본용."""
     from . import validator
     from ._concurrent import run_parallel
@@ -147,7 +204,8 @@ def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logge
 
     def _one(b, a, i):
         r = build_passage_merged(client, b, max_retries=max_retries, logger=logger,
-                                 analysis=a, passage_index=i)
+                                 analysis=a, passage_index=i,
+                                 strong_client=strong_client)
         if progress:
             progress.step(f"{part_label} · 지문 {i + 1}")
         return r
@@ -168,10 +226,11 @@ def build_passages_merged(client, bodies: list[str], max_retries: int = 1, logge
 
 def build_exam_merged(client, bodies: list[str], out_path: str | Path, header_note: str = "",
                       max_retries: int = 1, logger=None, analyses=None, sections=None,
-                      labels: list[str] | None = None) -> Path:
+                      labels: list[str] | None = None, strong_client=None) -> Path:
     from . import renderer
     passages = build_passages_merged(client, bodies, max_retries=max_retries, logger=logger,
-                                     analyses=analyses, labels=labels)
+                                     analyses=analyses, labels=labels,
+                                     strong_client=strong_client)
     return renderer.render_pdf(passages, out_path, header_note=header_note,
                                type_order=MERGED_ORDER, prompts=MERGED_PROMPTS,
                                labels=MERGED_LABELS, sections=sections)

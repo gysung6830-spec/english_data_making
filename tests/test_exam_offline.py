@@ -453,9 +453,13 @@ _VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
 
 
 class _FakeClient:
+    def __init__(self, *a, **kw):
+        self.efforts: list[tuple[str, str | None]] = []   # (스키마, 추론 강도)
+
     def structured(self, system, prompt, model_cls, max_tokens=8000,
                    max_retries=1, extra_validate=None, image_path=None,
-                   cache_prefix=None):
+                   cache_prefix=None, effort=None):
+        self.efforts.append((model_cls.__name__, effort))
         obj = _FAKE[model_cls.__name__]()
         if extra_validate:
             extra_validate(obj)
@@ -467,7 +471,7 @@ def _fake_analysis() -> Analysis:
         title="Test",
         sentences=[
             "The first sentence introduces the topic clearly.",
-            "The second sentence adds an important detail.",
+            "However, the second sentence adds an important detail.",
             "The third sentence gives a concrete example.",
             "The fourth sentence draws the whole thing together.",
             "The fifth sentence answers an obvious objection.",
@@ -1806,6 +1810,71 @@ def test_new_type_guards() -> None:
     print("✓ 새 유형 안전장치(제목 형식 통일·어휘 밑줄 겹침 금지·무관한 문장 조건) 통과")
 
 
+def test_tiering_and_escalation() -> None:
+    """비용은 줄이고 판단력은 지키는 두 장치.
+
+    ① 유형별 추론 강도 — 판단이 걸린 유형만 high, 나머지는 medium, 검수는 항상 high
+    ② 모델 승격 — 값싼 모델로 다 만들고, 검수에 걸린 문항만 좋은 모델로 다시 만든다
+    """
+    from exam import tiering
+    from exam.merged import MERGED_ORDER, build_passage_merged
+
+    # ① 강도 배분 ------------------------------------------------------------
+    assert tiering.effort_for("irrelevant") == "high"     # 논지 판단
+    assert tiering.effort_for("F") == "high"              # 빈칸 유일성
+    assert tiering.effort_for("insert") == "high"
+    assert tiering.effort_for("vocab") == "medium"        # 형식은 코드가 본다
+    assert tiering.effort_for("vocab_3") == "medium"      # 슬롯키도 base 로 판정
+    assert tiering.effort_for("title") == "medium"
+    assert tiering.VERIFY_EFFORT == "high"                # 마지막 문지기
+
+    c = _FakeClient()
+    p = build_passage_merged(c, "dummy body")
+    by_schema = dict(c.efforts)
+    assert by_schema["IrrelevantOut"] == "high", c.efforts
+    assert by_schema["VocabOut"] == "medium", c.efforts
+    assert by_schema["TitleOut"] == "medium", c.efforts
+    assert by_schema["VerifyOut"] == "high", c.efforts    # 검수는 강도를 안 낮춘다
+    # 분석은 유형 단위가 아니므로 강도를 얹지 않는다(클라이언트 기본값 사용)
+    assert by_schema["Analysis"] is None, c.efforts
+
+    # ② 승격 대상 판정 -------------------------------------------------------
+    from exam import review as _rv
+    assert tiering.needs_escalation(["자동검증: 복수정답 소지"])       # 결함 의심 → 다시
+    assert tiering.needs_escalation([_rv.FIX_INSERT])                  # 자동 보정 → 다시
+    assert not tiering.needs_escalation(["오답 선지 근거 보강 검토 (4개 중 1개)"])  # 참고용
+    assert not tiering.needs_escalation([]) and not tiering.needs_escalation(None)
+
+    p.flags.clear()
+    p.flag("F", ["자동검증: 정답이 둘로 읽힌다"])
+    del p.q["insert"], p.a["insert"]                       # 아예 못 만든 문항
+    p.flag("topic", ["오답 선지 근거 보강 검토 (…)"])        # 참고용 → 승격 대상 아님
+    assert set(tiering.escalation_targets(p, MERGED_ORDER)) == {"F", "insert"}
+
+    # ③ 승격이 실제로 상위 모델만 부르는지 -----------------------------------
+    weak, strong = _FakeClient(), _FakeClient()
+
+    class _Flaky(_FakeClient):
+        """빈칸추론(F)만 자기검증에 걸리는 값싼 모델."""
+
+        def structured(self, system, prompt, model_cls, **kw):
+            if model_cls.__name__ == "VerifyOut" and "빈칸" in prompt:
+                from exam.verify import VerifyOut
+                self.efforts.append((model_cls.__name__, kw.get("effort")))
+                return VerifyOut(ok=False, reason="정답이 둘로 읽힌다")
+            return super().structured(system, prompt, model_cls, **kw)
+
+    weak = _Flaky()
+    p2 = build_passage_merged(weak, "dummy body", strong_client=strong)
+    assert p2.types == set(MERGED_ORDER), sorted(set(MERGED_ORDER) - p2.types)
+    # 상위 모델은 '걸린 문항'에만 쓰였다 — 15문항을 전부 다시 만들지 않는다
+    used = [n for n, _ in strong.efforts if n not in ("VerifyOut", "Analysis")]
+    assert used and len(used) <= 3, used
+    assert "FOut" in used, used
+    assert "VocabOut" not in used, used        # 멀쩡한 문항은 건드리지 않는다
+    print("✓ 유형별 추론 강도·검수 승격(걸린 문항만 상위 모델) 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -1956,6 +2025,7 @@ if __name__ == "__main__":
     test_short_answer_q2_prompt_clean()
     test_rerender_relabel()
     test_new_type_guards()
+    test_tiering_and_escalation()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

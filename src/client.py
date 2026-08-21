@@ -149,9 +149,11 @@ class ClaudeClient:
         extra_validate=None,
         image_path: str | Path | None = None,
         cache_prefix: str | None = None,
+        effort: str | None = None,
     ) -> T:
         """구조화 JSON 을 받아 검증. 실패 시 max_retries 만큼 재요청.
 
+        effort 를 주면 이 호출에만 다른 추론 강도를 쓴다(유형별 차등용).
         image_path 가 주어지면 이미지를 함께 보내는 비전 요청으로 동작한다.
         cache_prefix 는 여러 호출이 공유하는 앞부분(지문·분석)으로, 프롬프트 캐싱에 쓴다.
         재시도 시 지시문(prompt)만 바뀌고 cache_prefix 는 그대로라 캐시가 계속 재사용된다.
@@ -161,7 +163,7 @@ class ClaudeClient:
         for attempt in range(max_retries + 1):
             req = build_request(self.model, system, cur_prompt, model_cls, max_tokens,
                                 image_path=image_path, cache_prefix=cache_prefix,
-                                thinking=self.thinking, effort=self.effort)
+                                thinking=self.thinking, effort=effort or self.effort)
             message = self._client.messages.create(**req)
             try:
                 text = extract_text(message)

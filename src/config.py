@@ -39,7 +39,8 @@ class DesignCfg:
 
 @dataclass
 class Config:
-    model: str = "claude-opus-4-8"
+    model: str = "claude-sonnet-5"
+    model_review: str = "claude-opus-5"
     input_dir: Path = field(default_factory=lambda: ROOT / "input")
     output_dir: Path = field(default_factory=lambda: ROOT / "output")
     logs_dir: Path = field(default_factory=lambda: ROOT / "logs")
@@ -85,7 +86,8 @@ def load_config(path: str | Path | None = None) -> Config:
     design = data.get("design", {})
 
     cfg = Config(
-        model=data.get("model", "claude-opus-4-8"),
+        model=data.get("model", "claude-sonnet-5"),
+        model_review=(data.get("model_review", "claude-opus-5") or "").strip(),
         input_dir=_resolve(ROOT, paths.get("input", "input")),
         output_dir=_resolve(ROOT, paths.get("output", "output")),
         logs_dir=_resolve(ROOT, paths.get("logs", "logs")),

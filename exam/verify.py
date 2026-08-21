@@ -79,9 +79,11 @@ def verify(client, type_key: str, q_html: str, a_html: str,
         "한국어 한 줄로 적어라."
     )
     try:
+        from .tiering import VERIFY_EFFORT
         out: VerifyOut = client.structured(
             system=_SYS, prompt=prompt, model_cls=VerifyOut,
-            max_tokens=600, max_retries=max_retries)
+            max_tokens=600, max_retries=max_retries,
+            effort=VERIFY_EFFORT)   # 검수는 언제나 깊게 — 마지막 문지기다
     except Exception:       # noqa: BLE001 — 검증 실패가 생성물을 버리게 하지 않는다
         return True, ""
     return bool(out.ok), (out.reason or "").strip()
