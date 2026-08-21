@@ -1475,14 +1475,12 @@ def test_edge_guards() -> None:
                    [1], {1: "r"}, flags=f2)
     assert R.FIX_AMBIG not in f2, f2                # 유일한 낱말 → 플래그 없음
 
-    # ② 같은 지문이라도 난이도가 다르면 시드·정답 위치 패턴이 다르다
-    for title in ("단일경작과 승자들", "함께하려는 인간의 욕구"):
-        seeds = [A.seed_of(title, lv) for lv in ("하", "중", "상")]
-        assert len(set(seeds)) == 3, seeds
-        pats = [tuple(A.pick(p, sl, 2, seed=A.seed_of(title, lv))
-                      for sl in (0, 1) for p in (0, 1)) for lv in ("하", "중", "상")]
-        assert len(set(pats)) == 3, pats
-    assert A.seed_of("x") == A.seed_of("x", None)   # 난이도 미지정은 기존과 동일
+    # ② 시드는 지문 내용에만 달렸다 — 난이도는 정답 위치에 영향을 주지 않는다
+    t1, t2 = "단일경작과 승자들", "함께하려는 인간의 욕구"
+    assert A.seed_of(t1) != A.seed_of(t2), "지문이 다르면 시드도 달라야 한다"
+    assert A.seed_of(t1) == A.seed_of(t1), "같은 지문이면 항상 같은 시드(프로세스 무관)"
+    import inspect
+    assert "level" not in inspect.signature(A.seed_of).parameters   # 난이도 오프셋 제거됨
 
     # ③ 유형이 빠지면 검토메모에 '생성 누락'으로 남는다
     ps = demo_passages()

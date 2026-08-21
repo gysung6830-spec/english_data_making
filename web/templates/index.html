@@ -97,13 +97,16 @@ Second passage goes here."></textarea>
   </div>
 
   <div class="field setbox">
-    <span class="label">난이도 (여러 개 체크 가능 · 어휘 방식도 자동 연동) — 체크한 난이도가 한 PDF에 모두 합쳐집니다.</span>
-    <label class="check"><input type="checkbox" name="levels" value="상" checked>
+    <span class="label">난이도 — 기본은 <b>중</b> 하나입니다. 더 체크하면 그만큼 시간과 비용이 늘어납니다.</span>
+    <label class="check"><input type="checkbox" name="levels" value="상">
       <b>상</b> <span class="hint2">함정 오답·강한 패러프레이즈 · 어휘=부정어 삽입형</span></label>
     <label class="check"><input type="checkbox" name="levels" value="중" checked>
-      <b>중</b> <span class="hint2">수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형</span></label>
-    <label class="check"><input type="checkbox" name="levels" value="하" checked>
+      <b>중</b> <span class="hint2">수능 표준(그럴듯한 오답 1~2 + 명확한 오답) · 어휘=유의어형 — <b>권장</b></span></label>
+    <label class="check"><input type="checkbox" name="levels" value="하">
       <b>하</b> <span class="hint2">오답이 분명히 어긋남·단서 뚜렷(평이) · 어휘=원문 단어형</span></label>
+    <span class="hint">내신 시험이 실제로 놓인 자리가 <b>중</b>이라 기본값으로 두었습니다.
+      난이도를 하나 더 체크할 때마다 <b>같은 지문을 한 벌 더 생성</b>하므로
+      소요 시간과 API 비용이 그만큼 배로 늘어납니다(지문 분석은 한 번만 하고 공유).</span>
   </div>
 
   <div class="field setbox">

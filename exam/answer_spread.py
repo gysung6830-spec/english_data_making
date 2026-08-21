@@ -15,9 +15,6 @@ import zlib
 # 1~5의 고정 스크램블(단조 증가 회피). 인덱스를 대면 목표 정답 위치가 나온다.
 _ORDER = (3, 5, 2, 4, 1)
 
-# 난이도별 시드 오프셋 — 상·중·하가 항상 서로 다른 정답 패턴을 갖게 한다.
-_LEVEL_OFFSET = {"하": 0, "중": 1, "상": 2}
-
 # 선지 순서가 자유로워 재배치 가능한 유형 → '지문 내 지역 슬롯'(분산 키)
 SLOTS1 = {"topic": 0, "content": 1}                 # 변형문제 1회
 SLOTS2 = {"A": 0, "B": 1, "E": 2, "F": 3}            # 변형문제 2회
@@ -25,19 +22,15 @@ SLOTS2 = {"A": 0, "B": 1, "E": 2, "F": 3}            # 변형문제 2회
 SLOTS_MERGED = {"topic": 0, "content": 1, "B": 2, "E": 3, "F": 4}
 
 
-def seed_of(text: str, level: str | None = None) -> int:
-    """지문 내용(+난이도)으로 안정적인(프로세스 무관) 시드를 만든다.
+def seed_of(text: str) -> int:
+    """지문 내용으로 안정적인(프로세스 무관) 시드를 만든다.
 
     같은 (지문 위치, 유형)이 시험지마다 늘 같은 번호가 되지 않도록 시작 위치를 지문
     내용에 따라 다르게 한다(파이썬 hash 는 실행마다 달라 사용하지 않는다).
 
-    난이도(상/중/하)도 섞는다. 같은 지문으로 상·중·하를 함께 배포할 때 세 시험지의
-    정답 번호가 똑같이 나오면(예: 셋 다 ②⑤②④…) 학생이 답 패턴을 눈치챌 수 있다.
-    난이도는 '고정 오프셋'(하0·중1·상2)으로 더해, 세 난이도가 항상 서로 다른 시드를
-    갖게 한다(해시를 섞으면 우연히 같은 값이 나올 수 있다).
+    난이도는 섞지 않는다 — 같은 지문이면 난이도가 달라도 정답 번호 배치는 같다.
     """
-    base = zlib.crc32((text or "").encode("utf-8"))
-    return (base + _LEVEL_OFFSET.get((level or "").strip(), 0)) % len(_ORDER)
+    return zlib.crc32((text or "").encode("utf-8")) % len(_ORDER)
 
 
 def pick(passage_index: int, slot: int, per_passage: int, seed: int = 0) -> int:

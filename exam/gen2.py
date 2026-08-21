@@ -230,6 +230,6 @@ def make_task2(t, client, analysis, body, max_retries=1, logger=None,
     gen = _GENERATORS2[t]
     slots = answer_spread.SLOTS2 if slots is None else slots
     apos = (answer_spread.pick(passage_index, slots[t], len(slots),
-                               seed=answer_spread.seed_of(analysis.title, level))
+                               seed=answer_spread.seed_of(analysis.title))
             if t in slots else None)
     return lambda: _gen_one_type2(gen, client, analysis, body, t, max_retries, logger, apos)

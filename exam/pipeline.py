@@ -81,7 +81,7 @@ def make_task(t, client, analysis, body, max_retries: int = 1, logger=None,
     if t in slots:
         kwargs["answer_pos"] = answer_spread.pick(
             passage_index, slots[t], len(slots),
-            seed=answer_spread.seed_of(analysis.title, level))
+            seed=answer_spread.seed_of(analysis.title))
     return lambda: _gen_one_type(gen, client, analysis, body, t,
                                  max_retries, logger, kwargs)
 
