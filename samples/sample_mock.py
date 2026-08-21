@@ -204,31 +204,31 @@ def mock_worksheet(title: str = "The Value of Curiosity",
         compose=schemas.WSComposeType(items=[
             schemas.WSComposeItem(
                 korean="질문하도록 격려받는 아이들은 호기심을 더 오래 유지한다.",
-                given_low=["child", "who", "encourage", "ask", "question", "retain", "curiosity", "long"],
-                given_mid=["child", "encourage", "retain", "curiosity"],
-                given_high=["encourage"],
+                # 중: 모든 단어(동사류 be·encourage·ask·retain 은 원형)
+                given_mid=["children", "who", "be", "encourage", "to", "ask",
+                           "questions", "retain", "their", "curiosity", "longer"],
+                # 상: 핵심 단어만(동사류 원형)
+                given_high=["encourage", "ask", "retain", "curiosity"],
                 conditions=["관계대명사 who 사용", "분사(수동) 활용", "비교급 longer 사용"],
                 word_count="12단어",
                 answer="Children who are encouraged to ask questions retain their curiosity longer.",
-                explanation="who 관계절 + are encouraged(수동) + longer(비교급)."),
+                explanation="who 관계절 + are encouraged(수동) + retain(현재) + longer(비교급)."),
             schemas.WSComposeItem(
                 korean="호기심은 우리가 미지의 것을 탐구하도록 이끈다.",
-                given_low=["curiosity", "drive", "us", "explore", "unknown"],
-                given_mid=["curiosity", "drive", "explore"],
-                given_high=["drive"],
+                given_mid=["curiosity", "drive", "us", "to", "explore", "the", "unknown"],
+                given_high=["curiosity", "drive", "explore"],
                 conditions=["5형식(drive+O+to부정사) 사용"],
                 word_count="7단어",
                 answer="Curiosity drives us to explore the unknown.",
-                explanation="drive + 목적어(us) + to explore 의 5형식 구조."),
+                explanation="drive→drives(3인칭 단수) + to explore(to부정사)."),
             schemas.WSComposeItem(
                 korean="질문하는 것은 학습에서 중요하다.",
-                given_low=["ask", "question", "matter", "learning"],
-                given_mid=["ask", "matter"],
-                given_high=[],
+                given_mid=["ask", "question", "matter", "in", "learning"],
+                given_high=["ask", "matter"],
                 conditions=["동명사 주어 사용"],
                 word_count="6단어",
                 answer="Asking questions matters in learning.",
-                explanation="동명사구(Asking questions)가 주어."),
+                explanation="ask→Asking(동명사 주어) + matter→matters(수일치)."),
         ]),
         choice=schemas.WSChoiceType(sets=[
             schemas.WSClozeSet(

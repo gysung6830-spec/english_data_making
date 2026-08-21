@@ -169,7 +169,7 @@ def _as_list(reports) -> list:
 
 # 서술형 교재 유형의 '표시 순서'(type-major 번호 매김에도 사용).
 #   보기어휘 → 요약문 → 어법오류 → 조건영작 → 배열영작 → 문장변형 → 문답
-WS_TYPE_ORDER = ["cloze", "summary", "error", "compose_low", "compose_mid",
+WS_TYPE_ORDER = ["cloze", "summary", "error", "compose_mid", "compose_high",
                  "arrange", "paraphrase", "qa"]
 
 
@@ -549,8 +549,8 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
                 "word_count": it.word_count, "answer": it.answer,
                 "explanation": it.explanation,
             } for it in (ws.compose.items if ws.compose else [])]
-        compose_low = _compose_at(lambda it: it.given_low, "L")
-        compose_mid = _compose_at(lambda it: it.given_mid, "M")
+        compose_mid = _compose_at(lambda it: it.given_mid, "M")    # 중: 모든 단어(동사류 원형)
+        compose_high = _compose_at(lambda it: it.given_high, "H")  # 상: 적은 단어(동사류 원형)
 
         # 사용되지 않는 낱말 고르기
         cloze_sets = []
@@ -596,7 +596,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
             "summary": sum_items,
             "paraphrase": para_items,
             "ideas": idea_items, "titles": title_items,
-            "compose_low": compose_low, "compose_mid": compose_mid,
+            "compose_mid": compose_mid, "compose_high": compose_high,
             "cloze": cloze_sets,
             "error": err_items,
             "qa": qa_items,
@@ -637,8 +637,8 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
         "cloze": any(p["cloze"] for p in passages),
         "summary": any(p["summary"] for p in passages),
         "error": any(p["error"] for p in passages),
-        "compose_low": any(p["compose_low"] for p in passages),
         "compose_mid": any(p["compose_mid"] for p in passages),
+        "compose_high": any(p["compose_high"] for p in passages),
         "arrange": any(p["ideas"] or p["titles"] for p in passages),
         "paraphrase": any(p["paraphrase"] for p in passages),
         "qa": any(p["qa"] for p in passages),

@@ -294,11 +294,16 @@ def test_compose_arrange_word_guard():
     toks = schemas._WORD_RE.findall(a)
     assert "BOGUS" not in it.given_words                       # 잉여 제거
     assert all(any(schemas._word_match(g, t) for g in it.given_words) for t in toks)  # 전부 커버
-    # 조건영작: 정답에 없는 힌트 제거, 어형(ask↔Asking)은 유지
-    c = schemas.WSComposeItem(korean="k", answer="Asking questions matters in learning.",
-                              given_low=["ask", "matter", "FAKE"], given_mid=["ask", "FAKE"])
-    assert "ask" in c.given_low and "FAKE" not in c.given_low and "FAKE" not in c.given_mid
-    print("PASS  영작 보기 단어↔정답 정합성(누락/잉여/어형)")
+    # 조건영작: 동사류 '원형'(be=are, encourage=encouraged)을 보기로 주므로 필터로 지우지 않는다.
+    c = schemas.WSComposeItem(
+        korean="k", answer="Children who are encouraged to ask questions retain their curiosity longer.",
+        given_mid=["children", "who", "be", "encourage", "to", "ask"], given_high=["encourage", "retain"])
+    assert "be" in c.given_mid and "encourage" in c.given_mid   # 원형이 보존됨
+    # 중이 비면 구버전(given_low/given_words)에서 채워짐(하위호환)
+    c2 = schemas.WSComposeItem(korean="k", answer="Asking questions matters.",
+                               given_low=["ask", "matter"])
+    assert c2.given_mid == ["ask", "matter"]
+    print("PASS  영작 보기 단어↔정답 정합성(배열 커버·조건영작 원형 보존)")
 
 
 # ---- 12. 부분 재생성(누락 유형만 다시 생성) ------------------------------

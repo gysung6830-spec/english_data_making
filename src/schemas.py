@@ -372,17 +372,11 @@ class WSComposeItem(BaseModel):
 
     @model_validator(mode="after")
     def _fill_levels(self) -> "WSComposeItem":
-        # 3단계가 비어 있으면(구버전 데이터) given_words 로 하 난이도를 채워 하위호환.
-        if not (self.given_low or self.given_mid or self.given_high):
-            self.given_low = list(self.given_words)
-        # 보기 단어는 '정답 문장에 실제로 있는 단어'만 남긴다(잘못된 힌트 제거).
-        tokens = _WORD_RE.findall(self.answer or "")
-        if tokens:
-            def _in_answer(w: str) -> bool:
-                return any(_word_match(w, t) for t in tokens)
-            self.given_low = [w for w in self.given_low if _in_answer(w)]
-            self.given_mid = [w for w in self.given_mid if _in_answer(w)]
-            self.given_high = [w for w in self.given_high if _in_answer(w)]
+        # 중(given_mid)이 비어 있으면 구버전 데이터(given_low/given_words)로 채워 하위호환.
+        if not self.given_mid:
+            self.given_mid = list(self.given_low or self.given_words)
+        # 주의: 조건영작 보기의 동사류는 '동사원형'이라 정답 활용형(are/went 등)과 글자가
+        #   달라, '정답에 없는 단어 제거' 검증은 정상 원형까지 지운다 → 하지 않는다(프롬프트로 통제).
         return self
 
 
