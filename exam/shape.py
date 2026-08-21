@@ -85,6 +85,38 @@ def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
     return bad
 
 
+# 순수 부정어 — 이것이 빈칸의 정답이 되면 요약문 문제가 O/X 문제로 무너진다.
+# (unlikely·impossible 처럼 뜻이 부정적인 '내용어'는 여기 넣지 않는다. 그건 정상 선지다.)
+NEGATORS = {
+    "not", "no", "never", "none", "neither", "nor", "nothing", "nowhere",
+    "nobody", "hardly", "scarcely", "barely", "rarely", "seldom", "without",
+    "cannot", "cant", "dont", "doesnt", "didnt", "wont", "isnt", "arent",
+}
+
+
+def check_summary_negation(pairs) -> list[str]:
+    """요약문 빈칸의 선지에 '순수 부정어'가 들어 있지 않은가.
+
+    부정어가 정답 자리에 오면 학생은 어휘를 몰라도 '지문이 긍정이었나 부정이었나'만
+    판단해 답을 고른다 — 요약문 유형이 아니라 O/X 문제가 된다. 게다가 선지에 따라
+    문장의 논리 방향 자체가 뒤집혀 오답이 '지문과 정반대 진술'이 되어 버린다.
+
+    부정의 방향은 요약문 문장(before/mid/after) 쪽에 박아 두고, 빈칸에는 내용어를
+    둬야 학생이 '그 부정이 무엇에 걸리는지'를 지문에서 읽어 오게 된다.
+    """
+    hit = set()
+    for p in pairs or []:
+        for label in ("a", "b"):
+            for w in _words(str(getattr(p, label, ""))):
+                if w in NEGATORS:
+                    hit.add(w)
+    if hit:
+        return [f"선지에 부정어({', '.join(sorted(hit))})가 들어 있습니다 — 부정어는 요약문 "
+                "문장 쪽에 두고 빈칸에는 내용어를 넣어야 합니다(그러지 않으면 어휘를 몰라도 "
+                "긍정·부정만 판단해 풀립니다)."]
+    return []
+
+
 def check_summary_pairs(pairs, answer_no: int) -> list[str]:
     """요약문 (A)(B) 낱말쌍이 '읽지 않고도' 풀리지 않는가.
 
@@ -109,7 +141,7 @@ def check_summary_pairs(pairs, answer_no: int) -> list[str]:
                        "요약문을 읽지 않고도 답이 드러납니다.")
     if len({(a, b) for a, b in zip(col_a, col_b)}) != len(pairs):
         bad.append("같은 (A)(B) 조합이 두 번 나옵니다.")
-    return bad
+    return bad + check_summary_negation(pairs)
 
 
 def check_order_shuffle(display: list[int]) -> list[str]:

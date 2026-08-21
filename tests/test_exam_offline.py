@@ -1837,14 +1837,32 @@ def test_new_type_guards() -> None:
     # 세 문제의 밑줄 표시가 실제로 다르다(같은 문제가 세 번 나오지 않는다)
     assert len({p.q["vocab"], p.q["vocab_2"], p.q["vocab_3"]}) == 3
 
-    # ③ 무관한 문장 ----------------------------------------------------------
+    # ③ 요약문 — 부정어는 선지가 아니라 요약문 문장 쪽에 -------------------
+    from exam.shape import check_summary_negation as chk_neg
+    from exam.gen2 import Pair as _Pair
+    ok_pairs = [_Pair(a="affordable", b="retain", a_ok=True, b_ok=True),
+                _Pair(a="unlikely", b="impossible", a_ok=False, b_ok=False)]
+    assert chk_neg(ok_pairs) == [], chk_neg(ok_pairs)   # 뜻이 부정적인 '내용어'는 정상
+    for bad_word in ("not", "never", "without", "neither"):
+        p_bad = [_Pair(a=bad_word, b="retain", a_ok=True, b_ok=True)]
+        assert chk_neg(p_bad), bad_word                 # 부정어 자체는 선지에 못 온다
+    # 전체 검사에도 물려 있다
+    from exam.shape import check_summary_pairs as chk_sum
+    mixed = [_Pair(a="not", b="retain", a_ok=True, b_ok=True),
+             _Pair(a="not", b="lose", a_ok=True, b_ok=False),
+             _Pair(a="fully", b="retain", a_ok=False, b_ok=True),
+             _Pair(a="fully", b="lose", a_ok=False, b_ok=False),
+             _Pair(a="fully", b="retain", a_ok=False, b_ok=True)]
+    assert any("부정어" in b for b in chk_sum(mixed, 1)), chk_sum(mixed, 1)
+
+    # ④ 무관한 문장 ----------------------------------------------------------
     sents = DNA.sentences
     assert chk_irr("Most large firms now run their interviews online.", sents)   # 소재 동떨어짐
     assert chk_irr(sents[2], sents)                                              # 원문 되풀이
     ok = ("Because living cells needed to store information, they gradually shrank "
           "until they could survive in bone and ice.")
     assert chk_irr(ok, sents) == [], chk_irr(ok, sents)     # 지문 낱말 + 인과 뒤집기
-    print("✓ 새 유형 안전장치(제목 형식 통일·어휘 밑줄 겹침 금지·무관한 문장 조건) 통과")
+    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 부정어·무관한 문장) 통과")
 
 
 def test_tiering_and_escalation() -> None:

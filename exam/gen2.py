@@ -156,6 +156,13 @@ def _gen_E(client, analysis, body, max_retries=1, answer_pos=None):
          "나온 단어'를 넣어 맞아 보이게(함정) 만듭니다.\n"
          "- 각 쌍에 a_ok/b_ok(그 자리가 논지에 맞는지 true/false)를 표시하세요. (A)(B) 둘 다 true인 "
          "쌍은 '정답 하나뿐'이어야 하고, 그 번호가 answer_no 입니다(우연히 둘 다 맞는 오답이 없게).\n"
+         "- [부정어 금지] 선지(a·b)에 not·no·never·neither·without·hardly 같은 '부정어' 자체를 "
+         "넣지 마세요. 지문의 논지가 부정이라면 그 부정어는 요약문 문장(before/mid/after)에 "
+         "'박아 두고', 빈칸에는 형용사·명사·동사 같은 내용어를 둡니다. 예) 나쁨: 'DNA storage is "
+         "___(A)___ practical' + (A)=not / 좋음: 'DNA storage is not yet ___(A)___ enough' + "
+         "(A)=affordable. 부정어가 정답이 되면 학생이 어휘를 몰라도 긍정·부정만 판단해 풀어 버리고, "
+         "선지에 따라 문장의 논리 방향까지 뒤집혀 오답이 '지문과 정반대 진술'이 됩니다.\n"
+         "  (unlikely·impossible 처럼 뜻이 부정적인 '내용어'는 괜찮습니다 — 금지는 부정어 자체입니다.)\n"
          "answer_no·reason 은 한국어.\n\n{ctx}")
     def _chk(o: EOut) -> None:
         bad = shape.check_summary_pairs(o.pairs, o.answer_no)
