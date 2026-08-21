@@ -124,8 +124,10 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "") -> tuple[str, str, list[str]]:
     n = len(analysis.sentences)
-    if n < 6:      # 도입문 1개 + ①~⑤ 5개 = 최소 6문장
-        raise ValueError(f"무관한 문장 문제에는 문장이 6개 이상 필요합니다(현재 {n}개).")
+    k = B.irrelevant_marks(n)        # 도입문 1개를 빼고 남는 자리(최대 5)
+    if k < B.MIN_IRRELEVANT_MARKS:
+        raise ValueError(f"무관한 문장 문제에는 문장이 "
+                         f"{B.MIN_IRRELEVANT_MARKS + 1}개 이상 필요합니다(현재 {n}개).")
 
     def _check(out: IrrelevantOut) -> None:
         _extra(out)
@@ -138,8 +140,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         system=SYSTEM,
         prompt=((variant_hint + "\n" if variant_hint else "")
                 + _PROMPT.format(ctx=ctx)
-                + f"\n[문장 수] 이 지문은 {n}개 문장입니다. "
-                  f"start_no 는 2 이상 {n - 4} 이하여야 합니다."),
+                + f"\n[문장 수] 이 지문은 {n}개 문장입니다. 번호는 ①~{'①②③④⑤'[k - 1]} "
+                  f"{k}개를 붙입니다. start_no 는 2 이상 {n - k + 1} 이하, "
+                  f"answer_no 는 1 이상 {k} 이하여야 합니다."),
         cache_prefix=ctx,
         model_cls=IrrelevantOut,
         max_tokens=2500,
@@ -147,11 +150,16 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         extra_validate=_check,
     )
     # 범위를 벗어나면 조판 가능한 자리로 당겨 붙인다(문항을 버리지 않는다).
-    start_no = min(max(out.start_no, 2), n - 4)
+    start_no = min(max(out.start_no, 2), n - k + 1)
     flags: list[str] = []
     if start_no != out.start_no:
         flags.append(review.FIX_INSERT)
     wrong = {w.no: w.text for w in out.wrong_reasons if w.no != out.answer_no}
-    q, a = B.make_irrelevant(analysis.sentences, start_no, out.answer_no,
+    answer_no = min(max(out.answer_no, 1), k)     # 자리 수가 줄면 정답 번호도 맞춘다
+    if answer_no != out.answer_no:
+        wrong = {w.no: w.text for w in out.wrong_reasons if w.no != answer_no}
+        if review.FIX_INSERT not in flags:
+            flags.append(review.FIX_INSERT)
+    q, a = B.make_irrelevant(analysis.sentences, start_no, answer_no,
                              out.sentence, out.reason, wrong)
     return q, a, flags + review.weak_distractors(out.wrong_reasons)

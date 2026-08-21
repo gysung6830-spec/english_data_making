@@ -146,8 +146,16 @@ def _gen_D(client, analysis, body, max_retries=1, answer_pos=None):
          "그 문장을 '글자 그대로'(단어·축약형·구두점 포함, 요약·수정·의역 금지) 복사한 것이어야 "
          "합니다(원래 배열이 정답). 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
          "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
+    def _chk(o: DOut) -> None:
+        # <보기> 에 없던 구두점이 붙거나 낱말이 빠지면 학생이 정답을 만들 수 없다
+        # (실제 출력물: 원문에 없는 'brain,' 토큰).
+        bad = shape.check_tokens_rebuild(o.tokens, o.answer, o.cues)
+        if bad:
+            raise ValueError("어순 배열 <보기> 결함 — " + " ".join(bad))
+
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
-                                  max_tokens=1500, max_retries=max_retries, cache_prefix=context(analysis))
+                                  max_tokens=1500, max_retries=max_retries,
+                                  extra_validate=_chk, cache_prefix=context(analysis))
     flags: list[str] = []
     q, a = build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer,
                          out.reason, flags=flags)

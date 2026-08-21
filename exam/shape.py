@@ -339,6 +339,8 @@ _AUTHOR_NOTES = (
     "배열을 조정", "조정하였다", "조정했다", "무작위로 섞", "섞어 제시",
     "문제에서는", "좋은 문제", "좋은 삽입", "좋은 빈칸", "출제 의도", "정답으로 적절",
     "이 문항은 ~로 설계", "설계하였다", "설계했다",
+    "구성한 문제", "구성하였다", "틀리도록", "이 문항은", "문제로 구성",
+    "빼낸 문장", "제시된 단어들을", "토큰들을",
 )
 # 학생용 지문에는 문장 번호가 없다. '(3)에서'·'(9)문장' 식 지칭은 대조할 수 없다.
 _SENT_REF = re.compile(r"[(（]\d+[)）]\s*(문장|에서|은|는|이|가|의|과|와|에)")
@@ -432,4 +434,72 @@ def check_key_overlap(a_answer: str, b_answer: str, label_a: str, label_b: str,
     if len(shared) / min(len(a), len(b)) >= max_overlap:
         return [f"{label_a}과 {label_b}의 정답 핵심어가 겹칩니다({', '.join(sorted(shared))}) — "
                 "한 문항을 풀면 다른 문항이 저절로 풀립니다."]
+    return []
+
+
+# ---------------------------------------------------------------------------
+# 지문에 들어갈 영어 문장이 '깨끗한 한 문장'인가
+# ---------------------------------------------------------------------------
+# 모델이 지시문 조각을 문장 끝에 흘리는 일이 있다(실제 출력물: '… ordinary
+# listeners.output must' 가 지문에 그대로 박혔다). 지문에 들어가는 영어 문장은
+# 문장부호로 끝나야 하고, 마침표 뒤에 낱말이 더 붙어 있으면 안 된다.
+_TAIL_JUNK = re.compile(r"[.!?][\"'’”)\]]?\s*[A-Za-z]")
+
+
+def check_clean_sentence(text: str, kind: str = "문장") -> list[str]:
+    """지문에 끼워 넣을 영어 문장이 깨끗한지 본다(꼬리 오염·미완결 차단)."""
+    s = (text or "").strip()
+    if not s:
+        return [f"{kind}이 비어 있습니다."]
+    if not re.search(r"[.!?][\"'’”)\]]?$", s):
+        return [f"{kind}이 문장부호로 끝나지 않습니다 — 지시문 조각이 섞였는지 "
+                f"확인하세요: '{s[-40:]}'"]
+    # 문장 안의 마침표 뒤에 곧바로 낱말이 붙은 자리(공백 없는 '…listeners.output')
+    if re.search(r"[a-z][.!?][A-Za-z]", s):
+        return [f"{kind} 안에 붙어 버린 낱말이 있습니다(마침표 뒤 공백 없음): "
+                f"'{s[:80]}'"]
+    return []
+
+
+def check_tokens_rebuild(tokens: list[str], answer: str,
+                         cues: list[str] | None = None) -> list[str]:
+    """어순 배열의 <보기> 낱말이 정답 문장을 복원할 수 있는지 본다.
+
+    이 유형은 일부러 동사를 원형으로 두고 cues 로 알려 주므로 낱말이 그대로 같지는
+    않다. 그래서 두 가지만 본다:
+      ① 낱말 개수·구성이 맞는가(어형 차이는 cues 에 있는 것만 허용).
+      ② 구두점이 붙은 토큰은 정답 문장에 '그 모양 그대로' 있는가.
+    ②가 실제 결함을 잡는다 — 원문에 없는 콤마가 붙은 'brain,' 토큰이 나왔다.
+    """
+    ans = (answer or "").split()
+    toks = [str(t) for t in (tokens or []) if str(t).strip()]
+    if not ans:
+        return ["정답 문장이 비어 있습니다."]
+    if not toks:
+        return ["<보기> 낱말이 비어 있습니다."]
+
+    def _bare(w: str) -> str:
+        return re.sub(r"^[^\w]+|[^\w]+$", "", w).lower()
+
+    # ② 구두점이 붙은 토큰은 정답에 그대로 있어야 한다
+    ans_forms = {w.lower() for w in ans}
+    stray = [t for t in toks if _bare(t) != t.lower() and t.lower() not in ans_forms]
+    if stray:
+        return [f"<보기> 낱말에 정답 문장에 없는 구두점이 붙어 있습니다: "
+                f"{', '.join(stray[:5])} — 학생이 원문대로 배열할 수 없습니다."]
+
+    # ① 낱말 구성(어형 차이는 cues 에 있는 것만)
+    from collections import Counter
+    cue = {_bare(c) for c in (cues or [])}
+    extra = Counter(_bare(t) for t in toks) - Counter(_bare(w) for w in ans)
+    missing = Counter(_bare(w) for w in ans) - Counter(_bare(t) for t in toks)
+    unexplained = [w for w in extra.elements() if w not in cue]
+    if unexplained or sum(extra.values()) != sum(missing.values()):
+        parts = []
+        if missing:
+            parts.append("빠진 것: " + ", ".join(sorted(missing.elements())[:6]))
+        if unexplained:
+            parts.append("없던 것: " + ", ".join(sorted(unexplained)[:6]))
+        if parts:
+            return ["<보기> 낱말이 정답 문장과 맞지 않습니다 — " + " / ".join(parts)]
     return []

@@ -123,6 +123,19 @@ class TitleOut(BaseModel):
             raise ValueError("제목 선지는 정확히 5개여야 합니다.")
         return v
 
+    @field_validator("answer_no")
+    @classmethod
+    def _range(cls, v: int) -> int:
+        if not (1 <= v <= 5):
+            raise ValueError("answer_no 는 1~5 여야 합니다.")
+        return v
+
+    @model_validator(mode="after")
+    def _distractors(self):
+        # 이 검사가 없어 정답 번호까지 오답 목록에 들어갔고, 해설에 빈 줄이 찍혔다.
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self
+
 
 class IrrelevantOut(BaseModel):
     """무관한 문장(수능 35번).

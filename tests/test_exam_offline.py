@@ -2205,6 +2205,8 @@ def test_demo_matches_real_rules() -> None:
 
 def test_output_defect_regressions() -> None:
     """실제 출력물(올림포스 Unit 11, 32문항)에서 나온 결함을 하나씩 못 박는다."""
+    import re
+
     from exam import answer_spread, shape
     from exam.analyzer import split_sentences
 
@@ -2261,7 +2263,47 @@ def test_output_defect_regressions() -> None:
     # 6) 요약문 해설도 오답을 번호별로 받는다(산문에 몰아 쓰면 번호가 밀린다)
     from exam.gen2 import EOut
     assert "wrong_reasons" in EOut.model_fields
-    print("✓ 실제 출력물 결함 재발 방지(이니셜·인용문·부정어 밑줄·선지 번호·해설 위생) 통과")
+
+    # 7) 지시문 조각이 지문에 박혔다 → '… ordinary listeners.output must'
+    assert shape.check_clean_sentence(
+        "One explanation is that they have never learned to hear music.output must")
+    assert shape.check_clean_sentence(
+        "It never lasts in bone or ice, disappearing within a few short years.") == []
+
+    # 8) 어순 배열 <보기> 에 원문에 없는 구두점이 붙었다 → 'brain,'
+    assert shape.check_tokens_rebuild(["the", "brain,", "that"], "the brain that")
+    #    동사를 원형으로 두는 것(cues)은 정상이므로 걸리지 않는다
+    assert shape.check_tokens_rebuild(
+        ["the", "third", "sentence", "give", "a", "concrete", "example."],
+        "The third sentence gives a concrete example.", ["give"]) == []
+
+    # 9) 유의어 치환이 문장 첫 낱말이면 대문자를 지킨다 → '② numerous studies …'
+    from exam import build as _B
+    kept = _B.keep_sentence_case(["Many studies show the effect."],
+                                 [(0, "Many", "numerous")])
+    assert kept == [(0, "Many", "Numerous")], kept
+
+    # 10) 짧은 지문에서도 무관한 문장을 낸다(①~④). 삽입은 자리가 모자라면 알린다.
+    assert _B.irrelevant_marks(5) == 4 and _B.irrelevant_marks(6) == 5
+    five = ["A one here now.", "B two here now.", "C three here now.",
+            "D four here now.", "E five here now."]
+    q_ir, _ = _B.make_irrelevant(five, 2, 3, "An unrelated sentence about costs.",
+                                 "이유", {1: "a", 2: "b", 4: "d"})
+    assert re.findall(r"[①-⑤]", q_ir) == ["①", "②", "③", "④"], q_ir
+    fl: list[str] = []
+    _B.make_insert(five, 2, "근거", flags=fl)
+    assert any("선지가 3개뿐" in f for f in fl), fl
+
+    # 11) 제목도 오답 4개 근거를 모두 받아야 한다(빠지면 해설에 빈 줄이 찍혔다)
+    from exam.schemas import TitleOut, WrongReason as _WR
+    try:
+        TitleOut(choices=list("abcde"), answer_no=3, reason="x",
+                 wrong_reasons=[_WR(no=i, text="t") for i in (1, 2, 3, 4, 5)])
+        raise AssertionError("정답 번호가 오답 목록에 있는데 통과했습니다.")
+    except ValueError:
+        pass
+    print("✓ 실제 출력물 결함 재발 방지(이니셜·인용문·부정어 밑줄·선지 번호·해설 위생·"
+          "지문 오염·보기 토큰·대문자·짧은 지문·제목 오답) 통과")
 
 
 def test_batch_client() -> None:

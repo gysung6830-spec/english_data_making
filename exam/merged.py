@@ -166,6 +166,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         passage.flag(t, _shape.check_explanation(_verify._text(a)))
 
     _flag_key_overlap(passage)      # 빈칸추론과 요약문의 정답 핵심어가 겹치는지
+    _flag_same_sentence(passage)    # 삽입의 주어진 문장과 어순배열 정답이 같은지
 
     if strong_client is not None:
         _escalate(passage, strong_client, _task, analysis, body, vslots,
@@ -191,6 +192,36 @@ def _answer_choice_text(q_html: str, a_html: str) -> str:
     if not (1 <= no <= len(items)):
         return ""
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", items[no - 1])).strip()
+
+
+def _flag_same_sentence(passage) -> None:
+    """삽입의 '주어진 문장'과 어순 배열의 정답 문장이 같으면 검토 메모를 남긴다.
+
+    둘 다 지문에서 문장 하나를 통째로 뽑아 쓰기 때문에 같은 문장을 고르기 쉽다.
+    그러면 삽입 문항이 어순 배열의 정답을 완성된 형태로 미리 보여 준다
+    (실제 출력물: 29번 주어진 문장 = 31번 어순 배열 정답).
+    """
+    import re
+
+    if not (INSERT in passage.q and D in passage.q):
+        return
+
+    def _plain(html: str) -> str:
+        t = re.sub(r"<[^>]+>", " ", html or "")
+        return re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()
+
+    given = re.search(r'<div class="given-sentence">(.*?)</div>',
+                      passage.q[INSERT] or "", re.S)
+    ans = re.search(r'<span class="answer-key">.*?</span>(.*?)</p>',
+                    passage.a[D] or "", re.S)
+    if not (given and ans):
+        return
+    g, a = _plain(given.group(1)), _plain(ans.group(1))
+    if g and a and (g == a or g in a or a in g):
+        why = ["문장 삽입의 '주어진 문장'과 어순 배열의 정답이 같은 문장입니다 — "
+               "삽입 문항이 어순 배열의 답을 완성된 형태로 보여 줍니다."]
+        passage.flag(INSERT, why)
+        passage.flag(D, why)
 
 
 def _flag_key_overlap(passage) -> None:

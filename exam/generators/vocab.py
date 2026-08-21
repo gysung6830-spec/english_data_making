@@ -102,7 +102,8 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
                 f"다른 어휘 문제와 밑줄이 겹칩니다: {', '.join(dup)}. 겹치지 않는 낱말로 다시 고르세요.")
         if method == NEGATION:
             # 정답 근거(부정어)가 밑줄 '안'에 있어야 문항이 성립한다.
-            bad = shape.check_negation_underline(o.marks, o.answer_no, o.override_text)
+            bad = (shape.check_clean_sentence(o.override_text, "교체 문장")
+                   + shape.check_negation_underline(o.marks, o.answer_no, o.override_text))
             if bad:
                 raise ValueError("부정어형 설계 결함 — " + " ".join(bad))
 

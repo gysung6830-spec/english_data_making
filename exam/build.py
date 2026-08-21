@@ -122,6 +122,24 @@ def flag_ambiguous_marks(sentences: list[str], marks: list[tuple[int, str, str]]
             return
 
 
+def keep_sentence_case(sentences: list[str],
+                       marks: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
+    """치환 낱말이 문장 맨 앞이면 표시어의 첫 글자를 대문자로 되돌린다.
+
+    유의어형 어휘는 'Many studies' 의 Many 를 numerous 로 바꾸는데, 그대로 넣으면
+    문장이 소문자로 시작한다(실제 출력물: '② numerous studies show …'). 학생 눈에는
+    그냥 오타로 보이고, 밑줄이 어디까지인지도 흐려진다.
+    """
+    out: list[tuple[int, str, str]] = []
+    for idx, word, shown in marks:
+        s = sentences[idx].strip() if 0 <= idx < len(sentences) else ""
+        if (s.lower().startswith(str(word).strip().lower())
+                and shown and shown[:1].islower()):
+            shown = shown[0].upper() + shown[1:]
+        out.append((idx, word, shown))
+    return out
+
+
 def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
     """(문장idx, 원본단어, 표시단어) -> (문장idx, 원본단어, 밑줄HTML) 로 변환."""
     return [
@@ -347,6 +365,9 @@ def make_order(sentences: list[str], given_n: int, block_sizes: list[int],
 # ---------------------------------------------------------------------------
 # ② 문장 삽입
 # ---------------------------------------------------------------------------
+MIN_INSERT_MARKS = 4     # 삽입 문제의 최소 선지 수(①~④)
+
+
 def make_insert(sentences: list[str], remove_idx: int, reason: str,
                 flags: list[str] | None = None) -> tuple[str, str]:
     """remove_idx: 빼낼 '주어진 문장'의 인덱스(내부 문장: 1 ~ len-2).
@@ -370,6 +391,11 @@ def make_insert(sentences: list[str], remove_idx: int, reason: str,
     rest = [s for i, s in enumerate(sentences) if i != remove_idx]
     gaps = len(rest) - 1                                # rest 문장 사이 간격 수
     n_marks = min(5, gaps)
+    # 자리가 셋뿐이면 찍어도 3분의 1이라 변별이 거의 없다(실제 출력물: ①②③ 뿐).
+    # 문항을 버리기보다 내보내되, 선생님이 알아보도록 검토 메모를 남긴다.
+    if n_marks < MIN_INSERT_MARKS and flags is not None:
+        flags.append(f"선지가 {n_marks}개뿐입니다 — 지문이 짧아 넣을 자리가 부족합니다"
+                     f"(지문 {n}문장). 배포 전 문항 유지 여부를 판단하세요.")
     true_gap = remove_idx                               # rest 에서 원래 위치 간격(1-based)
 
     # 정답 간격을 포함하도록 n_marks 개의 연속 간격 창을 잡는다
@@ -419,22 +445,41 @@ def make_title(sentences: list[str], choices: list[str], answer_no: int,
 # ---------------------------------------------------------------------------
 # 무관한 문장 — 도입문 뒤 연속 5문장에 ①~⑤, 그중 한 자리를 새 문장으로 교체
 # ---------------------------------------------------------------------------
+MIN_IRRELEVANT_MARKS = 4     # 무관한 문장의 최소 선지 수(①~④)
+
+
+def irrelevant_marks(n_sentences: int) -> int:
+    """지문 길이로 ①~⑤ 개수를 정한다(도입문 1개는 반드시 남긴다).
+
+    수능 형식은 다섯 개지만, 다섯 문장짜리 지문에서는 도입문을 빼면 넷뿐이다.
+    전에는 그런 지문에서 이 유형이 통째로 빠졌다(실제 출력물: 지문 2에 무관한
+    문장 누락). 네 개까지는 내신에서 흔히 쓰는 형식이라 넷으로 줄여 낸다.
+    """
+    return max(0, min(5, n_sentences - 1))
+
+
 def make_irrelevant(sentences: list[str], start_no: int, answer_no: int,
                     sentence: str, reason: str,
                     wrong: dict[int, str]) -> tuple[str, str]:
-    """start_no(1-based)부터 5문장에 ①~⑤를 달고, answer_no 자리를 sentence 로 교체.
+    """start_no(1-based)부터 4~5문장에 ①~⑤를 달고, answer_no 자리를 sentence 로 교체.
 
     도입문(start_no 앞 문장들)은 번호 없이 그대로 두어 글의 주제를 먼저 제시한다.
     """
     n = len(sentences)
-    if start_no < 2 or start_no + 4 > n:
+    k = irrelevant_marks(n)
+    if k < MIN_IRRELEVANT_MARKS:
+        raise ValueError(f"무관한 문장 문제는 도입문 1개 + {MIN_IRRELEVANT_MARKS}문장 "
+                         f"이상이 필요합니다(지문 문장 {n}개).")
+    if start_no < 2 or start_no + k - 1 > n:
         raise ValueError(
-            f"무관한 문장 문제는 도입문 1개 + 연속 5문장이 필요합니다"
+            f"무관한 문장 문제는 도입문 1개 + 연속 {k}문장이 필요합니다"
             f"(지문 문장 {n}개, 시작 {start_no}번).")
+    if not (1 <= answer_no <= k):
+        raise ValueError(f"무관한 문장 번호는 1~{k} 여야 합니다(현재 {answer_no}).")
     if not (sentence or "").strip():
         raise ValueError("무관한 문장 본문이 비어 있습니다.")
     intro = " ".join(s.strip() for s in sentences[:start_no - 1])
-    marked = [s.strip() for s in sentences[start_no - 1:start_no + 4]]
+    marked = [s.strip() for s in sentences[start_no - 1:start_no + k - 1]]
     marked[answer_no - 1] = sentence.strip()
     q = F.irrelevant_q(intro, marked)
     a = F.irrelevant_a(answer_no, reason, wrong)
@@ -474,6 +519,7 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     marks, remap = order_marks(eff, marks)
     answer_no = remap.get(answer_no, answer_no)
     marks = expand_marks(eff, marks)          # 'to confirm' 류 낱말 중복 방지
+    marks = keep_sentence_case(eff, marks)    # 문장 첫 낱말이면 대문자 유지
     flag_ambiguous_marks(eff, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(eff, _underline_marks(marks))
     return F.vocab_q(marked), F.vocab_a(answer_no, reason)
@@ -493,6 +539,7 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
     answer_nos = sorted(remap.get(n, n) for n in answer_nos)
     reasons = {remap.get(n, n): t for n, t in reasons.items()}
     marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
+    marks = keep_sentence_case(sentences, marks)    # 문장 첫 낱말이면 대문자 유지
     flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks))
     return F.grammar_q(marked), F.grammar_a(answer_nos, reasons)
