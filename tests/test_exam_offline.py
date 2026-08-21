@@ -85,7 +85,10 @@ def test_render_html_bold_rules() -> None:
     only_teacher = renderer.render_html(demo_passages(), sections=["teacher"])
     assert "학생용 · 문제" not in only_teacher
     assert 'class="teacher first-sec"' in only_teacher
-    print("✓ 조판 HTML·볼드 5곳·4섹션·섹션선택·머리글 통과")
+    # 2단에서 문항이 칸 중간에 잘리면 안 된다 — 통째로 다음 칸으로 넘어가야 한다.
+    css = (renderer.TEMPLATE_DIR / "exam.css").read_text(encoding="utf-8")
+    assert "break-inside: auto" not in css, "문항이 칸 중간에서 잘릴 수 있습니다."
+    print("✓ 조판 HTML·볼드 5곳·4섹션·섹션선택·머리글·칸 넘김 통과")
 
 
 def test_single_source_shared() -> None:

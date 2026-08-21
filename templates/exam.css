@@ -142,8 +142,9 @@ body {
 /* 서술형(지문+소문항)도 한 덩어리로 유지해 지문과 문항이 갈라지지 않게 한다.
    현실적 지문 길이에선 한 칸에 들어가며, 혹시 넘치면 소문항 사이에서만 끊긴다(박스는 보호). */
 .sub-q { break-inside: avoid; }
-/* 해설 본문(산문)은 길면 자연스럽게 이어지도록 칸 넘김 허용 */
-.a-item { break-inside: auto; }
+/* 해설도 한 덩어리 — 남은 칸에서 중간에 잘리면 통째로 다음 칸/쪽으로 넘긴다.
+   (한 칸을 다 채우고도 남을 만큼 긴 해설만 부득이 쪼개진다.) */
+.a-item { break-inside: avoid; }
 .q-head { margin-bottom: 1mm; break-after: avoid; }
 .qnum { font-weight: 800; font-size: 1.25em; margin-right: 0.6mm; color: #2f7d61; }  /* 볼드 2 — 브랜드 초록으로 문항 구분 */
 /* 문제 글자는 본문 기본(10.2px)보다 살짝 크게 — 발문·지문·선지에 함께 적용(해설은 기본 유지) */
