@@ -48,6 +48,11 @@ textarea:focus,input:focus,select:focus{outline:none;border-color:var(--green);
 .setbox{background:var(--green-050);border:1px solid var(--green-100);
   border-radius:12px;padding:12px 14px}
 .setbox .check{margin:6px 0}
+/* 출제 유형 — 문항 번호 순 목록 */
+.typelist{margin:8px 0 2px;padding-left:26px}
+.typelist li{margin:3px 0;line-height:1.55}
+.typelist li b{font-weight:700}
+.typelist li .hint2{margin-left:4px}
 /* 설정 상자에 '직접' 놓인 설명 줄은 한 줄씩 떨어뜨린다(체크박스 옆 설명은 그대로 인라인). */
 .setbox > .hint2{display:block;margin-top:6px;line-height:1.65}
 .hint2{color:var(--muted);font-size:12px}

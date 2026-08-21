@@ -110,6 +110,40 @@ SECTION_NAMES = {
 }
 
 
+# 문항별 한 줄 설명 — 화면에 '몇 번이 무엇인지'를 번호 순으로 보여 준다.
+# MERGED_ORDER 가 바뀌면 번호도 자동으로 따라가므로 설명이 어긋날 일이 없다.
+TYPE_NOTES = {
+    "topic": "글 전체가 무엇을 다루는가 (영어 선지)",
+    "title": "비유·대구 또는 의문형으로 압축 — 다섯 선지를 한 갈래로 통일",
+    "B": "밑줄 어구의 문맥적 의미 (축자 해석이 함정)",
+    "content": "한국어 선지 5개 중 글과 일치하는 것",
+    "grammar": "틀린 것을 모두 고르기 — ⚠ 지문을 다시 써서 출제",
+    "grammar_count": "밑줄 ①~⑥ 중 4개가 틀림 — ⚠ 지문을 다시 써서 출제",
+    "pair_odd": "밑줄 ⓐ~ⓔ 중 어법 오류 1개 + 어휘 오류 1개를 짝으로",
+    "vocab_2": "원문단어형 — 4개는 원문 그대로, 어색한 하나 찾기",
+    "vocab": "유의어형 — 5개가 다 바뀌어 하나하나 대조",
+    "vocab_3": "부정어형 — 낱말은 멀쩡하고 문장이 글 흐름과 모순",
+    "F": "정답은 지문에 없던 표현(패러프레이즈)이어야 한다",
+    "irrelevant": "원문에 없던 문장을 새로 써서 끼움 — 암기로는 못 푸는 유형",
+    "order": "(A)(B)(C)(D) 네 덩어리를 제 순서로",
+    "insert": "지시어·연결사로 들어갈 자리가 한 곳으로 굳는다",
+    "E": "한 문장 요약문의 (A)(B)에 들어갈 낱말쌍",
+    "D": "낱개 단어를 배열해 문장 완성 (동사는 원형 제시)",
+}
+
+
+def type_rows() -> list[tuple[int, str, str]]:
+    """출제 유형을 (문항 번호, 유형 이름, 한 줄 설명)으로. MERGED_ORDER 와 늘 일치한다."""
+    return [(i, MERGED_LABELS[t], TYPE_NOTES.get(t, ""))
+            for i, t in enumerate(MERGED_ORDER, 1)]
+
+
+@app.context_processor
+def _inject_types():
+    """모든 화면에서 문항별 목록을 쓸 수 있게 한다(따로 넘기지 않아도 됨)."""
+    return {"type_rows": type_rows(), "n_types": len(MERGED_ORDER)}
+
+
 def _pdf_path(fid: str, kind: str = "") -> Path:
     if not _FID_RE.match(fid) or kind not in _KIND_SUFFIX:
         abort(404)
