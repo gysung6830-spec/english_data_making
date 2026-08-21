@@ -1837,38 +1837,28 @@ def test_new_type_guards() -> None:
     # 세 문제의 밑줄 표시가 실제로 다르다(같은 문제가 세 번 나오지 않는다)
     assert len({p.q["vocab"], p.q["vocab_2"], p.q["vocab_3"]}) == 3
 
-    # ③ 요약문 — 부정어는 선지가 아니라 요약문 문장 쪽에 -------------------
-    from exam.shape import check_summary_negation as chk_neg
+    # ③ 요약문 — 정답은 긍정형, 부정은 요약문 문장 쪽에 -------------------
     from exam.gen2 import Pair as _Pair
-    ok_pairs = [_Pair(a="affordable", b="retain", a_ok=True, b_ok=True),
-                _Pair(a="unlikely", b="impossible", a_ok=False, b_ok=False)]
-    assert chk_neg(ok_pairs) == [], chk_neg(ok_pairs)   # 뜻이 부정적인 '내용어'는 정상
-    for bad_word in ("not", "never", "without", "neither"):
-        p_bad = [_Pair(a=bad_word, b="retain", a_ok=True, b_ok=True)]
-        assert chk_neg(p_bad), bad_word                 # 부정어 자체는 선지에 못 온다
-    # 긍정 쪽도 같다 — 정도·범위를 정하는 낱말 하나가 문장의 방향을 통째로 정한다
-    from exam.shape import check_summary_scalar as chk_sc
-    for bad_word in ("always", "all", "only", "must", "more", "some"):
-        p_bad = [_Pair(a=bad_word, b="retain", a_ok=True, b_ok=True)]
-        assert chk_sc(p_bad), bad_word
-    assert chk_sc(ok_pairs) == [], chk_sc(ok_pairs)
-    # 뜻을 지닌 부사·구 선지는 통과(오탐 없음)
-    assert chk_sc([_Pair(a="remarkably", b="supplement", a_ok=True, b_ok=True)]) == []
-    assert chk_sc([_Pair(a="more flexible", b="retain", a_ok=True, b_ok=True)]) == []
-    # 전체 검사에도 물려 있다
+    from exam.shape import check_summary_answer_polarity as chk_pol
     from exam.shape import check_summary_pairs as chk_sum
-    mixed = [_Pair(a="not", b="retain", a_ok=True, b_ok=True),
-             _Pair(a="not", b="lose", a_ok=True, b_ok=False),
-             _Pair(a="fully", b="retain", a_ok=False, b_ok=True),
-             _Pair(a="fully", b="lose", a_ok=False, b_ok=False),
-             _Pair(a="fully", b="retain", a_ok=False, b_ok=True)]
-    assert any("부정어" in b for b in chk_sum(mixed, 1)), chk_sum(mixed, 1)
-    scal = [_Pair(a="always", b="retain", a_ok=True, b_ok=True),
-            _Pair(a="always", b="lose", a_ok=True, b_ok=False),
-            _Pair(a="rarely", b="retain", a_ok=False, b_ok=True),
-            _Pair(a="rarely", b="lose", a_ok=False, b_ok=False),
-            _Pair(a="rarely", b="retain", a_ok=False, b_ok=True)]
-    assert any("정도·범위" in b for b in chk_sum(scal, 1)), chk_sum(scal, 1)
+
+    def _pair(a, b):
+        return _Pair(a=a, b=b, a_ok=True, b_ok=True)
+
+    # 정답이 '그 자체로 부정을 품은 낱말'이면 거절 → 문장에 not 을 넣고 긍정형으로
+    for neg in ("unlikely", "impossible", "insufficient", "irrelevant", "useless"):
+        assert chk_pol([_pair(neg, "retain")], 1), neg
+    # 오답이 부정형인 것은 정상(정답의 자연스러운 짝이다)
+    assert chk_pol([_pair("likely", "retain"), _pair("unlikely", "lose")], 1) == []
+    # 형태만 비슷한 멀쩡한 낱말은 걸리지 않는다
+    assert chk_pol([_pair("unique", "important")], 1) == []
+    assert chk_pol([_pair("increase", "distinct")], 1) == []
+    assert chk_pol([_pair("invaluable", "indeed")], 1) == []
+    # 전체 검사에도 물려 있다
+    bad_sum = [_pair("unlikely", "retain"), _pair("unlikely", "lose"),
+               _pair("likely", "retain"), _pair("likely", "lose"),
+               _pair("likely", "retain")]
+    assert any("부정 의미" in b for b in chk_sum(bad_sum, 1)), chk_sum(bad_sum, 1)
 
     # ④ 무관한 문장 ----------------------------------------------------------
     sents = DNA.sentences
@@ -1877,7 +1867,7 @@ def test_new_type_guards() -> None:
     ok = ("Because living cells needed to store information, they gradually shrank "
           "until they could survive in bone and ice.")
     assert chk_irr(ok, sents) == [], chk_irr(ok, sents)     # 지문 낱말 + 인과 뒤집기
-    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 부정어/정도어·무관한 문장) 통과")
+    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 정답 긍정형·무관한 문장) 통과")
 
 
 def test_tiering_and_escalation() -> None:

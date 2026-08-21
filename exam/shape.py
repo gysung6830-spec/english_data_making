@@ -85,74 +85,53 @@ def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
     return bad
 
 
-# 순수 부정어 — 이것이 빈칸의 정답이 되면 요약문 문제가 O/X 문제로 무너진다.
-# (unlikely·impossible 처럼 뜻이 부정적인 '내용어'는 여기 넣지 않는다. 그건 정상 선지다.)
-NEGATORS = {
-    "not", "no", "never", "none", "neither", "nor", "nothing", "nowhere",
-    "nobody", "hardly", "scarcely", "barely", "rarely", "seldom", "without",
-    "cannot", "cant", "dont", "doesnt", "didnt", "wont", "isnt", "arent",
+# 정답 자리에 오면 '긍정형으로 뒤집어야 하는' 부정 의미 어휘.
+# 형태만 보고 판정하면(un-·in- 접두어) unique·important·increase 까지 걸리므로
+# 실제로 뒤집기가 자연스러운 낱말만 추려 둔다.
+NEGATIVE_ANSWERS = {
+    "unlikely", "unable", "unaware", "unclear", "uncertain", "unnecessary",
+    "unimportant", "unsuccessful", "unwilling", "unfamiliar", "unavailable",
+    "unpredictable", "unrealistic", "unsafe", "unhelpful", "unfair", "unequal",
+    "impossible", "impractical", "imperfect", "inadequate", "inaccurate",
+    "insufficient", "incapable", "incomplete", "ineffective", "inefficient",
+    "invisible", "incorrect", "inconsistent",
+    "irrelevant", "irregular", "irrational", "illogical", "illegal",
+    "dishonest", "disadvantageous",
+    "absent", "useless", "meaningless", "helpless", "hopeless", "worthless",
+    "powerless", "fruitless",
 }
+# '-less' 로 끝나면 대개 부정 의미지만, 아래는 부정어가 아니라 접속 부사다.
+_NOT_LESS = {"unless", "regardless", "nevertheless", "nonetheless", "bless"}
 
 
-def check_summary_negation(pairs) -> list[str]:
-    """요약문 빈칸의 선지에 '순수 부정어'가 들어 있지 않은가.
+def _is_negative_word(word: str) -> bool:
+    w = word.strip().lower()
+    if w in NEGATIVE_ANSWERS:
+        return True
+    return len(w) >= 7 and w.endswith("less") and w not in _NOT_LESS
 
-    부정어가 정답 자리에 오면 학생은 어휘를 몰라도 '지문이 긍정이었나 부정이었나'만
-    판단해 답을 고른다 — 요약문 유형이 아니라 O/X 문제가 된다. 게다가 선지에 따라
-    문장의 논리 방향 자체가 뒤집혀 오답이 '지문과 정반대 진술'이 되어 버린다.
 
-    부정의 방향은 요약문 문장(before/mid/after) 쪽에 박아 두고, 빈칸에는 내용어를
-    둬야 학생이 '그 부정이 무엇에 걸리는지'를 지문에서 읽어 오게 된다.
+def check_summary_answer_polarity(pairs, answer_no: int) -> list[str]:
+    """요약문 정답이 '부정 의미 어휘'로 되어 있지 않은가.
+
+    정답이 unlikely·impossible 처럼 그 자체로 부정을 품은 낱말이면, 학생은 요약문을
+    제대로 읽지 않고 '지문이 부정적이었지' 하는 인상만으로 고른다. 부정은 요약문 문장
+    쪽에 not·never·hardly 로 드러내고, 빈칸의 정답은 그 긍정형으로 두어야 한다.
+
+        나쁨: "DNA storage is ___(A)___ to replace hard drives."   + (A) unlikely
+        좋음: "DNA storage is not ___(A)___ to replace hard drives." + (A) likely
+
+    이러면 학생은 문장의 부정을 읽고 '무엇이 부정되는지'를 지문에서 확인해야 한다.
     """
-    hit = set()
-    for p in pairs or []:
-        for label in ("a", "b"):
-            for w in _words(str(getattr(p, label, ""))):
-                if w in NEGATORS:
-                    hit.add(w)
+    if not pairs or not (1 <= answer_no <= len(pairs)):
+        return []
+    ans = pairs[answer_no - 1]
+    hit = [str(getattr(ans, k, "")) for k in ("a", "b")
+           if _is_negative_word(str(getattr(ans, k, "")))]
     if hit:
-        return [f"선지에 부정어({', '.join(sorted(hit))})가 들어 있습니다 — 부정어는 요약문 "
-                "문장 쪽에 두고 빈칸에는 내용어를 넣어야 합니다(그러지 않으면 어휘를 몰라도 "
-                "긍정·부정만 판단해 풀립니다)."]
-    return []
-
-
-# 정도·범위·확신을 결정하는 기능어 — 부정어와 같은 이유로 빈칸의 정답이 되면 안 된다.
-# 낱말 하나가 문장 전체의 방향을 정해 버려서, 학생이 어휘를 몰라도 '지문이 단정했나
-# 유보했나'만 판단하면 답이 나온다.
-#   (remarkably·extremely 같은 '정도를 나타내되 뜻을 지닌' 부사는 넣지 않는다 — 정상 선지다.)
-SCALARS = {
-    # 빈도·절대성
-    "always", "all", "every", "everything", "everyone", "entirely", "completely",
-    "totally", "absolutely", "wholly", "fully", "any", "both", "each",
-    "some", "sometimes", "often", "usually", "occasionally", "partly",
-    "partially", "mostly", "generally", "frequently",
-    # 조동사
-    "must", "should", "can", "could", "may", "might", "will", "would", "shall",
-    # 한정·초점
-    "only", "just", "merely", "simply", "even", "also", "still", "already",
-    # 정도·비교
-    "more", "less", "most", "least", "very", "quite", "rather", "too", "much",
-}
-
-
-def check_summary_scalar(pairs) -> list[str]:
-    """요약문 빈칸의 선지에 '정도·범위를 정하는 기능어'가 들어 있지 않은가.
-
-    check_summary_negation 과 같은 이유다. 부정어든 always·only·must 든, 낱말 하나가
-    문장의 논리 방향을 통째로 정해 버리면 요약문 유형이 '방향 고르기'로 무너진다.
-    그런 낱말은 요약문 문장 쪽에 박아 두고, 빈칸에는 내용어를 둬야 한다.
-    """
-    hit = set()
-    for p in pairs or []:
-        for label in ("a", "b"):
-            ws = _words(str(getattr(p, label, "")))
-            if len(ws) == 1 and ws[0] in SCALARS:   # 선지가 그 낱말 '하나'일 때만
-                hit.add(ws[0])
-    if hit:
-        return [f"선지에 정도·범위를 정하는 낱말({', '.join(sorted(hit))})이 그대로 들어 있습니다 "
-                "— 이런 낱말은 요약문 문장 쪽에 두고 빈칸에는 내용어를 넣어야 합니다"
-                "(그러지 않으면 어휘를 몰라도 '단정이냐 유보냐'만 판단해 풀립니다)."]
+        return [f"정답이 부정 의미 어휘({', '.join(hit)})입니다 — 부정은 요약문 문장에 "
+                "not·never·hardly 로 드러내고, 빈칸의 정답은 그 긍정형으로 바꾸세요"
+                "(예: (A)=unlikely → 문장에 not 을 넣고 (A)=likely)."]
     return []
 
 
@@ -180,7 +159,7 @@ def check_summary_pairs(pairs, answer_no: int) -> list[str]:
                        "요약문을 읽지 않고도 답이 드러납니다.")
     if len({(a, b) for a, b in zip(col_a, col_b)}) != len(pairs):
         bad.append("같은 (A)(B) 조합이 두 번 나옵니다.")
-    return bad + check_summary_negation(pairs) + check_summary_scalar(pairs)
+    return bad + check_summary_answer_polarity(pairs, answer_no)
 
 
 def check_order_shuffle(display: list[int]) -> list[str]:
