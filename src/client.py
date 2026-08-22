@@ -38,6 +38,8 @@ def _strictify(node: Any) -> None:
             node["required"] = list(node["properties"].keys())
         if "minItems" in node and isinstance(node["minItems"], int) and node["minItems"] > 1:
             node["minItems"] = 1
+        # maxItems 는 구조화 출력에서 아예 미지원 → 제거(상한은 pydantic 파싱+재시도로 검증)
+        node.pop("maxItems", None)
         for v in node.values():
             _strictify(v)
     elif isinstance(node, list):
