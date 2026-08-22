@@ -290,7 +290,10 @@ def ws_compose_prompt(title: str, body: str) -> str:
         "- given_high(상): '핵심 단어만 적게'(중의 절반 이하) 제시합니다. 마찬가지로 동사류는 동사원형으로. "
         "(단어도 적고 어형도 바꿔야 하는 난이도)\n"
         "- 두 목록의 단어는 모두 정답 문장에 실제로 쓰인 단어(그 원형)여야 합니다.\n"
-        "- word_count: 정답 문장의 단어 수(예: '12단어').\n"
+        "- ★ answer 는 korean·보기 단어와 '정확히' 대응해야 합니다. 'For example, Rather, However, "
+        "But, In addition' 같은 담화 표지(접속부사)는 korean 해석에 그 뜻이 있을 때만 answer 에 포함하세요. "
+        "지문 원문에 붙어 있더라도 korean 에 없으면 answer 에서 빼세요(학생이 쓸 문장과 정답이 어긋나면 안 됨).\n"
+        "- word_count: answer 의 '실제' 단어 수와 반드시 일치시키세요.\n"
         "- explanation: 어떤 어법을 어떻게 적용하는지(특히 동사 어형 변화) 한국어로 짧게.\n\n"
         + _passage_block(title, body)
     )
