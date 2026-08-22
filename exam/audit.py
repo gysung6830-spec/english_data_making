@@ -153,8 +153,14 @@ def _check_passage(text: str, name: str) -> list[str]:
     if m:
         bad.append(f"마침표 뒤에 낱말이 붙어 있습니다('{m.group(0)}') — 지시문 조각이 "
                    "섞였는지 확인하세요.")
-    # 문장이 소문자로 시작 — 유의어 치환이 첫 낱말을 갈아 끼운 자국
-    for s in re.split(r"(?<=[.!?])\s+", text):
+    # 문장이 소문자로 시작 — 유의어 치환이 첫 낱말을 갈아 끼운 자국.
+    # 여기서는 split_sentences 를 쓸 수 없다. 그 함수는 '대문자로 시작하는 문장'만
+    # 나누므로, 소문자로 시작하는 문장은 앞 문장에 붙어 버려 영영 안 보인다.
+    # 대신 약어·이니셜의 마침표만 가리고 '남은 마침표'에서 모두 자른다.
+    from .analyzer import mask_abbrev
+
+    for s in re.split(r"(?<=[.!?])\s+", mask_abbrev(text)):
+        s = s.replace("\x00", ".")
         s = re.sub(r"^[①-⑧ⓐ-ⓔ\s]+", "", s.strip())
         if s and s[0].isalpha() and s[0].islower():
             bad.append(f"문장이 소문자로 시작합니다('{s[:34]}…').")

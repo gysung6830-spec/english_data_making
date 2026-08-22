@@ -44,6 +44,12 @@ _ABBR = ["Mr", "Mrs", "Ms", "Dr", "Prof", "Sr", "Jr", "St", "Mt", "vs", "No",
 # 문장 끝처럼 보이지만 사람 이름이다. 보호하지 않으면 이름 한가운데서 문장이 갈라져
 # 밑줄 번호가 'Paul R. ① Ehrlich' 처럼 이름 사이에 박힌다(실제 결과물 버그).
 _INITIAL = re.compile(r'(?<![A-Za-z])([A-Z])\.(?=\s+[A-Z])')
+# 낱자마다 마침표가 붙은 약어 — U.S. · U.K. · e.g. · i.e. · a.m. · Ph.D.
+# 이 마침표들은 문장 끝이 아니다. 'in the U.S. during the 1970s' 가 갈리면
+# 뒤 조각이 소문자로 시작하는 반쪽 문장이 된다.
+_ACRONYM = re.compile(r'(?<![A-Za-z])(?:[A-Za-z]\.){2,}')
+# 마침표를 품은 그 밖의 약어. 'etc.'·'no.' 는 진짜 문장 끝일 수 있어 넣지 않는다.
+_DOTTED = re.compile(r'(?<![A-Za-z])(et al|cf|viz|approx)\.', re.IGNORECASE)
 _DOT = "\x00"   # 임시 치환용 (본문에 없을 제어문자)
 
 # 따옴표 짝 세기 — 조각이 인용문 한가운데서 끊겼는지 본다.
@@ -82,12 +88,25 @@ def _join_quoted(parts: list[str]) -> list[str]:
     return parts
 
 
-def split_sentences(text: str) -> list[str]:
-    """지문 원문을 문장 단위로 나눈다(공백 정규화 + 약어·이니셜·인용문 보호)."""
+def mask_abbrev(text: str) -> str:
+    """약어·이니셜의 마침표를 잠시 가린 문자열(공백도 정규화).
+
+    '문장 끝이 아닌 마침표'가 모두 가려지므로, 남은 마침표는 진짜 문장 끝이다.
+    문장이 소문자로 시작하는지 같은 검사는 대문자 조건 없이 잘라야 보이므로
+    이 함수를 쓴다(split_sentences 는 대문자로 시작하는 문장만 나눈다).
+    돌려받은 문자열의 \x00 을 '.' 로 되돌리면 원문이 된다.
+    """
     norm = " ".join((text or "").split())
     for ab in _ABBR:
         norm = re.sub(r'\b' + re.escape(ab) + r'\.', ab + _DOT, norm)
     norm = _INITIAL.sub(r'\1' + _DOT, norm)
+    norm = _ACRONYM.sub(lambda m: m.group(0).replace(".", _DOT), norm)
+    return _DOTTED.sub(lambda m: m.group(1).replace(".", _DOT) + _DOT, norm)
+
+
+def split_sentences(text: str) -> list[str]:
+    """지문 원문을 문장 단위로 나눈다(공백 정규화 + 약어·이니셜·인용문 보호)."""
+    norm = mask_abbrev(text)
     parts = [p.strip() for p in _SENT_BOUNDARY.split(norm) if p.strip()]
     parts = _join_quoted(parts)
     return [p.replace(_DOT, ".").strip() for p in parts]

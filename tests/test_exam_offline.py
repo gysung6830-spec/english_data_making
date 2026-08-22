@@ -2345,6 +2345,14 @@ def test_output_checker() -> None:
     print("✓ 산출물 검산기(문항 안·문항끼리)·기계 검사 승격 연결 통과")
 
 
+def test_stress_fixtures() -> None:
+    """극단 지문 시험대(tests/test_stress.py)를 본 묶음에서도 돌린다."""
+    sys.path.insert(0, str(ROOT / "tests"))
+    from test_stress import test_stress_passages
+
+    test_stress_passages()
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2501,6 +2509,7 @@ if __name__ == "__main__":
     test_demo_matches_real_rules()
     test_output_defect_regressions()
     test_output_checker()
+    test_stress_fixtures()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")
