@@ -25,11 +25,19 @@ MAX_TOKENS_CAP = 32000
 # pydantic 모델 -> 구조화 출력용 strict JSON 스키마
 # ---------------------------------------------------------------------------
 def _strictify(node: Any) -> None:
-    """모든 object 노드에 additionalProperties:false 와 required(전체 키)를 설정."""
+    """모든 object 노드에 additionalProperties:false 와 required(전체 키)를 설정.
+
+    또한 배열의 minItems 를 0/1 로 클램프한다 — Anthropic 구조화 출력(output_config)은
+    'minItems 값이 0 또는 1' 만 허용하므로, pydantic Field(min_length=N≥2)에서 나온
+    minItems(예: drills 5, flow_blocks 2, explanation 3)를 1 로 낮춘다.
+    (진짜 최소 개수 제약은 pydantic 파싱 단계에서 그대로 검증되고, 부족하면 재시도로 처리)
+    """
     if isinstance(node, dict):
         if node.get("type") == "object" and "properties" in node:
             node["additionalProperties"] = False
             node["required"] = list(node["properties"].keys())
+        if "minItems" in node and isinstance(node["minItems"], int) and node["minItems"] > 1:
+            node["minItems"] = 1
         for v in node.values():
             _strictify(v)
     elif isinstance(node, list):
