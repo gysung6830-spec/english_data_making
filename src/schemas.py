@@ -14,7 +14,20 @@ _LBL_RE = re.compile(r"\[\[([A-Za-z])\]\]")
 _ULM_RE = re.compile(r"\{\{(\d+)\|([^}]*)\}\}")
 
 # 영작 보기 단어와 '정답 문장의 단어'를 대조하기 위한 토큰/매칭 헬퍼.
-_WORD_RE = re.compile(r"[A-Za-z]+")
+#   소유격·축약형(child's, don't)을 한 토큰으로 유지해야 stray 's' 조각이 안 생긴다.
+_WORD_RE = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
+_STRIP_RE = re.compile(r"^[^0-9A-Za-z]+|[^0-9A-Za-z']+$")
+
+
+def _clean_given(words: list) -> list:
+    """보기 단어에서 앞뒤 문장부호를 떼고, 글자 없는(단독 ',' 등) 항목은 버린다.
+    'character,'→'character', 'help:'→'help', ','→제거. 내부 아포스트로피(child's)는 보존."""
+    out = []
+    for w in words or []:
+        c = _STRIP_RE.sub("", (w or "").strip())
+        if c and re.search(r"[A-Za-z]", c):
+            out.append(c)
+    return out
 
 
 def _word_match(a: str, b: str) -> bool:
@@ -326,6 +339,7 @@ class WSArrangeItem(BaseModel):
         - 정답에 있는데 빠진 단어는 정답 단어로 채워 넣음(학생이 만들 수 있게).
         정답 토큰과 1:1 로 매칭(중복 단어 개수까지 맞춤). 정답이 비면 원본 유지.
         """
+        self.given_words = _clean_given(self.given_words)   # 문장부호 칩 제거
         tokens = _WORD_RE.findall(self.answer or "")
         if not tokens:
             return self
@@ -375,6 +389,10 @@ class WSComposeItem(BaseModel):
         # 중(given_mid)이 비어 있으면 구버전 데이터(given_low/given_words)로 채워 하위호환.
         if not self.given_mid:
             self.given_mid = list(self.given_low or self.given_words)
+        # 문장부호 칩(단독 ',' 등) 제거. 앞뒤 부호도 정리.
+        self.given_low = _clean_given(self.given_low)
+        self.given_mid = _clean_given(self.given_mid)
+        self.given_high = _clean_given(self.given_high)
         # 주의: 조건영작 보기의 동사류는 '동사원형'이라 정답 활용형(are/went 등)과 글자가
         #   달라, '정답에 없는 단어 제거' 검증은 정상 원형까지 지운다 → 하지 않는다(프롬프트로 통제).
         return self
