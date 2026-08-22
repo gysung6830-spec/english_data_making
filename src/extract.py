@@ -170,6 +170,59 @@ def extract_passage_text(pdf_path: str | Path, two_column: bool = False) -> str:
     return clean_text(strip_listening(extract_raw_text(pdf_path, two_column)))
 
 
+def line_to_item_label(line: str) -> str | None:
+    """교재/문제집 '문항 헤더' 한 줄 -> 지문 라벨. 아니면 None.
+
+    예:
+      'Ch. 05 Unit 13 - 수능 대비 ANALYSIS: …'  -> '13-A'
+      'Ch. 05 Unit 13 - 1번: …'                 -> '13-1'
+      'Ch. 04 - 논술형 Practice: …'             -> '논술형'
+      'Unit 10 - 2번'                           -> '10-2'
+    """
+    s = (line or "").strip()
+    if not s:
+        return None
+    # 헤더로 볼 만한 줄만: 'Ch.NN' 로 시작하거나 'Unit NN -' 를 포함
+    if not (re.match(r"(?i)^ch\.?\s*\d+", s) or re.search(r"(?i)\bunit\s*\d+\s*[-–—]", s)):
+        return None
+    head = s.split(":", 1)[0]          # 콜론 뒤 '한글 주제'는 라벨 판단에서 제외
+    unit_m = re.search(r"(?i)\bunit\s*(\d+)", head)
+    unit = unit_m.group(1) if unit_m else None
+    if "ANALYSIS" in head.upper():
+        return f"{unit}-A" if unit else "ANALYSIS"
+    num_m = re.search(r"[-–—]\s*(\d+)\s*번", head)     # '- 1번'
+    if num_m:
+        return f"{unit}-{num_m.group(1)}" if unit else num_m.group(1)
+    if "논술형" in head:
+        return "논술형"
+    if "서술형" in head:
+        return "서술형"
+    if "대표" in head:                                 # '대표 유형/예제'
+        return f"{unit}-대표" if unit else "대표"
+    return unit  # 번호 표기 없는 단원 헤더면 단원번호만
+
+
+def source_item_labels(file_path: str | Path) -> list[str]:
+    """원본(텍스트 PDF) 앞부분의 문항 헤더들을 순서대로 파싱해 지문 라벨 리스트를 만든다.
+
+    시작 문항번호를 '비워' 두었을 때, 1·2·3… 순번 대신 이 라벨(10-A, 13-1, 논술형 …)을
+    지문에 그대로 매겨 학생이 원본 문제집과 번호를 맞출 수 있게 한다.
+    이미지·HWP·형식 불명이거나 헤더를 못 찾으면 빈 리스트(→ 호출측이 순번/기존값으로 폴백).
+    """
+    try:
+        if is_image(file_path) or Path(file_path).suffix.lower() != ".pdf":
+            return []
+        text = extract_raw_text(file_path)
+    except Exception:
+        return []
+    labels: list[str] = []
+    for line in text.splitlines():
+        lab = line_to_item_label(line)
+        if lab:
+            labels.append(lab)
+    return labels
+
+
 def looks_empty(text: str) -> bool:
     """텍스트가 사실상 비어있는지(스캔본/추출 실패) 판단."""
     letters = re.sub(r"[^A-Za-z]", "", text)

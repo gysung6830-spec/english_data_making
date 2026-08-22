@@ -113,9 +113,10 @@ INDEX_HTML = """
       <input type=text name=basename placeholder="예: 2027수능특강_16강">
       <div class=hint>저장 이름: <b>(지문명)_지문분석</b> · <b>(지문명)_핵심어휘리스트</b> · <b>(지문명)_핵심어휘test</b></div>
 
-      <label>④ 시작 문항번호 <span class=hint>(예: 31 — 지문마다 1씩 자동 증가. 비우면 원본 번호/순번 사용)</span></label>
-      <input type=text name=start_no placeholder="예: 31" inputmode=numeric>
-      <div class=hint>제목이 <b>31. 주제</b> → <b>32. 주제</b> → <b>33. 주제</b> … 순으로 매겨집니다.</div>
+      <label>④ 시작 문항번호 <span class=hint>(예: 31 — 지문마다 1씩 자동 증가. 비우면 원본 문제집 문항번호 자동 매칭)</span></label>
+      <input type=text name=start_no placeholder="예: 31 (비우면 원본 번호)" inputmode=numeric>
+      <div class=hint>숫자를 넣으면 <b>31 → 32 → 33 …</b> 순번으로 매겨집니다.<br>
+        <b>비워 두면</b> 원본(교재·문제집)의 문항 번호를 그대로 따옵니다 — 예: <b>논술형</b>, <b>13-A</b>(ANALYSIS), <b>13-1</b>(1번). (올림포스 등 단원형 교재용)</div>
 
       <label>④-2 모의고사 문항 범위 <span class=hint>(모의고사 시험지일 때만. 예: 18-24,29-43 — 듣기(1~17)는 자동 제외. 비우면 전체 지문)</span></label>
       <input type=text name=exam_range placeholder="예: 18-24,29-43">
@@ -354,6 +355,8 @@ def analyze_route():
             n_pass = 0
             # 같은 파일의 분석지·강의교재가 '같은 시작 문항번호'를 쓰도록 시작값 고정
             start_no = running_no
+            # 시작번호를 비웠으면(=None) 원본 문제집의 문항 라벨(10-A, 13-1, 논술형 …)을 파싱해 매칭
+            src_labels = extract.source_item_labels(tmp) if start_no is None else None
 
             # 6개 섹션 분석 계열 (분석지/어휘리스트/어휘시험지)
             if need_analysis:
@@ -363,7 +366,7 @@ def analyze_route():
                     reports = pipeline.build_reports_for_pdf(client, cfg, tmp,
                                                              focus_items=exam_range)
                 n_pass = len(reports)
-                pipeline._assign_item_numbers(reports, start_no)
+                pipeline._assign_item_numbers(reports, start_no, src_labels)
                 recs = pipeline.render_outputs(cfg, reports, stem, which=which,
                                                brand=brand, source_label=file_label)
                 fitems += [{"label": r["label"], "out": r["path"].name} for r in recs]
@@ -380,7 +383,7 @@ def analyze_route():
                     passages = lecture_analyze.build_lecture_passages_for_pdf(
                         client, cfg, tmp, focus_items=exam_range)
                 n_pass = n_pass or len(passages)
-                pipeline._assign_item_numbers(passages, start_no)
+                pipeline._assign_item_numbers(passages, start_no, src_labels)
                 lrecs = lecture_render.render_lecture_outputs(
                     OUTPUT_DIR, passages, stem, footer_note=cfg.design.footer_note)
                 fitems += [{"label": r["label"], "out": r["path"].name} for r in lrecs]

@@ -197,12 +197,19 @@ def _mock_lecture_passages_for_pdf(cfg: Config, pdf: Path):
     return [mock_lecture_passage(title=_safe_stem(pdf), source=pdf.name)]
 
 
-def _assign_item_numbers(items, start: int | None) -> int | None:
-    """지문 목록(reports/passages)에 시작 문항번호부터 1씩 증가시켜 item_no 를 부여.
+def _assign_item_numbers(items, start: int | None,
+                         source_labels: list[str] | None = None) -> int | None:
+    """지문 목록(reports/passages)에 문항번호(item_no)를 부여.
 
-    start 가 None 이면 아무것도 하지 않고 None 을 반환. 아니면 다음 시작 번호를 반환.
+    - start 가 주어지면: 그 번호부터 '1씩 자동 증가'(예: 31,32,33…) → 다음 시작 번호 반환.
+    - start 가 None 이고 source_labels 가 지문 수와 같으면: 원본 문제집의 문항 라벨을
+      순서대로 그대로 매김(예: 논술형, 13-A, 13-1). → None 반환.
+    - 둘 다 아니면: 아무것도 바꾸지 않음(추출/분석이 넣은 item_no 유지) → None 반환.
     """
     if start is None:
+        if source_labels and len(source_labels) == len(items):
+            for it, lab in zip(items, source_labels):
+                it.item_no = lab
         return None
     for it in items:
         it.item_no = str(start)
