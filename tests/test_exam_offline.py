@@ -2294,7 +2294,35 @@ def test_output_defect_regressions() -> None:
     _B.make_insert(five, 2, "근거", flags=fl)
     assert any("선지가 3개뿐" in f for f in fl), fl
 
-    # 11) 제목도 오답 4개 근거를 모두 받아야 한다(빠지면 해설에 빈 줄이 찍혔다)
+    # 11-a) 해설이 '선택지 N'·'세 번째 밑줄'로 불러도 번호가 같이 옮겨져야 한다
+    m2 = answer_spread.perm_map(5, 1, 4)
+    moved2 = answer_spread.relabel_choice_refs("선택지 1은 이를 재진술한다.", m2)
+    assert "선택지 4" in moved2, moved2
+    assert answer_spread.relabel_choice_refs("세 번째 밑줄이 정답이다.",
+                                             {3: 4, 4: 3}) == "네 번째 밑줄이 정답이다."
+    #    어휘는 밑줄을 읽는 순서로 다시 번호 매기므로 해설의 순번도 함께 옮긴다
+    five = ["Alpha one runs here.", "Beta two walks here.", "Gamma three sits here.",
+            "Delta four stands here.", "Epsilon five waits here."]
+    scrambled = [(4, "waits", "waits"), (0, "runs", "runs"), (2, "sits", "sits"),
+                 (1, "walks", "walks"), (3, "stands", "stands")]
+    _q, _a = _B.make_vocab(five, scrambled, 3, "세 번째 밑줄 sits 가 정답이다.")
+    assert "③" in _a and "세 번째" in _a, _a
+
+    # 11-b) 주제 선지 하나만 절이면 모양으로 답이 보인다(제목·빈칸에는 걸지 않는다)
+    np_bad = ["the tendency of individuals to overestimate their willingness",
+              "how more witnesses improve the chance that someone intervenes",
+              "various character defects that prevent people from responding",
+              "the discomfort people feel when comparing themselves to bystanders",
+              "situational forces, not personal flaws, explain the failure, as duty spreads"]
+    assert shape.check_choice_shape(np_bad, 5, noun_phrase=True)
+    assert shape.check_choice_shape(np_bad, 5) == []      # 기본은 걸지 않는다
+    #    쉼표 하나짜리 제목은 정상이므로 걸리면 안 된다
+    titles = ["Cheaper Chips, Shorter Memories", "Bridging Emotion and Reason",
+              "The Hidden Cost of Discipline", "A Sign of Weak Parenting",
+              "Calming the Storm Through Words"]
+    assert shape.check_choice_shape(titles, 1, noun_phrase=True) == []
+
+    # 12) 제목도 오답 4개 근거를 모두 받아야 한다(빠지면 해설에 빈 줄이 찍혔다)
     from exam.schemas import TitleOut, WrongReason as _WR
     try:
         TitleOut(choices=list("abcde"), answer_no=3, reason="x",

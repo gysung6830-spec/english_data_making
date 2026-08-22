@@ -36,7 +36,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "") -> tuple[str, str, list[str]]:
     def _chk(o: TopicOut) -> None:
-        bad = shape.check_choice_shape(o.choices, o.answer_no, "선지")
+        # 주제 선지는 명사구로 통일해야 한다 — 하나만 절이면 모양으로 답이 보인다.
+        bad = shape.check_choice_shape(o.choices, o.answer_no, "선지",
+                                       noun_phrase=True)
         if bad:
             raise ValueError("주제 문항 설계 결함 — " + " ".join(bad))
 

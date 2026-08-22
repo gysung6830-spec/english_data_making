@@ -138,6 +138,10 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     # (어법 2종은 '다시 쓴 지문' 위에 서므로 이 묶음에 넣지 않는다 — 지문이 다르다.)
     vslots = {t: pipeline.VOCAB_METHODS[t]
               for t in MERGED_ORDER if t in pipeline.VOCAB_METHODS}
+    # 밑줄 문항이 각각 어떤 낱말을 썼는지 기억해 둔다. 검수 승격으로 일부만 다시
+    # 만들 때, 다시 만들지 않는 문항의 낱말을 '피할 낱말'로 넘겨야 밑줄이 겹치지 않는다
+    # (실제 결과물: 승격으로 다시 만든 어휘가 짝짓기와 rational·soothe 를 겹쳐 썼다).
+    used_words: dict[str, set[str]] = {}
     underline = set(vslots)
     first = []
     if PAIR_ODD in MERGED_ORDER:
@@ -149,7 +153,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         vc = tiering.EffortClient(client, tiering.effort_for(VOCAB))
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
             vc, analysis, body, vslots, max_retries=max_retries, logger=logger,
-            first=first)))
+            first=first, used_out=used_words)))
 
     results = run_parallel(tasks)
     results.update(results.pop("__vocab__", None) or {})
@@ -168,7 +172,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
     if strong_client is not None:
         _escalate(passage, strong_client, _task, analysis, body, vslots,
-                  max_retries=max_retries, logger=logger)
+                  max_retries=max_retries, logger=logger, used_words=used_words)
 
     # 다 만든 뒤에야 보이는 것(선지 개수·지문 오염·문항 간 겹침·정답 쏠림)을 검산해
     # 검토 메모에 합친다. 승격이 끝난 다음이라 '다시 만들 것'이 아니라 '사람이 볼 것'이다.
@@ -306,7 +310,8 @@ def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retri
 
 
 def _escalate(passage, strong_client, task_of, analysis, body, vslots,
-              max_retries: int = 1, logger=None) -> list[str]:
+              max_retries: int = 1, logger=None,
+              used_words: dict[str, set[str]] | None = None) -> list[str]:
     """검수에 걸린 문항만 좋은 모델로 다시 만든다. 다시 만든 유형 목록을 돌려준다.
 
     다시 만든 결과가 검수를 통과하면 문항과 사유를 교체하고, 그래도 걸리면 새 사유로
@@ -329,8 +334,14 @@ def _escalate(passage, strong_client, task_of, analysis, body, vslots,
              for t in targets if t not in vt]
     if vt:      # 어휘는 밑줄이 겹치면 안 되므로 묶음으로 다시 만든다
         vc = tiering.EffortClient(strong_client, tiering.effort_for(VOCAB))
+        # 다시 만들지 않는 밑줄 문항(짝짓기·다른 어휘)이 이미 쓴 낱말은 피해야 한다.
+        keep = set()
+        for slot, words in (used_words or {}).items():
+            if slot not in vt:
+                keep |= words
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
-            vc, analysis, body, vt, max_retries=max_retries, logger=logger)))
+            vc, analysis, body, vt, max_retries=max_retries, logger=logger,
+            avoid=keep, used_out=used_words)))
 
     res = run_parallel(tasks)
     res.update(res.pop("__vocab__", None) or {})

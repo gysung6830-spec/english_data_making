@@ -148,6 +148,15 @@ def _underline_marks(marks: list[tuple[int, str, str]]) -> list[tuple[int, str, 
     ]
 
 
+def _relabel(text: str, remap: dict[int, int]) -> str:
+    """해설이 부른 밑줄 번호를 재매핑 뒤의 표시 번호로 옮긴다."""
+    from . import answer_spread as _as
+
+    if not text or all(k == v for k, v in (remap or {}).items()):
+        return text
+    return _as.relabel_choice_refs(text, remap)
+
+
 def order_marks(sentences: list[str], marks: list[tuple[int, str, str]]):
     """밑줄 marks 를 '지문 읽는 순서'(문장 index → 문장 내 등장 위치)로 정렬한다.
 
@@ -518,6 +527,9 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
     # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호도 그에 맞춰 재매핑
     marks, remap = order_marks(eff, marks)
     answer_no = remap.get(answer_no, answer_no)
+    # 해설이 '네 번째 밑줄'·'3번'처럼 부른 번호도 같이 옮긴다. 그러지 않으면
+    # 정답은 ④인데 해설은 '세 번째 밑줄이 정답'이라고 어긋난다(실제 결과물).
+    reason = _relabel(reason, remap)
     marks = expand_marks(eff, marks)          # 'to confirm' 류 낱말 중복 방지
     marks = keep_sentence_case(eff, marks)    # 문장 첫 낱말이면 대문자 유지
     flag_ambiguous_marks(eff, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
@@ -537,7 +549,7 @@ def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
     # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호·근거 키도 그에 맞춰 재매핑
     marks, remap = order_marks(sentences, marks)
     answer_nos = sorted(remap.get(n, n) for n in answer_nos)
-    reasons = {remap.get(n, n): t for n, t in reasons.items()}
+    reasons = {remap.get(n, n): _relabel(t, remap) for n, t in reasons.items()}
     marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
     marks = keep_sentence_case(sentences, marks)    # 문장 첫 낱말이면 대문자 유지
     flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장

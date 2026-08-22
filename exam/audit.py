@@ -107,7 +107,8 @@ def _check_item(it: dict) -> list[str]:
             bad.append(f"선지가 {len(it['choices'])}개입니다(기대 {want}개).")
         if it["choices"]:
             bad += shape.check_choice_shape(
-                [re.sub(r"^[①-⑧]\s*", "", c) for c in it["choices"]], n_ans)
+                [re.sub(r"^[①-⑧]\s*", "", c) for c in it["choices"]], n_ans,
+                noun_phrase=(t == "topic"))
 
     # 밑줄
     want_marks = _N_MARKS.get(t)

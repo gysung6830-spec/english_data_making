@@ -58,7 +58,7 @@ def check_insert_cue(sentence: str) -> list[str]:
 
 
 def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
-                       spread: float = 2.2) -> list[str]:
+                       spread: float = 2.2, noun_phrase: bool = False) -> list[str]:
     """선지 5개가 '모양'으로 정답을 흘리지 않는가.
 
     실제 출제에서 가장 흔한 사고: 정답만 유독 길다(또는 짧다). 학생은 뜻을 몰라도
@@ -82,7 +82,28 @@ def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
                        f"{min(others)}~{max(others)}자).")
     if len({c.strip().lower() for c in choices}) != len(choices):
         bad.append(f"같은 {kind}가 두 번 나옵니다.")
+    if noun_phrase:
+        bad += _odd_clause(choices, kind)
     return bad
+
+
+def _odd_clause(choices: list[str], kind: str) -> list[str]:
+    """명사구로 통일해야 하는 선지(주제)에 하나만 '절'이 섞였는가.
+
+    실제 결과물: 주제 선지 넷은 명사구인데 정답만 'situational forces, not personal
+    flaws, explain why bystanders fail to help, as …' 처럼 삽입구가 둘 든 완전한
+    절이었다. 학생이 뜻을 몰라도 모양으로 골라낸다.
+
+    삽입구가 둘 이상(쉼표 2개 이상)인 선지가 '혼자'일 때만 잡는다. 쉼표 하나는
+    명사구에도 자연스럽게 들어가므로(‘Tantrums, Explained’) 세지 않는다.
+    """
+    if len(choices) < 4 or any(re.search(r"[가-힣]", c) for c in choices):
+        return []
+    heavy = [i + 1 for i, c in enumerate(choices) if c.count(",") >= 2]
+    if len(heavy) == 1:
+        return [f"{heavy[0]}번 {kind}만 삽입구가 둘 이상인 절입니다 — 나머지는 명사구라 "
+                "모양만 보고 답을 고를 수 있습니다. 선지의 갈래를 맞추세요."]
+    return []
 
 
 # 정답 자리에 오면 '긍정형으로 뒤집어야 하는' 부정 의미 어휘.

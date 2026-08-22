@@ -128,7 +128,8 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
 
 def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
                    methods: dict[str, str], max_retries: int = 1,
-                   logger=None, first=None,
+                   logger=None, first=None, avoid: set[str] | None = None,
+                   used_out: dict[str, set[str]] | None = None,
                    ) -> dict[str, tuple[str, str, list[str]]]:
     """정본에 밑줄을 치는 문항들을 '차례로' 만들어 밑줄이 겹치지 않게 한다.
 
@@ -138,9 +139,11 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
     methods: {어휘 슬롯키: 방식}
     first:   [(슬롯키, 만드는 함수)] — 어휘보다 먼저 만들 밑줄 문항(짝짓기 등).
              함수는 avoid(피할 낱말 집합)를 받아 (q, a, flags, 쓴 낱말들)을 돌려준다.
+    avoid:   이미 다른 밑줄 문항이 쓴 낱말(검수 승격으로 일부만 다시 만들 때 필요).
+    used_out: {슬롯키: 그 문항이 쓴 낱말들} 을 채워 준다(다음 재생성의 avoid 용).
     한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
     """
-    used: set[str] = set()
+    used: set[str] = set(avoid or ())
     out: dict[str, tuple[str, str, list[str]]] = {}
 
     for slot, make in (first or []):
@@ -151,6 +154,8 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
                 logger.warning("[%s] 생성 실패: %s", slot, e)
             continue
         used |= words
+        if used_out is not None:
+            used_out[slot] = set(words)
         out[slot] = (q, a, flags)
 
     for slot, method in methods.items():
@@ -163,5 +168,7 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
                 logger.warning("[%s] 어휘 생성 실패: %s", slot, e)
             continue
         used |= words
+        if used_out is not None:
+            used_out[slot] = set(words)
         out[slot] = (q, a, flags)
     return out

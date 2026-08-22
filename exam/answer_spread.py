@@ -103,8 +103,16 @@ def relabel_answer_ref(reason: str, old_no: int, new_no: int) -> str:
     return pat.sub(f'{new_no}번', reason)
 
 
-# 해설 본문이 선지를 지칭하는 두 가지 표기 — 'N번' 과 '선지 N'.
-_REF = re.compile(r'(?<![(\d])(?:(\d)번(?!\s*문장|\s*째)|선지\s*(\d))')
+# 해설 본문이 선지·밑줄을 지칭하는 표기.
+#   'N번' · '선지 N' · '선택지 N' · '첫/두/세/네/다섯 번째'
+# '선택지 1' 을 빠뜨려 정답 ④를 '선택지 1'이라 부른 해설이 실제로 인쇄됐다.
+_ORDINAL = {"첫": 1, "두": 2, "세": 3, "네": 4, "다섯": 5, "여섯": 6}
+_ORD_BACK = {v: k for k, v in _ORDINAL.items()}
+_REF = re.compile(
+    r'(?<![(\d])(?:(\d)번(?!\s*문장|\s*째)'
+    r'|선지\s*(\d)'
+    r'|선택지\s*(\d)'
+    r'|(첫|두|세|네|다섯|여섯)\s*번째)')
 
 
 def relabel_choice_refs(text: str, mapping: dict[int, int]) -> str:
@@ -121,8 +129,14 @@ def relabel_choice_refs(text: str, mapping: dict[int, int]) -> str:
         return text
 
     def _sub(m: re.Match) -> str:
-        old = int(m.group(1) or m.group(2))
+        if m.group(4):                          # '세 번째' 같은 한글 서수
+            old = _ORDINAL[m.group(4)]
+            new = mapping.get(old, old)
+            return f"{_ORD_BACK.get(new, m.group(4))} 번째"
+        old = int(m.group(1) or m.group(2) or m.group(3))
         new = mapping.get(old, old)
-        return f"{new}번" if m.group(1) else f"선지 {new}"
+        if m.group(1):
+            return f"{new}번"
+        return ("선지 " if m.group(2) else "선택지 ") + str(new)
 
     return _REF.sub(_sub, text)
