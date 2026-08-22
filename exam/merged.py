@@ -161,9 +161,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         passage.set_qa(t, q, a)
         passage.flag(t, fl)
         passage.flag(t, _rv.type_fit_flags(getattr(analysis, "passage_type", "prose"), t))
-        # 해설 문구 위생(출제 메모·문장 번호 지칭·문체 혼재)은 다시 만들 만큼 심각하지는
-        # 않지만 그대로 인쇄되면 안 된다. 검토 메모로 남겨 사람이 한 번 보게 한다.
-        passage.flag(t, _shape.check_explanation(_verify._text(a)))
+        passage.flag(t, explain_flags(a))
 
     _flag_key_overlap(passage)      # 빈칸추론과 요약문의 정답 핵심어가 겹치는지
     _flag_same_sentence(passage)    # 삽입의 주어진 문장과 어순배열 정답이 같은지
@@ -172,9 +170,26 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         _escalate(passage, strong_client, _task, analysis, body, vslots,
                   max_retries=max_retries, logger=logger)
 
+    # 다 만든 뒤에야 보이는 것(선지 개수·지문 오염·문항 간 겹침·정답 쏠림)을 검산해
+    # 검토 메모에 합친다. 승격이 끝난 다음이라 '다시 만들 것'이 아니라 '사람이 볼 것'이다.
+    from . import audit as _audit
+    _audit.apply_to_flags(passage)
+
     if not passage.q:
         raise RuntimeError(f"[{passage.title}] 통합본 모든 유형 생성 실패")
     return passage
+
+
+def explain_flags(a_html: str) -> list[str]:
+    """해설 문구 위생 검사(조립 직후와 승격 직후에 똑같이 건다).
+
+    승격에서 다시 만든 문항은 사유를 새로 쓰기 때문에, 여기서 다시 걸지 않으면
+    상위 모델이 낸 해설은 검사를 통째로 건너뛰게 된다.
+    """
+    from . import shape as _shape
+    from . import verify as _verify
+
+    return _shape.check_explanation(_verify._text(a_html))
 
 
 _CIRCLED_KEY = "①②③④⑤⑥⑦⑧"
@@ -203,6 +218,8 @@ def _flag_same_sentence(passage) -> None:
     """
     import re
 
+    from . import shape as _shape
+
     if not (INSERT in passage.q and D in passage.q):
         return
 
@@ -218,8 +235,8 @@ def _flag_same_sentence(passage) -> None:
         return
     g, a = _plain(given.group(1)), _plain(ans.group(1))
     if g and a and (g == a or g in a or a in g):
-        why = ["문장 삽입의 '주어진 문장'과 어순 배열의 정답이 같은 문장입니다 — "
-               "삽입 문항이 어순 배열의 답을 완성된 형태로 보여 줍니다."]
+        why = [_shape.ESCALATE + "문장 삽입의 '주어진 문장'과 어순 배열의 정답이 같은 "
+               "문장입니다 — 삽입 문항이 어순 배열의 답을 완성된 형태로 보여 줍니다."]
         passage.flag(INSERT, why)
         passage.flag(D, why)
 
@@ -240,7 +257,8 @@ def _flag_key_overlap(passage) -> None:
     ea = _answer_choice_text(passage.q[E], passage.a[E])
     if not (fa and ea):
         return
-    why = _shape.check_key_overlap(fa, ea, "빈칸추론", "요약문")
+    why = [_shape.ESCALATE + w
+           for w in _shape.check_key_overlap(fa, ea, "빈칸추론", "요약문")]
     if why:
         passage.flag(F, why)
         passage.flag(E, why)
@@ -325,6 +343,7 @@ def _escalate(passage, strong_client, task_of, analysis, body, vslots,
         passage.set_qa(t, q, a)
         passage.flags.pop(t, None)          # 낡은 사유를 지우고 새 결과의 사유만 남긴다
         passage.flag(t, fl)
+        passage.flag(t, explain_flags(a))   # 상위 모델의 해설도 같은 검사를 거친다
         fixed.append(t)
     if logger:
         still = [t for t in targets if tiering.needs_escalation(passage.flags.get(t))]

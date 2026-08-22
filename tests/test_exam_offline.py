@@ -2306,6 +2306,45 @@ def test_output_defect_regressions() -> None:
           "지문 오염·보기 토큰·대문자·짧은 지문·제목 오답) 통과")
 
 
+def test_output_checker() -> None:
+    """완성된 산출물 검산기(tools/검증.py)가 실제로 나왔던 결함을 잡는가."""
+    import copy
+    import re
+
+    from exam import audit as V
+    from exam.merged import demo_passages_merged
+
+    clean = demo_passages_merged()[0]
+    rows, whole = V.check_passage(clean)
+    assert len(rows) == len(MERGED_ORDER), len(rows)
+    flagged = {r["label"]: r["bad"] for r in rows if r["bad"]}
+    assert not flagged and not whole, (flagged, whole)   # 데모는 깨끗해야 한다
+
+    # 실제 출력물에서 나왔던 결함을 하나씩 심고 잡히는지 본다
+    bad = copy.deepcopy(clean)
+    bad.q["vocab_3"] = bad.q["vocab_3"].replace("</div>", ".output must</div>", 1)
+    bad.q["vocab"] = bad.q["vocab"].replace("A single gram", "numerous single gram", 1)
+    bad.q["D"] = re.sub(r"(libraries)", r"\1,", bad.q["D"], count=1)
+    bad.a["topic"] = bad.a["topic"].replace("</p>", " 지문 (3)에서 확인된다.</p>", 1)
+    bad.a["title"] = bad.a["title"].replace(
+        "</p>", " 이 문항은 밑줄 넷이 틀리도록 구성한 문제이다.</p>", 1)
+
+    rows, _ = V.check_passage(bad)
+    got = {r["type"]: " ".join(r["bad"]) for r in rows if r["bad"]}
+    assert "마침표 뒤에 낱말" in got.get("vocab_3", ""), got
+    assert "소문자로 시작" in got.get("vocab", ""), got
+    assert "구두점" in got.get("D", ""), got
+    assert "문장 번호로 지칭" in got.get("topic", ""), got
+    assert "출제 과정 메모" in got.get("title", ""), got
+
+    # 기계 검사 사유는 검수 승격의 방아쇠가 된다(값싼 모델의 흠을 상위 모델이 고친다)
+    from exam import shape, tiering
+    assert tiering.needs_escalation([shape.ESCALATE + "해설에 내부 용어"])
+    assert not tiering.needs_escalation(["해설에 '-습니다'체와 '-다'체가 섞여 있습니다."])
+    assert not tiering.needs_escalation(["선지가 3개뿐입니다 — 지문이 짧아"])
+    print("✓ 산출물 검산기(문항 안·문항끼리)·기계 검사 승격 연결 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2461,6 +2500,7 @@ if __name__ == "__main__":
     test_grammar_count_fixed_four()
     test_demo_matches_real_rules()
     test_output_defect_regressions()
+    test_output_checker()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

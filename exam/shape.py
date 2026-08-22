@@ -379,19 +379,28 @@ def internal_terms_in(obj) -> list[str]:
     return sorted(found)
 
 
+# 이 접두어가 붙은 사유는 '다시 만들면 고쳐지는 것'이라, 검수 승격의 방아쇠가 된다
+# (tiering._ESCALATE_PREFIX). 접두어가 없는 사유는 검토 메모로만 남는다.
+ESCALATE = "자동검사: "
+
+
 def check_explanation(text: str) -> list[str]:
-    """해설 한 덩어리를 검사한다(내부 용어·출제 메모·문장 번호 지칭·문체 혼재)."""
+    """해설 한 덩어리를 검사한다(내부 용어·출제 메모·문장 번호 지칭·문체 혼재).
+
+    앞의 셋은 해설을 못 쓰게 만들고 다시 쓰면 고쳐지므로 승격 대상으로 표시한다.
+    문체 혼재는 읽는 데 지장이 없어 메모로만 남긴다(값싼 모델을 계속 쓰기 위해).
+    """
     bad: list[str] = []
     low = (text or "").lower()
     hit = [t for t in INTERNAL_TERMS if t.lower() in low]
     if hit:
-        bad.append("해설에 내부 용어가 그대로 있습니다: " + ", ".join(hit))
+        bad.append(ESCALATE + "해설에 내부 용어가 그대로 있습니다: " + ", ".join(hit))
     notes = [n for n in _AUTHOR_NOTES if n in (text or "")]
     if notes:
-        bad.append("해설에 출제 과정 메모가 있습니다: " + ", ".join(notes))
+        bad.append(ESCALATE + "해설에 출제 과정 메모가 있습니다: " + ", ".join(notes))
     if _SENT_REF.search(text or ""):
-        bad.append("해설이 '(3)에서'처럼 문장 번호로 지칭합니다 — 학생용 지문에는 "
-                   "번호가 없어 대조할 수 없습니다.")
+        bad.append(ESCALATE + "해설이 '(3)에서'처럼 문장 번호로 지칭합니다 — 학생용 "
+                   "지문에는 번호가 없어 대조할 수 없습니다.")
     if re.search(r"(습니다|입니다)\.", text or "") and re.search(r"(이다|한다|된다|아니다)\.", text or ""):
         bad.append("해설에 '-습니다'체와 '-다'체가 섞여 있습니다.")
     return bad
@@ -455,7 +464,7 @@ def check_clean_sentence(text: str, kind: str = "문장") -> list[str]:
         return [f"{kind}이 문장부호로 끝나지 않습니다 — 지시문 조각이 섞였는지 "
                 f"확인하세요: '{s[-40:]}'"]
     # 문장 안의 마침표 뒤에 곧바로 낱말이 붙은 자리(공백 없는 '…listeners.output')
-    if re.search(r"[a-z][.!?][A-Za-z]", s):
+    if re.search(r"[a-z]{3}[.!?]+[A-Za-z]", s):     # 약어(U.S.·e.g.)는 거르고
         return [f"{kind} 안에 붙어 버린 낱말이 있습니다(마침표 뒤 공백 없음): "
                 f"'{s[:80]}'"]
     return []
