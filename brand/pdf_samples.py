@@ -190,7 +190,7 @@ CROPS = [
     ("pilsaengbo-summary3.png", "h-psbc-restate3.png", (0.03, 0.300, 0.97, 0.600)),
     ("hapbon-summary.png", "h-psbc-restate4.png", (0.055, 0.352, 0.960, 0.660)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
-    ("workbook-integrated-pronoun.png", "h-wbi-pron.png", (0.02, 0.020, 0.98, 0.500)),
+    ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.288, 0.97, 0.408)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
     ("workbook-integrated.png", "h-wbi.png", (0.02, 0.020, 0.98, 0.560)),
     ("workbook.png", "h-wb.png", (0.02, 0.015, 0.98, 0.450)),

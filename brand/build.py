@@ -429,6 +429,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 2.0:.0f}px;
                  color:{t['fg']};line-height:1.65;word-break:keep-all;opacity:.9">
               {it.lineup_line or it.one_line or it.edge}</div>
+            {f'<div class="sans" style="margin-top:{u * .9:.0f}px;font-size:{u * 1.6:.0f}px;color:{t["accent"]};line-height:1.6;word-break:keep-all">{it.lineup_note}</div>' if it.lineup_note else ''}
             <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>"""
 
         if it.thumbs:
