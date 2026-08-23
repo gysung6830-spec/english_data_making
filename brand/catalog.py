@@ -342,8 +342,8 @@ MATERIALS: list[Item] = [
     Item(
         key="variation",
         no="07",
-        name="모출가",
-        en="모든 출제 가능성을 담은 변형문제",
+        name="16종 변형문제",
+        en="Variations",
         one_line="모든 출제 가능성을 담았습니다. 여기서 틀려야 학교에서 맞습니다.",
         edge="오답이 티 나지 않습니다. 지문을 읽어야 답이 골라집니다.",
         lead=(

@@ -257,7 +257,7 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 | 필생보 독학용 | 6 | `psb-solve.png` · `-answer` · `-predict` · `-paraphrase` · `-signal` · `-pace` |
 | 통합 워크북 | 2 | `workbook-integrated.png` · `-en` |
 | 서술형 대비 교재 | 1 | `workbook.png` |
-| 모출가(변형문제) | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
+| 16종 변형문제 | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
 | 동형모의고사 | 5 | `mock.png` · `-paper` · `-teacher` · `-answer` · `-quick` |
 
 **표지와 목차는 넣지 않습니다.** 사는 사람이 궁금한 건 겉이 아니라 안입니다.

@@ -1,4 +1,4 @@
-# 모출가
+# 16종 변형문제
 
 ![](detail-07-variation.png)
 <!-- 이미지: brand/assets/detail-07-variation.png -->
