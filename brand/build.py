@@ -426,7 +426,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             </div>
             <div class="sans" style="margin-top:{u * 1.0:.0f}px;font-size:{u * 2.0:.0f}px;
                  color:{t['fg']};line-height:1.65;word-break:keep-all;opacity:.9">
-              {it.one_line}</div>
+              {it.one_line or it.edge}</div>
             <div style="margin-top:{u * 1.2:.0f}px">{pts}</div>"""
 
         if it.thumbs:
@@ -694,6 +694,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         sample_el += "".join(figure(n, note) for n, note in item.extra[:n_fig - 1])
 
     # 짧고 센 한 줄은 크게, 설명형 긴 한 줄은 작게. 같은 크기로 두면 센 문장이 죽는다.
+    one_el = ""
     punchy = len(item.one_line) <= 30
     one_px = u * (3.4 if punchy else 2.3)
     one_cls = "ko" if punchy else "sans"
@@ -701,6 +702,11 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
 
     # 반 페이지 — 차별점 바로 아래. 무엇을 파는지 지면으로 한 번 보여 주고
     # 특징을 하나씩 뜯는 순서가 읽힌다.
+    if item.one_line:
+        one_el = (f'<div class="{one_cls}" style="margin-top:{u * 1.6:.0f}px;'
+                  f'font-size:{one_px:.0f}px;color:{t["fg"]};line-height:1.5;'
+                  f'word-break:keep-all;opacity:{one_op}">{item.one_line}</div>')
+
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     tables_el += "".join(grid_table(title, rows, t, u, width - u * 13)
                          for title, rows in item.grids)
@@ -745,9 +751,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
             <div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t['muted']};
                  letter-spacing:.10em">{item.en}</div>
           </div>
-          <div class="{one_cls}" style="margin-top:{u * 1.6:.0f}px;
-               font-size:{one_px:.0f}px;color:{t['fg']};line-height:1.5;
-               word-break:keep-all;opacity:{one_op}">{item.one_line}</div>
+          {one_el}
           {edge_el}
           {sample_el}
           {tables_el}
