@@ -35,6 +35,7 @@ class Item:
     #   '세 가지 중에 고르세요'라고 써 놓고 한 가지만 보여 주는 꼴이 된다
     extra: list[tuple[str, str]] = field(default_factory=list)  # (예시 파일명, 설명) 추가 장
     max_points: int = 0          # 특징 줄 수. 0이면 build.MAX_POINTS
+    points_title: str = ""       # 특징 묶음 위에 다는 제목. 비면 제목 없이 바로
     lineup_points: int = 0       # 라인업 줄에 보일 특징 수. 0이면 두 줄
     # ↑ 셋 이상이면 소제목만 짧게 늘어놓는다. 설명까지 다 넣으면 목록이 늘어진다
     figures: int = 0             # 상세페이지에 넣을 사진 수. 0이면 build.MAX_FIGURES
@@ -261,6 +262,7 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="workbook-integrated",
+        points_title="다른 워크북과 무엇이 다른가 — 다섯 가지",
         max_points=5,
         lineup_points=5,
         no="05",

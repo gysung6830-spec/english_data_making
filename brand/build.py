@@ -646,6 +646,16 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           <div style="flex:1 1 auto">{text}</div>
         </div>"""
 
+    # 특징 묶음 제목. '이게 다른 자료와 뭐가 다른데'를 묻고 있는 사람에게
+    # 아래 줄들이 그 답이라고 먼저 알려 준다.
+    pts_title = ""
+    if item.points_title:
+        pts_title = f"""<div style="margin-top:{u * 4.2:.0f}px;
+          padding-bottom:{u * 1.0:.0f}px;border-bottom:2px solid {t['accent']}">
+          <div class="ko" style="font-size:{u * 2.6:.0f}px;color:{t['fg']};
+               word-break:keep-all">{item.points_title}</div>
+        </div>"""
+
     n_pts = item.max_points or MAX_POINTS
     has_crops = any(len(pt) > 2 and pt[2] for pt in item.points)
     if has_crops:
@@ -741,6 +751,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           {edge_el}
           {sample_el}
           {tables_el}
+          {pts_title}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
           {spec_el}
           {who_el}
