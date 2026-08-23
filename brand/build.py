@@ -546,6 +546,27 @@ LINEUP_PARTS = ["lineup-1-read.png", "lineup-2-pilsaengbo.png",
                 "lineup-3-write.png"]
 
 
+def grid_table(title: str, rows, t: dict[str, str], u: float, width: float) -> str:
+    """항목이 많은 표를 두 칸으로 접는다.
+
+    열여섯 줄을 세로로 세우면 그 표만 한 화면을 먹는다. 왼쪽에 유형, 오른쪽에
+    대응 번호를 붙여 짧은 줄 열여섯 개로 만들면 훑어보기가 된다.
+    """
+    cells = "".join(f"""<div style="display:flex;justify-content:space-between;
+      align-items:baseline;gap:{u * 1.2:.0f}px;padding:{u * 1.15:.0f}px 0;
+      border-top:1px solid {t['line']};break-inside:avoid">
+      <div class="sans" style="font-size:{u * 1.75:.0f}px;color:{t['fg']};
+           line-height:1.4;word-break:keep-all">{k}</div>
+      <div class="sans" style="flex:0 0 auto;font-size:{u * 1.5:.0f}px;
+           color:{t['accent']};white-space:nowrap">{v}</div>
+    </div>""" for k, v in rows)
+    return f"""<div style="margin-top:{u * 3.4:.0f}px">
+      <div class="ko" style="font-size:{u * 2.2:.0f}px;color:{t['fg']};
+           margin-bottom:{u * .6:.0f}px;word-break:keep-all">{title}</div>
+      <div style="column-count:2;column-gap:{u * 3.4:.0f}px">{cells}</div>
+    </div>"""
+
+
 def spec_table(title: str, rows, t: dict[str, str], u: float,
                label_w: float = 13) -> str:
     """제목 + (왼쪽 칸 / 오른쪽 설명) 표. 회차 구성·난이도 기준처럼
@@ -660,6 +681,8 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
     # 반 페이지 — 차별점 바로 아래. 무엇을 파는지 지면으로 한 번 보여 주고
     # 특징을 하나씩 뜯는 순서가 읽힌다.
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
+    tables_el += "".join(grid_table(title, rows, t, u, width - u * 13)
+                         for title, rows in item.grids)
     name_px = u * (7.0 if item.signature else 5.4)
 
     # 형태·구성·배포는 이미지에 넣지 않는다. PDF·즉시 다운로드처럼 자료마다
