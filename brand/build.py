@@ -361,6 +361,15 @@ def build_favicon(size: int) -> str:
 
 
 # ── 라인업 (한 장) ────────────────────────────────────────────────────────
+def first_sentence(text: str) -> str:
+    """설명의 첫 문장만. 마침표 뒤에서만 자른다.
+
+    '~합니다 그리고' 처럼 종결어미 뒤 공백에서 자르면 문장 가운데가 잘린다.
+    """
+    parts = re.split(r"(?<=[.!?])\s+", text.strip(), maxsplit=1)
+    return parts[0]
+
+
 def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
                 points_n: int = 2) -> str:
     """자료 목록 줄. 왼쪽에 실물 썸네일, 오른쪽에 이름과 한 줄."""
@@ -399,23 +408,16 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
         # 사진 밑에 '원문만'이라 써 놓고 아래에 또 '원문만 —' 을 쓰면 같은 말이 두 번이다.
         src_pts = it.points[len(it.thumbs):] if it.thumbs else it.points
         n = it.lineup_points or points_n
-        if n > 2:
-            # 셋 이상이면 소제목만. 설명까지 붙이면 그 줄만 목록을 잡아먹는다.
-            pts = "".join(
-                f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["fg"]};'
-                f'line-height:1.6;padding-left:{u * 1.6:.0f}px;position:relative;'
-                f'word-break:keep-all;margin-top:{u * .5:.0f}px;font-weight:700">'
-                f'<span style="position:absolute;left:0;color:{t["accent"]};'
-                f'font-weight:400">·</span>{head}</div>'
-                for head, *_ in src_pts[:n])
-        else:
-            pts = "".join(
-                f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
-                f'line-height:1.68;padding-left:{u * 1.6:.0f}px;position:relative;'
-                f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
-                f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
-                f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-                for head, desc, *_ in src_pts[:n])
+        # 줄이 셋을 넘으면 설명을 첫 문장까지만 자른다. 생김새는 그대로 두어야
+        # 목록에서 그 자료만 다른 모양으로 튀지 않는다.
+        pts = "".join(
+            f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
+            f'line-height:1.68;padding-left:{u * 1.6:.0f}px;position:relative;'
+            f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
+            f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
+            f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — '
+            f'{first_sentence(desc) if n > 2 else desc}</div>'
+            for head, desc, *_ in src_pts[:n])
 
         head_el = f"""<div style="display:flex;align-items:baseline;flex-wrap:wrap;
                  gap:{u * .8:.0f}px {u * 1.1:.0f}px">
