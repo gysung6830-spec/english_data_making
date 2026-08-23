@@ -91,6 +91,7 @@ SHOTS = [
 
     Shot("workbook-integrated-pronoun.png", 6, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-order.png", 7, head=["한글 포함"], keep=0.72),
+    Shot("workbook-integrated-blank.png", 9, head=["한글 포함"], keep=1.0),
 
     # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
     Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
@@ -221,6 +222,8 @@ CROPS = [
     ("workbook-integrated.png", "c-wbi-ref.png", (0.06, 0.388, 0.95, 0.538)),
     ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.166, 0.97, 0.264)),
     ("workbook-integrated-order.png", "c-wbi-order2.png", (0.03, 0.292, 0.97, 0.410)),
+    ("workbook-integrated-blank.png", "c-wbi-blank.png", (0.03, 0.088, 0.97, 0.335)),
+    ("workbook-integrated-blank.png", "c-wbi-blank2.png", (0.03, 0.443, 0.97, 0.630)),
     ("workbook-integrated.png", "c-wbi-ko.png", (0.04, 0.236, 0.96, 0.372)),
     ("workbook-integrated-en.png", "c-wbi-en.png", (0.04, 0.236, 0.96, 0.348)),
 

@@ -398,13 +398,24 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
         # 판형을 사진 라벨로 이미 보여 주는 자료는 그 판형 설명을 건너뛴다.
         # 사진 밑에 '원문만'이라 써 놓고 아래에 또 '원문만 —' 을 쓰면 같은 말이 두 번이다.
         src_pts = it.points[len(it.thumbs):] if it.thumbs else it.points
-        pts = "".join(
-            f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
-            f'line-height:1.68;padding-left:{u * 1.6:.0f}px;position:relative;'
-            f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
-            f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
-            f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
-            for head, desc, *_ in src_pts[:points_n])
+        n = it.lineup_points or points_n
+        if n > 2:
+            # 셋 이상이면 소제목만. 설명까지 붙이면 그 줄만 목록을 잡아먹는다.
+            pts = "".join(
+                f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["fg"]};'
+                f'line-height:1.6;padding-left:{u * 1.6:.0f}px;position:relative;'
+                f'word-break:keep-all;margin-top:{u * .5:.0f}px;font-weight:700">'
+                f'<span style="position:absolute;left:0;color:{t["accent"]};'
+                f'font-weight:400">·</span>{head}</div>'
+                for head, *_ in src_pts[:n])
+        else:
+            pts = "".join(
+                f'<div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t["muted"]};'
+                f'line-height:1.68;padding-left:{u * 1.6:.0f}px;position:relative;'
+                f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
+                f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
+                f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — {desc}</div>'
+                for head, desc, *_ in src_pts[:n])
 
         head_el = f"""<div style="display:flex;align-items:baseline;flex-wrap:wrap;
                  gap:{u * .8:.0f}px {u * 1.1:.0f}px">
