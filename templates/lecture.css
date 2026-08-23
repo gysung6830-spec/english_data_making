@@ -144,6 +144,10 @@ body{
 .gram{ font-size:9pt; color:#5b6472; margin:6px 0 3px; line-height:1.6; }
 .gchip{ display:inline-block; font-size:8.2pt; font-weight:700; color:var(--indigo);
   background:var(--indigo-bg); border-radius:999px; padding:1px 9px; margin-right:3px; }
+/* 어법칩 번호 — 문장 속 형광펜 위첨자 번호와 짝 */
+.gnum{ display:inline-block; min-width:13px; height:13px; line-height:13px; text-align:center;
+  font-size:7pt; font-weight:800; color:#fff; background:#3a9a5a; border-radius:999px;
+  margin-right:3px; vertical-align:1px; }
 .gnote{ color:#6b7280; font-size:8.8pt; }
 .gram-do{ display:inline-block; margin-left:6px; font-size:8.6pt; font-weight:700;
   color:#8a6d1f; background:#fbf3df; border:1px solid #ecdfb6; border-radius:6px; padding:1px 9px; }
@@ -236,6 +240,9 @@ body{
 /* 재진술 사슬: 형광펜 표시 */
 mark{ padding:0 1px; border-radius:2px; color:inherit; }
 mark.hl0{ background:#fff2a1; } mark.hl1{ background:#cfe0ff; }
+/* 어법 형광펜(강사용): 재진술(노랑/파랑)과 구분되는 초록. 위첨자=어법칩 번호 */
+mark.hlg{ background:#d2f0d6; }
+mark.hlg .hln{ color:#2f7d4a; }
 mark .hln{ font-size:6.6pt; font-weight:800; color:#8a6d1f; vertical-align:0.5em;
   margin-right:1px; line-height:1; }
 mark.hl1 .hln{ color:#1f4e8a; }

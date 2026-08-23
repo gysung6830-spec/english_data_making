@@ -148,6 +148,10 @@ def sentence_prompt(title: str, sentences: list[LectureSentence],
         + kg_rule +
         "   tag=짧은 어법명(예: '관계사 that', '분사구문', '비교급 than절 도치', '가주어 it'), "
         "note=학생이 바로 이해할 한 줄 설명(예: '앞의 the role 을 that절이 수식').\n"
+        "   spans=그 어법이 '실제로 나타난' 문장 속 영어 구절을 english 에서 '그대로(대소문자·구두점 포함) 복사'해 "
+        "1~3개 담으세요(강사용에서 이 구절에 형광펜+칩번호가 칠해집니다). 반드시 english 의 '연속된' 부분이어야 하고, "
+        "떨어져 있는 구조(not A but B, One ~ the other, 도치의 조각 등)는 각 조각을 별도 원소로 나눠 담으세요. "
+        "그 어법의 '핵심 근거'가 되는 최소한의 구절만(문장 전체 복사 금지).\n"
         "- vocab: 그 문장에서 뽑을 핵심 어휘 2~5개를 {word, meaning}로. '중·고등 수준' 어휘만 담고 "
         "누구나 아는 아주 쉬운 기초 단어(초등 수준)는 제외하세요. 다의어·수준 높은 단어와 함께 "
         "'숙어·구동사(예: seek out, play a role in, serve to, keep up with)'도 적극 포함하세요"

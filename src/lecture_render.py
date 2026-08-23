@@ -115,6 +115,39 @@ def _highlight_passage(sentences, chains, first_expr_only: bool = False) -> Mark
     return Markup(text)
 
 
+def _highlight_grammar(english: str, grammar) -> Markup | None:
+    """문장(english)에서 각 어법칩의 spans 를 '칩 번호 형광펜'으로 표시(강사용 답).
+
+    - 칩 순서(1,2,…)와 같은 번호를 형광펜 위첨자로 달아, 아래 어법칩과 짝지어 보이게 한다
+      (흑백 인쇄에서 색이 안 나와도 번호로 어느 칩인지 알 수 있음).
+    - spans 가 하나도 매칭되지 않으면 None 을 반환(→ 템플릿은 기존 끊어읽기 줄로 폴백).
+    """
+    text = str(escape(english or ""))
+    pairs = []  # (escaped_span, chip_no)
+    for gi, g in enumerate(grammar):
+        for sp in getattr(g, "spans", []) or []:
+            e = str(escape(sp)).strip()
+            if e:
+                pairs.append((e, gi + 1))
+    tokens: dict[str, str] = {}
+    matched = False
+    # 긴 구절 먼저(짧은 구절이 긴 구절 안에서 잘리는 것 방지)
+    for i, (e, cno) in enumerate(sorted(pairs, key=lambda p: -len(p[0]))):
+        mm = re.search(re.escape(e), text, re.IGNORECASE)
+        if not mm:
+            continue
+        matched = True
+        tok = f"\x00g{i}\x00"
+        tokens[tok] = (f'<mark class="hlg"><sup class="hln">{cno}</sup>'
+                       f'{text[mm.start():mm.end()]}</mark>')
+        text = text[:mm.start()] + tok + text[mm.end():]
+    if not matched:
+        return None
+    for tok, html in tokens.items():
+        text = text.replace(tok, html)
+    return Markup(text)
+
+
 def _match_sentence_no(src: str, sentences) -> int | None:
     """핵심 문법이 나온 원문 문장(source_sentence)이 지문 몇 번째 문장인지 찾음."""
     s = (src or "").strip().rstrip(".").lower()
@@ -165,6 +198,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "id": s.id,
             "english": s.english,
             "grammar": [{"tag": g.tag, "note": g.note} for g in s.grammar],
+            # 강사용: 어법칩 spans 를 문장에서 형광펜(칩 번호)으로 표시. 없으면 None → 끊어읽기 줄 폴백
+            "english_hl": _highlight_grammar(s.english, s.grammar) if teacher else None,
             "chunks": chunks,
             "misreads": [{"statement": m.statement, "why": m.why} for m in s.misreads],
             "mistips": [_mark_tip(t) for t in getattr(s, "mistips", [])],

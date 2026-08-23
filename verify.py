@@ -108,6 +108,7 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
 
         # 2) 문장별: ①원문 ↔ ③조각 일치 / 오답 존재 / 말줄임표
         by_id = {s.id: s for s in p.analysis.sentences}
+        chips_without_spans = 0  # 어법 형광펜용 spans 가 없는 칩 수(지문 단위 집계)
         for sid in range(1, n + 1):
             s = by_id.get(sid)
             if s is None:
@@ -192,6 +193,28 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
                     warn(f"{tag} S{sid}", f"{ti}번째 오역 팁에 말줄임표: {tt[:30]!r}")
                 if len(tt) < 12:
                     warn(f"{tag} S{sid}", f"{ti}번째 오역 팁이 너무 짧음(<12자): {tt!r}")
+
+            # 어법칩 spans 검사: 강사용 형광펜용. spans 는 english 의 '연속된 부분'이어야 함
+            #   - span 이 원문에 없으면 형광펜이 안 칠해지므로 ERROR(실제 결함)
+            #   - spans 자체가 없는 칩은 '지문 단위'로 한 번만 집계(구자료 대량 WARN 방지)
+            en_low = (s.english or "").lower()
+            for gi, g in enumerate(s.grammar, 1):
+                spans = getattr(g, "spans", None) or []
+                if not spans:
+                    chips_without_spans += 1
+                    continue
+                for sp in spans:
+                    sp_t = (sp or "").strip()
+                    if not sp_t:
+                        err(f"{tag} S{sid}", f"{gi}번째 어법칩('{g.tag}')에 빈 span")
+                    elif sp_t.lower() not in en_low:
+                        err(f"{tag} S{sid}",
+                            f"{gi}번째 어법칩('{g.tag}') span 이 원문에 없음(형광펜 실패): {sp_t[:40]!r}")
+
+        # 어법 형광펜 커버리지: spans 없는 칩이 있으면 지문 단위로 한 번만 안내
+        if chips_without_spans:
+            warn(f"{tag}",
+                 f"어법칩 {chips_without_spans}개에 spans 없음 → 강사용 형광펜 미표시(재생성 시 반영)")
 
         # 2-b) ④ '오답만 읽어도 이해되도록' 설계 점검(지문 단위)
         #   - 문장 커버리지: 모든 문장이 오답을 하나씩 가져야(위 S{sid} 루프에서 ERROR) '오답만 읽어도

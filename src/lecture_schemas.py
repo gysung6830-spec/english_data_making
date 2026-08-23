@@ -126,6 +126,10 @@ class Chunk(BaseModel):
 class GrammarChip(BaseModel):
     tag: str          # 짧은 어법명(칩 라벨). 예: '관계사 that', '분사구문', '비교급 도치'
     note: str = ""    # 간단 설명 한 줄(필생보처럼)
+    # 이 어법이 '실제로 나타난' 문장 속 영어 구절(문장에서 그대로 복사한 연속 부분).
+    # 강사용에서 해당 구절에 '형광펜(칩 번호 위첨자)'으로 표시된다.
+    # 떨어져 있는 구조(예: not A but B, One ~ the other)는 여러 조각으로 나눠 담을 수 있다.
+    spans: list[str] = Field(default_factory=list)
 
 
 class Misread(BaseModel):
