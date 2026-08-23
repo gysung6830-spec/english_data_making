@@ -35,6 +35,9 @@ class Item:
     #   '세 가지 중에 고르세요'라고 써 놓고 한 가지만 보여 주는 꼴이 된다
     extra: list[tuple[str, str]] = field(default_factory=list)  # (예시 파일명, 설명) 추가 장
     max_points: int = 0          # 특징 줄 수. 0이면 build.MAX_POINTS
+    lineup_line: str = ""        # 라인업 줄에만 다르게 쓰는 부제. 비면 one_line
+    # ↑ 상세페이지는 한 줄과 강조 줄이 따로 서지만, 목록에는 한 줄만 들어간다.
+    #   목록에서 더 중요한 말이 따로 있을 때 여기에 적는다
     points_title: str = ""       # 특징 묶음 위에 다는 제목. 비면 제목 없이 바로
     lineup_points: int = 0       # 라인업 줄에 보일 특징 수. 0이면 두 줄
     # ↑ 셋 이상이면 소제목만 짧게 늘어놓는다. 설명까지 다 넣으면 목록이 늘어진다
@@ -347,6 +350,7 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="variation",
+        lineup_line="한 지문에서 나올 수 있는 모든 출제 가능성을 담았습니다.",
         no="07",
         name="16종 변형문제",
         en="Variations",
