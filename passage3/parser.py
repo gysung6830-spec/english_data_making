@@ -53,9 +53,9 @@ HEADER_RE = re.compile(
     r"(\[[^\]]*\][^:：\n]*?(\d+)\s*번)\s*[:：]\s*(.*)"
 )
 
-# 대체 헤더:  '31번 2026년 6월 … 고3 …' 처럼 줄이 'N번'으로 시작하는 형식
-#   (EXAM4YOU 워크북 등. 콜론/대괄호 없음)
-HEADER_RE2 = re.compile(r"^\s*(\d{1,3})\s*번\b(.*)$")
+# 대체 헤더:  '31번 …' / '41~42번 …' / '43~45번 …' 처럼 줄이 'N번' 또는
+#   범위 'N~M번'으로 시작하는 형식 (EXAM4YOU 워크북 등. 콜론/대괄호 없음)
+HEADER_RE2 = re.compile(r"^\s*(\d{1,3}(?:\s*[~∼\-]\s*\d{1,3})?)\s*번\b(.*)$")
 
 # 대체 헤더:  'Ch. 05 Unit 13 - 1번: 제목' / 'Ch. 05 Unit 13 - 수능 대비 ANALYSIS: 제목'
 #   (올림포스 등. Ch/Chapter/Unit/Lesson + 숫자로 시작하고 콜론이 있는 줄)
@@ -215,7 +215,9 @@ def _match_header(line: str):
         rest = m.group(2)
         # 'N번' 뒤에 실제 제목/설명이 있어야 헤더로 인정(문장 오인 방지)
         if _count_hangul(rest) >= 2 or len(rest.strip()) >= 4:
-            return f"{m.group(1)}번", _clean_title(rest)
+            # 범위(41~42) 정규화: 구분자 주변 공백 제거
+            num = re.sub(r"\s*[~∼\-]\s*", "~", m.group(1))
+            return f"{num}번", _clean_title(rest)
     m = HEADER_RE3.match(line)
     if m:
         return _clean_title(m.group(1)), _clean_title(m.group(2))
@@ -276,6 +278,13 @@ def split_passages(raw: str) -> List[Passage]:
 
         body = "\n".join(body_lines)
         sents = _parse_sentences(body)
-        passages.append(Passage(label=label, title=title, sentences=sents))
+
+        # 같은 번호 헤더가 다음 페이지에 반복되면(장문 등) 이전 지문에 이어붙임
+        if passages and label and passages[-1].label == label:
+            passages[-1].sentences.extend(sents)
+            if not passages[-1].title and title:
+                passages[-1].title = title
+        else:
+            passages.append(Passage(label=label, title=title, sentences=sents))
 
     return passages

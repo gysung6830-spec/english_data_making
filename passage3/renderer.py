@@ -23,7 +23,7 @@ except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
 
 import re as _re
 
-_NUM_IN_LABEL = _re.compile(r"(\d+)\s*번")
+_NUM_IN_LABEL = _re.compile(r"(\d+(?:\s*[~∼\-]\s*\d+)?)\s*번")
 
 
 def _short_num(label: str) -> str:
