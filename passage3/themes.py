@@ -110,22 +110,9 @@ VOCAB_RULES = """
 .vocab-item .m { color: #555558; }
 """
 
-# ── 직독직해(청크) 스타일 (모든 테마 공통) ────────────────────
+# ── 직독직해 슬래시(/) 스타일 (모든 테마 공통) ────────────────
 CHUNK_RULES = """
-.chunk-sent { margin-bottom: 15px; padding-bottom: 13px;
-  border-bottom: 1px solid #dcdee7; line-height: 1.5; }
-.chunk-sent .num { vertical-align: top; margin-right: 6px; color: #000; }
-.ck-unit { display: inline-block; vertical-align: top; margin: 0 9px 9px 0;
-  padding-right: 9px; border-right: 1px solid #cbe0d2; }
-.ck-unit:last-child { border-right: none; padding-right: 0; }
-.ck-en { display: block; font-size: 13px; line-height: 1.45; color: #000; }
-.ck-ko { display: block; font-size: 10px; line-height: 1.4; color: #2f6b45; margin-top: 2px; }
-.passage.compact  .ck-en { font-size: 12px; }
-.passage.compact  .ck-ko { font-size: 9.5px; }
-.passage.compact  .chunk-sent { margin-bottom: 11px; padding-bottom: 9px; }
-.passage.compact2 .ck-en { font-size: 11.2px; }
-.passage.compact2 .ck-ko { font-size: 9px; }
-.passage.compact2 .chunk-sent { margin-bottom: 8px; padding-bottom: 7px; }
+.en .slash { color: #2f6b45; font-weight: 700; padding: 0 1px; }
 """
 
 

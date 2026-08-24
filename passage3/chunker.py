@@ -19,13 +19,14 @@ except ImportError:
 DEFAULT_MODEL = "claude-sonnet-5"
 
 _SYSTEM = (
-    "You are an English teacher creating a 직독직해 (direct/sense-group reading) "
-    "worksheet for Korean students. Split an English sentence into sense units "
-    "and give each unit's Korean meaning, KEEPING THE ENGLISH WORD ORDER. "
-    "Chunk size is between a phrase and a clause (구와 절 중간 정도): break at "
-    "natural boundaries — before prepositional phrases, to-infinitives, "
-    "relative/that clauses, conjunctions, participial phrases. Do NOT split every "
-    "word, and do NOT keep the whole sentence as one chunk. Return ONLY JSON."
+    "You are an English teacher marking 직독직해 (sense-group) slashes for Korean "
+    "students. Split an English sentence into sense units by returning the exact "
+    "substrings in order — concatenating them (with single spaces) must reproduce "
+    "the original sentence verbatim (same words, punctuation, capitalization). "
+    "Chunk size is between a phrase and a clause (구와 절 중간 정도): break before "
+    "prepositional phrases, to-infinitives, relative/that clauses, conjunctions, "
+    "participial phrases. Do NOT split every word, and do NOT return one chunk for "
+    "the whole sentence. Return ONLY JSON."
 )
 
 
@@ -48,12 +49,12 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 continue  # 이미 있음 / 영어 없음
             user_msg = (
                 "Split this sentence into 직독직해 sense units (phrase~clause "
-                'sized), in order. Return ONLY JSON: '
-                '{"chunks":[{"en":"...","ko":"우리말 뜻"}]}\n\n' + s.en.strip()
+                'sized), in order. Return ONLY JSON: {"chunks":["unit1","unit2",'
+                '...]}\n\n' + s.en.strip()
             )
             try:
                 resp = client.messages.create(
-                    model=model, max_tokens=1200, system=_SYSTEM,
+                    model=model, max_tokens=800, system=_SYSTEM,
                     messages=[{"role": "user", "content": user_msg}],
                 )
                 text = "".join(b.text for b in resp.content
@@ -62,11 +63,11 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 items = data.get("chunks") if isinstance(data, dict) else data
                 if isinstance(items, list):
                     for it in items:
-                        if isinstance(it, dict) and (it.get("en") or "").strip():
-                            s.chunks.append(Chunk(
-                                en=str(it.get("en", "")).strip(),
-                                ko=str(it.get("ko", "")).strip(),
-                            ))
+                        # 문자열(신규) 또는 {"en":...}(구형) 모두 지원
+                        en = it if isinstance(it, str) else (it.get("en") if isinstance(it, dict) else "")
+                        en = (en or "").strip()
+                        if en:
+                            s.chunks.append(Chunk(en=en, ko=""))
             except Exception:
                 continue  # 한 문장 실패해도 나머지 진행
     return passages
