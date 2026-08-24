@@ -21,7 +21,8 @@ WS_JSON_VERSION = 1
 
 
 def save_worksheets_json(worksheets: list[Worksheet], path: Path, *, title: str = "",
-                         start_no: int = 1, passage_start_no: int = 1) -> Path:
+                         start_no: int = 1, passage_start_no: int = 1,
+                         passage_labels=None) -> Path:
     """서술형 교재 데이터(Worksheet 목록)를 JSON 으로 저장한다."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -31,6 +32,7 @@ def save_worksheets_json(worksheets: list[Worksheet], path: Path, *, title: str 
         "title": title,
         "start_no": start_no,
         "passage_start_no": passage_start_no,
+        "passage_labels": list(passage_labels or []),
         "worksheets": [w.model_dump(mode="json") for w in worksheets],
     }
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -66,6 +68,7 @@ def load_worksheets_json(path: Path) -> tuple[list[Worksheet], dict]:
         "title": data.get("title", ""),
         "start_no": int(data.get("start_no", 1) or 1),
         "passage_start_no": int(data.get("passage_start_no", 1) or 1),
+        "passage_labels": list(data.get("passage_labels") or []),
     }
     return worksheets, meta
 
@@ -166,6 +169,7 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
                    which=None, brand: str | None = None,
                    worksheets: list[Worksheet] | None = None,
                    ws_start_no: int = 1, ws_passage_start_no: int = 1,
+                   ws_passage_labels=None,
                    save_ws_json: bool = True) -> list[dict]:
     """선택된 종류(분석지/어휘 리스트/시험지/서술형 교재)의 PDF 를 생성.
 
@@ -207,13 +211,15 @@ def render_outputs(cfg: Config, reports: list[Report], stem: str,
         p = cfg.output_dir / f"{stem}_서술형대비.pdf"
         render.render_worksheet_pdf(worksheets, p, title=stem, footer_note=fn,
                                     brand=brand, start_no=ws_start_no,
-                                    passage_start_no=ws_passage_start_no)
+                                    passage_start_no=ws_passage_start_no,
+                                    passage_labels=ws_passage_labels)
         recs.append({"kind": "worksheet", "label": "🖊️ 서술형 교재", "path": p})
         # 분석 데이터 JSON 도 함께 저장 → 나중에 API 없이 제목만 바꿔 재렌더 가능.
         if save_ws_json:
             jp = cfg.output_dir / f"{stem}_서술형대비.json"
             save_worksheets_json(worksheets, jp, title=stem,
-                                 start_no=ws_start_no, passage_start_no=ws_passage_start_no)
+                                 start_no=ws_start_no, passage_start_no=ws_passage_start_no,
+                                 passage_labels=ws_passage_labels)
             recs.append({"kind": "worksheet_json", "label": "💾 재편집용 데이터(JSON)", "path": jp})
 
     return recs

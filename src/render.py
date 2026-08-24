@@ -462,6 +462,34 @@ def _hint(answer: str) -> str:
     return a[0] if a else ""
 
 
+_UNIT_RE = re.compile(r"(?:unit|유닛)\s*0*(\d+)", re.I)
+_GANG_RE = re.compile(r"(\d+)\s*강")
+_CH_RE = re.compile(r"ch(?:apter)?\.?\s*0*(\d+)", re.I)
+_NUM_MUN_RE = re.compile(r"(\d+)\s*번")
+
+
+def _auto_passage_label(source: str = "", title: str = "") -> str | None:
+    """지문 출처 헤더에서 '지문 식별자'를 자동으로 뽑는다(ORTICA 방식).
+
+    예) '... Unit 14 - 1번' → '14-1' / '... Unit 13 - ANALYSIS' → '13-A'
+        '논술형 Practice' → '논술형' / '서술형 Practice' → '서술형'
+    유닛 번호는 'Unit N' > 'N강' > 'Ch N' 순으로 찾는다. 못 찾으면 None(→숫자로 대체).
+    """
+    text = f"{source or ''} {title or ''}"
+    if "논술형" in text:
+        return "논술형"
+    if "서술형" in text:
+        return "서술형"
+    m = _UNIT_RE.search(text) or _GANG_RE.search(text) or _CH_RE.search(text)
+    unit = m.group(1) if m else None
+    if re.search(r"analysis|어낼리시스", text, re.I):
+        return f"{unit}-A" if unit else "Analysis"
+    mn = _NUM_MUN_RE.search(text)
+    if mn:
+        return f"{unit}-{mn.group(1)}" if unit else f"{mn.group(1)}번"
+    return None
+
+
 def _shuffle_words(words, seed_key: str = "") -> list:
     """보기 단어를 '정답 어순이 드러나지 않게' 랜덤으로 섞는다.
 
@@ -483,21 +511,38 @@ def _shuffle_words(words, seed_key: str = "") -> list:
 
 
 def _ws_context(worksheets, start_no: int = 1, title: str = "",
-                passage_start_no: int = 1) -> list[dict]:
+                passage_start_no: int = 1, passage_labels=None) -> list[dict]:
     """Worksheet 목록 -> 템플릿용 컨텍스트(일련번호·힌트·빈칸 치환 완료).
 
     일련번호(qno)는 '표시 유형 순서(type-major)'로 매긴다:
       복수 지문이면 각 유형 안에서 지문1→지문2… 순으로 이어진다.
     start_no: 첫 문항 번호(사용자 지정 시작번호). 이후 자동 증가.
-    title: 파일명(교재 제목). 지문 배지를 '파일명-지문번호'로 표시하는 데 쓴다.
-    passage_start_no: 첫 지문 번호(사용자 지정). 지문이 여러 개면 여기서부터 1씩 증가.
+    title: 파일명(교재 제목). 지문 배지를 '파일명-지문식별자'로 표시하는 데 쓴다.
+    passage_start_no: 첫 지문 번호(숫자 지정). 지문이 여러 개면 여기서부터 1씩 증가.
+    passage_labels: 지문별 '직접 지정한 식별자' 목록(예: ['10-A','10-1','논술형','서술형']).
+      주어지면 순서대로 배지에 그대로 쓰고, 목록이 부족한 지문은 숫자로 이어 매긴다.
     """
     reps = _as_list(worksheets)
 
     base = (title or "").strip()
+    labels = [str(x).strip() for x in (passage_labels or [])]
+    # passage_labels 가 '빈 리스트'로 명시되면 '자동(출처에서 유도)' 모드.
+    auto_mode = (passage_labels is not None) and (len(labels) == 0)
     passages: list[dict] = []
-    for i, ws in enumerate(reps, int(passage_start_no)):
-        src = f"{base}-{i}" if base else f"지문 {i}"
+    for idx0, ws in enumerate(reps):                 # idx0: 0부터
+        # 지문 식별자 우선순위: 직접 라벨 > (자동 모드면)출처 유도 > 숫자(+1)
+        if idx0 < len(labels) and labels[idx0]:
+            ident = labels[idx0]
+        elif auto_mode:
+            ident = _auto_passage_label(getattr(ws, "source", ""), getattr(ws, "title", "")) \
+                or str(int(passage_start_no) + idx0)
+        else:
+            ident = str(int(passage_start_no) + idx0)
+        i = idx0 + 1                                  # 1-based 순번(내부용)
+        if base:
+            src = f"{base}-{ident}"
+        else:
+            src = f"지문 {ident}" if str(ident).isdigit() else str(ident)
 
         # 요약문 완성 ((A)(B) 빈칸)
         sum_items = []
@@ -618,7 +663,8 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
 def render_worksheet_pdf(worksheets, out_path: str | Path,
                          title: str = "내신 서술형 대비 교재",
                          footer_note: str = "", brand: str = "은아 T",
-                         start_no: int = 1, passage_start_no: int = 1) -> Path:
+                         start_no: int = 1, passage_start_no: int = 1,
+                         passage_labels=None) -> Path:
     """여러 지문의 Worksheet 를 한 PDF 로 만든다.
 
     구성(한 PDF): ① 학생용 → ② 교사용(정답 표시) → ③ 빠른 정답 → ④ 정답 및 해설.
@@ -631,7 +677,8 @@ def render_worksheet_pdf(worksheets, out_path: str | Path,
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     passages = _ws_context(worksheets, start_no=start_no, title=title,
-                           passage_start_no=passage_start_no)
+                           passage_start_no=passage_start_no,
+                           passage_labels=passage_labels)
     # 유형별로 내용이 하나라도 있는지(부분 성공 시 빈 유형 블록은 건너뜀)
     has = {
         "cloze": any(p["cloze"] for p in passages),

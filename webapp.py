@@ -129,9 +129,14 @@ INDEX_HTML = """
       <input type=number name=start_no min=1 step=1 value=1 style="width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
       <div class=hint>예: <b>5</b> 를 넣으면 첫 문항이 5번, 그다음 6·7…로 매겨집니다. (여러 지문이면 유형별로 이어서 증가)</div>
 
-      <label>⑤ 지문 번호 <span class=hint>(배지 '파일명-지문번호'에 표시 · 여러 지문이면 1씩 증가)</span></label>
-      <input type=number name=passage_start_no min=1 step=1 value=1 style="width:120px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
-      <div class=hint>예: 파일명 <b>올림포스 7강</b>, 지문 번호 <b>3</b> → 배지가 <b>올림포스 7강-3</b> 으로 표시됩니다.</div>
+      <label>⑤ 지문 번호 / 식별자 <span class=hint>(배지 '파일명-식별자'에 표시 · <b>비우면 출처에서 자동</b>)</span></label>
+      <input type=text name=passage_start_no value="" placeholder="비우면 자동 (또는  3  ·  10-A, 10-1, 논술형, 서술형)"
+             style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;">
+      <div class=hint>
+        · <b>비움(권장)</b> → 지문 출처를 읽어 <b>자동</b>으로: <b>14-1</b>(1번), <b>13-A</b>(ANALYSIS), <b>논술형</b>, <b>서술형</b>. (못 읽으면 1,2,3…)<br>
+        · <b>숫자</b>(예: <b>3</b>) → 지문마다 <b>+1</b> 증가 → 올림포스 7강-3, -4, -5…<br>
+        · <b>쉼표로 라벨 직접 입력</b> → 그 순서대로: <b>10-A, 10-1, 논술형</b> → 올림포스 7강-10-A, -10-1, -논술형
+      </div>
 
       <div class=hint style="margin-top:14px">📄 결과물: <b>내신 서술형 대비 교재</b> (7개 유형 · 학생용 / 교사용 / 빠른 정답 / 정답 및 해설)</div>
 
@@ -283,11 +288,9 @@ def analyze_route():
         start_no = max(1, int(request.form.get("start_no") or 1))
     except (TypeError, ValueError):
         start_no = 1
-    # 지문 시작 번호(사용자 지정) — 배지 '파일명-지문번호'에 반영. 기본 1.
-    try:
-        passage_start_no = max(1, int(request.form.get("passage_start_no") or 1))
-    except (TypeError, ValueError):
-        passage_start_no = 1
+    # 지문 번호/식별자(⑤): 숫자면 +1 자동증가, 라벨(쉼표구분)이면 그대로, 비우면 자동(출처에서 유도).
+    passage_start_no, passage_labels = _parse_passage_ident(
+        request.form.get("passage_start_no"))
 
     if not files:
         return render_template_string(INDEX_HTML, has_key=cfg.has_api_key)
@@ -345,7 +348,8 @@ def analyze_route():
                 stem = _safe_name(Path(f.filename).stem)
             recs = pipeline.render_outputs(cfg, reports, stem, which=which, brand=brand,
                                            worksheets=worksheets, ws_start_no=start_no,
-                                           ws_passage_start_no=passage_start_no)
+                                           ws_passage_start_no=passage_start_no,
+                                           ws_passage_labels=passage_labels)
             fitems = [{"label": r["label"], "out": r["path"].name,
                        "pdf": r["path"].suffix.lower() == ".pdf"} for r in recs]
             n_passages = max(len(reports), len(worksheets))
@@ -367,6 +371,22 @@ def analyze_route():
 
 def _safe_name(stem: str) -> str:
     return re.sub(r"[^0-9A-Za-z가-힣_\- ]", "_", stem).strip() or "passage"
+
+
+def _parse_passage_ident(raw):
+    """⑤ 지문 번호/식별자 입력을 (시작번호, 라벨목록)으로 해석한다.
+
+    - 순수 숫자('3')      → (3, None)  : 지문마다 +1 자동 증가(기존 방식)
+    - 쉼표 구분 라벨       → (1, [...]) : 그 순서대로 배지에 표시(예: '10-A, 10-1, 논술형')
+    - 비움('')            → (1, [])    : 라벨 없음 → 렌더 단계에서 출처로부터 자동 유도
+    """
+    s = (raw or "").strip()
+    if not s:
+        return 1, []                       # 자동(출처 기반) 모드
+    if s.isdigit():
+        return max(1, int(s)), None        # 숫자 → +1 자동 증가
+    labels = [x.strip() for x in re.split(r"[,\n]", s) if x.strip()]
+    return 1, (labels or None)
 
 
 _WS_TYPE_LABELS = [("summary", "요약문"), ("paraphrase", "문장변형"),
