@@ -11,9 +11,9 @@ from pathlib import Path
 from typing import List
 
 try:
-    from .parser import Passage, Sentence, Vocab
+    from .parser import Chunk, Passage, Sentence, Vocab
 except ImportError:
-    from parser import Passage, Sentence, Vocab
+    from parser import Chunk, Passage, Sentence, Vocab
 
 ORTICA_FORMAT = "ORTICA-3form"
 ORTICA_VERSION = 1
@@ -30,7 +30,12 @@ def passages_to_dict(passages: List[Passage], docname: str = "") -> dict:
                 "label": p.label,
                 "title": p.title,
                 "sentences": [
-                    {"num": s.num, "en": s.en, "ko": s.ko} for s in p.sentences
+                    {
+                        "num": s.num, "en": s.en, "ko": s.ko,
+                        **({"chunks": [{"en": c.en, "ko": c.ko}
+                                       for c in s.chunks]} if s.chunks else {}),
+                    }
+                    for s in p.sentences
                 ],
                 "vocab": [
                     {"word": v.word, "meaning": v.meaning} for v in p.vocab
@@ -49,12 +54,20 @@ def passages_to_json(passages: List[Passage], docname: str = "") -> str:
 def passages_from_dict(data: dict) -> List[Passage]:
     out: List[Passage] = []
     for pd in (data.get("passages") or []):
-        sents = [
-            Sentence(num=int(s.get("num", 0) or 0),
-                     en=(s.get("en") or "").strip(),
-                     ko=(s.get("ko") or "").strip())
-            for s in (pd.get("sentences") or [])
-        ]
+        sents = []
+        for s in (pd.get("sentences") or []):
+            chunks = [
+                Chunk(en=(c.get("en") or "").strip(),
+                      ko=(c.get("ko") or "").strip())
+                for c in (s.get("chunks") or [])
+                if (c.get("en") or "").strip()
+            ]
+            sents.append(Sentence(
+                num=int(s.get("num", 0) or 0),
+                en=(s.get("en") or "").strip(),
+                ko=(s.get("ko") or "").strip(),
+                chunks=chunks,
+            ))
         voc = [
             Vocab(word=(v.get("word") or "").strip(),
                   meaning=(v.get("meaning") or "").strip())

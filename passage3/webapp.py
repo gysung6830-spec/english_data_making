@@ -16,16 +16,20 @@ from flask import (Flask, flash, redirect, render_template_string, request,
                    send_file, url_for)
 
 try:
+    from .chunker import chunk_sentences
     from .main import (FORMATS, extract_passages, html_to_pdf,
                        renumber_passages, safe_filename)
-    from .renderer import render_format_a, render_format_b, render_format_c
+    from .renderer import (render_format_a, render_format_b, render_format_c,
+                           render_format_d)
     from .serialize import passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # python webapp.py 로 직접 실행할 때
+    from chunker import chunk_sentences
     from main import (FORMATS, extract_passages, html_to_pdf,
                       renumber_passages, safe_filename)
-    from renderer import render_format_a, render_format_b, render_format_c
+    from renderer import (render_format_a, render_format_b, render_format_c,
+                          render_format_d)
     from serialize import passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
@@ -42,6 +46,7 @@ FORMAT_ORDER = [
     ("a", "한줄해석", "영어 문장 + 바로 아래 회색박스 한글해석"),
     ("c", "한줄영어", "영어 문장만 (해석 없음)"),
     ("b", "좌지문우해석", "좌 영어 / 우 한글 2단 표"),
+    ("d", "직독직해", "구~절 단위로 끊어 각 청크 아래 우리말 뜻 (AI, 키 필요)"),
 ]
 
 PAGE = """
@@ -172,7 +177,7 @@ PAGE = """
   </form>
 
 <script>
-  const SUFFIX = { a: "한줄해석", c: "한줄영어", b: "좌지문우해석" };
+  const SUFFIX = { a: "한줄해석", c: "한줄영어", b: "좌지문우해석", d: "직독직해" };
   function updatePreview() {
     const name = (document.getElementById('docname').value || '지문').trim() || '지문';
     const checked = Array.from(document.querySelectorAll('input[name=fmt]:checked')).map(x=>x.value);
@@ -279,7 +284,7 @@ def generate():
         is_json_input = Path(file.filename).suffix.lower() == ".json"
         if not is_json_input:
             # 한줄영어(c)만 선택하면 번역 불필요
-            if any(f in formats for f in ("a", "b")):
+            if any(f in formats for f in ("a", "b", "d")):
                 try:
                     passages = translate_missing(passages, api_key=api_key)
                 except Exception:
@@ -289,11 +294,18 @@ def generate():
                 passages = extract_vocab(passages, api_key=api_key)
             except Exception:
                 traceback.print_exc()  # 어휘 추출 실패도 치명적이지 않음
+            # 직독직해 청크(키 있으면)
+            if "d" in formats:
+                try:
+                    passages = chunk_sentences(passages, api_key=api_key)
+                except Exception:
+                    traceback.print_exc()
 
         renderers = {
             "a": render_format_a,
             "c": render_format_c,
             "b": render_format_b,
+            "d": render_format_d,
         }
 
         disp_name = (docname or Path(file.filename).stem).strip()  # 뱃지 표시용

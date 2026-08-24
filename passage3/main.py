@@ -16,18 +16,22 @@ from typing import List
 try:
     from .hwp import HWP_EXTS, extract_hwp_text
     from .ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
+    from .chunker import chunk_sentences
     from .parser import Passage, split_passages
     from .pdfparse import pdf_to_passages
-    from .renderer import render_format_a, render_format_b, render_format_c
+    from .renderer import (render_format_a, render_format_b, render_format_c,
+                          render_format_d)
     from .serialize import load_passages_json, passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
+    from chunker import chunk_sentences
     from hwp import HWP_EXTS, extract_hwp_text
     from ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from parser import Passage, split_passages
     from pdfparse import pdf_to_passages
-    from renderer import render_format_a, render_format_b, render_format_c
+    from renderer import (render_format_a, render_format_b, render_format_c,
+                         render_format_d)
     from serialize import load_passages_json, passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
@@ -53,6 +57,7 @@ FORMATS = {
     "a": (render_format_a, "한줄해석"),
     "c": (render_format_c, "한줄영어"),
     "b": (render_format_b, "좌지문우해석"),
+    "d": (render_format_d, "직독직해"),
 }
 
 _FNAME_BAD = re.compile(r'[\\/:*?"<>|]')
@@ -323,7 +328,7 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     if is_json_input:
         print("[3/4] JSON 재입력 → 재분석 생략(API 비용 없음)")
     else:
-        needs_ko = any(f in formats for f in ("a", "b"))
+        needs_ko = any(f in formats for f in ("a", "b", "d"))
         if do_translate and needs_ko:
             print("[3/4] 해석 없는 문장 번역(키 있으면)")
             passages = translate_missing(passages, api_key=api_key)
@@ -331,6 +336,9 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
             print("[3/4] 번역 생략")
         print("      어휘 리스트 추출(키 있으면)")
         passages = extract_vocab(passages, api_key=api_key)
+        if "d" in formats:
+            print("      직독직해 청크 생성(키 있으면)")
+            passages = chunk_sentences(passages, api_key=api_key)
 
     disp_name = (docname or input_path.stem).strip()   # 뱃지 표시용(원본 이름)
     doc = safe_filename(docname or input_path.stem)      # 파일 저장용(치환)
@@ -368,7 +376,7 @@ def _build_argparser() -> argparse.ArgumentParser:
     ap.add_argument("input", help="입력 파일 (PDF·이미지·txt)")
     ap.add_argument("--out", default="./output", help="출력 폴더 (기본 ./output)")
     ap.add_argument("--formats", default="abc",
-                    help="a=한줄해석 c=한줄영어 b=좌지문우해석 (기본 abc)")
+                    help="a=한줄해석 c=한줄영어 b=좌지문우해석 d=직독직해 (기본 abc)")
     ap.add_argument("--theme", default="modern",
                     choices=["modern", "textbook", "middle"], help="디자인 테마")
     ap.add_argument("--header", default="", help="상단 머리글(학원명·자료명 등)")

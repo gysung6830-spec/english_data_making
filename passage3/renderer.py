@@ -168,3 +168,45 @@ def render_format_b(passages: List[Passage], header_text: str = "", theme: str =
         chunk.append("</div>")
         blocks.append("\n".join(chunk))
     return _doc("\n".join(blocks), css, header_text)
+
+
+def render_format_d(passages: List[Passage], header_text: str = "", theme: str = "", doc_name: str = "") -> str:
+    """직독직해: 문장을 의미 단위(청크)로 끊고 각 청크 아래에 우리말 뜻.
+
+    청크가 없으면(키 없이 생성 안 됨) 한줄해석처럼 문장+해석으로 표시(폴백).
+    """
+    css = get_css(theme)
+    blocks: List[str] = []
+    for i, p in enumerate(passages, start=1):
+        out = [_passage_head(i, p, doc_name)]
+        for s in p.sentences:
+            num = _circled(s.num)
+            if s.chunks:
+                units = "".join(
+                    '<span class="ck-unit">'
+                    f'<span class="ck-en">{escape(c.en)}</span>'
+                    f'<span class="ck-ko">{escape(c.ko)}</span>'
+                    '</span>'
+                    for c in s.chunks
+                )
+                out.append(
+                    '<div class="sent chunk-sent">'
+                    f'<span class="num">{num}</span>'
+                    f'<span class="ck-flow">{units}</span>'
+                    '</div>'
+                )
+            else:
+                # 폴백: 청크 없으면 영어 + 회색박스 해석
+                ko = ""
+                if s.ko:
+                    ko = ('<div class="ko-box"><span class="ko">'
+                          f'<span class="num">{num}</span>{escape(s.ko)}</span></div>')
+                out.append(
+                    '<div class="sent">'
+                    f'<div class="en"><span class="num">{num}</span>{escape(s.en)}</div>'
+                    f'{ko}</div>'
+                )
+        out.append(_vocab_box(p))
+        out.append("</div>")
+        blocks.append("\n".join(out))
+    return _doc("\n".join(blocks), css, header_text)

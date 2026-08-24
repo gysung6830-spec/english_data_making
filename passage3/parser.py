@@ -13,10 +13,17 @@ from typing import List, Tuple
 # ── 데이터 모델 ────────────────────────────────────────────────
 
 @dataclass
+class Chunk:
+    en: str          # 영어 청크(구~절 사이 의미 단위)
+    ko: str          # 그 청크의 우리말 뜻
+
+
+@dataclass
 class Sentence:
     num: int        # 문장 번호 (①→1)
     en: str         # 영어 원문
     ko: str = ""    # 한글 해석 (없으면 빈 문자열)
+    chunks: List["Chunk"] = field(default_factory=list)  # 직독직해용 청크
 
 
 @dataclass

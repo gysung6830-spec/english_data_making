@@ -110,6 +110,24 @@ VOCAB_RULES = """
 .vocab-item .m { color: #555558; }
 """
 
+# ── 직독직해(청크) 스타일 (모든 테마 공통) ────────────────────
+CHUNK_RULES = """
+.chunk-sent { margin-bottom: 15px; padding-bottom: 13px;
+  border-bottom: 1px solid #dcdee7; line-height: 1.5; }
+.chunk-sent .num { vertical-align: top; margin-right: 6px; color: #000; }
+.ck-unit { display: inline-block; vertical-align: top; margin: 0 9px 9px 0;
+  padding-right: 9px; border-right: 1px solid #cbe0d2; }
+.ck-unit:last-child { border-right: none; padding-right: 0; }
+.ck-en { display: block; font-size: 13px; line-height: 1.45; color: #000; }
+.ck-ko { display: block; font-size: 10px; line-height: 1.4; color: #2f6b45; margin-top: 2px; }
+.passage.compact  .ck-en { font-size: 12px; }
+.passage.compact  .ck-ko { font-size: 9.5px; }
+.passage.compact  .chunk-sent { margin-bottom: 11px; padding-bottom: 9px; }
+.passage.compact2 .ck-en { font-size: 11.2px; }
+.passage.compact2 .ck-ko { font-size: 9px; }
+.passage.compact2 .chunk-sent { margin-bottom: 8px; padding-bottom: 7px; }
+"""
+
 
 def _modern_css() -> str:
     # 딥그린 팔레트.
@@ -205,7 +223,7 @@ table.two-col td {{
 table.two-col tr.sent:last-child td {{ border-bottom: none; }}
 table.two-col td.col-en {{ width: 62%; color: {INK}; padding-right: 20px; }}
 table.two-col td.col-ko {{ width: 38%; color: {KO}; font-size: 11px; }}
-{AUTOFIT_RULES}{VOCAB_RULES}
+{AUTOFIT_RULES}{VOCAB_RULES}{CHUNK_RULES}
 /* 하단 어휘 박스도 같은 색 계열 (VOCAB_RULES 뒤에서 덮어씀) */
 .vocab {{ border-color: #cbe0d2; background: {FILL}; }}
 .vocab-title {{ color: {MUTED}; }}
@@ -242,7 +260,7 @@ table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:11px 14px 11px 0; border-bottom:1px solid #cfd6e0; font-size:13px; line-height:1.62; }}
 table.two-col td.col-en {{ width:62%; padding-right:20px; }}
 table.two-col td.col-ko {{ width:38%; color:#3a4048; font-size:11px; }}
-{AUTOFIT_RULES}{VOCAB_RULES}"""
+{AUTOFIT_RULES}{VOCAB_RULES}{CHUNK_RULES}"""
 
 
 def _middle_css() -> str:
@@ -273,7 +291,7 @@ table.two-col {{ width:100%; border-collapse:collapse; table-layout:fixed; }}
 table.two-col td {{ vertical-align:top; padding:12px 14px 12px 0; border-bottom:2px dashed #ffe0c2; font-size:14px; line-height:1.68; }}
 table.two-col td.col-en {{ width:60%; padding-right:20px; }}
 table.two-col td.col-ko {{ width:40%; color:#555; font-size:11.5px; }}
-{AUTOFIT_RULES}{VOCAB_RULES}"""
+{AUTOFIT_RULES}{VOCAB_RULES}{CHUNK_RULES}"""
 
 
 _THEMES = {
