@@ -24,10 +24,13 @@ _SYSTEM = (
     "ORDER. For each unit give (1) the exact English substring — concatenating the "
     "units with single spaces must reproduce the original sentence verbatim (same "
     "words, punctuation, capitalization) — and (2) its Korean meaning for that unit. "
-    "Chunk size is between a phrase and a clause (구와 절 중간 정도): break before "
-    "prepositional phrases, to-infinitives, relative/that clauses, conjunctions, "
-    "participial phrases. Do NOT split every word, and do NOT return one chunk for "
-    "the whole sentence. Return ONLY JSON."
+    "IMPORTANT — keep chunks LARGE (clause-leaning, 절 중심), NOT fine-grained: "
+    "break only at MAJOR boundaries — clause boundaries (relative/that/adverbial "
+    "clauses), coordinating conjunctions joining clauses, and a long to-infinitive "
+    "or participial phrase. Keep a preposition/article with its noun phrase and keep "
+    "short phrases attached to what they modify. Do NOT break off small 1–3 word "
+    "fragments and do NOT break at every preposition. Aim for about one break per "
+    "7–12 words; a short sentence (≲10 words) usually needs 0–1 break. Return ONLY JSON."
 )
 
 
