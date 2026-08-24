@@ -539,10 +539,8 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
         else:
             ident = str(int(passage_start_no) + idx0)
         i = idx0 + 1                                  # 1-based 순번(내부용)
-        if base:
-            src = f"{base}-{ident}"
-        else:
-            src = f"지문 {ident}" if str(ident).isdigit() else str(ident)
+        # 배지/소제목: ORTICA 변형문제 형식과 동일하게 대괄호 식별자만. 예: [13-3], [14-A]
+        src = f"[{ident}]"
 
         # 요약문 완성 ((A)(B) 빈칸)
         sum_items = []
