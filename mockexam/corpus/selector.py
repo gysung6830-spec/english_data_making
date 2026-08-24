@@ -309,6 +309,10 @@ def _pick(item: Item, candidates: list[Passage],
             src = "llm"
         # 재사용은 소폭 페널티(같은 지문에만 몰리지 않게 고르게 분산)
         s -= 0.08 * use_count.get(p.id, 0)
+        # 같은 지문 + '동일 유형' 재사용은 문항이 사실상 중복됨(예: 요지 2번이 같은 지문).
+        # 지문이 적어도(cap=None) 강한 페널티로 '다른 지문'을 우선하게 한다.
+        if item.type in type_on.get(p.id, set()):
+            s -= 0.6
         # (지문 충분할 때만) 스포일러 유형 겹침 페널티 — 적을 땐 적합도 우선
         if plentiful:
             s -= _spoiler_penalty(item.type, type_on.get(p.id, set()))
