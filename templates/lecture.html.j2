@@ -47,11 +47,18 @@
         {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gnum">{{ loop.index }}</span><span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}{% if not teacher %}<span class="gram-do">✏ 위 어법(❶❷…)이 문장의 어디에 쓰였는지 찾아 ○표 해보자</span>{% endif %}</div>{% endif %}
         <div class="ko-box"><span class="q-chip">문제</span><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if not teacher %}{% for t in it.mistips %}<div class="mistip"><span class="mt-chip">이렇게 읽으면 안&nbsp;돼</span>{{ t }}</div>{% endfor %}{% endif %}
-        <div class="s-q"><span class="q-chip">문제</span><span class="q-lead">이렇게 읽으면 오답 — 왜 틀렸을까?</span></div>
+        <div class="s-q"><span class="q-chip">문제</span><span class="q-lead">맞으면 O · 틀리면 X · 결론은 맞지만 근거가 틀리면 △ — X·△는 바르게 고치기</span></div>
+        <div class="ox">
         {% for m in it.misreads %}
-        <div class="mis">{{ m.statement }} <span class="mis-x">(X)</span></div>
-        {% if teacher %}<div class="mis-why">→ {{ m.why }}</div>{% else %}<div class="mis-line">왜? <span class="writeline inline wide"></span></div>{% endif %}
+        {% if teacher %}
+          <div class="ox-row"><span class="ox-ans {% if m.verdict == 'O' %}o{% elif m.verdict == '△' %}tri{% else %}x{% endif %}">{{ m.verdict }}</span><span class="ox-st">{% if m.english %}<span class="ox-en">EN</span>{% endif %}{% if m.english %}<span class="en-txt">{{ m.statement }}</span>{% else %}{{ m.statement }}{% endif %}{% if m.killer %}<span class="ox-kill">🔥 킬러</span>{% endif %}</span></div>
+          {% if m.verdict != 'O' and m.why %}<div class="ox-why">→ 바르게: {% if m.anchor %}<span class="cue">본문 대조: {{ m.anchor }}</span> — {% endif %}{{ m.why }}{% if m.trap_type %} <span class="typ">[{{ m.trap_type }}{% if m.integrative %}·통합추론{% endif %}]</span>{% endif %}</div>{% endif %}
+        {% else %}
+          <div class="ox-row"><span class="ox-pick">O <b>/</b> X <b>/</b> △</span><span class="ox-st">{% if m.english %}<span class="ox-en">EN</span>{% endif %}{% if m.english %}<span class="en-txt">{{ m.statement }}</span>{% else %}{{ m.statement }}{% endif %}</span></div>
+        {% endif %}
         {% endfor %}
+        </div>
+        {% if not teacher %}<div class="ox-fix">✗·△로 고른 것 바르게: <span class="writeline inline wide"></span></div>{% endif %}
       </div>
       {% endfor %}
     </div>

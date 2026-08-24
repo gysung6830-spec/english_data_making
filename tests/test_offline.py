@@ -183,9 +183,12 @@ def test_lecture_render_html():
     p = mock_lecture_passage(item_no="1")
     student = lecture_render.render_lecture_html([p], teacher=False)
     teacher = lecture_render.render_lecture_html([p], teacher=True)
-    # 섹션(어휘 리스트 / 끊어읽기 / 오답 찾기 / 글 정리·내용 정리)은 둘 다 있음
-    for sec in ("어휘 리스트", "끊어읽기", "왜 틀렸을까", "글 정리", "재진술 사슬", "글 내용 정리"):
+    # 섹션(어휘 리스트 / 끊어읽기 / 오답 판별 / 글 정리·내용 정리)은 둘 다 있음
+    for sec in ("어휘 리스트", "끊어읽기", "바르게 고치기", "글 정리", "재진술 사슬", "글 내용 정리"):
         assert sec in student and sec in teacher
+    # O/X/△ 내용 판별 오답: 학생용엔 선택 칩(ox-pick), 강사용엔 정답 배지(ox-ans)
+    assert "ox-pick" in student
+    assert "ox-ans" in teacher
     # [[ ]] 마크업이 학생용엔 빈칸(ko-blank), 강사용엔 채워진 정답(ko-fill)으로
     assert "ko-blank" in student and "ko-fill" not in student
     assert "ko-fill" in teacher
@@ -193,8 +196,8 @@ def test_lecture_render_html():
     assert "<mark" in teacher
     # [[ ]] 원문 마크업이 렌더 결과엔 남지 않아야 함
     assert "[[" not in student and "[[" not in teacher
-    # 오답 이유(mis-why)·예측 정답(pred-a)은 강사용에만
-    assert "mis-why" not in student and "mis-why" in teacher
+    # 오답 해설(ox-why)·예측 정답(pred-a)은 강사용에만
+    assert "ox-why" not in student and "ox-why" in teacher
     assert "pred-a" not in student and "pred-a" in teacher
     print("PASS  강의컨셉(필생보) 학생용/강사용 렌더링")
 

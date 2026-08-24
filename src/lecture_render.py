@@ -201,7 +201,14 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             # 강사용: 어법칩 spans 를 문장에서 형광펜(칩 번호)으로 표시. 없으면 None → 끊어읽기 줄 폴백
             "english_hl": _highlight_grammar(s.english, s.grammar) if teacher else None,
             "chunks": chunks,
-            "misreads": [{"statement": m.statement, "why": m.why} for m in s.misreads],
+            "misreads": [{"statement": m.statement, "why": m.why,
+                          "verdict": getattr(m, "verdict", "X"),
+                          "trap_type": getattr(m, "trap_type", ""),
+                          "anchor": getattr(m, "anchor", ""),
+                          "killer": getattr(m, "killer", False),
+                          "english": getattr(m, "english", False),
+                          "integrative": getattr(m, "integrative", False)}
+                         for m in s.misreads],
             "mistips": [_mark_tip(t) for t in getattr(s, "mistips", [])],
         })
 

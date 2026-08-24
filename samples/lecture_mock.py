@@ -8,13 +8,28 @@ from src.lecture_schemas import (Chunk, FlowBlock, GrammarChip, GrammarDrill,
                                  SentenceItem, Vocab)
 
 
+def _M(t):
+    """오답 튜플 → Misread. 형식:
+    ('O', statement)  또는
+    (verdict, statement, trap_type, anchor, why[, {killer,english,integrative}])"""
+    verdict, statement = t[0], t[1]
+    if verdict == "O":
+        return Misread(statement=statement, verdict="O")
+    trap_type, anchor, why = t[2], t[3], t[4]
+    ex = t[5] if len(t) > 5 else {}
+    return Misread(statement=statement, verdict=verdict, trap_type=trap_type,
+                   anchor=anchor, why=why, killer=ex.get("killer", False),
+                   english=ex.get("english", False),
+                   integrative=ex.get("integrative", False))
+
+
 def _S(id, english, grammar, vocab, chunks, misreads):
     return SentenceItem(
         id=id, english=english,
         grammar=[GrammarChip(tag=t, note=n) for t, n in grammar],
         vocab=[Vocab(word=w, meaning=m) for w, m in vocab],
         chunks=[Chunk(en=e, ko=k) for e, k in chunks],
-        misreads=[Misread(statement=s, why=w) for s, w in misreads],
+        misreads=[_M(t) for t in misreads],
     )
 
 
@@ -141,10 +156,10 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             ("[[including those studying human as well as nonhuman primate subjects]],", "[[인간뿐 아니라 인간이 아닌 영장류를 연구 대상으로 삼는 사람들까지 포함해서]],"),
             ("have [[recognized]]", "[[인정해]] 왔다"),
             ("[[the role that fear can play in a primate's social development]].", "[[두려움이 영장류의 사회성 발달에서 할 수 있는 역할을]].")],
-           [("(역할) 이 문장은 앞선 통념을 '반박하는' 문장이다.",
-             "반박이 아니야. 두려움이 사회성 발달에 '역할을 한다'는 걸 학자들이 인정해 왔다고 밝히는, 글 전체의 '화제(주제)를 여는 도입' 문장이야."),
-            ("학자들이 두려움을 사회성 발달의 '유일한 결정 요인'으로 본다는 문장이다.",
-             "강도를 과장한 오해야. 두려움이 'a role(하나의 역할)'을 한다고 했을 뿐, '유일한 요인'이라고 단정하진 않았어.")]),
+           [("O", "학자들은 두려움이 영장류의 사회성 발달에서 어떤 역할을 한다는 것을 인정해 왔다."),
+            ("X", "이 연구자들은 두려움이 사회성 발달을 방해한다는 것을 실험으로 입증했다.",
+             "무관정보", "have recognized the role",
+             "본문은 두려움이 '역할을 한다'는 것을 '인정(recognized)'했을 뿐, '방해한다'거나 '실험으로 입증했다'는 내용은 없다.")]),
         _S(2, raw[1], [("부사절 when/until","시간·조건을 나타내는 종속절"), ("수동태 has been p.p.","아기가 '위로받는' 것")],
            [("infant", "아기, 유아"), ("seek out", "찾아 나서다"),
             ("exploratory", "탐색의"), ("reassure", "안심시키다"),
@@ -155,10 +170,11 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             ("and all exploratory and play activity [[stops]]", "그리고 모든 탐색·놀이 활동이 [[멈춘다]]"),
             ("[[until the infant has been sufficiently comforted and reassured]]", "[[그 아기가 충분히 위로받고 안심하게 될 때까지]]"),
             ("by its [[attachment object]].", "자신의 [[애착 대상]]에 의해")],
-           [("아기가 두려움을 스스로 '극복해 가는 과정'을 단계별로 설명하는 문장이다.",
-             "극복 과정이 아니야. 겁먹으면 엄마에게 가서 안심할 때까지 탐색·놀이가 '멈춘다'는, 앞 주제를 뒷받침하는 근거야."),
-            ("(지칭) 마지막의 'its attachment object(애착 대상)'는 아기가 가지고 노는 장난감을 가리킨다.",
-             "지칭 오인이야. 여기서 attachment object는 앞의 'its mother'와 같은 대상 — 아기가 정서적으로 매달리는 '엄마(보호자)'를 가리켜. 장난감이 아니야.")]),
+           [("X", "밑줄 친 its attachment object 는 아기가 안고 노는 장난감을 가리킨다.",
+             "지칭", "its mother",
+             "attachment object 는 앞의 its mother(엄마), 즉 아기가 정서적으로 매달리는 보호자를 가리킨다 — 장난감이 아니다.",
+             {"killer": True}),
+            ("O", "겁먹은 아기는 충분히 안심될 때까지 탐색·놀이를 멈춘다.")]),
         _S(3, raw[2], [("비교급 than절 도치", "than will infants ~ : than 뒤 '조동사(will)+주어' 도치·have 생략"),
                         ("비교급 less/fewer", "less time · fewer opportunities than ~ : 우열 비교")],
            [("frequently", "자주"), ("very likely", "~할 가능성이 매우 높다"),
@@ -167,10 +183,9 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             ("[[will very likely have less time to explore]]", "[[탐색할 시간이 더 적을 가능성이 매우 높고]]"),
             ("and fewer [[opportunities]] to play", "놀 [[기회]]도 더 적을 것이다"),
             ("[[than will infants who are not]].", "[[그렇지 않은(자주 겁먹지 않는) 아기들보다]].")],
-           [("자주 겁먹는 아기는 탐색·놀이 기회를 '전혀' 얻지 못한다는 뜻이다.",
-             "정도를 '유무'로 과장한 오해야. 'fewer(더 적은)'지 '전혀 없는(none)'이 아니야 — 그렇지 않은 아기'보다' 적다는 상대적 비교야."),
-            ("이 문장은 두 종류 아기의 '놀이 방식이 어떻게 다른지'를 비교한다.",
-             "비교 초점이 어긋났어. '방식(종류)'이 아니라 탐색·놀이의 '양(시간·기회)'을 비교해서 앞 문장의 결과를 정리한 거야.")]),
+           [("X", "이 문장은 자주 겁먹는 아기들끼리 놀이 시간을 서로 비교한 것이다.",
+             "구조수식", "than will infants who are not",
+             "비교 대상은 '자주 겁먹지 않는 아기(infants who are not)'다 — 겁먹는 아기끼리가 아니라 두 집단을 비교한 것.")]),
         _S(4, raw[3], [("serve to+동사원형","'~하는 역할을 하다'"), ("조건절 if","성향이 유지된다면")],
            [("voluntary", "자발적인"), ("restraint", "억제, 제약"),
             ("serve to", "~하는 역할을 하다"), ("tendency", "성향, 경향"),
@@ -180,10 +195,13 @@ def mock_lecture_passage(title: str = "Fear and Social Development",
             ("the social development of [[shy or anxious]] infants", "[[소심하거나 불안한]] 아기들의 사회성 발달을"),
             ("[[if these tendencies are maintained]]", "[[만약 이런 성향이 계속 유지된다면]]"),
             ("throughout their [[childhood]] years.", "그들의 [[유년기]] 내내")],
-           [("(역할) 이 문장은 본론 중간의 한 '예시'를 드는 문장이다.",
-             "예시가 아니야. 앞의 관찰들을 모아 '유년기 내내 유지되면 발달이 느려질 수 있다'고 마무리하는 글 전체의 '결론' 문장이야."),
-            ("(함축) 'voluntary(자발적인)'라고 했으니, 아기가 원해서 스스로 택한 긍정적 선택이라는 뜻이다.",
-             "함축을 놓친 거야. 말은 voluntary(자발적)지만 실제론 두려움 때문에 어쩔 수 없이 놀이를 접는 거야. 필자는 이 '스스로 택한 듯 보이는 제약'이 오히려 발달을 늦춘다고 부정적으로 봐.")]),
+           [("△", "According to the writer, shy infants always develop slowly, even after only a brief period of fear.",
+             "인과조건", "if these tendencies are maintained throughout their childhood years",
+             "결론(사회성 발달이 느려질 수 있다)의 방향은 맞지만, 본문은 '유년기 내내(throughout their childhood years) 성향이 유지될 때'라는 조건을 달았다 — '잠깐의 두려움'만으로 항상 느려진다는 건 조건을 무시한 것. 결론 O·근거 X → △.",
+             {"english": True}),
+            ("X", "필자는 이런 자발적 제약(voluntary restraints)이 아이의 사회성 발달에 도움이 된다고 본다.",
+             "필자관점", "slow down the social development",
+             "필자는 오히려 사회성 발달을 '늦춘다(slow down)'고 본다 — 도움이 아니라 지체 요인으로 부정적으로 평가한다.")]),
     ]
 
     return LecturePassage(title=title, source=source, item_no=item_no,

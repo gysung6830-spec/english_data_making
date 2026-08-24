@@ -191,6 +191,32 @@ body{
   border:1px solid #cbe6d5; border-left:4px solid var(--green); border-radius:8px;
   padding:5px 12px; margin:3px 0 3px 4px; line-height:1.5; }
 
+/* ---- O/X/△ 내용 판별 오답 ------------------------------------------------ */
+.ox{ margin:4px 0 2px; }
+.ox-row{ display:flex; align-items:flex-start; gap:8px; margin:5px 0; font-size:9.6pt;
+  line-height:1.5; }
+.ox-pick{ flex:none; font-weight:800; color:#94a3b8; font-size:8.6pt; letter-spacing:.5px;
+  border:1px solid #e2e6ec; border-radius:6px; padding:1px 7px; white-space:nowrap; }
+.ox-pick b{ color:#cbd2db; font-weight:800; }
+.ox-ans{ flex:none; min-width:17px; height:17px; line-height:17px; text-align:center;
+  border-radius:5px; font-weight:800; color:#fff; font-size:9pt; padding:0 3px; }
+.ox-ans.o{ background:var(--green); } .ox-ans.x{ background:var(--red); }
+.ox-ans.tri{ background:#d98a1f; }
+.ox-st{ flex:1; }
+.ox-en{ display:inline-block; font-size:6.6pt; font-weight:800; color:var(--indigo);
+  background:var(--indigo-bg); border-radius:4px; padding:0 5px; margin-right:5px;
+  vertical-align:1.5px; letter-spacing:.5px; }
+.ox-kill{ display:inline-block; font-size:6.6pt; font-weight:800; color:#fff;
+  background:#7a1f1f; border-radius:4px; padding:0 6px; margin-left:6px; vertical-align:1.5px; }
+.en-txt{ font-style:italic; }
+.ox-fix{ font-size:9pt; color:#8b93a1; margin:2px 0 4px 4px; }
+.ox-fix .writeline.inline.wide{ width:78%; }
+.ox-why{ font-size:9.2pt; color:var(--green-d); background:var(--green-soft);
+  border:1px solid #cbe6d5; border-left:4px solid var(--green); border-radius:8px;
+  padding:5px 12px; margin:2px 0 6px 26px; line-height:1.5; }
+.ox-why .cue{ color:#7a1f1f; font-weight:800; }
+.ox-why .typ{ color:var(--indigo); font-weight:800; }
+
 /* ---- ④ 글 정리 : 인디고 카드 (한 페이지 압축) --------------------------- */
 .pcard{
   background:var(--indigo-soft); border:1px solid #e4dffb; border-left:5px solid var(--indigo);

@@ -24,7 +24,8 @@ from dataclasses import dataclass
 
 from markupsafe import escape
 
-from src.lecture_schemas import STANCES, STRUCTURES, LecturePassage
+from src.lecture_schemas import (STANCES, STRUCTURES, TRAP_QUOTA, TRAP_TYPES,
+                                 LecturePassage)
 
 _MARK = re.compile(r"\[\[|\]\]")
 _BLANK = re.compile(r"\[\[.*?\]\]", re.S)  # 빈칸 한 개(통째/단어)
@@ -109,6 +110,12 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
         # 2) 문장별: ①원문 ↔ ③조각 일치 / 오답 존재 / 말줄임표
         by_id = {s.id: s for s in p.analysis.sentences}
         chips_without_spans = 0  # 어법 형광펜용 spans 가 없는 칩 수(지문 단위 집계)
+        # O/X/△ 신형 오답인지 판별(구자료는 모두 verdict=X·trap_type/anchor 없음 → 구형 검사 유지)
+        new_ox = any(
+            (getattr(m, "verdict", "X") != "X") or getattr(m, "trap_type", "")
+            or getattr(m, "anchor", "")
+            for s in p.analysis.sentences for m in s.misreads)
+        en_all_low = " ".join((si.english or "") for si in p.analysis.sentences).lower()
         for sid in range(1, n + 1):
             s = by_id.get(sid)
             if s is None:
@@ -169,17 +176,45 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
                 if n_whole > 2:
                     warn(f"{tag} S{sid}", f"③ 통째 빈칸이 {n_whole}개(문장당 최대 2개 권장)")
 
-            # ④ '오답만 읽어도 이해' — 각 오답 해설(why)이 실질적이어야(뜻을 설명)
+            # ④ 오답 판별 문항 검사
             for mi, m in enumerate(s.misreads, 1):
                 st = _strip(m.statement).strip()
                 wy = _strip(m.why).strip()
                 if not st:
-                    err(f"{tag} S{sid}", f"{mi}번째 오답의 '틀린 진술(statement)'이 비어 있음")
-                if not wy:
-                    err(f"{tag} S{sid}", f"{mi}번째 오답의 '해설(why)'이 비어 있음")
-                elif len(wy) < 15:
-                    warn(f"{tag} S{sid}",
-                         f"{mi}번째 오답 해설이 너무 짧아 뜻 전달 부족(<15자): {wy!r}")
+                    err(f"{tag} S{sid}", f"{mi}번째 진술(statement)이 비어 있음")
+                if new_ox:
+                    vd = getattr(m, "verdict", "X")
+                    tt = getattr(m, "trap_type", "") or ""
+                    an = _strip(getattr(m, "anchor", "")).strip()
+                    if vd not in ("O", "X", "△"):
+                        err(f"{tag} S{sid}", f"{mi}번째 verdict 가 O/X/△ 가 아님: {vd!r}")
+                    if vd == "O":
+                        # 참(O) 진술: 근거·해설 없음(있으면 형식 혼동)
+                        if tt or an:
+                            warn(f"{tag} S{sid}", f"{mi}번째 O(참) 진술에 trap_type/anchor 가 붙음(불필요)")
+                    else:  # X·△ = 오답
+                        if not tt:
+                            warn(f"{tag} S{sid}", f"{mi}번째 오답({vd})에 함정 유형(trap_type)이 없음")
+                        elif tt not in TRAP_TYPES:
+                            err(f"{tag} S{sid}",
+                                f"{mi}번째 오답의 trap_type 이 6종에 없음: {tt!r}")
+                        if not an:
+                            err(f"{tag} S{sid}", f"{mi}번째 오답({vd})에 본문 근거(anchor)가 없음")
+                        elif an.lower() not in en_all_low:
+                            err(f"{tag} S{sid}",
+                                f"{mi}번째 오답의 anchor 가 원문에 없음(본문 대조 실패): {an[:40]!r}")
+                        if not wy:
+                            err(f"{tag} S{sid}", f"{mi}번째 오답({vd})의 '바르게(why)' 해설이 비어 있음")
+                        elif len(wy) < 15:
+                            warn(f"{tag} S{sid}",
+                                 f"{mi}번째 오답 해설이 너무 짧음(<15자): {wy!r}")
+                else:
+                    # 구형(모두 X): 해설 필수
+                    if not wy:
+                        err(f"{tag} S{sid}", f"{mi}번째 오답의 '해설(why)'이 비어 있음")
+                    elif len(wy) < 15:
+                        warn(f"{tag} S{sid}",
+                             f"{mi}번째 오답 해설이 너무 짧아 뜻 전달 부족(<15자): {wy!r}")
 
             # 오역 팁(mistips, 학생용 전용) 형식 검사
             for ti, t in enumerate(getattr(s, "mistips", []) or [], 1):
@@ -216,16 +251,38 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
             warn(f"{tag}",
                  f"어법칩 {chips_without_spans}개에 spans 없음 → 강사용 형광펜 미표시(재생성 시 반영)")
 
-        # 2-b) ④ '오답만 읽어도 이해되도록' 설계 점검(지문 단위)
-        #   - 문장 커버리지: 모든 문장이 오답을 하나씩 가져야(위 S{sid} 루프에서 ERROR) '오답만 읽어도
-        #     전 문장을 훑는다'가 성립. 여기서는 '지칭·함축' 층위가 오답 스트림에 담겼는지 본다.
+        # 2-b) ④ 오답 설계 점검(지문 단위)
         sents = p.analysis.sentences
-        if len(sents) >= 5:
+        if new_ox:
+            # 신형(O/X/△): 함정 유형 커버리지 쿼터 + O 개수 + 킬러·영어·△ 상한
+            oxm = [m for s in sents for m in s.misreads]
+            wrong = [m for m in oxm if getattr(m, "verdict", "X") in ("X", "△")]
+            types_used = {getattr(m, "trap_type", "") for m in wrong}
+            for q in TRAP_QUOTA:            # 지칭 · 무관정보 · 필자관점
+                if q not in types_used:
+                    warn(tag, f"④ 커버리지 쿼터 미충족: '{q}' 유형 오답이 지문에 없음(최소 1개 권장)")
+            n_o = sum(1 for m in oxm if getattr(m, "verdict", "X") == "O")
+            if n_o < 2:
+                warn(tag, f"④ 참(O) 진술이 {n_o}개뿐 — O/X/△ 판별이 무의미(지문당 O 최소 2개 권장)")
+            n_kill = sum(1 for m in oxm if getattr(m, "killer", False))
+            if n_kill > 1:
+                warn(tag, f"④ 🔥킬러가 {n_kill}개(지문당 1개 권장)")
+            n_en = sum(1 for m in oxm if getattr(m, "english", False))
+            if n_en > 1:
+                warn(tag, f"④ 영어오답이 {n_en}개(지문당 0~1개 권장)")
+            n_tri = sum(1 for m in oxm if getattr(m, "verdict", "X") == "△")
+            if n_tri > 2:
+                warn(tag, f"④ △(부분정답)가 {n_tri}개(지문당 1개 권장)")
+            # 한 유형만 반복(편중) 여부
+            wc = Counter(getattr(m, "trap_type", "") for m in wrong if getattr(m, "trap_type", ""))
+            if wc and len(wrong) >= 4 and max(wc.values()) / len(wrong) > 0.6:
+                warn(tag, f"④ 함정 유형 편중: {dict(wc)} (여러 유형을 고르게 섞기 권장)")
+        elif len(sents) >= 5:
+            # 구형(모두 X): 기존 지칭/함축 키워드 커버리지 유지
             allm = [m for s in sents for m in s.misreads]
             blob = " ".join(_strip(m.statement) + " " + _strip(m.why) for m in allm)
             has_ref = bool(re.search(r"지칭|가리키|가리켜", blob))
             has_imp = bool(re.search(r"함축|반어|가정법|속뜻|진짜 뜻|실제로는", blob))
-            # 지시어(this/that/they/these/those/it 계열)가 여러 번 쓰였는데 '지칭' 오답이 없으면 누락 의심
             en_all = " ".join(si.english for si in sents)
             n_dem = len(re.findall(r"\b(this|that|these|those|they|them|their|it|its)\b",
                                    en_all, re.IGNORECASE))

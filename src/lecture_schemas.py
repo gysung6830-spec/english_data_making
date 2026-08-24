@@ -24,6 +24,18 @@ STRUCTURES: tuple[str, ...] = (
     "통념→반박(반전)", "주장→근거·예시", "문제→해결(방안)",
     "비교·대조", "시간·순서(나열)", "예시→일반화(결론)",
 )
+
+# ─────────────────────────────────────────────────────────────────────
+# 오답(misread) 출제 원리 — 내신·2등급 기준
+#   함정 유형 6종. 튜플 순서 = '출제 우선순위'(앞이 높음).
+#   화용·양상 미세구분, 정도·범위, 수치 바꿔치기, 과도한 함축은 제외.
+TRAP_TYPES: tuple[str, ...] = (
+    "주체대상", "인과조건", "지칭", "무관정보", "필자관점", "구조수식",
+)
+# 지문당 '최소 1개씩' 보장할 커버리지 쿼터 유형
+TRAP_QUOTA: tuple[str, ...] = ("지칭", "무관정보", "필자관점")
+# O(맞음) / X(틀림) / △(결론은 맞지만 근거가 틀림)
+Verdict = Literal["O", "X", "△"]
 Structure = Literal[
     "통념→반박(반전)", "주장→근거·예시", "문제→해결(방안)",
     "비교·대조", "시간·순서(나열)", "예시→일반화(결론)",
@@ -133,9 +145,21 @@ class GrammarChip(BaseModel):
 
 
 class Misread(BaseModel):
-    """모두 '틀린 해석(X)'. 학생은 왜 X인지 찾고, why 로 확인한다."""
-    statement: str    # 흔히 하는 오해/오역(틀린 해석 X)
-    why: str          # 왜 틀렸는지 + 바른 뜻(어려운 내용도 쉬운 말로), 글 흐름 이해에 도움
+    """O/X/△ 내용 판별 문항.
+
+    - verdict: O(맞음) / X(틀림) / △(결론은 맞지만 '근거·이유'가 틀림)
+    - X·△ 는 함정 유형(trap_type)·본문 근거(anchor)·해설(why)을 갖는다.
+    - O 는 statement 만(참인 진술; trap_type·anchor·why 없음).
+    학생은 각 진술의 O/X/△ 를 '판단'하고, X·△ 는 바르게 고친다.
+    """
+    statement: str                 # 판단할 진술(맞을 수도, 틀릴 수도)
+    verdict: Verdict = "X"         # O / X / △ (하위호환: 구자료는 모두 X)
+    trap_type: str = ""            # X·△ 의 함정 유형(TRAP_TYPES 중 하나), O 는 ""
+    anchor: str = ""               # X·△ 를 반박하는 '본문 속 근거 어구'(원문에 실재)
+    why: str = ""                  # X·△ 의 '바르게' 해설(O 는 빈칸)
+    killer: bool = False           # 🔥 가장 정교한 변별 오답(지문당 1개)
+    english: bool = False          # statement 가 영어(패러프레이즈 오답)
+    integrative: bool = False      # 통합추론(여러 문장 종합) 오답(지문당 0~1)
 
 
 class SentenceItem(BaseModel):
