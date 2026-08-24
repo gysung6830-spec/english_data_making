@@ -150,20 +150,6 @@ CROP_ZOOM = 1.5
 # 화면에서까지 작으면 무슨 그림인지 안 보인다.
 CROP_FLOOR = 0.62
 
-# 가로가 세로의 이 배를 넘는 조각은 '띠'로 본다. 옆칸에 세우지 않는다.
-WIDE_STRIP = 6.0
-
-
-def aspect(name: str) -> float:
-    """조각의 가로세로 비. 파일이 없으면 0."""
-    path = SAMPLES / name
-    if not name or not path.exists():
-        return 0.0
-    from PIL import Image
-
-    with Image.open(path) as im:
-        return im.width / max(1, im.height)
-
 
 def crop_img(name: str, doc_w: int, fill: bool = False) -> str:
     """부분 확대 조각. 원래 지면에서 차지하던 만큼만 키워서 보여 준다.
@@ -665,14 +651,6 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>"""
         if not crops:
             return f'<div style="margin-top:{u * 3.4:.0f}px">{text}</div>'
-        # 아주 납작한 띠는 옆칸에 넣으면 글자가 절반으로 줄어 안 읽힌다.
-        # 그런 조각만 본문 폭을 다 쓰고 설명을 위에 얹는다.
-        if any(aspect(c) > WIDE_STRIP for c in names):
-            full = "".join(
-                f'<div style="margin-top:{u * 1.4:.0f}px">'
-                f'{crop_img(c, int(width - u * 13), fill=True)}</div>'
-                for c in names if crop_img(c, col_w))
-            return f"""<div style="margin-top:{u * 3.4:.0f}px">{text}{full}</div>"""
         return f"""<div style="margin-top:{u * 3.4:.0f}px;display:flex;
           gap:{u * 3:.0f}px;align-items:flex-start">
           <div style="flex:0 0 {col_w}px">{crops}</div>
