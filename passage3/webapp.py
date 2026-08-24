@@ -126,7 +126,7 @@ PAGE = """
       <label class="field">2. 출력 형식 (하나 이상 선택)</label>
       {% for key, name, desc in formats %}
       <label class="fmt">
-        <input type="checkbox" name="fmt" value="{{ key }}" {% if key=='a' %}checked{% endif %}
+        <input type="checkbox" name="fmt" value="{{ key }}" {% if key in ['a','d'] %}checked{% endif %}
                onchange="updatePreview()">
         <span><b>{{ name }}</b><span>{{ desc }}</span></span>
       </label>
