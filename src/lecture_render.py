@@ -301,11 +301,11 @@ def render_lecture_outputs(out_dir: str | Path, passages, stem: str,
     out_dir = Path(out_dir)
     recs: list[dict] = []
     if want_student:
-        p = out_dir / f"{stem}_강의교재_학생용.pdf"
+        p = out_dir / f"{stem}_필생보_학생용.pdf"
         render_lecture_pdf(passages, p, teacher=False, footer_note=footer_note)
-        recs.append({"kind": "lecture_student", "label": "🎓 강의교재(학생 문제지)", "path": p})
+        recs.append({"kind": "lecture_student", "label": "🎓 필생보(학생 문제지)", "path": p})
     if want_teacher:
-        p = out_dir / f"{stem}_강의교재_강사용.pdf"
+        p = out_dir / f"{stem}_필생보_강사용.pdf"
         render_lecture_pdf(passages, p, teacher=True, footer_note=footer_note)
-        recs.append({"kind": "lecture_teacher", "label": "🗝️ 강의교재(강사용·답지 포함)", "path": p})
+        recs.append({"kind": "lecture_teacher", "label": "🗝️ 필생보(강사용·답지 포함)", "path": p})
     return recs

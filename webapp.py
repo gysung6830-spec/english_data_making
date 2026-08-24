@@ -127,7 +127,7 @@ INDEX_HTML = """
       <label class=chk><input type=checkbox name=out_student value=1> 📗 지문 분석지 (학생용·정답 빈칸)</label>
       <label class=chk><input type=checkbox name=out_vocablist value=1 checked> 📚 핵심 어휘 리스트 (유의어·반의어)</label>
       <label class=chk><input type=checkbox name=out_vocabtest value=1 checked> 🧩 핵심 어휘 시험지 (뜻쓰기+유의어/반의어 줄긋기)</label>
-      <label class=chk style="margin-top:10px;color:#8a6d1f"><input type=checkbox name=out_lecture value=1> 🎓 강의컨셉 교재 (학생 훈련용 + 강사용 정답지 세트)</label>
+      <label class=chk style="margin-top:10px;color:#8a6d1f"><input type=checkbox name=out_lecture value=1> 🎓 필생보 (학생 훈련용 + 강사용 정답지 세트)</label>
       <div class=hint>학생이 먼저 스스로 풀도록 만든 5개 훈련 섹션: 어휘 힌트·오역포인트·문장 역할·함정포인트·패러프레이징 줄잇기. (직독직해는 넣지 않음)</div>
 
       <label class=chk style="margin-top:16px"><input type=checkbox name=mock value=1> 샘플 미리보기 (API 키 없이 디자인만 확인)</label>
