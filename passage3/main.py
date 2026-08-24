@@ -21,6 +21,7 @@ try:
     from .pdfparse import pdf_to_passages
     from .renderer import (render_format_a, render_format_b, render_format_c,
                           render_format_d)
+    from .segmenter import segment_passages
     from .serialize import load_passages_json, passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
@@ -32,6 +33,7 @@ except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from pdfparse import pdf_to_passages
     from renderer import (render_format_a, render_format_b, render_format_c,
                          render_format_d)
+    from segmenter import segment_passages
     from serialize import load_passages_json, passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
@@ -328,6 +330,10 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
     if is_json_input:
         print("[3/4] JSON 재입력 → 재분석 생략(API 비용 없음)")
     else:
+        # 번호 없는 통짜 지문(지문 연습하기 등)을 AI로 문장 분리(키 있으면)
+        if any(not p.sentences and p.raw for p in passages):
+            print("      번호 없는 지문 문장 분리(키 있으면)")
+            passages = segment_passages(passages, api_key=api_key)
         needs_ko = any(f in formats for f in ("a", "b", "d"))
         if do_translate and needs_ko:
             print("[3/4] 해석 없는 문장 번역(키 있으면)")

@@ -21,6 +21,7 @@ try:
                        renumber_passages, safe_filename)
     from .renderer import (render_format_a, render_format_b, render_format_c,
                            render_format_d)
+    from .segmenter import segment_passages
     from .serialize import passages_to_json
     from .translator import translate_missing
     from .vocab import extract_vocab
@@ -30,6 +31,7 @@ except ImportError:  # python webapp.py 로 직접 실행할 때
                       renumber_passages, safe_filename)
     from renderer import (render_format_a, render_format_b, render_format_c,
                           render_format_d)
+    from segmenter import segment_passages
     from serialize import passages_to_json
     from translator import translate_missing
     from vocab import extract_vocab
@@ -283,6 +285,12 @@ def generate():
         # 분석 JSON 재입력이면 재분석(번역·어휘) 생략 → API 비용 없음
         is_json_input = Path(file.filename).suffix.lower() == ".json"
         if not is_json_input:
+            # 번호 없는 통짜 지문을 AI로 문장 분리(키 있으면)
+            if any(not p.sentences and p.raw for p in passages):
+                try:
+                    passages = segment_passages(passages, api_key=api_key)
+                except Exception:
+                    traceback.print_exc()
             # 한줄영어(c)만 선택하면 번역 불필요
             if any(f in formats for f in ("a", "b", "d")):
                 try:

@@ -38,6 +38,7 @@ class Passage:
     title: str                              # 제목/주제
     sentences: List[Sentence] = field(default_factory=list)
     vocab: List[Vocab] = field(default_factory=list)  # 하단 어휘 리스트
+    raw: str = ""                           # 번호 없는 지문 원문(문장 자동분리용)
 
 
 # ── 정규식/상수 ───────────────────────────────────────────────
@@ -72,8 +73,11 @@ _FOOTNOTE_RE = re.compile(r"\s*\d{1,3}\)\s*$")
 # 페이지 번호 줄:  '- 14 -', '14' 등
 _PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
 
-# 자료 머리말/꼬리말(워터마크) 줄:  '[EBS] …', '[Flow Edu] …', 'flowedu.tistory'
-_JUNK_RE = re.compile(r"(?i)(flowedu\.tistory|\[\s*flow\s*edu\s*\]|^\s*\[EBS\])")
+# 자료 머리말/꼬리말·안내문(워터마크) 줄
+_JUNK_RE = re.compile(
+    r"(?i)(flowedu\.tistory|\[\s*flow\s*edu\s*\]|^\s*\[EBS\]|EXAM4YOU|"
+    r"영문과\s*해석을\s*읽고|지문\s*연습하기|^\s*WORKBOOK\b)"
+)
 
 # 한글 음절 영역
 _HANGUL_RE = re.compile(r"[가-힣]")
@@ -278,13 +282,29 @@ def split_passages(raw: str) -> List[Passage]:
 
         body = "\n".join(body_lines)
         sents = _parse_sentences(body)
+        # 번호가 없어 문장을 못 나눈 경우, 원문(잡음 제거)을 남겨 AI 문장분리에 사용
+        raw = "" if sents else _clean_raw(body_lines)
 
         # 같은 번호 헤더가 다음 페이지에 반복되면(장문 등) 이전 지문에 이어붙임
         if passages and label and passages[-1].label == label:
             passages[-1].sentences.extend(sents)
+            if raw:
+                passages[-1].raw = (passages[-1].raw + " " + raw).strip()
             if not passages[-1].title and title:
                 passages[-1].title = title
         else:
-            passages.append(Passage(label=label, title=title, sentences=sents))
+            passages.append(Passage(label=label, title=title,
+                                   sentences=sents, raw=raw))
 
     return passages
+
+
+def _clean_raw(body_lines: List[str]) -> str:
+    """번호 없는 지문 원문에서 안내문·페이지번호·널문자 등을 제거."""
+    out = []
+    for ln in body_lines:
+        s = ln.replace("\x00", " ").strip()
+        if not s or _JUNK_RE.search(s) or _PAGENUM_RE.match(s):
+            continue
+        out.append(s)
+    return " ".join(out).strip()
