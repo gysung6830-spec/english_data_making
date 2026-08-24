@@ -40,7 +40,11 @@ class PassageText(BaseModel):
 
 class Analysis(BaseModel):
     title: str
-    sentences: list[str]           # 정본 지문(문장 단위, 원문 그대로·순서 유지)
+    # 정본 지문(문장 단위). LLM 이 돌려주는 값은 '참고용'이고, analyze() 가 곧바로
+    # '사용자가 넣은 원문을 코드가 나눈 것'으로 덮어쓴다. 그래서 여기에 개수 조건을
+    # 걸면 안 된다 — 쓰지도 않을 값 때문에 생성 전체가 죽는다(실제로 모델이 빈
+    # 배열을 돌려줘 지문 두 개짜리 작업이 통째로 실패했다).
+    sentences: list[str] = Field(default_factory=list)
     main_idea: str
     # 지문 종류(유형 적합성 검수용): prose(설명·논설)·narrative(서사·심경)·
     # notice(안내문)·chart(도표)·letter(편지)·dialogue(대화). 기본 prose.
@@ -52,11 +56,9 @@ class Analysis(BaseModel):
 
     @field_validator("sentences")
     @classmethod
-    def _has_sentences(cls, v: list[str]) -> list[str]:
-        v = [s.strip() for s in v if s and s.strip()]
-        if len(v) < 4:
-            raise ValueError("문장이 4개 미만입니다(지문이 너무 짧음).")
-        return v
+    def _clean_sentences(cls, v: list[str]) -> list[str]:
+        """빈 줄만 걸러 낸다. '몇 개 이상'은 원문을 보고 analyze() 가 판정한다."""
+        return [s.strip() for s in v if s and s.strip()]
 
 
 # ---------------------------------------------------------------------------

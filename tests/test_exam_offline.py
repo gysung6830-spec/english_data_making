@@ -490,6 +490,17 @@ def _fake_vocab_negation():
         reason="이유.")
 
 
+# analyze() 는 넣은 원문을 직접 나눠 문장 수를 본다(API 를 부르기 전에).
+# 그래서 테스트 지문도 문장 4개 이상이어야 한다 — 실제 사용과 같은 조건.
+_DUMMY = ("The first sentence introduces the topic clearly. "
+          "However, the second sentence adds an important detail. "
+          "The third sentence gives a concrete example. "
+          "The fourth sentence draws the whole thing together. "
+          "The fifth sentence answers an obvious objection. "
+          "The sixth sentence closes with a practical suggestion.")
+_DUMMY2 = _DUMMY.replace("sentence", "line")
+
+
 class _FakeClient:
     def __init__(self, *a, **kw):
         self.efforts: list[tuple[str, str | None]] = []   # (스키마, 추론 강도)
@@ -637,7 +648,7 @@ _FAKE = {
 
 
 def test_llm_path_wiring() -> None:
-    passage = build_passage_merged(_FakeClient(), "dummy body")
+    passage = build_passage_merged(_FakeClient(), _DUMMY)
     assert passage.types == set(MERGED_ORDER)
     validator.check_passage(passage, MERGED_ORDER)
     # 어휘 3종(유의어·원문단어·부정어)이 한 지문에 모두 배선된다 — 난이도와 무관하게 고정
@@ -698,7 +709,7 @@ def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") 
     tmp_out.mkdir(parents=True, exist_ok=True)
 
     client = _FakeClient()
-    bodies = ["dummy body one", "dummy body two"]
+    bodies = [_DUMMY, _DUMMY2]
 
     # 1) 지문 여러 개 병렬 분석
     analyses = pipeline.analyze_bodies(client, bodies)
@@ -715,7 +726,7 @@ def test_parallel_and_shared_analysis(tmp_out: Path = ROOT / "output" / "test") 
     assert out2.exists()
 
     # 4) 병렬 생성 결과가 순서대로 온전히 채워졌는지
-    p = build_passage_merged(client, "dummy", analysis=analyses[0])
+    p = build_passage_merged(client, _DUMMY, analysis=analyses[0])
     assert p.types == set(MERGED_ORDER)
     print("✓ 병렬 생성·병렬 분석·난이도별 분석 공유 통과")
 
@@ -746,7 +757,7 @@ def test_difficulty_lever() -> None:
             seen.append(prompt)
             return super().structured(system, prompt, model_cls, **kw)
 
-    p = build_passage_merged(_Peek(), "dummy")
+    p = build_passage_merged(_Peek(), _DUMMY)
     assert p.types == set(MERGED_ORDER)
     gen_prompts = [x for x in seen if "[문장]" in x]   # 분석·검증 호출은 제외
     assert gen_prompts and all("[출제 수준]" in x for x in gen_prompts), len(gen_prompts)
@@ -791,8 +802,8 @@ def test_serialize_roundtrip(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam import serialize
 
     client = _FakeClient()
-    ps1 = build_passages_merged(client, ["b1", "b2"], labels=["31번", "32번"])
-    ps2 = build_passages_merged(client, ["b3", "b4"], labels=["33번", "34번"])
+    ps1 = build_passages_merged(client, [_DUMMY, _DUMMY2], labels=["31번", "32번"])
+    ps2 = build_passages_merged(client, [_DUMMY, _DUMMY2], labels=["33번", "34번"])
     ps1[0].flag("topic", ["오답 선지 근거 보강 검토 (…)"])   # 플래그도 보존되는지
 
     # 파트가 여러 개인 저장본(옛 난이도별 합본 등)도 그대로 왕복되는지 함께 본다
@@ -1180,7 +1191,7 @@ def test_answer_spread() -> None:
     # 통합: 정답 위치가 실제로 여러 값으로 흩어지는지(FakeClient 4지문×주제·내용일치)
     from exam import renderer
     client = _FakeClient()
-    ps = build_passages_merged(client, ["b1", "b2", "b3", "b4"])
+    ps = build_passages_merged(client, [_DUMMY, _DUMMY2, _DUMMY, _DUMMY2])
     keys = []
     for i, p in enumerate(ps):
         _, quick = renderer._blocks([p], start=1)
@@ -1214,7 +1225,7 @@ def test_passage_source_label() -> None:
 
     # 라벨 스레딩: build_passages(labels=…) 가 Passage.source_label 에 실린다
     client = _FakeClient()
-    ps3 = build_passages_merged(client, ["b1", "b2"], labels=["45번", "46번"])
+    ps3 = build_passages_merged(client, [_DUMMY, _DUMMY2], labels=["45번", "46번"])
     assert [p.source_label for p in ps3] == ["45번", "46번"]
     print("✓ 지문 라벨(원본 문항번호·위치 폴백·labels 스레딩) 통과")
 
@@ -1249,7 +1260,7 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     # 3) collect_review — 문서 연속 번호로 정확히 매긴다
     #    문항 번호는 지문 경계를 넘어 문서 전체로 이어진다(둘째 지문 = +유형 수).
     def _fresh():
-        return build_passages_merged(_FakeClient(), ["b1", "b2"])
+        return build_passages_merged(_FakeClient(), [_DUMMY, _DUMMY2])
 
     _i = {t: i + 1 for i, t in enumerate(MERGED_ORDER)}   # 유형 → 지문 내 문항 번호
     ps = _fresh()
@@ -1296,8 +1307,11 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     ret = renderer.render_pdf_multi(parts, outm)
     assert ret is None                                  # 별도 파일 아님 → None
     rm = PdfReader(str(outm))
-    titled = [i for i, pg in enumerate(rm.pages) if "검토 메모" in (pg.extract_text() or "")]
-    assert titled == [len(rm.pages) - 1]                # 오직 마지막 한 장
+    texts = [pg.extract_text() or "" for pg in rm.pages]
+    titled = [i for i, t in enumerate(texts) if "검토 메모" in t]
+    assert len(titled) == 1, titled                     # 제목은 한 번만(한 덩어리)
+    # 검토 메모가 시작된 뒤로는 본문이 다시 나오지 않는다 — 맨 뒤에 붙는다
+    assert not any("교사용" in t or "해설지" in t for t in texts[titled[0]:]), titled
 
     # 7) review_out 지정 → 검토 메모를 '별도 PDF'로 분리(본문엔 안 붙는다)
     body = tmp_out / "rv_body.pdf"
@@ -1448,9 +1462,9 @@ def test_progress_output() -> None:
     buf = _io.StringIO()
     prog = Progress(total=4, stream=buf)
     prog.note("지문 2개 분석 중 …")
-    build_passages_merged(_FakeClient(), ["b1", "b2"],
+    build_passages_merged(_FakeClient(), [_DUMMY, _DUMMY2],
                             progress=prog, part_label="변형문제 1회 · 난이도 중")
-    build_passages_merged(_FakeClient(), ["b1", "b2"],
+    build_passages_merged(_FakeClient(), [_DUMMY, _DUMMY2],
                             progress=prog, part_label="변형문제 1회 · 난이도 상")
     prog.finish()
     out = buf.getvalue()
@@ -1482,7 +1496,7 @@ def test_parallel_passages_and_gate() -> None:
     from exam import _concurrent
 
     # ① 지문 병렬 처리 — 순서·라벨이 입력 순서대로 유지된다
-    bodies = [f"body {i}" for i in range(6)]
+    bodies = [_DUMMY.replace("sentence", f"line{i}") for i in range(6)]
     labels = [f"L{i}" for i in range(6)]
     ps = build_passages_merged(_FakeClient(), bodies, labels=labels)
     assert [p.source_label for p in ps] == labels, [p.source_label for p in ps]
@@ -1753,7 +1767,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
                 seen[model_cls.__name__] = seen.get(model_cls.__name__, 0) + 1
             return super().structured(system, prompt, model_cls, **kw)
 
-    ps = build_passages_merged(_Counting(), ["b1", "b2"], labels=["10-1", "10-2"])
+    ps = build_passages_merged(_Counting(), [_DUMMY, _DUMMY2], labels=["10-1", "10-2"])
     assert "AOut" not in seen and "GOut" not in seen, seen      # A·G 생성 안 함
     assert seen.get("GrammarOut") == 2, seen                    # 어법(모두 고르기) 지문당 1번
     assert seen.get("GrammarCountOut") == 2, seen               # 어법(개수) 지문당 1번
@@ -1861,7 +1875,7 @@ def test_new_type_guards() -> None:
                 marks[len(marks)] = ({m.word.lower() for m in obj.marks}, prompt)
             return obj
 
-    p = build_passage_merged(_Watch(), "dummy body")
+    p = build_passage_merged(_Watch(), _DUMMY)
     assert {"vocab", "vocab_2", "vocab_3"} <= p.types, sorted(p.types)
     sets = [w for w, _ in marks.values()]
     assert len(sets) == 3, len(sets)
@@ -1942,7 +1956,7 @@ def test_tiering_and_escalation() -> None:
     assert tiering.VERIFY_EFFORT == "high"                # 마지막 문지기
 
     c = _FakeClient()
-    p = build_passage_merged(c, "dummy body")
+    p = build_passage_merged(c, _DUMMY)
     by_schema = dict(c.efforts)
     assert by_schema["IrrelevantOut"] == "high", c.efforts
     assert by_schema["VocabOut"] == "medium", c.efforts
@@ -1978,7 +1992,7 @@ def test_tiering_and_escalation() -> None:
             return super().structured(system, prompt, model_cls, **kw)
 
     weak = _Flaky()
-    p2 = build_passage_merged(weak, "dummy body", strong_client=strong)
+    p2 = build_passage_merged(weak, _DUMMY, strong_client=strong)
     assert p2.types == set(MERGED_ORDER), sorted(set(MERGED_ORDER) - p2.types)
     # 상위 모델은 '걸린 문항'에만 쓰였다 — 15문항을 전부 다시 만들지 않는다
     used = [n for n, _ in strong.efforts if n not in ("VerifyOut", "Analysis")]
@@ -2061,7 +2075,7 @@ def test_overlap_and_paraphrase_guards() -> None:
     from exam.shape import check_blank_answer_paraphrase as chk_para
 
     # ① 밑줄이 겹치지 않는다 ------------------------------------------------
-    p = build_passage_merged(_FakeClient(), "dummy body")
+    p = build_passage_merged(_FakeClient(), _DUMMY)
     marks = {}
     for t in ("pair_odd", "vocab_2", "vocab", "vocab_3"):
         assert t in p.q, t
@@ -2078,7 +2092,7 @@ def test_overlap_and_paraphrase_guards() -> None:
                 seen_prompts.append((model_cls.__name__, prompt))
             return super().structured(system, prompt, model_cls, **kw)
 
-    build_passage_merged(_Peek(), "dummy body")
+    build_passage_merged(_Peek(), _DUMMY)
     later = [pr for _, pr in seen_prompts[1:]]
     assert later and all("겹침 금지" in pr for pr in later), len(later)
 
@@ -2381,6 +2395,63 @@ def test_stress_fixtures() -> None:
     test_stress_passages()
 
 
+def test_analysis_sentences_are_ours() -> None:
+    """모델이 sentences 를 못 줘도 생성이 죽지 않아야 한다(실제 실패 재발 방지).
+
+    analyze() 는 모델이 준 sentences 를 쓰지 않고 '넣은 원문'을 코드가 나눈 것으로
+    덮어쓴다. 그런데 스키마가 그 버려질 값에 '4개 이상'을 요구하고 있어서, 모델이
+    빈 배열을 한 번 돌려주자 지문 두 개짜리 작업이 통째로 실패했다.
+    """
+    from exam import analyzer
+    from exam.schemas import Analysis
+
+    # 1) 모델이 sentences 를 아예 안 줘도 스키마가 통과한다
+    assert Analysis(title="t", main_idea="m").sentences == []
+
+    body = ("One sentence stands here. Two sentences stand here. "
+            "Three sentences stand here. Four sentences stand here.")
+
+    class _Empty:                       # 모델이 빈 배열을 돌려주는 상황
+        def structured(self, **kw):
+            return Analysis(title="t", sentences=[], main_idea="m")
+
+    got = analyzer.analyze(_Empty(), body)
+    assert got.sentences == analyzer.split_sentences(body), got.sentences
+
+    class _Halluc:                      # 모델이 지문을 바꿔 말하는 상황
+        def structured(self, **kw):
+            return Analysis(title="t", sentences=["Made up.", "Not in the body."],
+                            main_idea="m")
+
+    assert analyzer.analyze(_Halluc(), body).sentences == analyzer.split_sentences(body)
+
+    # 2) 짧은 지문은 'API 를 부르기 전에' 사람이 읽는 말로 거절한다
+    class _Boom:
+        def structured(self, **kw):
+            raise AssertionError("짧은 지문인데 API 를 불렀습니다.")
+
+    try:
+        analyzer.analyze(_Boom(), "Only one sentence here.")
+        raise AssertionError("짧은 지문이 통과했습니다.")
+    except ValueError as e:
+        assert "너무 짧" in str(e) and "4개" in str(e), e
+
+    # 3) 사용자 화면에는 pydantic 원문이 아니라 읽을 수 있는 안내가 간다
+    sys.path.insert(0, str(ROOT))
+    from web.app import _readable_error
+
+    raw = ("[0] 생성 실패: 검증 실패(재시도 소진): 1 validation error for Analysis\n"
+           "sentences\n  Value error, 문장이 4개 미만입니다(지문이 너무 짧음). "
+           "[type=value_error, input_value=[], input_type=list]\n"
+           "    For further information visit https://errors.pydantic.dev/2.13/v/value_error")
+    msg = _readable_error(Exception(raw))
+    assert "지문이 너무 짧거나" in msg, msg
+    assert "pydantic" not in msg and "value_error" not in msg, msg
+    assert "요청이 잠시 몰렸" in _readable_error(Exception("Error code: 429 rate_limit"))
+    assert "API 키가" in _readable_error(Exception("Error code: 401 authentication_error"))
+    print("✓ 분석 문장은 코드가 정한다(모델 출력 무관)·짧은 지문 사전 거절·오류 문구 통과")
+
+
 def test_batch_client() -> None:
     """비용 절반(Batch API): 흩어진 요청을 한 배치로 모아 보내고, 각 호출에
     같은 결과를 돌려준다. 생성기 코드는 그대로다(클라이언트만 교체)."""
@@ -2479,7 +2550,7 @@ def test_batch_client() -> None:
     buf = _io.StringIO()
     prog = Progress(total=2, stream=buf)
     c5 = _Client(_demo, progress=prog)
-    ps = build_passages_merged(c5, ["b1", "b2"], labels=["10-1", "10-2"], progress=prog)
+    ps = build_passages_merged(c5, [_DUMMY, _DUMMY2], labels=["10-1", "10-2"], progress=prog)
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     assert len(ps[0].q) >= 7, len(ps[0].q)
     assert sum(c5._fake.sizes) > 10 and len(c5._fake.sizes) < 10, c5._fake.sizes
@@ -2538,6 +2609,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_output_checker()
     test_stress_fixtures()
+    test_analysis_sentences_are_ours()
     test_merged_set()
     test_batch_client()
     print("\n모든 오프라인 테스트 통과 ✅")

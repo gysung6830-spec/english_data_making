@@ -1,10 +1,13 @@
 """분석기 (명세서 §6): 지문 1회 분석 — 6종이 나눠 쓴다.
 
-문장 분리 · 핵심어휘+유의어+반의어 · 주제 한 문장 · 문법 밀집 문장을 추출한다.
+핵심어휘+유의어+반의어 · 주제 한 문장 · 문법 밀집 문장 · 지문 종류를 추출한다.
 
-중요(정확성): 문제의 '바탕 지문'은 AI 출력이 아니라 '사용자가 넣은 원문'을 그대로
-쓴다. 즉 sentences 는 입력 지문을 코드가 문장 단위로 나눈 것으로 강제 교체하여,
-AI 가 지문을 바꿔 말하더라도 넣은 지문으로만 문제가 만들어지도록 한다.
+중요(정확성): 문제의 '바탕 지문'은 AI 출력이 아니라 '사용자가 넣은 원문'이다.
+문장 나누기는 코드(split_sentences)가 하고, AI 에게는 아예 묻지 않는다.
+ · AI 가 지문을 바꿔 말할 여지가 사라진다.
+ · 지문 전체를 그대로 되돌려받던 출력 토큰이 사라져 분석 호출이 눈에 띄게 싸진다.
+ · 쓰지도 않을 값 때문에 생성이 죽는 일이 없다(모델이 빈 배열을 돌려줘 작업 전체가
+   실패한 적이 있다).
 """
 from __future__ import annotations
 
@@ -21,7 +24,6 @@ _PROMPT = """다음 영어 지문을 1회 분석하여 JSON 으로 반환하세�
   prose(설명·논설문) · narrative(이야기·서사·심경 묘사) · notice(행사/대회/모집 안내문,
   항목 나열식) · chart(도표·그래프 설명) · letter(편지·이메일) · dialogue(대화).
   애매하면 prose.
-- sentences: 지문을 문장 단위로 순서대로 나눈 배열(원문 그대로, 절대 바꾸지 말 것).
 - main_idea: 지문의 주제를 담은 한 문장(영어).
 - key_terms: 지문 핵심어 8~14개. 각 항목은 word(원문 형태), synonym(유의어),
   antonym(반의어, 없으면 빈 문자열). word 는 반드시 지문에 실제로 등장하는 단어여야 함.
@@ -112,7 +114,20 @@ def split_sentences(text: str) -> list[str]:
     return [p.replace(_DOT, ".").strip() for p in parts]
 
 
+# 문제를 만들려면 최소 몇 문장이 필요한가(순서 배열이 덩어리 셋을 만들 수 있는 최소).
+MIN_SENTENCES = 4
+
+
 def analyze(client: ClaudeClient, body: str, max_retries: int = 1) -> Analysis:
+    # 지문이 쓸 만한지는 '넣은 원문'으로 먼저 본다. API 를 부른 뒤에 알면 돈만 버리고,
+    # 사용자에게는 pydantic 오류 원문이 그대로 보인다.
+    real = split_sentences(body)
+    if len(real) < MIN_SENTENCES:
+        raise ValueError(
+            f"지문이 너무 짧습니다 — 문장이 {len(real)}개입니다"
+            f"(최소 {MIN_SENTENCES}개 필요). 지문이 제대로 읽혔는지, 한 지문이 "
+            "여러 개로 쪼개지지 않았는지 확인해 주세요.")
+
     analysis = client.structured(
         system=SYSTEM,
         prompt=_PROMPT.format(body=body.strip()),
@@ -120,8 +135,6 @@ def analyze(client: ClaudeClient, body: str, max_retries: int = 1) -> Analysis:
         max_tokens=4000,
         max_retries=max_retries,
     )
-    # 바탕 지문은 반드시 '넣은 원문'을 쓴다(AI 가 지문을 바꿔 말해도 무시).
-    real = split_sentences(body)
-    if len(real) >= 4:
-        analysis.sentences = real
+    # 바탕 지문은 반드시 '넣은 원문'을 쓴다(AI 가 지문을 바꿔 말해도, 아예 안 줘도 무시).
+    analysis.sentences = real
     return analysis

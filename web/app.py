@@ -391,9 +391,44 @@ def generate():
                             "count": len(parts), "name": f"{doc_name}_검토메모",
                             "has_json": False})
     except Exception as e:  # noqa: BLE001 — 사용자에게 원인 표시
-        return fail(f"생성 실패: {e}", 500)
+        return fail(_readable_error(e), 500)
 
     return render_template("result.html", outputs=outputs, demo=demo, header=header)
+
+
+# 내부 라이브러리가 던지는 원문(pydantic 검증문·스택 용어)은 사용자가 읽을 말이 아니다.
+# 지금까지 화면에 이런 것이 그대로 찍혔다:
+#   "1 validation error for Analysis sentences Value error, 문장이 4개 미만입니다
+#    [type=value_error, input_value=[], ...] https://errors.pydantic.dev/..."
+_ERROR_HINTS = (
+    (("지문이 너무 짧", "문장이 4개 미만", "문장이 0개", "지문이 비어"),
+     "지문이 너무 짧거나 제대로 읽히지 않았습니다. 원문 파일에서 영어 지문이 온전히 "
+     "뽑혔는지, 한 지문이 여러 개로 쪼개지지 않았는지 확인해 주세요."),
+    (("rate_limit", "rate limit", "429"),
+     "요청이 잠시 몰렸습니다. 1~2분 뒤에 다시 시도해 주세요."),
+    (("overloaded", "529"),
+     "AI 서버가 혼잡합니다. 잠시 뒤에 다시 시도해 주세요."),
+    (("timeout", "timed out"),
+     "응답이 너무 오래 걸렸습니다. 지문 수를 줄여 다시 시도해 주세요."),
+    (("credit", "quota", "billing", "insufficient"),
+     "API 사용 한도에 걸렸습니다. 결제·한도 설정을 확인해 주세요."),
+    (("authentication", "api_key", "api key", "unauthorized", "401"),
+     "API 키가 올바르지 않습니다. 키를 다시 확인해 주세요."),
+    (("connection", "network", "unreachable", "dns"),
+     "AI 서버에 연결하지 못했습니다. 인터넷 연결을 확인한 뒤 다시 시도해 주세요."),
+)
+
+
+def _readable_error(e: Exception) -> str:
+    """생성 실패를 사람이 읽을 수 있는 한 문장으로 바꾼다(원인 실마리는 남긴다)."""
+    raw = str(e)
+    low = raw.lower()
+    for keys, msg in _ERROR_HINTS:
+        if any(k in low for k in keys):
+            return f"생성 실패 — {msg}"
+    # 짚이는 데가 없으면 원문을 보여 주되, 스택·URL 같은 군더더기는 잘라 낸다.
+    first = raw.split("\n")[0].split("For further information")[0].strip()
+    return f"생성 실패: {first[:300]}"
 
 
 @app.get("/pdf/<fid>")
