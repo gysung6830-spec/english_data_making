@@ -70,19 +70,36 @@ def safe_filename(name: str) -> str:
     return _FNAME_BAD.sub("_", (name or "").strip()) or "지문"
 
 
-def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
-    """지문 라벨을 '시작번호부터 1씩 증가'하는 문항번호로 덮어쓴다.
+_RANGE_RE = re.compile(r"(\d+)\s*[~∼\-]\s*(\d+)\s*번")
 
+
+def _label_span(label: str) -> int:
+    """라벨이 장문 범위(N~M번)면 문항 수(M-N+1), 아니면 1."""
+    m = _RANGE_RE.search(label or "")
+    if m:
+        a, b = int(m.group(1)), int(m.group(2))
+        if b >= a:
+            return b - a + 1
+    return 1
+
+
+def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
+    """지문 라벨을 시작번호부터 문항번호로 덮어쓴다.
+
+    장문(원래 라벨이 N~M번)은 문항 수만큼 건너뛰고 범위로 표기한다.
+    예) 시작 18 → 18번, 19번, …, 40번, 41~42번, 43~45번.
     start_no 가 None/빈값이면 그대로 둔다(파일에서 인식한 번호 유지).
     """
     if start_no in (None, ""):
         return passages
     try:
-        base = int(start_no)
+        cur = int(start_no)
     except (TypeError, ValueError):
         return passages
-    for i, p in enumerate(passages):
-        p.label = f"{base + i}번"
+    for p in passages:
+        span = _label_span(p.label)
+        p.label = f"{cur}~{cur + span - 1}번" if span >= 2 else f"{cur}번"
+        cur += span
     return passages
 
 
