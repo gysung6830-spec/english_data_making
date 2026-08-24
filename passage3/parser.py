@@ -82,6 +82,9 @@ _JUNK_RE = re.compile(
 # 한글 음절 영역
 _HANGUL_RE = re.compile(r"[가-힣]")
 
+# 정상 제목 최대 길이(이보다 길면 2단 표 뒤섞임으로 보고 원문 파싱으로 되돌림)
+_MAX_TITLE_LEN = 150
+
 
 def circled_to_int(ch: str) -> int:
     """원문자 → 정수. ①→1 … ⑳→20. 아니면 0."""
@@ -289,6 +292,13 @@ def split_passages(raw: str) -> List[Passage]:
 
         # 워크북 안내문 등 보일러플레이트만 있는 제목은 비운다
         if title and _JUNK_RE.search(title):
+            title = ""
+
+        # 제목이 비정상적으로 길면(2단 표가 뒤섞여 지문 전체가 딸려온 경우)
+        # 파싱된 문장들도 어긋난 잡음이므로, 원문(raw)으로 되돌려 AI 문장분리에 맡김
+        if sents and len(title) > _MAX_TITLE_LEN:
+            raw = _clean_raw(body_lines)
+            sents = []
             title = ""
 
         # 같은 번호 헤더가 다음 페이지에 반복되면(장문 등) 이전 지문에 이어붙임

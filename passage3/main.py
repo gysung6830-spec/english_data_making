@@ -18,7 +18,7 @@ try:
     from .ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from .chunker import chunk_sentences
     from .parser import Passage, split_passages
-    from .pdfparse import pdf_to_passages
+    from .pdfparse import pdf_to_passages, strip_side_margins
     from .renderer import (render_format_a, render_format_b, render_format_c,
                           render_format_d)
     from .segmenter import segment_passages
@@ -30,7 +30,7 @@ except ImportError:  # 스크립트로 직접 실행할 때(python main.py)
     from hwp import HWP_EXTS, extract_hwp_text
     from ocr import IMAGE_EXTS, is_scanned_pdf, ocr_file
     from parser import Passage, split_passages
-    from pdfparse import pdf_to_passages
+    from pdfparse import pdf_to_passages, strip_side_margins
     from renderer import (render_format_a, render_format_b, render_format_c,
                          render_format_d)
     from segmenter import segment_passages
@@ -124,6 +124,7 @@ def extract_text(path) -> str:
         parts: List[str] = []
         with pdfplumber.open(str(p)) as pdf:
             for page in pdf.pages:
+                page = strip_side_margins(page)
                 parts.append(page.extract_text() or "")
         text = "\n".join(parts)
         # 추출은 됐지만 실질적으로 비었으면 OCR 재시도

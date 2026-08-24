@@ -21,6 +21,38 @@ except ImportError:  # 스크립트로 직접 실행할 때
                         _count_hangul)
 
 
+def strip_side_margins(page, frac: float = 0.045, min_pt: float = 15.0):
+    """페이지 좌·우 극단 여백의 글자(세로 워터맨크 등)를 제거한 페이지 반환.
+
+    교재/워크북 PDF의 좌우 가장자리에는 저작권 문구가 '세로로' 한 글자씩
+    박혀 있는 경우가 많다. pdfplumber 는 이를 본문 줄에 끼워 읽어 지문을
+    오염시킨다(예: '본 본 자 콘 료 텐 ... Dear Ms. Jane'). 페이지 폭의
+    바깥 frac(기본 4.5%) 안에 중심이 있는 '글자'만 걸러내고, 표 테두리
+    선/사각형 등은 그대로 두어 표 인식에는 영향을 주지 않는다.
+    """
+    try:
+        w = float(page.width)
+    except Exception:
+        return page
+    margin = max(min_pt, w * frac)
+    lo, hi = margin, w - margin
+
+    def _keep(obj):
+        if obj.get("object_type") != "char":
+            return True  # 선·사각형·이미지 등은 유지(표 구조 보존)
+        x0 = obj.get("x0")
+        x1 = obj.get("x1")
+        if x0 is None or x1 is None:
+            return True
+        cx = (x0 + x1) / 2.0
+        return lo <= cx <= hi
+
+    try:
+        return page.filter(_keep)
+    except Exception:
+        return page
+
+
 def _norm(s: str) -> str:
     """개행·중복 공백 정리."""
     return " ".join((s or "").split())
@@ -96,6 +128,7 @@ def pdf_to_passages(path) -> Optional[List[Passage]]:
     try:
         with pdfplumber.open(str(path)) as pdf:
             for page in pdf.pages:
+                page = strip_side_margins(page)
                 tables = page.extract_tables()
                 if not tables:
                     continue
