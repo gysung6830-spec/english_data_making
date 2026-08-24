@@ -52,6 +52,38 @@ def _has_key() -> bool:
     return bool(k and "여기에" not in k)
 
 
+def _env_key():
+    return os.environ.get("ANTHROPIC_API_KEY") if _has_key() else None
+
+
+def _key_hint() -> str:
+    """키 입력란 placeholder — 현재 키 출처를 안내(값은 노출하지 않음)."""
+    if session.get("api_key"):
+        return "기억된 키 사용 중 — 바꾸려면 새 키 입력"
+    if _env_key():
+        return "환경변수 키 사용 중 — 덮어쓰려면 새 키 입력"
+    return "sk-ant-..."
+
+
+def _resolve_key(form) -> str | None:
+    """입력한 키 > 세션 기억 키 > 환경변수 키. '이 브라우저에 기억' 옵트인 시 세션 저장."""
+    typed = (form.get("api_key") or "").strip()
+    if "설정됨" in typed or "환경변수" in typed or "기억된" in typed:
+        typed = ""                                   # placeholder 문구는 무시
+    remember = bool(form.get("remember_key"))
+    if typed and remember:
+        session["api_key"] = typed                   # 이 브라우저 세션에 기억
+    elif not remember:
+        session.pop("api_key", None)                 # 기억 해제
+    if typed:
+        return typed
+    return session.get("api_key") or _env_key()
+
+
+def _any_key() -> bool:
+    return bool(session.get("api_key") or _env_key())
+
+
 BASE_CSS = """
  :root{--ink:#23272e;--accent:#1d4ed8;--green:#15803d;--muted:#6b7280;--line:#e5e7eb;}
  *{box-sizing:border-box;}
@@ -176,14 +208,14 @@ INDEX_HTML = """
       <label>⑦ Anthropic API 키
         <span class=hint>(실제 문항 생성용 · 비우고 아래 '미리보기'를 쓰면 디자인만 확인)</span>
       </label>
-      <input type=password name=api_key placeholder="sk-ant-..."
-             value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
-             {{ 'readonly' if has_key else '' }}>
+      <input type=password name=api_key autocomplete=off placeholder="{{ key_hint }}">
+      <label class=chk><input type=checkbox name=remember_key value=1 {{ 'checked' if remembered else '' }}>
+        이 브라우저에 키 기억 <span class=hint>(다음부터 안 쳐도 됨 · 공용 PC면 끄세요)</span></label>
 
       <label class=chk><input type=checkbox name=strict value=1 checked>
         판매용: 확실한 문항만 출력 <span class=hint>(주의표시·검토페이지 없음 · 반복 인증)</span></label>
 
-      <label class=chk><input type=checkbox name=mock value=1 {{ '' if has_key else 'checked' }}>
+      <label class=chk><input type=checkbox name=mock value=1 {{ '' if any_key else 'checked' }}>
         미리보기 (API 키 없이 배치·검증·디자인만 확인)</label>
 
       <div class=row>
@@ -319,9 +351,9 @@ LEARN_HTML = """
       </div>
 
       <label>⑤ Anthropic API 키 <span class=hint>(학습은 실제 분석이므로 키가 필요합니다)</span></label>
-      <input type=password name=api_key placeholder="sk-ant-..."
-             value="{{ '설정됨(그대로 사용)' if has_key else '' }}"
-             {{ 'readonly' if has_key else '' }}>
+      <input type=password name=api_key autocomplete=off placeholder="{{ key_hint }}">
+      <label class=chk><input type=checkbox name=remember_key value=1 {{ 'checked' if remembered else '' }}>
+        이 브라우저에 키 기억 <span class=hint>(공용 PC면 끄세요)</span></label>
 
       <div class=row>
         <button class=btn type=submit>이 시험지로 학습하기</button>
@@ -500,7 +532,7 @@ def _schools_for_view():
 @app.route("/")
 def index():
     return render_template_string(INDEX_HTML, schools=_schools_for_view(),
-                                  has_key=_has_key())
+                                  has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key())
 
 
 def _safe_name(stem: str) -> str:
@@ -525,17 +557,15 @@ def generate():
     school = request.form.get("school") or "jinyang_hs"
     grade = int(request.form.get("grade") or 1)
     difficulty = request.form.get("difficulty") or "중"
-    form_key = (request.form.get("api_key") or "").strip()
-    key = None if "설정됨" in form_key else (form_key or None)
-    key = key or (os.environ.get("ANTHROPIC_API_KEY") if _has_key() else None)
+    key = _resolve_key(request.form)
 
     if not files:
         return render_template_string(INDEX_HTML, schools=_schools_for_view(),
-                                      has_key=_has_key())
+                                      has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key())
     if not mock and not key:
         html = INDEX_HTML.replace("<form id=f",
             "<div class=err>API 키가 없습니다. 키를 입력하거나 '미리보기'를 체크하세요.</div><form id=f")
-        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key())
 
     # 업로드 저장
     saved: list[Path] = []
@@ -549,7 +579,7 @@ def generate():
     if not saved:
         html = INDEX_HTML.replace("<form id=f",
             "<div class=err>지원하는 지문 파일이 없습니다(PDF·JPG·PNG·TXT·HWP).</div><form id=f")
-        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key())
 
     client = None
     review_client = None
@@ -647,7 +677,7 @@ def generate():
         traceback.print_exc()
         html = INDEX_HTML.replace("<form id=f",
             f"<div class=err>생성 중 오류: {e}</div><form id=f")
-        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key())
+        return render_template_string(html, schools=_schools_for_view(), has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key())
     finally:
         for p in saved:
             p.unlink(missing_ok=True)
@@ -681,7 +711,7 @@ def generate():
 @app.route("/learn", methods=["GET"])
 def learn_page():
     return render_template_string(LEARN_HTML, schools=_schools_for_view(),
-                                  has_key=_has_key(), err="")
+                                  has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key(), err="")
 
 
 @app.route("/learn", methods=["POST"])
@@ -691,14 +721,12 @@ def learn_run():
 
     def _err(msg):
         return render_template_string(LEARN_HTML, schools=_schools_for_view(),
-                                      has_key=_has_key(), err=msg)
+                                      has_key=_has_key(), key_hint=_key_hint(), remembered=bool(session.get('api_key')), any_key=_any_key(), err=msg)
 
     files = [f for f in request.files.getlist("files") if f and f.filename]
     if not files:
         return _err("시험지 파일을 올려주세요.")
-    form_key = (request.form.get("api_key") or "").strip()
-    key = None if "설정됨" in form_key else (form_key or None)
-    key = key or (os.environ.get("ANTHROPIC_API_KEY") if _has_key() else None)
+    key = _resolve_key(request.form)
     if not key:
         return _err("학습은 실제 분석이 필요합니다. Anthropic API 키를 입력하세요.")
 
