@@ -19,10 +19,11 @@ except ImportError:
 DEFAULT_MODEL = "claude-sonnet-5"
 
 _SYSTEM = (
-    "You are an English teacher marking 직독직해 (sense-group) slashes for Korean "
-    "students. Split an English sentence into sense units by returning the exact "
-    "substrings in order — concatenating them (with single spaces) must reproduce "
-    "the original sentence verbatim (same words, punctuation, capitalization). "
+    "You are an English teacher making a 직독직해 (sense-group reading) worksheet "
+    "for Korean students. Split an English sentence into sense units IN ENGLISH "
+    "ORDER. For each unit give (1) the exact English substring — concatenating the "
+    "units with single spaces must reproduce the original sentence verbatim (same "
+    "words, punctuation, capitalization) — and (2) its Korean meaning for that unit. "
     "Chunk size is between a phrase and a clause (구와 절 중간 정도): break before "
     "prepositional phrases, to-infinitives, relative/that clauses, conjunctions, "
     "participial phrases. Do NOT split every word, and do NOT return one chunk for "
@@ -49,12 +50,12 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 continue  # 이미 있음 / 영어 없음
             user_msg = (
                 "Split this sentence into 직독직해 sense units (phrase~clause "
-                'sized), in order. Return ONLY JSON: {"chunks":["unit1","unit2",'
-                '...]}\n\n' + s.en.strip()
+                "sized), in English order. Return ONLY JSON: "
+                '{"chunks":[{"en":"unit","ko":"그 단위의 뜻"}]}\n\n' + s.en.strip()
             )
             try:
                 resp = client.messages.create(
-                    model=model, max_tokens=800, system=_SYSTEM,
+                    model=model, max_tokens=1200, system=_SYSTEM,
                     messages=[{"role": "user", "content": user_msg}],
                 )
                 text = "".join(b.text for b in resp.content
@@ -63,11 +64,13 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 items = data.get("chunks") if isinstance(data, dict) else data
                 if isinstance(items, list):
                     for it in items:
-                        # 문자열(신규) 또는 {"en":...}(구형) 모두 지원
-                        en = it if isinstance(it, str) else (it.get("en") if isinstance(it, dict) else "")
+                        if isinstance(it, dict):
+                            en, ko = it.get("en"), it.get("ko")
+                        else:  # 문자열 응답 호환(뜻 없음)
+                            en, ko = it, ""
                         en = (en or "").strip()
                         if en:
-                            s.chunks.append(Chunk(en=en, ko=""))
+                            s.chunks.append(Chunk(en=en, ko=(ko or "").strip()))
             except Exception:
                 continue  # 한 문장 실패해도 나머지 진행
     return passages

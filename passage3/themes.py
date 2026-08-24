@@ -112,7 +112,7 @@ VOCAB_RULES = """
 
 # ── 직독직해 슬래시(/) 스타일 (모든 테마 공통) ────────────────
 CHUNK_RULES = """
-.en .slash { color: #2f6b45; font-weight: 700; padding: 0 1px; }
+.slash { color: #2f6b45; font-weight: 700; padding: 0 1px; }
 """
 
 

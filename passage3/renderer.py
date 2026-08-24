@@ -178,20 +178,27 @@ def render_format_d(passages: List[Passage], header_text: str = "", theme: str =
     """
     css = get_css(theme)
     sep = '<span class="slash">/</span>'
+    join = f" {sep} "
     blocks: List[str] = []
     for i, p in enumerate(passages, start=1):
         out = [_passage_head(i, p, doc_name)]
         for s in p.sentences:
             num = _circled(s.num)
             if s.chunks:
-                en_html = f" {sep} ".join(escape(c.en) for c in s.chunks)
+                en_html = join.join(escape(c.en) for c in s.chunks)
+                # 청크별 뜻이 있으면 한글도 / 로 끊어 맞춤, 없으면 문장 전체 해석
+                if any(c.ko for c in s.chunks):
+                    ko_html = join.join(escape(c.ko) for c in s.chunks)
+                else:
+                    ko_html = escape(s.ko)
             else:
                 en_html = escape(s.en)
+                ko_html = escape(s.ko)
             en = f'<div class="en"><span class="num">{num}</span>{en_html}</div>'
             ko = ""
-            if s.ko:
+            if ko_html:
                 ko = ('<div class="ko-box"><span class="ko">'
-                      f'<span class="num">{num}</span>{escape(s.ko)}</span></div>')
+                      f'<span class="num">{num}</span>{ko_html}</span></div>')
             out.append(f'<div class="sent">{en}{ko}</div>')
         out.append(_vocab_box(p))
         out.append("</div>")
