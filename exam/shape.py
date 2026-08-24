@@ -361,7 +361,8 @@ _AUTHOR_NOTES = (
     "문제에서는", "좋은 문제", "좋은 삽입", "좋은 빈칸", "출제 의도", "정답으로 적절",
     "이 문항은 ~로 설계", "설계하였다", "설계했다",
     "구성한 문제", "구성하였다", "틀리도록", "이 문항은", "문제로 구성",
-    "빼낸 문장", "제시된 단어들을", "토큰들을",
+    "빼낸 문장", "빼낼 문장", "뺀 문장", "제거한 문장", "제거할 문장",
+    "제시된 단어들을", "토큰들을",
 )
 # 학생용 지문에는 문장 번호가 없다. '(3)에서'·'(9)문장' 식 지칭은 대조할 수 없다.
 _SENT_REF = re.compile(r"[(（]\d+[)）]\s*(문장|에서|은|는|이|가|의|과|와|에)")
@@ -424,6 +425,11 @@ def check_explanation(text: str) -> list[str]:
                    "지문에는 번호가 없어 대조할 수 없습니다.")
     if re.search(r"(습니다|입니다)\.", text or "") and re.search(r"(이다|한다|된다|아니다)\.", text or ""):
         bad.append("해설에 '-습니다'체와 '-다'체가 섞여 있습니다.")
+    # 오답을 설계할 때 쓰는 내부 분류 이름('축')이 그대로 문장이 되어 나온다
+    # (실제 출력물 17번: '① 방향 반전 축이다.'). 읽는 사람에게는 뜻이 없는 말이다.
+    if re.search(r"(?:^|[\s'\"(])축(이다|입니다|의 오답|을 쓴|에 해당)", text or ""):
+        bad.append("해설이 오답 분류 이름을 그대로 문장으로 씁니다('… 축이다') — "
+                   "'방향 반전 — 이유' 처럼 쓰세요.")
     return bad
 
 
@@ -532,4 +538,220 @@ def check_tokens_rebuild(tokens: list[str], answer: str,
             parts.append("없던 것: " + ", ".join(sorted(unexplained)[:6]))
         if parts:
             return ["<보기> 낱말이 정답 문장과 맞지 않습니다 — " + " / ".join(parts)]
+    return []
+
+
+# ---------------------------------------------------------------------------
+# 낱말 하나를 갈아 끼웠을 때 '문장이 깨지는' 자리
+# ---------------------------------------------------------------------------
+# 어휘 문항은 낱말 하나만 바꾼다. 그런데 그 낱말이 뒤따르는 불변화사·전치사와 한
+# 덩어리이거나(구동사), 목적어를 요구하는 타동사이면, 바꾼 순간 문장이 영어가 아니게
+# 된다. 그러면 학생은 글을 읽지 않고 '덜컹거리는 자리'만 보고 답을 고른다.
+# 실제 출력물에서 한 회차에 세 번 나왔다:
+#   'help them calm down'   → 'help them upset down'      (구동사의 down 이 남았다)
+#   'the ability to listen to what' → '… to hear to what' (전치사 to 가 남았다)
+#   'would usually respond,' → 'would usually ignore,'    (목적어 없는 타동사)
+#
+# 판정은 '불변화사를 데려가는 동사 목록'으로 한다. 원래 낱말이 그 목록에 있고(그
+# 불변화사가 원래 낱말의 것이었다는 증거) 바꾼 낱말이 없으면 깨진 것이다. 목록에
+# 없는 낱말끼리의 교체는 건드리지 않는다 — 오탐이 한 번 나면 멀쩡한 문항이 죽는다.
+_PARTICLE_TAKERS: dict[str, set[str]] = {
+    "down": {"calm", "settle", "quiet", "quieten", "cool", "slow", "tone", "wind",
+             "simmer", "break", "close", "shut", "sit", "lie", "put", "turn", "write",
+             "cut", "back", "run", "let", "hand", "pass", "narrow", "tie", "water",
+             "step", "tear", "knock", "bring", "come", "go", "get", "fall", "lay",
+             "hold", "track", "hunt", "strike", "die", "slam", "scale"},
+    "up": {"give", "bring", "pick", "take", "set", "make", "look", "grow", "end",
+           "come", "show", "put", "open", "speed", "build", "sum", "wake", "stand",
+           "catch", "clean", "cover", "hang", "keep", "line", "live", "mix", "move",
+           "pull", "save", "sign", "split", "turn", "add", "back", "blow", "break",
+           "call", "cheer", "dress", "eat", "fill", "hold", "own", "pile", "sober"},
+    "off": {"cool", "take", "put", "set", "cut", "turn", "call", "show", "pay",
+            "write", "break", "close", "shut", "hold", "lay", "let", "pull", "see",
+            "send", "shake", "wear", "back", "drop", "kick", "level", "ward"},
+    "out": {"carry", "point", "figure", "find", "work", "turn", "bring", "hand",
+            "leave", "rule", "spell", "stand", "stretch", "wear", "wipe", "sort",
+            "set", "give", "run", "help", "burn", "check", "cross", "die", "drop",
+            "fill", "hold", "iron", "lay", "pass", "pick", "sell", "single", "watch"},
+    "to": {"listen", "respond", "react", "reply", "refer", "lead", "contribute",
+           "adapt", "apply", "belong", "relate", "attend", "object", "adhere",
+           "resort", "amount", "testify", "appeal", "subscribe", "cling", "conform",
+           "correspond", "defer", "revert", "yield", "speak", "talk", "turn", "point",
+           "see", "stick", "agree", "admit", "confess", "commit", "add", "return",
+           "switch", "expose", "subject", "owe", "compare", "link", "connect",
+           "attribute", "devote", "dedicate", "introduce", "submit", "give", "look",
+           "come", "go", "get", "amount", "cater", "object", "consent", "surrender"},
+    "on": {"depend", "rely", "focus", "insist", "concentrate", "dwell", "comment",
+           "reflect", "count", "impose", "base", "act", "carry", "go", "live", "take",
+           "put", "turn", "try", "keep", "hold", "move", "pass", "work", "call",
+           "draw", "touch", "bank", "border", "capitalize", "elaborate", "hinge",
+           "prey", "rest", "seize", "settle", "spy", "thrive"},
+    "with": {"deal", "cope", "interfere", "agree", "comply", "associate", "compete",
+             "identify", "sympathize", "begin", "part", "meet", "live", "go", "come",
+             "catch", "put", "bear", "clash", "collide", "correlate", "credit",
+             "empathize", "engage", "grapple", "provide", "reckon", "side", "trust"},
+    "from": {"stem", "arise", "benefit", "suffer", "result", "differ", "refrain",
+             "derive", "emerge", "escape", "recover", "separate", "prevent", "stop",
+             "keep", "protect", "hide", "borrow", "learn", "come", "hear", "range",
+             "abstain", "deter", "discourage", "distinguish", "exempt", "profit",
+             "recoil", "resign", "retire", "shrink", "spring", "stray", "withdraw"},
+    "of": {"consist", "approve", "dispose", "conceive", "think", "dream", "complain",
+           "boast", "accuse", "remind", "rid", "deprive", "convince", "inform",
+           "hear", "know", "speak", "die", "smell", "taste", "despair", "beware",
+           "admit", "acquit", "assure", "cure", "partake", "repent", "tire"},
+    "for": {"wait", "look", "search", "hope", "long", "ask", "care", "apply",
+            "account", "allow", "compensate", "substitute", "pay", "stand", "call",
+            "make", "head", "opt", "yearn", "strive", "provide", "prepare", "aim",
+            "arrange", "settle", "fall", "go", "run", "answer", "atone", "blame",
+            "campaign", "hunger", "mistake", "qualify", "root", "vouch", "wish"},
+    "about": {"think", "care", "talk", "worry", "complain", "wonder", "know", "hear",
+              "learn", "argue", "ask", "forget", "dream", "speak", "write", "read",
+              "bring", "come", "go", "set", "boast", "fret", "fuss", "quibble"},
+    "into": {"turn", "break", "run", "look", "divide", "translate", "transform",
+             "enter", "dig", "delve", "tap", "bump", "crash", "fall", "get", "go",
+             "come", "put", "talk", "force", "burst", "check", "convert", "grow",
+             "merge", "plunge", "sink", "split", "venture"},
+    "at": {"look", "stare", "glance", "aim", "arrive", "laugh", "point", "shout",
+           "guess", "excel", "hint", "marvel", "work", "get", "come", "jump", "gaze",
+           "grasp", "hammer", "peer", "scoff", "smile", "wonder"},
+    "in": {"result", "believe", "participate", "engage", "specialize", "succeed",
+           "invest", "indulge", "persist", "interfere", "join", "take", "give",
+           "step", "fill", "bring", "come", "live", "stay", "hand", "break", "check",
+           "confide", "delight", "dwell", "excel", "revel", "share", "trade"},
+}
+
+# 목적어 없이는 문장이 성립하지 않는 타동사(원형·3인칭 단수형만 본다 — 분사형까지
+# 넣으면 'the risks involved,' 같은 멀쩡한 자리를 잡아 버린다).
+_NEED_OBJECT = {
+    "ignore", "discuss", "mention", "emphasize", "approach", "enter", "resemble",
+    "lack", "deny", "accompany", "obtain", "resist", "achieve", "avoid", "regard",
+    "involve", "include", "contain", "require", "seek", "affect", "exceed",
+    "surpass", "await", "abandon", "acquire", "address", "attain", "consume",
+    "convey", "endure", "generate", "impose", "neglect", "possess", "reject",
+    "resemble", "restrict", "reveal", "seize", "suppress", "undermine", "withhold",
+}
+# 뒤에 아무것도 없다고 볼 문장부호(여기서 절이 끝난다)
+_CLAUSE_END = re.compile(r"^\s*(?:[,;:.!?]|$)")
+
+
+# 앞에 이것이 오면 밑줄 낱말은 동사가 아니라 명사다(the intensity of …).
+_DET = {"the", "a", "an", "this", "that", "these", "those", "their", "its", "his",
+        "her", "our", "your", "my", "no", "any", "some", "each", "every", "one"}
+# 명사 뒤에는 거의 붙지 않는 '부사 불변화사'만 조판 뒤 검사에 쓴다.
+_ADVERBIAL = {k: _PARTICLE_TAKERS[k] for k in ("down", "up", "out", "off")}
+
+
+def _swap_bases(w: str) -> set[str]:
+    """어형을 벗겨 사전에서 찾을 후보들(단수형 -s, 과거 -ed, -ing)."""
+    w = re.sub(r"^[^\w]+|[^\w]+$", "", (w or "").lower())
+    out = {w}
+    for suf, cut in (("ies", 3), ("es", 2), ("s", 1), ("ed", 2), ("ing", 3)):
+        if len(w) > cut + 2 and w.endswith(suf):
+            stem = w[:-cut]
+            out.add(stem)
+            out.add(stem + "e")           # hoped → hope · using → use
+            if len(stem) > 2 and stem[-1] == stem[-2]:
+                out.add(stem[:-1])        # stopped → stop
+    return {x for x in out if x}
+
+
+def check_swap_breaks(sentence: str, word: str, shown: str) -> list[str]:
+    """원본 낱말 word 를 shown 으로 갈아 끼웠을 때 문장이 깨지는지 본다.
+
+    sentence 는 '갈아 끼우기 전' 원문 문장이다(뒤따르는 낱말은 교체로 바뀌지 않으므로
+    원문에서 그대로 읽으면 된다).
+    """
+    w, s = (word or "").strip(), (shown or "").strip()
+    if not w or not s or w.lower() == s.lower():
+        return []
+    text = sentence or ""
+    m = re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", text, re.IGNORECASE)
+    if not m:
+        return []
+    after = text[m.end():]
+    bad: list[str] = []
+
+    # ① 구동사·전치사가 남는가
+    nxt = re.match(r"\s*([A-Za-z]+)", after)
+    if nxt:
+        part = nxt.group(1).lower()
+        takers = _PARTICLE_TAKERS.get(part)
+        if takers and (_swap_bases(w) & takers) and not (_swap_bases(s) & takers):
+            bad.append(f"'{w} {part}'는 한 덩어리로 쓰이는 표현인데 '{s} {part}'는 "
+                       f"영어가 되지 않습니다 — 뒤의 '{part}'까지 함께 손보거나 다른 "
+                       "낱말을 고르세요.")
+
+    # ② 목적어가 필요한 타동사인데 목적어가 없는가
+    if (_swap_bases(s) & _NEED_OBJECT) and _CLAUSE_END.match(after):
+        bad.append(f"'{s}'는 목적어가 필요한 타동사인데 뒤에 목적어가 없습니다 "
+                   f"('… {s}{after[:12].rstrip()}') — 문장이 성립하지 않습니다.")
+    return bad
+
+
+def check_marks_in_passage(body: str, marks: list[tuple[str, str]]) -> list[str]:
+    """조판이 끝난 지문에서 '밑줄 낱말 자체가 문장을 깨뜨리는' 자리를 찾는다.
+
+    원본 낱말을 모르므로 확실한 것 하나만 본다 — 목적어가 필요한 타동사인데 바로
+    뒤에서 절이 끝나는 경우('… would usually ignore, just as we hope'). 구동사가
+    깨진 경우는 원본 낱말을 알아야 판정할 수 있어 생성 시점(check_swap_breaks)에서
+    막는다.
+    """
+    bad: list[str] = []
+    text = body or ""
+    for _no, word in marks or []:
+        w = (word or "").strip()
+        if not w:
+            continue
+        m = re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", text)
+        if not m:
+            continue
+        after = text[m.end():]
+        # ① 목적어가 필요한 타동사인데 바로 뒤에서 절이 끝난다
+        if (_swap_bases(w) & _NEED_OBJECT) and _CLAUSE_END.match(after):
+            bad.append(f"밑줄 '{w}'는 목적어가 필요한 타동사인데 뒤에 목적어가 "
+                       "없습니다 — 문장이 성립하지 않습니다.")
+        # ② 부사 불변화사(down·up·out·off)가 남았다. 전치사(to·of·in …)는 명사 뒤에도
+        #    흔히 붙어 오탐이 나므로 여기서는 보지 않는다(생성 시점에서 막는다).
+        nxt = re.match(r"\s*([A-Za-z]+)", after)
+        before = text[:m.start()].split()[-1:] if text[:m.start()].split() else []
+        if nxt and (not before or before[0].lower() not in _DET):
+            part = nxt.group(1).lower()
+            takers = _ADVERBIAL.get(part)
+            if takers is not None and not (_swap_bases(w) & takers):
+                bad.append(f"밑줄 '{w} {part}'는 영어 표현이 되지 않습니다 — 원래 "
+                           f"구동사에서 낱말만 갈아 끼워 '{part}'가 남았는지 "
+                           "확인하세요.")
+    return bad
+
+
+def check_marks_swaps(sentences: list[str], marks) -> list[str]:
+    """밑줄 목록 전체에 check_swap_breaks 를 건다.
+
+    marks 는 sent_no(1-based)·word·shown 을 가진 객체들(WordMark).
+    """
+    bad: list[str] = []
+    for m in marks or []:
+        i = int(getattr(m, "sent_no", 0)) - 1
+        if 0 <= i < len(sentences):
+            bad += check_swap_breaks(sentences[i], getattr(m, "word", ""),
+                                     getattr(m, "shown", ""))
+    return bad
+
+
+def check_tokens_shuffled(tokens: list[str], answer: str) -> list[str]:
+    """어순 배열 <보기> 가 정답 순서 그대로 실려 있지 않은지 본다.
+
+    그대로면 학생은 배열이 아니라 베껴 쓰기를 한다(실제 출력물 16번).
+    """
+    toks = [str(t).strip() for t in (tokens or []) if str(t).strip()]
+    words = (answer or "").split()
+    if len(toks) < 4 or len(toks) != len(words):
+        return []
+
+    def _b(w: str) -> str:
+        return re.sub(r"^[^\w]+|[^\w]+$", "", w).lower()
+
+    if [_b(t) for t in toks] == [_b(w) for w in words]:
+        return ["<보기> 낱말이 정답 문장 순서 그대로입니다 — 섞이지 않아 "
+                "학생이 베껴 쓰기만 하면 됩니다."]
     return []

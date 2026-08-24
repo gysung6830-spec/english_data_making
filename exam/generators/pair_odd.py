@@ -12,13 +12,15 @@
 """
 from __future__ import annotations
 
+import re
 from itertools import combinations
 
-from .. import answer_spread, build2, review
+from .. import answer_spread, build2, review, shape
 from ..format2 import cletter
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, PairOddOut
 from .base import context
+from .vocab import _mark_words
 
 _PROMPT = """아래 '정본 지문'으로 '어법·어휘 짝짓기' 문제를 만드세요. 발문은
 '밑줄 친 부분 중, 어법상 또는 문맥상 낱말의 쓰임이 적절하지 않은 것끼리 짝지어진 것은?'입니다.
@@ -71,6 +73,14 @@ def build_pairs(a: int, b: int, seed: int = 0) -> tuple[list[str], int]:
     return texts, 1                     # 정답은 일단 1번(뒤에서 위치를 분산한다)
 
 
+_MARKER = re.compile(r"^\s*[ⓐ-ⓔ①-⑧]\s*[:.)]?\s*")
+
+
+def _strip_marker(text: str) -> str:
+    """사유 앞에 모델이 스스로 붙인 밑줄 기호를 뗀다(조판이 다시 붙인다)."""
+    return _MARKER.sub("", (text or "").strip())
+
+
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "", avoid: set[str] | None = None,
@@ -81,10 +91,14 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
 
     def _chk(out: PairOddOut) -> None:
         out.check()
-        dup = sorted({m.word.lower() for m in out.marks} & taken)
+        dup = sorted(_mark_words(out.marks) & taken)
         if dup:
             raise ValueError(f"다른 밑줄 문항과 낱말이 겹칩니다: {', '.join(dup)}. "
                              "겹치지 않는 낱말로 다시 고르세요.")
+        # 어휘 자리를 갈아 끼우다 구동사·전치사가 깨지면 어법 오류처럼 보인다.
+        broke = shape.check_marks_swaps(analysis.sentences, out.marks)
+        if broke:
+            raise ValueError("낱말을 바꾸자 문장이 깨졌습니다 — " + " ".join(broke))
 
     avoid_note = ""
     if taken:
@@ -107,14 +121,17 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     if answer_pos:      # 정답 위치 분산(짝 선지 재배열 — 정오 불변)
         choices, answer_no, _ = answer_spread.place_answer(choices, answer_no, answer_pos)
 
-    lines = [f"{cletter(r.no)} {r.text}" for r in sorted(out.reasons, key=lambda r: r.no)]
+    # 밑줄별 사유는 '번호 → 글' 로 넘긴다. 밑줄 기호는 조판이 붙이므로(그리고 읽는
+    # 순서로 다시 매겨지므로) 여기서 붙이면 안 된다. 모델이 사유 앞에 스스로 'ⓐ' 를
+    # 달아 오면 마커가 겹쳐 찍힌다(실제 출력물 7번 'ⓐ ⓐ contain:').
+    reasons = {r.no: _strip_marker(r.text) for r in out.reasons}
     head = (out.reason or "").strip()
-    reason = " / ".join(([head] if head else []) + lines)
 
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     flags: list[str] = []
-    q, a = build2.make_A(analysis.sentences, marks, answer_no, reason, choices, flags=flags)
+    q, a = build2.make_A(analysis.sentences, marks, answer_no, head, choices,
+                         flags=flags, reasons=reasons)
     flags = flags + review.type_fit_flags(getattr(analysis, "passage_type", "prose"), "A")
     if with_words:
-        return q, a, flags, {m.word.lower() for m in out.marks}
+        return q, a, flags, _mark_words(out.marks)
     return q, a, flags

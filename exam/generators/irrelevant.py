@@ -4,8 +4,9 @@
 풀 수 있지만, 이 유형은 '원문에 없던 문장'을 새로 만들어 넣으므로 암기가 통하지 않는다.
 글의 논리 흐름을 실제로 이해했는지가 그대로 드러난다.
 
-구조: 도입문(번호 없음) + 연속 5문장(①~⑤). 그중 한 자리의 원문 문장을 버리고,
-같은 소재를 다루지만 논지 전개에서 벗어나는 새 문장으로 갈아 끼운다.
+구조: 도입문(번호 없음) + ①~⑤. 번호가 붙는 자리는 지문 뒤쪽 원문 문장들이고,
+그 사이 한 곳에 '같은 소재를 다루지만 논지 전개에서 벗어나는 새 문장'을 끼워 넣는다.
+원문 문장은 하나도 버리지 않는다.
 """
 from __future__ import annotations
 
@@ -21,12 +22,12 @@ _PROMPT = """아래 '정본 지문'으로 '무관한 문장' 문제를 만드세
 흐름과 관계 없는 문장은?'입니다.
 
 [문제 구조]
-- 도입 문장(들)은 번호 없이 그대로 두고, 그 다음 '연속된 5개 문장'에 ①~⑤를 붙입니다.
-- start_no: ①이 붙을 원문 문장 번호(1-based). 도입문이 최소 1개 있어야 하므로 2 이상이며,
-  start_no + 4 가 마지막 문장 번호를 넘지 않아야 합니다.
-  가급적 글의 주제가 드러난 도입부 뒤에서 시작하세요.
-- answer_no: 1~5 중 '무관한 문장'을 끼워 넣을 자리. 그 자리의 원문 문장은 버려집니다.
+- 도입 문장(들)은 번호 없이 그대로 두고, 그 뒤 문장들에 ①~⑤를 붙입니다.
+- 원문 문장은 하나도 버리지 않습니다. 번호가 붙는 자리는 '원문 문장들 + 새로 쓴 문장
+  하나'이며, 새 문장은 원문 문장들 사이에 끼워 넣습니다.
+- answer_no: 새로 쓴 문장이 놓일 자리(몇 번째 번호가 될지).
 - sentence: 그 자리에 넣을, 새로 쓴 영어 문장 1개(정답).
+- start_no 는 쓰지 않습니다. 2 로 두세요.
 
 [무관한 문장을 쓰는 법] — 이 유형의 핵심입니다. 두 가지를 '동시에' 지켜야 합니다.
 
@@ -50,14 +51,14 @@ _PROMPT = """아래 '정본 지문'으로 '무관한 문장' 문제를 만드세
     오류가 됩니다. 문장 하나만 떼어 읽으면 자연스러워야 하고, 논리를 따져야만 어긋난 것이
     드러나야 합니다.
 
-[나머지 4문장] 원문 그대로 쓰이므로 당연히 흐름에 맞습니다.
+[나머지 번호] 원문 문장이 그대로 쓰이므로 당연히 흐름에 맞습니다.
 
 - reason: 왜 그 문장이 전체 흐름에서 벗어나는지 한국어로 설명. 글의 논지를 한 줄로 짚고,
   그 문장이 그 논지에 어떻게 기여하지 않는지 콕 집어 쓰세요.
-- wrong_reasons: 나머지 4개 번호 각각이 앞뒤와 어떻게 이어지는지(지시어·연결사·논리 관계)
-  한국어로 설명.
+- wrong_reasons: 정답을 뺀 나머지 번호 각각이 앞뒤와 어떻게 이어지는지(지시어·연결사·
+  논리 관계) 한국어로 설명.
 
-[확실성] 무관한 문장은 하나뿐이어야 합니다. 나머지 4개는 원문이므로 흐름에 맞고, 새로 쓴
+[확실성] 무관한 문장은 하나뿐이어야 합니다. 나머지는 원문이므로 흐름에 맞고, 새로 쓴
 문장만 '확실히' 논지에서 벗어나야 합니다. 애매하면 안 됩니다.
 
 {ctx}
@@ -113,24 +114,25 @@ def check_irrelevant_sentence(sentence: str, sentences: list[str]) -> list[str]:
     return bad
 
 
-def _extra(out: IrrelevantOut) -> None:
+def _extra(out: IrrelevantOut, k: int = 5) -> None:
     if not (out.sentence or "").strip():
         raise ValueError("무관한 문장(sentence)이 비어 있습니다.")
-    if len(out.wrong_reasons) != 4:
-        raise ValueError("나머지 4개 문장의 근거(wrong_reasons)가 4개여야 합니다.")
+    if len(out.wrong_reasons) != k - 1:
+        raise ValueError(f"정답을 뺀 나머지 {k - 1}개 번호의 근거(wrong_reasons)가 "
+                         f"{k - 1}개여야 합니다(현재 {len(out.wrong_reasons)}개).")
 
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "") -> tuple[str, str, list[str]]:
     n = len(analysis.sentences)
-    k = B.irrelevant_marks(n)        # 도입문 1개를 빼고 남는 자리(최대 5)
+    k = B.irrelevant_marks(n)        # 번호 자리 수(원문 k-1개 + 새 문장 1개)
     if k < B.MIN_IRRELEVANT_MARKS:
         raise ValueError(f"무관한 문장 문제에는 문장이 "
-                         f"{B.MIN_IRRELEVANT_MARKS + 1}개 이상 필요합니다(현재 {n}개).")
+                         f"{B.MIN_IRRELEVANT_MARKS}개 이상 필요합니다(현재 {n}개).")
 
     def _check(out: IrrelevantOut) -> None:
-        _extra(out)
+        _extra(out, k)
         bad = check_irrelevant_sentence(out.sentence, analysis.sentences)
         if bad:
             raise ValueError("끼워 넣을 문장이 조건에 맞지 않습니다 — " + " ".join(bad))
@@ -141,25 +143,20 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         prompt=((variant_hint + "\n" if variant_hint else "")
                 + _PROMPT.format(ctx=ctx)
                 + f"\n[문장 수] 이 지문은 {n}개 문장입니다. 번호는 ①~{'①②③④⑤'[k - 1]} "
-                  f"{k}개를 붙입니다. start_no 는 2 이상 {n - k + 1} 이하, "
-                  f"answer_no 는 1 이상 {k} 이하여야 합니다."),
+                  f"{k}개를 붙이며, 그중 {k - 1}개는 지문의 마지막 {k - 1}개 문장"
+                  f"(즉 {n - k + 2}~{n}번 문장)입니다. answer_no 는 1 이상 {k} 이하, "
+                  f"wrong_reasons 는 {k - 1}개여야 합니다."),
         cache_prefix=ctx,
         model_cls=IrrelevantOut,
         max_tokens=2500,
         max_retries=max_retries,
         extra_validate=_check,
     )
-    # 범위를 벗어나면 조판 가능한 자리로 당겨 붙인다(문항을 버리지 않는다).
-    start_no = min(max(out.start_no, 2), n - k + 1)
     flags: list[str] = []
-    if start_no != out.start_no:
-        flags.append(review.FIX_INSERT)
-    wrong = {w.no: w.text for w in out.wrong_reasons if w.no != out.answer_no}
     answer_no = min(max(out.answer_no, 1), k)     # 자리 수가 줄면 정답 번호도 맞춘다
     if answer_no != out.answer_no:
-        wrong = {w.no: w.text for w in out.wrong_reasons if w.no != answer_no}
-        if review.FIX_INSERT not in flags:
-            flags.append(review.FIX_INSERT)
-    q, a = B.make_irrelevant(analysis.sentences, start_no, answer_no,
+        flags.append(review.FIX_INSERT)
+    wrong = {w.no: w.text for w in out.wrong_reasons if w.no != answer_no}
+    q, a = B.make_irrelevant(analysis.sentences, 0, answer_no,
                              out.sentence, out.reason, wrong)
     return q, a, flags + review.weak_distractors(out.wrong_reasons)

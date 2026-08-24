@@ -2298,12 +2298,22 @@ def test_output_defect_regressions() -> None:
     assert kept == [(0, "Many", "Numerous")], kept
 
     # 10) 짧은 지문에서도 무관한 문장을 낸다(①~④). 삽입은 자리가 모자라면 알린다.
-    assert _B.irrelevant_marks(5) == 4 and _B.irrelevant_marks(6) == 5
+    assert _B.irrelevant_marks(4) == 4 and _B.irrelevant_marks(5) == 5
     five = ["A one here now.", "B two here now.", "C three here now.",
             "D four here now.", "E five here now."]
     q_ir, _ = _B.make_irrelevant(five, 2, 3, "An unrelated sentence about costs.",
-                                 "이유", {1: "a", 2: "b", 4: "d"})
-    assert re.findall(r"[①-⑤]", q_ir) == ["①", "②", "③", "④"], q_ir
+                                 "이유", {1: "a", 2: "b", 4: "d", 5: "e"})
+    assert re.findall(r"[①-⑤]", q_ir) == ["①", "②", "③", "④", "⑤"], q_ir
+    #    원문 문장은 하나도 사라지지 않는다 — 새 문장을 '끼워 넣는다'
+    plain = re.sub(r"<[^>]+>", "", q_ir)
+    for s in five:
+        assert s in plain, (s, plain)
+    assert "An unrelated sentence about costs." in plain
+    four = five[:4]
+    q4, _ = _B.make_irrelevant(four, 2, 2, "Alien.", "이유", {1: "a", 3: "c", 4: "d"})
+    p4 = re.sub(r"<[^>]+>", "", q4)
+    assert re.findall(r"[①-⑤]", q4) == ["①", "②", "③", "④"], q4
+    assert all(s in p4 for s in four), p4
     fl: list[str] = []
     _B.make_insert(five, 2, "근거", flags=fl)
     assert any("선지가 3개뿐" in f for f in fl), fl
@@ -2344,8 +2354,68 @@ def test_output_defect_regressions() -> None:
         raise AssertionError("정답 번호가 오답 목록에 있는데 통과했습니다.")
     except ValueError:
         pass
+    # ---- 네 번째 출력물 검증(올림포스 영어독해 기본1)에서 나온 것들 ----------
+    # 13) 낱말 하나를 갈아 끼우다 구동사·전치사·타동사 목적어가 깨졌다
+    assert shape.check_swap_breaks(
+        "To help them calm down, and to see reason, the best strategy is a hug.",
+        "calm", "upset")
+    assert shape.check_swap_breaks(
+        "give them the ability to listen to what their parents are saying.",
+        "listen", "hear")
+    assert shape.check_swap_breaks(
+        "A single bystander would usually respond, just as we hope we would.",
+        "respond", "ignore")
+    #     멀쩡한 유의어 치환은 하나도 걸리면 안 된다(오탐이 나면 문항이 죽는다)
+    for sent, w, sh in [
+        ("A single bystander would usually respond, just as we hope.", "respond", "react"),
+        ("the child is not able to contain their mood.", "contain", "control"),
+        ("due to frustration, sadness or any other intense emotion", "intense", "strong"),
+        ("the situation constrains their behavior more than we realize.",
+         "realize", "recognize"),
+        ("defects in their character that prevent them from helping.", "prevent", "stop"),
+        ("bystanders in emergency situations are acting normally", "acting", "behaving"),
+        ("the best strategy is a hug", "best", "most effective"),
+        ("responsibility apparently diffuses among them", "diffuses", "spreads"),
+        ("People often ignore the warning signs.", "ignore", "overlook"),
+    ]:
+        assert shape.check_swap_breaks(sent, w, sh) == [], (w, sh)
+
+    # 14) 어순 배열 <보기> 는 코드가 섞는다(모델이 정답 순서 그대로 돌려준 적이 있다)
+    from exam import build2 as _B2
+    ans14 = ("A spoken word will form a bridge between the two worlds, allowing "
+             "the child's rational brain to help soothe their emotions.")
+    toks14 = ans14.split()
+    assert shape.check_tokens_shuffled(toks14, ans14)        # 그대로면 잡는다
+    mixed = _B2._shuffle_tokens(toks14, ans14)
+    assert sorted(mixed) == sorted(toks14) and mixed != toks14
+    assert shape.check_tokens_shuffled(mixed, ans14) == []
+    assert _B2._shuffle_tokens(toks14, ans14) == mixed       # 같은 지문 → 같은 결과
+
+    # 15) 짝짓기 해설 — 밑줄 기호가 겹쳐 찍히지 않고, 한 줄씩 나뉜다
+    from exam.generators.pair_odd import _strip_marker
+    assert _strip_marker("ⓐ contain: '억누르다'의 뜻이다.") == "contain: '억누르다'의 뜻이다."
+    five15 = ["Alpha one runs here.", "Beta two walks here.", "Gamma three sits here.",
+              "Delta four stands here.", "Epsilon five waits here."]
+    marks15 = [(0, "runs", "runs"), (1, "walks", "walks"), (2, "sits", "sits"),
+               (3, "stands", "stands"), (4, "waits", "waits")]
+    _q15, a15 = _B2.make_A(five15, marks15, 2, "총평",
+                           ["ⓐ-ⓑ", "ⓒ-ⓓ", "ⓐ-ⓒ", "ⓑ-ⓓ", "ⓓ-ⓔ"],
+                           reasons={i: f"사유 {i}" for i in range(1, 6)})
+    assert a15.count('class="wrong"') == 5, a15
+    assert "ⓐ ⓐ" not in a15 and "사유 1" in a15
+
+    # 16) 밑줄로 '쓴 낱말'에는 보여 준 낱말도 들어간다(짝짓기 ⓒ emotional ↔ 어휘 ①)
+    from exam.generators.vocab import _mark_words
+
+    class _M:
+        def __init__(self, w, s):
+            self.word, self.shown = w, s
+    assert "emotional" in _mark_words([_M("rational", "emotional")])
+    assert {"never", "delete"} <= _mark_words([_M("never delete", "never delete")])
+
     print("✓ 실제 출력물 결함 재발 방지(이니셜·인용문·부정어 밑줄·선지 번호·해설 위생·"
-          "지문 오염·보기 토큰·대문자·짧은 지문·제목 오답) 통과")
+          "지문 오염·보기 토큰·대문자·짧은 지문·제목 오답·낱말 치환 파손·보기 섞기·"
+          "짝짓기 해설·밑줄 겹침) 통과")
 
 
 def test_output_checker() -> None:
@@ -2378,6 +2448,33 @@ def test_output_checker() -> None:
     assert "구두점" in got.get("D", ""), got
     assert "문장 번호로 지칭" in got.get("topic", ""), got
     assert "출제 과정 메모" in got.get("title", ""), got
+
+    # 네 번째 출력물에서 나온 것들도 검산기가 잡아야 한다
+    bad2 = copy.deepcopy(clean)
+    #  (가) <보기> 가 정답 문장 순서 그대로 → 베껴 쓰기 문항
+    d_ans = re.sub(r"<[^>]+>", "", re.search(
+        r'<span class="answer-key">.*?</span>(.*?)</p>', bad2.a["D"], re.S).group(1)).strip()
+    bad2.q["D"] = re.sub(r'<div class="boki">.*?</div>',
+                         '<div class="boki">&lt;보기&gt; '
+                         + " / ".join(d_ans.split()) + "</div>",
+                         bad2.q["D"], count=1, flags=re.S)
+    #  (나) 해설이 오답 분류 이름을 문장으로 쓴다
+    bad2.a["topic"] = bad2.a["topic"].replace("</p>", " 방향 반전 축이다.</p>", 1)
+    #  (다) '빼낼 문장은 …' 도 출제 과정 메모다
+    bad2.a["insert"] = bad2.a["insert"].replace("</p>", " 빼낼 문장은 이것이다.</p>", 1)
+    rows2, _ = V.check_passage(bad2)
+    got2 = {r["type"]: " ".join(r["bad"]) for r in rows2 if r["bad"]}
+    assert "순서 그대로" in got2.get("D", ""), got2
+    assert "오답 분류 이름" in got2.get("topic", ""), got2
+    assert "출제 과정 메모" in got2.get("insert", ""), got2
+
+    #  (라) 검토 메모는 같은 지적을 두 번 싣지 않는다(접두어·말끝만 다른 경우)
+    dup = copy.deepcopy(clean)
+    dup.flag("insert", ["자동검사: 해설에 출제 과정 메모가 있습니다: 빼낸 문장"])
+    dup.a["insert"] = dup.a["insert"].replace("</p>", " 빼낸 문장은 이것이다.</p>", 1)
+    V.apply_to_flags(dup)
+    memos = [m for m in dup.flags["insert"] if "출제 과정 메모" in m]
+    assert len(memos) == 1, memos
 
     # 기계 검사 사유는 검수 승격의 방아쇠가 된다(값싼 모델의 흠을 상위 모델이 고친다)
     from exam import shape, tiering

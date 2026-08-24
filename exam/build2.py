@@ -18,8 +18,9 @@ from . import format2 as F2
 
 
 # A · 어법·어휘 짝짓기 -------------------------------------------------------
-def make_A(sentences, marks, answer_no, reason, choices, flags=None):
-    """marks: [(문장idx, 원본단어, 표시단어)] 5개(ⓐ~ⓔ). choices: 5개 짝 문자열."""
+def make_A(sentences, marks, answer_no, reason, choices, flags=None, reasons=None):
+    """marks: [(문장idx, 원본단어, 표시단어)] 5개(ⓐ~ⓔ). choices: 5개 짝 문자열.
+    reasons: {밑줄번호: 사유} — 밑줄을 읽는 순서로 다시 매길 때 함께 옮긴다."""
     if len(marks) != 5:
         raise ValueError("A 유형 밑줄은 5개여야 합니다.")
     # 밑줄 문자 ⓐ~ⓔ 를 '읽는 순서'로 매기고, 선지 문자열의 문자도 같은 순서로 재표기
@@ -29,11 +30,17 @@ def make_A(sentences, marks, answer_no, reason, choices, flags=None):
         trans = {ord(F2.CIRC_LETTER[o - 1]): F2.CIRC_LETTER[n - 1]
                  for o, n in remap.items() if o - 1 < len(F2.CIRC_LETTER)}
         choices = [c.translate(trans) for c in choices]
+        # 사유도 같이 옮기지 않으면 'ⓑ told' 설명이 ⓒ 자리에 붙는다.
+        # 사유 '안'에서 부르는 기호(ⓒ 는 rational 이어야 …)도 함께 옮긴다.
+        if reasons:
+            reasons = {remap.get(o, o): t.translate(trans) for o, t in reasons.items()}
+        if reason:
+            reason = reason.translate(trans)
     marks = B1.expand_marks(sentences, marks)   # 'to confirm' 류 낱말 중복 방지
     B1.flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     lettered = [(idx, word, F2.uletter(i, shown)) for i, (idx, word, shown) in enumerate(marks, 1)]
     marked = B1._passage_html(sentences, lettered)
-    return F2.A_q(marked, choices), F2.A_a(answer_no, reason)
+    return F2.A_q(marked, choices), F2.A_a(answer_no, reason, reasons)
 
 
 # B · 함의추론 --------------------------------------------------------------
@@ -82,6 +89,57 @@ def locate_phrase(phrase: str, sentences: list[str]):
     return None, None
 
 
+def _shuffle_tokens(tokens: list[str], answer: str) -> list[str]:
+    """<보기> 낱말을 '정답 순서가 아니게' 섞는다(지문마다 같은 결과 — 재현 가능).
+
+    모델에게 "뒤섞어 주세요"라고만 하면 그대로 원래 순서로 돌려주는 일이 있다
+    (실제 출력물 16번: 서른여섯 낱말이 정답 문장 순서 그대로 실렸다 — 학생이
+    베껴 쓰기만 하면 되는 문항이 된다). 섞는 일은 모델에게 맡기지 않는다.
+
+    무작위로 한 번 섞으면 '앞뒤가 원문 그대로 붙어 있는 토막'이 길게 남을 수 있다.
+    여러 번 섞어 그 토막이 가장 짧은 것을 고른다.
+    """
+    import hashlib
+    import random
+
+    toks = list(tokens)
+    if len(toks) < 3:
+        return toks
+    # 각 토큰이 정답 문장에서 몇 번째 낱말인지(어형이 달라진 토큰은 -1)
+    words = [F2._bareword(w) for w in (answer or "").split()]
+    taken: set[int] = set()
+    pos: list[int] = []
+    for t in toks:
+        b = F2._bareword(t)
+        j = next((i for i, w in enumerate(words) if w == b and i not in taken), -1)
+        if j >= 0:
+            taken.add(j)
+        pos.append(j)
+
+    def runs(order: list[int]) -> int:
+        """이웃한 두 자리가 정답에서도 이웃하고 순서까지 같은 횟수."""
+        return sum(1 for i in range(len(order) - 1)
+                   if order[i] >= 0 and order[i + 1] == order[i] + 1)
+
+    rng = random.Random(int(hashlib.sha1((answer or "").encode()).hexdigest()[:8], 16))
+    idx = list(range(len(toks)))
+    best, best_score = None, None
+    for _ in range(32):
+        cand = list(idx)
+        rng.shuffle(cand)
+        order = [pos[i] for i in cand]
+        if order == sorted(o for o in order if o >= 0) and -1 not in order:
+            continue                    # 정답 순서 그대로 — 버린다
+        sc = runs(order)
+        if best_score is None or sc < best_score:
+            best, best_score = cand, sc
+            if sc == 0:
+                break
+    if best is None:                    # 낱말이 너무 적어 어떻게 섞어도 같을 때
+        return list(reversed(toks))
+    return [toks[i] for i in best]
+
+
 def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장).
     정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다.
@@ -108,7 +166,8 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     ans_words = {F2._bareword(w) for w in answer_sentence.split()}
     cues = list(cues) + [tk for tk in tokens
                          if F2._bareword(tk) and F2._bareword(tk) not in ans_words]
-    return F2.D_q(tokens, cues), F2.D_a(snapped, reason)
+    # 섞는 일은 코드가 한다(모델이 정답 순서 그대로 돌려주는 일이 있다).
+    return F2.D_q(_shuffle_tokens(tokens, snapped), cues), F2.D_a(snapped, reason)
 
 
 # E · 요약문 빈칸(객관식) ---------------------------------------------------

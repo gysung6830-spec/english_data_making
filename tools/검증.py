@@ -46,7 +46,14 @@ def report(passages, only_bad: bool = False) -> int:
                   f"정답 {(key or '-')[:44]}")
             for m in issues:
                 print(f"        · {m}")
+            # 검토메모가 방금 찾은 지적과 같은 말이면 다시 찍지 않는다
+            # (승격 표시·말끝만 다른 같은 지적이 두 줄로 실렸다).
+            seen = {audit._memo_key(m) for m in issues}
             for f in it["flags"]:
+                k = audit._memo_key(f)
+                if k in seen:
+                    continue
+                seen.add(k)
                 print(f"        (검토메모) {f}")
     print(f"\n{'─' * 72}")
     print(f"총 {total}문항 · 지적 {bad_items}문항 · 이상 없음 {total - bad_items}문항")

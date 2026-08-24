@@ -281,9 +281,9 @@ def test_stress_passages() -> None:
     bad = run(verbose=False)
     assert bad == 0, f"극단 지문에서 {bad}건이 걸렸습니다 — python tests/test_stress.py 로 확인하세요."
 
-    # 짧은 지문에서도 무관한 문장을 낸다(①~④). 삽입은 자리가 모자라면 알린다.
+    # 짧은 지문에서도 무관한 문장을 낸다(①~⑤). 삽입은 자리가 모자라면 알린다.
     short = split_sentences(STRESS["짧은 지문(5문장)"])
-    assert B.irrelevant_marks(len(short)) == 4, len(short)
+    assert B.irrelevant_marks(len(short)) == 5, len(short)
     p, _ = build_passage("짧은", STRESS["짧은 지문(5문장)"])
     assert any("선지가" in f for f in p.flags.get(INSERT, [])), p.flags
 

@@ -128,6 +128,10 @@ def _check_item(it: dict) -> list[str]:
             bad.append(f"선지가 {n_pos}개뿐입니다 — 지문이 짧아 자리가 부족합니다"
                        "(찍어도 맞을 확률이 높습니다).")
 
+    # 밑줄 낱말이 문장을 깨뜨리는가(목적어 없는 타동사)
+    if it["marks"] and it["body"]:
+        bad += shape.check_marks_in_passage(it["body"], it["marks"])
+
     # 지문 오염
     for name, text in (("지문", it["body"]), ("주어진 문장", it["given"])):
         if text:
@@ -139,6 +143,7 @@ def _check_item(it: dict) -> list[str]:
         ans = it["key_tail"] or it["key"]
         if ans:
             bad += shape.check_tokens_rebuild(toks, ans, it["cues"])
+            bad += shape.check_tokens_shuffled(toks, ans)
 
     # 해설 위생
     bad += [re.sub(r"^자동검사:\s*", "", m) for m in shape.check_explanation(it["explain"])]
@@ -192,6 +197,24 @@ def _check_cross(items: dict[str, dict]) -> dict[str, list[str]]:
                         "겹칩니다.")
             seen.setdefault(k, t)
 
+    # 1-b) 어휘 문항의 '정답 밑줄'이 같은 문장에 몰렸는가
+    #      한 문장이 세 문항에서 잇달아 정답 자리가 되면 문제집이 되풀이처럼 읽힌다
+    #      (실제 출력물: 24·25·26번의 정답이 모두 여덟 번째 문장에 있었다).
+    vocab_t = [t for t in ("vocab_2", "vocab", "vocab_3") if t in items]
+    where: dict[int, list[str]] = {}
+    for t in vocab_t:
+        sent = _answer_sentence(items[t])
+        if sent:
+            where.setdefault(sent, []).append(t)
+    for _sent, ts in where.items():
+        # 셋 이상이 겹치거나, 어휘 문항이 '모두' 한 문장에 몰렸을 때만 알린다.
+        # 짧은 지문에서는 둘이 겹치는 일이 흔해, 그것까지 알리면 메모가 시끄러워진다.
+        if len(ts) >= 3 or (len(ts) >= 2 and len(ts) == len(vocab_t)):
+            names = ", ".join(f"{items[t]['no']}번" for t in ts)
+            for t in ts:
+                _add(t, f"어휘 문항의 정답 밑줄이 같은 문장에 몰려 있습니다({names}) — "
+                        f"학생이 같은 자리를 {len(ts)}번 읽습니다.")
+
     # 2) 빈칸추론과 요약문의 정답 핵심어
     if "F" in items and "E" in items:
         fa = _choice_of(items["F"])
@@ -210,6 +233,26 @@ def _check_cross(items: dict[str, dict]) -> dict[str, list[str]]:
             _add("insert", msg)
             _add("D", msg)
     return out
+
+
+def _answer_sentence(it: dict) -> int:
+    """정답 밑줄이 지문의 '몇 번째 문장'에 있는지(1-based, 못 찾으면 0).
+
+    문장의 글로 맞대면 안 된다 — 어휘 문항끼리는 바로 그 낱말이 서로 다르므로
+    같은 문장인데도 다른 글이 된다(24·25·26번의 respond/ignore/rarely/never).
+    자리(번째)로 맞대야 같은 문장임이 드러난다.
+    """
+    n = answer_no(it["key"])
+    marks = it["marks"]
+    if not (1 <= n <= len(marks)):
+        return 0
+    word = marks[n - 1][1]
+    if not word:
+        return 0
+    for i, sent in enumerate(re.split(r"(?<=[.!?])\s+", it["body"]), 1):
+        if re.search(r"(?<![\w])" + re.escape(word) + r"(?![\w])", sent):
+            return i
+    return 0
 
 
 def _choice_of(it: dict) -> str:
@@ -263,6 +306,19 @@ def check_passage(passage, start_no: int = 1) -> tuple[list[dict], list[str]]:
     return rows, whole
 
 
+_MEMO_HEAD = re.compile(r"^(?:자동검사|자동검증):\s*")
+
+
+def _memo_key(msg: str) -> str:
+    """같은 지적인지 가리는 열쇠 — 승격 표시와 줄표 뒤 설명을 떼고 본다.
+
+    생성 때 붙인 사유와 검산이 다시 찾아낸 사유는 말끝만 다를 뿐 같은 지적인
+    경우가 많다(실제 출력물: '선지가 3개뿐입니다 —' 가 검토메모에 두 번 실렸다).
+    """
+    m = _MEMO_HEAD.sub("", (msg or "").strip())
+    return re.split(r"\s*—\s*|\s*\(", m)[0].strip()
+
+
 def apply_to_flags(passage, start_no: int = 1) -> int:
     """검산 결과를 Passage.flags 에 합친다(검토 메모에 그대로 실린다).
 
@@ -272,7 +328,14 @@ def apply_to_flags(passage, start_no: int = 1) -> int:
     rows, whole = check_passage(passage, start_no)
     n = 0
     for it in rows:
-        fresh = [m for m in it["bad"] if m not in passage.flags.get(it["type"], [])]
+        have = {_memo_key(m) for m in passage.flags.get(it["type"], [])}
+        fresh = []
+        for m in it["bad"]:
+            k = _memo_key(m)
+            if k in have:
+                continue
+            have.add(k)
+            fresh.append(m)
         if fresh:
             passage.flag(it["type"], fresh)
             n += len(fresh)

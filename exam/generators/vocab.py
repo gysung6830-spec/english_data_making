@@ -78,6 +78,23 @@ _PROMPT_NEGATION = """아래 '정본 지문'으로 '어휘(문맥상 부적절)'
 _PROMPTS = {SYNONYM: _PROMPT_SYNONYM, NEGATION: _PROMPT_NEGATION, ORIGINAL: _PROMPT_ORIGINAL}
 
 
+def _mark_words(marks) -> set[str]:
+    """이 문항이 '밑줄로 쓴 낱말' 전체 — 원본 낱말과 표시 낱말을 모두 담는다.
+
+    원본만 담으면 구멍이 난다. 짝짓기가 rational 을 emotional 로 바꿔 보여 주면
+    'emotional' 은 어디에도 기록되지 않고, 다음 어휘 문항이 그 낱말에 다시 밑줄을
+    긋는다(실제 출력물: 7번 ⓒ emotional 과 10번 ① emotional).
+    """
+    out: set[str] = set()
+    for m in marks or []:
+        for s in (getattr(m, "word", ""), getattr(m, "shown", "")):
+            s = (s or "").strip().lower()
+            if s:
+                out.add(s)
+                out.update(w for w in s.split() if len(w) > 2)
+    return out
+
+
 def _avoid_clause(taken: set[str]) -> str:
     """이미 다른 어휘 문제가 밑줄로 쓴 낱말을 피하라는 지시문."""
     if not taken:
@@ -88,18 +105,42 @@ def _avoid_clause(taken: set[str]) -> str:
             f"낱말을 고르세요(품사가 달라도 됩니다).\n피할 낱말: {words}\n")
 
 
+def _sent_clause(taken: set[int]) -> str:
+    """이미 다른 어휘 문제가 '정답 자리'로 쓴 문장을 피하라는 지시문(권고).
+
+    셋이 같은 문장을 정답으로 삼으면 학생이 같은 자리를 세 번 읽는다(실제 출력물:
+    24·25·26번의 정답이 모두 여덟 번째 문장에 있었다). 다만 짧은 지문에서는 피할
+    자리가 없을 수 있으므로 '권고'로만 두고, 어기더라도 문항을 버리지 않는다.
+    """
+    if not taken:
+        return ""
+    nos = ", ".join(f"{n}번" for n in sorted(taken))
+    return ("\n[정답 자리 분산] 같은 지문의 다른 어휘 문제가 이미 아래 문장을 '정답'으로 "
+            f"썼습니다. 가급적 다른 문장에서 정답을 고르세요.\n이미 쓴 문장: {nos}\n")
+
+
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, method: str = SYNONYM,
-             avoid: set[str] | None = None) -> tuple[str, str, list[str]]:
-    """avoid: 다른 어휘 문제가 이미 밑줄로 쓴 낱말(소문자). 겹치면 재요청한다."""
+             avoid: set[str] | None = None,
+             avoid_sents: set[int] | None = None,
+             report: dict | None = None) -> tuple[str, str, list[str]]:
+    """avoid: 다른 어휘 문제가 이미 밑줄로 쓴 낱말(소문자). 겹치면 재요청한다.
+    avoid_sents: 다른 어휘 문제가 이미 정답 자리로 쓴 문장 번호(권고).
+    report: 주면 {"answer_sent": 문장번호} 를 채워 준다(다음 문항의 avoid_sents 용)."""
     prompt = _PROMPTS.get(method, _PROMPT_SYNONYM)
     taken = {w.lower() for w in (avoid or set())}
 
     def _extra(o: VocabOut) -> None:
-        dup = sorted({m.word.lower() for m in o.marks} & taken)
+        dup = sorted(_mark_words(o.marks) & taken)
         if dup:
             raise ValueError(
                 f"다른 어휘 문제와 밑줄이 겹칩니다: {', '.join(dup)}. 겹치지 않는 낱말로 다시 고르세요.")
+        # 낱말 하나를 갈아 끼우다 구동사·전치사·타동사 목적어가 깨지면, 학생은 글을
+        # 읽지 않고 '덜컹거리는 자리'만 보고 답을 고른다(실제 출력물: 'upset down',
+        # 'hear to what', '목적어 없는 ignore,').
+        broke = shape.check_marks_swaps(analysis.sentences, o.marks)
+        if broke:
+            raise ValueError("낱말을 바꾸자 문장이 깨졌습니다 — " + " ".join(broke))
         if method == NEGATION:
             # 정답 근거(부정어)가 밑줄 '안'에 있어야 문항이 성립한다.
             bad = (shape.check_clean_sentence(o.override_text, "교체 문장")
@@ -109,13 +150,18 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
 
     out: VocabOut = client.structured(
         system=SYSTEM,
-        prompt=prompt.format(ctx=context(analysis)) + _avoid_clause(taken),
+        prompt=(prompt.format(ctx=context(analysis)) + _avoid_clause(taken)
+                + _sent_clause(set(avoid_sents or ()))),
         cache_prefix=context(analysis),
         model_cls=VocabOut,
         max_tokens=2500,
         max_retries=max_retries,
         extra_validate=_extra,
     )
+    if report is not None:
+        report["answer_sent"] = (out.override_no
+                                 or (out.marks[out.answer_no - 1].sent_no
+                                     if 1 <= out.answer_no <= len(out.marks) else 0))
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     overrides = None
     if out.override_no and out.override_text.strip():
@@ -123,7 +169,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     flags: list[str] = []
     q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
                         overrides=overrides, flags=flags)
-    return q, a, flags, {m.word.lower() for m in out.marks}
+    return q, a, flags, _mark_words(out.marks)
 
 
 def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
@@ -144,6 +190,7 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
     한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
     """
     used: set[str] = set(avoid or ())
+    used_sents: set[int] = set()
     out: dict[str, tuple[str, str, list[str]]] = {}
 
     for slot, make in (first or []):
@@ -159,15 +206,19 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
         out[slot] = (q, a, flags)
 
     for slot, method in methods.items():
+        report: dict = {}
         try:
             q, a, flags, words = generate(client, analysis, body,
                                           max_retries=max_retries, method=method,
-                                          avoid=used)
+                                          avoid=used, avoid_sents=used_sents,
+                                          report=report)
         except Exception as e:      # noqa: BLE001 — 슬롯 단위 격리
             if logger:
                 logger.warning("[%s] 어휘 생성 실패: %s", slot, e)
             continue
         used |= words
+        if report.get("answer_sent"):
+            used_sents.add(report["answer_sent"])
         if used_out is not None:
             used_out[slot] = set(words)
         out[slot] = (q, a, flags)

@@ -1,4 +1,4 @@
-"""② 문장 삽입 생성기 — 정본에서 문장 하나만 빼낸다."""
+"""② 문장 삽입 생성기 — 정본에서 문장 하나를 떼어 '주어진 문장'으로 올린다."""
 from __future__ import annotations
 
 from .. import build as B
@@ -8,12 +8,15 @@ from ..schemas import Analysis, InsertOut
 from .base import context
 
 _PROMPT = """아래 '정본 지문'으로 '문장 삽입' 문제를 만드세요.
-지문을 새로 쓰지 말고, 빼낼 문장 하나만 고르세요.
+지문을 새로 쓰지 말고, '주어진 문장'으로 올릴 문장 하나만 고르세요.
 
-- remove_no: '주어진 문장'으로 빼낼 문장 번호(1-based). 넣을 위치가 확정되는 문장,
+- remove_no: '주어진 문장'으로 올릴 문장 번호(1-based). 넣을 위치가 확정되는 문장,
   즉 however/therefore/this/such 등 연결사·지시어로 시작하거나 앞뒤와 같은 소재로
   묶이는 '내부' 문장을 고르세요(첫 문장·마지막 문장 제외).
 - reason: 지시어·연결 관계를 근거로 왜 그 위치인지 한국어로 설명.
+  학생이 읽는 글이므로 '주어진 문장은 …' 으로 시작하세요. '빼낸/빼낼 문장', '제거한
+  문장' 처럼 출제 과정을 드러내는 말은 쓰지 마세요 — 학생에게는 그 문장이 처음부터
+  '주어진 문장'입니다.
 
 {ctx}
 """
@@ -24,7 +27,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     def _chk(o: InsertOut) -> None:
         n = len(analysis.sentences)
         if not 2 <= o.remove_no <= n - 1:
-            raise ValueError(f"빼낼 문장은 첫 문장·마지막 문장이 될 수 없습니다"
+            raise ValueError(f"'주어진 문장'은 첫 문장·마지막 문장이 될 수 없습니다"
                              f"(1과 {n} 사이의 안쪽 문장에서 고르세요).")
         bad = shape.check_insert_cue(analysis.sentences[o.remove_no - 1])
         if bad:

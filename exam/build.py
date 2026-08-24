@@ -452,7 +452,7 @@ def make_title(sentences: list[str], choices: list[str], answer_no: int,
 
 
 # ---------------------------------------------------------------------------
-# 무관한 문장 — 도입문 뒤 연속 5문장에 ①~⑤, 그중 한 자리를 새 문장으로 교체
+# 무관한 문장 — 도입문 뒤 문장들에 ①~⑤, 그 사이에 새 문장 하나를 '끼워 넣는다'
 # ---------------------------------------------------------------------------
 MIN_IRRELEVANT_MARKS = 4     # 무관한 문장의 최소 선지 수(①~④)
 
@@ -460,36 +460,44 @@ MIN_IRRELEVANT_MARKS = 4     # 무관한 문장의 최소 선지 수(①~④)
 def irrelevant_marks(n_sentences: int) -> int:
     """지문 길이로 ①~⑤ 개수를 정한다(도입문 1개는 반드시 남긴다).
 
-    수능 형식은 다섯 개지만, 다섯 문장짜리 지문에서는 도입문을 빼면 넷뿐이다.
-    전에는 그런 지문에서 이 유형이 통째로 빠졌다(실제 출력물: 지문 2에 무관한
-    문장 누락). 네 개까지는 내신에서 흔히 쓰는 형식이라 넷으로 줄여 낸다.
+    번호가 붙는 자리는 '원문 문장 (k-1)개 + 새로 쓴 문장 1개' 로 채운다. 그래서
+    필요한 원문 문장은 도입문 1개 + (k-1)개다.
+
+    수능 형식은 다섯 개지만, 네 문장짜리 지문에서는 도입문을 빼면 넷뿐이다.
+    네 개까지는 내신에서 흔히 쓰는 형식이라 넷으로 줄여 낸다.
     """
-    return max(0, min(5, n_sentences - 1))
+    return max(0, min(5, n_sentences))
 
 
 def make_irrelevant(sentences: list[str], start_no: int, answer_no: int,
                     sentence: str, reason: str,
                     wrong: dict[int, str]) -> tuple[str, str]:
-    """start_no(1-based)부터 4~5문장에 ①~⑤를 달고, answer_no 자리를 sentence 로 교체.
+    """지문 뒤쪽 문장들에 ①~⑤를 달고, answer_no 자리에 sentence 를 '끼워 넣는다'.
 
-    도입문(start_no 앞 문장들)은 번호 없이 그대로 두어 글의 주제를 먼저 제시한다.
+    도입문(번호 앞 문장들)은 번호 없이 그대로 두어 글의 주제를 먼저 제시한다.
+
+    원문 문장은 하나도 버리지 않는다. 예전에는 그 자리의 원문 문장을 새 문장으로
+    갈아 끼웠는데, 그러면 지문에서 문장 하나가 통째로 사라져 앞뒤가 끊기고 나머지
+    선지의 해설이 '있지도 않은 문장'을 근거로 든다(실제 출력물: 12번에서 주제
+    문장인 '포옹과 공감' 문장이 사라졌고, 28번에서는 ④의 But 이 대비할 앞 문장이
+    없어졌다). start_no 는 호환을 위해 남겨 두지만 쓰지 않는다 — 번호 구간은 늘
+    지문 끝까지 닿아야 하므로 하나로 정해진다.
     """
     n = len(sentences)
     k = irrelevant_marks(n)
     if k < MIN_IRRELEVANT_MARKS:
-        raise ValueError(f"무관한 문장 문제는 도입문 1개 + {MIN_IRRELEVANT_MARKS}문장 "
+        raise ValueError(f"무관한 문장 문제는 문장 {MIN_IRRELEVANT_MARKS}개 "
                          f"이상이 필요합니다(지문 문장 {n}개).")
-    if start_no < 2 or start_no + k - 1 > n:
-        raise ValueError(
-            f"무관한 문장 문제는 도입문 1개 + 연속 {k}문장이 필요합니다"
-            f"(지문 문장 {n}개, 시작 {start_no}번).")
     if not (1 <= answer_no <= k):
         raise ValueError(f"무관한 문장 번호는 1~{k} 여야 합니다(현재 {answer_no}).")
     if not (sentence or "").strip():
         raise ValueError("무관한 문장 본문이 비어 있습니다.")
-    intro = " ".join(s.strip() for s in sentences[:start_no - 1])
-    marked = [s.strip() for s in sentences[start_no - 1:start_no + k - 1]]
-    marked[answer_no - 1] = sentence.strip()
+    # ①이 붙는 자리는 '뒤에서부터' 정해진다. 번호 구간이 지문 끝까지 닿아야 원문
+    # 문장을 하나도 버리지 않는다(start_no 는 모델이 고르지 않는다).
+    start = n - (k - 1) + 1
+    intro = " ".join(s.strip() for s in sentences[:start - 1])
+    rest = [s.strip() for s in sentences[start - 1:]]      # 원문 k-1 개
+    marked = rest[:answer_no - 1] + [sentence.strip()] + rest[answer_no - 1:]
     q = F.irrelevant_q(intro, marked)
     a = F.irrelevant_a(answer_no, reason, wrong)
     return q, a
