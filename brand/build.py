@@ -710,6 +710,14 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                   f'font-size:{one_px:.0f}px;color:{t["fg"]};line-height:1.5;'
                   f'word-break:keep-all;opacity:{one_op}">{item.one_line}</div>')
 
+    # 차별점 바로 아래 지면 한 장. 무엇을 파는지 먼저 보이고 나서 뜯는다.
+    open_el = ""
+    if item.opening and shot(item.opening):
+        open_el = f"""<div style="margin-top:{u * 3.4:.0f}px">{shot(item.opening)}
+          <div class="sans" style="margin-top:{u * 1.2:.0f}px;font-size:{u * 1.7:.0f}px;
+               color:{t['muted']};line-height:1.6;word-break:keep-all">{item.opening_note}</div>
+        </div>"""
+
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     tables_el += "".join(grid_table(title, rows, t, u, width - u * 13)
                          for title, rows in item.grids)
@@ -756,6 +764,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           </div>
           {one_el}
           {edge_el}
+          {open_el}
           {sample_el}
           {tables_el}
           {pts_title}
