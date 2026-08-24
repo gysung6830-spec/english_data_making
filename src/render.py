@@ -462,6 +462,17 @@ def _hint(answer: str) -> str:
     return a[0] if a else ""
 
 
+def _cap_first(s: str) -> str:
+    """문장 정답의 첫 알파벳을 대문자로(지문 중간 절을 뽑아 소문자로 시작하는 경우 교정)."""
+    s = s or ""
+    for i, ch in enumerate(s):
+        if ch.isalpha():
+            return s[:i] + ch.upper() + s[i + 1:]
+        if not ch.isspace():   # 첫 글자가 알파벳/공백이 아니면(따옴표 등) 그대로 둠
+            break
+    return s
+
+
 _UNIT_RE = re.compile(r"(?:unit|유닛)\s*0*(\d+)", re.I)
 _GANG_RE = re.compile(r"(\d+)\s*강")
 _CH_RE = re.compile(r"ch(?:apter)?\.?\s*0*(\d+)", re.I)
@@ -589,7 +600,7 @@ def _ws_context(worksheets, start_no: int = 1, title: str = "",
                 "src": src, "korean": it.korean,
                 "conditions": list(it.conditions),
                 "given_words": _shuffle_words(level_words(it), it.answer + suffix),
-                "word_count": it.word_count, "answer": it.answer,
+                "word_count": it.word_count, "answer": _cap_first(it.answer),
                 "explanation": it.explanation,
             } for it in (ws.compose.items if ws.compose else [])]
         compose_mid = _compose_at(lambda it: it.given_mid, "M")    # 중: 모든 단어(동사류 원형)
