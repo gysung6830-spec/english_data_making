@@ -6,7 +6,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from parser import Passage, Sentence, split_passages, circled_to_int  # noqa: E402
+from parser import (Passage, Sentence, split_passages, circled_to_int,  # noqa: E402
+                    Chunk, realign_chunks)
 from renderer import (render_format_a, render_format_b,  # noqa: E402
                       render_format_c)
 from themes import get_css  # noqa: E402
@@ -130,6 +131,33 @@ def test_pdfparse_helpers():
 
     assert _looks_like_header(["Ch. 04 Unit 10 - 2번: 제목"]) is True
     assert _looks_like_header(["① This is a sentence."]) is False
+
+
+def test_realign_chunks():
+    """직독직해 청크를 원문에서 그대로 다시 잘라 100% 일치시키는지 검증."""
+    en = ('A creature must get from the place it is born—often occupied by '
+          'its parent—to a place where it can survive.')
+    # AI가 대시 주변에 공백을 넣고 마지막 마침표를 흘린 청크(원문과 미세 불일치)
+    chunks = [
+        Chunk(en="A creature must get", ko="생물은 이동해야 한다"),
+        Chunk(en="from the place it is born —often occupied by its parent—",
+              ko="태어난 곳에서 (흔히 부모가 차지한)"),
+        Chunk(en="to a place where it can survive", ko="살아남을 수 있는 곳으로"),
+    ]
+    out = realign_chunks(en, chunks)
+    # 조각을 이어 붙이면(공백 join) 원문과 영숫자 순서가 정확히 일치
+    from parser import _letters
+    assert _letters(" ".join(c.en for c in out)) == _letters(en)
+    # 마지막 조각이 끝 마침표를 포함
+    assert out[-1].en.endswith("survive.")
+    # 대시가 앞 조각 끝에 붙고 다음 조각은 'to'로 시작(원문 그대로)
+    assert out[1].en.endswith("parent—")
+    assert out[2].en.startswith("to a place")
+    # 뜻(ko)은 보존
+    assert out[0].ko == "생물은 이동해야 한다"
+    # 단어가 실제로 다르면(안전) 원본 유지
+    bad = [Chunk(en="totally different words here", ko="x")]
+    assert realign_chunks(en, bad) is bad
 
 
 if __name__ == "__main__":

@@ -11,9 +11,11 @@ from pathlib import Path
 from typing import List
 
 try:
-    from .parser import Chunk, Passage, Sentence, Vocab, _JUNK_RE
+    from .parser import (Chunk, Passage, Sentence, Vocab, _JUNK_RE,
+                         realign_chunks)
 except ImportError:
-    from parser import Chunk, Passage, Sentence, Vocab, _JUNK_RE
+    from parser import (Chunk, Passage, Sentence, Vocab, _JUNK_RE,
+                        realign_chunks)
 
 ORTICA_FORMAT = "ORTICA-3form"
 ORTICA_VERSION = 1
@@ -79,11 +81,12 @@ def passages_from_dict(data: dict) -> List[Passage]:
                 for c in (s.get("chunks") or [])
                 if (c.get("en") or "").strip()
             ]
+            en = (s.get("en") or "").strip()
             sents.append(Sentence(
                 num=int(s.get("num", 0) or 0),
-                en=(s.get("en") or "").strip(),
+                en=en,
                 ko=(s.get("ko") or "").strip(),
-                chunks=chunks,
+                chunks=realign_chunks(en, chunks),
             ))
         voc = [
             Vocab(word=(v.get("word") or "").strip(),

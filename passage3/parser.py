@@ -18,6 +18,48 @@ class Chunk:
     ko: str          # 그 청크의 우리말 뜻
 
 
+_ALNUM_RE = re.compile(r"[0-9A-Za-z]")
+
+
+def _letters(s: str) -> str:
+    """영숫자만 남긴 문자열(문장부호·공백 정규화 비교용)."""
+    return "".join(_ALNUM_RE.findall(s or ""))
+
+
+def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
+    """직독직해 청크의 영어 텍스트를 원문(en)에서 '그대로' 다시 잘라 맞춘다.
+
+    AI가 돌려준 청크는 끊는 위치는 좋아도 문장부호(따옴표·대시 공백·마침표)가
+    원문과 미세하게 달라질 수 있다. 끊는 경계(글자 수)는 그대로 두고 각 청크의
+    실제 텍스트만 원문에서 잘라오면, 조각을 이어 붙였을 때 원문과 100% 일치한다.
+    글자(영숫자) 순서가 원문과 다르면(=단어가 실제로 다르면) 원본 청크를 그대로 둔다.
+    """
+    if not chunks:
+        return chunks
+    if _letters("".join(c.en for c in chunks)) != _letters(en):
+        return chunks  # 단어 자체가 다르면 건드리지 않음(안전)
+
+    out: List["Chunk"] = []
+    pos, n = 0, len(chunks)
+    for i, c in enumerate(chunks):
+        if i == n - 1:
+            seg = en[pos:]  # 마지막 청크는 남은 전부(끝 문장부호 포함)
+        else:
+            need = len(_letters(c.en))
+            j, cnt = pos, 0
+            while j < len(en) and cnt < need:
+                if en[j].isalnum():
+                    cnt += 1
+                j += 1
+            # 글자 뒤에 붙는 문장부호(공백 아닌)는 앞 청크에 붙인다
+            while j < len(en) and not en[j].isalnum() and en[j] != " ":
+                j += 1
+            seg = en[pos:j]
+            pos = j
+        out.append(Chunk(en=seg.strip(), ko=c.ko))
+    return out
+
+
 @dataclass
 class Sentence:
     num: int        # 문장 번호 (①→1)

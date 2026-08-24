@@ -10,10 +10,10 @@ import os
 from typing import List
 
 try:
-    from .parser import Chunk, Passage
+    from .parser import Chunk, Passage, realign_chunks
     from .translator import _extract_json
 except ImportError:
-    from parser import Chunk, Passage
+    from parser import Chunk, Passage, realign_chunks
     from translator import _extract_json
 
 DEFAULT_MODEL = "claude-sonnet-5"
@@ -83,6 +83,8 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                         en = (en or "").strip()
                         if en:
                             s.chunks.append(Chunk(en=en, ko=(ko or "").strip()))
+                # 조각 텍스트를 원문에서 그대로 다시 잘라 100% 일치시킴
+                s.chunks = realign_chunks(s.en, s.chunks)
             except Exception:
                 pass  # 한 문장 실패해도 나머지 진행
             done += 1
