@@ -30,7 +30,12 @@ _SYSTEM = (
     "or participial phrase. Keep a preposition/article with its noun phrase and keep "
     "short phrases attached to what they modify. Do NOT break off small 1–3 word "
     "fragments and do NOT break at every preposition. Aim for about one break per "
-    "7–12 words; a short sentence (≲10 words) usually needs 0–1 break. Return ONLY JSON."
+    "7–12 words; a short sentence (≲10 words) usually needs 0–1 break.\n"
+    "TONE for the Korean (직독직해 연결형): plain declarative written style "
+    "(문어체 평서형, 반말), NEVER 존댓말. Make the units read naturally in sequence — "
+    "non-final units end with connective forms so they flow into the next "
+    "(예: ~하여/~하고/~한 후/~인데/~것을/~기 위해/~때), and the LAST unit ends in "
+    "'~다'. Keep each meaning concise and in English order. Return ONLY JSON."
 )
 
 
