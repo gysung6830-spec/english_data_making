@@ -146,11 +146,31 @@ SAMPLE_PAGE_W = 1075
 CROP_ZOOM = 1.5
 
 
+# 칸 폭에 견줘 이보다 작게는 줄이지 않는다. 지면에서 작은 상자였다고 해서
+# 화면에서까지 작으면 무슨 그림인지 안 보인다.
+CROP_FLOOR = 0.62
+
+# 가로가 세로의 이 배를 넘는 조각은 '띠'로 본다. 옆칸에 세우지 않는다.
+WIDE_STRIP = 6.0
+
+
+def aspect(name: str) -> float:
+    """조각의 가로세로 비. 파일이 없으면 0."""
+    path = SAMPLES / name
+    if not name or not path.exists():
+        return 0.0
+    from PIL import Image
+
+    with Image.open(path) as im:
+        return im.width / max(1, im.height)
+
+
 def crop_img(name: str, doc_w: int, fill: bool = False) -> str:
     """부분 확대 조각. 원래 지면에서 차지하던 만큼만 키워서 보여 준다.
 
-    좁은 조각을 본문 폭에 맞춰 늘리면 세 배로 확대되어 흐려지고, 지면에서
-    작은 상자였다는 사실도 사라진다.
+    좁은 조각을 칸 폭에 맞춰 늘리면 확대되어 흐려지고, 지면에서 작은 상자였다는
+    사실도 사라진다. 반대로 비율만 따르면 작은 상자가 너무 작아지므로 아래를
+    막아 둔다. 어느 쪽이든 원본보다 크게 늘리지는 않는다.
     """
     path = SAMPLES / name
     if not name or not path.exists():
@@ -159,7 +179,9 @@ def crop_img(name: str, doc_w: int, fill: bool = False) -> str:
 
     with Image.open(path) as im:
         w = im.width
-    px = doc_w if fill else min(doc_w, round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM))
+    px = doc_w if fill else min(
+        doc_w, max(round(doc_w * CROP_FLOOR),
+                   round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM)))
     return (f'<img src="{path.as_uri()}" style="display:block;width:{px}px;'
             f'max-width:100%;border-radius:8px;'
             f'box-shadow:0 5px 18px rgba(14,31,26,.16)">')
@@ -634,7 +656,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         names = [c for c in (rest[0].split("|") if rest and rest[0] else [])]
         crops = "".join(
             f'<div style="margin-top:{u * 1.2 if i else 0:.0f}px">'
-            f'{crop_img(c, col_w, fill=True)}</div>'
+            f'{crop_img(c, col_w)}</div>'
             for i, c in enumerate(names) if crop_img(c, col_w))
         # 사진을 키우려고 글자를 줄였다. 포인트는 짚어 주는 말이라 작아도 읽힌다.
         text = f"""<div class="ko" style="font-size:{u * 2.05:.0f}px;color:{t['fg']};
@@ -643,6 +665,14 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
                color:{t['muted']};line-height:1.68;word-break:keep-all">{desc}</div>"""
         if not crops:
             return f'<div style="margin-top:{u * 3.4:.0f}px">{text}</div>'
+        # 아주 납작한 띠는 옆칸에 넣으면 글자가 절반으로 줄어 안 읽힌다.
+        # 그런 조각만 본문 폭을 다 쓰고 설명을 위에 얹는다.
+        if any(aspect(c) > WIDE_STRIP for c in names):
+            full = "".join(
+                f'<div style="margin-top:{u * 1.4:.0f}px">'
+                f'{crop_img(c, int(width - u * 13), fill=True)}</div>'
+                for c in names if crop_img(c, col_w))
+            return f"""<div style="margin-top:{u * 3.4:.0f}px">{text}{full}</div>"""
         return f"""<div style="margin-top:{u * 3.4:.0f}px;display:flex;
           gap:{u * 3:.0f}px;align-items:flex-start">
           <div style="flex:0 0 {col_w}px">{crops}</div>
