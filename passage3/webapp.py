@@ -8,9 +8,30 @@ from __future__ import annotations
 import io
 import os
 import tempfile
+import time
 import traceback
 import zipfile
 from pathlib import Path
+
+
+def _log(msg: str = "") -> None:
+    """터미널(웹앱 창)에 진행 상황을 즉시 출력."""
+    print(msg, flush=True)
+
+
+def _fmt_dur(sec: float) -> str:
+    """초 → '1분 5.2초' / '3.4초' 형태."""
+    if sec >= 60:
+        return f"{int(sec // 60)}분 {sec % 60:.0f}초"
+    return f"{sec:.1f}초"
+
+
+def _progress(label: str):
+    """AI 단계 진행률을 한 줄에서 갱신(\\r)하는 콜백."""
+    def cb(done: int, total: int) -> None:
+        end = "\n" if done >= total else ""
+        print(f"\r    {label} {done}/{total}", end=end, flush=True)
+    return cb
 
 from flask import (Flask, flash, redirect, render_template_string, request,
                    send_file, url_for)
@@ -262,6 +283,14 @@ def generate():
         return redirect(url_for("index"))
 
     doc = safe_filename(docname or Path(file.filename).stem)
+    t0 = time.perf_counter()
+    fmt_names = ", ".join(FORMATS[k][1] for k, _, _ in FORMAT_ORDER if k in formats)
+    _log("")
+    _log("=" * 60)
+    _log(f"[생성 시작] {docname or Path(file.filename).stem}  "
+         f"({time.strftime('%Y-%m-%d %H:%M:%S')})")
+    _log(f"  파일: {file.filename} | 형식: {fmt_names}"
+         f"{' | AI 키 사용' if api_key else ' | 키 없음'}")
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
@@ -269,6 +298,7 @@ def generate():
         file.save(str(in_path))
 
         try:
+            t = time.perf_counter()
             passages = extract_passages(in_path, api_key=api_key)
         except Exception:
             traceback.print_exc()
@@ -276,36 +306,67 @@ def generate():
             return redirect(url_for("index"))
 
         if not passages:
+            _log("[중단] 지문을 찾지 못했습니다.")
             flash("지문을 찾지 못했습니다. 헤더 형식(…N번: 제목)과 원문자(①②)를 확인하세요.")
             return redirect(url_for("index"))
 
         # 문항 시작 번호 지정 시 라벨 재부여
         passages = renumber_passages(passages, start_no)
+        n_sent = sum(len(p.sentences) for p in passages)
+        _log(f"[1] 입력 파싱 완료 — 지문 {len(passages)}개, 문장 {n_sent}개  "
+             f"({_fmt_dur(time.perf_counter() - t)})")
 
         # 분석 JSON 재입력이면 재분석(번역·어휘) 생략 → API 비용 없음
         is_json_input = Path(file.filename).suffix.lower() == ".json"
-        if not is_json_input:
+        if is_json_input:
+            _log("[2] JSON 재입력 → 재분석 생략(API 비용 없음)")
+        else:
             # 번호 없는 통짜 지문을 AI로 문장 분리(키 있으면)
-            if any(not p.sentences and p.raw for p in passages):
-                try:
-                    passages = segment_passages(passages, api_key=api_key)
-                except Exception:
-                    traceback.print_exc()
+            n_raw = sum(1 for p in passages if not p.sentences and p.raw)
+            if n_raw:
+                if api_key:
+                    _log(f"[2] 번호 없는 지문 {n_raw}개 AI 문장 분리 중…")
+                    t = time.perf_counter()
+                    try:
+                        passages = segment_passages(passages, api_key=api_key,
+                                                    progress=_progress("지문"))
+                        _log(f"    → 문장 분리 완료, 총 문장 "
+                             f"{sum(len(p.sentences) for p in passages)}개  "
+                             f"({_fmt_dur(time.perf_counter() - t)})")
+                    except Exception:
+                        traceback.print_exc()
+                else:
+                    _log(f"[2] 번호 없는 지문 {n_raw}개 발견 — 키가 없어 건너뜀"
+                         "(빈 지문으로 나옴)")
             # 한줄영어(c)만 선택하면 번역 불필요
             if any(f in formats for f in ("a", "b", "d")):
-                try:
-                    passages = translate_missing(passages, api_key=api_key)
-                except Exception:
-                    traceback.print_exc()  # 번역 실패는 치명적이지 않음
+                miss = sum(1 for p in passages for s in p.sentences if s.en and not s.ko)
+                if miss and api_key:
+                    _log(f"[3] 해석 없는 문장 {miss}개 번역 중…")
+                    t = time.perf_counter()
+                    try:
+                        passages = translate_missing(passages, api_key=api_key)
+                        _log(f"    → 번역 완료  ({_fmt_dur(time.perf_counter() - t)})")
+                    except Exception:
+                        traceback.print_exc()
             # 하단 어휘 리스트(키 있으면 자동 추출)
-            try:
-                passages = extract_vocab(passages, api_key=api_key)
-            except Exception:
-                traceback.print_exc()  # 어휘 추출 실패도 치명적이지 않음
-            # 직독직해 청크(키 있으면)
-            if "d" in formats:
+            if api_key:
+                _log("[4] 핵심 어휘 추출 중(AI)…")
+                t = time.perf_counter()
                 try:
-                    passages = chunk_sentences(passages, api_key=api_key)
+                    passages = extract_vocab(passages, api_key=api_key,
+                                             progress=_progress("어휘"))
+                    _log(f"    → 어휘 추출 완료  ({_fmt_dur(time.perf_counter() - t)})")
+                except Exception:
+                    traceback.print_exc()
+            # 직독직해 청크(키 있으면)
+            if "d" in formats and api_key:
+                _log("[5] 직독직해 청크 생성 중(AI)…")
+                t = time.perf_counter()
+                try:
+                    passages = chunk_sentences(passages, api_key=api_key,
+                                               progress=_progress("직독직해"))
+                    _log(f"    → 직독직해 청크 완료  ({_fmt_dur(time.perf_counter() - t)})")
                 except Exception:
                     traceback.print_exc()
 
@@ -318,9 +379,11 @@ def generate():
 
         disp_name = (docname or Path(file.filename).stem).strip()  # 뱃지 표시용
         produced = []  # (파일명, bytes)
+        _log("[6] PDF 렌더링…")
         for key in [k for k, _, _ in FORMAT_ORDER if k in formats]:
             render_fn = renderers[key]
             suffix = FORMATS[key][1]
+            t = time.perf_counter()
             html_str = render_fn(passages, header_text=header, doc_name=disp_name)
             out_pdf = tmp_path / f"{doc}_{suffix}.pdf"
             try:
@@ -330,11 +393,17 @@ def generate():
                 flash("PDF 렌더링 중 오류가 발생했습니다. (Playwright/Chromium 설치 확인)")
                 return redirect(url_for("index"))
             produced.append((out_pdf.name, out_pdf.read_bytes()))
+            _log(f"    · {out_pdf.name}  ({_fmt_dur(time.perf_counter() - t)})")
 
         # 재사용용 분석 JSON (제목만 바꿔 재생성할 때 다시 입력)
         json_bytes = None
         if save_json:
             json_bytes = passages_to_json(passages, docname=disp_name).encode("utf-8")
+
+        _log(f"[완료] PDF {len(produced)}개"
+             f"{' + 분석 JSON' if json_bytes else ''} 생성 — "
+             f"총 {_fmt_dur(time.perf_counter() - t0)}")
+        _log("=" * 60)
 
         # 형식 1개 + JSON 미포함 → PDF 그대로
         if len(produced) == 1 and not json_bytes:

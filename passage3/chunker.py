@@ -41,7 +41,7 @@ _SYSTEM = (
 
 
 def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
-                    api_key: str = None) -> List[Passage]:
+                    api_key: str = None, progress=None) -> List[Passage]:
     """각 문장에 직독직해 청크를 채운다. 키 없으면 그대로 둔다."""
     api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -52,6 +52,9 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
         return passages
 
     client = anthropic.Anthropic(api_key=api_key)
+    total = sum(1 for p in passages for s in p.sentences
+                if not s.chunks and s.en.strip())
+    done = 0
 
     for p in passages:
         for s in p.sentences:
@@ -81,5 +84,8 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                         if en:
                             s.chunks.append(Chunk(en=en, ko=(ko or "").strip()))
             except Exception:
-                continue  # 한 문장 실패해도 나머지 진행
+                pass  # 한 문장 실패해도 나머지 진행
+            done += 1
+            if progress:
+                progress(done, total)
     return passages

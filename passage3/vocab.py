@@ -35,7 +35,7 @@ def _count_for(passage: Passage) -> int:
 
 
 def extract_vocab(passages: List[Passage], model: str = DEFAULT_MODEL,
-                  api_key: str = None) -> List[Passage]:
+                  api_key: str = None, progress=None) -> List[Passage]:
     """각 지문에 핵심 어휘를 채운다. 키 없으면 그대로(빈 리스트)."""
     api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -47,6 +47,9 @@ def extract_vocab(passages: List[Passage], model: str = DEFAULT_MODEL,
         return passages
 
     client = anthropic.Anthropic(api_key=api_key)
+    todo = [p for p in passages
+            if not p.vocab and any(s.en for s in p.sentences)]
+    total, done = len(todo), 0
 
     for p in passages:
         if p.vocab:  # 이미 있으면 건너뜀
@@ -80,6 +83,9 @@ def extract_vocab(passages: List[Passage], model: str = DEFAULT_MODEL,
                             meaning=str(it.get("meaning", "")).strip(),
                         ))
         except Exception:
-            continue  # 한 지문 실패해도 나머지 진행
+            pass  # 한 지문 실패해도 나머지 진행
+        done += 1
+        if progress:
+            progress(done, total)
 
     return passages

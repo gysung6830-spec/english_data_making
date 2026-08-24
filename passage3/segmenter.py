@@ -30,7 +30,7 @@ _SYSTEM = (
 
 
 def segment_passages(passages: List[Passage], model: str = DEFAULT_MODEL,
-                     api_key: str = None) -> List[Passage]:
+                     api_key: str = None, progress=None) -> List[Passage]:
     """번호 없는 지문(raw 있음·문장 없음)을 AI로 문장 분리해 채운다."""
     api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -41,6 +41,8 @@ def segment_passages(passages: List[Passage], model: str = DEFAULT_MODEL,
         return passages
 
     client = anthropic.Anthropic(api_key=api_key)
+    todo = [p for p in passages if not p.sentences and p.raw.strip()]
+    total, done = len(todo), 0
 
     for p in passages:
         if p.sentences or not p.raw.strip():
@@ -71,5 +73,8 @@ def segment_passages(passages: List[Passage], model: str = DEFAULT_MODEL,
                 if p.sentences:
                     p.raw = ""  # 분리 성공 시 원문 비움
         except Exception:
-            continue
+            pass
+        done += 1
+        if progress:
+            progress(done, total)
     return passages
