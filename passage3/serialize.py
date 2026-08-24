@@ -11,12 +11,29 @@ from pathlib import Path
 from typing import List
 
 try:
-    from .parser import Chunk, Passage, Sentence, Vocab
+    from .parser import Chunk, Passage, Sentence, Vocab, _JUNK_RE
 except ImportError:
-    from parser import Chunk, Passage, Sentence, Vocab
+    from parser import Chunk, Passage, Sentence, Vocab, _JUNK_RE
 
 ORTICA_FORMAT = "ORTICA-3form"
 ORTICA_VERSION = 1
+
+# 제목이 이 길이를 넘으면 지문 본문이 잘못 섞여 들어간 것으로 보고 비운다.
+_MAX_TITLE_LEN = 120
+
+
+def _sane_title(title: str) -> str:
+    """재입력 JSON의 오염된 제목 정리.
+
+    (구버전 파서가 만든) 지문 전체가 들어간 긴 제목이나 잡줄(워터마크·안내문)이
+    섞인 제목은 비운다. 정상적인 짧은 제목은 그대로 둔다.
+    """
+    title = (title or "").strip()
+    if not title:
+        return ""
+    if len(title) > _MAX_TITLE_LEN or _JUNK_RE.search(title):
+        return ""
+    return title
 
 
 def passages_to_dict(passages: List[Passage], docname: str = "") -> dict:
@@ -75,7 +92,7 @@ def passages_from_dict(data: dict) -> List[Passage]:
             if (v.get("word") or "").strip()
         ]
         out.append(Passage(label=(pd.get("label") or "").strip(),
-                           title=(pd.get("title") or "").strip(),
+                           title=_sane_title(pd.get("title") or ""),
                            sentences=sents, vocab=voc))
     return out
 

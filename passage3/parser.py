@@ -269,21 +269,27 @@ def split_passages(raw: str) -> List[Passage]:
         body_end = header_idx[k + 1][0] if k + 1 < len(header_idx) else len(lines)
         body_lines = lines[body_start:body_end]
 
-        # 제목이 다음 줄로 이어지는 경우: 첫 문장 마커 전의 줄을 제목에 이어붙임
-        extra = []
-        for bl in body_lines:
-            if _starts_with_marker(bl):
-                break
-            s = bl.strip()
-            if s and not _JUNK_RE.search(s):
-                extra.append(s)
-        if extra:
-            title = _clean_title((title + " " + " ".join(extra)).strip())
-
         body = "\n".join(body_lines)
         sents = _parse_sentences(body)
         # 번호가 없어 문장을 못 나눈 경우, 원문(잡음 제거)을 남겨 AI 문장분리에 사용
         raw = "" if sents else _clean_raw(body_lines)
+
+        # 제목이 다음 줄로 이어지는 경우: 문장 마커가 있는 자료에서만 이어붙임
+        # (번호 없는 통짜 지문은 본문 전체가 제목에 딸려가는 것을 방지)
+        if sents:
+            extra = []
+            for bl in body_lines:
+                if _starts_with_marker(bl):
+                    break
+                s = bl.strip()
+                if s and not _JUNK_RE.search(s):
+                    extra.append(s)
+            if extra:
+                title = _clean_title((title + " " + " ".join(extra)).strip())
+
+        # 워크북 안내문 등 보일러플레이트만 있는 제목은 비운다
+        if title and _JUNK_RE.search(title):
+            title = ""
 
         # 같은 번호 헤더가 다음 페이지에 반복되면(장문 등) 이전 지문에 이어붙임
         if passages and label and passages[-1].label == label:
