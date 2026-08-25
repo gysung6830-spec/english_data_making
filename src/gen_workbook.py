@@ -1127,25 +1127,42 @@ def onepass_page(seqtype):
         '<ol><li><b>묻는 것 먼저</b> — 주어진 글·넣을 문장부터. 갈고리를 쥐고 본문에 들어가면 되돌아갈 일이 없다.</li>'
         '<li><b>몸통 말고 이음매</b> — 조각의 끝과 다음 첫머리만. 가운데 문장은 순서 판단에 필요 없다.</li>'
         '<li><b>눈으로 외우지 말고 손으로 표시</b> — 지시어→선행어를 화살표로 그으며 간다.</li></ol>')
+    _chip = lambda *ws: '<div class="tp-chips">' + ''.join(f'<span>{w}</span>' for w in ws) + '</div>'
     if seqtype == "순서":
         tips = (
+            '<div class="tp-lead">비법은 하나 — <b>조각의 “맨 앞 단어”만 보면</b> 됩니다.</div>'
             '<ol>'
-            '<li><b>맨 앞 후보부터 지우기</b> — 조각이 <b>this·그·그것·이런·그래서·하지만·예를 들어</b> 같은 말로 시작하면, ‘앞에 뭔가 있어야’ 말이 되는 조각이라 <b>맨 앞이 될 수 없어요.</b> 이렇게 하나씩 지우면 <b>시작 조각이 저절로 남아요.</b></li>'
-            '<li><b>첫 단어만 봐도 앞이 보여요</b> — <b>하지만/그러나(But·However)</b>→앞은 반대 얘기 · <b>예를 들어(For example)</b>→앞은 일반적인 얘기 · <b>그래서/따라서(So·Thus)</b>→앞은 그 <b>이유</b> · <b>그 다음/이후(then·after)</b>→앞은 먼저 일어난 일.</li>'
-            '<li><b>‘그 ~(the)’를 따라가기</b> — 어떤 조각에 <b>the + 명사</b>(예: the tree)가 나오면, 그건 이미 나온 걸 다시 부르는 말. 그 명사를 <b>처음 꺼낸 조각</b>(a tree) <b>뒤</b>에 붙여요.</li>'
-            '<li><b>‘그들·그것’이 누구?</b> — <b>they·it·she</b>가 나오면 “얘가 누구지?”를 묻고, 그 대상이 나온 조각을 <b>바로 앞</b>에 놓아요.</li>'
+            '<li><b>1) 맨 앞 조각부터 골라요.</b> 아래 말로 <u>시작하는</u> 조각은 <b>맨 앞이 될 수 없어요</b> '
+            '(앞에 뭔가 있어야 말이 되니까요).'
+            + _chip("this · these", "그 · 그것 · 이런", "they · it (그들 · 그것)",
+                    "But 하지만", "So 그래서", "Also 또한", "For example 예를 들어") +
+            '이 말이 <b>하나도 없는</b> 조각이 <b>맨 앞</b>이에요.</li>'
+            '<li><b>2) 나머지를 이어 붙여요.</b> 조각 맨 앞의 말이 <b>“무엇을 가리키는지”</b> 찾아서, '
+            '그게 <b>나온 조각 바로 뒤</b>에 놓으면 돼요.'
+            '<div class="tp-map">'
+            '<div><span class="w">the/그 + 명사</span> 그 명사를 <b>처음 말한</b> 조각 뒤</div>'
+            '<div><span class="w">they · it (그들·그것)</span> 그 대상이 <b>나온</b> 조각 뒤</div>'
+            '<div><span class="w">But (하지만)</span> <b>반대</b>로 말한 조각 뒤</div>'
+            '<div><span class="w">So · Thus (그래서)</span> 그 <b>까닭</b>을 말한 조각 뒤</div>'
+            '</div></li>'
+            '<li><b>3) 이어서 한 번 읽어봐요.</b> 정한 순서대로 쭉 읽어 <b>말이 매끄러우면 끝</b>. '
+            '어딘가 어색하면 2번을 다시 봐요.</li>'
             '</ol>')
     else:
         tips = (
+            '<div class="tp-lead"><b>넣을 문장(주어진 문장)</b>이 답을 다 알려줘요 — <b>맨 앞 단어부터</b> 봐요.</div>'
             '<ol>'
-            '<li><b>넣을 문장 속 ‘그·이·그것’부터</b> — 넣을 문장이 <b>this·these·그·그것·they</b>나 <b>하지만(But)</b>으로 시작하면, 그 말이 <b>가리킬 대상이 바로 앞에 있는 자리</b>에 넣어야 해요.</li>'
-            '<li><b>말이 뚝 끊긴 곳을 찾기</b> — ①~⑤를 읽다 보면 <b>‘그것’이 누군지 모르겠거나</b>, 갑자기 얘기가 툭 튀는 <b>어색한 한 곳</b>이 나와요. 거기가 정답 자리.</li>'
-            '<li><b>앞·뒤 둘 다 맞아야</b> — 넣고 나서 <b>앞 문장과도, 뒤 문장과도</b> 자연스레 이어지는지 확인해요. 한쪽만 맞으면 오답.</li>'
-            '<li><b>‘하지만’이면 앞뒤가 반대</b> — 넣을 문장이 <b>But·Yet</b>이면, 그 앞은 반대 얘기, 뒤는 그 반전을 이어받는 자리예요.</li>'
+            '<li><b>1) 넣을 문장의 맨 앞을 봐요.</b> 아래 말이 있으면, 그게 <b>가리키는 내용이 “바로 앞”에 있는 자리</b>에 넣어야 해요.'
+            + _chip("this · these", "그 · 그것", "they · them", "But 하지만", "So 그래서") +
+            '</li>'
+            '<li><b>2) 그 “가리키는 것”을 본문에서 찾아요.</b> '
+            '예를 들어 넣을 문장이 <i>“This is why…(이것이 ~한 이유다)”</i>라면, '
+            '<b>‘이것’에 해당하는 내용</b>이 끝난 자리 <b>바로 뒤</b>가 정답이에요.</li>'
+            '<li><b>3) 넣고 앞뒤를 읽어봐요.</b> <b>앞 문장 → 넣을 문장 → 뒤 문장</b>이 '
+            '<b>둘 다</b> 자연스러우면 정답. <b>한쪽만</b> 맞으면 오답이에요.</li>'
             '</ol>')
-    tips += ('<div style="margin-top:6px;font-size:8.6px;color:#8a5a1a;background:#fff7ed;'
-             'border:1px solid #f0c48a;border-radius:6px;padding:6px 9px">'
-             '※ “정답이 ②~④에 많다”는 <b>통계 찍기</b>는 근거가 아니라 <b>최후의 참고</b>로만 — 위 단서로 <b>자리를 확정</b>하는 게 원칙.</div>')
+    tips += ('<div class="tp-warn">※ “정답이 ②~④에 많다”는 <b>통계로 찍기</b>는 근거가 아니에요. '
+             '위 방법으로 <b>자리를 정하는 게 먼저</b>, 통계는 <b>정말 모를 때만</b> 참고하세요.</div>')
     return f'''<section class="onepass"><span class="wbm">wbspread</span>
       <div class="op-top"><span class="op-badge">1-PASS</span><h1>{title}</h1>
         <span class="op-sub">형광펜 독해 · 유형 특강</span></div>
@@ -1156,7 +1173,7 @@ def onepass_page(seqtype):
       <div class="op-steps">{steps}</div>
       <div class="op-h2">시범 — {"몸통은 넘기고 '이음매'만 따라간다" if seqtype=="순서" else "손잡이 뽑고 '끊긴 곳' 한 번에"}</div>
       {demo}
-      <div class="op-h2">실전 찍기 — <b>하나씩 지우고</b> 자리 맞추기</div>
+      <div class="op-h2">실전 — <b>이 순서대로</b> 하면 됩니다</div>
       <div class="op-habit op-tips">{tips}</div>
       <div class="op-h2">재독을 없애는 습관 3</div>
       <div class="op-habit">{habits}</div>
@@ -1262,6 +1279,20 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
 .op-habit{ background:#fff; border:1.5px solid var(--line); border-radius:9px; padding:6px 16px; }
 .op-habit ol{ margin:6px 0; padding-left:18px; } .op-habit li{ font-size:11.5px; line-height:1.65; margin-bottom:5px; }
 .op-habit li b{ color:var(--ink-d); }
+/* 실전 팁 (쉬운 말) */
+.op-tips .tp-lead{ font-size:12px; color:#2b3a34; background:#f2f8f5; border-left:4px solid var(--ink);
+  border-radius:0 6px 6px 0; padding:6px 11px; margin:2px 0 9px; } .op-tips .tp-lead b{ color:var(--ink-d); }
+.op-tips ol{ margin:4px 0 0; padding-left:20px; }
+.op-tips li{ font-size:11.5px; line-height:1.7; margin-bottom:9px; } .op-tips li b{ color:var(--ink-d); }
+.op-tips u{ text-decoration-color:var(--must-line); text-underline-offset:2px; }
+.tp-chips{ display:flex; flex-wrap:wrap; gap:5px; margin:6px 0 3px; }
+.tp-chips span{ font-size:10px; font-weight:700; color:#8a3f3a; background:#fdeceb;
+  border:1px solid #eec7c4; border-radius:20px; padding:2px 11px; }
+.tp-map{ margin:7px 0 1px; display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; }
+.tp-map > div{ font-size:10.5px; color:#48525c; line-height:1.45; }
+.tp-map .w{ display:inline-block; min-width:118px; font-weight:800; color:#1f4d7a; }
+.op-tips .tp-warn{ margin-top:9px; font-size:9px; color:#8a5a1a; background:#fff7ed;
+  border:1px solid #f0c48a; border-radius:6px; padding:6px 10px; line-height:1.55; } .op-tips .tp-warn b{ color:#a8641a; }
 .bd-top{ display:flex; align-items:center; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:7px; }
 .bd-top .bd-seq{ font-size:12px; font-weight:800; color:#fff; background:var(--ink); border-radius:6px; padding:3px 12px; }
 .bd-top .bd-part{ font-size:11px; font-weight:800; color:var(--ink-d); letter-spacing:1px; }
