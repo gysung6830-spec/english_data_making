@@ -62,9 +62,11 @@ def test_demo_validation_and_numbering() -> None:
 
 def test_render_html_bold_rules() -> None:
     html = renderer.render_html(demo_passages(), header_note="○○학원 고3")
-    for cls in ("brand-title", "qnum", "passage-label", "answer-title",
+    for cls in ("brand-title", "qnum", "type-chip", "answer-title",
                 "answer-key", "boki-title", "cue"):
         assert cls in html, f"볼드 클래스 누락: {cls}"
+    # 지문별 편성에서는 지문 라벨이 그 자리를 대신한다
+    assert "passage-label" in renderer.render_html(demo_passages(), group_by="passage")
     assert html.index('class="questions') < html.index('class="answers')
     assert "○○학원 고3" in html
     # 4개 섹션(학생용 → 교사용 → 빠른 정답 → 해설지)이 순서대로 존재
@@ -1194,7 +1196,7 @@ def test_answer_spread() -> None:
     ps = build_passages_merged(client, [_DUMMY, _DUMMY2, _DUMMY, _DUMMY2])
     keys = []
     for i, p in enumerate(ps):
-        _, quick = renderer._blocks([p], start=1)
+        _, quick = renderer._blocks([p], start=1, group_by="passage")
         cells = quick[0]["cells"]        # 지문별: 머리 없는 한 묶음
         for t, cell in zip(MERGED_ORDER, cells):
             if t in ("topic", "content"):
@@ -1204,24 +1206,34 @@ def test_answer_spread() -> None:
 
 
 def test_passage_source_label() -> None:
-    """지문 라벨: 원본 문항번호가 있으면 '[31번]', 없으면 위치 기준 '[지문 i]'."""
+    """지문 라벨: 원본 문항번호가 있으면 '31번', 없으면 위치 기준 '지문 i'.
+
+    유형별 편성(기본)에서는 지문이 섞이므로 문항마다 출처를 달고,
+    지문별 편성에서는 지문 블록 머리에 [ ] 로 단다.
+    """
     # 라벨 없음 → 위치 기준
-    html0 = renderer.render_html(demo_passages())
+    html0 = renderer.render_html(demo_passages(), group_by="passage")
     assert "[지문 1]" in html0 and "[지문 2]" in html0
 
     # source_label 지정 → 문항번호로 표기(위치 라벨은 사라짐)
     ps = demo_passages()
     ps[0].source_label = "31번"
     ps[1].source_label = "32번"
-    html = renderer.render_html(ps)
+    html = renderer.render_html(ps, group_by="passage")
     assert "[31번]" in html and "[32번]" in html
     assert "[지문 1]" not in html and "[지문 2]" not in html
 
     # 일부만 번호가 있으면, 없는 지문은 위치 기준(i)으로 대체
     ps2 = demo_passages()
     ps2[0].source_label = "31번"          # 1번째만 번호
-    html2 = renderer.render_html(ps2)
+    html2 = renderer.render_html(ps2, group_by="passage")
     assert "[31번]" in html2 and "[지문 2]" in html2
+
+    # 유형별 편성: 문항마다 출처 알약이 붙는다(문제·해설 양쪽)
+    by_type = renderer.render_html(ps)
+    assert by_type.count('class="q-src"') >= 2
+    assert '<span class="q-src">31번</span>' in by_type
+    assert '<span class="q-src">32번</span>' in by_type
 
     # 라벨 스레딩: build_passages(labels=…) 가 Passage.source_label 에 실린다
     client = _FakeClient()
@@ -1268,7 +1280,7 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     ps[0].flag("grammar", ["오답 근거 약함: …"])
     ps[1].flag("D", [review.FIX_SNAP])                    # 둘째 지문 → +유형 수
     items = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
-                                    labels=MERGED_LABELS)
+                                    labels=MERGED_LABELS, group_by="passage")
     by_no = {it["no"]: it for it in items}
     assert review.FIX_ORDER in by_no[_i["topic"]]["reasons"]
     assert "오답 근거 약함: …" in by_no[_i["grammar"]]["reasons"]
@@ -1277,6 +1289,12 @@ def test_review_flags_and_page(tmp_out: Path = ROOT / "output" / "test") -> None
     assert review.FIX_SNAP in by_no[n_last]["reasons"]
     assert by_no[n_last]["label"] == "어순 배열"
     assert max(by_no) == 2 * len(MERGED_ORDER), sorted(by_no)   # 지문 2개 × 유형 수
+
+    #    유형별 편성(기본)에서는 유형마다 1번부터 — 조판 번호와 어긋나면 안 된다
+    by_type = renderer.collect_review(ps, start=1, type_order=MERGED_ORDER,
+                                      labels=MERGED_LABELS)
+    got = {(it["label"], it["no"]) for it in by_type if it["no"] != "-"}
+    assert ("주제", 1) in got and ("어순 배열", 2) in got, got
 
     # 4) 교사용이면 맨 끝에 '검토 메모' 페이지가 붙고, 학생용만이면 붙지 않는다
     tmp_out.mkdir(parents=True, exist_ok=True)
@@ -1699,13 +1717,22 @@ def test_rerender_relabel(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert webmod.apply_labels(d_ok, ["10-A", "11-A"]) is None
     assert [pd["source_label"] for pd in d_ok["parts"][0]["passages"]] == ["10-A", "11-A"]
 
-    # 렌더 PDF 에 실제로 [10-A]/[11-A] 번호가 찍히고 기본 [지문 1] 은 사라진다
+    # 렌더 PDF 에 실제로 10-A/11-A 출처가 찍히고 기본 '지문 1' 은 사라진다
     parts, _ = serialize.load_parts(d_ok, header_override="h")
+    for pt in parts:                      # 지문 라벨은 지문별 편성에서 대괄호로 찍힌다
+        pt["group_by"] = "passage"
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "relabel.pdf"
     renderer.render_pdf_multi(parts, out)
     txt = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out)).pages)
     assert "[10-A]" in txt and "[11-A]" in txt and "[지문 1]" not in txt
+
+    # 유형별 편성(기본)에서는 문항마다 출처가 붙는다
+    parts2, _ = serialize.load_parts(d_ok, header_override="h")
+    out2 = tmp_out / "relabel_type.pdf"
+    renderer.render_pdf_multi(parts2, out2)
+    txt2 = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out2)).pages)
+    assert "10-A" in txt2 and "11-A" in txt2 and "지문 1" not in txt2
     print("✓ 재출력 지문 번호 다시 넣기(순서대로 라벨 교체·개수검증) 통과")
 
 
@@ -1780,15 +1807,31 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
 
-    # ④ 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 16 = 32번까지)
+    # ④-a 지문별 조판 — 번호가 지문을 넘어 이어진다(지문 2개 × 16 = 32번까지)
     tmp_out.mkdir(parents=True, exist_ok=True)
     out = tmp_out / "merged.pdf"
-    renderer.render_pdf(ps, out, header_note="통합",
+    renderer.render_pdf(ps, out, header_note="통합", group_by="passage",
                         type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
     txt = " ".join((pg.extract_text() or "") for pg in PdfReader(str(out)).pages)
     assert "[10-1]" in txt and "[10-2]" in txt, txt[:400]
     _last = 2 * len(MERGED_ORDER)
     assert f"{_last}." in txt, f"마지막 문항 번호({_last})가 없다"
+
+    # ④-b 유형별 조판(기본) — 유형마다 새 쪽에서 시작하고 큰 제목이 붙는다
+    out_t = tmp_out / "merged_type.pdf"
+    renderer.render_pdf(ps, out_t, header_note="통합", sections=["student"],
+                        type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
+    pages = PdfReader(str(out_t)).pages
+    #    학생용만 뽑았으므로 쪽 수 = 유형 수(유형마다 한 쪽부터 시작)
+    assert len(pages) >= len(MERGED_ORDER), len(pages)
+    heads = [(pg.extract_text() or "").strip().splitlines()[:3] for pg in pages]
+    #    각 유형의 이름이 그 유형 첫 쪽 머리에 칩으로 찍혀 있다
+    for t in MERGED_ORDER:
+        name = MERGED_LABELS[t]
+        assert any(any(name in ln and "문항" in ln for ln in h) for h in heads), name
+    #    출처는 문항마다 붙는다
+    txt_t = " ".join((pg.extract_text() or "") for pg in pages)
+    assert "10-1" in txt_t and "10-2" in txt_t
 
     # ⑤ JSON 저장→복원 재출력(무API)에서도 통합 유형표가 그대로 살아난다
     data = serialize.dump_parts([{"set": "M", "tag": "변형문제 · 난이도 중",
@@ -2418,6 +2461,46 @@ def test_output_defect_regressions() -> None:
           "짝짓기 해설·밑줄 겹침) 통과")
 
 
+def test_type_group_layout() -> None:
+    """유형별 편성 조판: 유형마다 새 쪽 · 큰 칩 · 문항별 출처 · 두 단 고르게."""
+    import copy
+
+    from exam.merged import demo_passages_merged
+
+    # 두 단으로 가장 고르게 나뉘는 자리를 고른다(문항 경계에서만 나눈다)
+    assert renderer._even_split([10, 10, 10]) == 20      # 20 / 10
+    assert renderer._even_split([10, 10, 10, 10]) == 20  # 20 / 20
+    assert renderer._even_split([50, 10, 10]) == 50      # 50 / 20 — 쪼갤 수 없다
+
+    ps = demo_passages_merged()
+    ps = ps + [copy.deepcopy(ps[0])]
+    for i, p in enumerate(ps, 1):
+        p.source_label = f"13-{i}"
+    M = dict(type_order=MERGED_ORDER, prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
+    html = renderer.render_html(ps, sections=["answers"], **M)
+    #  유형마다 제 몫의 2단 상자를 갖고, 조판기가 잴 수 있게 id 가 붙는다
+    assert html.count('class="type-group') == len(MERGED_ORDER)
+    assert html.count('id="tg-a-') == len(MERGED_ORDER)
+    assert '<span class="type-chip-name">주제</span>' in html
+    assert '<span class="q-src">13-2</span>' in html
+
+    #  1차 조판을 재어 2차 조판에 줄 칸 높이가 실제로 나온다(짧은 묶음은 한 단에만
+    #  쌓이므로, 그대로 두면 오른쪽 단이 통째로 빈다)
+    from weasyprint import HTML
+
+    doc = HTML(string=html, base_url=str(renderer.TEMPLATE_DIR)).render(
+        stylesheets=renderer._stylesheets())
+    css = renderer._balance_css(doc)
+    assert "#tg-a-0{height:" in css, css[:200]
+
+    #  지문별 편성에는 유형 묶음이 없으므로 2차 조판도 없다(비용 0)
+    html_p = renderer.render_html(ps, sections=["answers"], group_by="passage", **M)
+    doc_p = HTML(string=html_p, base_url=str(renderer.TEMPLATE_DIR)).render(
+        stylesheets=renderer._stylesheets())
+    assert renderer._balance_css(doc_p) == ""
+    print("✓ 유형별 편성 조판(유형마다 새 쪽·큰 칩·문항별 출처·두 단 고르게) 통과")
+
+
 def test_output_checker() -> None:
     """완성된 산출물 검산기(tools/검증.py)가 실제로 나왔던 결함을 잡는가."""
     import copy
@@ -2704,6 +2787,7 @@ if __name__ == "__main__":
     test_grammar_count_fixed_four()
     test_demo_matches_real_rules()
     test_output_defect_regressions()
+    test_type_group_layout()
     test_output_checker()
     test_stress_fixtures()
     test_analysis_sentences_are_ours()

@@ -7,6 +7,7 @@ JSON 은 사람이 읽고 고칠 수 있는 형태라, 지문 제목 등은 파�
 """
 from __future__ import annotations
 
+from .renderer import DEFAULT_GROUP_BY
 from .set2 import TYPE_LABELS2, TYPE_ORDER2, TYPE_PROMPTS2
 from .types import TYPE_LABELS, TYPE_ORDER, TYPE_PROMPTS, Passage
 
@@ -63,7 +64,7 @@ def dump_parts(part_meta: list[dict], header: str = "", doc_name: str = "") -> d
                 "set": str(pm["set"]),
                 "tag": pm["tag"],
                 "sections": list(pm.get("sections") or []),
-                "group_by": pm.get("group_by", "passage"),
+                "group_by": pm.get("group_by", DEFAULT_GROUP_BY),
                 "passages": [passage_to_dict(p) for p in pm["passages"]],
             }
             for pm in part_meta
@@ -97,12 +98,12 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
             missing = [t for t in order if t not in p.q or t not in p.a]
             if missing:
                 raise ValueError(f"'{p.title}' 파트에 빠진 유형이 있습니다: {missing}")
-        gb = pm.get("group_by", "passage")
+        gb = pm.get("group_by", DEFAULT_GROUP_BY)
         part = {
             "passages": passages,
             "header_note": _header_note(str(pm.get("tag", "") or ""), header),
             "sections": pm.get("sections") or None,
-            "group_by": gb if gb in ("passage", "type") else "passage",
+            "group_by": gb if gb in ("passage", "type") else DEFAULT_GROUP_BY,
         }
         # 조판 메타는 세트와 상관없이 항상 명시한다(기본값에 기대지 않는다).
         part.update(type_order=order, prompts=prompts, labels=labels)

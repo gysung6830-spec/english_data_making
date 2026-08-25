@@ -183,7 +183,7 @@ def generate():
     sections = [s for s in request.form.getlist("sections") if s in valid_sec] or list(valid_sec)
     # 문항 배치: 지문별(기본) 또는 문제유형별
     group_by = request.form.get("group_by")
-    group_by = group_by if group_by in ("passage", "type") else "passage"
+    group_by = group_by if group_by in ("passage", "type") else renderer.DEFAULT_GROUP_BY
     # 출력 방식: 합본(기본) / 개별(구성별 파일) / 합본 및 개별
     out_mode = request.form.get("out_mode")
     out_mode = out_mode if out_mode in ("merged", "each", "both") else "merged"

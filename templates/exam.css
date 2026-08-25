@@ -114,6 +114,40 @@ body {
   letter-spacing: 2px;
 }
 
+/* ---------- 유형 묶음(유형별 편성) ---------- */
+/* 유형마다 새 쪽에서 시작한다. 2단(.columns) '바깥'에 두어야 쪽 나눔이 확실히 먹는다
+   — 다단 안에서의 페이지 나눔은 조판기가 무시하는 일이 있다. */
+.type-group { break-before: page; }
+.type-group.first-group { break-before: auto; }   /* 섹션 제목 바로 뒤 빈 쪽 방지 */
+/* 유형 묶음은 자기만의 2단 상자를 갖는다. 이때 칸 높이는 '내용 높이'가 되므로,
+   그냥 두면 왼쪽 단만 끝까지 채우고 오른쪽 단이 통째로 빈다. min-height 로 칸
+   높이를 쪽 높이만큼 잡아 주면 왼쪽 단이 쪽 끝까지 찬 뒤 오른쪽으로 넘어간다.
+   height(고정)가 아니라 min-height 여야 한다 — 고정하면 한 쪽에 안 들어가는 긴
+   묶음이 다음 쪽으로 넘어가지 않고 단을 셋·넷으로 늘려 버린다.
+   column-fill: balance 는 쓰지 않는다 — 조판기가 칸 높이를 이분 탐색하느라
+   지문 3개짜리 문서에서 2분이 지나도 끝나지 않았다. */
+/* 칸 높이는 조판기가 1차 조판을 재어 2차 조판에 height 로 넣어 준다
+   (renderer._balance_css). 여기서는 아무 높이도 강제하지 않는다. */
+
+/* 유형 이름은 지문 라벨보다 크게 — 이 쪽이 무슨 유형인지 한눈에 보이게 한다. */
+.type-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 2.4mm;
+  background: #2f7d61;
+  color: #fff;
+  border-radius: 2.6mm;
+  padding: 1.6mm 3.4mm;
+  margin: 0 0 3mm 0;
+  break-after: avoid;
+}
+.type-chip-name { font-weight: 800; font-size: 15px; letter-spacing: 1px; flex: 1; }
+.type-chip-count {
+  font-weight: 700; font-size: 9px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px; padding: 0.5mm 2mm;
+}
+
 /* ---------- 지문 블록 / 라벨 ---------- */
 .passage-block { margin-bottom: 2mm; }
 /* 지문 라벨 + 첫 문항을 한 덩어리로 묶어, 라벨만 단 끝에 홀로 남지 않게 한다. */
@@ -145,7 +179,28 @@ body {
 /* 해설도 한 덩어리 — 남은 칸에서 중간에 잘리면 통째로 다음 칸/쪽으로 넘긴다.
    (한 칸을 다 채우고도 남을 만큼 긴 해설만 부득이 쪼개진다.) */
 .a-item { break-inside: avoid; }
-.q-head { margin-bottom: 1mm; break-after: avoid; }
+/* 문항 머리: [번호] [발문] ………… [출처]. 출처를 오른쪽 끝으로 밀어 발문을 가리지 않게. */
+.q-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6mm;
+  margin-bottom: 1mm;
+  break-after: avoid;
+}
+.q-head .q-prompt { flex: 1; }
+/* 출처(원본 교재의 문항 번호) — 어느 지문에서 나온 문항인지 알려 준다.
+   유형별로 편성하면 지문이 섞이므로 문항마다 붙여야 되짚어 볼 수 있다. */
+.q-src {
+  flex: none;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #2f7d61;
+  background: #eef6f2;
+  border: 0.5px solid #bcd8cc;
+  border-radius: 999px;
+  padding: 0.2mm 1.6mm;
+  white-space: nowrap;
+}
 .qnum { font-weight: 800; font-size: 1.25em; margin-right: 0.6mm; color: #2f7d61; }  /* 볼드 2 — 브랜드 초록으로 문항 구분 */
 /* 문제 글자는 본문 기본(10.2px)보다 살짝 크게 — 발문·지문·선지에 함께 적용(해설은 기본 유지) */
 .q-prompt { font-weight: 400; font-size: 11px; }
@@ -226,12 +281,15 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 /* ---------- 해설 ---------- */
 /* 해설은 한글 산문이라 문제보다 행간·문단 여백을 넉넉히 둔다(가독성). */
 .a-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8mm;
   margin-bottom: 1mm;
   padding-bottom: 0.7mm;
   border-bottom: 0.5px solid #dbeae2;   /* 문항 머리와 해설 본문을 갈라 준다 */
   break-after: avoid;
 }
-.a-type { font-weight: 400; font-size: 8.6px; color: #555; }
+.a-type { font-weight: 400; font-size: 8.6px; color: #555; flex: 1; }
 .a-body { font-weight: 400; line-height: 1.74; }
 /* 볼드 4 — 정답 글자(브랜드 초록). 알약으로 감싸 훑을 때 바로 잡히게 한다. */
 .answer-key {

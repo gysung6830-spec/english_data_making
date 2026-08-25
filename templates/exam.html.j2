@@ -6,6 +6,75 @@
 </head>
 <body>
 
+{# ===== 문항 한 개 · 해설 한 개 — 네 섹션이 같은 마크업을 나눠 쓴다 ===== #}
+{% macro q_item(item, with_exp) %}
+<div class="q-item type-{{ item.type }}">
+  <div class="q-head">
+    <span class="qnum">{{ item.no }}.</span>
+    <span class="q-prompt">{{ item.prompt }}</span>
+    {# 유형별 편성에서는 지문이 섞이므로 문항마다 출처를 단다. 지문별 편성에서는
+       블록 머리의 [10-1] 라벨이 같은 일을 하므로 되풀이하지 않는다. #}
+    {% if by_type and item.src %}<span class="q-src">{{ item.src }}</span>{% endif %}
+  </div>
+  <div class="q-body">{{ item.q_body }}</div>
+  {% if with_exp %}
+  <div class="teach-exp">
+    <span class="teach-tag">해설 · 정답 {{ item.key }}</span>
+    <div class="a-body">{{ item.a_body }}</div>
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro a_item(item) %}
+<div class="a-item type-{{ item.type }}">
+  <div class="a-head">
+    <span class="qnum">{{ item.no }}.</span>
+    <span class="a-type">{{ item.label }}</span>
+    {% if by_type and item.src %}<span class="q-src">{{ item.src }}</span>{% endif %}
+  </div>
+  <div class="a-body">{{ item.a_body }}</div>
+</div>
+{% endmacro %}
+
+{# rows 를 조판한다. kind: 'q'(문제) · 'qa'(문제+해설) · 'a'(해설) #}
+{% macro rows_of(block, kind) %}
+  {% for item in block.rows %}
+    {% if kind == 'a' %}{{ a_item(item) }}
+    {% else %}{{ q_item(item, kind == 'qa') }}{% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro body(blocks, kind) %}
+{% if by_type %}
+  {# 유형별: 유형마다 새 쪽에서 시작하고, 큰 칩으로 유형 이름을 단다 #}
+  {% for block in blocks %}
+  <div class="type-group{% if loop.first %} first-group{% endif %}">
+    <div class="type-chip">
+      <span class="type-chip-name">{{ block.chip }}</span>
+      <span class="type-chip-count">{{ block.count }}문항</span>
+    </div>
+    {# id 는 조판기가 붙인다 — 1차 조판에서 이 상자의 실제 높이를 재어, 두 단이
+       고르게 나뉘도록 2차 조판에 height 를 준다(renderer._balance_css). #}
+    <div class="columns" id="tg-{{ kind }}-{{ loop.index0 }}">{{ rows_of(block, kind) }}</div>
+  </div>
+  {% endfor %}
+{% else %}
+  {# 지문별: 지문 블록이 한 흐름으로 이어진다 #}
+  <div class="columns">
+    {% for block in blocks %}
+    <div class="passage-block">
+      <div class="label-keep">
+        <div class="passage-label">{{ block.label }}</div>
+        {% if block.rows %}{{ rows_of({'rows': block.rows[:1]}, kind) }}{% endif %}
+      </div>
+      {{ rows_of({'rows': block.rows[1:]}, kind) }}
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endmacro %}
+
 {# ===== 자료 하단 저작권(모든 쪽 하단에 반복) ===== #}
 {% if footer_note %}<div class="page-footer">{{ footer_note|e }}</div>{% endif %}
 
@@ -19,65 +88,23 @@
 </header>
 
 {% if 'student' in sections %}
-{# ============================================================
-   ① 학생용 — 문제만
-   ============================================================ #}
+{# ① 학생용 — 문제만 #}
 <section class="questions{% if first_section == 'student' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">학생용 · 문제</h2>
-  <div class="columns">
-    {% for block in blocks %}
-    <div class="passage-block">
-      {% for item in block.rows %}
-      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
-      <div class="q-item type-{{ item.type }}">
-        <div class="q-head">
-          <span class="qnum">{{ item.no }}.</span>
-          <span class="q-prompt">{{ item.prompt }}</span>
-        </div>
-        <div class="q-body">{{ item.q_body }}</div>
-      </div>
-      {% if loop.first %}</div>{% endif %}
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
+  {{ body(blocks, 'q') }}
 </section>
 {% endif %}
 
 {% if 'teacher' in sections %}
-{# ============================================================
-   ② 교사용 — 문제 밑에 해설(정답은 볼드)
-   ============================================================ #}
+{# ② 교사용 — 문제 밑에 해설(정답은 볼드) #}
 <section class="teacher{% if first_section == 'teacher' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">교사용 · 문제 + 해설</h2>
-  <div class="columns">
-    {% for block in blocks %}
-    <div class="passage-block">
-      {% for item in block.rows %}
-      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
-      <div class="q-item type-{{ item.type }}">
-        <div class="q-head">
-          <span class="qnum">{{ item.no }}.</span>
-          <span class="q-prompt">{{ item.prompt }}</span>
-        </div>
-        <div class="q-body">{{ item.q_body }}</div>
-        <div class="teach-exp">
-          <span class="teach-tag">해설 · 정답 {{ item.key }}</span>
-          <div class="a-body">{{ item.a_body }}</div>
-        </div>
-      </div>
-      {% if loop.first %}</div>{% endif %}
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
+  {{ body(blocks, 'qa') }}
 </section>
 {% endif %}
 
 {% if 'quick' in sections %}
-{# ============================================================
-   ③ 빠른 정답 — 번호·정답 한눈에
-   ============================================================ #}
+{# ③ 빠른 정답 — 번호·정답 한눈에 #}
 <section class="quick{% if first_section == 'quick' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">빠른 정답</h2>
   <div class="quick-grid">
@@ -95,28 +122,10 @@
 {% endif %}
 
 {% if 'answers' in sections %}
-{# ============================================================
-   ④ 해설지 — 정답 및 상세 해설
-   ============================================================ #}
+{# ④ 해설지 — 정답 및 상세 해설 #}
 <section class="answers{% if first_section == 'answers' %} first-sec{% endif %}">
   <h2 class="answer-title section-title">정답 및 해설 · 해설지</h2>
-  <div class="columns">
-    {% for block in blocks %}
-    <div class="passage-block">
-      {% for item in block.rows %}
-      {% if loop.first %}<div class="label-keep"><div class="passage-label">{{ block.label }}</div>{% endif %}
-      <div class="a-item type-{{ item.type }}">
-        <div class="a-head">
-          <span class="qnum">{{ item.no }}.</span>
-          <span class="a-type">{{ item.label }}</span>
-        </div>
-        <div class="a-body">{{ item.a_body }}</div>
-      </div>
-      {% if loop.first %}</div>{% endif %}
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
+  {{ body(blocks, 'a') }}
 </section>
 {% endif %}
 

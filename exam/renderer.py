@@ -52,27 +52,37 @@ _env = Environment(
 )
 
 
+# 기본 편성 — 유형별(같은 유형을 몰아 풀며 그 유형의 감을 잡게 한다).
+# 지문별로 묶고 싶으면 group_by="passage".
+DEFAULT_GROUP_BY = "type"
+
+
 def _blocks(passages: list[Passage], start: int,
             type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
-            group_by: str = "passage"):
+            group_by: str = DEFAULT_GROUP_BY):
     """통합 블록 + 빠른 정답 목록을 만들며 문항 번호를 연속 부여한다.
 
-    각 행(row)에 문제(q_body)·해설(a_body)·정답키(key)를 모두 담아,
+    각 행(row)에 문제(q_body)·해설(a_body)·정답키(key)·출처(src)를 모두 담아,
     한 데이터로 학생용·교사용·빠른정답·해설지 4개 섹션을 조판한다.
-    group_by="passage"(기본): [지문1: 유형들][지문2: 유형들]… (지문별)
-    group_by="type": [순서배열: 지문1·2·3][문장삽입: …]… (문제유형별)
+    group_by="type"(기본): [주제: 지문1·2][제목: 지문1·2]… (문제유형별)
+    group_by="passage": [지문1: 유형들][지문2: 유형들]… (지문별)
     번호는 어느 쪽이든 '조판에 나오는 순서 그대로' 1(또는 start)부터 연속 부여한다.
     """
     blocks: list[dict] = []
     quick: list[dict] = []       # 빠른정답: [{label, cells:[{no,key}]}] (label 빈값이면 머리 없이 평평)
 
-    def _row(no: int, t: str, p: Passage) -> tuple[dict, str]:
+    def _src(p: Passage, i: int) -> str:
+        """문항에 붙일 출처 표기 — 원본 문항번호가 있으면 그것, 없으면 '지문 n'."""
+        return (getattr(p, "source_label", "") or "").strip() or f"지문 {i}"
+
+    def _row(no: int, t: str, p: Passage, i: int) -> tuple[dict, str]:
         a_html = hang_numbers(p.a[t])
         key = _answer_key(a_html, t in SHORT_TYPES)
         return ({
             "no": no, "type": t, "prompt": prompts[t],
             "q_body": Markup(p.q[t]), "label": labels[t],
             "a_body": Markup(a_html), "key": key,
+            "src": _src(p, i), "title": p.title,
         }, key)
 
     def _has(p, t):     # 생성 실패로 빠진 슬롯은 건너뛴다(부분 생성 허용)
@@ -84,16 +94,18 @@ def _blocks(passages: list[Passage], start: int,
             rows: list[dict] = []
             items: list[dict] = []
             n = start
-            for p in passages:
+            for i, p in enumerate(passages, start=1):
                 if not _has(p, t):
                     continue
-                row, key = _row(n, t, p)
+                row, key = _row(n, t, p, i)
                 rows.append(row)
                 items.append({"no": n, "key": key})
                 n += 1
             if not rows:       # 이 유형이 전 지문에서 다 빠졌으면 블록 생략
                 continue
-            blocks.append({"label": f"[{labels[t]}]", "title": "", "rows": rows})
+            blocks.append({"label": f"[{labels[t]}]", "chip": labels[t],
+                           "prompt": prompts[t], "count": len(rows),
+                           "title": "", "rows": rows})
             quick.append({"label": f"[{labels[t]}]", "cells": items})
     else:
         # 지문별: 문서 전체 연속 번호(1..N). 빠른정답은 머리 없는 한 묶음(평평).
@@ -104,12 +116,13 @@ def _blocks(passages: list[Passage], start: int,
             for t in type_order:
                 if not _has(p, t):
                     continue
-                row, key = _row(n, t, p)
+                row, key = _row(n, t, p, i)
                 rows.append(row)
                 flat.append({"no": n, "key": key})
                 n += 1
-            disp = getattr(p, "source_label", "") or f"지문 {i}"
-            blocks.append({"label": f"[{disp}]", "title": p.title, "rows": rows})
+            disp = _src(p, i)
+            blocks.append({"label": f"[{disp}]", "chip": disp, "prompt": "",
+                           "count": len(rows), "title": p.title, "rows": rows})
         quick.append({"label": "", "cells": flat})
     return blocks, quick
 
@@ -136,7 +149,7 @@ def _resolve_sections(sections) -> tuple[set, str | None]:
 
 def collect_review(passages: list[Passage], start: int = 1,
                    type_order=TYPE_ORDER, labels=TYPE_LABELS,
-                   part_label: str = "", group_by: str = "passage") -> list[dict]:
+                   part_label: str = "", group_by: str = DEFAULT_GROUP_BY) -> list[dict]:
     """'확인 권장'으로 표시된 문항을 문서 연속 번호와 함께 모은다.
 
     _blocks 와 '같은 순회 순서·같은 번호 부여 규칙'(group_by 포함)을 쓰므로 문항 번호가
@@ -187,7 +200,7 @@ def render_html(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
-    sections=None, group_by: str = "passage",
+    sections=None, group_by: str = DEFAULT_GROUP_BY,
 ) -> str:
     blocks, quick = _blocks(passages, start, type_order, prompts, labels, group_by)
     active, first_section = _resolve_sections(sections)
@@ -200,6 +213,8 @@ def render_html(
         footer_note=footer_note,
         sections=active,
         first_section=first_section,
+        # 유형별 편성에서는 유형마다 새 쪽에서 시작하고 큰 칩으로 유형 이름을 단다.
+        by_type=(group_by == "type"),
     )
 
 
@@ -221,6 +236,90 @@ def _stylesheets():
             CSS(filename=str(TEMPLATE_DIR / "exam.css"))]
 
 
+
+# ---------------------------------------------------------------------------
+# 유형 묶음의 2단 칸 높이 — 한 번 조판해 '재고' 나눈다
+# ---------------------------------------------------------------------------
+# WeasyPrint 는 column-fill: auto 에서 칸 높이로 '쪽에 남은 높이'를 쓴다. 그래서
+# 한 쪽을 다 못 채우는 짧은 유형 묶음은 내용이 왼쪽 단에만 쌓이고 오른쪽 단이 통째로
+# 빈다(지문 2~3개짜리 해설편이 늘 그렇다). column-fill: balance 로 조판기에게 맡기면
+# 칸 높이를 이분 탐색하느라 해설편 한 섹션에 67초가 걸려 쓸 수 없었고, min-height 는
+# 칸 높이에 아무 영향을 주지 않았다(직접 확인).
+#
+# 그래서 이렇게 한다: 1차로 한 번 조판해 묶음마다 '한 단에 쌓았을 때의 실제 높이'를
+# 재고, 문항 경계 중 두 단이 가장 고르게 나뉘는 자리를 골라 그 높이를 height 로 준 뒤
+# 2차 조판을 한다. 어림이 아니라 실측이라 빗나갈 일이 없다. 값은 CSS 픽셀.
+_GROUP_ID = "tg-"
+
+
+def _box_id(box) -> str | None:
+    el = getattr(box, "element", None)
+    gid = el.get("id") if el is not None and hasattr(el, "get") else None
+    return gid if (gid or "").startswith(_GROUP_ID) else None
+
+
+def _group_fragments(doc) -> dict[str, list]:
+    """조판된 문서에서 유형 묶음(2단 상자) 조각을 id 별로 모은다.
+
+    다단 상자는 '바깥 상자 → 단 상자들'로 두 겹인데 둘 다 같은 element 를 물고 있다.
+    바깥 상자만 잡아야 children 이 '단'이 된다(안쪽을 잡으면 children 이 문항이라
+    단이 몇 개인지 알 수 없다). 그래서 만나는 즉시 그 아래는 더 보지 않는다.
+    """
+    out: dict[str, list] = {}
+
+    def walk(box) -> None:
+        gid = _box_id(box)
+        if gid:
+            out.setdefault(gid, []).append(box)
+            return                       # 안쪽 겹은 건너뛴다
+        for child in (getattr(box, "children", None) or []):
+            walk(child)
+
+    for page in doc.pages:
+        walk(page._page_box)
+    return out
+
+
+def _even_split(heights: list[float]) -> float:
+    """문항 경계 중 두 단이 가장 고르게 나뉘는 자리의 '큰 쪽' 높이."""
+    total = sum(heights)
+    best, acc = total, 0.0
+    for h in heights[:-1]:
+        acc += h
+        best = min(best, max(acc, total - acc))
+    return best
+
+
+def _balance_css(doc) -> str:
+    """1차 조판 실측 → 2차 조판에 줄 '묶음별 칸 높이' 스타일(없으면 빈 문자열)."""
+    rules = []
+    for gid, frags in _group_fragments(doc).items():
+        if len(frags) != 1:          # 이미 여러 쪽에 걸친 묶음 — 손대지 않는다
+            continue
+        cols = list(getattr(frags[0], "children", None) or [])
+        if len(cols) != 1:           # 이미 두 단을 쓰고 있다 — 그대로 둔다
+            continue
+        items = [c for c in (getattr(cols[0], "children", None) or [])
+                 if hasattr(c, "margin_height")]
+        if len(items) < 2:           # 문항이 하나뿐이면 나눌 수 없다
+            continue
+        want = _even_split([c.margin_height() for c in items])
+        rules.append(f"#{gid}{{height:{want:.1f}px}}")
+    return "".join(rules)
+
+
+def _render_doc(html: str, css):
+    """조판한다. 유형 묶음이 한 단에만 쌓였으면 칸 높이를 재서 다시 조판한다."""
+    from weasyprint import CSS, HTML  # 지연 임포트(무거움)
+
+    doc = HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css)
+    extra = _balance_css(doc)
+    if not extra:
+        return doc
+    return HTML(string=html, base_url=str(TEMPLATE_DIR)).render(
+        stylesheets=list(css) + [CSS(string=extra)])
+
+
 def _write_docs(docs, out_path: Path) -> Path:
     """여러 WeasyPrint 문서의 페이지를 한 PDF로 병합해 쓴다."""
     all_pages = [pg for d in docs for pg in d.pages]
@@ -236,7 +335,7 @@ def render_pdf(
     start: int = 1,
     footer_note: str = DEFAULT_FOOTER,
     type_order=TYPE_ORDER, prompts=TYPE_PROMPTS, labels=TYPE_LABELS,
-    sections=None, group_by: str = "passage",
+    sections=None, group_by: str = DEFAULT_GROUP_BY,
 ) -> Path:
     from weasyprint import HTML  # 지연 임포트(무거움)
 
@@ -248,7 +347,7 @@ def render_pdf(
                        type_order=type_order, prompts=prompts, labels=labels,
                        sections=sections, group_by=group_by)
     css = _stylesheets()
-    docs = [HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css)]
+    docs = [_render_doc(html, css)]
 
     # 교사용 산출물이면, '확인 권장 문항'을 맨 끝 별도 페이지로 덧붙인다.
     if active & _TEACHER_SECTIONS:
@@ -271,7 +370,7 @@ def _collect_review_items(parts: list[dict]) -> list[dict]:
                 part.get("type_order", TYPE_ORDER),
                 part.get("labels", TYPE_LABELS),
                 part_label=part.get("header_note", ""),
-                group_by=part.get("group_by", "passage"))
+                group_by=part.get("group_by", DEFAULT_GROUP_BY))
     return items
 
 
@@ -318,7 +417,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
         type_order = part.get("type_order", TYPE_ORDER)
         labels = part.get("labels", TYPE_LABELS)
         sections = part.get("sections")
-        group_by = part.get("group_by", "passage")
+        group_by = part.get("group_by", DEFAULT_GROUP_BY)
         html = render_html(
             part["passages"],
             header_note=part.get("header_note", ""),
@@ -329,7 +428,7 @@ def render_pdf_multi(parts: list[dict], out_path: str | Path,
             sections=sections,
             group_by=group_by,
         )
-        docs.append(HTML(string=html, base_url=str(TEMPLATE_DIR)).render(stylesheets=css))
+        docs.append(_render_doc(html, css))
         # 각 파트의 확인 권장 문항을 파트 라벨과 함께 모은다(교사용 산출물일 때만).
         active, _ = _resolve_sections(sections)
         if active & _TEACHER_SECTIONS:
