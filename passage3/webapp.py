@@ -39,7 +39,8 @@ from flask import (Flask, flash, redirect, render_template_string, request,
 try:
     from .chunker import chunk_sentences
     from .main import (FORMATS, extract_passages, html_to_pdf,
-                       renumber_passages, drop_practical_items, safe_filename)
+                       renumber_passages, drop_practical_items, is_mock_exam,
+                       safe_filename)
     from .renderer import (render_format_a, render_format_b, render_format_c,
                            render_format_d)
     from .segmenter import segment_passages
@@ -49,7 +50,8 @@ try:
 except ImportError:  # python webapp.py 로 직접 실행할 때
     from chunker import chunk_sentences
     from main import (FORMATS, extract_passages, html_to_pdf,
-                      renumber_passages, drop_practical_items, safe_filename)
+                      renumber_passages, drop_practical_items, is_mock_exam,
+                      safe_filename)
     from renderer import (render_format_a, render_format_b, render_format_c,
                           render_format_d)
     from segmenter import segment_passages
@@ -172,7 +174,8 @@ PAGE = """
       <label class="fmt" style="margin-top:10px;margin-bottom:0">
         <input type="checkbox" name="drop2728" value="1" checked>
         <span><b>모의고사 27·28번(실용문) 제외</b>
-          <span>안내문·광고 문항이라 지문 학습자료에서 자동 제외합니다. 포함하려면 체크 해제.</span></span>
+          <span><b>모의고사로 판별될 때만</b> 27·28번(안내문·광고)을 자동 제외합니다.
+            교재 등 다른 자료는 그대로 둡니다. 포함하려면 체크 해제.</span></span>
       </label>
     </div>
 
@@ -318,12 +321,14 @@ def generate():
 
         # 문항 시작 번호 지정 시 라벨 재부여
         passages = renumber_passages(passages, start_no)
-        # 모의고사 실용문(27·28번) 제외
-        if drop_2728:
+        # 모의고사일 때만 실용문(27·28번) 제외
+        if drop_2728 and is_mock_exam(passages, docname):
             before = len(passages)
             passages = drop_practical_items(passages)
             if len(passages) < before:
-                _log(f"    27·28번(실용문) 제외: {before} → {len(passages)}개")
+                _log(f"    모의고사 판정 · 27·28번(실용문) 제외: {before} → {len(passages)}개")
+        elif drop_2728:
+            _log("    모의고사 아님 → 27·28번 유지")
         n_sent = sum(len(p.sentences) for p in passages)
         _log(f"[1] 입력 파싱 완료 — 지문 {len(passages)}개, 문장 {n_sent}개  "
              f"({_fmt_dur(time.perf_counter() - t)})")

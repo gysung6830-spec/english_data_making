@@ -89,10 +89,40 @@ def _label_num(label: str):
     return int(m.group(1)) if m else None
 
 
+# 모의고사 판별 키워드(파일명·제목·원문에 등장)
+_MOCK_KEYWORDS = re.compile(
+    r"(모의고사|모의평가|모평|학력평가|학평|전국연합|수능|수학능력|"
+    r"대학수학능력|교육청|평가원)"
+)
+_RANGE_LABEL_RE = re.compile(r"\d+\s*[~∼]\s*\d+\s*번")
+
+
+def is_mock_exam(passages: List[Passage], docname: str = "") -> bool:
+    """이 자료가 '모의고사'인지 판별.
+
+    모의고사일 때만 27·28번(실용문)을 제외해야 하므로(교재 등은 제외 안 함),
+    다음 신호 중 하나라도 있으면 모의고사로 본다:
+      1) 파일명/지문 제목/원문에 모의고사 관련 키워드(학력평가·수능·교육청 등)
+      2) 장문 범위 라벨(41~42번, 43~45번 등) — 모의고사·수능 고유 구조
+    """
+    parts = [docname or ""]
+    for p in passages:
+        parts.append(p.title or "")
+        parts.append(getattr(p, "raw", "") or "")
+        for s in p.sentences[:2]:  # 앞부분 문장까지만 훑음
+            parts.append(s.ko or "")
+    if _MOCK_KEYWORDS.search(" ".join(parts)):
+        return True
+    if any(_RANGE_LABEL_RE.search(p.label or "") for p in passages):
+        return True
+    return False
+
+
 def drop_practical_items(passages: List[Passage],
                          nums=(27, 28)) -> List[Passage]:
-    """모의고사 실용문(안내문·광고) 문항을 제외한다(기본 27·28번).
+    """실용문(안내문·광고) 문항을 제외한다(기본 27·28번).
 
+    ※ 호출 전에 is_mock_exam()으로 모의고사인지 반드시 확인할 것.
     문항 번호가 실제 시험 번호와 맞도록 renumber_passages 이후에 호출한다.
     범위(장문) 라벨은 대상이 아니며, 형식 밖 라벨도 건드리지 않는다.
     """
@@ -359,12 +389,14 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
 
     # 문항 시작 번호 지정 시 라벨 재부여(시작번호부터 자동 증가)
     passages = renumber_passages(passages, start_no)
-    # 모의고사 실용문(27·28번) 제외(기본값). 실제 문항번호가 매겨진 뒤 제거.
-    if drop_practical:
+    # 모의고사일 때만 실용문(27·28번) 제외. 실제 문항번호가 매겨진 뒤 제거.
+    if drop_practical and is_mock_exam(passages, docname):
         before = len(passages)
         passages = drop_practical_items(passages)
         if len(passages) < before:
-            print(f"  → 27·28번(실용문) 제외: {before}개 → {len(passages)}개")
+            print(f"  → 모의고사 판정 · 27·28번(실용문) 제외: {before}개 → {len(passages)}개")
+    elif drop_practical:
+        print("  → 모의고사 아님(또는 미판정) → 27·28번 제외 안 함")
     print(f"  → 지문 {len(passages)}개, 총 문장 {sum(len(p.sentences) for p in passages)}개")
 
     # JSON 재입력(이미 분석된 자료)이면 번역·어휘 추출 생략 → API 비용 0
