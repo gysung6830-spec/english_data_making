@@ -133,6 +133,25 @@ def test_pdfparse_helpers():
     assert _looks_like_header(["① This is a sentence."]) is False
 
 
+def test_renumber_offset():
+    """재입력(27·28 이미 제외) + 시작번호 지정 시 번호가 밀리지 않아야 함."""
+    from main import renumber_passages, drop_practical_items, is_mock_exam
+    labels = (["18번", "19번", "20번", "21번", "22번", "23번", "24번", "25번",
+               "26번", "29번", "30번"] + ["41~42번", "43~45번"])
+    ps = [Passage(label=l, title="",
+                  sentences=[Sentence(num=1, en="a b c d e", ko="ㄱ")])
+          for l in labels]
+    ps = renumber_passages(ps, 18)          # 첫 지문 18 → offset 0
+    assert [p.label for p in ps] == labels   # 그대로(밀림 없음)
+    assert is_mock_exam(ps, "모의고사")
+    # 27·28 은 애초에 없으니 제외해도 실제 지문이 사라지지 않음
+    assert len(drop_practical_items(ps)) == len(labels)
+    # 오프셋(+2): 간격·범위 보존
+    ps2 = [Passage(label=l, title="", sentences=[]) for l in ["18번", "29번", "41~42번"]]
+    ps2 = renumber_passages(ps2, 20)
+    assert [p.label for p in ps2] == ["20번", "31번", "43~44번"]
+
+
 def test_realign_chunks():
     """직독직해 청크를 원문에서 그대로 다시 잘라 100% 일치시키는지 검증."""
     en = ('A creature must get from the place it is born—often occupied by '

@@ -130,19 +130,45 @@ def drop_practical_items(passages: List[Passage],
     return [p for p in passages if _label_num(p.label) not in drop]
 
 
-def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
-    """지문 라벨을 시작번호부터 문항번호로 덮어쓴다.
+def _label_lead(label: str):
+    """라벨의 맨 앞 숫자(단일 'N번'→N, 범위 'N~M번'→N). 숫자 없으면 None."""
+    m = re.search(r"\d{1,3}", label or "")
+    return int(m.group(0)) if m else None
 
-    장문(원래 라벨이 N~M번)은 문항 수만큼 건너뛰고 범위로 표기한다.
-    예) 시작 18 → 18번, 19번, …, 40번, 41~42번, 43~45번.
+
+def _shift_label(label: str, offset: int) -> str:
+    """라벨 안의 모든 숫자를 offset 만큼 이동('27번'·'41~42번' 모두 처리)."""
+    return re.sub(r"\d{1,3}", lambda m: str(int(m.group(0)) + offset), label)
+
+
+def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
+    """문항 시작 번호에 맞춰 라벨을 다시 매긴다.
+
+    - 숫자 라벨이 있으면 '오프셋 이동'(첫 지문 기준)으로 기존 간격·범위를 보존한다.
+      예) 첫 지문이 18번이고 시작 18 → offset 0 → 그대로.
+      이렇게 해야 27·28번이 이미 빠진 자료를 재입력해도 번호가 밀리지 않는다.
+    - 숫자 라벨이 전혀 없으면(번호 없는 자료) 시작번호부터 순차 부여한다.
     start_no 가 None/빈값이면 그대로 둔다(파일에서 인식한 번호 유지).
     """
     if start_no in (None, ""):
         return passages
     try:
-        cur = int(start_no)
+        start = int(start_no)
     except (TypeError, ValueError):
         return passages
+
+    first = next((_label_lead(p.label) for p in passages
+                  if _label_lead(p.label) is not None), None)
+    if first is not None:
+        offset = start - first
+        if offset:
+            for p in passages:
+                if _label_lead(p.label) is not None:
+                    p.label = _shift_label(p.label, offset)
+        return passages
+
+    # 숫자 라벨이 전혀 없는 경우에만 순차 부여
+    cur = start
     for p in passages:
         span = _label_span(p.label)
         p.label = f"{cur}~{cur + span - 1}번" if span >= 2 else f"{cur}번"
