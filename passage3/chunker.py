@@ -10,10 +10,10 @@ import os
 from typing import List
 
 try:
-    from .parser import Chunk, Passage, realign_chunks
+    from .parser import Chunk, Passage, realign_chunks, rough_sense_split
     from .translator import _extract_json
 except ImportError:
-    from parser import Chunk, Passage, realign_chunks
+    from parser import Chunk, Passage, realign_chunks, rough_sense_split
     from translator import _extract_json
 
 DEFAULT_MODEL = "claude-sonnet-5"
@@ -134,9 +134,12 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 except Exception:
                     pass  # 재시도
                 max_tokens = min(4096, max_tokens + 1200)  # 다음 시도는 더 넉넉히
-            # 그래도 실패하면 최소한 문장 전체를 한 조각으로(끊어읽기 누락 방지)
+            # 그래도 실패하면 규칙 기반으로 대략 끊는다(끊어읽기 누락 방지).
+            # 청크별 뜻은 못 달지만(ko 비움), 렌더러가 문장 전체 해석을 보여 준다.
             if not s.chunks:
-                s.chunks = [Chunk(en=s.en.strip(), ko=(s.ko or "").strip())]
+                pieces = rough_sense_split(s.en)
+                s.chunks = [Chunk(en=p, ko="") for p in pieces] or \
+                    [Chunk(en=s.en.strip(), ko="")]
             # 조각 텍스트를 원문에서 그대로 다시 잘라 100% 일치시킴
             s.chunks = realign_chunks(s.en, s.chunks)
             done += 1

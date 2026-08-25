@@ -171,6 +171,26 @@ def test_tidy_chunk_ko():
     assert tidy_chunk_ko("반대 의견을 지지한다고 한다") == "반대 의견을 지지한다고 한다"
     assert tidy_chunk_ko("고양이보다") == "고양이보다"
     assert tidy_chunk_ko("전문가가 자신이") == "전문가가 자신이"
+    # 비술어 억지 종결('~에서다/있어서다') → 끝의 '다' 제거
+    assert tidy_chunk_ko("여섯 나라 중에서다") == "여섯 나라 중에서"
+    assert tidy_chunk_ko("그것의 정의에 있어서다") == "그것의 정의에 있어서"
+    assert tidy_chunk_ko("무언가를 이루기 위해서다") == "무언가를 이루기 위해서"
+
+
+def test_rough_sense_split():
+    """규칙 기반 폴백 끊어읽기: 원문 보존 + 과도하게 길지 않게 분할."""
+    from parser import rough_sense_split, _letters
+    en = ("Those who have found deeper meaning in their careers find their days "
+          "much more energizing and satisfying, and count their employment as one "
+          "of their greatest sources of joy and pride.")
+    pieces = rough_sense_split(en)
+    assert len(pieces) >= 3
+    # 원문 영숫자 순서 보존
+    assert _letters(" ".join(pieces)) == _letters(en)
+    # 한 조각이 지나치게 길지 않음
+    assert max(len(p.split()) for p in pieces) <= 11
+    # 짧은 문장은 그대로 한 조각
+    assert rough_sense_split("Some snakes can detect heat.") == ["Some snakes can detect heat."]
 
 
 if __name__ == "__main__":

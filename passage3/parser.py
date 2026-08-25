@@ -28,16 +28,77 @@ def _letters(s: str) -> str:
 
 # 강제 '~다' 종결로 '다다'가 중복된 경우(예: 고양이보다→보다다, 있다→있다다)
 _DUP_DA_RE = re.compile(r"다다(?=[\s.!?…)\]\"'”’》」』]*$)")
+# 비술어(전치사구 등)에 억지로 '다'를 붙여 딱딱해진 종결
+#  (…에서다/…위해서다/…있어서다/…대해서다/…통해서다/…로서다 → 끝의 '다' 제거)
+_STIFF_END_RE = re.compile(
+    r"(에서|에게서|께서|위해서|위하여서|대해서|관해서|통해서|있어서|없어서|"
+    r"로서|으로서|로써|으로써)다(?=[\s.!?…)\]\"'”’》」』]*$)"
+)
 
 
 def tidy_chunk_ko(ko: str) -> str:
-    """직독직해 청크 뜻의 흔한 오타 정리.
+    """직독직해 청크 뜻의 흔한 오타·번역투 정리.
 
-    chunker 가 '마지막 조각은 ~다로 끝내라'는 지시 때문에 이미 '다'로 끝나는
-    말('보다', '있다'…)에 '다'를 한 번 더 붙여 '다다'가 되는 경우를 하나로 줄인다.
+    (1) '마지막 조각은 ~다로 끝내라'는 지시 때문에 이미 '다'로 끝나는 말
+        ('보다', '있다'…)에 '다'를 한 번 더 붙인 '다다'를 하나로 줄인다.
+    (2) 전치사구 등 비술어에 억지로 '다'를 붙여 딱딱해진 종결
+        ('…중에서다', '…있어서다')에서 끝의 '다'를 떼어 자연스럽게 만든다.
     """
     ko = (ko or "").strip()
-    return _DUP_DA_RE.sub("다", ko)
+    ko = _DUP_DA_RE.sub("다", ko)
+    ko = _STIFF_END_RE.sub(lambda m: m.group(1), ko)
+    return ko
+
+
+# 규칙 기반 끊어읽기(폴백): AI 청크 생성 실패 시 최소한의 의미 단위로 나눔
+_BREAK_BEFORE = {
+    "that", "which", "who", "whom", "whose", "where", "when", "why",
+    "because", "if", "although", "though", "while", "since", "unless",
+    "and", "but", "so", "or", "nor", "yet",
+}
+# 조각이 이미 길 때(5단어+)만 그 앞에서 끊는 전치사류
+_BREAK_BEFORE_LONG = {
+    "in", "of", "for", "on", "at", "with", "to", "from", "into",
+    "as", "than", "by", "about", "through", "between", "along",
+}
+
+
+def rough_sense_split(en: str) -> List[str]:
+    """영어 문장을 규칙만으로 의미 단위(구~절)로 대략 끊는다.
+
+    AI 청크 생성이 실패한 긴 문장에 최소한의 끊어읽기를 제공하기 위한 폴백.
+    콤마·대시 뒤, 절/등위접속사·관계사 앞, 문장 내부 마침표 뒤에서 끊고,
+    너무 짧은 조각(2단어 미만)은 앞 조각에 붙인다. 원문은 그대로 보존된다.
+    """
+    words = en.split()
+    if len(words) <= 6:
+        return [en.strip()] if en.strip() else []
+    chunks: List[List[str]] = []
+    cur: List[str] = []
+    for w in words:
+        bare = w.strip(".,;:!?\"'()—–").lower()
+        # 절/등위접속사·관계사 앞에서 끊기, 또는 조각이 길면 전치사 앞에서도 끊기
+        if (bare in _BREAK_BEFORE and len(cur) >= 3) or \
+           (bare in _BREAK_BEFORE_LONG and len(cur) >= 5):
+            chunks.append(cur)
+            cur = [w]
+        else:
+            cur.append(w)
+        # 콤마·대시·문장내 마침표 뒤에서 끊기
+        if re.search(r"[,—–]$", w) or re.search(r"[.!?]$", w):
+            if len(cur) >= 3:
+                chunks.append(cur)
+                cur = []
+    if cur:
+        chunks.append(cur)
+    # 너무 짧은 조각은 이웃에 병합
+    merged: List[List[str]] = []
+    for c in chunks:
+        if merged and len(c) < 2:
+            merged[-1].extend(c)
+        else:
+            merged.append(c)
+    return [" ".join(c) for c in merged if c]
 
 
 def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
