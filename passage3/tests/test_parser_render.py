@@ -155,9 +155,22 @@ def test_realign_chunks():
     assert out[2].en.startswith("to a place")
     # 뜻(ko)은 보존
     assert out[0].ko == "생물은 이동해야 한다"
-    # 단어가 실제로 다르면(안전) 원본 유지
+    # 단어가 실제로 다르면 영어는 원본 유지(한글 뜻 정리는 별도 검증)
     bad = [Chunk(en="totally different words here", ko="x")]
-    assert realign_chunks(en, bad) is bad
+    out2 = realign_chunks(en, bad)
+    assert [c.en for c in out2] == ["totally different words here"]
+
+
+def test_tidy_chunk_ko():
+    """강제 '~다' 종결로 생긴 '다다' 중복만 하나로 줄이고 정상 텍스트는 보존."""
+    from parser import tidy_chunk_ko
+    assert tidy_chunk_ko("있는 고양이보다다") == "있는 고양이보다"
+    assert tidy_chunk_ko("경험했다다.") == "경험했다."
+    assert tidy_chunk_ko("여겨질 수 있다다") == "여겨질 수 있다"
+    # 정상 한국어는 그대로
+    assert tidy_chunk_ko("반대 의견을 지지한다고 한다") == "반대 의견을 지지한다고 한다"
+    assert tidy_chunk_ko("고양이보다") == "고양이보다"
+    assert tidy_chunk_ko("전문가가 자신이") == "전문가가 자신이"
 
 
 if __name__ == "__main__":

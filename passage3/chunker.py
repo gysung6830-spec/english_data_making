@@ -36,7 +36,9 @@ _SYSTEM = (
     "(문어체 평서형, 반말), NEVER 존댓말. Make the units read naturally in sequence — "
     "non-final units end with connective forms so they flow into the next "
     "(예: ~하여/~하고/~한 후/~인데/~것을/~기 위해/~때), and the LAST unit ends in "
-    "'~다'. Keep each meaning concise and in English order. Return ONLY JSON."
+    "'~다'. If the last unit's Korean ALREADY ends in '다' (예: 보다, 있다, 없다, "
+    "같다), do NOT append another '다' (never write '다다'). Keep each meaning "
+    "concise and in English order. Return ONLY JSON."
 )
 
 

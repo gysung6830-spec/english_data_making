@@ -26,18 +26,34 @@ def _letters(s: str) -> str:
     return "".join(_ALNUM_RE.findall(s or ""))
 
 
+# 강제 '~다' 종결로 '다다'가 중복된 경우(예: 고양이보다→보다다, 있다→있다다)
+_DUP_DA_RE = re.compile(r"다다(?=[\s.!?…)\]\"'”’》」』]*$)")
+
+
+def tidy_chunk_ko(ko: str) -> str:
+    """직독직해 청크 뜻의 흔한 오타 정리.
+
+    chunker 가 '마지막 조각은 ~다로 끝내라'는 지시 때문에 이미 '다'로 끝나는
+    말('보다', '있다'…)에 '다'를 한 번 더 붙여 '다다'가 되는 경우를 하나로 줄인다.
+    """
+    ko = (ko or "").strip()
+    return _DUP_DA_RE.sub("다", ko)
+
+
 def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
     """직독직해 청크의 영어 텍스트를 원문(en)에서 '그대로' 다시 잘라 맞춘다.
 
     AI가 돌려준 청크는 끊는 위치는 좋아도 문장부호(따옴표·대시 공백·마침표)가
     원문과 미세하게 달라질 수 있다. 끊는 경계(글자 수)는 그대로 두고 각 청크의
     실제 텍스트만 원문에서 잘라오면, 조각을 이어 붙였을 때 원문과 100% 일치한다.
-    글자(영숫자) 순서가 원문과 다르면(=단어가 실제로 다르면) 원본 청크를 그대로 둔다.
+    글자(영숫자) 순서가 원문과 다르면(=단어가 실제로 다르면) 영어는 원본을 두되,
+    한글 뜻('다다' 중복 등)은 항상 정리한다.
     """
     if not chunks:
         return chunks
     if _letters("".join(c.en for c in chunks)) != _letters(en):
-        return chunks  # 단어 자체가 다르면 건드리지 않음(안전)
+        # 영어는 안전하게 그대로 두고 한글 뜻만 정리
+        return [Chunk(en=c.en, ko=tidy_chunk_ko(c.ko)) for c in chunks]
 
     out: List["Chunk"] = []
     pos, n = 0, len(chunks)
@@ -56,7 +72,7 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
                 j += 1
             seg = en[pos:j]
             pos = j
-        out.append(Chunk(en=seg.strip(), ko=c.ko))
+        out.append(Chunk(en=seg.strip(), ko=tidy_chunk_ko(c.ko)))
     return out
 
 
