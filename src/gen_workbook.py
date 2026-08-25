@@ -1127,6 +1127,25 @@ def onepass_page(seqtype):
         '<ol><li><b>묻는 것 먼저</b> — 주어진 글·넣을 문장부터. 갈고리를 쥐고 본문에 들어가면 되돌아갈 일이 없다.</li>'
         '<li><b>몸통 말고 이음매</b> — 조각의 끝과 다음 첫머리만. 가운데 문장은 순서 판단에 필요 없다.</li>'
         '<li><b>눈으로 외우지 말고 손으로 표시</b> — 지시어→선행어를 화살표로 그으며 간다.</li></ol>')
+    if seqtype == "순서":
+        tips = (
+            '<ol>'
+            '<li><b>첫 조각 소거</b> — 첫머리가 지시어(<b>This·That·These·They·Such</b>)나 연결어(<b>However·But·So·Thus·For example</b>)로 시작하는 조각은 <b>절대 맨 앞이 될 수 없다</b>. 남는 하나가 시작.</li>'
+            '<li><b>연결어로 앞자리 확정</b> — <b>However/But</b>=앞은 반대내용 · <b>For example</b>=앞은 일반진술 · <b>So/Thus</b>=앞은 원인 · <b>then/after that</b>=앞은 시간상 먼저.</li>'
+            '<li><b>the + 명사 추적</b> — 처음 등장은 <b>a/an</b>, 재등장은 <b>the</b>. ‘the X’가 든 조각은 ‘a X’로 X를 처음 꺼낸 조각 <b>뒤</b>.</li>'
+            '<li><b>대명사 수·성 일치</b> — they/it/she가 가리킬 대상이 있는 조각을 그 <b>바로 앞</b>에 붙인다.</li>'
+            '</ol>')
+    else:
+        tips = (
+            '<ol>'
+            '<li><b>뒤 손잡이 먼저</b> — 넣을 문장 첫머리의 지시어(<b>this·these·such·they</b>)나 역접(<b>But·However</b>)이 <b>받을 선행어가 없는 자리는 오답</b>, 있는 <b>첫 자리가 정답</b>.</li>'
+            '<li><b>논리 공백 탐지</b> — ①~⑤ 중 <b>대명사가 가리킬 게 없거나</b> 인과가 비약하거나 예시가 대상 없이 튀는 <b>끊긴 곳</b>이 정답.</li>'
+            '<li><b>양방향 확인</b> — 넣을 문장 <b>뒤</b> 문장의 지시어가 넣을 문장을 받는지도 본다. <b>앞·뒤가 맞물려야</b> 확정.</li>'
+            '<li><b>역접이면 상반</b> — 넣을 문장이 <b>But/Yet</b>이면 그 앞은 반대내용, 뒤는 그 반전을 이어받는 자리.</li>'
+            '</ol>')
+    tips += ('<div style="margin-top:6px;font-size:8.6px;color:#8a5a1a;background:#fff7ed;'
+             'border:1px solid #f0c48a;border-radius:6px;padding:6px 9px">'
+             '※ “정답이 ②~④에 많다”는 <b>통계 찍기</b>는 근거가 아니라 <b>최후의 참고</b>로만 — 위 단서로 <b>자리를 확정</b>하는 게 원칙.</div>')
     return f'''<section class="onepass"><span class="wbm">wbspread</span>
       <div class="op-top"><span class="op-badge">1-PASS</span><h1>{title}</h1>
         <span class="op-sub">형광펜 독해 · 유형 특강</span></div>
@@ -1137,6 +1156,8 @@ def onepass_page(seqtype):
       <div class="op-steps">{steps}</div>
       <div class="op-h2">시범 — {"몸통은 넘기고 '이음매'만 따라간다" if seqtype=="순서" else "손잡이 뽑고 '끊긴 곳' 한 번에"}</div>
       {demo}
+      <div class="op-h2">실전 찍기 — 분석으로 자리를 <b>확정·소거</b></div>
+      <div class="op-habit op-tips">{tips}</div>
       <div class="op-h2">재독을 없애는 습관 3</div>
       <div class="op-habit">{habits}</div>
     </section>'''
