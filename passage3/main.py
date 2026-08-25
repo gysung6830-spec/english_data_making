@@ -83,6 +83,23 @@ def _label_span(label: str) -> int:
     return 1
 
 
+def _label_num(label: str):
+    """라벨의 (단일) 문항번호 정수. 'N번' → N, 범위(N~M번)나 형식 밖이면 None."""
+    m = re.match(r"^\s*(\d{1,3})\s*번\s*$", label or "")
+    return int(m.group(1)) if m else None
+
+
+def drop_practical_items(passages: List[Passage],
+                         nums=(27, 28)) -> List[Passage]:
+    """모의고사 실용문(안내문·광고) 문항을 제외한다(기본 27·28번).
+
+    문항 번호가 실제 시험 번호와 맞도록 renumber_passages 이후에 호출한다.
+    범위(장문) 라벨은 대상이 아니며, 형식 밖 라벨도 건드리지 않는다.
+    """
+    drop = set(nums)
+    return [p for p in passages if _label_num(p.label) not in drop]
+
+
 def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
     """지문 라벨을 시작번호부터 문항번호로 덮어쓴다.
 
@@ -325,7 +342,8 @@ def _set_passage_class(page, selector: str, step: str) -> None:
 
 def run(input_path, out_dir, header: str = "", formats: str = "abc",
         do_translate: bool = True, theme: str = "modern",
-        docname: str = "", api_key: str = None, start_no=None) -> List[Path]:
+        docname: str = "", api_key: str = None, start_no=None,
+        drop_practical: bool = True) -> List[Path]:
     """입력 → 3형식 PDF 생성. 생성된 파일 경로 리스트 반환."""
     input_path = Path(input_path)
     out_dir = Path(out_dir)
@@ -341,6 +359,12 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
 
     # 문항 시작 번호 지정 시 라벨 재부여(시작번호부터 자동 증가)
     passages = renumber_passages(passages, start_no)
+    # 모의고사 실용문(27·28번) 제외(기본값). 실제 문항번호가 매겨진 뒤 제거.
+    if drop_practical:
+        before = len(passages)
+        passages = drop_practical_items(passages)
+        if len(passages) < before:
+            print(f"  → 27·28번(실용문) 제외: {before}개 → {len(passages)}개")
     print(f"  → 지문 {len(passages)}개, 총 문장 {sum(len(p.sentences) for p in passages)}개")
 
     # JSON 재입력(이미 분석된 자료)이면 번역·어휘 추출 생략 → API 비용 0
@@ -408,6 +432,8 @@ def _build_argparser() -> argparse.ArgumentParser:
     ap.add_argument("--no-translate", action="store_true", help="자동 번역 끄기")
     ap.add_argument("--start-no", default="",
                     help="문항 시작 번호. 지정 시 지문마다 시작번호부터 1씩 증가")
+    ap.add_argument("--keep-2728", action="store_true",
+                    help="모의고사 27·28번(실용문) 제외 안 함(기본은 제외)")
     ap.add_argument("--api-key", default="",
                     help="Claude API 키(영어만 있는 자료 자동 번역·비전 OCR용). "
                          "미지정 시 환경변수 ANTHROPIC_API_KEY 사용")
@@ -426,6 +452,7 @@ def main(argv=None) -> int:
         docname=args.name,
         api_key=args.api_key or None,
         start_no=args.start_no or None,
+        drop_practical=not args.keep_2728,
     )
     return 0 if produced else 1
 

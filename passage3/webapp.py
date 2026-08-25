@@ -39,7 +39,7 @@ from flask import (Flask, flash, redirect, render_template_string, request,
 try:
     from .chunker import chunk_sentences
     from .main import (FORMATS, extract_passages, html_to_pdf,
-                       renumber_passages, safe_filename)
+                       renumber_passages, drop_practical_items, safe_filename)
     from .renderer import (render_format_a, render_format_b, render_format_c,
                            render_format_d)
     from .segmenter import segment_passages
@@ -49,7 +49,7 @@ try:
 except ImportError:  # python webapp.py 로 직접 실행할 때
     from chunker import chunk_sentences
     from main import (FORMATS, extract_passages, html_to_pdf,
-                      renumber_passages, safe_filename)
+                      renumber_passages, drop_practical_items, safe_filename)
     from renderer import (render_format_a, render_format_b, render_format_c,
                           render_format_d)
     from segmenter import segment_passages
@@ -169,6 +169,11 @@ PAGE = """
              placeholder="예: 26  →  지문마다 26번, 27번, 28번 …">
       <div class="hint">입력하면 각 지문 제목이 <b>시작번호부터 1씩 증가</b>하는 문항번호로 표시됩니다.
         비우면 파일에서 인식한 번호를 그대로 사용합니다.</div>
+      <label class="fmt" style="margin-top:10px;margin-bottom:0">
+        <input type="checkbox" name="drop2728" value="1" checked>
+        <span><b>모의고사 27·28번(실용문) 제외</b>
+          <span>안내문·광고 문항이라 지문 학습자료에서 자동 제외합니다. 포함하려면 체크 해제.</span></span>
+      </label>
     </div>
 
     <div class="card">
@@ -271,6 +276,7 @@ def generate():
     api_key = request.form.get("apikey", "").strip() or None
     start_no = request.form.get("startno", "").strip() or None
     save_json = request.form.get("savejson") == "1"
+    drop_2728 = request.form.get("drop2728") == "1"
 
     if not file or not file.filename:
         flash("지문 파일을 선택하세요.")
@@ -312,6 +318,12 @@ def generate():
 
         # 문항 시작 번호 지정 시 라벨 재부여
         passages = renumber_passages(passages, start_no)
+        # 모의고사 실용문(27·28번) 제외
+        if drop_2728:
+            before = len(passages)
+            passages = drop_practical_items(passages)
+            if len(passages) < before:
+                _log(f"    27·28번(실용문) 제외: {before} → {len(passages)}개")
         n_sent = sum(len(p.sentences) for p in passages)
         _log(f"[1] 입력 파싱 완료 — 지문 {len(passages)}개, 문장 {n_sent}개  "
              f"({_fmt_dur(time.perf_counter() - t)})")
