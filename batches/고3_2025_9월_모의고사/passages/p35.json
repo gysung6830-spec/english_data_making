@@ -1,0 +1,602 @@
+{
+ "item_no": "35",
+ "theme": "모든 구성원의 성장을 돕는 다양한 멘토(mentor) 네트워크의 중요성",
+ "overview": {
+  "theme_ko": "모든 구성원을 위한 다양한 멘토 네트워크의 중요성",
+  "topic": "🔎 지배·소수 집단 모두의 성장을 돕는 다양한 멘토 네트워크의 중요성",
+  "stance": "긍정적",
+  "stance_reason": "Having a diverse network of mentors is important for dominant and minority group members alike (다양한 멘토 네트워크를 중요하게 평가)",
+  "structure": "주장→근거·예시",
+  "structure_reason": "S3에서 '다양한 멘토 네트워크가 두 집단 모두에게 중요하다'는 주장을 세우고, 소수 집단·다수 집단 각각의 이점을 근거로 제시한 뒤 결론짓는다.",
+  "key_grammar": {
+   "point": "동명사 주어 (Having ~ is)",
+   "source_sentence": "Having a diverse network of mentors is important for dominant and minority group members alike.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "Having a diverse network of mentors 전체가 문장의 [[주어]]인 동명사구다."
+    },
+    {
+     "chip": "수 일치",
+     "text": "동명사 주어는 [[단수]] 취급하므로 동사가 is다."
+    },
+    {
+     "chip": "의미",
+     "text": "'다양한 멘토 네트워크를 [[갖추는 것]]은 ~'으로 해석한다."
+    },
+    {
+     "chip": "구별",
+     "text": "To have ~로 바꿔도 주어가 되지만, 문두에서는 동명사가 더 [[자연스럽다]]."
+    }
+   ],
+   "example_analysis": "동명사구 Having ~ mentors가 주어, is가 동사, important가 보어인 구조다.",
+   "drills": [
+    {
+     "kind": "객관식",
+     "question": "빈칸에 알맞은 것은? '___ a diverse network of mentors is important for ~.'",
+     "options": [
+      "Having",
+      "Have",
+      "To having"
+     ],
+     "answer": "Having",
+     "from_passage": true
+    },
+    {
+     "kind": "객관식",
+     "question": "동명사 주어에 맞는 동사 형태는?",
+     "options": [
+      "is",
+      "are",
+      "be"
+     ],
+     "answer": "is",
+     "from_passage": true
+    },
+    {
+     "kind": "객관식",
+     "question": "'Having a diverse network of mentors'의 문장 성분은?",
+     "options": [
+      "주어",
+      "목적어",
+      "보어"
+     ],
+     "answer": "주어",
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "다양한 멘토 네트워크를 갖추는 것은 지배 집단과 소수 집단에게 똑같이 중요하다.",
+     "words": [
+      "Having",
+      "a",
+      "diverse",
+      "network",
+      "of",
+      "mentors",
+      "is",
+      "important",
+      "for",
+      "dominant",
+      "and",
+      "minority",
+      "group",
+      "members",
+      "alike"
+     ],
+     "answer": "Having a diverse network of mentors is important for dominant and minority group members alike",
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "새로운 언어를 배우는 것은 시간이 걸린다.",
+     "words": [
+      "Learning",
+      "a",
+      "new",
+      "language",
+      "takes",
+      "time"
+     ],
+     "answer": "Learning a new language takes time",
+     "from_passage": false
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "다양한 멘토 네트워크",
+    "expressions": [
+     "a diverse network of mentors",
+     "diverse mentors",
+     "a network of diverse mentors"
+    ],
+    "variation": "지배·소수 집단 모두에게 유익함"
+   },
+   {
+    "label": "멘토가 제공하는 것",
+    "expressions": [
+     "valuable information",
+     "psychosocial support"
+    ],
+    "variation": "직무 정보 + 심리사회적 지원"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입",
+    "sentence_range": "1~2",
+    "summary": "모든 근로자는 [[정보]]와 심리사회적 지원을 주는 멘토가 필요",
+    "easy_example": "새 직장에서 길을 알려 주고 마음도 다독여 주는 선배가 필요하다."
+   },
+   {
+    "stage": "주제",
+    "sentence_range": "3",
+    "summary": "[[다양한]] 멘토 네트워크는 지배·소수 집단 모두에게 중요",
+    "easy_example": "여러 배경의 조언자를 두면 누구에게나 도움이 된다."
+   },
+   {
+    "stage": "근거1(소수)",
+    "sentence_range": "4",
+    "summary": "소수 집단: [[고용]]된다는 것의 의미에 대한 통찰을 얻음",
+    "easy_example": "이 분야에서 일한다는 게 어떤 것인지 미리 배운다."
+   },
+   {
+    "stage": "근거2(다수)",
+    "sentence_range": "5",
+    "summary": "다수 집단: 다양한 현실·자신의 [[특권]]에 대한 이해·민감성 상승",
+    "easy_example": "남의 처지와 내 위치를 더 잘 알게 된다."
+   },
+   {
+    "stage": "결론",
+    "sentence_range": "6",
+    "summary": "궁극적 목표는 개인이 일과 조직에 더 [[관여]]하게 하는 것",
+    "easy_example": "결국 더 잘 알고 몰입해서 일하게 만든다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "All workers need access to mentors that can provide them with valuable information about their job, their workplace, and the resources that are available within their organization.",
+   "grammar": [
+    {
+     "tag": "관계대명사 that",
+     "note": "mentors를 수식(주격)",
+     "spans": [
+      "that"
+     ]
+    },
+    {
+     "tag": "provide A with B",
+     "note": "'A에게 B를 제공하다'",
+     "spans": [
+      "provide them with"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "access",
+     "meaning": "접근, 이용 (기회)"
+    },
+    {
+     "word": "mentor",
+     "meaning": "멘토, 조언자"
+    },
+    {
+     "word": "valuable",
+     "meaning": "가치 있는"
+    },
+    {
+     "word": "available",
+     "meaning": "이용 가능한"
+    },
+    {
+     "word": "organization",
+     "meaning": "조직, 단체"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "All workers need access to [[mentors]]",
+     "ko": "모든 근로자는 [[멘토]]에게로의 접근이 필요하다"
+    },
+    {
+     "en": "that can provide them with valuable [[information]]",
+     "ko": "그들에게 가치 있는 [[정보]]를 제공할 수 있는"
+    },
+    {
+     "en": "about their job, their [[workplace]],",
+     "ko": "그들의 직무, [[직장]]에 관한,"
+    },
+    {
+     "en": "and the [[resources]] that are available within their organization.",
+     "ko": "그리고 그들의 조직 내에서 이용 가능한 [[자원]]에 관한."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "모든 근로자는 직무·직장·조직 내 자원에 관한 정보를 제공하는 멘토가 필요하다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "멘토는 근로자에게 직무·직장 정보를 제공하지만, 조직 밖에서 이용 가능한 자원까지 다루지는 않는다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "anchor": "the resources that are available within their organization",
+     "why": "자원은 조직 '내에서(within)' 이용 가능한 것이므로 조직 밖이라는 진술은 틀리다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "Mentors also provide much needed psychosocial support.",
+   "grammar": [
+    {
+     "tag": "much needed",
+     "note": "'꼭 필요한'(much가 needed를 강조)",
+     "spans": [
+      "much needed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "psychosocial",
+     "meaning": "심리사회적인"
+    },
+    {
+     "word": "support",
+     "meaning": "지원, 지지"
+    },
+    {
+     "word": "much needed",
+     "meaning": "꼭 필요한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Mentors also provide much [[needed]]",
+     "ko": "멘토는 또한 꼭 [[필요한]]"
+    },
+    {
+     "en": "[[psychosocial]] support.",
+     "ko": "[[심리사회적]] 지원을 제공한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "멘토는 또한 꼭 필요한 심리사회적 지원도 제공한다.",
+     "verdict": "O",
+     "trap_type": "주체대상"
+    },
+    {
+     "statement": "필자는 멘토의 역할을 직무·조직 정보 제공으로만 한정한다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "much needed psychosocial support",
+     "why": "S2에서 필자는 멘토가 '심리·사회적 지지(psychosocial support)'도 제공한다고 덧붙인다 — 정보 제공에만 한정하지 않는다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 3,
+   "english": "Having a diverse network of mentors is important for dominant and minority group members alike.",
+   "grammar": [
+    {
+     "tag": "동명사 주어",
+     "note": "Having ~ mentors가 주어, 단수 취급 → is",
+     "spans": [
+      "Having"
+     ]
+    },
+    {
+     "tag": "A and B alike",
+     "note": "'A와 B 모두 똑같이'",
+     "spans": [
+      "alike"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "diverse",
+     "meaning": "다양한"
+    },
+    {
+     "word": "dominant",
+     "meaning": "지배적인, 우세한"
+    },
+    {
+     "word": "minority",
+     "meaning": "소수(집단)"
+    },
+    {
+     "word": "alike",
+     "meaning": "똑같이, 마찬가지로"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Having a diverse network of [[mentors]]",
+     "ko": "다양한 [[멘토 네트워크]]를 갖추는 것은"
+    },
+    {
+     "en": "is important for dominant and [[minority]] group members alike.",
+     "ko": "지배 집단과 [[소수]] 집단 구성원 모두에게 똑같이 중요하다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "다양한 멘토 네트워크를 갖추는 것은 소수 집단 구성원에게만 중요하다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "killer": true,
+     "anchor": "for dominant and minority group members alike",
+     "why": "지배 집단과 소수 집단 '모두'에게 똑같이 중요하다고 했으므로 소수 집단으로 한정하면 틀리다."
+    },
+    {
+     "statement": "필자는 다양한 멘토 네트워크가 지배 집단과 소수 집단 모두에게 중요하다고 본다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Minority group members need diverse mentors so that they can gain insight into what it means to be employed by a particular organization or in a particular field or profession.",
+   "grammar": [
+    {
+     "tag": "so that 목적",
+     "note": "'~할 수 있도록'",
+     "spans": [
+      "so that"
+     ]
+    },
+    {
+     "tag": "의문사절 what",
+     "note": "gain insight into의 목적어; '무엇을 의미하는지'",
+     "spans": [
+      "what"
+     ]
+    },
+    {
+     "tag": "가주어 it~to",
+     "note": "it이 가주어, to be employed가 진주어",
+     "spans": [
+      "to be employed"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "minority",
+     "meaning": "소수(집단)"
+    },
+    {
+     "word": "gain insight into",
+     "meaning": "~에 대한 통찰을 얻다"
+    },
+    {
+     "word": "be employed",
+     "meaning": "고용되다"
+    },
+    {
+     "word": "particular",
+     "meaning": "특정한"
+    },
+    {
+     "word": "profession",
+     "meaning": "직종, 전문직"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Minority group members need diverse [[mentors]]",
+     "ko": "소수 집단 구성원은 다양한 [[멘토]]가 필요하다"
+    },
+    {
+     "en": "so that they can gain [[insight]] into",
+     "ko": "그들이 ~에 대한 [[통찰]]을 얻을 수 있도록"
+    },
+    {
+     "en": "what it means to be [[employed]]",
+     "ko": "[[고용된다]]는 것이 무엇을 의미하는지"
+    },
+    {
+     "en": "by a particular [[organization]]",
+     "ko": "특정 [[조직]]에 의해"
+    },
+    {
+     "en": "or in a particular field or [[profession]].",
+     "ko": "혹은 특정 분야나 [[직종]]에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "소수 집단 구성원에게 다양한 멘토가 필요한 것은 특정 조직을 떠나는 방법을 알기 위해서다.",
+     "verdict": "X",
+     "trap_type": "인과조건",
+     "anchor": "gain insight into what it means to be employed",
+     "why": "특정 조직·분야에 '고용된다는 것'의 의미에 대한 통찰을 얻기 위함이지 떠나기 위함이 아니다."
+    }
+   ],
+   "mistips": [
+    "what it means to be employed을 '고용이 무엇을 의미하는지'로 뭉뚱그리면 안 돼 — [[특정 조직·분야]]에 고용된다는 것의 의미다."
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Majority workers benefit by having a network of diverse mentors because it increases their understanding and sensitivity to the unique realities of diverse workers and their own identity, and perhaps even their own forms of privilege.",
+   "grammar": [
+    {
+     "tag": "by -ing",
+     "note": "'~함으로써' 수단",
+     "spans": [
+      "by having"
+     ]
+    },
+    {
+     "tag": "because 이유절",
+     "note": "benefit의 이유를 제시",
+     "spans": [
+      "because"
+     ]
+    },
+    {
+     "tag": "지칭 it",
+     "note": "it = having a network of diverse mentors(앞의 행위)",
+     "spans": [
+      "it"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "majority",
+     "meaning": "다수(집단)"
+    },
+    {
+     "word": "benefit",
+     "meaning": "이익을 얻다"
+    },
+    {
+     "word": "sensitivity",
+     "meaning": "민감성, 감수성"
+    },
+    {
+     "word": "unique",
+     "meaning": "고유한, 독특한"
+    },
+    {
+     "word": "privilege",
+     "meaning": "특권"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Majority]] workers benefit by having a network of diverse mentors",
+     "ko": "[[다수 집단]] 근로자는 다양한 멘토 네트워크를 가짐으로써 이익을 얻는데"
+    },
+    {
+     "en": "because it increases their understanding and [[sensitivity]]",
+     "ko": "왜냐하면 그것이 그들의 이해와 [[민감성]]을 높이기 때문이다"
+    },
+    {
+     "en": "to the unique [[realities]] of diverse workers",
+     "ko": "다양한 근로자들의 고유한 [[현실]]에 대한"
+    },
+    {
+     "en": "and their own [[identity]],",
+     "ko": "그리고 그들 자신의 [[정체성]],"
+    },
+    {
+     "en": "and perhaps even their own forms of [[privilege]].",
+     "ko": "그리고 어쩌면 그들 자신이 지닌 [[특권]]의 형태들까지도."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'it increases'에서 it은 소수 집단 구성원을 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "it increases their understanding and sensitivity",
+     "why": "it은 '다양한 멘토 네트워크를 갖는 것(having a network ~)'을 가리킨다."
+    },
+    {
+     "statement": "다수 집단 근로자가 이익을 얻는다는 방향은 맞지만, 그 이유는 그들이 소수 집단의 특권을 넘겨받기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "their own forms of privilege",
+     "why": "높아지는 것은 이해·민감성이고 그 대상은 '자신의' 특권 형태에 대한 인식이지, 소수의 특권을 넘겨받는 것이 아니다."
+    }
+   ],
+   "mistips": [
+    "because의 it을 '소수 집단'으로 보면 안 돼 — [[멘토 네트워크를 갖는 것]]을 가리킨다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization.",
+   "grammar": [
+    {
+     "tag": "사역동사 have",
+     "note": "have + 목적어 + 원형(be): '~가 …되게 하다'",
+     "spans": [
+      "have"
+     ]
+    },
+    {
+     "tag": "보어 병렬",
+     "note": "informed/identified/engaged 세 보어가 and로 병렬",
+     "spans": [
+      "informed, identified, and engaged"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "ultimate",
+     "meaning": "궁극적인, 최종의"
+    },
+    {
+     "word": "opportunity",
+     "meaning": "기회"
+    },
+    {
+     "word": "informed",
+     "meaning": "정보를 갖춘, 잘 아는"
+    },
+    {
+     "word": "identified",
+     "meaning": "동일시되는"
+    },
+    {
+     "word": "engaged",
+     "meaning": "관여하는, 몰입하는"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The ultimate [[goal]] of these mentoring opportunities",
+     "ko": "이러한 멘토링 기회의 궁극적 [[목표]]는"
+    },
+    {
+     "en": "is to have individuals be more [[informed]],",
+     "ko": "개인들이 더 많은 [[정보를 갖고]],"
+    },
+    {
+     "en": "identified, and engaged in their [[work]]",
+     "ko": "그들의 [[일]]에 동일시되고 관여되게 하는 것이다"
+    },
+    {
+     "en": "and in their [[organization]].",
+     "ko": "그리고 그들의 [[조직]]에서."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "이 멘토링의 궁극적 목표는 개인이 자신의 일과 조직에 대해 더 많은 정보를 갖고 관여하게 하는 것이다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    },
+    {
+     "statement": "The ultimate goal is to replace human mentors with technology.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "english": true,
+     "anchor": "to have individuals be more informed, identified, and engaged",
+     "why": "궁극적 목표는 멘토를 기술로 대체하는 것이 아니라 개인이 더 정보를 갖고 관여되게 하는 것이다."
+    }
+   ],
+   "mistips": [
+    "have individuals be를 '개인을 갖는다'로 읽으면 안 돼 — [[사역]]동사 have로 '개인들이 …되게 하다'이다."
+   ]
+  }
+ ]
+}

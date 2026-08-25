@@ -1,0 +1,202 @@
+{
+  "item_no": "29",
+  "theme": "소비자 기호에 맞는 균일한 맛을 내기 위한 꿀의 혼합(blending)",
+  "overview": {
+    "theme_ko": "소비자 기호에 맞춘 꿀의 혼합",
+    "topic": "🔎 균일하고 순한 맛을 위해 여러 출처의 꿀을 섞는 이유",
+    "stance": "중립적",
+    "stance_reason": "혼합의 이유를 객관적으로 설명 (Blending is frequently done for taste as well as marketing reasons)",
+    "structure": "주장→근거·예시",
+    "structure_reason": "혼합의 이유(맛·균일성)를 제시한 뒤 Clover 사례로 마무리한다",
+    "key_grammar": {
+      "point": "분사구문 (과거분사구문, Referred to as ~)",
+      "source_sentence": "Also referred to as 'undiluted', it is usually more expensive than diluted honeys.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "문장 앞 'Referred to as ~'는 [[Being]]이 생략된 분사구문이야."},
+        {"chip": "핵심", "text": "주어(it)가 '불리는' 대상이라 [[과거분사]](p.p.)를 써."},
+        {"chip": "해석", "text": "'또한 ~라고 [[불리며]]'처럼 능동이 아니라 수동으로 풀어."},
+        {"chip": "주의", "text": "refer을 '언급하다'로만 알면 오역 — 여기선 'be referred to as'='[[~라고 불리다]]'."}
+      ],
+      "example_analysis": "'(Being) also referred to as undiluted'에서 Being이 생략되고, 과거분사 referred가 주절의 주어 it을 수동으로 부연한다.",
+      "drills": [
+        {"kind": "객관식", "question": "밑줄 친 분사구문 'Also referred to as ~'의 의미로 알맞은 것은?", "options": ["또한 ~라고 불리며 (수동)", "또한 ~을 언급하면서 (능동)", "또한 ~을 참고하여"], "answer": "또한 ~라고 불리며 (수동)", "from_passage": true},
+        {"kind": "객관식", "question": "'Also referred to as 'undiluted''에서 생략된 것으로 가장 알맞은 것은?", "options": ["Being", "Having", "Which was"], "answer": "Being", "from_passage": true},
+        {"kind": "객관식", "question": "동사가 과거분사 referred로 쓰인 이유로 알맞은 것은?", "options": ["주어 it이 '불리는' 대상이라 수동이므로", "주어가 능동적으로 언급하므로", "문장의 시제가 과거이므로"], "answer": "주어 it이 '불리는' 대상이라 수동이므로", "from_passage": true},
+        {"kind": "영작", "question": "또한 '묽게 되지 않은'이라고도 불리며, 그것은 보통 묽어진 꿀보다 더 비싸다.", "words": ["Also", "referred", "to", "as", "'undiluted',", "it", "is", "usually", "more", "expensive", "than", "diluted", "honeys."], "answer": "Also referred to as 'undiluted', it is usually more expensive than diluted honeys.", "from_passage": true},
+        {"kind": "영작", "question": "'걸작'이라고 불리며, 그것은 여전히 널리 읽힌다.", "words": ["Referred", "to", "as", "a", "masterpiece,", "it", "is", "still", "widely", "read."], "answer": "Referred to as a masterpiece, it is still widely read.", "from_passage": false}
+      ]
+    },
+    "restatement_chains": [
+      {"label": "혼합·균일한 순한 맛", "expressions": ["blended together", "Mixing different types of honey together", "a more uniform flavour"], "variation": "여러 출처의 꿀을 섞어 하나의 균일한 맛으로 만든다"},
+      {"label": "순한 맛 선호", "expressions": ["too strong", "mild flavour"], "variation": "진하고 강한 맛보다 순한 맛을 선호한다"}
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1~2", "summary": "꿀은 단독/혼합 가능하고, 순수 꿀엔 [[첨가물]]이 없음", "easy_example": "아무것도 안 섞은 원액 상태의 주스"},
+      {"stage": "전개", "sentence_range": "3~4", "summary": "순수 꿀='undiluted', 여러 출처를 사람이 섞으면 '[[blended]] honey'", "easy_example": "여러 농장의 우유를 한 회사가 섞어 파는 것"},
+      {"stage": "근거", "sentence_range": "5~6", "summary": "혼합 이유는 맛·마케팅, 균일하고 [[순한]] 맛 보장", "easy_example": "브랜드마다 늘 같은 맛을 내려는 라면 스프"},
+      {"stage": "결론·사례", "sentence_range": "7~7", "summary": "Clover 꿀의 순한 맛이 미국인에게 [[익숙]]해짐", "easy_example": "누구나 아는 국민 간식의 익숙한 맛"}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "Honey can be eaten by itself or mixed with other ingredients.",
+      "grammar": [
+        {"tag": "조동사 수동태", "note": "can + be + p.p.(be eaten): ~될 수 있다", "spans": ["be eaten"]},
+        {"tag": "과거분사 병렬", "note": "eaten ... or mixed: 두 과거분사가 or로 병렬", "spans": ["mixed"]}
+      ],
+      "vocab": [
+        {"word": "ingredient", "meaning": "재료, 성분"},
+        {"word": "by itself", "meaning": "그 자체로, 단독으로"}
+      ],
+      "chunks": [
+        {"en": "Honey can be [[eaten]] by itself", "ko": "꿀은 그 자체로 [[먹을]] 수 있고"},
+        {"en": "or [[mixed]] with other ingredients.", "ko": "또는 다른 재료와 [[섞일]] 수 있다."}
+      ],
+      "misreads": [
+        {"statement": "꿀은 단독으로 먹을 수도 있고 다른 재료와 섞어 먹을 수도 있다.", "verdict": "O", "trap_type": "주체대상"}
+      ]
+    },
+    {
+      "id": 2,
+      "english": "Natural or pure honey has had no additives, preservatives or synthetic ingredients added.",
+      "grammar": [
+        {"tag": "현재완료", "note": "has had: ~한 상태로 (완료·결과)", "spans": ["has had"]},
+        {"tag": "have + O + p.p.", "note": "no ... ingredients added: 성분이 더해진 상태를 갖다(=더해지지 않음)", "spans": ["added"]}
+      ],
+      "vocab": [
+        {"word": "additive", "meaning": "첨가물"},
+        {"word": "preservative", "meaning": "방부제"},
+        {"word": "synthetic", "meaning": "합성의, 인공의"},
+        {"word": "pure", "meaning": "순수한"}
+      ],
+      "chunks": [
+        {"en": "Natural or [[pure]] honey has had", "ko": "천연 또는 [[순수]] 꿀에는"},
+        {"en": "no additives, preservatives or synthetic ingredients [[added]].", "ko": "첨가물·방부제·합성 성분이 전혀 [[더해지]]지 않았다."}
+      ],
+      "misreads": [
+        {"statement": "순수 꿀은 첨가물과 방부제를 넣었다가 나중에 제거한 것이다.", "verdict": "X", "trap_type": "무관정보", "anchor": "no additives, preservatives or synthetic ingredients added", "why": "본문은 어떤 첨가물도 더해지지 않았다고 했지, 넣었다 뺐다는 언급은 없다."}
+      ]
+    },
+    {
+      "id": 3,
+      "english": "Also referred to as 'undiluted', it is usually more expensive than diluted honeys.",
+      "grammar": [
+        {"tag": "분사구문(과거분사)", "note": "Referred to as ~: ~라고 불리며 (Being 생략)", "spans": ["referred"]},
+        {"tag": "비교급", "note": "more expensive than: ~보다 더 비싼", "spans": ["more expensive than"]}
+      ],
+      "vocab": [
+        {"word": "undiluted", "meaning": "묽게 하지 않은, 원액의"},
+        {"word": "diluted", "meaning": "묽어진, 희석된"},
+        {"word": "referred to as", "meaning": "~라고 불리는"}
+      ],
+      "chunks": [
+        {"en": "Also [[referred]] to as 'undiluted', it is", "ko": "또한 '묽게 되지 않은'이라고 [[불리며]], 그것은"},
+        {"en": "usually more [[expensive]] than diluted honeys.", "ko": "보통 묽어진 꿀보다 더 [[비싸다]]."}
+      ],
+      "misreads": [
+        {"statement": "'그것(it)'은 '묽어진 꿀(diluted honeys)'을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "Also referred to as 'undiluted'", "why": "'그것'은 '묽게 되지 않은'이라 불리는 순수 꿀을 가리키므로 묽어진 꿀이 아니다."},
+        {"statement": "순수 꿀은 대개 묽어진 꿀보다 더 비싸다.", "verdict": "O", "trap_type": "구조수식"}
+      ],
+      "mistips": ["'referred to as'를 '~을 언급하다'로 읽으면 안 돼 — (바르게는) '~라고 [[불리는]]'."]
+    },
+    {
+      "id": 4,
+      "english": "Natural honey can also be called 'blended honey', where honeys from various sources are blended together ─ not by the bees, but by human processors and distributors in stages after the honey has been collected.",
+      "grammar": [
+        {"tag": "관계부사 where", "note": "where: 앞 명사(blended honey) 상황을 부연(계속적)", "spans": ["where"]},
+        {"tag": "상관구조 not A but B", "note": "not by ~, but by ~: A가 아니라 B에 의해", "spans": ["not", "but"]},
+        {"tag": "현재완료 수동태", "note": "has been collected: 채취되어 온", "spans": ["has been collected"]}
+      ],
+      "vocab": [
+        {"word": "various", "meaning": "다양한, 여러"},
+        {"word": "source", "meaning": "출처, 원천"},
+        {"word": "processor", "meaning": "가공업자"},
+        {"word": "distributor", "meaning": "유통업자"},
+        {"word": "in stages", "meaning": "단계적으로"}
+      ],
+      "chunks": [
+        {"en": "Natural honey can also be [[called]] 'blended honey',", "ko": "천연 꿀은 또한 '혼합 꿀'이라고도 [[불리는데]],"},
+        {"en": "where honeys from various sources are [[blended]] together", "ko": "그곳에서는 여러 출처의 꿀들이 [[섞인다]]"},
+        {"en": "─ not by the bees, but by human [[processors]] and distributors", "ko": "벌에 의해서가 아니라 인간 [[가공업자]]와 유통업자에 의해"},
+        {"en": "in stages after the honey has been [[collected]].", "ko": "꿀이 [[채취된]] 후 단계적으로."}
+      ],
+      "misreads": [
+        {"statement": "혼합 꿀에서 여러 출처의 꿀은 벌에 의해 한데 섞인다.", "verdict": "X", "trap_type": "구조수식", "anchor": "not by the bees, but by human processors and distributors", "why": "혼합은 벌이 아니라 인간 가공업자·유통업자에 의해 이루어진다고 했다."}
+      ],
+      "mistips": ["'not by the bees'를 '벌에 의해'로 읽으면 안 돼 — (바르게는) '벌이 아니라 [[인간]] 가공업자에 의해'."]
+    },
+    {
+      "id": 5,
+      "english": "Blending is frequently done for taste as well as marketing reasons, especially since some consumers find the darker honeys too strong.",
+      "grammar": [
+        {"tag": "상관구조 as well as", "note": "A as well as B: B뿐 아니라 A도", "spans": ["as well as"]},
+        {"tag": "이유 접속사 since", "note": "especially since ~: 특히 ~하기 때문에", "spans": ["since"]}
+      ],
+      "vocab": [
+        {"word": "frequently", "meaning": "자주, 흔히"},
+        {"word": "consumer", "meaning": "소비자"},
+        {"word": "darker", "meaning": "(색이) 더 진한"}
+      ],
+      "chunks": [
+        {"en": "Blending is frequently done for [[taste]]", "ko": "혼합은 자주 [[맛]]을 위해 행해지는데"},
+        {"en": "as well as [[marketing]] reasons,", "ko": "[[마케팅]] 상의 이유뿐 아니라,"},
+        {"en": "especially since some [[consumers]] find", "ko": "특히 일부 [[소비자]]가 (~을) 여기기 때문이다"},
+        {"en": "the darker honeys too [[strong]].", "ko": "더 진한 색의 꿀이 너무 [[강하다]]고."}
+      ],
+      "misreads": [
+        {"statement": "혼합은 주로 마케팅을 위해 행해지는데, 소비자들이 '밝은 색' 꿀을 너무 강하다고 느끼기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "some consumers find the darker honeys too strong", "why": "너무 강하다고 느껴지는 것은 밝은 색이 아니라 '더 진한 색'의 꿀이다."}
+      ],
+      "mistips": ["'darker honeys'를 '어두운 곳의 꿀'로 읽으면 안 돼 — (바르게는) '색이 더 [[진한]] 꿀'."]
+    },
+    {
+      "id": 6,
+      "english": "Mixing different types of honey together can make it more palatable, and also gives a more uniform flavour ─ this is an important consideration for producers and retailers, who feel the need to guarantee reliable, unsurprising (typically mild) flavours to their customers.",
+      "grammar": [
+        {"tag": "동명사 주어", "note": "Mixing ... together: ~하는 것(주어)", "spans": ["Mixing"]},
+        {"tag": "계속적 관계대명사 who", "note": "who: 앞 producers and retailers를 부연", "spans": ["who"]},
+        {"tag": "명사+to부정사", "note": "the need to guarantee: 보장할 필요", "spans": ["to guarantee"]}
+      ],
+      "vocab": [
+        {"word": "palatable", "meaning": "입에 맞는, 맛 좋은"},
+        {"word": "uniform", "meaning": "균일한, 한결같은"},
+        {"word": "consideration", "meaning": "고려 사항"},
+        {"word": "retailer", "meaning": "소매상"},
+        {"word": "guarantee", "meaning": "보장하다"}
+      ],
+      "chunks": [
+        {"en": "[[Mixing]] different types of honey together", "ko": "여러 종류의 꿀을 함께 [[섞는]] 것은"},
+        {"en": "can make it more [[palatable]],", "ko": "그것을 더 [[입에 맞게]] 만들 수 있고,"},
+        {"en": "and also gives a more [[uniform]] flavour", "ko": "또한 더 [[균일한]] 맛을 제공하는데"},
+        {"en": "─ this is an important [[consideration]] for producers and retailers,", "ko": "이것은 생산자와 소매상에게 중요한 [[고려 사항]]으로,"},
+        {"en": "who feel the need to [[guarantee]]", "ko": "그들은 (~을) [[보장할]] 필요를 느낀다"},
+        {"en": "[[reliable]], unsurprising (typically mild) flavours to their customers.", "ko": "고객에게 [[신뢰할]] 수 있고 놀랍지 않은(대개 순한) 맛을."}
+      ],
+      "misreads": [
+        {"statement": "생산자와 소매상은 고객에게 놀라움을 주는 강한 맛을 보장할 필요를 느낀다.", "verdict": "X", "trap_type": "주체대상", "killer": true, "anchor": "unsurprising (typically mild) flavours", "why": "그들이 보장하려는 것은 놀랍지 않은, 대개 순한 맛이지 놀라운 강한 맛이 아니다."},
+        {"statement": "필자는 꿀 혼합을 소비자를 속이는 부정적 행위로 비판하고 있다.", "verdict": "X", "trap_type": "필자관점", "anchor": "an important consideration for producers and retailers", "why": "필자는 혼합을 생산자·소매상의 현실적 고려 사항으로 설명할 뿐 비판하지 않는다.", "integrative": true}
+      ]
+    },
+    {
+      "id": 7,
+      "english": "Clover is one of the most popular honeys in the U.S., and its mild flavour and taste have become familiar to many Americans.",
+      "grammar": [
+        {"tag": "최상급", "note": "one of the most popular: 가장 ~한 것 중 하나", "spans": ["the most popular"]},
+        {"tag": "현재완료", "note": "have become familiar: 익숙해져 왔다", "spans": ["have become"]}
+      ],
+      "vocab": [
+        {"word": "mild", "meaning": "순한, 부드러운"},
+        {"word": "flavour", "meaning": "풍미, 맛"},
+        {"word": "familiar", "meaning": "익숙한, 친숙한"}
+      ],
+      "chunks": [
+        {"en": "Clover is one of the most [[popular]] honeys", "ko": "클로버 꿀은 가장 [[인기 있는]] 꿀 중 하나이고"},
+        {"en": "in the U.S., and its [[mild]] flavour and taste", "ko": "미국에서, 그리고 그 [[순한]] 맛과 풍미는"},
+        {"en": "have become [[familiar]] to many Americans.", "ko": "많은 미국인에게 [[익숙해]]졌다."}
+      ],
+      "misreads": [
+        {"statement": "Clover honey tastes strong and unfamiliar to most Americans.", "verdict": "X", "trap_type": "무관정보", "anchor": "its mild flavour and taste have become familiar to many Americans", "why": "클로버 꿀은 순한 맛으로 많은 미국인에게 익숙해졌다고 했다.", "english": true}
+      ]
+    }
+  ]
+}

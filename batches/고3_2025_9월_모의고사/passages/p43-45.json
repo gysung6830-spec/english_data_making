@@ -1,0 +1,571 @@
+{
+ "item_no": "43-45",
+ "theme": "아빠와 함께한 첫 야구 경기 관람의 소중한 경험",
+ "overview": {
+  "theme_ko": "아빠와 함께한 첫 야구장 나들이",
+  "topic": "🔎 야구를 TV로만 보던 소년 Mike가 아빠와 함께 처음 경기장에 가 뜬공을 잡은 잊지 못할 하루",
+  "stance": "중립적",
+  "stance_reason": "필자의 주장 없이 Mike의 하루 경험을 시간 순서로 담담히 서술한다.",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "One afternoon → In the car → the stadium → Before long → Several hours later → When they got home 로 시간 흐름을 따라 사건이 전개된다.",
+  "key_grammar": {
+   "point": "과거완료 시제",
+   "source_sentence": "He watched his favorite team, the Arrows, on TV all the time, but he had never seen a game in person.",
+   "explanation": [
+    {"chip":"쉽게 말하면","text":"과거의 한 시점보다 '더 이전'의 일·경험은 [[had+p.p.]] (과거완료)로 나타낸다."},
+    {"chip":"시제 대조","text":"watched(과거)로 TV 시청을, had never seen(과거완료)으로 그 전까지의 [[경험 없음]]을 구분한다."},
+    {"chip":"경험 용법","text":"had never seen a game in person = 그때까지 '한 번도 [[직접]] 본 적이 없었다'는 경험."},
+    {"chip":"신호어","text":"always·never·before 같은 말과 자주 어울려 [[대과거]]의 지속·경험을 강조한다."}
+   ],
+   "example_analysis": "watched(단순 과거의 반복)와 had never seen(그 이전까지의 경험 없음)이 but으로 대조되어 시제가 갈린다.",
+   "drills": [
+    {"kind":"객관식","question":"빈칸에 알맞은 것은? He ___ never seen a game in person before that night.","options":["had","has","was"],"answer":"had","from_passage":true},
+    {"kind":"객관식","question":"과거완료(had+p.p.)가 올바르게 쓰인 문장은?","options":["He watched the game had.","He had never seen a game in person.","He has never see a game."],"answer":"He had never seen a game in person.","from_passage":true},
+    {"kind":"객관식","question":"밑줄 친 had never seen의 의미로 알맞은 것은? ... he had never seen a game in person.","options":["앞으로 보지 않을 것이다","지금 보고 있는 중이다","그때까지 한 번도 본 적이 없었다"],"answer":"그때까지 한 번도 본 적이 없었다","from_passage":true},
+    {"kind":"영작","question":"Mike는 항상 야구 경기에 가는 것을 꿈꿔 왔다.","words":["Mike","had","always","dreamed","about","going","to","a","baseball","game"],"answer":"Mike had always dreamed about going to a baseball game.","from_passage":true},
+    {"kind":"영작","question":"그녀는 그 영화를 전에 한 번도 본 적이 없었다.","words":["she","had","never","seen","the","movie","before"],"answer":"She had never seen the movie before.","from_passage":false}
+   ]
+  },
+  "restatement_chains": [
+   {"label":"직접 보는 첫 경기(TV → 직관)","expressions":["seen a game in person","the stadium looked in person"],"variation":"TV로만 보던 경기를 '직접(in person)' 체험하는 것으로 이어진다."},
+   {"label":"Mike가 잡은 공(자랑스러운 전리품)","expressions":["grabbed the ball","held the ball","the ball he caught"],"variation":"낚아챈 공이 → 꼭 쥔 공 → 엄마에게 보여 준 '잡은 공'으로 재등장한다."}
+  ],
+  "flow_blocks": [
+   {"stage":"도입","sentence_range":"1~2","summary":"야구를 [[TV]]로만 보던 Mike의 오랜 꿈","easy_example":"좋아하는 가수를 영상으로만 보다 콘서트를 꿈꾸는 것."},
+   {"stage":"발단","sentence_range":"3~6","summary":"아빠가 [[표]] 두 장을 구해 함께 경기장으로 출발","easy_example":"부모님이 깜짝 이벤트 티켓을 내미는 순간."},
+   {"stage":"전개","sentence_range":"7~12","summary":"거대한 경기장과 선수들, 좋아하는 [[Chavez]] 목격, 간식 사기","easy_example":"놀이공원에 처음 들어서 두리번거리는 느낌."},
+   {"stage":"절정","sentence_range":"13~18","summary":"Chavez의 [[뜬공]]을 Mike가 글러브로 낚아채 자랑스러워함","easy_example":"우연히 무대 위로 던진 물건을 받아 든 관객."},
+   {"stage":"하강","sentence_range":"19~23","summary":"접전 끝 팀이 [[홈런]]으로 승리, 불꽃놀이","easy_example":"막판 역전승에 다 함께 환호하는 장면."},
+   {"stage":"결말","sentence_range":"24~27","summary":"집에서 엄마에게 자랑하며 [[아빠]]와의 시간을 최고로 여김","easy_example":"여행 후 가족에게 사진 보여 주며 다음을 기약하는 것."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Mike had always dreamed about going to a baseball game.",
+   "grammar": [
+    {"tag":"과거완료(had+p.p.)","note":"had dreamed: 예전부터 줄곧 꿈꿔 온 상태","spans":["had always dreamed"]}
+   ],
+   "vocab": [
+    {"word":"dream about ~ing","meaning":"~하기를 꿈꾸다"},
+    {"word":"go to a game","meaning":"경기를 보러 가다"}
+   ],
+   "chunks": [
+    {"en":"Mike had always [[dreamed]]","ko":"Mike는 항상 [[꿈꿔왔다]]"},
+    {"en":"about going to a [[baseball]] game.","ko":"[[야구]] 경기에 가는 것에 대해"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 야구 경기에 가 보는 것을 오래전부터 늘 꿈꿔 왔다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "He watched his favorite team, the Arrows, on TV all the time, but he had never seen a game in person.",
+   "grammar": [
+    {"tag":"과거완료 경험(had never seen)","note":"그때까지 한 번도 직접 본 적 없음","spans":["had never seen"]},
+    {"tag":"시제 대조","note":"watched(과거)와 had never seen(과거완료)이 but으로 갈림","spans":["watched","had never seen"]}
+   ],
+   "vocab": [
+    {"word":"in person","meaning":"직접, 몸소"},
+    {"word":"all the time","meaning":"항상, 늘"}
+   ],
+   "chunks": [
+    {"en":"He [[watched]] his favorite team, the Arrows,","ko":"그는 자신이 가장 좋아하는 팀 Arrows를 [[시청했다]]"},
+    {"en":"on TV all the [[time]],","ko":"[[항상]] TV에서,"},
+    {"en":"but he had never [[seen]]","ko":"하지만 그는 결코 [[본 적이]] 없었다"},
+    {"en":"a game in [[person]].","ko":"경기를 [[직접]]"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 자신이 좋아하는 Arrows 경기를 이미 직접 여러 번 관람한 적이 있다.","verdict":"X","trap_type":"주체대상","anchor":"never seen a game in person","why":"경기는 TV로만 봐 왔고 직접(in person) 관람은 한 번도 못 했다는 뜻이다."}
+   ],
+   "mistips": ["had never seen을 '보지 않을 것이다'가 아니라 [[그때까지 한 번도 못 봤다]]는 과거완료 경험으로 읽어야."]
+  },
+  {
+   "id": 3,
+   "english": "One afternoon, Mike's dad came home earlier than usual.",
+   "grammar": [
+    {"tag":"비교급 than","note":"earlier than usual: 평소보다 더 일찍","spans":["earlier than usual"]}
+   ],
+   "vocab": [
+    {"word":"earlier than usual","meaning":"평소보다 일찍"}
+   ],
+   "chunks": [
+    {"en":"One afternoon, Mike's dad [[came]] home","ko":"어느 날 오후, Mike의 아빠가 집에 [[오셨다]]"},
+    {"en":"earlier than [[usual]].","ko":"평소보다 더 [[일찍]]"}
+   ],
+   "misreads": [
+    {"statement":"아빠는 야구를 무척 좋아해서 평소보다 일찍 집에 오셨다.","verdict":"X","trap_type":"무관정보","anchor":"came home earlier than usual","why":"평소보다 일찍 온 사실만 있고 '야구를 좋아해서'라는 이유는 본문에 없다."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "\"Hey, Mike,\" he said, \"I just got two tickets for tonight's Arrows game. Do you want to go?\"",
+   "grammar": [
+    {"tag":"want to+동사원형","note":"want to go: 가고 싶어 하다","spans":["want to go"]}
+   ],
+   "vocab": [
+    {"word":"just","meaning":"방금, 막"},
+    {"word":"ticket","meaning":"입장권, 관람권"}
+   ],
+   "chunks": [
+    {"en":"\"Hey, Mike,\" he [[said]],","ko":"\"얘, Mike야,\"라고 그가 [[말했다]],"},
+    {"en":"\"I just got two [[tickets]]","ko":"\"내가 방금 [[표]] 두 장을 구했어"},
+    {"en":"for tonight's Arrows [[game]].","ko":"오늘 밤 Arrows [[경기]]의"},
+    {"en":"Do you want to [[go]]?\"","ko":"너 [[가고]] 싶니?\""}
+   ],
+   "misreads": [
+    {"statement":"아빠는 오늘 밤 Arrows 경기 관람권 두 장을 구했다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Mike was so excited that he ran to grab his Arrows hat.",
+   "grammar": [
+    {"tag":"so ~ that ...(인과)","note":"너무 ~해서 그 결과 …하다","spans":["so","that"]}
+   ],
+   "vocab": [
+    {"word":"grab","meaning":"움켜쥐다, 붙잡다"},
+    {"word":"excited","meaning":"신이 난, 들뜬"}
+   ],
+   "chunks": [
+    {"en":"Mike was so [[excited]]","ko":"Mike는 너무 [[신이 나서]]"},
+    {"en":"that he ran to [[grab]]","ko":"그가 [[움켜쥐러]] 달려갔다"},
+    {"en":"his Arrows [[hat]].","ko":"자신의 Arrows [[모자]]를"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 모자를 잃어버려서 그것을 찾으러 달려갔다.","verdict":"X","trap_type":"인과조건","anchor":"so excited that he ran to grab his Arrows hat","why":"모자를 잃어서가 아니라 '너무 신이 나서' 그 결과 모자를 챙기러 달려간 것이다."}
+   ],
+   "mistips": ["so excited that를 '~라고 흥분한'이 아니라 [[너무 신나서 (그 결과) …했다]]는 인과로 읽어야."]
+  },
+  {
+   "id": 6,
+   "english": "In the car, his dad handed him a new baseball glove and added, \"Just in case a fly ball comes our way.\"",
+   "grammar": [
+    {"tag":"4형식(hand+간·직목)","note":"handed him a glove: 그에게 글러브를 건네다","spans":["handed him a new baseball glove"]},
+    {"tag":"in case(~에 대비하여)","note":"just in case: 만일에 대비해서","spans":["in case"]}
+   ],
+   "vocab": [
+    {"word":"hand","meaning":"건네주다"},
+    {"word":"in case","meaning":"~할 경우에 대비하여"},
+    {"word":"fly ball","meaning":"(야구) 뜬공"}
+   ],
+   "chunks": [
+    {"en":"In the car, his dad [[handed]] him","ko":"차 안에서, 그의 아빠는 그에게 [[건넸다]]"},
+    {"en":"a new baseball [[glove]]","ko":"새 야구 [[글러브]]를"},
+    {"en":"and [[added]],","ko":"그리고 [[덧붙였다]],"},
+    {"en":"\"Just in case a fly ball comes our [[way]].\"","ko":"\"그냥 [[뜬공]]이 우리 쪽으로 오는 경우를 대비해서.\""}
+   ],
+   "misreads": [
+    {"statement":"아빠가 말한 '우리 쪽(our way)'은 관중석 전체를 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"a fly ball comes our way","why":"'우리 쪽'은 Mike와 아빠가 앉은 자리 방향을 가리키지 관중석 전체가 아니다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "The stadium was full of people wearing Arrows shirts.",
+   "grammar": [
+    {"tag":"현재분사 후치수식","note":"people wearing ~: ~을 입은 사람들","spans":["wearing"]}
+   ],
+   "vocab": [
+    {"word":"be full of","meaning":"~로 가득 차 있다"},
+    {"word":"stadium","meaning":"경기장, 스타디움"}
+   ],
+   "chunks": [
+    {"en":"The stadium was [[full]] of people","ko":"경기장은 사람들로 [[가득]] 차 있었다"},
+    {"en":"wearing Arrows [[shirts]].","ko":"Arrows [[셔츠]]를 입은"}
+   ],
+   "misreads": [
+    {"statement":"경기장은 Arrows 셔츠를 입은 사람들로 가득 차 있었다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Mike couldn't believe how big the stadium looked in person.",
+   "grammar": [
+    {"tag":"간접의문문(how+형+주+동)","note":"how big the stadium looked: 경기장이 얼마나 커 보이는지","spans":["how big the stadium looked"]}
+   ],
+   "vocab": [
+    {"word":"in person","meaning":"직접 (보니)"},
+    {"word":"couldn't believe","meaning":"믿을 수 없었다"}
+   ],
+   "chunks": [
+    {"en":"Mike couldn't [[believe]]","ko":"Mike는 [[믿을]] 수 없었다"},
+    {"en":"how big the [[stadium]] looked","ko":"경기장이 얼마나 [[커]] 보이는지"},
+    {"en":"in [[person]].","ko":"[[직접]] 보니"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 경기장이 생각보다 작다고 느껴 실망했다.","verdict":"X","trap_type":"필자관점","anchor":"how big the stadium looked in person","why":"직접 보니 믿기 어려울 만큼 '커' 보였다고 느낀 것이지 작다고 실망한 것이 아니다."}
+   ],
+   "mistips": ["how big을 '얼마나 크게'가 아니라 [[경기장이 얼마나 커 보이는지]]로 believe의 목적절로 읽어야."]
+  },
+  {
+   "id": 9,
+   "english": "As the players ran onto the field, Mike and his dad cheered for their team's players.",
+   "grammar": [
+    {"tag":"접속사 as(~할 때)","note":"As ~ ran: ~가 뛰어나오자","spans":["As"]}
+   ],
+   "vocab": [
+    {"word":"cheer for","meaning":"~을 응원하다"},
+    {"word":"onto","meaning":"~ 위로"}
+   ],
+   "chunks": [
+    {"en":"As the players ran onto the [[field]],","ko":"선수들이 [[운동장]]으로 뛰어나오자,"},
+    {"en":"Mike and his dad [[cheered]]","ko":"Mike와 그의 아빠는 [[응원했다]]"},
+    {"en":"for their team's [[players]].","ko":"자신들 팀의 [[선수들]]을 위해"}
+   ],
+   "misreads": [
+    {"statement":"선수들이 경기장으로 나오자 Mike와 아빠는 자기 팀 선수들을 응원했다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "His dad pointed at the player running out to third base, saying \"Look, it's Chavez, your favorite player \"",
+   "grammar": [
+    {"tag":"현재분사 후치수식(running)","note":"the player running out: 뛰어나가고 있는 선수","spans":["running out to third base"]},
+    {"tag":"분사구문 saying","note":"~라고 말하며","spans":["saying"]}
+   ],
+   "vocab": [
+    {"word":"point at","meaning":"~을 가리키다"},
+    {"word":"run out to","meaning":"~로 뛰어나가다"},
+    {"word":"favorite","meaning":"가장 좋아하는"}
+   ],
+   "chunks": [
+    {"en":"His dad [[pointed]] at the player","ko":"그의 아빠는 그 선수를 [[가리켰다]]"},
+    {"en":"running out to third [[base]],","ko":"3루로 [[뛰어나가고]] 있는"},
+    {"en":"saying \"Look, it's [[Chavez]],","ko":"\"봐라, [[Chavez]]야,\"라고 말하며"},
+    {"en":"your favorite [[player]] \"","ko":"네가 가장 좋아하는 [[선수]] \""}
+   ],
+   "misreads": [
+    {"statement":"3루로 뛰어나가고 있는 것은 아빠였다.","verdict":"X","trap_type":"구조수식","anchor":"the player running out to third base","why":"running은 the player를 꾸미므로 뛰어나간 것은 아빠가 아니라 선수(Chavez)다."}
+   ]
+  },
+  {
+   "id": 11,
+   "english": "Mike saw him warming up on the field and waved hoping to get his attention.",
+   "grammar": [
+    {"tag":"지각동사+O+~ing(5형식)","note":"saw him warming up: 그가 몸 푸는 것을 보다","spans":["saw him warming up"]},
+    {"tag":"분사구문 hoping","note":"~하기를 바라며","spans":["hoping to get his attention"]}
+   ],
+   "vocab": [
+    {"word":"warm up","meaning":"몸을 풀다"},
+    {"word":"get one's attention","meaning":"~의 주의를 끌다"},
+    {"word":"wave","meaning":"손을 흔들다"}
+   ],
+   "chunks": [
+    {"en":"Mike [[saw]] him warming up","ko":"Mike는 그가 몸 푸는 것을 [[보았다]]"},
+    {"en":"on the [[field]]","ko":"[[운동장]]에서"},
+    {"en":"and [[waved]]","ko":"그리고 [[손을 흔들었다]]"},
+    {"en":"hoping to get his [[attention]].","ko":"그의 [[주의]]를 끌기를 바라며"}
+   ],
+   "misreads": [
+    {"statement":"Mike가 Chavez의 주의를 끌려고 손을 흔든 것은 Chavez가 이미 그를 알아보았기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"hoping to get his attention","why":"손을 흔든 방향은 맞지만, 아직 주의를 못 끌었고 끌기를 '바라며' 흔든 것이다."}
+   ]
+  },
+  {
+   "id": 12,
+   "english": "After the players warmed up, Mike and his dad went to get some snacks.",
+   "grammar": [
+    {"tag":"전치사 after(~한 후)","note":"After ~ warmed up: 몸을 푼 후","spans":["After"]}
+   ],
+   "vocab": [
+    {"word":"warm up","meaning":"몸을 풀다"},
+    {"word":"snack","meaning":"간식"}
+   ],
+   "chunks": [
+    {"en":"After the players [[warmed]] up,","ko":"선수들이 [[몸을 푼]] 후,"},
+    {"en":"Mike and his dad [[went]] to get","ko":"Mike와 그의 아빠는 사러 [[갔다]]"},
+    {"en":"some [[snacks]].","ko":"[[간식]]을 좀"}
+   ],
+   "misreads": [
+    {"statement":"선수들이 지쳐서 Mike와 아빠가 간식을 사러 갔다.","verdict":"X","trap_type":"인과조건","anchor":"After the players warmed up","why":"선수들이 '몸을 푼' 뒤 간식을 사러 간 것이지 선수들이 지쳐서가 아니다."}
+   ]
+  },
+  {
+   "id": 13,
+   "english": "As soon as they sat back down, the pitcher threw the first pitch.",
+   "grammar": [
+    {"tag":"as soon as(~하자마자)","note":"자리에 앉자마자","spans":["As soon as"]}
+   ],
+   "vocab": [
+    {"word":"as soon as","meaning":"~하자마자"},
+    {"word":"pitcher","meaning":"(야구) 투수"},
+    {"word":"pitch","meaning":"투구, 공을 던지기"}
+   ],
+   "chunks": [
+    {"en":"As soon as they sat back [[down]],","ko":"그들이 다시 자리에 [[앉자마자]],"},
+    {"en":"the pitcher [[threw]]","ko":"투수가 [[던졌다]]"},
+    {"en":"the first [[pitch]].","ko":"첫 번째 [[투구]]를"}
+   ],
+   "misreads": [
+    {"statement":"첫 번째 공을 던진 사람은 Mike였다.","verdict":"X","trap_type":"주체대상","anchor":"the pitcher threw the first pitch","why":"첫 투구를 한 주체는 투수(the pitcher)이지 Mike가 아니다."}
+   ]
+  },
+  {
+   "id": 14,
+   "english": "Before long, it was Chavez's turn to hit.",
+   "grammar": [
+    {"tag":"to부정사 형용사적(turn to hit)","note":"turn to hit: 타격할 차례","spans":["turn to hit"]}
+   ],
+   "vocab": [
+    {"word":"before long","meaning":"얼마 후, 곧"},
+    {"word":"turn","meaning":"차례, 순번"}
+   ],
+   "chunks": [
+    {"en":"Before long, it was Chavez's [[turn]]","ko":"얼마 지나지 않아, [[Chavez의]] 차례였다"},
+    {"en":"to [[hit]].","ko":"[[타격할]]"}
+   ],
+   "misreads": [
+    {"statement":"얼마 지나지 않아 Chavez가 타석에 들어설 차례가 되었다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 15,
+   "english": "He hit a high fly ball into the stands.",
+   "grammar": [
+    {"tag":"전치사 into(~ 안으로)","note":"into the stands: 관중석 안으로","spans":["into"]}
+   ],
+   "vocab": [
+    {"word":"fly ball","meaning":"(야구) 뜬공"},
+    {"word":"stands","meaning":"관중석"}
+   ],
+   "chunks": [
+    {"en":"He [[hit]] a high fly ball","ko":"그는 높은 [[뜬공]]을 쳤다"},
+    {"en":"into the [[stands]].","ko":"[[관중석]]으로"}
+   ],
+   "misreads": [
+    {"statement":"관중석으로 높은 뜬공을 친 사람은 Mike다.","verdict":"X","trap_type":"지칭","anchor":"it was Chavez's turn to hit","why":"공을 친 'He'는 바로 앞 문장의 Chavez를 가리키지 Mike가 아니다.","integrative":true}
+   ]
+  },
+  {
+   "id": 16,
+   "english": "The whole crowd stood up, but Mike reached up with his glove and grabbed the ball.",
+   "grammar": [
+    {"tag":"전치사구 with(수단)","note":"with his glove: 글러브로","spans":["with his glove"]},
+    {"tag":"대조 but","note":"관중은 일어섰지만 Mike는 잡았다","spans":["but"]}
+   ],
+   "vocab": [
+    {"word":"whole","meaning":"전체의"},
+    {"word":"reach up","meaning":"손을 위로 뻗다"},
+    {"word":"grab","meaning":"붙잡다, 낚아채다"}
+   ],
+   "chunks": [
+    {"en":"The whole crowd stood [[up]],","ko":"관중 [[전체]]가 일어섰지만,"},
+    {"en":"but Mike reached up with his [[glove]]","ko":"Mike는 자신의 [[글러브]]로 손을 뻗어"},
+    {"en":"and [[grabbed]] the ball.","ko":"그리고 공을 [[낚아챘다]]"}
+   ],
+   "misreads": [
+    {"statement":"관중 전체가 일어서는 바람에 Mike는 결국 공을 놓쳤다.","verdict":"X","trap_type":"인과조건","anchor":"grabbed the ball","why":"관중이 일어섰지만 Mike는 글러브를 뻗어 공을 '낚아챘다'.","killer":true}
+   ]
+  },
+  {
+   "id": 17,
+   "english": "Everyone clapped and smiled at Mike.",
+   "grammar": [
+    {"tag":"smile at(~에게 미소 짓다)","note":"smiled at Mike: Mike에게 미소 지었다","spans":["smiled at"]}
+   ],
+   "vocab": [
+    {"word":"clap","meaning":"박수를 치다"},
+    {"word":"smile at","meaning":"~에게 미소 짓다"}
+   ],
+   "chunks": [
+    {"en":"Everyone [[clapped]]","ko":"모든 이가 [[박수를 쳤다]]"},
+    {"en":"and [[smiled]] at Mike.","ko":"그리고 Mike에게 [[미소 지었다]]"}
+   ],
+   "misreads": [
+    {"statement":"주변 사람들이 모두 박수를 치며 Mike에게 미소를 보냈다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 18,
+   "english": "He tightly held the ball and felt a little surprised, but very proud.",
+   "grammar": [
+    {"tag":"feel+형용사(2형식)","note":"felt surprised/proud: ~하게 느끼다","spans":["felt a little surprised"]},
+    {"tag":"대조 but","note":"놀랐지만 자랑스러웠다","spans":["but"]}
+   ],
+   "vocab": [
+    {"word":"tightly","meaning":"꽉, 단단히"},
+    {"word":"proud","meaning":"자랑스러운"}
+   ],
+   "chunks": [
+    {"en":"He tightly [[held]] the ball","ko":"그는 공을 꼭 [[쥐었고]]"},
+    {"en":"and felt a little [[surprised]],","ko":"다소 [[놀라움]]을 느꼈지만,"},
+    {"en":"but very [[proud]].","ko":"매우 [[자랑스러웠다]]"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 공을 잡고도 별 감흥 없이 시큰둥했다.","verdict":"X","trap_type":"필자관점","anchor":"but very proud","why":"조금 놀라긴 했지만 매우 '자랑스러워'했으므로 시큰둥한 것이 아니다."}
+   ]
+  },
+  {
+   "id": 19,
+   "english": "Both teams kept scoring and the game stayed close.",
+   "grammar": [
+    {"tag":"keep+~ing(계속 ~하다)","note":"kept scoring: 계속 득점했다","spans":["kept scoring"]},
+    {"tag":"stay+형용사(2형식)","note":"stayed close: 접전을 유지했다","spans":["stayed close"]}
+   ],
+   "vocab": [
+    {"word":"keep ~ing","meaning":"계속 ~하다"},
+    {"word":"stay close","meaning":"접전을 유지하다"}
+   ],
+   "chunks": [
+    {"en":"Both teams kept [[scoring]]","ko":"양 팀은 계속 [[득점했고]]"},
+    {"en":"and the game stayed [[close]].","ko":"경기는 계속 [[접전이었다]]"}
+   ],
+   "misreads": [
+    {"statement":"양 팀이 계속 득점하며 경기는 접전으로 이어졌다.","verdict":"O"}
+   ]
+  },
+  {
+   "id": 20,
+   "english": "Mike and his dad cheered for every hit and held their breath during every big play.",
+   "grammar": [
+    {"tag":"hold one's breath(숨죽이다)","note":"held their breath: 마음을 졸였다","spans":["held their breath"]},
+    {"tag":"during(~ 동안)","note":"during every big play: 주요 플레이마다","spans":["during"]}
+   ],
+   "vocab": [
+    {"word":"cheer for","meaning":"~을 응원하다"},
+    {"word":"hold one's breath","meaning":"숨을 죽이다, 마음 졸이다"}
+   ],
+   "chunks": [
+    {"en":"Mike and his dad [[cheered]] for every hit","ko":"Mike와 아빠는 안타마다 [[응원했고]]"},
+    {"en":"and held their [[breath]]","ko":"[[숨]]을 죽였다"},
+    {"en":"during every big [[play]].","ko":"모든 중요한 [[플레이]] 동안"}
+   ],
+   "misreads": [
+    {"statement":"Mike와 아빠는 응원하다 지쳐 경기 도중 자리를 떴다.","verdict":"X","trap_type":"무관정보","anchor":"cheered for every hit","why":"안타마다 응원하고 조마조마해했다고 했지 자리를 떴다는 내용은 없다."}
+   ]
+  },
+  {
+   "id": 21,
+   "english": "They high-fived each other every time the Arrows scored.",
+   "grammar": [
+    {"tag":"every time(~할 때마다, 접속사)","note":"every time ~ scored: ~가 득점할 때마다","spans":["every time"]}
+   ],
+   "vocab": [
+    {"word":"high-five","meaning":"하이파이브하다"},
+    {"word":"each other","meaning":"서로"}
+   ],
+   "chunks": [
+    {"en":"They [[high-fived]] each other","ko":"그들은 서로 [[하이파이브를 했다]]"},
+    {"en":"every time the Arrows [[scored]].","ko":"Arrows가 [[득점할]] 때마다"}
+   ],
+   "misreads": [
+    {"statement":"그들은 상대 팀이 득점할 때마다 하이파이브를 했다.","verdict":"X","trap_type":"주체대상","anchor":"every time the Arrows scored","why":"하이파이브를 한 것은 Arrows가 득점할 때마다이지 상대 팀이 아니다."}
+   ]
+  },
+  {
+   "id": 22,
+   "english": "Several hours later, Mike's favorite team hit a home run and won the game.",
+   "grammar": [
+    {"tag":"과거시제 나열(hit·won)","note":"hit ~ and won ~: 쳐서 이겼다","spans":["hit","won"]}
+   ],
+   "vocab": [
+    {"word":"hit a home run","meaning":"홈런을 치다"},
+    {"word":"win the game","meaning":"경기에 이기다"}
+   ],
+   "chunks": [
+    {"en":"Several hours later, Mike's favorite team [[hit]]","ko":"몇 시간 후, Mike가 가장 좋아하는 팀이 [[쳤다]]"},
+    {"en":"a home [[run]]","ko":"[[홈런]]을"},
+    {"en":"and [[won]] the game.","ko":"그리고 경기를 [[이겼다]]"}
+   ],
+   "misreads": [
+    {"statement":"Mike's team lost the game despite hitting a home run.","verdict":"X","trap_type":"주체대상","anchor":"won the game","why":"Mike가 좋아하는 팀은 홈런을 치고 경기를 '이겼다(won)'.","english":true}
+   ]
+  },
+  {
+   "id": 23,
+   "english": "Fireworks filled the sky, and the team song played throughout the stadium.",
+   "grammar": [
+    {"tag":"throughout(~ 전체에 걸쳐)","note":"throughout the stadium: 경기장 전체에","spans":["throughout"]}
+   ],
+   "vocab": [
+    {"word":"fireworks","meaning":"불꽃놀이"},
+    {"word":"throughout","meaning":"~ 전체에 걸쳐"}
+   ],
+   "chunks": [
+    {"en":"Fireworks [[filled]] the sky,","ko":"불꽃놀이가 하늘을 [[메웠고]],"},
+    {"en":"and the team song [[played]]","ko":"팀의 노래가 [[울려 퍼졌다]]"},
+    {"en":"throughout the [[stadium]].","ko":"경기장 [[전체]]에"}
+   ],
+   "misreads": [
+    {"statement":"불꽃놀이는 경기 시작을 알리기 위해 하늘에서 터졌다.","verdict":"X","trap_type":"무관정보","anchor":"Fireworks filled the sky","why":"불꽃놀이는 승리 뒤 하늘을 메운 것이지 경기 시작 신호라는 내용은 없다."}
+   ]
+  },
+  {
+   "id": 24,
+   "english": "When they got home, Mike told his mom all about his favorite plays and showed her the ball he caught.",
+   "grammar": [
+    {"tag":"4형식(show+간·직목)","note":"showed her the ball: 그녀에게 공을 보여 주다","spans":["showed her the ball"]},
+    {"tag":"관계대명사 생략","note":"the ball (which) he caught: 그가 잡은 공","spans":["the ball he caught"]}
+   ],
+   "vocab": [
+    {"word":"tell A all about B","meaning":"A에게 B에 대해 다 이야기하다"},
+    {"word":"catch","meaning":"잡다, 낚아채다"}
+   ],
+   "chunks": [
+    {"en":"When they got home, Mike [[told]] his mom","ko":"그들이 집에 왔을 때, Mike는 엄마에게 [[말했다]]"},
+    {"en":"all about his favorite [[plays]]","ko":"자신이 가장 좋아한 [[플레이]]에 대해 모두"},
+    {"en":"and [[showed]] her the ball","ko":"그리고 그녀에게 공을 [[보여 주었다]]"},
+    {"en":"he [[caught]].","ko":"자신이 [[낚아챈]]"}
+   ],
+   "misreads": [
+    {"statement":"집에 와서 Mike가 엄마에게 보여 준 공은 아빠가 잡은 것이다.","verdict":"△","trap_type":"지칭","anchor":"the ball he caught","why":"보여 준 행동은 맞지만 그 공은 he, 즉 Mike 자신이 잡은 공이다."}
+   ]
+  },
+  {
+   "id": 25,
+   "english": "He knew this was a day he would never forget.",
+   "grammar": [
+    {"tag":"관계대명사 생략","note":"a day (that) he would never forget","spans":["a day he would never forget"]},
+    {"tag":"조동사 would(과거의 시점)","note":"would never forget: 결코 잊지 못할","spans":["would never forget"]}
+   ],
+   "vocab": [
+    {"word":"forget","meaning":"잊다"}
+   ],
+   "chunks": [
+    {"en":"He [[knew]] this was a day","ko":"그는 이 날이 …임을 [[알았다]]"},
+    {"en":"he would never [[forget]].","ko":"자신이 결코 [[잊지]] 못할"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 이 날을 곧 잊어버릴 평범한 하루로 여겼다.","verdict":"X","trap_type":"필자관점","anchor":"a day he would never forget","why":"Mike는 이 날을 '결코 잊지 못할' 특별한 날로 느꼈지 평범하게 여긴 것이 아니다."}
+   ]
+  },
+  {
+   "id": 26,
+   "english": "It wasn't just the game ─ it was the cheering, the excitement, and best of all, spending time with his dad.",
+   "grammar": [
+    {"tag":"동명사 주격보어(spending)","note":"it was ~ spending time: ~하며 보낸 시간이었다","spans":["spending time with his dad"]},
+    {"tag":"best of all(무엇보다도)","note":"가장 좋았던 것","spans":["best of all"]}
+   ],
+   "vocab": [
+    {"word":"best of all","meaning":"무엇보다도, 가장 좋은 것은"},
+    {"word":"spend time with","meaning":"~와 시간을 보내다"}
+   ],
+   "chunks": [
+    {"en":"It wasn't just the [[game]] ─","ko":"그것은 단지 [[경기]]만은 아니었고 ─"},
+    {"en":"it was the [[cheering]], the excitement,","ko":"그것은 [[응원]], 흥분,"},
+    {"en":"and best of all, [[spending]] time with his dad.","ko":"그리고 무엇보다도, 아빠와 [[함께한 시간]]이었다"}
+   ],
+   "misreads": [
+    {"statement":"Mike에게 가장 좋았던 것은 경기 그 자체였다.","verdict":"X","trap_type":"필자관점","anchor":"best of all, spending time with his dad","why":"가장 좋았던 것은 경기가 아니라 아빠와 함께 보낸 시간이었다."}
+   ]
+  },
+  {
+   "id": 27,
+   "english": "He couldn't wait for the next time they would get to go to a game.",
+   "grammar": [
+    {"tag":"can't wait for(몹시 기다리다)","note":"couldn't wait for: 몹시 고대했다","spans":["couldn't wait for"]},
+    {"tag":"get to+동사원형(~하게 되다)","note":"get to go: 가게 되다","spans":["get to go"]}
+   ],
+   "vocab": [
+    {"word":"can't wait for","meaning":"~을 몹시 기다리다, 고대하다"},
+    {"word":"get to","meaning":"~하게 되다"}
+   ],
+   "chunks": [
+    {"en":"He couldn't [[wait]] for the next time","ko":"그는 다음번을 몹시 [[고대했다]]"},
+    {"en":"they would get to [[go]] to a game.","ko":"그들이 경기에 [[가게]] 될"}
+   ],
+   "misreads": [
+    {"statement":"Mike는 다음번 경기에 또 가게 될 날을 간절히 기다렸다.","verdict":"O"}
+   ]
+  }
+ ]
+}

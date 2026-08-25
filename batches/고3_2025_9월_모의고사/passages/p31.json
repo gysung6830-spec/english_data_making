@@ -1,0 +1,241 @@
+{
+ "item_no": "31",
+ "theme": "강제 원근법을 이용해 암컷에게 자신을 더 크게 보이게 하는 Bower bird",
+ "overview": {
+  "theme_ko": "강제 원근법으로 몸집을 부풀리는 바우어새",
+  "topic": "🔎 큰바우어새가 물체 배치로 강제 원근법을 만들어 암컷에게 더 크게 보이는 구애 전략",
+  "stance": "중립적",
+  "stance_reason": "현상을 관찰·설명하고 'supports their hypothesis'로 확인하는 분석적 서술",
+  "structure": "주장→근거·예시",
+  "structure_reason": "동물이 지각을 조작한다는 일반 주장 뒤에 바우어새 사례로 뒷받침",
+  "key_grammar": {
+   "point": "병렬구조",
+   "source_sentence": "The larger objects are placed closer to the bower and the smaller objects farther away.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "A와 B를 같은 꼴로 나란히 이어 주는 게 [[병렬구조]]예요."},
+    {"chip": "핵심", "text": "and 앞뒤가 'the larger objects ~'와 'the smaller objects ~'로 같은 [[구조]]로 짝을 이뤄요."},
+    {"chip": "생략", "text": "뒤쪽 'the smaller objects farther away'에는 반복되는 [[are placed]]가 생략됐어요."},
+    {"chip": "해석 팁", "text": "생략된 동사를 되살려 '더 작은 물체는 더 멀리 [[배치된다]]'로 읽어요."}
+   ],
+   "example_analysis": "and를 축으로 두 목적어구가 대칭을 이루고, 뒤 절에서 반복 동사구 are placed가 생략됨.",
+   "drills": [
+    {"kind": "객관식", "question": "S6에서 생략된 부분을 바르게 복원한 것은?", "options": ["the smaller objects (are placed) farther away", "the smaller objects farther away are placed", "the smaller objects placing farther away"], "answer": "the smaller objects (are placed) farther away", "from_passage": true},
+    {"kind": "객관식", "question": "S6에서 and가 대등하게 연결하는 두 요소로 알맞은 것은?", "options": ["males / females", "the larger objects ~ / the smaller objects ~", "closer / the Cinderella Castle"], "answer": "the larger objects ~ / the smaller objects ~", "from_passage": true},
+    {"kind": "객관식", "question": "'a modicum of safety'에서 modicum의 뜻으로 알맞은 것은?", "options": ["대량", "완전한 보장", "소량·약간"], "answer": "소량·약간", "from_passage": true},
+    {"kind": "영작", "question": "더 큰 물체는 바우어에 더 가까이 놓이고 더 작은 물체는 더 멀리 놓인다.", "words": ["the larger", "objects", "are placed", "closer", "to the bower", "and", "the smaller", "farther", "away"], "answer": "The larger objects are placed closer to the bower and the smaller objects farther away.", "from_passage": true},
+    {"kind": "영작", "question": "그 새는 포식자의 지각을 조작하기 위해 다양한 방식을 진화시켰다.", "words": ["the bird", "has", "evolved", "a variety of", "patterns", "to manipulate", "the perceptions", "of predators"], "answer": "The bird has evolved a variety of patterns to manipulate the perceptions of predators.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "강제 원근법으로 더 커 보이기", "expressions": ["forced perspective", "appears smaller than it actually is", "appears larger"], "variation": "실제 크기가 아니라 '보이는' 크기를 조작"},
+   {"label": "지각 조작 전략", "expressions": ["manipulate the perceptions", "perceptual biases"], "variation": "포식자 회피용→짝짓기용으로 확장"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "동물은 지각을 [[조작]]해 안전을 얻도록 진화", "easy_example": "나뭇잎처럼 위장해 천적 눈을 속이는 곤충"},
+   {"stage": "전개", "sentence_range": "2~3", "summary": "바우어새는 짝짓기에서 [[지각 편향]]을 이용, 수컷이 바우어를 지음", "easy_example": "무대를 꾸며 놓고 그 위에서 공연하는 사람"},
+   {"stage": "사례", "sentence_range": "4~6", "summary": "큰 물체는 가까이, 작은 물체는 멀리 [[배치]]", "easy_example": "가까운 건 크게, 먼 건 작게 그리는 원근화"},
+   {"stage": "전환", "sentence_range": "7", "summary": "이 배치가 [[강제 원근법]]을 만들어 바우어가 더 작아 보임", "easy_example": "작은 문 옆에 서면 사람이 더 커 보이는 착시"},
+   {"stage": "결론", "sentence_range": "8~9", "summary": "수컷은 더 [[커 보여]] 매력이 커지고, 야생 자료가 가설을 뒷받침", "easy_example": "키 커 보이는 각도로 찍은 사진"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "We know that animals have evolved a variety of patterns to manipulate the perceptions of their predators to afford themselves a modicum of safety.",
+   "grammar": [
+    {"tag": "명사절 접속사 that", "note": "know의 목적어 절을 이끎", "spans": ["that"]},
+    {"tag": "to부정사(목적)", "note": "~하기 위해", "spans": ["to manipulate", "to afford"]}
+   ],
+   "vocab": [
+    {"word": "manipulate", "meaning": "조작하다"},
+    {"word": "perception", "meaning": "지각, 인식"},
+    {"word": "predator", "meaning": "포식자"},
+    {"word": "modicum", "meaning": "소량, 약간"},
+    {"word": "afford", "meaning": "주다, 제공하다"}
+   ],
+   "chunks": [
+    {"en": "We know that [[animals]]", "ko": "우리는 [[동물]]이 ~을 안다는 것을"},
+    {"en": "have evolved a variety of [[patterns]]", "ko": "다양한 [[방식]]을 진화시켜 왔음을"},
+    {"en": "to manipulate the [[perceptions]] of their predators", "ko": "포식자의 [[지각]]을 조작하기 위해"},
+    {"en": "to afford themselves a modicum of [[safety]].", "ko": "자신에게 약간의 [[안전]]을 부여하려고."}
+   ],
+   "misreads": [
+    {"statement": "동물은 포식자의 지각을 조작하여 포식자에게 약간의 안전을 제공한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "to afford themselves a modicum of safety", "why": "안전을 얻는 대상은 포식자가 아니라 동물 자신(themselves)이므로 주체·대상이 뒤바뀌었다."}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Greater Bower birds utilize perceptual biases in the mating domain.",
+   "grammar": [
+    {"tag": "현재시제 일반동사", "note": "습성·일반적 사실", "spans": ["utilize"]}
+   ],
+   "vocab": [
+    {"word": "utilize", "meaning": "활용하다, 이용하다"},
+    {"word": "perceptual", "meaning": "지각의"},
+    {"word": "bias", "meaning": "편향"},
+    {"word": "domain", "meaning": "영역"}
+   ],
+   "chunks": [
+    {"en": "Greater Bower birds [[utilize]] perceptual biases", "ko": "큰바우어새는 지각적 편향을 [[이용한다]]"},
+    {"en": "in the [[mating]] domain.", "ko": "[[짝짓기]] 영역에서."}
+   ],
+   "misreads": [
+    {"statement": "큰바우어새는 짝짓기 영역에서 상대의 지각적 편향을 이용한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Males construct a bower; its function is to provide an arena in which males display to females standing in an avenue that leads up to the bower.",
+   "grammar": [
+    {"tag": "관계사 in which", "note": "arena를 수식하는 관계절", "spans": ["in which"]},
+    {"tag": "현재분사 후치수식", "note": "females를 수식", "spans": ["standing"]}
+   ],
+   "vocab": [
+    {"word": "construct", "meaning": "짓다, 건설하다"},
+    {"word": "bower", "meaning": "정자(구애용 구조물)"},
+    {"word": "arena", "meaning": "무대, 경기장"},
+    {"word": "display", "meaning": "과시하다, 구애 동작을 하다"},
+    {"word": "avenue", "meaning": "길, 통로"}
+   ],
+   "chunks": [
+    {"en": "Males [[construct]] a bower;", "ko": "수컷은 바우어를 [[짓는데]];"},
+    {"en": "its function is to provide an [[arena]]", "ko": "그 기능은 [[무대]]를 제공하는 것이다"},
+    {"en": "in which males [[display]] to females", "ko": "거기서 수컷이 암컷에게 [[구애하는]]"},
+    {"en": "[[standing]] in an avenue", "ko": "[[서 있는]] 길에"},
+    {"en": "that leads up to the [[bower]].", "ko": "바우어로 이어지는 [[그 길]]."}
+   ],
+   "misreads": [
+    {"statement": "바우어로 이어지는 길에 서 있는 것은 수컷이고, 수컷이 암컷에게 구애한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "females standing in an avenue that leads up to the bower", "why": "길에 서 있는(standing) 것은 수컷이 아니라 암컷(females)이므로 수식 관계를 잘못 읽었다."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "The males decorate the avenue with a variety of objects, such as stones and shells.",
+   "grammar": [
+    {"tag": "such as 예시", "note": "objects의 구체 예", "spans": ["such as"]}
+   ],
+   "vocab": [
+    {"word": "decorate", "meaning": "장식하다"},
+    {"word": "a variety of", "meaning": "다양한"},
+    {"word": "object", "meaning": "물체"},
+    {"word": "shell", "meaning": "조개껍데기"}
+   ],
+   "chunks": [
+    {"en": "The males [[decorate]] the avenue", "ko": "수컷은 그 길을 [[장식한다]]"},
+    {"en": "with a variety of [[objects]],", "ko": "다양한 [[물체]]로,"},
+    {"en": "such as [[stones]] and shells.", "ko": "[[돌]]과 조개껍데기 같은."}
+   ],
+   "misreads": [
+    {"statement": "수컷은 돌과 조개껍데기를 암컷에게 선물로 주어 길을 장식한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "decorate the avenue with a variety of objects", "why": "돌·조개껍데기는 길을 '장식'하는 물체일 뿐, 암컷에게 선물로 준다는 내용은 본문에 없다."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "But they do not do so in a chaotic manner.",
+   "grammar": [
+    {"tag": "대동사 do so", "note": "앞 동사구(장식하다) 대신", "spans": ["do so"]}
+   ],
+   "vocab": [
+    {"word": "chaotic", "meaning": "무질서한"},
+    {"word": "manner", "meaning": "방식"},
+    {"word": "do so", "meaning": "그렇게 하다"}
+   ],
+   "chunks": [
+    {"en": "But they do not do so", "ko": "그러나 그들은 그렇게 하지 않는다"},
+    {"en": "in a [[chaotic]] manner.", "ko": "[[무질서한]] 방식으로."}
+   ],
+   "misreads": [
+    {"statement": "암컷이 무질서한 방식으로 길을 장식하지는 않는다.", "verdict": "X", "trap_type": "지칭", "anchor": "they do not do so in a chaotic manner", "why": "무질서하게 장식하지 않는 주체 they는 암컷이 아니라 수컷을 가리킨다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The larger objects are placed closer to the bower and the smaller objects farther away.",
+   "grammar": [
+    {"tag": "병렬구조(생략)", "note": "and 앞뒤 대칭·동사구 are placed 생략", "spans": ["and"]}
+   ],
+   "vocab": [
+    {"word": "place", "meaning": "배치하다, 놓다"},
+    {"word": "closer", "meaning": "더 가까이"},
+    {"word": "farther", "meaning": "더 멀리"}
+   ],
+   "chunks": [
+    {"en": "The [[larger]] objects are placed", "ko": "[[더 큰]] 물체는 배치된다"},
+    {"en": "[[closer]] to the bower", "ko": "바우어에 [[더 가까이]]"},
+    {"en": "and the [[smaller]] objects", "ko": "그리고 [[더 작은]] 물체는"},
+    {"en": "[[farther]] away.", "ko": "더 [[멀리]] 놓인다."}
+   ],
+   "misreads": [
+    {"statement": "Because larger objects sit closer, the bower looks bigger.", "verdict": "X", "trap_type": "인과조건", "anchor": "The larger objects are placed closer to the bower", "english": true, "why": "큰 물체를 가까이 둔 결과 바우어가 더 커 보이는 게 아니라 실제보다 더 '작아' 보인다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "This creates a forced perspective the opposite of the Cinderella Castle; the bower appears smaller than it actually is.",
+   "grammar": [
+    {"tag": "비교급 than", "note": "than 이하와 비교", "spans": ["smaller than"]}
+   ],
+   "vocab": [
+    {"word": "forced perspective", "meaning": "강제 원근법"},
+    {"word": "opposite", "meaning": "반대(의 것)"},
+    {"word": "appear", "meaning": "~처럼 보이다"},
+    {"word": "actually", "meaning": "실제로"}
+   ],
+   "chunks": [
+    {"en": "This creates a [[forced]] perspective", "ko": "이것은 [[강제]] 원근감을 만들어 낸다"},
+    {"en": "the [[opposite]] of the Cinderella Castle;", "ko": "신데렐라 성과는 [[반대의]];"},
+    {"en": "the bower [[appears]] smaller", "ko": "바우어는 더 [[작아 보인다]]"},
+    {"en": "than it [[actually]] is.", "ko": "[[실제]]보다."}
+   ],
+   "misreads": [
+    {"statement": "이 강제 원근감 때문에 바우어 자체가 실제보다 더 커 보인다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the bower appears smaller than it actually is", "killer": true, "why": "본문에서 더 커 보이는 것은 수컷이고 바우어는 실제보다 더 '작아' 보이므로 정반대다."}
+   ],
+   "mistips": ["'the bower appears smaller'를 '수컷이 작아 보인다'로 읽으면 안 돼 — 작아 보이는 건 [[바우어]]이고, 그 덕분에 수컷이 더 커 보여."]
+  },
+  {
+   "id": 8,
+   "english": "Endler and his colleagues suggested that the male courting in the bower now appears larger and thus more attractive to the female.",
+   "grammar": [
+    {"tag": "명사절 that", "note": "suggested의 목적어", "spans": ["that"]},
+    {"tag": "분사 후치수식", "note": "male을 수식", "spans": ["courting"]}
+   ],
+   "vocab": [
+    {"word": "colleague", "meaning": "동료"},
+    {"word": "suggest", "meaning": "시사하다, 보여 주다"},
+    {"word": "court", "meaning": "구애하다"},
+    {"word": "attractive", "meaning": "매력적인"}
+   ],
+   "chunks": [
+    {"en": "Endler and his colleagues [[suggested]]", "ko": "Endler와 그의 동료들은 [[보여 주었다]]"},
+    {"en": "that the male [[courting]] in the bower", "ko": "바우어에서 [[구애하는]] 그 수컷이"},
+    {"en": "now appears [[larger]]", "ko": "이제 더 [[커 보이고]]"},
+    {"en": "and thus more [[attractive]] to the female.", "ko": "따라서 암컷에게 더 [[매력적]]이라고."}
+   ],
+   "misreads": [
+    {"statement": "Endler 등은 수컷이 더 매력적으로 보인다고 했는데, 그 이유는 수컷이 몸집을 실제로 키웠기 때문이다.", "verdict": "△", "trap_type": "필자관점", "anchor": "the male courting in the bower now appears larger", "why": "더 매력적이라는 결론은 맞지만, 수컷이 실제로 커진 게 아니라 원근 효과로 '더 커 보이는' 것이다."}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "Data on male mating success collected in the wild supports their hypothesis.",
+   "grammar": [
+    {"tag": "과거분사 후치수식", "note": "Data를 수식", "spans": ["collected"]},
+    {"tag": "주어-동사 수일치", "note": "단수 취급 Data + supports", "spans": ["supports"]}
+   ],
+   "vocab": [
+    {"word": "mating success", "meaning": "짝짓기 성공"},
+    {"word": "collected", "meaning": "수집된"},
+    {"word": "support", "meaning": "뒷받침하다"},
+    {"word": "hypothesis", "meaning": "가설"}
+   ],
+   "chunks": [
+    {"en": "[[Data]] on male mating success", "ko": "수컷 짝짓기 성공에 관한 [[자료]]는"},
+    {"en": "[[collected]] in the wild", "ko": "야생에서 [[수집된]]"},
+    {"en": "supports their [[hypothesis]].", "ko": "그들의 [[가설]]을 뒷받침한다."}
+   ],
+   "misreads": [
+    {"statement": "야생에서 수집된 수컷 짝짓기 성공 자료가 그들의 가설을 뒷받침한다.", "verdict": "O"}
+   ]
+  }
+ ]
+}

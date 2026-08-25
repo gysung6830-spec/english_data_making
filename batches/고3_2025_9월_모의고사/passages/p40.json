@@ -1,0 +1,249 @@
+{
+ "item_no": "40",
+ "theme": "문학 장르에 따라 다른 등장인물의 재등장과 변화 양상",
+ "overview": {
+   "theme_ko": "장르에 따른 등장인물의 재등장과 변화",
+   "topic": "🔎 문학 장르별 등장인물의 재등장 여부와 변화 양상",
+   "stance": "중립적",
+   "stance_reason": "'less common ~ than', 'often do so'처럼 장르 간 차이를 사실 비교로 담담히 서술",
+   "structure": "비교·대조",
+   "structure_reason": "문학 소설과 장르 소설·만화, 단일 작가와 여러 작가를 대조",
+   "key_grammar": {
+     "point": "대용 표현 those와 대동사 do so (명사·동사구의 반복 회피)",
+     "source_sentence": "─> While characters in most literary fiction hardly ever feature in successive works, those in genre fiction and comics often do so, and may undergo transformation in their traits especially when written about by different authors over time.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"[[those]]는 앞에 나온 복수명사(characters)를 대신해 반복을 피한다"},
+       {"chip":"핵심","text":"[[do so]]는 앞의 동사구(feature in successive works)를 통째로 대신하는 대동사 표현이다"},
+       {"chip":"짝 맞추기","text":"those in genre fiction ↔ [[characters]] in ~, often do so ↔ often [[feature]] ~"},
+       {"chip":"주의","text":"those는 'the [[ones]]'로 바꿔 읽으면 '~한 것들'로 자연스럽다"},
+       {"chip":"해석","text":"'장르 소설과 만화 속 [[그것들]]은 흔히 그렇게 한다(재등장한다)'로 풀어 읽는다"}
+     ],
+     "example_analysis": "those = characters, do so = feature in successive works를 대신해 반복을 피하고 문장을 간결하게 만든다.",
+     "drills": [
+       {"kind":"객관식","question":"밑줄 친 do so가 대신하는 말로 알맞은 것은?","options":["undergo transformation","change considerably","feature in successive works"],"answer":"feature in successive works","from_passage":true},
+       {"kind":"객관식","question":"밑줄 친 those가 가리키는 것은?","options":["works","characters","authors"],"answer":"characters","from_passage":true},
+       {"kind":"객관식","question":"다음 중 대동사(대용 표현)가 쓰인 문장은?","options":["Those in genre fiction often do so.","The story is very long.","He wrote a new book."],"answer":"Those in genre fiction often do so.","from_passage":false},
+       {"kind":"영작","question":"장르 소설과 만화 속 등장인물은 흔히 그렇게 한다(재등장한다).","words":["those","genre fiction and comics","often","do so"],"answer":"Those in genre fiction and comics often do so.","from_passage":true},
+       {"kind":"영작","question":"다른 학생들은 그렇게 하지 않았지만, 그녀는 그렇게 했다.","words":["other students","did not","but","she","did so"],"answer":"Other students did not, but she did so.","from_passage":false}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"재등장(reappear/feature)","expressions":["reappear in subsequent works","feature in successive works","series featuring the same central characters"],"variation":"문학 소설은 드물고 장르 소설·만화는 흔하다는 대조로 변주"},
+     {"label":"인물의 변화(change)","expressions":["they change in various ways","may change considerably","may change little"],"variation":"단일 작가면 거의 안 변하고 여러 작가면 크게 변한다는 점으로 변주"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입","sentence_range":"1~2","summary":"소설 속 인물의 삶은 [[개별 작품]]에 국한되고 해석은 다양","easy_example":"한 편의 영화가 끝나면 그 주인공 이야기도 끝나는 셈"},
+     {"stage":"전개","sentence_range":"3~4","summary":"문학 소설은 [[재등장]]이 드물지만 장르 소설·만화는 흔하다","easy_example":"주간 웹툰 주인공은 매주 다시 나온다"},
+     {"stage":"사례","sentence_range":"5~6","summary":"[[슈퍼맨]]·배트맨은 수십 년째 새 모험을 이어 가며 변화한다","easy_example":"오래된 만화 주인공이 시대마다 옷·성격이 바뀐다"},
+     {"stage":"대조","sentence_range":"7~8","summary":"단일 작가면 거의 안 변하고 [[여러 작가]]면 크게 변한다","easy_example":"한 사람이 그린 캐릭터와 여러 손을 거친 캐릭터의 차이"},
+     {"stage":"결론","sentence_range":"9","summary":"장르·만화 인물은 후속작에 흔히 나오고 [[변형]]을 겪는다","easy_example":"같은 히어로라도 작가가 바뀌면 성격이 달라진다"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "In most fiction, characters' lives are limited to the individual work.",
+     "grammar": [
+       {"tag":"수동태 be limited to","note":"~에 국한되다","spans":["are limited to"]}
+     ],
+     "vocab": [
+       {"word":"fiction","meaning":"소설, 허구"},
+       {"word":"be limited to","meaning":"~에 국한되다"},
+       {"word":"individual","meaning":"개별의"}
+     ],
+     "chunks": [
+       {"en":"In most fiction, characters' lives are [[limited]]","ko":"대부분의 소설에서, 등장인물의 삶은 [[국한된다]]"},
+       {"en":"to the [[individual]] work.","ko":"[[개별]] 작품에."}
+     ],
+     "misreads": [
+       {"statement":"대부분의 소설에서 등장인물의 삶은 여러 작품에 걸쳐 이어진다.","verdict":"X","trap_type":"구조수식","anchor":"limited to the individual work","why":"등장인물의 삶은 개별 작품에 국한된다고 본문은 말한다."}
+     ]
+   },
+   {
+     "id": 2,
+     "english": "Readers may disagree on the characteristics and traits of fictional figures, and in drama there is room for different interpretations of characters.",
+     "grammar": [
+       {"tag":"조동사 may(추측)","note":"~일 수도 있다","spans":["may disagree"]},
+       {"tag":"there is room for","note":"~의 여지가 있다","spans":["there is room for"]}
+     ],
+     "vocab": [
+       {"word":"disagree","meaning":"의견이 다르다"},
+       {"word":"trait","meaning":"특성"},
+       {"word":"fictional","meaning":"허구의"},
+       {"word":"interpretation","meaning":"해석"}
+     ],
+     "chunks": [
+       {"en":"Readers may [[disagree]] on the characteristics and traits of fictional figures,","ko":"독자들은 허구적 인물의 특징과 특성에 관해 [[의견이 다를]] 수 있고,"},
+       {"en":"and in drama there is [[room]]","ko":"그리고 연극에는 [[여지]]가 있다"},
+       {"en":"for different [[interpretations]] of characters.","ko":"등장인물에 관한 다양한 [[해석]]의."}
+     ],
+     "misreads": [
+       {"statement":"독자들은 허구적 인물의 특징과 특성에 관해 서로 의견이 다를 수 있다.","verdict":"O"},
+       {"statement":"허구적 인물의 특성에 관해 의견이 갈리는 주체는 작가들이다.","verdict":"X","trap_type":"주체대상","anchor":"Readers may disagree on the characteristics and traits","why":"의견이 다를 수 있는 주체는 '독자(Readers)'이다."}
+     ]
+   },
+   {
+     "id": 3,
+     "english": "However, it is less common for characters in literary fiction to reappear in subsequent works than in genre fiction, where series featuring the same central characters are common.",
+     "grammar": [
+       {"tag":"가주어 it ~ 진주어 to부정사","note":"it is less common ... to reappear","spans":["it is less common"]},
+       {"tag":"열등비교 less ~ than","note":"…보다 덜 ~한","spans":["less common"]},
+       {"tag":"관계부사 where","note":"장소·상황(genre fiction) 수식","spans":["where"]}
+     ],
+     "vocab": [
+       {"word":"subsequent","meaning":"후속의, 그 다음의"},
+       {"word":"genre","meaning":"장르"},
+       {"word":"feature","meaning":"등장시키다, 특징으로 삼다"},
+       {"word":"central character","meaning":"중심인물"}
+     ],
+     "chunks": [
+       {"en":"However, it is less [[common]]","ko":"그러나, (~하는 경우는) 덜 [[흔한데]]"},
+       {"en":"for characters in literary fiction to [[reappear]]","ko":"문학 소설의 등장인물이 [[재등장하는]] 것은"},
+       {"en":"in [[subsequent]] works than in genre fiction,","ko":"장르 소설에서보다 [[후속]] 작품에,"},
+       {"en":"where [[series]] featuring the same central characters are common.","ko":"장르 소설에서는 동일한 중심인물이 등장하는 [[연재물]]이 흔하다."}
+     ],
+     "misreads": [
+       {"statement":"문학 소설의 인물이 후속 작품에 재등장하지 못하는 것은 출판 비용 때문이다.","verdict":"X","trap_type":"무관정보","anchor":"it is less common for characters in literary fiction to reappear in subsequent works","why":"본문은 비용 같은 이유를 언급하지 않는다."},
+       {"statement":"장르 소설에 인물 재등장이 흔하므로, 필자는 장르 소설을 문학적으로 더 우수하다고 평가한다.","verdict":"△","trap_type":"필자관점","anchor":"series featuring the same central characters are common","why":"재등장 빈도 차이만 말할 뿐 장르 간 우열은 평가하지 않는다."}
+     ],
+     "mistips": [
+       "'less common ~ than'을 '더 흔하다'로 읽으면 안 돼 — 문학 소설이 장르 소설보다 '[[덜 흔하다]]'는 열등비교야."
+     ]
+   },
+   {
+     "id": 4,
+     "english": "This is even more pronounced in comics, which are typically serialized in newspaper strips or comic books.",
+     "grammar": [
+       {"tag":"계속적 용법 which","note":"콤마 뒤 which=comics를 받아 부연","spans":["which"]},
+       {"tag":"수동태 be serialized","note":"연재되다","spans":["are typically serialized"]}
+     ],
+     "vocab": [
+       {"word":"pronounced","meaning":"확연한, 뚜렷한"},
+       {"word":"serialize","meaning":"연재하다"},
+       {"word":"comic strip","meaning":"연재만화"}
+     ],
+     "chunks": [
+       {"en":"This is even more [[pronounced]] in comics,","ko":"이는 만화에서 훨씬 더 [[확연한데]],"},
+       {"en":"which are typically [[serialized]]","ko":"그것(만화)은 보통 [[연재되는]]"},
+       {"en":"in [[newspaper]] strips or comic books.","ko":"[[신문]] 만화나 만화책으로."}
+     ],
+     "misreads": [
+       {"statement":"밑줄 친 which가 가리키는 것은 comics가 아니라 newspaper strips이다.","verdict":"X","trap_type":"지칭","anchor":"This is even more pronounced in comics, which are typically serialized","why":"which의 선행사는 comics(만화)이다.","killer":true}
+     ]
+   },
+   {
+     "id": 5,
+     "english": "Thus characters introduced in the 1930s, like Superman and Batman, may still enjoy new adventures decades later.",
+     "grammar": [
+       {"tag":"과거분사 후치수식","note":"characters (which were) introduced ~","spans":["introduced in the 1930s"]},
+       {"tag":"조동사 may(가능)","note":"~할 수도 있다","spans":["may still enjoy"]}
+     ],
+     "vocab": [
+       {"word":"introduce","meaning":"소개하다, 도입하다"},
+       {"word":"adventure","meaning":"모험"},
+       {"word":"decade","meaning":"십 년"}
+     ],
+     "chunks": [
+       {"en":"Thus characters [[introduced]] in the 1930s,","ko":"따라서 1930년대에 [[소개된]] 등장인물은,"},
+       {"en":"like [[Superman]] and Batman,","ko":"[[슈퍼맨]]과 배트맨 같은,"},
+       {"en":"may still enjoy new [[adventures]] decades later.","ko":"수십 년 후에도 여전히 새로운 [[모험]]을 즐길 수도 있다."}
+     ],
+     "misreads": [
+       {"statement":"1930년대에 등장한 슈퍼맨과 배트맨은 수십 년 뒤에도 새로운 이야기에 나올 수 있다.","verdict":"O"},
+       {"statement":"슈퍼맨과 배트맨이 지금도 활약하는 것은 단일 작가가 계속 그들을 그리기 때문이다.","verdict":"X","trap_type":"인과조건","anchor":"characters introduced in the 1930s, like Superman and Batman, may still enjoy new adventures decades later","why":"이들은 여러 작가를 거치는 만화 연재물의 인물이다."}
+     ]
+   },
+   {
+     "id": 6,
+     "english": "During these characters' long histories, they change in various ways for a variety of reasons.",
+     "grammar": [
+       {"tag":"전치사 During","note":"~ 동안(기간)","spans":["During these characters' long histories"]},
+       {"tag":"a variety of","note":"다양한","spans":["a variety of"]}
+     ],
+     "vocab": [
+       {"word":"various","meaning":"다양한"},
+       {"word":"a variety of","meaning":"다양한"}
+     ],
+     "chunks": [
+       {"en":"During these characters' long [[histories]],","ko":"이러한 등장인물의 오래된 [[역사]] 동안,"},
+       {"en":"they [[change]] in various ways","ko":"그들은 다양한 방식으로 [[변화한다]]"},
+       {"en":"for a variety of [[reasons]].","ko":"다양한 [[이유]]로."}
+     ],
+     "misreads": [
+       {"statement":"'these characters'는 오직 문학 소설의 인물만 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"During these characters' long histories","why":"these characters는 앞의 만화·연재물 인물(슈퍼맨 등)을 가리킨다."}
+     ]
+   },
+   {
+     "id": 7,
+     "english": "If a character is created by a single author, like Sherlock Holmes, the character's core traits may change little from story to story, but readers learn more about him with each successive story.",
+     "grammar": [
+       {"tag":"조건 부사절 if","note":"만약 ~라면","spans":["If a character is created"]},
+       {"tag":"수동태 be created by","note":"~에 의해 창작되다","spans":["is created by"]},
+       {"tag":"비교급 강조 more","note":"learn more about him","spans":["learn more about him"]}
+     ],
+     "vocab": [
+       {"word":"core","meaning":"핵심의"},
+       {"word":"trait","meaning":"특성"},
+       {"word":"successive","meaning":"연속되는"}
+     ],
+     "chunks": [
+       {"en":"If a character is [[created]] by a single author,","ko":"만약 등장인물이 단일 작가에 의해 [[창작되면]],"},
+       {"en":"like Sherlock Holmes, the character's [[core]] traits may change little","ko":"셜록 홈즈처럼, 그 등장인물의 [[핵심]] 특성은 거의 변하지 않을 수도 있지만"},
+       {"en":"from story to [[story]],","ko":"[[이야기]]마다,"},
+       {"en":"but readers [[learn]] more about him","ko":"하지만 독자들은 그에 관해 더 [[알게]] 되고"},
+       {"en":"with each [[successive]] story.","ko":"[[연속되는]] 각각의 이야기와 함께."}
+     ],
+     "misreads": [
+       {"statement":"셜록 홈즈처럼 단일 작가가 만든 인물은 핵심 특성이 이야기마다 거의 변하지 않을 수 있다.","verdict":"O"},
+       {"statement":"A single author's character changes drastically in every new story.","verdict":"X","trap_type":"필자관점","anchor":"the character's core traits may change little from story to story","why":"단일 작가가 만든 인물의 핵심 특성은 거의 변하지 않는다고 한다.","english":true}
+     ]
+   },
+   {
+     "id": 8,
+     "english": "On the other hand, if characters are the work of several hands over decades, they may change considerably.",
+     "grammar": [
+       {"tag":"On the other hand","note":"반면에(대조 연결)","spans":["On the other hand"]},
+       {"tag":"조건 부사절 if","note":"만약 ~라면","spans":["if characters are the work of several hands"]}
+     ],
+     "vocab": [
+       {"word":"the work of several hands","meaning":"여러 사람의 손을 거친 작품"},
+       {"word":"considerably","meaning":"상당히"}
+     ],
+     "chunks": [
+       {"en":"On the other hand, if [[characters]] are the work","ko":"반면에, 만약 [[등장인물]]이 (~의) 작품이라면"},
+       {"en":"of several [[hands]] over decades,","ko":"수십 년 동안 여러 [[(작가의) 손]]을 거친,"},
+       {"en":"they may change [[considerably]].","ko":"그들은 [[상당히]] 바뀔 수도 있다."}
+     ],
+     "misreads": [
+       {"statement":"여러 작가의 손을 거친 인물이라도 그 특성은 거의 변하지 않는다.","verdict":"X","trap_type":"인과조건","anchor":"if characters are the work of several hands over decades, they may change considerably","why":"여러 작가를 거치면 인물이 상당히 바뀔 수 있다고 한다."}
+     ]
+   },
+   {
+     "id": 9,
+     "english": "─> While characters in most literary fiction hardly ever feature in successive works, those in genre fiction and comics often do so, and may undergo transformation in their traits especially when written about by different authors over time.",
+     "grammar": [
+       {"tag":"대용어 those","note":"앞 복수명사(characters) 대신","spans":["those in genre fiction and comics"]},
+       {"tag":"대동사 do so","note":"앞 동사구(feature ~)를 대신","spans":["do so"]},
+       {"tag":"수동 분사구문 written about","note":"쓰일 때(부사절 축약)","spans":["when written about by different authors"]}
+     ],
+     "vocab": [
+       {"word":"undergo","meaning":"겪다"},
+       {"word":"transformation","meaning":"변형, 변화"},
+       {"word":"hardly ever","meaning":"거의 ~않다"}
+     ],
+     "chunks": [
+       {"en":"─> While characters in most literary [[fiction]]","ko":"대부분의 문학 [[소설]] 속 등장인물은 (~하는) 반면,"},
+       {"en":"hardly ever [[feature]] in successive works,","ko":"연속되는 작품에 거의 [[등장하지]] 않지만,"},
+       {"en":"those in genre fiction and comics often [[do so]],","ko":"장르 소설과 만화 속 그것들(등장인물)은 흔히 [[그렇게 한다]],"},
+       {"en":"and may undergo [[transformation]] in their traits","ko":"그리고 그들의 특성에 [[변형]]을 겪을 수도 있는데"},
+       {"en":"especially when written about by different [[authors]] over time.","ko":"특히 시간이 지나면서 다른 [[작가]]들에 의해 쓰일 때."}
+     ],
+     "misreads": [
+       {"statement":"필자는 문학 소설과 장르 소설 모두에서 인물이 후속작에 똑같이 자주 등장한다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"characters in most literary fiction hardly ever feature in successive works","why":"문학 소설 인물은 거의 등장하지 않는 반면 장르·만화는 흔하다고 대조한다."}
+     ],
+     "mistips": [
+       "'do so'를 '그렇게 하도록'으로 읽으면 안 돼 — 앞 동사구를 대신하는 '[[그렇게 한다(재등장한다)]]'야."
+     ]
+   }
+ ]
+}

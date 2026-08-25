@@ -1,0 +1,236 @@
+{
+ "item_no": "39",
+ "theme": "역사 연구에서 현존하는 사료(史料)의 한계와 해석의 중요성",
+ "overview": {
+   "theme_ko": "현존 사료의 한계와 해석의 중요성",
+   "topic": "🔎 역사 연구에서 현존하는 증거의 한계와 해석의 중요성",
+   "stance": "중립적",
+   "stance_reason": "사실만으로는 '거의 알려 주는 것이 없다(tell us little)'며 해석의 필요성을 담담히 서술",
+   "structure": "주장→근거·예시",
+   "structure_reason": "현존한 사실도 해석돼야 의미를 가진다는 주장을 피라미드 사례로 뒷받침",
+   "key_grammar": {
+     "point": "계속적 용법의 관계대명사 which",
+     "source_sentence": "These buildings were part of a rich and diverse culture, much of which has been lost.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"콤마 뒤 [[which]]는 앞의 명사·내용을 받아 '그리고 그것' 정도로 이어 준다"},
+       {"chip":"핵심","text":"[[계속적 용법]]은 콤마와 함께 쓰여 선행사를 한정하지 않고 '추가 정보'를 덧붙인다"},
+       {"chip":"구조","text":"much of which = '그것의 [[많은 부분]]', 여기서 which는 a rich and diverse culture를 가리킨다"},
+       {"chip":"주의","text":"계속적 용법의 which는 [[that]]으로 바꿔 쓸 수 없다"},
+       {"chip":"해석","text":"'~인데, 그 대부분은 소실되었다'처럼 [[앞에서 뒤로]] 자연스럽게 풀어 읽는다"}
+     ],
+     "example_analysis": "which가 앞의 'a rich and diverse culture'를 받아, much of which(그 문화의 많은 부분)가 소실됐다고 부연 설명한다.",
+     "drills": [
+       {"kind":"객관식","question":"빈칸에 알맞은 관계사는? These buildings were part of a rich and diverse culture, much of ___ has been lost.","options":["that","which","what"],"answer":"which","from_passage":true},
+       {"kind":"객관식","question":"다음 중 계속적 용법(콤마+관계사)이 쓰인 문장은?","options":["He has two sons, both of whom are doctors.","The book that I read was fun.","I know what you mean."],"answer":"He has two sons, both of whom are doctors.","from_passage":false},
+       {"kind":"객관식","question":"본문 much of which의 의미로 알맞은 것은?","options":["가장 많은 문화","문화가 아닌 것","그 문화의 많은 부분"],"answer":"그 문화의 많은 부분","from_passage":true},
+       {"kind":"영작","question":"이 건축물들은 풍부하고 다양한 문화의 일부였고, 그 대부분은 소실되었다.","words":["these buildings","part of","a rich and diverse culture","much of which","has been lost"],"answer":"These buildings were part of a rich and diverse culture, much of which has been lost.","from_passage":true},
+       {"kind":"영작","question":"그녀에게는 세 명의 자녀가 있는데, 그들 모두 해외에 산다.","words":["she","three children","all of whom","live","abroad"],"answer":"She has three children, all of whom live abroad.","from_passage":false}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"현존(survival)의 문제","expressions":["The problem of survival","what has survived","have survived"],"variation":"'살아남았다'가 곧 '더 중요하다'는 뜻은 아니라는 점으로 변주"},
+     {"label":"사실→해석","expressions":["evaluated, placed in context and interpreted","place different values"],"variation":"같은 사실도 평가·해석에 따라 다른 가치를 얻는다는 점으로 변주"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입","sentence_range":"1","summary":"역사가는 무엇이·왜 일어났는지 [[이해]]하려 증거를 쓴다","easy_example":"탐정이 사건을 풀 때 단서부터 모으는 것과 같다"},
+     {"stage":"전개","sentence_range":"2~3","summary":"증거는 건물·잔해와 문서 등 [[수많은 출처]]에서 온다","easy_example":"옛 동네를 알려면 사진·일기·낡은 간판을 다 본다"},
+     {"stage":"전환","sentence_range":"4","summary":"[[현존]]의 문제 — 살아남은 것이 반드시 더 중요하진 않다","easy_example":"오래된 물건이라고 다 값진 건 아니다"},
+     {"stage":"사례","sentence_range":"5~6","summary":"피라미드는 남았지만 그 문화의 [[많은 부분]]은 소실됐다","easy_example":"거대한 성만 남고 그 안 사람들 이야기는 사라진 셈"},
+     {"stage":"결론","sentence_range":"7~8","summary":"사실은 [[해석]]되기 전까지 알려 주는 바가 적다","easy_example":"재료만 있고 요리하지 않으면 밥상이 안 된다"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Historians use evidence in order to understand what happened and why it happened.",
+     "grammar": [
+       {"tag":"부사적 to부정사(목적)","note":"in order to+동사원형 = ~하기 위해","spans":["in order to understand"]}
+     ],
+     "vocab": [
+       {"word":"evidence","meaning":"증거"},
+       {"word":"in order to","meaning":"~하기 위해"}
+     ],
+     "chunks": [
+       {"en":"Historians use [[evidence]]","ko":"역사학자들은 [[증거]]를 활용한다"},
+       {"en":"in order to [[understand]]","ko":"[[이해하기]] 위해"},
+       {"en":"[[what happened and why it happened.]]","ko":"[[무엇이 일어났고 왜 일어났는지를.]]"}
+     ],
+     "misreads": [
+       {"statement":"역사학자들은 무슨 일이 일어났는지만 확인하면 되고, 그 이유는 다루지 않는다.","verdict":"X","trap_type":"인과조건","anchor":"why it happened","why":"역사가는 무엇이 일어났는지와 '왜' 일어났는지를 함께 이해하려 한다."}
+     ]
+   },
+   {
+     "id": 2,
+     "english": "In architectural history this evidence may take the form of the buildings themselves or their remains, and documents such as plans, drawings, descriptions, diaries or bills.",
+     "grammar": [
+       {"tag":"take the form of","note":"~의 형태를 띠다","spans":["take the form of"]},
+       {"tag":"such as 예시","note":"~와 같은(예시 나열)","spans":["such as"]}
+     ],
+     "vocab": [
+       {"word":"architectural","meaning":"건축의"},
+       {"word":"remains","meaning":"잔해, 유물"},
+       {"word":"description","meaning":"설명(서)"},
+       {"word":"bill","meaning":"청구서"}
+     ],
+     "chunks": [
+       {"en":"In architectural history this evidence may [[take]]","ko":"건축사에서 이 증거는 (~한) 형태를 [[띨]] 수도 있는데"},
+       {"en":"the form of the [[buildings]] themselves or their remains,","ko":"[[건물]] 그 자체나 그것의 잔해의 형태를,"},
+       {"en":"and [[documents]] such as plans, drawings, descriptions, diaries or bills.","ko":"그리고 설계도, 도면, 설명서, 일지, 또는 청구서 같은 [[문서]] 형태를."}
+     ],
+     "misreads": [
+       {"statement":"건축사의 증거에는 건물 자체나 잔해뿐 아니라 설계도·일지 같은 문서도 포함된다.","verdict":"O"},
+       {"statement":"이 증거는 오직 문서로만 존재하고 건물 자체는 증거로 보지 않는다.","verdict":"X","trap_type":"구조수식","anchor":"the buildings themselves or their remains","why":"증거는 건물 자체·잔해와 문서를 모두 아우른다고 한다."}
+     ]
+   },
+   {
+     "id": 3,
+     "english": "Our picture of any period of history is derived from a multitude of sources, such as the paintings, literature, deeds, buildings and other artefacts that have survived.",
+     "grammar": [
+       {"tag":"수동태 be derived from","note":"~에서 유래되다","spans":["is derived from"]},
+       {"tag":"주격 관계대명사 that","note":"other artefacts를 수식","spans":["that"]}
+     ],
+     "vocab": [
+       {"word":"be derived from","meaning":"~에서 유래하다"},
+       {"word":"a multitude of","meaning":"수많은"},
+       {"word":"deed","meaning":"증서"},
+       {"word":"artefact","meaning":"인공물, 공예품"}
+     ],
+     "chunks": [
+       {"en":"Our [[picture]] of any period of history","ko":"어떤 역사적 시기에 관한 우리의 [[인식]]은"},
+       {"en":"is derived from a multitude of [[sources]],","ko":"수많은 [[출처]]에서 유래되는데,"},
+       {"en":"such as the paintings, [[literature]], deeds, buildings","ko":"그림, [[문학]], 증서, 건물과 같은"},
+       {"en":"and other artefacts that have [[survived]].","ko":"그리고 [[현존해 온]] 다른 인공물과 같은 (출처에서)."}
+     ],
+     "misreads": [
+       {"statement":"우리의 역사 인식은 주로 통계 자료와 설문 인터뷰에서 나온다.","verdict":"X","trap_type":"무관정보","anchor":"such as the paintings, literature, deeds, buildings and other artefacts","why":"본문은 그림·문학·증서·건물 등 현존 인공물을 출처로 든다."},
+       {"statement":"'that have survived'는 소실되어 사라진 인공물을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"other artefacts that have survived","why":"관계절 that have survived는 '현존해 온' 인공물을 가리킨다."}
+     ]
+   },
+   {
+     "id": 4,
+     "english": "The problem of survival lies at the root of many of the historian's problems, for what has survived may not necessarily be more significant than what has not survived.",
+     "grammar": [
+       {"tag":"lie at the root of","note":"~의 근원에 있다","spans":["lies at the root"]},
+       {"tag":"이유 접속사 for","note":"~이기 때문에(등위)","spans":["for what has survived"]},
+       {"tag":"부분부정 not necessarily","note":"반드시 ~인 것은 아니다","spans":["not necessarily"]}
+     ],
+     "vocab": [
+       {"word":"survival","meaning":"현존, 살아남음"},
+       {"word":"root","meaning":"근원, 뿌리"},
+       {"word":"significant","meaning":"중요한"},
+       {"word":"necessarily","meaning":"반드시"}
+     ],
+     "chunks": [
+       {"en":"The problem of [[survival]] lies at the root","ko":"[[현존]]의 문제는 (~의) 근원에 있는데"},
+       {"en":"of many of the historian's [[problems]],","ko":"역사가들의 많은 [[문제]]의,"},
+       {"en":"for what has survived may [[not necessarily]] be","ko":"왜냐하면 현존해 온 것이 [[반드시]] (~은 아닐 수도) 있기 때문에"},
+       {"en":"more [[significant]] than what has not survived.","ko":"현존해 오지 못한 것보다 더 [[중요한]] 것은 (아닐 수도 있기 때문에)."}
+     ],
+     "misreads": [
+       {"statement":"역사가의 근본 문제는, 현존해 온 것이 현존하지 못한 것보다 항상 더 중요하다는 점에 있다.","verdict":"X","trap_type":"필자관점","anchor":"may not necessarily be more significant than what has not survived","why":"본문은 현존한 것이 '반드시' 더 중요한 것은 아니라고 한다(부분부정).","killer":true}
+     ],
+     "mistips": [
+       "'not necessarily more significant'를 '전혀 안 중요하다'로 읽으면 안 돼 — '[[반드시 더 중요한 것은 아니다]]'라는 부분부정이야."
+     ]
+   },
+   {
+     "id": 5,
+     "english": "The Egyptian pyramids have survived thousands of years, but historical significance is not just a question of durability.",
+     "grammar": [
+       {"tag":"현재완료(계속)","note":"have survived: 수천 년째 견뎌 옴","spans":["have survived"]},
+       {"tag":"not just A","note":"단지 A만은 아니다","spans":["not just"]}
+     ],
+     "vocab": [
+       {"word":"durability","meaning":"내구성"},
+       {"word":"significance","meaning":"중요성, 의의"}
+     ],
+     "chunks": [
+       {"en":"The Egyptian pyramids have [[survived]] thousands of years,","ko":"이집트 피라미드는 수천 년을 [[견뎌 냈지만]],"},
+       {"en":"but historical [[significance]] is not just","ko":"하지만 역사적 [[중요성]]은 그저 (~이) 아니다"},
+       {"en":"a question of [[durability]].","ko":"[[내구성]]의 문제가."}
+     ],
+     "misreads": [
+       {"statement":"피라미드는 역사적으로 의미가 있지만, 그 의미는 오직 오래 견뎠기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"historical significance is not just a question of durability","why":"중요성은 내구성만이 아니라 평가·해석에서 나온다고 한다."}
+     ]
+   },
+   {
+     "id": 6,
+     "english": "These buildings were part of a rich and diverse culture, much of which has been lost.",
+     "grammar": [
+       {"tag":"계속적 용법 관계대명사 which","note":"콤마 뒤 which=앞 명사(culture)를 받아 부연","spans":["which"]},
+       {"tag":"부분 표현 much of which","note":"그것의 많은 부분","spans":["much of which"]},
+       {"tag":"현재완료 수동 has been lost","note":"소실되어 왔다","spans":["has been lost"]}
+     ],
+     "vocab": [
+       {"word":"diverse","meaning":"다양한"},
+       {"word":"be lost","meaning":"소실되다, 사라지다"}
+     ],
+     "chunks": [
+       {"en":"These [[buildings]] were part of","ko":"이 [[건축물]]들은 (~의) 일부였고"},
+       {"en":"a rich and diverse [[culture]],","ko":"풍부하고 다양한 [[문화]]의,"},
+       {"en":"[[much of which has been lost.]]","ko":"[[그리고 그 대부분은 소실되었다.]]"}
+     ],
+     "misreads": [
+       {"statement":"'These buildings'는 앞에서 언급된 모든 현존 사료 전체를 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"These buildings were part of a rich and diverse culture","why":"These buildings는 바로 앞에 나온 이집트 피라미드를 가리킨다."},
+       {"statement":"이 건축물들은 풍부하고 다양한 문화의 일부였고, 그 문화의 많은 부분은 사라졌다.","verdict":"O"}
+     ],
+     "mistips": [
+       "'much of which'를 '많은 which'로 읽으면 안 돼 — '그 [[문화의 많은 부분]]'이라는 뜻이야."
+     ]
+   },
+   {
+     "id": 7,
+     "english": "They are historical facts, but facts by themselves, even such massive facts as the pyramids, are just the first stage in any historical study, and until they have been evaluated, placed in context and interpreted, they tell us little.",
+     "grammar": [
+       {"tag":"시간·조건 until절","note":"~하기 전까지는","spans":["until they have been evaluated"]},
+       {"tag":"과거분사 병렬(수동)","note":"evaluated·placed·interpreted 병렬","spans":["placed in context and interpreted"]},
+       {"tag":"tell+간·직접목적어(4형식)","note":"tell us little","spans":["tell us little"]}
+     ],
+     "vocab": [
+       {"word":"massive","meaning":"거대한"},
+       {"word":"stage","meaning":"단계"},
+       {"word":"evaluate","meaning":"평가하다"},
+       {"word":"interpret","meaning":"해석하다"}
+     ],
+     "chunks": [
+       {"en":"They are historical [[facts]],","ko":"그것들은 역사적 [[사실]]이지만,"},
+       {"en":"but facts by [[themselves]],","ko":"하지만 사실 [[그 자체로는]],"},
+       {"en":"even such [[massive]] facts as the pyramids,","ko":"피라미드처럼 [[거대한]] 사실조차도,"},
+       {"en":"are just the first [[stage]] in any historical study,","ko":"그저 어떤 역사 연구의 첫 [[단계]]에 불과하고,"},
+       {"en":"and until they have been [[evaluated]],","ko":"그리고 그것이 [[평가되고]],"},
+       {"en":"placed in context and [[interpreted]],","ko":"맥락에 배치되고 [[해석되기]] 전까지는,"},
+       {"en":"they tell us [[little]].","ko":"우리에게 알려 주는 것이 [[거의 없다]]."}
+     ],
+     "misreads": [
+       {"statement":"거대한 사실인 피라미드조차도 평가·맥락화·해석을 거치기 전에는 알려 주는 바가 적다.","verdict":"O"},
+       {"statement":"Massive facts like the pyramids speak for themselves and need no interpretation.","verdict":"X","trap_type":"필자관점","anchor":"until they have been evaluated, placed in context and interpreted, they tell us little","why":"사실은 해석되기 전까지는 거의 알려 주는 것이 없다고 필자는 본다.","english":true}
+     ]
+   },
+   {
+     "id": 8,
+     "english": "Different historians may place different values on the same facts, and the discovery of new evidence may modify or change existing theories and interpretations.",
+     "grammar": [
+       {"tag":"place value on","note":"~에 가치를 부여하다","spans":["place different values"]},
+       {"tag":"등위접속 and","note":"두 절을 대등 연결","spans":["and the discovery"]}
+     ],
+     "vocab": [
+       {"word":"discovery","meaning":"발견"},
+       {"word":"modify","meaning":"수정하다"},
+       {"word":"existing","meaning":"기존의"},
+       {"word":"interpretation","meaning":"해석"}
+     ],
+     "chunks": [
+       {"en":"Different historians may [[place]] different values","ko":"서로 다른 역사학자가 서로 다른 [[가치를 부여할]] 수도 있고"},
+       {"en":"on the same [[facts]],","ko":"같은 [[사실]]에,"},
+       {"en":"and the [[discovery]] of new evidence","ko":"그리고 새로운 증거의 [[발견]]이"},
+       {"en":"may [[modify]] or change existing theories and interpretations.","ko":"기존 이론과 해석을 [[수정하거나]] 바꿀 수도 있다."}
+     ],
+     "misreads": [
+       {"statement":"같은 사실이라면 어떤 역사가든 반드시 같은 가치를 부여한다.","verdict":"X","trap_type":"주체대상","anchor":"Different historians may place different values on the same facts","why":"역사가마다 같은 사실에 다른 가치를 부여할 수 있다고 한다."}
+     ],
+     "mistips": [
+       "'may place different values'를 '가치를 두면 안 된다'로 읽으면 안 돼 — '서로 다른 [[가치를 부여할 수도 있다]]'라는 뜻이야."
+     ]
+   }
+ ]
+}

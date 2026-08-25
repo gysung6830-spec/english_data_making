@@ -1,0 +1,624 @@
+{
+ "item_no": "34",
+ "theme": "집단적 의사 결정에서 공정성 확보를 위한 무작위 선택의 필요성",
+ "overview": {
+  "theme_ko": "공정한 집단 선택을 위한 무작위 추첨의 필요성",
+  "topic": "🔎 집단적 의사결정에서 공정성 확보를 위한 무작위 선택(추첨)의 필요성",
+  "stance": "긍정적",
+  "stance_reason": "Allowing lotteries ~ seems like a necessity for impartial collective choice (추첨을 긍정적으로 평가)",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "선호가 갈릴 때 공정성 조건을 지키며 정할 결정적 방법이 없다는 문제를 제시하고, 추첨(무작위 선택) 허용을 해결책으로 제시한다.",
+  "key_grammar": {
+   "point": "관계부사 where (계속적 용법)",
+   "source_sentence": "The use of lotteries for the selection of officials interestingly goes back to the world's first democracy in Athens, where it was widely regarded as a principal characteristic of democracy, and has recently gained increasing attention in political science.",
+   "explanation": [
+    {
+     "chip": "쉽게 말하면",
+     "text": "where는 앞의 장소 명사 [[Athens]]를 대신하는 관계부사로 '그곳에서'로 이어 읽는다."
+    },
+    {
+     "chip": "형태",
+     "text": "「, where + 주어 + 동사」로 앞 명사를 부연 설명하는 [[계속적]] 용법이다."
+    },
+    {
+     "chip": "의미",
+     "text": "where it was widely regarded ~ = '그리고 그곳(아테네)에서 그것이 널리 [[여겨졌다]]'."
+    },
+    {
+     "chip": "구별",
+     "text": "where 뒤에 완전한 [[절]]이 오면 관계부사, 목적어 등이 빠진 불완전한 절이면 관계대명사다."
+    }
+   ],
+   "example_analysis": "where는 in Athens를 선행사로 받아 뒤의 완전절(it was widely regarded ~)을 이끄는 계속적 용법이다.",
+   "drills": [
+    {
+     "kind": "객관식",
+     "question": "빈칸에 알맞은 것은? '... in Athens, ___ it was widely regarded as a principal characteristic of democracy.'",
+     "options": [
+      "where",
+      "which",
+      "that"
+     ],
+     "answer": "where",
+     "from_passage": true
+    },
+    {
+     "kind": "객관식",
+     "question": "관계부사 where가 가리키는 것은?",
+     "options": [
+      "Athens",
+      "lotteries",
+      "officials"
+     ],
+     "answer": "Athens",
+     "from_passage": true
+    },
+    {
+     "kind": "객관식",
+     "question": "where 뒤에 오는 절의 형태로 옳은 것은?",
+     "options": [
+      "주어·동사를 갖춘 완전한 절",
+      "목적어가 빠진 불완전한 절",
+      "주어가 빠진 불완전한 절"
+     ],
+     "answer": "주어·동사를 갖춘 완전한 절",
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "그것은 민주주의의 주요 특징으로 널리 여겨졌다.",
+     "words": [
+      "it",
+      "was",
+      "widely",
+      "regarded",
+      "as",
+      "a",
+      "principal",
+      "characteristic",
+      "of",
+      "democracy"
+     ],
+     "answer": "it was widely regarded as a principal characteristic of democracy",
+     "from_passage": true
+    },
+    {
+     "kind": "영작",
+     "question": "이곳이 내가 10년 동안 살았던 도시다.",
+     "words": [
+      "This",
+      "is",
+      "the",
+      "city",
+      "where",
+      "I",
+      "lived",
+      "for",
+      "ten",
+      "years"
+     ],
+     "answer": "This is the city where I lived for ten years",
+     "from_passage": false
+    }
+   ]
+  },
+  "restatement_chains": [
+   {
+    "label": "무작위·추첨",
+    "expressions": [
+     "randomization",
+     "lotteries",
+     "drawing a lot"
+    ],
+    "variation": "동점을 가르는 tiebreaking 수단"
+   },
+   {
+    "label": "공정성 조건",
+    "expressions": [
+     "anonymity and neutrality",
+     "impartiality"
+    ],
+    "variation": "정체성·대안에 치우치지 않는 공평함"
+   }
+  ],
+  "flow_blocks": [
+   {
+    "stage": "도입/문제",
+    "sentence_range": "1",
+    "summary": "선호를 모을 때 어떤 경우엔 [[무작위 추출]]·동점 처리가 필요",
+    "easy_example": "둘의 표가 정확히 반반이면 가위바위보로 정하듯"
+   },
+   {
+    "stage": "예시",
+    "sentence_range": "2~3",
+    "summary": "a·b 선호가 갈리면 [[익명성]]·중립성을 어기지 않고 정할 결정적 방법이 없음",
+    "easy_example": "두 사람이 서로 다른 답을 고집하면 규칙만으로는 못 정한다."
+   },
+   {
+    "stage": "주장",
+    "sentence_range": "4",
+    "summary": "그래서 [[추첨]] 허용이 공정한 집단 선택에 필요",
+    "easy_example": "제비를 뽑는 것이 오히려 공평할 수 있다."
+   },
+   {
+    "stage": "부연",
+    "sentence_range": "5",
+    "summary": "'결정적' 함수도 [[동점]]이 없을 때만 결정적, 동점은 제비뽑기로 해결",
+    "easy_example": "다수결도 표가 같으면 결국 뽑기로 간다."
+   },
+   {
+    "stage": "결론/확장",
+    "sentence_range": "6",
+    "summary": "추첨은 [[아테네]] 민주주의에서 유래, 최근 정치학의 주목",
+    "easy_example": "옛 아테네에서 관리를 제비뽑기로 뽑았다."
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "When gathering the preferences of multiple agents into one collective choice, it is easily seen that certain cases call for randomization or other means of tiebreaking.",
+   "grammar": [
+    {
+     "tag": "분사구문(When ~ing)",
+     "note": "접속사를 남긴 분사구문 '~할 때'",
+     "spans": [
+      "gathering"
+     ]
+    },
+    {
+     "tag": "가주어 it",
+     "note": "it은 가주어, that절이 진주어",
+     "spans": [
+      "it"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "preference",
+     "meaning": "선호"
+    },
+    {
+     "word": "agent",
+     "meaning": "행위자, 주체"
+    },
+    {
+     "word": "collective",
+     "meaning": "집단의, 공동의"
+    },
+    {
+     "word": "randomization",
+     "meaning": "무작위 추출"
+    },
+    {
+     "word": "tiebreaking",
+     "meaning": "동점 처리, 동점 가르기"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "When gathering the preferences of multiple [[agents]]",
+     "ko": "여러 [[행위자]]의 선호를 모을 때"
+    },
+    {
+     "en": "into one collective [[choice]],",
+     "ko": "하나의 집단적 [[선택]]으로,"
+    },
+    {
+     "en": "it is easily [[seen]] that",
+     "ko": "~라는 것을 쉽게 [[알]] 수 있다"
+    },
+    {
+     "en": "certain cases call for [[randomization]]",
+     "ko": "특정 경우들은 [[무작위 추출]]을 필요로 하거나"
+    },
+    {
+     "en": "or other means of [[tiebreaking]].",
+     "ko": "동점을 가르는 다른 [[방법]]이 필요하다는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "여러 행위자의 선호를 하나의 집단적 선택으로 모을 때, 어떤 경우에는 무작위 추출이 필요하다는 것을 쉽게 알 수 있다.",
+     "verdict": "O",
+     "trap_type": "필자관점"
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "For example, if there are two alternatives, a and b, and two agents such that one prefers a and the other one b, there is no deterministic way of selecting a single alternative without violating one of two basic fairness conditions known as anonymity and neutrality.",
+   "grammar": [
+    {
+     "tag": "such that",
+     "note": "'~한 상황이어서'로 조건을 이어 줌",
+     "spans": [
+      "such that"
+     ]
+    },
+    {
+     "tag": "동명사(전치사 목적어)",
+     "note": "of selecting: '선택하는'",
+     "spans": [
+      "selecting"
+     ]
+    },
+    {
+     "tag": "분사 후치수식",
+     "note": "known as ~가 conditions를 수식",
+     "spans": [
+      "known"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "alternative",
+     "meaning": "대안"
+    },
+    {
+     "word": "deterministic",
+     "meaning": "결정적인, 확정적인"
+    },
+    {
+     "word": "violate",
+     "meaning": "위반하다, 어기다"
+    },
+    {
+     "word": "anonymity",
+     "meaning": "익명성"
+    },
+    {
+     "word": "neutrality",
+     "meaning": "중립성"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "For example, if there are two [[alternatives]], a and b,",
+     "ko": "예를 들어, 두 [[대안]] a와 b가 있고,"
+    },
+    {
+     "en": "and two [[agents]] such that",
+     "ko": "그리고 두 [[행위자]]가 있어서"
+    },
+    {
+     "en": "one [[prefers]] a and the other one b,",
+     "ko": "한 사람은 a를, 다른 사람은 b를 [[선호]]한다면,"
+    },
+    {
+     "en": "there is no [[deterministic]] way of selecting a single alternative",
+     "ko": "단일 대안을 선택할 [[결정적]] 방법은 없다"
+    },
+    {
+     "en": "without violating one of two basic [[fairness]] conditions",
+     "ko": "두 가지 기본 [[공정성]] 조건 중 하나를 위반하지 않고서는"
+    },
+    {
+     "en": "known as [[anonymity]] and neutrality.",
+     "ko": "즉 [[익명성]]과 중립성이라 불리는."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "'the other one b'에서 the other one은 대안 b 그 자체를 가리킨다.",
+     "verdict": "X",
+     "trap_type": "지칭",
+     "anchor": "one prefers a and the other one b",
+     "why": "the other one은 첫 번째와 다른 '두 번째 행위자'를 가리키며, b는 그가 선호하는 대안이다."
+    },
+    {
+     "statement": "익명성과 중립성 중 하나를 위반하지 않고서는 단일 대안을 정할 결정적 방법이 없다.",
+     "verdict": "O",
+     "trap_type": "구조수식"
+    }
+   ],
+   "mistips": [
+    "'such that'을 '그러한 것'으로만 보면 안 돼 — '~한 상황이어서'로 조건을 이어 [[읽어야]] 한다."
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Anonymity requires that the collective choice ought to be independent of the agents' identities whereas neutrality requires impartiality towards the alternatives.",
+   "grammar": [
+    {
+     "tag": "whereas 대조",
+     "note": "'반면에' 두 절을 대조",
+     "spans": [
+      "whereas"
+     ]
+    },
+    {
+     "tag": "ought to",
+     "note": "'~해야 한다' 당위",
+     "spans": [
+      "ought to"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "be independent of",
+     "meaning": "~와 무관하다"
+    },
+    {
+     "word": "identity",
+     "meaning": "정체성, 신원"
+    },
+    {
+     "word": "whereas",
+     "meaning": "반면에"
+    },
+    {
+     "word": "impartiality",
+     "meaning": "공정성, 공평함"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "[[Anonymity]] requires that the collective choice",
+     "ko": "[[익명성]]은 집단적 선택이 ~을 요구한다"
+    },
+    {
+     "en": "ought to be independent of the agents' [[identities]]",
+     "ko": "행위자들의 [[정체성]]과 무관해야 한다고"
+    },
+    {
+     "en": "whereas neutrality requires [[impartiality]] towards the alternatives.",
+     "ko": "반면 중립성은 대안에 대한 [[공정성]]을 요구한다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "중립성은 집단적 선택이 행위자의 정체성과 무관해야 한다고 요구한다.",
+     "verdict": "X",
+     "trap_type": "주체대상",
+     "anchor": "Anonymity requires that the collective choice ought to be independent of the agents' identities",
+     "why": "행위자의 정체성과 무관할 것을 요구하는 것은 중립성이 아니라 익명성이다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Allowing lotteries as social outcomes hence seems like a necessity for impartial collective choice.",
+   "grammar": [
+    {
+     "tag": "동명사 주어",
+     "note": "Allowing ~ outcomes가 주어(단수 취급)",
+     "spans": [
+      "Allowing"
+     ]
+    },
+    {
+     "tag": "seem like",
+     "note": "'~인 것처럼 보이다'+명사",
+     "spans": [
+      "seems like"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "lottery",
+     "meaning": "추첨, 제비뽑기"
+    },
+    {
+     "word": "social outcome",
+     "meaning": "사회적 결과"
+    },
+    {
+     "word": "hence",
+     "meaning": "따라서, 그러므로"
+    },
+    {
+     "word": "necessity",
+     "meaning": "필요(성), 필수"
+    },
+    {
+     "word": "impartial",
+     "meaning": "공정한, 공평한"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Allowing [[lotteries]] as social outcomes",
+     "ko": "[[추첨]]을 사회적 결과로 허용하는 것은"
+    },
+    {
+     "en": "hence seems like a [[necessity]]",
+     "ko": "따라서 [[필수적인]] 것처럼 보인다"
+    },
+    {
+     "en": "for [[impartial]] collective choice.",
+     "ko": "[[공정한]] 집단적 선택을 위해."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "따라서 추첨을 사회적 결과로 허용하는 것이 공정한 집단 선택을 위해 필요해 보인다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    },
+    {
+     "statement": "필자는 제비뽑기(lottery)를 공정한 집단 선택을 오히려 해치는 요소로 본다.",
+     "verdict": "X",
+     "trap_type": "필자관점",
+     "anchor": "seems like a necessity for impartial collective choice",
+     "why": "필자는 반대로 lottery가 '공정한 집단 선택에 필요한 것'이라고 본다 — 해치는 요소가 아니라 필수 요소로 긍정 평가한다."
+    }
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "Indeed, most common \"deterministic\" social choice functions such as plurality rule are only deterministic as long as there is no tie, which is usually resolved by drawing a lot.",
+   "grammar": [
+    {
+     "tag": "계속적 용법 which",
+     "note": "앞 절의 tie를 부연 '그런데 그것은'",
+     "spans": [
+      "which"
+     ]
+    },
+    {
+     "tag": "as long as",
+     "note": "'~하는 한' 조건",
+     "spans": [
+      "as long as"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "is resolved by ~: '~로 해결되다'",
+     "spans": [
+      "resolved"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "plurality rule",
+     "meaning": "복수 규칙(최다 득표제, 다수결)"
+    },
+    {
+     "word": "tie",
+     "meaning": "동점, 무승부"
+    },
+    {
+     "word": "resolve",
+     "meaning": "해결하다"
+    },
+    {
+     "word": "draw a lot",
+     "meaning": "제비뽑기를 하다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "Indeed, most common \"deterministic\" social choice [[functions]]",
+     "ko": "사실, 가장 흔한 '결정적' 사회적 선택 [[함수]]조차"
+    },
+    {
+     "en": "such as [[plurality]] rule",
+     "ko": "[[복수 규칙]](다수결) 같은"
+    },
+    {
+     "en": "are only [[deterministic]] as long as there is no tie,",
+     "ko": "동점이 없는 한에서만 [[결정적]]인데,"
+    },
+    {
+     "en": "which is usually [[resolved]] by drawing a lot.",
+     "ko": "그 동점은 보통 제비뽑기로 [[해결]]된다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "복수 규칙 같은 '결정적' 함수는 동점이 있을 때에만 결정적이다.",
+     "verdict": "X",
+     "trap_type": "구조수식",
+     "killer": true,
+     "anchor": "are only deterministic as long as there is no tie",
+     "why": "동점이 '없는' 한에서만 결정적이므로 조건이 정반대로 뒤집혔다."
+    },
+    {
+     "statement": "복수 규칙에서 생기는 동점은 보통 제비뽑기로 해결된다.",
+     "verdict": "O",
+     "trap_type": "인과조건"
+    }
+   ],
+   "mistips": [
+    "'as long as there is no tie'를 '동점이 있는 한'으로 읽으면 안 돼 — '동점이 [[없는]] 한에서만'이다."
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The use of lotteries for the selection of officials interestingly goes back to the world's first democracy in Athens, where it was widely regarded as a principal characteristic of democracy, and has recently gained increasing attention in political science.",
+   "grammar": [
+    {
+     "tag": "관계부사 where",
+     "note": "in Athens를 받아 '그곳에서'; 완전절을 인도",
+     "spans": [
+      "where"
+     ]
+    },
+    {
+     "tag": "수동태",
+     "note": "was regarded as ~: '~로 여겨지다'",
+     "spans": [
+      "regarded"
+     ]
+    },
+    {
+     "tag": "현재완료",
+     "note": "has recently gained: 최근까지의 완료",
+     "spans": [
+      "has recently gained"
+     ]
+    }
+   ],
+   "vocab": [
+    {
+     "word": "selection",
+     "meaning": "선발, 선택"
+    },
+    {
+     "word": "official",
+     "meaning": "관리, 공직자"
+    },
+    {
+     "word": "go back to",
+     "meaning": "~로 거슬러 올라가다"
+    },
+    {
+     "word": "principal",
+     "meaning": "주요한, 주된"
+    },
+    {
+     "word": "gain attention",
+     "meaning": "관심을 끌다"
+    }
+   ],
+   "chunks": [
+    {
+     "en": "The use of lotteries for the selection of [[officials]]",
+     "ko": "[[관리]] 선발을 위한 추첨의 사용은"
+    },
+    {
+     "en": "interestingly goes back to the world's first [[democracy]] in Athens,",
+     "ko": "흥미롭게도 아테네의 세계 최초의 [[민주주의]]로 거슬러 올라가는데,"
+    },
+    {
+     "en": "where it was widely regarded as a principal [[characteristic]] of democracy,",
+     "ko": "그곳에서 그것은 민주주의의 주요 [[특징]]으로 널리 여겨졌으며,"
+    },
+    {
+     "en": "and has recently gained increasing attention in political [[science]].",
+     "ko": "그리고 최근 [[정치학]]에서 점점 더 많은 관심을 얻어 왔다."
+    }
+   ],
+   "misreads": [
+    {
+     "statement": "The use of lotteries began in modern political science.",
+     "verdict": "X",
+     "trap_type": "무관정보",
+     "english": true,
+     "anchor": "goes back to the world's first democracy in Athens",
+     "why": "추첨의 사용은 현대 정치학이 아니라 고대 아테네 민주주의로 거슬러 올라간다."
+    },
+    {
+     "statement": "추첨은 아테네에서 민주주의의 주요 특징으로 여겨졌는데, 이는 그것이 최근 정치학에서 관심을 얻었기 때문이다.",
+     "verdict": "△",
+     "trap_type": "인과조건",
+     "anchor": "where it was widely regarded as a principal characteristic of democracy",
+     "why": "아테네에서 주요 특징으로 여겨진 것은 맞지만, 최근 정치학의 관심은 그 이유가 아니라 별개의 후대 사실이다."
+    }
+   ],
+   "mistips": [
+    "where를 '어디'로 읽으면 안 돼 — 앞의 [[Athens]]를 받는 관계부사 '그곳에서'다."
+   ]
+  }
+ ]
+}

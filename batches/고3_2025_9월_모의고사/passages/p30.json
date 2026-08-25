@@ -1,0 +1,265 @@
+{
+  "item_no": "30",
+  "theme": "강의 자연적 변화를 존중하는 연성 하천 공학(soft-path river engineering)",
+  "overview": {
+    "theme_ko": "강의 변화를 존중하는 연성 하천 공학",
+    "topic": "🔎 자연의 변화를 최소한의 개입으로 존중하는 soft-path 하천 공학",
+    "stance": "긍정적",
+    "stance_reason": "soft-path의 'unique advantage of intellectual modesty'를 장점으로 강조",
+    "structure": "비교·대조",
+    "structure_reason": "오솔길 비유로 개입 정도를 단계별로 대조하고 hard-path와 대비한다",
+    "key_grammar": {
+      "point": "관계대명사 what (선행사 포함, ~하는 것)",
+      "source_sentence": "Soft-path engineering has the unique advantage of intellectual modesty with respect to what we actually know about river movement and its environmental effects.",
+      "explanation": [
+        {"chip": "쉽게 말하면", "text": "'what'은 선행사를 이미 품은 관계대명사로 '[[~하는 것]]'이라는 뜻이야."},
+        {"chip": "바꿔쓰기", "text": "what we know = [[the thing which]] we know 로 풀 수 있어."},
+        {"chip": "자리", "text": "여기서 what절은 전치사 [[to]]의 목적어 역할을 해(with respect to what ~)."},
+        {"chip": "주의", "text": "의문사 '무엇'과 헷갈리지 마 — 문맥상 '우리가 아는 [[것]]'이 자연스러워."}
+      ],
+      "example_analysis": "전치사구 'with respect to'의 목적어로 명사절 'what we actually know ~'가 오고, what은 그 절 안 know의 목적어를 겸한다.",
+      "drills": [
+        {"kind": "객관식", "question": "밑줄 친 'what we actually know'에서 what의 역할로 알맞은 것은?", "options": ["선행사를 포함한 관계대명사(~하는 것)", "의문사 '무엇'", "동격 접속사 that"], "answer": "선행사를 포함한 관계대명사(~하는 것)", "from_passage": true},
+        {"kind": "객관식", "question": "'what we actually know'를 'the thing'을 넣어 바르게 바꾼 것은?", "options": ["the thing which we actually know", "the thing what we actually know", "the thing that what we know"], "answer": "the thing which we actually know", "from_passage": false},
+        {"kind": "객관식", "question": "'what we actually know about river movement'에서 what은 어떤 성분인가?", "options": ["know의 목적어", "문장의 주어", "movement의 보어"], "answer": "know의 목적어", "from_passage": true},
+        {"kind": "영작", "question": "소프트 패스 공학은 하천의 움직임과 그 환경적 효과에 관해 우리가 실제로 아는 것에 대한 지적 겸손이라는 독특한 장점이 있다.", "words": ["Soft-path", "engineering", "has", "the", "unique", "advantage", "of", "intellectual", "modesty", "with", "respect", "to", "what", "we", "actually", "know", "about", "river", "movement", "and", "its", "environmental", "effects."], "answer": "Soft-path engineering has the unique advantage of intellectual modesty with respect to what we actually know about river movement and its environmental effects.", "from_passage": true},
+        {"kind": "영작", "question": "이것이 바로 우리가 정말로 필요로 하는 것이다.", "words": ["This", "is", "exactly", "what", "we", "really", "need."], "answer": "This is exactly what we really need.", "from_passage": false}
+      ]
+    },
+    "restatement_chains": [
+      {"label": "최소 개입·지적 겸손", "expressions": ["intellectual modesty", "redirect the trail around the fallen tree", "accepts variability in the river's movement as significant"], "variation": "자연의 변동성을 존중하며 최소한으로 개입한다"},
+      {"label": "hard-path의 강한 개입", "expressions": ["create a superhighway", "bulldozes straight through all obstacles"], "variation": "장애물을 밀어붙이는 극단적 개입"}
+    ],
+    "flow_blocks": [
+      {"stage": "도입", "sentence_range": "1~2", "summary": "soft-path 공학이란? 숲속 [[오솔길]]에 비유", "easy_example": "산길에 돌부리가 있으면 밟지 않고 돌아가는 길"},
+      {"stage": "전개(비유)", "sentence_range": "3~5", "summary": "쓰러진 나무: soft-path는 [[우회]], 더 개입적이면 나무 제거·복구", "easy_example": "장애물을 치울지 돌아갈지의 선택"},
+      {"stage": "심화(비유)", "sentence_range": "6~7", "summary": "더 강한 개입=포장, 극단은 경관 없애는 [[초고속도로]]", "easy_example": "오솔길을 밀어 고속도로로 만드는 격"},
+      {"stage": "핵심 주장", "sentence_range": "8~9", "summary": "soft-path의 장점=지적 [[겸손]], 변동성을 중요하게 수용", "easy_example": "잘 모르니 자연을 함부로 바꾸지 않는 태도"},
+      {"stage": "결론·대조", "sentence_range": "10~10", "summary": "hard-path가 무시하는 습지 등을 [[생태]]적으로 중요하다고 봄", "easy_example": "쓸모없어 보이는 웅덩이도 생태계엔 소중"}
+    ]
+  },
+  "sentences": [
+    {
+      "id": 1,
+      "english": "What is soft-path river engineering?",
+      "grammar": [
+        {"tag": "의문사 what 의문문", "note": "What is ~?: ~은 무엇인가 (what이 보어)", "spans": ["What"]}
+      ],
+      "vocab": [
+        {"word": "soft-path", "meaning": "연성 방식의, 부드러운 접근의"},
+        {"word": "engineering", "meaning": "공학"}
+      ],
+      "chunks": [
+        {"en": "What is soft-path river [[engineering]]?", "ko": "소프트 패스 하천 [[공학]]이란 무엇인가?"}
+      ],
+      "misreads": [
+        {"statement": "글쓴이는 '소프트 패스 하천 공학이란 무엇인가?'라는 물음으로 논의를 시작한다.", "verdict": "O", "trap_type": "필자관점"}
+      ]
+    },
+    {
+      "id": 2,
+      "english": "One way to visualize its spirit is to liken it to a footpath in the forest.",
+      "grammar": [
+        {"tag": "to부정사 형용사적", "note": "One way to visualize: 시각화하는 한 가지 방법", "spans": ["to visualize"]},
+        {"tag": "to부정사 보어", "note": "is to liken: (~하는 것)이다", "spans": ["to liken"]},
+        {"tag": "liken A to B", "note": "liken it to a footpath: A를 B에 비유하다", "spans": ["liken", "to"]}
+      ],
+      "vocab": [
+        {"word": "visualize", "meaning": "시각화하다, 그려 보다"},
+        {"word": "spirit", "meaning": "정신, 취지"},
+        {"word": "liken A to B", "meaning": "A를 B에 비유하다"},
+        {"word": "footpath", "meaning": "오솔길, 보행로"}
+      ],
+      "chunks": [
+        {"en": "One way to [[visualize]] its spirit is", "ko": "그것의 정신을 [[시각화하는]] 한 가지 방법은"},
+        {"en": "to [[liken]] it to a footpath in the forest.", "ko": "그것을 숲속 오솔길에 [[비유하는]] 것이다."}
+      ],
+      "misreads": [
+        {"statement": "'to liken it to a footpath'에서 'it'은 '숲(the forest)'을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "to liken it to a footpath in the forest", "why": "'it'은 소프트 패스 공학(그 정신)을 가리키지 숲을 가리키지 않는다."}
+      ],
+      "mistips": ["'liken'을 'like(좋아하다)'로 읽으면 안 돼 — (바르게는) 'A를 B에 [[비유하다]]'."]
+    },
+    {
+      "id": 3,
+      "english": "Suppose a tree falls across a footpath.",
+      "grammar": [
+        {"tag": "명령문(가정)", "note": "Suppose ~: ~라고 가정해 보라", "spans": ["Suppose"]},
+        {"tag": "전치사 across", "note": "across a footpath: 오솔길을 가로질러", "spans": ["across"]}
+      ],
+      "vocab": [
+        {"word": "suppose", "meaning": "가정하다, ~라고 해 보다"},
+        {"word": "across", "meaning": "~을 가로질러"},
+        {"word": "footpath", "meaning": "오솔길"}
+      ],
+      "chunks": [
+        {"en": "Suppose a tree [[falls]] across a footpath.", "ko": "나무가 오솔길을 가로질러 [[쓰러져]] 있다고 가정해 보라."}
+      ],
+      "misreads": [
+        {"statement": "나무 한 그루가 오솔길을 가로질러 쓰러진 상황을 가정해 보라고 한다.", "verdict": "O", "trap_type": "구조수식"}
+      ]
+    },
+    {
+      "id": 4,
+      "english": "A soft-path response would be simply to redirect the trail around the fallen tree.",
+      "grammar": [
+        {"tag": "would 추측", "note": "would be: ~일 것이다", "spans": ["would be"]},
+        {"tag": "to부정사 보어", "note": "to redirect: 우회시키는 것", "spans": ["to redirect"]},
+        {"tag": "과거분사 수식", "note": "the fallen tree: 쓰러진 나무", "spans": ["fallen"]}
+      ],
+      "vocab": [
+        {"word": "response", "meaning": "대응, 반응"},
+        {"word": "redirect", "meaning": "방향을 바꾸다, 우회시키다"},
+        {"word": "trail", "meaning": "길, 오솔길"},
+        {"word": "fallen", "meaning": "쓰러진, 떨어진"}
+      ],
+      "chunks": [
+        {"en": "A soft-path [[response]] would be simply", "ko": "소프트 패스의 [[대응]]은 그저"},
+        {"en": "to [[redirect]] the trail around the fallen tree.", "ko": "쓰러진 나무를 돌아 그 길을 [[우회시키는]] 것이다."}
+      ],
+      "misreads": [
+        {"statement": "소프트 패스의 대응은 쓰러진 나무를 제거하고 원래의 경로를 복구하는 것이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "to redirect the trail around the fallen tree", "why": "소프트 패스는 나무를 치우지 않고 쓰러진 나무 주위로 길을 우회시킨다."}
+      ]
+    },
+    {
+      "id": 5,
+      "english": "A more interventionist response would be to remove the tree and restore the original route.",
+      "grammar": [
+        {"tag": "비교급", "note": "more interventionist: 더 개입적인", "spans": ["more interventionist"]},
+        {"tag": "to부정사 병렬", "note": "to remove ... and restore: 제거하고 복구하는 것", "spans": ["to remove", "restore"]}
+      ],
+      "vocab": [
+        {"word": "interventionist", "meaning": "개입적인, 간섭하는"},
+        {"word": "remove", "meaning": "제거하다, 치우다"},
+        {"word": "restore", "meaning": "복구하다, 되돌리다"},
+        {"word": "route", "meaning": "경로, 길"}
+      ],
+      "chunks": [
+        {"en": "A more [[interventionist]] response would be", "ko": "더 [[개입적인]] 대응은"},
+        {"en": "to remove the tree and [[restore]] the original route.", "ko": "나무를 제거하고 원래 길을 [[복구하는]] 것일 것이다."}
+      ],
+      "misreads": [
+        {"statement": "더 개입적인 대응은 원래 경로를 복구하려 하는데, 이는 나무를 우회하기 위해서다.", "verdict": "△", "trap_type": "인과조건", "anchor": "to remove the tree and restore the original route", "why": "원래 경로 복구는 나무를 '제거'해서 이루어지지 우회해서가 아니다."}
+      ]
+    },
+    {
+      "id": 6,
+      "english": "A still more interventionist response might be to straighten and pave the path to insert it more permanently in the landscape.",
+      "grammar": [
+        {"tag": "비교급 강조 still", "note": "still more ~: 훨씬 더 ~한", "spans": ["still more"]},
+        {"tag": "to부정사(목적)", "note": "to insert: 삽입하기 위해", "spans": ["to insert"]}
+      ],
+      "vocab": [
+        {"word": "straighten", "meaning": "곧게 펴다"},
+        {"word": "pave", "meaning": "포장하다"},
+        {"word": "insert", "meaning": "삽입하다, 끼워 넣다"},
+        {"word": "permanently", "meaning": "영구적으로"},
+        {"word": "landscape", "meaning": "경관, 풍경"}
+      ],
+      "chunks": [
+        {"en": "A still more [[interventionist]] response might be", "ko": "더욱더 [[개입적인]] 대응은"},
+        {"en": "to [[straighten]] and pave the path", "ko": "길을 [[곧게 펴고]] 포장하여"},
+        {"en": "to insert it more [[permanently]] in the landscape.", "ko": "그것을 경관 속에 더 [[영구적으로]] 삽입하는 것일 수 있다."}
+      ],
+      "misreads": [
+        {"statement": "더욱더 개입적인 대응은 길을 포장하되 경관 속에 일시적으로만 두는 것이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "to insert it more permanently in the landscape", "why": "길을 '더 영구적으로' 경관에 삽입한다고 했지 일시적으로 두는 것이 아니다."}
+      ]
+    },
+    {
+      "id": 7,
+      "english": "The true high-modernist step would, of course, be to create a superhighway that removes the landscape and bulldozes straight through all obstacles in the topography.",
+      "grammar": [
+        {"tag": "주격 관계대명사 that", "note": "a superhighway that removes ~: ~하는 초고속도로", "spans": ["that"]},
+        {"tag": "동사 병렬", "note": "removes ... and bulldozes: 제거하고 밀어붙이다", "spans": ["removes", "bulldozes"]}
+      ],
+      "vocab": [
+        {"word": "high-modernist", "meaning": "하이 모더니스트의(극단적 개입주의)"},
+        {"word": "superhighway", "meaning": "초고속도로"},
+        {"word": "bulldoze", "meaning": "불도저로 밀다"},
+        {"word": "obstacle", "meaning": "장애물"},
+        {"word": "topography", "meaning": "지형"}
+      ],
+      "chunks": [
+        {"en": "The true [[high-modernist]] step would, of course, be", "ko": "물론, 진정한 [[하이 모더니스트]] 단계는"},
+        {"en": "to create a [[superhighway]]", "ko": "[[초고속도로]]를 만드는 것일 텐데"},
+        {"en": "that removes the landscape and [[bulldozes]] straight", "ko": "그것은 경관을 제거하고 곧장 [[불도저로 밀며]]"},
+        {"en": "through all [[obstacles]] in the topography.", "ko": "지형 속 모든 [[장애물]]을 뚫고 나간다."}
+      ],
+      "misreads": [
+        {"statement": "필자는 경관을 없애고 초고속도로를 뚫는 하이 모더니스트 방식을 가장 바람직한 이상으로 지지한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "be to create a superhighway that removes the landscape and bulldozes straight through all obstacles", "why": "필자는 이를 극단적 개입의 예로 들 뿐 바람직하다고 지지하지 않는다."}
+      ]
+    },
+    {
+      "id": 8,
+      "english": "Soft-path engineering has the unique advantage of intellectual modesty with respect to what we actually know about river movement and its environmental effects.",
+      "grammar": [
+        {"tag": "관계대명사 what", "note": "what we actually know: 우리가 실제로 아는 것(the thing which)", "spans": ["what"]},
+        {"tag": "with respect to", "note": "with respect to ~: ~에 관하여", "spans": ["with respect to"]}
+      ],
+      "vocab": [
+        {"word": "unique", "meaning": "독특한, 고유한"},
+        {"word": "advantage", "meaning": "장점, 이점"},
+        {"word": "intellectual", "meaning": "지적인"},
+        {"word": "modesty", "meaning": "겸손"},
+        {"word": "with respect to", "meaning": "~에 관하여"}
+      ],
+      "chunks": [
+        {"en": "Soft-path engineering has the unique [[advantage]]", "ko": "소프트 패스 공학은 독특한 [[장점]]을 지니는데"},
+        {"en": "of intellectual [[modesty]] with respect to", "ko": "그것은 (~에 관한) 지적 [[겸손]]으로"},
+        {"en": "what we actually [[know]] about river movement", "ko": "하천의 움직임에 관해 우리가 실제로 [[아는]] 것"},
+        {"en": "and its [[environmental]] effects.", "ko": "그리고 그 [[환경적]] 효과."}
+      ],
+      "misreads": [
+        {"statement": "소프트 패스 공학의 독특한 장점은 하천 움직임에 관해 우리가 아는 것에 대한 지적 '자신감(우월감)'이다.", "verdict": "X", "trap_type": "주체대상", "killer": true, "anchor": "the unique advantage of intellectual modesty", "why": "그 장점은 지적 '겸손'이지 자신감이나 우월감이 아니다."}
+      ],
+      "mistips": ["'what we actually know'의 what을 의문사 '무엇'으로만 읽으면 안 돼 — (바르게는) '우리가 아는 [[것]]'(관계대명사)."]
+    },
+    {
+      "id": 9,
+      "english": "In contrast to hard-path engineering, soft-path engineering accepts variability in the river's movement as significant until proven otherwise.",
+      "grammar": [
+        {"tag": "in contrast to", "note": "In contrast to ~: ~와 대조적으로", "spans": ["In contrast to"]},
+        {"tag": "accept A as B", "note": "accepts variability ... as significant: ~을 …으로 받아들이다", "spans": ["as significant"]},
+        {"tag": "분사구문(수동)", "note": "until proven otherwise: (그렇지 않다고) 입증될 때까지", "spans": ["proven"]}
+      ],
+      "vocab": [
+        {"word": "in contrast to", "meaning": "~와 대조적으로"},
+        {"word": "variability", "meaning": "변동성, 가변성"},
+        {"word": "significant", "meaning": "중요한, 의미 있는"},
+        {"word": "proven otherwise", "meaning": "그렇지 않다고 입증되다"}
+      ],
+      "chunks": [
+        {"en": "In contrast to hard-path engineering, soft-path engineering [[accepts]]", "ko": "하드 패스 공학과 대조적으로, 소프트 패스 공학은 (~을) [[받아들인다]]"},
+        {"en": "variability in the river's movement as [[significant]] until proven otherwise.", "ko": "하천 움직임의 변동성을, 그렇지 않다고 입증될 때까지 [[중요한]] 것으로."}
+      ],
+      "misreads": [
+        {"statement": "소프트 패스 공학은 변동성이 중요하다는 것이 입증될 때까지만 그것을 중요하게 여긴다.", "verdict": "X", "trap_type": "구조수식", "anchor": "as significant until proven otherwise", "why": "'그렇지 않다고(중요하지 않다고) 입증될 때까지'는 기본적으로 중요하게 받아들인다는 뜻이다."}
+      ],
+      "mistips": ["'until proven otherwise'를 '증명되지 않는 한'으로 대충 읽으면 안 돼 — (바르게는) '[[그렇지 않다고]] 입증될 때까지'."]
+    },
+    {
+      "id": 10,
+      "english": "Backwaters, short-lived wetlands, braids and channels, swamps ─ all undesirable to hard-path engineering ─ are presumed by soft-path engineers to be ecologically important.",
+      "grammar": [
+        {"tag": "삽입구", "note": "─ all undesirable to ~ ─: 삽입된 부연", "spans": ["all undesirable"]},
+        {"tag": "be presumed to", "note": "are presumed ... to be: ~로 간주되다", "spans": ["are presumed"]}
+      ],
+      "vocab": [
+        {"word": "backwater", "meaning": "지류, 괸 물"},
+        {"word": "short-lived", "meaning": "단명하는, 오래가지 않는"},
+        {"word": "wetland", "meaning": "습지"},
+        {"word": "undesirable", "meaning": "바람직하지 않은"},
+        {"word": "presume", "meaning": "간주하다, 추정하다"}
+      ],
+      "chunks": [
+        {"en": "Backwaters, short-lived [[wetlands]], braids and channels, swamps", "ko": "지류, 단명하는 [[습지]], 갈래와 수로, 늪지는"},
+        {"en": "─ all [[undesirable]] to hard-path engineering ─", "ko": "하드 패스 공학에는 모두 [[바람직하지 않지만]] ─"},
+        {"en": "are [[presumed]] by soft-path engineers", "ko": "소프트 패스 엔지니어들에게는 (~라고) [[간주된다]]"},
+        {"en": "to be [[ecologically]] important.", "ko": "[[생태학적]]으로 중요하다고."}
+      ],
+      "misreads": [
+        {"statement": "글에 따르면 소프트 패스 엔지니어들은 늪지를 매립해 농경지로 바꾸자고 제안한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "presumed by soft-path engineers to be ecologically important", "why": "엔지니어들은 늪지 등을 생태학적으로 중요하다고 볼 뿐 매립·전환은 언급되지 않는다."},
+        {"statement": "Soft-path engineers regard these wetlands as ecologically worthless.", "verdict": "X", "trap_type": "주체대상", "anchor": "presumed by soft-path engineers to be ecologically important", "why": "그들은 이 습지 등을 생태학적으로 '중요하다'고 간주한다.", "english": true}
+      ]
+    }
+  ]
+}

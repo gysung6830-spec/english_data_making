@@ -1,0 +1,183 @@
+{
+ "item_no": "36",
+ "theme": "결과물보다 과정을 중시하는 과정 중심 쓰기(process writing)의 특징",
+ "overview": {
+  "theme_ko": "과정 중심 글쓰기의 특징",
+  "topic": "🔎 결과물 중심 전통 방식 vs 과정 중심 글쓰기",
+  "stance": "중립적",
+  "stance_reason": "'product-oriented'와 'process writing'을 대조해 설명·서술",
+  "structure": "비교·대조",
+  "structure_reason": "'on the other hand'로 전통 방식과 과정 중심 글쓰기를 대조",
+  "key_grammar": {
+   "point": "전치사+관계대명사(during which)",
+   "source_sentence": "In process writing, on the other hand, students may initially brainstorm ideas about a topic and begin writing, but then they have repeated conferences with the teacher and the other students, during which they receive feedback on their writing up to that point, make revisions, based on the feedback they receive, and carry on writing.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "「전치사+[[관계대명사]]」는 'during which'처럼 전치사가 which/whom과 붙어 앞 명사를 이어 받는 형태"},
+    {"chip": "핵심", "text": "during which = and during the [[conferences]] — '그 협의 동안에'로 풀어 읽기"},
+    {"chip": "판별", "text": "which 앞 전치사는 관계절 안 [[동사]]가 요구하던 짝을 앞으로 당겨 온 것"},
+    {"chip": "주의", "text": "'during which' 뒤에는 주어·동사를 갖춘 완전한 [[문장]]이 온다"}
+   ],
+   "example_analysis": "선행사 conferences를 during which가 이어받아 '그 협의 동안'을 뜻하며, 뒤에 완전한 절(they receive feedback)이 옴",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? 'they have repeated conferences with the teacher, ___ they receive feedback.'", "options": ["during that", "during which", "during where"], "answer": "during which", "from_passage": true},
+    {"kind": "객관식", "question": "「전치사+관계대명사」가 바르게 쓰인 것은?", "options": ["the point up to that we agreed", "the point up to which we agreed", "the point up to where we agreed"], "answer": "the point up to which we agreed", "from_passage": false},
+    {"kind": "객관식", "question": "밑줄 친 which의 선행사로 알맞은 것은? '...conferences..., during which they receive feedback'", "options": ["the teacher", "feedback", "conferences"], "answer": "conferences", "from_passage": true},
+    {"kind": "영작", "question": "과정 중심 글쓰기는 글쓰기 교육의 주안점을 평가에서 수정으로 전환한다.", "words": ["Process writing", "shifts", "the emphasis", "in teaching writing", "from evaluation", "to revision"], "answer": "Process writing shifts the emphasis in teaching writing from evaluation to revision.", "from_passage": true},
+    {"kind": "영작", "question": "이곳은 내가 자란 마을인데, 그곳에서 나는 학교를 다녔다.", "words": ["This", "is", "the village", "in which", "I", "grew up", "and", "went to school"], "answer": "This is the village in which I grew up and went to school.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "과정 중심 글쓰기(수정 강조)", "expressions": ["process writing", "make revisions", "from evaluation to revision"], "variation": "결과물이 아니라 '고쳐 쓰는 과정'에 방점"},
+   {"label": "결과물 지향 전통 방식", "expressions": ["product-oriented", "collect and evaluate"], "variation": "쓴 결과물을 걷어 '평가'하는 데 초점"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~2", "summary": "전통적 글쓰기 수업: 주제 배정 후 쓴 [[결과물]]만 걷어 평가", "easy_example": "요리 수업에서 완성된 요리만 채점하고 조리 과정은 안 보는 것"},
+   {"stage": "전개", "sentence_range": "3", "summary": "그런 수업은 '[[결과물]] 지향적'—과정엔 교사 관여 없음", "easy_example": "그림을 다 그린 뒤에야 점수를 매기는 미술 시간"},
+   {"stage": "전환", "sentence_range": "4", "summary": "반면 [[과정]] 중심 글쓰기: 반복 협의로 피드백 받고 수정", "easy_example": "코치가 연습 중간중간 자세를 고쳐 주는 훈련"},
+   {"stage": "결론", "sentence_range": "5~6", "summary": "학생은 독자 관점으로 고쳐 쓰며, 초점이 [[평가]]에서 수정으로 이동", "easy_example": "초안을 친구에게 보여 주고 고쳐 다시 쓰는 글쓰기"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Traditionally, when teachers teach writing, they assign topics for students to write on; perhaps they do a bit of brainstorming about the topic during a pre-writing phase, and then have students write about the topic without interruption.",
+   "grammar": [
+    {"tag": "사역동사 have+O+동사원형", "note": "have students write: 학생들이 ~하게 하다", "spans": ["have students write"]},
+    {"tag": "시간 부사절 when", "note": "when절: ~할 때", "spans": ["when teachers teach writing"]}
+   ],
+   "vocab": [
+    {"word": "assign", "meaning": "배정하다, 부과하다"},
+    {"word": "brainstorming", "meaning": "생각을 짜냄, 브레인스토밍"},
+    {"word": "pre-writing phase", "meaning": "사전 글쓰기 단계"},
+    {"word": "interruption", "meaning": "방해, 중단"}
+   ],
+   "chunks": [
+    {"en": "Traditionally, when teachers [[teach]] writing,", "ko": "전통적으로, 교사들이 글쓰기를 [[가르칠]] 때,"},
+    {"en": "they assign [[topics]] for students to write on;", "ko": "그들은 학생들이 쓸 [[주제]]를 배정해 주고,"},
+    {"en": "perhaps they do a bit of [[brainstorming]] about the topic", "ko": "아마도 그 주제에 대해 약간의 [[브레인스토밍]]을 하며,"},
+    {"en": "during a [[pre-writing]] phase,", "ko": "[[사전 글쓰기]] 단계에서,"},
+    {"en": "and then have students write about the topic [[without interruption]].", "ko": "그런 다음 학생들이 그 주제에 대해 [[방해받지]] 않고 글을 쓰게 한다."}
+   ],
+   "misreads": [
+    {"statement": "전통적인 글쓰기 수업에서 교사는 학생이 쓸 주제를 정해 준다.", "verdict": "O"},
+    {"statement": "사전 글쓰기 단계의 브레인스토밍은 교사가 아니라 학생들이 스스로 한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "perhaps they do a bit of brainstorming", "why": "'they(=교사)'가 브레인스토밍을 하는 것이므로 그 주체는 학생이 아니라 교사이다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'have students write'를 '학생들의 글을 가지고 있다'로 읽으면 안 돼 — 'have+목적어+동사원형'으로 '학생들이 [[쓰게 한다]]'는 뜻"]
+  },
+  {
+   "id": 2,
+   "english": "Subsequently, teachers collect and evaluate what students have written.",
+   "grammar": [
+    {"tag": "관계대명사 what", "note": "what: ~하는 것(선행사 포함)", "spans": ["what"]},
+    {"tag": "현재완료 have p.p.", "note": "have written: 이미 다 쓴 결과", "spans": ["have written"]}
+   ],
+   "vocab": [
+    {"word": "subsequently", "meaning": "그 후에, 이어서"},
+    {"word": "collect", "meaning": "수거하다, 모으다"},
+    {"word": "evaluate", "meaning": "평가하다"}
+   ],
+   "chunks": [
+    {"en": "Subsequently, teachers collect and [[evaluate]]", "ko": "이어서, 교사들은 수거하여 [[평가한다]]"},
+    {"en": "what students have [[written]].", "ko": "학생들이 [[쓴 것]]을."}
+   ],
+   "misreads": [
+    {"statement": "교사는 학생이 아직 글을 쓰고 있는 도중에 걷어서 평가한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "what students have written", "why": "현재완료 'have written'은 이미 다 쓴 글을 뜻하므로, 쓰는 도중이 아니라 완성된 뒤에 수거·평가한다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'what students have written'을 '학생들이 무엇을 썼는지'(의문)로 읽으면 안 돼 — '학생들이 [[쓴 것]]'(관계대명사 what)"]
+  },
+  {
+   "id": 3,
+   "english": "Such instruction is very 'product-oriented;' there is no involvement of the teacher in the act or 'process' of writing.",
+   "grammar": [
+    {"tag": "there is 구문", "note": "there is no ~: ~이 없다", "spans": ["there is no involvement"]},
+    {"tag": "전치사구 병렬", "note": "in the act or 'process': 행위나 과정 안에서", "spans": ["in the act or 'process' of writing"]}
+   ],
+   "vocab": [
+    {"word": "instruction", "meaning": "수업, 지도"},
+    {"word": "product-oriented", "meaning": "결과물 지향적인"},
+    {"word": "involvement", "meaning": "관여, 개입"}
+   ],
+   "chunks": [
+    {"en": "Such [[instruction]] is very 'product-oriented;'", "ko": "이러한 [[수업]] 방식은 매우 '결과물 지향적'이어서,"},
+    {"en": "there is no [[involvement]] of the teacher", "ko": "교사의 [[관여]]가 전혀 없다"},
+    {"en": "in the act or '[[process]]' of writing.", "ko": "글을 쓰는 행위나 '[[과정]]'에는."}
+   ],
+   "misreads": [
+    {"statement": "필자는 결과물 지향적 수업이 학생의 독립성을 살려 주므로 바람직하다고 지지한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "there is no involvement of the teacher in the act or 'process' of writing", "why": "필자는 교사가 쓰기 과정에 전혀 관여하지 않음을 결과물 지향의 한계로 지적하며 지지하지 않는다.", "killer": false, "english": false, "integrative": false},
+    {"statement": "결과물 지향적 수업에서는 교사가 글을 쓰는 '과정'에는 관여하지 않는다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "In process writing, on the other hand, students may initially brainstorm ideas about a topic and begin writing, but then they have repeated conferences with the teacher and the other students, during which they receive feedback on their writing up to that point, make revisions, based on the feedback they receive, and carry on writing.",
+   "grammar": [
+    {"tag": "전치사+관계대명사", "note": "during which: '그 협의 동안에'", "spans": ["during which"]},
+    {"tag": "분사구문 based on", "note": "based on ~: ~에 근거하여", "spans": ["based on the feedback they receive"]}
+   ],
+   "vocab": [
+    {"word": "initially", "meaning": "처음에"},
+    {"word": "conference", "meaning": "협의, 상담"},
+    {"word": "feedback", "meaning": "피드백, 의견"},
+    {"word": "revision", "meaning": "수정, 교정"},
+    {"word": "carry on", "meaning": "계속하다"}
+   ],
+   "chunks": [
+    {"en": "In process [[writing]], on the other hand,", "ko": "반면에, 과정 중심 [[글쓰기]]에서는,"},
+    {"en": "students may initially [[brainstorm]] ideas about a topic and begin writing,", "ko": "학생들이 처음에 어떤 주제에 대해 아이디어를 [[브레인스토밍]]하고 글쓰기를 시작할 수도 있지만,"},
+    {"en": "but then they have repeated [[conferences]] with the teacher and the other students,", "ko": "그 후 교사 및 다른 학생들과 반복적으로 [[협의]]하며,"},
+    {"en": "during which they receive [[feedback]] on their writing up to that point,", "ko": "그 협의 동안 그 시점까지 쓴 글에 대한 [[피드백]]을 받고,"},
+    {"en": "make [[revisions]], based on the feedback they receive, and carry on writing.", "ko": "받은 피드백을 바탕으로 [[수정]]하며 계속해서 글을 써 나간다."}
+   ],
+   "misreads": [
+    {"statement": "과정 중심 글쓰기에서 학생들은 오직 교사와만 협의하여 피드백을 받는다.", "verdict": "X", "trap_type": "주체대상", "anchor": "conferences with the teacher and the other students", "why": "협의 대상은 교사뿐 아니라 '다른 학생들'도 포함되므로 교사와만 협의한다는 것은 틀리다.", "killer": true, "english": false, "integrative": false},
+    {"statement": "학생들은 협의에서 받은 의견과 무관하게 자기 방식대로 글을 고친다.", "verdict": "△", "trap_type": "인과조건", "anchor": "make revisions, based on the feedback they receive", "why": "글을 고친다는 방향은 맞지만, 수정의 근거는 자기 방식이 아니라 '받은 피드백'에 기반한다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'during which'를 '어느 시점 동안'으로 막연히 읽으면 안 돼 — 앞의 [[conferences]](협의) '동안에'라는 뜻"]
+  },
+  {
+   "id": 5,
+   "english": "In this way, students learn to view their writing as someone else's reading and to improve both the expression of meaning and the form of their writing as they draft and redraft.",
+   "grammar": [
+    {"tag": "상관접속사 both A and B", "note": "both A and B: A와 B 둘 다", "spans": ["both the expression of meaning and the form"]},
+    {"tag": "to부정사 병렬", "note": "learn to view ... and to improve", "spans": ["to view", "to improve"]}
+   ],
+   "vocab": [
+    {"word": "view A as B", "meaning": "A를 B로 여기다"},
+    {"word": "expression", "meaning": "표현"},
+    {"word": "draft", "meaning": "초안을 쓰다"},
+    {"word": "redraft", "meaning": "다시 쓰다, 고쳐 쓰다"}
+   ],
+   "chunks": [
+    {"en": "In this way, students [[learn]]", "ko": "이러한 방식으로, 학생들은 [[배운다]]"},
+    {"en": "to view their writing as someone else's [[reading]]", "ko": "자기 글을 다른 사람의 [[읽을거리]]로 여기고,"},
+    {"en": "and to [[improve]] both the expression of meaning and the form of their writing", "ko": "글의 의미 표현과 형식을 모두 [[개선하는]] 법을,"},
+    {"en": "as they draft and [[redraft]].", "ko": "초안을 쓰고 [[다시 쓰면서]]."}
+   ],
+   "misreads": [
+    {"statement": "여기서 'someone else'는 오직 교사만을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "someone else's reading", "why": "'someone else'는 교사에 한정되지 않고 자기 글을 읽는 다른 독자 일반을 가리킨다.", "killer": false, "english": false, "integrative": false},
+    {"statement": "학생들은 초안을 쓰고 고쳐 쓰면서 의미 표현과 형식을 모두 개선하는 법을 배운다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Process writing shifts the emphasis in teaching writing from evaluation to revision.",
+   "grammar": [
+    {"tag": "from A to B", "note": "from evaluation to revision: 평가에서 수정으로", "spans": ["from evaluation to revision"]}
+   ],
+   "vocab": [
+    {"word": "shift", "meaning": "전환하다, 옮기다"},
+    {"word": "emphasis", "meaning": "주안점, 강조"},
+    {"word": "evaluation", "meaning": "평가"}
+   ],
+   "chunks": [
+    {"en": "Process writing shifts the [[emphasis]]", "ko": "과정 중심 글쓰기는 [[주안점]]을 옮긴다"},
+    {"en": "in [[teaching]] writing", "ko": "글쓰기 [[교육]]에서"},
+    {"en": "from evaluation to [[revision]].", "ko": "평가에서 [[수정]]으로."}
+   ],
+   "misreads": [
+    {"statement": "과정 중심 글쓰기는 초점을 평가에서 수정으로, 그리고 학생 성적 등급 산출로 옮긴다.", "verdict": "X", "trap_type": "무관정보", "anchor": "from evaluation to revision", "why": "본문은 초점이 평가에서 '수정'으로 옮겨간다고만 하며 성적 등급 산출은 언급되지 않는다.", "killer": false, "english": false, "integrative": false},
+    {"statement": "The final emphasis is on evaluation, not revision.", "verdict": "X", "trap_type": "필자관점", "anchor": "from evaluation to revision", "why": "강조점은 평가에서 '수정'으로 옮겨가므로, 최종 강조는 평가가 아니라 수정이다.", "killer": false, "english": true, "integrative": false}
+   ]
+  }
+ ]
+}

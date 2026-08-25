@@ -1,0 +1,195 @@
+{
+ "item_no": "33",
+ "theme": "고유 생물군을 지닌 비산림 생태계를 숲으로 바꾸는 것의 생태학적 문제",
+ "overview": {
+   "theme_ko": "비산림 생태계를 숲으로 바꾸는 것의 생태 문제",
+   "topic": "🔎 습지·초원 등 비산림 생태계를 숲으로 전환하는 것의 생태학적 문제",
+   "stance": "부정적·비판적",
+   "stance_reason": "ecologists frequently complain about the Commission's work (조림 사업에 대한 비판적 시각)",
+   "structure": "주장→근거·예시",
+   "structure_reason": "S1에서 '비산림을 숲으로 바꾸는 것이 정당화되지 않는다'는 주장을 세운 뒤, 스코틀랜드 사례와 exotic trees·희귀종 위협이라는 근거로 뒷받침한다.",
+   "key_grammar": {
+     "point": "분사구문 (수동·과거분사: Compared to ~)",
+     "source_sentence": "Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"'Compared to ~'는 'Being compared to ~'에서 Being이 [[생략]]된 분사구문이다."},
+       {"chip":"형태","text":"주절과 [[주어]](forests)가 같아 분사구문의 주어가 생략되고 과거분사 Compared로 시작한다."},
+       {"chip":"의미","text":"'~와 [[비교하면]]'이라는 부사절처럼 주절을 수식한다."},
+       {"chip":"주의","text":"숲이 '비교되는' 대상이라 수동이므로 현재분사 Comparing이 아니라 과거분사 [[Compared]]를 쓴다."}
+     ],
+     "example_analysis": "문두의 Compared to other ecosystems가 주절 forests are relatively diverse를 수식하는 수동 분사구문이다.",
+     "drills": [
+       {"kind":"객관식","question":"빈칸에 알맞은 것은? '___ to other ecosystems, forests are relatively diverse.'","options":["Compared","Comparing","To compare"],"answer":"Compared","from_passage":true},
+       {"kind":"객관식","question":"밑줄 친 Compared to의 의미로 알맞은 것은?","options":["~와 비교하면","~와 비교하기 위해","~를 비교하면서"],"answer":"~와 비교하면","from_passage":true},
+       {"kind":"객관식","question":"Compared가 과거분사인 이유로 옳은 것은?","options":["forests가 '비교되는' 대상이라 수동이므로","forests가 능동으로 무언가를 비교하므로","비교가 미래의 일이므로"],"answer":"forests가 '비교되는' 대상이라 수동이므로","from_passage":true},
+       {"kind":"영작","question":"다른 생태계와 비교하면, 숲은 상대적으로 다양하다.","words":["Compared","to","other","ecosystems","forests","are","relatively","diverse"],"answer":"Compared to other ecosystems, forests are relatively diverse","from_passage":true},
+       {"kind":"영작","question":"다른 나라들과 비교하면, 그 도시는 상대적으로 조용하다.","words":["Compared","to","other","countries","the","city","is","relatively","quiet"],"answer":"Compared to other countries, the city is relatively quiet","from_passage":false}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"비산림을 숲으로 전환","expressions":["converting nonforests into forests","turning them into forests"],"variation":"습지를 배수·시비·울타리로 조림하는 행위"},
+     {"label":"고유 생물상 vs 숲 생물상","expressions":["a unique biota","a forest biota"],"variation":"비산림도 저마다의 생물상을 지님"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입/통념","sentence_range":"1","summary":"숲이 다양해도 비산림을 숲으로 바꿀 [[정당한 근거]]는 아니다","easy_example":"장점이 있다고 무엇이든 바꿔도 된다는 뜻은 아니다."},
+     {"stage":"전개","sentence_range":"2","summary":"습지·목초지·초원도 [[고유한]] 생물상을 지닌다","easy_example":"화려한 정원만 생명이 사는 게 아니라 들판에도 저마다의 생태가 있다."},
+     {"stage":"사례","sentence_range":"3~4","summary":"[[스코틀랜드]]·잉글랜드 북부: 삼림위원회가 습지를 배수·시비·울타리로 숲 [[전환]]","easy_example":"물웅덩이를 메워 밭으로 만들듯 습지를 갈아엎어 숲을 만든다."},
+     {"stage":"양보","sentence_range":"5","summary":"영국에서 숲을 늘리는 것 자체는 [[바람직한]] 목표","easy_example":"나무 심기 자체는 좋은 일일 수 있다."},
+     {"stage":"결론/비판","sentence_range":"6","summary":"그러나 [[외래종]] 나무·희귀종 위협 때문에 생태학자들이 불평","easy_example":"엉뚱한 자리에 남의 나라 나무를 심으면 원래 생물이 쫓겨난다."}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests.",
+     "grammar": [
+       {"tag":"분사구문(수동)","note":"Being이 생략된 과거분사 분사구문; '~와 비교하면'","spans":["Compared"]},
+       {"tag":"부분부정","note":"not necessarily = 반드시 ~인 것은 아니다","spans":["not necessarily"]}
+     ],
+     "vocab": [
+       {"word":"ecosystem","meaning":"생태계"},
+       {"word":"diverse","meaning":"다양한"},
+       {"word":"justification","meaning":"정당한 이유, 근거"},
+       {"word":"convert A into B","meaning":"A를 B로 전환하다"}
+     ],
+     "chunks": [
+       {"en":"Compared to other ecosystems, forests are relatively [[diverse]],","ko":"다른 생태계와 비교하면, 숲은 상대적으로 [[다양]]하지만,"},
+       {"en":"but this should not necessarily be a [[justification]]","ko":"이것이 반드시 [[정당한 근거]]가 되는 것은 아니다"},
+       {"en":"for [[converting]] nonforests into forests.","ko":"숲이 아닌 곳을 숲으로 [[전환]]하기 위한."}
+     ],
+     "misreads": [
+       {"statement":"숲이 다양하다는 점은 숲이 아닌 곳을 숲으로 바꾸는 것을 정당화하는 충분한 이유가 된다.","verdict":"X","trap_type":"필자관점","anchor":"should not necessarily be a justification for converting nonforests into forests","why":"필자는 그것이 반드시 정당한 근거가 되지는 않는다고 하므로 주장을 정반대로 뒤집은 진술이다."},
+       {"statement":"숲은 다른 생태계와 비교하면 상대적으로 다양한 편이다.","verdict":"O","trap_type":"구조수식"}
+     ],
+     "mistips": ["'not necessarily'를 '반드시 아니다(전체부정)'로 읽으면 안 돼 — (바르게는) '[[반드시]] ~인 것은 아니다'의 부분부정이다."]
+   },
+   {
+     "id": 2,
+     "english": "Wetlands, meadows, and grasslands have a unique biota too, even if it is often not as rich as a forest biota.",
+     "grammar": [
+       {"tag":"양보 even if","note":"'비록 ~일지라도'","spans":["even if"]},
+       {"tag":"원급 비교","note":"as ~ as: '…만큼 ~한'","spans":["as rich as"]}
+     ],
+     "vocab": [
+       {"word":"wetland","meaning":"습지"},
+       {"word":"meadow","meaning":"목초지"},
+       {"word":"grassland","meaning":"초원"},
+       {"word":"biota","meaning":"생물상(한 지역의 생물 전체)"}
+     ],
+     "chunks": [
+       {"en":"Wetlands, meadows, and grasslands have a unique [[biota]] too,","ko":"습지, 목초지, 초원도 고유한 [[생물상]]을 지니고 있는데,"},
+       {"en":"even if it is often not as [[rich]] as a forest biota.","ko":"비록 그것이 흔히 숲의 생물상만큼 [[풍부]]하지는 않더라도."}
+     ],
+     "misreads": [
+       {"statement":"밑줄 친 it은 숲의 생물상을 가리키며, 그것이 습지의 생물상만큼 풍부하지 않다는 뜻이다.","verdict":"X","trap_type":"지칭","anchor":"it is often not as rich as a forest biota","why":"여기서 it은 습지·목초지·초원의 생물상을 가리키며, 그것이 숲 생물상보다 덜 풍부하다는 의미다."},
+       {"statement":"습지, 목초지, 초원도 고유한 생물상을 지니고 있다.","verdict":"O","trap_type":"주체대상"}
+     ],
+     "mistips": ["'too'를 '너무'로 읽으면 안 돼 — 여기서는 '[[역시/도]]'의 뜻이다."]
+   },
+   {
+     "id": 3,
+     "english": "The ecological problems of this process have been described from a number of places such as Iceland, South Africa, and Australia, but the classic example of this comes from Scotland and northern England.",
+     "grammar": [
+       {"tag":"현재완료 수동","note":"have been described: '기술되어 왔다'","spans":["have been described"]},
+       {"tag":"such as 예시","note":"'~와 같은' 구체적 예시 나열","spans":["such as"]}
+     ],
+     "vocab": [
+       {"word":"ecological","meaning":"생태학적인"},
+       {"word":"describe","meaning":"기술하다, 서술하다"},
+       {"word":"a number of","meaning":"여러, 다수의"},
+       {"word":"classic example","meaning":"전형적 사례"}
+     ],
+     "chunks": [
+       {"en":"The ecological [[problems]] of this process have been described","ko":"이 과정의 생태학적 [[문제]]는 기술되어 왔다"},
+       {"en":"from a number of [[places]] such as Iceland,","ko":"아이슬란드와 같은 여러 [[지역]]에서 기술되어 왔지만,"},
+       {"en":"South Africa, and [[Australia]],","ko":"남아프리카, [[오스트레일리아]] 같은 곳에서,"},
+       {"en":"but the classic [[example]] of this comes from","ko":"하지만 이것의 전형적 [[사례]]는 나온다"},
+       {"en":"Scotland and northern [[England]].","ko":"스코틀랜드와 잉글랜드 [[북부]]에서."}
+     ],
+     "misreads": [
+       {"statement":"The classic example of this comes from Australia.","verdict":"X","trap_type":"무관정보","english":true,"anchor":"the classic example of this comes from Scotland and northern England","why":"전형적 사례는 오스트레일리아가 아니라 스코틀랜드와 잉글랜드 북부에서 나온다."}
+     ],
+     "mistips": []
+   },
+   {
+     "id": 4,
+     "english": "Here the Forestry Commission has drained, fertilized, and fenced extensive areas of wetlands to facilitate turning them into forests.",
+     "grammar": [
+       {"tag":"병렬구조","note":"has 뒤 과거분사 세 개가 병렬(drained/fertilized/fenced)","spans":["drained, fertilized, and fenced"]},
+       {"tag":"목적 to부정사","note":"to facilitate ~: '~을 촉진하려고'","spans":["to facilitate"]},
+       {"tag":"동명사 목적어","note":"turning them into forests: facilitate의 목적어","spans":["turning"]}
+     ],
+     "vocab": [
+       {"word":"drain","meaning":"물을 빼다, 배수하다"},
+       {"word":"fertilize","meaning":"비옥하게 하다, 시비하다"},
+       {"word":"fence","meaning":"울타리를 치다"},
+       {"word":"facilitate","meaning":"촉진하다, 용이하게 하다"},
+       {"word":"extensive","meaning":"광대한, 광범위한"}
+     ],
+     "chunks": [
+       {"en":"Here the Forestry Commission has [[drained]], fertilized, and fenced","ko":"여기서 삼림위원회는 [[배수]]하고, 비옥하게 하고, 울타리를 쳤다"},
+       {"en":"extensive areas of [[wetlands]]","ko":"광대한 [[습지]] 구역을"},
+       {"en":"to facilitate [[turning]] them into forests.","ko":"그것들을 숲으로 [[바꾸는]] 것을 촉진하려고."}
+     ],
+     "misreads": [
+       {"statement":"삼림위원회는 광대한 숲을 배수·시비하고 울타리를 쳐서 그것을 습지로 바꾸는 것을 촉진했다.","verdict":"X","trap_type":"주체대상","killer":true,"anchor":"drained, fertilized, and fenced extensive areas of wetlands to facilitate turning them into forests","why":"배수·시비·울타리의 대상은 습지이고 그것을 숲으로 바꾸려 한 것이므로 숲과 습지가 뒤바뀌었다."},
+       {"statement":"삼림위원회는 습지를 숲으로 바꾸는 것을 촉진하려고 습지를 배수하고 비옥하게 했다.","verdict":"O","trap_type":"인과조건"}
+     ],
+     "mistips": ["'turning them into forests'의 them을 '숲'으로 보면 안 돼 — them은 [[습지]]다."]
+   },
+   {
+     "id": 5,
+     "english": "Increasing the extent of forests in Britain is certainly a desirable goal, and most of the Forestry Commission's efforts are directed toward sites that were forested before sheep and their keepers came to the island.",
+     "grammar": [
+       {"tag":"동명사 주어","note":"Increasing ~ Britain이 주어, is가 동사","spans":["Increasing"]},
+       {"tag":"관계대명사 that","note":"sites 수식(주격)","spans":["that"]},
+       {"tag":"수동태","note":"were forested: '숲이었던(숲으로 조성된)'","spans":["were forested"]}
+     ],
+     "vocab": [
+       {"word":"extent","meaning":"범위, 정도"},
+       {"word":"desirable","meaning":"바람직한"},
+       {"word":"be directed toward","meaning":"~을 향하다, ~을 대상으로 하다"},
+       {"word":"keeper","meaning":"(가축을) 지키는 사람, 양치기"}
+     ],
+     "chunks": [
+       {"en":"Increasing the [[extent]] of forests in Britain","ko":"영국에서 숲의 [[범위]]를 늘리는 것은"},
+       {"en":"is certainly a desirable [[goal]],","ko":"분명히 바람직한 [[목표]]이며,"},
+       {"en":"and most of the Forestry Commission's [[efforts]] are directed","ko":"삼림위원회의 [[노력]] 대부분은 향해 있다"},
+       {"en":"toward sites that were [[forested]]","ko":"[[숲이었던]] 곳을 대상으로,"},
+       {"en":"before sheep and their [[keepers]] came to the island.","ko":"양과 그 [[양치기들]]이 섬에 오기 전에."}
+     ],
+     "misreads": [
+       {"statement":"삼림위원회의 노력 대부분은 적절한 곳을 향하는데, 그곳은 양과 양치기가 온 뒤에야 숲이 된 지역이기 때문이다.","verdict":"△","trap_type":"구조수식","anchor":"sites that were forested before sheep and their keepers came to the island","why":"노력의 방향(적절한 대상지)은 맞지만, 그곳은 양치기 도래 '이전에' 숲이었던 곳이므로 이유가 틀리다."},
+       {"statement":"영국에서 숲의 범위를 늘리는 것 자체는 바람직한 목표라고 필자도 인정한다.","verdict":"O","trap_type":"필자관점"}
+     ],
+     "mistips": ["'before sheep ... came'을 '양이 온 뒤 숲이 되었다'로 읽으면 안 돼 — 양치기가 오기 [[전]]에 숲이었던 곳이다."]
+   },
+   {
+     "id": 6,
+     "english": "However, ecologists frequently complain about the Commission's work because it is not restricted to former forest sites, because the forests established are usually composed of exotic trees, and because the wildlife threatened by this activity includes many uncommon species.",
+     "grammar": [
+       {"tag":"이유 병렬 because","note":"because절 세 개가 병렬로 불평의 이유 제시","spans":["because"]},
+       {"tag":"분사 후치수식","note":"threatened by this activity가 the wildlife 수식","spans":["threatened"]},
+       {"tag":"수동태","note":"be composed of: '~로 구성되다'","spans":["composed of"]}
+     ],
+     "vocab": [
+       {"word":"complain","meaning":"불평하다"},
+       {"word":"be restricted to","meaning":"~에 국한되다"},
+       {"word":"exotic","meaning":"외래의, 외래종의"},
+       {"word":"uncommon","meaning":"흔하지 않은, 드문"},
+       {"word":"species","meaning":"종(種)"}
+     ],
+     "chunks": [
+       {"en":"However, ecologists frequently [[complain]] about the Commission's work","ko":"그러나 생태학자들은 그 위원회의 작업에 대해 자주 [[불평한다]]"},
+       {"en":"because it is not restricted to former forest [[sites]],","ko":"그것이 이전에 숲이었던 [[지역]]에만 국한되지 않기 때문이고,"},
+       {"en":"because the forests established are usually composed of [[exotic]] trees,","ko":"조성된 숲이 대개 [[외래종]] 나무로 구성되기 때문이며,"},
+       {"en":"and because the [[wildlife]] threatened by this activity","ko":"그리고 이 활동으로 위협받는 [[야생동물]]에는"},
+       {"en":"includes many uncommon [[species]].","ko":"흔하지 않은 [[종]]이 많이 포함되기 때문이다."}
+     ],
+     "misreads": [
+       {"statement":"생태학자들이 불평하는 한 가지 이유는 조성된 숲이 대개 토종(재래) 나무로 구성되기 때문이다.","verdict":"X","trap_type":"인과조건","anchor":"the forests established are usually composed of exotic trees","why":"조성된 숲은 토종이 아니라 외래종(exotic) 나무로 구성되므로 이유가 틀리다."}
+     ],
+     "mistips": []
+   }
+ ]
+}

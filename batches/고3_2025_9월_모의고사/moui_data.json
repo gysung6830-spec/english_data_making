@@ -1,0 +1,726 @@
+[
+ {
+  "item_no": "29",
+  "theme": "소비자 기호에 맞는 균일한 맛을 내기 위한 꿀의 혼합(blending)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Honey can be eaten by itself or mixed with other ingredients.",
+    "korean": "꿀은 그 자체로 먹거나 다른 재료와 섞을 수 있다."
+   },
+   {
+    "id": 2,
+    "english": "Natural or pure honey has had no additives, preservatives or synthetic ingredients added.",
+    "korean": "천연 또는 순수 꿀은 첨가물, 방부제, 또는 합성 성분이 전혀 더해져 있지 않다."
+   },
+   {
+    "id": 3,
+    "english": "Also referred to as 'undiluted', it is usually more expensive than diluted honeys.",
+    "korean": "또한 그것은 '묽게 되지 않은'이라고 불리며, 보통 묽어진 꿀보다 더 비싸다."
+   },
+   {
+    "id": 4,
+    "english": "Natural honey can also be called 'blended honey', where honeys from various sources are blended together ─ not by the bees, but by human processors and distributors in stages after the honey has been collected.",
+    "korean": "천연 꿀은 또한 '혼합 꿀'이라고도 불리는데, 그것에서는 여러 출처의 꿀들이 벌에 의해서가 아니라, 꿀이 채취된 후 단계적으로 인간 가공업자와 유통업자에 의해 한데 섞인다."
+   },
+   {
+    "id": 5,
+    "english": "Blending is frequently done for taste as well as marketing reasons, especially since some consumers find the darker honeys too strong.",
+    "korean": "혼합은 마케팅 상의 이유들 뿐 아니라 맛을 위해서도 자주 행해지는데, 특히 일부 소비자가 더 진한 색의 꿀이 너무 강하다고 여기기 때문이다."
+   },
+   {
+    "id": 6,
+    "english": "Mixing different types of honey together can make it more palatable, and also gives a more uniform flavour ─ this is an important consideration for producers and retailers, who feel the need to guarantee reliable, unsurprising (typically mild) flavours to their customers.",
+    "korean": "여러 종류의 꿀을 함께 섞는 것은 그것을 더 입에 맞게 만들 수 있고 또한 더 균일한 맛을 제공하는데, 이것은 생산자와 소매상에게 중요한 고려 사항으로, 그들은 자신의 고객에게 신뢰할 수 있고, 놀랍지 않은(보통은 순한) 맛을 보장할 필요가 있다고 느낀다."
+   },
+   {
+    "id": 7,
+    "english": "Clover is one of the most popular honeys in the U.S., and its mild flavour and taste have become familiar to many Americans.",
+    "korean": "클로버 꿀은 미국에서 가장 인기 있는 꿀 중 하나이고, 그 부드러운 맛과 풍미는 많은 미국인들에게 익숙해졌다."
+   }
+  ]
+ },
+ {
+  "item_no": "30",
+  "theme": "강의 자연적 변화를 존중하는 연성 하천 공학(soft-path river engineering)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "What is soft-path river engineering?",
+    "korean": "소프트 패스 하천 공학이란 무엇인가?"
+   },
+   {
+    "id": 2,
+    "english": "One way to visualize its spirit is to liken it to a footpath in the forest.",
+    "korean": "그것의 정신을 시각화하는 한 가지 방법은 그것을 숲속의 오솔길에 비유하는 것이다."
+   },
+   {
+    "id": 3,
+    "english": "Suppose a tree falls across a footpath.",
+    "korean": "나무가 오솔길을 가로질러 쓰러져 있다고 해보자."
+   },
+   {
+    "id": 4,
+    "english": "A soft-path response would be simply to redirect the trail around the fallen tree.",
+    "korean": "소프트 패스의 대응은 그저 쓰러진 나무를 돌아서 그 오솔길을 우회하는 것이다."
+   },
+   {
+    "id": 5,
+    "english": "A more interventionist response would be to remove the tree and restore the original route.",
+    "korean": "보다 개입적인 대응은 나무를 제거하여 원래 길을 복구하는 것일 거다."
+   },
+   {
+    "id": 6,
+    "english": "A still more interventionist response might be to straighten and pave the path to insert it more permanently in the landscape.",
+    "korean": "더욱더 개입적인 대응은 길을 곧게 펴고 포장하여 그것을 경관 속에 더 영구적으로 삽입하는 것일 수 있다."
+   },
+   {
+    "id": 7,
+    "english": "The true high-modernist step would, of course, be to create a superhighway that removes the landscape and bulldozes straight through all obstacles in the topography.",
+    "korean": "물론, 진정한 하이 모더니스트 단계는 경관을 제거하고 지형 속 모든 장애물을 불도저로 밀고 나가는 초고속도로를 만드는 것일 거다."
+   },
+   {
+    "id": 8,
+    "english": "Soft-path engineering has the unique advantage of intellectual modesty with respect to what we actually know about river movement and its environmental effects.",
+    "korean": "소프트 패스 공학은 하천의 움직임과 그 환경적 효과에 관해 우리가 실제로 알고 있는 것에 관한 지적 겸손이라는 독특한 장점이 있다."
+   },
+   {
+    "id": 9,
+    "english": "In contrast to hard-path engineering, soft-path engineering accepts variability in the river's movement as significant until proven otherwise.",
+    "korean": "하드 패스 공학과는 대조적으로, 소프트 패스 공학은 그렇지 않다는 것이 입증될 때까지는 하천 움직임의 변동성을 중요한 것으로 받아들인다."
+   },
+   {
+    "id": 10,
+    "english": "Backwaters, short-lived wetlands, braids and channels, swamps ─ all undesirable to hard-path engineering ─ are presumed by soft-path engineers to be ecologically important.",
+    "korean": "지류, 단명하는 습지, 갈래와 수로, 늪지 등, 하드 패스 공학에서는 바람직하지 않다고 여겨지는 모든 것들이 소프트 패스 엔지니어들에게는 생태학적으로 중요하다고 간주된다."
+   }
+  ]
+ },
+ {
+  "item_no": "31",
+  "theme": "강제 원근법을 이용해 암컷에게 자신을 더 크게 보이게 하는 Bower bird",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "We know that animals have evolved a variety of patterns to manipulate the perceptions of their predators to afford themselves a modicum of safety.",
+    "korean": "우리는 동물이 자신에게 약간의 안전을 부여하기 위해 포식자의 지각을 조작하는 다양한 방식을 진화시켜 왔음을 알고 있다."
+   },
+   {
+    "id": 2,
+    "english": "Greater Bower birds utilize perceptual biases in the mating domain.",
+    "korean": "큰바우어새는 짝짓기 영역에서 지각적 편향을 활용한다."
+   },
+   {
+    "id": 3,
+    "english": "Males construct a bower; its function is to provide an arena in which males display to females standing in an avenue that leads up to the bower.",
+    "korean": "수컷은 바우어를 짓는데, 그 기능은 수컷이 바우어로 이어지는 길에 서있는 암컷에게 구애 동작을 하는 무대를 제공하는 것이다."
+   },
+   {
+    "id": 4,
+    "english": "The males decorate the avenue with a variety of objects, such as stones and shells.",
+    "korean": "수컷은 돌이나 조개껍데기 같은 다양한 물체로 그 길을 장식한다."
+   },
+   {
+    "id": 5,
+    "english": "But they do not do so in a chaotic manner.",
+    "korean": "그러나 그들은 무질서하게 그렇게 하지는 않는다."
+   },
+   {
+    "id": 6,
+    "english": "The larger objects are placed closer to the bower and the smaller objects farther away.",
+    "korean": "더 큰 물체는 바우어에 더 가까이에, 더 작은 물체는 더 멀리 배치된다."
+   },
+   {
+    "id": 7,
+    "english": "This creates a forced perspective the opposite of the Cinderella Castle; the bower appears smaller than it actually is.",
+    "korean": "이것은 '신데렐라 성'과는 반대의 강제 원근감을 만들어 내는데, 바우어는 실제보다 더 작아보인다."
+   },
+   {
+    "id": 8,
+    "english": "Endler and his colleagues suggested that the male courting in the bower now appears larger and thus more attractive to the female.",
+    "korean": "Endler와 그의 동료들은 바우어에서 구애하는 수컷이 이제 더 커 보이고, 따라서 암컷에게 더 매력적으로 보인다는 것을 보여 주었다."
+   },
+   {
+    "id": 9,
+    "english": "Data on male mating success collected in the wild supports their hypothesis.",
+    "korean": "야생에서 수집된 수컷의 짝짓기 성공에 관한 자료는 그들의 가설을 뒷받침한다."
+   }
+  ]
+ },
+ {
+  "item_no": "32",
+  "theme": "공감(empathy)이 갈등을 악화시킬 수 있다는 비판적 견해",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Although empathy is widely praised by scholars and public figures, not everyone is an empathy booster.",
+    "korean": "비록 공감이 학자들과 공인들에 의해 널리 칭송받지만, 모든 사람이 공감을 북돋는 것은 아니다."
+   },
+   {
+    "id": 2,
+    "english": "Critics of empathy argue that empathy will not save us from interpersonal and intergroup conflict.",
+    "korean": "공감의 비판자들은 공감이 우리를 개인 간 및 집단 간 갈등으로부터 구해주지 않을 것이라고 주장한다."
+   },
+   {
+    "id": 3,
+    "english": "In fact, they argue, empathy makes such conflicts worse.",
+    "korean": "사실, 그들은 공감이 그러한 갈등을 더 악화시킨다고 주장한다."
+   },
+   {
+    "id": 4,
+    "english": "These critics maintain that empathy can be exhausting and lead to burnout, insensitivity to suffering, or worse.",
+    "korean": "이 비판자들은 공감이 소모적일 수 있고, 쇠진, 고통에 대한 무감각, 혹은 더 나쁘게 이끌 수 있다고 주장한다."
+   },
+   {
+    "id": 5,
+    "english": "They argue that we tend to empathize strongly with our in-group and resist empathizing with out-groups, and even enjoy the suffering of out-groups in competitive or threatening contexts.",
+    "korean": "그들은 우리가 내집단에 대해서는 강하게 공감하고 외집단에 대해서는 공감하기를 거부하며, 경쟁적이거나 위협적인 상황에서는 심지어 외집단의 고통을 즐기는 경향이 있다고 주장한다."
+   },
+   {
+    "id": 6,
+    "english": "Thus, the prescription for more empathy is often counterproductive in cases of conflict.",
+    "korean": "따라서, 더 많은 공감을 위한 처방은 갈등 상황에서 흔히 역효과를 낸다."
+   },
+   {
+    "id": 7,
+    "english": "Empathy, they argue, can further entrench conflict and force us into an us vs. them mentality.",
+    "korean": "그들이 주장하기를, 공감은 갈등을 한층 더 확립하고 우리를 우리 대 그들이라는 사고방식에 몰아넣을 수 있다."
+   },
+   {
+    "id": 8,
+    "english": "Finally, even when we try to empathize with others who are dissimilar from us or in unfamiliar contexts, sometimes we are unable to accurately empathize with their experiences, causing further misunderstandings and frustration.",
+    "korean": "마지막으로, 우리가 우리와 다르거나 낯선 맥락 속에 있는 다른 사람들에게 공감하려고 할 때조차, 때때로 우리는 그들의 경험에 정확히 공감하지 못해, 더 깊은 오해와 좌절을 일으킨다."
+   },
+   {
+    "id": 9,
+    "english": "Critics of empathy argue that we should give up on empathy and employ other tools in pursuit of social harmony, e.g., rational compassion or moral emotions like fear, anger, and shame.",
+    "korean": "공감의 비판자들은 우리가 공감을 포기하고 사회적 조화를 추구하면서 예를 들어 이성적 동정심이나 두려움, 분노, 수치심 같은 도덕적 감정과 같은 다른 수단을 써야 한다고 주장한다."
+   }
+  ]
+ },
+ {
+  "item_no": "33",
+  "theme": "고유 생물군을 지닌 비산림 생태계를 숲으로 바꾸는 것의 생태학적 문제",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be a justification for converting nonforests into forests.",
+    "korean": "다른 생태계들과 비교했을 때, 숲은 상대적으로 다양하지만, 이것이 반드시 숲이 아닌 곳을 숲으로 전환하기 위한 타당한 이유가 될 수는 없을 것이다."
+   },
+   {
+    "id": 2,
+    "english": "Wetlands, meadows, and grasslands have a unique biota too, even if it is often not as rich as a forest biota.",
+    "korean": "비록 보통은 숲의 생물상만큼 풍부하지는 않더라도 습지, 목초지, 초원 역시 고유한 생물상을 가지고 있다."
+   },
+   {
+    "id": 3,
+    "english": "The ecological problems of this process have been described from a number of places such as Iceland, South Africa, and Australia, but the classic example of this comes from Scotland and northern England.",
+    "korean": "이 과정의 생태학적 문제는 아이슬란드, 남아프리카, 오스트레일리아와 같은 여러 지역에서 기술되어 왔지만, 이것의 전형적 사례는 스코틀랜드와 잉글랜드 북부에서 나온다."
+   },
+   {
+    "id": 4,
+    "english": "Here the Forestry Commission has drained, fertilized, and fenced extensive areas of wetlands to facilitate turning them into forests.",
+    "korean": "여기서 삼림위원회는 광대한 습지 구역을 배수하고, 기름지게 하며, 울타리를 설치해 그것들을 숲으로 바꾸는 것을 촉진했다."
+   },
+   {
+    "id": 5,
+    "english": "Increasing the extent of forests in Britain is certainly a desirable goal, and most of the Forestry Commission's efforts are directed toward sites that were forested before sheep and their keepers came to the island.",
+    "korean": "영국에서 숲의 범위를 늘리는 것은 분명히 바람직한 목표이며, 삼림위원회의 노력 대부분은 양과 양치기들이 섬에 오기 전에는 숲이었던 곳을 대상으로 한다."
+   },
+   {
+    "id": 6,
+    "english": "However, ecologists frequently complain about the Commission's work because it is not restricted to former forest sites, because the forests established are usually composed of exotic trees, and because the wildlife threatened by this activity includes many uncommon species.",
+    "korean": "그러나 생태학자들은 그 위원회의 작업에 대해 자주 불평하는데, 그 이유는 그것이 이전에 숲이었던 곳에만 국한되지 않고, 조성된 숲이 대개 외래종 나무로 구성되어 있으며, 이 활동으로 위협받는 야생동물들에는 흔하지 않은 종들이 많이 포함되기 때문이다."
+   }
+  ]
+ },
+ {
+  "item_no": "34",
+  "theme": "집단적 의사 결정에서 공정성 확보를 위한 무작위 선택의 필요성",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "When gathering the preferences of multiple agents into one collective choice, it is easily seen that certain cases call for randomization or other means of tiebreaking.",
+    "korean": "여러 행위자의 선호를 하나의 집단적 선택으로 모을 때, 특정 경우들은 무작위 추출이나 동점을 가르는 다른 방법들이 필요하다는 것을 쉽게 알 수 있다."
+   },
+   {
+    "id": 2,
+    "english": "For example, if there are two alternatives, a and b, and two agents such that one prefers a and the other one b, there is no deterministic way of selecting a single alternative without violating one of two basic fairness conditions known as anonymity and neutrality.",
+    "korean": "예를 들어, 두개의 대안 a 와 b 가 있고, 두 명의 행위자가 있는데 한 사람은 a 를 선호하고 나머지 사람은 b 를 선호한다면, '익명성'과 '중립성'으로 알려진 두 가지 기본적인 공정성 조건 중 하나를 위반하지 않고 단일 대안을 선택할 결정적 방법은 없다."
+   },
+   {
+    "id": 3,
+    "english": "Anonymity requires that the collective choice ought to be independent of the agents' identities whereas neutrality requires impartiality towards the alternatives.",
+    "korean": "익명성은 집단적 선택이 행위자들의 정체성과는 무관해야 한다고 요구하고, 반면 중립성은 대안에 대한 공정성을 요구한다."
+   },
+   {
+    "id": 4,
+    "english": "Allowing lotteries as social outcomes hence seems like a necessity for impartial collective choice.",
+    "korean": "따라서 사회적 결과로 추첨을 허용하는 것은 공정한 집단적 선택을 위해 필수적인 것처럼 보인다."
+   },
+   {
+    "id": 5,
+    "english": "Indeed, most common \"deterministic\" social choice functions such as plurality rule are only deterministic as long as there is no tie, which is usually resolved by drawing a lot.",
+    "korean": "사실, 복수 규칙(다수결)과 같은 가장 일반적인 '결정적' 사회적 선택 함수조차도, 동점이 없는 한에서만 결정적인데, 보통 그런 경우에는 제비뽑기로 해결된다."
+   },
+   {
+    "id": 6,
+    "english": "The use of lotteries for the selection of officials interestingly goes back to the world's first democracy in Athens, where it was widely regarded as a principal characteristic of democracy, and has recently gained increasing attention in political science.",
+    "korean": "관리 선발을 위한 추첨의 사용은 흥미롭게도 아테네의 세계 최초의 민주주의로 거슬러 올라가는데, 거기서는 그것이 민주주의의 주요 특징으로 널리 여겨졌으며, 최근에는 정치학에서 점점 더 많은 관심을 끌어 왔다."
+   }
+  ]
+ },
+ {
+  "item_no": "35",
+  "theme": "모든 구성원의 성장을 돕는 다양한 멘토(mentor) 네트워크의 중요성",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "All workers need access to mentors that can provide them with valuable information about their job, their workplace, and the resources that are available within their organization.",
+    "korean": "모든 근로자들은 그들의 직무, 직장, 그리고 조직 내에서 이용 가능한 자원에 대해 가치 있는 정보를 제공해 줄 수 있는 멘토에게로의 접근이 필요하다."
+   },
+   {
+    "id": 2,
+    "english": "Mentors also provide much needed psychosocial support.",
+    "korean": "멘토 또한 꼭 필요한 심리사회적인 지원을 제공한다."
+   },
+   {
+    "id": 3,
+    "english": "Having a diverse network of mentors is important for dominant and minority group members alike.",
+    "korean": "다양한 멘토 네트워크를 갖추는 것은 지배 집단과 소수 집단에게 똑같이 중요하다."
+   },
+   {
+    "id": 4,
+    "english": "Minority group members need diverse mentors so that they can gain insight into what it means to be employed by a particular organization or in a particular field or profession.",
+    "korean": "소수 집단 구성원들은 특정한 조직이나 특정한 분야 혹은 직종에 고용된다는 것이 무엇을 의미하는지에 대한 통찰을 얻기 위해 다양한 멘토가 필요하다."
+   },
+   {
+    "id": 5,
+    "english": "Majority workers benefit by having a network of diverse mentors because it increases their understanding and sensitivity to the unique realities of diverse workers and their own identity, and perhaps even their own forms of privilege.",
+    "korean": "다수 집단의 근로자들은 다양한 멘토들로 구성된 네트워크를 가짐으로써 혜택을 보는데, 그 이유는 그것이 다양한 근로자들의 고유한 현실과 그들 자신의 정체성, 그리고 어쩌면 그들 자신이 지닌 특권의 형태들에 대해서까지도 이해와 민감성을 높여주기 때문이다."
+   },
+   {
+    "id": 6,
+    "english": "The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization.",
+    "korean": "이러한 멘토링 기회의 궁극적인 목표는 개인들이 자신의 일과 조직에 대해 더 많은 정보를 갖고, 더 많이 동일시되며, 더 많이 관여되게 하는 것이다."
+   }
+  ]
+ },
+ {
+  "item_no": "36",
+  "theme": "결과물보다 과정을 중시하는 과정 중심 쓰기(process writing)의 특징",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Traditionally, when teachers teach writing, they assign topics for students to write on; perhaps they do a bit of brainstorming about the topic during a pre-writing phase, and then have students write about the topic without interruption.",
+    "korean": "전통적으로, 글쓰기를 가르칠 때, 교사들은 학생들이 글을 쓸 주제를 배정해 주고, 아마도 사전 글쓰기 단계에서 그 주제에 대해 약간의 브레인스토밍을 하고, 그런 다음 학생들이 방해받지 않고 그 주제에 대해 글을 쓰게 한다."
+   },
+   {
+    "id": 2,
+    "english": "Subsequently, teachers collect and evaluate what students have written.",
+    "korean": "이어서, 교사들은 학생들이 쓴 것을 수거하여 평가한다."
+   },
+   {
+    "id": 3,
+    "english": "Such instruction is very 'product-oriented;' there is no involvement of the teacher in the act or 'process' of writing.",
+    "korean": "이러한 수업 방식은 매우 '결과물 지향적'이어서, 교사는 글을 쓰는 행위나 '과정'에 어떤 관여도 하지 않는다."
+   },
+   {
+    "id": 4,
+    "english": "In process writing, on the other hand, students may initially brainstorm ideas about a topic and begin writing, but then they have repeated conferences with the teacher and the other students, during which they receive feedback on their writing up to that point, make revisions, based on the feedback they receive, and carry on writing.",
+    "korean": "반면에, 과정 중심 글쓰기에서는, 학생들이 처음에 어떤 주제에 대해 아이디어를 브레인스토밍하고 글쓰기를 시작할 수도 있지만, 그 후에 그들은 교사 및 다른 학생들과 반복으로 협의하며, 그 과정에서 그들은 그 시점까지 쓴 글에 대한 피드백을 받고, 받은 피드백을 바탕으로 수정하며, 계속해서 글쓰기를 이어간다."
+   },
+   {
+    "id": 5,
+    "english": "In this way, students learn to view their writing as someone else's reading and to improve both the expression of meaning and the form of their writing as they draft and redraft.",
+    "korean": "이러한 방식으로, 학생들은 자신의 글쓰기를 어떤 다른 사람의 읽을거리로 여기고, 초안을 쓰고 다시 쓰는 중에 글의 의미 표현과 형식 둘 다를 개선하는 법을 배운다."
+   },
+   {
+    "id": 6,
+    "english": "Process writing shifts the emphasis in teaching writing from evaluation to revision.",
+    "korean": "과정 중심 글쓰기는 글쓰기 교육의 주안점을 평가에서 수정으로 전환한다."
+   }
+  ]
+ },
+ {
+  "item_no": "37",
+  "theme": "고대 문자 기록에서 수학적 내용을 식별하는 것의 어려움",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Perhaps at some point you have seen some mathematical writing and not understood it.",
+    "korean": "아마도 어느 순간 여러분은 수학적 글을 본 적이 있지만, 그것을 이해하지 못했을 수도 있다."
+   },
+   {
+    "id": 2,
+    "english": "You would not be the first; rest assured, even professional mathematicians sometimes have to rely on discussions with colleagues to properly understand problems they are looking at.",
+    "korean": "여러분이 처음은 아니므로, 안심해도 되는 것이, 심지어 전문 수학자들조차도 자신들이 바라보고 있는 문제를 제대로 이해하기 위해 때때로 동료들과의 토론에 의존해야 하기 때문이다."
+   },
+   {
+    "id": 3,
+    "english": "But how do you recognise some writing is mathematical in the first place?",
+    "korean": "그러나 애초에 어떤 글이 수학적이라는 것을 어떻게 알아볼 수 있을까?"
+   },
+   {
+    "id": 4,
+    "english": "The complicated notations that might spring to mind ─ all those strange dashes, squiggles and letters ─ are obvious signs, but a lot of those are really quite modern.",
+    "korean": "그 모든 낯선 대시, 꼬부라져 읽기 어려운 글자, 그리고 문자와 같은 머릿속에 떠오를지도 모르는 복잡한 기호들은 명백한 부호들이지만, 그중 많은 것이 사실 꽤 현대적인 것이다."
+   },
+   {
+    "id": 5,
+    "english": "Mathematics had been going on for a long time before the dashes and squiggles were invented.",
+    "korean": "수학은 그 대시들과 꼬부라져 읽기 어려운 글자들이 발명되기 훨씬 전부터 계속되어 오고 있었다."
+   },
+   {
+    "id": 6,
+    "english": "Put simply, there has to be something mathematical going on for us to say that it is mathematics.",
+    "korean": "간단히 말해서, 우리가 그것이 수학이라고 말하기 위해서는 '수학적인' 무언가가 진행되고 있어야만 한다."
+   },
+   {
+    "id": 7,
+    "english": "And if we are dealing with writing from a very distant past, in a language that is not familiar to us, from a time even before recorded language, that can be sometimes difficult to recognise.",
+    "korean": "그리고 만약 우리가 우리에게 익숙하지 않은 언어로 쓰인, 심지어 기록된 언어가 존재하기 이전의 시대에서 온, 매우 먼 과거의 글을 다루고 있다면, 그것을 알아보기란 때로 어려울 수 있다."
+   }
+  ]
+ },
+ {
+  "item_no": "38",
+  "theme": "겨울을 나기 위한 생존 전략으로서 나무의 능동적 낙엽 현상(senescence)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "It is worth pointing out that leaves don't drop to the ground because they are dying ─ rather, the tree initiates an active process of clever recycling called senescence.",
+    "korean": "잎이 땅에 떨어지는 것은 잎이 죽어가기 때문이 아니라, 나무가 노화라고 불리는 영리한 재순환의 능동적 과정을 시작하기 때문이라는 점은 주목할 가치가 있다."
+   },
+   {
+    "id": 2,
+    "english": "A tree, like an oak for example, would struggle to survive through a harsh winter if it retained its canopy of leaves.",
+    "korean": "예를 들어 참나무 같은 나무는 만약 그것이 수관(樹冠)을 유지한다면 혹독한 겨울을 이겨내기 어려울 것이다."
+   },
+   {
+    "id": 3,
+    "english": "It would risk damage from strong winter winds and would lose more water from its leaves than it could draw up from the frozen ground.",
+    "korean": "그것은 강한 겨울바람으로부터 해를 입을 위험을 감수할 것이고 얼어붙은 땅에서 끌어올릴 수 있는 양보다 잎으로부터 더 많은 수분을 잃게 될 것이다."
+   },
+   {
+    "id": 4,
+    "english": "If it didn't blow over, it would die of thirst.",
+    "korean": "만약 그것이 바람에 쓰러지지 않는다면 갈증으로 죽을 것이다."
+   },
+   {
+    "id": 5,
+    "english": "As winter approaches, the length of the day shortens, the temperature drops, and plants, including trees, can detect this change.",
+    "korean": "겨울이 다가오면서 낮의 길이가 짧아지고 기온이 떨어지며, 나무를 포함한 식물들은 이러한 변화를 감지할 수 있다."
+   },
+   {
+    "id": 6,
+    "english": "It signals to them that it is time to lose their leaves.",
+    "korean": "그것(이러한 변화)은 나무에게 이제 잎을 떨어뜨릴 시기임을 알리는 신호를 보낸다."
+   },
+   {
+    "id": 7,
+    "english": "First, however, trees carefully suck all of the useful nutrients out of the leaves and then, with surgical precision, block up that pathway into the leaves.",
+    "korean": "그러나 나무들은 먼저 조심스럽게 잎으로부터 모든 유용한 영양분을 빨아들이고, 그런 다음 외과적 정밀함으로 잎 속으로 가는 통로를 막는다."
+   },
+   {
+    "id": 8,
+    "english": "That blocked pathway at the base of the leaf stem creates a weakness and, in the wind, the leaves snap off and fall to the ground.",
+    "korean": "잎줄기 밑동에서 막힌 그 통로는 약한 부분을 만들어 내어, 바람이 불 때 잎은 끊어져 땅으로 떨어진다."
+   }
+  ]
+ },
+ {
+  "item_no": "39",
+  "theme": "역사 연구에서 현존하는 사료(史料)의 한계와 해석의 중요성",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Historians use evidence in order to understand what happened and why it happened.",
+    "korean": "역사학자들은 무엇이 일어났고 그것이 왜 일어났는지를 이해하기 위해 증거를 활용한다."
+   },
+   {
+    "id": 2,
+    "english": "In architectural history this evidence may take the form of the buildings themselves or their remains, and documents such as plans, drawings, descriptions, diaries or bills.",
+    "korean": "건축사에서 이러한 증거는 건물 그 자체나 그것의 잔해, 그리고 설계도, 도면, 설명서, 일지, 또는 청구서와 같은 문서 형태를 띨 수도 있다."
+   },
+   {
+    "id": 3,
+    "english": "Our picture of any period of history is derived from a multitude of sources, such as the paintings, literature, deeds, buildings and other artefacts that have survived.",
+    "korean": "어떤 역사적 시기에 관한 우리의 인식은 그림, 문학, 증서, 건물 및 다른 인공물과 같은 현존해 온 수많은 출처에서 유래된다."
+   },
+   {
+    "id": 4,
+    "english": "The problem of survival lies at the root of many of the historian's problems, for what has survived may not necessarily be more significant than what has not survived.",
+    "korean": "현존의 문제는 역사가들이 갖고 있는 많은 문제의 근원에 있는데, 현존해 온 것이 현존해 오지 못한 것보다 반드시 더 중요한 것은 아닐 수도 있기 때문이다."
+   },
+   {
+    "id": 5,
+    "english": "The Egyptian pyramids have survived thousands of years, but historical significance is not just a question of durability.",
+    "korean": "이집트 피라미드는 수천 년을 견뎌 냈지만, 역사적 중요성은 단순히 내구성의 문제가 아니다."
+   },
+   {
+    "id": 6,
+    "english": "These buildings were part of a rich and diverse culture, much of which has been lost.",
+    "korean": "이 건축물들은 풍부하고 다양한 문화의 일부였고, 그 대부분은 소실되었다."
+   },
+   {
+    "id": 7,
+    "english": "They are historical facts, but facts by themselves, even such massive facts as the pyramids, are just the first stage in any historical study, and until they have been evaluated, placed in context and interpreted, they tell us little.",
+    "korean": "그것들은 역사적 사실이지만, 피라미드처럼 거대한 사실조차도 사실만으로는 그저 역사 연구의 첫 단계에 불과하고, 그것이 평가되고 맥락에 배치되고 해석되기 전까지는 우리에게 알려주는 것이 거의 없다."
+   },
+   {
+    "id": 8,
+    "english": "Different historians may place different values on the same facts, and the discovery of new evidence may modify or change existing theories and interpretations.",
+    "korean": "서로 다른 역사학자가 같은 사실에 서로 다른 가치를 부여할 수도 있고, 새로운 증거의 발견이 기존 이론과 해석을 수정하거나 바꿀 수도 있다."
+   }
+  ]
+ },
+ {
+  "item_no": "40",
+  "theme": "문학 장르에 따라 다른 등장인물의 재등장과 변화 양상",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "In most fiction, characters' lives are limited to the individual work.",
+    "korean": "대부분의 소설에서 등장인물의 삶은 개별 작품에 국한된다."
+   },
+   {
+    "id": 2,
+    "english": "Readers may disagree on the characteristics and traits of fictional figures, and in drama there is room for different interpretations of characters.",
+    "korean": "독자들은 허구적 인물의 특징과 특성에 관해 의견이 다를 수 있고, 연극에서는 등장인물에 관한 다양한 해석의 여지가 있다."
+   },
+   {
+    "id": 3,
+    "english": "However, it is less common for characters in literary fiction to reappear in subsequent works than in genre fiction, where series featuring the same central characters are common.",
+    "korean": "그러나, 문학 소설의 등장인물이 후속 작품에 재등장하는 경우는 장르 소설보다 덜 흔한데, 장르 소설에서는 동일한 중심인물이 등장하는 연재물이 흔하다."
+   },
+   {
+    "id": 4,
+    "english": "This is even more pronounced in comics, which are typically serialized in newspaper strips or comic books.",
+    "korean": "이는 보통 신문 만화나 만화책으로 연재되는 만화에서 훨씬 더 확연하다."
+   },
+   {
+    "id": 5,
+    "english": "Thus characters introduced in the 1930s, like Superman and Batman, may still enjoy new adventures decades later.",
+    "korean": "따라서 1930년대에 소개된 Superman이나 Batman과 같은 등장인물은 수십 년 후에도 여전히 새로운 모험을 즐길 수도 있다."
+   },
+   {
+    "id": 6,
+    "english": "During these characters' long histories, they change in various ways for a variety of reasons.",
+    "korean": "이러한 등장인물의 오래된 역사 동안 그들은 다양한 이유로 여러 가지 방식으로 변화한다."
+   },
+   {
+    "id": 7,
+    "english": "If a character is created by a single author, like Sherlock Holmes, the character's core traits may change little from story to story, but readers learn more about him with each successive story.",
+    "korean": "Sherlock Holmes처럼 등장인물이 단일 작가에 의해 창작되면, 그 등장인물의 핵심 특성은 이야기마다 거의 변하지 않을 수도 있지만, 독자들은 연속되는 각각의 이야기와 함께 그에 관해 더 많이 알게 된다."
+   },
+   {
+    "id": 8,
+    "english": "On the other hand, if characters are the work of several hands over decades, they may change considerably.",
+    "korean": "반면에 등장인물이 수십 년 동안 여러 (작가의) 손을 거친 작품이라면 그들은 상당히 바뀔 수도 있다."
+   },
+   {
+    "id": 9,
+    "english": "─> While characters in most literary fiction hardly ever feature in successive works, those in genre fiction and comics often do so, and may undergo transformation in their traits especially when written about by different authors over time.",
+    "korean": "─> 대부분의 문학 소설 속 등장인물은 연속되는 작품에 거의 한 번도 등장하지 않는 반면, 장르 소설과 만화 속 등장인물은 그러한 경우가 흔하며, 특히 시간이 지나면서 다른 작가들에 의해 쓰일 때 특성의 변형을 겪을 수도 있다."
+   }
+  ]
+ },
+ {
+  "item_no": "41-42",
+  "theme": "메시지의 복잡성에 따라 적절한 소통 매체를 선택하는 것의 중요성",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "While social presence has evolved through many iterations since its first development within the context of the landline telephone, the perception or feeling of being connected with the other person within the context of the conversation has persisted.",
+    "korean": "사회적 실재감은 유선 전화 환경에서 처음 발달한 이후 많은 반복을 거쳐 진화해 왔지만, 대화 환경 내에서 다른 사람과 연결되어 있다는 인식이나 느낌은 지속되어 왔다."
+   },
+   {
+    "id": 2,
+    "english": "Some research has explored specific technologies and the extent to which their characteristics lead to a feeling of social presence.",
+    "korean": "일부 연구는 특정 기술과 그것의 특성이 어느 정도까지 사회적 실재감의 느낌으로 이어지는지를 탐구해 왔다."
+   },
+   {
+    "id": 3,
+    "english": "For example, some researchers have studied the \"richness\" of the media, or the number of cues available to convey social presence.",
+    "korean": "예를 들어, 일부 연구자들은 매체의 '풍부성', 즉 사회적 실재감을 전달하기 위해 이용 가능한 단서들의 수를 연구했다."
+   },
+   {
+    "id": 4,
+    "english": "A telephone call, which provides for audio cues and immediate feedback, is potentially richer than an email, which provides only textual cues and no immediate feedback.",
+    "korean": "음성 단서와 즉각적인 피드백을 제공하는 전화 통화는 문자 단서만 제공하고 즉각적인 피드백은 제공하지 않는 이메일보다 잠재적으로 더 풍부하다."
+   },
+   {
+    "id": 5,
+    "english": "Videoconferencing would be considered richer than the phone because of the addition of visual cues, making it closer to replicating a perceived gold standard of face-to-face, in-person social presence.",
+    "korean": "화상 회의는 시각 단서가 추가되었기 때문에 전화보다 더 풍부한 것으로 여겨질 것이며, 그것을 최고의 기준으로 인식되는 대면적.직접적 사회적 실재감을 복제하는 데 더 가까워지게 한다."
+   },
+   {
+    "id": 6,
+    "english": "Researchers have suggested that successful managers would choose rich media for confusing or ambiguous messages and lean or less rich media for messages that were more routine in nature.",
+    "korean": "연구자들은 성공적인 관리자가 혼란스럽거나 모호한 메시지에는 풍부한 매체를 선택하고, 본질적으로 더 일상적인 메시지에는 빈약한 또는 덜 풍부한 매체를 선택할 것이라고 시사했다."
+   },
+   {
+    "id": 7,
+    "english": "For example, if you wanted to discuss a complicated client agreement, it would be best to choose a face- to-face meeting.",
+    "korean": "예를 들어, 만약 여러분이 복잡한 고객 계약에 대해 논의하고 싶다면, 대면 회의를 선택하는 것이 가장 좋을 것이다."
+   },
+   {
+    "id": 8,
+    "english": "In contrast, if you were going to inform your team about a change in meeting time from 3:00 to 3:30, you might send out a generic email to everyone.",
+    "korean": "그에 반해서, 만약 여러분이 회의 시간이 3시에서 3시 30분으로 바뀌었다고 팀에게 알리려 한다면, 여러분은 모든 사람에게 일반적인 이메일을 보낼 수도 있다."
+   },
+   {
+    "id": 9,
+    "english": "These different channels of communication were considered by researchers as a type of container that the message comes in.",
+    "korean": "이러한 다양한 의사소통 수단은 연구자들에 의해 메시지가 담겨 오는 일종의 그릇으로 여겨졌다."
+   },
+   {
+    "id": 10,
+    "english": "To be a good communicator, you need to choose the right container.",
+    "korean": "좋은 의사소통자가 되기 위해서, 여러분은 올바른 그릇을 선택할 필요가 있다."
+   }
+  ]
+ },
+ {
+  "item_no": "43-45",
+  "theme": "아빠와 함께한 첫 야구 경기 관람의 소중한 경험",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Mike had always dreamed about going to a baseball game.",
+    "korean": "Mike는 항상 야구 경기에 가는 것에 대해 꿈꿔왔다."
+   },
+   {
+    "id": 2,
+    "english": "He watched his favorite team, the Arrows, on TV all the time, but he had never seen a game in person.",
+    "korean": "그는 자신이 가장 좋아하는 팀인 Arrows를 항상 TV에서 시청했지만, 직접 경기를 본 적이 한 번도 없었다."
+   },
+   {
+    "id": 3,
+    "english": "One afternoon, Mike's dad came home earlier than usual.",
+    "korean": "어느 날 오후, Mike의 아빠가 평소보다 더 일찍 집에 오셨다."
+   },
+   {
+    "id": 4,
+    "english": "\"Hey, Mike,\" he said, \"I just got two tickets for tonight's Arrows game. Do you want to go?\"",
+    "korean": "\"얘, Mike야, 내가 방금 오늘 밤 Arrows 경기 관람권 두 장을 구했어. 너 가고 싶니?\"라고 아빠가 말씀하셨다."
+   },
+   {
+    "id": 5,
+    "english": "Mike was so excited that he ran to grab his Arrows hat.",
+    "korean": "Mike는 너무 기뻐서 자신의 Arrows 모자를 움켜쥐러 달려갔다."
+   },
+   {
+    "id": 6,
+    "english": "In the car, his dad handed him a new baseball glove and added, \"Just in case a fly ball comes our way.\"",
+    "korean": "차 안에서 그의 아빠는 그에게 새로운 야구 글러브를 건네시며, \"그냥 뜬공이 우리 쪽으로 오는 걸 대비해서야.\"라고 덧붙이셨다."
+   },
+   {
+    "id": 7,
+    "english": "The stadium was full of people wearing Arrows shirts.",
+    "korean": "경기장은 Arrows 셔츠를 입은 사람들로 가득했다."
+   },
+   {
+    "id": 8,
+    "english": "Mike couldn't believe how big the stadium looked in person.",
+    "korean": "Mike는 경기장이 직접 보니 얼마나 커 보이는지 믿을 수가 없었다."
+   },
+   {
+    "id": 9,
+    "english": "As the players ran onto the field, Mike and his dad cheered for their team's players.",
+    "korean": "선수들이 운동장으로 뛰어나오자, Mike와 그의 아빠는 자신들 팀의 선수들을 위해 응원했다."
+   },
+   {
+    "id": 10,
+    "english": "His dad pointed at the player running out to third base, saying \"Look, it's Chavez, your favorite player \"",
+    "korean": "그의 아빠는 3루로 뛰어나가고 있는 선수를 가리키며, \"봐라, 네가 가장 좋아하는 선수, Chavez야 \"라고 말씀하셨다."
+   },
+   {
+    "id": 11,
+    "english": "Mike saw him warming up on the field and waved hoping to get his attention.",
+    "korean": "Mike는 그가 운동장에서 몸을 풀고 있는 것을 보았고 그의 주의를 끌려는 소망으로 손을 흔들었다."
+   },
+   {
+    "id": 12,
+    "english": "After the players warmed up, Mike and his dad went to get some snacks.",
+    "korean": "선수들이 몸을 풀고 나서, Mike와 그의 아빠는 간식을 좀 사러 갔다."
+   },
+   {
+    "id": 13,
+    "english": "As soon as they sat back down, the pitcher threw the first pitch.",
+    "korean": "그들이 다시 자리에 앉자마자, 투수가 첫 번째 투구를 했다."
+   },
+   {
+    "id": 14,
+    "english": "Before long, it was Chavez's turn to hit.",
+    "korean": "얼마 되지 않아, Chavez의 타격 차례가 되었다."
+   },
+   {
+    "id": 15,
+    "english": "He hit a high fly ball into the stands.",
+    "korean": "그는 관중석으로 높게 뜬공을 쳤다."
+   },
+   {
+    "id": 16,
+    "english": "The whole crowd stood up, but Mike reached up with his glove and grabbed the ball.",
+    "korean": "관중 전체가 일어났지만, Mike가 자신의 글러브를 들어 올려 공을 낚아챘다."
+   },
+   {
+    "id": 17,
+    "english": "Everyone clapped and smiled at Mike.",
+    "korean": "모든 이가 박수를 쳤고 Mike에게 웃음을 보냈다."
+   },
+   {
+    "id": 18,
+    "english": "He tightly held the ball and felt a little surprised, but very proud.",
+    "korean": "그는 공을 꼭 쥐었고 다소 놀라움을 느꼈지만, 매우 자랑스러웠다."
+   },
+   {
+    "id": 19,
+    "english": "Both teams kept scoring and the game stayed close.",
+    "korean": "양 팀은 계속 득점했고 경기는 계속 접전이었다."
+   },
+   {
+    "id": 20,
+    "english": "Mike and his dad cheered for every hit and held their breath during every big play.",
+    "korean": "Mike와 그의 아빠는 안타가 나올 때마다 응원했고 주요 플레이마다 마음을 졸였다."
+   },
+   {
+    "id": 21,
+    "english": "They high-fived each other every time the Arrows scored.",
+    "korean": "그들은 Arrows가 득점할 때마다 서로 하이 파이브를 했다."
+   },
+   {
+    "id": 22,
+    "english": "Several hours later, Mike's favorite team hit a home run and won the game.",
+    "korean": "몇 시간 후, Mike가 가장 좋아하는 팀이 홈런을 쳐서 경기에 이겼다."
+   },
+   {
+    "id": 23,
+    "english": "Fireworks filled the sky, and the team song played throughout the stadium.",
+    "korean": "불꽃놀이가 하늘을 메웠고, 팀의 노래가 경기장 전체에 울려 퍼졌다."
+   },
+   {
+    "id": 24,
+    "english": "When they got home, Mike told his mom all about his favorite plays and showed her the ball he caught.",
+    "korean": "그들이 집에 돌아왔을 때, Mike는 자신의 엄마에게 자신이 가장 좋아한 플레이에 대해 모두 이야기했고 자신이 낚아챈 공을 그녀에게 보여 주었다."
+   },
+   {
+    "id": 25,
+    "english": "He knew this was a day he would never forget.",
+    "korean": "그는 오늘이 자신이 절대 잊지 못할 날이라는 것을 알았다."
+   },
+   {
+    "id": 26,
+    "english": "It wasn't just the game ─ it was the cheering, the excitement, and best of all, spending time with his dad.",
+    "korean": "그것은 단지 게임뿐만이 아니었고, 그것은 응원, 흥분, 그리고 가장 좋은 것은 자신의 아빠와 시간을 보낸 것이었다."
+   },
+   {
+    "id": 27,
+    "english": "He couldn't wait for the next time they would get to go to a game.",
+    "korean": "그는 그들이 경기에 가게 될 다음번을 간절히 기다렸다."
+   }
+  ]
+ }
+]

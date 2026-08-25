@@ -1,0 +1,261 @@
+{
+ "item_no": "41-42",
+ "theme": "메시지의 복잡성에 따라 적절한 소통 매체를 선택하는 것의 중요성",
+ "overview": {
+  "theme_ko": "메시지 복잡성에 따른 소통 매체(그릇)의 선택",
+  "topic": "🔎 메시지의 성격에 맞는 소통 매체(그릇) 고르기",
+  "stance": "중립적",
+  "stance_reason": "특정 매체를 편들지 않고 메시지 성격에 맞춰 고르라고 설명함('choose the right container')",
+  "structure": "예시→일반화(결론)",
+  "structure_reason": "전화·이메일·화상회의 등 여러 매체 예시 뒤에 '올바른 그릇을 골라라'로 일반화·결론",
+  "key_grammar": {
+   "point": "전치사+관계대명사 (the extent to which)",
+   "source_sentence": "Some research has explored specific technologies and the extent to which their characteristics lead to a feeling of social presence.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "'the extent + to which'는 '~하는 [[정도]]'라는 뜻으로, to which 절이 명사 extent를 뒤에서 꾸며."},
+    {"chip": "왜 to which?", "text": "원래 lead to a feeling에서 'to'가 관계사 which 앞으로 이동해 [[전치사+관계대명사]] 형태가 된 거야."},
+    {"chip": "끊어읽기", "text": "the extent // to which their characteristics lead ~ → '~이 이어지는 [[정도]]'로 which 절을 통째로 extent에 붙여 읽어."},
+    {"chip": "비교", "text": "in which(장소·상황), for which(이유)처럼 앞에 오는 [[전치사]]는 뒤 동사·문맥이 결정해."}
+   ],
+   "example_analysis": "explored의 목적어가 'specific technologies'와 'the extent to which ~' 둘이며, to which 절 전체가 명사 extent를 후치 수식한다.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? Some research has explored specific technologies and the extent ___ which their characteristics lead to a feeling of social presence.", "options": ["to", "in", "of"], "answer": "to", "from_passage": true},
+    {"kind": "객관식", "question": "source_sentence의 which의 역할로 옳은 것은?", "options": ["명사 extent를 뒤에서 수식하는 관계대명사", "의문사로 명사절을 이끎", "앞 문장 전체를 부연하는 계속적 용법"], "answer": "명사 extent를 뒤에서 수식하는 관계대명사", "from_passage": true},
+    {"kind": "객관식", "question": "'전치사+관계대명사'로 바르게 바꾼 것은? ~ the way that the characteristics work → ~ the way ___ the characteristics work", "options": ["in which", "to which", "which"], "answer": "in which", "from_passage": false},
+    {"kind": "영작", "question": "일부 연구는 특정 기술과 그것의 특성이 어느 정도까지 사회적 실재감의 느낌으로 이어지는지를 탐구해 왔다.", "words": ["Some", "research", "has", "explored", "specific", "technologies", "and", "the", "extent", "to", "which", "their", "characteristics", "lead", "to", "a", "feeling", "of", "social", "presence"], "answer": "Some research has explored specific technologies and the extent to which their characteristics lead to a feeling of social presence.", "from_passage": true},
+    {"kind": "영작", "question": "그것이 성공으로 이어지는 정도는 측정하기 어렵다.", "words": ["The", "extent", "to", "which", "it", "leads", "to", "success", "is", "hard", "to", "measure"], "answer": "The extent to which it leads to success is hard to measure.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "매체의 풍부성", "expressions": ["the \"richness\" of the media", "the number of cues available to convey social presence", "rich media"], "variation": "매체가 전달하는 단서가 많을수록 풍부하다는 개념."},
+   {"label": "매체=그릇 비유", "expressions": ["a type of container that the message comes in", "the right container"], "variation": "의사소통 수단을 메시지가 담겨 오는 그릇에 빗댐."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~2", "summary": "사회적 실재감 개념과, 기술 [[특성]]이 그 느낌으로 이어지는 정도에 대한 연구", "easy_example": "같은 통화라도 목소리만 vs 얼굴까지 보이면 '함께 있는 느낌'이 다르지."},
+   {"stage": "전개", "sentence_range": "3~5", "summary": "매체의 [[풍부성]]: 이메일 < 전화 < 화상회의 순으로 전달 단서가 많아짐", "easy_example": "문자보다 전화, 전화보다 영상통화가 상대를 더 가깝게 느끼게 해."},
+   {"stage": "사례", "sentence_range": "6~8", "summary": "복잡·모호한 메시지엔 [[풍부한]] 매체, 일상적 메시지엔 빈약한 매체", "easy_example": "중요한 약속은 만나서, 시간 변경은 단톡 한 줄로."},
+   {"stage": "결론", "sentence_range": "9~10", "summary": "매체는 메시지를 담는 [[그릇]]—좋은 소통자는 맞는 그릇을 고름", "easy_example": "국은 국그릇에, 밥은 밥공기에 담듯 메시지도 맞는 통로에."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "While social presence has evolved through many iterations since its first development within the context of the landline telephone, the perception or feeling of being connected with the other person within the context of the conversation has persisted.",
+   "grammar": [
+    {"tag": "접속사 While(양보)", "note": "'~하지만'의 대조·양보 부사절을 이끎", "spans": ["While"]},
+    {"tag": "동명사 being connected", "note": "전치사 of의 목적어인 동명사(수동형)", "spans": ["being connected"]},
+    {"tag": "현재완료(지속)", "note": "'지속되어 왔다'—주절의 동사", "spans": ["has persisted"]}
+   ],
+   "vocab": [
+    {"word": "iteration", "meaning": "반복, (거듭된) 개정판"},
+    {"word": "persist", "meaning": "지속되다, 계속되다"},
+    {"word": "landline telephone", "meaning": "유선 전화"},
+    {"word": "perception", "meaning": "인식, 지각"}
+   ],
+   "chunks": [
+    {"en": "While social presence has [[evolved]] through many iterations", "ko": "사회적 실재감이 많은 반복을 거쳐 [[진화해]] 왔지만"},
+    {"en": "since its first [[development]] within the context of the landline telephone,", "ko": "유선 전화 환경에서 처음 [[발달한]] 이후"},
+    {"en": "the perception or feeling of being [[connected]] with the other person", "ko": "다른 사람과 [[연결되어]] 있다는 인식이나 느낌은"},
+    {"en": "within the context of the conversation has [[persisted]].", "ko": "대화 환경 내에서 [[지속되어]] 왔다."}
+   ],
+   "misreads": [
+    {"statement": "사회적 실재감이 유선 전화 이후 여러 번 반복·변화하면서, 연결되어 있다는 느낌도 함께 사라져 왔다.", "verdict": "X", "trap_type": "구조수식", "anchor": "has persisted", "why": "연결된 느낌은 지속되어 왔다(has persisted)고 했으므로 사라졌다는 것은 틀림."}
+   ],
+   "mistips": ["since를 '~때문에'로 읽으면 안 돼 — 여기선 '~한 [[이후]]'라는 시점의 뜻이야."]
+  },
+  {
+   "id": 2,
+   "english": "Some research has explored specific technologies and the extent to which their characteristics lead to a feeling of social presence.",
+   "grammar": [
+    {"tag": "전치사+관계대명사", "note": "the extent to which = '~하는 정도'", "spans": ["the extent to which"]},
+    {"tag": "현재완료", "note": "'탐구해 왔다'—경험·계속", "spans": ["has explored"]}
+   ],
+   "vocab": [
+    {"word": "explore", "meaning": "탐구하다, 탐색하다"},
+    {"word": "extent", "meaning": "정도, 범위"},
+    {"word": "characteristic", "meaning": "특성, 특징"}
+   ],
+   "chunks": [
+    {"en": "Some research has [[explored]] specific technologies", "ko": "일부 연구는 특정 기술을 [[탐구해]] 왔다"},
+    {"en": "and the extent to which their [[characteristics]]", "ko": "그리고 그것의 [[특성]]이 어느 정도까지"},
+    {"en": "lead to a [[feeling]] of social presence.", "ko": "사회적 실재감의 [[느낌]]으로 이어지는지를"}
+   ],
+   "misreads": [
+    {"statement": "일부 연구는 특정 기술의 특성이 어느 정도까지 사회적 실재감의 느낌으로 이어지는지를 탐구해 왔다.", "verdict": "O"}
+   ],
+   "mistips": ["the extent to which를 '어느 정도'로만 뭉뚱그리면 안 돼 — '특성이 [[어느 정도까지]] ~로 이어지는지'로 which 절을 끝까지 읽어."]
+  },
+  {
+   "id": 3,
+   "english": "For example, some researchers have studied the \"richness\" of the media, or the number of cues available to convey social presence.",
+   "grammar": [
+    {"tag": "동격 or", "note": "or = '즉', 앞말을 부연 설명", "spans": ["or"]},
+    {"tag": "형용사 후치수식", "note": "available이 cues를 뒤에서 수식", "spans": ["available"]}
+   ],
+   "vocab": [
+    {"word": "richness", "meaning": "풍부함, 풍요로움"},
+    {"word": "cue", "meaning": "단서, 신호"},
+    {"word": "convey", "meaning": "전달하다, 전하다"}
+   ],
+   "chunks": [
+    {"en": "For example, some researchers have [[studied]]", "ko": "예를 들어, 일부 연구자들은 ~를 [[연구했다]]"},
+    {"en": "the \"[[richness]]\" of the media,", "ko": "매체의 '[[풍부성]]', 즉"},
+    {"en": "or the number of [[cues]] available", "ko": "이용 가능한 [[단서]]들의 수를"},
+    {"en": "to [[convey]] social presence.", "ko": "사회적 실재감을 [[전달하기]] 위해"}
+   ],
+   "misreads": [
+    {"statement": "연구자들은 매체의 풍부성을 그 매체의 '비용', 즉 이용 가능한 단서의 수로 정의했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "the number of cues available to convey social presence", "why": "풍부성은 비용이 아니라 전달 가능한 단서의 수로 정의되므로 비용 언급은 무관함."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "A telephone call, which provides for audio cues and immediate feedback, is potentially richer than an email, which provides only textual cues and no immediate feedback.",
+   "grammar": [
+    {"tag": "관계대명사 계속적 which", "note": "앞 명사를 부연 설명(콤마+which)", "spans": ["which"]},
+    {"tag": "비교급", "note": "richer than = '~보다 더 풍부한'", "spans": ["richer than"]}
+   ],
+   "vocab": [
+    {"word": "potentially", "meaning": "잠재적으로"},
+    {"word": "immediate", "meaning": "즉각적인"},
+    {"word": "textual", "meaning": "문자의, 텍스트의"},
+    {"word": "feedback", "meaning": "피드백, 반응"}
+   ],
+   "chunks": [
+    {"en": "A telephone call, which provides for [[audio]] cues and immediate feedback,", "ko": "[[음성]] 단서와 즉각적인 피드백을 제공하는 전화 통화는"},
+    {"en": "is potentially [[richer]] than an email,", "ko": "이메일보다 잠재적으로 더 [[풍부하다]]"},
+    {"en": "which provides only [[textual]] cues and no immediate feedback.", "ko": "그 이메일은 [[문자]] 단서만 제공하고 즉각적인 피드백은 제공하지 않는다"}
+   ],
+   "misreads": [
+    {"statement": "이메일은 음성 단서와 즉각적인 피드백을 제공하여 전화 통화보다 잠재적으로 더 풍부하다.", "verdict": "X", "trap_type": "주체대상", "anchor": "is potentially richer than an email", "why": "음성 단서·즉각 피드백은 전화의 특성이고, 전화가 이메일보다 더 풍부하므로 주체가 뒤바뀜.", "killer": true}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Videoconferencing would be considered richer than the phone because of the addition of visual cues, making it closer to replicating a perceived gold standard of face-to-face, in-person social presence.",
+   "grammar": [
+    {"tag": "수동태 would be considered", "note": "'~로 여겨질 것이다'", "spans": ["would be considered"]},
+    {"tag": "분사구문 making", "note": "'~하게 하면서'의 결과·부대상황", "spans": ["making"]}
+   ],
+   "vocab": [
+    {"word": "videoconferencing", "meaning": "화상 회의"},
+    {"word": "replicate", "meaning": "복제하다, 재현하다"},
+    {"word": "gold standard", "meaning": "최고의 기준"},
+    {"word": "in-person", "meaning": "대면의, 직접의"}
+   ],
+   "chunks": [
+    {"en": "Videoconferencing would be considered [[richer]] than the phone", "ko": "화상 회의는 전화보다 더 [[풍부한]] 것으로 여겨질 것이며"},
+    {"en": "because of the addition of [[visual]] cues,", "ko": "[[시각]] 단서가 추가되었기 때문에"},
+    {"en": "making it closer to [[replicating]]", "ko": "그것을 [[복제하는]] 데 더 가까워지게 하는데"},
+    {"en": "a perceived [[gold]] standard of face-to-face,", "ko": "대면적, 인식되는 최고의 [[기준]]인"},
+    {"en": "[[in-person]] social presence.", "ko": "[[직접적]] 사회적 실재감을"}
+   ],
+   "misreads": [
+    {"statement": "화상 회의가 전화보다 더 풍부한 것은 즉각적인 피드백이 추가되었기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "because of the addition of visual cues", "why": "더 풍부한 이유는 즉각 피드백이 아니라 '시각 단서'의 추가이므로 근거가 틀림."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Researchers have suggested that successful managers would choose rich media for confusing or ambiguous messages and lean or less rich media for messages that were more routine in nature.",
+   "grammar": [
+    {"tag": "명사절 that", "note": "suggested의 목적어절을 이끎", "spans": ["that"]},
+    {"tag": "가정·추측 would", "note": "would choose = '~을 선택할 것이다'", "spans": ["would choose"]}
+   ],
+   "vocab": [
+    {"word": "ambiguous", "meaning": "모호한, 애매한"},
+    {"word": "lean", "meaning": "빈약한, 정보가 적은"},
+    {"word": "routine", "meaning": "일상적인, 정례적인"}
+   ],
+   "chunks": [
+    {"en": "Researchers have [[suggested]] that successful managers", "ko": "연구자들은 성공적인 관리자가 ~라고 [[시사했다]]"},
+    {"en": "would choose rich media for confusing or [[ambiguous]] messages", "ko": "혼란스럽거나 [[모호한]] 메시지에는 풍부한 매체를 선택하고"},
+    {"en": "and [[lean]] or less rich media", "ko": "[[빈약한]] 또는 덜 풍부한 매체를"},
+    {"en": "for messages that were more [[routine]] in nature.", "ko": "본질적으로 더 [[일상적인]] 메시지에는 선택할 것이라고"}
+   ],
+   "misreads": [
+    {"statement": "필자에 따르면 성공적인 관리자는 메시지 종류와 상관없이 항상 풍부한 매체를 선택해야 한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "lean or less rich media for messages that were more routine in nature", "why": "일상적 메시지엔 빈약한 매체를 택한다고 했으므로 '항상 풍부한 매체'는 아님."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "For example, if you wanted to discuss a complicated client agreement, it would be best to choose a face- to-face meeting.",
+   "grammar": [
+    {"tag": "가정법 과거", "note": "if you wanted ~, it would be ~ (가정·조건)", "spans": ["wanted", "would be"]}
+   ],
+   "vocab": [
+    {"word": "complicated", "meaning": "복잡한"},
+    {"word": "client agreement", "meaning": "고객 계약"},
+    {"word": "face-to-face", "meaning": "대면의, 마주 보는"}
+   ],
+   "chunks": [
+    {"en": "For example, if you wanted to [[discuss]]", "ko": "예를 들어, 만약 여러분이 ~을 [[논의하고]] 싶다면"},
+    {"en": "a [[complicated]] client agreement,", "ko": "[[복잡한]] 고객 계약에 대해"},
+    {"en": "it would be [[best]] to choose", "ko": "선택하는 것이 [[가장 좋을]] 것이다"},
+    {"en": "a face- to-face [[meeting]].", "ko": "대면 [[회의]]를"}
+   ],
+   "misreads": [
+    {"statement": "복잡한 고객 계약을 논의하려 할 때는 대면 회의를 선택하는 것이 가장 좋다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "In contrast, if you were going to inform your team about a change in meeting time from 3:00 to 3:30, you might send out a generic email to everyone.",
+   "grammar": [
+    {"tag": "조건절 were going to", "note": "if you were going to ~, you might ~", "spans": ["were going to", "might"]}
+   ],
+   "vocab": [
+    {"word": "inform", "meaning": "알리다, 통지하다"},
+    {"word": "generic", "meaning": "일반적인, 포괄적인"},
+    {"word": "in contrast", "meaning": "그에 반해서, 대조적으로"}
+   ],
+   "chunks": [
+    {"en": "In contrast, if you were going to [[inform]] your team", "ko": "그에 반해서, 만약 여러분이 팀에게 [[알리려]] 한다면"},
+    {"en": "about a [[change]] in meeting time from 3:00 to 3:30,", "ko": "회의 시간이 3시에서 3시 30분으로 [[바뀌었다]]고"},
+    {"en": "you might send out a [[generic]] email to everyone.", "ko": "여러분은 모든 사람에게 [[일반적인]] 이메일을 보낼 수도 있다"}
+   ],
+   "misreads": [
+    {"statement": "회의 시간이 바뀌었음을 팀에 알릴 때는 대면 회의를 선택하는 것이 가장 좋다.", "verdict": "X", "trap_type": "인과조건", "anchor": "you might send out a generic email to everyone", "why": "시간 변경 같은 일상 메시지엔 일반 이메일을 보낸다고 했으므로 대면 회의는 아님."}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "These different channels of communication were considered by researchers as a type of container that the message comes in.",
+   "grammar": [
+    {"tag": "수동태 were considered by", "note": "행위자 by researchers, '~로 여겨졌다'", "spans": ["were considered by"]},
+    {"tag": "관계대명사 that", "note": "container를 수식, comes in의 목적어 역할", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "channel", "meaning": "수단, 경로"},
+    {"word": "container", "meaning": "그릇, 용기"},
+    {"word": "consider", "meaning": "여기다, 간주하다"}
+   ],
+   "chunks": [
+    {"en": "These different [[channels]] of communication", "ko": "이러한 다양한 의사소통 [[수단]]은"},
+    {"en": "were [[considered]] by researchers", "ko": "연구자들에 의해 [[여겨졌다]]"},
+    {"en": "as a type of [[container]]", "ko": "일종의 [[그릇]]으로"},
+    {"en": "that the [[message]] comes in.", "ko": "[[메시지]]가 담겨 오는"}
+   ],
+   "misreads": [
+    {"statement": "The message itself is the container.", "verdict": "X", "trap_type": "지칭", "anchor": "a type of container that the message comes in", "why": "그릇은 메시지가 담겨 오는 의사소통 수단(매체)을 가리키며 메시지 자체가 아님.", "english": true}
+   ],
+   "mistips": ["container를 '메시지'로 읽으면 안 돼 — 메시지가 그 안에 담겨 오는 '[[그릇]](매체)'을 가리켜."]
+  },
+  {
+   "id": 10,
+   "english": "To be a good communicator, you need to choose the right container.",
+   "grammar": [
+    {"tag": "to부정사 부사적(목적)", "note": "'~가 되기 위해서'", "spans": ["To be"]}
+   ],
+   "vocab": [
+    {"word": "communicator", "meaning": "의사소통자, 전달자"},
+    {"word": "container", "meaning": "그릇, 용기"}
+   ],
+   "chunks": [
+    {"en": "To be a good [[communicator]],", "ko": "좋은 [[의사소통자]]가 되기 위해서"},
+    {"en": "you need to choose the right [[container]].", "ko": "여러분은 올바른 [[그릇]]을 선택할 필요가 있다"}
+   ],
+   "misreads": [
+    {"statement": "좋은 의사소통자가 되려면 메시지에 맞는 올바른 그릇(매체)을 선택해야 한다.", "verdict": "O"}
+   ]
+  }
+ ]
+}

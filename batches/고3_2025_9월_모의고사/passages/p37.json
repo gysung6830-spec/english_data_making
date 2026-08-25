@@ -1,0 +1,196 @@
+{
+ "item_no": "37",
+ "theme": "고대 문자 기록에서 수학적 내용을 식별하는 것의 어려움",
+ "overview": {
+  "theme_ko": "고대 기록에서 수학 알아보기",
+  "topic": "🔎 복잡한 기호가 아니라 '수학적 내용'으로 수학을 식별",
+  "stance": "중립적",
+  "stance_reason": "판별 기준을 설명·예시로 서술",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "'how do you recognise ...?' 질문을 던진 뒤 판별 기준을 제시",
+  "key_grammar": {
+   "point": "과거완료진행형(had been -ing)",
+   "source_sentence": "Mathematics had been going on for a long time before the dashes and squiggles were invented.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "「had been -ing」는 과거 어느 시점 '[[이전]]부터' 그때까지 죽 이어진 동작"},
+    {"chip": "형태", "text": "had + been + [[동사원형]]-ing (과거완료 + 진행)"},
+    {"chip": "핵심", "text": "기준 시점은 'before ~ were invented'—기호 발명 [[이전]]까지 계속됨"},
+    {"chip": "비교", "text": "단순 과거 'went on'과 달리 그 이전까지 '계속 [[진행]] 중'이었음을 강조"}
+   ],
+   "example_analysis": "기호가 발명된 과거 시점 그 이전부터 수학이 죽 이어져 왔음을 had been going on이 나타냄",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? 'Mathematics ___ on for a long time before the symbols were invented.'", "options": ["had been going", "has been going", "is going"], "answer": "had been going", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 '과거완료진행형'인 것은?", "options": ["had been going", "has gone", "was going"], "answer": "had been going", "from_passage": true},
+    {"kind": "객관식", "question": "'had been going on'이 나타내는 시제 의미로 알맞은 것은?", "options": ["미래의 계획", "단순한 현재 습관", "과거 시점 이전부터의 계속"], "answer": "과거 시점 이전부터의 계속", "from_passage": false},
+    {"kind": "영작", "question": "수학은 그 대시들과 꼬부라져 읽기 어려운 글자들이 발명되기 훨씬 전부터 계속되어 오고 있었다.", "words": ["Mathematics", "had been going on", "for a long time", "before", "the dashes and squiggles", "were invented"], "answer": "Mathematics had been going on for a long time before the dashes and squiggles were invented.", "from_passage": true},
+    {"kind": "영작", "question": "그가 도착했을 때 우리는 두 시간째 그를 기다리고 있던 중이었다.", "words": ["We", "had been waiting", "for him", "for two hours", "when", "he arrived"], "answer": "We had been waiting for him for two hours when he arrived.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "수학적임의 판별 기준", "expressions": ["something mathematical going on", "recognise some writing is mathematical"], "variation": "겉모습(기호)이 아니라 '수학적 내용'의 유무로 판별"},
+   {"label": "기호는 비교적 현대적", "expressions": ["really quite modern", "before the dashes and squiggles were invented"], "variation": "복잡한 표기는 최근 것—수학 자체는 그보다 훨씬 오래됨"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~2", "summary": "수학 글을 이해 못 해도 정상—[[전문가]]조차 동료와 토론에 의존", "easy_example": "어려운 설명서를 혼자 못 읽어 친구에게 물어보는 상황"},
+   {"stage": "문제제기", "sentence_range": "3", "summary": "그렇다면 어떤 글이 [[수학적]]인지 어떻게 알아보나?", "easy_example": "낯선 낙서를 보고 '이게 계산일까?' 묻는 것"},
+   {"stage": "전개", "sentence_range": "4~5", "summary": "복잡한 [[기호]]는 명백하지만 사실 현대적—수학은 그 전부터 존재", "easy_example": "숫자 기호가 없던 시절에도 물건을 세던 사람들"},
+   {"stage": "결론", "sentence_range": "6~7", "summary": "핵심은 '[[수학적]] 내용'의 유무—먼 과거 글은 알아보기 어려울 수 있음", "easy_example": "고대 점토판의 눈금을 수학으로 볼지 판단하기 어려운 경우"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Perhaps at some point you have seen some mathematical writing and not understood it.",
+   "grammar": [
+    {"tag": "현재완료 경험 have p.p.", "note": "have seen: ~한 적이 있다(경험)", "spans": ["have seen"]}
+   ],
+   "vocab": [
+    {"word": "at some point", "meaning": "어느 순간, 언젠가"},
+    {"word": "mathematical", "meaning": "수학적인"},
+    {"word": "writing", "meaning": "글, 저술"}
+   ],
+   "chunks": [
+    {"en": "Perhaps at some [[point]]", "ko": "아마 어느 [[시점]]엔가"},
+    {"en": "you have seen some [[mathematical]] writing", "ko": "여러분은 어떤 [[수학적]] 글을 본 적이 있지만"},
+    {"en": "and not [[understood]] it.", "ko": "그것을 [[이해하지]] 못했을 것이다."}
+   ],
+   "misreads": [
+    {"statement": "여러분이 수학적 글을 보고도 그것을 이해하지 못한 적이 있을 수 있다.", "verdict": "O"},
+    {"statement": "여러분이 수학 글을 이해하지 못하는 것은 수학 지식이 전혀 없기 때문이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "you have seen some mathematical writing and not understood it", "why": "본문은 '이해하지 못할 수도 있다'만 말할 뿐, 그 원인을 지식이 전혀 없기 때문이라고 단정하지 않는다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "You would not be the first; rest assured, even professional mathematicians sometimes have to rely on discussions with colleagues to properly understand problems they are looking at.",
+   "grammar": [
+    {"tag": "have to (의무)", "note": "have to rely: 의존해야 한다", "spans": ["have to rely on discussions"]},
+    {"tag": "목적격 관계대명사 생략", "note": "problems (which) they are looking at", "spans": ["problems they are looking at"]}
+   ],
+   "vocab": [
+    {"word": "rest assured", "meaning": "안심하다"},
+    {"word": "rely on", "meaning": "~에 의존하다"},
+    {"word": "colleague", "meaning": "동료"}
+   ],
+   "chunks": [
+    {"en": "You would not be the [[first]];", "ko": "여러분이 [[처음]]은 아닐 것이니,"},
+    {"en": "rest assured, even professional [[mathematicians]]", "ko": "안심하라, 심지어 전문 [[수학자들]]조차"},
+    {"en": "sometimes have to rely on [[discussions]] with colleagues", "ko": "때때로 동료와의 [[토론]]에 의존해야 한다"},
+    {"en": "to properly [[understand]] problems", "ko": "문제를 제대로 [[이해하기]] 위해"},
+    {"en": "they are [[looking]] at.", "ko": "자신이 [[바라보고]] 있는."}
+   ],
+   "misreads": [
+    {"statement": "본문은 아마추어들만 동료와의 토론에 의존한다고 말한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "even professional mathematicians sometimes have to rely on discussions with colleagues", "why": "'even professional mathematicians(전문 수학자조차)'도 동료 토론에 의존하므로 아마추어에 한정되지 않는다.", "killer": false, "english": false, "integrative": false},
+    {"statement": "전문 수학자조차 때때로 동료와의 토론에 기대어 문제를 이해한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "But how do you recognise some writing is mathematical in the first place?",
+   "grammar": [
+    {"tag": "간접의문 어순", "note": "how do you recognise ...: 의문사+조동사+주어", "spans": ["how do you recognise"]}
+   ],
+   "vocab": [
+    {"word": "recognise", "meaning": "알아보다, 식별하다"},
+    {"word": "in the first place", "meaning": "애초에, 우선"}
+   ],
+   "chunks": [
+    {"en": "But how do you [[recognise]]", "ko": "그런데 어떻게 [[알아볼]] 수 있을까"},
+    {"en": "some writing is [[mathematical]]", "ko": "어떤 글이 [[수학적]]이라는 것을"},
+    {"en": "in the first [[place]]?", "ko": "[[애초에]]?"}
+   ],
+   "misreads": [
+    {"statement": "이 문장은 수학적인 글을 어떻게 '쓰는지'를 묻고 있다.", "verdict": "X", "trap_type": "구조수식", "anchor": "how do you recognise some writing is mathematical", "why": "핵심 동사는 'recognise(알아보다)'이므로, 쓰는 법이 아니라 어떤 글이 '수학적임을 알아보는' 법을 묻는다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "The complicated notations that might spring to mind ─ all those strange dashes, squiggles and letters ─ are obvious signs, but a lot of those are really quite modern.",
+   "grammar": [
+    {"tag": "주격 관계대명사 that", "note": "notations that might spring: 주격 that", "spans": ["that might spring to mind"]},
+    {"tag": "삽입구(─ ─)", "note": "대시 사이 부연 삽입", "spans": ["all those strange dashes, squiggles and letters"]}
+   ],
+   "vocab": [
+    {"word": "notation", "meaning": "표기법, 기호"},
+    {"word": "spring to mind", "meaning": "머릿속에 떠오르다"},
+    {"word": "squiggle", "meaning": "꼬부라져 읽기 어려운 글자"},
+    {"word": "obvious", "meaning": "명백한"}
+   ],
+   "chunks": [
+    {"en": "The complicated [[notations]] that might spring to mind ─", "ko": "머릿속에 떠오를 법한 그 복잡한 [[기호들]] ─"},
+    {"en": "all those strange dashes, [[squiggles]] and letters ─", "ko": "그 모든 낯선 대시, [[꼬부랑 기호]]와 글자들 ─"},
+    {"en": "are obvious [[signs]],", "ko": "명백한 [[부호]]들이지만,"},
+    {"en": "but a lot of those are really quite [[modern]].", "ko": "그중 많은 것은 사실 꽤 [[현대적]]인 것이다."}
+   ],
+   "misreads": [
+    {"statement": "머릿속에 떠오르는 복잡한 기호들은 수학의 명백한 표시이며, 그 대부분은 아주 오래된 것이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "a lot of those are really quite modern", "why": "그 기호들 중 다수는 오래된 것이 아니라 '사실 꽤 현대적(modern)'인 것이다.", "killer": true, "english": false, "integrative": false},
+    {"statement": "'a lot of those'에서 those는 'signs(부호)'가 아니라 오직 'letters(글자)'만 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "all those strange dashes, squiggles and letters", "why": "those는 앞서 열거된 대시·꼬부랑 기호·글자를 아우르는 복잡한 표기 전체를 가리키며 글자에 한정되지 않는다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["대시(─) 사이 부분을 본동사로 읽으면 안 돼 — 그건 [[삽입]] 설명이고, 주어는 'The complicated notations'"]
+  },
+  {
+   "id": 5,
+   "english": "Mathematics had been going on for a long time before the dashes and squiggles were invented.",
+   "grammar": [
+    {"tag": "과거완료진행형 had been -ing", "note": "발명 이전부터 죽 진행됨", "spans": ["had been going on"]},
+    {"tag": "과거 수동태 were invented", "note": "were invented: 발명되었다", "spans": ["were invented"]}
+   ],
+   "vocab": [
+    {"word": "go on", "meaning": "계속되다"},
+    {"word": "invent", "meaning": "발명하다"}
+   ],
+   "chunks": [
+    {"en": "Mathematics [[had been going on]]", "ko": "수학은 [[계속되어]] 오고 있었다"},
+    {"en": "for a long [[time]]", "ko": "오랜 [[시간]] 동안"},
+    {"en": "before the dashes and [[squiggles]] were invented.", "ko": "그 대시와 [[꼬부랑 기호]]가 발명되기 전부터."}
+   ],
+   "misreads": [
+    {"statement": "수학은 기호가 발명되기 전에도 이어져 왔으며, 고대에는 주로 상업 계산에 쓰였다.", "verdict": "X", "trap_type": "무관정보", "anchor": "Mathematics had been going on for a long time before the dashes and squiggles were invented", "why": "본문은 기호 발명 이전에도 수학이 죽 이어졌다고만 하며, '상업 계산' 용도는 언급되지 않는다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'had been going on'을 단순 과거 '했다'로 읽으면 안 돼 — 그 이전부터 '[[계속 이어져]]' 왔다는 뜻"]
+  },
+  {
+   "id": 6,
+   "english": "Put simply, there has to be something mathematical going on for us to say that it is mathematics.",
+   "grammar": [
+    {"tag": "to부정사 의미상 주어 for us", "note": "for us to say: 우리가 말하려면", "spans": ["for us to say"]}
+   ],
+   "vocab": [
+    {"word": "put simply", "meaning": "간단히 말해서"},
+    {"word": "going on", "meaning": "진행 중인, 일어나는"}
+   ],
+   "chunks": [
+    {"en": "Put [[simply]], there has to be", "ko": "간단히 [[말해]],"},
+    {"en": "something [[mathematical]] going on", "ko": "[[수학적인]] 무언가가 진행되고 있어야"},
+    {"en": "for us to say that it is [[mathematics]].", "ko": "우리가 그것을 [[수학]]이라 말하려면."}
+   ],
+   "misreads": [
+    {"statement": "필자는 복잡한 기호가 있어야만 그것을 수학이라 부를 수 있다고 본다.", "verdict": "△", "trap_type": "필자관점", "anchor": "there has to be something mathematical going on for us to say that it is mathematics", "why": "무언가 조건이 필요하다는 방향은 맞지만, 필자가 필요하다고 보는 것은 기호가 아니라 '수학적인 무언가'의 진행이다.", "killer": false, "english": false, "integrative": false},
+    {"statement": "무언가 수학적인 것이 진행되어야 비로소 그것을 수학이라 부를 수 있다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "And if we are dealing with writing from a very distant past, in a language that is not familiar to us, from a time even before recorded language, that can be sometimes difficult to recognise.",
+   "grammar": [
+    {"tag": "주격 관계대명사 that", "note": "a language that is not familiar", "spans": ["that is not familiar to us"]}
+   ],
+   "vocab": [
+    {"word": "deal with", "meaning": "다루다"},
+    {"word": "distant", "meaning": "먼, 아득한"},
+    {"word": "familiar", "meaning": "익숙한"},
+    {"word": "recorded language", "meaning": "기록된 언어"}
+   ],
+   "chunks": [
+    {"en": "And if we are [[dealing]] with writing", "ko": "그리고 만약 우리가 [[글]]을 다루고 있다면"},
+    {"en": "from a very [[distant]] past,", "ko": "매우 [[먼 과거]]에서 온,"},
+    {"en": "in a language that is not [[familiar]] to us,", "ko": "우리에게 [[익숙하지]] 않은 언어로 쓰인,"},
+    {"en": "from a time even before [[recorded]] language,", "ko": "심지어 [[기록된]] 언어가 있기 이전 시대에서 온,"},
+    {"en": "that can be sometimes [[difficult]] to recognise.", "ko": "그것은 때로 [[알아보기]] 어려울 수 있다."}
+   ],
+   "misreads": [
+    {"statement": "Writing from a distant past is always easy to recognise as mathematical.", "verdict": "X", "trap_type": "구조수식", "anchor": "that can be sometimes difficult to recognise", "why": "아주 먼 과거의 글은 수학적임을 알아보기가 '때로 어려울' 수 있으므로 항상 쉬운 것은 아니다.", "killer": false, "english": true, "integrative": false},
+    {"statement": "익숙하지 않은 언어로 된 아주 먼 과거의 글은 수학적임을 알아보기 어려울 수 있다.", "verdict": "O"}
+   ]
+  }
+ ]
+}

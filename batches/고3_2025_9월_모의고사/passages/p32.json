@@ -1,0 +1,246 @@
+{
+ "item_no": "32",
+ "theme": "공감(empathy)이 갈등을 악화시킬 수 있다는 비판적 견해",
+ "overview": {
+  "theme_ko": "공감이 갈등을 악화시킨다는 비판",
+  "topic": "🔎 공감이 갈등의 해결책이 아니라 오히려 갈등을 심화시킨다는 비판적 견해",
+  "stance": "부정적·비판적",
+  "stance_reason": "'empathy makes such conflicts worse', 'counterproductive'로 공감에 비판적",
+  "structure": "주장→근거·예시",
+  "structure_reason": "공감 비판자들의 주장을 제시하고 소진·내집단 편향 등 근거로 뒷받침",
+  "key_grammar": {
+   "point": "부분부정(not ~ everyone)",
+   "source_sentence": "Although empathy is widely praised by scholars and public figures, not everyone is an empathy booster.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "'모두가 ~인 것은 아니다'처럼 전체가 아니라 [[일부]]만 부정하는 게 부분부정이에요."},
+    {"chip": "핵심", "text": "not everyone은 '아무도 아니다'가 아니라 '[[모두]]가 ~인 것은 아니다'로 읽어요."},
+    {"chip": "대조", "text": "전체부정은 no one·none, 부분부정은 not [[all]]·not everyone처럼 not+전체어예요."},
+    {"chip": "해석 팁", "text": "widely praised(널리 칭송)와 대비해 '그래도 [[모두]]가 옹호자는 아니다'로 반전을 잡아요."}
+   ],
+   "example_analysis": "전체를 뜻하는 everyone 앞에 not이 붙어 '전부는 아님(일부 예외)'을 나타냄.",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 'not everyone is an empathy booster'의 의미로 알맞은 것은?", "options": ["아무도 공감을 북돋는 사람이 아니다", "모두가 공감을 북돋는 사람인 것은 아니다", "모든 사람이 공감을 북돋는 사람이다"], "answer": "모두가 공감을 북돋는 사람인 것은 아니다", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 부분부정 표현에 해당하는 것은?", "options": ["no one agrees", "none of them care", "not everyone is a booster"], "answer": "not everyone is a booster", "from_passage": true},
+    {"kind": "객관식", "question": "'counterproductive'의 의미로 알맞은 것은?", "options": ["역효과를 내는", "매우 생산적인", "중립적인"], "answer": "역효과를 내는", "from_passage": true},
+    {"kind": "영작", "question": "사실, 그들은 공감이 그러한 갈등을 더 악화시킨다고 주장한다.", "words": ["In fact", "they argue", "empathy", "makes", "such", "conflicts", "worse"], "answer": "In fact, they argue, empathy makes such conflicts worse.", "from_passage": true},
+    {"kind": "영작", "question": "공감이 항상 우리를 갈등에서 구해 주는 것은 아니다.", "words": ["empathy", "does", "not", "always", "save", "us", "from", "conflict"], "answer": "Empathy does not always save us from conflict.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "공감이 갈등을 악화", "expressions": ["makes such conflicts worse", "counterproductive", "further entrench conflict"], "variation": "구제책이 아니라 오히려 악화 요인"},
+   {"label": "공감 대신 다른 수단", "expressions": ["give up on empathy", "rational compassion"], "variation": "공감을 폐기하고 이성적 대안으로 전환"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "공감이 칭송받지만 모두가 [[옹호자]]는 아님", "easy_example": "다 좋다는 유행에 '꼭 그렇진 않다'며 반대하는 사람"},
+   {"stage": "주장", "sentence_range": "2~3", "summary": "비판자들은 공감이 갈등을 [[악화]]시킨다고 봄", "easy_example": "불을 끄려던 물이 오히려 기름불을 키우는 격"},
+   {"stage": "근거", "sentence_range": "4~5", "summary": "소진·내집단 편향 등 공감의 [[부작용]]", "easy_example": "우리 편만 응원하고 상대 팀 불행을 즐기는 관중"},
+   {"stage": "심화", "sentence_range": "6~7", "summary": "공감 처방은 흔히 [[역효과]]이고 대립을 굳힘", "easy_example": "편 가르기를 부추기는 응원 구호"},
+   {"stage": "부연", "sentence_range": "8", "summary": "낯선 상대엔 정확히 공감 못 해 [[오해]] 유발", "easy_example": "문화가 다른 사람 마음을 넘겨짚다 어긋나는 위로"},
+   {"stage": "결론", "sentence_range": "9", "summary": "공감을 [[포기]]하고 이성적 동정심 등 다른 수단을 쓰자", "easy_example": "감정 대신 규칙으로 공정하게 나누기"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Although empathy is widely praised by scholars and public figures, not everyone is an empathy booster.",
+   "grammar": [
+    {"tag": "부분부정 not ~ everyone", "note": "전체가 아니라 일부만 부정", "spans": ["not everyone"]},
+    {"tag": "양보 접속사 Although", "note": "~에도 불구하고", "spans": ["Although"]}
+   ],
+   "vocab": [
+    {"word": "praise", "meaning": "칭송하다"},
+    {"word": "scholar", "meaning": "학자"},
+    {"word": "public figure", "meaning": "공인"},
+    {"word": "booster", "meaning": "옹호자, 후원자"}
+   ],
+   "chunks": [
+    {"en": "Although empathy is widely [[praised]]", "ko": "비록 공감이 널리 [[칭송받지만]]"},
+    {"en": "by scholars and [[public]] figures,", "ko": "학자들과 [[공인들]]에 의해,"},
+    {"en": "not everyone is an empathy [[booster]].", "ko": "모두가 공감 [[옹호자]]는 아니다."}
+   ],
+   "misreads": [
+    {"statement": "필자는 모든 학자와 공인이 공감을 북돋아야 한다는 입장이다.", "verdict": "X", "trap_type": "필자관점", "anchor": "not everyone is an empathy booster", "why": "필자는 모두가 공감 옹호자는 아니라고 했으므로 전원이 북돋아야 한다는 관점이 아니다."}
+   ],
+   "mistips": ["'not everyone'을 '아무도 아니다'로 읽으면 안 돼 — [[모두]]가 옹호자는 아니라는 부분부정이야."]
+  },
+  {
+   "id": 2,
+   "english": "Critics of empathy argue that empathy will not save us from interpersonal and intergroup conflict.",
+   "grammar": [
+    {"tag": "명사절 that", "note": "argue의 목적어", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "critic", "meaning": "비판자"},
+    {"word": "interpersonal", "meaning": "개인 간의"},
+    {"word": "intergroup", "meaning": "집단 간의"},
+    {"word": "conflict", "meaning": "갈등"}
+   ],
+   "chunks": [
+    {"en": "Critics of empathy [[argue]]", "ko": "공감의 비판자들은 [[주장한다]]"},
+    {"en": "that empathy will not [[save]] us", "ko": "공감이 우리를 [[구해주지]] 않는다고"},
+    {"en": "from interpersonal and intergroup [[conflict]].", "ko": "개인 간·집단 간 [[갈등]]으로부터."}
+   ],
+   "misreads": [
+    {"statement": "공감의 비판자들은 공감이 개인 간·집단 간 갈등에서 우리를 구해 주지 못한다고 본다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "In fact, they argue, empathy makes such conflicts worse.",
+   "grammar": [
+    {"tag": "삽입절 they argue", "note": "문장 중간 삽입", "spans": ["they argue"]}
+   ],
+   "vocab": [
+    {"word": "make ~ worse", "meaning": "악화시키다"},
+    {"word": "argue", "meaning": "주장하다"}
+   ],
+   "chunks": [
+    {"en": "In [[fact]], they argue,", "ko": "[[사실]], 그들이 주장하기를,"},
+    {"en": "empathy makes such conflicts [[worse]].", "ko": "공감이 그러한 갈등을 더 [[악화시킨다]]."}
+   ],
+   "misreads": [
+    {"statement": "공감의 옹호자들은 공감이 그러한 갈등을 더 악화시킨다고 주장한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "they argue, empathy makes such conflicts worse", "why": "갈등을 악화시킨다고 주장하는 주체는 옹호자가 아니라 비판자들(they)이다."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "These critics maintain that empathy can be exhausting and lead to burnout, insensitivity to suffering, or worse.",
+   "grammar": [
+    {"tag": "등위접속 and", "note": "be exhausting과 lead to 연결", "spans": ["and"]}
+   ],
+   "vocab": [
+    {"word": "maintain", "meaning": "주장하다"},
+    {"word": "exhausting", "meaning": "소모적인, 진을 빼는"},
+    {"word": "burnout", "meaning": "쇠진, 탈진"},
+    {"word": "insensitivity", "meaning": "무감각"},
+    {"word": "suffering", "meaning": "고통"}
+   ],
+   "chunks": [
+    {"en": "These critics [[maintain]]", "ko": "이 비판자들은 [[주장한다]]"},
+    {"en": "that empathy can be [[exhausting]]", "ko": "공감이 [[소모적]]일 수 있고"},
+    {"en": "and lead to burnout, [[insensitivity]] to suffering,", "ko": "쇠진, 고통에 대한 [[무감각]]으로 이어지거나,"},
+    {"en": "or [[worse]].", "ko": "혹은 더 [[나쁜]] 것으로."}
+   ],
+   "misreads": [
+    {"statement": "이 비판자들은 공감이 신체 질병을 직접 유발한다고 주장한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "empathy can be exhausting and lead to burnout", "why": "본문은 소진·무감각 등을 말할 뿐, 공감이 신체 질병을 유발한다는 내용은 없다."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "They argue that we tend to empathize strongly with our in-group and resist empathizing with out-groups, and even enjoy the suffering of out-groups in competitive or threatening contexts.",
+   "grammar": [
+    {"tag": "대등 연결 and", "note": "empathize·resist·enjoy 연결", "spans": ["and"]},
+    {"tag": "동명사 empathizing", "note": "resist의 목적어", "spans": ["empathizing"]}
+   ],
+   "vocab": [
+    {"word": "tend to", "meaning": "~하는 경향이 있다"},
+    {"word": "in-group", "meaning": "내집단"},
+    {"word": "out-group", "meaning": "외집단"},
+    {"word": "resist", "meaning": "거부하다, 저항하다"},
+    {"word": "threatening", "meaning": "위협적인"}
+   ],
+   "chunks": [
+    {"en": "They argue that we tend to [[empathize]] strongly", "ko": "그들은 우리가 강하게 [[공감하는]] 경향이 있다고 주장한다"},
+    {"en": "with our [[in-group]]", "ko": "우리 [[내집단]]에는"},
+    {"en": "and resist empathizing with [[out-groups]],", "ko": "그리고 [[외집단]]에는 공감하기를 거부하고,"},
+    {"en": "and even enjoy the [[suffering]] of out-groups", "ko": "심지어 외집단의 [[고통]]을 즐긴다고"},
+    {"en": "in competitive or [[threatening]] contexts.", "ko": "경쟁적이거나 [[위협적인]] 상황에서."}
+   ],
+   "misreads": [
+    {"statement": "우리는 외집단에 강하게 공감하고 내집단에는 공감을 거부하는 경향이 있다.", "verdict": "X", "trap_type": "지칭", "anchor": "empathize strongly with our in-group and resist empathizing with out-groups", "why": "강하게 공감하는 대상은 외집단이 아니라 내집단이고, 거부하는 대상이 외집단이다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Thus, the prescription for more empathy is often counterproductive in cases of conflict.",
+   "grammar": [
+    {"tag": "부사 often", "note": "빈도 수식", "spans": ["often"]},
+    {"tag": "주어-동사 수일치", "note": "단수 prescription + is", "spans": ["is"]}
+   ],
+   "vocab": [
+    {"word": "prescription", "meaning": "처방"},
+    {"word": "counterproductive", "meaning": "역효과를 내는"},
+    {"word": "in cases of", "meaning": "~의 경우에"}
+   ],
+   "chunks": [
+    {"en": "Thus, the [[prescription]] for more empathy", "ko": "따라서, 더 많은 공감을 위한 [[처방]]은"},
+    {"en": "is often [[counterproductive]]", "ko": "흔히 [[역효과]]를 낸다"},
+    {"en": "in cases of [[conflict]].", "ko": "[[갈등]] 상황에서."}
+   ],
+   "misreads": [
+    {"statement": "따라서 갈등 상황에서 더 많은 공감을 처방하면 대체로 효과적이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the prescription for more empathy is often counterproductive", "killer": true, "why": "갈등 상황에서 공감 처방은 효과적인 게 아니라 흔히 역효과(counterproductive)를 낸다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Empathy, they argue, can further entrench conflict and force us into an us vs. them mentality.",
+   "grammar": [
+    {"tag": "조동사 can", "note": "가능·잠재", "spans": ["can"]},
+    {"tag": "삽입절 they argue", "note": "주어와 동사 사이 삽입", "spans": ["they argue"]}
+   ],
+   "vocab": [
+    {"word": "entrench", "meaning": "확립하다, 굳히다"},
+    {"word": "mentality", "meaning": "사고방식"},
+    {"word": "further", "meaning": "한층 더"}
+   ],
+   "chunks": [
+    {"en": "[[Empathy]], they argue,", "ko": "[[공감]]은, 그들이 주장하길,"},
+    {"en": "can further [[entrench]] conflict", "ko": "갈등을 한층 더 [[확립하고]]"},
+    {"en": "and force us into an us vs. them [[mentality]].", "ko": "우리를 '우리 대 그들' [[사고방식]]에 몰아넣을 수 있다."}
+   ],
+   "misreads": [
+    {"statement": "공감은 갈등을 굳히기는 하지만, 우리를 대립 사고로 몰아넣지는 않는다.", "verdict": "X", "trap_type": "구조수식", "anchor": "entrench conflict and force us into an us vs. them mentality", "why": "and로 연결된 두 동사가 모두 공감의 작용이므로 대립 사고로 몰아넣는 것도 포함된다."}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Finally, even when we try to empathize with others who are dissimilar from us or in unfamiliar contexts, sometimes we are unable to accurately empathize with their experiences, causing further misunderstandings and frustration.",
+   "grammar": [
+    {"tag": "분사구문(결과)", "note": "causing ~ 결과", "spans": ["causing"]},
+    {"tag": "관계대명사 who", "note": "others를 수식", "spans": ["who"]}
+   ],
+   "vocab": [
+    {"word": "dissimilar", "meaning": "다른, 닮지 않은"},
+    {"word": "unfamiliar", "meaning": "낯선"},
+    {"word": "accurately", "meaning": "정확히"},
+    {"word": "frustration", "meaning": "좌절"}
+   ],
+   "chunks": [
+    {"en": "Finally, even when we try to [[empathize]] with others", "ko": "마지막으로, 우리가 다른 이들에게 [[공감하려]] 할 때조차"},
+    {"en": "who are [[dissimilar]] from us", "ko": "우리와 [[다른]]"},
+    {"en": "or in [[unfamiliar]] contexts,", "ko": "혹은 [[낯선]] 맥락 속에 있는,"},
+    {"en": "sometimes we are unable to accurately [[empathize]] with their experiences,", "ko": "때때로 우리는 그들의 경험에 정확히 [[공감하지]] 못해,"},
+    {"en": "causing further [[misunderstandings]] and frustration.", "ko": "더 깊은 [[오해]]와 좌절을 일으킨다."}
+   ],
+   "misreads": [
+    {"statement": "낯선 상대에게 공감을 시도하면, 공감을 너무 많이 해서 오해와 좌절이 생긴다.", "verdict": "△", "trap_type": "인과조건", "anchor": "we are unable to accurately empathize with their experiences", "why": "오해·좌절이 생기는 것은 맞지만, 그 원인은 공감을 과하게 해서가 아니라 정확히 공감하지 '못해서'다."}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "Critics of empathy argue that we should give up on empathy and employ other tools in pursuit of social harmony, e.g., rational compassion or moral emotions like fear, anger, and shame.",
+   "grammar": [
+    {"tag": "조동사 should", "note": "당위·제안", "spans": ["should"]},
+    {"tag": "예시 e.g.", "note": "구체 예 제시", "spans": ["e.g."]}
+   ],
+   "vocab": [
+    {"word": "give up on", "meaning": "포기하다"},
+    {"word": "employ", "meaning": "쓰다, 이용하다"},
+    {"word": "in pursuit of", "meaning": "~을 추구하여"},
+    {"word": "rational compassion", "meaning": "이성적 동정심"},
+    {"word": "moral emotion", "meaning": "도덕적 감정"}
+   ],
+   "chunks": [
+    {"en": "Critics of empathy argue that we should [[give up]] on empathy", "ko": "공감의 비판자들은 우리가 공감을 [[포기하고]]"},
+    {"en": "and [[employ]] other tools", "ko": "그리고 다른 [[수단]]을 써야 한다고 주장한다"},
+    {"en": "in pursuit of social [[harmony]],", "ko": "사회적 [[조화]]를 추구하며,"},
+    {"en": "e.g., rational [[compassion]]", "ko": "예를 들어 이성적 [[동정심]]이나"},
+    {"en": "or moral emotions like fear, anger, and [[shame]].", "ko": "두려움, 분노, [[수치심]] 같은 도덕적 감정을."}
+   ],
+   "misreads": [
+    {"statement": "비판자들은 사회적 조화를 위해 공감을 포기하고 다른 수단을 쓰자고 제안한다.", "verdict": "O"},
+    {"statement": "Critics say we should rely only on empathy for social harmony.", "verdict": "X", "trap_type": "필자관점", "anchor": "give up on empathy", "english": true, "why": "비판자들은 공감에만 의존하자는 게 아니라 공감을 '포기'하고 다른 수단을 쓰자고 한다."}
+   ]
+  }
+ ]
+}
