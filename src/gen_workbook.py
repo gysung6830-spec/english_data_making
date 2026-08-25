@@ -1130,18 +1130,18 @@ def onepass_page(seqtype):
     if seqtype == "순서":
         tips = (
             '<ol>'
-            '<li><b>첫 조각 소거</b> — 첫머리가 지시어(<b>This·That·These·They·Such</b>)나 연결어(<b>However·But·So·Thus·For example</b>)로 시작하는 조각은 <b>절대 맨 앞이 될 수 없다</b>. 남는 하나가 시작.</li>'
-            '<li><b>연결어로 앞자리 확정</b> — <b>However/But</b>=앞은 반대내용 · <b>For example</b>=앞은 일반진술 · <b>So/Thus</b>=앞은 원인 · <b>then/after that</b>=앞은 시간상 먼저.</li>'
-            '<li><b>the + 명사 추적</b> — 처음 등장은 <b>a/an</b>, 재등장은 <b>the</b>. ‘the X’가 든 조각은 ‘a X’로 X를 처음 꺼낸 조각 <b>뒤</b>.</li>'
-            '<li><b>대명사 수·성 일치</b> — they/it/she가 가리킬 대상이 있는 조각을 그 <b>바로 앞</b>에 붙인다.</li>'
+            '<li><b>맨 앞 후보부터 지우기</b> — 조각이 <b>this·그·그것·이런·그래서·하지만·예를 들어</b> 같은 말로 시작하면, ‘앞에 뭔가 있어야’ 말이 되는 조각이라 <b>맨 앞이 될 수 없어요.</b> 이렇게 하나씩 지우면 <b>시작 조각이 저절로 남아요.</b></li>'
+            '<li><b>첫 단어만 봐도 앞이 보여요</b> — <b>하지만/그러나(But·However)</b>→앞은 반대 얘기 · <b>예를 들어(For example)</b>→앞은 일반적인 얘기 · <b>그래서/따라서(So·Thus)</b>→앞은 그 <b>이유</b> · <b>그 다음/이후(then·after)</b>→앞은 먼저 일어난 일.</li>'
+            '<li><b>‘그 ~(the)’를 따라가기</b> — 어떤 조각에 <b>the + 명사</b>(예: the tree)가 나오면, 그건 이미 나온 걸 다시 부르는 말. 그 명사를 <b>처음 꺼낸 조각</b>(a tree) <b>뒤</b>에 붙여요.</li>'
+            '<li><b>‘그들·그것’이 누구?</b> — <b>they·it·she</b>가 나오면 “얘가 누구지?”를 묻고, 그 대상이 나온 조각을 <b>바로 앞</b>에 놓아요.</li>'
             '</ol>')
     else:
         tips = (
             '<ol>'
-            '<li><b>뒤 손잡이 먼저</b> — 넣을 문장 첫머리의 지시어(<b>this·these·such·they</b>)나 역접(<b>But·However</b>)이 <b>받을 선행어가 없는 자리는 오답</b>, 있는 <b>첫 자리가 정답</b>.</li>'
-            '<li><b>논리 공백 탐지</b> — ①~⑤ 중 <b>대명사가 가리킬 게 없거나</b> 인과가 비약하거나 예시가 대상 없이 튀는 <b>끊긴 곳</b>이 정답.</li>'
-            '<li><b>양방향 확인</b> — 넣을 문장 <b>뒤</b> 문장의 지시어가 넣을 문장을 받는지도 본다. <b>앞·뒤가 맞물려야</b> 확정.</li>'
-            '<li><b>역접이면 상반</b> — 넣을 문장이 <b>But/Yet</b>이면 그 앞은 반대내용, 뒤는 그 반전을 이어받는 자리.</li>'
+            '<li><b>넣을 문장 속 ‘그·이·그것’부터</b> — 넣을 문장이 <b>this·these·그·그것·they</b>나 <b>하지만(But)</b>으로 시작하면, 그 말이 <b>가리킬 대상이 바로 앞에 있는 자리</b>에 넣어야 해요.</li>'
+            '<li><b>말이 뚝 끊긴 곳을 찾기</b> — ①~⑤를 읽다 보면 <b>‘그것’이 누군지 모르겠거나</b>, 갑자기 얘기가 툭 튀는 <b>어색한 한 곳</b>이 나와요. 거기가 정답 자리.</li>'
+            '<li><b>앞·뒤 둘 다 맞아야</b> — 넣고 나서 <b>앞 문장과도, 뒤 문장과도</b> 자연스레 이어지는지 확인해요. 한쪽만 맞으면 오답.</li>'
+            '<li><b>‘하지만’이면 앞뒤가 반대</b> — 넣을 문장이 <b>But·Yet</b>이면, 그 앞은 반대 얘기, 뒤는 그 반전을 이어받는 자리예요.</li>'
             '</ol>')
     tips += ('<div style="margin-top:6px;font-size:8.6px;color:#8a5a1a;background:#fff7ed;'
              'border:1px solid #f0c48a;border-radius:6px;padding:6px 9px">'
@@ -1156,7 +1156,7 @@ def onepass_page(seqtype):
       <div class="op-steps">{steps}</div>
       <div class="op-h2">시범 — {"몸통은 넘기고 '이음매'만 따라간다" if seqtype=="순서" else "손잡이 뽑고 '끊긴 곳' 한 번에"}</div>
       {demo}
-      <div class="op-h2">실전 찍기 — 분석으로 자리를 <b>확정·소거</b></div>
+      <div class="op-h2">실전 찍기 — <b>하나씩 지우고</b> 자리 맞추기</div>
       <div class="op-habit op-tips">{tips}</div>
       <div class="op-h2">재독을 없애는 습관 3</div>
       <div class="op-habit">{habits}</div>
