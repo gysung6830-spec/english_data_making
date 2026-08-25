@@ -1,0 +1,1953 @@
+[
+ {
+  "item_no": "Unit10-2",
+  "title": "자신의 존재·정체성 확인을 위해 타인과의 교제·유대를 갈망하는 인간의 본성",
+  "theme_ko": "자신의 존재·정체성 확인을 위해 타인과의 교제·유대를 갈망하는 인간의 본성",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Although the wish to be alone is often strong, its intensity varies from person to person.",
+    "grammar": [
+     {
+      "tag": "양보 although",
+      "note": "'~이지만'으로 대조 도입"
+     },
+     {
+      "tag": "its 지칭",
+      "note": "its = the wish의"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "An equally impelling impulse, though, is to seek the company of others and to spend extended periods of time sharing activities.",
+    "grammar": [
+     {
+      "tag": "병렬 to부정사",
+      "note": "to seek ~ and to spend ~ 대등 연결"
+     },
+     {
+      "tag": "though 삽입",
+      "note": "'하지만'의 역접 부사"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "In these periods we exchange information and feelings in both conversational and non-verbal forms (facial expressions, eye contact, gestures, touching, and so on).",
+    "grammar": [
+     {
+      "tag": "these 지칭",
+      "note": "these periods = 교제하는 시간"
+     },
+     {
+      "tag": "both A and B",
+      "note": "대화·비언어 두 형태 모두"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "We need other people to provide us with love, support, approval, bodily contact, reassurance, physical help and a myriad of other practical, physical and emotional needs.",
+    "grammar": [
+     {
+      "tag": "need+O+to부정사",
+      "note": "사람들이 제공해 주도록 필요로 함(5형식)"
+     },
+     {
+      "tag": "myriad of",
+      "note": "무수히 많은"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "In a very basic sense we need others to confirm that we are there, that we exist and that we have an identity that is unique and separate from anyone else.",
+    "grammar": [
+     {
+      "tag": "need+O+to부정사",
+      "note": "others가 confirm해 주도록 필요로 함"
+     },
+     {
+      "tag": "that절 나열",
+      "note": "that ~, that ~ and that ~ 병렬"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Thus, we generally cannot exist for too long without seeking companionship.",
+    "grammar": [
+     {
+      "tag": "cannot ~ without",
+      "note": "'~하지 않고는 …할 수 없다'(이중부정)"
+     },
+     {
+      "tag": "Thus 결론",
+      "note": "앞 내용의 귀결"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit10-3",
+  "title": "단일 재배 농업이 원치 않는 종의 번식을 도운 생태적 결과",
+  "theme_ko": "단일 재배 농업이 잡초·해충 같은 원치 않는 종의 번식을 도운 생태적 결과",
+  "structure": "비교·대조",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "At one end of the spectrum of transformations was the forest gardening as practiced by the peoples of New Guinea and Amazonia that mimicked natural growth and left minimal traces on the land.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "forest gardening 수식"
+     },
+     {
+      "tag": "분사(과거분사구)",
+      "note": "as practiced by the peoples = as (it was) practiced — forest gardening 수식(수동)"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "At the other end was monoculture: cultivating only one species of plant or raising only one species of animal.",
+    "grammar": []
+   },
+   {
+    "id": 3,
+    "english": "The beginnings of monoculture can be seen in the wheat fields of the Middle East, the rice paddies of China, and the herds of sheep and goats on the Eurasian steppe.",
+    "grammar": [
+     {
+      "tag": "병렬 명사구",
+      "note": "밀밭/논/양·염소 무리"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Biologically speaking, these species suddenly became very successful, measured by their rates of survival and reproduction.",
+    "grammar": [
+     {
+      "tag": "분사 measured",
+      "note": "'~로 측정될 때'"
+     },
+     {
+      "tag": "Biologically speaking",
+      "note": "'생물학적으로 말하면'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "So did other, unwanted species.",
+    "grammar": [
+     {
+      "tag": "도치(So+동사+주어)",
+      "note": "앞 문장을 받아 '~도 그랬다'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Crops that ripened or were stored after harvesting attracted rats, mice, sparrows, and roaches.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "Crops 수식"
+     },
+     {
+      "tag": "수동 were stored",
+      "note": "'저장된'"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "Water pools provided habitats for mosquitoes.",
+    "grammar": [
+     {
+      "tag": "provide A for B",
+      "note": "B에게 A를 제공하다"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "Garbage and human or animal waste attracted flies.",
+    "grammar": [
+     {
+      "tag": "병렬 주어",
+      "note": "Garbage and ... waste"
+     }
+    ]
+   },
+   {
+    "id": 9,
+    "english": "Thanks to humans, weeds and pests were also biological winners.",
+    "grammar": [
+     {
+      "tag": "Thanks to",
+      "note": "'~덕분에'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit11-ANALYSIS",
+  "title": "자신을 고양하려는 욕구로 소셜미디어 반응을 확인·삭제하는 십대들의 행동",
+  "theme_ko": "자신을 고양하려는 욕구로 소셜미디어 반응을 확인하고 게시물을 삭제하는 십대들의 행동",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Observation studies of teenagers using social media have discovered one peculiar behaviour in particular that sets them apart — teenagers will post or share something on social media, but then they'll monitor the post to gauge the volume of reactions.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "behaviour 수식"
+     },
+     {
+      "tag": "대시 부연",
+      "note": "독특한 행동을 풀어 설명"
+     },
+     {
+      "tag": "분사(현재분사 수식)",
+      "note": "teenagers using social media = teenagers who use~ (후치수식)"
+     },
+     {
+      "tag": "공통 조동사 will",
+      "note": "will [post] or [share] — will이 두 동사에 공통"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "After a set amount of time, if the number of resulting 'Likes' and 'Shares' is too low, they'll delete the content.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Sometimes within the first ten minutes!",
+    "grammar": [
+     {
+      "tag": "생략·강조",
+      "note": "(they delete it) within ten minutes"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Their aim of posting is to earn recognition for what they're sharing as a way to self-enhance.",
+    "grammar": [
+     {
+      "tag": "관계사 what",
+      "note": "for의 목적어 '~하는 것'"
+     },
+     {
+      "tag": "as a way to",
+      "note": "'~하는 방법으로서'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "If the recognition is insufficient, they'd rather delete the content than suffer perceived judgement from others against their failed efforts to self-enhance.",
+    "grammar": [
+     {
+      "tag": "would rather A than B",
+      "note": "'B하느니 A하겠다'"
+     },
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Not getting a reaction has a negative effect on their self-esteem.",
+    "grammar": [
+     {
+      "tag": "동명사 주어",
+      "note": "Not getting a reaction"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit11-1",
+  "title": "예측 실패 시 시점을 바꿔 오류를 회피하는 비관론자들의 전략",
+  "theme_ko": "예측 실패 시 시점을 바꿔 오류를 회피하고 안전을 도모하는 비관론자들의 전략",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "The reason pessimists often sound smart is that they can avoid being 'wrong' by moving the goalposts.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "is의 보어"
+     },
+     {
+      "tag": "by -ing",
+      "note": "'~함으로써'"
+     },
+     {
+      "tag": "관계부사 생략",
+      "note": "The reason [why] pessimists sound smart — reason 뒤 why 생략"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "When a doomer predicts that the world will end in five years, and it doesn't, they just shift the date.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "predicts의 목적어"
+     },
+     {
+      "tag": "대동사 doesn't",
+      "note": "end 대신"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "The American biologist Paul R. Ehrlich — author of the 1968 book The Population Bomb — has been doing this for decades.",
+    "grammar": [
+     {
+      "tag": "대시 동격",
+      "note": "저서 정보 부연"
+     },
+     {
+      "tag": "현재완료진행",
+      "note": "계속 해 오고 있다"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "In 1970 he said that 'sometime in the next 15 years, the end will come. And by \"the end\" I mean an utter breakdown of the capacity of the planet to support humanity.'",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "said의 목적어"
+     },
+     {
+      "tag": "동격 the end",
+      "note": "'종말'의 뜻 부연"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Of course, that was terribly wrong.",
+    "grammar": [
+     {
+      "tag": "지시 that",
+      "note": "앞 예측을 받음"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "He had another go: he said that 'England will not exist in the year 2000.'",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "said의 목적어"
+     },
+     {
+      "tag": "have another go",
+      "note": "'다시 한 번 하다'"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "Wrong again.",
+    "grammar": [
+     {
+      "tag": "생략",
+      "note": "(He was) wrong again"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "Ehrlich will keep pushing this deadline back.",
+    "grammar": [
+     {
+      "tag": "will keep -ing",
+      "note": "'계속 ~할 것이다'"
+     },
+     {
+      "tag": "push back",
+      "note": "미루다"
+     }
+    ]
+   },
+   {
+    "id": 9,
+    "english": "A pessimistic stance is a safe one.",
+    "grammar": [
+     {
+      "tag": "보어 명사",
+      "note": "a safe one = a safe stance"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit11-2",
+  "title": "개인의 기억과 경험적 대본(script)을 바탕으로 이루어지는 주관적 이해 과정",
+  "theme_ko": "개인의 기억과 경험적 대본(script)을 바탕으로 이루어지는 주관적인 이해 과정",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "We all understand differently — this much is obvious.",
+    "grammar": [
+     {
+      "tag": "대시 부연",
+      "note": "this much is obvious 덧붙임"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "The reason we understand differently is that our memories are different.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "is의 보어"
+     },
+     {
+      "tag": "관계부사 생략",
+      "note": "The reason [why] we understand differently — reason 뒤 why 생략"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Our experiences simply are not yours.",
+    "grammar": [
+     {
+      "tag": "be동사 강조",
+      "note": "simply are not"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "In order to understand anything, we must find the closest item in memory to which it relates.",
+    "grammar": [
+     {
+      "tag": "전치사+관계대명사 to which",
+      "note": "item을 수식"
+     },
+     {
+      "tag": "In order to",
+      "note": "'~하기 위해'"
+     },
+     {
+      "tag": "최상급",
+      "note": "the closest item — 최상급"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Schank and Abelson claimed that understanding required one to find the correct knowledge structure, and to use that structure to create expectations for what events were likely to take place, so that new events could be understood in terms of what was normal.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "claimed의 목적어"
+     },
+     {
+      "tag": "so that",
+      "note": "'~하도록/그 결과'"
+     },
+     {
+      "tag": "관계사 what",
+      "note": "'~하는 것'"
+     },
+     {
+      "tag": "수동태",
+      "note": "could be understood — 조동사+be+p.p."
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Thus, when a story about a cocktail party was being told, an understander brought out his cocktail party script which told him about what ordinarily happens at cocktail parties, and he used that script to guide his understanding of the story he was about to hear.",
+    "grammar": [
+     {
+      "tag": "관계사 which",
+      "note": "script 부연"
+     },
+     {
+      "tag": "관계사 what",
+      "note": "'~하는 것'"
+     },
+     {
+      "tag": "수동태(진행)",
+      "note": "a story ... was being told — be being p.p."
+     },
+     {
+      "tag": "목적격 관계대명사 생략",
+      "note": "the story [which] he was about to hear — 목적격 관계대명사 생략"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit11-3",
+  "title": "위험을 알리는 붉은색의 특성과 야생 동물이 이를 기피하는 현상",
+  "theme_ko": "시각적 충격과 위험을 알리는 붉은색의 특성과 야생 동물이 위장을 위해 이를 기피하는 현상",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Of all the colours of the rainbow the one that makes the greatest impact on the eye is red.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "the one 수식"
+     },
+     {
+      "tag": "최상급 the greatest",
+      "note": "가장 큰 영향"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "There is something instantly arresting about the colour of fire and danger.",
+    "grammar": [
+     {
+      "tag": "There is something ... about",
+      "note": "'~에는 ~한 무언가가 있다'"
+     },
+     {
+      "tag": "현재분사 arresting",
+      "note": "형용사적"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "It is charged with alarm and urgency.",
+    "grammar": [
+     {
+      "tag": "수동 be charged with",
+      "note": "'~로 가득 차다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "We have red fire engines, red warning lights and the Red Cross.",
+    "grammar": [
+     {
+      "tag": "병렬 명사",
+      "note": "fire engines/warning lights/Red Cross"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "If we want something to be seen from a distance, such as a post box or (formerly) a telephone kiosk, we paint it red.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "수동 to be seen",
+      "note": "'보이도록'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Perhaps it is because red is so obvious that few wild animals are truly red: even the so-called Red Squirrel and the Red Deer are really shades of reddish-brown that conceal rather than advertise.",
+    "grammar": [
+     {
+      "tag": "so ... that",
+      "note": "'너무 ~해서 …하다'"
+     },
+     {
+      "tag": "A rather than B",
+      "note": "'B라기보다 A'"
+     },
+     {
+      "tag": "관계사 that",
+      "note": "reddish-brown 수식"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "Relatively few butterflies are red either.",
+    "grammar": [
+     {
+      "tag": "either",
+      "note": "'~도 (아니다)'"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "In Britain, and indeed, in all mainland Europe, only one species has a pattern of full-on bright red, like a splash of blood: the Red Admiral.",
+    "grammar": [
+     {
+      "tag": "only one",
+      "note": "'단 하나의'"
+     },
+     {
+      "tag": "비유 like",
+      "note": "'~처럼'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit12-ANALYSIS",
+  "title": "조용한 전기차 시대에 생존을 좌우하는 청각 정보의 중요성",
+  "theme_ko": "시각이 지배적 감각이지만 조용한 전기차 시대에 생존을 좌우하는 청각 정보의 중요성",
+  "structure": "통념→반박(반전)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Vision is our dominant sense, and you want to look both ways before crossing the street — it's the first thing parents drill into their children.",
+    "grammar": [
+     {
+      "tag": "관계사 생략(목적격)",
+      "note": "the first thing (that) parents drill — that 생략"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "But that doesn't mean our sense of hearing isn't a big deal.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "mean의 목적어절(that 생략)"
+     },
+     {
+      "tag": "이중부정",
+      "note": "doesn't mean ... isn't a big deal — 부정+부정=강한 긍정(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "I don't have to mention the worn-out example of cavemen and hidden saber-toothed tigers.",
+    "grammar": [
+     {
+      "tag": "don't have to",
+      "note": "~할 필요가 없다"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "There's something that can sneak up and kill you today: a silent electric car.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "something 수식"
+     },
+     {
+      "tag": "병렬 공통 조동사 can",
+      "note": "can [sneak up and] [kill] — can이 두 동사에 공통"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "These pose an unanticipated but serious threat to pedestrians and bicyclists, who depend on engine noise to detect and orient to cars — so much so that the National Highway Traffic Safety Administration now requires slow-moving electric vehicles to generate a warning noise.",
+    "grammar": [
+     {
+      "tag": "계속적 용법 who",
+      "note": "pedestrians and bicyclists 부연"
+     },
+     {
+      "tag": "so much so that",
+      "note": "'그 정도가 심해서 (결과)'"
+     },
+     {
+      "tag": "병렬 공통 to",
+      "note": "to [detect] and [orient to] cars — to가 두 부정사에 공통"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "It's a reminder that even for us in a modern city, having both cues can mean the difference between life and death.",
+    "grammar": [
+     {
+      "tag": "동격 that",
+      "note": "a reminder 뒤 내용 부연"
+     },
+     {
+      "tag": "동명사 주어",
+      "note": "having both cues"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit12-1",
+  "title": "편의성·건강·취향 변화로 달라지거나 사라지는 것처럼 보이는 음식 조리법과 전통",
+  "theme_ko": "편의성·건강·취향의 변화로 인해 달라지거나 사라지는 것처럼 보이는 음식 조리법과 전통",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Sometimes traditions may change or appear to end because of convenience or changes in taste.",
+    "grammar": [
+     {
+      "tag": "조동사 may",
+      "note": "'~일 수도 있다'(추측)"
+     },
+     {
+      "tag": "공통 조동사 may",
+      "note": "may [change] or [appear to end] — may가 공통"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "For example, to make a pumpkin pie, a cook used to have to first find a pumpkin of suitable size, cut it, peel it, cook it, and mash it, all before combining it with other ingredients and pouring the mixture into a crust.",
+    "grammar": [
+     {
+      "tag": "used to",
+      "note": "(과거엔) ~하곤 했다"
+     },
+     {
+      "tag": "부정사 to make",
+      "note": "'~하기 위해'"
+     },
+     {
+      "tag": "병렬구조",
+      "note": "find, cut it, peel it, cook it, and mash it — 동사원형 병렬(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Now, cooks may choose to use canned pumpkin from the supermarket and cut out a great deal of labor and time.",
+    "grammar": [
+     {
+      "tag": "조동사 may",
+      "note": "'~할 수도 있다'(선택 가능)"
+     },
+     {
+      "tag": "공통 조동사 may",
+      "note": "may [choose to use...] and [cut out...] — may가 공통"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Another changing food tradition is that many families no longer make refried beans by cooking them in lard and choose instead to use vegetable shortening.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "is의 보어"
+     },
+     {
+      "tag": "no longer",
+      "note": "더 이상 ~ 않다"
+     },
+     {
+      "tag": "instead",
+      "note": "대신에"
+     },
+     {
+      "tag": "병렬구조",
+      "note": "[no longer make...] and [choose instead to use...] — many families에 공통"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Perhaps this change came about because the family has come to prefer the taste of beans without lard, because concepts of healthy cooking have changed, or because someone in the family has heart disease or high cholesterol.",
+    "grammar": [
+     {
+      "tag": "이유 because(병렬)",
+      "note": "because A, because B, or because C"
+     },
+     {
+      "tag": "came about",
+      "note": "생겨나다"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit12-2",
+  "title": "가격 상승으로 소비를 억제하고 자원 보존을 유도하는, 예측이 간과한 시장 기능의 힘",
+  "theme_ko": "자원 고갈 예측이 간과하는, 가격 상승으로 소비를 억제하고 보존을 유도하는 시장 기능의 힘",
+  "structure": "통념→반박(반전)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Forecasters who predict resource depletion often ignore or underestimate the power of markets.",
+    "grammar": [
+     {
+      "tag": "관계사 who",
+      "note": "Forecasters 수식"
+     },
+     {
+      "tag": "공통 목적어(병렬)",
+      "note": "[ignore] or [underestimate] the power of markets — 목적어 공통"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "For example, some forecasters use a current reserve index to estimate how long a resource would last.",
+    "grammar": [
+     {
+      "tag": "부정사 to estimate",
+      "note": "'추정하기 위해'"
+     },
+     {
+      "tag": "의문사 how long",
+      "note": "'얼마나 오래'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "The current reserve index divides the current known reserve of a resource by the amount currently used each period.",
+    "grammar": [
+     {
+      "tag": "divide A by B",
+      "note": "A를 B로 나누다"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "So, if we know of 445 billion barrels of oil, and we are currently using 15 billion barrels per year, the index indicates that we will run out of oil in about 30 years.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "명사절 that",
+      "note": "indicates의 목적어"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Some studies, like the Limits to Growth, further assume that demand will increase each year, thus depleting resources even faster.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "assume의 목적어"
+     },
+     {
+      "tag": "비교급 강조 even",
+      "note": "'훨씬 더'"
+     },
+     {
+      "tag": "분사구문",
+      "note": "thus depleting resources even faster — 결과의 분사구문"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "But what they fail to see is that if markets are allowed to do their usual duty, that is, prices rise as depletion occurs, resources will last much longer.",
+    "grammar": [
+     {
+      "tag": "관계사 what",
+      "note": "'~하는 것'(주어절)"
+     },
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "that is",
+      "note": "'즉'(부연)"
+     },
+     {
+      "tag": "수동태 be allowed",
+      "note": "if markets are allowed to ~ — be+p.p."
+     },
+     {
+      "tag": "비교급 much longer",
+      "note": "resources will last much longer — much 강조 비교급"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit12-3",
+  "title": "프로젝트 팀 내 의견 차이의 긍정적 가치와 이를 조기에 해결해야 하는 리더의 역할",
+  "theme_ko": "프로젝트 팀 내 의견 차이의 긍정적 가치와, 이를 조기에 찾아 해결해야 하는 리더의 역할",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Project leaders should not be surprised when disagreements emerge within the team.",
+    "grammar": [
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     },
+     {
+      "tag": "감정 형용사 surprised",
+      "note": "should not be surprised: 조동사+원형, surprised는 감정 형용사"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "In fact, they should expect them.",
+    "grammar": [
+     {
+      "tag": "대명사 them",
+      "note": "= disagreements(이견)"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "If they remain hidden, the leader may even want to seek them out for at least two reasons.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "seek out",
+      "note": "찾아내다"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "First, different views can bring with them good ideas about the project and how it might be run.",
+    "grammar": [
+     {
+      "tag": "bring with them",
+      "note": "'~을 함께 가져오다'"
+     },
+     {
+      "tag": "의문사 how",
+      "note": "'어떻게 ~하는지'"
+     },
+     {
+      "tag": "수동태 be run",
+      "note": "how it might be run — 조동사+be+p.p."
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Although snap decisions about project changes should be avoided, leaders should be open to new and better ways to run the project.",
+    "grammar": [
+     {
+      "tag": "수동 should be avoided",
+      "note": "'피해져야 한다'"
+     },
+     {
+      "tag": "be open to",
+      "note": "~에 열려 있다"
+     },
+     {
+      "tag": "양보 접속사 although",
+      "note": "Although ~ should be avoided, 주절 — 양보(⑤)"
+     },
+     {
+      "tag": "비교급 better",
+      "note": "new and better ways — 비교급"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Second, when conflicting viewpoints are found, they are more easily resolved earlier rather than later in the project.",
+    "grammar": [
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     },
+     {
+      "tag": "수동 are found/resolved",
+      "note": "'발견·해결되다'"
+     },
+     {
+      "tag": "A rather than B",
+      "note": "'B보다 A'"
+     },
+     {
+      "tag": "비교급 more easily",
+      "note": "more easily resolved — more 비교급"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "Although team members may disagree about one or another aspect of the project, most simply want their ideas considered and resolved.",
+    "grammar": [
+     {
+      "tag": "접속사 although(양보)",
+      "note": "주절과 대조"
+     },
+     {
+      "tag": "분사 considered/resolved",
+      "note": "'고려·해결되는'"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "The team tends to look to the project leader to play the lead role in resolving differences, and members will generally defer to the leader if they believe their views have been given due consideration.",
+    "grammar": [
+     {
+      "tag": "look to A to B",
+      "note": "'A가 B하기를 기대하다'"
+     },
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "수동 have been given",
+      "note": "'주어져 왔다'"
+     },
+     {
+      "tag": "접속사 that 생략",
+      "note": "they believe (that) their views ~ — believe 뒤 that 생략"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "서술형 Practice",
+  "title": "음악 훈련이 뇌의 음악 처리를 우반구(감정)에서 좌반구(언어)로 이동시키는 변화",
+  "theme_ko": "음악 훈련이 뇌의 음악 처리 영역을 우반구(감정)에서 좌반구(언어)로 이동시키는 신경학적 변화",
+  "structure": "비교·대조",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "There is no question that learning to sing or play a musical instrument changes the structure of your brain.",
+    "grammar": [
+     {
+      "tag": "동격 that",
+      "note": "no question 뒤 내용 부연"
+     },
+     {
+      "tag": "부정사 to sing",
+      "note": "learning의 목적어"
+     },
+     {
+      "tag": "동명사 주어 수일치",
+      "note": "learning to sing or play ... changes — 동명사구 주어=단수(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "If you enjoy music but have no special training, then your brain processes it mostly through its right hemisphere, the side of the brain that deals with emotion.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~라면'"
+     },
+     {
+      "tag": "관계사 that",
+      "note": "the side 수식"
+     },
+     {
+      "tag": "동격",
+      "note": "the side … = right hemisphere"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "In the face of music, you are 'right-lateralised'.",
+    "grammar": [
+     {
+      "tag": "수동태",
+      "note": "you are 'right-lateralised' — be+p.p."
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Many studies show that musical training shifts the brain's processing of music to its left hemisphere; musicians are left-brained.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "show의 목적어"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "There are several guesses about why this happens.",
+    "grammar": [
+     {
+      "tag": "의문사 why",
+      "note": "'왜 ~하는지'(전치사 about의 목적어절)"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "One explanation is that they have learned to hear music more like language, discerning a level of structural complexity beyond the grasp of ordinary listeners.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "is의 보어"
+     },
+     {
+      "tag": "분사구문 discerning",
+      "note": "'분간하면서'"
+     },
+     {
+      "tag": "A more like B",
+      "note": "'B에 더 가깝게'"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "When trained musicians hear music, it activates the part of the brain associated with language comprehension.",
+    "grammar": [
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     },
+     {
+      "tag": "분사 associated with",
+      "note": "'~와 관련된'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit13-ANALYSIS",
+  "title": "연설을 공연이 아닌 의사소통으로 인식할 필요성과 실수가 주는 인간적 매력",
+  "theme_ko": "연설을 공연이 아닌 의사소통으로 인식해야 할 필요성과 실수가 주는 인간적인 매력",
+  "structure": "통념→반박(반전)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "One of the biggest reasons people are concerned about making a mistake in a speech is that they view speechmaking as a performance rather than an act of communication.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "is의 보어(is that ~)"
+     },
+     {
+      "tag": "A rather than B",
+      "note": "'B라기보다 A'"
+     },
+     {
+      "tag": "최상급",
+      "note": "One of the biggest reasons — biggest 최상급"
+     },
+     {
+      "tag": "관계부사 생략",
+      "note": "the reasons [why] people are concerned — reasons 뒤 why 생략"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "They feel the audience is judging them against a scale of absolute perfection in which every misstated word or awkward gesture will count against them.",
+    "grammar": [
+     {
+      "tag": "관계사 in which",
+      "note": "perfection 수식"
+     },
+     {
+      "tag": "명사절 생략",
+      "note": "feel (that) ~"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "But speech audiences are not like judges in a violin recital or an ice-skating contest.",
+    "grammar": [
+     {
+      "tag": "비교 not like",
+      "note": "'~와 같지 않다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "They are not looking for a virtuoso performance, but for a well-thought-out address that communicates the speaker's ideas clearly and directly.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "address 수식"
+     },
+     {
+      "tag": "상관접속사 not A but B",
+      "note": "not looking for a performance, but for an address(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Sometimes an error or two can actually enhance a speaker's appeal by making her or him seem more human.",
+    "grammar": [
+     {
+      "tag": "by -ing",
+      "note": "'~함으로써'"
+     },
+     {
+      "tag": "make + 목적어 + 원형",
+      "note": "'~을 …하게 하다'"
+     },
+     {
+      "tag": "비교급",
+      "note": "seem more human — more+형용사 비교급"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit13-1",
+  "title": "수질 정화·폐기물 처리를 위해 생물 공학적으로 설계·건설되는 인간 건설 생태계",
+  "theme_ko": "수질 정화와 폐기물 처리를 위해 생물 공학적으로 설계·건설되는 인간 건설 생태계의 기능",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Some ecosystems, over a wide range of sites and purposes, are constructed by humans.",
+    "grammar": [
+     {
+      "tag": "수동태 are constructed",
+      "note": "'건설된다'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "For example, we may construct shallow ponds or a series of canals known as bioswales that collect runoff of surface water.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "canals 수식"
+     },
+     {
+      "tag": "분사 known as",
+      "note": "'~로 알려진'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Marsh plants, such as cattails, when planted in ponds or canals, use and remove nutrients in water that's delivered to them as a waste or pollutant, helping clean the water.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "water 수식"
+     },
+     {
+      "tag": "분사구문",
+      "note": "when planted ~ / helping clean the water — 분사구문(⑤)"
+     },
+     {
+      "tag": "수동태",
+      "note": "water that's delivered to them — is delivered, be+p.p."
+     },
+     {
+      "tag": "공통 목적어",
+      "note": "[use] and [remove] nutrients — 목적어 nutrients 공통"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Specially designed wetland ecosystems have been constructed where bacteria and plants process mine wastewater and help remove toxins from water.",
+    "grammar": [
+     {
+      "tag": "수동태 have been constructed",
+      "note": "'건설되어 왔다'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Other large-scale ecosystems are constructed to partially treat urban wastewater.",
+    "grammar": [
+     {
+      "tag": "부정사 to treat",
+      "note": "'처리하기 위해'"
+     },
+     {
+      "tag": "수동태",
+      "note": "are constructed — be+p.p."
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Human-constructed ecosystems are part of what is known as biological engineering.",
+    "grammar": [
+     {
+      "tag": "관계사 what",
+      "note": "'~라고 알려진 것'"
+     },
+     {
+      "tag": "수동태",
+      "note": "what is known as biological engineering — is known as"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit13-2",
+  "title": "비음성 모바일 소통의 급격한 확산에 따른 대면 소통 소멸에 대한 우려",
+  "theme_ko": "비음성 모바일 소통의 급격한 확산에 따른 대면 소통 소멸에 대한 우려",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Mobile communications have changed the way we interact with our computers and, as more time is spent on mobile devices, emoticon use has followed.",
+    "grammar": [
+     {
+      "tag": "수동 is spent",
+      "note": "'소비되다'"
+     },
+     {
+      "tag": "관계부사 생략",
+      "note": "the way (that/how) we interact — the way 뒤 관계부사 생략"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "Cellular phones, smartphones, tablets, and similar technologies have penetrated the world at an enormous rate and non-voice communications have become the norm rather than the rule.",
+    "grammar": [
+     {
+      "tag": "A rather than B",
+      "note": "'B가 아니라 A'"
+     },
+     {
+      "tag": "현재완료 have penetrated",
+      "note": "'침투해 왔다'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "In 2013, the number of mobile subscriptions almost equaled the estimated number of individuals that made up the global population in the same year.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "individuals 수식"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Users of these technologies have posted, pinned, tweeted, sent and/or received billions of electronic messages through public or private (text messages, emails, etc.) means.",
+    "grammar": [
+     {
+      "tag": "병렬 동사",
+      "note": "posted·pinned·tweeted·sent·received"
+     },
+     {
+      "tag": "공통 조동사 have",
+      "note": "have [posted, pinned, tweeted, sent, received] — have가 공통"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "These communications media have become so prolific, researchers have worried that face-to-face communications could become extinct.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "worried의 목적어"
+     },
+     {
+      "tag": "so+형용사+(that) 강조·결과",
+      "note": "so prolific, (that) researchers worried — that 생략(⑤)"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit13-3",
+  "title": "감정적으로 흥분한 아이의 짜증을 진정시키기 위한 포옹과 공감적 반응의 중요성",
+  "theme_ko": "감정적으로 흥분한 아이의 짜증을 진정시키기 위한 포옹과 공감적 반응의 중요성",
+  "structure": "문제→해결(방안)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "When a region of the emotional brain is overexcited due to frustration, sadness or any other intense emotion, the child is not able to contain their mood.",
+    "grammar": [
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     },
+     {
+      "tag": "수동 is overexcited",
+      "note": "'과도하게 흥분되다'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "This is when the tantrums occur — situations in which the child closes in on themself and is not able to do what they are told — or comments are made which the parents find hard to deal with.",
+    "grammar": [
+     {
+      "tag": "전치사+관계 in which",
+      "note": "situations 수식"
+     },
+     {
+      "tag": "관계사 which",
+      "note": "comments 수식"
+     },
+     {
+      "tag": "관계사 what",
+      "note": "'~하는 것'"
+     },
+     {
+      "tag": "수동태",
+      "note": "comments are made / what they are told — be+p.p."
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Literally, the child is outside themselves, outside their rational part.",
+    "grammar": [
+     {
+      "tag": "재귀대명사 themselves",
+      "note": "주어=목적어"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "To help them calm down, and to see reason, the best strategy is a hug and an empathic reflection of the situation to defuse the intensity of the emotion.",
+    "grammar": [
+     {
+      "tag": "명사 보어",
+      "note": "the best strategy is a hug"
+     },
+     {
+      "tag": "부정사 부사적용법(목적)",
+      "note": "To help ~, to see ~, ... to defuse ~ — 목적의 부정사(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "A spoken word will form a bridge between the two worlds, allowing the child's rational brain to help soothe their emotions, or at least give them the ability to listen to what their parents are saying.",
+    "grammar": [
+     {
+      "tag": "분사구문 allowing",
+      "note": "'~하게 하면서'"
+     },
+     {
+      "tag": "관계사 what",
+      "note": "'~하는 것'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit14-ANALYSIS",
+  "title": "위급 상황에서 타인의 존재로 책임감이 분산되어 발생하는 방관자 효과",
+  "theme_ko": "위급 상황에서 타인의 존재로 인해 책임감이 분산되어 발생하는 방관자 효과",
+  "structure": "통념→반박(반전)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Social psychology tells us that bystanders in emergency situations are acting normally when they fail to respond.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "tells us의 목적어"
+     },
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "We would fail to respond as well.",
+    "grammar": [
+     {
+      "tag": "조동사 would",
+      "note": "'(그런 상황이면) ~할 것이다'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "That social psychological insight makes us uncomfortable.",
+    "grammar": [
+     {
+      "tag": "지시 That",
+      "note": "앞 통찰을 받음"
+     },
+     {
+      "tag": "make + 목적어 + 형용사",
+      "note": "'~을 …하게 만들다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "We like to feel we would behave differently, better.",
+    "grammar": [
+     {
+      "tag": "명사절 생략",
+      "note": "feel (that) ~"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "The problem with bystanders, however, does not stem from defects in their character that prevent them from helping.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "defects 수식"
+     },
+     {
+      "tag": "prevent A from -ing",
+      "note": "'A가 ~하지 못하게 하다'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Rather, the situation that bystanders find themselves in constrains their behavior more than we realize.",
+    "grammar": [
+     {
+      "tag": "관계사 that",
+      "note": "the situation 수식"
+     },
+     {
+      "tag": "비교 more than",
+      "note": "'~보다 더'"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "For example, the more bystanders there are, the less likely any one of them will intervene.",
+    "grammar": [
+     {
+      "tag": "형용사 likely + 절",
+      "note": "the less likely (that) ~ : '~할 것 같은/가능성이 있는'"
+     },
+     {
+      "tag": "the 비교급~, the 비교급~",
+      "note": "the more bystanders ~, the less likely ~ — 비례 비교(⑤)"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "A single bystander at the scene of an emergency would usually respond, just as we hope we would.",
+    "grammar": [
+     {
+      "tag": "가정법 would",
+      "note": "'(혼자라면) ~할 것이다'"
+     },
+     {
+      "tag": "just as",
+      "note": "'꼭 ~처럼'"
+     },
+     {
+      "tag": "반복어구 생략(대동사 would)",
+      "note": "just as we hope we would (respond) — respond 반복 생략"
+     }
+    ]
+   },
+   {
+    "id": 9,
+    "english": "But when a number of bystanders witness an emergency, responsibility apparently diffuses among them, getting weaker.",
+    "grammar": [
+     {
+      "tag": "접속사 when",
+      "note": "'~할 때'"
+     },
+     {
+      "tag": "분사구문 getting",
+      "note": "'~해지면서'"
+     }
+    ]
+   },
+   {
+    "id": 10,
+    "english": "No one bystander feels enough personal responsibility to respond.",
+    "grammar": [
+     {
+      "tag": "enough ... to",
+      "note": "'~할 만큼 충분히'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit14-1",
+  "title": "성공을 위해 자리에 없을 때 회자될 평판을 관리하는 퍼스널 브랜딩의 중요성",
+  "theme_ko": "성공을 위해 자리에 없을 때 회자될 평판을 관리하는 퍼스널 브랜딩의 중요성",
+  "structure": "통념→반박(반전)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Personal branding is not something that you have to do behind the scenes.",
+    "grammar": [
+     {
+      "tag": "명사절 that",
+      "note": "something that ~ 목적격 관계사"
+     },
+     {
+      "tag": "not something",
+      "note": "'~하는 것이 아니다'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "For many it does not always feel comfortable to deliberately plan how we are going to promote ourselves and our accomplishments to others.",
+    "grammar": [
+     {
+      "tag": "가주어 it-진주어 to부정사",
+      "note": "it=가주어, to plan ~=진주어"
+     },
+     {
+      "tag": "부분부정",
+      "note": "not always = '항상 ~인 것은 아니다'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Personal branding, however, is essential to achieving success.",
+    "grammar": [
+     {
+      "tag": "however 역접",
+      "note": "앞의 거리낌을 반전"
+     },
+     {
+      "tag": "be essential to -ing",
+      "note": "'~하는 데 필수적이다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "The key takeaway from this concept is awareness and anticipation.",
+    "grammar": [
+     {
+      "tag": "this 지칭",
+      "note": "this concept = 퍼스널 브랜딩"
+     },
+     {
+      "tag": "A and B",
+      "note": "awareness와 anticipation 병렬"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "If you are not aware of the opportunities to brand yourself, you may not be directed to leave a favorable impression.",
+    "grammar": [
+     {
+      "tag": "조건 if",
+      "note": "'~하지 못하면'의 가정·조건"
+     },
+     {
+      "tag": "may not",
+      "note": "'~하지 못할 수도 있다'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "If you cannot anticipate the opportunities that will present themselves to favorably demonstrate your brand through capability, you may not be prepared when they occur.",
+    "grammar": [
+     {
+      "tag": "they 지칭",
+      "note": "they = the opportunities"
+     },
+     {
+      "tag": "관계사 that",
+      "note": "opportunities that ~ 수식"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "So as you begin to think about what you want to be known for, begin to be more aware of what you want people to say about you when you are not in the room as an effective way to guide your personal brand.",
+    "grammar": [
+     {
+      "tag": "what 관계대명사",
+      "note": "what you want ~ '~하는 것'"
+     },
+     {
+      "tag": "명령문 조언",
+      "note": "begin to ~ 실천 지시"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit14-2",
+  "title": "사진 간 시각적 움직임 포착 기술로 이룬 Clyde Tombaugh의 명왕성 발견",
+  "theme_ko": "사진 간 시각적 움직임 포착 기술로 이룬 Clyde Tombaugh의 명왕성 발견",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "The ability to detect visual movement played an interesting role in the history of astronomy.",
+    "grammar": [
+     {
+      "tag": "부정사 형용사적 용법",
+      "note": "the ability to detect: '감지하는 능력'로 명사를 수식"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "In 1930, Clyde Tombaugh was searching the skies for a possible undiscovered planet beyond Neptune.",
+    "grammar": [
+     {
+      "tag": "과거진행",
+      "note": "was searching: 그 시점에 진행 중이던 탐색"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "He photographed each region of the sky twice, several days apart.",
+    "grammar": [
+     {
+      "tag": "부사구",
+      "note": "several days apart: '며칠 간격으로'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Stars essentially remain unmoving in photos, while a planet moves from one photo to the next.",
+    "grammar": [
+     {
+      "tag": "대조의 접속사 while (~인 반면에)",
+      "note": "앞 절(항성 불변)과 while절(행성 이동)을 대조"
+     },
+     {
+      "tag": "현재시제",
+      "note": "일반적 사실을 나타내는 현재"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "However, how would he find a small dot that moved among all the countless unmoving dots in the sky?",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "a small dot that moved: 앞의 명사를 수식하는 주격 관계사"
+     },
+     {
+      "tag": "수사의문문",
+      "note": "'어떻게 찾을까'로 문제를 던지는 형식"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "He put each pair of photos on a machine that would flip back and forth between one photo and the other.",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "a machine that would flip ~: 기계를 수식하는 주격 관계사"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "When he came to one pair of photos, he immediately noticed one dot moving as the machine flipped back and forth.",
+    "grammar": [
+     {
+      "tag": "지각동사+O+-ing",
+      "note": "noticed one dot moving: 점이 움직이는 것을 알아챔"
+     },
+     {
+      "tag": "접속사 as",
+      "note": "'~할 때'의 뜻"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "He identified that dot as Pluto, which astronomers now list as a dwarf planet.",
+    "grammar": [
+     {
+      "tag": "계속적 용법 관계대명사 (, which)",
+      "note": "앞 내용(Pluto)을 부연 설명"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "Unit14-3",
+  "title": "기후 조절이라는 숲의 기능을 망각한 채 이뤄지는 근시안적 목재 남용 비판",
+  "theme_ko": "기후 조절이라는 숲의 기능을 망각한 채 이뤄지는 근시안적 목재 남용 비판",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "People are cutting down forests much faster than the rate at which forests can regrow.",
+    "grammar": [
+     {
+      "tag": "비교급 faster than",
+      "note": "'~보다 더 빠르게' 벌목 속도와 재성장 속도를 비교"
+     },
+     {
+      "tag": "전치사+관계대명사",
+      "note": "the rate at which ~: '~하는 속도'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "We need to dramatically reduce our use of wood, not just because the supply is decreasing, and not just because entire species of flora and fauna that live in forests are vanishing, but because the forest performs an important function.",
+    "grammar": [
+     {
+      "tag": "상관접속사 not (just) A but B",
+      "note": "'~때문만이 아니라 ~때문이다'로 진짜 이유를 강조"
+     },
+     {
+      "tag": "주격 관계대명사 that",
+      "note": "species ... that live in forests"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Forests control global warming by absorbing carbon from the atmosphere and reducing greenhouse gases.",
+    "grammar": [
+     {
+      "tag": "by -ing",
+      "note": "'~함으로써'라는 수단"
+     },
+     {
+      "tag": "동명사 병렬",
+      "note": "absorbing ~ and reducing ~"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "They also provide oxygen for us to breathe.",
+    "grammar": [
+     {
+      "tag": "for + 목적격 + to부정사",
+      "note": "for us to breathe: 부정사의 의미상 주어 us"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "There are too many trivial and shortsighted uses of wood.",
+    "grammar": [
+     {
+      "tag": "There are 구문",
+      "note": "'~가 있다/많다'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "When a hurricane advances on a city, people board up their windows with plywood.",
+    "grammar": [
+     {
+      "tag": "접속사 When",
+      "note": "'~할 때'의 시간 부사절"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "After the storm has passed, they discard the plywood.",
+    "grammar": [
+     {
+      "tag": "현재완료 has passed",
+      "note": "폭풍이 지나간 완료 시점"
+     },
+     {
+      "tag": "접속사 After",
+      "note": "'~한 후에'"
+     }
+    ]
+   },
+   {
+    "id": 8,
+    "english": "It's ironic to think that for purposes such as these, forests are cut down that otherwise would aid in controlling such storms.",
+    "grammar": [
+     {
+      "tag": "가정법 otherwise (그렇지 않다면 ~할 텐데)",
+      "note": "otherwise would aid: 베지 않았다면 도움이 됐을 것"
+     },
+     {
+      "tag": "가주어 It",
+      "note": "It's ironic to think ~"
+     },
+     {
+      "tag": "주격 관계대명사 that",
+      "note": "forests ... that otherwise would aid"
+     }
+    ]
+   }
+  ]
+ }
+]

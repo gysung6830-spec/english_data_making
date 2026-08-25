@@ -1,0 +1,128 @@
+{
+  "misreads": {
+    "Unit12-ANALYSIS||1": [
+      {"statement": "시각은 우리의 지배적인 감각이며, 길을 건너기 전에 양쪽을 살피는 것은 부모가 자녀에게 가장 먼저 가르치는 것이다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "부모가 자녀에게 가장 먼저 가르치는 것은 시각이 지배적 감각이라는 사실 그 자체이다.", "verdict": "X", "trap_type": "지칭", "anchor": "look both ways before crossing the street", "why": "it은 '양쪽을 살피는 것'을 가리키므로 시각이 지배 감각이라는 명제가 아니다."}
+    ],
+    "Unit12-ANALYSIS||2": [
+      {"statement": "필자는 우리의 청각이 그다지 중요한 문제가 아니라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "doesn't mean our sense of hearing isn't a big deal", "why": "이중부정(doesn't mean ~ isn't)으로 청각이 중요하다는 강한 긍정이라 필자 관점과 정반대다."}
+    ],
+    "Unit12-ANALYSIS||3": [
+      {"statement": "필자는 동굴인과 검치호랑이 사례가 청각의 중요성을 보여주는 최고의 근거라고 강조한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "worn-out example", "why": "본문은 진부한(worn-out) 예라 했을 뿐 최고의 근거라는 과장된 평가는 없다."},
+      {"statement": "The caveman example is old and overused.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit12-ANALYSIS||4": [
+      {"statement": "오늘날 몰래 다가와 당신을 죽일 수 있는 것은 소리 없는 전기차이다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "소리 없는 전기차는 몰래 다가오기는 하지만 사람을 죽일 수는 없는 존재로 묘사된다.", "verdict": "X", "trap_type": "구조수식", "anchor": "sneak up and kill you", "why": "can이 sneak up과 kill에 공통으로 걸려 '죽일 수도 있다'까지 포함하므로 죽일 수 없다는 해석은 틀리다."}
+    ],
+    "Unit12-ANALYSIS||5": [
+      {"statement": "보행자와 자전거 이용자는 엔진 소음을 내서 자동차들이 자신을 감지하고 방향을 잡게 한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "depend on engine noise to detect and orient to cars", "why": "소음에 의존해 '차를 감지·정향'하는 주체는 보행자·자전거 이용자이지 그 반대가 아니다.", "killer": true},
+      {"statement": "규제 기관이 전기차에 경고음을 내도록 요구했기 때문에 전기차가 보행자에게 위협이 되기 시작했다.", "verdict": "X", "trap_type": "인과조건", "anchor": "so much so that the National Highway Traffic Safety Administration now requires slow-moving electric vehicles to generate a warning noise", "why": "위협이 심각해서 규제를 요구한 것이지, 규제 때문에 위협이 생긴 것이 아니므로 인과가 뒤집혔다."}
+    ],
+    "Unit12-ANALYSIS||6": [
+      {"statement": "시각과 청각 두 단서를 모두 갖는 것이 현대 도시에서도 삶과 죽음의 차이를 만들 수 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "현대 도시에서도 청각 단서가 생존을 좌우할 수 있는데, 이는 시각 단서가 이제 전혀 쓸모없어졌기 때문이다.", "verdict": "△", "trap_type": "무관정보", "anchor": "having both cues", "why": "청각이 중요하다는 방향은 맞지만 본문은 '두 단서 모두'가 필요하다 했지 시각이 무용해졌다는 근거는 없다."}
+    ],
+
+    "Unit12-1||1": [
+      {"statement": "때로 전통은 편의성이나 취향의 변화 때문에 달라지거나 끝나는 것처럼 보일 수 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "전통이 바뀌거나 사라지기 때문에 사람들의 편의성과 취향이 달라지게 된다.", "verdict": "X", "trap_type": "인과조건", "anchor": "because of convenience or changes in taste", "why": "편의성·취향 변화가 원인이고 전통 변화가 결과인데, 원인과 결과를 거꾸로 뒤집었다."}
+    ],
+    "Unit12-1||2": [
+      {"statement": "예전에 호박 파이를 만들려면 요리사는 적당한 크기의 호박을 찾아 자르고 껍질을 벗기고 익히고 으깨야 했다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "예전 요리사는 호박을 찾기만 하면 되었고, 그것을 자르거나 껍질을 벗기거나 익힐 필요는 없었다.", "verdict": "X", "trap_type": "구조수식", "anchor": "cut it, peel it, cook it, and mash it", "why": "find·cut·peel·cook·mash가 병렬로 모두 필요했으므로 찾기만 하면 됐다는 해석은 병렬 구조를 무시한 것이다."}
+    ],
+    "Unit12-1||3": [
+      {"statement": "요즘 요리사들은 슈퍼마켓의 통조림 호박만을 반드시 사용해야 하며 다른 선택은 전혀 없다.", "verdict": "X", "trap_type": "무관정보", "anchor": "may choose to", "why": "may choose(선택할 수도 있다)라는 가능성 표현이므로 반드시·전혀 같은 단정은 본문에 없다."},
+      {"statement": "Canned pumpkin saves cooks a lot of work and time.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit12-1||4": [
+      {"statement": "필자는 많은 가정이 여전히 라드로 리프라이드 빈을 만드는 것을 선호한다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "no longer make refried beans by cooking them in lard", "why": "no longer(더 이상 ~않다)라 했으므로 여전히 라드를 선호한다는 것은 본문 진술과 반대다."},
+      {"statement": "많은 가정이 이제 라드 대신 쓰던 식물성 쇼트닝을 그만두었다.", "verdict": "X", "trap_type": "주체대상", "anchor": "choose instead to use vegetable shortening", "why": "가정이 새로 택한 것은 식물성 쇼트닝이고 그만둔 것은 라드이므로, 쇼트닝을 그만두었다는 것은 대상을 뒤바꾼 것이다.", "killer": true}
+    ],
+    "Unit12-1||5": [
+      {"statement": "여기서 'this change'는 호박 파이 조리법의 변화를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "this change", "why": "문장 4·5 종합: this change는 앞 문장의 리프라이드 빈 조리법 변화를 가리키지 호박 파이 조리법이 아니다.", "integrative": true},
+      {"statement": "이 변화가 생긴 것은 가족이 라드 없는 맛을 선호하게 되었기 때문이며, 건강 개념과는 무관하다.", "verdict": "△", "trap_type": "인과조건", "anchor": "because concepts of healthy cooking have changed", "why": "맛 선호가 이유라는 방향은 맞지만 본문은 건강 개념 변화도 이유로 들므로 '무관'은 틀리다."}
+    ],
+
+    "Unit12-2||1": [
+      {"statement": "자원 고갈을 예측하는 예측가들은 흔히 시장의 힘을 무시하거나 과소평가한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "필자는 예측가들이 시장의 힘을 정확히 평가한다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "ignore or underestimate the power of markets", "why": "필자는 예측가들이 시장의 힘을 무시·과소평가한다고 보므로 정확히 평가한다는 것은 정반대다."}
+    ],
+    "Unit12-2||2": [
+      {"statement": "일부 예측가는 자원이 얼마나 오래갈지 추정하기 위해 현재 매장량 지수를 사용한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "모든 예측가는 현재 매장량 지수를 사용하여 자원의 정확한 고갈 날짜를 반드시 확정한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "some forecasters", "why": "본문은 '일부(some)' 예측가가 '추정(estimate)'한다고 했을 뿐 모든 예측가가 정확한 날짜를 확정한다는 말은 없다."}
+    ],
+    "Unit12-2||3": [
+      {"statement": "현재 매장량 지수는 기간별 사용량을 현재 알려진 매장량으로 나눈 값이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "divides the current known reserve of a resource by the amount currently used", "why": "지수는 '매장량 ÷ 사용량'인데, '사용량 ÷ 매장량'으로 나누는 대상과 나누는 수를 뒤바꿨다."}
+    ],
+    "Unit12-2||4": [
+      {"statement": "지수가 약 30년 뒤 고갈을 가리키므로, 실제로도 30년 뒤 석유는 반드시 고갈될 것이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the index indicates", "why": "지수가 30년을 '가리킨다'는 방향은 맞지만, 이는 지수의 계산일 뿐 실제 반드시 고갈된다는 결론은 본문 취지와 다르다."}
+    ],
+    "Unit12-2||5": [
+      {"statement": "일부 연구는 자원이 매년 증가하여 수요를 더 빨리 고갈시킨다고 가정한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "demand will increase each year", "why": "매년 증가하는 것은 수요(demand)이고 그 결과 자원이 고갈되는데, 증가 주체와 고갈 대상을 뒤바꿨다.", "killer": true}
+    ],
+    "Unit12-2||6": [
+      {"statement": "여기서 'they'는 시장(markets)을 가리키며, 시장이 보지 못하는 것을 뜻한다.", "verdict": "X", "trap_type": "지칭", "anchor": "what they fail to see", "why": "they는 앞의 예측가·연구들을 가리키지 markets가 아니므로, 보지 못하는 주체는 예측가들이다."},
+      {"statement": "If prices rise, resources will last longer.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+
+    "Unit12-3||1": [
+      {"statement": "프로젝트 리더는 팀 내에서 이견이 생길 때 놀라지 말아야 한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "필자는 팀 내에서 이견이 생기면 리더가 놀라며 경계해야 한다고 조언한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "should not be surprised", "why": "본문은 리더가 '놀라지 말아야' 한다고 했으므로 놀라고 경계하라는 조언은 필자 관점과 반대다."}
+    ],
+    "Unit12-3||2": [
+      {"statement": "여기서 'them'은 프로젝트 리더들을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "they should expect them", "why": "문장 1·2 종합: them은 앞 문장의 이견(disagreements)을 가리키며 프로젝트 리더가 아니다.", "integrative": true}
+    ],
+    "Unit12-3||3": [
+      {"statement": "이견이 숨겨져 있으면 리더는 항상 반드시 세 가지 이상의 이유로 그것들을 찾아내야만 한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "may even want to seek them out for at least two reasons", "why": "본문은 '찾고 싶어 할 수도(may want)' 있고 이유는 '최소 두 가지'라 했으므로 반드시·세 가지 이상은 과장이다."},
+      {"statement": "이견이 숨겨진 채로 있으면, 리더는 적어도 두 가지 이유에서 그것들을 찾아내고 싶어 할 수도 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit12-3||4": [
+      {"statement": "첫째, 서로 다른 관점은 프로젝트와 그것을 운영하는 방식에 대한 좋은 아이디어를 함께 가져올 수 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit12-3||5": [
+      {"statement": "프로젝트 변경에 관한 성급한 결정은 권장되며, 리더는 새로운 방식을 경계해야 한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "snap decisions about project changes should be avoided", "why": "although절은 '성급한 결정은 피해야 한다'는 양보 진술이므로 권장된다는 해석은 양보·부정 범위를 뒤집은 것이다."}
+    ],
+    "Unit12-3||6": [
+      {"statement": "상충하는 관점은 프로젝트 후반에 발견될수록 더 쉽게 해결되므로, 리더는 해결을 미뤄야 한다.", "verdict": "△", "trap_type": "인과조건", "anchor": "earlier rather than later", "why": "쉽게 해결된다는 방향은 맞지만 본문은 '나중보다 이른' 시점이 낫다고 했으므로 후반·미루기는 시점을 뒤집은 것이다."}
+    ],
+    "Unit12-3||7": [
+      {"statement": "필자는 팀원 대부분이 자신의 아이디어가 무시되기를 바란다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "want their ideas considered and resolved", "why": "팀원 대부분은 자기 생각이 '고려되고 해결되기를' 원하므로 무시되기를 바란다는 것은 정반대다."},
+      {"statement": "Most team members want their ideas to be heard.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit12-3||8": [
+      {"statement": "프로젝트 리더는 팀이 이견 해결의 주도적 역할을 맡아 주기를 기대한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "look to the project leader to play the lead role", "why": "주도적 역할을 하도록 기대되는 대상은 리더이고 기대하는 주체는 팀인데, 주체와 대상을 뒤바꿨다.", "killer": true}
+    ]
+  },
+  "spans": {
+    "Unit12-ANALYSIS||1": [["thing parents drill"]],
+    "Unit12-ANALYSIS||2": [[], ["doesn't", "isn't"]],
+    "Unit12-ANALYSIS||3": [["don't have to"]],
+    "Unit12-ANALYSIS||4": [["that"], ["can", "sneak up", "kill"]],
+    "Unit12-ANALYSIS||5": [["who"], ["so much so that"], ["to detect", "and", "orient"]],
+    "Unit12-ANALYSIS||6": [["that"], ["having"]],
+
+    "Unit12-1||1": [["may"], ["may", "change", "appear to end"]],
+    "Unit12-1||2": [["used to"], ["to make"], ["find", "cut it", "peel it", "cook it", "and mash it"]],
+    "Unit12-1||3": [["may"], ["may", "choose to use", "cut out"]],
+    "Unit12-1||4": [["that"], ["no longer"], ["instead"], ["make", "and", "choose"]],
+    "Unit12-1||5": [["because", "or because"], ["came about"]],
+
+    "Unit12-2||1": [["who"], ["ignore", "or", "underestimate"]],
+    "Unit12-2||2": [["to estimate"], ["how long"]],
+    "Unit12-2||3": [["divides", "by"]],
+    "Unit12-2||4": [["if"], ["that"]],
+    "Unit12-2||5": [["that"], ["even"], ["depleting"]],
+    "Unit12-2||6": [["what"], ["if"], ["that is"], ["are allowed"], ["much longer"]],
+
+    "Unit12-3||1": [["when"], ["surprised"]],
+    "Unit12-3||2": [["them"]],
+    "Unit12-3||3": [["If"], ["seek", "out"]],
+    "Unit12-3||4": [["bring with them"], ["how"], ["be run"]],
+    "Unit12-3||5": [["should be avoided"], ["be open to"], ["Although"], ["better"]],
+    "Unit12-3||6": [["when"], ["are found", "resolved"], ["rather than"], ["more easily"]],
+    "Unit12-3||7": [["Although"], ["considered", "resolved"]],
+    "Unit12-3||8": [["look to", "to play"], ["if"], ["have been given"], ["believe their"]]
+  }
+}

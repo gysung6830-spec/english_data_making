@@ -1,0 +1,97 @@
+{
+  "misreads": {
+    "Unit13-2||1": [
+      {"statement": "모바일 기기에 더 많은 시간을 쓰게 되면서 이모티콘 사용도 뒤따라 늘었다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "이모티콘 사용이 늘어난 결과, 사람들이 모바일 기기에 더 많은 시간을 쓰게 되었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "as more time is spent on mobile devices, emoticon use has followed", "why": "모바일 사용 시간 증가가 원인이고 이모티콘 사용 증가가 뒤따른 결과인데, 인과가 뒤바뀜.", "killer": true}
+    ],
+    "Unit13-2||2": [
+      {"statement": "비음성 소통이 일반적 규범이 아니라 예외적인 규칙(rule)이 되었다.", "verdict": "X", "trap_type": "구조수식", "anchor": "the norm rather than the rule", "why": "'A rather than B'로, 비음성 소통은 규칙이 아니라 '규범(norm)'이 되었다는 뜻."},
+      {"statement": "세계가 이 기술들 속으로 침투해 들어갔다.", "verdict": "X", "trap_type": "주체대상", "anchor": "have penetrated the world", "why": "침투한 주체는 기술이고 침투당한 대상이 세계로, 주어·목적어가 뒤바뀜."}
+    ],
+    "Unit13-2||3": [
+      {"statement": "2013년 모바일 가입 건수가 그해 전 세계 인구 추정치와 거의 맞먹었다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "2013년 모바일 가입 건수가 전 세계 인구 추정치를 넘어섰다.", "verdict": "X", "trap_type": "무관정보", "anchor": "almost equaled", "why": "'거의 같았다(almost equaled)'일 뿐 인구를 초과했다는 내용은 없음."}
+    ],
+    "Unit13-2||4": [
+      {"statement": "여기서 'these technologies'는 이모티콘의 여러 종류를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "Users of these technologies", "why": "these technologies는 앞 문장의 휴대폰·스마트폰·태블릿 등 기기를 가리킴.", "integrative": true},
+      {"statement": "Users sent billions of messages with these devices.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit13-2||5": [
+      {"statement": "대면 소통이 사라질 수 있다는 우려가 나오는데, 이는 비음성 매체가 이미 대면 소통을 완전히 대체했기 때문이다.", "verdict": "△", "trap_type": "필자관점", "anchor": "could become extinct", "why": "소멸은 아직 일어나지 않은 '가능성(could)'에 대한 우려이며, 완전 대체는 본문 근거가 아님."}
+    ],
+    "Unit13-3||1": [
+      {"statement": "감정 뇌의 한 영역이 과도하게 흥분하면 아이는 자신의 기분을 억누르지 못한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "아이가 자기 기분을 억누르지 못하기 때문에 감정 뇌의 영역이 과도하게 흥분한다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the child is not able to contain their mood", "why": "뇌 영역의 과흥분이 원인이고 기분 통제 불가가 결과인데, 인과가 뒤집힘."}
+    ],
+    "Unit13-3||2": [
+      {"statement": "문장 첫머리의 This는 아이가 이미 진정된 상태를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "This is when the tantrums occur", "why": "This는 앞 문장의 과흥분 상태, 즉 짜증이 일어나는 순간을 가리킴.", "integrative": true},
+      {"statement": "부모가 다루기 힘들어하는 것은 아이가 남에게서 듣는 말이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "comments are made which the parents find hard to deal with", "why": "관계사 which가 가리키는 것은 (아이가 내뱉는) comments로, 부모가 다루기 힘든 대상은 그 말임."}
+    ],
+    "Unit13-3||3": [
+      {"statement": "아이는 말 그대로 자기 자신, 즉 이성적인 부분 바깥에 있는 상태다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "아이는 물리적으로 부모에게서 멀리 떨어져 나가 있다.", "verdict": "X", "trap_type": "무관정보", "anchor": "outside their rational part", "why": "'이성 바깥(비이성 상태)'을 뜻하며 물리적 이탈·거리는 본문에 없음."}
+    ],
+    "Unit13-3||4": [
+      {"statement": "필자는 아이를 진정시키는 데 포옹이나 공감적 반응은 효과가 없다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "the best strategy is a hug and an empathic reflection", "why": "필자는 포옹과 공감적 반응을 '최선의 전략'으로 제시함."},
+      {"statement": "아이를 진정시키는 최선책은 포옹과 공감적 반응인데, 이는 감정을 완전히 없애기 위해서다.", "verdict": "△", "trap_type": "무관정보", "anchor": "to defuse the intensity of the emotion", "why": "방향은 맞지만 목적은 감정 '강도를 누그러뜨리는' 것이지 완전 제거가 아님."}
+    ],
+    "Unit13-3||5": [
+      {"statement": "말은 부모의 이성적 뇌가 아이의 감정을 진정시키도록 돕는다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the child's rational brain to help soothe their emotions", "why": "감정을 진정시키도록 돕는 주체는 '아이의' 이성적 뇌임.", "killer": true},
+      {"statement": "A kind word can help calm the child.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit14-ANALYSIS||1": [
+      {"statement": "사회심리학에 따르면 위급 상황의 방관자가 반응하지 않는 것은 정상적인 행동이다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "사회심리학은 방관자가 반응하지 않는 것을 비정상적이고 결함 있는 행동으로 규정한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "are acting normally", "why": "본문은 반응하지 않는 것을 '정상적으로 행동하는 것'이라고 봄."}
+    ],
+    "Unit14-ANALYSIS||2": [
+      {"statement": "우리도 (그런 상황이라면) 마찬가지로 반응하지 못할 것이다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit14-ANALYSIS||3": [
+      {"statement": "우리를 불편하게 만드는 That은 우리가 남들보다 더 잘 행동할 것이라는 생각을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "That social psychological insight", "why": "That은 우리도 반응하지 못하는 것이 정상이라는 앞의 통찰(문장 1·2)을 가리킴.", "integrative": true}
+    ],
+    "Unit14-ANALYSIS||4": [
+      {"statement": "우리는 자신이라면 방관자들과 다르게, 더 낫게 행동할 것이라고 느끼고 싶어 한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit14-ANALYSIS||5": [
+      {"statement": "방관자 문제는 남을 돕지 못하게 하는 그들의 성격적 결함에서 비롯된다.", "verdict": "X", "trap_type": "구조수식", "anchor": "does not stem from defects in their character", "why": "'does not stem from'의 부정을 놓쳐, 성격 결함에서 비롯되지 '않는다'를 뒤집음.", "killer": true}
+    ],
+    "Unit14-ANALYSIS||6": [
+      {"statement": "방관자가 처한 상황이 우리가 생각하는 것보다 더 그들의 행동을 제약한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "방관자들이 자신이 처한 상황을 제약한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the situation that bystanders find themselves in constrains their behavior", "why": "제약하는 주체는 '상황'이고 제약받는 것은 방관자의 행동으로, 주어·목적어가 뒤바뀜."}
+    ],
+    "Unit14-ANALYSIS||7": [
+      {"statement": "방관자가 많을수록 그중 누구든 개입할 가능성은 낮아지는데, 이는 방관자들이 서로 돕겠다고 경쟁하기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the more bystanders there are, the less likely any one of them will intervene", "why": "방향은 맞지만 원인은 '경쟁'이 아니라 책임감의 분산(문장 9)임.", "integrative": true}
+    ],
+    "Unit14-ANALYSIS||8": [
+      {"statement": "위급 현장에 방관자가 한 명뿐이면 그는 항상 즉시 반응한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "would usually respond", "why": "'대개(usually)' 반응한다는 것이지 '항상' 즉시 반응한다는 내용은 없음."}
+    ],
+    "Unit14-ANALYSIS||9": [
+      {"statement": "When many people watch, each person feels less responsible.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit14-ANALYSIS||10": [
+      {"statement": "어느 한 명의 방관자도 나서서 반응할 만큼 충분한 개인적 책임감을 느끼지 못한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ]
+  },
+  "spans": {
+    "Unit13-2||1": [["is spent"], ["the way we"]],
+    "Unit13-2||2": [["rather than"], ["have penetrated"]],
+    "Unit13-2||3": [["that"]],
+    "Unit13-2||4": [["posted, pinned, tweeted, sent"], ["have"]],
+    "Unit13-2||5": [["that"], ["so prolific"]],
+    "Unit13-3||1": [["When"], ["is overexcited"]],
+    "Unit13-3||2": [["in which"], ["which the parents"], ["what"], ["are made"]],
+    "Unit13-3||3": [["themselves"]],
+    "Unit13-3||4": [["a hug"], ["To help"]],
+    "Unit13-3||5": [["allowing"], ["what"]],
+    "Unit14-ANALYSIS||1": [["that"], ["when"]],
+    "Unit14-ANALYSIS||2": [["would"]],
+    "Unit14-ANALYSIS||3": [["That"], ["makes", "uncomfortable"]],
+    "Unit14-ANALYSIS||4": [["feel we would"]],
+    "Unit14-ANALYSIS||5": [["that"], ["prevent them from helping"]],
+    "Unit14-ANALYSIS||6": [["that"], ["more than"]],
+    "Unit14-ANALYSIS||7": [["likely"], ["the more", "the less"]],
+    "Unit14-ANALYSIS||8": [["would"], ["just as"], ["we would"]],
+    "Unit14-ANALYSIS||9": [["when"], ["getting"]],
+    "Unit14-ANALYSIS||10": [["enough", "to respond"]]
+  }
+}

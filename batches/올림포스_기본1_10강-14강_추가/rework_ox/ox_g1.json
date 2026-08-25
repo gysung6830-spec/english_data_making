@@ -1,0 +1,72 @@
+{
+  "misreads": {
+    "Unit10-2||1": [
+      {"statement": "혼자 있고 싶은 소망의 강도는 사람마다 다르다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "'its'는 사람마다 다른 개인의 성격을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "its intensity", "why": "its는 the wish(혼자 있고 싶은 소망)를 가리키므로 성격을 지칭하는 것이 아니다."}
+    ],
+    "Unit10-2||2": [
+      {"statement": "People also want to be with others.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true},
+      {"statement": "필자는 혼자 있으려는 충동이 타인과 어울리려는 충동보다 더 강하다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "An equally impelling impulse", "why": "타인과 어울리려는 충동이 '똑같이(equally)' 강하다고 했으므로 어느 한쪽이 더 강한 것이 아니다."}
+    ],
+    "Unit10-2||3": [
+      {"statement": "우리는 표정·눈맞춤·몸짓 같은 비언어적 형태로도 정보와 감정을 주고받는다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "우리는 이 시기에 오직 언어적(대화) 형태로만 정보와 감정을 교환한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "both conversational and non-verbal forms", "why": "언어적·비언어적 형태 '둘 다(both)'라고 했으므로 언어적 형태만은 아니다."}
+    ],
+    "Unit10-2||4": [
+      {"statement": "우리는 다른 사람들에게 사랑·지지·인정 등을 제공해 주기 위해 그들을 필요로 한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "to provide us with love", "why": "다른 사람들이 '우리에게(us)' 제공해 주는 것이지 우리가 그들에게 제공하는 것이 아니다.", "killer": true}
+    ],
+    "Unit10-2||5": [
+      {"statement": "우리는 타인이 우리의 정체성이 다른 모든 사람보다 우월하다는 것을 확인해 주기를 필요로 한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "unique and separate from anyone else", "why": "정체성이 '고유하고 분리된' 것이라 했을 뿐 우월하다는 언급은 본문에 없다."}
+    ],
+    "Unit10-2||6": [
+      {"statement": "우리는 대체로 오랫동안 혼자 존재할 수 없는데, 그것은 혼자 있고 싶은 마음을 전혀 갖지 않기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "cannot exist for too long without seeking companionship", "why": "오래 혼자 지낼 수 없다는 결론은 맞지만, 원인은 교제 욕구이지 혼자 있고 싶은 마음이 없어서가 아니다."}
+    ],
+    "Unit10-3||1": [
+      {"statement": "뉴기니와 아마존 사람들의 삼림 정원 가꾸기는 자연적 성장을 모방했고 땅에 흔적을 거의 남기지 않았다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "단일 재배가 자연적 성장을 모방하고 땅에 최소한의 흔적만 남겼다.", "verdict": "X", "trap_type": "구조수식", "anchor": "that mimicked natural growth and left minimal traces on the land", "why": "이 관계절은 스펙트럼 한쪽 끝의 '삼림 정원 가꾸기'를 수식하며, 반대편의 단일 재배를 설명하지 않는다."}
+    ],
+    "Unit10-3||2": [
+      {"statement": "단일 재배는 여러 종의 식물이나 동물을 함께 기르는 방식을 뜻한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "only one species of plant", "why": "단일 재배는 '오직 한 종'만 재배·사육하는 것이므로 여러 종을 함께 기르는 것이 아니다."}
+    ],
+    "Unit10-3||3": [
+      {"statement": "단일 재배의 시초는 중동의 밀밭, 중국의 논, 유라시아 초원의 양·염소 무리에서 볼 수 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit10-3||4": [
+      {"statement": "'these species'는 뒤에 등장하는 쥐·생쥐·참새 같은 원치 않는 종을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "these species", "why": "these species는 앞서 재배·사육된 종(밀·쌀·양·염소)을 가리키며, 뒤에 나오는 쥐·참새가 아니다."},
+      {"statement": "These crops grew well and increased fast.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit10-3||5": [
+      {"statement": "원치 않는 다른 종들도 번성했는데, 이는 그들이 인간의 농경지를 피해 살았기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "So did other, unwanted species.", "why": "원치 않는 종도 번성했다는 방향(문장 5·9 종합)은 맞지만, 그 원인은 인간 농업을 피해서가 아니라 오히려 그 덕분이다.", "integrative": true}
+    ],
+    "Unit10-3||6": [
+      {"statement": "쥐, 생쥐, 참새, 바퀴벌레가 익거나 저장된 작물을 끌어들였다.", "verdict": "X", "trap_type": "주체대상", "anchor": "attracted rats, mice, sparrows, and roaches", "why": "작물이 쥐·참새 등을 끌어들인 것이지, 쥐·참새가 작물을 끌어들인 것이 아니다."}
+    ],
+    "Unit10-3||7": [
+      {"statement": "물웅덩이는 모기에게 서식지를 제공했다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit10-3||8": [
+      {"statement": "쓰레기와 사람·동물의 배설물은 파리를 포함한 모든 해충을 끌어들였다.", "verdict": "X", "trap_type": "무관정보", "anchor": "attracted flies", "why": "본문은 파리를 끌어들였다고만 했을 뿐 '모든 해충'을 끌어들였다는 언급은 없다."}
+    ],
+    "Unit10-3||9": [
+      {"statement": "인간에도 불구하고, 잡초와 해충은 생물학적 승자가 되었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "Thanks to humans", "why": "잡초·해충은 인간 '덕분에(Thanks to)' 번성한 것이므로 인간에도 불구하고가 아니다.", "killer": true},
+      {"statement": "필자는 인간의 활동이 잡초와 해충을 성공적으로 제거했다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "weeds and pests were also biological winners", "why": "잡초·해충이 '생물학적 승자'가 되었다고 했으므로 제거되었다는 관점은 틀렸다."}
+    ]
+  },
+  "spans": {
+    "Unit10-2||1": [["Although"], ["its"]],
+    "Unit10-2||2": [["to seek", "to spend"], ["though"]],
+    "Unit10-2||3": [["these"], ["both", "and"]],
+    "Unit10-2||4": [["need", "to provide"], ["myriad of"]],
+    "Unit10-2||5": [["need", "to confirm"], ["that we are there", "that we exist", "that we have"]],
+    "Unit10-2||6": [["cannot", "without"], ["Thus"]],
+    "Unit10-3||1": [["that"], ["practiced"]],
+    "Unit10-3||2": [],
+    "Unit10-3||3": [["wheat fields", "rice paddies", "herds of sheep and goats"]],
+    "Unit10-3||4": [["measured"], ["Biologically speaking"]],
+    "Unit10-3||5": [["So did"]],
+    "Unit10-3||6": [["that"], ["were stored"]],
+    "Unit10-3||7": [["provided", "for"]],
+    "Unit10-3||8": [["Garbage", "human or animal waste"]],
+    "Unit10-3||9": [["Thanks to"]]
+  }
+}

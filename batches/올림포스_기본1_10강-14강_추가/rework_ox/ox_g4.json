@@ -1,0 +1,89 @@
+{
+  "misreads": {
+    "서술형 Practice||1": [
+      {"statement": "노래하거나 악기를 연주하는 법을 배우는 것이 뇌의 구조를 바꾼다는 데는 의문의 여지가 없다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "노래하기와 악기 연주를 모두 배워야만 비로소 뇌 구조가 바뀐다.", "verdict": "X", "trap_type": "구조수식", "anchor": "sing or play", "why": "or이므로 둘 중 하나만 배워도 되며 '모두 배워야'는 조건이 아니다"}
+    ],
+    "서술형 Practice||2": [
+      {"statement": "특별한 음악 훈련이 없으면 뇌는 주로 우반구를 통해 음악을 처리한다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "its right hemisphere에서 its는 음악(music)을 가리켜 '음악의 우반구'를 뜻한다.", "verdict": "X", "trap_type": "지칭", "anchor": "its right hemisphere", "why": "its는 your brain을 받으므로 뇌의 우반구를 뜻하며 음악이 아니다"}
+    ],
+    "서술형 Practice||3": [
+      {"statement": "음악을 접할 때 우편향된다는 방향은 맞지만, 그것은 우반구가 언어를 처리하기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the side of the brain that deals with emotion", "why": "문장 2·3 종합: 우반구는 감정을 담당하지 언어를 처리하지 않는다", "integrative": true}
+    ],
+    "서술형 Practice||4": [
+      {"statement": "많은 연구는 음악 훈련이 뇌의 음악 처리를 좌반구에서 우반구로 옮긴다는 것을 보여 준다.", "verdict": "X", "trap_type": "주체대상", "anchor": "to its left hemisphere", "why": "훈련은 음악 처리를 좌반구로 옮기는 것이며 우반구로가 아니다", "killer": true}
+    ],
+    "서술형 Practice||5": [
+      {"statement": "이 현상이 왜 일어나는지는 이미 하나의 확실한 정설로 밝혀져 있다.", "verdict": "X", "trap_type": "무관정보", "anchor": "several guesses", "why": "본문은 여러 추측이 있다고 할 뿐 확정된 정설은 언급하지 않는다"}
+    ],
+    "서술형 Practice||6": [
+      {"statement": "필자는 음악가의 감상법이 일반 청자의 방식보다 우월하다고 주장한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "beyond the grasp of ordinary listeners", "why": "구조적 복잡성을 더 분간한다는 설명일 뿐 우월하다는 가치판단은 없다"}
+    ],
+    "서술형 Practice||7": [
+      {"statement": "언어 이해를 담당하는 뇌 부위가 활성화되어야 숙련 음악가가 비로소 음악을 들을 수 있다.", "verdict": "X", "trap_type": "인과조건", "anchor": "it activates the part of the brain", "why": "음악을 들으면 그 부위가 활성화되는 것이지 순서가 반대가 아니다"},
+      {"statement": "Trained musicians use the emotion part of the brain to understand music.", "verdict": "X", "trap_type": "주체대상", "anchor": "associated with language comprehension", "why": "활성화되는 부위는 언어 이해 담당이며 감정 담당 부위가 아니다", "english": true}
+    ],
+    "Unit13-ANALYSIS||1": [
+      {"statement": "사람들이 연설 실수를 걱정하는 가장 큰 이유 중 하나는 연설을 의사소통이 아닌 공연으로 여기기 때문이다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "사람들이 실수를 걱정하는 이유는 연설을 공연이 아니라 의사소통 행위로 보기 때문이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "as a performance rather than an act of communication", "why": "A rather than B 구조상 사람들은 연설을 공연으로 보며 의사소통으로 보지 않는다"}
+    ],
+    "Unit13-ANALYSIS||2": [
+      {"statement": "will count against them에서 them은 청중(the audience)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "count against them", "why": "them은 연설자를 가리키며 감점이 연설자에게 불리하게 작용한다는 뜻이다"},
+      {"statement": "필자는 청중이 절대적 완벽의 잣대로 연설자를 평가한다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "They feel", "why": "이는 연설자들이 그렇게 느낀다는 것일 뿐 필자의 견해나 사실이 아니다"}
+    ],
+    "Unit13-ANALYSIS||3": [
+      {"statement": "연설 청중은 바이올린 연주회나 아이스스케이팅 대회의 심사위원과는 다르다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "연설 청중이 심사위원과 다른 것은 맞지만, 그것은 청중이 연설 내용에 관심이 없기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "not like judges", "why": "문장 3·4 종합: 청중이 다른 이유는 명확한 전달을 원해서지 무관심 때문이 아니다", "integrative": true}
+    ],
+    "Unit13-ANALYSIS||4": [
+      {"statement": "청중은 화자의 생각을 명확하고 직접적으로 전달하는 명연주(virtuoso performance)를 원한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "not looking for a virtuoso performance", "why": "not A but B이므로 청중이 원하는 것은 명연주가 아니라 잘 다듬어진 연설이다", "killer": true},
+      {"statement": "청중은 발음과 몸짓까지 완벽하게 다듬어진 전문 연설을 요구한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "well-thought-out address", "why": "본문은 명확·직접 전달만 언급하며 발음·몸짓까지 완벽 요구는 없는 정보이다"}
+    ],
+    "Unit13-ANALYSIS||5": [
+      {"statement": "실수는 청중을 더 인간적으로 보이게 만들어 화자의 매력을 높인다.", "verdict": "X", "trap_type": "주체대상", "anchor": "making her or him seem more human", "why": "더 인간적으로 보이는 대상은 화자(her or him)이지 청중이 아니다"},
+      {"statement": "A small mistake can make a speaker seem more human.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true}
+    ],
+    "Unit13-1||1": [
+      {"statement": "일부 생태계는 다양한 장소와 목적에 걸쳐 인간에 의해 건설된다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "인간이 다양한 생태계에 의해 건설된다.", "verdict": "X", "trap_type": "주체대상", "anchor": "are constructed by humans", "why": "건설되는 대상은 생태계이고 인간은 행위자이므로 주체·대상이 뒤바뀌었다"}
+    ],
+    "Unit13-1||2": [
+      {"statement": "우리는 지표수 유출수를 모으기 위해 깊고 큰 저수지를 반드시 건설해야 한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "may construct shallow ponds", "why": "본문은 얕은 못을 만들 수도 있다고 할 뿐 깊은 저수지를 반드시 짓는다는 정보는 없다"},
+      {"statement": "우리는 지표수의 유출수를 모으는, 바이오스웨일이라 불리는 얕은 못이나 수로를 만들 수도 있다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""}
+    ],
+    "Unit13-1||3": [
+      {"statement": "delivered to them에서 them은 물속 영양분(nutrients)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "delivered to them", "why": "them은 습지 식물을 가리키며 영양분이 아니므로 대상을 잘못 짚었다"},
+      {"statement": "습지 식물은 물속 영양분을 사용하기만 할 뿐 제거하지는 않는다.", "verdict": "X", "trap_type": "구조수식", "anchor": "use and remove nutrients", "why": "use and remove이므로 식물은 영양분을 사용하고 제거도 하며 제거하지 않는 것이 아니다", "killer": true}
+    ],
+    "Unit13-1||4": [
+      {"statement": "특별히 설계된 습지 생태계가 건설된 것은 맞지만, 그것은 박테리아와 식물이 광산 폐수를 만들어 내기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "process mine wastewater", "why": "박테리아·식물은 광산 폐수를 처리하는 것이지 만들어 내기 때문이 아니다"}
+    ],
+    "Unit13-1||5": [
+      {"statement": "People build these ecosystems to fully clean all city water.", "verdict": "X", "trap_type": "무관정보", "anchor": "partially treat", "why": "본문은 도시 폐수를 부분적으로 처리한다고 하며 완전히·전부가 아니다", "english": true}
+    ],
+    "Unit13-1||6": [
+      {"statement": "필자는 생태계를 인위적으로 건설하는 것이 환경에 해롭다고 비판한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "what is known as biological engineering", "why": "필자는 이를 생물 공학의 일부로 소개할 뿐 해롭다고 비판하지 않는다"}
+    ]
+  },
+  "spans": {
+    "서술형 Practice||1": [["that"], ["to sing"], ["learning"]],
+    "서술형 Practice||2": [["If"], ["that"], ["the side of the brain"]],
+    "서술형 Practice||3": [["are 'right-lateralised'"]],
+    "서술형 Practice||4": [["that"]],
+    "서술형 Practice||5": [["why"]],
+    "서술형 Practice||6": [["that"], ["discerning"], ["more like"]],
+    "서술형 Practice||7": [["When"], ["associated with"]],
+    "Unit13-ANALYSIS||1": [["that"], ["rather than"], ["biggest"], []],
+    "Unit13-ANALYSIS||2": [["in which"], ["feel the audience"]],
+    "Unit13-ANALYSIS||3": [["not like"]],
+    "Unit13-ANALYSIS||4": [["that"], ["not", "but"]],
+    "Unit13-ANALYSIS||5": [["by making"], ["making", "seem"], ["more human"]],
+    "Unit13-1||1": [["are constructed"]],
+    "Unit13-1||2": [["that"], ["known as"]],
+    "Unit13-1||3": [["that's"], ["helping"], ["delivered"], ["use and remove"]],
+    "Unit13-1||4": [["have been constructed"]],
+    "Unit13-1||5": [["to partially treat"], ["are constructed"]],
+    "Unit13-1||6": [["what"], ["is known as"]]
+  }
+}
