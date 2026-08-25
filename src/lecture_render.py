@@ -148,6 +148,23 @@ def _highlight_grammar(english: str, grammar) -> Markup | None:
     return Markup(text)
 
 
+def _order_grammar(english: str, grammar):
+    """어법칩을 '문장 속 첫 span 위치' 기준으로 정렬(왼→오).
+
+    형광펜 위첨자 번호(❶❷…)가 문장에서 나타나는 순서대로 읽히게 한다.
+    span 을 못 찾는 칩(위치 불명)은 원래 상대순서를 유지하며 뒤로 보낸다(안정 정렬).
+    """
+    low = (english or "").lower()
+
+    def key(g):
+        pos = [low.find((sp or "").lower().strip())
+               for sp in (getattr(g, "spans", []) or [])]
+        pos = [i for i in pos if i >= 0]
+        return min(pos) if pos else 10 ** 9
+
+    return sorted(grammar, key=key)
+
+
 def _match_sentence_no(src: str, sentences) -> int | None:
     """핵심 문법이 나온 원문 문장(source_sentence)이 지문 몇 번째 문장인지 찾음."""
     s = (src or "").strip().rstrip(".").lower()
@@ -194,12 +211,14 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
                 "en": _mark_en(c.en),
                 "ko": _mark_ko(c.ko, teacher),
             })
+        # 어법칩을 문장 속 위치 순서(왼→오)로 정렬 → 형광펜 번호가 순서대로 읽힘
+        og = _order_grammar(s.english, s.grammar)
         lines.append({
             "id": s.id,
             "english": s.english,
-            "grammar": [{"tag": g.tag, "note": g.note} for g in s.grammar],
+            "grammar": [{"tag": g.tag, "note": g.note} for g in og],
             # 강사용: 어법칩 spans 를 문장에서 형광펜(칩 번호)으로 표시. 없으면 None → 끊어읽기 줄 폴백
-            "english_hl": _highlight_grammar(s.english, s.grammar) if teacher else None,
+            "english_hl": _highlight_grammar(s.english, og) if teacher else None,
             "chunks": chunks,
             "misreads": [{"statement": m.statement, "why": m.why,
                           "verdict": getattr(m, "verdict", "X"),

@@ -162,6 +162,8 @@ def sentence_prompt(title: str, sentences: list[LectureSentence],
         "'도치·강조' → 도치·강조된 그 조각만. "
         "떨어져 있는 상관구조(not A but B, either…or, one … the other 등)는 표지어(not·but, either·or, one·the other)를 "
         "'각각 별도 원소'로 나눠 담으세요. 한 칩의 spans 는 보통 1개, 상관구조여도 2~3개면 충분합니다.\n"
+        "   ★어법칩은 '문장에 나타나는 순서(왼→오, 첫 span 위치 순)'대로 나열하세요 — 형광펜 번호가 "
+        "순서대로 읽히게.\n"
         "- vocab: 그 문장에서 뽑을 핵심 어휘 2~5개를 {word, meaning}로. '중·고등 수준' 어휘만 담고 "
         "누구나 아는 아주 쉬운 기초 단어(초등 수준)는 제외하세요. 다의어·수준 높은 단어와 함께 "
         "'숙어·구동사(예: seek out, play a role in, serve to, keep up with)'도 적극 포함하세요"
