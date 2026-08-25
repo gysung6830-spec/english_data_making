@@ -45,6 +45,9 @@ A4_H_PX = 1123
 # 본문 가용 높이 = A4(297mm) - 상하 여백 20mm씩 = 257mm
 PAGE_H_PX = 257 * 96 / 25.4          # ≈ 971px
 CALIB = 0.90                          # measure ↔ 실제 PDF 오차 흡수(넘침 방지)
+# 압축 후 남는 공간을 문장 간격으로 분배해 페이지를 채울 때의 목표 높이 비율
+# (측정↔실제 PDF 오차를 감안한 안전값. 넘치면 2페이지가 되므로 보수적으로.)
+FILL_CALIB = 0.89                     # 페이지 가용 높이의 이 비율까지 채움
 FIT_STEPS = ["", "compact", "compact2", "compact3"]
 
 # 하단 왼쪽 저작권 문구 + 하단 오른쪽 페이지 번호
@@ -374,12 +377,11 @@ def _apply_autofit(page) -> None:
             _set_passage_class(page, sel, "", keep_long=True)
             continue
 
-        budget = PAGE_H_PX * CALIB
+        budget = PAGE_H_PX * FILL_CALIB
         if i == 1:
-            budget = (PAGE_H_PX - header_h) * CALIB
+            budget = (PAGE_H_PX - header_h) * FILL_CALIB
 
-        # 첫 단계부터 순서대로 시도, 한 페이지에 들어가는 가장 약한 축소를 채택.
-        # 최대 축소(compact3)로도 넘치면 그대로 유지(= 한 페이지에 최대한 압축).
+        # 1) 한 페이지에 들어가는 가장 약한 축소 단계 선택(안 되면 최대 축소).
         chosen = FIT_STEPS[-1]
         for step in FIT_STEPS:
             _set_passage_class(page, sel, step)
@@ -389,8 +391,27 @@ def _apply_autofit(page) -> None:
             if h <= budget:
                 chosen = step
                 break
-
         _set_passage_class(page, sel, chosen)
+
+        # 2) 남는 공간을 문장 사이 간격에 고르게 나눠 페이지를 '채운다'.
+        h = page.eval_on_selector(
+            sel, "el => el.getBoundingClientRect().height"
+        )
+        slack = budget - h
+        if slack > 8:
+            page.eval_on_selector(
+                sel,
+                "(el, slack) => {"
+                "  const items = el.querySelectorAll('.sent');"
+                "  if (!items.length) return;"
+                "  const extra = slack / items.length;"
+                "  items.forEach(s => {"
+                "    const m = parseFloat(getComputedStyle(s).marginBottom)||0;"
+                "    s.style.marginBottom = (m + extra) + 'px';"
+                "  });"
+                "}",
+                slack,
+            )
 
 
 def _set_passage_class(page, selector: str, step: str,
