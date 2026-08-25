@@ -80,28 +80,42 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                 "sized), in English order. Return ONLY JSON: "
                 '{"chunks":[{"en":"unit","ko":"그 단위의 뜻"}]}\n\n' + s.en.strip()
             )
-            try:
-                resp = client.messages.create(
-                    model=model, max_tokens=1200, system=_SYSTEM,
-                    messages=[{"role": "user", "content": user_msg}],
-                )
-                text = "".join(b.text for b in resp.content
-                               if getattr(b, "type", "") == "text")
-                data = _extract_json(text)
-                items = data.get("chunks") if isinstance(data, dict) else data
-                if isinstance(items, list):
-                    for it in items:
-                        if isinstance(it, dict):
-                            en, ko = it.get("en"), it.get("ko")
-                        else:  # 문자열 응답 호환(뜻 없음)
-                            en, ko = it, ""
-                        en = (en or "").strip()
-                        if en:
-                            s.chunks.append(Chunk(en=en, ko=(ko or "").strip()))
-                # 조각 텍스트를 원문에서 그대로 다시 잘라 100% 일치시킴
-                s.chunks = realign_chunks(s.en, s.chunks)
-            except Exception:
-                pass  # 한 문장 실패해도 나머지 진행
+            # 긴 문장은 청크가 많아 응답이 길다 → 길이에 비례해 토큰 확보
+            # (부족하면 JSON이 잘려 파싱 실패 → 청크 0개가 되던 문제 방지)
+            n_words = len(s.en.split())
+            max_tokens = min(4096, max(1200, 400 + n_words * 60))
+            # 실패(잘림/일시 오류) 시 재시도
+            for attempt in range(2):
+                try:
+                    resp = client.messages.create(
+                        model=model, max_tokens=max_tokens, system=_SYSTEM,
+                        messages=[{"role": "user", "content": user_msg}],
+                    )
+                    text = "".join(b.text for b in resp.content
+                                   if getattr(b, "type", "") == "text")
+                    data = _extract_json(text)
+                    items = data.get("chunks") if isinstance(data, dict) else data
+                    got = []
+                    if isinstance(items, list):
+                        for it in items:
+                            if isinstance(it, dict):
+                                en, ko = it.get("en"), it.get("ko")
+                            else:  # 문자열 응답 호환(뜻 없음)
+                                en, ko = it, ""
+                            en = (en or "").strip()
+                            if en:
+                                got.append(Chunk(en=en, ko=(ko or "").strip()))
+                    if got:
+                        s.chunks = got
+                        break  # 성공
+                except Exception:
+                    pass  # 재시도
+                max_tokens = min(4096, max_tokens + 1200)  # 다음 시도는 더 넉넉히
+            # 그래도 실패하면 최소한 문장 전체를 한 조각으로(끊어읽기 누락 방지)
+            if not s.chunks:
+                s.chunks = [Chunk(en=s.en.strip(), ko=(s.ko or "").strip())]
+            # 조각 텍스트를 원문에서 그대로 다시 잘라 100% 일치시킴
+            s.chunks = realign_chunks(s.en, s.chunks)
             done += 1
             if progress:
                 progress(done, total)
