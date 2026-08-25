@@ -1,0 +1,344 @@
+{
+ "misreads": {
+  "장면 · 4 (Hali의 거절)||1": [
+   {
+    "statement": "Alyssa가 미안하지만 자기가 먼저 왔다고 그 여자에게 말한다.",
+    "verdict": "X",
+    "trap_type": "주체대상",
+    "anchor": "she says",
+    "why": "먼저 왔다며 사과하듯 말하는 주체는 she(그 여자)이지 Alyssa가 아니다."
+   },
+   {
+    "statement": "여자가 자리를 양보하지 않는 것은 맞지만, 그 이유는 아이가 아프기 때문이다.",
+    "verdict": "△",
+    "trap_type": "인과조건",
+    "anchor": "we were here first",
+    "why": "양보하지 않는 근거는 ‘먼저 왔다(we were here first)’는 것이지 아이가 아파서가 아니다."
+   }
+  ],
+  "장면 · 4 (Hali의 거절)||2": [
+   {
+    "statement": "‘내가 축구에서 아는 여자아이’는 앞서 말한 그 어머니를 가리킨다.",
+    "verdict": "X",
+    "trap_type": "지칭",
+    "anchor": "her daughter steps forward",
+    "why": "삽입구 ‘a girl I recognize from soccer’가 가리키는 대상은 딸 Hali이지 어머니가 아니다."
+   }
+  ],
+  "장면 · 4 (Hali의 거절)||3": [
+   {
+    "statement": "어머니가 카트를 끌고 가는 사이 Hali는 화자에게 더 가까이 다가와 미안하다고 말한다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   }
+  ],
+  "장면 · 4 (Hali의 거절)||4": [
+   {
+    "statement": "화자는 지난주 연습 때 Hali에게서 물을 나눠 받았고, 그래서 이번엔 자기가 몇 병을 건네려 한다.",
+    "verdict": "X",
+    "trap_type": "주체대상",
+    "anchor": "share my water with you",
+    "why": "물을 나눠 준 사람은 화자(‘I share my water with you’)이고, 보답으로 물을 받으려는 쪽도 화자다.",
+    "killer": true
+   }
+  ],
+  "장면 · 4 (Hali의 거절)||5": [
+   {
+    "statement": "Hali는 이미 통로를 따라 멀어지는 어머니를 돌아본 뒤, 화자 쪽으로 고개를 돌리며 고개를 젓는다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   }
+  ],
+  "장면 · 4 (Hali의 거절)||6": [
+   {
+    "statement": "그녀는 얼굴이 붉어지자 화자에게 물 몇 병을 건넨 뒤 자리를 뜬다.",
+    "verdict": "X",
+    "trap_type": "무관정보",
+    "anchor": "turns to leave",
+    "why": "그녀는 물을 주지 않고 붉어진 얼굴로 ‘자리를 뜰(turns to leave)’ 뿐, 물을 건넸다는 내용은 없다."
+   },
+   {
+    "statement": "이 장면은 위기 속에서도 이웃끼리 선뜻 물을 나누는 훈훈한 연대를 그린다.",
+    "verdict": "X",
+    "trap_type": "필자관점",
+    "anchor": "turns to leave",
+    "why": "문장 5·6 종합: Hali는 고개를 젓고(shaking her head) 붉어진 채 떠나므로, 훈훈한 나눔이 아니라 거절의 아이러니다.",
+    "integrative": true
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||1": [
+   {
+    "statement": "Garrett이 냉동 코너에서 화자를 찾아내고, 그 뒤 화자가 무언가를 본다.",
+    "verdict": "X",
+    "trap_type": "주체대상",
+    "anchor": "whom I find",
+    "why": "찾는 주체는 화자(‘I find’)이고 whom(=Garrett)은 찾아낸 대상이므로 주체·대상이 뒤바뀌었다."
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||2": [
+   {
+    "statement": "냉동 채소와 아이스크림을 막 지난 곳에 얼음으로 채워진 통이 있고, 화자는 문을 열어 한 봉지에 손을 뻗는다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   },
+   {
+    "statement": "화자가 얼음 한 봉지에 손을 뻗는 것은 맞지만, 그 이유는 얼음이 이미 다 팔려서다.",
+    "verdict": "△",
+    "trap_type": "인과조건",
+    "anchor": "a case packed with ice",
+    "why": "그 통은 ‘얼음으로 가득 차(a case packed with ice)’ 있으므로 다 팔려서 손을 뻗는 것이 아니다."
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||3": [
+   {
+    "statement": "Garrett은 우리에게 필요한 건 얼음이지 물이 아니라고 화자에게 상기시킨다.",
+    "verdict": "X",
+    "trap_type": "구조수식",
+    "anchor": "We need water, not ice",
+    "why": "Garrett의 말은 필요한 것이 물(water)이지 얼음이 아니라는 것으로, 물과 얼음이 뒤바뀌었다.",
+    "killer": true
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||4": [
+   {
+    "statement": "화자는 얼음도 물이라며 Garrett에게 그저 도와 달라고 말한다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   },
+   {
+    "statement": "이 장면은 물 대신 얼음을 택한 것이 어리석은 실수였음을 강조한다.",
+    "verdict": "X",
+    "trap_type": "필자관점",
+    "anchor": "Ice is water",
+    "why": "화자는 ‘Ice is water’라며 얼음을 물의 대안으로 확보하는 기지를 보이므로, 어리석은 실수로 보는 것은 글의 초점과 어긋난다."
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||5": [
+   {
+    "statement": "Garrett과 화자는 얼음 봉지를 하나씩 계속 카트에 담아, 카트가 더 이상 못 쌓을 만큼 높이 쌓인다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   },
+   {
+    "statement": "가능한 한 높이 쌓이는 것은 얼음이 든 진열통이다.",
+    "verdict": "X",
+    "trap_type": "지칭",
+    "anchor": "it is piled",
+    "why": "‘it’은 our cart를 가리키며 높이 쌓이는 것은 카트이지 진열통이 아니다."
+   }
+  ],
+  "장면 · 5 (Garrett과 얼음)||6": [
+   {
+    "statement": "이제 다른 사람들도 알아채고는 화자에게 얼음을 나눠 달라고 사정한다.",
+    "verdict": "X",
+    "trap_type": "무관정보",
+    "anchor": "empty the ice case",
+    "why": "다른 사람들은 오히려 ‘얼음통을 비우기(empty the ice case)’ 시작할 뿐, 화자에게 부탁했다는 내용은 없다."
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||1": [
+   {
+    "statement": "카트가 몹시 무거워진 지금, 정장 차림의 남자가 뒤에서 다가와 미소 짓는다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   },
+   {
+    "statement": "A man in a suit walks away from them.",
+    "verdict": "X",
+    "trap_type": "주체대상",
+    "anchor": "comes up behind us",
+    "why": "정장 입은 남자는 뒤에서 ‘다가오지(comes up behind us)’ 멀어지지 않는다.",
+    "english": true
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||2": [
+   {
+    "statement": "낯선 남자는 우리가 대답할 때까지 기다린 뒤에야 카트 손잡이를 잡는다.",
+    "verdict": "X",
+    "trap_type": "인과조건",
+    "anchor": "doesn’t wait for us to answer",
+    "why": "그는 우리가 대답하기를 ‘기다리지 않고(doesn’t wait for us to answer)’ 손잡이를 먼저 잡는다.",
+    "killer": true
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||3": [
+   {
+    "statement": "화자는 남자에게 도와줘서 고맙다고 말한다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||4": [
+   {
+    "statement": "필자는 모두가 서로 도와야 한다는 남자의 말에 동의하며 이를 교훈으로 제시한다.",
+    "verdict": "X",
+    "trap_type": "필자관점",
+    "anchor": "help one another",
+    "why": "‘서로 도와야 한다(help one another)’는 말은 얼음을 가로채려는 남자의 위선적 명분이지 필자가 내세우는 교훈이 아니다."
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||5": [
+   {
+    "statement": "화자가 남자를 좋게 본 것은 맞지만, 그 이유는 남자가 자기 얼음을 화자에게 양보했기 때문이다.",
+    "verdict": "△",
+    "trap_type": "인과조건",
+    "anchor": "bring out the best in people",
+    "why": "화자가 남자를 좋게 본 근거는 ‘어려운 때가 사람의 선함을 끌어낸다(bring out the best in people)’는 믿음이지 남자가 얼음을 양보해서가 아니다."
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||6": [
+   {
+    "statement": "화자는 남자에게 얼음 한 봉지를 가져가라고 제안한다.",
+    "verdict": "O",
+    "trap_type": "",
+    "anchor": "",
+    "why": ""
+   }
+  ],
+  "장면 · 6 (수상한 '도움')||7": [
+   {
+    "statement": "‘the rest’는 남자가 화자 일행에게 남겨 주는 몫이다.",
+    "verdict": "X",
+    "trap_type": "지칭",
+    "anchor": "I’ll keep the rest",
+    "why": "‘the rest(나머지 전부)’는 남자가 자기가 차지하려는 몫이고 화자 일행에게는 한 봉지만 준다."
+   },
+   {
+    "statement": "남자는 좋은 생각이라며 얼음을 공평하게 반씩 나누자고 제안한다.",
+    "verdict": "X",
+    "trap_type": "무관정보",
+    "anchor": "I have a better idea",
+    "why": "남자는 화자 일행에게 한 봉지만 주고 나머지 전부를 자신이 갖겠다고 하므로 공평한 반분은 본문에 없다."
+   }
+  ]
+ },
+ "spans": {
+  "장면 · 4 (Hali의 거절)||1": [
+   [
+    "she says"
+   ]
+  ],
+  "장면 · 4 (Hali의 거절)||2": [
+   [
+    "a girl I recognize from soccer"
+   ],
+   [
+    "a girl I recognize"
+   ]
+  ],
+  "장면 · 4 (Hali의 거절)||3": [
+   [
+    "As"
+   ]
+  ],
+  "장면 · 4 (Hali의 거절)||4": [
+   [
+    "Didn’t I share"
+   ],
+   [
+    "could return"
+   ]
+  ],
+  "장면 · 4 (Hali의 거절)||5": [
+   [
+    "who’s"
+   ],
+   [
+    "shaking her head"
+   ]
+  ],
+  "장면 · 4 (Hali의 거절)||6": [
+   [
+    "before"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||1": [
+   [
+    "whom"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||2": [
+   [
+    "there is"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||3": [
+   [
+    "What are you doing"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||4": [
+   [
+    "Just help me"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||5": [
+   [
+    "as high as"
+   ]
+  ],
+  "장면 · 5 (Garrett과 얼음)||6": [
+   [
+    "have taken"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||1": [
+   [
+    "almost impossible to push"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||2": [
+   [
+    "could use"
+   ],
+   [
+    "before grabbing"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||3": [
+   [
+    "Thank you for helping"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||4": [
+   [
+    "one another"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||5": [
+   [
+    "It is good to know"
+   ],
+   [
+    "that difficult times"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||6": [
+   [
+    "Why don’t you"
+   ]
+  ],
+  "장면 · 6 (수상한 '도움')||7": [
+   [
+    "Why don’t you"
+   ],
+   [
+    "a better idea"
+   ]
+  ]
+ }
+}

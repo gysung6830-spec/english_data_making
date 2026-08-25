@@ -1,0 +1,774 @@
+[
+ {
+  "item_no": "장면 · 1 (수도가 끊기다)",
+  "title": "Dry ① 수도 단수",
+  "theme_ko": "수도가 끊긴 순간 — 가뭄이 새 국면에 들다",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "The kitchen tap makes strange sounds. It coughs. It spits once, and then goes silent.",
+    "grammar": [
+     {
+      "tag": "대명사 It",
+      "note": "앞 명사 the tap을 받는 대명사"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "“Mom,” I shout out into the living room, “water is not coming out.”",
+    "grammar": [
+     {
+      "tag": "직접 인용",
+      "note": "따옴표 안이 화자가 외친 말"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "“Alyssa, shush!” Mom says.",
+    "grammar": [
+     {
+      "tag": "명령·감탄",
+      "note": "shush! = 조용히 시키는 말"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "She is watching the TV, where a news anchor is talking about the “flow crisis.”",
+    "grammar": [
+     {
+      "tag": "관계부사 where",
+      "note": "콤마 뒤 계속적 용법 — 앞 명사 the TV를 보충설명"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "This is what the media has been calling the drought ever since people got tired of hearing the word “drought.”",
+    "grammar": [
+     {
+      "tag": "관계대명사 what",
+      "note": "선행사를 포함한 '~하는 것'"
+     },
+     {
+      "tag": "현재완료",
+      "note": "has been calling — 계속되어 온 호칭"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Now the crisis is entering a new stage. We have no running water out of the tap.",
+    "grammar": [
+     {
+      "tag": "현재진행",
+      "note": "is entering — 위기가 진행 중"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 2 (몰의 군중)",
+  "title": "Dry ② 사재기 인파",
+  "theme_ko": "물을 사재기하는 몰의 군중 — 생필품이 된 물",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "“To the mall!” says Uncle Basil. My little brother Garrett and I jump in our uncle’s truck.",
+    "grammar": [
+     {
+      "tag": "직접 인용",
+      "note": "따옴표 안이 삼촌의 말"
+     },
+     {
+      "tag": "소유격",
+      "note": "our uncle’s truck"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "As we pull into the parking lot, we can see the crowd.",
+    "grammar": [
+     {
+      "tag": "시간 부사절",
+      "note": "As ~ = ~할 때"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "“You two go in. I’ll meet you inside,” Uncle Basil says.",
+    "grammar": [
+     {
+      "tag": "직접 인용",
+      "note": "따옴표 안이 삼촌의 지시"
+     },
+     {
+      "tag": "조동사 축약",
+      "note": "I’ll = I will"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Inside it’s like Black Friday at its worst — but today it’s not televisions and video games people are after.",
+    "grammar": [
+     {
+      "tag": "강조구문·생략",
+      "note": "it’s not ~ (that) people are after — 관계사 생략"
+     },
+     {
+      "tag": "비유",
+      "note": "like Black Friday at its worst"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "What I see in the carts in the checkout line are mostly water bottles. The essentials of life.",
+    "grammar": [
+     {
+      "tag": "관계대명사 what",
+      "note": "선행사 포함 '~하는 것'이 주어"
+     },
+     {
+      "tag": "동격·부연",
+      "note": "The essentials of life = water bottles"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "There is a look of impatience on the faces of the people in line. There is even hostility, hidden by a thin layer of politeness. Even that politeness is stretched thin.",
+    "grammar": [
+     {
+      "tag": "과거분사구",
+      "note": "hidden by ~ = ~에 가려진 (수동)"
+     },
+     {
+      "tag": "지시형용사 that",
+      "note": "that politeness"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 3 (빈 진열대와 뺏긴 생수)",
+  "title": "Dry ③ 마지막 생수",
+  "theme_ko": "빈 진열대에서 찾은 마지막 생수, 그러나 눈앞에서 빼앗기다",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "As I approach the back of the store for water bottles, I realize I am too late. The shelves are already empty.",
+    "grammar": [
+     {
+      "tag": "(that) 생략",
+      "note": "I realize (that) I am ~ — 명사절 that 생략"
+     },
+     {
+      "tag": "As",
+      "note": "때·이유의 접속사 '~하면서/때문에'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "I manage my way to the side aisle, trying my luck. Sometimes people place unwanted items in the wrong shelves.",
+    "grammar": [
+     {
+      "tag": "분사구문",
+      "note": "trying my luck — 동시동작 '~하면서'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Lucky! I find a single case of water that someone abandoned there maybe yesterday, when it wasn’t such a precious commodity.",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "water that someone abandoned — 목적격 that"
+     },
+     {
+      "tag": "관계부사 when",
+      "note": "when it wasn’t ~ '~하던 때'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "I reach for it, only to find it pulled away at the last second by a woman.",
+    "grammar": [
+     {
+      "tag": "only to+동사원형",
+      "note": "결과 '결국 ~하고 말다'"
+     },
+     {
+      "tag": "과거분사 pulled",
+      "note": "find it pulled away — 수동 의미의 분사"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "She stacks it on top of her cart like a crown on top of her canned goods.",
+    "grammar": [
+     {
+      "tag": "직유 like",
+      "note": "like a crown — '~처럼' 비유"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 4 (Hali의 거절)",
+  "title": "Dry ④ 거절당한 호의",
+  "theme_ko": "지난주 베푼 호의를 상기시켜도 끝내 거절당하는 아이러니",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "“I’m sorry, but we were here first,” she says.",
+    "grammar": [
+     {
+      "tag": "직접화법",
+      "note": "“~,” she says — 인용부호 속 실제 발화"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "And then her daughter steps forward — a girl I recognize from soccer — Hali Hartling.",
+    "grammar": [
+     {
+      "tag": "삽입 동격",
+      "note": "— a girl I recognize from soccer — 로 daughter를 부연"
+     },
+     {
+      "tag": "관계사 생략",
+      "note": "a girl (whom) I recognize — 목적격 관계대명사 생략"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "As her mother pulls their cart away, Hali leans closer to me. “I’m sorry about that, Alyssa.”",
+    "grammar": [
+     {
+      "tag": "시간 부사절 As",
+      "note": "As her mother pulls ~ '~하는 동안'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "“Didn’t I share my water with you at the practice last week?” I point out to her. “Maybe you could return the favor and share a few bottles with me.”",
+    "grammar": [
+     {
+      "tag": "부정 의문문",
+      "note": "Didn’t I share ~? '내가 ~해 주지 않았니?'"
+     },
+     {
+      "tag": "조동사 could",
+      "note": "could return — 완곡한 제안 '~할 수도 있잖아'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "She looks back to her mother, who’s already moving down the aisle, then turns back to me shaking her head.",
+    "grammar": [
+     {
+      "tag": "계속적 용법 who",
+      "note": "her mother, who’s already moving — 선행사 보충설명"
+     },
+     {
+      "tag": "분사구문",
+      "note": "shaking her head — 동시동작 '고개를 저으며'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "And then she gets a little bit red in the face, and turns to leave before it becomes a deep flush.",
+    "grammar": [
+     {
+      "tag": "시간 부사절 before",
+      "note": "before it becomes ~ '~가 되기 전에'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 5 (Garrett과 얼음)",
+  "title": "Dry ⑤ 얼음이라는 기지",
+  "theme_ko": "얼음을 물 대신 확보하는 화자의 기지",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "I look for Garrett, whom I find in the frozen aisle. Then I see something.",
+    "grammar": [
+     {
+      "tag": "관계대명사 whom(목적격)",
+      "note": "find의 목적어 자리 — 선행사 Garrett"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "Just past the frozen vegetables and ice cream, there is a case packed with ice. I open the door and reach for a bag.",
+    "grammar": [
+     {
+      "tag": "there is 구문",
+      "note": "'~이 있다' — a case가 진짜 주어"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "“What are you doing? We need water, not ice,” he reminds me.",
+    "grammar": [
+     {
+      "tag": "호격·명령",
+      "note": "상대에게 상기시키는 대사"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "“Ice is water. Just help me,” I tell him.",
+    "grammar": [
+     {
+      "tag": "생략(주어)",
+      "note": "'Just help me'는 명령문 — 주어 you 생략"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Garrett and I put one bag of ice after another into our cart, until it is piled as high as it can get.",
+    "grammar": [
+     {
+      "tag": "as ~ as 원급",
+      "note": "'가능한 한 높이' — as high as it can get"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "By now other people have taken notice and begin to empty the ice case.",
+    "grammar": [
+     {
+      "tag": "현재완료",
+      "note": "have taken notice — 방금까지 벌어진 일"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 6 (수상한 '도움')",
+  "title": "Dry ⑥ 낯선 남자의 호의",
+  "theme_ko": "호의를 가장해 얼음을 가로채려는 낯선 남자",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "The cart is ridiculously heavy now, and almost impossible to push. Then, a man in a business suit comes up behind us. He smiles.",
+    "grammar": [
+     {
+      "tag": "too ~ to / 형용사구",
+      "note": "'거의 밀 수 없을 만큼' — almost impossible to push"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "“Looks like you could use some help.” He doesn’t wait for us to answer before grabbing the cart’s handle.",
+    "grammar": [
+     {
+      "tag": "could use",
+      "note": "'~이 있으면 좋겠다, 필요하다'의 완곡 표현"
+     },
+     {
+      "tag": "before -ing",
+      "note": "'~하기 전에' — 대답도 전에 손잡이를 잡음"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "“Thank you for helping us,” I tell him.",
+    "grammar": [
+     {
+      "tag": "thank for -ing",
+      "note": "'~해 준 것에 감사하다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "“Not a problem. We all need to help one another.” He smiles again, and I return the smile.",
+    "grammar": [
+     {
+      "tag": "one another",
+      "note": "'서로' — 셋 이상 사이의 상호"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "It is good to know that difficult times can bring out the best in people. I decide that one favor deserves another.",
+    "grammar": [
+     {
+      "tag": "가주어 It-진주어 to부정사",
+      "note": "It is good to know ~ — 진주어 to know"
+     },
+     {
+      "tag": "that 명사절",
+      "note": "know의 목적어절"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "“Why don’t you take a bag of ice for yourself,” I suggest.",
+    "grammar": [
+     {
+      "tag": "Why don’t you ~?",
+      "note": "'~하는 게 어때?' 제안"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "His smile does not fade. “I have a better idea,” he says. “Why don’t you take a bag of ice for yourselves, and I’ll keep the rest.”",
+    "grammar": [
+     {
+      "tag": "Why don’t you ~?",
+      "note": "제안 형식으로 요구를 포장"
+     },
+     {
+      "tag": "비교급",
+      "note": "a better idea — '더 좋은' 생각"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "장면 · 7 (반전과 삼촌의 등장)",
+  "title": "Dry ⑦ 위기와 구원",
+  "theme_ko": "미소 뒤에 숨은 위협과 때맞춘 삼촌의 등장",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "For a moment I think he is joking, but then realize he is serious. “Excuse me?”",
+    "grammar": [
+     {
+      "tag": "that 생략",
+      "note": "I think (that) he is joking — 접속사 that 생략"
+     },
+     {
+      "tag": "but (역접)",
+      "note": "생각↔깨달음의 대비"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "He is still smiling, but his eyes scare me.",
+    "grammar": [
+     {
+      "tag": "but (역접)",
+      "note": "미소 ↔ 겁나는 눈빛의 대조"
+     },
+     {
+      "tag": "still (계속)",
+      "note": "여전히 웃고 있음"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "As long as his hands are firmly locked on the handle of our cart, there is nothing to prove that it’s ours and not his.",
+    "grammar": [
+     {
+      "tag": "As long as (조건)",
+      "note": "~하는 한 (조건 부사절)"
+     },
+     {
+      "tag": "to prove (부정사)",
+      "note": "nothing을 꾸미는 형용사적 용법"
+     },
+     {
+      "tag": "it’s = it is",
+      "note": "it은 the cart"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "“Is there a problem here?” It is Uncle Basil. He has arrived just in time.",
+    "grammar": [
+     {
+      "tag": "has arrived (현재완료)",
+      "note": "막 도착한 결과"
+     },
+     {
+      "tag": "It is ~ (지칭)",
+      "note": "It은 말을 건 사람의 정체"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "“Not at all.” The man looks at the ice with a bitter face, then leaves.",
+    "grammar": [
+     {
+      "tag": "looks ~ then leaves (동사 나열)",
+      "note": "본다 → 떠난다 순서"
+     },
+     {
+      "tag": "with a ~ face (부대상황)",
+      "note": "~한 표정으로"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "작품 정리 · 1 (소설 「Dry」와 현실 경고)",
+  "title": "Dry ⑧ 작품 소개·경고",
+  "theme_ko": "소설 「Dry」 소개와 물 부족이 현실이 될 수 있다는 경고",
+  "structure": "예시→일반화(결론)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "The above is a shortened version of the opening of the novel Dry (2018).",
+    "grammar": [
+     {
+      "tag": "shortened (과거분사)",
+      "note": "version을 꾸미는 '축약된'"
+     },
+     {
+      "tag": "of ~ of ~ (전치사 연결)",
+      "note": "축약본 ← 도입부 ← 소설"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "It tells the story of a girl who has to make tough choices for her family during a disastrous California drought.",
+    "grammar": [
+     {
+      "tag": "who (주격 관계대명사)",
+      "note": "a girl을 꾸미는 절"
+     },
+     {
+      "tag": "has to (의무)",
+      "note": "~해야 한다"
+     },
+     {
+      "tag": "It (지칭)",
+      "note": "It은 the novel Dry"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Her unwanted adventure ends when the water supply resumes and life is back to normal.",
+    "grammar": [
+     {
+      "tag": "when (시간 부사절)",
+      "note": "~할 때 모험이 끝남"
+     },
+     {
+      "tag": "and (병렬)",
+      "note": "resumes ↔ is back to normal"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Provided that the factors contributing to water shortages worldwide are not addressed, including climate change, population growth, and using too much water for agriculture, it is possible that this story can become a reality.",
+    "grammar": [
+     {
+      "tag": "Provided that (조건)",
+      "note": "'~라면(안 하면)' 조건 접속사"
+     },
+     {
+      "tag": "가주어 it",
+      "note": "it is possible that ~ 의 it"
+     },
+     {
+      "tag": "including (예시)",
+      "note": "요인들의 예를 나열"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "본문 외 · 1 (기아석이란)",
+  "title": "Hunger Stones ①",
+  "theme_ko": "기아석(hunger stone)이란 무엇인가",
+  "structure": "예시→일반화(결론)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "In the summer of 2022, during the worst drought in 500 years in Europe, a stone known as a “hunger stone” was found in a Czech town along the Elbe River.",
+    "grammar": [
+     {
+      "tag": "과거분사구",
+      "note": "known as a 'hunger stone'이 앞 stone을 수식"
+     },
+     {
+      "tag": "수동태",
+      "note": "was found = 발견되었다"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "The stone had a sentence written on it that read: “If you see me, then cry.”",
+    "grammar": [
+     {
+      "tag": "과거분사",
+      "note": "written on it = 그 위에 새겨진(수식)"
+     },
+     {
+      "tag": "관계사절",
+      "note": "that read: 뒤가 문구 내용"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "The hunger stones, found in rivers across central Europe, typically remain underwater.",
+    "grammar": [
+     {
+      "tag": "과거분사 삽입구",
+      "note": "found in rivers ~ 가 The hunger stones를 수식"
+     },
+     {
+      "tag": "부사",
+      "note": "typically = 평소에는"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "However, when droughts occur and water levels retreat, these stones become visible.",
+    "grammar": [
+     {
+      "tag": "시간 부사절",
+      "note": "when droughts occur ~ = ~할 때"
+     },
+     {
+      "tag": "병렬",
+      "note": "droughts occur and water levels retreat"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "The stones are significant because they bear records of the past severe droughts.",
+    "grammar": [
+     {
+      "tag": "이유 부사절",
+      "note": "because they bear ~ = ~하기 때문에"
+     },
+     {
+      "tag": "대명사",
+      "note": "they = the stones"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "본문 외 · 2 (경고와 미래 예측)",
+  "title": "Hunger Stones ②",
+  "theme_ko": "가뭄의 경고와 미래 예측",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Droughts cause reduced harvests, food shortages, and hunger, especially for the poor.",
+    "grammar": [
+     {
+      "tag": "병렬 명사구",
+      "note": "reduced harvests, food shortages, and hunger 나열"
+     },
+     {
+      "tag": "부사",
+      "note": "especially = 특히"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "The words on the hunger stones are believed to warn of these hardships and to urge people to be prepared.",
+    "grammar": [
+     {
+      "tag": "수동태",
+      "note": "are believed to ~ = ~한다고 여겨진다"
+     },
+     {
+      "tag": "병렬 부정사",
+      "note": "to warn ~ and to urge ~"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Considering the continuation of climate change, experts warn that the situation we face is not just a simple, occasional drought but a severe drought that could persist for decades.",
+    "grammar": [
+     {
+      "tag": "분사구문",
+      "note": "Considering ~ = ~을 고려하면"
+     },
+     {
+      "tag": "상관접속사",
+      "note": "not just A but B = A가 아니라 B"
+     },
+     {
+      "tag": "관계사절",
+      "note": "that could persist ~ 수식"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "The United Nations has predicted that by 2050, 75 percent of the global population could suffer from the effects of drought unless significant action is taken to address climate change.",
+    "grammar": [
+     {
+      "tag": "조건 부사절",
+      "note": "unless ~ = ~하지 않으면"
+     },
+     {
+      "tag": "수동태",
+      "note": "action is taken = 조치가 취해지다"
+     },
+     {
+      "tag": "명사절",
+      "note": "that ~ 이 predicted의 목적어"
+     }
+    ]
+   }
+  ]
+ }
+]

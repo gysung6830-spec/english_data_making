@@ -1,0 +1,457 @@
+{
+  "misreads": {
+    "장면 · 7 (반전과 삼촌의 등장)||1": [
+      {
+        "statement": "화자는 처음엔 그가 농담한다고 생각했다가 곧 진심임을 깨닫는다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "화자는 그가 진지하다고 깨닫는데, 그가 미소를 완전히 거뒀기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "realize he is serious",
+        "why": "진지함을 깨달은 방향은 맞으나, 문장 1·2 종합 시 그는 여전히 웃고 있어 '미소를 거둬서'라는 근거는 틀림.",
+        "integrative": true
+      }
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||2": [
+      {
+        "statement": "화자의 눈빛이 그 남자를 겁먹게 만든다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "his eyes scare me",
+        "why": "겁주는 주체는 그의 눈빛이고 겁먹는 대상은 화자인데 주체·대상을 뒤바꿈."
+      },
+      {
+        "statement": "화자는 그 남자의 눈빛을 보고도 아무런 위협도 느끼지 않는다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "his eyes scare me",
+        "why": "화자는 그 눈빛에 겁을 먹는다고 했으므로 위협을 못 느낀다는 건 화자 심리 오독."
+      }
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||3": [
+      {
+        "statement": "그의 손이 손잡이를 잡고 있는 한, 그 카트가 그의 것이고 화자 측 것이 아님을 증명할 것이 없다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "it’s ours and not his",
+        "why": "원문은 '우리 것이고 그의 것이 아님'인데 소유 대상을 정반대로 뒤바꿈.",
+        "killer": true
+      }
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||4": [
+      {
+        "statement": "삼촌 Basil이 때마침 도착한다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "여기 문제가 있냐고 물은 사람은 삼촌 Basil이 아니라 화자다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "It is Uncle Basil",
+        "why": "말을 건 It의 정체는 삼촌 Basil이므로 화자가 물었다는 건 지칭 오독."
+      }
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||5": [
+      {
+        "statement": "그 남자는 씁쓸한 표정으로 얼음을 본 뒤 떠난다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "그 남자는 얼음값을 지불한 뒤 만족스러운 표정으로 떠난다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "with a bitter face",
+        "why": "그는 씁쓸한 표정으로 떠난다고 했을 뿐, 값 지불·만족스러운 표정은 본문에 없는 정보."
+      }
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||1": [
+      {
+        "statement": "위 글은 소설 「Dry」(2018) 도입부를 축약한 것이다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "위 글은 소설 「Dry」 전체 줄거리를 요약한 것이다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "of the opening",
+        "why": "축약된 대상은 소설의 '도입부(the opening)'이지 작품 전체가 아님."
+      }
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||2": [
+      {
+        "statement": "여기서 It은 그 소녀를 가리킨다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "It tells the story",
+        "why": "It은 앞 문장의 the novel Dry를 가리키며, 소녀가 아니라 소설이 이야기를 들려주는 것."
+      },
+      {
+        "statement": "소녀의 가족이 소녀를 위해 힘든 선택을 해야 한다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "make tough choices for her family",
+        "why": "힘든 선택을 하는 주체는 소녀이고 그 대상(위하는 이)이 가족인데 뒤바꿈."
+      }
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||3": [
+      {
+        "statement": "물 공급이 재개되고 일상이 정상으로 돌아오면서 소녀의 원치 않던 모험이 끝난다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "물 공급이 재개되면서 정부가 소녀 가족에게 보상해 모험이 끝난다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "life is back to normal",
+        "why": "본문엔 일상이 정상으로 돌아온다고만 했을 뿐, 정부 보상은 없는 정보."
+      }
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||4": [
+      {
+        "statement": "물 부족을 부르는 요인들이 해결되면 이 이야기가 현실이 될 수 있다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "are not addressed",
+        "why": "요인들이 해결되지 '않으면(not addressed)' 현실이 될 수 있다인데 조건을 정반대로 뒤집음.",
+        "killer": true
+      },
+      {
+        "statement": "이 이야기는 현실이 될 수 있다 — 소설이 실화를 바탕으로 하기 때문이다.",
+        "verdict": "△",
+        "trap_type": "필자관점",
+        "anchor": "become a reality",
+        "why": "현실이 될 수 있다는 방향은 맞으나, 근거는 '실화 바탕'이 아니라 물 부족 요인이 해결되지 않을 경우다."
+      }
+    ],
+    "본문 외 · 1 (기아석이란)||1": [
+      {
+        "statement": "2022년 여름 유럽 500년 만의 최악의 가뭄 동안, 엘베강 변 체코의 한 마을에서 '기아석'이 발견되었다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "체코의 그 마을 전체가 '기아석'으로 알려져 있다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "a stone known as a",
+        "why": "'기아석'으로 알려진 것은 stone(돌)이지 마을이 아님 — 수식 대상 오독."
+      }
+    ],
+    "본문 외 · 1 (기아석이란)||2": [
+      {
+        "statement": "그 돌에는 '나를 보거든 울어라'라는 문장이 새겨져 있었다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "The stone tells people to smile when they see it.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "then cry",
+        "why": "돌의 문구는 '울어라(cry)'인데 웃으라고 왜곡함.",
+        "english": true
+      }
+    ],
+    "본문 외 · 1 (기아석이란)||3": [
+      {
+        "statement": "중부 유럽 강에서 발견되는 기아석은 평소에는 물속에 잠겨 있다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "기아석이 평소 물속에 잠겨 있는 것은 사람들이 일부러 물속에 넣어 두기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "typically remain underwater",
+        "why": "물속에 잠겨 있는 방향은 맞으나, 이유는 사람이 넣어서가 아니라 평소 수위가 높아서다."
+      }
+    ],
+    "본문 외 · 1 (기아석이란)||4": [
+      {
+        "statement": "가뭄이 들고 수위가 내려가면 강물이 눈에 보이게 된다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "these stones become visible",
+        "why": "드러나 보이는 것은 these stones(=기아석)이지 강물이 아님."
+      },
+      {
+        "statement": "강의 수위가 올라가고 가뭄이 끝나면 이 돌들이 드러난다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "water levels retreat",
+        "why": "수위가 '물러날(retreat)' 때 돌이 드러나는데 수위 상승·가뭄 종료로 조건을 뒤집음.",
+        "killer": true
+      }
+    ],
+    "본문 외 · 1 (기아석이란)||5": [
+      {
+        "statement": "필자는 기아석이 별 의미 없는 평범한 돌이라고 본다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "The stones are significant",
+        "why": "필자는 기아석이 '중요하다(significant)'고 평가하므로 의미 없다는 건 관점 오독."
+      },
+      {
+        "statement": "기아석의 기록이 과거의 극심한 가뭄들을 만들어 냈다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "they bear records of the past severe droughts",
+        "why": "돌은 가뭄의 '기록을 지닐(bear records)' 뿐 가뭄을 만들어 낸 것이 아님 — 행위 주체·대상 뒤바꿈."
+      }
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||1": [
+      {
+        "statement": "가뭄은 수확 감소, 식량 부족, 굶주림을 초래하며, 특히 가난한 이들에게 그렇다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "가뭄이 굶주림을 부르는데, 이는 가난한 이들이 식량을 사재기하기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "especially for the poor",
+        "why": "가뭄이 굶주림을 부르는 방향은 맞으나, 원인은 사재기가 아니라 수확·식량 감소다."
+      }
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||2": [
+      {
+        "statement": "여기서 these hardships는 기아석 자체가 입은 손상을 가리킨다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "these hardships",
+        "why": "these hardships는 문장 1의 가뭄이 부른 어려움(수확 감소·식량 부족·굶주림)을 가리킴, 돌의 손상이 아님.",
+        "integrative": true
+      },
+      {
+        "statement": "사람들이 기아석의 문구에게 대비하라고 촉구한다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "to urge people to be prepared",
+        "why": "촉구하는 주체는 돌에 새겨진 문구이고 그 대상이 사람들인데 주체·대상을 뒤바꿈."
+      }
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||3": [
+      {
+        "statement": "전문가들은 우리가 겪는 것이 심각한 가뭄이 아니라 단순하고 일시적인 가뭄이라고 경고한다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "not just a simple, occasional drought but a severe drought",
+        "why": "'A(단순·일시적 가뭄)가 아니라 B(심각한 가뭄)'인데 A와 B를 정반대로 뒤바꿈.",
+        "killer": true
+      },
+      {
+        "statement": "전문가들은 현재 상황을 굳이 걱정할 필요 없는 가벼운 문제로 본다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "a severe drought that could persist for decades",
+        "why": "전문가는 수십 년 지속될 심각한 가뭄으로 경고하므로 가벼운 문제로 본다는 건 관점 오독."
+      }
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||4": [
+      {
+        "statement": "UN은 기후변화에 대한 큰 조치가 없으면 2050년까지 세계 인구의 75%가 가뭄의 영향을 겪을 수 있다고 예측했다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "UN은 2050년까지 세계 인구의 75%가 이미 가뭄으로 사망했다고 예측했다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "could suffer from the effects of drought",
+        "why": "가뭄의 영향을 '겪을 수 있다(could suffer)'는 예측인데 이미 사망했다고 과장함."
+      }
+    ]
+  },
+  "spans": {
+    "장면 · 7 (반전과 삼촌의 등장)||1": [
+      [],
+      [
+        "but"
+      ]
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||2": [
+      [
+        "but"
+      ],
+      [
+        "still"
+      ]
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||3": [
+      [
+        "As long as"
+      ],
+      [
+        "to prove"
+      ],
+      [
+        "it’s"
+      ]
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||4": [
+      [
+        "has arrived"
+      ],
+      [
+        "It is"
+      ]
+    ],
+    "장면 · 7 (반전과 삼촌의 등장)||5": [
+      [
+        "looks",
+        "leaves"
+      ],
+      [
+        "with a bitter face"
+      ]
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||1": [
+      [
+        "shortened"
+      ],
+      [
+        "of the opening",
+        "of the novel"
+      ]
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||2": [
+      [
+        "who"
+      ],
+      [
+        "has to"
+      ],
+      [
+        "It"
+      ]
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||3": [
+      [
+        "when"
+      ],
+      [
+        "and"
+      ]
+    ],
+    "작품 정리 · 1 (소설 「Dry」와 현실 경고)||4": [
+      [
+        "Provided that"
+      ],
+      [
+        "it is possible"
+      ],
+      [
+        "including"
+      ]
+    ],
+    "본문 외 · 1 (기아석이란)||1": [
+      [
+        "known as"
+      ],
+      [
+        "was found"
+      ]
+    ],
+    "본문 외 · 1 (기아석이란)||2": [
+      [
+        "written on it"
+      ],
+      [
+        "that read"
+      ]
+    ],
+    "본문 외 · 1 (기아석이란)||3": [
+      [
+        "found in rivers"
+      ],
+      [
+        "typically"
+      ]
+    ],
+    "본문 외 · 1 (기아석이란)||4": [
+      [
+        "when"
+      ],
+      [
+        "and"
+      ]
+    ],
+    "본문 외 · 1 (기아석이란)||5": [
+      [
+        "because"
+      ],
+      [
+        "they"
+      ]
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||1": [
+      [
+        "reduced harvests",
+        "food shortages",
+        "and hunger"
+      ],
+      [
+        "especially"
+      ]
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||2": [
+      [
+        "are believed"
+      ],
+      [
+        "to warn",
+        "to urge"
+      ]
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||3": [
+      [
+        "Considering"
+      ],
+      [
+        "not just",
+        "but"
+      ],
+      [
+        "that could persist"
+      ]
+    ],
+    "본문 외 · 2 (경고와 미래 예측)||4": [
+      [
+        "unless"
+      ],
+      [
+        "is taken"
+      ],
+      [
+        "that by 2050"
+      ]
+    ]
+  }
+}

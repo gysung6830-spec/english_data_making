@@ -1,0 +1,257 @@
+{
+  "misreads": {
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||1": [
+      {
+        "statement": "진짜 뉴스가 소셜 미디어에서 가짜 뉴스보다 훨씬 더 멀리, 더 빠르게 퍼진다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "Fake news on social media spreads significantly farther and faster",
+        "why": "더 멀리·더 빠르게 퍼지는 주체는 가짜 뉴스이지 진짜 뉴스가 아님.",
+        "killer": true
+      },
+      {
+        "statement": "가짜 뉴스는 소셜 미디어에서 진짜 이야기보다 훨씬 더 멀리, 더 빠르게 퍼진다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||2": [
+      {
+        "statement": "가짜 뉴스가 진짜 뉴스보다 더 빨리 퍼지는 것은 맞지만, 그것은 온라인에 진짜 뉴스가 6배 더 많기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "fake news spreads online 6 times faster than real news",
+        "why": "6배는 확산 '속도'를 뜻함 — 진짜 뉴스의 양이 6배라는 근거가 틀림."
+      }
+    ],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||3": [
+      {
+        "statement": "this phenomenon은 사람들이 새롭고 자극적인 것을 좋아한다는 사실을 가리킨다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "this phenomenon",
+        "why": "this phenomenon은 가짜 뉴스가 더 멀리·빨리 퍼지는 현상을 가리킴 — 새것 선호는 그 설명임."
+      }
+    ],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||4": [
+      {
+        "statement": "정보가 놀라울 때 사람들은 그것이 놀랍다고 느끼기만 할 뿐, 자극적인 뉴스를 남과 공유하고 싶어 하지는 않는다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "not only feel that it is surprising, but they also want to share",
+        "why": "not only A but also B는 둘 다임 — 공유 욕구를 부정하면 안 됨."
+      },
+      {
+        "statement": "정보가 놀라우면 사람들은 그것이 놀랍다고 느낄 뿐 아니라 자극적인 뉴스를 남들과 공유하고 싶어 한다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||5": [
+      {
+        "statement": "사람들은 그 정보가 완전히 검증된 사실이기 때문에 가장 먼저 그것을 올린다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "previously unknown, but possibly false, information",
+        "why": "그 정보는 '아마 거짓일 수도 있는' 것으로 검증된 사실이 아님."
+      },
+      {
+        "statement": "필자는 남보다 먼저 자극적 정보를 올려 관심을 얻는 행동을 바람직하다고 권장한다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "possibly false",
+        "why": "필자는 그 정보가 거짓일 수 있음을 지적하며 비판적으로 서술함 — 권장 태도가 아님."
+      }
+    ],
+
+    "확산이유 · 2 (단순 사고·확증 편향)||1": [
+      {
+        "statement": "사람들이 일상에서 단순하고 힘들이지 않게 생각하는 경향 때문에 가짜 뉴스가 널리 퍼진다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "가짜 뉴스가 널리 퍼지기 때문에 사람들이 단순하고 힘들이지 않게 생각하게 된다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "because people in their daily lives tend to think simply",
+        "why": "단순 사고가 원인이고 확산이 결과임 — 원인·결과가 뒤바뀜."
+      }
+    ],
+    "확산이유 · 2 (단순 사고·확증 편향)||2": [
+      {
+        "statement": "사람들은 확실한 증거가 있을 때에만 새로운 정보를 받아들인다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "believe new information without any proof",
+        "why": "증거 없이도 믿을 가능성이 크다고 함 — '증거 있을 때만'은 본문에 없는 조건."
+      }
+    ],
+    "확산이유 · 2 (단순 사고·확증 편향)||3": [
+      {
+        "statement": "사람들이 편견에 맞는 정보를 잘 믿는 것은 맞지만, 그것은 그 정보가 언제나 사실로 확인되기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "even when not true",
+        "why": "사실이 아닐 때조차 믿는 것이므로 '항상 사실이라서'라는 근거가 틀림."
+      },
+      {
+        "statement": "사람들은 사실이 아닐 때조차 자신의 편견이나 경험에 들어맞는 정보를 믿는 경향이 있다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "확산이유 · 2 (단순 사고·확증 편향)||4": [
+      {
+        "statement": "this process는 다양한 출처를 비판적으로 검토하는 과정을 가리킨다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "this process",
+        "why": "this process는 편견에 맞는 정보를 무비판적으로 믿는 과정을 가리킴."
+      }
+    ],
+    "확산이유 · 2 (단순 사고·확증 편향)||5": [
+      {
+        "statement": "필자는 사람들이 자기 믿음과 반대되는 뉴스도 균형 있게 받아들인다고 본다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "ignore news that doesn't support them",
+        "why": "필자는 믿음을 확인하는 뉴스만 받고 반대는 무시한다고 봄 — 균형 수용이 아님."
+      },
+      {
+        "statement": "그들은 자기 믿음을 확인해 주는 뉴스는 무시하고, 뒷받침하지 않는 뉴스를 선택적으로 받아들인다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "accept news in a way that only confirms their beliefs and ignore news that doesn't support them",
+        "why": "확인해 주는 뉴스를 받아들이고 뒷받침 안 하는 뉴스를 무시함 — accept/ignore 대상이 뒤바뀜."
+      }
+    ],
+    "확산이유 · 2 (단순 사고·확증 편향)||6": [
+      {
+        "statement": "선거철에 사람들은 자기가 지지하는 후보를 부정적으로 보도하는 뉴스를 맹목적으로 믿는 경향이 있다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "believe any news describing their favored candidates in a positive way",
+        "why": "지지 후보에 대해서는 긍정적으로 그린 뉴스를 믿음 — 부정 보도가 아님.",
+        "killer": true
+      }
+    ],
+
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||1": [
+      {
+        "statement": "필자는 인터넷에 정보가 너무 많아 가짜 뉴스에 속는 것을 막을 수 없다고 본다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "how can you make sure that fake news does not mislead you",
+        "why": "필자는 속지 않는 방법을 묻고 이어서 방법을 제시함 — 막을 수 없다는 태도가 아님."
+      },
+      {
+        "statement": "인터넷에 정보가 매우 많은 상황에서, 가짜 뉴스에 속지 않으려면 어떻게 해야 하는지 묻고 있다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||2": [
+      {
+        "statement": "우선, 자극적인 제목은 항상 거짓이므로 제목만 보고 뉴스를 걸러 내라.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "read beyond the provocative headlines",
+        "why": "제목을 '넘어서' 읽으라는 것 — 제목이 항상 거짓이라거나 제목만 보라는 말은 없음."
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||3": [
+      {
+        "statement": "They는 뉴스를 읽는 사람들을 가리키며, 사람들이 매우 자극적이라는 뜻이다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "They can be so stimulating",
+        "why": "They는 앞 문장의 자극적인 제목(headlines)을 가리킴 — 사람이 아님."
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||4": [
+      {
+        "statement": "그러니 본문은 대충 넘기고 제목만 주의 깊게 읽어라.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "don't just read the headlines, but read the text carefully",
+        "why": "제목만 읽지 말고 본문을 주의 깊게 읽으라는 것 — 주의해서 읽을 대상은 본문임.",
+        "killer": true
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||5": [
+      {
+        "statement": "둘째, 뉴스를 액면 그대로 곧이곧대로 받아들여라.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "don't read the news at face value",
+        "why": "뉴스를 액면 그대로 읽지 '말라'는 부정 명령 — 곧이곧대로 받아들이라는 정반대."
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||6": [
+      {
+        "statement": "뉴스를 판단하려고 비판적 사고력을 발휘하라는 것은 맞지만, 그것은 인터넷의 모든 뉴스가 거짓이기 때문이다.",
+        "verdict": "△",
+        "trap_type": "인과조건",
+        "anchor": "Exercise critical thinking skills to judge the news",
+        "why": "비판적 사고는 뉴스를 판단하기 위함 — '모든 뉴스가 거짓'이라는 근거는 본문에 없음."
+      },
+      {
+        "statement": "뉴스를 판단하기 위해 비판적 사고력을 발휘하라고 말한다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||7": [
+      {
+        "statement": "당신이 읽는 것이 당신에게 질문하고 분석하고 평가한다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "question, analyze, and evaluate what you read",
+        "why": "질문·분석·평가하는 주체는 독자(you)이며, 읽는 내용은 그 대상임."
+      },
+      {
+        "statement": "You should think carefully about what you read.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": "",
+        "english": true
+      }
+    ]
+  },
+  "spans": {
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||1": [["farther and faster", "than"]],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||2": [["6 times faster than"], ["has shown that"]],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||3": [["this phenomenon"], ["is that"]],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||4": [["not only", "but", "also"], ["feel that"]],
+    "확산이유 · 1 (빠른 전파와 새로움 선호)||5": [["By passing"], ["the first to post"]],
+
+    "확산이유 · 2 (단순 사고·확증 편향)||1": [["tend to"], ["because"]],
+    "확산이유 · 2 (단순 사고·확증 편향)||2": [["It", "for them to believe"], ["more likely"]],
+    "확산이유 · 2 (단순 사고·확증 편향)||3": [["information that fits"], ["even when not true"]],
+    "확산이유 · 2 (단순 사고·확증 편향)||4": [["this process"], ["fall into the trap of"]],
+    "확산이유 · 2 (단순 사고·확증 편향)||5": [["accept", "and ignore"], ["a way that", "news that"]],
+    "확산이유 · 2 (단순 사고·확증 편향)||6": [["describing"], ["while"]],
+
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||1": [["make sure that"], ["how can you"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||2": [["read"], ["beyond"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||3": [["so", "that"], ["to get more clicks"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||4": [["don't just", "but"], ["read the text"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||5": [["don't read"], ["at face value"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||6": [["Exercise"], ["to judge"]],
+    "식별법 · 1 (표제 넘어읽기·액면 부정)||7": [["question", "analyze", "and evaluate"], ["what you read"]]
+  }
+}

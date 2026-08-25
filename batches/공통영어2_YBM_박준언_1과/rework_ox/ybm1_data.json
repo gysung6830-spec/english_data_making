@@ -1,0 +1,872 @@
+[
+ {
+  "item_no": "도입 · 1 (흔들바위 오보)",
+  "title": "Warning: Fake News Alert! ①",
+  "theme_ko": "가짜 뉴스를 퍼뜨리고 당황한 Gina (흔들바위 오보)",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "While scrolling through her social media one day, Gina was astonished when she saw the news headline, \"The Heundeulbawi in Seoraksan National Park Has Fallen.\"",
+    "grammar": [
+     {
+      "tag": "분사구문",
+      "note": "While scrolling ~ = While she was scrolling ~"
+     },
+     {
+      "tag": "감정 수동태",
+      "note": "was astonished: '놀라게 되다(놀랐다)'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "Gina immediately shared the shocking story with her close friends.",
+    "grammar": [
+     {
+      "tag": "부사 위치",
+      "note": "immediately가 동사 shared 앞에서 '즉시'를 강조"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Later, during the morning news on TV, a reporter standing next to the undamaged Heundeulbawi said, \"Today's Internet stories of the Heundeulbawi being damaged were fake.\"",
+    "grammar": [
+     {
+      "tag": "현재분사 수식",
+      "note": "standing next to ~ 가 앞의 a reporter를 뒤에서 수식"
+     },
+     {
+      "tag": "동명사 수동",
+      "note": "the Heundeulbawi being damaged: 흔들바위가 훼손되는 것"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Gina was embarrassed by the fact that she had spread the fake news.",
+    "grammar": [
+     {
+      "tag": "동격 that",
+      "note": "the fact = that절 내용(자신이 가짜 뉴스를 퍼뜨림)"
+     },
+     {
+      "tag": "과거완료",
+      "note": "had spread: 당황하기 이전에 이미 퍼뜨린 일"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "도입 · 2 (운동선수 사망 오보)",
+  "title": "Warning: Fake News Alert! ②",
+  "theme_ko": "관심과 돈을 노린 가짜 뉴스, 그리고 Gina의 자성 (운동선수 사망 오보)",
+  "structure": "비교·대조",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "It reminded her of another incident of fake news that had happened a while ago.",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "incident를 수식하는 주격 that절"
+     },
+     {
+      "tag": "과거완료",
+      "note": "had happened: 지금보다 앞선 '얼마 전' 사건"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "The news that a famous athlete had died became the number one issue online, but it turned out to be fake.",
+    "grammar": [
+     {
+      "tag": "동격 that",
+      "note": "The news = that a famous athlete had died(뉴스의 내용)"
+     },
+     {
+      "tag": "과거완료",
+      "note": "had died: 화제가 되기 이전의 (거짓) 사망"
+     },
+     {
+      "tag": "turn out to be",
+      "note": "알고 보니 ~이다"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "It had been made by content creators who sought people's attention.",
+    "grammar": [
+     {
+      "tag": "과거완료 수동태",
+      "note": "had been made: 그 전에 이미 '만들어져' 있었다"
+     },
+     {
+      "tag": "관계대명사 who",
+      "note": "content creators를 수식"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "They produced provocative false stories to make money by raising the number of views of their posts.",
+    "grammar": [
+     {
+      "tag": "to부정사(목적)",
+      "note": "to make money: 돈을 벌기 위해"
+     },
+     {
+      "tag": "by -ing",
+      "note": "by raising ~: ~함으로써(수단)"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "At that time, Gina criticized those who had made and spread fake news because it had hurt the athlete and confused people.",
+    "grammar": [
+     {
+      "tag": "관계대명사 who",
+      "note": "those who ~: ~한 사람들"
+     },
+     {
+      "tag": "과거완료",
+      "note": "had made/spread, had hurt: 비난하던 시점 이전의 일"
+     },
+     {
+      "tag": "병렬 구조",
+      "note": "made and spread / hurt and confused"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "This time, however, Gina herself had accidentally contributed to the spread of fake news.",
+    "grammar": [
+     {
+      "tag": "재귀대명사 강조",
+      "note": "herself: 'Gina 자신이'를 강조"
+     },
+     {
+      "tag": "과거완료",
+      "note": "had contributed: 이번 일에 이미 기여함"
+     },
+     {
+      "tag": "대조 연결어",
+      "note": "however: 앞의 '그때'와 대조"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "영향 · 1 (가짜뉴스의 정의와 해악)",
+  "title": "The Impact of Fake News ①",
+  "theme_ko": "가짜뉴스의 정의와 그 해악",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Unfortunately, becoming an accidental distributor of fake news like Gina is not unusual.",
+    "grammar": [
+     {
+      "tag": "동명사 주어",
+      "note": "becoming ~ = '~가 되는 것'이 문장 주어"
+     },
+     {
+      "tag": "이중부정",
+      "note": "not unusual = 드물지 않다 → 흔하다"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "Fake news is a deliberate attempt to manipulate people by spreading inaccurate information.",
+    "grammar": [
+     {
+      "tag": "to부정사 형용사적 용법",
+      "note": "attempt to manipulate = 조종하려는 시도"
+     },
+     {
+      "tag": "동명사(전치사 뒤)",
+      "note": "by spreading = 퍼뜨림으로써"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "It is made by certain groups with the intention of attracting people's attention, making profits, or gaining political benefits.",
+    "grammar": [
+     {
+      "tag": "수동태",
+      "note": "is made by ~ = ~에 의해 만들어진다"
+     },
+     {
+      "tag": "병렬 동명사",
+      "note": "attracting ~, making ~, or gaining ~ 나열"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "It can confuse people, disturb society, and even seriously harm the public as well as all individuals involved.",
+    "grammar": [
+     {
+      "tag": "병렬 동사",
+      "note": "confuse ~, disturb ~, and harm ~ 나열"
+     },
+     {
+      "tag": "B as well as A",
+      "note": "the public as well as all individuals = 개인뿐 아니라 대중도"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "영향 · 2 (비상사태 확산·암본 지진)",
+  "title": "The Impact of Fake News ②",
+  "theme_ko": "비상사태 속 가짜뉴스의 확산 (암본 지진 사례)",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "It is very common for fake news to spread during states of emergency.",
+    "grammar": [
+     {
+      "tag": "가주어·진주어",
+      "note": "It ~ to spread = to부정사가 진주어"
+     },
+     {
+      "tag": "의미상 주어 for",
+      "note": "for fake news = to부정사의 주체"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "For example, after an earthquake measuring 6.5 struck Ambon, Indonesia, in September 2019, thousands of residents did not return to their homes and were still in shelters for two weeks.",
+    "grammar": [
+     {
+      "tag": "현재분사 수식",
+      "note": "an earthquake measuring 6.5 = 규모를 나타내는 분사"
+     },
+     {
+      "tag": "병렬 구조",
+      "note": "did not return ~ and were still ~ 나열"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "This was because of fake news stories on social media that another earthquake followed by a tsunami was about to strike.",
+    "grammar": [
+     {
+      "tag": "동격·관계 that",
+      "note": "stories that ~ = 어떤 이야기인지 설명"
+     },
+     {
+      "tag": "과거분사 수식",
+      "note": "followed by a tsunami = 쓰나미가 뒤따르는"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "One of those messages said, \"It's up to you if you want to believe me or not, but apparently Ambon is going to sink in the next few days.\"",
+    "grammar": [
+     {
+      "tag": "직접 인용",
+      "note": "said, \"...\" = 실제 말을 그대로 인용"
+     },
+     {
+      "tag": "It's up to you",
+      "note": "'~하는 것은 네게 달렸다'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Many displaced people were so anxious about aftershocks that the government had to announce that the information was fake.",
+    "grammar": [
+     {
+      "tag": "so ~ that 구문",
+      "note": "너무 …해서 ~하다(원인·결과)"
+     },
+     {
+      "tag": "동격 that",
+      "note": "announce that ~ = ~라고 발표하다"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "확산이유 · 1 (빠른 전파와 새로움 선호)",
+  "title": "Reasons for the Viral Spread ①",
+  "theme_ko": "가짜 뉴스가 진짜보다 빠르게 퍼지는 이유 ① — 새로움·자극 선호",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Fake news on social media spreads significantly farther and faster than true stories.",
+    "grammar": [
+     {
+      "tag": "비교급 farther and faster ~ than",
+      "note": "'~보다 더 멀리·더 빠르게'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "A study by the Massachusetts Institute of Technology in the US has shown that fake news spreads online 6 times faster than real news on average.",
+    "grammar": [
+     {
+      "tag": "배수 비교",
+      "note": "'6 times faster than' 배수사+비교급+than (⑤)"
+     },
+     {
+      "tag": "명사절 that",
+      "note": "has shown that ~ '~을 보여 주었다'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "One explanation for this phenomenon is that people like new and provocative things.",
+    "grammar": [
+     {
+      "tag": "지시형용사 this",
+      "note": "'이 (현상)'"
+     },
+     {
+      "tag": "보어 명사절 that",
+      "note": "is that ~ '~라는 것이다'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "When information is astonishing, people not only feel that it is surprising, but they also want to share the stimulating news with others.",
+    "grammar": [
+     {
+      "tag": "상관접속사 not only A but also B",
+      "note": "'A뿐만 아니라 B도'"
+     },
+     {
+      "tag": "명사절 that",
+      "note": "feel that it is surprising"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "By passing it to others on social media, they can gain attention because they are the first to post previously unknown, but possibly false, information.",
+    "grammar": [
+     {
+      "tag": "전치사 By + 동명사",
+      "note": "'~함으로써' (passing)"
+     },
+     {
+      "tag": "to부정사 형용사적",
+      "note": "the first to post '가장 먼저 올리는'"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "확산이유 · 2 (단순 사고·확증 편향)",
+  "title": "Reasons for the Viral Spread ②",
+  "theme_ko": "가짜 뉴스가 퍼지는 이유 ② — 단순한 사고와 확증 편향",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Also, fake news goes viral because people in their daily lives tend to think simply and effortlessly.",
+    "grammar": [
+     {
+      "tag": "tend to+V",
+      "note": "'~하는 경향이 있다'"
+     },
+     {
+      "tag": "이유 부사절 because",
+      "note": "'~하기 때문에'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "It is more likely for them to believe new information without any proof, instead of critically examining it.",
+    "grammar": [
+     {
+      "tag": "가주어 It - 진주어 to부정사",
+      "note": "It ~ for them to believe (⑤)"
+     },
+     {
+      "tag": "비교급 more likely",
+      "note": "'~할 가능성이 더 크다'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Moreover, people are inclined to believe information that fits their prejudices or experiences even when not true.",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "information that fits ~ '~에 들어맞는 정보'"
+     },
+     {
+      "tag": "부사절 생략",
+      "note": "even when (it is) not true"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "In this process, people easily fall into the trap of \"confirmation bias.\"",
+    "grammar": [
+     {
+      "tag": "지시형용사 this",
+      "note": "'이 (과정)' = 앞의 편향된 수용 과정"
+     },
+     {
+      "tag": "fall into the trap of",
+      "note": "'~의 함정에 빠지다'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "That is, they selectively accept news in a way that only confirms their beliefs and ignore news that doesn't support them.",
+    "grammar": [
+     {
+      "tag": "병렬 accept ~ and ignore ~",
+      "note": "동사 병렬"
+     },
+     {
+      "tag": "관계대명사 that",
+      "note": "a way that ~ / news that ~"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "During election season, for example, people tend to blindly believe any news describing their favored candidates in a positive way, while unconsciously believing news that reports something negative about other candidates.",
+    "grammar": [
+     {
+      "tag": "현재분사 describing",
+      "note": "news를 뒤에서 수식 '~을 묘사하는'"
+     },
+     {
+      "tag": "접속사 while",
+      "note": "'반면에' (대조)"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "식별법 · 1 (표제 넘어읽기·액면 부정)",
+  "title": "Ways to Spot and Avoid ①",
+  "theme_ko": "가짜뉴스를 가려내는 첫 두 방법: 표제 넘어읽기와 액면 부정",
+  "structure": "문제→해결(방안)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "With so much information on the Internet, how can you make sure that fake news does not mislead you?",
+    "grammar": [
+     {
+      "tag": "make sure that+절",
+      "note": "'~을 확실히 하다/확신하다' + 명사절 목적어"
+     },
+     {
+      "tag": "수사의문문",
+      "note": "how로 시작해 답을 유도하는 물음"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "First, read beyond the provocative headlines.",
+    "grammar": [
+     {
+      "tag": "명령문",
+      "note": "동사원형 read로 시작하는 명령문"
+     },
+     {
+      "tag": "beyond",
+      "note": "전치사 '~을 넘어서'"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "They can be so stimulating to get more clicks that you may click on them accidentally.",
+    "grammar": [
+     {
+      "tag": "so ~ that 구문",
+      "note": "'너무 ~해서 …하다'라는 정도와 결과"
+     },
+     {
+      "tag": "to부정사(목적)",
+      "note": "to get more clicks '~하려고'"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "So don't just read the headlines, but read the text carefully.",
+    "grammar": [
+     {
+      "tag": "not just A but B",
+      "note": "'A만 하지 말고 B하라' 병렬 대조"
+     },
+     {
+      "tag": "명령문",
+      "note": "don't ~, but read ~ 명령문"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "Second, don't read the news at face value.",
+    "grammar": [
+     {
+      "tag": "명령문",
+      "note": "Don't + 동사원형 부정 명령"
+     },
+     {
+      "tag": "at face value",
+      "note": "숙어 '액면 그대로, 곧이곧대로'"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "Exercise critical thinking skills to judge the news.",
+    "grammar": [
+     {
+      "tag": "명령문",
+      "note": "Exercise 동사원형으로 시작하는 명령문"
+     },
+     {
+      "tag": "to부정사(목적)",
+      "note": "to judge '판단하기 위해'"
+     }
+    ]
+   },
+   {
+    "id": 7,
+    "english": "You should question, analyze, and evaluate what you read.",
+    "grammar": [
+     {
+      "tag": "병렬(A, B, and C)",
+      "note": "question, analyze, evaluate 세 동사 병렬"
+     },
+     {
+      "tag": "관계대명사 what",
+      "note": "'~하는 것', 선행사를 포함"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "식별법 · 2 (편견 점검·출처 확인)",
+  "title": "Ways to Spot and Avoid ②",
+  "theme_ko": "가짜뉴스 식별법 ②: 편견 점검과 출처 신뢰성 확인",
+  "structure": "시간·순서(나열)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Third, examine your biases.",
+    "grammar": [
+     {
+      "tag": "명령문",
+      "note": "동사원형 examine으로 시작하는 명령문 — '~을 점검하라'"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "Consider if your own beliefs could affect your judgment.",
+    "grammar": [
+     {
+      "tag": "if 명사절",
+      "note": "if = whether, '~인지 아닌지'를 이끄는 명사절(목적어)"
+     },
+     {
+      "tag": "조동사 could",
+      "note": "could affect: '영향을 줄 수도 있다'는 가능성"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Ask yourself if you are only reading articles that suit your opinion, and look for articles that oppose your opinion as well.",
+    "grammar": [
+     {
+      "tag": "if 명사절",
+      "note": "Ask ... if ~: '~인지 (스스로에게) 물어라'"
+     },
+     {
+      "tag": "관계대명사 that",
+      "note": "articles that suit / that oppose: 기사를 수식"
+     },
+     {
+      "tag": "병렬",
+      "note": "Ask ... and look for ... 두 명령이 대등하게 연결"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Finally, check the credibility of the source.",
+    "grammar": [
+     {
+      "tag": "명령문",
+      "note": "check로 시작하는 명령문"
+     },
+     {
+      "tag": "서수 부사",
+      "note": "Finally: 마지막 단계를 알리는 신호어"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "You should examine who wrote the news story and what the intent was behind writing the news story.",
+    "grammar": [
+     {
+      "tag": "간접의문문",
+      "note": "examine who wrote ... and what ... was: 의문사절이 목적어"
+     },
+     {
+      "tag": "병렬",
+      "note": "who wrote ~ and what ~ was 두 명사절이 대등"
+     }
+    ]
+   },
+   {
+    "id": 6,
+    "english": "You also need to check whether the news story is from a reliable media source and the evidence is valid.",
+    "grammar": [
+     {
+      "tag": "whether 명사절",
+      "note": "check whether ~: '~인지 아닌지 확인하다'"
+     },
+     {
+      "tag": "병렬",
+      "note": "the news story is ... and the evidence is valid: 두 절이 대등"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "마무리 · 1 (디지털 시대 결어)",
+  "title": "Ways to Spot and Avoid ③(결론)",
+  "theme_ko": "디지털 시대의 결어: 비판적 시각으로 가짜뉴스 피해 줄이기",
+  "structure": "문제→해결(방안)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "In the digital age, it might be impossible to avoid or eliminate all false information that spreads online.",
+    "grammar": [
+     {
+      "tag": "가주어 it / 진주어 to",
+      "note": "it = 가주어, to avoid ~ 가 진주어 — 'it ~ to부정사' 구문"
+     },
+     {
+      "tag": "관계대명사 that",
+      "note": "information that spreads online: 정보를 수식"
+     },
+     {
+      "tag": "조동사 might",
+      "note": "might be impossible: '불가능할지도 모른다'는 추측"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "However, if you have the ability to view information critically and objectively, you will be able to reduce the damage that fake news can cause.",
+    "grammar": [
+     {
+      "tag": "조건문 (if ~, you will ~)",
+      "note": "if 현재형 조건절 + will 주절: '~하면 …할 것이다'"
+     },
+     {
+      "tag": "관계대명사 that",
+      "note": "the damage that fake news can cause: 피해를 수식(목적격 that)"
+     },
+     {
+      "tag": "병렬",
+      "note": "critically and objectively: 부사 대등 연결"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Don't forget! Anyone can be the next person producing or spreading fake news!",
+    "grammar": [
+     {
+      "tag": "부정 명령문",
+      "note": "Don't forget!: '~하지 마라'"
+     },
+     {
+      "tag": "현재분사 수식",
+      "note": "person producing or spreading ~: person을 뒤에서 꾸미는 분사구"
+     },
+     {
+      "tag": "병렬",
+      "note": "producing or spreading: 분사 대등 연결"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "본문 외 · 1 (에코 챔버란)",
+  "title": "Further Reading: Echo Chamber ①",
+  "theme_ko": "에코 챔버(반향실)란 무엇인가",
+  "structure": "주장→근거·예시",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "These days, everyone accesses the news through the Internet or social media, and often selectively takes the information that suits their tastes or beliefs.",
+    "grammar": [
+     {
+      "tag": "관계대명사 that",
+      "note": "'the information that suits ~' — 선행사 information 수식"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "However, consistently encountering similar perspectives without considering alternative views can lead you to be trapped in an \"echo chamber.\"",
+    "grammar": [
+     {
+      "tag": "분사(동명사) 주어",
+      "note": "'consistently encountering ~' 이 긴 주어"
+     },
+     {
+      "tag": "결과 lead to",
+      "note": "'lead you to be trapped' — ~하게 이끌다"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "An echo chamber refers to an enclosed space where sound doesn't leak out and returns as an echo.",
+    "grammar": [
+     {
+      "tag": "관계부사 where",
+      "note": "'a space where sound ~' — 장소 선행사 수식"
+     },
+     {
+      "tag": "병렬",
+      "note": "doesn't leak out and returns 병렬"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "The term \"echo chamber\" is also used to describe any situation in which you only hear opinions you already agree with.",
+    "grammar": [
+     {
+      "tag": "전치사+관계대명사",
+      "note": "'situation in which ~' — in which = where"
+     },
+     {
+      "tag": "접촉동사 agree with",
+      "note": "'opinions you agree with'"
+     }
+    ]
+   },
+   {
+    "id": 5,
+    "english": "This can distort your understanding of reality, and limit your ability to think critically and engage in meaningful debates.",
+    "grammar": [
+     {
+      "tag": "지시대명사 This",
+      "note": "앞 상황(에코 챔버에 갇힘) 전체를 받음"
+     },
+     {
+      "tag": "병렬",
+      "note": "distort ~ and limit ~ 병렬"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "item_no": "본문 외 · 2 (사회 분열과 대처)",
+  "title": "Further Reading: Echo Chamber ②",
+  "theme_ko": "에코 챔버의 사회적 폐해와 대처법",
+  "structure": "문제→해결(방안)",
+  "sentences": [
+   {
+    "id": 1,
+    "english": "Worse still, an echo chamber may foster social division, making collaboration on common issues challenging.",
+    "grammar": [
+     {
+      "tag": "분사구문 making",
+      "note": "'making ~ challenging' — 결과·부대상황"
+     },
+     {
+      "tag": "5형식",
+      "note": "make + 목적어 + challenging(목적격보어)"
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "english": "To avoid falling into this trap, you must actively seek diverse sources of information and engage with people who have different views.",
+    "grammar": [
+     {
+      "tag": "목적 to부정사",
+      "note": "'To avoid ~' — ~하기 위해서"
+     },
+     {
+      "tag": "관계대명사 who",
+      "note": "'people who have ~' 수식"
+     }
+    ]
+   },
+   {
+    "id": 3,
+    "english": "Always remember to check the information you receive, and keep an open mind when discussing new ideas.",
+    "grammar": [
+     {
+      "tag": "remember to+동사원형",
+      "note": "'앞으로 확인할 것'을 기억하라"
+     },
+     {
+      "tag": "명령문 병렬",
+      "note": "remember ~ and keep ~"
+     }
+    ]
+   },
+   {
+    "id": 4,
+    "english": "Even if you really want something to be true, it doesn't always mean that it is true.",
+    "grammar": [
+     {
+      "tag": "양보 Even if",
+      "note": "'설령 ~일지라도'"
+     },
+     {
+      "tag": "부분부정",
+      "note": "doesn't always — '항상 ~인 것은 아니다'"
+     }
+    ]
+   }
+  ]
+ }
+]

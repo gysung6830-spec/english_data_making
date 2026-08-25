@@ -1,0 +1,104 @@
+{
+  "misreads": {
+    "도입 · 1 (흔들바위 오보)||1": [
+      {"statement": "Gina는 소셜 미디어를 보다가 흔들바위가 무너졌다는 헤드라인을 보고 깜짝 놀랐다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "Gina는 그 뉴스 헤드라인으로 사람들을 깜짝 놀라게 했다.", "verdict": "X", "trap_type": "주체대상", "anchor": "was astonished", "why": "was astonished는 Gina가 놀란 것이지 남을 놀라게 한 것이 아니다."}
+    ],
+    "도입 · 1 (흔들바위 오보)||2": [
+      {"statement": "Gina shared the shocking story with her friends.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true},
+      {"statement": "Gina는 그 충격적인 이야기를 자신의 모든 팔로워에게 널리 퍼뜨렸다.", "verdict": "X", "trap_type": "무관정보", "anchor": "with her close friends", "why": "본문은 '가까운 친구들'에게 공유했다고만 하며 '모든 팔로워'는 본문에 없는 정보다."}
+    ],
+    "도입 · 1 (흔들바위 오보)||3": [
+      {"statement": "리포터는 훼손된 흔들바위 옆에 서서 방송을 했다.", "verdict": "X", "trap_type": "구조수식", "anchor": "the undamaged Heundeulbawi", "why": "undamaged는 '훼손되지 않은'이므로 '훼손된'은 수식을 정반대로 읽은 것이다."},
+      {"statement": "리포터는 그 인터넷 이야기들이 가짜라고 밝혔는데, 이는 흔들바위가 지진 후 복구되었기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "were fake", "why": "이야기가 가짜인 근거는 흔들바위가 애초에 훼손되지 않았다는 점이지 복구되어서가 아니다."}
+    ],
+    "도입 · 1 (흔들바위 오보)||4": [
+      {"statement": "Gina는 리포터가 가짜 뉴스를 퍼뜨렸다는 사실에 당황했다.", "verdict": "X", "trap_type": "지칭", "anchor": "she had spread the fake news", "why": "she는 Gina 자신을 가리키므로 가짜 뉴스를 퍼뜨린 사람은 Gina다.", "killer": true},
+      {"statement": "Gina는 가짜 뉴스를 퍼뜨린 것을 오히려 자랑스러워했다.", "verdict": "X", "trap_type": "필자관점", "anchor": "was embarrassed", "why": "was embarrassed(당황했다)는 자랑스러워하는 태도와 정반대다."}
+    ],
+
+    "도입 · 2 (운동선수 사망 오보)||1": [
+      {"statement": "그것은 Gina에게 얼마 전 있었던 또 다른 가짜 뉴스 사건을 떠올리게 했다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "그 가짜 뉴스 사건은 앞으로 일어날 일이었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "had happened a while ago", "why": "had happened와 a while ago는 이미 얼마 전에 '일어난' 일임을 뜻한다."}
+    ],
+    "도입 · 2 (운동선수 사망 오보)||2": [
+      {"statement": "The news about the athlete's death was fake.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true},
+      {"statement": "그 가짜 뉴스는 전 세계 모든 매체에서 1위를 차지했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "the number one issue online", "why": "본문은 '온라인에서' 1위였다고만 하며 '전 세계 모든 매체'는 과장이다."}
+    ],
+    "도입 · 2 (운동선수 사망 오보)||3": [
+      {"statement": "그 뉴스는 사람들의 관심을 끌려는 그 유명 운동선수에 의해 만들어졌다.", "verdict": "X", "trap_type": "주체대상", "anchor": "content creators who sought people's attention", "why": "그 뉴스를 만든 주체는 콘텐츠 제작자들이지 운동선수가 아니다.", "killer": true}
+    ],
+    "도입 · 2 (운동선수 사망 오보)||4": [
+      {"statement": "그들은 돈을 벌었기 때문에 자극적인 가짜 이야기를 만들었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "to make money", "why": "to make money는 '돈을 벌기 위한' 목적이지 이야기를 만든 원인이 아니다."}
+    ],
+    "도입 · 2 (운동선수 사망 오보)||5": [
+      {"statement": "Gina는 가짜 뉴스를 만들고 퍼뜨린 사람들을 칭찬했다.", "verdict": "X", "trap_type": "필자관점", "anchor": "criticized", "why": "criticized(비판했다)는 칭찬하는 태도와 정반대다."},
+      {"statement": "그 가짜 뉴스는 운동선수에게 도움이 되고 사람들을 안심시켰다.", "verdict": "X", "trap_type": "구조수식", "anchor": "hurt the athlete and confused people", "why": "hurt and confused는 해를 끼치고 혼란스럽게 한 것이므로 도움·안심과 정반대다."}
+    ],
+    "도입 · 2 (운동선수 사망 오보)||6": [
+      {"statement": "이번 가짜 뉴스 확산에 기여한 사람은 Gina가 아닌 다른 사람들이었다.", "verdict": "X", "trap_type": "지칭", "anchor": "Gina herself", "why": "herself는 Gina 자신을 강조하므로 기여한 사람은 바로 Gina다."},
+      {"statement": "이번에도 Gina가 가짜 뉴스 확산에 관여했는데, 이는 그녀가 가짜 뉴스를 의도적으로 만들었기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "accidentally contributed", "why": "문장 5·6 종합: Gina는 '우연히' 기여한 것이지 예전처럼 의도적으로 가짜 뉴스를 만든 것이 아니다.", "integrative": true}
+    ],
+
+    "영향 · 1 (가짜뉴스의 정의와 해악)||1": [
+      {"statement": "Gina처럼 가짜 뉴스의 우연한 유포자가 되는 일은 드물지 않다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "필자는 가짜 뉴스의 우연한 유포가 매우 드문 일이라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "is not unusual", "why": "not unusual은 '드물지 않다=흔하다'이므로 드물다는 필자 취지와 정반대다."}
+    ],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||2": [
+      {"statement": "가짜 뉴스는 부정확한 정보를 퍼뜨림으로써 사람들에게 조종당하는 대상이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "to manipulate people", "why": "가짜 뉴스가 사람들을 '조종하려는' 것이지 조종당하는 것이 아니다."},
+      {"statement": "가짜 뉴스는 사람들을 조종하려는 의도적 시도인데, 이는 부정확한 정보가 우연히 섞여 들기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "by spreading inaccurate information", "why": "부정확한 정보를 '퍼뜨림으로써' 의도적으로 조종하는 것이지 우연히 섞이는 것이 아니다."}
+    ],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||3": [
+      {"statement": "Fake news is made by certain groups.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true},
+      {"statement": "진짜 뉴스는 관심·이익·정치적 이득을 노리는 특정 집단이 만든다.", "verdict": "X", "trap_type": "지칭", "anchor": "It is made by certain groups", "why": "문장 2·3 종합: It은 앞 문장의 Fake news를 가리키므로 진짜 뉴스가 아니다.", "killer": true, "integrative": true}
+    ],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||4": [
+      {"statement": "가짜 뉴스는 항상 사회를 완전히 붕괴시켜 회복 불가능하게 만든다.", "verdict": "X", "trap_type": "무관정보", "anchor": "disturb society", "why": "본문은 사회를 '교란한다'고 할 뿐 '항상 완전히 붕괴·회복불가'라는 정보는 없다."},
+      {"statement": "가짜 뉴스는 대중은 해치지 않고 오직 관련된 개인들만 해친다.", "verdict": "X", "trap_type": "구조수식", "anchor": "the public as well as all individuals involved", "why": "B as well as A는 '개인들뿐 아니라 대중도'이므로 대중도 피해에 포함된다."}
+    ],
+
+    "영향 · 2 (비상사태 확산·암본 지진)||1": [
+      {"statement": "Fake news spreads a lot during emergencies.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "english": true},
+      {"statement": "필자는 비상사태 동안 가짜 뉴스가 퍼지는 일은 매우 드물다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "It is very common", "why": "very common은 '매우 흔하다'이므로 드물다는 필자 취지와 정반대다."}
+    ],
+    "영향 · 2 (비상사태 확산·암본 지진)||2": [
+      {"statement": "지진 이후 수천 명의 주민이 곧바로 집으로 돌아갔다.", "verdict": "X", "trap_type": "구조수식", "anchor": "did not return to their homes", "why": "did not return이므로 집으로 '돌아가지 않았다'; 부정의 범위를 놓친 오독이다."},
+      {"statement": "주민들은 식수가 바닥나 2주 동안 대피소에 머물렀다.", "verdict": "X", "trap_type": "무관정보", "anchor": "in shelters for two weeks", "why": "대피소에 머문 이유로 '식수'는 본문에 없는 정보다."}
+    ],
+    "영향 · 2 (비상사태 확산·암본 지진)||3": [
+      {"statement": "가짜 뉴스가 퍼진 것은 주민들이 대피소에 머물렀기 때문이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "This was because of fake news stories", "why": "주민들이 집에 안 돌아간 원인이 가짜 뉴스이지, 인과 방향이 그 반대가 아니다.", "killer": true}
+    ],
+    "영향 · 2 (비상사태 확산·암본 지진)||4": [
+      {"statement": "그 메시지들 중 하나는 정부의 공식 발표였다.", "verdict": "X", "trap_type": "지칭", "anchor": "One of those messages", "why": "those messages는 소셜 미디어의 가짜 뉴스 메시지들을 가리키지 정부 발표가 아니다."},
+      {"statement": "그 메시지는 암본이 곧 가라앉을 것이라 경고했는데, 이는 실제 지질 조사에 근거한 것이었다.", "verdict": "△", "trap_type": "무관정보", "anchor": "Ambon is going to sink in the next few days", "why": "암본이 가라앉는다는 내용은 근거 없는 가짜 뉴스지 지질 조사 결과가 아니다."}
+    ],
+    "영향 · 2 (비상사태 확산·암본 지진)||5": [
+      {"statement": "이재민들이 여진을 너무 불안해해서 정부가 그 정보가 가짜라고 발표해야 했다.", "verdict": "O", "trap_type": "", "anchor": "", "why": ""},
+      {"statement": "정부가 여진을 너무 불안해한 나머지, 이재민들이 그 정보가 가짜라고 발표했다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the government had to announce", "why": "발표한 주체는 정부이고, 여진을 불안해한 것은 이재민들이다."}
+    ]
+  },
+  "spans": {
+    "도입 · 1 (흔들바위 오보)||1": [["While scrolling"], ["was astonished"]],
+    "도입 · 1 (흔들바위 오보)||2": [["immediately"]],
+    "도입 · 1 (흔들바위 오보)||3": [["standing next to"], ["being damaged"]],
+    "도입 · 1 (흔들바위 오보)||4": [["that"], ["had spread"]],
+
+    "도입 · 2 (운동선수 사망 오보)||1": [["that"], ["had happened"]],
+    "도입 · 2 (운동선수 사망 오보)||2": [["that"], ["had died"], ["turned out to be"]],
+    "도입 · 2 (운동선수 사망 오보)||3": [["had been made"], ["who"]],
+    "도입 · 2 (운동선수 사망 오보)||4": [["to make money"], ["by raising"]],
+    "도입 · 2 (운동선수 사망 오보)||5": [["who"], ["had made"], ["made and spread"]],
+    "도입 · 2 (운동선수 사망 오보)||6": [["herself"], ["had accidentally contributed"], ["however"]],
+
+    "영향 · 1 (가짜뉴스의 정의와 해악)||1": [["becoming"], ["not unusual"]],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||2": [["to manipulate"], ["by spreading"]],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||3": [["is made by"], ["attracting", "making", "gaining"]],
+    "영향 · 1 (가짜뉴스의 정의와 해악)||4": [["confuse", "disturb", "harm"], ["as well as"]],
+
+    "영향 · 2 (비상사태 확산·암본 지진)||1": [["It", "to spread"], ["for fake news"]],
+    "영향 · 2 (비상사태 확산·암본 지진)||2": [["measuring"], ["did not return", "were still"]],
+    "영향 · 2 (비상사태 확산·암본 지진)||3": [["that"], ["followed by"]],
+    "영향 · 2 (비상사태 확산·암본 지진)||4": [["said"], ["It's up to you"]],
+    "영향 · 2 (비상사태 확산·암본 지진)||5": [["so", "that"], ["announce that"]]
+  }
+}

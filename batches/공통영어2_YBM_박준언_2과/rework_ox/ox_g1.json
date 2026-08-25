@@ -1,0 +1,304 @@
+{
+  "misreads": {
+    "장면 · 1 (수도가 끊기다)||1": [
+      {
+        "statement": "기침하듯 소리를 내고 물을 한 번 뱉은 주체는 화자(나)다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "The kitchen tap makes strange sounds",
+        "why": "It은 the kitchen tap을 받으므로 소리를 내고 물을 뱉은 주체는 수도꼭지다.",
+        "english": false
+      },
+      {
+        "statement": "수도꼭지가 물을 한 번 뱉고는 이내 조용해진다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "장면 · 1 (수도가 끊기다)||2": [
+      {
+        "statement": "거실을 향해 물이 안 나온다고 외친 사람은 엄마다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "I shout out into the living room",
+        "why": "외친 주체는 I(화자)이며 엄마는 거실 안에 있는 대상이다.",
+        "english": false
+      }
+    ],
+    "장면 · 1 (수도가 끊기다)||3": [
+      {
+        "statement": "엄마는 물이 끊겼다는 말에 놀라 Alyssa를 다급히 부른다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "shush!",
+        "why": "'shush'는 조용히 하라고 시키는 말로, 놀라 부르는 것이 아니다.",
+        "english": false
+      }
+    ],
+    "장면 · 1 (수도가 끊기다)||4": [
+      {
+        "statement": "뉴스 진행자가 '흐름 위기(flow crisis)'에 대해 말하고 있다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "엄마는 TV를 보고 있다 — 화면에서는 가뭄이 끝났다는 소식이 흘러나온다.",
+        "verdict": "△",
+        "trap_type": "무관정보",
+        "anchor": "a news anchor is talking about the “flow crisis.”",
+        "why": "TV를 본다는 방향은 맞지만 진행자는 '흐름 위기'를 말할 뿐 가뭄이 끝났다는 내용은 없다.",
+        "english": false
+      }
+    ],
+    "장면 · 1 (수도가 끊기다)||5": [
+      {
+        "statement": "언론은 사람들이 'drought'라는 말을 즐겨 듣게 되자 그것을 달리 부르기 시작했다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "ever since people got tired of hearing the word “drought.”",
+        "why": "사람들이 그 말에 '싫증 난' 것이 계기인데, '즐겨 듣게 되어서'로 원인을 정반대로 뒤집었다.",
+        "killer": true,
+        "english": false
+      }
+    ],
+    "장면 · 1 (수도가 끊기다)||6": [
+      {
+        "statement": "이제 위기가 새로운 국면으로 접어들고 있다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      },
+      {
+        "statement": "수도에서 물이 끊기자 온 마을 사람들이 대피를 시작한다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "We have no running water out of the tap",
+        "why": "본문엔 수돗물이 끊겼다는 사실만 있을 뿐, 대피한다는 내용은 없다.",
+        "english": false
+      }
+    ],
+
+    "장면 · 2 (몰의 군중)||1": [
+      {
+        "statement": "'몰로 가자'고 외친 사람은 화자와 남동생이다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "says Uncle Basil",
+        "why": "'몰로 가자'고 말한 주체는 Uncle Basil이며 두 아이는 트럭에 올라탄 쪽이다.",
+        "english": false
+      },
+      {
+        "statement": "화자와 남동생 Garrett은 삼촌의 트럭에 올라탄다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "장면 · 2 (몰의 군중)||2": [
+      {
+        "statement": "They see a crowd when they arrive.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": "",
+        "english": true
+      },
+      {
+        "statement": "주차장이 한산해서 그들은 곧장 안으로 들어간다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "we can see the crowd",
+        "why": "주차장에 들어서며 그들이 본 것은 군중(crowd)이며, 한산했다는 내용은 없다.",
+        "english": false
+      }
+    ],
+    "장면 · 2 (몰의 군중)||3": [
+      {
+        "statement": "삼촌이 먼저 안으로 들어가 자리를 잡은 뒤 두 아이를 불러들인다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "You two go in",
+        "why": "삼촌은 두 아이더러 먼저 들어가라 하고 자신은 나중에 안에서 합류한다(순서가 반대).",
+        "english": false
+      },
+      {
+        "statement": "삼촌은 두 아이에게 먼저 들어가라 하고 안에서 만나자고 한다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "장면 · 2 (몰의 군중)||4": [
+      {
+        "statement": "사람들이 몰에서 사려고 몰려든 것은 텔레비전과 비디오 게임이다.",
+        "verdict": "X",
+        "trap_type": "구조수식",
+        "anchor": "it’s not televisions and video games people are after",
+        "why": "'it's not ~ people are after'는 사람들이 노리는 게 TV·게임이 '아니다'라는 뜻이다.",
+        "english": false
+      },
+      {
+        "statement": "몰 안은 최악의 블랙 프라이데이 같은 아수라장이다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "장면 · 2 (몰의 군중)||5": [
+      {
+        "statement": "계산대 줄의 카트 안에서 화자가 본 것은 대부분 통조림 식품이다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "are mostly water bottles",
+        "why": "화자가 본 것은 대부분 water bottles(물병)인데 통조림으로 대상을 바꿨다.",
+        "killer": true,
+        "english": false
+      },
+      {
+        "statement": "본문에서 '삶의 필수품'이라 부른 것은 텔레비전이다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "are mostly water bottles",
+        "why": "The essentials of life는 바로 앞 water bottles를 부연 지칭하므로 물병을 뜻한다.",
+        "english": false
+      }
+    ],
+    "장면 · 2 (몰의 군중)||6": [
+      {
+        "statement": "줄을 선 사람들의 표정에는 여유와 친절이 가득하다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "There is a look of impatience on the faces of the people in line",
+        "why": "사람들 얼굴엔 초조함이 서려 있어 여유·친절과는 정반대다.",
+        "english": false
+      },
+      {
+        "statement": "줄 선 사람들 사이엔 적대감이 감돈다 — 오래 알고 지낸 이웃들이기 때문이다.",
+        "verdict": "△",
+        "trap_type": "무관정보",
+        "anchor": "hidden by a thin layer of politeness",
+        "why": "적대감이 있다는 방향은 맞지만 그것은 얇은 예의에 가려진 것일 뿐, 이웃 관계 때문이라는 근거는 없다.",
+        "english": false
+      }
+    ],
+
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||1": [
+      {
+        "statement": "화자는 진열대가 아직 가득해 늦지 않았다고 안도한다.",
+        "verdict": "X",
+        "trap_type": "인과조건",
+        "anchor": "I realize I am too late",
+        "why": "화자는 스스로 '너무 늦었다'고 깨달으며, 늦지 않았다는 것과 정반대다.",
+        "english": false
+      },
+      {
+        "statement": "화자는 물병을 찾아 매장 안쪽으로 간다 — 그곳 진열대가 가장 잘 차 있기 때문이다.",
+        "verdict": "△",
+        "trap_type": "무관정보",
+        "anchor": "The shelves are already empty",
+        "why": "안쪽으로 간 방향은 맞지만 그 진열대는 이미 비어 있어 '잘 차 있어서'라는 근거는 틀렸다.",
+        "english": false
+      }
+    ],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||2": [
+      {
+        "statement": "화자는 직원이 매장을 다시 채우는 것을 보며 옆 통로로 향한다.",
+        "verdict": "X",
+        "trap_type": "무관정보",
+        "anchor": "Sometimes people place unwanted items in the wrong shelves",
+        "why": "옆 통로로 간 것은 사람들이 원치 않는 물건을 엉뚱한 칸에 두곤 하기 때문이며, 직원 재입고 언급은 없다.",
+        "english": false
+      },
+      {
+        "statement": "화자는 운을 시험하며 옆 통로로 향한다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||3": [
+      {
+        "statement": "화자가 어제 그곳에 두고 간 생수 한 상자를 다시 찾아냈다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "that someone abandoned there maybe yesterday",
+        "why": "그 생수를 버려둔 것은 someone(누군가)이지 화자가 아니다.",
+        "killer": true,
+        "english": false
+      },
+      {
+        "statement": "'그것(it)이 귀한 물건이 아니었을 때'에서 it은 옆 통로를 가리킨다.",
+        "verdict": "X",
+        "trap_type": "지칭",
+        "anchor": "when it wasn’t such a precious commodity",
+        "why": "it은 앞의 water(생수)를 가리키며, 통로가 아니다.",
+        "english": false
+      }
+    ],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||4": [
+      {
+        "statement": "화자가 마지막 순간에 그 물을 여자의 손에서 낚아챈다.",
+        "verdict": "X",
+        "trap_type": "주체대상",
+        "anchor": "only to find it pulled away at the last second by a woman",
+        "why": "물을 채간 것은 a woman이고 화자는 빼앗긴 쪽이다(수동).",
+        "english": false
+      },
+      {
+        "statement": "A woman takes the water away at the last second.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": "",
+        "english": true
+      }
+    ],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||5": [
+      {
+        "statement": "여자는 빼앗은 물을 대수롭지 않게 카트 아무 곳에나 던져 둔다.",
+        "verdict": "X",
+        "trap_type": "필자관점",
+        "anchor": "like a crown on top of her canned goods",
+        "why": "물을 '왕관처럼' 통조림 위에 얹었다는 비유는 전리품처럼 떠받드는 태도를 보여준다.",
+        "english": false
+      },
+      {
+        "statement": "여자는 통조림 위에 그 물을 왕관처럼 얹는다.",
+        "verdict": "O",
+        "trap_type": "",
+        "anchor": "",
+        "why": ""
+      }
+    ]
+  },
+  "spans": {
+    "장면 · 1 (수도가 끊기다)||1": [["It"]],
+    "장면 · 1 (수도가 끊기다)||2": [["water is not coming out"]],
+    "장면 · 1 (수도가 끊기다)||3": [["shush!"]],
+    "장면 · 1 (수도가 끊기다)||4": [["where"]],
+    "장면 · 1 (수도가 끊기다)||5": [["what"], ["has been calling"]],
+    "장면 · 1 (수도가 끊기다)||6": [["is entering"]],
+
+    "장면 · 2 (몰의 군중)||1": [["To the mall!"], ["uncle’s"]],
+    "장면 · 2 (몰의 군중)||2": [["As"]],
+    "장면 · 2 (몰의 군중)||3": [["You two go in"], ["I’ll"]],
+    "장면 · 2 (몰의 군중)||4": [["it’s not", "people are after"], ["like Black Friday"]],
+    "장면 · 2 (몰의 군중)||5": [["What"], ["The essentials of life"]],
+    "장면 · 2 (몰의 군중)||6": [["hidden by"], ["that politeness"]],
+
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||1": [["realize I am"], ["As"]],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||2": [["trying my luck"]],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||3": [["that"], ["when"]],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||4": [["only to find"], ["pulled"]],
+    "장면 · 3 (빈 진열대와 뺏긴 생수)||5": [["like a crown"]]
+  }
+}
