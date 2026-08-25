@@ -45,7 +45,7 @@ A4_H_PX = 1123
 # 본문 가용 높이 = A4(297mm) - 상하 여백 20mm씩 = 257mm
 PAGE_H_PX = 257 * 96 / 25.4          # ≈ 971px
 CALIB = 0.90                          # measure ↔ 실제 PDF 오차 흡수(넘침 방지)
-FIT_STEPS = ["", "compact", "compact2"]
+FIT_STEPS = ["", "compact", "compact2", "compact3"]
 
 # 하단 왼쪽 저작권 문구 + 하단 오른쪽 페이지 번호
 FOOTER_TEXT = "©2026.Ortica영어.All rights reserved"
@@ -366,11 +366,21 @@ def _apply_autofit(page) -> None:
 
     for i in range(1, count + 1):
         sel = f"#passage-{i}"
+        # 장문(범위 라벨)은 압축 예외 → 자연스러운 2페이지+ 흐름
+        is_long = page.eval_on_selector(
+            sel, "el => el.classList.contains('long')"
+        )
+        if is_long:
+            _set_passage_class(page, sel, "", keep_long=True)
+            continue
+
         budget = PAGE_H_PX * CALIB
         if i == 1:
             budget = (PAGE_H_PX - header_h) * CALIB
 
-        chosen = FIT_STEPS[-1]  # 기본은 최대 축소 → 그래도 넘치면 흐름 허용
+        # 첫 단계부터 순서대로 시도, 한 페이지에 들어가는 가장 약한 축소를 채택.
+        # 최대 축소(compact3)로도 넘치면 그대로 유지(= 한 페이지에 최대한 압축).
+        chosen = FIT_STEPS[-1]
         for step in FIT_STEPS:
             _set_passage_class(page, sel, step)
             h = page.eval_on_selector(
@@ -379,16 +389,18 @@ def _apply_autofit(page) -> None:
             if h <= budget:
                 chosen = step
                 break
-        else:
-            # compact2 로도 초과 → 축소를 풀고(빈 클래스) 자연스러운 2페이지+ 흐름
-            chosen = ""
 
         _set_passage_class(page, sel, chosen)
 
 
-def _set_passage_class(page, selector: str, step: str) -> None:
-    """지문 요소의 클래스를 '.passage' + step 으로 설정."""
-    cls = "passage" + (f" {step}" if step else "")
+def _set_passage_class(page, selector: str, step: str,
+                       keep_long: bool = False) -> None:
+    """지문 요소의 클래스를 '.passage'(+long)(+step) 으로 설정."""
+    cls = "passage"
+    if keep_long:
+        cls += " long"
+    if step:
+        cls += f" {step}"
     page.eval_on_selector(
         selector, "(el, cls) => { el.className = cls; }", cls
     )

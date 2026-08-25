@@ -75,6 +75,15 @@ AUTOFIT_RULES = """
 .passage.compact  .vocab-item { font-size:10.5px; }
 .passage.compact2 .vocab { margin-top:9px; padding:6px 10px; }
 .passage.compact2 .vocab-item { font-size:10px; }
+/* 3단계 축소 (한 페이지 강제 압축용) */
+.passage.compact3 .en { font-size:11px;   line-height:1.32; }
+.passage.compact3 .ko { font-size:9.3px;  line-height:1.3; }
+.passage.compact3 .sent { margin-bottom:4.5px; padding-bottom:4.5px; }
+.passage.compact3 .ko-box { margin-top:3.5px; padding:4px 8px; }
+.passage.compact3 td { padding:4px 8px 4px 0; font-size:11px; }
+.passage.compact3 .p-head { margin-bottom:8px; }
+.passage.compact3 .vocab { margin-top:7px; padding:5px 9px; }
+.passage.compact3 .vocab-item { font-size:9.3px; }
 """
 
 # ── 하단 어휘 리스트 박스 (모든 테마 공통) ────────────────────

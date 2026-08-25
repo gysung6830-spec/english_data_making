@@ -60,9 +60,15 @@ def _doc(body_html: str, css: str, header_text: str) -> str:
 </html>"""
 
 
+def _is_long_label(label: str) -> bool:
+    """장문(범위) 라벨인지: 'N~M번'처럼 번호 범위면 True."""
+    return bool(_re.search(r"\d+\s*[~∼\-]\s*\d+", label or ""))
+
+
 def _passage_head(idx: int, p: Passage, doc_name: str = "") -> str:
     """지문 여는 태그 + 머리(뱃지 '파일명 지문번호' + 지문주제)."""
-    parts = [f'<div class="passage" id="passage-{idx}">']
+    cls = "passage long" if _is_long_label(p.label) else "passage"
+    parts = [f'<div class="{cls}" id="passage-{idx}">']
     # 뱃지 = 파일명 + 지문번호(라벨)
     bits = []
     if doc_name and doc_name.strip():
