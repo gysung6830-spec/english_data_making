@@ -391,7 +391,7 @@ def paraphrase_line(p):
     return f'<div class="pline"><span class="lb">패러프레이즈</span> <span class="sw">{frm}</span> {arw} <span class="sw">{to}</span> ✓{tail}</div>'
 
 
-def opts_block(opts, answer):
+def opts_block(opts, answer, choices=None):
     lis = []
     for o in opts:
         n = o.get("n")
@@ -400,11 +400,19 @@ def opts_block(opts, answer):
         jd = o.get("jd") or ("✔ 정답" if ok else "✘")
         if ok and jd.startswith("✔") and "정답" not in jd:
             jd = "✔ 정답 · " + jd[1:].strip()
+        # 영어 원문 선지(주제·제목·빈칸 등)면 '영어 + 한글 뜻'으로, 한글 선지(요지)면 한글만
+        en = (choices or {}).get(str(n)) if choices else None
+        en_official = bool(en and re.search(r"[A-Za-z]{3,}", en))
         ko = o.get("ko", "")
-        ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
+        if en_official:
+            main = f'<span class="tx en">{esc(en)}</span>'
+            ko_html = f'<span class="oko">{esc(ko)}</span>' if ko else ""
+        else:
+            main = f'<span class="tx">{o.get("tx","")}</span>'
+            ko_html = ""
         badge = '<span class="okflag">정답</span>' if ok else ""
         lis.append(f'<div class="{cls}"><span class="n">{CIRCLED[n-1] if n else "·"}</span>'
-                    f'<span class="txwrap"><span class="tx">{o.get("tx","")}</span>{ko_html}</span>'
+                    f'<span class="txwrap">{main}{ko_html}</span>'
                     f'{badge}<span class="jd">{esc(jd)}</span></div>')
     circ = CIRCLED[answer-1] if answer and 1 <= answer <= 5 else "·"
     head = f'<div class="ans-head">✅ 정답 <span class="ansno">{circ}</span></div>'
@@ -894,12 +902,12 @@ def solution_block(rec, c, idx, tno=None):
         '<u class="pu mn">부정</u><sup class="pm mn">−</sup> = <b>±어휘</b> <span style="color:#8a929b">(PART 0 ± 사전)</span></span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
+      <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
       {clue_legend}{color_legend}
       <div class="psg">{passage_html}</div>
       {reason_block}
       {pline}
-      {mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer)}
+      {mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer, rec.get("choices"))}
       {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
     </div>'''
@@ -943,7 +951,7 @@ def solution_block(rec, c, idx, tno=None):
             _a, _b = (_parts + ["", ""])[:2]
             step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
     right2 = f'''<div class="card trans">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
+      <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
         <span class="kt">{step3_head}</span>
         {step3_body}
@@ -1036,7 +1044,7 @@ def render_spread(rec, c, idx, tno=None):
     rquiz = restate_problem(rt, _cue)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
-    <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{f'<span class="tnob">{typ} {tno:02d}</span>' if tno else ''}
+    <div class="pbanner"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span>
       {'<span class="daepyo">⭐ 대표</span>' if c.get("daepyo") else ''}{'<span class="pt">'+pts+'</span>' if pts else ''}<span class="psrc">평가원 {exam_src(rec.get("exam_id",""))} {num}번</span><span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
       <div class="pmain">
@@ -1101,7 +1109,7 @@ def render_fallback(rec, idx, tno=None):
         ch += f'<div{cls}><span class="n">{CIRCLED[k-1]}</span><span class="tx">{esc(choices[str(k)])}</span>{jd}</div>'
     formula = FORMULA.get(typ, "")
     return f'''<div class="card solo">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}
+      <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span>
         {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="kind">훈련(정답 칠)</span>
         <span class="tm">{esc(rec.get("exam_id",""))} · #{idx}</span></div>
       <div class="psg">{_fallback_hl(rec["passage"])}</div>
@@ -1638,6 +1646,8 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .opt{ display:flex; gap:6px; align-items:baseline; font-size:9.5px; margin-bottom:3px; }
 .opt .n{ flex:none; font-weight:800; width:14px; } .opt .txwrap{ flex:1; } .opt .tx{ display:inline; } .opt .jd{ flex:none; font-size:8.6px; font-weight:800; }
 .opt .oko{ display:block; font-size:8.8px; color:#5a6169; margin-top:1px; line-height:1.4; }
+.opt .oko::before{ content:"↳ "; color:#aab0b6; }
+.opt .tx.en{ font-family:"Liberation Serif","DejaVu Serif",serif; color:#23272e; }
 .opt.ok .oko{ color:#12543d; }
 .opt.ok{ background:#dff0e8; border:1.5px solid var(--ink); border-radius:5px; padding:3px 6px; } .opt.ok .jd{ color:var(--ink-d); } .opt.x .jd{ color:var(--trap); }
 /* 정답 선지: 동그라미 번호를 초록 채움 + '정답' 배지 */
