@@ -11,8 +11,38 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 
-from .lecture_schemas import STANCES, STRUCTURES, LecturePassage
+from .lecture_schemas import STANCES, STRUCTURES, GrammarChip, LecturePassage
 from .tag_terms import normalize_tag
+
+# 구동사·숙어를 가르는 표지(파티클·전치사). 이게 든 다어절 표현만 어법칩으로 승격
+_PARTICLES = {"on", "in", "of", "up", "out", "off", "for", "to", "down", "with",
+              "as", "into", "over", "at", "from", "about", "through", "against",
+              "upon", "onto", "by", "after", "away", "along", "around", "apart"}
+
+
+def _promote_idiom_chips(s) -> list:
+    """문장 어휘 중 '숙어·구동사'(다어절 + 파티클 포함)를 어법칩으로 승격.
+
+    - 원문에 '그대로' 있는 표현만(형광펜 span 을 위해). 기존 칩과 중복은 제외.
+    - 데이터 변경 없이 렌더 시 항상 숙어를 어법칩으로 노출한다.
+    """
+    en = s.english or ""
+    low = en.lower()
+    existing = {(g.tag or "").strip().lower() for g in s.grammar}
+    out, seen = [], set()
+    for v in getattr(s, "vocab", []) or []:
+        w = (v.word or "").strip()
+        wl = w.lower()
+        if " " not in w or wl in existing or wl in seen:
+            continue
+        if not any(p in wl.split() for p in _PARTICLES):
+            continue  # 파티클 없는 단순 명사구(고유명사 등)는 제외
+        i = low.find(wl)
+        if i < 0:
+            continue  # 원문에 그대로 없으면(굴절 등) 형광펜 불가 → 제외
+        seen.add(wl)
+        out.append(GrammarChip(tag=w, note=(v.meaning or ""), spans=[en[i:i + len(w)]]))
+    return out
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -253,8 +283,9 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
                 "en": _mark_en(c.en),
                 "ko": _mark_ko(c.ko, teacher),
             })
-        # 어법칩을 문장 속 위치 순서(왼→오)로 정렬 → 형광펜 번호가 순서대로 읽힘
-        og = _order_grammar(s.english, s.grammar)
+        # 숙어·구동사를 어법칩으로 승격 + 문장 속 위치 순서(왼→오)로 정렬
+        allg = list(s.grammar) + _promote_idiom_chips(s)
+        og = _order_grammar(s.english, allg)
         lines.append({
             "id": s.id,
             "english": s.english,
