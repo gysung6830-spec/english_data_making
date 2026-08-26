@@ -20,8 +20,12 @@ ROOT = Path(__file__).resolve().parent.parent
 BANK = ROOT / "corpus" / "passage_bank.jsonl"
 CONTENT = ROOT / "corpus" / "workbook_content.json"
 CONNECT = ROOT / "corpus" / "workbook_connect.json"
+DIRECT_FULL_PATH = ROOT / "corpus" / "direct_full.json"
 OUT = ROOT / "samples" / "유형별훈련_워크북.html"
 _CONNECT = {}
+DIRECT_FULL = {}
+if DIRECT_FULL_PATH.exists():
+    DIRECT_FULL = json.loads(DIRECT_FULL_PATH.read_text(encoding="utf-8"))
 CIRCLED = "①②③④⑤"
 
 SIGNALS = {
@@ -452,6 +456,113 @@ def direct_block(num, typ, direct):
     return rows
 
 
+_UCLS = {"ref": "uref", "conj": "uconj", "time": "utime"}
+
+
+def _mk_underline(text, marks):
+    """text 안의 특정 표현에 색줄(uref/uconj) span을 입힌다. marks=[[표현, kind], ...]."""
+    out = esc(text)
+    for expr, kind in (marks or []):
+        cls = _UCLS.get(kind, "uref")
+        out = out.replace(esc(expr), f'<span class="{cls}">{esc(expr)}</span>', 1)
+    return out
+
+
+def _slash(chunks):
+    SL = ' <span class="sl">/</span> '
+    return SL.join(esc(c) for c in chunks)
+
+
+def _slash_marked(chunks, marks):
+    SL = ' <span class="sl">/</span> '
+    joined = SL.join(esc(c) for c in chunks)
+    for expr, kind in (marks or []):
+        cls = _UCLS.get(kind, "uref")
+        joined = joined.replace(esc(expr), f'<span class="{cls}">{esc(expr)}</span>', 1)
+    return joined
+
+
+def direct_full_block(data):
+    """전 문장 직독직해 해석카드 — 유형별 표시(노란줄/무관이탈/이음매신호줄/요약)."""
+    kind = data.get("kind", "general")
+    rows_html = ""
+    n = 0
+    for r in data.get("rows", []):
+        if r.get("is_summary"):
+            def _blk(s):
+                return (esc(s).replace("___(A)___", '<span class="blk">(A)</span>')
+                        .replace("___(B)___", '<span class="blk">(B)</span>'))
+            sen = ' <span class="sl">/</span> '.join(_blk(c) for c in r.get("en", []))
+            sko = ' <span class="sl">/</span> '.join(_blk(c) for c in r.get("ko", []))
+            rows_html += (f'<div class="sumbox"><span class="sh">📝 요약문 — (A)·(B)를 채우면 정답</span>'
+                          f'<div class="sen">{sen}</div><div class="sko">{sko}</div></div>')
+            continue
+        role = r.get("role", "gray")
+        marks = r.get("marks") or r.get("mark")
+        marks_ko = r.get("marks_ko") or r.get("mark_ko")
+        en = _slash_marked(r.get("en", []), marks)
+        ko = _slash_marked(r.get("ko", []), marks_ko)
+        # 번호/라벨
+        label = r.get("label")
+        rowcls = "row"
+        lbl_inline = ""
+        if kind in ("seq", "mugwan") and label:
+            lblcls = "clab"
+            if role in ("given", "ctx"):
+                lblcls += " gv"
+            elif role in ("slot", "irr"):
+                lblcls += " rd"
+            else:
+                lblcls += " abc"
+            lbl_inline = f'<span class="{lblcls}">{esc(label)}</span>'
+            bn = ""
+            rowcls += " lab"
+        else:
+            n += 1
+            bn = f'<span class="bn">{n}</span>'
+        # 역할별 en 스타일
+        entag = ""
+        if role == "yellow":
+            rowcls += " y"
+            en = f'<span class="yl">{en}</span>'
+            btag = "🟡 읽기" + (" · 끝문장" if r.get("end") else "")
+            if r.get("blank"):
+                btag = f"🟡 근거({r['blank']})"
+            entag = f'<span class="tagm ry">{btag}</span>'
+        elif role in ("gray", "given") and kind not in ("seq",):
+            en = f'<span class="dim">{en}</span>'
+            if r.get("note"):
+                entag = f'<span class="tagm rg">{esc(r["note"])}</span>'
+        elif role == "skip":
+            en = f'<span class="dim">{en}</span>'
+            entag = '<span class="tagm rs">예시·부연</span>'
+        elif role == "irr":
+            rowcls += " irr"
+            entag = '<span class="irrmark">✕ 무관</span>'
+        # 노트(이음매/이탈 화살표)
+        note = ""
+        if r.get("note") and role in ("chunk", "slot", "irr", "ctx"):
+            nk = r.get("note_kind", "ref")
+            ncls = "arw-b" if nk == "ref" else ("arw-r" if nk == "conj" else "arw-b")
+            color = "irr" if role == "irr" else nk
+            note = f' <span class="jnote {ncls}">↳ {esc(r["note"])}</span>'
+        rows_html += (f'<div class="{rowcls}">{bn}<div class="rc">'
+                      f'<div class="en">{lbl_inline}{en}{entag}</div>'
+                      f'<div class="ko">{ko}{note}</div></div></div>')
+    # 유형별 꼬리
+    tail = ""
+    if kind == "mugwan" and data.get("concl"):
+        tail = f'<div class="dnote">→ 정답 <b>{esc(str(data.get("answer","")))}</b> — {esc(data["concl"])}</div>'
+    elif kind == "seq" and data.get("seqtype") == "삽입" and data.get("gap"):
+        tail = f'<div class="gapbox">🚫 {esc(data["gap"])}</div>'
+    elif kind == "seq" and data.get("concl"):
+        tail = f'<div class="dnote">→ {esc(data["concl"])}</div>'
+    elif kind == "summary" and data.get("summary_note"):
+        # 요약문 행(is_summary) 은 위에서 이미 렌더됨; 안내만
+        tail = f'<div class="snote">↳ {esc(data["summary_note"])}</div>'
+    return f'<div class="dfull">{rows_html}{tail}</div>'
+
+
 def seam_block(seq):
     """순서·삽입 '이음매형' 해석카드 — 조각별 지시어의 한국어 정체 + 어디에 붙는지."""
     if not seq:
@@ -791,8 +902,27 @@ def solution_block(rec, c, idx):
       {'<div class="reconnote">※ 원본 선지 일부가 유실되어 <b>선지를 학습용으로 재구성</b>했습니다 (지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
     </div>'''
+    dfull = DIRECT_FULL.get(f'{rec["exam_id"]}|{rec["num"]}')
     seqd = c.get("seq_direct") if seqtype else None
-    if seqd:
+    if dfull:
+        step3_kind = "STEP 3 · 해석 (전 문장 직독직해)"
+        _dk = dfull.get("kind")
+        if _dk == "mugwan":
+            step3_tm = "✕ 이탈 표시"
+            step3_head = "✕ 전 문장 직독직해 — 흐름과 <b>동떨어진 정답 문장</b>은 빨간 줄+✕"
+        elif _dk == "seq":
+            step3_tm = "🔗 이음매 신호줄"
+            step3_head = ("🔗 전 문장 직독직해 — 조각을 잇는 <b>지시어·연결어</b>에 색줄"
+                          if dfull.get("seqtype") == "순서" else
+                          "🔗 전 문장 직독직해 — <b>지시어·연결어</b> + <b>넣을 문장</b>, 빼면 뒤가 깨지는 자리가 정답")
+        elif _dk == "summary":
+            step3_tm = "🟡 근거+요약문"
+            step3_head = "🟡 전 문장 직독직해 — <b>노란 줄</b>=요약문 근거, 아래 <b>요약문 (A)(B)</b>"
+        else:
+            step3_tm = "🟡 전 문장"
+            step3_head = "🟡 전 문장 직독직해 — <b>형광펜(무조건 읽을) 문장</b>은 노란 줄, 슬래시(/)로 끊어 읽기"
+        step3_body = direct_full_block(dfull)
+    elif seqd:
         step3_kind = "STEP 3 · 해석 (조각 잇기)"; step3_tm = "🔗 지시어·이음매"
         step3_head = ("🔗 조각별 해석 — <b>지시어가 가리키는 것</b>과 <b>어디에 붙는지</b>로 순서를 확인"
                       if seqtype == "순서" else
@@ -1409,6 +1539,34 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .sbk{ display:inline-block; min-width:34px; text-align:center; font-weight:800; color:#a86b00; border-bottom:1.4px solid var(--must-line); background:#fff7e6; border-radius:3px; padding:0 6px; margin:0 2px; }
 .sfa,.sfb{ display:inline-block; font-weight:800; color:#12543d; background:var(--must); border-radius:3px; padding:0 5px; margin:0 2px; }
 .dchl .sumbox{ margin:0 0 8px; }
+/* 전 문장 직독직해 해석카드 */
+.dfull .row{ position:relative; padding-left:23px; margin-bottom:6px; }
+.dfull .bn{ position:absolute; left:0; top:1px; width:15px; height:15px; line-height:15px; text-align:center; background:#b9c2c9; color:#fff; border-radius:50%; font-size:8px; font-weight:800; }
+.dfull .row.y .bn{ background:var(--ink); }
+.dfull .row.lab{ padding-left:0; }
+.dfull .clab{ display:inline-block; color:#fff; font-weight:800; font-size:7.6px; border-radius:5px; padding:1px 6px; margin-right:6px; vertical-align:1px; }
+.dfull .clab.gv{ background:#6b7280; } .dfull .clab.abc{ background:var(--ink-d); } .dfull .clab.rd{ background:var(--trap); }
+.dfull .en{ font-size:10px; line-height:1.85; color:#23272e; }
+.dfull .ko{ font-size:9.4px; line-height:1.85; color:#33414d; margin-top:1px; }
+.dfull .en .dim{ color:#79828c; }
+.dfull .yl{ background:linear-gradient(transparent 56%, #ffe27a 56%); font-weight:600; color:#1f2a25; }
+.dfull .sl{ color:#b3beb6; font-weight:400; padding:0 1px; }
+.dfull .uref{ border-bottom:2px solid #2f6fb0; color:#194e7e; font-weight:700; }
+.dfull .uconj{ border-bottom:2px solid var(--trap); color:#8f2f28; font-weight:700; }
+.dfull .utime{ border-bottom:2px solid var(--ink); color:#12543d; font-weight:700; }
+.dfull .tagm{ display:inline-block; font-size:7.3px; font-weight:800; border-radius:8px; padding:0 5px; margin-left:4px; vertical-align:1px; }
+.dfull .tagm.ry{ color:#8a6a00; background:#fff4d1; } .dfull .tagm.rg{ color:#5f6870; background:#eef0f2; } .dfull .tagm.rs{ color:#8a929b; background:#f2f4f6; }
+.dfull .row.irr{ background:#fdecea; border-radius:5px; padding:3px 6px 3px 23px; }
+.dfull .row.irr .en{ color:#8f2f28; font-weight:600; }
+.dfull .irrmark{ color:#fff; background:var(--trap); border-radius:5px; font-size:7.3px; font-weight:800; padding:1px 6px; margin-left:4px; }
+.dfull .jnote{ font-size:8px; font-weight:700; } .dfull .arw-b{ color:#2f6fb0; } .dfull .arw-r{ color:#cd5049; }
+.dfull .dnote{ margin-top:6px; background:#eef4f1; border-left:3px solid var(--ink); border-radius:0 5px 5px 0; padding:6px 10px; font-size:9px; } .dfull .dnote b{ color:var(--ink-d); }
+.dfull .gapbox{ margin-top:6px; border:1.5px dashed var(--trap); background:#fdf2f1; border-radius:6px; padding:6px 10px; font-size:8.6px; color:#8f2f28; font-weight:700; line-height:1.5; } .dfull .gapbox b{ color:var(--trap); }
+.dfull .sumbox{ margin-top:6px; background:#fffdf3; border:1.5px solid var(--must-line); border-radius:7px; padding:7px 11px; }
+.dfull .sumbox .sh{ font-size:8px; font-weight:800; color:#a86b00; display:block; margin-bottom:3px; }
+.dfull .sumbox .sen{ font-size:9.6px; line-height:1.7; color:#23272e; } .dfull .sumbox .sko{ font-size:9.2px; color:#33414d; line-height:1.7; margin-top:2px; }
+.dfull .blk{ display:inline-block; min-width:30px; text-align:center; font-weight:800; color:var(--ink-d); border-bottom:2px solid var(--ink); }
+.dfull .snote{ font-size:8px; color:#8a929b; margin-top:4px; }
 .pguide{ margin-top:auto; background:#e9f4ef; border:1px solid var(--ink); border-radius:7px; padding:9px 12px; }
 .pguide .h{ font-size:9.5px; font-weight:800; color:var(--ink-d); margin-bottom:5px; }
 .pguide .g3{ display:flex; gap:8px; }
