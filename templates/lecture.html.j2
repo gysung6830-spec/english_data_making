@@ -3,6 +3,47 @@
 <html lang="ko">
 <head><meta charset="utf-8"><title>필생보</title></head>
 <body>
+{% if show_guide %}
+{#- A: 처음 쓰는 사람을 위한 사용법 1페이지 -#}
+<div class="guide brk-after">
+  <div class="g-head">
+    <div class="g-badge">필생보 사용법</div>
+    <div class="g-title">필자의 생각이 <b>보이는</b> 영어독해</div>
+    <div class="g-sub">한 지문을 <b>①통째로 읽고 → ②어휘 → ③문장별로 뜯어보고 → ④글 전체를 정리 → ⑤핵심 문법</b> 순서로 풉니다. 아래 표시만 알면 바로 시작할 수 있어요.</div>
+  </div>
+
+  <div class="g-flow">
+    <span class="gf"><span class="gf-n">1</span>지문 통째로 읽기</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">2</span>어휘 리스트</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">3</span>문장별 끊어읽기 &amp; 내용 파악</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">4</span>글 정리</span><span class="gf-arr">›</span>
+    <span class="gf"><span class="gf-n">5</span>핵심 문법</span>
+  </div>
+
+  <div class="g-legend">
+    <div class="gl-col">
+      <div class="gl-h">색·표시가 뜻하는 것</div>
+      <div class="gl-row"><span class="gl-chip q-chip">문제</span>직접 풀어야 하는 칸(빈칸·판단·객관식)</div>
+      <div class="gl-row"><span class="gl-chip gchip-demo"><span class="gnum">1</span>어법칩</span>그 문장에서 반드시 짚어야 할 어법 — 문장 속 위치를 찾아 ○표</div>
+      <div class="gl-row"><span class="gl-chip mt-demo">이렇게 읽으면 안&nbsp;돼</span>학생용에만 있는 오역 주의 팁</div>
+      <div class="gl-row"><span class="gl-chip sl-demo">/</span>끊어 읽는 지점(의미 덩어리)</div>
+    </div>
+    <div class="gl-col">
+      <div class="gl-h">내용 판단 — O · X · △</div>
+      <div class="gl-row"><b class="k-o gl-k">O</b>본문과 <b>맞는</b> 진술</div>
+      <div class="gl-row"><b class="k-x gl-k">X</b>본문과 <b>틀린</b> 진술 → 근거를 바르게 고치기</div>
+      <div class="gl-row"><b class="k-t gl-k">△</b>결론은 맞지만 <b>근거가 틀린</b> 진술 → 근거를 고치기</div>
+      <div class="gl-row"><span class="gl-chip ox-en">EN</span>진술이 영어로 된 문항</div>
+      <div class="gl-row"><span class="gl-chip ox-kill">🔥 킬러</span>본문 한 군데만 비튼 가장 까다로운 함정</div>
+    </div>
+  </div>
+
+  <div class="g-versions">
+    <span class="gv"><span class="tag-student">학생 문제지</span>빈칸·판단이 비어 있는 <b>푸는 용</b></span>
+    <span class="gv"><span class="tag-teacher">강사용 · 정답 표시</span>정답·어법 형광펜·오답 해설이 <b>채워진 용</b></span>
+  </div>
+</div>
+{% endif %}
 {% for p in passages %}
 <div class="passage">
 
@@ -39,22 +80,27 @@
   <div class="section brk">
     <div class="sec-head"><span class="sec-no">3</span><span class="sec-title">문장별 끊어읽기 &amp; 내용 파악</span>
       <span class="sec-desc">빈칸을 직접 해석해 채우고(어디가 빠졌는지 찾기), 문장 내용을 골라봐</span></div>
+    {#- B: 문장마다 반복하던 안내를 섹션 맨 위 1회로 -#}
+    <div class="sec-guide">
+      <span class="sg-item"><span class="sg-ico">✏</span>빈칸 = 직접 해석해 채우기</span>
+      {% if not teacher %}<span class="sg-item"><span class="sg-ico">🔑</span>어법칩(❶❷…)이 문장의 어디에 쓰였는지 찾아 <b>○표</b></span>{% endif %}
+      <span class="sg-item"><span class="sg-ico">⭕</span>내용 진술 판단 — 맞으면 <b class="k-o">O</b> · 틀리면 <b class="k-x">X</b> · 결론은 맞지만 근거가 틀리면 <b class="k-t">△</b>, <b>X·△는 근거를 바르게 고치기</b></span>
+    </div>
     <div class="panel">
       {% for it in p.lines %}
       <div class="s-item">
         {% if teacher and it.english_hl %}<div class="s-en"><span class="s-no">{{ it.id }}</span>{{ it.english_hl }}</div>
         {% else %}<div class="s-en"><span class="s-no">{{ it.id }}</span>{% for c in it.chunks %}{{ c.en }}{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>{% endif %}
-        {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gnum">{{ loop.index }}</span><span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}{% if not teacher %}<span class="gram-do">✏ 위 어법(❶❷…)이 문장의 어디에 쓰였는지 찾아 ○표 해보자</span>{% endif %}</div>{% endif %}
+        {% if it.grammar %}<div class="gram">🔑 {% for g in it.grammar %}<span class="gnum">{{ loop.index }}</span><span class="gchip">{{ g.tag }}</span>{% if teacher and g.note %} <span class="gnote">{{ g.note }}</span>{% endif %}{% if not loop.last %} &nbsp;·&nbsp; {% endif %}{% endfor %}</div>{% endif %}
         <div class="ko-box"><span class="q-chip">문제</span><span class="ko-lab">한글</span>{% for c in it.chunks %}<span class="ko-plain">{{ c.ko }}</span>{% if not loop.last %} <span class="sl">/</span> {% endif %}{% endfor %}</div>
         {% if not teacher %}{% for t in it.mistips %}<div class="mistip"><span class="mt-chip">이렇게 읽으면 안&nbsp;돼</span>{{ t }}</div>{% endfor %}{% endif %}
-        <div class="s-q"><span class="q-chip">문제</span><span class="q-lead">맞으면 O · 틀리면 X · 결론은 맞지만 근거가 틀리면 △ — X·△는 바르게 고치기</span></div>
         <div class="ox">
         {% for m in it.misreads %}
         {% if teacher %}
           <div class="ox-row"><span class="ox-ans {% if m.verdict == 'O' %}o{% elif m.verdict == '△' %}tri{% else %}x{% endif %}">{{ m.verdict }}</span><span class="ox-st">{% if m.english %}<span class="ox-en">EN</span>{% endif %}{% if m.english %}<span class="en-txt">{{ m.statement }}</span>{% else %}{{ m.statement }}{% endif %}{% if m.killer %}<span class="ox-kill">🔥 킬러</span>{% endif %}</span></div>
           {% if m.verdict != 'O' and m.why %}<div class="ox-why">→ 바르게: {% if m.anchor %}<span class="cue">본문 대조: {{ m.anchor }}</span> — {% endif %}{{ m.why }}{% if m.trap_type %} <span class="typ">[{{ m.trap_type }}{% if m.integrative %}·통합추론{% endif %}]</span>{% endif %}</div>{% endif %}
         {% else %}
-          <div class="ox-row"><span class="ox-pick">O <b>/</b> X <b>/</b> △</span><span class="ox-st">{% if m.english %}<span class="ox-en">EN</span>{% endif %}{% if m.english %}<span class="en-txt">{{ m.statement }}</span>{% else %}{{ m.statement }}{% endif %}</span></div>
+          <div class="ox-row"><span class="ox-pick"><span class="op-lab">내 판단</span><b class="k-o">O</b><b class="k-x">X</b><b class="k-t">△</b></span><span class="ox-st">{% if m.english %}<span class="ox-en">EN</span>{% endif %}{% if m.english %}<span class="en-txt">{{ m.statement }}</span>{% else %}{{ m.statement }}{% endif %}</span></div>
         {% endif %}
         {% endfor %}
         </div>

@@ -195,9 +195,16 @@ body{
 .ox{ margin:4px 0 2px; }
 .ox-row{ display:flex; align-items:flex-start; gap:8px; margin:5px 0; font-size:9.6pt;
   line-height:1.5; }
-.ox-pick{ flex:none; font-weight:800; color:#94a3b8; font-size:8.6pt; letter-spacing:.5px;
-  border:1px solid #e2e6ec; border-radius:6px; padding:1px 7px; white-space:nowrap; }
-.ox-pick b{ color:#cbd2db; font-weight:800; }
+/* C: 학생용 판단칸 — '내 판단' 라벨 + 동그라미 칠 O/X/△(뜻 색상) */
+.ox-pick{ flex:none; display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+  border:1px dashed #cfd5de; border-radius:7px; padding:1px 5px 1px 4px; }
+.ox-pick .op-lab{ font-size:7pt; font-weight:800; color:#9aa2ae; letter-spacing:.3px;
+  margin-right:1px; }
+.ox-pick b{ display:inline-block; min-width:15px; height:15px; line-height:15px; text-align:center;
+  font-size:8.6pt; font-weight:800; border-radius:50%; border:1.3px solid; }
+.k-o{ color:var(--green); border-color:#bfe0cc; }
+.k-x{ color:var(--red); border-color:#eab8ae; }
+.k-t{ color:#c07f14; border-color:#eecf9a; }
 .ox-ans{ flex:none; min-width:17px; height:17px; line-height:17px; text-align:center;
   border-radius:5px; font-weight:800; color:#fff; font-size:9pt; padding:0 3px; }
 .ox-ans.o{ background:var(--green); } .ox-ans.x{ background:var(--red); }
@@ -303,3 +310,56 @@ mark.hl1 .hln{ color:#1f4e8a; }
 .mt-chip{ display:inline-block; background:#e0912f; color:#fff; font-weight:700; font-size:6.8pt;
   border-radius:7px; padding:0.5px 6px; margin-right:5px; white-space:nowrap; vertical-align:1px; }
 .mistip b{ color:#a85b12; }
+
+/* ---- B: ③섹션 상단 1회 안내 --------------------------------------------- */
+.sec-guide{ display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center;
+  background:var(--green-soft); border:1px solid #d6e9de; border-radius:9px;
+  padding:6px 12px; margin:0 0 10px; font-size:8.7pt; color:#3c4652; line-height:1.4; }
+.sec-guide .sg-item{ white-space:normal; }
+.sec-guide .sg-ico{ margin-right:3px; }
+.sec-guide b{ font-weight:800; }
+.sec-guide .k-o{ color:var(--green); } .sec-guide .k-x{ color:var(--red); }
+.sec-guide .k-t{ color:#c07f14; }
+
+/* ---- A: 사용법 커버 1페이지 --------------------------------------------- */
+.guide.brk-after{ page-break-after:always; }
+.g-head{ border-bottom:2.5px solid var(--green); padding-bottom:12px; margin-bottom:16px; }
+.g-badge{ display:inline-block; background:var(--green); color:#fff; font-weight:800;
+  border-radius:8px; padding:3px 12px; font-size:11pt; }
+.g-title{ font-size:19pt; font-weight:800; color:var(--green-d); margin:10px 0 6px; }
+.g-title b{ color:var(--amber); }
+.g-sub{ font-size:10pt; color:#3c4652; line-height:1.6; }
+.g-sub b{ color:var(--green-d); font-weight:800; }
+.g-flow{ display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin:0 0 18px; }
+.g-flow .gf{ display:inline-flex; align-items:center; gap:6px; background:var(--box);
+  border:1px solid var(--line); border-radius:999px; padding:4px 13px 4px 5px;
+  font-size:9.4pt; font-weight:700; color:var(--ink); white-space:nowrap; }
+.g-flow .gf-n{ display:inline-block; width:19px; height:19px; line-height:19px; text-align:center;
+  background:var(--green); color:#fff; border-radius:50%; font-size:8.4pt; font-weight:800; }
+.g-flow .gf-arr{ color:#b9c0ca; font-weight:800; }
+.g-legend{ display:flex; gap:16px; margin:0 0 16px; }
+.g-legend .gl-col{ flex:1; border:1px solid var(--line); border-radius:12px; padding:11px 15px;
+  background:#fff; }
+.gl-h{ font-weight:800; color:var(--green-d); font-size:10.3pt; margin-bottom:8px;
+  border-bottom:1.5px solid var(--green-bg); padding-bottom:5px; }
+.gl-row{ display:flex; align-items:flex-start; gap:8px; font-size:9.2pt; color:#3c4652;
+  line-height:1.45; margin:6px 0; }
+.gl-row b{ font-weight:800; }
+.gl-chip{ flex:none; }
+.gl-k{ display:inline-block; min-width:17px; height:17px; line-height:16px; text-align:center;
+  font-size:9pt; font-weight:800; border-radius:50%; border:1.5px solid; }
+.gchip-demo{ display:inline-flex; align-items:center; gap:3px; font-size:8.2pt; font-weight:700;
+  color:var(--indigo); background:var(--indigo-bg); border-radius:999px; padding:1px 9px 1px 3px;
+  white-space:nowrap; }
+.gchip-demo .gnum{ margin:0; }
+.mt-demo{ display:inline-block; background:#e0912f; color:#fff; font-weight:700; font-size:6.8pt;
+  border-radius:7px; padding:1px 7px; white-space:nowrap; }
+.sl-demo{ display:inline-block; color:var(--green); font-weight:800; font-size:11pt;
+  min-width:17px; text-align:center; }
+.g-legend .ox-en,.g-legend .ox-kill{ vertical-align:0; }
+.g-versions{ display:flex; gap:22px; background:var(--green-soft); border:1px solid #d6e9de;
+  border-radius:10px; padding:10px 16px; }
+.g-versions .gv{ display:inline-flex; align-items:center; gap:8px; font-size:9.3pt; color:#3c4652;
+  white-space:nowrap; }
+.g-versions .gv b{ color:var(--green-d); font-weight:800; }
+.g-versions .tag-student,.g-versions .tag-teacher{ white-space:nowrap; margin-left:0; }

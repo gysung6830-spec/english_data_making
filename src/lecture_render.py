@@ -364,7 +364,8 @@ def _as_list(passages) -> list[LecturePassage]:
     return list(passages)
 
 
-def render_lecture_html(passages, teacher: bool, footer_note: str = "") -> str:
+def render_lecture_html(passages, teacher: bool, footer_note: str = "",
+                        show_guide: bool = True) -> str:
     reps = _as_list(passages)
     views = []
     for i, p in enumerate(reps, 1):
@@ -373,7 +374,8 @@ def render_lecture_html(passages, teacher: bool, footer_note: str = "") -> str:
         v["total"] = len(reps)
         views.append(v)
     tmpl = _env.get_template("lecture.html.j2")
-    return tmpl.render(passages=views, teacher=teacher, footer_note=footer_note)
+    return tmpl.render(passages=views, teacher=teacher, footer_note=footer_note,
+                       show_guide=show_guide)
 
 
 def _css_string(text: str) -> str:
@@ -401,13 +403,14 @@ def _inline_styles(html: str, footer_note: str = "") -> str:
 
 
 def render_lecture_pdf(passages, out_path: str | Path, teacher: bool,
-                       footer_note: str = "") -> Path:
+                       footer_note: str = "", show_guide: bool = True) -> Path:
     from weasyprint import HTML  # 지연 임포트(무거움)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     html = _inline_styles(render_lecture_html(passages, teacher=teacher,
-                                             footer_note=footer_note), footer_note)
+                                             footer_note=footer_note,
+                                             show_guide=show_guide), footer_note)
     HTML(string=html, base_url=str(TEMPLATE_DIR) + "/").write_pdf(str(out_path))
     return out_path
 
