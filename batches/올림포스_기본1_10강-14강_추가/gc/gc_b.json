@@ -1,0 +1,55 @@
+{
+  "Unit12-ANALYSIS||1": [
+    {"tag": "to부정사 명사적 용법", "note": "to look은 want의 목적어(명사적 용법)", "spans": ["to look"]},
+    {"tag": "동명사", "note": "crossing은 전치사 before의 목적어(동명사)", "spans": ["crossing"]}
+  ],
+  "Unit12-ANALYSIS||3": [
+    {"tag": "분사 형용사적 용법", "note": "과거분사 hidden이 saber-toothed tigers를 앞에서 수식", "spans": ["hidden"]}
+  ],
+  "Unit12-ANALYSIS||5": [
+    {"tag": "5형식 목적격보어", "note": "require+O+to부정사: to generate가 electric vehicles의 목적격보어", "spans": ["requires", "to generate"]}
+  ],
+  "Unit12-1||2": [
+    {"tag": "동명사", "note": "combining, pouring은 전치사 before의 목적어(병렬 동명사)", "spans": ["combining", "pouring"]}
+  ],
+  "Unit12-1||3": [
+    {"tag": "to부정사 명사적 용법", "note": "to use는 choose의 목적어(명사적 용법)", "spans": ["to use"]},
+    {"tag": "분사 형용사적 용법", "note": "과거분사 canned가 pumpkin을 앞에서 수식", "spans": ["canned"]}
+  ],
+  "Unit12-1||4": [
+    {"tag": "동명사", "note": "cooking은 전치사 by의 목적어(by -ing 수단)", "spans": ["cooking"]},
+    {"tag": "분사 형용사적 용법", "note": "현재분사 changing이 food tradition을 앞에서 수식", "spans": ["changing"]},
+    {"tag": "to부정사 명사적 용법", "note": "to use는 choose의 목적어(명사적 용법)", "spans": ["to use"]}
+  ],
+  "Unit12-2||3": [
+    {"tag": "분사 형용사적 용법", "note": "과거분사 known이 reserve를 앞에서 수식", "spans": ["known"]},
+    {"tag": "분사 형용사적 용법", "note": "과거분사 used가 the amount를 뒤에서 수식", "spans": ["used"]}
+  ],
+  "Unit12-2||6": [
+    {"tag": "명사절 that", "note": "is의 보어절을 이끄는 that(what ... is that ~)", "spans": ["that"]}
+  ],
+  "Unit12-3||3": [
+    {"tag": "to부정사 명사적 용법", "note": "to seek는 want의 목적어(명사적 용법)", "spans": ["to seek"]}
+  ],
+  "Unit12-3||5": [
+    {"tag": "to부정사 형용사적 용법", "note": "to run이 앞의 ways를 수식(형용사적 용법)", "spans": ["to run"]}
+  ],
+  "Unit12-3||6": [
+    {"tag": "분사 형용사적 용법", "note": "현재분사 conflicting이 viewpoints를 앞에서 수식", "spans": ["conflicting"]}
+  ],
+  "Unit12-3||8": [
+    {"tag": "동명사", "note": "resolving은 전치사 in의 목적어(동명사)", "spans": ["resolving"]}
+  ],
+  "서술형 Practice||6": [
+    {"tag": "to부정사 명사적 용법", "note": "to hear는 learn의 목적어(명사적 용법)", "spans": ["to hear"]}
+  ],
+  "서술형 Practice||7": [
+    {"tag": "분사 형용사적 용법", "note": "과거분사 trained가 musicians를 앞에서 수식", "spans": ["trained"]}
+  ],
+  "Unit13-ANALYSIS||1": [
+    {"tag": "동명사", "note": "making은 전치사 about의 목적어(동명사)", "spans": ["making a mistake"]}
+  ],
+  "Unit13-ANALYSIS||2": [
+    {"tag": "분사 형용사적 용법", "note": "과거분사 misstated가 word를 앞에서 수식", "spans": ["misstated"]}
+  ]
+}

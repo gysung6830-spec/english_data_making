@@ -1,0 +1,61 @@
+{
+  "38||1": [
+    {"tag": "to부정사(부사적)", "note": "빨리 감기·되감기 없이 '찾기 위해'라는 목적을 나타내는 부사적 to부정사", "spans": ["to find"]}
+  ],
+  "38||3": [
+    {"tag": "동명사", "note": "전치사 without의 목적어로 쓰인 동명사(having)", "spans": ["having"]}
+  ],
+  "38||6": [
+    {"tag": "부사절(조건)", "note": "조건을 나타내는 부사절을 이끄는 접속사 If", "spans": ["If"]}
+  ],
+  "38||8": [
+    {"tag": "부사절(조건)", "note": "조건을 나타내는 부사절을 이끄는 접속사 If", "spans": ["If"]}
+  ],
+  "39||5": [
+    {"tag": "to부정사(부사적)", "note": "the false impression을 '피하기 위해'라는 목적을 나타내는 부사적 to부정사", "spans": ["to avoid"]},
+    {"tag": "동격 that", "note": "명사 impression의 내용을 설명하는 동격의 that절(뒤의 that은 강조구문의 that)", "spans": ["that"]}
+  ],
+  "39||7": [
+    {"tag": "대동사 do", "note": "앞의 tries to prevent harm을 대신 받는 대동사 does", "spans": ["does"]}
+  ],
+  "39||8": [
+    {"tag": "수동태", "note": "be+p.p. 형태의 수동태(그녀가 도덕적으로 선하다고 여겨지다)", "spans": ["is regarded"]}
+  ],
+  "40||4": [
+    {"tag": "수동태", "note": "the handle을 주어로 하는 be+p.p. 수동태", "spans": ["is hidden"]}
+  ],
+  "40||5": [
+    {"tag": "to부정사(형용사적)", "note": "앞의 명사 ability를 수식하는 형용사적 to부정사", "spans": ["to see"]}
+  ],
+  "40||8": [
+    {"tag": "부사절(시간)", "note": "시간을 나타내는 부사절을 이끄는 접속사 When", "spans": ["When"]}
+  ],
+  "40||10": [
+    {"tag": "분사 형용사적 용법", "note": "명사 hierarchy를 앞에서 수식하는 과거분사 established", "spans": ["established"]},
+    {"tag": "to부정사(형용사적)", "note": "앞의 명사 ability를 수식하는 형용사적 to부정사", "spans": ["to see"]}
+  ],
+  "41-42||1": [
+    {"tag": "최상급", "note": "the worst four words의 최상급 표현", "spans": ["worst"]},
+    {"tag": "부사절(이유)", "note": "이유를 나타내는 부사절을 이끄는 접속사 because", "spans": ["because"]},
+    {"tag": "5형식 목적격보어", "note": "encourage+목적어(the customer)+to부정사(to talk) 목적격보어의 5형식", "spans": ["encourage", "to talk"]}
+  ],
+  "41-42||3": [
+    {"tag": "비교급", "note": "better questions의 비교급 형용사", "spans": ["better"]},
+    {"tag": "to부정사(형용사적)", "note": "앞의 명사 questions를 수식하는 형용사적 to부정사", "spans": ["to use"]}
+  ],
+  "41-42||4": [
+    {"tag": "가정법 과거", "note": "If+과거동사(approached), 주어+would+동사원형 형태의 가정법 과거", "spans": ["approached", "would feel"]}
+  ],
+  "41-42||14": [
+    {"tag": "5형식 목적격보어", "note": "keep+목적어(themselves)+형용사 보어(accessible)의 5형식", "spans": ["keep", "accessible"]}
+  ],
+  "43-45||9": [
+    {"tag": "분사구문", "note": "동시상황을 나타내는 분사구문(~인 것처럼 보이면서)", "spans": ["looking"]}
+  ],
+  "43-45||18": [
+    {"tag": "가주어-진주어", "note": "it이 가주어, that절(they were from very different worlds)이 진주어", "spans": ["it", "that"]}
+  ],
+  "43-45||21": [
+    {"tag": "수동태", "note": "be+p.p. 형태의 수동태 부정(받아들여지지 않았다)", "spans": ["weren't accepted"]}
+  ]
+}

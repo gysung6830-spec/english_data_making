@@ -1,0 +1,47 @@
+{
+ "33||1": [
+  {"tag": "명사절 접속사 that", "note": "'is that ~'의 that절이 주어 One ~ is의 보어인 명사절", "spans": ["that"]},
+  {"tag": "to부정사(난이형용사)", "note": "difficult ... to appreciate: 난이형용사를 수식하는 부사적 to부정사(의미상 주어 for)", "spans": ["to appreciate"]}
+ ],
+ "33||4": [
+  {"tag": "동명사(전치사 목적어)", "note": "전치사 in의 목적어로 쓰인 동명사 knowing", "spans": ["knowing"]}
+ ],
+ "33||6": [
+  {"tag": "과거분사 후치수식", "note": "quoted here가 앞의 명사 the number를 뒤에서 수식", "spans": ["quoted"]}
+ ],
+ "33||7": [
+  {"tag": "부사적 to부정사(목적)", "note": "to orbit: '~하기 위해'라는 목적을 나타내는 부사적 to부정사", "spans": ["to orbit"]}
+ ],
+ "34||1": [
+  {"tag": "명사절 접속사 that", "note": "argues의 목적어로 쓰인 명사절을 이끄는 that", "spans": ["that"]},
+  {"tag": "부사적 to부정사(목적)", "note": "to stop global warming: 목적을 나타내는 부사적 to부정사", "spans": ["to stop"]}
+ ],
+ "34||8": [
+  {"tag": "명사절 접속사 that", "note": "remarks의 목적어로 쓰인 명사절을 이끄는 that", "spans": ["that"]},
+  {"tag": "동명사(전치사 목적어)", "note": "전치사 of의 목적어로 쓰인 동명사 building", "spans": ["building"]}
+ ],
+ "36||2": [
+  {"tag": "명사절 접속사 that", "note": "분사 meaning의 목적어로 쓰인 명사절을 이끄는 that", "spans": ["that"]}
+ ],
+ "36||5": [
+  {"tag": "부사적 to부정사(목적)", "note": "to collect rain: 목적을 나타내는 부사적 to부정사", "spans": ["to collect"]}
+ ],
+ "36||10": [
+  {"tag": "시간 부사절 when", "note": "when people pick them up: 때를 나타내는 시간 부사절", "spans": ["when"]}
+ ],
+ "37||2": [
+  {"tag": "동명사 목적어", "note": "stop의 목적어로 쓰인 동명사 pedalling(멈추다+동명사)", "spans": ["pedalling"]}
+ ],
+ "37||7": [
+  {"tag": "접속사 as(~하면서)", "note": "as they grip and rub ~: 동시동작을 나타내는 부사절 접속사 as", "spans": ["as"]}
+ ],
+ "37||8": [
+  {"tag": "현재분사 수식", "note": "moving이 뒤의 명사 things를 앞에서 수식", "spans": ["moving"]}
+ ],
+ "37||11": [
+  {"tag": "접속사 as(~하면서)", "note": "as you and the bicycle move forwards: 동시동작 부사절 접속사 as", "spans": ["as"]}
+ ],
+ "37||12": [
+  {"tag": "접속사 as(~하면서)", "note": "as they rotate: 동시동작을 나타내는 부사절 접속사 as", "spans": ["as"]}
+ ]
+}

@@ -1,0 +1,36 @@
+{
+  "Unit13-1||4": [
+    {"tag": "분사 형용사적 용법", "note": "designed가 뒤의 wetland ecosystems를 앞에서 수식하는 과거분사", "spans": ["designed"]}
+  ],
+  "Unit13-2||3": [
+    {"tag": "분사 형용사적 용법", "note": "estimated가 뒤의 number를 앞에서 수식하는 과거분사", "spans": ["estimated"]}
+  ],
+  "Unit13-3||5": [
+    {"tag": "분사 형용사적 용법", "note": "spoken이 word를 앞에서 수식하는 과거분사", "spans": ["spoken"]},
+    {"tag": "to부정사 형용사적 용법", "note": "to listen이 the ability를 수식", "spans": ["to listen"]}
+  ],
+  "Unit14-1||2": [
+    {"tag": "명사절 의문사", "note": "how가 이끄는 절이 plan의 목적어", "spans": ["how"]}
+  ],
+  "Unit14-1||5": [
+    {"tag": "to부정사 형용사적 용법", "note": "to brand가 the opportunities를 수식", "spans": ["to brand"]},
+    {"tag": "수동태", "note": "be directed — 조동사+be+p.p.", "spans": ["be directed"]}
+  ],
+  "Unit14-1||6": [
+    {"tag": "시간 부사절", "note": "when이 이끄는 시간의 부사절(~할 때)", "spans": ["when"]}
+  ],
+  "Unit14-1||7": [
+    {"tag": "5형식 목적격보어", "note": "want+people+to say — 목적격보어로 to부정사", "spans": ["to say"]},
+    {"tag": "시간 부사절", "note": "when이 이끄는 시간의 부사절(~할 때)", "spans": ["when"]}
+  ],
+  "Unit14-2||7": [
+    {"tag": "시간 부사절", "note": "When이 이끄는 시간의 부사절(~했을 때)", "spans": ["When"]}
+  ],
+  "Unit14-3||1": [
+    {"tag": "비교급 강조", "note": "much가 비교급 faster를 강조", "spans": ["much"]}
+  ],
+  "Unit14-3||8": [
+    {"tag": "명사절 that", "note": "that절이 think의 목적어", "spans": ["that"]},
+    {"tag": "수동태", "note": "forests are cut down — be+p.p.", "spans": ["are cut down"]}
+  ]
+}

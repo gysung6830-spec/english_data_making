@@ -1,0 +1,42 @@
+{
+  "장면 · 1 (수도가 끊기다)||5": [
+    {"tag": "시간 부사절", "note": "ever since ~ = '~한 이래로', 시간 부사절을 이끄는 접속사", "spans": ["since"]}
+  ],
+  "장면 · 5 (Garrett과 얼음)||2": [
+    {"tag": "분사 형용사적 용법", "note": "packed with ice가 앞의 a case를 뒤에서 수식하는 과거분사", "spans": ["packed"]}
+  ],
+  "장면 · 5 (Garrett과 얼음)||5": [
+    {"tag": "시간 부사절", "note": "until ~ = '~할 때까지', 시간 부사절 접속사", "spans": ["until"]},
+    {"tag": "수동태", "note": "it is piled ~ = 쌓이다, be+p.p. 수동태", "spans": ["is piled"]}
+  ],
+  "장면 · 5 (Garrett과 얼음)||6": [
+    {"tag": "to부정사", "note": "begin의 목적어인 명사적 용법 to부정사", "spans": ["to empty"]}
+  ],
+  "장면 · 6 (수상한 '도움')||2": [
+    {"tag": "to부정사", "note": "for us to answer — 의미상 주어 for us를 동반한 to부정사", "spans": ["to answer"]}
+  ],
+  "장면 · 6 (수상한 '도움')||4": [
+    {"tag": "to부정사", "note": "need의 목적어인 명사적 용법 to부정사", "spans": ["to help"]}
+  ],
+  "장면 · 7 (반전과 삼촌의 등장)||3": [
+    {"tag": "수동태", "note": "his hands are firmly locked ~ = 잠겨 있다, be+p.p. 수동태", "spans": ["are firmly locked"]},
+    {"tag": "명사절 that", "note": "prove의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that"]}
+  ],
+  "작품 정리 · 1 (소설 「Dry」와 현실 경고)||4": [
+    {"tag": "분사 형용사적 용법", "note": "contributing to ~가 앞의 the factors를 뒤에서 수식하는 현재분사", "spans": ["contributing"]},
+    {"tag": "수동태", "note": "the factors ~ are not addressed = 다루어지지 않다, be+p.p. 수동태", "spans": ["are not addressed"]}
+  ],
+  "본문 외 · 1 (기아석이란)||1": [
+    {"tag": "최상급", "note": "the worst drought = 최악의 가뭄, 형용사 최상급", "spans": ["worst"]}
+  ],
+  "본문 외 · 1 (기아석이란)||2": [
+    {"tag": "조건 부사절", "note": "If you see me ~ = '나를 보면', 조건을 이끄는 접속사 if", "spans": ["If"]}
+  ],
+  "본문 외 · 2 (경고와 미래 예측)||3": [
+    {"tag": "관계사 생략", "note": "the situation (which/that) we face — 목적격 관계대명사 생략", "spans": ["situation we face"]},
+    {"tag": "명사절 that", "note": "warn의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that the situation"]}
+  ],
+  "본문 외 · 2 (경고와 미래 예측)||4": [
+    {"tag": "to부정사", "note": "action is taken to address ~ = '~을 다루기 위해', 목적을 나타내는 부사적 용법", "spans": ["to address"]}
+  ]
+}

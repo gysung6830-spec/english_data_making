@@ -1,0 +1,51 @@
+{
+  "Unit10-2||1": [
+    {"tag": "to부정사 형용사적 용법", "note": "the wish를 수식('~하려는 소망')", "spans": ["to be alone"]}
+  ],
+  "Unit10-2||5": [
+    {"tag": "관계대명사", "note": "주격 관계대명사 that — an identity 수식", "spans": ["that is unique"]}
+  ],
+  "Unit10-3||1": [
+    {"tag": "도치", "note": "장소 부사구가 앞으로 나와 주어-동사 도치(was the forest gardening)", "spans": ["was the forest gardening"]}
+  ],
+  "Unit10-3||2": [
+    {"tag": "도치", "note": "장소 부사구가 앞으로 나와 주어-동사 도치(was monoculture)", "spans": ["was monoculture"]},
+    {"tag": "동명사", "note": "monoculture를 부연하는 동명사구(재배하는 것/기르는 것)", "spans": ["cultivating", "raising"]}
+  ],
+  "Unit10-3||3": [
+    {"tag": "수동태", "note": "can be seen — 조동사+be+p.p.", "spans": ["can be seen"]}
+  ],
+  "Unit11-ANALYSIS||1": [
+    {"tag": "to부정사 부사적 용법", "note": "monitor하는 목적('반응량을 가늠하기 위해')", "spans": ["to gauge"]}
+  ],
+  "Unit11-ANALYSIS||2": [
+    {"tag": "수일치", "note": "the number of ~ 는 단수 취급(is)", "spans": ["the number of", "is"]}
+  ],
+  "Unit11-ANALYSIS||4": [
+    {"tag": "to부정사 명사적 용법", "note": "is의 보어('~하는 것')", "spans": ["to earn"]}
+  ],
+  "Unit11-ANALYSIS||5": [
+    {"tag": "to부정사 형용사적 용법", "note": "efforts 수식('~하려는 노력')", "spans": ["to self-enhance"]}
+  ],
+  "Unit11-1||1": [
+    {"tag": "동명사", "note": "avoid의 목적어(being 'wrong')", "spans": ["being"]}
+  ],
+  "Unit11-1||2": [
+    {"tag": "접속사 when", "note": "'~할 때'의 시간 부사절", "spans": ["When"]}
+  ],
+  "Unit11-1||4": [
+    {"tag": "to부정사 형용사적 용법", "note": "the capacity 수식('~할 능력')", "spans": ["to support"]}
+  ],
+  "Unit11-2||5": [
+    {"tag": "동명사 주어", "note": "that절 내부의 주어 동명사(understanding required ~)", "spans": ["understanding"]},
+    {"tag": "5형식 목적격보어", "note": "required one [to find] ~ and [to use] ~ — require+O+to부정사", "spans": ["to find", "to use"]}
+  ],
+  "Unit11-2||6": [
+    {"tag": "접속사 when", "note": "'~할 때'의 시간 부사절", "spans": ["when"]},
+    {"tag": "to부정사 부사적 용법", "note": "used that script의 목적('이해를 이끌기 위해')", "spans": ["to guide"]}
+  ],
+  "Unit11-3||5": [
+    {"tag": "5형식 목적격보어", "note": "want+O+to부정사(something이 목적어, to be seen이 목적격보어)", "spans": ["want something to be seen"]},
+    {"tag": "5형식 목적격보어", "note": "paint it red — it 목적어, red 목적격보어(형용사)", "spans": ["paint it red"]}
+  ]
+}

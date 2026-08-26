@@ -1,0 +1,56 @@
+{
+  "20||2": [
+    {"tag": "부사절(시간)", "note": "before가 이끄는 시간 부사절", "spans": ["before"]}
+  ],
+  "20||3": [
+    {"tag": "to부정사(형용사적 용법)", "note": "reason을 뒤에서 수식하는 형용사적 to부정사", "spans": ["to be"]}
+  ],
+  "20||4": [
+    {"tag": "to부정사(부사적 용법)", "note": "목적을 나타내는 부사적 to부정사", "spans": ["to get"]},
+    {"tag": "to부정사(명사적 용법)", "note": "choose의 목적어인 명사적 to부정사", "spans": ["to waste"]}
+  ],
+  "20||6": [
+    {"tag": "동명사", "note": "전치사 on의 목적어인 동명사", "spans": ["learning"]}
+  ],
+  "21||2": [
+    {"tag": "부사절(시간)", "note": "when이 이끄는 시간 부사절", "spans": ["When"]}
+  ],
+  "21||8": [
+    {"tag": "최상급", "note": "the lightest atoms의 최상급 표현", "spans": ["lightest"]}
+  ],
+  "22||4": [
+    {"tag": "동명사", "note": "전치사 like의 목적어인 동명사 병렬", "spans": ["weeding", "turning"]}
+  ],
+  "22||6": [
+    {"tag": "to부정사(형용사적 용법)", "note": "way를 뒤에서 수식하는 형용사적 to부정사", "spans": ["to stay"]}
+  ],
+  "22||11": [
+    {"tag": "명사절 접속사 that", "note": "shown의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that"]}
+  ],
+  "23||1": [
+    {"tag": "주격 관계대명사 that", "note": "tools를 수식하는 주격 관계대명사", "spans": ["that translate"]}
+  ],
+  "23||2": [
+    {"tag": "동명사", "note": "전치사 of의 목적어인 동명사", "spans": ["amplifying"]},
+    {"tag": "주격 관계대명사 that", "note": "signals를 수식하는 주격 관계대명사", "spans": ["that feed"]}
+  ],
+  "23||4": [
+    {"tag": "동명사", "note": "전치사 of의 목적어인 동명사", "spans": ["expanding"]},
+    {"tag": "주격 관계대명사 that", "note": "sounds를 수식하는 주격 관계대명사", "spans": ["that"]}
+  ],
+  "24||1": [
+    {"tag": "명사절 접속사 that", "note": "argue의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that not only"]},
+    {"tag": "주격 관계대명사 that", "note": "many medical advances를 수식하는 주격 관계대명사", "spans": ["that did"]}
+  ],
+  "24||2": [
+    {"tag": "명사절 접속사 that", "note": "claimed의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that"]}
+  ],
+  "24||5": [
+    {"tag": "부사절(이유)", "note": "Since가 이끄는 이유 부사절", "spans": ["Since"]},
+    {"tag": "명사절 접속사 that", "note": "find의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that all medical"]},
+    {"tag": "부사절(시간)", "note": "before가 이끄는 시간 부사절", "spans": ["before"]}
+  ],
+  "24||8": [
+    {"tag": "명사절 접속사 that", "note": "claim의 목적어절을 이끄는 명사절 접속사 that", "spans": ["that"]}
+  ]
+}

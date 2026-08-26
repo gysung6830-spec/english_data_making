@@ -1,0 +1,98 @@
+{
+  "도입 · 1 (흔들바위 오보)||1": [
+    {
+      "tag": "부사절(시간)",
+      "note": "when she saw ~ = '~을 보았을 때'라는 시간 부사절",
+      "spans": ["when"]
+    }
+  ],
+  "도입 · 1 (흔들바위 오보)||4": [
+    {
+      "tag": "감정 수동태",
+      "note": "was embarrassed: '당황하게 되다(당황했다)'",
+      "spans": ["was embarrassed"]
+    }
+  ],
+  "도입 · 2 (운동선수 사망 오보)||5": [
+    {
+      "tag": "부사절(이유)",
+      "note": "because it had hurt ~ = 비난한 이유를 나타내는 부사절",
+      "spans": ["because"]
+    }
+  ],
+  "영향 · 1 (가짜뉴스의 정의와 해악)||4": [
+    {
+      "tag": "과거분사 수식",
+      "note": "all individuals involved = 관련된 모든 개인, involved가 individuals를 뒤에서 수식",
+      "spans": ["involved"]
+    }
+  ],
+  "영향 · 2 (비상사태 확산·암본 지진)||2": [
+    {
+      "tag": "부사절(시간)",
+      "note": "after an earthquake ~ struck = '~이 강타한 후'라는 시간 부사절",
+      "spans": ["after"]
+    }
+  ],
+  "확산이유 · 1 (빠른 전파와 새로움 선호)||4": [
+    {
+      "tag": "부사절(시간)",
+      "note": "When information is astonishing = '정보가 놀라울 때'라는 시간·조건 부사절",
+      "spans": ["When"]
+    }
+  ],
+  "확산이유 · 1 (빠른 전파와 새로움 선호)||5": [
+    {
+      "tag": "부사절(이유)",
+      "note": "because they are the first ~ = 관심을 얻는 이유를 나타내는 부사절",
+      "spans": ["because"]
+    }
+  ],
+  "확산이유 · 2 (단순 사고·확증 편향)||6": [
+    {
+      "tag": "관계대명사 that",
+      "note": "news that reports ~ = news를 수식하는 주격 관계대명사 that",
+      "spans": ["that"]
+    }
+  ],
+  "마무리 · 1 (디지털 시대 결어)||2": [
+    {
+      "tag": "to부정사 형용사적 용법",
+      "note": "the ability to view ~ = '~을 볼 수 있는 능력', to view가 ability를 수식",
+      "spans": ["to view"]
+    }
+  ],
+  "본문 외 · 1 (에코 챔버란)||4": [
+    {
+      "tag": "수동태",
+      "note": "is also used to describe ~ = '~을 묘사하는 데에도 쓰인다'",
+      "spans": ["is also used"]
+    }
+  ],
+  "본문 외 · 1 (에코 챔버란)||5": [
+    {
+      "tag": "to부정사 형용사적 용법",
+      "note": "your ability to think ~ = '~을 생각할 능력', to think가 ability를 수식",
+      "spans": ["to think"]
+    }
+  ],
+  "본문 외 · 2 (사회 분열과 대처)||3": [
+    {
+      "tag": "목적격 관계대명사 생략",
+      "note": "the information (that) you receive = information 뒤에 목적격 관계대명사 생략",
+      "spans": ["information you receive"]
+    }
+  ],
+  "본문 외 · 2 (사회 분열과 대처)||4": [
+    {
+      "tag": "5형식 목적격보어",
+      "note": "want something to be true = want+목적어(something)+목적격보어(to be true)",
+      "spans": ["want", "to be"]
+    },
+    {
+      "tag": "명사절 that",
+      "note": "mean that it is true = mean의 목적어인 명사절 that",
+      "spans": ["that"]
+    }
+  ]
+}

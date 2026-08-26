@@ -1,0 +1,37 @@
+{
+  "26||4": [
+    {"tag": "명사절 that", "note": "showed의 목적어 역할을 하는 명사절을 이끄는 접속사", "spans": ["that"]}
+  ],
+  "26||8": [
+    {"tag": "관계대명사", "note": "선행사 laws를 수식하는 주격 관계대명사", "spans": ["that"]}
+  ],
+  "29||5": [
+    {"tag": "to부정사", "note": "명사 attempts를 뒤에서 수식하는 형용사적 용법의 to부정사", "spans": ["to escape"]}
+  ],
+  "29||7": [
+    {"tag": "to부정사", "note": "명사 opportunity를 뒤에서 수식하는 형용사적 용법의 to부정사", "spans": ["to domesticate"]}
+  ],
+  "30||1": [
+    {"tag": "to부정사", "note": "명사 tendency를 수식하는 형용사적 용법의 to부정사(to share and cooperate)", "spans": ["to share"]}
+  ],
+  "30||2": [
+    {"tag": "시간 부사절", "note": "'~할 때'를 뜻하는 시간의 부사절을 이끄는 접속사", "spans": ["When"]}
+  ],
+  "30||3": [
+    {"tag": "이유 부사절", "note": "이유를 나타내는 부사절을 이끄는 접속사 because", "spans": ["because"]}
+  ],
+  "30||5": [
+    {"tag": "이유 부사절", "note": "이유를 나타내는 부사절을 이끄는 접속사 because", "spans": ["because"]},
+    {"tag": "명사절 that", "note": "know의 목적어 역할을 하는 명사절을 이끄는 접속사", "spans": ["that"]}
+  ],
+  "31||7": [
+    {"tag": "시간 부사절", "note": "'~할 때'를 뜻하는 시간의 부사절을 이끄는 접속사", "spans": ["When"]}
+  ],
+  "32||1": [
+    {"tag": "수동태", "note": "be+p.p. 형태의 수동태(are forced)", "spans": ["are forced"]},
+    {"tag": "동명사", "note": "put off의 목적어로 쓰인 동명사", "spans": ["going"]}
+  ],
+  "32||6": [
+    {"tag": "동명사", "note": "전치사 by의 목적어로 쓰인 수단의 동명사", "spans": ["sleeping"]}
+  ]
+}
