@@ -2,12 +2,12 @@
 "2023-06|22": {
   "kind": "general",
   "rows": [
-    {"role":"yellow","en":["Often overlooked,","but just as important a stakeholder,","is the consumer","who plays a large role","in the notion of the privacy paradox."],"ko":["종종 간과되지만","그럼에도 똑같이 중요한 이해관계자는","바로 소비자이다","큰 역할을 하는","'프라이버시 역설'이라는 개념에서."]},
-    {"role":"skip","en":["Consumer engagement levels","in all manner of digital experiences and communities","have simply exploded","― and they show little or no signs of slowing."],"ko":["소비자 참여 수준은","온갖 디지털 경험과 커뮤니티에서","그야말로 폭발했고","둔화될 기미는 거의 보이지 않는다."]},
-    {"role":"gray","en":["There is an awareness among consumers,","not only that their personal data","helps to drive the rich experiences that these companies provide,","but also that sharing this data","is the price you pay for these experiences,","in whole or in part."],"ko":["소비자들 사이에는 인식이 있다","자신의 개인 데이터가","이런 기업들이 제공하는 풍부한 경험을 이끌어 낼 뿐 아니라","이 데이터를 공유하는 것이","그 경험에 치르는 대가라는","전부든 일부든."]},
-    {"role":"yellow","en":["Without a better understanding","of the what, when, and why of data collection and use,","the consumer is often left","feeling vulnerable and conflicted."],"ko":["더 나은 이해가 없으면","데이터 수집·사용의 무엇·언제·왜에 대한","소비자는 종종 남겨진다","취약하고 갈등을 느끼는 상태로."]},
-    {"role":"skip","en":["“I love this restaurant-finder app on my phone,","but what happens to my data","if I press ‘ok’","when asked if that app can use my current location?”"],"ko":["“내 폰의 이 맛집 찾기 앱이 정말 좋은데","내 데이터는 어떻게 되지","'확인'을 누르면","그 앱이 내 현재 위치를 써도 되냐고 물을 때?”"]},
-    {"role":"yellow","en":["Armed with tools","that can provide them options,","the consumer moves","from passive bystander to active participant."],"ko":["도구로 무장하면","선택권을 제공하는","소비자는 이동한다","수동적 방관자에서 능동적 참여자로."],"end":true}
+    {"role":"yellow","en":["Often overlooked, but just as important a stakeholder, is the consumer","who plays a large role in the notion of the privacy paradox."],"ko":["종종 간과되지만 똑같이 중요한 이해관계자는 바로 소비자다","'프라이버시 역설'에서 큰 역할을 하는."],"sig":{"name":"역접","color":"red","word":"but"}},
+    {"role":"skip","en":["Consumer engagement levels in digital experiences have simply exploded","― and they show little or no signs of slowing."],"ko":["디지털 경험에서 소비자 참여 수준이 그야말로 폭발했고","둔화될 기미가 거의 없다."]},
+    {"role":"gray","en":["There is an awareness among consumers,","not only that their personal data helps to drive the rich experiences these companies provide,","but also that sharing this data is the price you pay for these experiences."],"ko":["소비자들은 인식하고 있다","개인 데이터가 기업이 주는 풍부한 경험을 이끌 뿐 아니라","그 데이터 공유가 그 경험에 치르는 대가임을."],"sig":{"name":"열거","color":"gray","word":"not only"},"nat":"소비자는 데이터가 풍부한 경험을 만든다는 것과, 그 데이터를 내주는 게 경험의 대가임을 안다."},
+    {"role":"yellow","en":["Without a better understanding of data collection and use,","the consumer is often left feeling vulnerable and conflicted."],"ko":["데이터 수집·이용을 제대로 이해하지 못하면","소비자는 취약하고 갈등을 느끼게 된다."],"sig":{"name":"조건","color":"orange","word":"Without"}},
+    {"role":"skip","en":["“I love this restaurant-finder app,","but what happens to my data if I press ‘ok’ … my current location?”"],"ko":["“이 맛집 찾기 앱이 정말 좋은데","'확인'을 누르면 내 데이터는 어떻게 되지?”"]},
+    {"role":"yellow","en":["Armed with tools that can provide them options,","the consumer moves from passive bystander to active participant."],"ko":["선택권을 주는 도구로 무장하면","소비자는 수동적 방관자에서 능동적 참여자로 이동한다."],"sig":{"name":"결론","color":"green","word":"moves from passive bystander to active participant"},"end":true}
   ]
 },
 "2023-09|35": {

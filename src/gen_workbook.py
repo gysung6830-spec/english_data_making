@@ -464,7 +464,11 @@ def direct_block(num, typ, direct):
     return rows
 
 
-_UCLS = {"ref": "uref", "conj": "uconj", "time": "utime"}
+_UCLS = {"ref": "uref", "conj": "uconj", "time": "utime",
+         "sig-red": "sw-red", "sig-orange": "sw-orange", "sig-purple": "sw-purple",
+         "sig-blue": "sw-blue", "sig-green": "sw-green", "sig-gray": "sw-gray"}
+# 신호 6색: 이름→(색키). 데이터의 sig.color 가 이미 색키면 그대로 사용.
+_SIGCOLORS = {"전환", "대조", "역접", "양보", "반전"}  # (참고용, 실제 색은 데이터 color 필드)
 
 
 def _mk_underline(text, marks):
@@ -506,8 +510,17 @@ def direct_full_block(data):
                           f'<div class="sen">{sen}</div><div class="sko">{sko}</div></div>')
             continue
         role = r.get("role", "gray")
-        marks = r.get("marks") or r.get("mark")
-        marks_ko = r.get("marks_ko") or r.get("mark_ko")
+        marks = list(r.get("marks") or r.get("mark") or [])
+        marks_ko = list(r.get("marks_ko") or r.get("mark_ko") or [])
+        # 신호(왜 노랑인가): sig={name,color,word} → 신호어에 색줄 + 칩
+        sig = r.get("sig")
+        sigchip = ""
+        if sig and sig.get("name"):
+            scol = sig.get("color", "red")
+            if sig.get("word"):
+                marks.append((sig["word"], f"sig-{scol}"))
+            _lbl = sig["name"] + (f' {sig["word"]}' if sig.get("word") else "")
+            sigchip = f'<span class="sigc sc-{scol}">{esc(_lbl)}</span>'
         en = _slash_marked(r.get("en", []), marks)
         ko = _slash_marked(r.get("ko", []), marks_ko)
         # 번호/라벨
@@ -536,14 +549,14 @@ def direct_full_block(data):
             btag = "🟡 읽기" + (" · 끝문장" if r.get("end") else "")
             if r.get("blank"):
                 btag = f"🟡 근거({r['blank']})"
-            entag = f'<span class="tagm ry">{btag}</span>'
+            entag = f'{sigchip}<span class="tagm ry">{btag}</span>'
         elif role in ("gray", "given") and kind not in ("seq",):
             en = f'<span class="dim">{en}</span>'
-            if r.get("note"):
-                entag = f'<span class="tagm rg">{esc(r["note"])}</span>'
+            _rt = r.get("note") or ("배경" if role != "given" else "")
+            entag = sigchip + (f'<span class="tagm rg">{esc(_rt)}</span>' if _rt else "")
         elif role == "skip":
             en = f'<span class="dim">{en}</span>'
-            entag = '<span class="tagm rs">예시·부연</span>'
+            entag = sigchip + '<span class="tagm rs">예시·부연</span>'
         elif role == "irr":
             rowcls += " irr"
             entag = '<span class="irrmark">✕ 무관</span>'
@@ -554,9 +567,10 @@ def direct_full_block(data):
             ncls = "arw-b" if nk == "ref" else ("arw-r" if nk == "conj" else "arw-b")
             color = "irr" if role == "irr" else nk
             note = f' <span class="jnote {ncls}">↳ {esc(r["note"])}</span>'
+        nat_html = f'<div class="natline"><b>뜻</b> {esc(r["nat"])}</div>' if r.get("nat") else ""
         rows_html += (f'<div class="{rowcls}">{bn}<div class="rc">'
                       f'<div class="en">{lbl_inline}{en}{entag}</div>'
-                      f'<div class="ko">{ko}{note}</div></div></div>')
+                      f'<div class="ko">{ko}{note}</div>{nat_html}</div></div>')
     # 유형별 꼬리
     tail = ""
     if kind == "mugwan" and data.get("concl"):
@@ -766,6 +780,32 @@ def _rrows(letter, seq):
     return out
 
 
+def _restate_inner(rt):
+    """재진술 지도 '내용'만(카드 래퍼 없이) — 통합 카드에서 재사용."""
+    if not rt or rt.get("has_restate") is False:
+        return ""
+    thesis = esc(rt.get("thesis", ""))
+    echo = esc(rt.get("echo", ""))
+    kind = rt.get("kind", "single")
+    subs = rt.get("subjects") or []
+    compare = kind == "compare" and len(subs) >= 2 and any(len(s.get("trail") or []) >= 2 for s in subs[:2])
+    if not compare and len(rt.get("chain") or []) < 2:
+        return ""
+    if compare:
+        blocks = ""
+        for li, s in zip(["A", "B"], subs[:2]):
+            blocks += (f'<div class="rsub"><div class="rname"><span class="pr big">{li}</span>'
+                       f'{esc(s.get("name",""))}</div>{_rrows(li, s.get("trail"))}</div>')
+        body = f'<div class="rsubs">{blocks}</div>'
+        hint = '두 소재를 <b>A→A′→A″</b> · <b>B→B′→B″</b>로 나란히 추적'
+    else:
+        body = f'<div class="rchain">{_rrows("A", rt.get("chain"))}</div>'
+        hint = '같은 소재 <b>A</b>가 <b>A→A′→A″</b>로 표현만 바뀌며 되풀이 → 마지막이 정답'
+    thesis_html = f'<div class="thesis"><span class="lb">핵심(A)</span>{thesis}</div>' if thesis else ""
+    echo_html = f'<div class="rEcho"><span class="lb">정답</span>{echo}</div>' if echo else ""
+    return f'<div class="restate restate-in">{thesis_html}<div class="rhint">{hint}</div>{body}{echo_html}</div>'
+
+
 def restate_card(rt):
     """STEP3 오른쪽 — 재진술 지도. 한 소재 A→A′→A″→A‴ / 두 소재 A…·B…로 되풀이를 추적."""
     if not rt:
@@ -950,6 +990,32 @@ def solution_block(rec, c, idx, tno=None):
             _parts = re.split(r"\s*(?:…|\.\.\.|·)\s*", _atx, maxsplit=1)
             _a, _b = (_parts + ["", ""])[:2]
             step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
+    # (가) 통합 카드 — general/summary 유형은 STEP2+3를 한 카드로
+    if dfull and dfull.get("kind") in ("general", "summary"):
+        opts_html = mugwan_opts(mug) if mug else opts_block(c.get("opts", []), answer, rec.get("choices"))
+        circ = CIRCLED[answer-1] if (answer and 1 <= (answer or 0) <= 5) else "·"
+        is_blank = num in (31, 32, 33, 34)
+        blanknote = ' <span class="blanknote">(빈칸 <span class="bkmini">___</span> 채우기)</span>' if is_blank else ''
+        ileg = ('<div class="ilegend"><span class="yl2">노란 형광펜</span>=무조건 읽을 문장 · '
+                '<span style="color:#79828c">회색</span>=배경·예시 · '
+                '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=왜 노랑인지(신호어 색줄) · 슬래시(/)=의미 단위')
+        ileg += (' · <b>어려운 문장</b>은 <span style="color:#a86b00">뜻</span> 자연해석</div>')
+        rin = _restate_inner(rt)
+        r4 = f'<div class="isec"><span class="in">4</span>재진술 지도</div><div class="ibox">{rin}</div>' if rin else ''
+        recon = '<div class="reconnote">※ 원본 선지 일부 유실 → 학습용 재구성(지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""
+        return f'''<div class="qsolution"><div class="card intg">
+      <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind">STEP 2+3 · 훈련·해석 통합</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
+      <div class="isec"><span class="in">1</span>지문 — 형광펜 문장 + 직독직해{blanknote}</div>
+      {ileg}
+      {direct_full_block(dfull)}
+      <div class="isec"><span class="in">2</span>노랑만으로 {'빈칸' if is_blank else '정답'} 도출</div>
+      {reason_block}
+      {pline}
+      <div class="isec"><span class="in">3</span>정답 <span class="ansno">{circ}</span></div>
+      {opts_html}{recon}
+      <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
+      {r4}
+    </div></div>'''
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
@@ -1475,7 +1541,8 @@ body{ font-family:"Liberation Serif","DejaVu Serif","NanumSquareRound",serif; co
   .qproblem{ break-before:page; break-inside:avoid; }        /* ① 문제면 */
   .qsolution{ break-before:page; }                            /* ② 훈련(STEP2)면 시작 */
   .qsolution .card.trans{ break-before:page; }                /* ③ 해석면 시작(STEP3+재진술은 같은 면) */
-  .qsolution .card{ break-inside:avoid; }
+  .qsolution .card.intg{ break-before:page; break-inside:auto; }  /* (가) 통합면 — 길면 다음 면으로 흐름 */
+  .qsolution .card:not(.intg){ break-inside:avoid; }
   .card.solo{ break-inside:avoid; }
 }
 .spread{ margin-bottom:6px; }
@@ -1566,6 +1633,17 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .dfull .uref{ border-bottom:2px solid #2f6fb0; color:#194e7e; font-weight:700; }
 .dfull .uconj{ border-bottom:2px solid var(--trap); color:#8f2f28; font-weight:700; }
 .dfull .utime{ border-bottom:2px solid var(--ink); color:#12543d; font-weight:700; }
+/* 신호 6색 — 신호어 색줄 + 칩 */
+.dfull .sw-red{ border-bottom:2px solid #cd5049; color:#a5352d; font-weight:800; }
+.dfull .sw-orange{ border-bottom:2px solid #d98324; color:#a5631a; font-weight:800; }
+.dfull .sw-purple{ border-bottom:2px solid #8b5cf6; color:#6d3fd4; font-weight:800; }
+.dfull .sw-blue{ border-bottom:2px solid #2f6fb0; color:#215788; font-weight:800; }
+.dfull .sw-green{ border-bottom:2px solid #1f7a5c; color:#12543d; font-weight:800; }
+.dfull .sw-gray{ border-bottom:2px solid #8a929b; color:#5f6870; font-weight:800; }
+.dfull .sigc{ display:inline-block; font-size:7.3px; font-weight:800; color:#fff; border-radius:8px; padding:1px 6px; margin-left:4px; vertical-align:1px; }
+.dfull .sigc.sc-red{ background:#cd5049; } .dfull .sigc.sc-orange{ background:#d98324; } .dfull .sigc.sc-purple{ background:#8b5cf6; }
+.dfull .sigc.sc-blue{ background:#2f6fb0; } .dfull .sigc.sc-green{ background:#1f7a5c; } .dfull .sigc.sc-gray{ background:#8a929b; }
+.dfull .natline{ font-size:9px; color:#8a6a00; background:#fffaf0; border-left:2px solid var(--must-line); border-radius:0 4px 4px 0; padding:2px 8px; margin-top:3px; } .dfull .natline b{ color:#a86b00; }
 .dfull .tagm{ display:inline-block; font-size:7.3px; font-weight:800; border-radius:8px; padding:0 5px; margin-left:4px; vertical-align:1px; }
 .dfull .tagm.ry{ color:#8a6a00; background:#fff4d1; } .dfull .tagm.rg{ color:#5f6870; background:#eef0f2; } .dfull .tagm.rs{ color:#8a929b; background:#f2f4f6; }
 .dfull .row.irr{ background:#fdecea; border-radius:5px; padding:3px 6px 3px 23px; }
@@ -1728,6 +1806,16 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .rquiz .rqsub .rqrow .rqlab{ width:52px; }
 /* STEP3 재진술 지도 카드 */
 .card.restate{ border-left:5px solid #e0b94a; background:#fffdf6; }
+/* (가) 통합 카드 */
+.card.intg{ border:2px solid var(--ink-d); }
+.card.intg .isec{ font-size:12px; font-weight:800; color:var(--ink-d); margin:11px 0 7px; padding-left:8px; border-left:5px solid var(--ink); display:flex; align-items:center; gap:6px; }
+.card.intg .isec .in{ font-size:8.5px; color:#fff; background:var(--ink); border-radius:50%; width:15px; height:15px; line-height:15px; text-align:center; }
+.card.intg .isec .ansno{ color:var(--ink-d); }
+.card.intg .ilegend{ font-size:8.6px; color:#6b7280; margin-bottom:7px; line-height:1.5; } .card.intg .ilegend b{ color:#48525c; }
+.card.intg .ilegend .yl2{ background:#ffe680; border-radius:2px; padding:0 4px; font-weight:800; color:#23272e; }
+.card.intg .blanknote{ font-size:9px; color:#8f2f28; font-weight:700; } .card.intg .bkmini{ border:1px dashed #cd5049; border-radius:3px; padding:0 4px; color:#cd5049; }
+.card.intg .ibox{ margin-top:2px; }
+.card.intg .restate-in{ background:#fff7ef; border:1px solid #e0b94a; border-radius:8px; padding:8px 12px; }
 .card.restate .hd{ border-bottom-color:#e0b94a; }
 .card.restate .rno{ background:none; font-size:14px; padding:0; }
 .card.restate .ty{ color:#8a5a1a; }
