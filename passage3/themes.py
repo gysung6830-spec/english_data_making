@@ -168,8 +168,8 @@ body {{
   background: {ACCENT};
   color: #ffffff;
   font-weight: 700;
-  font-size: 11.5px;
-  padding: 3px 11px;
+  font-size: 13.5px;
+  padding: 4px 14px;
   border-radius: 999px;
   margin-bottom: 8px;
   letter-spacing: .2px;
