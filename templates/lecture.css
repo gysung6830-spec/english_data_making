@@ -357,9 +357,3 @@ mark.hl1 .hln{ color:#1f4e8a; }
 .sl-demo{ display:inline-block; color:var(--green); font-weight:800; font-size:11pt;
   min-width:17px; text-align:center; }
 .g-legend .ox-en,.g-legend .ox-kill{ vertical-align:0; }
-.g-versions{ display:flex; gap:22px; background:var(--green-soft); border:1px solid #d6e9de;
-  border-radius:10px; padding:10px 16px; }
-.g-versions .gv{ display:inline-flex; align-items:center; gap:8px; font-size:9.3pt; color:#3c4652;
-  white-space:nowrap; }
-.g-versions .gv b{ color:var(--green-d); font-weight:800; }
-.g-versions .tag-student,.g-versions .tag-teacher{ white-space:nowrap; margin-left:0; }
