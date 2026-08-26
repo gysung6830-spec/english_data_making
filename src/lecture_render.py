@@ -149,6 +149,47 @@ def _highlight_grammar(english: str, grammar) -> Markup | None:
     return Markup(text)
 
 
+def _highlight_grammar_chunked(chunks, grammar) -> Markup | None:
+    """끊어읽기 조각(chunks)을 ' / '로 이으면서 각 조각 안에서 어법칩 spans 를 형광펜 표시.
+
+    - 강사용 영어 줄에 '끊어읽기(/)' 와 '어법 형광펜(칩 번호)' 을 함께 보이게 한다.
+    - 각 span 은 지문에서 '처음 나오는 조각'에서 한 번만 표시(중복 형광 방지).
+    - 매칭이 하나도 없으면 None(→ 템플릿이 기존 끊어읽기 줄로 폴백).
+    """
+    pairs = []  # (escaped_span, chip_no)
+    for gi, g in enumerate(grammar):
+        for sp in getattr(g, "spans", []) or []:
+            e = str(escape(sp)).strip()
+            if e:
+                pairs.append((e, gi + 1))
+    used: set[int] = set()
+    parts: list[str] = []
+    matched = False
+    for c in chunks:
+        raw = _MARK.sub(lambda m: m.group(1), c.en or "")  # [[ ]] 표시는 떼고
+        text = str(escape(raw))
+        tokens: dict[str, str] = {}
+        # 아직 안 쓴 span 을 '긴 것 먼저' 이 조각에서 찾기
+        for k in sorted((i for i in range(len(pairs)) if i not in used),
+                        key=lambda i: -len(pairs[i][0])):
+            e, cno = pairs[k]
+            mm = re.search(re.escape(e), text, re.IGNORECASE)
+            if not mm:
+                continue
+            used.add(k)
+            matched = True
+            tok = f"\x00g{k}\x00"
+            tokens[tok] = (f'<mark class="hlg"><sup class="hln">{cno}</sup>'
+                           f'{text[mm.start():mm.end()]}</mark>')
+            text = text[:mm.start()] + tok + text[mm.end():]
+        for tok, html in tokens.items():
+            text = text.replace(tok, html)
+        parts.append(text)
+    if not matched:
+        return None
+    return Markup(' <span class="sl">/</span> '.join(parts))
+
+
 def _order_grammar(english: str, grammar):
     """어법칩을 '문장 속 첫 span 위치' 기준으로 정렬(왼→오).
 
@@ -218,8 +259,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "id": s.id,
             "english": s.english,
             "grammar": [{"tag": normalize_tag(g.tag), "note": g.note} for g in og],
-            # 강사용: 어법칩 spans 를 문장에서 형광펜(칩 번호)으로 표시. 없으면 None → 끊어읽기 줄 폴백
-            "english_hl": _highlight_grammar(s.english, og) if teacher else None,
+            # 강사용: 끊어읽기(/) + 어법칩 spans 형광펜(칩 번호)을 함께 표시. 없으면 None → 끊어읽기 줄 폴백
+            "english_hl": _highlight_grammar_chunked(s.chunks, og) if teacher else None,
             "chunks": chunks,
             "misreads": [{"statement": m.statement, "why": m.why,
                           "verdict": getattr(m, "verdict", "X"),
