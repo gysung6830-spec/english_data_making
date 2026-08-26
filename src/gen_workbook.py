@@ -848,9 +848,10 @@ def mugwan_direct(mug):
     return rows
 
 
-def solution_block(rec, c, idx):
+def solution_block(rec, c, idx, tno=None):
     """형광펜 해설(오른쪽) 조립 — STEP2 정답 칠 + STEP3 직독직해 + 재진술. 답지(해설지)에서도 재사용."""
     num = rec["num"]; typ = BAND_TITLE.get(rec["band"], rec.get("type", ""))
+    _tnob = f'<span class="tnob">{typ} {tno:02d}</span>' if tno else ''
     answer = c.get("answer") or rec.get("answer")
     hl = c.get("hl") or []
     formula = FORMULA.get(typ, "")
@@ -893,7 +894,7 @@ def solution_block(rec, c, idx):
         '<u class="pu mn">부정</u><sup class="pm mn">−</sup> = <b>±어휘</b> <span style="color:#8a929b">(PART 0 ± 사전)</span></span></div>')
     right = f'''<div class="qsolution">
     <div class="card">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind">{step2_kind}</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
       {clue_legend}{color_legend}
       <div class="psg">{passage_html}</div>
       {reason_block}
@@ -942,7 +943,7 @@ def solution_block(rec, c, idx):
             _a, _b = (_parts + ["", ""])[:2]
             step3_body = summary_box(c.get("summary"), fill=(_a, _b)) + step3_body
     right2 = f'''<div class="card trans">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
       <div class="dchl">
         <span class="kt">{step3_head}</span>
         {step3_body}
@@ -969,7 +970,7 @@ def summary_box(summary, fill=None):
     return f'<div class="sumbox"><div class="sh">{head}</div><div class="sent">{s}</div></div>'
 
 
-def render_spread(rec, c, idx):
+def render_spread(rec, c, idx, tno=None):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
     answer = c.get("answer") or rec.get("answer")
@@ -1035,7 +1036,7 @@ def render_spread(rec, c, idx):
     rquiz = restate_problem(rt, _cue)
 
     left = f'''<div class="qproblem"><span class="wbm">wbspread</span>
-    <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
+    <div class="pbanner"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{f'<span class="tnob">{typ} {tno:02d}</span>' if tno else ''}
       {'<span class="daepyo">⭐ 대표</span>' if c.get("daepyo") else ''}{'<span class="pt">'+pts+'</span>' if pts else ''}<span class="psrc">평가원 {exam_src(rec.get("exam_id",""))} {num}번</span><span class="step">STEP 1 · 직접 풀기 ✍️</span></div>
     <div class="pbody">
       <div class="pmain">
@@ -1060,7 +1061,7 @@ def render_spread(rec, c, idx):
     {vocab_block(c.get("vlist", []))}
   </div>'''
 
-    right = solution_block(rec, c, idx)
+    right = solution_block(rec, c, idx, tno)
     return f'<div class="spread">{left}{right}</div>'
 
 
@@ -1088,9 +1089,10 @@ def _fallback_hl(passage):
     return " ".join(out)
 
 
-def render_fallback(rec, idx):
+def render_fallback(rec, idx, tno=None):
     band = rec["band"]; typ = BAND_TITLE.get(band, rec.get("type", ""))
     num = rec["num"]; pts = f'{rec.get("points")}점' if rec.get("points") else ""
+    _tnob = f'<span class="tnob">{typ} {tno:02d}</span>' if tno else ''
     ans = rec.get("answer"); choices = rec.get("choices") or {}
     ch = ""
     for k in sorted(int(x) for x in choices):
@@ -1099,7 +1101,7 @@ def render_fallback(rec, idx):
         ch += f'<div{cls}><span class="n">{CIRCLED[k-1]}</span><span class="tx">{esc(choices[str(k)])}</span>{jd}</div>'
     formula = FORMULA.get(typ, "")
     return f'''<div class="card solo">
-      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>
+      <div class="hd"><span class="no">{num}</span><span class="ty">{esc(typ)}</span>{_tnob}
         {'<span class="pt">'+pts+'</span>' if pts else ''}<span class="kind">훈련(정답 칠)</span>
         <span class="tm">{esc(rec.get("exam_id",""))} · #{idx}</span></div>
       <div class="psg">{_fallback_hl(rec["passage"])}</div>
@@ -1341,14 +1343,14 @@ def build(n=80):
         elif b == "38-39":
             body.append(onepass_page("삽입"))
         body.append(band_divider(b, groups[b], si, len(present_bands)))
-        for r in groups[b]:
+        for tno, r in enumerate(groups[b], 1):
             idx += 1
             key = f'{r["exam_id"]}|{r["num"]}'
             c = content.get(key)
             if c and c.get("hl"):
-                body.append(render_spread(r, c, idx)); full += 1
+                body.append(render_spread(r, c, idx, tno)); full += 1
             else:
-                body.append(render_fallback(r, idx))
+                body.append(render_fallback(r, idx, tno))
     doc = TEMPLATE.replace("{{BODY}}", "\n".join(body)).replace("{{N}}", str(idx)).replace("{{FULL}}", str(full))
     OUT.write_text(doc, encoding="utf-8")
     print(f"워크북 생성: {idx}문항(대표형 {full} · 폴백 {idx-full}) → {OUT}")
@@ -1522,6 +1524,8 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .pbanner .ty{ font-size:15px; font-weight:800; }
 .pbanner .pt{ font-size:9px; font-weight:700; background:var(--trap); padding:1px 8px; border-radius:9px; }
 .pbanner .psrc{ font-size:9px; font-weight:700; color:#12543d; background:#ffe9a8; padding:2px 9px; border-radius:9px; }
+.pbanner .tnob{ font-size:11px; font-weight:800; color:#fff; background:rgba(255,255,255,.22); border:1.5px solid rgba(255,255,255,.5); padding:2px 11px; border-radius:20px; }
+.card .hd .tnob{ font-size:9.5px; font-weight:800; color:#fff; background:var(--ink); padding:1px 9px; border-radius:20px; }
 .pbanner .daepyo{ font-size:9px; font-weight:800; color:#fff; background:#cd5049; padding:2px 9px; border-radius:9px; }
 .pbanner .step{ margin-left:auto; font-size:9px; font-weight:800; background:rgba(255,255,255,.18); padding:3px 10px; border-radius:11px; }
 .pbody{ border:2px solid var(--ink-d); border-top:none; border-radius:0 0 9px 9px; padding:15px 17px 13px; display:flex; gap:15px; min-height:360px; }
