@@ -37,11 +37,11 @@ def _promote_idiom_chips(s) -> list:
             continue
         if not any(p in wl.split() for p in _PARTICLES):
             continue  # 파티클 없는 단순 명사구(고유명사 등)는 제외
-        i = low.find(wl)
-        if i < 0:
+        mm = re.search(_boundary_pat(w), en, re.IGNORECASE)
+        if not mm:
             continue  # 원문에 그대로 없으면(굴절 등) 형광펜 불가 → 제외
         seen.add(wl)
-        out.append(GrammarChip(tag=w, note=(v.meaning or ""), spans=[en[i:i + len(w)]]))
+        out.append(GrammarChip(tag=w, note=(v.meaning or ""), spans=[mm.group(0)]))
     return out
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -79,6 +79,20 @@ def _aggregate_vocab(sentences) -> list[dict]:
 
 
 _MARK = re.compile(r"\[\[(.+?)\]\]")
+
+
+def _boundary_pat(e: str) -> str:
+    """단어 경계를 붙인 검색 패턴 — 'if' 가 'difference' 안에서 매칭되는 것을 막는다.
+
+    span 양끝이 영숫자면 그 바깥에 영숫자가 오지 못하게 lookaround 를 건다
+    (구두점·공백으로 시작/끝나는 표현은 그대로).
+    """
+    pat = re.escape(e)
+    if e[:1].isalnum():
+        pat = r"(?<![A-Za-z0-9])" + pat
+    if e[-1:].isalnum():
+        pat = pat + r"(?![A-Za-z0-9])"
+    return pat
 
 
 def _mark_en(text: str) -> Markup:
@@ -203,7 +217,7 @@ def _highlight_grammar_chunked(chunks, grammar) -> Markup | None:
         for k in sorted((i for i in range(len(pairs)) if i not in used),
                         key=lambda i: -len(pairs[i][0])):
             e, cno = pairs[k]
-            mm = re.search(re.escape(e), text, re.IGNORECASE)
+            mm = re.search(_boundary_pat(e), text, re.IGNORECASE)
             if not mm:
                 continue
             used.add(k)
@@ -226,12 +240,17 @@ def _order_grammar(english: str, grammar):
     형광펜 위첨자 번호(❶❷…)가 문장에서 나타나는 순서대로 읽히게 한다.
     span 을 못 찾는 칩(위치 불명)은 원래 상대순서를 유지하며 뒤로 보낸다(안정 정렬).
     """
-    low = (english or "").lower()
+    en = english or ""
+
+    def _pos(sp):
+        e = (sp or "").strip()
+        if not e:
+            return -1
+        m = re.search(_boundary_pat(e), en, re.IGNORECASE)
+        return m.start() if m else -1
 
     def key(g):
-        pos = [low.find((sp or "").lower().strip())
-               for sp in (getattr(g, "spans", []) or [])]
-        pos = [i for i in pos if i >= 0]
+        pos = [p for p in (_pos(sp) for sp in (getattr(g, "spans", []) or [])) if p >= 0]
         return min(pos) if pos else 10 ** 9
 
     return sorted(grammar, key=key)
