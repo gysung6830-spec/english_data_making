@@ -1,0 +1,214 @@
+{
+ "item_no": "38",
+ "theme": "비선형(nonlinear) 편집 시스템의 효율성과 장점",
+ "overview": {
+  "theme_ko": "비선형 편집 시스템의 장점",
+  "topic": "🔎 비선형 편집 시스템의 임의 접근과 수정 편의성",
+  "stance": "긍정적",
+  "stance_reason": "'Another highlight', 'makes it easy', 'easily added or removed' 등 이점을 부각한다.",
+  "structure": "비교·대조",
+  "structure_reason": "'Linear editing was like ...' vs 'Nonlinear editing, on the other hand, is like ...' 로 대조한다.",
+  "key_grammar": {
+   "point": "가목적어-진목적어 (make it + 형용사 + to부정사)",
+   "source_sentence": "Another highlight of a digital nonlinear system is its random access process that makes it easy for an editor to find desired shots or scenes without having to spend time fast forwarding or rewinding videotape.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "동사 makes 뒤의 [[it]]은 가짜 목적어이고, 진짜 목적어는 뒤의 to부정사다."},
+    {"chip": "형태", "text": "make + it + 형용사(easy) + (for 목적격) + [[to부정사]] 구조다."},
+    {"chip": "왜", "text": "진목적어인 to부정사구가 길어서 자리를 뒤로 미루고 [[it]]을 대신 세웠다."},
+    {"chip": "해석", "text": "'…하는 것을 …하게 만들다'로, 가목적어 [[it]]은 해석하지 않는다."}
+   ],
+   "example_analysis": "makes it easy에서 it은 가목적어, to find desired shots or scenes가 진목적어다.",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 친 it이 '가목적어'로 쓰인 문장은?", "options": ["The system makes it easy to find scenes.", "The system uses it every day.", "It is a nonlinear system."], "answer": "The system makes it easy to find scenes.", "from_passage": true},
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? The computer makes it easy for editors ___ shots.", "options": ["to find", "finding", "found"], "answer": "to find", "from_passage": true},
+    {"kind": "객관식", "question": "어법상 옳은 것은?", "options": ["makes it easy to add scenes", "makes easy it to add scenes", "makes it easily to add scenes"], "answer": "makes it easy to add scenes", "from_passage": false},
+    {"kind": "영작", "question": "그것의 임의적 접근 과정은 편집자가 원하는 숏이나 장면을 쉽게 찾게 한다.", "words": ["its", "random", "access", "process", "makes", "it", "easy", "for", "an", "editor", "to", "find", "desired", "shots", "or", "scenes"], "answer": "its random access process makes it easy for an editor to find desired shots or scenes", "from_passage": true},
+    {"kind": "영작", "question": "그 앱은 사용자가 파일을 쉽게 공유하게 한다.", "words": ["the", "app", "makes", "it", "easy", "for", "users", "to", "share", "files"], "answer": "the app makes it easy for users to share files", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "임의 접근", "expressions": ["random access", "find desired shots or scenes"], "variation": "빨리 감기·되감기 없이 원하는 장면에 바로 접근한다."},
+   {"label": "수정 용이", "expressions": ["easily added or removed", "easily deleted and fixed"], "variation": "워드 프로세서처럼 손쉽게 고친다."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~2", "summary": "모든 편집은 [[비선형]] 시스템으로 임의 접근과 특수 효과가 가능하다", "easy_example": "영상 파일을 폴더처럼 바로 열어 보는 셈이다."},
+   {"stage": "전개", "sentence_range": "3~4", "summary": "[[임의 접근]]으로 원하는 장면을 쉽게 찾고 추가·삭제도 자동 조정된다", "easy_example": "문서에 문장을 끼워 넣으면 쪽 번호가 알아서 바뀌듯 한다."},
+   {"stage": "대조", "sentence_range": "5~6", "summary": "선형 편집은 [[타자기]]처럼 실수가 나면 전체를 다시 써야 했다", "easy_example": "타자기로 쓰다 틀리면 처음부터 다시 친다."},
+   {"stage": "결론", "sentence_range": "7~8", "summary": "비선형 편집은 [[워드 프로세서]]처럼 몇 번의 입력으로 수정된다", "easy_example": "워드에서 오타를 지우고 고치듯 한다."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "All editing systems are now nonlinear computer-based systems that allow random access to any video shot or scene without having to fast forward or fast reverse to find it.",
+   "grammar": [
+    {"tag": "주격 관계대명사 that", "note": "systems를 수식하는 관계사절", "spans": ["that"]},
+    {"tag": "without + 동명사", "note": "~할 필요 없이", "spans": ["without having"]}
+   ],
+   "vocab": [
+    {"word": "nonlinear", "meaning": "비선형의"},
+    {"word": "random access", "meaning": "임의 접근"},
+    {"word": "fast forward", "meaning": "빨리 감기(하다)"},
+    {"word": "fast reverse", "meaning": "빨리 되감기(하다)"}
+   ],
+   "chunks": [
+    {"en": "All editing systems are now [[nonlinear]] computer-based systems", "ko": "모든 편집 시스템은 이제 [[비선형]] 컴퓨터 기반 시스템으로"},
+    {"en": "that allow random [[access]] to any video shot or scene", "ko": "어떤 비디오 숏이나 장면으로의 임의적 [[접근]]을 가능하게 하는데"},
+    {"en": "[[without having to fast forward or fast reverse to find it.]]", "ko": "[[그것을 찾기 위해 빨리 감기나 빨리 되감기를 할 필요 없이]]"}
+   ],
+   "misreads": [
+    {"statement": "모든 편집 시스템은 이제 비선형이며, 원하는 화면을 찾으려고 빨리 감기나 되감기를 할 필요가 없다.", "verdict": "O"},
+    {"statement": "빨리 감기나 되감기를 해야만 원하는 비디오 숏에 접근할 수 있다.", "verdict": "X", "trap_type": "구조수식", "anchor": "without having to fast forward or fast reverse to find it", "why": "빨리 감기·되감기 '없이' 임의 접근이 가능하다고 했다(반대로 읽음)."}
+   ],
+   "mistips": ["without having to ~ 를 '~하지 않고서는'으로 읽으면 안 돼 — 바르게는 [[~할 필요 없이]]다."]
+  },
+  {
+   "id": 2,
+   "english": "Nonlinear systems can create a range of special effects, such as slow motion, wipes and dissolves.",
+   "grammar": [
+    {"tag": "such as", "note": "예시 열거", "spans": ["such as"]}
+   ],
+   "vocab": [
+    {"word": "a range of", "meaning": "다양한"},
+    {"word": "special effects", "meaning": "특수 효과"},
+    {"word": "slow motion", "meaning": "슬로 모션"},
+    {"word": "dissolve", "meaning": "디졸브(화면 용해 전환)"}
+   ],
+   "chunks": [
+    {"en": "Nonlinear systems can create a range of special [[effects]],", "ko": "비선형 시스템은 다양한 특수 [[효과]]를 만들 수 있는데,"},
+    {"en": "such as slow motion, wipes and [[dissolves]].", "ko": "예를 들어 슬로 모션, 와이프, [[디졸브]] 같은 것이다."}
+   ],
+   "misreads": [
+    {"statement": "비선형 시스템의 특수 효과는 오직 전문 편집자만 사용할 수 있다.", "verdict": "X", "trap_type": "무관정보", "anchor": "a range of special effects", "why": "다양한 특수 효과를 만들 수 있다고만 했지 전문가만 쓴다는 언급은 없다."}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Another highlight of a digital nonlinear system is its random access process that makes it easy for an editor to find desired shots or scenes without having to spend time fast forwarding or rewinding videotape.",
+   "grammar": [
+    {"tag": "가목적어 it (make it 형용사 to)", "note": "makes의 가목적어 it, 진목적어는 to find...", "spans": ["makes it easy", "to find"]},
+    {"tag": "주격 관계대명사 that", "note": "process를 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "highlight", "meaning": "주요 특징"},
+    {"word": "random access process", "meaning": "임의 접근 과정"},
+    {"word": "desired", "meaning": "원하는"},
+    {"word": "rewind", "meaning": "되감다"}
+   ],
+   "chunks": [
+    {"en": "Another [[highlight]] of a digital nonlinear system", "ko": "디지털 비선형 시스템의 또 다른 [[특징]]은"},
+    {"en": "is its random access [[process]]", "ko": "그것의 임의적 접근 [[과정]]인데"},
+    {"en": "that makes it easy for an editor to find [[desired]] shots or scenes", "ko": "편집자가 [[원하는]] 숏이나 장면을 쉽게 찾게 하는"},
+    {"en": "[[without having to spend time fast forwarding or rewinding videotape.]]", "ko": "[[비디오테이프를 빨리 감거나 되감는 데 시간을 들일 필요 없이]]"}
+   ],
+   "misreads": [
+    {"statement": "임의적 접근 과정 덕분에 컴퓨터가 원하는 숏을 대신 찾아 편집자에게 보여 준다.", "verdict": "X", "trap_type": "주체대상", "anchor": "makes it easy for an editor to find desired shots or scenes", "why": "원하는 숏을 찾는 주체는 '편집자'이지 컴퓨터가 아니다.", "killer": true},
+    {"statement": "임의적 접근 과정은 편집자가 테이프를 빨리 감거나 되감는 시간을 들이지 않게 해 준다.", "verdict": "O"}
+   ],
+   "mistips": ["makes it easy의 it을 '그것'으로 해석하면 안 돼 — [[가목적어]]라 해석하지 않고 뒤의 to부정사가 진짜 목적어야."]
+  },
+  {
+   "id": 4,
+   "english": "With nonlinear editing, shots and scenes can be easily added or removed anywhere in the program, and the computer adjusts the program length automatically.",
+   "grammar": [
+    {"tag": "조동사 수동태", "note": "can be added or removed", "spans": ["can be easily added or removed"]}
+   ],
+   "vocab": [
+    {"word": "add", "meaning": "추가하다"},
+    {"word": "remove", "meaning": "제거하다"},
+    {"word": "adjust", "meaning": "조정하다"},
+    {"word": "automatically", "meaning": "자동으로"}
+   ],
+   "chunks": [
+    {"en": "With nonlinear editing, shots and scenes can be easily [[added]] or removed", "ko": "비선형 편집으로는, 숏과 장면이 쉽게 [[추가]]되거나 삭제될 수 있고"},
+    {"en": "[[anywhere]] in the program,", "ko": "프로그램의 [[어디에나]],"},
+    {"en": "and the computer adjusts the program length [[automatically]].", "ko": "그리고 컴퓨터가 프로그램 길이를 [[자동으로]] 조정한다."}
+   ],
+   "misreads": [
+    {"statement": "숏을 추가하거나 삭제하면 프로그램 길이가 달라지는데, 이때 편집자가 길이를 수동으로 맞춰야 한다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the computer adjusts the program length automatically", "why": "길이가 바뀌는 건 맞지만, 조정하는 것은 편집자가 아니라 '컴퓨터가 자동으로' 한다."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Linear editing was like composing a paper on a typewriter.",
+   "grammar": [
+    {"tag": "like + 동명사", "note": "~하는 것과 같다", "spans": ["like composing"]}
+   ],
+   "vocab": [
+    {"word": "linear", "meaning": "선형의"},
+    {"word": "compose", "meaning": "(글을) 작성하다"},
+    {"word": "typewriter", "meaning": "타자기"}
+   ],
+   "chunks": [
+    {"en": "[[Linear]] editing was like composing a paper", "ko": "[[선형]] 편집은 종이에 글을 작성하는 것과 같았는데"},
+    {"en": "on a [[typewriter]].", "ko": "[[타자기]]로 하는 것과 같았다."}
+   ],
+   "misreads": [
+    {"statement": "필자는 선형 편집이 타자기처럼 우수하고 신뢰할 만한 방식이라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "Linear editing was like composing a paper on a typewriter", "why": "타자기 비유는 수정이 번거로운 '단점'을 부각한 것이지 우수함을 뜻하지 않는다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "If a mistake was made or new information needed to be added the whole piece had to be retyped.",
+   "grammar": [
+    {"tag": "수동태", "note": "was made / had to be retyped", "spans": ["was made", "be retyped"]}
+   ],
+   "vocab": [
+    {"word": "mistake", "meaning": "실수"},
+    {"word": "information", "meaning": "정보"},
+    {"word": "whole", "meaning": "전체의"},
+    {"word": "retype", "meaning": "다시 입력하다"}
+   ],
+   "chunks": [
+    {"en": "If a [[mistake]] was made", "ko": "만약 [[실수]]가 생기거나"},
+    {"en": "or new [[information]] needed to be added", "ko": "새로운 [[정보]]가 추가되어야 했다면"},
+    {"en": "the whole piece had to be [[retyped]].", "ko": "전체를 [[다시 작성]]해야 했다."}
+   ],
+   "misreads": [
+    {"statement": "선형 편집에서는 실수가 나거나 정보를 추가하려면 전체를 다시 작성해야 했다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Nonlinear editing, on the other hand, is like using a word processing program.",
+   "grammar": [
+    {"tag": "on the other hand", "note": "대조 연결어", "spans": ["on the other hand"]},
+    {"tag": "like + 동명사", "note": "~하는 것과 같다", "spans": ["like using"]}
+   ],
+   "vocab": [
+    {"word": "on the other hand", "meaning": "반면에"},
+    {"word": "word processing", "meaning": "워드 프로세싱"}
+   ],
+   "chunks": [
+    {"en": "[[Nonlinear]] editing, on the other hand,", "ko": "[[비선형]] 편집은, 반면,"},
+    {"en": "is like using a word processing [[program]].", "ko": "워드 프로세싱 [[프로그램]]을 사용하는 것과 같다."}
+   ],
+   "misreads": [
+    {"statement": "Nonlinear editing is like writing on a typewriter.", "verdict": "X", "trap_type": "구조수식", "anchor": "is like using a word processing program", "why": "비선형 편집은 타자기가 아니라 '워드 프로세서'를 사용하는 것에 비유되었다.", "english": true}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "If a mistake is made, it is easily deleted and fixed with a few keystrokes, and new information can be added easily.",
+   "grammar": [
+    {"tag": "수동태", "note": "is made / is deleted and fixed / be added", "spans": ["is made", "can be added"]},
+    {"tag": "지칭 it", "note": "it = a mistake", "spans": ["it"]}
+   ],
+   "vocab": [
+    {"word": "delete", "meaning": "삭제하다"},
+    {"word": "fix", "meaning": "수정하다"},
+    {"word": "keystroke", "meaning": "키 입력"},
+    {"word": "add", "meaning": "추가하다"}
+   ],
+   "chunks": [
+    {"en": "If a [[mistake]] is made,", "ko": "만약 [[실수]]가 생기면,"},
+    {"en": "it is easily deleted and fixed with a few [[keystrokes]],", "ko": "그것은 몇 번의 [[키 입력]]으로 쉽게 삭제되고 수정되며,"},
+    {"en": "and new information can be [[added]] easily.", "ko": "새로운 정보가 쉽게 [[추가]]될 수 있다."}
+   ],
+   "misreads": [
+    {"statement": "이 문장의 it은 새로 추가되는 정보(new information)를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "If a mistake is made, it is easily deleted", "why": "it이 가리키는 것은 새 정보가 아니라 앞의 '실수(a mistake)'다."}
+   ],
+   "mistips": ["it is deleted의 it을 '새 정보'로 보면 안 돼 — 앞의 [[a mistake]]를 가리켜."]
+  }
+ ]
+}

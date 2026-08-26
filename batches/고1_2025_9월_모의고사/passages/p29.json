@@ -1,0 +1,235 @@
+{
+ "item_no": "29",
+ "theme": "가젤(gazelle)처럼 예민한 초식 동물을 길들이기 어려운 이유",
+ "overview": {
+   "theme_ko": "예민한 초식동물을 길들이기 어려운 이유",
+   "topic": "🔎 긴장이 심한 초식동물(가젤)의 가축화 실패",
+   "stance": "중립적",
+   "stance_reason": "긴장하는 종은 갇히면 공황에 빠져 difficult to keep in captivity 라는 사실로 설명함",
+   "structure": "주장→근거·예시",
+   "structure_reason": "예민한 종은 가축화가 어렵다는 진술 뒤 for example, of gazelles 로 예시를 듦",
+   "key_grammar": {
+     "point": "분사구문 (접속사 + 과거분사: If put ~)",
+     "source_sentence": "If put into an enclosure, they are likely to panic, and either die of shock or hit themselves repeatedly to death against the fence in their attempts to escape.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"If put into an enclosure는 If they are [[put]] ~에서 they are가 생략된 분사구문이다"},
+       {"chip":"형태","text":"[[접속사]] If를 남기고 주어 they와 be동사 are를 지운 뒤 과거분사 put으로 시작한다"},
+       {"chip":"의미","text":"'만약 ~된다면'이라는 [[조건]]의 뜻으로 뒤의 주절과 이어진다"},
+       {"chip":"수동","text":"put은 과거분사로 '(우리 안에) [[넣어지면]]'이라는 수동의 뜻이다"},
+       {"chip":"복원하면","text":"If they are put into an enclosure로 되돌릴 수 있다"}
+     ],
+     "example_analysis": "If (they are) put into an enclosure에서 주어 they와 be동사 are가 생략되고 과거분사 put만 남았다.",
+     "drills": [
+       {"kind":"객관식","question":"밑줄 친 분사구문 'If put into an enclosure'에서 생략된 부분으로 알맞은 것은?","options":["they are","they will","being them"],"answer":"they are","from_passage":true},
+       {"kind":"객관식","question":"괄호 안에서 어법상 옳은 것: If ( ) into an enclosure, they panic.","options":["put","putting","to put"],"answer":"put","from_passage":true},
+       {"kind":"객관식","question":"빈칸에 들어갈 접속사로 알맞은 것(조건): ( ) put into an enclosure, they panic.","options":["If","Because","Although"],"answer":"If","from_passage":true},
+       {"kind":"영작","question":"만약 우리 안에 넣어지면, 그들은 공황에 빠지기 쉽다.","words":["If","put","into","an","enclosure","they","are","likely","to","panic"],"answer":"If put into an enclosure, they are likely to panic","from_passage":true},
+       {"kind":"영작","question":"만약 홀로 남겨지면, 그 아이는 울기 시작한다.","words":["If","left","alone","the","child","starts","to","cry"],"answer":"If left alone, the child starts to cry","from_passage":false}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"예민한 종의 특성","expressions":["nervous","difficult to keep in captivity","panic"],"variation":"긴장이 심해 갇힌 상태를 못 견디고 공황에 빠지는 종"},
+     {"label":"가축화","expressions":["domesticate","domesticated"],"variation":"길들이려 시도했으나 끝내 가축이 되지 못함"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입","sentence_range":"1~3","summary":"대형 초식동물은 위험에 서로 다른 [[방식]]으로 반응한다","easy_example":"같은 반 친구라도 놀라면 누군 도망가고 누군 버틴다"},
+     {"stage":"전개","sentence_range":"4~5","summary":"[[긴장하는]] 종은 우리에 가두면 공황에 빠져 죽는다","easy_example":"겁 많은 야생 새를 새장에 넣으면 벽에 부딪혀 다친다"},
+     {"stage":"사례","sentence_range":"6~8","summary":"가젤은 기회가 많았지만 끝내 [[가축화]]된 적이 없다","easy_example":"흔히 보여도 길들일 수 없는 동물이 있다"},
+     {"stage":"결론","sentence_range":"9","summary":"도망치고 부딪히는 가젤을 [[모는]] 것은 상상하기 어렵다","easy_example":"시속 50마일로 뛰는 동물을 몰이하는 장면"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "Big mammalian herbivore species react to danger from predators or humans in different ways.",
+     "grammar": [
+       {"tag":"등위접속 or","note":"predators와 humans를 or로 병렬 연결","spans":["or"]}
+     ],
+     "vocab": [
+       {"word":"mammalian","meaning":"포유류의"},
+       {"word":"herbivore","meaning":"초식동물"},
+       {"word":"predator","meaning":"포식자"}
+     ],
+     "chunks": [
+       {"en":"Big mammalian [[herbivore]] species react","ko":"큰 포유류 [[초식동물]] 종은 반응한다"},
+       {"en":"to danger from [[predators]] or humans in different ways.","ko":"[[포식자]]나 인간으로부터의 위험에 대해 다른 방식으로"}
+     ],
+     "misreads": [
+       {"statement":"대형 초식동물 종은 포식자로부터의 위협에 대해서만 서로 다른 방식으로 반응한다.","verdict":"X","trap_type":"구조수식","anchor":"from predators or humans","why":"포식자뿐 아니라 인간으로부터의 위험에도 반응한다고 했으므로 '포식자에 대해서만'은 틀리다."}
+     ]
+   },
+   {
+     "id": 2,
+     "english": "Some species are nervous, fast, and programmed for instant flight when they perceive a threat.",
+     "grammar": [
+       {"tag":"병렬 형용사","note":"nervous, fast, programmed가 and로 병렬","spans":["and"]},
+       {"tag":"시간 부사절 when","note":"when이 이끄는 부사절","spans":["when"]}
+     ],
+     "vocab": [
+       {"word":"nervous","meaning":"긴장한, 예민한"},
+       {"word":"instant","meaning":"즉각적인"},
+       {"word":"flight","meaning":"도망, 달아남"},
+       {"word":"perceive","meaning":"감지하다"}
+     ],
+     "chunks": [
+       {"en":"Some species are [[nervous]], fast,","ko":"어떤 종들은 [[긴장하고]], 빠르며,"},
+       {"en":"and programmed for instant [[flight]]","ko":"즉각적인 [[도망]]을 하도록 프로그램되어 있고"},
+       {"en":"when they perceive a [[threat]].","ko":"그들이 [[위협]]을 감지할 때"}
+     ],
+     "misreads": [
+       {"statement":"어떤 종은 위협을 감지하면 즉시 달아나도록 프로그램되어 있다.","verdict":"O"}
+     ]
+   },
+   {
+     "id": 3,
+     "english": "Other species are slower, less nervous, seek protection in herds, stand their ground when threatened, and don't run until necessary.",
+     "grammar": [
+       {"tag":"동사 병렬","note":"are, seek, stand, don't run이 병렬","spans":["and"]},
+       {"tag":"분사 threatened","note":"when (they are) threatened 수동 분사","spans":["threatened"]}
+     ],
+     "vocab": [
+       {"word":"seek","meaning":"찾다, 구하다"},
+       {"word":"herd","meaning":"무리, 떼"},
+       {"word":"stand one's ground","meaning":"자기 자리를 지키다, 물러서지 않다"},
+       {"word":"threatened","meaning":"위협받는"}
+     ],
+     "chunks": [
+       {"en":"Other species are [[slower]], less nervous,","ko":"다른 종들은 더 [[느리고]], 덜 긴장하며,"},
+       {"en":"seek protection in [[herds]],","ko":"[[무리]] 속에서 보호를 찾고,"},
+       {"en":"stand their [[ground]] when threatened,","ko":"위협받을 때 자기 [[자리]]를 지키며,"},
+       {"en":"and don't [[run]] until necessary.","ko":"필요할 때까지 [[도망가지]] 않는다"}
+     ],
+     "misreads": [
+       {"statement":"다른 종들은 위협을 받으면 그 즉시 곧바로 도망친다.","verdict":"X","trap_type":"인과조건","anchor":"don't run until necessary","why":"필요할 때까지는 도망가지 않는다고 했으므로 즉시 도망친다는 것은 틀리다."}
+     ]
+   },
+   {
+     "id": 4,
+     "english": "Naturally, the nervous species are difficult to keep in captivity.",
+     "grammar": [
+       {"tag":"난이형용사 difficult to","note":"difficult+to부정사, keep의 목적어는 주어","spans":["difficult to keep"]}
+     ],
+     "vocab": [
+       {"word":"naturally","meaning":"당연히, 자연히"},
+       {"word":"captivity","meaning":"갇힌 상태, 포획"}
+     ],
+     "chunks": [
+       {"en":"Naturally, the [[nervous]] species","ko":"자연히, [[긴장하는]] 종은"},
+       {"en":"are difficult to keep in [[captivity]].","ko":"[[갇힌]] 상태로 기르기 어렵다"}
+     ],
+     "misreads": [
+       {"statement":"The nervous species are hard to keep in captivity.","verdict":"O","english":true}
+     ]
+   },
+   {
+     "id": 5,
+     "english": "If put into an enclosure, they are likely to panic, and either die of shock or hit themselves repeatedly to death against the fence in their attempts to escape.",
+     "grammar": [
+       {"tag":"분사구문 If put","note":"If (they are) put, 주어·be동사 생략","spans":["If put"]},
+       {"tag":"상관접속 either or","note":"either A or B 병렬","spans":["either","or"]}
+     ],
+     "vocab": [
+       {"word":"enclosure","meaning":"우리, 울타리 친 공간"},
+       {"word":"panic","meaning":"공황에 빠지다"},
+       {"word":"repeatedly","meaning":"반복적으로"},
+       {"word":"attempt","meaning":"시도"}
+     ],
+     "chunks": [
+       {"en":"[[If put into an enclosure,]]","ko":"[[만약 우리 안에 넣어지면,]]"},
+       {"en":"they are likely to [[panic]],","ko":"그들은 [[공황]]에 빠지기 쉽고,"},
+       {"en":"and either die of [[shock]]","ko":"[[충격]]으로 죽거나"},
+       {"en":"[[or hit themselves repeatedly to death against the fence]]","ko":"[[또는 울타리에 반복적으로 부딪혀 죽는다]]"},
+       {"en":"in their attempts to [[escape]].","ko":"탈출하려는 [[시도]] 속에서"}
+     ],
+     "misreads": [
+       {"statement":"우리에 갇히면 가젤은 울타리를 부수고 탈출에 성공한다.","verdict":"X","trap_type":"주체대상","anchor":"hit themselves repeatedly to death against the fence","why":"탈출을 시도하다 울타리에 부딪혀 죽는다고 했으므로 탈출에 성공한다는 것은 틀리다.","killer":true}
+     ],
+     "mistips": ["either A or B를 '둘 다'로 읽으면 안 돼 — (바르게는) [[둘 중 하나]](충격으로 죽거나, 부딪혀 죽거나)"]
+   },
+   {
+     "id": 6,
+     "english": "That's true, for example, of gazelles, which for thousands of years were the most frequently hunted game species in some parts of the Fertile Crescent.",
+     "grammar": [
+       {"tag":"계속적 which","note":"콤마 뒤 which가 gazelles를 부연","spans":["which"]},
+       {"tag":"최상급 the most","note":"the most frequently hunted 최상급","spans":["the most"]}
+     ],
+     "vocab": [
+       {"word":"frequently","meaning":"자주, 빈번하게"},
+       {"word":"game species","meaning":"사냥감 종"},
+       {"word":"Fertile Crescent","meaning":"비옥한 초승달 지대"}
+     ],
+     "chunks": [
+       {"en":"That's true, for example, of [[gazelles]],","ko":"예를 들어, 이는 [[가젤]]에 해당하는데,"},
+       {"en":"which for thousands of [[years]]","ko":"수천 [[년]] 동안"},
+       {"en":"were the most frequently [[hunted]] game species","ko":"가장 자주 [[사냥된]] 사냥감 종이었고"},
+       {"en":"in some parts of the [[Fertile Crescent]].","ko":"비옥한 [[초승달 지대]]의 일부 지역에서"}
+     ],
+     "misreads": [
+       {"statement":"That's true의 That은 '더 느리고 덜 긴장하는 종'에 관한 설명을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"the nervous species are difficult to keep in captivity","why":"That은 긴장하는 종이 갇힌 상태를 못 견딘다는 앞 내용을 가리키므로 느긋한 종을 가리킨다는 것은 틀리다.","integrative":true}
+     ]
+   },
+   {
+     "id": 7,
+     "english": "There is no mammal species that the first settled peoples of that area had more opportunity to domesticate than gazelles.",
+     "grammar": [
+       {"tag":"관계대명사 that","note":"목적격 that, domesticate의 목적어","spans":["that"]},
+       {"tag":"비교 more than","note":"more opportunity ~ than gazelles","spans":["more","than"]}
+     ],
+     "vocab": [
+       {"word":"settled","meaning":"정착한"},
+       {"word":"opportunity","meaning":"기회"},
+       {"word":"domesticate","meaning":"길들이다, 가축화하다"}
+     ],
+     "chunks": [
+       {"en":"There is no [[mammal]] species","ko":"어떤 [[포유류]] 종도 없다"},
+       {"en":"that the first [[settled]] peoples of that area","ko":"그 지역에 처음 [[정착한]] 사람들이"},
+       {"en":"had more opportunity to [[domesticate]] than gazelles.","ko":"가젤보다 [[길들일]] 기회가 더 많았던"}
+     ],
+     "misreads": [
+       {"statement":"정착민들이 가젤을 길들일 기회는 많았지만, 그것은 가젤이 온순한 동물이었기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"the most frequently hunted game species","why":"가젤은 가장 자주 사냥되어 접할 기회가 많았던 것이지 온순해서가 아니므로 근거가 틀리다.","integrative":true}
+     ],
+     "mistips": ["no ~ more than을 '~보다 적다'로 읽으면 안 돼 — (바르게는) 가젤이 [[기회가 가장 많았다]]는 뜻"]
+   },
+   {
+     "id": 8,
+     "english": "But no gazelle species has ever been domesticated.",
+     "grammar": [
+       {"tag":"현재완료 수동","note":"has been p.p.: has ever been domesticated","spans":["has ever been domesticated"]}
+     ],
+     "vocab": [
+       {"word":"domesticated","meaning":"길들여진, 가축화된"},
+       {"word":"ever","meaning":"지금까지, 한 번이라도"}
+     ],
+     "chunks": [
+       {"en":"But no [[gazelle]] species","ko":"하지만 어떤 [[가젤]] 종도"},
+       {"en":"has ever been [[domesticated]].","ko":"지금까지 [[길들여진]] 적이 없다"}
+     ],
+     "misreads": [
+       {"statement":"필자는 가젤이 결국 성공적으로 가축화되었다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"no gazelle species has ever been domesticated","why":"지금까지 어떤 가젤 종도 가축화된 적이 없다고 했으므로 필자 관점과 정반대다."}
+     ]
+   },
+   {
+     "id": 9,
+     "english": "Just imagine trying to herd an animal that runs away, blindly hits itself against walls, can leap up to nearly 30 feet, and can run at a speed of 50 miles per hour",
+     "grammar": [
+       {"tag":"동명사 목적어","note":"trying to herd, imagine의 목적어 동명사","spans":["trying"]},
+       {"tag":"관계대명사 that","note":"that이 animal 수식, 여러 동사 병렬","spans":["that"]}
+     ],
+     "vocab": [
+       {"word":"herd","meaning":"(가축을) 몰다"},
+       {"word":"blindly","meaning":"맹목적으로"},
+       {"word":"leap","meaning":"뛰어오르다"}
+     ],
+     "chunks": [
+       {"en":"Just imagine trying to [[herd]] an animal","ko":"동물을 [[몰려고]] 시도하는 것을 상상해보라"},
+       {"en":"that runs away, blindly hits itself against [[walls]],","ko":"도망가고, 맹목적으로 [[벽]]에 부딪히며,"},
+       {"en":"can leap up to nearly 30 [[feet]],","ko":"거의 30[[피트]]까지 뛰어오를 수 있고,"},
+       {"en":"and can run at a [[speed]]","ko":"그리고 [[속도]]로 달릴 수 있는"},
+       {"en":"of 50 [[miles]] per hour","ko":"시속 50[[마일]]의"}
+     ],
+     "misreads": [
+       {"statement":"가젤은 무리를 지어 다니므로 사람이 몰기에 적합한 동물이다.","verdict":"X","trap_type":"무관정보","anchor":"trying to herd an animal that runs away","why":"도망가고 벽에 부딪히며 빠르게 달리는 동물을 모는 것을 상상해보라며 몰기 어려움을 강조하므로 적합하다는 것은 틀리다."}
+     ]
+   }
+ ]
+}

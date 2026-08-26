@@ -1,0 +1,166 @@
+{
+ "item_no": "23",
+ "theme": "인간의 감각을 넘어선 자연 현상 인식을 가능하게 하는 도구",
+ "overview": {
+  "theme_ko": "인간 감각의 한계를 넘어서게 하는 도구",
+  "topic": "🔎 감각으로 지각 못 하는 자연 현상을 관찰 가능하게 바꾸는 도구",
+  "stance": "중립적",
+  "stance_reason": "도구가 신호를 바꾸어(translate and bring into our perception) 지각하게 하는 방식을 유형별로 설명함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "도입 문장 뒤로 In some cases / Other instruments / Alternatively 로 도구의 작동 사례를 나열",
+  "key_grammar": {
+   "point": "전치사 + 관계대명사 (for which)",
+   "source_sentence": "Alternatively, some instruments measure properties for which we have no sensory capacity at all and change them into that which we can observe.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "관계사절 안에서 [[전치사]]가 필요할 때 그 전치사를 관계대명사 앞으로 보낸 형태예요."},
+    {"chip": "원래 모습", "text": "we have no sensory capacity for the properties 에서 전치사 for가 [[which]] 앞으로 이동한 것."},
+    {"chip": "해석 요령", "text": "'그것에 대해(for) 우리가 감각 능력이 없는 [[속성]]'처럼 전치사를 살려 해석."},
+    {"chip": "짝 표현", "text": "뒤의 that which도 선행사를 품은 관계대명사로 '우리가 관찰할 수 있는 [[것]]'."}
+   ],
+   "example_analysis": "선행사 properties 뒤에서 전치사 for가 관계대명사 which와 함께 앞으로 나와 for which 를 이룬다.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? some instruments measure properties ___ we have no sensory capacity at all", "options": ["for which", "which", "what"], "answer": "for which", "from_passage": true},
+    {"kind": "객관식", "question": "밑줄 친 that which we can observe 의 that which 와 의미가 같은 것은?", "options": ["the thing which we can observe", "that we can observe it", "which we can observe that"], "answer": "the thing which we can observe", "from_passage": true},
+    {"kind": "객관식", "question": "어법상 어색한 것은?", "options": ["properties for which we have no capacity", "properties which we have no capacity for", "properties for that we have no capacity"], "answer": "properties for that we have no capacity", "from_passage": false},
+    {"kind": "영작", "question": "일부 도구들은 우리가 전혀 감각 수용 능력이 없는 속성을 측정한다.", "words": ["some", "instruments", "measure", "properties", "for", "which", "we", "have", "no", "sensory", "capacity", "at", "all"], "answer": "some instruments measure properties for which we have no sensory capacity at all", "from_passage": true},
+    {"kind": "영작", "question": "이것은 우리가 아무런 설명도 갖지 못한 문제이다.", "words": ["this", "is", "a", "problem", "for", "which", "we", "have", "no", "explanation"], "answer": "this is a problem for which we have no explanation", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "지각 불가 → 관찰 가능으로 변환", "expressions": ["translate and bring into our perception", "turn signals that we cannot perceive into ones that we can observe", "change them into that which we can observe"], "variation": "표현은 달라도 모두 '감각 밖 신호를 관찰 가능한 형태로 바꾼다'는 핵심."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "도구는 감각으로 [[지각]]할 수 없는 자연 현상을 우리의 지각으로 가져온다", "easy_example": "라디오가 안 들리는 전파를 소리로 바꿔 주는 것처럼."},
+   {"stage": "전개", "sentence_range": "2~3", "summary": "신호를 단순히 [[증폭]]하거나, 지각 못 할 신호를 관찰 가능한 것으로 전환", "easy_example": "확대경으로 작은 글씨를 크게 보는 것."},
+   {"stage": "사례", "sentence_range": "4", "summary": "감각 [[범위]]를 넓혀 자외선 이미지나 초음파를 보고 듣게 함", "easy_example": "적외선 카메라로 어둠 속 열을 보는 것."},
+   {"stage": "결론", "sentence_range": "5", "summary": "감각 능력이 전혀 없는 [[속성]]까지 관찰 가능하게 바꿈", "easy_example": "온도계가 못 느끼는 미세 온도차를 숫자로 보여 주는 것."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "For many centuries, humans have taken advantage of tools that translate and bring into our perception natural phenomena that we can't perceive with our senses.",
+   "grammar": [
+    {"tag": "현재완료 (have p.p.)", "note": "과거부터 지금까지 이어져 온 일을 나타냄", "spans": ["have taken"]},
+    {"tag": "관계대명사 that (목적격)", "note": "natural phenomena 를 뒤에서 꾸며 주는 관계절", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "take advantage of", "meaning": "~을 이용하다"},
+    {"word": "translate", "meaning": "바꾸다, 변환하다"},
+    {"word": "perception", "meaning": "지각, 인식"},
+    {"word": "phenomena", "meaning": "현상 (phenomenon의 복수)"},
+    {"word": "perceive", "meaning": "지각하다, 감지하다"}
+   ],
+   "chunks": [
+    {"en": "For many centuries, humans have taken advantage of [[tools]]", "ko": "수 세기 동안, 인간은 [[도구]]를 이용해 왔다"},
+    {"en": "that translate and bring into our [[perception]]", "ko": "그 도구는 우리의 [[지각]]으로 바꾸고 가져오는데"},
+    {"en": "[[natural phenomena that we can't perceive with our senses.]]", "ko": "[[우리가 감각으로는 지각할 수 없는 자연 현상을]]"}
+   ],
+   "misreads": [
+    {"statement": "이 도구는 우리가 감각으로 지각할 수 있는 자연 현상을 우리의 지각으로 가져온다.", "verdict": "X", "trap_type": "구조수식", "anchor": "natural phenomena that we can't perceive with our senses", "why": "관계절이 꾸미는 것은 감각으로 지각할 수 '없는' 현상이므로 '있는'은 반대."},
+    {"statement": "인간은 오래전부터 감각의 한계를 넘어서는 현상을 도구로 파악해 왔다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["'that we can't perceive'를 '우리가 지각하는'으로 읽으면 안 돼 — (바르게는) 지각할 수 [[없는]] 현상."]
+  },
+  {
+   "id": 2,
+   "english": "In some cases, this consists of simply amplifying signals that feed into our normal sensory inputs (e.g., telescopes can bring into clear view that which is too far away for our eyes to perceive on their own).",
+   "grammar": [
+    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = the thing which, '~한 것'", "spans": ["that which"]},
+    {"tag": "의미상 주어 for + to부정사", "note": "to perceive 의 주체를 for our eyes 로 나타냄", "spans": ["for our eyes to perceive"]}
+   ],
+   "vocab": [
+    {"word": "consist of", "meaning": "~으로 이루어지다"},
+    {"word": "amplify", "meaning": "증폭하다, 확대하다"},
+    {"word": "sensory input", "meaning": "감각 입력"},
+    {"word": "telescope", "meaning": "망원경"},
+    {"word": "on one's own", "meaning": "스스로, 혼자서"}
+   ],
+   "chunks": [
+    {"en": "In some cases, this consists of simply amplifying [[signals]]", "ko": "어떤 경우에, 이것은 단순히 [[신호]]를 증폭하는 것으로 구성되는데"},
+    {"en": "that feed into our normal sensory [[inputs]]", "ko": "그 신호는 우리의 일반적인 감각 [[입력]]으로 들어온다"},
+    {"en": "(e.g., [[telescopes]] can bring into clear view", "ko": "(예를 들어, [[망원경]]은 명확한 시야로 가져올 수 있다"},
+    {"en": "[[that which is too far away for our eyes to perceive on their own).]]", "ko": "[[너무 멀어서 우리 눈이 스스로 지각할 수 없는 것을)]]"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 this 가 가리키는 것은 우리의 정상적인 감각 입력이다.", "verdict": "X", "trap_type": "지칭", "anchor": "this consists of simply amplifying signals", "why": "this 는 앞 문장의 '도구가 현상을 지각으로 가져오는 일'을 가리키므로 감각 입력은 틀림."},
+    {"statement": "어떤 도구는 우리 감각으로 들어오는 신호를 단순히 증폭하는 방식으로 작동한다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["'on their own'을 '그들 위에'로 읽으면 안 돼 — (바르게는) 눈이 [[스스로]] 지각한다."]
+  },
+  {
+   "id": 3,
+   "english": "Other instruments turn signals that we cannot perceive into ones that we can observe.",
+   "grammar": [
+    {"tag": "turn A into B (전환)", "note": "A를 B로 바꾸다 — A와 B의 방향에 주의", "spans": ["turn", "into"]},
+    {"tag": "관계대명사 that (목적격)", "note": "signals / ones 를 각각 뒤에서 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "instrument", "meaning": "도구, 기구"},
+    {"word": "perceive", "meaning": "지각하다"},
+    {"word": "observe", "meaning": "관찰하다"}
+   ],
+   "chunks": [
+    {"en": "Other [[instruments]] turn signals", "ko": "다른 [[도구]]들은 신호를 바꾼다"},
+    {"en": "that we cannot [[perceive]]", "ko": "우리가 [[지각]]할 수 없는 (신호를)"},
+    {"en": "into ones that we can [[observe]].", "ko": "우리가 [[관찰]]할 수 있는 것으로"}
+   ],
+   "misreads": [
+    {"statement": "다른 도구들은 우리가 관찰할 수 있는 신호를, 우리가 지각할 수 없는 것으로 바꾼다.", "verdict": "X", "trap_type": "주체대상", "anchor": "turn signals that we cannot perceive into ones that we can observe", "why": "지각할 수 '없는' 신호를 관찰 '가능한' 것으로 바꾸는 것이므로 A와 B가 뒤바뀜.", "killer": true}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "Some of these take the form of expanding the reach of our current senses, such as creating visible images based on the ultraviolet spectrum of light or changing sounds that are normally outside the range of what human ears can hear into audible signals.",
+   "grammar": [
+    {"tag": "동명사 병렬 (creating ... or changing)", "note": "such as 뒤에 두 동명사가 or 로 연결", "spans": ["creating", "changing"]},
+    {"tag": "분사 based on (과거분사 수식)", "note": "images 를 뒤에서 꾸며 '~에 기반한'", "spans": ["based on"]},
+    {"tag": "관계대명사 what", "note": "선행사 없이 '~하는 것'을 이끔", "spans": ["what"]}
+   ],
+   "vocab": [
+    {"word": "expand", "meaning": "확장하다, 넓히다"},
+    {"word": "reach", "meaning": "범위, 미치는 거리"},
+    {"word": "visible", "meaning": "눈에 보이는"},
+    {"word": "ultraviolet", "meaning": "자외선의"},
+    {"word": "audible", "meaning": "들리는, 청취 가능한"}
+   ],
+   "chunks": [
+    {"en": "Some of these take the [[form]] of expanding the reach", "ko": "이것들 중 일부는 범위를 확장하는 [[형태]]를 취한다"},
+    {"en": "of our current senses, such as creating visible [[images]]", "ko": "우리의 현재 감각의, 가시 [[이미지]]를 생성하는 것과 같이"},
+    {"en": "based on the ultraviolet [[spectrum]] of light", "ko": "빛의 자외선 [[스펙트럼]]에 기반하여"},
+    {"en": "or changing [[sounds]] that are normally outside the range", "ko": "또는 보통 범위 밖에 있는 [[소리]]를 바꾸는 것과 같이"},
+    {"en": "of what human ears can hear into audible [[signals]].", "ko": "인간의 귀가 들을 수 있는, 들리는 [[신호]]로"}
+   ],
+   "misreads": [
+    {"statement": "자외선 스펙트럼에 기반한 가시 이미지는 인간의 귀가 들을 수 있는 소리보다 더 정확하다.", "verdict": "X", "trap_type": "무관정보", "anchor": "creating visible images based on the ultraviolet spectrum of light", "why": "본문은 감각 범위 확장의 예시일 뿐, 이미지와 소리의 정확성을 비교한 언급은 없음.", "english": "Ultraviolet images are more accurate than the sounds humans can hear."}
+   ],
+   "mistips": ["'what human ears can hear'를 의문사 '무엇을'로 읽으면 안 돼 — (바르게는) 인간의 귀가 들을 수 [[있는 것]]."]
+  },
+  {
+   "id": 5,
+   "english": "Alternatively, some instruments measure properties for which we have no sensory capacity at all and change them into that which we can observe.",
+   "grammar": [
+    {"tag": "전치사 + 관계대명사 (for which)", "note": "for + which 로 '그것에 대해 ~인 (속성)'", "spans": ["for which"]},
+    {"tag": "that which (선행사 포함 관계대명사)", "note": "that which = '~하는 것'", "spans": ["that which"]}
+   ],
+   "vocab": [
+    {"word": "alternatively", "meaning": "그렇지 않으면, 대안으로"},
+    {"word": "measure", "meaning": "측정하다"},
+    {"word": "property", "meaning": "속성, 특성"},
+    {"word": "sensory capacity", "meaning": "감각 수용 능력"},
+    {"word": "at all", "meaning": "전혀 (부정 강조)"}
+   ],
+   "chunks": [
+    {"en": "Alternatively, some instruments measure [[properties]]", "ko": "아니면, 일부 도구들은 [[속성]]을 측정한다"},
+    {"en": "[[for which we have no sensory capacity at all]]", "ko": "[[우리가 전혀 감각 수용 능력이 없는]]"},
+    {"en": "and change them into that which we can [[observe]].", "ko": "그리고 그것들을 우리가 [[관찰]]할 수 있는 것으로 바꾼다"}
+   ],
+   "misreads": [
+    {"statement": "일부 도구는 우리가 감각으로 이미 느끼는 속성을 측정해 관찰 가능하게 바꾼다.", "verdict": "△", "trap_type": "인과조건", "anchor": "for which we have no sensory capacity at all", "why": "관찰 가능하게 바꾼다는 결론은 맞지만, 대상은 '이미 느끼는' 속성이 아니라 감각 능력이 '전혀 없는' 속성이므로 근거가 틀림."},
+    {"statement": "글쓴이는 이런 도구가 결국 인간의 감각을 완전히 대체할 것이라고 주장한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "change them into that which we can observe", "why": "도구는 감각 밖 속성을 관찰 가능하게 '바꿔 줄' 뿐, 감각을 대체한다는 주장은 없음."}
+   ],
+   "mistips": ["'for which'를 '무엇을 위해'로 읽으면 안 돼 — (바르게는) [[그것에 대해]] 감각 능력이 없는 속성."]
+  }
+ ]
+}

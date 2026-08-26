@@ -1,0 +1,226 @@
+{
+ "item_no": "24",
+ "theme": "동물 실험과 의학 발전의 상관관계에 대한 반론",
+ "overview": {
+  "theme_ko": "동물 실험과 의학 발전의 상관관계 반박",
+  "topic": "🔎 동물 실험과 의학 발전의 상관관계는 인과가 아니라 법적 필요성의 결과",
+  "stance": "부정적·비판적",
+  "stance_reason": "the correlation ... is the result of legal necessity, not evidence that animal experimentation led to medical advances 로 옹호 논리를 반박",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "옹호자의 인과 주장(Defenders ... claimed)을 반대자들이 거부(reject this inference)하고 법적 필요성으로 재해석",
+  "key_grammar": {
+   "point": "부정어(not only) 도치",
+   "source_sentence": "Many opponents of animal experimentation argue that not only is modern medicine not the only cause for the decline in mortality, many medical advances that did contribute to human health were not the result of animal experimentation.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "부정어 not only 가 문장 앞에 나오면 뒤의 주어와 동사가 [[의문문]] 어순처럼 도치돼요."},
+    {"chip": "어순", "text": "not only + [[동사]] + 주어 ~ : is modern medicine 순서로 뒤집힌다."},
+    {"chip": "짝 표현", "text": "'not only A but (also) B'의 확장으로, A 자리에 도치된 [[절]]이 온 것."},
+    {"chip": "해석", "text": "'현대 의학이 유일한 원인이 아닐 뿐만 아니라'로 [[부정]]의 의미를 살려 해석."}
+   ],
+   "example_analysis": "부정어 not only 가 앞으로 나오면서 주어 modern medicine 과 be동사 is 가 도치되었다.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸의 어순으로 알맞은 것은? Not only ___ the only cause for the decline in mortality, ...", "options": ["is modern medicine not", "modern medicine is not", "not modern medicine is"], "answer": "is modern medicine not", "from_passage": true},
+    {"kind": "객관식", "question": "어법상 옳은 것은?", "options": ["Not only he studied but also worked", "Not only did he study but also worked", "Not only he did study but also worked"], "answer": "Not only did he study but also worked", "from_passage": false},
+    {"kind": "객관식", "question": "밑줄 친 the former 와 the latter 의 지칭으로 옳은 것은?", "options": ["the former=animal experimentation, the latter=medical advancement", "the former=medical advancement, the latter=animal experimentation", "the former=defenders, the latter=opponents"], "answer": "the former=animal experimentation, the latter=medical advancement", "from_passage": true},
+    {"kind": "영작", "question": "연구 반대자들은 이 추론을 거부한다.", "words": ["opponents", "of", "research", "reject", "this", "inference"], "answer": "Opponents of research reject this inference", "from_passage": true},
+    {"kind": "영작", "question": "그녀는 똑똑할 뿐만 아니라, 매우 친절하다.", "words": ["not", "only", "is", "she", "smart", "but", "she", "is", "very", "kind"], "answer": "Not only is she smart but she is very kind", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "상관관계 ≠ 인과", "expressions": ["there is a strong correlation between the practice of animal experimentation and medical advancement", "all medical advances are correlated with prior experimentation on animals", "the correlation between animal experimentation and medical discovery is the result of legal necessity"], "variation": "강한 상관관계가 있어도 그것은 법적 필요성 탓이지 인과의 증거가 아님."},
+   {"label": "옹호자 주장에 대한 반박", "expressions": ["Opponents of research reject this inference", "animal experimentation has not been as responsible for biomedical discovery as defenders suggest"], "variation": "반대자들은 옹호자의 인과 추론을 거부하며 반증을 제시."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입(주장)", "sentence_range": "1", "summary": "반대자: 현대 의학만이 사망률 감소 원인은 아니며, 많은 발전은 [[동물 실험]]의 결과가 아님", "easy_example": "비 온 날 우산이 많이 팔렸다고 우산이 비를 부른 건 아님."},
+   {"stage": "통념·반박", "sentence_range": "2~3", "summary": "옹호자: 강한 [[상관관계]]가 있으니 전자가 후자를 초래했다 → 반대자는 이 추론을 거부", "easy_example": "함께 자주 보인다고 원인·결과인 건 아님."},
+   {"stage": "반박 근거", "sentence_range": "4~6", "summary": "법이 인간 사용 전 [[동물]] 시험을 규정하므로 상관관계는 법적 필요성의 결과", "easy_example": "모든 운전자가 시험을 본다고 시험이 운전 실력을 만든 건 아님."},
+   {"stage": "추가 근거", "sentence_range": "7~8", "summary": "여러 의사들의 [[역사적]] 증거: 임상적 발견이 더 큰 역할을 함", "easy_example": "약보다 손 씻기가 병을 더 많이 줄인 사례."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Many opponents of animal experimentation argue that not only is modern medicine not the only cause for the decline in mortality, many medical advances that did contribute to human health were not the result of animal experimentation.",
+   "grammar": [
+    {"tag": "부정어(not only) 도치", "note": "부정어가 앞에 나와 be동사와 주어가 도치됨", "spans": ["not only is modern medicine"]},
+    {"tag": "강조의 do (did)", "note": "일반동사 앞 did 로 '실제로 ~했다'를 강조", "spans": ["did contribute"]}
+   ],
+   "vocab": [
+    {"word": "opponent", "meaning": "반대자"},
+    {"word": "animal experimentation", "meaning": "동물 실험"},
+    {"word": "mortality", "meaning": "사망률"},
+    {"word": "medical advance", "meaning": "의학적 발전"},
+    {"word": "contribute to", "meaning": "~에 기여하다"}
+   ],
+   "chunks": [
+    {"en": "Many [[opponents]] of animal experimentation argue that", "ko": "많은 동물 실험 [[반대자]]들은 ~라고 주장한다"},
+    {"en": "[[not only is modern medicine not the only cause]]", "ko": "[[현대 의학이 유일한 원인이 아닐 뿐만 아니라]]"},
+    {"en": "for the decline in [[mortality]],", "ko": "[[사망률]] 감소의 (유일한 원인)"},
+    {"en": "many medical [[advances]] that did contribute to human health", "ko": "인간 건강에 실제로 기여한 많은 의학적 [[발전]]이"},
+    {"en": "were not the [[result]] of animal experimentation.", "ko": "동물 실험의 [[결과]]가 아니었다고"}
+   ],
+   "misreads": [
+    {"statement": "반대자들은 현대 의학이 사망률 감소의 유일한 원인이라고 주장한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "not only is modern medicine not the only cause for the decline in mortality", "why": "현대 의학이 유일한 원인이 '아니다'라고 했으므로 유일한 원인이라는 진술은 반대."},
+    {"statement": "반대자들은 인간 건강에 기여한 여러 의학 발전이 동물 실험의 결과가 아니었다고 본다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["'not only is modern medicine...'를 평서문 어순으로 착각하면 안 돼 — (바르게는) not only 뒤 [[동사+주어]] 도치."]
+  },
+  {
+   "id": 2,
+   "english": "Defenders of research have claimed that since there is a strong correlation between the practice of animal experimentation and medical advancement, the former caused the latter.",
+   "grammar": [
+    {"tag": "이유의 접속사 since", "note": "'~이기 때문에'로 이유를 이끔 (시간 아님)", "spans": ["since"]},
+    {"tag": "the former / the latter (지칭)", "note": "the former=앞의 것, the latter=뒤의 것", "spans": ["the former", "the latter"]}
+   ],
+   "vocab": [
+    {"word": "defender", "meaning": "옹호자, 지지자"},
+    {"word": "correlation", "meaning": "상관관계"},
+    {"word": "the former", "meaning": "전자"},
+    {"word": "the latter", "meaning": "후자"},
+    {"word": "advancement", "meaning": "발전, 진보"}
+   ],
+   "chunks": [
+    {"en": "[[Defenders]] of research have claimed that", "ko": "연구 [[옹호자]]들은 ~라고 주장해 왔다"},
+    {"en": "since there is a strong [[correlation]]", "ko": "강한 [[상관관계]]가 있기 때문에"},
+    {"en": "between the practice of animal experimentation and medical [[advancement]],", "ko": "동물 실험 실행과 의학적 [[발전]] 사이에"},
+    {"en": "[[the former caused the latter.]]", "ko": "[[전자가 후자를 초래했다]]"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 the former 는 medical advancement 를, the latter 는 animal experimentation 을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the former caused the latter", "why": "the former 는 앞의 animal experimentation, the latter 는 뒤의 medical advancement 이므로 지칭이 뒤바뀜."}
+   ],
+   "mistips": ["the former=[[동물 실험]], the latter=[[의학 발전]] — 짝을 반대로 읽지 말 것."]
+  },
+  {
+   "id": 3,
+   "english": "Opponents of research reject this inference.",
+   "grammar": [
+    {"tag": "지시형용사 this", "note": "앞 문장의 인과 추론을 가리킴", "spans": ["this"]}
+   ],
+   "vocab": [
+    {"word": "reject", "meaning": "거부하다"},
+    {"word": "inference", "meaning": "추론"}
+   ],
+   "chunks": [
+    {"en": "Opponents of research reject this [[inference]].", "ko": "연구 반대자들은 이 [[추론]]을 거부한다"}
+   ],
+   "misreads": [
+    {"statement": "연구 반대자들은 옹호자들의 이 인과 추론을 받아들이지 않는다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "After all, we have independent reasons to expect these phenomena to be correlated.",
+   "grammar": [
+    {"tag": "to부정사 (형용사적 수식)", "note": "reasons 를 꾸며 '~할 이유'", "spans": ["to expect"]},
+    {"tag": "expect + O + to부정사", "note": "'O가 ~하리라 예상하다' 구조", "spans": ["to be correlated"]}
+   ],
+   "vocab": [
+    {"word": "after all", "meaning": "결국, 어쨌든"},
+    {"word": "independent", "meaning": "독립적인, 별개의"},
+    {"word": "expect", "meaning": "예상하다"},
+    {"word": "be correlated", "meaning": "상관관계가 있다"}
+   ],
+   "chunks": [
+    {"en": "After all, we have independent [[reasons]]", "ko": "결국, 우리는 독립적인 [[이유]]를 가진다"},
+    {"en": "to expect these phenomena to be [[correlated]].", "ko": "이러한 현상들이 [[상관관계]]가 있으리라 예상할"}
+   ],
+   "misreads": [
+    {"statement": "우리에게는 두 현상이 상관관계가 있으리라 예상할 독립적 근거가 전혀 없다.", "verdict": "X", "trap_type": "인과조건", "anchor": "we have independent reasons to expect these phenomena to be correlated", "why": "독립적인 이유가 '있다'고 했으므로 '전혀 없다'는 반대."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 5,
+   "english": "Since the law prescribes that all new drugs, prosthetic devices, and surgical techniques be tried on animals before they are used in humans, we will subsequently find that all medical advances are correlated with prior experimentation on animals.",
+   "grammar": [
+    {"tag": "요구·규정 동사 + that + (should) 동사원형", "note": "prescribe 뒤 that절에 동사원형 be 가 옴", "spans": ["be tried"]},
+    {"tag": "수동태 (be + p.p.)", "note": "'인간에게 사용되기 전에'로 수동 의미", "spans": ["are used"]}
+   ],
+   "vocab": [
+    {"word": "prescribe", "meaning": "규정하다, 지시하다"},
+    {"word": "prosthetic device", "meaning": "보철 장치"},
+    {"word": "surgical technique", "meaning": "외과 기술"},
+    {"word": "subsequently", "meaning": "그 결과, 이후에"}
+   ],
+   "chunks": [
+    {"en": "Since the law [[prescribes]] that all new drugs,", "ko": "법이 모든 신약과 ~를 [[규정]]하기 때문에"},
+    {"en": "prosthetic devices, and surgical [[techniques]] be tried on animals", "ko": "보철 장치와 외과 [[기술]]이 동물에게 시험되도록"},
+    {"en": "before they are used in [[humans]],", "ko": "그것들이 [[인간]]에게 사용되기 전에"},
+    {"en": "we will subsequently find that all medical [[advances]]", "ko": "우리는 그 결과 모든 의학적 [[발전]]이 ~임을 알게 된다"},
+    {"en": "are correlated with prior experimentation on [[animals]].", "ko": "이전의 [[동물]] 실험과 상관관계가 있다는 것을"}
+   ],
+   "misreads": [
+    {"statement": "법은 신약이 인간에게 사용된 뒤에 동물에게 시험되도록 규정한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "be tried on animals before they are used in humans", "why": "인간에게 사용되기 '전에' 동물 시험을 하도록 규정하므로 '사용된 뒤'는 순서가 뒤바뀜.", "killer": true}
+   ],
+   "mistips": ["'before they are used in humans'를 '사용된 후'로 읽으면 안 돼 — (바르게는) 인간 사용 [[전에]] 동물에 시험."]
+  },
+  {
+   "id": 6,
+   "english": "Consequently, the correlation between animal experimentation and medical discovery is the result of legal necessity, not evidence that animal experimentation led to medical advances.",
+   "grammar": [
+    {"tag": "A, not B (대조)", "note": "'A이지 B가 아니다'로 대비", "spans": ["not evidence"]},
+    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "consequently", "meaning": "따라서, 결과적으로"},
+    {"word": "legal necessity", "meaning": "법적 필요성"},
+    {"word": "evidence", "meaning": "증거"},
+    {"word": "lead to", "meaning": "~을 초래하다"}
+   ],
+   "chunks": [
+    {"en": "Consequently, the [[correlation]] between animal experimentation and medical discovery is", "ko": "따라서, 동물 실험과 의학적 발견 사이의 [[상관관계]]는 ~이다"},
+    {"en": "the result of legal [[necessity]],", "ko": "법적 [[필요성]]의 결과이지"},
+    {"en": "[[not evidence that animal experimentation led to medical advances.]]", "ko": "[[동물 실험이 의학적 발전을 이끌었다는 증거가 아니다]]"}
+   ],
+   "misreads": [
+    {"statement": "상관관계가 나타나는 것은 맞지만, 그것은 동물 실험이 의학 발전을 이끌었다는 증거이기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the result of legal necessity", "why": "상관관계가 존재한다는 결론은 맞지만, 그 원인은 인과가 아니라 '법적 필요성'이므로 근거가 틀림."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Moreover, several influential physicians have offered historical evidence that animal experimentation has not been as responsible for biomedical discovery as defenders suggest.",
+   "grammar": [
+    {"tag": "원급 비교 (as ~ as)", "note": "'옹호자가 주장하는 만큼 ~하지는 않다'", "spans": ["as responsible", "as defenders"]},
+    {"tag": "동격의 that", "note": "evidence 의 내용을 that절이 설명", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "influential", "meaning": "영향력 있는"},
+    {"word": "physician", "meaning": "의사"},
+    {"word": "responsible for", "meaning": "~의 원인인"},
+    {"word": "biomedical", "meaning": "생의학의"}
+   ],
+   "chunks": [
+    {"en": "Moreover, several influential [[physicians]] have offered historical evidence", "ko": "게다가, 몇몇 영향력 있는 [[의사]]들은 역사적 증거를 제시해 왔다"},
+    {"en": "that animal experimentation has not been as [[responsible]]", "ko": "동물 실험이 그만큼 [[원인]]이 되어 오지는 않았다는"},
+    {"en": "for biomedical [[discovery]] as defenders suggest.", "ko": "옹호자들이 주장하는 만큼 생의학적 [[발견]]의"}
+   ],
+   "misreads": [
+    {"statement": "몇몇 의사들은 동물 실험이 생의학 발견의 대부분을 일으켰다는 역사적 증거를 제시했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "animal experimentation has not been as responsible for biomedical discovery as defenders suggest", "why": "옹호자 주장'만큼' 원인이 아니었다는 증거이므로 '대부분을 일으켰다'는 정반대의 내용.", "english": "Physicians showed animal experiments caused most biomedical discoveries."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "They claim that clinical discoveries played a more substantial role than animal researchers have led us to believe.",
+   "grammar": [
+    {"tag": "비교급 + than", "note": "'~보다 더 중요한 역할'로 비교", "spans": ["more substantial", "than"]},
+    {"tag": "lead + O + to부정사", "note": "'우리가 믿게 해 왔다'로 사역 의미", "spans": ["led us to believe"]}
+   ],
+   "vocab": [
+    {"word": "clinical", "meaning": "임상의"},
+    {"word": "substantial", "meaning": "상당한, 중요한"},
+    {"word": "lead A to believe", "meaning": "A가 믿게 만들다"}
+   ],
+   "chunks": [
+    {"en": "They claim that clinical [[discoveries]] played a more substantial role", "ko": "그들은 임상적 [[발견]]이 더 중요한 역할을 했다고 주장한다"},
+    {"en": "than animal researchers have led us to [[believe]].", "ko": "동물 연구자들이 우리가 [[믿게]] 해 온 것보다"}
+   ],
+   "misreads": [
+    {"statement": "글쓴이는 임상적 발견보다 동물 연구가 더 중요한 역할을 했다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "clinical discoveries played a more substantial role than animal researchers have led us to believe", "why": "임상적 발견이 '더 중요한' 역할을 했다고 했으므로 동물 연구가 더 중요하다는 것은 반대."}
+   ],
+   "mistips": []
+  }
+ ]
+}

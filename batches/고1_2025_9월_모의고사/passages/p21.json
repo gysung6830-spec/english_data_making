@@ -1,0 +1,273 @@
+{
+ "item_no": "21",
+ "theme": "우리 몸을 구성하는 원자의 영원한 순환과 공유",
+ "overview": {
+  "theme_ko": "원자의 영원한 순환과 공유",
+  "topic": "🔎 몸속 원자의 나이, 순환, 그리고 '빌려 쓰는' 존재",
+  "stance": "긍정적",
+  "stance_reason": "You're the present caretaker of the atoms ~ 로 원자를 잠시 맡아 돌보는 존재로 긍정적으로 봄",
+  "structure": "주장→근거·예시",
+  "structure_reason": "원자는 우주만큼 오래되고 공유된다는 주장 → 호흡·땀·재순환 근거로 뒷받침",
+  "key_grammar": {
+   "point": "분사구문 (circulating ~: 동시상황 '~하면서')",
+   "source_sentence": "There are atoms in your body that have existed since the first moments of time, circulating throughout the universe among limitless forms, both living and nonliving.",
+   "explanation": [
+    {"chip":"쉽게 말하면","text":"circulating 은 「그리고 [[순환한다]]」를 분사로 줄인 거예요."},
+    {"chip":"원래 문장","text":"= and they circulate ~ 를 [[분사구문]]으로 압축한 형태."},
+    {"chip":"의미","text":"주절과 [[동시]]에 일어나는 동작을 나타내요(~하면서)."},
+    {"chip":"의미상 주어","text":"분사의 주어는 주절의 [[atoms]]예요."},
+    {"chip":"신호","text":"앞의 콤마(,) + -ing 는 [[분사구문]] 신호일 때가 많아요."}
+   ],
+   "example_analysis": "주절 There are atoms ~ 뒤에 콤마+circulating 이 붙어 '순환하면서'라는 동시 상황을 덧붙인다.",
+   "drills": [
+    {"kind":"객관식","question":"circulating throughout the universe 를 절로 풀어 쓴 것으로 알맞은 것은?","options":["and they circulate throughout the universe","because they circulated","which are circulate"],"answer":"and they circulate throughout the universe","from_passage":true},
+    {"kind":"객관식","question":"분사 circulating 의 의미상 주어로 알맞은 것은?","options":["atoms","the universe","forms"],"answer":"atoms","from_passage":true},
+    {"kind":"객관식","question":"분사구문 circulating 이 나타내는 의미로 알맞은 것은?","options":["동시동작(~하면서)","조건(~라면)","양보(~일지라도)"],"answer":"동시동작(~하면서)","from_passage":true},
+    {"kind":"영작","question":"생물과 무생물 모두 우주 전체를 순환하면서","words":["circulating","throughout","the","universe","among","limitless","forms","both","living","and","nonliving"],"answer":"circulating throughout the universe among limitless forms, both living and nonliving","from_passage":true},
+    {"kind":"영작","question":"음악을 들으면서, 그녀는 공부했다.","words":["listening","to","music","she","studied"],"answer":"Listening to music, she studied","from_passage":false}
+   ]
+  },
+  "restatement_chains": [
+   {"label":"원자의 순환","expressions":["cycle from person to person","recycle atoms","circulating throughout the universe"],"variation":"→ 원자는 계속 돌고 돈다"},
+   {"label":"원자를 빌림","expressions":["you borrow them","the present caretaker of the atoms"],"variation":"→ 소유가 아니라 잠시 맡아둠"}
+  ],
+  "flow_blocks": [
+   {"stage":"도입(주장)","sentence_range":"1~2","summary":"몸속 원자는 [[우주]]만큼 오래됐고, 들이마신 원자 일부만 다시 나감","easy_example":"숨 한 번에 오래된 원자를 잠깐 빌려 쓰는 셈."},
+   {"stage":"전개(원리)","sentence_range":"3~5","summary":"원자는 몸에 들어왔다 나가며, 소유가 아니라 [[빌리]]는 것—같은 원자풀 공유","easy_example":"도서관 책처럼 잠깐 빌렸다 반납하듯."},
+   {"stage":"부연(순환)","sentence_range":"6~9","summary":"숨·땀으로 사람 간 [[순환]], 거대 규모 재순환, 태초부터 존재","easy_example":"운동장의 물을 서로 돌려 쓰는 것처럼."},
+   {"stage":"결론","sentence_range":"10~11","summary":"당신은 현재의 [[관리인]]일 뿐, 뒤를 이을 이가 많음","easy_example":"릴레이 배턴을 잠시 쥐었다 넘겨주듯."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Many atoms in your body are nearly as old as the universe itself.",
+   "grammar": [
+    {"tag":"원급 비교 as ~ as","note":"as old as: ~만큼 오래된","spans":["as old as"]},
+    {"tag":"재귀대명사 강조","note":"itself: 우주 '자체'를 강조","spans":["itself"]}
+   ],
+   "vocab": [
+    {"word":"atom","meaning":"원자"},
+    {"word":"universe","meaning":"우주"},
+    {"word":"nearly","meaning":"거의"}
+   ],
+   "chunks": [
+    {"en":"Many [[atoms]] in your body","ko":"당신 몸속 많은 [[원자]]는"},
+    {"en":"are nearly as [[old]] as","ko":"거의 ~만큼 [[오래되]]었다"},
+    {"en":"the universe [[itself]].","ko":"[[우주]] 자체만큼"}
+   ],
+   "misreads": [
+    {"statement":"필자는 몸속의 많은 원자가 거의 우주만큼이나 오래되었다고 본다.","verdict":"O","trap_type":"필자관점"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "When you breathe, for example, only some of the atoms that you inhale are exhaled in your next breath.",
+   "grammar": [
+    {"tag":"목적격 관계대명사 that","note":"the atoms that you inhale: 목적격 that","spans":["that"]},
+    {"tag":"수동태","note":"are exhaled: 내쉬어진다(수동)","spans":["are exhaled"]}
+   ],
+   "vocab": [
+    {"word":"inhale","meaning":"들이마시다"},
+    {"word":"exhale","meaning":"내쉬다"},
+    {"word":"breath","meaning":"숨, 호흡"}
+   ],
+   "chunks": [
+    {"en":"When you [[breathe]], for example,","ko":"예를 들어, 당신이 [[숨 쉴]] 때,"},
+    {"en":"only some of the atoms that you [[inhale]]","ko":"당신이 [[들이마신]] 원자 중 일부만"},
+    {"en":"are [[exhaled]] in your next breath.","ko":"다음 숨에 [[내쉬어진다]]"}
+   ],
+   "misreads": [
+    {"statement":"숨을 쉴 때 들이마신 원자 중 일부만이 다음 숨에 다시 내쉬어진다.","verdict":"O","trap_type":"인과조건"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "The remaining atoms are taken into your body to become part of you, and they later leave your body by various means.",
+   "grammar": [
+    {"tag":"수동태 + 목적 to부정사","note":"are taken ~ to become ~: 받아들여져 ~이 되다","spans":["are taken","to become"]},
+    {"tag":"부사 later","note":"they later leave: 이후에 떠난다","spans":["later"]}
+   ],
+   "vocab": [
+    {"word":"remaining","meaning":"남아 있는"},
+    {"word":"means","meaning":"방법, 수단"},
+    {"word":"various","meaning":"다양한"}
+   ],
+   "chunks": [
+    {"en":"The remaining atoms are [[taken]] into your body","ko":"남은 원자는 당신 몸으로 [[받아들여져]]"},
+    {"en":"to become part of [[you]],","ko":"당신의 [[일부]]가 되고,"},
+    {"en":"and they later [[leave]] your body","ko":"이후 그것들은 당신 몸을 [[떠난다]]"},
+    {"en":"by various [[means]].","ko":"다양한 [[방법]]으로"}
+   ],
+   "misreads": [
+    {"statement":"남은 원자는 몸 밖으로 곧장 빠져나가 결코 몸의 일부가 되지 않는다.","verdict":"X","trap_type":"주체대상","anchor":"to become part of you","why":"남은 원자는 몸에 들어와 일부가 된 뒤 나중에 떠남(반대 진술)"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "You don't \"own\" the atoms that make up your body; you borrow them.",
+   "grammar": [
+    {"tag":"주격 관계대명사 that","note":"the atoms that make up: 주격 that","spans":["that"]},
+    {"tag":"세미콜론 대조","note":"; 소유(own) vs 빌림(borrow) 대조","spans":[";"]}
+   ],
+   "vocab": [
+    {"word":"own","meaning":"소유하다"},
+    {"word":"make up","meaning":"구성하다"},
+    {"word":"borrow","meaning":"빌리다"}
+   ],
+   "chunks": [
+    {"en":"You don't \"[[own]]\" the atoms","ko":"당신은 원자를 [[소유]]하지 않는다"},
+    {"en":"that make up your [[body]];","ko":"당신 몸을 [[구성하]]는"},
+    {"en":"you [[borrow]] them.","ko":"당신은 그것들을 [[빌린다]]"}
+   ],
+   "misreads": [
+    {"statement":"당신은 몸을 구성하는 원자를 소유하는 것이며, 빌리는 것이 아니다.","verdict":"X","trap_type":"주체대상","anchor":"you borrow them","killer":true,"why":"원자는 소유(own)하는 것이 아니라 '빌리는(borrow)' 것이라고 함"}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "We all share from the same atom pool because atoms forever travel around, within, and among us.",
+   "grammar": [
+    {"tag":"이유 접속사 because","note":"because ~: ~ 때문에","spans":["because"]},
+    {"tag":"전치사 병렬","note":"around, within, and among: 전치사 병렬","spans":["around, within, and among"]}
+   ],
+   "vocab": [
+    {"word":"share","meaning":"공유하다"},
+    {"word":"pool","meaning":"공동의 자원, 풀"},
+    {"word":"forever","meaning":"영원히"}
+   ],
+   "chunks": [
+    {"en":"We all [[share]] from the same atom pool","ko":"우리는 모두 같은 원자풀에서 [[공유한다]]"},
+    {"en":"because atoms forever [[travel]]","ko":"원자가 영원히 [[이동하]]기 때문에"},
+    {"en":"around, within, and [[among]] us.","ko":"우리 주변·내부·[[사이]]를"}
+   ],
+   "misreads": [
+    {"statement":"원자가 늘 우리 주변·내부·사이를 이동하기에 우리는 같은 원자풀을 공유한다.","verdict":"O","trap_type":"인과조건"}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Atoms cycle from person to person as we breathe and as our sweat is evaporated.",
+   "grammar": [
+    {"tag":"접속사 as(~하면서)","note":"as we breathe / as ~ evaporated: ~함에 따라","spans":["as we breathe"]},
+    {"tag":"수동태","note":"is evaporated: 증발되다","spans":["is evaporated"]}
+   ],
+   "vocab": [
+    {"word":"cycle","meaning":"순환하다"},
+    {"word":"sweat","meaning":"땀"},
+    {"word":"evaporate","meaning":"증발하다"}
+   ],
+   "chunks": [
+    {"en":"Atoms [[cycle]] from person to person","ko":"원자는 사람에서 사람으로 [[순환한다]]"},
+    {"en":"as we [[breathe]]","ko":"우리가 [[숨 쉬]]고"},
+    {"en":"and as our sweat is [[evaporated]].","ko":"땀이 [[증발되]]면서"}
+   ],
+   "misreads": [
+    {"statement":"원자가 사람 사이를 순환하는 방향은 맞지만, 그 순환은 오직 땀 증발 때문에만 일어난다.","verdict":"△","trap_type":"인과조건","anchor":"as we breathe and as our sweat is evaporated","why":"순환 방향은 맞으나 원인은 땀 증발뿐 아니라 숨쉬기도 포함됨"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "We recycle atoms on a grand scale.",
+   "grammar": [
+    {"tag":"전치사구 on a ~ scale","note":"on a grand scale: 거대한 규모로","spans":["on a grand scale"]}
+   ],
+   "vocab": [
+    {"word":"recycle","meaning":"재순환시키다"},
+    {"word":"grand","meaning":"거대한, 웅장한"},
+    {"word":"scale","meaning":"규모"}
+   ],
+   "chunks": [
+    {"en":"We [[recycle]] atoms","ko":"우리는 원자를 [[재순환시킨다]]"},
+    {"en":"on a grand [[scale]].","ko":"거대한 [[규모]]로"}
+   ],
+   "misreads": [
+    {"statement":"필자는 인간이 거대한 규모로 원자를 재순환시킨다고 본다.","verdict":"O","trap_type":"필자관점"}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "The origin of the lightest atoms goes back to the origin of the universe, and most heavier atoms are older than the Sun and Earth.",
+   "grammar": [
+    {"tag":"비교급 + than","note":"older than: ~보다 오래된","spans":["older than"]},
+    {"tag":"등위접속사 and(문장 연결)","note":"and most heavier ~: 두 절을 연결","spans":["and"]}
+   ],
+   "vocab": [
+    {"word":"origin","meaning":"기원"},
+    {"word":"lightest","meaning":"가장 가벼운"},
+    {"word":"go back to","meaning":"~로 거슬러 올라가다"}
+   ],
+   "chunks": [
+    {"en":"The origin of the lightest atoms [[goes back]]","ko":"가장 가벼운 원자의 기원은 [[거슬러 올라가]]고"},
+    {"en":"to the origin of the [[universe]],","ko":"[[우주]]의 기원까지"},
+    {"en":"and most heavier atoms are [[older]]","ko":"대부분의 더 무거운 원자는 더 [[오래되]]었다"},
+    {"en":"than the Sun and [[Earth]].","ko":"[[태양]]과 지구보다"}
+   ],
+   "misreads": [
+    {"statement":"이 글은 더 무거운 원자일수록 인체 건강에 해롭다고 설명한다.","verdict":"X","trap_type":"무관정보","anchor":"most heavier atoms are older than the Sun and Earth","why":"무게와 건강 해로움은 언급이 없고, 오직 원자의 '나이'만 비교함"}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "There are atoms in your body that have existed since the first moments of time, circulating throughout the universe among limitless forms, both living and nonliving.",
+   "grammar": [
+    {"tag":"주격 관계대명사 that(완료)","note":"atoms that have existed: ~해 온 원자","spans":["that"]},
+    {"tag":"분사구문(circulating)","note":"circulating ~: 동시동작 '순환하면서'","spans":["circulating"]},
+    {"tag":"both A and B","note":"both living and nonliving: A와 B 둘 다","spans":["both"]}
+   ],
+   "vocab": [
+    {"word":"exist","meaning":"존재하다"},
+    {"word":"circulate","meaning":"순환하다"},
+    {"word":"limitless","meaning":"제한 없는, 무수한"}
+   ],
+   "chunks": [
+    {"en":"There are [[atoms]] in your body","ko":"당신 몸속에는 [[원자]]가 있다"},
+    {"en":"that have [[existed]] since the first moments of time,","ko":"태초부터 [[존재해]] 온"},
+    {"en":"[[circulating]] throughout the universe","ko":"우주 전체를 [[순환하면서]]"},
+    {"en":"among limitless [[forms]],","ko":"무수한 [[형태]] 가운데"},
+    {"en":"both living and [[nonliving]].","ko":"생물과 [[무생물]] 모두"}
+   ],
+   "misreads": [
+    {"statement":"밑줄 친 both living and nonliving 이 직접 수식하는 것은 'the universe'이다.","verdict":"X","trap_type":"구조수식","anchor":"among limitless forms, both living and nonliving","why":"both living and nonliving 은 우주가 아니라 앞의 limitless forms(형태)를 부연함"}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "You're the present caretaker of the atoms in your body.",
+   "grammar": [
+    {"tag":"축약 You're","note":"You are → You're: ~이다","spans":["You're"]},
+    {"tag":"전치사구 수식","note":"caretaker of the atoms: ~의 관리인","spans":["of"]}
+   ],
+   "vocab": [
+    {"word":"present","meaning":"현재의"},
+    {"word":"caretaker","meaning":"관리인, 돌보는 사람"}
+   ],
+   "chunks": [
+    {"en":"You're the present [[caretaker]]","ko":"당신은 현재의 [[관리인]]이다"},
+    {"en":"of the atoms in your [[body]].","ko":"당신 몸속 [[원자]]의"}
+   ],
+   "misreads": [
+    {"statement":"필자는 우리를 몸속 원자의 'present caretaker'가 아니라 원자의 영원한 주인으로 본다.","verdict":"X","trap_type":"필자관점","anchor":"You're the present caretaker","english":"the present caretaker","why":"영원한 주인이 아니라 '현재의(present)' 관리인일 뿐이라고 함"}
+   ]
+  },
+  {
+   "id": 11,
+   "english": "There will be many who will follow you.",
+   "grammar": [
+    {"tag":"There will be ~","note":"~가 있을 것이다(미래)","spans":["There will be"]},
+    {"tag":"주격 관계대명사 who","note":"many who will follow: 사람 선행사 + who","spans":["who"]}
+   ],
+   "vocab": [
+    {"word":"many","meaning":"많은 이들, 다수"},
+    {"word":"follow","meaning":"뒤를 잇다, 따르다"}
+   ],
+   "chunks": [
+    {"en":"There will be [[many]]","ko":"[[많은 이들]]이 있을 것이다"},
+    {"en":"who will [[follow]] you.","ko":"당신의 뒤를 [[이을]]"}
+   ],
+   "misreads": [
+    {"statement":"밑줄 친 you가 가리키는 것은 원자(atoms)이다.","verdict":"X","trap_type":"지칭","anchor":"You're the present caretaker","integrative":true,"why":"you는 원자가 아니라 앞 문장의 '현재 관리인인 당신'을 가리킴"}
+   ]
+  }
+ ]
+}

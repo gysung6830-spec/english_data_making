@@ -1,0 +1,228 @@
+{
+ "item_no": "31",
+ "theme": "특정 경험 후 자신의 행복 기준점으로 되돌아가려는 인간의 경향",
+ "overview": {
+  "theme_ko": "행복의 기준점으로 되돌아가는 적응 경향",
+  "topic": "🔎 좋고 나쁜 일을 겪어도 결국 각자의 기본 행복 수준으로 돌아가는 적응",
+  "stance": "중립적",
+  "stance_reason": "특정 주장을 옹호·비판하기보다 'we adjust ... and return to our personal default level of well-being'라는 현상을 설명함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "적응해 기준선으로 돌아온다는 원리를 제시한 뒤 'little kids and their toy joy'를 예로 뒷받침",
+  "key_grammar": {
+   "point": "so+동사+주어 도치(긍정 동의)",
+   "source_sentence": "The euphoria of first love fades, and so does the despair of a break-up.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "앞 문장의 동사를 반복하지 않고 [[so]]+동사+주어로 '~도 그렇다'를 나타내요"},
+    {"chip": "핵심은", "text": "긍정문에 이어 '역시 그렇다'일 때 so [[does]]/do/is + 주어 어순으로 도치돼요"},
+    {"chip": "여기선", "text": "so does가 앞의 [[fades]]를 받아 '절망도 (사라진다)'는 뜻이에요"},
+    {"chip": "주의", "text": "주어와 동사의 [[어순]]이 바뀌어 the despair가 does 뒤로 가요"},
+    {"chip": "비교", "text": "부정문 동의는 [[neither]]/nor + 동사 + 주어를 써요"}
+   ],
+   "example_analysis": "does가 앞 절의 fades를 대신하고, 주어 the despair of a break-up이 동사 뒤로 도치됨",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? The euphoria of first love fades, and ___ the despair of a break-up.", "options": ["so does", "so is", "does so"], "answer": "so does", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 어순이 옳은 것은?", "options": ["and so does the despair", "and so the despair does", "and does so the despair"], "answer": "and so does the despair", "from_passage": true},
+    {"kind": "객관식", "question": "'~도 (역시) 아니다'라는 부정 동의의 도치로 옳은 것은?", "options": ["neither does he", "so does he", "he neither does"], "answer": "neither does he", "from_passage": false},
+    {"kind": "영작", "question": "첫사랑의 행복감은 사라지고, 이별의 절망도 그러하다.", "words": ["The", "euphoria", "of", "first", "love", "fades", "and", "so", "does", "the", "despair", "of", "a", "break-up"], "answer": "The euphoria of first love fades, and so does the despair of a break-up.", "from_passage": true},
+    {"kind": "영작", "question": "그는 프랑스어를 할 줄 알고, 그의 여동생도 그렇다.", "words": ["He", "can", "speak", "French", "and", "so", "can", "his", "sister"], "answer": "He can speak French, and so can his sister.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "기준선 복귀", "expressions": ["return to our personal default level of well-being", "pulled toward our baseline", "adapt"], "variation": "좋고 나쁜 일 뒤에도 결국 원래의 행복 수준으로 되돌아옴"},
+   {"label": "강렬한 감정의 소멸", "expressions": ["The euphoria of first love fades", "the despair of a break-up", "highs and lows"], "variation": "뜨겁던 감정도 시간이 지나면 사그라듦"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입(원리)", "sentence_range": "1~2", "summary": "행복·슬픔은 순간의 사건 하나하나로 [[결정되지]] 않음", "easy_example": "바람 한 번 분다고 배가 매번 딴 데로 가지 않는 것처럼"},
+   {"stage": "전개(핵심주장)", "sentence_range": "3~4", "summary": "인간은 적응해 자신의 [[기준선]]으로 되돌아옴", "easy_example": "물이 언제나 제 수위를 찾아가듯"},
+   {"stage": "부연", "sentence_range": "5", "summary": "첫사랑의 [[행복감]]도 이별의 절망도 시간이 지나면 사라짐", "easy_example": "한때 뜨겁던 유행이 곧 식는 것처럼"},
+   {"stage": "사례", "sentence_range": "6~8", "summary": "원하던 것을 얻은 [[아이]]는 잠깐만 최고로 행복함", "easy_example": "새 게임기에 신났다가 며칠 뒤 시들해지는 것"},
+   {"stage": "결론", "sentence_range": "9", "summary": "아이도 어른처럼 결국 [[적응]]함", "easy_example": "누구나 새것에 곧 익숙해짐"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Whether we feel happy or sad, content or discontent, is not determined merely by each individual successive moment of life experience ─ a good thing happens and I'm happy, a bad thing happens and I'm sad.",
+   "grammar": [
+    {"tag": "명사절 주어(whether)", "note": "'~인지 아닌지'라는 Whether절 전체가 주어이고 단수 취급해 is", "spans": ["Whether", "is"]},
+    {"tag": "수동태 부정", "note": "is not determined = '결정되지 않는다'(수동)", "spans": ["is", "determined"]}
+   ],
+   "vocab": [
+    {"word": "content", "meaning": "(형용사) 만족한, 자족하는"},
+    {"word": "discontent", "meaning": "불만족한"},
+    {"word": "merely", "meaning": "단지, 그저"},
+    {"word": "successive", "meaning": "연속적인, 잇따른"}
+   ],
+   "chunks": [
+    {"en": "Whether we feel [[happy]] or sad, content or discontent,", "ko": "우리가 [[행복하]]거나 슬프거나, 만족하거나 불만족스러운 것은"},
+    {"en": "is not [[determined]] merely", "ko": "단지 [[결정되]]지 않는다"},
+    {"en": "[[by each individual successive moment of life experience]]", "ko": "[[삶의 경험의 각각의 개별적이고 연속적인 순간에 의해]]"},
+    {"en": "─ a good thing [[happens]] and I'm happy,", "ko": "즉, 좋은 일이 [[일어나]]면 나는 행복하고,"},
+    {"en": "a bad thing happens and I'm [[sad]].", "ko": "나쁜 일이 일어나면 나는 [[슬프]]다."}
+   ],
+   "misreads": [
+    {"statement": "우리의 행복과 슬픔은 삶의 매 순간 일어나는 개별 사건 하나하나에 의해서만 결정된다.", "verdict": "X", "trap_type": "인과조건", "anchor": "is not determined merely by each individual successive moment", "why": "순간의 경험만으로 결정되지 '않는다'고 했으므로 인과 관계가 정반대다.", "killer": true}
+   ],
+   "mistips": ["content를 '[[내용]]'으로 읽으면 안 돼 — 여기선 형용사 '[[만족한]]'이야."]
+  },
+  {
+   "id": 2,
+   "english": "While our experiences affect our mood, we are not blown in a completely new direction by each gust of wind.",
+   "grammar": [
+    {"tag": "접속사 While(양보)", "note": "여기 While은 '~이지만'(양보)", "spans": ["While"]},
+    {"tag": "수동태", "note": "are not blown = '(바람에) 날려가지 않는다'", "spans": ["are", "blown"]}
+   ],
+   "vocab": [
+    {"word": "affect", "meaning": "~에 영향을 미치다"},
+    {"word": "gust", "meaning": "돌풍, 세찬 바람"},
+    {"word": "direction", "meaning": "방향"}
+   ],
+   "chunks": [
+    {"en": "While our experiences [[affect]] our mood,", "ko": "우리의 경험이 우리의 기분에 [[영향을 미치]]지만,"},
+    {"en": "we are not [[blown]] in a completely new direction", "ko": "우리는 완전히 새로운 방향으로 [[날아가]]지 않는다"},
+    {"en": "by each [[gust]] of wind.", "ko": "각각의 [[돌풍]]에 의해."}
+   ],
+   "misreads": [
+    {"statement": "경험이 기분에 영향을 주긴 하지만, 매번의 자극이 우리를 완전히 새로운 방향으로 몰아가지는 않는다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "As humans, we adjust ─ to new information and events both good and bad ─ and return to our personal default level of well-being.",
+   "grammar": [
+    {"tag": "상관구조 both A and B", "note": "both good and bad = '좋은 것과 나쁜 것 둘 다'", "spans": ["both", "and"]},
+    {"tag": "삽입구(─ ─)", "note": "두 대시 사이는 삽입 — adjust의 대상을 설명", "spans": []}
+   ],
+   "vocab": [
+    {"word": "adjust", "meaning": "적응하다, 조정하다"},
+    {"word": "default", "meaning": "기본값의, 기본 설정의"},
+    {"word": "well-being", "meaning": "행복, 안녕"}
+   ],
+   "chunks": [
+    {"en": "As humans, we [[adjust]]", "ko": "인간으로서, 우리는 [[적응하]]고"},
+    {"en": "[[─ to new information and events both good and bad ─]]", "ko": "[[즉, 좋기도 하고 나쁘기도 한 새로운 정보와 사건 모두에 대해 ─]]"},
+    {"en": "and [[return]] to our personal default level of well-being.", "ko": "그리고 우리의 개인적 기본 행복 수준으로 [[되돌아온]]다."}
+   ],
+   "misreads": [
+    {"statement": "인간은 좋은 정보든 나쁜 정보든 그 새로운 것에 적응한 뒤, 자신만의 기본 행복 수준으로 되돌아간다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "There will be highs and lows, but over time, like water seeking its own level, we are pulled toward our baseline ─ back up after bad news and back down after good.",
+   "grammar": [
+    {"tag": "현재분사 후치수식", "note": "water seeking its own level = '자신의 수위를 찾는 물'", "spans": ["seeking"]},
+    {"tag": "수동태", "note": "are pulled = '끌려간다'", "spans": ["are", "pulled"]}
+   ],
+   "vocab": [
+    {"word": "highs and lows", "meaning": "기복, 오르내림"},
+    {"word": "seek", "meaning": "찾다, 추구하다"},
+    {"word": "baseline", "meaning": "기준선, 기본선"}
+   ],
+   "chunks": [
+    {"en": "There will be highs and [[lows]],", "ko": "높음과 [[낮음]](기복)은 있겠지만,"},
+    {"en": "but over time, like water [[seeking]] its own level,", "ko": "그러나 시간이 지나면서, 자신의 수위를 [[찾는]] 물처럼,"},
+    {"en": "we are [[pulled]] toward our baseline", "ko": "우리는 우리의 기준선으로 [[끌려간]]다"},
+    {"en": "[[─ back up after bad news and back down after good.]]", "ko": "[[즉, 나쁜 소식 뒤엔 다시 올라오고 좋은 소식 뒤엔 다시 내려온다.]]"}
+   ],
+   "misreads": [
+    {"statement": "우리는 나쁜 소식 뒤에는 기준선보다 더 내려가고, 좋은 소식 뒤에는 더 올라간다.", "verdict": "X", "trap_type": "주체대상", "anchor": "back up after bad news and back down after good", "why": "나쁜 소식 뒤엔 다시 '올라오고' 좋은 소식 뒤엔 '내려온다'고 했으므로 방향이 뒤바뀌었다."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "The euphoria of first love fades, and so does the despair of a break-up.",
+   "grammar": [
+    {"tag": "so+동사+주어 도치", "note": "and so does the despair = '절망도 (사라진다)' — 긍정 동의 도치", "spans": ["so does"]},
+    {"tag": "자동사 fade", "note": "fades = '(점점) 사라지다, 옅어지다'", "spans": ["fades"]}
+   ],
+   "vocab": [
+    {"word": "euphoria", "meaning": "행복감, 희열"},
+    {"word": "despair", "meaning": "절망"},
+    {"word": "fade", "meaning": "사라지다, 희미해지다"},
+    {"word": "break-up", "meaning": "이별, 결별"}
+   ],
+   "chunks": [
+    {"en": "The [[euphoria]] of first love fades,", "ko": "첫사랑의 [[행복감]]은 사라지고,"},
+    {"en": "and so does the [[despair]] of a break-up.", "ko": "이별의 [[절망]]도 그러하다(사라진다)."}
+   ],
+   "misreads": [
+    {"statement": "'so does'는 이별의 절망만은 사라지지 않고 남는다는 뜻이다.", "verdict": "X", "trap_type": "지칭", "anchor": "and so does the despair of a break-up", "why": "so does는 앞의 fades를 받아 '절망도 사라진다'는 뜻이므로 남는다는 해석은 틀리다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "This tendency is best seen with little kids and their toy joy:",
+   "grammar": [
+    {"tag": "수동태+최상급 부사", "note": "is best seen = '가장 잘 나타난다'(수동)", "spans": ["is", "seen"]}
+   ],
+   "vocab": [
+    {"word": "tendency", "meaning": "경향, 성향"},
+    {"word": "joy", "meaning": "기쁨, 즐거움"}
+   ],
+   "chunks": [
+    {"en": "This [[tendency]] is best seen", "ko": "이 [[경향]]은 가장 잘 나타난다"},
+    {"en": "with little kids and their toy [[joy]]:", "ko": "어린아이들과 그들의 장난감 [[기쁨]]에서:"}
+   ],
+   "misreads": [
+    {"statement": "필자는 이 예시로 아이들이 어른보다 더 쉽고 오래 행복해진다는 점을 강조하려 한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "This tendency is best seen with little kids", "why": "아이 예시는 '적응해 기준선으로 돌아오는 경향'을 보여주려는 것이지 아이가 더 행복하다는 게 아니다.", "integrative": true}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "When they get what they've longed for, they believe they will be happy for the rest of their lives.",
+   "grammar": [
+    {"tag": "관계대명사 what", "note": "what they've longed for = '그들이 간절히 원해온 것'(선행사 포함)", "spans": ["what"]},
+    {"tag": "현재완료", "note": "they've longed for = '(그동안) 간절히 원해왔다'", "spans": ["they've longed"]}
+   ],
+   "vocab": [
+    {"word": "long for", "meaning": "간절히 바라다"},
+    {"word": "the rest", "meaning": "나머지, 남은 것"},
+    {"word": "believe", "meaning": "믿다"}
+   ],
+   "chunks": [
+    {"en": "When they get what they've [[longed]] for,", "ko": "그들이 간절히 [[원하]]던 것을 얻을 때,"},
+    {"en": "they [[believe]] they will be happy", "ko": "그들은 자신이 행복할 것이라 [[믿는]]다"},
+    {"en": "for the [[rest]] of their lives.", "ko": "그들의 [[남은]] 인생 동안."}
+   ],
+   "misreads": [
+    {"statement": "아이들은 원하던 장난감을 얻기 위해 오랫동안 부모를 조른다.", "verdict": "X", "trap_type": "무관정보", "anchor": "When they get what they've longed for", "why": "본문은 원하던 것을 '얻은 뒤'의 믿음만 다루며, 조르는 과정은 언급되지 않았다."}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "And for the first few minutes of the rest of their lives, they are.",
+   "grammar": [
+    {"tag": "대동사·보어 생략", "note": "they are 뒤 happy 생략 — '그들은 (정말) 행복하다'", "spans": ["they are"]}
+   ],
+   "vocab": [
+    {"word": "the first few", "meaning": "처음 몇 ~"},
+    {"word": "the rest of their lives", "meaning": "그들의 남은 인생"}
+   ],
+   "chunks": [
+    {"en": "And for the first few [[minutes]]", "ko": "그리고 처음 몇 [[분]] 동안,"},
+    {"en": "of the [[rest]] of their lives, they are.", "ko": "그들의 [[남은]] 인생 동안, 그들은 정말 그러하다(행복하다)."}
+   ],
+   "misreads": [
+    {"statement": "아이들은 원하던 것을 얻고 나면 남은 인생 내내 실제로 행복하다.", "verdict": "△", "trap_type": "구조수식", "anchor": "for the first few minutes", "why": "행복한 것은 맞지만 '남은 인생 내내'가 아니라 '처음 몇 분'뿐이라는 점에서 범위가 틀리다."}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "But then the kids ─ like adults ─ adapt.",
+   "grammar": [
+    {"tag": "삽입구(─ ─)", "note": "like adults가 주어 the kids와 동사 adapt 사이에 삽입됨", "spans": ["like adults"]}
+   ],
+   "vocab": [
+    {"word": "adapt", "meaning": "적응하다"},
+    {"word": "adult", "meaning": "어른, 성인"}
+   ],
+   "chunks": [
+    {"en": "But then the kids ─ like adults ─ [[adapt]].", "ko": "하지만 그때 그 아이들은 ─ 어른들처럼 ─ [[적응한]]다."}
+   ],
+   "misreads": [
+    {"statement": "Unlike adults, children never adapt to what they get.", "verdict": "X", "trap_type": "주체대상", "anchor": "like adults", "why": "아이도 어른'처럼' 적응한다고 했으므로, 어른과 달리 적응하지 못한다는 진술은 틀리다.", "english": true}
+   ]
+  }
+ ]
+}

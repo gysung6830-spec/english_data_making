@@ -1,0 +1,215 @@
+{
+ "item_no": "26",
+ "theme": "고래 노래를 발견하고 보호에 헌신한 Roger Payne의 업적",
+ "overview": {
+  "theme_ko": "고래 노래를 발견한 Roger Payne",
+  "topic": "🔎 고래 노래를 발견하고 고래 보호 운동에 헌신한 Roger Payne의 일생",
+  "stance": "긍정적",
+  "stance_reason": "His work helped make laws that protect marine mammals 처럼 그의 업적을 기림",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "1935년 출생부터 1961, 1967, 1970, 이듬해, 경력 전반, 1986년까지 시간 순으로 업적을 나열",
+  "key_grammar": {
+   "point": "계속적 용법 관계대명사 which",
+   "source_sentence": "Then in 1970, he released an album Songs of the Humpback Whale, which became a surprise hit and helped start the global \"Save the Whales\" movement.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "콤마(,) 뒤의 which 는 앞 내용을 '그리고 그것은~'으로 [[부연]] 설명해요."},
+    {"chip": "제한 vs 계속", "text": "계속적 용법은 콤마가 있어 선행사를 한정하지 않고 [[추가]] 정보를 덧붙인다."},
+    {"chip": "바꿔 쓰기", "text": "which = and it: ', which became a hit' = '[[and it]] became a hit'."},
+    {"chip": "주의", "text": "계속적 용법 자리의 which 는 관계대명사 [[that]]으로 바꿀 수 없어요."}
+   ],
+   "example_analysis": "콤마 뒤 which 가 앞의 an album Songs of the Humpback Whale 를 받아 '그리고 그것이 뜻밖의 인기를 얻었다'로 부연한다.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? ..., ___ became a surprise hit and helped start the movement", "options": ["which", "that", "what"], "answer": "which", "from_passage": true},
+    {"kind": "객관식", "question": "밑줄 친 which 와 쓰임이 같은 것은?", "options": ["He has a car, which is red.", "This is the car which he bought.", "I don't know which he likes."], "answer": "He has a car, which is red.", "from_passage": false},
+    {"kind": "객관식", "question": "which finally led to the global ban 에서 which 가 가리키는 것은?", "options": ["His work helped make laws that protect marine mammals", "commercial whaling", "marine mammals"], "answer": "His work helped make laws that protect marine mammals", "from_passage": true},
+    {"kind": "영작", "question": "1967년에 그는 혹등고래가 길고 복잡한 소리를 낸다는 것을 발견했다.", "words": ["in", "1967", "he", "discovered", "that", "humpback", "whales", "make", "long", "and", "complex", "sounds"], "answer": "In 1967, he discovered that humpback whales make long and complex sounds", "from_passage": true},
+    {"kind": "영작", "question": "그는 새 앨범을 발표했는데, 그것은 큰 인기를 얻었다.", "words": ["he", "released", "a", "new", "album", "which", "became", "a", "big", "hit"], "answer": "He released a new album, which became a big hit", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "고래 노래의 발견", "expressions": ["humpback whales make long and complex sounds", "whales use them to communicate"], "variation": "긴 소리가 단순한 소음이 아니라 의사소통 수단임을 밝힘."},
+   {"label": "고래 보호에 대한 헌신", "expressions": ["he founded Ocean Alliance to protect whales and the earth's oceans", "His work helped make laws that protect marine mammals", "the global ban on commercial whaling in 1986"], "variation": "연구를 넘어 단체 설립·법 제정·포경 금지까지 보호로 이어짐."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~2", "summary": "1935년 맨해튼 출생, 하버드에서 [[생물학]], 코넬에서 박사 학위", "easy_example": "한 과학자의 성장 배경 소개."},
+   {"stage": "전개", "sentence_range": "3~4", "summary": "1967년 혹등고래의 길고 복잡한 [[소리]]가 의사소통 수단임을 발견", "easy_example": "동물의 울음이 사실은 대화라는 걸 알아낸 것."},
+   {"stage": "전개", "sentence_range": "5~6", "summary": "1970년 앨범이 [[인기]]를 얻어 보호 운동을 촉발, 이듬해 Ocean Alliance 설립", "easy_example": "노래 한 곡이 환경 운동을 일으킨 것."},
+   {"stage": "결론", "sentence_range": "7~8", "summary": "100회 넘는 탐사와 법 제정 기여로 1986년 상업 포경 [[금지]]를 이끎", "easy_example": "꾸준한 연구가 실제 법을 바꾼 것."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Roger Payne was born in Manhattan in 1935.",
+   "grammar": [
+    {"tag": "수동태 (be + p.p.)", "note": "be born 은 '태어나다'로 굳어진 수동 표현", "spans": ["was born"]}
+   ],
+   "vocab": [
+    {"word": "be born", "meaning": "태어나다"},
+    {"word": "Manhattan", "meaning": "맨해튼 (뉴욕의 지역명)"}
+   ],
+   "chunks": [
+    {"en": "Roger Payne was born in [[Manhattan]] in 1935.", "ko": "Roger Payne은 1935년 [[맨해튼]]에서 태어났다"}
+   ],
+   "misreads": [
+    {"statement": "Roger Payne은 1935년 맨해튼에서 태어났다.", "verdict": "O"}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 2,
+   "english": "He studied biology at Harvard University and eventually earned his Ph.D. from Cornell University in 1961.",
+   "grammar": [
+    {"tag": "동사 병렬 (studied ... and earned)", "note": "주어 He 에 두 과거동사가 and 로 연결", "spans": ["studied", "earned"]}
+   ],
+   "vocab": [
+    {"word": "biology", "meaning": "생물학"},
+    {"word": "eventually", "meaning": "마침내, 결국"},
+    {"word": "earn", "meaning": "(학위 등을) 얻다, 받다"},
+    {"word": "Ph.D.", "meaning": "박사 학위"}
+   ],
+   "chunks": [
+    {"en": "He studied [[biology]] at Harvard University", "ko": "그는 하버드 대학교에서 [[생물학]]을 공부했다"},
+    {"en": "and eventually earned his Ph.D. from [[Cornell]] University in 1961.", "ko": "그리고 마침내 1961년 [[코넬]] 대학교에서 박사 학위를 받았다"}
+   ],
+   "misreads": [
+    {"statement": "그는 코넬 대학교에서 생물학을 공부하고, 하버드 대학교에서 박사 학위를 받았다.", "verdict": "X", "trap_type": "주체대상", "anchor": "studied biology at Harvard University and eventually earned his Ph.D. from Cornell University", "why": "생물학은 하버드, 박사 학위는 코넬에서였으므로 두 대학이 서로 뒤바뀜.", "killer": true}
+   ],
+   "mistips": ["Harvard는 [[생물학]], Cornell은 [[박사]] 학위 — 두 대학을 바꿔 읽지 말 것."]
+  },
+  {
+   "id": 3,
+   "english": "In 1967, he discovered that humpback whales make long and complex sounds.",
+   "grammar": [
+    {"tag": "명사절 접속사 that", "note": "discovered 의 목적어절을 이끔", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "discover", "meaning": "발견하다"},
+    {"word": "humpback whale", "meaning": "혹등고래"},
+    {"word": "complex", "meaning": "복잡한"}
+   ],
+   "chunks": [
+    {"en": "In 1967, he [[discovered]] that humpback whales", "ko": "1967년에 그는 혹등고래가 ~을 [[발견]]했다"},
+    {"en": "make long and complex [[sounds]].", "ko": "길고 복잡한 [[소리]]를 낸다는 것을"}
+   ],
+   "misreads": [
+    {"statement": "1967년에 그는 혹등고래가 짧고 단순한 소리를 낸다는 것을 발견했다.", "verdict": "X", "trap_type": "구조수식", "anchor": "humpback whales make long and complex sounds", "why": "'길고 복잡한' 소리라고 했으므로 '짧고 단순한'은 수식어가 정반대.", "english": "In 1967 he found that humpback whales make short and simple sounds."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 4,
+   "english": "They're known as \"whale songs,\" and he showed that whales use them to communicate.",
+   "grammar": [
+    {"tag": "수동태 be known as", "note": "'~라고 알려져 있다'", "spans": ["known as"]},
+    {"tag": "to부정사 (부사적, 목적)", "note": "'의사소통하기 위해'로 목적을 나타냄", "spans": ["to communicate"]}
+   ],
+   "vocab": [
+    {"word": "be known as", "meaning": "~로 알려져 있다"},
+    {"word": "communicate", "meaning": "의사소통하다"}
+   ],
+   "chunks": [
+    {"en": "They're known as \"whale [[songs]],\"", "ko": "그것들은 '고래 [[노래]]'라고 알려져 있다"},
+    {"en": "and he showed that whales use them to [[communicate]].", "ko": "그리고 그는 고래들이 [[의사소통]]하기 위해 그것들을 사용한다는 것을 보여줬다"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 them 은 고래들(whales)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "whales use them to communicate", "why": "them 은 고래가 사용하는 대상인 '고래 노래(whale songs)'를 가리키므로 고래는 틀림."},
+    {"statement": "그는 고래들이 의사소통을 위해 고래 노래를 사용한다는 것을 보여 주었다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["'use them to communicate'의 them 을 whales 로 읽으면 안 돼 — (바르게는) [[고래 노래]]."]
+  },
+  {
+   "id": 5,
+   "english": "Then in 1970, he released an album Songs of the Humpback Whale, which became a surprise hit and helped start the global \"Save the Whales\" movement.",
+   "grammar": [
+    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 앨범을 부연 설명", "spans": ["which"]},
+    {"tag": "help + (to) 동사원형", "note": "help 뒤에 원형 start 가 옴", "spans": ["helped start"]}
+   ],
+   "vocab": [
+    {"word": "release", "meaning": "(음반 등을) 발표하다"},
+    {"word": "album", "meaning": "음반, 앨범"},
+    {"word": "surprise hit", "meaning": "뜻밖의 성공작"},
+    {"word": "movement", "meaning": "(사회적) 운동"}
+   ],
+   "chunks": [
+    {"en": "Then in 1970, he [[released]] an album", "ko": "그 후 1970년에 그는 앨범을 [[발표]]했다"},
+    {"en": "Songs of the Humpback [[Whale]],", "ko": "Songs of the Humpback [[Whale]]이라는"},
+    {"en": "which became a surprise [[hit]]", "ko": "그런데 그것은 뜻밖의 [[성공작]]이 되었다"},
+    {"en": "and helped start the global \"Save the Whales\" [[movement]].", "ko": "그리고 전 세계적인 'Save the Whales' [[운동]]을 시작하는 것을 도왔다"}
+   ],
+   "misreads": [
+    {"statement": "앨범 Songs of the Humpback Whale 는 상업적으로 실패했지만, 'Save the Whales' 운동을 시작하는 데 도움을 주었다.", "verdict": "△", "trap_type": "인과조건", "anchor": "which became a surprise hit", "why": "운동을 도왔다는 결론은 맞지만, 앨범은 실패가 아니라 '뜻밖의 인기'를 얻었으므로 근거가 틀림."}
+   ],
+   "mistips": ["'which became a surprise hit'의 which 는 앞의 [[앨범]]을 부연하는 계속적 용법."]
+  },
+  {
+   "id": 6,
+   "english": "The following year, he founded Ocean Alliance to protect whales and the earth's oceans, and he used new, safe methods to study whales without harming them.",
+   "grammar": [
+    {"tag": "to부정사 (부사적, 목적)", "note": "'보호하기 위해', '연구하기 위해'로 목적", "spans": ["to protect", "to study"]},
+    {"tag": "전치사 + 동명사 (without harming)", "note": "'해치지 않고'로 동시상황", "spans": ["without harming"]}
+   ],
+   "vocab": [
+    {"word": "found", "meaning": "설립하다"},
+    {"word": "protect", "meaning": "보호하다"},
+    {"word": "method", "meaning": "방법"},
+    {"word": "harm", "meaning": "해치다"}
+   ],
+   "chunks": [
+    {"en": "The following year, he [[founded]] Ocean Alliance", "ko": "다음 해에 그는 Ocean Alliance를 [[설립]]했다"},
+    {"en": "to [[protect]] whales and the earth's oceans,", "ko": "고래와 지구의 해양을 [[보호]]하기 위해"},
+    {"en": "and he used new, safe [[methods]]", "ko": "그리고 그는 새롭고 안전한 [[방법]]을 사용했다"},
+    {"en": "to study whales without [[harming]] them.", "ko": "고래를 [[해치지]] 않고 연구하기 위해"}
+   ],
+   "misreads": [
+    {"statement": "그는 Ocean Alliance를 설립해 고래를 보호했으며, 이 단체는 이후 세계에서 가장 큰 환경 단체가 되었다.", "verdict": "X", "trap_type": "무관정보", "anchor": "he founded Ocean Alliance to protect whales and the earth's oceans", "why": "단체 설립과 보호 목적은 맞지만, '가장 큰 환경 단체가 되었다'는 본문에 없는 정보."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 7,
+   "english": "Over his career, he led more than 100 research trips worldwide, including the Voyage of the Odyssey from 2000 to 2005, which studied ocean pollution.",
+   "grammar": [
+    {"tag": "전치사 including (~을 포함하여)", "note": "앞의 research trips 의 예를 덧붙임", "spans": ["including"]},
+    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 항해를 부연", "spans": ["which"]}
+   ],
+   "vocab": [
+    {"word": "career", "meaning": "경력, 생애"},
+    {"word": "research trip", "meaning": "연구 탐사"},
+    {"word": "worldwide", "meaning": "전 세계적으로"},
+    {"word": "pollution", "meaning": "오염"}
+   ],
+   "chunks": [
+    {"en": "Over his career, he led more than 100 research [[trips]]", "ko": "그의 경력 동안 그는 100회 넘는 연구 [[탐사]]를 이끌었다"},
+    {"en": "worldwide, including the Voyage of the [[Odyssey]]", "ko": "전 세계적으로, Voyage of the [[Odyssey]]를 포함하여"},
+    {"en": "from 2000 to 2005, which studied ocean [[pollution]].", "ko": "2000년부터 2005년까지의, 그런데 그것은 해양 [[오염]]을 연구했다"}
+   ],
+   "misreads": [
+    {"statement": "Voyage of the Odyssey는 해양 오염이 아니라 고래의 의사소통을 연구했다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the Voyage of the Odyssey from 2000 to 2005, which studied ocean pollution", "why": "이 항해가 연구한 대상은 '해양 오염'이므로 의사소통 연구라는 진술은 틀림.", "english": "The Voyage of the Odyssey studied whale communication, not ocean pollution."}
+   ],
+   "mistips": []
+  },
+  {
+   "id": 8,
+   "english": "His work helped make laws that protect marine mammals, which finally led to the global ban on commercial whaling in 1986.",
+   "grammar": [
+    {"tag": "help + (to) 동사원형", "note": "help 뒤에 원형 make 가 옴", "spans": ["helped make"]},
+    {"tag": "계속적 용법 관계대명사 which", "note": "콤마 뒤 which 가 앞 절 내용을 받아 부연", "spans": ["which"]}
+   ],
+   "vocab": [
+    {"word": "marine mammal", "meaning": "해양 포유류"},
+    {"word": "ban", "meaning": "금지"},
+    {"word": "commercial whaling", "meaning": "상업적 고래잡이"}
+   ],
+   "chunks": [
+    {"en": "His work helped make [[laws]] that protect marine mammals,", "ko": "그의 연구는 해양 포유류를 보호하는 [[법]]을 만드는 것을 도왔다"},
+    {"en": "which finally led to the global [[ban]]", "ko": "그리고 이는 결국 세계적인 [[금지]]로 이어졌다"},
+    {"en": "on commercial [[whaling]] in 1986.", "ko": "1986년 상업적 [[고래잡이]]에 대한"}
+   ],
+   "misreads": [
+    {"statement": "글쓴이는 Payne의 연구가 실제 법 제정에는 거의 영향을 주지 못했다고 평가한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "His work helped make laws that protect marine mammals", "why": "그의 연구가 법 제정을 '도왔다'고 했으므로 영향을 주지 못했다는 평가는 반대."}
+   ],
+   "mistips": []
+  }
+ ]
+}

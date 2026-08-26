@@ -1,0 +1,188 @@
+{
+ "item_no": "35",
+ "theme": "인공 지능(artificial intelligence) 개념의 역사적 발전 과정",
+ "overview": {
+  "theme_ko": "인공지능 개념의 역사적 발전",
+  "topic": "🔎 인간의 오랜 꿈에서 출발한 인공지능(AI) 개념의 역사",
+  "stance": "중립적",
+  "stance_reason": "신화·문학부터 Turing, McCarthy까지 사실을 시간 순으로 담담히 서술함",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "since ancient Greece → In 1950 → A few years later → Since then 으로 시간 순 전개",
+  "key_grammar": {
+   "point": "동명사 ─ 전치사의 목적어 (of + -ing)",
+   "source_sentence": "Since then, artificial intelligence has become the study and practice of \"making intelligent machines\" that are programmed to think like humans ─ endowed by their creators with reasoning and learning.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "전치사 of 뒤에는 명사가 와야 하는데, 동사를 명사처럼 쓰려면 [[동명사]](-ing)로 바꿔"},
+    {"chip": "핵심은", "text": "of \"making intelligent machines\" 에서 making 은 '만드는 [[것]]'이라는 동명사로 of 의 목적어야"},
+    {"chip": "비교하면", "text": "to make 가 아니라 making 인 이유는 바로 앞에 [[전치사]] of 가 있기 때문"},
+    {"chip": "한 걸음 더", "text": "the study and practice of making ~ 처럼 of 가 앞 명사와 뒤 [[동명사]]를 연결해 줘"}
+   ],
+   "example_analysis": "전치사 of 의 목적어 자리에 동사 make 대신 동명사 making 이 와서 '지능적인 기계를 만드는 것'이라는 명사구를 이룸",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? artificial intelligence has become the study and practice of ___ intelligent machines", "options": ["making", "make", "made"], "answer": "making", "from_passage": true},
+    {"kind": "객관식", "question": "밑줄 친 making 의 문법적 역할로 알맞은 것은?", "options": ["전치사 of 의 목적어인 동명사", "진행형을 만드는 현재분사", "명사를 뒤에서 꾸미는 분사"], "answer": "전치사 of 의 목적어인 동명사", "from_passage": true},
+    {"kind": "객관식", "question": "전치사 뒤 동사의 알맞은 형태는? They are interested in ___ new robots.", "options": ["creating", "create", "to create"], "answer": "creating", "from_passage": false},
+    {"kind": "영작", "question": "인공지능은 지능적인 기계를 만드는 것에 대한 연구와 실행이 되었다.", "words": ["artificial intelligence", "has become", "the study and practice", "of", "making", "intelligent machines"], "answer": "artificial intelligence has become the study and practice of making intelligent machines", "from_passage": true},
+    {"kind": "영작", "question": "그는 새로운 언어를 배우는 것에 관심이 있다.", "words": ["he", "is interested", "in", "learning", "a new language"], "answer": "he is interested in learning a new language", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "인공지능의 정의", "expressions": ["artificial intelligence", "making intelligent machines"], "variation": "막연한 꿈이 '인공지능'이라는 이름과 '지능적 기계 만들기'라는 실체로 구체화됨"},
+   {"label": "인간처럼 사고하기", "expressions": ["think and reason like humans", "think like humans"], "variation": "'인간처럼 사고·추론'이 기계 지능의 판단 기준이자 목표로 반복됨"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "인간은 오래전부터 [[지능적]] 기계를 꿈꿔 옴", "easy_example": "옛날 사람들도 '스스로 생각하는 인형'을 이야기 속에 그렸어"},
+   {"stage": "사례", "sentence_range": "2~3", "summary": "고대 [[신화]]와 문학 속 인공 생명체·사고 기계", "easy_example": "판도라나 프랑켄슈타인 같은 이야기가 대표적이야"},
+   {"stage": "전개", "sentence_range": "4~5", "summary": "Turing 의 [[테스트]], McCarthy 의 '인공지능' 명명", "easy_example": "'이 기계가 진짜 생각하나?'를 시험으로 재고 이름도 붙였어"},
+   {"stage": "결론", "sentence_range": "6", "summary": "AI 는 인간처럼 사고하는 [[기계]] 만들기의 연구·실행이 됨", "easy_example": "이제 AI 는 상상이 아니라 실제로 만드는 학문이 됐어"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Humans for centuries have dreamed of machines that could become intelligent and make human-like decisions.",
+   "grammar": [
+    {"tag": "현재완료(계속)", "note": "have + p.p. 로 과거부터 지금까지 이어진 상태를 나타냄", "spans": ["have dreamed"]},
+    {"tag": "주격 관계대명사 that", "note": "that 이하가 앞의 machines 를 수식", "spans": ["that"]},
+    {"tag": "조동사+원형 병렬", "note": "could 에 become 과 make 가 and 로 병렬 연결됨", "spans": ["become", "make"]}
+   ],
+   "vocab": [
+    {"word": "for centuries", "meaning": "수 세기 동안"},
+    {"word": "intelligent", "meaning": "지능적인, 총명한"},
+    {"word": "human-like", "meaning": "인간과 같은"},
+    {"word": "decision", "meaning": "결정, 판단"}
+   ],
+   "chunks": [
+    {"en": "Humans for centuries have dreamed of [[machines]]", "ko": "인간은 수 세기 동안 [[기계]]를 꿈꿔 왔다"},
+    {"en": "that could become [[intelligent]]", "ko": "[[지능적]]이게 될 수 있는"},
+    {"en": "and make [[human-like]] decisions.", "ko": "그리고 [[인간과 같은]] 결정을 내릴 수 있는"}
+   ],
+   "misreads": [
+    {"statement": "인간은 오래전부터 인간처럼 판단을 내리는 지능적 기계를 만들기를 꿈꿔 왔다.", "verdict": "O"},
+    {"statement": "필자는 지능적 기계에 대한 인간의 오랜 꿈이 헛된 공상에 불과하다고 비판한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "Humans for centuries have dreamed of machines that could become intelligent", "why": "필자는 비판이 아니라 오랜 역사적 사실로 담담히 서술하고 있음", "killer": false}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "There have been myths about robots, automatons, and artificial beings since ancient Greece (e.g., the myth of Pandora, who released ills upon the world).",
+   "grammar": [
+    {"tag": "현재완료(계속)", "note": "There have been ~ since: 고대부터 지금까지 존재해 옴", "spans": ["have been"]},
+    {"tag": "계속적 용법 who", "note": "콤마+who 가 앞의 Pandora 를 부연 설명", "spans": ["who"]}
+   ],
+   "vocab": [
+    {"word": "automaton", "meaning": "자동 장치, 자동인형"},
+    {"word": "artificial being", "meaning": "인공 생명체"},
+    {"word": "ancient", "meaning": "고대의"},
+    {"word": "ill", "meaning": "(명사) 나쁜 것, 해악, 불행"}
+   ],
+   "chunks": [
+    {"en": "There have been [[myths]] about robots, automatons, and artificial beings", "ko": "로봇, 자동 장치, 인공 생명체에 대한 [[신화]]가 존재해 왔다"},
+    {"en": "since [[ancient]] Greece", "ko": "[[고대]] 그리스 이래로"},
+    {"en": "(e.g., the myth of [[Pandora]],", "ko": "(예를 들어, [[판도라]]의 신화,"},
+    {"en": "who released [[ills]] upon the world).", "ko": "세상에 [[해악]]을 퍼뜨린)"}
+   ],
+   "misreads": [
+    {"statement": "관계사 who 가 이끄는 절은 '고대 그리스(ancient Greece)'를 부연 설명한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "the myth of Pandora, who released ills upon the world", "why": "who 는 바로 앞의 Pandora 를 수식하며 그리스를 가리키지 않음", "killer": false},
+    {"statement": "고대 그리스 시대부터 로봇이나 인공 생명체에 관한 이야기가 존재해 왔다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Likewise, literature throughout history has dreamed of creating human-like creatures and thinking machines (e.g., Mary Shelley's Frankenstein).",
+   "grammar": [
+    {"tag": "동명사(전치사 목적어)", "note": "of 뒤에 동명사 creating 이 옴(~을 창조하는 것)", "spans": ["creating"]},
+    {"tag": "현재분사 수식", "note": "thinking 이 machines 를 앞에서 수식(사고하는 기계)", "spans": ["thinking"]}
+   ],
+   "vocab": [
+    {"word": "likewise", "meaning": "마찬가지로"},
+    {"word": "literature", "meaning": "문학"},
+    {"word": "throughout history", "meaning": "역사를 통틀어"},
+    {"word": "creature", "meaning": "생명체, 창조물"}
+   ],
+   "chunks": [
+    {"en": "Likewise, literature throughout history has [[dreamed]]", "ko": "마찬가지로, 문학은 역사를 통틀어 [[꿈꿔]] 왔다"},
+    {"en": "of creating [[human-like]] creatures", "ko": "[[인간과 같은]] 생명체를 창조하는 것을"},
+    {"en": "and [[thinking]] machines", "ko": "그리고 [[사고하는]] 기계를"},
+    {"en": "(e.g., Mary Shelley's [[Frankenstein]]).", "ko": "(예를 들어, Mary Shelley 의 [[프랑켄슈타인]])"}
+   ],
+   "misreads": [
+    {"statement": "Mary Shelley actually built a thinking machine in real life.", "verdict": "X", "trap_type": "무관정보", "anchor": "literature throughout history has dreamed of creating human-like creatures", "why": "문학이 창조를 '상상'했을 뿐 실제로 기계를 만든 것은 아님", "english": true, "killer": false}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "In 1950, British mathematician Alan Turing asked whether machines could think and reason like humans and then developed the Turing test to measure a machine's intelligence and whether the machines can think autonomously.",
+   "grammar": [
+    {"tag": "명사절 whether", "note": "asked 의 목적어로 whether 절이 쓰임(~인지 아닌지)", "spans": ["whether"]},
+    {"tag": "과거동사 병렬", "note": "asked 와 developed 가 and then 으로 병렬됨", "spans": ["asked", "developed"]},
+    {"tag": "부사적 to부정사(목적)", "note": "to measure: ~을 측정하기 위해", "spans": ["to measure"]}
+   ],
+   "vocab": [
+    {"word": "mathematician", "meaning": "수학자"},
+    {"word": "reason", "meaning": "(동사) 추론하다"},
+    {"word": "measure", "meaning": "측정하다"},
+    {"word": "autonomously", "meaning": "자율적으로"}
+   ],
+   "chunks": [
+    {"en": "In 1950, British mathematician Alan Turing [[asked]]", "ko": "1950년, 영국의 수학자 Alan Turing 은 [[물었다]]"},
+    {"en": "whether machines could [[think]] and reason like humans", "ko": "기계가 인간처럼 [[사고]]하고 추론할 수 있는지를"},
+    {"en": "and then developed the Turing [[test]]", "ko": "그러고 나서 튜링 [[테스트]]를 개발했다"},
+    {"en": "to measure a machine's [[intelligence]]", "ko": "기계의 [[지능]]을 측정하기 위해"},
+    {"en": "and whether the machines can think [[autonomously]].", "ko": "그리고 기계가 [[자율적으로]] 사고할 수 있는지를"}
+   ],
+   "misreads": [
+    {"statement": "Turing 은 튜링 테스트를 먼저 개발한 다음에 기계가 인간처럼 사고할 수 있는지를 물었다.", "verdict": "X", "trap_type": "인과조건", "anchor": "asked whether machines could think and reason like humans and then developed the Turing test", "why": "물음이 먼저이고 테스트 개발이 그 뒤임(and then)", "killer": true}
+   ],
+   "mistips": ["and then developed 를 '개발하기 위해 물었다'는 [[인과]]로 읽으면 안 돼 ─ 물은 뒤에 그다음(then) 개발한 [[순서]]야"]
+  },
+  {
+   "id": 5,
+   "english": "A few years later, MIT professor John McCarthy coined \"artificial intelligence,\" replacing the previously used expression \"automata studies.\"",
+   "grammar": [
+    {"tag": "분사구문(동시상황)", "note": "replacing ~ : ~을 대체하면서(앞 절에 부수)", "spans": ["replacing"]},
+    {"tag": "과거분사 수식", "note": "previously used 가 expression 을 수식(이전에 사용된)", "spans": ["used"]}
+   ],
+   "vocab": [
+    {"word": "coin", "meaning": "(새 용어를) 만들어내다"},
+    {"word": "previously", "meaning": "이전에"},
+    {"word": "expression", "meaning": "표현, 용어"}
+   ],
+   "chunks": [
+    {"en": "A few years later, MIT professor John McCarthy [[coined]]", "ko": "몇 년 후, MIT 교수 John McCarthy 는 [[만들어냈다]]"},
+    {"en": "\"artificial [[intelligence]],\"", "ko": "'인공[[지능]]'이라는 표현을"},
+    {"en": "replacing the previously used [[expression]]", "ko": "이전에 사용된 [[표현]]을 대체하면서"},
+    {"en": "\"automata [[studies]].\"", "ko": "'자동 장치 [[연구]]'라는"}
+   ],
+   "misreads": [
+    {"statement": "'인공지능'이라는 용어를 처음 만들어낸 사람은 Alan Turing 이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "MIT professor John McCarthy coined \"artificial intelligence,\"", "why": "용어를 만든 사람은 Turing 이 아니라 McCarthy 임", "killer": false},
+    {"statement": "McCarthy 가 '인공지능'이라는 표현을 만든 것은 맞지만, 그것은 Turing 이 쓰던 표현을 대체하기 위해서였다.", "verdict": "△", "trap_type": "무관정보", "anchor": "replacing the previously used expression \"automata studies.\"", "why": "대체된 것은 Turing 의 표현이 아니라 '자동 장치 연구(automata studies)'임", "killer": false}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Since then, artificial intelligence has become the study and practice of \"making intelligent machines\" that are programmed to think like humans ─ endowed by their creators with reasoning and learning.",
+   "grammar": [
+    {"tag": "동명사(전치사 목적어)", "note": "of 뒤 동명사 making: ~을 만드는 것", "spans": ["making"]},
+    {"tag": "주격 관계대명사+수동태", "note": "that are programmed: machines 가 프로그램된", "spans": ["that", "are programmed"]},
+    {"tag": "과거분사 분사구문", "note": "endowed by ~: ~에 의해 부여받은(수동)", "spans": ["endowed"]}
+   ],
+   "vocab": [
+    {"word": "practice", "meaning": "실행, 실천"},
+    {"word": "be programmed to", "meaning": "~하도록 프로그램되다"},
+    {"word": "endow A with B", "meaning": "A에게 B를 부여하다"},
+    {"word": "reasoning", "meaning": "추론"}
+   ],
+   "chunks": [
+    {"en": "Since then, artificial intelligence has [[become]]", "ko": "그 이후로, 인공지능은 ~이 [[되었다]]"},
+    {"en": "the study and practice of \"[[making]] intelligent machines\"", "ko": "'지능적인 기계를 [[만드는]] 것'에 대한 연구와 실행이"},
+    {"en": "that are [[programmed]] to think like humans", "ko": "인간처럼 사고하도록 [[프로그램된]]"},
+    {"en": "─ endowed by their [[creators]]", "ko": "즉, 그들의 [[창조자]]에 의해 부여받은"},
+    {"en": "with reasoning and [[learning]].", "ko": "추론과 [[학습]] 능력을"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 their creators 의 their 는 인간(humans)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "endowed by their creators with reasoning and learning", "why": "their 는 능력을 부여받는 대상인 기계(machines)를 가리킴", "killer": false}
+   ],
+   "mistips": ["endowed 를 '기계가 부여한다'는 [[능동]]으로 읽으면 안 돼 ─ 기계가 창조자에게 능력을 [[부여받은]] 수동이야"]
+  }
+ ]
+}

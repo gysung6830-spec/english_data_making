@@ -1,0 +1,254 @@
+{
+ "item_no": "36",
+ "theme": "극심한 더위에 대처하는 사막 거북의 생존 전략",
+ "overview": {
+  "theme_ko": "사막 거북의 극한 더위 생존 전략",
+  "topic": "🔎 Death Valley 의 극한 더위를 피해 살아가는 사막 거북의 생존법",
+  "stance": "긍정적",
+  "stance_reason": "its highly sophisticated bladder, Incredibly 등 감탄적 표현으로 거북의 적응을 긍정적으로 서술함",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "극한 더위(문제)에 대해 회피·물 비축·방광 재흡수라는 해결책을 차례로 제시함",
+  "key_grammar": {
+   "point": "so + 형용사 ~ that ... (너무 …해서 ~하다) 결과 구문",
+   "source_sentence": "Tortoises become so terrified when people pick them up that they empty their bladders, losing their precious water reserves.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "so 뒤 형용사가 원인, that 뒤 문장이 [[결과]]야: '너무 …해서 ~하다'"},
+    {"chip": "핵심은", "text": "so terrified 와 that they empty ~ 를 [[한 덩어리]]로 묶어서 읽어야 뜻이 이어져"},
+    {"chip": "헷갈리면", "text": "여기 that 은 '~라는 것'이 아니라 [[결과]]를 이끄는 접속사야"},
+    {"chip": "한 걸음 더", "text": "when people pick them up 이 중간에 끼어 있어도 so ~ that 의 [[연결]]은 그대로 유지돼"}
+   ],
+   "example_analysis": "so 와 형용사 terrified 가 원인, that 절(they empty their bladders)이 결과로 연결되며 그 사이에 when 부사절이 삽입됨",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? Tortoises become ___ terrified that they empty their bladders.", "options": ["so", "such", "very"], "answer": "so", "from_passage": true},
+    {"kind": "객관식", "question": "밑줄 친 that 의 역할로 알맞은 것은?", "options": ["결과를 이끄는 접속사", "명사를 꾸미는 관계대명사", "앞 명사를 가리키는 지시대명사"], "answer": "결과를 이끄는 접속사", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 어법상 알맞은 문장은?", "options": ["It was so hot that we stayed inside.", "It was so a hot day that we stayed inside.", "It was such hot that we stayed inside."], "answer": "It was so hot that we stayed inside.", "from_passage": false},
+    {"kind": "영작", "question": "거북은 너무 겁에 질려서 자신의 방광을 비운다.", "words": ["tortoises", "become", "so terrified", "that", "they empty", "their bladders"], "answer": "tortoises become so terrified that they empty their bladders", "from_passage": true},
+    {"kind": "영작", "question": "그 상자는 너무 무거워서 나는 그것을 들 수 없었다.", "words": ["the box", "was", "so heavy", "that", "I couldn't", "lift it"], "answer": "the box was so heavy that I couldn't lift it", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "물 확보·비축", "expressions": ["stocks up on water", "stay supplied with water"], "variation": "물이 부족한 사막에서 물을 모으고 유지하는 것이 생존의 핵심으로 반복됨"},
+   {"label": "정교한 방광의 역할", "expressions": ["its highly sophisticated bladder", "acts as a holding tank", "reabsorb water"], "variation": "방광이 저장 탱크처럼 물을 되흡수해 오래 버티게 해 줌"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "거북의 더위 해결책은 그것을 [[피하는]] 것", "easy_example": "가장 쉬운 더위 대책은 아예 안 나가는 거야"},
+   {"stage": "전개", "sentence_range": "2~4", "summary": "동면하며 생의 대부분을 [[움직이지]] 않고, 비 온 뒤에만 나옴", "easy_example": "곰이 겨울잠 자듯 거북은 거의 굴 속에 있어"},
+   {"stage": "핵심", "sentence_range": "5~8", "summary": "물을 비축하고 [[방광]]으로 물을 재흡수해 1년도 버팀", "easy_example": "방광을 물통처럼 써서 저장해 둔 물을 되쓰는 거야"},
+   {"stage": "결론", "sentence_range": "9~10", "summary": "겁먹으면 [[방광]]을 비우므로 사람이 도와주면 안 됨", "easy_example": "놀란 거북을 들면 아까운 물을 다 쏟아 버려"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The desert tortoise has a simple solution for coping with Death Valley's extreme heat: It avoids it.",
+   "grammar": [
+    {"tag": "동명사(전치사 목적어)", "note": "for 뒤 동명사 coping: ~에 대처하는 것", "spans": ["coping"]},
+    {"tag": "대명사 지칭", "note": "It avoids it: 앞의 tortoise 와 heat 를 각각 받음", "spans": ["It", "it"]}
+   ],
+   "vocab": [
+    {"word": "tortoise", "meaning": "(육지) 거북"},
+    {"word": "cope with", "meaning": "~에 대처하다"},
+    {"word": "extreme", "meaning": "극심한, 극한의"}
+   ],
+   "chunks": [
+    {"en": "The desert tortoise has a simple [[solution]]", "ko": "사막 거북은 간단한 [[해결책]]을 가지고 있다"},
+    {"en": "for coping with Death Valley's extreme [[heat]]:", "ko": "Death Valley 의 극심한 [[더위]]에 대처하기 위한:"},
+    {"en": "It [[avoids]] it.", "ko": "그것은 그것을 [[피한다]]"}
+   ],
+   "misreads": [
+    {"statement": "사막 거북이 극심한 더위에 대처하는 방법은 그 더위를 피하는 것이다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "The slow-moving creature hibernates during the winter and stays in its tunnel for much of the summer, meaning that it spends more than 90 percent of its life immobile.",
+   "grammar": [
+    {"tag": "현재동사 병렬", "note": "hibernates 와 stays 가 and 로 병렬됨", "spans": ["hibernates", "stays"]},
+    {"tag": "분사구문(결과)", "note": "meaning that ~: 그 결과 ~을 의미하며", "spans": ["meaning"]}
+   ],
+   "vocab": [
+    {"word": "hibernate", "meaning": "동면하다, 겨울잠 자다"},
+    {"word": "tunnel", "meaning": "굴, 터널"},
+    {"word": "immobile", "meaning": "움직이지 않는"}
+   ],
+   "chunks": [
+    {"en": "The slow-moving creature [[hibernates]] during the winter", "ko": "그 느리게 움직이는 생명체는 겨울에 [[동면한다]]"},
+    {"en": "and stays in its [[tunnel]] for much of the summer,", "ko": "그리고 여름의 대부분을 그것의 [[굴]] 속에서 지낸다,"},
+    {"en": "meaning that it [[spends]] more than 90 percent", "ko": "이는 90퍼센트 이상을 [[보낸다]]는 뜻인데"},
+    {"en": "of its life [[immobile]].", "ko": "그 생의 [[움직이지 않는]] 채로"}
+   ],
+   "misreads": [
+    {"statement": "현재분사 meaning 은 문장의 주어 the slow-moving creature 를 앞에서 꾸며 준다.", "verdict": "X", "trap_type": "구조수식", "anchor": "meaning that it spends more than 90 percent of its life immobile", "why": "meaning 은 앞 문장 전체를 받아 '그 결과 ~을 의미하며'로 잇는 분사구문임", "killer": false},
+    {"statement": "이 거북은 한 해의 대부분을 굴 속에서 움직이지 않고 보낸다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "In fact, the tortoise usually only surfaces after a good rain.",
+   "grammar": [
+    {"tag": "빈도부사 usually", "note": "usually only: 보통 ~만", "spans": ["usually only"]}
+   ],
+   "vocab": [
+    {"word": "in fact", "meaning": "사실은"},
+    {"word": "surface", "meaning": "(동사) 지면 위로 나오다"}
+   ],
+   "chunks": [
+    {"en": "In fact, the tortoise usually only [[surfaces]]", "ko": "사실, 거북은 보통 ~할 때만 [[나온다]]"},
+    {"en": "after a good [[rain]].", "ko": "충분한 [[비]]가 온 후에"}
+   ],
+   "misreads": [
+    {"statement": "거북은 날씨와 상관없이 아무 때나 땅 위로 나온다.", "verdict": "X", "trap_type": "인과조건", "anchor": "usually only surfaces after a good rain", "why": "보통 충분한 비가 온 뒤에만 나온다는 조건이 있음", "killer": false}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "Then, it gets to work.",
+   "grammar": [
+    {"tag": "get to+명사", "note": "get to work: 일을 시작하다, 활동을 개시하다", "spans": ["gets to work"]}
+   ],
+   "vocab": [
+    {"word": "get to work", "meaning": "활동을 시작하다, 일에 착수하다"}
+   ],
+   "chunks": [
+    {"en": "Then, it gets to [[work]].", "ko": "그다음, 그것은 [[활동]]을 시작한다"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 it 은 Death Valley(죽음의 계곡)를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "Then, it gets to work", "why": "it 은 앞 문장의 the tortoise(거북)를 가리킴", "killer": false}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "The tortoise stocks up on water by eating plants and digging holes to collect rain.",
+   "grammar": [
+    {"tag": "by+동명사(수단)", "note": "by eating/digging: ~함으로써", "spans": ["by eating"]},
+    {"tag": "동명사 병렬", "note": "eating 과 digging 이 and 로 병렬됨", "spans": ["eating", "digging"]}
+   ],
+   "vocab": [
+    {"word": "stock up on", "meaning": "~을 비축하다"},
+    {"word": "dig", "meaning": "(구멍을) 파다"},
+    {"word": "collect", "meaning": "모으다"}
+   ],
+   "chunks": [
+    {"en": "The tortoise [[stocks]] up on water", "ko": "거북은 물을 [[비축한다]]"},
+    {"en": "by eating [[plants]]", "ko": "[[식물]]을 먹음으로써"},
+    {"en": "and digging [[holes]] to collect rain.", "ko": "그리고 빗물을 모으려 [[구멍]]을 팜으로써"}
+   ],
+   "misreads": [
+    {"statement": "거북은 식물을 먹고 빗물을 모을 구멍을 파서 물을 저장한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "But to stay supplied with water through its extended hibernation, the reptile relies on something else ─ its highly sophisticated bladder.",
+   "grammar": [
+    {"tag": "부사적 to부정사(목적)", "note": "to stay supplied: 공급된 채로 지내기 위해", "spans": ["to stay"]},
+    {"tag": "과거분사 보어", "note": "stay supplied: 공급된 상태로 유지되다", "spans": ["supplied"]}
+   ],
+   "vocab": [
+    {"word": "be supplied with", "meaning": "~을 공급받다"},
+    {"word": "extended", "meaning": "장기간의, 연장된"},
+    {"word": "reptile", "meaning": "파충류"},
+    {"word": "sophisticated", "meaning": "정교한"},
+    {"word": "bladder", "meaning": "방광"}
+   ],
+   "chunks": [
+    {"en": "But to stay [[supplied]] with water", "ko": "하지만 물을 [[공급받은]] 채로 지내기 위해"},
+    {"en": "through its extended [[hibernation]],", "ko": "그것의 장기간의 [[동면]] 동안,"},
+    {"en": "the reptile relies on [[something]] else", "ko": "이 파충류는 [[다른 것]]에 의존한다"},
+    {"en": "─ its highly sophisticated [[bladder]].", "ko": "즉, 그것의 매우 정교한 [[방광]]이다"}
+   ],
+   "misreads": [
+    {"statement": "거북이 오랜 동면 동안 수분을 유지하려고 의존하는 것은 두꺼운 등껍질이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the reptile relies on something else ─ its highly sophisticated bladder", "why": "의존하는 대상은 등껍질이 아니라 매우 정교한 방광(bladder)임", "killer": false},
+    {"statement": "거북은 긴 동면 동안 물을 유지하기 위해 자신의 방광에 의존한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Unlike most animals, the tortoise's bladder acts as a holding tank, allowing it to reabsorb water back into its body.",
+   "grammar": [
+    {"tag": "전치사 Unlike", "note": "Unlike ~: ~와 달리", "spans": ["Unlike"]},
+    {"tag": "분사구문(결과)", "note": "allowing it to ~: 그 결과 ~할 수 있게 하며", "spans": ["allowing"]},
+    {"tag": "allow+O+to부정사", "note": "allow it to reabsorb: 그것이 재흡수하게 하다", "spans": ["to reabsorb"]}
+   ],
+   "vocab": [
+    {"word": "holding tank", "meaning": "저장 탱크"},
+    {"word": "reabsorb", "meaning": "재흡수하다"}
+   ],
+   "chunks": [
+    {"en": "Unlike most animals, the tortoise's bladder [[acts]] as a holding tank,", "ko": "대부분의 동물과 달리, 거북의 방광은 저장 탱크 [[역할을 한다]],"},
+    {"en": "allowing it to [[reabsorb]] water back into its body.", "ko": "그것이 물을 몸속으로 다시 [[재흡수]]하게 하며"}
+   ],
+   "misreads": [
+    {"statement": "거북의 방광이 생존에 중요한 것은 맞지만, 그 이유는 물을 몸 밖으로 재빨리 배출해 열을 식히기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "allowing it to reabsorb water back into its body", "why": "방광은 물을 배출하는 게 아니라 몸속으로 다시 흡수해 저장함", "killer": false}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Incredibly, a desert tortoise can go a full year without taking in any freshwater at all.",
+   "grammar": [
+    {"tag": "without+동명사", "note": "without taking in: ~을 섭취하지 않고", "spans": ["without taking"]}
+   ],
+   "vocab": [
+    {"word": "incredibly", "meaning": "놀랍게도"},
+    {"word": "take in", "meaning": "섭취하다, 흡수하다"},
+    {"word": "freshwater", "meaning": "담수, 민물"}
+   ],
+   "chunks": [
+    {"en": "Incredibly, a desert tortoise can [[go]] a full year", "ko": "놀랍게도, 사막 거북은 꼬박 한 해를 [[지낼]] 수 있다"},
+    {"en": "without taking in any [[freshwater]] at all.", "ko": "[[담수]]를 전혀 섭취하지 않고"}
+   ],
+   "misreads": [
+    {"statement": "사막 거북은 담수를 전혀 마시지 않고도 1년을 버틸 수 있다.", "verdict": "O"},
+    {"statement": "A desert tortoise must drink freshwater every month.", "verdict": "X", "trap_type": "인과조건", "anchor": "can go a full year without taking in any freshwater at all", "why": "1년 내내 담수를 전혀 섭취하지 않고도 지낼 수 있음", "english": true, "killer": false}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "And because its bladder is so important to a tortoise's survival, park rangers often remind visitors not to stop and help the slow-movers across the road.",
+   "grammar": [
+    {"tag": "이유 접속사 because", "note": "because ~: 방광이 생존에 중요하기 때문에", "spans": ["because"]},
+    {"tag": "remind+O+to부정사", "note": "remind visitors not to stop: ~하지 말라고 상기시키다", "spans": ["not to stop"]}
+   ],
+   "vocab": [
+    {"word": "survival", "meaning": "생존"},
+    {"word": "park ranger", "meaning": "공원 순찰대원"},
+    {"word": "remind A not to", "meaning": "A에게 ~하지 말라고 상기시키다"},
+    {"word": "slow-mover", "meaning": "느리게 움직이는 것"}
+   ],
+   "chunks": [
+    {"en": "And because its bladder is so [[important]]", "ko": "그리고 그것의 방광이 매우 [[중요하기]] 때문에"},
+    {"en": "to a tortoise's [[survival]],", "ko": "거북의 [[생존]]에,"},
+    {"en": "park rangers often remind [[visitors]]", "ko": "공원 순찰대원들은 종종 [[방문객]]들에게 상기시킨다"},
+    {"en": "not to stop and help the [[slow-movers]] across the road.", "ko": "멈춰서 그 [[느림보]]들이 도로를 건너도록 돕지 말라고"}
+   ],
+   "misreads": [
+    {"statement": "공원 순찰대원들은 거북이 도로를 빨리 건너도록 도로에 먹이를 놓아 둔다.", "verdict": "X", "trap_type": "무관정보", "anchor": "remind visitors not to stop and help the slow-movers across the road", "why": "본문엔 먹이 얘기가 없고 방문객에게 돕지 말라고 상기시킬 뿐임", "killer": false},
+    {"statement": "필자는 방문객이 거북을 도로 건너편으로 옮겨 주는 것을 권장한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "remind visitors not to stop and help the slow-movers across the road", "why": "필자는 오히려 돕지 말라(not to stop and help)는 입장을 전함", "killer": false}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "Tortoises become so terrified when people pick them up that they empty their bladders, losing their precious water reserves.",
+   "grammar": [
+    {"tag": "so ~ that 결과", "note": "so terrified ~ that ...: 너무 겁을 먹어서 ~하다", "spans": ["so", "that"]},
+    {"tag": "분사구문(결과)", "note": "losing ~: 그 결과 ~을 잃으며", "spans": ["losing"]}
+   ],
+   "vocab": [
+    {"word": "terrified", "meaning": "겁에 질린"},
+    {"word": "pick up", "meaning": "들어 올리다"},
+    {"word": "empty", "meaning": "(동사) 비우다"},
+    {"word": "reserve", "meaning": "비축(량), 저장"}
+   ],
+   "chunks": [
+    {"en": "Tortoises become so [[terrified]]", "ko": "거북은 너무 [[겁에 질려서]]"},
+    {"en": "when people [[pick]] them up", "ko": "사람들이 그들을 [[들어 올릴]] 때"},
+    {"en": "that they [[empty]] their bladders,", "ko": "그들의 방광을 [[비워]] 버려서,"},
+    {"en": "losing their precious water [[reserves]].", "ko": "소중한 물 [[비축량]]을 잃는다"}
+   ],
+   "misreads": [
+    {"statement": "거북은 사람들이 들어 올릴 때 안심하여 방광을 비운다.", "verdict": "X", "trap_type": "인과조건", "anchor": "become so terrified when people pick them up that they empty their bladders", "why": "안심이 아니라 너무 겁에 질려서(so terrified) 방광을 비움", "killer": true}
+   ],
+   "mistips": ["so terrified ~ that 을 '너무 ~한'에서 끊으면 안 돼 ─ [[so]] ~ [[that]] 을 묶어 '너무 겁나서 …하다'로 읽어"]
+  }
+ ]
+}

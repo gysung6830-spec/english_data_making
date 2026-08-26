@@ -1,0 +1,227 @@
+{
+ "item_no": "39",
+ "theme": "도덕적으로 선한 사람을 판단하는 기준으로서의 의도와 결과",
+ "overview": {
+  "theme_ko": "도덕적으로 선한 사람의 판단 기준",
+  "topic": "🔎 도덕적으로 선한 사람을 판단하는 기준으로서의 의도와 결과",
+  "stance": "중립적",
+  "stance_reason": "의도(intentions and motives)와 결과(actual consequences)를 모두 판단 기준으로 균형 있게 제시함",
+  "structure": "통념→반박(반전)",
+  "structure_reason": "의도가 중요하다는 논의 뒤 'But actual consequences are important'로 결과도 필요하다고 반박함",
+  "key_grammar": {
+   "point": "It is ~ that 강조구문 (it-cleft: 강조할 말을 It is 와 that 사이에 둠)",
+   "source_sentence": "Although this kind of situation generally occurs only in slapstick movies, it is worth mentioning to avoid the false impression that it is the actual consequences of a person's actions that count toward her being judged morally good or bad.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "It is 와 that 사이에 강조할 말을 넣어 '~인 것은 바로 …이다'로 [[강조]]해"},
+    {"chip": "핵심은", "text": "여기선 the actual consequences 를 It is ~ that 로 감싸 [[결과]]를 강조하고 있어"},
+    {"chip": "헷갈리면", "text": "이 that 은 관계대명사나 명사절이 아니라 강조구문을 [[완성]]하는 that 이야"},
+    {"chip": "한 걸음 더", "text": "It is 와 that 을 지워도 문장이 [[성립]]하면 강조구문이라고 보면 돼"}
+   ],
+   "example_analysis": "It is 와 that 사이에 the actual consequences of a person's actions 를 넣어 그 부분을 강조함",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 친 It is ~ that 강조구문이 강조하는 것은?", "options": ["the actual consequences of a person's actions", "this kind of situation", "slapstick movies"], "answer": "the actual consequences of a person's actions", "from_passage": true},
+    {"kind": "객관식", "question": "밑줄 친 that 의 쓰임으로 알맞은 것은? it is the actual consequences ... that count", "options": ["강조구문을 이루는 that", "선행사를 꾸미는 관계대명사", "목적을 나타내는 부사절 접속사"], "answer": "강조구문을 이루는 that", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 It is ~ that 강조구문인 것은?", "options": ["It was Tom that broke the window.", "It is important that you study hard.", "It is raining outside now."], "answer": "It was Tom that broke the window.", "from_passage": false},
+    {"kind": "영작", "question": "내가 어제 만난 사람은 바로 그녀였다.", "words": ["it was", "her", "that", "I met", "yesterday"], "answer": "it was her that I met yesterday", "from_passage": false},
+    {"kind": "영작", "question": "하지만 실제 결과는 중요하다.", "words": ["but", "actual consequences", "are", "important"], "answer": "but actual consequences are important", "from_passage": true}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "의도·동기의 중요성", "expressions": ["her intentions and motives", "must intend to do morally good actions"], "variation": "선한 사람은 선을 행하려는 의도를 가져야 한다는 점이 반복됨"},
+   {"label": "결과도 필요함", "expressions": ["actual consequences are important", "some results are necessary"], "variation": "의도만이 아니라 실제 결과도 판단에 필요하다는 주장이 이어짐"}
+  ],
+  "flow_blocks": [
+   {"stage": "정의", "sentence_range": "1", "summary": "선한 사람은 나쁜 행동은 덜, 선한 [[행동]]은 더 자주 하는 사람", "easy_example": "평소 착한 일을 더 많이 하는 사람을 떠올려 봐"},
+   {"stage": "전개", "sentence_range": "2~3", "summary": "판단엔 행동뿐 아니라 [[의도]]와 동기도 관련됨", "easy_example": "같은 행동도 마음가짐에 따라 다르게 보이지"},
+   {"stage": "예외", "sentence_range": "4~5", "summary": "의도 없이 우연히 해를 막은 사람은 선하다 볼 수 없고, [[결과]]만 중시하는 인상은 잘못됨", "easy_example": "실수로 좋은 결과가 나도 착하다곤 못 하잖아"},
+   {"stage": "반전", "sentence_range": "6~7", "summary": "하지만 실제 [[결과]]도 중요하며, 늘 시도만 하고 못 이루면 선하다 안 봄", "easy_example": "돕겠다 말만 하고 못 도우면 착하다 하긴 어렵지"},
+   {"stage": "결론", "sentence_range": "8", "summary": "칸트와 달리 선하다 여겨지려면 어떤 [[결과]]가 필요함", "easy_example": "마음만이 아니라 실제로 이뤄 내야 인정받는 거야"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "A morally good person is one who does morally bad actions significantly less often than most and does morally good ones significantly more often than most.",
+   "grammar": [
+    {"tag": "주격 관계대명사 who", "note": "one who does ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "비교 less/more often than", "note": "less often than most: 대부분보다 덜 자주", "spans": ["less often than most"]}
+   ],
+   "vocab": [
+    {"word": "morally", "meaning": "도덕적으로"},
+    {"word": "significantly", "meaning": "상당히, 훨씬"},
+    {"word": "most", "meaning": "대부분의 사람들"}
+   ],
+   "chunks": [
+    {"en": "A morally good person is [[one]] who", "ko": "도덕적으로 선한 [[사람]]은 ~하는 사람이다"},
+    {"en": "does morally bad actions significantly [[less]] often than most", "ko": "대부분보다 나쁜 행동을 훨씬 [[덜]] 자주 하고"},
+    {"en": "and does morally good ones significantly [[more]] often than most.", "ko": "선한 행동은 훨씬 [[더]] 자주 하는"}
+   ],
+   "misreads": [
+    {"statement": "도덕적으로 선한 사람은 나쁜 행동은 남보다 덜, 선한 행동은 남보다 더 자주 하는 사람이다.", "verdict": "O"},
+    {"statement": "도덕적으로 선한 사람은 대부분의 사람들이 나쁜 행동을 덜 하도록 만드는 사람이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "does morally bad actions significantly less often than most", "why": "그가 직접 나쁜 행동을 덜 하는 것이지 남이 덜 하게 만드는 게 아님", "killer": false}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "In judging a person not only her actions but also her intentions and motives are relevant.",
+   "grammar": [
+    {"tag": "상관접속사 not only A but also B", "note": "not only her actions but also her intentions ~: A뿐 아니라 B도", "spans": ["not only", "but also"]},
+    {"tag": "동명사(전치사 목적어)", "note": "In judging: 판단하는 데 있어", "spans": ["judging"]}
+   ],
+   "vocab": [
+    {"word": "judge", "meaning": "판단하다, 평가하다"},
+    {"word": "intention", "meaning": "의도"},
+    {"word": "motive", "meaning": "동기"},
+    {"word": "relevant", "meaning": "관련 있는"}
+   ],
+   "chunks": [
+    {"en": "In [[judging]] a person", "ko": "사람을 [[판단할]] 때"},
+    {"en": "not only her [[actions]]", "ko": "그녀의 [[행동]]뿐만 아니라"},
+    {"en": "but also her intentions and [[motives]]", "ko": "그녀의 의도와 [[동기]]도"},
+    {"en": "are [[relevant]].", "ko": "[[관련이 있다]]"}
+   ],
+   "misreads": [
+    {"statement": "사람을 판단할 때 관련 있는 것은 행동뿐이며 의도와 동기는 판단과 무관하다.", "verdict": "X", "trap_type": "무관정보", "anchor": "not only her actions but also her intentions and motives are relevant", "why": "행동뿐 아니라 의도와 동기도 판단에 관련됨(relevant), 무관하지 않음", "killer": false}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "A morally good person must intend to do morally good actions and intend to avoid morally bad ones.",
+   "grammar": [
+    {"tag": "조동사 must", "note": "must intend: 반드시 의도해야 한다", "spans": ["must intend"]},
+    {"tag": "to부정사 목적어", "note": "intend to do/avoid: ~하려고/피하려고 의도하다", "spans": ["to do"]}
+   ],
+   "vocab": [
+    {"word": "intend", "meaning": "의도하다, ~하려고 하다"},
+    {"word": "avoid", "meaning": "피하다"}
+   ],
+   "chunks": [
+    {"en": "A morally good person must [[intend]] to do", "ko": "도덕적으로 선한 사람은 반드시 ~하려고 [[의도해야]] 한다"},
+    {"en": "morally good [[actions]]", "ko": "도덕적으로 선한 [[행동]]을 하려고"},
+    {"en": "and intend to [[avoid]] morally bad ones.", "ko": "그리고 나쁜 행동은 [[피하려고]] 의도해야 한다"}
+   ],
+   "misreads": [
+    {"statement": "선한 사람은 선한 행동을 하려 하고 나쁜 행동은 피하려고 의도해야 한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "A person who unintentionally prevents harm to others and does not harm them simply because things do not turn out as she intends is not morally good.",
+   "grammar": [
+    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "이유 접속사 because", "note": "because things do not turn out ~: ~ 때문에", "spans": ["because"]},
+    {"tag": "turn out(결과)", "note": "turn out as she intends: 그녀가 의도한 대로 되다", "spans": ["turn out"]}
+   ],
+   "vocab": [
+    {"word": "unintentionally", "meaning": "의도치 않게"},
+    {"word": "prevent", "meaning": "막다, 예방하다"},
+    {"word": "harm", "meaning": "해; 해치다"},
+    {"word": "turn out", "meaning": "(결과가) ~로 되다, 판명되다"}
+   ],
+   "chunks": [
+    {"en": "A person who [[unintentionally]] prevents harm to others", "ko": "다른 사람에 대한 해를 [[의도치 않게]] 막고"},
+    {"en": "and does not [[harm]] them", "ko": "그들을 [[해치지]] 않는 사람은"},
+    {"en": "simply because things do not [[turn]] out", "ko": "단지 일이 [[되어가지]] 않기 때문에"},
+    {"en": "as she [[intends]]", "ko": "그녀가 [[의도한]] 대로"},
+    {"en": "is not morally [[good]].", "ko": "도덕적으로 [[선하지]] 않다"}
+   ],
+   "misreads": [
+    {"statement": "의도치 않게 남에게 해를 끼치지 않은 사람은 그 자체로 도덕적으로 선하다.", "verdict": "X", "trap_type": "인과조건", "anchor": "is not morally good", "why": "의도 없이 우연히 해를 막은 사람은 도덕적으로 선하지 않다고 함", "killer": true},
+    {"statement": "is not morally good 의 주어는 바로 앞의 things 여서, 일이 잘 안 풀린 것이 부도덕하다는 뜻이다.", "verdict": "X", "trap_type": "구조수식", "anchor": "simply because things do not turn out as she intends is not morally good", "why": "'is not morally good'의 주어는 문장 맨 앞의 A person 이고 because 절은 삽입된 이유임", "killer": false}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Although this kind of situation generally occurs only in slapstick movies, it is worth mentioning to avoid the false impression that it is the actual consequences of a person's actions that count toward her being judged morally good or bad.",
+   "grammar": [
+    {"tag": "양보 접속사 Although", "note": "Although ~: 비록 ~이지만", "spans": ["Although"]},
+    {"tag": "It is ~ that 강조구문", "note": "it is the actual consequences ~ that count: 결과를 강조", "spans": ["it is the actual consequences"]},
+    {"tag": "count toward", "note": "count toward her being judged: ~에 중요하게 작용하다", "spans": ["count toward"]}
+   ],
+   "vocab": [
+    {"word": "occur", "meaning": "일어나다, 발생하다"},
+    {"word": "impression", "meaning": "인상"},
+    {"word": "consequence", "meaning": "결과"},
+    {"word": "count", "meaning": "중요하다, 중요하게 작용하다"}
+   ],
+   "chunks": [
+    {"en": "Although this kind of [[situation]] generally occurs only in slapstick movies,", "ko": "비록 이런 종류의 [[상황]]은 보통 슬랩스틱 영화에서만 일어나지만,"},
+    {"en": "it is worth [[mentioning]]", "ko": "그것은 [[언급할]] 가치가 있다"},
+    {"en": "to avoid the false [[impression]]", "ko": "잘못된 [[인상]]을 피하기 위해"},
+    {"en": "that it is the actual [[consequences]] of a person's actions", "ko": "즉 한 사람의 행동의 실제 [[결과]]가"},
+    {"en": "that count toward her being [[judged]] morally good or bad.", "ko": "그녀가 도덕적으로 선하거나 나쁘다고 [[판단되는]] 데 중요하다는"}
+   ],
+   "misreads": [
+    {"statement": "필자는 사람의 도덕성 판단에서 중요한 것은 의도가 아니라 오직 행동의 실제 결과라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "the false impression that it is the actual consequences of a person's actions that count", "why": "필자는 그것을 '잘못된 인상(false impression)'이라 하며 결과만 중시하는 관점을 부정함", "killer": false}
+   ],
+   "mistips": ["it is ~ that 을 '그것이 ~하는 것'으로 읽으면 안 돼 ─ It is 와 that 사이의 [[결과]]를 강조하는 구문이야"]
+  },
+  {
+   "id": 6,
+   "english": "But actual consequences are important.",
+   "grammar": [
+    {"tag": "역접 But", "note": "But ~: 하지만", "spans": ["But"]},
+    {"tag": "주어+be+형용사", "note": "consequences are important: 결과는 중요하다", "spans": ["are important"]}
+   ],
+   "vocab": [
+    {"word": "actual", "meaning": "실제의"},
+    {"word": "consequence", "meaning": "결과"},
+    {"word": "important", "meaning": "중요한"}
+   ],
+   "chunks": [
+    {"en": "But actual [[consequences]]", "ko": "하지만 실제 [[결과]]는"},
+    {"en": "are [[important]].", "ko": "[[중요하다]]"}
+   ],
+   "misreads": [
+    {"statement": "하지만 실제 결과도 중요하다.", "verdict": "O"},
+    {"statement": "Only intentions, not results, decide whether a person is morally good.", "verdict": "X", "trap_type": "인과조건", "anchor": "But actual consequences are important", "why": "실제 결과도 중요하므로 의도만으로 도덕성이 결정된다는 것은 틀림", "english": true, "killer": false}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "A person who always tries to prevent harm but never does, is not generally thought of as morally good.",
+   "grammar": [
+    {"tag": "주격 관계대명사 who", "note": "A person who ~: ~하는 사람", "spans": ["who"]},
+    {"tag": "수동태 be thought of as", "note": "is not thought of as ~: ~로 여겨지지 않다", "spans": ["thought of as"]}
+   ],
+   "vocab": [
+    {"word": "prevent harm", "meaning": "해를 막다"},
+    {"word": "generally", "meaning": "일반적으로"},
+    {"word": "be thought of as", "meaning": "~로 여겨지다"}
+   ],
+   "chunks": [
+    {"en": "A person who always [[tries]] to prevent harm", "ko": "항상 해를 막으려 [[노력하지만]]"},
+    {"en": "but never [[does]],", "ko": "결코 [[해내지]] 못하는 사람은,"},
+    {"en": "is not generally [[thought]] of as morally good.", "ko": "일반적으로 도덕적으로 선하다고 [[여겨지지]] 않는다"}
+   ],
+   "misreads": [
+    {"statement": "항상 해를 막으려 하지만 결코 이루지 못하는 사람이 선하다고 여겨지지 않는 것은 맞지만, 그것은 그가 의도조차 없기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "always tries to prevent harm but never does", "why": "그는 늘 시도(의도)는 하지만 결과를 못 냄 ─ 의도가 없어서가 아니라 결과가 없어서임", "killer": false}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Of such a person, it may be said that she means well; but, contrary to Kant, some results are necessary before she is regarded as morally good.",
+   "grammar": [
+    {"tag": "가주어 it + that절", "note": "it may be said that ~: ~라고 말할 수 있다", "spans": ["it may be said"]},
+    {"tag": "전치사구 contrary to", "note": "contrary to Kant: 칸트와는 달리", "spans": ["contrary to"]},
+    {"tag": "시간 접속사 before", "note": "before she is regarded ~: ~여겨지기 전에", "spans": ["before"]}
+   ],
+   "vocab": [
+    {"word": "mean well", "meaning": "선의를 갖다, 좋은 뜻으로 하다"},
+    {"word": "contrary to", "meaning": "~와 반대로, ~와 달리"},
+    {"word": "result", "meaning": "결과"},
+    {"word": "be regarded as", "meaning": "~로 간주되다"}
+   ],
+   "chunks": [
+    {"en": "Of such a person, it may be [[said]]", "ko": "그런 사람에 대해 ~라고 말할 수 [[있다]]"},
+    {"en": "that she means [[well]];", "ko": "그녀가 [[선의를 품고]] 있다고;"},
+    {"en": "but, contrary to [[Kant]],", "ko": "하지만, [[칸트]]와는 달리,"},
+    {"en": "some [[results]] are necessary", "ko": "어떤 [[결과]]가 필요하다"},
+    {"en": "before she is regarded as morally [[good]].", "ko": "그녀가 도덕적으로 [[선하다]]고 여겨지기 전에"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 she 는 칸트(Kant)를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "before she is regarded as morally good", "why": "she 는 앞의 such a person(그런 사람)을 가리키며 칸트가 아님", "killer": false}
+   ]
+  }
+ ]
+}

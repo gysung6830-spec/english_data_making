@@ -1,0 +1,202 @@
+{
+ "item_no": "33",
+ "theme": "목적에 따라 상대적으로 달라지는 불확실성의 중요성",
+ "overview": {
+  "theme_ko": "목적에 따라 상대적인 불확실성의 중요성",
+  "topic": "🔎 같은 측정값이라도 그것을 무엇에 쓰느냐에 따라 불확실성(정밀함)의 중요성이 달라진다",
+  "stance": "중립적",
+  "stance_reason": "'the significance of uncertainty is relative', 'depends on what I'm intending to do'로 객관적으로 설명함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "불확실성이 상대적이라는 주장을 지구-태양 거리와 위성 궤도 사례로 뒷받침함",
+  "key_grammar": {
+   "point": "명사절 주어 whether",
+   "source_sentence": "Whether or not the quoted number is \"precise\" therefore depends on what I'm intending to do with it.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "문장 맨 앞의 whether절 전체가 하나의 [[주어]] 덩어리예요('~인지 아닌지는')."},
+    {"chip": "핵심", "text": "주어로 쓰인 whether절은 단수 취급이라 뒤에 [[단수동사]](depends)가 와요."},
+    {"chip": "대조", "text": "if절은 보통 주어로 못 쓰고, 주어 자리에는 [[whether]]를 써요."},
+    {"chip": "해석 팁", "text": "긴 whether절을 통째로 묶어 '~인지 아닌지는'으로 끊고, 동사 [[depends]]를 찾아요."}
+   ],
+   "example_analysis": "Whether or not ~ precise까지가 주어절이고, 문장의 본동사는 단수 depends이다.",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 'Whether or not the quoted number is precise'의 문장 내 역할은?", "options": ["주어 역할의 명사절", "조건을 나타내는 부사절", "depends의 목적어절"], "answer": "주어 역할의 명사절", "from_passage": true},
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? '( ) it is true matters a lot.'", "options": ["Whether", "If", "That not"], "answer": "Whether", "from_passage": false},
+    {"kind": "객관식", "question": "'significant digits'의 의미로 알맞은 것은?", "options": ["유효 숫자", "큰 숫자", "소수점 자리"], "answer": "유효 숫자", "from_passage": true},
+    {"kind": "영작", "question": "따라서 인용된 숫자가 '정확한지' 아닌지는 내가 그것으로 무엇을 하려고 하느냐에 달려 있다.", "words": ["Whether or not", "the quoted number", "is", "\"precise\"", "therefore", "depends on", "what", "I'm intending to do", "with it"], "answer": "Whether or not the quoted number is \"precise\" therefore depends on what I'm intending to do with it.", "from_passage": true},
+    {"kind": "영작", "question": "그것이 안전한지 아닌지는 네가 그것을 어떻게 쓰는지에 달려 있다.", "words": ["Whether or not", "it", "is safe", "depends on", "how", "you use it"], "answer": "Whether or not it is safe depends on how you use it.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "불확실성은 상대적", "expressions": ["the significance of uncertainty is relative", "depends on what I'm intending to do with it"], "variation": "상대적이라는 주장이 '목적에 달려 있다'로 구체화됨"},
+   {"label": "목적에 따른 정밀도 요구", "expressions": ["the number quoted here is fine", "know distances more accurately"], "variation": "같은 값이 목적에 따라 '충분함'과 '부족함'으로 갈림"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "불확실성의 중요성이 [[상대적]]이라 이해하기 어려움", "easy_example": "같은 5분도 버스 탈 땐 길고 잠잘 땐 짧게 느껴짐"},
+   {"stage": "예시", "sentence_range": "2", "summary": "지구-태양 [[거리]] 값을 예로 제시", "easy_example": "'키가 173.4cm'처럼 구체적 숫자를 하나 꺼내 봄"},
+   {"stage": "전개", "sentence_range": "3", "summary": "유효숫자가 많아 [[정밀]]해 보임", "easy_example": "소수점을 길게 적으면 왠지 더 정확해 보이는 느낌"},
+   {"stage": "반전", "sentence_range": "4", "summary": "다음 자리가 불확실하면 오차가 도시 간 [[거리]]보다 큼", "easy_example": "'대충 서울 어딘가'라는 오차가 사실 도시 하나 크기"},
+   {"stage": "일반화", "sentence_range": "5", "summary": "정밀함의 판단은 [[목적]]에 따라 달라짐", "easy_example": "요리엔 '한 스푼'이면 되지만 실험엔 g 단위가 필요"},
+   {"stage": "사례", "sentence_range": "6~7", "summary": "일출 시각엔 충분하나 위성 궤도엔 더 [[정확]]히 필요", "easy_example": "동네 약속엔 지도 대충, 우주선 발사엔 초정밀 좌표"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "One of the things that makes uncertainty difficult for members of the public to appreciate is that the significance of uncertainty is relative.",
+   "grammar": [
+    {"tag": "관계대명사 that", "note": "the things 수식", "spans": ["that"]},
+    {"tag": "주어-동사 수일치 One ~ is", "note": "단수 주어 + is", "spans": ["is"]}
+   ],
+   "vocab": [
+    {"word": "uncertainty", "meaning": "불확실성"},
+    {"word": "the public", "meaning": "대중, 일반인"},
+    {"word": "appreciate", "meaning": "이해하다, 인식하다"},
+    {"word": "significance", "meaning": "중요성"},
+    {"word": "relative", "meaning": "상대적인"}
+   ],
+   "chunks": [
+    {"en": "One of the [[things]]", "ko": "여러 [[것]] 중 하나는"},
+    {"en": "that makes uncertainty [[difficult]]", "ko": "불확실성을 [[어렵게]] 만드는"},
+    {"en": "for members of the [[public]] to appreciate", "ko": "대중이 [[이해하도록]]"},
+    {"en": "is that the [[significance]] of uncertainty", "ko": "불확실성의 [[중요성]]이"},
+    {"en": "is [[relative]].", "ko": "[[상대적]]이라는 것이다."}
+   ],
+   "misreads": [
+    {"statement": "불확실성의 중요성은 누구에게나 절대적으로 정해져 있다.", "verdict": "X", "trap_type": "필자관점", "anchor": "the significance of uncertainty is relative", "why": "필자는 불확실성의 중요성이 절대적이 아니라 상대적(relative)이라고 본다."},
+    {"statement": "The significance of uncertainty is relative.", "verdict": "O", "english": true}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Take, for example, the distance between Earth and the sun: 1.49597 x 10⁸ km, as measured at one point during the year.",
+   "grammar": [
+    {"tag": "삽입어구 for example", "note": "예시 삽입", "spans": ["for example"]},
+    {"tag": "과거분사 as measured", "note": "~로 측정된", "spans": ["as measured"]}
+   ],
+   "vocab": [
+    {"word": "distance", "meaning": "거리"},
+    {"word": "measure", "meaning": "측정하다"},
+    {"word": "at one point", "meaning": "한 시점에"}
+   ],
+   "chunks": [
+    {"en": "Take, for [[example]],", "ko": "[[예를 들어]],"},
+    {"en": "the [[distance]] between Earth and the sun: 1.49597 x 10⁸ km,", "ko": "지구와 태양 사이의 [[거리]]: 1.49597 x 10⁸ km,"},
+    {"en": "as measured at one [[point]] during the year.", "ko": "연중 한 [[지점]]에서 측정된."}
+   ],
+   "misreads": [
+    {"statement": "지구와 태양 사이 거리는 연중 한 시점에 측정되어 약 1.49597 x 10⁸ km이다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "This seems relatively precise; after all, using six significant digits means I know the distance to an accuracy of one part in a million or so.",
+   "grammar": [
+    {"tag": "동명사 주어 using", "note": "using ~ 가 주어", "spans": ["using"]},
+    {"tag": "목적어절 means (that)", "note": "that 생략된 명사절", "spans": ["means"]}
+   ],
+   "vocab": [
+    {"word": "relatively", "meaning": "상대적으로"},
+    {"word": "precise", "meaning": "정확한, 정밀한"},
+    {"word": "significant digit", "meaning": "유효 숫자"},
+    {"word": "accuracy", "meaning": "정확도"}
+   ],
+   "chunks": [
+    {"en": "This seems relatively [[precise]];", "ko": "이것은 상대적으로 [[정확해]] 보이는데;"},
+    {"en": "after all, using six significant [[digits]]", "ko": "결국, 여섯 자리의 유효 [[숫자]]를 쓴다는 것은"},
+    {"en": "means I know the [[distance]]", "ko": "그 [[거리]]를 안다는 뜻이다"},
+    {"en": "to an accuracy of one [[part]] in a million or so.", "ko": "백만 분의 일 정도의 [[정확도]]로."}
+   ],
+   "misreads": [
+    {"statement": "여섯 자리 유효숫자는 백만 분의 일 정확도를 뜻하므로, 이 값은 어떤 목적에도 충분히 정밀하다.", "verdict": "△", "trap_type": "인과조건", "anchor": "depends on what I'm intending to do with it", "integrative": true, "why": "정밀해 보인다는 건 맞지만, 그 정밀함의 충분함은 목적에 따라 달라져 어떤 목적에도 충분한 건 아니다."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "However, if the next digit is uncertain, that means the uncertainty in knowing the precise Earth-sun distance is larger than the distance between New York and Chicago",
+   "grammar": [
+    {"tag": "조건 부사절 if", "note": "만약 ~라면", "spans": ["if"]},
+    {"tag": "비교급 larger than", "note": "~보다 더 큰", "spans": ["larger than"]}
+   ],
+   "vocab": [
+    {"word": "digit", "meaning": "자릿수, 숫자"},
+    {"word": "uncertain", "meaning": "불확실한"},
+    {"word": "precise", "meaning": "정확한"}
+   ],
+   "chunks": [
+    {"en": "However, if the next [[digit]] is uncertain,", "ko": "하지만, 만약 다음 [[숫자]]가 불확실하다면,"},
+    {"en": "that means the [[uncertainty]]", "ko": "그것은 그 [[불확실성]]이"},
+    {"en": "in knowing the precise Earth-sun [[distance]]", "ko": "정확한 지구-태양 [[거리]]를 아는 데 있어서의"},
+    {"en": "is larger than the [[distance]]", "ko": "그 [[거리]]보다 더 크다는 것을 뜻한다"},
+    {"en": "between New York and [[Chicago]]", "ko": "뉴욕과 [[시카고]] 사이의"}
+   ],
+   "misreads": [
+    {"statement": "다음 자릿수가 불확실하면, 그 불확실성은 뉴욕과 시카고 사이 거리보다 오히려 더 작다.", "verdict": "X", "trap_type": "구조수식", "anchor": "is larger than the distance between New York and Chicago", "killer": true, "why": "그 불확실성은 두 도시 사이 거리보다 더 '작은' 게 아니라 더 '크다(larger)'."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Whether or not the quoted number is \"precise\" therefore depends on what I'm intending to do with it.",
+   "grammar": [
+    {"tag": "명사절 주어 whether", "note": "~인지 아닌지가 주어", "spans": ["Whether or not"]},
+    {"tag": "관계대명사 what", "note": "선행사 포함, on의 목적어", "spans": ["what"]}
+   ],
+   "vocab": [
+    {"word": "quoted number", "meaning": "인용된 숫자"},
+    {"word": "depend on", "meaning": "~에 달려 있다"},
+    {"word": "intend to", "meaning": "~하려고 하다"}
+   ],
+   "chunks": [
+    {"en": "Whether or not the quoted [[number]]", "ko": "인용된 [[숫자]]가"},
+    {"en": "is \"precise\" therefore [[depends]] on", "ko": "'정확한지' 아닌지는 따라서 …에 [[달려 있다]]"},
+    {"en": "what I'm [[intending]] to do with it.", "ko": "내가 그것으로 무엇을 [[하려는지]]에."}
+   ],
+   "misreads": [
+    {"statement": "인용된 숫자가 정확한지 아닌지는 내가 그것으로 무엇을 하려고 하는지에 달려 있다.", "verdict": "O"},
+    {"statement": "밑줄 친 it은 앞에 나온 태양(the sun)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "the quoted number", "why": "여기서 it은 태양이 아니라 인용된 숫자(the quoted number)를 가리킨다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "If I care only about what minute the sun will rise tomorrow, then the number quoted here is fine.",
+   "grammar": [
+    {"tag": "조건 부사절 if", "note": "만약 ~라면", "spans": ["If"]},
+    {"tag": "의문사절 what minute", "note": "about의 목적어절", "spans": ["what minute"]}
+   ],
+   "vocab": [
+    {"word": "care about", "meaning": "~에 관심을 두다"},
+    {"word": "rise", "meaning": "(해가) 뜨다"},
+    {"word": "fine", "meaning": "괜찮은, 충분한"}
+   ],
+   "chunks": [
+    {"en": "If I care only about [[what minute]]", "ko": "만약 내가 [[몇 분]]인지에만 관심이 있다면"},
+    {"en": "the sun will [[rise]] tomorrow,", "ko": "내일 태양이 [[뜰지]],"},
+    {"en": "then the number [[quoted]] here is fine.", "ko": "그러면 여기 [[인용된]] 숫자로 괜찮다."}
+   ],
+   "misreads": [
+    {"statement": "내일 태양이 몇 분에 뜰지에만 관심 있다면, 여기 인용된 숫자로는 부족하다.", "verdict": "X", "trap_type": "인과조건", "anchor": "then the number quoted here is fine", "why": "그 정도 목적이라면 인용된 숫자로 '괜찮다(fine)'고 했으므로 부족하지 않다."},
+    {"statement": "여기 인용된 숫자는 일출 시각뿐 아니라 일몰 시각까지 정확히 알려준다.", "verdict": "X", "trap_type": "무관정보", "anchor": "what minute the sun will rise tomorrow", "why": "본문은 일출(rise) 시각만 언급하며, 일몰 시각까지 알려준다는 내용은 없다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "If I want to send a satellite to orbit just above the sun, however, then I would need to know distances more accurately.",
+   "grammar": [
+    {"tag": "조건 부사절 if", "note": "만약 ~라면", "spans": ["If"]},
+    {"tag": "가정·추정 would", "note": "~할 것이다", "spans": ["would"]}
+   ],
+   "vocab": [
+    {"word": "satellite", "meaning": "위성"},
+    {"word": "orbit", "meaning": "궤도를 돌다"},
+    {"word": "accurately", "meaning": "정확하게"}
+   ],
+   "chunks": [
+    {"en": "If I want to send a [[satellite]]", "ko": "만약 내가 [[위성]]을 보내고 싶다면"},
+    {"en": "to [[orbit]] just above the sun, however,", "ko": "태양 바로 위에서 [[궤도]]를 돌도록, 하지만,"},
+    {"en": "then I would need to know distances more [[accurately]].", "ko": "그러면 나는 거리를 더 [[정확하게]] 알아야 할 것이다."}
+   ],
+   "misreads": [
+    {"statement": "위성을 태양 바로 위 궤도에 보내고 싶다면, 태양이 거리를 더 정확히 알아야 한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "I would need to know distances more accurately", "why": "거리를 더 정확히 알아야 하는 주체는 태양이 아니라 위성을 보내려는 '나(I)'다."}
+   ]
+  }
+ ]
+}

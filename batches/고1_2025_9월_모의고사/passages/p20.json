@@ -1,0 +1,197 @@
+{
+ "item_no": "20",
+ "theme": "수업 시작 루틴 확립을 통한 효율적인 수업 운영",
+ "overview": {
+  "theme_ko": "수업 시작 루틴 확립의 중요성",
+  "topic": "🔎 수업 첫 몇 분(opening minutes)의 활용과 시작 루틴",
+  "stance": "긍정적",
+  "stance_reason": "you should establish an opening routine ~ 로 시작 루틴 확립을 권함",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "비효율적 교사의 시간 낭비(문제) → 시작 루틴 확립(해결)",
+  "key_grammar": {
+   "point": "It's no wonder that ~ 구문(「~은 놀랄 일이 아니다」)",
+   "source_sentence": "It's no wonder that students are late for class; they have little reason to be on time.",
+   "explanation": [
+    {"chip":"쉽게 말하면","text":"It's no wonder that ~ 는 「~인 것도 [[당연하다]]」라는 뜻이에요."},
+    {"chip":"구조","text":"가주어 It + no wonder + [[that]]절(진짜 내용)로 이어져요."},
+    {"chip":"해석 순서","text":"「~라는 것은 놀랄 일이 아니다」로 that절을 뒤에서 [[당겨]] 읽어요."},
+    {"chip":"주의","text":"여기 that은 관계사가 아니라 [[명사절]] 접속사예요."},
+    {"chip":"세미콜론","text":"; 뒤 문장은 앞 내용의 [[이유·부연]]이에요."}
+   ],
+   "example_analysis": "It's 의 It은 가주어이고, that students are late for class 가 진짜 주어 역할을 하는 명사절이다.",
+   "drills": [
+    {"kind":"객관식","question":"빈칸에 알맞은 것: It's no ___ that students are late for class.","options":["wonder","wondering","wondered"],"answer":"wonder","from_passage":true},
+    {"kind":"객관식","question":"밑줄 친 that의 역할로 알맞은 것은?","options":["명사절 접속사","관계대명사","지시형용사"],"answer":"명사절 접속사","from_passage":true},
+    {"kind":"객관식","question":"세미콜론(;)의 기능으로 알맞은 것은?","options":["앞 문장의 이유·부연 연결","의문 표시","목록 나열"],"answer":"앞 문장의 이유·부연 연결","from_passage":true},
+    {"kind":"영작","question":"학생들이 수업에 늦는 것은 놀랄 일이 아니다.","words":["it's","no","wonder","that","students","are","late","for","class"],"answer":"It's no wonder that students are late for class","from_passage":true},
+    {"kind":"영작","question":"그가 시험에 떨어진 것은 놀랄 일이 아니다.","words":["it's","no","wonder","that","he","failed","the","exam"],"answer":"It's no wonder that he failed the exam","from_passage":false}
+   ]
+  },
+  "restatement_chains": [
+   {"label":"시간 낭비","expressions":["more than ten minutes can disappear","waste this time"],"variation":"→ 시작 루틴이 없으면 첫 시간이 사라진다"},
+   {"label":"시작 루틴","expressions":["an opening routine","establish an opening routine"],"variation":"→ 효과적 출발의 핵심 장치"}
+  ],
+  "flow_blocks": [
+   {"stage":"도입(문제)","sentence_range":"1~3","summary":"비효율적 교사는 첫 몇 분의 [[힘]]을 간과해 시간이 사라짐","easy_example":"수업 시작종이 울려도 준비 안 하면 10분이 훅 지나가요."},
+   {"stage":"전개(대비)","sentence_range":"4~5","summary":"첫 10분을 살릴 수도, 낭비할 수도 있고 첫 몇 분이 [[분위기]]를 정함","easy_example":"경기 시작 휘슬 직후 몇 분이 흐름을 좌우하듯."},
+   {"stage":"해결(방안)","sentence_range":"6~7","summary":"시작 [[루틴]]을 가르쳐 두면 학생이 전환·집중 준비를 함 → 루틴 확립 권고","easy_example":"매 수업 첫 3분 '지난 내용 복습' 규칙처럼."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Inefficient teachers overlook the potential power of the opening minutes of class.",
+   "grammar": [
+    {"tag":"현재시제 수일치","note":"복수주어 teachers 에 맞춘 현재형 동사 overlook","spans":["overlook"]},
+    {"tag":"전치사구 후치수식","note":"of the opening minutes of class 가 앞 명사 power 를 수식","spans":["of the opening minutes of class"]}
+   ],
+   "vocab": [
+    {"word":"inefficient","meaning":"비효율적인"},
+    {"word":"overlook","meaning":"간과하다"},
+    {"word":"potential","meaning":"잠재적인"}
+   ],
+   "chunks": [
+    {"en":"Inefficient teachers [[overlook]]","ko":"비효율적인 교사들은 [[간과한다]]"},
+    {"en":"the potential [[power]]","ko":"잠재적인 [[힘]]을"},
+    {"en":"of the opening [[minutes]] of class.","ko":"수업 시작 [[몇 분]]의"}
+   ],
+   "misreads": [
+    {"statement":"필자는 비효율적인 교사가 수업 시작 몇 분의 잠재력을 대수롭지 않게 여긴다고 본다.","verdict":"O","trap_type":"필자관점"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "Often, if students are quiet enough and if there are many pressing demands on a teacher's time at that moment, more than ten minutes can disappear before class starts.",
+   "grammar": [
+    {"tag":"조건 접속사 if 병렬","note":"if ~ and if ~ 두 조건이 병렬로 연결됨","spans":["if","and if"]},
+    {"tag":"there is/are 구문","note":"there are + 복수명사(demands): ~가 있다","spans":["there are"]}
+   ],
+   "vocab": [
+    {"word":"pressing","meaning":"긴급한"},
+    {"word":"demand","meaning":"요구"},
+    {"word":"disappear","meaning":"사라지다"}
+   ],
+   "chunks": [
+    {"en":"Often, if students are quiet [[enough]]","ko":"종종, 학생들이 충분히 [[조용하]]고"},
+    {"en":"and if there are many pressing [[demands]]","ko":"긴급한 [[요구]]가 많으면"},
+    {"en":"on a teacher's [[time]] at that moment,","ko":"그 순간 교사의 [[시간]]에 대해"},
+    {"en":"more than ten minutes can [[disappear]]","ko":"10분 이상이 [[사라질]] 수 있다"},
+    {"en":"before class [[starts]].","ko":"수업이 [[시작되]]기 전에"}
+   ],
+   "misreads": [
+    {"statement":"학생들이 충분히 조용하고 교사에게 급한 요구가 많으면 수업 시작 전에 10분 넘게 사라질 수 있다.","verdict":"O","trap_type":"인과조건"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "It's no wonder that students are late for class; they have little reason to be on time.",
+   "grammar": [
+    {"tag":"It's no wonder that ~","note":"「~은 놀랄 일이 아니다」, that절이 진짜 내용","spans":["It's no wonder that"]},
+    {"tag":"세미콜론 병치","note":"; 앞뒤 두 문장을 이어 원인·부연을 연결","spans":[";"]}
+   ],
+   "vocab": [
+    {"word":"no wonder","meaning":"놀랄 일이 아니다, 당연하다"},
+    {"word":"reason","meaning":"이유"},
+    {"word":"on time","meaning":"제시간에"}
+   ],
+   "chunks": [
+    {"en":"It's no [[wonder]] that","ko":"~은 놀랄 [[일이 아니다]]"},
+    {"en":"students are [[late]] for class;","ko":"학생들이 수업에 [[늦는]] 것은"},
+    {"en":"they have little [[reason]]","ko":"그들은 거의 [[이유]]가 없다"},
+    {"en":"to be on [[time]].","ko":"[[제시간에]] 올"}
+   ],
+   "misreads": [
+    {"statement":"학생들이 지각하는 것이 이상하지 않은 이유는 교사가 지각을 벌하지 않기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"they have little reason to be on time","why":"지각이 이상하지 않다는 방향은 맞으나, 이유는 벌이 아니라 제시간에 올 이유가 거의 없어서임"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "You can use the first ten minutes to get your class off to a great start, or you can choose to waste this time.",
+   "grammar": [
+    {"tag":"조동사 can + 동사원형","note":"can use / can choose: ~할 수 있다(선택)","spans":["can use","can choose"]},
+    {"tag":"등위접속사 or","note":"두 절을 or로 연결해 대안을 제시","spans":["or"]}
+   ],
+   "vocab": [
+    {"word":"get off to a start","meaning":"~로 출발하다, 시작하다"},
+    {"word":"waste","meaning":"낭비하다"}
+   ],
+   "chunks": [
+    {"en":"You can [[use]] the first ten minutes","ko":"당신은 첫 10분을 [[사용]]할 수 있다"},
+    {"en":"[[to get your class off to a great start]],","ko":"[[훌륭한 시작으로 수업을 출발시키도록]]"},
+    {"en":"or you can [[choose]]","ko":"또는 당신은 [[선택]]할 수 있다"},
+    {"en":"to [[waste]] this time.","ko":"이 시간을 [[낭비]]하도록"}
+   ],
+   "misreads": [
+    {"statement":"필자는 첫 10분을 'off to a great start'로 쓰든 낭비하든 수업 결과는 같다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"get your class off to a great start","english":"off to a great start","why":"활용과 낭비를 대비하며 훌륭한 출발을 권하므로 결과가 같지 않음"}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "The first minutes set the tone for the rest of the class.",
+   "grammar": [
+    {"tag":"주어-동사 수일치","note":"복수주어 minutes 에 맞춘 동사 set","spans":["set"]},
+    {"tag":"전치사 for","note":"for the rest of the class: 나머지 수업에 대해","spans":["for"]}
+   ],
+   "vocab": [
+    {"word":"set the tone","meaning":"분위기를 정하다"},
+    {"word":"the rest of","meaning":"~의 나머지"}
+   ],
+   "chunks": [
+    {"en":"The first minutes [[set]]","ko":"첫 몇 분이 [[설정한다]]"},
+    {"en":"the [[tone]]","ko":"[[분위기]]를"},
+    {"en":"for the rest of the [[class]].","ko":"나머지 [[수업]]의"}
+   ],
+   "misreads": [
+    {"statement":"나머지 수업의 분위기를 좌우하는 것은 수업의 '마지막' 몇 분이다.","verdict":"X","trap_type":"주체대상","anchor":"The first minutes set the tone","killer":true,"why":"분위기를 정하는 것은 '마지막'이 아니라 '첫' 몇 분임"}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "If you are prepared for class and have taught your students an opening routine, they can use this brief time to make mental and emotional transitions from the last class or subject and prepare to focus on learning new material.",
+   "grammar": [
+    {"tag":"조건절 if + 현재완료","note":"if you are ~ and have taught ~: 조건 안의 완료형","spans":["have taught"]},
+    {"tag":"to부정사 목적 + 병렬","note":"to make ~ and prepare ~: 목적의 to(make/prepare 병렬)","spans":["to make","prepare"]}
+   ],
+   "vocab": [
+    {"word":"prepared","meaning":"준비된"},
+    {"word":"routine","meaning":"루틴, 정해진 순서"},
+    {"word":"transition","meaning":"변화, 전환"},
+    {"word":"material","meaning":"자료"}
+   ],
+   "chunks": [
+    {"en":"If you are [[prepared]] for class","ko":"당신이 수업 준비가 [[되어 있]]고"},
+    {"en":"and have [[taught]] your students an opening routine,","ko":"학생들에게 시작 루틴을 [[가르쳤]]다면"},
+    {"en":"they can use this brief [[time]]","ko":"그들은 이 짧은 [[시간]]을 사용할 수 있다"},
+    {"en":"to make mental and emotional [[transitions]] from the last class or subject","ko":"지난 수업이나 과목으로부터 정신적·감정적 [[변화]]를 만들고"},
+    {"en":"and [[prepare]] to focus on learning new material.","ko":"새로운 자료를 배우는 데 집중할 [[준비를 하려고]]"}
+   ],
+   "misreads": [
+    {"statement":"교사가 준비되어 있고 시작 루틴을 가르쳤다면, 학생들은 이 짧은 시간을 전환과 집중 준비에 쓸 수 있다.","verdict":"O","trap_type":"구조수식"},
+    {"statement":"밑줄 친 they가 가리키는 것은 교사(teachers)이다.","verdict":"X","trap_type":"지칭","anchor":"they can use this brief time","why":"they는 앞의 students(학생들)를 가리키며 교사가 아님"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "In summary, you should establish an opening routine to develop your class with an effective start.",
+   "grammar": [
+    {"tag":"조동사 should","note":"should establish: ~해야 한다(의무·조언)","spans":["should establish"]},
+    {"tag":"to부정사(목적)","note":"to develop ~: ~하기 위해","spans":["to develop"]}
+   ],
+   "vocab": [
+    {"word":"in summary","meaning":"요약하면"},
+    {"word":"establish","meaning":"마련하다, 확립하다"},
+    {"word":"develop","meaning":"전개하다, 발전시키다"},
+    {"word":"effective","meaning":"효과적인"}
+   ],
+   "chunks": [
+    {"en":"In summary, you should [[establish]] an opening routine","ko":"요약하면, 당신은 시작 루틴을 [[마련해야]] 한다"},
+    {"en":"to [[develop]] your class","ko":"당신의 수업을 [[전개하]]기 위해"},
+    {"en":"with an effective [[start]].","ko":"효과적인 [[출발]]로"}
+   ],
+   "misreads": [
+    {"statement":"필자는 시작 루틴이 학생의 학업 성적을 직접 올린다고 명시한다.","verdict":"X","trap_type":"무관정보","anchor":"establish an opening routine to develop your class","why":"성적 향상은 언급이 없고, 효과적 출발로 수업을 전개하는 것을 말할 뿐임"}
+   ],
+   "mistips": ["establish an opening routine 를 '루틴을 없애라'로 읽으면 안 돼 — (바르게는) [[루틴을 마련·확립하라]]"]
+  }
+ ]
+}

@@ -1,0 +1,222 @@
+{
+ "item_no": "32",
+ "theme": "수면 부족을 감지하고 수면을 유도하는 아데노신(adenosine)의 역할",
+ "overview": {
+  "theme_ko": "수면을 유도하는 아데노신의 역할",
+  "topic": "🔎 깨어 있는 동안 쌓이고 잠자는 동안 분해되는 아데노신이 놓친 잠을 추적해 수면을 유도한다",
+  "stance": "중립적",
+  "stance_reason": "'appears to be due', 'may be what your body uses'처럼 단정하지 않고 과학적으로 설명·추정함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "수면 욕구가 아데노신 때문이라는 주장을, 축적·분해 과정과 수면 빚 사례로 뒷받침함",
+  "key_grammar": {
+   "point": "관계대명사 what",
+   "source_sentence": "Thus, this molecule may be what your body uses to keep track of lost sleep and to trigger sleep when needed.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "what은 '~하는 [[것]]'으로, 선행사(the thing)를 이미 품은 관계대명사예요."},
+    {"chip": "핵심", "text": "what = the thing which. 앞에 꾸밈받는 [[명사]]가 따로 없어야 what을 써요."},
+    {"chip": "대조", "text": "앞에 명사가 있으면 which·that, 없으면 [[what]]이라고 구별해요."},
+    {"chip": "해석 팁", "text": "may be 뒤의 what절 전체가 be동사의 [[보어]] 역할을 하는 명사절이에요."}
+   ],
+   "example_analysis": "be동사 be의 보어 자리에 선행사를 포함한 관계대명사 what이 이끄는 명사절이 통째로 들어옴.",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 'what your body uses'에서 what의 역할로 알맞은 것은?", "options": ["선행사를 포함한 관계대명사(~하는 것)", "의문사(무엇)", "앞의 molecule을 꾸미는 관계대명사"], "answer": "선행사를 포함한 관계대명사(~하는 것)", "from_passage": true},
+    {"kind": "객관식", "question": "빈칸에 what을 쓸 수 있는 것은?", "options": ["the tool ( ) I need", "This is ( ) I need", "the book ( ) I read"], "answer": "This is ( ) I need", "from_passage": false},
+    {"kind": "객관식", "question": "'accumulation'의 의미로 알맞은 것은?", "options": ["축적, 쌓임", "감소", "분해"], "answer": "축적, 쌓임", "from_passage": true},
+    {"kind": "영작", "question": "따라서, 이 분자는 당신의 몸이 놓친 잠을 추적하고 필요할 때 수면을 유도하는 데 사용하는 것일지도 모른다.", "words": ["Thus", "this molecule", "may be", "what", "your body uses", "to keep track of", "lost sleep", "and to trigger sleep", "when needed"], "answer": "Thus, this molecule may be what your body uses to keep track of lost sleep and to trigger sleep when needed.", "from_passage": true},
+    {"kind": "영작", "question": "이것이 바로 내가 필요로 하는 것이다.", "words": ["This", "is", "what", "I", "need"], "answer": "This is what I need.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "아데노신의 수면 신호 역할", "expressions": ["a compound known as adenosine", "keep track of lost sleep", "trigger sleep when needed"], "variation": "이름표 → 놓친 잠 추적 → 수면 유도로 기능이 구체화됨"},
+   {"label": "쌓임과 분해", "expressions": ["builds up in your blood", "breaks down the adenosine"], "variation": "깨어 있을 때 쌓이고 잘 때 분해되는 대칭 구조"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1", "summary": "수면을 미뤄도 결국 [[잠]]을 잘 수밖에 없음", "easy_example": "미뤄둔 숙제가 결국 몰려와 반드시 해야 하는 상황"},
+   {"stage": "전개", "sentence_range": "2~3", "summary": "수면 욕구는 [[아데노신]] 때문이며 깨어 있을수록 쌓임", "easy_example": "깨어 있는 동안 조금씩 차오르는 모래시계의 모래"},
+   {"stage": "전개", "sentence_range": "4~5", "summary": "잘 때 [[분해]]되며 놓친 잠을 추적해 수면을 유도", "easy_example": "밤새 물통을 비워 다음 날 다시 채울 수 있게 하는 것"},
+   {"stage": "심화", "sentence_range": "6", "summary": "아데노신 축적이 [[수면 빚]]을 설명함", "easy_example": "며칠 밀린 대출 이자를 몰아서 갚아야 하는 것"},
+   {"stage": "결론", "sentence_range": "7~8", "summary": "적은 잠에 [[익숙해질]] 수 없고 결국 부족이 따라잡음", "easy_example": "빚은 못 본 척해도 사라지지 않고 결국 청구됨"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Although you may put off going to sleep in order to squeeze more activities into your day, eventually your need for sleep becomes overwhelming and you are forced to get some sleep.",
+   "grammar": [
+    {"tag": "양보 접속사 Although", "note": "~에도 불구하고", "spans": ["Although"]},
+    {"tag": "목적 in order to", "note": "~하기 위해", "spans": ["in order to"]}
+   ],
+   "vocab": [
+    {"word": "put off", "meaning": "미루다"},
+    {"word": "squeeze", "meaning": "밀어넣다, 짜 넣다"},
+    {"word": "overwhelming", "meaning": "압도적인"},
+    {"word": "be forced to", "meaning": "~할 수밖에 없다"}
+   ],
+   "chunks": [
+    {"en": "Although you may [[put off]] going to sleep", "ko": "비록 당신은 잠자는 것을 [[미룰]] 수 있지만"},
+    {"en": "in order to squeeze more [[activities]] into your day,", "ko": "하루에 더 많은 [[활동]]을 밀어넣기 위해,"},
+    {"en": "eventually your need for sleep becomes [[overwhelming]]", "ko": "결국 수면에 대한 당신의 욕구는 [[압도적]]이 되고"},
+    {"en": "and you are [[forced]] to get some sleep.", "ko": "당신은 [[어쩔 수 없이]] 잠을 자게 된다."}
+   ],
+   "misreads": [
+    {"statement": "활동을 더 하려고 잠을 미루면, 수면에 대한 욕구도 함께 줄어든다.", "verdict": "X", "trap_type": "인과조건", "anchor": "your need for sleep becomes overwhelming", "why": "잠을 미뤄도 수면 욕구는 줄어드는 게 아니라 압도적이 되어 결국 잘 수밖에 없다."}
+   ],
+   "mistips": ["'be forced to'를 '억지로 시켰다'로 읽으면 안 돼 — 필요 때문에 [[어쩔 수 없이]] 자게 된다는 뜻이야."]
+  },
+  {
+   "id": 2,
+   "english": "This daily drive for sleep appears to be due, in part, to a compound known as adenosine.",
+   "grammar": [
+    {"tag": "appear to be (~인 듯하다)", "note": "추정 표현", "spans": ["appears to be"]},
+    {"tag": "known as (~라고 알려진)", "note": "과거분사 후치수식", "spans": ["known as"]}
+   ],
+   "vocab": [
+    {"word": "drive", "meaning": "욕구, 충동"},
+    {"word": "due to", "meaning": "~때문인"},
+    {"word": "in part", "meaning": "부분적으로"},
+    {"word": "compound", "meaning": "화합물"}
+   ],
+   "chunks": [
+    {"en": "This daily [[drive]] for sleep", "ko": "이러한 매일의 수면 [[욕구]]는"},
+    {"en": "appears to be due, in [[part]],", "ko": "부분적으로 [[기인하는]] 듯 보이는데,"},
+    {"en": "to a compound known as [[adenosine]].", "ko": "[[아데노신]]이라고 알려진 화합물."}
+   ],
+   "misreads": [
+    {"statement": "매일의 수면 욕구는 부분적으로 아데노신이라는 화합물 때문인 것으로 보인다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "This natural chemical builds up in your blood as time awake increases.",
+   "grammar": [
+    {"tag": "builds up (쌓이다)", "note": "구동사", "spans": ["builds up"]},
+    {"tag": "접속사 as (~할수록)", "note": "비례·시간", "spans": ["as"]}
+   ],
+   "vocab": [
+    {"word": "natural chemical", "meaning": "천연 화학물질"},
+    {"word": "build up", "meaning": "쌓이다, 축적되다"},
+    {"word": "awake", "meaning": "깨어 있는"},
+    {"word": "increase", "meaning": "증가하다"}
+   ],
+   "chunks": [
+    {"en": "This natural [[chemical]] builds up", "ko": "이 자연 [[화학물질]]은 쌓인다"},
+    {"en": "in your [[blood]]", "ko": "당신의 [[혈액]] 속에"},
+    {"en": "as time [[awake]] increases.", "ko": "[[깨어 있는]] 시간이 늘어날수록."}
+   ],
+   "misreads": [
+    {"statement": "이 화학물질은 혈액 속에 쌓이면서 동시에 당신의 혈압을 높인다.", "verdict": "X", "trap_type": "무관정보", "anchor": "builds up in your blood as time awake increases", "why": "본문은 혈액 속에 쌓인다고만 하며, 혈압을 높인다는 내용은 어디에도 없다."}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "While you sleep, your body breaks down the adenosine.",
+   "grammar": [
+    {"tag": "시간 접속사 While", "note": "~하는 동안", "spans": ["While"]},
+    {"tag": "breaks down (분해하다)", "note": "구동사", "spans": ["breaks down"]}
+   ],
+   "vocab": [
+    {"word": "break down", "meaning": "분해하다"},
+    {"word": "adenosine", "meaning": "아데노신"}
+   ],
+   "chunks": [
+    {"en": "While you [[sleep]],", "ko": "당신이 [[자는]] 동안,"},
+    {"en": "your body breaks down the [[adenosine]].", "ko": "당신의 몸은 [[아데노신]]을 분해한다."}
+   ],
+   "misreads": [
+    {"statement": "잠자는 동안 당신의 몸은 아데노신을 더 많이 만들어낸다.", "verdict": "X", "trap_type": "주체대상", "anchor": "your body breaks down the adenosine", "why": "잠자는 동안 몸은 아데노신을 만들어내는 게 아니라 분해한다(breaks down)."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Thus, this molecule may be what your body uses to keep track of lost sleep and to trigger sleep when needed.",
+   "grammar": [
+    {"tag": "관계대명사 what", "note": "선행사 포함, be의 보어절", "spans": ["what"]},
+    {"tag": "to부정사 목적", "note": "~하기 위해", "spans": ["to keep", "to trigger"]}
+   ],
+   "vocab": [
+    {"word": "molecule", "meaning": "분자"},
+    {"word": "keep track of", "meaning": "~을 추적하다"},
+    {"word": "lost sleep", "meaning": "놓친 잠"},
+    {"word": "trigger", "meaning": "유발하다, 유도하다"}
+   ],
+   "chunks": [
+    {"en": "Thus, this [[molecule]] may be", "ko": "따라서, 이 [[분자]]는 아마도"},
+    {"en": "what your body [[uses]]", "ko": "당신의 몸이 [[사용하는]] 것"},
+    {"en": "to keep track of lost [[sleep]]", "ko": "놓쳐버린 [[잠]]을 추적하고"},
+    {"en": "and to [[trigger]] sleep when needed.", "ko": "필요할 때 잠을 [[유도하기]] 위해."}
+   ],
+   "misreads": [
+    {"statement": "이 분자(아데노신)는 몸이 놓친 잠을 추적하고 필요할 때 수면을 유도하는 데 쓰이는 것일 수 있다.", "verdict": "O"},
+    {"statement": "This molecule refers to blood sugar that builds up while you are awake.", "verdict": "X", "trap_type": "지칭", "anchor": "a compound known as adenosine", "english": true, "integrative": true, "why": "this molecule(이 분자)이 가리키는 것은 혈당이 아니라 아데노신(adenosine)이다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "An accumulation of adenosine and other factors might explain why, after several nights of less than optimal amounts of sleep, you build up a sleep debt that you must make up by sleeping longer than normal.",
+   "grammar": [
+    {"tag": "의문사절 why", "note": "explain의 목적어절", "spans": ["why"]},
+    {"tag": "관계대명사 that", "note": "sleep debt 수식", "spans": ["that"]},
+    {"tag": "비교급 than", "note": "~보다 더", "spans": ["longer than"]}
+   ],
+   "vocab": [
+    {"word": "accumulation", "meaning": "축적, 쌓임"},
+    {"word": "optimal", "meaning": "최적의"},
+    {"word": "sleep debt", "meaning": "수면 빚, 수면 부채"},
+    {"word": "make up", "meaning": "보충하다, 갚다"}
+   ],
+   "chunks": [
+    {"en": "An accumulation of adenosine and other [[factors]]", "ko": "아데노신의 축적과 다른 [[요인들]]은"},
+    {"en": "might [[explain]] why,", "ko": "왜 그런지를 [[설명할]] 수도 있는데,"},
+    {"en": "after several nights of less than optimal amounts of [[sleep]],", "ko": "최적의 [[수면량]]에 못 미친 며칠 밤 후에,"},
+    {"en": "you build up a sleep [[debt]]", "ko": "당신은 수면 [[빚]]을 쌓는다는 것을"},
+    {"en": "that you must [[make up]]", "ko": "당신이 [[갚아야]] 하는"},
+    {"en": "by sleeping longer than [[normal]].", "ko": "평소보다 더 [[오래]] 잠으로써."}
+   ],
+   "misreads": [
+    {"statement": "며칠 밤 최적의 수면량을 충분히 채우면, 평소보다 더 오래 자야 하는 수면 빚이 쌓인다.", "verdict": "X", "trap_type": "인과조건", "anchor": "less than optimal amounts of sleep", "killer": true, "why": "수면 빚이 쌓이는 것은 수면량을 채운 뒤가 아니라 최적량에 '못 미친(less than optimal)' 며칠 밤 뒤다."},
+    {"statement": "당신이 갚아야 하는 수면 빚은 평소보다 더 오래 잤기 때문에 생긴다.", "verdict": "X", "trap_type": "구조수식", "anchor": "a sleep debt that you must make up by sleeping longer than normal", "why": "that절은 '더 오래 자서 갚아야 하는' 빚을 수식할 뿐, 오래 자서 빚이 생긴다는 뜻이 아니다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Because of such built-in molecular feedback, you can't become accustomed to getting less sleep than your body needs.",
+   "grammar": [
+    {"tag": "become accustomed to +동명사", "note": "~에 익숙해지다", "spans": ["accustomed to getting"]},
+    {"tag": "비교급 than", "note": "~보다 더 적은", "spans": ["less sleep than"]}
+   ],
+   "vocab": [
+    {"word": "built-in", "meaning": "내재된, 내장된"},
+    {"word": "molecular", "meaning": "분자의"},
+    {"word": "feedback", "meaning": "피드백, 되먹임"},
+    {"word": "become accustomed to", "meaning": "~에 익숙해지다"}
+   ],
+   "chunks": [
+    {"en": "Because of such built-in molecular [[feedback]],", "ko": "이러한 내재된 분자적 [[피드백]] 때문에,"},
+    {"en": "you can't become [[accustomed]] to getting", "ko": "당신은 …을 얻는 것에 [[익숙해질]] 수 없다"},
+    {"en": "less sleep than your body [[needs]].", "ko": "당신의 몸이 [[필요로]] 하는 것보다 더 적은 잠을."}
+   ],
+   "misreads": [
+    {"statement": "필자는 훈련하면 몸이 필요로 하는 것보다 적은 잠에도 익숙해질 수 있다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "you can't become accustomed to getting less sleep than your body needs", "why": "필자는 이런 분자 피드백 때문에 적은 잠에 '익숙해질 수 없다'고 본다."},
+    {"statement": "몸이 필요로 하는 것보다 적은 잠에 익숙해질 수 없는데, 그 이유는 잠자는 동안 아데노신이 계속 늘어나기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "your body breaks down the adenosine", "integrative": true, "why": "익숙해질 수 없다는 결론은 맞지만, 잠자는 동안 아데노신은 늘어나는 게 아니라 분해된다."}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Eventually, a lack of sleep catches up with you.",
+   "grammar": [
+    {"tag": "catch up with (구동사)", "note": "~을 따라잡다", "spans": ["catches up with"]}
+   ],
+   "vocab": [
+    {"word": "lack", "meaning": "부족"},
+    {"word": "catch up with", "meaning": "(결과가) 따라잡다, 영향을 미치다"}
+   ],
+   "chunks": [
+    {"en": "Eventually, a [[lack]] of sleep", "ko": "결국, 수면 [[부족]]은"},
+    {"en": "catches up with you.", "ko": "당신을 [[따라잡는다]]."}
+   ],
+   "misreads": [
+    {"statement": "결국 수면 부족은 그 영향이 당신에게 나타난다.", "verdict": "O"}
+   ]
+  }
+ ]
+}

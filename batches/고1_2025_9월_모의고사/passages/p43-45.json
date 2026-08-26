@@ -1,0 +1,477 @@
+{
+ "item_no": "43-45",
+ "theme": "자판기 앞에서 어려움을 겪는 Dave를 도와준 한 학생의 친절",
+ "overview": {
+  "theme_ko": "자판기 앞 Dave를 도와준 학생의 친절",
+  "topic": "🔎 소외된 Dave를 자판기 앞에서 도운 한 상급생의 작은 친절",
+  "stance": "긍정적",
+  "stance_reason": "for one moment, they'd shared a real understanding",
+  "structure": "시간·순서(나열)",
+  "structure_reason": "on that afternoon → After he failed → Just then → After that → Then → that day 로 사건이 시간 순서대로 이어진다",
+  "key_grammar": {
+   "point": "과거완료(had+p.p.): 이야기 흐름에서 한 시점보다 '더 이전'에 일어난 일",
+   "source_sentence": "I saw him turn to sit down, looking like he had given up.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "[[과거완료]](had+p.p.)는 과거의 어느 시점보다 '더 먼저' 일어난 일을 나타낸다"},
+    {"chip": "형태", "text": "had + [[과거분사]](p.p.)로 만든다"},
+    {"chip": "본문에서", "text": "본 시점 saw 보다 먼저 일어난 '[[포기]]'를 had given up 으로 표현했다"},
+    {"chip": "주의", "text": "단순과거는 사건의 순서를, 과거완료는 '[[대과거]]'(더 이전)를 강조한다"}
+   ],
+   "example_analysis": "'had given up'은 본 시점(saw)보다 더 이전의 '이미 포기한' 상태를 나타내는 과거완료다.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? 'I saw him turn to sit down, looking like he ___ up.'", "options": ["had given", "gives", "has given"], "answer": "had given", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 과거완료(had+p.p.)가 쓰인 문장은?", "options": ["They'd shared a real understanding.", "He was thirsty.", "Dave gave him his dollar."], "answer": "They'd shared a real understanding.", "from_passage": true},
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? 'just as the dollar ___ a place in a warm-hearted senior's pocket'", "options": ["had found", "found", "finds"], "answer": "had found", "from_passage": true},
+    {"kind": "영작", "question": "그가 몇 번 실패한 후, 몇몇 학생들이 그를 비웃기 시작했다.", "words": ["After", "he", "failed", "a few times", "some students", "began", "to laugh", "at him"], "answer": "After he failed a few times, some students began to laugh at him.", "from_passage": true},
+    {"kind": "영작", "question": "그녀가 이미 떠난 뒤였기 때문에 나는 그녀를 볼 수 없었다.", "words": ["I", "couldn't", "see", "her", "because", "she", "had", "already", "left"], "answer": "I couldn't see her because she had already left.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "소외·거리감", "expressions": ["far away from our world", "very different worlds", "away from him"], "variation": "Dave가 또래 집단에서 떨어져 있는 상태를 여러 표현으로 반복한다"},
+   {"label": "친절과 받아들여짐", "expressions": ["a real understanding", "warm-hearted", "found a place"], "variation": "한순간의 이해와 따뜻함, 그리고 '자리를 찾음'으로 주제가 이어진다"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~3", "summary": "붐비는 식당 속에서 또래와 [[동떨어진]] 채 목말라하는 Dave", "easy_example": "교실 구석에 혼자 앉아 있는 전학생을 떠올려 보라"},
+   {"stage": "전개", "sentence_range": "4~8", "summary": "자판기에 지폐를 넣으려다 [[실패]]하고 비웃음과 눈물", "easy_example": "카드가 자꾸 안 찍혀 뒷사람 눈치를 보는 상황"},
+   {"stage": "위기", "sentence_range": "9~12", "summary": "포기 직전까지 갔다가 [[단호하게]] 다시 시도함", "easy_example": "될 때까지 다시 해 보겠다고 마음먹는 순간"},
+   {"stage": "전환", "sentence_range": "13~15", "summary": "인기 많은 [[상급생]]이 다가와 설명하고 동전을 넣어 줌", "easy_example": "모르는 사람이 슬쩍 다가와 방법을 알려 주는 장면"},
+   {"stage": "사례·결말", "sentence_range": "16~18", "summary": "Dave가 주스를 고르고 둘이 잠시 [[이해]]를 나눔", "easy_example": "말 한마디 없이도 통했다고 느끼는 짧은 순간"},
+   {"stage": "결론", "sentence_range": "19~22", "summary": "화자는 Dave와 달러를 견주며 그도 [[자리]]를 찾으리라 확신", "easy_example": "구겨진 지폐도 결국 누군가의 주머니에 담기듯"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "While the cafeteria was full of high school students on that afternoon, Dave was thirsty.",
+   "grammar": [
+    {"tag": "접속사 while", "note": "~하는 동안(상황 대조)", "spans": ["While"]},
+    {"tag": "부사구", "note": "때를 나타내는 표현", "spans": ["on that afternoon"]}
+   ],
+   "vocab": [
+    {"word": "cafeteria", "meaning": "구내식당"},
+    {"word": "be full of", "meaning": "~로 가득 차다"},
+    {"word": "thirsty", "meaning": "목이 마른"}
+   ],
+   "chunks": [
+    {"en": "While the [[cafeteria]] was full", "ko": "그 [[식당]]이 가득 차 있는 동안"},
+    {"en": "of high school [[students]] on that afternoon,", "ko": "그날 오후에 [[고등학생들]]로,"},
+    {"en": "Dave was [[thirsty]].", "ko": "Dave는 [[목이 말랐다]]."}
+   ],
+   "misreads": [
+    {"statement": "식당이 붐빈 것은 Dave 때문이었다.", "verdict": "X", "trap_type": "주체대상", "anchor": "the cafeteria was full of high school students", "why": "식당을 가득 채운 것은 고등학생들이며 Dave와는 무관하다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'While ~'을 '잠깐'으로 읽으면 안 돼 — 여기선 '[[~하는 동안]]'의 대조 접속사"]
+  },
+  {
+   "id": 2,
+   "english": "We sat near yet away from him, fixing our hair and worrying about the test next period we hadn't studied for.",
+   "grammar": [
+    {"tag": "과거완료", "note": "had p.p. — 시험 전에 공부 안 한 상태", "spans": ["hadn't studied"]},
+    {"tag": "분사구문", "note": "동시동작을 나타내는 -ing", "spans": ["fixing", "worrying"]}
+   ],
+   "vocab": [
+    {"word": "yet", "meaning": "그렇지만"},
+    {"word": "fix one's hair", "meaning": "머리를 매만지다"},
+    {"word": "next period", "meaning": "다음 교시"}
+   ],
+   "chunks": [
+    {"en": "We sat near yet [[away]] from him,", "ko": "우리는 가까이 앉았지만 그와 [[떨어져]] 있었고,"},
+    {"en": "fixing our [[hair]]", "ko": "[[머리]]를 매만지며"},
+    {"en": "and [[worrying]] about the test next period", "ko": "다음 교시의 시험을 [[걱정]]하면서"},
+    {"en": "we hadn't [[studied]] for.", "ko": "우리가 [[공부하지]] 않았던."}
+   ],
+   "misreads": [
+    {"statement": "him은 화자 자신들(We)을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "away from him", "why": "him은 화자들과 떨어져 앉은 Dave를 가리키며 We가 아니다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "He was far away from our world, yet forced to be a part of it.",
+   "grammar": [
+    {"tag": "과거분사 forced", "note": "수동 의미로 쓰인 분사", "spans": ["forced"]},
+    {"tag": "접속사 yet", "note": "그러나(대조)", "spans": ["yet"]}
+   ],
+   "vocab": [
+    {"word": "far away from", "meaning": "~에서 멀리 떨어진"},
+    {"word": "be forced to", "meaning": "억지로 ~하게 되다"},
+    {"word": "a part of", "meaning": "~의 일부"}
+   ],
+   "chunks": [
+    {"en": "He was far away from our [[world]],", "ko": "그는 우리 [[세계]]에서 멀리 떨어져 있었지만,"},
+    {"en": "yet [[forced]] to be a part of it.", "ko": "[[억지로]] 그것의 일부가 되어야 했다."}
+   ],
+   "misreads": [
+    {"statement": "그는 우리 세계에서 멀리 떨어져 있어서 그 세계와 아무 상관이 없었다.", "verdict": "△", "trap_type": "구조수식", "anchor": "forced to be a part of it", "why": "'멀리 떨어져 있다'는 방향은 맞지만, 억지로 그 '일부가 되어야' 했다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "He stood at the drink machine with purpose, fumbling through his fake leather wallet for some change.",
+   "grammar": [
+    {"tag": "분사구문", "note": "동시동작(-하면서)", "spans": ["fumbling"]}
+   ],
+   "vocab": [
+    {"word": "with purpose", "meaning": "목적을 가지고"},
+    {"word": "fumble through", "meaning": "~을 더듬어 뒤지다"},
+    {"word": "fake leather", "meaning": "인조 가죽"},
+    {"word": "change", "meaning": "잔돈"}
+   ],
+   "chunks": [
+    {"en": "He stood at the drink machine with [[purpose]],", "ko": "그는 [[목적]]을 가지고 음료 자판기 앞에 섰고,"},
+    {"en": "[[fumbling]] through his fake leather wallet", "ko": "인조 가죽 지갑을 [[더듬으며]]"},
+    {"en": "for some [[change]].", "ko": "[[잔돈]]을 찾으려고."}
+   ],
+   "misreads": [
+    {"statement": "Dave는 목적을 갖고 자판기 앞에 서서 지갑에서 잔돈을 더듬어 찾았다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "He came up with a wrinkled dollar bill, and nervously glanced back at his table where other students in his class were sitting.",
+   "grammar": [
+    {"tag": "관계부사 where", "note": "장소(table)를 수식하는 절", "spans": ["where"]},
+    {"tag": "과거분사 wrinkled", "note": "명사를 앞에서 수식", "spans": ["wrinkled"]}
+   ],
+   "vocab": [
+    {"word": "come up with", "meaning": "~을 꺼내다·찾아내다"},
+    {"word": "wrinkled", "meaning": "구겨진"},
+    {"word": "glance back", "meaning": "뒤를 돌아보다"},
+    {"word": "nervously", "meaning": "초조하게"}
+   ],
+   "chunks": [
+    {"en": "He came up with a [[wrinkled]] dollar bill,", "ko": "그는 [[구겨진]] 1달러 지폐를 꺼냈고,"},
+    {"en": "and [[nervously]] glanced back at his table", "ko": "그의 테이블을 [[초조하게]] 돌아보았는데,"},
+    {"en": "where other [[students]] in his class were sitting.", "ko": "그곳에는 그의 반 다른 [[학생들]]이 앉아 있었다."}
+   ],
+   "misreads": [
+    {"statement": "his table의 his와 his class의 his는 서로 다른 사람을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "his table where other students in his class", "why": "두 his는 모두 Dave를 가리키므로 같은 사람이다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Dave tried to make the machine accept his money.",
+   "grammar": [
+    {"tag": "사역동사 make", "note": "make+목적어+동사원형", "spans": ["make the machine accept"]}
+   ],
+   "vocab": [
+    {"word": "try to", "meaning": "~하려고 애쓰다"},
+    {"word": "accept", "meaning": "받아들이다·인식하다"}
+   ],
+   "chunks": [
+    {"en": "Dave tried to make the [[machine]]", "ko": "Dave는 [[자판기]]가"},
+    {"en": "[[accept]] his money.", "ko": "그의 돈을 [[받아들이게]] 하려고 했다."}
+   ],
+   "misreads": [
+    {"statement": "Dave는 자판기가 자신의 돈을 받아들이게 하려고 애썼다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "After he failed a few times, some students began to laugh at him.",
+   "grammar": [
+    {"tag": "접속사 after", "note": "~한 후에", "spans": ["After"]},
+    {"tag": "begin to V", "note": "~하기 시작하다", "spans": ["began to laugh"]}
+   ],
+   "vocab": [
+    {"word": "fail", "meaning": "실패하다"},
+    {"word": "a few times", "meaning": "몇 번"},
+    {"word": "laugh at", "meaning": "~을 비웃다"}
+   ],
+   "chunks": [
+    {"en": "After he [[failed]] a few times,", "ko": "그가 몇 번 [[실패]]한 후,"},
+    {"en": "some students began to [[laugh]] at him.", "ko": "몇몇 학생들이 그를 [[비웃기]] 시작했다."}
+   ],
+   "misreads": [
+    {"statement": "학생들이 비웃었기 때문에 Dave가 실패했다.", "verdict": "X", "trap_type": "인과조건", "anchor": "After he failed a few times, some students began to laugh", "why": "Dave의 실패가 먼저이고 비웃음은 그 뒤에 일어난 결과다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "He started shaking, and tears began to form in his eyes.",
+   "grammar": [
+    {"tag": "begin to V", "note": "~하기 시작하다", "spans": ["began to form"]}
+   ],
+   "vocab": [
+    {"word": "shake", "meaning": "떨다"},
+    {"word": "tears", "meaning": "눈물"},
+    {"word": "form", "meaning": "맺히다·형성되다"}
+   ],
+   "chunks": [
+    {"en": "He started [[shaking]],", "ko": "그는 [[떨기]] 시작했고,"},
+    {"en": "and [[tears]] began to form in his eyes.", "ko": "[[눈물]]이 그의 눈에 맺히기 시작했다."}
+   ],
+   "misreads": [
+    {"statement": "눈물이 맺히기 시작한 것은 그를 비웃던 학생들이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "tears began to form in his eyes", "why": "눈물이 맺힌 것은 his eyes, 즉 Dave이지 학생들이 아니다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "I saw him turn to sit down, looking like he had given up.",
+   "grammar": [
+    {"tag": "과거완료", "note": "본 시점보다 이전의 '이미 포기한' 상태", "spans": ["had given up"]},
+    {"tag": "지각동사 see", "note": "see+목적어+동사원형", "spans": ["saw him turn"]}
+   ],
+   "vocab": [
+    {"word": "turn", "meaning": "돌아서다"},
+    {"word": "sit down", "meaning": "자리에 앉다"},
+    {"word": "give up", "meaning": "포기하다"}
+   ],
+   "chunks": [
+    {"en": "I saw him [[turn]] to sit down,", "ko": "나는 그가 앉으려고 [[돌아서는]] 것을 보았는데,"},
+    {"en": "looking like he had [[given]] up.", "ko": "그는 [[포기한]] 것처럼 보였다."}
+   ],
+   "misreads": [
+    {"statement": "화자는 Dave가 실제로 완전히 포기했다고 단정한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "looking like he had given up", "why": "'포기한 것처럼 보였다'는 인상일 뿐 단정한 것이 아니다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "But for some reason, he decided against it.",
+   "grammar": [
+    {"tag": "decide against", "note": "~하지 않기로 하다", "spans": ["decided against"]}
+   ],
+   "vocab": [
+    {"word": "for some reason", "meaning": "무슨 이유에서인지"},
+    {"word": "decide against", "meaning": "~하지 않기로 결정하다"}
+   ],
+   "chunks": [
+    {"en": "But for some reason, he [[decided]] against it.", "ko": "하지만 무슨 이유에서인지, 그는 그러지 않기로 [[결정]]했다."}
+   ],
+   "misreads": [
+    {"statement": "it은 Dave가 마시려던 음료를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "he decided against it", "why": "it은 앞에 나온 '앉아서 포기하려던 행동'을 가리킨다.", "killer": false, "english": false, "integrative": false}
+   ],
+   "mistips": ["'decided against it'을 '그것에 맞서 싸웠다'로 읽으면 안 돼 — '[[그렇게 하지 않기로]] 했다'는 뜻"]
+  },
+  {
+   "id": 11,
+   "english": "He wasn't leaving until he got a drink.",
+   "grammar": [
+    {"tag": "과거진행 부정", "note": "~하지 않으려 하고 있었다", "spans": ["wasn't leaving"]},
+    {"tag": "접속사 until", "note": "~할 때까지", "spans": ["until"]}
+   ],
+   "vocab": [
+    {"word": "leave", "meaning": "떠나다"},
+    {"word": "get a drink", "meaning": "음료를 얻다"}
+   ],
+   "chunks": [
+    {"en": "He wasn't [[leaving]]", "ko": "그는 [[떠나지]] 않고 있었다"},
+    {"en": "until he got a [[drink]].", "ko": "그가 [[음료]]를 얻을 때까지."}
+   ],
+   "misreads": [
+    {"statement": "그는 음료를 손에 넣기 전까지는 그 자리를 떠나려 하지 않았다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 12,
+   "english": "With a determined expression, he kept aimlessly pushing the dollar bill into the machine.",
+   "grammar": [
+    {"tag": "keep -ing", "note": "계속 ~하다", "spans": ["kept aimlessly pushing"]}
+   ],
+   "vocab": [
+    {"word": "determined", "meaning": "단호한"},
+    {"word": "expression", "meaning": "표정"},
+    {"word": "aimlessly", "meaning": "아무렇게나·정처 없이"}
+   ],
+   "chunks": [
+    {"en": "With a [[determined]] expression,", "ko": "[[단호한]] 표정으로,"},
+    {"en": "he kept [[aimlessly]] pushing the dollar bill", "ko": "그는 계속 [[아무렇게나]] 달러 지폐를 밀어 넣었고"},
+    {"en": "into the [[machine]].", "ko": "[[자판기]] 안으로."}
+   ],
+   "misreads": [
+    {"statement": "그는 화가 나서 자판기를 발로 차기 시작했다.", "verdict": "X", "trap_type": "무관정보", "anchor": "he kept aimlessly pushing the dollar bill", "why": "그는 지폐를 계속 밀어 넣었을 뿐, 자판기를 찼다는 내용은 없다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 13,
+   "english": "Just then a popular senior boy stood up from his seat, and walked over to the boy.",
+   "grammar": [
+    {"tag": "부사 just then", "note": "바로 그때", "spans": ["Just then"]}
+   ],
+   "vocab": [
+    {"word": "popular", "meaning": "인기 있는"},
+    {"word": "senior", "meaning": "상급생·졸업반"},
+    {"word": "walk over to", "meaning": "~에게 걸어가다"}
+   ],
+   "chunks": [
+    {"en": "Just then a popular [[senior]] boy stood up from his seat,", "ko": "바로 그때 인기 많은 [[상급생]]이 자리에서 일어섰고,"},
+    {"en": "and [[walked]] over to the boy.", "ko": "그리고 그 소년에게 [[걸어갔다]]."}
+   ],
+   "misreads": [
+    {"statement": "인기 많은 상급생이 자리에서 일어나 Dave에게 다가갔다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 14,
+   "english": "He calmly explained how the machine often had trouble accepting dollar bills.",
+   "grammar": [
+    {"tag": "간접의문문 how", "note": "how+주어+동사 어순", "spans": ["how the machine often had trouble"]},
+    {"tag": "have trouble -ing", "note": "~하는 데 애를 먹다", "spans": ["had trouble accepting"]}
+   ],
+   "vocab": [
+    {"word": "calmly", "meaning": "차분하게"},
+    {"word": "explain", "meaning": "설명하다"},
+    {"word": "have trouble -ing", "meaning": "~하는 데 어려움을 겪다"}
+   ],
+   "chunks": [
+    {"en": "He calmly [[explained]]", "ko": "그는 차분하게 [[설명]]했다"},
+    {"en": "how the machine often had [[trouble]]", "ko": "자판기가 자주 [[어려움]]을 겪는지를"},
+    {"en": "[[accepting]] dollar bills.", "ko": "지폐를 [[인식하는]] 데."}
+   ],
+   "misreads": [
+    {"statement": "여기서 He는 설명을 들은 Dave를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "He calmly explained", "why": "설명한 He는 앞 문장에서 다가온 상급생을 가리킨다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 15,
+   "english": "After that, he pulled some coins from his pocket and put them into the machine.",
+   "grammar": [
+    {"tag": "접속사 after that", "note": "그 후에(순서)", "spans": ["After that"]}
+   ],
+   "vocab": [
+    {"word": "pull", "meaning": "꺼내다"},
+    {"word": "coins", "meaning": "동전"},
+    {"word": "pocket", "meaning": "주머니"}
+   ],
+   "chunks": [
+    {"en": "After that, he pulled some [[coins]] from his pocket", "ko": "그 후, 그는 주머니에서 [[동전]]을 꺼냈고"},
+    {"en": "and put them into the [[machine]].", "ko": "그것들을 [[자판기]]에 넣었다."}
+   ],
+   "misreads": [
+    {"statement": "주머니에서 동전을 꺼낸 사람은 Dave다.", "verdict": "X", "trap_type": "주체대상", "anchor": "he pulled some coins from his pocket", "why": "동전을 꺼낸 he는 도와준 상급생이며 Dave가 아니다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 16,
+   "english": "Dave gave him his dollar and chose a flavor of fruit juice.",
+   "grammar": [
+    {"tag": "등위접속 and", "note": "주어 Dave 공유 병렬", "spans": ["gave", "chose"]}
+   ],
+   "vocab": [
+    {"word": "flavor", "meaning": "맛·종류"},
+    {"word": "fruit juice", "meaning": "과일 주스"}
+   ],
+   "chunks": [
+    {"en": "Dave gave him his [[dollar]]", "ko": "Dave는 그에게 자신의 [[달러]]를 주었고"},
+    {"en": "and chose a [[flavor]] of fruit juice.", "ko": "과일 주스 [[맛]]을 골랐다."}
+   ],
+   "misreads": [
+    {"statement": "Dave는 자신의 달러를 상급생에게 건네고 과일 주스 맛을 골랐다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 17,
+   "english": "Then the two walked off in different directions.",
+   "grammar": [
+    {"tag": "walk off", "note": "떠나다·자리를 뜨다", "spans": ["walked off"]}
+   ],
+   "vocab": [
+    {"word": "walk off", "meaning": "떠나다"},
+    {"word": "direction", "meaning": "방향"}
+   ],
+   "chunks": [
+    {"en": "Then the two [[walked]] off", "ko": "그러고 나서 둘은 [[걸어]]갔다"},
+    {"en": "in different [[directions]].", "ko": "서로 다른 [[방향]]으로."}
+   ],
+   "misreads": [
+    {"statement": "The two boys kept talking and left together.", "verdict": "X", "trap_type": "무관정보", "anchor": "walked off in different directions", "why": "둘은 서로 '다른' 방향으로 떠났고 함께 가지 않았다.", "killer": false, "english": true, "integrative": false}
+   ]
+  },
+  {
+   "id": 18,
+   "english": "Although it was clear that they were from very different worlds, for one moment, they'd shared a real understanding.",
+   "grammar": [
+    {"tag": "과거완료", "note": "had shared — 그 이전에 나눈 이해", "spans": ["they'd shared"]},
+    {"tag": "양보 although", "note": "비록 ~일지라도", "spans": ["Although"]}
+   ],
+   "vocab": [
+    {"word": "clear", "meaning": "분명한"},
+    {"word": "for one moment", "meaning": "한순간"},
+    {"word": "real understanding", "meaning": "진정한 이해"}
+   ],
+   "chunks": [
+    {"en": "Although it was [[clear]]", "ko": "비록 [[분명]]했지만"},
+    {"en": "that they were from very different [[worlds]],", "ko": "그들이 매우 다른 [[세상]]에서 왔다는 것이,"},
+    {"en": "for one moment, they'd [[shared]] a real understanding.", "ko": "한순간, 그들은 진정한 이해를 [[나누었다]]."}
+   ],
+   "misreads": [
+    {"statement": "화자는 둘이 서로 다른 세계 출신이라 끝내 서로를 이해하지 못했다고 본다.", "verdict": "△", "trap_type": "필자관점", "anchor": "they'd shared a real understanding", "why": "'다른 세계'라는 판단은 맞지만, 한순간 '진정한 이해를 나눴다'고 했다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 19,
+   "english": "As I walked away from my lunch table that day, I looked at Dave.",
+   "grammar": [
+    {"tag": "접속사 as", "note": "~하면서(때)", "spans": ["As"]}
+   ],
+   "vocab": [
+    {"word": "walk away from", "meaning": "~에서 걸어 나오다"},
+    {"word": "lunch table", "meaning": "점심 식탁"}
+   ],
+   "chunks": [
+    {"en": "As I [[walked]] away from my lunch table that day,", "ko": "그날 점심 테이블에서 [[걸어]] 나오며,"},
+    {"en": "I [[looked]] at Dave.", "ko": "나는 Dave를 [[바라보았다]]."}
+   ],
+   "misreads": [
+    {"statement": "그날 점심 자리를 떠난 사람은 Dave다.", "verdict": "X", "trap_type": "주체대상", "anchor": "As I walked away from my lunch table", "why": "자리를 떠난 것은 화자(I)이고 Dave가 아니다.", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 20,
+   "english": "I thought he and the dollar were very much alike.",
+   "grammar": [
+    {"tag": "think O C", "note": "~가 …라고 생각하다", "spans": ["thought he and the dollar were"]}
+   ],
+   "vocab": [
+    {"word": "alike", "meaning": "비슷한·닮은"},
+    {"word": "very much", "meaning": "아주 많이"}
+   ],
+   "chunks": [
+    {"en": "I [[thought]]", "ko": "나는 [[생각]]했다"},
+    {"en": "he and the dollar were very much [[alike]].", "ko": "그와 그 달러가 아주 많이 [[닮았다]]고."}
+   ],
+   "misreads": [
+    {"statement": "화자는 Dave와 그 달러가 서로 완전히 다르다고 생각했다.", "verdict": "X", "trap_type": "필자관점", "anchor": "he and the dollar were very much alike", "why": "화자는 둘이 '아주 많이 닮았다'고 생각했다.", "killer": true, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 21,
+   "english": "They both weren't accepted where the world said they were supposed to be.",
+   "grammar": [
+    {"tag": "관계부사 where", "note": "장소를 나타내는 절", "spans": ["where"]},
+    {"tag": "be supposed to", "note": "~하기로 되어 있다", "spans": ["supposed to be"]}
+   ],
+   "vocab": [
+    {"word": "accept", "meaning": "받아들이다"},
+    {"word": "be supposed to be", "meaning": "~에 있어야 하다"}
+   ],
+   "chunks": [
+    {"en": "They both weren't [[accepted]]", "ko": "그들 둘 다 [[받아들여지지]] 않았다"},
+    {"en": "where the [[world]] said they were supposed to be.", "ko": "[[세상]]이 그들이 있어야 한다고 말한 곳에서."}
+   ],
+   "misreads": [
+    {"statement": "세상이 그들에게 있으라고 정해 준 곳에서 그들은 잘 받아들여졌다.", "verdict": "X", "trap_type": "구조수식", "anchor": "weren't accepted where the world said they were supposed to be", "why": "그 자리에서 그들은 오히려 받아들여지지 '않았다'(부정).", "killer": false, "english": false, "integrative": false}
+   ]
+  },
+  {
+   "id": 22,
+   "english": "But just as the dollar had found a place in a warm-hearted senior's pocket, I was sure he would eventually find his, too.",
+   "grammar": [
+    {"tag": "과거완료", "note": "had found — 확신 이전에 자리를 찾음", "spans": ["had found"]},
+    {"tag": "just as", "note": "꼭 ~하듯이(비유)", "spans": ["just as"]}
+   ],
+   "vocab": [
+    {"word": "just as", "meaning": "꼭 ~하듯이"},
+    {"word": "warm-hearted", "meaning": "마음씨 따뜻한"},
+    {"word": "eventually", "meaning": "결국"}
+   ],
+   "chunks": [
+    {"en": "But just as the dollar had [[found]] a place", "ko": "하지만 그 달러가 자리를 [[찾았던]] 것처럼"},
+    {"en": "in a [[warm-hearted]] senior's pocket,", "ko": "마음씨 [[따뜻한]] 상급생의 주머니 속에서,"},
+    {"en": "I was sure he would [[eventually]] find his, too.", "ko": "나는 그도 [[결국]] 자신의 자리를 찾을 것이라고 확신했다."}
+   ],
+   "misreads": [
+    {"statement": "달러가 상급생의 주머니에서 자리를 찾았듯, 화자는 Dave도 결국 자기 자리를 찾으리라 확신했다.", "verdict": "O", "trap_type": "", "anchor": "", "why": "", "killer": false, "english": false, "integrative": false}
+   ]
+  }
+ ]
+}

@@ -1,0 +1,226 @@
+{
+ "item_no": "34",
+ "theme": "재생 에너지 시스템 구축에 역설적으로 화석 연료가 필요한 현실",
+ "overview": {
+  "theme_ko": "재생 에너지 전환에 역설적으로 필요한 화석 연료",
+  "topic": "🔎 재생 에너지 기반시설을 지으려면 오히려 화석 연료가 요구되는 역설",
+  "stance": "부정적·비판적",
+  "stance_reason": "전환 비용이 'seldom counted in transition proposals'라며 현재 전환 계획의 맹점을 비판",
+  "structure": "주장→근거·예시",
+  "structure_reason": "전환에 화석 연료가 필요하다는 주장 뒤 콘크리트·강철, 태양광 패널 광물 채굴을 예로 뒷받침",
+  "key_grammar": {
+   "point": "the 비교급 ~, the 비교급 ~ 구문",
+   "source_sentence": "Thus, the harder we push towards a renewable energy system, the faster we have to use fossil energy for the construction process.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "'the+[[비교급]] ~, the+비교급 ~'은 '~할수록 그만큼 더 …되다'는 비례 관계예요"},
+    {"chip": "어순은", "text": "각 절 맨 앞에 [[the+비교급]]을 놓고 뒤에 '주어+동사'가 와요"},
+    {"chip": "여기선", "text": "the harder we push ↔ the [[faster]] we have to use — 밀어붙일수록 더 빨리 화석 에너지를 씀"},
+    {"chip": "의미는", "text": "앞 절이 [[조건]], 뒤 절이 그 결과처럼 비례해 커져요"},
+    {"chip": "주의", "text": "비교급 자리에 원급을 쓰면 안 되고 반드시 [[비교급]] 형태여야 해요"}
+   ],
+   "example_analysis": "두 절 모두 'the+비교급(harder/faster)'이 앞으로 나오고 그 뒤에 we push / we have to use가 이어짐",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? The harder we push, ___ we have to use fossil energy.", "options": ["the faster", "faster than", "the fast"], "answer": "the faster", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 어법상 옳은 것은?", "options": ["The harder we push, the faster we have to use it.", "The harder we push, faster we have to use it.", "Harder we push, the faster we have to use it."], "answer": "The harder we push, the faster we have to use it.", "from_passage": false},
+    {"kind": "객관식", "question": "'the 비교급 ~, the 비교급 ~'의 의미로 옳은 것은?", "options": ["~하면 할수록 그만큼 더 그렇게 된다", "~하지 않을수록 덜 그렇게 된다", "~한 만큼만 그렇게 된다"], "answer": "~하면 할수록 그만큼 더 그렇게 된다", "from_passage": false},
+    {"kind": "영작", "question": "우리가 재생 에너지 시스템을 향해 더 세게 밀어붙일수록, 건설 과정에서 더 빨리 화석 에너지를 써야 한다.", "words": ["The", "harder", "we", "push", "towards", "a", "renewable", "energy", "system", "the", "faster", "we", "have", "to", "use", "fossil", "energy", "for", "the", "construction", "process"], "answer": "The harder we push towards a renewable energy system, the faster we have to use fossil energy for the construction process.", "from_passage": true},
+    {"kind": "영작", "question": "네가 더 많이 연습할수록, 너는 더 잘하게 된다.", "words": ["the", "more", "you", "practice", "the", "better", "you", "get"], "answer": "The more you practice, the better you get.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "단계마다의 화석 연료 의존", "expressions": ["cannot happen without fossil fuels", "only possible to produce with fossil energy", "requiring the use of fossil fuels"], "variation": "재생 에너지 구축의 여러 단계마다 화석 연료가 필수임"},
+   {"label": "인류사적 대전환", "expressions": ["one of the greatest change projects in human history", "This transformation", "renewable energy infrastructure"], "variation": "재생 에너지로의 전환은 인류 역사상 손꼽히는 거대 사업"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입(주장)", "sentence_range": "1~2", "summary": "재생 에너지 [[기반시설]] 구축은 인류사적 대전환이며 여러 분야를 새로 지어야 함", "easy_example": "집만 바꾸는 게 아니라 도로·수도까지 통째로 새로 까는 일"},
+   {"stage": "핵심주장", "sentence_range": "3", "summary": "이 전환은 [[화석 연료]] 없이는 불가능함", "easy_example": "새 시스템을 켜려면 옛 발전기부터 돌려야 하는 상황"},
+   {"stage": "근거·예시", "sentence_range": "4~5", "summary": "콘크리트·강철, 태양광 패널 [[광물]] 채굴 모두 화석 에너지가 필요", "easy_example": "태양광 패널 만들 공장부터 기름으로 돌아감"},
+   {"stage": "결론(역설)", "sentence_range": "6~7", "summary": "세게 밀어붙일수록 화석 에너지를 더 써 배출 감축 노력을 [[훼손]]", "easy_example": "살 빼려 운동하다 배고파 더 먹는 역설"},
+   {"stage": "마무리(비판)", "sentence_range": "8", "summary": "전환 [[비용]]이 제안에서 거의 계산되지 않음", "easy_example": "이사 견적에서 포장비를 빼놓고 계산하는 격"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Richard Heinberg, an American journalist, argues that in building the renewable energy infrastructure to stop global warming, we are actually involved in one of the greatest change projects in human history.",
+   "grammar": [
+    {"tag": "동격 콤마", "note": "an American journalist는 Richard Heinberg의 동격", "spans": ["an American journalist"]},
+    {"tag": "동명사(전치사 목적어)", "note": "in building = '구축하는 데 있어'", "spans": ["building"]},
+    {"tag": "one of the+최상급", "note": "one of the greatest ~ projects = '가장 큰 ~ 중 하나'", "spans": ["one of the greatest"]}
+   ],
+   "vocab": [
+    {"word": "infrastructure", "meaning": "기반시설"},
+    {"word": "renewable", "meaning": "재생 가능한"},
+    {"word": "argue", "meaning": "주장하다"},
+    {"word": "be involved in", "meaning": "~에 관여하다"},
+    {"word": "global warming", "meaning": "지구 온난화"}
+   ],
+   "chunks": [
+    {"en": "Richard Heinberg, an American journalist, [[argues]]", "ko": "미국인 저널리스트 Richard Heinberg는 [[주장한다]]"},
+    {"en": "that in building the renewable energy [[infrastructure]]", "ko": "재생 에너지 [[기반시설]]을 구축하는 데 있어"},
+    {"en": "to stop global [[warming]],", "ko": "지구 [[온난화]]를 멈추기 위해,"},
+    {"en": "we are actually [[involved]] in", "ko": "우리는 실제로 [[관여하]]고 있다는 것"},
+    {"en": "one of the greatest change [[projects]] in human history.", "ko": "인류 역사상 가장 큰 변화 [[프로젝트]] 중 하나에."}
+   ],
+   "misreads": [
+    {"statement": "Heinberg는 재생 에너지로의 전환이 사소하고 손쉽게 끝낼 수 있는 과제라고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "one of the greatest change projects in human history", "why": "그는 이를 '인류 역사상 가장 큰 변화 프로젝트 중 하나'라 했으므로 사소하다는 관점은 반대다."}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "In addition to solar panels and wind turbines, we have to build an alternative transport infrastructure, farming procedures and industrial processes.",
+   "grammar": [
+    {"tag": "In addition to+명사", "note": "'~에 더하여'(여기서 to는 전치사)", "spans": ["In addition to"]},
+    {"tag": "have to(의무)", "note": "have to build = '구축해야 한다'", "spans": ["have to build"]}
+   ],
+   "vocab": [
+    {"word": "alternative", "meaning": "대체의, 대안의"},
+    {"word": "transport", "meaning": "교통, 운송"},
+    {"word": "procedure", "meaning": "절차, 과정"},
+    {"word": "industrial", "meaning": "산업의"},
+    {"word": "turbine", "meaning": "터빈"}
+   ],
+   "chunks": [
+    {"en": "In addition to solar panels and wind [[turbines]],", "ko": "태양광 패널과 풍력 [[터빈]]에 더하여,"},
+    {"en": "we have to build an [[alternative]] transport infrastructure,", "ko": "우리는 [[대체]] 교통 기반시설을 구축해야 한다,"},
+    {"en": "farming [[procedures]] and industrial processes.", "ko": "농업 [[절차]]와 산업 공정도."}
+   ],
+   "misreads": [
+    {"statement": "태양광·풍력 설비뿐 아니라 대체 교통 기반시설과 농업 절차, 산업 공정까지 새로 구축해야 한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "This transformation cannot happen without fossil fuels.",
+   "grammar": [
+    {"tag": "조동사+부정(불가능)", "note": "cannot happen = '일어날 수 없다'", "spans": ["cannot happen"]},
+    {"tag": "전치사 without", "note": "without ~ = '~ 없이는'(조건)", "spans": ["without"]}
+   ],
+   "vocab": [
+    {"word": "transformation", "meaning": "전환, 변화"},
+    {"word": "fossil fuel", "meaning": "화석 연료"}
+   ],
+   "chunks": [
+    {"en": "This [[transformation]] cannot happen", "ko": "이 [[전환]]은 일어날 수 없다"},
+    {"en": "without [[fossil]] fuels.", "ko": "[[화석]] 연료 없이는."}
+   ],
+   "misreads": [
+    {"statement": "여기서 'This transformation'은 화석 연료 사용을 늘려 가는 과정 자체를 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "This transformation cannot happen without fossil fuels", "why": "This transformation은 재생 에너지 기반시설 구축(전환)을 가리키며, 화석 연료 사용 증대 자체가 아니다.", "integrative": true},
+    {"statement": "Fossil fuels are no longer needed for this transformation.", "verdict": "X", "trap_type": "인과조건", "anchor": "cannot happen without fossil fuels", "why": "화석 연료 '없이는' 이 전환이 일어날 수 없다고 했으므로 더는 필요 없다는 말은 틀리다.", "english": true}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "For instance, production of concrete structures and steel elements require amounts of energy that is only possible to produce with fossil energy.",
+   "grammar": [
+    {"tag": "주격 관계대명사 that", "note": "that is only possible ~는 amounts of energy를 수식", "spans": ["that"]},
+    {"tag": "to부정사(난이형용사)", "note": "possible to produce = '생산하기에 가능한'", "spans": ["to produce"]}
+   ],
+   "vocab": [
+    {"word": "concrete", "meaning": "콘크리트"},
+    {"word": "steel", "meaning": "강철"},
+    {"word": "element", "meaning": "요소, 성분"},
+    {"word": "produce", "meaning": "생산하다"},
+    {"word": "require", "meaning": "필요로 하다"}
+   ],
+   "chunks": [
+    {"en": "For instance, production of [[concrete]] structures and steel elements", "ko": "예를 들어, [[콘크리트]] 구조물과 강철 요소의 생산은"},
+    {"en": "require [[amounts]] of energy", "ko": "많은 [[양]]의 에너지를 필요로 하는데"},
+    {"en": "that is only possible to [[produce]] with fossil energy.", "ko": "그것은 화석 에너지로만 [[생산]] 가능하다."}
+   ],
+   "misreads": [
+    {"statement": "콘크리트와 강철은 재생 에너지 설비에서 가장 많은 비용을 차지하는 요소다.", "verdict": "X", "trap_type": "무관정보", "anchor": "production of concrete structures and steel elements", "why": "본문은 이들 생산에 화석 에너지가 필요하다고만 했지, 비용 비중이 가장 크다고는 하지 않았다."}
+   ],
+   "mistips": ["require의 주어를 energy로 읽으면 안 돼 — 주어는 '[[production]] ... of concrete structures and steel elements'야."]
+  },
+  {
+   "id": 5,
+   "english": "Production of solar panels requires scarce and expensive minerals which must be excavated, again requiring the use of fossil fuels.",
+   "grammar": [
+    {"tag": "관계대명사+조동사 수동", "note": "which must be excavated = '발굴되어야 하는'(수동)", "spans": ["which", "excavated"]},
+    {"tag": "분사구문(연속동작)", "note": "again requiring ~ = '그리고 (또다시) ~을 필요로 하면서'", "spans": ["requiring"]}
+   ],
+   "vocab": [
+    {"word": "scarce", "meaning": "희귀한, 부족한"},
+    {"word": "excavate", "meaning": "발굴하다, 캐내다"},
+    {"word": "mineral", "meaning": "광물"}
+   ],
+   "chunks": [
+    {"en": "Production of solar panels [[requires]]", "ko": "태양광 패널의 생산은 ~을 [[필요로 한]]다"},
+    {"en": "[[scarce]] and expensive minerals", "ko": "[[희귀하]]고 값비싼 광물을,"},
+    {"en": "which must be [[excavated]],", "ko": "그리고 그것은 [[발굴되]]어야 하는데,"},
+    {"en": "again [[requiring]] the use of fossil fuels.", "ko": "이는 또다시 화석 연료 사용을 [[필요로 하]]ㄴ다."}
+   ],
+   "misreads": [
+    {"statement": "태양광 패널이 희귀하고 값비싼 광물을 만들어내며, 그 광물이 화석 연료를 채굴한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "requires scarce and expensive minerals which must be excavated", "why": "패널 생산이 광물을 '필요로 하고' 광물이 '채굴돼야' 하는 것이지, 패널이 광물을 만들거나 광물이 화석 연료를 캐는 게 아니다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "Thus, the harder we push towards a renewable energy system, the faster we have to use fossil energy for the construction process.",
+   "grammar": [
+    {"tag": "the 비교급 ~, the 비교급 ~", "note": "'~하면 할수록 그만큼 더 …하다'", "spans": ["the harder", "the faster"]},
+    {"tag": "have to(의무)", "note": "have to use = '사용해야 한다'", "spans": ["have to use"]}
+   ],
+   "vocab": [
+    {"word": "renewable energy", "meaning": "재생 가능 에너지"},
+    {"word": "construction", "meaning": "건설, 구축"},
+    {"word": "push towards", "meaning": "~을 향해 밀어붙이다"}
+   ],
+   "chunks": [
+    {"en": "Thus, the harder we [[push]] towards a renewable energy system,", "ko": "따라서, 우리가 재생 에너지 시스템을 향해 더 세게 [[밀어붙일]]수록,"},
+    {"en": "the [[faster]] we have to use fossil energy", "ko": "그만큼 더 [[빨리]] 우리는 화석 에너지를 써야 한다"},
+    {"en": "for the [[construction]] process.", "ko": "[[건설]] 과정을 위해."}
+   ],
+   "misreads": [
+    {"statement": "우리가 재생 에너지 시스템을 향해 더 세게 밀어붙일수록, 화석 에너지를 그만큼 더 적게 써도 된다.", "verdict": "X", "trap_type": "인과조건", "anchor": "the faster we have to use fossil energy", "why": "더 세게 밀어붙일수록 화석 에너지를 '더 빨리(더 많이)' 써야 한다고 했으므로 정반대다.", "killer": true}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "This is not only expensive, but also an undermining factor for our efforts to cut global emissions.",
+   "grammar": [
+    {"tag": "상관접속사 not only A but also B", "note": "'A일 뿐 아니라 B이기도 하다'", "spans": ["not only", "but also"]},
+    {"tag": "to부정사(형용사적)", "note": "efforts to cut ~ = '~을 줄이려는 노력'", "spans": ["to cut"]}
+   ],
+   "vocab": [
+    {"word": "undermine", "meaning": "훼손하다, 약화시키다"},
+    {"word": "factor", "meaning": "요인"},
+    {"word": "emissions", "meaning": "배출가스, 배출"},
+    {"word": "effort", "meaning": "노력"}
+   ],
+   "chunks": [
+    {"en": "This is not only [[expensive]],", "ko": "이것은 [[비용이 많이 드]]ㄹ 뿐만 아니라,"},
+    {"en": "but also an [[undermining]] factor", "ko": "또한 [[훼손하는]] 요인이기도 한데"},
+    {"en": "for our efforts to cut global [[emissions]].", "ko": "전 세계 [[배출가스]]를 줄이려는 우리의 노력에 있어."}
+   ],
+   "misreads": [
+    {"statement": "이 과정은 비용이 많이 들 뿐 아니라, 배출가스 감축 노력을 훼손하는 요인이기도 하다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Heinberg remarks that the cost of building this new energy infrastructure is seldom counted in transition proposals, which tend to focus just on energy supply requirements.",
+   "grammar": [
+    {"tag": "계속적 용법 which", "note": "which는 앞의 transition proposals를 부연 설명", "spans": ["which"]},
+    {"tag": "수동태+빈도부사", "note": "is seldom counted = '좀처럼 계산되지 않는다'", "spans": ["is", "counted"]}
+   ],
+   "vocab": [
+    {"word": "remark", "meaning": "언급하다, 말하다"},
+    {"word": "seldom", "meaning": "좀처럼 ~않다"},
+    {"word": "transition", "meaning": "전환, 이행"},
+    {"word": "proposal", "meaning": "제안"},
+    {"word": "requirement", "meaning": "요구사항, 필요조건"}
+   ],
+   "chunks": [
+    {"en": "Heinberg remarks that the [[cost]] of building this new energy infrastructure", "ko": "Heinberg는 이 새로운 에너지 기반시설 구축 [[비용]]이 ~라고 언급하는데"},
+    {"en": "is seldom [[counted]] in transition proposals,", "ko": "전환 제안에서 거의 [[계산되]]지 않는다고,"},
+    {"en": "which tend to focus just on energy supply [[requirements]].", "ko": "그리고 이 제안들은 에너지 공급 [[요구사항]]에만 집중하는 경향이 있다."}
+   ],
+   "misreads": [
+    {"statement": "전환 제안들은 새 에너지 기반시설의 건설 비용에 초점을 맞추는 경향이 있다.", "verdict": "X", "trap_type": "구조수식", "anchor": "which tend to focus just on energy supply requirements", "why": "which절은 제안이 '에너지 공급 요구'에만 집중한다고 했지 '건설 비용'에 집중한다고 하지 않았다(오히려 비용은 거의 계산되지 않음)."},
+    {"statement": "전환 제안들은 현실을 제대로 반영하지 못하는데, 이는 건설 비용을 실제보다 부풀려 계산하기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "the cost of building this new energy infrastructure is seldom counted in transition proposals", "why": "제안이 불완전하다는 결론은 맞지만, 비용을 '부풀린' 게 아니라 '거의 계산하지 않아서'라는 점에서 근거가 틀리다."}
+   ]
+  }
+ ]
+}

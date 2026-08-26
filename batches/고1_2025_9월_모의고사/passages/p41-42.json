@@ -1,0 +1,331 @@
+{
+ "item_no": "41-42",
+ "theme": "고객을 방어적으로 만드는 비효과적인 판매 접근법의 문제점",
+ "overview": {
+  "theme_ko": "고객을 방어적으로 만드는 판매 접근법",
+  "topic": "🔎 '도와드릴까요?'가 판매를 망치는 이유와 더 나은 접근법",
+  "stance": "부정적·비판적",
+  "stance_reason": "the worst four words ... put them on the defensive",
+  "structure": "문제→해결(방안)",
+  "structure_reason": "the approach has to promote a comfortable environment",
+  "key_grammar": {
+   "point": "사역동사 make + 목적격보어(원형부정사)",
+   "source_sentence": "The approach has to promote a comfortable environment that makes customers feel there is no rush.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "make 는 '~하게 만들다'라는 [[사역]]동사예요."},
+    {"chip": "핵심 규칙", "text": "make + 목적어 뒤에는 to 없이 [[동사원형]]이 와요."},
+    {"chip": "이 문장에선", "text": "makes customers [[feel]] — feel 이 원형 그대로 쓰였죠."},
+    {"chip": "비교", "text": "allow·force 는 to부정사를 쓰지만, make 는 [[원형]]을 써요."}
+   ],
+   "example": "makes customers feel there is no rush",
+   "example_analysis": "makes 의 목적격보어로 to feel 이 아니라 원형 feel 이 쓰였다.",
+   "drills": [
+    {"kind": "객관식", "question": "괄호 안에서 어법상 알맞은 것은? The environment makes customers ( ) there is no rush.", "options": ["feel", "to feel", "feeling"], "answer": "feel", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 목적격보어로 동사원형을 취하는 사역동사는?", "options": ["make", "want", "allow"], "answer": "make", "from_passage": false},
+    {"kind": "객관식", "question": "밑줄 친 부분이 어법상 옳은 것은?", "options": ["makes customers feel", "makes customers to feel", "makes customers felt"], "answer": "makes customers feel", "from_passage": true},
+    {"kind": "영작", "question": "그 접근 방식은 고객들이 서두를 필요가 없다고 느끼게 만드는 편안한 환경을 조장해야 한다.", "words": ["the approach", "has to", "promote", "a comfortable environment", "that", "makes", "customers", "feel", "there is", "no rush"], "answer": "The approach has to promote a comfortable environment that makes customers feel there is no rush.", "from_passage": true},
+    {"kind": "영작", "question": "그 선생님은 학생들이 편안하다고 느끼게 만든다.", "words": ["the teacher", "makes", "students", "feel", "comfortable"], "answer": "The teacher makes students feel comfortable.", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "방어적으로 만듦", "expressions": ["put them on the defensive", "puts the customer on the defense"], "variation": "'방어하게 만든다'는 개념이 표현만 바꿔 반복된다."},
+   {"label": "거절·부정 반응", "expressions": ["a negative response", "the immediate response"], "variation": "고객의 즉각적 거절 반응을 가리키는 표현이 이어진다."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입(문제제기)", "sentence_range": "1~2", "summary": "'도와드릴까요?'는 [[최악]]의 표현이라 부정적 반응만 부른다.", "easy_example": "첫인사부터 '무슨 문제 있어요?'라고 물으면 상대가 움츠러든다."},
+   {"stage": "전개(대조)", "sentence_range": "3~5", "summary": "더 나은 [[질문]] 예시 vs. 훈련 안 된 판매원의 진부한 접근.", "easy_example": "'선물 사세요?'처럼 열린 질문이 대화를 연다."},
+   {"stage": "부연(심리)", "sentence_range": "6~10", "summary": "이 말은 고객을 곤경에 처한 사람으로 [[함의]]해 방어하게 만든다.", "easy_example": "'도와줄까?'는 '너 못 하잖아'처럼 들릴 수 있다."},
+   {"stage": "결론(방안)", "sentence_range": "11~14", "summary": "압박 대신 [[편안]]한 환경과 명함으로 부담 없이 접근해야 한다.", "easy_example": "명함만 건네고 물러서면 손님이 편히 둘러본다."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "\"May I help you?\" are the worst four words that a retail salesperson can utter because they don't encourage the customer to talk and put them on the defensive.",
+   "grammar": [
+    {"tag": "관계대명사 that", "note": "선행사 words 를 수식하는 절을 이끈다", "spans": ["that"]},
+    {"tag": "병렬 don't A and B", "note": "encourage ~ and put ~ 이 don't 에 병렬로 걸린다", "spans": ["encourage", "put"]}
+   ],
+   "vocab": [
+    {"word": "retail", "meaning": "소매의"},
+    {"word": "utter", "meaning": "(말을) 하다, 입 밖에 내다"},
+    {"word": "encourage", "meaning": "장려하다, ~하도록 하다"},
+    {"word": "on the defensive", "meaning": "방어적인 태도로"}
+   ],
+   "chunks": [
+    {"en": "\"May I help you?\" are the [[worst]] four words", "ko": "\"도와드릴까요?\"는 [[최악의]] 네 단어이다"},
+    {"en": "that a retail salesperson can [[utter]]", "ko": "소매 판매원이 [[말할]] 수 있는"},
+    {"en": "because they don't [[encourage]] the customer to talk", "ko": "그들이 고객이 말하도록 [[유도하지]] 않고"},
+    {"en": "and put them on the [[defensive]].", "ko": "그들을 [[방어적]]이게 만들기 때문이다."}
+   ],
+   "misreads": [
+    {"statement": "'도와드릴까요?'라는 말은 고객이 말하도록 유도하지 못해서 최악의 표현으로 제시된다.", "verdict": "O"},
+    {"statement": "'도와드릴까요?'는 고객이 방어적으로 되는 것을 막아 주기 때문에 최악의 표현이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "put them on the defensive", "why": "이 말은 고객을 방어적으로 '만들기' 때문에 최악인 것이지, 방어를 막아 주는 것이 아니다.", "killer": true}
+   ],
+   "mistips": ["put them on the defensive 를 '방어를 없앤다'로 읽으면 안 돼 — (바르게는) 고객을 [[방어적]]으로 만든다는 뜻이야."]
+  },
+  {
+   "id": 2,
+   "english": "The four words usually draw out a negative response that stops cold a sales transaction.",
+   "grammar": [
+    {"tag": "구동사 draw out", "note": "'~을 끌어내다'", "spans": ["draw out"]},
+    {"tag": "관계대명사 that", "note": "선행사 response 를 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "draw out", "meaning": "끌어내다, 유도하다"},
+    {"word": "negative response", "meaning": "부정적인 반응"},
+    {"word": "stop cold", "meaning": "완전히 멈추게 하다"},
+    {"word": "transaction", "meaning": "거래"}
+   ],
+   "chunks": [
+    {"en": "The four words usually draw out a negative [[response]]", "ko": "그 네 단어는 보통 부정적인 [[반응]]을 끌어낸다"},
+    {"en": "that stops cold a sales [[transaction]].", "ko": "판매 [[거래]]를 완전히 막는."}
+   ],
+   "misreads": [
+    {"statement": "부정적인 반응이 그 네 단어를 이끌어 낸다.", "verdict": "X", "trap_type": "주체대상", "anchor": "draw out a negative response", "why": "그 네 단어가 부정적 반응을 끌어내는 것이지, 반응이 그 말을 끌어내는 것이 아니다."}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "Examples of better questions to use when approaching customers are \"Is there anything in particular that you are looking for?\" and \"Are you shopping for a gift?\"",
+   "grammar": [
+    {"tag": "분사 approaching", "note": "when + 분사(~할 때)", "spans": ["approaching"]},
+    {"tag": "관계대명사 that", "note": "선행사 anything 을 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "approach", "meaning": "다가가다, 접근하다"},
+    {"word": "in particular", "meaning": "특별히"},
+    {"word": "look for", "meaning": "~을 찾다"}
+   ],
+   "chunks": [
+    {"en": "Examples of better [[questions]] to use when approaching customers are", "ko": "고객에게 다가갈 때 사용할 더 나은 [[질문]]들의 예들은"},
+    {"en": "\"Is there anything in [[particular]] that you are looking for?\"", "ko": "\"[[특별히]] 찾으시는 것이 있나요?\""},
+    {"en": "and \"Are you shopping for a [[gift]]?\"", "ko": "그리고 \"[[선물]]을 사려고 하시나요?\""}
+   ],
+   "misreads": [
+    {"statement": "'특별히 찾으시는 것이 있나요?' 같은 질문이 더 나은 접근의 예로 제시된다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "If a fashion salesperson approached you with \"May I help you?\" chances are you would feel the salesperson didn't care.",
+   "grammar": [
+    {"tag": "조건절 If", "note": "If + 과거로 상황 가정", "spans": ["If"]},
+    {"tag": "감정동사 feel", "note": "feel + 목적어절", "spans": ["feel"]}
+   ],
+   "vocab": [
+    {"word": "chances are", "meaning": "~할 가능성이 있다"},
+    {"word": "care", "meaning": "신경 쓰다, 마음 쓰다"}
+   ],
+   "chunks": [
+    {"en": "If a fashion salesperson [[approached]] you", "ko": "만약 패션 판매원이 당신에게 [[다가온다면]]"},
+    {"en": "with \"May I [[help]] you?\"", "ko": "\"[[도와드릴까요]]?\"라고"},
+    {"en": "[[chances]] are you would feel", "ko": "당신은 느낄 [[가능성]]이 있다"},
+    {"en": "the salesperson didn't [[care]].", "ko": "그 판매원이 [[신경]] 쓰지 않는다고."}
+   ],
+   "misreads": [
+    {"statement": "패션 판매원은 다른 업종보다 이 표현을 특히 자주 사용한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "a fashion salesperson approached you", "why": "본문은 패션 판매원을 예로 들 뿐, 업종 간 사용 빈도를 비교하지는 않는다."}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "This line is a rote approach that is so overused by untrained and uninterested salespeople.",
+   "grammar": [
+    {"tag": "관계대명사 that", "note": "선행사 approach 를 수식", "spans": ["that"]},
+    {"tag": "수동태 is overused", "note": "so + 과거분사(수동)", "spans": ["overused"]}
+   ],
+   "vocab": [
+    {"word": "rote", "meaning": "기계적인, 암기식의"},
+    {"word": "overused", "meaning": "지나치게 사용된"},
+    {"word": "untrained", "meaning": "훈련되지 않은"},
+    {"word": "uninterested", "meaning": "무관심한"}
+   ],
+   "chunks": [
+    {"en": "This line is a [[rote]] approach", "ko": "이 문장은 [[기계적]]인 접근 방식이다"},
+    {"en": "that is so [[overused]]", "ko": "매우 [[지나치게]] 사용되는"},
+    {"en": "by [[untrained]] and uninterested salespeople.", "ko": "[[훈련되지]] 않고 무관심한 판매원들에 의해."}
+   ],
+   "misreads": [
+    {"statement": "이 표현은 피해야 할 진부한 방식인데, 이는 잘 훈련된 판매원들이 즐겨 쓰기 때문이다.", "verdict": "△", "trap_type": "주체대상", "anchor": "untrained and uninterested salespeople", "why": "이 말을 남용하는 이들은 훈련되지 않고 무관심한 판매원이지, 잘 훈련된 판매원이 아니다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "In fact, most of us shudder in horror on hearing these words.",
+   "grammar": [
+    {"tag": "동명사 hearing", "note": "전치사 on + 동명사(~하자마자)", "spans": ["on hearing"]}
+   ],
+   "vocab": [
+    {"word": "shudder", "meaning": "몸서리치다, 떨다"},
+    {"word": "in horror", "meaning": "겁에 질려"}
+   ],
+   "chunks": [
+    {"en": "In fact, most of us [[shudder]] in horror", "ko": "사실, 우리 대부분은 겁에 질려 [[몸서리친다]]"},
+    {"en": "on [[hearing]] these words.", "ko": "이 단어들을 [[들을]] 때."}
+   ],
+   "misreads": [
+    {"statement": "'these words'는 앞서 제시된 더 나은 질문들을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "these words", "why": "these words 는 '도와드릴까요?'라는 최악의 표현을 가리키지, 더 나은 질문을 가리키지 않는다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "The very meaning of the question \"May I help you?\" implies that the customer is in trouble of some sort and needs rescuing.",
+   "grammar": [
+    {"tag": "명사절 that", "note": "implies 의 목적어절을 이끈다", "spans": ["that"]},
+    {"tag": "동명사 rescuing", "note": "needs + 동명사(수동 의미)", "spans": ["needs rescuing"]}
+   ],
+   "vocab": [
+    {"word": "imply", "meaning": "내포하다, 암시하다"},
+    {"word": "of some sort", "meaning": "어떤 종류의"},
+    {"word": "rescue", "meaning": "구출하다, 구조하다"}
+   ],
+   "chunks": [
+    {"en": "The very [[meaning]] of the question \"May I help you?\" implies", "ko": "\"도와드릴까요?\"라는 질문의 바로 그 [[의미]]가 내포하는 것은"},
+    {"en": "that the customer is in [[trouble]] of some sort", "ko": "고객이 어떤 종류의 [[곤경]]에 처해 있고"},
+    {"en": "and needs [[rescuing]].", "ko": "[[구출]]될 필요가 있다는 것이다."}
+   ],
+   "misreads": [
+    {"statement": "필자는 고객이 실제로 곤경에 처해 구조받기를 반긴다고 본다.", "verdict": "X", "trap_type": "필자관점", "anchor": "the customer is in trouble of some sort and needs rescuing", "why": "필자는 그 질문이 고객을 곤경에 처한 사람으로 '함의'한다고 비판하는 것이지, 고객이 구조를 반긴다고 보지 않는다."}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "This almost always puts the customer on the defense.",
+   "grammar": [
+    {"tag": "빈도부사 almost always", "note": "'거의 항상'", "spans": ["almost always"]}
+   ],
+   "vocab": [
+    {"word": "on the defense", "meaning": "방어 태세로"}
+   ],
+   "chunks": [
+    {"en": "This almost always puts the customer on the [[defense]].", "ko": "이것은 거의 항상 그 고객을 [[방어적]]이게 만든다."}
+   ],
+   "misreads": [
+    {"statement": "'This'는 고객의 'No, thank you'라는 대답을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "implies that the customer is in trouble", "why": "This 는 그 질문이 내포하는 의미를 가리키며, 바로 그 의미가 고객을 방어적으로 만든다는 흐름이다.", "integrative": true}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "\"No, thank you\" is usually the immediate response, even if the customer is actually in need of assistance.",
+   "grammar": [
+    {"tag": "양보 even if", "note": "'비록 ~일지라도'", "spans": ["even if"]}
+   ],
+   "vocab": [
+    {"word": "immediate", "meaning": "즉각적인"},
+    {"word": "in need of", "meaning": "~을 필요로 하는"},
+    {"word": "assistance", "meaning": "도움, 지원"}
+   ],
+   "chunks": [
+    {"en": "\"No, thank you\" is usually the [[immediate]] response,", "ko": "\"아니요, 괜찮습니다\"는 보통 [[즉각적]]인 반응이다,"},
+    {"en": "even if the customer is actually in need of [[assistance]].", "ko": "그 고객이 실제로 [[도움]]이 필요할지라도."}
+   ],
+   "misreads": [
+    {"statement": "\"No, thank you\" means the customer never needs any help.", "verdict": "X", "trap_type": "인과조건", "anchor": "even if the customer is actually in need of assistance", "why": "실제로 도움이 필요할 때조차 즉각 거절이 나온다고 했으므로, 도움이 전혀 필요 없다는 뜻은 아니다.", "english": true}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "The subconscious thought by the customer is often \"I'm smart enough to figure out what I want, and I don't need your help \"",
+   "grammar": [
+    {"tag": "enough to부정사", "note": "형용사 + enough to-V(~할 만큼 충분히)", "spans": ["enough to"]},
+    {"tag": "관계대명사 what", "note": "figure out 의 목적어절", "spans": ["what"]}
+   ],
+   "vocab": [
+    {"word": "subconscious", "meaning": "잠재의식의"},
+    {"word": "figure out", "meaning": "알아내다, 파악하다"}
+   ],
+   "chunks": [
+    {"en": "The [[subconscious]] thought by the customer is often", "ko": "고객의 [[잠재의식]]적인 생각은 종종 다음과 같다"},
+    {"en": "\"I'm smart enough to [[figure]] out what I want,", "ko": "\"나는 내가 원하는 것을 [[알아낼]] 만큼 충분히 똑똑하다,"},
+    {"en": "and I don't need your [[help]] \"", "ko": "그리고 나는 당신의 [[도움]]이 필요 없다\""}
+   ],
+   "misreads": [
+    {"statement": "고객의 잠재의식에는 스스로 원하는 것을 알아낼 만큼 똑똑하니 도움이 필요 없다는 생각이 흔히 있다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 11,
+   "english": "If customers feel pressured or cornered, then salespeople won't make any sales.",
+   "grammar": [
+    {"tag": "조건절 If", "note": "If ~, then ~ 구조", "spans": ["If"]},
+    {"tag": "수동 pressured or cornered", "note": "감정 과거분사 병렬", "spans": ["pressured or cornered"]}
+   ],
+   "vocab": [
+    {"word": "pressured", "meaning": "압박을 받는"},
+    {"word": "cornered", "meaning": "궁지에 몰린"}
+   ],
+   "chunks": [
+    {"en": "If customers feel [[pressured]] or cornered,", "ko": "만약 고객들이 [[압박]]감이나 궁지를 느낀다면,"},
+    {"en": "then salespeople won't make any [[sales]].", "ko": "그러면 판매원들은 어떤 [[판매]]도 못 할 것이다."}
+   ],
+   "misreads": [
+    {"statement": "고객이 압박이나 궁지를 느껴도 판매는 이루어진다.", "verdict": "X", "trap_type": "인과조건", "anchor": "salespeople won't make any sales", "why": "고객이 압박이나 궁지에 몰리면 판매원은 어떤 판매도 하지 못한다고 했다."}
+   ]
+  },
+  {
+   "id": 12,
+   "english": "The approach has to promote a comfortable environment that makes customers feel there is no rush.",
+   "grammar": [
+    {"tag": "사역동사 make+원형부정사", "note": "makes + 목적어 + feel(원형부정사)", "spans": ["makes customers feel"]},
+    {"tag": "관계대명사 that", "note": "선행사 environment 를 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "promote", "meaning": "조성하다, 촉진하다"},
+    {"word": "comfortable", "meaning": "편안한"},
+    {"word": "no rush", "meaning": "서두를 것 없음"}
+   ],
+   "chunks": [
+    {"en": "The approach has to [[promote]] a comfortable environment", "ko": "그 접근 방식은 편안한 환경을 [[조성]]해야 한다"},
+    {"en": "that makes customers feel there is no [[rush]].", "ko": "고객들이 [[서두를]] 필요가 없다고 느끼게 만드는."}
+   ],
+   "misreads": [
+    {"statement": "고객들이 서두름 없는 편안한 환경을 스스로 조성해야 한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "makes customers feel there is no rush", "why": "편안한 환경이 고객에게 서두를 필요 없다고 느끼게 하는 것이지, 고객이 환경을 만드는 것이 아니다."}
+   ]
+  },
+  {
+   "id": 13,
+   "english": "Furthermore, if customers just want to look around, they should feel that it is all right to do so.",
+   "grammar": [
+    {"tag": "부사절 if", "note": "'~라면'", "spans": ["if"]},
+    {"tag": "가주어 it", "note": "it is all right to do — 진주어 to부정사", "spans": ["it is all right"]}
+   ],
+   "vocab": [
+    {"word": "furthermore", "meaning": "게다가"},
+    {"word": "look around", "meaning": "둘러보다"},
+    {"word": "all right", "meaning": "괜찮은"}
+   ],
+   "chunks": [
+    {"en": "Furthermore, if customers just want to look [[around]],", "ko": "게다가, 만약 고객들이 그저 [[둘러보길]] 원한다면,"},
+    {"en": "they should feel that it is all [[right]] to do so.", "ko": "그들은 그렇게 해도 [[괜찮]]다고 느껴야 한다."}
+   ],
+   "misreads": [
+    {"statement": "고객이 그저 둘러보고만 싶어 해도 그래도 괜찮다고 느끼게 해야 한다고 본다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 14,
+   "english": "In situations where customers really do want to look around on their own, salespeople should give customers their business cards and keep themselves accessible in case customers have questions or concerns.",
+   "grammar": [
+    {"tag": "관계부사 where", "note": "선행사 situations 를 수식", "spans": ["where"]},
+    {"tag": "재귀대명사 themselves", "note": "주어 salespeople 과 동일 대상", "spans": ["themselves"]},
+    {"tag": "in case 절", "note": "'~할 경우에 대비하여'", "spans": ["in case"]}
+   ],
+   "vocab": [
+    {"word": "on their own", "meaning": "혼자서, 스스로"},
+    {"word": "business card", "meaning": "명함"},
+    {"word": "accessible", "meaning": "접근 가능한"},
+    {"word": "in case", "meaning": "~할 경우에 대비하여"}
+   ],
+   "chunks": [
+    {"en": "In situations where customers really do [[want]]", "ko": "고객들이 정말로 원하는 [[상황]]에서는"},
+    {"en": "to look [[around]] on their own,", "ko": "혼자서 [[둘러보길]],"},
+    {"en": "salespeople should give customers their [[business]] cards", "ko": "판매원들은 고객들에게 [[명함]]을 주어야 하고"},
+    {"en": "and keep themselves [[accessible]]", "ko": "그들 자신을 [[접근]] 가능한 상태로 유지해야 하며"},
+    {"en": "in case customers have questions or [[concerns]].", "ko": "고객들이 질문이나 [[걱정]]이 있을 경우에 대비하여."}
+   ],
+   "misreads": [
+    {"statement": "혼자 둘러보길 원하는 고객에게는 명함을 주고 판매원은 자리를 비워 두어야 한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "keep themselves accessible", "why": "판매원은 접근 가능한 상태로 '남아 있어야' 하지, 자리를 비우는 것이 아니다."}
+   ]
+  }
+ ]
+}

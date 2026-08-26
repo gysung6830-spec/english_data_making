@@ -1,0 +1,201 @@
+{
+ "item_no": "30",
+ "theme": "소유가 많아질수록 공유를 덜하게 되는 인간의 경향",
+ "overview": {
+   "theme_ko": "많이 가질수록 덜 나누는 인간의 경향",
+   "topic": "🔎 소유와 공유의 반비례 관계",
+   "stance": "부정적·비판적",
+   "stance_reason": "the less we want to share, disconnection or blindness to reality 로 비판적으로 봄",
+   "structure": "비교·대조",
+   "structure_reason": "적게 가질 때(나눔)와 많이 가질 때(안 나눔)를 대조함",
+   "key_grammar": {
+     "point": "관계대명사 what (선행사를 포함)",
+     "source_sentence": "When we have less, we tend to be more open to sharing what we have.",
+     "explanation": [
+       {"chip":"쉽게 말하면","text":"what we have는 [[the thing(s) that]] we have와 같다"},
+       {"chip":"형태","text":"what은 선행사를 [[포함]]하는 관계대명사라 앞에 꾸밈 받는 명사가 없다"},
+       {"chip":"역할","text":"여기서 what절은 sharing(동명사)의 [[목적어]] 역할을 한다"},
+       {"chip":"뜻","text":"'우리가 [[가진 것]]'으로 해석한다"},
+       {"chip":"비교","text":"관계대명사 that/which와 달리 what은 [[선행사]]가 필요 없다"}
+     ],
+     "example_analysis": "sharing what we have에서 what은 선행사를 포함해 '~하는 것'을 뜻하며 sharing의 목적어절을 이끈다.",
+     "drills": [
+       {"kind":"객관식","question":"밑줄 친 what we have에서 what의 역할로 알맞은 것은?","options":["선행사를 포함한 관계대명사","의문사","등위접속사"],"answer":"선행사를 포함한 관계대명사","from_passage":true},
+       {"kind":"객관식","question":"what we have에서 what을 바꿔 쓸 수 있는 것은?","options":["the thing that","the thing what","that of which"],"answer":"the thing that","from_passage":false},
+       {"kind":"객관식","question":"빈칸에 알맞은 것: we are open to sharing ( ) we have.","options":["what","that","which"],"answer":"what","from_passage":true},
+       {"kind":"영작","question":"우리가 더 적게 가질 때, 우리는 가진 것을 나누는 데 더 개방적인 경향이 있다.","words":["When","we","have","less","we","tend","to","be","more","open","to","sharing","what","we","have"],"answer":"When we have less, we tend to be more open to sharing what we have","from_passage":true},
+       {"kind":"영작","question":"그는 자신이 가진 것에 만족한다.","words":["He","is","satisfied","with","what","he","has"],"answer":"He is satisfied with what he has","from_passage":false}
+     ]
+   },
+   "restatement_chains": [
+     {"label":"나눔·협력","expressions":["share and cooperate","open to sharing","happy to share","depends on sharing"],"variation":"적게 가진 이들이 기꺼이 베푸는 나눔의 태도"},
+     {"label":"소유의 증가","expressions":["the more we have","Our desire for more"],"variation":"소유·욕망이 커질수록 나눔에서 멀어짐"}
+   ],
+   "flow_blocks": [
+     {"stage":"도입(주제)","sentence_range":"1","summary":"자원이 풍부해지면 나누려는 [[본능]]이 복잡해진다","easy_example":"먹을 게 넘치면 오히려 나눠 먹기를 꺼린다"},
+     {"stage":"전개","sentence_range":"2~3","summary":"적게 가질수록 [[나누는]] 데 더 개방적이다","easy_example":"과자 하나뿐일 때 오히려 친구와 나눈다"},
+     {"stage":"사례","sentence_range":"4~5","summary":"유목 부족은 [[생존]]이 나눔에 달려 있어 손님을 환대한다","easy_example":"사막 여행자에게 물을 내주는 유목민"},
+     {"stage":"반전(결론)","sentence_range":"6~7","summary":"많이 가질수록 [[울타리]]는 커지고 덜 나누며 현실과 단절된다","easy_example":"담장 높은 큰 집일수록 이웃과 왕래가 줄어든다"}
+   ]
+ },
+ "sentences": [
+   {
+     "id": 1,
+     "english": "For a species born in a time when resources were limited and dangers were great, our natural tendency to share and cooperate is complicated when resources are plenty and outside dangers are few.",
+     "grammar": [
+       {"tag":"분사 born","note":"born in a time가 species를 후치수식","spans":["born"]},
+       {"tag":"관계부사 when","note":"a time을 수식하는 when절","spans":["when"]}
+     ],
+     "vocab": [
+       {"word":"tendency","meaning":"성향, 경향"},
+       {"word":"cooperate","meaning":"협력하다"},
+       {"word":"plenty","meaning":"풍부한, 많은"},
+       {"word":"complicated","meaning":"복잡한"}
+     ],
+     "chunks": [
+       {"en":"For a [[species]] born in a time","ko":"한 시기에 태어난 [[종]]에게 있어"},
+       {"en":"when resources were [[limited]] and dangers were great,","ko":"자원이 [[제한적]]이고 위험이 컸던 때,"},
+       {"en":"our natural tendency to share and [[cooperate]]","ko":"나누고 [[협력]]하려는 우리의 타고난 성향은"},
+       {"en":"is complicated when resources are [[plenty]]","ko":"자원이 [[풍부]]할 때 복잡해진다"},
+       {"en":"and outside dangers are [[few]].","ko":"그리고 외부의 위험이 [[거의 없을]] 때"}
+     ],
+     "misreads": [
+       {"statement":"자원이 부족하고 위험이 컸을 때 나누려는 성향이 복잡해진다.","verdict":"X","trap_type":"인과조건","anchor":"when resources are plenty and outside dangers are few","why":"자원이 풍부하고 외부 위험이 적을 때 성향이 복잡해진다고 했으므로 조건이 반대다."},
+       {"statement":"자원이 풍부해지면 나눔의 성향이 복잡해지는데, 이는 외부 위험이 커지기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"outside dangers are few","why":"외부 위험이 적을 때라고 했으므로 '위험이 커져서'라는 근거는 틀리다."}
+     ]
+   },
+   {
+     "id": 2,
+     "english": "When we have less, we tend to be more open to sharing what we have.",
+     "grammar": [
+       {"tag":"관계대명사 what","note":"선행사 포함 what, sharing의 목적어","spans":["what"]},
+       {"tag":"비교급 more","note":"more open, more+형용사","spans":["more"]}
+     ],
+     "vocab": [
+       {"word":"tend to","meaning":"~하는 경향이 있다"},
+       {"word":"open to","meaning":"~에 개방적인"}
+     ],
+     "chunks": [
+       {"en":"When we have [[less]],","ko":"우리가 더 [[적게]] 가질 때,"},
+       {"en":"we tend to be more open to [[sharing]]","ko":"우리는 [[나누는]] 데 더 개방적인 경향이 있다"},
+       {"en":"[[what we have.]]","ko":"[[우리가 가진 것]]"}
+     ],
+     "misreads": [
+       {"statement":"가진 것이 적을 때 사람들은 더 개방적으로 나누는 경향이 있다.","verdict":"O"}
+     ]
+   },
+   {
+     "id": 3,
+     "english": "Certain nomadic tribes don't have much, yet they are happy to share because it is in their interest to do so.",
+     "grammar": [
+       {"tag":"양보 yet","note":"don't have much, yet 대조","spans":["yet"]},
+       {"tag":"가주어 it","note":"it is in their interest to do so, it=가주어","spans":["it is"]}
+     ],
+     "vocab": [
+       {"word":"nomadic","meaning":"유목의"},
+       {"word":"tribe","meaning":"부족"},
+       {"word":"in one's interest","meaning":"~의 이익에 부합하는"}
+     ],
+     "chunks": [
+       {"en":"Certain [[nomadic]] tribes don't have much,","ko":"특정 [[유목]] 부족은 많이 갖고 있지 않지만,"},
+       {"en":"yet they are happy to [[share]]","ko":"그럼에도 기꺼이 [[나누려]] 한다"},
+       {"en":"because it is in their [[interest]] to do so.","ko":"그렇게 하는 것이 그들의 [[이익]]에 부합하기 때문에"}
+     ],
+     "misreads": [
+       {"statement":"유목 부족이 나누는 이유는 그들의 종교적 신념 때문이다.","verdict":"X","trap_type":"무관정보","anchor":"it is in their interest to do so","why":"나누는 이유는 그것이 그들의 이익에 부합하기 때문이라 했지 종교적 신념 때문이 아니다."}
+     ]
+   },
+   {
+     "id": 4,
+     "english": "If you happen upon them in your travels, they will open up their homes and give you their food and hospitality.",
+     "grammar": [
+       {"tag":"조건절 If","note":"If you happen upon them 조건","spans":["If"]},
+       {"tag":"수여동사 give","note":"give you their food 4형식","spans":["give you their food"]}
+     ],
+     "vocab": [
+       {"word":"happen upon","meaning":"우연히 마주치다"},
+       {"word":"hospitality","meaning":"환대, 접대"}
+     ],
+     "chunks": [
+       {"en":"If you [[happen upon]] them in your travels,","ko":"만약 여행 중 그들을 [[우연히 만나면]],"},
+       {"en":"they will open up their [[homes]]","ko":"그들은 자신의 [[집]]을 열고"},
+       {"en":"and give you their food and [[hospitality]].","ko":"당신에게 음식과 [[환대]]를 베풀 것이다"}
+     ],
+     "misreads": [
+       {"statement":"they will open up their homes에서 they는 여행 중인 당신(여행자)을 가리킨다.","verdict":"X","trap_type":"지칭","anchor":"they will open up their homes","why":"집을 여는 they는 유목 부족이지 여행자가 아니므로 지칭이 틀리다."},
+       {"statement":"여행 중 여행자가 유목 부족에게 음식과 환대를 베푼다.","verdict":"X","trap_type":"주체대상","anchor":"give you their food and hospitality","why":"유목 부족이 여행자에게 음식과 환대를 베푸는 것이므로 주체와 대상이 반대다."}
+     ]
+   },
+   {
+     "id": 5,
+     "english": "It's not just because they are nice people; it's because their survival depends on sharing, for they know that they may be the travelers in need of food and shelter another day.",
+     "grammar": [
+       {"tag":"세미콜론 대조","note":"not just A; it's because B","spans":["not just because"]},
+       {"tag":"이유 for","note":"for they know ~ 이유 접속사","spans":["for"]}
+     ],
+     "vocab": [
+       {"word":"survival","meaning":"생존"},
+       {"word":"shelter","meaning":"거처, 은신처"},
+       {"word":"in need of","meaning":"~을 필요로 하는"}
+     ],
+     "chunks": [
+       {"en":"It's not just because they are [[nice]] people;","ko":"이는 단지 그들이 [[좋은]] 사람이어서가 아니라;"},
+       {"en":"it's because their [[survival]] depends on sharing,","ko":"그들의 [[생존]]이 나눔에 달려 있기 때문인데,"},
+       {"en":"for they know that they may be the [[travelers]]","ko":"왜냐하면 그들도 [[여행자]]가 될 수 있음을 알기에"},
+       {"en":"in need of food and [[shelter]] another day.","ko":"언젠가 음식과 [[거처]]가 필요한"}
+     ],
+     "misreads": [
+       {"statement":"유목민이 나누는 이유는 오직 그들이 착한 사람들이기 때문이다.","verdict":"X","trap_type":"인과조건","anchor":"It's not just because they are nice people","why":"단지 착해서가 아니라 생존이 나눔에 달려 있기 때문이라고 했으므로 '오직 착해서'는 틀리다.","killer":true}
+     ],
+     "mistips": ["for를 전치사 '~을 위해'로 읽으면 안 돼 — 여기서는 [[이유]]를 뜻하는 접속사('왜냐하면')"]
+   },
+   {
+     "id": 6,
+     "english": "Ironically, the more we have, the bigger our fences, the more sophisticated our security to keep people away and the less we want to share.",
+     "grammar": [
+       {"tag":"the 비교급 the 비교급","note":"the more ~, the less ~ 상관 병렬","spans":["the more","the less"]}
+     ],
+     "vocab": [
+       {"word":"ironically","meaning":"아이러니하게도"},
+       {"word":"sophisticated","meaning":"정교한, 복잡한"},
+       {"word":"security","meaning":"보안"}
+     ],
+     "chunks": [
+       {"en":"Ironically, the more we [[have]],","ko":"아이러니하게도, 우리가 더 많이 [[가질]]수록,"},
+       {"en":"the bigger our [[fences]],","ko":"우리의 [[울타리]]는 더 커지고,"},
+       {"en":"the more sophisticated our [[security]]","ko":"우리의 [[보안]]은 더 정교해지며"},
+       {"en":"to keep people [[away]]","ko":"사람들을 [[멀리]] 두려고"},
+       {"en":"and the less we want to [[share]].","ko":"그리고 우리는 더 적게 [[나누려]] 한다"}
+     ],
+     "misreads": [
+       {"statement":"필자는 부(富)가 늘수록 사람들의 나눔도 함께 늘어난다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"the less we want to share","why":"많이 가질수록 덜 나누려 한다고 했으므로 필자의 관점과 반대다."}
+     ],
+     "mistips": ["the 비교급, the 비교급을 따로 끊어 읽으면 안 돼 — (바르게는) [[많이 가질수록 덜 나눈다]]"]
+   },
+   {
+     "id": 7,
+     "english": "Our desire for more, combined with our decreased physical interaction with the \"common folk,\" starts to create a disconnection or blindness to reality.",
+     "grammar": [
+       {"tag":"분사 combined","note":"combined with ~ 삽입 분사구","spans":["combined"]},
+       {"tag":"등위 or","note":"disconnection or blindness 병렬","spans":["or"]}
+     ],
+     "vocab": [
+       {"word":"desire","meaning":"욕망"},
+       {"word":"decreased","meaning":"줄어든"},
+       {"word":"interaction","meaning":"상호작용"},
+       {"word":"disconnection","meaning":"단절"}
+     ],
+     "chunks": [
+       {"en":"Our [[desire]] for more,","ko":"더 많은 것에 대한 우리의 [[욕망]]은,"},
+       {"en":"combined with our [[decreased]] physical interaction","ko":"[[줄어든]] 실제 상호작용과 결합되어,"},
+       {"en":"with the \"common [[folk]],\"","ko":"'[[일반 대중]]'과의,"},
+       {"en":"starts to create a [[disconnection]]","ko":"[[단절]]을 만들어내기 시작한다"},
+       {"en":"or [[blindness]] to reality.","ko":"또는 현실에 대한 [[눈멂]]을"}
+     ],
+     "misreads": [
+       {"statement":"'일반 대중'과의 늘어난 실제 상호작용이 현실과의 단절을 만들어낸다.","verdict":"X","trap_type":"구조수식","anchor":"our decreased physical interaction","why":"줄어든 상호작용이라고 했으므로 '늘어난 상호작용'은 틀리다."},
+       {"statement":"Having more can make us share less.","verdict":"O","english":true}
+     ]
+   }
+ ]
+}

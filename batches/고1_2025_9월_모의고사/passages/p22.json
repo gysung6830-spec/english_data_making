@@ -1,0 +1,296 @@
+{
+ "item_no": "22",
+ "theme": "신체 및 정신 건강에 긍정적 영향을 주는 정원 가꾸기",
+ "overview": {
+  "theme_ko": "정원 가꾸기의 신체·정신 건강 효과",
+  "topic": "🔎 원예(gardening)가 몸과 마음에 주는 이로움",
+  "stance": "긍정적",
+  "stance_reason": "gardening has profound mental health benefits 등 이점을 나열하며 긍정적으로 평가함",
+  "structure": "주장→근거·예시",
+  "structure_reason": "원예가 좋은 운동이자 정신 건강에도 이롭다는 주장 → 근력·칼로리·마음챙김 근거",
+  "key_grammar": {
+   "point": "지각동사 watch + 목적어 + 원형부정사 (watching your plants grow)",
+   "source_sentence": "The sense of accomplishment from watching your plants grow and thrive can also boost self-esteem and overall well-being.",
+   "explanation": [
+    {"chip":"쉽게 말하면","text":"watch 뒤 「목적어 + [[동사원형]]」이면 '~가 …하는 걸 보다'예요."},
+    {"chip":"핵심","text":"grow, thrive 앞에 to가 [[없]]는 게 포인트(원형부정사)."},
+    {"chip":"목적어","text":"보는 대상은 your [[plants]], 그 동작이 grow and thrive."},
+    {"chip":"watching","text":"여기 watching 은 from 뒤라 [[동명사]]지만, 그 안은 지각동사 구조예요."},
+    {"chip":"주의","text":"watch A to grow 처럼 [[to]]를 넣으면 어색해요."}
+   ],
+   "example_analysis": "지각동사 watching 의 목적어는 your plants, 그 목적격보어로 원형 grow and thrive 가 온다(to 없음).",
+   "drills": [
+    {"kind":"객관식","question":"watching your plants ___ and thrive — 빈칸으로 알맞은 것은?","options":["grow","to grow","growing"],"answer":"grow","from_passage":true},
+    {"kind":"객관식","question":"지각동사 watch 의 목적격보어 형태로 알맞은 것은?","options":["원형부정사","to부정사","과거분사만"],"answer":"원형부정사","from_passage":true},
+    {"kind":"객관식","question":"밑줄 친 grow and thrive 의 문장 성분으로 알맞은 것은?","options":["목적격보어","주어","전치사의 목적어"],"answer":"목적격보어","from_passage":true},
+    {"kind":"영작","question":"당신의 식물이 자라고 번성하는 것을 지켜보는 것으로부터","words":["from","watching","your","plants","grow","and","thrive"],"answer":"from watching your plants grow and thrive","from_passage":true},
+    {"kind":"영작","question":"나는 그가 방을 나가는 것을 보았다.","words":["I","watched","him","leave","the","room"],"answer":"I watched him leave the room","from_passage":false}
+   ]
+  },
+  "restatement_chains": [
+   {"label":"신체 활동 이점","expressions":["a fantastic form of physical activity","burn many calories"],"variation":"→ 원예는 훌륭한 운동"},
+   {"label":"정신 건강 이점","expressions":["profound mental health benefits","calming and meditative","reducing stress and anxiety"],"variation":"→ 원예는 마음을 안정시킴"}
+  ],
+  "flow_blocks": [
+   {"stage":"주제","sentence_range":"1~2","summary":"원예는 그 자체로 훌륭한 신체 [[활동]]이며 다양한 움직임을 포함","easy_example":"밭일 한 번이면 팔·다리·허리를 다 쓰죠."},
+   {"stage":"근거1(신체)","sentence_range":"3~6","summary":"근력·유연성·지구력 향상, [[칼로리]] 소모, 누구나 접근 가능한 저부담 운동","easy_example":"잡초 뽑기도 은근히 땀나는 운동이에요."},
+   {"stage":"전환(정신)","sentence_range":"7~10","summary":"신체 외 정신 건강 이점—돌봄은 [[차분]]하고 명상적, 현재 집중, 마음챙김 유도","easy_example":"물 주며 잡생각이 사라지는 순간처럼."},
+   {"stage":"근거2+결론","sentence_range":"11~12","summary":"자연 속 시간이 기분·[[인지]] 개선·우울 완화, 성취감이 자존감·행복 상승","easy_example":"내 손으로 키운 토마토를 볼 때의 뿌듯함."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "The act of gardening itself is a fantastic form of physical activity.",
+   "grammar": [
+    {"tag":"재귀대명사 강조 itself","note":"gardening itself: 원예 '그 자체'","spans":["itself"]},
+    {"tag":"전치사구 수식","note":"form of physical activity: ~의 형태","spans":["of"]}
+   ],
+   "vocab": [
+    {"word":"gardening","meaning":"원예, 정원 가꾸기"},
+    {"word":"fantastic","meaning":"환상적인, 훌륭한"},
+    {"word":"physical activity","meaning":"신체 활동"}
+   ],
+   "chunks": [
+    {"en":"The act of gardening [[itself]]","ko":"원예 행위 그 [[자체]]는"},
+    {"en":"is a fantastic [[form]]","ko":"환상적인 [[형태]]이다"},
+    {"en":"of physical [[activity]].","ko":"신체 [[활동]]의"}
+   ],
+   "misreads": [
+    {"statement":"필자는 원예 행위 그 자체가 훌륭한 신체 활동의 한 형태라고 본다.","verdict":"O","trap_type":"필자관점"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "It involves a range of motions, from digging and planting to watering and harvesting.",
+   "grammar": [
+    {"tag":"from A to B","note":"from digging ~ to watering ~: A에서 B까지","spans":["from","to"]},
+    {"tag":"동명사 병렬","note":"digging and planting / watering and harvesting: 동명사 병렬","spans":["digging and planting"]}
+   ],
+   "vocab": [
+    {"word":"involve","meaning":"포함하다"},
+    {"word":"a range of","meaning":"다양한, 광범위한"},
+    {"word":"harvest","meaning":"수확하다"}
+   ],
+   "chunks": [
+    {"en":"It [[involves]] a range of motions,","ko":"그것은 다양한 움직임을 [[포함한다]]"},
+    {"en":"from digging and [[planting]]","ko":"파기와 [[심기]]에서"},
+    {"en":"to watering and [[harvesting]].","ko":"물 주기와 [[수확하기]]까지"}
+   ],
+   "misreads": [
+    {"statement":"원예는 파기·심기부터 물 주기·수확까지 다양한 움직임을 포함한다.","verdict":"O","trap_type":"구조수식"}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "These activities help improve strength, flexibility, and endurance.",
+   "grammar": [
+    {"tag":"help + (to) 동사원형","note":"help improve: ~하는 것을 돕다","spans":["help improve"]},
+    {"tag":"명사 병렬(A, B, and C)","note":"strength, flexibility, and endurance: 명사 병렬","spans":["strength, flexibility, and endurance"]}
+   ],
+   "vocab": [
+    {"word":"strength","meaning":"강인함, 힘"},
+    {"word":"flexibility","meaning":"유연성"},
+    {"word":"endurance","meaning":"지구력, 내구력"}
+   ],
+   "chunks": [
+    {"en":"These activities help [[improve]]","ko":"이런 활동들은 [[향상시키]]는 것을 돕는다"},
+    {"en":"strength, [[flexibility]], and endurance.","ko":"강인함, [[유연성]], 내구력을"}
+   ],
+   "misreads": [
+    {"statement":"이 활동들은 근력·유연성·지구력뿐 아니라 시력도 향상시킨다고 한다.","verdict":"X","trap_type":"무관정보","anchor":"improve strength, flexibility, and endurance","why":"시력 향상은 언급이 없고 근력·유연성·지구력만 제시됨"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "You might not realize it, but small tasks like weeding or turning compost can burn many calories.",
+   "grammar": [
+    {"tag":"조동사 might(추측)","note":"might not realize: ~하지 못할 수도 있다","spans":["might not realize"]},
+    {"tag":"전치사 like(예시)","note":"like weeding or turning compost: ~같은","spans":["like"]}
+   ],
+   "vocab": [
+    {"word":"realize","meaning":"인식하다, 깨닫다"},
+    {"word":"weeding","meaning":"잡초 뽑기"},
+    {"word":"compost","meaning":"퇴비"}
+   ],
+   "chunks": [
+    {"en":"You might not [[realize]] it,","ko":"당신은 그것을 [[인식하지]] 못할 수도 있으나"},
+    {"en":"but small [[tasks]] like weeding or turning compost","ko":"잡초 뽑기나 퇴비 뒤섞기 같은 작은 [[과업]]들이"},
+    {"en":"can burn many [[calories]].","ko":"많은 [[칼로리]]를 태울 수 있다"}
+   ],
+   "misreads": [
+    {"statement":"잡초 뽑기 같은 작은 과업도 칼로리를 태울 수 있는데, 그 이유는 도구가 무겁기 때문이다.","verdict":"△","trap_type":"인과조건","anchor":"small tasks like weeding or turning compost can burn many calories","why":"칼로리를 태운다는 방향은 맞으나 원인이 도구 무게라는 근거는 본문에 없음"}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "Gardening is particularly beneficial for those who find traditional exercise challenging.",
+   "grammar": [
+    {"tag":"관계대명사 who","note":"those who find ~: ~하는 사람들","spans":["who"]},
+    {"tag":"5형식 find + O + C","note":"find traditional exercise challenging: O를 C라고 여기다","spans":["find traditional exercise challenging"]}
+   ],
+   "vocab": [
+    {"word":"particularly","meaning":"특히"},
+    {"word":"beneficial","meaning":"이로운"},
+    {"word":"challenging","meaning":"힘든, 도전적인"}
+   ],
+   "chunks": [
+    {"en":"Gardening is particularly [[beneficial]]","ko":"원예는 특히 [[이롭다]]"},
+    {"en":"for those who find traditional exercise [[challenging]].","ko":"전통적 운동이 [[힘들]]다고 여기는 사람들에게"}
+   ],
+   "misreads": [
+    {"statement":"원예는 전통적인 운동을 쉽게 여기는 사람들에게 특히 이롭다.","verdict":"X","trap_type":"주체대상","anchor":"those who find traditional exercise challenging","killer":true,"why":"운동을 '힘들다(challenging)'고 여기는 사람에게 이로운 것이지 쉽게 여기는 사람이 아님"}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "It's a low-impact way to stay active and fit, making it accessible for people of all ages and physical abilities.",
+   "grammar": [
+    {"tag":"분사구문 making","note":"making it accessible: 그래서 ~하게 만든다","spans":["making"]},
+    {"tag":"가목적어 it","note":"making it accessible: it이 가목적어","spans":["it accessible"]}
+   ],
+   "vocab": [
+    {"word":"low-impact","meaning":"부담이 적은"},
+    {"word":"fit","meaning":"건강한, 몸이 좋은"},
+    {"word":"accessible","meaning":"접근 가능한"}
+   ],
+   "chunks": [
+    {"en":"It's a low-impact [[way]]","ko":"그것은 부담 적은 [[방법]]이다"},
+    {"en":"to stay active and [[fit]],","ko":"활동적이고 [[건강하]]게 유지하는"},
+    {"en":"making it [[accessible]]","ko":"그것을 [[접근 가능]]하게 만들어"},
+    {"en":"for people of all ages and physical [[abilities]].","ko":"모든 연령·신체 [[능력]]의 사람에게"}
+   ],
+   "misreads": [
+    {"statement":"부담이 적은 방식이라 모든 연령과 신체 능력의 사람이 원예에 접근할 수 있다.","verdict":"O","trap_type":"인과조건"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Besides physical health, gardening has profound mental health benefits.",
+   "grammar": [
+    {"tag":"전치사 Besides","note":"Besides ~: ~ 외에도","spans":["Besides"]}
+   ],
+   "vocab": [
+    {"word":"besides","meaning":"~ 외에도"},
+    {"word":"profound","meaning":"깊은, 심오한"},
+    {"word":"mental health","meaning":"정신 건강"}
+   ],
+   "chunks": [
+    {"en":"Besides physical [[health]],","ko":"신체적 [[건강]] 외에도,"},
+    {"en":"gardening has profound mental health [[benefits]].","ko":"원예는 깊은 정신 건강 [[이점]]이 있다"}
+   ],
+   "misreads": [
+    {"statement":"필자는 원예가 신체 건강에만 좋고 정신 건강과는 무관하다고 본다.","verdict":"X","trap_type":"필자관점","anchor":"gardening has profound mental health benefits","why":"원예가 깊은 정신 건강 이점을 가진다고 명시하므로 무관하지 않음"}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "Tending to plants can be incredibly calming and meditative.",
+   "grammar": [
+    {"tag":"동명사 주어","note":"Tending to plants: ~하는 것은(주어)","spans":["Tending to plants"]},
+    {"tag":"보어 형용사 병렬","note":"be calming and meditative: 형용사 보어 병렬","spans":["calming and meditative"]}
+   ],
+   "vocab": [
+    {"word":"tend to","meaning":"~을 돌보다"},
+    {"word":"calming","meaning":"차분하게 하는"},
+    {"word":"meditative","meaning":"명상적인"}
+   ],
+   "chunks": [
+    {"en":"Tending to [[plants]]","ko":"식물을 [[돌보]]는 것은"},
+    {"en":"can be incredibly [[calming]] and meditative.","ko":"믿기 힘들 만큼 [[차분하]]고 명상적일 수 있다"}
+   ],
+   "misreads": [
+    {"statement":"식물이 사람을 돌보는 것은 매우 차분하고 명상적일 수 있다.","verdict":"X","trap_type":"주체대상","anchor":"Tending to plants","why":"돌보는 주체는 사람이고 대상이 식물인데 주체·대상이 뒤바뀜"}
+   ]
+  },
+  {
+   "id": 9,
+   "english": "It allows you to focus on the present moment, reducing stress and anxiety.",
+   "grammar": [
+    {"tag":"allow + O + to부정사","note":"allows you to focus: ~가 …하게 하다","spans":["allows you to focus"]},
+    {"tag":"분사구문 reducing","note":"reducing stress ~: 줄이면서(동시·결과)","spans":["reducing"]}
+   ],
+   "vocab": [
+    {"word":"allow","meaning":"~하게 하다, 허용하다"},
+    {"word":"focus on","meaning":"~에 집중하다"},
+    {"word":"anxiety","meaning":"불안"}
+   ],
+   "chunks": [
+    {"en":"It [[allows]] you to focus","ko":"그것은 당신이 집중하게 [[해준다]]"},
+    {"en":"on the present [[moment]],","ko":"현재 [[순간]]에"},
+    {"en":"reducing stress and [[anxiety]].","ko":"스트레스와 [[불안]]을 줄이면서"}
+   ],
+   "misreads": [
+    {"statement":"밑줄 친 It이 가리키는 것은 스트레스(stress)이다.","verdict":"X","trap_type":"지칭","anchor":"Tending to plants can be incredibly calming and meditative","integrative":true,"why":"It은 앞 문장의 '식물 돌보기(원예)'를 가리키며 스트레스가 아님"}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "The repetitive tasks involved in gardening can induce a state of mindfulness, similar to meditation.",
+   "grammar": [
+    {"tag":"과거분사 후치수식","note":"tasks involved in gardening: ~에 수반된 과업","spans":["involved"]},
+    {"tag":"형용사구 후치 similar to","note":"state ~ similar to meditation: ~과 유사한","spans":["similar to"]}
+   ],
+   "vocab": [
+    {"word":"repetitive","meaning":"반복적인"},
+    {"word":"induce","meaning":"유도하다"},
+    {"word":"mindfulness","meaning":"마음챙김"}
+   ],
+   "chunks": [
+    {"en":"The repetitive tasks involved in [[gardening]]","ko":"원예에 수반된 반복적 [[과업]]은"},
+    {"en":"can induce a [[state]] of mindfulness,","ko":"마음챙김 [[상태]]를 유도할 수 있다"},
+    {"en":"similar to [[meditation]].","ko":"[[명상]]과 유사한"}
+   ],
+   "misreads": [
+    {"statement":"원예에 수반된 반복적 과업은 명상과 유사한 마음챙김 상태를 유도할 수 있다.","verdict":"O","trap_type":"구조수식"}
+   ]
+  },
+  {
+   "id": 11,
+   "english": "Studies have shown that spending time in nature, even in a small garden, can elevate mood, improve cognition, and lessen depression symptoms.",
+   "grammar": [
+    {"tag":"동명사 주어(that절 내)","note":"spending time in nature: ~하는 것이","spans":["spending time in nature"]},
+    {"tag":"동사 병렬 can + 원형","note":"elevate ~, improve ~, and lessen ~: 원형 병렬","spans":["elevate","improve","lessen"]}
+   ],
+   "vocab": [
+    {"word":"elevate","meaning":"높이다, 돋우다"},
+    {"word":"cognition","meaning":"인지"},
+    {"word":"lessen","meaning":"줄이다, 완화하다"}
+   ],
+   "chunks": [
+    {"en":"Studies have [[shown]] that","ko":"연구는 ~을 [[보여왔다]]"},
+    {"en":"spending time in [[nature]],","ko":"자연에서 시간을 [[보내는]] 것이"},
+    {"en":"even in a small [[garden]],","ko":"심지어 작은 [[정원]]에서라도"},
+    {"en":"can elevate mood, improve [[cognition]],","ko":"기분을 돋우고, [[인지]]를 개선하며"},
+    {"en":"and lessen depression [[symptoms]].","ko":"우울 [[증상]]을 줄일 수 있음을"}
+   ],
+   "misreads": [
+    {"statement":"밑줄 친 elevate mood, improve cognition 의 주체는 depression symptoms이다.","verdict":"X","trap_type":"구조수식","anchor":"can elevate mood, improve cognition, and lessen depression symptoms","english":"elevate mood","why":"기분을 돋우고 인지를 개선하는 주체는 '자연 속에서 시간 보내기'이지 우울 증상이 아님"}
+   ]
+  },
+  {
+   "id": 12,
+   "english": "The sense of accomplishment from watching your plants grow and thrive can also boost self-esteem and overall well-being.",
+   "grammar": [
+    {"tag":"지각동사 watch + O + 원형부정사","note":"watching your plants grow and thrive: ~가 …하는 것을 보다","spans":["watching your plants grow"]},
+    {"tag":"동사 병렬 boost A and B","note":"boost self-esteem and overall well-being","spans":["boost"]}
+   ],
+   "vocab": [
+    {"word":"accomplishment","meaning":"성취"},
+    {"word":"thrive","meaning":"번성하다, 잘 자라다"},
+    {"word":"self-esteem","meaning":"자아존중감"},
+    {"word":"well-being","meaning":"행복, 안녕"}
+   ],
+   "chunks": [
+    {"en":"The sense of [[accomplishment]]","ko":"[[성취감]]은"},
+    {"en":"from watching your plants grow and [[thrive]]","ko":"식물이 자라고 [[번성하]]는 것을 지켜본 데서 온"},
+    {"en":"can also boost [[self-esteem]]","ko":"또한 [[자존감]]을 높일 수 있다"},
+    {"en":"and overall [[well-being]].","ko":"전반적 [[행복]]도"}
+   ],
+   "misreads": [
+    {"statement":"식물이 자라고 번성하는 것을 지켜본 성취감은 오히려 자존감을 낮춘다.","verdict":"X","trap_type":"인과조건","anchor":"boost self-esteem and overall well-being","why":"성취감은 자존감과 행복을 '높이는(boost)' 것이지 낮추는 것이 아님"}
+   ],
+   "mistips": ["watching your plants grow 를 '식물을 위해 지켜보다'로 읽으면 안 돼 — (바르게는) [[식물이 자라는 것을 지켜보다]]"]
+  }
+ ]
+}

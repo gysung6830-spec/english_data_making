@@ -1,0 +1,285 @@
+{
+ "item_no": "37",
+ "theme": "움직임을 늦추는 힘인 마찰력(friction)의 작용 원리",
+ "overview": {
+  "theme_ko": "움직임을 늦추는 힘, 마찰력",
+  "topic": "🔎 자전거를 예로 들어 움직이는 물체를 느리게 하는 마찰력의 작용 원리",
+  "stance": "중립적",
+  "stance_reason": "friction ~ tends to slow down moving things 처럼 마찰력의 작용을 객관적으로 설명함",
+  "structure": "예시→일반화(결론)",
+  "structure_reason": "자전거 제동 예시로 마찰력을 설명한 뒤 카트 등 주변 사물로 개념을 일반화함",
+  "key_grammar": {
+   "point": "현재분사 후치수식 (명사 + -ing구: 명사를 뒤에서 꾸밈)",
+   "source_sentence": "Even without the brakes on, there are other friction forces acting on you and your bicycle, which also slow you down.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "명사 뒤의 -ing 구는 그 [[명사]]를 뒤에서 꾸며 '~하는/~하고 있는'으로 풀어"},
+    {"chip": "핵심은", "text": "forces 와 acting on you 를 붙여 '당신에게 [[작용하는]] 힘'으로 읽어야 뜻이 이어져"},
+    {"chip": "헷갈리면", "text": "이 -ing 는 진행형(be+-ing)이 아니라 앞 [[명사]]를 꾸미는 분사야"},
+    {"chip": "한 걸음 더", "text": "the wheels rubbing, the axles rubbing 도 모두 같은 [[후치수식]] 구조야"}
+   ],
+   "example_analysis": "현재분사구 acting on you and your bicycle 가 앞의 명사 forces 를 뒤에서 수식함",
+   "drills": [
+    {"kind": "객관식", "question": "밑줄 친 acting 의 역할로 알맞은 것은? there are other friction forces acting on you", "options": ["앞의 forces 를 꾸미는 현재분사", "문장의 본동사", "목적을 나타내는 to부정사"], "answer": "앞의 forces 를 꾸미는 현재분사", "from_passage": true},
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? there are other friction forces ___ on you and your bicycle", "options": ["acting", "act", "acted"], "answer": "acting", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 밑줄 친 부분이 명사를 뒤에서 꾸미는 것은?", "options": ["The boy playing soccer is my brother.", "He is playing soccer now.", "To play soccer is fun."], "answer": "The boy playing soccer is my brother.", "from_passage": false},
+    {"kind": "영작", "question": "당신과 당신의 자전거에 작용하는 다른 마찰력들이 있다.", "words": ["there are", "other friction forces", "acting", "on you", "and your bicycle"], "answer": "there are other friction forces acting on you and your bicycle", "from_passage": true},
+    {"kind": "영작", "question": "탁자 위에서 자고 있는 그 고양이는 내 것이다.", "words": ["the cat", "sleeping", "on the table", "is", "mine"], "answer": "the cat sleeping on the table is mine", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "움직임을 늦추는 마찰력", "expressions": ["slow down moving things", "also slow you down"], "variation": "마찰력이 물체와 자전거의 속도를 줄인다는 핵심이 반복됨"},
+   {"label": "마찰을 일으키는 접촉", "expressions": ["grip and rub on the wheel-rims", "rubbing on the axles", "rubbing on the body"], "variation": "부품이 서로 닿아 문지르는 접촉이 마찰의 원인으로 제시됨"}
+  ],
+  "flow_blocks": [
+   {"stage": "도입", "sentence_range": "1~4", "summary": "자전거 페달을 멈추면 미는 [[힘]]이 사라져 서서히 느려짐", "easy_example": "발을 떼면 미끄럼틀에서도 점점 느려지지"},
+   {"stage": "전개", "sentence_range": "5~7", "summary": "브레이크를 걸면 바퀴 테를 잡고 문질러 [[힘]]을 가함", "easy_example": "손으로 바퀴를 잡으면 더 빨리 멈추잖아"},
+   {"stage": "핵심", "sentence_range": "8", "summary": "이 힘이 움직임의 [[반대]] 방향으로 작용하는 마찰력임", "easy_example": "미는 쪽 반대로 잡아당기는 힘이라고 보면 돼"},
+   {"stage": "부연", "sentence_range": "9~11", "summary": "브레이크 없이도 축 마찰과 [[공기]] 저항이 속도를 줄임", "easy_example": "바람을 안고 뛰면 저절로 느려지는 것과 같아"},
+   {"stage": "결론", "sentence_range": "12", "summary": "카트 같은 주변 사물에도 같은 [[마찰]] 원리를 적용", "easy_example": "수레바퀴 축이 닳는 것도 같은 원리야"}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Imagine you are pedalling your bicycle on a level road.",
+   "grammar": [
+    {"tag": "명령문(권유)", "note": "Imagine ~: ~라고 상상해 보라", "spans": ["Imagine"]},
+    {"tag": "현재진행 be+-ing", "note": "are pedalling: 페달을 밟고 있다", "spans": ["are pedalling"]}
+   ],
+   "vocab": [
+    {"word": "pedal", "meaning": "(동사) 페달을 밟다"},
+    {"word": "level", "meaning": "평평한, 수평의"}
+   ],
+   "chunks": [
+    {"en": "Imagine you are [[pedalling]] your bicycle", "ko": "당신이 자전거 [[페달을 밟고]] 있다고 상상해 보라"},
+    {"en": "on a level [[road]].", "ko": "평평한 [[도로]]에서"}
+   ],
+   "misreads": [
+    {"statement": "평평한 도로에서 자전거 페달을 밟고 있는 상황을 상상해 보라고 한다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "You stop pedalling: no force is now acting to move you forward.",
+   "grammar": [
+    {"tag": "현재진행 부정", "note": "no force is now acting: 지금 아무 힘도 작용하지 않음", "spans": ["is now acting"]},
+    {"tag": "부사적 to부정사(목적)", "note": "to move you forward: 앞으로 나아가게 하도록", "spans": ["to move"]}
+   ],
+   "vocab": [
+    {"word": "force", "meaning": "힘"},
+    {"word": "forward", "meaning": "앞으로"}
+   ],
+   "chunks": [
+    {"en": "You stop [[pedalling]]:", "ko": "당신은 [[페달 밟기]]를 멈춘다:"},
+    {"en": "no [[force]] is now acting", "ko": "이제 어떤 [[힘]]도 작용하지 않는다"},
+    {"en": "to [[move]] you forward.", "ko": "당신을 앞으로 [[나아가게]] 하도록"}
+   ],
+   "misreads": [
+    {"statement": "페달을 멈춰도 당신을 앞으로 나아가게 하는 힘은 계속 작용한다.", "verdict": "X", "trap_type": "인과조건", "anchor": "no force is now acting to move you forward", "why": "페달을 멈추면 앞으로 미는 힘은 이제 작용하지 않음", "killer": false}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "What happens?",
+   "grammar": [
+    {"tag": "의문사 what 주어", "note": "What happens?: 무슨 일이 일어나는가", "spans": ["What happens"]}
+   ],
+   "vocab": [
+    {"word": "happen", "meaning": "(일이) 일어나다, 발생하다"}
+   ],
+   "chunks": [
+    {"en": "What [[happens]]?", "ko": "무슨 일이 [[일어날까]]?"}
+   ],
+   "misreads": [
+    {"statement": "이제 무슨 일이 일어나는지 묻는 질문이다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 4,
+   "english": "You gradually slow down.",
+   "grammar": [
+    {"tag": "부사 gradually", "note": "gradually: 서서히, 점진적으로", "spans": ["gradually"]}
+   ],
+   "vocab": [
+    {"word": "gradually", "meaning": "서서히, 점차"},
+    {"word": "slow down", "meaning": "속도가 줄다, 느려지다"}
+   ],
+   "chunks": [
+    {"en": "You [[gradually]] slow down.", "ko": "당신은 [[서서히]] 속도가 줄어든다"}
+   ],
+   "misreads": [
+    {"statement": "After you stop pedalling, you keep moving at the same speed forever.", "verdict": "X", "trap_type": "인과조건", "anchor": "You gradually slow down", "why": "페달을 멈추면 서서히 느려지므로 같은 속도를 유지하지 못함", "english": true, "killer": false}
+   ]
+  },
+  {
+   "id": 5,
+   "english": "How could you slow down more suddenly, in a shorter distance?",
+   "grammar": [
+    {"tag": "조동사 could 의문", "note": "How could you ~?: 어떻게 ~할 수 있을까", "spans": ["How could you"]},
+    {"tag": "비교급 more", "note": "more suddenly: 더 갑자기", "spans": ["more suddenly"]}
+   ],
+   "vocab": [
+    {"word": "suddenly", "meaning": "갑자기"},
+    {"word": "distance", "meaning": "거리"}
+   ],
+   "chunks": [
+    {"en": "How could you [[slow down]] more suddenly,", "ko": "어떻게 더 갑자기 [[속도를 줄일]] 수 있을까,"},
+    {"en": "in a shorter [[distance]]?", "ko": "더 짧은 [[거리]] 안에서?"}
+   ],
+   "misreads": [
+    {"statement": "필자는 갑자기 멈추는 것은 위험하므로 피해야 한다고 조언한다.", "verdict": "X", "trap_type": "필자관점", "anchor": "How could you slow down more suddenly, in a shorter distance", "why": "필자는 위험성을 경고하는 게 아니라 더 급히 멈추는 방법을 묻고 설명함", "killer": false}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "By putting the brakes on.",
+   "grammar": [
+    {"tag": "By+동명사(수단)", "note": "By putting ~: ~함으로써", "spans": ["By putting"]}
+   ],
+   "vocab": [
+    {"word": "brake", "meaning": "브레이크, 제동 장치"},
+    {"word": "put on", "meaning": "(브레이크를) 걸다, 작동시키다"}
+   ],
+   "chunks": [
+    {"en": "By putting the [[brakes]] on.", "ko": "[[브레이크]]를 걺으로써"}
+   ],
+   "misreads": [
+    {"statement": "더 급히 멈추는 방법은 브레이크를 거는 것이다.", "verdict": "O"}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "Because the brakes change your movement, making you slow down more suddenly, they must be exerting a force on the bicycle and you, as they grip and rub on the wheel-rims.",
+   "grammar": [
+    {"tag": "이유 접속사 Because", "note": "Because ~: ~때문에", "spans": ["Because"]},
+    {"tag": "분사구문(동시)", "note": "making you slow down: 당신을 느려지게 하면서", "spans": ["making"]},
+    {"tag": "must be -ing(강한 추측)", "note": "must be exerting: ~하고 있음이 틀림없다", "spans": ["must be exerting"]}
+   ],
+   "vocab": [
+    {"word": "exert", "meaning": "(힘을) 가하다, 발휘하다"},
+    {"word": "grip", "meaning": "꽉 잡다"},
+    {"word": "rub", "meaning": "문지르다, 마찰하다"},
+    {"word": "wheel-rim", "meaning": "바퀴 테두리"}
+   ],
+   "chunks": [
+    {"en": "Because the brakes [[change]] your movement,", "ko": "브레이크가 당신의 움직임을 [[바꾸기]] 때문에,"},
+    {"en": "making you slow down more [[suddenly]],", "ko": "당신을 더 [[갑자기]] 느려지게 하면서,"},
+    {"en": "they must be [[exerting]] a force on the bicycle and you,", "ko": "그것들은 자전거와 당신에게 힘을 [[가하고]] 있음이 틀림없다,"},
+    {"en": "as they grip and [[rub]] on the wheel-rims.", "ko": "그것들이 바퀴 테두리를 잡고 [[문지르면서]]"}
+   ],
+   "misreads": [
+    {"statement": "브레이크는 바퀴에 물을 뿌려 마찰을 만들어 당신을 멈추게 한다.", "verdict": "X", "trap_type": "무관정보", "anchor": "as they grip and rub on the wheel-rims", "why": "브레이크는 바퀴 테두리를 잡고 문질러 힘을 가할 뿐 물 얘기는 없음", "killer": false}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "This is the force called friction, which tends to slow down moving things by acting in the direction opposite to movement, that is backwards.",
+   "grammar": [
+    {"tag": "과거분사 후치수식", "note": "the force called friction: 마찰력이라 불리는 힘", "spans": ["called"]},
+    {"tag": "계속적 용법 which", "note": "which tends to ~: 그리고 그것은 ~", "spans": ["which"]},
+    {"tag": "by+동명사(수단)", "note": "by acting ~: 작용함으로써", "spans": ["by acting"]}
+   ],
+   "vocab": [
+    {"word": "friction", "meaning": "마찰, 마찰력"},
+    {"word": "tend to", "meaning": "~하는 경향이 있다"},
+    {"word": "opposite", "meaning": "반대의, 맞은편의"},
+    {"word": "backwards", "meaning": "뒤쪽으로"}
+   ],
+   "chunks": [
+    {"en": "This is the force called [[friction]],", "ko": "이것이 [[마찰력]]이라 불리는 힘인데,"},
+    {"en": "which tends to [[slow down]] moving things", "ko": "그것은 움직이는 물체를 [[느리게]] 하는 경향이 있다"},
+    {"en": "by acting in the direction [[opposite]] to movement,", "ko": "움직임과 [[반대]] 방향으로 작용함으로써,"},
+    {"en": "that is [[backwards]].", "ko": "즉 [[뒤쪽]]으로"}
+   ],
+   "misreads": [
+    {"statement": "마찰력은 움직임과 같은 방향으로 작용하여 움직이는 물체를 느리게 하는 힘이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "by acting in the direction opposite to movement", "why": "마찰력은 움직임의 반대 방향(opposite)으로 작용함", "killer": true}
+   ],
+   "mistips": ["the force called friction 을 '힘이 마찰을 부른다'로 읽으면 안 돼 ─ called 는 [[force]]를 꾸며 '마찰력이라 불리는 힘'이야"]
+  },
+  {
+   "id": 9,
+   "english": "Even without the brakes on, there are other friction forces acting on you and your bicycle, which also slow you down.",
+   "grammar": [
+    {"tag": "현재분사 후치수식", "note": "forces acting on you ~: 명사를 뒤에서 꾸미는 -ing구", "spans": ["acting on you and your bicycle"]},
+    {"tag": "계속적 용법 which", "note": "which also slow you down: 그리고 그것도 ~", "spans": ["which"]}
+   ],
+   "vocab": [
+    {"word": "friction force", "meaning": "마찰력"},
+    {"word": "even without", "meaning": "~이 없이도"}
+   ],
+   "chunks": [
+    {"en": "Even without the [[brakes]] on,", "ko": "심지어 [[브레이크]]를 걸지 않아도,"},
+    {"en": "there are other friction [[forces]] acting on you and your bicycle,", "ko": "당신과 자전거에 작용하는 다른 마찰 [[힘]]들이 있는데,"},
+    {"en": "which also [[slow]] you down.", "ko": "이것도 당신을 [[느리게]] 한다"}
+   ],
+   "misreads": [
+    {"statement": "브레이크가 없어도 자전거가 느려지는 것은 맞지만, 그 이유는 도로가 평평하지 않기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "there are other friction forces acting on you and your bicycle, which also slow you down", "why": "느려지는 이유는 도로 경사가 아니라 당신과 자전거에 작용하는 다른 마찰력들 때문임", "killer": false}
+   ],
+   "mistips": ["forces acting 을 '힘이 행동한다'로 읽으면 안 돼 ─ acting 은 [[forces]]를 꾸며 '작용하는 힘'이야"]
+  },
+  {
+   "id": 10,
+   "english": "One of these is friction in the wheels rubbing on the axles.",
+   "grammar": [
+    {"tag": "현재분사 후치수식", "note": "the wheels rubbing on the axles: 축에 닿아 문지르는 바퀴", "spans": ["rubbing on the axles"]},
+    {"tag": "지시대명사 these", "note": "One of these: 이것들 중 하나", "spans": ["these"]}
+   ],
+   "vocab": [
+    {"word": "axle", "meaning": "(바퀴의) 축, 굴대"},
+    {"word": "rub on", "meaning": "~에 닿아 문지르다"}
+   ],
+   "chunks": [
+    {"en": "One of [[these]] is friction", "ko": "이들 [[중 하나]]는 마찰이다"},
+    {"en": "in the wheels [[rubbing]] on the axles.", "ko": "축에 닿아 [[문지르는]] 바퀴 속의"}
+   ],
+   "misreads": [
+    {"statement": "밑줄 친 these 는 자전거의 여러 부품을 가리킨다.", "verdict": "X", "trap_type": "지칭", "anchor": "One of these is friction in the wheels rubbing on the axles", "why": "these 는 앞 문장의 다른 마찰력들(other friction forces)을 가리킴", "killer": false}
+   ]
+  },
+  {
+   "id": 11,
+   "english": "Another is air resistance, which you can feel, pushing you backwards as you and the bicycle move forwards.",
+   "grammar": [
+    {"tag": "계속적 용법 which(삽입)", "note": "which you can feel: 삽입된 관계절", "spans": ["which you can feel"]},
+    {"tag": "현재분사 후치수식", "note": "pushing you backwards: air resistance 를 이어 설명", "spans": ["pushing"]}
+   ],
+   "vocab": [
+    {"word": "air resistance", "meaning": "공기 저항"},
+    {"word": "backwards", "meaning": "뒤로, 뒤쪽으로"},
+    {"word": "forwards", "meaning": "앞으로"}
+   ],
+   "chunks": [
+    {"en": "Another is air [[resistance]],", "ko": "또 다른 하나는 공기 [[저항]]이다,"},
+    {"en": "which you can [[feel]],", "ko": "당신이 [[느낄]] 수 있는,"},
+    {"en": "pushing you [[backwards]]", "ko": "당신을 [[뒤로]] 밀면서"},
+    {"en": "as you and the bicycle move [[forwards]].", "ko": "당신과 자전거가 앞으로 [[나아갈]] 때"}
+   ],
+   "misreads": [
+    {"statement": "pushing you backwards 는 you 를 꾸며 '뒤로 밀려난 당신'을 뜻한다.", "verdict": "X", "trap_type": "구조수식", "anchor": "pushing you backwards as you and the bicycle move forwards", "why": "pushing 은 air resistance 를 이어받아 '공기 저항이 당신을 뒤로 민다'는 뜻임", "killer": false}
+   ]
+  },
+  {
+   "id": 12,
+   "english": "When you apply these ideas to something around you, like a cart, you can see what could be generating friction: mainly the axles rubbing on the body as they rotate.",
+   "grammar": [
+    {"tag": "시간 접속사 When", "note": "When you apply ~: ~할 때", "spans": ["When"]},
+    {"tag": "의문사절 목적어 what", "note": "see what could be generating ~: 무엇이 ~하는지", "spans": ["what could be generating"]},
+    {"tag": "현재분사 후치수식", "note": "the axles rubbing on the body: 본체에 닿는 축들", "spans": ["rubbing on the body"]}
+   ],
+   "vocab": [
+    {"word": "apply to", "meaning": "~에 적용하다"},
+    {"word": "generate", "meaning": "발생시키다, 만들어 내다"},
+    {"word": "rotate", "meaning": "회전하다"}
+   ],
+   "chunks": [
+    {"en": "When you [[apply]] these ideas", "ko": "당신이 이 개념을 [[적용하면]]"},
+    {"en": "to something around you, like a [[cart]],", "ko": "당신 주변의 무언가, 예컨대 [[카트]]에,"},
+    {"en": "you can see what could be [[generating]] friction:", "ko": "무엇이 마찰을 [[일으키는지]] 알 수 있다:"},
+    {"en": "mainly the axles [[rubbing]] on the body as they rotate.", "ko": "주로 회전하며 본체에 닿아 [[문지르는]] 축들이다"}
+   ],
+   "misreads": [
+    {"statement": "카트에서 마찰을 일으키는 것은 주로 본체가 축을 문지르는 것이다.", "verdict": "X", "trap_type": "주체대상", "anchor": "mainly the axles rubbing on the body as they rotate", "why": "문지르는 주체는 축(axles)이고 문질러지는 대상이 본체(body)임", "killer": false}
+   ]
+  }
+ ]
+}

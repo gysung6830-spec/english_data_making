@@ -1,0 +1,271 @@
+{
+ "item_no": "40",
+ "theme": "사물과의 기능적 관계로 인해 객관적 인식을 방해받는 시각",
+ "overview": {
+  "theme_ko": "기능적 관계가 방해하는 객관적 시각",
+  "topic": "🔎 사물과의 기능적 관계가 객관적 시지각을 방해함",
+  "stance": "중립적",
+  "stance_reason": "인간 시각의 한계와 카메라의 객관성을 대조하며 사실을 설명함",
+  "structure": "비교·대조",
+  "structure_reason": "선입견·위계에 좌우되는 인간의 시각과 형태·색만 공평하게 기록하는 카메라를 대조함",
+  "key_grammar": {
+   "point": "상관접속사 not A but B",
+   "source_sentence": "When we look at them carefully, photographs are often surprising because they don't interpret confusing details but simply serve them up to us with a mechanical indifference.",
+   "explanation": [
+    {"chip": "쉽게 말하면", "text": "'A가 아니라 B다'라고 두 내용을 [[대조]]하는 짝꿍 표현이야."},
+    {"chip": "형태", "text": "not(don't) + A … but + B 로, 앞의 A를 [[부정]]하고 뒤의 B를 강조해."},
+    {"chip": "여기서는", "text": "don't interpret ~ (A) … but simply serve ~ (B) 로 [[연결]]돼 있어."},
+    {"chip": "해석 요령", "text": "'A하는 게 아니라 B하다'로 뒤의 [[B]]에 무게를 실어 읽어."},
+    {"chip": "주의", "text": "not 뒤의 A를 사실로 [[오해]]하면 안 돼 — A는 부정된 내용이야."}
+   ],
+   "example_analysis": "don't interpret confusing details 가 부정되는 A, but simply serve them up ~ 이 강조되는 B로 대조된 상관구조.",
+   "drills": [
+    {"kind": "객관식", "question": "빈칸에 알맞은 것은? They don't interpret confusing details ___ simply serve them up to us.", "options": ["but", "and", "so"], "answer": "but", "from_passage": true},
+    {"kind": "객관식", "question": "이 문장의 not A but B 구문에서 글쓴이가 강조하는 쪽은?", "options": ["A(don't 뒤 부정되는 내용)", "B(but 뒤의 내용)", "A와 B 둘 다 동등하게"], "answer": "B(but 뒤의 내용)", "from_passage": true},
+    {"kind": "객관식", "question": "다음 중 'A가 아니라 B다' 상관구조가 쓰인 것은?", "options": ["they don't interpret confusing details but simply serve them up", "the camera sees only shapes and colors", "photographs are often surprising"], "answer": "they don't interpret confusing details but simply serve them up", "from_passage": true},
+    {"kind": "영작", "question": "그것들은 혼란스러운 세부를 해석하지 않고 단지 우리에게 그것들을 제공할 뿐이다.", "words": ["they", "don't", "interpret", "confusing", "details", "but", "simply", "serve", "them", "up", "to", "us"], "answer": "they don't interpret confusing details but simply serve them up to us", "from_passage": true},
+    {"kind": "영작", "question": "그녀는 화가 난 것이 아니라 그저 피곤할 뿐이었다.", "words": ["she", "was", "not", "angry", "but", "just", "tired"], "answer": "she was not angry but just tired", "from_passage": false}
+   ]
+  },
+  "restatement_chains": [
+   {"label": "기능적 관계가 만드는 시각적 왜곡", "expressions": ["our functional relationship to objects", "The functional relationship we have with objects", "creates visual expectations that interfere with our ability to see"], "variation": "사물과의 기능적 관계 → 시각적 기대·위계 → 객관적으로 보는 능력 방해."},
+   {"label": "카메라의 객관적 시각", "expressions": ["sees only shapes and colors", "documents the world impartially", "with a mechanical indifference"], "variation": "카메라 = 해석 없이 형태·색만 공평하게 기록하는 무관심한 눈."}
+  ],
+  "flow_blocks": [
+   {"stage": "도입(주장)", "sentence_range": "1~2", "summary": "시각은 [[선입견]]의 영향을 받아 무의식적 위계를 만든다", "easy_example": "같은 방을 봐도 배고프면 냉장고가 가장 먼저 눈에 들어오는 것처럼."},
+   {"stage": "사례", "sentence_range": "3~4", "summary": "망치를 떠올리면 '[[사용]]하기 좋은' 각도로 그린다", "easy_example": "가위를 상상하라면 손잡이 잡는 모습부터 떠오르듯."},
+   {"stage": "전개(핵심)", "sentence_range": "5", "summary": "기능적 관계가 '[[카메라처럼]]' 보는 능력을 방해한다", "easy_example": "친한 친구 얼굴은 '반갑다'는 느낌이 먼저라 생김새를 객관적으로 못 보듯."},
+   {"stage": "대조(카메라)", "sentence_range": "6~9", "summary": "카메라는 해석 없이 형태·색만 [[공평하게]] 기록한다", "easy_example": "CCTV는 누가 착한지 나쁜지 모르고 그저 화면만 찍듯."},
+   {"stage": "결론(요약)", "sentence_range": "10", "summary": "기능적 위계가 사물을 [[있는 그대로]] 보는 것을 방해한다", "easy_example": "카메라와 달리 사람 눈엔 '용도'라는 색안경이 씌워진 셈."}
+  ]
+ },
+ "sentences": [
+  {
+   "id": 1,
+   "english": "Vision is influenced by our preconceptions about reality.",
+   "grammar": [
+    {"tag": "수동태 (be+p.p.)", "note": "주어(Vision)가 영향을 '받는' 수동 구조", "spans": ["is influenced"]}
+   ],
+   "vocab": [
+    {"word": "vision", "meaning": "시각, 봄"},
+    {"word": "influence", "meaning": "영향을 주다"},
+    {"word": "preconception", "meaning": "선입견"},
+    {"word": "reality", "meaning": "현실"}
+   ],
+   "chunks": [
+    {"en": "Vision is [[influenced]] by", "ko": "시각은 ~에 의해 [[영향받는다]]"},
+    {"en": "our [[preconceptions]] about reality.", "ko": "현실에 대한 우리의 [[선입견]]에"}
+   ],
+   "misreads": [
+    {"statement": "현실에 대해 우리가 이미 가진 선입견이 우리가 보는 것에 영향을 준다.", "verdict": "O", "trap_type": "주체대상"}
+   ]
+  },
+  {
+   "id": 2,
+   "english": "In viewing a scene, we establish unconscious hierarchies that reflect our functional relationship to objects and our momentary priorities.",
+   "grammar": [
+    {"tag": "전치사+동명사", "note": "In+동명사: ~할 때/~하면서", "spans": ["In viewing"]},
+    {"tag": "주격 관계대명사 that", "note": "선행사 hierarchies 를 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "establish", "meaning": "확립하다, 세우다"},
+    {"word": "unconscious", "meaning": "무의식적인"},
+    {"word": "hierarchy", "meaning": "위계질서"},
+    {"word": "reflect", "meaning": "반영하다"},
+    {"word": "momentary priority", "meaning": "순간적인 우선순위"}
+   ],
+   "chunks": [
+    {"en": "In [[viewing]] a scene,", "ko": "한 장면을 [[볼]] 때,"},
+    {"en": "we establish unconscious [[hierarchies]]", "ko": "우리는 무의식적인 [[위계질서]]를 확립한다"},
+    {"en": "that reflect our functional [[relationship]] to objects", "ko": "사물과의 기능적 [[관계]]를 반영하는"},
+    {"en": "and our momentary [[priorities]].", "ko": "그리고 순간적인 [[우선순위]]를"}
+   ],
+   "misreads": [
+    {"statement": "우리가 세우는 무의식적 위계질서는 사물과의 기능적 관계나 순간적 우선순위와는 무관하게 형성된다.", "verdict": "X", "trap_type": "구조수식", "anchor": "hierarchies that reflect our functional relationship to objects and our momentary priorities", "why": "위계질서는 기능적 관계와 순간적 우선순위를 '반영한다(reflect)'고 했으므로 무관하지 않다."}
+   ]
+  },
+  {
+   "id": 3,
+   "english": "For example, when visualizing a hammer in our mind's eye, we tend to \"see\" it in profile or at some other 'ready for use' angle.",
+   "grammar": [
+    {"tag": "분사구문(시간)", "note": "when+분사: ~할 때(부사절 축약)", "spans": ["when visualizing"]},
+    {"tag": "tend to 부정사", "note": "~하는 경향이 있다", "spans": ["tend to"]}
+   ],
+   "vocab": [
+    {"word": "visualize", "meaning": "시각화하다, 마음속에 그리다"},
+    {"word": "mind's eye", "meaning": "마음의 눈, 상상"},
+    {"word": "in profile", "meaning": "옆모습으로"},
+    {"word": "ready for use", "meaning": "사용 준비가 된"}
+   ],
+   "chunks": [
+    {"en": "For example, when [[visualizing]] a hammer", "ko": "예를 들어, 망치를 [[시각화]]할 때"},
+    {"en": "in our mind's [[eye]],", "ko": "우리의 마음의 [[눈]]으로,"},
+    {"en": "we tend to \"[[see]]\" it in profile", "ko": "우리는 그것을 옆모습으로 \"[[보는]]\" 경향이 있다"},
+    {"en": "or at some other 'ready for use' [[angle]].", "ko": "또는 다른 '사용 준비된' [[각도]]에서"}
+   ],
+   "misreads": [
+    {"statement": "우리는 마음의 눈, 즉 '장면'을 옆모습이나 사용하기 좋은 각도에서 보는 경향이 있다.", "verdict": "X", "trap_type": "지칭", "anchor": "when visualizing a hammer in our mind's eye, we tend to \"see\" it in profile", "why": "'it'이 가리키는 대상은 장면이 아니라 앞에 나온 망치(a hammer)이다."}
+   ],
+   "mistips": ["\"see\" it 의 it 을 '[[장면]]'으로 읽으면 안 돼 — 바르게는 앞의 [[망치]]를 가리켜."]
+  },
+  {
+   "id": 4,
+   "english": "One would probably not visualize a hammer as seen from the top so that the handle is hidden by the hammer's head.",
+   "grammar": [
+    {"tag": "과거분사 후치수식", "note": "a hammer as seen: 보여지는 망치", "spans": ["as seen"]},
+    {"tag": "so that 구문", "note": "~하도록/그 결과 ~하다", "spans": ["so that"]}
+   ],
+   "vocab": [
+    {"word": "as seen from", "meaning": "~에서 보이는 대로"},
+    {"word": "handle", "meaning": "손잡이"},
+    {"word": "be hidden by", "meaning": "~에 가려지다"}
+   ],
+   "chunks": [
+    {"en": "One would probably not [[visualize]] a hammer", "ko": "사람들은 아마 망치를 [[시각화]]하지 않을 것이다"},
+    {"en": "as seen from the [[top]]", "ko": "위에서 [[본]] 모습으로"},
+    {"en": "so that the [[handle]] is hidden", "ko": "그래서 [[손잡이]]가 가려지도록"},
+    {"en": "by the hammer's [[head]].", "ko": "망치의 [[머리]]에 의해"}
+   ],
+   "misreads": [
+    {"statement": "사람들은 손잡이가 망치 머리에 가려지도록, 망치를 위에서 내려다본 모습으로 시각화할 것이다.", "verdict": "X", "trap_type": "인과조건", "anchor": "would probably not visualize a hammer as seen from the top", "why": "위에서 본(손잡이가 가려지는) 모습으로는 '시각화하지 않을' 것이라고 했다.", "killer": true}
+   ],
+   "mistips": ["not ~ so that 을 '[[하기 위해]] 그렇게 한다'로 긍정해 읽으면 안 돼 — 위에서 본 모습으로는 '[[시각화하지 않는다]]'."]
+  },
+  {
+   "id": 5,
+   "english": "The functional relationship we have with objects creates visual expectations that interfere with our ability to see \"like a camera.\"",
+   "grammar": [
+    {"tag": "목적격 관계대명사 생략", "note": "relationship (that) we have with objects", "spans": ["relationship we have"]},
+    {"tag": "주격 관계대명사 that", "note": "선행사 visual expectations 수식", "spans": ["that interfere"]}
+   ],
+   "vocab": [
+    {"word": "functional relationship", "meaning": "기능적 관계"},
+    {"word": "visual expectation", "meaning": "시각적 기대"},
+    {"word": "interfere with", "meaning": "~을 방해하다"},
+    {"word": "ability", "meaning": "능력"}
+   ],
+   "chunks": [
+    {"en": "The functional [[relationship]] we have with objects", "ko": "우리가 사물과 맺는 기능적 [[관계]]는"},
+    {"en": "creates visual [[expectations]]", "ko": "시각적 [[기대]]를 만든다"},
+    {"en": "that [[interfere]] with our ability", "ko": "우리의 능력을 [[방해하는]]"},
+    {"en": "to see \"like a [[camera]].\"", "ko": "\"[[카메라]]처럼\" 보는"}
+   ],
+   "misreads": [
+    {"statement": "시각적 기대가 사물과의 기능적 관계를 만들어 내어, '카메라처럼' 보는 능력을 방해한다.", "verdict": "X", "trap_type": "주체대상", "anchor": "The functional relationship we have with objects creates visual expectations", "why": "기능적 관계가 시각적 기대를 '만드는' 것이지 그 반대 방향이 아니다."}
+   ]
+  },
+  {
+   "id": 6,
+   "english": "The camera, like the human eye, sees only shapes and colors.",
+   "grammar": [
+    {"tag": "삽입구(like~)", "note": "인간의 눈처럼, 콤마로 삽입된 비교구", "spans": ["like the human eye"]}
+   ],
+   "vocab": [
+    {"word": "shape", "meaning": "형태, 모양"},
+    {"word": "human eye", "meaning": "인간의 눈"}
+   ],
+   "chunks": [
+    {"en": "The [[camera]], like the human eye,", "ko": "[[카메라]]는, 인간의 눈처럼,"},
+    {"en": "sees only [[shapes]] and colors.", "ko": "오직 [[형태]]와 색깔만을 본다."}
+   ],
+   "misreads": [
+    {"statement": "카메라는 인간의 눈보다 형태와 색을 더 정확하게 볼 수 있다.", "verdict": "X", "trap_type": "무관정보", "anchor": "sees only shapes and colors", "why": "카메라가 형태와 색만 본다고 했을 뿐, 눈보다 더 정확하다는 언급은 없다."}
+   ]
+  },
+  {
+   "id": 7,
+   "english": "It documents the world impartially through a lens that is similar to the eye.",
+   "grammar": [
+    {"tag": "주격 관계대명사 that", "note": "선행사 a lens 를 수식", "spans": ["that"]}
+   ],
+   "vocab": [
+    {"word": "document", "meaning": "기록하다"},
+    {"word": "impartially", "meaning": "공평하게, 편견 없이"},
+    {"word": "lens", "meaning": "렌즈"},
+    {"word": "similar to", "meaning": "~와 비슷한"}
+   ],
+   "chunks": [
+    {"en": "It [[documents]] the world impartially", "ko": "그것은 세상을 공평하게 [[기록한다]]"},
+    {"en": "through a [[lens]] that is similar to the eye.", "ko": "눈과 비슷한 [[렌즈]]를 통해"}
+   ],
+   "misreads": [
+    {"statement": "인간의 눈은 눈과 비슷한 렌즈를 통해 세상을 공평하게 기록한다.", "verdict": "X", "trap_type": "지칭", "anchor": "It documents the world impartially through a lens", "why": "세상을 공평하게 기록하는 주체는 인간의 눈이 아니라 카메라(It)이다."}
+   ]
+  },
+  {
+   "id": 8,
+   "english": "When we look at them carefully, photographs are often surprising because they don't interpret confusing details but simply serve them up to us with a mechanical indifference.",
+   "grammar": [
+    {"tag": "상관접속사 not A but B", "note": "A가 아니라 B: 해석하는 게 아니라 제공함", "spans": ["don't", "but"]},
+    {"tag": "이유 접속사 because", "note": "사진이 놀라운 이유를 제시", "spans": ["because"]}
+   ],
+   "vocab": [
+    {"word": "interpret", "meaning": "해석하다"},
+    {"word": "confusing", "meaning": "혼란스러운"},
+    {"word": "serve up", "meaning": "제공하다, 내놓다"},
+    {"word": "mechanical", "meaning": "기계적인"},
+    {"word": "indifference", "meaning": "무관심"}
+   ],
+   "chunks": [
+    {"en": "When we look at them [[carefully]],", "ko": "우리가 그것들을 [[주의 깊게]] 볼 때,"},
+    {"en": "photographs are often [[surprising]]", "ko": "사진은 종종 [[놀랍다]]"},
+    {"en": "because they don't [[interpret]] confusing details", "ko": "왜냐하면 그것들은 혼란스러운 세부를 [[해석하지]] 않고"},
+    {"en": "but simply [[serve]] them up to us", "ko": "단지 우리에게 [[제공할]] 뿐이기 때문이다"},
+    {"en": "with a mechanical [[indifference]].", "ko": "기계적인 [[무관심]]으로"}
+   ],
+   "misreads": [
+    {"statement": "Photographs surprise us because they interpret confusing details for us.", "verdict": "X", "trap_type": "필자관점", "anchor": "they don't interpret confusing details but simply serve them up", "why": "사진은 세부를 '해석하지 않고(don't interpret)' 기계적 무관심으로 그대로 제공한다고 했다.", "english": true},
+    {"statement": "사진은 혼란스러운 세부를 해석하지 않기 때문에 자세히 볼 때 종종 놀랍다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["not A but B 에서 A(interpret)를 사실로 읽으면 안 돼 — 사진은 '[[해석하지]]' 않고 '[[제공]]'만 해."]
+  },
+  {
+   "id": 9,
+   "english": "And because of their flatness, photographs often contain areas that appear as unrecognizable colors and shapes.",
+   "grammar": [
+    {"tag": "전치사구 because of", "note": "~때문에(뒤에 명사)", "spans": ["because of"]},
+    {"tag": "주격 관계대명사 that", "note": "선행사 areas 를 수식", "spans": ["that appear"]}
+   ],
+   "vocab": [
+    {"word": "flatness", "meaning": "평면성"},
+    {"word": "contain", "meaning": "포함하다"},
+    {"word": "unrecognizable", "meaning": "알아볼 수 없는"}
+   ],
+   "chunks": [
+    {"en": "And because of their [[flatness]],", "ko": "그리고 그것들의 [[평면성]] 때문에,"},
+    {"en": "photographs often [[contain]] areas", "ko": "사진은 종종 영역을 [[포함한다]]"},
+    {"en": "that appear as [[unrecognizable]] colors and shapes.", "ko": "[[알아볼 수 없는]] 색과 형태로 보이는"}
+   ],
+   "misreads": [
+    {"statement": "사진이 알아보기 힘든 색과 형태의 영역을 포함하는 것은, 카메라가 세부를 해석하기 때문이다.", "verdict": "△", "trap_type": "인과조건", "anchor": "because of their flatness", "why": "그런 영역이 생기는 것은 해석 때문이 아니라 '평면성(flatness)' 때문이다."}
+   ]
+  },
+  {
+   "id": 10,
+   "english": "─> Our visual perception is shaped by an established hierarchy based on functional relationships, which interrupts our ability to see objects as they truly are, unlike the objective perspective of a camera.",
+   "grammar": [
+    {"tag": "수동태 (be+p.p.)", "note": "시각적 인식이 '형성되는' 수동", "spans": ["is shaped"]},
+    {"tag": "계속적 용법 which", "note": "앞 절 전체를 보충 설명", "spans": ["which"]}
+   ],
+   "vocab": [
+    {"word": "visual perception", "meaning": "시각적 인식"},
+    {"word": "established", "meaning": "확립된"},
+    {"word": "interrupt", "meaning": "방해하다, 가로막다"},
+    {"word": "objective", "meaning": "객관적인"},
+    {"word": "perspective", "meaning": "관점, 시각"}
+   ],
+   "chunks": [
+    {"en": "─> Our visual [[perception]] is shaped", "ko": "우리의 시각적 [[인식]]은 형성된다"},
+    {"en": "by an established [[hierarchy]]", "ko": "확립된 [[위계]]에 의해"},
+    {"en": "based on functional [[relationships]],", "ko": "기능적 [[관계]]에 기반한,"},
+    {"en": "which interrupts our ability to see [[objects]]", "ko": "[[사물]]을 보는 우리의 능력을 방해하며"},
+    {"en": "as they [[truly]] are,", "ko": "그것들이 [[진정으로]] 있는 그대로,"},
+    {"en": "unlike the objective [[perspective]] of a camera.", "ko": "카메라의 객관적인 [[관점]]과는 달리."}
+   ],
+   "misreads": [
+    {"statement": "우리의 시각적 인식은 기능적 관계에 기반한 위계에 의해 형성되어, 카메라와 달리 사물을 있는 그대로 보는 것을 방해한다.", "verdict": "O", "trap_type": "필자관점"}
+   ],
+   "mistips": ["which 를 objects 를 꾸미는 것으로 읽으면 안 돼 — 앞 [[절 전체]]를 보충 설명해."]
+  }
+ ]
+}
