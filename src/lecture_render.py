@@ -12,6 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 
 from .lecture_schemas import STANCES, STRUCTURES, LecturePassage
+from .tag_terms import normalize_tag
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
@@ -216,7 +217,7 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
         lines.append({
             "id": s.id,
             "english": s.english,
-            "grammar": [{"tag": g.tag, "note": g.note} for g in og],
+            "grammar": [{"tag": normalize_tag(g.tag), "note": g.note} for g in og],
             # 강사용: 어법칩 spans 를 문장에서 형광펜(칩 번호)으로 표시. 없으면 None → 끊어읽기 줄 폴백
             "english_hl": _highlight_grammar(s.english, og) if teacher else None,
             "chunks": chunks,
