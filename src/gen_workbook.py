@@ -1549,7 +1549,7 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .dfull .en{ font-size:10px; line-height:1.85; color:#23272e; }
 .dfull .ko{ font-size:9.4px; line-height:1.85; color:#33414d; margin-top:1px; }
 .dfull .en .dim{ color:#79828c; }
-.dfull .yl{ background:linear-gradient(180deg, transparent 15%, #ffe680 15%, #ffe680 88%, transparent 88%); color:#23272e; box-decoration-break:clone; -webkit-box-decoration-break:clone; padding:0 1px; }
+.dfull .yl{ background:#ffe680; color:#23272e; border-radius:2px; padding:1px 2px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .dfull .sl{ color:#b3beb6; font-weight:400; padding:0 1px; }
 .dfull .uref{ border-bottom:2px solid #2f6fb0; color:#194e7e; font-weight:700; }
 .dfull .uconj{ border-bottom:2px solid var(--trap); color:#8f2f28; font-weight:700; }
