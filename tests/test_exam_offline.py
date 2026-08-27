@@ -481,14 +481,14 @@ _VOCAB_SETS = [
 _VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
 
 
-def _fake_ox(prefix: str) -> list:
-    """내용 O/X 가짜 출력 — O 둘, X 여덟이 여덟 축을 하나씩 쓴다."""
+def _fake_ox(prefix: str, n: int = 10) -> list:
+    """내용 O/X 가짜 출력 — O 둘, 나머지 X 가 축을 하나씩 쓴다."""
     from exam.shape import OX_AXES
 
     axes = list(OX_AXES)
     out, k = [], 0
-    for i in range(1, 11):
-        if i in (2, 7):                       # O 두 개(자리는 조판기가 다시 정한다)
+    for i in range(1, n + 1):
+        if i in (2, n - 3):                   # O 두 개(자리는 조판기가 다시 정한다)
             out.append(OXStatement(text=f"{prefix} {i}", is_true=True,
                                    why=f"근거{i}", axis="일치"))
         else:
@@ -575,10 +575,11 @@ _FAKE = {
         choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
         wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
                        WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
-    # 내용 O/X — 한글판·영어판 각각 10개, O 는 정확히 2개, X 여덟은 여덟 축을 하나씩
+    # 내용 O/X — O 는 정확히 2개, 나머지 X 가 축을 하나씩.
+    # _DUMMY 는 47낱말이라 schemas.ox_sizes 가 영어판을 8개로 줄인다(총 18개).
     "ContentOXOut": lambda: ContentOXOut(
-        korean=_fake_ox("한글 진술"),
-        english=_fake_ox("English statement")),
+        korean=_fake_ox("한글 진술", 10),
+        english=_fake_ox("English statement", 8)),
     # 연결어 — (A) 2번 문장 · (B) 4번 문장. 원문에 연결어가 없으니 remove 는 비운다.
     # 정답의 (A)·(B) 낱말이 오답에도 한 번씩 더 나온다 — 한 자리만 보고는 못 고른다.
     "LinkerOut": lambda: LinkerOut(
@@ -2661,10 +2662,20 @@ def test_ox_short_passage() -> None:
 
     FILL = shape.OX_AXES[-1]            # '미언급인데 그럴듯' — 재료가 없을 때 채우는 축
 
-    #  ① 진술 수는 문장 수가 정한다. 줄이는 쪽은 늘 영어판이다
-    #     (영어판이 '한글판이 쓰지 않은 사실'을 받아 만들기 때문).
-    assert ox_sizes(4) == (10, 8) and ox_sizes(5) == (10, 8)
-    assert ox_sizes(6) == (10, 10) and ox_sizes(12) == (10, 10)
+    #  ① 진술 수는 '낱말 수'가 정한다 — 문장 수가 아니다.
+    #     실제 EBS 지문을 재어 보면 5문장 141낱말(명제 ~13개)과 10문장 132낱말(~13~16개)이
+    #     명제 수가 비슷하다. 문장으로 자르면 정보가 더 많은 쪽이 축소 대상이 된다.
+    def _sents(n_words: int, n_sents: int) -> list[str]:
+        per = max(1, n_words // n_sents)
+        return [" ".join(["word"] * per) + "." for _ in range(n_sents)]
+
+    assert ox_sizes(_sents(60, 4)) == (10, 8)        # 짧다 → 영어판 8진술(총 18)
+    assert ox_sizes(_sents(90, 5)) == (10, 8)
+    assert ox_sizes(_sents(140, 12)) == (10, 10)     # 넉넉하다 → 20진술
+    #     문장이 5개뿐이어도 낱말이 넉넉하면 줄이지 않는다(실제 지문1: 5문장 141낱말)
+    assert ox_sizes(_sents(140, 5)) == (10, 10)
+    #     문장이 10개여도 낱말이 모자라면 줄인다(문장 수로는 못 잡는 경우)
+    assert ox_sizes(_sents(80, 10)) == (10, 8)
 
     #  ② 여덟 칸짜리 O 자리표 — 없는 자리(⑨⑩)가 나오지 않는다
     seen = set()
@@ -2731,20 +2742,18 @@ def test_ox_short_passage() -> None:
                 extra_validate(obj)
             return obj
 
-    def _analysis(n: int) -> Analysis:
-        return Analysis(
-            title="Short", main_idea="A main idea.",
-            sentences=[f"Sentence {i} carries one fact of the passage."
-                       for i in range(1, n + 1)],
-            key_terms=[KeyTerm(word="fact", synonym="detail", antonym="")],
-            hardest_sentence="Sentence 1 carries one fact of the passage.")
+    def _analysis(n_words: int, n_sents: int) -> Analysis:
+        ss = _sents(n_words, n_sents)
+        return Analysis(title="P", main_idea="A main idea.", sentences=ss,
+                        key_terms=[KeyTerm(word="fact", synonym="detail", antonym="")],
+                        hardest_sentence=ss[0])
 
-    #     5문장 — 세 자리가 모두 낮아진다
+    #     낱말 60개 — 세 자리가 모두 낮아진다
     cli = _Cli()
-    res = C.generate_pair(cli, _analysis(5), "body", passage_index=0)
+    res = C.generate_pair(cli, _analysis(60, 5), "body", passage_index=0)
     assert "한국어 진술 **10개**" in cli.prompt
     assert "영어 진술 **8개**" in cli.prompt
-    assert "이 지문은 문장이 5개로 짧습니다" in cli.prompt          # O 근거 겹침 허용
+    assert "이 지문은 낱말이 60개로 짧습니다" in cli.prompt         # O 근거 겹침 허용
     assert f"'{FILL}'으로 채우세요" in cli.prompt                   # 없는 축 대체 허용
     assert "한글판의 X 8개, 영어판의 X 6개" in cli.prompt
     assert res[CONTENT][0].count("<li>") == 10
@@ -2755,15 +2764,18 @@ def test_ox_short_passage() -> None:
     ox = _re.findall(r"([OX])</b>", res[CONTENT_2][1])
     assert len(ox) == 8 and ox.count("O") == 2, ox
 
-    #     8문장 — 요구를 낮추지 않는다
+    #     낱말 140개 — 문장이 5개뿐이어도 요구를 낮추지 않는다(실제 EBS 지문1의 모양)
     cli2 = _Cli()
-    res2 = C.generate_pair(cli2, _analysis(8), "body", passage_index=0)
+    res2 = C.generate_pair(cli2, _analysis(140, 5), "body", passage_index=0)
     assert "영어 진술 **10개**" in cli2.prompt
     assert "짧습니다" not in cli2.prompt
     assert f"'{FILL}'으로 채우세요" not in cli2.prompt
-    assert "한글판이 A·B 사실을 O 로 물었다면" in cli2.prompt       # 서로 다른 사실 원칙
     assert res2[CONTENT][0].count("<li>") == 10
     assert res2[CONTENT_2][0].count("<li>") == 10
+    #     O 넷만 서로 달라야 하고, X 는 두 판이 같은 대목을 써도 된다
+    assert "O 4개(판마다 2개)는 서로 다른 사실" in cli2.prompt
+    assert "X 는 두 판이 같은 대목을 써도 됩니다" in cli2.prompt
+    assert "한 판 안에서는" in cli2.prompt
 
     #  ⑤ '채우라고 시킨' 겹침만 봐준다 — 그 밖의 겹침은 그대로 지적한다
     filled = list(shape.OX_AXES[:3]) + [FILL] * 3       # FILL 이 2번 더(허용치와 같음)

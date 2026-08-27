@@ -27,26 +27,40 @@
    지문을 읽지 않고 자리만 보고 찍는다. 열두 문항까지 어느 둘도 같은 자리 짝을
    쓰지 않으며, 두 O 는 늘 세 칸 이상 떨어져 있다.
 
-[지문 길이에 맞춰 요구를 낮추는 세 자리]
-위 원리는 '재료가 넉넉한 지문'을 전제한다. 실제 EBS 지문은 5문장짜리가 흔한데,
-그런 지문에 같은 요구를 보내면 모델은 없는 재료를 지어낸다 — 그러면 지문에 근거가
-없는 진술이 되어 정답 시비가 난다. 그래서 문장 수에 따라 세 곳을 낮춘다.
+[한 지문에서 스무 진술이 나오는가 — 나온다. 다만 무엇을 겹치게 두느냐에 달렸다]
+실제 EBS 지문(약 135낱말)에서 판정 가능한 명제는 열댓 개다. 그런데 20진술 중 X 가
+열여섯이다. X 마다 다른 명제를 요구하면 16 > 13 이라 모델은 지문에 없는 이야기를
+지어낸다 — 정답 시비의 첫째 원인이다.
 
-  문장 5개 이하 → 영어판을 8진술로(총 18개).   [schemas.ox_sizes]
-      O 는 한 지문에 넷이고 넷은 서로 다른 사실이어야 하는데, 주제문을 빼면 5문장
-      지문에서 O 를 놓을 자리가 정확히 넷뿐이라 여유가 0이다. 모자라는 쪽은 늘
-      영어판이다(한글판이 쓰지 않은 사실을 받아 만들기 때문).
-  문장 6개 미만 → 두 판의 O 가 같은 문장에 기대는 것을 허용(묻는 각도는 달라야).
-  문장 7개 미만 → 재료가 없는 축은 '미언급인데 그럴듯'으로 대체 허용(판마다 최대 2회).
-      인과 관계가 없는 지문에서 '인과 역전'을, 단서구가 없는 지문에서 '조건 삭제'를
-      만들어 내는 것보다 낫다.
+그럴 필요가 없다. **겹치면 안 되는 것은 O 넷뿐이다.**
+  · O 는 '지문과 일치한다'는 같은 사실이라, 두 판이 같은 사실을 O 로 물으면 한쪽이
+    다른 쪽의 번역이 된다. 한 판을 푼 학생이 그대로 옮겨 적는다.
+  · X 는 그렇지 않다. 한글판이 5번 문장을 '인과 역전'으로 비틀고 영어판이 같은 5번
+    문장을 '조건 삭제'로 비틀면, 판정 근거가 달라 서로 다른 문제다. 옮겨 적을 수 없다.
+그래서 X 는 두 판 사이에 대목을 겹쳐 써도 된다(한 판 안에서는 되도록 흩는다).
+필요한 서로 다른 명제는 16개가 아니라 4개다 — 열댓 개면 넉넉하다.
+
+[재료를 세는 자는 문장 수가 아니라 낱말 수다]
+실제 지문 둘을 재어 보고 고쳤다.
+    지문1  5문장 141낱말 → 명제 약 13개 (문장이 길고 종속절이 많다)
+    지문2 10문장 132낱말 → 약 13~16개
+문장 수는 두 배 차이인데 명제 수는 비슷하다. 낱말 수가 거의 같으니 당연하다.
+문장 수로 자르면 정보가 더 많은 지문1이 오히려 축소 대상이 된다. 그래서 낱말로 센다.
+
+  낱말 100개 미만 → 영어판을 8진술로(총 18개) + 두 판의 O 가 같은 대목에 기대는 것 허용.
+      [schemas.ox_sizes · OX_WORDS_SHORT]
+  낱말 120개 미만 → 재료가 없는 축은 '미언급인데 그럴듯'으로 대체 허용(판마다 최대 2회).
+      [OX_WORDS_THIN] 인과 관계가 없는 지문에서 '인과 역전'을, 단서구가 없는 지문에서
+      '조건 삭제'를 만들어 내는 것보다 낫다.
+실제 EBS 지문 둘(141·132낱말)은 어느 문턱에도 걸리지 않아 20진술 전부를 낸다.
 """
 from __future__ import annotations
 
 from .. import answer_spread, build as B
 from .. import shape
 from ..llm import SYSTEM, ClaudeClient
-from ..schemas import Analysis, ContentOXOut, N_OX_TRUE, ox_sizes
+from ..schemas import (Analysis, ContentOXOut, N_OX_TRUE, OX_WORDS_SHORT,
+                       OX_WORDS_THIN, ox_sizes, passage_words)
 from ..types import CONTENT, CONTENT_2
 from .base import context
 
@@ -112,17 +126,24 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
 {ctx}
 """
 
-# 문장이 넉넉한 지문 — 두 판이 서로 다른 사실을 물어야 한다.
-_O_RULE_STRICT = """- 한글판과 영어판은 **서로 다른 사실**을 물어야 합니다. 영어판은 한글판의 번역이
-  아닙니다. 같은 문장을 두 언어로 내면 한 판을 푼 학생이 그대로 옮겨 적습니다.
-  · 한글판이 A·B 사실을 O 로 물었다면, 영어판은 C·D 를 O 로 무세요.
-  · X 진술도 서로 다른 대목을 비틀어야 합니다.
+# 재료가 넉넉한 지문 — O 넷을 서로 다른 사실에서 뽑을 수 있다.
+_O_RULE_STRICT = """- **O 4개(판마다 2개)는 서로 다른 사실이어야 합니다.** 한글판이 A·B 를 O 로 물었다면
+  영어판은 C·D 를 O 로 무세요. O 는 '지문과 일치한다'는 같은 사실이라, 두 언어로 쓰면
+  그대로 번역이 되어 한 판을 푼 학생이 옮겨 적습니다.
+- **X 는 두 판이 같은 대목을 써도 됩니다.** 한글판이 어느 문장을 '인과 역전'으로
+  비틀고 영어판이 같은 문장을 '조건 삭제'로 비틀면, 판정 근거가 달라 서로 다른
+  문제입니다. 옮겨 적을 수 없습니다.
+  · 다만 **한 판 안에서는** 되도록 서로 다른 대목을 비트세요(같은 문장만 여덟 번
+    비틀면 나머지 지문을 읽지 않아도 풀립니다).
+  · 두 판의 X 를 억지로 다른 대목에 배정하려 하지 마세요. 지문 하나에서 판정 가능한
+    사실은 열댓 개뿐이라, 열여섯 개를 다른 대목에 흩으려 하면 지문에 없는 이야기를
+    지어내게 됩니다.
 """
 
 # 짧은 지문 — 서로 다른 사실이 넷이나 나오지 않는다.
 _O_RULE_SHARED = """- 한글판과 영어판은 **서로 다른 사실**을 묻는 것이 원칙입니다. 영어판은 한글판의
   번역이 아닙니다 — 같은 문장을 두 언어로 내면 한 판을 푼 학생이 그대로 옮겨 적습니다.
-- **다만 이 지문은 문장이 {n}개로 짧습니다.** O 로 쓸 만한 '눈에 덜 띄는 세부 사실'이
+- **다만 이 지문은 낱말이 {w}개로 짧습니다.** O 로 쓸 만한 '눈에 덜 띄는 세부 사실'이
   넷이나 나오지 않을 수 있습니다. 그럴 때는 두 판의 O 가 같은 문장에 기대도 됩니다.
   대신 **묻는 각도가 완전히 달라야** 합니다.
   · 한 판이 그 문장의 '무엇이 무엇을 한다'를 물었다면, 다른 판은 '어떤 조건에서'나
@@ -138,7 +159,7 @@ _AXIS_RULE_STRICT = """- 지문에 통념·인용이 없어 '논지·화자 뒤�
 """
 
 # 짧은 지문 — 여덟 축의 재료가 다 있지 않다. 없는 축은 지어내지 말고 대체하게 한다.
-_AXIS_RULE_RELAXED = """- **이 지문은 문장이 {n}개로 짧아 위 여덟 축의 재료가 다 있지는 않습니다.**
+_AXIS_RULE_RELAXED = """- **이 지문은 낱말이 {w}개로 짧아 위 여덟 축의 재료가 다 있지는 않습니다.**
   인과 관계가 없는 지문에서 '인과 역전'을, '이론상·~할 때에는' 같은 단서구가 없는
   지문에서 '조건 삭제'를, 통념·인용이 없는 지문에서 '논지·화자 뒤집기'를 만들어 내면
   지문에 근거가 없는 진술이 되어 **정답 시비가 납니다**.
@@ -158,17 +179,18 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
     두 판이 서로 다른 사실을 물어야 하므로 한 번에 만든다. 따로 부르면 같은 사실을
     두 번 묻게 되고(모델은 다른 호출에서 무엇을 물었는지 모른다), 호출도 두 배가 된다.
     """
-    n = len(analysis.sentences)
-    n_ko, n_en = ox_sizes(n)
-    shared_o = n < 6            # O 넷을 서로 다른 사실로 뽑을 수 없는 길이
-    relaxed_axes = n < 7        # 여덟 축의 재료가 다 있지 않은 길이
+    words = passage_words(analysis.sentences)
+    n_ko, n_en = ox_sizes(analysis.sentences)
+    # 재료를 세는 자는 낱말 수다(schemas 의 주석 참고 — 문장 수는 명제 수와 어긋난다).
+    shared_o = words < OX_WORDS_SHORT     # O 넷을 서로 다른 명제로 뽑을 수 없다
+    relaxed_axes = words < OX_WORDS_THIN  # 여덟 축의 재료가 다 있지 않다
     fill = _FILL_ALLOWANCE if relaxed_axes else 0
 
     prompt = _PROMPT.format(
         n_ko=n_ko, n_en=n_en, n_true=N_OX_TRUE,
         x_ko=n_ko - N_OX_TRUE, x_en=n_en - N_OX_TRUE,
-        o_rule=(_O_RULE_SHARED.format(n=n) if shared_o else _O_RULE_STRICT),
-        axis_rule=(_AXIS_RULE_RELAXED.format(n=n, fill=fill)
+        o_rule=(_O_RULE_SHARED.format(w=words) if shared_o else _O_RULE_STRICT),
+        axis_rule=(_AXIS_RULE_RELAXED.format(w=words, fill=fill)
                    if relaxed_axes else _AXIS_RULE_STRICT),
         ctx=context(analysis),
     )
@@ -179,8 +201,8 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
         for label, items, want in (("한글판", out.korean, n_ko),
                                    ("영어판", out.english, n_en)):
             if len(items) != want:
-                raise ValueError(f"{label} 진술이 {len(items)}개입니다 — 이 지문은 문장이 "
-                                 f"{n}개이므로 정확히 {want}개여야 합니다.")
+                raise ValueError(f"{label} 진술이 {len(items)}개입니다 — 이 지문은 낱말이 "
+                                 f"{words}개이므로 정확히 {want}개여야 합니다.")
         # 쓰지 않기로 한 두 함정은 되돌린다 — 문항의 값을 깎는 결함이고 드물게 나온다.
         bad = shape.check_ox_axes([it.why for it in out.korean + out.english]
                                   + [it.axis for it in out.korean + out.english])
