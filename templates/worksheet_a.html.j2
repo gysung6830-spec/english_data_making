@@ -89,11 +89,13 @@
               white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:#7c828c; font-weight:800; font-size:8.5px; }   /* 성분(SVOC) 라벨 = 회색 */
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
-  /* 지칭 표식(어법 ①②③ 와 구분): 보라 '위첨자 문자' a·b·c — 본문 대명사 ↔ 독해 박스 연결 */
-  .rsup{ color:var(--purple); font-weight:800; font-size:8px; vertical-align:super; margin-left:1px; }
-  .pbox .rsup.box{ vertical-align:baseline; font-size:10px; display:inline-block; min-width:12px;
-                   text-align:center; border:1.3px solid var(--purple); border-radius:50%;
-                   line-height:1.25; margin-right:2px; }
+  /* 지칭 표식(어법 ①②③ 와 구분): 보라 '색 채운 동그라미 + 옅은 글자' a·b·c
+     — 본문 대명사(위첨자) ↔ 독해 박스를 문자로 연결 */
+  .rsup{ display:inline-block; min-width:12px; height:12px; line-height:12px; text-align:center;
+         background:var(--purple); color:#fff; border-radius:50%; font-size:8px; font-weight:800;
+         vertical-align:3px; margin-left:1.5px; }
+  .pbox .rsup.box{ min-width:13px; height:13px; line-height:13px; font-size:9px;
+                   vertical-align:baseline; margin-right:2px; }
   /* 긴 토큰(구절 단위)은 줄바꿈 허용 → 컬럼 폭을 넘겨 포인트 박스를 밀어내는 오류 방지.
      짧은 토큰(주석 달린 단어)은 어차피 한 줄에 들어가 정렬 유지. */
   .tok{ max-width:100%; }
