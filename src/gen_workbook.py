@@ -494,6 +494,18 @@ def _slash_marked(chunks, marks):
     return joined
 
 
+def _dfull_en(chunks, tags):
+    """일반 유형 ①지문 영어 — 청크별로 신호(빨강)+관계어(파랑)+±어휘 마킹 후 슬래시로 연결.
+       각 신호 태그는 그 신호어(word)가 실제로 들어있는 청크에만 적용."""
+    SL = ' <span class="sl">/</span> '
+    out = []
+    for c in chunks:
+        ctags = [t for t in (tags or [])
+                 if t.get("word") and re.search(re.escape(t["word"]), c, re.I)]
+        out.append(_mark_sentence(c, ctags, mark_rel=True))
+    return SL.join(out)
+
+
 def direct_full_block(data):
     """전 문장 직독직해 해석카드 — 유형별 표시(노란줄/무관이탈/이음매신호줄/요약)."""
     kind = data.get("kind", "general")
@@ -510,19 +522,23 @@ def direct_full_block(data):
                           f'<div class="sen">{sen}</div><div class="sko">{sko}</div></div>')
             continue
         role = r.get("role", "gray")
-        marks = list(r.get("marks") or r.get("mark") or [])
-        marks_ko = list(r.get("marks_ko") or r.get("mark_ko") or [])
-        # 신호(왜 노랑인가): sig={name,color,word} → 신호어에 색줄 + 칩
-        sig = r.get("sig")
         sigchip = ""
-        if sig and sig.get("name"):
-            scol = sig.get("color", "red")
-            if sig.get("word"):
-                marks.append((sig["word"], f"sig-{scol}"))
-            _lbl = sig["name"] + (f' {sig["word"]}' if sig.get("word") else "")
-            sigchip = f'<span class="sigc sc-{scol}">{esc(_lbl)}</span>'
-        en = _slash_marked(r.get("en", []), marks)
-        ko = _slash_marked(r.get("ko", []), marks_ko)
+        if kind in ("general", "summary"):
+            # 신호(빨강)+관계어(파랑)+±어휘 자동 마킹 + 슬래시 (옛 STEP2 신호 복원)
+            en = _dfull_en(r.get("en", []), r.get("tags", []))
+            ko = _slash(r.get("ko", []))
+        else:
+            marks = list(r.get("marks") or r.get("mark") or [])
+            marks_ko = list(r.get("marks_ko") or r.get("mark_ko") or [])
+            sig = r.get("sig")
+            if sig and sig.get("name"):
+                scol = sig.get("color", "red")
+                if sig.get("word"):
+                    marks.append((sig["word"], f"sig-{scol}"))
+                _lbl = sig["name"] + (f' {sig["word"]}' if sig.get("word") else "")
+                sigchip = f'<span class="sigc sc-{scol}">{esc(_lbl)}</span>'
+            en = _slash_marked(r.get("en", []), marks)
+            ko = _slash_marked(r.get("ko", []), marks_ko)
         # 번호/라벨
         label = r.get("label")
         rowcls = "row"
@@ -1000,8 +1016,6 @@ def solution_block(rec, c, idx, tno=None):
                 '<span style="color:#79828c">회색</span>=배경·예시 · '
                 '<span class="sigc sc-red" style="margin:0;padding:1px 6px">신호</span>=왜 노랑인지(신호어 색줄) · 슬래시(/)=의미 단위')
         ileg += (' · <b>어려운 문장</b>은 <span style="color:#a86b00">뜻</span> 자연해석</div>')
-        rin = _restate_inner(rt)
-        r4 = f'<div class="isec"><span class="in">4</span>재진술 지도</div><div class="ibox">{rin}</div>' if rin else ''
         recon = '<div class="reconnote">※ 원본 선지 일부 유실 → 학습용 재구성(지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""
         return f'''<div class="qsolution"><div class="card intg">
       <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind">STEP 2+3 · 훈련·해석 통합</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
@@ -1014,7 +1028,7 @@ def solution_block(rec, c, idx, tno=None):
       <div class="isec"><span class="in">3</span>정답 <span class="ansno">{circ}</span></div>
       {opts_html}{recon}
       <div class="formula"><span class="k">공식</span>{esc(formula)}</div>
-      {r4}
+      <div class="rmoved">🔁 재진술 지도는 <b>책 맨 끝 「재진술 답」 부록</b>(색인 앞)에 모아 두었습니다.</div>
     </div></div>'''
     right2 = f'''<div class="card trans">
       <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span><span class="kind" style="color:var(--src-line);border-color:var(--src-line)">{step3_kind}</span><span class="tm">{step3_tm}</span></div>
@@ -1024,7 +1038,7 @@ def solution_block(rec, c, idx, tno=None):
         <div class="opt-line">{opt_line(c)}</div>
       </div>
     </div>'''
-    return right + right2 + restate_card(rt) + '\n  </div>'
+    return right + right2 + '\n  </div>'
 
 
 def summary_box(summary, fill=None):
@@ -1411,6 +1425,7 @@ def build(n=80):
         groups[b].sort(key=lambda r: 0 if f'{r["exam_id"]}|{r["num"]}' in DAEPYO else 1)
     present_bands = [b for b in BAND_ORDER if b in groups]
     body, idx, full = [], 0, 0
+    item_meta = {}
     for si, b in enumerate(present_bands, 1):
         if b == "36-37":
             body.append(onepass_page("순서"))
@@ -1421,12 +1436,16 @@ def build(n=80):
             idx += 1
             key = f'{r["exam_id"]}|{r["num"]}'
             c = content.get(key)
+            item_meta[key] = {"type": BAND_TITLE.get(b, b), "tno": tno,
+                              "band": b, "exam": exam_src(r.get("exam_id", "")), "num": r["num"]}
             if c and c.get("hl"):
                 body.append(render_spread(r, c, idx, tno)); full += 1
             else:
                 body.append(render_fallback(r, idx, tno))
     doc = TEMPLATE.replace("{{BODY}}", "\n".join(body)).replace("{{N}}", str(idx)).replace("{{FULL}}", str(full))
     OUT.write_text(doc, encoding="utf-8")
+    (ROOT / "corpus" / "item_meta.json").write_text(
+        json.dumps(item_meta, ensure_ascii=False, indent=0), encoding="utf-8")
     print(f"워크북 생성: {idx}문항(대표형 {full} · 폴백 {idx-full}) → {OUT}")
 
 
@@ -1815,6 +1834,7 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .card.intg .ilegend .yl2{ background:#ffe680; border-radius:2px; padding:0 4px; font-weight:800; color:#23272e; }
 .card.intg .blanknote{ font-size:9px; color:#8f2f28; font-weight:700; } .card.intg .bkmini{ border:1px dashed #cd5049; border-radius:3px; padding:0 4px; color:#cd5049; }
 .card.intg .ibox{ margin-top:2px; }
+.card.intg .rmoved{ margin-top:9px; font-size:8.8px; color:#8a6a00; background:#fff8e6; border:1px dashed #e0b94a; border-radius:6px; padding:5px 10px; } .card.intg .rmoved b{ color:#8a5a1a; }
 .card.intg .restate-in{ background:#fff7ef; border:1px solid #e0b94a; border-radius:8px; padding:8px 12px; }
 .card.restate .hd{ border-bottom-color:#e0b94a; }
 .card.restate .rno{ background:none; font-size:14px; padding:0; }

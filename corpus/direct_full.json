@@ -66,7 +66,13 @@
 "color": "red",
 "word": "when in fact"
 },
-"nat": "당신은 그것을 조금만 어렵다고 느껴 자신이 꽤 잘 오르고 있다고 결론짓지만, 사실은 평소와 다를 바 없이 오르고 있었다."
+"nat": "당신은 그것을 조금만 어렵다고 느껴 자신이 꽤 잘 오르고 있다고 결론짓지만, 사실은 평소와 다를 바 없이 오르고 있었다.",
+"tags": [
+{
+"sig": "대조",
+"word": "when in fact"
+}
+]
 },
 {
 "role": "skip",
@@ -90,6 +96,12 @@
 "당신은 비교해서 약하다고 느꼈다,",
 "사실은, 객관적으로,",
 "당신은 매우 강한 성과를 냈는데도."
+],
+"tags": [
+{
+"sig": "대조",
+"word": "when in fact"
+}
 ]
 },
 {
@@ -133,7 +145,13 @@
 "name": "결론",
 "color": "green",
 "word": "In all these cases"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "In all these cases"
 }
+]
 },
 {
 "role": "yellow",
@@ -150,7 +168,13 @@
 "color": "orange",
 "word": "If"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 }
 ]
 },
@@ -173,7 +197,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "skip",
@@ -205,7 +235,13 @@
 "color": "gray",
 "word": "not only"
 },
-"nat": "소비자들은 자신의 개인 데이터가 기업이 주는 풍부한 경험을 만들어낼 뿐 아니라, 그 데이터를 내주는 것이 그 경험의 대가임을 안다."
+"nat": "소비자들은 자신의 개인 데이터가 기업이 주는 풍부한 경험을 만들어낼 뿐 아니라, 그 데이터를 내주는 것이 그 경험의 대가임을 안다.",
+"tags": [
+{
+"sig": "열거",
+"word": "not only ... but also"
+}
+]
 },
 {
 "role": "yellow",
@@ -221,7 +257,13 @@
 "name": "조건",
 "color": "orange",
 "word": "Without"
+},
+"tags": [
+{
+"sig": "조건",
+"word": "Without"
 }
+]
 },
 {
 "role": "skip",
@@ -286,7 +328,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "분산된 주의는 스트레스를 떨쳐내는 능력을 해치는데, 주의가 분산되어 있어도 실은 좁게 집중되어 경험의 스트레스받는 부분에만 고착되기 때문이다."
+"nat": "분산된 주의는 스트레스를 떨쳐내는 능력을 해치는데, 주의가 분산되어 있어도 실은 좁게 집중되어 경험의 스트레스받는 부분에만 고착되기 때문이다.",
+"tags": [
+{
+"sig": "인과",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -330,7 +378,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "좁은 초점은 각 경험의 스트레스를 높이지만, 넓어진 초점은 각 상황을 더 넓은 시각으로 볼 수 있게 해 스트레스를 낮춘다."
+"nat": "좁은 초점은 각 경험의 스트레스를 높이지만, 넓어진 초점은 각 상황을 더 넓은 시각으로 볼 수 있게 해 스트레스를 낮춘다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "yellow",
@@ -369,7 +423,13 @@
 "color": "red",
 "word": "but"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 }
 ]
 },
@@ -404,7 +464,13 @@
 "color": "orange",
 "word": "Given"
 },
-"nat": "인터넷에 존재하는 모든 것에 따르는 익명성의 수준을 감안하면, 당신이 받는 어떤 데이터든 그 타당성을 의심하는 것이 현명하다."
+"nat": "인터넷에 존재하는 모든 것에 따르는 익명성의 수준을 감안하면, 당신이 받는 어떤 데이터든 그 타당성을 의심하는 것이 현명하다.",
+"tags": [
+{
+"sig": "조건",
+"word": "Given"
+}
+]
 },
 {
 "role": "skip",
@@ -479,7 +545,13 @@
 "color": "red",
 "word": "However"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 }
 ]
 },
@@ -503,7 +575,13 @@
 "color": "purple",
 "word": "not"
 },
-"nat": "세상에 대한 우리의 관점은 순수하고 객관적인 형태로 외부에서 주어지는 것이 아니라, 우리의 정신적 능력과 공유된 문화적 시각, 그리고 고유한 가치관과 신념에 의해 형성된다."
+"nat": "세상에 대한 우리의 관점은 순수하고 객관적인 형태로 외부에서 주어지는 것이 아니라, 우리의 정신적 능력과 공유된 문화적 시각, 그리고 고유한 가치관과 신념에 의해 형성된다.",
+"tags": [
+{
+"sig": "부정",
+"word": "not"
+}
+]
 },
 {
 "role": "skip",
@@ -530,7 +608,13 @@
 "name": "강조",
 "color": "purple",
 "word": "not the version"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "not the version"
 }
+]
 },
 {
 "role": "gray",
@@ -560,7 +644,17 @@
 "color": "purple",
 "word": "only"
 },
-"nat": "우리는 세상을 오직 우리에게 보이는 대로만 볼 수 있을 뿐 '진정한 그대로'는 볼 수 없는데, 형태를 부여할 관점이 없다면 '진정한 그대로'라는 것 자체가 존재하지 않기 때문이다."
+"nat": "우리는 세상을 오직 우리에게 보이는 대로만 볼 수 있을 뿐 '진정한 그대로'는 볼 수 없는데, 형태를 부여할 관점이 없다면 '진정한 그대로'라는 것 자체가 존재하지 않기 때문이다.",
+"tags": [
+{
+"sig": "한정",
+"word": "only"
+},
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -580,7 +674,17 @@
 "word": "since"
 },
 "nat": "철학자 토머스 네이글은 우리가 특정한 관점에서만 세상을 볼 수 있고 그 관점이 우리가 보는 것에 영향을 주므로 '어디에도 속하지 않는 관점'은 없다고 주장했다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "이유",
+"word": "since"
+},
+{
+"sig": "부정",
+"word": "no"
+}
+]
 },
 {
 "role": "gray",
@@ -596,7 +700,13 @@
 "name": "한정",
 "color": "purple",
 "word": "only"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "only"
 }
+]
 }
 ]
 },
@@ -629,7 +739,13 @@
 "어떤 기분일지 생각해 보라",
 "그 결과로 예를 들어 브랜드 매니저에게서 개인적으로 인정받는다면."
 ],
-"nat": "브랜드나 제품, 서비스에 호의적인 댓글, 사실 어떤 댓글이든 달아본 적이 있다면, 그 결과로 예컨대 브랜드 매니저에게서 직접 인정받는다면 어떤 기분일지 생각해 보라."
+"nat": "브랜드나 제품, 서비스에 호의적인 댓글, 사실 어떤 댓글이든 달아본 적이 있다면, 그 결과로 예컨대 브랜드 매니저에게서 직접 인정받는다면 어떤 기분일지 생각해 보라.",
+"tags": [
+{
+"sig": "예시",
+"word": "for example"
+}
+]
 },
 {
 "role": "gray",
@@ -647,7 +763,13 @@
 "name": "이유",
 "color": "orange",
 "word": "because"
+},
+"tags": [
+{
+"sig": "이유",
+"word": "because"
 }
+]
 },
 {
 "role": "gray",
@@ -677,7 +799,13 @@
 "color": "red",
 "word": "While"
 },
-"nat": "옆 사람에게 건넨 칭찬은 대개 '고맙습니다'라는 답을 듣지만, 안타깝게도 대부분의 브랜드 칭찬은 아무런 응답을 받지 못한다."
+"nat": "옆 사람에게 건넨 칭찬은 대개 '고맙습니다'라는 답을 듣지만, 안타깝게도 대부분의 브랜드 칭찬은 아무런 응답을 받지 못한다.",
+"tags": [
+{
+"sig": "대조",
+"word": "While"
+}
+]
 },
 {
 "role": "yellow",
@@ -728,7 +856,13 @@
 "name": "주장",
 "color": "purple",
 "word": "seriously"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "seriously"
 }
+]
 },
 {
 "role": "skip",
@@ -755,7 +889,13 @@
 "name": "핵심",
 "color": "green",
 "word": "inner worlds"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "inner worlds"
 }
+]
 },
 {
 "role": "gray",
@@ -811,7 +951,13 @@
 "color": "orange",
 "word": "no one"
 },
-"nat": "결국 신경과학이 번성했음에도, 이 신성시되는 '의식'을 담당할 만한, 인간에게만 고유한 뇌 부위는 아무도 아직 찾아내지 못했다."
+"nat": "결국 신경과학이 번성했음에도, 이 신성시되는 '의식'을 담당할 만한, 인간에게만 고유한 뇌 부위는 아무도 아직 찾아내지 못했다.",
+"tags": [
+{
+"sig": "근거",
+"word": "no one"
+}
+]
 },
 {
 "role": "yellow",
@@ -849,7 +995,13 @@
 "name": "이유",
 "color": "orange",
 "word": "reason"
+},
+"tags": [
+{
+"sig": "이유",
+"word": "reason"
 }
+]
 },
 {
 "role": "yellow",
@@ -865,7 +1017,13 @@
 "name": "인과",
 "color": "orange",
 "word": "when"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "when"
 }
+]
 },
 {
 "role": "skip",
@@ -930,7 +1088,13 @@
 "color": "purple",
 "word": "stresses"
 },
-"nat": "린의 연구는 사회에서의 우리 경험을 형성하는 것이 무엇을 아느냐만큼이나 누구를 아느냐임을 강조한다."
+"nat": "린의 연구는 사회에서의 우리 경험을 형성하는 것이 무엇을 아느냐만큼이나 누구를 아느냐임을 강조한다.",
+"tags": [
+{
+"sig": "강조",
+"word": "stresses"
+}
+]
 },
 {
 "role": "yellow",
@@ -947,7 +1111,13 @@
 "color": "green",
 "word": "expanding"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "expanding"
+}
+]
 }
 ]
 },
@@ -981,7 +1151,13 @@
 "name": "인과",
 "color": "orange",
 "word": "because"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "because"
 }
+]
 },
 {
 "role": "yellow",
@@ -999,7 +1175,13 @@
 "name": "조건",
 "color": "orange",
 "word": "When"
+},
+"tags": [
+{
+"sig": "조건",
+"word": "When"
 }
+]
 },
 {
 "role": "gray",
@@ -1026,7 +1208,13 @@
 "우리가 아는 모든 문화는 옥타브를 자기 음악의 기초로 삼는다,",
 "다른 음악 전통과 공통점이 거의 없더라도."
 ],
-"nat": "그것은 매우 중요해서, 음악 문화 간에 큰 차이가 있고 다른 전통과 공통점이 거의 없더라도, 우리가 아는 모든 문화가 옥타브를 자기 음악의 기초로 삼는다."
+"nat": "그것은 매우 중요해서, 음악 문화 간에 큰 차이가 있고 다른 전통과 공통점이 거의 없더라도, 우리가 아는 모든 문화가 옥타브를 자기 음악의 기초로 삼는다.",
+"tags": [
+{
+"sig": "양보",
+"word": "in spite of"
+}
+]
 },
 {
 "role": "gray",
@@ -1050,6 +1238,12 @@
 "빨강과 보라가 연속체의 양 끝에 놓여 있음에도 불구하고",
 "전자기 에너지의 가시적 주파수의,",
 "우리는 그것들을 지각적으로 유사하게 본다."
+],
+"tags": [
+{
+"sig": "양보",
+"word": "Although"
+}
 ]
 },
 {
@@ -1107,7 +1301,13 @@
 "name": "강조",
 "color": "purple",
 "word": "particularly"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "particularly"
 }
+]
 },
 {
 "role": "skip",
@@ -1118,6 +1318,12 @@
 "ko": [
 "네덜란드처럼 자전거 사용이 많은 지역에서는,",
 "배송 자전거가 개인 화물(예: 식료품)을 운반하는 데도 사용된다."
+],
+"tags": [
+{
+"sig": "예시",
+"word": "such as"
+}
 ]
 },
 {
@@ -1137,7 +1343,13 @@
 "color": "orange",
 "word": "Due to"
 },
-"nat": "화물 자전거는 구매·유지 비용이 낮아, 인도네시아의 베짝(세발자전거)처럼 선진국과 개발도상국 모두에서 큰 잠재력을 지닌다."
+"nat": "화물 자전거는 구매·유지 비용이 낮아, 인도네시아의 베짝(세발자전거)처럼 선진국과 개발도상국 모두에서 큰 잠재력을 지닌다.",
+"tags": [
+{
+"sig": "인과",
+"word": "Due to"
+}
+]
 },
 {
 "role": "skip",
@@ -1150,6 +1362,12 @@
 "전기 보조 배송 삼륜차를 사용하는 서비스가 프랑스에서 성공적으로 시행되었다",
 "그리고 유럽 전역에서 점차 채택되고 있다",
 "택배와 케이터링 배송만큼이나 다양한 서비스를 위해."
+],
+"tags": [
+{
+"sig": "예시",
+"word": "such as"
+}
 ]
 },
 {
@@ -1170,7 +1388,13 @@
 "word": "particularly encouraged"
 },
 "nat": "자전거를 화물 차량으로 쓰는 것은, 도심이나 상업 지구 같은 도시 특정 구역의 자동차 진입을 제한하는 정책이나 전용 자전거 도로 확장과 결합될 때 특히 장려된다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "강조",
+"word": "particularly encouraged"
+}
+]
 }
 ]
 },
@@ -1216,7 +1440,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "그 은유는 소유권을 분리했다가 다시 합칠 수 있는 대인 권리들의 묶음으로 보게 해주기에 유용하다."
+"nat": "그 은유는 소유권을 분리했다가 다시 합칠 수 있는 대인 권리들의 묶음으로 보게 해주기에 유용하다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -1249,7 +1479,13 @@
 "color": "red",
 "word": "though"
 },
-"nat": "하지만 흔히 우리는, 한 필지의 땅처럼 막대기를 나누어, 토지 소유자, 저당권을 쥔 은행, 임차권을 가진 세입자, 출입 허가를 받은 배관공, 광물권을 가진 석유 회사가 각각 존재할 수 있다."
+"nat": "하지만 흔히 우리는, 한 필지의 땅처럼 막대기를 나누어, 토지 소유자, 저당권을 쥔 은행, 임차권을 가진 세입자, 출입 허가를 받은 배관공, 광물권을 가진 석유 회사가 각각 존재할 수 있다.",
+"tags": [
+{
+"sig": "역접",
+"word": "though"
+}
+]
 },
 {
 "role": "yellow",
@@ -1287,7 +1523,13 @@
 "name": "단정",
 "color": "purple",
 "word": "clearly"
+},
+"tags": [
+{
+"sig": "단정",
+"word": "clearly"
 }
+]
 },
 {
 "role": "yellow",
@@ -1306,7 +1548,13 @@
 "color": "red",
 "word": "the former; the latter"
 },
-"nat": "전자는 특정 상황에서 확률을 쉽게 잴 수 있는 해석되지 않은 데이터나 감각 상태를 뜻하고, 후자는 주어진 상황에서 그 정보가 수반하거나 지니도록 의도된 특별한 뉘앙스와 가치를 포함한 그 데이터·감각 상태의 해석을 뜻한다."
+"nat": "전자는 특정 상황에서 확률을 쉽게 잴 수 있는 해석되지 않은 데이터나 감각 상태를 뜻하고, 후자는 주어진 상황에서 그 정보가 수반하거나 지니도록 의도된 특별한 뉘앙스와 가치를 포함한 그 데이터·감각 상태의 해석을 뜻한다.",
+"tags": [
+{
+"sig": "대조",
+"word": "the former; the latter"
+}
+]
 },
 {
 "role": "gray",
@@ -1328,6 +1576,12 @@
 "ko": [
 "예를 들어, 동전 던지기 게임을 생각해 보라",
 "연속으로 앞면 세 번을 던지는 것이 승리가 된다고 정해진."
+],
+"tags": [
+{
+"sig": "예시",
+"word": "for instance"
+}
 ]
 },
 {
@@ -1342,7 +1596,13 @@
 "그러면 우리는 그 결과를 행운의 작용으로 해석하는 경향이 있다,",
 "아니면 이긴 선수 쪽의 영리하고 탐지 불가능한 속임수로."
 ],
-"nat": "어떤 선수가 도전자를 모두 물리치며 계속 원하는 결과를 낸다면, 우리는 그 결과를 행운의 작용이거나, 아니면 그 선수의 영리해서 들키지 않는 속임수로 해석하곤 한다."
+"nat": "어떤 선수가 도전자를 모두 물리치며 계속 원하는 결과를 낸다면, 우리는 그 결과를 행운의 작용이거나, 아니면 그 선수의 영리해서 들키지 않는 속임수로 해석하곤 한다.",
+"tags": [
+{
+"sig": "예시조건",
+"word": "If"
+}
+]
 },
 {
 "role": "yellow",
@@ -1359,7 +1619,13 @@
 "color": "green",
 "word": "at the core"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "at the core"
+}
+]
 }
 ]
 },
@@ -1383,7 +1649,13 @@
 "color": "green",
 "word": "reason and critique to the understanding of self"
 },
-"nat": "18~19세기에 성숙한 개인 일기는 근대적 주체성 형성의 중심이 되었고, 그 핵심에는 세계와 자아를 이해하는 데 이성과 비판을 적용하는 일이 있었으며, 이것이 새로운 종류의 지식을 만들어냈다."
+"nat": "18~19세기에 성숙한 개인 일기는 근대적 주체성 형성의 중심이 되었고, 그 핵심에는 세계와 자아를 이해하는 데 이성과 비판을 적용하는 일이 있었으며, 이것이 새로운 종류의 지식을 만들어냈다.",
+"tags": [
+{
+"sig": "핵심어",
+"word": "reason and critique to the understanding of self"
+}
+]
 },
 {
 "role": "skip",
@@ -1424,7 +1696,13 @@
 "color": "green",
 "word": "insights and narratives about the self"
 },
-"nat": "시간이 흐르고 다시 읽으면서, 제각각인 기록과 사건, 우연들이 자아에 관한 통찰과 이야기로 빚어질 수 있었고, 이는 주체성의 형성을 가능하게 했다."
+"nat": "시간이 흐르고 다시 읽으면서, 제각각인 기록과 사건, 우연들이 자아에 관한 통찰과 이야기로 빚어질 수 있었고, 이는 주체성의 형성을 가능하게 했다.",
+"tags": [
+{
+"sig": "핵심어",
+"word": "insights and narratives about the self"
+}
+]
 },
 {
 "role": "yellow",
@@ -1440,7 +1718,13 @@
 "name": "핵심어",
 "color": "green",
 "word": "made and explored with words"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "made and explored with words"
 }
+]
 },
 {
 "role": "yellow",
@@ -1458,7 +1742,13 @@
 "name": "환언",
 "color": "gray",
 "word": "or"
+},
+"tags": [
+{
+"sig": "환언",
+"word": "or"
 }
+]
 },
 {
 "role": "yellow",
@@ -1477,7 +1767,13 @@
 "color": "green",
 "word": "self-inspection and self-critique"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심어",
+"word": "self-inspection and self-critique"
+}
+]
 }
 ]
 },
@@ -1498,7 +1794,13 @@
 "name": "핵심어",
 "color": "green",
 "word": "emotional attachments to ‘faces’"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "emotional attachments to ‘faces’"
 }
+]
 },
 {
 "role": "skip",
@@ -1543,7 +1845,13 @@
 "name": "핵심어",
 "color": "green",
 "word": "angrier, scarier faces"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "angrier, scarier faces"
 }
+]
 },
 {
 "role": "gray",
@@ -1572,7 +1880,13 @@
 "name": "강조",
 "color": "purple",
 "word": "no sign of slowing"
+},
+"tags": [
+{
+"sig": "지속",
+"word": "no sign of slowing"
 }
+]
 },
 {
 "role": "yellow",
@@ -1592,7 +1906,13 @@
 "word": "customers are happy"
 },
 "nat": "한 국제 자동차 사이트는 2017년에, 힘이나 사나운 성미를 풍기는 스타일의 차가 활발히 팔리는 것은 고객들이 이 외관에 만족한다는 점을 확인해 주는 듯하다고 보도했다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심어",
+"word": "Buoyant sales ... customers are happy"
+}
+]
 }
 ]
 },
@@ -1613,7 +1933,13 @@
 "name": "주제",
 "color": "green",
 "word": "most important"
+},
+"tags": [
+{
+"sig": "주제",
+"word": "most important"
 }
+]
 },
 {
 "role": "gray",
@@ -1631,7 +1957,13 @@
 "name": "부연",
 "color": "gray",
 "word": "This means"
+},
+"tags": [
+{
+"sig": "부연",
+"word": "This means"
 }
+]
 },
 {
 "role": "skip",
@@ -1672,7 +2004,13 @@
 "color": "red",
 "word": "Yet"
 },
-"nat": "하지만 내가 기사나 블로그 글, 책의 한 장을 쓰려고 앉았을 때, 답장을 기다리는 사람들이 줄지어 있지 않은 날은 단 하루도 없었다."
+"nat": "하지만 내가 기사나 블로그 글, 책의 한 장을 쓰려고 앉았을 때, 답장을 기다리는 사람들이 줄지어 있지 않은 날은 단 하루도 없었다.",
+"tags": [
+{
+"sig": "역접",
+"word": "Yet"
+}
+]
 },
 {
 "role": "skip",
@@ -1701,7 +2039,13 @@
 "name": "핵심",
 "color": "green",
 "word": "others’ expectations"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "others’ expectations"
 }
+]
 },
 {
 "role": "gray",
@@ -1739,7 +2083,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -1756,7 +2106,13 @@
 "color": "green",
 "word": "Otherwise"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Otherwise"
+}
+]
 }
 ]
 },
@@ -1777,7 +2133,13 @@
 "name": "도입",
 "color": "green",
 "word": "Historically"
+},
+"tags": [
+{
+"sig": "도입",
+"word": "Historically"
 }
+]
 },
 {
 "role": "skip",
@@ -1806,7 +2168,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -1822,7 +2190,13 @@
 "name": "강조",
 "color": "purple",
 "word": "fundamental"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "fundamental"
 }
+]
 },
 {
 "role": "gray",
@@ -1852,7 +2226,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "경제학은 특정 세법이 특정 목표 달성에 도움이 될지 입법부가 판단하도록 크게 도울 수 있지만, 그 자체만으로는 목표가 무엇인지 규명하지 못한다."
+"nat": "경제학은 특정 세법이 특정 목표 달성에 도움이 될지 입법부가 판단하도록 크게 도울 수 있지만, 그 자체만으로는 목표가 무엇인지 규명하지 못한다.",
+"tags": [
+{
+"sig": "한정",
+"word": "but"
+}
+]
 },
 {
 "role": "yellow",
@@ -1870,7 +2250,13 @@
 "word": "requires"
 },
 "nat": "세금 정책을 만드는 일은 도덕적 목표를 규명하는 것을 요구하며, 이는 반드시 윤리와 도덕적 분석을 수반해야 하는 과업이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "requires"
+}
+]
 }
 ]
 },
@@ -1907,7 +2293,13 @@
 "name": "당위",
 "color": "purple",
 "word": "should"
+},
+"tags": [
+{
+"sig": "당위",
+"word": "should"
 }
+]
 },
 {
 "role": "skip",
@@ -1949,7 +2341,17 @@
 "name": "양보",
 "color": "red",
 "word": "Although"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "Although"
+},
+{
+"sig": "부정",
+"word": "did not"
 }
+]
 },
 {
 "role": "yellow",
@@ -1966,7 +2368,13 @@
 "color": "green",
 "word": "Thus"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
+}
+]
 }
 ]
 },
@@ -1987,7 +2395,13 @@
 "name": "주제",
 "color": "green",
 "word": "shaped values"
+},
+"tags": [
+{
+"sig": "주제",
+"word": "shaped values"
 }
+]
 },
 {
 "role": "gray",
@@ -2005,7 +2419,13 @@
 "name": "당위",
 "color": "purple",
 "word": "had to"
+},
+"tags": [
+{
+"sig": "당위",
+"word": "had to"
 }
+]
 },
 {
 "role": "skip",
@@ -2050,7 +2470,17 @@
 "color": "gray",
 "word": "Moreover"
 },
-"nat": "게다가 말하고 듣는 것에 대한 평등한 접근은, 재산을 공동으로 소유하고 특히 물품과 음식은 나누며 모두가 서로를 돌볼 의무가 있다는 관념을 북돋웠다."
+"nat": "게다가 말하고 듣는 것에 대한 평등한 접근은, 재산을 공동으로 소유하고 특히 물품과 음식은 나누며 모두가 서로를 돌볼 의무가 있다는 관념을 북돋웠다.",
+"tags": [
+{
+"sig": "첨가",
+"word": "Moreover"
+},
+{
+"sig": "인과",
+"word": "promoted"
+}
+]
 },
 {
 "role": "skip",
@@ -2078,7 +2508,13 @@
 "color": "red",
 "word": "But"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+}
+]
 },
 {
 "role": "skip",
@@ -2121,7 +2557,13 @@
 "name": "주장",
 "color": "purple",
 "word": "suggest"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "suggest"
 }
+]
 },
 {
 "role": "yellow",
@@ -2138,7 +2580,13 @@
 "color": "red",
 "word": "however"
 },
-"nat": "그러나 자신의 문화적 정체성을 지키기보다 순응하라는 압력이 있으며, 이러한 갈등은 이주해 가는 공동체에 의해 크게 좌우된다."
+"nat": "그러나 자신의 문화적 정체성을 지키기보다 순응하라는 압력이 있으며, 이러한 갈등은 이주해 가는 공동체에 의해 크게 좌우된다.",
+"tags": [
+{
+"sig": "역접",
+"word": "however"
+}
+]
 },
 {
 "role": "skip",
@@ -2178,7 +2626,13 @@
 "name": "역접",
 "color": "red",
 "word": "however"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "however"
 }
+]
 },
 {
 "role": "yellow",
@@ -2198,7 +2652,13 @@
 "word": "the challenge is"
 },
 "nat": "다시 한번, 과제는 다른 문화가 다르게 생각하고 행동하며 그렇게 할 권리가 있음을 인정하는 것이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론·당위",
+"word": "the challenge is"
+}
+]
 },
 {
 "role": "gray",
@@ -2233,7 +2693,13 @@
 "color": "red",
 "word": "Even though"
 },
-"nat": "개를 선택과 계획이 가능한 지각 있는 존재로 볼 만한 충분한 이유가 있어 '달리 행동할 수도 있었다'고 여길 수 있음에도, 우리는 개가 아이를 공격한 것을 사악하고 부도덕하다고 여기지는 않을 것이다."
+"nat": "개를 선택과 계획이 가능한 지각 있는 존재로 볼 만한 충분한 이유가 있어 '달리 행동할 수도 있었다'고 여길 수 있음에도, 우리는 개가 아이를 공격한 것을 사악하고 부도덕하다고 여기지는 않을 것이다.",
+"tags": [
+{
+"sig": "양보",
+"word": "Even though"
+}
+]
 },
 {
 "role": "yellow",
@@ -2251,7 +2717,13 @@
 "name": "부정",
 "color": "purple",
 "word": "not"
+},
+"tags": [
+{
+"sig": "부정",
+"word": "not"
 }
+]
 },
 {
 "role": "yellow",
@@ -2267,7 +2739,13 @@
 "name": "한정",
 "color": "purple",
 "word": "specifically"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "specifically"
 }
+]
 },
 {
 "role": "yellow",
@@ -2286,7 +2764,13 @@
 "color": "red",
 "word": "While"
 },
-"nat": "감각과 의지는 정신과 행위 주체성의 한 측면이지만, 도덕은 바람직한 것을 기르고 해로운 것을 억제하여 사회적 행동에 영향을 주려고 만들어진 문화적 도구이다."
+"nat": "감각과 의지는 정신과 행위 주체성의 한 측면이지만, 도덕은 바람직한 것을 기르고 해로운 것을 억제하여 사회적 행동에 영향을 주려고 만들어진 문화적 도구이다.",
+"tags": [
+{
+"sig": "대조",
+"word": "While"
+}
+]
 },
 {
 "role": "yellow",
@@ -2302,7 +2786,13 @@
 "name": "대조",
 "color": "red",
 "word": "not"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "not"
 }
+]
 },
 {
 "role": "yellow",
@@ -2320,7 +2810,13 @@
 "word": "only"
 },
 "nat": "우리가 남과 협력하려는 성향을 타고날 가능성은, 실로 그럴 법도 하지만, 오직 인간 사회 안에서만 우리는 이를 도덕적 행동으로 이해하게 된다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "한정",
+"word": "only"
+}
+]
 }
 ]
 },
@@ -2344,7 +2840,13 @@
 "color": "green",
 "word": "particularly relevant in group settings"
 },
-"nat": "다양한 감정 어휘를 갖추고 감정의 원인과 결과를 이해하는, 감정을 이해하는 능력은 집단 환경에서 특히 중요하다."
+"nat": "다양한 감정 어휘를 갖추고 감정의 원인과 결과를 이해하는, 감정을 이해하는 능력은 집단 환경에서 특히 중요하다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "particularly relevant in group settings"
+}
+]
 },
 {
 "role": "yellow",
@@ -2360,7 +2862,13 @@
 "name": "결과",
 "color": "orange",
 "word": "thus"
+},
+"tags": [
+{
+"sig": "결과",
+"word": "thus"
 }
+]
 },
 {
 "role": "yellow",
@@ -2376,7 +2884,17 @@
 "name": "추가",
 "color": "gray",
 "word": "Furthermore"
+},
+"tags": [
+{
+"sig": "추가",
+"word": "Furthermore"
+},
+{
+"sig": "부연",
+"word": "cooperate"
 }
+]
 },
 {
 "role": "skip",
@@ -2389,6 +2907,12 @@
 "예를 들어, 집단 갈등 상황에서,",
 "감정을 이해하는 강한 능력을 가진 구성원은 표현할 수 있을 것이다",
 "그가 그 문제에 대해 어떻게 느끼는지 그리고 왜 그렇게 느끼는지."
+],
+"tags": [
+{
+"sig": "예시",
+"word": "for example"
+}
 ]
 },
 {
@@ -2417,7 +2941,13 @@
 "color": "green",
 "word": "promotes"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "promotes"
+}
+]
 }
 ]
 },
@@ -2441,7 +2971,13 @@
 "color": "red",
 "word": "no more qualified"
 },
-"nat": "과학자에게 도덕적·윤리적 결정에 대한 특별한 권한은 없으며, 기후 과학자가 의료 개혁을 논평할 자격은 물리학자가 벌집 붕괴 원인을 판단할 자격 이상이 아니다."
+"nat": "과학자에게 도덕적·윤리적 결정에 대한 특별한 권한은 없으며, 기후 과학자가 의료 개혁을 논평할 자격은 물리학자가 벌집 붕괴 원인을 판단할 자격 이상이 아니다.",
+"tags": [
+{
+"sig": "대조",
+"word": "no more qualified"
+}
+]
 },
 {
 "role": "gray",
@@ -2457,7 +2993,13 @@
 "name": "인과",
 "color": "orange",
 "word": "lead to"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "lead to"
 }
+]
 },
 {
 "role": "gray",
@@ -2473,7 +3015,13 @@
 "name": "대조",
 "color": "red",
 "word": "lay people"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "lay people"
 }
+]
 },
 {
 "role": "skip",
@@ -2500,7 +3048,13 @@
 "name": "결론",
 "color": "green",
 "word": "So"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "So"
 }
+]
 },
 {
 "role": "skip",
@@ -2527,7 +3081,13 @@
 "name": "대조",
 "color": "red",
 "word": "Blind trust"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "Blind trust"
 }
+]
 },
 {
 "role": "yellow",
@@ -2547,7 +3107,17 @@
 "word": "But"
 },
 "nat": "하지만 우리가 사는 자연 세계의 어려운 문제를 풀어내는 데 평생을 바친, 우리가 지정한 전문가들을 어느 정도 신뢰하지 않으면, 우리는 사실상 아침 출근 준비를 해야 할지조차 모른 채 마비되고 만다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "조건",
+"word": "without"
+}
+]
 }
 ]
 },
@@ -2592,7 +3162,13 @@
 "name": "핵심",
 "color": "green",
 "word": "directed toward new music"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "directed toward new music"
 }
+]
 },
 {
 "role": "skip",
@@ -2631,7 +3207,17 @@
 "color": "red",
 "word": "But"
 },
-"nat": "하지만 지금 나를 음악 라이브러리 속으로 밀고 당기는 알고리즘은 내가 좋아할 만한 보석 같은 곡을 찾아내는 데 안성맞춤이다."
+"nat": "하지만 지금 나를 음악 라이브러리 속으로 밀고 당기는 알고리즘은 내가 좋아할 만한 보석 같은 곡을 찾아내는 데 안성맞춤이다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "핵심",
+"word": "perfectly suited to finding gems that I’ll like"
+}
+]
 },
 {
 "role": "gray",
@@ -2649,7 +3235,13 @@
 "name": "핵심",
 "color": "green",
 "word": "drive everyone into certain parts"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "drive everyone into certain parts"
 }
+]
 },
 {
 "role": "gray",
@@ -2665,7 +3257,13 @@
 "name": "핵심",
 "color": "green",
 "word": "convergence of tastes"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "convergence of tastes"
 }
+]
 },
 {
 "role": "yellow",
@@ -2681,7 +3279,17 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "인과",
+"word": "thanks to the nonlinear and chaotic mathematics"
 }
+]
 },
 {
 "role": "yellow",
@@ -2698,7 +3306,13 @@
 "color": "green",
 "word": "A small divergence in my likes"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "A small divergence in my likes compared to yours"
+}
+]
 }
 ]
 },
@@ -2722,7 +3336,17 @@
 "color": "green",
 "word": "needlessly enhancing"
 },
-"nat": "프로젝트에서 '금도금'이란 기대 결과를 불필요하게 부풀리는 것, 즉 비용은 크고 요구되지도 않으며 목표에 비해 부가가치가 낮은 특성을 덧붙이는 것으로, 자기 재능을 과시하려는 것 말고는 별다른 정당성 없이 더 많이 제공하는 것이다."
+"nat": "프로젝트에서 '금도금'이란 기대 결과를 불필요하게 부풀리는 것, 즉 비용은 크고 요구되지도 않으며 목표에 비해 부가가치가 낮은 특성을 덧붙이는 것으로, 자기 재능을 과시하려는 것 말고는 별다른 정당성 없이 더 많이 제공하는 것이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "needlessly enhancing"
+},
+{
+"sig": "강조",
+"word": "no real justification"
+}
+]
 },
 {
 "role": "gray",
@@ -2741,7 +3365,13 @@
 "color": "gray",
 "word": "in other words"
 },
-"nat": "금도금은 프로젝트 팀원들에게 특히 흥미로운데, 이는 뚜렷한 전문적 요소를 지닌 프로젝트, 즉 검증된 경험과 폭넓은 자율성을 가진 전문가가 참여하는 프로젝트에서 전형적으로 나타나기 때문이다."
+"nat": "금도금은 프로젝트 팀원들에게 특히 흥미로운데, 이는 뚜렷한 전문적 요소를 지닌 프로젝트, 즉 검증된 경험과 폭넓은 자율성을 가진 전문가가 참여하는 프로젝트에서 전형적으로 나타나기 때문이다.",
+"tags": [
+{
+"sig": "부연",
+"word": "in other words"
+}
+]
 },
 {
 "role": "skip",
@@ -2771,7 +3401,17 @@
 "color": "red",
 "word": "but does not add value"
 },
-"nat": "따라서 선의에서 비롯된, 금도금을 하려는 강한 유혹이 생기는데, 이는 전문가는 만족시키지만 고객의 요구에는 가치를 더하지 못하면서 동시에 프로젝트의 귀중한 자원을 앗아가는, 더 많거나 더 높은 품질의 작업을 이루려는 것이다."
+"nat": "따라서 선의에서 비롯된, 금도금을 하려는 강한 유혹이 생기는데, 이는 전문가는 만족시키지만 고객의 요구에는 가치를 더하지 못하면서 동시에 프로젝트의 귀중한 자원을 앗아가는, 더 많거나 더 높은 품질의 작업을 이루려는 것이다.",
+"tags": [
+{
+"sig": "결론",
+"word": "therefore"
+},
+{
+"sig": "역접",
+"word": "but does not add value"
+}
+]
 },
 {
 "role": "yellow",
@@ -2788,7 +3428,13 @@
 "color": "green",
 "word": "The best is the enemy of the good"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "The best is the enemy of the good"
+}
+]
 }
 ]
 },
@@ -2812,7 +3458,13 @@
 "color": "red",
 "word": "not as a state but as a spectrum"
 },
-"nat": "누구나 조금은 번아웃을 느낀다는 폭넓음과 어떤 이는 일을 못 할 만큼 번아웃된다는 깊이를 함께 아우르려면, 우리는 번아웃을 하나의 상태가 아니라 스펙트럼으로 여겨야 한다."
+"nat": "누구나 조금은 번아웃을 느낀다는 폭넓음과 어떤 이는 일을 못 할 만큼 번아웃된다는 깊이를 함께 아우르려면, 우리는 번아웃을 하나의 상태가 아니라 스펙트럼으로 여겨야 한다.",
+"tags": [
+{
+"sig": "역접",
+"word": "not as a state but as a spectrum"
+}
+]
 },
 {
 "role": "skip",
@@ -2841,7 +3493,13 @@
 "name": "역접",
 "color": "red",
 "word": "though"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "though"
 }
+]
 },
 {
 "role": "skip",
@@ -2874,7 +3532,13 @@
 "color": "green",
 "word": "a partial or less-severe form of it"
 },
-"nat": "번아웃을 스펙트럼으로 보면 이 문제가 풀리는데, 번아웃을 호소하면서도 그 때문에 무력해지지 않은 사람들은 단지 부분적이거나 덜 심한 형태의 번아웃을 겪고 있을 뿐이다."
+"nat": "번아웃을 스펙트럼으로 보면 이 문제가 풀리는데, 번아웃을 호소하면서도 그 때문에 무력해지지 않은 사람들은 단지 부분적이거나 덜 심한 형태의 번아웃을 겪고 있을 뿐이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "a partial or less-severe form of it"
+}
+]
 },
 {
 "role": "gray",
@@ -2890,7 +3554,13 @@
 "name": "강조",
 "color": "purple",
 "word": "without being burned out"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "without being burned out"
 }
+]
 },
 {
 "role": "yellow",
@@ -2907,7 +3577,13 @@
 "color": "green",
 "word": "hasn’t had the last word"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "hasn’t had the last word"
+}
+]
 }
 ]
 },
@@ -2928,7 +3604,13 @@
 "name": "인과",
 "color": "orange",
 "word": "as"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "as"
 }
+]
 },
 {
 "role": "skip",
@@ -2958,7 +3640,13 @@
 "color": "green",
 "word": "both practical and theoretical knowledge"
 },
-"nat": "아우구스투스 카이사르 통치기의 현역 건축가였던 마르쿠스 비트루비우스 폴리오는 건축이 실무적 지식과 이론적 지식을 모두 요구한다고 보고, 지망 건축가가 통달해야 한다고 여긴 분야들, 즉 문학과 작문, 제도, 수학, 역사, 철학, 음악, 의학, 법학, 천문학을 열거했는데, 이는 오늘날에도 권할 만한 점이 많은 교육과정이다."
+"nat": "아우구스투스 카이사르 통치기의 현역 건축가였던 마르쿠스 비트루비우스 폴리오는 건축이 실무적 지식과 이론적 지식을 모두 요구한다고 보고, 지망 건축가가 통달해야 한다고 여긴 분야들, 즉 문학과 작문, 제도, 수학, 역사, 철학, 음악, 의학, 법학, 천문학을 열거했는데, 이는 오늘날에도 권할 만한 점이 많은 교육과정이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "both practical and theoretical knowledge"
+}
+]
 },
 {
 "role": "yellow",
@@ -2978,7 +3666,17 @@
 "word": "while"
 },
 "nat": "이 모든 학습이 필요하다고 그는 주장했는데, 학식 없이 손기술 습득만 좇은 건축가는 자기 설계에 걸맞은 권위의 자리에 결코 오르지 못한 반면, 이론과 학식에만 의존한 자는 분명 '실체가 아닌 그림자를 좇는' 격이었기 때문이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "while"
+},
+{
+"sig": "한정",
+"word": "only"
+}
+]
 }
 ]
 },
@@ -2999,7 +3697,13 @@
 "name": "핵심",
 "color": "green",
 "word": "Environmental hazards"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "Environmental hazards"
 }
+]
 },
 {
 "role": "yellow",
@@ -3018,7 +3722,17 @@
 "color": "green",
 "word": "difficult to avoid"
 },
-"nat": "오염된 공기를 마시거나 화학 물질로 오염된 공공 식수를 마시고 개방된 공공장소의 소음에 노출되는 것처럼, 일부 환경 오염물질은 피하기 어려우며, 이런 상황에서 노출은 대체로 비자발적이다."
+"nat": "오염된 공기를 마시거나 화학 물질로 오염된 공공 식수를 마시고 개방된 공공장소의 소음에 노출되는 것처럼, 일부 환경 오염물질은 피하기 어려우며, 이런 상황에서 노출은 대체로 비자발적이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "difficult to avoid"
+},
+{
+"sig": "한정",
+"word": "involuntary"
+}
+]
 },
 {
 "role": "yellow",
@@ -3034,7 +3748,13 @@
 "name": "주장",
 "color": "purple",
 "word": "may require societal action"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "may require societal action"
 }
+]
 },
 {
 "role": "yellow",
@@ -3054,7 +3774,13 @@
 "word": "more morally egregious"
 },
 "nat": "많은 나라에서, 일부 환경 위험을 개인 차원에서 피하기 어렵다는 사실은 피할 수 있는 위험보다 도덕적으로 더 나쁘게 여겨진다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "more morally egregious"
+}
+]
 },
 {
 "role": "skip",
@@ -3084,7 +3810,13 @@
 "name": "핵심",
 "color": "green",
 "word": "important"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "important"
 }
+]
 }
 ]
 },
@@ -3105,7 +3837,13 @@
 "name": "핵심",
 "color": "green",
 "word": "place more weight on the planning process"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "place more weight on the planning process"
 }
+]
 },
 {
 "role": "yellow",
@@ -3121,7 +3859,13 @@
 "name": "핵심",
 "color": "green",
 "word": "Proper planning"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "Proper planning"
 }
+]
 },
 {
 "role": "skip",
@@ -3159,7 +3903,13 @@
 "name": "한정",
 "color": "purple",
 "word": "the only way"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "the only way"
 }
+]
 },
 {
 "role": "gray",
@@ -3192,7 +3942,13 @@
 "color": "green",
 "word": "uses the resources efficiently"
 },
-"nat": "도급업자에게 계획 과정의 목표는 허용된 시간과 주어진 예산 안에서 자원을 효율적으로 쓰는 실행 가능한 방안을 만들어내는 것이다."
+"nat": "도급업자에게 계획 과정의 목표는 허용된 시간과 주어진 예산 안에서 자원을 효율적으로 쓰는 실행 가능한 방안을 만들어내는 것이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "uses the resources efficiently"
+}
+]
 },
 {
 "role": "gray",
@@ -3210,7 +3966,13 @@
 "name": "양보",
 "color": "red",
 "word": "does not guarantee"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "does not guarantee"
 }
+]
 },
 {
 "role": "yellow",
@@ -3227,7 +3989,13 @@
 "color": "red",
 "word": "however"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "however"
+}
+]
 }
 ]
 },
@@ -3248,7 +4016,13 @@
 "name": "상관",
 "color": "blue",
 "word": "correlates"
+},
+"tags": [
+{
+"sig": "상관",
+"word": "correlates"
 }
+]
 },
 {
 "role": "gray",
@@ -3267,7 +4041,13 @@
 "color": "purple",
 "word": "must"
 },
-"nat": "작은 동물은 훨씬 작은 팔다리를 통제하고 빠른 운동 피드백에 반응하기 위해 반사 신경이 더 빨라야 한다."
+"nat": "작은 동물은 훨씬 작은 팔다리를 통제하고 빠른 운동 피드백에 반응하기 위해 반사 신경이 더 빨라야 한다.",
+"tags": [
+{
+"sig": "당위",
+"word": "must"
+}
+]
 },
 {
 "role": "skip",
@@ -3286,7 +4066,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "게다가 작은 종은 높은 대사율과 적은 에너지 비축량 탓에 먹이 찾기, 포식자 방어, 짝짓기에서 선택지가 거의 없어 의사 결정이 간소화되어야 한다."
+"nat": "게다가 작은 종은 높은 대사율과 적은 에너지 비축량 탓에 먹이 찾기, 포식자 방어, 짝짓기에서 선택지가 거의 없어 의사 결정이 간소화되어야 한다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -3304,7 +4090,13 @@
 "name": "강조",
 "color": "purple",
 "word": "perhaps most important"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "perhaps most important"
 }
+]
 },
 {
 "role": "yellow",
@@ -3323,7 +4115,13 @@
 "color": "orange",
 "word": "As a result"
 },
-"nat": "그 결과 수명이 짧다는 것은, 환경에 맞춘 미세 조정이 거의 필요 없는 선천적 행동 패턴의 효율성을 중시하게 만든다."
+"nat": "그 결과 수명이 짧다는 것은, 환경에 맞춘 미세 조정이 거의 필요 없는 선천적 행동 패턴의 효율성을 중시하게 만든다.",
+"tags": [
+{
+"sig": "결과",
+"word": "As a result"
+}
+]
 },
 {
 "role": "gray",
@@ -3342,7 +4140,13 @@
 "color": "red",
 "word": "in comparison"
 },
-"nat": "이에 비해 큰 동물은 다소 느린 반사 신경으로도 지낼 수 있고, 행동을 더 잘 최적화하려 짝짓기와 먹이 찾기 방식을 다양화할 여유가 있으며, 관찰과 시행착오로 배울 기회도 상당하다."
+"nat": "이에 비해 큰 동물은 다소 느린 반사 신경으로도 지낼 수 있고, 행동을 더 잘 최적화하려 짝짓기와 먹이 찾기 방식을 다양화할 여유가 있으며, 관찰과 시행착오로 배울 기회도 상당하다.",
+"tags": [
+{
+"sig": "대조",
+"word": "in comparison"
+}
+]
 },
 {
 "role": "yellow",
@@ -3373,7 +4177,13 @@
 "color": "gray",
 "word": "In addition"
 },
-"nat": "게다가 오래 살거나 먼 거리를 이동할 수 있으면 동물이 환경의 큰 변화에 노출될 가능성이 더 높다."
+"nat": "게다가 오래 살거나 먼 거리를 이동할 수 있으면 동물이 환경의 큰 변화에 노출될 가능성이 더 높다.",
+"tags": [
+{
+"sig": "첨가",
+"word": "In addition"
+}
+]
 }
 ]
 },
@@ -3408,7 +4218,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "손을 물체로 뻗게 돕는 세포는 물체의 크기와 위치는 알아야 하지만 색은 알 필요가 없다."
+"nat": "손을 물체로 뻗게 돕는 세포는 물체의 크기와 위치는 알아야 하지만 색은 알 필요가 없다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "skip",
@@ -3424,7 +4240,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "skip",
@@ -3443,7 +4265,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "얼굴 인식을 돕는 세포는 형태의 세부에 극도로 민감해야 하지만 위치에는 덜 신경 써도 된다."
+"nat": "얼굴 인식을 돕는 세포는 형태의 세부에 극도로 민감해야 하지만 위치에는 덜 신경 써도 된다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "gray",
@@ -3476,7 +4304,13 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 실제로는 뇌의 한 부분은 형태를, 다른 부분은 색을, 또 다른 부분은 위치를, 또 다른 부분은 움직임을 따로 처리한다."
+"nat": "그러나 실제로는 뇌의 한 부분은 형태를, 다른 부분은 색을, 또 다른 부분은 위치를, 또 다른 부분은 움직임을 따로 처리한다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 },
 {
 "role": "yellow",
@@ -3495,7 +4329,13 @@
 "color": "orange",
 "word": "Consequently"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결과",
+"word": "Consequently"
+}
+]
 },
 {
 "role": "skip",
@@ -3546,7 +4386,13 @@
 "name": "대조",
 "color": "red",
 "word": "not"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "not"
 }
+]
 },
 {
 "role": "skip",
@@ -3576,7 +4422,13 @@
 "color": "orange",
 "word": "for"
 },
-"nat": "이것들은 학습 과정의 중요한 지적 활동인데, 그것들을 통해 자신의 의견을 발견하고 표현하게 되기 때문이다."
+"nat": "이것들은 학습 과정의 중요한 지적 활동인데, 그것들을 통해 자신의 의견을 발견하고 표현하게 되기 때문이다.",
+"tags": [
+{
+"sig": "이유",
+"word": "for"
+}
+]
 },
 {
 "role": "yellow",
@@ -3605,7 +4457,13 @@
 "name": "강조",
 "color": "purple",
 "word": "Unfortunately"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "Unfortunately"
 }
+]
 },
 {
 "role": "skip",
@@ -3624,7 +4482,13 @@
 "color": "red",
 "word": "Admittedly"
 },
-"nat": "인정하건대, 강의와 달리 토론은 산만하고 따라가기 어려워서 강의보다 필기하기가 훨씬 더 어렵다."
+"nat": "인정하건대, 강의와 달리 토론은 산만하고 따라가기 어려워서 강의보다 필기하기가 훨씬 더 어렵다.",
+"tags": [
+{
+"sig": "양보",
+"word": "Admittedly"
+}
+]
 },
 {
 "role": "skip",
@@ -3640,7 +4504,13 @@
 "name": "첨가",
 "color": "gray",
 "word": "Also"
+},
+"tags": [
+{
+"sig": "첨가",
+"word": "Also"
 }
+]
 },
 {
 "role": "skip",
@@ -3658,7 +4528,13 @@
 "name": "조건",
 "color": "orange",
 "word": "if"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "if"
 }
+]
 },
 {
 "role": "yellow",
@@ -3674,7 +4550,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -3759,7 +4641,13 @@
 "name": "결론",
 "color": "green",
 "word": "Hence"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "Hence"
 }
+]
 },
 {
 "role": "yellow",
@@ -3775,7 +4663,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "skip",
@@ -3794,7 +4688,13 @@
 "color": "purple",
 "word": "Indeed"
 },
-"nat": "실제로 수용력이 제한되어 더 이상 방문객이 들어설 자리가 없는 특정 명소의 사례들이 있다."
+"nat": "실제로 수용력이 제한되어 더 이상 방문객이 들어설 자리가 없는 특정 명소의 사례들이 있다.",
+"tags": [
+{
+"sig": "양보",
+"word": "Indeed"
+}
+]
 },
 {
 "role": "skip",
@@ -3826,7 +4726,13 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 도시나 지역, 심지어 나라 전체가 관광지로 홍보되고 과잉 관광의 피해자로 묘사되면, 문제는 더 복잡해진다."
+"nat": "그러나 도시나 지역, 심지어 나라 전체가 관광지로 홍보되고 과잉 관광의 피해자로 묘사되면, 문제는 더 복잡해진다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 },
 {
 "role": "yellow",
@@ -3881,7 +4787,13 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 감정을 뇌에 구현된 핵심 상태로 본다면, 그 데이터가 문화마다 감정이 다르다는 것을 실제로 보여주는 것은 아니다."
+"nat": "그러나 감정을 뇌에 구현된 핵심 상태로 본다면, 그 데이터가 문화마다 감정이 다르다는 것을 실제로 보여주는 것은 아니다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 },
 {
 "role": "yellow",
@@ -3902,7 +4814,13 @@
 "color": "red",
 "word": "despite"
 },
-"nat": "색각의 경우처럼, 그들은 내부 처리 구조는 같아도 감정을 해석·분류·명명하는 방식은 문화에 따라 다르며, 감정 표현이 적절한 사회적 맥락을 특정 문화 속에서 배운다고 말할 뿐이다."
+"nat": "색각의 경우처럼, 그들은 내부 처리 구조는 같아도 감정을 해석·분류·명명하는 방식은 문화에 따라 다르며, 감정 표현이 적절한 사회적 맥락을 특정 문화 속에서 배운다고 말할 뿐이다.",
+"tags": [
+{
+"sig": "양보",
+"word": "despite"
+}
+]
 },
 {
 "role": "yellow",
@@ -3918,7 +4836,13 @@
 "name": "역접",
 "color": "red",
 "word": "However"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "However"
 }
+]
 },
 {
 "role": "yellow",
@@ -3940,7 +4864,13 @@
 "word": "but"
 },
 "nat": "어떤 의미에서 진화로 형성되어 뇌에 구현된 기본적·보편적 감정 세트를 상정할 수 있지만, 그 감정 상태와 자극·행동·다른 인지 상태 간의 연결은 유연해서 특정 문화 맥락의 학습으로 바뀔 수 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "but"
+}
+]
 }
 ]
 },
@@ -4026,7 +4956,17 @@
 "name": "역접",
 "color": "red",
 "word": "Yet"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "Yet"
+},
+{
+"sig": "양보",
+"word": "despite"
 }
+]
 },
 {
 "role": "gray",
@@ -4045,7 +4985,13 @@
 "color": "gray",
 "word": "Not only"
 },
-"nat": "도시 내 장소 접근이 시간·비용·편안함 면에서 덜 편리할 뿐 아니라, 도시를 이동하는 과정 자체가 여러 부정적 외부효과를 만들어낸다."
+"nat": "도시 내 장소 접근이 시간·비용·편안함 면에서 덜 편리할 뿐 아니라, 도시를 이동하는 과정 자체가 여러 부정적 외부효과를 만들어낸다.",
+"tags": [
+{
+"sig": "강조",
+"word": "Not only"
+}
+]
 },
 {
 "role": "yellow",
@@ -4064,7 +5010,13 @@
 "color": "green",
 "word": "Accordingly"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Accordingly"
+}
+]
 }
 ]
 },
@@ -4099,7 +5051,13 @@
 "color": "gray",
 "word": "For example"
 },
-"nat": "예컨대 산림 소유주는 탄소 포집·야생 서식지·홍수 방지 같은 생태계 서비스를 위해 숲을 관리하기보다 나무를 베려는 시장 유인을 갖는다."
+"nat": "예컨대 산림 소유주는 탄소 포집·야생 서식지·홍수 방지 같은 생태계 서비스를 위해 숲을 관리하기보다 나무를 베려는 시장 유인을 갖는다.",
+"tags": [
+{
+"sig": "예시",
+"word": "For example"
+}
+]
 },
 {
 "role": "gray",
@@ -4115,7 +5073,13 @@
 "name": "인과",
 "color": "orange",
 "word": "thus"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "thus"
 }
+]
 },
 {
 "role": "yellow",
@@ -4134,7 +5098,13 @@
 "color": "red",
 "word": "But"
 },
-"nat": "그러나 이런 서비스가 주는 경제적 이익은, 비시장적 가치에 근거해 목재의 경제적 가치를 넘어설 수 있다."
+"nat": "그러나 이런 서비스가 주는 경제적 이익은, 비시장적 가치에 근거해 목재의 경제적 가치를 넘어설 수 있다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+}
+]
 },
 {
 "role": "skip",
@@ -4155,7 +5125,13 @@
 "color": "gray",
 "word": "For example"
 },
-"nat": "예컨대 유엔의 한 이니셔티브는 기후 조절, 물 정화, 침식 방지를 포함한 열대림 생태계 서비스의 경제적 이익이 헥타르당 시장 이익보다 3배 넘게 크다고 추정했다."
+"nat": "예컨대 유엔의 한 이니셔티브는 기후 조절, 물 정화, 침식 방지를 포함한 열대림 생태계 서비스의 경제적 이익이 헥타르당 시장 이익보다 3배 넘게 크다고 추정했다.",
+"tags": [
+{
+"sig": "예시",
+"word": "For example"
+}
+]
 },
 {
 "role": "yellow",
@@ -4175,7 +5151,13 @@
 "word": "Thus"
 },
 "nat": "따라서 나무를 베는 것은 경제적으로 비효율적이며, 시장은 채취적 이용보다 생태계 서비스를 우선하도록 하는 올바른 ‘신호’를 보내지 못하고 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
+}
+]
 }
 ]
 },
@@ -4199,7 +5181,13 @@
 "color": "red",
 "word": "independently"
 },
-"nat": "1950년대 이전 관광은 매우 분열된 산업이어서, 호텔·운송업체·여행사·투어 운영자가 모두 서로 독립적으로 일하는 경향이 있었다."
+"nat": "1950년대 이전 관광은 매우 분열된 산업이어서, 호텔·운송업체·여행사·투어 운영자가 모두 서로 독립적으로 일하는 경향이 있었다.",
+"tags": [
+{
+"sig": "대조축",
+"word": "independently"
+}
+]
 },
 {
 "role": "skip",
@@ -4254,7 +5242,13 @@
 "word": "change"
 },
 "nat": "1950년대 중반 이후 특히 영국에서 투어 운영자의 성장은 산업의 성격을 개별 사업 활동에서 더 통합된 활동으로 바꾸기 시작했다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "전환",
+"word": "change"
+}
+]
 },
 {
 "role": "skip",
@@ -4273,7 +5267,13 @@
 "color": "gray",
 "word": "for example"
 },
-"nat": "예컨대 호텔은 고객을 단순히 숙박을 사는 사람이 아니라 다양한 서비스를 원하는 사람으로 보기 시작했다."
+"nat": "예컨대 호텔은 고객을 단순히 숙박을 사는 사람이 아니라 다양한 서비스를 원하는 사람으로 보기 시작했다.",
+"tags": [
+{
+"sig": "예시",
+"word": "for example"
+}
+]
 },
 {
 "role": "skip",
@@ -4335,7 +5335,13 @@
 "color": "red",
 "word": "as opposed to"
 },
-"nat": "정보 공개의 중요한 이점은, 더 강압적인 형태의 규제와 달리, 유연성과 자유 시장 작동에 대한 존중이다."
+"nat": "정보 공개의 중요한 이점은, 더 강압적인 형태의 규제와 달리, 유연성과 자유 시장 작동에 대한 존중이다.",
+"tags": [
+{
+"sig": "대조",
+"word": "as opposed to"
+}
+]
 },
 {
 "role": "gray",
@@ -4367,7 +5373,13 @@
 "color": "gray",
 "word": "For example"
 },
-"nat": "예컨대 가전제품의 에너지 효율 요건은 성능이 떨어지거나 소비자가 원치 않는 특성을 가진 제품을 낳을 수 있다."
+"nat": "예컨대 가전제품의 에너지 효율 요건은 성능이 떨어지거나 소비자가 원치 않는 특성을 가진 제품을 낳을 수 있다.",
+"tags": [
+{
+"sig": "예시",
+"word": "For example"
+}
+]
 },
 {
 "role": "yellow",
@@ -4383,7 +5395,13 @@
 "name": "대조",
 "color": "red",
 "word": "by contrast"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "by contrast"
 }
+]
 },
 {
 "role": "skip",
@@ -4402,7 +5420,13 @@
 "color": "orange",
 "word": "If"
 },
-"nat": "자동차 제조사가 차량의 안전 특성을 측정·공개하도록 요구받으면, 잠재 구매자는 가격이나 스타일 같은 다른 속성과 안전에 대한 고려를 견주어 선택할 수 있다."
+"nat": "자동차 제조사가 차량의 안전 특성을 측정·공개하도록 요구받으면, 잠재 구매자는 가격이나 스타일 같은 다른 속성과 안전에 대한 고려를 견주어 선택할 수 있다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 },
 {
 "role": "skip",
@@ -4421,7 +5445,13 @@
 "color": "orange",
 "word": "If"
 },
-"nat": "식당 손님이 음식의 열량을 알게 되면, 체중을 줄이려는 사람은 그 정보를 활용하고 열량에 관심 없는 사람은 영향받지 않는다."
+"nat": "식당 손님이 음식의 열량을 알게 되면, 체중을 줄이려는 사람은 그 정보를 활용하고 열량에 관심 없는 사람은 영향받지 않는다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 },
 {
 "role": "yellow",
@@ -4440,7 +5470,13 @@
 "color": "purple",
 "word": "should even promote"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "강조",
+"word": "should even promote"
+}
+]
 }
 ]
 },
@@ -4489,7 +5525,13 @@
 "color": "gray",
 "word": "For millennia"
 },
-"nat": "수천 년 동안 음식을 인간적·경제적 현상으로 다룬 이들의 관심은 그 생산·보존·유통·가격 같은 실용적 문제에 있었다."
+"nat": "수천 년 동안 음식을 인간적·경제적 현상으로 다룬 이들의 관심은 그 생산·보존·유통·가격 같은 실용적 문제에 있었다.",
+"tags": [
+{
+"sig": "시간",
+"word": "For millennia"
+}
+]
 },
 {
 "role": "yellow",
@@ -4505,7 +5547,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -4521,7 +5569,13 @@
 "name": "강조",
 "color": "purple",
 "word": "more than"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "more than"
 }
+]
 },
 {
 "role": "gray",
@@ -4597,7 +5651,13 @@
 "name": "대조",
 "color": "red",
 "word": "different"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "different"
 }
+]
 },
 {
 "role": "gray",
@@ -4630,7 +5690,13 @@
 "color": "purple",
 "word": "few; unless"
 },
-"nat": "친척·자녀·친구·동료처럼 대상과 개인적 관계가 있지 않은 한, 개인적 기억을 믿을 만한 증거로 쓰는 전기 작가는 드물다."
+"nat": "친척·자녀·친구·동료처럼 대상과 개인적 관계가 있지 않은 한, 개인적 기억을 믿을 만한 증거로 쓰는 전기 작가는 드물다.",
+"tags": [
+{
+"sig": "한정",
+"word": "few; unless"
+}
+]
 },
 {
 "role": "yellow",
@@ -4646,7 +5712,13 @@
 "name": "대조",
 "color": "red",
 "word": "by contrast"
+},
+"tags": [
+{
+"sig": "역접대조",
+"word": "by contrast"
 }
+]
 },
 {
 "role": "skip",
@@ -4680,7 +5752,13 @@
 "word": "But"
 },
 "nat": "그러나 그런 증거의 유용성은, 자신의 개인화된 기억 행위를 뒷받침·보충하거나 그에 논평을 더하기 위해 그 증거를 어떻게 사용하는가에 달려 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+}
+]
 },
 {
 "role": "skip",
@@ -4718,7 +5796,13 @@
 "color": "blue",
 "word": "synergistic"
 },
-"nat": "결합 인지 시스템이라는 접근법은 로봇을, 지능이 각 행위자의 기여에서 생겨나 시너지를 내는 인간-기계 팀의 일부로 본다."
+"nat": "결합 인지 시스템이라는 접근법은 로봇을, 지능이 각 행위자의 기여에서 생겨나 시너지를 내는 인간-기계 팀의 일부로 본다.",
+"tags": [
+{
+"sig": "정의",
+"word": "synergistic"
+}
+]
 },
 {
 "role": "gray",
@@ -4737,7 +5821,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "그 팀은 최소 로봇 한 대와 인간 한 명으로 이루어지며, 인간과 로봇 행위자의 혼합이므로 흔히 혼합 팀이라 불린다."
+"nat": "그 팀은 최소 로봇 한 대와 인간 한 명으로 이루어지며, 인간과 로봇 행위자의 혼합이므로 흔히 혼합 팀이라 불린다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "skip",
@@ -4753,7 +5843,13 @@
 "name": "예시",
 "color": "gray",
 "word": "an example"
+},
+"tags": [
+{
+"sig": "예시",
+"word": "an example"
 }
+]
 },
 {
 "role": "skip",
@@ -4769,7 +5865,13 @@
 "name": "예시",
 "color": "gray",
 "word": "examples"
+},
+"tags": [
+{
+"sig": "예시",
+"word": "examples"
 }
+]
 },
 {
 "role": "yellow",
@@ -4788,7 +5890,13 @@
 "color": "green",
 "word": "cooperate and coordinate"
 },
-"nat": "설계 과정은 행위자들이 팀 목표를 이루기 위해 어떻게 서로 협력하고 조율할지에 초점을 둔다."
+"nat": "설계 과정은 행위자들이 팀 목표를 이루기 위해 어떻게 서로 협력하고 조율할지에 초점을 둔다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "cooperate and coordinate"
+}
+]
 },
 {
 "role": "gray",
@@ -4807,7 +5915,13 @@
 "color": "red",
 "word": "Rather than"
 },
-"nat": "로봇을 완전히 독립적인 의제를 가진 동등한 행위자로 보기보다, 결합 인지 시스템 접근법은 로봇을 보조 동물이나 양치기 개 같은 조력자로 본다."
+"nat": "로봇을 완전히 독립적인 의제를 가진 동등한 행위자로 보기보다, 결합 인지 시스템 접근법은 로봇을 보조 동물이나 양치기 개 같은 조력자로 본다.",
+"tags": [
+{
+"sig": "대조",
+"word": "Rather than"
+}
+]
 },
 {
 "role": "yellow",
@@ -4827,7 +5941,13 @@
 "word": "good team members"
 },
 "nat": "결합 인지 시스템 설계에서는 인공지능이 인간-로봇 상호작용 원리와 함께 사용되어, 좋은 팀원이 될 만큼 지능적인 로봇을 만든다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "good team members"
+}
+]
 }
 ]
 },
@@ -4851,7 +5971,13 @@
 "color": "green",
 "word": "emphasise galleries over unseen zones"
 },
-"nat": "박물관 내부에는, 보이지 않는 구역에서 벌어지는 활동보다 전시실에서 일어나는 일을 강조하게 만드는 압력이 있다."
+"nat": "박물관 내부에는, 보이지 않는 구역에서 벌어지는 활동보다 전시실에서 일어나는 일을 강조하게 만드는 압력이 있다.",
+"tags": [
+{
+"sig": "핵심어",
+"word": "pressures ... emphasise galleries over unseen zones"
+}
+]
 },
 {
 "role": "yellow",
@@ -4870,7 +5996,13 @@
 "color": "orange",
 "word": "forced to increase their earnings"
 },
-"nat": "박물관이 수익 증대를 강요받는 시대에, 그들은 더 많은 관객을 끌어들이려고 전시실 현대화나 임시 전시 개최에 힘을 쏟는 경우가 많다."
+"nat": "박물관이 수익 증대를 강요받는 시대에, 그들은 더 많은 관객을 끌어들이려고 전시실 현대화나 임시 전시 개최에 힘을 쏟는 경우가 많다.",
+"tags": [
+{
+"sig": "조건",
+"word": "forced to increase their earnings"
+}
+]
 },
 {
 "role": "yellow",
@@ -4889,7 +6021,13 @@
 "color": "gray",
 "word": "In other words"
 },
-"nat": "다시 말해, 경쟁 경제에서 살아남으려 애쓰는 박물관의 예산은 전시실의 인포테인먼트, 카페·상점의 상품과 서비스처럼 소비 가능한 부분을 우선시하는 경우가 많다."
+"nat": "다시 말해, 경쟁 경제에서 살아남으려 애쓰는 박물관의 예산은 전시실의 인포테인먼트, 카페·상점의 상품과 서비스처럼 소비 가능한 부분을 우선시하는 경우가 많다.",
+"tags": [
+{
+"sig": "환언",
+"word": "In other words"
+}
+]
 },
 {
 "role": "gray",
@@ -4908,7 +6046,13 @@
 "color": "red",
 "word": "at best"
 },
-"nat": "불도 꺼지고 화려하지 않은 수장고는, 언급되더라도 기껏해야 전시실을 위해 물품을 처리하는 서비스 구역으로 제시될 뿐이다."
+"nat": "불도 꺼지고 화려하지 않은 수장고는, 언급되더라도 기껏해야 전시실을 위해 물품을 처리하는 서비스 구역으로 제시될 뿐이다.",
+"tags": [
+{
+"sig": "양보",
+"word": "at best"
+}
+]
 },
 {
 "role": "yellow",
@@ -4930,7 +6074,13 @@
 "word": "at worst ... storage may even suffer"
 },
 "nat": "그리고 최악의 경우, 박물관이 공개적으로 보이는 면에 자원을 계속 쏟아부으면서 수장 공간은 오히려 피해를 볼 수 있는데, 그 현대화는 보류되거나 늘어나는 소장품 보관과 복잡한 보존 요구를 감당할 공간을 점점 덜 받게 된다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결과",
+"word": "at worst ... storage may even suffer"
+}
+]
 }
 ]
 },
@@ -4951,7 +6101,13 @@
 "name": "핵심",
 "color": "green",
 "word": "engine rooms"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "engine rooms"
 }
+]
 },
 {
 "role": "yellow",
@@ -4972,7 +6128,13 @@
 "color": "green",
 "word": "leadership for society"
 },
-"nat": "활동과 영향력의 절정기에 수도원은 교회와 세속 정부 기관을 위한 지적 리더십은 물론 종교 사상·실천의 혁신, 의료, 교육, 시각 문화, 농업 발전까지 제공했다."
+"nat": "활동과 영향력의 절정기에 수도원은 교회와 세속 정부 기관을 위한 지적 리더십은 물론 종교 사상·실천의 혁신, 의료, 교육, 시각 문화, 농업 발전까지 제공했다.",
+"tags": [
+{
+"sig": "핵심어",
+"word": "leadership ... for society"
+}
+]
 },
 {
 "role": "yellow",
@@ -4990,7 +6152,13 @@
 "name": "양보",
 "color": "red",
 "word": "while ... isolation"
+},
+"tags": [
+{
+"sig": "양보/대조",
+"word": "while ... isolation"
 }
+]
 },
 {
 "role": "skip",
@@ -5036,7 +6204,13 @@
 "color": "green",
 "word": "for the benefit of wider society"
 },
-"nat": "이 삶을 따르는 이들과 바깥 사람들 모두, 수도원 생활이 더 넓은 사회의 이익을 위한 것이며 수도승이 ‘정상적’ 인간 접촉을 끊고 치른 희생이 자신의 구원뿐 아니라 공동체를 대신한 속죄로 기능한다고 믿었다."
+"nat": "이 삶을 따르는 이들과 바깥 사람들 모두, 수도원 생활이 더 넓은 사회의 이익을 위한 것이며 수도승이 ‘정상적’ 인간 접촉을 끊고 치른 희생이 자신의 구원뿐 아니라 공동체를 대신한 속죄로 기능한다고 믿었다.",
+"tags": [
+{
+"sig": "핵심어",
+"word": "separating ... for the benefit of wider society"
+}
+]
 },
 {
 "role": "yellow",
@@ -5053,7 +6227,13 @@
 "color": "green",
 "word": "save themselves and others"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "save themselves and others"
+}
+]
 }
 ]
 },
@@ -5074,7 +6254,13 @@
 "name": "대조",
 "color": "red",
 "word": "rather than"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "rather than"
 }
+]
 },
 {
 "role": "skip",
@@ -5108,7 +6294,13 @@
 "name": "한정",
 "color": "purple",
 "word": "only"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "only"
 }
+]
 },
 {
 "role": "yellow",
@@ -5127,7 +6319,13 @@
 "color": "green",
 "word": "thus"
 },
-"nat": "따라서 이런 공유된 실천 요소들은, 과학자들이 그것을 사용할 때 무엇을 하는지에 관한 믿음에서 그에 상응하는 어떤 통일성도 전제할 필요가 없다."
+"nat": "따라서 이런 공유된 실천 요소들은, 과학자들이 그것을 사용할 때 무엇을 하는지에 관한 믿음에서 그에 상응하는 어떤 통일성도 전제할 필요가 없다.",
+"tags": [
+{
+"sig": "결론",
+"word": "thus"
+}
+]
 },
 {
 "role": "yellow",
@@ -5147,7 +6345,13 @@
 "word": "Indeed"
 },
 "nat": "실제로 패러다임의 한 역할은, 과학자들이 자신이 무엇을 하고 무엇을 믿는지 상세히 설명하지 않고도 성공적으로 연구할 수 있게 해 주는 것이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "강조",
+"word": "Indeed"
+}
+]
 },
 {
 "role": "gray",
@@ -5187,7 +6391,13 @@
 "color": "gray",
 "word": "Not only"
 },
-"nat": "음악가와 심리학자뿐 아니라 열성적 음악 애호가와 전문가들도, 음악의 아름다움이 정확히 규정된 악보로부터의 표현적 일탈에 있다는 견해를 자주 밝힌다."
+"nat": "음악가와 심리학자뿐 아니라 열성적 음악 애호가와 전문가들도, 음악의 아름다움이 정확히 규정된 악보로부터의 표현적 일탈에 있다는 견해를 자주 밝힌다.",
+"tags": [
+{
+"sig": "강조",
+"word": "Not only"
+}
+]
 },
 {
 "role": "gray",
@@ -5244,7 +6454,13 @@
 "name": "대조",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "but"
 }
+]
 },
 {
 "role": "yellow",
@@ -5319,7 +6535,13 @@
 "color": "green",
 "word": "same activity"
 },
-"nat": "아이들은 놀이와 이야기 몰입 사이를, 마치 둘이 같은 활동의 형태인 듯 힘들이지 않고 오갈 수 있다."
+"nat": "아이들은 놀이와 이야기 몰입 사이를, 마치 둘이 같은 활동의 형태인 듯 힘들이지 않고 오갈 수 있다.",
+"tags": [
+{
+"sig": "주제",
+"word": "same activity"
+}
+]
 },
 {
 "role": "skip",
@@ -5352,7 +6574,17 @@
 "color": "red",
 "word": "but"
 },
-"nat": "사람들이 청소년기로 자라면서 어린 시절의 놀이를 그만둔다고 생각할 수도 있지만, 그렇지 않다."
+"nat": "사람들이 청소년기로 자라면서 어린 시절의 놀이를 그만둔다고 생각할 수도 있지만, 그렇지 않다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+},
+{
+"sig": "부정",
+"word": "not so"
+}
+]
 },
 {
 "role": "yellow",
@@ -5372,7 +6604,13 @@
 "word": "Instead"
 },
 "nat": "대신 이 활동의 기반과 관심사는 스포츠를 하고 보는 것, 연극·소설·영화의 허구, 요즘엔 비디오 게임으로 변하고 발전한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "Instead"
+}
+]
 },
 {
 "role": "skip",
@@ -5434,7 +6672,13 @@
 "name": "주제",
 "color": "green",
 "word": "more creativity"
+},
+"tags": [
+{
+"sig": "주제",
+"word": "more creativity"
 }
+]
 },
 {
 "role": "skip",
@@ -5478,7 +6722,13 @@
 "color": "red",
 "word": "With industrialization"
 },
-"nat": "산업화와 결국 대량 생산이 이루어지면서, 물건 만들기는 지식이 제한된 기계 관리자들의 영역이 되었다."
+"nat": "산업화와 결국 대량 생산이 이루어지면서, 물건 만들기는 지식이 제한된 기계 관리자들의 영역이 되었다.",
+"tags": [
+{
+"sig": "대조",
+"word": "With industrialization"
+}
+]
 },
 {
 "role": "yellow",
@@ -5497,7 +6747,17 @@
 "color": "red",
 "word": "But"
 },
-"nat": "그러나 수리는 여전히 디자인과 재료에 대한 더 넓은 파악, 전체에 대한 이해, 디자이너의 의도에 대한 이해를 요구했다."
+"nat": "그러나 수리는 여전히 디자인과 재료에 대한 더 넓은 파악, 전체에 대한 이해, 디자이너의 의도에 대한 이해를 요구했다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "지속",
+"word": "continued"
+}
+]
 },
 {
 "role": "skip",
@@ -5528,7 +6788,17 @@
 "color": "red",
 "word": "But"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "당위",
+"word": "must"
+}
+]
 },
 {
 "role": "gray",
@@ -5547,7 +6817,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "시계나 총의 모든 부분을 기계로 만들 수 있지만, 고장 나면 기계는 그것을 고칠 수 없고, 벽시계나 권총은 더더욱 그렇다."
+"nat": "시계나 총의 모든 부분을 기계로 만들 수 있지만, 고장 나면 기계는 그것을 고칠 수 없고, 벽시계나 권총은 더더욱 그렇다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 }
 ]
 },
@@ -5570,7 +6846,13 @@
 "name": "핵심",
 "color": "green",
 "word": "primary purpose"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "primary purpose"
 }
+]
 },
 {
 "role": "yellow",
@@ -5586,7 +6868,13 @@
 "name": "당위",
 "color": "purple",
 "word": "must"
+},
+"tags": [
+{
+"sig": "당위",
+"word": "must"
 }
+]
 },
 {
 "role": "yellow",
@@ -5605,7 +6893,13 @@
 "color": "purple",
 "word": "the most significant"
 },
-"nat": "인구·심리 프로필, 구매력, 관심도, 만족도, 주의의 질, 감정 상태 같은 다른 어떤 특성보다도, 하나의 대중으로 모인 청중의 양이 수익을 노리는 방송사에게 가장 중요한 지표이다."
+"nat": "인구·심리 프로필, 구매력, 관심도, 만족도, 주의의 질, 감정 상태 같은 다른 어떤 특성보다도, 하나의 대중으로 모인 청중의 양이 수익을 노리는 방송사에게 가장 중요한 지표이다.",
+"tags": [
+{
+"sig": "최상급",
+"word": "the most significant"
+}
+]
 },
 {
 "role": "yellow",
@@ -5624,7 +6918,13 @@
 "color": "orange",
 "word": "As a result"
 },
-"nat": "그 결과 방송사들은 인기 있는 음악, 아니면 적어도 청취자가 라디오를 끄거나 채널을 바꾸지 않으리라 믿을 만한 음악을 틀어 청중 규모를 극대화하려 한다."
+"nat": "그 결과 방송사들은 인기 있는 음악, 아니면 적어도 청취자가 라디오를 끄거나 채널을 바꾸지 않으리라 믿을 만한 음악을 틀어 청중 규모를 극대화하려 한다.",
+"tags": [
+{
+"sig": "인과",
+"word": "As a result"
+}
+]
 },
 {
 "role": "gray",
@@ -5642,7 +6942,13 @@
 "name": "핵심",
 "color": "green",
 "word": "key value"
+},
+"tags": [
+{
+"sig": "핵심어",
+"word": "key value"
 }
+]
 },
 {
 "role": "yellow",
@@ -5658,7 +6964,13 @@
 "name": "인과",
 "color": "orange",
 "word": "In consequence"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "In consequence"
 }
+]
 },
 {
 "role": "yellow",
@@ -5675,7 +6987,13 @@
 "color": "orange",
 "word": "restricted"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결과",
+"word": "restricted"
+}
+]
 }
 ]
 },
@@ -5699,7 +7017,13 @@
 "color": "green",
 "word": "As far back as"
 },
-"nat": "멀게는 3만 2천 년 전에도 선사시대 동굴 화가들은 말과 들소에 입체감을 주려고 명암 그림자를 능숙하게 사용했다."
+"nat": "멀게는 3만 2천 년 전에도 선사시대 동굴 화가들은 말과 들소에 입체감을 주려고 명암 그림자를 능숙하게 사용했다.",
+"tags": [
+{
+"sig": "시점·기원",
+"word": "As far back as"
+}
+]
 },
 {
 "role": "gray",
@@ -5728,7 +7052,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "skip",
@@ -5761,7 +7091,13 @@
 "color": "red",
 "word": "transition"
 },
-"nat": "그리스인과 로마인이 명암 그림자에서 투영 그림자로 처음 전환했는데, 이 관행은 일관된 광원, 고정된 시점, 기하학적 투영에 대한 이해를 함축했다."
+"nat": "그리스인과 로마인이 명암 그림자에서 투영 그림자로 처음 전환했는데, 이 관행은 일관된 광원, 고정된 시점, 기하학적 투영에 대한 이해를 함축했다.",
+"tags": [
+{
+"sig": "전환",
+"word": "transition"
+}
+]
 },
 {
 "role": "gray",
@@ -5795,7 +7131,13 @@
 "word": "Ever since"
 },
 "nat": "그 이후로 그림자를 묘사하는 관행은, 예술가와 이론가들이 그림자 표현의 의미를 두고 계속 논쟁을 벌이면서 그에 대한 비평적 분석과 함께 발전해 왔다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "지속·결론",
+"word": "Ever since"
+}
+]
 }
 ]
 },
@@ -5819,7 +7161,13 @@
 "color": "red",
 "word": "no longer"
 },
-"nat": "많은 도시 소비자가 자연과 연관된 음식을 사고 먹는다는 생각에 분명히 끌렸지만, 광고가 내세운 자연은 더 이상 그 음식을 만들어낸 자연이 아니었다."
+"nat": "많은 도시 소비자가 자연과 연관된 음식을 사고 먹는다는 생각에 분명히 끌렸지만, 광고가 내세운 자연은 더 이상 그 음식을 만들어낸 자연이 아니었다.",
+"tags": [
+{
+"sig": "대조",
+"word": "no longer"
+}
+]
 },
 {
 "role": "gray",
@@ -5837,7 +7185,13 @@
 "name": "강조",
 "color": "purple",
 "word": "Indeed"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "Indeed"
 }
+]
 },
 {
 "role": "yellow",
@@ -5856,7 +7210,13 @@
 "color": "blue",
 "word": "This"
 },
-"nat": "이것은 분명히 프랑스 사회학자 앙리 르페브르가 ‘지시 대상의 쇠퇴’라 부른 것, 즉 자본주의의 영향 아래 단어들이 의미 있는 연관에서 분리되는 경향의 사례이다."
+"nat": "이것은 분명히 프랑스 사회학자 앙리 르페브르가 ‘지시 대상의 쇠퇴’라 부른 것, 즉 자본주의의 영향 아래 단어들이 의미 있는 연관에서 분리되는 경향의 사례이다.",
+"tags": [
+{
+"sig": "명명·개념",
+"word": "This"
+}
+]
 },
 {
 "role": "yellow",
@@ -5876,7 +7236,13 @@
 "word": "opposite"
 },
 "nat": "점점 더 식품 광고는 소비자가 ‘신선한’이나 ‘자연의’ 같은 단어의 새로운 정의, 곧 전통적 의미와 정반대라 할 만한 정의에 익숙해지도록 만들었다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "opposite"
+}
+]
 },
 {
 "role": "gray",
@@ -5906,7 +7272,13 @@
 "name": "양보",
 "color": "red",
 "word": "although"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "although"
 }
+]
 }
 ]
 },
@@ -5930,7 +7302,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "개방형 사무실 설계가 널리 쓰이게 된 데는 그럴 만한 이유가 있지만, 개방형 사무실이 모든 시대에 최선의 선택은 아닐 수 있다."
+"nat": "개방형 사무실 설계가 널리 쓰이게 된 데는 그럴 만한 이유가 있지만, 개방형 사무실이 모든 시대에 최선의 선택은 아닐 수 있다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "yellow",
@@ -5946,7 +7324,13 @@
 "name": "전환",
 "color": "red",
 "word": "Instead"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "Instead"
 }
+]
 },
 {
 "role": "skip",
@@ -5976,7 +7360,13 @@
 "color": "green",
 "word": "crucial take-away"
 },
-"nat": "오랜 시간에 걸쳐 사무실 설계를 분석해 얻는 핵심 교훈은 정답이 계속 바뀐다는 것이다."
+"nat": "오랜 시간에 걸쳐 사무실 설계를 분석해 얻는 핵심 교훈은 정답이 계속 바뀐다는 것이다.",
+"tags": [
+{
+"sig": "결론",
+"word": "crucial take-away"
+}
+]
 },
 {
 "role": "yellow",
@@ -5992,7 +7382,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "yellow",
@@ -6009,7 +7405,13 @@
 "color": "green",
 "word": "cycle that repeats"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "cycle that repeats"
+}
+]
 },
 {
 "role": "gray",
@@ -6028,7 +7430,13 @@
 "color": "gray",
 "word": "circled back"
 },
-"nat": "1940년대 사무실을 오늘날의 사무실과 비교해 보면, 칸막이와 큐비클이 흔하던 1980년대를 거쳐 본질적으로 같은 양식으로 되돌아왔음을 알 수 있다."
+"nat": "1940년대 사무실을 오늘날의 사무실과 비교해 보면, 칸막이와 큐비클이 흔하던 1980년대를 거쳐 본질적으로 같은 양식으로 되돌아왔음을 알 수 있다.",
+"tags": [
+{
+"sig": "예시",
+"word": "circled back"
+}
+]
 },
 {
 "role": "skip",
@@ -6047,7 +7455,13 @@
 "color": "red",
 "word": "but"
 },
-"nat": "기술과 색은 다를지 몰라도, 1940년대와 2000년대의 설계는 한가운데를 따라 늘어선 기둥에 이르기까지 비슷하다."
+"nat": "기술과 색은 다를지 몰라도, 1940년대와 2000년대의 설계는 한가운데를 따라 늘어선 기둥에 이르기까지 비슷하다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 }
 ]
 },
@@ -6070,7 +7484,13 @@
 "name": "핵심",
 "color": "green",
 "word": "Environmental learning"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "Environmental learning"
 }
+]
 },
 {
 "role": "skip",
@@ -6103,7 +7523,13 @@
 "color": "gray",
 "word": "trialability"
 },
-"nat": "그들은 농사 활동을 실험으로 보고, 상대적 이점, 기존 자원과의 양립성, 사용의 난이도, 그리고 ‘시험 가능성’(얼마나 잘 실험해 볼 수 있는가) 같은 요소들을 평가한다."
+"nat": "그들은 농사 활동을 실험으로 보고, 상대적 이점, 기존 자원과의 양립성, 사용의 난이도, 그리고 ‘시험 가능성’(얼마나 잘 실험해 볼 수 있는가) 같은 요소들을 평가한다.",
+"tags": [
+{
+"sig": "열거",
+"word": "trialability"
+}
+]
 },
 {
 "role": "yellow",
@@ -6122,7 +7548,17 @@
 "color": "red",
 "word": "But"
 },
-"nat": "그러나 ‘시험 가능성’이라는 기준은 실제로 문제가 되는데, 농부들이 늘 실험하는 것은 사실이지만 실제 운영되는 농장은 결함이 많은 실험실이기 때문이다."
+"nat": "그러나 ‘시험 가능성’이라는 기준은 실제로 문제가 되는데, 농부들이 늘 실험하는 것은 사실이지만 실제 운영되는 농장은 결함이 많은 실험실이기 때문이다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "강조",
+"word": "flawed laboratories"
+}
+]
 },
 {
 "role": "yellow",
@@ -6140,7 +7576,13 @@
 "name": "핵심",
 "color": "green",
 "word": "cannot set up"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "cannot set up"
 }
+]
 },
 {
 "role": "gray",
@@ -6159,7 +7601,13 @@
 "color": "gray",
 "word": "also"
 },
-"nat": "농부들은 또한 통제된 실험을 할 수 있다 해도 다루기 어려울, 복잡하고 관찰하기 힘든 현상에 자주 부딪힌다."
+"nat": "농부들은 또한 통제된 실험을 할 수 있다 해도 다루기 어려울, 복잡하고 관찰하기 힘든 현상에 자주 부딪힌다.",
+"tags": [
+{
+"sig": "열거",
+"word": "also"
+}
+]
 },
 {
 "role": "yellow",
@@ -6179,7 +7627,17 @@
 "word": "which makes"
 },
 "nat": "게다가 농부들은 자신이 쓸 수 있는 여러 생산 방법 중 몇 가지에 대해서만 겨우 이득 정보를 얻을 수 있어서, ‘상대적 이점’이라는 기준을 측정하기 어렵게 만든다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "열거",
+"word": "Moreover"
+},
+{
+"sig": "인과",
+"word": "hard to measure"
+}
+]
 }
 ]
 },
@@ -6203,7 +7661,13 @@
 "color": "green",
 "word": "unusual phenomena"
 },
-"nat": "낙하하는 물체나 밤낮의 교대 같은 평범한 현상보다 일식 같은 이례적 현상에 놀라는 편이 훨씬 자연스럽다."
+"nat": "낙하하는 물체나 밤낮의 교대 같은 평범한 현상보다 일식 같은 이례적 현상에 놀라는 편이 훨씬 자연스럽다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "unusual phenomena"
+}
+]
 },
 {
 "role": "skip",
@@ -6236,7 +7700,17 @@
 "color": "red",
 "word": "But"
 },
-"nat": "그러나 일식의 원인은 궁극적으로 밤낮이 교대하는 원인과 같은데, 바로 천체의 운동이며, 그것 자체는 뉴턴의 인력 법칙과 물체를 놓으면 왜 떨어지는지를 설명하는 방식에 근거한다."
+"nat": "그러나 일식의 원인은 궁극적으로 밤낮이 교대하는 원인과 같은데, 바로 천체의 운동이며, 그것 자체는 뉴턴의 인력 법칙과 물체를 놓으면 왜 떨어지는지를 설명하는 방식에 근거한다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "핵심",
+"word": "the reason for eclipses is ultimately the same"
+}
+]
 },
 {
 "role": "yellow",
@@ -6255,7 +7729,17 @@
 "color": "green",
 "word": "thus"
 },
-"nat": "물리학자에게는 평범하고 습관적이며 빈번한 것을 이해하는 일이, 결국 무섭고 특이한 것을 설명할 수 있게 해 준다."
+"nat": "물리학자에게는 평범하고 습관적이며 빈번한 것을 이해하는 일이, 결국 무섭고 특이한 것을 설명할 수 있게 해 준다.",
+"tags": [
+{
+"sig": "결론",
+"word": "thus"
+},
+{
+"sig": "핵심",
+"word": "understanding the ordinary"
+}
+]
 },
 {
 "role": "yellow",
@@ -6275,7 +7759,17 @@
 "word": "thus"
 },
 "nat": "따라서 ‘왜 물체는 떨어지는가?’라고 묻고 뉴턴의 답을 확보하는 일이, 우주의 모든 층위에서 일어나는 훨씬 더 기이한 현상을 폭넓게 이해하기 위해 필요했다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "주장",
+"word": "necessary to ask"
+},
+{
+"sig": "결론",
+"word": "thus"
+}
+]
 }
 ]
 },
@@ -6298,7 +7792,13 @@
 "name": "핵심",
 "color": "green",
 "word": "changed the relationship"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "changed the relationship"
 }
+]
 },
 {
 "role": "gray",
@@ -6316,7 +7816,13 @@
 "name": "부연",
 "color": "gray",
 "word": "around the clock"
+},
+"tags": [
+{
+"sig": "부연",
+"word": "around the clock"
 }
+]
 },
 {
 "role": "skip",
@@ -6363,7 +7869,17 @@
 "color": "green",
 "word": "thus"
 },
-"nat": "산업화는 모든 노동 시간의 잠재적 가치를 높였고 ― 오래 일할수록 위젯을 더 만들고 돈을 더 벌었다 ― 그리하여 임금은 노력과 생산에 결부되었다."
+"nat": "산업화는 모든 노동 시간의 잠재적 가치를 높였고 ― 오래 일할수록 위젯을 더 만들고 돈을 더 벌었다 ― 그리하여 임금은 노력과 생산에 결부되었다.",
+"tags": [
+{
+"sig": "결론",
+"word": "thus"
+},
+{
+"sig": "핵심",
+"word": "raised the potential value of every single work hour"
+}
+]
 },
 {
 "role": "yellow",
@@ -6383,7 +7899,17 @@
 "word": "clock-oriented"
 },
 "nat": "예전엔 수확 주기에 따르던 노동이 시계 중심으로 바뀌었고, 사회는 새로운 생산성 원리를 중심으로 재편되기 시작했다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "previously"
+},
+{
+"sig": "핵심",
+"word": "clock-oriented"
+}
+]
 }
 ]
 },
@@ -6415,7 +7941,13 @@
 "name": "정의",
 "color": "blue",
 "word": "by definition"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "current"
 }
+]
 },
 {
 "role": "yellow",
@@ -6434,7 +7966,13 @@
 "color": "green",
 "word": "extended the shelf life"
 },
-"nat": "아카이브에 누구나 접근할 수 있게 되면서 저널리즘의 수명이 크게 늘어, 오래된 기사가 이제는 더 최근 기사에 맥락을 주기 위해 정기적으로 인용된다."
+"nat": "아카이브에 누구나 접근할 수 있게 되면서 저널리즘의 수명이 크게 늘어, 오래된 기사가 이제는 더 최근 기사에 맥락을 주기 위해 정기적으로 인용된다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "extended the shelf life"
+}
+]
 },
 {
 "role": "yellow",
@@ -6455,7 +7993,13 @@
 "color": "blue",
 "word": "underlying issues and contexts"
 },
-"nat": "뉴스에서 접하는 복잡한 사안의 의미 형성과 관련해, 이 변화는 인쇄 매체 소비자에게는 뚜렷하지도 가능하지도 않았던, 뉴스의 근저 사안과 맥락에 참여하려는 온라인 소비자의 준비된 태도로 이해될 수 있다."
+"nat": "뉴스에서 접하는 복잡한 사안의 의미 형성과 관련해, 이 변화는 인쇄 매체 소비자에게는 뚜렷하지도 가능하지도 않았던, 뉴스의 근저 사안과 맥락에 참여하려는 온라인 소비자의 준비된 태도로 이해될 수 있다.",
+"tags": [
+{
+"sig": "반복",
+"word": "underlying issues and contexts"
+}
+]
 },
 {
 "role": "yellow",
@@ -6475,7 +8019,13 @@
 "word": "rather than short-lived spectacles"
 },
 "nat": "쉽게 접근할 수 있는 온라인 아카이브의 깊이로 부분적으로 결정되는 온라인 뉴스의 새로운 특성 하나는, 뉴스 기사를 수명 짧고 단절된 미디어 볼거리가 아니라 더 큰 경제·사회·문화 사안의 명백한 결과로 이해할 가능성으로 보인다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "rather than short-lived and unconnected media spectacles"
+}
+]
 }
 ]
 },
@@ -6499,7 +8049,17 @@
 "color": "red",
 "word": "but"
 },
-"nat": "셀피가 공감을 얻는 것은 그것이 새로워서가 아니라, 자화상의 긴 역사를 표현하고 발전·확장·강화하기 때문이다."
+"nat": "셀피가 공감을 얻는 것은 그것이 새로워서가 아니라, 자화상의 긴 역사를 표현하고 발전·확장·강화하기 때문이다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+},
+{
+"sig": "열거",
+"word": "expresses, develops, expands, and intensifies"
+}
+]
 },
 {
 "role": "gray",
@@ -6569,7 +8129,13 @@
 "word": "first visual signature of the new era"
 },
 "nat": "오늘날 젊고 도시적이며 네트워크로 연결된 다수는 자화상의 역사를 재구성해, 셀피를 새 시대의 첫 시각적 서명으로 만들었다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "first visual signature of the new era"
+}
+]
 }
 ]
 },
@@ -6593,7 +8159,17 @@
 "color": "red",
 "word": "Although"
 },
-"nat": "인지적·신경심리학적 접근은 사회적 지각을 해칠 수 있는, 나이에 따른 상실을 강조하지만, 동기 이론은 어떤 이득이나 질적 변화가 있을 수 있다고 본다."
+"nat": "인지적·신경심리학적 접근은 사회적 지각을 해칠 수 있는, 나이에 따른 상실을 강조하지만, 동기 이론은 어떤 이득이나 질적 변화가 있을 수 있다고 본다.",
+"tags": [
+{
+"sig": "역접",
+"word": "Although"
+},
+{
+"sig": "핵심",
+"word": "gains"
+}
+]
 },
 {
 "role": "gray",
@@ -6612,7 +8188,13 @@
 "color": "green",
 "word": "positive emotional information"
 },
-"nat": "Charles와 Carstensen은, 사람들이 나이 들수록 가까운 사회적 관계를 우선하고 정서적 행복에 더 집중하며 부정적 정보를 무시한 채 긍정적 정서 정보에 더 주의를 기울인다는 상당한 증거를 검토한다."
+"nat": "Charles와 Carstensen은, 사람들이 나이 들수록 가까운 사회적 관계를 우선하고 정서적 행복에 더 집중하며 부정적 정보를 무시한 채 긍정적 정서 정보에 더 주의를 기울인다는 상당한 증거를 검토한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "positive emotional information"
+}
+]
 },
 {
 "role": "skip",
@@ -6645,7 +8227,17 @@
 "color": "purple",
 "word": "Of particular importance"
 },
-"nat": "노년기의 정서 변화를 볼 때 특히 중요한 것은 긍정 편향의 존재인데, 곧 부정적 정보보다 긍정적 정보를 더 알아차리고 주목하고 기억하는 경향이다."
+"nat": "노년기의 정서 변화를 볼 때 특히 중요한 것은 긍정 편향의 존재인데, 곧 부정적 정보보다 긍정적 정보를 더 알아차리고 주목하고 기억하는 경향이다.",
+"tags": [
+{
+"sig": "강조",
+"word": "Of particular importance"
+},
+{
+"sig": "핵심",
+"word": "positivity bias"
+}
+]
 },
 {
 "role": "yellow",
@@ -6665,7 +8257,13 @@
 "word": "gains"
 },
 "nat": "사회적 기술에서 인생 경험이 하는 역할 또한, 노인이 사회적 지각의 일부 측면에서 이득을 보일 수 있음을 시사한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "반복",
+"word": "gains"
+}
+]
 }
 ]
 },
@@ -6686,7 +8284,13 @@
 "name": "핵심",
 "color": "green",
 "word": "must decide if it is truly an emergency"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "must decide if it is truly an emergency"
 }
+]
 },
 {
 "role": "skip",
@@ -6740,7 +8344,13 @@
 "name": "핵심",
 "color": "green",
 "word": "looks at those around him"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "looks at those around him"
 }
+]
 },
 {
 "role": "gray",
@@ -6761,7 +8371,13 @@
 "color": "orange",
 "word": "If everyone else"
 },
-"nat": "다른 사람들이 모두 침착하고 무관심하면 그도 그렇게 남으려 하고, 모두가 강하게 반응하면 그도 경계하게 되기 쉽다."
+"nat": "다른 사람들이 모두 침착하고 무관심하면 그도 그렇게 남으려 하고, 모두가 강하게 반응하면 그도 경계하게 되기 쉽다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If everyone else"
+}
+]
 },
 {
 "role": "gray",
@@ -6780,7 +8396,13 @@
 "color": "red",
 "word": "not merely blind conformity"
 },
-"nat": "이 경향은 단순한 맹목적 동조가 아니라, 우리는 보통 주변 사람들의 행동에서 새로운 상황에 대한 귀중한 정보를 많이 얻는다."
+"nat": "이 경향은 단순한 맹목적 동조가 아니라, 우리는 보통 주변 사람들의 행동에서 새로운 상황에 대한 귀중한 정보를 많이 얻는다.",
+"tags": [
+{
+"sig": "역접",
+"word": "not merely blind conformity"
+}
+]
 },
 {
 "role": "skip",
@@ -6810,7 +8432,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "skip",
@@ -6850,7 +8478,13 @@
 "name": "강조",
 "color": "purple",
 "word": "more (d) unconcerned than he is in fact"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "more (d) unconcerned than he is in fact"
 }
+]
 },
 {
 "role": "yellow",
@@ -6870,7 +8504,17 @@
 "word": "thus"
 },
 "nat": "그리하여 군중은 그 수동성을 통해 사건이 비상이 아니라고 암시함으로써 구성원들에게 무행동을 강요할 수 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "thus"
+},
+{
+"sig": "인과",
+"word": "force (e) inaction"
+}
+]
 },
 {
 "role": "skip",
@@ -6907,7 +8551,13 @@
 "color": "green",
 "word": "ethical thinking is about identifying ethical issues"
 },
-"nat": "비판적 사고를 '의사결정을 이끌 증거의 식별·평가'로 본다면, 윤리적 사고란 윤리적 쟁점을 식별하고 이를 여러 관점에서 평가해 대응 방향을 정하는 것이다."
+"nat": "비판적 사고를 '의사결정을 이끌 증거의 식별·평가'로 본다면, 윤리적 사고란 윤리적 쟁점을 식별하고 이를 여러 관점에서 평가해 대응 방향을 정하는 것이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "ethical thinking is about identifying ethical issues"
+}
+]
 },
 {
 "role": "skip",
@@ -6934,7 +8584,13 @@
 "name": "핵심",
 "color": "green",
 "word": "no clear right or wrong response"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "no clear right or wrong response"
 }
+]
 },
 {
 "role": "gray",
@@ -6952,7 +8608,17 @@
 "name": "당위",
 "color": "purple",
 "word": "essential"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "essential"
+},
+{
+"sig": "대조",
+"word": "rather than follow"
 }
+]
 },
 {
 "role": "yellow",
@@ -6971,7 +8637,17 @@
 "color": "red",
 "word": "although"
 },
-"nat": "윤리적이라는 것이 '옳다고 여겨지는 행동 원칙에 따라 행동하는 것'으로 정의되긴 하지만, 그 원칙은 개인마다도 한 개인 안에서도 다르다는 점을 인식하도록 장려할 필요가 있다."
+"nat": "윤리적이라는 것이 '옳다고 여겨지는 행동 원칙에 따라 행동하는 것'으로 정의되긴 하지만, 그 원칙은 개인마다도 한 개인 안에서도 다르다는 점을 인식하도록 장려할 필요가 있다.",
+"tags": [
+{
+"sig": "역접",
+"word": "although"
+},
+{
+"sig": "핵심",
+"word": "vary both between and within individuals"
+}
+]
 },
 {
 "role": "gray",
@@ -6989,7 +8665,13 @@
 "name": "핵심",
 "color": "green",
 "word": "values"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "values"
 }
+]
 },
 {
 "role": "yellow",
@@ -7008,7 +8690,17 @@
 "color": "purple",
 "word": "context (d) dependent"
 },
-"nat": "개인의 관점은 맥락에 따라 달라질 수 있어, 상황·시점·기분이 다르면 같은 사람도 다른 선택을 할 수 있다."
+"nat": "개인의 관점은 맥락에 따라 달라질 수 있어, 상황·시점·기분이 다르면 같은 사람도 다른 선택을 할 수 있다.",
+"tags": [
+{
+"sig": "강조",
+"word": "context (d) dependent"
+},
+{
+"sig": "반복",
+"word": "different choices"
+}
+]
 },
 {
 "role": "yellow",
@@ -7028,7 +8720,17 @@
 "word": "Therefore"
 },
 "nat": "따라서 윤리적으로 사고하려면 자신의 행동 규범에 영향을 주는 개인적 요인과 그것들이 어떻게 맞물리는지를 이해하고, 동시에 타인의 규범을 이끄는 요인은 다를 수 있음을 받아들여야 한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Therefore"
+},
+{
+"sig": "대조",
+"word": "may be different"
+}
+]
 }
 ]
 },
@@ -7052,7 +8754,17 @@
 "color": "green",
 "word": "a crisis of the imagination"
 },
-"nat": "기후변화 전문가와 환경 인문주의자 모두, 기후 위기는 본질적으로 상상력의 위기이며 대중의 상상 상당 부분이 소설에 의해 형성된다는 데 동의한다."
+"nat": "기후변화 전문가와 환경 인문주의자 모두, 기후 위기는 본질적으로 상상력의 위기이며 대중의 상상 상당 부분이 소설에 의해 형성된다는 데 동의한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "a crisis of the imagination"
+},
+{
+"sig": "주장",
+"word": "agree"
+}
+]
 },
 {
 "role": "yellow",
@@ -7071,7 +8783,17 @@
 "color": "orange",
 "word": "because fiction (a) fails to believably represent it"
 },
-"nat": "Amitav Ghosh는 2016년 책에서 상상력과 환경 관리의 관계를 다루며, 인류가 기후변화에 대응하지 못한 것은 적어도 부분적으로 소설이 그것을 그럴듯하게 재현하지 못하기 때문이라고 주장한다."
+"nat": "Amitav Ghosh는 2016년 책에서 상상력과 환경 관리의 관계를 다루며, 인류가 기후변화에 대응하지 못한 것은 적어도 부분적으로 소설이 그것을 그럴듯하게 재현하지 못하기 때문이라고 주장한다.",
+"tags": [
+{
+"sig": "인과",
+"word": "because fiction (a) fails to believably represent it"
+},
+{
+"sig": "핵심",
+"word": "failed to respond to climate change"
+}
+]
 },
 {
 "role": "gray",
@@ -7090,7 +8812,17 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "Ghosh는 기후변화가 떠올리게 하는 사이클론·홍수 같은 재앙이 일상 이야기에 담기엔 너무 '있을 법하지 않게' 보이기 때문에 현대 소설에서 대체로 다뤄지지 않는다고 설명한다."
+"nat": "Ghosh는 기후변화가 떠올리게 하는 사이클론·홍수 같은 재앙이 일상 이야기에 담기엔 너무 '있을 법하지 않게' 보이기 때문에 현대 소설에서 대체로 다뤄지지 않는다고 설명한다.",
+"tags": [
+{
+"sig": "인과",
+"word": "because"
+},
+{
+"sig": "핵심",
+"word": "largely absent from contemporary fiction"
+}
+]
 },
 {
 "role": "skip",
@@ -7106,7 +8838,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "gray",
@@ -7124,7 +8862,13 @@
 "name": "핵심",
 "color": "green",
 "word": "imperceptible"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "imperceptible"
 }
+]
 },
 {
 "role": "skip",
@@ -7154,7 +8898,17 @@
 "color": "orange",
 "word": "because it poses significant representational challenges"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "인과",
+"word": "because it poses significant representational challenges"
+},
+{
+"sig": "핵심",
+"word": "evades our imagination"
+}
+]
 },
 {
 "role": "skip",
@@ -7194,7 +8948,13 @@
 "color": "green",
 "word": "differ considerably from the everyday language"
 },
-"nat": "문자 사회의 기록 시든 비문자 사회의 구술 시든 공동체의 일상 언어와 상당히 다르다고 느끼는 것은 옳다."
+"nat": "문자 사회의 기록 시든 비문자 사회의 구술 시든 공동체의 일상 언어와 상당히 다르다고 느끼는 것은 옳다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "differ considerably from the everyday language"
+}
+]
 },
 {
 "role": "skip",
@@ -7208,7 +8968,13 @@
 "실제로 시에서 이런 것들을 발견하기를 기대하며",
 "시가 '시적으로' 들리지 않으면 실망한다."
 ],
-"nat": "청자는 낯선 어휘, 어순 재배열, 운율 같은 것을 받아들일 뿐 아니라 시에서 그런 것을 기대하며, 시가 시적으로 들리지 않으면 실망한다."
+"nat": "청자는 낯선 어휘, 어순 재배열, 운율 같은 것을 받아들일 뿐 아니라 시에서 그런 것을 기대하며, 시가 시적으로 들리지 않으면 실망한다.",
+"tags": [
+{
+"sig": "열거",
+"word": "not only"
+}
+]
 },
 {
 "role": "yellow",
@@ -7224,7 +8990,17 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "핵심",
+"word": "deaf to the true achievements of the poet"
 }
+]
 },
 {
 "role": "yellow",
@@ -7243,7 +9019,17 @@
 "color": "purple",
 "word": "Rather"
 },
-"nat": "오히려 시인은 일상 대화에서 쓰이는 것과 똑같은 언어 재료를 능숙하게 다루며, 그의 기술은 이미 언어 안에 있는 자원에서 새로운 가능성을 찾아내는 것이다."
+"nat": "오히려 시인은 일상 대화에서 쓰이는 것과 똑같은 언어 재료를 능숙하게 다루며, 그의 기술은 이미 언어 안에 있는 자원에서 새로운 가능성을 찾아내는 것이다.",
+"tags": [
+{
+"sig": "강조",
+"word": "Rather"
+},
+{
+"sig": "핵심",
+"word": "the same raw materials of his language"
+}
+]
 },
 {
 "role": "gray",
@@ -7262,7 +9048,13 @@
 "color": "green",
 "word": "accustomed to the sound of waves"
 },
-"nat": "바닷가 사람들이 파도 소리에 익숙해져 더는 듣지 않게 되듯, 우리 대부분도 매일 고막을 때리는 수백만 개의 말의 홍수에 둔감해졌다."
+"nat": "바닷가 사람들이 파도 소리에 익숙해져 더는 듣지 않게 되듯, 우리 대부분도 매일 고막을 때리는 수백만 개의 말의 홍수에 둔감해졌다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "accustomed to the sound of waves"
+}
+]
 },
 {
 "role": "yellow",
@@ -7281,7 +9073,17 @@
 "color": "green",
 "word": "depict the world with a (d) fresh perception"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "depict the world with a (d) fresh perception"
+},
+{
+"sig": "결론",
+"word": "so that we will listen to language once again"
+}
+]
 },
 {
 "role": "gray",
@@ -7297,7 +9099,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "skip",
@@ -7329,7 +9137,13 @@
 "name": "핵심",
 "color": "green",
 "word": "outperform expert judgement"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "outperform expert judgement"
 }
+]
 },
 {
 "role": "skip",
@@ -7362,7 +9176,13 @@
 "color": "orange",
 "word": "In over 100 studies"
 },
-"nat": "여러 영역의 100건 넘는 연구에서 절반은 단순 공식이 전문가보다 더 나은 예측을 했고, 나머지는 극소수를 빼면 둘이 비겼다."
+"nat": "여러 영역의 100건 넘는 연구에서 절반은 단순 공식이 전문가보다 더 나은 예측을 했고, 나머지는 극소수를 빼면 둘이 비겼다.",
+"tags": [
+{
+"sig": "근거",
+"word": "In over 100 studies"
+}
+]
 },
 {
 "role": "yellow",
@@ -7381,7 +9201,17 @@
 "color": "red",
 "word": "while"
 },
-"nat": "여러 요인이 얽히고 상황이 매우 불확실할 때, 단순 공식은 가장 중요한 요인에 집중하고 일관되게 함으로써 이기는 반면, 인간 판단은 두드러지지만 무관할 수 있는 요소에 너무 쉽게 흔들린다."
+"nat": "여러 요인이 얽히고 상황이 매우 불확실할 때, 단순 공식은 가장 중요한 요인에 집중하고 일관되게 함으로써 이기는 반면, 인간 판단은 두드러지지만 무관할 수 있는 요소에 너무 쉽게 흔들린다.",
+"tags": [
+{
+"sig": "대조",
+"word": "while"
+},
+{
+"sig": "한정",
+"word": "the most important factors"
+}
+]
 },
 {
 "role": "yellow",
@@ -7401,7 +9231,17 @@
 "word": "A similar idea"
 },
 "nat": "'체크리스트'가 사람들이 방심할 때 중요한 단계나 고려사항이 빠지지 않게 함으로써 여러 영역에서 전문가 결정의 질을 높일 수 있다는 증거가 비슷한 생각을 뒷받침한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "반복",
+"word": "A similar idea"
+},
+{
+"sig": "핵심",
+"word": "improve the quality of expert decisions"
+}
+]
 },
 {
 "role": "skip",
@@ -7430,7 +9270,13 @@
 "name": "핵심",
 "color": "green",
 "word": "remarkably"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "remarkably"
 }
+]
 }
 ]
 },
@@ -7484,7 +9330,17 @@
 "name": "역접",
 "color": "red",
 "word": "Yet"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "Yet"
+},
+{
+"sig": "핵심",
+"word": "a breakthrough in human evolution"
 }
+]
 },
 {
 "role": "yellow",
@@ -7503,7 +9359,17 @@
 "color": "red",
 "word": "but not"
 },
-"nat": "다른 영장류도 물체를 다룰 때 어느 정도 정밀한 쥐기를 하지만, 우리 손의 해부 구조가 가능하게 하는 효율적인 맞섬(엄지-손가락 대립)은 하지 못한다."
+"nat": "다른 영장류도 물체를 다룰 때 어느 정도 정밀한 쥐기를 하지만, 우리 손의 해부 구조가 가능하게 하는 효율적인 맞섬(엄지-손가락 대립)은 하지 못한다.",
+"tags": [
+{
+"sig": "역접",
+"word": "but not"
+},
+{
+"sig": "대조",
+"word": "Other primates"
+}
+]
 },
 {
 "role": "skip",
@@ -7535,7 +9401,13 @@
 "name": "근거",
 "color": "orange",
 "word": "anatomical attributes"
+},
+"tags": [
+{
+"sig": "근거",
+"word": "anatomical attributes"
 }
+]
 },
 {
 "role": "skip",
@@ -7563,7 +9435,13 @@
 "color": "green",
 "word": "the human hand shaped our history"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "the human hand shaped our history"
+}
+]
 },
 {
 "role": "gray",
@@ -7582,7 +9460,13 @@
 "color": "orange",
 "word": "without hands that could do the job"
 },
-"nat": "석기가 인간 기술과 생존의 핵심이 될 수 있었던 것은 그 일을 해낼 수 있는 손과, 필요한 신호를 조절·조정하는 신경계가 있었기 때문이다."
+"nat": "석기가 인간 기술과 생존의 핵심이 될 수 있었던 것은 그 일을 해낼 수 있는 손과, 필요한 신호를 조절·조정하는 신경계가 있었기 때문이다.",
+"tags": [
+{
+"sig": "조건",
+"word": "without hands that could do the job"
+}
+]
 },
 {
 "role": "skip",
@@ -7628,7 +9512,13 @@
 "name": "핵심",
 "color": "green",
 "word": "a fixed pie"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "a fixed pie"
 }
+]
 },
 {
 "role": "skip",
@@ -7658,7 +9548,13 @@
 "color": "orange",
 "word": "so they (a) suppress efforts"
 },
-"nat": "고정된 파이를 믿는 사람들은 당사자들의 이해가 대립하며 통합적 합의나 상호 이익의 여지가 없다고 가정해, 그런 가능성을 찾으려는 노력을 억누른다."
+"nat": "고정된 파이를 믿는 사람들은 당사자들의 이해가 대립하며 통합적 합의나 상호 이익의 여지가 없다고 가정해, 그런 가능성을 찾으려는 노력을 억누른다.",
+"tags": [
+{
+"sig": "인과",
+"word": "so they (a) suppress efforts"
+}
+]
 },
 {
 "role": "skip",
@@ -7688,7 +9584,13 @@
 "name": "조건",
 "color": "orange",
 "word": "varies depending on"
+},
+"tags": [
+{
+"sig": "조건",
+"word": "varies depending on"
 }
+]
 },
 {
 "role": "skip",
@@ -7729,7 +9631,13 @@
 "name": "대조",
 "color": "red",
 "word": "fixed-pie beliefs"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "fixed-pie beliefs"
 }
+]
 },
 {
 "role": "yellow",
@@ -7745,7 +9653,13 @@
 "name": "대조",
 "color": "red",
 "word": "least likely to see the problem in fixed-pie terms"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "least likely to see the problem in fixed-pie terms"
 }
+]
 },
 {
 "role": "yellow",
@@ -7762,7 +9676,13 @@
 "color": "blue",
 "word": "this common misperception"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "this common misperception"
+}
+]
 }
 ]
 },
@@ -7783,7 +9703,13 @@
 "name": "핵심",
 "color": "green",
 "word": "blend seamlessly into our everyday lives"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "blend seamlessly into our everyday lives"
 }
+]
 },
 {
 "role": "yellow",
@@ -7802,7 +9728,13 @@
 "color": "purple",
 "word": "no longer (a) aware of the technology"
 },
-"nat": "본질적으로 이 열망은 사람들이 더 이상 기술이나 인터페이스, 혹은 인간-기술과 인간-인간 상호작용의 차이를 의식하지 않는 경험을 지향한다."
+"nat": "본질적으로 이 열망은 사람들이 더 이상 기술이나 인터페이스, 혹은 인간-기술과 인간-인간 상호작용의 차이를 의식하지 않는 경험을 지향한다.",
+"tags": [
+{
+"sig": "강조",
+"word": "no longer (a) aware of the technology"
+}
+]
 },
 {
 "role": "gray",
@@ -7821,7 +9753,13 @@
 "color": "gray",
 "word": "metaphor of seams in clothing"
 },
-"nat": "옷의 솔기에 빗대면, 우리는 솔기를 촘촘히 꿰매 납작하게 눌러 안쪽에 숨김으로써 천 조각이 아니라 '옷'을 입게 하듯 매끄러운 미학을 추구한다."
+"nat": "옷의 솔기에 빗대면, 우리는 솔기를 촘촘히 꿰매 납작하게 눌러 안쪽에 숨김으로써 천 조각이 아니라 '옷'을 입게 하듯 매끄러운 미학을 추구한다.",
+"tags": [
+{
+"sig": "비유",
+"word": "metaphor of seams in clothing"
+}
+]
 },
 {
 "role": "gray",
@@ -7837,7 +9775,13 @@
 "name": "반복",
 "color": "blue",
 "word": "ease of use and convenience"
+},
+"tags": [
+{
+"sig": "반복",
+"word": "ease of use and convenience"
 }
+]
 },
 {
 "role": "skip",
@@ -7878,7 +9822,13 @@
 "name": "반복",
 "color": "blue",
 "word": "less visible screens"
+},
+"tags": [
+{
+"sig": "반복",
+"word": "less visible screens"
 }
+]
 },
 {
 "role": "yellow",
@@ -7898,7 +9848,13 @@
 "word": "inside the screen rather than a body"
 },
 "nat": "목표는 사용자 경험을 몰입시켜, 상호작용이 별개의 몸이 콘솔이나 물체를 다루는 것이 아니라 마치 화면 '안'에 있는 것처럼 느껴지게 하는 것이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "inside the screen rather than a body"
+}
+]
 },
 {
 "role": "skip",
@@ -7930,7 +9886,13 @@
 "name": "핵심",
 "color": "green",
 "word": "underestimate what we actually remember"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "underestimate what we actually remember"
 }
+]
 },
 {
 "role": "gray",
@@ -7946,7 +9908,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "gray",
@@ -7974,7 +9942,13 @@
 "name": "결론",
 "color": "green",
 "word": "Thus"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
 }
+]
 },
 {
 "role": "skip",
@@ -8026,7 +10000,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "skip",
@@ -8051,7 +10031,13 @@
 "name": "인과",
 "color": "orange",
 "word": "Because"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "Because"
 }
+]
 },
 {
 "role": "yellow",
@@ -8071,7 +10057,13 @@
 "word": "If"
 },
 "nat": "지식의 출처를 기억하기가 어렵다면, 학교에서 배운 것이 별로 없다고 결론 내리는 것이 왜 무리한 일인지 알 수 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 }
 ]
 },
@@ -8093,7 +10085,13 @@
 "color": "red",
 "word": "While"
 },
-"nat": "사회적 실재감은 유선 전화에서 처음 나온 뒤 여러 형태로 진화해 왔지만, 대화 속에서 상대와 연결되어 있다는 느낌 자체는 변함없이 남아 있다."
+"nat": "사회적 실재감은 유선 전화에서 처음 나온 뒤 여러 형태로 진화해 왔지만, 대화 속에서 상대와 연결되어 있다는 느낌 자체는 변함없이 남아 있다.",
+"tags": [
+{
+"sig": "대조",
+"word": "While"
+}
+]
 },
 {
 "role": "gray",
@@ -8155,7 +10153,13 @@
 "color": "red",
 "word": "less rich media"
 },
-"nat": "연구자들은 유능한 관리자라면 혼란스럽거나 모호한 메시지에는 풍부한 매체를, 더 일상적인 메시지에는 빈약한 매체를 고를 것이라고 보았다."
+"nat": "연구자들은 유능한 관리자라면 혼란스럽거나 모호한 메시지에는 풍부한 매체를, 더 일상적인 메시지에는 빈약한 매체를 고를 것이라고 보았다.",
+"tags": [
+{
+"sig": "대조",
+"word": "less rich media"
+}
+]
 },
 {
 "role": "skip",
@@ -8193,7 +10197,13 @@
 "name": "지시",
 "color": "blue",
 "word": "These different channels"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "container"
 }
+]
 },
 {
 "role": "yellow",
@@ -8210,7 +10220,13 @@
 "color": "purple",
 "word": "need to choose the right container"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "주장",
+"word": "need to choose the right container"
+}
+]
 }
 ]
 },
@@ -8231,7 +10247,13 @@
 "name": "반복",
 "color": "blue",
 "word": "Classifying things together into groups"
+},
+"tags": [
+{
+"sig": "반복",
+"word": "Classifying things together into groups"
 }
+]
 },
 {
 "role": "skip",
@@ -8272,7 +10294,13 @@
 "name": "핵심",
 "color": "green",
 "word": "the system of classification"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "the system of classification"
 }
+]
 },
 {
 "role": "yellow",
@@ -8288,7 +10316,17 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+},
+{
+"sig": "핵심",
+"word": "system of classification embodied in our language"
 }
+]
 },
 {
 "role": "skip",
@@ -8315,7 +10353,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "skip",
@@ -8366,7 +10410,17 @@
 "color": "green",
 "word": "therefore"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "therefore"
+},
+{
+"sig": "핵심",
+"word": "the core of our language"
+}
+]
 }
 ]
 },
@@ -8398,7 +10452,13 @@
 "name": "역접",
 "color": "red",
 "word": "However"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "However"
 }
+]
 },
 {
 "role": "yellow",
@@ -8417,7 +10477,17 @@
 "color": "red",
 "word": "but"
 },
-"nat": "언론과 이야기하는 것은 메시지를 알리고 호의적 인정을 얻는 이점이 있지만, 오해받고 거듭 해명해야 하며 끝없는 논쟁에 휘말릴 위험을 안는다."
+"nat": "언론과 이야기하는 것은 메시지를 알리고 호의적 인정을 얻는 이점이 있지만, 오해받고 거듭 해명해야 하며 끝없는 논쟁에 휘말릴 위험을 안는다.",
+"tags": [
+{
+"sig": "대조",
+"word": "but"
+},
+{
+"sig": "열거",
+"word": "advantages"
+}
+]
 },
 {
 "role": "yellow",
@@ -8433,7 +10503,17 @@
 "name": "결론",
 "color": "green",
 "word": "Hence"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "Hence"
+},
+{
+"sig": "핵심",
+"word": "highly individualized"
 }
+]
 },
 {
 "role": "skip",
@@ -8474,7 +10554,13 @@
 "color": "red",
 "word": "quite different"
 },
-"nat": "지금은 상황이 사뭇 달라, 많은 과학자가 지구온난화의 중요성 때문에 목소리를 낼 책임을 느끼고 많은 기자도 같은 생각을 공유한다."
+"nat": "지금은 상황이 사뭇 달라, 많은 과학자가 지구온난화의 중요성 때문에 목소리를 낼 책임을 느끼고 많은 기자도 같은 생각을 공유한다.",
+"tags": [
+{
+"sig": "대조",
+"word": "quite different"
+}
+]
 },
 {
 "role": "skip",
@@ -8505,7 +10591,17 @@
 "word": "At the same time"
 },
 "nat": "동시에 어떤 과학자들은 기자와의 대화를 계속 거부해, 연구 시간을 더 확보하고 잘못 인용되는 등 언론 보도에 따르는 불쾌함을 피한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "At the same time"
+},
+{
+"sig": "핵심",
+"word": "resist speaking with reporters"
+}
+]
 }
 ]
 },
@@ -8526,7 +10622,13 @@
 "name": "핵심",
 "color": "green",
 "word": "a bit of a mess"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "a bit of a mess"
 }
+]
 },
 {
 "role": "gray",
@@ -8543,7 +10645,13 @@
 "color": "red",
 "word": "random ball-pit of atoms"
 },
-"nat": "눈에는 투명하고 완벽해 보여도 분자 수준에서 보면 유리는 원자들이 뒤엉킨 무작위한 볼풀에 더 가깝다."
+"nat": "눈에는 투명하고 완벽해 보여도 분자 수준에서 보면 유리는 원자들이 뒤엉킨 무작위한 볼풀에 더 가깝다.",
+"tags": [
+{
+"sig": "대조",
+"word": "random ball-pit of atoms"
+}
+]
 },
 {
 "role": "gray",
@@ -8561,7 +10669,13 @@
 "name": "열거",
 "color": "gray",
 "word": "amorphous solid"
+},
+"tags": [
+{
+"sig": "열거",
+"word": "amorphous solid"
 }
+]
 },
 {
 "role": "skip",
@@ -8637,7 +10751,17 @@
 "color": "purple",
 "word": "paradox"
 },
-"nat": "역설은, 유리가 가장 오래된 인공 물질 중 하나인데도 과학자들이 아직 그것이 왜 그렇게 행동하는지 제대로 이해하지 못한다는 점이다."
+"nat": "역설은, 유리가 가장 오래된 인공 물질 중 하나인데도 과학자들이 아직 그것이 왜 그렇게 행동하는지 제대로 이해하지 못한다는 점이다.",
+"tags": [
+{
+"sig": "강조",
+"word": "paradox"
+},
+{
+"sig": "핵심",
+"word": "struggle to comprehend why glass behaves"
+}
+]
 },
 {
 "role": "skip",
@@ -8665,7 +10789,13 @@
 "color": "green",
 "word": "glass is not a material; it’s a state"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "glass is not a material; it’s a state"
+}
+]
 }
 ]
 },
@@ -8749,7 +10879,13 @@
 "color": "red",
 "word": "While"
 },
-"nat": "대부분의 관리자는 스포츠 팬만큼 열정적인 고객을 갖는 것을 꿈만 꾸지만, 스포츠가 유발하는 감정은 부정적 영향도 미칠 수 있다."
+"nat": "대부분의 관리자는 스포츠 팬만큼 열정적인 고객을 갖는 것을 꿈만 꾸지만, 스포츠가 유발하는 감정은 부정적 영향도 미칠 수 있다.",
+"tags": [
+{
+"sig": "부정전환",
+"word": "negative impact"
+}
+]
 },
 {
 "role": "yellow",
@@ -8767,7 +10903,13 @@
 "name": "근거",
 "color": "orange",
 "word": "strong attachments to the past"
+},
+"tags": [
+{
+"sig": "배경",
+"word": "strong attachments to the past"
 }
+]
 },
 {
 "role": "yellow",
@@ -8784,7 +10926,13 @@
 "color": "orange",
 "word": "As a result"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "인과·정답",
+"word": "increase"
+}
+]
 },
 {
 "role": "gray",
@@ -8822,7 +10970,13 @@
 "color": "green",
 "word": "managed rather than accommodated"
 },
-"nat": "최근 전 세계 도시 교통 전문가들은 도시의 자동차 수요가 수용되기보다 관리되어야 한다는 견해를 대체로 받아들였다."
+"nat": "최근 전 세계 도시 교통 전문가들은 도시의 자동차 수요가 수용되기보다 관리되어야 한다는 견해를 대체로 받아들였다.",
+"tags": [
+{
+"sig": "주제·대조",
+"word": "managed rather than accommodated"
+}
+]
 },
 {
 "role": "gray",
@@ -8868,7 +11022,13 @@
 "name": "인과",
 "color": "orange",
 "word": "As a result"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "persuading people to choose not to use cars"
 }
+]
 },
 {
 "role": "gray",
@@ -8901,7 +11061,13 @@
 "color": "red",
 "word": "However"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접·정답",
+"word": "accommodating"
+}
+]
 },
 {
 "role": "gray",
@@ -8976,7 +11142,13 @@
 "name": "대조",
 "color": "red",
 "word": "On the contrary"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "brought the motors into our lives"
 }
+]
 },
 {
 "role": "gray",
@@ -9044,7 +11216,13 @@
 "name": "주장",
 "color": "purple",
 "word": "must ④adapt"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "adapt to us"
 }
+]
 },
 {
 "role": "gray",
@@ -9075,7 +11253,13 @@
 "word": "The longer"
 },
 "nat": "컴퓨터가 우리를 마법의 신세계로 데려간다고 믿을수록, 사회경제적 혁명의 특징인 그 기술과 삶의 자연스러운 융합을 더 오래 지연하게 될 것이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "정답",
+"word": "maintain"
+}
+]
 }
 ]
 },
@@ -9135,7 +11319,13 @@
 "name": "변화",
 "color": "red",
 "word": "no longer"
+},
+"tags": [
+{
+"sig": "변화",
+"word": "no longer"
 }
+]
 },
 {
 "role": "yellow",
@@ -9151,7 +11341,13 @@
 "name": "부연",
 "color": "gray",
 "word": "little or no connection"
+},
+"tags": [
+{
+"sig": "부연",
+"word": "little or no connection"
 }
+]
 },
 {
 "role": "yellow",
@@ -9171,7 +11367,13 @@
 "word": "This ④countered"
 },
 "nat": "이것은 소비자와 일상 제품 사이의 단절, 제작에 필요한 기술·자원에 대한 이해 상실, 인적·자연 자원에 대한 경시를 만들어냈다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "인과·정답",
+"word": "countered"
+}
+]
 },
 {
 "role": "gray",
@@ -9273,7 +11475,13 @@
 "name": "인과",
 "color": "orange",
 "word": "Consequently"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "remains dependent on external controls"
 }
+]
 },
 {
 "role": "yellow",
@@ -9290,7 +11498,13 @@
 "color": "gray",
 "word": "parents"
 },
-"nat": "따라서 보상·강요·회유로 숙제를 시키는 부모는 보상·회유·강요될 때만 숙제하는 아이를 갖기 쉽다."
+"nat": "따라서 보상·강요·회유로 숙제를 시키는 부모는 보상·회유·강요될 때만 숙제하는 아이를 갖기 쉽다.",
+"tags": [
+{
+"sig": "예시",
+"word": "only when rewarded, cajoled, or forced"
+}
+]
 },
 {
 "role": "yellow",
@@ -9307,7 +11521,13 @@
 "color": "green",
 "word": "④drives"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "정답",
+"word": "drives"
+}
+]
 },
 {
 "role": "gray",
@@ -9346,7 +11566,13 @@
 "color": "green",
 "word": "lower task effort"
 },
-"nat": "심리학 연구들은 경쟁적 유인이 오히려 과제 노력을 낮춘 사례를 보고했으며, 그 초점은 동기 감소의 심리적 토대에 있었다."
+"nat": "심리학 연구들은 경쟁적 유인이 오히려 과제 노력을 낮춘 사례를 보고했으며, 그 초점은 동기 감소의 심리적 토대에 있었다.",
+"tags": [
+{
+"sig": "주제",
+"word": "lower task effort"
+}
+]
 },
 {
 "role": "gray",
@@ -9418,7 +11644,13 @@
 "name": "지시",
 "color": "blue",
 "word": "Feelings of guilt"
+},
+"tags": [
+{
+"sig": "정답",
+"word": "stronger"
 }
+]
 },
 {
 "role": "yellow",
@@ -9436,7 +11668,13 @@
 "word": "Consequences"
 },
 "nat": "이 감정 상태의 결과로 경쟁에서 과제 동기가 낮아지고, 결과의 중요성을 줄이거나 승자의 보상을 나누는 등 더 협력적·이타적인 결과를 선호하게 된다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결과",
+"word": "lower task motivation"
+}
+]
 }
 ]
 },
@@ -9540,7 +11778,13 @@
 "name": "핵심",
 "color": "green",
 "word": "④modesty"
+},
+"tags": [
+{
+"sig": "특징",
+"word": "modesty"
 }
+]
 },
 {
 "role": "yellow",
@@ -9558,7 +11802,13 @@
 "name": "대조",
 "color": "red",
 "word": "In contrast"
+},
+"tags": [
+{
+"sig": "정답",
+"word": "insignificant"
 }
+]
 },
 {
 "role": "yellow",
@@ -9576,7 +11826,13 @@
 "word": "ecologically important"
 },
 "nat": "역류수, 단명 습지, 갈래 물길, 늪은 하드패스 공법에는 다 성가신 것이지만, 소프트패스 공학자들은 이를 생태적으로 중요하다고 본다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거·대조",
+"word": "ecologically important"
+}
+]
 }
 ]
 },
@@ -9613,7 +11869,13 @@
 "name": "역접",
 "color": "red",
 "word": "however"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "however"
 }
+]
 },
 {
 "role": "yellow",
@@ -9630,7 +11892,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "무기 질소 공급은 많은 비콩과 작물의 중상 수준 생산성 유지에 필수적인데, 유기 질소 공급원은 흔히 제한적이거나 무기 질소 비료보다 비싸기 때문이다."
+"nat": "무기 질소 공급은 많은 비콩과 작물의 중상 수준 생산성 유지에 필수적인데, 유기 질소 공급원은 흔히 제한적이거나 무기 질소 비료보다 비싸기 때문이다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -9647,7 +11915,13 @@
 "color": "gray",
 "word": "In addition"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "흐름모순",
+"word": "benefits"
+}
+]
 },
 {
 "role": "skip",
@@ -9738,7 +12012,13 @@
 "name": "결과",
 "color": "orange",
 "word": "As a result"
+},
+"tags": [
+{
+"sig": "결과",
+"word": "As a result"
 }
+]
 },
 {
 "role": "yellow",
@@ -9755,7 +12035,13 @@
 "color": "purple",
 "word": "frustrating"
 },
-"nat": "이는 세상의 복잡성을 이해하려 평생을 바친 과학자에게 특히 좌절스러운데, 그 주제 경험이 고작 몇 분인 사람들에게 연구가 즉석에서 반박당하기 때문이다."
+"nat": "이는 세상의 복잡성을 이해하려 평생을 바친 과학자에게 특히 좌절스러운데, 그 주제 경험이 고작 몇 분인 사람들에게 연구가 즉석에서 반박당하기 때문이다.",
+"tags": [
+{
+"sig": "부정",
+"word": "frustrating"
+}
+]
 },
 {
 "role": "yellow",
@@ -9772,7 +12058,13 @@
 "color": "blue",
 "word": "This frustration"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "흐름모순",
+"word": "diminished"
+}
+]
 }
 ]
 },
@@ -9810,7 +12102,13 @@
 "name": "당위",
 "color": "purple",
 "word": "should be autonomous"
+},
+"tags": [
+{
+"sig": "보완",
+"word": "compensate"
 }
+]
 },
 {
 "role": "skip",
@@ -9840,7 +12138,13 @@
 "color": "orange",
 "word": "when"
 },
-"nat": "실질적으로 처음부터 완전한 자율성을 요구하는 일은 드문데, 경험이 거의 없는 에이전트는 설계자의 도움이 없으면 무작위로 행동할 수밖에 없기 때문이다."
+"nat": "실질적으로 처음부터 완전한 자율성을 요구하는 일은 드문데, 경험이 거의 없는 에이전트는 설계자의 도움이 없으면 무작위로 행동할 수밖에 없기 때문이다.",
+"tags": [
+{
+"sig": "무작위",
+"word": "randomly"
+}
+]
 },
 {
 "role": "skip",
@@ -9869,7 +12173,13 @@
 "color": "green",
 "word": "(C) independent"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "독립",
+"word": "independent"
+}
+]
 },
 {
 "role": "gray",
@@ -9944,7 +12254,13 @@
 "name": "대조",
 "color": "red",
 "word": "necessity and a luxury"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "necessity and a luxury"
 }
+]
 },
 {
 "role": "yellow",
@@ -9960,7 +12276,13 @@
 "name": "부정",
 "color": "purple",
 "word": "not"
+},
+"tags": [
+{
+"sig": "부정",
+"word": "not"
 }
+]
 },
 {
 "role": "yellow",
@@ -9978,7 +12300,13 @@
 "word": "because"
 },
 "nat": "그래서 델리 시장의 판매자는 게임에 매우 높은 값을 직접 부르지 않도록 조심하는데, 구매자가 그 소유를 절대적 필수로 보는 일은 결코 없기 때문이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "흐름모순",
+"word": "low"
+}
+]
 },
 {
 "role": "gray",
@@ -10043,7 +12371,13 @@
 "name": "반전",
 "color": "red",
 "word": "in fact"
+},
+"tags": [
+{
+"sig": "반전",
+"word": "in fact"
 }
+]
 },
 {
 "role": "skip",
@@ -10081,7 +12415,13 @@
 "name": "부정",
 "color": "purple",
 "word": "biases"
+},
+"tags": [
+{
+"sig": "부정",
+"word": "biases"
 }
+]
 },
 {
 "role": "skip",
@@ -10110,7 +12450,13 @@
 "color": "blue",
 "word": "our mental processes"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "흐름모순",
+"word": "rationality"
+}
+]
 }
 ]
 },
@@ -10149,7 +12495,13 @@
 "name": "핵심",
 "color": "green",
 "word": "memorable"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "memorable"
 }
+]
 },
 {
 "role": "skip",
@@ -10208,7 +12560,13 @@
 "name": "핵심",
 "color": "green",
 "word": "distinctive voice"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "distinctive voice"
 }
+]
 },
 {
 "role": "yellow",
@@ -10225,7 +12583,13 @@
 "color": "blue",
 "word": "It’s about"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "흐름모순",
+"word": "temporary"
+}
+]
 }
 ]
 },
@@ -10288,7 +12652,13 @@
 "name": "대조",
 "color": "red",
 "word": "diminished emphasis on dialogue"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "diminished emphasis on dialogue"
 }
+]
 },
 {
 "role": "yellow",
@@ -10306,7 +12676,13 @@
 "name": "예시",
 "color": "gray",
 "word": "For example"
+},
+"tags": [
+{
+"sig": "흐름모순",
+"word": "thick"
 }
+]
 },
 {
 "role": "yellow",
@@ -10324,7 +12700,13 @@
 "word": "but"
 },
 "nat": "뮤지컬에는 춤·동작·행동의 강조가 있는데, 무대에서 실제 공연하면 시간이 오래 걸리지만 대본에 글로 적으면 아주 적은 자리만 차지한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거",
+"word": "very little space"
+}
+]
 }
 ]
 },
@@ -10345,7 +12727,13 @@
 "name": "한정",
 "color": "purple",
 "word": "only"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "only"
 }
+]
 },
 {
 "role": "skip",
@@ -10373,7 +12761,13 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 권리를 이미지·인격을 보호하는 재산 기반 개념에서 사생활과 가족 생활이라는 현대적 개념으로 옮기면, 오히려 그 권리의 한계를 정하기가 더 어려워진다."
+"nat": "그러나 권리를 이미지·인격을 보호하는 재산 기반 개념에서 사생활과 가족 생활이라는 현대적 개념으로 옮기면, 오히려 그 권리의 한계를 정하기가 더 어려워진다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 },
 {
 "role": "yellow",
@@ -10389,7 +12783,13 @@
 "name": "핵심",
 "color": "green",
 "word": "adapt"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "adapt"
 }
+]
 },
 {
 "role": "skip",
@@ -10416,7 +12816,13 @@
 "name": "핵심",
 "color": "green",
 "word": "unobserved"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "unobserved"
 }
+]
 },
 {
 "role": "skip",
@@ -10454,7 +12860,13 @@
 "name": "첨가",
 "color": "gray",
 "word": "Furthermore"
+},
+"tags": [
+{
+"sig": "열거",
+"word": "Furthermore"
 }
+]
 },
 {
 "role": "skip",
@@ -10481,7 +12893,13 @@
 "name": "대조",
 "color": "red",
 "word": "Historically"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "Historically"
 }
+]
 },
 {
 "role": "yellow",
@@ -10500,7 +12918,13 @@
 "color": "red",
 "word": "But"
 },
-"nat": "프라이버시 개념이 사진·신문의 이미지 복제에 대한 대응으로 처음 법적 주목을 받았다면, 데이터 저장·디지털 이미지·인터넷 같은 최근의 기술 발전은 프라이버시에 새로운 위협을 제기한다."
+"nat": "프라이버시 개념이 사진·신문의 이미지 복제에 대한 대응으로 처음 법적 주목을 받았다면, 데이터 저장·디지털 이미지·인터넷 같은 최근의 기술 발전은 프라이버시에 새로운 위협을 제기한다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+}
+]
 },
 {
 "role": "yellow",
@@ -10517,7 +12941,13 @@
 "color": "green",
 "word": "reinterpreted"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "reinterpreted"
+}
+]
 }
 ]
 },
@@ -10541,7 +12971,13 @@
 "color": "red",
 "word": "when in fact"
 },
-"nat": "작가는 종종 등장인물의 얼굴을 묘사한 듯한 인상을 주지만, 실은 독자가 채워 넣을 윤곽만 제공했을 뿐이다."
+"nat": "작가는 종종 등장인물의 얼굴을 묘사한 듯한 인상을 주지만, 실은 독자가 채워 넣을 윤곽만 제공했을 뿐이다.",
+"tags": [
+{
+"sig": "대조",
+"word": "when in fact"
+}
+]
 },
 {
 "role": "skip",
@@ -10552,6 +12988,12 @@
 "ko": [
 "Hermann Broch의 걸작 『몽유병자들』에서 가장 중요한 인물인 Esch에 대해",
 "우리는 그가 큰 이를 가졌다는 것만 알게 된다."
+],
+"tags": [
+{
+"sig": "한정",
+"word": "only"
+}
 ]
 },
 {
@@ -10568,7 +13010,13 @@
 "name": "양보",
 "color": "red",
 "word": "Even so"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "Even so"
 }
+]
 },
 {
 "role": "yellow",
@@ -10610,7 +13058,13 @@
 "name": "강조",
 "color": "purple",
 "word": "Actually"
+},
+"tags": [
+{
+"sig": "강조",
+"word": "Actually"
 }
+]
 },
 {
 "role": "yellow",
@@ -10671,7 +13125,13 @@
 "color": "green",
 "word": "exposed"
 },
-"nat": "속어, 곧 '어휘 혁신'은 늘 도시에서 시작되었는데, 이는 다양한 사람들이 서로 자주 접촉한 결과다."
+"nat": "속어, 곧 '어휘 혁신'은 늘 도시에서 시작되었는데, 이는 다양한 사람들이 서로 자주 접촉한 결과다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "exposed"
+}
+]
 },
 {
 "role": "skip",
@@ -10703,7 +13163,13 @@
 "color": "orange",
 "word": "If"
 },
-"nat": "Bloomfield의 주장처럼 말하는 방식이 '이전에 들은 것의 복합적 결과'라면, 언어 혁신은 가장 많은 사람이 서로 가장 많이 주고받는 곳에서 일어날 것이다."
+"nat": "Bloomfield의 주장처럼 말하는 방식이 '이전에 들은 것의 복합적 결과'라면, 언어 혁신은 가장 많은 사람이 서로 가장 많이 주고받는 곳에서 일어날 것이다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 },
 {
 "role": "yellow",
@@ -10722,7 +13188,13 @@
 "color": "orange",
 "word": "because"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "인과",
+"word": "because"
+}
+]
 },
 {
 "role": "gray",
@@ -10759,7 +13231,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "인간 심리·교육 학계는 동물의 사회적 학습을 '가르침'이라 부르는 데 반대해 왔는데, 가르침은 동물에게서 측정하기 어려운 모델 측의 어떤 수준의 ______를 함축하기 때문이다."
+"nat": "인간 심리·교육 학계는 동물의 사회적 학습을 '가르침'이라 부르는 데 반대해 왔는데, 가르침은 동물에게서 측정하기 어려운 모델 측의 어떤 수준의 ______를 함축하기 때문이다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -10775,7 +13253,13 @@
 "name": "역접",
 "color": "red",
 "word": "Nonetheless"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "Nonetheless"
 }
+]
 },
 {
 "role": "skip",
@@ -10788,6 +13272,12 @@
 "예를 들어, 숙련된 개미들은 '탠덤 러닝'이라는 행동을 한다,",
 "그 안에서 그들은 화학적 흔적을 남기며 초보 개미의 몸에 자기 몸을 접촉하는데,",
 "아마도 새내기의 경로 학습을 돕기 위해서다."
+],
+"tags": [
+{
+"sig": "예시",
+"word": "For example"
+}
 ]
 },
 {
@@ -10823,7 +13313,13 @@
 "color": "green",
 "word": "reason"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "reason"
+}
+]
 }
 ]
 },
@@ -10871,7 +13367,13 @@
 "name": "대조",
 "color": "red",
 "word": "distinguish"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "distinguish"
 }
+]
 },
 {
 "role": "yellow",
@@ -10889,7 +13391,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "gray",
@@ -10905,7 +13413,13 @@
 "name": "양보",
 "color": "red",
 "word": "nonetheless"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "nonetheless"
 }
+]
 },
 {
 "role": "yellow",
@@ -10927,7 +13441,13 @@
 "word": "rather than"
 },
 "nat": "그들은 보존론자들이 하듯 원본을 지키려 최소한으로만 개입하기보다, 산출·수확·사용에 추가 우선순위를 두는 보전론자들을 이따금 비판한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "rather than"
+}
+]
 },
 {
 "role": "skip",
@@ -10986,7 +13506,13 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 음향 디자이너와 달리, 작곡가들은 이런 새 세계를 반영한 독특한 곡을 만들기를 꺼리고, 익숙한 구조와 종지를 지닌 악보를 제시하는 경우가 많다."
+"nat": "그러나 음향 디자이너와 달리, 작곡가들은 이런 새 세계를 반영한 독특한 곡을 만들기를 꺼리고, 익숙한 구조와 종지를 지닌 악보를 제시하는 경우가 많다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+}
+]
 },
 {
 "role": "yellow",
@@ -11002,7 +13528,17 @@
 "name": "양보",
 "color": "red",
 "word": "While"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "While"
+},
+{
+"sig": "강조",
+"word": "in fact"
 }
+]
 },
 {
 "role": "yellow",
@@ -11020,7 +13556,13 @@
 "name": "핵심",
 "color": "green",
 "word": "recognizable context"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "recognizable context"
 }
+]
 },
 {
 "role": "yellow",
@@ -11040,7 +13582,13 @@
 "word": "so that"
 },
 "nat": "이런 익숙함 덕분에 관객은 편안한 자리에 놓이고, 그래서 영화는 관객을 자신의 세계와는 다른, 낯설지만 수용할 만한 상상으로 이끌 수 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결과",
+"word": "so that"
+}
+]
 }
 ]
 },
@@ -11078,7 +13626,13 @@
 "color": "gray",
 "word": "Moreover"
 },
-"nat": "게다가 19세기 말 박물관과 대학이 멀어지고 사물이 세계를 아는 소중한 통로라는 생각이 쇠퇴하면서, 수집은 특히 과학에서 가치 있는 지적 활동으로서의 지위를 잃기 시작했다."
+"nat": "게다가 19세기 말 박물관과 대학이 멀어지고 사물이 세계를 아는 소중한 통로라는 생각이 쇠퇴하면서, 수집은 특히 과학에서 가치 있는 지적 활동으로서의 지위를 잃기 시작했다.",
+"tags": [
+{
+"sig": "첨가",
+"word": "lose its status"
+}
+]
 },
 {
 "role": "yellow",
@@ -11094,7 +13648,13 @@
 "name": "한정",
 "color": "purple",
 "word": "no longer"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "no longer"
 }
+]
 },
 {
 "role": "yellow",
@@ -11111,7 +13671,13 @@
 "color": "purple",
 "word": "mere"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "한정",
+"word": "mere"
+}
+]
 }
 ]
 },
@@ -11137,7 +13703,13 @@
 "color": "green",
 "word": "all the elements of a text"
 },
-"nat": "형식주의 관점에서 문학을 논하려는 비평가는 먼저 텍스트의 모든 요소를 개별적으로 검토하고 그것들이 어떻게 결합해 예술 작품을 이루는지 묻는 세심한 독자여야 한다."
+"nat": "형식주의 관점에서 문학을 논하려는 비평가는 먼저 텍스트의 모든 요소를 개별적으로 검토하고 그것들이 어떻게 결합해 예술 작품을 이루는지 묻는 세심한 독자여야 한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "all the elements of a text"
+}
+]
 },
 {
 "role": "yellow",
@@ -11153,7 +13725,13 @@
 "name": "핵심",
 "color": "green",
 "word": "autonomy"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "autonomy"
 }
+]
 },
 {
 "role": "yellow",
@@ -11173,7 +13751,13 @@
 "word": "Instead of"
 },
 "nat": "예컨대 역사적 시대·작가 전기·문체를 살피는 대신, 그런 독자는 텍스트를 자족적 실체로 보고 그것이 스스로를 드러내게 하는 지배 원리를 찾는다는 전제로 접근한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "대조",
+"word": "Instead of"
+}
+]
 },
 {
 "role": "gray",
@@ -11221,7 +13805,13 @@
 "name": "대조",
 "color": "red",
 "word": "not so much"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "not so much"
 }
+]
 },
 {
 "role": "yellow",
@@ -11237,7 +13827,13 @@
 "name": "핵심",
 "color": "green",
 "word": "holding pattern"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "holding pattern"
 }
+]
 },
 {
 "role": "skip",
@@ -11309,7 +13905,13 @@
 "color": "green",
 "word": "escape the pull"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "escape the pull"
+}
+]
 }
 ]
 },
@@ -11332,7 +13934,13 @@
 "name": "핵심",
 "color": "green",
 "word": "constituted"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "constituted"
 }
+]
 },
 {
 "role": "yellow",
@@ -11350,7 +13958,13 @@
 "name": "정의",
 "color": "blue",
 "word": "Presentational styles"
+},
+"tags": [
+{
+"sig": "정의",
+"word": "Presentational styles"
 }
+]
 },
 {
 "role": "gray",
@@ -11384,7 +13998,13 @@
 "word": "presentational styles"
 },
 "nat": "실제로 현대 뉴스 제작은 로고·사운드바이트·빠른 화면 전환·진행자의 스타성 등, 더 빠른 편집과 화려한 제시 양식에 점점 더 의존하게 되었다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "반복",
+"word": "presentational styles"
+}
+]
 },
 {
 "role": "gray",
@@ -11473,7 +14093,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -11487,7 +14113,13 @@
 "name": "핵심",
 "color": "green",
 "word": "pleasure"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "pleasure"
 }
+]
 },
 {
 "role": "gray",
@@ -11518,7 +14150,13 @@
 "word": "attachments"
 },
 "nat": "팬이 사랑하는 것은 팬덤의 대상 자체라기보다, 그 애정이 만들어 주는 서로에 대한 애착과 구별이라는 강력한 주장이 가능하다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "attachments"
+}
+]
 }
 ]
 },
@@ -11552,7 +14190,13 @@
 "name": "대조",
 "color": "red",
 "word": "analog"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "analog"
 }
+]
 },
 {
 "role": "yellow",
@@ -11568,7 +14212,13 @@
 "name": "핵심",
 "color": "green",
 "word": "medium"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "medium"
 }
+]
 },
 {
 "role": "gray",
@@ -11626,7 +14276,13 @@
 "color": "green",
 "word": "information"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "information"
+}
+]
 }
 ]
 },
@@ -11647,7 +14303,13 @@
 "name": "핵심",
 "color": "green",
 "word": "fosters"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "fosters"
 }
+]
 },
 {
 "role": "gray",
@@ -11687,7 +14349,13 @@
 "name": "전환",
 "color": "red",
 "word": "beyond"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "Engaging"
 }
+]
 },
 {
 "role": "gray",
@@ -11748,7 +14416,13 @@
 "color": "green",
 "word": "whole person"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "whole person"
+}
+]
 }
 ]
 },
@@ -11782,7 +14456,13 @@
 "name": "전환",
 "color": "red",
 "word": "shift"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "private"
 }
+]
 },
 {
 "role": "skip",
@@ -11809,7 +14489,13 @@
 "name": "핵심",
 "color": "green",
 "word": "leisure"
+},
+"tags": [
+{
+"sig": "빈칸",
+"word": "leisure"
 }
+]
 },
 {
 "role": "yellow",
@@ -11829,7 +14515,13 @@
 "word": "home"
 },
 "nat": "더 많은 사람이 넓은 실내와 멋진 마당이 있는 집을 소유하게 되면서, 오락과 여가 시간은 점점 집이나 기껏해야 동네를 중심으로 이루어졌다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "home"
+}
+]
 },
 {
 "role": "gray",
@@ -11896,7 +14588,13 @@
 "name": "전환",
 "color": "red",
 "word": "While"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "goal"
 }
+]
 },
 {
 "role": "gray",
@@ -11928,7 +14626,13 @@
 "color": "green",
 "word": "evaluate"
 },
-"nat": "이는 사람들이 자신과 서로의 상상의 산물을 평가해, 더 키울 만큼 유망한 아이디어는 고르고 성공 가망이 없는 것은 버릴 것을 요구한다."
+"nat": "이는 사람들이 자신과 서로의 상상의 산물을 평가해, 더 키울 만큼 유망한 아이디어는 고르고 성공 가망이 없는 것은 버릴 것을 요구한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "evaluate"
+}
+]
 },
 {
 "role": "yellow",
@@ -11942,7 +14646,13 @@
 "name": "결론",
 "color": "green",
 "word": "Thus"
+},
+"tags": [
+{
+"sig": "빈칸",
+"word": "creative"
 }
+]
 },
 {
 "role": "yellow",
@@ -11959,7 +14669,13 @@
 "color": "green",
 "word": "useless"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "useless"
+}
+]
 }
 ]
 },
@@ -12035,7 +14751,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -12051,7 +14773,13 @@
 "name": "핵심",
 "color": "green",
 "word": "who is doing what"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "who is doing what"
 }
+]
 },
 {
 "role": "yellow",
@@ -12071,7 +14799,13 @@
 "word": "For example"
 },
 "nat": "예컨대 거리의 고양이 사진에 '고양이·거리·쓰레기통·생선 뼈'라고 태그를 달면, 고양이가 거리의 열린 쓰레기통에서 생선 뼈를 꺼내고 있다는 정보는 빠진다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "예시",
+"word": "leaves out"
+}
+]
 }
 ]
 },
@@ -12092,7 +14826,13 @@
 "name": "핵심",
 "color": "green",
 "word": "rarely make reference"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "rarely make reference"
 }
+]
 },
 {
 "role": "gray",
@@ -12133,7 +14873,13 @@
 "color": "red",
 "word": "marked contrast"
 },
-"nat": "이는 30년 전, 컴퓨터를 쓰는 작가들이 비평가들에게 흔히 못마땅하게 '컴퓨터 예술가'로 분류되던 때와는 뚜렷이 대조된다."
+"nat": "이는 30년 전, 컴퓨터를 쓰는 작가들이 비평가들에게 흔히 못마땅하게 '컴퓨터 예술가'로 분류되던 때와는 뚜렷이 대조된다.",
+"tags": [
+{
+"sig": "대조",
+"word": "marked contrast"
+}
+]
 },
 {
 "role": "skip",
@@ -12166,7 +14912,13 @@
 "word": "it now appears"
 },
 "nat": "태블릿·휴대전화가 인터넷 사용에서 PC를 앞지르고 얇은 기기들이 예전의 거대한 컴퓨터와 전혀 닮지 않게 되면서, 이제 '컴퓨터 예술가'는 마침내 ______인 것처럼 보인다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "it now appears"
+}
+]
 }
 ]
 },
@@ -12200,7 +14952,13 @@
 "name": "핵심",
 "color": "green",
 "word": "avoid"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "avoid"
 }
+]
 },
 {
 "role": "skip",
@@ -12227,7 +14985,13 @@
 "name": "핵심",
 "color": "green",
 "word": "liberation"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "liberation"
 }
+]
 },
 {
 "role": "gray",
@@ -12257,7 +15021,13 @@
 "color": "red",
 "word": "But"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "빈칸",
+"word": "stimulus-driven"
+}
+]
 },
 {
 "role": "gray",
@@ -12319,7 +15089,13 @@
 "name": "핵심",
 "color": "green",
 "word": "paradoxical"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "paradoxical"
 }
+]
 },
 {
 "role": "gray",
@@ -12367,7 +15143,13 @@
 "color": "red",
 "word": "Yet"
 },
-"nat": "그러나 스포츠 기자는 독자 수나 급여에 걸맞은 직업적 위상을 누리지 못하며, 스포츠가 '뉴스 미디어의 장난감 부서'라는 진부한 옛말이 그들의 일을 폄하하는 데 여전히 손쉽게 동원된다."
+"nat": "그러나 스포츠 기자는 독자 수나 급여에 걸맞은 직업적 위상을 누리지 못하며, 스포츠가 '뉴스 미디어의 장난감 부서'라는 진부한 옛말이 그들의 일을 폄하하는 데 여전히 손쉽게 동원된다.",
+"tags": [
+{
+"sig": "역접",
+"word": "Yet"
+}
+]
 },
 {
 "role": "yellow",
@@ -12386,7 +15168,13 @@
 "color": "green",
 "word": "paradoxical outcome"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "paradoxical outcome"
+}
+]
 }
 ]
 },
@@ -12410,7 +15198,13 @@
 "color": "blue",
 "word": "self-ignorance"
 },
-"nat": "정보 탐색에 관한 통찰력 있는 연구들은 '전략적 자기 무지', 곧 미래의 자신에게 해로울 쾌락 활동에 지나치게 빠지려 무지를 핑계로 삼는 것을 강조한다."
+"nat": "정보 탐색에 관한 통찰력 있는 연구들은 '전략적 자기 무지', 곧 미래의 자신에게 해로울 쾌락 활동에 지나치게 빠지려 무지를 핑계로 삼는 것을 강조한다.",
+"tags": [
+{
+"sig": "정의",
+"word": "self-ignorance"
+}
+]
 },
 {
 "role": "yellow",
@@ -12431,7 +15225,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "요점은, 현재 편향적인 사람은 죄책감·수치심을 낳거나 그런 활동을 그만두라고 조언할 상충을 드러낼 정보를 피할 수 있다는 것이다."
+"nat": "요점은, 현재 편향적인 사람은 죄책감·수치심을 낳거나 그런 활동을 그만두라고 조언할 상충을 드러낼 정보를 피할 수 있다는 것이다.",
+"tags": [
+{
+"sig": "인과",
+"word": "avoid"
+}
+]
 },
 {
 "role": "skip",
@@ -12472,7 +15272,13 @@
 "color": "green",
 "word": "delay"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "신호",
+"word": "delay"
+}
+]
 },
 {
 "role": "gray",
@@ -12517,7 +15323,13 @@
 "name": "부정",
 "color": "purple",
 "word": "no guarantee"
+},
+"tags": [
+{
+"sig": "부정",
+"word": "no guarantee"
 }
+]
 },
 {
 "role": "yellow",
@@ -12533,7 +15345,13 @@
 "name": "이유",
 "color": "orange",
 "word": "Because"
+},
+"tags": [
+{
+"sig": "이유",
+"word": "profitability"
 }
+]
 },
 {
 "role": "gray",
@@ -12585,7 +15403,13 @@
 "color": "green",
 "word": "community demand"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "community demand"
+}
+]
 }
 ]
 },
@@ -12608,7 +15432,13 @@
 "name": "핵심",
 "color": "green",
 "word": "manipulate the perceptions"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "manipulate the perceptions"
 }
+]
 },
 {
 "role": "yellow",
@@ -12624,7 +15454,13 @@
 "name": "핵심",
 "color": "green",
 "word": "utilize"
+},
+"tags": [
+{
+"sig": "빈칸",
+"word": "utilize"
 }
+]
 },
 {
 "role": "gray",
@@ -12688,7 +15524,13 @@
 "color": "green",
 "word": "forced perspective"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "신호",
+"word": "forced perspective"
+}
+]
 },
 {
 "role": "gray",
@@ -12780,7 +15622,13 @@
 "name": "핵심",
 "color": "green",
 "word": "sustenance"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "sustenance"
 }
+]
 },
 {
 "role": "yellow",
@@ -12798,7 +15646,13 @@
 "name": "핵심",
 "color": "green",
 "word": "value"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "value"
 }
+]
 },
 {
 "role": "gray",
@@ -12837,7 +15691,13 @@
 "color": "green",
 "word": "life-style"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "life-style"
+}
+]
 }
 ]
 },
@@ -12880,7 +15740,13 @@
 "name": "핵심",
 "color": "green",
 "word": "worse"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "worse"
 }
+]
 },
 {
 "role": "gray",
@@ -12919,7 +15785,13 @@
 "name": "결론",
 "color": "green",
 "word": "Thus"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
 }
+]
 },
 {
 "role": "yellow",
@@ -12936,7 +15808,13 @@
 "color": "green",
 "word": "entrench"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "entrench"
+}
+]
 },
 {
 "role": "gray",
@@ -12997,7 +15875,13 @@
 "name": "핵심",
 "color": "green",
 "word": "true or false"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "true or false"
 }
+]
 },
 {
 "role": "gray",
@@ -13027,7 +15911,13 @@
 "color": "gray",
 "word": "making up a few details"
 },
-"nat": "그들이 상황의 어리석음을 과장하거나 세부를 지어내 웃음을 더 끌어내더라도, 우리는 기꺼이 일종의 시적 허용인 코믹 라이선스를 인정해 준다."
+"nat": "그들이 상황의 어리석음을 과장하거나 세부를 지어내 웃음을 더 끌어내더라도, 우리는 기꺼이 일종의 시적 허용인 코믹 라이선스를 인정해 준다.",
+"tags": [
+{
+"sig": "부연",
+"word": "making up a few details"
+}
+]
 },
 {
 "role": "skip",
@@ -13059,7 +15949,13 @@
 "color": "green",
 "word": "not to provide"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "not to provide"
+}
+]
 }
 ]
 },
@@ -13115,7 +16011,13 @@
 "name": "핵심",
 "color": "green",
 "word": "internal specialization"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "internal specialization"
 }
+]
 },
 {
 "role": "skip",
@@ -13143,7 +16045,13 @@
 "color": "green",
 "word": "We keep"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "We keep"
+}
+]
 },
 {
 "role": "gray",
@@ -13205,7 +16113,13 @@
 "color": "red",
 "word": "formal records"
 },
-"nat": "노동 공유 집단은 어느 가족이 얼마나 넣고 가져가는지 아무도 공식 기록을 남기지 않기에 이른바 '도덕 경제'의 일부다."
+"nat": "노동 공유 집단은 어느 가족이 얼마나 넣고 가져가는지 아무도 공식 기록을 남기지 않기에 이른바 '도덕 경제'의 일부다.",
+"tags": [
+{
+"sig": "대조",
+"word": "formal records"
+}
+]
 },
 {
 "role": "yellow",
@@ -13219,7 +16133,13 @@
 "name": "전환",
 "color": "red",
 "word": "Instead"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "Instead"
 }
+]
 },
 {
 "role": "yellow",
@@ -13236,7 +16156,13 @@
 "color": "orange",
 "word": "moral community"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거",
+"word": "moral community"
+}
+]
 },
 {
 "role": "gray",
@@ -13326,7 +16252,13 @@
 "color": "green",
 "word": "nonverbal behaviors"
 },
-"nat": "매우 자주 우리는 어조·음량 변화, 눈맞춤, 표정, 몸짓 같은 비언어적 행동을 관찰해 화자의 의미를 이해할 수 있다."
+"nat": "매우 자주 우리는 어조·음량 변화, 눈맞춤, 표정, 몸짓 같은 비언어적 행동을 관찰해 화자의 의미를 이해할 수 있다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "nonverbal behaviors"
+}
+]
 },
 {
 "role": "gray",
@@ -13383,7 +16315,13 @@
 "color": "orange",
 "word": "no mortal can keep a secret"
 },
-"nat": "Freud조차 보고 들을 줄 아는 이는 누구도 비밀을 지킬 수 없음을 알게 되며, 입이 침묵해도 손끝이 지껄이고 온몸의 모공에서 속내가 새어 나온다고 했다."
+"nat": "Freud조차 보고 들을 줄 아는 이는 누구도 비밀을 지킬 수 없음을 알게 되며, 입이 침묵해도 손끝이 지껄이고 온몸의 모공에서 속내가 새어 나온다고 했다.",
+"tags": [
+{
+"sig": "인용근거",
+"word": "no mortal can keep a secret"
+}
+]
 },
 {
 "role": "yellow",
@@ -13400,7 +16338,13 @@
 "color": "green",
 "word": "difficult for most people"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "difficult for most people"
+}
+]
 }
 ]
 },
@@ -13460,7 +16404,13 @@
 "color": "green",
 "word": "Thus"
 },
-"nat": "따라서 읽기는, 삽화나 그림을 부속물로 두고 아이들이 인쇄된 텍스트에만 주목하던 때보다 더 복잡한 해석 행위가 된다."
+"nat": "따라서 읽기는, 삽화나 그림을 부속물로 두고 아이들이 인쇄된 텍스트에만 주목하던 때보다 더 복잡한 해석 행위가 된다.",
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
+}
+]
 },
 {
 "role": "gray",
@@ -13485,7 +16435,13 @@
 "name": "한정",
 "color": "purple",
 "word": "not simply"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "not simply"
 }
+]
 },
 {
 "role": "yellow",
@@ -13502,7 +16458,13 @@
 "color": "orange",
 "word": "not what it means"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거",
+"word": "not what it means"
+}
+]
 }
 ]
 },
@@ -13567,7 +16529,13 @@
 "name": "역접",
 "color": "red",
 "word": "however"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "however"
 }
+]
 },
 {
 "role": "yellow",
@@ -13594,7 +16562,13 @@
 "name": "결론",
 "color": "green",
 "word": "In the last analysis"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "In the last analysis"
 }
+]
 },
 {
 "role": "yellow",
@@ -13614,7 +16588,13 @@
 "word": "courageously"
 },
 "nat": "그것을 통해 그는, 어떤 원천에서 나왔든 자신의 미적 판단뿐 아니라 ___라는 확신까지도 용감하게 확언한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "강조",
+"word": "courageously"
+}
+]
 }
 ]
 },
@@ -13698,7 +16678,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "yellow",
@@ -13714,7 +16700,13 @@
 "name": "부연",
 "color": "gray",
 "word": "locked in"
+},
+"tags": [
+{
+"sig": "부연",
+"word": "locked in"
 }
+]
 },
 {
 "role": "yellow",
@@ -13731,7 +16723,13 @@
 "color": "orange",
 "word": "too long"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "조건",
+"word": "too long"
+}
+]
 },
 {
 "role": "gray",
@@ -13791,7 +16789,13 @@
 "color": "orange",
 "word": "because"
 },
-"nat": "『국가』의 논의가 보여 주듯, 감각은 오류와 착각에 빠지기 쉽기 때문에 지각은 본질적으로 믿을 수 없고 오해를 낳는다."
+"nat": "『국가』의 논의가 보여 주듯, 감각은 오류와 착각에 빠지기 쉽기 때문에 지각은 본질적으로 믿을 수 없고 오해를 낳는다.",
+"tags": [
+{
+"sig": "이유",
+"word": "because"
+}
+]
 },
 {
 "role": "yellow",
@@ -13807,7 +16811,13 @@
 "name": "한정",
 "color": "purple",
 "word": "Only"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "Only"
 }
+]
 },
 {
 "role": "skip",
@@ -13823,7 +16833,13 @@
 "name": "예시",
 "color": "gray",
 "word": "For instance"
+},
+"tags": [
+{
+"sig": "예시",
+"word": "For instance"
 }
+]
 },
 {
 "role": "gray",
@@ -13842,7 +16858,13 @@
 "color": "red",
 "word": "Yet"
 },
-"nat": "그러나 논리적 추론을 적용하면, 그 형상은 기하학적 원근법의 법칙을 따르기에 단지 작아 보일 뿐임이 드러난다."
+"nat": "그러나 논리적 추론을 적용하면, 그 형상은 기하학적 원근법의 법칙을 따르기에 단지 작아 보일 뿐임이 드러난다.",
+"tags": [
+{
+"sig": "역접",
+"word": "Yet"
+}
+]
 },
 {
 "role": "yellow",
@@ -13862,7 +16884,13 @@
 "word": "Nevertheless"
 },
 "nat": "그럼에도 원근법적 보정을 거쳐 이성이 지각은 오해를 낳는다고 결론지은 뒤에도 그 형상은 여전히 작아 보이며, 이 문제의 진실은 ___ 드러난다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "Nevertheless"
+}
+]
 }
 ]
 },
@@ -13885,7 +16913,13 @@
 "name": "역접",
 "color": "red",
 "word": "but"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "but"
 }
+]
 },
 {
 "role": "yellow",
@@ -13901,7 +16935,13 @@
 "name": "양보",
 "color": "red",
 "word": "even if"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "even if; too"
 }
+]
 },
 {
 "role": "gray",
@@ -13918,7 +16958,13 @@
 "color": "gray",
 "word": "such as"
 },
-"nat": "이 과정의 생태 문제는 아이슬란드, 남아프리카, 호주 등 여러 곳에서 보고되어 왔지만, 그 전형적 사례는 스코틀랜드와 잉글랜드 북부에서 나온다."
+"nat": "이 과정의 생태 문제는 아이슬란드, 남아프리카, 호주 등 여러 곳에서 보고되어 왔지만, 그 전형적 사례는 스코틀랜드와 잉글랜드 북부에서 나온다.",
+"tags": [
+{
+"sig": "예시",
+"word": "such as"
+}
+]
 },
 {
 "role": "gray",
@@ -13943,7 +16989,13 @@
 "그리고 산림위원회의 노력 대부분은 장소를 향한다",
 "양과 그 목자들이 그 섬에 오기 전에 숲이었던."
 ],
-"nat": "영국에서 숲을 늘리는 것은 분명 바람직한 목표이며, 산림위원회의 노력 대부분은 양과 목자들이 그 섬에 오기 전에 숲이었던 곳을 향한다."
+"nat": "영국에서 숲을 늘리는 것은 분명 바람직한 목표이며, 산림위원회의 노력 대부분은 양과 목자들이 그 섬에 오기 전에 숲이었던 곳을 향한다.",
+"tags": [
+{
+"sig": "양보",
+"word": "certainly"
+}
+]
 },
 {
 "role": "yellow",
@@ -13965,7 +17017,13 @@
 "word": "However"
 },
 "nat": "그러나 생태학자들은 그 작업이 과거 숲이었던 곳에 국한되지 않고, 조성된 숲이 대개 외래종으로 이루어지며, 이 활동으로 위협받는 야생 생물에 희귀종이 많다는 이유로 위원회의 작업에 자주 불평한다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "However; because"
+}
+]
 }
 ]
 },
@@ -13986,7 +17044,13 @@
 "name": "주제",
 "color": "green",
 "word": "collective choice"
+},
+"tags": [
+{
+"sig": "주제",
+"word": "collective choice"
 }
+]
 },
 {
 "role": "yellow",
@@ -14007,7 +17071,17 @@
 "color": "purple",
 "word": "no deterministic way"
 },
-"nat": "예컨대 두 대안 a와 b가 있고 한 사람은 a를, 다른 사람은 b를 선호하는 두 행위자가 있다면, 익명성과 중립성이라는 두 공정성 조건 중 하나를 어기지 않고서 단일 대안을 고를 결정론적 방법은 없다."
+"nat": "예컨대 두 대안 a와 b가 있고 한 사람은 a를, 다른 사람은 b를 선호하는 두 행위자가 있다면, 익명성과 중립성이라는 두 공정성 조건 중 하나를 어기지 않고서 단일 대안을 고를 결정론적 방법은 없다.",
+"tags": [
+{
+"sig": "예시",
+"word": "For example"
+},
+{
+"sig": "부정",
+"word": "no deterministic way"
+}
+]
 },
 {
 "role": "skip",
@@ -14018,6 +17092,12 @@
 "ko": [
 "익명성은 집단적 선택이 행위자들의 정체성과 무관해야 한다고 요구한다",
 "반면 중립성은 대안들에 대한 공정성을 요구한다."
+],
+"tags": [
+{
+"sig": "당위",
+"word": "ought to"
+}
 ]
 },
 {
@@ -14034,7 +17114,17 @@
 "name": "결론",
 "color": "green",
 "word": "hence"
+},
+"tags": [
+{
+"sig": "결론",
+"word": "hence"
+},
+{
+"sig": "당위",
+"word": "necessity"
 }
+]
 },
 {
 "role": "yellow",
@@ -14054,7 +17144,17 @@
 "word": "Indeed"
 },
 "nat": "실제로 다수결처럼 가장 흔한 ‘결정론적’ 사회적 선택 함수조차 동점이 없을 때에만 결정론적이며, 그 동점은 대개 제비뽑기로 해결된다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "강조",
+"word": "Indeed"
+},
+{
+"sig": "조건",
+"word": "as long as"
+}
+]
 },
 {
 "role": "skip",
@@ -14100,7 +17200,13 @@
 "name": "양보",
 "color": "red",
 "word": "Despite"
+},
+"tags": [
+{
+"sig": "양보",
+"word": "Despite"
 }
+]
 },
 {
 "role": "skip",
@@ -14144,7 +17250,17 @@
 "color": "red",
 "word": "However"
 },
-"nat": "그러나 이웃과 낯선 새에 대한 이 반응 차이는, 그 이웃의 노래가 이웃 영역과 실험 대상 새의 영역 사이 경계에 놓인 확성기로 재생될 때에만 나타났다."
+"nat": "그러나 이웃과 낯선 새에 대한 이 반응 차이는, 그 이웃의 노래가 이웃 영역과 실험 대상 새의 영역 사이 경계에 놓인 확성기로 재생될 때에만 나타났다.",
+"tags": [
+{
+"sig": "역접",
+"word": "However"
+},
+{
+"sig": "한정",
+"word": "only"
+}
+]
 },
 {
 "role": "yellow",
@@ -14163,7 +17279,13 @@
 "color": "orange",
 "word": "If"
 },
-"nat": "같은 이웃의 노래라도 실험 대상의 영역을 또 다른 이웃과 나누는 다른 경계에서 재생되면, 그것은 낯선 새의 울음으로 취급되었다."
+"nat": "같은 이웃의 노래라도 실험 대상의 영역을 또 다른 이웃과 나누는 다른 경계에서 재생되면, 그것은 낯선 새의 울음으로 취급되었다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 },
 {
 "role": "yellow",
@@ -14214,7 +17336,13 @@
 "color": "green",
 "word": "changing their own behavior"
 },
-"nat": "댄스플로어에서의 상호작용 연구는, 국소 정보에 반응해 스스로 행동을 바꾸는 개체가 어떻게 ___하는지 보여 주는 여러 사례를 우리에게 제공한다."
+"nat": "댄스플로어에서의 상호작용 연구는, 국소 정보에 반응해 스스로 행동을 바꾸는 개체가 어떻게 ___하는지 보여 주는 여러 사례를 우리에게 제공한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "changing their own behavior"
+}
+]
 },
 {
 "role": "skip",
@@ -14270,7 +17398,13 @@
 "color": "green",
 "word": "correlated"
 },
-"nat": "수용 벌은 자신에게든 다른 벌과 애벌레에게 전하기 위해서든 필요할 때만 물을 받으므로, 이 하역 시간은 군집 전체의 물 수요와 상관관계를 갖는다."
+"nat": "수용 벌은 자신에게든 다른 벌과 애벌레에게 전하기 위해서든 필요할 때만 물을 받으므로, 이 하역 시간은 군집 전체의 물 수요와 상관관계를 갖는다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "correlated"
+}
+]
 },
 {
 "role": "yellow",
@@ -14287,7 +17421,13 @@
 "color": "green",
 "word": "Thus"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Thus"
+}
+]
 }
 ]
 },
@@ -14306,7 +17446,13 @@
 "name": "도입",
 "color": "green",
 "word": "Prior to photography"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "Prior to"
 }
+]
 },
 {
 "role": "yellow",
@@ -14325,7 +17471,13 @@
 "color": "green",
 "word": "difficult to transport"
 },
-"nat": "화가들은 늘 특정 장소를 그 ‘거처’에서 끄집어내 다른 곳으로 옮겨 왔지만, 그림은 제작에 시간이 많이 들고 운반이 비교적 어려우며 세상에 하나뿐이었다."
+"nat": "화가들은 늘 특정 장소를 그 ‘거처’에서 끄집어내 다른 곳으로 옮겨 왔지만, 그림은 제작에 시간이 많이 들고 운반이 비교적 어려우며 세상에 하나뿐이었다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "difficult to transport"
+}
+]
 },
 {
 "role": "gray",
@@ -14370,7 +17522,13 @@
 "color": "green",
 "word": "circulation of places"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "circulation of places"
+}
+]
 }
 ]
 },
@@ -14402,7 +17560,13 @@
 "name": "핵심",
 "color": "green",
 "word": "Earth’s surface"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "Earth’s surface"
 }
+]
 },
 {
 "role": "skip",
@@ -14429,7 +17593,13 @@
 "name": "핵심",
 "color": "green",
 "word": "spatial arrangements"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "spatial arrangements"
 }
+]
 },
 {
 "role": "skip",
@@ -14460,7 +17630,13 @@
 "word": "without"
 },
 "nat": "규모를 더 키워 보면, ___에 대한 어느 정도의 인식 없이는 합리적인 사업·정책 판단을 내리거나, 사건을 이해하거나, 지구상 삶을 형성하는 근본적인 힘을 파악하기 어렵다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "한정",
+"word": "without some awareness"
+}
+]
 },
 {
 "role": "skip",
@@ -14552,7 +17728,13 @@
 "name": "대조",
 "color": "red",
 "word": "on the other hand"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "marriage"
 }
+]
 },
 {
 "role": "gray",
@@ -14582,7 +17764,13 @@
 "name": "핵심",
 "color": "green",
 "word": "opposite"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "opposite"
 }
+]
 },
 {
 "role": "yellow",
@@ -14601,7 +17789,13 @@
 "color": "green",
 "word": "dependent"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "dependent"
+}
+]
 }
 ]
 },
@@ -14665,7 +17859,13 @@
 "color": "green",
 "word": "small similarity"
 },
-"nat": "그런 경우, 지각한 대상과 보리라 기대하는 것 사이의 작은 유사성만으로도 그 지각 대상을 기대하던 것으로 잘못 알아볼 수 있다."
+"nat": "그런 경우, 지각한 대상과 보리라 기대하는 것 사이의 작은 유사성만으로도 그 지각 대상을 기대하던 것으로 잘못 알아볼 수 있다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "small similarity"
+}
+]
 },
 {
 "role": "gray",
@@ -14690,7 +17890,13 @@
 "name": "비례",
 "color": "orange",
 "word": "more affected"
+},
+"tags": [
+{
+"sig": "비례",
+"word": "more affected"
 }
+]
 },
 {
 "role": "gray",
@@ -14718,7 +17924,13 @@
 "color": "green",
 "word": "emotional investment"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "emotional investment"
+}
+]
 }
 ]
 },
@@ -14756,7 +17968,13 @@
 "color": "purple",
 "word": "must"
 },
-"nat": "예를 들어 그녀는, 자원의 사용과 관리 규칙의 영향을 받는 행위자들이 ___할 권리를 반드시 가져야 한다고 지적했다."
+"nat": "예를 들어 그녀는, 자원의 사용과 관리 규칙의 영향을 받는 행위자들이 ___할 권리를 반드시 가져야 한다고 지적했다.",
+"tags": [
+{
+"sig": "빈칸",
+"word": "right to"
+}
+]
 },
 {
 "role": "skip",
@@ -14800,7 +18018,13 @@
 "color": "green",
 "word": "democratic"
 },
-"nat": "Ostrom은 또한 민주적 의사결정 과정의 중요성과, 모든 사용자가 자기들끼리 문제와 갈등을 해결할 지역 포럼에 접근할 수 있어야 함을 강조한다."
+"nat": "Ostrom은 또한 민주적 의사결정 과정의 중요성과, 모든 사용자가 자기들끼리 문제와 갈등을 해결할 지역 포럼에 접근할 수 있어야 함을 강조한다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "democratic"
+}
+]
 },
 {
 "role": "yellow",
@@ -14819,7 +18043,13 @@
 "color": "green",
 "word": "devise"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "devise"
+}
+]
 }
 ]
 },
@@ -14883,7 +18113,13 @@
 "color": "red",
 "word": "celebrated"
 },
-"nat": "19세기 후반부터 예술적인 남성 오트쿠튀르 디자이너가 크게 성공하며 떠오르자, 칭송받는 존재는 디자이너가 되었고 고객은 그의 영감 어린 관심으로 격상되었다."
+"nat": "19세기 후반부터 예술적인 남성 오트쿠튀르 디자이너가 크게 성공하며 떠오르자, 칭송받는 존재는 디자이너가 되었고 고객은 그의 영감 어린 관심으로 격상되었다.",
+"tags": [
+{
+"sig": "전환",
+"word": "celebrated"
+}
+]
 },
 {
 "role": "yellow",
@@ -14899,7 +18135,13 @@
 "name": "핵심",
 "color": "green",
 "word": "creator"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "creator"
 }
+]
 },
 {
 "role": "yellow",
@@ -14918,7 +18160,13 @@
 "color": "red",
 "word": "Instead of"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "빈칸",
+"word": "craft"
+}
+]
 }
 ]
 },
@@ -14956,7 +18204,13 @@
 "color": "red",
 "word": "But"
 },
-"nat": "그러나 역사적 서술은 표상의 증식을 중시하며, 따라서 하나의 표상을 정교화하는 것이 아니라 갈수록 더 다양한 표상들을 생산하는 데 방점을 둔다."
+"nat": "그러나 역사적 서술은 표상의 증식을 중시하며, 따라서 하나의 표상을 정교화하는 것이 아니라 갈수록 더 다양한 표상들을 생산하는 데 방점을 둔다.",
+"tags": [
+{
+"sig": "역접",
+"word": "But"
+}
+]
 },
 {
 "role": "gray",
@@ -14989,7 +18243,13 @@
 "color": "green",
 "word": "therefore"
 },
-"nat": "따라서 그것은 이전 표상들의 옳고 그름을 세심히 분석해 진리에 이르기보다는, 새롭고 대안적인 표상들을 생산함으로써 확정성과 정밀성이라는 이전의 환상을 벗겨내는 것을 목표로 한다."
+"nat": "따라서 그것은 이전 표상들의 옳고 그름을 세심히 분석해 진리에 이르기보다는, 새롭고 대안적인 표상들을 생산함으로써 확정성과 정밀성이라는 이전의 환상을 벗겨내는 것을 목표로 한다.",
+"tags": [
+{
+"sig": "결론",
+"word": "therefore"
+}
+]
 },
 {
 "role": "yellow",
@@ -15009,7 +18269,13 @@
 "word": "questioning"
 },
 "nat": "그리고 이 관점에서 보면, 역사적 통찰의 발전은 외부인에게 진리에 점점 더 다가가는 것이 아니라, ___에 대한 끊임없는 의문 제기, 즉 갈수록 더 큰 혼란을 만들어내는 과정으로 보일 수 있다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "questioning"
+}
+]
 }
 ]
 },
@@ -15033,7 +18299,13 @@
 "color": "green",
 "word": "wilderness"
 },
-"nat": "서로 다른 학문이 자서전적 기억을 어떻게 이해하려 하는지 설명하면서, 문학 비평가 Daniel Albright는 “심리학은 정원이고 문학은 야생이다”라고 말했다."
+"nat": "서로 다른 학문이 자서전적 기억을 어떻게 이해하려 하는지 설명하면서, 문학 비평가 Daniel Albright는 “심리학은 정원이고 문학은 야생이다”라고 말했다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "wilderness"
+}
+]
 },
 {
 "role": "gray",
@@ -15088,7 +18360,13 @@
 "color": "orange",
 "word": "If"
 },
-"nat": "만약 우리 심리학자들이 아이들 마음의 질서정연한 패턴과 규칙성을 밝히는 데 너무 몰두하면, 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이의 더 자유분방하고 상상력 넘치는 말하기·사고 방식을 놓칠 수 있다."
+"nat": "만약 우리 심리학자들이 아이들 마음의 질서정연한 패턴과 규칙성을 밝히는 데 너무 몰두하면, 우리 주제의 본질적이고 널리 퍼진 특성, 즉 아이의 더 자유분방하고 상상력 넘치는 말하기·사고 방식을 놓칠 수 있다.",
+"tags": [
+{
+"sig": "조건",
+"word": "If"
+}
+]
 },
 {
 "role": "gray",
@@ -15119,7 +18397,13 @@
 "color": "purple",
 "word": "may have to"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "주장",
+"word": "may have to"
+}
+]
 }
 ]
 },
@@ -15140,7 +18424,13 @@
 "name": "인과",
 "color": "orange",
 "word": "Because"
+},
+"tags": [
+{
+"sig": "인과",
+"word": "Because"
 }
+]
 },
 {
 "role": "gray",
@@ -15168,7 +18458,13 @@
 "color": "green",
 "word": "mental institutions"
 },
-"nat": "이런 식으로 주관적 경험은 외부 환경으로 확장되고 그 반대도 성립하며, 제도적 법률이나 장비 같은 규율적 대상을 지닌 외부 환경은 ___하는 정신적 제도가 된다."
+"nat": "이런 식으로 주관적 경험은 외부 환경으로 확장되고 그 반대도 성립하며, 제도적 법률이나 장비 같은 규율적 대상을 지닌 외부 환경은 ___하는 정신적 제도가 된다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "mental institutions"
+}
+]
 },
 {
 "role": "gray",
@@ -15197,7 +18493,13 @@
 "word": "influenced"
 },
 "nat": "즉, 우리가 아무리 냉철한 의료 합리주의자나 실무적인 관료, 데이터 기반 과학자로 훈련받았더라도, 연구에 따르면 우리의 결정은 다양한 제도적 관행에 영향을 받는다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거",
+"word": "influenced"
+}
+]
 },
 {
 "role": "gray",
@@ -15235,7 +18537,13 @@
 "color": "green",
 "word": "consume my attention"
 },
-"nat": "우리는 잘 알려진 대로 주목 경제의 시대에 살고 있으며, 그 시대에 세계에서 가장 크고 수익성 높은 기업들은 나의 주목을 소비하는 기업들이다."
+"nat": "우리는 잘 알려진 대로 주목 경제의 시대에 살고 있으며, 그 시대에 세계에서 가장 크고 수익성 높은 기업들은 나의 주목을 소비하는 기업들이다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "consume my attention"
+}
+]
 },
 {
 "role": "yellow",
@@ -15251,7 +18559,13 @@
 "name": "근거",
 "color": "orange",
 "word": "selling them to someone else"
+},
+"tags": [
+{
+"sig": "근거",
+"word": "selling them to someone else"
 }
+]
 },
 {
 "role": "yellow",
@@ -15271,7 +18585,13 @@
 "word": "but"
 },
 "nat": "그토록 많은 흥미롭고 유용한 소프트웨어를 공짜로 쓸 수 있다는 것이 마법처럼 보일 수 있지만, 공짜처럼 보이는 것에 대해 누가 값을 치르는지 보이지 않는다면 ___라는 것이 이제는 상식이다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "gray",
@@ -15319,7 +18639,13 @@
 "name": "핵심",
 "color": "green",
 "word": "only the next step"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "only the next step"
 }
+]
 },
 {
 "role": "skip",
@@ -15376,7 +18702,13 @@
 "name": "전환",
 "color": "red",
 "word": "Decades later"
+},
+"tags": [
+{
+"sig": "전환",
+"word": "Decades later"
 }
+]
 },
 {
 "role": "yellow",
@@ -15391,7 +18723,13 @@
 "color": "green",
 "word": "Now"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "Now"
+}
+]
 },
 {
 "role": "skip",
@@ -15468,7 +18806,13 @@
 "color": "red",
 "word": "While"
 },
-"nat": "이것이 사실일지라도, 나는 여기서 지각의 상당히 기본적인 측면, 특히 박자와 조성에 관심을 두는데, 나는 그것들이 청자들 사이에서 비교적 일관적이라고 믿는다."
+"nat": "이것이 사실일지라도, 나는 여기서 지각의 상당히 기본적인 측면, 특히 박자와 조성에 관심을 두는데, 나는 그것들이 청자들 사이에서 비교적 일관적이라고 믿는다.",
+"tags": [
+{
+"sig": "역접",
+"word": "relatively consistent across listeners"
+}
+]
 },
 {
 "role": "gray",
@@ -15498,7 +18842,13 @@
 "color": "red",
 "word": "occasional disagreements"
 },
-"nat": "이것이 이 점에서 완전한 획일성이 존재한다는 말은 아니다. 곡의 조성이나 박자를 어떻게 듣는지에 대해서는 심지어 전문가들 사이에서도 이따금 이견이 있을 수 있다."
+"nat": "이것이 이 점에서 완전한 획일성이 존재한다는 말은 아니다. 곡의 조성이나 박자를 어떻게 듣는지에 대해서는 심지어 전문가들 사이에서도 이따금 이견이 있을 수 있다.",
+"tags": [
+{
+"sig": "양보",
+"word": "occasional disagreements"
+}
+]
 },
 {
 "role": "yellow",
@@ -15513,7 +18863,13 @@
 "color": "green",
 "word": "believe"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "But"
+}
+]
 }
 ]
 },
@@ -15532,7 +18888,13 @@
 "name": "핵심",
 "color": "green",
 "word": "Centralized, formal rules"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "Centralized, formal rules"
 }
+]
 },
 {
 "role": "gray",
@@ -15559,7 +18921,13 @@
 "name": "핵심",
 "color": "green",
 "word": "create the very practice"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "create the very practice"
 }
+]
 },
 {
 "role": "skip",
@@ -15612,7 +18980,13 @@
 "color": "red",
 "word": "but rules also create the roles"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "역접",
+"word": "but rules also create the roles"
+}
+]
 },
 {
 "role": "skip",
@@ -15658,7 +19032,13 @@
 "color": "red",
 "word": "rather than"
 },
-"nat": "대다수 제조사는 여전히 제품·서비스 개발이 늘 제조사의 몫이며, 자신의 일은 때때로 ___한 혁신을 찾아 상업화하는 것이 아니라 늘 필요를 찾아 그것을 채우는 것이라고 생각한다."
+"nat": "대다수 제조사는 여전히 제품·서비스 개발이 늘 제조사의 몫이며, 자신의 일은 때때로 ___한 혁신을 찾아 상업화하는 것이 아니라 늘 필요를 찾아 그것을 채우는 것이라고 생각한다.",
+"tags": [
+{
+"sig": "대조",
+"word": "rather than"
+}
+]
 },
 {
 "role": "gray",
@@ -15688,7 +19068,13 @@
 "name": "핵심",
 "color": "green",
 "word": "rejected"
+},
+"tags": [
+{
+"sig": "신호",
+"word": "rejected"
 }
+]
 },
 {
 "role": "yellow",
@@ -15708,7 +19094,13 @@
 "word": "actual source"
 },
 "nat": "실제로 선도 사용자의 혁신이 기업의 제품군에 들어올 때 ― 그것은 많은 기업에서 여러 주요 혁신의 실제 원천으로 밝혀졌음에도 ― 대개 시간이 지체된 채 비정상적이고 비체계적인 경로로 들어온다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "반전",
+"word": "actual source"
+}
+]
 }
 ]
 },
@@ -15757,7 +19149,13 @@
 "color": "red",
 "word": "however"
 },
-"nat": "그러나 기후변화의 경우, 시간을 과거·현재·미래로 뚜렷이 나누는 것은 지독히 오해를 낳아 왔고, 무엇보다 지금 살아 있는 우리의 책임 범위를 시야에서 가려 왔다."
+"nat": "그러나 기후변화의 경우, 시간을 과거·현재·미래로 뚜렷이 나누는 것은 지독히 오해를 낳아 왔고, 무엇보다 지금 살아 있는 우리의 책임 범위를 시야에서 가려 왔다.",
+"tags": [
+{
+"sig": "역접",
+"word": "however"
+}
+]
 },
 {
 "role": "gray",
@@ -15787,7 +19185,13 @@
 "name": "대조",
 "color": "red",
 "word": "not that"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "not that"
 }
+]
 },
 {
 "role": "yellow",
@@ -15804,7 +19208,13 @@
 "color": "green",
 "word": "obscured"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "obscured"
+}
+]
 }
 ]
 },
@@ -15823,7 +19233,13 @@
 "name": "핵심",
 "color": "green",
 "word": "cultural"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "cultural"
 }
+]
 },
 {
 "role": "gray",
@@ -15890,7 +19306,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "역접",
+"word": "But"
 }
+]
 },
 {
 "role": "yellow",
@@ -15907,7 +19329,13 @@
 "color": "green",
 "word": "regulate"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "regulate"
+}
+]
 }
 ]
 },
@@ -15926,7 +19354,13 @@
 "name": "핵심",
 "color": "green",
 "word": "complicated"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "complicated"
 }
+]
 },
 {
 "role": "gray",
@@ -15959,7 +19393,13 @@
 "color": "green",
 "word": "mileage"
 },
-"nat": "Beethoven의 유명한 5번 교향곡은, 고전 작곡가가 겨우 몇 개의 음표와 단순한 리듬 두드림에서 얼마나 많은 것을 뽑아낼 수 있는지를 보여 주는 특출난 예다."
+"nat": "Beethoven의 유명한 5번 교향곡은, 고전 작곡가가 겨우 몇 개의 음표와 단순한 리듬 두드림에서 얼마나 많은 것을 뽑아낼 수 있는지를 보여 주는 특출난 예다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "mileage"
+}
+]
 },
 {
 "role": "yellow",
@@ -15979,7 +19419,13 @@
 "word": "throughout"
 },
 "nat": "누구나 어디선가 들어본 그 서두의 ‘다-다-다-둠’은, 마치 하나의 모티프나 연결의 실처럼 첫 악장뿐 아니라 나머지 세 악장 전체에 걸쳐 ___.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "반복",
+"word": "throughout"
+}
+]
 },
 {
 "role": "gray",
@@ -16039,7 +19485,13 @@
 "name": "핵심",
 "color": "green",
 "word": "mixed"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "mixed"
 }
+]
 },
 {
 "role": "gray",
@@ -16067,7 +19519,13 @@
 "name": "핵심",
 "color": "green",
 "word": "striking"
+},
+"tags": [
+{
+"sig": "핵심",
+"word": "striking"
 }
+]
 },
 {
 "role": "yellow",
@@ -16084,7 +19542,13 @@
 "color": "green",
 "word": "missing"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "missing"
+}
+]
 },
 {
 "role": "gray",
@@ -16133,7 +19597,13 @@
 "color": "green",
 "word": "quality"
 },
-"nat": "도시의 질은 선택적 활동에 매우 중요해서, 머무는 활동의 정도가 흔히 그 공간의 질은 물론 도시 전체의 질을 재는 척도로 쓰일 수 있다."
+"nat": "도시의 질은 선택적 활동에 매우 중요해서, 머무는 활동의 정도가 흔히 그 공간의 질은 물론 도시 전체의 질을 재는 척도로 쓰일 수 있다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "quality"
+}
+]
 },
 {
 "role": "gray",
@@ -16188,7 +19658,13 @@
 "name": "대조",
 "color": "red",
 "word": "but rather"
+},
+"tags": [
+{
+"sig": "한정",
+"word": "rather"
 }
+]
 },
 {
 "role": "yellow",
@@ -16205,7 +19681,13 @@
 "color": "green",
 "word": "temptations"
 },
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "핵심",
+"word": "temptations"
+}
+]
 },
 {
 "role": "gray",
@@ -16240,7 +19722,13 @@
 "color": "green",
 "word": "transportation expert"
 },
-"nat": "도시에서 운전하든 걷든 교통카드를 대든, 모든 사람은 현관문을 나서는 순간부터 자신을 교통 전문가로 여긴다."
+"nat": "도시에서 운전하든 걷든 교통카드를 대든, 모든 사람은 현관문을 나서는 순간부터 자신을 교통 전문가로 여긴다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "transportation expert"
+}
+]
 },
 {
 "role": "yellow",
@@ -16254,7 +19742,13 @@
 "name": "주제",
 "color": "green",
 "word": "how she views the street"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "how she views the street"
 }
+]
 },
 {
 "role": "gray",
@@ -16333,7 +19827,13 @@
 "word": "commute"
 },
 "nat": "거리에 관한 공적 논쟁은 대개, 어떤 변화가 개인의 통근과 주차 능력에 어떻게 영향을 줄지, 무엇이 안전하고 아닌지에 대한 믿음, 혹은 지역 사업체의 수익에 관한 감정적 가정에 뿌리를 둔다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "근거",
+"word": "commute"
+}
+]
 }
 ]
 },
@@ -16371,7 +19871,13 @@
 "color": "green",
 "word": "not born but made"
 },
-"nat": "Rousseau는 사람은 태어나는 것이 아니라 만들어지며, 모든 개인은 그 실현에 다른 사람들의 능동적 관여가 필요한 잠재력의 묶음이라고 믿었다."
+"nat": "Rousseau는 사람은 태어나는 것이 아니라 만들어지며, 모든 개인은 그 실현에 다른 사람들의 능동적 관여가 필요한 잠재력의 묶음이라고 믿었다.",
+"tags": [
+{
+"sig": "핵심",
+"word": "not born but made"
+}
+]
 },
 {
 "role": "gray",
@@ -16417,7 +19923,13 @@
 "name": "역접",
 "color": "red",
 "word": "But"
+},
+"tags": [
+{
+"sig": "주장",
+"word": "his writings document"
 }
+]
 },
 {
 "role": "yellow",
@@ -16433,7 +19945,13 @@
 "name": "핵심",
 "color": "green",
 "word": "relative and collective"
+},
+"tags": [
+{
+"sig": "인용",
+"word": "relative and collective"
 }
+]
 },
 {
 "role": "yellow",
@@ -16453,7 +19971,13 @@
 "word": "kindness"
 },
 "nat": "그리고 이 집합적 존재의 열쇠는 바로 친절함인데, 이는 Rousseau가 pitié라는 범주로 분석한 것으로, ‘연민’으로 번역되지만 Hume과 Smith가 정의한 ‘공감’에 훨씬 가깝다.",
-"end": true
+"end": true,
+"tags": [
+{
+"sig": "결론",
+"word": "kindness"
+}
+]
 }
 ]
 },
@@ -24038,7 +27562,13 @@
 "word": "permanence"
 },
 "nat": "Keith Thomas의 역사서 Man and the Natural World에 따르면, 17~18세기 귀족들은 소유지의 범위와 소유권의 영속성을 선언하기 위해 흔히 줄지어 활엽수를 심기 시작했다.",
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "핵심",
+"word": "permanence"
+}
+]
 },
 {
 "role": "yellow",
@@ -24058,7 +27588,13 @@
 "word": "from age to age"
 },
 "nat": "'그러한 살아 자라는 증인들의 증언으로 자신의 소유지 경계가 대대로 보존되고 이어지는 것보다 더 즐거운 일이 무엇이겠는가'라고 신사용 잡지 편집자가 독자에게 물었다.",
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "반복",
+"word": "from age to age"
+}
+]
 },
 {
 "role": "yellow",
@@ -24080,7 +27616,13 @@
 "word": "additional"
 },
 "nat": "나무 심기는 애국적 행위로 여겨지는 추가 이점도 있었는데, 왕실이 해군이 의존하던 활엽수의 심각한 부족을 선언했기 때문이다.",
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "첨가",
+"word": "additional"
+}
+]
 },
 {
 "is_summary": true,
@@ -24131,7 +27673,13 @@
 "color": "green",
 "word": "a minimal number"
 },
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "핵심",
+"word": "a minimal number"
+}
+]
 },
 {
 "role": "gray",
@@ -24176,7 +27724,13 @@
 "name": "대조",
 "color": "red",
 "word": "The other view"
+},
+"tags": [
+{
+"sig": "대조",
+"word": "The other view"
 }
+]
 },
 {
 "role": "gray",
@@ -24206,7 +27760,13 @@
 "color": "green",
 "word": "individual events"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "핵심",
+"word": "individual events"
+}
+]
 },
 {
 "role": "yellow",
@@ -24225,7 +27785,13 @@
 "color": "gray",
 "word": "That is"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "부연",
+"word": "That is"
+}
+]
 },
 {
 "is_summary": true,
@@ -24306,7 +27872,13 @@
 "word": "however"
 },
 "nat": "그러나 더 큰 규모의 프로젝트에서는, 강한 개성이 큰 영향력을 행사하는 경우에도 상당수의 디자이너가 개념 구현에 투입된다는 사실이 쉽게 간과될 수 있다.",
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "역접",
+"word": "however"
+}
+]
 },
 {
 "role": "yellow",
@@ -24325,7 +27897,13 @@
 "color": "orange",
 "word": "therefore"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "인과",
+"word": "therefore"
+}
+]
 },
 {
 "role": "gray",
@@ -24357,7 +27935,13 @@
 "color": "blue",
 "word": "the latter"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "대조",
+"word": "In the latter case"
+}
+]
 },
 {
 "is_summary": true,
@@ -24420,7 +28004,13 @@
 "word": "a clearer indication"
 },
 "nat": "역사소설은 역사가가 밝혀낸 앙상한 뼈대에 '살을 붙여', 반드시 사실은 아니더라도 과거의 사건·상황·문화를 더 분명히 보여주는 서술을 제공한다.",
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "부연",
+"word": "a clearer indication"
+}
+]
 },
 {
 "role": "gray",
@@ -24461,7 +28051,13 @@
 "color": "orange",
 "word": "for lack of archives"
 },
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "결핍",
+"word": "for lack of archives"
+}
+]
 },
 {
 "role": "yellow",
@@ -24483,7 +28079,13 @@
 "word": "for lack of appropriate evidence"
 },
 "nat": "실제로 Gilden Seavey는, 역사소설 제작자들이 엄격한 학문적 기준을 강하게 고수했다면 많은 역사적 주제가 적절한 증거의 부족으로 미탐구로 남았을 것이라고 설명한다.",
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "연결",
+"word": "for lack of appropriate evidence"
+}
+]
 },
 {
 "role": "gray",
@@ -24555,7 +28157,13 @@
 "color": "purple",
 "word": "cannot be denied"
 },
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "인정",
+"word": "cannot be denied"
+}
+]
 },
 {
 "role": "yellow",
@@ -24577,7 +28185,13 @@
 "word": "At the same time"
 },
 "nat": "동시에, 아무리 빨리 성장하더라도 인구의 상당 부분이 불확실한 원천에서 생계를 잇는 나라들은 직접적 공적 개입을 수반하는 특화된 자격 보호 장치 없이는 기아를 막을 수 없다는 점을 인식하는 것이 중요하다.",
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "대조",
+"word": "At the same time"
+}
+]
 },
 {
 "role": "gray",
@@ -24609,7 +28223,13 @@
 "color": "purple",
 "word": "The real achievements"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "강조",
+"word": "The real achievements"
+}
+]
 },
 {
 "is_summary": true,
@@ -24658,7 +28278,13 @@
 "color": "green",
 "word": "one call for one message"
 },
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "핵심",
+"word": "one call for one message"
+}
+]
 },
 {
 "role": "gray",
@@ -24715,7 +28341,13 @@
 "color": "green",
 "word": "a restricted number of sounds"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "중심",
+"word": "a restricted number of sounds"
+}
+]
 },
 {
 "role": "yellow",
@@ -24732,7 +28364,13 @@
 "color": "gray",
 "word": "thirty or forty"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "예시",
+"word": "thirty or forty"
+}
+]
 },
 {
 "role": "gray",
@@ -24802,7 +28440,13 @@
 "color": "red",
 "word": "but"
 },
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "역접",
+"word": "but"
+}
+]
 },
 {
 "role": "yellow",
@@ -24822,7 +28466,13 @@
 "word": "precisely controlled fashion"
 },
 "nat": "일반적으로 합성 성분은 정밀하게 통제된 방식으로 만들어져 잘 정의된 조성과 특성을 지니므로, 잠재적 독성을 신중히 평가할 수 있다.",
-"blank": "A"
+"blank": "A",
+"tags": [
+{
+"sig": "근거",
+"word": "precisely controlled fashion"
+}
+]
 },
 {
 "role": "yellow",
@@ -24844,7 +28494,13 @@
 "word": "On the other hand"
 },
 "nat": "반면에 천연 성분은 원산지, 수확 시기, 평생 겪은 기후, 토양의 질, 분리·저장 방식에 따라 조성과 특성이 상당히 달라진다.",
-"blank": "B"
+"blank": "B",
+"tags": [
+{
+"sig": "대조",
+"word": "On the other hand"
+}
+]
 },
 {
 "role": "gray",
