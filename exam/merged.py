@@ -136,10 +136,12 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
                                logger=logger, passage_index=passage_index,
                                slots=slots)
 
-    # 정본에 밑줄을 치는 문항들(짝짓기 + 어휘 3종)은 한 덩어리로 '차례로' 만든다.
+    # 정본에 밑줄을 치는 문항들(어법 + 짝짓기 + 어휘 3종)은 한 덩어리로 '차례로' 만든다.
     # 저마다 '눈에 띄는 낱말'을 고르기 때문에 따로 만들면 같은 자리에 밑줄이 몰린다.
     # 앞 문항이 쓴 낱말을 다음 문항에 '피할 낱말'로 넘겨 그것을 막는다.
-    # (어법 2종은 '다시 쓴 지문' 위에 서므로 이 묶음에 넣지 않는다 — 지문이 다르다.)
+    # 순서가 중요하다: 고를 수 있는 낱말이 가장 좁은 어법이 먼저(문법이 걸린 자리여야
+    # 한다), 그다음 짝짓기, 마지막이 어휘 3종(아무 내용어나 쓸 수 있어 가장 자유롭다).
+    # (어법 서술형은 '다시 쓴 지문' 위에 서므로 이 묶음에 넣지 않는다 — 지문이 다르다.)
     vslots = {t: pipeline.VOCAB_METHODS[t]
               for t in MERGED_ORDER if t in pipeline.VOCAB_METHODS}
     # 밑줄 문항이 각각 어떤 낱말을 썼는지 기억해 둔다. 검수 승격으로 일부만 다시
@@ -148,6 +150,10 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     used_words: dict[str, set[str]] = {}
     underline = set(vslots)
     first = []
+    if GRAMMAR in MERGED_ORDER:
+        underline.add(GRAMMAR)
+        first.append((GRAMMAR, _grammar_maker(client, analysis, body,
+                                              max_retries, logger)))
     if PAIR_ODD in MERGED_ORDER:
         underline.add(PAIR_ODD)
         first.append((PAIR_ODD, _pair_odd_maker(client, analysis, body, slots,
@@ -280,6 +286,43 @@ def _flag_key_overlap(passage) -> None:
         passage.flag(E, why)
 
 
+def _grammar_maker(client, analysis, body, max_retries: int, logger=None):
+    """어법(복수정답)을 '밑줄 묶음'의 첫 문항으로 만드는 함수를 돌려준다(avoid 를 받는다).
+
+    이 유형은 묶음 안에서 만들어지므로 pipeline._gen_one_type 을 거치지 않는다.
+    그래서 자기검증(고위험 유형 재확인)을 여기서 직접 돌린다 — 빠뜨리면 어법만 검수
+    없이 나가고, 검수에 걸려야 도는 상위 모델 승격도 일어나지 않는다.
+    """
+    from . import tiering
+    from . import verify as _verify
+    from .generators import grammar as _gr
+
+    c = tiering.EffortClient(client, tiering.effort_for(GRAMMAR))
+
+    def _make(avoid):
+        last: Exception | None = None
+        for attempt in range(2):
+            try:
+                q, a, fl, words = _gr.generate(c, analysis, body, max_retries=max_retries,
+                                               avoid=avoid, with_words=True)
+            except Exception as e:      # noqa: BLE001 — 유형 단위 격리
+                last = e
+                if logger:
+                    logger.warning("[%s] 생성 실패(시도 %d): %s", GRAMMAR, attempt + 1, e)
+                continue
+            ok, why = _verify.verify(c, GRAMMAR, q, a, max_retries=max_retries)
+            if not ok:
+                if attempt == 0:        # 한 번은 재생성으로 결함을 털어낸다
+                    if logger:
+                        logger.info("[%s] 자기검증 실패 → 재생성: %s", GRAMMAR, why)
+                    continue
+                fl = list(fl) + [f"자동검증: {why or '정답 유일성·정오답 재확인'}"]
+            return q, a, fl, words
+        raise last or RuntimeError(f"'{GRAMMAR}' 생성 실패")
+
+    return _make
+
+
 def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retries: int,
                     logger=None):
     """짝짓기를 '밑줄 묶음'의 첫 문항으로 만드는 함수를 돌려준다(avoid 를 받는다).
@@ -392,16 +435,21 @@ def _escalate(passage, strong_client, task_of, analysis, body, vslots,
     if ct:      # 한 판만 걸려도 두 판을 함께 — 서로 다른 사실을 물어야 하기 때문
         tasks.append(("__content__", _content_maker(
             strong_client, analysis, body, 0, max_retries, logger)))
-    if vt:      # 어휘는 밑줄이 겹치면 안 되므로 묶음으로 다시 만든다
+    gt = GRAMMAR if GRAMMAR in targets else None
+    if gt:
+        tasks = [t for t in tasks if t[0] != GRAMMAR]
+    if vt or gt:      # 밑줄이 겹치면 안 되므로 묶음으로 다시 만든다
         vc = tiering.EffortClient(strong_client, tiering.effort_for(VOCAB))
-        # 다시 만들지 않는 밑줄 문항(짝짓기·다른 어휘)이 이미 쓴 낱말은 피해야 한다.
+        # 다시 만들지 않는 밑줄 문항(짝짓기·어법·다른 어휘)이 이미 쓴 낱말은 피해야 한다.
         keep = set()
         for slot, words in (used_words or {}).items():
-            if slot not in vt:
+            if slot not in vt and slot != gt:
                 keep |= words
+        first = ([(GRAMMAR, _grammar_maker(strong_client, analysis, body,
+                                           max_retries, logger))] if gt else [])
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
             vc, analysis, body, vt, max_retries=max_retries, logger=logger,
-            avoid=keep, used_out=used_words)))
+            first=first, avoid=keep, used_out=used_words)))
 
     res = run_parallel(tasks)
     res.update(res.pop("__vocab__", None) or {})

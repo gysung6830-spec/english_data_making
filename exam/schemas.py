@@ -332,9 +332,8 @@ class GrammarReason(BaseModel):
 
 
 class GrammarOut(BaseModel):
-    # 어법 문항은 '정본 그대로'가 아니라 다시 쓴 지문 위에 낸다 — 지문을 통째로 외운
-    # 학생이 '달라진 낱말 찾기'로 풀어 버리는 것을 막는다.
-    rewritten: list[str]           # 내용은 같고 표현만 바꾼 지문(원문과 문장 수 동일)
+    # 어법(복수정답)은 '정본 지문 그대로' 위에 낸다 — 지문을 다시 쓰지 않으므로
+    # rewritten 이 없다. 암기 대비는 어법 서술형(GrammarCountOut)이 맡는다.
     marks: list[WordMark]          # 밑줄 2~8개(틀린 것은 shown 이 오답형)
     answer_nos: list[int]          # 틀린 밑줄 번호들(복수)
     reasons: list[GrammarReason]

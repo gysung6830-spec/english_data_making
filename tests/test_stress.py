@@ -185,11 +185,19 @@ def build_passage(name: str, body: str) -> tuple[Passage, list[str]]:
     else:
         notes.append(f"밑줄 칠 낱말을 5개 고르지 못했습니다({len(marks)}개).")
 
-    # 어법 — 밑줄 3개
-    gmarks = marks[:3]
+    # 어법 — 밑줄 3개. 정본 지문 위에 서므로 어휘와 '다른' 낱말을 골라야 한다
+    # (실제 생성도 밑줄 묶음에서 앞 문항이 쓴 낱말을 피한다).
+    gmarks = []
+    for i in range(n):
+        w = _content_word(sents[i], taken)
+        if w and len(gmarks) < 3:
+            gmarks.append((i, w, w))
+            taken.add(w.lower())
     if len(gmarks) == 3:
         p.set_qa(GRAMMAR, *B.make_grammar(
             sents, gmarks, [2], {2: "수 일치"}))
+    else:
+        notes.append(f"어법 밑줄을 3개 고르지 못했습니다({len(gmarks)}개).")
 
     # 순서 배열 — 주어진 글 1문장 + 나머지를 3~4덩어리로
     k = 4 if n >= 5 else 3

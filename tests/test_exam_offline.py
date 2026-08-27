@@ -498,11 +498,13 @@ def _fake_vocab_negation():
 
 # analyze() 는 넣은 원문을 직접 나눠 문장 수를 본다(API 를 부르기 전에).
 # 그래서 테스트 지문도 문장 4개 이상이어야 한다 — 실제 사용과 같은 조건.
+# 낱말이 넉넉해야 밑줄 문항 다섯(어법·짝짓기·어휘 3종)이 겹치지 않고 다 만들어진다 —
+# 실제 지문도 그렇다. carefully·briefly 는 어법 밑줄이 쓰는 자리다.
 _DUMMY = ("The first sentence introduces the topic clearly. "
           "However, the second sentence adds an important detail. "
           "The third sentence gives a concrete example. "
-          "The fourth sentence draws the whole thing together. "
-          "The fifth sentence answers an obvious objection. "
+          "The fourth sentence carefully draws the whole thing together. "
+          "The fifth sentence briefly answers an obvious objection. "
           "The sixth sentence closes with a practical suggestion.")
 _DUMMY2 = _DUMMY.replace("sentence", "line")
 
@@ -582,13 +584,13 @@ _FAKE = {
         marks=[WordMark(sent_no=n, word=w, shown=sh)
                for n, w, sh in next(_VOCAB_CYCLE)],
         answer_no=3, reason="이유."),
-    # 어법은 '다시 쓴 지문' 위에 낸다 — 원문과 문장 수는 같고 표현만 다르다.
+    # 어법(복수정답)은 '정본 지문 그대로' 위에 낸다 — 밑줄 낱말만 고른다.
+    # 짝짓기·어휘 3종과 같은 지문을 쓰므로 그것들과 겹치지 않는 낱말이어야 한다.
     "GrammarOut": lambda: GrammarOut(
-        rewritten=_REWRITE_A,
-        marks=[WordMark(sent_no=1, word="opens", shown="open"),
-               WordMark(sent_no=2, word="supplies", shown="supplies"),
-               WordMark(sent_no=3, word="offers", shown="offer")],
-        answer_nos=[1, 3],
+        marks=[WordMark(sent_no=4, word="carefully", shown="careful"),
+               WordMark(sent_no=5, word="briefly", shown="brief"),
+               WordMark(sent_no=6, word="sixth", shown="sixth")],
+        answer_nos=[1, 2],
         reasons=[GrammarReason(no=1, text="수 일치"), GrammarReason(no=3, text="수 일치")]),
     # 밑줄 6개 중 정확히 4개가 틀린다(정답은 늘 ④)
     "GrammarCountOut": lambda: GrammarCountOut(
@@ -2585,6 +2587,44 @@ def test_type_group_layout() -> None:
     print("✓ 유형별 편성 조판(유형마다 새 쪽·큰 칩·문항별 출처·두 단 고르게) 통과")
 
 
+def test_grammar_on_original_passage() -> None:
+    """5번 어법은 정본 그대로, 6번 어법 서술형은 다시 쓴 지문 위에 선다."""
+    import re as _re
+
+    from exam.merged import build_passage_merged
+    from exam.schemas import GrammarOut
+
+    #  스키마에서 rewritten 이 사라졌다 — 다시 쓰라고 시키지 않으므로 받을 것도 없다
+    assert "rewritten" not in GrammarOut.model_fields
+    assert "rewritten" in GrammarCountOut.model_fields      # 서술형은 그대로 다시 쓴다
+
+    p = build_passage_merged(_FakeClient(), _DUMMY)
+    orig = " ".join(_re.sub(r"\s+", " ", s2) for s2 in
+                    _re.split(r"(?<=[.!?])\s+", _DUMMY))
+
+    def _body(html):
+        t = _re.sub(r"<[^>]+>", " ", _re.search(
+            r'<div class="passage[^"]*">(.*?)</div>', html, _re.S).group(1))
+        return _re.sub(r"[^a-z ]+", " ", t.lower()).split()
+
+    #  ① 어법 지문은 정본과 같은 낱말로 이루어진다(밑줄 자리만 형태가 다르다)
+    g = set(_body(p.q["grammar"]))
+    o = set(_re.sub(r"[^a-z ]+", " ", orig.lower()).split())
+    assert len(g - o) <= 3, sorted(g - o)     # 틀린 형태로 바꾼 밑줄만 다르다
+    #  ② 어법 서술형 지문은 정본과 확실히 다르다(다시 쓴 것)
+    f = set(_body(p.q["grammar_fix"]))
+    assert len(f - o) > 5, sorted(f - o)
+
+    #  ③ 어법이 정본에 서므로 짝짓기·어휘와 밑줄이 겹치면 안 된다
+    import collections
+    marks = {t: [w.lower() for w in _re.findall(r"<u>(.*?)</u>", p.q[t])]
+             for t in ("grammar", "pair_odd", "vocab_2", "vocab", "vocab_3")}
+    flat = [w for ws in marks.values() for w in ws]
+    dup = [w for w, c in collections.Counter(flat).items() if c > 1]
+    assert not dup, (dup, marks)
+    print("✓ 어법은 정본 그대로·어법 서술형은 다시 쓴 지문·밑줄 겹침 없음 통과")
+
+
 def test_output_checker() -> None:
     """완성된 산출물 검산기(tools/검증.py)가 실제로 나왔던 결함을 잡는가."""
     import copy
@@ -2871,6 +2911,7 @@ if __name__ == "__main__":
     test_grammar_count_fixed_four()
     test_demo_matches_real_rules()
     test_output_defect_regressions()
+    test_grammar_on_original_passage()
     test_type_group_layout()
     test_output_checker()
     test_stress_fixtures()

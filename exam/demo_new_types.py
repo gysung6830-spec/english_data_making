@@ -135,33 +135,24 @@ def _dna() -> Passage:
                 "바로 뒤의 '그런 효율에 영감을 받아 연구가 시작됐다'와 정면으로 모순된다. "
                 "'오래 견딘다'는 뜻이어야 앞뒤가 이어진다."),
     ))
-    # 어법 — 다시 쓴 지문 위에 낸다(원문 그대로면 외운 학생이 달라진 낱말만 찾는다)
-    r1 = [
-        "Inside every living cell sits a molecule called DNA, which serves as nature's own hard drive.",
-        "What makes it extraordinary is not merely that it compresses information, but that it packs a huge quantity into a vanishingly small space.",
-        "In theory, one single gram of DNA could carry as much data as millions of ordinary hard drives put together.",
-        "It is remarkably tough as well, lasting inside bone and ice across tens of thousands of years.",
-        "Impressed by such efficiency, researchers have started encoding digital files into synthetic DNA.",
-        "Although the method remains slow and costly, it lets information be kept safe for thousands of years.",
-        "Someday our libraries and photographs may rest safely within molecules.",
-    ]
+    # 어법(복수정답) — 정본 지문 그대로 위에 낸다. 밑줄은 짝짓기·어휘 3종과 겹치지 않는다.
     p.set_qa(GRAMMAR, *B.make_grammar(
-        r1,
+        s,
         marks=[
-            (0, "serves", "serves"),          # ① 관계사절 수 일치(적절)
-            (1, "compresses", "compress"),    # ② 수 일치 오류(it compresses)
-            (2, "put", "put"),                # ③ 과거분사(적절)
-            (3, "lasting", "lasting"),        # ④ 분사구문(적절)
-            (4, "have", "has"),               # ⑤ 수 일치 오류(researchers have)
-            (5, "lets", "let"),               # ⑥ 수 일치 오류(it lets)
-            (5, "kept", "kept"),              # ⑦ 수동(적절)
-            (6, "rest", "rest"),              # ⑧ 조동사 뒤 원형(적절)
+            (0, "called", "calling"),      # ① 과거분사여야(태) → 오류
+            (1, "makes", "makes"),         # ② What makes ~ is (적절)
+            (3, "surviving", "survived"),  # ③ 분사구문은 능동이어야 → 오류
+            (4, "have", "has"),            # ④ 수 일치(researchers have) → 오류
+            (5, "slow", "slow"),           # ⑤ 형용사 병렬(적절)
+            (6, "safely", "safely"),       # ⑥ 부사(적절)
         ],
-        answer_nos=[2, 5, 6],
+        answer_nos=[1, 3, 4],
         reasons={
-            2: "선행하는 주어 it 은 단수이므로 compress → compresses (수 일치).",
-            5: "주어 researchers 는 복수이므로 has → have (수 일치).",
-            6: "주어 it(the method) 은 단수이므로 let → lets (수 일치).",
+            1: "분자가 DNA라고 '불리는' 것이므로 현재분사 calling 이 아니라 과거분사 "
+               "called 여야 한다 (태).",
+            3: "durable 한 주체(It)가 스스로 '살아남는' 것이므로 능동의 surviving 이 "
+               "맞다. survived 로 쓰면 앞의 It is ~ 와 이어지지 않는다 (분사구문).",
+            4: "주어 researchers 는 복수이므로 has → have (수 일치).",
         },
     ))
 
@@ -307,9 +298,9 @@ def _star() -> Passage:
 
     p.set_qa(VOCAB_2, *B.make_vocab(
         s,
-        marks=[(0, "promote", "promote"), (2, "opposite", "identical"),
+        marks=[(0, "performer", "performer"), (2, "opposite", "identical"),
                (3, "patience", "patience"), (4, "neglects", "neglects"),
-               (6, "loses", "loses")],
+               (6, "outstanding", "outstanding")],
         answer_no=2,
         reason=("뒤 문장이 '하나는 개인의 탁월함을, 다른 하나는 남을 키우는 인내를 보상한다'며 두 "
                 "역할을 대비하므로, identical(동일한)이 아니라 opposite(정반대의)이어야 한다."),
@@ -317,9 +308,9 @@ def _star() -> Passage:
 
     p.set_qa(VOCAB_3, *B.make_vocab(
         s,
-        marks=[(1, "assume", "assume"), (2, "demand", "demand"),
+        marks=[(1, "naturally", "naturally"), (2, "skills", "skills"),
                (4, "never neglects", "never neglects"), (5, "stalls", "stalls"),
-               (6, "loses", "loses")],
+               (6, "manager", "manager")],
         answer_no=3,
         overrides={4: ("Placed in charge, the former star keeps pursuing personal wins "
                        "and never neglects the slow work of coaching the team.")},
@@ -328,32 +319,24 @@ def _star() -> Passage:
                 "모순된다. '소홀히 한다'여야 앞뒤가 이어진다."),
     ))
 
-    r1 = [
-        "A great many firms move their strongest performer into a management role.",
-        "They take for granted that a star will naturally become a star boss.",
-        "The two roles, though, call for almost opposite skills.",
-        "One prizes individual brilliance, whereas the other prizes the patience needed to develop other people.",
-        "Put in charge, the former star keeps pursuing personal wins and neglects the slow work of coaching the team.",
-        "The team stalls, and the celebrated hire gradually becomes a disappointment.",
-        "In the end, the company loses both an outstanding contributor and a capable manager.",
-    ]
+    # 어법(복수정답) — 정본 지문 그대로 위에.
     p.set_qa(GRAMMAR, *B.make_grammar(
-        r1,
+        s,
         marks=[
-            (1, "become", "become"),      # ① 조동사 뒤 원형(적절)
-            (2, "call", "calls"),         # ② 수 일치 오류(The two roles call)
-            (3, "needed", "needed"),      # ③ 과거분사 수식(적절)
-            (4, "Put", "Putting"),        # ④ 분사·태 오류(수동이어야)
-            (4, "keeps", "keeps"),        # ⑤ 수 일치(적절)
-            (4, "neglects", "neglect"),   # ⑥ 병렬·수 일치 오류
-            (5, "becomes", "becomes"),    # ⑦ 수 일치(적절)
-            (6, "loses", "loses"),        # ⑧ 수 일치(적절)
+            (1, "make", "makes"),          # ① 조동사 will 뒤 원형이어야 → 오류
+            (3, "develop", "developing"),  # ② the patience to develop → 오류
+            (4, "Placed", "Placing"),      # ③ 자리에 '앉혀진' 것이므로 수동 → 오류
+            (4, "chasing", "chasing"),     # ④ keeps + -ing (적절)
+            (5, "turns", "turns"),         # ⑤ 수 일치(the hire turns) (적절)
+            (6, "capable", "capable"),     # ⑥ 형용사(적절)
         ],
-        answer_nos=[2, 4, 6],
+        answer_nos=[1, 2, 3],
         reasons={
-            2: "주어 The two roles 는 복수이므로 calls → call (수 일치).",
-            4: "별은 '자리에 앉혀지는' 대상이므로 능동 Putting 이 아니라 과거분사 Put (분사·태).",
-            6: "앞의 keeps 와 병렬이고 주어가 3인칭 단수이므로 neglect → neglects (병렬·수 일치).",
+            1: "조동사 will 뒤에는 동사원형이 와야 하므로 makes → make (조동사).",
+            2: "'~할 인내심'이라는 뜻이므로 명사를 뒤에서 꾸미는 to부정사가 맞다. "
+               "developing 으로 쓰면 patience 와의 관계가 끊긴다 (준동사).",
+            3: "스타는 자리에 '앉혀진' 쪽이므로 수동의 과거분사 Placed 여야 한다. "
+               "Placing 은 스타가 누군가를 앉힌다는 뜻이 된다 (분사구문·태).",
         },
     ))
 
