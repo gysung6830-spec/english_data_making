@@ -162,9 +162,13 @@ class Passage:
 
 # ── 정규식/상수 ───────────────────────────────────────────────
 
-# 원문자 ①(U+2460) … ⑳(U+2473)
-CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
-_CIRCLED_BASE = 0x2460  # ①
+# 원문자: ①~⑳(U+2460~2473), ㉑~㉟(U+3251~325F), ㊱~㊿(U+32B1~32BF)
+CIRCLED = (
+    "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳"
+    "㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟"
+    "㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿"
+)
+_CIRCLED_BASE = 0x2460  # ① (하위호환용 상수)
 CIRCLED_SET = set(CIRCLED)
 
 # 지문 헤더:  [ ... ] ... N번 : 제목
@@ -195,8 +199,25 @@ _PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
 # 자료 머리말/꼬리말·안내문(워터마크) 줄
 _JUNK_RE = re.compile(
     r"(?i)(flowedu\.tistory|\[\s*flow\s*edu\s*\]|^\s*\[EBS\]|EXAM4YOU|"
-    r"영문과\s*해석을\s*읽고|지문\s*연습하기|^\s*WORKBOOK\b)"
+    r"영문과\s*해석을\s*읽고|지문\s*연습하기|^\s*WORKBOOK\b|"
+    r"한\s*줄\s*해석|한\s*줄\s*영어|좌지문\s*우?\s*해석|직독\s*직해)"
 )
+
+# 자료 러닝 헤더/푸터(예: '[고3] 2026년 6월 모의고사 한줄해석')가 문장에 섞인 것
+_MATERIAL_HDR_RE = re.compile(
+    r"\[?\s*고\s*\d\s*\]?\s*\d{4}\s*년\s*\d{1,2}\s*월\s*"
+    r"(?:모의고사|모의평가|학력평가)?\s*"
+    r"(?:한\s*줄\s*해석|한\s*줄\s*영어|좌지문\s*우?\s*해석|직독\s*직해)\s*\d*"
+)
+
+
+def _strip_material_header(s: str) -> str:
+    """문장에 섞여 들어온 자료 러닝 헤더/푸터 텍스트를 제거."""
+    return _re_sub_collapse(_MATERIAL_HDR_RE.sub(" ", s or ""))
+
+
+def _re_sub_collapse(s: str) -> str:
+    return re.sub(r"\s{2,}", " ", s).strip()
 
 # 한글 음절 영역
 _HANGUL_RE = re.compile(r"[가-힣]")
@@ -206,9 +227,14 @@ _MAX_TITLE_LEN = 150
 
 
 def circled_to_int(ch: str) -> int:
-    """원문자 → 정수. ①→1 … ⑳→20. 아니면 0."""
-    if ch in CIRCLED_SET:
-        return ord(ch) - _CIRCLED_BASE + 1
+    """원문자 → 정수. ①→1 … ⑳→20, ㉑→21 … ㉟→35, ㊱→36 … ㊿→50. 아니면 0."""
+    o = ord(ch)
+    if 0x2460 <= o <= 0x2473:   # ①~⑳
+        return o - 0x2460 + 1
+    if 0x3251 <= o <= 0x325F:   # ㉑~㉟
+        return o - 0x3251 + 21
+    if 0x32B1 <= o <= 0x32BF:   # ㊱~㊿
+        return o - 0x32B1 + 36
     return 0
 
 
@@ -317,7 +343,8 @@ def _parse_sentences(body: str) -> List[Sentence]:
     for num in order:
         combined = "\n".join(merged[num])
         en, ko = _split_en_ko(combined)
-        en = _strip_footnote(en)
+        en = _strip_material_header(_strip_footnote(en))
+        ko = _strip_material_header(ko)
         if not en and not ko:
             continue
         sentences.append(Sentence(num=num, en=en, ko=ko))
