@@ -1,9 +1,9 @@
 """데모(무료 미리보기)용 — 통합본에 새로 들어온 유형의 예시 문항.
 
-제목·무관한 문장·어휘(원문단어형·부정어형)·어법 개수는 기존 데모에 없던 유형이라
+제목·연결어·어휘(원문단어형·부정어형)·어법 서술형은 기존 데모에 없던 유형이라
 여기서 따로 만든다. 실제 생성과 똑같은 빌더(build.py)를 거치므로 조판 결과도 같다.
 
-어법 두 유형(GRAMMAR·GRAMMAR_COUNT)은 여기 것이 demo_data 의 것을 대신한다 —
+어법 두 유형(GRAMMAR·GRAMMAR_FIX)은 여기 것이 demo_data 의 것을 대신한다 —
 실제 생성과 같이 '다시 쓴 지문' 위에 서야 하기 때문이다(generators/grammar.py 참고).
 두 문항은 서로 다른 다시쓰기를 쓰므로 같은 밑줄을 두 번 묻지 않는다.
 """
@@ -14,7 +14,7 @@ from .demo_data import DNA, STAR
 from . import build2 as B2
 from .generators.pair_odd import build_pairs
 from .types import (
-    GRAMMAR, GRAMMAR_COUNT, IRRELEVANT, PAIR_ODD, TITLE, VOCAB_2, VOCAB_3, Passage,
+    GRAMMAR, GRAMMAR_FIX, LINKER, PAIR_ODD, TITLE, VOCAB_2, VOCAB_3, Passage,
 )
 
 # 데모 지문 제목 -> 이 파일이 채워 줄 문항들
@@ -47,20 +47,23 @@ def _dna() -> Passage:
         },
     ))
 
-    # 무관한 문장 — 도입 1문장 뒤 ①~⑤, ③자리에 '소재는 같고 논지는 벗어난' 문장을 끼움
-    p.set_qa(IRRELEVANT, *B.make_irrelevant(
-        s, start_no=2, answer_no=3,
-        sentence=("Because living cells needed to store information, they gradually "
-                  "shrank until they could survive in bone and ice."),
-        reason=("글은 'DNA가 정보를 엄청난 밀도로 담고 오래 견디므로 저장 매체로 쓸 만하다'는 "
-                "쪽으로 나아간다. 이 문장은 지문의 낱말(store information·bone and ice)을 그대로 "
-                "쓰지만 인과를 뒤집었다 — 지문은 '작아서 많이 담는다'고 했지 '담아야 해서 작아졌다'고 "
-                "한 적이 없다. 세포의 진화 원인은 필자의 논지가 아니다."),
+    # 연결어 — (A) 4번 문장(부연·병렬) · (B) 6번 문장(대조). 원문에 연결어가 없는
+    # 자리라 remove 는 비운다.
+    p.set_qa(LINKER, *B2.make_linker(
+        s, 4, 6, "", "",
+        pairs=[("In addition", "However"), ("However", "Therefore"),
+               ("For example", "Moreover"), ("In addition", "Similarly"),
+               ("Nevertheless", "However")],
+        answer_no=1,
+        reason=("(A) 앞은 '아주 작은 공간에 엄청난 양을 담는다(밀도)', 뒤는 '뼈와 얼음 속에서 "
+                "수만 년을 견딘다(내구성)'로, 서로 다른 장점을 하나 더 얹는 자리다 → In addition. "
+                "(B) 앞은 '연구가 시작됐다'는 진전이고 뒤는 '아직 느리고 비싸다'는 한계라 뒤집는 "
+                "자리다 → However. 실제로 원문도 그 문장 안에서 but 으로 뒤집는다."),
         wrong={
-            1: "①은 도입의 '정보를 저장한다'를 받아 '아주 작은 공간에 담는다'는 밀도로 나아간다.",
-            2: "②는 ①의 밀도를 1그램이라는 구체적 수치로 뒷받침한다.",
-            4: "④는 Inspired by such efficiency 로 앞의 효율을 받아 실제 연구로 이어 준다.",
-            5: "⑤는 The technique 으로 ④의 연구를 받아 그 한계와 이점을 덧붙인다.",
+            2: "(A) 자리는 앞뒤가 대조가 아니라 장점을 더하는 관계라 However 가 맞지 않는다.",
+            3: "(A) 뒤 문장은 앞의 예시가 아니라 별개의 장점이므로 For example 이 맞지 않는다.",
+            4: "(A) 는 맞지만 (B) 자리는 앞의 진전을 뒤집는 자리라 Similarly 가 정반대다.",
+            5: "(A) 자리에는 뒤집을 앞 진술이 없어 Nevertheless 가 성립하지 않는다.",
         },
     ))
 
@@ -119,7 +122,7 @@ def _dna() -> Passage:
         },
     ))
 
-    # 어법 개수 — 또 다른 다시쓰기 위에. 밑줄을 하나하나 따져 '몇 개가 틀렸는지' 센다.
+    # 어법 서술형 — 또 다른 다시쓰기 위에. 틀린 넷을 찾아 바른 형태로 고쳐 쓴다.
     r2 = [
         "Every cell that is alive contains a molecule known as DNA, which acts like nature's own hard drive.",
         "Its remarkable quality lies not only in storing information but also in squeezing an enormous amount into an extremely small space.",
@@ -129,7 +132,7 @@ def _dna() -> Passage:
         "The method is still slow and expensive, yet it allows information to be preserved for thousands of years.",
         "One day the libraries and photographs we treasure may sit safely inside molecules.",
     ]
-    p.set_qa(GRAMMAR_COUNT, *B.make_grammar_count(
+    p.set_qa(GRAMMAR_FIX, *B.make_grammar_fix(
         r2,
         marks=[
             (0, "known", "knowing"),          # ① 수동 관계 → 오류
@@ -199,19 +202,23 @@ def _star() -> Passage:
         },
     ))
 
-    p.set_qa(IRRELEVANT, *B.make_irrelevant(
-        s, start_no=2, answer_no=4,
-        sentence=("Companies promote their best performers precisely because coaching "
-                  "a team always rewards personal brilliance."),
-        reason=("글은 '두 자리가 정반대 능력을 요구한다'는 논지를 편다. 이 문장은 지문의 낱말"
-                "(promote·performers·coaching·personal brilliance)을 그대로 쓰지만 인과를 날조했다 — "
-                "지문은 코칭이 개인의 탁월함을 보상한다고 한 적이 없고, 오히려 그 둘을 정반대로 "
-                "대비한다. 논지를 뒷받침하기는커녕 뒤집는다."),
+    # 연결어 — (A) 3번 문장은 원문이 'however' 를 문장 가운데 두므로 새로 빈칸을 놓고,
+    # (B) 5번 문장은 앞의 대비를 실제 상황으로 옮기는 자리다.
+    p.set_qa(LINKER, *B2.make_linker(
+        s, 3, 5, "", "",
+        pairs=[("However", "As a result"), ("Therefore", "However"),
+               ("For example", "In contrast"), ("However", "Similarly"),
+               ("Moreover", "As a result")],
+        answer_no=1,
+        reason=("(A) 앞은 '스타가 스타 상사가 될 것이라 여긴다'는 통념이고 뒤는 '두 자리는 거의 "
+                "정반대 능력을 요구한다'는 반박이라 뒤집는 자리다 → However. (B) 앞은 그 정반대 "
+                "능력이 무엇인지 밝힌 대목이고 뒤는 '스타를 앉혀 놓으니 개인 성과만 좇는다'는 "
+                "귀결이므로 결과를 잇는 자리다 → As a result."),
         wrong={
-            1: "①은 도입의 승진 관행을 받아 그 밑에 깔린 가정(스타가 스타 상사가 된다)을 드러낸다.",
-            2: "②는 however 로 그 가정을 반박하며 '정반대 능력'이라는 논점을 세운다.",
-            3: "③은 One ~ while the other ~ 로 그 정반대 능력이 무엇인지 풀어 준다.",
-            5: "⑤는 The team stalls 로 두 능력이 어긋난 결과를 보여 준다.",
+            2: "(A) 는 앞의 통념을 뒤집는 자리라 결과를 잇는 Therefore 가 맞지 않는다.",
+            3: "(A) 뒤 문장은 앞 진술의 예시가 아니라 반박이므로 For example 이 맞지 않는다.",
+            4: "(A) 는 맞지만 (B) 자리는 결과를 잇는 자리라 Similarly 가 관계를 잘못 짚는다.",
+            5: "(A) 자리에 Moreover 를 넣으면 통념을 오히려 더 밀어 주는 뜻이 되어 뒤집히지 않는다.",
         },
     ))
 
@@ -276,7 +283,7 @@ def _star() -> Passage:
         "The team stops moving forward, and the celebrated hire slowly turns into a letdown.",
         "In the end, the firm loses an outstanding contributor as well as a capable manager.",
     ]
-    p.set_qa(GRAMMAR_COUNT, *B.make_grammar_count(
+    p.set_qa(GRAMMAR_FIX, *B.make_grammar_fix(
         r2,
         marks=[
             (1, "assumed", "assuming"),   # ① 수동이어야 → 오류

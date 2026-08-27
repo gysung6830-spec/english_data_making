@@ -150,3 +150,17 @@ def G_a(match_count: int, reason: str, per_stmt: dict[int, str]) -> str:
     for i in sorted(per_stmt):
         parts.append(f'<p class="wrong">{_ABC[i - 1]} {F.esc(per_stmt[i])}</p>')
     return "".join(parts)
+
+
+# 연결어 (A)(B) ------------------------------------------------------------
+def linker_q(passage_html_with_blanks: str, choices: list[str]) -> str:
+    lis = "".join(
+        f'<li><span class="cnum">{F.circ(i)}</span> {c}</li>'   # choices 는 (A)-(B) HTML
+        for i, c in enumerate(choices, 1)
+    )
+    return (f'<div class="passage">{passage_html_with_blanks}</div>'
+            f'<ol class="choices">{lis}</ol>')
+
+
+def linker_a(answer_no: int, reason: str, wrong: dict[int, str] | None = None) -> str:
+    return _answer(answer_no, reason, wrong)

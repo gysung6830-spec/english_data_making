@@ -390,3 +390,81 @@ class ShortOut(BaseModel):
         if not v:
             raise ValueError("변형할 제시어(cue)가 최소 1개는 있어야 합니다.")
         return v
+
+
+# ---------------------------------------------------------------------------
+# 내용 O/X — 진술 5개를 각각 참·거짓으로 판정
+# ---------------------------------------------------------------------------
+class ContentOXOut(BaseModel):
+    """'일치하는 것 하나 고르기' 대신 다섯 진술을 각각 O/X 로 판정하게 한다.
+
+    5지선다는 넷을 몰라도 하나만 알면 맞고, 찍으면 20%가 맞는다. O/X 는 다섯 진술을
+    모두 판정해야 하므로 지문을 통째로 훑게 되고, 부분 점수도 줄 수 있다.
+    """
+
+    statements: list[str]          # 한국어 진술 5개
+    truths: list[bool]             # 각 진술이 글과 일치하는가(O=True)
+    reasons: list[str]             # 진술마다 왜 O 인지 / 어디가 X 인지
+
+    @field_validator("statements", "reasons")
+    @classmethod
+    def _five(cls, v: list[str]) -> list[str]:
+        if len(v) != 5:
+            raise ValueError("내용 O/X 는 진술과 근거가 각각 5개여야 합니다.")
+        return v
+
+    @model_validator(mode="after")
+    def _mixed(self):
+        if len(self.truths) != 5:
+            raise ValueError("truths 는 5개여야 합니다.")
+        n_true = sum(1 for t in self.truths if t)
+        if not (2 <= n_true <= 3):
+            raise ValueError(
+                f"O 는 2~3개여야 합니다(현재 {n_true}개). 한쪽으로 몰리면 학생이 "
+                "지문을 읽지 않고 전부 O 나 전부 X 로 찍습니다.")
+        return self
+
+
+# ---------------------------------------------------------------------------
+# 연결어 (A)(B) — 두 자리의 연결사를 짝으로 고른다
+# ---------------------------------------------------------------------------
+class LinkerPair(BaseModel):
+    a: str
+    b: str
+
+
+class LinkerOut(BaseModel):
+    """지문 두 곳을 (A)·(B) 빈칸으로 만들고, 들어갈 연결어 짝을 고르게 한다."""
+
+    blank_a_no: int                # (A) 가 들어갈 문장 번호(1-based)
+    blank_b_no: int                # (B) 가 들어갈 문장 번호(1-based, a 보다 뒤)
+    remove_a: str = ""             # 그 문장 첫머리에서 지울 기존 연결어(없으면 빈 문자열)
+    remove_b: str = ""
+    pairs: list[LinkerPair]        # 선지 5개 — (A)-(B) 짝
+    answer_no: int
+    reason: str
+    wrong_reasons: list[WrongReason]
+
+    @field_validator("pairs")
+    @classmethod
+    def _five(cls, v: list[LinkerPair]) -> list[LinkerPair]:
+        if len(v) != 5:
+            raise ValueError("연결어 선지는 정확히 5개여야 합니다.")
+        return v
+
+    @field_validator("answer_no")
+    @classmethod
+    def _range(cls, v: int) -> int:
+        if not (1 <= v <= 5):
+            raise ValueError("answer_no 는 1~5 여야 합니다.")
+        return v
+
+    @model_validator(mode="after")
+    def _sane(self):
+        if self.blank_a_no >= self.blank_b_no:
+            raise ValueError("(B) 는 (A) 보다 뒤 문장이어야 합니다.")
+        seen = {(p.a.strip().lower(), p.b.strip().lower()) for p in self.pairs}
+        if len(seen) != 5:
+            raise ValueError("연결어 짝 5개가 서로 달라야 합니다(같은 짝이 두 번 있습니다).")
+        _require_all_distractors(self.answer_no, self.wrong_reasons)
+        return self

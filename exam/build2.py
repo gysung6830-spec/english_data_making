@@ -170,6 +170,42 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     return F2.D_q(_shuffle_tokens(tokens, snapped), cues), F2.D_a(snapped, reason)
 
 
+# 연결어 (A)(B) -------------------------------------------------------------
+def make_linker(sentences, a_no: int, b_no: int, remove_a: str, remove_b: str,
+                pairs, answer_no: int, reason: str, wrong=None):
+    """지문 두 문장의 첫머리를 (A)·(B) 빈칸으로 만든다.
+
+    그 문장이 이미 연결어로 시작하면(However, / Rather, …) 그것을 지우고 빈칸을
+    놓는다. 지우지 않으면 '(A)_____ However, …' 처럼 연결어가 둘이 된다.
+    remove 로 준 말이 그 문장 첫머리에 실제로 없으면 문항이 어긋난 것이라 거절한다
+    (조용히 무시하면 학생용 지문에 연결어가 둘 남는다).
+    """
+    n = len(sentences)
+    if not (1 <= a_no < b_no <= n):
+        raise ValueError(f"연결어 자리는 1 이상 {n} 이하이고 (A) 가 (B) 보다 앞서야 "
+                         f"합니다(현재 A={a_no}, B={b_no}).")
+    if a_no == 1:
+        raise ValueError("첫 문장에는 연결어 자리를 두지 않습니다(앞에 이어받을 글이 없습니다).")
+
+    out = [s.strip() for s in sentences]
+    for no, rm, letter in ((a_no, remove_a, "A"), (b_no, remove_b, "B")):
+        sent = out[no - 1]
+        rm = (rm or "").strip()
+        if rm:
+            if not sent.lower().startswith(rm.lower()):
+                raise ValueError(f"({letter}) 문장이 '{rm}' 로 시작하지 않습니다: "
+                                 f"'{sent[:40]}…'")
+            sent = sent[len(rm):].lstrip(" ,")
+            sent = sent[:1].upper() + sent[1:] if sent else sent
+        out[no - 1] = f"\x00{letter}\x00 " + sent
+
+    body = F.esc(" ".join(out))
+    for letter in ("A", "B"):
+        body = body.replace(f"\x00{letter}\x00", F2.blank_ab(letter))
+    choices = [F2.E_pair(p.a, p.b) if hasattr(p, "a") else F2.E_pair(*p) for p in pairs]
+    return F2.linker_q(body, choices), F2.linker_a(answer_no, reason, wrong)
+
+
 # E · 요약문 빈칸(객관식) ---------------------------------------------------
 def make_E(sentences, before, mid, after, choice_pairs, answer_no, reason, wrong=None):
     """choice_pairs: [(a_word, b_word)] 5개. 요약문 위에 지문도 함께 제시한다."""

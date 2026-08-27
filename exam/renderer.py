@@ -17,7 +17,8 @@ from markupsafe import Markup
 from .types import TYPE_LABELS, TYPE_ORDER, TYPE_PROMPTS, Passage
 
 # 서술형 계열(단일 정답 번호가 없는 유형) — 빠른 정답에는 '서술형'으로 표기
-SHORT_TYPES = {"short_answer", "D"}
+# 정답이 원 번호가 아닌 유형 — 빠른 정답에는 '서술형'으로 적는다.
+SHORT_TYPES = {"short_answer", "D", "grammar_fix"}
 _KEY_RE = re.compile(r'<span class="answer-key">(.*?)</span>', re.S)
 
 # 번호(①·ⓑ)로 시작하는 근거 문단 — 오답 풀이처럼 번호를 내어쓰기 한다(CSS .reason.num).
@@ -250,6 +251,7 @@ def _stylesheets():
 # 재고, 문항 경계 중 두 단이 가장 고르게 나뉘는 자리를 골라 그 높이를 height 로 준 뒤
 # 2차 조판을 한다. 어림이 아니라 실측이라 빗나갈 일이 없다. 값은 CSS 픽셀.
 _GROUP_ID = "tg-"
+_COL_SLACK_PX = 4.0     # 칸 높이 여유(≈1mm)
 
 
 def _box_id(box) -> str | None:
@@ -303,7 +305,9 @@ def _balance_css(doc) -> str:
                  if hasattr(c, "margin_height")]
         if len(items) < 2:           # 문항이 하나뿐이면 나눌 수 없다
             continue
-        want = _even_split([c.margin_height() for c in items])
+        # 딱 맞게 주면 반올림 한 톨에 첫 단이 넘쳐, 칩만 남고 본문이 다음 쪽으로
+        # 밀린다(실제로 16쪽짜리가 26쪽이 됐다). 1mm 남짓 여유를 둔다.
+        want = _even_split([c.margin_height() for c in items]) + _COL_SLACK_PX
         rules.append(f"#{gid}{{height:{want:.1f}px}}")
     return "".join(rules)
 

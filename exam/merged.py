@@ -45,7 +45,9 @@ from .types import (
     ORDER,
     TOPIC,
     GRAMMAR_COUNT,
+    GRAMMAR_FIX,
     IRRELEVANT,
+    LINKER,
     PAIR_ODD,
     TITLE,
     TYPE_LABELS,
@@ -67,14 +69,14 @@ MERGED_ORDER: tuple[str, ...] = (
     B,             # 함의추론      (21번)
     CONTENT,       # 내용 일치     (26번)
     GRAMMAR,       # 어법 — 틀린 것 모두 고르기 (29번)
-    GRAMMAR_COUNT, # 어법 — 틀린 것의 개수      (29번 계열·내신)
+    GRAMMAR_FIX,   # 어법 서술형 — 틀린 넷을 찾아 바르게 고쳐 쓰기 (내신)
     PAIR_ODD,      # 어법·어휘 짝짓기 — 어법과 어휘를 잇는 자리
     # 어휘 3종은 쉬운 것부터 — 전체 배열과 같은 원칙(뒤로 갈수록 어려워진다).
     VOCAB_2,       # 어휘 — 원문단어형 (30번) 4개는 원문 그대로 → 어색한 하나만 찾으면 된다
     VOCAB,         # 어휘 — 유의어형   (30번) 5개가 다 바뀌어 하나하나 대조해야 한다
     VOCAB_3,       # 어휘 — 부정어형   (30번) 낱말은 멀쩡하고 '문장'이 글 흐름과 모순된다
     F,             # 빈칸추론      (31~34번)
-    IRRELEVANT,    # 무관한 문장    (35번)
+    LINKER,        # 연결어 (A)(B)  (수능 연결어 문항)
     ORDER,         # 순서 배열     (36~37번)
     INSERT,        # 문장 삽입     (38~39번)
     E,             # 요약문 빈칸    (40번)

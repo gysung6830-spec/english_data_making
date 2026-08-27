@@ -513,6 +513,16 @@ def make_content(sentences: list[str], choices: list[str], answer_no: int,
     return q, a
 
 
+def make_content_ox(sentences: list[str], statements: list[str],
+                    truths: list[bool], reasons: list[str]) -> tuple[str, str]:
+    """내용 O/X — 진술 5개를 각각 참·거짓으로 판정하게 한다."""
+    if not (len(statements) == len(truths) == len(reasons) == 5):
+        raise ValueError("내용 O/X 는 진술·판정·근거가 각각 5개여야 합니다.")
+    q = F.content_ox_q(" ".join(s.strip() for s in sentences), statements)
+    a = F.content_ox_a(list(truths), list(reasons))
+    return q, a
+
+
 # ---------------------------------------------------------------------------
 # ④ 어휘 (지정 단어만 원본과 다름)
 # ---------------------------------------------------------------------------
@@ -593,6 +603,38 @@ def make_grammar_count(sentences: list[str], marks: list[tuple[int, str, str]],
     q = F.grammar_count_q(marked, MAX_WRONG_COUNT)
     a = F.grammar_count_a(n_wrong, reasons, note)
     return q, a
+
+
+def make_grammar_fix(sentences: list[str], marks: list[tuple[int, str, str]],
+                     wrong_nos: list[int], reasons: dict[int, str],
+                     note: str = "",
+                     flags: list[str] | None = None) -> tuple[str, str]:
+    """어법 서술형 — 틀린 밑줄 4개의 '번호 + 바르게 고친 형태'를 학생이 적는다.
+
+    개수만 세는 문항과 재료는 같다(밑줄 6개·틀린 것 4개). 다만 답을 고르는 대신
+    적게 하므로 찍어서 맞힐 수 없고, '무엇이 왜 틀렸는지'까지 알아야 한다.
+    고친 형태는 따로 물을 필요가 없다 — 다시 쓴 지문의 원래 낱말(word)이 곧 정답이고,
+    보여 준 낱말(shown)이 틀린 형태다.
+    """
+    if len(marks) != N_COUNT_MARKS:
+        raise ValueError(f"어법 서술형의 밑줄은 정확히 {N_COUNT_MARKS}개여야 합니다.")
+    marks, remap = order_marks(sentences, marks)      # 읽는 순서로 번호 재매핑
+    wrong = sorted({remap.get(n, n) for n in wrong_nos})
+    reasons = {remap.get(n, n): t for n, t in reasons.items()}
+    if len(wrong) != FIXED_WRONG_COUNT:
+        raise ValueError(f"틀린 밑줄은 정확히 {FIXED_WRONG_COUNT}개여야 합니다"
+                         f"(현재 {len(wrong)}개).")
+    fixes = {}
+    for no in wrong:
+        _idx, word, shown = marks[no - 1]
+        if shown.strip().lower() == word.strip().lower():
+            raise ValueError(f"{no}번 밑줄이 틀린 것으로 표시됐는데 원래 낱말과 같습니다"
+                             f"('{shown}') — 고칠 것이 없습니다.")
+        fixes[no] = (shown.strip(), word.strip())
+    marks = expand_marks(sentences, marks)            # 'to confirm' 류 낱말 중복 방지
+    flag_ambiguous_marks(sentences, marks, flags)     # 같은 낱말 여러 번 → 확인 권장
+    marked = _passage_html(sentences, _underline_marks(marks))
+    return F.grammar_fix_q(marked, FIXED_WRONG_COUNT), F.grammar_fix_a(fixes, reasons, note)
 
 
 # ---------------------------------------------------------------------------

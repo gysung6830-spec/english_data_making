@@ -20,12 +20,15 @@ from exam.demo_data import DNA, demo_passages  # noqa: E402
 from exam.schemas import (  # noqa: E402
     Analysis,
     ContentOut,
+    ContentOXOut,
     GrammarCountOut,
     GrammarOut,
     GrammarReason,
     InsertOut,
     IrrelevantOut,
     KeyTerm,
+    LinkerOut,
+    LinkerPair,
     OrderOut,
     PairOddOut,
     ShortOut,
@@ -552,6 +555,24 @@ _FAKE = {
         choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
         wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
                        WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
+    # 내용 O/X — O 는 2~3개여야 한다(한쪽으로 몰리면 찍어서 맞는다)
+    "ContentOXOut": lambda: ContentOXOut(
+        statements=[f"진술{i}" for i in range(1, 6)],
+        truths=[True, False, False, True, False],
+        reasons=[f"근거{i}" for i in range(1, 6)]),
+    # 연결어 — (A) 2번 문장 · (B) 4번 문장. 원문에 연결어가 없으니 remove 는 비운다.
+    "LinkerOut": lambda: LinkerOut(
+        blank_a_no=2, blank_b_no=4, remove_a="", remove_b="",
+        pairs=[LinkerPair(a="However", b="Therefore"),
+               LinkerPair(a="Moreover", b="However"),
+               LinkerPair(a="For example", b="Similarly"),
+               LinkerPair(a="Therefore", b="Instead"),
+               LinkerPair(a="In contrast", b="Moreover")],
+        answer_no=1, reason="(A) 대조 · (B) 인과.",
+        wrong_reasons=[WrongReason(no=2, text="(A)가 어긋남"),
+                       WrongReason(no=3, text="(A)가 어긋남"),
+                       WrongReason(no=4, text="(B)가 어긋남"),
+                       WrongReason(no=5, text="둘 다 어긋남")]),
     # 어휘는 3종을 잇달아 만들므로, 호출마다 '겹치지 않는' 밑줄 묶음을 돌려준다
     # (실제 LLM 이 [겹침 금지] 지시를 따랐을 때의 모습).
     "VocabOut": lambda: VocabOut(
@@ -1758,7 +1779,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     # 옛 A(짝짓기)는 pair_odd 로 되살렸다 — 뺐던 3유형 중 유일하게 되돌아온 것
     assert "pair_odd" in MERGED_ORDER
     # 새로 만든 슬롯키(옛 A 는 pair_odd 라는 새 키로 다시 들였다)
-    _added = {"title", "irrelevant", "vocab_2", "vocab_3", "grammar_count", "pair_odd"}
+    _added = {"title", "linker", "vocab_2", "vocab_3", "grammar_fix", "pair_odd"}
     _dropped = {"short_answer"}          # 어순 배열·요약문과 겹쳐 뺐다
     assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
             == (set(MERGED_ORDER) - _added) | set(EXCLUDED) | _dropped)
@@ -1766,12 +1787,15 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
     assert MERGED_ORDER == ("topic", "title", "B", "content",
-                            "grammar", "grammar_count", "pair_odd",
-                            "vocab_2", "vocab", "vocab_3", "F", "irrelevant",
+                            "grammar", "grammar_fix", "pair_odd",
+                            "vocab_2", "vocab", "vocab_3", "F", "linker",
                             "order", "insert", "E", "D"), MERGED_ORDER
     # 어법 두 문항은 발문이 서로 달라야 한다(같은 문제를 두 번 내는 것이 아니다)
-    assert MERGED_PROMPTS["grammar"] != MERGED_PROMPTS["grammar_count"]
-    assert "개수" in MERGED_PROMPTS["grammar_count"]
+    assert MERGED_PROMPTS["grammar"] != MERGED_PROMPTS["grammar_fix"]
+    assert "고쳐 쓰시오" in MERGED_PROMPTS["grammar_fix"]
+    #    내용 일치는 O/X, 무관한 문장 자리는 연결어가 대신한다
+    assert "O, 일치하지 않으면 X" in MERGED_PROMPTS["content"]
+    assert "(A), (B)" in MERGED_PROMPTS["linker"]
     assert MERGED_ORDER[-1] == "D"                          # 서술형 계열은 맨 뒤
     # 서술형은 뺐다 — (2)는 어순 배열과, (3)은 요약문과 과제가 똑같았다
     assert "short_answer" not in MERGED_ORDER
@@ -1797,9 +1821,10 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     ps = build_passages_merged(_Counting(), [_DUMMY, _DUMMY2], labels=["10-1", "10-2"])
     assert "AOut" not in seen and "GOut" not in seen, seen      # A·G 생성 안 함
     assert seen.get("GrammarOut") == 2, seen                    # 어법(모두 고르기) 지문당 1번
-    assert seen.get("GrammarCountOut") == 2, seen               # 어법(개수) 지문당 1번
+    assert seen.get("GrammarCountOut") == 2, seen               # 어법 서술형 지문당 1번
     assert seen.get("VocabOut") == 6, seen                      # 어휘는 지문당 3번(3종)
-    assert seen.get("TitleOut") == 2 and seen.get("IrrelevantOut") == 2, seen
+    assert seen.get("TitleOut") == 2 and seen.get("LinkerOut") == 2, seen
+    assert seen.get("ContentOXOut") == 2, seen                  # 내용 O/X 지문당 1번
     assert seen.get("VerifyOut") == 20, seen                    # 자기검증 지문당 10회
 
     # ③ 지문마다 16문항이 순서대로, 라벨도 보존된다
@@ -1871,7 +1896,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 10
     # 짝짓기는 '밑줄 묶음' 안에서 만들어지지만 자기검증은 빠뜨리지 않는다
     assert "pair_odd" in _v.HIGH_RISK
-    print("✓ 변형문제 통합본(16문항·제목·무관한문장·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
+    print("✓ 변형문제 통합본(16문항·제목·연결어·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
 
 
 def test_new_type_guards() -> None:
@@ -1879,9 +1904,8 @@ def test_new_type_guards() -> None:
 
     ① 제목 — 선지 5개가 제목 형식으로 통일됐는가(하나만 서술문이면 답이 티 난다)
     ② 어휘 3종 — 세 문제의 밑줄이 겹치지 않는가
-    ③ 무관한 문장 — 지문 낱말을 쓰되 원문 되풀이가 아닌가
+    ③ 연결어 — 빈칸 자리와 지울 연결어가 지문과 맞는가
     """
-    from exam.generators.irrelevant import check_irrelevant_sentence as chk_irr
     from exam.generators.title import check_title_form as chk_title
 
     # ① 제목 형식 통일 -------------------------------------------------------
@@ -1968,14 +1992,39 @@ def test_new_type_guards() -> None:
             half = [c for c in ch if len(want & set(c)) == 1]
             assert len(half) == 3, ch
 
-    # ⑤ 무관한 문장 ----------------------------------------------------------
-    sents = DNA.sentences
-    assert chk_irr("Most large firms now run their interviews online.", sents)   # 소재 동떨어짐
-    assert chk_irr(sents[2], sents)                                              # 원문 되풀이
-    ok = ("Because living cells needed to store information, they gradually shrank "
-          "until they could survive in bone and ice.")
-    assert chk_irr(ok, sents) == [], chk_irr(ok, sents)     # 지문 낱말 + 인과 뒤집기
-    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 정답 긍정형·무관한 문장) 통과")
+    # ⑤ 연결어 --------------------------------------------------------------
+    import re as _re2
+
+    from exam import build2 as _B2
+    lsents = ["First sentence sets the scene.", "However, the second turns.",
+              "A third adds detail.", "Therefore, the fourth concludes."]
+    pairs = [("However", "Therefore"), ("Moreover", "However"), ("Thus", "Moreover"),
+             ("In contrast", "Similarly"), ("For example", "Instead")]
+    q, _a = _B2.make_linker(lsents, 2, 4, "However,", "Therefore,", pairs, 1, "이유",
+                            {2: "a", 3: "b", 4: "c", 5: "d"})
+    plain = _re2.sub(r"<[^>]+>", " ", q)
+    assert q.count('class="blank"') == 2                    # (A)·(B) 두 자리
+    assert "However" not in plain.split("①")[0]             # 지문에서 지워졌다
+    assert "Therefore" not in plain.split("①")[0]
+    assert "The second turns" in plain                       # 연결어를 뗀 뒤 첫 글자 대문자
+    #    지울 연결어가 그 문장에 실제로 없으면 문항이 어긋난 것 — 거절한다
+    for args in (("Moreover,", "Therefore,"), ("However,", "Thus,")):
+        try:
+            _B2.make_linker(lsents, 2, 4, *args, pairs=pairs, answer_no=1,
+                            reason="이유", wrong={2: "a", 3: "b", 4: "c", 5: "d"})
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"{args} 가 통과되면 안 된다")
+    #    첫 문장에는 연결어 자리를 두지 않는다(앞에 이어받을 글이 없다)
+    try:
+        _B2.make_linker(lsents, 1, 3, "", "", pairs, 1, "이유",
+                        {2: "a", 3: "b", 4: "c", 5: "d"})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("첫 문장 빈칸이 통과되면 안 된다")
+    print("✓ 새 유형 안전장치(제목 형식·어휘 밑줄 겹침·요약문 정답 긍정형·연결어) 통과")
 
 
 def test_tiering_and_escalation() -> None:
@@ -1988,11 +2037,12 @@ def test_tiering_and_escalation() -> None:
     from exam.merged import MERGED_ORDER, build_passage_merged
 
     # ① 강도 배분 ------------------------------------------------------------
-    assert tiering.effort_for("irrelevant") == "high"     # 논지 판단
+    assert tiering.effort_for("linker") == "high"         # 두 자리가 바꿔 써지면 복수정답
     assert tiering.effort_for("F") == "high"              # 빈칸 유일성
     assert tiering.effort_for("insert") == "high"
     assert tiering.effort_for("grammar") == "high"        # 다시 쓴 지문 위에 내므로 부담이 크다
-    assert tiering.effort_for("grammar_count") == "high"  # 밑줄 하나만 어긋나도 개수가 틀린다
+    assert tiering.effort_for("grammar_fix") == "high"    # 고칠 방법이 하나뿐이어야 한다
+    assert tiering.effort_for("content") == "high"        # O/X 다섯을 모두 확정해야 한다
     assert tiering.effort_for("vocab") == "medium"        # 형식은 코드가 본다
     assert tiering.effort_for("vocab_3") == "medium"      # 슬롯키도 base 로 판정
     assert tiering.effort_for("title") == "medium"
@@ -2001,7 +2051,7 @@ def test_tiering_and_escalation() -> None:
     c = _FakeClient()
     p = build_passage_merged(c, _DUMMY)
     by_schema = dict(c.efforts)
-    assert by_schema["IrrelevantOut"] == "high", c.efforts
+    assert by_schema["LinkerOut"] == "high", c.efforts
     assert by_schema["VocabOut"] == "medium", c.efforts
     assert by_schema["TitleOut"] == "medium", c.efforts
     assert by_schema["VerifyOut"] == "high", c.efforts    # 검수는 강도를 안 낮춘다
@@ -2204,12 +2254,15 @@ def test_grammar_count_fixed_four() -> None:
     else:
         raise AssertionError("틀린 것이 2개인데 통과되면 안 된다")
 
-    # 데모도 같은 규칙을 따른다
+    # 데모(어법 서술형)도 같은 규칙을 따른다 — 밑줄 6개, 고쳐 쓸 것 4개
     from exam.merged import demo_passages_merged
     dq = demo_passages_merged()[0]
-    assert len(_re.findall(r'<u>.*?</u>', dq.q["grammar_count"])) == 6
-    assert _re.search(r'answer-key">(.)<', dq.a["grammar_count"]).group(1) == "④"
-    print("✓ 어법 개수(밑줄 6개·틀린 것 4개 고정·선지 ①~⑥) 통과")
+    assert len(_re.findall(r'<u>.*?</u>', dq.q["grammar_fix"])) == 6
+    key = _re.search(r'answer-key">(.*?)</span>', dq.a["grammar_fix"]).group(1)
+    assert len(_re.findall(r"[①-⑥][^,]*?→", key)) == 4, key
+    #    답란도 네 줄이어야 한다(학생이 적을 자리)
+    assert dq.q["grammar_fix"].count('class="fix-row"') == 4
+    print("✓ 어법 서술형(밑줄 6개·고쳐 쓸 것 4개·답란 4줄) 통과")
 
 
 def test_demo_matches_real_rules() -> None:
@@ -2243,10 +2296,11 @@ def test_demo_matches_real_rules() -> None:
             ch = [_re.sub(r"^[①-⑤]\s*", "", c) for c in ch]
             assert check_title_form(ch) == [], (p.title, check_title_form(ch))
 
-        # ③ 어법 개수는 밑줄 6개·틀린 것 4개(정답 ④)
-        if "grammar_count" in p.q:
-            assert len(_re.findall(r"<u>.*?</u>", p.q["grammar_count"])) == 6
-            assert _re.search(r'answer-key">(.)<', p.a["grammar_count"]).group(1) == "④"
+        # ③ 어법 서술형은 밑줄 6개·고쳐 쓸 것 4개
+        if "grammar_fix" in p.q:
+            assert len(_re.findall(r"<u>.*?</u>", p.q["grammar_fix"])) == 6
+            k = _re.search(r'answer-key">(.*?)</span>', p.a["grammar_fix"]).group(1)
+            assert len(_re.findall(r"[①-⑥][^,]*?→", k)) == 4, (p.title, k)
 
         # ④ 순서 배열은 네 덩어리이고 (A)가 첫 덩어리가 아니다
         if "order" in p.q:
@@ -2257,7 +2311,20 @@ def test_demo_matches_real_rules() -> None:
 
         # ⑤ 모든 문항이 갖춰져 있다
         assert list(p.q) == list(MERGED_ORDER), [t for t in MERGED_ORDER if t not in p.q]
-    print("✓ 데모가 실제 생성 규칙(밑줄 겹침·제목 갈래·어법 개수·순서 4덩어리)을 지킴")
+        # ⑥ 내용 O/X 는 다섯 진술을 모두 판정하고, O 는 2~3개
+        if "content" in p.q:
+            k = _re.search(r'answer-key">(.*?)</span>', p.a["content"]).group(1)
+            ox = _re.findall(r"[①-⑤]\s*([OX])", k)
+            assert len(ox) == 5, (p.title, k)
+            assert 2 <= ox.count("O") <= 3, (p.title, k)
+            assert p.q["content"].count('class="ox-box"') == 5
+
+        # ⑦ 연결어는 (A)·(B) 빈칸 하나씩과 짝 선지 5개
+        if "linker" in p.q:
+            assert p.q["linker"].count('class="blank"') == 2, p.title
+            assert len(_re.findall(r"<li>", p.q["linker"])) == 5, p.title
+
+    print("✓ 데모가 실제 생성 규칙(밑줄 겹침·제목 갈래·어법 서술형·O/X·연결어)을 지킴")
 
 
 def test_output_defect_regressions() -> None:

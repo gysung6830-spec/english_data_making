@@ -248,6 +248,37 @@ body {
 .choices.topic li,
 .choices.content li { margin: 1mm 0; text-align: left; }
 
+/* ---------- 내용 O/X ---------- */
+/* 진술마다 O·X 를 적을 괄호를 오른쪽 끝에 붙인다(진술 길이가 달라도 세로로 줄이 선다). */
+.choices.ox li { margin: 1.6mm 0; padding-right: 12mm; position: relative; }
+.ox-box {
+  position: absolute;
+  right: 0;
+  font-weight: 700;
+  letter-spacing: 0.4mm;
+  color: #2f7d61;
+}
+
+/* ---------- 어법 서술형 답란 ---------- */
+/* '( ) → ______' 네 줄. 학생이 번호와 고친 형태를 직접 적는다. */
+.fix-box {
+  break-inside: avoid;
+  border: 0.8px solid #bcd8cc;
+  border-radius: 1.6mm;
+  background: #f7fbf9;
+  padding: 2mm 2.6mm 1.2mm 2.6mm;
+  margin: 1.5mm 0 0 0;
+}
+.fix-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6mm;
+  margin-bottom: 2.6mm;
+}
+.fix-no { font-weight: 700; color: #2f7d61; letter-spacing: 0.3mm; }
+.fix-arrow { color: #2f7d61; }
+.fix-line { flex: 1; border-bottom: 0.6px solid #9db8ac; height: 4.2mm; }
+
 /* 밑줄/네모 표시 */
 u { text-decoration: underline; text-underline-offset: 1.5px; }
 .box {

@@ -273,3 +273,62 @@ def short_answer_a(
     if q3_reason:
         parts.append(f'<p class="reason">{esc(q3_reason)}</p>')
     return "".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# 내용 O/X — 진술마다 O·X 를 적는다
+# ---------------------------------------------------------------------------
+def content_ox_q(passage: str, statements: list[str]) -> str:
+    lis = "".join(
+        f'<li><span class="cnum">{circ(i)}</span> {esc(s)}'
+        f'<span class="ox-box">(&nbsp;&nbsp;&nbsp;&nbsp;)</span></li>'
+        for i, s in enumerate(statements, 1)
+    )
+    return (
+        f'<div class="passage">{esc(passage)}</div>'
+        f'<ol class="choices content ox">{lis}</ol>'
+    )
+
+
+def ox_key(truths: list[bool]) -> str:
+    """빠른 정답에 실릴 한 줄 — '①O ②X ③X ④O ⑤X'."""
+    return " ".join(f"{circ(i)}{'O' if t else 'X'}"
+                    for i, t in enumerate(truths, 1))
+
+
+def content_ox_a(truths: list[bool], reasons: list[str]) -> str:
+    parts = [f'<p><span class="answer-key">{esc(ox_key(truths))}</span></p>']
+    for i, (t, why) in enumerate(zip(truths, reasons), 1):
+        mark = "O" if t else "X"
+        parts.append(f'<p class="wrong">{circ(i)} <b>{mark}</b> — {esc(why)}</p>')
+    return "".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# 어법 서술형 — 틀린 번호와 고친 형태를 적는다
+# ---------------------------------------------------------------------------
+def grammar_fix_q(marked_passage_html: str, n_answers: int) -> str:
+    """밑줄이 박힌 본문 + '번호 / 바르게 고친 것' 답란 n_answers 줄."""
+    rows = "".join(
+        '<div class="fix-row">'
+        '<span class="fix-no">(&nbsp;&nbsp;&nbsp;)</span>'
+        '<span class="fix-arrow">→</span>'
+        '<span class="fix-line"></span>'
+        "</div>"
+        for _ in range(n_answers)
+    )
+    return (f'<div class="passage">{marked_passage_html}</div>'
+            f'<div class="fix-box">{rows}</div>')
+
+
+def grammar_fix_a(fixes: dict[int, tuple[str, str]], reasons: dict[int, str],
+                  note: str = "") -> str:
+    """정답 = '② shown → word' 줄들 + 밑줄마다 옳은지 틀린지."""
+    key = ", ".join(f"{circ(i)} {shown} → {word}"
+                    for i, (shown, word) in sorted(fixes.items()))
+    parts = [f'<p><span class="answer-key">{esc(key)}</span></p>']
+    if note:
+        parts.append(f'<p class="reason">{esc(note)}</p>')
+    for i in sorted(reasons):
+        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}</p>')
+    return "".join(parts)

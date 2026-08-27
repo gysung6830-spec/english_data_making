@@ -20,10 +20,13 @@ from __future__ import annotations
 # 추론 강도 — 판단이 걸린 유형만 high, 나머지는 medium.
 #   high  : 정답 유일성을 따져야 하고, 틀리면 복수정답·정답 없음이 되는 유형
 #   medium: 코드가 형식을 검사해 주거나(어휘·제목), 구조가 단순한 유형
-_HIGH = {"irrelevant", "F", "insert", "order", "content", "B", "E",
-         # 어법 두 유형은 지문을 다시 써서 내므로(암기 방지) 판단 부담이 크다.
+_HIGH = {"F", "insert", "order", "content", "B", "E",
+         # 연결어는 두 자리가 '서로 바꿔 써도 되는' 관계면 곧바로 복수정답이 된다.
+         "linker",
+         # 어법 세 유형은 지문을 다시 써서 내므로(암기 방지) 판단 부담이 크다.
          # 다시 쓴 문장에 뜻하지 않은 오류가 남으면 정답이 여러 개가 된다.
-         "grammar", "grammar_count",
+         # 서술형은 '고칠 방법이 하나뿐인가'까지 따져야 해서 특히 그렇다.
+         "grammar", "grammar_fix",
          # 짝짓기는 밑줄 5개 판정이 모두 맞아야 짝이 성립한다.
          "pair_odd"}
 _MEDIUM = {"topic", "title", "vocab", "D", "short_answer"}

@@ -12,14 +12,14 @@ from . import analyzer, answer_spread
 from . import verify as _verify
 from ._concurrent import run_parallel
 from .generators import (
-    content, grammar, grammar_count, insert, irrelevant, order, pair_odd,
+    content, grammar, grammar_fix, insert, linker, order, pair_odd,
     title, topic, vocab,
 )
 from .llm import ClaudeClient
 from .types import (
     CONTENT,
-    GRAMMAR_COUNT,
-    IRRELEVANT,
+    GRAMMAR_FIX,
+    LINKER,
     PAIR_ODD,
     TITLE,
     VOCAB_2,
@@ -40,8 +40,8 @@ GENERATORS = {
     GRAMMAR: grammar,
     CONTENT: content,
     TITLE: title,
-    IRRELEVANT: irrelevant,
-    GRAMMAR_COUNT: grammar_count,
+    LINKER: linker,
+    GRAMMAR_FIX: grammar_fix,
     PAIR_ODD: pair_odd,
 }
 

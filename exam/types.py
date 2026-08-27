@@ -28,7 +28,9 @@ SHORT_ANSWER = "short_answer"
 TITLE = "title"                 # 제목 (수능 24번)
 GRAMMAR_COUNT = "grammar_count"  # 어법상 틀린 것의 개수 (수능 29번 계열)
 PAIR_ODD = "pair_odd"           # 어법·어휘 짝짓기 (부적절한 것끼리 짝)
-IRRELEVANT = "irrelevant"       # 무관한 문장 (수능 35번)
+IRRELEVANT = "irrelevant"       # 무관한 문장 (수능 35번) — 지금은 연결어(LINKER)로 대체
+LINKER = "linker"               # 연결어 (A)(B) (수능 연결어 문항)
+GRAMMAR_FIX = "grammar_fix"     # 어법 서술형 — 틀린 4개를 찾아 번호와 고친 형태를 쓴다
 # 어휘는 한 지문에서 세 방식을 모두 출제한다(같은 발문·다른 문제).
 #   vocab   = 유의어형   — 정답만 반의어, 나머지 4개는 유의어로 패러프레이즈
 #   vocab_2 = 원문단어형 — 정답만 반의어, 나머지 4개는 원문 단어 그대로
@@ -49,10 +51,13 @@ TYPE_PROMPTS: dict[str, str] = {
     TOPIC: "다음 글의 주제로 가장 적절한 것은?",
     VOCAB: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
     GRAMMAR: "밑줄 친 부분 중, 어법상 틀린 것을 모두 고르시오.",
-    CONTENT: "위 글의 내용과 일치하는 것은?",
+    CONTENT: "다음 진술이 글의 내용과 일치하면 O, 일치하지 않으면 X 를 쓰시오.",
     SHORT_ANSWER: "다음 글을 읽고 물음에 답하시오.",
     TITLE: "다음 글의 제목으로 가장 적절한 것은?",
     GRAMMAR_COUNT: "밑줄 친 부분 중, 어법상 틀린 것의 개수는?",
+    GRAMMAR_FIX: ("밑줄 친 부분 중 어법상 틀린 것 4개를 찾아, 번호를 쓰고 "
+                  "바르게 고쳐 쓰시오."),
+    LINKER: "다음 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?",
     PAIR_ODD: "밑줄 친 부분 중, 어법상 또는 문맥상 낱말의 쓰임이 적절하지 않은 것끼리 짝지어진 것은?",
     IRRELEVANT: "다음 글에서 전체 흐름과 관계 없는 문장은?",
     VOCAB_2: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
@@ -66,12 +71,14 @@ TYPE_LABELS: dict[str, str] = {
     TOPIC: "주제",
     VOCAB: "어휘",
     GRAMMAR: "어법",
-    CONTENT: "내용 일치",
+    CONTENT: "내용 O/X",
     SHORT_ANSWER: "서술형",
     TITLE: "제목",
     GRAMMAR_COUNT: "어법 개수",
     PAIR_ODD: "어법·어휘 짝짓기",
     IRRELEVANT: "무관한 문장",
+    LINKER: "연결어",
+    GRAMMAR_FIX: "어법 서술형",
     VOCAB_2: "어휘",
     VOCAB_3: "어휘",
 }

@@ -72,6 +72,22 @@ def dump_parts(part_meta: list[dict], header: str = "", doc_name: str = "") -> d
     }
 
 
+# 유형표가 바뀌기 전의 슬롯키(새 키가 없으면 이것으로 조판한다)
+_LEGACY = {"linker": "irrelevant", "grammar_fix": "grammar_count"}
+
+
+def _with_legacy(order, passages) -> tuple:
+    """새 유형이 JSON 에 없으면 그 자리를 옛 유형으로 바꾼 유형 순서."""
+    out = []
+    for t in order:
+        old = _LEGACY.get(t)
+        if old and all(t not in p.q for p in passages) and any(old in p.q for p in passages):
+            out.append(old)
+        else:
+            out.append(t)
+    return tuple(out)
+
+
 def _header_note(tag: str, header: str) -> str:
     return f"{tag} — {header}" if (tag and header) else (tag or header)
 
@@ -93,6 +109,11 @@ def load_parts(data: dict, header_override: str | None = None) -> tuple[list[dic
         passages = [passage_from_dict(pd) for pd in (pm.get("passages") or [])]
         if not passages:
             raise ValueError("빈 파트가 있습니다(지문 없음).")
+        # 옛 JSON 재출력: 그 사이 바뀐 유형은 예전 것으로 대신 채워 넣는다.
+        #   무관한 문장 → 연결어 · 어법 개수 → 어법 서술형
+        # 유형표를 바꿨다고 예전 결과물을 못 뽑게 되면 안 된다(재출력은 API 를 쓰지
+        # 않는 기능이라, 이미 만들어 둔 세트를 제목만 바꿔 다시 뽑을 때 쓴다).
+        order = _with_legacy(order, passages)
         # 문항 완비 검증(JSON 손상·수정 실수 방지)
         for p in passages:
             missing = [t for t in order if t not in p.q or t not in p.a]

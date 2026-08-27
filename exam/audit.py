@@ -39,11 +39,13 @@ _CIRC = "①②③④⑤⑥⑦⑧"
 _MARKS = "①②③④⑤⑥⑦⑧ⓐⓑⓒⓓⓔ"
 
 # 유형별로 기대하는 밑줄 개수(없으면 검사하지 않는다)
-_N_MARKS = {"vocab": 5, "vocab_2": 5, "vocab_3": 5, "pair_odd": 5, "grammar_count": 6}
+_N_MARKS = {"vocab": 5, "vocab_2": 5, "vocab_3": 5, "pair_odd": 5,
+            "grammar_count": 6, "grammar_fix": 6}
 # 선지 개수
 _N_CHOICES = {"grammar_count": 6}
 # <li> 선지가 없는 유형. 삽입·무관한 문장은 본문 속 위치 표시(①~⑤)가 선지 구실을 한다.
-_NO_CHOICES = {"grammar", "vocab", "vocab_2", "vocab_3", "D", "insert", "irrelevant"}
+_NO_CHOICES = {"grammar", "vocab", "vocab_2", "vocab_3", "D", "insert",
+               "irrelevant", "grammar_fix"}
 
 
 def _txt(h: str) -> str:
@@ -120,6 +122,21 @@ def _check_item(it: dict) -> list[str]:
     # 어법 개수 — 정답은 늘 ④(4개)
     if t == "grammar_count" and it["key"] and "④" not in it["key"]:
         bad.append(f"어법 개수의 정답이 {it['key']}입니다 — 틀린 것은 늘 4개(④)로 냅니다.")
+
+    # 어법 서술형 — 고쳐 쓸 것이 정확히 4개, 모두 '보여 준 형태 → 바른 형태'
+    if t == "grammar_fix":
+        fixes = re.findall(r"[①-⑧][^,]*?→", it["key"])
+        if len(fixes) != 4:
+            bad.append(f"고쳐 쓸 밑줄이 {len(fixes)}개입니다(4개여야 합니다).")
+
+    # 내용 O/X — 다섯 진술이 모두 판정돼야 하고, 한쪽으로 몰리면 찍어서 맞는다
+    if t == "content" and "O" in it["key"] and "X" in it["key"]:
+        marks = re.findall(r"[①-⑧]\s*([OX])", it["key"])
+        if len(marks) != 5:
+            bad.append(f"O/X 판정이 {len(marks)}개입니다(진술 5개 모두여야 합니다).")
+        elif not (2 <= marks.count("O") <= 3):
+            bad.append(f"O 가 {marks.count('O')}개입니다 — 한쪽으로 몰리면 학생이 "
+                       "지문을 읽지 않고 전부 O(또는 X)로 찍습니다.")
 
     # 위치 표시(삽입·무관한 문장)의 자리 수
     if t in ("insert", "irrelevant"):
@@ -297,7 +314,8 @@ def check_passage(passage, start_no: int = 1) -> tuple[list[dict], list[str]]:
         whole.append(f"{len(missing)}개 유형이 빠졌습니다: {', '.join(missing)}")
     # 정답 번호 쏠림 — 단일정답 문항만 센다
     keys = [answer_no(it["key"]) for it in rows
-            if it["type"] not in ("grammar", "D") and answer_no(it["key"])]
+            if it["type"] not in ("grammar", "D", "grammar_fix", "content")
+            and answer_no(it["key"])]
     if keys:
         c = Counter(keys)
         top, n = c.most_common(1)[0]
