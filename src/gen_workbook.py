@@ -156,6 +156,26 @@ POL_POS = r"\b(critical|crucial|essential|vital|fundamental|indispensable|signif
 POL_NEG = r"\b(abandon(?:s|ed)?|discard(?:s|ed)?|eliminate[sd]?|neglect(?:s|ed)?|ignore[sd]?|dismiss(?:es|ed)?|overlook(?:s|ed)?|reject(?:s|ed)?|refuse[sd]?|den(?:y|ies|ied)|forbid(?:s|den)?|hinder(?:s|ed)?|diminish(?:es|ed)?|obscure[sd]?|undermine[sd]?|disregard(?:s|ed)?|lack(?:s|ed|ing)?|absence|flaw(?:s|ed)?|drawback|fail(?:s|ed|ing)?|problem(?:s|atic)?|threat(?:s|en(?:s|ed)?)?|harm(?:s|ed|ful)?|damage[sd]?|weaken(?:s|ed)?|suffer(?:s|ed|ing)?|danger(?:ous)?|useless|worthless|destroy(?:s|ed)?|hardly|rarely|scarcely|by no means)\b"
 
 
+_SIG_GROUPS = [
+    ("red", ["역접", "대조", "양보", "전환", "반전"]),
+    ("orange", ["인과", "조건", "이유", "근거", "결과", "상관", "비례"]),
+    ("purple", ["강조", "한정", "주장", "당위", "단정", "최상급", "인정", "부정", "결핍"]),
+    ("blue", ["지시", "반복", "정의", "명명", "선행", "지속", "관련", "복선"]),
+    ("green", ["핵심", "결론", "주제", "도입", "중심", "배경", "상황", "질문", "위험",
+               "해결", "변화", "특징", "시점", "연대", "시간", "연결", "흐름"]),
+    ("gray", ["예시", "부연", "첨가", "열거", "비유", "유추", "환언", "추가", "사례", "보완"]),
+]
+
+
+def sig_color(name):
+    """신호명 → 6색 그룹 색키."""
+    for col, keys in _SIG_GROUPS:
+        for k in keys:
+            if k in (name or ""):
+                return col
+    return "red"
+
+
 def _mark_sentence(text, tags, mark_rel, rel_cap=2, pol_cap=2):
     """노랑/회색 문장 마킹 — ①근거 신호(빨강) ②논리 관계어(파랑) ③±어휘(＋녹/−적).
        관계어·±는 노랑·회색 문장에 표시(mark_rel=True), 겹치면 신호>관계어>±,
@@ -200,7 +220,8 @@ def _mark_sentence(text, tags, mark_rel, rel_cap=2, pol_cap=2):
     for a, b, kind, label in chosen:
         out.append(esc(text[i:a]))
         if kind == "sig":
-            out.append(f'<span class="tag hot">{esc(label)}</span><span class="rk">{esc(text[a:b])}</span>')
+            _sc = sig_color(label)
+            out.append(f'<span class="tag sc-{_sc}">{esc(label)}</span><span class="rk rk-{_sc}">{esc(text[a:b])}</span>')
         elif kind.startswith("rel"):
             cls = kind.split(":", 1)[1]
             out.append(f'<span class="tag rel {cls}">{esc(label)}</span><u class="ru {cls}">{esc(text[a:b])}</u>')
@@ -209,7 +230,7 @@ def _mark_sentence(text, tags, mark_rel, rel_cap=2, pol_cap=2):
             out.append(f'<u class="pu {cls}">{esc(text[a:b])}</u><sup class="pm {cls}">{label}</sup>')
         i = b
     tail = "".join(out) + esc(text[i:])
-    pre = "".join(f'<span class="tag hot">{esc(s)}</span> ' for s in unmatched)
+    pre = "".join(f'<span class="tag sc-{sig_color(s)}">{esc(s)}</span> ' for s in unmatched)
     html_out = pre + tail
     # 빈칸(31~40): 밑줄 구간을 빈칸 박스로
     html_out = re.sub(r'_{3,}', '<span class="bk">&nbsp;&nbsp;&nbsp;</span>', html_out)
@@ -1597,6 +1618,13 @@ mark.g{ background:var(--src); padding:0 2px; border-radius:2px; }
 .mg-xt{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border-radius:7px; padding:0 5px; margin-left:4px; vertical-align:1px; }
 .tag{ font-size:7.5px; font-weight:800; color:#fff; background:var(--trap); border:1px solid var(--trap); border-radius:3px; padding:0 4px; vertical-align:1px; margin:0 1px; }
 .tag.hot{ color:#fff; background:var(--trap); border-color:var(--trap); }
+/* 신호 6색 칩 (신호 사전과 일치) */
+.tag.sc-red{ background:#cd5049; border-color:#cd5049; } .tag.sc-orange{ background:#d98324; border-color:#d98324; }
+.tag.sc-purple{ background:#8b5cf6; border-color:#8b5cf6; } .tag.sc-blue{ background:#2f6fb0; border-color:#2f6fb0; }
+.tag.sc-green{ background:#1f7a5c; border-color:#1f7a5c; } .tag.sc-gray{ background:#8a929b; border-color:#8a929b; }
+.rk-red{ background:#f4b8b2; color:#7a1f19; box-shadow:inset 0 -2px 0 #d98b84; } .rk-orange{ background:#fbe0c4; color:#824a12; box-shadow:inset 0 -2px 0 #e0ab6e; }
+.rk-purple{ background:#e3d7fb; color:#4b2ca0; box-shadow:inset 0 -2px 0 #b9a0ef; } .rk-blue{ background:#cfe0f3; color:#194e7e; box-shadow:inset 0 -2px 0 #8db4dc; }
+.rk-green{ background:#c9e6db; color:#12543d; box-shadow:inset 0 -2px 0 #7fbfa8; } .rk-gray{ background:#e3e7ea; color:#495159; box-shadow:inset 0 -2px 0 #b3bcc4; }
 .tag.pos{ color:#7a5c00; background:var(--must); border-color:var(--must-line); }
 /* 논리 관계어 태그(파랑 계열) — 빨강 '근거 신호'와 구분 */
 .tag.rel{ color:#fff; border:none; }
