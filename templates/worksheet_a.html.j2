@@ -8,7 +8,8 @@
   :root{
     /* 김은아영어연구소 파일(초록 브랜드) 팔레트 — 디자인 그대로, 색만 회사색으로 */
     --navy:#2e8b54; --red:#cd5049; --blue:#2e8b54;      /* 성분·리본=초록, 어법=빨강 */
-    --green:#2f9e5f; --purple:#6a54b3; --amber:#cf8a2a; /* 유의어=초록, 함축·지칭=보라, 포인트=주황 */
+    --green:#2f9e5f; --purple:#6a54b3; --amber:#cf8a2a; /* 유의어=초록, 담화표지=보라, 포인트=주황 */
+    --ref:#2f6fd0;  /* 지칭(대명사가 가리키는 대상) = 파랑 — 어법(빨강)·유의어(초록)와 구분 */
     --gray:#8a90a0; --ink:#20242e;
     --yellow-hl:#fbed9c; --green-hl:#dcecc4; --purple-hl:#e0daf1;
     --page-bg:#edf1ec; --line:#d3dcd3; --box-red:#e2b6b1; --tmi-line:#d7ddd6;
@@ -89,10 +90,10 @@
               white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:#7c828c; font-weight:800; font-size:8.5px; }   /* 성분(SVOC) 라벨 = 회색 */
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
-  /* 지칭 표식(어법 ①②③ 와 구분): 보라 '색 채운 동그라미 + 옅은 글자' a·b·c
+  /* 지칭 표식(어법 ①②③ 와 구분): 파랑 '색 채운 동그라미 + 옅은 글자' a·b·c
      — 본문 대명사(위첨자) ↔ 독해 박스를 문자로 연결 */
   .rsup{ display:inline-block; min-width:12px; height:12px; line-height:12px; text-align:center;
-         background:var(--purple); color:#fff; border-radius:50%; font-size:8px; font-weight:800;
+         background:var(--ref); color:#fff; border-radius:50%; font-size:8px; font-weight:800;
          vertical-align:3px; margin-left:1.5px; }
   .pbox .rsup.box{ min-width:13px; height:13px; line-height:13px; font-size:9px;
                    vertical-align:baseline; margin-right:2px; }
@@ -158,9 +159,9 @@
   .pbox .fr{ margin:2px 0; }
   .pbox .fl{ font-weight:800; color:#37827b; }
   .pbox .fl.im{ color:#37827b; }             /* 함축 라벨은 틸 */
-  .pbox .fl.ref{ color:var(--purple); }      /* 지칭 라벨=보라(본문 대명사 점선과 짝) */
-  /* 지칭 대명사: 독해 Point '지칭' 설명이 가리키는 본문 단어에 보라 점선 → 위치 연결 */
-  .tok .w.refu{ border-bottom:1.6px dotted var(--purple); }
+  .pbox .fl.ref{ color:var(--ref); }         /* 지칭 라벨=파랑(본문 대명사 점선과 짝) */
+  /* 지칭 대명사: 독해 Point '지칭' 설명이 가리키는 본문 단어에 파랑 점선 → 위치 연결 */
+  .tok .w.refu{ border-bottom:1.6px dotted var(--ref); }
   /* 중요 문장(주제문·서술형 등): 번호를 채운 네모로 강조 → 한눈에 식별 */
   .row.imp .num{ color:#fff; background:var(--navy); border-radius:6px;
                  padding:2px 4px; text-align:center; align-self:start; }
@@ -362,6 +363,9 @@
            text-decoration-thickness:1.5px; text-underline-offset:2.5px; }
   .gsw.hy{ background:var(--yellow-hl); padding:0 3px; }
   .gsw.hp{ background:var(--purple-hl); padding:0 3px; }
+  .gsw.ref{ display:inline-block; min-width:13px; height:13px; line-height:13px; text-align:center;
+            background:var(--ref); color:#fff; border-radius:50%; font-size:9px; font-weight:800;
+            vertical-align:1px; }   /* 지칭 = 파랑 채운 동그라미(본문 위첨자와 동일) */
   .gpill{ display:inline-block; font-size:9.5px; font-weight:800;
           border-radius:11px; padding:1px 8px; }
   .gpill.mint{ background:#dcece6; color:#2f6f63; }   /* 어법 Point = 민트 */
@@ -453,6 +457,13 @@
   .icard{ background:#ffffff !important; }
   .flow .step{ background:#ffffff !important; }
   .ez{ background:#ffffff !important; }
+  /* 가이드(표지) 스와치도 인쇄 실제 표기와 일치 */
+  .gsw.gram{ background:#fdf4c2 !important; color:#161616 !important;
+             border-radius:2px; padding:0 3px; }               /* 어법 = 형광펜 */
+  .gsw.hy, .gsw.hp{ background:transparent !important;
+             border:1.3px solid #2b2b2b !important; border-radius:3px;
+             padding:0 3px; font-weight:800; }                 /* 주제문·담화표지 = 테두리 박스 */
+  .gsw.vu{ text-decoration:none !important; }                  /* 유의어 밑줄 생략 */
 {% endif %}
 </style>
 </head>
@@ -478,27 +489,29 @@
     <div class="gitem"><span class="gsw role">S</span> <span class="gsw role">V</span> <span class="gsw role">O</span> <span class="gsw role">C</span>
       <span class="gt">문장 성분</span> — <span class="gd">단어 <b>위</b>에 표기. 주어·동사·목적어·보어(<b>회색</b>)</span></div>
     <div class="gitem"><span class="gsw gram">need</span> <span class="gsw num">①</span>
-      <span class="gt">핵심 어법</span> — <span class="gd">빨간 글자 + 단어 <b>아래</b> 번호 ①②③</span></div>
+      <span class="gt">핵심 어법</span> — <span class="gd">{% if bw %}<b>노란 형광</b> + 단어 <b>아래</b> 빨간 번호 ①②③{% else %}빨간 글자 + 단어 <b>아래</b> 번호 ①②③{% endif %}</span></div>
     <div class="gitem"><span class="gsw x">who(X)</span>
       <span class="gt">오답형 함정</span> — <span class="gd">그 자리에 넣으면 <b>틀리는</b> 형태 — 오른쪽 <b>어법 Point 박스</b>에 표기</span></div>
-    <div class="gitem"><span class="gsw vu">thrive</span>
-      <span class="gt">유의어 · 반의어</span> — <span class="gd">초록 밑줄 (= 유의어 · ↔ 반의어)</span></div>
+    <div class="gitem"><span class="gsw ref">a</span>
+      <span class="gt">지칭</span> — <span class="gd">대명사(it·them…)가 가리키는 대상 — 본문 <b>동그라미 a·b·c</b>와 오른쪽 <b>독해 Point</b>가 짝</span></div>
     <div class="gitem"><span class="gsw hy">주제문</span>
-      <span class="gt">노란 형광</span> — <span class="gd">주제문 · 빈칸 출제 예상 어구</span></div>
+      <span class="gt">{% if bw %}검정 테두리 박스{% else %}노란 형광{% endif %}</span> — <span class="gd">주제문 · 빈칸 출제 예상 어구</span></div>
     <div class="gitem"><span class="gsw hp">However</span>
-      <span class="gt">라벤더 형광</span> — <span class="gd">담화표지(However, Similarly …)</span></div>
+      <span class="gt">{% if bw %}검정 테두리 박스{% else %}라벤더 형광{% endif %}</span> — <span class="gd">담화표지(However, Similarly …)</span></div>
+    <div class="gitem"><span class="gsw vu">thrive</span>
+      <span class="gt">유의어 · 반의어</span> — <span class="gd">{% if bw %}<b>뒷면 어휘표</b>에서 정리 (= 유의어 · ↔ 반의어){% else %}초록 밑줄 (= 유의어 · ↔ 반의어){% endif %}</span></div>
     <div class="gitem"><span class="gpill mint">N문장 - 어법 Point</span>
       <span class="gt gd"> — 문장별 어법을 ①②③로 정리(민트 박스)</span></div>
     <div class="gitem"><span class="gpill gold">N문장 - 독해 Point</span>
-      <span class="gt gd"> — 대명사 지칭(it→…) · 숨은 함축 의미(골드 박스)</span></div>
+      <span class="gt gd"> — 대명사 지칭(a·b·c→…) · 숨은 함축 의미(골드 박스)</span></div>
   </div>
 
   <span class="gst">📖 이렇게 쓰세요</span>
   <ol class="gsteps">
     <li>앞면 <b>영어 원문</b>을 소리 내어 한 번 읽는다.</li>
     <li><b>성분(회색)</b>으로 문장의 뼈대(주어·동사)를 먼저 잡는다.</li>
-    <li><b>어법(빨강 ①②③)</b>과 오른쪽 <b>민트 박스</b>로 시험 포인트 확인 — 특히 <b>(X) 함정</b>에 주의.</li>
-    <li><b>골드 박스</b>로 대명사가 가리키는 것과 문장의 숨은 뜻을 확인한다.</li>
+    <li><b>어법({% if bw %}형광 + 빨강 번호{% else %}빨강 ①②③{% endif %})</b>과 오른쪽 <b>민트 박스</b>로 시험 포인트 확인 — 특히 <b>(X) 함정</b>에 주의.</li>
+    <li>본문 <b>동그라미 a·b·c</b>와 <b>골드 박스</b>로 대명사가 가리키는 것과 문장의 숨은 뜻을 확인한다.</li>
     <li>아래 <b>한글 해석</b>과 대조하며 직독직해로 한 번 더 읽는다.</li>
     <li><b>뒷면</b>의 핵심 어휘(유의어·반의어)와 논리 흐름으로 복습한다.</li>
   </ol>
