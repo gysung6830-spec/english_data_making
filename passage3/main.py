@@ -475,26 +475,26 @@ def run(input_path, out_dir, header: str = "", formats: str = "abc",
         print("  → 모의고사 아님(또는 미판정) → 27·28번 제외 안 함")
     print(f"  → 지문 {len(passages)}개, 총 문장 {sum(len(p.sentences) for p in passages)}개")
 
-    # JSON 재입력(이미 분석된 자료)이면 번역·어휘 추출 생략 → API 비용 0
+    # 분석 단계는 '이미 있는 항목은 건너뛴다'(각 함수가 idempotent).
+    # JSON 재입력이라도 누락분(예: 새로 분리된 장문 문장의 청크)은 채운다.
+    #   - 완성된 자료 재입력 + 키 없음 → 모두 no-op(비용 0)
+    #   - 일부 누락 + 키 있음 → 누락분만 생성(비용은 그만큼)
     is_json_input = input_path.suffix.lower() == ".json"
     if is_json_input:
-        print("[3/4] JSON 재입력 → 재분석 생략(API 비용 없음)")
-    else:
-        # 번호 없는 통짜 지문(지문 연습하기 등)을 AI로 문장 분리(키 있으면)
-        if any(not p.sentences and p.raw for p in passages):
-            print("      번호 없는 지문 문장 분리(키 있으면)")
-            passages = segment_passages(passages, api_key=api_key)
-        needs_ko = any(f in formats for f in ("a", "b", "d"))
-        if do_translate and needs_ko:
-            print("[3/4] 해석 없는 문장 번역(키 있으면)")
-            passages = translate_missing(passages, api_key=api_key)
-        else:
-            print("[3/4] 번역 생략")
-        print("      어휘 리스트 추출(키 있으면)")
-        passages = extract_vocab(passages, api_key=api_key)
-        if "d" in formats:
-            print("      직독직해 청크 생성(키 있으면)")
-            passages = chunk_sentences(passages, api_key=api_key)
+        print("[3/4] JSON 재입력 — 이미 분석된 항목 재사용, 누락분만 채움(키 있을 때)")
+    # 번호 없는 통짜 지문(지문 연습하기 등)을 AI로 문장 분리(키 있으면)
+    if any(not p.sentences and p.raw for p in passages):
+        print("      번호 없는 지문 문장 분리(키 있으면)")
+        passages = segment_passages(passages, api_key=api_key)
+    needs_ko = any(f in formats for f in ("a", "b", "d"))
+    if do_translate and needs_ko:
+        print("[3/4] 해석 없는 문장 번역(키 있으면)")
+        passages = translate_missing(passages, api_key=api_key)
+    print("      어휘 리스트 추출(키 있으면)")
+    passages = extract_vocab(passages, api_key=api_key)
+    if "d" in formats:
+        print("      직독직해 청크 생성(키 있으면)")
+        passages = chunk_sentences(passages, api_key=api_key)
 
     disp_name = (docname or input_path.stem).strip()   # 뱃지 표시용(원본 이름)
     doc = safe_filename(docname or input_path.stem)      # 파일 저장용(치환)

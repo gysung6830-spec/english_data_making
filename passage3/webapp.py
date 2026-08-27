@@ -333,59 +333,63 @@ def generate():
         _log(f"[1] 입력 파싱 완료 — 지문 {len(passages)}개, 문장 {n_sent}개  "
              f"({_fmt_dur(time.perf_counter() - t)})")
 
-        # 분석 JSON 재입력이면 재분석(번역·어휘) 생략 → API 비용 없음
+        # 분석 단계는 '이미 있는 항목은 건너뛴다'(idempotent). JSON 재입력이라도
+        # 누락분(예: 새로 분리된 장문 문장의 청크)은 키가 있으면 채운다.
+        #   - 완성된 자료 + 키 없음 → 모두 no-op(비용 0)
+        #   - 일부 누락 + 키 있음 → 누락분만 생성
         is_json_input = Path(file.filename).suffix.lower() == ".json"
         if is_json_input:
-            _log("[2] JSON 재입력 → 재분석 생략(API 비용 없음)")
-        else:
-            # 번호 없는 통짜 지문을 AI로 문장 분리(키 있으면)
-            n_raw = sum(1 for p in passages if not p.sentences and p.raw)
-            if n_raw:
-                if api_key:
-                    _log(f"[2] 번호 없는 지문 {n_raw}개 AI 문장 분리 중…")
-                    t = time.perf_counter()
-                    try:
-                        passages = segment_passages(passages, api_key=api_key,
-                                                    progress=_progress("지문"))
-                        _log(f"    → 문장 분리 완료, 총 문장 "
-                             f"{sum(len(p.sentences) for p in passages)}개  "
-                             f"({_fmt_dur(time.perf_counter() - t)})")
-                    except Exception:
-                        traceback.print_exc()
-                else:
-                    _log(f"[2] 번호 없는 지문 {n_raw}개 발견 — 키가 없어 건너뜀"
-                         "(빈 지문으로 나옴)")
-            # 한줄영어(c)만 선택하면 번역 불필요
-            if any(f in formats for f in ("a", "b", "d")):
-                miss = sum(1 for p in passages for s in p.sentences if s.en and not s.ko)
-                if miss and api_key:
-                    _log(f"[3] 해석 없는 문장 {miss}개 번역 중…")
-                    t = time.perf_counter()
-                    try:
-                        passages = translate_missing(passages, api_key=api_key)
-                        _log(f"    → 번역 완료  ({_fmt_dur(time.perf_counter() - t)})")
-                    except Exception:
-                        traceback.print_exc()
-            # 하단 어휘 리스트(키 있으면 자동 추출)
+            _log("[2] JSON 재입력 — 이미 분석된 항목 재사용, 누락분만 채움(키 있을 때)")
+        # 번호 없는 통짜 지문을 AI로 문장 분리(키 있으면)
+        n_raw = sum(1 for p in passages if not p.sentences and p.raw)
+        if n_raw:
             if api_key:
-                _log("[4] 핵심 어휘 추출 중(AI)…")
+                _log(f"[2] 번호 없는 지문 {n_raw}개 AI 문장 분리 중…")
                 t = time.perf_counter()
                 try:
-                    passages = extract_vocab(passages, api_key=api_key,
-                                             progress=_progress("어휘"))
-                    _log(f"    → 어휘 추출 완료  ({_fmt_dur(time.perf_counter() - t)})")
+                    passages = segment_passages(passages, api_key=api_key,
+                                                progress=_progress("지문"))
+                    _log(f"    → 문장 분리 완료, 총 문장 "
+                         f"{sum(len(p.sentences) for p in passages)}개  "
+                         f"({_fmt_dur(time.perf_counter() - t)})")
                 except Exception:
                     traceback.print_exc()
-            # 직독직해 청크(키 있으면)
-            if "d" in formats and api_key:
-                _log("[5] 직독직해 청크 생성 중(AI)…")
+            else:
+                _log(f"[2] 번호 없는 지문 {n_raw}개 발견 — 키가 없어 건너뜀"
+                     "(빈 지문으로 나옴)")
+        # 한줄영어(c)만 선택하면 번역 불필요
+        if any(f in formats for f in ("a", "b", "d")):
+            miss = sum(1 for p in passages for s in p.sentences if s.en and not s.ko)
+            if miss and api_key:
+                _log(f"[3] 해석 없는 문장 {miss}개 번역 중…")
                 t = time.perf_counter()
                 try:
-                    passages = chunk_sentences(passages, api_key=api_key,
-                                               progress=_progress("직독직해"))
-                    _log(f"    → 직독직해 청크 완료  ({_fmt_dur(time.perf_counter() - t)})")
+                    passages = translate_missing(passages, api_key=api_key)
+                    _log(f"    → 번역 완료  ({_fmt_dur(time.perf_counter() - t)})")
                 except Exception:
                     traceback.print_exc()
+        # 하단 어휘 리스트(키 있으면, 어휘 없는 지문만 자동 추출)
+        if api_key and any(not p.vocab and any(s.en for s in p.sentences)
+                           for p in passages):
+            _log("[4] 핵심 어휘 추출 중(AI, 누락 지문만)…")
+            t = time.perf_counter()
+            try:
+                passages = extract_vocab(passages, api_key=api_key,
+                                         progress=_progress("어휘"))
+                _log(f"    → 어휘 추출 완료  ({_fmt_dur(time.perf_counter() - t)})")
+            except Exception:
+                traceback.print_exc()
+        # 직독직해 청크(키 있으면, 청크 없는 문장만)
+        if "d" in formats and api_key and \
+                any(not s.chunks and s.en for p in passages for s in p.sentences):
+            _log("[5] 직독직해 청크 생성 중(AI, 누락 문장만)…")
+            t = time.perf_counter()
+            try:
+                passages = chunk_sentences(passages, api_key=api_key,
+                                           progress=_progress("직독직해"))
+                _log(f"    → 직독직해 청크 완료  ({_fmt_dur(time.perf_counter() - t)})")
+            except Exception:
+                traceback.print_exc()
 
         renderers = {
             "a": render_format_a,
