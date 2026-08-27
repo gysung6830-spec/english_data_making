@@ -22,6 +22,13 @@ from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOO
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
 
+# 문장당 출제 개수 규칙(어법·어휘 하/상): 최소 2 · 최대 4.
+#   MAX 는 코드로 '확실히' 강제한다(초과분은 버리고 자리표시자를 정답/원문으로 복원).
+#   MIN 은 프롬프트로 유도한다(문항을 새로 만들 수는 없으므로). 위반 시 진단 로그로만 남긴다.
+_MIN_PER_SENT = 2
+_MAX_PER_SENT = 4
+_COUNT_LIMITED = ("grammar", "vocab", "vocab_easy")
+
 
 # ── 데이터 모델 ──────────────────────────────────────────────────────
 @dataclass
@@ -348,6 +355,16 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             #   그 잔여가 문장에 남는데, en 으로 복구해 깨끗한 문장을 보인다.
             if not pitems:
                 template = s.en
+        # ★ 문장당 출제 개수 상한(최대 4개) 강제 — 어법·어휘 하/상.
+        #   프롬프트를 어겨 5개 이상 오면 읽기 순서로 앞 4개만 남기고, 버린 문항의 {{Pn}} 은
+        #   '정답(어휘 상은 원문)'으로 복원해 문장에 구멍이 생기지 않게 한다.
+        if wtype in _COUNT_LIMITED and len(pitems) > _MAX_PER_SENT:
+            keep, drop = pitems[:_MAX_PER_SENT], pitems[_MAX_PER_SENT:]
+            for it in drop:
+                restore = (it.answer.split("/")[0].strip()
+                           if wtype == "vocab" else it.answer)
+                template = template.replace("{{" + it.id + "}}", restore)
+            pitems = keep
         sents.append(PSentence(no=s.no, template=template, ko=s.ko, items=pitems))
     return ProseWorksheet(wtype=wtype, label=label, instruction=instr, sentences=sents)
 

@@ -85,6 +85,31 @@ def test_id_mismatch_order():
     _check("id 불일치시 등장 순서 정렬(P1,P2)", ids == ["P1", "P2"])
 
 
+def test_per_sentence_max_cap():
+    # ★ 문장당 최대 4개 강제(어법): 5개가 오면 앞 4개만 남고 5번째는 정답으로 복원(구멍 없음)
+    llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="aa bb cc dd ee ff", ko="가",
+        grammar_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f",
+        grammar_items=[pr.LLMProseItem(id=f"P{i}", display=f"[x{i}/y{i}]", answer=f"x{i}")
+                       for i in range(1, 6)])])
+    pr.validate_llm_prose(llm)
+    g = next(w for w in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
+             if w.wtype == "grammar").sentences[0]
+    _check("어법 문장당 최대 4개", len(g.items) == 4)
+    _check("초과분 자리표시자 제거", "{{P5}}" not in g.template)
+    _check("초과분 정답으로 복원(구멍 없음)", "x5" in g.template)
+    # 어휘(상): 5개 → 4개, 초과분은 '원문'(answer 첫 부분)으로 복원
+    v = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
+        no=1, en="aa bb cc dd ee ff", ko="가",
+        vocab_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f",
+        vocab_items=[pr.LLMProseItem(id=f"P{i}", display=f"[a{i}/b{i}/c{i}]", answer=f"w{i} / s{i}")
+                     for i in range(1, 6)])])
+    vg = next(w for w in pr.build_prose_pack(v, header="H", title="T", subtitle="S").worksheets
+              if w.wtype == "vocab").sentences[0]
+    _check("어휘 문장당 최대 4개", len(vg.items) == 4)
+    _check("어휘 초과분 원문(첫 부분) 복원", "w5" in vg.template and "{{P5}}" not in vg.template)
+
+
 def test_ref_safeguard():
     # 지칭: 정답이 보기에 없으면 출제오류이므로 자동 제외, '앞 문장'은 유지
     bad = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
@@ -330,6 +355,7 @@ if __name__ == "__main__":
     test_form_write_flag()
     test_translate_no_items()
     test_id_mismatch_order()
+    test_per_sentence_max_cap()
     test_ref_safeguard()
     test_form_dedup_and_empty_sentence()
     test_duplicate_sentence_dropped()
