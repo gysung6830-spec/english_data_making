@@ -517,15 +517,6 @@
   </ol>
 
   <div class="gtip">💡 <b>Tip.</b> 번호 <b>①②③</b>는 본문과 오른쪽 박스가 서로 <b>짝</b>이에요. 본문에서 색·번호를 먼저 보고, 박스에서 그 이유를 확인하세요.</div>
-
-  {% if toc %}
-  <span class="gst">📑 목차</span>
-  <div class="gtoc">
-    {% for it in toc %}
-    <div class="gtocrow"><span class="gtoct">{{ it.label }}</span><span class="gtocdots"></span><span class="gtocpg">{{ it.page }}</span></div>
-    {% endfor %}
-  </div>
-  {% endif %}
 </div>
 {% endif %}
 {% for a in analyses %}
