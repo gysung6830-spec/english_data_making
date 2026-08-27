@@ -146,10 +146,59 @@ def test_nonrenderable_raw_still_triggers():
     _check("버려질 가주어 문장은 그대로(덮어쓸 폴백 없음)", llm.sentences[0].ref_items[0] is bad)
 
 
+# ── 어법·어휘 '문장당 최소 2개' 미달 top-up 보강 ───────────────────────────
+def _count_sentence(no, g, ve, v):
+    """no번 문장에 어법 g·어휘하 ve·어휘상 v개 문항(짧고 '고유한' en 으로 가드 통과·중복 회피)."""
+    def tmpl(n):
+        return "w " + " ".join(f"{{{{P{j+1}}}}} w" for j in range(n))
+    def two(n):     # 2지선다(어법·어휘하)
+        return [pr.LLMProseItem(id=f"P{j+1}", display=f"[x{j}/y{j}]", answer=f"x{j}")
+                for j in range(n)]
+    def three(n):   # 3개 중 2개(어휘상)
+        return [pr.LLMProseItem(id=f"P{j+1}", display=f"[a{j}/b{j}/c{j}]", answer=f"a{j} / b{j}")
+                for j in range(n)]
+    return pr.LLMProseSentence(
+        no=no, en=f"n{no} aa bb cc dd ee ff", ko="가",
+        grammar_template=tmpl(g), grammar_items=two(g),
+        vocab_easy_template=tmpl(ve), vocab_easy_items=two(ve),
+        vocab_template=tmpl(v), vocab_items=three(v))
+
+
+def test_counts_enough_skips_call():
+    cfg = load_config()
+    llm = pr.LLMProsePack(sentences=[_count_sentence(1, 2, 2, 2), _count_sentence(2, 3, 2, 2)])
+    fc = _FakeClient()
+    pg._ensure_counts(fc, cfg, _extraction(), llm)
+    _check("어법·어휘 충분하면 재호출 없음", fc.calls == 0)
+
+
+def test_counts_low_merges():
+    cfg = load_config()
+    # 2번 문장의 어법이 1개(min 2 미달) → top-up 재요청으로 채워야 함
+    llm = pr.LLMProsePack(sentences=[_count_sentence(1, 2, 2, 2), _count_sentence(2, 1, 2, 2)])
+    top = pr.LLMProsePack(sentences=[_count_sentence(2, 3, 2, 2)])   # 2번 어법 3개 제공
+    fc = _FakeClient(ref_pack=top)
+    pg._ensure_counts(fc, cfg, _extraction(), llm)
+    _check("미달 시 top-up 재호출 1회", fc.calls == 1)
+    _check("부족 문장 어법 채움(1→3)", len(llm.sentences[1].grammar_items) == 3)
+    _check("충분했던 문장은 그대로(2개)", len(llm.sentences[0].grammar_items) == 2)
+
+
+def test_counts_fail_open():
+    cfg = load_config()
+    llm = pr.LLMProsePack(sentences=[_count_sentence(1, 1, 2, 2)])
+    fc = _FakeClient(raise_exc=True)
+    pg._ensure_counts(fc, cfg, _extraction(), llm)          # 예외 삼킴
+    _check("top-up 예외 시 원본 유지(fail-open)", len(llm.sentences[0].grammar_items) == 1)
+
+
 if __name__ == "__main__":
     test_enough_ref_skips_call()
     test_low_ref_merges_by_no()
     test_does_not_overwrite_existing_ref()
     test_fail_open_on_exception()
     test_nonrenderable_raw_still_triggers()
-    print("\n지칭 전용 재생성 보강 오프라인 테스트 통과 ✅")
+    test_counts_enough_skips_call()
+    test_counts_low_merges()
+    test_counts_fail_open()
+    print("\n지칭·개수 보강 오프라인 테스트 통과 ✅")

@@ -32,6 +32,7 @@ def generate_prose_pack(client: ClaudeClient, cfg: Config, extraction: Extractio
         extra_validate=lambda p: pr.validate_llm_prose(p, min_sentences=min_sentences),
     )
     _ensure_ref(client, cfg, extraction, llm)
+    _ensure_counts(client, cfg, extraction, llm)
     do_verify = cfg.processing.verify_vocab if verify_vocab is None else verify_vocab
     if do_verify:
         from . import vocab_verify
@@ -82,3 +83,51 @@ def _ensure_ref(client: ClaudeClient, cfg: Config, extraction: Extraction,
             continue
         tgt.ref_template = rs.ref_template or tgt.ref_template
         tgt.ref_items = rs.ref_items
+
+
+# 어법·어휘(하/상)에서 문장당 최소 개수(2) 미달 문장이 있으면, 부족한 문장만 top-up 재요청으로 채운다.
+_COUNT_MIN = 2
+_COUNT_ATTRS = {"grammar": ("grammar_template", "grammar_items"),
+                "vocab": ("vocab_template", "vocab_items"),
+                "vocab_easy": ("vocab_easy_template", "vocab_easy_items")}
+
+
+def _ensure_counts(client: ClaudeClient, cfg: Config, extraction: Extraction,
+                   llm: pr.LLMProsePack) -> None:
+    """어법·어휘(하/상)의 '문장당 최소 2개' 미달을 top-up 재요청으로 보강한다(부작용: llm 수정).
+
+    - 억지 생성(코드 조작)이 아니라 LLM 에 한 번 더 요청해 '채울 수 있는' 문장만 채운다.
+      진짜 낼 게 없는 짧은 문장은 재요청해도 안 나오므로 그대로 둔다(규칙상 1개 예외 허용).
+    - 우리 필터가 '틀린 문제'를 걸러 생긴 빈자리는 top-up 이 더 많은 문항을 줄 때만 교체한다.
+    - 실패(예외)해도 기존 결과를 유지(fail-open).
+    """
+    # 렌더 가드까지 통과한 '실제 출제 수'로 미달 판단(raw 개수가 아님).
+    pack = pr.build_prose_pack(llm, "", "", "")
+    sf = pr.count_shortfalls(pack, min_per=_COUNT_MIN)
+    if not sf:
+        return
+    need = {(wt, no) for wt, lst in sf.items() for no, _ in lst}
+    try:
+        top = client.structured(
+            system=pp.SYSTEM,
+            prompt=pp.prose_prompt(extraction.title, extraction.body),
+            model_cls=pr.LLMProsePack,
+            max_tokens=16000,
+            max_retries=1,
+        )
+    except Exception:
+        return
+    by_no = {s.no: s for s in llm.sentences}
+    by_en = {s.en.strip(): s for s in llm.sentences}
+    for ts in top.sentences:
+        tgt = by_no.get(ts.no) or by_en.get(ts.en.strip())
+        if tgt is None:
+            continue
+        for wt, (tkey, ikey) in _COUNT_ATTRS.items():
+            if (wt, tgt.no) not in need:
+                continue
+            new_items = getattr(ts, ikey)
+            # top-up 이 '더 많은' 문항을 줄 때만 template+items 를 함께 교체(정합 유지).
+            if len(new_items) > len(getattr(tgt, ikey)):
+                setattr(tgt, tkey, getattr(ts, tkey) or getattr(tgt, tkey))
+                setattr(tgt, ikey, new_items)
