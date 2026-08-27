@@ -69,45 +69,67 @@ def _dna() -> Passage:
         },
     ))
 
+    # 내용 O/X 영어판 — 한글판과 '다른 사실'을 묻는다. X 여덟은 서로 다른 여덟 축.
     p.set_qa(CONTENT_2, *B.make_content_ox(
         s,
         statements=[
+            "DNA is described as a hard drive that engineers built to store nature's data.",
             "Every living cell contains DNA, which the passage compares to a hard drive.",
-            "DNA loses its stored information within a few years unless it is frozen.",
-            "Researchers write digital files into synthetic DNA because the molecule is "
-            "remarkably efficient.",
-            "The passage claims that synthetic DNA is already cheaper than magnetic tape.",
-            "Only laboratory-made DNA, not natural DNA, can survive inside bone and ice.",
-            "According to the passage, storing data in DNA is a fast process today.",
-            "Ancient DNA has been read from bones, which proves it can be edited as well.",
-            "The passage says that libraries will certainly be replaced by molecules.",
+            "DNA survives in bone and ice because researchers encode digital files into it.",
+            "DNA became efficient because researchers began encoding files into it.",
+            "A single gram of DNA holds as much data as millions of ordinary hard drives.",
+            "Our libraries and photographs are already stored safely inside molecules.",
+            "What makes DNA remarkable is only that it stores information.",
             "DNA can hold information in a space far smaller than any ordinary drive.",
-            "Scientists began encoding files into DNA before they noticed how durable it was.",
+            "The passage treats DNA mainly as a subject of biology rather than as a "
+            "storage medium.",
+            "Storing data in DNA costs less than keeping it on magnetic tape.",
         ],
-        truths=[True, False, False, False, False,
-                False, False, False, True, False],
+        truths=[False, True, False, False, False,
+                False, False, True, False, False],
         reasons=[
+            "지문은 DNA를 '자연이 만든(nature's own)' 하드 드라이브라고 했다. 만든 "
+            "주체가 기술자로 바뀌었다. (주체·대상 바꿔치기)",
             "첫 문장 'Every living cell carries a molecule called DNA, which works as "
             "nature's own hard drive' 를 그대로 옮긴 일치 진술이다.",
-            "지문은 정반대로 '뼈와 얼음 속에서 수만 년을 견딘다'고 했다. 얼리지 않으면 "
-            "몇 년 만에 사라진다는 것은 지문과 어긋난다. (부분 일치 + 한 요소 왜곡)",
-            "연구가 시작된 계기는 맞지만(Inspired by such efficiency), 지문은 이를 "
-            "'영감을 받았다'고 했지 '효율적이기 때문에 쓴다'는 인과로 못 박지 않았다. "
-            "덧붙여 진술은 원문에 없는 단정을 더한다. (인과 날조)",
-            "자기 테이프와의 비용 비교는 지문에 없다. 오히려 지문은 그 기술이 아직 "
-            "'비싸다'고 했다. (미언급인데 그럴듯)",
-            "지문은 DNA 일반이 뼈와 얼음 속에서 견딘다고 했지, 실험실에서 만든 것만 "
-            "그렇다고 한 적이 없다. (조건 삭제·왜곡)",
-            "지문은 'The technique is still slow' 라고 했다. 정반대다. (정도·빈도 과장)",
-            "고대 DNA를 읽어 낸다는 이야기는 내구성의 예시일 뿐, '편집할 수 있다'는 "
-            "결론은 지문에 없다. (인과 날조)",
-            "지문은 'may be stored' 라는 가능성을 말했을 뿐 '반드시 대체된다'고 하지 "
-            "않았다. (정도·빈도 과장)",
+            "지문은 DNA가 오래 견딘다는 것과 연구자들이 파일을 기록한다는 것을 나란히 "
+            "말했을 뿐, 둘을 인과로 엮은 적이 없다. (인과 날조)",
+            "지문은 '그 효율에 영감을 받아(Inspired by such efficiency)' 연구가 시작됐다고 "
+            "했다. 효율이 원인이고 연구가 결과인데 그 방향이 뒤집혔다. (인과 역전)",
+            "지문은 'in theory(이론상)'라는 단서를 달아 말했다. 그 단서를 떼면 이미 "
+            "이루어진 일처럼 읽힌다. (조건 삭제)",
+            "지문은 '언젠가(One day) 저장될 수 있다(may be stored)'는 가능성을 말했다. "
+            "이미 그렇게 되었다는 것은 앞뒤가 다르다. (시점 뒤집기)",
+            "지문은 'not only ~ but also' 로 '저장한다는 것뿐 아니라' 좁은 공간에 "
+            "담는다는 점도 주목할 만하다고 했다. only 로 그 대목을 잘라 냈다. "
+            "(부정 뒤집기)",
             "지문은 '엄청난 양을 아주 좁은 공간에 담는다(packs an enormous amount into "
             "a vanishingly small space)'고 했다. 이를 바꿔 표현한 일치 진술이다.",
-            "지문은 내구성을 먼저 말한 뒤 'Inspired by such efficiency' 로 연구를 "
-            "잇는다. 순서가 뒤집혔다. (시점 뒤집기)",
+            "지문은 처음부터 끝까지 DNA를 '저장 매체'로 다룬다. 생물학의 소재로 다룬다는 "
+            "것은 글의 논지를 반대로 세운 것이다. (논지·화자 뒤집기)",
+            "자기 테이프와의 비용 비교는 지문에 없다. 그럴듯하지만 언급되지 않았다. "
+            "(미언급인데 그럴듯)",
         ],
+    ))
+
+    # 연결어 — (A) 4번 문장(부연·병렬) · (B) 6번 문장(대조). 원문에 연결어가 없는
+    # 자리라 remove 는 비운다.
+    p.set_qa(LINKER, *B2.make_linker(
+        s, 4, 6, "", "",
+        pairs=[("In addition", "However"), ("However", "Therefore"),
+               ("For example", "Moreover"), ("In addition", "Similarly"),
+               ("Nevertheless", "However")],
+        answer_no=1,
+        reason=("(A) 앞은 '아주 작은 공간에 엄청난 양을 담는다(밀도)', 뒤는 '뼈와 얼음 속에서 "
+                "수만 년을 견딘다(내구성)'로, 서로 다른 장점을 하나 더 얹는 자리다 → In addition. "
+                "(B) 앞은 '연구가 시작됐다'는 진전이고 뒤는 '아직 느리고 비싸다'는 한계라 뒤집는 "
+                "자리다 → However. 실제로 원문도 그 문장 안에서 but 으로 뒤집는다."),
+        wrong={
+            2: "(A) 자리는 앞뒤가 대조가 아니라 장점을 더하는 관계라 However 가 맞지 않는다.",
+            3: "(A) 뒤 문장은 앞의 예시가 아니라 별개의 장점이므로 For example 이 맞지 않는다.",
+            4: "(A) 는 맞지만 (B) 자리는 앞의 진전을 뒤집는 자리라 Similarly 가 정반대다.",
+            5: "(A) 자리에는 뒤집을 앞 진술이 없어 Nevertheless 가 성립하지 않는다.",
+        },
     ))
 
     # 어휘 — 원문단어형(정답만 반의어, 나머지 4개는 원문 그대로)
@@ -256,44 +278,67 @@ def _star() -> Passage:
         },
     ))
 
+    # 내용 O/X 영어판 — 한글판과 '다른 사실'을 묻는다. X 여덟은 서로 다른 여덟 축.
     p.set_qa(CONTENT_2, *B.make_content_ox(
         s,
         statements=[
             "The passage says that management rewards personal brilliance above all.",
             "Companies expect a top performer to become an equally good manager.",
-            "The firm ends up keeping its outstanding contributor after the promotion.",
-            "Coaching other people is described as quick and easy work.",
-            "The passage recommends paying stars more instead of promoting them.",
-            "Only small firms make the mistake of promoting their best performer.",
-            "The team stalls because the new manager deliberately ignores it.",
+            "The firm loses its best contributor, and for that reason it promotes a star.",
+            "The former star chases personal wins whether or not he is put in charge.",
+            "The celebrated hire becomes a disappointment before the team stalls.",
+            "The two jobs turn out to demand much the same skills.",
+            "The writer agrees that a star will naturally make a star boss.",
             "A promoted star tends to keep chasing personal wins instead of coaching.",
-            "The celebrated hire turns into a disappointment overnight.",
-            "According to the passage, a star and a star boss need the same skills.",
+            "The team stalls because the new manager deliberately ignores it.",
+            "Companies should train managers before promoting them.",
         ],
         truths=[False, True, False, False, False,
                 False, False, True, False, False],
         reasons=[
-            "지문은 정반대다 — 개인적 탁월함을 보상하는 쪽은 실무 역할이고, 관리자 "
-            "역할은 남을 키우는 인내를 보상한다. (주체 바꿔치기)",
+            "개인적 탁월함(personal brilliance)을 보상하는 쪽은 실무 역할이고, 관리자 "
+            "역할은 남을 키우는 인내를 보상한다. 두 역할의 짝이 뒤바뀌었다. "
+            "(주체·대상 바꿔치기)",
             "두 번째 문장 'They assume that a star will naturally make a star boss' 를 "
             "바꿔 표현한 일치 진술이다.",
-            "지문은 회사가 '뛰어난 실무자와 유능한 관리자를 둘 다 잃는다'고 했다. "
-            "정반대다. (부분 일치 + 한 요소 왜곡)",
-            "지문은 코칭을 'the slow work' 라고 불렀다. 빠르고 쉬운 일이라는 것은 "
-            "어긋난다. (정도·빈도 과장)",
-            "보수를 더 주라는 대안은 지문에 없다. 그럴듯하지만 언급되지 않았다. "
-            "(미언급인데 그럴듯)",
-            "지문은 'Many companies' 라고만 했고 회사 규모를 한정하지 않았다. "
-            "(조건 삭제·왜곡)",
-            "지문은 스타가 개인 성과를 좇느라 코칭을 소홀히 한다고 했지, '일부러 "
-            "무시한다'고 하지 않았다. (인과 날조)",
+            "지문에서 승진이 먼저이고 인재를 잃는 것은 그 결과다. 원인과 결과가 "
+            "뒤집혔다. (인과 역전)",
+            "지문은 'Placed in charge(자리에 앉혀지자)'라는 조건 아래 그렇게 된다고 "
+            "했다. 그 조건을 떼면 사람 자체가 원래 그렇다는 뜻이 된다. (조건 삭제)",
+            "지문은 팀이 정체되고 '그러고 나서(and)' 채용이 실망으로 바뀐다고 했다. "
+            "앞뒤 순서가 뒤집혔다. (시점 뒤집기)",
+            "지문은 두 자리가 '거의 정반대 능력(almost opposite skills)'을 요구한다고 "
+            "못 박았다. 그 대목을 아니라고 뒤집었다. (부정 뒤집기)",
+            "그것은 회사들이 그렇게 '여긴다(They assume)'고 소개한 통념이고, 필자는 "
+            "바로 다음 문장에서 however 로 반박한다. 통념을 필자의 주장으로 "
+            "바꿔치기했다. (논지·화자 뒤집기)",
             "다섯 번째 문장 'keeps chasing personal wins and neglects the slow work of "
             "coaching' 을 그대로 옮긴 일치 진술이다.",
-            "지문은 'slowly turns into a disappointment' 라고 했다. 하룻밤 사이라는 "
-            "것은 정반대다. (시점 뒤집기)",
-            "지문의 논지는 두 자리가 '거의 정반대 능력'을 요구한다는 것이다. "
-            "(인과·관계 역전)",
+            "지문은 스타가 개인 성과를 좇느라 코칭을 소홀히 한다고 했지, '일부러 "
+            "무시한다'고 하지 않았다. 없던 의도를 원인으로 지어냈다. (인과 날조)",
+            "승진 전 관리자 교육은 그럴듯한 해법이지만 지문에 전혀 언급되지 않았다. "
+            "(미언급인데 그럴듯)",
         ],
+    ))
+
+    # 연결어 — (A) 3번 문장은 원문이 'however' 를 문장 가운데 두므로 새로 빈칸을 놓고,
+    # (B) 5번 문장은 앞의 대비를 실제 상황으로 옮기는 자리다.
+    p.set_qa(LINKER, *B2.make_linker(
+        s, 3, 5, "", "",
+        pairs=[("However", "As a result"), ("Therefore", "However"),
+               ("For example", "In contrast"), ("However", "Similarly"),
+               ("Moreover", "As a result")],
+        answer_no=1,
+        reason=("(A) 앞은 '스타가 스타 상사가 될 것이라 여긴다'는 통념이고 뒤는 '두 자리는 거의 "
+                "정반대 능력을 요구한다'는 반박이라 뒤집는 자리다 → However. (B) 앞은 그 정반대 "
+                "능력이 무엇인지 밝힌 대목이고 뒤는 '스타를 앉혀 놓으니 개인 성과만 좇는다'는 "
+                "귀결이므로 결과를 잇는 자리다 → As a result."),
+        wrong={
+            2: "(A) 는 앞의 통념을 뒤집는 자리라 결과를 잇는 Therefore 가 맞지 않는다.",
+            3: "(A) 뒤 문장은 앞 진술의 예시가 아니라 반박이므로 For example 이 맞지 않는다.",
+            4: "(A) 는 맞지만 (B) 자리는 결과를 잇는 자리라 Similarly 가 관계를 잘못 짚는다.",
+            5: "(A) 자리에 Moreover 를 넣으면 통념을 오히려 더 밀어 주는 뜻이 되어 뒤집히지 않는다.",
+        },
     ))
 
     p.set_qa(VOCAB_2, *B.make_vocab(

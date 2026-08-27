@@ -13,6 +13,10 @@
    X 에는 오히려 원문 낱말을 그대로 노출해 그럴듯하게 만든다.
 ③ X 여덟 개는 서로 다른 여덟 가지 축으로 비튼다(아래 프롬프트의 (1)~(8)).
    한 축을 되풀이하면 하나를 알아챈 학생이 나머지도 같은 눈으로 걸러 낸다.
+   여덟 축은 모두 '읽고 이해했는가'를 묻는 것들이다. 낱말 하나만 바꿔 놓고 눈썰미를
+   재는 두 방식은 일부러 뺐다 — 숫자·기간만 살짝 틀리는 '부분 일치 + 한 요소 왜곡'과
+   '늘·오직·반드시'로 키우는 '정도·빈도 과장'. 그런 함정은 글을 이해한 학생도 걸리고
+   대충 읽은 학생도 운으로 피해서, 실력을 가르지 못한다.
 ④ O 두 개의 자리는 코드가 정한다(answer_spread.ox_positions).
    모델에게 맡기면 앞쪽으로 몰리는 버릇이 나오고, 문항마다 같은 자리에 O 가 오면
    지문을 읽지 않고 자리만 보고 찍는다. 열두 문항까지 어느 둘도 같은 자리 짝을
@@ -21,6 +25,7 @@
 from __future__ import annotations
 
 from .. import answer_spread, build as B
+from .. import shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, ContentOXOut
 from ..types import CONTENT, CONTENT_2
@@ -51,14 +56,22 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
 [X 진술 8개를 쓰는 법 — 아래 여덟 축을 '하나씩' 쓰세요]
 한 축을 되풀이하면 하나를 알아챈 학생이 나머지도 같은 눈으로 걸러 냅니다.
 각 X 진술에는 지문에 실제로 나온 단어를 일부 그대로 노출해 그럴듯하게 만드세요.
-  (1) 부분 일치 + 한 요소만 왜곡 — 대부분 맞고 숫자·기간·대상 '딱 한 군데'만 다르게
-  (2) 주체·대상 바꿔치기 — 지문의 진짜 관계에서 행위자와 대상만 맞바꿈
-  (3) 인과 날조 — 지문에 나란히 놓인 두 사실을 '때문에'로 엮음
-  (4) 인과 역전 — 지문의 원인과 결과를 뒤집음
-  (5) 정도·빈도 과장 — '~하기도 한다·~할 수 있다'를 '늘·오직·반드시'로 키움
-  (6) 조건 삭제 — '이론상·어떤 경우에는' 같은 단서를 떼어 무조건으로 만듦
-  (7) 시점 뒤집기 — '앞으로 그럴 수 있다'를 '이미 그렇게 했다'로(또는 그 반대)
+  (1) 주체·대상 바꿔치기 — 지문의 진짜 관계에서 행위자와 대상만 맞바꿈
+  (2) 인과 날조 — 지문에 나란히 놓인 두 사실을 '때문에'로 엮음
+  (3) 인과 역전 — 지문의 원인과 결과를 뒤집음
+  (4) 조건 삭제 — '이론상·~할 때에는' 같은 단서를 떼어 무조건으로 만듦
+  (5) 시점 뒤집기 — '앞으로 그럴 수 있다'를 '이미 그렇게 했다'로(또는 그 반대)
+  (6) 부정 뒤집기 — 지문이 '아니다'라고 못 박은 것을 '그렇다'로(또는 그 반대)
+  (7) 논지·화자 뒤집기 — 필자가 반박하려고 소개한 통념을 필자의 주장인 것처럼
   (8) 미언급인데 그럴듯 — 지문과 모순은 아니지만 아예 언급되지 않은 상식적 진술
+
+[쓰지 말아야 할 두 가지 — 반드시 지키세요]
+  · **부분 일치 + 한 요소만 왜곡 금지** — 나머지는 다 맞는데 숫자·기간·대상 하나만
+    살짝 바꿔 놓는 방식. 예: '수만 년' 을 '수백 년' 으로.
+  · **정도·빈도 과장 금지** — '~하기도 한다' 를 '늘·오직·반드시·모든' 으로 키우는 방식.
+  둘 다 글을 이해했는지가 아니라 눈썰미를 재는 함정입니다. 이해한 학생도 놓치고 대충
+  읽은 학생도 운으로 피해서 실력을 가르지 못합니다. X 는 '읽고 따져 봐야 아는' 것으로만
+  만드세요.
 
 [why 쓰는 법] 모두 한국어로.
 - O: 지문의 어느 문장에 근거하는지(원문 표현을 짧게 인용).
@@ -80,6 +93,11 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
     두 판이 서로 다른 사실을 물어야 하므로 한 번에 만든다. 따로 부르면 같은 사실을
     두 번 묻게 되고(모델은 다른 호출에서 무엇을 물었는지 모른다), 호출도 두 배가 된다.
     """
+    def _chk(out: ContentOXOut) -> None:
+        bad = shape.check_ox_axes([it.why for it in out.korean + out.english])
+        if bad:
+            raise ValueError("내용 O/X 설계 결함 — " + " ".join(bad))
+
     out: ContentOXOut = client.structured(
         system=SYSTEM,
         prompt=((variant_hint + "\n" if variant_hint else "")
@@ -88,6 +106,7 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
         model_cls=ContentOXOut,
         max_tokens=6000,
         max_retries=max_retries,
+        extra_validate=_chk,
     )
     seed = answer_spread.seed_of(analysis.title)
     res: dict[str, tuple[str, str, list[str]]] = {}

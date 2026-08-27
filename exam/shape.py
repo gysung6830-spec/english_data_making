@@ -782,3 +782,22 @@ def check_linker_pairs(pairs, answer_no: int) -> list[str]:
         bad.append("(A) 자리에 서로 다른 낱말이 다섯 개입니다 — 겹치는 것이 있어야 "
                    "두 자리를 모두 따지게 됩니다.")
     return bad
+
+
+# 내용 O/X 에서 쓰지 않기로 한 두 함정 — 해설에 그 이름이 적혀 있으면 걸러 낸다.
+# 둘 다 '읽고 이해했는가'가 아니라 눈썰미를 재는 방식이라 실력을 가르지 못한다.
+_BANNED_OX_AXES = (
+    "부분 일치", "한 요소만", "한 요소 왜곡",
+    "정도·빈도 과장", "정도 과장", "빈도 과장", "정도·범위 과장",
+)
+
+
+def check_ox_axes(reasons) -> list[str]:
+    """O/X 근거에 '쓰지 않기로 한 함정'의 이름이 적혀 있는지 본다."""
+    hit = sorted({a for a in _BANNED_OX_AXES
+                  for r in (reasons or []) if a in (r or "")})
+    if not hit:
+        return []
+    return [f"쓰지 않기로 한 함정을 썼습니다: {', '.join(hit)}. 숫자·기간 한 군데만 "
+            "바꾸거나 '늘·오직·반드시'로 키우는 방식은 눈썰미를 잴 뿐입니다 — "
+            "읽고 따져 봐야 아는 것으로 다시 만드세요."]

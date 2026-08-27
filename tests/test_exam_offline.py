@@ -2587,6 +2587,36 @@ def test_type_group_layout() -> None:
     print("✓ 유형별 편성 조판(유형마다 새 쪽·큰 칩·문항별 출처·두 단 고르게) 통과")
 
 
+def test_ox_axes() -> None:
+    """내용 O/X 의 오답 축 — 눈썰미만 재는 두 방식은 쓰지 않는다."""
+    import re as _re
+
+    from exam.merged import demo_passages_merged
+    from exam.shape import check_ox_axes
+
+    #  ① 뺀 두 축의 이름이 근거에 있으면 걸린다
+    assert check_ox_axes(["지문은 '수만 년'이라 했다. (부분 일치 + 한 요소 왜곡)"])
+    assert check_ox_axes(["'반드시'라고 하지 않았다. (정도·빈도 과장)"])
+    #  ② 남은 여덟 축은 통과한다
+    assert check_ox_axes([
+        "주체가 뒤바뀌었다. (주체·대상 바꿔치기)",
+        "없던 인과를 엮었다. (인과 날조)",
+        "원인과 결과가 뒤집혔다. (인과 역전)",
+        "'이론상'이라는 단서를 뗐다. (조건 삭제)",
+        "앞뒤 순서가 뒤집혔다. (시점 뒤집기)",
+        "지문이 못 박아 부정한 대목이다. (부정 뒤집기)",
+        "통념을 필자의 주장으로 바꿔치기했다. (논지·화자 뒤집기)",
+        "그럴듯하지만 언급되지 않았다. (미언급인데 그럴듯)",
+    ]) == []
+    #  ③ 데모도 그 두 축을 쓰지 않는다
+    for p in demo_passages_merged():
+        for t in ("content", "content_2"):
+            if t in p.a:
+                plain = _re.sub(r"<[^>]+>", " ", p.a[t])
+                assert check_ox_axes([plain]) == [], (p.title, t)
+    print("✓ 내용 O/X 오답 축(부분 일치·정도 과장 제외) 통과")
+
+
 def test_grammar_on_original_passage() -> None:
     """5번 어법은 정본 그대로, 6번 어법 서술형은 다시 쓴 지문 위에 선다."""
     import re as _re
@@ -2857,7 +2887,8 @@ def test_batch_client() -> None:
     ps = build_passages_merged(c5, [_DUMMY, _DUMMY2], labels=["10-1", "10-2"], progress=prog)
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     assert len(ps[0].q) >= 7, len(ps[0].q)
-    assert sum(c5._fake.sizes) > 10 and len(c5._fake.sizes) < 10, c5._fake.sizes
+    #    요청 수십 건이 배치 열 몇 개로 뭉쳐진다(건건이 나가지 않는다)
+    assert sum(c5._fake.sizes) > 10 and len(c5._fake.sizes) <= 12, c5._fake.sizes
     assert "배치 #1 제출" in buf.getvalue() and "정가의 50%" in buf.getvalue()
     print("✓ Batch API 클라이언트(요청 모으기·재시도·오류 전달·파이프라인) 통과")
 
@@ -2911,6 +2942,7 @@ if __name__ == "__main__":
     test_grammar_count_fixed_four()
     test_demo_matches_real_rules()
     test_output_defect_regressions()
+    test_ox_axes()
     test_grammar_on_original_passage()
     test_type_group_layout()
     test_output_checker()
