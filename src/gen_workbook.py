@@ -369,13 +369,13 @@ def derive_block(d, yellows=None):
     for i, s in enumerate(d.get("steps", [])):
         yb = f'노랑{_CIR[i]}' if i < len(_CIR) else '노랑'
         an = f' <span class="an">— {s.get("an","")}</span>' if s.get("an") else ""
-        anchor = f'<span class="yanch">“{_anchor(yellows[i])}”</span>' if i < len(yellows) else ""
-        steps += (f'<li><span class="yb">{yb}</span>{anchor}'
+        # 영어 원문은 ①지문에 같은 번호로 이미 있으므로 ②에서는 재수록하지 않음(중복 제거)
+        steps += (f'<li><span class="yb">{yb}</span>'
                   f'<span class="ystep">{s.get("ko","")}{an}</span></li>')
     concl = f'<div class="concl">{d.get("concl","")}</div>' if d.get("concl") else ""
     gnote = f'<div class="gnote">{esc(d.get("gnote",""))}</div>' if d.get("gnote") else ""
     return f'''<div class="derive">
-      <div class="dh">🟡 노란색 문장만으로 정답이 나오는 과정 <span style="font-weight:600;color:#a58a3a;font-size:8.3px">(노랑①②③ = 위 지문에 <b>같은 번호</b>로 칠한 노랑 문장)</span></div>
+      <div class="dh">🟡 노란색 문장만으로 정답이 나오는 과정 <span style="font-weight:600;color:#a58a3a;font-size:8.3px">(①지문의 <b>🟡노랑①②③</b> 문장을 그 번호로 가리킴 — 영어 원문은 위에서 확인)</span></div>
       <ol>{steps}</ol>{concl}{gnote}</div>'''
 
 
@@ -532,6 +532,7 @@ def direct_full_block(data):
     kind = data.get("kind", "general")
     rows_html = ""
     n = 0
+    yc = 0  # 노랑 문장 순번 → ②'노랑①②③'와 매칭
     for r in data.get("rows", []):
         if r.get("is_summary"):
             def _blk(s):
@@ -583,9 +584,11 @@ def direct_full_block(data):
         if role == "yellow":
             rowcls += " y"
             en = f'<span class="yl">{en}</span>'
-            btag = "🟡 읽기" + (" · 끝문장" if r.get("end") else "")
+            _yi = _CIRC[yc] if yc < len(_CIRC) else f"{yc+1}"
+            yc += 1
+            btag = f"🟡 노랑{_yi}" + (" · 끝문장" if r.get("end") else "")
             if r.get("blank"):
-                btag = f"🟡 근거({r['blank']})"
+                btag = f"🟡 노랑{_yi} 근거({r['blank']})"
             entag = f'{sigchip}<span class="tagm ry">{btag}</span>'
         elif role in ("gray", "given") and kind not in ("seq",):
             en = f'<span class="dim">{en}</span>'
