@@ -209,9 +209,11 @@ def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
     from . import branding
 
     keys = _cover_keys(books, packs, writing_packs, blank_wb)
-    title = (books[0].title if books else
-             (packs[0].title if packs else
-              (writing_packs[0].title if writing_packs else "통합 워크북")))
+    # 표지 부제 = '지문 제목'이 아니라 '원본 파일명'(확장자 제외). 파일명이 없을 때만 제목으로 폴백.
+    fname = Path(source_name).stem.strip() if source_name else ""
+    title = fname or (books[0].title if books else
+                      (packs[0].title if packs else
+                       (writing_packs[0].title if writing_packs else "통합 워크북")))
     n_passages = max(len(books or []), len(packs or []), len(writing_packs or []), 1)
     version_label = "한글 포함" if show_ko else "한글 제외"
     return cover_render.render_cover_pdf(
