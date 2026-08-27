@@ -35,9 +35,13 @@ def _short_num(label: str) -> str:
 
 
 def _circled(num: int) -> str:
-    """정수 → 원문자. 범위 밖이면 'N.' 형태."""
+    """정수 → 원문자. ①~⑳, ㉑~㉟, ㊱~㊿. 범위 밖이면 'N.' 형태."""
     if 1 <= num <= 20:
-        return chr(0x2460 + num - 1)
+        return chr(0x2460 + num - 1)    # ①~⑳
+    if 21 <= num <= 35:
+        return chr(0x3251 + num - 21)   # ㉑~㉟
+    if 36 <= num <= 50:
+        return chr(0x32B1 + num - 36)   # ㊱~㊿
     return f"{num}."
 
 
