@@ -88,10 +88,12 @@
               margin:0 auto 1px; width:0; height:0; overflow:visible; line-height:1.05;
               white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:#7c828c; font-weight:800; font-size:8.5px; }   /* 성분(SVOC) 라벨 = 회색 */
-  .tok .over .reflbl{ color:var(--purple); font-weight:700; font-size:7.5px; }  /* 지칭 대상(대명사 위) */
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
-  .en .line.po.refline .tok .over{ height:21px; }   /* 지칭 대상 줄은 위 공간 더 확보 */
-  .tok .tstar{ color:#c58a00; font-weight:800; font-size:11px; margin-right:1px; vertical-align:2px; }  /* 주제문 별표 */
+  /* 지칭 표식(어법 ①②③ 와 구분): 보라 '위첨자 문자' a·b·c — 본문 대명사 ↔ 독해 박스 연결 */
+  .rsup{ color:var(--purple); font-weight:800; font-size:8px; vertical-align:super; margin-left:1px; }
+  .pbox .rsup.box{ vertical-align:baseline; font-size:10px; display:inline-block; min-width:12px;
+                   text-align:center; border:1.3px solid var(--purple); border-radius:50%;
+                   line-height:1.25; margin-right:2px; }
   /* 긴 토큰(구절 단위)은 줄바꿈 허용 → 컬럼 폭을 넘겨 포인트 박스를 밀어내는 오류 방지.
      짧은 토큰(주석 달린 단어)은 어차피 한 줄에 들어가 정렬 유지. */
   .tok{ max-width:100%; }
@@ -543,18 +545,15 @@
           <div class="en">
             {% for line in s.lines %}
             {%- set has_role = (line | selectattr('role') | list) and s_roles -%}
-            {%- set _hasref = s_gram and (line | selectattr('ref_to') | list) -%}
-            {%- set _over = has_role or _hasref -%}
-            <div class="line{% if _over %} po{% endif %}{% if _hasref %} refline{% endif %}">
+            <div class="line{% if has_role %} po{% endif %}">
               {%- for t in line -%}
                 <span class="tok">
-                  {# 위: 지칭 대상(대명사 위) + 문장 성분 라벨(학생용 blank/slash 는 숨김) #}
-                  {%- if _over %}<span class="over">{% if _hasref and t.ref_to %}<span class="reflbl">→{{ t.ref_to }}</span>{% endif %}{% if has_role and t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
+                  {# 위: 문장 성분 라벨(학생용 blank/slash 는 숨김) #}
+                  {%- if has_role %}<span class="over">{% if t.role %}<span class="lbl">{{ t.role }}</span>{% endif %}</span>{% endif -%}
                   {%- set _a = t.above or '' -%}{%- set _n = t.note or '' -%}
                   {%- set is_vocab = _a[:1] in ['=', '↔'] or (t.note_kind != 'red' and _n[:1] in ['=', '↔']) -%}
                   {# 빨강 어법 글자색(t.color)은 학생용에도 항상 표시. 형광·밑줄·유의어는 s_gram 때만. #}
-                  {%- if s_gram and t.topic_star %}<span class="tstar">★</span>{% endif -%}
-                  <span class="w{% if t.color %} {{ t.color }}{% endif %}{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if is_vocab %} vu{% endif %}{% if t.ref_mark %} refu{% endif %}{% endif %}">{{ t.text | ansclean }}</span>
+                  <span class="w{% if t.color %} {{ t.color }}{% endif %}{% if s_gram %}{% if t.hl %} hl-{{ t.hl }}{% endif %}{% if t.underline %} underline{% endif %}{% if is_vocab %} vu{% endif %}{% if t.ref_mark %} refu{% endif %}{% endif %}">{{ t.text | ansclean }}</span>{% if s_gram and t.ref_no %}<span class="rsup">{{ t.ref_no }}</span>{% endif %}
                   {# 아래: 어법 원문자 번호(빨강)는 학생용에도 표시 / 유의어·반의어·해석힌트는 s_gram 때만.
                      (X) 오답형은 어법 Point 박스에 있으므로 본문에선 생략. #}
                   {%- set _redmark = t.note and t.note_kind == 'red' -%}
@@ -595,7 +594,7 @@
           <span class="cap fcap">{{ s.index }}문장 - 독해 Point</span>
           <div class="body">
             {%- if s_gram -%}
-            {%- for r in s.refs %}<div class="fr"><span class="fl ref">지칭</span> {{ r }}</div>{% endfor -%}
+            {%- for r in s.refs %}<div class="fr"><span class="rsup box">{{ 'abcdefgh'[loop.index0] if loop.index0 < 8 else '·' }}</span><span class="fl ref"> 지칭</span> {{ r }}</div>{% endfor -%}
             {% if s.gloss_en %}<div class="fr"><span class="fl im">함축</span> {{ s.gloss_en }}{% if s.gloss_ko %}<br><span class="gko">{{ s.gloss_ko }}</span>{% endif %}</div>{% endif %}
             {%- endif -%}
           </div>

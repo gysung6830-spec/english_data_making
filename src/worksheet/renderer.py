@@ -211,25 +211,20 @@ def _mark_reference_pronouns(a) -> None:
     import re
     for s in getattr(a, "sentences", None) or []:
         lines = getattr(s, "lines", None) or []
-        # 중요 문장 플래그 + 주제문 별표(★): 첫 노란 형광(주제문) 토큰에 ★ 표시.
-        has_topic = False
-        for line in lines:
-            for t in line:
-                if getattr(t, "hl", None) == "y":
-                    if not has_topic:
-                        t.topic_star = True              # 주제문 첫 어구에 ★
-                    has_topic = True
+        # 중요 문장 플래그(주제문=노란 형광 어구 포함 또는 뱃지) — 문장 번호 박스 강조용.
+        has_topic = any(getattr(t, "hl", None) == "y"
+                        for line in lines for t in line)
         s.important = bool(getattr(s, "badge", None) or has_topic)
         refs = getattr(s, "refs", None) or []
         if not refs:
             continue
-        prons: dict[str, str] = {}                       # 대명사 → 지칭 대상(대명사 위에 표기)
-        for r in refs:
-            parts = re.split(r"→|-+>", str(r), maxsplit=1)
-            head = parts[0].strip().strip("'\"·` ").lower()
-            tail = parts[1].strip() if len(parts) > 1 else ""
-            if head and len(head) <= 24:
-                prons[head] = tail[:22]
+        # 지칭 넘버링: refs 순서대로 문자(a,b,c…) 부여 → 본문 대명사와 독해 박스를 연결.
+        prons: dict[str, str] = {}                       # 대명사 → 문자 표식
+        for i, r in enumerate(refs):
+            head = re.split(r"→|-+>", str(r), maxsplit=1)[0]
+            head = head.strip().strip("'\"·` ").lower()
+            if head and len(head) <= 24 and i < 26:
+                prons.setdefault(head, chr(97 + i))
         if not prons:
             continue
         for line in lines:
@@ -237,8 +232,7 @@ def _mark_reference_pronouns(a) -> None:
                 w = (t.text or "").strip().strip(".,;:!?'\"()").lower()
                 if w in prons:
                     t.ref_mark = True                    # 본문 대명사에 점선
-                    if prons[w]:
-                        t.ref_to = prons[w]              # 대명사 '위'에 지칭 대상 표기
+                    t.ref_no = prons[w]                  # 지칭 표식 문자(위첨자)
 
 
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
