@@ -394,10 +394,27 @@ class ShortOut(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# 내용 O/X — 진술 10개를 각각 참·거짓으로 판정 (한글판·영어판)
+# 내용 O/X — 진술을 각각 참·거짓으로 판정 (한글판·영어판)
 # ---------------------------------------------------------------------------
-N_OX = 10          # 한 문항의 진술 수
-N_OX_TRUE = 2      # 그중 O(일치)인 것 — 늘 2개, 나머지 8개는 X
+N_OX = 10          # 한 문항의 진술 수(보통)
+N_OX_SHORT = 8     # 짧은 지문(문장 5개 이하)의 영어판 — 아래 주석 참고
+N_OX_TRUE = 2      # 그중 O(일치)인 것 — 늘 2개, 나머지는 모두 X
+
+# 짧은 지문에서 영어판만 줄이는 까닭:
+# 한 지문에서 O 는 모두 넷이고(판마다 둘), 넷은 서로 다른 사실이어야 한다. 그런데
+# 주제문은 쓰지 않으므로 5문장 지문에서 O 를 놓을 자리는 넷뿐 — 여유가 정확히 0이다.
+# 여기서 모자라는 쪽은 늘 영어판이다. 영어판은 '한글판이 쓰지 않은 사실'을 받아 만들기
+# 때문이다. 그래서 줄이는 것도 영어판이다(10+10 → 10+8).
+_OX_SIZES = (N_OX_SHORT, N_OX)
+
+
+def ox_sizes(n_sentences: int) -> tuple[int, int]:
+    """이 지문에서 만들 진술 수 (한글판, 영어판).
+
+    문장이 5개 이하면 서로 다른 사실이 모자라 억지 진술이 나온다. 그때만 영어판을
+    여덟으로 줄인다(총 18개). 그 위로는 늘 열 개씩이다.
+    """
+    return (N_OX, N_OX_SHORT if n_sentences <= 5 else N_OX)
 
 
 class OXStatement(BaseModel):
@@ -410,13 +427,16 @@ class OXStatement(BaseModel):
 
 
 def _check_ox(items: list[OXStatement], label: str) -> list[OXStatement]:
-    if len(items) != N_OX:
-        raise ValueError(f"{label} 진술은 정확히 {N_OX}개여야 합니다(현재 {len(items)}개).")
+    # 개수는 지문 길이에 따라 8 또는 10이다. 어느 쪽을 요구했는지는 스키마가 모르므로
+    # 여기서는 '둘 중 하나'까지만 보고, 정확한 개수는 생성기가 확인한다.
+    if len(items) not in _OX_SIZES:
+        raise ValueError(f"{label} 진술은 {N_OX_SHORT}개 또는 {N_OX}개여야 합니다"
+                         f"(현재 {len(items)}개).")
     n_true = sum(1 for it in items if it.is_true)
     if n_true != N_OX_TRUE:
         raise ValueError(
             f"{label}에서 O 인 진술이 {n_true}개입니다 — 정확히 {N_OX_TRUE}개여야 합니다. "
-            f"나머지 {N_OX - N_OX_TRUE}개는 모두 X 여야 합니다.")
+            f"나머지 {len(items) - N_OX_TRUE}개는 모두 X 여야 합니다.")
     if any(not (it.text or "").strip() or not (it.why or "").strip() for it in items):
         raise ValueError(f"{label}에 빈 진술 또는 빈 근거가 있습니다.")
     return items
@@ -432,8 +452,8 @@ class ContentOXOut(BaseModel):
     같은 사실이면 한 판을 푼 학생이 다른 판을 뜻으로 옮겨 적어 버린다.
     """
 
-    korean: list[OXStatement]      # 한글 진술 10개 (O 2 · X 8)
-    english: list[OXStatement]     # 영어 진술 10개 (O 2 · X 8)
+    korean: list[OXStatement]      # 한글 진술 10개 (O 2 · 나머지 X)
+    english: list[OXStatement]     # 영어 진술 10개 — 짧은 지문에서는 8개
 
     @field_validator("korean")
     @classmethod

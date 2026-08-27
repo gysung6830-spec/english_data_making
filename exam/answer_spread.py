@@ -157,17 +157,28 @@ _OX_SLOTS: tuple[tuple[int, int], ...] = (
     (3, 10), (1, 8), (4, 7), (5, 9), (2, 9), (3, 6),
 )
 
+# 짧은 지문의 영어판은 진술이 여덟이다(schemas.ox_sizes). 자리표도 따로 둔다 —
+# 열 칸짜리 표를 그냥 쓰면 ⑨·⑩ 이 없는 문항에 없는 자리가 나온다.
+_OX_SLOTS_8: tuple[tuple[int, int], ...] = (
+    (2, 6), (4, 8), (1, 5), (3, 7), (2, 7), (1, 6),
+    (3, 8), (4, 7), (2, 5), (1, 8), (3, 6), (2, 8),
+)
 
-def ox_positions(passage_index: int, version: int, seed: int = 0) -> tuple[int, int]:
-    """이 문항에서 O 가 놓일 두 자리(1-based).
+_OX_TABLES: dict[int, tuple[tuple[int, int], ...]] = {8: _OX_SLOTS_8, 10: _OX_SLOTS}
+
+
+def ox_positions(passage_index: int, version: int, seed: int = 0,
+                 n: int = 10) -> tuple[int, int]:
+    """이 문항에서 O 가 놓일 두 자리(1-based). n 은 그 문항의 진술 수(8 또는 10).
 
     passage_index(지문 순서)·version(한글판 0 · 영어판 1)·seed(지문 내용)로 정하므로
     ① 같은 시험지 안에서 문항마다 다르고, ② 같은 지문이면 늘 같은 결과가 나온다.
     """
     # 문항을 만들어지는 순서대로 세어 자리표를 한 칸씩 옮긴다 — 열두 문항까지는
     # 어느 둘도 같은 자리 짝을 쓰지 않는다(지문 6개 × 두 판).
+    table = _OX_TABLES.get(n, _OX_SLOTS)
     idx = seed + passage_index * 2 + version
-    return _OX_SLOTS[idx % len(_OX_SLOTS)]
+    return table[idx % len(table)]
 
 
 def place_ox(items: list, positions: tuple[int, int]) -> list:

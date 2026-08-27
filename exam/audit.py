@@ -33,6 +33,7 @@ from collections import Counter
 
 from . import shape
 from .merged import MERGED_LABELS, MERGED_ORDER
+from .schemas import N_OX
 
 
 _CIRC = "①②③④⑤⑥⑦⑧⑨⑩"
@@ -41,8 +42,8 @@ _MARKS = "①②③④⑤⑥⑦⑧⑨⑩ⓐⓑⓒⓓⓔ"
 # 유형별로 기대하는 밑줄 개수(없으면 검사하지 않는다)
 _N_MARKS = {"vocab": 5, "vocab_2": 5, "vocab_3": 5, "pair_odd": 5,
             "grammar_count": 6, "grammar_fix": 6}
-# 선지 개수
-_N_CHOICES = {"grammar_count": 6, "content": 10, "content_2": 10}
+# 선지 개수 — 허용하는 값들. 내용 O/X 영어판은 짧은 지문에서 8개다(schemas.ox_sizes).
+_N_CHOICES = {"grammar_count": (6,), "content": (10,), "content_2": (8, 10)}
 # <li> 선지가 없는 유형. 삽입·무관한 문장은 본문 속 위치 표시(①~⑤)가 선지 구실을 한다.
 _NO_CHOICES = {"grammar", "vocab", "vocab_2", "vocab_3", "D", "insert",
                "irrelevant", "grammar_fix"}
@@ -104,9 +105,10 @@ def _check_item(it: dict) -> list[str]:
 
     # 선지
     if t not in _NO_CHOICES:
-        want = _N_CHOICES.get(t, 5)
-        if len(it["choices"]) != want:
-            bad.append(f"선지가 {len(it['choices'])}개입니다(기대 {want}개).")
+        want = _N_CHOICES.get(t, (5,))
+        if len(it["choices"]) not in want:
+            bad.append(f"선지가 {len(it['choices'])}개입니다"
+                       f"(기대 {'·'.join(map(str, want))}개).")
         if it["choices"]:
             bad += shape.check_choice_shape(
                 [re.sub(r"^[①-⑧]\s*", "", c) for c in it["choices"]], n_ans,
@@ -129,11 +131,13 @@ def _check_item(it: dict) -> list[str]:
         if len(fixes) != 4:
             bad.append(f"고쳐 쓸 밑줄이 {len(fixes)}개입니다(4개여야 합니다).")
 
-    # 내용 O/X — 열 진술이 모두 판정돼야 하고, O 는 늘 둘이며 서로 붙어 있으면 안 된다
+    # 내용 O/X — 진술이 모두 판정돼야 하고, O 는 늘 둘이며 서로 붙어 있으면 안 된다.
+    # 진술 수는 지문 길이에 따라 8 또는 10이므로(schemas.ox_sizes) 문제편의 진술 수와 맞춘다.
     if t in ("content", "content_2"):
         marks = re.findall(r"[①-⑩]\s*([OX])", it["key"])
-        if len(marks) != 10:
-            bad.append(f"O/X 판정이 {len(marks)}개입니다(진술 10개 모두여야 합니다).")
+        want = len(it["choices"]) or N_OX
+        if len(marks) != want:
+            bad.append(f"O/X 판정이 {len(marks)}개입니다(진술 {want}개 모두여야 합니다).")
         elif marks.count("O") != 2:
             bad.append(f"O 가 {marks.count('O')}개입니다 — 늘 2개여야 합니다"
                        "(비율이 흔들리면 학생이 감으로 찍습니다).")

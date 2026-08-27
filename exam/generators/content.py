@@ -5,20 +5,19 @@
 옮겨 적어 버린다. 영어판은 영어 진술을 읽어 내는 일 자체가 과제가 된다.
 
 [출제 원리]
-① O 는 늘 두 개, 나머지 여덟 개는 X.
+① O 는 늘 두 개, 나머지는 모두 X.
    O 가 절반쯤이면 학생이 감으로 반은 맞힌다. 여덟 대 둘이면 '왜 X 인지'를 하나하나
    짚어야 하고, 대충 O 를 찍는 습관이 통하지 않는다.
 ② O 진술은 '눈에 덜 띄는 세부'를 유의어로 바꿔 쓴다.
    원문 낱말이 많이 보이면 O 처럼 느껴진다. 그래서 O 에는 원문 낱말을 숨기고,
    X 에는 오히려 원문 낱말을 그대로 노출해 그럴듯하게 만든다.
-③ X 여덟 개는 여덟 축(shape.OX_AXES)을 하나씩 쓴다.
+③ X 는 여덟 축(shape.OX_AXES)을 하나씩 쓴다.
    한 축을 되풀이하면 그 하나를 알아챈 학생이 나머지도 같은 눈으로 한꺼번에 걸러 낸다.
    축은 글 속에 괄호로 적게 하지 않고 axis 필드로 따로 받는다 — 조판기가 이름을
    붙이므로 표기가 늘 같고, 축이 겹쳤는지 코드가 셀 수 있다.
    다만 겹쳤다고 다시 만들지는 않는다. 이 유형은 한 호출로 진술 스무 개를 만드는
    가장 비싼 호출이라, 축 하나 겹친 값으로 통째로 다시 부르면 문항 값이 두 배가 된다.
-   프롬프트에서 '하나씩'을 못 박아 처음부터 맞게 나오게 하고, 어긋나면 검토 메모로
-   남겨 사람이 본다.
+   프롬프트에서 '하나씩'을 못 박아 처음부터 맞게 나오게 한다.
    여덟 축은 모두 '읽고 이해했는가'를 묻는 것들이다. 낱말 하나만 바꿔 놓고 눈썰미를
    재는 두 방식은 일부러 뺐다 — 숫자·기간만 살짝 틀리는 '부분 일치 + 한 요소 왜곡'과
    '늘·오직·반드시'로 키우는 '정도·빈도 과장'. 그런 함정은 글을 이해한 학생도 걸리고
@@ -27,44 +26,58 @@
    모델에게 맡기면 앞쪽으로 몰리는 버릇이 나오고, 문항마다 같은 자리에 O 가 오면
    지문을 읽지 않고 자리만 보고 찍는다. 열두 문항까지 어느 둘도 같은 자리 짝을
    쓰지 않으며, 두 O 는 늘 세 칸 이상 떨어져 있다.
+
+[지문 길이에 맞춰 요구를 낮추는 세 자리]
+위 원리는 '재료가 넉넉한 지문'을 전제한다. 실제 EBS 지문은 5문장짜리가 흔한데,
+그런 지문에 같은 요구를 보내면 모델은 없는 재료를 지어낸다 — 그러면 지문에 근거가
+없는 진술이 되어 정답 시비가 난다. 그래서 문장 수에 따라 세 곳을 낮춘다.
+
+  문장 5개 이하 → 영어판을 8진술로(총 18개).   [schemas.ox_sizes]
+      O 는 한 지문에 넷이고 넷은 서로 다른 사실이어야 하는데, 주제문을 빼면 5문장
+      지문에서 O 를 놓을 자리가 정확히 넷뿐이라 여유가 0이다. 모자라는 쪽은 늘
+      영어판이다(한글판이 쓰지 않은 사실을 받아 만들기 때문).
+  문장 6개 미만 → 두 판의 O 가 같은 문장에 기대는 것을 허용(묻는 각도는 달라야).
+  문장 7개 미만 → 재료가 없는 축은 '미언급인데 그럴듯'으로 대체 허용(판마다 최대 2회).
+      인과 관계가 없는 지문에서 '인과 역전'을, 단서구가 없는 지문에서 '조건 삭제'를
+      만들어 내는 것보다 낫다.
 """
 from __future__ import annotations
 
 from .. import answer_spread, build as B
 from .. import shape
 from ..llm import SYSTEM, ClaudeClient
-from ..schemas import Analysis, ContentOXOut
+from ..schemas import Analysis, ContentOXOut, N_OX_TRUE, ox_sizes
 from ..types import CONTENT, CONTENT_2
 from .base import context
+
+# 짧은 지문에서 '미언급인데 그럴듯'으로 대신 채워도 되는 횟수(판마다).
+_FILL_ALLOWANCE = 2
 
 _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만드세요. 발문은 '다음 진술이 글의
 내용과 일치하면 O, 일치하지 않으면 X 를 쓰시오.' 이며, 지문은 원본 그대로 쓰입니다.
 당신은 진술과 그 판정만 만듭니다.
 
-- korean: 한국어 진술 **10개**
-- english: 영어 진술 **10개**
+- korean: 한국어 진술 **{n_ko}개**
+- english: 영어 진술 **{n_en}개**
 - 각 항목은 text(진술) · is_true(글과 일치하면 true) · why(그 판정의 근거, 한국어) ·
   axis(어느 축으로 비틀었는지 — 아래 여덟 이름 중 하나를 '글자 그대로'. O 진술은 "일치").
 
 [가장 중요한 조건]
-- 두 목록 각각에서 is_true 가 true 인 것은 **정확히 2개**, 나머지 8개는 false 입니다.
-- 한글판과 영어판은 **서로 다른 사실**을 물어야 합니다. 영어판은 한글판의 번역이
-  아닙니다. 같은 문장을 두 언어로 내면 한 판을 푼 학생이 다른 판을 그대로 옮겨 적습니다.
-  · 한글판이 A·B 사실을 O 로 물었다면, 영어판은 C·D 를 O 로 무세요.
-  · X 진술도 서로 다른 대목을 비틀어야 합니다.
-- 진술을 늘어놓는 순서는 신경 쓰지 마세요. O 자리는 조판기가 다시 정합니다.
+- 두 목록 각각에서 is_true 가 true 인 것은 **정확히 {n_true}개**입니다.
+  한글판은 나머지 {x_ko}개가, 영어판은 나머지 {x_en}개가 모두 false 입니다.
+{o_rule}- 진술을 늘어놓는 순서는 신경 쓰지 마세요. O 자리는 조판기가 다시 정합니다.
 
-[O 진술 2개를 쓰는 법]
+[O 진술 {n_true}개를 쓰는 법]
 - 지문에서 '눈에 덜 띄는 세부 사실'을 고르세요(맨 앞 문장의 주제문은 너무 쉽습니다).
 - 원문 단어를 그대로 쓰지 말고 **유의어로 바꿔 쓰세요**. 원문 낱말이 그대로 보이면
   읽지 않고도 O 로 찍힙니다.
 - 두 O 는 지문의 서로 다른 대목에서 가져오세요.
 
-[X 진술 8개를 쓰는 법 — 여덟 축을 '하나씩', 겹치지 않게]
-**X 여덟 개는 아래 여덟 축을 정확히 하나씩 씁니다. 같은 축을 두 번 쓰지 마세요.**
+[X 진술을 쓰는 법 — 축이 겹치지 않게]
+**한글판의 X {x_ko}개, 영어판의 X {x_en}개는 각각 아래 축을 하나씩 씁니다.**
 한 축을 되풀이하면 그 하나를 알아챈 학생이 나머지도 같은 눈으로 한꺼번에 걸러 냅니다.
-여덟을 다 쓰면 학생은 여덟 가지 다른 방식으로 따져 봐야 합니다.
-한글판과 영어판은 각각 따로 여덟 축을 하나씩 씁니다(두 판 사이에는 겹쳐도 됩니다).
+축을 흩어 놓으면 학생은 그만큼 다른 방식으로 따져 봐야 합니다.
+한글판과 영어판은 각각 따로 축을 고릅니다(두 판 사이에는 겹쳐도 됩니다).
 각 X 진술에는 지문에 실제로 나온 단어를 일부 그대로 노출해 그럴듯하게 만드세요.
 
   axis 에 적을 이름            무엇을 비트는가
@@ -78,10 +91,7 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
   논지·화자 뒤집기              필자가 반박하려고 소개한 통념을 필자의 주장인 것처럼
   미언급인데 그럴듯             지문과 모순은 아니지만 아예 언급되지 않은 상식적 진술
 
-- 지문에 통념·인용이 없어 '논지·화자 뒤집기'를 쓸 자리가 마땅치 않으면, 필자가 글을
-  맺는 태도(낙관·경계·유보)를 반대로 세우면 됩니다. 그래도 어려우면 그 한 자리만
-  다른 축으로 채우고 axis 에 그 축 이름을 적으세요 — 억지로 만든 진술보다 낫습니다.
-
+{axis_rule}
 [쓰지 말아야 할 두 가지 — 반드시 지키세요]
   · **부분 일치 + 한 요소만 왜곡 금지** — 나머지는 다 맞는데 숫자·기간·대상 하나만
     살짝 바꿔 놓는 방식. 예: '수만 년' 을 '수백 년' 으로.
@@ -102,6 +112,43 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
 {ctx}
 """
 
+# 문장이 넉넉한 지문 — 두 판이 서로 다른 사실을 물어야 한다.
+_O_RULE_STRICT = """- 한글판과 영어판은 **서로 다른 사실**을 물어야 합니다. 영어판은 한글판의 번역이
+  아닙니다. 같은 문장을 두 언어로 내면 한 판을 푼 학생이 그대로 옮겨 적습니다.
+  · 한글판이 A·B 사실을 O 로 물었다면, 영어판은 C·D 를 O 로 무세요.
+  · X 진술도 서로 다른 대목을 비틀어야 합니다.
+"""
+
+# 짧은 지문 — 서로 다른 사실이 넷이나 나오지 않는다.
+_O_RULE_SHARED = """- 한글판과 영어판은 **서로 다른 사실**을 묻는 것이 원칙입니다. 영어판은 한글판의
+  번역이 아닙니다 — 같은 문장을 두 언어로 내면 한 판을 푼 학생이 그대로 옮겨 적습니다.
+- **다만 이 지문은 문장이 {n}개로 짧습니다.** O 로 쓸 만한 '눈에 덜 띄는 세부 사실'이
+  넷이나 나오지 않을 수 있습니다. 그럴 때는 두 판의 O 가 같은 문장에 기대도 됩니다.
+  대신 **묻는 각도가 완전히 달라야** 합니다.
+  · 한 판이 그 문장의 '무엇이 무엇을 한다'를 물었다면, 다른 판은 '어떤 조건에서'나
+    '그래서 어떻게 되는가'를 무세요.
+  · 두 진술을 나란히 놓았을 때 한쪽을 번역하면 다른 쪽이 되는 관계면 안 됩니다.
+  · 억지로 다른 사실을 지어내지는 마세요 — 지문에 없는 O 는 그 자체로 오답입니다.
+"""
+
+# 문장이 넉넉한 지문 — 여덟 축의 재료가 대체로 다 있다.
+_AXIS_RULE_STRICT = """- 지문에 통념·인용이 없어 '논지·화자 뒤집기'를 쓸 자리가 마땅치 않으면, 필자가 글을
+  맺는 태도(낙관·경계·유보)를 반대로 세우면 됩니다. 그래도 어려우면 그 한 자리만
+  다른 축으로 채우고 axis 에 그 축 이름을 적으세요 — 억지로 만든 진술보다 낫습니다.
+"""
+
+# 짧은 지문 — 여덟 축의 재료가 다 있지 않다. 없는 축은 지어내지 말고 대체하게 한다.
+_AXIS_RULE_RELAXED = """- **이 지문은 문장이 {n}개로 짧아 위 여덟 축의 재료가 다 있지는 않습니다.**
+  인과 관계가 없는 지문에서 '인과 역전'을, '이론상·~할 때에는' 같은 단서구가 없는
+  지문에서 '조건 삭제'를, 통념·인용이 없는 지문에서 '논지·화자 뒤집기'를 만들어 내면
+  지문에 근거가 없는 진술이 되어 **정답 시비가 납니다**.
+  · 지문에 재료가 있는 축부터 쓰세요.
+  · 재료가 없는 축은 **건너뛰고 '미언급인데 그럴듯'으로 채우세요**(한 판에서
+    최대 {fill}회까지. axis 에도 '미언급인데 그럴듯'이라고 적습니다).
+  · 없는 축을 지어내는 것보다 이쪽이 낫습니다. 채운 진술도 '지문에 없다'는 근거가
+    분명하므로 정답은 확실합니다.
+"""
+
 
 def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
                   max_retries: int = 1, passage_index: int = 0,
@@ -111,7 +158,29 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
     두 판이 서로 다른 사실을 물어야 하므로 한 번에 만든다. 따로 부르면 같은 사실을
     두 번 묻게 되고(모델은 다른 호출에서 무엇을 물었는지 모른다), 호출도 두 배가 된다.
     """
+    n = len(analysis.sentences)
+    n_ko, n_en = ox_sizes(n)
+    shared_o = n < 6            # O 넷을 서로 다른 사실로 뽑을 수 없는 길이
+    relaxed_axes = n < 7        # 여덟 축의 재료가 다 있지 않은 길이
+    fill = _FILL_ALLOWANCE if relaxed_axes else 0
+
+    prompt = _PROMPT.format(
+        n_ko=n_ko, n_en=n_en, n_true=N_OX_TRUE,
+        x_ko=n_ko - N_OX_TRUE, x_en=n_en - N_OX_TRUE,
+        o_rule=(_O_RULE_SHARED.format(n=n) if shared_o else _O_RULE_STRICT),
+        axis_rule=(_AXIS_RULE_RELAXED.format(n=n, fill=fill)
+                   if relaxed_axes else _AXIS_RULE_STRICT),
+        ctx=context(analysis),
+    )
+
     def _chk(out: ContentOXOut) -> None:
+        # 개수는 지문 길이에 따라 달라지므로 스키마가 '8 또는 10'까지만 본다.
+        # 이 지문에 요구한 정확한 수는 여기서 확인한다(어긋나면 재시도 안내에 실린다).
+        for label, items, want in (("한글판", out.korean, n_ko),
+                                   ("영어판", out.english, n_en)):
+            if len(items) != want:
+                raise ValueError(f"{label} 진술이 {len(items)}개입니다 — 이 지문은 문장이 "
+                                 f"{n}개이므로 정확히 {want}개여야 합니다.")
         # 쓰지 않기로 한 두 함정은 되돌린다 — 문항의 값을 깎는 결함이고 드물게 나온다.
         bad = shape.check_ox_axes([it.why for it in out.korean + out.english]
                                   + [it.axis for it in out.korean + out.english])
@@ -120,8 +189,7 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
 
     out: ContentOXOut = client.structured(
         system=SYSTEM,
-        prompt=((variant_hint + "\n" if variant_hint else "")
-                + _PROMPT.format(ctx=context(analysis))),
+        prompt=((variant_hint + "\n" if variant_hint else "") + prompt),
         cache_prefix=context(analysis),
         model_cls=ContentOXOut,
         max_tokens=6000,
@@ -133,14 +201,17 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
     for version, (slot, items) in enumerate(((CONTENT, out.korean),
                                              (CONTENT_2, out.english))):
         placed = answer_spread.place_ox(
-            items, answer_spread.ox_positions(passage_index, version, seed))
+            items,
+            answer_spread.ox_positions(passage_index, version, seed, n=len(items)))
         q, a = B.make_content_ox(analysis.sentences,
                                  [it.text for it in placed],
                                  [it.is_true for it in placed],
                                  [it.why for it in placed],
                                  axes=[it.axis for it in placed])
         # 축이 겹쳤는지는 검토 메모로만 남긴다(다시 만들지 않는다 — 위 머리말 참고).
-        res[slot] = (q, a, shape.check_ox_axis_coverage([it.axis for it in placed]))
+        # 짧은 지문에서 '채우라고 시킨' 겹침은 결함이 아니므로 세지 않는다.
+        res[slot] = (q, a, shape.check_ox_axis_coverage(
+            [it.axis for it in placed], allow_repeat=fill))
     return res
 
 

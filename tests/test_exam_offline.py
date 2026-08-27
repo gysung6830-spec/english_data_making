@@ -2645,6 +2645,140 @@ def test_ox_axes() -> None:
     print("✓ 내용 O/X 오답 축(여덟 축 하나씩·부분 일치·정도 과장 제외) 통과")
 
 
+def test_ox_short_passage() -> None:
+    """짧은 지문에서는 요구를 낮춘다 — 영어판 8진술 · O 근거 겹침 허용 · 없는 축 대체.
+
+    5문장짜리 지문에 '서로 다른 사실 넷 · 여덟 축 하나씩'을 그대로 요구하면 모델이
+    없는 재료를 지어낸다. 지어낸 진술은 지문에 근거가 없어 정답 시비가 난다.
+    """
+    import re as _re
+
+    from exam import answer_spread, build as B, shape
+    from exam.generators import content as C
+    from exam.schemas import ContentOXOut, OXStatement, ox_sizes
+    from exam.types import CONTENT, CONTENT_2
+
+    FILL = shape.OX_AXES[-1]            # '미언급인데 그럴듯' — 재료가 없을 때 채우는 축
+
+    #  ① 진술 수는 문장 수가 정한다. 줄이는 쪽은 늘 영어판이다
+    #     (영어판이 '한글판이 쓰지 않은 사실'을 받아 만들기 때문).
+    assert ox_sizes(4) == (10, 8) and ox_sizes(5) == (10, 8)
+    assert ox_sizes(6) == (10, 10) and ox_sizes(12) == (10, 10)
+
+    #  ② 여덟 칸짜리 O 자리표 — 없는 자리(⑨⑩)가 나오지 않는다
+    seen = set()
+    for pi in range(6):                              # 지문 6개 × 두 판 = 열두 문항
+        for v in (0, 1):
+            a, b = answer_spread.ox_positions(pi, v, seed=0, n=8)
+            assert 1 <= a < b <= 8, (pi, v, a, b)
+            assert b - a >= 3, (pi, v, a, b)         # 두 O 는 세 칸 이상 떨어진다
+            assert (a <= 4) != (b <= 4), (pi, v, a, b)   # 앞뒤 한쪽에 몰리지 않는다
+            seen.add((a, b))
+    assert len(seen) == 12, seen                     # 열두 문항이 저마다 다른 자리 짝
+
+    #  ③ 조판기가 여덟 진술을 받는다(열은 그대로, 아홉은 거절)
+    sents = [f"Sentence {i} of the passage." for i in range(1, 6)]
+    q8, _ = B.make_content_ox(sents, [f"진술{i}" for i in range(1, 9)],
+                              [i in (2, 6) for i in range(1, 9)],
+                              [f"근거{i}" for i in range(1, 9)])
+    assert q8.count("<li>") == 8
+    try:
+        B.make_content_ox(sents, ["진술"] * 9, [True, True] + [False] * 7, ["근거"] * 9)
+    except ValueError as e:
+        assert "8 또는 10" in str(e), e
+    else:
+        raise AssertionError("진술이 아홉 개인데 통과했습니다.")
+
+    #     검산기도 여덟 진술을 걸고넘어지지 않는다(문제편의 진술 수와 맞춰 센다)
+    from exam import audit
+    q8b, a8b = B.make_content_ox(sents, [f"진술{i}" for i in range(1, 9)],
+                                 [i in (2, 6) for i in range(1, 9)],
+                                 [f"근거{i}" for i in range(1, 9)])
+    assert audit._check_item(audit._parse("content_2", q8b, a8b)) == []
+    #     반대로 판정이 모자라면 잡는다
+    short_key = _re.sub(r"⑥O", "", a8b, count=1)
+    assert audit._check_item(audit._parse("content_2", q8b, short_key))
+
+    #  ④ 생성기 — 프롬프트가 지문 길이에 맞춰 바뀌고, 결과 개수도 그에 맞는다
+    def _fake(prefix: str, n: int) -> list:
+        n_x = n - 2
+        axes = (list(shape.OX_AXES[:n_x]) if n_x >= 8
+                else list(shape.OX_AXES[:n_x - 3]) + [FILL] * 3)
+        out, k = [], 0
+        for i in range(1, n + 1):
+            if i in (1, n):                          # O 둘(자리는 조판기가 다시 정한다)
+                out.append(OXStatement(text=f"{prefix} {i}", is_true=True,
+                                       why=f"근거{i}", axis="일치"))
+            else:
+                out.append(OXStatement(text=f"{prefix} {i}", is_true=False,
+                                       why=f"근거{i}", axis=axes[k]))
+                k += 1
+        return out
+
+    class _Cli:
+        prompt = ""
+
+        def structured(self, system, prompt, model_cls, max_tokens=8000,
+                       max_retries=1, extra_validate=None, image_path=None,
+                       cache_prefix=None, effort=None):
+            self.prompt = prompt
+            n_ko = int(_re.search(r"한국어 진술 \*\*(\d+)개\*\*", prompt).group(1))
+            n_en = int(_re.search(r"영어 진술 \*\*(\d+)개\*\*", prompt).group(1))
+            obj = ContentOXOut(korean=_fake("한글 진술", n_ko),
+                               english=_fake("English statement", n_en))
+            if extra_validate:
+                extra_validate(obj)
+            return obj
+
+    def _analysis(n: int) -> Analysis:
+        return Analysis(
+            title="Short", main_idea="A main idea.",
+            sentences=[f"Sentence {i} carries one fact of the passage."
+                       for i in range(1, n + 1)],
+            key_terms=[KeyTerm(word="fact", synonym="detail", antonym="")],
+            hardest_sentence="Sentence 1 carries one fact of the passage.")
+
+    #     5문장 — 세 자리가 모두 낮아진다
+    cli = _Cli()
+    res = C.generate_pair(cli, _analysis(5), "body", passage_index=0)
+    assert "한국어 진술 **10개**" in cli.prompt
+    assert "영어 진술 **8개**" in cli.prompt
+    assert "이 지문은 문장이 5개로 짧습니다" in cli.prompt          # O 근거 겹침 허용
+    assert f"'{FILL}'으로 채우세요" in cli.prompt                   # 없는 축 대체 허용
+    assert "한글판의 X 8개, 영어판의 X 6개" in cli.prompt
+    assert res[CONTENT][0].count("<li>") == 10
+    assert res[CONTENT_2][0].count("<li>") == 8
+    #     시킨 대로 채운 겹침은 검토 메모를 남기지 않는다
+    assert res[CONTENT_2][2] == [], res[CONTENT_2][2]
+    #     영어판 O 두 자리가 여덟 칸 안에 있다
+    ox = _re.findall(r"([OX])</b>", res[CONTENT_2][1])
+    assert len(ox) == 8 and ox.count("O") == 2, ox
+
+    #     8문장 — 요구를 낮추지 않는다
+    cli2 = _Cli()
+    res2 = C.generate_pair(cli2, _analysis(8), "body", passage_index=0)
+    assert "영어 진술 **10개**" in cli2.prompt
+    assert "짧습니다" not in cli2.prompt
+    assert f"'{FILL}'으로 채우세요" not in cli2.prompt
+    assert "한글판이 A·B 사실을 O 로 물었다면" in cli2.prompt       # 서로 다른 사실 원칙
+    assert res2[CONTENT][0].count("<li>") == 10
+    assert res2[CONTENT_2][0].count("<li>") == 10
+
+    #  ⑤ '채우라고 시킨' 겹침만 봐준다 — 그 밖의 겹침은 그대로 지적한다
+    filled = list(shape.OX_AXES[:3]) + [FILL] * 3       # FILL 이 2번 더(허용치와 같음)
+    assert shape.check_ox_axis_coverage(filled, allow_repeat=2) == []
+    assert shape.check_ox_axis_coverage(filled) != []   # 안 시켰으면 지적한다
+    over = list(shape.OX_AXES[:2]) + [FILL] * 4         # 한 번 더 겹쳤다
+    assert shape.check_ox_axis_coverage(over, allow_repeat=2) != []
+    other = list(shape.OX_AXES[:3]) + [shape.OX_AXES[0]] + [FILL] * 3
+    assert shape.check_ox_axis_coverage(other, allow_repeat=2) != []
+    #     건너뛰라고 시켜 놓고 '빠진 축이 있다'고 지적하지도 않는다
+    skipped = list(shape.OX_AXES[:6]) + [FILL] * 2      # 여덟 자리에 여섯 축 + 채움
+    assert shape.check_ox_axis_coverage(skipped, allow_repeat=2) == []
+    assert "쓰이지 않은" in " ".join(shape.check_ox_axis_coverage(skipped))
+    print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
+
+
 def test_grammar_on_original_passage() -> None:
     """5번 어법은 정본 그대로, 6번 어법 서술형은 다시 쓴 지문 위에 선다."""
     import re as _re
@@ -2971,6 +3105,7 @@ if __name__ == "__main__":
     test_demo_matches_real_rules()
     test_output_defect_regressions()
     test_ox_axes()
+    test_ox_short_passage()
     test_grammar_on_original_passage()
     test_type_group_layout()
     test_output_checker()

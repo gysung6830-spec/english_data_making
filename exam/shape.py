@@ -798,25 +798,37 @@ OX_AXES: tuple[str, ...] = (
 OX_TRUE_AXIS = "일치"        # O 진술의 axis 자리
 
 
-def check_ox_axis_coverage(axes) -> list[str]:
+def check_ox_axis_coverage(axes, allow_repeat: int = 0) -> list[str]:
     """X 여덟 개가 여덟 축을 '하나씩' 썼는지 본다.
 
     이 검사는 걸려도 다시 만들지 않는다 — 검토 메모로만 남긴다. 내용 O/X 는 한 번에
     진술 스무 개를 만드는 가장 비싼 호출이라, 축이 하나 겹쳤다고 통째로 다시 부르면
     문항 하나 값이 두 배가 된다. 그만한 결함이 아니다(여덟 축 중 일곱만 써도 문항은
     성립한다). 대신 프롬프트에서 '하나씩'을 못 박아 처음부터 맞게 나오게 한다.
+
+    allow_repeat: 짧은 지문에서는 재료가 없는 축을 억지로 만드는 대신 '미언급인데
+    그럴듯'으로 채우게 한다(generators/content.py). 그렇게 시킨 만큼의 겹침은 결함이
+    아니므로 세지 않는다.
     """
     used = [a for a in (axes or []) if (a or "").strip()
             and (a or "").strip() != OX_TRUE_AXIS]
     if not used:
         return []
-    dup = sorted({a for a in used if used.count(a) > 1})
+    over = {a: used.count(a) - 1 for a in set(used) if used.count(a) > 1}
+    if allow_repeat:
+        # 채우라고 시킨 축의 겹침은 허용치까지 눈감는다.
+        fill = OX_AXES[-1]                      # '미언급인데 그럴듯'
+        if fill in over and over[fill] <= allow_repeat:
+            over.pop(fill)
+    dup = sorted(over)
     miss = [a for a in OX_AXES if a not in used]
     bad = []
     if dup:
         bad.append(f"오답 축이 겹칩니다: {', '.join(dup)}. 여덟 축을 하나씩 쓰면 "
                    "학생이 같은 눈으로 여럿을 한꺼번에 걸러 내지 못합니다.")
-    if miss and len(used) >= len(OX_AXES):
+    # 짧은 지문에서는 재료가 없는 축을 건너뛰라고 시켰다. 시켜 놓고 건너뛰었다고
+    # 지적하면 안 된다 — allow_repeat 가 서 있으면 빠진 축은 따지지 않는다.
+    if miss and not allow_repeat and len(used) >= len(OX_AXES):
         bad.append(f"쓰이지 않은 오답 축이 있습니다: {', '.join(miss)}.")
     return bad
 

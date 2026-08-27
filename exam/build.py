@@ -15,7 +15,7 @@ import zlib
 import re
 
 from . import format as F
-from .schemas import N_OX, N_OX_TRUE
+from .schemas import N_OX, N_OX_SHORT, N_OX_TRUE
 
 
 # ---------------------------------------------------------------------------
@@ -517,10 +517,15 @@ def make_content(sentences: list[str], choices: list[str], answer_no: int,
 def make_content_ox(sentences: list[str], statements: list[str],
                     truths: list[bool], reasons: list[str],
                     axes: list[str] | None = None) -> tuple[str, str]:
-    """내용 O/X — 진술 10개를 각각 참·거짓으로 판정하게 한다(O 는 늘 2개)."""
+    """내용 O/X — 진술을 각각 참·거짓으로 판정하게 한다(O 는 늘 2개).
+
+    진술 수는 10개가 보통이고, 문장 5개 이하 지문의 영어판만 8개다(schemas.ox_sizes).
+    """
     n = len(statements)
-    if not (n == len(truths) == len(reasons) == N_OX):
-        raise ValueError(f"내용 O/X 는 진술·판정·근거가 각각 {N_OX}개여야 합니다.")
+    if n not in (N_OX_SHORT, N_OX) or not (n == len(truths) == len(reasons)):
+        raise ValueError(f"내용 O/X 는 진술·판정·근거의 개수가 같아야 하고, 그 수는 "
+                         f"{N_OX_SHORT} 또는 {N_OX}여야 합니다"
+                         f"(현재 진술 {n}·판정 {len(truths)}·근거 {len(reasons)}).")
     n_true = sum(1 for t in truths if t)
     if n_true != N_OX_TRUE:
         raise ValueError(f"O 인 진술이 {n_true}개입니다 — 정확히 {N_OX_TRUE}개여야 합니다.")
