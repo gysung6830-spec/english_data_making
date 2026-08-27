@@ -755,3 +755,30 @@ def check_tokens_shuffled(tokens: list[str], answer: str) -> list[str]:
         return ["<보기> 낱말이 정답 문장 순서 그대로입니다 — 섞이지 않아 "
                 "학생이 베껴 쓰기만 하면 됩니다."]
     return []
+
+
+def check_linker_pairs(pairs, answer_no: int) -> list[str]:
+    """연결어 선지가 '한 자리만 보고' 풀리지 않는지 본다.
+
+    (A)-(B) 짝 다섯 중 정답의 (A) 낱말이 그 짝에만 있으면, 학생은 (B) 는 보지도 않고
+    (A) 하나만 판정해 답을 고른다. 반대도 마찬가지다. 그러면 두 자리를 낸 뜻이 없다.
+    수능이 이 유형을 낼 때 늘 지키는 조건이라, 여기서도 강제한다.
+    """
+    got = [((p.a if hasattr(p, "a") else p[0]).strip().lower(),
+            (p.b if hasattr(p, "b") else p[1]).strip().lower()) for p in (pairs or [])]
+    if not (1 <= answer_no <= len(got)):
+        return ["정답 번호가 선지 범위를 벗어났습니다."]
+    bad: list[str] = []
+    a_ans, b_ans = got[answer_no - 1]
+    n_a = sum(1 for a, _ in got if a == a_ans)
+    n_b = sum(1 for _, b in got if b == b_ans)
+    if n_a < 2:
+        bad.append(f"(A) 정답 '{a_ans}' 가 한 선지에만 있습니다 — (A)만 보고 답이 "
+                   "나옵니다. 같은 (A) 를 쓰는 오답을 하나 더 두세요.")
+    if n_b < 2:
+        bad.append(f"(B) 정답 '{b_ans}' 가 한 선지에만 있습니다 — (B)만 보고 답이 "
+                   "나옵니다. 같은 (B) 를 쓰는 오답을 하나 더 두세요.")
+    if len(set(a for a, _ in got)) > 4:
+        bad.append("(A) 자리에 서로 다른 낱말이 다섯 개입니다 — 겹치는 것이 있어야 "
+                   "두 자리를 모두 따지게 됩니다.")
+    return bad

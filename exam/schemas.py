@@ -9,6 +9,8 @@
 """
 from __future__ import annotations
 
+import re
+
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 
@@ -393,35 +395,60 @@ class ShortOut(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# 내용 O/X — 진술 5개를 각각 참·거짓으로 판정
+# 내용 O/X — 진술 10개를 각각 참·거짓으로 판정 (한글판·영어판)
 # ---------------------------------------------------------------------------
-class ContentOXOut(BaseModel):
-    """'일치하는 것 하나 고르기' 대신 다섯 진술을 각각 O/X 로 판정하게 한다.
+N_OX = 10          # 한 문항의 진술 수
+N_OX_TRUE = 2      # 그중 O(일치)인 것 — 늘 2개, 나머지 8개는 X
 
-    5지선다는 넷을 몰라도 하나만 알면 맞고, 찍으면 20%가 맞는다. O/X 는 다섯 진술을
-    모두 판정해야 하므로 지문을 통째로 훑게 되고, 부분 점수도 줄 수 있다.
+
+class OXStatement(BaseModel):
+    text: str          # 진술
+    is_true: bool      # 글과 일치하면 True(O)
+    why: str           # O 인 근거 / X 인 이유
+
+
+def _check_ox(items: list[OXStatement], label: str) -> list[OXStatement]:
+    if len(items) != N_OX:
+        raise ValueError(f"{label} 진술은 정확히 {N_OX}개여야 합니다(현재 {len(items)}개).")
+    n_true = sum(1 for it in items if it.is_true)
+    if n_true != N_OX_TRUE:
+        raise ValueError(
+            f"{label}에서 O 인 진술이 {n_true}개입니다 — 정확히 {N_OX_TRUE}개여야 합니다. "
+            f"나머지 {N_OX - N_OX_TRUE}개는 모두 X 여야 합니다.")
+    if any(not (it.text or "").strip() or not (it.why or "").strip() for it in items):
+        raise ValueError(f"{label}에 빈 진술 또는 빈 근거가 있습니다.")
+    return items
+
+
+class ContentOXOut(BaseModel):
+    """'일치하는 것 하나 고르기' 대신 열 진술을 각각 O/X 로 판정하게 한다.
+
+    5지선다는 넷을 몰라도 하나만 알면 맞고 찍어도 20%가 맞는다. O/X 열 개는 지문을
+    처음부터 끝까지 훑어야 하고, 열 자리에 부분 점수를 줄 수 있다.
+
+    한글판과 영어판은 '같은 사실을 번역한 것'이 아니라 서로 다른 사실을 묻는다.
+    같은 사실이면 한 판을 푼 학생이 다른 판을 뜻으로 옮겨 적어 버린다.
     """
 
-    statements: list[str]          # 한국어 진술 5개
-    truths: list[bool]             # 각 진술이 글과 일치하는가(O=True)
-    reasons: list[str]             # 진술마다 왜 O 인지 / 어디가 X 인지
+    korean: list[OXStatement]      # 한글 진술 10개 (O 2 · X 8)
+    english: list[OXStatement]     # 영어 진술 10개 (O 2 · X 8)
 
-    @field_validator("statements", "reasons")
+    @field_validator("korean")
     @classmethod
-    def _five(cls, v: list[str]) -> list[str]:
-        if len(v) != 5:
-            raise ValueError("내용 O/X 는 진술과 근거가 각각 5개여야 합니다.")
-        return v
+    def _ko(cls, v):
+        return _check_ox(v, "한글판")
+
+    @field_validator("english")
+    @classmethod
+    def _en(cls, v):
+        return _check_ox(v, "영어판")
 
     @model_validator(mode="after")
-    def _mixed(self):
-        if len(self.truths) != 5:
-            raise ValueError("truths 는 5개여야 합니다.")
-        n_true = sum(1 for t in self.truths if t)
-        if not (2 <= n_true <= 3):
-            raise ValueError(
-                f"O 는 2~3개여야 합니다(현재 {n_true}개). 한쪽으로 몰리면 학생이 "
-                "지문을 읽지 않고 전부 O 나 전부 X 로 찍습니다.")
+    def _distinct(self):
+        # 두 판이 같은 사실을 물으면 한 판을 풀고 다른 판을 옮겨 적을 수 있다.
+        ko_true = {re.sub(r"[^가-힣0-9]+", "", it.text) for it in self.korean if it.is_true}
+        if len(ko_true) < N_OX_TRUE:
+            raise ValueError("한글판의 O 진술 두 개가 서로 같습니다.")
         return self
 
 

@@ -293,7 +293,7 @@ def main() -> int:
         note = parts[0].get("header_note", "")
     else:
         passages = demo_passages_merged()
-        note = "무료 미리보기(데모 지문) · 16문항 · 수능 배열 — API 를 쓰지 않았습니다."
+        note = "무료 미리보기(데모 지문) · 17문항 · 수능 배열 — API 를 쓰지 않았습니다."
 
     if not passages:
         print("지문이 없습니다.", file=sys.stderr)

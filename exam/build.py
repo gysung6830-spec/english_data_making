@@ -15,6 +15,7 @@ import zlib
 import re
 
 from . import format as F
+from .schemas import N_OX, N_OX_TRUE
 
 
 # ---------------------------------------------------------------------------
@@ -515,9 +516,17 @@ def make_content(sentences: list[str], choices: list[str], answer_no: int,
 
 def make_content_ox(sentences: list[str], statements: list[str],
                     truths: list[bool], reasons: list[str]) -> tuple[str, str]:
-    """내용 O/X — 진술 5개를 각각 참·거짓으로 판정하게 한다."""
-    if not (len(statements) == len(truths) == len(reasons) == 5):
-        raise ValueError("내용 O/X 는 진술·판정·근거가 각각 5개여야 합니다.")
+    """내용 O/X — 진술 10개를 각각 참·거짓으로 판정하게 한다(O 는 늘 2개)."""
+    n = len(statements)
+    if not (n == len(truths) == len(reasons) == N_OX):
+        raise ValueError(f"내용 O/X 는 진술·판정·근거가 각각 {N_OX}개여야 합니다.")
+    n_true = sum(1 for t in truths if t)
+    if n_true != N_OX_TRUE:
+        raise ValueError(f"O 인 진술이 {n_true}개입니다 — 정확히 {N_OX_TRUE}개여야 합니다.")
+    yes = [i for i, t in enumerate(truths, 1) if t]
+    if yes[1] - yes[0] < 3:
+        raise ValueError(f"O 두 개가 {yes[0]}번·{yes[1]}번으로 붙어 있습니다 — "
+                         "세 칸 이상 떨어뜨려야 자리만 보고 찍지 못합니다.")
     q = F.content_ox_q(" ".join(s.strip() for s in sentences), statements)
     a = F.content_ox_a(list(truths), list(reasons))
     return q, a

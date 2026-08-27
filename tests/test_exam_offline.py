@@ -21,6 +21,7 @@ from exam.schemas import (  # noqa: E402
     Analysis,
     ContentOut,
     ContentOXOut,
+    OXStatement,
     GrammarCountOut,
     GrammarOut,
     GrammarReason,
@@ -555,23 +556,25 @@ _FAKE = {
         choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
         wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
                        WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
-    # 내용 O/X — O 는 2~3개여야 한다(한쪽으로 몰리면 찍어서 맞는다)
+    # 내용 O/X — 한글판·영어판 각각 10개, O 는 정확히 2개
     "ContentOXOut": lambda: ContentOXOut(
-        statements=[f"진술{i}" for i in range(1, 6)],
-        truths=[True, False, False, True, False],
-        reasons=[f"근거{i}" for i in range(1, 6)]),
+        korean=[OXStatement(text=f"한글 진술{i}", is_true=(i in (1, 2)),
+                            why=f"근거{i}") for i in range(1, 11)],
+        english=[OXStatement(text=f"English statement {i}", is_true=(i in (3, 4)),
+                             why=f"근거{i}") for i in range(1, 11)]),
     # 연결어 — (A) 2번 문장 · (B) 4번 문장. 원문에 연결어가 없으니 remove 는 비운다.
+    # 정답의 (A)·(B) 낱말이 오답에도 한 번씩 더 나온다 — 한 자리만 보고는 못 고른다.
     "LinkerOut": lambda: LinkerOut(
         blank_a_no=2, blank_b_no=4, remove_a="", remove_b="",
-        pairs=[LinkerPair(a="However", b="Therefore"),
-               LinkerPair(a="Moreover", b="However"),
-               LinkerPair(a="For example", b="Similarly"),
-               LinkerPair(a="Therefore", b="Instead"),
-               LinkerPair(a="In contrast", b="Moreover")],
+        pairs=[LinkerPair(a="However", b="Therefore"),      # 정답
+               LinkerPair(a="However", b="Moreover"),       # (A) 겹침
+               LinkerPair(a="In addition", b="Therefore"),  # (B) 겹침
+               LinkerPair(a="In addition", b="Moreover"),
+               LinkerPair(a="For example", b="Instead")],
         answer_no=1, reason="(A) 대조 · (B) 인과.",
-        wrong_reasons=[WrongReason(no=2, text="(A)가 어긋남"),
+        wrong_reasons=[WrongReason(no=2, text="(B)가 어긋남"),
                        WrongReason(no=3, text="(A)가 어긋남"),
-                       WrongReason(no=4, text="(B)가 어긋남"),
+                       WrongReason(no=4, text="둘 다 어긋남"),
                        WrongReason(no=5, text="둘 다 어긋남")]),
     # 어휘는 3종을 잇달아 만들므로, 호출마다 '겹치지 않는' 밑줄 묶음을 돌려준다
     # (실제 LLM 이 [겹침 금지] 지시를 따랐을 때의 모습).
@@ -1772,21 +1775,22 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     from exam.set2 import TYPE_ORDER2
     from exam.types import TYPE_ORDER
 
-    # ① 구성 — 15문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
-    assert len(MERGED_ORDER) == 16, MERGED_ORDER
-    assert len(set(MERGED_ORDER)) == 16                    # 같은 슬롯이 두 번 나오지 않는다
+    # ① 구성 — 17문항, 중복 3유형 제외, 옛 두 세트의 나머지는 하나도 안 빠졌다
+    assert len(MERGED_ORDER) == 17, MERGED_ORDER
+    assert len(set(MERGED_ORDER)) == 17                    # 같은 슬롯이 두 번 나오지 않는다
     assert set(EXCLUDED) == {"A", "C", "G"}, EXCLUDED
     # 옛 A(짝짓기)는 pair_odd 로 되살렸다 — 뺐던 3유형 중 유일하게 되돌아온 것
     assert "pair_odd" in MERGED_ORDER
     # 새로 만든 슬롯키(옛 A 는 pair_odd 라는 새 키로 다시 들였다)
-    _added = {"title", "linker", "vocab_2", "vocab_3", "grammar_fix", "pair_odd"}
+    _added = {"title", "linker", "vocab_2", "vocab_3", "grammar_fix", "pair_odd",
+              "content_2"}
     _dropped = {"short_answer"}          # 어순 배열·요약문과 겹쳐 뺐다
     assert (set(TYPE_ORDER) | set(TYPE_ORDER2)
             == (set(MERGED_ORDER) - _added) | set(EXCLUDED) | _dropped)
     for t in MERGED_ORDER:                                  # 발문·라벨이 모두 있다
         assert MERGED_PROMPTS.get(t) and MERGED_LABELS.get(t), t
     # 배열은 수능 순서를 따른다(주제만 함의추론 앞으로 당김) — 뒤로 갈수록 어려워진다
-    assert MERGED_ORDER == ("topic", "title", "B", "content",
+    assert MERGED_ORDER == ("topic", "title", "B", "content", "content_2",
                             "grammar", "grammar_fix", "pair_odd",
                             "vocab_2", "vocab", "vocab_3", "F", "linker",
                             "order", "insert", "E", "D"), MERGED_ORDER
@@ -1796,6 +1800,9 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     #    내용 일치는 O/X, 무관한 문장 자리는 연결어가 대신한다
     assert "O, 일치하지 않으면 X" in MERGED_PROMPTS["content"]
     assert "(A), (B)" in MERGED_PROMPTS["linker"]
+    #    내용 O/X 는 한글판·영어판 두 문항이고 발문이 서로 다르다
+    assert MERGED_PROMPTS["content"] != MERGED_PROMPTS["content_2"]
+    assert "Write O" in MERGED_PROMPTS["content_2"]
     assert MERGED_ORDER[-1] == "D"                          # 서술형 계열은 맨 뒤
     # 서술형은 뺐다 — (2)는 어순 배열과, (3)은 요약문과 과제가 똑같았다
     assert "short_answer" not in MERGED_ORDER
@@ -1824,10 +1831,11 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert seen.get("GrammarCountOut") == 2, seen               # 어법 서술형 지문당 1번
     assert seen.get("VocabOut") == 6, seen                      # 어휘는 지문당 3번(3종)
     assert seen.get("TitleOut") == 2 and seen.get("LinkerOut") == 2, seen
-    assert seen.get("ContentOXOut") == 2, seen                  # 내용 O/X 지문당 1번
-    assert seen.get("VerifyOut") == 20, seen                    # 자기검증 지문당 10회
+    #    내용 O/X 는 한 호출로 한글판·영어판 두 문항을 만든다(호출은 지문당 1번)
+    assert seen.get("ContentOXOut") == 2, seen
+    assert seen.get("VerifyOut") == 22, seen                    # 자기검증 지문당 11회
 
-    # ③ 지문마다 16문항이 순서대로, 라벨도 보존된다
+    # ③ 지문마다 17문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
     for p in ps:
         assert list(p.q) == list(MERGED_ORDER), list(p.q)
@@ -1883,7 +1891,7 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     cli = webmod.app.test_client()
     home = cli.get("/").get_data(as_text=True)
     assert 'name="sets"' not in home, "세트 선택이 아직 남아 있다"
-    assert "지문당 16문항" in home
+    assert "17문항" in home
     r = cli.post("/generate", data={"action": "demo",
                                     "sections": ["student", "answers"]})
     assert r.status_code == 200, r.status_code
@@ -1893,10 +1901,10 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert "변형문제 1회" not in page and "변형문제 2회" not in page
 
     # 고위험 자기검증 대상도 통합본 유형만 남는다(C·G 몫이 사라짐)
-    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 10
+    assert len([t for t in MERGED_ORDER if _v._base_key(t) in _v.HIGH_RISK]) == 11
     # 짝짓기는 '밑줄 묶음' 안에서 만들어지지만 자기검증은 빠뜨리지 않는다
     assert "pair_odd" in _v.HIGH_RISK
-    print("✓ 변형문제 통합본(16문항·제목·연결어·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
+    print("✓ 변형문제 통합본(17문항·제목·연결어·어휘3종·어법2종·짝짓기)·조판·재출력 통과")
 
 
 def test_new_type_guards() -> None:
@@ -2311,13 +2319,22 @@ def test_demo_matches_real_rules() -> None:
 
         # ⑤ 모든 문항이 갖춰져 있다
         assert list(p.q) == list(MERGED_ORDER), [t for t in MERGED_ORDER if t not in p.q]
-        # ⑥ 내용 O/X 는 다섯 진술을 모두 판정하고, O 는 2~3개
-        if "content" in p.q:
-            k = _re.search(r'answer-key">(.*?)</span>', p.a["content"]).group(1)
-            ox = _re.findall(r"[①-⑤]\s*([OX])", k)
-            assert len(ox) == 5, (p.title, k)
-            assert 2 <= ox.count("O") <= 3, (p.title, k)
-            assert p.q["content"].count('class="ox-box"') == 5
+        # ⑥ 내용 O/X — 두 판 각각 열 진술, O 는 정확히 둘이며 세 칸 이상 떨어져 있다
+        ox_at = {}
+        for t in ("content", "content_2"):
+            if t not in p.q:
+                continue
+            k = _re.search(r'answer-key">(.*?)</span>', p.a[t]).group(1)
+            ox = _re.findall(r"[①-⑩]\s*([OX])", k)
+            assert len(ox) == 10, (p.title, t, k)
+            assert ox.count("O") == 2, (p.title, t, k)
+            yes = tuple(i for i, m in enumerate(ox, 1) if m == "O")
+            assert yes[1] - yes[0] >= 3, (p.title, t, k)
+            assert p.q[t].count('class="ox-box"') == 10
+            ox_at[t] = yes
+        #    두 판의 O 자리가 같으면 한 판을 풀고 다른 판을 자리만 보고 옮겨 적는다
+        if len(ox_at) == 2:
+            assert len(set(ox_at.values())) == 2, (p.title, ox_at)
 
         # ⑦ 연결어는 (A)·(B) 빈칸 하나씩과 짝 선지 5개
         if "linker" in p.q:

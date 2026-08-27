@@ -163,7 +163,11 @@ def build_passage(name: str, body: str) -> tuple[Passage, list[str]]:
     five = [f"선지 {i} 내용" for i in range(1, 6)]
     wrong = {i: "근거" for i in (1, 2, 4, 5)}
     p.set_qa(TOPIC, *B.make_topic(sents, five, 3, "근거", wrong))
-    p.set_qa(CONTENT, *B.make_content(sents, five, 3, "근거", wrong))
+    #   내용 O/X — 진술 10개, O 는 ③·⑦(세 칸 이상 떨어뜨림)
+    ox_true = [i in (3, 7) for i in range(1, 11)]
+    p.set_qa(CONTENT, *B.make_content_ox(
+        sents, [f"진술 {i}" for i in range(1, 11)], ox_true,
+        [f"근거 {i}" for i in range(1, 11)]))
 
     # 어휘 — 문장마다 낱말 하나씩. 첫 낱말도 일부러 한 번 고른다(대문자 유지 확인).
     taken: set[str] = set()

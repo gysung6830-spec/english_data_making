@@ -1,6 +1,7 @@
 """데모(무료 미리보기)용 — 통합본에 새로 들어온 유형의 예시 문항.
 
-제목·연결어·어휘(원문단어형·부정어형)·어법 서술형은 기존 데모에 없던 유형이라
+제목·연결어·내용 O/X 영어판·어휘(원문단어형·부정어형)·어법 서술형은 기존 데모에 없던
+유형이라
 여기서 따로 만든다. 실제 생성과 똑같은 빌더(build.py)를 거치므로 조판 결과도 같다.
 
 어법 두 유형(GRAMMAR·GRAMMAR_FIX)은 여기 것이 demo_data 의 것을 대신한다 —
@@ -14,7 +15,8 @@ from .demo_data import DNA, STAR
 from . import build2 as B2
 from .generators.pair_odd import build_pairs
 from .types import (
-    GRAMMAR, GRAMMAR_FIX, LINKER, PAIR_ODD, TITLE, VOCAB_2, VOCAB_3, Passage,
+    CONTENT_2, GRAMMAR, GRAMMAR_FIX, LINKER, PAIR_ODD, TITLE, VOCAB_2, VOCAB_3,
+    Passage,
 )
 
 # 데모 지문 제목 -> 이 파일이 채워 줄 문항들
@@ -65,6 +67,47 @@ def _dna() -> Passage:
             4: "(A) 는 맞지만 (B) 자리는 앞의 진전을 뒤집는 자리라 Similarly 가 정반대다.",
             5: "(A) 자리에는 뒤집을 앞 진술이 없어 Nevertheless 가 성립하지 않는다.",
         },
+    ))
+
+    p.set_qa(CONTENT_2, *B.make_content_ox(
+        s,
+        statements=[
+            "Every living cell contains DNA, which the passage compares to a hard drive.",
+            "DNA loses its stored information within a few years unless it is frozen.",
+            "Researchers write digital files into synthetic DNA because the molecule is "
+            "remarkably efficient.",
+            "The passage claims that synthetic DNA is already cheaper than magnetic tape.",
+            "Only laboratory-made DNA, not natural DNA, can survive inside bone and ice.",
+            "According to the passage, storing data in DNA is a fast process today.",
+            "Ancient DNA has been read from bones, which proves it can be edited as well.",
+            "The passage says that libraries will certainly be replaced by molecules.",
+            "DNA can hold information in a space far smaller than any ordinary drive.",
+            "Scientists began encoding files into DNA before they noticed how durable it was.",
+        ],
+        truths=[True, False, False, False, False,
+                False, False, False, True, False],
+        reasons=[
+            "첫 문장 'Every living cell carries a molecule called DNA, which works as "
+            "nature's own hard drive' 를 그대로 옮긴 일치 진술이다.",
+            "지문은 정반대로 '뼈와 얼음 속에서 수만 년을 견딘다'고 했다. 얼리지 않으면 "
+            "몇 년 만에 사라진다는 것은 지문과 어긋난다. (부분 일치 + 한 요소 왜곡)",
+            "연구가 시작된 계기는 맞지만(Inspired by such efficiency), 지문은 이를 "
+            "'영감을 받았다'고 했지 '효율적이기 때문에 쓴다'는 인과로 못 박지 않았다. "
+            "덧붙여 진술은 원문에 없는 단정을 더한다. (인과 날조)",
+            "자기 테이프와의 비용 비교는 지문에 없다. 오히려 지문은 그 기술이 아직 "
+            "'비싸다'고 했다. (미언급인데 그럴듯)",
+            "지문은 DNA 일반이 뼈와 얼음 속에서 견딘다고 했지, 실험실에서 만든 것만 "
+            "그렇다고 한 적이 없다. (조건 삭제·왜곡)",
+            "지문은 'The technique is still slow' 라고 했다. 정반대다. (정도·빈도 과장)",
+            "고대 DNA를 읽어 낸다는 이야기는 내구성의 예시일 뿐, '편집할 수 있다'는 "
+            "결론은 지문에 없다. (인과 날조)",
+            "지문은 'may be stored' 라는 가능성을 말했을 뿐 '반드시 대체된다'고 하지 "
+            "않았다. (정도·빈도 과장)",
+            "지문은 '엄청난 양을 아주 좁은 공간에 담는다(packs an enormous amount into "
+            "a vanishingly small space)'고 했다. 이를 바꿔 표현한 일치 진술이다.",
+            "지문은 내구성을 먼저 말한 뒤 'Inspired by such efficiency' 로 연구를 "
+            "잇는다. 순서가 뒤집혔다. (시점 뒤집기)",
+        ],
     ))
 
     # 어휘 — 원문단어형(정답만 반의어, 나머지 4개는 원문 그대로)
@@ -220,6 +263,46 @@ def _star() -> Passage:
             4: "(A) 는 맞지만 (B) 자리는 결과를 잇는 자리라 Similarly 가 관계를 잘못 짚는다.",
             5: "(A) 자리에 Moreover 를 넣으면 통념을 오히려 더 밀어 주는 뜻이 되어 뒤집히지 않는다.",
         },
+    ))
+
+    p.set_qa(CONTENT_2, *B.make_content_ox(
+        s,
+        statements=[
+            "The passage says that management rewards personal brilliance above all.",
+            "Companies expect a top performer to become an equally good manager.",
+            "The firm ends up keeping its outstanding contributor after the promotion.",
+            "Coaching other people is described as quick and easy work.",
+            "The passage recommends paying stars more instead of promoting them.",
+            "Only small firms make the mistake of promoting their best performer.",
+            "The team stalls because the new manager deliberately ignores it.",
+            "A promoted star tends to keep chasing personal wins instead of coaching.",
+            "The celebrated hire turns into a disappointment overnight.",
+            "According to the passage, a star and a star boss need the same skills.",
+        ],
+        truths=[False, True, False, False, False,
+                False, False, True, False, False],
+        reasons=[
+            "지문은 정반대다 — 개인적 탁월함을 보상하는 쪽은 실무 역할이고, 관리자 "
+            "역할은 남을 키우는 인내를 보상한다. (주체 바꿔치기)",
+            "두 번째 문장 'They assume that a star will naturally make a star boss' 를 "
+            "바꿔 표현한 일치 진술이다.",
+            "지문은 회사가 '뛰어난 실무자와 유능한 관리자를 둘 다 잃는다'고 했다. "
+            "정반대다. (부분 일치 + 한 요소 왜곡)",
+            "지문은 코칭을 'the slow work' 라고 불렀다. 빠르고 쉬운 일이라는 것은 "
+            "어긋난다. (정도·빈도 과장)",
+            "보수를 더 주라는 대안은 지문에 없다. 그럴듯하지만 언급되지 않았다. "
+            "(미언급인데 그럴듯)",
+            "지문은 'Many companies' 라고만 했고 회사 규모를 한정하지 않았다. "
+            "(조건 삭제·왜곡)",
+            "지문은 스타가 개인 성과를 좇느라 코칭을 소홀히 한다고 했지, '일부러 "
+            "무시한다'고 하지 않았다. (인과 날조)",
+            "다섯 번째 문장 'keeps chasing personal wins and neglects the slow work of "
+            "coaching' 을 그대로 옮긴 일치 진술이다.",
+            "지문은 'slowly turns into a disappointment' 라고 했다. 하룻밤 사이라는 "
+            "것은 정반대다. (시점 뒤집기)",
+            "지문의 논지는 두 자리가 '거의 정반대 능력'을 요구한다는 것이다. "
+            "(인과·관계 역전)",
+        ],
     ))
 
     p.set_qa(VOCAB_2, *B.make_vocab(

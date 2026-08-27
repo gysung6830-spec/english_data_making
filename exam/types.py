@@ -30,6 +30,9 @@ GRAMMAR_COUNT = "grammar_count"  # 어법상 틀린 것의 개수 (수능 29번 
 PAIR_ODD = "pair_odd"           # 어법·어휘 짝짓기 (부적절한 것끼리 짝)
 IRRELEVANT = "irrelevant"       # 무관한 문장 (수능 35번) — 지금은 연결어(LINKER)로 대체
 LINKER = "linker"               # 연결어 (A)(B) (수능 연결어 문항)
+# 내용 O/X 는 한 지문에서 두 문항이 나온다 — 한글판(content)과 영어판(content_2).
+# 두 판은 같은 사실을 번역한 것이 아니라 서로 다른 사실을 묻는다.
+CONTENT_2 = "content_2"
 GRAMMAR_FIX = "grammar_fix"     # 어법 서술형 — 틀린 4개를 찾아 번호와 고친 형태를 쓴다
 # 어휘는 한 지문에서 세 방식을 모두 출제한다(같은 발문·다른 문제).
 #   vocab   = 유의어형   — 정답만 반의어, 나머지 4개는 유의어로 패러프레이즈
@@ -52,6 +55,8 @@ TYPE_PROMPTS: dict[str, str] = {
     VOCAB: "밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지 않은 것은?",
     GRAMMAR: "밑줄 친 부분 중, 어법상 틀린 것을 모두 고르시오.",
     CONTENT: "다음 진술이 글의 내용과 일치하면 O, 일치하지 않으면 X 를 쓰시오.",
+    CONTENT_2: ("Write O if the statement agrees with the passage, and X if it does not."
+                " (다음 진술이 글의 내용과 일치하면 O, 일치하지 않으면 X 를 쓰시오.)"),
     SHORT_ANSWER: "다음 글을 읽고 물음에 답하시오.",
     TITLE: "다음 글의 제목으로 가장 적절한 것은?",
     GRAMMAR_COUNT: "밑줄 친 부분 중, 어법상 틀린 것의 개수는?",
@@ -72,6 +77,7 @@ TYPE_LABELS: dict[str, str] = {
     VOCAB: "어휘",
     GRAMMAR: "어법",
     CONTENT: "내용 O/X",
+    CONTENT_2: "내용 O/X (영어)",
     SHORT_ANSWER: "서술형",
     TITLE: "제목",
     GRAMMAR_COUNT: "어법 개수",

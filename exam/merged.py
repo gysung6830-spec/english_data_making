@@ -1,4 +1,4 @@
-"""변형문제 통합본 — 수능 출제 유형을 한 벌로 덮는 16문항 세트.
+"""변형문제 통합본 — 수능 출제 유형을 한 벌로 덮는 17문항 세트.
 
 1회(7유형)와 2회(A~G)를 따로 뽑으면 사실상 같은 문제가 두 번 나온다.
 아래 3유형은 다른 유형이 이미 같은 능력을 묻고 있어 통합본에서 뺐다:
@@ -28,7 +28,7 @@
 각각 단독으로 있으니 중복'이라고 보고 뺐지만, 이 유형이 묻는 것은 어법도 어휘도 아닌
 **둘을 동시에, 짝으로** 짚는 능력이다. 하나만 찾아서는 답이 나오지 않아 찍기가 통하지
 않는다. 선지(짝 5개)는 코드가 만들어 정답 짝이 반드시 하나만 들어가게 한다.
-결과: 지문당 16문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
+결과: 지문당 17문항. 빼고 싶은 유형이 있으면 MERGED_ORDER 한 줄만 고치면 된다.
 
 생성기는 새로 만들지 않는다 — 1회 계열은 pipeline, 2회 계열은 gen2 의 것을
 그대로 호출하고, 이 파일은 '어떤 유형을 어떤 순서로 낼지'만 정한다.
@@ -40,6 +40,7 @@ from pathlib import Path
 from .set2 import B, D, E, F, TYPE_LABELS2, TYPE_PROMPTS2
 from .types import (
     CONTENT,
+    CONTENT_2,
     GRAMMAR,
     INSERT,
     ORDER,
@@ -67,7 +68,8 @@ MERGED_ORDER: tuple[str, ...] = (
     TOPIC,         # 주제         (23번)
     TITLE,         # 제목         (24번) — 주제와 붙여 대의파악을 한 묶음으로
     B,             # 함의추론      (21번)
-    CONTENT,       # 내용 일치     (26번)
+    CONTENT,       # 내용 O/X — 한글판 (26번 계열)
+    CONTENT_2,     # 내용 O/X — 영어판 (같은 지문, 다른 사실)
     GRAMMAR,       # 어법 — 틀린 것 모두 고르기 (29번)
     GRAMMAR_FIX,   # 어법 서술형 — 틀린 넷을 찾아 바르게 고쳐 쓰기 (내신)
     PAIR_ODD,      # 어법·어휘 짝짓기 — 어법과 어휘를 잇는 자리
@@ -98,7 +100,7 @@ MERGED_LABELS: dict[str, str] = {**TYPE_LABELS, **TYPE_LABELS2}
 def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
                          analysis=None, passage_index: int = 0,
                          strong_client=None) -> Passage:
-    """지문 원문 1개 → 통합 16문항이 채워진 Passage.
+    """지문 원문 1개 → 통합 17문항이 채워진 Passage.
 
     유형끼리는 서로 독립이므로 스레드로 동시에 생성한다.
     analysis 를 주면 분석 호출을 건너뛴다.
@@ -150,7 +152,14 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
         underline.add(PAIR_ODD)
         first.append((PAIR_ODD, _pair_odd_maker(client, analysis, body, slots,
                                                 passage_index, max_retries, logger)))
-    tasks = [(t, _task(t)) for t in MERGED_ORDER if t not in underline]
+    # 내용 O/X 두 판(한글·영어)도 한 호출로 함께 만든다 — 서로 다른 사실을 물어야
+    # 하는데, 따로 부르면 모델이 다른 호출에서 무엇을 물었는지 알 수 없다.
+    cslots = tuple(t for t in (CONTENT, CONTENT_2) if t in MERGED_ORDER)
+    tasks = [(t, _task(t)) for t in MERGED_ORDER
+             if t not in underline and t not in cslots]
+    if cslots:
+        tasks.append(("__content__", _content_maker(client, analysis, body,
+                                                    passage_index, max_retries, logger)))
     if vslots or first:
         vc = tiering.EffortClient(client, tiering.effort_for(VOCAB))
         tasks.append(("__vocab__", lambda: _vocab.generate_group(
@@ -159,6 +168,7 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
 
     results = run_parallel(tasks)
     results.update(results.pop("__vocab__", None) or {})
+    results.update(results.pop("__content__", None) or {})
     for t in MERGED_ORDER:      # 수거는 완료순이라도 조립은 고정 순서대로
         res = results.get(t)
         if res is None:         # 이 유형만 최종 실패 → 건너뛰고 나머지는 살린다
@@ -311,6 +321,50 @@ def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retri
     return _make
 
 
+def _content_maker(client, analysis, body, passage_index: int, max_retries: int,
+                   logger=None):
+    """내용 O/X 두 판을 만드는 '무인자 함수'를 돌려준다.
+
+    한 호출로 두 문항이 나오므로 pipeline._gen_one_type 을 거치지 않는다. 그래서
+    자기검증(고위험 유형 재확인)을 여기서 직접 돌린다 — 빠뜨리면 두 문항만 검수 없이
+    나가고, 검수에 걸려야 도는 상위 모델 승격도 일어나지 않는다.
+    """
+    from . import tiering
+    from . import verify as _verify
+    from .generators import content as _content
+
+    c = tiering.EffortClient(client, tiering.effort_for(CONTENT))
+
+    def _make():
+        last: Exception | None = None
+        for attempt in range(2):
+            try:
+                res = _content.generate_pair(c, analysis, body,
+                                             max_retries=max_retries,
+                                             passage_index=passage_index)
+            except Exception as e:      # noqa: BLE001 — 유형 단위 격리
+                last = e
+                if logger:
+                    logger.warning("[%s] 생성 실패(시도 %d): %s", CONTENT, attempt + 1, e)
+                continue
+            bad = []
+            for slot, (q, a, _fl) in res.items():
+                ok, why = _verify.verify(c, slot, q, a, max_retries=max_retries)
+                if not ok:
+                    bad.append((slot, why))
+            if bad and attempt == 0:    # 한 번은 재생성으로 결함을 털어낸다
+                if logger:
+                    logger.info("[%s] 자기검증 실패 → 재생성: %s", CONTENT, bad)
+                continue
+            for slot, why in bad:
+                q, a, fl = res[slot]
+                res[slot] = (q, a, list(fl) + [f"자동검증: {why or '판정 재확인'}"])
+            return res
+        raise last or RuntimeError(f"'{CONTENT}' 생성 실패")
+
+    return _make
+
+
 def _escalate(passage, strong_client, task_of, analysis, body, vslots,
               max_retries: int = 1, logger=None,
               used_words: dict[str, set[str]] | None = None) -> list[str]:
@@ -331,9 +385,13 @@ def _escalate(passage, strong_client, task_of, analysis, body, vslots,
                     len(targets), ", ".join(targets))
 
     vt = {t: vslots[t] for t in targets if t in vslots}
+    ct = [t for t in targets if t in (CONTENT, CONTENT_2)]
     # task_of() 는 '무인자 함수'를 돌려주므로 여기서 곧바로 실행한다.
     tasks = [(t, (lambda t=t: task_of(t, strong_client)()))
-             for t in targets if t not in vt]
+             for t in targets if t not in vt and t not in ct]
+    if ct:      # 한 판만 걸려도 두 판을 함께 — 서로 다른 사실을 물어야 하기 때문
+        tasks.append(("__content__", _content_maker(
+            strong_client, analysis, body, 0, max_retries, logger)))
     if vt:      # 어휘는 밑줄이 겹치면 안 되므로 묶음으로 다시 만든다
         vc = tiering.EffortClient(strong_client, tiering.effort_for(VOCAB))
         # 다시 만들지 않는 밑줄 문항(짝짓기·다른 어휘)이 이미 쓴 낱말은 피해야 한다.
@@ -347,8 +405,9 @@ def _escalate(passage, strong_client, task_of, analysis, body, vslots,
 
     res = run_parallel(tasks)
     res.update(res.pop("__vocab__", None) or {})
+    res.update(res.pop("__content__", None) or {})
     fixed = []
-    for t in targets:
+    for t in list(targets) + [t for t in ct if t not in targets]:
         got = res.get(t)
         if got is None:            # 상위 모델도 실패 → 원래 상태를 그대로 둔다
             continue

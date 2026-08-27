@@ -141,3 +141,50 @@ def relabel_choice_refs(text: str, mapping: dict[int, int]) -> str:
         return ("선지 " if m.group(2) else "선택지 ") + str(new)
 
     return _REF.sub(_sub, text)
+
+
+# ---------------------------------------------------------------------------
+# 내용 O/X — O 두 자리를 문항마다 다르게 흩어 놓는다
+# ---------------------------------------------------------------------------
+# 열 진술 중 O 는 늘 둘이다. 그 둘이 늘 같은 자리(예: ①과 ⑥)에 오면 학생이 지문을
+# 읽지 않고 자리만 보고 찍는다. 그렇다고 모델에게 "적당히 섞어 주세요"라고 맡기면
+# 앞쪽으로 몰리는 버릇이 나온다. 그래서 자리는 코드가 정한다.
+#
+# 고를 자리는 '두 O 가 서로 멀고, 앞뒤 어느 한쪽에 치우치지 않는' 짝만 모아 두었다.
+# (간격 3 이상 · 둘이 같은 반쪽에 몰리지 않음)
+_OX_SLOTS: tuple[tuple[int, int], ...] = (
+    (2, 7), (4, 9), (1, 6), (3, 8), (5, 10), (2, 6),
+    (3, 10), (1, 8), (4, 7), (5, 9), (2, 9), (3, 6),
+)
+
+
+def ox_positions(passage_index: int, version: int, seed: int = 0) -> tuple[int, int]:
+    """이 문항에서 O 가 놓일 두 자리(1-based).
+
+    passage_index(지문 순서)·version(한글판 0 · 영어판 1)·seed(지문 내용)로 정하므로
+    ① 같은 시험지 안에서 문항마다 다르고, ② 같은 지문이면 늘 같은 결과가 나온다.
+    """
+    # 문항을 만들어지는 순서대로 세어 자리표를 한 칸씩 옮긴다 — 열두 문항까지는
+    # 어느 둘도 같은 자리 짝을 쓰지 않는다(지문 6개 × 두 판).
+    idx = seed + passage_index * 2 + version
+    return _OX_SLOTS[idx % len(_OX_SLOTS)]
+
+
+def place_ox(items: list, positions: tuple[int, int]) -> list:
+    """is_true 인 항목 둘을 positions 자리로 옮긴 새 목록.
+
+    items 는 is_true 를 가진 객체들(순서는 모델이 준 그대로). 나머지는 남은 자리에
+    원래 순서대로 채운다.
+    """
+    yes = [it for it in items if getattr(it, "is_true", False)]
+    no = [it for it in items if not getattr(it, "is_true", False)]
+    if len(yes) != len(positions):
+        return list(items)          # 개수가 다르면 손대지 않는다(스키마가 이미 막는다)
+    out: list = [None] * len(items)
+    for pos, it in zip(sorted(positions), yes):
+        out[pos - 1] = it
+    rest = iter(no)
+    for i in range(len(out)):
+        if out[i] is None:
+            out[i] = next(rest)
+    return out

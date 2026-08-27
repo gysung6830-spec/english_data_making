@@ -35,14 +35,14 @@ from . import shape
 from .merged import MERGED_LABELS, MERGED_ORDER
 
 
-_CIRC = "①②③④⑤⑥⑦⑧"
-_MARKS = "①②③④⑤⑥⑦⑧ⓐⓑⓒⓓⓔ"
+_CIRC = "①②③④⑤⑥⑦⑧⑨⑩"
+_MARKS = "①②③④⑤⑥⑦⑧⑨⑩ⓐⓑⓒⓓⓔ"
 
 # 유형별로 기대하는 밑줄 개수(없으면 검사하지 않는다)
 _N_MARKS = {"vocab": 5, "vocab_2": 5, "vocab_3": 5, "pair_odd": 5,
             "grammar_count": 6, "grammar_fix": 6}
 # 선지 개수
-_N_CHOICES = {"grammar_count": 6}
+_N_CHOICES = {"grammar_count": 6, "content": 10, "content_2": 10}
 # <li> 선지가 없는 유형. 삽입·무관한 문장은 본문 속 위치 표시(①~⑤)가 선지 구실을 한다.
 _NO_CHOICES = {"grammar", "vocab", "vocab_2", "vocab_3", "D", "insert",
                "irrelevant", "grammar_fix"}
@@ -129,14 +129,19 @@ def _check_item(it: dict) -> list[str]:
         if len(fixes) != 4:
             bad.append(f"고쳐 쓸 밑줄이 {len(fixes)}개입니다(4개여야 합니다).")
 
-    # 내용 O/X — 다섯 진술이 모두 판정돼야 하고, 한쪽으로 몰리면 찍어서 맞는다
-    if t == "content" and "O" in it["key"] and "X" in it["key"]:
-        marks = re.findall(r"[①-⑧]\s*([OX])", it["key"])
-        if len(marks) != 5:
-            bad.append(f"O/X 판정이 {len(marks)}개입니다(진술 5개 모두여야 합니다).")
-        elif not (2 <= marks.count("O") <= 3):
-            bad.append(f"O 가 {marks.count('O')}개입니다 — 한쪽으로 몰리면 학생이 "
-                       "지문을 읽지 않고 전부 O(또는 X)로 찍습니다.")
+    # 내용 O/X — 열 진술이 모두 판정돼야 하고, O 는 늘 둘이며 서로 붙어 있으면 안 된다
+    if t in ("content", "content_2"):
+        marks = re.findall(r"[①-⑩]\s*([OX])", it["key"])
+        if len(marks) != 10:
+            bad.append(f"O/X 판정이 {len(marks)}개입니다(진술 10개 모두여야 합니다).")
+        elif marks.count("O") != 2:
+            bad.append(f"O 가 {marks.count('O')}개입니다 — 늘 2개여야 합니다"
+                       "(비율이 흔들리면 학생이 감으로 찍습니다).")
+        else:
+            yes = [i for i, m in enumerate(marks, 1) if m == "O"]
+            if yes[1] - yes[0] < 3:
+                bad.append(f"O 두 개가 {yes[0]}번·{yes[1]}번으로 붙어 있습니다 — "
+                           "세 칸 이상 떨어뜨려야 자리만 보고 찍지 못합니다.")
 
     # 위치 표시(삽입·무관한 문장)의 자리 수
     if t in ("insert", "irrelevant"):
@@ -232,6 +237,17 @@ def _check_cross(items: dict[str, dict]) -> dict[str, list[str]]:
                 _add(t, f"어휘 문항의 정답 밑줄이 같은 문장에 몰려 있습니다({names}) — "
                         f"학생이 같은 자리를 {len(ts)}번 읽습니다.")
 
+    # 1-c) 내용 O/X 두 판의 O 자리가 같은가
+    if "content" in items and "content_2" in items:
+        def _yes(it):
+            return tuple(i for i, m in enumerate(
+                re.findall(r"[①-⑩]\s*([OX])", it["key"]), 1) if m == "O")
+        if _yes(items["content"]) and _yes(items["content"]) == _yes(items["content_2"]):
+            msg = ("내용 O/X 두 판의 O 자리가 같습니다 — 한 판을 푼 학생이 다른 판을 "
+                   "자리만 보고 옮겨 적습니다.")
+            _add("content", msg)
+            _add("content_2", msg)
+
     # 2) 빈칸추론과 요약문의 정답 핵심어
     if "F" in items and "E" in items:
         fa = _choice_of(items["F"])
@@ -314,7 +330,8 @@ def check_passage(passage, start_no: int = 1) -> tuple[list[dict], list[str]]:
         whole.append(f"{len(missing)}개 유형이 빠졌습니다: {', '.join(missing)}")
     # 정답 번호 쏠림 — 단일정답 문항만 센다
     keys = [answer_no(it["key"]) for it in rows
-            if it["type"] not in ("grammar", "D", "grammar_fix", "content")
+            if it["type"] not in ("grammar", "D", "grammar_fix",
+                                  "content", "content_2")
             and answer_no(it["key"])]
     if keys:
         c = Counter(keys)
