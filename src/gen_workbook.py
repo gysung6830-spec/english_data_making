@@ -1321,125 +1321,129 @@ def _op_piece(lab, seam_html, mid_html, hook_lb, hook_html, give=False):
 
 
 def onepass_page(seqtype):
-    """순서·삽입 유형 표지 앞에 오는 '한 번에 푸는 법(1-PASS)' 특강 1쪽."""
-    if seqtype == "순서":
-        title = "순서를 '한 번에' 푸는 법"
-        steps = (
-            '<div class="op-st"><span class="k">STEP 1</span><b>끝에서 갈고리 하나</b>'
-            '<span class="d">주어진 글의 <b>끝</b>에서 “다음엔 반드시 ___가 와야 한다”를 <b>딱 하나</b>만 건다.</span></div>'
-            '<div class="op-st"><span class="k">STEP 2</span><b>첫머리만 본다</b>'
-            '<span class="d">(A)(B)(C)의 <b>첫 1~2문장</b>만. 몸통은 건너뛰고 <b>갈고리를 채우는 조각</b>을 고른다.</span></div>'
-            '<div class="op-st"><span class="k">STEP 3</span><b>끝→첫머리 반복</b>'
-            '<span class="d">고른 조각의 <b>끝</b>에서 새 갈고리 → 남은 첫머리에 맞춘다. 되돌아가지 않는다.</span></div>')
-        demo_cap = '각 조각의 <b>첫머리(이음매)</b>만 진하게, <b>몸통</b>은 흐리게 표시했다. 순서는 <b>첫머리 단서</b>만으로 정해진다.'
+    """순서·삽입 특강 — 추상 비유 없이 '실제 기출 단어'를 짚어 구체적으로 푸는 1쪽."""
+    is_ord = (seqtype == "순서")
+    title = "순서 — 덩어리 첫 단어만 보고 잇기" if is_ord else "삽입 — 넣을 문장 첫 단어가 답을 알려줘요"
+    diag = ("<b>순서 문제</b> = [주어진 글] 뒤에 <b>(A)(B)(C) 세 덩어리</b>를 바르게 놓기. "
+            "비밀은 하나 — 각 덩어리 <b>첫 문장의 맨 앞 몇 단어</b>만 보면 '내 앞에 무엇이 와야 하는지'가 나와요. "
+            "<b>덩어리 속 내용(가운데 문장)은 안 읽어도</b> 됩니다."
+            if is_ord else
+            "<b>삽입 문제</b> = 문장 하나를 본문 <b>①~⑤ 중 한 곳</b>에 넣기. "
+            "비밀 — <b>넣을 문장의 맨 앞 몇 단어</b>가 '내 앞에 무엇이 있어야 하는지'를 알려줘요. "
+            "그 대상을 찾아 <b>바로 뒤</b>에 넣으면 끝. <b>본문 전체를 이해할 필요 없습니다.</b>")
+
+    seat = "그 내용이 나온 덩어리" if is_ord else "그 내용이 나온 문장"
+    dict_rows = [
+        ("#2f6fb0", "this · these · such · 그 · 이런", "앞 내용을 <b>콕 집어</b> 가리킴", seat + " <b>바로 뒤</b>"),
+        ("#2f6fb0", "they · them · it", "앞의 사람·사물 (<b>they</b>=여럿 · <b>it</b>=하나)", "그 대상이 <b>처음 나온</b> 곳 뒤"),
+        ("#cd5049", "But · However · Yet", "앞 내용을 <b>뒤집음</b>", "<b>반대</b>로 말한 곳 <b>뒤</b>"),
+        ("#d98324", "So · Thus · That's why", "앞의 <b>결과</b>", "그 <b>원인</b>을 말한 곳 <b>뒤</b>"),
+        ("#1f7a5c", "Also · In addition · Besides", "같은 편 내용 <b>추가</b>", "비슷하게 말한 곳 <b>뒤</b>"),
+        ("#8a929b", "For example · For instance", "앞 <b>일반론</b>의 예", "일반적으로 말한 곳 <b>뒤</b>"),
+        ("#8a5a1a", "the + 명사 <span style='font-weight:600;color:#9aa2ab'>(a/an 아님)</span>", "앞에서 <b>이미 말한</b> 그 명사", "그 명사를 <b>처음(a/an)</b> 꺼낸 곳 뒤"),
+        ("#12543d", "(신호가 <b>하나도 없음</b>)", "새로 <b>시작</b>하는 내용", ("<b>맨 앞</b>" if is_ord else "앞에 새 화제를 <b>여는</b> 자리")),
+    ]
+    trows = "".join(
+        ('<tr><td style="border:1px solid #e6e8ea;padding:3px 8px;font-weight:800;color:{0};font-size:10px;white-space:nowrap">{1}</td>'
+        '<td style="border:1px solid #e6e8ea;padding:3px 8px;font-size:10px;color:#3a4550">{2}</td>'
+        '<td style="border:1px solid #e6e8ea;padding:3px 8px;font-size:10px;color:#12543d">{3}</td></tr>').format(col, a, b, c)
+        for col, a, b, c in dict_rows)
+    dict_tbl = ('<table style="width:100%;border-collapse:collapse">'
+                '<tr><th style="border:1px solid #e6e8ea;background:#f2f8f5;padding:3px 8px;font-size:9.5px;color:#12543d;width:34%">덩어리 첫 단어</th>'
+                '<th style="border:1px solid #e6e8ea;background:#f2f8f5;padding:3px 8px;font-size:9.5px;color:#12543d">속뜻</th>'
+                '<th style="border:1px solid #e6e8ea;background:#f2f8f5;padding:3px 8px;font-size:9.5px;color:#12543d;width:32%">놓을 자리</th></tr>' + trows + '</table>')
+
+    def wline(lab, en, ko):
+        return ('<div style="display:flex;gap:8px;margin:3px 0;font-size:10px;line-height:1.5">'
+                '<span style="flex:none;min-width:56px;font-weight:800;color:#12543d;background:#eef5f1;border-radius:5px;padding:1px 7px;height:fit-content">{0}</span>'
+                '<span style="color:#2b3a34"><span style="font-style:italic;color:#3a4550">{1}</span><br><span style="color:#5f6870">{2}</span></span></div>').format(lab, en, ko)
+
+    def step(n, html):
+        return ('<div style="display:flex;gap:7px;margin:5px 0;font-size:10.5px;line-height:1.55">'
+                '<span style="flex:none;font-size:9px;font-weight:900;color:#fff;background:#1f7a5c;border-radius:50%;width:16px;height:16px;line-height:16px;text-align:center">{0}</span>'
+                '<span style="color:#2b3a34">{1}</span></div>').format(n, html)
+
+    def C(w, col="#2f6fb0"):
+        return '<b style="color:{0}">{1}</b>'.format(col, w)
+
+    if is_ord:
         demo_src = "2024학년도 수능 37번"
         pieces = (
-            _op_piece("주어진 글",
-                      'Norms emerge in groups … Thus, the start of a norm occurs when one person acts …',
-                      "", "갈고리",
-                      "한 사람이 <b>'그 행동'을 시작</b> → 다음엔 <b>그 행동을 이어받는</b> 조각이 와야 함", give=True)
-            + _op_piece("(C)",
-                        'Others may then conform to <span class="op-clue ck-ref">this behavior</span> <span class="op-clue ck-time">then</span> …',
-                        "The person who performed the initial action may think …", "이음매",
-                        "<b>this behavior·then</b> = 주어진 글의 그 행동을 받음 <span class='op-ar'>→</span> <b>주어진 글 바로 뒤</b>")
-            + _op_piece("(A)",
-                        'Thus, she may prescribe the behavior to <span class="op-clue ck-ref">them</span> …',
-                        "Alternately, she may communicate … In addition, she may threaten to sanction them …", "이음매",
-                        "<b>them</b> = (C)의 'others' <span class='op-ar'>→</span> <b>(C) 뒤</b>")
-            + _op_piece("(B)",
-                        '<span class="op-clue ck-conj">But</span> some others will not need to have the behavior prescribed …',
-                        "They will observe the regularity of behavior … either rational or moral reasons.", "이음매",
-                        "<b>But</b> = (A)의 '규정하면 따른다'를 뒤집어 마무리 <span class='op-ar'>→</span> <b>(A) 뒤</b>"))
-        path = ("읽은 것은 <b>이음매 4곳</b>뿐 (몸통 7문장은 안 읽음). &nbsp;주어진 글 <span class='op-arrow'>→</span> (C) "
-                "<span class='op-arrow'>→</span> (A) <span class='op-arrow'>→</span> (B) &nbsp;∴ 정답 <b>(C)-(A)-(B)</b>")
-    else:
-        title = "문장 삽입을 '한 번에' 푸는 법"
+            wline("주어진 글", "… one person acts in a particular manner …",
+                  "한 사람이 어떤 <b>행동</b>을 시작한다.")
+            + wline("(A)", "<u>Thus, she may prescribe the behavior to <b>them</b></u> …",
+                    "그리하여 그녀가 <b>그들에게</b> 그 행동을 규정한다.")
+            + wline("(B)", "<u><b>But</b> some others will not need to have the behavior prescribed</u> …",
+                    "<b>하지만</b> 어떤 이들은 규정받을 필요가 없다.")
+            + wline("(C)", "<u>Others may then conform to <b>this behavior</b></u> …",
+                    "그 뒤 다른 이들(others)이 <b>이 행동</b>에 동조한다."))
         steps = (
-            '<div class="op-st"><span class="k">STEP 1</span><b>넣을 문장 먼저 · 손잡이 둘</b>'
-            '<span class="d"><b>뒤 손잡이</b>(지시어 this·they·But → 앞에 뭐가 있어야) + <b>앞 손잡이</b>(새 화제 → 뒤에 뭐가 와야).</span></div>'
-            '<div class="op-st"><span class="k">STEP 2</span><b>한 번 훑어 끊긴 곳</b>'
-            '<span class="d">본문을 <b>딱 한 번</b> 훑으며 <b>흐름이 끊긴 한 군데</b>(대명사가 받을 게 없거나 화제가 튀는 곳)를 찾는다.</span></div>'
-            '<div class="op-st"><span class="k">STEP 3</span><b>끊긴 자리 = 정답</b>'
-            '<span class="d">손잡이를 쥐고 들어가니 <b>다섯 자리를 시험하지 않는다.</b></span></div>')
-        demo_cap = '<b>넣을 문장</b>의 손잡이(지시어)를 먼저 뽑고, 본문에서 <b>흐름이 끊긴 한 곳</b>만 찾는다.'
+            step("1", "맨 앞부터 보면 (A)는 " + C("them") + ", (B)는 " + C("But", "#cd5049") + ", (C)는 " + C("this behavior") + "로 시작 — "
+                      "셋 다 '앞에 뭔가 있어야' 하는 신호. → 신호 없는 <b>주어진 글이 맨 앞</b>.")
+            + step("2", "주어진 글 = '한 사람이 <b>행동</b>을 시작.' (C) 첫머리 " + C("this behavior") + "(이 행동) ← 바로 그 행동! "
+                        "→ <b>주어진 글 뒤 = (C)</b>.")
+            + step("3", "(C) = '다른 이들(<b>others</b>)이 따라 함.' (A) 첫머리 " + C("them") + "(그들) ← (C)의 others! "
+                        "→ <b>(C) 뒤 = (A)</b>.")
+            + step("4", "남은 (B) = '" + C("But", "#cd5049") + " 어떤 이는 규정 안 해도 따름' ← (A)의 '규정하면 따른다'를 뒤집어 마무리. "
+                        "→ <b>(A) 뒤 = (B)</b>."))
+        path = ("주어진 글 <b>→</b> (C) <b>→</b> (A) <b>→</b> (B) &nbsp;&nbsp;∴ 정답 <b>(C)-(A)-(B)</b> "
+                "&nbsp;— 읽은 건 <b>첫 단어 3개</b>(this·them·But)뿐.")
+    else:
         demo_src = "2024학년도 6월 39번"
         pieces = (
-            _op_piece("넣을 문장",
-                      '<span class="op-clue ck-ref">As a result, they</span> are fit and grow better, but they aren’t particularly long-lived.',
-                      "", "손잡이",
-                      "<b>they</b> = 앞의 'Some individuals'(홀로 광합성하는 그 나무들) → <b>그 문장 뒤</b>에 놓여야", give=True)
-            + _op_piece("① 앞 문장",
-                        'Some individuals photosynthesize like mad until sugar positively bubbles …',
-                        "", "이음매",
-                        "여기서 <b>흐름이 끊김</b> — 'they'가 받을 대상이 바로 여기 <span class='op-ar'>→</span> <b>이 뒤(②)가 자리</b>")
-            + _op_piece("② 뒤 문장",
-                        '<span class="op-clue ck-ref">This</span> is because a tree can be only as strong as the forest …',
-                        "", "이음매",
-                        "<b>This</b> = 넣을 문장의 '오래 못 산다'는 결과 <span class='op-ar'>→</span> 그 이유를 이어 <b>공백을 메움</b>"))
-        path = ("<b>넣을 문장</b>의 they를 쥐고 본문을 한 번 훑자 <b>② 자리</b>에서 딱 걸림 (다섯 자리 안 넣어봄). &nbsp;∴ 정답 <b>②</b>")
+            wline("넣을 문장", "<u><b>As a result</b>, <b>they</b></u> are fit and grow better, but … not particularly long-lived.",
+                  "<b>그 결과, 그것들(they)</b>은 튼튼하지만 오래 살진 못한다.")
+            + wline("본문 ①앞", "Some individuals photosynthesize like mad until sugar positively bubbles …",
+                    "<b>어떤 나무들</b>은 미친 듯 광합성해 당분이 넘친다.")
+            + wline("본문 ②뒤", "<u><b>This</b> is because a tree can be only as strong as the forest</u> …",
+                    "<b>이것</b>은 나무가 숲만큼만 강할 수 있기 때문이다."))
+        steps = (
+            step("1", "넣을 문장 맨 앞: " + C("As a result", "#d98324") + "(그 결과) + " + C("they") + "(그것들, <b>여럿</b>) — "
+                      "'앞에 <b>원인</b>'과 '<b>복수 대상</b>'이 있어야 한다는 신호.")
+            + step("2", "본문에서 <b>복수 나무</b>가 나온 곳 찾기: ① '" + C("Some individuals", "#1f7a5c") + "…(어떤 나무들이 미친 듯 광합성)' "
+                        "← 바로 그 여럿! → 넣을 문장은 이 <b>바로 뒤(②)</b>.")
+            + step("3", "넣고 확인: 뒤 문장 " + C("This is because", "#2f6fb0") + "(이것은 ~때문) = '오래 못 산다'는 <b>이유</b>를 이어받음. "
+                        "앞·뒤가 <b>둘 다</b> 자연스러움 → 정답 <b>②</b>."))
+        path = ("they=그 나무들 → ① 'Some individuals' <b>바로 뒤 = ②</b> &nbsp;&nbsp;∴ 정답 <b>②</b> "
+                "&nbsp;— 다섯 자리를 다 넣어보지 않음.")
+    demo = ('<div style="border:1.5px solid #cfe0f2;background:#f6faff;border-radius:10px;padding:9px 13px">'
+            '<div style="font-size:9px;color:#6b7280;font-weight:700;margin-bottom:4px">실제 기출 · {0} — 밑줄 친 <b>첫머리 단어</b>만 봅니다</div>'
+            '{1}<div style="border-top:1px dashed #cfe0f2;margin:6px 0 5px"></div>{2}'
+            '<div style="margin-top:6px;font-size:10.5px;color:#12543d;background:#eaf5f0;border-radius:6px;padding:6px 10px">👉 {3}</div></div>'
+            ).format(demo_src, pieces, steps, path)
 
-    demo = (f'<div class="op-demo"><div class="op-cap">{demo_cap} '
-            f'<span class="op-srcnote">({demo_src})</span></div>'
-            f'<div class="op-legend">단서 색: <span class="op-clue ck-ref">지시어</span>'
-            f'<span class="op-clue ck-time">시간·순서</span><span class="op-clue ck-conj">연결어</span></div>'
-            f'<div class="op-pass">{pieces}</div>'
-            f'<div class="op-path">{path}</div></div>')
-    habits = (
-        '<ol><li><b>묻는 것 먼저</b> — 주어진 글·넣을 문장부터. 갈고리를 쥐고 본문에 들어가면 되돌아갈 일이 없다.</li>'
-        '<li><b>몸통 말고 이음매</b> — 조각의 끝과 다음 첫머리만. 가운데 문장은 순서 판단에 필요 없다.</li>'
-        '<li><b>눈으로 외우지 말고 손으로 표시</b> — 지시어→선행어를 화살표로 그으며 간다.</li></ol>')
-    _chip = lambda *ws: '<div class="tp-chips">' + ''.join(f'<span>{w}</span>' for w in ws) + '</div>'
-    if seqtype == "순서":
-        tips = (
-            '<div class="tp-lead">비법은 하나 — <b>조각의 “맨 앞 단어”만 보면</b> 됩니다.</div>'
-            '<ol>'
-            '<li><b>1) 맨 앞 조각부터 골라요.</b> 아래 말로 <u>시작하는</u> 조각은 <b>맨 앞이 될 수 없어요</b> '
-            '(앞에 뭔가 있어야 말이 되니까요).'
-            + _chip("this · these", "그 · 그것 · 이런", "they · it (그들 · 그것)",
-                    "But 하지만", "So 그래서", "Also 또한", "For example 예를 들어") +
-            '이 말이 <b>하나도 없는</b> 조각이 <b>맨 앞</b>이에요.</li>'
-            '<li><b>2) 나머지를 이어 붙여요.</b> 조각 맨 앞의 말이 <b>“무엇을 가리키는지”</b> 찾아서, '
-            '그게 <b>나온 조각 바로 뒤</b>에 놓으면 돼요.'
-            '<div class="tp-map">'
-            '<div><span class="w">the/그 + 명사</span> 그 명사를 <b>처음 말한</b> 조각 뒤</div>'
-            '<div><span class="w">they · it (그들·그것)</span> 그 대상이 <b>나온</b> 조각 뒤</div>'
-            '<div><span class="w">But (하지만)</span> <b>반대</b>로 말한 조각 뒤</div>'
-            '<div><span class="w">So · Thus (그래서)</span> 그 <b>까닭</b>을 말한 조각 뒤</div>'
-            '</div></li>'
-            '<li><b>3) 이어서 한 번 읽어봐요.</b> 정한 순서대로 쭉 읽어 <b>말이 매끄러우면 끝</b>. '
-            '어딘가 어색하면 2번을 다시 봐요.</li>'
-            '</ol>')
+    if is_ord:
+        hands = [
+            "각 덩어리 <b>첫 문장 첫 단어</b>에 ○ 표시. (this·they·But·So·Also·the+명사)",
+            "○가 가리키는 걸 <b>다른 덩어리</b>에서 찾아 <b>화살표(→)</b>로 이어요. (they=여럿·it=하나로 짝 맞추기)",
+            "○ <b>없는</b> 덩어리에서 출발 → 화살표 따라 쭉 = 순서. 마지막에 <b>한 번</b> 읽어 확인.",
+        ]
     else:
-        tips = (
-            '<div class="tp-lead"><b>넣을 문장(주어진 문장)</b>이 답을 다 알려줘요 — <b>맨 앞 단어부터</b> 봐요.</div>'
-            '<ol>'
-            '<li><b>1) 넣을 문장의 맨 앞을 봐요.</b> 아래 말이 있으면, 그게 <b>가리키는 내용이 “바로 앞”에 있는 자리</b>에 넣어야 해요.'
-            + _chip("this · these", "그 · 그것", "they · them", "But 하지만", "So 그래서") +
-            '</li>'
-            '<li><b>2) 그 “가리키는 것”을 본문에서 찾아요.</b> '
-            '예를 들어 넣을 문장이 <i>“This is why…(이것이 ~한 이유다)”</i>라면, '
-            '<b>‘이것’에 해당하는 내용</b>이 끝난 자리 <b>바로 뒤</b>가 정답이에요.</li>'
-            '<li><b>3) 넣고 앞뒤를 읽어봐요.</b> <b>앞 문장 → 넣을 문장 → 뒤 문장</b>이 '
-            '<b>둘 다</b> 자연스러우면 정답. <b>한쪽만</b> 맞으면 오답이에요.</li>'
-            '</ol>')
-    tips += ('<div class="tp-warn">※ “정답이 ②~④에 많다”는 <b>통계로 찍기</b>는 근거가 아니에요. '
-             '위 방법으로 <b>자리를 정하는 게 먼저</b>, 통계는 <b>정말 모를 때만</b> 참고하세요.</div>')
-    return f'''<section class="onepass"><span class="wbm">wbspread</span>
-      <div class="op-top"><span class="op-badge">1-PASS</span><h1>{title}</h1>
-        <span class="op-sub">형광펜 독해 · 유형 특강</span></div>
-      <div class="op-diag">왜 자꾸 <b>여러 번 읽게</b> 될까? — 조각의 <b>'내용'</b>을 이해하려 읽기 때문.
-        순서·삽입은 이해 문제가 아니라 <b>'어디에 붙나'를 잇는 문제</b>다.
-        읽는 목적을 <b>“무슨 말이지?” → “어디에 붙지?”</b> 로 바꾸면 <b>한 번의 전진 읽기</b>로 끝난다.</div>
-      <div class="op-h2">{"순서" if seqtype=="순서" else "삽입"} — 한 번에 푸는 3단계</div>
-      <div class="op-steps">{steps}</div>
-      <div class="op-h2">시범 — {"몸통은 넘기고 '이음매'만 따라간다" if seqtype=="순서" else "손잡이 뽑고 '끊긴 곳' 한 번에"}</div>
-      {demo}
-      <div class="op-h2">실전 — <b>이 순서대로</b> 하면 됩니다</div>
-      <div class="op-habit op-tips">{tips}</div>
-      <div class="op-h2">재독을 없애는 습관 3</div>
-      <div class="op-habit">{habits}</div>
-    </section>'''
+        hands = [
+            "<b>넣을 문장</b> 첫 단어에 ○. (this·they·But·So·As a result·the+명사)",
+            "○가 가리키는 내용이 <b>끝나는 곳</b>을 본문에서 찾아요. (대명사는 <b>수</b>를 맞춰서)",
+            "그 <b>바로 뒤</b>에 넣고 → <b>앞·뒤 both</b> 자연스러우면 정답. <b>한쪽만</b> 맞으면 오답.",
+        ]
+    hand_html = "".join(
+        ('<div style="display:flex;gap:8px;margin:4px 0;font-size:11px;line-height:1.5">'
+        '<span style="flex:none;font-size:10px;font-weight:900;color:#fff;background:#12543d;border-radius:6px;padding:1px 9px">{0}단계</span>'
+        '<span style="color:#2b3a34">{1}</span></div>').format(i + 1, h) for i, h in enumerate(hands))
 
+    return (
+        '<section class="onepass"><span class="wbm">wbspread</span>'
+        '<div class="op-top"><span class="op-badge">1-PASS</span><h1>' + title + '</h1>'
+        '<span class="op-sub">형광펜 독해 · 유형 특강</span></div>'
+        '<div class="op-diag">' + diag + '</div>'
+        '<div class="op-h2">① 맨 앞 단어 사전 — 이 단어로 시작하면 ‘앞에 무엇이 있어야 함’</div>'
+        + dict_tbl +
+        '<div class="op-h2">② 시범 — 실제 기출을 <b>단어로</b> 짚어가며</div>'
+        + demo +
+        '<div class="op-h2">③ 실전 — 손으로 이렇게 3단계</div>'
+        '<div class="op-habit">' + hand_html + '</div>'
+        '<div style="margin-top:8px;font-size:10px;color:#8a5a1a;background:#fff7ef;border:1px solid #e0b94a;border-radius:8px;padding:7px 11px">'
+        '💡 <b>핵심</b> — 순서·삽입은 ‘무슨 말인지’ 이해하는 문제가 아니라 <b>‘어느 단어가 어디를 가리키나’</b>를 잇는 문제. '
+        '<b>첫 단어</b>만 보면 독해력이 약해도 풀립니다.</div>'
+        '</section>')
 
 def signal_cheatsheet():
     """순서·삽입 공통 — '이해 0%'로 시작하는 신호 3순위 치트시트 + 신호만 표시 연습 (1쪽)."""
