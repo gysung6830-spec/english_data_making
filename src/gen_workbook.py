@@ -1040,6 +1040,7 @@ def solution_block(rec, c, idx, tno=None):
         recon = '<div class="reconnote">※ 원본 선지 일부 유실 → 학습용 재구성(지문·정답은 기출 그대로).</div>' if c.get("recon_opts") else ""
         return f'''<div class="qsolution"><div class="card intg">
       <div class="hd"><span class="no">{tno or num}</span><span class="ty">{esc(typ)}</span>{_tnob}<span class="kind">STEP 2+3 · 훈련·해석 통합</span><span class="tm">평가원 {exam_src(rec.get("exam_id",""))} {num}번 · #{idx}{ans_note}</span></div>
+      <div class="itoc"><span class="itk">📑 카드 구성</span><span class="itp"><b>①</b> 지문 <em>직독직해</em></span><span class="itsep">›</span><span class="itp"><b>②</b> 노랑만으로 {'빈칸' if is_blank else '정답'} 도출</span><span class="itsep">›</span><span class="itp"><b>③</b> 정답 <span class="itans">{circ}</span></span></div>
       <div class="isec"><span class="in">1</span>지문 — 형광펜 문장 + 직독직해{blanknote}</div>
       {ileg}
       {direct_full_block(dfull)}
@@ -1858,6 +1859,12 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .card.intg .isec{ font-size:12px; font-weight:800; color:var(--ink-d); margin:11px 0 7px; padding-left:8px; border-left:5px solid var(--ink); display:flex; align-items:center; gap:6px; }
 .card.intg .isec .in{ font-size:8.5px; color:#fff; background:var(--ink); border-radius:50%; width:15px; height:15px; line-height:15px; text-align:center; }
 .card.intg .isec .ansno{ color:var(--ink-d); }
+.card.intg .itoc{ display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin:8px 0 9px; padding:6px 10px; background:#f2f8f5; border:1px solid #cfe6db; border-radius:8px; font-size:9.5px; }
+.card.intg .itoc .itk{ font-size:8.5px; font-weight:800; color:#fff; background:var(--ink-d); border-radius:5px; padding:2px 8px; letter-spacing:.3px; }
+.card.intg .itoc .itp{ font-weight:700; color:#2b3a34; } .card.intg .itoc .itp b{ color:var(--ink-d); }
+.card.intg .itoc .itp em{ font-style:normal; color:#a86b00; font-weight:800; }
+.card.intg .itoc .itsep{ color:#9fb3aa; font-weight:800; }
+.card.intg .itoc .itans{ font-weight:900; color:#fff; background:var(--trap); border-radius:50%; padding:0 5px; margin-left:2px; }
 .card.intg .ilegend{ font-size:8.6px; color:#6b7280; margin-bottom:7px; line-height:1.5; } .card.intg .ilegend b{ color:#48525c; }
 .card.intg .ilegend .yl2{ background:#ffe680; border-radius:2px; padding:0 4px; font-weight:800; color:#23272e; }
 .card.intg .blanknote{ font-size:9px; color:#8f2f28; font-weight:700; } .card.intg .bkmini{ border:1px dashed #cd5049; border-radius:3px; padding:0 4px; color:#cd5049; }
