@@ -393,8 +393,24 @@ def connect_block(cn, typ):
     lab = esc(cn.get("answer_label", ""))
     head = ("🔗 연결고리로 <b>순서를 잇는</b> 과정" if typ == "순서"
             else "🔗 연결고리로 <b>넣을 자리를 찾는</b> 과정")
+    # 🔑 쉬운 3줄 풀이 — 신호만으로(내용 이해 없이) 자리를 정하는 고정 요약
+    def _short(m, w=4):
+        toks = (m or "").split()
+        return esc(" ".join(toks[:w]) + ("…" if len(toks) > w else ""))
+    e3chips = "".join(
+        f'<span class="e3c"><span class="ck {CLUE_CLS.get(c.get("kind",""),"ck-ref")}">{esc(c.get("kind",""))}</span>'
+        f'<span class="e3w">{_short(c.get("marker",""))}</span></span>'
+        for c in cn.get("clues", [])[:4])
+    _seat = ("신호가 <b>가리키는 조각 바로 뒤</b> · 신호 <b>없는</b> 조각이 <b>맨 앞</b>"
+             if typ == "순서" else
+             "넣을 문장의 신호가 <b>가리키는 내용 끝난 자리 뒤</b> · <b>앞뒤 both</b> 자연스러운 한 곳")
+    easy3 = (f'<div class="easy3"><div class="e3h">🔑 신호로 푸는 3줄 <span>— 내용 말고 신호만</span></div>'
+             f'<div class="e3l"><span class="e3n">1</span><b>신호 찾기</b><span class="e3b">{e3chips}</span></div>'
+             f'<div class="e3l"><span class="e3n">2</span><b>붙이기</b><span class="e3b">{_seat}</span></div>'
+             f'<div class="e3l"><span class="e3n">3</span><b>정답</b><span class="e3b"><span class="e3ans">{lab}</span></span></div></div>')
     return f'''<div class="derive connect">
       <div class="dh">{head} <span style="font-weight:600;color:#3a6ea5;font-size:8.3px">(노랑 형광펜이 아니라 지시어·연결어·시간으로 조각을 연결)</span></div>
+      {easy3}
       <div class="clues">{clues}</div>
       <ol class="chain">{steps}</ol>
       <div class="concl">→ 정답: <b>{lab}</b></div>
@@ -1425,6 +1441,70 @@ def onepass_page(seqtype):
     </section>'''
 
 
+def signal_cheatsheet():
+    """순서·삽입 공통 — '이해 0%'로 시작하는 신호 3순위 치트시트 + 신호만 표시 연습 (1쪽)."""
+    def prio(nblob, color, name, sub, rows):
+        rowhtml = "".join(
+            f'<div style="display:flex;gap:7px;margin:3px 0;font-size:10px;line-height:1.4">'
+            f'<span style="flex:none;min-width:96px;font-weight:800;color:{color}">{a}</span>'
+            f'<span style="color:#3a4550">{b}</span></div>' for a, b in rows)
+        return (f'<div style="flex:1;border:1.5px solid #e6e8ea;border-top:4px solid {color};border-radius:10px;padding:9px 12px">'
+                f'<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">'
+                f'<span style="font-size:12px;font-weight:900;color:#fff;background:{color};border-radius:6px;padding:1px 8px">{nblob}</span>'
+                f'<b style="font-size:12.5px;color:{color}">{name}</b>'
+                f'<span style="font-size:9px;color:#6b7280;font-weight:700">{sub}</span></div>{rowhtml}</div>')
+
+    RED, BLU, ORG = "#cd5049", "#2f6fb0", "#d98324"
+    p1 = prio("①", RED, "연결어", "관계만 — 뜻 필요 없음", [
+        ("But·However·Yet", "앞을 <b>뒤집음</b> → <b>반대</b>로 말한 조각 뒤"),
+        ("So·Thus·Therefore", "앞의 <b>결과</b> → 그 <b>까닭</b> 조각 뒤"),
+        ("Also·Moreover", "<b>같은 편</b> 추가 → 비슷한 조각 뒤"),
+        ("For example", "앞 <b>일반론의 예</b> → 일반 문장 뒤")])
+    p2 = prio("②", BLU, "지시어·대명사", "가리키는 건 '바로 앞'", [
+        ("this·these·그·이", "<b>앞 문장 통째</b>를 받음 → 그 문장 뒤"),
+        ("they·them", "<b>복수</b> 명사 뒤 &nbsp;/&nbsp; it·this = <b>단수</b> 뒤"),
+        ("such·the former", "앞에 <b>짝</b>이 있어야 성립")])
+    p3 = prio("③", ORG, "관사·이름 흐름", "처음 vs 두 번째", [
+        ("a/an → the", "<b>‘the 명사’</b> 문장은 <b>‘a 명사’</b> 처음 문장 뒤"),
+        ("풀네임 → 약칭", "he·Smith(약칭)은 <b>John Smith</b> 뒤"),
+        ("숫자·고유명 반복", "<b>두 번째</b> 언급은 <b>처음</b> 언급 뒤")])
+
+    gold = ('<div style="background:#fff7ef;border:1.5px solid #e0b94a;border-radius:9px;padding:9px 13px;margin:10px 0;font-size:11.5px;color:#2b3a34">'
+            '🔑 <b>황금 규칙</b> — 신호가 <b>가리키는 조각·문장 ‘바로 뒤’</b>에 붙인다. '
+            '&nbsp;신호가 <b>하나도 없는</b> 조각 = <b>맨 앞</b>. &nbsp;<b>내용은 안 읽어도 됩니다.</b></div>')
+
+    def drill(tag, lines, ans):
+        ls = "".join(f'<div style="font-size:10px;color:#3a4550;margin:2px 0">{l}</div>' for l in lines)
+        return (f'<div style="border:1px solid #eceef0;border-radius:8px;padding:8px 11px;margin-bottom:6px">'
+                f'<div style="font-size:9px;font-weight:800;color:#12543d;background:#eef5f1;border-radius:5px;padding:1px 7px;display:inline-block;margin-bottom:4px">{tag}</div>'
+                f'{ls}<div style="font-size:10px;color:#a5342d;font-weight:700;margin-top:4px">✔ {ans}</div></div>')
+
+    d1 = drill("연습 1 · 순서 — 첫 조각 찾기 (신호만 O)", [
+        '(A) <b>But</b> they soon realized the plan had a flaw.',
+        '(B) In 1900, a small town decided to build its first library.',
+        '(C) <b>This</b> library later became a national treasure.'],
+        '신호 <b>없는 (B)</b>가 맨 앞. (A) But=반대 / (C) This=앞 가리킴 → 뒤로.')
+    d2 = drill("연습 2 · 삽입 — 넣을 문장의 신호", [
+        '넣을 문장: “<b>As a result</b>, <b>the machine</b> stopped working.”'],
+        'As a result=결과·the machine=이미 나온 그 기계 → <b>‘a machine’을 처음 말한 문장 뒤</b>.')
+    d3 = drill("연습 3 · 대명사 수 맞추기", [
+        '넣을 문장: “<b>They</b> were far too expensive for most families.”'],
+        'They=<b>복수</b> → <b>복수 명사</b>(the cars·these devices…)가 나온 문장 <b>바로 뒤</b>.')
+
+    return f'''<section class="onepass"><span class="wbm">wbspread</span>
+      <div class="op-top"><span class="op-badge">신호 KEY</span><h1>순서·삽입 만능 열쇠 — 신호 3순위</h1>
+        <span class="op-sub">형광펜 독해 · 유형 특강</span></div>
+      <div class="op-diag">순서·삽입은 <b>‘내용’이 아니라 ‘신호’</b>로 붙입니다. 조각·문장의 <b>맨 앞 몇 단어</b>에서 아래
+        <b>3가지 신호</b>만 찾으면, 뜻을 하나도 몰라도 자리가 정해져요. <b>독해력이 약해도 됩니다 — 눈으로 매칭만.</b></div>
+      <div class="op-h2">신호 3순위 — 위에서부터 찾으세요</div>
+      <div style="display:flex;gap:9px">{p1}{p2}{p3}</div>
+      {gold}
+      <div class="op-h2">연습 — <b>신호에만 동그라미</b> (번역 금지)</div>
+      {d1}{d2}{d3}
+      <div style="font-size:9.5px;color:#6b7280;margin-top:2px">※ 여기 연습 문장은 <b>신호 감각을 익히는 예시</b>입니다. 실제 문항은 뒤 페이지의 <b>평가원 기출</b>로 훈련하세요.</div>
+    </section>'''
+
+
 DAEPYO = ["2022-06|21", "2022-06|34"]  # 대표 문항 — 유형편 각 유형 맨 앞에 배치
 
 
@@ -1453,6 +1533,7 @@ def build(n=80):
     item_meta = {}
     for si, b in enumerate(present_bands, 1):
         if b == "36-37":
+            body.append(signal_cheatsheet())   # 순서·삽입 공통 신호 치트시트 + 연습
             body.append(onepass_page("순서"))
         elif b == "38-39":
             body.append(onepass_page("삽입"))
@@ -1750,6 +1831,16 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .derive.connect .clue .cw{ flex:none; font-weight:800; color:#1f4d7a; background:#dcebf9; border-radius:3px; padding:0 4px; }
 .derive.connect .clue .ck{ flex:none; font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
 .ck-ref{ background:#2f6fb0; } .ck-conj{ background:#cd5049; } .ck-time{ background:#1f7a5c; } .ck-echo{ background:#8a6a00; }
+.easy3{ background:#fff7ef; border:1.5px solid #e0b94a; border-radius:8px; padding:7px 11px; margin:6px 0 8px; }
+.easy3 .e3h{ font-size:10.5px; font-weight:800; color:#8a5a1a; margin-bottom:4px; } .easy3 .e3h span{ font-weight:600; color:#a58a5a; font-size:8.6px; }
+.easy3 .e3l{ display:flex; align-items:baseline; gap:6px; font-size:9.6px; line-height:1.55; margin:2px 0; color:#3a4550; }
+.easy3 .e3l b{ flex:none; min-width:44px; color:#12543d; }
+.easy3 .e3n{ flex:none; font-size:8px; font-weight:900; color:#fff; background:#c9902f; border-radius:50%; width:14px; height:14px; line-height:14px; text-align:center; }
+.easy3 .e3b{ flex:1; }
+.easy3 .e3c{ display:inline-flex; align-items:baseline; gap:3px; margin:1px 7px 1px 0; }
+.easy3 .e3c .ck{ font-size:7.2px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
+.easy3 .e3c .e3w{ font-size:9px; font-weight:700; font-style:italic; color:#3a4550; }
+.easy3 .e3ans{ font-weight:900; color:#fff; background:#1f7a5c; border-radius:5px; padding:1px 9px; }
 /* 지문 속 연결고리 색칠(순서·삽입) */
 .psg .pclue{ color:#fff; font-weight:700; padding:0 3px; border-radius:3px; }
 .pclue{ font-size:7.4px; font-weight:800; color:#fff; border-radius:8px; padding:0 6px; }
