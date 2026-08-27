@@ -430,9 +430,16 @@
   .kobox{ background:#ffffff !important; border:1px solid #c7ced6 !important; }
   .pcol{ background:#ffffff !important; border:1px solid #d7dde3 !important; }
   .vtab th{ background:#eef1f4 !important; color:#333 !important; }   /* 표 헤더만 아주 옅게 */
-  /* 형광 → 밑줄(토너 절약, 흑백 가독) */
-  .w.hl-y{ background:transparent !important; border-bottom:2px solid #c59b00 !important; padding-bottom:1px; }
-  .w.hl-p{ background:transparent !important; border-bottom:1.6px solid #8f83c9 !important; padding-bottom:1px; }
+  /* ── 인쇄용 표기 구분(겹치지 않게 서로 다른 방식) ──
+     어법=형광펜 / 주제문=테두리 박스 / 담화표지=대시 밑줄 / 지칭=점선 밑줄 */
+  .en .w.red{ background:#fdf1b0 !important; color:#161616 !important;
+              border-radius:2px; padding:0 1.5px; }              /* 어법 = 형광펜(노랑) */
+  .en .ann.red{ color:#1c1c1c !important; }                      /* 어법 번호·주석은 검정 */
+  .en .w.hl-y{ background:transparent !important; border:1.3px solid #2b2b2b !important;
+               border-radius:3px; padding:0 2px; font-weight:800; }  /* 주제문 = 테두리 박스 */
+  .en .w.hl-p{ background:transparent !important;
+               border-bottom:1.6px dashed #555 !important; }     /* 담화표지 = 대시 밑줄 */
+  .tok .w.refu{ border-bottom:1.8px dotted #1c1c1c !important; } /* 지칭 = 점선 밑줄(검정) */
   /* 요약 라벨은 테두리형으로 */
   .slbl{ background:#ffffff !important; color:#3a4653 !important; border:1px solid #9aa4b0 !important; }
   .slbl.easy{ color:#7a5a1e !important; border-color:#cbb488 !important; }

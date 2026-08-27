@@ -256,7 +256,8 @@ def retitle_build_route():
             analyses, out, layout="A", footer_note=footer, density="auto",
             make_student=make_student,
             slevel=getattr(cfg.design, "student_level", "blank"),
-            boxmode=getattr(cfg.design, "box_align", "even"))
+            boxmode=getattr(cfg.design, "box_align", "even"),
+            bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
     except Exception as e:
         traceback.print_exc()
         return render_result([{"name": stem, "ok": False, "error": str(e)}])
@@ -343,7 +344,8 @@ def build_route():
                 analyses, out, layout=layout, footer_note=footer, density=density,
                 make_student=make_student,
                 slevel=getattr(cfg.design, "student_level", "blank"),
-                boxmode=getattr(cfg.design, "box_align", "even"))
+                boxmode=getattr(cfg.design, "box_align", "even"),
+                bw=getattr(cfg.design, "print_mode", True))   # 웹앱 기본=인쇄용(흑백 친화)
             label = "✏️ 교사용+학생용(합본)" if make_student else "✏️ 교사용"
             outfiles = [{"label": label, "out": out.name}]
             # 분석 데이터(JSON) 저장 — 나중에 제목·헤더만 고쳐 재출력할 때 재분석(API) 없이 씀.
