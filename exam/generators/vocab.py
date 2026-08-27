@@ -26,10 +26,32 @@ _PROMPT_SYNONYM = """아래 '정본 지문'으로 '어휘(문맥상 부적절)' 
   shown(문제에 보여줄 단어). '형용사·부사·동사' 위주로 고르세요.
 - 정확히 1개(answer_no)는 shown 을 '반의어'로 하여 문맥상 어색하게 만듭니다 → 정답.
 - 나머지 4개는 shown 을 원본 단어의 '유의어'로 바꿔 둡니다(원문 단어 그대로 노출 금지).
-- [확실성] 정답 1개만 확실히 어색해야 한다. 유의어로 바꾼 나머지 4개는 바꾼 뒤에도 문맥이
-  '완전히 자연스러워야' 하며 조금이라도 어색하면 안 된다(그러면 정답이 2개가 됨).
 - reason: 정답이 왜 문맥에 어긋나는지, 나머지는 왜 적절한지 한국어로 설명.
 - override_no 는 0, override_text 는 빈 문자열로 두세요.
+
+[이 유형에서 무너지는 곳은 한 군데뿐입니다 — 유의어 4개]
+정답 하나만 어색해야 하는데, 유의어로 바꾼 넷 중 하나라도 어색해지면 정답이 둘이 됩니다.
+이 유형은 다섯 낱말을 모두 갈아 끼우므로 그 위험이 넷 있습니다. 아래를 지키면 사라집니다.
+
+① **위 [핵심어휘·유의어·반의어] 표에 있는 낱말을 먼저 고르세요.**
+   그 표의 유의어·반의어는 이 지문 전체를 읽고 고른 것이라 문맥에 이미 맞습니다.
+   표에 있는 낱말을 밑줄로 골랐다면 shown 도 그 표의 유의어를 그대로 쓰세요.
+   (다른 문항이 이미 쓴 낱말이라 표에서 다섯을 채우지 못하면 그때만 표 밖에서 고릅니다.)
+② **바꿀 수 없는 자리는 아예 밑줄로 고르지 마세요.**
+   · 구동사·전치사와 한 덩어리인 낱말(depend on, result in, look after …)
+   · 연어가 굳은 낱말(make a decision 의 make, take place 의 take …)
+   · 관사·수량사·부정어와 함께 굳은 표현
+   이런 자리는 유의어를 넣는 순간 문장이 덜컹거려서, 학생이 뜻을 따지지 않고 '어색한
+   자리'만 보고 답을 고릅니다.
+③ **품사와 어형을 그대로 두세요.** 원본이 과거형이면 유의어도 과거형, 복수면 복수,
+   형용사면 형용사입니다. 어형이 어긋나면 그 자리가 어법 오류처럼 보입니다.
+④ **넷을 다 정한 뒤, 바꾼 문장을 처음부터 끝까지 소리 내어 읽듯 다시 읽으세요.**
+   조금이라도 걸리는 곳이 있으면 그 낱말을 버리고 다른 자리를 고르세요. '거의 자연스럽다'
+   는 안 됩니다 — 원어민이 그대로 썼을 문장이어야 합니다.
+⑤ **정답의 shown 은 반의어여야 합니다.** 뜻이 좁아지거나 넓어지는 낱말이 아니라, 방향이
+   반대인 낱말이어야 '확실히' 어긋납니다.
+⑥ **오답 넷에는 그 낱말의 반의어를 절대 쓰지 마세요.** 반의어를 넣으면 그 자리도 문맥에
+   어긋나 정답이 둘이 됩니다.
 
 {ctx}
 """
@@ -119,6 +141,35 @@ def _sent_clause(taken: set[int]) -> str:
             f"썼습니다. 가급적 다른 문장에서 정답을 고르세요.\n이미 쓴 문장: {nos}\n")
 
 
+def check_synonym_antonyms(analysis: Analysis, out: VocabOut) -> list[str]:
+    """유의어형에서 '오답 밑줄에 반의어가 들어갔는지'를 분석표로 본다.
+
+    이 유형이 무너지는 길은 하나다 — 오답 넷 중 하나가 문맥에 어긋나 정답이 둘이 되는 것.
+    그중 가장 흔하고 가장 확실한 경우가 '오답 자리에 반의어를 넣은 것'이다. 반의어는
+    정의상 방향이 반대라 그 자리도 어긋난다.
+
+    분석기가 지문마다 핵심어를 word·유의어·반의어 세 쌍으로 뽑아 두므로(그 표는 이미
+    모든 생성기 프롬프트에 실려 가고 캐시된다), 밑줄 낱말이 그 표에 있으면 코드가
+    확정적으로 셀 수 있다 — 호출을 한 번도 더 쓰지 않는다.
+
+    표에 없는 낱말은 볼 수 없다. 그래서 이 검사는 위험을 다 없애지 못하고 줄일 뿐이다.
+    나머지는 프롬프트(_PROMPT_SYNONYM 의 여섯 조항)가 맡는다.
+    """
+    ant = {t.word.strip().lower(): t.antonym.strip().lower()
+           for t in (analysis.key_terms or []) if (t.antonym or "").strip()}
+    bad: list[str] = []
+    for i, m in enumerate(out.marks, 1):
+        if i == out.answer_no:
+            continue
+        a = ant.get(m.word.strip().lower())
+        if a and m.shown.strip().lower() == a:
+            bad.append(f"{i}번 밑줄의 '{m.shown}' 은 '{m.word}' 의 반의어입니다")
+    if not bad:
+        return []
+    return [", ".join(bad) + " — 오답 자리에 반의어를 넣으면 그 자리도 문맥에 어긋나 "
+            "정답이 둘이 됩니다. 유의어로 바꾸세요."]
+
+
 def _restore_original_marks(out: VocabOut, method: str) -> list[int]:
     """원문단어형·부정어형에서 '정답이 아닌 밑줄'을 원문 낱말로 되돌린다.
 
@@ -178,6 +229,12 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
                    + shape.check_negation_underline(o.marks, o.answer_no, o.override_text))
             if bad:
                 raise ValueError("부정어형 설계 결함 — " + " ".join(bad))
+        if method == SYNONYM:
+            # 오답 자리에 반의어가 들어가면 정답이 둘이 된다. 분석표로 확정할 수 있는
+            # 만큼만 보고 되돌린다(추가 호출 없음 — check_synonym_antonyms 참고).
+            bad = check_synonym_antonyms(analysis, o)
+            if bad:
+                raise ValueError("유의어형 설계 결함 — " + " ".join(bad))
 
     out: VocabOut = client.structured(
         system=SYSTEM,
@@ -223,10 +280,12 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
     used_out: {슬롯키: 그 문항이 쓴 낱말들} 을 채워 준다(다음 재생성의 avoid 용).
     한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
 
-    어휘 3종 중 '유의어형' 하나만 자기검증을 받는다(아래 _verify_synonym 참고).
+    어휘 3종에는 자기검증을 걸지 않는다. 이 묶음은 밑줄이 겹치면 안 되어 '차례로'
+    도는 직렬 구간이고, 지문 생성의 최장 경로다. 다른 문항은 병렬이라 검증을 붙여도
+    벽시계 시간이 거의 늘지 않지만, 여기 붙인 한 번은 고스란히 대기 시간에 더해진다.
+    그래서 위험은 검증이 아니라 프롬프트와 무료 검사로 막는다
+    (_PROMPT_SYNONYM 의 여섯 조항 · check_synonym_antonyms · _restore_original_marks).
     """
-    from .. import verify as _verify
-
     used: set[str] = set(avoid or ())
     used_sents: set[int] = set()
     out: dict[str, tuple[str, str, list[str]]] = {}
@@ -259,32 +318,5 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
             used_sents.add(report["answer_sent"])
         if used_out is not None:
             used_out[slot] = set(words)
-        if method == SYNONYM:
-            flags = list(flags) + _verify_synonym(_verify, client, q, a,
-                                                  max_retries, logger, slot)
         out[slot] = (q, a, flags)
     return out
-
-
-def _verify_synonym(_verify, client, q: str, a: str, max_retries: int,
-                    logger, slot: str) -> list[str]:
-    """유의어형 어휘만 자기검증을 건다. 어휘 3종 중 이것 하나뿐이다.
-
-    왜 이것만인가 — 위험은 '모델이 갈아 끼운 낱말 중 정답이 아닌 것'에서만 생긴다.
-    원문 그대로 둔 낱말은 필자가 쓴 말이므로 어색할 수가 없다.
-      · 원문단어형·부정어형: 정답 아닌 밑줄 넷이 원문 그대로다(코드가 그렇게 복원한다
-        — _restore_original_marks). 위험한 낱말이 0개라 물어볼 것이 없다.
-      · 유의어형: 정답 아닌 넷을 '일부러' 유의어로 바꾼다. 그 넷이 바뀐 뒤에도 문맥에
-        맞는지는 판단이고, 판단은 코드가 못 한다. 위험한 낱말이 4개다.
-    그래서 지문당 검증 호출이 3회가 아니라 1회만 늘어난다.
-
-    걸렸을 때 여기서 다시 만들지 않는 까닭: 산출물이 곧바로 판매되므로, 같은 모델로
-    한 번 더 굴리는 것보다 상위 모델 승격에 넘기는 편이 낫다. '자동검증:' 로 시작하는
-    사유를 달면 tiering.needs_escalation 이 이 문항을 승격 대상으로 잡는다.
-    """
-    ok, reason = _verify.verify(client, "vocab_synonym", q, a, max_retries=max_retries)
-    if ok:
-        return []
-    if logger:
-        logger.info("[%s] 어휘 자기검증 실패 → 승격 대상: %s", slot, reason)
-    return [f"자동검증: {reason or '오답 넷의 문맥 적합성 재확인'}"]
