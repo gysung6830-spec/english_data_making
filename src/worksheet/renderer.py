@@ -211,10 +211,9 @@ def _mark_reference_pronouns(a) -> None:
     import re
     for s in getattr(a, "sentences", None) or []:
         lines = getattr(s, "lines", None) or []
-        # 중요 문장 플래그(주제문=노란 형광 어구 포함 또는 뱃지) — 문장 번호 박스 강조용.
-        has_topic = any(getattr(t, "hl", None) == "y"
-                        for line in lines for t in line)
-        s.important = bool(getattr(s, "badge", None) or has_topic)
+        # 중요 문장 플래그(주제문=노란 형광 어구 포함) — 문장 번호 박스 강조용. ('서' 뱃지는 미사용)
+        s.important = any(getattr(t, "hl", None) == "y"
+                          for line in lines for t in line)
         refs = getattr(s, "refs", None) or []
         if not refs:
             continue
