@@ -210,26 +210,35 @@ def _mark_reference_pronouns(a) -> None:
     """
     import re
     for s in getattr(a, "sentences", None) or []:
-        # 중요 문장(주제문·서술형 등) 표시용 플래그: 뱃지가 있거나 노란 형광(주제문 어구) 포함.
-        has_topic = any(getattr(t, "hl", None) == "y"
-                        for line in (getattr(s, "lines", None) or []) for t in line)
+        lines = getattr(s, "lines", None) or []
+        # 중요 문장 플래그 + 주제문 별표(★): 첫 노란 형광(주제문) 토큰에 ★ 표시.
+        has_topic = False
+        for line in lines:
+            for t in line:
+                if getattr(t, "hl", None) == "y":
+                    if not has_topic:
+                        t.topic_star = True              # 주제문 첫 어구에 ★
+                    has_topic = True
         s.important = bool(getattr(s, "badge", None) or has_topic)
         refs = getattr(s, "refs", None) or []
         if not refs:
             continue
-        prons: set[str] = set()
+        prons: dict[str, str] = {}                       # 대명사 → 지칭 대상(대명사 위에 표기)
         for r in refs:
-            head = re.split(r"→|-+>", str(r))[0]        # 'it → ...' 의 앞부분
-            head = head.strip().strip("'\"·` ").lower()
+            parts = re.split(r"→|-+>", str(r), maxsplit=1)
+            head = parts[0].strip().strip("'\"·` ").lower()
+            tail = parts[1].strip() if len(parts) > 1 else ""
             if head and len(head) <= 24:
-                prons.add(head)
+                prons[head] = tail[:22]
         if not prons:
             continue
-        for line in getattr(s, "lines", None) or []:
+        for line in lines:
             for t in line:
                 w = (t.text or "").strip().strip(".,;:!?'\"()").lower()
                 if w in prons:
-                    t.ref_mark = True                    # 동적 속성(템플릿에서 점선 표시)
+                    t.ref_mark = True                    # 본문 대명사에 점선
+                    if prons[w]:
+                        t.ref_to = prons[w]              # 대명사 '위'에 지칭 대상 표기
 
 
 def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
