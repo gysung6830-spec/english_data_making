@@ -74,22 +74,33 @@ def safe_filename(name: str) -> str:
 
 
 _RANGE_RE = re.compile(r"(\d+)\s*[~∼\-]\s*(\d+)\s*번")
+# 라벨 '끝'의 문항번호 토큰('…N번' 또는 '…N~M번'). 앞의 '[고3] 2026년 6월 -'
+# 같은 접두어 숫자에 오인되지 않도록 반드시 끝(번으로 종료)만 잡는다.
+_QNUM_END_RE = re.compile(r"(\d{1,3})(?:\s*[~∼\-]\s*(\d{1,3}))?\s*번\s*$")
+
+
+def _label_qspan(label: str):
+    """라벨 끝 문항번호에서 (시작, 끝, match) 반환. 없으면 None."""
+    m = _QNUM_END_RE.search(label or "")
+    if not m:
+        return None
+    a = int(m.group(1))
+    b = int(m.group(2)) if m.group(2) else a
+    return a, b, m
 
 
 def _label_span(label: str) -> int:
     """라벨이 장문 범위(N~M번)면 문항 수(M-N+1), 아니면 1."""
-    m = _RANGE_RE.search(label or "")
-    if m:
-        a, b = int(m.group(1)), int(m.group(2))
-        if b >= a:
-            return b - a + 1
+    q = _label_qspan(label)
+    if q and q[1] >= q[0]:
+        return q[1] - q[0] + 1
     return 1
 
 
 def _label_num(label: str):
-    """라벨의 (단일) 문항번호 정수. 'N번' → N, 범위(N~M번)나 형식 밖이면 None."""
-    m = re.match(r"^\s*(\d{1,3})\s*번\s*$", label or "")
-    return int(m.group(1)) if m else None
+    """라벨의 (단일) 문항번호 정수. '…N번' → N, 범위나 형식 밖이면 None."""
+    q = _label_qspan(label)
+    return q[0] if (q and q[0] == q[1]) else None
 
 
 # 모의고사 판별 키워드(파일명·제목·원문에 등장)
@@ -134,14 +145,20 @@ def drop_practical_items(passages: List[Passage],
 
 
 def _label_lead(label: str):
-    """라벨의 맨 앞 숫자(단일 'N번'→N, 범위 'N~M번'→N). 숫자 없으면 None."""
-    m = re.search(r"\d{1,3}", label or "")
-    return int(m.group(0)) if m else None
+    """라벨 끝 문항번호의 시작값(단일 'N번'→N, 범위 'N~M번'→N). 없으면 None.
+    '[고3] 2026년 6월 - 18번' 같은 접두어 숫자는 무시하고 문항번호만 본다."""
+    q = _label_qspan(label)
+    return q[0] if q else None
 
 
 def _shift_label(label: str, offset: int) -> str:
-    """라벨 안의 모든 숫자를 offset 만큼 이동('27번'·'41~42번' 모두 처리)."""
-    return re.sub(r"\d{1,3}", lambda m: str(int(m.group(0)) + offset), label)
+    """라벨 끝 문항번호만 offset 만큼 이동. 접두어(고3·연도 등)는 건드리지 않는다."""
+    q = _label_qspan(label)
+    if not q:
+        return label
+    a, b, m = q
+    new = f"{a + offset}~{b + offset}번" if b != a else f"{a + offset}번"
+    return label[:m.start()] + new
 
 
 def renumber_passages(passages: List[Passage], start_no) -> List[Passage]:
