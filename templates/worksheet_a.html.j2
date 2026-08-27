@@ -9,7 +9,7 @@
     /* 김은아영어연구소 파일(초록 브랜드) 팔레트 — 디자인 그대로, 색만 회사색으로 */
     --navy:#2e8b54; --red:#cd5049; --blue:#2e8b54;      /* 성분·리본=초록, 어법=빨강 */
     --green:#2f9e5f; --purple:#6a54b3; --amber:#cf8a2a; /* 유의어=초록, 담화표지=보라, 포인트=주황 */
-    --ref:#2f6fd0;  /* 지칭(대명사가 가리키는 대상) = 파랑 — 어법(빨강)·유의어(초록)와 구분 */
+    --ref:#9385d6;  /* 지칭(대명사가 가리키는 대상) = 라벤더 — 어법(빨강)·유의어(초록)와 구분 */
     --gray:#8a90a0; --ink:#20242e;
     --yellow-hl:#fbed9c; --green-hl:#dcecc4; --purple-hl:#e0daf1;
     --page-bg:#edf1ec; --line:#d3dcd3; --box-red:#e2b6b1; --tmi-line:#d7ddd6;
@@ -90,7 +90,7 @@
               white-space:nowrap; text-align:center; }
   .tok .over .lbl{ color:#7c828c; font-weight:800; font-size:8.5px; }   /* 성분(SVOC) 라벨 = 회색 */
   .en .line.po .tok .over{ height:11px; }   /* 성분 라벨이 있는 줄만 상단 공간 확보(단어 정렬) */
-  /* 지칭 표식(어법 ①②③ 와 구분): 파랑 '색 채운 동그라미 + 옅은 글자' a·b·c
+  /* 지칭 표식(어법 ①②③ 와 구분): 라벤더 '색 채운 동그라미 + 옅은 글자' a·b·c
      — 본문 대명사(위첨자) ↔ 독해 박스를 문자로 연결 */
   .rsup{ display:inline-block; min-width:12px; height:12px; line-height:12px; text-align:center;
          background:var(--ref); color:#fff; border-radius:50%; font-size:8px; font-weight:800;
@@ -159,8 +159,8 @@
   .pbox .fr{ margin:2px 0; }
   .pbox .fl{ font-weight:800; color:#37827b; }
   .pbox .fl.im{ color:#37827b; }             /* 함축 라벨은 틸 */
-  .pbox .fl.ref{ color:var(--ref); }         /* 지칭 라벨=파랑(본문 대명사 점선과 짝) */
-  /* 지칭 대명사: 독해 Point '지칭' 설명이 가리키는 본문 단어에 파랑 점선 → 위치 연결 */
+  .pbox .fl.ref{ color:var(--ref); }         /* 지칭 라벨=라벤더(본문 대명사 점선과 짝) */
+  /* 지칭 대명사: 독해 Point '지칭' 설명이 가리키는 본문 단어에 라벤더 점선 → 위치 연결 */
   .tok .w.refu{ border-bottom:1.6px dotted var(--ref); }
   /* 중요 문장(주제문·서술형 등): 번호를 채운 네모로 강조 → 한눈에 식별 */
   .row.imp .num{ color:#fff; background:var(--navy); border-radius:6px;
@@ -365,7 +365,7 @@
   .gsw.hp{ background:var(--purple-hl); padding:0 3px; }
   .gsw.ref{ display:inline-block; min-width:13px; height:13px; line-height:13px; text-align:center;
             background:var(--ref); color:#fff; border-radius:50%; font-size:9px; font-weight:800;
-            vertical-align:1px; }   /* 지칭 = 파랑 채운 동그라미(본문 위첨자와 동일) */
+            vertical-align:1px; }   /* 지칭 = 라벤더 채운 동그라미(본문 위첨자와 동일) */
   .gpill{ display:inline-block; font-size:9.5px; font-weight:800;
           border-radius:11px; padding:1px 8px; }
   .gpill.mint{ background:#dcece6; color:#2f6f63; }   /* 어법 Point = 민트 */
