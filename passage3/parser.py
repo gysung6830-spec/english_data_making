@@ -113,8 +113,11 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
     if not chunks:
         return chunks
     if _letters("".join(c.en for c in chunks)) != _letters(en):
-        # 영어는 안전하게 그대로 두고 한글 뜻만 정리
-        return [Chunk(en=c.en, ko=tidy_chunk_ko(c.ko)) for c in chunks]
+        # 청크가 원문과 글자 수준으로 다르면(AI가 단어를 넣거나 뺌) 원문을 신뢰한다.
+        # 규칙 기반으로 다시 끊어 영어가 항상 원문과 100% 일치하게 함(뜻은 문장 전체 사용).
+        pieces = rough_sense_split(en)
+        return [Chunk(en=p, ko="") for p in pieces] or \
+            [Chunk(en=en.strip(), ko="")]
 
     out: List["Chunk"] = []
     pos, n = 0, len(chunks)
@@ -214,6 +217,17 @@ _MATERIAL_HDR_RE = re.compile(
 def _strip_material_header(s: str) -> str:
     """문장에 섞여 들어온 자료 러닝 헤더/푸터 텍스트를 제거."""
     return _re_sub_collapse(_MATERIAL_HDR_RE.sub(" ", s or ""))
+
+
+# 문장 앞에 붙은 자료 라벨: '[Summary]', '[요약]', '[요약문]', '[Paraphrase]' 등
+_LEAD_LABEL_RE = re.compile(
+    r"^\s*\[\s*(?:summary|abstract|paraphrase|요약문?|주제문?)\s*\]\s*", re.I
+)
+
+
+def _strip_lead_label(s: str) -> str:
+    """문장 맨 앞의 자료 라벨('[Summary]' 등)을 제거."""
+    return _LEAD_LABEL_RE.sub("", s or "").strip()
 
 
 def _re_sub_collapse(s: str) -> str:
@@ -343,7 +357,7 @@ def _parse_sentences(body: str) -> List[Sentence]:
     for num in order:
         combined = "\n".join(merged[num])
         en, ko = _split_en_ko(combined)
-        en = _strip_material_header(_strip_footnote(en))
+        en = _strip_lead_label(_strip_material_header(_strip_footnote(en)))
         ko = _strip_material_header(ko)
         if not en and not ko:
             continue

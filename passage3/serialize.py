@@ -12,10 +12,12 @@ from typing import List
 
 try:
     from .parser import (Chunk, Passage, Sentence, Vocab, _JUNK_RE,
-                         realign_chunks, rough_sense_split, _letters)
+                         realign_chunks, rough_sense_split, _letters,
+                         _strip_lead_label)
 except ImportError:
     from parser import (Chunk, Passage, Sentence, Vocab, _JUNK_RE,
-                        realign_chunks, rough_sense_split, _letters)
+                        realign_chunks, rough_sense_split, _letters,
+                        _strip_lead_label)
 
 ORTICA_FORMAT = "ORTICA-3form"
 ORTICA_VERSION = 1
@@ -81,7 +83,8 @@ def passages_from_dict(data: dict) -> List[Passage]:
                 for c in (s.get("chunks") or [])
                 if (c.get("en") or "").strip()
             ]
-            en = (s.get("en") or "").strip()
+            # 문장 앞 자료 라벨('[Summary]' 등)은 제거(재입력 자료 정리)
+            en = _strip_lead_label((s.get("en") or "").strip())
             # 끊기 실패로 문장 전체가 한 조각뿐인 긴 문장은 규칙 기반으로 다시 끊는다
             # (뜻은 비워 렌더러가 문장 전체 해석을 보여 주게 함).
             if (len(chunks) == 1 and len(en.split()) >= 12

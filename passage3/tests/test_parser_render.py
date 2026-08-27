@@ -174,10 +174,12 @@ def test_realign_chunks():
     assert out[2].en.startswith("to a place")
     # 뜻(ko)은 보존
     assert out[0].ko == "생물은 이동해야 한다"
-    # 단어가 실제로 다르면 영어는 원본 유지(한글 뜻 정리는 별도 검증)
-    bad = [Chunk(en="totally different words here", ko="x")]
+    # 청크가 원문과 글자 수준으로 다르면(단어 추가/누락) 원문을 규칙 기반으로
+    # 다시 끊어 영어가 항상 원문과 일치하게 한다.
+    bad = [Chunk(en="A creature must get that from the place", ko="x")]
     out2 = realign_chunks(en, bad)
-    assert [c.en for c in out2] == ["totally different words here"]
+    from parser import _letters as _L
+    assert _L(" ".join(c.en for c in out2)) == _L(en)  # 원문과 100% 일치
 
 
 def test_tidy_chunk_ko():
