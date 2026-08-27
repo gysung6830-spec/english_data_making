@@ -2637,6 +2637,44 @@ def test_ox_axes() -> None:
             assert sorted(ax) == sorted(OX_AXES), (p.title, t, ax)
             assert check_ox_axis_coverage(ax) == []
 
+    #  ③-b 축 이름의 표기 흔들림은 표의 표기로 되돌린다(다시 만들지 않는다)
+    from exam.shape import normalize_ox_axis
+    assert normalize_ox_axis("조건삭제") == "조건 삭제"
+    assert normalize_ox_axis(" 논지·화자  뒤집기 ") == "논지·화자 뒤집기"
+    assert normalize_ox_axis("주체ㆍ대상 바꿔치기") == "주체·대상 바꿔치기"
+    assert normalize_ox_axis("일치") == "일치"
+    #      표에 없는 이름은 빈 문자열 — 틀린 이름을 인쇄하느니 알약을 안 단다
+    assert normalize_ox_axis("인과관계 날조") == ""
+    assert normalize_ox_axis("") == ""
+    #      되돌린 뒤에는 겹침 검사가 제대로 센다(되돌리기 전에는 '안 썼다'고 나온다)
+    shaken = ["조건삭제", "인과 날조", "인과역전", "시점뒤집기",
+              "부정 뒤집기", "논지·화자뒤집기", "미언급인데그럴듯", "주체·대상 바꿔치기"]
+    assert check_ox_axis_coverage(shaken) != []                     # 되돌리기 전 — 오탐
+    assert check_ox_axis_coverage([normalize_ox_axis(a) for a in shaken]) == []
+
+    #  ③-c 영어판 O 가 지문을 통째로 베끼면 되돌린다(X 는 일부러 노출하므로 보지 않는다)
+    from exam.shape import OX_MAX_COPIED_RUN, check_ox_copied
+    sents = ["A single gram of DNA holds as much data as millions of hard drives.",
+             "Researchers are learning to encode digital files into living cells."]
+    copied = "A single gram of DNA holds as much data as millions of hard drives"
+    para = "One gram of it can keep what many machines would need to store."
+    assert check_ox_copied([copied], [True], sents) != []            # O 가 베꼈다 → 걸린다
+    assert check_ox_copied([para], [True], sents) == []              # 바꿔 썼다 → 통과
+    assert check_ox_copied([copied], [False], sents) == []           # X 는 보지 않는다
+    #      데모의 잘 만든 O 진술은 연속 겹침이 2~3이라 문턱(6)에 한참 못 미친다
+    assert OX_MAX_COPIED_RUN == 6
+    for p in demo_passages_merged():
+        if "content_2" not in p.q:
+            continue
+        body = _re.sub(r"<[^>]+>", " ", _re.search(
+            r'<div class="passage">(.*?)</div>', p.q["content_2"], _re.S).group(1))
+        texts = [_re.sub(r"^[①-⑩]\s*|\(&nbsp;.*", "",
+                         _re.sub(r"<[^>]+>", "", li)).strip()
+                 for li in _re.findall(r"<li>(.*?)</li>", p.q["content_2"], _re.S)]
+        k = _re.search(r'answer-key">(.*?)</span>', p.a["content_2"]).group(1)
+        truths = [m == "O" for m in _re.findall(r"[①-⑩]\s*([OX])", k)]
+        assert check_ox_copied(texts, truths, [body]) == [], (p.title,)
+
     #  ④ 축이 겹치면 알려 준다 — 다만 다시 만들지는 않는다(가장 비싼 호출이라서)
     dup = list(OX_AXES[:-1]) + [OX_AXES[0]]
     msg = check_ox_axis_coverage(dup)

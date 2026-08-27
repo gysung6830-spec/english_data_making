@@ -797,6 +797,70 @@ OX_AXES: tuple[str, ...] = (
 )
 OX_TRUE_AXIS = "일치"        # O 진술의 axis 자리
 
+# 표기 흔들림을 되돌리기 위한 색인 — 공백·가운뎃점만 다른 이름은 같은 축으로 본다.
+_OX_AXIS_BY_NORM = {re.sub(r"[\s·ㆍ・,.]+", "", a): a
+                    for a in OX_AXES + (OX_TRUE_AXIS,)}
+
+
+def normalize_ox_axis(axis: str) -> str:
+    """축 이름을 표의 표기로 되돌린다. 표에 없는 이름이면 빈 문자열.
+
+    모델이 '조건삭제'·'조건 삭제'처럼 띄어쓰기만 달리 적는 일이 있다. 그대로 두면
+      · 해설의 축 알약에 표기가 뒤섞여 인쇄되고,
+      · check_ox_axis_coverage 가 그것을 '다른 축'으로 세어 여덟을 다 썼는데도
+        '쓰이지 않은 축이 있다'고 말한다(실제로 그렇게 나온다).
+    표에 없는 이름은 빈 문자열로 돌려 알약을 아예 달지 않는다. 틀린 이름을 인쇄하느니
+    안 다는 편이 낫고, 문항 자체는 멀쩡하므로 다시 만들지 않는다 — 산출물이 곧바로
+    판매되는 터라, 이름표 하나 때문에 문항을 잃는 것이 더 나쁘다.
+    """
+    a = (axis or "").strip()
+    if not a:
+        return ""
+    return _OX_AXIS_BY_NORM.get(re.sub(r"[\s·ㆍ・,.]+", "", a), "")
+
+
+# 영어판 O 진술이 지문에서 이만큼 연달아 베끼면 '바꿔 쓴 것'이 아니다.
+# 데모의 잘 만든 O 진술은 최장 연속이 1~3이고, X 는 일부러 원문 낱말을 노출하므로 9까지
+# 간다. 그래서 O 에만, 6을 문턱으로 건다(오탐 여지가 넉넉하다).
+OX_MAX_COPIED_RUN = 6
+
+
+def _longest_verbatim_run(text: str, passage_words: str) -> int:
+    """진술이 지문에서 연달아 베낀 낱말 수(최댓값)."""
+    w = re.findall(r"[A-Za-z']+", (text or "").lower())
+    best = 0
+    for i in range(len(w)):
+        for j in range(i + best + 1, len(w) + 1):
+            if f" {' '.join(w[i:j])} " in passage_words:
+                best = j - i
+            else:
+                break
+    return best
+
+
+def check_ox_copied(texts, truths, sentences,
+                    max_run: int = OX_MAX_COPIED_RUN) -> list[str]:
+    """영어판 O 진술이 지문을 그대로 베꼈는지 본다.
+
+    O 는 '눈에 덜 띄는 세부'를 유의어로 바꿔 써야 한다. 원문 낱말이 그대로 보이면
+    학생이 지문을 읽지 않고 O 로 찍는다 — 이 유형이 재려는 것이 통째로 무너진다.
+    X 는 반대로 원문 낱말을 일부러 노출해 그럴듯하게 만드는 설계이므로 보지 않는다.
+    한글판은 언어가 달라 벨 수 없다(영어판만 잴 수 있다).
+    """
+    body = " " + " ".join(re.findall(r"[A-Za-z']+",
+                                     " ".join(sentences).lower())) + " "
+    bad = []
+    for i, (t, is_true) in enumerate(zip(texts, truths), 1):
+        if not is_true:
+            continue
+        run = _longest_verbatim_run(t, body)
+        if run >= max_run:
+            bad.append(f"{i}번 O 진술이 지문의 낱말 {run}개를 연달아 그대로 씁니다")
+    if not bad:
+        return []
+    return [", ".join(bad) + " — O 진술은 원문 낱말을 숨기고 유의어로 바꿔 써야 합니다. "
+            "원문이 그대로 보이면 학생이 지문을 읽지 않고 O 로 찍습니다."]
+
 
 def check_ox_axis_coverage(axes, allow_repeat: int = 0) -> list[str]:
     """X 여덟 개가 여덟 축을 '하나씩' 썼는지 본다.

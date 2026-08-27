@@ -85,6 +85,9 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
 - 지문에서 '눈에 덜 띄는 세부 사실'을 고르세요(맨 앞 문장의 주제문은 너무 쉽습니다).
 - 원문 단어를 그대로 쓰지 말고 **유의어로 바꿔 쓰세요**. 원문 낱말이 그대로 보이면
   읽지 않고도 O 로 찍힙니다.
+- **영어판 O 는 지문의 낱말을 다섯 개 넘게 연달아 쓰면 안 됩니다.** 문장 구조부터
+  바꿔 다시 쓰세요(능동↔수동 · 구를 절로 · 어순 조정). 잘 만든 O 는 지문과 연달아
+  겹치는 낱말이 두세 개를 넘지 않습니다. X 는 반대로 원문 낱말을 그대로 노출해도 됩니다.
 - 두 O 는 지문의 서로 다른 대목에서 가져오세요.
 
 [X 진술을 쓰는 법 — 축이 겹치지 않게]
@@ -93,6 +96,10 @@ _PROMPT = """아래 '정본 지문'으로 '내용 O/X' 문제를 **두 개** 만
 축을 흩어 놓으면 학생은 그만큼 다른 방식으로 따져 봐야 합니다.
 한글판과 영어판은 각각 따로 축을 고릅니다(두 판 사이에는 겹쳐도 됩니다).
 각 X 진술에는 지문에 실제로 나온 단어를 일부 그대로 노출해 그럴듯하게 만드세요.
+
+**axis 에는 아래 여덟 이름 중 하나를 '한 글자도 바꾸지 말고' 그대로 적으세요.**
+띄어쓰기·가운뎃점까지 같아야 합니다('조건삭제' 아님, '조건 삭제'). 표에 없는 이름을
+적으면 해설의 축 표시가 빠집니다.
 
   axis 에 적을 이름            무엇을 비트는가
   ─────────────────────────  ────────────────────────────────────────────────
@@ -206,6 +213,11 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
         # 쓰지 않기로 한 두 함정은 되돌린다 — 문항의 값을 깎는 결함이고 드물게 나온다.
         bad = shape.check_ox_axes([it.why for it in out.korean + out.english]
                                   + [it.axis for it in out.korean + out.english])
+        # 영어판 O 가 지문을 그대로 베끼면 학생이 읽지 않고 O 로 찍는다 — 이 유형이
+        # 재려는 것이 통째로 무너지므로 되돌린다(한글판은 언어가 달라 잴 수 없다).
+        bad += shape.check_ox_copied([it.text for it in out.english],
+                                     [it.is_true for it in out.english],
+                                     analysis.sentences)
         if bad:
             raise ValueError("내용 O/X 설계 결함 — " + " ".join(bad))
 
@@ -218,6 +230,12 @@ def generate_pair(client: ClaudeClient, analysis: Analysis, body: str,
         max_retries=max_retries,
         extra_validate=_chk,
     )
+    # 축 이름의 표기 흔들림('조건삭제' ↔ '조건 삭제')을 표의 표기로 되돌린다. 표에 없는
+    # 이름은 빈 문자열이 되어 알약을 달지 않는다 — 틀린 이름을 인쇄하느니 안 다는 편이
+    # 낫고, 문항 자체는 멀쩡하므로 다시 만들지 않는다(shape.normalize_ox_axis 참고).
+    for it in out.korean + out.english:
+        it.axis = shape.normalize_ox_axis(it.axis)
+
     seed = answer_spread.seed_of(analysis.title)
     res: dict[str, tuple[str, str, list[str]]] = {}
     for version, (slot, items) in enumerate(((CONTENT, out.korean),
