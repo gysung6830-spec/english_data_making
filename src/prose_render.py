@@ -22,12 +22,13 @@ from .workbook_render import _chromium_executable, _footer_template, DEFAULT_FOO
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "templates"
 
-# 문장당 출제 개수 규칙(어법·어휘 하/상): 최소 2 · 최대 4.
+# 문장당 출제 개수 규칙(어법·어휘 하/상): 최소 2 · 최대 5.
 #   MAX 는 코드로 '확실히' 강제한다(초과분은 버리고 자리표시자를 정답/원문으로 복원).
-#   MIN 은 프롬프트로 유도한다(문항을 새로 만들 수는 없으므로). 위반 시 진단 로그로만 남긴다.
+#   MIN 은 프롬프트로 유도한다(문항을 새로 만들 수는 없으므로). 위반 시 진단 리포트로 알린다.
 _MIN_PER_SENT = 2
-_MAX_PER_SENT = 4
+_MAX_PER_SENT = 5
 _COUNT_LIMITED = ("grammar", "vocab", "vocab_easy")
+_COUNT_LABELS = {"grammar": "어법", "vocab_easy": "어휘(하)", "vocab": "어휘(상)"}
 
 
 # ── 데이터 모델 ──────────────────────────────────────────────────────
@@ -394,6 +395,44 @@ def build_prose_pack(llm: LLMProsePack, header: str, title: str, subtitle: str) 
     worksheets.append(translate)
     return ProsePack(header=header, title=title or "", subtitle=subtitle or "",
                      worksheets=worksheets)
+
+
+def count_shortfalls(pack: ProsePack, min_per: int = _MIN_PER_SENT) -> dict:
+    """문장당 최소 개수(min_per) 미달 진단.
+
+    어법·어휘(하/상)에서 '문항 수 < min_per' 인 문장을 유형별로 모아 돌려준다.
+    자동으로 고치지 않는다(없는 문항은 만들 수 없으므로) — 어느 문장이 부족한지 '알려' 주는 용도.
+    반환: { "grammar": [(문장번호, 문항수), ...], ... }  (미달 없으면 빈 dict)
+    """
+    out: dict = {}
+    for ws in pack.worksheets:
+        if ws.wtype not in _COUNT_LIMITED:
+            continue
+        short = [(s.no, len(s.items)) for s in ws.sentences if len(s.items) < min_per]
+        if short:
+            out[ws.wtype] = short
+    return out
+
+
+def format_count_report(packs, min_per: int = _MIN_PER_SENT, max_per: int = _MAX_PER_SENT,
+                        label: str = "") -> str:
+    """여러 ProsePack 의 '문항 개수 점검' 리포트 문자열(사람이 읽는 요약)."""
+    lines = []
+    for idx, pk in enumerate(packs or [], start=1):
+        sf = count_shortfalls(pk, min_per=min_per)
+        tag = (pk.label or f"지문 {idx}") if hasattr(pk, "label") else f"지문 {idx}"
+        if not sf:
+            lines.append(f"  [{tag}] 문장당 {min_per}~{max_per}개 규칙 만족 ✔")
+            continue
+        for wtype, short in sf.items():
+            name = _COUNT_LABELS.get(wtype, wtype)
+            total = len(next(w for w in pk.worksheets if w.wtype == wtype).sentences)
+            detail = ", ".join(f"S{no}={cnt}개" for no, cnt in short)
+            lines.append(f"  [{tag}] {name}: {total}문장 중 {len(short)}문장 미달({min_per} 미만) — {detail}")
+    head = f"[문항 개수 점검] 문장당 최소 {min_per}·최대 {max_per}개"
+    if label:
+        head += f" · {label}"
+    return head + "\n" + ("\n".join(lines) if lines else "  (해당 유형 없음)")
 
 
 def validate_llm_prose(llm: LLMProsePack, min_sentences: int = 1) -> None:

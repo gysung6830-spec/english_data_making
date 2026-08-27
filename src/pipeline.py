@@ -576,6 +576,19 @@ def run_folder_workbook(cfg: Config, mock: bool = False) -> dict:
                     client, cfg, pdf)
             # 뱃지 = 지문번호('단원-문항' 예: 10-1). 파일명 접두는 붙이지 않는다.
             apply_q_numbers(wbs, file_packs, file_bsets, file_wpacks, tag="")
+            # 문항 개수 점검(문장당 최소 2·최대 5). 미달 문장을 리포트로 남긴다(자동 수정 아님, 알림용).
+            try:
+                report = prose_render.format_count_report(file_packs, label=pdf.name)
+                cfg.logs_dir.mkdir(parents=True, exist_ok=True)
+                with open(cfg.logs_dir / "count_report.txt", "a", encoding="utf-8") as _f:
+                    _f.write(report + "\n\n")
+                short_total = sum(len(v) for pk in file_packs
+                                  for v in prose_render.count_shortfalls(pk).values())
+                if short_total:
+                    logger.warning("문항 개수 미달 문장 %d개 — %s (상세: %s)",
+                                   short_total, pdf.name, cfg.logs_dir / "count_report.txt")
+            except Exception:
+                pass
             if combine:
                 books.extend(wbs)   # 파일 안의 여러 지문을 모두 합본에 포함
                 packs.extend(file_packs)

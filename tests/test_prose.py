@@ -86,28 +86,45 @@ def test_id_mismatch_order():
 
 
 def test_per_sentence_max_cap():
-    # ★ 문장당 최대 4개 강제(어법): 5개가 오면 앞 4개만 남고 5번째는 정답으로 복원(구멍 없음)
+    # ★ 문장당 최대 5개 강제(어법): 6개가 오면 앞 5개만 남고 6번째는 정답으로 복원(구멍 없음)
     llm = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
-        no=1, en="aa bb cc dd ee ff", ko="가",
-        grammar_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f",
+        no=1, en="aa bb cc dd ee ff gg", ko="가",
+        grammar_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f {{P6}} g",
         grammar_items=[pr.LLMProseItem(id=f"P{i}", display=f"[x{i}/y{i}]", answer=f"x{i}")
-                       for i in range(1, 6)])])
+                       for i in range(1, 7)])])
     pr.validate_llm_prose(llm)
     g = next(w for w in pr.build_prose_pack(llm, header="H", title="T", subtitle="S").worksheets
              if w.wtype == "grammar").sentences[0]
-    _check("어법 문장당 최대 4개", len(g.items) == 4)
-    _check("초과분 자리표시자 제거", "{{P5}}" not in g.template)
-    _check("초과분 정답으로 복원(구멍 없음)", "x5" in g.template)
-    # 어휘(상): 5개 → 4개, 초과분은 '원문'(answer 첫 부분)으로 복원
+    _check("어법 문장당 최대 5개", len(g.items) == 5)
+    _check("초과분 자리표시자 제거", "{{P6}}" not in g.template)
+    _check("초과분 정답으로 복원(구멍 없음)", "x6" in g.template)
+    # 어휘(상): 6개 → 5개, 초과분은 '원문'(answer 첫 부분)으로 복원
     v = pr.LLMProsePack(sentences=[pr.LLMProseSentence(
-        no=1, en="aa bb cc dd ee ff", ko="가",
-        vocab_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f",
+        no=1, en="aa bb cc dd ee ff gg", ko="가",
+        vocab_template="a {{P1}} b {{P2}} c {{P3}} d {{P4}} e {{P5}} f {{P6}} g",
         vocab_items=[pr.LLMProseItem(id=f"P{i}", display=f"[a{i}/b{i}/c{i}]", answer=f"w{i} / s{i}")
-                     for i in range(1, 6)])])
+                     for i in range(1, 7)])])
     vg = next(w for w in pr.build_prose_pack(v, header="H", title="T", subtitle="S").worksheets
               if w.wtype == "vocab").sentences[0]
-    _check("어휘 문장당 최대 4개", len(vg.items) == 4)
-    _check("어휘 초과분 원문(첫 부분) 복원", "w5" in vg.template and "{{P5}}" not in vg.template)
+    _check("어휘 문장당 최대 5개", len(vg.items) == 5)
+    _check("어휘 초과분 원문(첫 부분) 복원", "w6" in vg.template and "{{P6}}" not in vg.template)
+
+
+def test_count_shortfall_report():
+    # 최소 개수 미달 진단: 어법 2문장(1개·0개)이 min 2 미달로 잡혀야 함
+    llm = pr.LLMProsePack(sentences=[
+        pr.LLMProseSentence(no=1, en="aa bb cc", ko="가",
+            grammar_template="a {{P1}} b {{P2}} c",
+            grammar_items=[pr.LLMProseItem(id="P1", display="[x/y]", answer="x"),
+                           pr.LLMProseItem(id="P2", display="[m/n]", answer="m")]),
+        pr.LLMProseSentence(no=2, en="dd ee", ko="나",
+            grammar_template="d {{P1}} e",
+            grammar_items=[pr.LLMProseItem(id="P1", display="[p/q]", answer="p")])])
+    pack = pr.build_prose_pack(llm, header="H", title="T", subtitle="S")
+    sf = pr.count_shortfalls(pack)
+    _check("어법 미달 1문장(S2=1개)", sf.get("grammar") == [(2, 1)])
+    rep = pr.format_count_report([pack], label="t.pdf")
+    _check("리포트에 미달 표기", "어법" in rep and "S2=1개" in rep)
 
 
 def test_ref_safeguard():
@@ -356,6 +373,7 @@ if __name__ == "__main__":
     test_translate_no_items()
     test_id_mismatch_order()
     test_per_sentence_max_cap()
+    test_count_shortfall_report()
     test_ref_safeguard()
     test_form_dedup_and_empty_sentence()
     test_duplicate_sentence_dropped()
