@@ -638,6 +638,7 @@ _FAKE = {
         tokens=["the", "third", "sentence", "give", "a", "concrete", "example"],
         cues=["give"],
         answer="The third sentence gives a concrete example.",  # 지문 문장 그대로
+        korean="세 번째 문장은 구체적인 예를 제시한다.",       # 이 줄이 정답 어순을 정한다
         reason="원래 배열."),
     "EOut": lambda: EOut(
         before="The passage presents its ", mid=" through a ", after=" for readers.",
@@ -1850,7 +1851,10 @@ def test_merged_set(tmp_out: Path = ROOT / "output" / "test") -> None:
     assert seen.get("TitleOut") == 2 and seen.get("LinkerOut") == 2, seen
     #    내용 O/X 는 한 호출로 한글판·영어판 두 문항을 만든다(호출은 지문당 1번)
     assert seen.get("ContentOXOut") == 2, seen
-    assert seen.get("VerifyOut") == 22, seen                    # 자기검증 지문당 11회
+    #    자기검증 지문당 12회 — 고위험 11유형 + 어휘 유의어형 1개.
+    #    어휘 3종 중 유의어형만 받는다(나머지 둘은 정답 아닌 밑줄이 원문 그대로라
+    #    코드가 확정한다 — generators/vocab._restore_original_marks).
+    assert seen.get("VerifyOut") == 24, seen
 
     # ③ 지문마다 17문항이 순서대로, 라벨도 보존된다
     assert [p.source_label for p in ps] == ["10-1", "10-2"]
@@ -2779,6 +2783,83 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_direct_sale_guards() -> None:
+    """산출물이 곧바로 판매되는 전제 — 검토메모에 기대지 않고 코드가 끝을 낸다.
+
+    ① 9·11번(원문단어형·부정어형): 정답 아닌 밑줄을 원문 낱말로 '되돌린다'(거부가 아니라).
+       거부하면 재시도가 소진됐을 때 문항이 통째로 빠지고, 빠진 문항은 그대로 팔린다.
+    ② 17번(어순 배열): 우리말 뜻이 없으면 정답 어순이 정해지지 않는다 → 스키마 필수.
+    ③ 10번(유의어형)만 자기검증 — 지문당 검증 호출이 3회가 아니라 1회만 는다.
+    """
+    import collections
+    import re as _re
+
+    from exam import build2, format2
+    from exam.gen2 import DOut
+    from exam.generators.vocab import (NEGATION, ORIGINAL, SYNONYM,
+                                       _restore_original_marks)
+    from exam.merged import MERGED_ORDER, build_passage_merged
+    from exam.schemas import VocabOut, WordMark
+    from exam.verify import HIGH_RISK
+
+    #  ① 정답 아닌 밑줄만 되돌리고, 정답과 유의어형은 손대지 않는다
+    def _mk():
+        return VocabOut(
+            marks=[WordMark(sent_no=1, word="rapid", shown="rapid"),
+                   WordMark(sent_no=2, word="ignore", shown="overlook"),   # 몰래 바뀜
+                   WordMark(sent_no=3, word="clear", shown="obvious"),     # 몰래 바뀜
+                   WordMark(sent_no=4, word="grow", shown="shrink"),       # 정답(반의어)
+                   WordMark(sent_no=5, word="often", shown="often")],
+            answer_no=4, reason="이유", override_no=0, override_text="")
+
+    for method in (ORIGINAL, NEGATION):
+        o = _mk()
+        assert _restore_original_marks(o, method) == [2, 3], method
+        assert [m.shown for m in o.marks] == [
+            "rapid", "ignore", "clear", "shrink", "often"], method   # 정답은 그대로
+    o = _mk()
+    assert _restore_original_marks(o, SYNONYM) == []          # 유의어형은 손대지 않는다
+    assert o.marks[1].shown == "overlook"
+
+    #  ② 우리말 뜻은 스키마 '필수' — 빠지면 파싱 단계에서 걸린다(재시도 안내에 실린다)
+    assert DOut.model_fields["korean"].is_required()
+    q = format2.D_q(["a", "b"], [], "우리말 뜻입니다.")
+    assert "d-korean" in q and "우리말 뜻입니다." in q
+    #     옛 결과 JSON 에는 우리말이 없다 — 그때는 줄이 통째로 빠져 예전 그대로 나온다
+    assert "d-korean" not in format2.D_q(["a", "b"], [])
+    #     조판기까지 이어진다
+    sents = ["One day our libraries may be stored inside molecules."]
+    qd, _ = build2.make_D(sents, sents[0].split(), [], sents[0],
+                          korean="언젠가 우리의 도서관이 분자 안에 저장될지도 모른다.")
+    assert "언젠가 우리의 도서관이" in qd
+
+    #  ③ 어휘 3종 중 유의어형만 자기검증 — 검증 호출이 1회만 는다.
+    #     키가 'vocab' 이면 _base_key 가 vocab_2·vocab_3 까지 끌어와 3회가 된다.
+    from exam.verify import _base_key
+    assert "vocab_synonym" in HIGH_RISK and "vocab" not in HIGH_RISK
+    assert not any(_base_key(t) == "vocab_synonym" for t in MERGED_ORDER)
+
+    class _Count(_FakeClient):
+        def __init__(self):
+            super().__init__()
+            self.calls = collections.Counter()
+
+        def structured(self, system, prompt, model_cls, **kw):
+            self.calls[model_cls.__name__] += 1
+            return super().structured(system, prompt, model_cls, **kw)
+
+    c = _Count()
+    p = build_passage_merged(c, _DUMMY)
+    assert len(p.q) == len(MERGED_ORDER), f"문항이 빠졌습니다: {len(p.q)}"
+    #     비용 회귀 방지 — 지문 1개당 호출 수를 못 박는다(늘면 이 줄이 먼저 깨진다)
+    assert sum(c.calls.values()) == 29, dict(c.calls)
+    assert c.calls["VerifyOut"] == 12, dict(c.calls)          # 11 + 유의어형 1
+    #     우리말 뜻이 실제 문제편에 실린다
+    assert "d-korean" in p.q["D"]
+    assert _re.search(r"우리말", _re.sub(r"<[^>]+>", " ", p.q["D"]))
+    print("✓ 판매 직행 안전장치(밑줄 자동 복원·어순배열 우리말 뜻·유의어형만 검증) 통과")
+
+
 def test_grammar_on_original_passage() -> None:
     """5번 어법은 정본 그대로, 6번 어법 서술형은 다시 쓴 지문 위에 선다."""
     import re as _re
@@ -3106,6 +3187,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_direct_sale_guards()
     test_grammar_on_original_passage()
     test_type_group_layout()
     test_output_checker()

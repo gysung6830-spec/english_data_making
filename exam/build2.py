@@ -140,10 +140,14 @@ def _shuffle_tokens(tokens: list[str], answer: str) -> list[str]:
     return [toks[i] for i in best]
 
 
-def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
+def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None,
+           korean: str = ""):
     """정답 문장은 반드시 '지문에 실제로 있는 문장'이어야 한다(원래 배열 보장).
     정확히 일치하지 않으면 토큰·답과 가장 잘 맞는 지문 문장으로 스냅(교정)한다.
-    flags(리스트)를 주면 유사도 스냅이 실제로 일어났을 때 '확인 권장' 사유를 담는다."""
+    flags(리스트)를 주면 유사도 스냅이 실제로 일어났을 때 '확인 권장' 사유를 담는다.
+
+    korean: 정답 문장의 우리말 뜻. 학생이 보는 것은 섞인 낱말뿐이라 이것이 어순을
+    정한다 — 없으면 문법에 맞는 다른 어순도 정답이 되어 버린다."""
     from . import review as _rv
 
     for t in tokens:
@@ -167,7 +171,8 @@ def make_D(sentences, tokens, cues, answer_sentence, reason="", flags=None):
     cues = list(cues) + [tk for tk in tokens
                          if F2._bareword(tk) and F2._bareword(tk) not in ans_words]
     # 섞는 일은 코드가 한다(모델이 정답 순서 그대로 돌려주는 일이 있다).
-    return F2.D_q(_shuffle_tokens(tokens, snapped), cues), F2.D_a(snapped, reason)
+    return (F2.D_q(_shuffle_tokens(tokens, snapped), cues, korean),
+            F2.D_a(snapped, reason))
 
 
 # 연결어 (A)(B) -------------------------------------------------------------

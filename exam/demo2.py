@@ -79,6 +79,7 @@ def _passage_dna2() -> Passage:
                 "store", "safely", "inside", "molecules"],
         cues=["store"],
         answer_sentence="One day, our libraries and photographs may be stored safely inside molecules.",
+        korean="언젠가 우리의 도서관과 사진이 분자 안에 안전하게 저장될지도 모른다.",
         reason="동사 store 를 수동(may be stored)으로 바꾸고 지문 어순 그대로 배열한다.",
     ))
 

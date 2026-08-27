@@ -310,6 +310,18 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
   background: #eef6f2;
 }
 .boki-title { font-weight: 700; color: #2f7d61; }   /* 볼드 5 */
+/* 어순 배열의 우리말 뜻 — 이 줄이 정답 어순을 정한다(없으면 복수정답이 된다) */
+.d-korean {
+  margin: 1mm 0 0.6mm 0;
+  line-height: 1.6;
+  break-inside: avoid;
+  break-after: avoid;       /* <보기> 와 떨어지지 않게 */
+}
+.d-korean-label {
+  font-weight: 700;
+  color: #2f7d61;
+  margin-right: 1.2mm;
+}
 .cue { font-weight: 700; }          /* 볼드 5 — 괄호 안 제시어 */
 .blank { letter-spacing: 1px; }
 

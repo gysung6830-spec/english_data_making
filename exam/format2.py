@@ -106,7 +106,7 @@ def F_a(answer_no: int, reason: str, wrong: dict[int, str]) -> str:
 
 
 # D · 어순 배열(서술형) -----------------------------------------------------
-def D_q(tokens: list[str], cues: list[str]) -> str:
+def D_q(tokens: list[str], cues: list[str], korean: str = "") -> str:
     # 구두점에 영향받지 않게 '맨몸 단어'로 비교(예: 'find,' 토큰도 cue 'find' 로 볼드).
     cue_set = {_bareword(c) for c in cues if _bareword(c)}
     toks = []
@@ -115,7 +115,17 @@ def D_q(tokens: list[str], cues: list[str]) -> str:
             toks.append(f'<span class="cue">{F.esc(tk)}</span>')
         else:
             toks.append(F.esc(tk))
-    return (f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
+    # 우리말 뜻이 어순을 정한다. 학생이 보는 것은 섞인 낱말뿐이므로, 이 줄이 없으면
+    # 문법에 맞는 다른 배열도 정답이 된다.
+    # 라벨을 함께 붙이는 까닭: 발문(set2.TYPE_PROMPTS2)은 유형마다 고정이라 옛 결과
+    # JSON 을 다시 조판할 때도 같은 문장이 쓰인다. 그래서 발문을 고치는 대신, 이 줄만
+    # 보고도 무엇을 만들라는 것인지 알 수 있게 한다(우리말 뜻이 없던 옛 문항은 이 줄이
+    # 통째로 빠지므로 예전 그대로 나온다).
+    head = (f'<div class="d-korean"><span class="d-korean-label">우리말</span> '
+            f'{F.esc(korean.strip())}</div>'
+            if (korean or "").strip() else "")
+    return (head
+            + f'<div class="boki"><span class="boki-title">&lt;보기&gt;</span> {" / ".join(toks)}</div>'
             + F.write_lines(1))   # 답 쓰는 칸
 
 

@@ -41,6 +41,13 @@ class DOut(BaseModel):
     tokens: list[str]
     cues: list[str]
     answer: str
+    # 정답 문장의 우리말 뜻. 이것이 없으면 이 유형은 정답이 하나로 정해지지 않는다 —
+    # 학생이 보는 것은 섞인 낱말뿐이라, 문법에 맞는 다른 어순을 쓴 학생에게 틀렸다고
+    # 할 근거가 문항 안에 없다(정답을 정하는 것은 '지문에 그렇게 있었다'인데 그 지문을
+    # 학생은 보지 못한다). 수능·내신이 '우리말과 같은 뜻이 되도록'을 붙이는 이유다.
+    # 기본값을 두지 않는다 — 스키마의 '필수' 자리에 있어야 구조화 출력이 이 칸을 반드시
+    # 채운다. 나중에 검사해서 되돌리는 것보다 처음부터 오게 하는 편이 싸다(재시도가 없다).
+    korean: str
     reason: str = ""
 
 
@@ -145,20 +152,29 @@ def _gen_D(client, analysis, body, max_retries=1, answer_pos=None):
     p = ("아래 정본으로 '어순 배열(D)'을 만드세요. 아래 [문장] 목록에서 문장 하나를 골라, answer 는 "
          "그 문장을 '글자 그대로'(단어·축약형·구두점 포함, 요약·수정·의역 금지) 복사한 것이어야 "
          "합니다(원래 배열이 정답). 그 문장을 낱개 단어로 뒤섞어 tokens 로 줍니다(구 묶음 금지). "
-         "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n\n{ctx}")
+         "어형변화가 필요한 동사는 원형으로 두고 cues 에 넣습니다. reason 한국어.\n"
+         "korean: 그 문장의 우리말 뜻을 한 문장으로 적으세요. **이것이 정답을 정합니다** — "
+         "학생은 지문을 보지 못하고 섞인 낱말만 보므로, 우리말 뜻이 없으면 문법에 맞는 다른 "
+         "어순도 정답이 되어 버립니다. 그러니 뜻은 정확하고, 그 뜻에 맞는 영어 어순이 "
+         "'하나뿐'이어야 합니다. 어순이 둘 이상 가능한 문장(부사구 위치가 자유로운 문장 등)은 "
+         "아예 고르지 마세요.\n\n{ctx}")
     def _chk(o: DOut) -> None:
         # <보기> 에 없던 구두점이 붙거나 낱말이 빠지면 학생이 정답을 만들 수 없다
         # (실제 출력물: 원문에 없는 'brain,' 토큰).
         bad = shape.check_tokens_rebuild(o.tokens, o.answer, o.cues)
         if bad:
             raise ValueError("어순 배열 <보기> 결함 — " + " ".join(bad))
+        # 우리말 뜻이 없으면 정답이 하나로 정해지지 않는다 — 문항이 성립하지 않는다.
+        if len((o.korean or "").strip()) < 5:
+            raise ValueError("정답 문장의 우리말 뜻(korean)이 비어 있습니다 — 우리말 뜻이 "
+                             "없으면 어느 어순이 정답인지 학생이 알 길이 없습니다.")
 
     out: DOut = client.structured(SYSTEM, p.format(ctx=context(analysis)), DOut,
                                   max_tokens=1500, max_retries=max_retries,
                                   extra_validate=_chk, cache_prefix=context(analysis))
     flags: list[str] = []
     q, a = build2.make_D(analysis.sentences, out.tokens, out.cues, out.answer,
-                         out.reason, flags=flags)
+                         out.reason, flags=flags, korean=out.korean)
     return q, a, flags
 
 

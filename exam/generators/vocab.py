@@ -119,6 +119,37 @@ def _sent_clause(taken: set[int]) -> str:
             f"썼습니다. 가급적 다른 문장에서 정답을 고르세요.\n이미 쓴 문장: {nos}\n")
 
 
+def _restore_original_marks(out: VocabOut, method: str) -> list[int]:
+    """원문단어형·부정어형에서 '정답이 아닌 밑줄'을 원문 낱말로 되돌린다.
+
+    두 방식은 정답 하나만 손대고 나머지 밑줄은 원문 그대로 두는 것이 설계다. 원문
+    그대로면 필자가 쓴 말이므로 어색할 수가 없고, 그래서 정답이 둘이 될 수 없다.
+    바로 여기에 이 두 유형의 안전성이 통째로 걸려 있다.
+
+    그런데 지금까지는 프롬프트로 시키기만 하고 코드가 확인하지 않았다. 모델이 한
+    낱말이라도 유의어로 바꿔 놓으면 그 자리가 어색해질 수 있고, 그러면 정답이 둘이 된다.
+
+    되돌리는 것이 거부보다 낫다 — 산출물이 곧바로 판매되기 때문이다.
+      · 거부하면 재시도를 한 번 쓰고, 재시도가 소진되면 그 문항이 통째로 빠진다.
+        빠진 문항은 검토 메모가 아니라 '없는 문항'으로 팔려 나간다.
+      · 되돌리는 것은 추측이 아니다. 바른 낱말(word)이 같은 항목에 들어 있으므로
+        프롬프트가 원래 시킨 상태를 그대로 복원할 뿐이다. 호출도 재시도도 쓰지 않는다.
+
+    유의어형(SYNONYM)은 나머지 넷을 '일부러' 유의어로 바꾸는 방식이라 손대지 않는다.
+    그쪽 위험은 코드로 없앨 수 없어 자기검증에 맡긴다.
+    """
+    if method not in (ORIGINAL, NEGATION):
+        return []
+    fixed: list[int] = []
+    for i, m in enumerate(out.marks, 1):
+        if i == out.answer_no:
+            continue
+        if m.shown.strip().lower() != m.word.strip().lower():
+            m.shown = m.word
+            fixed.append(i)
+    return fixed
+
+
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, method: str = SYNONYM,
              avoid: set[str] | None = None,
@@ -158,6 +189,7 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         max_retries=max_retries,
         extra_validate=_extra,
     )
+    fixed = _restore_original_marks(out, method)
     if report is not None:
         report["answer_sent"] = (out.override_no
                                  or (out.marks[out.answer_no - 1].sent_no
@@ -169,6 +201,8 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     flags: list[str] = []
     q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
                         overrides=overrides, flags=flags)
+    if fixed:
+        flags.append(f"정답 아닌 밑줄 {', '.join(map(str, fixed))}번을 원문 낱말로 되돌림")
     return q, a, flags, _mark_words(out.marks)
 
 
@@ -188,7 +222,11 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
     avoid:   이미 다른 밑줄 문항이 쓴 낱말(검수 승격으로 일부만 다시 만들 때 필요).
     used_out: {슬롯키: 그 문항이 쓴 낱말들} 을 채워 준다(다음 재생성의 avoid 용).
     한 슬롯이 실패해도 나머지는 살린다(그 슬롯만 빠지고 검토메모에 남는다).
+
+    어휘 3종 중 '유의어형' 하나만 자기검증을 받는다(아래 _verify_synonym 참고).
     """
+    from .. import verify as _verify
+
     used: set[str] = set(avoid or ())
     used_sents: set[int] = set()
     out: dict[str, tuple[str, str, list[str]]] = {}
@@ -221,5 +259,32 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
             used_sents.add(report["answer_sent"])
         if used_out is not None:
             used_out[slot] = set(words)
+        if method == SYNONYM:
+            flags = list(flags) + _verify_synonym(_verify, client, q, a,
+                                                  max_retries, logger, slot)
         out[slot] = (q, a, flags)
     return out
+
+
+def _verify_synonym(_verify, client, q: str, a: str, max_retries: int,
+                    logger, slot: str) -> list[str]:
+    """유의어형 어휘만 자기검증을 건다. 어휘 3종 중 이것 하나뿐이다.
+
+    왜 이것만인가 — 위험은 '모델이 갈아 끼운 낱말 중 정답이 아닌 것'에서만 생긴다.
+    원문 그대로 둔 낱말은 필자가 쓴 말이므로 어색할 수가 없다.
+      · 원문단어형·부정어형: 정답 아닌 밑줄 넷이 원문 그대로다(코드가 그렇게 복원한다
+        — _restore_original_marks). 위험한 낱말이 0개라 물어볼 것이 없다.
+      · 유의어형: 정답 아닌 넷을 '일부러' 유의어로 바꾼다. 그 넷이 바뀐 뒤에도 문맥에
+        맞는지는 판단이고, 판단은 코드가 못 한다. 위험한 낱말이 4개다.
+    그래서 지문당 검증 호출이 3회가 아니라 1회만 늘어난다.
+
+    걸렸을 때 여기서 다시 만들지 않는 까닭: 산출물이 곧바로 판매되므로, 같은 모델로
+    한 번 더 굴리는 것보다 상위 모델 승격에 넘기는 편이 낫다. '자동검증:' 로 시작하는
+    사유를 달면 tiering.needs_escalation 이 이 문항을 승격 대상으로 잡는다.
+    """
+    ok, reason = _verify.verify(client, "vocab_synonym", q, a, max_retries=max_retries)
+    if ok:
+        return []
+    if logger:
+        logger.info("[%s] 어휘 자기검증 실패 → 승격 대상: %s", slot, reason)
+    return [f"자동검증: {reason or '오답 넷의 문맥 적합성 재확인'}"]
