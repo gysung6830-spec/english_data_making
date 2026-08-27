@@ -420,6 +420,27 @@
   .ansitem .an{ color:var(--navy); font-weight:800; }
   .ansitem .aw{ font-weight:700; }
   .ansitem .am{ color:#4a5064; }
+{% if bw %}
+  /* ── 인쇄(흑백 친화) 모드: 음영 최소·테두리 중심·형광→밑줄(글자 크기·밀도는 그대로) ── */
+  .page{ background:#ffffff !important; border-radius:12px; box-shadow:none; }
+  .summary{ background:#ffffff !important; border:1px solid #c7ced6 !important; }
+  .pbox, .pbox.merged{ background:#ffffff !important; border:1px solid #c7ced6 !important; }
+  .cap.gcap{ background:#ffffff !important; color:#256b5f !important; border:1px solid #b9d3cc !important; }
+  .cap.fcap{ background:#ffffff !important; color:#8a5f22 !important; border:1px solid #ddc7a6 !important; }
+  .kobox{ background:#ffffff !important; border:1px solid #c7ced6 !important; }
+  .pcol{ background:#ffffff !important; border:1px solid #d7dde3 !important; }
+  .vtab th{ background:#eef1f4 !important; color:#333 !important; }   /* 표 헤더만 아주 옅게 */
+  /* 형광 → 밑줄(토너 절약, 흑백 가독) */
+  .w.hl-y{ background:transparent !important; border-bottom:2px solid #c59b00 !important; padding-bottom:1px; }
+  .w.hl-p{ background:transparent !important; border-bottom:1.6px solid #8f83c9 !important; padding-bottom:1px; }
+  /* 요약 라벨은 테두리형으로 */
+  .slbl{ background:#ffffff !important; color:#3a4653 !important; border:1px solid #9aa4b0 !important; }
+  .slbl.easy{ color:#7a5a1e !important; border-color:#cbb488 !important; }
+  /* 정리(뒷면) 카드/흐름 음영 완화 */
+  .icard{ background:#ffffff !important; }
+  .flow .step{ background:#ffffff !important; }
+  .ez{ background:#ffffff !important; }
+{% endif %}
 </style>
 </head>
 <body>

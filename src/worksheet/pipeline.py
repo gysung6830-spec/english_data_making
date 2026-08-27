@@ -435,7 +435,8 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                      only_answer: bool = False, only_test: bool = False,
                      include_back: bool = True, only_guide: bool = False,
                      only_front: bool = False, only_source: bool = False,
-                     only_summary: bool = False, toc: list | None = None) -> Path:
+                     only_summary: bool = False, toc: list | None = None,
+                     bw: bool = False) -> Path:
     return renderer.render_pdf(analyses, out_path, layout=layout, brand=brand,
                                footer_note=footer_note, engine=engine,
                                footer_meta=footer_meta, density=density,
@@ -445,13 +446,13 @@ def render_worksheet(analyses, out_path: str | Path, layout: str = "A",
                                only_test=only_test, include_back=include_back,
                                only_guide=only_guide, only_front=only_front,
                                only_source=only_source, only_summary=only_summary,
-                               toc=toc)
+                               toc=toc, bw=bw)
 
 
 def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
                           footer_note: str = "", density: str = "auto",
                           make_student: bool = True, slevel: str = "blank",
-                          boxmode: str = "") -> Path:
+                          boxmode: str = "", bw: bool = False) -> Path:
     """섹션을 재배치해 '한 PDF'로 합본하고, 활용 가이드에 페이지 목차를 싣는다.
 
     페이지 순서:
@@ -498,7 +499,7 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
         sections: list[tuple[str, Path, int]] = []
         for label, path, kw in specs:
             render_worksheet(analyses, path, layout=layout, footer_note=footer_note,
-                             include_guide=False, boxmode=boxmode, **kw)
+                             include_guide=False, boxmode=boxmode, bw=bw, **kw)
             n = _pages(path)
             if n > 0:
                 sections.append((label, path, n))
@@ -514,12 +515,12 @@ def render_worksheet_pair(analyses, out_path: str | Path, layout: str = "A",
         gp = dd / "guide.pdf"
         # 가이드는 보통 1페이지 — 우선 1페이지 가정으로 목차를 넣어 렌더한 뒤 실제 길이 확인.
         render_worksheet(analyses, gp, layout=layout, footer_note=footer_note,
-                         include_guide=True, only_guide=True, toc=_build_toc(1))
+                         include_guide=True, only_guide=True, toc=_build_toc(1), bw=bw)
         real_g = _pages(gp)
         if real_g != 1:                    # 가이드가 2페이지 이상이면 목차 페이지 재계산
             render_worksheet(analyses, gp, layout=layout, footer_note=footer_note,
                              include_guide=True, only_guide=True,
-                             toc=_build_toc(real_g))
+                             toc=_build_toc(real_g), bw=bw)
 
         w = PdfWriter()
         w.append(str(gp))

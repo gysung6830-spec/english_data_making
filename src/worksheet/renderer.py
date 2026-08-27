@@ -240,8 +240,10 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                   only_answer: bool = False, only_test: bool = False,
                   only_guide: bool = False, only_front: bool = False,
                   only_source: bool = False, only_summary: bool = False,
-                  toc: list | None = None) -> str:
+                  toc: list | None = None, bw: bool = False) -> str:
     """레이아웃 A(분석 학습지형) HTML.
+
+    bw : True 면 인쇄(흑백 친화) 모드 — 배경·박스 음영 최소, 형광→밑줄.
 
     footer_note   : 하단 우측 저작권 문구.
     footer_meta   : 하단 좌측 페이지 라벨(예: '2025년 06월 고2 모의고사 분석서').
@@ -266,7 +268,7 @@ def render_a_html(analyses, footer_note: str = "", footer_meta: str = "",
                        only_answer=only_answer, only_test=only_test,
                        only_guide=only_guide, only_front=only_front,
                        only_source=only_source, only_summary=only_summary,
-                       toc=toc or [])
+                       toc=toc or [], bw=bw)
     return _inject_fonts(html)
 
 
@@ -288,7 +290,8 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
                 only_answer: bool = False, only_test: bool = False,
                 include_back: bool = True, only_guide: bool = False,
                 only_front: bool = False, only_source: bool = False,
-                only_summary: bool = False, toc: list | None = None) -> str:
+                only_summary: bool = False, toc: list | None = None,
+                bw: bool = False) -> str:
     if layout.upper() == "B":
         return render_b_html(analyses, footer_note=footer_note, brand=brand)
     return render_a_html(analyses, footer_note=footer_note, footer_meta=footer_meta,
@@ -298,7 +301,7 @@ def render_html(analyses, layout: str = "A", footer_note: str = "",
                          only_test=only_test, include_back=include_back,
                          only_guide=only_guide, only_front=only_front,
                          only_source=only_source, only_summary=only_summary,
-                         toc=toc)
+                         toc=toc, bw=bw)
 
 
 def _measure_pages_chromium(htmls: list[str]) -> list[int] | None:
@@ -461,7 +464,8 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                only_answer: bool = False, only_test: bool = False,
                include_back: bool = True, only_guide: bool = False,
                only_front: bool = False, only_source: bool = False,
-               only_summary: bool = False, toc: list | None = None) -> Path:
+               only_summary: bool = False, toc: list | None = None,
+               bw: bool = False) -> Path:
     """Analysis → PDF.
 
     engine  : 'auto' | 'playwright' | 'weasyprint'.
@@ -496,7 +500,7 @@ def render_pdf(analyses, out_path: str | Path, layout: str = "A",
                        only_answer=only_answer, only_test=only_test,
                        include_back=include_back, only_guide=only_guide,
                        only_front=only_front, only_source=only_source,
-                       only_summary=only_summary, toc=toc)
+                       only_summary=only_summary, toc=toc, bw=bw)
 
     if engine in ("auto", "playwright"):
         if _pdf_playwright(html, out_path):
