@@ -784,6 +784,43 @@ def check_linker_pairs(pairs, answer_no: int) -> list[str]:
     return bad
 
 
+# 내용 O/X 의 오답 여덟 축 — 이름을 한곳에 둔다(프롬프트·검사·조판이 같은 말을 쓴다).
+OX_AXES: tuple[str, ...] = (
+    "주체·대상 바꿔치기",
+    "인과 날조",
+    "인과 역전",
+    "조건 삭제",
+    "시점 뒤집기",
+    "부정 뒤집기",
+    "논지·화자 뒤집기",
+    "미언급인데 그럴듯",
+)
+OX_TRUE_AXIS = "일치"        # O 진술의 axis 자리
+
+
+def check_ox_axis_coverage(axes) -> list[str]:
+    """X 여덟 개가 여덟 축을 '하나씩' 썼는지 본다.
+
+    이 검사는 걸려도 다시 만들지 않는다 — 검토 메모로만 남긴다. 내용 O/X 는 한 번에
+    진술 스무 개를 만드는 가장 비싼 호출이라, 축이 하나 겹쳤다고 통째로 다시 부르면
+    문항 하나 값이 두 배가 된다. 그만한 결함이 아니다(여덟 축 중 일곱만 써도 문항은
+    성립한다). 대신 프롬프트에서 '하나씩'을 못 박아 처음부터 맞게 나오게 한다.
+    """
+    used = [a for a in (axes or []) if (a or "").strip()
+            and (a or "").strip() != OX_TRUE_AXIS]
+    if not used:
+        return []
+    dup = sorted({a for a in used if used.count(a) > 1})
+    miss = [a for a in OX_AXES if a not in used]
+    bad = []
+    if dup:
+        bad.append(f"오답 축이 겹칩니다: {', '.join(dup)}. 여덟 축을 하나씩 쓰면 "
+                   "학생이 같은 눈으로 여럿을 한꺼번에 걸러 내지 못합니다.")
+    if miss and len(used) >= len(OX_AXES):
+        bad.append(f"쓰이지 않은 오답 축이 있습니다: {', '.join(miss)}.")
+    return bad
+
+
 # 내용 O/X 에서 쓰지 않기로 한 두 함정 — 해설에 그 이름이 적혀 있으면 걸러 낸다.
 # 둘 다 '읽고 이해했는가'가 아니라 눈썰미를 재는 방식이라 실력을 가르지 못한다.
 _BANNED_OX_AXES = (

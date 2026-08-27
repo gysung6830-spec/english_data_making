@@ -259,6 +259,18 @@ body {
   color: #2f7d61;
 }
 
+/* 오답 축 표지 — 해설에서만 쓴다(교사가 오답 설계를 훑을 때의 표). */
+.ox-axis {
+  font-size: 8.2px;
+  font-weight: 700;
+  color: #2f7d61;
+  background: #eef6f2;
+  border: 0.5px solid #bcd8cc;
+  border-radius: 999px;
+  padding: 0.1mm 1.4mm;
+  white-space: nowrap;
+}
+
 /* ---------- 어법 서술형 답란 ---------- */
 /* '( ) → ______' 네 줄. 학생이 번호와 고친 형태를 직접 적는다. */
 .fix-box {

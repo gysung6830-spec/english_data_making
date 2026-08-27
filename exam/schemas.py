@@ -404,6 +404,9 @@ class OXStatement(BaseModel):
     text: str          # 진술
     is_true: bool      # 글과 일치하면 True(O)
     why: str           # O 인 근거 / X 인 이유
+    # 어느 축으로 비틀었는지(X 일 때). 글 속에 괄호로 적게 하지 않고 따로 받는다 —
+    # 조판이 이름을 붙여 주므로 표기가 늘 같고, 축이 겹쳤는지 코드가 셀 수 있다.
+    axis: str = ""
 
 
 def _check_ox(items: list[OXStatement], label: str) -> list[OXStatement]:

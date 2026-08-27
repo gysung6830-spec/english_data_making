@@ -515,7 +515,8 @@ def make_content(sentences: list[str], choices: list[str], answer_no: int,
 
 
 def make_content_ox(sentences: list[str], statements: list[str],
-                    truths: list[bool], reasons: list[str]) -> tuple[str, str]:
+                    truths: list[bool], reasons: list[str],
+                    axes: list[str] | None = None) -> tuple[str, str]:
     """내용 O/X — 진술 10개를 각각 참·거짓으로 판정하게 한다(O 는 늘 2개)."""
     n = len(statements)
     if not (n == len(truths) == len(reasons) == N_OX):
@@ -528,7 +529,7 @@ def make_content_ox(sentences: list[str], statements: list[str],
         raise ValueError(f"O 두 개가 {yes[0]}번·{yes[1]}번으로 붙어 있습니다 — "
                          "세 칸 이상 떨어뜨려야 자리만 보고 찍지 못합니다.")
     q = F.content_ox_q(" ".join(s.strip() for s in sentences), statements)
-    a = F.content_ox_a(list(truths), list(reasons))
+    a = F.content_ox_a(list(truths), list(reasons), axes)
     return q, a
 
 

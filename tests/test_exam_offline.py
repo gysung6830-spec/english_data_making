@@ -481,6 +481,23 @@ _VOCAB_SETS = [
 _VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
 
 
+def _fake_ox(prefix: str) -> list:
+    """내용 O/X 가짜 출력 — O 둘, X 여덟이 여덟 축을 하나씩 쓴다."""
+    from exam.shape import OX_AXES
+
+    axes = list(OX_AXES)
+    out, k = [], 0
+    for i in range(1, 11):
+        if i in (2, 7):                       # O 두 개(자리는 조판기가 다시 정한다)
+            out.append(OXStatement(text=f"{prefix} {i}", is_true=True,
+                                   why=f"근거{i}", axis="일치"))
+        else:
+            out.append(OXStatement(text=f"{prefix} {i}", is_true=False,
+                                   why=f"근거{i}", axis=axes[k]))
+            k += 1
+    return out
+
+
 def _fake_vocab_negation():
     """부정어형 어휘의 가짜 출력 — 정답 밑줄이 삽입한 부정어를 품는다."""
     # 낱말은 다른 어휘 문항(_VOCAB_SETS)·짝짓기와 겹치지 않는 것으로 고른다.
@@ -558,12 +575,10 @@ _FAKE = {
         choices=["선지1", "선지2", "선지3", "선지4", "선지5"], answer_no=2, reason="일치 근거.",
         wrong_reasons=[WrongReason(no=1, text="~부분이 틀림"), WrongReason(no=3, text="~부분이 틀림"),
                        WrongReason(no=4, text="~부분이 틀림"), WrongReason(no=5, text="~부분이 틀림")]),
-    # 내용 O/X — 한글판·영어판 각각 10개, O 는 정확히 2개
+    # 내용 O/X — 한글판·영어판 각각 10개, O 는 정확히 2개, X 여덟은 여덟 축을 하나씩
     "ContentOXOut": lambda: ContentOXOut(
-        korean=[OXStatement(text=f"한글 진술{i}", is_true=(i in (1, 2)),
-                            why=f"근거{i}") for i in range(1, 11)],
-        english=[OXStatement(text=f"English statement {i}", is_true=(i in (3, 4)),
-                             why=f"근거{i}") for i in range(1, 11)]),
+        korean=_fake_ox("한글 진술"),
+        english=_fake_ox("English statement")),
     # 연결어 — (A) 2번 문장 · (B) 4번 문장. 원문에 연결어가 없으니 remove 는 비운다.
     # 정답의 (A)·(B) 낱말이 오답에도 한 번씩 더 나온다 — 한 자리만 보고는 못 고른다.
     "LinkerOut": lambda: LinkerOut(
@@ -2608,13 +2623,26 @@ def test_ox_axes() -> None:
         "통념을 필자의 주장으로 바꿔치기했다. (논지·화자 뒤집기)",
         "그럴듯하지만 언급되지 않았다. (미언급인데 그럴듯)",
     ]) == []
-    #  ③ 데모도 그 두 축을 쓰지 않는다
+    #  ③ 데모도 그 두 축을 쓰지 않고, 여덟 축을 하나씩 쓴다
+    from exam.shape import OX_AXES, check_ox_axis_coverage
     for p in demo_passages_merged():
         for t in ("content", "content_2"):
-            if t in p.a:
-                plain = _re.sub(r"<[^>]+>", " ", p.a[t])
-                assert check_ox_axes([plain]) == [], (p.title, t)
-    print("✓ 내용 O/X 오답 축(부분 일치·정도 과장 제외) 통과")
+            if t not in p.a:
+                continue
+            plain = _re.sub(r"<[^>]+>", " ", p.a[t])
+            assert check_ox_axes([plain]) == [], (p.title, t)
+            ax = _re.findall(r'class="ox-axis">(.*?)</span>', p.a[t])
+            assert sorted(ax) == sorted(OX_AXES), (p.title, t, ax)
+            assert check_ox_axis_coverage(ax) == []
+
+    #  ④ 축이 겹치면 알려 준다 — 다만 다시 만들지는 않는다(가장 비싼 호출이라서)
+    dup = list(OX_AXES[:-1]) + [OX_AXES[0]]
+    msg = check_ox_axis_coverage(dup)
+    assert msg and "겹칩니다" in msg[0] and "미언급인데 그럴듯" in " ".join(msg), msg
+    #     생성기는 이것을 검토 메모로만 단다(승격 표시가 붙지 않는다)
+    from exam import tiering
+    assert not tiering.needs_escalation(msg)
+    print("✓ 내용 O/X 오답 축(여덟 축 하나씩·부분 일치·정도 과장 제외) 통과")
 
 
 def test_grammar_on_original_passage() -> None:

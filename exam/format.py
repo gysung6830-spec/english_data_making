@@ -296,11 +296,22 @@ def ox_key(truths: list[bool]) -> str:
                     for i, t in enumerate(truths, 1))
 
 
-def content_ox_a(truths: list[bool], reasons: list[str]) -> str:
+def content_ox_a(truths: list[bool], reasons: list[str],
+                 axes: list[str] | None = None) -> str:
+    """O/X 판정 한 줄 + 진술마다 왜 그렇게 판정했는지.
+
+    axes 를 주면 X 줄 끝에 '어느 축으로 비틀었는지'를 알약으로 붙인다. 학생용이 아니라
+    교사가 문항을 훑을 때 쓰는 표지다(오답이 한쪽으로 몰렸는지 한눈에 보인다).
+    """
+    axes = list(axes or [])
     parts = [f'<p><span class="answer-key">{esc(ox_key(truths))}</span></p>']
     for i, (t, why) in enumerate(zip(truths, reasons), 1):
         mark = "O" if t else "X"
-        parts.append(f'<p class="wrong">{circ(i)} <b>{mark}</b> — {esc(why)}</p>')
+        tag = ""
+        ax = (axes[i - 1] if i - 1 < len(axes) else "").strip()
+        if ax and not t:
+            tag = f' <span class="ox-axis">{esc(ax)}</span>'
+        parts.append(f'<p class="wrong">{circ(i)} <b>{mark}</b> — {esc(why)}{tag}</p>')
     return "".join(parts)
 
 
