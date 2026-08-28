@@ -50,6 +50,26 @@ _RULES = """[문장 완전성 — 매우 중요]
         수만 바꾼 형태로 두지 말 것. (예: "His legs [ were / was ] covered" 금지 →
         "His legs [ were covered / covered ]" 로 태를 묻는다.)
      오답 B 는 위 항목에서 '문법적으로 혼동되는 것'을 넣는다(유의어 금지).
+   ── 출제 가능한 어법 포인트 전체 목록(참고: 지문 전체에서 아래 범위를 '다양하게' 발굴하라. 같은
+      포인트만 반복하지 말고 A~G 를 폭넓게 섞어라. 단, 위 '선별 우선순위'와 '태 위주·수일치 지양'은 유지) ──
+     A. 동사·시제·태: 태(수동 be p.p. / 능동), 시제(완료·진행·완료진행), 수일치(특히 'A of B'는 핵심명사 A에
+        일치·the number of vs a number of), 조동사 / 조동사+have p.p., 당위의 should 생략(require/suggest/insist
+        that S (should) V), 대동사(do/does/did).
+     B. 준동사: to부정사(명사·형용사·부사적 용법), to부정사 의미상 주어(for/of + 목적격), 원형부정사(사역·지각동사
+        + 원형), 동명사(전치사+v-ing, 동명사만 목적어로 취하는 동사), 분사(현재/과거), 감정분사(유발 -ing / 느낌 p.p.),
+        분사구문·삽입, 정동사 vs 준동사(본동사 자리 판단).
+     C. 관계사: 관계대명사(주격 who/which/that, 목적격, 소유격 whose)—선행사 명시, 관계부사(where/when/why/how)—
+        선행사 명시, 관계대명사 what(선행사 포함·명사절), 전치사+관계대명사(=관계부사), 복합관계사(whatever/whoever/
+        wherever), what ↔ that ↔ which 구별.
+     D. 접속사·절: 등위·종속 접속사, 상관접속사(not only A but also B, both A and B …), 명사절 접속사(whether ↔ if /
+        that ↔ what / 여부), 부사절·명사절·형용사절 구별, 동격 that, 접속사 vs 전치사(because ↔ because of,
+        while ↔ during, although ↔ despite), 의문사·간접의문문(의문사+S+V 어순).
+     E. 문형·성분: 5형식(S·V·O·O.C·C) 구별, 가주어 it ~ 진주어 / 가목적어 it, 목적격보어(형용사·분사·원형·to부정사),
+        부사 vs 형용사(수식·보어 자리), 후치수식.
+     F. 비교·강조·도치·가정법: 비교급·최상급·원급(as ~ as, 배수사, the 비교급 the 비교급), 강조구문(it ~ that),
+        도치(부정어 문두, 장소부사구 도치), 가정법 도치(Were I …, Had I known …), 가정법(과거·과거완료·혼합).
+     G. 대명사·수량·명사: 대명사 수·격 일치(it ↔ them, one ↔ it, that of ↔ those of), 재귀대명사 vs 인칭대명사,
+        수량 표현(many/few/a number of ↔ much/little/the number of), 단수/복수, 부분부정·부정어, 생략 복원.
    display 예: "[ that / what ]"   answer 예: "that"
 2) 어형 변형(form) → display = "(원형)", 정답은 문맥에 맞게 변형한 최종 형태.
    ★ 그 문장에 나오는 '모든 동사·준동사·동명사'를 빠짐없이 (원형)으로 제시한다.
