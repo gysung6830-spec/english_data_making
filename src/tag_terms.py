@@ -2,6 +2,18 @@
 import re, json, glob
 # 표준 태그 정규화: 별칭/변형 → 표준 용어(용어만, 문장 속 단어 제거)
 RULES=[
+ # ── 특정 규칙 우선(일반 규칙보다 앞) ────────────────────────────
+ (r'의미상\s*주어', 'to부정사 의미상 주어'),          # to부정사 앞
+ (r'복합\s*관계|whatever|whoever|wherever|whenever|however', '복합관계사'),  # what/관계사 앞
+ (r'재귀', '재귀대명사'),                              # 대명사 앞
+ (r'조동사\s*\+?\s*have|조동사.*have\s*p', '조동사+have p.p.'),  # 조동사/생략 앞
+ (r'당위|should\s*생략|require.*should|suggest.*should|require.*that|suggest.*that', '당위의 should 생략'),  # 생략 앞
+ (r'정동사|준동사\s*(구별|자리|판단)|본동사\s*자리', '정동사 vs 준동사'),  # to부정사 앞
+ (r'접속사\s*vs\s*전치사|because\s*of|\bduring\b|\bdespite\b|접속사.*전치사|전치사.*접속사', '접속사 vs 전치사'),  # 부사절/병렬 앞
+ (r'수량|a\s*number\s*of|the\s*number\s*of|many.*few|much.*little', '수량 표현'),
+ (r'수\s*일치|주어\s*[-·]?\s*동사\s*일치|수의\s*일치', '수일치'),
+ (r'조동사', '조동사'),
+ # ── 기존 규칙 ──────────────────────────────────────────────────
  (r'가목적어|진목적어', '가목적어-진목적어'),
  (r'가주어|진주어', '가주어-진주어'),
  (r'사역', '사역동사'),
