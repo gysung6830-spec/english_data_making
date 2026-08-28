@@ -21,8 +21,9 @@
     <ol class="ws-list">
       {% for s in pack.sentences %}
       <li>
+        {# 영작의 우리말은 '해석'이 아니라 '문제(배열 지시)'이므로 한글 제외본에서도 항상 표시 #}
+        <div class="s-ko-q">{{ s.ko }}</div>
         <div class="s-en">{{ s | render_writing }}</div>
-        {% if show_ko %}<div class="s-ko">{{ s.ko }}</div>{% endif %}
       </li>
       {% endfor %}
     </ol>
