@@ -329,6 +329,10 @@ class VocabOut(BaseModel):
 class GrammarReason(BaseModel):
     no: int
     text: str
+    # 어느 문법 항목을 물었는지(shape.GRAMMAR_POINTS 의 이름 그대로).
+    # 글 속에 적게 하지 않고 따로 받는다 — 해설에 알약으로 붙어 표기가 늘 같고,
+    # 틀린 밑줄들이 같은 항목을 되풀이하는지 코드가 셀 수 있다.
+    point: str = ""
 
 
 class GrammarOut(BaseModel):

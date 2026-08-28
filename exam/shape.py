@@ -784,6 +784,81 @@ def check_linker_pairs(pairs, answer_no: int) -> list[str]:
     return bad
 
 
+# ---------------------------------------------------------------------------
+# 어법 출제 항목 — 내신·수능에서 실제로 물어지는 열한 가지
+# ---------------------------------------------------------------------------
+# 이름을 한곳에 둔다(프롬프트·검사·해설이 같은 말을 쓴다). 예전에는 '수 일치 / 시제 /
+# 태 / 준동사 / 관계사 / 병렬 / 대명사 / 비교' 같은 큰 갈래만 적어 두어서, 모델이
+# 무엇을 물을지 스스로 정했다. 갈래가 넓으면 만들기는 쉬워도 실제 시험에 나오는 자리와
+# 어긋난다.
+#
+# 두 어법 문항에 '겹치지 않는' 풀을 나눠 준다. 지금까지 5번과 7번이 같은 문법 항목을
+# 겹쳐 물을 수 있었는데(둘은 서로 다른 지문 위에 서므로 밑줄은 안 겹쳐도 항목은 겹쳤다),
+# 풀을 나누면 호출을 늘리지 않고 구조적으로 막힌다.
+
+# 5번 어법(정본 지문 · 틀린 것 모두 고르기) — 판정만 하면 되므로 어순·구조가 걸린
+# 항목도 낼 수 있다.
+GRAMMAR_POINTS_JUDGE: tuple[str, ...] = (
+    "정동사 vs 준동사",
+    "접속사 vs 전치사",
+    "관계사 what/that/which",
+    "가목적어 it",
+    "명사절 whether/that/what",
+    "도치·부정",
+)
+
+# 7번 어법 서술형(다시 쓴 지문 · 바르게 고쳐 쓰기) — 학생이 '낱말 한두 개'로 고쳐
+# 적어야 하므로, 고칠 방법이 하나뿐이고 한 낱말로 끝나는 항목만 둔다.
+# (도치·부정처럼 어순을 되돌려야 하는 항목은 문장을 통째로 다시 쓰게 되어 여기 못 온다.)
+GRAMMAR_POINTS_FIX: tuple[str, ...] = (
+    "감정분사",
+    "재귀대명사",
+    "대명사 수·격 일치",
+    "부사 vs 형용사",
+    "수량·명사 수일치",
+)
+
+GRAMMAR_POINTS: tuple[str, ...] = GRAMMAR_POINTS_JUDGE + GRAMMAR_POINTS_FIX
+
+_GRAMMAR_POINT_BY_NORM = {re.sub(r"[\s·ㆍ・,.]+", "", p).lower(): p
+                          for p in GRAMMAR_POINTS}
+
+
+def normalize_grammar_point(point: str) -> str:
+    """문법 항목 이름을 표의 표기로 되돌린다. 표에 없으면 빈 문자열.
+
+    O/X 축과 같은 이유다(normalize_ox_axis 참고) — 띄어쓰기만 다른 이름을 그대로 두면
+    해설의 항목 표시가 뒤섞이고 겹침 검사가 무력해진다. 표에 없는 이름은 알약을 달지
+    않는다. 이름표 하나 때문에 문항을 다시 만들지는 않는다.
+    """
+    p = (point or "").strip()
+    if not p:
+        return ""
+    return _GRAMMAR_POINT_BY_NORM.get(re.sub(r"[\s·ㆍ・,.]+", "", p).lower(), "")
+
+
+def check_grammar_points(points: dict[int, str], wrong_nos) -> list[str]:
+    """틀린 밑줄들이 '서로 다른 문법 항목'을 물는지 본다.
+
+    한 항목만 되풀이하면 그 하나를 아는 학생이 나머지도 한꺼번에 찾아낸다 — 밑줄을
+    여럿 둔 뜻이 없어진다. 풀이 넉넉하므로(판정형 6개·서술형 5개) 겹칠 이유가 없다.
+    """
+    seen: dict[str, int] = {}
+    dup: list[str] = []
+    for no in sorted(wrong_nos or []):
+        p = (points or {}).get(no, "").strip()
+        if not p:
+            continue
+        if p in seen:
+            dup.append(f"{seen[p]}번과 {no}번이 모두 '{p}'")
+        else:
+            seen[p] = no
+    if not dup:
+        return []
+    return [", ".join(dup) + " — 틀린 밑줄은 저마다 다른 문법 항목이어야 합니다. "
+            "한 항목을 되풀이하면 그것 하나를 아는 학생이 나머지도 한꺼번에 찾아냅니다."]
+
+
 # 내용 O/X 의 오답 여덟 축 — 이름을 한곳에 둔다(프롬프트·검사·조판이 같은 말을 쓴다).
 OX_AXES: tuple[str, ...] = (
     "주체·대상 바꿔치기",

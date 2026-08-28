@@ -52,12 +52,19 @@ _PROMPT = """아래 '정본 지문'으로 '어법 서술형' 문제를 만드세
   고칠 수 있는 자리)는 고르지 마세요 — 채점이 갈립니다.
 - 고친 형태는 '낱말 한두 개'로 끝나야 합니다(문장을 통째로 다시 쓰게 하는 자리는 금지).
 - 어느 4개를 틀리게 할지는 지문마다 달리하세요(늘 앞쪽 넷이면 자리만 보고 찍습니다).
-- 타깃 문법: 수 일치 / 시제 / 태 / 준동사 / 관계사 / 병렬 / 대명사 / 비교.
-  네 오류가 서로 다른 문법 항목이면 더 좋습니다(한 항목만 반복하면 하나 알면 넷이 보입니다).
+
+[타깃 문법 — 아래 다섯 항목에서만 고르세요]
+{points}
+- **네 오류는 저마다 다른 항목이어야 합니다.** 한 항목을 되풀이하면 그것 하나를 아는
+  학생이 나머지도 한꺼번에 찾아냅니다. 항목이 다섯이라 겹칠 이유가 없습니다.
+- 이 다섯은 모두 '낱말 한두 개'로 고쳐지는 항목입니다 — 이 유형은 학생이 고친 형태를
+  직접 적으므로 그래야 합니다. 어순을 되돌려야 하는 항목(도치·부정 등)은 문장을 통째로
+  다시 쓰게 되므로 여기서는 쓰지 마세요. 그런 항목은 5번 어법이 맡습니다.
 
 [근거] reasons 는 **밑줄 6개 전부**에 대해 하나씩 씁니다.
 - 틀린 밑줄: 무엇이 왜 틀렸고 어떤 형태로 고쳐야 하는지.
 - 옳은 밑줄: 왜 옳은지(어떤 규칙에 맞는지). 학생이 헷갈릴 만한 이유까지 짚어 주면 좋습니다.
+- 각 항목에 point 를 함께 적으세요 — 위 목록의 이름을 '한 글자도 바꾸지 말고' 그대로.
 reason: 전체 총평 한 줄(한국어).
 
 [확실성]
@@ -86,10 +93,18 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
             raise ValueError(
                 f"{', '.join(map(str, same))}번을 틀린 것으로 표시했는데 보여 준 낱말이 "
                 "바른 낱말과 같습니다 — 학생이 고칠 것이 없습니다.")
+        # 네 오류가 같은 문법 항목이면 하나만 알아도 넷이 다 보인다.
+        flaw = shape.check_grammar_points(
+            {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons},
+            out.wrong_nos)
+        if flaw:
+            raise ValueError("어법 서술형 설계 결함 — " + " ".join(flaw))
 
     out: GrammarCountOut = client.structured(
         system=SYSTEM,
-        prompt=_PROMPT.format(rules=REWRITE_RULES, ctx=context(analysis)),
+        prompt=_PROMPT.format(rules=REWRITE_RULES, ctx=context(analysis),
+                              points="\n".join(f"  · {p}"
+                                               for p in shape.GRAMMAR_POINTS_FIX)),
         cache_prefix=context(analysis),
         model_cls=GrammarCountOut,
         max_tokens=3500,
@@ -99,7 +114,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     sents = [s.strip() for s in out.rewritten]
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     reasons = {r.no: r.text for r in out.reasons}
+    points = {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons}
     flags: list[str] = []
     q, a = B.make_grammar_fix(sents, marks, out.wrong_nos, reasons,
-                              note=(out.reason or "").strip(), flags=flags)
+                              note=(out.reason or "").strip(), flags=flags,
+                              points=points)
     return q, a, flags

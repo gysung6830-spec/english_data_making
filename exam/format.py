@@ -187,11 +187,19 @@ def grammar_q(marked_passage_html: str) -> str:
     return f'<div class="passage">{marked_passage_html}</div>'
 
 
-def grammar_a(answer_nos: list[int], reasons: dict[int, str]) -> str:
+def _point_pill(points, i: int) -> str:
+    """해설 줄 끝에 붙는 '문법 항목' 알약. 항목 이름이 없으면 붙이지 않는다."""
+    p = ((points or {}).get(i) or "").strip()
+    return f' <span class="g-point">{esc(p)}</span>' if p else ""
+
+
+def grammar_a(answer_nos: list[int], reasons: dict[int, str],
+              points: dict[int, str] | None = None) -> str:
     keys = ", ".join(circ(n) for n in sorted(answer_nos))
     parts = [f'<p><span class="answer-key">{keys}</span></p>']
     for i in sorted(reasons):
-        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}</p>')
+        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}'
+                     f'{_point_pill(points, i)}</p>')
     return "".join(parts)
 
 
@@ -333,7 +341,7 @@ def grammar_fix_q(marked_passage_html: str, n_answers: int) -> str:
 
 
 def grammar_fix_a(fixes: dict[int, tuple[str, str]], reasons: dict[int, str],
-                  note: str = "") -> str:
+                  note: str = "", points: dict[int, str] | None = None) -> str:
     """정답 = '② shown → word' 줄들 + 밑줄마다 옳은지 틀린지."""
     key = ", ".join(f"{circ(i)} {shown} → {word}"
                     for i, (shown, word) in sorted(fixes.items()))
@@ -341,5 +349,6 @@ def grammar_fix_a(fixes: dict[int, tuple[str, str]], reasons: dict[int, str],
     if note:
         parts.append(f'<p class="reason">{esc(note)}</p>')
     for i in sorted(reasons):
-        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}</p>')
+        parts.append(f'<p class="reason">{circ(i)} {esc(reasons[i])}'
+                     f'{_point_pill(points, i)}</p>')
     return "".join(parts)

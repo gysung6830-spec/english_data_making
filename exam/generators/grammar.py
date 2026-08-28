@@ -29,10 +29,17 @@ _PROMPT = """아래 '정본 지문'으로 '어법(복수정답)' 문제를 만�
   shown 을 word 와 똑같이(옳게) 둡니다.
 - word 는 지문에 있는 그대로여야 합니다(철자·대소문자 포함). 지문에 없는 낱말을 적으면
   밑줄을 칠 자리를 찾지 못해 문항이 만들어지지 않습니다.
-- 타깃 문법: 수 일치 / 시제 / 태 / 준동사 / 관계사 / 병렬 / 대명사 / 비교.
-  틀린 것들이 서로 다른 문법 항목이면 더 좋습니다(한 항목만 반복하면 하나 알면 다 보입니다).
 - 틀린 밑줄과 옳은 밑줄을 번갈아 놓아 흩어 두세요(앞쪽에 몰리면 자리만 보고 찍습니다).
 - reasons: 틀린 각 번호가 왜 틀렸고 무엇으로 고쳐야 하는지 한국어로 설명.
+  각 항목에 point 를 함께 적으세요 — 아래 목록의 이름을 '한 글자도 바꾸지 말고' 그대로.
+
+[타깃 문법 — 아래 여섯 항목에서만 고르세요]
+{points}
+- **틀린 밑줄은 저마다 다른 항목이어야 합니다.** 한 항목을 되풀이하면 그것 하나를 아는
+  학생이 나머지도 한꺼번에 찾아냅니다. 항목이 여섯이라 겹칠 이유가 없습니다.
+- 이 여섯은 '판정'만으로 풀리는 항목입니다(어순·구조가 걸린 것도 됩니다). 낱말 하나만
+  바꿔 고치는 항목(감정분사·재귀대명사·부사vs형용사 등)은 어법 서술형이 맡으므로
+  여기서는 쓰지 마세요 — 두 어법 문항이 같은 것을 두 번 묻게 됩니다.
 
 [확실성] 정답으로 표시한 밑줄만 틀려야 하고, 나머지 밑줄은 모두 어법상 옳아야 합니다.
 옳은 밑줄은 '학생이 헷갈릴 만한 자리'(관계절 안의 동사·병렬 구조·준동사)로 고르되,
@@ -40,6 +47,11 @@ _PROMPT = """아래 '정본 지문'으로 '어법(복수정답)' 문제를 만�
 
 {ctx}
 """
+
+
+def _points_block() -> str:
+    """5번 어법이 고를 수 있는 문법 항목 목록(shape 가 원본이다)."""
+    return "\n".join(f"  · {p}" for p in shape.GRAMMAR_POINTS_JUDGE)
 
 
 def _avoid_clause(taken: set[str]) -> str:
@@ -66,10 +78,17 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         if dup:
             raise ValueError(f"다른 밑줄 문항과 낱말이 겹칩니다: {', '.join(dup)}. "
                              "겹치지 않는 낱말로 다시 고르세요.")
+        # 틀린 밑줄이 같은 문법 항목을 되풀이하면 하나만 알아도 나머지가 다 보인다.
+        bad = shape.check_grammar_points(
+            {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons},
+            out.answer_nos)
+        if bad:
+            raise ValueError("어법 문항 설계 결함 — " + " ".join(bad))
 
     out: GrammarOut = client.structured(
         system=SYSTEM,
-        prompt=_PROMPT.format(ctx=context(analysis)) + _avoid_clause(taken),
+        prompt=(_PROMPT.format(ctx=context(analysis), points=_points_block())
+                + _avoid_clause(taken)),
         cache_prefix=context(analysis),
         model_cls=GrammarOut,
         max_tokens=3000,
@@ -78,8 +97,12 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     )
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     reasons = {r.no: r.text for r in out.reasons}
+    # 표기 흔들림은 표의 이름으로 되돌린다. 표에 없는 이름은 알약을 달지 않는다
+    # (이름표 하나 때문에 문항을 다시 만들지는 않는다 — shape.normalize_grammar_point).
+    points = {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons}
     flags: list[str] = []
-    q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons, flags=flags)
+    q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons,
+                          flags=flags, points=points)
     if with_words:
         return q, a, flags, _mark_words(out.marks)
     return q, a, flags

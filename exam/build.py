@@ -575,19 +575,22 @@ def make_vocab(sentences: list[str], marks: list[tuple[int, str, str]],
 # ---------------------------------------------------------------------------
 def make_grammar(sentences: list[str], marks: list[tuple[int, str, str]],
                  answer_nos: list[int], reasons: dict[int, str],
-                 flags: list[str] | None = None) -> tuple[str, str]:
-    """marks: [(문장idx, 원본단어, 표시단어)] 2~8개. 틀린 것은 표시단어가 오답형."""
+                 flags: list[str] | None = None,
+                 points: dict[int, str] | None = None) -> tuple[str, str]:
+    """marks: [(문장idx, 원본단어, 표시단어)] 2~8개. 틀린 것은 표시단어가 오답형.
+    points: 밑줄 번호별 '문법 항목' 이름(해설에 알약으로 붙는다)."""
     if not (2 <= len(marks) <= 8):
         raise ValueError("어법 밑줄은 2~8개여야 합니다.")
-    # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호·근거 키도 그에 맞춰 재매핑
+    # 밑줄 번호를 '읽는 순서'로 매기고 정답 번호·근거·항목 키도 그에 맞춰 재매핑
     marks, remap = order_marks(sentences, marks)
     answer_nos = sorted(remap.get(n, n) for n in answer_nos)
     reasons = {remap.get(n, n): _relabel(t, remap) for n, t in reasons.items()}
+    points = {remap.get(n, n): t for n, t in (points or {}).items()}
     marks = expand_marks(sentences, marks)      # 'to confirm' 류 낱말 중복 방지
     marks = keep_sentence_case(sentences, marks)    # 문장 첫 낱말이면 대문자 유지
     flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks))
-    return F.grammar_q(marked), F.grammar_a(answer_nos, reasons)
+    return F.grammar_q(marked), F.grammar_a(answer_nos, reasons, points)
 
 
 # ---------------------------------------------------------------------------
@@ -623,7 +626,8 @@ def make_grammar_count(sentences: list[str], marks: list[tuple[int, str, str]],
 def make_grammar_fix(sentences: list[str], marks: list[tuple[int, str, str]],
                      wrong_nos: list[int], reasons: dict[int, str],
                      note: str = "",
-                     flags: list[str] | None = None) -> tuple[str, str]:
+                     flags: list[str] | None = None,
+                     points: dict[int, str] | None = None) -> tuple[str, str]:
     """어법 서술형 — 틀린 밑줄 4개의 '번호 + 바르게 고친 형태'를 학생이 적는다.
 
     개수만 세는 문항과 재료는 같다(밑줄 6개·틀린 것 4개). 다만 답을 고르는 대신
@@ -636,6 +640,7 @@ def make_grammar_fix(sentences: list[str], marks: list[tuple[int, str, str]],
     marks, remap = order_marks(sentences, marks)      # 읽는 순서로 번호 재매핑
     wrong = sorted({remap.get(n, n) for n in wrong_nos})
     reasons = {remap.get(n, n): t for n, t in reasons.items()}
+    points = {remap.get(n, n): t for n, t in (points or {}).items()}
     if len(wrong) != FIXED_WRONG_COUNT:
         raise ValueError(f"틀린 밑줄은 정확히 {FIXED_WRONG_COUNT}개여야 합니다"
                          f"(현재 {len(wrong)}개).")
@@ -649,7 +654,8 @@ def make_grammar_fix(sentences: list[str], marks: list[tuple[int, str, str]],
     marks = expand_marks(sentences, marks)            # 'to confirm' 류 낱말 중복 방지
     flag_ambiguous_marks(sentences, marks, flags)     # 같은 낱말 여러 번 → 확인 권장
     marked = _passage_html(sentences, _underline_marks(marks))
-    return F.grammar_fix_q(marked, FIXED_WRONG_COUNT), F.grammar_fix_a(fixes, reasons, note)
+    return (F.grammar_fix_q(marked, FIXED_WRONG_COUNT),
+            F.grammar_fix_a(fixes, reasons, note, points))
 
 
 # ---------------------------------------------------------------------------

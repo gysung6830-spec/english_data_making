@@ -607,7 +607,10 @@ _FAKE = {
                WordMark(sent_no=5, word="briefly", shown="brief"),
                WordMark(sent_no=6, word="sixth", shown="sixth")],
         answer_nos=[1, 2],
-        reasons=[GrammarReason(no=1, text="수 일치"), GrammarReason(no=3, text="수 일치")]),
+        # 틀린 둘은 서로 다른 문법 항목이어야 한다(shape.check_grammar_points).
+        reasons=[GrammarReason(no=1, text="부사 자리", point="정동사 vs 준동사"),
+                 GrammarReason(no=2, text="전치사 자리", point="접속사 vs 전치사"),
+                 GrammarReason(no=3, text="옳음", point="가목적어 it")]),
     # 밑줄 6개 중 정확히 4개가 틀린다(정답은 늘 ④)
     "GrammarCountOut": lambda: GrammarCountOut(
         rewritten=_REWRITE_B,
@@ -618,7 +621,10 @@ _FAKE = {
                WordMark(sent_no=5, word="meets", shown="meet"),         # ⑤ 오류
                WordMark(sent_no=6, word="ends", shown="ends")],         # ⑥ 적절
         wrong_nos=[1, 3, 4, 5],
-        reasons=[GrammarReason(no=i, text="근거") for i in range(1, 7)],
+        # 틀린 넷은 저마다 다른 항목(서술형 풀 5개 중 넷)
+        reasons=[GrammarReason(no=no, text="근거", point=pt) for no, pt in
+                 ((1, "감정분사"), (2, "재귀대명사"), (3, "대명사 수·격 일치"),
+                  (4, "부사 vs 형용사"), (5, "수량·명사 수일치"), (6, "재귀대명사"))],
         reason="틀린 것은 4개."),
     "ShortOut": lambda: ShortOut(
         q1_prompt="p1", q1_answer="한글답",
@@ -2830,6 +2836,68 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_grammar_points() -> None:
+    """어법 출제 항목 열한 가지 — 두 어법 문항이 겹치지 않는 풀에서 고른다.
+
+    예전에는 '수 일치 / 시제 / 태 / 준동사 …' 같은 큰 갈래만 적어 두어 모델이 무엇을
+    물을지 스스로 정했고, 5번과 7번이 같은 항목을 겹쳐 물 수 있었다. 풀을 나누면
+    호출을 늘리지 않고 구조적으로 막힌다.
+    """
+    import re as _re
+
+    from exam import shape
+    from exam.generators import grammar as _gr
+    from exam.generators import grammar_fix as _gf
+    from exam.merged import build_passage_merged
+
+    J, F_ = shape.GRAMMAR_POINTS_JUDGE, shape.GRAMMAR_POINTS_FIX
+    #  ① 열한 항목이 두 풀로 '겹치지 않게' 나뉜다
+    assert len(J) == 6 and len(F_) == 5
+    assert set(J) & set(F_) == set()
+    assert len(shape.GRAMMAR_POINTS) == 11
+    #     서술형 풀은 '낱말 한두 개로 고쳐지는' 것만 — 어순을 되돌리는 항목은 없다
+    assert "도치·부정" in J and "도치·부정" not in F_
+    assert "감정분사" in F_ and "재귀대명사" in F_
+
+    #  ② 두 프롬프트의 '고를 항목 목록'이 저마다 제 풀만 담는다.
+    #     (목록 밖에서는 상대 풀을 '여기서 쓰지 말라'고 이름 들어 막으므로 본문 전체를
+    #      맞대면 안 된다 — 그 금지 문구가 겹침으로 잡힌다.)
+    jp = _gr._PROMPT.format(ctx="", points=_gr._points_block())
+    fp = _gf._PROMPT.format(rules="", ctx="",
+                            points="\n".join(f"  · {p}" for p in F_))
+
+    def _listed(prompt: str) -> set[str]:
+        return set(_re.findall(r"^  · (.+)$", prompt, _re.M))
+
+    assert _listed(jp) == set(J), _listed(jp)
+    assert _listed(fp) == set(F_), _listed(fp)
+    #     그리고 상대 풀을 쓰지 말라고 이름을 들어 막는다
+    assert "감정분사" in jp and "도치·부정" in fp
+
+    #  ③ 이름의 표기 흔들림은 표의 표기로 되돌린다(없는 이름은 알약을 안 단다)
+    assert shape.normalize_grammar_point("정동사vs준동사") == "정동사 vs 준동사"
+    assert shape.normalize_grammar_point(" 수량·명사  수일치 ") == "수량·명사 수일치"
+    assert shape.normalize_grammar_point("관계사 What/That/Which") == "관계사 what/that/which"
+    assert shape.normalize_grammar_point("가정법") == ""
+    assert shape.normalize_grammar_point("") == ""
+
+    #  ④ 틀린 밑줄이 같은 항목을 되풀이하면 걸린다(하나 알면 나머지가 다 보인다)
+    same = {1: "감정분사", 2: "재귀대명사", 3: "감정분사"}
+    msg = shape.check_grammar_points(same, [1, 2, 3])
+    assert msg and "1번과 3번이 모두 '감정분사'" in msg[0], msg
+    assert shape.check_grammar_points(same, [1, 2]) == []      # 틀린 것끼리만 본다
+    assert shape.check_grammar_points({1: "", 2: ""}, [1, 2]) == []   # 이름이 없으면 넘어감
+
+    #  ⑤ 해설에 항목 알약이 붙는다(교사·학생이 무엇을 물었는지 바로 안다)
+    p = build_passage_merged(_FakeClient(), _DUMMY)
+    for t in ("grammar", "grammar_fix"):
+        pills = _re.findall(r'class="g-point">(.*?)</span>', p.a[t])
+        assert pills, t
+        pool = J if t == "grammar" else F_
+        assert all(x in pool for x in pills), (t, pills)
+    print("✓ 어법 출제 항목 11종(두 문항 풀 분리·표기 복원·항목 중복 금지·해설 알약) 통과")
+
+
 def test_direct_sale_guards() -> None:
     """산출물이 곧바로 판매되는 전제 — 검토메모에 기대지 않고 코드가 끝을 낸다.
 
@@ -3263,6 +3331,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_grammar_points()
     test_direct_sale_guards()
     test_grammar_on_original_passage()
     test_type_group_layout()
