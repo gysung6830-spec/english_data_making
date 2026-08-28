@@ -93,7 +93,7 @@ def passages_from_dict(data: dict) -> List[Passage]:
             sents.append(Sentence(
                 num=int(s.get("num", 0) or 0),
                 en=en,
-                ko=(s.get("ko") or "").strip(),
+                ko=_strip_lead_label((s.get("ko") or "").strip()),
                 chunks=realign_chunks(en, chunks),
             ))
         voc = [

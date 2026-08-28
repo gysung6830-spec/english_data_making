@@ -358,7 +358,7 @@ def _parse_sentences(body: str) -> List[Sentence]:
         combined = "\n".join(merged[num])
         en, ko = _split_en_ko(combined)
         en = _strip_lead_label(_strip_material_header(_strip_footnote(en)))
-        ko = _strip_material_header(ko)
+        ko = _strip_lead_label(_strip_material_header(ko))
         if not en and not ko:
             continue
         sentences.append(Sentence(num=num, en=en, ko=ko))
