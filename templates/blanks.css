@@ -39,23 +39,16 @@ body{
 .pb-head{ color:var(--pb); border-left-color:var(--pb); }
 .sb-head{ color:var(--sb); border-left-color:var(--sb); }
 
-/* ── 문장 카드 (유형 B, 2단) ── */
-.cards{ display:flex; flex-direction:column; gap:7px; }
-.card{
-  position:relative; display:flex; gap:8px; align-items:stretch; background:#fff;
-  border:1px solid var(--line); border-radius:10px; padding:9px 11px 9px 15px;
-  overflow:hidden; page-break-inside:avoid; break-inside:avoid;
+/* ── 지문 빈칸 문장 목록 (유형 B) — 다른 유형과 동일한 세로 배치: 번호 + 영문(위) / 한글(아래) ── */
+.pb-list{ list-style:none; margin:0; padding:0; }
+.pb-list > li{ margin-bottom:14px; page-break-inside:avoid; break-inside:avoid; }
+.pb-list .s-no{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:19px; height:19px; margin-right:6px; border-radius:50%;
+  background:var(--pb); color:#fff; font-weight:800; font-size:8.5pt; vertical-align:1px;
 }
-.card .cbar{ position:absolute; left:0; top:0; bottom:0; width:5px; background:var(--pb); }
-.card .cnum{
-  flex:none; width:23px; height:23px; border-radius:50%; background:var(--pb);
-  color:#fff; font-weight:800; font-size:9pt;
-  display:flex; align-items:center; justify-content:center; margin-top:1px;
-}
-.cbody{ flex:1 1 auto; display:flex; gap:10px; align-items:stretch; }
-.c-en{ flex:0 0 58%; line-height:2.1; }
-.c-ko{ flex:1 1 42%; font-size:8.5pt; color:#404652; line-height:1.5;
-  border-left:1px dashed #cdd5de; padding-left:10px; }
+.pb-list .s-en{ display:inline; line-height:2.1; }
+.pb-list .s-ko{ margin-top:5px; font-size:8.6pt; color:#555b66; line-height:1.5; padding-left:25px; }
 
 /* ── 요약문 블록: 헤더+워드뱅크+요약문을 한 페이지에 묶는다(워드뱅크 분리 방지) ── */
 .sb-block{ page-break-inside:avoid; break-inside:avoid; }

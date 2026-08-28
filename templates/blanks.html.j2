@@ -18,20 +18,17 @@
       {% if st.label %}<span class="sh-badge">{{ st.label }}</span>{% endif %}
     </div>
 
-    {# ── 유형 B: 지문 빈칸형 (첫 글자 + 밑줄, 2단: 영어 / 한글) ── #}
+    {# ── 유형 B: 지문 빈칸형 (첫 글자 + 밑줄) — 다른 유형과 동일한 세로 배치(영문 위·한글 아래) ── #}
     <div class="part-head pb-head">① 지문 빈칸 <span class="ph-sub">첫 글자 힌트</span></div>
-    <div class="cards">
+    <ol class="pb-list">
       {% for s in st.sentences %}
-      <div class="card">
-        <span class="cbar"></span>
-        <span class="cnum">{{ s.no }}</span>
-        <div class="cbody">
-          <div class="c-en">{{ s | render_bsentence }}</div>
-          {% if show_ko %}<div class="c-ko">{{ s.ko }}</div>{% endif %}
-        </div>
-      </div>
+      <li>
+        <span class="s-no">{{ s.no }}</span>
+        <div class="s-en">{{ s | render_bsentence }}</div>
+        {% if show_ko %}<div class="s-ko">{{ s.ko }}</div>{% endif %}
+      </li>
       {% endfor %}
-    </div>
+    </ol>
 
     {# ── 유형 A: 요약문 빈칸형 (번호만 + 단어뱅크) ──
         헤더·워드뱅크·요약문을 한 덩어리로 묶어 페이지가 갈리며 워드뱅크가
