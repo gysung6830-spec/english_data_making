@@ -54,6 +54,7 @@ class LLMWritingItem(BaseModel):
     id: str                                       # "A1"
     chunks: list[str] = Field(default_factory=list)  # 바른 순서의 조각들
     answer: str = ""                              # 바른 배열(문장부호 포함). 비면 chunks 로 생성
+    decoys: list[str] = Field(default_factory=list)  # 함정 보기(정답에 안 쓰는 오답 단어) — 난도↑
 
 
 class LLMWritingSentence(BaseModel):
@@ -78,25 +79,32 @@ def _norm_seq(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
-def _shuffled_display(chunks: list[str], answer: str = "") -> str:
+def _shuffled_display(chunks: list[str], answer: str = "", decoys: list[str] | None = None) -> str:
     """조각들을 무작위로 섞어 '〈 a / b / c 〉' 표시 문자열을 만든다.
 
     ★ '정답(바른 배열) 순서'와도, '입력 조각 순서'와도 다르게 섞는다. LLM 이 조각을 이미
     섞어 넘겨도(입력≠정답) 셔플이 우연히 '정답 순서'로 떨어지면(예: 〈 where / Compean / was 〉
     정답 "where Compean was") 문제가 무의미해지므로, 정답 어순과 일치하지 않을 때까지 다시 섞는다.
+    ★ decoys(함정 보기)가 있으면 정답 조각과 '구분 없이' 섞어 넣는다 — 학생이 다 쓰면 틀리므로
+    난도가 오른다. 단 정답 조각과 '중복'되는 함정은 실제로 사용 가능해져 함정이 안 되므로 제외한다.
     """
     parts = [c.strip() for c in chunks if c and c.strip()]
     if not parts:
         return "〈 〉"
-    if len(parts) >= 2:
+    used = {_norm_seq(p) for p in parts}
+    extra = [d.strip() for d in (decoys or [])
+             if d and d.strip() and _norm_seq(d) not in used]
+    allparts = parts + extra
+    if len(allparts) >= 2:
         correct = _norm_seq(answer) if answer and answer.strip() else _norm_seq(" ".join(parts))
-        shuffled = parts[:]
-        for _ in range(20):
+        shuffled = allparts[:]
+        for _ in range(30):
             random.shuffle(shuffled)
-            if shuffled != parts and _norm_seq(" ".join(shuffled)) != correct:
+            # 함정을 섞은 뒤에도 '정답 조각만' 그 순서면 무의미하므로, 전체 셔플이 입력과 달라야 함
+            if shuffled != allparts and _norm_seq(" ".join(shuffled)) != correct:
                 break
-        parts = shuffled
-    return "〈 " + " / ".join(parts) + " 〉"
+        allparts = shuffled
+    return "〈 " + " / ".join(allparts) + " 〉"
 
 
 def _item_answer(it: LLMWritingItem) -> str:
@@ -125,7 +133,7 @@ def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: s
             if len(chunks) < 2:
                 template = template.replace("{{" + pid + "}}", _item_answer(src))
                 continue
-            items.append(WItem(id=pid, display=_shuffled_display(src.chunks, _item_answer(src)),
+            items.append(WItem(id=pid, display=_shuffled_display(src.chunks, _item_answer(src), src.decoys),
                                answer=_item_answer(src)))
         sents.append(WSentence(no=s.no, template=template, ko=s.ko, items=items))
     return WritingPack(header=header, title=title or "", subtitle=subtitle or "",
