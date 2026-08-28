@@ -119,11 +119,12 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
         return [Chunk(en=p, ko="") for p in pieces] or \
             [Chunk(en=en.strip(), ko="")]
 
-    out: List["Chunk"] = []
+    # 각 청크의 원문 내 경계(start, end)를 구한다(연속 슬라이스).
+    bounds: List[Tuple[int, int]] = []
     pos, n = 0, len(chunks)
     for i, c in enumerate(chunks):
         if i == n - 1:
-            seg = en[pos:]  # 마지막 청크는 남은 전부(끝 문장부호 포함)
+            bounds.append((pos, len(en)))
         else:
             need = len(_letters(c.en))
             j, cnt = pos, 0
@@ -134,10 +135,25 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
             # 글자 뒤에 붙는 문장부호(공백 아닌)는 앞 청크에 붙인다
             while j < len(en) and not en[j].isalnum() and en[j] != " ":
                 j += 1
-            seg = en[pos:j]
+            bounds.append((pos, j))
             pos = j
-        out.append(Chunk(en=seg.strip(), ko=tidy_chunk_ko(c.ko)))
-    return out
+
+    # 경계가 '단어 중간'(양쪽이 모두 글자)이면 앞 청크와 병합(clich/és 방지).
+    kos = [tidy_chunk_ko(c.ko) for c in chunks]
+    m_bounds: List[Tuple[int, int]] = [bounds[0]]
+    m_kos: List[str] = [kos[0]]
+    for i in range(1, len(bounds)):
+        s, e = bounds[i]
+        b = m_bounds[-1][1]  # 앞 청크 끝 = 이 청크 시작
+        if 0 < b < len(en) and en[b - 1].isalnum() and en[b].isalnum():
+            m_bounds[-1] = (m_bounds[-1][0], e)          # 병합
+            m_kos[-1] = (m_kos[-1] + " " + kos[i]).strip()
+        else:
+            m_bounds.append((s, e))
+            m_kos.append(kos[i])
+
+    return [Chunk(en=en[s:e].strip(), ko=k)
+            for (s, e), k in zip(m_bounds, m_kos)]
 
 
 @dataclass
