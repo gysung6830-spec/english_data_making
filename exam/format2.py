@@ -44,7 +44,8 @@ def A_q(marked_passage_html: str, choices: list[str]) -> str:
 
 
 def A_a(answer_no: int, reason: str,
-        reasons: dict[int, str] | None = None) -> str:
+        reasons: dict[int, str] | None = None,
+        points: dict[int, str] | None = None) -> str:
     """짝짓기 해설 — 총평 한 줄 + 밑줄 ⓐ~ⓔ 별 사유를 '한 줄씩' 찍는다.
 
     예전에는 다섯 사유를 ' / ' 로 이어 한 문단에 몰아넣어, 해설편에서 열 줄짜리
@@ -54,7 +55,8 @@ def A_a(answer_no: int, reason: str,
     if (reason or "").strip():
         parts.append(f'<p class="reason">{F.esc(reason)}</p>')
     for i in sorted(reasons or {}):
-        parts.append(f'<p class="wrong">{cletter(i)} {F.esc(reasons[i])}</p>')
+        parts.append(f'<p class="wrong">{cletter(i)} {F.esc(reasons[i])}'
+                     f'{F._point_pill(points, i)}</p>')
     return "".join(parts)
 
 

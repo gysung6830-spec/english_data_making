@@ -30,13 +30,14 @@ _PROMPT = """아래 '정본 지문'으로 '어법·어휘 짝짓기' 문제를 �
   shown(문제에 보여줄 형태). 읽는 순서대로 나열하세요.
 - 그중 **정확히 2개만** 부적절하게 만듭니다. 나머지 3개는 shown 을 word 와 똑같이 둡니다.
   · grammar_no — **어법**상 틀린 밑줄 하나. shown 을 어법상 틀린 형태로 바꿉니다.
-    (수 일치 / 시제 / 태 / 준동사 / 관계사 / 병렬 / 대명사)
+    아래 항목에서 고르세요(이름은 reasons 의 point 에 '한 글자도 바꾸지 말고' 그대로):
+{points}
   · vocab_no — **문맥**상 낱말이 부적절한 밑줄 하나. shown 을 원본의 '반의어'로 바꿔
     글의 흐름과 어긋나게 만듭니다. 어법은 멀쩡해야 하고 '뜻'만 어긋나야 합니다.
   · 이 둘은 서로 다른 밑줄이어야 하고, 되도록 떨어진 문장에 두세요.
 
 [적절한 밑줄 3개] shown 을 word 와 똑같이 두어 어법·문맥 모두 흠이 없어야 합니다.
-학생이 헷갈릴 만한 자리(관계절 안의 동사, 병렬 구조, 다의어 등)를 골라 두면 좋습니다.
+학생이 헷갈릴 만한 자리(관계절 안의 동사, 준동사 자리, 다의어 등)를 골라 두면 좋습니다.
 
 [근거] reasons 는 **밑줄 5개 전부**에 대해 하나씩 씁니다.
 - 부적절한 둘: 무엇이 왜 틀렸고 어떤 형태·낱말로 고쳐야 하는지. 어법 오류인지 어휘 오류인지
@@ -84,10 +85,16 @@ def _strip_marker(text: str) -> str:
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, answer_pos: int | None = None,
              variant_hint: str = "", avoid: set[str] | None = None,
-             with_words: bool = False):
+             with_words: bool = False, avoid_points: set[str] | None = None):
     """avoid: 같은 지문의 다른 밑줄 문항이 이미 쓴 낱말(겹치면 재요청).
+    avoid_points: 어법 문항이 이미 쓴 문법 항목(같은 것을 두 번 묻지 않게 피한다).
     with_words=True 면 (q, a, flags, 이 문항이 쓴 낱말들)을 돌려준다(밑줄 묶음용)."""
     taken = {w.lower() for w in (avoid or set())}
+    # 이 문항의 어법 오류는 하나뿐이라 '겹침'은 다른 어법 문항과의 사이에서만 생긴다.
+    # 밑줄 묶음이 차례로 도므로(어법 → 짝짓기), 앞 문항이 쓴 항목을 여기서 빼면 된다.
+    pool = [x for x in shape.GRAMMAR_POINTS_JUDGE if x not in (avoid_points or set())]
+    if not pool:                      # 앞 문항이 여섯을 다 썼다면(있을 수 없지만) 원래 풀로
+        pool = list(shape.GRAMMAR_POINTS_JUDGE)
 
     def _chk(out: PairOddOut) -> None:
         out.check()
@@ -109,7 +116,9 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     out: PairOddOut = client.structured(
         system=SYSTEM,
         prompt=((variant_hint + "\n" if variant_hint else "")
-                + _PROMPT.format(ctx=context(analysis)) + avoid_note),
+                + _PROMPT.format(ctx=context(analysis),
+                                 points="\n".join(f"      · {x}" for x in pool))
+                + avoid_note),
         cache_prefix=context(analysis),
         model_cls=PairOddOut,
         max_tokens=3000,
@@ -125,12 +134,13 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     # 순서로 다시 매겨지므로) 여기서 붙이면 안 된다. 모델이 사유 앞에 스스로 'ⓐ' 를
     # 달아 오면 마커가 겹쳐 찍힌다(실제 출력물 7번 'ⓐ ⓐ contain:').
     reasons = {r.no: _strip_marker(r.text) for r in out.reasons}
+    points = {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons}
     head = (out.reason or "").strip()
 
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
     flags: list[str] = []
     q, a = build2.make_A(analysis.sentences, marks, answer_no, head, choices,
-                         flags=flags, reasons=reasons)
+                         flags=flags, reasons=reasons, points=points)
     flags = flags + review.type_fit_flags(getattr(analysis, "passage_type", "prose"), "A")
     if with_words:
         return q, a, flags, _mark_words(out.marks)

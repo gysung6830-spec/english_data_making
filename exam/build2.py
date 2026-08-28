@@ -18,7 +18,8 @@ from . import format2 as F2
 
 
 # A · 어법·어휘 짝짓기 -------------------------------------------------------
-def make_A(sentences, marks, answer_no, reason, choices, flags=None, reasons=None):
+def make_A(sentences, marks, answer_no, reason, choices, flags=None, reasons=None,
+           points=None):
     """marks: [(문장idx, 원본단어, 표시단어)] 5개(ⓐ~ⓔ). choices: 5개 짝 문자열.
     reasons: {밑줄번호: 사유} — 밑줄을 읽는 순서로 다시 매길 때 함께 옮긴다."""
     if len(marks) != 5:
@@ -34,13 +35,15 @@ def make_A(sentences, marks, answer_no, reason, choices, flags=None, reasons=Non
         # 사유 '안'에서 부르는 기호(ⓒ 는 rational 이어야 …)도 함께 옮긴다.
         if reasons:
             reasons = {remap.get(o, o): t.translate(trans) for o, t in reasons.items()}
+        if points:
+            points = {remap.get(o, o): t for o, t in points.items()}
         if reason:
             reason = reason.translate(trans)
     marks = B1.expand_marks(sentences, marks)   # 'to confirm' 류 낱말 중복 방지
     B1.flag_ambiguous_marks(sentences, marks, flags)   # 같은 낱말 여러 번 → 확인 권장
     lettered = [(idx, word, F2.uletter(i, shown)) for i, (idx, word, shown) in enumerate(marks, 1)]
     marked = B1._passage_html(sentences, lettered)
-    return F2.A_q(marked, choices), F2.A_a(answer_no, reason, reasons)
+    return F2.A_q(marked, choices), F2.A_a(answer_no, reason, reasons, points)
 
 
 # B · 함의추론 --------------------------------------------------------------

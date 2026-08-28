@@ -669,7 +669,10 @@ _FAKE = {
                WordMark(sent_no=4, word="thing", shown="nothing"),     # ⓓ 어휘 오류
                WordMark(sent_no=5, word="objection", shown="objection")],
         grammar_no=2, vocab_no=4,
-        reasons=[GrammarReason(no=i, text="근거") for i in range(1, 6)],
+        # ⓑ 의 문법 항목은 어법 문항이 쓰지 않은 것으로(merged 가 넘겨 주는 avoid_points)
+        reasons=[GrammarReason(no=i, text="근거",
+                               point=("명사절 whether/that/what" if i == 2 else ""))
+                 for i in range(1, 6)],
         reason="부적절한 것은 2개."),
     "TitleOut": lambda: TitleOut(
         choices=["The First Title", "A Second Title", "Third Title Here",
@@ -2888,13 +2891,33 @@ def test_grammar_points() -> None:
     assert shape.check_grammar_points(same, [1, 2]) == []      # 틀린 것끼리만 본다
     assert shape.check_grammar_points({1: "", 2: ""}, [1, 2]) == []   # 이름이 없으면 넘어감
 
-    #  ⑤ 해설에 항목 알약이 붙는다(교사·학생이 무엇을 물었는지 바로 안다)
+    #  ⑤ 짝짓기(8번)의 어법 오류도 같은 목록에서 고른다. 그리고 밑줄 묶음이 차례로
+    #     돌므로, 어법 문항이 이미 쓴 항목은 짝짓기 프롬프트의 목록에서 빠진다.
+    from exam.generators import pair_odd as _po
+    seen: list[str] = []
+
+    class _Peek(_FakeClient):
+        def structured(self, system, prompt, model_cls, **kw):
+            if model_cls.__name__ == "PairOddOut":
+                seen.extend(_re.findall(r"^      · (.+)$", prompt, _re.M))
+            return super().structured(system, prompt, model_cls, **kw)
+
+    _po.generate(_Peek(), _fake_analysis(), "body",
+                 avoid_points={"가목적어 it", "도치·부정"})
+    assert seen, "짝짓기 프롬프트에 문법 항목 목록이 실리지 않았습니다"
+    assert set(seen) == set(J) - {"가목적어 it", "도치·부정"}, seen
+
+    #  ⑥ 해설에 항목 알약이 붙는다(교사·학생이 무엇을 물었는지 바로 안다)
     p = build_passage_merged(_FakeClient(), _DUMMY)
-    for t in ("grammar", "grammar_fix"):
+    for t in ("grammar", "grammar_fix", "pair_odd"):
         pills = _re.findall(r'class="g-point">(.*?)</span>', p.a[t])
         assert pills, t
-        pool = J if t == "grammar" else F_
+        pool = F_ if t == "grammar_fix" else J
         assert all(x in pool for x in pills), (t, pills)
+    #     한 지문의 세 어법 문항이 같은 항목을 두 번 묻지 않는다
+    used = [x for t in ("grammar", "pair_odd")
+            for x in _re.findall(r'class="g-point">(.*?)</span>', p.a[t])]
+    assert len(used) == len(set(used)), used
     print("✓ 어법 출제 항목 11종(두 문항 풀 분리·표기 복원·항목 중복 금지·해설 알약) 통과")
 
 

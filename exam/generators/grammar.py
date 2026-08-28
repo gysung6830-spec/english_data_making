@@ -65,8 +65,10 @@ def _avoid_clause(taken: set[str]) -> str:
 
 def generate(client: ClaudeClient, analysis: Analysis, body: str,
              max_retries: int = 1, avoid: set[str] | None = None,
-             with_words: bool = False):
+             with_words: bool = False, points_out: set[str] | None = None):
     """avoid: 같은 지문의 다른 밑줄 문항이 이미 쓴 낱말(겹치면 재요청).
+    points_out: 주면 이 문항이 '틀린 것'으로 쓴 문법 항목을 채워 준다 — 밑줄 묶음의
+    다음 문항(짝짓기)이 같은 항목을 두 번 묻지 않게 피하는 데 쓴다.
     with_words=True 면 (q, a, flags, 이 문항이 쓴 낱말들)을 돌려준다(밑줄 묶음용)."""
     from .vocab import _mark_words
 
@@ -100,6 +102,8 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
     # 표기 흔들림은 표의 이름으로 되돌린다. 표에 없는 이름은 알약을 달지 않는다
     # (이름표 하나 때문에 문항을 다시 만들지는 않는다 — shape.normalize_grammar_point).
     points = {r.no: shape.normalize_grammar_point(r.point) for r in out.reasons}
+    if points_out is not None:
+        points_out |= {points.get(n, "") for n in out.answer_nos} - {""}
     flags: list[str] = []
     q, a = B.make_grammar(analysis.sentences, marks, out.answer_nos, reasons,
                           flags=flags, points=points)

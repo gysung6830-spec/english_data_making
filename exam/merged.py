@@ -148,16 +148,21 @@ def build_passage_merged(client, body: str, max_retries: int = 1, logger=None,
     # 만들 때, 다시 만들지 않는 문항의 낱말을 '피할 낱말'로 넘겨야 밑줄이 겹치지 않는다
     # (실제 결과물: 승격으로 다시 만든 어휘가 짝짓기와 rational·soothe 를 겹쳐 썼다).
     used_words: dict[str, set[str]] = {}
+    # 어법 문항이 쓴 '문법 항목'을 짝짓기에 넘긴다 — 짝짓기의 어법 오류가 같은 항목이면
+    # 한 지문에서 같은 것을 두 번 묻게 된다. 묶음이 차례로 도므로 집합 하나면 된다.
+    used_points: set[str] = set()
     underline = set(vslots)
     first = []
     if GRAMMAR in MERGED_ORDER:
         underline.add(GRAMMAR)
         first.append((GRAMMAR, _grammar_maker(client, analysis, body,
-                                              max_retries, logger)))
+                                              max_retries, logger,
+                                              points_out=used_points)))
     if PAIR_ODD in MERGED_ORDER:
         underline.add(PAIR_ODD)
         first.append((PAIR_ODD, _pair_odd_maker(client, analysis, body, slots,
-                                                passage_index, max_retries, logger)))
+                                                passage_index, max_retries, logger,
+                                                avoid_points=used_points)))
     # 내용 O/X 두 판(한글·영어)도 한 호출로 함께 만든다 — 서로 다른 사실을 물어야
     # 하는데, 따로 부르면 모델이 다른 호출에서 무엇을 물었는지 알 수 없다.
     cslots = tuple(t for t in (CONTENT, CONTENT_2) if t in MERGED_ORDER)
@@ -286,7 +291,8 @@ def _flag_key_overlap(passage) -> None:
         passage.flag(E, why)
 
 
-def _grammar_maker(client, analysis, body, max_retries: int, logger=None):
+def _grammar_maker(client, analysis, body, max_retries: int, logger=None,
+                   points_out: set[str] | None = None):
     """어법(복수정답)을 '밑줄 묶음'의 첫 문항으로 만드는 함수를 돌려준다(avoid 를 받는다).
 
     이 유형은 묶음 안에서 만들어지므로 pipeline._gen_one_type 을 거치지 않는다.
@@ -304,6 +310,7 @@ def _grammar_maker(client, analysis, body, max_retries: int, logger=None):
         for attempt in range(2):
             try:
                 q, a, fl, words = _gr.generate(c, analysis, body, max_retries=max_retries,
+                                               points_out=points_out,
                                                avoid=avoid, with_words=True)
             except Exception as e:      # noqa: BLE001 — 유형 단위 격리
                 last = e
@@ -324,7 +331,7 @@ def _grammar_maker(client, analysis, body, max_retries: int, logger=None):
 
 
 def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retries: int,
-                    logger=None):
+                    logger=None, avoid_points: set[str] | None = None):
     """짝짓기를 '밑줄 묶음'의 첫 문항으로 만드는 함수를 돌려준다(avoid 를 받는다).
 
     이 유형은 묶음 안에서 만들어지므로 pipeline._gen_one_type 을 거치지 않는다.
@@ -345,7 +352,8 @@ def _pair_odd_maker(client, analysis, body, slots, passage_index: int, max_retri
         for attempt in range(2):
             try:
                 q, a, fl, words = _po.generate(c, analysis, body, max_retries=max_retries,
-                                               answer_pos=apos, avoid=avoid, with_words=True)
+                                               answer_pos=apos, avoid=avoid, with_words=True,
+                                               avoid_points=avoid_points)
             except Exception as e:      # noqa: BLE001 — 유형 단위 격리
                 last = e
                 if logger:
