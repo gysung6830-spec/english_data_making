@@ -187,7 +187,7 @@ def _prose_subpack(pk, wtype: str):
                                   subtitle=pk.subtitle, worksheets=subs, label=pk.label)
 
 
-def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
+def _cover_keys(books, packs, writing_packs, blank_wb, writing_form_packs=None) -> list[str]:
     keys: list[str] = []
     if books:
         keys.append("workbook")
@@ -196,6 +196,8 @@ def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
             keys.append(wtype)
     if writing_packs:
         keys.append("writing")
+    if writing_form_packs:
+        keys.append("writing_form")
     if blank_wb is not None:
         keys.append("blanks")
     return keys
@@ -204,11 +206,11 @@ def _cover_keys(books, packs, writing_packs, blank_wb) -> list[str]:
 def _render_cover_for(out_path: Path, books, packs, writing_packs, blank_wb,
                       show_ko: bool, footer_note: str,
                       page_map: dict | None = None, answers_page: int = 0,
-                      source_name: str = "") -> Path:
+                      source_name: str = "", writing_form_packs=None) -> Path:
     """수록된 유형을 감지해 표지 겸 목차/사용 설명서를 렌더한다."""
     from . import branding
 
-    keys = _cover_keys(books, packs, writing_packs, blank_wb)
+    keys = _cover_keys(books, packs, writing_packs, blank_wb, writing_form_packs)
     # 표지 부제 = '지문 제목'이 아니라 '원본 파일명'(확장자 제외). 파일명이 없을 때만 제목으로 폴백.
     fname = Path(source_name).stem.strip() if source_name else ""
     title = fname or (books[0].title if books else
@@ -231,7 +233,8 @@ _ANSWER_META = {
 }
 
 
-def _answer_groups_for(key, packs, writing_packs, blank_wb, style: str = "compact") -> list:
+def _answer_groups_for(key, packs, writing_packs, blank_wb, style: str = "compact",
+                       writing_form_packs=None) -> list:
     """한 유형(key)의 정답 그룹 목록. 통합카드(workbook)는 별도 렌더러라 빈 목록."""
     from . import answers_render as ar
     out = []
@@ -243,7 +246,12 @@ def _answer_groups_for(key, packs, writing_packs, blank_wb, style: str = "compac
                 out.append(g)
     elif key == "writing":
         for wpk in writing_packs or []:
-            g = ar.group_from_writing(wpk, style=style)
+            g = ar.group_from_writing(wpk, style=style, type_name="영작 ① 배열")
+            if g:
+                out.append(g)
+    elif key == "writing_form":
+        for wpk in writing_form_packs or []:
+            g = ar.group_from_writing(wpk, style=style, type_name="영작 ② 어형 변형")
             if g:
                 out.append(g)
     elif key == "blanks":
@@ -252,12 +260,14 @@ def _answer_groups_for(key, packs, writing_packs, blank_wb, style: str = "compac
     return out
 
 
-def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact") -> list:
+def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact",
+                         writing_form_packs=None) -> list:
     """단일 유형(통합카드 제외) 정답을 문제와 동일 순서(cover_render._ORDER)로 연속 배치."""
     from . import cover_render
     groups = []
     for key in cover_render._ORDER:
-        groups += _answer_groups_for(key, packs, writing_packs, blank_wb, style=style)
+        groups += _answer_groups_for(key, packs, writing_packs, blank_wb, style=style,
+                                     writing_form_packs=writing_form_packs)
     return groups
 
 
@@ -265,7 +275,8 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
                                    show_ko: bool = True, source_name: str = "",
-                                   answer_style: str = "compact") -> Path:
+                                   answer_style: str = "compact",
+                                   writing_form_packs: list | None = None) -> Path:
     """[표지·목차] → 문제(통합카드→어형→어법→어휘→영작→해석→빈칸)
        → [정답·해설 간지] → 통합카드 정답(유형/지문별 페이지 분할)
        → 단일 유형 정답(유형끼리 페이지 안 나누고 연속, 출처 라벨).
@@ -310,6 +321,10 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
             for i, wpk in enumerate(writing_packs or [], start=1):
                 _emit(f"writing{i}_q", lambda p, w=wpk: writing_render.render_writing_pdf(
                     w, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="writing")
+        elif key == "writing_form":
+            for i, wpk in enumerate(writing_form_packs or [], start=1):
+                _emit(f"writingform{i}_q", lambda p, w=wpk: writing_render.render_writing_pdf(
+                    w, p, footer_note=footer_note, show_ko=show_ko, section="q"), key="writing_form")
         elif key == "blanks":
             if blank_wb is not None:
                 _emit("blanks_q", lambda p: blanks_render.render_blanks_pdf(
@@ -345,19 +360,22 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
                 _emit("wb_a", lambda p: workbook_render.render_workbooks_pdf(
                     books, p, footer_note=footer_note, show_ko=show_ko, section="a"))
         else:
-            _acc.extend(_answer_groups_for(_key, packs, writing_packs, blank_wb, style=answer_style))
+            _acc.extend(_answer_groups_for(_key, packs, writing_packs, blank_wb, style=answer_style,
+                                           writing_form_packs=writing_form_packs))
     _flush_answers()
 
     # ── 표지·목차 (본문 페이지 수 집계 후 렌더, 표지 페이지 수 보정) ──
     cover_path = scratch / f"{stem}__cover.pdf"
     _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
-                      page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name)
+                      page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name,
+                      writing_form_packs=writing_form_packs)
     cpages = _count(cover_path)
     if cpages != cover_guess:                         # 표지가 여러 장이면 목차 페이지를 보정
         shift = cpages - cover_guess
         toc = {k: v + shift for k, v in toc.items()}
         _render_cover_for(cover_path, books, packs, writing_packs, blank_wb, show_ko, footer_note,
-                          page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name)
+                          page_map=toc, answers_page=toc.get("answers", 0), source_name=source_name,
+                          writing_form_packs=writing_form_packs)
 
     workbook_render.merge_pdfs([cover_path] + parts, out_path)
     try:
@@ -377,7 +395,8 @@ def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Pa
                                  base_name: str, footer_note: str = "",
                                  scratch: Path | None = None, blank_wb=None,
                                  writing_packs: list | None = None,
-                                 source_name: str = "", answer_style: str = "compact") -> list[Path]:
+                                 source_name: str = "", answer_style: str = "compact",
+                                 writing_form_packs: list | None = None) -> list[Path]:
     """같은 내용을 '한글 포함'·'한글 제외' 두 개의 별도 PDF 로 출력한다."""
     out_dir = Path(out_dir)
     outs: list[Path] = []
@@ -386,7 +405,8 @@ def render_workbook_two_versions(books: list[Workbook], packs: list, out_dir: Pa
         render_workbook_with_prose_pdf(
             books, packs, out, footer_note=footer_note, scratch=scratch,
             blank_wb=blank_wb, writing_packs=writing_packs, show_ko=show_ko,
-            source_name=source_name, answer_style=answer_style)
+            source_name=source_name, answer_style=answer_style,
+            writing_form_packs=writing_form_packs)
         outs.append(out)
     return outs
 

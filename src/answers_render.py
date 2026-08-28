@@ -69,7 +69,8 @@ def group_from_prose(pack, wtype: str, type_name: str, css: str,
                     items=items, block=block, note=note)
 
 
-def group_from_writing(wpack, css: str = "o", style: str = "gloss") -> "AnsGroup | None":
+def group_from_writing(wpack, css: str = "o", style: str = "gloss",
+                       type_name: str = "영작 워크북") -> "AnsGroup | None":
     items: list[str] = []
     kos: list[str] = []
     for s in wpack.sentences:
@@ -85,7 +86,7 @@ def group_from_writing(wpack, css: str = "o", style: str = "gloss") -> "AnsGroup
     if not items:
         return None
     note = " ".join(kos) if style == "passage" else ""
-    return AnsGroup(label=wpack.label, type_name="영작 워크북", css=css,
+    return AnsGroup(label=wpack.label, type_name=type_name, css=css,
                     items=items, block=True, note=note)
 
 

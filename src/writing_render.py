@@ -47,6 +47,7 @@ class WritingPack:
     instruction: str
     sentences: list[WSentence]
     label: str = ""    # 출처 기반 문항 라벨 (예: "[고1] 9월 30번")
+    wt_label: str = "영작"   # 유형 라벨(영작① 배열 / 영작② 어형변형)
 
 
 # ── LLM 응답 계층 (pydantic) ─────────────────────────────────────────

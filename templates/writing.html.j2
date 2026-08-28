@@ -15,7 +15,7 @@
       {% if pack.label %}<span class="sh-badge">{{ pack.label }}</span>{% endif %}
     </div>
     <div class="ws-instr wt-writing">
-      <span class="wt-label">영작</span> {{ pack.instruction }}
+      <span class="wt-label">{{ pack.wt_label or '영작' }}</span> {{ pack.instruction }}
     </div>
 
     <ol class="ws-list">

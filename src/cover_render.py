@@ -63,10 +63,15 @@ _CATALOG: dict[str, dict] = {
         how="대명사 뒤 = [ ] 에서 가리키는 대상을 고른다",
         mark="= [ A / B / C ]"),
     "writing": dict(
-        name="영작 워크북", css="sec-o",
-        purpose="자주 틀리는 영작 포인트(어순·구문)만 배열 연습",
-        how="우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열한다",
+        name="영작 ① 배열", css="sec-o",
+        purpose="자주 틀리는 영작 포인트(어순·구문)만 배열 연습 — 함정 보기 포함",
+        how="우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열한다(안 쓰는 함정 단어 주의)",
         mark="〈 a / b / c 〉"),
+    "writing_form": dict(
+        name="영작 ② 어형 변형", css="sec-o",
+        purpose="배열 + 어형 변형을 동시에 — 원형을 문맥에 맞게 바꿔 배열",
+        how="〈 〉 안의 '원형' 단어를 문맥에 맞는 어형으로 바꿔 바르게 배열한다",
+        mark="〈 원형 → 어형 〉"),
     "translate": dict(
         name="한글 해석 연습", css="sec-t",
         purpose="문장을 정확히 해석하는 훈련",
@@ -81,7 +86,7 @@ _CATALOG: dict[str, dict] = {
 
 # 유형 배치 순서(진실원본) — 문제 조립·표지 목차·정답이 모두 이 순서를 따른다.
 # 사용자 지정: 어형→어법→어휘(하·상)→영작→빈칸→지칭→통합카드→해석.
-_ORDER = ["form", "grammar", "vocab_easy", "vocab", "writing",
+_ORDER = ["form", "grammar", "vocab_easy", "vocab", "writing", "writing_form",
           "blanks", "ref", "workbook", "translate"]
 
 
