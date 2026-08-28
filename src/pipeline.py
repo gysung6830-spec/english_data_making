@@ -271,6 +271,67 @@ def _build_answer_groups(packs, writing_packs, blank_wb, style: str = "compact",
     return groups
 
 
+_WF_INSTRUCTION = "〈 〉 안의 '( 원형 )' 단어를 문맥에 맞는 어형으로 바꾸고 바르게 배열하시오."
+
+
+def _form_infl_map(prose_pack) -> dict:
+    """render 층 ProsePack 의 form 워크시트에서 {문장no: {변형형(소문자): 원형}} 을 만든다."""
+    out: dict = {}
+    for w in getattr(prose_pack, "worksheets", []):
+        if getattr(w, "wtype", "") != "form":
+            continue
+        for s in w.sentences:
+            m = {}
+            for it in s.items:
+                a = re.sub(r"[^A-Za-z]", "", (it.answer or "")).lower()
+                b = (it.display or "").strip()
+                if b.startswith("(") and b.endswith(")"):
+                    b = b[1:-1].strip()
+                if a and b and a != b.lower() and " " not in b:
+                    m[a] = b
+            if m:
+                out[s.no] = m
+    return out
+
+
+def derive_writing_form_packs(writing_packs, packs) -> list:
+    """영작①(배열) 팩 + 산문 form(원형→변형형) 데이터로 영작②(어형 변형 배열) 팩을 파생한다.
+    변형형이 든 절만 골라, 보기에서 그 단어를 '(원형)'으로 제시한다(정답 어구는 그대로 유지).
+    → 학생은 원형을 문맥에 맞는 어형으로 바꾸고 어순을 배열해야 한다."""
+    out = []
+    for wp, pp in zip(writing_packs or [], packs or []):
+        infl = _form_infl_map(pp)
+        if not infl:
+            continue
+        llm_sents = []
+        for s in wp.sentences:
+            m = infl.get(s.no, {})
+            if not m:
+                continue
+            items, any_changed = [], False
+            for it in s.items:
+                ch = []
+                for token in (it.answer or "").split():
+                    key = re.sub(r"[^A-Za-z]", "", token).lower()
+                    if key in m and key != m[key].lower():
+                        ch.append("(" + m[key] + ")"); any_changed = True
+                    else:
+                        ch.append(token)
+                items.append(writing_render.LLMWritingItem(id=it.id, chunks=ch, answer=it.answer))
+            if any_changed and items:
+                llm_sents.append(writing_render.LLMWritingSentence(
+                    no=s.no, ko=s.ko, template=s.template, items=items))
+        if not llm_sents:
+            continue
+        fp = writing_render.build_writing_pack(
+            writing_render.LLMWritingPack(title=wp.title, subtitle=wp.subtitle, sentences=llm_sents),
+            header=wp.header, title=wp.title, subtitle=wp.subtitle, instruction=_WF_INSTRUCTION)
+        fp.label = getattr(wp, "label", "")
+        fp.wt_label = "영작②"
+        out.append(fp)
+    return out
+
+
 def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path: Path,
                                    footer_note: str = "", scratch: Path | None = None,
                                    blank_wb=None, writing_packs: list | None = None,
@@ -292,6 +353,10 @@ def render_workbook_with_prose_pdf(books: list[Workbook], packs: list, out_path:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     scratch = scratch or out_path.parent
     stem = out_path.stem
+
+    # 영작② (어형 변형) 팩을 지정하지 않으면 영작①+form 데이터로 자동 파생한다.
+    if writing_form_packs is None and writing_packs and packs:
+        writing_form_packs = derive_writing_form_packs(writing_packs, packs) or None
 
     parts: list[Path] = []          # 표지 제외, 본문 순서대로
     toc: dict[str, int] = {}        # 유형 key -> 시작 페이지(문서 전체 기준)
