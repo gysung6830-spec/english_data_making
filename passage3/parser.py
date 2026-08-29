@@ -113,8 +113,16 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
     if not chunks:
         return chunks
     if _letters("".join(c.en for c in chunks)) != _letters(en):
-        # 청크가 원문과 글자 수준으로 다르면(AI가 단어를 넣거나 뺌) 원문을 신뢰한다.
-        # 규칙 기반으로 다시 끊어 영어가 항상 원문과 100% 일치하게 함(뜻은 문장 전체 사용).
+        # 청크가 원문과 글자 수준으로 다름(AI가 단어·문자를 넣거나 뺌).
+        # 단, AI가 '여러 조각으로 나눠 조각마다 뜻(ko)까지 단' 정상 응답이면
+        # 그 뜻을 버리지 않는다(경계가 원문과 미세하게 어긋났다는 이유로 청크별
+        # 해석을 통째로 날려 빈 청크가 되던 문제 방지). 영어는 AI 조각을 그대로
+        # 쓰고 뜻만 정리한다.
+        real = [c for c in chunks if c.en.strip()]
+        if len(real) >= 2 and any((c.ko or "").strip() for c in real):
+            return [Chunk(en=c.en.strip(), ko=tidy_chunk_ko(c.ko)) for c in real]
+        # 그 외(한 덩어리이거나 뜻이 아예 없음)는 원문을 신뢰해 규칙 기반으로 다시
+        # 끊어 영어가 원문과 100% 일치하게 함(뜻은 렌더러가 문장 전체 해석 사용).
         pieces = rough_sense_split(en)
         return [Chunk(en=p, ko="") for p in pieces] or \
             [Chunk(en=en.strip(), ko="")]

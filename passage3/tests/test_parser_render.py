@@ -180,6 +180,17 @@ def test_realign_chunks():
     out2 = realign_chunks(en, bad)
     from parser import _letters as _L
     assert _L(" ".join(c.en for c in out2)) == _L(en)  # 원문과 100% 일치
+    # AI가 여러 조각으로 나누고 조각마다 뜻을 달았지만 경계가 원문과 미세하게
+    # 어긋난 경우: 뜻(ko)을 버리지 않고 보존해야 한다(빈 청크로 폴백 금지).
+    misaligned = [
+        Chunk(en="But remember it has a limit", ko="하지만 한계가 있음을 기억하라"),
+        Chunk(en="of 7 items", ko="일곱 개 항목의"),        # 원문 'seven' → '7'로 달라짐
+        Chunk(en="or chunks.", ko="또는 덩어리라는"),
+    ]
+    out3 = realign_chunks("But remember it has a limit of seven items or chunks.",
+                          misaligned)
+    assert [c.ko for c in out3] == ["하지만 한계가 있음을 기억하라",
+                                    "일곱 개 항목의", "또는 덩어리라는"]  # 뜻 보존
 
 
 def test_tidy_chunk_ko():
