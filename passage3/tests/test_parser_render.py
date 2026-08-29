@@ -196,6 +196,7 @@ def test_tidy_chunk_ko():
     assert tidy_chunk_ko("여섯 나라 중에서다") == "여섯 나라 중에서"
     assert tidy_chunk_ko("그것의 정의에 있어서다") == "그것의 정의에 있어서"
     assert tidy_chunk_ko("무언가를 이루기 위해서다") == "무언가를 이루기 위해서"
+    assert tidy_chunk_ko("보일 수 있는 전체에 의해서다") == "보일 수 있는 전체에 의해서"
 
 
 def test_rough_sense_split():

@@ -93,15 +93,20 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
     except ImportError:
         return passages
 
+    # 청크가 아예 없거나, 있어도 '뜻(ko)'이 통째로 비어 있으면 (=en 조각만 있고
+    # 청크별 해석이 없는 미완성 상태) 다시 생성한다. 뜻이 하나라도 있으면 완료로 본다.
+    def _needs_chunks(s):
+        return bool(s.en.strip()) and (
+            not s.chunks or not any(c.ko.strip() for c in s.chunks))
+
     client = anthropic.Anthropic(api_key=api_key)
-    total = sum(1 for p in passages for s in p.sentences
-                if not s.chunks and s.en.strip())
+    total = sum(1 for p in passages for s in p.sentences if _needs_chunks(s))
     done = 0
 
     for p in passages:
         for s in p.sentences:
-            if s.chunks or not s.en.strip():
-                continue  # 이미 있음 / 영어 없음
+            if not _needs_chunks(s):
+                continue  # 이미 뜻까지 있음 / 영어 없음
             user_msg = (
                 "Split this sentence into 직독직해 sense units (phrase~clause "
                 "sized), in English order. Return ONLY JSON: "
@@ -132,9 +137,13 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                             en = (en or "").strip()
                             if en:
                                 got.append(Chunk(en=en, ko=(ko or "").strip()))
-                    if got:
+                    # 뜻(ko)이 하나라도 있어야 성공으로 인정(en 조각만 온 응답은
+                    # 재시도해서 청크별 해석을 채운다).
+                    if got and any(c.ko for c in got):
                         s.chunks = got
                         break  # 성공
+                    if got and not s.chunks:
+                        s.chunks = got  # 뜻은 없지만 최소한 조각은 보존(폴백 대비)
                 except Exception:
                     pass  # 재시도
                 max_tokens = min(4096, max_tokens + 1200)  # 다음 시도는 더 넉넉히
