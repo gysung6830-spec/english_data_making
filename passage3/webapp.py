@@ -37,7 +37,7 @@ from flask import (Flask, flash, redirect, render_template_string, request,
                    send_file, url_for)
 
 try:
-    from .chunker import chunk_sentences
+    from .chunker import chunk_sentences, any_needs_chunks
     from .main import (FORMATS, extract_passages, html_to_pdf,
                        renumber_passages, drop_practical_items, is_mock_exam,
                        safe_filename)
@@ -48,7 +48,7 @@ try:
     from .translator import translate_missing
     from .vocab import extract_vocab
 except ImportError:  # python webapp.py 로 직접 실행할 때
-    from chunker import chunk_sentences
+    from chunker import chunk_sentences, any_needs_chunks
     from main import (FORMATS, extract_passages, html_to_pdf,
                       renumber_passages, drop_practical_items, is_mock_exam,
                       safe_filename)
@@ -379,9 +379,8 @@ def generate():
                 _log(f"    → 어휘 추출 완료  ({_fmt_dur(time.perf_counter() - t)})")
             except Exception:
                 traceback.print_exc()
-        # 직독직해 청크(키 있으면, 청크 없는 문장만)
-        if "d" in formats and api_key and \
-                any(not s.chunks and s.en for p in passages for s in p.sentences):
+        # 직독직해 청크(키 있으면, 청크가 없거나 뜻이 비어 미완성인 문장만)
+        if "d" in formats and api_key and any_needs_chunks(passages):
             _log("[5] 직독직해 청크 생성 중(AI, 누락 문장만)…")
             t = time.perf_counter()
             try:

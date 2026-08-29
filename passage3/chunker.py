@@ -82,6 +82,21 @@ _SYSTEM = (
 )
 
 
+def needs_chunks(s) -> bool:
+    """이 문장이 직독직해 청크를 (다시) 생성해야 하는 상태인가.
+
+    청크가 아예 없거나, 있어도 '뜻(ko)'이 통째로 비어 있으면(=en 조각만 있고
+    청크별 해석이 없는 미완성) 재생성 대상. 뜻이 하나라도 있으면 완료로 본다.
+    (webapp의 호출 게이트와 chunk_sentences 내부가 동일 조건을 쓰도록 공유.)
+    """
+    return bool(s.en.strip()) and (
+        not s.chunks or not any(c.ko.strip() for c in s.chunks))
+
+
+def any_needs_chunks(passages) -> bool:
+    return any(needs_chunks(s) for p in passages for s in p.sentences)
+
+
 def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
                     api_key: str = None, progress=None) -> List[Passage]:
     """각 문장에 직독직해 청크를 채운다. 키 없으면 그대로 둔다."""
@@ -93,12 +108,7 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
     except ImportError:
         return passages
 
-    # 청크가 아예 없거나, 있어도 '뜻(ko)'이 통째로 비어 있으면 (=en 조각만 있고
-    # 청크별 해석이 없는 미완성 상태) 다시 생성한다. 뜻이 하나라도 있으면 완료로 본다.
-    def _needs_chunks(s):
-        return bool(s.en.strip()) and (
-            not s.chunks or not any(c.ko.strip() for c in s.chunks))
-
+    _needs_chunks = needs_chunks
     client = anthropic.Anthropic(api_key=api_key)
     total = sum(1 for p in passages for s in p.sentences if _needs_chunks(s))
     done = 0
