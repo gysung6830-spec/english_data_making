@@ -72,6 +72,23 @@ def test_mixed_line_split():
     assert "안녕" in s.ko
 
 
+def test_summary_label_split():
+    """'[요약문]' 라벨(한글 포함)이 붙은 요약문 문항: 영어 요약문이 통째로 해석
+    쪽으로 넘어가거나 '['만 영어로 잘려 나가면 안 된다(요약문/[Summary] 버그)."""
+    raw = ("[고1] 2024년 06월 - 40번: 요약문 test\n"
+           "⑥ [요약문] The needs of people have often been overlooked, which could\n"
+           "be changed by adopting an inclusive design.\n"
+           "⑥ [요약문] 장애가 있는 사람들의 요구는 종종 간과되어 왔으며, 변화될 수 있다.\n")
+    p = split_passages(raw)[0]
+    s = p.sentences[0]
+    assert s.en == ("The needs of people have often been overlooked, "
+                    "which could be changed by adopting an inclusive design.")
+    assert s.en.lstrip()[0] != "["          # 라벨 대괄호 잔존 금지
+    assert "needs of people" not in s.ko      # 영어가 해석에 섞이지 않음
+    assert "요약문" not in s.ko and "요약문" not in s.en  # 라벨 제거됨
+    assert s.ko.startswith("장애가")
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):

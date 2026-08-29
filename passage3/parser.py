@@ -317,6 +317,12 @@ def _split_en_ko(chunk: str) -> Tuple[str, str]:
             continue  # 페이지 번호 줄('- 14 -' 등) 무시
         if _JUNK_RE.search(line):
             continue  # [EBS]/[Flow Edu] 머리말·꼬리말 무시
+        # 문장 앞 자료 라벨('[요약문]'·'[Summary]' 등)을 줄 단위에서 먼저 제거.
+        # ('요약문'에 한글이 들어 있어 영/한 혼합줄로 오인→'['에서 잘못 분리되던
+        #  문제 방지. 요약문 문항의 영어 요약문이 통째로 해석 쪽으로 넘어가던 버그.)
+        line = _strip_lead_label(line)
+        if not line:
+            continue  # 라벨만 있던 줄
         if _is_korean_line(line):
             if not en_parts:
                 # 아직 영어를 못 잡음 → 같은 줄 혼합 가능성. 분리 시도.
