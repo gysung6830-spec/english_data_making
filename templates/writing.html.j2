@@ -17,7 +17,7 @@
     <div class="ws-instr wt-writing">
       <span class="wt-label">{{ pack.wt_label or '영작' }}</span> {{ pack.instruction }}
     </div>
-    {% if pack.caution %}<div class="ws-caution"><span class="cx-icon">✕ 함정</span>{{ pack.caution }}</div>{% endif %}
+    {% if pack.caution %}<div class="ws-caution cx-{{ pack.caution_style or 'warn' }}"><span class="cx-icon">{{ pack.caution_badge or '주의' }}</span>{{ pack.caution }}</div>{% endif %}
 
     <ol class="ws-list">
       {% for s in pack.sentences %}

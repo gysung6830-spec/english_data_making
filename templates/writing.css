@@ -42,13 +42,18 @@ body{
 .s-ko-q{ display:inline; font-size:9.4pt; font-weight:700; color:#20242c; }
 .s-en{ display:block; margin-top:6px; margin-left:25px; line-height:2.15; }
 
-/* 함정 주의문 — 눈에 확 띄는 경고 박스(붉은 계열) */
+/* 주의문 — 눈에 확 띄는 강조 박스 */
 .ws-caution{ display:flex; align-items:center; gap:9px; margin:0 0 14px;
-  padding:9px 13px; border:2px solid #d64545; border-left-width:7px;
-  background:#fdecec; color:#a02626; font-size:9.8pt; font-weight:800; line-height:1.45;
-  border-radius:8px; }
-.ws-caution .cx-icon{ flex:none; background:#d64545; color:#fff; font-weight:900;
-  font-size:8.5pt; padding:2px 9px; border-radius:999px; letter-spacing:.3px; }
+  padding:9px 13px; border:2px solid; border-left-width:7px;
+  font-size:9.8pt; font-weight:800; line-height:1.45; border-radius:8px; }
+.ws-caution .cx-icon{ flex:none; color:#fff; font-weight:900;
+  font-size:8.5pt; padding:2px 9px; border-radius:999px; letter-spacing:.3px; white-space:nowrap; }
+/* warn = 붉은 경고(영작① 함정) */
+.ws-caution.cx-warn{ border-color:#d64545; background:#fdecec; color:#a02626; }
+.ws-caution.cx-warn .cx-icon{ background:#d64545; }
+/* info = 호박색 안내(영작② 어형 변형) */
+.ws-caution.cx-info{ border-color:var(--amber); background:var(--amber-bg); color:#8a5412; }
+.ws-caution.cx-info .cx-icon{ background:var(--amber); }
 
 /* 영작 포인트 배열 박스 〈 … 〉 */
 .wo{ display:inline-block; border:1.3px solid var(--amber); color:var(--amber);

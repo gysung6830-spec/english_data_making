@@ -49,6 +49,8 @@ class WritingPack:
     label: str = ""    # 출처 기반 문항 라벨 (예: "[고1] 9월 30번")
     wt_label: str = "영작"   # 유형 라벨(영작① 배열 / 영작② 어형변형)
     caution: str = ""  # 강조 주의문(예: 함정 단어 안내) — 있으면 눈에 띄는 박스로 렌더
+    caution_badge: str = "✕ 함정"   # 주의 박스 뱃지 문구
+    caution_style: str = "warn"     # 주의 박스 색(warn=붉은 경고 / info=호박색 안내)
 
 
 # ── LLM 응답 계층 (pydantic) ─────────────────────────────────────────
@@ -75,6 +77,8 @@ class LLMWritingPack(BaseModel):
 _DEFAULT_INSTRUCTION = "우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열하시오."
 # 영작①(배열) 함정 안내 — 지시문과 별도로 '눈에 띄는 박스'로 강조 렌더한다.
 _DEFAULT_CAUTION = "주의! 〈 〉 안에는 문장에 쓰이지 않는 '함정 단어'가 하나씩 섞여 있습니다. 필요 없는 단어는 빼고 배열하세요."
+# 영작②(어형 변형) 안내 — ( ) 로 표시된 원형은 어형을 바꿔야 함을 강조.
+WFORM_CAUTION = "주의! 〈 〉 안에서 ( )로 표시된 단어는 '원형'입니다. 문맥에 맞게 어형을 바꾼 뒤 배열하세요."
 
 
 def _norm_seq(s: str) -> str:
@@ -118,7 +122,8 @@ def _item_answer(it: LLMWritingItem) -> str:
 
 
 def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: str,
-                       instruction: str = "", caution: str | None = None) -> WritingPack:
+                       instruction: str = "", caution: str | None = None,
+                       caution_badge: str = "✕ 함정", caution_style: str = "warn") -> WritingPack:
     """검증된 LLM 응답 -> 렌더용 WritingPack. display 는 코드가 조각을 섞어 생성한다.
     caution=None 이면 영작①(배열) 함정 안내를 기본으로 넣고, ""(빈 문자열)이면 주의문을 넣지 않는다."""
     sents: list[WSentence] = []
@@ -143,7 +148,8 @@ def build_writing_pack(llm: LLMWritingPack, header: str, title: str, subtitle: s
         sents.append(WSentence(no=s.no, template=template, ko=s.ko, items=items))
     return WritingPack(header=header, title=title or "", subtitle=subtitle or "",
                        instruction=instruction or _DEFAULT_INSTRUCTION, sentences=sents,
-                       caution=(_DEFAULT_CAUTION if caution is None else caution))
+                       caution=(_DEFAULT_CAUTION if caution is None else caution),
+                       caution_badge=caution_badge, caution_style=caution_style)
 
 
 def validate_llm_writing(llm: LLMWritingPack) -> None:

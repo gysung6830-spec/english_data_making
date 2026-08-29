@@ -325,7 +325,8 @@ def derive_writing_form_packs(writing_packs, packs) -> list:
             continue
         fp = writing_render.build_writing_pack(
             writing_render.LLMWritingPack(title=wp.title, subtitle=wp.subtitle, sentences=llm_sents),
-            header=wp.header, title=wp.title, subtitle=wp.subtitle, instruction=_WF_INSTRUCTION, caution="")
+            header=wp.header, title=wp.title, subtitle=wp.subtitle, instruction=_WF_INSTRUCTION,
+            caution=writing_render.WFORM_CAUTION, caution_badge="✎ 어형변형", caution_style="info")
         fp.label = getattr(wp, "label", "")
         fp.wt_label = "영작②"
         out.append(fp)
