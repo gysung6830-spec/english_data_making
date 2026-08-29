@@ -126,8 +126,8 @@ def chunk_sentences(passages: List[Passage], model: str = DEFAULT_MODEL,
             # (부족하면 JSON이 잘려 파싱 실패 → 청크 0개가 되던 문제 방지)
             n_words = len(s.en.split())
             max_tokens = min(4096, max(1200, 400 + n_words * 60))
-            # 실패(잘림/일시 오류) 시 재시도
-            for attempt in range(2):
+            # 실패(잘림/일시 오류/뜻 누락) 시 재시도
+            for attempt in range(3):
                 try:
                     resp = client.messages.create(
                         model=model, max_tokens=max_tokens, system=_SYSTEM,
