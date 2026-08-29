@@ -71,7 +71,8 @@ class LLMWritingPack(BaseModel):
     sentences: list[LLMWritingSentence] = Field(default_factory=list)
 
 
-_DEFAULT_INSTRUCTION = "우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열하여 문장을 완성하시오."
+_DEFAULT_INSTRUCTION = ("우리말 뜻에 맞게 〈 〉 안의 어구를 바르게 배열하시오. "
+                        "단, 〈 〉 안에는 문장에 필요 없는 단어가 하나 섞여 있으니 빼고 배열할 것.")
 
 
 def _norm_seq(s: str) -> str:
