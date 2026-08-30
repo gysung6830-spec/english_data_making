@@ -72,6 +72,35 @@ def test_mixed_line_split():
     assert "안녕" in s.ko
 
 
+def test_bracket_enclosed_number_header():
+    """'[고3 2024년 03월 – 18번]'처럼 번호가 대괄호 안에 있고 콜론·제목이 없는
+    헤더도 지문 경계로 인식해야 한다(못 잡으면 전 지문이 한 덩어리로 뭉쳐
+    같은 번호 문장끼리 뒤섞이던 심각한 파싱 실패 방지)."""
+    raw = ("[고3] 2024년 3월 모의고사 – 한줄해석\n"
+           "[Flow Edu] flowedu.tistory.com\n- 1 -\n"
+           "[고3 2024년 03월 – 18번]\n"
+           "① It has been a privilege to serve here.\n"
+           "① 이곳에서 일한 것은 영광이었습니다.\n"
+           "② My last day will be April 30th.\n"
+           "② 제 마지막 날은 4월 30일입니다.\n"
+           "[고3 2024년 03월 – 19번]\n"
+           "① Anna held on to the wreckage.\n"
+           "① Anna는 잔해에 매달렸다.\n"
+           "[고3 2024년 03월 – 41~42번]\n"
+           "① This is a long passage.\n"
+           "① 이것은 장문이다.\n")
+    ps = split_passages(raw)
+    assert len(ps) == 3                       # 세 지문으로 분리(한 덩어리 방지)
+    assert ps[0].label.endswith("18번")
+    assert len(ps[0].sentences) == 2          # 번호 병합 없이 문장 2개
+    assert ps[0].sentences[0].en == "It has been a privilege to serve here."
+    assert ps[1].label.endswith("19번")
+    assert ps[2].label.endswith("41~42번")    # 범위 라벨 정규화
+    # 자료 머리글/라벨이 문장에 새지 않음
+    assert all("고3 2024" not in s.ko and "번]" not in s.ko
+               for p in ps for s in p.sentences)
+
+
 def test_summary_label_split():
     """'[요약문]' 라벨(한글 포함)이 붙은 요약문 문항: 영어 요약문이 통째로 해석
     쪽으로 넘어가거나 '['만 영어로 잘려 나가면 안 된다(요약문/[Summary] 버그)."""

@@ -232,6 +232,12 @@ HEADER_RE3 = re.compile(
     r"(?i)^\s*((?:ch(?:apter)?|unit|lesson)\.?\s*\d[^:：\n]*?)\s*[:：]\s*(.+)$"
 )
 
+# 대체 헤더:  '[고3 2024년 03월 – 18번]' 처럼 번호가 대괄호 '안'에 있고 콜론·제목이
+#   없는 형식 (Flow&Edu 등). 대괄호 내부가 'N번' 또는 'N~M번'으로 끝난다.
+HEADER_RE4 = re.compile(
+    r"^\s*\[\s*([^\]]*?(\d{1,3}(?:\s*[~∼\-]\s*\d{1,3})?)\s*번)\s*\]\s*(.*)$"
+)
+
 # 아라비아 숫자 문장 번호:  줄 시작의 'N. ' (원문자 대신 쓰는 자료)
 _ARABIC_MARK_RE = re.compile(r"(?m)^[ \t]*(\d{1,2})\.[ \t]+")
 
@@ -425,6 +431,11 @@ def _match_header(line: str):
     m = HEADER_RE.search(line)
     if m:
         return m.group(1).strip(), m.group(3).strip()
+    m = HEADER_RE4.match(line)
+    if m:
+        # 라벨: 대괄호 내부('고3 2024년 03월 – 18번' / 범위 정규화), 제목: 대괄호 뒤(대개 없음)
+        label = re.sub(r"\s*[~∼\-]\s*(\d)", r"~\1", m.group(1)).strip()
+        return label, _clean_title(m.group(3))
     m = HEADER_RE2.match(line)
     if m:
         rest = m.group(2)
