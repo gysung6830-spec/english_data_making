@@ -2865,6 +2865,61 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_json_edit_and_rerender() -> None:
+    """결과 JSON 을 고쳐 API 없이 다시 뽑는다 (검증 → 수정 → 재조판).
+
+    오류 검증에서 나온 결함 중 상당수는 '글자만 고치면 되는 것'이다(정제가 먹은 날짜,
+    깨진 전화번호, 해설 오타). 그걸로 지문을 다시 생성하면 API 값이 그대로 다시 든다.
+    결과 JSON 은 문항 HTML 을 그대로 담으므로, 글자를 고치고 다시 조판하면 호출이 0이다.
+    """
+    import importlib.util
+    import json as _json
+    from pathlib import Path as _Path
+
+    from exam import merged, serialize
+
+    spec = importlib.util.spec_from_file_location(
+        "json_edit", _Path(__file__).resolve().parent.parent / "tools" / "JSON수정.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    passages = merged.demo_passages_merged()
+    data = serialize.dump_parts(
+        [{"passages": passages, "set": "M", "tag": "변형문제",
+          "group_by": "type", "sections": ["student"]}], doc_name="시험")
+    #     JSON 은 문항 HTML 을 그대로 담는다(그래서 글자만 고쳐도 조판이 된다)
+    txt = _json.dumps(data, ensure_ascii=False)
+    assert "<div class=\\\"passage\\\">" in txt or '<div class="passage">' in txt
+
+    #  ① 지문 본문의 글자를 고친다 — 문항 여러 개에 한꺼번에 반영된다
+    target = "DNA"
+    n, stuck = mod.apply_edits(data, [(target, "D.N.A.")])
+    assert n >= 5, n                       # 같은 지문을 쓰는 문항 다수에 반영
+    assert not stuck, stuck
+    assert "D.N.A." in _json.dumps(data, ensure_ascii=False)
+
+    #  ② 없는 글자는 아무것도 바꾸지 않는다
+    n2, _ = mod.apply_edits(data, [("있지도 않은 글자", "무언가")])
+    assert n2 == 0
+
+    #  ③ 밑줄·빈칸이 어구 사이에 끼면 '글자만으로는 못 고친다'고 알려 준다.
+    #     기호(①~⑩)까지 지운 평문으로 찾아야 이 경고가 뜬다 — 안 지우면 조용히 넘어간다.
+    pg = data["parts"][0]["passages"][0]
+    pg["q"]["_probe"] = 'the <span class="cnum">①</span> <u>quick</u> brown fox'
+    n3, stuck3 = mod.apply_edits(data, [("the quick brown", "the slow brown")])
+    assert n3 == 0 and any("_probe" in s for s in stuck3), (n3, stuck3)
+
+    #  ④ 고친 JSON 이 그대로 다시 조판된다(호출 0회)
+    parts, meta = serialize.load_parts(data)
+    assert meta["n_parts"] == 1
+    html = renderer.render_html(
+        parts[0]["passages"], type_order=parts[0]["type_order"],
+        prompts=parts[0]["prompts"], labels=parts[0]["labels"],
+        sections=parts[0]["sections"])
+    assert "D.N.A." in html                # 고친 글자가 조판까지 이어진다
+    print("✓ JSON 수정 → API 없이 재조판(다중 문항 반영·밑줄 걸림 경고) 통과")
+
+
 def test_ox_no_length_check() -> None:
     """내용 O/X 에는 선지 길이 검사를 걸지 않는다 (5차 검증에서 나온 오탐).
 
@@ -3559,6 +3614,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_json_edit_and_rerender()
     test_ox_no_length_check()
     test_ingest_number_preservation()
     test_vocab_memorization_guards()
