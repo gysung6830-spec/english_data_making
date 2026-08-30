@@ -71,11 +71,19 @@ class RestatementChain(BaseModel):
 # 지문 전체 개관 (LLM 1차 호출) — ③ 글 예측
 # ---------------------------------------------------------------------------
 class GrammarDrill(BaseModel):
-    """핵심 문법 연습문제(객관식 / 영작). '해석' 유형은 사용하지 않는다."""
-    kind: Literal["객관식", "영작"]
-    question: str         # 객관식=문제(밑줄·빈칸 포함) / 영작=한국어 문장
-    answer: str           # 모범 답(객관식=정답 선택지 원문)
-    options: list[str] = Field(default_factory=list)  # 객관식 선택지(3~5개)
+    """핵심 문법 연습문제.
+    kind:
+      밑줄형   = 수능 어법: sentence 안 [[n|텍스트]] 5곳 중 어법상 틀린 것(answer=번호). fix=수정.
+      네모형   = 내신 어법: sentence 안 [[A/B]] 여러 곳 옳은 조합(answer='A / B / …' 조합).
+      오류찾기 = options 5문장 중 어법상 틀린 문장(answer=틀린 문장 원문). fix=수정.
+      객관식   = (레거시) question+options 단일 정답. 영작=한국어→영작.
+    """
+    kind: Literal["밑줄형", "네모형", "오류찾기", "객관식", "영작"]
+    question: str         # 지시문(예: '어법상 틀린 것은?') / 영작=한국어 문장
+    answer: str           # 정답(밑줄형=번호 / 네모형=조합 / 오류찾기=틀린 문장 / 객관식=정답 선택지 / 영작=모범답)
+    sentence: str = ""    # 밑줄형·네모형: 표지([[n|…]] 또는 [[A/B]])를 넣은 지문 문장
+    fix: str = ""         # 밑줄형·오류찾기: 틀린 부분을 어떻게 고치는지(강사용 해설)
+    options: list[str] = Field(default_factory=list)  # 객관식·오류찾기 선택지 / 밑줄형=①~⑤ 항목
     words: list[str] = Field(default_factory=list)    # 영작 제시 단어(반드시 제공)
     from_passage: bool = False  # 영작: 지문에 실제로 있는 문장 복원이면 True(응용이면 False)
 

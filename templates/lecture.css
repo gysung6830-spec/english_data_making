@@ -93,6 +93,22 @@ body{
 .drill-kind.객관식{ background:var(--indigo); }
 .drill-kind.해석{ background:var(--green); }
 .drill-kind.영작{ background:#8a6d1f; }
+.drill-kind.밑줄형{ background:var(--indigo); }
+.drill-kind.네모형{ background:var(--green); }
+.drill-kind.오류찾기{ background:var(--red); }
+/* 밑줄형/네모형 표지 문장 */
+.drill-sent{ font-size:9.9pt; color:var(--ink); line-height:1.75; margin:5px 0 3px;
+  padding:6px 11px; background:var(--green-soft); border:1px solid var(--line); border-radius:8px; }
+.dul{ text-decoration:underline; text-underline-offset:2.5px; text-decoration-thickness:1px; }
+.dul .dnum{ font-size:6.6pt; font-weight:800; color:var(--indigo); margin-right:1px; vertical-align:3px; }
+.dul-x{ color:var(--red); text-decoration-color:var(--red); font-weight:700; }
+.dul-x .dnum{ color:var(--red); }
+.nbox{ white-space:nowrap; }
+.nbox .boxo{ color:#7a828c; }
+.nbox .boxc{ color:var(--green-d); font-weight:800; }
+.nbox i{ color:#b9c0c6; font-style:normal; }
+.drill-opts.nums{ flex-direction:row; flex-wrap:wrap; gap:4px 14px; margin-top:4px; }
+.drill-opts.nums .dopt2{ font-size:9.2pt; color:#3f4654; white-space:nowrap; }
 .drill-src{ display:inline-block; font-weight:700; font-size:7.6pt; border-radius:5px;
   padding:0 6px; margin-right:6px; }
 .drill-src.psg{ background:var(--green-bg); color:var(--green-d); }

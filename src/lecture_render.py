@@ -130,6 +130,58 @@ def _has_mark(text: str) -> bool:
     return bool(_MARK.search(text or ""))
 
 
+def _render_underline(sentence: str, answer: str, teacher: bool) -> Markup:
+    """밑줄형: [[n|텍스트]] → 밑줄+번호. 강사용은 answer 번호에 오류 표시."""
+    ans = str(answer or "").strip()
+    esc = str(escape(sentence or ""))
+
+    def rep(m):
+        inner = m.group(1)
+        if "|" in inner:
+            n, txt = inner.split("|", 1)
+        else:
+            n, txt = "", inner
+        n = n.strip()
+        cls = "dul dul-x" if (teacher and n and n == ans) else "dul"
+        sup = f'<sup class="dnum">{n}</sup>' if n else ""
+        return f'<u class="{cls}">{sup}{txt.strip()}</u>'
+
+    return Markup(_MARK.sub(rep, esc))
+
+
+def _render_box(sentence: str, answer: str, teacher: bool) -> Markup:
+    """네모형: [[A/B]] → [ A / B ] 박스. 강사용은 answer 조합의 정답을 굵게."""
+    esc = str(escape(sentence or ""))
+    ans_tokens = [t.strip() for t in str(answer or "").split("/")]
+    idx = [0]
+
+    def rep(m):
+        opts = [o.strip() for o in m.group(1).split("/")]
+        k = idx[0]; idx[0] += 1
+        correct = ans_tokens[k] if k < len(ans_tokens) else None
+        parts = []
+        for o in opts:
+            if teacher and correct and o == correct:
+                parts.append(f'<b class="boxc">{o}</b>')
+            else:
+                parts.append(f'<span class="boxo">{o}</span>')
+        return '<span class="nbox">[&nbsp;' + ' <i>/</i> '.join(parts) + '&nbsp;]</span>'
+
+    return Markup(_MARK.sub(rep, esc))
+
+
+def _drill_view(d, teacher: bool) -> dict:
+    v = {"kind": d.kind, "question": d.question, "answer": d.answer,
+         "options": list(d.options), "words": list(d.words),
+         "from_passage": d.from_passage, "fix": getattr(d, "fix", ""),
+         "sentence_html": ""}
+    if d.kind == "밑줄형":
+        v["sentence_html"] = _render_underline(getattr(d, "sentence", ""), d.answer, teacher)
+    elif d.kind == "네모형":
+        v["sentence_html"] = _render_box(getattr(d, "sentence", ""), d.answer, teacher)
+    return v
+
+
 def _highlight_passage(sentences, chains, first_expr_only: bool = False) -> Markup:
     """지문 텍스트에 각 재진술 사슬(소재)의 표현을 소재별 색 + '소재 번호'로 형광펜 표시.
 
@@ -335,10 +387,7 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
                             for n in ov.key_grammar.explanation],
             "example": ov.key_grammar.example,
             "example_analysis": ov.key_grammar.example_analysis,
-            "drills": [{"kind": d.kind, "question": d.question, "answer": d.answer,
-                        "options": list(d.options), "words": list(d.words),
-                        "from_passage": d.from_passage}
-                       for d in ov.key_grammar.drills],
+            "drills": [_drill_view(d, teacher) for d in ov.key_grammar.drills],
         },
         "sentences": p.sentences,
         "lines": lines,

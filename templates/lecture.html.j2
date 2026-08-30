@@ -168,12 +168,26 @@
     </div>
 
     <div class="kg-drills">
-      <div class="kg-drills-h">✏ 연습문제 — 객관식 · 영작(지문 문장 + 응용)으로 확인</div>
+      <div class="kg-drills-h">✏ 연습문제 — 어법 판단(밑줄·네모·오류) · 영작으로 확인</div>
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">
         <div class="drill-q"><span class="drill-kind {{ d.kind }}">{{ d.kind }}</span>{% if d.kind == '영작' %}<span class="drill-src {{ 'psg' if d.from_passage else 'app' }}">{{ '지문 문장' if d.from_passage else '응용' }}</span>{% endif %}{{ d.question }}</div>
-        {% if d.kind == '객관식' %}
+        {% if d.kind == '밑줄형' %}
+        <div class="drill-sent">{{ d.sentence_html }}</div>
+        {% if d.options %}<div class="drill-opts nums">{% for op in d.options %}<span class="dopt2">{{ op }}</span>{% endfor %}</div>{% endif %}
+        {% if teacher %}<div class="drill-a">정답 <b>{{ d.answer }}</b>{% if d.fix %} — {{ d.fix }}{% endif %}</div>
+        {% else %}<div class="drill-write"><span class="drill-arrow">답</span><span class="writeline inline wide2"></span></div>{% endif %}
+        {% elif d.kind == '네모형' %}
+        <div class="drill-sent">{{ d.sentence_html }}</div>
+        {% if teacher %}<div class="drill-a">정답 <b>{{ d.answer }}</b></div>
+        {% else %}<div class="drill-write"><span class="drill-arrow">답</span><span class="writeline inline wide2"></span></div>{% endif %}
+        {% elif d.kind == '오류찾기' %}
+        <div class="drill-opts">
+          {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}
+        </div>
+        {% if teacher %}<div class="drill-a">정답 <b>{{ d.answer }}</b>{% if d.fix %} → {{ d.fix }}{% endif %}</div>{% endif %}
+        {% elif d.kind == '객관식' %}
         <div class="drill-opts">
           {% for op in d.options %}<span class="dopt {% if teacher and op == d.answer %}on{% endif %}"><span class="dk"></span>{{ op }}</span>{% endfor %}
         </div>

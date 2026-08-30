@@ -324,18 +324,37 @@ def verify_passages(passages, *, cross_check: bool = True) -> list[Issue]:
         # 6) ⑤ 연습문제 구성·정답
         kg = ov.key_grammar
         d = list(kg.drills)
-        nmc = sum(1 for x in d if x.kind == "객관식")
+        # 어법판단 3형식(밑줄형·네모형·오류찾기) + 영작 2. 레거시 '객관식'도 어법판단으로 인정.
+        njudge = sum(1 for x in d if x.kind in ("밑줄형", "네모형", "오류찾기", "객관식"))
         nwr = sum(1 for x in d if x.kind == "영작")
         if len(d) != 5:
             err(tag, f"연습문제가 5개가 아님({len(d)})")
-        if nmc != 3 or nwr != 2:
-            warn(tag, f"'객관식3+영작2' 구성 아님(객{nmc}/영{nwr})")
+        if njudge != 3 or nwr != 2:
+            warn(tag, f"'어법판단3+영작2' 구성 아님(판{njudge}/영{nwr})")
         for x in d:
-            if x.kind == "객관식":
+            if x.kind == "밑줄형":
+                nmark = len(re.findall(r"\[\[.+?\]\]", getattr(x, "sentence", "") or ""))
+                if nmark != 5:
+                    warn(tag, f"밑줄형 표지가 5곳이 아님({nmark})")
+                if not str(x.answer).strip():
+                    err(tag, "밑줄형 정답(틀린 번호) 비어 있음")
+            elif x.kind == "네모형":
+                nbox = len(re.findall(r"\[\[.+?\]\]", getattr(x, "sentence", "") or ""))
+                ntok = len([t for t in str(x.answer).split("/") if t.strip()])
+                if nbox < 2:
+                    warn(tag, f"네모형 표지가 2곳 미만({nbox})")
+                if nbox != ntok:
+                    warn(tag, f"네모형 네모수({nbox})≠정답조합수({ntok})")
+            elif x.kind == "오류찾기":
+                if len(x.options) != 5:
+                    warn(tag, f"오류찾기 보기가 5문장이 아님({len(x.options)})")
+                if x.answer not in x.options:
+                    err(tag, f"오류찾기 정답 문장이 보기에 없음: {str(x.answer)[:30]!r}")
+            elif x.kind == "객관식":
                 if x.answer not in x.options:
                     err(tag, f"객관식 정답이 보기에 없음: {x.answer[:30]!r}")
-                if any(e in x.question for e in _ELLIPSIS):
-                    warn(tag, f"객관식 문항에 말줄임표: {x.question[:40]!r}")
+            if x.kind in ("밑줄형", "네모형", "오류찾기", "객관식") and any(e in x.question for e in _ELLIPSIS):
+                warn(tag, f"어법판단 문항에 말줄임표: {x.question[:40]!r}")
             if x.kind == "영작" and not x.words:
                 warn(tag, "영작 제시어(words)가 비어 있음")
 
