@@ -222,7 +222,9 @@ CROPS = [
     ("analysis.png", "c-analysis-point.png", (0.035, 0.535, 0.96, 0.685)),
 
     # 03 필생보 강의용 — 학생용 지면이 특징을 더 잘 보여 준다
-    ("pilsaengbo-student.png", "c-psbc-circle.png", (0.085, 0.170, 0.62, 0.193)),
+    # 조각은 빈칸 하나만 학생용에서 따고 나머지는 강사용에서 딴다.
+    # 학생용은 빈칸이라 무엇을 배우는 자리인지가 사진으로는 안 보인다.
+    ("pilsaengbo-sent.png", "c-psbc-circle.png", (0.06, 0.152, 0.94, 0.190)),
     # 강사용 쪽에서 잘라야 △ 판정과 '→ 바르게'가 채워진 채로 보인다
     ("pilsaengbo-sent.png", "c-psbc-ox.png", (0.06, 0.560, 0.94, 0.640)),
     ("pilsaengbo-student2.png", "c-psbc-notread.png", (0.06, 0.573, 0.94, 0.600)),
