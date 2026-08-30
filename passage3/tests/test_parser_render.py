@@ -140,9 +140,15 @@ def test_proper_noun_josa_not_split():
         "", "Linda는 대답으로 고개를 끄덕였다.")
     assert _split_mixed_line("Sean이 돌에 걸려 넘어졌다.") == (
         "", "Sean이 돌에 걸려 넘어졌다.")
+    # 경칭 포함 다어절 이름('Ms. Blake는')도 통째로 한글
+    assert _split_mixed_line("Ms. Blake는 단호하게 말했다.") == (
+        "", "Ms. Blake는 단호하게 말했다.")
     # 진짜 영/한 혼합줄(영어 여러 단어 + 공백 후 한글)은 그대로 분리
     en, ko = _split_mixed_line("The weather was perfect 날씨는 완벽했다.")
     assert en == "The weather was perfect" and ko == "날씨는 완벽했다."
+    # 영어 문장 뒤에 이름이 밀착해도(소문자 기능어 포함) 이름구 아님 → 정상 분리
+    en, ko = _split_mixed_line("said firmly Ms. Blake는 단호하게 말했다.")
+    assert en == "said firmly Ms. Blake" and ko.startswith("는")
 
 
 def test_renderers_produce_html():

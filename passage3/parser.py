@@ -329,11 +329,30 @@ def _split_mixed_line(line: str) -> Tuple[str, str]:
         return line.strip(), ""
     idx = m.start()
     en_part = line[:idx].strip()
-    # 한글 바로 앞이 라틴 글자(공백 없이 밀착)이고, 앞 영어가 단일 토큰(고유명사)
+    # 한글 바로 앞이 라틴 글자(공백 없이 밀착)이고, 앞 영어가 짧은 고유명사구
+    # ('Linda', 'Ms. Blake' 등)면 → 문장 전체가 '이름+조사'로 시작하는 한글.
     if (idx > 0 and line[idx - 1].isascii() and line[idx - 1].isalpha()
-            and en_part and " " not in en_part):
+            and _looks_like_name_phrase(en_part)):
         return "", line.strip()
     return en_part, line[idx:].strip()
+
+
+def _looks_like_name_phrase(s: str) -> bool:
+    """짧은 라틴 고유명사구인가('Linda', 'Ms. Blake', 'Dr. Kim' 등).
+
+    한글 해석이 이름+조사(Linda는/Ms. Blake는)로 시작할 때, 그 앞을 영어로
+    떼어내면 안 되는지 판단. 모든 토큰이 대문자로 시작하는(경칭 'Ms.' 포함) 짧은
+    (≤3어절) 구여야 이름구로 본다. 소문자 기능어(said, the…)가 섞이면 실제
+    영/한 혼합줄이므로 False(정상 분리).
+    """
+    toks = s.split()
+    if not toks or len(toks) > 3:
+        return False
+    for t in toks:
+        t = t.rstrip(".'’")
+        if not t or not t[0].isupper():
+            return False
+    return True
 
 
 def _split_en_ko(chunk: str) -> Tuple[str, str]:
