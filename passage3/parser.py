@@ -250,6 +250,8 @@ _PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
 # PDF 글리프 매핑 실패 토큰:  '(cid:8796)' 등. 원문자(①②③)·특수기호가
 # ToUnicode에 없어 디코딩되지 못한 것. 문장 분리를 망가뜨리므로 지운다.
 _CID_RE = re.compile(r"\(cid:\d+\)")
+# 줄 맨 앞의 cid(=디코딩 실패한 문장 마커). 뒤의 한글 짝줄에서 번호를 되살린다.
+_LEAD_CID_RE = re.compile(r"^(\s*)\(cid:\d+\)\s*")
 
 # 자료 머리말/꼬리말·안내문(워터마크) 줄
 _JUNK_RE = re.compile(
@@ -302,6 +304,50 @@ def circled_to_int(ch: str) -> int:
     if 0x32B1 <= o <= 0x32BF:   # ㊱~㊿
         return o - 0x32B1 + 36
     return 0
+
+
+def _int_to_circled(n: int) -> str:
+    """정수 → 원문자. 1→① … 50→㊿. 범위 밖이면 빈 문자열."""
+    return CIRCLED[n - 1] if 1 <= n <= len(CIRCLED) else ""
+
+
+def _leading_circled_num(line: str) -> int:
+    """줄 선두의 원문자 번호(없으면 0)."""
+    s = line.lstrip()
+    return circled_to_int(s[0]) if s else 0
+
+
+def _restore_cid_markers(raw: str) -> str:
+    """줄 맨 앞의 '(cid:NNNN)'(디코딩 실패한 원문자 문장 마커)를 복원한다.
+
+    모의고사 2단 지문에서 영어줄의 원문자 ㉑㉒…(U+3251~)가 폰트 디코딩에
+    실패해 '(cid:8796)'처럼 나오는 일이 잦다. 마커가 사라지면 그 영어 문장이
+    바로 앞 문장 청크에 흡수돼 en/해석 정렬이 통째로 밀린다(장문 43~45 반복
+    버그의 근본 원인). 영어줄 바로 다음의 한글 짝줄이 '같은 번호'의 원문자로
+    시작하므로 그 번호로 마커를 되살린다. 못 찾으면 직전 번호+1로 이어붙인다.
+    줄 중간의 cid(대화 표시 등)는 그냥 지운다.
+    """
+    lines = raw.split("\n")
+    prev = 0
+    for i, ln in enumerate(lines):
+        m = _LEAD_CID_RE.match(ln)
+        if not m:
+            c = _leading_circled_num(ln)
+            if c:
+                prev = c
+            continue
+        num = 0
+        for j in range(i + 1, min(i + 3, len(lines))):  # 다음 짝줄에서 번호 찾기
+            c = _leading_circled_num(lines[j])
+            if c:
+                num = c
+                break
+        if not num:
+            num = prev + 1
+        ch = _int_to_circled(num)
+        lines[i] = m.group(1) + (ch + " " if ch else "") + ln[m.end():]
+        prev = num
+    return _CID_RE.sub(" ", "\n".join(lines))  # 남은(줄 중간) cid 제거
 
 
 def _count_hangul(s: str) -> int:
@@ -501,8 +547,8 @@ def split_passages(raw: str) -> List[Passage]:
 
     # PDF 추출에서 섞이는 널문자/소프트하이픈을 공백으로 정규화
     raw = raw.replace("\x00", " ").replace("\xad", " ")
-    # 글리프 매핑 실패 토큰('(cid:8796)' 등)을 제거(문장 분리 교란 방지)
-    raw = _CID_RE.sub(" ", raw)
+    # 디코딩 실패한 문장 마커('(cid:8796)' 등)를 짝줄 번호로 복원(남으면 제거)
+    raw = _restore_cid_markers(raw)
 
     lines = raw.splitlines()
 

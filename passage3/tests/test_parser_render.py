@@ -151,6 +151,31 @@ def test_proper_noun_josa_not_split():
     assert en == "said firmly Ms. Blake" and ko.startswith("는")
 
 
+def test_cid_marker_restored_from_pair():
+    """영어줄의 원문자 문장 마커가 '(cid:NNNN)'로 디코딩 실패하면, 뒤따르는
+    한글 짝줄의 번호로 마커를 복원해야 한다. 마커가 사라지면 그 영어 문장이 앞
+    문장에 흡수돼 en/해석 정렬이 통째로 밀린다(장문 43~45 근본 버그)."""
+    raw = (
+        "[고2] 2025년 03월 - 43~45번: story\n"
+        "⑳ Soccer isn't about perfection.\n"
+        "⑳ 축구는 완벽함에 관한 것이 아니다.\n"
+        "(cid:8796) And you've always had plenty of that.\n"
+        "㉑ 그리고 너는 항상 그것을 많이 갖고 있었다.\n"
+        "(cid:8797) Ms. Blake said firmly.\n"
+        "㉒ Ms. Blake는 단호하게 말했다.\n"
+    )
+    p = split_passages(raw)[0]
+    by = {s.num: s for s in p.sentences}
+    # 21번 영어 문장이 20번에 흡수되지 않고 독립 + 정렬
+    assert by[20].en == "Soccer isn't about perfection."
+    assert by[21].en == "And you've always had plenty of that."
+    assert by[21].ko.startswith("그리고")
+    # 22번: 이름+조사 보존, 조사로 시작하지 않음
+    assert by[22].en == "Ms. Blake said firmly."
+    assert by[22].ko == "Ms. Blake는 단호하게 말했다."
+    assert "cid" not in by[21].en and "cid" not in by[22].en
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):
