@@ -464,7 +464,7 @@ MATERIALS: list[Item] = [
     ),
     Item(
         key="variation",
-        max_points=9,
+        max_points=8,
         signature=True,
         # 목록 썸네일은 두 단이 다 찬 쪽으로. 학생용은 왼쪽 한 단뿐이라
         # 작게 줄이면 오른쪽 절반이 비어 허전하다.
