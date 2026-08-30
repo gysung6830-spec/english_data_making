@@ -47,6 +47,11 @@ MAX_FIGURES = 2
 # 특징 줄 수. 카드마다 분량이 들쭉날쭉하면 목록으로 늘어놨을 때 눈에 걸린다.
 MAX_POINTS = 4
 
+# 상세페이지·라인업은 이 배율로 저장한다. 네이버가 폭에 맞춰 줄여 주므로
+# 큰 판을 올리는 편이 글자가 선명하다. 프로필·타이틀·파비콘처럼 규격이 정해진
+# 이미지는 크기를 바꾸면 안 되므로 여기 해당하지 않는다.
+DOC_SCALE = 2
+
 CSS = f"""
 {font_css()}
 body {{ font-family:'OrticaSans','Malgun Gothic',sans-serif; color:{P['ink']}; }}
@@ -990,9 +995,11 @@ def build_index_sheet(width: int = 1200, cols: int = 4,
 
 
 # ── 실행 ──────────────────────────────────────────────────────────────────
-def emit(made: list[Path], name: str, html: str, w: int, h: int) -> None:
-    made.append(html_to_png(html, OUT / name, w, h))
-    print(f"  ✔ {name}  ({w}×{h})")
+def emit(made: list[Path], name: str, html: str, w: int, h: int,
+         scale: int = 1) -> None:
+    made.append(html_to_png(html, OUT / name, w, h, scale=scale))
+    size = f"{w}×{h}" if scale == 1 else f"{w}×{h} → {w * scale}×{h * scale}"
+    print(f"  ✔ {name}  ({size})")
 
 
 def build_all() -> list[Path]:
@@ -1046,14 +1053,15 @@ def build_all() -> list[Path]:
     print("자료별 상세페이지")
     for it in MATERIALS + BOOKS:
         html, h = build_detail(it)
-        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
+        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h,
+             scale=DOC_SCALE)
 
     print("라인업")
     html, h = build_lineup()
-    emit(made, "lineup.png", html, DOC_W, h)
+    emit(made, "lineup.png", html, DOC_W, h, scale=DOC_SCALE)
     for i, name in enumerate(LINEUP_PARTS):
         html, h = build_lineup(part=i)
-        emit(made, name, html, DOC_W, h)
+        emit(made, name, html, DOC_W, h, scale=DOC_SCALE)
 
     print("포스트 썸네일 샘플")
     emit(made, "thumb-800-sample.png",
@@ -1098,8 +1106,8 @@ def main() -> None:
 
     if args.cmd == "index":
         html, h = build_index_sheet()
-        html_to_png(html, OUT / "_index.png", 1200, h)
-        print(f"✔ _index.png  (1200×{h})")
+        html_to_png(html, OUT / "_index.png", 1200, h, scale=DOC_SCALE)
+        print(f"✔ _index.png  (1200×{h} → {1200 * DOC_SCALE}×{h * DOC_SCALE})")
         return
 
     if args.cmd == "posts":
@@ -1110,17 +1118,18 @@ def main() -> None:
     if args.cmd == "lineup":
         made: list[Path] = []
         html, h = build_lineup()
-        emit(made, "lineup.png", html, DOC_W, h)
+        emit(made, "lineup.png", html, DOC_W, h, scale=DOC_SCALE)
         for i, name in enumerate(LINEUP_PARTS):
             html, h = build_lineup(part=i)
-            emit(made, name, html, DOC_W, h)
+            emit(made, name, html, DOC_W, h, scale=DOC_SCALE)
         return
 
     if args.cmd == "item":
         it = BY_KEY[args.key]
         made: list[Path] = []
         html, h = build_detail(it)
-        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h)
+        emit(made, f"detail-{it.no.lower()}-{it.key}.png", html, DOC_W, h,
+             scale=DOC_SCALE)
         return
 
     made = build_all()
