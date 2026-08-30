@@ -47,6 +47,10 @@ class Shot:
         self.keep = keep
 
 
+# 새 워크북은 표지가 없어 첫 쪽 본문 머리로 가려낸다. 필생보에도 '올림포스
+# 영어독해 기본1' 이 출처로 적혀 있어, 단원 번호까지 붙여야 겹치지 않는다.
+WB = dict(head=["올림포스 영어독해 기본1 10-2"], marks=["영작①"])
+
 SHOTS = [
     # '지문 자료' 머리말을 셋이 나눠 쓴다. 본문 생김새로 가른다.
     #   원문만        → 해석 문장이 아예 없다
@@ -85,15 +89,18 @@ SHOTS = [
     Shot("psb-pace.png", 3, marks=["완급조절"], keep=0.9),
     Shot("psb-predict.png", 19, marks=["해석 전 예측"], keep=0.9),
 
-    # 통합 영어 워크북 — 한글 포함 / 제외
-    Shot("workbook-integrated.png", 1, head=["한글 포함"], keep=0.82),
-    Shot("workbook-integrated-en.png", 1, head=["한글 제외"], keep=0.82),
+    # 통합 영어 워크북 — 새 판(올림포스 10-2). 영작이 ①함정 단어 / ②어형 변형
+    # 둘로 갈렸고 쪽 순서도 바뀌었다. 표지가 없어 첫 쪽 본문으로 가려낸다.
+    Shot("workbook-integrated.png", 8, **WB, keep=0.82),          # 통합 카드
+    Shot("workbook-integrated-vocab.png", 3, **WB, keep=0.72),    # 어휘 (상)
+    Shot("workbook-integrated-order.png", 4, **WB, keep=0.72),    # 영작① 함정
+    Shot("workbook-integrated-form.png", 5, **WB, keep=0.72),     # 영작② 어형
+    Shot("workbook-integrated-blank.png", 6, **WB, keep=1.0),     # 지문·요약문 빈칸
+    Shot("workbook-integrated-pronoun.png", 7, **WB, keep=0.72),  # 대명사 지칭
 
-    Shot("workbook-integrated-pronoun.png", 6, head=["한글 포함"], keep=0.72),
-    Shot("workbook-integrated-order.png", 7, head=["한글 포함"], keep=0.72),
-    Shot("workbook-integrated-form.png", 2, head=["한글 포함"], keep=0.72),
-    Shot("workbook-integrated-vocab.png", 5, head=["한글 포함"], keep=0.72),
-    Shot("workbook-integrated-blank.png", 9, head=["한글 포함"], keep=1.0),
+    # 한글 포함 / 제외 대비만 이전 판에서 가져온다. 새 판은 아직 한 벌만 받았다.
+    Shot("workbook-integrated-ko.png", 1, head=["한글 포함"], keep=0.82),
+    Shot("workbook-integrated-en.png", 1, head=["한글 제외"], keep=0.82),
 
     # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
     Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
@@ -193,8 +200,8 @@ CROPS = [
     ("hapbon-summary.png", "h-psbc-restate4.png", (0.055, 0.352, 0.960, 0.660)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     # 지시문 띠 + 실제 지칭 문항. 띠가 없으면 무슨 문제인지 안 보인다.
-    ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.120, 0.97, 0.392)),
-    ("workbook-integrated-vocab.png", "c-wbi-vocab.png", (0.03, 0.120, 0.97, 0.281)),
+    ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.125, 0.97, 0.258)),
+    ("workbook-integrated-vocab.png", "c-wbi-vocab.png", (0.03, 0.125, 0.97, 0.258)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
     ("workbook-integrated.png", "h-wbi.png", (0.02, 0.020, 0.98, 0.560)),
     ("workbook.png", "h-wb.png", (0.02, 0.015, 0.98, 0.450)),
@@ -226,12 +233,11 @@ CROPS = [
     ("workbook-integrated.png", "c-wbi-ref.png", (0.06, 0.388, 0.95, 0.538)),
     # 영작은 두 판이다. 지시문 띠까지 같이 잘라야 '배열'과 '어형 변화'가
     # 다른 문제라는 것이 보인다. 같은 1번 문장을 두 판으로 나란히 놓는다.
-    ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.120, 0.97, 0.281)),
-    ("workbook-integrated-form.png", "c-wbi-form.png", (0.03, 0.120, 0.97, 0.281)),
-    ("workbook-integrated-order.png", "c-wbi-order2.png", (0.03, 0.292, 0.97, 0.410)),
-    ("workbook-integrated-blank.png", "c-wbi-blank.png", (0.03, 0.088, 0.97, 0.335)),
-    ("workbook-integrated-blank.png", "c-wbi-blank2.png", (0.03, 0.443, 0.97, 0.630)),
-    ("workbook-integrated.png", "c-wbi-ko.png", (0.04, 0.236, 0.96, 0.372)),
+    ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.125, 0.97, 0.368)),
+    ("workbook-integrated-form.png", "c-wbi-form.png", (0.03, 0.125, 0.97, 0.368)),
+    ("workbook-integrated-blank.png", "c-wbi-blank.png", (0.03, 0.098, 0.97, 0.222)),
+    ("workbook-integrated-blank.png", "c-wbi-blank2.png", (0.03, 0.468, 0.97, 0.682)),
+    ("workbook-integrated-ko.png", "c-wbi-ko.png", (0.04, 0.236, 0.96, 0.372)),
     ("workbook-integrated-en.png", "c-wbi-en.png", (0.04, 0.236, 0.96, 0.348)),
 
     # 06 서술형 대비 교재
