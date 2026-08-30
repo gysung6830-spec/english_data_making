@@ -59,6 +59,9 @@ PSB_S = dict(head=["필생보 사용법"], marks=["학생 문제지"])
 # 변형문제 새 판 — 회차로 나누던 것을 한 지문 17문항 통합본으로 묶었다.
 VAR = dict(head=["통합본 17문항"])
 
+# 서술형 대비 교재
+WB6 = dict(head=["내신 서술형"])
+
 SHOTS = [
     # '지문 자료' 머리말을 셋이 나눠 쓴다. 본문 생김새로 가른다.
     #   원문만        → 해석 문장이 아예 없다
@@ -108,8 +111,14 @@ SHOTS = [
     Shot("workbook-integrated-ko.png", 1, head=["한글 포함"], keep=0.82),
     Shot("workbook-integrated-en.png", 1, head=["한글 제외"], keep=0.82),
 
-    # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
-    Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
+    # 서술형 대비 교재 — 표지(구성·7종) · 유형별 학생용 · 교사용 · 정답
+    Shot("workbook-cover.png", 0, **WB6, keep=1.0),        # 구성 + 수록 유형 7종
+    Shot("workbook-gram.png", 3, **WB6, keep=0.86),        # 유형3 어법 오류 수정
+    Shot("workbook.png", 4, **WB6, keep=0.86),             # 유형4 조건 영작(학생용)
+    Shot("workbook-trans.png", 7, **WB6, keep=0.86),       # 유형6 문장 변형 대비
+    Shot("workbook-qa.png", 8, **WB6, keep=0.86),          # 유형7 영어 문답
+    Shot("workbook-teacher.png", 12, **WB6, keep=0.86),    # 교사용 조건 영작
+    Shot("workbook-answer.png", 18, **WB6, keep=0.86),     # 정답 및 해설
 
     # 변형문제 — 1회 문제 · 교사용 · 해설 · 2회 · 3회 · 빠른정답
     Shot("variation-cover.png", 0, **VAR, keep=0.86),      # 첫 쪽 — 학생용 문제
@@ -261,9 +270,14 @@ CROPS = [
     ("workbook-integrated-en.png", "c-wbi-en.png", (0.04, 0.236, 0.96, 0.348)),
 
     # 06 서술형 대비 교재
-    ("workbook.png", "c-wb-types.png", (0.03, 0.030, 0.97, 0.069)),
-    ("workbook.png", "c-wb-level.png", (0.04, 0.110, 0.51, 0.408)),
-    ("workbook.png", "c-wb-answer.png", (0.51, 0.110, 0.97, 0.352)),
+    ("workbook-cover.png", "c-wb-parts.png", (0.03, 0.176, 0.97, 0.293)),
+    ("workbook-cover.png", "c-wb-types.png", (0.03, 0.302, 0.97, 0.485)),
+    ("workbook-cover.png", "c-wb-rule.png", (0.03, 0.492, 0.97, 0.582)),
+    ("workbook.png", "c-wb-level.png", (0.04, 0.042, 0.50, 0.468)),
+    ("workbook-trans.png", "c-wb-trans.png", (0.04, 0.042, 0.50, 0.288)),
+    ("workbook-qa.png", "c-wb-qa.png", (0.04, 0.042, 0.96, 0.345)),
+    ("workbook-gram.png", "c-wb-gram.png", (0.04, 0.042, 0.96, 0.300)),
+    ("workbook-answer.png", "c-wb-answer.png", (0.04, 0.135, 0.96, 0.470)),
 
     # 07 변형문제
     # 교사용 한 쪽에 지문 · 선지 · 오답 해설이 위아래로 붙어 있다
