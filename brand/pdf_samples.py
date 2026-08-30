@@ -113,8 +113,11 @@ SHOTS = [
 
     # 서술형 대비 교재 — 표지(구성·7종) · 유형별 학생용 · 교사용 · 정답
     Shot("workbook-cover.png", 0, **WB6, keep=1.0),        # 구성 + 수록 유형 7종
+    Shot("workbook-vocab.png", 1, **WB6, keep=0.86),       # 유형1 보기 어휘 빈칸
+    Shot("workbook-summary.png", 2, **WB6, keep=0.86),     # 유형2 서술형 요약문
     Shot("workbook-gram.png", 3, **WB6, keep=0.86),        # 유형3 어법 오류 수정
     Shot("workbook.png", 4, **WB6, keep=0.86),             # 유형4 조건 영작(학생용)
+    Shot("workbook-order.png", 6, **WB6, keep=0.86),       # 유형5 요지·제목 배열 영작
     Shot("workbook-trans.png", 7, **WB6, keep=0.86),       # 유형6 문장 변형 대비
     Shot("workbook-qa.png", 8, **WB6, keep=0.86),          # 유형7 영어 문답
     Shot("workbook-teacher.png", 12, **WB6, keep=0.86),    # 교사용 조건 영작
@@ -274,7 +277,10 @@ CROPS = [
     ("workbook-cover.png", "c-wb-parts.png", (0.03, 0.176, 0.97, 0.293)),
     ("workbook-cover.png", "c-wb-types.png", (0.03, 0.302, 0.97, 0.485)),
     ("workbook-cover.png", "c-wb-rule.png", (0.03, 0.492, 0.97, 0.582)),
+    ("workbook-vocab.png", "c-wb-vocab.png", (0.04, 0.150, 0.96, 0.545)),
+    ("workbook-summary.png", "c-wb-summary.png", (0.04, 0.042, 0.96, 0.254)),
     ("workbook.png", "c-wb-level.png", (0.04, 0.042, 0.50, 0.468)),
+    ("workbook-order.png", "c-wb-order.png", (0.04, 0.042, 0.96, 0.309)),
     ("workbook-trans.png", "c-wb-trans.png", (0.04, 0.042, 0.50, 0.288)),
     ("workbook-qa.png", "c-wb-qa.png", (0.04, 0.042, 0.96, 0.345)),
     ("workbook-gram.png", "c-wb-gram.png", (0.04, 0.042, 0.96, 0.300)),
