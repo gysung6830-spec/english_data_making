@@ -91,6 +91,7 @@ SHOTS = [
 
     Shot("workbook-integrated-pronoun.png", 6, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-order.png", 7, head=["한글 포함"], keep=0.72),
+    Shot("workbook-integrated-form.png", 2, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-blank.png", 9, head=["한글 포함"], keep=1.0),
 
     # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
@@ -220,7 +221,10 @@ CROPS = [
 
     # 05 통합 워크북
     ("workbook-integrated.png", "c-wbi-ref.png", (0.06, 0.388, 0.95, 0.538)),
-    ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.166, 0.97, 0.264)),
+    # 영작은 두 판이다. 지시문 띠까지 같이 잘라야 '배열'과 '어형 변화'가
+    # 다른 문제라는 것이 보인다. 같은 1번 문장을 두 판으로 나란히 놓는다.
+    ("workbook-integrated-order.png", "c-wbi-order.png", (0.03, 0.120, 0.97, 0.281)),
+    ("workbook-integrated-form.png", "c-wbi-form.png", (0.03, 0.120, 0.97, 0.281)),
     ("workbook-integrated-order.png", "c-wbi-order2.png", (0.03, 0.292, 0.97, 0.410)),
     ("workbook-integrated-blank.png", "c-wbi-blank.png", (0.03, 0.088, 0.97, 0.335)),
     ("workbook-integrated-blank.png", "c-wbi-blank2.png", (0.03, 0.443, 0.97, 0.630)),
