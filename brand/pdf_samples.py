@@ -115,6 +115,7 @@ SHOTS = [
     Shot("variation.png", 8, **VAR, keep=0.86),            # 어휘 — 원문형
     Shot("variation-gram.png", 5, **VAR, keep=0.86),       # 어법 모두 고르기
     Shot("variation-gramwrite.png", 6, **VAR, keep=0.86),  # 어법 서술형
+    Shot("variation-pair.png", 7, **VAR, keep=0.86),       # 어법·어휘 짝짓기
     Shot("variation-oxen.png", 4, **VAR, keep=0.86),       # 내용 O/X (영어)
     Shot("variation-teacher.png", 17, **VAR, keep=0.86),   # 교사용 문제+해설
     Shot("variation-answer.png", 45, **VAR, keep=0.86),    # 해설지 — 어법 서술형
@@ -266,6 +267,9 @@ CROPS = [
     ("variation-gramwrite.png", "c-var-passage.png", (0.05, 0.155, 0.50, 0.398)),
     ("variation-gramwrite.png", "c-var-write.png", (0.05, 0.040, 0.50, 0.159)),
     ("variation-oxen.png", "c-var-oxen.png", (0.05, 0.412, 0.50, 0.540)),
+    # 어법·어휘를 한 문항에서 같이 묻는 자리 — 지문 밑줄과 선지를 같이 본다
+    ("variation-pair.png", "c-var-pair.png", (0.05, 0.113, 0.50, 0.398)),
+    ("variation-pair.png", "c-var-pairq.png", (0.05, 0.398, 0.50, 0.512)),
 
     # 08 동형모의고사
     ("mock.png", "c-mock-head.png", (0.04, 0.045, 0.96, 0.200)),
