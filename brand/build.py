@@ -481,8 +481,8 @@ def lineup_sections():
          MATERIALS[:2], False),
         ("03 — 04  ·  시그니처 자료", "필생보 — 필자의 생각이 보이는 영어독해",
          "분석지는 아무리 잘 만들어도 학생이 눈으로 읽고 넘깁니다. 같은 내용을 "
-         "손으로 채우면서 보게 만든 자료입니다. 수업에서 쓰실 강의용은 강사용과 "
-         "학생용 두 판본으로 나오고, 학생이 혼자 볼 것은 독학용입니다.",
+         "손으로 채우면서 보게 만든 자료입니다. 수업에서 쓰실 것은 학생용·강의용 "
+         "두 판본으로 함께 나오고, 학생이 혼자 볼 것은 독학용입니다.",
          MATERIALS[2:4], True),
         ("05 — 08  ·  시험 대비", "시험에 나오는 형태로 풀립니다",
          "아는 것과 시험장에서 맞히는 것은 다릅니다. 한 지문을 여러 각도로 묻고, "
@@ -735,7 +735,9 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     tables_el += "".join(grid_table(title, rows, t, u, width - u * 13)
                          for title, rows in item.grids)
-    name_px = u * (7.0 if item.signature else 5.4)
+    # 이름이 길면 한 줄에 안 들어가 '강의 / 용)' 처럼 끊긴다. 글자 수에 맞춰
+    # 줄여서 한 줄로 세운다. 제목이 접히면 배지·번호와 축이 어긋난다.
+    name_px = u * (7.0 if item.signature else 5.4) * min(1, 11 / len(item.name))
 
     # 형태·구성·배포는 이미지에 넣지 않는다. PDF·즉시 다운로드처럼 자료마다
     # 똑같은 줄이 장마다 반복되면 아래쪽이 안 읽힌다. catalog 의 spec 은 그대로
@@ -772,7 +774,8 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           <div style="display:flex;align-items:baseline;gap:{u * 1.6:.0f}px;
                margin-top:{u * (2.6 if item.signature else 0):.0f}px">
             <div class="wm" style="font-size:{u * 2.2:.0f}px;color:{t['accent']}">{item.no}</div>
-            <div class="ko" style="font-size:{name_px:.0f}px;color:{t['fg']}">{item.name}</div>
+            <div class="ko" style="font-size:{name_px:.0f}px;color:{t['fg']};
+                 white-space:nowrap">{item.name}</div>
             <div class="sans" style="font-size:{u * 1.8:.0f}px;color:{t['muted']};
                  letter-spacing:.10em">{item.en}</div>
           </div>

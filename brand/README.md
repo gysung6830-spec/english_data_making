@@ -214,7 +214,7 @@ posts/03-pilsaengbo-class.md      본문 원고 초안
 다르니 눌러서 바로 받는 자료와 섞이면 안 됩니다.
 
 **시그니처 자료**는 `catalog.py` 의 `signature=True` 로 정합니다. 지금은
-필생보 강의용·독학용과 동형모의고사 셋입니다. 라인업에서는 이름 옆에
+필생보(학생용,강의용)·독학용과 동형모의고사 셋입니다. 라인업에서는 이름 옆에
 금색 `SIGNATURE` 칩이 붙고, 상세페이지는 혼자 어두운 판이 되며 배지와 함께
 이름이 더 크게 나옵니다.
 
@@ -226,7 +226,7 @@ posts/03-pilsaengbo-class.md      본문 원고 초안
   `catalog.py` 의 `figures` 로 덮어씁니다(01 지문자료는 판형 셋을 다 보여야
   해서 `figures=3`).
 - `MAX_POINTS = 4` — 특징은 네 줄까지. 자료마다 다르게 하려면 `catalog.py`
-  의 `max_points` 로 덮어씁니다(필생보 강의용은 여섯, 통합 워크북은 다섯).
+  의 `max_points` 로 덮어씁니다(필생보는 여덟, 통합 워크북은 다섯).
 - 라인업 줄의 부제는 한 줄(`one_line`)입니다. 목록에서 더 중요한 말이 따로
   있으면 `lineup_line` 으로 갈아 끼웁니다(17종 변형문제). 한 줄이 비어 있으면
   차별점(`edge`)이 대신 들어갑니다(통합 워크북).
@@ -264,7 +264,7 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 | --- | --- | --- |
 | 지문자료 | 3 | `passage.png` · `one-line.png` · `one-line-2col.png` (판형 3옵션) |
 | 지문분석지 | 6 | `analysis.png` · `-point` · `-flow` · `-blank` · `-vocatest` · `-guide` |
-| 필생보 강의용 | 7 | `-guide` · `pilsaengbo`(통독·어휘) · `-sent` · `-summary` · `-grammar` · `-student` · `-student2` |
+| 필생보(학생용,강의용) | 7 | `-guide` · `pilsaengbo`(통독·어휘) · `-sent` · `-summary` · `-grammar` · `-student` · `-student2` |
 | 필생보 독학용 | 6 | `psb-solve.png` · `-answer` · `-predict` · `-paraphrase` · `-signal` · `-pace` |
 | 통합 워크북 | 2 | `workbook-integrated.png` · `-en` |
 | 서술형 대비 교재 | 1 | `workbook.png` |
@@ -296,7 +296,7 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 여덟 개를 한 줄로 늘어놓으면 목록으로만 읽힙니다. 묶어 두면 흐름이 생깁니다.
 
 - **01–02 읽는 자료** — 지문자료 · 지문분석지
-- **03–04 시그니처 자료** — 필생보 강의용 · 독학용
+- **03–04 시그니처 자료** — 필생보(학생용, 강의용) · 독학용
 - **05–08 쓰는 자료** — 통합 워크북 · 서술형 · 변형문제 · 동형모의고사
 
 읽고 → 뜯어보고 → 손으로 쓰는 순서입니다. 문구는 `build.py` 의

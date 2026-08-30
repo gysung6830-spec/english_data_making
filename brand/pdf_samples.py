@@ -297,7 +297,7 @@ def make_crops() -> list[Path]:
 # ── 두 판본을 나란히 ──────────────────────────────────────────────────────
 PAIRS = [
     # (왼쪽 파일, 왼쪽 라벨, 오른쪽 파일, 오른쪽 라벨, 저장 이름, 위에서 남길 비율)
-    ("pilsaengbo-sent.png", "강사용 · 정답 표시",
+    ("pilsaengbo-sent.png", "강의용 · 정답 표시",
      "pilsaengbo-student.png", "학생용 · 빈칸",
      "pilsaengbo-compare.png", 0.66),
 ]
