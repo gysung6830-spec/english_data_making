@@ -292,10 +292,74 @@ def _even_split(heights: list[float]) -> float:
     return best
 
 
+def _items_of(frag) -> list:
+    """묶음 조각 안에 실제로 담긴 문항 상자들(단을 가로질러 모은다)."""
+    out = []
+    for col in (getattr(frag, "children", None) or []):
+        out += [c for c in (getattr(col, "children", None) or [])
+                if hasattr(c, "margin_height")]
+    return out
+
+
+_CHIP_ID = "tgc-"          # 유형 칩의 id 앞머리(짝이 되는 2단 상자는 _GROUP_ID)
+
+
+def _chip_id(box) -> str | None:
+    """유형 칩이면 그 칩이 속한 묶음의 id 를 돌려준다.
+
+    칩과 2단 상자에 짝이 되는 id 를 달아 둔다('tgc-q-3' ↔ 'tg-q-3'). 칩만 남은 쪽에는
+    2단 상자가 아예 없어서, 상자를 타고 내려가서는 어느 묶음인지 알 수 없기 때문이다.
+    """
+    el = getattr(box, "element", None)
+    cid = el.get("id") if el is not None and hasattr(el, "get") else None
+    if (cid or "").startswith(_CHIP_ID):
+        return _GROUP_ID + cid[len(_CHIP_ID):]
+    return None
+
+
+def _orphan_chips(doc) -> set[str]:
+    """유형 칩만 홀로 남은 묶음의 id 들.
+
+    유형 묶음은 '칩 + 2단 상자'인데, 첫 문항이 남은 자리에 안 들어가면 2단 상자가
+    통째로 다음 쪽으로 밀린다. 그러면 칩만 있는 빈 쪽이 나온다(실제 결과물 83쪽에서
+    3쪽이 그랬다 — 교사용 내용 O/X 두 편과 어법 서술형).
+    칩에 걸어 둔 break-after: avoid 로는 막히지 않는다. 조판기가 '칩 뒤'가 아니라
+    '2단 상자를 통째로' 미루기 때문이다.
+
+    그래서 실측으로 잡는다 — 칩이 있는 쪽에 그 묶음의 2단 조각이 하나도 없으면 고아다.
+    """
+    chip_page: dict[str, int] = {}
+    frag_pages: dict[str, list[int]] = {}
+
+    def walk(box, page_no: int) -> None:
+        gid = _box_id(box)
+        if gid:
+            frag_pages.setdefault(gid, []).append(page_no)
+            return                       # 안쪽 겹은 건너뛴다
+        cid = _chip_id(box)
+        if cid:
+            chip_page.setdefault(cid, page_no)
+            return
+        for child in (getattr(box, "children", None) or []):
+            walk(child, page_no)
+
+    for i, page in enumerate(doc.pages, 1):
+        walk(page._page_box, i)
+    return {g for g, pg in chip_page.items() if pg not in frag_pages.get(g, [])}
+
+
 def _balance_css(doc) -> str:
-    """1차 조판 실측 → 2차 조판에 줄 '묶음별 칸 높이' 스타일(없으면 빈 문자열)."""
+    """1차 조판 실측 → 2차 조판에 줄 '묶음별' 스타일(없으면 빈 문자열)."""
     rules = []
+    # 칩만 홀로 남은 묶음 — 그 묶음에서만 문항이 쪼개지도록 풀어 준다.
+    # 빈 쪽을 내보내는 것보다 해설이 두 쪽에 걸치는 편이 낫다.
+    # (지문 상자 .passage 는 따로 break-inside: avoid 라 잘리지 않는다.)
+    orphans = _orphan_chips(doc)
+    for gid in sorted(orphans):
+        rules.append(f"#{gid} .q-item,#{gid} .a-item{{break-inside:auto}}")
     for gid, frags in _group_fragments(doc).items():
+        if gid in orphans:           # 위에서 이미 손봤다
+            continue
         if len(frags) != 1:          # 이미 여러 쪽에 걸친 묶음 — 손대지 않는다
             continue
         cols = list(getattr(frags[0], "children", None) or [])

@@ -50,7 +50,7 @@
   {# 유형별: 유형마다 새 쪽에서 시작하고, 큰 칩으로 유형 이름을 단다 #}
   {% for block in blocks %}
   <div class="type-group{% if loop.first %} first-group{% endif %}">
-    <div class="type-chip">
+    <div class="type-chip" id="tgc-{{ kind }}-{{ loop.index0 }}">
       <span class="type-chip-name">{{ block.chip }}</span>
       <span class="type-chip-count">{{ block.count }}문항</span>
     </div>

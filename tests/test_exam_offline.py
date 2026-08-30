@@ -2865,6 +2865,51 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_no_orphan_pages() -> None:
+    """칩만 있는 빈 쪽이 나오지 않는다 (5차 검증 산출물에서 83쪽 중 5쪽이 그랬다).
+
+    유형 묶음은 '칩 + 2단 상자'인데, 첫 문항이 남은 자리에 안 들어가면 2단 상자가
+    통째로 다음 쪽으로 밀려 칩만 남는다. 칩에 걸어 둔 break-after: avoid 로는 안 막힌다
+    — 조판기가 '칩 뒤'가 아니라 '2단 상자를 통째로' 미루기 때문이다.
+    그래서 1차 조판을 실측해, 칩이 있는 쪽에 그 묶음의 조각이 하나도 없으면 그 묶음에서만
+    문항이 쪼개지도록 풀어 준다.
+    """
+    import re as _re
+
+    from weasyprint import HTML
+
+    from exam import renderer
+    from exam.merged import (MERGED_LABELS, MERGED_ORDER, MERGED_PROMPTS,
+                             demo_passages_merged)
+
+    #  ① 칩과 2단 상자에 짝이 되는 id 가 달려 있다 — 이게 없으면 칩만 남은 쪽에서
+    #     그 칩이 어느 묶음의 것인지 알 길이 없다(2단 상자가 그 쪽에 없으므로).
+    passages = demo_passages_merged()
+    html = renderer.render_html(passages, type_order=MERGED_ORDER,
+                                prompts=MERGED_PROMPTS, labels=MERGED_LABELS)
+    chips = set(_re.findall(r'class="type-chip" id="(tgc-[^"]+)"', html))
+    cols = set(_re.findall(r'class="columns" id="(tg-[^"]+)"', html))
+    assert chips and {"tg-" + c[len("tgc-"):] for c in chips} == cols, (chips, cols)
+    assert renderer._chip_id.__doc__            # 짝 맞추는 규칙이 문서화돼 있다
+
+    #  ② 실제 조판에 '내용이 거의 없는 쪽'이 없다
+    doc = HTML(string=html, base_url=str(renderer.TEMPLATE_DIR)).render(
+        stylesheets=renderer._stylesheets())
+    extra = renderer._balance_css(doc)
+    if extra:
+        from weasyprint import CSS
+        doc = HTML(string=html, base_url=str(renderer.TEMPLATE_DIR)).render(
+            stylesheets=list(renderer._stylesheets()) + [CSS(string=extra)])
+    assert renderer._orphan_chips(doc) == set(), renderer._orphan_chips(doc)
+
+    #  ③ 빠른 정답 격자는 쪽을 넘어 나뉜다 — flex 상자는 통째로 밀려 제목만 남았다
+    css = (renderer.TEMPLATE_DIR / "exam.css").read_text(encoding="utf-8")
+    grid = _re.search(r"\.quick-grid \{(.*?)\}", css, _re.S).group(1)
+    assert "display: flex" not in grid, "빠른 정답 격자가 다시 flex 가 되었습니다"
+    assert "display: inline-flex" in _re.search(r"\.quick-cell \{(.*?)\}", css, _re.S).group(1)
+    print("✓ 칩만 있는 빈 쪽 없음(짝 id·실측 감지·빠른정답 격자 분할) 통과")
+
+
 def test_json_edit_and_rerender() -> None:
     """결과 JSON 을 고쳐 API 없이 다시 뽑는다 (검증 → 수정 → 재조판).
 
@@ -3614,6 +3659,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_no_orphan_pages()
     test_json_edit_and_rerender()
     test_ox_no_length_check()
     test_ingest_number_preservation()

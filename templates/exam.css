@@ -388,17 +388,19 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 }
 
 /* ---------- 빠른 정답 격자 ---------- */
+/* flex 상자는 조판기가 쪽 사이로 나누지 못해, 제목만 남고 격자가 통째로 다음 쪽으로
+   밀린다('빠 른 정 답'만 있는 빈 쪽이 나왔다). 칸을 인라인으로 흘려 쪽을 넘어 이어지게
+   한다 — 보이는 모양(줄바꿈되는 알약 격자)은 같다. */
 .quick-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2mm 3mm;
   margin-top: 3mm;
+  line-height: 2.1;          /* flex 의 세로 gap(2mm) 대신 줄 간격으로 벌린다 */
 }
 .quick-cell {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   gap: 2mm;
   min-width: 24mm;
+  margin-right: 3mm;         /* flex 의 가로 gap 자리 */
   border: 1px solid #dbeae2;
   border-radius: 6px;
   padding: 1.2mm 2.6mm;
@@ -409,7 +411,7 @@ u { text-decoration: underline; text-underline-offset: 1.5px; }
 .quick-key { font-weight: 700; }
 /* 유형별 배치일 때 빠른정답 소제목([순서 배열] 등) — flex 한 줄 전체 차지 */
 .quick-group {
-  flex-basis: 100%;
+  display: block;            /* 인라인 흐름에서도 소제목은 한 줄을 차지한다 */
   font-weight: 800;
   color: #2f7d61;
   margin-top: 1.5mm;
