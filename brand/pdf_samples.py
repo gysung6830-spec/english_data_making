@@ -116,6 +116,8 @@ SHOTS = [
     Shot("variation-gram.png", 5, **VAR, keep=0.86),       # 어법 모두 고르기
     Shot("variation-gramwrite.png", 6, **VAR, keep=0.86),  # 어법 서술형
     Shot("variation-pair.png", 7, **VAR, keep=0.86),       # 어법·어휘 짝짓기
+    Shot("variation-syn.png", 9, **VAR, keep=0.86),        # 어휘 — 유의어형
+    Shot("variation-neg.png", 10, **VAR, keep=0.86),       # 어휘 — 부정어형
     Shot("variation-oxen.png", 4, **VAR, keep=0.86),       # 내용 O/X (영어)
     Shot("variation-teacher.png", 17, **VAR, keep=0.86),   # 교사용 문제+해설
     Shot("variation-answer.png", 45, **VAR, keep=0.86),    # 해설지 — 어법 서술형
@@ -273,6 +275,10 @@ CROPS = [
     # 어법·어휘를 한 문항에서 같이 묻는 자리 — 지문 밑줄과 선지를 같이 본다
     ("variation-pair.png", "c-var-pair.png", (0.05, 0.113, 0.50, 0.398)),
     ("variation-pair.png", "c-var-pairq.png", (0.05, 0.398, 0.50, 0.512)),
+    # 어휘 세 종 — 같은 자리를 세 번 다르게 비튼다. 같은 구간을 잘라야 비교된다
+    ("variation.png", "c-var-v1.png", (0.05, 0.147, 0.50, 0.252)),
+    ("variation-syn.png", "c-var-v2.png", (0.05, 0.147, 0.50, 0.252)),
+    ("variation-neg.png", "c-var-v3.png", (0.05, 0.147, 0.50, 0.252)),
 
     # 08 동형모의고사
     ("mock.png", "c-mock-head.png", (0.04, 0.045, 0.96, 0.200)),
@@ -379,6 +385,49 @@ def variation_gallery(src: Path, dpi: int = 130) -> list[Path]:
             raw.unlink(missing_ok=True)
             made.append(OUT / name)
             print(f"  ✔ samples/{name}  ({out.width}×{out.height})  {label}")
+    return made
+
+
+# ── 조각 여러 장을 라벨과 함께 세로로 ─────────────────────────────────────
+# 같은 자리를 방식만 바꿔 낸 문항들은 나란히 놓아야 차이가 보인다.
+LABELED = [
+    # (저장 이름, [(조각, 라벨)], 가로)
+    ("c-var-vocab.png", [
+        ("c-var-v1.png", "원문형 — 밑줄 5개 중 1개만 반의어, 나머지는 원문 그대로"),
+        ("c-var-v2.png", "유의어형 — 5개 전부 교체. 정답만 반의어, 넷은 유의어"),
+        ("c-var-v3.png", "부정어형 — 밑줄은 원문 그대로, 정답 문장에 부정어"),
+    ], 980),
+]
+
+
+def compose_labeled(bg: str = "#FFFDF7") -> list[Path]:
+    """조각마다 한 줄 라벨을 붙여 세로로 잇는다."""
+    from PIL import Image
+
+    from render import html_to_png, page  # noqa: PLC0415
+
+    made: list[Path] = []
+    for name, rows, width in LABELED:
+        rows = [(OUT / f, label) for f, label in rows if (OUT / f).exists()]
+        if not rows:
+            print(f"  · {name} — 원본이 없어 건너뜀")
+            continue
+        pad, gap, label_h = 18, 16, 30
+        inner = width - pad * 2
+        total = pad * 2 + sum(
+            label_h + gap + round(Image.open(f).height * inner / Image.open(f).width)
+            for f, _ in rows) - gap
+        cells = "".join(f"""<div style="margin-bottom:{gap}px">
+          <div style="font-size:15px;font-weight:700;color:#1B5A46;
+               margin-bottom:6px">{label}</div>
+          <img src="{f.as_uri()}" style="width:100%;display:block;
+               border:1px solid #DED9CC;border-radius:5px">
+        </div>""" for f, label in rows)
+        html = page(f'<div style="background:{bg};padding:{pad}px">{cells}</div>',
+                    "body{font-family:'Malgun Gothic',sans-serif}", width, total)
+        html_to_png(html, OUT / name, width, total)
+        made.append(OUT / name)
+        print(f"  ✔ samples/{name}  ({width}×{total})")
     return made
 
 
@@ -493,7 +542,7 @@ def main() -> None:
         return
 
     if args.crops_only:
-        made = make_crops() + make_stacks()
+        made = make_crops() + make_stacks() + compose_labeled()
         print(f"\n{len(made)}개 → {OUT}")
         return
 
@@ -506,6 +555,7 @@ def main() -> None:
         made += compose_pairs()
         made += make_crops()
         made += make_stacks()
+        made += compose_labeled()
     print(f"\n{len(made)}개 → {OUT}")
 
 
