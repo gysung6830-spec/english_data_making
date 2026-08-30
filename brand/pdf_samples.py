@@ -198,7 +198,7 @@ CROPS = [
 
     # 각 자료의 '반 페이지' — 지면이 어떻게 생겼는지 보이는 핵심 절반.
     # 조각만 늘어놓으면 부품은 알아도 지면이 안 그려진다.
-    ("analysis.png", "h-analysis.png", (0.02, 0.030, 0.98, 0.520)),
+    ("analysis.png", "h-analysis.png", (0.02, 0.020, 0.98, 0.412)),
     ("pilsaengbo-student.png", "h-psbc.png", (0.03, 0.040, 0.97, 0.290)),
     ("pilsaengbo-summary.png", "h-psbc-restate.png", (0.05, 0.265, 0.95, 0.492)),
     ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.05, 0.510, 0.95, 0.728)),
@@ -213,10 +213,13 @@ CROPS = [
     ("mock.png", "h-mock.png", (0.02, 0.030, 0.98, 0.560)),
 
     # 02 지문분석지
-    ("analysis.png", "c-analysis-easy.png", (0.05, 0.100, 0.95, 0.170)),
-    ("analysis.png", "c-analysis-point.png", (0.66, 0.664, 0.96, 0.730)),
-    ("analysis.png", "c-analysis-parse.png", (0.04, 0.170, 0.665, 0.322)),
-    ("analysis.png", "c-analysis-gram.png", (0.66, 0.170, 0.96, 0.272)),
+    ("analysis.png", "c-analysis-easy.png", (0.04, 0.088, 0.96, 0.152)),
+    # 반 페이지(h-analysis)가 1~2문장을 이미 보여 준다. 조각은 5문장에서 딴다.
+    ("analysis.png", "c-analysis-parse.png", (0.035, 0.700, 0.70, 0.885)),
+    ("analysis.png", "c-analysis-gram.png", (0.685, 0.703, 0.96, 0.858)),
+    # 지칭은 본문 동그라미와 오른쪽 골드 박스가 짝이다. 한 줄을 통째로 잘라야
+    # ⓐ 가 무엇을 가리키는지 보인다.
+    ("analysis.png", "c-analysis-point.png", (0.035, 0.535, 0.96, 0.685)),
 
     # 03 필생보 강의용 — 학생용 지면이 특징을 더 잘 보여 준다
     ("pilsaengbo-student.png", "c-psbc-circle.png", (0.085, 0.170, 0.62, 0.193)),

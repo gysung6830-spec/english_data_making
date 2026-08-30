@@ -569,23 +569,25 @@ LINEUP_PARTS = ["lineup-1-read.png", "lineup-2-pilsaengbo.png",
 
 
 def grid_table(title: str, rows, t: dict[str, str], u: float, width: float) -> str:
-    """항목이 많은 표를 두 칸으로 접는다.
+    """항목이 많은 표를 여러 칸으로 접는다.
 
-    열여섯 줄을 세로로 세우면 그 표만 한 화면을 먹는다. 왼쪽에 유형, 오른쪽에
-    대응 번호를 붙여 짧은 줄 열여섯 개로 만들면 훑어보기가 된다.
+    열일곱 줄을 세로로 세우면 그 표만 한 화면을 먹는다. 짧은 줄로 잘라 칸을
+    나누면 훑어보기가 된다. 오른쪽 값이 다 비어 있으면 그냥 이름만 늘어놓는
+    목록이므로 한 칸 더 나눈다.
     """
+    cols = 2 if any(v for _, v in rows) else 3
     cells = "".join(f"""<div style="display:flex;justify-content:space-between;
       align-items:baseline;gap:{u * 1.2:.0f}px;padding:{u * 1.15:.0f}px 0;
       border-top:1px solid {t['line']};break-inside:avoid">
       <div class="sans" style="font-size:{u * 1.75:.0f}px;color:{t['fg']};
            line-height:1.4;word-break:keep-all">{k}</div>
-      <div class="sans" style="flex:0 0 auto;font-size:{u * 1.5:.0f}px;
-           color:{t['accent']};white-space:nowrap">{v}</div>
+      {f'''<div class="sans" style="flex:0 0 auto;font-size:{u * 1.5:.0f}px;
+           color:{t['accent']};white-space:nowrap">{v}</div>''' if v else ''}
     </div>""" for k, v in rows)
     return f"""<div style="margin-top:{u * 3.4:.0f}px">
       <div class="ko" style="font-size:{u * 2.2:.0f}px;color:{t['fg']};
            margin-bottom:{u * .6:.0f}px;word-break:keep-all">{title}</div>
-      <div style="column-count:2;column-gap:{u * 3.4:.0f}px">{cells}</div>
+      <div style="column-count:{cols};column-gap:{u * 3.4:.0f}px">{cells}</div>
     </div>"""
 
 
