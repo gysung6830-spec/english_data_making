@@ -2865,6 +2865,43 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_ox_no_length_check() -> None:
+    """내용 O/X 에는 선지 길이 검사를 걸지 않는다 (5차 검증에서 나온 오탐).
+
+    이 유형의 '선지'는 고르는 다섯이 아니라 하나하나 판정하는 진술 여덟~열이다.
+    '지문은 A라 했는데 B라고 적었다'는 진술은 길고 한 사실만 짚는 진술은 짧다 —
+    길이가 고른 것이 오히려 부자연스럽다. 실제 산출물에서 54자~145자로 걸렸는데
+    읽어 보면 열 진술이 다 멀쩡했다.
+    '정답만 길이가 튄다'는 검사는 아예 성립하지 않는다 — O 가 둘이라 답이 하나가 아니고,
+    넘어오는 answer_no 는 '첫 번째 O 의 자리'일 뿐이다.
+    """
+    from exam import audit, shape
+
+    ox = ["짧다.", "조금 더 긴 진술 하나입니다.",
+          "아주 많이 긴 진술로 지문의 여러 대목을 한꺼번에 끌어와 길게 늘여 쓴 것입니다.",
+          "보통 길이의 진술.", "또 다른 진술.", "여섯 번째 진술.", "일곱 번째.",
+          "여덟 번째 진술입니다.", "아홉 번째 진술.", "열 번째 진술."]
+    #  ① 길이 편차만으로는 걸리지 않는다
+    assert shape.check_choice_shape(ox, 3, lengths=False) == []
+    #  ② 그래도 빈 진술·중복 진술은 잡는다(O/X 에서도 실제 결함이다)
+    assert shape.check_choice_shape(ox[:-1] + ["  "], 3, lengths=False)
+    assert shape.check_choice_shape(ox[:-1] + [ox[0]], 3, lengths=False)
+    #  ③ 5지선다는 예전 그대로 — 정답만 길면 잡는다
+    five = ["가" * 10, "나" * 10, "다" * 60, "라" * 10, "마" * 10]
+    msgs = shape.check_choice_shape(five, 3)
+    assert len(msgs) == 2 and "혼자 튑니다" in " ".join(msgs), msgs
+
+    #  ④ 검산기가 O/X 에만 길이 검사를 끈다
+    def _item(t, choices):
+        return {"type": t, "choices": choices, "key": "①O", "marks": [], "pos": [],
+                "body": "", "given": "", "boki": "", "cues": [], "explain": ""}
+
+    assert not [m for m in audit._check_item(_item("content", ox)) if "길이" in m]
+    assert not [m for m in audit._check_item(_item("content_2", ox)) if "길이" in m]
+    assert [m for m in audit._check_item(_item("topic", five)) if "길이" in m]
+    print("✓ 내용 O/X 선지 길이 검사 제외(빈 진술·중복은 유지, 5지선다는 그대로) 통과")
+
+
 def test_ingest_number_preservation() -> None:
     """정제가 본문의 날짜·전화번호를 먹지 않는다 (5차 검증에서 나온 결함).
 
@@ -3522,6 +3559,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_ox_no_length_check()
     test_ingest_number_preservation()
     test_vocab_memorization_guards()
     test_grammar_points()

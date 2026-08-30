@@ -58,11 +58,21 @@ def check_insert_cue(sentence: str) -> list[str]:
 
 
 def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
-                       spread: float = 2.2, noun_phrase: bool = False) -> list[str]:
+                       spread: float = 2.2, noun_phrase: bool = False,
+                       lengths: bool = True) -> list[str]:
     """선지 5개가 '모양'으로 정답을 흘리지 않는가.
 
     실제 출제에서 가장 흔한 사고: 정답만 유독 길다(또는 짧다). 학생은 뜻을 몰라도
     남다른 하나를 고른다. 길이 편차와 중복만 봐도 이 통로는 막힌다.
+
+    lengths=False 면 길이 검사 둘을 건너뛴다. 내용 O/X 가 그렇다.
+      · 이 유형의 '선지'는 고르는 다섯이 아니라 하나하나 판정하는 진술 여덟~열이다.
+        '지문은 A라 했는데 B라고 적었다'는 진술은 길고, 한 사실만 짚는 진술은 짧다 —
+        길이가 고른 것이 오히려 부자연스럽다(실제 산출물에서 54자~145자로 나왔고,
+        읽어 보면 다섯 문항 다 멀쩡했다).
+      · '정답만 길이가 튄다'는 검사는 아예 성립하지 않는다. O 가 둘이라 답이 하나가
+        아니고, answer_no 로 넘어오는 것은 '첫 번째 O 의 자리'일 뿐이다.
+    빈 진술·중복 진술 검사는 O/X 에서도 그대로 값이 있으므로 남긴다.
     """
     bad: list[str] = []
     if len(choices) < 2:
@@ -70,16 +80,17 @@ def check_choice_shape(choices: list[str], answer_no: int, kind: str = "선지",
     lens = [len(c.strip()) for c in choices]
     if min(lens) == 0:
         return [f"비어 있는 {kind}가 있습니다."]
-    if max(lens) > min(lens) * spread:
-        bad.append(f"{kind} 길이가 고르지 않습니다(가장 짧은 것 {min(lens)}자 / "
-                   f"가장 긴 것 {max(lens)}자) — 길이만 보고 답을 고르게 됩니다.")
-    # 정답이 '가장 길거나 가장 짧은 하나'로 혼자 튀는 경우
-    if 1 <= answer_no <= len(lens):
-        a = lens[answer_no - 1]
-        others = lens[:answer_no - 1] + lens[answer_no:]
-        if others and (a > max(others) * 1.6 or a * 1.6 < min(others)):
-            bad.append(f"정답 {kind}만 길이가 혼자 튑니다(정답 {a}자 / 나머지 "
-                       f"{min(others)}~{max(others)}자).")
+    if lengths:
+        if max(lens) > min(lens) * spread:
+            bad.append(f"{kind} 길이가 고르지 않습니다(가장 짧은 것 {min(lens)}자 / "
+                       f"가장 긴 것 {max(lens)}자) — 길이만 보고 답을 고르게 됩니다.")
+        # 정답이 '가장 길거나 가장 짧은 하나'로 혼자 튀는 경우
+        if 1 <= answer_no <= len(lens):
+            a = lens[answer_no - 1]
+            others = lens[:answer_no - 1] + lens[answer_no:]
+            if others and (a > max(others) * 1.6 or a * 1.6 < min(others)):
+                bad.append(f"정답 {kind}만 길이가 혼자 튑니다(정답 {a}자 / 나머지 "
+                           f"{min(others)}~{max(others)}자).")
     if len({c.strip().lower() for c in choices}) != len(choices):
         bad.append(f"같은 {kind}가 두 번 나옵니다.")
     if noun_phrase:

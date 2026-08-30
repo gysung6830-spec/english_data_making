@@ -111,8 +111,11 @@ def _check_item(it: dict) -> list[str]:
                        f"(기대 {'·'.join(map(str, want))}개).")
         if it["choices"]:
             bad += shape.check_choice_shape(
-                [re.sub(r"^[①-⑧]\s*", "", c) for c in it["choices"]], n_ans,
-                noun_phrase=(t == "topic"))
+                [re.sub(r"^[①-⑩]\s*", "", c) for c in it["choices"]], n_ans,
+                noun_phrase=(t == "topic"),
+                # 내용 O/X 는 고르는 선지가 아니라 하나하나 판정하는 진술이라
+                # 길이가 고를 이유가 없다(shape.check_choice_shape 머리말 참고).
+                lengths=(t not in ("content", "content_2")))
 
     # 밑줄
     want_marks = _N_MARKS.get(t)
