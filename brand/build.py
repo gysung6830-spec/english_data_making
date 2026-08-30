@@ -705,9 +705,20 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         </div>"""
 
     n_pts = item.max_points or MAX_POINTS
-    has_crops = any(len(pt) > 2 and pt[2] for pt in item.points)
+    # 설명만 있고 사진이 없는 특징은 상세페이지에 싣지 않는다. 말로만 하는 줄이
+    # 하나 끼면 그 옆의 실물 사진까지 '광고 문구'로 읽힌다.
+    shown = [pt for pt in item.points
+             if len(pt) > 2 and pt[2] and any(
+                 (SAMPLES / c).exists() for c in pt[2].split("|"))]
+    dropped = [pt[0] for pt in item.points if pt not in shown]
+    if dropped and shown:
+        print(f"    · {item.no} 사진 없는 특징 {len(dropped)}줄 뺌 — {', '.join(dropped)}")
+    elif dropped:
+        # 실물 PDF 를 아직 못 받은 자료. 사진이 하나도 없으니 글로만 세운다.
+        print(f"    · {item.no} 예시 지면이 아직 없어 특징을 글로만 세웠습니다")
+    has_crops = bool(shown)
     if has_crops:
-        pts = "".join(point_block(pt) for pt in item.points[:n_pts])
+        pts = "".join(point_block(pt) for pt in shown[:n_pts])
     else:
         pts = "".join(
             f'<div class="sans" style="font-size:{u * 1.95:.0f}px;color:{t["muted"]};'
