@@ -51,6 +51,14 @@ class Shot:
 # 영어독해 기본1' 이 출처로 적혀 있어, 단원 번호까지 붙여야 겹치지 않는다.
 WB = dict(head=["올림포스 영어독해 기본1 10-2"], marks=["영작①"])
 
+# 필생보 새 판 — 맨 앞에 '사용법'(범례) 쪽이 붙었다. 강사용·학생용의 첫 쪽이
+# 똑같아서 머리말로는 못 가른다. 본문에 있는 판본 이름으로 가른다.
+PSB_T = dict(head=["필생보 사용법"], marks=["강사용 · 정답 표시"])
+PSB_S = dict(head=["필생보 사용법"], marks=["학생 문제지"])
+
+# 변형문제 새 판 — 회차로 나누던 것을 한 지문 17문항 통합본으로 묶었다.
+VAR = dict(head=["통합본 17문항"])
+
 SHOTS = [
     # '지문 자료' 머리말을 셋이 나눠 쓴다. 본문 생김새로 가른다.
     #   원문만        → 해석 문장이 아예 없다
@@ -69,17 +77,15 @@ SHOTS = [
     Shot("analysis-vocatest.png", 4, head=["이 학습지 100% 활용법"], keep=0.86),
     Shot("analysis-guide.png", 0, head=["이 학습지 100% 활용법"], keep=0.86),
 
-    # 필생보 강의용 — 강사용 / 학생 문제지 / 글 정리
-    Shot("pilsaengbo.png", 1, head=["필생보", "강사용"]),
-    Shot("pilsaengbo-summary.png", 3, head=["필생보", "강사용"]),
-    # 핵심 문법 — 설명 빈칸이 살아 있는 판. 학생이 채우는 자료라는 것이 보인다.
-    Shot("pilsaengbo-grammar.png", 1, head=["문장별 끊어읽기"],
-         marks=["would rather A than B"], keep=1.0),
-    Shot("pilsaengbo-summary2.png", 15, head=["필생보", "강사용"]),
-    Shot("pilsaengbo-summary3.png", 9, head=["필생보", "강사용"]),
-    # 재진술 사슬이 둘이고 형광펜이 다섯 곳인 지문. 합본 강사용에서 따로 받았다.
-    Shot("hapbon-summary.png", 0, head=["글 정리"], marks=["nonlinear"], keep=1.0),
-    Shot("pilsaengbo-student.png", 1, head=["학생 문제지"]),
+    # 필생보 강의용 새 판 — 사용법 · 통독+어휘 · 문장별 · 글 정리 · 핵심 문법
+    Shot("pilsaengbo-guide.png", 0, **PSB_T, keep=1.0),
+    Shot("pilsaengbo.png", 1, **PSB_T, keep=1.0),
+    Shot("pilsaengbo-sent.png", 2, **PSB_T, keep=1.0),
+    Shot("pilsaengbo-summary.png", 4, **PSB_T, keep=1.0),
+    Shot("pilsaengbo-grammar.png", 5, **PSB_T, keep=1.0),
+    # 학생용 — 같은 지면이 빈칸으로. 3쪽에 '이렇게 읽으면 안 돼'가 붙는다.
+    Shot("pilsaengbo-student.png", 2, **PSB_S, keep=1.0),
+    Shot("pilsaengbo-student2.png", 3, **PSB_S, keep=1.0),
 
     # 필생보 독학용 — 표지·목차 말고 실제로 푸는 지면 위주
     Shot("psb-solve.png", 15, marks=["한 문장씩 직접 풀기"], keep=0.9),
@@ -106,12 +112,13 @@ SHOTS = [
     Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
 
     # 변형문제 — 1회 문제 · 교사용 · 해설 · 2회 · 3회 · 빠른정답
-    Shot("variation.png", 0, head=["변형문제 1회"], keep=0.86),
-    Shot("variation-teacher.png", 4, head=["변형문제 1회"], keep=0.86),
-    Shot("variation-answer.png", 10, head=["변형문제 1회"], keep=0.86),
-    Shot("variation-r2.png", 12, head=["변형문제 1회"], keep=0.86),
-    Shot("variation-r3.png", 19, head=["변형문제 1회"], keep=0.86),
-    Shot("variation-quick.png", 9, head=["변형문제 1회"], keep=0.7),
+    Shot("variation.png", 8, **VAR, keep=0.86),            # 어휘 — 원문형
+    Shot("variation-gram.png", 5, **VAR, keep=0.86),       # 어법 모두 고르기
+    Shot("variation-gramwrite.png", 6, **VAR, keep=0.86),  # 어법 서술형
+    Shot("variation-oxen.png", 4, **VAR, keep=0.86),       # 내용 O/X (영어)
+    Shot("variation-teacher.png", 17, **VAR, keep=0.86),   # 교사용 문제+해설
+    Shot("variation-answer.png", 45, **VAR, keep=0.86),    # 해설지 — 어법 서술형
+    Shot("variation-quick.png", 37, **VAR, keep=0.7),      # 빠른 정답
 
     # 동형모의고사 — 시험지 · 문제 · 교사용 · 해설 · 빠른정답
     Shot("mock.png", 0, head=["동형모의고사"], keep=0.9),
@@ -192,12 +199,9 @@ CROPS = [
     # 각 자료의 '반 페이지' — 지면이 어떻게 생겼는지 보이는 핵심 절반.
     # 조각만 늘어놓으면 부품은 알아도 지면이 안 그려진다.
     ("analysis.png", "h-analysis.png", (0.02, 0.030, 0.98, 0.520)),
-    ("pilsaengbo-student.png", "h-psbc.png", (0.03, 0.055, 0.97, 0.470)),
-    ("pilsaengbo-summary.png", "h-psbc-restate.png", (0.03, 0.310, 0.97, 0.625)),
-    ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.03, 0.628, 0.97, 0.880)),
-    ("pilsaengbo-summary2.png", "h-psbc-restate2.png", (0.03, 0.305, 0.97, 0.640)),
-    ("pilsaengbo-summary3.png", "h-psbc-restate3.png", (0.03, 0.300, 0.97, 0.600)),
-    ("hapbon-summary.png", "h-psbc-restate4.png", (0.055, 0.352, 0.960, 0.660)),
+    ("pilsaengbo-student.png", "h-psbc.png", (0.03, 0.040, 0.97, 0.290)),
+    ("pilsaengbo-summary.png", "h-psbc-restate.png", (0.05, 0.265, 0.95, 0.492)),
+    ("pilsaengbo-summary.png", "h-psbc-flow.png", (0.05, 0.510, 0.95, 0.728)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
     # 지시문 띠 + 실제 지칭 문항. 띠가 없으면 무슨 문제인지 안 보인다.
     ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.125, 0.97, 0.258)),
@@ -215,12 +219,15 @@ CROPS = [
     ("analysis.png", "c-analysis-gram.png", (0.66, 0.170, 0.96, 0.272)),
 
     # 03 필생보 강의용 — 학생용 지면이 특징을 더 잘 보여 준다
-    ("pilsaengbo-student.png", "c-psbc-blank.png", (0.07, 0.172, 0.93, 0.232)),
-    ("pilsaengbo-student.png", "c-psbc-wrong.png", (0.07, 0.232, 0.93, 0.328)),
-    ("pilsaengbo-student.png", "c-psbc-circle.png", (0.08, 0.138, 0.70, 0.182)),
-    ("pilsaengbo-grammar.png", "h-psbc-gram.png", (0.04, 0.044, 0.96, 0.320)),
-    ("pilsaengbo-grammar.png", "c-psbc-gram-write.png", (0.04, 0.610, 0.96, 0.760)),
-    ("pilsaengbo.png", "c-psbc-filled.png", (0.07, 0.168, 0.93, 0.228)),
+    ("pilsaengbo-student.png", "c-psbc-circle.png", (0.085, 0.170, 0.62, 0.193)),
+    # 강사용 쪽에서 잘라야 △ 판정과 '→ 바르게'가 채워진 채로 보인다
+    ("pilsaengbo-sent.png", "c-psbc-ox.png", (0.06, 0.560, 0.94, 0.640)),
+    ("pilsaengbo-student2.png", "c-psbc-notread.png", (0.06, 0.573, 0.94, 0.600)),
+    ("pilsaengbo.png", "c-psbc-vocab.png", (0.05, 0.437, 0.95, 0.618)),
+    ("pilsaengbo-guide.png", "c-psbc-guide.png", (0.05, 0.280, 0.95, 0.464)),
+    ("pilsaengbo-grammar.png", "h-psbc-gram.png", (0.05, 0.050, 0.95, 0.315)),
+    ("pilsaengbo-grammar.png", "c-psbc-gram-write.png", (0.05, 0.590, 0.95, 0.737)),
+    ("pilsaengbo-sent.png", "c-psbc-filled.png", (0.06, 0.120, 0.94, 0.255)),
 
     # 04 필생보 독학용
     ("psb-solve.png", "c-psbs-write.png", (0.05, 0.120, 0.95, 0.202)),
@@ -246,10 +253,14 @@ CROPS = [
     ("workbook.png", "c-wb-answer.png", (0.51, 0.110, 0.97, 0.352)),
 
     # 07 변형문제
-    ("variation.png", "c-var-choices.png", (0.49, 0.428, 0.96, 0.588)),
-    ("variation.png", "c-var-passage.png", (0.04, 0.234, 0.50, 0.462)),
-    ("variation.png", "c-var-round.png", (0.26, 0.083, 0.74, 0.113)),
-    ("variation-answer.png", "c-var-why.png", (0.04, 0.352, 0.50, 0.530)),
+    # 교사용 한 쪽에 지문 · 선지 · 오답 해설이 위아래로 붙어 있다
+    ("variation-teacher.png", "c-var-orig.png", (0.05, 0.190, 0.50, 0.425)),
+    ("variation-teacher.png", "c-var-choices.png", (0.05, 0.425, 0.50, 0.578)),
+    ("variation-teacher.png", "c-var-why.png", (0.05, 0.578, 0.50, 0.872)),
+    # 같은 지문을 표현만 바꿔 낸 판. 위 c-var-orig 와 나란히 놓으면 차이가 보인다
+    ("variation-gramwrite.png", "c-var-passage.png", (0.05, 0.155, 0.50, 0.398)),
+    ("variation-gramwrite.png", "c-var-write.png", (0.05, 0.040, 0.50, 0.159)),
+    ("variation-oxen.png", "c-var-oxen.png", (0.05, 0.412, 0.50, 0.540)),
 
     # 08 동형모의고사
     ("mock.png", "c-mock-head.png", (0.04, 0.045, 0.96, 0.200)),
@@ -281,7 +292,7 @@ def make_crops() -> list[Path]:
 # ── 두 판본을 나란히 ──────────────────────────────────────────────────────
 PAIRS = [
     # (왼쪽 파일, 왼쪽 라벨, 오른쪽 파일, 오른쪽 라벨, 저장 이름, 위에서 남길 비율)
-    ("pilsaengbo.png", "강사용 · 정답 표시",
+    ("pilsaengbo-sent.png", "강사용 · 정답 표시",
      "pilsaengbo-student.png", "학생용 · 빈칸",
      "pilsaengbo-compare.png", 0.66),
 ]
@@ -340,10 +351,8 @@ def compose_pairs(width: int = 1600) -> list[Path]:
 # ── 여러 조각을 한 장으로 세로로 잇기 ────────────────────────────────────
 # 지문 하나만 보여 주면 "이 지문만 그런가" 싶다. 같은 자리를 지문마다 잇대어
 # 놓으면 자료 전체가 그렇게 만들어졌다는 것이 한 장으로 보인다.
-STACKS = [
+STACKS: list[tuple[str, list[str], int]] = [
     # (저장 이름, [조각들], 사이 여백)
-    ("h-psbc-restate-set.png",
-     ["h-psbc-restate2.png", "h-psbc-restate3.png", "h-psbc-restate.png"], 18),
 ]
 
 

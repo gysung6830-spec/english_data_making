@@ -228,7 +228,7 @@ posts/03-pilsaengbo-class.md      본문 원고 초안
 - `MAX_POINTS = 4` — 특징은 네 줄까지. 자료마다 다르게 하려면 `catalog.py`
   의 `max_points` 로 덮어씁니다(필생보 강의용은 여섯, 통합 워크북은 다섯).
 - 라인업 줄의 부제는 한 줄(`one_line`)입니다. 목록에서 더 중요한 말이 따로
-  있으면 `lineup_line` 으로 갈아 끼웁니다(16종 변형문제). 한 줄이 비어 있으면
+  있으면 `lineup_line` 으로 갈아 끼웁니다(17종 변형문제). 한 줄이 비어 있으면
   차별점(`edge`)이 대신 들어갑니다(통합 워크북).
 - 라인업 줄에는 특징을 **둘**만 보여 줍니다. `lineup_points` 로 더 많이
   보이게 하면 설명을 **첫 문장까지만** 잘라 붙입니다(통합 워크북은 다섯).
@@ -264,11 +264,11 @@ python brand/pdf_samples.py --src ~/Downloads/ortica-pdf
 | --- | --- | --- |
 | 지문자료 | 3 | `passage.png` · `one-line.png` · `one-line-2col.png` (판형 3옵션) |
 | 지문분석지 | 6 | `analysis.png` · `-point` · `-flow` · `-blank` · `-vocatest` · `-guide` |
-| 필생보 강의용 | 3 | `pilsaengbo-compare.png` (강사용·학생용 나란히) · `pilsaengbo` · `-summary` |
+| 필생보 강의용 | 7 | `-guide` · `pilsaengbo`(통독·어휘) · `-sent` · `-summary` · `-grammar` · `-student` · `-student2` |
 | 필생보 독학용 | 6 | `psb-solve.png` · `-answer` · `-predict` · `-paraphrase` · `-signal` · `-pace` |
 | 통합 워크북 | 2 | `workbook-integrated.png` · `-en` |
 | 서술형 대비 교재 | 1 | `workbook.png` |
-| 16종 변형문제 | 6 | `variation.png` · `-teacher` · `-answer` · `-r2` · `-r3` · `-quick` |
+| 17종 변형문제 | 7 | `variation.png` · `-gram` · `-gramwrite` · `-oxen` · `-teacher` · `-answer` · `-quick` |
 | 동형모의고사 | 5 | `mock.png` · `-paper` · `-teacher` · `-answer` · `-quick` |
 
 **표지와 목차는 넣지 않습니다.** 사는 사람이 궁금한 건 겉이 아니라 안입니다.
