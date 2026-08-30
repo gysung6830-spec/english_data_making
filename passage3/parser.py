@@ -247,6 +247,10 @@ _FOOTNOTE_RE = re.compile(r"\s*\d{1,3}\)\s*$")
 # 페이지 번호 줄:  '- 14 -', '14' 등
 _PAGENUM_RE = re.compile(r"^\s*[-–—]?\s*\d{1,4}\s*[-–—]?\s*$")
 
+# PDF 글리프 매핑 실패 토큰:  '(cid:8796)' 등. 원문자(①②③)·특수기호가
+# ToUnicode에 없어 디코딩되지 못한 것. 문장 분리를 망가뜨리므로 지운다.
+_CID_RE = re.compile(r"\(cid:\d+\)")
+
 # 자료 머리말/꼬리말·안내문(워터마크) 줄
 _JUNK_RE = re.compile(
     r"(?i)(flowedu\.tistory|\[\s*flow\s*edu\s*\]|^\s*\[EBS\]|EXAM4YOU|"
@@ -467,6 +471,8 @@ def split_passages(raw: str) -> List[Passage]:
 
     # PDF 추출에서 섞이는 널문자/소프트하이픈을 공백으로 정규화
     raw = raw.replace("\x00", " ").replace("\xad", " ")
+    # 글리프 매핑 실패 토큰('(cid:8796)' 등)을 제거(문장 분리 교란 방지)
+    raw = _CID_RE.sub(" ", raw)
 
     lines = raw.splitlines()
 

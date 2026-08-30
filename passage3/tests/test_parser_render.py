@@ -118,6 +118,18 @@ def test_summary_label_split():
     assert s.ko.startswith("장애가")
 
 
+def test_cid_glyph_token_stripped():
+    """PDF 글리프 매핑 실패 토큰 '(cid:8796)'(원문자 ①② 등이 디코딩 안 된 것)이
+    본문에 섞이면 지워야 한다. 남으면 문장 분리를 망가뜨려 en/해석이 어긋난다."""
+    raw = ("[고3] 2025년 06월 - 43번: cid test\n"
+           "① I bought some blueberries. (cid:8797) Would you like to come?\n"
+           "① 나는 블루베리를 좀 샀어. 우리 집에 올래?\n")
+    p = split_passages(raw)[0]
+    joined_en = " ".join(s.en for s in p.sentences)
+    assert "cid:" not in joined_en
+    assert "(cid" not in joined_en
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):
