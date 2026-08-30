@@ -436,6 +436,12 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
         # 사진 밑에 '원문만'이라 써 놓고 아래에 또 '원문만 —' 을 쓰면 같은 말이 두 번이다.
         src_pts = it.points[len(it.thumbs):] if it.thumbs else it.points
         n = it.lineup_points or points_n
+        # 설계가 유형마다 다른 자료는 상세 문구를 잘라 쓰면 두 줄밖에 못 담는다.
+        # 목록 전용으로 한 줄씩 따로 적어 두면 여덟 가지도 여덟 줄에 들어간다.
+        trim = n > 2
+        if it.lineup_bullets:
+            # 이미 한 줄로 줄여 쓴 것이라 다시 자르지 않는다.
+            src_pts, n, trim = it.lineup_bullets, len(it.lineup_bullets), False
         # 줄이 셋을 넘으면 설명을 첫 문장까지만 자른다. 생김새는 그대로 두어야
         # 목록에서 그 자료만 다른 모양으로 튀지 않는다.
         pts = "".join(
@@ -444,7 +450,7 @@ def lineup_rows(items, t: dict[str, str], u: float, thumb_w: int = 320,
             f'word-break:keep-all;margin-top:{u * .6:.0f}px">'
             f'<span style="position:absolute;left:0;color:{t["accent"]}">·</span>'
             f'<b style="color:{t["fg"]};font-weight:700">{head}</b> — '
-            f'{first_sentence(desc) if n > 2 else desc}</div>'
+            f'{first_sentence(desc) if trim else desc}</div>'
             for head, desc, *_ in src_pts[:n])
 
         head_el = f"""<div style="display:flex;align-items:baseline;flex-wrap:wrap;
