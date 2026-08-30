@@ -45,10 +45,10 @@
 
 ## 실제 자료 예시
 
-![](samples/variation.png)
-<!-- 이미지: brand/assets/samples/variation.png -->
+![](samples/variation-cover.png)
+<!-- 이미지: brand/assets/samples/variation-cover.png -->
 
-1회 학생용 — 한 지문에 어법·어휘·주제·내용 일치·순서·삽입이 이어집니다.
+학생용 첫 쪽 — 시험지 머리 아래로 유형이 한 문항씩 이어집니다.
 
 <!-- ▼ 직접 채울 곳 (VOICE.md §4) ─────────────────────────────
    · 이 자료를 만들게 된 계기가 된 구체적인 순간 한 문단

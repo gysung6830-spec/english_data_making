@@ -112,6 +112,7 @@ SHOTS = [
     Shot("workbook.png", 12, head=["내신 서술형"], keep=0.86),
 
     # 변형문제 — 1회 문제 · 교사용 · 해설 · 2회 · 3회 · 빠른정답
+    Shot("variation-cover.png", 0, **VAR, keep=0.86),      # 첫 쪽 — 학생용 문제
     Shot("variation.png", 8, **VAR, keep=0.86),            # 어휘 — 원문형
     Shot("variation-gram.png", 5, **VAR, keep=0.86),       # 어법 모두 고르기
     Shot("variation-gramwrite.png", 6, **VAR, keep=0.86),  # 어법 서술형
