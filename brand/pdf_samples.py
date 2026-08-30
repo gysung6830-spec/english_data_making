@@ -92,6 +92,7 @@ SHOTS = [
     Shot("workbook-integrated-pronoun.png", 6, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-order.png", 7, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-form.png", 2, head=["한글 포함"], keep=0.72),
+    Shot("workbook-integrated-vocab.png", 5, head=["한글 포함"], keep=0.72),
     Shot("workbook-integrated-blank.png", 9, head=["한글 포함"], keep=1.0),
 
     # 내신 서술형 워크북 — 조건 영작(난이도 3단 제시어)
@@ -191,7 +192,9 @@ CROPS = [
     ("pilsaengbo-summary3.png", "h-psbc-restate3.png", (0.03, 0.300, 0.97, 0.600)),
     ("hapbon-summary.png", "h-psbc-restate4.png", (0.055, 0.352, 0.960, 0.660)),
     ("psb-answer.png", "h-psbs-catch.png", (0.02, 0.015, 0.98, 0.450)),
-    ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.288, 0.97, 0.408)),
+    # 지시문 띠 + 실제 지칭 문항. 띠가 없으면 무슨 문제인지 안 보인다.
+    ("workbook-integrated-pronoun.png", "c-wbi-pron.png", (0.03, 0.120, 0.97, 0.392)),
+    ("workbook-integrated-vocab.png", "c-wbi-vocab.png", (0.03, 0.120, 0.97, 0.281)),
     ("psb-solve.png", "h-psbs.png", (0.02, 0.020, 0.98, 0.420)),
     ("workbook-integrated.png", "h-wbi.png", (0.02, 0.020, 0.98, 0.560)),
     ("workbook.png", "h-wb.png", (0.02, 0.015, 0.98, 0.450)),
