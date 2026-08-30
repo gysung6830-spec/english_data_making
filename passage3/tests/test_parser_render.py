@@ -130,6 +130,21 @@ def test_cid_glyph_token_stripped():
     assert "(cid" not in joined_en
 
 
+def test_proper_noun_josa_not_split():
+    """해석이 '이름+조사'(Linda는/Sean이)로 시작하는 한글 문장에서, 앞의 라틴
+    고유명사를 영어로 떼어내면 안 된다(해석이 '는…'으로 시작하고 이름이 영어
+    쪽에 고아로 남아 en/해석 정렬이 깨지던 장문 43~45 버그)."""
+    from parser import _split_mixed_line
+    # 이름+조사 밀착 → 통째로 한글
+    assert _split_mixed_line("Linda는 대답으로 고개를 끄덕였다.") == (
+        "", "Linda는 대답으로 고개를 끄덕였다.")
+    assert _split_mixed_line("Sean이 돌에 걸려 넘어졌다.") == (
+        "", "Sean이 돌에 걸려 넘어졌다.")
+    # 진짜 영/한 혼합줄(영어 여러 단어 + 공백 후 한글)은 그대로 분리
+    en, ko = _split_mixed_line("The weather was perfect 날씨는 완벽했다.")
+    assert en == "The weather was perfect" and ko == "날씨는 완벽했다."
+
+
 def test_renderers_produce_html():
     passages = split_passages(SAMPLE)
     for fn in (render_format_a, render_format_c, render_format_b):

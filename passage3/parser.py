@@ -317,12 +317,23 @@ def _split_mixed_line(line: str) -> Tuple[str, str]:
     """한 줄에 영/한이 섞이면 한글 첫 등장 위치에서 분리.
 
     반환: (영어부분, 한글부분).
+
+    단, 한글이 라틴 문자에 '붙어' 시작하고(예: 'Linda는', 'Sean이') 그 앞
+    영어가 고유명사 한 토큰뿐이면 영/한 혼합줄이 아니라 '이름+조사'로 시작하는
+    한글 해석 문장이다. 이때 이름을 영어로 떼어내면 해석이 조사('는…')로 시작하고
+    이름이 영어 쪽에 고아로 남아 en/해석 정렬이 깨진다(장문 43~45 반복 버그).
+    → 통째로 한글로 둔다.
     """
     m = _HANGUL_RE.search(line)
     if not m:
         return line.strip(), ""
     idx = m.start()
-    return line[:idx].strip(), line[idx:].strip()
+    en_part = line[:idx].strip()
+    # 한글 바로 앞이 라틴 글자(공백 없이 밀착)이고, 앞 영어가 단일 토큰(고유명사)
+    if (idx > 0 and line[idx - 1].isascii() and line[idx - 1].isalpha()
+            and en_part and " " not in en_part):
+        return "", line.strip()
+    return en_part, line[idx:].strip()
 
 
 def _split_en_ko(chunk: str) -> Tuple[str, str]:
