@@ -156,23 +156,38 @@ CROP_ZOOM = 1.5
 CROP_FLOOR = 0.62
 
 
-def crop_img(name: str, doc_w: int, fill: bool = False) -> str:
+# 특징 하나에 딸린 조각들의 세로 합. 이보다 길어지면 오른쪽 설명이 진작 끝나
+# 옆이 텅 빈다. 넘치면 조각을 같은 비율로 줄여 그 여백을 없앤다.
+POINT_STACK_MAX = 620
+
+
+def crop_size(name: str, doc_w: int) -> tuple[int, int]:
+    """조각을 doc_w 칸에 놓을 때의 (가로, 세로) px. 파일이 없으면 (0, 0)."""
+    path = SAMPLES / name
+    if not name or not path.exists():
+        return 0, 0
+    from PIL import Image
+
+    with Image.open(path) as im:
+        w, h = im.size
+    px = min(doc_w, max(round(doc_w * CROP_FLOOR),
+                        round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM)))
+    return px, round(h * px / w)
+
+
+def crop_img(name: str, doc_w: int, fill: bool = False, px: int = 0) -> str:
     """부분 확대 조각. 원래 지면에서 차지하던 만큼만 키워서 보여 준다.
 
     좁은 조각을 칸 폭에 맞춰 늘리면 확대되어 흐려지고, 지면에서 작은 상자였다는
     사실도 사라진다. 반대로 비율만 따르면 작은 상자가 너무 작아지므로 아래를
     막아 둔다. 어느 쪽이든 원본보다 크게 늘리지는 않는다.
+
+    px 를 주면 그 가로로 놓는다(여러 장을 한 묶음으로 줄일 때).
     """
     path = SAMPLES / name
     if not name or not path.exists():
         return ""
-    from PIL import Image
-
-    with Image.open(path) as im:
-        w = im.width
-    px = doc_w if fill else min(
-        doc_w, max(round(doc_w * CROP_FLOOR),
-                   round(w / SAMPLE_PAGE_W * doc_w * CROP_ZOOM)))
+    px = px or (doc_w if fill else crop_size(name, doc_w)[0])
     return (f'<img src="{path.as_uri()}" style="display:block;width:{px}px;'
             f'max-width:100%;border-radius:8px;'
             f'box-shadow:0 5px 18px rgba(14,31,26,.16)">')
@@ -650,11 +665,16 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
         head, desc, *rest = pt
         # 왼쪽에 지면, 오른쪽에 말. 눈이 사진에서 설명으로 바로 건너간다.
         col_w = int((width - u * 13 - u * 3) * 0.62)
-        names = [c for c in (rest[0].split("|") if rest and rest[0] else [])]
+        names = [c for c in (rest[0].split("|") if rest and rest[0] else [])
+                 if crop_size(c, col_w)[0]]
+        # 조각이 설명보다 훨씬 길면 옆이 텅 빈다. 묶음째 같은 비율로 줄인다.
+        sizes = [crop_size(c, col_w) for c in names]
+        tall = sum(h for _, h in sizes) + u * 1.2 * (len(sizes) - 1)
+        shrink = min(1.0, POINT_STACK_MAX / tall) if tall else 1.0
         crops = "".join(
             f'<div style="margin-top:{u * 1.2 if i else 0:.0f}px">'
-            f'{crop_img(c, col_w)}</div>'
-            for i, c in enumerate(names) if crop_img(c, col_w))
+            f'{crop_img(c, col_w, px=max(1, round(w * shrink)))}</div>'
+            for i, (c, (w, _)) in enumerate(zip(names, sizes)))
         # 사진을 키우려고 글자를 줄였다. 포인트는 짚어 주는 말이라 작아도 읽힌다.
         text = f"""<div class="ko" style="font-size:{u * 2.05:.0f}px;color:{t['fg']};
                line-height:1.42;word-break:keep-all">{head}</div>
