@@ -304,9 +304,12 @@ CROPS = [
     ("variation-neg.png", "c-var-v3.png", (0.05, 0.147, 0.50, 0.252)),
 
     # 08 동형모의고사
-    ("mock.png", "c-mock-head.png", (0.04, 0.045, 0.96, 0.200)),
-    ("mock-paper.png", "c-mock-score.png", (0.04, 0.028, 0.51, 0.250)),
-    ("mock-answer.png", "c-mock-why.png", (0.04, 0.080, 0.51, 0.300)),
+    ("mock.png", "c-mock-head.png", (0.04, 0.033, 0.96, 0.212)),
+    ("mock.png", "c-mock-score.png", (0.50, 0.508, 0.965, 0.688)),
+    ("mock-teacher.png", "c-mock-bold.png", (0.045, 0.283, 0.50, 0.402)),
+    ("mock-answer.png", "c-mock-why.png", (0.045, 0.088, 0.50, 0.258)),
+    ("mock-answer.png", "c-mock-trap.png", (0.045, 0.618, 0.50, 0.800)),
+    ("mock-quick.png", "c-mock-quick.png", (0.04, 0.030, 0.96, 0.330)),
 ]
 
 
