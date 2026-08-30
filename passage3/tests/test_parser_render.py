@@ -197,17 +197,27 @@ def test_realign_chunks():
     out2 = realign_chunks(en, bad)
     from parser import _letters as _L
     assert _L(" ".join(c.en for c in out2)) == _L(en)  # 원문과 100% 일치
-    # AI가 여러 조각으로 나누고 조각마다 뜻을 달았지만 경계가 원문과 미세하게
-    # 어긋난 경우: 뜻(ko)을 버리지 않고 보존해야 한다(빈 청크로 폴백 금지).
-    misaligned = [
-        Chunk(en="But remember it has a limit", ko="하지만 한계가 있음을 기억하라"),
-        Chunk(en="of 7 items", ko="일곱 개 항목의"),        # 원문 'seven' → '7'로 달라짐
-        Chunk(en="or chunks.", ko="또는 덩어리라는"),
+    # AI가 여러 조각으로 나누고 조각마다 뜻을 달았지만 영어가 원문과 어긋난 경우:
+    # 뜻(ko)은 보존하되 '영어는 원문 단어로 되돌려' 100% 일치시켜야 한다.
+    # (1) 단어 치환: 'your'를 'our'로 바꿈 → 영어는 'your'로 복원, 뜻 보존.
+    sub = [
+        Chunk(en="We greatly appreciate", ko="우리는 감사하는데"),
+        Chunk(en="our continued use", ko="여러분의 지속적인 이용에"),  # your→our 오류
+        Chunk(en="of our sports center.", ko="스포츠 센터를"),
     ]
-    out3 = realign_chunks("But remember it has a limit of seven items or chunks.",
-                          misaligned)
-    assert [c.ko for c in out3] == ["하지만 한계가 있음을 기억하라",
-                                    "일곱 개 항목의", "또는 덩어리라는"]  # 뜻 보존
+    o = realign_chunks("We greatly appreciate your continued use of our sports center.", sub)
+    assert _L(" ".join(c.en for c in o)) == _L("We greatly appreciate your continued use of our sports center.")
+    assert o[1].en == "your continued use"        # 원문 단어로 복원
+    assert o[1].ko == "여러분의 지속적인 이용에"    # 뜻 보존
+    # (2) 단어 삽입: 'that'을 끼워 넣음 → 영어에서 that 제거, 뜻 보존.
+    ins = [
+        Chunk(en="we intuitively assume", ko="우리는 직관적으로 가정한다"),
+        Chunk(en="that it reflects an increase.", ko="그것이 증가를 반영한다고"),  # +that
+    ]
+    o2 = realign_chunks("we intuitively assume it reflects an increase.", ins)
+    assert _L(" ".join(c.en for c in o2)) == _L("we intuitively assume it reflects an increase.")
+    assert "that" not in o2[-1].en.split()          # 삽입된 that 제거됨
+    assert o2[-1].ko == "그것이 증가를 반영한다고"    # 뜻 보존
 
 
 def test_tidy_chunk_ko():

@@ -113,14 +113,32 @@ def realign_chunks(en: str, chunks: List["Chunk"]) -> List["Chunk"]:
     if not chunks:
         return chunks
     if _letters("".join(c.en for c in chunks)) != _letters(en):
-        # 청크가 원문과 글자 수준으로 다름(AI가 단어·문자를 넣거나 뺌).
-        # 단, AI가 '여러 조각으로 나눠 조각마다 뜻(ko)까지 단' 정상 응답이면
-        # 그 뜻을 버리지 않는다(경계가 원문과 미세하게 어긋났다는 이유로 청크별
-        # 해석을 통째로 날려 빈 청크가 되던 문제 방지). 영어는 AI 조각을 그대로
-        # 쓰고 뜻만 정리한다.
+        # 청크가 원문과 글자 수준으로 다름(AI가 단어를 치환·삽입·누락).
+        # AI가 '여러 조각으로 나눠 조각마다 뜻(ko)까지 단' 정상 응답이면 그 뜻을
+        # 살리되, 영어는 AI 조각을 그대로 쓰지 않고 '원문 단어로 되돌린다':
+        # 각 AI 조각의 단어 수만큼 원문 단어를 차례대로 잘라 배정(마지막 조각이
+        # 남은 단어를 흡수)하면, 이어 붙였을 때 원문과 100% 일치하면서 조각별
+        # 뜻은 보존된다. (AI가 your→our로 바꾸거나 that을 끼워 넣어도 영어는
+        # 원문대로 나온다.)
         real = [c for c in chunks if c.en.strip()]
         if len(real) >= 2 and any((c.ko or "").strip() for c in real):
-            return [Chunk(en=c.en.strip(), ko=tidy_chunk_ko(c.ko)) for c in real]
+            owords = en.split()
+            out: List["Chunk"] = []
+            pos, n = 0, len(real)
+            for i, c in enumerate(real):
+                if pos >= len(owords):
+                    break
+                take = max(1, len(c.en.split()))
+                seg = owords[pos:] if i == n - 1 else owords[pos:pos + take]
+                if not seg:
+                    continue
+                pos += len(seg)
+                out.append(Chunk(en=" ".join(seg), ko=tidy_chunk_ko(c.ko)))
+            if pos < len(owords) and out:   # 남은 단어는 끝 조각에 붙임
+                out[-1] = Chunk(en=(out[-1].en + " " + " ".join(owords[pos:])).strip(),
+                                ko=out[-1].ko)
+            if out and _letters(" ".join(c.en for c in out)) == _letters(en):
+                return out
         # 그 외(한 덩어리이거나 뜻이 아예 없음)는 원문을 신뢰해 규칙 기반으로 다시
         # 끊어 영어가 원문과 100% 일치하게 함(뜻은 렌더러가 문장 전체 해석 사용).
         pieces = rough_sense_split(en)
