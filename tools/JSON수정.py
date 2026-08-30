@@ -22,6 +22,10 @@
     # 특정 지문에서만 바꾼다(1부터 셈)
     python tools/JSON수정.py 결과.json --지문 2 --바꾸기 "낡은 말=>고친 말" --저장 out.json
 
+    # 제목·머리글만 바꿔 다시 뽑는다(문항은 그대로)
+    python tools/JSON수정.py 결과.json --머리글 "○○학원 고3 3월" --제목 "올림포스 기본1" \\
+        --저장 새제목.json --조판 새제목.pdf
+
 바꾸기 전후로 검산(exam/audit)을 돌려 지적 수가 어떻게 달라졌는지 보여 준다.
 '찾을 것'이 태그에 걸려 통째로는 못 찾은 자리가 있으면 경고한다 — 그런 자리는 밑줄이나
 빈칸이 글자 사이에 끼어 있다는 뜻이라, 글자만 고쳐서는 안 되고 문항을 다시 만들어야 한다.
@@ -94,6 +98,10 @@ def main() -> int:
     ap.add_argument("--저장", default=None, help="고친 JSON 을 저장할 경로")
     ap.add_argument("--조판", default=None, help="PDF 로 뽑을 경로")
     ap.add_argument("--검토메모", default=None, help="검토 메모를 따로 저장할 경로")
+    ap.add_argument("--머리글", default=None, metavar="문구",
+                    help="시험지 맨 위 머리글을 바꾼다(빈 문자열이면 지운다)")
+    ap.add_argument("--제목", default=None, metavar="이름",
+                    help="자료 이름(doc_name)을 바꾼다 — 파일 이름에 쓰인다")
     args = ap.parse_args()
 
     edits = []
@@ -111,6 +119,15 @@ def main() -> int:
     parts, meta = serialize.load_parts(data)
     before = sum(_count_bad(p["passages"]) for p in parts)
 
+    # 제목·머리글은 문항을 건드리지 않는다 — 조판할 때만 쓰이는 값이라 언제든 바꿔도
+    # 안전하다(문항 HTML 은 그대로이므로 검산 결과도 달라지지 않는다).
+    if args.머리글 is not None:
+        data["header"] = args.머리글
+        print(f"머리글: {args.머리글!r}")
+    if args.제목 is not None:
+        data["doc_name"] = args.제목
+        print(f"자료 이름: {args.제목!r}")
+
     n, stuck = apply_edits(data, edits, only=args.지문)
     print(f"고친 자리: {n}곳" + (f" (지문 {args.지문}만)" if args.지문 else ""))
     if not n and edits:
@@ -122,6 +139,8 @@ def main() -> int:
     parts, meta = serialize.load_parts(data)
     after = sum(_count_bad(p["passages"]) for p in parts)
     print(f"검산: 지적 {before}건 → {after}건")
+    if not edits and (args.머리글 is not None or args.제목 is not None):
+        print("  (문항은 그대로 — 제목·머리글만 바꿨습니다)")
 
     if args.저장:
         Path(args.저장).write_text(json.dumps(data, ensure_ascii=False, indent=1),
@@ -132,7 +151,8 @@ def main() -> int:
 
         rev = renderer.render_pdf_multi(parts, args.조판, review_out=args.검토메모)
         print(f"PDF 조판: {args.조판}" + (f" · 검토메모: {rev}" if rev else ""))
-    if not args.저장 and not args.조판:
+    if not args.저장 and not args.조판 and (edits or args.머리글 is not None
+                                            or args.제목 is not None):
         print("(미리보기만 했습니다 — 실제로 고치려면 --저장 / --조판 을 주세요)")
     return 0
 
