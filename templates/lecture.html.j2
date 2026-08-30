@@ -168,7 +168,7 @@
     </div>
 
     <div class="kg-drills">
-      <div class="kg-drills-h">✏ 연습문제 — 어법 판단(밑줄·네모·오류) · 영작으로 확인</div>
+      <div class="kg-drills-h">✏ 연습문제 — {% if p.key_grammar.has_judge %}어법 판단(밑줄·네모·오류){% else %}객관식{% endif %} · 영작으로 확인</div>
       <div class="drill-cols">
       {% for d in p.key_grammar.drills %}
       <div class="drill">

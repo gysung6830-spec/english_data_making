@@ -388,6 +388,8 @@ def _build_view(p: LecturePassage, teacher: bool) -> dict:
             "example": ov.key_grammar.example,
             "example_analysis": ov.key_grammar.example_analysis,
             "drills": [_drill_view(d, teacher) for d in ov.key_grammar.drills],
+            "has_judge": any(d.kind in ("밑줄형", "네모형", "오류찾기")
+                             for d in ov.key_grammar.drills),
         },
         "sentences": p.sentences,
         "lines": lines,
