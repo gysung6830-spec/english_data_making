@@ -294,6 +294,87 @@ def make_crops() -> list[Path]:
     return made
 
 
+# ── 변형문제 유형 한 장씩 ─────────────────────────────────────────────────
+# "열일곱 유형이 각각 어떻게 생겼는지"를 목록 글자만으로는 못 보여 준다.
+# 학생용 문제지 열일곱 쪽에서 유형칸을 한 장씩 따 온다.
+#
+# 지문은 열일곱 쪽에 똑같이 실려 있다. 그대로 열일곱 번 붙이면 같은 지문만
+# 계속 나오고 세로가 네 배로 길어지므로, **지시문 위쪽과 지문 아래쪽만** 잘라
+# 붙인다. 어법·어휘처럼 지문 안에 밑줄로 묻는 유형은 지문이 곧 문제라서
+# 통째로 남긴다.
+VARIATION_TYPES = [
+    "주제", "제목", "함의추론", "내용 O/X", "내용 O/X (영어)",
+    "어법 — 모두 고르기", "어법 서술형", "어법·어휘 짝짓기",
+    "어휘 — 원문형", "어휘 — 유의어형", "어휘 — 부정어형",
+    "빈칸추론", "연결어 (A)·(B)", "순서 배열", "문장 삽입",
+    "요약문 빈칸", "어순 배열",
+]
+
+# 본문 칸 좌우(포인트). 오른쪽 절반은 늘 비어 있다.
+_VAR_X = (30, 292)
+_VAR_GAP = 10          # 지시문과 지문 아랫부분을 이어 붙일 때 벌리는 간격(px)
+
+
+def variation_gallery(src: Path, dpi: int = 130) -> list[Path]:
+    """변형문제 학생용 열일곱 쪽 → 유형별 조각 열일곱 장."""
+    import pymupdf
+    from PIL import Image
+
+    index = {p: scan_text(p) for p in sorted(src.glob("*.pdf"))}
+    path = pick(index, Shot("", 0, **VAR))
+    if path is None:
+        print("  · 변형문제 유형 조각 — 통합본 PDF 없음, 건너뜀")
+        return []
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    made: list[Path] = []
+    z = dpi / 72
+    with pymupdf.open(path) as doc:
+        for i, label in enumerate(VARIATION_TYPES):
+            page = doc[i]
+            blocks = [b for b in page.get_text("blocks")
+                      if b[4].strip() and "Ortica" not in b[4]]
+            if not blocks:
+                continue
+            last = max(b[3] for b in blocks)
+            # 유형 이름이 든 초록 띠. 표지 띠가 하나 더 있는 첫 쪽은 아래 것을 쓴다.
+            bands = sorted((r["rect"] for r in page.get_drawings()
+                            if r["rect"].width > 400 and 20 < r["rect"].height < 60),
+                           key=lambda r: r.y0)
+            top = bands[-1].y0 - 4 if bands else 30
+            # 지문 상자 — 본문 칸 폭이고 세로로 긴 사각형
+            boxes = sorted((r["rect"] for r in page.get_drawings()
+                            if r["rect"].height > 100 and r["rect"].x1 < 300),
+                           key=lambda r: r.y0)
+            box = boxes[0] if boxes else None
+
+            pix = page.get_pixmap(dpi=dpi)
+            raw = OUT / "_raw_var.png"
+            pix.save(str(raw))
+            with Image.open(raw) as im:
+                full = im.convert("RGB")
+                x0, x1 = (round(v * z) for v in _VAR_X)
+
+                def band(y0: float, y1: float):
+                    return full.crop((x0, round(y0 * z), x1, round(y1 * z)))
+
+                # 지문 아래에 선지·답란이 있으면 지문을 건너뛴다.
+                if box is not None and last > box.y1 + 12:
+                    a, b = band(top, box.y0 - 3), band(box.y1 + 3, last + 8)
+                    out = Image.new("RGB", (a.width, a.height + _VAR_GAP + b.height),
+                                    "white")
+                    out.paste(a, (0, 0))
+                    out.paste(b, (0, a.height + _VAR_GAP))
+                else:
+                    out = band(top, last + 8)
+                name = f"g-var-{i + 1:02d}.png"
+                out.save(OUT / name)
+            raw.unlink(missing_ok=True)
+            made.append(OUT / name)
+            print(f"  ✔ samples/{name}  ({out.width}×{out.height})  {label}")
+    return made
+
+
 # ── 두 판본을 나란히 ──────────────────────────────────────────────────────
 PAIRS = [
     # (왼쪽 파일, 왼쪽 라벨, 오른쪽 파일, 오른쪽 라벨, 저장 이름, 위에서 남길 비율)
@@ -395,7 +476,14 @@ def main() -> None:
     ap.add_argument("--only", default="", help="이 이름 한 장만 다시 뽑는다")
     ap.add_argument("--crops-only", action="store_true",
                     help="PDF 는 건드리지 않고 부분 확대만 다시 자른다")
+    ap.add_argument("--gallery-only", action="store_true",
+                    help="변형문제 유형 조각만 다시 뽑는다")
     args = ap.parse_args()
+
+    if args.gallery_only:
+        made = variation_gallery(Path(args.src).expanduser(), args.dpi)
+        print(f"\n{len(made)}개 → {OUT}")
+        return
 
     if args.crops_only:
         made = make_crops() + make_stacks()
@@ -407,6 +495,7 @@ def main() -> None:
         sys.exit(f"폴더가 없습니다: {src}")
     made = shoot(src, args.dpi, args.only)
     if not args.only:
+        made += variation_gallery(src, args.dpi)
         made += compose_pairs()
         made += make_crops()
         made += make_stacks()

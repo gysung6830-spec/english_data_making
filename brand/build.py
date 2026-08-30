@@ -735,6 +735,29 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
     tables_el = "".join(spec_table(title, rows, t, u) for title, rows in item.tables)
     tables_el += "".join(grid_table(title, rows, t, u, width - u * 13)
                          for title, rows in item.grids)
+
+    # 유형 이름만 늘어놓으면 '그래서 그게 어떻게 생겼는데'가 남는다. 실물을
+    # 두 칸으로 흘려 놓으면 열일곱 장이 한 화면 분량으로 접힌다.
+    gallery_el = ""
+    if item.gallery:
+        cards = "".join(f"""<div style="break-inside:avoid;
+          margin-bottom:{u * 2.6:.0f}px">
+          <div class="ko" style="font-size:{u * 1.6:.0f}px;color:{t['accent']};
+               margin-bottom:{u * .7:.0f}px;word-break:keep-all">
+            <span class="wm" style="margin-right:{u * .7:.0f}px;opacity:.75">
+              {i:02d}</span>{label}</div>
+          <img src="{(SAMPLES / name).as_uri()}" style="display:block;width:100%;
+               border-radius:6px;box-shadow:0 4px 14px rgba(14,31,26,.15)">
+        </div>""" for i, (name, label) in enumerate(item.gallery, 1)
+            if (SAMPLES / name).exists())
+        if cards:
+            gallery_el = f"""<div style="margin-top:{u * 4.2:.0f}px">
+              <div class="ko" style="font-size:{u * 2.2:.0f}px;color:{t['fg']};
+                   padding-bottom:{u * 1.0:.0f}px;border-bottom:2px solid {t['accent']};
+                   margin-bottom:{u * 2.4:.0f}px">{item.gallery_title}</div>
+              <div style="column-count:2;column-gap:{u * 2.6:.0f}px;
+                   column-fill:balance">{cards}</div>
+            </div>"""
     # 이름이 길면 한 줄에 안 들어가 '강의 / 용)' 처럼 끊긴다. 글자 수에 맞춰
     # 줄여서 한 줄로 세운다. 제목이 접히면 배지·번호와 축이 어긋난다.
     name_px = u * (7.0 if item.signature else 5.4) * min(1, 11 / len(item.name))
@@ -786,6 +809,7 @@ def build_detail(item, width: int = DOC_W) -> tuple[str, int]:
           {tables_el}
           {pts_title}
           <div style="margin-top:{u * 3.2:.0f}px">{pts}</div>
+          {gallery_el}
           {spec_el}
           {who_el}
           {price_el}
