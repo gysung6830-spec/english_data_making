@@ -574,16 +574,20 @@ def grid_table(title: str, rows, t: dict[str, str], u: float, width: float) -> s
     열일곱 줄을 세로로 세우면 그 표만 한 화면을 먹는다. 짧은 줄로 잘라 칸을
     나누면 훑어보기가 된다. 오른쪽 값이 다 비어 있으면 그냥 이름만 늘어놓는
     목록이므로 한 칸 더 나눈다.
+
+    앞에 번호를 붙인다. '열일곱 가지'라고 써 놓고 세게 만들면 안 된다.
     """
     cols = 2 if any(v for _, v in rows) else 3
     cells = "".join(f"""<div style="display:flex;justify-content:space-between;
       align-items:baseline;gap:{u * 1.2:.0f}px;padding:{u * 1.15:.0f}px 0;
       border-top:1px solid {t['line']};break-inside:avoid">
       <div class="sans" style="font-size:{u * 1.75:.0f}px;color:{t['fg']};
-           line-height:1.4;word-break:keep-all">{k}</div>
+           line-height:1.4;word-break:keep-all">
+        <span class="wm" style="font-size:{u * 1.45:.0f}px;color:{t['accent']};
+              margin-right:{u * .9:.0f}px">{i:02d}</span>{k}</div>
       {f'''<div class="sans" style="flex:0 0 auto;font-size:{u * 1.5:.0f}px;
            color:{t['accent']};white-space:nowrap">{v}</div>''' if v else ''}
-    </div>""" for k, v in rows)
+    </div>""" for i, (k, v) in enumerate(rows, 1))
     return f"""<div style="margin-top:{u * 3.4:.0f}px">
       <div class="ko" style="font-size:{u * 2.2:.0f}px;color:{t['fg']};
            margin-bottom:{u * .6:.0f}px;word-break:keep-all">{title}</div>
