@@ -278,7 +278,10 @@ MATERIALS: list[Item] = [
         key="workbook-integrated",
         points_title="다른 워크북과 무엇이 다른가 — 다섯 가지",
         max_points=5,
-        lineup_points=5,
+        # 목록에서는 다섯을 한 줄로 훑고, 그중 둘만 풀어 쓴다. 다섯 줄을 세우면
+        # 이 자료만 목록에서 다른 모양으로 튄다.
+        lineup_note=("한글 포함본·제외본 두 벌 · 대명사 지칭 · 영작은 나올 자리만 · "
+                     "빈칸 채우기 · 한 문장에 여러 유형"),
         no="05",
         name="통합 영어 워크북",
         en="Integrated Workbook",
