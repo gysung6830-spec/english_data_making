@@ -2865,6 +2865,49 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_ingest_number_preservation() -> None:
+    """정제가 본문의 날짜·전화번호를 먹지 않는다 (5차 검증에서 나온 결함).
+
+    두 규칙이 지문을 망가뜨렸고, 그 지문 위에 선 문항이 통째로 팔려 나갔다.
+      · 문장 일련번호 규칙이 'for September 17. I realize …' 의 '17.' 을 지워
+        'September I realize' 라는 비문이 되었다 → 그 지문의 13문항에 실렸다.
+      · 페이지 번호 규칙이 '308-555-9847' 의 가운데를 먹어 '308 9847' 이 되었다
+        → 그 지문의 16문항에 실렸다.
+    둘 다 기계 검사에 걸리지 않았다(문법적으로 멀쩡한 글자열이라서).
+    """
+    from exam import ingest, precheck
+
+    #  ① 낱말 뒤의 숫자는 날짜·수량이지 일련번호가 아니다
+    keep = "we've had to reschedule the meeting for September 17. I realize you've started."
+    assert ingest._SENT_NO.sub(r"\1", keep) == keep
+    assert ingest._SENT_NO.sub(r"\1", "The price rose to 25. Sales followed.") == \
+        "The price rose to 25. Sales followed."
+    #     진짜 일련번호는 여전히 지운다(글 첫머리·문장이 끝난 자리)
+    assert ingest._SENT_NO.sub(r"\1", "1. A real numbered sentence.") == \
+        "A real numbered sentence."
+    assert ingest._SENT_NO.sub(r"\1", "Text ends. 2. Next one here.") == \
+        "Text ends. Next one here."
+
+    #  ② 하이픈으로 이어진 숫자는 페이지 번호가 아니다
+    tel = "If you have questions, I can be reached at 308-555-9847."
+    assert ingest._PAGE_NO.sub(" ", tel) == tel
+    assert ingest._PAGE_NO.sub(" ", "call 02-345-6789 now") == "call 02-345-6789 now"
+    #     진짜 페이지 번호는 여전히 지운다
+    assert "14" not in ingest._PAGE_NO.sub(" ", "footer - 14 - page")
+
+    #  ③ 편지의 인사말·맺음말은 '한줄해석 잔재'가 아니다 — 편지 지문이 통째로 걸렸었다
+    letter = ("Dear Mrs. Rabinowitz, It was very kind of you to offer refreshments at "
+              "this month's council meeting. Your contributions are always appreciated, "
+              "and I feel terrible for the inconvenience we have caused you. "
+              "If not, I understand completely. Regards, Martin Williams")
+    kinds = [i.kind for i in precheck.check_body(letter, "01-1")]
+    assert "한줄해석 잔재 의심" not in kinds, kinds
+    #     진짜 잔재(동사 없는 고유명사·연도 나열)는 그대로 잡는다
+    residue = letter + " 1968 The Population Bomb Paul R. Ehrlich."
+    assert "한줄해석 잔재 의심" in [i.kind for i in precheck.check_body(residue, "x")]
+    print("✓ 정제가 날짜·전화번호를 보존하고, 편지 인사말을 잔재로 오인하지 않음 통과")
+
+
 def test_vocab_memorization_guards() -> None:
     """어휘 3종의 암기 대비 — 지문을 외워도 '달라진 것 찾기'로 풀리지 않아야 한다.
 
@@ -3479,6 +3522,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_ingest_number_preservation()
     test_vocab_memorization_guards()
     test_grammar_points()
     test_direct_sale_guards()

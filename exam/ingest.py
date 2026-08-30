@@ -74,10 +74,15 @@ _WB_PROBLEM = re.compile(
     r"|\[\s*고\s*\d\s*\][^\n]*?(\d+)\s*번\s*[:：]",
     re.IGNORECASE)
 _FOOTNOTE = re.compile(r"(?<!\()\b\d{1,3}\)")            # 각주 번호(괄호쌍 (2)은 보호)
-# 문장 앞 일련번호 — 단, '10:00.'처럼 콜론 뒤 숫자(시간)와 '5-12.'처럼 하이픈 뒤
-# 숫자(나이·범위)는 제외한다(: 와 - 를 룩비하인드에 포함).
-_SENT_NO = re.compile(r"(?<![\w.:\-–])\d{1,3}\.\s+(?=[A-Z“\"‘'(])")
-_PAGE_NO = re.compile(r"[-–]\s*\d{1,4}\s*[-–]")          # 페이지 번호 (- 14 -)
+# 문장 앞 일련번호 — '1. Sentence …' 의 '1.' 만 지운다.
+# 실제 결과물에서 'reschedule the meeting for September 17. I realize …' 의 '17.' 이
+# 통째로 지워져 두 문장이 'September I realize' 로 붙어 버렸다(지문 하나의 13문항이
+# 그 비문을 싣고 나갔다). 낱말 뒤에 오는 숫자는 날짜·수량이지 일련번호가 아니다.
+# 그래서 '글 첫머리 · 문장이 끝난 자리 · 줄 첫머리' 에서만 일련번호로 본다.
+_SENT_NO = re.compile(r"(^|[.!?][\s]|\n)\s*\d{1,3}\.\s+(?=[A-Z“\"‘'(])")
+# 페이지 번호 (- 14 -). 앞뒤가 낱말·숫자가 아닐 때만 — 그러지 않으면 전화번호
+# '308-555-9847' 의 가운데 토막을 먹어 '308 9847' 이 된다(실제 결과물에서 그랬다).
+_PAGE_NO = re.compile(r"(?<![\w])[-–]\s*\d{1,4}\s*[-–](?![\w])")
 
 
 def _normalize_raw(raw: str) -> str:
@@ -159,7 +164,7 @@ def _clean_pdf_text(segment: str) -> str:
     text = _WB_HEADER.sub(" ", text)                    # WORKBOOK 러닝 헤더
     text = _PAGE_NO.sub(" ", text)                      # 페이지 번호 - 14 -
     text = _FOOTNOTE.sub("", text)                      # 각주 번호 .1) .2) …
-    text = _SENT_NO.sub("", text)                       # 문장 앞 일련번호 1. 2. …
+    text = _SENT_NO.sub(r"\1", text)                    # 문장 앞 일련번호 1. 2. …
     text = re.sub(r"\bWORKBOOK\w*\.?", " ", text, flags=re.IGNORECASE)  # 잔여 WORKBOOK
     text = re.sub(r"\(\s*\)", "", text)               # 빈 괄호 () 제거(한글 지운 잔재)
     text = re.sub(r"\s+", " ", text).strip()

@@ -60,6 +60,12 @@ def _split_sentences(body: str) -> list[str]:
     return [s for s in re.split(r"(?<=[.!?])\s+", body.strip()) if s.strip()]
 
 
+# 편지의 인사말·맺음말 — 동사가 없어도 정상 본문이다.
+_LETTER_EDGE = re.compile(
+    r"^(Dear\b|(Sincerely|Regards|Best\s+regards|Yours\s+(sincerely|truly)|"
+    r"Respectfully|Cordially|Warm\s+regards|Thank\s+you)\b)", re.IGNORECASE)
+
+
 def _fragment_sentences(sents: list[str]) -> list[str]:
     """'번역 잔재'로 보이는 조각 문장들을 돌려준다(지문 어느 위치든).
 
@@ -69,6 +75,12 @@ def _fragment_sentences(sents: list[str]) -> list[str]:
     """
     frags = []
     for s in sents:
+        # 편지의 인사말·맺음말은 원래 동사가 없다 — 잔재가 아니라 본문이다.
+        # (실제 원본 4지문에서 'Sincerely, Lisa'·'Dear Mrs.'·'Regards, Martin Williams'가
+        #  모두 잔재로 걸렸다. 편지는 이 교재에서 한 단원을 통째로 차지한다.)
+        if _LETTER_EDGE.match(s.strip()) and len(s.split()) <= 6:
+            continue        # 'Regards, Martin Williams' 는 맞지만, 그 뒤에 잔재가
+                            # 길게 붙은 줄은 걸러야 하므로 짧은 줄만 면제한다.
         words = [w for w in re.findall(r"[A-Za-z0-9.'’-]+", s) if w.strip(".'’-")]
         if len(words) < 2:
             continue
