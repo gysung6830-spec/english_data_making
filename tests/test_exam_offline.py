@@ -480,6 +480,21 @@ _VOCAB_SETS = [
 ]
 _VOCAB_CYCLE = itertools.cycle(_VOCAB_SETS)
 
+# 원문단어형(vocab_2)은 '다시 쓴 지문' 위에 선다 — 밑줄도 그 지문의 낱말이다.
+# 정본 낱말과 겹쳐도 되므로(지문이 다르다) 겹침 금지 대상이 아니다.
+_VOCAB_ORIGINAL = [(1, "plain", "plain"), (2, "supplies", "supplies"),
+                   (3, "offers", "abstract"), (4, "pulls", "pulls"),
+                   (5, "meets", "meets")]
+
+
+def _fake_vocab_original():
+    """원문단어형 가짜 출력 — 다시 쓴 지문 + 정답 하나만 반의어."""
+    return VocabOut(
+        rewritten=list(_REWRITE_A),
+        marks=[WordMark(sent_no=n, word=w, shown=sh)
+               for n, w, sh in _VOCAB_ORIGINAL],
+        answer_no=3, reason="이유.")
+
 
 def _fake_ox(prefix: str, n: int = 10) -> list:
     """내용 O/X 가짜 출력 — O 둘, 나머지 X 가 축을 하나씩 쓴다."""
@@ -510,6 +525,10 @@ def _fake_vocab_negation():
         answer_no=5,
         override_no=6,
         override_text="The sixth sentence never closes with a practical suggestion.",
+        # 미끼 — 뜻은 그대로, 표현만 바꾼 문장 하나(부정어 없음). 달라진 문장이 둘이라야
+        # 지문을 외운 학생이 '달라진 문장 찾기'로 풀지 못한다(shape.check_decoy).
+        decoy_no=3,
+        decoy_text="The third sentence offers a concrete example.",
         reason="이유.")
 
 
@@ -535,8 +554,12 @@ class _FakeClient:
                    cache_prefix=None, effort=None):
         self.efforts.append((model_cls.__name__, effort))
         # 부정어형 어휘는 '정답 밑줄이 부정어를 품어야' 통과한다(shape.check_negation_underline).
-        if model_cls.__name__ == "VocabOut" and "부정어 삽입" in prompt:
+        # 방식 표시는 '[방식: …]' 머리표로만 가른다. 본문에는 '원문 단어 그대로 노출
+        # 금지'처럼 다른 방식의 이름이 섞여 있어 그냥 부분 문자열로 가르면 어긋난다.
+        if model_cls.__name__ == "VocabOut" and "[방식: 부정어 삽입]" in prompt:
             obj = _fake_vocab_negation()
+        elif model_cls.__name__ == "VocabOut" and "[방식: 원문 단어]" in prompt:
+            obj = _fake_vocab_original()
         else:
             obj = _FAKE[model_cls.__name__]()
         if extra_validate:
@@ -2204,11 +2227,14 @@ def test_overlap_and_paraphrase_guards() -> None:
     from exam.shape import check_blank_answer_paraphrase as chk_para
 
     # ① 밑줄이 겹치지 않는다 ------------------------------------------------
+    #    '정본 지문' 위에 서는 문항끼리만 본다. 어휘 원문단어형(vocab_2)은 다시 쓴 지문
+    #    위에 서므로 같은 낱말을 써도 겹침이 아니다(audit._check_cross 와 같은 기준).
     p = build_passage_merged(_FakeClient(), _DUMMY)
     marks = {}
-    for t in ("pair_odd", "vocab_2", "vocab", "vocab_3"):
+    for t in ("pair_odd", "vocab", "vocab_3"):
         assert t in p.q, t
         marks[t] = [w.lower() for w in _re.findall(r"<u>(.*?)</u>", p.q[t])]
+    assert "vocab_2" in p.q                      # 만들어지긴 한다(다른 지문 위에)
     flat = [w for ws in marks.values() for w in ws]
     dup = [w for w, c in collections.Counter(flat).items() if c > 1]
     assert not dup, (dup, marks)
@@ -2839,6 +2865,105 @@ def test_ox_short_passage() -> None:
     print("✓ 짧은 지문 내용 O/X(영어판 8진술·O 근거 겹침 허용·없는 축 대체) 통과")
 
 
+def test_vocab_memorization_guards() -> None:
+    """어휘 3종의 암기 대비 — 지문을 외워도 '달라진 것 찾기'로 풀리지 않아야 한다.
+
+    이 유형들이 뚫리던 길:
+      · 원문단어형 — 오답 넷이 지문 낱말 그대로라, 정본 위에 세우면 '원문과 다른 낱말
+        하나'를 찾는 것으로 끝난다(뜻을 몰라도 풀린다). → 다시 쓴 지문 위에 세운다.
+      · 부정어형 — 밑줄 다섯이 모두 지문 낱말 그대로라 달라진 것이 문장 하나뿐이다.
+        그 문장 안의 밑줄이 곧 정답이므로 '달라진 문장 찾기'로 끝난다. → 미끼 문장을
+        하나 더 두어 달라진 문장을 둘로 만든다.
+      · 유의어형 — 다섯을 다 갈아 끼우므로 원래 뚫리지 않는다.
+    """
+    import re as _re
+
+    from exam import audit, shape
+    from exam.generators.vocab import NEGATION, ORIGINAL, SYNONYM
+    from exam.merged import build_passage_merged
+
+    orig = ["The cat sat on the warm mat.",
+            "It slept for hours without moving.",
+            "Later the dog arrived and barked."]
+
+    #  ① 미끼가 없으면 걸린다 — 달라진 문장이 하나뿐이면 외워서 풀린다
+    msg = shape.check_decoy(orig, 1, 0, "", [])
+    assert msg and "미끼 문장이 없습니다" in msg[0], msg
+    #     정답 문장과 같은 자리면 미끼가 아니다
+    assert shape.check_decoy(orig, 2, 2, "It dozed for hours.", [])
+    #     원문과 글자 그대로 같으면 미끼 구실을 못 한다
+    same = shape.check_decoy(orig, 1, 2, orig[1], [])
+    assert same and "글자 그대로 같습니다" in same[0], same
+    #     부정어가 새로 들어가면 그 자리도 흐름과 어긋나 정답이 둘이 된다
+    neg = shape.check_decoy(orig, 1, 2, "It never slept for hours.", [])
+    assert neg and "부정어" in neg[0], neg
+    #     제대로 된 미끼는 통과한다
+    assert shape.check_decoy(orig, 1, 2, "It dozed for hours on end.", []) == []
+    #     미끼 문장 안의 밑줄 낱말은 그대로 남아 있어야 밑줄을 칠 수 있다
+    mk = [WordMark(sent_no=2, word="slept", shown="slept")]
+    gone = shape.check_decoy(orig, 1, 2, "It dozed for hours on end.", mk)
+    assert gone and "밑줄" in gone[0], gone
+    assert shape.check_decoy(orig, 1, 2, "It slept for many long hours.", mk) == []
+
+    #  ② 원문단어형은 '다시 쓴 지문' 위에 선다 — 정본과 글이 다르다
+    p = build_passage_merged(_FakeClient(), _DUMMY)
+
+    def _body(t: str) -> str:
+        m = _re.search(r'<div class="passage">(.*?)</div>', p.q[t], _re.S)
+        return _re.sub(r"\s+", " ", _re.sub(r"<[^>]+>", " ", m.group(1))).strip()
+
+    canon = _re.sub(r"\s+", " ", _DUMMY).strip()
+    canon_words = set(_re.findall(r"[a-z]+", canon.lower()))
+
+    def _skeleton(t: str) -> set[str]:
+        """밑줄 '바깥'의 낱말들 — 어느 낱말이 밑줄이 됐는지와 무관하게 지문을 가른다."""
+        h = _re.sub(r"<u>.*?</u>", " ", p.q[t], flags=_re.S)
+        m = _re.search(r'<div class="passage">(.*?)</div>', h, _re.S)
+        return set(_re.findall(r"[a-z]+", _re.sub(r"<[^>]+>", " ", m.group(1)).lower()))
+
+    #     유의어형은 정본 그대로다 — 밑줄 밖은 모두 정본의 낱말이다.
+    extra = _skeleton("vocab") - canon_words
+    assert not extra, ("유의어형이 정본 위에 서 있지 않습니다", sorted(extra))
+    #     원문단어형은 지문이 다시 쓰였으므로 정본에 없던 낱말이 나온다.
+    assert _skeleton("vocab_2") - canon_words, "원문단어형이 아직 정본 위에 서 있습니다"
+    v3 = _body("vocab_3")
+    assert v3 != canon
+    #     부정어형에서 원문과 달라진 문장이 '둘'이다 — 정답 문장 + 미끼.
+    #     하나뿐이면 외운 학생이 그 문장만 찾으면 되고, 그 안의 밑줄이 곧 정답이다.
+    def _sents(t: str) -> list[str]:
+        # 밑줄 번호(①②…)는 조판이 넣은 것이라 글의 일부가 아니다 — 빼고 견준다.
+        t = _re.sub(r"[①-⑩]", " ", t)
+        return [" ".join(_re.findall(r"[a-z]+", x.lower()))
+                for x in _re.split(r"(?<=[.!?])\s+", t) if x.strip()]
+
+    changed = [i for i, (a, b) in enumerate(zip(_sents(v3), _sents(canon)), 1) if a != b]
+    assert len(changed) == 2, (changed, _sents(v3))
+    #     원문단어형은 '두 문장만' 바뀐 것이 아니라 지문 전체가 다시 쓰였다
+    #     (shape.check_rewrite 가 6할 이상을 요구한다).
+    n2 = sum(1 for a, b in zip(_sents(_body("vocab_2")), _sents(canon)) if a != b)
+    assert n2 >= 4, n2
+
+    #  ③ 다시 쓴 지문 위에 서므로 정본 밑줄 겹침 검사에서 빠진다.
+    #     정본 문항(vocab)과 같은 낱말을 밑줄로 써도 지적하지 않는다 — 지문이 다르다.
+    def _item(t, marks):
+        return {"type": t, "marks": [(str(i), w) for i, w in enumerate(marks, 1)],
+                "no": 1, "key": "", "body": "", "choices": []}
+
+    same = {"vocab": _item("vocab", ["alpha"]), "vocab_2": _item("vocab_2", ["alpha"])}
+    assert audit._check_cross(same) == {}, audit._check_cross(same)
+    #     정본끼리 겹치면 그대로 지적한다
+    both = {"vocab": _item("vocab", ["alpha"]), "vocab_3": _item("vocab_3", ["alpha"])}
+    assert audit._check_cross(both), "정본 문항끼리의 밑줄 겹침은 잡아야 합니다"
+
+    #  ④ 세 방식이 저마다 다른 대비를 갖는다(머리말과 코드가 어긋나지 않게)
+    from exam.generators import vocab as _v
+    assert "{rules}" in _v._PROMPT_ORIGINAL          # 다시 쓰기 지침이 실린다
+    assert "{rules}" not in _v._PROMPT_SYNONYM and "{rules}" not in _v._PROMPT_NEGATION
+    assert "decoy_no" in _v._PROMPT_NEGATION
+    assert (SYNONYM, NEGATION, ORIGINAL) == ("synonym", "negation", "original")
+    print("✓ 어휘 3종 암기 대비(원문단어형 다시 쓰기·부정어형 미끼 문장) 통과")
+
+
 def test_grammar_points() -> None:
     """어법 출제 항목 열한 가지 — 두 어법 문항이 겹치지 않는 풀에서 고른다.
 
@@ -3354,6 +3479,7 @@ if __name__ == "__main__":
     test_output_defect_regressions()
     test_ox_axes()
     test_ox_short_passage()
+    test_vocab_memorization_guards()
     test_grammar_points()
     test_direct_sale_guards()
     test_grammar_on_original_passage()

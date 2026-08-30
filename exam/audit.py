@@ -213,8 +213,9 @@ def _check_cross(items: dict[str, dict]) -> dict[str, list[str]]:
         out.setdefault(t, []).append(msg)
 
     # 1) 밑줄 낱말 겹침 — 정본에 밑줄을 치는 문항끼리
-    # 정본 지문 위에 밑줄을 치는 문항들. 어법 서술형은 '다시 쓴 지문' 위에 서므로 뺀다.
-    same_body = [t for t in ("grammar", "pair_odd", "vocab_2", "vocab", "vocab_3")
+    # '다시 쓴 지문' 위에 서는 둘은 뺀다 — 어법 서술형(grammar_fix)과
+    # 어휘 원문단어형(vocab_2). 지문이 다르므로 같은 낱말을 써도 겹침이 아니다.
+    same_body = [t for t in ("grammar", "pair_odd", "vocab", "vocab_3")
                  if t in items]
     seen: dict[str, str] = {}
     for t in same_body:

@@ -305,8 +305,18 @@ class VocabOut(BaseModel):
     marks: list[WordMark]          # 밑줄 5개
     answer_no: int                 # 문맥상 부적절한 밑줄 번호(1~5)
     reason: str
-    override_no: int = 0           # (방식2) 부정어를 넣을 문장 번호(1-based, 0=없음)
-    override_text: str = ""        # (방식2) 그 문장의 교체 텍스트
+    override_no: int = 0           # (부정어형) 부정어를 넣을 문장 번호(1-based, 0=없음)
+    override_text: str = ""        # (부정어형) 그 문장의 교체 텍스트
+    # (부정어형) '미끼' 문장 — 뜻은 그대로 두고 표현만 바꿔 놓은 문장 하나.
+    # 이것이 없으면 지문을 외운 학생이 '원문과 달라진 문장'을 하나 찾는 것으로 끝난다
+    # (그 문장 안의 밑줄이 곧 정답이므로). 달라진 문장이 둘이면 어느 쪽이 글의 흐름과
+    # 모순되는지 따져야 하고, 그것이 이 유형이 원래 재려던 것이다.
+    decoy_no: int = 0
+    decoy_text: str = ""
+    # (원문단어형) 다시 쓴 지문. 이 방식은 오답 넷을 원문 낱말 그대로 두므로, 정본 위에
+    # 세우면 외운 학생이 '원문과 다른 낱말 하나'를 찾는 것으로 끝난다 — 뜻을 몰라도 풀린다.
+    # 다시 쓴 지문 위에 세우면 그 지름길이 통째로 막힌다(어법 서술형과 같은 대비다).
+    rewritten: list[str] = Field(default_factory=list)
 
     @field_validator("marks")
     @classmethod

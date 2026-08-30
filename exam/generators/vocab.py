@@ -3,9 +3,17 @@
 세 방식을 한 지문에서 모두 출제한다(pipeline.VOCAB_METHODS). 발문은 같지만 밑줄을
 만드는 방식이 달라 서로 다른 문제가 된다:
   method="synonym"  : 밑줄 5개 중 1개=반의어(정답), 나머지=유의어로 패러프레이즈.
-  method="original" : 정답 1개만 반의어, 나머지 4개는 '원문 단어 그대로' 노출.
-  method="negation" : 밑줄은 원문 그대로, 정답 문장에만 부정어(no/not/neither)를 넣어
-      글의 흐름과 모순되게 만든다(override_no/override_text).
+  method="original" : 정답 1개만 반의어, 나머지 4개는 지문 낱말 그대로 노출.
+      **'다시 쓴 지문' 위에 선다** — 오답 넷이 지문 그대로라, 정본 위에 세우면 지문을
+      외운 학생이 '달라진 낱말 하나'를 찾는 것만으로 푼다(뜻을 몰라도 풀린다).
+  method="negation" : 밑줄은 지문 낱말 그대로, 정답 문장에만 부정어(no/not/neither)를
+      넣어 글의 흐름과 모순되게 만든다(override_no/override_text). 여기에 '미끼'
+      문장 하나를 더 둔다(decoy_no/decoy_text) — 뜻은 그대로 두고 표현만 바꾼 문장이다.
+      미끼가 없으면 달라진 문장이 하나뿐이라, 외운 학생이 그것만 찾으면 그 안의 밑줄이
+      곧 정답이 된다.
+
+암기 대비가 세 방식에 모두 있다: 유의어형은 다섯을 다 갈아 끼우고, 원문단어형은 지문을
+다시 쓰고, 부정어형은 달라진 문장을 둘로 만든다.
 """
 from __future__ import annotations
 
@@ -13,7 +21,7 @@ from .. import build as B
 from .. import shape
 from ..llm import SYSTEM, ClaudeClient
 from ..schemas import Analysis, VocabOut
-from .base import context
+from .base import REWRITE_RULES, context
 
 SYNONYM = "synonym"
 NEGATION = "negation"
@@ -57,15 +65,24 @@ _PROMPT_SYNONYM = """아래 '정본 지문'으로 '어휘(문맥상 부적절)' 
 """
 
 _PROMPT_ORIGINAL = """아래 '정본 지문'으로 '어휘(문맥상 부적절)' 문제를 만드세요. [방식: 원문 단어]
-지문을 새로 쓰지 말고, 밑줄 칠 단어와 표시할 단어만 정하세요.
 
-- marks: 밑줄 5개. 각 항목은 sent_no(문장 번호 1-based), word(그 문장의 원본 단어),
-  shown(문제에 보여줄 단어). '형용사·부사·동사' 위주로 고르세요.
+{rules}
+[2단계 — 밑줄과 오답 심기] marks / answer_no
+- marks: 밑줄 5개. 각 항목은 sent_no(1-based, **다시 쓴 지문 기준**),
+  word(다시 쓴 지문에 실제로 있는 낱말), shown(문제에 보여줄 낱말).
+  '형용사·부사·동사' 위주로 고르세요.
 - 정확히 1개(answer_no)는 shown 을 '반의어'로 하여 문맥상 어색하게 만듭니다 → 정답.
-- 나머지 4개는 shown 을 'word 와 똑같이'(원문 단어 그대로) 둡니다. 유의어로 바꾸지 마세요.
-- [확실성] 정답 1개만 확실히 어색해야 하고, 나머지 4개는 원문 그대로라 당연히 자연스럽습니다.
+- 나머지 4개는 shown 을 'word 와 똑같이' 둡니다. 유의어로 바꾸지 마세요.
+- [확실성] 정답 1개만 확실히 어색해야 하고, 나머지 4개는 다시 쓴 지문 그대로라 자연스럽습니다.
 - reason: 정답이 왜 문맥에 어긋나는지 한국어로 설명.
-- override_no 는 0, override_text 는 빈 문자열로 두세요.
+- override_no 는 0, override_text·decoy_text 는 빈 문자열, decoy_no 는 0 으로 두세요.
+
+[이 방식이 다시 쓴 지문 위에 서는 까닭]
+오답 넷을 지문 낱말 그대로 두는 것이 이 방식의 안전장치입니다 — 필자가 쓴 말이라
+어색할 수가 없어 정답이 둘이 될 수 없습니다. 그런데 정본 위에 그대로 세우면, 지문을
+외운 학생이 '원문과 다른 낱말 하나'를 찾는 것만으로 답을 냅니다. 낱말 뜻을 몰라도,
+문맥을 따지지 않아도 풀립니다. 지문을 다시 쓰면 그 지름길이 통째로 막히면서 안전장치는
+그대로 남습니다.
 
 {ctx}
 """
@@ -76,6 +93,15 @@ _PROMPT_NEGATION = """아래 '정본 지문'으로 '어휘(문맥상 부적절)'
 - override_no: 부정어를 넣을 문장 번호(1-based).
   override_text: 그 문장에 부정어(not/no/never/neither/hardly 등)를 자연스럽게 넣어 글 전체
   흐름과 '모순'되게 만든 문장.
+- decoy_no / decoy_text: **'미끼' 문장 하나**(override_no 와 다른 문장).
+  뜻은 그대로 두고 표현만 바꿔 쓴 문장입니다. 부정어를 넣지 마세요 — 뜻이 조금도
+  달라지면 안 됩니다(유의어 교체 · 능동↔수동 · 어순 조정 정도).
+  · **왜 필요한가:** 이 유형은 밑줄 다섯이 모두 원문 낱말 그대로라, 달라진 것은 문장
+    하나뿐입니다. 그러면 지문을 외운 학생이 '달라진 문장'을 찾는 것만으로 끝납니다 —
+    그 문장 안의 밑줄이 곧 정답이니까요. 달라진 문장이 둘이면 어느 쪽이 글의 흐름과
+    '모순되는지'를 따져야 하고, 그것이 이 문항이 원래 재려던 것입니다.
+  · 미끼 문장에 밑줄이 있다면, 그 밑줄의 word 가 decoy_text 안에 '글자 그대로' 남아
+    있어야 합니다(밑줄을 칠 자리를 찾지 못하면 문항이 만들어지지 않습니다).
 - marks: 밑줄 5개. sent_no·word·shown. 형용사·부사·동사 위주. shown 은 word 와 '똑같이'.
 - answer_no: 정답 밑줄 번호. 그 밑줄은 override_no 문장에 있어야 합니다.
 
@@ -227,8 +253,16 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
             # 정답 근거(부정어)가 밑줄 '안'에 있어야 문항이 성립한다.
             bad = (shape.check_clean_sentence(o.override_text, "교체 문장")
                    + shape.check_negation_underline(o.marks, o.answer_no, o.override_text))
+            bad += shape.check_decoy(analysis.sentences, o.override_no,
+                                     o.decoy_no, o.decoy_text, o.marks)
             if bad:
                 raise ValueError("부정어형 설계 결함 — " + " ".join(bad))
+        if method == ORIGINAL:
+            # 이 방식은 '다시 쓴 지문' 위에 선다 — 정본 위에 세우면 외운 학생이
+            # '달라진 낱말 하나'를 찾는 것만으로 푼다(위 프롬프트 머리말 참고).
+            bad = shape.check_rewrite(o.rewritten, analysis.sentences)
+            if bad:
+                raise ValueError("어휘 지문 다시 쓰기 실패 — " + " ".join(bad))
         if method == SYNONYM:
             # 오답 자리에 반의어가 들어가면 정답이 둘이 된다. 분석표로 확정할 수 있는
             # 만큼만 보고 되돌린다(추가 호출 없음 — check_synonym_antonyms 참고).
@@ -238,11 +272,11 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
 
     out: VocabOut = client.structured(
         system=SYSTEM,
-        prompt=(prompt.format(ctx=context(analysis)) + _avoid_clause(taken)
-                + _sent_clause(set(avoid_sents or ()))),
+        prompt=(prompt.format(ctx=context(analysis), rules=REWRITE_RULES)
+                + _avoid_clause(taken) + _sent_clause(set(avoid_sents or ()))),
         cache_prefix=context(analysis),
         model_cls=VocabOut,
-        max_tokens=2500,
+        max_tokens=3500,      # 원문단어형은 지문을 다시 쓴 것까지 담는다
         max_retries=max_retries,
         extra_validate=_extra,
     )
@@ -251,12 +285,20 @@ def generate(client: ClaudeClient, analysis: Analysis, body: str,
         report["answer_sent"] = (out.override_no
                                  or (out.marks[out.answer_no - 1].sent_no
                                      if 1 <= out.answer_no <= len(out.marks) else 0))
+    # 원문단어형만 '다시 쓴 지문' 위에 선다. 나머지 둘은 정본 그대로다.
+    sents = ([s.strip() for s in out.rewritten]
+             if method == ORIGINAL and out.rewritten else analysis.sentences)
     marks = [(m.sent_no - 1, m.word, m.shown) for m in out.marks]
-    overrides = None
+    overrides = {}
     if out.override_no and out.override_text.strip():
-        overrides = {out.override_no - 1: out.override_text}
+        overrides[out.override_no - 1] = out.override_text
+    # 미끼 문장 — 뜻은 그대로인데 표현만 바뀐 문장 하나. 달라진 문장이 둘이 되어야
+    # '외워서 달라진 문장 찾기'가 통하지 않는다(shape.check_decoy 참고).
+    if out.decoy_no and out.decoy_text.strip():
+        overrides[out.decoy_no - 1] = out.decoy_text
+    overrides = overrides or None
     flags: list[str] = []
-    q, a = B.make_vocab(analysis.sentences, marks, out.answer_no, out.reason,
+    q, a = B.make_vocab(sents, marks, out.answer_no, out.reason,
                         overrides=overrides, flags=flags)
     if fixed:
         flags.append(f"정답 아닌 밑줄 {', '.join(map(str, fixed))}번을 원문 낱말로 되돌림")
@@ -313,7 +355,10 @@ def generate_group(client: ClaudeClient, analysis: Analysis, body: str,
             if logger:
                 logger.warning("[%s] 어휘 생성 실패: %s", slot, e)
             continue
-        used |= words
+        # 원문단어형은 '다시 쓴 지문' 위에 서므로 그 낱말은 정본 풀을 잡아먹지 않는다.
+        # 뒤 문항들이 쓸 수 있는 정본 낱말이 그만큼 넉넉해진다.
+        if method != ORIGINAL:
+            used |= words
         if report.get("answer_sent"):
             used_sents.add(report["answer_sent"])
         if used_out is not None:

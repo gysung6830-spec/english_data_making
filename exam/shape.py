@@ -784,6 +784,56 @@ def check_linker_pairs(pairs, answer_no: int) -> list[str]:
     return bad
 
 
+# 부정어형 어휘의 '미끼' 문장이 제구실을 하는지 — 지문을 외워서 푸는 길을 막는다.
+_NEG_WORDS = ("not", "no", "never", "neither", "nor", "hardly", "rarely",
+              "seldom", "barely", "none", "nothing", "cannot")
+
+
+def check_decoy(sentences: list[str], override_no: int, decoy_no: int,
+                decoy_text: str, marks) -> list[str]:
+    """미끼 문장 — 뜻은 그대로 두고 표현만 바꾼 문장 하나.
+
+    부정어형은 밑줄 다섯이 모두 지문 낱말 그대로라, 달라진 것이 문장 하나뿐이다.
+    그러면 지문을 외운 학생이 '달라진 문장'을 찾는 것만으로 끝난다 — 그 문장 안의
+    밑줄이 곧 정답이기 때문이다. 달라진 문장이 둘이면 어느 쪽이 글의 흐름과 모순되는지
+    따져야 하고, 그것이 이 문항이 원래 재려던 것이다.
+
+    셋을 본다.
+      ① 정답 문장과 다른 자리인가(같으면 미끼가 아니다).
+      ② 원문과 실제로 달라졌는가(그대로면 달라진 문장이 여전히 하나뿐이다).
+      ③ 부정어가 새로 들어가지는 않았는가(들어가면 그 자리도 흐름과 어긋나 정답이 둘).
+    그리고 그 문장에 밑줄이 있다면 밑줄 낱말이 미끼 안에 그대로 남아 있어야 한다
+    (없으면 밑줄 칠 자리를 찾지 못해 문항이 만들어지지 않는다).
+    """
+    text = (decoy_text or "").strip()
+    if not decoy_no or not text:
+        return ["미끼 문장이 없습니다 — 달라진 문장이 하나뿐이면 지문을 외운 학생이 "
+                "그 문장만 찾으면 됩니다(그 안의 밑줄이 곧 정답입니다)."]
+    if not (1 <= decoy_no <= len(sentences)):
+        return [f"미끼 문장 번호가 범위를 벗어났습니다({decoy_no})."]
+    if decoy_no == override_no:
+        return ["미끼 문장이 정답 문장과 같은 자리입니다 — 달라진 문장이 둘이어야 합니다."]
+
+    bad: list[str] = []
+    orig = sentences[decoy_no - 1]
+    if " ".join(_words(text)) == " ".join(_words(orig)):
+        bad.append(f"미끼로 지목한 {decoy_no}번 문장이 원문과 글자 그대로 같습니다 — "
+                   "표현을 바꿔야 미끼가 됩니다.")
+    added = {w for w in _words(text) if w in _NEG_WORDS} - {w for w in _words(orig)
+                                                            if w in _NEG_WORDS}
+    if added:
+        bad.append(f"미끼 문장에 부정어({', '.join(sorted(added))})가 새로 들어갔습니다 — "
+                   "미끼는 뜻이 달라지면 안 됩니다(그 자리도 흐름과 어긋나 정답이 둘이 됩니다).")
+    for i, m in enumerate(marks or [], 1):
+        if getattr(m, "sent_no", 0) != decoy_no:
+            continue
+        w = (getattr(m, "word", "") or "").strip()
+        if w and not re.search(r"(?<![\w])" + re.escape(w) + r"(?![\w])", text, re.I):
+            bad.append(f"{i}번 밑줄 '{w}' 가 미끼 문장 안에 없습니다 — 밑줄 칠 자리를 "
+                       "찾지 못합니다. 그 낱말은 미끼에서도 글자 그대로 두세요.")
+    return bad
+
+
 # ---------------------------------------------------------------------------
 # 어법 출제 항목 — 내신·수능에서 실제로 물어지는 열한 가지
 # ---------------------------------------------------------------------------
