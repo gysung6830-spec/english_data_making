@@ -205,12 +205,45 @@ def _ref_template_lossy(en: str, template: str) -> bool:
     return any(len(w) >= 3 and w not in have for w in words(en))
 
 
+# 지칭 문항의 밑줄 대상이 될 수 있는 '진짜 대명사·지시어'
+_REF_PRONOUNS = {
+    "it", "its", "itself", "they", "them", "their", "theirs", "themselves",
+    "this", "that", "these", "those", "he", "him", "his", "she", "her", "hers",
+    "one", "ones", "which", "who", "whom", "whose", "such",
+}
+
+
+def _ref_target_is_pronoun(template: str, pid: str) -> bool:
+    """{{Pn}} '바로 앞' 단어(밑줄 대상)가 실제 대명사·지시어인지. 일반 명사(예: 'pests')를
+    지칭 대상으로 삼고 그 명사 자신을 정답으로 준 '순환·무의미' 문항을 걸러낸다."""
+    import re
+    m = re.search(r"([A-Za-z']+)\s*\{\{\s*" + re.escape(pid) + r"\s*\}\}", template)
+    return bool(m) and m.group(1).lower() in _REF_PRONOUNS
+
+
+_REF_POSSESSIVE = {"its", "his", "her", "their", "theirs", "my", "our", "your", "one's"}
+
+
+def _ref_answer_not_circular(answer: str, template: str, pid: str) -> bool:
+    """정답이 밑줄 대상(소유격 대명사) 자신을 그대로 포함하면(예: 대상 its → 정답 'its intensity')
+    순환이므로 배제. that/this 등은 명사절 접속사('that vision is dominant')로도 쓰여 오탐이 나므로,
+    형태가 소유격일 때만 검사한다(소유격은 접속사가 될 수 없어 안전)."""
+    import re
+    m = re.search(r"([A-Za-z']+)\s*\{\{\s*" + re.escape(pid) + r"\s*\}\}", template)
+    if not m:
+        return True
+    pron = m.group(1).lower()
+    if pron not in _REF_POSSESSIVE:
+        return True
+    return pron not in {w.lower() for w in re.findall(r"[A-Za-z']+", answer or "")}
+
+
 def renderable_ref_items(s: LLMProseSentence) -> list[LLMProseItem]:
     """이 문장에서 render 단계의 지칭 가드를 '통과해 실제로 출제될' ref 문항만 반환.
 
     _worksheet 의 ref 분기와 동일한 판정(자리표시자 손상·정답 보기 불일치·한글 혼입·
-    가주어/there·원문 단어 소실)을 적용한다. 지칭이 '겉보기엔 있으나 전부 버려지는' 경우를
-    _ensure_ref 가 감지해 재생성하도록, 실제 출제 가능한 문항 수를 세는 데 쓴다.
+    가주어/there·원문 단어 소실·비(非)대명사 대상·순환 정답)을 적용한다. 지칭이 '겉보기엔 있으나
+    전부 버려지는' 경우를 _ensure_ref 가 감지해 재생성하도록, 실제 출제 가능한 문항 수를 세는 데 쓴다.
     """
     template = s.ref_template or s.en
     items_src = s.ref_items
@@ -220,7 +253,9 @@ def renderable_ref_items(s: LLMProseSentence) -> list[LLMProseItem]:
     surviving = [src for pid, src in _align(order, items_src)
                  if _ref_answer_in_display(src.answer, src.display)
                  and _ref_candidates_clean(src.display)
-                 and not _ref_is_expletive(template, pid)]
+                 and not _ref_is_expletive(template, pid)
+                 and _ref_target_is_pronoun(template, pid)
+                 and _ref_answer_not_circular(src.answer, template, pid)]
     if surviving and _ref_template_lossy(s.en, template):   # 원문 단어 소실 → 버려짐
         return []
     return surviving
@@ -346,7 +381,9 @@ def _worksheet(llm: LLMProsePack, wtype: str, label: str, instr: str,
             pitems = [it for it in pitems
                       if _ref_answer_in_display(it.answer, it.display)
                       and _ref_candidates_clean(it.display)
-                      and not _ref_is_expletive(template, it.id)]   # 가주어 it/there 제외
+                      and not _ref_is_expletive(template, it.id)    # 가주어 it/there 제외
+                      and _ref_target_is_pronoun(template, it.id)   # 밑줄 대상이 진짜 대명사여야
+                      and _ref_answer_not_circular(it.answer, template, it.id)]  # 순환 정답 제외
             # 안전장치: 지칭은 원문에 {{Pn}} 만 삽입해야 하는데 원문 단어가 사라졌으면
             #   (대명사 소실·명사 누락) 문항을 버리고 원문(en)을 그대로 보여 준다.
             if pitems and _ref_template_lossy(s.en, template):
