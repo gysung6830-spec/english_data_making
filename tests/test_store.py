@@ -6,7 +6,7 @@ API 키도, 인터넷도 필요 없습니다. 실제 데이터 대신 임시 폴
 검증 항목:
   - 고객 페이지가 모두 열리는지 (교재별 페이지·공지·프리패스·시험지 나눔 포함)
   - 주문서 입력값 검증과 금액 계산
-  - 교재 요청(지문 없이) / 맞춤 제작 두 경로
+  - 자료 요청(지문 없이) / 맞춤 제작 두 경로
   - 시험지 제출 → 관리자 승인 → 쿠폰 발급 → 주문에서 할인 적용까지 한 줄로
   - 관리자 화면에서 상품·교재·분류·공지·설정을 고치면 고객 화면에 반영되는지
   - 백업 내려받기·되돌리기
@@ -68,8 +68,8 @@ def test_public_pages_open():
         ("/", "지문분석지"),
         ("/products", "자료 목록"),
         ("/lineup", "오르티카 라인업"),
-        ("/samples", "무료 샘플"),
-        ("/custom", "교재 요청"),
+        ("/free", "무료 자료"),
+        ("/custom", "자료 요청"),
         ("/submit", "시험지"),
         ("/notice", "자료 업데이트 일정"),
         ("/pass", "프리패스"),
@@ -78,6 +78,9 @@ def test_public_pages_open():
         resp = c.get(path)
         assert resp.status_code == 200, f"{path} 가 열리지 않습니다"
         assert must in body(resp), f"{path} 에 '{must}' 가 없습니다"
+    # 예전 '무료 샘플' 목록 주소는 라인업으로 넘겨 줍니다 (검색에 걸린 주소가 끊기지 않게)
+    moved = c.get("/samples")
+    assert moved.status_code == 301 and "/lineup" in moved.headers["Location"]
     assert c.get("/products/없는상품").status_code == 404
     assert c.get("/books/없는교재").status_code == 404
     print("PASS  고객 페이지 열림")
@@ -208,9 +211,9 @@ def test_search_finds_by_publisher_and_book():
     ebs = names(body(client().get("/products?q=EBS")))
     assert ebs and all(("수능특강" in n or "수능완성" in n) for n in ebs), ebs
 
-    # 없는 것을 치면 교재 요청으로 안내
+    # 없는 것을 치면 자료 요청으로 안내
     miss = body(client().get("/products?q=없는교재이름"))
-    assert "찾은 자료가 없습니다" in miss and "교재 요청하기" in miss
+    assert "찾은 자료가 없습니다" in miss and "자료 요청하기" in miss
     print("PASS  교재·출판사 검색")
 
 
@@ -235,11 +238,20 @@ def test_book_page_lists_only_its_products():
     print("PASS  교재별 페이지가 해당 교재 자료만 보여 줌")
 
 
-def test_home_shows_every_category():
+def test_home_links_every_category_and_search_word():
+    """홈에서 분류·학년·무료 자료로 한 번에 갈 수 있어야 합니다.
+
+    검색으로 들어온 사람이 첫 화면에서 자기가 찾던 말을 봐야 안 나갑니다.
+    """
     text = body(client().get("/"))
-    for slug in ("neungyule-kim", "mock-2026-06-g3", "ebs-2026-tokgang-eng", "highlighter-basic"):
-        assert f"/books/{slug}" in text, slug
-    print("PASS  홈에 모든 분류의 교재 노출")
+    for cid in ("textbook", "mock", "ebs", "highlighter"):
+        assert f"category={cid}" in text, cid
+    from urllib.parse import quote
+    for grade in ("고1", "고2", "고3"):
+        assert f"grade={quote(grade)}" in text, grade
+    for word in ("한줄해석", "좌지문우해석", "17종 변형문제", "동형모의고사"):
+        assert word in text, word
+    print("PASS  홈에서 분류·학년·무료 자료로 바로 가기")
 
 
 def test_pass_twelve_month_price():
@@ -304,16 +316,16 @@ def test_order_rejects_unknown_coupon():
     print("PASS  없는 쿠폰 코드 반려")
 
 
-# ---- 3. 교재 요청 / 맞춤 제작 ---------------------------------------------
+# ---- 3. 자료 요청 / 맞춤 제작 ---------------------------------------------
 def test_request_needs_no_passage():
-    """지문을 하나도 주지 않아도 교재 요청이 접수되어야 합니다."""
+    """지문을 하나도 주지 않아도 자료 요청이 접수되어야 합니다."""
     resp = client().post("/custom", data={
         "mode": "request", "wanted": "비상(홍민표) 공통영어1 2과",
         "name": "김선생", "phone": "01098765432", "email": "kim@example.com", "agree": "1"})
     assert resp.status_code == 200
-    assert "교재 요청이 접수되었습니다" in body(resp)
+    assert "자료 요청이 접수되었습니다" in body(resp)
     assert "따로 보내실 자료는 없습니다" in body(resp)
-    print("PASS  지문 없이 교재 요청 접수")
+    print("PASS  지문 없이 자료 요청 접수")
 
 
 def test_custom_request_accepted():
@@ -607,7 +619,8 @@ def test_setup_checklist_guides_first_day():
     text = body(admin().get("/admin"))
     assert "문 열기까지" in text and "단계 남았습니다" in text
     for step in ("연락처와 입금 계좌 넣기", "내 상품 등록하기",
-                 "상품에 판매할 파일 올리기", "무료 샘플 올리기"):
+                 "상품에 판매할 파일 올리기", "자료 샘플 PDF 올리기",
+                 "무료 자료 한 건 올리기", "네이버 · 구글에 사이트 등록하기"):
         assert step in text, step
     assert "지금 사이트에 보이는 상품은 예시입니다" in text     # 예시 데이터 경고 상자
     print("PASS  첫날 준비 체크리스트")
@@ -1068,6 +1081,64 @@ def test_sitemap_lists_free_items():
     print("PASS  사이트맵에 무료 자료실 포함")
 
 
+def test_lineup_offers_sample_pdf():
+    """샘플 PDF는 이제 라인업의 자료마다 붙습니다."""
+    sc.SAMPLE_DIR.mkdir(parents=True, exist_ok=True)
+    (sc.SAMPLE_DIR / "analysis-sample.pdf").write_bytes(b"%PDF-1.4 sample\n")
+    data = sc.load_materials()
+    for m in data["materials"]:
+        if m["id"] == "analysis":
+            m["sample_file"] = "analysis-sample.pdf"
+    sc.save_materials(data)
+
+    text = body(client().get("/lineup"))
+    assert "지문분석지 샘플 PDF" in text
+    got = client().get("/samples/analysis-sample.pdf")
+    assert got.status_code == 200 and got.data.startswith(b"%PDF")
+
+    # 파일이 없는 자료에는 버튼이 붙지 않아야 합니다
+    assert "필생보 샘플 PDF" not in text
+    print("PASS  라인업 자료마다 샘플 PDF")
+
+
+def test_free_search_and_filters():
+    _put_free_file("2026-03-goh1-oneline")
+    _put_free_file("2026-03-goh2-side")
+
+    hit = body(client().get("/free?q=한줄해석"))
+    assert "고1 3월 학력평가 한줄해석" in hit
+    assert "고2 3월 학력평가 좌지문우해석" not in hit
+
+    by_grade = body(client().get("/free?grade=고2"))
+    assert "좌지문우해석" in by_grade and "고1 3월 학력평가 한줄해석" not in by_grade
+
+    by_exam = body(client().get("/free?exam=2026년 3월 학력평가"))
+    assert "고1 3월 학력평가 한줄해석" in by_exam
+
+    miss = body(client().get("/free?q=없는자료이름"))
+    assert "조건에 맞는 자료가 없습니다" in miss
+    print("PASS  무료 자료실 검색 · 학년 · 종류 · 시험 거르기")
+
+
+def test_policy_sections_are_filled_in():
+    """환불·이용범위·개인정보는 사장님이 따로 쓰지 않아도 되게 채워 둡니다."""
+    text = body(client().get("/guide"))
+    for must in ("환불 규정 (청약철회)", "전자상거래법 제17조",
+                 "자료 이용 범위", "이렇게 쓰실 수 있습니다", "이건 안 됩니다",
+                 "개인정보 처리방침", "수집하는 항목과 목적", "보유 기간",
+                 "제3자 제공", "이용자의 권리", "개인정보 보호책임자"):
+        assert must in text, must
+    assert '"@type": "FAQPage"' in text          # 구글에 질문·답이 펼쳐지도록
+    print("PASS  약관 3종이 업계 표준 내용으로 채워짐")
+
+
+def test_request_menu_renamed_to_jaryo():
+    text = body(client().get("/"))
+    assert "교재 요청" not in text
+    assert "자료 요청" in body(client().get("/custom"))
+    print("PASS  '교재 요청' → '자료 요청'")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1083,7 +1154,7 @@ def run_all():
     test_search_finds_by_publisher_and_book()
     test_share_and_branding()
     test_book_page_lists_only_its_products()
-    test_home_shows_every_category()
+    test_home_links_every_category_and_search_word()
     test_pass_twelve_month_price()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
@@ -1125,6 +1196,10 @@ def run_all():
     test_seo_tags_on_public_pages()
     test_seo_verification_code_paste()
     test_sitemap_lists_free_items()
+    test_lineup_offers_sample_pdf()
+    test_free_search_and_filters()
+    test_policy_sections_are_filled_in()
+    test_request_menu_renamed_to_jaryo()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
     test_mobile_menu_exists()

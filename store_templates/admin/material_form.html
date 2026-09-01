@@ -77,6 +77,29 @@
 </div>
 
 <div class="panel">
+  <h2>무료 샘플 PDF <span class="tag tag-on">매출에 가장 크게 영향</span></h2>
+  <div class="hint">
+    <b>PDF 파일을 <code>store_data/samples/</code> 폴더에 넣으면</b> 아래에 버튼으로 나옵니다.
+    고르시면 라인업 페이지의 이 자료 아래에 <b>'샘플 PDF 받기'</b> 버튼이 붙습니다.
+    사기 전에 눈으로 봐야 지갑이 열립니다.
+  </div>
+  <div class="adm-field">
+    <input type="text" id="sample_file" name="sample_file"
+           value="{{ m.sample_file or '' }}" hidden>
+    <div class="pick" data-target="sample_file" style="margin-top:0;">
+      {% for f in sample_files %}
+        <button class="pick-btn" data-value="{{ f }}">{{ f }}</button>
+      {% endfor %}
+      <button class="pick-btn clear" data-value="">샘플 없음</button>
+    </div>
+    {% if not sample_files %}
+      <div class="tip">아직 <code>store_data/samples/</code> 폴더에 파일이 없습니다.
+        PDF를 그 폴더에 넣고 이 화면을 새로고침하세요.</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="panel">
   <h2>판형 · 종류</h2>
   <div class="hint">'원문만 / 위아래 해석 / 좌우 해석' 처럼 고를 수 있는 판형이 있을 때만 씁니다.
     이름을 비우면 그 줄은 지워집니다.</div>

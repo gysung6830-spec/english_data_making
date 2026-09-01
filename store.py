@@ -251,8 +251,10 @@ def product_detail(slug):
     related = [x for x in catalog["products"]
                if x.get("category") == product.get("category")
                and x.get("slug") != slug and x is not sibling][:3]
+    sample_ready = bool(product.get("sample_file")
+                        and (sc.SAMPLE_DIR / product["sample_file"]).exists())
     return render_template("product.html", p=product, book=book,
-                           sibling=sibling, related=related)
+                           sibling=sibling, related=related, sample_ready=sample_ready)
 
 
 @app.route("/books/<slug>")
@@ -284,8 +286,12 @@ def book_detail(slug):
 def lineup():
     """오르티카 라인업 — 우리가 만드는 자료 8종을 한 장에 보여 주는 페이지."""
     data = sc.load_materials()
+    # 샘플 파일이 실제로 올라와 있는 자료에만 받기 버튼을 답니다.
+    ready = {m["sample_file"] for m in data["materials"]
+             if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()}
     return render_template("lineup.html", intro=data.get("intro", {}),
-                           groups=sc.grouped_materials())
+                           groups=sc.grouped_materials(),
+                           ready_samples=ready, sample_count=len(ready))
 
 
 @app.route("/notice")
@@ -400,7 +406,7 @@ def order_done(key):
 
 
 # ---------------------------------------------------------------------------
-# 교재 요청 · 맞춤 제작
+# 자료 요청 · 맞춤 제작
 # ---------------------------------------------------------------------------
 @app.route("/custom", methods=["GET", "POST"])
 def custom():
@@ -435,7 +441,7 @@ def custom():
     if errors:
         return render_template("custom.html", form=request.form, errors=errors), 400
 
-    label = "교재 요청" if mode == "request" else "맞춤 제작 의뢰"
+    label = "자료 요청" if mode == "request" else "맞춤 제작 의뢰"
     ts = sc.stamp()
     order_no = sc.insert_numbered(
         """INSERT INTO orders (order_no, kind, product_name, quantity, amount,
@@ -601,23 +607,37 @@ def free():
     data = sc.load_freebies()
     grade = sc.clean(request.args.get("grade"), 10)
     kind = sc.clean(request.args.get("kind"), 20)
+    exam = sc.clean(request.args.get("exam"), 60)
+    q = sc.clean(request.args.get("q"), 60)
 
     items = [x for x in data["items"] if sc.free_ready(x)]
     # 거르기 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
     grades = sorted({x.get("grade", "") for x in data["items"] if x.get("grade")})
+    exams = sorted({x.get("exam", "") for x in data["items"] if x.get("exam")}, reverse=True)
     if grade:
         items = [x for x in items if x.get("grade") == grade]
     if kind in sc.FREE_KINDS:
         items = [x for x in items if kind in (x.get("kinds") or [])]
+    if exam:
+        items = [x for x in items if x.get("exam") == exam]
+    if q:
+        needle = q.lower()
+        items = [x for x in items
+                 if needle in f"{x.get('title','')} {x.get('summary','')} "
+                              f"{x.get('exam','')} {x.get('grade','')} "
+                              f"{' '.join(sc.free_kind_names(x))}".lower()]
 
     # 파일이 아직 안 올라온 것은 '준비 중'으로 따로 모아 둡니다.
     coming = [x for x in data["items"] if not sc.free_ready(x)]
-    samples = [pr for pr in sc.load_catalog()["products"]
-               if pr.get("sample_file") and (sc.SAMPLE_DIR / pr["sample_file"]).exists()]
+    lineup_samples = sum(1 for m in sc.load_materials()["materials"]
+                         if m.get("sample_file")
+                         and (sc.SAMPLE_DIR / m["sample_file"]).exists())
 
     return render_template("free.html", intro=data.get("intro", {}), items=items,
+                           total=len([x for x in data["items"] if sc.free_ready(x)]),
                            coming=coming, grades=grades, grade=grade, kind=kind,
-                           kinds=sc.FREE_KINDS, sample_count=len(samples))
+                           exams=exams, exam=exam, q=q,
+                           kinds=sc.FREE_KINDS, sample_count=lineup_samples)
 
 
 @app.route("/free/<slug>")
@@ -693,13 +713,8 @@ def free_file(slug, index):
 # ---------------------------------------------------------------------------
 @app.route("/samples")
 def samples():
-    catalog = sc.load_catalog()
-    # 파일이 실제로 올라와 있는 것만 보여 줍니다.
-    # 이름만 적혀 있고 파일이 없는 것을 늘어놓으면 '준비 중' 버튼만 가득한 화면이 됩니다.
-    items = [p for p in catalog["products"]
-             if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
-    ready = {p["sample_file"] for p in items}
-    return render_template("samples.html", items=items, ready=ready)
+    """예전 '무료 샘플' 목록 주소. 지금은 라인업에서 자료마다 샘플을 받습니다."""
+    return redirect(url_for("lineup"), code=301)
 
 
 @app.route("/samples/<path:filename>")

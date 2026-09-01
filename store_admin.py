@@ -188,8 +188,8 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
     mine = [p for p in products if not p.get("sample")]
     with_files = [p for p in products if sc.has_deliverable(p)]
-    with_sample = [p for p in products
-                   if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
+    with_sample = [m for m in sc.load_materials()["materials"]
+                   if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
     free_ready = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)]
     seo_cfg = site.get("seo") or {}
@@ -215,9 +215,10 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "why": "이 파일이 실제로 팔리는 물건입니다. 없으면 주문이 와도 보낼 수 없습니다.",
          "url": url_for("admin.products"), "label": "상품 > 📁 파일"},
         {"done": bool(with_sample),
-         "title": "무료 샘플 올리기",
-         "why": "사기 전에 눈으로 봐야 지갑이 열립니다. 매출에 가장 크게 영향을 줍니다.",
-         "url": url_for("admin.products"), "label": "상품 화면 열기"},
+         "title": "자료 샘플 PDF 올리기",
+         "why": "사기 전에 눈으로 봐야 지갑이 열립니다. 매출에 가장 크게 영향을 줍니다. "
+                "PDF를 store_data/samples/ 에 넣고, 라인업의 자료마다 골라 주세요.",
+         "url": url_for("admin.materials"), "label": "오르티카 라인업 열기"},
         {"done": mail_ok,
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
@@ -884,12 +885,12 @@ def materials():
 def materials_intro():
     data = sc.load_materials()
     f = request.form
-    data["intro"] = {
+    data["intro"].update({
         "eyebrow": sc.clean(f.get("eyebrow"), 40),
         "headline": sc.clean(f.get("headline"), 200),
         "lead": sc.clean(f.get("lead"), 600),
         "signature_note": sc.clean(f.get("signature_note"), 200),
-    }
+    })
     groups = []
     for gid, rng, name, theme, headline, lead in zip(
             f.getlist("group_id"), f.getlist("group_range"), f.getlist("group_name"),
@@ -939,8 +940,11 @@ def material_form(mid):
     if item is None:
         abort(404)
 
+    sample_files = [f.name for f in sorted(sc.SAMPLE_DIR.glob("*"))
+                    if f.is_file() and not f.name.startswith(".")]
     if request.method == "GET":
-        return render_template("admin/material_form.html", m=item, groups=data["groups"])
+        return render_template("admin/material_form.html", m=item, groups=data["groups"],
+                               sample_files=sample_files)
 
     f = request.form
     item["no"] = sc.clean(f.get("no"), 6)
@@ -952,6 +956,7 @@ def material_form(mid):
     item["sheet_note"] = sc.clean(f.get("sheet_note"), 800)
     item["features_headline"] = sc.clean(f.get("features_headline"), 120)
     item["image"] = sc.clean(f.get("image"), 120)
+    item["sample_file"] = sc.clean(f.get("sample_file"), 120)
     item["signature"] = bool(f.get("signature"))
     item["made_to_order"] = bool(f.get("made_to_order"))
     item["active"] = bool(f.get("active"))

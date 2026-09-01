@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}시험지 주고 할인받기 · {{ site.brand }}{% endblock %}
+{% block title %}시험지 나눔 — 더 정확한 자료를 만드는 데 씁니다 | {{ site.brand }}{% endblock %}
 {% block desc %}{{ reward.lead }}{% endblock %}
 
 {% block body %}
@@ -23,7 +23,7 @@
     {% else %}
       <div class="section-head">
         <span class="eyebrow">시험지 나눔</span>
-        <h2>{{ reward.headline or '우리 학교 시험지 주시면, 할인 쿠폰 드립니다' }}</h2>
+        <h2>{{ reward.headline or '학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다' }}</h2>
         <p>{{ reward.lead }}</p>
       </div>
 
@@ -47,6 +47,20 @@
             <li>쿠폰 코드를 메일로 보내 드립니다.</li>
           </ol>
         </div>
+      </div>
+
+      <div class="card" style="margin-bottom:26px;">
+        <h3 style="font-size:17px;margin-bottom:10px;">보내 주신 시험지를 어디에 쓰는지</h3>
+        <ul style="padding-left:18px;margin:0;color:var(--ink-2);font-size:15px;line-height:1.75;">
+          <li><b>출제 경향을 읽습니다.</b> 그 학교가 어법을 묻는지 서술형을 무겁게 내는지,
+            지문을 어디까지 변형하는지를 봅니다.</li>
+          <li><b>동형 모의고사의 난이도와 배점을 맞춥니다.</b>
+            실제 시험지와 같은 형태로 만들어야 시험장에서 통합니다.</li>
+          <li><b>변형문제의 유형 비중을 조정합니다.</b>
+            학교가 실제로 내는 자리를 알아야 17종 중 무엇을 두껍게 낼지 정할 수 있습니다.</li>
+        </ul>
+        <p class="muted" style="margin:12px 0 0;font-size:14px;">
+          보내 주신 <b>원본은 재배포하지 않습니다.</b> 자료 제작 참고용으로만 씁니다.</p>
       </div>
 
       {% if errors %}

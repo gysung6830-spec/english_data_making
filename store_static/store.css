@@ -667,6 +667,98 @@ input[type=file]{
   .bg-picks{grid-template-columns:1fr;}
 }
 
+/* 홈 — 자주 찾는 자료 (검색어가 그대로 링크가 되는 자리) */
+.seek-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.seek{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px 20px;
+}
+.seek > b{display:block; font-size:14px; color:var(--brand); margin-bottom:10px;}
+.seek-links{display:flex; flex-direction:column; gap:7px;}
+.seek-links a{
+  font-size:14.5px; color:var(--ink-2); line-height:1.5;
+  padding:3px 0; border-bottom:1px solid transparent;
+}
+.seek-links a:hover{color:var(--brand); border-bottom-color:var(--brand);}
+@media (max-width:900px){ .seek-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:520px){ .seek-grid{grid-template-columns:1fr;} }
+
+/* 이용 안내 — 규정 표와 허용·금지 상자 */
+.policy-table{margin:14px 0 0; width:100%;}
+.policy-table th{
+  text-align:left; vertical-align:top; font-size:14px; font-weight:700;
+  color:var(--ink-2); padding:11px 14px 11px 0; border-top:1px solid var(--line);
+}
+.policy-table td{
+  font-size:14.5px; line-height:1.7; padding:11px 0; border-top:1px solid var(--line);
+}
+.policy-table th small{display:block; font-weight:400; color:var(--muted); font-size:12.5px;}
+.policy-h{font-size:15.5px; font-weight:800; margin:22px 0 6px; color:var(--ink);}
+.policy-box{border-radius:11px; padding:16px 18px; border:1px solid var(--line);}
+.policy-box > b{display:block; font-size:15px; margin-bottom:8px;}
+.policy-box ul{margin:0; padding-left:18px; font-size:14.5px; line-height:1.8;
+  color:var(--ink-2);}
+.policy-box.ok{background:var(--brand-soft); border-color:#cfe4d9;}
+.policy-box.ok > b{color:var(--brand-dark);}
+.policy-box.no{background:#fdf6f4; border-color:#f0d4c4;}
+.policy-box.no > b{color:#8c2f16;}
+
+/* 무료 자료 — 세 종류 소개 띠 */
+.free-kinds{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:26px;}
+.fk{
+  background:var(--brand-soft); border:1px solid #cfe4d9; border-radius:12px;
+  padding:16px 18px; display:flex; flex-direction:column; gap:5px;
+}
+.fk b{font-size:16px; color:var(--brand-dark); letter-spacing:-.02em;}
+.fk span{font-size:13.5px; color:var(--ink-2); line-height:1.55;}
+@media (max-width:720px){
+  .free-kinds{grid-template-columns:1fr;}
+  .fk span br{display:none;}
+}
+
+/* 라인업 — 자료마다 붙는 샘플 PDF 버튼 */
+.mat-sample{
+  display:flex; align-items:center; gap:14px; margin-top:20px;
+  padding:16px 18px; border:1px solid #cfe4d9; background:var(--brand-soft);
+  border-radius:12px; transition:border-color .15s, transform .15s;
+}
+.mat-sample:hover{border-color:var(--brand); transform:translateY(-1px);}
+.ms-tag{
+  flex:0 0 auto; font-size:12px; font-weight:800; color:#fff;
+  background:var(--brand); border-radius:999px; padding:3px 10px;
+}
+.ms-text{display:flex; flex-direction:column; gap:3px; min-width:0;}
+.ms-text b{font-size:15.5px; color:var(--brand-dark); letter-spacing:-.02em;}
+.ms-text small{font-size:13.5px; color:var(--ink-2);}
+.ms-go{margin-left:auto; font-weight:800; font-size:14px; color:var(--brand);
+  white-space:nowrap;}
+.lineup-group.dark .mat-sample{
+  background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.22);
+}
+.lineup-group.dark .ms-text b{color:#fff;}
+.lineup-group.dark .ms-text small{color:#b9d3c6;}
+.lineup-group.dark .ms-go{color:#7ee0b0;}
+@media (max-width:520px){
+  .mat-sample{flex-wrap:wrap; gap:10px;}
+  .ms-go{margin-left:0;}
+}
+
+/* 홈 — 전문성 띠 */
+.proof{background:#12261e; color:#dbe9e1; padding:30px 0;}
+.proof-row{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+.proof-item{display:flex; flex-direction:column; gap:6px;}
+.proof-item b{font-size:26px; font-weight:800; color:#5fd6a4; letter-spacing:-.02em;}
+.proof-item span{font-size:14px; line-height:1.6; color:#a8c4b6;}
+@media (max-width:860px){
+  .proof-row{grid-template-columns:repeat(2,1fr); gap:20px;}
+}
+@media (max-width:420px){
+  .proof-row{grid-template-columns:1fr;}
+  .proof-item{flex-direction:row; align-items:baseline; gap:12px;}
+  .proof-item b{min-width:76px;}
+  .proof-item span br{display:none;}
+}
+
 /* 홈의 무료 자료 칸 */
 .free-tile{
   display:flex; flex-direction:column; gap:7px; background:#fff;

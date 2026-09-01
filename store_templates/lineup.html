@@ -10,6 +10,8 @@
     <p class="lineup-lead">
       {{ intro.lead }}
       {% if intro.signature_note %}<em class="sig-note">{{ intro.signature_note }}</em>{% endif %}
+      {% if sample_count %}<em class="sig-note">샘플 PDF가 있는 자료는
+        아래에서 바로 받아 보실 수 있습니다. (지금 {{ sample_count }}종)</em>{% endif %}
     </p>
   </div>
 </section>
@@ -73,6 +75,15 @@
             <ul>{% for w in m.for_whom %}<li>{{ w }}</li>{% endfor %}</ul>
           </div>
         {% endif %}
+
+        {% if m.sample_file and m.sample_file in ready_samples %}
+          <a class="mat-sample" href="{{ url_for('sample_download', filename=m.sample_file) }}">
+            <span class="ms-tag">무료</span>
+            <span class="ms-text"><b>{{ m.name }} 샘플 PDF</b>
+              <small>실제로 보내 드리는 파일과 같은 판형입니다.</small></span>
+            <span class="ms-go">받기 ↓</span>
+          </a>
+        {% endif %}
       </article>
     {% endfor %}
   </div>
@@ -86,7 +97,7 @@
       <p>교재·회차를 고르시면 그 세트에 어떤 자료가 들어가는지 상세 페이지에서 확인하실 수 있습니다.</p>
     </div>
     <a class="btn btn-primary" href="{{ url_for('products') }}">자료 목록 보기</a>
-    <a class="btn btn-ghost" href="{{ url_for('samples') }}">무료 샘플 받기</a>
+    <a class="btn btn-ghost" href="{{ url_for('free') }}">무료 자료 받기</a>
   </div>
 </section>
 {% endblock %}
