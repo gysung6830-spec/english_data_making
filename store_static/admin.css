@@ -225,3 +225,14 @@
   border:0; background:none; color:var(--brand); font-weight:700; font-size:12.5px;
   cursor:pointer; text-decoration:underline; font-family:inherit; padding:0;
 }
+
+/* ---------- 검색 등록 ---------- */
+.seo-steps{margin:0 0 16px; padding-left:20px; font-size:14.5px; color:var(--ink-2);}
+.seo-steps li{margin-bottom:9px; line-height:1.6;}
+.seo-steps a{color:var(--brand); font-weight:700; text-decoration:underline;}
+.copybox{
+  margin:7px 0 2px; padding:9px 12px; background:#f4f2ed; border:1px solid var(--line);
+  border-radius:8px; overflow-x:auto;
+}
+.copybox code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13.5px; user-select:all; white-space:nowrap; background:none; padding:0;}

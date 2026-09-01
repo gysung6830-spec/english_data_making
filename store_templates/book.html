@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import product_card, book_card with context %}
-{% block title %}{{ book.name }} 지문 분석 자료 · {{ site.brand }}{% endblock %}
+{% block title %}{{ book.name }} 지문분석지 · 변형문제 PDF{% if book.grade %} ({{ book.grade }}){% endif %} | {{ site.brand }}{% endblock %}
 {% block desc %}{{ book.description }}{% endblock %}
 
 {% block body %}

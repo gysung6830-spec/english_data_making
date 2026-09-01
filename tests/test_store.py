@@ -36,6 +36,7 @@ sc.DATA_DIR = _TMP / "store_data"
 sc.SAMPLE_DIR = sc.DATA_DIR / "samples"
 sc.SUBMIT_DIR = sc.DATA_DIR / "submissions"
 sc.DELIVER_DIR = sc.DATA_DIR / "deliverables"
+sc.FREE_DIR = sc.DATA_DIR / "free"
 sc.DB_PATH = sc.DATA_DIR / "store.db"
 
 import store  # noqa: E402
@@ -917,9 +918,154 @@ def test_file_path_traversal_blocked():
 def test_uses_temp_data_only():
     """테스트가 진짜 store_data 를 건드리면 안 됩니다."""
     real = Path(__file__).resolve().parent.parent / "store_data"
-    for path in (sc.DATA_DIR, sc.SAMPLE_DIR, sc.SUBMIT_DIR, sc.DELIVER_DIR, sc.DB_PATH):
+    for path in (sc.DATA_DIR, sc.SAMPLE_DIR, sc.SUBMIT_DIR, sc.DELIVER_DIR,
+                 sc.FREE_DIR, sc.DB_PATH):
         assert real not in Path(path).resolve().parents and Path(path).resolve() != real, path
     print("PASS  실제 데이터 폴더를 건드리지 않음")
+
+
+# ---- 무료 자료실 ----------------------------------------------------------
+def _put_free_file(slug: str, name: str = "sample.pdf") -> None:
+    folder = sc.free_dir(slug)
+    folder.mkdir(parents=True, exist_ok=True)
+    (folder / name).write_bytes(b"%PDF-1.4 free\n")
+
+
+def test_free_list_hides_items_without_files():
+    """파일이 없는 자료를 목록에 늘어놓으면 '준비 중' 버튼만 가득 찹니다."""
+    text = body(client().get("/free"))
+    assert "곧 올라옵니다" in text                     # 준비 중 칸에는 보이고
+    assert "무료로 받기" not in text                   # 받기 버튼은 아직 없어야
+    _put_free_file("2026-03-goh1-oneline")
+    text = body(client().get("/free"))
+    assert "무료로 받기" in text
+    assert "고1 3월 학력평가 한줄해석" in text
+    print("PASS  무료 자료실 — 파일 있는 것만 목록에")
+
+
+def test_free_open_item_downloads_without_email():
+    """한줄해석 같은 가벼운 자료는 이메일 없이 바로 받아야 합니다."""
+    _put_free_file("2026-03-goh1-oneline")
+    c = client()
+    page = body(c.get("/free/2026-03-goh1-oneline"))
+    assert "받으실 파일" in page
+    assert "이메일만 적으면" not in page
+    got = c.get("/free/2026-03-goh1-oneline/file/0")
+    assert got.status_code == 200 and got.data.startswith(b"%PDF")
+    print("PASS  가벼운 무료 자료는 그냥 받기")
+
+
+def test_free_gated_item_needs_email():
+    """직독직해는 이메일을 적어야 열립니다."""
+    _put_free_file("2026-03-goh3-literal")
+    c = client()
+    page = body(c.get("/free/2026-03-goh3-literal"))
+    assert "이메일만 적으면" in page and "받으실 파일" not in page
+    # 이메일 없이 파일 주소를 직접 쳐도 안 열립니다
+    assert c.get("/free/2026-03-goh3-literal/file/0").status_code == 302
+
+    bad = c.post("/free/2026-03-goh3-literal/get", data={"email": "엉터리", "agree": "1"})
+    assert bad.status_code == 400 and "정확히 적어" in body(bad)
+
+    ok = c.post("/free/2026-03-goh3-literal/get",
+                data={"email": "teacher@school.com", "agree": "1", "news": "1"},
+                follow_redirects=True)
+    assert "받으실 파일" in body(ok)
+    assert c.get("/free/2026-03-goh3-literal/file/0").status_code == 200
+
+    rows = body(admin().get("/admin/leads"))
+    assert "teacher@school.com" in rows and "고3 3월 학력평가 직독직해" in rows
+    print("PASS  직독직해는 이메일 받고 내어 주기")
+
+
+def test_free_notify_collects_email():
+    c = client()
+    c.post("/free/notify", data={"email": "alarm@school.com"}, follow_redirects=True)
+    assert "alarm@school.com" in body(admin().get("/admin/leads"))
+    assert "alarm@school.com" in body(admin().get("/admin/leads.csv"))
+    print("PASS  새 자료 알림 신청")
+
+
+def test_admin_creates_free_item_end_to_end():
+    """관리자 화면에서 만든 무료 자료가 고객 화면에 그대로 나와야 합니다."""
+    a = admin()
+    resp = a.post("/admin/free/new", data={
+        "slug": "test-free-item", "title": "고2 6월 모평 한줄해석",
+        "summary": "전 지문 한 줄 해석", "grade": "고2", "exam": "2026년 6월 모의평가",
+        "kinds": ["oneline_ko"], "gate": "open", "date": "2026-06-05",
+        "body": "설명입니다.", "active": "1"}, follow_redirects=True)
+    assert resp.status_code == 200
+    # 파일이 없으면 아직 '곧 올라옵니다'
+    assert "무료로 받기" not in body(client().get("/free")).split("곧 올라옵니다")[0] \
+        or "고2 6월 모평 한줄해석" in body(client().get("/free"))
+    _put_free_file("test-free-item")
+    text = body(client().get("/free"))
+    assert "고2 6월 모평 한줄해석" in text
+
+    # 종류로 거르기
+    assert "고2 6월 모평 한줄해석" in body(client().get("/free?kind=oneline_ko"))
+    assert "고2 6월 모평 한줄해석" not in body(client().get("/free?kind=literal"))
+
+    a.post("/admin/free/test-free-item/delete", follow_redirects=True)
+    assert "고2 6월 모평 한줄해석" not in body(client().get("/free"))
+    print("PASS  관리자에서 무료 자료 만들기 → 고객 화면 → 지우기")
+
+
+def test_free_kind_suggests_email_gate():
+    """직독직해가 들어가면 이메일 받기를 기본으로 잡아야 합니다."""
+    assert sc.suggested_gate(["oneline_ko"]) == "open"
+    assert sc.suggested_gate(["side", "literal"]) == "email"
+    # 폼에서 gate 를 안 보내도 종류를 보고 정합니다
+    import store_admin as sa
+    item, errors = sa.freebie_from_form(
+        _fake_form({"slug": "x-gate-test", "title": "제목", "kinds": ["literal"], "gate": ""}))
+    assert not errors and item["gate"] == "email"
+    print("PASS  직독직해면 이메일 받기를 자동으로 권함")
+
+
+class _fake_form(dict):
+    """getlist 가 있는 아주 작은 폼 흉내."""
+    def getlist(self, key):
+        value = self.get(key, [])
+        return value if isinstance(value, list) else [value]
+
+    def get(self, key, default=None):
+        value = dict.get(self, key, default)
+        return value if not isinstance(value, list) else (value[0] if value else default)
+
+
+# ---- 검색 등록 ------------------------------------------------------------
+def test_seo_tags_on_public_pages():
+    home = body(client().get("/"))
+    assert 'rel="canonical"' in home
+    assert '"@type": "Organization"' in home
+    detail = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert '"@type": "Product"' in detail and '"priceCurrency": "KRW"' in detail
+    assert '"@type": "BreadcrumbList"' in detail
+    # JSON 문법이 깨지면 검색엔진이 통째로 버립니다
+    for chunk in re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                            detail + home, re.S):
+        json.loads(chunk)
+    print("PASS  검색용 표시(canonical · 구조화 데이터)")
+
+
+def test_seo_verification_code_paste():
+    """네이버가 주는 meta 태그를 통째로 붙여 넣어도 코드만 뽑아내야 합니다."""
+    a = admin()
+    a.post("/admin/seo", data={
+        "naver": '<meta name="naver-site-verification" content="navercode123" />',
+        "google": "googlecode456"}, follow_redirects=True)
+    home = body(client().get("/"))
+    assert 'name="naver-site-verification" content="navercode123"' in home
+    assert 'name="google-site-verification" content="googlecode456"' in home
+    print("PASS  검색 등록 확인 코드 붙여넣기")
+
+
+def test_sitemap_lists_free_items():
+    _put_free_file("2026-03-goh1-oneline")
+    xml = body(client().get("/sitemap.xml"))
+    assert "/free" in xml and "/free/2026-03-goh1-oneline" in xml
+    print("PASS  사이트맵에 무료 자료실 포함")
 
 
 def run_all():
@@ -970,6 +1116,15 @@ def run_all():
     test_order_page_cannot_be_enumerated()
     test_security_headers_everywhere()
     test_public_forms_are_rate_limited()
+    test_free_list_hides_items_without_files()
+    test_free_open_item_downloads_without_email()
+    test_free_gated_item_needs_email()
+    test_free_notify_collects_email()
+    test_admin_creates_free_item_end_to_end()
+    test_free_kind_suggests_email_gate()
+    test_seo_tags_on_public_pages()
+    test_seo_verification_code_paste()
+    test_sitemap_lists_free_items()
     # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
     test_mobile_menu_exists()

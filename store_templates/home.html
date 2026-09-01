@@ -2,6 +2,35 @@
 {% from "_macros.html" import product_card, book_card with context %}
 {% block title %}{{ site.brand }} · {{ site.tagline }}{% endblock %}
 
+{% block jsonld %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ site.brand|tojson }},
+  "url": {{ url_for('home', _external=True)|tojson }},
+  "logo": {{ url_for('static', filename='og.png', _external=True)|tojson }},
+  "description": {{ site.description|tojson }}
+  {%- if site.contact and site.contact.email %},
+  "email": {{ site.contact.email|tojson }}
+  {%- endif %}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.brand|tojson }},
+  "url": {{ url_for('home', _external=True)|tojson }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {{ (url_for('products', _external=True) ~ '?q={search_term_string}')|tojson }},
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endblock %}
+
 {% block body %}
 {% if latest_notice %}
 <a class="notice-strip" href="{{ url_for('notice') }}">

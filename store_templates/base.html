@@ -17,6 +17,16 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#146b4a">
 {% block robots %}{% endblock %}
+{# 같은 화면이 여러 주소로 잡히지 않게, 대표 주소를 하나 알려 줍니다 #}
+<link rel="canonical" href="{{ request.base_url }}">
+{# 네이버·구글에 '이 사이트 내 것이 맞다' 를 증명하는 코드 (관리자 > 검색 등록) #}
+{% if site.seo and site.seo.naver %}
+  <meta name="naver-site-verification" content="{{ site.seo.naver }}">
+{% endif %}
+{% if site.seo and site.seo.google %}
+  <meta name="google-site-verification" content="{{ site.seo.google }}">
+{% endif %}
+{% block jsonld %}{% endblock %}
 <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ url_for('static', filename='og.png') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">

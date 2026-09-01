@@ -13,6 +13,7 @@
   /admin/free         무료 자료실 — 회차 자료 올리기
   /admin/leads        무료 자료 받아 가신 분 이메일 명단
   /admin/notices      공지 작성
+  /admin/seo          검색 등록 — 네이버 · 구글에 사이트 알리기
   /admin/settings     가게 정보 · 계좌 · 프리패스 가격
   /admin/backup       백업 내려받기 · 되돌리기
 """
@@ -22,6 +23,7 @@ import io
 import csv
 import json
 import os
+import re
 import secrets
 from datetime import timedelta
 
@@ -189,6 +191,10 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     with_sample = [p for p in products
                    if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
+    free_ready = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)]
+    seo_cfg = site.get("seo") or {}
+    seo_ok = bool(seo_cfg.get("naver") or seo_cfg.get("google")
+                  or seo_cfg.get("done_naver") or seo_cfg.get("done_google"))
 
     return [
         {"done": email_ok and bank_ok,
@@ -216,6 +222,16 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
          "url": url_for("admin.backup"), "label": "설정 방법 보기"},
+        {"done": bool(free_ready),
+         "title": "무료 자료 한 건 올리기",
+         "why": "한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다. "
+                "공짜로 받아 본 분이 유료 자료를 삽니다.",
+         "url": url_for("admin.free_list"), "label": "무료 자료실 열기"},
+        {"done": seo_ok,
+         "title": "네이버 · 구글에 사이트 등록하기",
+         "why": "등록하지 않으면 검색엔진이 이 사이트가 있는 줄도 모릅니다. "
+                "검색에 뜨기까지 2주~3개월 걸리니 일찍 해 두세요.",
+         "url": url_for("admin.seo"), "label": "검색 등록 열기"},
     ]
 
 
@@ -1285,6 +1301,49 @@ def settings():
 # ---------------------------------------------------------------------------
 # 백업 · 되돌리기
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# 검색 등록 — 네이버 · 구글에 사이트를 알리기
+# ---------------------------------------------------------------------------
+VERIFY_RE = re.compile(r'content\s*=\s*["\']([^"\']+)["\']')
+
+
+def verify_code(raw: str) -> str:
+    """붙여 넣은 값에서 확인 코드만 뽑아냅니다.
+
+    네이버·구글이 주는 것은 <meta ... content="코드"> 통째입니다.
+    통째로 붙여 넣으셔도 되고, 코드만 붙여 넣으셔도 되게 합니다.
+    """
+    raw = sc.clean(raw, 400)
+    found = VERIFY_RE.search(raw)
+    code = (found.group(1) if found else raw).strip()
+    return re.sub(r"[^A-Za-z0-9_\-\.]", "", code)[:120]
+
+
+@admin_bp.route("/seo", methods=["GET", "POST"])
+def seo():
+    site = sc.load_site()
+    if request.method == "POST":
+        seo_cfg = dict(site.get("seo") or {})
+        seo_cfg["naver"] = verify_code(request.form.get("naver"))
+        seo_cfg["google"] = verify_code(request.form.get("google"))
+        seo_cfg["done_naver"] = bool(request.form.get("done_naver"))
+        seo_cfg["done_google"] = bool(request.form.get("done_google"))
+        seo_cfg["done_daum"] = bool(request.form.get("done_daum"))
+        site["seo"] = seo_cfg
+        sc.save_site(site)
+        flash("검색 등록 정보를 저장했습니다.", "ok")
+        return redirect(url_for("admin.seo"))
+
+    catalog = sc.load_catalog()
+    freebies = sc.load_freebies()["items"]
+    page_count = (9 + len(catalog["products"]) + len(catalog["books"])
+                  + len([x for x in freebies if x.get("active", True)]))
+    return render_template("admin/seo.html", seo=site.get("seo") or {},
+                           home_url=url_for("home", _external=True).rstrip("/"),
+                           page_count=page_count,
+                           free_count=len(freebies))
+
+
 @admin_bp.route("/backup")
 def backup():
     return render_template("admin/backup.html", files=MANAGED_FILES)

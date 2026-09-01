@@ -1,7 +1,44 @@
 {% extends "base.html" %}
 {% from "_macros.html" import product_card with context %}
-{% block title %}{{ p.name }} · {{ site.brand }}{% endblock %}
+{% block title %}{{ p.name }} PDF{% if p.grade %} · {{ p.grade }}{% endif %} | {{ site.brand }}{% endblock %}
 {% block desc %}{{ p.description }}{% endblock %}
+
+{% block jsonld %}
+{# 구글 검색 결과에 가격이 함께 뜨게 하는 표시입니다 #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ p.name|tojson }},
+  "description": {{ (p.description or p.subtitle or '')|tojson }},
+  "image": {{ url_for('static', filename='og.png', _external=True)|tojson }},
+  "brand": {"@type": "Brand", "name": {{ site.brand|tojson }}},
+  "category": {{ (package_map.get(p.package, {}).get('name') or '영어 학습 자료')|tojson }},
+  "offers": {
+    "@type": "Offer",
+    "price": {{ p.price|int }},
+    "priceCurrency": "KRW",
+    "availability": "https://schema.org/InStock",
+    "url": {{ url_for('product_detail', slug=p.slug, _external=True)|tojson }},
+    "seller": {"@type": "Organization", "name": {{ site.brand|tojson }}}
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "홈",
+     "item": {{ url_for('home', _external=True)|tojson }}},
+    {"@type": "ListItem", "position": 2, "name": "자료 목록",
+     "item": {{ url_for('products', _external=True)|tojson }}},
+    {"@type": "ListItem", "position": 3, "name": {{ p.name|tojson }},
+     "item": {{ url_for('product_detail', slug=p.slug, _external=True)|tojson }}}
+  ]
+}
+</script>
+{% endblock %}
 
 {% block body %}
 <section class="section">
