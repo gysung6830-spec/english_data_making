@@ -81,6 +81,19 @@
                  placeholder="홍길동" required>
         </div>
 
+        {% if email_typo %}
+          <div class="field typo-check">
+            <label class="check">
+              <input type="checkbox" name="email_ok" value="1">
+              <span><b>적은 주소가 맞습니다</b> —
+                <code>{{ form.email }}</code> 로 보내 주세요</span>
+            </label>
+            <p class="muted mb-0" style="font-size:13.5px;margin-top:6px;">
+              혹시 <b>{{ email_typo }}</b> 를 적으려 하셨다면 위 이메일 칸을 고쳐 주세요.
+            </p>
+          </div>
+        {% endif %}
+
         <div class="field">
           <label for="depositor">입금자명 <span class="hint">성함과 다를 때만 적어 주세요</span></label>
           <input type="text" id="depositor" name="depositor" value="{{ form.depositor or '' }}"
@@ -131,6 +144,19 @@
           </p>
         </div>
 
+        {% if no_mark_price %}
+          <label class="also-box {{ 'on' if form.no_mark }}" id="nomark-box">
+            <input type="checkbox" name="no_mark" value="1" id="no_mark"
+                   {{ 'checked' if form.no_mark }}>
+            <span>
+              <b>이름이 안 새겨진 판으로 받기</b>
+              <small>받으시는 PDF 에는 유출을 막으려고 구매자 이름·이메일이 옅게 들어갑니다.
+                여러 선생님이 나눠 쓰시는 등 이름이 곤란하시면 이쪽으로 받으세요.</small>
+            </span>
+            <em>+{{ no_mark_price|won }}</em>
+          </label>
+        {% endif %}
+
         <div class="field">
           <label for="coupon">할인 쿠폰 코드 <span class="hint">있으면 넣어 주세요</span></label>
           <input type="text" id="coupon" name="coupon" value="{{ form.coupon or '' }}"
@@ -173,6 +199,7 @@
   var base = {{ ('/order/quote?cart=1' if from_cart
                  else '/order/quote?slug=' ~ p.slug)|tojson }};
   var also   = document.getElementById('also');
+  var nomark = document.getElementById('no_mark');
   var email  = document.getElementById('email');
   var coupon = document.getElementById('coupon');
   var loyal  = document.getElementById('loyalty-note');
@@ -187,6 +214,7 @@
   function refresh() {
     var url = base
             + '&also=' + (also && also.checked ? '1' : '0')
+            + '&nomark=' + (nomark && nomark.checked ? '1' : '0')
             + '&email=' + encodeURIComponent(email ? email.value.trim() : '')
             + '&coupon=' + encodeURIComponent(coupon.value.trim());
     fetch(url).then(function (r) { return r.json(); }).then(function (d) {
@@ -196,6 +224,10 @@
         html += '<div class="sum-row cut"><span>' + r.name + ' ' + r.percent
              + '%</span><b>-' + won(r.amount) + '</b></div>';
       });
+      if (d.extra) {
+        html += '<div class="sum-row"><span>이름 없는 판</span><b>+'
+             + won(d.extra) + '</b></div>';
+      }
       if (d.coupon_cut) {
         html += '<div class="sum-row cut"><span>할인 쿠폰</span><b>-'
              + won(d.coupon_cut) + '</b></div>';
@@ -222,6 +254,12 @@
   if (also) {
     also.addEventListener('change', function () {
       also.closest('.also-box').classList.toggle('on', also.checked);
+      refresh();
+    });
+  }
+  if (nomark) {
+    nomark.addEventListener('change', function () {
+      nomark.closest('.also-box').classList.toggle('on', nomark.checked);
       refresh();
     });
   }

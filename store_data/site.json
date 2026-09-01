@@ -110,8 +110,22 @@
     "max_percent": 25
   },
   "watermark": {
-    "_안내": "받으실 때 PDF 에 구매자 표시를 새깁니다. 관리자 화면 > 가게 정보 에서 켜고 끕니다.",
+    "_안내": "받으실 때 PDF 에 새기는 문구입니다. 관리자 화면 > 가게 정보 에서 고칩니다.",
     "enabled": true,
-    "diagonal": true
+    "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
+    "center": "{이메일}",
+    "optout_enabled": false,
+    "optout_price": 10000
+  },
+  "pricing": {
+    "units": {
+      "analysis": 800,
+      "problem": 950
+    },
+    "small_under": 10,
+    "small_multiplier": 1.5,
+    "round_to": 1000,
+    "full_pack_percent": 85,
+    "_안내": "우리 정가 기준입니다. 지문 1개당 얼마인지만 정해 두면 상품 값이 자동으로 계산됩니다. 손님 화면에는 안 보입니다."
   }
 }

@@ -1415,14 +1415,36 @@ def test_analysis_tagline_updated():
     print("PASS  지문분석지 소개 문구")
 
 
-def test_admin_pricing_guide():
-    """가격 가이드가 실제 상품에서 지문당 단가를 계산해야 합니다."""
-    text = body(admin().get("/admin/pricing"))
-    assert "우리 손님은 두 부류입니다" in text
+def test_admin_pricing_is_editable():
+    """지문 1개당 얼마인지를 관리자 화면에서 정하고, 그 값으로 계산해야 합니다."""
+    a = admin()
+    text = body(a.get("/admin/pricing"))
+    assert "우리 정가" in text and "지문 1개당 얼마" in text
     assert "독학하는 학생" in text and "차별화된 자료를 찾는 강사" in text
-    assert "지문 하나당" in text and "값 계산기" in text
-    assert "800원" in text and "950원" in text     # 지금 걸린 단가
-    print("PASS  가격 가이드 (지문당 단가 · 계산기)")
+
+    a.post("/admin/pricing", data={
+        "unit_analysis": "900", "unit_problem": "1100",
+        "small_under": "10", "small_multiplier_x10": "15",
+        "round_to": "1000", "full_pack_percent": "80"}, follow_redirects=True)
+    site = sc.load_site()
+    cfg = sc.pricing_cfg(site)
+    assert cfg["units"] == {"analysis": 900, "problem": 1100}
+    assert sc.suggested_price(site, "analysis", 28) == 25000    # 900x28=25,200 → 천원 단위
+    assert sc.suggested_price(site, "problem", 20) == 22000     # 1,100x20
+    assert sc.suggested_price(site, "analysis", 5) == 7000      # 적은 묶음 1.5배
+    assert sc.suggested_price(site, "없는갈래", 28) == 0
+
+    # 손님 화면에는 단가가 새어 나가면 안 됩니다
+    for path in ("/", "/products", "/products/ybm-han-analysis", "/cart"):
+        page = body(client().get(path))
+        assert "지문 1개당" not in page and "우리 정가" not in page, path
+
+    # 원래대로 돌려 놓습니다
+    a.post("/admin/pricing", data={
+        "unit_analysis": "800", "unit_problem": "950",
+        "small_under": "10", "small_multiplier_x10": "15",
+        "round_to": "1000", "full_pack_percent": "85"}, follow_redirects=True)
+    print("PASS  우리 정가(지문 1개당)를 화면에서 정하기 · 손님에겐 안 보임")
 
 
 def _set_discount(bundle=12, loyalty=None, cap=25):
@@ -1563,7 +1585,9 @@ def test_watermark_stamps_buyer_on_pdf():
         return
 
     site = sc.load_site()
-    site["watermark"] = {"enabled": True, "diagonal": True}
+    site["watermark"] = {"enabled": True,
+                         "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
+                         "center": "{이메일}"}
     sc.save_site(site)
 
     slug = "ybm-han-analysis"
@@ -1625,7 +1649,7 @@ def test_watermark_can_be_turned_off():
     from pypdf import PdfReader
     text = PdfReader(_io.BytesIO(got.data)).pages[0].extract_text()
     assert "mark@example.com" not in text
-    site["watermark"] = {"enabled": True, "diagonal": True}
+    site["watermark"] = {"enabled": True}
     sc.save_site(site)
     print("PASS  워터마크 끄기")
 
@@ -1737,6 +1761,103 @@ def test_watermark_does_not_bloat_the_file():
     print(f"PASS  새겨도 파일이 안 부풂 ({before // 1024}KB → {after // 1024}KB)")
 
 
+def test_watermark_wording_is_editable():
+    """워터마크 문구는 관리자가 정합니다. 자리표가 실제 값으로 바뀌어야 합니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    site = sc.load_site()
+    site["watermark"] = {"enabled": True,
+                         "footer": "{브랜드} · {주문번호} · 무단 배포 금지",
+                         "center": "{이름}"}
+    sc.save_site(site)
+    with store.app.app_context():
+        dl = sc.get_db().execute(
+            """SELECT d.token FROM downloads d JOIN orders o ON o.order_no = d.order_no
+               WHERE o.email = 'mark@example.com'""").fetchone()
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(client().get(f"/d/{dl['token']}/0").data)).pages[0].extract_text()
+    assert "무단 배포 금지" in text
+    assert "새김이" in text                    # {이름} 이 실제 값으로
+    assert "mark@example.com" not in text      # 이번 문구엔 이메일이 없습니다
+    print("PASS  워터마크 문구를 관리자가 정함")
+
+
+def test_watermark_optout_costs_extra():
+    """값을 더 내면 표시 없이 받을 수 있어야 합니다."""
+    import store_watermark as wm
+    if not wm.AVAILABLE:
+        print("SKIP  워터마크 라이브러리 없음")
+        return
+    site = sc.load_site()
+    site["watermark"] = {"enabled": True, "optout_enabled": True, "optout_price": 10000,
+                         "footer": "{이메일}", "center": ""}
+    sc.save_site(site)
+
+    form = body(client().get("/order?slug=ybm-han-analysis"))
+    assert "이름이 안 새겨진 판" in form and "+10,000원" in form
+    q = client().get("/order/quote?slug=ybm-han-analysis&nomark=1").get_json()
+    assert q["extra"] == 10000 and q["final"] == 32000
+
+    c = client()
+    c.post("/order", data={"slug": "ybm-han-analysis", "no_mark": "1", "name": "표시없이",
+                           "email": "clean@example.com", "agree": "1"})
+    with store.app.app_context():
+        row = sc.get_db().execute(
+            "SELECT * FROM orders WHERE email = 'clean@example.com'").fetchone()
+    assert row["amount"] == 32000 and row["no_mark"] == 1
+    admin().post(f"/admin/orders/{row['id']}/deliver", follow_redirects=True)
+    with store.app.app_context():
+        dl = sc.get_db().execute(
+            "SELECT token FROM downloads WHERE order_no = ?", (row["order_no"],)).fetchone()
+    import io as _io
+    from pypdf import PdfReader
+    text = PdfReader(_io.BytesIO(client().get(f"/d/{dl['token']}/0").data)).pages[0].extract_text()
+    assert "clean@example.com" not in text, "값을 더 냈는데 표시가 새겨졌습니다"
+
+    # 꺼 두면 주문서에 칸이 안 보여야 합니다
+    site["watermark"]["optout_enabled"] = False
+    sc.save_site(site)
+    assert "이름이 안 새겨진 판" not in body(client().get("/order?slug=ybm-han-analysis"))
+    print("PASS  값을 더 내면 표시 없이 받기")
+
+
+def test_email_typo_is_caught_once():
+    """자료가 이메일로 가므로, 흔한 오타는 한 번 되물어야 합니다."""
+    assert sc.email_typo("a@gmail.co") == "a@gmail.com"
+    assert sc.email_typo("b@naver.con") == "b@naver.com"
+    assert sc.email_typo("c@gmail.com") == ""
+    assert sc.email_typo("d@school.ac.kr") == ""
+
+    c = client()
+    asked = c.post("/order", data={"slug": "ybm-han-analysis", "name": "오타",
+                                   "email": "teacher@gmail.co", "agree": "1"})
+    assert asked.status_code == 400
+    page = body(asked)
+    assert "teacher@gmail.com" in page and "적은 주소가 맞습니다" in page
+
+    # 맞다고 표시하면 그대로 접수됩니다
+    ok = c.post("/order", data={"slug": "ybm-han-analysis", "name": "오타",
+                                "email": "teacher@gmail.co", "agree": "1", "email_ok": "1"})
+    assert ok.status_code == 302
+
+    # 멀쩡한 주소는 되묻지 않습니다
+    fine = c.post("/order", data={"slug": "ybm-han-analysis", "name": "정상",
+                                  "email": "fine@gmail.com", "agree": "1"})
+    assert fine.status_code == 302
+    print("PASS  이메일 오타 한 번 되묻기")
+
+
+def test_product_form_offers_our_price():
+    """상품 폼에서 우리 정가로 값을 계산해 넣을 수 있어야 합니다."""
+    text = body(admin().get("/admin/products/new"))
+    assert "우리 정가" in text and "계산해서 넣기" in text
+    assert '"analysis": 800' in text.replace(" ", "").replace('"analysis":800', '"analysis": 800')
+    print("PASS  상품 폼의 우리 정가 계산")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1768,6 +1889,7 @@ def run_all():
     test_manual_line_break_filter()
     test_no_emoji_on_customer_pages()
     test_phone_is_optional_email_is_not()
+    test_email_typo_is_caught_once()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()
@@ -1794,6 +1916,8 @@ def run_all():
     test_deliver_by_external_link()
     test_watermark_stamps_buyer_on_pdf()
     test_watermark_can_be_turned_off()
+    test_watermark_wording_is_editable()
+    test_watermark_optout_costs_extra()
     test_watermark_skips_non_pdf()
     test_watermark_does_not_bloat_the_file()
     test_download_revoke_and_limit()
@@ -1803,7 +1927,8 @@ def run_all():
     test_admin_not_indexed_and_login_is_standalone()
     test_login_next_cannot_leave_admin()
     test_admin_pages_open()
-    test_admin_pricing_guide()
+    test_admin_pricing_is_editable()
+    test_product_form_offers_our_price()
     test_setup_checklist_guides_first_day()
     test_admin_forms_offer_buttons_not_typing()
     test_admin_creates_product_visible_on_site()

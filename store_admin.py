@@ -690,6 +690,7 @@ def product_form(slug=None):
                                packages=list(sc.package_map().values()),
                                sample_files=[f.name for f in sorted(sc.SAMPLE_DIR.glob("*"))
                                              if f.is_file() and not f.name.startswith(".")],
+                               pricing=sc.pricing_cfg(sc.load_site()),
                                hints=form_hints(catalog))
 
     item, errors = product_from_form(request.form, existing)
@@ -704,6 +705,7 @@ def product_form(slug=None):
                                packages=list(sc.package_map().values()),
                                sample_files=[f.name for f in sorted(sc.SAMPLE_DIR.glob("*"))
                                              if f.is_file() and not f.name.startswith(".")],
+                               pricing=sc.pricing_cfg(sc.load_site()),
                                hints=form_hints(catalog)), 400
 
     if existing is None:
@@ -1327,7 +1329,10 @@ def settings():
     # 구매자 표시 (워터마크)
     mark = site.setdefault("watermark", {})
     mark["enabled"] = bool(f.get("watermark_enabled"))
-    mark["diagonal"] = bool(f.get("watermark_diagonal"))
+    mark["footer"] = sc.clean(f.get("watermark_footer"), 200)
+    mark["center"] = sc.clean(f.get("watermark_center"), 80)
+    mark["optout_enabled"] = bool(f.get("watermark_optout_enabled"))
+    mark["optout_price"] = max(0, min(200000, sc.to_int(f.get("watermark_optout_price"), 0)))
 
     # 자동 할인 (묶음 · 수량)
     disc = site.setdefault("discount", {})
@@ -1412,16 +1417,9 @@ def seo():
 # ---------------------------------------------------------------------------
 # 가격 가이드 — 얼마에 팔지 정할 때 보는 화면
 # ---------------------------------------------------------------------------
-# 지문 하나당 얼마로 잡을지. 지금 사이트의 실제 값에서 뽑은 기준입니다.
-PRICE_GUIDE = {
-    "analysis": {"low": 700, "mid": 800, "high": 950},
-    "problem": {"low": 850, "mid": 950, "high": 1150},
-}
-SMALL_PACK_BONUS = 1.5      # 10지문 미만은 손이 더 가므로 단가를 올립니다
-
-
-def per_passage_rows(catalog: dict) -> list[dict]:
-    """상품마다 '지문 하나에 얼마인지' 를 뽑습니다. 값이 튀는 것을 찾아냅니다."""
+def per_passage_rows(catalog: dict, site: dict) -> list[dict]:
+    """상품마다 '지문 하나에 얼마인지' 를 뽑습니다. 우리 정가와 얼마나 벌어졌는지 봅니다."""
+    units = sc.pricing_cfg(site)["units"]
     rows = []
     for item in catalog["products"]:
         passages = sc.to_int(item.get("passages"), 0)
@@ -1429,35 +1427,49 @@ def per_passage_rows(catalog: dict) -> list[dict]:
         if passages <= 0 or price <= 0:
             continue
         unit = price // passages
-        guide = PRICE_GUIDE.get(item.get("package"))
-        band = ""
-        if guide and passages >= 10:
-            if unit < guide["low"]:
-                band = "낮음"
-            elif unit > guide["high"]:
-                band = "높음"
+        want = units.get(item.get("package"), 0)
+        should = sc.suggested_price(site, item.get("package", ""), passages)
+        gap = price - should if should else 0
         rows.append({"name": item.get("name", ""), "slug": item.get("slug", ""),
                      "package": item.get("package", ""), "passages": passages,
-                     "price": price, "unit": unit, "band": band,
+                     "price": price, "unit": unit, "want": want,
+                     "should": should, "gap": gap,
+                     # 전권·전회차 상품은 일부러 싸게 잡는 것이라 '벌어졌다' 고 보지 않습니다
+                     "is_full": bool(item.get("covers")),
                      "sample": bool(item.get("sample"))})
-    return sorted(rows, key=lambda r: (r["package"], -r["unit"]))
+    return sorted(rows, key=lambda r: (r["package"], -abs(r["gap"])))
 
 
-@admin_bp.route("/pricing")
+@admin_bp.route("/pricing", methods=["GET", "POST"])
 def pricing():
+    site = sc.load_site()
     catalog = sc.load_raw_catalog()
-    rows = per_passage_rows(catalog)
-    mine = [r for r in rows if not r["sample"]]
-    stats = {}
-    for pid in ("analysis", "problem"):
-        units = sorted(r["unit"] for r in rows if r["package"] == pid and r["passages"] >= 10)
-        if units:
-            stats[pid] = {"min": units[0], "max": units[-1],
-                          "mid": units[len(units) // 2], "count": len(units)}
-    return render_template("admin/pricing.html", rows=rows, stats=stats,
-                           guide=PRICE_GUIDE, packages=sc.package_map(),
-                           mine_count=len(mine),
-                           site=sc.load_site())
+    packages = list(sc.package_map().values())
+
+    if request.method == "POST":
+        cfg = sc.pricing_cfg(site)
+        units = {}
+        for pkg in packages:
+            units[pkg["id"]] = max(0, min(100000,
+                                          sc.to_int(request.form.get(f"unit_{pkg['id']}"), 0)))
+        cfg["units"] = units
+        cfg["small_under"] = max(0, min(100, sc.to_int(request.form.get("small_under"), 10)))
+        cfg["small_multiplier"] = max(1.0, min(3.0,
+                                               sc.to_int(request.form.get("small_multiplier_x10"), 15) / 10))
+        cfg["round_to"] = max(1, min(10000, sc.to_int(request.form.get("round_to"), 1000)))
+        cfg["full_pack_percent"] = max(50, min(100,
+                                               sc.to_int(request.form.get("full_pack_percent"), 85)))
+        site["pricing"] = cfg
+        sc.save_site(site)
+        flash("우리 정가를 저장했습니다. 상품 만들 때 이 값으로 계산해 드립니다.", "ok")
+        return redirect(url_for("admin.pricing"))
+
+    rows = per_passage_rows(catalog, site)
+    off = [r for r in rows
+           if r["should"] and abs(r["gap"]) >= 1000 and not r["is_full"]]
+    return render_template("admin/pricing.html", rows=rows, off=off,
+                           cfg=sc.pricing_cfg(site), packages=packages,
+                           package_map=sc.package_map(), site=site)
 
 
 @admin_bp.route("/backup")

@@ -420,6 +420,8 @@ MIGRATIONS = [
     ("orders", "extra_slugs", "TEXT"),
     # 주문 확인 화면 주소에 쓰는 열쇠. 주문번호로는 남의 주문을 못 열게 합니다.
     ("orders", "view_key", "TEXT"),
+    # 값을 더 내고 '구매자 표시 없는 판' 으로 받기로 한 주문
+    ("orders", "no_mark", "INTEGER NOT NULL DEFAULT 0"),
 ]
 
 
@@ -571,6 +573,63 @@ def loyalty_tier(site: dict, repeat_no: int) -> dict | None:
             if best is None or need > to_int(best.get("min"), 0):
                 best = {"min": need, "percent": pct}
     return best
+
+
+WATERMARK_MARKS = ["이름", "이메일", "주문번호", "브랜드", "날짜"]
+
+WATERMARK_DEFAULTS = {
+    "footer": "{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지",
+    "center": "{이메일}",
+}
+
+
+def no_mark_price(site: dict) -> int:
+    """'구매자 표시 없는 판' 으로 받으실 때 더 내시는 값. 꺼져 있으면 0."""
+    cfg = site.get("watermark") or {}
+    if not cfg.get("enabled", True) or not cfg.get("optout_enabled"):
+        return 0
+    return max(0, to_int(cfg.get("optout_price"), 0))
+
+
+def fill_marks(template: str | None, values: dict) -> str:
+    """워터마크 문구의 {이름}·{이메일} 같은 자리를 실제 값으로 바꿉니다.
+
+    관리자 화면에서 문구를 적으므로, 모르는 자리표는 그냥 지워 둡니다.
+    """
+    text = (template or "").strip()
+    if not text:
+        return ""
+    for key in WATERMARK_MARKS:
+        text = text.replace("{" + key + "}", str(values.get(key, "")))
+    text = re.sub(r"\{[^}]*\}", "", text)                 # 모르는 자리표는 지웁니다
+    text = re.sub(r"(\s*·\s*)+", " · ", text)             # 값이 비어 생긴 가운뎃점 정리
+    return text.strip(" ·")
+
+
+PRICING_DEFAULTS = {"units": {}, "small_under": 10, "small_multiplier": 1.5,
+                    "round_to": 1000, "full_pack_percent": 85}
+
+
+def pricing_cfg(site: dict) -> dict:
+    cfg = dict(PRICING_DEFAULTS)
+    cfg.update(site.get("pricing") or {})
+    cfg["units"] = {k: to_int(v, 0) for k, v in (cfg.get("units") or {}).items()}
+    return cfg
+
+
+def suggested_price(site: dict, package: str, passages: int) -> int:
+    """지문 수 × 우리 정가(지문 1개당). 손님 화면에는 안 보이는 계산입니다."""
+    cfg = pricing_cfg(site)
+    unit = cfg["units"].get(package, 0)
+    passages = to_int(passages, 0)
+    if unit <= 0 or passages <= 0:
+        return 0
+    raw = unit * passages
+    if passages < to_int(cfg.get("small_under"), 10):
+        # 지문이 적어도 표지·편집 품은 똑같이 듭니다.
+        raw = int(raw * float(cfg.get("small_multiplier") or 1))
+    step = max(1, to_int(cfg.get("round_to"), 1000))
+    return int(round(raw / step) * step)
 
 
 def bundle_pairs(items: list[dict]) -> tuple[int, int]:
@@ -915,6 +974,29 @@ def to_int(value, default: int = 0) -> int:
         return default
 
 
+# 손이 미끄러져 자주 틀리는 도메인. 자료가 그 주소로 가므로 한 번 잡아 줍니다.
+EMAIL_TYPOS = {
+    "gmail.co": "gmail.com", "gmial.com": "gmail.com", "gmail.con": "gmail.com",
+    "gamil.com": "gmail.com", "gmaill.com": "gmail.com", "gmail.cm": "gmail.com",
+    "naver.co": "naver.com", "navr.com": "naver.com", "naver.con": "naver.com",
+    "nave.com": "naver.com", "navercom": "naver.com",
+    "daum.ent": "daum.net", "daum.nt": "daum.net", "danum.net": "daum.net",
+    "hanmail.ne": "hanmail.net", "hanmail.com": "hanmail.net",
+    "kakao.co": "kakao.com", "nate.co": "nate.com", "hotmail.co": "hotmail.com",
+    "outlook.co": "outlook.com", "icloud.co": "icloud.com",
+}
+
+
+def email_typo(email: str) -> str:
+    """오타로 보이면 고친 주소를 돌려줍니다. 멀쩡하면 빈 문자열."""
+    email = clean(email, 120).lower()
+    if "@" not in email:
+        return ""
+    name, _, domain = email.rpartition("@")
+    fixed = EMAIL_TYPOS.get(domain)
+    return f"{name}@{fixed}" if fixed and name else ""
+
+
 def validate_contact(form) -> tuple[dict, list[str]]:
     data = {
         "name": clean(form.get("name"), 50),
@@ -929,6 +1011,14 @@ def validate_contact(form) -> tuple[dict, list[str]]:
     # 이메일은 꼭 받습니다 — 자료가 그 주소로 갑니다.
     if not EMAIL_RE.match(data["email"]):
         errors.append("이메일 주소를 정확히 입력해 주세요. 자료를 이 주소로 보내 드립니다.")
+    else:
+        # 오타로 보이면 한 번 되묻습니다. 그대로 보내시겠다면 다시 누르면 넘어갑니다.
+        maybe = email_typo(data["email"])
+        if maybe and not form.get("email_ok"):
+            errors.append(f"혹시 {maybe} 아닌가요? 자료가 이 주소로 가기 때문에 한 번 여쭙습니다. "
+                          f"맞으면 이메일 칸을 고쳐 주시고, 적으신 주소가 맞으면 "
+                          f"아래 '적은 주소가 맞습니다' 에 표시하고 다시 눌러 주세요.")
+            data["email_typo"] = maybe
     # 연락처는 선택입니다. 적으셨을 때만 형식을 봅니다.
     if data["phone"] and not PHONE_RE.match(data["phone"]):
         errors.append("연락처를 숫자와 '-' 로 적어 주세요. 안 적으셔도 됩니다.")

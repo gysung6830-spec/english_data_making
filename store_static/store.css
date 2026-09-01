@@ -1356,3 +1356,13 @@ input[type=file]{
   .fo-compare{flex-direction:column; align-items:stretch; gap:8px;}
   .fo-arrow{text-align:center; transform:rotate(90deg);}
 }
+
+/* 이메일 오타로 보일 때 한 번 되묻는 칸 */
+.typo-check{
+  background:#fff8f4; border:1px solid #f0d4c4; border-radius:11px;
+  padding:14px 16px;
+}
+.typo-check code{
+  background:#fff; border:1px solid var(--line); border-radius:6px;
+  padding:1px 7px; font-size:14px;
+}

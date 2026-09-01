@@ -3,8 +3,9 @@
 
 {% block body %}
 <div class="adm-head">
-  <h1>가격 가이드</h1>
-  <p>얼마에 팔지 정할 때 보는 화면입니다. <b>지금 사이트에 걸린 값</b>을 기준으로 계산했습니다.</p>
+  <h1>우리 정가</h1>
+  <p><b>지문 1개당 얼마</b>만 정해 두면 상품 값이 자동으로 계산됩니다.
+    이 화면은 <b>손님에게 안 보입니다.</b></p>
 </div>
 
 <div class="steps-help">
@@ -13,44 +14,86 @@
     <li><b>독학하는 학생</b> — 자기 돈으로 삽니다. 한 번에 2~3만원이 한계입니다.
       회차 하나, 강 몇 개처럼 <b>작게 끊어 파는 것</b>이 맞습니다.</li>
     <li><b>차별화된 자료를 찾는 강사</b> — 수업에 쓰는 값이라 부담이 덜합니다.
-      대신 <b>전 지문·전 회차가 빠짐없이</b> 있어야 삽니다. 빠지면 안 삽니다.</li>
+      대신 <b>전 지문·전 회차가 빠짐없이</b> 있어야 삽니다.</li>
   </ol>
-  같은 자료라도 <b>묶는 단위</b>가 다릅니다. 값을 나누는 게 아니라 <b>덩어리를 나누세요.</b>
+  값을 나누는 게 아니라 <b>덩어리를 나누세요.</b>
+</div>
+
+<form method="post">
+<div class="panel">
+  <h2>1. 지문 1개당 얼마 <span class="tag tag-on">여기만 정하면 됩니다</span></h2>
+  <div class="hint">자료 갈래마다 따로 정합니다. 상품을 만들 때 이 값으로 계산해 드립니다.</div>
+  <div class="form-grid">
+    {% for pkg in packages %}
+      <div class="adm-field">
+        <label for="unit_{{ pkg.id }}">{{ pkg.name }}</label>
+        <input type="text" id="unit_{{ pkg.id }}" name="unit_{{ pkg.id }}"
+               value="{{ cfg.units.get(pkg.id, 0) }}" hidden>
+        <div class="pick" data-target="unit_{{ pkg.id }}">
+          {% for v in [600, 700, 800, 900, 950, 1000, 1100, 1200] %}
+            <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}원</button>
+          {% endfor %}
+        </div>
+        <div class="tip">{{ pkg.tagline }}</div>
+      </div>
+    {% endfor %}
+  </div>
 </div>
 
 <div class="panel">
-  <h2>1. 지금 우리 단가</h2>
-  <div class="hint">지문 하나에 얼마를 받고 있는지입니다. 10지문 이상 상품만 셌습니다.</div>
-  {% if stats %}
-    <div class="mini-grid">
-      {% for pid, st in stats.items() %}
-        <div class="mini">
-          <small>{{ packages[pid].name if pid in packages else pid }}</small>
-          <b>{{ '{:,}'.format(st.mid) }}원</b>
-          <small>지문 하나당 · 가장 흔한 값<br>
-            ({{ '{:,}'.format(st.min) }} ~ {{ '{:,}'.format(st.max) }}원 · {{ st.count }}개)</small>
-        </div>
-      {% endfor %}
-      <div class="mini">
-        <small>권장 범위 · 지문 분석</small>
-        <b>{{ '{:,}'.format(guide.analysis.mid) }}원</b>
-        <small>{{ '{:,}'.format(guide.analysis.low) }} ~ {{ '{:,}'.format(guide.analysis.high) }}원</small>
+  <h2>2. 세부 규칙</h2>
+  <div class="form-grid">
+    <div class="adm-field">
+      <label for="small_under">몇 지문 미만을 '적은 묶음' 으로 볼까</label>
+      <input type="text" id="small_under" name="small_under" value="{{ cfg.small_under }}" hidden>
+      <div class="pick" data-target="small_under">
+        {% for v in [0, 5, 10, 15, 20] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}지문</button>
+        {% endfor %}
       </div>
-      <div class="mini">
-        <small>권장 범위 · 문제</small>
-        <b>{{ '{:,}'.format(guide.problem.mid) }}원</b>
-        <small>{{ '{:,}'.format(guide.problem.low) }} ~ {{ '{:,}'.format(guide.problem.high) }}원</small>
+      <div class="tip">지문이 적어도 표지·편집 품은 똑같이 듭니다. 0 이면 안 씁니다.</div>
+    </div>
+    <div class="adm-field">
+      <label for="small_multiplier_x10">적은 묶음은 몇 배로</label>
+      <input type="text" id="small_multiplier_x10" name="small_multiplier_x10"
+             value="{{ (cfg.small_multiplier * 10) | round | int }}" hidden>
+      <div class="pick" data-target="small_multiplier_x10">
+        {% for v, label in [(10, '그대로'), (12, '1.2배'), (15, '1.5배'), (20, '2배')] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ label }}</button>
+        {% endfor %}
       </div>
     </div>
-  {% else %}
-    <div class="empty"><b>아직 지문 수가 적힌 상품이 없습니다.</b>
-      상품에 지문 수를 넣으면 여기서 단가를 계산해 드립니다.</div>
-  {% endif %}
+    <div class="adm-field">
+      <label for="round_to">끝자리 맞추기</label>
+      <input type="text" id="round_to" name="round_to" value="{{ cfg.round_to }}" hidden>
+      <div class="pick" data-target="round_to">
+        {% for v, label in [(100, '백원'), (500, '오백원'), (1000, '천원')] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ label }}</button>
+        {% endfor %}
+      </div>
+      <div class="tip">계좌이체는 <b>천원 단위</b>가 편합니다.</div>
+    </div>
+    <div class="adm-field">
+      <label for="full_pack_percent">전체(전강·전회차)는 부분 합계의</label>
+      <input type="text" id="full_pack_percent" name="full_pack_percent"
+             value="{{ cfg.full_pack_percent }}" hidden>
+      <div class="pick" data-target="full_pack_percent">
+        {% for v in [75, 80, 85, 90] %}
+          <button class="pick-btn" data-value="{{ v }}">{{ v }}%</button>
+        {% endfor %}
+      </div>
+      <div class="tip">너무 깎으면 아무도 부분을 안 삽니다. <b>80~85%</b> 를 권합니다.</div>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit">우리 정가 저장</button>
+  </div>
 </div>
+</form>
 
 <div class="panel">
-  <h2>2. 값 계산기</h2>
-  <div class="hint">지문 수를 넣으면 권장 가격이 나옵니다. 백원 단위로 반올림합니다.</div>
+  <h2>3. 값 계산기</h2>
+  <div class="hint">위에서 정한 값으로 계산합니다. 저장한 뒤에 보세요.</div>
   <div class="form-grid">
     <div class="adm-field">
       <label for="calc-n">지문 수</label>
@@ -64,121 +107,58 @@
   </div>
   <div class="wrapbox">
     <table class="adm-table">
-      <thead><tr><th>무엇을</th><th class="num">권장가</th><th class="num">지문당</th><th>메모</th></tr></thead>
-      <tbody>
-        <tr><td><b>지문 분석 패키지</b></td>
-            <td class="num"><b id="c-analysis">-</b></td>
-            <td class="num muted" id="u-analysis">-</td>
-            <td class="muted"><small>01 지문자료 · 02 지문분석지 · 03 필생보</small></td></tr>
-        <tr><td><b>문제 패키지</b></td>
-            <td class="num"><b id="c-problem">-</b></td>
-            <td class="num muted" id="u-problem">-</td>
-            <td class="muted"><small>05 워크북 · 06 서술형 · 07 변형문제</small></td></tr>
-        <tr><td><b>두 개 함께</b> <span class="tag tag-on">묶음 할인 자동</span></td>
-            <td class="num"><b id="c-both">-</b></td>
-            <td class="num muted" id="u-both">-</td>
-            <td class="muted"><small>주문서에서 자동으로 깎입니다</small></td></tr>
-      </tbody>
+      <thead><tr><th>무엇을</th><th class="num">우리 정가</th><th class="num">지문당</th></tr></thead>
+      <tbody id="calc-rows"></tbody>
     </table>
   </div>
   <div class="tip" id="small-note" hidden>
-    ⚠ 10지문 미만은 <b>손이 더 갑니다.</b> 지문 수는 적어도 표지·편집은 똑같이 들어가요.
-    그래서 단가를 1.5배로 잡았습니다. 학생용 맛보기가 여기에 해당합니다.
+    지금은 <b>적은 묶음</b>이라 {{ cfg.small_multiplier }}배로 잡았습니다.
   </div>
 </div>
 
 <div class="panel">
-  <h2>3. 부분과 전체 — 값을 어떻게 벌려 놓을까</h2>
-  <div class="hint">
-    필요한 회차·강만 사실 수 있게 두되, <b>전체를 사면 오히려 싸지게</b> 만드는 방법입니다.
-  </div>
-
+  <h2>4. 부분과 전체 — 값을 어떻게 벌려 놓을까</h2>
+  <div class="hint">필요한 회차·강만 사실 수 있게 두되, 전체를 사면 오히려 싸지게 만듭니다.</div>
   <div class="wrapbox" style="margin-bottom:14px;">
     <table class="adm-table">
-      <thead><tr><th style="width:190px;">무엇을</th><th>어떻게</th></tr></thead>
       <tbody>
-        <tr><th>부분(강·회차)</th>
-            <td>지문당 <b>단가 그대로</b>. 학생이 살 수 있는 크기로 자릅니다.
-              <br><small class="muted">예: 수능특강 1~5강 20지문 → 16,000원</small></td></tr>
+        <tr><th style="width:190px;">부분(강·회차)</th>
+            <td>위 정가 그대로. 학생이 살 수 있는 크기로 자릅니다.</td></tr>
         <tr><th>전체(전강·전회차)</th>
-            <td>부분 값 합계의 <b>80~85%</b>. 20% 넘게 깎으면 아무도 부분을 안 삽니다.
-              <br><small class="muted">예: 16,000 × 2 = 32,000 → <b>28,000원</b> (87.5%)</small></td></tr>
-        <tr><th>얼마나 벌릴까</th>
-            <td><b>3,000~5,000원</b> 차이면 대부분 전체를 고릅니다.
-              너무 크면 부분 상품이 '미끼' 로 보이고, 너무 작으면 안 움직입니다.</td></tr>
+            <td>부분 값 합계의 <b>{{ cfg.full_pack_percent }}%</b>.
+              <br><small class="muted">16,000 × 2 = 32,000 →
+                {{ '{:,}'.format(((32000 * cfg.full_pack_percent / 100) / 1000) | round | int * 1000) }}원</small></td></tr>
+        <tr><th>왜 부분을 남겨 두나</th>
+            <td><b>독학하는 학생은 전체를 못 삽니다.</b> 부분을 없애면 그 손님을 통째로 잃습니다.
+              대신 부분을 두 개 담으면 장바구니가 '전체로 바꾸면 얼마 싸집니다' 를 알려 줍니다.</td></tr>
       </tbody>
     </table>
   </div>
-
-  <div class="panel" style="margin:0; background:#fbfaf7;">
-    <h2 style="font-size:15px;">왜 부분을 남겨 두나</h2>
-    <div class="hint" style="margin-bottom:0;">
-      <b>독학하는 학생은 전체를 못 삽니다.</b> 28,000원이 한 번에 나가면 안 삽니다.
-      부분을 없애면 그 손님을 통째로 잃습니다.<br><br>
-      대신 부분을 두 개 담는 순간 장바구니가
-      <b>"전체로 바꾸면 4,000원 싸집니다"</b> 라고 알려 주고, 단추 하나로 바꿔 줍니다.
-      <b>고르게 두되, 큰 쪽이 이득이게</b> 만드는 것이 요령입니다.
-    </div>
-  </div>
-
-  <div class="tip" style="margin-top:14px;">
+  <div class="tip">
     설정하는 법 — 전체 상품을 만들고 <b>상품 고치기 → '전권 · 전회차 상품인가요'</b> 에서
     그 안에 들어가는 부분들을 체크하면 됩니다.
   </div>
 </div>
 
 <div class="panel">
-  <h2>4. 값을 정할 때 지킬 것 다섯</h2>
-  <div class="wrapbox">
-    <table class="adm-table">
-      <tbody>
-        <tr><th style="width:210px;">① 지문 수로 계산하세요</th>
-            <td>느낌으로 정하면 상품마다 들쭉날쭉해집니다.
-              <b>지문당 단가 × 지문 수</b> 로 잡고 백원 단위로 맞추세요.</td></tr>
-        <tr><th>② 학생에게는 작게 끊어서</th>
-            <td>28지문 22,000원은 학생에게 부담입니다.
-              <b>10지문 9,000원</b> 처럼 잘라 놓으면 학생이 삽니다.
-              같은 자료를 두 덩어리로 파는 셈입니다.</td></tr>
-        <tr><th>③ 강사에게는 빠짐없이</th>
-            <td>강사는 <b>범위가 빠지면 안 삽니다.</b> 전 지문·전 회차를 묶어 파세요.
-              값이 좀 비싸도 삽니다.</td></tr>
-        <tr><th>④ 끝자리는 000 으로</th>
-            <td>22,400원 같은 값은 계좌이체할 때 불편합니다.
-              <b>22,000원</b> 처럼 천원 단위로 맞추세요.</td></tr>
-        <tr><th>⑤ 값을 내리지 말고 덩어리를 줄이세요</th>
-            <td>비싸다는 말이 나오면 값을 깎지 말고
-              <b>더 작은 묶음</b>을 만드세요. 한 번 내린 값은 못 올립니다.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="panel">
-  <h2>5. 상품마다 지문당 단가</h2>
-  <div class="hint">
-    값이 튀는 상품을 찾아 줍니다. <b>낮음</b>은 손해 보고 있을 수 있고,
-    <b>높음</b>은 손님이 비싸다고 느낄 수 있습니다. (10지문 미만은 재지 않습니다)
-  </div>
-  {% if rows %}
+  <h2>5. 정가와 벌어진 상품 {{ off|length }}개</h2>
+  <div class="hint">지금 걸린 값이 우리 정가와 <b>1,000원 이상</b> 다른 것만 모았습니다.</div>
+  {% if off %}
     <div class="wrapbox">
       <table class="adm-table">
-        <thead><tr><th>상품</th><th>갈래</th><th class="num">지문</th>
-                   <th class="num">가격</th><th class="num">지문당</th><th></th></tr></thead>
+        <thead><tr><th>상품</th><th class="num">지문</th><th class="num">지금 값</th>
+                   <th class="num">우리 정가</th><th class="num">차이</th></tr></thead>
         <tbody>
-        {% for r in rows %}
+        {% for r in off %}
           <tr>
-            <td>{{ r.name }}
+            <td><a href="{{ url_for('admin.product_form', slug=r.slug) }}">{{ r.name }}</a>
               {% if r.sample %}<span class="tag" style="background:#fdece2;color:#a3450f;">예시</span>{% endif %}</td>
-            <td><small class="muted">{{ packages[r.package].short if r.package in packages else r.package }}</small></td>
             <td class="num">{{ r.passages }}</td>
             <td class="num">{{ r.price|won }}</td>
-            <td class="num"><b>{{ '{:,}'.format(r.unit) }}원</b></td>
-            <td>
-              {% if r.band == '낮음' %}
-                <span class="tag" style="background:#fef3c7;color:#92400e;">낮음</span>
-              {% elif r.band == '높음' %}
-                <span class="tag" style="background:#fdeceb;color:#b91c1c;">높음</span>
-              {% else %}<span class="tag tag-on">보통</span>{% endif %}
+            <td class="num muted">{{ r.should|won }}</td>
+            <td class="num">
+              <b style="color:{{ '#b91c1c' if r.gap > 0 else '#92400e' }};">
+                {{ '+' if r.gap > 0 }}{{ '{:,}'.format(r.gap) }}원</b>
             </td>
           </tr>
         {% endfor %}
@@ -186,28 +166,43 @@
       </table>
     </div>
   {% else %}
-    <div class="empty"><b>지문 수가 적힌 상품이 없습니다.</b></div>
+    <div class="empty"><b>전부 정가대로입니다.</b> 값이 들쭉날쭉하지 않습니다.</div>
   {% endif %}
 </div>
 
 <script>
 (function () {
-  var G = {{ guide|tojson }};
-  var BONUS = {{ 1.5 }};
+  var UNITS = {{ cfg.units|tojson }};
+  var NAMES = {{ (packages | map(attribute='name') | list)|tojson }};
+  var IDS = {{ (packages | map(attribute='id') | list)|tojson }};
+  var SMALL_UNDER = {{ cfg.small_under }};
+  var SMALL_X = {{ cfg.small_multiplier }};
+  var STEP = {{ cfg.round_to }};
   var n = document.getElementById('calc-n');
-  function round100(v) { return Math.round(v / 1000) * 1000; }
+  var box = document.getElementById('calc-rows');
+
+  function price(pkg, count) {
+    var unit = UNITS[pkg] || 0;
+    if (!unit || !count) return 0;
+    var raw = unit * count;
+    if (SMALL_UNDER && count < SMALL_UNDER) raw = Math.floor(raw * SMALL_X);
+    return Math.round(raw / STEP) * STEP;
+  }
+  function won(v) { return v.toLocaleString('ko-KR') + '원'; }
+
   function calc() {
     var count = Math.max(1, parseInt(n.value || '1', 10));
-    var small = count < 10;
-    document.getElementById('small-note').hidden = !small;
-    var a = round100(count * G.analysis.mid * (small ? BONUS : 1));
-    var p = round100(count * G.problem.mid * (small ? BONUS : 1));
-    function set(id, won, per) {
-      document.getElementById('c-' + id).textContent = won.toLocaleString('ko-KR') + '원';
-      document.getElementById('u-' + id).textContent =
-        Math.round(won / count).toLocaleString('ko-KR') + '원';
-    }
-    set('analysis', a); set('problem', p); set('both', a + p);
+    document.getElementById('small-note').hidden = !(SMALL_UNDER && count < SMALL_UNDER);
+    var html = '', total = 0;
+    IDS.forEach(function (id, i) {
+      var p = price(id, count); total += p;
+      html += '<tr><td><b>' + NAMES[i] + '</b></td><td class="num"><b>' + won(p)
+           + '</b></td><td class="num muted">' + won(Math.round(p / count)) + '</td></tr>';
+    });
+    html += '<tr><td><b>두 개 함께</b> <span class="tag tag-on">묶음 할인 자동</span></td>'
+         + '<td class="num"><b>' + won(total) + '</b></td>'
+         + '<td class="num muted">' + won(Math.round(total / count)) + '</td></tr>';
+    box.innerHTML = html;
   }
   n.addEventListener('input', calc);
   calc();

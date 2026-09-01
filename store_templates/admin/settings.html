@@ -163,45 +163,78 @@
 <div class="panel" id="watermark">
   <h2>구매자 표시 (워터마크) <span class="tag tag-on">유출 방지</span></h2>
   <div class="hint">
-    손님이 자료를 받는 그 순간, <b>그 파일에만</b> 구매자 이름·이메일·주문번호가 새겨집니다.
+    손님이 자료를 받는 그 순간, <b>그 파일에만</b> 아래 문구가 새겨집니다.
     카페나 단톡방에 올리면 누가 올렸는지 바로 드러나서, 애초에 올리지 않게 됩니다.
     <b>원본 파일은 그대로 있습니다.</b>
-  </div>
-
-  <div class="wrapbox" style="margin-bottom:14px;">
-    <table class="adm-table">
-      <tbody>
-        <tr><th style="width:170px;">쪽 아래 작은 글씨</th>
-            <td><code>홍길동 · teacher@school.com · OR-260901-12345 · {{ s.brand }} 제공 · 재배포 금지</code>
-              <br><small class="muted">회색 7pt. 인쇄해도 지문을 가리지 않습니다.</small></td></tr>
-        <tr><th>가운데 옅은 글씨</th>
-            <td><code>teacher@school.com</code>
-              <br><small class="muted">아주 옅게(7%) 비스듬히. 캡처해도 남습니다.</small></td></tr>
-      </tbody>
-    </table>
   </div>
 
   <div class="adm-field">
     <label class="check">
       <input type="checkbox" name="watermark_enabled" value="1"
              {{ 'checked' if s.watermark.get('enabled', True) }}>
-      <span><b>구매자 표시 새기기</b> — PDF 에만 붙습니다 (ZIP·한글 파일은 그대로)</span>
+      <span><b>구매자 표시 새기기</b> — PDF 에만 (ZIP·한글은 그대로, 무료 자료는 안 새김)</span>
     </label>
-  </div>
-  <div class="adm-field">
-    <label class="check">
-      <input type="checkbox" name="watermark_diagonal" value="1"
-             {{ 'checked' if s.watermark.get('diagonal', True) }}>
-      <span>가운데 옅은 글씨도 넣기</span>
-    </label>
-    <div class="tip">끄면 쪽 아래 한 줄만 들어갑니다. 지면이 빽빽한 자료라면 꺼 두세요.</div>
   </div>
 
-  <div class="panel" style="margin:0; background:#fbfaf7;">
-    <h2 style="font-size:15px;">무료 자료에는 안 새깁니다</h2>
+  <div class="adm-field full">
+    <label for="watermark_footer">쪽 아래 한 줄</label>
+    <input type="text" id="watermark_footer" name="watermark_footer"
+           value="{{ s.watermark.get('footer', '') }}"
+           placeholder="{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
+    <div class="pick" data-target="watermark_footer">
+      <span class="pick-label">골라 쓰기</span>
+      <button class="pick-btn" data-value="{이름} · {이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
+        이름 · 이메일 · 주문번호 (권장)</button>
+      <button class="pick-btn" data-value="{이메일} · {주문번호} · {브랜드} 제공 · 재배포 금지">
+        이메일만 (이름 빼기)</button>
+      <button class="pick-btn" data-value="{브랜드} · {날짜} · 재배포 금지">
+        구매자 정보 없이</button>
+    </div>
+  </div>
+
+  <div class="adm-field full">
+    <label for="watermark_center">가운데 옅은 글씨 <span class="hint">비우면 안 넣습니다</span></label>
+    <input type="text" id="watermark_center" name="watermark_center"
+           value="{{ s.watermark.get('center', '') }}" placeholder="{이메일}">
+    <div class="pick" data-target="watermark_center">
+      {% for v in ['{이메일}', '{이름}', '{주문번호}', '{브랜드}'] %}
+        <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+      {% endfor %}
+      <button class="pick-btn clear" data-value="">안 넣음</button>
+    </div>
+    <div class="tip">7% 농도로 비스듬히 들어갑니다. 지면이 빽빽한 자료라면 비워 두세요.</div>
+  </div>
+
+  <div class="panel" style="margin:0 0 16px; background:#fbfaf7;">
+    <h2 style="font-size:15px;">쓸 수 있는 자리표</h2>
     <div class="hint" style="margin-bottom:0;">
-      무료 자료실 자료는 <b>퍼질수록 좋습니다.</b> 그래서 표시를 넣지 않습니다.
-      돈 받고 파는 자료에만 들어갑니다.
+      <code>{이름}</code> <code>{이메일}</code> <code>{주문번호}</code>
+      <code>{브랜드}</code> <code>{날짜}</code>
+      — 주문에서 실제 값으로 바뀝니다. 값이 비면 가운뎃점도 알아서 정리됩니다.
+    </div>
+  </div>
+
+  <div class="adm-field">
+    <label class="check">
+      <input type="checkbox" name="watermark_optout_enabled" value="1"
+             {{ 'checked' if s.watermark.get('optout_enabled') }}>
+      <span><b>값을 더 내면 표시 없이 받게 하기</b></span>
+    </label>
+    <div class="tip" style="margin-top:6px;">
+      주문서에 <b>'이름이 안 새겨진 판으로 받기'</b> 칸이 생깁니다.
+      학원에서 여러 선생님이 나눠 쓰실 때 이름이 곤란한 경우가 있습니다.<br>
+      ⚠️ 다만 <b>표시가 없으면 유출돼도 누가 흘렸는지 알 수 없습니다.</b>
+      값을 넉넉히 잡으셔야 손해가 안 납니다.
+    </div>
+  </div>
+  <div class="adm-field">
+    <label for="watermark_optout_price">더 받을 값</label>
+    <input type="text" id="watermark_optout_price" name="watermark_optout_price"
+           value="{{ s.watermark.get('optout_price', 10000) }}" hidden>
+    <div class="pick" data-target="watermark_optout_price">
+      {% for v in [5000, 10000, 20000, 30000] %}
+        <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}원</button>
+      {% endfor %}
     </div>
   </div>
 </div>

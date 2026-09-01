@@ -102,7 +102,15 @@
           <button class="pick-btn" data-value="{{ v }}">{{ '{:,}'.format(v) }}</button>
         {% endfor %}
       </div>
-      <div class="tip">지문 수를 넣으면 아래에 <b>추천 가격</b>도 나옵니다.</div>
+      <div class="pick" id="our-price-row">
+        <span class="pick-label">우리 정가</span>
+        <button class="pick-btn" type="button" id="our-price-btn">계산해서 넣기</button>
+        <span class="tip" id="our-price-note" style="margin:0; align-self:center;"></span>
+      </div>
+      <div class="tip">
+        <b>지문 수</b>와 <b>패키지 종류</b>를 고르면 우리 정가로 계산해 드립니다.
+        기준은 <a href="{{ url_for('admin.pricing') }}">가격 가이드</a>에서 정합니다.
+      </div>
     </div>
     <div class="adm-field">
       <label for="list_price">정가</label>
@@ -367,4 +375,46 @@
   rebuild();
 })();
 </script>
+
+<script>
+/* 우리 정가로 값 계산하기 — 기준은 가격 가이드에서 정합니다 */
+(function () {
+  var CFG = {{ pricing|tojson }};
+  var price = document.getElementById('price');
+  var passages = document.getElementById('passages');
+  var pkg = document.getElementById('package');
+  var btn = document.getElementById('our-price-btn');
+  var note = document.getElementById('our-price-note');
+  if (!price || !btn) return;
+
+  function suggest() {
+    var unit = (CFG.units || {})[pkg ? pkg.value : ''] || 0;
+    var n = parseInt((passages && passages.value) || '0', 10);
+    if (!unit || !n) return 0;
+    var raw = unit * n;
+    if (CFG.small_under && n < CFG.small_under) raw = Math.floor(raw * CFG.small_multiplier);
+    var step = CFG.round_to || 1000;
+    return Math.round(raw / step) * step;
+  }
+  function paint() {
+    var v = suggest();
+    note.textContent = v
+      ? v.toLocaleString('ko-KR') + '원  (지문 ' + passages.value + '개)'
+      : '지문 수와 패키지를 고르면 계산됩니다';
+    btn.disabled = !v;
+  }
+  btn.addEventListener('click', function () {
+    var v = suggest();
+    if (v) {
+      price.value = v;
+      price.dispatchEvent(new Event('input', {bubbles: true}));
+    }
+  });
+  [passages, pkg].forEach(function (el) {
+    if (el) { el.addEventListener('input', paint); el.addEventListener('change', paint); }
+  });
+  paint();
+})();
+</script>
+
 {% endblock %}

@@ -469,18 +469,21 @@ def cart_clear():
     return redirect(back_to(url_for("cart")))
 
 
-def quote_for(items: list[dict], email: str, coupon_code: str) -> dict:
+def quote_for(items: list[dict], email: str, coupon_code: str,
+              no_mark: bool = False) -> dict:
     """주문 금액을 한 곳에서 계산합니다. 화면과 접수가 같은 값을 쓰게 하려고 나눠 두었습니다."""
     site = sc.load_site()
     subtotal = sum(int(x.get("price", 0)) for x in items)
     repeat_no = sc.paid_order_count(email) + 1        # 이번이 몇 번째 구매인지
     rows, auto = sc.auto_discounts(site, items, repeat_no)
     coupon, coupon_cut, coupon_note = sc.check_coupon(coupon_code, subtotal - auto)
+    extra = sc.no_mark_price(site) if no_mark else 0
     return {
         "subtotal": subtotal, "rows": rows, "auto": auto, "repeat_no": repeat_no,
         "coupon": coupon, "coupon_cut": coupon_cut, "coupon_note": coupon_note,
+        "no_mark": bool(extra), "extra": extra,
         "discount": auto + coupon_cut,
-        "final": subtotal - auto - coupon_cut,
+        "final": subtotal - auto - coupon_cut + extra,
     }
 
 
@@ -509,9 +512,11 @@ def order_quote():
         abort(404)
     q = quote_for(items,
                   sc.clean(request.args.get("email"), 120),
-                  sc.clean(request.args.get("coupon"), 40).upper())
+                  sc.clean(request.args.get("coupon"), 40).upper(),
+                  request.args.get("nomark") == "1")
     return {
         "subtotal": q["subtotal"],
+        "extra": q["extra"],
         "rows": [{"name": r["name"], "amount": r["amount"], "percent": r["percent"]}
                  for r in q["rows"]],
         "repeat_no": q["repeat_no"],
@@ -533,9 +538,10 @@ def order():
         abort(404)
     books = {b["slug"]: b for b in catalog["books"]}
 
-    def page(form, errors, status=200):
+    def page(form, errors, status=200, typo=""):
         return render_template("order.html", items=items, p=product, sibling=sibling,
-                               books=books, from_cart=from_cart,
+                               books=books, from_cart=from_cart, email_typo=typo,
+                               no_mark_price=sc.no_mark_price(sc.load_site()),
                                form=form, errors=errors), status
 
     if request.method == "GET":
@@ -547,6 +553,7 @@ def order():
                     ["잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다."], 429)
 
     data, errors = sc.validate_contact(request.form)
+    typo = data.get("email_typo", "")
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
 
     receipt_kind = sc.clean(request.form.get("receipt_kind"), 20)
@@ -557,14 +564,15 @@ def order():
         errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
 
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
-    quote = quote_for(items, data["email"], coupon_code)
+    no_mark = bool(request.form.get("no_mark"))
+    quote = quote_for(items, data["email"], coupon_code, no_mark)
     subtotal, discount = quote["subtotal"], quote["discount"]
     coupon = quote["coupon"]
     if coupon_code and coupon is None:
         errors.append(quote["coupon_note"])
 
     if errors:
-        return page(request.form, errors, 400)
+        return page(request.form, errors, 400, typo)
 
     names = " + ".join(x["name"] for x in items)
     slugs = [x["slug"] for x in items]
@@ -575,13 +583,13 @@ def order():
         """INSERT INTO orders (order_no, view_key, kind, product_slug, extra_slugs, product_name,
                                quantity, amount, discount, coupon_code, name, phone, email,
                                affiliation, depositor, message, receipt_kind, receipt_no,
-                               status, created_at, updated_at)
-           VALUES (?, ?, 'product', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+                               status, created_at, updated_at, no_mark)
+           VALUES (?, ?, 'product', ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?, ?)""",
         lambda no: (no, view_key, slugs[0], ",".join(slugs[1:]) or None, names[:400],
                     amount, discount,
                     coupon["code"] if coupon else None, data["name"], data["phone"],
                     data["email"], data["affiliation"], depositor, data["message"],
-                    receipt_kind, receipt_no, ts, ts))
+                    receipt_kind, receipt_no, ts, ts, 1 if quote["no_mark"] else 0))
     if coupon:
         sc.redeem_coupon(coupon["code"], order_no)
     if from_cart:
@@ -992,17 +1000,27 @@ def download_file(token, index):
 
 def watermark_for(row, path):
     """이 주문의 구매자 표시를 새긴 PDF 바이트. 새길 수 없으면 None."""
-    cfg = sc.load_site().get("watermark") or {}
+    site = sc.load_site()
+    cfg = site.get("watermark") or {}
     if not cfg.get("enabled", True):
         return None
-    buyer = sc.get_db().execute(
-        "SELECT name FROM orders WHERE order_no = ?", (row["order_no"],)).fetchone()
-    who = (buyer["name"] if buyer else "") or ""
-    mail = row["email"] or ""
-    brand = sc.load_site().get("brand", "Ortica영어")
-    footer = " · ".join(x for x in (who, mail, row["order_no"],
-                                    f"{brand} 제공 · 재배포 금지") if x)
-    return wm.stamp(path, footer, mail if cfg.get("diagonal", True) else "")
+    order = sc.get_db().execute(
+        "SELECT name, no_mark, created_at FROM orders WHERE order_no = ?",
+        (row["order_no"],)).fetchone()
+    if order and order["no_mark"]:
+        return None                    # 표시 없는 판으로 값을 더 내신 주문
+    marks = {
+        "이름": (order["name"] if order else "") or "",
+        "이메일": row["email"] or "",
+        "주문번호": row["order_no"],
+        "브랜드": site.get("brand", ""),
+        "날짜": (order["created_at"][:10] if order and order["created_at"] else ""),
+    }
+    # 문구 칸이 아예 없으면(예전 설정 파일) 기본 문구를 씁니다.
+    # 관리자가 일부러 비운 경우("")는 그대로 비워 둡니다.
+    footer = cfg.get("footer", sc.WATERMARK_DEFAULTS["footer"])
+    center = cfg.get("center", sc.WATERMARK_DEFAULTS["center"])
+    return wm.stamp(path, sc.fill_marks(footer, marks), sc.fill_marks(center, marks))
 
 
 @app.route("/guide")
