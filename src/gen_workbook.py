@@ -1765,7 +1765,7 @@ u.pu.pl{ text-decoration-color:#1f7a5c; } u.pu.mn{ text-decoration-color:#b3453b
 .dfull .ko{ font-size:9.4px; line-height:1.85; color:#33414d; margin-top:1px; }
 .dfull .en .dim{ color:#79828c; }
 .dfull .yl{ background:#ffe680; color:#23272e; border-radius:2px; padding:1px 2px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
-.dfull .sl{ color:#b3beb6; font-weight:400; padding:0 1px; }
+.dfull .sl{ color:#3f83c4; font-weight:800; padding:0 3px; }
 .dfull .uref{ border-bottom:2px solid #2f6fb0; color:#194e7e; font-weight:700; }
 .dfull .uconj{ border-bottom:2px solid var(--trap); color:#8f2f28; font-weight:700; }
 .dfull .utime{ border-bottom:2px solid var(--ink); color:#12543d; font-weight:700; }
@@ -1902,7 +1902,7 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .dchl .bn{ position:absolute; left:0; top:1px; width:14px; height:14px; line-height:14px; text-align:center; background:var(--src-line); color:#fff; border-radius:50%; font-size:8px; font-weight:800; }
 .dchl .en{ font-size:10.2px; line-height:1.95; color:#23272e; }
 .dchl .ko{ font-size:9.6px; line-height:1.95; color:#23272e; margin-top:2px; }
-.dchl .sl{ color:#b3beb6; font-weight:400; padding:0 1px; }
+.dchl .sl{ color:#3f83c4; font-weight:800; padding:0 3px; }
 .hl0,.hl1,.hl2,.hl3,.hl4{ color:#23272e; padding:1px 4px; border-radius:3px; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
 .hl0{ background:#c9e0ec; } .hl1{ background:#c7e0da; } .hl2{ background:#e8dfb2; } .hl3{ background:#e2dac8; } .hl4{ background:#d5ddb9; }
 .dchl .opt-line{ margin-top:7px; padding-top:7px; border-top:1px dashed var(--line); font-size:9.3px; }
@@ -1973,14 +1973,15 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .card.intg{ padding:10px 13px; }
 .card.intg .itoc{ margin:5px 0 6px; padding:4px 9px; }
 .card.intg .ilegend{ margin-bottom:4px; line-height:1.4; }
-.card.intg .isec{ margin:7px 0 4px; font-size:11px; }
-.card.intg .dfull .row{ margin-bottom:3px; padding-left:20px; }
-.card.intg .dfull .row .bn{ top:0; }
-.card.intg .dfull .rc{ display:grid; grid-template-columns:1.1fr 0.9fr; column-gap:13px; row-gap:1px; align-items:start; }
-.card.intg .dfull .en{ line-height:1.5; }
-.card.intg .dfull .ko{ line-height:1.5; margin-top:0; }
-.card.intg .dfull .natline{ grid-column:1 / -1; margin-top:2px; }
-.card.intg .dfull .sumbox{ margin-top:4px; }
+.card.intg .isec{ margin:9px 0 5px; font-size:11px; }
+.card.intg .dfull .row{ margin-bottom:4px; padding-left:21px; }
+.card.intg .dfull .row .bn{ top:1px; }
+.card.intg .dfull .rc{ display:grid; grid-template-columns:1.08fr 0.92fr; column-gap:18px; row-gap:1px; align-items:start; }
+.card.intg .dfull .ko{ padding-left:12px; border-left:1px dotted #dfe4e7; }
+.card.intg .dfull .en{ line-height:1.56; }
+.card.intg .dfull .ko{ line-height:1.56; margin-top:0; }
+.card.intg .dfull .natline{ grid-column:1 / -1; margin-top:3px; }
+.card.intg .dfull .sumbox{ margin-top:5px; }
 .card.intg .derive{ margin-top:2px; padding:7px 11px; }
 .card.intg .derive li{ margin-bottom:3px; }
 .card.intg .opt{ margin-bottom:2px; }
