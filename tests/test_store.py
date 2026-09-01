@@ -41,6 +41,9 @@ sc.DB_PATH = sc.DATA_DIR / "store.db"
 import store  # noqa: E402
 
 store.app.config["TESTING"] = True
+# 테스트는 한 대에서 폼을 수십 번 보내므로 남용 제한을 꺼 둡니다.
+# 제한 자체는 test_public_forms_are_rate_limited 에서 따로 확인합니다.
+sc.FORM_MAX = 100000
 
 
 def client():
@@ -221,9 +224,9 @@ def test_order_both_packages_at_once():
     assert "49,000원" in done          # 22,000 + 27,000
     assert "지문 분석 패키지" in done and "문제 패키지" in done
 
-    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+    key = resp.headers["Location"].rsplit("/", 1)[-1]
     row = sc.sqlite3.connect(sc.DB_PATH).execute(
-        "SELECT extra_slugs FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+        "SELECT extra_slugs FROM orders WHERE view_key = ?", (key,)).fetchone()
     assert row[0] == "mock-2026-06-g3-problem"
     print("PASS  두 패키지 한 번에 주문")
 
@@ -330,9 +333,10 @@ def test_order_to_download_flow():
         "slug": slug, "name": "다운로드테스트", "phone": "010-5555-6666",
         "email": "dl@example.com", "agree": "1"})
     assert resp.status_code == 302
-    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
-    row = sc.sqlite3.connect(sc.DB_PATH).execute(
-        "SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+    key = resp.headers["Location"].rsplit("/", 1)[-1]
+    conn = sc.sqlite3.connect(sc.DB_PATH)
+    row = conn.execute("SELECT id, order_no FROM orders WHERE view_key = ?", (key,)).fetchone()
+    order_no = row[1]
     a.post(f"/admin/orders/{row[0]}/deliver")
     assert sc.sqlite3.connect(sc.DB_PATH).execute(
         "SELECT COUNT(*) FROM downloads").fetchone()[0] == 0, "파일 없이 링크가 나갔습니다"
@@ -402,9 +406,9 @@ def test_deliver_by_external_link():
     resp = c.post("/order", data={
         "slug": slug, "name": "링크손님", "phone": "010-9090-1010",
         "email": "link@example.com", "agree": "1"})
-    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
-    oid = sc.sqlite3.connect(sc.DB_PATH).execute(
-        "SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()[0]
+    key = resp.headers["Location"].rsplit("/", 1)[-1]
+    oid, order_no = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT id, order_no FROM orders WHERE view_key = ?", (key,)).fetchone()
     assert a.post(f"/admin/orders/{oid}/deliver").status_code == 302
 
     token = sc.sqlite3.connect(sc.DB_PATH).execute(
@@ -449,11 +453,11 @@ def test_receipt_request_and_sales():
         "email": "academy@example.com", "affiliation": "오르티카학원", "agree": "1",
         "receipt_kind": "tax_invoice", "receipt_no": "123-45-67890"})
     assert resp.status_code == 302
-    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+    key = resp.headers["Location"].rsplit("/", 1)[-1]
 
     a = admin()
     conn = sc.sqlite3.connect(sc.DB_PATH)
-    oid = conn.execute("SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()[0]
+    oid = conn.execute("SELECT id FROM orders WHERE view_key = ?", (key,)).fetchone()[0]
     a.post(f"/admin/orders/{oid}", data={"status": "입금확인"})
 
     page = body(a.get("/admin/sales"))
@@ -750,6 +754,57 @@ def test_nanumsquareround_font_is_served():
     print("PASS  나눔스퀘어라운드 글꼴 제공")
 
 
+def test_order_page_cannot_be_enumerated():
+    """주문번호를 찍어 남의 이름·연락처를 훔쳐볼 수 없어야 합니다."""
+    c = client()
+    resp = c.post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "name": "비밀손님",
+        "phone": "010-7777-1234", "email": "secret@example.com", "agree": "1"})
+    key = resp.headers["Location"].rsplit("/", 1)[-1]
+    assert len(key) >= 20, "주소 열쇠가 너무 짧습니다"
+
+    conn = sc.sqlite3.connect(sc.DB_PATH)
+    order_no = conn.execute("SELECT order_no FROM orders WHERE view_key = ?",
+                            (key,)).fetchone()[0]
+    # 열쇠를 가진 본인은 열리고 — 입금자명·이메일이 보여야 입금을 할 수 있습니다.
+    ok = client().get(f"/order/done/{key}")
+    assert ok.status_code == 200
+    assert "비밀손님" in body(ok) and "secret@example.com" in body(ok)
+    # 주문번호를 찍어서는 못 엽니다. (여기가 막혀야 고객 명단이 안 샙니다)
+    assert client().get(f"/order/done/{order_no}").status_code == 404
+    # 열쇠를 한 글자만 바꿔도 안 됩니다.
+    assert client().get(f"/order/done/{key[:-1]}x").status_code == 404
+    print("PASS  주문 확인 화면 열거 차단")
+
+
+def test_security_headers_everywhere():
+    for path in ("/", "/products", "/guide"):
+        h = client().get(path).headers
+        assert h.get("X-Content-Type-Options") == "nosniff", path
+        assert "Referrer-Policy" in h, path
+        assert "Permissions-Policy" in h, path
+    print("PASS  공통 보안 헤더")
+
+
+def test_public_forms_are_rate_limited():
+    """장난으로 주문을 쏟아붓지 못하게 막습니다."""
+    keep = sc.FORM_MAX
+    sc.FORM_MAX = 5                      # 이 테스트 동안만 낮춰서 확인
+    sc._form_hits.clear()
+    try:
+        c = client()
+        data = {"slug": "mock-2026-06-g3-analysis", "name": "도배",
+                "phone": "010-0000-1111", "email": "flood@example.com", "agree": "1"}
+        codes = [c.post("/order", data=data).status_code for _ in range(8)]
+        assert codes.count(302) == 5, codes          # 5번까지만 받고
+        assert codes[-1] == 429                      # 그다음은 막힘
+        assert "잠시 뒤에" in body(c.post("/order", data=data))
+    finally:
+        sc.FORM_MAX = keep
+        sc._form_hits.clear()
+    print("PASS  공개 폼 남용 제한")
+
+
 def test_file_path_traversal_blocked():
     assert client().get("/samples/..%2f..%2fstore.py").status_code == 404
     assert admin().get("/admin/submissions/file/..%2f..%2fstore.py").status_code == 404
@@ -804,6 +859,10 @@ def run_all():
     test_admin_notice_appears_on_home()
     test_admin_settings_change_reaches_customer()
     test_backup_download_and_restore()
+    test_order_page_cannot_be_enumerated()
+    test_security_headers_everywhere()
+    test_public_forms_are_rate_limited()
+    # 예시 데이터를 지우는 테스트는 다른 테스트가 그 상품을 쓰므로 맨 뒤에 둡니다.
     test_clear_sample_data()
     test_nanumsquareround_font_is_served()
     test_file_path_traversal_blocked()

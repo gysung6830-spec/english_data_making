@@ -298,6 +298,8 @@ MIGRATIONS = [
     ("orders", "receipt_done", "INTEGER NOT NULL DEFAULT 0"),
     # 같은 교재의 짝 패키지를 함께 주문했을 때, 그 상품 주소 이름
     ("orders", "extra_slugs", "TEXT"),
+    # 주문 확인 화면 주소에 쓰는 열쇠. 주문번호로는 남의 주문을 못 열게 합니다.
+    ("orders", "view_key", "TEXT"),
 ]
 
 
@@ -324,6 +326,11 @@ def close_db(_exc=None):
     db = g.pop("db", None)
     if db is not None:
         db.close()
+
+
+def new_view_key() -> str:
+    """주문 확인 화면 주소에 붙는 열쇠. 찍어서 맞힐 수 없을 만큼 깁니다."""
+    return secrets.token_urlsafe(18)
 
 
 def new_order_no() -> str:
@@ -507,6 +514,33 @@ def count_download(token: str) -> None:
     db.execute("UPDATE downloads SET download_count = download_count + 1 WHERE token = ?",
                (token,))
     db.commit()
+
+
+# ---------------------------------------------------------------------------
+# 공개 폼 남용 막기 — 한 대에서 짧은 시간에 너무 많이 보내지 못하게
+# ---------------------------------------------------------------------------
+_form_hits: dict[str, list] = {}
+FORM_MAX = 12           # 10분 동안 보낼 수 있는 횟수
+FORM_WINDOW_MIN = 10
+
+
+def client_ip(request) -> str:
+    forwarded = request.headers.get("X-Forwarded-For", "")
+    return (forwarded.split(",")[0].strip() if forwarded else request.remote_addr) or "?"
+
+
+def too_many_submits(request, bucket: str = "form") -> bool:
+    """장난으로 주문·문의를 쏟아붓는 것을 막습니다."""
+    key = f"{bucket}:{client_ip(request)}"
+    now = now_kst()
+    hits = [t for t in _form_hits.get(key, [])
+            if (now - t).total_seconds() < FORM_WINDOW_MIN * 60]
+    if len(hits) >= FORM_MAX:
+        _form_hits[key] = hits
+        return True
+    hits.append(now)
+    _form_hits[key] = hits
+    return False
 
 
 # ---------------------------------------------------------------------------

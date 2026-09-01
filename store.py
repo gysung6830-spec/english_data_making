@@ -48,8 +48,9 @@ app.config.update(
 )
 # 글꼴 파일이 800KB 가까이 되므로 브라우저가 오래 캐시하도록 합니다(30일).
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
-# 업로드 상한 (상품 자료 ZIP · 시험지 사진)
-app.config["MAX_CONTENT_LENGTH"] = 200 * 1024 * 1024
+# 업로드 상한. 무료 서버는 메모리가 작아 큰 파일을 받으면 죽습니다.
+# 더 큰 자료는 구글 드라이브 링크로 거세요(관리자 > 상품 > 파일).
+app.config["MAX_CONTENT_LENGTH"] = 30 * 1024 * 1024
 
 app.register_blueprint(admin_bp)
 app.teardown_appcontext(sc.close_db)
@@ -58,6 +59,19 @@ app.teardown_appcontext(sc.close_db)
 # ---------------------------------------------------------------------------
 # 모든 화면이 함께 쓰는 값 / 서식
 # ---------------------------------------------------------------------------
+@app.after_request
+def security_headers(resp):
+    """모든 화면에 공통으로 거는 최소한의 방어."""
+    # 브라우저가 파일 종류를 멋대로 추측하지 않게 (올린 파일이 스크립트로 실행되는 것 차단)
+    resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+    # 바깥 사이트로 이동할 때 우리 주소(다운로드 열쇠가 들어 있을 수 있음)를 넘기지 않음
+    resp.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    # 쓰지도 않는 카메라·마이크·위치 권한을 아예 잠금
+    resp.headers.setdefault("Permissions-Policy",
+                            "camera=(), microphone=(), geolocation=(), payment=()")
+    return resp
+
+
 @app.context_processor
 def inject_globals():
     site = sc.load_site()
@@ -236,6 +250,11 @@ def order():
     if request.method == "GET":
         return render_template("order.html", p=product, sibling=sibling, form={}, errors=[])
 
+    if sc.too_many_submits(request, "order"):
+        errors = ["잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다."]
+        return render_template("order.html", p=product, sibling=sibling,
+                               form=request.form, errors=errors), 429
+
     data, errors = sc.validate_contact(request.form)
     quantity = max(1, min(99, sc.to_int(request.form.get("quantity"), 1)))
     depositor = sc.clean(request.form.get("depositor"), 50) or data["name"]
@@ -261,13 +280,14 @@ def order():
 
     amount = subtotal - discount
     ts = sc.stamp()
+    view_key = sc.new_view_key()
     order_no = sc.insert_numbered(
-        """INSERT INTO orders (order_no, kind, product_slug, extra_slugs, product_name,
+        """INSERT INTO orders (order_no, view_key, kind, product_slug, extra_slugs, product_name,
                                quantity, amount, discount, coupon_code, name, phone, email,
                                affiliation, depositor, message, receipt_kind, receipt_no,
                                status, created_at, updated_at)
-           VALUES (?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        lambda no: (no, product["slug"], sibling["slug"] if take_both else None,
+           VALUES (?, ?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        lambda no: (no, view_key, product["slug"], sibling["slug"] if take_both else None,
                     product["name"] + (" + " + sibling["name"] if take_both else ""),
                     quantity, amount, discount,
                     coupon["code"] if coupon else None, data["name"], data["phone"],
@@ -292,12 +312,17 @@ def order():
                    f"증빙     : {sc.RECEIPT_KINDS.get(receipt_kind, '-')} {receipt_no}",
                    f"요청사항 : {data['message'] or '-'}",
                    f"접수시각 : {ts}"]))
-    return redirect(url_for("order_done", order_no=order_no))
+    return redirect(url_for("order_done", key=view_key))
 
 
-@app.route("/order/done/<order_no>")
-def order_done(order_no):
-    row = sc.get_db().execute("SELECT * FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+@app.route("/order/done/<key>")
+def order_done(key):
+    """주문 확인 화면.
+
+    주소에 주문번호가 아니라 긴 열쇠를 씁니다. 주문번호(OR-260901-12345)로 열게 두면
+    번호를 하나씩 바꿔 가며 남의 이름·연락처를 훔쳐볼 수 있기 때문입니다.
+    """
+    row = sc.get_db().execute("SELECT * FROM orders WHERE view_key = ?", (key,)).fetchone()
     if not row:
         abort(404)
     return render_template("order_done.html", o=row)
@@ -318,6 +343,9 @@ def custom():
         return render_template("custom.html", form={"mode": default_mode}, errors=[])
 
     mode = "custom" if request.form.get("mode") == "custom" else "request"
+    if sc.too_many_submits(request, "custom"):
+        return render_template("custom.html", form=request.form,
+                               errors=["잠시 뒤에 다시 시도해 주세요."]), 429
     data, errors = sc.validate_contact(request.form)
     wanted = sc.clean(request.form.get("wanted"), 200)
     detail = {
@@ -372,6 +400,9 @@ def submit():
     if request.method == "GET":
         return render_template("submit.html", reward=reward, form={}, errors=[], done=None)
 
+    if sc.too_many_submits(request, "submit"):
+        return render_template("submit.html", reward=reward, form=request.form,
+                               errors=["잠시 뒤에 다시 시도해 주세요."], done=None), 429
     data, errors = sc.validate_contact(request.form)
     school = sc.clean(request.form.get("school"), 60)
     if not school:
