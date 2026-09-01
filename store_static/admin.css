@@ -183,3 +183,9 @@
   .setup-list li{flex-wrap:wrap;}
   .setup-list li .btn{margin-left:44px;}
 }
+
+/* ---------- 관리자 화면 줄나눔 ---------- */
+.adm-head h1, .panel > h2, .setup-body b { text-wrap:balance; }
+.adm-head p, .panel > .hint, .setup-body small, .adm-field .tip,
+.steps-help li, .warn-list li, .empty { text-wrap:pretty; }
+.adm-head p, .panel > .hint, .steps-help, .setup-body small { max-width:60em; }
