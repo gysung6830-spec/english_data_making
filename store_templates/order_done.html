@@ -12,7 +12,7 @@
     <div class="card" style="margin-bottom:20px;">
       <table class="spec" style="margin:0;">
         <tr><th>주문번호</th><td><b>{{ o['order_no'] }}</b></td></tr>
-        <tr><th>상품</th><td>{{ o['product_name'] }} × {{ o['quantity'] }}</td></tr>
+        <tr><th>상품</th><td>{{ o['product_name'] }}</td></tr>
         <tr><th>결제 금액</th><td><b style="color:var(--brand);font-size:18px;">{{ o['amount']|won }}</b></td></tr>
         <tr><th>입금자명</th><td>{{ o['depositor'] }}</td></tr>
         <tr><th>받으실 곳</th><td>{{ o['email'] }}</td></tr>

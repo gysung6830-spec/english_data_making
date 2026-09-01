@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import os
 import secrets
+from datetime import timedelta
 
 from flask import (Flask, abort, redirect, render_template, request,
                    send_from_directory, url_for)
@@ -32,6 +33,19 @@ app = Flask(__name__, template_folder="store_templates",
             static_folder="store_static", static_url_path="/static")
 app.secret_key = os.environ.get("STORE_SECRET") or secrets.token_hex(16)
 app.config["JSON_AS_ASCII"] = False
+
+# --- 로그인 쿠키 단속 -------------------------------------------------------
+# HTTPONLY : 자바스크립트가 쿠키를 못 읽게 (스크립트로 훔쳐 가는 것 차단)
+# SAMESITE : 다른 사이트에서 우리 관리자 주소로 몰래 요청 못 하게
+# SECURE   : https 로만 쿠키를 보냄. 내 컴퓨터(http)에서 개발할 땐 꺼 둡니다.
+# LIFETIME : 7일이 지나면 다시 로그인
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=bool(os.environ.get("STORE_HTTPS", "1") == "1"
+                               and not os.environ.get("STORE_DEBUG")),
+    PERMANENT_SESSION_LIFETIME=timedelta(days=7),
+)
 # 글꼴 파일이 800KB 가까이 되므로 브라우저가 오래 캐시하도록 합니다(30일).
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 30
 # 업로드 상한 (상품 자료 ZIP · 시험지 사진)
@@ -213,8 +227,14 @@ def order():
     if not product:
         abort(404)
 
+    catalog = sc.load_catalog()
+    # 같은 교재의 반대쪽 패키지 — 한 번에 같이 주문할 수 있게 합니다.
+    sibling = next((x for x in catalog["products"]
+                    if x.get("book") and x.get("book") == product.get("book")
+                    and x.get("package") and x.get("package") != product.get("package")), None)
+
     if request.method == "GET":
-        return render_template("order.html", p=product, form={}, errors=[])
+        return render_template("order.html", p=product, sibling=sibling, form={}, errors=[])
 
     data, errors = sc.validate_contact(request.form)
     quantity = max(1, min(99, sc.to_int(request.form.get("quantity"), 1)))
@@ -227,24 +247,29 @@ def order():
     if receipt_kind and not receipt_no:
         errors.append("증빙을 받으시려면 사업자등록번호나 휴대폰 번호를 적어 주세요.")
 
-    subtotal = int(product.get("price", 0)) * quantity
+    take_both = bool(request.form.get("also")) and sibling is not None
+    unit = int(product.get("price", 0)) + (int(sibling.get("price", 0)) if take_both else 0)
+    subtotal = unit * quantity
     coupon_code = sc.clean(request.form.get("coupon"), 40).upper()
     coupon, discount, coupon_note = sc.check_coupon(coupon_code, subtotal)
     if coupon_code and coupon is None:
         errors.append(coupon_note)
 
     if errors:
-        return render_template("order.html", p=product, form=request.form, errors=errors), 400
+        return render_template("order.html", p=product, sibling=sibling,
+                               form=request.form, errors=errors), 400
 
     amount = subtotal - discount
     ts = sc.stamp()
     order_no = sc.insert_numbered(
-        """INSERT INTO orders (order_no, kind, product_slug, product_name, quantity,
-                               amount, discount, coupon_code, name, phone, email,
+        """INSERT INTO orders (order_no, kind, product_slug, extra_slugs, product_name,
+                               quantity, amount, discount, coupon_code, name, phone, email,
                                affiliation, depositor, message, receipt_kind, receipt_no,
                                status, created_at, updated_at)
-           VALUES (?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
-        lambda no: (no, product["slug"], product["name"], quantity, amount, discount,
+           VALUES (?, 'product', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '입금대기', ?, ?)""",
+        lambda no: (no, product["slug"], sibling["slug"] if take_both else None,
+                    product["name"] + (" + " + sibling["name"] if take_both else ""),
+                    quantity, amount, discount,
                     coupon["code"] if coupon else None, data["name"], data["phone"],
                     data["email"], data["affiliation"], depositor, data["message"],
                     receipt_kind, receipt_no, ts, ts))
@@ -254,7 +279,8 @@ def order():
     sc.send_mail(
         f"[Ortica영어] 새 주문 {order_no} · {product['name']}",
         "\n".join([f"주문번호 : {order_no}",
-                   f"상품     : {product['name']} x {quantity}",
+                   f"상품     : {product['name']}"
+                   + (f" + {sibling['name']}" if take_both else "") + f" x {quantity}",
                    f"주문금액 : {subtotal:,}원",
                    f"할인     : -{discount:,}원 ({coupon['code'] if coupon else '없음'})",
                    f"결제금액 : {amount:,}원",
@@ -501,6 +527,38 @@ def download_file(token, index):
 @app.route("/guide")
 def guide():
     return render_template("guide.html")
+
+
+@app.route("/robots.txt")
+def robots():
+    """검색엔진에게 관리자 화면과 다운로드 주소는 훑지 말라고 알려 줍니다."""
+    body = "\n".join([
+        "User-agent: *",
+        "Disallow: /admin",
+        "Disallow: /d/",
+        "Disallow: /order",
+        "Allow: /",
+        f"Sitemap: {url_for('home', _external=True).rstrip('/')}/sitemap.xml",
+    ]) + "\n"
+    return body, 200, {"Content-Type": "text/plain; charset=utf-8"}
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    """네이버·구글이 상품과 교재 페이지를 찾아가도록 목록을 내어 줍니다."""
+    catalog = sc.load_catalog()
+    urls = [url_for("home", _external=True), url_for("lineup", _external=True),
+            url_for("products", _external=True), url_for("samples", _external=True),
+            url_for("notice", _external=True), url_for("guide", _external=True),
+            url_for("custom", _external=True), url_for("submit", _external=True)]
+    urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]
+    urls += [url_for("product_detail", slug=p["slug"], _external=True)
+             for p in catalog["products"]]
+    body = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls)
+            + "</urlset>\n")
+    return body, 200, {"Content-Type": "application/xml; charset=utf-8"}
 
 
 @app.route("/healthz")

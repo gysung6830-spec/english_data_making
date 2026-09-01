@@ -17,6 +17,7 @@ from __future__ import annotations
 import io
 import json
 import os
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -194,12 +195,37 @@ def test_order_rejects_bad_input():
 def test_order_saves_and_multiplies_amount():
     c = client()
     resp = c.post("/order", data={
-        "slug": "mock-2026-06-g3-analysis", "quantity": "2", "name": "홍길동",
+        "slug": "mock-2026-06-g3-analysis", "name": "홍길동",
         "phone": "010-1234-5678", "email": "teacher@example.com", "agree": "1"})
     assert resp.status_code == 302
-    done = c.get(resp.headers["Location"])
-    assert "44,000원" in body(done)      # 22,000 x 2
-    print("PASS  주문 저장 · 금액 계산")
+    done = body(c.get(resp.headers["Location"]))
+    assert "22,000원" in done
+    # 디지털 자료라 수량 칸은 없어야 합니다. (하나 사면 반 전체가 씁니다)
+    form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
+    assert 'name="quantity"' not in form
+    assert "결제하실 금액" in form
+    print("PASS  주문 저장 · 금액 표시 · 수량 칸 없음")
+
+
+def test_order_both_packages_at_once():
+    """두 패키지를 사려고 주문을 두 번 하게 만들면 안 됩니다."""
+    form = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
+    assert "문제 패키지도 함께 받기" in form and "+27,000원" in form
+
+    c = client()
+    resp = c.post("/order", data={
+        "slug": "mock-2026-06-g3-analysis", "also": "1", "name": "둘다",
+        "phone": "010-1212-3434", "email": "both@example.com", "agree": "1"})
+    assert resp.status_code == 302
+    done = body(c.get(resp.headers["Location"]))
+    assert "49,000원" in done          # 22,000 + 27,000
+    assert "지문 분석 패키지" in done and "문제 패키지" in done
+
+    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+    row = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT extra_slugs FROM orders WHERE order_no = ?", (order_no,)).fetchone()
+    assert row[0] == "mock-2026-06-g3-problem"
+    print("PASS  두 패키지 한 번에 주문")
 
 
 def test_order_rejects_unknown_coupon():
@@ -409,13 +435,68 @@ def test_receipt_request_and_sales():
 
 
 # ---- 5. 관리자 잠금 --------------------------------------------------------
-def test_admin_requires_login():
+def test_every_admin_route_is_locked():
+    """관리자 주소를 하나도 빠짐없이 훑어, 로그인 없이는 못 들어가는지 확인합니다."""
     c = client()
-    for path in ("/admin", "/admin/products", "/admin/settings", "/admin/backup",
-                 "/admin/sales"):
-        assert c.get(path).status_code == 302, path
-    assert c.post("/admin/login", data={"password": "틀린비번"}).status_code == 401
-    print("PASS  관리자 페이지 잠김")
+    checked = 0
+    for rule in store.app.url_map.iter_rules():
+        if not rule.rule.startswith("/admin"):
+            continue
+        if rule.endpoint in ("admin.login", "admin.logout", "static"):
+            continue
+        # <int:order_id> 같은 자리는 아무 값이나 넣어 봅니다.
+        path = re.sub(r"<[^>]+>", "1", rule.rule)
+        for method in ("GET", "POST"):
+            if method not in rule.methods:
+                continue
+            resp = c.open(path, method=method)
+            assert resp.status_code == 302, f"{method} {path} 가 {resp.status_code} 로 열렸습니다"
+            assert "/admin/login" in resp.headers.get("Location", ""), path
+            checked += 1
+    assert checked >= 40, f"검사한 주소가 {checked}개뿐입니다"
+    print(f"PASS  관리자 주소 {checked}개 전부 잠김")
+
+
+def test_login_blocks_repeated_guesses():
+    """비밀번호를 계속 찍으면 막혀야 합니다."""
+    import store_admin
+    store_admin._login_tries.clear()
+    c = client()
+    for _ in range(store_admin.LOGIN_MAX_TRIES):
+        assert c.post("/admin/login", data={"password": "틀린비번"}).status_code == 401
+    blocked = c.post("/admin/login", data={"password": "틀린비번"})
+    assert blocked.status_code == 429 and "분 뒤에 다시" in body(blocked)
+    # 막힌 동안에는 맞는 비밀번호도 안 받습니다.
+    assert c.post("/admin/login", data={"password": "test1234"}).status_code == 429
+    store_admin._login_tries.clear()
+    assert c.post("/admin/login", data={"password": "test1234"}).status_code == 302
+    print("PASS  비밀번호 무차별 대입 차단")
+
+
+def test_admin_not_indexed_and_login_is_standalone():
+    resp = admin().get("/admin")
+    assert "noindex" in resp.headers.get("X-Robots-Tag", "")
+    assert "no-store" in resp.headers.get("Cache-Control", "")
+    assert resp.headers.get("X-Frame-Options") == "DENY"
+
+    login = body(client().get("/admin/login"))
+    assert 'name="robots"' in login and "noindex" in login
+    assert "자료 라인업" not in login       # 고객 메뉴가 딸려 나오지 않아야 함
+
+    robots = body(client().get("/robots.txt"))
+    assert "Disallow: /admin" in robots and "Disallow: /d/" in robots
+    print("PASS  관리자·다운로드 주소 검색 차단, 로그인 화면 분리")
+
+
+def test_login_next_cannot_leave_admin():
+    """로그인 뒤 엉뚱한 사이트로 튕겨 보내는 수법을 막습니다."""
+    c = client()
+    resp = c.post("/admin/login?next=https://evil.example.com",
+                  data={"password": "test1234"})
+    assert resp.status_code == 302
+    assert "evil.example.com" not in resp.headers["Location"]
+    assert resp.headers["Location"].endswith("/admin/")
+    print("PASS  로그인 후 이동 주소 제한")
 
 
 def test_setup_checklist_guides_first_day():
@@ -663,6 +744,7 @@ def run_all():
     test_pass_twelve_month_price()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
+    test_order_both_packages_at_once()
     test_order_rejects_unknown_coupon()
     test_request_needs_no_passage()
     test_custom_request_accepted()
@@ -672,7 +754,10 @@ def run_all():
     test_order_to_download_flow()
     test_download_revoke_and_limit()
     test_receipt_request_and_sales()
-    test_admin_requires_login()
+    test_every_admin_route_is_locked()
+    test_login_blocks_repeated_guesses()
+    test_admin_not_indexed_and_login_is_standalone()
+    test_login_next_cannot_leave_admin()
     test_admin_pages_open()
     test_setup_checklist_guides_first_day()
     test_admin_creates_product_visible_on_site()

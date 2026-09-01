@@ -35,6 +35,33 @@ ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 MANAGED_FILES = ["site.json", "products.json", "notices.json", "materials.json"]
 
+# 비밀번호를 여러 번 틀리면 잠시 막습니다. (한 대에서 무한정 찍어 보지 못하게)
+LOGIN_MAX_TRIES = 8
+LOGIN_BLOCK_MINUTES = 15
+_login_tries: dict[str, list] = {}
+
+
+def _client_ip() -> str:
+    """Render 같은 곳은 앞단을 거치므로 원래 주소가 헤더에 담겨 옵니다."""
+    forwarded = request.headers.get("X-Forwarded-For", "")
+    return (forwarded.split(",")[0].strip() if forwarded else request.remote_addr) or "?"
+
+
+def login_blocked() -> int:
+    """남은 차단 시간(분). 0이면 막히지 않은 상태입니다."""
+    now = sc.now_kst()
+    tries = [t for t in _login_tries.get(_client_ip(), [])
+             if (now - t).total_seconds() < LOGIN_BLOCK_MINUTES * 60]
+    _login_tries[_client_ip()] = tries
+    if len(tries) < LOGIN_MAX_TRIES:
+        return 0
+    left = LOGIN_BLOCK_MINUTES * 60 - (now - tries[0]).total_seconds()
+    return max(1, int(left // 60) + 1)
+
+
+def note_login_failure() -> None:
+    _login_tries.setdefault(_client_ip(), []).append(sc.now_kst())
+
 
 # ---------------------------------------------------------------------------
 # 로그인
@@ -50,23 +77,49 @@ def guard():
         return None
     if not logged_in():
         return redirect(url_for("admin.login", next=request.path))
+    # 관리자 화면은 어떤 경우에도 브라우저·검색엔진이 저장하지 않게 합니다.
     return None
+
+
+@admin_bp.after_request
+def no_store(resp):
+    resp.headers["X-Robots-Tag"] = "noindex, nofollow"
+    resp.headers["Cache-Control"] = "no-store, max-age=0"
+    resp.headers["X-Frame-Options"] = "DENY"          # 다른 사이트에 끼워 넣지 못하게
+    return resp
+
+
+def safe_next(target: str) -> str:
+    """로그인 뒤 돌아갈 주소. 우리 관리자 화면 안으로만 보냅니다."""
+    if target and target.startswith("/admin") and "//" not in target:
+        return target
+    return url_for("admin.dashboard")
 
 
 @admin_bp.route("/login", methods=["GET", "POST"])
 def login():
     if not ADMIN_PASSWORD:
-        return render_template("admin/login.html", locked=True, error=None)
+        return render_template("admin/login.html", locked=True, error=None, blocked=0)
+
+    blocked = login_blocked()
     if request.method == "POST":
+        if blocked:
+            return render_template("admin/login.html", locked=False, blocked=blocked,
+                                   error=f"비밀번호를 여러 번 틀렸습니다. {blocked}분 뒤에 다시 시도해 주세요."), 429
         # 한글 비밀번호나 한글 입력이 들어와도 터지지 않도록 바이트로 비교합니다.
         typed = request.form.get("password", "").encode("utf-8")
         if secrets.compare_digest(typed, ADMIN_PASSWORD.encode("utf-8")):
+            session.clear()                      # 예전 흔적을 지우고 새로 시작
             session["admin"] = True
             session.permanent = True
-            return redirect(request.args.get("next") or url_for("admin.dashboard"))
-        return render_template("admin/login.html", locked=False,
-                               error="비밀번호가 맞지 않습니다."), 401
-    return render_template("admin/login.html", locked=False, error=None)
+            _login_tries.pop(_client_ip(), None)
+            return redirect(safe_next(request.args.get("next", "")))
+        note_login_failure()
+        left = LOGIN_MAX_TRIES - len(_login_tries.get(_client_ip(), []))
+        hint = f" ({left}번 더 틀리면 {LOGIN_BLOCK_MINUTES}분 동안 막힙니다)" if left <= 3 else ""
+        return render_template("admin/login.html", locked=False, blocked=0,
+                               error="비밀번호가 맞지 않습니다." + hint), 401
+    return render_template("admin/login.html", locked=False, blocked=blocked, error=None)
 
 
 @admin_bp.route("/logout")
@@ -287,12 +340,22 @@ def order_deliver(order_id):
     if not slug:
         flash("이 주문에는 상품이 없어 링크를 낼 수 없습니다.", "err")
         return redirect(request.referrer or url_for("admin.orders"))
-    if not sc.product_files(slug):
-        flash("이 상품에 올려 둔 파일이 없습니다. 먼저 상품 > 파일에서 올려 주세요.", "err")
-        return redirect(url_for("admin.product_files", slug=slug))
 
-    token = sc.issue_download(row, slug, row["product_name"])
-    link = url_for("download_page", token=token, _external=True)
+    # 짝 패키지를 함께 사신 경우 두 상품 모두 링크를 냅니다.
+    slugs = [slug] + [x for x in (row["extra_slugs"] or "").split(",") if x]
+    catalog = {p["slug"]: p for p in sc.load_raw_catalog()["products"]}
+    missing = [x for x in slugs if not sc.product_files(x)]
+    if missing:
+        flash(f"'{catalog.get(missing[0], {}).get('name', missing[0])}' 에 올려 둔 파일이 없습니다. "
+              f"먼저 상품 > 파일에서 올려 주세요.", "err")
+        return redirect(url_for("admin.product_files", slug=missing[0]))
+
+    links = []
+    for one in slugs:
+        name = catalog.get(one, {}).get("name", one)
+        token = sc.issue_download(row, one, name)
+        links.append(f"· {name}\n  " + url_for("download_page", token=token, _external=True))
+    link = "\n".join(links)
     sent = sc.send_mail(
         f"[Ortica영어] 주문하신 자료입니다 ({row['order_no']})",
         "\n".join([f"{row['name']}님, 입금 확인했습니다. 감사합니다.", "",

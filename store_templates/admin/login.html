@@ -1,32 +1,55 @@
-{% extends "base.html" %}
-{% block title %}관리자 로그인 · {{ site.brand }}{% endblock %}
-{% block body %}
-<section class="section">
-  <div class="wrap narrow">
-    <div class="section-head"><h2>관리자 로그인</h2></div>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>관리자 로그인</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+<style>
+  body{background:#12261e; display:flex; align-items:center; justify-content:center;
+       min-height:100vh; padding:24px;}
+  .login-box{width:100%; max-width:400px;}
+  .login-brand{color:#fff; font-size:20px; font-weight:800; text-align:center; margin-bottom:6px;}
+  .login-sub{color:#8fae9f; font-size:14px; text-align:center; margin-bottom:22px;}
+  .login-card{background:#fff; border-radius:14px; padding:28px;}
+  .login-foot{text-align:center; margin-top:18px;}
+  .login-foot a{color:#8fae9f; font-size:13.5px; text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="login-box">
+  <div class="login-brand">🛠 관리자 화면</div>
+  <div class="login-sub">{{ site.brand }}</div>
+
+  <div class="login-card">
     {% if locked %}
-      <div class="alert alert-error">
-        <b>관리자 비밀번호가 설정되어 있지 않습니다.</b>
-        <p class="mb-0" style="margin-top:8px;">
-          서버를 켤 때 비밀번호를 정해 주셔야 합니다.<br>
-          내 컴퓨터라면 이렇게 실행하세요 →
-          <code>ADMIN_PASSWORD=원하는비번 python store.py</code><br>
+      <div class="flash flash-err" style="margin-bottom:0;">
+        <span>⚠️</span>
+        <span><b>관리자 비밀번호가 설정되어 있지 않습니다.</b><br>
+          서버를 켤 때 비밀번호를 정해 주셔야 합니다.<br><br>
+          내 컴퓨터라면 →<br><code>ADMIN_PASSWORD=원하는비번 python store.py</code><br><br>
           인터넷에 올렸다면 Render 대시보드에서 <code>ADMIN_PASSWORD</code> 를 넣어 주세요.
-          (자세한 방법은 STORE.md)
-        </p>
+        </span>
       </div>
     {% else %}
-      {% if error %}<div class="alert alert-error">{{ error }}</div>{% endif %}
-      <div class="form-card">
-        <form method="post">
-          <div class="field">
-            <label for="password">비밀번호</label>
-            <input type="password" id="password" name="password" autofocus required>
-          </div>
-          <button class="btn btn-primary btn-block" type="submit">로그인</button>
-        </form>
-      </div>
+      {% if error %}<div class="flash flash-err"><span>⚠️</span><span>{{ error }}</span></div>{% endif %}
+      <form method="post">
+        <div class="adm-field">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" name="password" autofocus required
+                 autocomplete="current-password" {{ 'disabled' if blocked }}>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" {{ 'disabled' if blocked }}>
+          {{ '잠시 막혔습니다' if blocked else '로그인' }}</button>
+      </form>
     {% endif %}
   </div>
-</section>
-{% endblock %}
+
+  <div class="login-foot">
+    <a href="{{ url_for('home') }}">← 고객 화면으로 돌아가기</a>
+  </div>
+</div>
+</body>
+</html>

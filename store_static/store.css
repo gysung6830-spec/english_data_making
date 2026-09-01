@@ -547,3 +547,26 @@ input[type=file]{
 .dl-ico{font-size:20px;}
 .dl-name{font-weight:700; flex:1; min-width:0; word-break:break-all;}
 .dl-size{color:var(--muted); font-size:13.5px; white-space:nowrap;}
+
+/* ---------- 짝 패키지 함께 담기 ---------- */
+.also-box{
+  display:flex; align-items:center; gap:12px; cursor:pointer; margin-bottom:22px;
+  border:2px solid var(--line-strong); border-radius:12px; padding:16px 18px;
+  background:#fff; transition:.15s;
+}
+.also-box:hover{border-color:var(--brand);}
+.also-box.on{border-color:var(--brand); background:var(--brand-soft);}
+.also-box input{width:19px; height:19px; accent-color:var(--brand); flex:0 0 auto;}
+.also-box > span{flex:1; min-width:0;}
+.also-box b{display:block; font-size:15.5px;}
+.also-box small{display:block; color:var(--ink-2); font-size:13.5px; line-height:1.5; margin-top:4px;}
+.also-box em{font-style:normal; font-weight:800; font-size:16px; white-space:nowrap;}
+
+/* 결제 금액 — 제출 직전에 크게 한 번 더 */
+.total-box{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:var(--brand-soft); border:1px solid #cfe4d9; border-radius:12px;
+  padding:16px 20px; margin:6px 0 16px;
+}
+.total-box span{font-weight:700; color:var(--brand-dark);}
+.total-box b{font-size:24px; font-weight:800; letter-spacing:-.02em; color:var(--brand-dark);}

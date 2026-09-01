@@ -105,7 +105,9 @@
       <div class="pair-buy">
         <div class="price">{{ sibling.price|won }}</div>
         <a class="btn btn-primary btn-block"
-           href="{{ url_for('product_detail', slug=sibling.slug) }}">보러 가기</a>
+           href="{{ url_for('order', slug=p.slug) }}#also">둘 다 한 번에 주문</a>
+        <a class="btn btn-ghost btn-block" style="margin-top:8px;"
+           href="{{ url_for('product_detail', slug=sibling.slug) }}">먼저 살펴보기</a>
       </div>
     </div>
   </div>

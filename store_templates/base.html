@@ -8,6 +8,7 @@
 <meta property="og:title" content="{{ self.title() }}">
 <meta property="og:description" content="{{ self.desc() }}">
 <meta property="og:type" content="website">
+{% block robots %}{% endblock %}
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
 <link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
 </head>

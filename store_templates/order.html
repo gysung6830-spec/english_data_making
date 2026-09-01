@@ -17,22 +17,26 @@
     {% endif %}
 
     <div class="form-card">
-      <div class="alert alert-info" style="margin-bottom:24px;">
+      <div class="alert alert-info" style="margin-bottom:20px;">
         <b>{{ p.name }}</b><br>
-        {{ p.subtitle }} · 단가 <b>{{ p.price|won }}</b>
+        {{ p.subtitle }} · <b>{{ p.price|won }}</b>
       </div>
+
+      {% if sibling %}
+        {% set spkg = package_map.get(sibling.package) %}
+        <label class="also-box {{ 'on' if form.also }}">
+          <input type="checkbox" name="also" value="1" id="also" {{ 'checked' if form.also }}>
+          <span>
+            <b>{{ spkg.name if spkg else sibling.name }}도 함께 받기</b>
+            <small>같은 교재의 {{ spkg.tagline if spkg else '' }}.
+              따로 주문하시면 입금을 두 번 하셔야 합니다.</small>
+          </span>
+          <em>+{{ sibling.price|won }}</em>
+        </label>
+      {% endif %}
 
       <form method="post" action="{{ url_for('order') }}">
         <input type="hidden" name="slug" value="{{ p.slug }}">
-
-        <div class="field">
-          <label for="quantity">수량</label>
-          <input type="number" id="quantity" name="quantity" min="1" max="99"
-                 value="{{ form.quantity or 1 }}">
-          <p class="muted mb-0" style="font-size:14px;margin-top:8px;">
-            결제하실 금액: <b id="total">{{ p.price|won }}</b>
-          </p>
-        </div>
 
         <div class="field">
           <label for="name">성함<span class="req">*</span></label>
@@ -106,6 +110,11 @@
           </label>
         </div>
 
+        <div class="total-box">
+          <span>결제하실 금액</span>
+          <b id="total">{{ p.price|won }}</b>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block">주문서 제출하기</button>
         <p class="muted center mb-0" style="font-size:13px;margin-top:12px;">
           제출해도 바로 결제되지 않습니다. 다음 화면에서 입금 계좌를 안내해 드립니다.
@@ -118,16 +127,18 @@
 <script>
   // 수량·쿠폰을 바꾸면 결제 금액을 바로 보여 줍니다.
   (function () {
-    var unit = {{ p.price|int }};
-    var qty = document.getElementById('quantity');
+    var basePrice = {{ p.price|int }};
+    var alsoPrice = {{ (sibling.price if sibling else 0)|int }};
+    var also = document.getElementById('also');
+    function unitPrice() {
+      return basePrice + (also && also.checked ? alsoPrice : 0);
+    }
     var out = document.getElementById('total');
     var coupon = document.getElementById('coupon');
     var msg = document.getElementById('coupon-msg');
     var timer = null;
 
-    function subtotal() {
-      return unit * Math.max(1, Math.min(99, parseInt(qty.value, 10) || 1));
-    }
+    function subtotal() { return unitPrice(); }
     function show(amount) { out.textContent = amount.toLocaleString('ko-KR') + '원'; }
 
     function checkCoupon() {
@@ -154,7 +165,12 @@
     rk.addEventListener('change', syncReceipt);
     syncReceipt();
 
-    qty.addEventListener('input', checkCoupon);
+    if (also) {
+      also.addEventListener('change', function () {
+        also.closest('.also-box').classList.toggle('on', also.checked);
+        checkCoupon();
+      });
+    }
     coupon.addEventListener('input', function () {
       clearTimeout(timer);
       timer = setTimeout(checkCoupon, 400);   // 타이핑이 멈추면 확인합니다

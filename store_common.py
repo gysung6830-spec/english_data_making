@@ -296,6 +296,8 @@ MIGRATIONS = [
     ("orders", "receipt_kind", "TEXT"),
     ("orders", "receipt_no", "TEXT"),
     ("orders", "receipt_done", "INTEGER NOT NULL DEFAULT 0"),
+    # 같은 교재의 짝 패키지를 함께 주문했을 때, 그 상품 주소 이름
+    ("orders", "extra_slugs", "TEXT"),
 ]
 
 
