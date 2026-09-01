@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{% from "_macros.html" import product_card, book_card with context %}
-{% block title %}자료 목록 · {{ site.brand }}{% endblock %}
+{% from "_macros.html" import product_card, book_group with context %}
+{% block title %}자료 목록 — 교재·회차별 지문분석지 · 변형문제 | {{ site.brand }}{% endblock %}
+{% block desc %}교재·회차마다 지문 분석 패키지와 문제 패키지 두 가지로 판매합니다. 학년·교재로 골라 보세요.{% endblock %}
 
 {% block body %}
 <section class="section">
   <div class="wrap">
     <div class="section-head">
       <h2>자료 목록</h2>
-      <p>교재·회차마다 <b>지문 분석 패키지</b>와 <b>문제 패키지</b> 두 가지가 있습니다.
-        각각 어떤 자료가 들어가는지는 카드에 적어 두었고,
+      <p>교재 한 권마다 <b>지문 분석 패키지</b>와 <b>문제 패키지</b> 두 가지가 있습니다.
+        어떤 자료가 들어가는지는 카드에 적어 두었고,
         자료 하나하나는 <a href="{{ url_for('lineup') }}"><b>오르티카 라인업</b></a>에서 보실 수 있습니다.</p>
     </div>
 
@@ -17,48 +18,68 @@
              placeholder="교재 이름으로 찾기 — 예: 능률, 6월 모평, 수능특강">
       {% if selected %}<input type="hidden" name="category" value="{{ selected }}">{% endif %}
       {% if selected_package %}<input type="hidden" name="package" value="{{ selected_package }}">{% endif %}
+      {% if grade %}<input type="hidden" name="grade" value="{{ grade }}">{% endif %}
       <button class="btn btn-primary" type="submit">찾기</button>
       {% if q %}<a class="btn btn-ghost" href="{{ url_for('products') }}">지우기</a>{% endif %}
     </form>
 
     {% if q %}
       <p class="search-note"><b>'{{ q }}'</b> 로 찾은 결과 —
-        교재 {{ books|length }}개 · 자료 {{ items|length }}개</p>
+        교재 {{ groups|length }}권 · 자료 {{ items|length }}개</p>
     {% endif %}
 
     <div class="filters">
+      <span class="filter-label">분류</span>
       <a class="filter {{ 'on' if not selected }}"
-         href="{{ url_for('products', package=selected_package, q=q) }}">전체</a>
+         href="{{ url_for('products', package=selected_package, grade=grade, order=order, q=q) }}">전체</a>
       {% for c in categories %}
         <a class="filter {{ 'on' if selected == c.id }}"
-           href="{{ url_for('products', category=c.id, package=selected_package, q=q) }}">{{ c.name }}</a>
+           href="{{ url_for('products', category=c.id, package=selected_package, grade=grade, order=order, q=q) }}">{{ c.name }}</a>
       {% endfor %}
     </div>
 
-    <div class="filters pkg-filters">
-      <a class="filter {{ 'on' if not selected_package }}"
-         href="{{ url_for('products', category=selected, q=q) }}">두 가지 모두</a>
-      {% for pkg in packages %}
-        <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
-           href="{{ url_for('products', category=selected, package=pkg.id, q=q) }}">{{ pkg.name }}</a>
-      {% endfor %}
-    </div>
-
-    {% if books %}
-      <div class="subhead">
-        <h3>교재로 찾기</h3>
-        <p class="muted mb-0">쓰시는 교재를 고르면 그 교재의 자료만 모아서 보여 드립니다.</p>
+    {% if grades %}
+      <div class="filters">
+        <span class="filter-label">학년</span>
+        <a class="filter {{ 'on' if not grade }}"
+           href="{{ url_for('products', category=selected, package=selected_package, order=order, q=q) }}">전체</a>
+        {% for g in grades %}
+          <a class="filter {{ 'on' if grade == g }}"
+             href="{{ url_for('products', category=selected, package=selected_package, grade=g, order=order, q=q) }}">{{ g }}</a>
+        {% endfor %}
       </div>
-      <div class="grid grid-4" style="margin-bottom:40px;">
-        {% for b in books %}{{ book_card(b) }}{% endfor %}
-      </div>
-      <div class="subhead"><h3>전체 자료</h3></div>
     {% endif %}
 
-    {% if items %}
-      <div class="grid grid-3">
-        {% for p in items %}{{ product_card(p) }}{% endfor %}
+    <div class="filters pkg-filters">
+      <span class="filter-label">패키지</span>
+      <a class="filter {{ 'on' if not selected_package }}"
+         href="{{ url_for('products', category=selected, grade=grade, order=order, q=q) }}">두 가지 모두</a>
+      {% for pkg in packages %}
+        <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
+           href="{{ url_for('products', category=selected, package=pkg.id, grade=grade, order=order, q=q) }}">{{ pkg.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="filters">
+      <span class="filter-label">정렬</span>
+      {% for oid, oname in orders.items() %}
+        <a class="filter {{ 'on' if order == oid }}"
+           href="{{ url_for('products', category=selected, package=selected_package, grade=grade, order=oid, q=q) }}">{{ oname }}</a>
+      {% endfor %}
+    </div>
+
+    {% if groups or loose %}
+      <p class="search-note" style="margin-top:20px;">
+        교재 {{ groups|length }}권 · 자료 {{ items|length }}개</p>
+      <div class="group-grid">
+        {% for g in groups %}{{ book_group(g) }}{% endfor %}
       </div>
+      {% if loose %}
+        <div class="subhead" style="margin-top:36px;"><h3>낱개 자료</h3></div>
+        <div class="grid grid-3">
+          {% for p in loose %}{{ product_card(p) }}{% endfor %}
+        </div>
+      {% endif %}
     {% else %}
       <div class="card center">
         {% if q %}
@@ -66,9 +87,13 @@
           <p class="muted">아직 안 만든 교재일 수 있습니다.
             <b>교재 이름만 적어 두시면</b> 만든 뒤 연락드리겠습니다.</p>
         {% else %}
-          <p>이 분류에는 아직 등록된 자료가 없습니다.</p>
+          <p>이 조건에는 아직 등록된 자료가 없습니다.</p>
+          <p class="muted">거르는 조건을 지우고 전체를 보시거나, 찾으시는 교재를 적어 두세요.</p>
         {% endif %}
-        <a class="btn btn-primary" href="{{ url_for('custom') }}">교재 요청하기</a>
+        <div class="hero-actions" style="justify-content:center; margin-top:16px;">
+          <a class="btn btn-primary" href="{{ url_for('custom') }}">교재 요청하기</a>
+          <a class="btn btn-ghost" href="{{ url_for('products') }}">조건 지우고 전체 보기</a>
+        </div>
       </div>
     {% endif %}
 

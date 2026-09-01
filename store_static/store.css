@@ -620,6 +620,53 @@ input[type=file]{
 }
 .search-note{color:var(--ink-2); font-size:14.5px; margin:-8px 0 18px;}
 
+/* ---------------------------------------------------------------------------
+   자료 목록 — 교재 한 권을 카드 한 장으로 (두 패키지를 나란히)
+   --------------------------------------------------------------------------- */
+.filters{align-items:center;}
+.filter-label{
+  font-size:12.5px; font-weight:700; color:var(--muted);
+  margin-right:2px; align-self:center; min-width:34px;
+}
+
+.group-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px;}
+
+.book-group{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:20px; display:flex; flex-direction:column;
+}
+.bg-head{padding-bottom:14px; border-bottom:1px solid var(--line); margin-bottom:14px;}
+.bg-pub{font-size:12.5px; font-weight:700; color:var(--brand); margin-bottom:5px;}
+.bg-head h3{font-size:17.5px; letter-spacing:-.02em; line-height:1.4; margin-bottom:10px;}
+.bg-head h3 a{color:var(--ink);}
+.bg-head h3 a:hover{color:var(--brand);}
+
+.bg-picks{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; flex:1;}
+.bg-pick{
+  display:flex; flex-direction:column; gap:8px; padding:14px;
+  border:1px solid var(--line); border-radius:11px; background:#fbfaf7;
+  transition:border-color .15s, background .15s;
+}
+.bg-pick:hover{border-color:var(--brand); background:#fff;}
+.bg-pick-name{font-size:14.5px; font-weight:800; letter-spacing:-.02em; color:var(--ink);}
+.bg-pick.pkg-analysis .bg-pick-name{color:#1e4bb8;}
+.bg-pick.pkg-problem .bg-pick-name{color:#a3450f;}
+.bg-pick-mats{display:flex; flex-wrap:wrap; gap:5px;}
+.bg-pick-mats .mat-chip{font-size:11px; padding:2px 7px;}
+.bg-pick-foot{
+  margin-top:auto; padding-top:8px; display:flex; align-items:baseline;
+  gap:7px; flex-wrap:wrap;
+}
+.bg-pick-foot .price{font-size:17px;}
+.bg-go{margin-left:auto; font-size:13px; font-weight:700; color:var(--brand);}
+
+@media (max-width:860px){
+  .group-grid{grid-template-columns:1fr;}
+}
+@media (max-width:420px){
+  .bg-picks{grid-template-columns:1fr;}
+}
+
 /* 홈의 무료 자료 칸 */
 .free-tile{
   display:flex; flex-direction:column; gap:7px; background:#fff;

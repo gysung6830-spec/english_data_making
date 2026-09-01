@@ -148,13 +148,42 @@ def test_sibling_package_cross_sell():
 
 
 def test_package_filter():
+    """패키지로 거르면 목록 카드에 그쪽 갈래만 남아야 합니다."""
     only_analysis = body(client().get("/products?package=analysis"))
-    assert "지문 분석 패키지" in only_analysis
-    assert "문제 패키지" not in only_analysis.split("전체 자료")[-1]
+    assert "bg-pick pkg-analysis" in only_analysis
+    assert "bg-pick pkg-problem" not in only_analysis
 
     only_problem = body(client().get("/products?package=problem"))
-    assert "문제 패키지" in only_problem
+    assert "bg-pick pkg-problem" in only_problem
+    assert "bg-pick pkg-analysis" not in only_problem
     print("PASS  목록에서 패키지로 거르기")
+
+
+def test_products_grouped_by_book():
+    """같은 교재의 두 패키지가 카드 한 장에 나란히 묶여야 합니다."""
+    text = body(client().get("/products"))
+    # 교재 이름은 한 번만, 그 아래 패키지 두 개
+    assert text.count("능률(김성곤) 공통영어 1") == 1
+    head = text.split("찾으시는 교재가 없나요")[0]
+    assert head.count('class="book-group"') >= 5
+    assert "지문 분석 패키지" in head and "문제 패키지" in head
+    print("PASS  자료 목록이 교재별로 묶임")
+
+
+def test_grade_filter_and_sort():
+    """학년 버튼과 정렬 버튼이 실제로 걸러 주고 줄 세워야 합니다."""
+    go1 = body(client().get("/products?grade=고1"))
+    assert "능률(김성곤) 공통영어 1" in go1          # 고1 교재
+    assert "2026 수능특강 영어" not in go1           # 고3 교재는 빠져야 합니다
+
+    import re
+    cheap = body(client().get("/products?order=price"))
+    # 교재 카드마다 가장 싼 값 = 첫 번째 가격. 그 값이 오름차순이어야 합니다.
+    cards = cheap.split('class="book-group"')[1:]
+    firsts = [int(re.search(r'<span class="price">([\d,]+)원</span>', c)
+                  .group(1).replace(",", "")) for c in cards if "price" in c]
+    assert firsts == sorted(firsts), firsts
+    print("PASS  학년 거르기 · 가격순 정렬")
 
 
 def test_book_page_splits_lanes():
@@ -902,6 +931,8 @@ def run_all():
     test_two_packages_per_book()
     test_sibling_package_cross_sell()
     test_package_filter()
+    test_products_grouped_by_book()
+    test_grade_filter_and_sort()
     test_book_page_splits_lanes()
     test_search_finds_by_publisher_and_book()
     test_share_and_branding()
