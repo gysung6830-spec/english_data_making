@@ -139,6 +139,8 @@ ul{margin:0; padding-left:1.1em;}
 /* ---------- 섹션 ---------- */
 .section{padding:64px 0;}
 .section + .section{border-top:1px solid var(--line);}
+.section-soft{background:var(--brand-soft);}
+.section-soft + .section{border-top:0;}
 .section-head{margin-bottom:32px;}
 .section-head h2{font-size:28px; font-weight:800; margin-bottom:8px;}
 .section-head p{color:var(--ink-2); margin:0;}
@@ -617,6 +619,74 @@ input[type=file]{
   outline:none; border-color:var(--brand); box-shadow:0 0 0 3px rgba(20,107,74,.12);
 }
 .search-note{color:var(--ink-2); font-size:14.5px; margin:-8px 0 18px;}
+
+/* 홈의 무료 자료 칸 */
+.free-tile{
+  display:flex; flex-direction:column; gap:7px; background:#fff;
+  border:1px solid #cfe4d9; border-radius:var(--radius); padding:20px;
+  transition:border-color .15s, transform .15s;
+}
+.free-tile:hover{border-color:var(--brand); transform:translateY(-2px);}
+.free-tile .badge{align-self:flex-start;}
+.free-tile b{font-size:16.5px; letter-spacing:-.02em; line-height:1.4;}
+.free-tile small{color:var(--ink-2); font-size:14px; line-height:1.55;}
+.free-tile-go{margin-top:auto; padding-top:10px; color:var(--brand);
+  font-weight:700; font-size:14px;}
+
+/* ---------------------------------------------------------------------------
+   무료 자료실 — 회차마다 뿌리는 자료
+   --------------------------------------------------------------------------- */
+.free-card .free-way{
+  margin-top:auto; padding:10px 0 12px; font-size:13.5px;
+  color:var(--brand-dark); font-weight:700;
+}
+.chip-brand{background:var(--brand-soft); border-color:#cfe4d9; color:var(--brand-dark);}
+
+.back-link{
+  display:inline-block; margin-bottom:18px; font-size:14px;
+  color:var(--muted); font-weight:600;
+}
+.back-link:hover{color:var(--brand);}
+
+.free-head{margin-bottom:22px;}
+.free-head h1{
+  font-size:32px; font-weight:800; letter-spacing:-.03em;
+  margin:10px 0 8px; line-height:1.32;
+}
+.free-head .lead{font-size:17px; color:var(--ink-2); margin-bottom:14px;}
+
+.free-shot{
+  width:100%; border:1px solid var(--line); border-radius:var(--radius);
+  margin-bottom:22px; background:#fff;
+}
+.free-body p{margin-bottom:10px;}
+.free-body p:last-child{margin-bottom:0;}
+
+.get-box{margin-top:22px;}
+.get-box h2{font-size:20px; font-weight:800; margin-bottom:8px; letter-spacing:-.02em;}
+.dl-go{color:var(--brand); font-weight:700; font-size:14px; white-space:nowrap;}
+
+.coming-list{display:grid; gap:10px;}
+.coming-item{
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:14px 16px; display:flex; gap:12px; flex-wrap:wrap; align-items:baseline;
+}
+.coming-item b{font-size:15px;}
+.coming-item .muted{font-size:14px;}
+
+.notify-box .searchbar{margin-bottom:0;}
+.notify-box input[type=email]{
+  flex:1; min-width:220px; padding:12px 16px; font-size:15.5px;
+  border:1px solid var(--line-strong); border-radius:10px; font-family:inherit;
+  background:#fff; color:var(--ink);
+}
+.notify-box input[type=email]:focus{
+  outline:none; border-color:var(--brand); box-shadow:0 0 0 3px rgba(20,107,74,.12);
+}
+
+@media (max-width:640px){
+  .free-head h1{font-size:26px;}
+}
 
 /* ---------- 폰에서 접히는 메뉴 ---------- */
 .nav-toggle{display:none;}

@@ -204,6 +204,16 @@
 .pick-btn.clear{color:var(--muted);}
 .pick-label{font-size:12.5px; color:var(--muted); align-self:center; margin-right:2px;}
 
+/* 큰 고르기 버튼 — 둘 중 하나를 고르는 자리 */
+.pick-big{gap:10px;}
+.pick-big .pick-btn{
+  flex:1; min-width:240px; display:flex; flex-direction:column; align-items:flex-start;
+  gap:4px; padding:14px 16px; font-size:15px; font-weight:700; text-align:left;
+  border-radius:11px; line-height:1.4;
+}
+.pick-big .pick-btn small{font-weight:400; font-size:13px; color:var(--muted); line-height:1.5;}
+.pick-big .pick-btn.on small{color:rgba(255,255,255,.85);}
+
 /* 자동으로 채워지는 칸은 회색으로 눕혀 두고, '직접 고치기'를 누르면 깨어납니다. */
 .auto-field input{background:#f4f2ed; color:var(--ink-2);}
 .auto-field.edit input{background:#fff; color:var(--ink);}

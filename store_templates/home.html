@@ -22,12 +22,12 @@
         압축 정리된 정리본부터 9개년 평가원분석을 통한 정교한 오답설계까지.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="{{ url_for('products') }}">자료 목록 보기</a>
-        <a class="btn btn-ghost" href="{{ url_for('lineup') }}">오르티카 라인업 보기</a>
+        <a class="btn btn-primary" href="{{ url_for('free') }}">무료 자료 받기</a>
+        <a class="btn btn-ghost" href="{{ url_for('products') }}">자료 목록 보기</a>
       </div>
       <p class="hero-note">
-        지금 {{ product_count }}종의 세트를 판매 중입니다 ·
-        <a href="{{ url_for('samples') }}"><b>무료 샘플</b></a>로 먼저 확인하시고,
+        회원가입 없이 바로 받으실 수 있습니다 ·
+        지금 {{ product_count }}종의 세트를 판매 중이고,
         원하는 교재가 없으면 <a href="{{ url_for('custom') }}"><b>이름만 적어</b></a> 두세요.
       </p>
     </div>
@@ -48,6 +48,37 @@
     </div>
   </div>
 </section>
+
+{% if free_items or free_ready_count %}
+<section class="section section-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">무료 자료실</span>
+      <h2>먼저 공짜로 써 보세요</h2>
+      <p>학력평가·모의고사 회차마다 <b>한줄해석 · 한줄영어 · 좌지문우해석</b>을 무료로 올립니다.
+        회원가입 없이 바로 받으실 수 있습니다.</p>
+    </div>
+    {% if free_items %}
+      <div class="grid grid-3">
+        {% for x in free_items %}
+          <a class="free-tile" href="{{ url_for('free_detail', slug=x.slug) }}">
+            <span class="badge badge-soft">무료</span>
+            <b>{{ x.title }}</b>
+            <small>{{ x.summary }}</small>
+            <span class="free-tile-go">받으러 가기 →</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="hero-actions" style="margin-top:22px;">
+      <a class="btn btn-primary" href="{{ url_for('free') }}">무료 자료 전부 보기</a>
+      {% if free_ready_count %}
+        <a class="btn btn-ghost" href="{{ url_for('samples') }}">유료 자료 샘플 보기</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <section class="section">
   <div class="wrap">

@@ -23,3 +23,7 @@ store_data/submissions/*
 # 판매하는 자료 원본 — 저장소에 올리면 누구나 받을 수 있으니 넣지 않습니다
 store_data/deliverables/*
 !store_data/deliverables/.gitkeep
+
+# 무료 자료실에 올린 파일 (용량이 크고 자료라서 코드에 넣지 않습니다)
+store_data/free/*
+!store_data/free/.gitkeep

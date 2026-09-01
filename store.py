@@ -23,7 +23,7 @@ import secrets
 from datetime import timedelta
 
 from flask import (Flask, abort, redirect, render_template, request,
-                   send_from_directory, url_for)
+                   send_from_directory, session, url_for)
 
 import store_common as sc
 from store_admin import admin_bp
@@ -129,10 +129,15 @@ def home():
         picked.append(book)
     groups = sc.grouped_materials()
     all_materials = [m for g in groups for m in g["items"]]
+    # 무료 자료 — 받을 수 있는 것만 최신 세 건
+    free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
+    free_ready_count = sum(1 for p in products
+                           if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists())
     return render_template("home.html", featured=featured, product_count=len(products),
                            books=picked[:8],
                            lineup_groups=groups, lineup_all=all_materials,
                            material_total=len(all_materials),
+                           free_items=free_items, free_ready_count=free_ready_count,
                            latest_notice=notices[0] if notices else None)
 
 
@@ -526,6 +531,114 @@ def pass_page():
 
 
 # ---------------------------------------------------------------------------
+# 무료 자료실 — 회차마다 뿌리는 자료
+# ---------------------------------------------------------------------------
+def free_unlocked(slug: str) -> bool:
+    """이메일을 적고 받기로 한 자료를, 그 손님이 이미 열어 두었는지."""
+    return slug in (session.get("free_ok") or [])
+
+
+def unlock_free(slug: str) -> None:
+    opened = list(session.get("free_ok") or [])
+    if slug not in opened:
+        opened.append(slug)
+        session["free_ok"] = opened[-40:]      # 쿠키가 무한정 커지지 않게
+
+
+@app.route("/free")
+def free():
+    """무료 자료실 — 회차·학년으로 걸러 봅니다."""
+    data = sc.load_freebies()
+    grade = sc.clean(request.args.get("grade"), 10)
+    kind = sc.clean(request.args.get("kind"), 20)
+
+    items = [x for x in data["items"] if sc.free_ready(x)]
+    # 거르기 버튼은 준비 중인 것까지 포함해 만들어 둡니다.
+    grades = sorted({x.get("grade", "") for x in data["items"] if x.get("grade")})
+    if grade:
+        items = [x for x in items if x.get("grade") == grade]
+    if kind in sc.FREE_KINDS:
+        items = [x for x in items if kind in (x.get("kinds") or [])]
+
+    # 파일이 아직 안 올라온 것은 '준비 중'으로 따로 모아 둡니다.
+    coming = [x for x in data["items"] if not sc.free_ready(x)]
+    samples = [pr for pr in sc.load_catalog()["products"]
+               if pr.get("sample_file") and (sc.SAMPLE_DIR / pr["sample_file"]).exists()]
+
+    return render_template("free.html", intro=data.get("intro", {}), items=items,
+                           coming=coming, grades=grades, grade=grade, kind=kind,
+                           kinds=sc.FREE_KINDS, sample_count=len(samples))
+
+
+@app.route("/free/<slug>")
+def free_detail(slug):
+    item = sc.find_freebie(slug)
+    if item is None:
+        abort(404)
+    catalog = sc.load_catalog()
+    related = [p for p in catalog["products"] if p.get("slug") in (item.get("related") or [])]
+    return render_template(
+        "free_detail.html", item=item, files=sc.free_files(slug),
+        links=sc.free_links(item), kind_names=sc.free_kind_names(item),
+        opened=(item.get("gate") != "email" or free_unlocked(slug)),
+        related=related, errors=[], form={})
+
+
+@app.route("/free/<slug>/get", methods=["POST"])
+def free_get(slug):
+    """이메일을 받고 내어 주는 자료 — 이메일만 적으면 바로 열립니다."""
+    item = sc.find_freebie(slug)
+    if item is None:
+        abort(404)
+
+    email = sc.clean(request.form.get("email"), 120)
+    errors = []
+    if sc.too_many_submits(request, "free"):
+        errors.append("잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다.")
+    elif not sc.EMAIL_RE.match(email):
+        errors.append("이메일 주소를 정확히 적어 주세요. 예: teacher@school.com")
+    elif not request.form.get("agree"):
+        errors.append("이메일 수집·이용에 동의해 주셔야 받으실 수 있습니다.")
+
+    if errors:
+        return render_template(
+            "free_detail.html", item=item, files=sc.free_files(slug),
+            links=sc.free_links(item), kind_names=sc.free_kind_names(item),
+            opened=False, related=[], errors=errors, form=request.form), 400
+
+    sc.add_lead(email, name=sc.clean(request.form.get("name"), 50), slug=slug,
+                title=item.get("title", ""), news=bool(request.form.get("news")))
+    unlock_free(slug)
+    return redirect(url_for("free_detail", slug=slug))
+
+
+@app.route("/free/notify", methods=["POST"])
+def free_notify():
+    """새 자료가 올라오면 알려 달라는 신청. 이메일 한 칸이면 끝입니다."""
+    email = sc.clean(request.form.get("email"), 120)
+    back = url_for("free", _anchor="notify")
+    if sc.too_many_submits(request, "free") or not sc.EMAIL_RE.match(email):
+        return redirect(back + "?bad=1")
+    sc.add_lead(email, slug="", title="새 자료 알림 신청", news=True)
+    return redirect(back + "?ok=1")
+
+
+@app.route("/free/<slug>/file/<int:index>")
+def free_file(slug, index):
+    """무료 자료 파일 내려받기."""
+    item = sc.find_freebie(slug)
+    if item is None:
+        abort(404)
+    if item.get("gate") == "email" and not free_unlocked(slug):
+        return redirect(url_for("free_detail", slug=slug))
+    files = sc.free_files(slug)
+    if not 0 <= index < len(files):
+        abort(404)
+    folder = sc.free_dir(slug)
+    return send_from_directory(folder, files[index]["name"], as_attachment=True)
+
+
+# ---------------------------------------------------------------------------
 # 샘플 · 안내 · 기타
 # ---------------------------------------------------------------------------
 @app.route("/samples")
@@ -601,10 +714,13 @@ def robots():
 def sitemap():
     """네이버·구글이 상품과 교재 페이지를 찾아가도록 목록을 내어 줍니다."""
     catalog = sc.load_catalog()
-    urls = [url_for("home", _external=True), url_for("lineup", _external=True),
+    urls = [url_for("home", _external=True), url_for("free", _external=True),
+            url_for("lineup", _external=True),
             url_for("products", _external=True), url_for("samples", _external=True),
             url_for("notice", _external=True), url_for("guide", _external=True),
             url_for("custom", _external=True), url_for("submit", _external=True)]
+    urls += [url_for("free_detail", slug=x["slug"], _external=True)
+             for x in sc.load_freebies()["items"]]
     urls += [url_for("book_detail", slug=b["slug"], _external=True) for b in catalog["books"]]
     urls += [url_for("product_detail", slug=p["slug"], _external=True)
              for p in catalog["products"]]

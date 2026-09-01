@@ -10,6 +10,8 @@
   /admin/coupons      할인 쿠폰 발급 · 현황
   /admin/products     상품 등록 · 수정
   /admin/books        교재 · 분류 등록
+  /admin/free         무료 자료실 — 회차 자료 올리기
+  /admin/leads        무료 자료 받아 가신 분 이메일 명단
   /admin/notices      공지 작성
   /admin/settings     가게 정보 · 계좌 · 프리패스 가격
   /admin/backup       백업 내려받기 · 되돌리기
@@ -33,7 +35,8 @@ admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 # 관리자 페이지 비밀번호 (환경변수). 없으면 관리자 페이지가 통째로 잠깁니다.
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
-MANAGED_FILES = ["site.json", "products.json", "notices.json", "materials.json"]
+MANAGED_FILES = ["site.json", "products.json", "notices.json",
+                 "materials.json", "freebies.json"]
 
 # 비밀번호를 여러 번 틀리면 잠시 막습니다. (한 대에서 무한정 찍어 보지 못하게)
 LOGIN_MAX_TRIES = 8
@@ -951,6 +954,223 @@ def material_form(mid):
 # ---------------------------------------------------------------------------
 # 공지
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# 무료 자료실 — 회차마다 뿌리는 자료 올리기
+# ---------------------------------------------------------------------------
+@admin_bp.route("/free")
+def free_list():
+    data = sc.load_raw_freebies()
+    items = sorted(data["items"], key=lambda x: (x.get("date", ""), x.get("slug", "")),
+                   reverse=True)
+    ready = {x["slug"]: len(sc.free_files(x["slug"])) + len(sc.free_links(x))
+             for x in items if x.get("slug")}
+    leads = sc.get_db().execute("SELECT COUNT(*) AS n FROM leads").fetchone()["n"]
+    return render_template("admin/free.html", items=items, ready=ready,
+                           kinds=sc.FREE_KINDS, intro=data.get("intro", {}),
+                           lead_count=leads,
+                           sample_count=len([x for x in items if x.get("sample")]))
+
+
+@admin_bp.route("/free/intro", methods=["POST"])
+def free_intro():
+    data = sc.load_raw_freebies()
+    data["intro"] = {
+        "eyebrow": sc.clean(request.form.get("eyebrow"), 40),
+        "headline": sc.clean(request.form.get("headline"), 120),
+        "lead": sc.clean(request.form.get("lead"), 400),
+        "note": sc.clean(request.form.get("note"), 300),
+    }
+    sc.save_freebies(data)
+    flash("무료 자료실 머리말을 저장했습니다.", "ok")
+    return redirect(url_for("admin.free_list"))
+
+
+def freebie_from_form(form, existing: dict | None = None) -> tuple[dict, list[str]]:
+    item = dict(existing or {})
+    errors = []
+    slug = sc.clean(form.get("slug"), 60).lower()
+    if not sc.SLUG_RE.match(slug):
+        errors.append("주소 이름(slug)은 영문 소문자·숫자·하이픈으로 3자 이상 적어 주세요. "
+                      "예: 2026-03-goh1-oneline")
+    item["slug"] = slug
+    item["title"] = sc.clean(form.get("title"), 120)
+    if not item["title"]:
+        errors.append("자료 이름을 적어 주세요.")
+    item["summary"] = sc.clean(form.get("summary"), 200)
+    item["grade"] = sc.clean(form.get("grade"), 20)
+    item["exam"] = sc.clean(form.get("exam"), 60)
+    item["kinds"] = [k for k in form.getlist("kinds") if k in sc.FREE_KINDS]
+    if not item["kinds"]:
+        errors.append("어떤 형식의 자료인지 하나 이상 골라 주세요.")
+    gate = sc.clean(form.get("gate"), 10)
+    item["gate"] = gate if gate in ("open", "email") else sc.suggested_gate(item["kinds"])
+    item["date"] = sc.clean(form.get("date"), 10) or sc.now_kst().date().isoformat()
+    item["body"] = sc.clean(form.get("body"), 3000)
+    item["image"] = sc.clean(form.get("image"), 120)
+    known = {p.get("slug") for p in sc.load_raw_catalog()["products"]}
+    item["related"] = [x for x in form.getlist("related") if x in known]
+    item["active"] = bool(form.get("active"))
+    return item, errors
+
+
+@admin_bp.route("/free/new", methods=["GET", "POST"])
+@admin_bp.route("/free/<slug>/edit", methods=["GET", "POST"])
+def free_form(slug=None):
+    data = sc.load_raw_freebies()
+    existing = next((x for x in data["items"] if x.get("slug") == slug), None)
+    if slug and existing is None:
+        abort(404)
+    catalog = sc.load_raw_catalog()
+
+    def page(item, errors, status=200):
+        return render_template("admin/free_form.html", x=item, errors=errors,
+                               is_new=existing is None, kinds=sc.FREE_KINDS,
+                               gated=sc.FREE_KINDS_GATED,
+                               products=catalog["products"],
+                               shots=[f.name for f in sorted((sc.ROOT / "store_static" / "free").glob("*"))
+                                      if f.is_file() and not f.name.startswith(".")]), status
+
+    if request.method == "GET":
+        blank = {"active": True, "gate": "open", "kinds": [], "related": [],
+                 "date": sc.now_kst().date().isoformat()}
+        body, _ = page(existing or blank, [])
+        return body
+
+    item, errors = freebie_from_form(request.form, existing)
+    if [x for x in data["items"] if x.get("slug") == item["slug"] and x is not existing]:
+        errors.append(f"주소 이름 '{item['slug']}' 은 이미 다른 자료가 쓰고 있습니다.")
+    if errors:
+        return page(item, errors, 400)
+
+    if existing is None:
+        data["items"].append(item)
+        flash(f"무료 자료 '{item['title']}' 을(를) 만들었습니다. 이제 파일을 올려 주세요.", "ok")
+        sc.save_freebies(data)
+        return redirect(url_for("admin.free_files", slug=item["slug"]))
+
+    data["items"] = [item if x is existing else x for x in data["items"]]
+    sc.save_freebies(data)
+    flash(f"무료 자료 '{item['title']}' 을(를) 저장했습니다.", "ok")
+    return redirect(url_for("admin.free_list"))
+
+
+@admin_bp.route("/free/<slug>/files", methods=["GET", "POST"])
+def free_files(slug):
+    """무료로 내어 줄 파일을 올립니다."""
+    item = sc.find_freebie(slug, raw=True)
+    if item is None:
+        abort(404)
+
+    if request.method == "POST":
+        folder = sc.free_dir(slug)
+        folder.mkdir(parents=True, exist_ok=True)
+        saved = 0
+        for upload in request.files.getlist("files"):
+            if not upload or not upload.filename:
+                continue
+            name = os.path.basename(upload.filename).replace("\\", "")
+            if os.path.splitext(name)[1].lower() not in sc.DELIVER_EXTS:
+                flash(f"'{name}' 은 올릴 수 없는 형식입니다. PDF·ZIP·한글 파일만 됩니다.", "err")
+                continue
+            upload.save(folder / name)
+            saved += 1
+        if saved:
+            flash(f"파일 {saved}개를 올렸습니다. 이제 손님이 받으실 수 있습니다.", "ok")
+        return redirect(url_for("admin.free_files", slug=slug))
+
+    return render_template("admin/free_files.html", x=item, files=sc.free_files(slug),
+                           links=sc.free_links(item))
+
+
+@admin_bp.route("/free/<slug>/links", methods=["POST"])
+def free_links_save(slug):
+    data = sc.load_raw_freebies()
+    item = next((x for x in data["items"] if x.get("slug") == slug), None)
+    if item is None:
+        abort(404)
+    links, bad = [], 0
+    for name, url in zip(request.form.getlist("link_name"), request.form.getlist("link_url")):
+        url = sc.clean(url, 500)
+        if not url:
+            continue
+        if not (url.startswith("http://") or url.startswith("https://")):
+            bad += 1
+            continue
+        links.append({"name": sc.clean(name, 120) or "자료 받기", "url": url})
+    item["file_links"] = links
+    sc.save_freebies(data)
+    flash(f"주소 {bad}개는 http 로 시작하지 않아 빼 두었습니다." if bad
+          else f"링크 {len(links)}개를 저장했습니다.", "err" if bad else "ok")
+    return redirect(url_for("admin.free_files", slug=slug))
+
+
+@admin_bp.route("/free/<slug>/files/delete", methods=["POST"])
+def free_file_delete(slug):
+    name = os.path.basename(sc.clean(request.form.get("name"), 200))
+    target = (sc.free_dir(slug) / name).resolve()
+    if sc.free_dir(slug).resolve() in target.parents and target.is_file():
+        target.unlink()
+        flash(f"'{name}' 을 지웠습니다.", "ok")
+    return redirect(url_for("admin.free_files", slug=slug))
+
+
+@admin_bp.route("/free/<slug>/toggle", methods=["POST"])
+def free_toggle(slug):
+    data = sc.load_raw_freebies()
+    for x in data["items"]:
+        if x.get("slug") == slug:
+            x["active"] = not x.get("active", True)
+            sc.save_freebies(data)
+            flash(f"'{x.get('title')}' 을(를) "
+                  f"{'보이게' if x['active'] else '숨김으로'} 바꿨습니다.", "ok")
+            break
+    return redirect(url_for("admin.free_list"))
+
+
+@admin_bp.route("/free/<slug>/delete", methods=["POST"])
+def free_delete(slug):
+    data = sc.load_raw_freebies()
+    gone = next((x for x in data["items"] if x.get("slug") == slug), None)
+    data["items"] = [x for x in data["items"] if x.get("slug") != slug]
+    sc.save_freebies(data)
+    if gone:
+        flash(f"'{gone.get('title')}' 을(를) 지웠습니다. 올린 파일은 그대로 남아 있습니다.", "ok")
+    return redirect(url_for("admin.free_list"))
+
+
+@admin_bp.route("/free/clear-samples", methods=["POST"])
+def free_clear_samples():
+    data = sc.load_raw_freebies()
+    gone = len([x for x in data["items"] if x.get("sample")])
+    data["items"] = [x for x in data["items"] if not x.get("sample")]
+    sc.save_freebies(data)
+    flash(f"예시 무료 자료 {gone}개를 지웠습니다.", "ok")
+    return redirect(url_for("admin.free_list"))
+
+
+@admin_bp.route("/leads")
+def leads():
+    """무료 자료를 받아 가시며 남긴 이메일 명단."""
+    rows = sc.lead_rows(500)
+    news = [r for r in rows if r["news"]]
+    return render_template("admin/leads.html", rows=rows, news_count=len(news))
+
+
+@admin_bp.route("/leads.csv")
+def leads_csv():
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow(["이메일", "성함", "받아 간 자료", "알림 신청", "남긴 날짜"])
+    for r in sc.lead_rows(5000):
+        writer.writerow([r["email"], r["name"] or "", r["title"] or "",
+                         "예" if r["news"] else "", r["created_at"]])
+    data = "\ufeff" + buf.getvalue()      # 엑셀에서 한글이 깨지지 않게
+    return data, 200, {
+        "Content-Type": "text/csv; charset=utf-8",
+        "Content-Disposition": "attachment; filename=ortica-emails.csv",
+    }
+
+
 @admin_bp.route("/notices")
 def notices():
     return render_template("admin/notices.html", **sc.load_notices())

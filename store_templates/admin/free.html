@@ -1,0 +1,139 @@
+{% extends "admin/base.html" %}
+{% block title %}무료 자료실{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <div class="row">
+    <div>
+      <h1>무료 자료실</h1>
+      <p>회차마다 뿌리는 자료입니다. 여기 올리면 <b>고객 화면 '무료 자료'</b> 에 바로 나옵니다.</p>
+    </div>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="{{ url_for('admin.free_form') }}">＋ 무료 자료 올리기</a>
+  </div>
+</div>
+
+<div class="steps-help">
+  <b>무료 자료가 왜 중요하냐면</b>
+  <ol>
+    <li><b>검색으로 들어오는 문</b>입니다. "고1 3월 학평 한줄해석" 같은 말로 찾아옵니다.</li>
+    <li>회차마다 하나씩 올리면 검색에 걸리는 페이지가 그만큼 늘어납니다.</li>
+    <li>공짜로 받아 본 분이 <b>같은 지문의 유료 자료</b>를 사십니다. 아래 '함께 보여 줄 유료 자료'를 꼭 골라 주세요.</li>
+  </ol>
+</div>
+
+{% if sample_count %}
+  <div class="panel" style="border:1px solid #f0d4c4; background:#fff8f4;">
+    <h2>⚠️ 아래 {{ sample_count }}개는 제가 만든 예시입니다</h2>
+    <div class="hint">파일이 없어서 손님 화면에는 '곧 올라옵니다' 로만 보입니다.</div>
+    <form method="post" action="{{ url_for('admin.free_clear_samples') }}"
+          onsubmit="return confirm('예시 무료 자료를 모두 지웁니다. 진행할까요?');">
+      <button class="btn btn-ghost btn-sm danger" type="submit">예시 한 번에 지우기</button>
+    </form>
+  </div>
+{% endif %}
+
+<div class="panel">
+  {% if items %}
+  <div class="wrapbox">
+    <table class="adm-table">
+      <thead><tr><th>날짜</th><th>자료</th><th>학년 · 회차</th><th>종류</th>
+                 <th>받는 방법</th><th>상태</th><th style="min-width:230px;"></th></tr></thead>
+      <tbody>
+      {% for x in items %}
+        <tr>
+          <td class="muted"><small>{{ x.date }}</small></td>
+          <td>
+            <b>{{ x.title }}</b>
+            {% if x.sample %}<span class="tag" style="background:#fdece2;color:#a3450f;">예시</span>{% endif %}
+            <br><small class="muted">{{ x.summary or '' }}</small>
+            <br><small class="code">{{ x.slug }}</small>
+          </td>
+          <td>
+            <small>{{ x.grade or '-' }}</small>
+            <br><small class="muted">{{ x.exam or '' }}</small>
+          </td>
+          <td>
+            {% for k in x.kinds %}
+              {% if k in kinds %}<span class="tag">{{ kinds[k] }}</span>{% endif %}
+            {% endfor %}
+          </td>
+          <td>
+            {% if x.gate == 'email' %}
+              <span class="tag" style="background:#eef2ff;color:#3730a3;">📧 이메일</span>
+            {% else %}<span class="tag tag-on">✅ 그냥</span>{% endif %}
+          </td>
+          <td>
+            {% if x.active is not defined or x.active %}
+              <span class="tag tag-on">보이는 중</span>
+            {% else %}<span class="tag tag-off">숨김</span>{% endif %}
+            {% if not ready.get(x.slug) %}
+              <br><span class="tag" style="background:#fdeceb;color:#b91c1c;">파일 없음</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="inline-form">
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_form', slug=x.slug) }}">고치기</a>
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.free_files', slug=x.slug) }}">
+                📁 파일{% if ready.get(x.slug) %} {{ ready[x.slug] }}{% endif %}</a>
+              <a class="btn btn-ghost btn-sm" href="{{ url_for('free_detail', slug=x.slug) }}"
+                 target="_blank" rel="noopener">보기 ↗</a>
+              <form method="post" action="{{ url_for('admin.free_toggle', slug=x.slug) }}">
+                <button class="btn btn-ghost btn-sm" type="submit">
+                  {{ '숨기기' if (x.active is not defined or x.active) else '다시 노출' }}</button>
+              </form>
+              <form method="post" action="{{ url_for('admin.free_delete', slug=x.slug) }}"
+                    onsubmit="return confirm('{{ x.title }} 을(를) 지울까요?');">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 올린 무료 자료가 없습니다.</b>
+      한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다.
+      <div style="margin-top:16px;">
+        <a class="btn btn-primary btn-sm" href="{{ url_for('admin.free_form') }}">첫 자료 올리기</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+<div class="panel">
+  <h2>받아 가신 분 이메일 {{ lead_count }}개</h2>
+  <div class="hint">이메일을 적고 받는 자료(직독직해 등)와 '알림 신청'으로 모인 명단입니다.</div>
+  <a class="btn btn-ghost btn-sm" href="{{ url_for('admin.leads') }}">명단 보기</a>
+</div>
+
+<div class="panel">
+  <h2>무료 자료실 머리말</h2>
+  <div class="hint">고객 화면 '무료 자료' 맨 위에 나오는 문구입니다.</div>
+  <form method="post" action="{{ url_for('admin.free_intro') }}">
+    <div class="adm-field">
+      <label for="eyebrow">작은 머리말</label>
+      <input type="text" id="eyebrow" name="eyebrow" value="{{ intro.eyebrow or '무료 자료실' }}">
+    </div>
+    <div class="adm-field">
+      <label for="headline">큰 제목</label>
+      <input type="text" id="headline" name="headline" value="{{ intro.headline or '' }}"
+             placeholder="회차마다 무료로 뿌립니다">
+    </div>
+    <div class="adm-field">
+      <label for="lead">설명</label>
+      <textarea id="lead" name="lead" rows="3">{{ intro.lead or '' }}</textarea>
+    </div>
+    <div class="adm-field">
+      <label for="note">덧붙이는 말</label>
+      <input type="text" id="note" name="note" value="{{ intro.note or '' }}">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">머리말 저장</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -8,6 +8,7 @@
   store_data/products.json  분류 · 교재 · 상품
   store_data/notices.json   공지 · 업데이트 일정
   store_data/store.db       주문 · 쿠폰 · 시험지 제출 (SQLite)
+  store_data/freebies.json  무료 자료실 (한줄해석 · 한줄영어 · 좌지문우해석 …)
   store_data/submissions/   올려 주신 시험지 파일
 """
 from __future__ import annotations
@@ -29,6 +30,7 @@ DATA_DIR = ROOT / "store_data"
 SAMPLE_DIR = DATA_DIR / "samples"
 SUBMIT_DIR = DATA_DIR / "submissions"
 DELIVER_DIR = DATA_DIR / "deliverables"   # 상품별로 손님에게 보낼 파일
+FREE_DIR = DATA_DIR / "free"              # 무료 자료실에 올린 파일
 DB_PATH = Path(os.environ.get("STORE_DB") or (DATA_DIR / "store.db"))
 
 KST = timezone(timedelta(hours=9))
@@ -168,6 +170,91 @@ def grouped_materials() -> list[dict]:
     return out
 
 
+# ---------------------------------------------------------------------------
+# 무료 자료실 — 회차마다 뿌리는 자료 (한줄해석 · 한줄영어 · 좌지문우해석 · 직독직해)
+# ---------------------------------------------------------------------------
+FREE_KINDS = {
+    "oneline_ko": "한줄해석",
+    "oneline_en": "한줄영어",
+    "side": "좌지문우해석",
+    "literal": "직독직해",
+}
+
+# 이메일을 받고 내어 주는 것이 기본인 자료. (품이 많이 든 자료입니다)
+FREE_KINDS_GATED = {"literal"}
+
+FREEBIE_FALLBACK = {"intro": {}, "items": []}
+
+
+def load_raw_freebies() -> dict:
+    """숨긴 것까지 전부. 관리자 화면에서 씁니다."""
+    data = load_json("freebies.json", FREEBIE_FALLBACK)
+    data.setdefault("items", [])
+    data.setdefault("intro", {})
+    return data
+
+
+def load_freebies() -> dict:
+    """고객 화면용 — 숨긴 것은 빼고, 최신 날짜가 위로 옵니다."""
+    data = load_raw_freebies()
+    data["items"] = sorted(
+        [x for x in data["items"] if x.get("active", True)],
+        key=lambda x: (x.get("date", ""), x.get("slug", "")), reverse=True)
+    return data
+
+
+def save_freebies(data: dict) -> None:
+    save_json("freebies.json", data)
+
+
+def find_freebie(slug: str, raw: bool = False) -> dict | None:
+    data = load_raw_freebies() if raw else load_freebies()
+    return next((x for x in data["items"] if x.get("slug") == slug), None)
+
+
+def free_kind_names(item: dict) -> list[str]:
+    """자료에 담긴 형식 이름들. ['한줄해석', '좌지문우해석'] 처럼 돌려줍니다."""
+    return [FREE_KINDS[k] for k in (item or {}).get("kinds", []) if k in FREE_KINDS]
+
+
+def suggested_gate(kinds) -> str:
+    """직독직해가 들어 있으면 이메일을 받고, 아니면 그냥 내어 주는 것을 권합니다."""
+    return "email" if set(kinds or []) & FREE_KINDS_GATED else "open"
+
+
+def free_dir(slug: str) -> Path:
+    safe = re.sub(r"[^a-z0-9\-]", "", (slug or "").lower())[:60]
+    if not safe:
+        raise ValueError("무료 자료 주소 이름이 이상합니다")
+    return FREE_DIR / safe
+
+
+def free_files(slug: str) -> list[dict]:
+    try:
+        folder = free_dir(slug)
+    except ValueError:
+        return []
+    if not folder.is_dir():
+        return []
+    return [{"name": f.name, "size": f.stat().st_size}
+            for f in sorted(folder.iterdir())
+            if f.is_file() and not f.name.startswith(".")]
+
+
+def free_links(item: dict) -> list[dict]:
+    out = []
+    for one in (item or {}).get("file_links", []):
+        url = (one.get("url") or "").strip()
+        if url.startswith("http://") or url.startswith("https://"):
+            out.append({"name": (one.get("name") or url)[:120], "url": url})
+    return out
+
+
+def free_ready(item: dict) -> bool:
+    """내어 줄 것이 하나라도 있는지."""
+    return bool(free_files(item.get("slug", "")) or free_links(item))
+
+
 def load_notices() -> dict:
     """공지 · 자료 업데이트 일정. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)
@@ -286,6 +373,17 @@ CREATE TABLE IF NOT EXISTS submissions (
     updated_at    TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_sub_created ON submissions(created_at DESC);
+
+CREATE TABLE IF NOT EXISTS leads (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    email         TEXT NOT NULL,
+    name          TEXT,
+    slug          TEXT,
+    title         TEXT,
+    news          INTEGER NOT NULL DEFAULT 0,
+    created_at    TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_leads_created ON leads(created_at DESC);
 """
 
 # 이미 만들어진 DB 에 나중에 생긴 칸을 채워 넣습니다(있으면 건너뜀).
@@ -514,6 +612,38 @@ def count_download(token: str) -> None:
     db.execute("UPDATE downloads SET download_count = download_count + 1 WHERE token = ?",
                (token,))
     db.commit()
+
+
+# ---------------------------------------------------------------------------
+# 무료 자료를 받아 가신 분 명단 (이메일)
+# ---------------------------------------------------------------------------
+def add_lead(email: str, *, name: str = "", slug: str = "", title: str = "",
+             news: bool = False) -> None:
+    """무료 자료를 받으며 남겨 주신 이메일을 쌓아 둡니다.
+
+    같은 분이 같은 자료를 여러 번 받아도 한 줄만 남깁니다.
+    """
+    email = clean(email, 120).lower()
+    if not EMAIL_RE.match(email):
+        return
+    db = get_db()
+    same = db.execute("SELECT id FROM leads WHERE email = ? AND slug = ?",
+                      (email, slug)).fetchone()
+    if same:
+        if news:
+            db.execute("UPDATE leads SET news = 1 WHERE id = ?", (same["id"],))
+            db.commit()
+        return
+    db.execute("""INSERT INTO leads (email, name, slug, title, news, created_at)
+                  VALUES (?,?,?,?,?,?)""",
+               (email, clean(name, 50), slug, clean(title, 200),
+                1 if news else 0, stamp()))
+    db.commit()
+
+
+def lead_rows(limit: int = 500) -> list:
+    return get_db().execute(
+        "SELECT * FROM leads ORDER BY created_at DESC LIMIT ?", (limit,)).fetchall()
 
 
 # ---------------------------------------------------------------------------

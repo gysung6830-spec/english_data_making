@@ -1,0 +1,98 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ x.title }} 파일{% endblock %}
+
+{% block body %}
+<div class="adm-head">
+  <h1>무료로 내어 줄 파일</h1>
+  <p><b>{{ x.title }}</b>
+    {% if x.gate == 'email' %}
+      · <span class="tag" style="background:#eef2ff;color:#3730a3;">📧 이메일 적고 받기</span>
+    {% else %}· <span class="tag tag-on">✅ 그냥 받기</span>{% endif %}
+  </p>
+</div>
+
+<div class="steps-help">
+  <b>파일을 올려야 손님 화면에 나옵니다</b>
+  <ol>
+    <li>파일이 하나도 없으면 '곧 올라옵니다' 칸에만 이름이 뜹니다.</li>
+    <li>파일을 올리거나 링크를 걸면 그때부터 <b>무료 자료실 목록</b>에 나옵니다.</li>
+    <li>무료 요금제를 쓰신다면 <b>링크</b> 를 권합니다. 다시 배포하면 올린 파일이 사라집니다.</li>
+  </ol>
+</div>
+
+<div class="panel">
+  <h2>방법 1 — 자료 링크 걸기 <span class="tag tag-on">무료 요금제 추천</span></h2>
+  <div class="hint">
+    구글 드라이브·네이버 MYBOX에 올리고 <b>'링크가 있는 모든 사용자'</b> 로 공유한 뒤
+    주소를 붙여 넣으세요. 이름을 비우면 그 줄은 지워집니다.
+  </div>
+  <form method="post" action="{{ url_for('admin.free_links_save', slug=x.slug) }}">
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th style="width:240px;">손님에게 보일 이름</th><th>주소</th></tr></thead>
+        <tbody>
+        {% for l in (links + [{}, {}]) %}
+          <tr>
+            <td><input type="text" name="link_name" value="{{ l.get('name','') }}"
+                       placeholder="고1 3월 학평 한줄해석" style="width:100%;"></td>
+            <td><input type="text" name="link_url" value="{{ l.get('url','') }}"
+                       placeholder="https://drive.google.com/..." style="width:100%;"></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">링크 저장</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>방법 2 — 파일 직접 올리기</h2>
+  <div class="hint">PDF · ZIP · 한글(HWP) · 워드 · 파워포인트. 한 번에 여러 개 고를 수 있습니다.</div>
+  <form method="post" enctype="multipart/form-data">
+    <div class="adm-field" style="max-width:520px;">
+      <input type="file" name="files" multiple accept=".pdf,.zip,.hwp,.hwpx,.docx,.pptx">
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">올리기</button>
+      <a class="btn btn-ghost" href="{{ url_for('admin.free_list') }}">무료 자료실로</a>
+      <a class="btn btn-ghost" href="{{ url_for('free_detail', slug=x.slug) }}"
+         target="_blank" rel="noopener">손님 화면 보기 ↗</a>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>올려 둔 파일 {{ files|length }}개</h2>
+  {% if files %}
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th>파일 이름</th><th class="num">크기</th><th></th></tr></thead>
+        <tbody>
+        {% for f in files %}
+          <tr>
+            <td>{{ f.name }}</td>
+            <td class="num">{{ f.size | filesize }}</td>
+            <td>
+              <form method="post" action="{{ url_for('admin.free_file_delete', slug=x.slug) }}"
+                    onsubmit="return confirm('{{ f.name }} 을 지울까요?');">
+                <input type="hidden" name="name" value="{{ f.name }}">
+                <button class="btn btn-sm danger" type="submit">지우기</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty">
+      <b>아직 올린 파일이 없습니다.</b>
+      {% if links %}위에 링크를 걸어 두셨으니 손님이 받으실 수 있습니다.
+      {% else %}파일을 올리거나 링크를 걸어야 손님 화면에 나옵니다.{% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
