@@ -531,8 +531,11 @@ def pass_page():
 @app.route("/samples")
 def samples():
     catalog = sc.load_catalog()
-    items = [p for p in catalog["products"] if p.get("sample_file")]
-    ready = {p["sample_file"] for p in items if (sc.SAMPLE_DIR / p["sample_file"]).exists()}
+    # 파일이 실제로 올라와 있는 것만 보여 줍니다.
+    # 이름만 적혀 있고 파일이 없는 것을 늘어놓으면 '준비 중' 버튼만 가득한 화면이 됩니다.
+    items = [p for p in catalog["products"]
+             if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
+    ready = {p["sample_file"] for p in items}
     return render_template("samples.html", items=items, ready=ready)
 
 
