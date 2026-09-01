@@ -48,7 +48,16 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">모의고사 · EBS 연계 · 수능 대비 수업 자료</span>
+      {% if exams %}
+        <a class="hero-dday" href="{{ url_for('notice') }}#exams">
+          <span class="dd">{{ exams[0].label }}</span>
+          <span>{{ exams[0].name }}{% if exams[0].grades %}
+            · {{ exams[0].grades|join(' ') }}{% endif %}</span>
+          <span class="dd-more">시험 일정 ›</span>
+        </a>
+      {% else %}
+        <span class="eyebrow">모의고사 · EBS 연계 · 수능 대비 수업 자료</span>
+      {% endif %}
       <h1>읽고 · 뜯어보고<br><em>시험에 나올 문제만</em> 풉니다</h1>
       <p class="lead">
         양질의 자료를 찾아 헤매던 시간, 이제는 수업에만 집중할 수 있습니다.
@@ -78,6 +87,72 @@
       {% endfor %}
       <a class="btn btn-ghost btn-block btn-sm" style="margin-top:14px;"
          href="{{ url_for('lineup') }}">자료 하나하나 자세히 보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="section now-sec">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>지금 오르티카</h2>
+      <p>새로 올라온 자료와 다음 시험까지 남은 날짜입니다.
+        <span class="muted">{{ now.strftime('%Y년 %m월 %d일') }} 기준</span></p>
+    </div>
+    <div class="now-grid">
+
+      <div class="now-card wide">
+        <div class="now-head">
+          <b>새로 올라왔습니다</b>
+          <a href="{{ url_for('free') }}">무료 자료 전체 ›</a>
+        </div>
+        {% if fresh %}
+          <ul class="fresh-list">
+            {% for f in fresh %}
+              <li>
+                <a href="{{ f.url }}">
+                  <span class="fresh-tag {{ 'free' if f.free }}">{{ f.tag }}</span>
+                  <span class="fresh-title">{{ f.title }}</span>
+                  <span class="fresh-date">{{ f.date }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted mb-0">첫 자료를 준비하고 있습니다.</p>
+        {% endif %}
+      </div>
+
+      <div class="now-card">
+        <div class="now-head"><b>다음 시험까지</b></div>
+        {% if exams %}
+          <ul class="dday-list">
+            {% for e in exams %}
+              <li>
+                <span class="dday">{{ e.label }}</span>
+                <span class="dday-name">{{ e.name }}
+                  <small>{{ e.date }}{% if e.grades %} · {{ e.grades|join(' ') }}{% endif %}</small>
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted mb-0">시험 일정을 준비하고 있습니다.</p>
+        {% endif %}
+      </div>
+
+      <div class="now-card">
+        <div class="now-head"><b>이렇게 올립니다</b></div>
+        {% if schedule %}
+          <ul class="plan-list">
+            {% for row in schedule %}
+              <li><b>{{ row.when }}</b><span>{{ row.what }}</span></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="muted mb-0">업데이트 일정을 준비하고 있습니다.</p>
+        {% endif %}
+      </div>
+
     </div>
   </div>
 </section>

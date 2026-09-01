@@ -113,6 +113,27 @@ def fromjson(value):
 # ---------------------------------------------------------------------------
 # 홈 · 목록 · 상세
 # ---------------------------------------------------------------------------
+def recent_updates(limit: int = 4) -> list[dict]:
+    """새로 올라온 것을 한 줄로 모읍니다 — 무료 자료와 공지를 최신순으로.
+
+    올 때마다 바뀌는 자리가 있어야 다시 찾아옵니다.
+    """
+    rows = []
+    for x in sc.load_freebies()["items"]:
+        if sc.free_ready(x):
+            rows.append({"date": x.get("date", ""), "tag": "무료 자료",
+                         "title": x.get("title", ""), "note": x.get("summary", ""),
+                         "url": url_for("free_detail", slug=x["slug"]), "free": True})
+    for n in sc.load_notices()["notices"]:
+        if n.get("pinned"):
+            continue          # 맨 위 띠에 이미 떠 있습니다
+        rows.append({"date": n.get("date", ""), "tag": n.get("tag") or "공지",
+                     "title": n.get("title", ""), "note": "",
+                     "url": url_for("notice"), "free": False})
+    rows.sort(key=lambda r: r["date"], reverse=True)
+    return rows[:limit]
+
+
 @app.route("/")
 def home():
     catalog = sc.load_catalog()
@@ -131,6 +152,7 @@ def home():
     all_materials = [m for g in groups for m in g["items"]]
     # 무료 자료 — 받을 수 있는 것만 최신 세 건
     free_items = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)][:3]
+    fresh = recent_updates(limit=4)
     free_ready_count = sum(1 for p in products
                            if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists())
     return render_template("home.html", featured=featured, product_count=len(products),
@@ -138,6 +160,8 @@ def home():
                            lineup_groups=groups, lineup_all=all_materials,
                            material_total=len(all_materials),
                            free_items=free_items, free_ready_count=free_ready_count,
+                           exams=sc.upcoming_exams(3), fresh=fresh,
+                           schedule=sc.load_notices().get("schedule", []),
                            latest_notice=notices[0] if notices else None)
 
 

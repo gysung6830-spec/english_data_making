@@ -192,6 +192,7 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
                    if m.get("sample_file") and (sc.SAMPLE_DIR / m["sample_file"]).exists()]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
     free_ready = [x for x in sc.load_freebies()["items"] if sc.free_ready(x)]
+    exams_fixed = not sc.load_notices().get("_시험일정안내")
     seo_cfg = site.get("seo") or {}
     seo_ok = bool(seo_cfg.get("naver") or seo_cfg.get("google")
                   or seo_cfg.get("done_naver") or seo_cfg.get("done_google"))
@@ -223,6 +224,10 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
          "title": "주문 알림 메일 켜기",
          "why": "주문이 오면 바로 알 수 있고, 메일함이 주문 장부가 됩니다.",
          "url": url_for("admin.backup"), "label": "설정 방법 보기"},
+        {"done": exams_fixed,
+         "title": "시험 일정 실제 날짜로 고치기",
+         "why": "홈 첫 화면의 D-day 를 이 날짜로 셉니다. 지금은 예시 날짜가 들어 있습니다.",
+         "url": url_for("admin.notices"), "label": "공지 > 시험 일정"},
         {"done": bool(free_ready),
          "title": "무료 자료 한 건 올리기",
          "why": "한줄해석 하나만 올려도 검색으로 들어오는 문이 하나 생깁니다. "
@@ -1194,7 +1199,9 @@ def leads_csv():
 
 @admin_bp.route("/notices")
 def notices():
-    return render_template("admin/notices.html", **sc.load_notices())
+    data = sc.load_notices()
+    return render_template("admin/notices.html",
+                           exam_note=bool(data.get("_시험일정안내")), **data)
 
 
 @admin_bp.route("/notices/save", methods=["POST"])
@@ -1229,6 +1236,28 @@ def notice_delete(index):
         data["notices"].pop(index)
         sc.save_notices(data)
         flash("공지를 지웠습니다.", "ok")
+    return redirect(url_for("admin.notices"))
+
+
+@admin_bp.route("/notices/exams", methods=["POST"])
+def exams_save():
+    """시험 일정 — 홈의 'D-day' 는 여기 날짜로 셉니다."""
+    data = sc.load_notices()
+    rows = []
+    for i, (date, name) in enumerate(zip(request.form.getlist("exam_date"),
+                                         request.form.getlist("exam_name"))):
+        date = sc.clean(date, 10)
+        name = sc.clean(name, 60)
+        if not date or not name:
+            continue
+        grades = [g for g in request.form.getlist(f"exam_grades_{i}")
+                  if g in ("고1", "고2", "고3")]
+        rows.append({"date": date, "name": name, "grades": grades})
+    rows.sort(key=lambda r: r["date"])
+    data["exams"] = rows
+    data.pop("_시험일정안내", None)      # 예시 안내문은 한 번 저장하면 지웁니다
+    sc.save_notices(data)
+    flash(f"시험 일정 {len(rows)}개를 저장했습니다. 홈의 D-day 가 바로 바뀝니다.", "ok")
     return redirect(url_for("admin.notices"))
 
 

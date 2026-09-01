@@ -89,7 +89,7 @@ def save_json(name: str, data: dict) -> None:
 SITE_FALLBACK = {"brand": "Ortica영어", "contact": {}, "payment": {},
                  "business": {}, "policy": {}, "pass": {}}
 CATALOG_FALLBACK = {"categories": [], "packages": [], "books": [], "products": []}
-NOTICE_FALLBACK = {"schedule": [], "notices": []}
+NOTICE_FALLBACK = {"schedule": [], "notices": [], "exams": []}
 
 
 def load_site() -> dict:
@@ -259,12 +259,34 @@ def load_notices() -> dict:
     """공지 · 자료 업데이트 일정. 고정 공지가 맨 앞, 그다음 최신순."""
     data = load_json("notices.json", NOTICE_FALLBACK)
     data.setdefault("schedule", [])
+    data.setdefault("exams", [])
     items = data.get("notices", [])
     pinned = [n for n in items if n.get("pinned")]
     rest = sorted([n for n in items if not n.get("pinned")],
                   key=lambda n: n.get("date", ""), reverse=True)
     data["notices"] = pinned + rest
     return data
+
+
+def upcoming_exams(limit: int = 4) -> list[dict]:
+    """다음 시험까지 며칠 남았는지. 선생님이 가장 자주 확인하는 정보입니다.
+
+    지난 시험은 빼고, 가까운 순으로 돌려줍니다.
+    """
+    today = now_kst().date()
+    out = []
+    for exam in load_notices().get("exams", []):
+        try:
+            when = datetime.strptime(exam.get("date", ""), "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        left = (when - today).days
+        if left < 0:
+            continue
+        out.append({**exam, "when": when, "dday": left,
+                    "label": "오늘" if left == 0 else f"D-{left}"})
+    out.sort(key=lambda x: x["when"])
+    return out[:limit]
 
 
 def save_notices(data: dict) -> None:

@@ -1162,12 +1162,63 @@ def test_search_result_title_is_editable():
     print("PASS  검색 결과 제목·설명을 화면에서 정하기")
 
 
+# ---- 홈이 '다시 오고 싶은 화면' 인가 ---------------------------------------
+def test_home_shows_live_now_section():
+    """올 때마다 바뀌는 자리가 있어야 다시 찾아옵니다."""
+    text = body(client().get("/"))
+    assert "지금 오르티카" in text
+    assert "새로 올라왔습니다" in text and "다음 시험까지" in text and "이렇게 올립니다" in text
+    # 업데이트 일정이 홈에 그대로 나와야 합니다
+    assert "지난주 학평·모평 회차 자료 업로드" in text
+    print("PASS  홈에 '지금 오르티카' — 새 자료 · D-day · 업데이트 일정")
+
+
+def test_home_counts_dday_to_next_exam():
+    """다음 시험까지 며칠인지 홈에서 바로 보여야 합니다."""
+    from datetime import timedelta
+    data = sc.load_notices()
+    soon = (sc.now_kst() + timedelta(days=12)).date().isoformat()
+    data["exams"] = [{"date": soon, "name": "테스트 학력평가", "grades": ["고1"]},
+                     {"date": (sc.now_kst() - timedelta(days=3)).date().isoformat(),
+                      "name": "이미 지난 시험", "grades": ["고3"]}]
+    sc.save_notices(data)
+
+    text = body(client().get("/"))
+    assert "D-12" in text and "테스트 학력평가" in text
+    assert "이미 지난 시험" not in text          # 지난 시험은 안 나와야 합니다
+    print("PASS  다음 시험까지 D-day (지난 시험은 제외)")
+
+
+def test_admin_edits_exam_schedule():
+    a = admin()
+    resp = a.post("/admin/notices/exams", data={
+        "exam_date": ["2099-05-20", ""], "exam_name": ["아주 먼 학력평가", ""],
+        "exam_grades_0": ["고2", "고3"]}, follow_redirects=True)
+    assert resp.status_code == 200
+    saved = sc.load_notices()["exams"]
+    assert saved == [{"date": "2099-05-20", "name": "아주 먼 학력평가",
+                      "grades": ["고2", "고3"]}], saved
+    assert "아주 먼 학력평가" in body(client().get("/"))
+    print("PASS  관리자에서 시험 일정 고치기 → 홈 D-day 반영")
+
+
+def test_home_updates_skip_pinned_notice():
+    """맨 위 띠에 이미 뜬 고정 공지가 '새로 올라왔습니다'에 또 나오면 안 됩니다."""
+    text = body(client().get("/"))
+    assert text.count("Ortica영어 자료 판매를 시작합니다") == 1
+    print("PASS  고정 공지가 홈에서 두 번 나오지 않음")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
     test_categories_include_textbook()
     test_lineup_shows_all_materials()
     test_home_reflects_lineup()
+    test_home_shows_live_now_section()
+    test_home_updates_skip_pinned_notice()
+    test_home_counts_dday_to_next_exam()
+    test_admin_edits_exam_schedule()
     test_two_packages_per_book()
     test_sibling_package_cross_sell()
     test_package_filter()

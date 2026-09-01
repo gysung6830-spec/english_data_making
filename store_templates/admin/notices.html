@@ -111,6 +111,61 @@
 </div>
 
 <div class="panel">
+  <h2>시험 일정 <span class="tag tag-on">홈의 D-day</span></h2>
+  <div class="hint">
+    여기 넣은 날짜로 홈 첫 화면의 <b>'D-12' 같은 남은 날짜</b>를 셉니다.
+    선생님들이 가장 자주 확인하는 정보라, 이게 맞아야 다시 찾아옵니다.
+    {% if exam_note %}<br><b style="color:#c2410c;">⚠️ 지금 들어 있는 날짜는 예시입니다.
+      실제 시행일로 고쳐 주세요.</b>{% endif %}
+  </div>
+  <form method="post" action="{{ url_for('admin.exams_save') }}">
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th style="width:170px;">날짜</th><th>시험 이름</th>
+                   <th style="width:220px;">학년</th></tr></thead>
+        <tbody>
+        {% for row in (exams + [{}, {}]) %}
+          <tr>
+            <td><input type="date" name="exam_date" value="{{ row.get('date','') }}"
+                       style="width:100%;"></td>
+            <td>
+              <input type="text" name="exam_name" id="exam-name-{{ loop.index0 }}"
+                     value="{{ row.get('name','') }}"
+                     placeholder="예: 3월 전국연합 학력평가" style="width:100%;">
+              <div class="pick" data-target="exam-name-{{ loop.index0 }}">
+                {% for v in ['3월 전국연합 학력평가', '5월 전국연합 학력평가',
+                             '6월 모의평가', '6월 전국연합 학력평가',
+                             '9월 모의평가', '10월 전국연합 학력평가',
+                             '대학수학능력시험', '1학기 중간고사', '1학기 기말고사',
+                             '2학기 중간고사', '2학기 기말고사'] %}
+                  <button class="pick-btn" data-value="{{ v }}">{{ v }}</button>
+                {% endfor %}
+              </div>
+            </td>
+            <td>
+              {% set outer = loop.index0 %}
+              {% for g in ['고1', '고2', '고3'] %}
+                <label class="check" style="margin-right:10px;">
+                  <input type="checkbox" name="exam_grades_{{ outer }}" value="{{ g }}"
+                         {{ 'checked' if g in row.get('grades', []) }}>
+                  <span>{{ g }}</span>
+                </label>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">시험 일정 저장</button>
+      <span class="muted" style="font-size:13px;">
+        빈 줄은 자동으로 지워집니다. 지난 시험은 홈에 안 나옵니다.</span>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
   <h2>자료 업데이트 일정</h2>
   <div class="hint">"매주 월요일에 지난주 학평 올림" 처럼 <b>실제로 지킬 수 있는</b> 주기만 적으세요.
     못 지키면 오히려 신뢰를 잃습니다. 비워 두면 이 표가 안 나옵니다.</div>
