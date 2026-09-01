@@ -1265,6 +1265,41 @@ def test_new_product_appears_in_home_updates():
     print("PASS  새 자료가 공지 없이 홈에 뜸")
 
 
+def test_order_page_shows_what_you_are_buying():
+    """주문서에서 무엇을 사는지 칩으로 한눈에 보여야 합니다."""
+    text = body(client().get("/order?slug=mock-2026-06-g3-analysis"))
+    assert "2026학년도 6월 모의평가" in text      # 교재·회차
+    assert "고3" in text and "지문 28개" in text   # 학년 · 분량
+    assert "지문 분석 패키지" in text
+    assert "지문자료" in text and 'class="mat-chip' in text   # 들어가는 자료
+    print("PASS  주문서에 교재·회차·학년 칩")
+
+
+def test_manual_line_break_filter():
+    """한글 줄나눔은 손으로 잡을 수 있어야 합니다."""
+    with store.app.app_context():
+        assert str(store.br("읽고 | 뜯어보고")) == "읽고<br>뜯어보고"
+        assert str(store.br("한 줄\n두 줄")) == "한 줄<br>두 줄"
+        assert str(store.br("<b>지움</b>")) == "&lt;b&gt;지움&lt;/b&gt;"   # 태그는 못 넣게
+        assert str(store.br("  |  가운데  |  ")) == "가운데"
+
+    data = sc.load_materials()
+    data["intro"]["headline"] = "앞줄입니다 | 뒷줄입니다"
+    sc.save_materials(data)
+    text = body(client().get("/lineup"))
+    assert "앞줄입니다<br>뒷줄입니다" in text
+    print("PASS  줄나눔을 손으로 잡기 (| 또는 줄바꿈)")
+
+
+def test_no_emoji_on_customer_pages():
+    """이모지가 섞이면 손으로 만든 느낌이 사라집니다."""
+    for path in ("/", "/products", "/free", "/lineup", "/guide"):
+        text = body(client().get(path))
+        for bad in ("✅", "📧", "🎁", "👉", "⚠️", "💡", "🧩", "📁", "🌿"):
+            assert bad not in text, f"{path} 에 {bad} 가 있습니다"
+    print("PASS  고객 화면에 이모지 없음")
+
+
 def run_all():
     test_uses_temp_data_only()
     test_public_pages_open()
@@ -1290,6 +1325,9 @@ def run_all():
     test_book_page_lists_only_its_products()
     test_home_links_every_category_and_search_word()
     test_pass_twelve_month_price()
+    test_order_page_shows_what_you_are_buying()
+    test_manual_line_break_filter()
+    test_no_emoji_on_customer_pages()
     test_order_rejects_bad_input()
     test_order_saves_and_multiplies_amount()
     test_order_both_packages_at_once()

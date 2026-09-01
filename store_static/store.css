@@ -599,6 +599,17 @@ input[type=file]{
 .also-box small{display:block; color:var(--ink-2); font-size:13.5px; line-height:1.5; margin-top:4px;}
 .also-box em{font-style:normal; font-weight:800; font-size:16px; white-space:nowrap;}
 
+@media (max-width:640px){
+  /* 값이 옆에 붙어 있으면 글이 좁은 칸에 끼어 줄나눔이 엉망이 됩니다.
+     폰에서는 값을 아래로 내리고 글에 폭을 다 줍니다. */
+  .also-box{flex-wrap:wrap; align-items:flex-start; row-gap:10px;}
+  .also-box > span{flex:1 1 0; min-width:0;}
+  .also-box em{
+    flex:1 0 100%; padding-top:10px; border-top:1px solid var(--line);
+    text-align:right; font-size:17px; color:var(--brand-dark);
+  }
+}
+
 /* 결제 금액 — 제출 직전에 크게 한 번 더 */
 .total-box{
   display:flex; align-items:center; justify-content:space-between; gap:12px;
@@ -1135,4 +1146,27 @@ input[type=file]{
 .to-top:hover{border-color:var(--brand); color:var(--brand);}
 @media (max-width:640px){
   body:has(.buy-bar) .to-top{bottom:84px;}
+}
+
+/* 주문서 — 무엇을 주문하는지 한눈에 */
+.order-item{
+  border:1px solid #cfe4d9; background:var(--brand-soft);
+  border-radius:12px; padding:18px 20px; margin-bottom:22px;
+}
+.oi-top{display:flex; align-items:center; gap:9px; flex-wrap:wrap; margin-bottom:10px;}
+.oi-top b{font-size:17px; letter-spacing:-.02em; line-height:1.4; word-break:keep-all;}
+.order-item .chips{margin-bottom:10px;}
+.order-item .chip{background:#fff; border-color:#cfe4d9;}
+.order-item .mat-chips{margin:0 0 12px;}
+.oi-price{
+  display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding-top:12px; border-top:1px solid #cfe4d9;
+}
+.oi-price span{font-size:22px; font-weight:800; color:var(--brand-dark);
+  letter-spacing:-.02em;}
+.oi-price a{margin-left:auto; font-size:13.5px; font-weight:700; color:var(--brand);
+  white-space:nowrap;}
+@media (max-width:640px){
+  .order-item{padding:16px;}
+  .oi-price a{padding:8px 0;}
 }

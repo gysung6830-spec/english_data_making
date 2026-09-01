@@ -24,6 +24,7 @@ from datetime import timedelta
 
 from flask import (Flask, abort, redirect, render_template, request,
                    send_from_directory, session, url_for)
+from markupsafe import Markup, escape
 
 import store_common as sc
 from store_admin import admin_bp
@@ -99,6 +100,19 @@ def won(value) -> str:
 @app.template_filter("filesize")
 def filesize(value):
     return sc.human_size(int(value or 0))
+
+
+@app.template_filter("br")
+def br(value) -> Markup:
+    """줄을 바꾸고 싶은 자리를 그대로 지켜 줍니다.
+
+    관리자 화면에서 줄바꿈(Enter)을 넣거나 ' | ' 를 적으면 그 자리에서 줄이 바뀝니다.
+    한글은 자동 줄나눔이 어색해지는 자리가 있어서, 손으로 잡을 수 있게 열어 둡니다.
+    """
+    text = escape((value or "").strip())
+    text = text.replace("|", "\n")
+    lines = [line.strip() for line in text.split("\n") if line.strip()]
+    return Markup("<br>".join(lines))
 
 
 @app.template_filter("fromjson")
@@ -349,12 +363,15 @@ def order():
                     if x.get("book") and x.get("book") == product.get("book")
                     and x.get("package") and x.get("package") != product.get("package")), None)
 
+    book = next((b for b in catalog["books"] if b["slug"] == product.get("book")), None)
+
     if request.method == "GET":
-        return render_template("order.html", p=product, sibling=sibling, form={}, errors=[])
+        return render_template("order.html", p=product, sibling=sibling, book=book,
+                               form={}, errors=[])
 
     if sc.too_many_submits(request, "order"):
         errors = ["잠시 뒤에 다시 시도해 주세요. 짧은 시간에 너무 많이 보내셨습니다."]
-        return render_template("order.html", p=product, sibling=sibling,
+        return render_template("order.html", p=product, sibling=sibling, book=book,
                                form=request.form, errors=errors), 429
 
     data, errors = sc.validate_contact(request.form)
@@ -377,7 +394,7 @@ def order():
         errors.append(coupon_note)
 
     if errors:
-        return render_template("order.html", p=product, sibling=sibling,
+        return render_template("order.html", p=product, sibling=sibling, book=book,
                                form=request.form, errors=errors), 400
 
     amount = subtotal - discount

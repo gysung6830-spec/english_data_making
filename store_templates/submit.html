@@ -23,7 +23,7 @@
     {% else %}
       <div class="section-head">
         <span class="eyebrow">시험지 나눔</span>
-        <h2>{{ reward.headline or '학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다' }}</h2>
+        <h2>{{ (reward.headline or '학교 시험지를 나눠 주시면, 더 정확한 자료로 돌려드립니다')|br }}</h2>
         <p>{{ reward.lead }}</p>
       </div>
 

@@ -17,9 +17,32 @@
     {% endif %}
 
     <div class="form-card">
-      <div class="alert alert-info" style="margin-bottom:20px;">
-        <b>{{ p.name }}</b><br>
-        {{ p.subtitle }} · <b>{{ p.price|won }}</b>
+      <div class="order-item">
+        {% set pkg = package_map.get(p.package) %}
+        <div class="oi-top">
+          {% if pkg %}<span class="pkg-tag pkg-{{ pkg.id }}">{{ pkg.name }}</span>{% endif %}
+          <b>{{ book.name if book else p.name }}</b>
+        </div>
+        <div class="chips">
+          {% if book and book.publisher %}<span class="chip">{{ book.publisher }}</span>{% endif %}
+          {% if p.grade %}<span class="chip">{{ p.grade }}</span>{% endif %}
+          {% if p.passages %}<span class="chip">지문 {{ p.passages }}개</span>{% endif %}
+          {% if p.materials %}<span class="chip">자료 {{ p.materials|length }}종</span>{% endif %}
+          <span class="chip">PDF</span>
+        </div>
+        {% if p.materials %}
+          <div class="mat-chips">
+            {% for mid in p.materials %}
+              {% set m = material_map.get(mid) %}
+              {% if m %}<span class="mat-chip {{ 'sig-chip' if m.signature }}">
+                <span class="n">{{ m.no }}</span>{{ m.name }}</span>{% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="oi-price">
+          <span>{{ p.price|won }}</span>
+          <a href="{{ url_for('product_detail', slug=p.slug) }}">자료 다시 보기 ›</a>
+        </div>
       </div>
 
       {% if sibling %}
