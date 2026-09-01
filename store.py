@@ -506,9 +506,13 @@ def download_page(token):
     """메일로 보내 드린 링크. 이 주소를 아는 사람만 파일을 받을 수 있습니다."""
     row, reason = sc.check_download(token)
     if row is None:
-        return render_template("download.html", d=None, files=[], reason=reason), 404
-    files = sc.product_files(row["product_slug"])
-    return render_template("download.html", d=row, files=files, reason="")
+        return render_template("download.html", d=None, files=[], links=[],
+                               reason=reason), 404
+    product = next((x for x in sc.load_catalog()["products"]
+                    if x.get("slug") == row["product_slug"]), {})
+    return render_template("download.html", d=row,
+                           files=sc.product_files(row["product_slug"]),
+                           links=sc.product_links(product), reason="")
 
 
 @app.route("/d/<token>/<int:index>")

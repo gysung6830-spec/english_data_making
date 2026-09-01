@@ -380,6 +380,41 @@ def test_order_to_download_flow():
     print("PASS  파일 올리기 → 링크 발급 → 손님이 받기")
 
 
+def test_deliver_by_external_link():
+    """파일을 안 올리고 구글 드라이브 링크만 걸어도 팔 수 있어야 합니다."""
+    a = admin()
+    slug = "mock-2026-06-g3-problem"          # 파일을 올리지 않은 상품
+    assert not sc.product_files(slug)
+
+    # http 로 시작하지 않는 주소는 걸러집니다.
+    a.post(f"/admin/products/{slug}/links", data={
+        "link_name": ["잘못된 주소"], "link_url": ["drive.google.com/abc"]})
+    saved = next(x for x in sc.load_raw_catalog()["products"] if x["slug"] == slug)
+    assert saved.get("file_links") == []
+
+    a.post(f"/admin/products/{slug}/links", data={
+        "link_name": ["6월 모평 문제 패키지", ""],
+        "link_url": ["https://drive.google.com/file/demo", ""]})
+    saved = next(x for x in sc.load_raw_catalog()["products"] if x["slug"] == slug)
+    assert len(saved["file_links"]) == 1
+
+    c = client()
+    resp = c.post("/order", data={
+        "slug": slug, "name": "링크손님", "phone": "010-9090-1010",
+        "email": "link@example.com", "agree": "1"})
+    order_no = resp.headers["Location"].rsplit("/", 1)[-1]
+    oid = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT id FROM orders WHERE order_no = ?", (order_no,)).fetchone()[0]
+    assert a.post(f"/admin/orders/{oid}/deliver").status_code == 302
+
+    token = sc.sqlite3.connect(sc.DB_PATH).execute(
+        "SELECT token FROM downloads WHERE order_no = ?", (order_no,)).fetchone()[0]
+    page = body(client().get(f"/d/{token}"))
+    assert "6월 모평 문제 패키지" in page
+    assert "https://drive.google.com/file/demo" in page
+    print("PASS  파일 없이 링크만으로 판매 · 발송")
+
+
 def test_download_revoke_and_limit():
     a = admin()
     dl = sc.sqlite3.connect(sc.DB_PATH).execute(
@@ -752,6 +787,7 @@ def run_all():
     test_submission_to_coupon_to_discount()
     test_submission_requires_file_or_link()
     test_order_to_download_flow()
+    test_deliver_by_external_link()
     test_download_revoke_and_limit()
     test_receipt_request_and_sales()
     test_every_admin_route_is_locked()

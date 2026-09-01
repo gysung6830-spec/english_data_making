@@ -182,7 +182,7 @@ def setup_steps(site: dict, catalog: dict) -> list[dict]:
     bank_ok = bool(payment.get("bank_account")) and "0000" not in payment["bank_account"]
     biz_ok = bool(business.get("reg_no")) and "0000" not in business["reg_no"]
     mine = [p for p in products if not p.get("sample")]
-    with_files = [p for p in products if sc.product_files(p.get("slug", ""))]
+    with_files = [p for p in products if sc.has_deliverable(p)]
     with_sample = [p for p in products
                    if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()]
     mail_ok = bool(os.environ.get("SMTP_HOST") and os.environ.get("ORDER_EMAIL_TO"))
@@ -316,7 +316,32 @@ def product_files(slug):
         return redirect(url_for("admin.product_files", slug=slug))
 
     return render_template("admin/product_files.html", p=product,
-                           files=sc.product_files(slug))
+                           files=sc.product_files(slug), links=sc.product_links(product))
+
+
+@admin_bp.route("/products/<slug>/links", methods=["POST"])
+def product_links_save(slug):
+    """구글 드라이브 같은 바깥 링크를 상품에 걸어 둡니다."""
+    catalog = sc.load_raw_catalog()
+    product = next((p for p in catalog["products"] if p.get("slug") == slug), None)
+    if product is None:
+        abort(404)
+    links, bad = [], 0
+    for name, url in zip(request.form.getlist("link_name"), request.form.getlist("link_url")):
+        url = sc.clean(url, 500)
+        if not url:
+            continue
+        if not (url.startswith("http://") or url.startswith("https://")):
+            bad += 1
+            continue
+        links.append({"name": sc.clean(name, 120) or "자료 받기", "url": url})
+    product["file_links"] = links
+    sc.save_catalog(catalog)
+    if bad:
+        flash(f"주소 {bad}개는 http 로 시작하지 않아 빼 두었습니다. 전체 주소를 붙여 넣어 주세요.", "err")
+    else:
+        flash(f"링크 {len(links)}개를 저장했습니다.", "ok")
+    return redirect(url_for("admin.product_files", slug=slug))
 
 
 @admin_bp.route("/products/<slug>/files/delete", methods=["POST"])
@@ -344,10 +369,10 @@ def order_deliver(order_id):
     # 짝 패키지를 함께 사신 경우 두 상품 모두 링크를 냅니다.
     slugs = [slug] + [x for x in (row["extra_slugs"] or "").split(",") if x]
     catalog = {p["slug"]: p for p in sc.load_raw_catalog()["products"]}
-    missing = [x for x in slugs if not sc.product_files(x)]
+    missing = [x for x in slugs if not sc.has_deliverable(catalog.get(x, {"slug": x}))]
     if missing:
-        flash(f"'{catalog.get(missing[0], {}).get('name', missing[0])}' 에 올려 둔 파일이 없습니다. "
-              f"먼저 상품 > 파일에서 올려 주세요.", "err")
+        flash(f"'{catalog.get(missing[0], {}).get('name', missing[0])}' 에 손님께 내어 줄 것이 없습니다. "
+              f"파일을 올리거나 자료 링크를 걸어 주세요.", "err")
         return redirect(url_for("admin.product_files", slug=missing[0]))
 
     links = []
@@ -590,7 +615,8 @@ def products():
     # 샘플 파일이 실제로 폴더에 있는지 미리 확인해 화면에 표시해 줍니다.
     ready = {p["sample_file"] for p in items
              if p.get("sample_file") and (sc.SAMPLE_DIR / p["sample_file"]).exists()}
-    counts = {x["slug"]: len(sc.product_files(x["slug"])) for x in items if x.get("slug")}
+    counts = {x["slug"]: len(sc.product_files(x["slug"])) + len(sc.product_links(x))
+              for x in items if x.get("slug")}
     return render_template("admin/products.html", items=items, catalog=catalog,
                            sample_ready=ready, file_counts=counts,
                            sample_count=len([x for x in items if x.get("sample")]))

@@ -11,7 +11,7 @@
         <p>주문번호 <b>{{ d['order_no'] }}</b> · {{ d['product_name'] }}</p>
       </div>
 
-      {% if files %}
+      {% if files or links %}
         <div class="dl-list">
           {% for f in files %}
             <a class="dl-item" href="{{ url_for('download_file', token=d['token'], index=loop.index0) }}">
@@ -19,6 +19,14 @@
               <span class="dl-name">{{ f.name }}</span>
               <span class="dl-size">{{ f.size | filesize }}</span>
               <span class="btn btn-primary btn-sm">받기</span>
+            </a>
+          {% endfor %}
+          {% for l in links %}
+            <a class="dl-item" href="{{ l.url }}" target="_blank" rel="noopener noreferrer">
+              <span class="dl-ico">🔗</span>
+              <span class="dl-name">{{ l.name }}</span>
+              <span class="dl-size">바깥 링크</span>
+              <span class="btn btn-primary btn-sm">열기 ↗</span>
             </a>
           {% endfor %}
         </div>

@@ -8,16 +8,56 @@
 </div>
 
 <div class="steps-help">
-  <b>이 파일이 판매되는 실물입니다</b>
+  <b>여기 있는 것이 실제로 팔리는 물건입니다</b>
   <ol>
-    <li>여기에 자료 PDF(또는 묶음 ZIP)를 올려 둡니다.</li>
-    <li>주문이 들어와 입금을 확인하면, 주문 목록에서 <b>'자료 보내기'</b> 를 누릅니다.</li>
-    <li>손님 메일로 <b>다운로드 링크</b>가 자동으로 갑니다. 파일을 직접 첨부할 필요가 없습니다.</li>
+    <li>자료를 <b>파일로 올리거나</b>, <b>구글 드라이브 링크로 걸어</b> 둡니다. (둘 중 하나면 됩니다)</li>
+    <li>주문이 들어와 입금을 확인하면, 주문 목록에서 <b>📤 자료 보내기</b> 를 누릅니다.</li>
+    <li>손님 메일로 받는 주소가 자동으로 갑니다. 파일을 직접 첨부할 필요가 없습니다.</li>
   </ol>
 </div>
 
+<div class="panel" style="border:1px solid #cfe4d9; background:#f2f8f5;">
+  <h2>💡 어느 쪽을 쓰면 좋을까요</h2>
+  <div class="hint" style="margin-bottom:0;">
+    <b>무료 요금제로 쓰신다면 '링크' 를 권합니다.</b>
+    무료 요금제는 사이트를 다시 배포하면 <b>올려 둔 파일이 사라집니다.</b>
+    구글 드라이브에 자료를 두고 링크만 걸어 두면 그 걱정이 없습니다.<br>
+    유료 요금제(월 $7)로 올리시면 파일을 직접 올리는 편이 손님에게 더 깔끔합니다.
+  </div>
+</div>
+
 <div class="panel">
-  <h2>파일 올리기</h2>
+  <h2>방법 1 — 자료 링크 걸기 <span class="tag tag-on">무료 요금제 추천</span></h2>
+  <div class="hint">
+    구글 드라이브·네이버 MYBOX에 자료를 올리고 <b>'링크가 있는 모든 사용자'</b> 로 공유한 뒤,
+    그 주소를 여기에 붙여 넣으세요. 이름을 비우면 그 줄은 지워집니다.
+  </div>
+  <form method="post" action="{{ url_for('admin.product_links_save', slug=p.slug) }}">
+    <div class="wrapbox">
+      <table class="adm-table">
+        <thead><tr><th style="width:240px;">손님에게 보일 이름</th><th>주소</th></tr></thead>
+        <tbody>
+        {% for l in (links + [{}, {}]) %}
+          <tr>
+            <td><input type="text" name="link_name" value="{{ l.get('name','') }}"
+                       placeholder="6월 모평 지문분석지" style="width:100%;"></td>
+            <td><input type="text" name="link_url" value="{{ l.get('url','') }}"
+                       placeholder="https://drive.google.com/..." style="width:100%;"></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">링크 저장</button>
+      <span class="muted" style="font-size:13px;">
+        ⚠️ 공유 설정을 '제한됨'으로 두면 손님이 못 엽니다. 꼭 확인해 주세요.</span>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>방법 2 — 파일 직접 올리기</h2>
   <div class="hint">PDF · ZIP · 한글(HWP) · 워드 · 파워포인트. 한 번에 여러 개 고를 수 있습니다.
     파일이 많으면 <b>ZIP 하나로 묶어 올리는 편</b>이 손님도 받기 편합니다.</div>
   <form method="post" enctype="multipart/form-data">
@@ -57,7 +97,8 @@
   {% else %}
     <div class="empty">
       <b>아직 올린 파일이 없습니다.</b>
-      파일이 없으면 이 상품 주문에 다운로드 링크를 낼 수 없습니다.
+      {% if links %}위에 링크를 걸어 두셨으니 판매에는 문제 없습니다.
+      {% else %}파일을 올리거나 위에 링크를 걸어야 이 상품을 보낼 수 있습니다.{% endif %}
     </div>
   {% endif %}
 </div>

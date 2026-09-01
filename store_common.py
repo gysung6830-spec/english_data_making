@@ -441,6 +441,25 @@ def product_files(slug: str) -> list[dict]:
     return out
 
 
+def product_links(product: dict) -> list[dict]:
+    """상품에 걸어 둔 바깥 자료 링크 (구글 드라이브 등).
+
+    무료 호스팅은 다시 배포할 때 올려 둔 파일이 사라집니다.
+    파일 대신 링크를 걸어 두면 그 걱정이 없습니다.
+    """
+    out = []
+    for item in (product or {}).get("file_links", []):
+        url = (item.get("url") or "").strip()
+        if url.startswith("http://") or url.startswith("https://"):
+            out.append({"name": (item.get("name") or url)[:120], "url": url})
+    return out
+
+
+def has_deliverable(product: dict) -> bool:
+    """손님에게 내어 줄 것이 하나라도 있는지 (올린 파일이든, 링크든)."""
+    return bool(product_files(product.get("slug", "")) or product_links(product))
+
+
 def human_size(num: int) -> str:
     for unit in ("B", "KB", "MB", "GB"):
         if num < 1024 or unit == "GB":
