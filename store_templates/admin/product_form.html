@@ -42,6 +42,18 @@
       </select>
     </div>
     <div class="adm-field">
+      <label for="package">패키지 종류 <span style="color:#c2410c">*</span></label>
+      <select id="package" name="package">
+        {% for pkg in packages %}
+          <option value="{{ pkg.id }}" data-materials="{{ pkg.materials|join(',') }}"
+                  {{ 'selected' if p.package == pkg.id }}>{{ pkg.name }}</option>
+        {% endfor %}
+        <option value="" {{ 'selected' if not p.package }}>어느 쪽도 아님</option>
+      </select>
+      <div class="tip">고르면 아래 '들어가는 자료'가 자동으로 체크됩니다. 뒤에 손으로 고쳐도 됩니다.</div>
+    </div>
+
+    <div class="adm-field">
       <label for="book">어느 교재의 자료인가요</label>
       <select id="book" name="book">
         <option value="">교재 없음 (낱개 상품)</option>
@@ -122,7 +134,8 @@
         {% endfor %}
       </div>
       <div class="tip">고른 자료가 상품 카드와 상세 페이지에 배지로 붙고, 라인업 설명으로 연결됩니다.
-        자료 목록을 바꾸려면 <a href="{{ url_for('admin.materials') }}">자료 라인업</a>에서 고치세요.</div>
+        자료 목록이나 패키지 기본 구성을 바꾸려면
+        <a href="{{ url_for('admin.materials') }}">자료 라인업</a>에서 고치세요.</div>
     </div>
 
     <div class="adm-field">
@@ -167,4 +180,20 @@
   </div>
 </div>
 </form>
+
+<script>
+  // 패키지 종류를 바꾸면 그 패키지의 기본 자료를 자동으로 체크해 줍니다.
+  (function () {
+    var sel = document.getElementById('package');
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+      var opt = sel.options[sel.selectedIndex];
+      var want = (opt.dataset.materials || '').split(',').filter(Boolean);
+      if (!want.length) return;
+      document.querySelectorAll('input[name=materials]').forEach(function (box) {
+        box.checked = want.indexOf(box.value) !== -1;
+      });
+    });
+  })();
+</script>
 {% endblock %}

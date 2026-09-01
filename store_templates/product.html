@@ -87,6 +87,30 @@
     </aside>
   </div>
 
+  {% if sibling %}
+  <div class="wrap" style="margin-top:46px;">
+    {% set spkg = package_map.get(sibling.package) %}
+    <div class="pair-box">
+      <div>
+        <span class="pkg-tag pkg-{{ sibling.package }}">{{ spkg.name if spkg else '' }}</span>
+        <h3>같은 교재의 {{ spkg.name if spkg else '다른 패키지' }}도 있습니다</h3>
+        <p>{{ spkg.tagline if spkg else '' }} —
+          {%- for mid in sibling.materials %}{% set m = material_map.get(mid) %}
+            {%- if m %} {{ m.no }} {{ m.name }}{% if not loop.last %} ·{% endif %}{% endif %}
+          {%- endfor %}</p>
+        <p class="muted mb-0" style="font-size:14px;">
+          지문을 읽히는 자료와 문제로 확인하는 자료를 함께 쓰면 한 지문을 끝까지 돌릴 수 있습니다.
+        </p>
+      </div>
+      <div class="pair-buy">
+        <div class="price">{{ sibling.price|won }}</div>
+        <a class="btn btn-primary btn-block"
+           href="{{ url_for('product_detail', slug=sibling.slug) }}">보러 가기</a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
   {% if related %}
   <div class="wrap" style="margin-top:52px;">
     <div class="section-head"><h2 style="font-size:22px;">{{ '같은 교재의 다른 자료' if book else '함께 보면 좋은 자료' }}</h2></div>

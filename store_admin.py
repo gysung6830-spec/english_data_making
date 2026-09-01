@@ -334,6 +334,8 @@ def product_from_form(form, existing: dict | None = None) -> tuple[dict, list[st
         errors.append("상품 이름을 적어 주세요.")
     item["category"] = sc.clean(form.get("category"), 40)
     item["book"] = sc.clean(form.get("book"), 60)
+    pkg = sc.clean(form.get("package"), 40)
+    item["package"] = pkg if pkg in sc.package_map() else ""
     item["subtitle"] = sc.clean(form.get("subtitle"), 120)
     item["price"] = sc.to_int(form.get("price"), 0)
     if item["price"] < 0:
@@ -380,13 +382,17 @@ def product_form(slug=None):
         abort(404)
 
     if request.method == "GET":
+        packages = list(sc.package_map().values())
+        first = packages[0] if packages else {}
         blank = {"active": True, "sort": 100, "includes": [],
-                 "materials": ["passage", "analysis"],
+                 "package": first.get("id", ""),
+                 "materials": list(first.get("materials", [])),
                  "delivery": "입금 확인 후 영업일 기준 24시간 이내 이메일 발송",
                  "format": "PDF (A4, 인쇄용)"}
         return render_template("admin/product_form.html", p=existing or blank,
                                catalog=catalog, errors=[], is_new=existing is None,
-                               all_materials=list(sc.material_map().values()))
+                               all_materials=list(sc.material_map().values()),
+                               packages=list(sc.package_map().values()))
 
     item, errors = product_from_form(request.form, existing)
     clash = [p for p in catalog["products"]
@@ -396,7 +402,8 @@ def product_form(slug=None):
     if errors:
         return render_template("admin/product_form.html", p=item, catalog=catalog,
                                errors=errors, is_new=existing is None,
-                               all_materials=list(sc.material_map().values())), 400
+                               all_materials=list(sc.material_map().values()),
+                               packages=list(sc.package_map().values())), 400
 
     if existing is None:
         catalog["products"].append(item)
@@ -567,7 +574,8 @@ def materials():
     for product in sc.load_raw_catalog()["products"]:
         for mid in product.get("materials", []):
             used[mid] = used.get(mid, 0) + 1
-    return render_template("admin/materials.html", data=data, used=used)
+    return render_template("admin/materials.html", data=data, used=used,
+                           packages=sc.load_raw_catalog()["packages"])
 
 
 @admin_bp.route("/materials/intro", methods=["POST"])
@@ -595,6 +603,30 @@ def materials_intro():
         data["groups"] = groups
     sc.save_materials(data)
     flash("라인업 소개와 묶음을 저장했습니다.", "ok")
+    return redirect(url_for("admin.materials"))
+
+
+@admin_bp.route("/materials/packages", methods=["POST"])
+def packages_save():
+    """판매 단위 두 갈래(지문 분석 패키지 / 문제 패키지)를 고칩니다."""
+    catalog = sc.load_raw_catalog()
+    known = set(sc.material_map())
+    packages = []
+    for i, (pid, name, short, tagline, desc) in enumerate(zip(
+            request.form.getlist("pkg_id"), request.form.getlist("pkg_name"),
+            request.form.getlist("pkg_short"), request.form.getlist("pkg_tagline"),
+            request.form.getlist("pkg_desc"))):
+        pid = sc.clean(pid, 40)
+        if not pid:
+            continue
+        chosen = [m for m in request.form.getlist(f"pkg_materials_{pid}") if m in known]
+        packages.append({"id": pid, "name": sc.clean(name, 40), "short": sc.clean(short, 10),
+                         "tagline": sc.clean(tagline, 120), "desc": sc.clean(desc, 600),
+                         "materials": chosen, "sort": (i + 1) * 10})
+    if packages:
+        catalog["packages"] = packages
+        sc.save_catalog(catalog)
+        flash("패키지 구성을 저장했습니다. 새로 만드는 상품에 이 자료가 기본으로 들어갑니다.", "ok")
     return redirect(url_for("admin.materials"))
 
 

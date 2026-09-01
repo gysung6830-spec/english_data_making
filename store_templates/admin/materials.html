@@ -46,6 +46,55 @@
 </div>
 
 <div class="panel">
+  <h2>판매 패키지 두 갈래</h2>
+  <div class="hint">
+    교재·회차마다 이 두 가지를 팝니다. 여기서 체크한 자료가
+    <b>새 상품을 만들 때 기본으로 들어갑니다.</b>
+    (이미 만든 상품은 바뀌지 않습니다 — 상품 화면에서 따로 고치세요.)
+  </div>
+  <form method="post" action="{{ url_for('admin.packages_save') }}">
+    {% for pkg in packages %}
+      <div style="border:1px solid var(--line); border-radius:10px; padding:18px; margin-bottom:14px;">
+        <input type="hidden" name="pkg_id" value="{{ pkg.id }}">
+        <div class="form-grid">
+          <div class="adm-field">
+            <label>패키지 이름</label>
+            <input type="text" name="pkg_name" value="{{ pkg.name }}">
+          </div>
+          <div class="adm-field">
+            <label>짧은 이름</label>
+            <input type="text" name="pkg_short" value="{{ pkg.short or '' }}" style="max-width:120px;">
+          </div>
+          <div class="adm-field full">
+            <label>한 줄 소개</label>
+            <input type="text" name="pkg_tagline" value="{{ pkg.tagline or '' }}">
+          </div>
+          <div class="adm-field full">
+            <label>설명</label>
+            <textarea name="pkg_desc" style="min-height:60px;">{{ pkg.desc or '' }}</textarea>
+          </div>
+          <div class="adm-field full">
+            <label>기본으로 들어가는 자료</label>
+            <div class="check-grid" style="gap:10px 18px;">
+              {% for m in data.materials %}
+                <label class="check">
+                  <input type="checkbox" name="pkg_materials_{{ pkg.id }}" value="{{ m.id }}"
+                         {{ 'checked' if m.id in (pkg.materials or []) }}>
+                  <span>{{ m.no }} {{ m.name }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">패키지 구성 저장</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
   <h2>라인업 페이지 맨 위</h2>
   <div class="hint">자료 라인업 페이지의 진한 초록 머리말입니다.</div>
   <form method="post" action="{{ url_for('admin.materials_intro') }}">

@@ -495,3 +495,43 @@ input[type=file]{
 
 /* 초록 상자 없이 곧바로 특징이 오는 자료는 조금 띄워 줍니다 */
 .mat-tagline + .feat-list{margin-top:16px;}
+
+/* ---------- 패키지 두 갈래 (지문 분석 / 문제) ---------- */
+.pkg-tag{
+  display:inline-block; align-self:flex-start; font-size:12px; font-weight:800;
+  padding:3px 10px; border-radius:999px; margin-bottom:8px;
+}
+.pkg-analysis{background:#e6f0fb; color:#1e4bb8;}
+.pkg-problem{background:#fdeee6; color:#a3450f;}
+
+.pkg-filters{margin-top:-14px;}
+.pkg-filters .filter{font-size:14px;}
+.filter.pkg-filter-analysis.on{background:#1e4bb8; border-color:#1e4bb8;}
+.filter.pkg-filter-problem.on{background:#a3450f; border-color:#a3450f;}
+
+.lanes{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; align-items:start;}
+.lane{display:flex; flex-direction:column;}
+.lane-head{margin-bottom:14px;}
+.lane-head h3{font-size:21px; font-weight:800; display:flex; align-items:center; gap:9px;}
+.lane-head h3 .pkg-tag{margin-bottom:0;}
+.lane-head p{color:var(--ink-2); font-size:14.5px; margin:8px 0 10px;}
+.lane-mats{display:flex; flex-wrap:wrap; gap:6px;}
+.lane-mats .mat-chip:hover{background:var(--brand); color:#fff;}
+.lane-mats .mat-chip:hover .n{color:#fff;}
+/* 갈래 제목에 패키지 이름과 자료가 이미 있으니 카드에서는 뺍니다 */
+.lane .product-card > .pkg-tag,
+.lane .product-card .mat-chips{display:none;}
+@media (max-width:860px){ .lanes{grid-template-columns:1fr;} }
+
+/* 같은 교재의 반대쪽 패키지 안내 */
+.pair-box{
+  display:flex; gap:28px; align-items:center; flex-wrap:wrap;
+  background:var(--card); border:2px solid var(--brand); border-radius:var(--radius);
+  padding:24px 28px; box-shadow:var(--shadow);
+}
+.pair-box > div:first-child{flex:1; min-width:280px;}
+.pair-box h3{font-size:20px; font-weight:800; margin:4px 0 8px;}
+.pair-box p{color:var(--ink-2); font-size:15px; margin:0 0 8px;}
+.pair-buy{text-align:center; min-width:180px;}
+.pair-buy .price{font-size:24px; font-weight:800; margin-bottom:10px;}
+@media (max-width:640px){ .pair-buy{width:100%;} }

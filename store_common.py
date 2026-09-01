@@ -74,7 +74,7 @@ def save_json(name: str, data: dict) -> None:
 
 SITE_FALLBACK = {"brand": "Ortica영어", "contact": {}, "payment": {},
                  "business": {}, "policy": {}, "pass": {}}
-CATALOG_FALLBACK = {"categories": [], "books": [], "products": []}
+CATALOG_FALLBACK = {"categories": [], "packages": [], "books": [], "products": []}
 NOTICE_FALLBACK = {"schedule": [], "notices": []}
 
 
@@ -95,8 +95,9 @@ def save_site(site: dict) -> None:
 def load_raw_catalog() -> dict:
     """숨긴 항목까지 전부. 관리자 화면에서 씁니다."""
     catalog = load_json("products.json", CATALOG_FALLBACK)
-    for key in ("categories", "books", "products"):
+    for key in ("categories", "packages", "books", "products"):
         catalog.setdefault(key, [])
+    catalog["packages"] = sorted(catalog["packages"], key=lambda x: x.get("sort", 100))
     return catalog
 
 
@@ -183,6 +184,11 @@ def books_with_counts(catalog: dict, category: str = "") -> list[dict]:
         result.append({**book, "count": len(items),
                        "from_price": min(p.get("price", 0) for p in items)})
     return result
+
+
+def package_map() -> dict:
+    """판매 단위 두 갈래 — 지문 분석 패키지 / 문제 패키지."""
+    return {p["id"]: p for p in load_raw_catalog()["packages"]}
 
 
 def category_name(catalog: dict, cid: str) -> str:

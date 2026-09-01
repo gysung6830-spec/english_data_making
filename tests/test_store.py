@@ -109,23 +109,59 @@ def test_home_reflects_lineup():
     print("PASS  홈이 라인업을 반영")
 
 
-def test_product_shows_its_materials():
-    text = body(client().get("/products/mock-2026-06-g3-full"))
-    assert "이 세트에 들어가는 자료" in text
-    for name in ("지문자료", "지문분석지", "필생보", "통합 영어 워크북", "17종 변형문제"):
-        assert name in text, name
-    assert "/lineup#variants" in text        # 라인업 설명으로 이어지는 링크
-    assert "서술형 대비 교재" in text
-    # 고르지 않은 자료는 나오지 않습니다 (독학용은 주문제작이라 기본 세트에서 뺐습니다)
-    assert "동형모의고사" not in text and "독학용" not in text
-    print("PASS  상품 상세에 포함 자료와 라인업 링크")
+def test_two_packages_per_book():
+    """교재마다 '지문 분석 패키지'와 '문제 패키지' 두 개가 있어야 합니다."""
+    def own(html):                      # 짝 패키지 안내 앞부분 = 이 상품의 구성
+        return html.split("같은 교재의")[0]
+
+    analysis = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert "지문 분석 패키지" in analysis
+    for name in ("지문자료", "지문분석지", "필생보"):
+        assert name in own(analysis), name
+    for name in ("통합 영어 워크북", "17종 변형문제", "서술형 대비 교재"):
+        assert name not in own(analysis), f"분석 패키지에 {name} 이 섞였습니다"
+
+    problem = body(client().get("/products/mock-2026-06-g3-problem"))
+    assert "문제 패키지" in problem
+    for name in ("통합 영어 워크북", "서술형 대비 교재", "17종 변형문제"):
+        assert name in own(problem), name
+    for name in ("지문자료", "필생보"):
+        assert name not in own(problem), f"문제 패키지에 {name} 이 섞였습니다"
+    assert "/lineup#variants" in problem      # 라인업 설명으로 이어지는 링크
+    print("PASS  교재마다 분석 · 문제 패키지 두 갈래")
+
+
+def test_sibling_package_cross_sell():
+    """분석 패키지를 보면 같은 교재의 문제 패키지를 권해 줘야 합니다."""
+    text = body(client().get("/products/mock-2026-06-g3-analysis"))
+    assert "같은 교재의 문제 패키지도 있습니다" in text
+    assert "/products/mock-2026-06-g3-problem" in text
+    back = body(client().get("/products/mock-2026-06-g3-problem"))
+    assert "같은 교재의 지문 분석 패키지도 있습니다" in back
+    print("PASS  짝 패키지 서로 권하기")
+
+
+def test_package_filter():
+    only_analysis = body(client().get("/products?package=analysis"))
+    assert "지문 분석 패키지" in only_analysis
+    assert "문제 패키지" not in only_analysis.split("전체 자료")[-1]
+
+    only_problem = body(client().get("/products?package=problem"))
+    assert "문제 패키지" in only_problem
+    print("PASS  목록에서 패키지로 거르기")
+
+
+def test_book_page_splits_lanes():
+    text = body(client().get("/books/mock-2026-06-g3"))
+    assert "지문 분석 패키지" in text and "문제 패키지" in text
+    assert "읽고 뜯어보는 자료" in text          # 갈래 설명
+    print("PASS  교재 페이지가 두 갈래로 갈림")
 
 
 def test_book_page_lists_only_its_products():
     text = body(client().get("/books/mock-2026-06-g3"))
     assert "2026학년도 6월 모의평가" in text
-    assert "고3 전지문 세트" in text and "빈칸/순서/삽입 10지문" in text
-    assert "3월 학력평가 · 고2 전지문" not in text.split("같은 분류의 다른 교재")[0]
+    assert "3월 학력평가" not in text.split("같은 분류의 다른 교재")[0]
     print("PASS  교재별 페이지가 해당 교재 자료만 보여 줌")
 
 
@@ -145,7 +181,7 @@ def test_pass_twelve_month_price():
 # ---- 2. 주문 --------------------------------------------------------------
 def test_order_rejects_bad_input():
     resp = client().post("/order", data={
-        "slug": "mock-2026-06-g3-full", "name": "홍길동",
+        "slug": "mock-2026-06-g3-analysis", "name": "홍길동",
         "phone": "010-1234-5678", "email": "이메일아님"})
     assert resp.status_code == 400
     assert "이메일 주소를 정확히" in body(resp)
@@ -156,7 +192,7 @@ def test_order_rejects_bad_input():
 def test_order_saves_and_multiplies_amount():
     c = client()
     resp = c.post("/order", data={
-        "slug": "mock-2026-06-g3-full", "quantity": "2", "name": "홍길동",
+        "slug": "mock-2026-06-g3-analysis", "quantity": "2", "name": "홍길동",
         "phone": "010-1234-5678", "email": "teacher@example.com", "agree": "1"})
     assert resp.status_code == 302
     done = c.get(resp.headers["Location"])
@@ -166,7 +202,7 @@ def test_order_saves_and_multiplies_amount():
 
 def test_order_rejects_unknown_coupon():
     resp = client().post("/order", data={
-        "slug": "mock-2026-06-g3-full", "name": "홍길동", "phone": "010-1234-5678",
+        "slug": "mock-2026-06-g3-analysis", "name": "홍길동", "phone": "010-1234-5678",
         "email": "a@b.com", "agree": "1", "coupon": "ORT-XXXX-XXXX"})
     assert resp.status_code == 400
     assert "쿠폰 코드가 없습니다" in body(resp)
@@ -234,7 +270,7 @@ def test_submission_to_coupon_to_discount():
 
     c2 = client()
     resp = c2.post("/order", data={
-        "slug": "mock-2026-06-g3-full", "name": "이선생", "phone": "010-3333-4444",
+        "slug": "mock-2026-06-g3-analysis", "name": "이선생", "phone": "010-3333-4444",
         "email": "lee@example.com", "agree": "1", "coupon": coupon[0]})
     assert resp.status_code == 302
     assert "17,000원" in body(c2.get(resp.headers["Location"]))
@@ -344,7 +380,7 @@ def test_admin_product_materials_saved():
 
 def test_admin_rejects_duplicate_slug():
     resp = admin().post("/admin/products/new", data={
-        "slug": "mock-2026-06-g3-full", "name": "중복", "category": "mock", "price": "1000"})
+        "slug": "mock-2026-06-g3-analysis", "name": "중복", "category": "mock", "price": "1000"})
     assert resp.status_code == 400
     assert "이미 다른 상품이 쓰고 있습니다" in body(resp)
     print("PASS  주소 이름 중복 반려")
@@ -458,7 +494,10 @@ def run_all():
     test_categories_include_textbook()
     test_lineup_shows_all_materials()
     test_home_reflects_lineup()
-    test_product_shows_its_materials()
+    test_two_packages_per_book()
+    test_sibling_package_cross_sell()
+    test_package_filter()
+    test_book_page_splits_lanes()
     test_book_page_lists_only_its_products()
     test_home_shows_every_category()
     test_pass_twelve_month_price()

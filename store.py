@@ -55,6 +55,7 @@ def inject_globals():
         "passcfg": site.get("pass", {}),
         "order_kinds": sc.ORDER_KIND_LABELS,
         "material_map": sc.material_map(),
+        "package_map": sc.package_map(),
     }
 
 
@@ -106,12 +107,16 @@ def home():
 def products():
     catalog = sc.load_catalog()
     selected = request.args.get("category", "")
+    package = request.args.get("package", "")
     items = catalog["products"]
     if selected:
         items = [p for p in items if p.get("category") == selected]
+    if package:
+        items = [p for p in items if p.get("package") == package]
     return render_template("products.html", items=items,
                            books=sc.books_with_counts(catalog, selected),
-                           categories=catalog.get("categories", []), selected=selected)
+                           categories=catalog.get("categories", []), selected=selected,
+                           packages=catalog.get("packages", []), selected_package=package)
 
 
 def find_product(slug: str) -> dict | None:
@@ -135,14 +140,15 @@ def product_detail(slug):
         abort(404)
     catalog = sc.load_catalog()
     book = next((b for b in catalog["books"] if b["slug"] == product.get("book")), None)
-    related = []
-    if book:
-        related = [p for p in catalog["products"]
-                   if p.get("book") == book["slug"] and p.get("slug") != slug][:3]
-    if not related:
-        related = [p for p in catalog["products"]
-                   if p.get("category") == product.get("category") and p.get("slug") != slug][:3]
-    return render_template("product.html", p=product, book=book, related=related)
+    # 같은 교재의 반대쪽 패키지 — 분석을 보고 있으면 문제, 문제를 보고 있으면 분석.
+    sibling = next((x for x in catalog["products"]
+                    if x.get("book") and x.get("book") == product.get("book")
+                    and x.get("package") and x.get("package") != product.get("package")), None)
+    related = [x for x in catalog["products"]
+               if x.get("category") == product.get("category")
+               and x.get("slug") != slug and x is not sibling][:3]
+    return render_template("product.html", p=product, book=book,
+                           sibling=sibling, related=related)
 
 
 @app.route("/books/<slug>")
@@ -157,9 +163,17 @@ def book_detail(slug):
         abort(404)
     catalog = sc.load_catalog()
     items = [p for p in catalog["products"] if p.get("book") == slug]
+    # 지문 분석 패키지 / 문제 패키지 순서로 갈라 놓습니다.
+    lanes = []
+    for pkg in catalog.get("packages", []):
+        picked = [p for p in items if p.get("package") == pkg["id"]]
+        if picked:
+            lanes.append({**pkg, "items": picked})
+    rest = [p for p in items if not p.get("package")]
     others = [b for b in sc.books_with_counts(catalog, book.get("category", ""))
               if b["slug"] != slug][:3]
-    return render_template("book.html", book=book, items=items, others=others)
+    return render_template("book.html", book=book, items=items, lanes=lanes,
+                           rest=rest, others=others)
 
 
 @app.route("/lineup")

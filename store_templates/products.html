@@ -7,15 +7,26 @@
   <div class="wrap">
     <div class="section-head">
       <h2>자료 목록</h2>
-      <p>세트마다 어떤 자료가 들어가는지 카드에 적어 두었습니다.
-        자료가 각각 무엇인지는 <a href="{{ url_for('lineup') }}"><b>자료 라인업</b></a>에서 보실 수 있습니다.</p>
+      <p>교재·회차마다 <b>지문 분석 패키지</b>와 <b>문제 패키지</b> 두 가지가 있습니다.
+        각각 어떤 자료가 들어가는지는 카드에 적어 두었고,
+        자료 하나하나는 <a href="{{ url_for('lineup') }}"><b>자료 라인업</b></a>에서 보실 수 있습니다.</p>
     </div>
 
     <div class="filters">
-      <a class="filter {{ 'on' if not selected }}" href="{{ url_for('products') }}">전체</a>
+      <a class="filter {{ 'on' if not selected }}"
+         href="{{ url_for('products', package=selected_package) }}">전체</a>
       {% for c in categories %}
         <a class="filter {{ 'on' if selected == c.id }}"
-           href="{{ url_for('products', category=c.id) }}">{{ c.name }}</a>
+           href="{{ url_for('products', category=c.id, package=selected_package) }}">{{ c.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="filters pkg-filters">
+      <a class="filter {{ 'on' if not selected_package }}"
+         href="{{ url_for('products', category=selected) }}">두 가지 모두</a>
+      {% for pkg in packages %}
+        <a class="filter pkg-filter-{{ pkg.id }} {{ 'on' if selected_package == pkg.id }}"
+           href="{{ url_for('products', category=selected, package=pkg.id) }}">{{ pkg.name }}</a>
       {% endfor %}
     </div>
 

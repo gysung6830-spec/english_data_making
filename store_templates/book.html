@@ -19,9 +19,30 @@
       <p>{{ book.description }}</p>
     </div>
 
-    <div class="grid grid-3">
-      {% for p in items %}{{ product_card(p) }}{% endfor %}
+    {# 두 패키지를 나란히 놓아 바로 견줄 수 있게 합니다. #}
+    <div class="lanes">
+      {% for lane in lanes %}
+        <div class="lane">
+          <div class="lane-head">
+            <h3><span class="pkg-tag pkg-{{ lane.id }}">{{ lane.short }}</span> {{ lane.name }}</h3>
+            <p>{{ lane.tagline }}</p>
+            <div class="lane-mats">
+              {%- for mid in lane.materials %}{% set m = material_map.get(mid) %}
+                {%- if m %}<a class="mat-chip {{ 'sig-chip' if m.signature }}"
+                    href="{{ url_for('lineup') }}#{{ m.id }}"><span class="n">{{ m.no }}</span>{{ m.name }}</a>{% endif %}
+              {%- endfor %}
+            </div>
+          </div>
+          {% for p in lane['items'] %}{{ product_card(p) }}{% endfor %}
+        </div>
+      {% endfor %}
     </div>
+
+    {% if rest %}
+      <div class="grid grid-3">
+        {% for p in rest %}{{ product_card(p) }}{% endfor %}
+      </div>
+    {% endif %}
 
     <div class="card" style="margin-top:32px;">
       <h3 style="font-size:18px;margin-bottom:8px;">이 교재의 다른 회차·강이 필요하신가요?</h3>
