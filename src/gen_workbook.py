@@ -1969,6 +1969,24 @@ u.vund{ text-decoration:underline; text-decoration-thickness:1.5px; text-underli
 .card.intg .ibox{ margin-top:2px; }
 .card.intg .rmoved{ margin-top:9px; font-size:8.8px; color:#8a6a00; background:#fff8e6; border:1px dashed #e0b94a; border-radius:6px; padding:5px 10px; } .card.intg .rmoved b{ color:#8a5a1a; }
 .card.intg .restate-in{ background:#fff7ef; border:1px solid #e0b94a; border-radius:8px; padding:8px 12px; }
+/* ── 통합 해설 카드 1면 압축 : 레이아웃만 조이기(내용 유지) + 직독직해 영·한 2단 ── */
+.card.intg{ padding:10px 13px; }
+.card.intg .itoc{ margin:5px 0 6px; padding:4px 9px; }
+.card.intg .ilegend{ margin-bottom:4px; line-height:1.4; }
+.card.intg .isec{ margin:7px 0 4px; font-size:11px; }
+.card.intg .dfull .row{ margin-bottom:3px; padding-left:20px; }
+.card.intg .dfull .row .bn{ top:0; }
+.card.intg .dfull .rc{ display:grid; grid-template-columns:1.1fr 0.9fr; column-gap:13px; row-gap:1px; align-items:start; }
+.card.intg .dfull .en{ line-height:1.5; }
+.card.intg .dfull .ko{ line-height:1.5; margin-top:0; }
+.card.intg .dfull .natline{ grid-column:1 / -1; margin-top:2px; }
+.card.intg .dfull .sumbox{ margin-top:4px; }
+.card.intg .derive{ margin-top:2px; padding:7px 11px; }
+.card.intg .derive li{ margin-bottom:3px; }
+.card.intg .opt{ margin-bottom:2px; }
+.card.intg .opt .oko{ line-height:1.3; }
+.card.intg .formula{ margin-top:5px; padding:5px 10px; }
+.card.intg .rmoved{ margin-top:6px; padding:4px 9px; }
 .card.restate .hd{ border-bottom-color:#e0b94a; }
 .card.restate .rno{ background:none; font-size:14px; padding:0; }
 .card.restate .ty{ color:#8a5a1a; }
