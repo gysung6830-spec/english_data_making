@@ -126,7 +126,7 @@
       "category": "textbook",
       "book": "neungyule-kim",
       "name": "능률(김성곤) 고1 영어 · 3과 전지문 세트",
-      "subtitle": "지문 8개 · 자료 4종",
+      "subtitle": "지문 8개 · 자료 5종",
       "price": 18000,
       "list_price": 24000,
       "passages": 8,
@@ -146,6 +146,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -175,6 +176,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "descriptive",
         "variants"
@@ -185,7 +187,7 @@
       "category": "textbook",
       "book": "ybm-han",
       "name": "YBM(한상호) 고1 영어 · 1과 전지문 세트",
-      "subtitle": "지문 7개 · 자료 4종",
+      "subtitle": "지문 7개 · 자료 5종",
       "price": 16000,
       "list_price": 21000,
       "passages": 7,
@@ -203,6 +205,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -233,6 +236,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "descriptive",
         "variants"
@@ -262,6 +266,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -290,6 +295,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -314,7 +320,8 @@
       "sample_file": "sample_mock.pdf",
       "materials": [
         "passage",
-        "analysis"
+        "analysis",
+        "pilsaengbo"
       ]
     },
     {
@@ -342,6 +349,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "descriptive",
         "variants"
@@ -370,6 +378,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -398,6 +407,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "descriptive",
         "variants"
@@ -429,6 +439,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]
@@ -457,6 +468,7 @@
       "materials": [
         "passage",
         "analysis",
+        "pilsaengbo",
         "workbook",
         "variants"
       ]

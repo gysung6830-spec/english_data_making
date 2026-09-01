@@ -458,3 +458,40 @@ input[type=file]{
 .mat-tile .sig{align-self:flex-start; font-size:10.5px; padding:1px 8px;}
 .mat-tile b{font-size:16.5px; letter-spacing:-.02em;}
 .mat-tile small{color:var(--muted); font-size:13.5px; line-height:1.55;}
+
+/* 라인업에서 한 묶음만 진한 초록으로 (시그니처 자료 지면처럼) */
+.lineup-group.dark{
+  background:#123227; color:#e6efe9; border-top:0;
+  margin-top:-1px; padding-bottom:44px;
+}
+.lineup-group.dark .group-label{color:#7fd8ab;}
+.lineup-group.dark .group-count{color:#8fae9f;}
+.lineup-group.dark .group-head h2,
+.lineup-group.dark .mat-head h3{color:#fff;}
+.lineup-group.dark .group-head p,
+.lineup-group.dark .feat-list li,
+.lineup-group.dark .feat-list span{color:#bdd3c8;}
+.lineup-group.dark .mat{border-top-color:rgba(255,255,255,.12);}
+.lineup-group.dark .mat-no{color:#7fd8ab;}
+.lineup-group.dark .mat-en{color:#8fae9f;}
+.lineup-group.dark .mat-tagline,
+.lineup-group.dark .feat-list b,
+.lineup-group.dark .feat-head{color:#fff;}
+.lineup-group.dark .feat-head{border-bottom-color:rgba(255,255,255,.35);}
+.lineup-group.dark .mat-subline{
+  background:transparent; color:#7fd8ab; border-left-color:#3ec98f; padding-left:0;
+  border-left:0;
+}
+.lineup-group.dark .sig{color:#f0c469; border-color:#c99b3a; background:rgba(224,164,88,.12);}
+.lineup-group.dark .mto{color:#a9d9bd; background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.22);}
+.lineup-group.dark .variant{background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12);}
+.lineup-group.dark .variant b{color:#fff;}
+.lineup-group.dark .variant p{color:#bdd3c8;}
+.lineup-group.dark .for-whom{background:rgba(255,255,255,.05);}
+.lineup-group.dark .for-whom > b{color:#fff;}
+.lineup-group.dark .for-whom li{color:#bdd3c8;}
+.lineup-group.dark .sheet-note{color:#a9c2b5;}
+.lineup-group.dark .mat-shot figcaption{color:#8fae9f;}
+
+/* 초록 상자 없이 곧바로 특징이 오는 자료는 조금 띄워 줍니다 */
+.mat-tagline + .feat-list{margin-top:16px;}

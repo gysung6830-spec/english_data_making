@@ -15,7 +15,7 @@
 </section>
 
 {% for g in groups %}
-<section class="lineup-group">
+<section class="lineup-group {{ 'dark' if g.theme == 'dark' }}">
   <div class="wrap">
     <div class="group-head">
       <div class="group-label">

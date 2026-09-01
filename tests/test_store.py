@@ -86,10 +86,13 @@ def test_categories_include_textbook():
 def test_lineup_shows_all_materials():
     """보내 주신 라인업 8종이 그룹별로 다 나와야 합니다."""
     text = body(client().get("/lineup"))
-    for name in ("지문자료", "지문분석지", "통합 영어 워크북", "서술형 대비 교재",
-                 "17종 변형문제", "동형모의고사 2회"):
+    for name in ("지문자료", "지문분석지", "필생보", "필생보 · 독학용", "통합 영어 워크북",
+                 "서술형 대비 교재", "17종 변형문제", "동형모의고사 2회"):
         assert name in text, name
-    assert "지문 이해" in text and "시험 대비" in text          # 묶음 이름
+    for group in ("지문 이해", "시그니처 자료", "시험 대비"):
+        assert group in text, group
+    assert "필자의 생각이 보이는 영어독해" in text              # 시그니처 묶음 제목
+    assert 'lineup-group dark' in text                          # 그 묶음만 진한 배경
     assert "SIGNATURE" in text and "주문제작자료" in text        # 표시
     assert "읽고 · 뜯어보고" in text                             # 머리말
     # 지문자료의 세 판형
@@ -109,12 +112,12 @@ def test_home_reflects_lineup():
 def test_product_shows_its_materials():
     text = body(client().get("/products/mock-2026-06-g3-full"))
     assert "이 세트에 들어가는 자료" in text
-    for name in ("지문자료", "지문분석지", "통합 영어 워크북", "17종 변형문제"):
+    for name in ("지문자료", "지문분석지", "필생보", "통합 영어 워크북", "17종 변형문제"):
         assert name in text, name
     assert "/lineup#variants" in text        # 라인업 설명으로 이어지는 링크
     assert "서술형 대비 교재" in text
-    # 고르지 않은 자료는 나오지 않습니다
-    assert "동형모의고사" not in text
+    # 고르지 않은 자료는 나오지 않습니다 (독학용은 주문제작이라 기본 세트에서 뺐습니다)
+    assert "동형모의고사" not in text and "독학용" not in text
     print("PASS  상품 상세에 포함 자료와 라인업 링크")
 
 

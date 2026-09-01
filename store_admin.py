@@ -581,13 +581,16 @@ def materials_intro():
         "signature_note": sc.clean(f.get("signature_note"), 200),
     }
     groups = []
-    for gid, rng, name, headline, lead in zip(
+    for gid, rng, name, theme, headline, lead in zip(
             f.getlist("group_id"), f.getlist("group_range"), f.getlist("group_name"),
-            f.getlist("group_headline"), f.getlist("group_lead")):
+            f.getlist("group_theme"), f.getlist("group_headline"), f.getlist("group_lead")):
         gid = sc.clean(gid, 40)
         if gid:
-            groups.append({"id": gid, "range": sc.clean(rng, 20), "name": sc.clean(name, 40),
-                           "headline": sc.clean(headline, 150), "lead": sc.clean(lead, 600)})
+            group = {"id": gid, "range": sc.clean(rng, 20), "name": sc.clean(name, 40),
+                     "headline": sc.clean(headline, 150), "lead": sc.clean(lead, 600)}
+            if theme == "dark":
+                group["theme"] = "dark"
+            groups.append(group)
     if groups:
         data["groups"] = groups
     sc.save_materials(data)

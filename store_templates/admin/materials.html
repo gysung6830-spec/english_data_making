@@ -72,16 +72,22 @@
 
     <h2 style="margin-top:18px;">자료 묶음</h2>
     <div class="hint">"01 — 02 · 지문 이해" 처럼 자료를 몇 개씩 묶는 큰 갈래입니다.
-      아이디를 비우면 그 줄은 지워집니다.</div>
+      아이디를 비우면 그 줄은 지워집니다. '진하게'로 두면 그 묶음만 진한 초록 배경으로 나옵니다.</div>
     <div class="wrapbox">
       <table class="adm-table">
-        <thead><tr><th>아이디</th><th>번호 범위</th><th>이름</th><th>큰 제목</th><th>설명</th></tr></thead>
+        <thead><tr><th>아이디</th><th>번호 범위</th><th>이름</th><th>배경</th><th>큰 제목</th><th>설명</th></tr></thead>
         <tbody>
         {% for g in (data.groups + [{}]) %}
           <tr>
             <td><input type="text" name="group_id" value="{{ g.get('id','') }}" style="width:90px;"></td>
             <td><input type="text" name="group_range" value="{{ g.get('range','') }}" style="width:80px;"></td>
             <td><input type="text" name="group_name" value="{{ g.get('name','') }}" style="width:110px;"></td>
+            <td>
+              <select name="group_theme" style="width:90px;">
+                <option value="" {{ 'selected' if g.get('theme') != 'dark' }}>밝게</option>
+                <option value="dark" {{ 'selected' if g.get('theme') == 'dark' }}>진하게</option>
+              </select>
+            </td>
             <td><input type="text" name="group_headline" value="{{ g.get('headline','') }}" style="width:100%;"></td>
             <td><input type="text" name="group_lead" value="{{ g.get('lead','') }}" style="width:100%;"></td>
           </tr>
